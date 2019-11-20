@@ -1,10 +1,10 @@
 ---
-title: Azure VM konuk işletim sistemi güvenlik duvarı gelen trafiği engelleme | Microsoft Docs
+title: Azure VM Konuk işletim sistemi güvenlik duvarı gelen trafiği engelliyor | Microsoft Docs
 description: ''
 services: virtual-machines-windows
 documentationcenter: ''
 author: Deland-Han
-manager: willchen
+manager: dcscontentpm
 editor: ''
 tags: ''
 ms.service: virtual-machines
@@ -14,145 +14,145 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: azurecli
 ms.date: 11/22/2018
 ms.author: delhan
-ms.openlocfilehash: 0a0da446385c592bfeda2e01e209ef1fb75b7de3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0cbd1a24f5c460e248d55777735da6809befba63
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60711586"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72028798"
 ---
-# <a name="azure-vm-guest-os-firewall-is-blocking-inbound-traffic"></a>Azure VM konuk işletim sistemi güvenlik duvarı gelen trafiği engelliyor
+# <a name="azure-vm-guest-os-firewall-is-blocking-inbound-traffic"></a>Azure VM Konuk işletim sistemi güvenlik duvarı gelen trafiği engelliyor
 
-Bu makalede, konuk işletim sistemi güvenlik duvarı blokları gelen trafik oluşan Uzak Masaüstü Portal (RDP) sorunun nasıl çözüleceğini açıklar.
+Bu makalede, Konuk işletim sistemi güvenlik duvarı gelen trafiği engelliyorsa oluşan uzak masaüstü portalı (RDP) sorununun nasıl düzeltileceğini ele alınmaktadır.
 
 ## <a name="symptoms"></a>Belirtiler
 
-RDP bağlantısı, bir Azure sanal makinesine (VM) bağlamak için kullanamazsınız. Önyüklemesinden Tanılama -> ekran görüntüsü, işletim sisteminin tam Hoş Geldiniz ekranında (Ctrl + Alt + Del) yüklü olduğunu gösterir.
+Bir Azure sanal makinesine (VM) bağlanmak için RDP bağlantısı kullanamazsınız. Önyükleme tanılaması-> ekran görüntüsünden, işletim sisteminin hoş geldiniz ekranına (Ctrl + Alt + Del) tam olarak yüklendiğini gösterir.
 
 ## <a name="cause"></a>Nedeni
 
 ### <a name="cause-1"></a>Neden 1
 
-RDP kuralının RDP trafiğine izin verecek şekilde ayarlanır değil.
+RDP kuralı, RDP trafiğine izin verecek şekilde ayarlanmadı.
 
 ### <a name="cause-2"></a>Neden 2
 
-Konuk sistemi Güvenlik Duvarı profilleri, RDP trafiği de dahil olmak üzere tüm gelen bağlantıları engelleyecek şekilde ayarlanmıştır.
+Konuk sistem güvenlik duvarı profilleri, RDP trafiği de dahil olmak üzere tüm gelen bağlantıları engelleyecek şekilde ayarlanır.
 
-![Güvenlik Duvarı ayarı](./media/guest-os-firewall-blocking-inbound-traffic/firewall-advanced-setting.png)
+![Güvenlik duvarı ayarı](./media/guest-os-firewall-blocking-inbound-traffic/firewall-advanced-setting.png)
 
 ## <a name="solution"></a>Çözüm
 
-Bu adımları gerçekleştirmeden önce sistem diski etkilenen sanal makinenin anlık görüntüsünü yedekleyin. Daha fazla bilgi için [bir diskin anlık görüntüsünü alma](../windows/snapshot-copy-managed-disk.md).
+Bu adımları izlemeden önce, etkilenen VM 'nin sistem diskinin bir anlık görüntüsünü yedek olarak alın. Daha fazla bilgi için bkz. [disk anlık görüntüsü](../windows/snapshot-copy-managed-disk.md).
 
-Bu sorunu düzeltmek için metotlarından birini kullanın: [Azure VM sorunlarını gidermek için Uzak Araçlar'ı kullanma](remote-tools-troubleshoot-azure-vm-issues.md) VM'ye uzaktan bağlanın ve ardından konuk işletim sistemi güvenlik duvarı kurallarına **izin** RDP trafiği .
+Sorunu gidermek için, [Uzak araçları kullanarak](remote-tools-troubleshoot-azure-vm-issues.md) VM 'ye uzaktan bağlanın ve ardından, RDP trafiğine **izin** vermek için konuk işletim sistemi güvenlik duvarı kurallarını düzenleyin.
 
 ### <a name="online-troubleshooting"></a>Çevrimiçi sorun giderme
 
-Bağlanma [seri konsolu ve bir PowerShell örneği açın](serial-console-windows.md#use-cmd-or-powershell-in-serial-console). Seri konsol VM üzerinde etkin değilse, Git "[VM çevrimdışı onarım](troubleshoot-rdp-internal-error.md#repair-the-vm-offline).
+[Seri konsoluna bağlanın ve ardından bir PowerShell örneği açın](serial-console-windows.md#use-cmd-or-powershell-in-serial-console). Seri konsol sanal makinede etkinleştirilmemişse, "[VM 'Yi çevrimdışı olarak onarın](troubleshoot-rdp-internal-error.md#repair-the-vm-offline)' a gidin.
 
-#### <a name="mitigation-1"></a>1 risk azaltma
+#### <a name="mitigation-1"></a>Risk azaltma 1
 
-1.  Azure aracısı yüklü olduğundan ve doğru VM üzerinde çalışan, altında "Yalnızca sıfırlama yapılandırması" seçeneğini kullanabilirsiniz, **destek + sorun giderme** > **parolayı Sıfırla** VM menüsünde.
+1.  Azure Aracısı yüklenip sanal makinede düzgün çalışıyorsa, VM menüsünde, **destek + sorun giderme** > **sıfırlama parolası** altında "yalnızca yapılandırmayı Sıfırla" seçeneğini kullanabilirsiniz.
 
-2.  Bu kurtarma seçeneğini çalıştıran şunları yapar:
+2.  Bu kurtarma seçeneğini çalıştırmak şunları yapar:
 
-    *   Devre dışı bir RDP bileşeni sağlar.
+    *   Devre dışıysa RDP bileşenini etkinleştirilir.
 
-    *   Tüm Windows Güvenlik duvarı profillerini sağlar.
+    *   Tüm Windows Güvenlik Duvarı profillerini etkinleştirilir.
 
-    *   RDP kuralının Windows Güvenlik duvarının açık olduğundan emin olun.
+    *   Windows Güvenlik Duvarı 'nda RDP kuralının açık olduğundan emin olun.
 
-    *   Önceki adımlar işe yaramazsa, güvenlik duvarı kuralını el ile sıfırlayın. Bunu yapmak için aşağıdaki komutu çalıştırarak ad "Uzak Masaüstü" içeren tüm kurallar sorgu:
+    *   Önceki adımlar çalışmazsa, güvenlik duvarı kuralını el ile sıfırlayın. Bunu yapmak için, aşağıdaki komutu çalıştırarak "Uzak Masaüstü" adını içeren tüm kuralları sorgulayın:
 
         ```cmd
         netsh advfirewall firewall show rule dir=in name=all | select-string -pattern "(Name.*Remote Desktop)" -context 9,4 | more
         ```
 
-        RDP bağlantı noktası 3389 dışında'diğer tüm bağlantı noktası ayarlandıysa, oluşturulur ve bu bağlantı noktasına ayarlandığı herhangi bir özel kural bulmanız gerekir. Özel bir bağlantı noktası olan tüm gelen kuralları için sorgulamak için aşağıdaki komutu çalıştırın:
+        RDP bağlantı noktası 3389 dışında başka bir bağlantı noktasına ayarlandıysa, oluşturulmuş olabilecek ve bu bağlantı noktasına ayarlanmış olan herhangi bir özel kural bulmanız gerekir. Özel bir bağlantı noktası olan tüm gelen kuralları sorgulamak için aşağıdaki komutu çalıştırın:
 
         ```cmd
         netsh advfirewall firewall show rule dir=in name=all | select-string -pattern "(LocalPort.*<CUSTOM PORT>)" -context 9,4 | more
         ```
 
-3.  Kuralı devre dışı olduğunu görürseniz, bunu etkinleştirin. Yerleşik Uzak Masaüstü grubu gibi tüm bir grubu açmak için aşağıdaki komutu çalıştırın:
+3.  Kuralın devre dışı olduğunu görürseniz, etkinleştirin. Yerleşik uzak masaüstü grubu gibi bir grubun tamamını açmak için aşağıdaki komutu çalıştırın:
 
     ```cmd
     netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes
     ```
 
-    Aksi takdirde, Uzak Masaüstü (TCP-Gelen) kuralı açmak için aşağıdaki komutu çalıştırın:
+    Aksi takdirde, belirli uzak masaüstü (TCP-ın) kuralını açmak için aşağıdaki komutu çalıştırın:
 
     ```cmd
     netsh advfirewall firewall set rule name="<CUSTOM RULE NAME>" new enable=yes
     ```
 
-4.  Sorun giderme için Güvenlik Duvarı profilleri off kapatabilirsiniz:
+4.  Sorun giderme için Güvenlik Duvarı profillerini devre dışı bırakabilirsiniz:
 
     ```cmd
     netsh advfirewall set allprofiles state off
     ```
 
-    Sorun giderme ve güvenlik duvarı doğru şekilde ayarlanması tamamladıktan sonra Güvenlik Duvarı'nı yeniden etkinleştirin.
+    Sorun gidermeyi ve güvenlik duvarını doğru şekilde ayarlamayı tamamladıktan sonra, güvenlik duvarını yeniden etkinleştirin.
 
     > [!Note]
-    > Bu değişiklikleri uygulamak için VM'yi yeniden başlatma gerekmez.
+    > Bu değişiklikleri uygulamak için VM 'yi yeniden başlatmanız gerekmez.
 
-5.  Sanal Makineye erişmek için bir RDP bağlantı kurmayı dener.
+5.  SANAL makineye erişmek için bir RDP bağlantısı yapmayı deneyin.
 
 #### <a name="mitigation-2"></a>Risk azaltma 2
 
-1.  Gelen güvenlik duvarı ilkesi olarak ayarlandığını belirlemek için Güvenlik Duvarı profilleri sorgu *BlockInboundAlways*:
+1.  Gelen güvenlik duvarı ilkesinin *Blockinboundalways*olarak ayarlanmış olup olmadığını öğrenmek için Güvenlik Duvarı profillerini sorgulayın:
 
     ```cmd
     netsh advfirewall show allprofiles | more
     ```
 
-    ![Allprofiles](./media/guest-os-firewall-blocking-inbound-traffic/firewall-profiles.png)
+    ![AllProfiles](./media/guest-os-firewall-blocking-inbound-traffic/firewall-profiles.png)
 
     > [!Note]
-    > Nasıl ayarlandığına bağlı olarak güvenlik duvarı ilkesi, aşağıdaki kurallar uygulanır:
-    >    * *BlockInbound*: Aslında o trafiğe izin verecek bir kural yoksa, tüm gelen trafik engellenir.
-    >    * *BlockInboundAlways*: Tüm güvenlik duvarı kurallarını göz ardı edilir ve tüm trafik engellenir.
+    > Aşağıdaki yönergeler, nasıl ayarlandığına bağlı olarak güvenlik duvarı ilkesi için geçerlidir:
+    >    * *Blockınbound*: Bu trafiğe izin vermek için bir kuralınızın olmadığı durumlar dışında tüm gelen trafik engellenir.
+    >    * *Blockinboundalways*: tüm güvenlik duvarı kuralları yok sayılacak ve tüm trafik engellenmeyecektir.
 
-2.  Düzen *DefaultInboundAction* bu profiller ayarlanacak **izin** trafiği. Bunu yapmak için aşağıdaki komutu çalıştırın:
+2.  Bu profilleri trafiğe **izin** verecek şekilde ayarlamak Için *Defaulınboundavction* öğesini düzenleyin. Bunu yapmak için aşağıdaki komutu çalıştırın:
 
     ```cmd
     netsh advfirewall set allprofiles firewallpolicy allowinbound,allowoutbound
     ```
 
-3.  Yeniden değişikliğiniz başarıyla yapıldı emin olmak için profiller sorgulayın. Bunu yapmak için aşağıdaki komutu çalıştırın:
+3.  Yaptığınız değişikliğin başarılı bir şekilde yapıldığından emin olmak için profilleri tekrar sorgulayın. Bunu yapmak için aşağıdaki komutu çalıştırın:
 
     ```cmd
     netsh advfirewall show allprofiles | more
     ```
 
     > [!Note]
-    > Değişiklikleri uygulamak için VM'yi yeniden başlatma gerekmez.
+    > Değişiklikleri uygulamak için VM 'yi yeniden başlatmanız gerekmez.
 
-4.  Sanal makinenize RDP erişmek bir kez daha deneyin.
+4.  Sanal makinenize RDP aracılığıyla erişmeyi yeniden deneyin.
 
-### <a name="offline-mitigations"></a>Çevrimdışı bir risk azaltma işlemleri
+### <a name="offline-mitigations"></a>Çevrimdışı azaltmaları
 
-1.  [Bir kurtarma VM'si sistem diski](troubleshoot-recovery-disks-portal-windows.md).
+1.  [Sistem diskini bir kurtarma VM 'Sine bağlayın](troubleshoot-recovery-disks-portal-windows.md).
 
-2.  Kurtarma VM'sini bir Uzak Masaüstü Bağlantısı'nı başlatın.
+2.  Kurtarma VM 'sine bir Uzak Masaüstü bağlantısı başlatın.
 
-3.  Disk olarak işaretlenmiş olduğundan emin olun **çevrimiçi** Disk Yönetimi Konsolu'nda. Bağlı sistem diskine atanmış sürücü harfini unutmayın.
+3.  Diskin Disk Yönetimi konsolunda **çevrimiçi** olarak işaretlendiğinden emin olun. Eklenmiş sistem diskine atanan sürücü harfini unutmayın.
 
-#### <a name="mitigation-1"></a>1 risk azaltma
+#### <a name="mitigation-1"></a>Risk azaltma 1
 
-Bkz: [nasıl bir konuk işletim sisteminde etkinleştirme-devre dışı bırakma için bir güvenlik duvarı kuralı](enable-disable-firewall-rule-guest-os.md).
+Bkz. [Enable-bir güvenlik duvarı kuralını Konuk işletim sisteminde devre dışı bırakma](enable-disable-firewall-rule-guest-os.md).
 
 #### <a name="mitigation-2"></a>Risk azaltma 2
 
-1.  [Bir kurtarma VM'si sistem diski](troubleshoot-recovery-disks-portal-windows.md).
+1.  [Sistem diskini bir kurtarma VM 'Sine bağlayın](troubleshoot-recovery-disks-portal-windows.md).
 
-2.  Kurtarma VM'sini bir Uzak Masaüstü Bağlantısı'nı başlatın.
+2.  Kurtarma VM 'sine bir Uzak Masaüstü bağlantısı başlatın.
 
-3.  Sistem diskini bir kurtarma VM'si bağlandıktan sonra disk olarak işaretlenmiş emin olun **çevrimiçi** Disk Yönetimi Konsolu'nda. Ekli işletim sistemi diski için atanan sürücü harfini unutmayın.
+3.  Sistem diski kurtarma VM 'sine eklendikten sonra, diskin Disk Yönetimi konsolunda **çevrimiçi** olarak işaretlendiğinden emin olun. Bağlı işletim sistemi diskine atanan sürücü harfini unutmayın.
 
-4.  Yükseltilmiş bir komut örneği açın ve ardından aşağıdaki betiği çalıştırın:
+4.  Yükseltilmiş bir CMD örneği açın ve aşağıdaki betiği çalıştırın:
 
     ```cmd
     REM Backup the registry prior doing any change
@@ -173,6 +173,6 @@ Bkz: [nasıl bir konuk işletim sisteminde etkinleştirme-devre dışı bırakm
     reg unload HKLM\BROKENSYSTEM
     ```
 
-5.  [VM yeniden oluşturma ve sistem diskini](troubleshoot-recovery-disks-portal-windows.md).
+5.  [Sistem diskini ayırın ve VM 'yi yeniden oluşturun](troubleshoot-recovery-disks-portal-windows.md).
 
-6.  Sorunun çözülüp çözülmediğini denetleyin.
+6.  Sorunun çözümlenip çözümlenmediğini denetleyin.

@@ -1,6 +1,6 @@
 ---
-title: PowerShell kullanarak bir VHD dosyasından bir Azure DevTest Labs özel görüntü oluşturma | Microsoft Docs
-description: Azure DevTest Labs PowerShell kullanarak bir VHD dosyasından özel görüntüsünü oluşturulmasını otomatikleştirin
+title: PowerShell kullanarak bir VHD dosyasından Azure DevTest Labs özel görüntü oluşturma | Microsoft Docs
+description: PowerShell kullanarak bir VHD dosyasından Azure DevTest Labs özel görüntü oluşturmayı otomatikleştirin
 services: devtest-lab,virtual-machines,lab-services
 documentationcenter: na
 author: spelluru
@@ -14,14 +14,14 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/05/2018
 ms.author: spelluru
-ms.openlocfilehash: c1cdb64e4c8c99eeca4cc66c0d0ad2b755144917
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b43dc668af74f532838dad3baf1d6e11d51ac69d
+ms.sourcegitcommit: 5d6c8231eba03b78277328619b027d6852d57520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60201962"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68964074"
 ---
-# <a name="create-a-custom-image-from-a-vhd-file-using-powershell"></a>PowerShell kullanarak bir VHD dosyasından özel bir görüntü oluşturma
+# <a name="create-a-custom-image-from-a-vhd-file-using-powershell"></a>PowerShell kullanarak bir VHD dosyasından özel görüntü oluşturma
 
 [!INCLUDE [devtest-lab-create-custom-image-from-vhd-selector](../../includes/devtest-lab-create-custom-image-from-vhd-selector.md)]
 
@@ -33,22 +33,22 @@ ms.locfileid: "60201962"
 
 ## <a name="step-by-step-instructions"></a>Adım adım yönergeler
 
-Aşağıdaki adımlar, PowerShell kullanarak bir VHD dosyasından bir özel görüntü oluşturmada size yol:
+Aşağıdaki adımlar, PowerShell kullanarak bir VHD dosyasından özel görüntü oluşturma işleminde size yol gösterir:
 
-1. Bir PowerShell komut isteminde aşağıdaki çağrısını Azure hesabınızla oturum açın **Connect AzAccount** cmdlet'i.
+1. Bir PowerShell isteminde, **Connect-AzAccount** cmdlet 'ine aşağıdaki çağrı ile Azure hesabınızda oturum açın.
 
     ```powershell
     Connect-AzAccount
     ```
 
-1.  Çağırarak istediğiniz Azure aboneliğini seçin **seçin AzSubscription** cmdlet'i. Aşağıdaki yer tutucusunu değiştirin **$subscriptionId** bir geçerli Azure abonelik kimliğinizle değişken
+1.  **Select-AzSubscription** cmdlet 'ini çağırarak istenen Azure aboneliğini seçin. **$SubscriptionID** değişkeni için aşağıdaki yer tutucusunu geçerli bir Azure abonelik kimliğiyle değiştirin.
 
     ```powershell
     $subscriptionId = '<Specify your subscription ID here>'
     Select-AzSubscription -SubscriptionId $subscriptionId
     ```
 
-1.  Laboratuvar nesnesi çağırarak alma **Get-AzResource** cmdlet'i. Aşağıdaki yer tutucularını değiştirin **$labRg** ve **$labName** değişkenleri ortamınız için uygun değerlerle.
+1.  **Get-AzResource** cmdlet 'ini çağırarak laboratuvar nesnesini alın. **$LabRg** ve **$labName** değişkenleri için aşağıdaki yer tutucuları, ortamınız için uygun değerlerle değiştirin.
 
     ```powershell
     $labRg = '<Specify your lab resource group name here>'
@@ -56,20 +56,13 @@ Aşağıdaki adımlar, PowerShell kullanarak bir VHD dosyasından bir özel gör
     $lab = Get-AzResource -ResourceId ('/subscriptions/' + $subscriptionId + '/resourceGroups/' + $labRg + '/providers/Microsoft.DevTestLab/labs/' + $labName)
     ```
 
-1.  Laboratuvar, laboratuvarı nesnesinden depolama hesabı ve Laboratuvar depolama hesap anahtarı değerleriyle alın.
-
-    ```powershell
-    $labStorageAccount = Get-AzResource -ResourceId $lab.Properties.defaultStorageAccount
-    $labStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $labStorageAccount.ResourceGroupName -Name $labStorageAccount.ResourceName)[0].Value
-    ```
-
-1.  Aşağıdaki yer tutucusunu değiştirin **$vhdUri** URI'yı kullanarak karşıya VHD dosyası için içeren değişken. VHD dosya URI'si, Azure portalında depolama hesabının blob dikey penceresinden alabilirsiniz.
+1.  **$VhdUri** değişkeni için aşağıdaki yer tutucusunu, KARŞıYA yüklenen VHD dosyanıza URI ile değiştirin. VHD dosyasının URI 'sini Azure portal depolama hesabının blob dikey penceresinden alabilirsiniz.
 
     ```powershell
     $vhdUri = '<Specify the VHD URI here>'
     ```
 
-1.  Özel görüntü kullanarak oluşturma **yeni AzResourceGroupDeployment** cmdlet'i. Aşağıdaki yer tutucularını değiştirin **$customImageName** ve **$customImageDescription** değişkenleri ortamınız için anlamlı adlar.
+1.  **New-AzResourceGroupDeployment** cmdlet 'ini kullanarak özel görüntü oluşturun. **$CustomImageName** ve **$customImageDescription** değişkenleri için aşağıdaki yer tutucuları, ortamınız için anlamlı adlarla değiştirin.
 
     ```powershell
     $customImageName = '<Specify the custom image name>'
@@ -80,9 +73,9 @@ Aşağıdaki adımlar, PowerShell kullanarak bir VHD dosyasından bir özel gör
     New-AzResourceGroupDeployment -ResourceGroupName $lab.ResourceGroupName -Name CreateCustomImage -TemplateUri 'https://raw.githubusercontent.com/Azure/azure-devtestlab/master/samples/DevTestLabs/QuickStartTemplates/201-dtl-create-customimage-from-vhd/azuredeploy.json' -TemplateParameterObject $parameters
     ```
 
-## <a name="powershell-script-to-create-a-custom-image-from-a-vhd-file"></a>Bir VHD dosyasından özel bir görüntü oluşturmak için PowerShell Betiği
+## <a name="powershell-script-to-create-a-custom-image-from-a-vhd-file"></a>Bir VHD dosyasından özel bir görüntü oluşturmak için PowerShell betiği
 
-Aşağıdaki PowerShell Betiği, bir VHD dosyasından özel bir görüntü oluşturmak için kullanılabilir. Gereksinimlerinize uygun değerlerle (başlangıç ve bitiş açılı ayraçlar ile) yer tutucularını değiştirin.
+Aşağıdaki PowerShell betiği, bir VHD dosyasından özel bir görüntü oluşturmak için kullanılabilir. Yer tutucuları (açılı parantez ile başlayıp biter) gereksinimlerinize uygun değerlerle değiştirin.
 
 ```powershell
 # Log in to your Azure account.
@@ -96,10 +89,6 @@ Select-AzSubscription -SubscriptionId $subscriptionId
 $labRg = '<Specify your lab resource group name here>'
 $labName = '<Specify your lab name here>'
 $lab = Get-AzResource -ResourceId ('/subscriptions/' + $subscriptionId + '/resourceGroups/' + $labRg + '/providers/Microsoft.DevTestLab/labs/' + $labName)
-
-# Get the lab storage account and lab storage account key values.
-$labStorageAccount = Get-AzResource -ResourceId $lab.Properties.defaultStorageAccount
-$labStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $labStorageAccount.ResourceGroupName -Name $labStorageAccount.ResourceName)[0].Value
 
 # Set the URI of the VHD file.
 $vhdUri = '<Specify the VHD URI here>'
@@ -117,9 +106,9 @@ New-AzResourceGroupDeployment -ResourceGroupName $lab.ResourceGroupName -Name Cr
 
 ## <a name="related-blog-posts"></a>İlgili blog gönderileri
 
-- [Özel görüntü veya formül?](https://blogs.msdn.microsoft.com/devtestlab/2016/04/06/custom-images-or-formulas/)
+- [Özel görüntüler veya formüller mi?](https://blogs.msdn.microsoft.com/devtestlab/2016/04/06/custom-images-or-formulas/)
 - [Azure DevTest Labs arasında özel görüntüleri kopyalama](https://www.visualstudiogeeks.com/blog/DevOps/How-To-Move-CustomImages-VHD-Between-AzureDevTestLabs#copying-custom-images-between-azure-devtest-labs)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Laboratuvarınız için bir VM ekleme](devtest-lab-add-vm.md)
+- [Laboratuvarınızda VM ekleme](devtest-lab-add-vm.md)

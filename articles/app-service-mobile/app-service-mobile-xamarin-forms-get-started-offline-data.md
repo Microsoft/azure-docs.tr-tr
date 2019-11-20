@@ -1,6 +1,6 @@
 ---
-title: Azure mobil uygulaması (Xamarin.Forms) için çevrimdışı eşitlemeyi etkinleştirme | Microsoft Docs
-description: Xamarin.Forms uygulamanızda çevrimdışı veri önbelleği ve eşitleme için App Service Mobile Apps'ı kullanmayı öğrenin
+title: Azure mobil uygulamanız için çevrimdışı eşitlemeyi etkinleştirin (Xamarin. Forms) | Microsoft Docs
+description: App Service mobil uygulamayı kullanarak Xamarin. Forms uygulamanızda çevrimdışı verileri önbelleğe alma ve eşitleme hakkında bilgi edinin
 documentationcenter: xamarin
 author: elamalani
 manager: yochayk
@@ -14,49 +14,50 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 06/25/2019
 ms.author: emalani
-ms.openlocfilehash: 53f339d5450965c992f6528ff294e0d37ec2f7f6
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 65bd619a95b102c4ad4be57f1661a89fbae43e22
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67446293"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72388421"
 ---
 # <a name="enable-offline-sync-for-your-xamarinforms-mobile-app"></a>Xamarin.Forms mobil uygulamanız için çevrimdışı eşitlemeyi etkinleştirme
 [!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 > [!NOTE]
-> Visual Studio App Center, mobil uygulama geliştirme merkezi hizmetlerinde yeni ve tümleşik yatırım yapıyor. Geliştiriciler **derleme**, **Test** ve **Dağıt** hizmetlerinin sürekli tümleştirme ve teslim işlem hattı ayarlayın. Uygulama dağıtıldığında, geliştiriciler kendi uygulamasını kullanarak kullanımı ve durumu izleyebilirsiniz **Analytics** ve **tanılama** kullanarak kullanıcılarla etkileşim kurun ve hizmetlerini **anında iletme** hizmeti. Geliştiriciler de yararlanabilir **Auth** , kullanıcıların kimliğini doğrulamak ve **veri** kalıcı hale getirmek ve uygulama verilerini bulutta eşitleme hizmeti. Kullanıma [App Center](https://appcenter.ms/?utm_source=zumo&utm_campaign=app-service-mobile-xamarin-forms-get-started-offline-data) bugün.
+> Visual Studio App Center mobil uygulama dağıtımında merkezi konumdaki uçtan uca ve tümleşik hizmetleri destekler. Geliştiriciler Sürekli Tümleştirme ve Teslim işlem hattını ayarlamak için **Oluşturma**, **Test** ve **Dağıtım** hizmetlerini kullanabilir. Uygulama dağıtıldıktan sonra, geliştiriciler **Analiz** ve **Tanılama** hizmetlerini kullanarak uygulamanın durumunu ve kullanımını izleyebilir, **Gönderme** hizmetini kullanarak kullanıcılarla etkileşim kurabilir. Geliştiriciler ayrıca kullanıcıların kimliğini doğrulamak için **Kimlik Doğrulaması**'ndan ve uygulama verilerini bulutta kalıcı hale getirmek ve eşitlemek için **Veri** hizmetinden yararlanabilir.
 >
+> Mobil uygulamanızda bulut hizmetlerini tümleştirmek istiyorsanız bugün [App Center](https://appcenter.ms/?utm_source=zumo&utm_medium=Azure&utm_campaign=zumo%20doc) kaydolun.
 
 ## <a name="overview"></a>Genel Bakış
-Bu öğretici için Xamarin.Forms çevrimdışı eşitleme özelliği Azure Mobile Apps tanıtır. Çevrimdışı eşitleme son kullanıcıların görüntüleme, ekleme veya ağ bağlantısı olduğunda bile verileri--değiştirme ile mobil uygulama--etkileşime olanak tanır. Değişiklikler, yerel bir veritabanında depolanır. Cihaz yeniden çevrimiçi olduğunda, bu değişiklikleri uzak hizmeti ile eşitlenir.
+Bu öğreticide, Xamarin. Forms için Azure Mobile Apps çevrimdışı eşitleme özelliği tanıtılmıştır. Çevrimdışı eşitleme son kullanıcıların bir mobil uygulamayla etkileşime geçmesini sağlar--ağ bağlantısı olmasa bile verileri görüntüleme, ekleme veya değiştirme. Değişiklikler yerel bir veritabanında depolanır. Cihaz yeniden çevrimiçi olduktan sonra, bu değişiklikler uzak hizmetle eşitlenir.
 
-Bu öğretici, Mobile Apps için [bir Xamarin iOS uygulaması oluşturma] öğreticiyi tamamladıktan sonra oluşturduğunuz Xamarin.Forms hızlı çözüm üzerinde temel alır. Xamarin.Forms için hızlı başlangıç çözümü etkinleştirilmesi gerekiyor çevrimdışı eşitleme desteği için kod içerir. Bu öğreticide, Azure Mobile Apps'ın çevrimdışı özellikleri etkinleştirmek için hızlı başlangıç çözüm güncelleştirin. Biz de çevrimdışı özgü kod uygulamasında vurgulayın. İndirilen hızlı başlangıç çözümü kullanmıyorsanız, veri erişim uzantısı paketlerini projenize eklemeniz gerekir. Server uzantısı paketleri hakkında daha fazla bilgi için bkz. [Azure Mobile Apps için .NET arka uç sunucu SDK'sı ile çalışma][1].
+Bu öğretici, [Xamarin iOS uygulaması oluşturma] öğreticisini tamamladığınızda oluşturduğunuz Mobile Apps için Xamarin. Forms hızlı başlangıç çözümünü temel alır. Xamarin. Forms için hızlı başlangıç çözümü, yalnızca etkinleştirilmesi gereken çevrimdışı eşitlemeyi desteklemeye yönelik kodu içerir. Bu öğreticide, Azure Mobile Apps çevrimdışı özelliklerini açmak için hızlı başlangıç çözümünü güncelleolursunuz. Ayrıca, uygulamadaki çevrimdışı özel kodu vurgularız. İndirilen hızlı başlangıç çözümünü kullanmazsanız, veri erişim uzantısı paketlerini projenize eklemeniz gerekir. Sunucu Uzantısı paketleri hakkında daha fazla bilgi için bkz. [Azure için .net arka uç sunucu SDK 'sı Mobile Apps çalışma][1].
 
-Çevrimdışı eşitleme özelliği hakkında daha fazla bilgi için Ek Yardım konusuna [Azure Mobile apps'te çevrimdışı veri eşitleme][2].
+Çevrimdışı eşitleme özelliği hakkında daha fazla bilgi edinmek için [Azure Mobile Apps 'de çevrimdışı veri eşitleme][2]konusuna bakın.
 
-## <a name="enable-offline-sync-functionality-in-the-quickstart-solution"></a>Hızlı Başlangıç çözümdeki çevrimdışı eşitleme işlevselliğini etkinleştirin
-Çevrimdışı eşitleme kod kullanarak projeye dahil C# önişlemci yönergeleri. Zaman **çevrimdışı\_eşitleme\_etkin** sembol tanımlanır, bu kod yolları yapıya dahil edilir. Windows uygulamaları için SQLite platformu da yüklemeniz gerekir.
+## <a name="enable-offline-sync-functionality-in-the-quickstart-solution"></a>Hızlı başlangıç çözümünde çevrimdışı eşitleme işlevini etkinleştirme
+Çevrimdışı eşitleme kodu, Önişlemci yönergeleri kullanılarak C# projeye dahil edilir. **Çevrimdışı @ no__t-1SYNC @ no__t-2ENABLED** sembolü tanımlandığında, bu kod yolları yapıya dahil edilir. Windows uygulamaları için, SQLite platformunu da yüklemelisiniz.
 
-1. Visual Studio'da çözüme sağ tıklayın > **çözüm için NuGet paketlerini Yönet...** , ardından aramak ve yüklemek **Microsoft.Azure.Mobile.Client.SQLiteStore** Çözümdeki tüm projeleri için NuGet paketi.
-2. Çözüm Gezgini'nde, ile proje Todoıtemmanager.cs dosyasını açın. **taşınabilir** , taşınabilir sınıf kitaplığı proje adı, ardından aşağıdaki önişlemci yönergesi açıklamasını kaldırın:
+1. Visual Studio 'da çözüme sağ tıklayın > çözüm **Için NuGet Paketlerini Yönet...** ' i sağ tıklatın ve Çözümdeki tüm projeler için **Microsoft. Azure. Mobile. Client. SQLiteStore** NuGet paketini arayın ve yüklemeyi yapın.
+2. Çözüm Gezgini, taşınabilir sınıf kitaplığı projesi olan ad içinde **Taşınabilir** olan TodoItemManager.cs dosyasını projeden açın ve ardından aşağıdaki Önişlemci yönergesinin açıklamasını kaldırın:
 
         #define OFFLINE_SYNC_ENABLED
-3. (İsteğe bağlı) Windows cihazları desteklemek için aşağıdaki SQLite çalışma zamanı paketlerini yükleyin:
+3. Seçim Windows cihazlarını desteklemek için aşağıdaki SQLite çalışma zamanı paketlerinden birini yüklemelisiniz:
 
-   * **Windows 8.1 çalışma zamanı:** Yükleme [Windows 8.1 için SQLite][3].
-   * **Windows Phone 8.1:** Yükleme [Windows Phone 8.1 için SQLite][4].
-   * **Evrensel Windows platformu** yükleme [Evrensel Windows Evrensel için SQLite][5].
+   * **Windows 8.1 çalışma zamanı:** [Windows 8.1 Için SQLite][3]'ı yükler.
+   * **Windows Phone 8,1:** [Windows Phone 8,1 Için SQLite][4]'ı yükler.
+   * **Evrensel Windows platformu** [Evrensel Windows Universal Için SQLite][5]'ı yükler.
 
-     Bu hızlı başlangıçta, bir evrensel Windows projesi içermiyor olsa da, Evrensel Windows platformu, Xamarin Forms ile desteklenir.
-4. (İsteğe bağlı) Her Windows uygulama projesine sağ tıklayın **başvuruları** > **Başvuru Ekle...** , genişletme **Windows** klasör > **uzantıları**.
-    Uygun etkinleştirme **için SQLite Windows** SDK'sı ile birlikte **için Visual C++ 2013 çalışma zamanı Windows** SDK.
-    SQLite SDK adları, her Windows platformuyla biraz farklılık gösterir.
+     Hızlı başlangıç, bir Evrensel Windows projesi içermediğinden, Xamarin Forms ile Evrensel Windows platformu desteklenir.
+4. Seçim Her Windows uygulama projesinde, **başvurular** > **Başvuru Ekle...** öğesine sağ tıklayın, **Windows** klasör > **uzantıları**' nı genişletin.
+    Windows SDK **Için Visual C++ 2013 çalışma zamanı** ile birlikte **Windows SDK için uygun SQLite** 'ı etkinleştirin.
+    SQLite SDK adları her bir Windows platformunda biraz farklılık gösterir.
 
-## <a name="review-the-client-sync-code"></a>İstemci eşitleme kodu gözden geçirin
-Ne öğretici kod zaten eklenmiştir, kısa bir genel bakış şöyledir `#if OFFLINE_SYNC_ENABLED` yönergeleri. Taşınabilir sınıf kitaplığı proje Todoıtemmanager.cs proje dosyasında çevrimdışı eşitleme işlevdir. Özellik kavramsal bir genel bakış için bkz: [Azure Mobile apps'te çevrimdışı veri eşitleme][2].
+## <a name="review-the-client-sync-code"></a>İstemci eşitleme kodunu gözden geçirin
+İşte `#if OFFLINE_SYNC_ENABLED` yönergelerinin içindeki öğretici kodunda zaten nelerin dahil olduğuna ilişkin kısa bir genel bakış. Çevrimdışı Eşitleme işlevselliği, taşınabilir sınıf Kitaplığı projesindeki TodoItemManager.cs proje dosyasında bulunur. Özelliğe kavramsal bir genel bakış için bkz. [Azure Mobile Apps 'de çevrimdışı veri eşitleme][2].
 
-* Yerel depo, herhangi bir tablo işlem gerçekleştirilmeden önce başlatılmalıdır. Yerel depo veritabanı içinde başlatılır **TodoItemManager** sınıfı Oluşturucu aşağıdaki kodu kullanarak:
+* Herhangi bir tablo işlemi gerçekleştirilmeden önce, yerel deponun başlatılmış olması gerekir. Yerel depo veritabanı, aşağıdaki kod kullanılarak **TodoItemManager** sınıf oluşturucusunda başlatılır:
 
         var store = new MobileServiceSQLiteStore(OfflineDbPath);
         store.DefineTable<TodoItem>();
@@ -66,12 +67,12 @@ Ne öğretici kod zaten eklenmiştir, kısa bir genel bakış şöyledir `#if OF
 
         this.todoTable = client.GetSyncTable<TodoItem>();
 
-    Bu kod kullanarak yeni bir yerel SQLite veritabanı oluşturur ve **MobileServiceSQLiteStore** sınıfı.
+    Bu kod, **Mobileservicesqlitestore** sınıfını kullanarak yeni bir yerel SQLite veritabanı oluşturur.
 
-    **DefineTable** yöntemi sağlanan türü alanları ile eşleşen yerel deposunda bir tablo oluşturur.  Türü, uzak veritabanındaki tüm sütunları eklemek gerekmez. Bir sütun alt kümesi depolamak mümkündür.
-* **TodoTable** alanındaki **TodoItemManager** olduğu bir **IMobileServiceSyncTable** türü yerine **IMobileServiceTable**. Bu sınıfı kullanan tüm yerel veritabanı oluşturma, okuma, güncelleştirme ve silme (CRUD) tablo işlemleri. Çağırarak bu değişiklikleri mobil uygulama arka ucuna zaman itilir karar **PushAsync** üzerinde **IMobileServiceSyncContext**. Tablo ilişkileri izleme ve bir istemci uygulaması değiştiren tüm tablolardaki değişiklikleri gönderme tarafından korumak eşitleme bağlamı yardımcı **PushAsync** çağrılır.
+    **Definetable** yöntemi, yerel depoda, belirtilen türdeki alanlarla eşleşen bir tablo oluşturur.  Türün, uzak veritabanındaki tüm sütunları içermesi gerekmez. Sütunların bir alt kümesini depolamak mümkündür.
+* **TodoItemManager** içindeki **TodoTable** alanı **ımobileservicetable**yerine bir **ımobileservicesynctable** türüdür. Bu sınıf, tüm oluşturma, okuma, güncelleştirme ve silme (CRUD) tablo işlemleri için yerel veritabanını kullanır. **Imobileservicesynccontext**üzerinde **PushAsync** çağırarak, bu değişikliklerin mobil uygulama arka ucuna ne zaman itileceğine karar verirsiniz. Eşitleme bağlamı, **PushAsync** çağrıldığında bir istemci uygulamasının değiştirdiği tüm tablolardaki değişiklikleri izleyerek ve ileterek Tablo ilişkilerinin korunmasına yardımcı olur.
 
-    Aşağıdaki **SyncAsync** yöntemi çağrıldığında mobil uygulama arka ucu ile eşitlemek için:
+    Aşağıdaki **Syncasync** yöntemi, mobil uygulama arka ucuna eşitlenmek üzere çağırılır:
 
         public async Task SyncAsync()
         {
@@ -115,48 +116,48 @@ Ne öğretici kod zaten eklenmiştir, kısa bir genel bakış şöyledir `#if OF
             }
         }
 
-    Bu örnek, basit hata varsayılan eşitleme işleyici ile işleme kullanır. Gerçek bir uygulamada özel bir kullanarak ağ koşulları ve sunucu çakışmaları gibi çeşitli hatalar'ı işleme **IMobileServiceSyncHandler** uygulaması.
+    Bu örnek, varsayılan eşitleme işleyicisiyle basit hata işlemeyi kullanır. Gerçek bir uygulama, ağ koşulları ve sunucu çakışmaları gibi çeşitli hataları özel bir **ımobileservicesynchandler** uygulaması kullanarak işleyebilir.
 
 ## <a name="offline-sync-considerations"></a>Çevrimdışı eşitleme konuları
-Örnekte, **SyncAsync** yöntemi başlatma ve ne zaman eşitleme istenen yalnızca çağrılır.  Bir Android veya iOS uygulama eşitleme başlatmak için öğeleri listesinde çekme; Windows için kullanmak **eşitleme** düğmesi. Gerçek bir uygulamada, ağ durumu değiştiğinde eşitleme tetikleyici de yapabilirsiniz.
+Örnekte, **Syncasync** yöntemi yalnızca başlangıç sırasında ve bir eşitleme istendiğinde çağırılır.  Android veya iOS uygulamasında bir eşitleme başlatmak için, öğe listesini aşağı çekin; Windows için **Eşitle** düğmesini kullanın. Gerçek dünyada bir uygulamada, ağ durumu değiştiğinde eşitleme tetikleyicisini de yapabilirsiniz.
 
-Beklemede olan bir tabloya karşı bir çekme yürütüldüğünde yerel güncelleştirmeleri önceki bir bağlam anında iletme işlemi Tetikleyicileri otomatik olarak çekmesini bağlam tarafından izlenir. Yenilerken, ekleme ve bu örnekte, öğeleri Tamamlanıyor açık atlayabilirsiniz **PushAsync** çağırın.
+Bir çekme, bağlam tarafından izlenen bekleyen yerel güncelleştirmeleri olan bir tabloya karşı yürütüldüğünde, bu çekme işlemi önceki bağlam göndereni otomatik olarak tetikler. Bu örnekteki öğeleri yenilerken, eklerken ve tamamlarken açık **PushAsync** çağrısını atlayabilirsiniz.
 
-Sağlanan kod içinde uzak Todoıtem tablosundaki tüm kayıtlar seçmeleri istenir, ancak sorgu kimliği geçirerek kayıtlarını filtrelemek ve için sorgular mümkündür **PushAsync**. Daha fazla bilgi için konudaki *Artımlı eşitleme* içinde [Azure Mobile apps'te çevrimdışı veri eşitleme][2].
+Belirtilen kodda, uzak TodoItem tablosundaki tüm kayıtlar sorgulanır, ancak bir sorgu kimliği ve sorgu **PushAsync**'e geçirerek kayıtları filtrelemek de mümkündür. Daha fazla bilgi için bkz. [Azure Mobile Apps çevrimdışı veri eşitlemede][2] *artımlı eşitleme* bölümü.
 
-## <a name="run-the-client-app"></a>İstemci uygulaması çalıştırın
-İstemci uygulaması, artık etkin çevrimdışı eşitleme ile her platformda yerel depo veritabanını doldurmak için en az bir kez çalıştırın. Daha sonra çevrimdışı bir senaryonun benzetimini yapmak ve uygulamayı çevrimdışı durumdayken yerel deposundaki verileri değiştirebilirsiniz.
+## <a name="run-the-client-app"></a>İstemci uygulamasını çalıştırma
+Çevrimdışı eşitleme özelliği etkinken, yerel mağaza veritabanını doldurmak için her platformda istemci uygulamasını en az bir kez çalıştırın. Daha sonra, çevrimdışı bir senaryonun benzetimini yapın ve uygulama çevrimdışıyken yerel depodaki verileri değiştirin.
 
-## <a name="update-the-sync-behavior-of-the-client-app"></a>İstemci uygulaması eşitleme davranışını güncelleştir
-Bu bölümde, arka ucunuz için bir geçersiz uygulama URL'si kullanılarak bir çevrimdışı senaryoda benzetimini yapmak için istemci projesini değiştirin. Alternatif olarak, "Uçak modu." Cihazınızı taşıyarak ağ bağlantılarını devre dışı dışı bırakabilirsiniz  Veri öğeleri ekleyin veya değiştirdiğinizde, bu değişiklikleri yerel deposunda tutulan ancak arka uç veri deposuna bağlantı yeniden kurulur kadar eşitlenmedi.
+## <a name="update-the-sync-behavior-of-the-client-app"></a>İstemci uygulamasının eşitleme davranışını güncelleştirme
+Bu bölümde, arka ucunuz için geçersiz bir uygulama URL 'SI kullanarak istemci projesini bir çevrimdışı senaryonun benzetimini yapmak üzere değiştirin. Alternatif olarak, cihazınızı "uçak moduna taşıyarak" ağ bağlantılarını devre dışı bırakabilirsiniz.  Veri öğelerini eklediğinizde veya değiştirirken, bu değişiklikler yerel depoda tutulur, ancak bağlantı yeniden oluşturulana kadar arka uç veri deposuyla eşitlenmez.
 
-1. Çözüm Gezgini'nde Constants.cs proje dosyasından açın **taşınabilir** değiştirin ve proje `ApplicationURL` geçersiz bir URL ile işaret edecek şekilde:
+1. Çözüm Gezgini, **Taşınabilir** projeden Constants.cs proje dosyasını açın ve `ApplicationURL` değerini GEÇERSIZ bir URL 'ye işaret etmek için değiştirin:
 
         public static string ApplicationURL = @"https://your-service.azurewebsites.net/";
-2. Todoıtemmanager.cs dosya açma **taşınabilir** proje ardından ekleyin bir **catch** tabanı için **özel durum** sınıfının **try... catch**engelleyin **SyncAsync**. Bu **catch** blok özel durum iletisi şu şekilde konsola yazar:
+2. **Taşınabilir** projeden TodoItemManager.cs dosyasını açın ve sonra dene... ' ye temel **özel durum** sınıfı için bir **catch** ekleyin **.**  **Syncasync**içindeki catch bloğu. Bu **catch** bloğu özel durum iletisini konsola aşağıdaki şekilde Yazar:
 
             catch (Exception ex)
             {
                 Console.Error.WriteLine(@"Exception: {0}", ex.Message);
             }
-3. Oluşturun ve istemci uygulaması çalıştırın.  Bazı yeni öğeleri ekleyin. Bir özel durum için arka uç ile eşitlemek için her girişim konsolunda kaydedilir dikkat edin. Mobil arka ucuna gönderilen kadar bu yeni öğeleri yalnızca yerel depoda mevcut. Bağlı olduğu gibi arka uç, tüm oluşturma, okuma destekleyen, güncelleştirme, silme (CRUD) işlemleri için istemci uygulaması davranır.
-4. Uygulamayı kapatın ve oluşturduğunuz yeni öğeleri yerel depoya kalıcı olduğunu doğrulamak için yeniden başlatın.
-5. (İsteğe bağlı) Arka uç veritabanındaki verilerin değiştirilmesi etkiye görmek için Azure SQL veritabanı tablosunu görüntülemek için Visual Studio'yu kullanın.
+3. İstemci uygulamasını derleyin ve çalıştırın.  Bazı yeni öğeler ekleyin. Her arka uç ile eşitleme denemesi için konsolda bir özel durum günlüğe kaydedildiğini unutmayın. Bu yeni öğeler yalnızca yerel depoda, mobil arka uca itilene kadar bulunur. İstemci uygulaması, tüm oluşturma, okuma, güncelleştirme, silme (CRUD) işlemlerini desteklemek için arka uca bağlı gibi davranır.
+4. Uygulamayı kapatın ve oluşturduğunuz yeni öğelerin yerel depoda kalıcı olduğunu doğrulamak için yeniden başlatın.
+5. Seçim Arka uç veritabanındaki verilerin değiştirilmediğini görmek üzere Azure SQL veritabanı tablonuzu görüntülemek için Visual Studio 'Yu kullanın.
 
-    Visual Studio'da açın **Sunucu Gezgini**. Veritabanınızda gidin **Azure**->**SQL veritabanları**. Veritabanınıza sağ tıklayıp **SQL Server nesne Gezgini'nde Aç**. Şimdi, SQL veritabanı tablosuna ve içeriği için göz atabilirsiniz.
+    Visual Studio 'da **Sunucu Gezgini**açın. **Azure**->**SQL veritabanlarında**veritabanınıza gidin. Veritabanınıza sağ tıklayın ve **SQL Server Nesne Gezgini aç**' ı seçin. Artık SQL veritabanı tablonuza ve içindekilere gidebilirsiniz.
 
-## <a name="update-the-client-app-to-reconnect-your-mobile-backend"></a>Mobil arka ucunuzdaki yeniden bağlanmak için istemci uygulamasını güncelleştirme
-Bu bölümde, çevrimiçi duruma geri dönmeyi uygulama taklit eden mobil arka uygulamaya yeniden bağlanın. Yenileme hareket gerçekleştirdiğinizde, veriler mobil arka ucunuza eşitlenir.
+## <a name="update-the-client-app-to-reconnect-your-mobile-backend"></a>Mobil arka ucunuzu yeniden bağlamak için istemci uygulamasını güncelleştirme
+Bu bölümde, uygulamanın çevrimiçi duruma geri geldiğini taklit eden mobil arka uca yeniden bağlayın. Yenileme hareketini gerçekleştirdiğinizde veriler, mobil arka ucunuza eşitlenir.
 
-1. Constants.cs yeniden açın. Düzeltme `applicationURL` doğru URL'ye yönlendirin.
-2. Yeniden oluşturun ve istemci uygulaması çalıştırın. Uygulama başlatıldıktan sonra mobil uygulama arka ucu ile eşitlemek çalışır. Özel durum yok hata ayıklama konsolunu açtığınızdan emin olun.
-3. (İsteğe bağlı) SQL Server Nesne Gezgini veya Fiddler gibi bir REST araç kullanarak güncelleştirilmiş verileri görüntülemek veya [Postman][6]. Yerel depo ve arka uç veritabanı arasında veri eşitlenmiş dikkat edin.
+1. Constants.cs yeniden açın. Doğru URL 'yi göstermek için `applicationURL` ' ı düzeltin.
+2. İstemci uygulamasını yeniden derleyin ve çalıştırın. Uygulama, başlatıldıktan sonra mobil uygulama arka ucu ile eşitlemeye çalışır. Hata ayıklama konsolunda hiçbir özel durum günlüğe kaydedilmeyeceğini doğrulayın.
+3. Seçim SQL Server Nesne Gezgini veya Fiddler veya [Postman][6]gıbı bir rest aracını kullanarak güncelleştirilmiş verileri görüntüleyin. Arka uç veritabanı ve yerel depo arasında verilerin eşitlendiğini fark edin.
 
-    Uyarı verileri, veritabanı ve yerel depo arasında eşitlenmesini ve uygulamanızı değilken, eklenen öğeleri içeriyor.
+    Verilerin veritabanı ile yerel depo arasında eşitlendiğini ve uygulamanızın bağlantısı kesildiğinde eklediğiniz öğeleri içerdiğini unutmayın.
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 * [Azure Mobile Apps’te Çevrimdışı Veri Eşitleme][2]
-* [Azure Mobile Apps .NET SDK nasıl yapılır][8]
+* [Azure Mobile Apps .NET SDK 'Sı nasıl yapılır][8]
 
 <!-- URLs. -->
 [1]: app-service-mobile-dotnet-backend-how-to-use-server-sdk.md

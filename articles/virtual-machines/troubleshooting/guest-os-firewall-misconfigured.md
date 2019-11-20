@@ -4,7 +4,7 @@ description: ''
 services: virtual-machines-windows
 documentationcenter: ''
 author: Deland-Han
-manager: willchen
+manager: dcscontentpm
 editor: ''
 tags: ''
 ms.service: virtual-machines
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: azurecli
 ms.date: 11/22/2018
 ms.author: delhan
-ms.openlocfilehash: fcea5e4e6bb108f1a8d8036e51a5dae8a9e6431b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8f04d943e1db49beed13c183fbd06e401546fc03
+ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60711025"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71153888"
 ---
 # <a name="azure-vm-guest-os-firewall-is-misconfigured"></a>Azure VM konuk işletim sistemi güvenlik duvarı yanlış yapılandırılmış
 
@@ -49,13 +49,13 @@ Bağlanma [seri konsolu ve bir PowerShell örneği açın](serial-console-window
 
 Aşağıdaki kuralları ya da VM (RDP) üzerinden erişim sağlamak veya sorun giderme daha kolay bir deneyim sağlamak üzere düzenlenebilir:
 
-*   Uzak Masaüstü (TCP-Gelen): Bu birincil erişim sağlayan VM Azure'da RDP vererek standart bir kuraldır.
+*   Uzak Masaüstü (TCP-ın): Bu, Azure 'da RDP 'ye izin vererek VM 'ye birincil erişim sağlayan standart bir kuraldır.
 
-*   Windows Uzaktan Yönetim (HTTP-gelen): PowerShell, Azure, bu tür bir erişim'ı kullanarak sanal Makineye bağlanmanızı sağlar bu kural uzak komut dosyası ve sorun giderme komut dosyası çalıştırma kullanılmasına izin verir.
+*   Windows Uzaktan Yönetimi (HTTP-ın): Bu kural, PowerShell 'i kullanarak VM 'ye bağlanmanızı sağlar. Azure 'Da bu tür bir erişim, uzaktan betik oluşturma ve sorun giderme konusunda komut dosyası kullanımını kullanmanıza imkan sağlar.
 
-*   Dosya ve Yazıcı Paylaşımı (SMB-gelen): Bu kural, bir sorun giderme seçeneği olarak ağ paylaşımı erişimi sağlar.
+*   Dosya ve yazıcı paylaşımı (SMB-gelen): Bu kural, sorun giderme seçeneği olarak ağ paylaşımının erişimine izin vermez.
 
-*   Dosya ve Yazıcı Paylaşımı (yankı isteği - Icmpv4 gelen): Bu kural, VM ping olanak tanır.
+*   Dosya ve yazıcı paylaşımı (yankı Isteği-Icmpv4-gelen): Bu kural, VM 'ye ping yapmanızı sağlar.
 
 Seri konsol erişimi örnekte, güvenlik duvarı kuralı geçerli durumunu sorgulayabilirsiniz.
 
@@ -98,7 +98,7 @@ Seri konsol erişimi örnekte, güvenlik duvarı kuralı geçerli durumunu sorgu
 
 ### <a name="offline-mitigations"></a>Çevrimdışı bir risk azaltma işlemleri
 
-1.  Etkinleştirmek veya güvenlik duvarı kurallarını devre dışı bırakmak için başvurmak [etkinleştirmek veya devre dışı bir güvenlik duvarı kuralı, bir Azure VM konuk işletim sistemine](enable-disable-firewall-rule-guest-os.md).
+1.  Güvenlik duvarı kurallarını etkinleştirmek veya devre dışı bırakmak için [bir Azure VM Konuk işletim sistemindeki güvenlik duvarı kuralını etkinleştirme veya devre dışı bırakma](enable-disable-firewall-rule-guest-os.md)bölümüne bakın.
 
 2.  İçinde olup olmadığını denetleyin [konuk işletim sistemi güvenlik duvarı engelleme gelen trafiği senaryo](guest-os-firewall-blocking-inbound-traffic.md).
 

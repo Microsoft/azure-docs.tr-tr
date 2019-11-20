@@ -1,64 +1,63 @@
 ---
-title: SAP hana (büyük örnekler) azure'da SMT sunucusu kurmak nasıl | Microsoft Docs
-description: SMT sunucusu (büyük örnekler) Azure üzerinde SAP HANA için ayarlama yapma.
+title: Azure 'da SAP HANA için SMT Server ayarlama (büyük örnekler) | Microsoft Docs
+description: Azure 'da SAP HANA için SMT Server 'ı ayarlama (büyük örnekler).
 services: virtual-machines-linux
 documentationcenter: ''
 author: hermanndms
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/10/2018
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 690f41e941f2d1db8fc92d225a54d07570299222
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0d9e86e54a4c94db97b6c89b3ef8799855963020
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60478115"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70099758"
 ---
-# <a name="set-up-smt-server-for-suse-linux"></a>SUSE Linux için SMT sunucusu ayarlama
-Büyük örnekler, SAP HANA doğrudan internet bağlantısı yok. Böyle bir birim işletim sistemi sağlayıcısı ile kaydolmak için indirme ve güncelleştirmeleri uygulamak için basit bir işlem değil. Bir SUSE Linux için bir Azure sanal makine'de SMT sunucusunu ayarlamak için çözümüdür. HANA büyük örneği için bağlı olan bir Azure sanal ağında sanal makine konağının. Böyle bir SMT sunucusu ile HANA büyük örneği birim kaydedin ve güncelleştirmeleri karşıdan. 
+# <a name="set-up-smt-server-for-suse-linux"></a>SUSE Linux için SMT Server 'ı ayarlama
+Büyük SAP HANA örneklerinin internet 'e doğrudan bağlantısı yoktur. Bu tür bir birimi işletim sistemi sağlayıcısına kaydetmek ve güncelleştirmeleri indirmek ve uygulamak için kolay bir işlem değildir. SUSE Linux çözümü, bir Azure sanal makinesinde bir SMT sunucusu ayarlamaya yöneliktir. Sanal makineyi, HANA büyük örneğine bağlı bir Azure sanal ağında barındırın. Bu tür bir SMT sunucusu sayesinde, HANA büyük örnek birimi güncelleştirmeleri kaydedebilir ve indirebilir. 
 
-SUSE üzerinde daha fazla bilgi için bkz, [SLES 12 SP2 için abonelik yönetimini](https://www.suse.com/documentation/sles-12/pdfdoc/book_smt/book_smt.pdf). 
+SUSE hakkında daha fazla belge için, bkz. [SLES 12 SP2 Için abonelik yönetim aracı](https://www.suse.com/documentation/sles-12/pdfdoc/book_smt/book_smt.pdf). 
 
-HANA büyük örnekler için görev karşılayan bir SMT sunucusu yüklemek için Önkoşullar şunlardır:
+HANA büyük örneklere yönelik görevi yerine getiren bir SMT sunucusunu yüklemeye yönelik önkoşullar şunlardır:
 
-- HANA büyük örneği ExpressRoute işlem hattına bağlı bir Azure sanal ağı.
-- Bir kuruluşla ilişkili olan bir SUSE hesabı. Kuruluş geçerli SUSE aboneliğinizin olması.
+- HANA büyük örnek ExpressRoute devresine bağlı bir Azure sanal ağı.
+- Bir kuruluşla ilişkili SUSE hesabı. Kuruluşun geçerli bir SUSE aboneliğine sahip olması gerekir.
 
-## <a name="install-smt-server-on-an-azure-virtual-machine"></a>Azure sanal makinesinde SMT sunucusu yükleme
+## <a name="install-smt-server-on-an-azure-virtual-machine"></a>Bir Azure sanal makinesine SMT Server 'ı yükler
 
-İlk olarak oturum açın [SUSE Müşteri merkezi](https://scc.suse.com/).
+İlk olarak, [SUSE müşteri merkezinde](https://scc.suse.com/)oturum açın.
 
-Git **kuruluş** > **kuruluş kimlik**. Bu bölümde, SMT sunucusu kurmak gerekli kimlik bilgilerini bulmanız gerekir.
+**Kuruluş** > **kuruluşu kimlik bilgileri**' ne gidin. Bu bölümde, SMT sunucusunu ayarlamak için gereken kimlik bilgilerini bulmanız gerekir.
 
-Ardından, SUSE Linux VM, Azure sanal ağında yükleyin. Sanal makineyi dağıtmak için Azure (BYOS SUSE görüntüyü seçin) SLES 12 SP2 galeri görüntüsü alın. Dağıtım işlemi, bir DNS adı yok tanımlayın ve statik IP adresini kullanmayın.
+Ardından, Azure sanal ağına bir SUSE Linux VM 'si yüklersiniz. Sanal makineyi dağıtmak için, Azure 'un SLES 12 SP2 Galeri görüntüsünü alın (KCG SUSE görüntüsünü seçin). Dağıtım sürecinde, DNS adı tanımlamaz ve statik IP adresleri kullanmayın.
 
-![Sanal makine dağıtımı SMT sunucusu için ekran görüntüsü](./media/hana-installation/image3_vm_deployment.png)
+![SMT sunucusu için sanal makine dağıtımının ekran görüntüsü](./media/hana-installation/image3_vm_deployment.png)
 
-Dağıtılan sanal makine daha küçüktür ve iç IP adresi 10.34.1.4 Azure sanal ağında alındı. Sanal makine adı *smtserver*. Yükleme sonrasında, HANA büyük örneği birim veya birim bağlantısını denetlenir. Ad çözümlemesinin nasıl düzenlendiği bağlı olarak, vb./ana bilgisayarları Azure sanal makinesinin HANA büyük örneği birimlerinin çözüm yapılandırmanız gerekebilir. 
+Dağıtılan sanal makine daha küçüktür ve 10.34.1.4 Azure sanal ağındaki iç IP adresini aldı. Sanal makinenin adı *smtserver*' dır. Yüklemeden sonra, HANA büyük örnek birimine veya birimlerine olan bağlantı denetlenir. Ad çözümlemesini nasıl düzenlediğinize bağlı olarak, Azure sanal makinesinin vb/konaklarındaki HANA büyük örnek birimlerinin çözümlenmesini yapılandırmanız gerekebilir. 
 
-Bir disk sanal makineye ekleyin. Güncelleştirmeleri tutmak için bu diski kullanan ve önyükleme diski çok küçük olabilir. Burada, disk /srv/www/htdocs için aşağıdaki ekran görüntüsünde gösterildiği gibi bağlı. 100 GB boyutlu disk yeterli olacaktır.
+Sanal makineye bir disk ekleyin. Bu diski güncelleştirmeleri tutmak için kullanırsınız ve önyükleme diskinin kendisi çok küçük olabilir. Burada, disk aşağıdaki ekran görüntüsünde gösterildiği gibi/SRV/www/htdocs dizinine bağlandı. 100 GB bir disk yeterli olacaktır.
 
-![Sanal makine dağıtımı SMT sunucusu için ekran görüntüsü](./media/hana-installation/image4_additional_disk_on_smtserver.PNG)
+![SMT sunucusu için sanal makine dağıtımının ekran görüntüsü](./media/hana-installation/image4_additional_disk_on_smtserver.PNG)
 
-HANA büyük örneği birim veya birim oturum/etc/hosts korumak ve SMT sunucunun ağ üzerinde çalıştırmak için gereken Azure sanal makinesini ulaşıp ulaşamadığını denetleyin.
+HANA büyük örnek birimi veya birimlerinde oturum açın,/etc/Konakları koruyun ve ağ üzerinden SMT sunucusunu çalıştırmak için gereken Azure sanal makinesine erişip ulaşamayacağını denetleyin.
 
-Bu denetimden sonra SMT sunucunun çalışması gereken Azure sanal makine için oturum açın. Sanal makineye oturum açmak için putty kullanıyorsanız, bu bir dizi komut, bash penceresinde çalıştırın:
+Bu denetim sonrasında, SMT sunucusunu çalıştırması gereken Azure sanal makinesinde oturum açın. Sanal makinede oturum açmak için Putty kullanıyorsanız, Bash pencerenizde bu komut dizisini çalıştırın:
 
 ```
 cd ~
 echo "export NCURSES_NO_UTF8_ACS=1" >> .bashrc
 ```
 
-Ayarları etkinleştirmek için bash yeniden başlatın. Daha sonra YAST başlatın.
+Ayarları etkinleştirmek için bash 'nizi yeniden başlatın. Ardından YAST 'yi başlatın.
 
-Sanal makinenize (smtserver) SUSE siteye bağlanın.
+VM 'nizi (smtserver) SUSE sitesine bağlayın.
 
 ```
 smtserver:~ # SUSEConnect -r <registration code> -e s<email address> --url https://scc.suse.com
@@ -68,7 +67,7 @@ Using E-Mail: email address
 Successfully registered system.
 ```
 
-Sanal makine SUSE siteye bağlandıktan sonra smt paketleri yükleyin. Smt paketleri yüklemek için putty aşağıdaki komutu kullanın.
+Sanal makine SUSE sitesine bağlandıktan sonra, SMT paketlerini yükler. Smt paketlerini yüklemek için aşağıdaki Putty komutunu kullanın.
 
 ```
 smtserver:~ # zypper in smt
@@ -79,30 +78,30 @@ Resolving package dependencies...
 ```
 
 
-Smt paketleri yüklemek için YAST Aracı'nı da kullanabilirsiniz. YAST içinde Git **yazılım bakımı**, smt arayın. Seçin **smt**, hangi anahtarları otomatik olarak yast2 smt için.
+Ayrıca, SMT paketlerini yüklemek için YAST aracını da kullanabilirsiniz. YAST 'de **Yazılım Bakımı**' na gidin ve SMT araması yapın. Otomatikolarak YaST2-smt öğesine geçiş yapar.
 
-![SMT YAST içinde ekran görüntüsü](./media/hana-installation/image5_smt_in_yast.PNG)
+![YAST içindeki SMT ekran görüntüsü](./media/hana-installation/image5_smt_in_yast.PNG)
 
 
-Smtserver yüklemesinde seçimini kabul edin. Yükleme tamamlandıktan sonra SMT sunucu yapılandırmasına geçin. Daha önce aldığınız SUSE müşteri Merkezi'nden Kurumsal kimlik bilgilerinizi girin. Ayrıca, Azure sanal makine ana bilgisayar adı SMT sunucu URL'sini girin. Bu örnekte, bu uygulamanın https:\//smtserver.
+Smtserver üzerinde yükleme seçimini kabul edin. Yükleme tamamlandıktan sonra, SMT sunucu yapılandırmasına gidin. Daha önce aldığınız SUSE müşteri merkezinden kuruluş kimlik bilgilerini girin. Ayrıca, Azure sanal makinenizin ana bilgisayar adını SMT sunucu URL 'SI olarak girin. Bu gösteride, https:\//smtserver.
 
-![Ekran görüntüsü, SMT sunucu yapılandırması](./media/hana-installation/image6_configuration_of_smtserver1.png)
+![SMT sunucu yapılandırması ekran görüntüsü](./media/hana-installation/image6_configuration_of_smtserver1.png)
 
-Şimdi SUSE müşteri Merkezi'ne bağlantı çalışıp çalışmadığını test edin. Bu sunum durumda, aşağıdaki ekran görüntüsünde gördüğünüz gibi çalıştı.
+Şimdi SUSE Customer Center bağlantısının çalışıp çalışmadığını test edin. Aşağıdaki ekran görüntüsünde gördüğünüz gibi, bu gösterim çalışmasında çalışır.
 
-![SUSE müşteri Merkezi'ne bağlantı test ediliyor ekran görüntüsü](./media/hana-installation/image7_test_connect.png)
+![SUSE müşteri merkezine yönelik test bağlantısı ekran görüntüsü](./media/hana-installation/image7_test_connect.png)
 
-SMT Kurulum başlatıldıktan sonra bir veritabanı parolasını belirtin. Yeni bir yüklemesi olduğundan, aşağıdaki ekran görüntüsünde gösterildiği gibi bu parolayı tanımlamanız gerekir.
+SMT kurulumu başladıktan sonra bir veritabanı parolası sağlayın. Yeni bir yükleme olduğundan, bu parolayı aşağıdaki ekran görüntüsünde gösterildiği gibi tanımlamanız gerekir.
 
-![Veritabanı parolasını tanımlama ekran görüntüsü](./media/hana-installation/image8_define_db_passwd.PNG)
+![Veritabanı için parola tanımlamayı ekran görüntüsü](./media/hana-installation/image8_define_db_passwd.PNG)
 
-Sonraki adım, bir sertifika oluşturmaktır.
+Sonraki adım bir sertifika oluşturmaktır.
 
-![SMT sunucusu için bir sertifika oluşturma işleminin ekran görüntüsü](./media/hana-installation/image9_certificate_creation.PNG)
+![SMT sunucusu için sertifika oluşturma ekran görüntüsü](./media/hana-installation/image9_certificate_creation.PNG)
 
-Yapılandırmanın sonunda, eşitleme denetimini çalıştırmak için birkaç dakika sürebilir. Yükleme ve yapılandırma SMT sunucusunun sonra bağlama noktası /srv/www/htdocs altında dizin deposu bulmalısınız /. Depo bazı alt dizinler de vardır. 
+Yapılandırmanın sonunda, eşitleme denetiminin çalıştırılması birkaç dakika sürebilir. SMT sunucusunu yükleme ve yapılandırmadan sonra, dizin deposunu/SRV/www/htdoc/bağlama noktası altında bulmalısınız. Depo altında bazı alt dizinler de vardır. 
 
-SMT sunucunun ve ilgili hizmetleri şu komutlarla yeniden başlatın.
+Bu komutlarla, SMT sunucusunu ve ilgili hizmetlerini yeniden başlatın.
 
 ```
 rcsmt restart
@@ -110,50 +109,50 @@ systemctl restart smt.service
 systemctl restart apache2
 ```
 
-## <a name="download-packages-onto-smt-server"></a>SMT sunucuya paketlerini indirin
+## <a name="download-packages-onto-smt-server"></a>Paketleri SMT sunucusuna indir
 
-Tüm hizmetleri yeniden başlatıldıktan sonra uygun paketleri SMT yönetiminde YAST kullanarak seçin. Paket seçimi, HANA büyük örneği sunucu işletim sistemi görüntüsü üzerinde bağlıdır. Paket seçimi SLES sürüm veya sürüm SMT server çalıştıran sanal makinenin bağımlı değildir. Aşağıdaki ekran görüntüsünde seçimi ekran örneği gösterilmektedir.
+Tüm hizmetler yeniden başlatıldıktan sonra, YAST kullanarak SMT yönetiminde uygun paketleri seçin. Paket seçimi, HANA büyük örnek sunucusunun işletim sistemi görüntüsüne bağlıdır. Paket seçimi, SMT sunucusunu çalıştıran sanal makinenin SLES sürümüne veya sürümüne bağlı değildir. Aşağıdaki ekran görüntüsünde, seçim ekranının bir örneği gösterilmektedir.
 
-![Paket seçme işleminin ekran görüntüsü](./media/hana-installation/image10_select_packages.PNG)
+![Paket seçme ekran görüntüsü](./media/hana-installation/image10_select_packages.PNG)
 
-Ardından, paket seçmek için ayarladığınız SMT sunucu ilk kopyasını başlatın. Bu kopya komut smt yansıtma kullanarak Kabuğu'nda tetiklenir.
+Ardından, select paketlerinin ilk kopyasını ayarladığınız SMT sunucusuna başlatın. Bu kopya kabukta komut, SMT-yansıtma kullanılarak tetiklenir.
 
-![SMT sunucuya paketleri indirme işleminin ekran görüntüsü](./media/hana-installation/image11_download_packages.PNG)
+![Nesnelerin SMT sunucusuna indiriceği ekran görüntüsü](./media/hana-installation/image11_download_packages.PNG)
 
-Bağlama noktası /srv/www/htdocs altında oluşturulan dizinleri halinde paketler kopyalanmasını. Bu işlem bir saat veya seçtiğiniz kaç paketin bağlı olarak daha fazla sürebilir. Bu işlemi tamamlanır, SMT istemci kurulum taşıyabilirsiniz. 
+Paketler,/SRV/www/htges bağlama noktası altında oluşturulan dizinlere kopyalanmalıdır. Bu işlem, seçtiğiniz paket sayısına bağlı olarak bir saat veya daha fazla sürebilir. Bu işlem tamamlandığında, SMT istemci kurulumuna geçin. 
 
-## <a name="set-up-the-smt-client-on-hana-large-instance-units"></a>HANA büyük örneği birimleri SMT istemcide ayarlama
+## <a name="set-up-the-smt-client-on-hana-large-instance-units"></a>HANA büyük örnek birimlerinde SMT istemcisini ayarlama
 
-Bu durumda istemci veya istemciler HANA büyük örneği birimler verilir. SMT Sunucusu Kurulumu betik clientSetup4SMT.sh Azure sanal makine kopyalar. Üzerinde HANA büyük örneği birimi komut dosyası kopyalama SMT sunucunuza bağlanmak istediğiniz. Betik -h seçeneğiyle başlatın ve bir parametre olarak SMT sunucunuzun adını verin. Bu örnekte, addır *smtserver*.
+Bu durumda, istemci veya istemciler HANA büyük örnek birimleridir. SMT Server kurulumu, clientSetup4SMT.sh betiğini Azure sanal makinesine kopyaladı. Bu betiği, SMT sunucunuza bağlamak istediğiniz HANA büyük örnek birimine kopyalayın. Betiği-h seçeneğiyle başlatın ve SMT sunucunuzun adını bir parametre olarak verin. Bu örnekte, ad *smtserver*' dır.
 
-![SMT istemci yapılandırma ekran görüntüsü](./media/hana-installation/image12_configure_client.PNG)
+![SMT istemcisini yapılandırma ekran görüntüsü](./media/hana-installation/image12_configure_client.PNG)
 
-Aşağıdaki ekran görüntüsünde gösterildiği gibi sunucu tarafından istemci sertifikası yükünü başarılı, ancak kayıt başarısız olursa mümkündür.
+Sertifikanın istemci tarafından sunucudan yüklenmesi başarılı olur, ancak aşağıdaki ekran görüntüsünde gösterildiği gibi kayıt başarısız olur.
 
-![İstemci kayıt hatası görüntüsü](./media/hana-installation/image13_registration_failed.PNG)
+![İstemci kayıt hatası ekran görüntüsü](./media/hana-installation/image13_registration_failed.PNG)
 
-Kayıt başarısız olursa bkz [SUSE belge desteği](https://www.suse.com/de-de/support/kb/doc/?id=7006024), ve burada açıklanan adımları çalıştırın.
+Kayıt başarısız olursa, [SUSE destek belgesi](https://www.suse.com/de-de/support/kb/doc/?id=7006024)' ne bakın ve burada açıklanan adımları çalıştırın.
 
 > [!IMPORTANT] 
-> Sunucu adı için sanal makine adını belirtin (Bu durumda, *smtserver*), tam etki alanı adı. 
+> Sunucu adı için, tam etki alanı adı olmadan sanal makinenin adını (Bu örnekte, *smtserver*) belirtin. 
 
-Bu adımları çalıştırdıktan sonra HANA büyük örneği biriminde aşağıdaki komutu çalıştırın:
+Bu adımları çalıştırdıktan sonra, HANA büyük örnek biriminde aşağıdaki komutu çalıştırın:
 
 ```
 SUSEConnect –cleanup
 ```
 
 > [!Note] 
-> Bu adımdan sonra birkaç dakika bekleyin. ClientSetup4SMT.sh hemen çalıştırırsanız, bir hata alabilirsiniz.
+> Bu adımdan sonra birkaç dakika bekleyin. ClientSetup4SMT.sh 'i hemen çalıştırırsanız bir hata alabilirsiniz.
 
-Düzeltme SUSE makalenin adımlara göre gereken bir sorunla karşılaşırsanız, HANA büyük örneği birimi clientSetup4SMT.sh yeniden başlatın. Şimdi, başarıyla tamamlanmalıdır.
+SUSE makalesinin adımlarını temel alarak düzeltilmesi gereken bir sorunla karşılaşırsanız, clientSetup4SMT.sh 'i HANA büyük örnek biriminde yeniden başlatın. Şimdi başarıyla tamamlanmalıdır.
 
-![İstemci kayıt başarı ekran görüntüsü](./media/hana-installation/image14_finish_client_config.PNG)
+![İstemci kaydı başarısı ekran görüntüsü](./media/hana-installation/image14_finish_client_config.PNG)
 
-Azure sanal makinesinde yüklü SMT sunucusuna bağlanmak için HANA büyük örneği biriminin SMT istemci yapılandırdığınız. Artık yapabilir HANA büyük örnekler için işletim sistemi güncelleştirmeleri yüklemek için 'kurmak zypper' veya 'ı zypper içinde' olması veya ek paketler yüklemek. Yalnızca SMT sunucuda önceden indirdiğiniz güncelleştirmeleri alabilirsiniz.
+Azure sanal makinesine yüklediğiniz SMT sunucusuna bağlanmak için HANA büyük örnek biriminin SMT istemcisini yapılandırdınız. Bu aşamada, HANA büyük örneklerine işletim sistemi güncelleştirmeleri yüklemek veya ek paketler yüklemek için ' zypper of up ' veya ' zypper ' ' ölçeğini alabilirsiniz. Yalnızca SMT sunucusundan daha önce indirdiğiniz güncelleştirmeleri alabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [HANA yüklemesi HLI](hana-example-installation.md).
+- [HLI 'Da Hana yüklemesi](hana-example-installation.md).
 
 
 

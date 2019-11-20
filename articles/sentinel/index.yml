@@ -1,62 +1,91 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Sentinel Önizleme Belgeleri
+### YamlMime:Landing
+title: Azure Sentinel belgeleri
+summary: Bu makalede, Azure Sentinel ile çalışmaya başlamaya yönelik kullanım örnekleri sunulur. Modern dünya için yeniden tasarlanan SIEM ile tehditleri zarar vermeden önce görüp durdurun. Azure Sentinel size işletmenizin kuş bakışı görünümünü sunar.
 metadata:
-  title: 'Azure Sentinel Önizleme Belgeleri - Öğreticiler, Hızlı Başlangıçlar | Microsoft Docs'
-  meta.description: Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise at cloud scale.
+  title: Azure Sentinel belgeleri
+  description: 'Bu makalede, Azure Sentinel ile çalışmaya başlamaya yönelik kullanım örnekleri ve senaryolar sunulur. Modern dünya için yeniden tasarlanan SIEM ile tehditleri zarar vermeden önce görüp durdurun. Azure Sentinel, kuruluş genelinde kuşbakışı bir görünüm sunar.# Gerekli: arama sonuçlarında görüntülenen makale açıklaması. 160 karakterden az.'
   services: sentinel
-  author: cmcclister
-  manager: carolz
   ms.service: sentinel
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: azure-sentinel
   ms.topic: landing-page
-  ms.date: 02/28/19
-  ms.author: cmcclister
-abstract:
-  description: 'Azure Sentinel Önizleme, tüm işletmenize bulut ölçeğinde akıllı güvenlik analizi olanakları sunan, bulutta yerel bir SIEM çözümüdür. Bulutta sınırsız hız ve ölçeklendirme olanağı elde ederek önemli işlerinize odaklanın. Buluttaki ve şirket içindeki tüm varlıklarınızdan, Office 365’ten, Azure kaynaklarından ve diğer bulutlardan kolayca veri toplayın. Microsoft’un güvenlik analizi uzmanlarının hazırladığı yerleşik makine öğrenmesi özellikleriyle tehditleri etkili bir biçimde algılayın. Yerleşik düzenleme ve otomasyon playbook’larını kullanarak tehdit yanıtlarını otomatikleştirin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Verilerinizi Azure Sentinel’a eklemeyi, verilerinize ve olası tehditlere yönelik görünürlük elde etmeyi öğrenin.'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/deploy.svg
-            text: Azure Sentinel’a ekleme
-            href: /azure/sentinel/quickstart-onboard
-          - image:
-              src: media/index/get-started.svg
-            text: Azure Sentinel’ı kullanmaya başlama
-            href: /azure/sentinel/quickstart-get-visibility
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Güvenlik ilkelerini tanımlamayı, kötü amaçlı etkinliklere karşı kaynaklarınızı korumayı ve güvenlik uyarıları ile olaylara yanıt vermeyi öğrenin.'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/sentinel/tutorial-detect-threats">Azure Sentinel ile tehdit algılama</a>
-          - html: <a href="/azure/sentinel/tutorial-respond-threats-playbook">Otomatik tehdit yanıtları ayarlama</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure'da güvenliğe giriş
-            href: 'https://docs.microsoft.com/learn/azure'
-            image:
-              src: media/index/tutorial.svg
-              href: 'https://docs.microsoft.com/learn/azure'
-      - type: paragraph
-        text: <a href="/learn/browse/?term=security">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - html: '<a href="https://azure.microsoft.com/updates/?product=sentinel">Hizmet güncelleştirmeleri</a>'
+  ms.collection: collection
+  author: rkarlin
+  ms.author: rkarlin
+  ms.date: 25/09/2019
+  ms.openlocfilehash: 8f8815645b7dfcdcc5e1ed5212ecd1ec298f8644
+  ms.sourcegitcommit: 9fba13cdfce9d03d202ada4a764e574a51691dcd
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/26/2019
+  ms.locfileid: "71316497"
+landingContent:
+- title: Azure Sentinel hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Sentinel nedir?
+      url: overview.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Sentinel’a ekleme
+      url: quickstart-onboard.md
+    - text: Uyarılara yönelik görünürlük elde etme
+      url: quickstart-get-visibility.md
+  - linkListType: how-to-guide
+    links:
+    - text: Verileri Azure Sentinel’e bağlama
+      url: connect-data-sources.md
+- title: Ek veri kaynaklarını bağlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD’yi bağlama
+      url: connect-azure-active-directory.md
+    - text: Azure Information Protection’ı bağlama
+      url: connect-azure-information-protection.md
+    - text: AWS’ye bağlanma
+      url: connect-aws.md
+    - text: Palo Alto Networks’e bağlanma
+      url: connect-paloalto.md
+    - text: Tehdit zekasını bağlama
+      url: connect-threat-intelligence.md
+- title: Birden çok kiracı ile çalışma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Sentinel’de çok kiracılı desteği etkinleştirme
+      url: multiple-tenants-service-providers.md
+- title: Ortamınızda neler olduğunu anlama
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Verilerinizi izleme
+      url: tutorial-monitor-your-data.md
+    - text: Olayları araştırma
+      url: tutorial-investigate-cases.md
+- title: Tehditleri algılama
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Tehditleri algılamak için yerleşik analizi kullanma
+      url: tutorial-detect-threats-built-in.md
+    - text: Özel algılama kuralı oluşturma
+      url: tutorial-detect-threats-custom.md
+- title: Tehdit önlemeyi otomatikleştirme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Tehditlere otomatik olarak yanıt verme
+      url: tutorial-respond-threats-playbook.md
+    - text: Güvenlik tehditlerini aramak için Jupyter Notebook kullanma
+      url: notebooks.md
+- title: Tehdit algılama konusunda öngörülü olma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Tehdit zekasını bağlama
+      url: connect-threat-intelligence.md
+    - text: Tehditleri arama
+      url: hunting.md

@@ -1,5 +1,5 @@
 ---
-title: PHP web uygulaması - Azure App Service oluştur | Microsoft Docs
+title: PHP Web uygulaması oluşturma-Azure App Service | Microsoft Docs
 description: Azure App Service Web Uygulamalarında ilk PHP Hello World uygulamanızı birkaç dakika içinde dağıtın.
 services: app-service\web
 documentationcenter: ''
@@ -10,17 +10,16 @@ ms.assetid: 6feac128-c728-4491-8b79-962da9a40788
 ms.service: app-service-web
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
 ms.date: 08/24/2018
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: f1a5c3a57c60b30855f7bfaaa1ee3ab85285011d
-ms.sourcegitcommit: 8c49df11910a8ed8259f377217a9ffcd892ae0ae
+ms.openlocfilehash: 386229bc272a520ec8093c95bc861704ce9ea7eb
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66298534"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73471391"
 ---
 # <a name="create-a-php-web-app-in-azure"></a>Azure’da PHP web uygulaması oluşturma
 
@@ -28,7 +27,7 @@ ms.locfileid: "66298534"
 > Bu makalede bir uygulamanın Windows üzerinde App Service'e dağıtımı yapılır. _Linux_ üzerinde App Service'e dağıtım yapmak için bkz. [Linux üzerinde App Service'te PHP web uygulaması oluşturma](./containers/quickstart-php.md).
 >
 
-[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar.  Bu hızlı başlangıç öğreticisinde, PHP uygulamasını Azure App Service'e dağıtma işlemi gösterilmektedir. Cloud Shell’de [Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) kullanarak web uygulamasını oluşturabilir ve örnek PHP kodunu web uygulamasına dağıtmak için Git kullanabilirsiniz.
+[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar.  Bu hızlı başlangıç öğreticisinde, Azure App Service için bir PHP uygulamasının nasıl dağıtılacağı gösterilmektedir. Cloud Shell’de [Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) kullanarak web uygulamasını oluşturabilir ve örnek PHP kodunu web uygulamasına dağıtmak için Git kullanabilirsiniz.
 
 ![Azure'da çalışan örnek uygulama](media/app-service-web-get-started-php/hello-world-in-browser.png)
 
@@ -78,7 +77,7 @@ Terminal pencerenizde **Ctrl+C** tuşlarına basarak web sunucusundan çıkın.
 
 ## <a name="create-a-web-app"></a>Web uygulaması oluşturma
 
-Cloud Shell’de, [`az webapp create`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) komutuyla `myAppServicePlan` App Service planında bir web uygulaması oluşturun. 
+Cloud Shell’de, `myAppServicePlan`[`az webapp create` komutuyla ](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) App Service planında bir web uygulaması oluşturun. 
 
 Aşağıdaki örnekte `<app_name>` kısmını genel olarak benzersiz bir uygulama adıyla değiştirin (geçerli karakterler `a-z`, `0-9` ve `-` şeklindedir). Çalışma zamanı `PHP|7.0` olarak ayarlanmıştır. Desteklenen tüm çalışma zamanları görmek için [`az webapp list-runtimes`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-list-runtimes) komutunu çalıştırın. 
 
@@ -150,7 +149,7 @@ To https://<app_name>.scm.azurewebsites.net/<app_name>.git
 
 ## <a name="browse-to-the-app"></a>Uygulamaya göz atma
 
-Web tarayıcınızı kullanarak, dağıtılan uygulamanın konumuna gidin.
+Web tarayıcınızı kullanarak dağıtılan uygulamaya göz atın.
 
 ```
 http://<app_name>.azurewebsites.net
@@ -181,19 +180,21 @@ Dağıtım tamamlandıktan sonra **Uygulamaya göz atma** adımında açılan ta
 
 ![Azure'da çalışan güncelleştirilmiş örnek uygulama](media/app-service-web-get-started-php/hello-azure-in-browser.png)
 
-## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetme
+## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetin
 
-Oluşturduğunuz web uygulamasını yönetmek için <a href="https://portal.azure.com" target="_blank">Azure portalına</a> gidin.
+1. Oluşturduğunuz web uygulamasını yönetmek için <a href="https://portal.azure.com" target="_blank">Azure portalına</a> gidin. **Uygulama hizmetleri**' ni arayıp seçin.
 
-Sol menüden **uygulama hizmetleri**ve ardından Azure uygulamanızın adına tıklayın.
+    ![Uygulama Hizmetleri arama Azure portal, PHP Web uygulaması oluşturma](media/app-service-web-get-started-php/navigate-to-app-services-in-the-azure-portal.png)
 
-![Azure uygulamasına portal gezintisi](./media/app-service-web-get-started-php/php-docs-hello-world-app-service-list.png)
+2. Azure uygulamanızın adını seçin.
 
-Web uygulamanızın Genel Bakış sayfasını görürsünüz. Buradan göz atma, durdurma, başlatma, yeniden başlatma ve silme gibi temel yönetim görevlerini gerçekleştirebilirsiniz.
+    ![Azure uygulamasına portal gezintisi](./media/app-service-web-get-started-php/php-docs-hello-world-app-service-list.png)
 
-![Azure portalında App Service sayfası](media/app-service-web-get-started-php/php-docs-hello-world-app-service-detail.png)
+    Web uygulamanızın **genel bakış** sayfası görüntülenir. Burada, **Gözden**geçirme, **durdurma**, **yeniden başlatma**ve **silme**gibi temel yönetim görevlerini gerçekleştirebilirsiniz.
 
-Soldaki menü, uygulamanızı yapılandırmak için farklı seçenekler sağlar. 
+    ![Azure portalında App Service sayfası](media/app-service-web-get-started-php/php-docs-hello-world-app-service-detail.png)
+
+    Web uygulaması menüsü, uygulamanızı yapılandırmak için farklı seçenekler sağlar. 
 
 [!INCLUDE [cli-samples-clean-up](../../includes/cli-samples-clean-up.md)]
 

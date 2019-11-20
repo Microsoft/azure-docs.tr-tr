@@ -1,23 +1,23 @@
 ---
-title: Azure Cosmos DB'de UZAKLIĞI sınırı yan tümcesi
-description: Azure Cosmos DB için UZAKLIK sınırlama yan tümcesi hakkında öğrenin.
+title: Azure Cosmos DB içindeki konum SıNıRı yan tümcesi
+description: Azure Cosmos DB için fark SıNıRı yan tümcesi hakkında bilgi edinin.
 author: timsander1
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 06/10/2019
 ms.author: mjbrown
-ms.openlocfilehash: 60ac28c80e9f7cc72f4d6005c12cb5f68671341e
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: 7aae56783f83f13b50321c88d69f07d910e589dd
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342494"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72326885"
 ---
-# <a name="offset-limit-clause"></a>UZAKLIK sınırlama yan tümcesi
+# <a name="offset-limit-clause-in-azure-cosmos-db"></a>Azure Cosmos DB içindeki konum SıNıRı yan tümcesi
 
-UZAKLIK sınırlama yan tümcesi bazı sayısı değerleri sorgudan Al atlamak için isteğe bağlı bir yan tümcesi ' dir. UZAKLIK sayımı ve sınırı sayısı sınırı UZAKLIĞI yan tümcesinde gereklidir.
+Konum SıNıRı yan tümcesi, atlamak için isteğe bağlı bir yan tümce ve sonra sorgudan birkaç değer alır. Konum sayısı ve sınır sayısı, sınır SıNıRı yan tümcesinde gereklidir.
 
-UZAKLIK sınırı, ORDER BY yan tümcesi ile birlikte kullanıldığında, sonuç kümesi Atla yaparak oluşturulur ve sıralı değerlerine gerçekleştirin. ORDER BY yan tümce kullandıysanız, değer belirleyici bir sırada neden olur.
+Sınır sınırı ORDER BY yan tümcesiyle birlikte kullanıldığında, sonuç kümesi, sıralı değerler üzerinde atlama ve alma işlemleri gerçekleştirerek oluşturulur. ORDER BY yan tümcesi kullanılmazsa, değerin belirleyici bir sırası oluşur.
 
 ## <a name="syntax"></a>Sözdizimi
   
@@ -29,19 +29,19 @@ OFFSET <offset_amount> LIMIT <limit_amount>
 
 - `<offset_amount>`
 
-   Sorgu sonuçları atlamalısınız öğeleri tamsayı sayısını belirtir.
+   Sorgu sonuçlarının atlayacağı öğelerin tamsayı sayısını belirtir.
 
 - `<limit_amount>`
   
-   Sorgu sonuçları içermelidir bir öğe tamsayı sayısını belirtir
+   Sorgu sonuçlarının içermesi gereken öğelerin tamsayı sayısını belirtir
 
 ## <a name="remarks"></a>Açıklamalar
   
-  UZAKLIK sayımı hem sınırı sayısı sınırı UZAKLIĞI yan tümcesinde gerekir. İsteğe bağlı ise `ORDER BY` yan tümcesi kullanıldığında, sonuç kümesi sıralı değerleri Atla yaparak üretilir. Aksi takdirde, sorgu bir sabit değerlerin sırasını döndürür. Şu anda yalnızca tek bir bölüm içinde sorguları için bu yan tümce desteklenir, bölümler arası sorgu henüz bunu desteklemez.
+  Konum SıNıRı yan tümcesinde hem konum sayısı hem de LIMIT sayısı gereklidir. İsteğe bağlı bir `ORDER BY` yan tümcesi kullanılırsa, sonuç kümesi sıralı değerlerin atlanarak oluşturulur. Aksi halde sorgu sabit bir değerler sırası döndürür. Şu anda bu yan tümce yalnızca tek bir bölüm içindeki sorgularda desteklenir, çapraz bölümleme sorguları henüz desteklememektedir.
 
 ## <a name="examples"></a>Örnekler
 
-Örneğin, ilk değer atlar ve ikinci değer (yerleşik şehir adı sırasına göre) döndüren bir sorgu aşağıdadır:
+Örneğin, ilk değeri atlayan ve ikinci değeri döndüren (yerleşik şehrin adının sırasıyla) bir sorgu aşağıda verilmiştir:
 
 ```sql
     SELECT f.id, f.address.city
@@ -50,7 +50,7 @@ OFFSET <offset_amount> LIMIT <limit_amount>
     OFFSET 1 LIMIT 1
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -61,7 +61,7 @@ Sonuçlar şu şekildedir:
     ]
 ```
 
-İlk değer atlar ve ikinci değer (sıralama olmadan) döndüren bir sorgu aşağıda verilmiştir:
+İlk değeri atlayan ve ikinci değeri döndüren (sıralama olmadan) bir sorgu aşağıda verilmiştir:
 
 ```sql
    SELECT f.id, f.address.city
@@ -69,7 +69,7 @@ Sonuçlar şu şekildedir:
     OFFSET 1 LIMIT 1
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [

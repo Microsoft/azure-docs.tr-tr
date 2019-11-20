@@ -1,74 +1,70 @@
 ---
-title: Azure Application Insights - Azure işlevleri desteklenen özellikler | Microsoft Docs
-description: Azure işlevleri için Application ınsights'ı desteklenen özellikler
-services: application-insights
-documentationcenter: .net
-author: MS-TimothyMothra
-manager: ''
-ms.service: application-insights
-ms.workload: TBD
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights-Azure Işlevleri desteklenen özellikler | Microsoft Docs
+description: Azure Işlevleri için desteklenen özellikler Application Insights
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: reference
+author: TimothyMothra
+ms.author: tilee
 ms.date: 4/23/2019
 ms.reviewer: mbullwin
-ms.author: tilee
-ms.openlocfilehash: 0199d8f0c4a76a10fffcab7cf2819643d0ac2d68
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 31f962ca96ca5c47d18f9250e567abb8f4024e6f
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67075351"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72677549"
 ---
-# <a name="application-insights-for-azure-functions-supported-features"></a>Application ınsights'ı Azure işlevleri için desteklenen özellikler
+# <a name="application-insights-for-azure-functions-supported-features"></a>Azure Işlevleri 'nin desteklediği özellikler için Application Insights
 
-Azure işlevleri tekliflerini [yerleşik tümleştirme](https://docs.microsoft.com/azure/azure-functions/functions-monitoring) Application Insights ile olan ILogger arabirimi aracılığıyla kullanılabilir. Şu anda desteklenen özelliklerin listesi aşağıda verilmiştir. Azure işlevleri Kılavuzu gözden [Başlarken](https://github.com/Azure/Azure-Functions/wiki/App-Insights).
+Azure Işlevleri, ILogger arabirimi aracılığıyla kullanılabilen Application Insights ile [yerleşik tümleştirme](../../azure-functions/functions-monitoring.md) sunar. Şu anda desteklenen özelliklerin listesi aşağıda verilmiştir. [Kullanmaya başlamak](../../azure-functions/functions-monitoring.md#enable-application-insights-integration)Için Azure işlevleri Kılavuzu ' nu gözden geçirin.
 
 ## <a name="supported-features"></a>Desteklenen özellikler
 
 | Azure İşlevleri                       | V1                | V2 (Ignite 2018)  | 
 |-----------------------------------    |---------------    |------------------ |
-| **Application ınsights'ı .NET SDK'sı**   | **2.5.0**       | **2.9.1**         |
+| **Application Insights .NET SDK**   | **2.5.0**       | **2.9.1**         |
 | | | | 
-| **Otomatik olarak toplama**        |                 |                   |               
-| &bull; İstekleri                     | Evet             | Evet               | 
-| &bull; Özel durumlar                   | Evet             | Evet               | 
-| &bull; Performans sayaçları         | Evet             | Evet               |
-| &bull; Bağımlılıkları                   |                   |                   |               
-| &nbsp;&nbsp;&nbsp;&mdash; HTTP      |                 | Evet               | 
-| &nbsp;&nbsp;&nbsp;&mdash; ServiceBus|                 | Evet               | 
-| &nbsp;&nbsp;&nbsp;&mdash; EventHub  |                 | Evet               | 
-| &nbsp;&nbsp;&nbsp;&mdash; SQL       |                 | Evet               | 
+| **Otomatik toplama**        |                 |                   |               
+| &bull; Istek                     | Yes             | Yes               | 
+| &bull; özel durumları                   | Yes             | Yes               | 
+| &bull; performans sayacı         | Yes             | Yes               |
+| &bull; bağımlılıkları                   |                   |                   |               
+| &nbsp; &nbsp; &nbsp; &mdash; HTTP      |                 | Yes               | 
+| &nbsp; &nbsp; &nbsp; &mdash; ServiceBus|                 | Yes               | 
+| &nbsp; &nbsp; &nbsp; &mdash; EventHub  |                 | Yes               | 
+| &nbsp; &nbsp; &nbsp; &mdash; SQL       |                 | Yes               | 
 | | | | 
 | **Desteklenen özellikler**                |                   |                   |               
-| &bull; QuickPulse/LiveMetrics       | Evet             | Evet               | 
-| &nbsp;&nbsp;&nbsp;&mdash; Güvenli denetim kanalı|                 | Evet               | 
-| &bull; Örnekleme                     | Evet             | Evet               | 
-| &bull; Sinyal                   |                 | Evet               | 
+| &bull; QuickPulse/Liveölçümleri       | Yes             | Yes               | 
+| &nbsp; &nbsp; &nbsp; &mdash; güvenli denetim kanalı|                 | Yes               | 
+| &bull; örnekleme                     | Yes             | Yes               | 
+| &bull; sinyal                   |                 | Yes               | 
 | | | | 
-| **Bağıntı**                       |                   |                   |               
-| &bull; ServiceBus                     |                   | Evet               | 
-| &bull; EventHub                       |                   | Evet               | 
+| **Bağıntılı**                       |                   |                   |               
+| &bull; ServiceBus                     |                   | Yes               | 
+| &bull; EventHub                       |                   | Yes               | 
 | | | | 
 | **Yapılandırılabilir**                      |                   |                   |           
-| &bull;Tam olarak yapılandırılabilir.<br/>Bkz: [Azure işlevleri](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/759#issuecomment-426687852) yönergeler için.<br/>Bkz: [Asp.NET Core](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Custom-Configuration) tüm seçenekler için.               |                   | Evet                   | 
+| &bull;Tam yapılandırılabilir.<br/>Yönergeler için bkz. [Azure işlevleri](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/759#issuecomment-426687852) .<br/>Tüm seçenekler için bkz. [ASP.NET Core](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Custom-Configuration) .               |                   | Yes                   | 
 
 
 ## <a name="performance-counters"></a>Performans Sayaçları
 
-Otomatik performans sayaçlarını toplamayı yalnızca Windows makineleri çalışır.
+Performans sayaçlarının otomatik toplanması yalnızca Windows makinelerini işler.
 
 
-## <a name="live-metrics--secure-control-channel"></a>Canlı Ölçümler ve güvenli denetim kanalı
+## <a name="live-metrics--secure-control-channel"></a>Canlı ölçümler & güvenli denetim kanalı
 
-Belirttiğiniz özel filtreler ölçütlere geri Application Insights SDK'sı Canlı ölçümleri bileşeni gönderilir. Filtreler, büyük olasılıkla customerIDs gibi hassas bilgiler içerebilir. Kanal güvenli sahip gizli bir API anahtarı yapabilirsiniz. Bkz: [denetim kanalı güvenli](https://docs.microsoft.com/azure/azure-monitor/app/live-stream#secure-the-control-channel) yönergeler için.
+Belirttiğiniz özel filtreler ölçütü, Application Insights SDK 'sindeki canlı ölçümler bileşenine geri gönderilir. Filtreler potansiyel olarak CustomerIDs gibi hassas bilgileri içerebilir. Kanalı gizli bir API anahtarı ile güvenli hale getirebilirsiniz. Yönergeler için bkz. [Denetim kanalını güvenli hale getirme](https://docs.microsoft.com/azure/azure-monitor/app/live-stream#secure-the-control-channel) .
 
 ## <a name="sampling"></a>Örnekleme
 
-Azure işlevleri, varsayılan olarak, yapılandırmada örnekleme sağlar. Daha fazla bilgi için [örnekleme yapılandırma](https://docs.microsoft.com/azure/azure-functions/functions-monitoring#configure-sampling).
+Azure Işlevleri, yapılandırmasında varsayılan olarak örnekleme imkanı sunar. Daha fazla bilgi için bkz. [örneklemesi yapılandırma](https://docs.microsoft.com/azure/azure-functions/functions-monitoring#configure-sampling).
 
-Projeniz el ile telemetri izleme yapmak için Application Insights SDK üzerinde bir bağımlılık alırsa, örnekleme yapılandırmanızı işlevler örnekleme yapılandırmadan farklı ise, garip davranışlar karşılaşabilirsiniz. 
+Projeniz, el ile Telemetriyi izlemeyi yapmak üzere Application Insights SDK üzerinde bir bağımlılık alırsa, örnekleme yapılandırmanız Işlevlerin örnekleme yapılandırmasından farklı olduğunda garip davranışlar yaşayabilirsiniz. 
 
-İşlevleri aynı yapılandırmayı kullanmanızı öneririz. İle **işlevler v2**, oluşturucu, bağımlılık ekleme kullanılarak yapılandırmanın alabilirsiniz:
+Aynı yapılandırmayı Işlevlerle kullanmanızı öneririz. **İşlev v2**ile, oluşturucuya bağımlılık ekleme kullanarak aynı yapılandırmayı edinebilirsiniz:
 
 ```csharp
 using Microsoft.ApplicationInsights;

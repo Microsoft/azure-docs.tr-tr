@@ -1,10 +1,10 @@
 ---
-title: Azure Linux VM'de bir kullanıcı eklemek için cloud-init kullanma | Microsoft Docs
-description: Azure CLI ile oluşturma sırasında bir Linux VM için bir kullanıcı eklemek için cloud-init kullanma
+title: Azure 'da bir Linux VM 'sine Kullanıcı eklemek için Cloud-init kullanma
+description: Azure CLı ile oluşturma sırasında bir Linux VM 'sine Kullanıcı eklemek için Cloud-init kullanma
 services: virtual-machines-linux
 documentationcenter: ''
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
@@ -14,20 +14,20 @@ ms.devlang: azurecli
 ms.topic: article
 ms.date: 11/29/2017
 ms.author: rclaus
-ms.openlocfilehash: 51de92eb64e9879b769baf7e574ee1dca9355040
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 428f489a24c24b173cb1cef0980dd17c1d8483ce
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60650361"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036776"
 ---
-# <a name="use-cloud-init-to-add-a-user-to-a-linux-vm-in-azure"></a>Azure'da bir Linux sanal makinesi için bir kullanıcı eklemek için cloud-init kullanma
-Bu makalede nasıl kullanılacağını gösterir [cloud-init](https://cloudinit.readthedocs.io) bir sanal makine (VM) veya sanal makinede bir kullanıcı eklemek için ölçek kümeleri (VMSS zaman azure'da sağlama sırasında). Kaynakları Azure tarafından sağlanan sonra ilk önyüklemede bu cloud-init betiği çalıştırır. Cloud-init yerel olarak desteklenen Linux dağıtımları ve Azure ile işleyişi hakkında daha fazla bilgi için bkz. [cloud-init genel bakış](using-cloud-init.md).
+# <a name="use-cloud-init-to-add-a-user-to-a-linux-vm-in-azure"></a>Azure 'da bir Linux VM 'sine Kullanıcı eklemek için Cloud-init kullanma
+Bu makalede, Azure 'da sağlama zamanında bir sanal makineye (VM) veya sanal makine ölçek kümelerine (VMSS) Kullanıcı eklemek için [Cloud-init](https://cloudinit.readthedocs.io) ' i nasıl kullanacağınız gösterilmektedir. Bu Cloud-init betiği, kaynaklar Azure tarafından sağlandıktan sonra ilk önyüklemede çalışır. Cloud-init 'in Azure 'da ve desteklenen Linux korumalar 'daki yerel olarak nasıl çalıştığı hakkında daha fazla bilgi için bkz. [Cloud-init Overview](using-cloud-init.md).
 
-## <a name="add-a-user-to-a-vm-with-cloud-init"></a>Cloud-init ile VM kullanıcı ekleme
-Yeni bir Linux VM üzerinde ilk görevlerden biridir kendiniz kullanımını önlemek için ek bir kullanıcı eklemek için *kök*. SSH anahtarları, güvenlik ve kullanılabilirlik için en iyi uygulamalardan biridir. Anahtarları eklenir *~/.ssh/authorized_keys* bu cloud-init betik dosyası.
+## <a name="add-a-user-to-a-vm-with-cloud-init"></a>Cloud-init ile bir VM 'ye Kullanıcı ekleme
+Yeni bir Linux VM 'deki ilk görevlerden biri, *kök*kullanımını önlemek için kendinize ek bir kullanıcı eklemektir. SSH anahtarları, güvenlik ve kullanılabilirlik için en iyi uygulamadır. Bu Cloud-init betiğine sahip *~/. SSH/authorized_keys* dosyasına anahtarlar eklenir.
 
-Bir Linux VM için bir kullanıcı eklemek için geçerli kabuğunuzda adlı bir dosya oluşturmak *cloud_init_add_user.txt* oluşturup aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud shell'de oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_add_user.txt` adını girin. Kullanılacak #1 seçin **nano** Düzenleyici. Tüm cloud-init dosyası doğru bir şekilde kopyalandığından emin olun başta birinci satır.  Ortak anahtarınızı sağlamanız gerekir (içeriğini gibi *~/.ssh/id_rsa.pub*) değerini `ssh-authorized-keys:` -alan örneği basitleştirmek amacıyla buraya kısaltıldı.
+Bir Linux VM 'ye Kullanıcı eklemek için, geçerli kabuğunuzun *cloud_init_add_user. txt* adlı bir dosya oluşturun ve aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud Shell oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_add_user.txt` adını girin. **Nano** düzenleyiciyi kullanmak için #1 seçin. Tüm Cloud-init dosyalarının, özellikle de ilk satırda doğru şekilde kopyalandığından emin olun.  `ssh-authorized-keys:` değeri için kendi ortak anahtarınızı ( *~/. ssh/id_rsa. pub*içeriği gibi) sağlamanız gerekir; bu, örneği basitleştirmek için burada kısaltıldı.
 
 ```yaml
 #cloud-config
@@ -41,15 +41,15 @@ users:
       - ssh-rsa AAAAB3<snip>
 ```
 > [!NOTE] 
-> #Cloud-config dosyası içerir `- default` parametresi dahil. Bu kullanıcı için sağlama sırasında oluşturulan mevcut yönetici kullanıcı sonuna ekler. Bir kullanıcı olmaksızın oluşturursanız `- default` parametre - Azure platformu tarafından oluşturulan otomatik oluşturulan yönetici kullanıcı olacak üzerine. 
+> #Cloud-config dosyası, dahil edilen `- default` parametresini içerir. Bu işlem, kullanıcıyı sağlama sırasında oluşturulan mevcut yönetici kullanıcısına ekler. `- default` parametresi olmadan bir kullanıcı oluşturursanız, Azure platformu tarafından oluşturulan otomatik olarak oluşturulan Yönetici Kullanıcı üzerine yazılır. 
 
-Bu görüntü dağıtmadan önce bir kaynak grubu oluşturmak için ihtiyacınız [az grubu oluşturma](/cli/azure/group) komutu. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
+Bu görüntüyü dağıtılmadan önce [az Group Create](/cli/azure/group) komutuyla bir kaynak grubu oluşturmanız gerekir. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
 
 ```azurecli-interactive 
 az group create --name myResourceGroup --location eastus
 ```
 
-Şimdi bir VM oluşturun [az vm oluşturma](/cli/azure/vm) ve cloud-init dosyası ile `--custom-data cloud_init_add_user.txt` gibi:
+Şimdi [az VM Create](/cli/azure/vm) Ile bir VM oluşturun ve Cloud-init dosyasını `--custom-data cloud_init_add_user.txt` ile aşağıdaki gibi belirtin:
 
 ```azurecli-interactive 
 az vm create \
@@ -60,19 +60,19 @@ az vm create \
   --generate-ssh-keys 
 ```
 
-SSH için yukarıdaki komut çıktısında gösterilen sanal makinenizin genel IP adresi. Kendi girin **Publicıpaddress** gibi:
+Önceki komutun çıktısında gösterilen sanal makinenizin genel IP adresine SSH. Kendi **Publicıpaddress** değerini aşağıdaki şekilde girin:
 
 ```bash
 ssh <publicIpAddress>
 ```
 
-Kullanıcı VM ve belirtilen gruplara eklendiğini doğrulamak için içeriğini görüntülemek */etc/grup* aşağıdaki gibi:
+Kullanıcının VM 'ye ve belirtilen gruplara eklendiğini doğrulamak için, */etc/group* dosyasının içeriğini aşağıdaki gibi görüntüleyin:
 
 ```bash
 cat /etc/group
 ```
 
-Aşağıdaki örnek çıktı gösterilmektedir kullanıcıdan *cloud_init_add_user.txt* VM ve uygun grubu dosyası eklendi:
+Aşağıdaki örnek çıktı, *cloud_init_add_user. txt* DOSYASıNDAKI kullanıcının VM 'ye ve uygun gruba eklendiğini gösterir:
 
 ```bash
 root:x:0:
@@ -83,9 +83,9 @@ myadminuser:x:1000:
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yapılandırma değişiklikleri ek cloud-init örnekleri için aşağıdakilere bakın:
+Yapılandırma değişikliklerine yönelik ek Cloud-init örnekleri için aşağıdakilere bakın:
  
-- [Bir VM'ye ek Linux kullanıcı ekleme](cloudinit-add-user.md)
-- [İlk önyüklemede mevcut paketlerini güncelleştirmek için bir paket Yöneticisi'ni çalıştırın](cloudinit-update-vm.md)
-- [VM yerel ana bilgisayar adını değiştirin](cloudinit-update-vm-hostname.md) 
-- [Bir uygulama paketi yükleme, yapılandırma dosyasını güncelleyin ve anahtarları ekleme](tutorial-automate-vm-deployment.md)
+- [VM 'ye ek bir Linux kullanıcısı ekleme](cloudinit-add-user.md)
+- [İlk önyüklemede var olan paketleri güncelleştirmek için bir paket yöneticisi çalıştırın](cloudinit-update-vm.md)
+- [VM yerel ana bilgisayar adını değiştir](cloudinit-update-vm-hostname.md) 
+- [Uygulama paketi yüklemesi, yapılandırma dosyalarını güncelleştirme ve anahtarları ekleme](tutorial-automate-vm-deployment.md)

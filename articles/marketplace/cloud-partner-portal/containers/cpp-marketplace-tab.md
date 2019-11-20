@@ -1,42 +1,43 @@
 ---
-title: Bir Azure kapsayıcı görüntüsü için Market ayarları | Azure Market
-description: Bir Azure kapsayıcı Market ayarlarını yapılandırın.
+title: Azure kapsayıcıları görüntüsü için Market ayarları | Azure Marketi
+description: Azure kapsayıcısı için Market ayarlarını yapılandırın.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/24/2019
 ms.author: pabutler
-ms.openlocfilehash: f2d735662fcd177f64d1ebc71a25b7d7629db3ce
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8d7c930f3adcfb4b4d092cc909bf4468ced3271f
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942644"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823200"
 ---
-# <a name="container-marketplace-tab"></a>Kapsayıcı Market sekmesi
+# <a name="container-marketplace-tab"></a>Kapsayıcı marketi sekmesi
 
-**Market** sekmesinde **yeni teklif** sayfası, pazarlama, satış ve yasal bilgileri ve sözleşmeleri, müşteri adaylarınıza sağlamak ve oluşturulan müşteri adayları yönetmenize olanak tanır Market. Pazarlama özgü içeriğinizi ekleyin **genel bakış** bölümü.
+**Yeni teklif** sayfasının **Market** sekmesi, olası müşterilerinize pazarlama, satış ve yasal bilgiler ve anlaşmalar sağlamanıza ve Market 'ten oluşturulan müşteri adaylarını yönetmenize olanak sağlar. Pazarlama 'ya özgü içeriğinizi **genel bakış** bölümüne ekleyin.
 
 ## <a name="overview"></a>Genel Bakış
 
-Bu bölümde, Azure Market teklifi hakkında genel bilgileri girin.  Gerekli alan adına eklenmiş bir yıldız işareti (*) gösterir.
+Bu bölümde, Azure Market teklifiniz hakkında genel bilgileri girersiniz.  Alan adının sonuna bir yıldız işareti (*), gerekli olduğunu gösterir.
 
-![Market'teki bilgileri](./media/containers-marketplace-tab.png)
+![Market bilgileri](./media/containers-marketplace-tab.png)
 
-Aşağıdaki tabloda, amacı ve bu alanların içeriğini açıklar. Gerekli alanlar yıldız (*) indicted.
+Aşağıdaki tabloda bu alanların amacı ve içeriği açıklanmaktadır. Gerekli alanlar bir yıldız işareti (*) ile tanımlanır.
 
 |    Alan                  |       Açıklama                                                            |
 |  ---------                |     ---------------                                                          |
-| **Başlık\***                 | Teklif başlığı. Market'te dikkat çekecek şekilde gösterilir.  En fazla 50 karakterdir. |
-| **Özeti\***               | Teklifin kısa özeti. En fazla 100 karakterdir. |
-| **Uzun özeti\***          | Bu teklif artık özeti (aynı olabilir ancak **Özet**).  En fazla uzunluk 256 karakterdir. |
-| **Açıklaması\***           | Teklif açıklaması.  En fazla 3000 karakterdir, basit HTML biçimlendirmeyi destekler.
-| **Pazarlama tanımlayıcısı**  | Genellikle, kuruluş ve çözüm adını içeren bu teklif için ilişkilendirmek için benzersiz bir URL. En fazla 50 karakterdir.   |
-| **Önizleme abonelik kimlikleri\*** | Bir ila 100 abonelik tanımlayıcıları nizleyicileri ekleyin. Canlı geçmeden önce yayımlandıktan sonra bu teknik listelenen abonelikler teklif erişebilir. |
+| **Başlık\***                 | Teklifin başlığı. Market 'te göze çarpacak olarak görüntülenecektir.  Maksimum uzunluk 50 karakterdir. |
+| **Özet\***               | Teklifin kısa özeti. Maksimum Uzunluk 100 karakterdir. |
+| **Uzun Özet\***          | Teklifin daha uzun Özeti (ancak **Özet**ile aynı olabilir).  Maksimum uzunluk 256 karakterdir. |
+| **Açıklama\***           | Teklifin açıklaması.  Maksimum uzunluk 3000 karakterdir, basit HTML biçimlendirmesini destekler.
+| **Pazarlama tanımlayıcısı**  | Genellikle kuruluşunuzu ve çözüm adınızı içeren bu teklifle ilişkilendirilecek benzersiz bir URL. Maksimum uzunluk 50 karakterdir.   |
+| **Abonelik kimliklerini önizleme\*** | Ön görüntüleyicilerin 100 abonelik tanımlayıcılarına bir tane ekleyin. Bu beyaz listeye alınan abonelikler, yayımlandıktan sonra, yayımlanmaya başladıktan sonra teklif erişimine sahip olur. |
 |  |  |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kullanım [Destek](./cpp-support-tab.md) kullanıcı ve teknik destek kaynaklarını teklifiniz için sağlamak için sekmesinde.
+Teklifiniz için teknik ve Kullanıcı Destek kaynakları sağlamak üzere [destek](./cpp-support-tab.md) sekmesini kullanın.

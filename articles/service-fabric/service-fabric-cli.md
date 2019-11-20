@@ -2,18 +2,18 @@
 title: Azure Service Fabric CLI'sı ile çalışmaya başlama
 description: Azure Service Fabric CLI’sını kullanmayı öğrenin. Kümeye bağlanmayı ve uygulamaları yönetmeyi öğrenin.
 services: service-fabric
-author: Christina-Kang
+author: jeffj6123
 manager: chackdan
 ms.service: service-fabric
 ms.topic: conceptual
-ms.date: 12/06/2018
-ms.author: bikang
-ms.openlocfilehash: d5b6f183a59e3f47aa5867b5e09e06541a6a67db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 9/17/2019
+ms.author: jejarry
+ms.openlocfilehash: e0146504bd06a3c56de8113cc59c9eedd375d06f
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60803234"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72901372"
 ---
 # <a name="azure-service-fabric-cli"></a>Azure Service Fabric CLI'sı
 
@@ -25,7 +25,7 @@ Azure Service Fabric komut satırı arabirimi (CLI) Service Fabric varlıklarıy
 
 Yüklemeden önce ortamınızda Python ve pip uygulamalarının yüklü olduğundan emin olun. Daha fazla bilgi için [pip hızlı başlangıç belgelerine](https://pip.pypa.io/en/latest/quickstart/) ve resmi [Python yükleme belgelerine](https://wiki.python.org/moin/BeginnersGuide/Download) bakın.
 
-CLI, Python 2.7, 3.5, 3.6 ve 3.7 sürümlerini destekler. Python 3.x Python 2.7 destek yakında ulaşacak beri önerilen sürüm olduğu.
+CLı, 2,7, 3,5, 3,6 ve 3,7 Python sürümlerini destekler. Python 2,7, destek sonuna kadar yakında iletişime geçecağından, Python 3. x önerilen sürümdür.
 
 ### <a name="service-fabric-target-runtime"></a>Service Fabric hedef çalışma zamanı
 
@@ -33,7 +33,8 @@ Service Fabric CLI, Service Fabric SDK'sının en son çalışma zamanı sürüm
 
 | CLI sürümü   | desteklenen çalışma zamanı sürümü |
 |---------------|---------------------------|
-| En son (~ = 7)  | En son (~ = 6.4)            |
+| En son (~ = 8)  | En son (~ = 6,5)            |
+| 7.1.0         | 6.4                       |
 | 6.0.0         | 6.3                       |
 | 5.0.0         | 6.2                       |
 | 4.0.0         | 6.1                       |
@@ -58,11 +59,11 @@ pip ve Python'u platformunuza yüklemek için kullanabileceğiniz birçok yol va
 
 Windows 10, Windows Server 2016 ve Windows Server 2012 R2 için standart resmi yükleme talimatlarını kullanın. Python yükleyici pip'i de varsayılan olarak yükler.
 
-1. Resmi Git [Python indirmeler sayfasına](https://www.python.org/downloads/)ve Python 3.7'ın en son sürümünü indirin.
+1. Resmi [Python İndirmeleri sayfasına](https://www.python.org/downloads/)gidin ve Python 3,7 ' un en son sürümünü indirin.
 
 2. Yükleyiciyi başlatın.
 
-3. İstemi sonunda seçin **ekleme Python 3.7 yola**.
+3. İsteminin en altında, **yola Python 3,7 Ekle**' yi seçin.
 
 4. **Şimdi Yükle**'yi seçin ve yüklemeyi tamamlayın.
 
@@ -73,7 +74,7 @@ python --version
 pip --version
 ```
 
-Ardından, Azure Service Fabric CLI (sfctl) yükleme ve CLI Yardım sayfasını görüntülemek için aşağıdaki komutu çalıştırın:
+Ardından, Azure Service Fabric CLı (sfctl) yüklemek ve CLı yardım sayfasını görüntülemek için aşağıdaki komutu çalıştırın:
 
 ```bat
 pip install sfctl
@@ -115,7 +116,7 @@ sudo pip3 install sfctl
 
 ### <a name="red-hat-enterprise-linux-74-service-fabric-preview-support"></a>Red Hat Enterprise Linux 7.4 (Service Fabric önizleme desteği)
 
-Red Hat üzerinde Service Fabric CLI yüklemek için aşağıdaki komutları çalıştırın:
+Red Hat 'te CLı Service Fabric yüklemek için aşağıdaki komutları çalıştırın:
 
 ```bash
 sudo yum install -y python34
@@ -124,10 +125,10 @@ sudo easy_install-3.4 pip
 sudo pip3 install sfctl
 ```
 
-Yükleme testi için belirtilen adımları başvurabilirsiniz **Linux için Ubuntu ve Windows alt sistemi** bölümü
+Yüklemeyi test etmek için **Ubuntu ve Linux Için Windows alt sistemi** bölümünde bahsedilen adımlara başvurabilirsiniz
 
 <a name = "cli-mac"></a>
-### <a name="macos"></a>macOS
+### <a name="macos"></a>MacOS
 
 MacOS için [HomeBrew paket yöneticisini](https://brew.sh) kullanmanızı öneririz. HomeBrew yüklü değilse aşağıdaki komutu çalıştırarak yükleyin:
 
@@ -135,7 +136,7 @@ MacOS için [HomeBrew paket yöneticisini](https://brew.sh) kullanmanızı öner
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Ardından terminalden Python 3.7, pip ve Service Fabric CLI'yı aşağıdaki komutları çalıştırarak yükleyin:
+Bundan sonra terminalden aşağıdaki komutları çalıştırarak Python 3,7, PIP ve Service Fabric CLı 'yi çalıştırın:
 
 ```bash
 brew install python3
@@ -241,7 +242,7 @@ Belirtilen küme uç noktasının kullanılabilir olduğunu ve dinlediğini doğ
 
 ### <a name="detailed-logs"></a>Ayrıntılı günlükler
 
-Hata ayıkladığınız veya sorun bildirdiğiniz sırada ayrıntılı günlükler çoğunlukla yararlı olur. `--debug` Bayrağı çıkışın ayrıntı düzeyini artırır.
+Hata ayıkladığınız veya sorun bildirdiğiniz sırada ayrıntılı günlükler çoğunlukla yararlı olur. `--debug` bayrağı Çıktının ayrıntı düzeyini artırır.
 
 ### <a name="command-help-and-syntax"></a>Komut yardımı ve söz dizimi
 

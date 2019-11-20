@@ -1,12 +1,14 @@
 - name: Yüksek Performanslı Bilgi İşlem Belgeleri
   items:
     - name: Genel Bakış
-      href: 'https://docs.microsoft.com/azure/architecture/topics/high-performance-computing/'
+      items:
+        - name: H serisi VM’lere yönelik HPC
+          href: overview.md
     - name: Yapılandırma
       items:
         - name: Linux için iyileştirme
           href: configure.md
-        - name: Infiniband’i etkinleştirme
+        - name: InfiniBand’i etkinleştirme
           href: enable-infiniband.md
     - name: MPI’yı ayarlama
       href: setup-mpi.md

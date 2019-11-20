@@ -39,6 +39,8 @@
       href: security-overview.md
     - name: Yönlendirme
       href: virtual-networks-udr-overview.md
+    - name: Hizmet etiketleri
+      href: service-tags-overview.md
     - name: Hizmet uç noktaları
       href: virtual-network-service-endpoints-overview.md
     - name: Hizmet uç noktası ilkeleri
@@ -61,8 +63,12 @@
       href: public-ip-address-prefix.md
     - name: Azure Sanal Ağı için IPv6
       href: ipv6-overview.md
+    - name: Genel IPv6 adresi ön eki
+      href: ipv6-public-ip-address-prefix.md
     - name: DDoS koruması
       href: ddos-protection-overview.md
+    - name: Alt ağ uzantısı
+      href: subnet-extension.md
     - name: Arka Uç Bağlantısı Birlikte Çalışabilirliği
       items:
         - name: Önsöz ve Test Kurulumu
@@ -91,14 +97,34 @@
           href: virtual-network-tcpip-performance-tuning.md
     - name: Dağıtma
       items:
-        - name: Azure Sanal Ağı için IPv6
+        - name: VNet için IPv6
           items:
-            - name: Azure PowerShell
-              href: virtual-network-ipv4-ipv6-dual-stack-powershell.md
-            - name: Azure CLI
-              href: virtual-network-ipv4-ipv6-dual-stack-cli.md
-            - name: Resource Manager şablonu
-              href: ipv6-configure-template-json.md
+            - name: Temel Genel Load Balancer
+              items:
+                - name: Azure PowerShell
+                  href: virtual-network-ipv4-ipv6-dual-stack-powershell.md
+                - name: Azure CLI
+                  href: virtual-network-ipv4-ipv6-dual-stack-cli.md
+                - name: Resource Manager şablonu
+                  href: ipv6-configure-template-json.md
+            - name: IPv4 uygulamasına IPv6 ekleme
+              items:
+                - name: Azure PowerShell
+                  href: ipv6-add-to-existing-vnet-powershell.md
+                - name: Azure CLI
+                  href: ipv6-add-to-existing-vnet-cli.md
+            - name: Standart Genel Load Balancer
+              items:
+                - name: Azure PowerShell
+                  href: virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-powershell.md
+                - name: Azure CLI
+                  href: virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-cli.md
+                - name: Resource Manager şablonu
+                  href: ipv6-configure-standard-load-balancer-template-json.md
+            - name: Standart İç Load Balancer
+              href: ipv6-dual-stack-standard-internal-load-balancer-powershell.md
+            - name: IPv6 ile sanal makine ölçek kümesi
+              href: ipv6-virtual-machine-scale-set.md
         - name: Ağ güvenlik grupları
           items:
             - name: Azure PowerShell
@@ -222,6 +248,8 @@
           items:
             - name: Alt ağlar
               href: virtual-network-manage-subnet.md
+            - name: Alt ağ temsilcisi
+              href: manage-subnet-delegation.md
             - name: Eşlemeler
               href: virtual-network-manage-peering.md
             - name: DDoS koruması
@@ -245,14 +273,36 @@
           href: virtual-network-public-ip-address.md
         - name: Genel IP ön eki
           href: manage-public-ip-address-prefix.md
+        - name: Genel IPv6 adresi ön eki
+          href: ipv6-reserve-public-ip-address-prefix.md
+    - name: Bölgeler arasında taşıma
+      items:
+        - name: Ağ güvenlik grupları - Portal
+          href: move-across-regions-nsg-portal.md
+        - name: Ağ güvenlik grupları - PowerShell
+          href: move-across-regions-nsg-powershell.md
+        - name: Sanal ağlar - Portal
+          href: move-across-regions-vnet-portal.md
+        - name: Sanal ağlar - PowerShell
+          href: move-across-regions-vnet-powershell.md
+        - name: Genel IP'ler - Portal
+          href: move-across-regions-publicip-portal.md
+        - name: Genel IP'ler - PowerShell
+          href: move-across-regions-publicip-powershell.md
     - name: Sorun giderme
       items:
+        - name: Sanal ağ eşleme sorunlarını giderme
+          href: virtual-network-troubleshoot-peering-issues.md
+        - name: VNet veya VPN bağlantılarını yapılandırma ve doğrulama
+          href: virtual-network-configure-vnet-connections.md
         - name: Ağ güvenlik grupları
           href: diagnose-network-traffic-filter-problem.md
         - name: Yollar
           href: diagnose-network-routing-problem.md
         - name: Aktarım hızı testi
           href: virtual-network-bandwidth-testing.md
+        - name: VM ağ gecikmesini sınama
+          href: virtual-network-test-latency.md
         - name: Sanal ağlar silinemiyor
           href: virtual-network-troubleshoot-cannot-delete-vnet.md
         - name: VM’den VM’ye bağlantı sorunları
@@ -265,6 +315,8 @@
           href: troubleshoot-outbound-smtp-connectivity.md
         - name: IP adresi 168.63.129.16 hakkında
           href: what-is-ip-address-168-63-129-16.md
+        - name: Azure VM bağlantısıyla ilgili sorunları giderme
+          href: troubleshoot-vm-connectivity.md
     - name: Klasik
       items:
         - name: Sanal ağı oluşturma ve yönetme

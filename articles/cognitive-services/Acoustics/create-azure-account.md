@@ -1,67 +1,68 @@
 ---
-title: Proje akustik Azure Batch hesabı kurulumu
+title: Project Acoustics Azure Batch hesabı kurulumu
 titlesuffix: Azure Cognitive Services
-description: Bu nasıl yapılır proje akustik Unity ve Unreal engine tümleştirmeleri ile kullanmak için Azure Batch hesabı ayarlama açıklanır.
+description: Bu nasıl yapılır, Project Acoustics Unity ve Unreal Engine tümleştirmeleri ile kullanmak üzere Azure Batch hesabı ayarlamayı açıklar.
 services: cognitive-services
-author: ashtat
+author: NoelCross
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: acoustics
-ms.topic: how-to
+ms.topic: conceptual
 ms.date: 03/20/2019
-ms.author: kegodin
-ms.openlocfilehash: 7a7f5f6738b4bc96b6248deb062c7b3f63048148
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: noelc
+ROBOTS: NOINDEX
+ms.openlocfilehash: 8f0f726d9d23f20698d3510ad674331ad74fb703
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61335758"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68855089"
 ---
-# <a name="project-acoustics-azure-batch-account-setup"></a>Proje akustik Azure Batch hesabı kurulumu
-Bu nasıl yapılır proje akustik Unity ve Unreal engine tümleştirmeleri ile kullanmak için Azure Batch hesabı ayarlama açıklanır.
+# <a name="project-acoustics-azure-batch-account-setup"></a>Project Acoustics Azure Batch hesabı kurulumu
+Bu nasıl yapılır, Project Acoustics Unity ve Unreal Engine tümleştirmeleri ile kullanmak üzere Azure Batch hesabı ayarlamayı açıklar.
 
-## <a name="get-an-azure-subscription"></a>Azure aboneliği edinme
-Bir [Azure abonelik](https://azure.microsoft.com/free/) Batch ve Storage hesaplarını ayarlama önce gereklidir. İlk kez oturum açtığınız, Azure birkaç süre sınırlı ücretsiz kaynakları ve 200 ABD Doları kredi sağlar.
+## <a name="get-an-azure-subscription"></a>Azure aboneliği edinin
+Batch ve Storage hesapları ayarlamadan önce bir [Azure aboneliği](https://azure.microsoft.com/free/) gereklidir. İlk kez kaydoluyorsanız Azure, birkaç zaman sınırlı boş kaynak ve $200 kredi sağlar.
 
-## <a name="create-azure-batch-and-storage-accounts"></a>Azure Batch ve depolama hesapları oluşturun
-Ardından, izleyin [bu yönergeleri](https://docs.microsoft.com/azure/batch/batch-account-create-portal) için Azure ayarlamak ve ilişkili Azure depolama hesapları.
+## <a name="create-azure-batch-and-storage-accounts"></a>Azure Batch ve depolama hesapları oluşturma
+Sonra, Azure Batch ve ilişkili Azure depolama hesaplarınızı ayarlamak için [Bu yönergeleri](https://docs.microsoft.com/azure/batch/batch-account-create-portal) izleyin.
 
-Batch ve depolama hesapları için varsayılan seçenekleri seçin:
+Toplu Iş ve depolama hesapları için varsayılan seçenekleri belirleyin:
   
-  ![Seçenekleri varsayılan ayarları gösteren ekran görüntüsü, Azure Batch yeni hesapları](media/new-batch-account-create.png)
+  ![Yeni hesap seçeneklerinin Azure Batch varsayılan ayarları gösteren ekran görüntüsü](media/new-batch-account-create.png)
 
-  ![Seçenekleri varsayılan ayarları gösteren ekran görüntüsü, Azure depolama yeni hesapları](media/batch-storage-account-create.png)
+  ![Azure depolama yeni hesap seçeneklerinin varsayılan ayarları gösteren ekran görüntüsü](media/batch-storage-account-create.png)
 
-Azure hesapları dağıtmak birkaç dakika sürer. Tamamlama bildirim portalında sağ üst köşedeki arayın.
+Azure 'un hesapları dağıtması birkaç dakika sürer. Portalın sağ üst köşesinde bir tamamlanma bildirimi arayın.
   
-  ![Bildirim, ekran Azure hesapları dağıtılan](media/batch-accounts-deploy-notification.png)
+  ![Azure hesabı dağıtılan bildirim ekran görüntüsü](media/batch-accounts-deploy-notification.png)
 
-Artık hesaplarınızı Panonuzda görünür olmalıdır.
+Hesaplarınız artık panonuzda görünür olmalıdır.
   
-  ![Batch ve depolama hesabını gösteren ekran görüntüsü, Azure portalı Panosu](media/azure-portal-dashboard.png)
+  ![Batch ve Storage hesabını gösteren Azure portal panonun ekran görüntüsü](media/azure-portal-dashboard.png)
 
-## <a name="set-up-acoustics-bake-ui-with-azure-credentials"></a>Azure kimlik bilgileriyle akustik hazırlama kullanıcı Arabirimi ayarlama
-Panoda Batch hesabı bağlantısına tıklayın ve ardından tıklayarak **anahtarları** bağlantısı kimlik bilgilerinizi erişmek için Batch hesabı sayfası.
+## <a name="set-up-acoustics-bake-ui-with-azure-credentials"></a>Azure kimlik bilgileriyle Acoustics hazırlama Kullanıcı arabirimini ayarlama
+Panodaki Batch hesabı bağlantısına tıklayın ve ardından Batch hesabı sayfasındaki **anahtarlar** bağlantısına tıklayarak kimlik bilgilerinizi erişin.
   
-  ![Anahtarları sayfasına vurgulanmış ekran görüntüsü, Azure Batch hesabıyla](media/batch-access-keys.png)
+  ![Anahtarlar sayfasına bağlantı içeren Azure Batch hesabının ekran görüntüsü vurgulanmış](media/batch-access-keys.png)
 
-  ![Ekran görüntüsü, Azure Batch hesabı anahtarları erişim anahtarlarını sayfayla](media/batch-keys-info.png)
+  ![Erişim anahtarlarına sahip Azure Batch hesap anahtarları sayfasının ekran görüntüsü](media/batch-keys-info.png)
 
-Tıklayarak **depolama hesabı** sayfasında Azure depolama hesabı kimlik bilgilerinizi erişmek için bağlantı.
+Azure depolama hesabınızın kimlik bilgilerine erişmek için sayfadaki **depolama hesabı** bağlantısına tıklayın.
   
-  ![Ekran görüntüsü, Azure depolama hesabı anahtarları erişim anahtarlarını sayfayla](media/storage-keys-info.png)
+  ![Erişim anahtarları içeren Azure depolama hesabı anahtarları sayfasının ekran görüntüsü](media/storage-keys-info.png)
 
-Bu kimlik bilgilerini girin [Unity hazırlama eklentisi](unity-baking.md) veya [Unreal hazırlama eklentisi](unreal-baking.md).
+Bu kimlik bilgilerini [Unity hazırlama eklentisine](unity-baking.md) veya [Unreal hazırlama eklentisine](unreal-baking.md)girin.
 
 ## <a name="node-types-and-region-support"></a>Düğüm türleri ve bölge desteği
-Proje akustik Fsv2 ve H serisi, tüm Azure bölgelerinde desteklenmeyebilir Azure VM düğümleri için iyileştirilmiş işlem gerektirir. Lütfen denetleyin [bu tabloda](https://azure.microsoft.com/global-infrastructure/services) Batch hesabınız için doğru konuma çekme emin olmak için.
-![Bölgeye göre Azure sanal makineler gösteren ekran görüntüsü](media/azure-regions.png) 
+Project Acoustics, tüm Azure bölgelerinde desteklenmeyen Fsv2 ve H serisi işlem için iyileştirilmiş Azure VM düğümlerini gerektirir. Batch hesabınız için doğru konumu seçtiğinizden emin olmak için lütfen [Bu tabloyu](https://azure.microsoft.com/global-infrastructure/services) kontrol edin.
+![Bölgeye göre Azure sanal makinelerini gösteren ekran görüntüsü](media/azure-regions.png) 
 
-## <a name="upgrading-your-quota"></a>Kota yükseltme
-Azure Batch hesapları oluşturma 20 sınırına sahip işlem çekirdek hesabında sağlanır. Akustik iş yükünüz, sahnedeki araştırma noktası sayısı kadar çok sayıda düğüm arasında getirebilen çünkü biz daha hızlı hazırlama süreleri için bu sınırı artırmak isteyebilirsiniz. Tıklayarak bir kota artışı isteyebilir **kota** bağlantı, Azure Batch portalı sayfasında ve ardından tıklayarak **istek kotasını artırmak**:
+## <a name="upgrading-your-quota"></a>Kotayı yükseltme
+Azure Batch hesapları, hesap oluşturma sırasında 20 işlem çekirdekleri ile sağlanır. Acoustics iş yükünüzü sahnenin araştırma noktası sayısına kadar çok sayıda düğümde paralel hale getirmek olanak sağladığından daha hızlı bir şekilde bu sınırı artırmak istiyoruz. Azure Batch portalı sayfanızdaki **Kota** bağlantısına tıklayıp, ardından **Istek kotası artışına**tıkladığınızda bir kota artışı isteyebilirsiniz:
 
-![Azure kotası ekran sayfası](media/azure-quotas.png)
+![Azure kota sayfasının ekran görüntüsü](media/azure-quotas.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Proje akustik eklentisi ile tümleştirmek, [Unity](unity-integration.md) veya [Unreal](unreal-integration.md) proje
+* Project Acoustics eklentisini [Unity](unity-integration.md) veya [gerçek olmayan](unreal-integration.md) projenizden tümleştirin
 

@@ -1,0 +1,79 @@
+### YamlMime:Landing
+title: Azure Lab Services belgeleri
+summary: Azure Lab Services’i kullanarak bulutta takımınız veya öğrencileriniz için bir geliştirme, test, hackathon ya da sınıf laboratuvarını hızlıca ayarlama hakkında bilgi edinin.
+metadata:
+  title: Azure Lab Services belgeleri
+  description: Azure Lab Services’i kullanarak bulutta takımınız veya öğrencileriniz için bir geliştirme, test, hackathon ya da sınıf laboratuvarını hızlıca ayarlama hakkında bilgi edinin.
+  services: lab-services
+  ms.service: lab-services
+  ms.subservice: 
+  ms.topic: landing-page
+  ms.collection: collection
+  author: spelluru
+  ms.author: spelluru
+  ms.date: 09/26/2019
+  ms.openlocfilehash: cce45b3c38924a290c2b44379df060ecf636e982
+  ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/23/2019
+  ms.locfileid: "72795039"
+landingContent:
+- title: Yüksek düzey genel bakış
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Sınıf Laboratuvarları Hakkında
+      url: classroom-labs-overview.md
+    - text: DevTest Labs ve Lab Services hakkında
+      url: ../lab-services-overview.md?toc=%2fazure%2fevent-grid%2fclassroom-labs%2ftoc.json
+  - linkListType: concept
+    links:
+    - text: Sınıf Laboratuvarları kavramları
+      url: classroom-labs-concepts.md
+- title: Laboratuvar hesapları
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Bir laboratuvar hesabı ayarlama
+      url: tutorial-setup-lab-account.md
+  - linkListType: how-to-guide
+    links:
+    - text: Laboratuvar hesabı oluşturma ve yönetme
+      url: how-to-manage-lab-accounts.md
+    - text: Laboratuvar hesaplarını yapılandırma
+      url: how-to-configure-lab-accounts.md
+- title: Sınıf laboratuvarları ayarlama
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Bir sınıf laboratuvarı ayarlama
+      url: tutorial-setup-classroom-lab.md
+  - linkListType: how-to-guide
+    links:
+    - text: Sınıf laboratuvarları oluşturma ve yönetme
+      url: how-to-manage-lab-accounts.md
+    - text: Şablonları ayarlama, özelleştirme ve yayımlama
+      url: how-to-create-manage-template.md
+    - text: Sanal makine havuzunu ayarlama ve yönetme
+      url: how-to-set-virtual-machine-passwords.md
+    - text: Laboratuvar kullanıcılarını ekleme ve yönetme
+      url: how-to-configure-student-usage.md
+    - text: Zamanlamaları oluşturma ve yönetme
+      url: how-to-create-schedules.md
+- title: Sınıf laboratuvarlarını kullanma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Bir sınıf laboratuvarına erişim
+      url: tutorial-connect-virtual-machine-classroom-lab.md
+  - linkListType: how-to-guide
+    links:
+    - text: Linux sanal makineleri için uzak masaüstü bağlantısını kullanma
+      url: how-to-use-remote-desktop-linux-student.md
+- title: Başvuru içeriğini keşfetme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: REST
+      url: /rest/api/labservices/

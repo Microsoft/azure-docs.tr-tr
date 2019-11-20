@@ -1,6 +1,6 @@
 ---
-title: Öğretici - Stream Azure Active Directory, Azure olay hub'ına kaydeder | Microsoft Docs
-description: Azure Active Directory günlükleri Olay hub'ına göndermek için Azure Tanılama'yı ayarlama hakkında bilgi edinin
+title: Öğretici-Azure Olay Hub 'ına Günlükler akışı | Microsoft Docs
+description: Azure Active Directory günlüklerini bir olay hub 'ına göndermek için Azure Tanılama ayarlamayı öğrenin
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -17,16 +17,16 @@ ms.date: 04/18/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 906da7ac6b0086e4efca7c38171668a08f687d19
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: eba44252672248b983d7f6e0c843f638e5f73447
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60437258"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74007648"
 ---
-# <a name="tutorial-stream-azure-active-directory-logs-to-an-azure-event-hub"></a>Öğretici: Azure olay hub'ına Stream Azure Active Directory günlükleri
+# <a name="tutorial-stream-azure-active-directory-logs-to-an-azure-event-hub"></a>Öğretici: Azure Olay Hub 'ına akış Azure Active Directory günlükleri
 
-Bu öğreticide, Azure İzleyici tanılama ayarları günlüklerinin akışını Azure Active Directory (Azure AD) bir Azure olay hub'ı için ayarlama konusunda bilgi edinin. Bu mekanizmayı kullanarak günlüklerinizi Splunk ve QRadar gibi üçüncü taraf Güvenlik Bilgileri ve Olay Yönetimi (SIEM) araçlarıyla tümleştirebilirsiniz.
+Bu öğreticide, Azure Olay Hub 'ına Azure Active Directory (Azure AD) günlüklerini akışa almak için Azure Izleyici tanılama ayarlarını ayarlamayı öğreneceksiniz. Bu mekanizmayı kullanarak günlüklerinizi Splunk ve QRadar gibi üçüncü taraf Güvenlik Bilgileri ve Olay Yönetimi (SIEM) araçlarıyla tümleştirebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar 
 
@@ -37,11 +37,11 @@ Bu özelliği kullanmak için şunlara ihtiyacınız vardır:
 * Azure AD kiracısında *genel yönetici* veya *güvenlik yöneticisi* olan bir kullanıcı.
 * Azure aboneliğinizde bir Event Hubs ad alanı ve bir olay hub'ı. [Olay hub'ı oluşturma](https://docs.microsoft.com/azure/event-hubs/event-hubs-create) hakkında bilgi edinin.
 
-## <a name="stream-logs-to-an-event-hub"></a>Olay hub'ına Stream günlükleri
+## <a name="stream-logs-to-an-event-hub"></a>Günlükleri bir olay hub 'ına akış
 
-1. [Azure Portal](https://portal.azure.com) oturum açın. 
+1. [Azure portalında](https://portal.azure.com) oturum açın. 
 
-2. **Azure Active Directory** > **Etkinlik** > **Denetim günlükleri**'ni seçin. 
+2. **Denetim günlüklerini** > **Azure Active Directory** > **izleme** ' yi seçin. 
 
 3. **Dışarı Aktarma Ayarları**'nı seçin.  
     
@@ -76,17 +76,21 @@ Bu özelliği kullanmak için şunlara ihtiyacınız vardır:
 Olay hub'ında görüntülenen verilere iki farklı şekilde erişebilir ve onları okuyabilirsiniz:
 
 * **Desteklenen bir SIEM aracını yapılandırın**. Çoğu araç olay hub'ındaki verileri okumak için olay hub'ı bağlantı dizesine ve Azure aboneliğinizde belirli izinlere ihtiyaç duyar. Azure İzleyici tümleştirmesine sahip üçüncü taraf araçlarının bazıları şunlardır:
-    * **Splunk**: Azure AD günlükleri Splunk ile tümleştirme hakkında daha fazla bilgi için bkz. [Azure İzleyicisi'ni kullanarak Azure AD tümleştirme günlükleriyle Splunk](tutorial-integrate-activity-logs-with-splunk.md).
     
-    * **IBM QRadar**: Azure olay hub'ı protokol ve DSM adresten indirilebilir [IBM desteği](https://www.ibm.com/support). Azure tümleştirmesi hakkında daha fazla bilgi için [IBM QRadar Security Intelligence Platform 7.3.0](https://www.ibm.com/support/knowledgecenter/SS42VS_DSM/c_dsm_guide_microsoft_azure_overview.html?cp=SS42VS_7.3.0) sitesini ziyaret edin.
+    * **ARCTIS**: Azure AD günlüklerini splunk ile tümleştirme hakkında daha fazla bilgi için bkz. [Azure izleyici kullanarak arctımla Azure Active Directory günlüklerini tümleştirme](howto-integrate-activity-logs-with-arcsight.md).
     
-    * **Sumo mantığı**: Bir olay hub'ından veri tüketmek için Sumo mantığı oluşturma ayarlamak için bkz [Azure AD uygulamasını yükleyin ve panoları görüntüleme](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory/Install_the_Azure_Active_Directory_App_and_View_the_Dashboards). 
+    * **Splunk**: Azure AD günlüklerini Splunk ile tümleştirme hakkında daha fazla bilgi için bkz. [Azure İzleyici'yi kullanarak Azure AD günlüklerini Splunk ile tümleştirme](tutorial-integrate-activity-logs-with-splunk.md).
+    
+    * **IBM QRadar**: DSM ve Azure Olay Hub'ı Protokolünü [IBM destek](https://www.ibm.com/support) sayfasından indirebilirsiniz. Azure tümleştirmesi hakkında daha fazla bilgi için [IBM QRadar Security Intelligence Platform 7.3.0](https://www.ibm.com/support/knowledgecenter/SS42VS_DSM/c_dsm_guide_microsoft_azure_overview.html?cp=SS42VS_7.3.0) sitesini ziyaret edin.
+    
+    * **Sumo Logic**: Sumo Logic'i bir olay hub'ındaki verileri kullanacak şekilde ayarlamak için bkz. [Azure AD uygulamasını yükleme ve panoları görüntüleme](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory/Install_the_Azure_Active_Directory_App_and_View_the_Dashboards). 
 
 * **Özel araçları ayarlama**. Geçerli SIEM çözümünüz henüz Azure İzleyici tanılamaları için desteklenmiyorsa Event Hubs API'lerini kullanarak özel aracınızı ayarlayabilirsiniz. Daha fazla bilgi için bkz. [Bir olay hub'ındaki verileri almaya başlama](https://docs.microsoft.com/azure/event-hubs/event-hubs-dotnet-standard-getstarted-receive-eph).
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
+* [Azure Izleyici kullanarak Azure Active Directory günlüklerini Arcizle tümleştirin](howto-integrate-activity-logs-with-arcsight.md)
 * [Azure İzleyici kullanarak Azure AD günlüklerini Splunk ile tümleştirme](tutorial-integrate-activity-logs-with-splunk.md)
 * [Azure İzleyici kullanarak Azure AD günlüklerini SumoLogic ile tümleştirme](howto-integrate-activity-logs-with-sumologic.md)
 * [Azure İzleyici denetim günlükleri şemasını yorumlama](reference-azure-monitor-audit-log-schema.md)

@@ -1,7 +1,7 @@
 ---
-title: Derecelendirme yanıtları - Bing varlık arama görüntülemek için kullanma
-titlesuffix: Azure Cognitive Services
-description: Bing varlık arama API'si döndürdüğü yanıtları görüntülemek için sıralama'ı kullanmayı öğrenin.
+title: Yanıtları göstermek için derecelendirmeyi kullanma-Bing Varlık Arama
+titleSuffix: Azure Cognitive Services
+description: Bing Varlık Arama API'si döndürdüğü yanıtları göstermek için derecelendirmenin nasıl kullanılacağını öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,32 +10,32 @@ ms.subservice: bing-entity-search
 ms.topic: conceptual
 ms.date: 02/01/2019
 ms.author: aahi
-ms.openlocfilehash: 9e2a4075436145a0cc185b7ab1b406fa8d27b8e3
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 110cef117683b20170649a231226c8193496edf3
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60309343"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68423906"
 ---
-# <a name="using-ranking-to-display-entity-search-results"></a>Varlık arama sonuçlarını görüntülemek için sıralama kullanma  
+# <a name="using-ranking-to-display-entity-search-results"></a>Varlık arama sonuçlarını göstermek için derecelendirmeyi kullanma  
 
-Her varlık arama yanıt içeren bir [RankingResponse](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#rankingresponse) nasıl Bing varlık arama API'si tarafından döndürülen arama sonuçlarını görüntülemek belirten yanıt. Derecelendirme yanıt kutbu, ana hat, sonuçlara ve kenar çubuğu içeriğini gruplandırır. Kutup sonucu en önemli veya tanınmış bir sonucudur ve ilk görüntülenmesi gerekir. Kenar biçimi ve kalan sonuçlarında Geleneksel ana hat görüntülenmiyorsa, ana hat içerik daha yüksek görünürlük kenar çubuğu içeriği daha sağlamanız gerekir. 
+Her varlık arama yanıtı, Bing Varlık Arama API'si tarafından döndürülen arama sonuçlarının nasıl görüntüleneceğini belirten bir [Rankingresponse](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#rankingresponse) yanıtı içerir. Derecelendirme yanıtı, ana hat ve kenar çubuğu içeriğine neden olur. Direk sonucu en önemli veya belirgin bir sonuçdır ve öncelikle görüntülenmelidir. Kalan sonuçları geleneksel bir ana çizgi ve kenar çubuğu biçiminde görüntülemedıysanız, ana hat içeriğini kenar çubuğu içeriğinden daha yüksek görünürlük sağlamanız gerekir. 
   
-Her grup içindeki [öğeleri](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#rankinggroup-items) dizi içeriği görünmelidir sırasını tanımlar. Her bir öğe içinde bir yanıt sonucu belirlemek için iki yol sunar.  
+Her grup içinde, [öğeler](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#rankinggroup-items) dizisi içeriğin içinde görünmesi gereken sırayı tanımlar. Her öğe, yanıt içindeki sonucu belirlemek için iki yol sağlar.  
  
 
 |Alan | Açıklama  |
 |---------|---------|
-|`answerType` ve `resultIndex` | `answerType` Yanıt (varlık veya yer) tanımlar ve `resultIndex` sonucu, yanıt (örneğin, bir varlık) içinde tanımlar. Dizin 0'da başlar.|
-|`value`    | `value` Bir yanıt veya yanıt içinde bir sonuç kimliği eşleşen bir kimlik içerir. Yanıt ya da sonuçları kimliği ancak ikisini birden içerir. |
+|`answerType` ve `resultIndex` | `answerType`yanıtı tanımlar (varlık veya yer) ve `resultIndex` bu yanıt içinde bir sonucu tanımlar (örneğin, bir varlık). Dizin 0 ' da başlar.|
+|`value`    | `value`Yanıt ya da yanıt içindeki bir sonuç KIMLIĞIYLE eşleşen bir KIMLIK içerir. Yanıt ya da sonuçlar KIMLIĞI içeriyor ancak her ikisini de içermemelidir. |
   
-Kullanarak `answerType` ve `resultIndex` iki adımlı bir işlemdir. İlk olarak, `answerType` görüntülemek için sonuçları içeren yanıt tanımlamak için. Ardından `resultIndex` görüntülenecek sonuç almak için bu yanıtın sonuçları dizine için. ( `answerType` Değer alanın adıdır [SearchResponse](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#searchresponse) nesne.) Yanıtın tüm sonuçları birlikte görüntülemek için beklenen yapıyorsanız, derecelendirme yanıt öğesi içermez `resultIndex` alan.
+`answerType` Ve`resultIndex` kullanarak iki adımlı bir işlemdir. İlk olarak, `answerType` görüntülenecek sonuçları içeren yanıtı belirlemek için kullanın. Daha sonra `resultIndex` , görüntülenecek sonucu almak için bu yanıtın sonuçlarına dizin eklemek için kullanın. (Değer, SearchResponse nesnesindeki alanın adıdır.) [](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#searchresponse) `answerType` Tüm yanıtın sonuçlarını birlikte görüntülemesi gerekiyorsa, derecelendirme yanıtı öğesi `resultIndex` alanı içermez.
 
-Kimliğini kullanarak, cevap veya bir hesaplamanın sonuçlarını kimliği derecelendirme Kimliğiyle eşleşecek şekilde gerektirir. Bir yanıt nesnesi içeriyorsa bir `id` alan, yanıtın tüm sonuçları birlikte görüntüler. Örneğin, varsa `Entities` nesne içerir `id` alanı, tüm varlıkları makaleleri birlikte görüntüleyebilirsiniz. Varsa `Entities` nesnesi içermez `id` her varlık içeriyorsa, alan bir `id` alan ve sıralama yanıt yerler sonuçları ile varlıkları karıştırır.  
+KIMLIĞI kullanmak, derecelendirme KIMLIĞINI bir yanıtın KIMLIĞIYLE veya sonuçlardan biriyle eşleştirmeye gerek duyar. Bir yanıt nesnesi bir `id` alan içeriyorsa, tüm yanıtın sonuçlarını birlikte görüntüleyin. Örneğin, `Entities` nesnesi `id` alanı içeriyorsa, tüm varlıklar makalelerini birlikte görüntüleyin. Nesne alanını içermiyorsa, her varlık bir `id` alan içerir ve derecelendirme yanıtı, yerleri sonuçları ile karıştırmaz. `id` `Entities`  
   
-## <a name="ranking-response-example"></a>Örnek yanıt derecelendirmesi
+## <a name="ranking-response-example"></a>Derecelendirme yanıtı örneği
 
-Aşağıdaki örnekler [RankingResponse](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#rankingresponse).
+Aşağıda bir [Rankingresponse](https://docs.microsoft.com/rest/api/cognitiveservices/bing-web-api-v7-reference#rankingresponse)örneği gösterilmektedir.
   
 ```json
 {
@@ -67,7 +67,7 @@ Aşağıdaki örnekler [RankingResponse](https://docs.microsoft.com/rest/api/cog
 }
 ```
 
-Bu derecelendirme yanıtta bağlı olarak, kenar Jimi Hendrix için ilgili iki varlık sonuçları görüntüler.
+Bu sıralama yanıtına göre, kenar çubuğu JII Hendrix ile ilgili iki varlık sonucunu görüntüler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

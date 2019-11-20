@@ -1,52 +1,48 @@
 ---
-title: Azure işlevleri ile ilk PowerShell işlevinizi oluşturma
-description: Visual Studio Code kullanarak Azure'da ilk PowerShell işlevinizi oluşturmayı öğrenin.
-services: functions
-keywords: ''
+title: Azure 'da ilk PowerShell işlevinizi oluşturma
+description: Visual Studio Code kullanarak Azure 'da ilk PowerShell işlevinizi oluşturmayı öğrenin.
 author: joeyaiello
-manager: jeconnoc
-ms.author: jaiello, glenga
+manager: gwallace
+ms.author: jaiello
+ms.reviewer: glenga
 ms.date: 04/25/2019
 ms.topic: quickstart
 ms.service: azure-functions
-ms.devlang: powershell
-ms.openlocfilehash: 1fc541f1236d17e1c2ffbf64ddb0340dcf5c0b9a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1d6d641e141862b12fed40b800589aad70af2789
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67063471"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73469416"
 ---
-# <a name="create-your-first-powershell-function-in-azure-preview"></a>(Önizleme) ile Azure PowerShell'i ilk işlevinizi oluşturma
+# <a name="create-your-first-powershell-function-in-azure"></a>Azure 'da ilk PowerShell işlevinizi oluşturma
 
-[!INCLUDE [functions-powershell-preview-note](../../includes/functions-powershell-preview-note.md)]
+Bu hızlı başlangıç makalesinde Visual Studio Code kullanarak ilk [sunucusuz](https://azure.com/serverless) PowerShell işlevinizi nasıl oluşturacağınız anlatılmaktadır.
 
-Bu hızlı başlangıç makalesi ilk kez oluşturma hakkında bilgi vermektedir [sunucusuz](https://azure.com/serverless) Visual Studio Code kullanarak PowerShell işlevi.
+![Visual Studio Code projesindeki Azure Işlevleri kodu](./media/functions-create-first-function-powershell/powershell-project-first-function.png)
 
-![Visual Studio kod projesinde Azure işlevleri kodu](./media/functions-create-first-function-powershell/powershell-project-first-function.png)
-
-Kullandığınız [Visual Studio Code için Azure işlevleri uzantısı] yerel olarak bir PowerShell işlevi oluşturmak için ve azure'da yeni bir işlev uygulaması dağıttınız. Uzantı şu an önizleme aşamasındadır. Daha fazla bilgi edinmek için [Visual Studio Code için Azure İşlevleri uzantısı] sayfasına bakın.
+Yerel olarak bir PowerShell işlevi oluşturmak ve ardından bunu Azure 'da yeni bir işlev uygulamasına dağıtmak için [Visual Studio Code için Azure İşlevleri uzantısı] kullanırsınız. Uzantı şu an önizleme aşamasındadır. Daha fazla bilgi edinmek için [Visual Studio Code için Azure İşlevleri uzantısı] sayfasına bakın.
 
 > [!NOTE]  
-> PowerShell desteği [Azure işlevleri uzantısı][Visual Studio Code için Azure işlevleri uzantısı] şu anda varsayılan olarak devre dışıdır. PowerShell desteğini etkinleştirme, bu makaledeki adımlarda biridir.
+> Visual Studio Code için Azure işlevleri [Uzantısı][visual studio code için azure işlevleri uzantısı] için PowerShell desteği şu anda varsayılan olarak devre dışıdır. PowerShell desteğinin etkinleştirilmesi, bu makaledeki adımlardan biridir.
 
-Aşağıdaki adımlar, macOS, Windows ve Linux tabanlı işletim sistemlerinde desteklenir.
+Aşağıdaki adımlar macOS, Windows ve Linux tabanlı işletim sistemlerinde desteklenir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu hızlı başlangıcı tamamlamak için:
 
-* Yükleme [PowerShell Core](/powershell/scripting/install/installing-powershell-core-on-windows)
+* [PowerShell çekirdeğini](/powershell/scripting/install/installing-powershell-core-on-windows) yükler
 
-* [Desteklenen platformlardan](https://code.visualstudio.com/docs/supporting/requirements#_platforms) birinde [Visual Studio Code](https://code.visualstudio.com/)’u yükleyin. 
+* [Desteklenen platformlardan](https://code.visualstudio.com/) birinde [Visual Studio Code](https://code.visualstudio.com/docs/supporting/requirements#_platforms)’u yükleyin. 
 
-* Yükleme [Visual Studio Code için PowerShell uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell).
+* [Visual Studio Code Için PowerShell uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell)yükler.
 
-* Yükleme [.NET Core SDK'sını 2.2 +](https://www.microsoft.com/net/download) (Azure işlevleri çekirdek araçları gerektirdiği ve tüm desteklenen platformlarda kullanılabilir).
+* [.NET Core SDK 2.2 +](https://www.microsoft.com/net/download) (Azure Functions Core Tools için gereklidir ve desteklenen tüm platformlarda kullanılabilir).
 
-* Sürümünü yüklemek 2.x [Azure işlevleri çekirdek Araçları](functions-run-local.md#v2).
+* [Azure Functions Core Tools](functions-run-local.md#v2)sürüm 2. x ' i yükler.
 
-* Ayrıca bir etkin Azure aboneliği gerekir.
+* Ayrıca etkin bir Azure aboneliğine de ihtiyacınız vardır.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
@@ -56,62 +52,62 @@ Bu hızlı başlangıcı tamamlamak için:
 
 Visual Studio Code'daki Azure İşlevleri proje şablonu, Azure'daki bir işlev uygulamasında yayımlanabilen bir proje oluşturur. İşlev uygulaması, kaynakların yönetilmesi, dağıtılması ve paylaşılması için işlevleri bir mantıksal birim olarak gruplandırmanıza olanak tanır. 
 
-1. Visual Studio Code'da Azure logosu görüntülemek için seçin **Azure: İşlevleri** alan ve yeni proje Oluştur simgesini seçin.
+1. Visual Studio Code’da **Azure: İşlevler** alanını görüntülemek için Azure logosunu seçin ve Yeni Proje Oluştur simgesini seçin.
 
     ![İşlev uygulaması projesi oluşturma](./media/functions-create-first-function-powershell/create-function-app-project.png)
 
-1. İşlevler projesi çalışma alanınız için bir konum seçin ve **seçin**.
+1. Işlevleriniz proje çalışma alanınız için bir konum seçin ve **Seç**' i seçin.
 
     > [!NOTE]
     > Bu makale, bir çalışma alanının dışında tamamlanacak şekilde tasarlanmıştır. Bu örnekte, bir çalışma alanının parçası olan bir proje klasörünü seçmeyin.
 
-1. Seçin **Powershell (Önizleme)** işlev uygulaması projenizi dili olarak ve ardından **Azure işlevler v2**.
+1. İşlev uygulaması projeniz için dil olarak **PowerShell** 'i ve ardından **Azure işlevleri v2**'yi seçin.
 
-1. Seçin **HTTP tetikleyicisi** ilk işlevinizi şablonu olarak kullanmak `HTTPTrigger` işlevi olarak adlandırın ve bir yetkilendirme düzeyini seçin **işlevi**.
+1. İlk işleviniz için şablon olarak **http tetikleyicisi** ' ni seçin **, işlev adı**olarak `HTTPTrigger` kullanın ve bir Yetkilendirme düzeyi seçin.
 
     > [!NOTE]
-    > **İşlevi** yetki düzeyi gerekmektedir bir [işlev anahtarı](functions-bindings-http-webhook.md#authorization-keys) işlev uç noktası Azure'da çağırırken değeri. Bu, yalnızca herkesin işlevinizi çağırmak zorlaştırır.
+    > İşlev **Yetkilendirme düzeyi** , Azure 'da işlev uç noktası çağrılırken bir [işlev anahtarı](functions-bindings-http-webhook.md#authorization-keys) değeri gerektirir. Bu, yalnızca birisinin işlevinizi çağırazorlamanızı sağlar.
 
 1. İstendiğinde **Çalışma alanına ekle**’yi seçin.
 
-Visual Studio Code yeni bir çalışma alanında PowerShell işlev uygulaması projesi oluşturur. Bu projeyi içeren [host.json](functions-host-json.md) ve [local.settings.json](functions-run-local.md#local-settings-file) yapılandırma dosyaları, projedeki tüm işlevi uygulanır. Bu [PowerShell projesine](functions-reference-powershell.md#folder-structure) Azure'da çalışan bir işlev uygulaması ile aynıdır.
+Visual Studio Code, yeni bir çalışma alanında PowerShell işlevi uygulama projesi oluşturur. Bu proje, projedeki tüm işleve uygulanan [Host. JSON](functions-host-json.md) ve [Local. Settings. JSON](functions-run-local.md#local-settings-file) yapılandırma dosyalarını içerir. Bu [PowerShell projesi](functions-reference-powershell.md#folder-structure) , Azure 'da çalışan bir işlev uygulamasıyla aynıdır.
 
 ## <a name="run-the-function-locally"></a>İşlevi yerel olarak çalıştırma
 
-Azure işlevleri temel araçları, Visual Studio, çalıştırın ve Azure işlevleri projenizi yerel olarak hata ayıklama izin vermek için kod ile tümleştirilir.  
+Azure Functions Core Tools, bir Azure Işlevleri projesinde yerel olarak çalıştırmanıza ve hata ayıklamanıza olanak sağlamak için Visual Studio Code tümleştirilir.  
 
-1. İşlevinizin hatalarını ayıklamak için bir çağrı ekleyin [ `Wait-Debugger` ] hata ayıklayıcıyı iliştirmek istediğiniz önce işlev kodunu cmdlet'te, işlev uygulaması projesi başlatmak ve hata ayıklayıcıyı iliştirmek için F5 tuşuna basın. Temel Araçlar’daki çıktı, **Terminal** panelinde görüntülenir.
+1. İşlevinizde hata ayıklamak için, hata ayıklayıcıyı iliştirmek istediğiniz işlev kodundaki [`Wait-Debugger`] cmdlet 'ine bir çağrı ekleyin ve ardından F5 tuşuna basarak işlev uygulaması projesini başlatın ve hata ayıklayıcıyı ekleyin. Temel Araçlar’daki çıktı, **Terminal** panelinde görüntülenir.
 
 1. **Terminal** panelinde, HTTP ile tetiklenen işlevinizin URL uç noktasını kopyalayın.
 
     ![Azure yerel çıktısı](./media/functions-create-first-function-powershell/functions-vscode-f5.png)
 
-1. Sorgu dizesini URL'ye `?name=<yourname>` bu URL ve ardından `Invoke-RestMethod` isteği şu şekilde yürütmek için:
+1. `?name=<yourname>` sorgu dizesini bu URL 'ye ekleyin ve ardından `Invoke-RestMethod` kullanarak isteği yürütün:
 
     ```powershell
     PS > Invoke-RestMethod -Method Get -Uri http://localhost:7071/api/HttpTrigger?name=PowerShell
     Hello PowerShell
     ```
 
-    Ayrıca, bir tarayıcıdan GET isteği yürütebilir.
+    GET isteğini bir tarayıcıdan da yürütebilirsiniz.
 
-    HttpTrigger uç noktası olmadığında geçirme çağırdığınızda bir `name` sorgu parametresi olarak veya gövde parametresi, işlev, 500 hata döndürür. Run.ps1 kodu gözden geçirirken, bu hata, tasarım gereği oluşur bakın.
+    Sorgu parametresi veya gövdede bir `name` parametresi geçirmeden HttpTrigger uç noktasını çağırdığınızda, işlev bir [HttpStatusCode]:: BadRequest hatası döndürür. Run. ps1 içinde kodu gözden geçirdikten sonra, bu hatanın tasarım tarafından oluştuğunu görürsünüz.
 
 1. Hata ayıklamayı durdurmak için Shift + F5 tuşuna basın.
 
 İşlevin yerel bilgisayarınızda düzgün çalıştığını doğruladıktan sonra, projeyi Azure'da yayımlamanın zamanı gelmiştir.
 
 > [!NOTE]
-> Çağrıları kaldırmayı unutmayın `Wait-Debugger` Azure'da işlevlerinizin yayımlamadan önce. 
-
-> [!NOTE]
-> Azure'da bir işlev uygulaması oluşturma, işlev uygulaması adı için yalnızca ister. AzureFunctions.advancedCreation diğer tüm değerler için size sorulması için true olarak ayarlayın.
+> İşlevlerinizi Azure 'da yayımlamadan önce `Wait-Debugger` yapılan çağrıları kaldırmayı unutmayın. 
+>
+> Azure 'da bir işlev uygulaması oluşturmak yalnızca işlev uygulamanızın adını ister. Diğer değerler sizin için tanımlanır.
+> `azureFunctions.advancedCreation` diğer tüm değerler için sorulması için `true` olarak ayarlayın.
 
 [!INCLUDE [functions-publish-project-vscode](../../includes/functions-publish-project-vscode.md)]
 
-## <a name="test"></a>İşlev Azure'da çalıştırın
+## <a name="test"></a>İşlevi Azure 'da çalıştırma
 
-Azure'da yayımlanan işlevinizin çalıştığını doğrulamak için aşağıdaki PowerShell komutunu yürütün değiştirerek `Uri` önceki adımdan HTTPTrigger işlevin URL'si ile parametre. Önceki örneklerde olduğu gibi sorgu dizesini URL'ye `&name=<yourname>` aşağıdaki örnekteki gibi bir URL:
+Yayınlanan işlevinizin Azure 'da çalıştığını doğrulamak için aşağıdaki PowerShell komutunu yürütün ve `Uri` parametresini önceki adımdaki HTTPTrigger işlevinin URL 'siyle değiştirin. Daha önce olduğu gibi, aşağıdaki örnekte olduğu gibi sorgu dizesini URL 'ye `&name=<yourname>` ekleyin:
 
 ```powershell
 PS > Invoke-WebRequest -Method Get -Uri "https://glengatest-vscode-powershell.azurewebsites.net/api/HttpTrigger?code=nrY05eZutfPqLo0som...&name=PowerShell"
@@ -136,7 +132,7 @@ RawContentLength  : 16
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Basit bir HTTP ile tetiklenen işlevi ile bir PowerShell işlev uygulaması oluşturmak için Visual Studio Code kullandığınızı. Daha fazla bilgi edinin isteyebilirsiniz [PowerShell işlevi yerel olarak hata ayıklama](functions-debug-powershell-local.md) Azure işlevleri çekirdek araçları kullanarak. Kullanıma [Azure işlevleri PowerShell Geliştirici kılavuzunda](functions-reference-powershell.md).
+Basit HTTP ile tetiklenen bir işlevle PowerShell işlevi uygulaması oluşturmak için Visual Studio Code kullandınız. Ayrıca, Azure Functions Core Tools kullanarak [bir PowerShell işlevindeki yerel olarak hata ayıklama](functions-debug-powershell-local.md) hakkında daha fazla bilgi edinmek isteyebilirsiniz. [Azure Işlevleri PowerShell Geliştirici Kılavuzu ' na](functions-reference-powershell.md)göz atın.
 
 > [!div class="nextstepaction"]
 > [Application Insights tümleştirmesini etkinleştirme](functions-monitoring.md#manually-connect-an-app-insights-resource)
@@ -144,4 +140,4 @@ Basit bir HTTP ile tetiklenen işlevi ile bir PowerShell işlev uygulaması olu�
 [Azure portal]: https://portal.azure.com
 [Azure Functions Core Tools]: functions-run-local.md
 [Visual Studio Code için Azure İşlevleri uzantısı]: https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions
-['Wait-Hata Ayıklayıcı']: /powershell/module/microsoft.powershell.utility/wait-debugger?view=powershell-6
+[' Wait-Debugger ']: /powershell/module/microsoft.powershell.utility/wait-debugger?view=powershell-6

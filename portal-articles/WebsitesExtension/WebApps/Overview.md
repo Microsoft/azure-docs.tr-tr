@@ -8,12 +8,12 @@ ms.service: app-service
 ms.topic: article
 ms.date: 04/27/2017
 ms.author: sewatson
-ms.openlocfilehash: be918ecef3a9fb346d9aa441bef9b4c3991009d6
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: bc013469610d5535c89870947fe094da93660012
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "60530871"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73488428"
 ---
 # <a name="app-service-documentation"></a>App Service Belgeleri
 Azure App Service, altyapıyı veya dilin ya da web çerçevesinin çalışma zamanını yönetmeye gerek kalmadan, kendi seçtiğiniz programlama dilinde web uygulamaları oluşturmanıza ve barındırmanıza olanak tanır. Otomatik ölçeklendirme ve yüksek kullanılabilirlik sunar, hem Windows hem de Linux’ı destekler ve GitHub, Azure DevOps Services veya herhangi bir Git deposundan otomatik dağıtımlar sağlar. Hızlı başlangıçlarımız, öğreticilerimiz ve örneklerimizle Azure App Service’i kullanmayı öğrenin.
@@ -42,7 +42,7 @@ Azure'da güvenli web uygulamaları dağıtma, yönetme ve izleme hakkında bilg
   - [MySQL ile Java](/app-service/app-service-web-tutorial-java-mysql)
   - [PostgreSQL ile Python](/app-service/containers/tutorial-python-postgresql-app)
 - [Mevcut bir özel etki alanını uygulamanıza eşleme](/azure/app-service/app-service-web-tutorial-custom-domain)
-- [Mevcut bir SSL sertifikasını uygulamanıza bağlama](/azure/app-service/app-service-web-tutorial-custom-SSL)
+- [SSL sertifikasını uygulamanıza bağlama](/azure/app-service/configure-ssl-bindings)
 
 ## <a name="free-pluralsight-video-training"></a>Ücretsiz Pluralsight Video Eğitimi
 

@@ -1,103 +1,104 @@
 ---
-title: Mevcut bir ticari Market teklifi güncelleştirme
-description: Düzenleme, yayımlama isteği iptal edilirken bir taslak silme de dahil olmak üzere bir var olan ticari Market teklifi için güncelleştirmeler yapmak için bir teklif ya da plan satmayı ve özel izleyicileri eşitleniyor Durdur nasıl.
-author: mattwojo
+title: Mevcut bir ticari Market Teklifini güncelleştirme
+description: Mevcut bir ticari Market teklifinde güncelleştirme, taslak silme, yayımlama isteğini iptal etme, teklif veya plan satma ve özel izleyicileri eşitleme dahil olmak üzere nasıl yapılır?
+author: ChJenk
 manager: evansma
-ms.author: mattwoj
+ms.author: v-chjen
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 05/30/2019
-ms.openlocfilehash: f591df0fe93336da09e9c441292c97be09f25a2e
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: f2cb1907557c2440a5a94c0f4799eac95a8cf507
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67442085"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827853"
 ---
-# <a name="update-an-existing-offer-in-the-commercial-marketplace"></a>Ticari Market'te bir mevcut teklifi güncelleştirme
+# <a name="update-an-existing-offer-in-the-commercial-marketplace"></a>Ticari Market 'te mevcut bir teklifi güncelleştirme
 
-Mevcut tekliflerin görüntüleyebileceğiniz **genel bakış** sekmesinde [ticari Marketi portalı](https://partner.microsoft.com/dashboard/commercial-marketplace/offers) iş ortağı Merkezi'nde.
+Mevcut tekliflerinizi, Iş Ortağı Merkezi ' nde [ticari Market portalının](https://partner.microsoft.com/dashboard/commercial-marketplace/offers) **genel bakış** sekmesinde görebilirsiniz.
 
-Market'te şu anda Canlı olan mevcut bir teklif güncelleştirmek için: 
+Market 'te Şu anda etkin olan mevcut bir teklifi güncelleştirmek için: 
 
-1. Güncelleştirmek istediğiniz teklif adını seçin. Teklif durumu olarak listelenebilir **canlı**, **yayımlama sürüyor**, **taslak**, **ilgilenilmesi gereken**, veya **yok ediliyor Market'te satılan** (daha önce teklif satış durdurmak seçtiğiniz varsa). Seçildiğinde, **genel bakış sunan** sayfası bu teklif açılır.
-2. Seçin **güncelleştirme** overview kartı ya da güncelleştirmek istediğiniz alanı için sol gezinti bölmesinden menü öğesi. Güncelleştirmek istediğiniz **teklif Kurulum**, **özellikleri**, **listeleme teklif**, **Önizleme**, **teknik yapılandırma** , **Plan genel bakış**, veya **Test sürücü**. 
-3. Değişikliklerinizi yapın ve ardından **Kaydet**. Yaptığınız tüm değişiklikler tamamlanana kadar bu işlemi yineleyin.
+1. Güncelleştirmek istediğiniz teklifin adını seçin. Teklifin durumu **canlı**, **Yayımla devam ediyor**, **taslak**, **ilgilenmeniz gerekiyor**veya **Market 'te satılmamış** olabilir (daha önce teklifi satmayı durdurmayı seçtiyseniz). Seçildiğinde, bu teklif için **teklif genel bakış** sayfası açılır.
+2. Güncelleştirmek istediğiniz alan için genel bakış kartından veya sol gezinmede bulunan menü öğesinden **Güncelleştir** ' i seçin. **Teklif kurulumu**, **Özellikler**, **teklif listesi**, **Önizleme**, **Teknik yapılandırma**, **plana genel bakış**veya **test sürüşü**güncelleştirmek isteyebilirsiniz. 
+3. Değişikliklerinizi yapın ve ardından **Kaydet**' i seçin. Tüm değişiklikleriniz tamamlanana kadar bu işlemi tekrarlayın.
 
-## <a name="review-and-publish-an-updated-offer"></a>Gözden geçirin ve güncelleştirilmiş bir teklifi yayımlama
+## <a name="review-and-publish-an-updated-offer"></a>Güncelleştirilmiş bir teklifi İnceleme ve yayımlama
 
-Güncelleştirilen teklifinizi yayımlamaya hazır olduğunuzda **Yayımla** herhangi bir sayfadan. **Gözden geçirin ve yayımlama** sayfası açılır. Bu sayfada aşağıdakileri yapabilirsiniz:
+Güncelleştirilmiş teklifinizi yayımlamaya hazırsanız herhangi bir sayfadan **Yayımla** ' yı seçin. **İnceleme ve yayımlama** sayfası açılır. Bu sayfada şunları yapabilirsiniz:
 
 
-- Güncelleştirdiğiniz teklif bölümlerini tamamlanma durumunu bakın: 
-    - **Yayımlanmamış değişiklikler**: Bölüm güncelleştirildi ve tamamlanmış olur. Gerekli tüm verileri sağlanan ve güncelleştirmelerinde kullanıma sunulan herhangi bir hata oluştu.
-    - **Tamamlanmamış**: Bölüm için yapılan güncelleştirmeler, düzeltilmesi gereken hatalar tanıtılan veya sağlanması daha fazla bilgi gerektirir.
-- Sertifika test takımının test sorunsuz gider emin olmak için ek bilgiler sağlayın.
-- Seçerek güncelleştirilmiş teklif yayımlama için gönderme **Gönder**.  Güncelleştirilmiş teklif önizleme sürümünü gözden geçirin ve oturum kapatma için kullanılabilir duruma geldiğinde size, e-posta göndereceğiz.
+- Seçtiğiniz teklifin bölümlerinin tamamlanma durumunu görün: 
+    - **Yayımlanmamış değişiklikler**: Bölüm güncelleştirildi ve tamamlandı. Tüm gerekli veriler sağlandı ve güncelleştirmelerde hiçbir hata alınmadı.
+    - **Tamamlanmamış**: bölümde yapılan güncelleştirmeler düzeltilmekte olan veya daha fazla bilgi sağlanması gereken hatalar getirdi.
+- Testin sorunsuz bir şekilde çalışmasını sağlamak için sertifika sınama ekibine ek bilgi sağlayın.
+- **Gönder**' i seçerek yayımlama için güncelleştirilmiş teklifi gönder.  Gözden geçirmeniz ve oturum açmanız için güncelleştirilmiş teklifin önizleme sürümü kullanılabilir olduğunda size e-posta göndereceğiz.
 
-**ÖNEMLİ**: Seçim kullanılabilir ve sonra teklifin önizlemesini, gözden geçirmeniz gerekir **Go-live** güncelleştirilen teklifinizi, hedef kitle için (genel veya özel) yayımlamak için.
+**Önemli**: sunulan hedef kitlenize (ortak veya özel) sunulan teklifinizi yayımlamak için, teklif önizlemeyi gözden geçirmeniz ve **canlı çalış** ' ı seçmeniz gerekir.
 
-## <a name="update-a-plan-within-an-existing-offer"></a>Güncelleştirme var olan bir teklif içinde bir plan
+## <a name="update-a-plan-within-an-existing-offer"></a>Mevcut bir teklif içindeki bir planı güncelleştirme
 
-Bir plan zaten yayımladığınız var olan bir teklif içinde değişiklik yapmak için:
+Zaten yayımladığınız mevcut bir teklifin içindeki bir planda değişiklik yapmak için:
 
-- İle **genel bakış sunan** mevcut teklifiniz için açık sayfasında, değiştirmek istediğiniz planı seçin. Plan erişilebilir değilse **planı genel bakış** listesinden **tüm planlar bkz**.
-- Planı seçmek seçebileceğiniz **adı**, **fiyatlandırma modeli**, veya **kullanılabilirlik**. *Şu anda planları yalnızca İngilizce (ABD) kullanılabilir*.
-- Seçin **Kaydet** planı adı, açıklama, fiyatlandırma veya İzleyici kullanılabilirlik için gerekli değişiklikleri yaptıktan sonra. 
-- Seçin **Yayımla** yaptığınız güncelleştirmeler yayımlamaya hazır olduğunuzda. **[Gözden geçirin ve yayımlama](#review-and-publish-an-updated-offer)** sayfasını açın ve bir tamamlanma durumu için yaptığınız güncelleştirmeler sağlar. 
+- Mevcut teklifiniz için **teklif genel bakış** sayfası açıkken, değiştirmek istediğiniz planı seçin. Plana **genel bakış** listesinden erişilemezse, **tüm planları göster**' i seçin.
+- Plan **adını**, **fiyatlandırma modelini**veya **kullanılabilirliği**seçebilirsiniz. *Şu anda planlar yalnızca İngilizce (Birleşik Devletler) olarak kullanılabilir*.
+- Plan adı, açıklama, fiyatlandırma veya hedef kitle kullanılabilirliğine gereken değişiklikleri yaptıktan sonra **Kaydet** ' i seçin. 
+- Güncelleştirmelerinizi yayımlamaya hazırsanız **Yayımla** ' yı seçin. **[İnceleme ve yayımlama](#review-and-publish-an-updated-offer)** sayfası açılır ve güncelleştirmelerinizin tamamlanma durumunu sağlar. 
 
-## <a name="delete-a-draft-offer"></a>Bir taslak teklifi Sil
+## <a name="delete-a-draft-offer"></a>Taslak teklifini silme
 
-Bir taslak teklif (bir yayımlanmadı) seçerek silebilirsiniz **Sil taslak** gelen **genel bakış sunan** sayfası. Teklif daha önce yayımladığınız varsa bu seçenek, kullanılabilir olmayacaktır.
+**Teklif genel bakış** sayfasından **taslağı Sil** ' i seçerek Taslak teklifini silebilirsiniz (yayımlanmamış bir tane). Teklifi daha önce yayımladıysanız Bu seçenek kullanılamaz.
 
-Taslak teklif silmek istediğinizi onayladıktan sonra teklifin iş ortağı Merkezi'nde görünür veya erişilebilir olmayacak ve **tüm sunar** sayfası açılır.
+Taslak teklifini silmek istediğinizi doğruladıktan sonra, teklif artık Iş Ortağı Merkezi 'nde görünür veya erişilebilir olmayacaktır ve **Tüm teklifler** sayfası açılır.
 
 ## <a name="delete-a-draft-plan"></a>Taslak planı silme
 
-Yayımlanmadı bir planı silmek için işaretleyin **Sil taslak** gelen **planı genel bakış** sayfası. Teklif daha önce yayımladığınız varsa bu seçeneği için kullanılamaz.
+Yayımlanmamış bir planı silmek için **plana genel bakış** sayfasında **taslağı Sil** ' i seçin. Teklifi daha önce yayımladıysanız Bu seçenek kullanılamaz.
 
-Taslak planı silmek istediğinizi onayladıktan sonra planın görünür veya erişilebilir artık iş ortağı Merkezi'nde olacaktır.
+Taslak planını silmek istediğinizi doğruladıktan sonra, plan artık Iş Ortağı Merkezi 'nde görünür veya erişilebilir olmayacaktır.
 
-## <a name="cancel-publishing"></a>Yayımlama iptal et
+## <a name="cancel-publishing"></a>Yayımlamayı iptal et
 
-Bir teklife iptal etmek için **yayımlama sürüyor** durumu:
+**Yayımlama sürüyor** durumunda olan bir teklifi iptal etmek için:
 
-- Teklif adı açmak için seçin **genel bakış sunan** sayfası. 
-- Seçin **yayımlamayı iptal et** sayfanın sağ üst köşedeki öğesinden.
-- Teklifin yayımlanmasını bırakmak istediğinizi onaylayın. 
+- Teklif **genel bakış** sayfasını açmak için teklif adını seçin. 
+- Sayfanın sağ üst köşesinden **yayımlamayı Iptal et** ' i seçin.
+- Teklifin yayımlanmasını durdurmak istediğinizi onaylayın. 
 
-Sonraki bir zamanda teklif yayımlamak istiyorsanız, yayımlama işlemi baştan başlatmak gerekir.
+Teklifi daha sonra yayınlamak istiyorsanız, Yayımlama sürecini üzerinde başlatmanız gerekir.
 
 > [!NOTE]
-> Yalnızca bu teklif yayımcı adıma sign-off henüz ilerlemedi caspol.exe'nin yayımlanan bir teklifi durdurabilirsiniz. Seçtikten sonra **yayınlayın** iptal etme seçeneğini olmaz artık yayımlayın.
+> Bir teklifin yayımlanmasını, yalnızca teklifin yayımcı oturumu açma adımına henüz ilerlemedi. **Canlı git** ' i seçtikten sonra, yayımlamayı daha fazla iptal etme seçeneğiniz olmayacaktır.
 
-## <a name="stop-selling-an-offer-or-plan"></a>Bir teklif ya da plan satış Durdur
+## <a name="stop-selling-an-offer-or-plan"></a>Teklif veya plan satmaya
 
-Zaten yayımladıktan sonra bir teklif satış durdurmayı seçin **satış Durdur** gelen **genel bakış sunan** sayfası. Bir plan satış durdurmayı seçin **satış Durdur** gelen **planı genel bakış** sayfası. (Bir plan satış Durdur seçeneğine yalnızca birden fazla plan teklife varsa kullanılabilir. Diğer planlar teklifinizi içinde etkilemeden bir plan satış durdurmak seçebileceğiniz.)
+Zaten yayımladıktan sonra teklif satımı bırakmak için **teklif genel bakış** sayfasından **satışı durdur** ' u seçin. Bir planı satmaya durdurmak için **plana genel bakış** sayfasından **satışı durdur** ' u seçin. (Bir planı satmaya durdurma seçeneği yalnızca teklifte birden fazla plana sahipseniz kullanılabilir. Teklifinizdeki diğer planları etkilemeden bir plan satmaya izin vermeyi seçebilirsiniz.)
 
-Plan ve teklif satış durdurmak istediğinizi onaylamak sonra birkaç saat içinde artık Market'te görünür olur ve yeni müşteri indirebilirsiniz. 
+Teklif veya planı satmayı durdurmak istediğinizi tamamladıktan sonra, birkaç saat içinde artık Market 'te görünmez ve yeni müşteriler bunu indiremez. 
 
-Daha önce plan ve teklif alınan müşteriler kullanmaya devam edebilir. Yeniden yükleyebilirsiniz, ancak güncelleştirmeniz ve teklifi yeniden yayımlama veya daha sonraki bir zamanda plan güncelleştirmeleri almaz. 
+Teklifi veya planı önceden almış olan müşteriler onu kullanmaya devam edebilir. Bu kişiler yeniden indirebilir, ancak teklifi veya planı daha sonra güncelleştirip yeniden yayımladığınızda güncelleştirmeleri almaz. 
 
-Teklif/planını satış durdurmak için istek tamamlandıktan sonra hala onu ticari Market iş ortağı merkezi portalında görürsünüz. Taslak silmek için seçin **taslağı silin** da **genel bakış sunan** veya **Plan genel bakış** sayfası. 
+Teklifi/planı satmaya başladıktan sonra, Iş Ortağı Merkezi 'nde ticari Market portalında görmeye devam edersiniz. Taslağı silmek için **teklif genel bakış** veya **plana genel bakış** sayfasından **taslağı Sil** ' i seçin. 
 
-Listelemek veya bu teklif satmak veya yeniden planlama karar verirseniz, yönergeleri [bir mevcut teklifi güncelleştirme](#update-an-existing-offer-in-the-commercial-marketplace). Gerektiğini unutmayın **yayımlama** herhangi bir değişiklik yapıldıktan sonra yeniden plan ve teklif.
+Bu teklifi veya planı yeniden listeya da satmaya karar verirseniz, [mevcut bir teklifi güncelleştirmek](#update-an-existing-offer-in-the-commercial-marketplace)için yönergeleri izleyin. Herhangi bir değişiklik yaptıktan sonra teklifi veya planı **yayımlamanız** gerektiğini unutmayın.
 
-## <a name="remove-offers-from-existing-customers"></a>Mevcut müşterilerin teklifler Kaldır
+## <a name="remove-offers-from-existing-customers"></a>Mevcut müşterilerden teklifleri kaldırma
 
-Var olan müşterilerin, teklifleri kaldırmak için [günlük desteği isteği](https://support.microsoft.com/supportforbusiness/productselection?sapId=48734891-ee9a-5d77-bf29-82bf8d8111ff). Belirli teklif türünüzü seçin **sorun türü** listeleyin ve ardından **yayımlanan bir teklifi kaldırabilir** içinde **kategori** listesi. İstek gönderin. Destek ekibine teklif kaldırma işleminde size yol gösterecektir.
+Mevcut müşterilerden teklifleri kaldırmak için [bir destek isteği kaydedin](https://support.microsoft.com/supportforbusiness/productselection?sapId=48734891-ee9a-5d77-bf29-82bf8d8111ff). **Sorun türü** listesinden özel teklif türünü seçin ve ardından **Kategori** listesinden **yayımlanmış teklifi kaldır** ' ı seçin. İsteği gönderir. Destek ekibi, teklif kaldırma sürecinde size kılavuzluk eder.
 
-## <a name="sync-private-plan-audiences"></a>Eşitleme özel plan izleyicileri
+## <a name="sync-private-plan-audiences"></a>Özel plan kitlelerini Eşitle
 
-Teklifinizi yalnızca özel bir kısıtlı hedef kitle için kullanılabilir olarak yapılandırılmış bir veya daha fazla plan içeriyorsa, bu özel plan teklife başka değişiklikler yayımlamadan erişebilen hedef kitleyi güncelleştirme mümkündür. 
+Teklifiniz yalnızca özel kısıtlı bir hedef kitle tarafından kullanılabilir olacak şekilde yapılandırılmış bir veya daha fazla plan içeriyorsa, yalnızca bu özel plana, teklifte başka değişiklikler yayımlamadan erişebilecek hedef kitleleri güncelleştirmek mümkündür. 
 
-Güncelleştirme ve özel hedef kitlesi, plana eşitlemek için:
+Planlarınız için özel hedef kitleleri güncelleştirmek ve eşitlemek için:
 
-- Hedef kitle kullanarak bir veya daha fazla özel planlarında değişiklik + **kimlik Ekle** veya **alma müşteriler (csv)** düğmesine tıklayın ve değişiklikleri kaydedin.
-- Seçin **eşitleme özel İzleyici** gelen **Plan genel bakış** sayfası.
+- \+ **Kimlik Ekle** veya **Müşteri al (CSV)** düğmesini kullanarak bir veya daha fazla özel planda izleyiciyi değiştirin ve değişiklikleri kaydedin.
+- **Plana genel bakış** sayfasından **özel izleyiciyi Eşitle** ' yi seçin.
 
-**Eşitleme özel İzleyici** yalnızca değişiklikler yaptığınız taslak teklife güncelleştirmeleri yayımlama olmadan, özel hedef kitle yayımlayacak.
+**Eşitleme özel hedef kitlesi** , taslak teklifine yapmış olabileceğiniz herhangi bir güncelleştirmeyi yayımlamadan yalnızca özel izleyicilerinizdeki değişiklikleri yayımlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Kendi ticari Market teklifi Yayımlama durumunu denetleyin](./publishing-status.md)
+- [Ticari Market teklifinizin Yayımlanma durumunu kontrol edin](./publishing-status.md)

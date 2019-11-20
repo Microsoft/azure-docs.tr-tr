@@ -1,7 +1,7 @@
 ---
-title: Yükseltme Bing otomatik öneri API'si v5 için v7
-titlesuffix: Azure Cognitive Services
-description: Sürüm 7 kullanılacak güncelleştirmeye gerek duyduğunuz uygulamanızın parçalarını tanıtır.
+title: Bing Otomatik Öneri API'si v5 'i v7 'ye yükseltme
+titleSuffix: Azure Cognitive Services
+description: Uygulamanızın 7 sürümünü kullanmak için güncelleştirmeniz gereken parçalarını tanımlar.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
@@ -10,63 +10,63 @@ ms.subservice: bing-autosuggest
 ms.topic: conceptual
 ms.date: 02/20/2019
 ms.author: scottwhi
-ms.openlocfilehash: 51f057a1dd0da866a50a0219574c70c3c805882e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 5249a3a1f51eea2ecd0999d71c6b08fdacf37a34
+ms.sourcegitcommit: 9dc7517db9c5817a3acd52d789547f2e3efff848
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60549657"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68405404"
 ---
-# <a name="autosuggest-api-upgrade-guide"></a>Otomatik öneri API'si Yükseltme Kılavuzu
+# <a name="autosuggest-api-upgrade-guide"></a>Otomatik öneri API Yükseltme Kılavuzu
 
-Bu Yükseltme Kılavuzu, sürüm 5 ve Bing otomatik öneri API'si 7 sürümü arasındaki değişiklikleri tanımlar. Uygulamanızı sürüm 7 kullanacak şekilde güncelleştirmenize yardımcı olması için bu kılavuzu kullanın.
+Bu yükseltme Kılavuzu, sürüm 5 ve Bing Otomatik Öneri API'si sürüm 7 arasındaki değişiklikleri tanımlar. Uygulamanızı 7 sürümünü kullanacak şekilde güncelleştirmeye yardımcı olması için bu kılavuzu kullanın.
 
 ## <a name="breaking-changes"></a>Yeni değişiklikler
 
 ### <a name="endpoints"></a>Uç Noktalar
 
-- Uç noktanın sürüm numarası için v7 v5 değiştirildi. Örneğin, https:\//api.cognitive.microsoft.com/bing/\*\*v7.0 ** / öneriler.
+- Uç noktanın sürüm numarası, V5 'ten v7 'e değişti. Örneğin, https:\//api.Cognitive.Microsoft.com/Bing/\*\*v 7.0 * */mülations.
 
 ### <a name="error-response-objects-and-error-codes"></a>Hata yanıtı nesneleri ve hata kodları
 
-- Tüm başarısız istekler şimdi içermelidir bir `ErrorResponse` yanıt gövdesinde bir nesne.
+- Tüm başarısız istekler yanıt gövdesine bir `ErrorResponse` nesne içermelidir.
 
-- Aşağıdaki alanları eklenen `Error` nesne.  
-  - `subCode`&mdash;Hata kodu ayrık demetlerin içine mümkünse bölümleri
-  - `moreDetails`&mdash;İçinde açıklanan hata hakkında ek bilgi `message` alan
+- `Error` Nesnesine aşağıdaki alanlar eklendi.  
+  - `subCode`&mdash;Mümkünse hata kodunu farklı demetlere göre bölümler
+  - `moreDetails`&mdash;`message` Alanda açıklanan hata hakkında ek bilgiler
 
-- V5 hata kodları ile aşağıdaki olası yerine `code` ve `subCode` değerleri.
+- V5 hata kodları aşağıdaki olası `code` ve `subCode` değerlerle değiştirilmiştir.
 
 |Kod|Alt|Açıklama
 |-|-|-
-|ServerError|UnexpectedError<br/>ResourceError<br/>NotImplemented|Alt kod koşullardan herhangi biri gerçekleştiğinde Bing ServerError döndürür. HTTP durum kodunu 500 ise yanıt bu hataları içeriyor.
-|InvalidRequest|ParameterMissing<br/>ParameterInvalidValue<br/>HttpNotAllowed<br/>Engellendi|Her isteğin herhangi bir bölümü geçerli değil Bing InvalidRequest döndürür. Örneğin, bir gerekli parametre eksik veya bir parametre değeri geçerli değil.<br/><br/>Hata ParameterMissing veya ParameterInvalidValue ise, HTTP durum kodu 400 ' dir.<br/><br/>Hata HttpNotAllowed, HTTP durum kodu 410 ise.
-|RateLimitExceeded||/ Saniye (QPS) sorguları veya sorgu başına aylık (QPM) kota aştığında Bing RateLimitExceeded döndürür.<br/><br/>Bing QPM aşılırsa QPS ve 403 aşıldı HTTP durum kodu 429 döndürür.
-|InvalidAuthorization|AuthorizationMissing<br/>AuthorizationRedundancy|Bing çağıran doğrulandığında Bing InvalidAuthorization döndürür. Örneğin, `Ocp-Apim-Subscription-Key` üstbilgisi eksik veya abonelik anahtarı geçerli değil.<br/><br/>Birden fazla kimlik doğrulama yöntemi belirtmek, yedeklilik meydana gelir.<br/><br/>Hata InvalidAuthorization ise, HTTP durum kodunu 401 ' dir.
-|InsufficientAuthorization|AuthorizationDisabled<br/>AuthorizationExpired|Çağıran kaynağa erişmek için izinlere sahip olmadığı durumlarda Bing InsufficientAuthorization döndürür. Bu abonelik anahtarını devre dışı bırakıldı veya süresi ortaya çıkabilir. <br/><br/>Hata InsufficientAuthorization, HTTP durum kodu 403 ise.
+|ServerError|UnexpectedError<br/>ResourceError<br/>Uygulanmadı|Bing, alt kod koşullarından herhangi biri gerçekleştiğinde ServerError döndürür. HTTP durum kodu 500 ise yanıt bu hataları içerir.
+|Invalidrequest|ParameterMissing<br/>Parameterınvalidvalue<br/>HttpNotAllowed<br/>Engellendi|İsteğin herhangi bir bölümü geçerli değilse Bing, ınvalidrequest döndürüyor. Örneğin, gerekli bir parametre eksik veya bir parametre değeri geçerli değil.<br/><br/>Hata ParameterMissing veya Parameterınvalidvalue ise, HTTP durum kodu 400 ' dir.<br/><br/>Hataya HttpNotAllowed varsa HTTP durum kodu 410 ' dir.
+|Ratelimitexcebaşında||Bing, sorgu/saniye (QPS) veya aylık sorgu (QPM) kotası her aşışınızda Ratelimitexceden başına döndürür.<br/><br/>QPM 'yi aştıysanız Bing, QPS ve 403 değerini aştıysanız, 429 HTTP durum kodunu döndürür.
+|Invalidauthorleştirme|AuthorizationMissing<br/>Authorizationartıklık|Bing çağıranın kimliğini doğrulayamayan Bing, ınvalidauthortıcıyla geri döndürür. Örneğin, `Ocp-Apim-Subscription-Key` üst bilgi eksik veya abonelik anahtarı geçerli değil.<br/><br/>Birden fazla kimlik doğrulama yöntemi belirtirseniz artıklık oluşur.<br/><br/>Hata eksik ise, HTTP durum kodu 401 ' dir.
+|InsufficientAuthorization|AuthorizationDisabled<br/>Authorization, zaman aşımına uğradı|Çağıranın kaynağa erişim izni olmadığında Bing, InsufficientAuthorization döndürür. Abonelik anahtarı devre dışı bırakılmışsa veya süresi dolmuşsa bu durum oluşabilir. <br/><br/>Hata InsufficientAuthorization ise, HTTP durum kodu 403 ' dir.
 
-- Aşağıdaki yeni kodları için önceki hata kodlarını eşler. Bir bağımlılık v5 hata kodlarıyla ilgili zamandaki, kodunuzu buna göre güncelleştirin.
+- Aşağıda önceki hata kodları yeni kodlara eşlenir. V5 hata kodlarıyla bir bağımlılık yaptıysanız, kodunuzu uygun şekilde güncelleştirin.
 
-|Sürüm 5 kodu|Sürüm 7 code.subCode
+|Sürüm 5 kodu|Sürüm 7 Code. alt kod
 |-|-
-|RequestParameterMissing|InvalidRequest.ParameterMissing
-RequestParameterInvalidValue|InvalidRequest.ParameterInvalidValue
-ResourceAccessDenied|InsufficientAuthorization
-ExceededVolume|RateLimitExceeded
-ExceededQpsLimit|RateLimitExceeded
-Devre dışı|InsufficientAuthorization.AuthorizationDisabled
-UnexpectedError|ServerError.UnexpectedError
-DataSourceErrors|ServerError.ResourceError
-AuthorizationMissing|InvalidAuthorization.AuthorizationMissing
-HttpNotAllowed|InvalidRequest.HttpNotAllowed
-UserAgentMissing|InvalidRequest.ParameterMissing
-NotImplemented|ServerError.NotImplemented
-InvalidAuthorization|InvalidAuthorization
-InvalidAuthorizationMethod|InvalidAuthorization
-MultipleAuthorizationMethod|InvalidAuthorization.AuthorizationRedundancy
-ExpiredAuthorizationToken|InsufficientAuthorization.AuthorizationExpired
+|RequestParameterMissing yok|Invalidrequest. ParameterMissing yok
+Requestparameterınvalidvalue|Invalidrequest. Parameterınvalidvalue
+Resourceaccessreddedildi|InsufficientAuthorization
+ExceededVolume|Ratelimitexcebaşında
+ExceededQpsLimit|Ratelimitexcebaşında
+Devre dışı|InsufficientAuthorization. AuthorizationDisabled
+UnexpectedError|ServerError. UnexpectedError
+DataSourceErrors|Sunucuhatası. ResourceError
+AuthorizationMissing|Invalidauthorleştirme. AuthorizationMissing
+HttpNotAllowed|Invalidrequest. HttpNotAllowed
+UserAgentMissing|Invalidrequest. ParameterMissing yok
+Uygulanmadı|ServerError. NotImplemented
+Invalidauthorleştirme|Invalidauthorleştirme
+Invalidauthorizationmethod|Invalidauthorleştirme
+MultipleAuthorizationMethod|Invalidauthorasyon. Authorizationartıklık
+ExpiredAuthorizationToken|InsufficientAuthorization. Authorization, zaman aşımına uğradı
 InsufficientScope|InsufficientAuthorization
-Engellendi|InvalidRequest.Blocked
+Engellendi|Invalidrequest. engellendi
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

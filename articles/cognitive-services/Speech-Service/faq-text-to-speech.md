@@ -1,67 +1,67 @@
 ---
-title: Azure metin okuma hizmeti hakkında sık sorulan sorular
+title: Metin Okuma sık sorulan sorular
 titleSuffix: Azure Cognitive Services
-description: Metin okuma hizmetle ilgili en yaygın soruların yanıtlarını alın.
+description: Metin Okuma hizmeti hakkında sık sorulan soruların yanıtlarını alın.
 services: cognitive-services
 author: PanosPeriorellis
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 06/11/2018
+ms.date: 07/05/2019
 ms.author: panosper
-ms.openlocfilehash: fd8362748c39389139e8384d0bad7e84d20128a4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 19b8be83a3678164197ec0650b07091e941a04d7
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66751615"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74110500"
 ---
-# <a name="text-to-speech-frequently-asked-questions"></a>Metin okuma hakkında sık sorulan sorular
+# <a name="text-to-speech-frequently-asked-questions"></a>Metin Okuma sık sorulan sorular
 
-Bu SSS'de sorularınızın yanıtlarını bulamazsanız, kullanıma [diğer destek seçenekleri](support.md).
+Bu SSS 'de sorularınıza yanıt bulamazsanız, [diğer destek seçeneklerine](support.md)göz atın.
 
 ## <a name="general"></a>Genel
 
-**S: Bir standart ses modeli ve özel ses model arasındaki fark nedir?**
+**S: standart bir ses modeli ve özel bir ses modeli arasındaki fark nedir?**
 
-**A**: Ses standart modele (olarak da adlandırılan bir *ses tipi*) Microsoft'a ait verileri kullanılarak geliştirilen ve bulut üzerinde zaten dağıtılmış. Ortalama bir model uyarlama ve timbre ve konuşmacının ses stili ifade aktarmak veya kullanıcı tarafından hazırlanan eğitim verileri temel alan tam, yeni bir modeli eğitmek için özel sesli modeli kullanabilirsiniz. Günümüzde giderek daha fazla müşteriler kendi botlar için tür bir tane, markalı bir ses ister. Özel ses oluşturma platformu için bu seçeneği doğru seçimdir.
+Y **: Standart**ses modeli ( _ses yazı tipi_de denir) Microsoft 'a ait veriler kullanılarak eğitilmiş ve buluta zaten dağıtılmıştı. Bir ortalama modeli uyarlamak ve hoparlörün ses stilinin Timbre ve ifadesini aktarmak ya da Kullanıcı tarafından hazırlanan eğitim verilerine göre tam, yeni bir model eğmek için özel bir ses modeli kullanabilirsiniz. Günümüzde, daha fazla müşteri, botları için tek bir tür ve markalı ses istiyor. Özel ses oluşturma platformu, bu seçeneğe yönelik doğru seçimdir.
 
-**S: Standart ses modelini kullanmak istiyorsanız nereden başlamalıyım?**
+**S: standart bir ses modeli kullanmak istersem nereden başlayabilirim?**
 
-**A**: HTTP isteklerini 80'den fazla standart ses modelleri üzerinde 45 dilde kullanılabilir. İlk olarak, alın bir [abonelik anahtarı](https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started). Predeployed ses modelleri için REST çağrıları yapmak için bkz: [REST API](https://docs.microsoft.com/azure/cognitive-services/speech-service/rest-apis).
+Y **: 45**' 80 den fazla standart ses MODELI, http istekleri aracılığıyla kullanılabilir. İlk olarak bir [abonelik anahtarı](https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started)alın. Önceden dağıtılan ses modellerine REST çağrıları yapmak için [REST API](https://docs.microsoft.com/azure/cognitive-services/speech-service/rest-apis)bakın.
 
-**S: API, özelleştirilmiş sesli model kullanmak isterseniz standart ses için kullanılan bir ile aynı mıdır?**
+**S: özelleştirilmiş bir ses modeli kullanmak istersem, API standart sesler için kullanılan ile aynı mı?**
 
-**A**: Özel ses modeli oluşturulup dağıtıldığında, modelinizi için benzersiz bir uç noktası alın. Uygulamalarınızda konuşma ses kullanmak için uç noktası, HTTP isteklerini belirtmeniz gerekir. Metin okuma hizmeti REST API'si kullanılabilir olan aynı işlevleri özel uç noktanız için kullanılabilir. Bilgi edinmek için nasıl [oluşturabilir ve özel uç noktanız](https://docs.microsoft.com/azure/cognitive-services/speech-service/how-to-customize-voice-font#create-and-use-a-custom-voice-endpoint).
+Y **: özel bir ses**modeli oluşturulup dağıtıldığında, modelinize yönelik benzersiz bir uç nokta alırsınız. Uygulamalarınızdaki seslendirmeyi kullanmak için, uç noktasını HTTP istekleriniz içinde belirtmeniz gerekir. Metin Okuma hizmeti için REST API kullanılabilen işlevler, Özel uç noktanız için kullanılabilir. [Özel uç noktanızı oluşturma ve kullanma](https://docs.microsoft.com/azure/cognitive-services/speech-service/how-to-customize-voice-font#create-and-use-a-custom-voice-endpoint)hakkında bilgi edinin.
 
-**S: Verilerimi kendi özel sesli modelleri oluşturmak için eğitim verileri hazırlamanız gerekiyor mu?**
+**S: kendi kendinize özel ses modelleri oluşturmak için eğitim verilerini hazırlıyorum mıyım?**
 
-**A**: Evet, eğitim verileri kendiniz için bir özel sesli modeli hazırlamanız gerekir.
+Y **: Evet**, eğitim verilerini özel bir ses modeli için hazırlamanız gerekir.
 
-Konuşma verilerinin bir koleksiyonunu özelleştirilmiş sesli modeli oluşturmak için gereklidir. Bu koleksiyon, bir dizi konuşma kayıtlarını ses dosyalarının ve her ses dosyasının transkripsiyonu, metin dosyası oluşur. Dijital sesinizi sonucunu yoğun eğitim verilerinizi kaliteye kullanır. İyi bir metin okuma ses üretmek için bir yüksek kaliteli ayakta Mikrofon Sessiz bir odada kayıtları yapılan önemlidir. Tutarlı bir birim oranı konuşma ve aralık ve konuşma ifadesel veren davranışların bile tutarlılık gibi harika bir dijital ses oluşturmak için gereklidir. Ses kaydı Studio'da kaydı önemle öneririz.
+Özelleştirilmiş bir ses modeli oluşturmak için bir konuşma verileri koleksiyonu gerekir. Bu koleksiyon, konuşma kayıtlarının ses dosyalarından bir kümesinden ve her ses dosyasının dökümünden oluşan bir metin dosyasına sahiptir. Dijital sesinizin sonucu eğitim verilerinizin kalitesinden büyük ölçüde yararlanır. İyi bir metin okuma sesi oluşturmak için, kayıtların yüksek kaliteli, duran bir mikrofonla sessiz bir odada yapılması önemlidir. Mükemmel bir dijital ses oluşturmak için tutarlı bir birim, konuşma hızı ve konuşma sıklığı, hatta büyük bir deyişle, önemli bir dijital ses oluşturmak için önemlidir. Bir kayıt Studio 'ya seslerin kaydedilmesini kesinlikle öneririz.
 
-Şu anda, biz çevrimiçi kaydı desteklemek veya kayıt studio önerisi sahip kullanmayın. Biçim gereksinim için bkz: [kayıtları ve dökümler hazırlama](https://docs.microsoft.com/azure/cognitive-services/speech-service/how-to-custom-voice-create-voice).
+Şu anda çevrimiçi kayıt desteği sağlamayız veya herhangi bir kayıt Studio önerisi sunuyoruz. Biçim gereksinimi için bkz. [kayıtları hazırlama ve dökümü](https://docs.microsoft.com/azure/cognitive-services/speech-service/how-to-custom-voice-create-voice)oluşturma.
 
-**S: Özel bir üslup eğitimi konuşma verilerini kaydetmek için hangi betikleri kullanmalıyım?**
+**S: özel ses eğitimine yönelik konuşma verilerini kaydetmek için hangi betikleri kullanmalıyım?**
 
-**A**: Ses kaydı için komut dosyalarını sınırlandırırız yok. Konuşma kaydetmek için kendi betiklerini kullanabilirsiniz. Yalnızca konuşma verilerinizi yeterli fonetik kapsamı olduğundan emin olun. Özel ses eğitmek için küçük bir 50 farklı cümlelerden (yaklaşık konuşma 3-5 dakika) olabilecek konuşma veri hacmi ile başlayabilirsiniz. Daha fazla veri sağlarsanız, daha doğal sesinizi olacaktır. Kayıt (yaklaşık konuşma 3-4 saat) 2. 000'den fazla tümcelerin sağladığınızda tam ses tipi eğitmek başlatabilirsiniz. Yüksek kaliteli, tam ses almak için 6000'den fazla cümlelerden (yaklaşık konuşma 8-10 saat) kayıtlarını hazırlamanız gerekir.
+Y **: ses**kaydı için betikleri sınırlandırmıyoruz. Konuşmayı kaydetmek için kendi komut dosyalarınızı kullanabilirsiniz. Konuşma verilerinizde yeterli miktarda fonetik kapsama sahip olduğunuzdan emin olun. Özel bir sesi eğitebilmeniz için, 50 farklı cümleler (yaklaşık 3-5 dakikalık konuşma) olabilecek küçük bir konuşma verileri hacminde başlayabilirsiniz. Sağladığınız veriler daha fazla olduğunda sesinizin daha doğal olması gerekir. 2\.000 ' den fazla cümle (yaklaşık 3-4 saat konuşma) için kayıtlar sağladığınızda tam bir ses yazı tipi eğitmenize başlayabilirsiniz. Yüksek kaliteli, tam bir ses almak için 6.000 ' den fazla cümle (yaklaşık 8-10 saat konuşma) kayıtlarını hazırlamanız gerekir.
 
-Kayıt için betikler hazırlanmanıza yardımcı olması için ek hizmetler sağlarız. İlgili kişi [özel sesli müşteri desteği](mailto:customvoice@microsoft.com?subject=Inquiries%20about%20scripts%20generation%20for%20Custom%20Voice%20creation) sorgular için.
+Betikleri kayıt için hazırlamanıza yardımcı olacak ek hizmetler sağlıyoruz. Sorgular için [özel sesli müşteri desteğiyle](mailto:customvoice@microsoft.com?subject=Inquiries%20about%20scripts%20generation%20for%20Custom%20Voice%20creation) iletişim kurun.
 
-**S: Varsayılan değer veya Portalı'nda sunulan daha yüksek eşzamanlılık ne gerekiyor?**
+**S: varsayılan değerden daha yüksek eşzamanlılık mi yoksa portalda teklif mi gerekiyor?**
 
-**A**: Modelinizi 20 eş zamanlı istek artışlarla ölçeklendirme yapabilir. İlgili kişi [özel sesli müşteri desteği](mailto:customvoice@microsoft.com?subject=Inquiries%20about%20scripts%20generation%20for%20Custom%20Voice%20creation) için yüksek ölçeklendirme hakkında sorgular.
+Y **: modelinizi**20 eşzamanlı istek artışlarına göre ölçeklendirebilirsiniz. Daha yüksek ölçeklendirmeyle ilgili sorgular için [özel sesli müşteri desteğiyle](mailto:customvoice@microsoft.com?subject=Inquiries%20about%20scripts%20generation%20for%20Custom%20Voice%20creation) iletişim kurun.
 
-**S: Ben my modeli indirebilir ve yerel olarak çalıştırma?**
+**S: modelimi indirebilir ve yerel olarak çalıştırabilir miyim?**
 
-**A**: Modelleri indirilir ve yerel olarak yürütülür.
+Y **: modeller**yerel olarak indirilemez ve yürütülemez.
 
-**S: İsteklerim kısıtlanan?**
+**S: isteklerim kısıtlandı mı?**
 
-**A**: REST API istekleri 5 saniye başına 25 sınırlar. Ayrıntılar için sayfalarımızın bulunabilir [metin okuma](text-to-speech.md). 
+Y **: REST API**, istekleri 5 saniyede 25 ' e sınırlandırır. Ayrıntılar, [metin okuma](text-to-speech.md)sayfalarımızda bulunabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Sorun giderme](troubleshooting.md)
-* [Sürüm notları](releasenotes.md)
+- [Sorun giderme](troubleshooting.md)
+- [Sürüm notları](releasenotes.md)

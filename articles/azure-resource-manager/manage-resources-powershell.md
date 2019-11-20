@@ -1,36 +1,33 @@
 ---
-title: Azure PowerShell kullanarak Azure kaynaklarını yönetmek | Microsoft Docs
-description: Azure PowerShell ve Azure Resource Manager kaynaklarınızı yönetmek için kullanın.
-services: azure-resource-manager
-documentationcenter: ''
+title: Kaynakları yönetme-Azure PowerShell
+description: Kaynaklarınızı yönetmek için Azure PowerShell ve Azure Resource Manager kullanın. Kaynakların nasıl dağıtılacağını ve silineceğini gösterir.
 author: mumian
-ms.service: azure-resource-manager
 ms.topic: conceptual
 ms.date: 02/11/2019
 ms.author: jgao
-ms.openlocfilehash: 22224fba6a001fa424029caa60beb726a2775e26
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: d9714c90af326c34a64ac13b0d10e21fbe5469d4
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67206445"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74146521"
 ---
 # <a name="manage-azure-resources-by-using-azure-powershell"></a>Azure PowerShell kullanarak Azure kaynaklarını yönetme
 
-Azure PowerShell ile kullanma hakkında bilgi edinin [Azure Resource Manager](resource-group-overview.md) Azure kaynaklarınızı yönetmek için. Kaynak grupları yönetmek için bkz: [Azure PowerShell kullanarak yönetme Azure kaynak grupları](./manage-resource-groups-powershell.md).
+Azure kaynaklarınızı yönetmek için [Azure Resource Manager](resource-group-overview.md) Azure PowerShell nasıl kullanacağınızı öğrenin. Kaynak gruplarını yönetmek için bkz. [Azure PowerShell kullanarak Azure kaynak gruplarını yönetme](./manage-resource-groups-powershell.md).
 
 Kaynakları yönetme hakkında diğer makaleler:
 
-- [Azure portalını kullanarak Azure kaynaklarını yönetme](./manage-resources-portal.md)
-- [Azure CLI kullanarak Azure kaynaklarını yönetme](./manage-resources-cli.md)
+- [Azure portal kullanarak Azure kaynaklarını yönetme](./manage-resources-portal.md)
+- [Azure CLı kullanarak Azure kaynaklarını yönetme](./manage-resources-cli.md)
 
 ## <a name="deploy-resources-to-an-existing-resource-group"></a>Kaynakları var olan bir kaynak grubuna dağıtma
 
-Azure PowerShell kullanarak doğrudan Azure kaynaklarını dağıtın veya Azure kaynakları oluşturmak için Resource Manager şablonu dağıtın.
+Azure kaynaklarını Azure PowerShell kullanarak doğrudan dağıtabilir veya Azure kaynakları oluşturmak için bir Kaynak Yöneticisi şablonu dağıtabilirsiniz.
 
-### <a name="deploy-a-resource"></a>Bir kaynak dağıtma
+### <a name="deploy-a-resource"></a>Kaynak dağıtma
 
-Aşağıdaki betik, bir depolama hesabı oluşturur.
+Aşağıdaki betik bir depolama hesabı oluşturur.
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -49,7 +46,7 @@ $ctx = $storageAccount.Context
 
 ### <a name="deploy-a-template"></a>Şablon dağıtma
 
-Aşağıdaki betik bir depolama hesabı oluşturmak için Hızlı Başlangıç şablonu dağıtın. Daha fazla bilgi için [hızlı başlangıç: Visual Studio Code kullanarak Azure Resource Manager şablonları oluşturma](./resource-manager-quickstart-create-templates-use-visual-studio-code.md?tabs=PowerShell).
+Aşağıdaki betik, bir depolama hesabı oluşturmak için hızlı başlangıç şablonu dağıt oluşturur. Daha fazla bilgi için bkz. [hızlı başlangıç: Visual Studio Code kullanarak Azure Resource Manager şablonları oluşturma](./resource-manager-quickstart-create-templates-use-visual-studio-code.md?tabs=PowerShell).
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -58,19 +55,19 @@ $templateUri = "https://raw.githubusercontent.com/Azure/azure-quickstart-templat
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateUri -Location $location
 ```
 
-Daha fazla bilgi için [kaynakları Resource Manager şablonları ve Azure PowerShell ile dağıtma](./resource-group-template-deploy.md).
+Daha fazla bilgi için bkz. [Kaynak Yöneticisi şablonları ve Azure PowerShell ile kaynak dağıtma](./resource-group-template-deploy.md).
 
-## <a name="deploy-a-resource-group-and-resources"></a>Bir kaynak grubu ve kaynakları dağıtma
+## <a name="deploy-a-resource-group-and-resources"></a>Kaynak grubu ve kaynakları dağıtma
 
-Bir kaynak grubu oluşturun ve kaynak grubuna dağıtın. Daha fazla bilgi için [kaynak grubu oluşturun ve kaynakları dağıtma](./deploy-to-subscription.md#create-resource-group-and-deploy-resources).
+Bir kaynak grubu oluşturabilir ve gruba kaynak dağıtabilirsiniz. Daha fazla bilgi için bkz. [kaynak grubu oluşturma ve kaynakları dağıtma](./deploy-to-subscription.md#resource-group-and-resources).
 
-## <a name="deploy-resources-to-multiple-subscriptions-or-resource-groups"></a>Birden çok abonelik veya kaynak grupları, kaynakları dağıtma
+## <a name="deploy-resources-to-multiple-subscriptions-or-resource-groups"></a>Kaynakları birden çok aboneliğe veya kaynak grubuna dağıtma
 
-Genellikle, tüm kaynakları tek bir kaynak grubu için şablonunuzdaki dağıtın. Ancak, bir kaynak kümesini birlikte dağıtmak ancak farklı kaynak gruplarında ya da abonelik yerleştirmek istediğiniz senaryolar da vardır. Daha fazla bilgi için [birden çok abonelik veya kaynak grupları dağıtma Azure kaynaklarına](./resource-manager-cross-resource-group-deployment.md).
+Genellikle, şablonunuzda bulunan tüm kaynakları tek bir kaynak grubuna dağıtırsınız. Ancak, bir kaynak kümesini birlikte dağıtmak ve bunları farklı kaynak gruplarına veya aboneliklerine yerleştirmek istediğiniz senaryolar vardır. Daha fazla bilgi için bkz. [Azure kaynaklarını birden çok aboneliğe veya kaynak grubuna dağıtma](./resource-manager-cross-resource-group-deployment.md).
 
 ## <a name="delete-resources"></a>Kaynakları silme
 
-Aşağıdaki komut dosyası, bir depolama hesabını silme işlemi gösterilmektedir.
+Aşağıdaki betik bir depolama hesabının nasıl silineceğini gösterir.
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -79,11 +76,11 @@ $storageAccountName = Read-Host -Prompt "Enter the storage account name"
 Remove-AzStorageAccount -ResourceGroupName $resourceGroupName -AccountName $storageAccountName
 ```
 
-Azure Resource Manager kaynakların silinmesini nasıl siparişler hakkında daha fazla bilgi için bkz. [Azure Resource Manager kaynak grubu silme işlemi](./resource-group-delete.md).
+Kaynakların silinmesini Azure Resource Manager nasıl sipariş Azure Resource Manager hakkında daha fazla bilgi için bkz. [kaynak grubu silme](./resource-group-delete.md).
 
 ## <a name="move-resources"></a>Kaynakları taşıma
 
-Aşağıdaki betik, bir depolama hesabı, başka bir kaynak grubu için bir kaynak grubundan kaldırmak gösterilmektedir.
+Aşağıdaki betik, bir depolama hesabının bir kaynak grubundan başka bir kaynak grubuna nasıl kaldırılacağını gösterir.
 
 ```azurepowershell-interactive
 $srcResourceGroupName = Read-Host -Prompt "Enter the source Resource Group name"
@@ -98,9 +95,9 @@ Daha fazla bilgi için bkz. [Kaynakları yeni kaynak grubuna veya aboneliğe ta�
 
 ## <a name="lock-resources"></a>Kaynakları kilitleme
 
-Kilitleme yanlışlıkla Azure aboneliği, kaynak grubu ya da kaynağa gibi kritik kaynakları silmesini veya kuruluşunuzdaki diğer kullanıcılar engeller. 
+Kilitleme, kuruluşunuzdaki diğer kullanıcıların Azure aboneliği, kaynak grubu veya kaynak gibi önemli kaynakları yanlışlıkla silmesini veya değiştirmelerini engeller. 
 
-Hesabı tarafından silindiği için aşağıdaki betiği bir depolama hesabı kilitler.
+Aşağıdaki betik, bir depolama hesabını kilitleyerek hesabın silinememesi sağlanır.
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -109,7 +106,7 @@ $storageAccountName = Read-Host -Prompt "Enter the storage account name"
 New-AzResourceLock -LockName LockStorage -LockLevel CanNotDelete -ResourceGroupName $resourceGroupName -ResourceName $storageAccountName -ResourceType Microsoft.Storage/storageAccounts 
 ```
 
-Aşağıdaki betik, bir depolama hesabı için tüm kilitleri alır:
+Aşağıdaki betik bir depolama hesabı için tüm kilitleri alır:
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -118,7 +115,7 @@ $storageAccountName = Read-Host -Prompt "Enter the storage account name"
 Get-AzResourceLock -ResourceGroupName $resourceGroupName -ResourceName $storageAccountName -ResourceType Microsoft.Storage/storageAccounts
 ```
 
-Aşağıdaki betiği bir kilit depolama hesabını siler:
+Aşağıdaki betik bir depolama hesabının bir kilidini siler:
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -132,15 +129,15 @@ Daha fazla bilgi için bkz. [Azure Resource Manager ile kaynakları kilitleme](r
 
 ## <a name="tag-resources"></a>Kaynakları etiketleme
 
-Kaynak grubu ve kaynakları mantıksal olarak düzenlemek etiketleme yardımcı olur. Bilgi için [etiketleri kullanarak Azure kaynaklarınızı düzenleme](./resource-group-using-tags.md#powershell).
+Etiketleme, kaynak grubunuzun ve kaynaklarınızın mantıksal olarak düzenlenmesine yardımcı olur. Daha fazla bilgi için bkz. [Azure kaynaklarınızı düzenlemek için etiketleri kullanma](./resource-group-using-tags.md#powershell).
 
 ## <a name="manage-access-to-resources"></a>Kaynaklara erişimi yönetme
 
-[Rol tabanlı erişim denetimi (RBAC)](../role-based-access-control/overview.md), Azure'daki kaynaklara erişimi yönetmek için kullanılan sistemdir. Daha fazla bilgi için [RBAC ve Azure PowerShell kullanarak erişimini yönetme](../role-based-access-control/role-assignments-powershell.md).
+[Rol tabanlı erişim denetimi (RBAC)](../role-based-access-control/overview.md), Azure'daki kaynaklara erişimi yönetmek için kullanılan sistemdir. Daha fazla bilgi için bkz. [RBAC ve Azure PowerShell kullanarak erişimi yönetme](../role-based-access-control/role-assignments-powershell.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure Resource Manager bilgi edinmek için [Azure Resource Manager'a genel bakış](./resource-group-overview.md).
-- Resource Manager şablon söz dizimi bilgi edinmek için [yapısını ve Azure Resource Manager şablonları söz dizimini anlamak](./resource-group-authoring-templates.md).
-- Şablonları geliştirme hakkında bilgi edinmek için [adım adım öğreticiler](/azure/azure-resource-manager/).
-- Azure Resource Manager Şablon Şemaları görüntülemek için bkz: [şablon başvurusu](/azure/templates/).
+- Azure Resource Manager öğrenmek için bkz. [Azure Resource Manager genel bakış](./resource-group-overview.md).
+- Kaynak Yöneticisi Şablon sözdizimini öğrenmek için bkz. [Azure Resource Manager şablonlarının yapısını ve sözdizimini anlayın](./resource-group-authoring-templates.md).
+- Şablon geliştirmeyi öğrenmek için [adım adım öğreticiler](/azure/azure-resource-manager/)bölümüne bakın.
+- Azure Resource Manager şablonu şemalarını görüntülemek için bkz. [şablon başvurusu](/azure/templates/).

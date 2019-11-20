@@ -1,32 +1,32 @@
 ---
-title: Azure Kubernetes Service (AKS) kümesini ölçeklendirme
-description: Bir Azure Kubernetes Service (AKS) kümedeki düğüm sayısını ölçeklendirmeyi öğrenin.
+title: Azure Kubernetes hizmeti (AKS) kümesini ölçeklendirme
+description: Azure Kubernetes Service (AKS) kümesindeki düğümlerin sayısını ölçeklendirmeyi öğrenin.
 services: container-service
 author: iainfoulds
 ms.service: container-service
 ms.topic: article
 ms.date: 05/31/2019
-ms.author: iainfoulds
-ms.openlocfilehash: de3f8613c93715aecf7e9e066a8ad1d82e4379e3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: iainfou
+ms.openlocfilehash: 719f45aeeb5c7aa7e9b5e597ed461808c9d2b005
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66475138"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73472594"
 ---
-# <a name="scale-the-node-count-in-an-azure-kubernetes-service-aks-cluster"></a>Bir Azure Kubernetes Service (AKS) kümedeki düğüm sayısını ölçekleyin
+# <a name="scale-the-node-count-in-an-azure-kubernetes-service-aks-cluster"></a>Azure Kubernetes Service (AKS) kümesindeki düğüm sayısını ölçeklendirme
 
-Kaynak, gerekiyorsa uygulamalarınızı değiştirmek için farklı sayıda düğüm çalıştırmak için bir AKS kümesi elle ölçeklendirebilirsiniz. Ölçeği Azalt düğümleri dikkatli bir şekilde konusunda [kordonlanır ve boşaltılır] [ kubernetes-drain] çalışan uygulamaların kesintiye en aza indirmek için. Ölçeği artırma, AKS düğümleri işaretlenene kadar bekler `Ready` pod'ları üzerinde zamanlanmış önce Kubernetes kümesi tarafından.
+Uygulamalarınızın kaynağı değişiklik içeriyorsa, bir AKS kümesini farklı sayıda düğüm çalıştıracak şekilde el ile ölçeklendirebilirsiniz. Ölçeği azaltmak için düğümler, çalışan uygulamaların kesintiye uğratılmasını en aza indirmek için dikkatle [ve drenapaştırlanır][kubernetes-drain] . Ölçeği artırma sırasında, AKS 'ler, düğümler üzerinde zamanlanmadan önce Kubernetes kümesi tarafından `Ready` işaretlenene kadar bekler.
 
 ## <a name="scale-the-cluster-nodes"></a>Küme düğümlerini ölçeklendirme
 
-İlk olarak, alın *adı* düğüm havuzu kullanmanın [az aks show] [ az-aks-show] komutu. Aşağıdaki örnekte adlı Küme için düğüm havuzu adı alır *myAKSCluster* içinde *myResourceGroup* kaynak grubu:
+İlk olarak, [az aks Show][az-aks-show] komutunu kullanarak düğüm havuzunuzun *adını* alın. Aşağıdaki örnek, *Myresourcegroup* kaynak grubundaki *Myakscluster* adlı küme için düğüm havuzu adını alır:
 
 ```azurecli-interactive
 az aks show --resource-group myResourceGroup --name myAKSCluster --query agentPoolProfiles
 ```
 
-Aşağıdaki örnek çıktı gösterilmektedir *adı* olduğu *nodepool1*:
+Aşağıdaki örnek çıktı, *adının* *nodepool1*olduğunu gösterir:
 
 ```console
 $ az aks show --resource-group myResourceGroup --name myAKSCluster --query agentPoolProfiles
@@ -44,13 +44,13 @@ $ az aks show --resource-group myResourceGroup --name myAKSCluster --query agent
 ]
 ```
 
-Kullanım [az aks ölçek] [ az-aks-scale] küme düğümlerini ölçeklendirmek için komutu. Aşağıdaki örnekte adlı bir küme ölçeklendirir *myAKSCluster* tek bir düğüm. Kendi sağlamak *--nodepool adı* önceki komuttan gibi *nodepool1*:
+Küme düğümlerini ölçeklendirmek için [az aks Scale][az-aks-scale] komutunu kullanın. Aşağıdaki örnek, *Myakscluster* adlı bir kümeyi tek bir düğüme ölçeklendirir. *Nodepool1*gibi önceki komuttan kendi *--nodepool-adınızı* sağlayın:
 
 ```azurecli-interactive
 az aks scale --resource-group myResourceGroup --name myAKSCluster --node-count 1 --nodepool-name <your node pool name>
 ```
 
-Aşağıdaki örnek çıktıda kümenin bir düğümü için başarıyla Ölçeklendirildi gösterildiği gösterir *agentPoolProfiles* bölümü:
+Aşağıdaki örnek çıktı, *Agentpoolprofiles* bölümünde gösterildiği gibi, kümenin tek bir düğüme başarıyla ölçeklendirildi olduğunu gösterir:
 
 ```json
 {
@@ -74,7 +74,7 @@ Aşağıdaki örnek çıktıda kümenin bir düğümü için başarıyla Ölçek
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, el ile bir AKS kümesi artırmak veya düğüm sayısını azaltmak için ölçeği. Ayrıca [ölçeklendiriciyi küme] [ cluster-autoscaler] (şu anda önizlemede AKS) kümenizi otomatik olarak ölçeklendirmek için.
+Bu makalede, düğüm sayısını artırmak veya azaltmak için bir AKS kümesini el ile ölçeklendirmeniz gerekir. Kümenizi otomatik olarak ölçeklendirmek için [cluster otomatik Scaler öğesini][cluster-autoscaler] de kullanabilirsiniz.
 
 <!-- LINKS - external -->
 [kubernetes-drain]: https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/

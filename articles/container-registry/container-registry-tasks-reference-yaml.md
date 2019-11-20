@@ -1,46 +1,47 @@
 ---
-title: Azure kapsayıcı kayıt defteri görevleri başvurusu - YAML
-description: ACR görev özellikleri, adım türleri, adım özellikleri ve yerleşik değişkenler dahil olmak üzere görev için YAML içinde görevleri tanımlama için başvuru.
+title: Azure Container Registry görevleri başvurusu-YAML
+description: Görev özellikleri, adım türleri, adım özellikleri ve yerleşik değişkenler de dahil olmak üzere ACR görevleri için YAML görevlerini tanımlamaya yönelik başvuru.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: article
-ms.date: 03/28/2019
+ms.date: 10/23/2019
 ms.author: danlep
-ms.openlocfilehash: bdf88657c11bdb5ab5bcde97c155780328065c7e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6e55b65d58fe6545d8212b4233f2f45261d18ee5
+ms.sourcegitcommit: 38251963cf3b8c9373929e071b50fd9049942b37
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65954461"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73043876"
 ---
 # <a name="acr-tasks-reference-yaml"></a>ACR görevleri başvurusu: YAML
 
-Çok adımlı görev tanımı ACR görevleri oluşturmaya, sınamaya ve kapsayıcıları düzeltme eki uygulama üzerinde odaklanmış bir kapsayıcı merkezli işlem temel sağlar. Bu makale, komutlar, Parametreler, özellikleri ve, çok adımlı görevler tanımlayın YAML dosyalar için söz dizimi kapsar.
+ACR görevlerinde çok adımlı görev tanımı, kapsayıcıları oluşturmaya, teste ve düzeltme eki uygulamaya odaklanan kapsayıcı merkezli bir işlem temel alanı sağlar. Bu makalede, çok adımlı görevlerinizi tanımlayan YAML dosyalarının komutları, parametreleri, özellikleri ve söz dizimi ele alınmaktadır.
 
-Bu makale, çok adımlı görev ACR görev için YAML dosyaları oluşturmak için başvuru içerir. ACR görevleri giriş isterseniz bkz [ACR görevlere genel bakış](container-registry-tasks-overview.md).
+Bu makale, ACR görevleri için çok adımlı görev YAML dosyaları oluşturmak için başvuru içerir. ACR görevlerine giriş istiyorsanız [ACR görevlerine genel bakış ' a](container-registry-tasks-overview.md)bakın.
 
-## <a name="acr-taskyaml-file-format"></a>ACR task.yaml dosya biçimi
+## <a name="acr-taskyaml-file-format"></a>ACR-Task. YAML dosya biçimi
 
-ACR görevleri çok adımlı görev bildirimi standart YAML sözdizimini destekler. Bir YAML dosyası içinde bir görevin adımları tanımlarsınız. Ardından görev el ile dosyaya geçirerek çalıştırabilirsiniz [çalıştırma az acr] [ az-acr-run] komutu. Veya, bir görev oluşturmak için bu dosyayı kullanın [az acr görev oluşturma] [ az-acr-task-create] , tetiklenir otomatik olarak bir Git commit veya temel görüntü güncelleştirme. Bu makalede başvuruyor ancak `acr-task.yaml` adımları içeren dosya geçerli bir dosya ile ACR görevleri destekleyen bir [uzantı desteklenen](#supported-task-filename-extensions).
+ACR görevleri standart YAML sözdiziminde çok adımlı görev bildirimini destekler. Bir YAML dosyasında bir görevin adımlarını tanımlarsınız. Daha sonra dosyayı [az ACR Run][az-acr-run] komutuna geçirerek görevi el ile çalıştırabilirsiniz. Ya da bir git işlemesinde veya temel görüntü güncelleştirmesinde otomatik olarak tetiklenen [az ACR görev oluşturma][az-acr-task-create] ile bir görev oluşturmak için dosyasını kullanın. Bu makale, adımları içeren dosya olarak `acr-task.yaml` anlamına gelse de, ACR görevleri [desteklenen bir uzantıya](#supported-task-filename-extensions)sahip tüm geçerli dosya adını destekler.
 
-Üst düzey `acr-task.yaml` ilkelleri olan **görev özellikleri**, **adım türleri**, ve **adım özellikleri**:
+En üst düzey `acr-task.yaml` temel elemanlar **görev özellikleri**, **adım türleri**ve **adım özelliklerdir**:
 
-* [Görev Özellikleri](#task-properties) tüm adımları görev yürütme boyunca geçerlidir. Dahil olmak üzere çeşitli genel görev özellikleri vardır:
+* Görev [özellikleri](#task-properties) , görev yürütme boyunca tüm adımlara uygulanır. Aşağıdakiler dahil olmak üzere birkaç genel görev özelliği vardır:
   * `version`
   * `stepTimeout`
   * `workingDirectory`
-* [Görev Adım türleri](#task-step-types) görevde gerçekleştirilebilecek eylemler türlerini temsil eder. Üç adım vardır:
+* [Görev adımı türleri](#task-step-types) , bir görevde gerçekleştirilebilecek eylem türlerini temsil eder. Üç adım türü vardır:
   * `build`
   * `push`
   * `cmd`
-* [Adım özellikleri görev](#task-step-properties) tek bir adımı için geçerli parametreler. Birkaç adım özellikleri vardır:
+* [Görev adımı özellikleri](#task-step-properties) , tek bir adıma uygulanan parametrelerdir. Aşağıdakiler dahil olmak üzere birkaç adım özelliği vardır:
   * `startDelay`
   * `timeout`
   * `when`
-  * .. .ve çok daha fazlası.
+  * ... ve çok daha fazlası.
 
-Temel biçimi bir `acr-task.yaml` bazı ortak adım özellikleri dahil olmak üzere, dosya izler. Bir ayrıntılı gösterimini değil tüm kullanılabilir adım özellikleri veya adım türü kullanımı sırasında temel dosya biçimi hızlı bir genel bakış sağlar.
+Bazı yaygın adım özellikleri de dahil olmak üzere bir `acr-task.yaml` dosyasının temel biçimi aşağıdaki gibidir. Tüm kullanılabilir adım özelliklerinin veya adım türü kullanımının ayrıntılı bir gösterimi olmasa da temel dosya biçimine hızlı bir genel bakış sağlar.
 
 ```yml
 version: # acr-task.yaml format version.
@@ -55,122 +56,122 @@ steps: # A collection of image or container actions.
 
 ### <a name="supported-task-filename-extensions"></a>Desteklenen görev dosya adı uzantıları
 
-ACR görevler gibi çeşitli dosya adı uzantıları ayrılmış `.yaml`, bir görev dosyası olarak işleyecek. Uzantıyı *değil* aşağıdaki listede, bir Dockerfile olarak ACR görevler tarafından kabul edilir: .yaml .yml, .toml, .json, .sh, .bash, .zsh, .ps1, .ps, .cmd, .bat, .ts, .js, .php, .py, .rb, .lua
+ACR görevleri, `.yaml`dahil olmak üzere birkaç dosya adı uzantısını ayırmıştır ve bu işlem bir görev dosyası olarak işlem görür. Aşağıdaki listede *olmayan* herhangi bir uzantı, ACR görevlerinin bir Dockerfile olarak değerlendirilir:. YAML,. yml,. TOML,. JSON,. sh,. Bash,. ZSH,. ps1,. PS,. cmd,. bat,. TS,. js,. php,.,. RB,. lua
 
-YAML, ACR görevler tarafından şu anda desteklenen tek dosya biçimidir. Bir dosya adı uzantıları, olası gelecek destek için ayrılmıştır.
+YAML, şu anda ACR görevleri tarafından desteklenen tek dosya biçimidir. Diğer dosya adı uzantıları olası gelecekteki destek için ayrılmıştır.
 
 ## <a name="run-the-sample-tasks"></a>Örnek görevleri çalıştırma
 
-Aşağıdaki bölümlerde, bu makalenin başvurulan birkaç örnek görev dosyası vardır. Genel bir GitHub deposunda örnek görevleridir [Azure-Samples/acr-görevleri][acr-tasks]. Azure CLI komutuyla çalıştırabilirsiniz [çalıştırma az acr][az-acr-run]. Örnek komutlar için benzerdir:
+Bu makalenin aşağıdaki bölümlerinde başvurulan birkaç örnek görev dosyası vardır. Örnek görevler ortak bir GitHub deposunda, [Azure-Samples/ACR-Tasks][acr-tasks]' dadır. Bunları, [az ACR Run][az-acr-run]Azure CLI komutuyla çalıştırabilirsiniz. Örnek komutlar şuna benzerdir:
 
 ```azurecli
 az acr run -f build-push-hello-world.yaml https://github.com/Azure-Samples/acr-tasks.git
 ```
 
-Örnek komutlar biçimlendirme, yapılandırdığınız bir varsayılan kayıt defterine Azure CLI, bunlar atlamak için varsayar `--registry` parametresi. Varsayılan kayıt defteri yapılandırmak için kullanın [az yapılandırma] [ az-configure] komutunu `--defaults` parametresini kabul eden bir `acr=REGISTRY_NAME` değeri.
+Örnek komutların biçimlendirmesi, Azure CLı 'de varsayılan bir kayıt defteri yapılandırdığınız varsayılmaktadır, bu nedenle `--registry` parametresini atlarlar. Varsayılan bir kayıt defteri yapılandırmak için, [az configure][az-configure] komutunu bir `acr=REGISTRY_NAME` değeri kabul eden `--defaults` parametresiyle kullanın.
 
-Örneğin, "myregistry" adlı varsayılan kayıt defteri ile Azure CLI'yı yapılandırmak için:
+Örneğin, Azure CLı 'yı "myregistry" adlı varsayılan bir kayıt defteriyle yapılandırmak için:
 
 ```azurecli
 az configure --defaults acr=myregistry
 ```
 
-## <a name="task-properties"></a>Görev Özellikleri
+## <a name="task-properties"></a>Görev özellikleri
 
-Görev özellikleri genellikle üst kısmında görünür bir `acr-task.yaml` dosyasını bulun ve tam yürütülmesini görev adımları uygulanan genel özellikler. Bu genel özelliklerin bazıları içinde tek bir adımı kılınabilir.
+Görev özellikleri genellikle `acr-task.yaml` bir dosyanın en üstünde görünür ve görev adımlarının tam yürütülmesi boyunca uygulanan genel özelliklerdir. Bu genel özelliklerden bazıları, tek bir adım içinde geçersiz kılınabilir.
 
-| Özellik | Tür | İsteğe bağlı | Açıklama | Desteklenen bir geçersiz kılma | Varsayılan değer |
+| Özellik | Tür | İsteğe Bağlı | Açıklama | Geçersiz kılma destekleniyor | Varsayılan değer |
 | -------- | ---- | -------- | ----------- | ------------------ | ------------- |
-| `version` | string | Evet | Sürümü `acr-task.yaml` ACR görevleri hizmeti tarafından ayrıştırılan gibi dosya. Geriye dönük uyumluluğu korumak ACR görevleri içindedir, ancak bu değer, ACR içinde tanımlı bir sürüm uyumluluğu korumak için görevleri sağlar. En son sürüme belirtilmemişse, varsayılan olarak. | Hayır | None |
-| `stepTimeout` | int (saniye) | Evet | Bir adım çalıştırabilirsiniz saniye sayısı. Özelliği bir görevde belirtilmezse, varsayılan ayarlar `timeout` tüm adımları özelliğidir. Varsa `timeout` özelliği belirtilen bir adımında, görev tarafından sağlanan özelliğini geçersiz kılar. | Evet | 600 (10 dakika) |
-| `workingDirectory` | string | Evet | Kapsayıcı çalışma zamanı sırasında çalışma dizini. Özelliği bir görevde belirtilmezse, varsayılan ayarlar `workingDirectory` tüm adımları özelliğidir. Bir adımı belirtilmişse, görev tarafından sağlanan özelliğini geçersiz kılar. | Evet | `$HOME` |
-| `env` | [dize, dize,...] | Evet |  Dizeler dizisi `key=value` görev için ortam değişkenlerini biçimi. Özelliği bir görevde belirtilmezse, varsayılan ayarlar `env` tüm adımları özelliğidir. Bir adımı belirtilmişse görevden devralınır tüm ortam değişkenlerini geçersiz kılar. | None |
-| `secrets` | [gizli anahtar, gizli,...] | Evet | Dizi [gizli](#secret) nesneleri. | None |
-| `networks` | [ağ, ağ,...] | Evet | Dizi [ağ](#network) nesneleri. | None |
+| `version` | string | Yes | ACR görevler hizmeti tarafından ayrıştırılabilen `acr-task.yaml` dosyanın sürümü. ACR görevleri geriye dönük uyumluluğu sürdürmeye devam ederken, bu değer ACR görevlerinin tanımlı bir sürüm içinde uyumluluğu korumasına olanak tanır. Belirtilmemişse, varsayılan olarak en son sürümü alır. | Hayır | Hiçbiri |
+| `stepTimeout` | int (saniye) | Yes | Bir adımın çalıştırılacağı en fazla saniye sayısı. Özellik bir görevde belirtilmişse, tüm adımların varsayılan `timeout` özelliğini ayarlar. `timeout` özelliği bir adımda belirtilmişse, görev tarafından sunulan özelliği geçersiz kılar. | Yes | 600 (10 dakika) |
+| `workingDirectory` | string | Yes | Çalışma zamanı sırasında kapsayıcının çalışma dizini. Özellik bir görevde belirtilmişse, tüm adımların varsayılan `workingDirectory` özelliğini ayarlar. Bir adımda belirtilmişse, görev tarafından sunulan özelliği geçersiz kılar. | Yes | `$HOME` |
+| `env` | [dize, dize,...] | Yes |  Görevin ortam değişkenlerini tanımlayan `key=value` biçimdeki dizeler dizisi. Özellik bir görevde belirtilmişse, tüm adımların varsayılan `env` özelliğini ayarlar. Bir adımda belirtilmişse, görevden devralınan tüm ortam değişkenlerini geçersiz kılar. | Hiçbiri |
+| `secrets` | [gizli, gizli,...] | Yes | [Gizli](#secret) nesneler dizisi. | Hiçbiri |
+| `networks` | [Ağ, ağ,...] | Yes | [Ağ](#network) nesneleri dizisi. | Hiçbiri |
 
-### <a name="secret"></a>secret
+### <a name="secret"></a>gizli dizi
 
-Gizli dizi nesnesi, aşağıdaki özelliklere sahiptir.
+Gizli nesne aşağıdaki özelliklere sahiptir.
 
-| Özellik | Tür | İsteğe bağlı | Açıklama | Varsayılan değer |
+| Özellik | Tür | İsteğe Bağlı | Açıklama | Varsayılan değer |
 | -------- | ---- | -------- | ----------- | ------- |
-| `id` | string | Hayır | Gizli dizi tanımlayıcısı. | None |
-| `keyvault` | string | Evet | Azure Key Vault gizli URL'si. | None |
-| `clientID` | string | Evet | Kullanıcı tarafından atanan istemci kimliği yönetilen Azure kaynakları için kimliği. | None |
+| `id` | string | Hayır | Gizli dizi tanımlayıcısı. | Hiçbiri |
+| `keyvault` | string | Yes | Azure Key Vault gizli URL 'SI. | Hiçbiri |
+| `clientID` | string | Yes | Azure kaynakları için [Kullanıcı tarafından atanan yönetilen kimliğin](container-registry-tasks-authentication-managed-identity.md) istemci kimliği. | Hiçbiri |
 
-### <a name="network"></a>Ağ
+### <a name="network"></a>Network
 
-Ağ nesnesini aşağıdaki özelliklere sahiptir.
+Ağ nesnesi aşağıdaki özelliklere sahiptir.
 
-| Özellik | Tür | İsteğe bağlı | Açıklama | Varsayılan değer |
+| Özellik | Tür | İsteğe Bağlı | Açıklama | Varsayılan değer |
 | -------- | ---- | -------- | ----------- | ------- | 
-| `name` | string | Hayır | Ağ adı. | None |
-| `driver` | string | Evet | Ağı yönetmek için sürücü. | None |
-| `ipv6` | bool | Evet | IPv6 ağ etkinleştirilip etkinleştirilmediği. | `false` |
-| `skipCreation` | bool | Evet | Ağ oluşturma atlanmayacağını belirtir. | `false` |
-| `isDefault` | bool | Evet | Azure Container Registry ile sağlanan varsayılan bir ağ ağ olup | `false` |
+| `name` | string | Hayır | Ağın adı. | Hiçbiri |
+| `driver` | string | Yes | Ağı yönetmek için sürücü. | Hiçbiri |
+| `ipv6` | bool | Yes | IPv6 ağ oluşturma özelliğinin etkin olup olmadığı. | `false` |
+| `skipCreation` | bool | Yes | Ağ oluşturma atlanıp atlanmayacağı. | `false` |
+| `isDefault` | bool | Yes | Ağın Azure Container Registry ile belirtilen bir varsayılan ağ olup olmadığı | `false` |
 
-## <a name="task-step-types"></a>Görev Adım türü
+## <a name="task-step-types"></a>Görev adımı türleri
 
-ACR görevleri üç adım türlerini destekler. Her adım türü bölümünde her bir adım türü için ayrıntılı çeşitli özelliklerini destekler.
+ACR görevleri üç adım türünü destekler. Her adım türü, her adım türü için bölümünde ayrıntılı olarak açıklanan birkaç özelliği destekler.
 
 | Adım türü | Açıklama |
 | --------- | ----------- |
-| [`build`](#build) | Tanıdık kullanarak bir kapsayıcı görüntüsü derler `docker build` söz dizimi. |
-| [`push`](#push) | Yürüten bir `docker push` bir kapsayıcı kayıt defterine yeni oluşturulmuş veya retagged görüntüleri. Azure Container Registry, diğer özel kayıt defterlerini ve genel Docker Hub desteklenir. |
-| [`cmd`](#cmd) | Kapsayıcı parametrelere sahip bir komut olarak geçirilen kapsayıcının çalışır `[ENTRYPOINT]`. `cmd` Adım türü gibi parametrelerin destekler `env`, `detach`ve diğer tanıdık `docker run` komut, birim ve işlevsel test kapsayıcı eş zamanlı yürütme ile etkinleştirme seçenekleri. |
+| [`build`](#build) | Tanıdık `docker build` sözdizimini kullanarak bir kapsayıcı görüntüsü oluşturur. |
+| [`push`](#push) | Yeni oluşturulan veya retagged görüntülerinin bir kapsayıcı kayıt defterine `docker push` yürütür. Azure Container Registry, diğer özel kayıt defterleri ve genel Docker Hub desteklenir. |
+| [`cmd`](#cmd) | Kapsayıcının `[ENTRYPOINT]`geçirilen parametreleri içeren bir kapsayıcıyı komut olarak çalıştırır. `cmd` adım türü `env`, `detach`ve diğer tanıdık `docker run` komut seçenekleri gibi parametreleri destekler, eşzamanlı kapsayıcı yürütmesi ile birim ve işlevsel testi etkinleştirir. |
 
-## <a name="build"></a>Derleme
+## <a name="build"></a>Derlemeyi
 
-Bir kapsayıcı görüntüsü oluşturun. `build` Adım türünü temsil eder, çalışan çok kiracılı, güvenli bir çeşit `docker build` birinci sınıf bir temel olarak bulutta.
+Kapsayıcı görüntüsü oluşturun. `build` adım türü, bulutta ilk sınıf temel olarak `docker build` çalıştırmanın çok kiracılı ve güvenli bir şekilde temsil eder.
 
 ### <a name="syntax-build"></a>Sözdizimi: derleme
 
 ```yml
-version: v1.0.0
+version: v1.1.0
 steps:
   - [build]: -t [imageName]:[tag] -f [Dockerfile] [context]
     [property]: [value]
 ```
 
-`build` Adım türü parametreleri aşağıdaki tabloda destekler. `build` Adım türü de destekler, tüm derleme seçenekleri [docker derleme](https://docs.docker.com/engine/reference/commandline/build/) komutu gibi `--build-arg` derleme zamanı değişkenlerini ayarlamak için.
+`build` adımı türü aşağıdaki tablodaki parametreleri destekler. `build` Step Type, derleme zamanı değişkenlerini ayarlamak için `--build-arg` gibi [Docker Build](https://docs.docker.com/engine/reference/commandline/build/) komutunun tüm derleme seçeneklerini de destekler.
 
-| Parametre | Açıklama | İsteğe bağlı |
+| Parametre | Açıklama | İsteğe Bağlı |
 | --------- | ----------- | :-------: |
-| `-t` &#124; `--image` | Tam tanımlar `image:tag` yerleşik resmin.<br /><br />Tüm görüntüleri görüntüleri gibi işlevsel testler iç görev doğrulama için kullanılabilir olarak gerektiren `push` bir kayıt defterine. Ancak, bir görüntü içindeki görev yürütme örneği, görüntünün başvurmak için bir ad gerek yoktur.<br /><br />Aksine `az acr build`, ACR görevleri çalıştıran gönderme davranışı varsayılan sunmaz. ACR görevlerle varsayılan senaryoyu oluşturmak, doğrulamak ve görüntü gönderebilmeniz olanağı varsayar. Bkz: [anında iletme](#push) için isteğe bağlı olarak anında iletme yerleşik görüntüleri hakkında. | Evet |
-| `-f` &#124; `--file` | Geçirilen Dockerfile belirtir `docker build`. Belirtilmezse, varsayılan bağlamı kökünde Dockerfile varsayılır. Bir Dockerfile belirtmek için bağlam köküne dosya adı geçirin. | Evet |
-| `context` | Kök dizin geçirilen `docker build`. Her görev kök dizini ayarlamak için bir paylaşılan [workingDirectory](#task-step-properties)ve ilişkili Git kopyalanan dizininin kökü içerir. | Hayır |
+| `-t` &#124;`--image` | Oluşturulan görüntünün tam nitelikli `image:tag` tanımlar.<br /><br />Görüntü, işlevsel testler gibi iç görev doğrulamaları için kullanılabilir, tüm görüntülerin bir kayıt defterine `push` gerektirmez. Ancak, bir görev yürütme içindeki bir görüntüyü örnek olarak, görüntünün başvuru için bir adı olması gerekir.<br /><br />`az acr build`farklı olarak, ACR görevlerinin çalıştırılması varsayılan gönderme davranışını sağlamaz. ACR görevleri ile, varsayılan senaryo bir görüntüyü oluşturma, doğrulama ve gönderme özelliğini kabul eder. İsteğe bağlı olarak oluşturulan görüntüleri gönderme hakkında bilgi için bkz. [gönderim](#push) . | Yes |
+| `-f` &#124;`--file` | `docker build`geçirilen Dockerfile dosyasını belirtir. Belirtilmemişse, bağlam kökündeki varsayılan Dockerfile varsayılır. Bir Dockerfile belirtmek için, dosya adını bağlamın köküne göre geçirin. | Yes |
+| `context` | `docker build`öğesine geçirilen kök dizin. Her görevin kök dizini paylaşılan bir [WorkingDirectory](#task-step-properties)olarak ayarlanır ve ilişkili git klonlanmış dizinin kökünü içerir. | Hayır |
 
 ### <a name="properties-build"></a>Özellikler: derleme
 
-`build` Adım türü aşağıdaki özellikleri destekler. Bu özellikleri ayrıntılarını bulun [görev adım özellikleri](#task-step-properties) bu makalenin.
+`build` adımı türü aşağıdaki özellikleri destekler. Bu makalenin [görev adımı özellikleri](#task-step-properties) bölümünde bu özelliklerin ayrıntılarını bulun.
 
 | | | |
 | -------- | ---- | -------- |
-| `detach` | bool | İsteğe bağlı |
-| `disableWorkingDirectoryOverride` | bool | İsteğe bağlı |
-| `entryPoint` | string | İsteğe bağlı |
-| `env` | [dize, dize,...] | İsteğe bağlı |
-| `expose` | [dize, dize,...] | İsteğe bağlı |
-| `id` | string | İsteğe bağlı |
-| `ignoreErrors` | bool | İsteğe bağlı |
-| `isolation` | string | İsteğe bağlı |
-| `keep` | bool | İsteğe bağlı |
-| `network` | object | İsteğe bağlı |
-| `ports` | [dize, dize,...] | İsteğe bağlı |
-| `pull` | bool | İsteğe bağlı |
-| `repeat` | int | İsteğe bağlı |
-| `retries` | int | İsteğe bağlı |
-| `retryDelay` | int (saniye) | İsteğe bağlı |
-| `secret` | object | İsteğe bağlı |
-| `startDelay` | int (saniye) | İsteğe bağlı |
-| `timeout` | int (saniye) | İsteğe bağlı |
-| `when` | [dize, dize,...] | İsteğe bağlı |
-| `workingDirectory` | string | İsteğe bağlı |
+| `detach` | bool | İsteğe Bağlı |
+| `disableWorkingDirectoryOverride` | bool | İsteğe Bağlı |
+| `entryPoint` | string | İsteğe Bağlı |
+| `env` | [dize, dize,...] | İsteğe Bağlı |
+| `expose` | [dize, dize,...] | İsteğe Bağlı |
+| `id` | string | İsteğe Bağlı |
+| `ignoreErrors` | bool | İsteğe Bağlı |
+| `isolation` | string | İsteğe Bağlı |
+| `keep` | bool | İsteğe Bağlı |
+| `network` | object | İsteğe Bağlı |
+| `ports` | [dize, dize,...] | İsteğe Bağlı |
+| `pull` | bool | İsteğe Bağlı |
+| `repeat` | int | İsteğe Bağlı |
+| `retries` | int | İsteğe Bağlı |
+| `retryDelay` | int (saniye) | İsteğe Bağlı |
+| `secret` | object | İsteğe Bağlı |
+| `startDelay` | int (saniye) | İsteğe Bağlı |
+| `timeout` | int (saniye) | İsteğe Bağlı |
+| `when` | [dize, dize,...] | İsteğe Bağlı |
+| `workingDirectory` | string | İsteğe Bağlı |
 
-### <a name="examples-build"></a>Örnekler: oluşturma
+### <a name="examples-build"></a>Örnekler: derleme
 
-#### <a name="build-image---context-in-root"></a>Görüntü - kök bağlamda oluşturun
+#### <a name="build-image---context-in-root"></a>Derleme görüntüsü-kökte bağlam
 
 ```azurecli
 az acr run -f build-hello-world.yaml https://github.com/AzureCR/acr-tasks-sample.git
@@ -179,56 +180,56 @@ az acr run -f build-hello-world.yaml https://github.com/AzureCR/acr-tasks-sample
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/build-hello-world.yaml -->
 [!code-yml[task](~/acr-tasks/build-hello-world.yaml)]
 
-#### <a name="build-image---context-in-subdirectory"></a>Görüntü - alt bağlamda oluşturun
+#### <a name="build-image---context-in-subdirectory"></a>Alt dizinde derleme görüntüsü-bağlam
 
 ```yml
-version: v1.0.0
+version: v1.1.0
 steps:
-  - build: -t {{.Run.Registry}}/hello-world -f hello-world.dockerfile ./subDirectory
+  - build: -t $Registry/hello-world -f hello-world.dockerfile ./subDirectory
 ```
 
-## <a name="push"></a>anında iletme
+## <a name="push"></a>hareketle
 
-Bir anında iletme veya daha fazla yerleşik veya bir kapsayıcı kayıt defterine görüntü retagged. Azure Container Registry gibi özel kayıt defterleri için veya genel Docker hub'ına gönderme destekler.
+Bir veya daha fazla oluşturulmuş veya retagged görüntüsünü bir kapsayıcı kayıt defterine gönderin. Azure Container Registry veya genel Docker Hub 'ına gibi özel kayıt defterlerine göndermeyi destekler.
 
-### <a name="syntax-push"></a>Sözdizimi: anında iletme
+### <a name="syntax-push"></a>Sözdizimi: Push
 
-`push` Adım türü görüntü koleksiyonunu destekler. Satır içi hem de iç içe geçmiş biçimleri YAML koleksiyon sözdizimini destekler. Tek bir görüntü gönderme genelde satır içi söz dizimi kullanılarak temsil edilir:
+`push` adım türü bir görüntü koleksiyonunu destekler. YAML koleksiyon sözdizimi, satır içi ve iç içe biçimleri destekler. Tek bir görüntünün gönderilmesi genellikle satır içi sözdizimi kullanılarak temsil edilir:
 
 ```yml
-version: v1.0.0
+version: v1.1.0
 steps:
   # Inline YAML collection syntax
-  - push: ["{{.Run.Registry}}/hello-world:{{.Run.ID}}"]
+  - push: ["$Registry/hello-world:$ID"]
 ```
 
-Birden fazla görüntü gönderirken, okunurluğu artırmak için iç içe geçmiş sözdizimini kullanın:
+Daha fazla okunabilirlik için, birden çok görüntü gönderirken iç içe geçmiş sözdizimini kullanın:
 
 ```yml
-version: v1.0.0
+version: v1.1.0
 steps:
   # Nested YAML collection syntax
   - push:
-    - {{.Run.Registry}}/hello-world:{{.Run.ID}}
-    - {{.Run.Registry}}/hello-world:latest
+    - $Registry/hello-world:$ID
+    - $Registry/hello-world:latest
 ```
 
-### <a name="properties-push"></a>Özellikler: gönderme
+### <a name="properties-push"></a>Özellikler: gönderim
 
-`push` Adım türü aşağıdaki özellikleri destekler. Bu özellikleri ayrıntılarını bulun [görev adım özellikleri](#task-step-properties) bu makalenin.
+`push` adımı türü aşağıdaki özellikleri destekler. Bu makalenin [görev adımı özellikleri](#task-step-properties) bölümünde bu özelliklerin ayrıntılarını bulun.
 
 | | | |
 | -------- | ---- | -------- |
-| `env` | [dize, dize,...] | İsteğe bağlı |
-| `id` | string | İsteğe bağlı |
-| `ignoreErrors` | bool | İsteğe bağlı |
-| `startDelay` | int (saniye) | İsteğe bağlı |
-| `timeout` | int (saniye) | İsteğe bağlı |
-| `when` | [dize, dize,...] | İsteğe bağlı |
+| `env` | [dize, dize,...] | İsteğe Bağlı |
+| `id` | string | İsteğe Bağlı |
+| `ignoreErrors` | bool | İsteğe Bağlı |
+| `startDelay` | int (saniye) | İsteğe Bağlı |
+| `timeout` | int (saniye) | İsteğe Bağlı |
+| `when` | [dize, dize,...] | İsteğe Bağlı |
 
-### <a name="examples-push"></a>Örnekler: anında iletme
+### <a name="examples-push"></a>Örnekler: Push
 
-#### <a name="push-multiple-images"></a>Birden çok görüntüleri gönderme
+#### <a name="push-multiple-images"></a>Birden çok görüntü gönderme
 
 ```azurecli
 az acr run -f build-push-hello-world.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -248,50 +249,50 @@ az acr run -f build-run-hello-world.yaml https://github.com/Azure-Samples/acr-ta
 
 ## <a name="cmd"></a>cmd
 
-`cmd` Adım türü bir kapsayıcı olarak çalıştırılır.
+`cmd` adımı türü bir kapsayıcı çalıştırır.
 
 ### <a name="syntax-cmd"></a>Sözdizimi: cmd
 
 ```yml
-version: v1.0.0
+version: v1.1.0
 steps:
   - [cmd]: [containerImage]:[tag (optional)] [cmdParameters to the image]
 ```
 
 ### <a name="properties-cmd"></a>Özellikler: cmd
 
-`cmd` Adım türü aşağıdaki özellikleri destekler:
+`cmd` adımı türü aşağıdaki özellikleri destekler:
 
 | | | |
 | -------- | ---- | -------- |
-| `detach` | bool | İsteğe bağlı |
-| `disableWorkingDirectoryOverride` | bool | İsteğe bağlı |
-| `entryPoint` | string | İsteğe bağlı |
-| `env` | [dize, dize,...] | İsteğe bağlı |
-| `expose` | [dize, dize,...] | İsteğe bağlı |
-| `id` | string | İsteğe bağlı |
-| `ignoreErrors` | bool | İsteğe bağlı |
-| `isolation` | string | İsteğe bağlı |
-| `keep` | bool | İsteğe bağlı |
-| `network` | object | İsteğe bağlı |
-| `ports` | [dize, dize,...] | İsteğe bağlı |
-| `pull` | bool | İsteğe bağlı |
-| `repeat` | int | İsteğe bağlı |
-| `retries` | int | İsteğe bağlı |
-| `retryDelay` | int (saniye) | İsteğe bağlı |
-| `secret` | object | İsteğe bağlı |
-| `startDelay` | int (saniye) | İsteğe bağlı |
-| `timeout` | int (saniye) | İsteğe bağlı |
-| `when` | [dize, dize,...] | İsteğe bağlı |
-| `workingDirectory` | string | İsteğe bağlı |
+| `detach` | bool | İsteğe Bağlı |
+| `disableWorkingDirectoryOverride` | bool | İsteğe Bağlı |
+| `entryPoint` | string | İsteğe Bağlı |
+| `env` | [dize, dize,...] | İsteğe Bağlı |
+| `expose` | [dize, dize,...] | İsteğe Bağlı |
+| `id` | string | İsteğe Bağlı |
+| `ignoreErrors` | bool | İsteğe Bağlı |
+| `isolation` | string | İsteğe Bağlı |
+| `keep` | bool | İsteğe Bağlı |
+| `network` | object | İsteğe Bağlı |
+| `ports` | [dize, dize,...] | İsteğe Bağlı |
+| `pull` | bool | İsteğe Bağlı |
+| `repeat` | int | İsteğe Bağlı |
+| `retries` | int | İsteğe Bağlı |
+| `retryDelay` | int (saniye) | İsteğe Bağlı |
+| `secret` | object | İsteğe Bağlı |
+| `startDelay` | int (saniye) | İsteğe Bağlı |
+| `timeout` | int (saniye) | İsteğe Bağlı |
+| `when` | [dize, dize,...] | İsteğe Bağlı |
+| `workingDirectory` | string | İsteğe Bağlı |
 
-Bu özellikleri ayrıntılarını bulabilirsiniz [görev adım özellikleri](#task-step-properties) bu makalenin.
+Bu özelliklerin ayrıntılarını bu makalenin [görev adımı özellikleri](#task-step-properties) bölümünde bulabilirsiniz.
 
 ### <a name="examples-cmd"></a>Örnekler: cmd
 
-#### <a name="run-hello-world-image"></a>Merhaba-Dünya görüntüsünü çalıştırma
+#### <a name="run-hello-world-image"></a>Merhaba-Dünya görüntüsünü Çalıştır
 
-Bu komutu yürütür `hello-world.yaml` başvuran görev dosyası [Merhaba-Dünya](https://hub.docker.com/_/hello-world/) Docker hub'daki resmi.
+Bu komut, Docker Hub 'daki [Merhaba-Dünya](https://hub.docker.com/_/hello-world/) görüntüsüne başvuran `hello-world.yaml` görev dosyasını yürütür.
 
 ```azurecli
 az acr run -f hello-world.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -300,9 +301,9 @@ az acr run -f hello-world.yaml https://github.com/Azure-Samples/acr-tasks.git
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/hello-world.yaml -->
 [!code-yml[task](~/acr-tasks/hello-world.yaml)]
 
-#### <a name="run-bash-image-and-echo-hello-world"></a>Bash görüntüsü ve yankı "hello world" çalıştırın
+#### <a name="run-bash-image-and-echo-hello-world"></a>Bash görüntüsünü ve "Hello World" yankısını çalıştırın
 
-Bu komutu yürütür `bash-echo.yaml` başvuran görev dosyası [bash](https://hub.docker.com/_/bash/) Docker hub'daki resmi.
+Bu komut, Docker Hub 'da [Bash](https://hub.docker.com/_/bash/) görüntüsüne başvuran `bash-echo.yaml` görev dosyasını yürütür.
 
 ```azurecli
 az acr run -f bash-echo.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -311,11 +312,11 @@ az acr run -f bash-echo.yaml https://github.com/Azure-Samples/acr-tasks.git
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/bash-echo.yaml -->
 [!code-yml[task](~/acr-tasks/bash-echo.yaml)]
 
-#### <a name="run-specific-bash-image-tag"></a>Belirli bir bash resim etiketi çalıştırın
+#### <a name="run-specific-bash-image-tag"></a>Belirli Bash Image etiketini Çalıştır
 
-Bir özel görüntü sürümünü çalıştırmak üzere etiketinde belirtin `cmd`.
+Belirli bir görüntü sürümünü çalıştırmak için `cmd`etiketi belirtin.
 
-Bu komutu yürütür `bash-echo-3.yaml` başvuran görev dosyası [bash: 3.0](https://hub.docker.com/_/bash/) Docker hub'daki resmi.
+Bu komut, Docker Hub 'da [bash: 3.0](https://hub.docker.com/_/bash/) görüntüsüne başvuran `bash-echo-3.yaml` görev dosyasını yürütür.
 
 ```azurecli
 az acr run -f bash-echo-3.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -324,74 +325,72 @@ az acr run -f bash-echo-3.yaml https://github.com/Azure-Samples/acr-tasks.git
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/bash-echo-3.yaml -->
 [!code-yml[task](~/acr-tasks/bash-echo-3.yaml)]
 
-#### <a name="run-custom-images"></a>Özel görüntüleri çalıştırın
+#### <a name="run-custom-images"></a>Özel görüntüleri Çalıştır
 
-`cmd` Adım türe başvuran standart kullanarak görüntüleri `docker run` biçimi. Kayıt defteri ile başında değil görüntüleri docker.io kaynaklanan varsayılır. Önceki örnekte, eşit olarak gösterilebilir:
+`cmd` adım türü, standart `docker run` biçimini kullanarak görüntülere başvurur. Bir kayıt defteriyle önceden kullanıma hazır olmayan görüntülerin docker.io 'tan kaynaklandığından varsayılır. Önceki örnek eşit olarak temsil edilebilir:
 
 ```yml
-version: v1.0.0
+version: v1.1.0
 steps:
   - cmd: docker.io/bash:3.0 echo hello world
 ```
 
-Standart kullanarak `docker run` görüntü başvurusu kuralı `cmd` görüntüleri herhangi bir özel kayıt veya genel Docker hub'ı çalıştırabilirsiniz. ACR görevin yürütüldüğü aynı kayıt defterindeki görüntüleri başvuran herhangi bir kayıt defteri kimlik bilgilerini belirtmeniz gerekmez.
+`cmd`, standart `docker run` resim başvuru kuralını kullanarak, herhangi bir özel kayıt defterinden veya genel Docker Hub 'ından görüntü çalıştırabilir. ACR görevinin yürütüldüğü aynı kayıt defterindeki görüntülere başvuruyorsanız, kayıt defteri kimlik bilgilerini belirtmeniz gerekmez.
 
-* Bir Azure container registry'den bir görüntü çalıştırma
-
-    Değiştirin `[myregistry]` kayıt defterinizin adıyla:
+* Azure Container Registry 'den bir görüntü çalıştırın. Aşağıdaki örnek, `myregistry`adlı bir kayıt defteriniz olduğunu ve `myimage:mytag`özel bir görüntü olduğunu varsayar.
 
     ```yml
-    version: v1.0.0
+    version: v1.1.0
     steps:
-        - cmd: [myregistry].azurecr.io/bash:3.0 echo hello world
+        - cmd: myregistry.azurecr.io/myimage:mytag
     ```
 
-* Bir çalışma değişkeniyle kayıt defteri başvuru generalize
+* Bir çalıştırma değişkeni veya diğer adla kayıt defteri başvurusunu genelleştirin
 
-    Kayıt defteri adınız sabit kodlama yerine bir `acr-task.yaml` dosyası yapabilirsiniz, daha taşınabilir kullanarak bir [değişkeni çalıştırma](#run-variables). `Run.Registry` Görev yürütüyordur kayıt defteri adı için çalışma zamanında değişken genişletir.
+    Kayıt defteri adınızı bir `acr-task.yaml` dosyasında sabit kodlamak yerine, bir [çalıştırma değişkeni](#run-variables) veya [diğer ad](#aliases)kullanarak daha taşınabilir hale getirebilirsiniz. `Run.Registry` değişkeni veya `$Registry` diğer adı, çalışma zamanında görevin yürütüldüğü kayıt defterinin adına genişletilir.
 
-    Herhangi bir Azure container Registry'de çalışır böylece önceki görev genelleştirmek için başvuru [Run.Registry](#runregistry) değişken görüntü adı:
+    Örneğin, önceki görevi herhangi bir Azure Container Registry 'de çalışacak şekilde genelleştirmek için, görüntü adı içindeki $Registry değişkenine başvurun:
 
     ```yml
-    version: v1.0.0
+    version: v1.1.0
     steps:
-      - cmd: {{.Run.Registry}}/bash:3.0 echo hello world
+      - cmd: $Registry/myimage:mytag
     ```
 
-## <a name="task-step-properties"></a>Görev Adım özellikleri
+## <a name="task-step-properties"></a>Görev adımı özellikleri
 
-Her adım türü kendi türü için uygun çeşitli özelliklerini destekler. Aşağıdaki tabloda tüm kullanılabilir adım özelliklerini tanımlar. Adım türü tüm özellikleri desteklemez. Her bir adım türü için bu özelliklerin kullanılabildiğini görmek için bkz: [cmd](#cmd), [derleme](#build), ve [anında iletme](#push) adım türü başvurusu bölümler.
+Her adım türü, türü için uygun olan birkaç özelliği destekler. Aşağıdaki tabloda, tüm kullanılabilir adım özellikleri tanımlanmaktadır. Tüm adım türleri tüm özellikleri desteklemez. Her adım türü için bu özelliklerden hangilerinin kullanılabildiğini görmek için, [cmd](#cmd), [Build](#build)ve [Push](#push) Step Type başvuru bölümlerine bakın.
 
-| Özellik | Tür | İsteğe bağlı | Açıklama | Varsayılan değer |
+| Özellik | Tür | İsteğe Bağlı | Açıklama | Varsayılan değer |
 | -------- | ---- | -------- | ----------- | ------- |
-| `detach` | bool | Evet | Olup kapsayıcı çalıştırırken ayrılmış. | `false` |
-| `disableWorkingDirectoryOverride` | bool | Evet | Devre dışı bırakılıp bırakılmayacağını `workingDirectory` işlevleri geçersiz kılar. Bu ile birlikte kullanma `workingDirectory` kapsayıcının çalışma dizini üzerinde tam denetime sahip. | `false` |
-| `entryPoint` | string | Evet | Geçersiz kılmalar `[ENTRYPOINT]` bir adım kapsayıcısı. | None |
-| `env` | [dize, dize,...] | Evet | Dizeler dizisi `key=value` adımı için ortam değişkenlerini biçimi. | None |
-| `expose` | [dize, dize,...] | Evet | Kapsayıcıyı kullanıma sunulan bağlantı noktaları dizisi. |  None |
-| [`id`](#example-id) | string | Evet | Adım görev içinde benzersiz olarak tanımlar. Diğer adımları görev bir adım başvurabilirsiniz `id`, bağımlılık ile denetimi gibi `when`.<br /><br />`id` Çalıştırılan kapsayıcının adıdır. Görev diğer kapsayıcılardaki çalışan işlemler başvurabilir `id` DNS ana bilgisayar adını veya docker günlükleri [ID] ile örneğin erişmek için. | `acb_step_%d`, burada `%d` adımın yukarıdan aşağıya YAML dosyası 0 tabanlı dizin. |
-| `ignoreErrors` | bool | Evet | Bir adım olarak başarılı olup olmadığını kapsayıcı yürütülürken bir hata oluştu bağımsız olarak işaretlemek belirtir. | `false` |
-| `isolation` | string | Evet | Kapsayıcı yalıtım düzeyi. | `default` |
-| `keep` | bool | Evet | Adım kapsayıcı yürütme sonrasında korunması gerekir. | `false` |
-| `network` | object | Evet | Kapsayıcı çalıştığı bir ağı tanımlar. | None |
-| `ports` | [dize, dize,...] | Evet | Kapsayıcıdan konağa yayımlanan bağlantı noktaları dizisi. |  None |
-| `pull` | bool | Evet | Tüm önbelleğe alma davranışı önlemek için çalıştırmadan önce bir çekme kapsayıcının zorlamak verilmeyeceğini belirtir. | `false` |
-| `privileged` | bool | Evet | Kapsayıcı'ı ayrıcalıklı modda çalıştırılıp çalıştırılmayacağını belirtir. | `false` |
-| `repeat` | int | Evet | Bir kapsayıcının yürütme yinelemek için yeniden deneme sayısı. | 0 |
-| `retries` | int | Evet | Bir kapsayıcı yürütme başarısız olursa denemek için yeniden deneme sayısı. Bir kapsayıcının çıkış kodu sıfır değilse bir yeniden deneme yalnızca denenir. | 0 |
-| `retryDelay` | int (saniye) | Evet | Bir kapsayıcının yürütme yeniden denemeler arasındaki saniye cinsinden gecikme. | 0 |
-| `secret` | object | Evet | Bir Azure Key Vault gizli veya Azure kaynakları için yönetilen kimlik tanımlar. | None |
-| `startDelay` | int (saniye) | Evet | Bir kapsayıcının yürütme geciktirme saniye sayısı. | 0 |
-| `timeout` | int (saniye) | Evet | En fazla saniye sayısı, sonlandırılmadan önce bir adımı yürütür. | 600 |
-| [`when`](#example-when) | [dize, dize,...] | Evet | Görev içindeki bir veya daha fazla diğer adımlar bir adım bağımlılık yapılandırır. | None |
-| `user` | string | Evet | Kullanıcı adı veya bir kapsayıcı UID'si | None |
-| `workingDirectory` | string | Evet | Bir adım için çalışma dizinini ayarlar. Varsayılan olarak, ACR görevleri bir kök dizin çalışma dizininde olarak oluşturur. Derleme birkaç adım vardır, ancak, önceki adımlarda yapıtları sonraki adımlara aynı çalışma dizini belirterek paylaşabilir. | `$HOME` |
+| `detach` | bool | Yes | Çalışma sırasında kapsayıcının ayrılmayacağı. | `false` |
+| `disableWorkingDirectoryOverride` | bool | Yes | `workingDirectory` geçersiz kılma işlevinin devre dışı bırakılıp başlatılmayacağını belirtir. Kapsayıcının çalışma dizini üzerinde tamamen denetim sağlamak için bunu `workingDirectory` birlikte kullanın. | `false` |
+| `entryPoint` | string | Yes | Bir adımın kapsayıcısının `[ENTRYPOINT]` geçersiz kılar. | Hiçbiri |
+| `env` | [dize, dize,...] | Yes | Adım için ortam değişkenlerini tanımlayan `key=value` biçimdeki dizeler dizisi. | Hiçbiri |
+| `expose` | [dize, dize,...] | Yes | Kapsayıcıdan sunulan bağlantı noktası dizisi. |  Hiçbiri |
+| [`id`](#example-id) | string | Yes | Görevi içindeki adımı benzersiz bir şekilde tanımlar. Görevdeki diğer adımlar, `when`ile bağımlılık denetimi gibi bir adım `id`başvuruda bulunabilir.<br /><br />`id` aynı zamanda çalışan kapsayıcının adıdır. Görevdeki diğer kapsayıcılar üzerinde çalışan süreçler, DNS ana bilgisayar adı olarak `id` veya Docker günlükleri [ID] ile erişim için, örneğin. | `acb_step_%d`, `%d` YAML dosyasında adımın 0 tabanlı dizinidir |
+| `ignoreErrors` | bool | Yes | Kapsayıcının yürütülmesi sırasında bir hata oluşup oluşmadığını ne olursa olsun adımın başarıyla işaretleneceğini belirtir. | `false` |
+| `isolation` | string | Yes | Kapsayıcının yalıtım düzeyi. | `default` |
+| `keep` | bool | Yes | Adım kapsayıcısının yürütmeden sonra tutulup tutulmayacağını belirtir. | `false` |
+| `network` | object | Yes | Kapsayıcının çalıştığı bir ağı tanımlar. | Hiçbiri |
+| `ports` | [dize, dize,...] | Yes | Kapsayıcıdan konağa yayınlanan bağlantı noktaları dizisi. |  Hiçbiri |
+| `pull` | bool | Yes | Herhangi bir önbelleğe alma davranışına engel olmak için yürütmeden önce kapsayıcının yapılıp yapılmayacağını belirtir. | `false` |
+| `privileged` | bool | Yes | Kapsayıcının ayrıcalıklı modda çalıştırılıp çalıştırılmayacağı. | `false` |
+| `repeat` | int | Yes | Kapsayıcının yürütülmesini yinelemek için yeniden deneme sayısı. | 0 |
+| `retries` | int | Yes | Bir kapsayıcının yürütülmesinin başarısız olması durumunda denenecek yeniden deneme sayısı. Yeniden deneme yalnızca bir kapsayıcının çıkış kodu sıfır değilse denenir. | 0 |
+| `retryDelay` | int (saniye) | Yes | Bir kapsayıcının çalışmasının yeniden denemeleri arasındaki gecikme süresi (saniye cinsinden). | 0 |
+| `secret` | object | Yes | [Azure kaynakları için](container-registry-tasks-authentication-managed-identity.md)Azure Key Vault gizli dizi veya yönetilen kimlik tanımlar. | Hiçbiri |
+| `startDelay` | int (saniye) | Yes | Kapsayıcının yürütülmesinin geciktirileceği saniye sayısı. | 0 |
+| `timeout` | int (saniye) | Yes | Bir adımın sonlandırılmadan önce yürütebilmesi için gereken en fazla saniye sayısı. | 600 |
+| [`when`](#example-when) | [dize, dize,...] | Yes | Görevin içindeki bir veya daha fazla adım için bir adımın bağımlılığını yapılandırır. | Hiçbiri |
+| `user` | string | Yes | Bir kapsayıcının Kullanıcı adı veya UID 'SI | Hiçbiri |
+| `workingDirectory` | string | Yes | Bir adım için çalışma dizinini ayarlar. Varsayılan olarak ACR görevleri, çalışma dizini olarak bir kök dizin oluşturur. Ancak, derlemeniz birkaç adım içeriyorsa, önceki adımlar aynı çalışma dizinini belirterek yapıtları sonraki adımlarla paylaşabilir. | `$HOME` |
 
-### <a name="examples-task-step-properties"></a>Örnekler: Görev Adım özellikleri
+### <a name="examples-task-step-properties"></a>Örnekler: görev adımı özellikleri
 
-#### <a name="example-id"></a>Örnek: kimliği
+#### <a name="example-id"></a>Örnek: kimlik
 
-İşlevsel test görüntüsü depolamasına iki görüntü oluşturun. Her adımın bir benzersiz tarafından tanımlanır `id` diğer adımları görev içinde başvuran kendi `when` özelliği.
+İki görüntü oluşturun ve işlevsel test görüntüsünü örnekleyebilirsiniz. Her adım, `when` özelliğinde görev başvurusunda bulunan diğer adımların `id` benzersiz bir şekilde tanımlanır.
 
 ```azurecli
 az acr run -f when-parallel-dependent.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -400,16 +399,16 @@ az acr run -f when-parallel-dependent.yaml https://github.com/Azure-Samples/acr-
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/when-parallel-dependent.yaml -->
 [!code-yml[task](~/acr-tasks/when-parallel-dependent.yaml)]
 
-#### <a name="example-when"></a>Örnek: zaman
+#### <a name="example-when"></a>Örnek: ne zaman
 
-`when` Özelliği, görev içinde diğer adımlar bir adım bağımlılık belirtir. Bu, iki parametre değerlerini destekler:
+`when` özelliği, görevin içindeki diğer adımlara bir adımın bağımlılığını belirtir. İki parametre değerini destekler:
 
-* `when: ["-"]` -Diğer adımlar üzerinde hiçbir bağımlılık gösterir. Belirten bir adım `when: ["-"]` yürütme hemen başlar ve eş zamanlı adım yürütme sağlar.
-* `when: ["id1", "id2"]` -Adım adımlara bağlı bağımlı olduğunu gösterir `id` "ıd1" ve `id` "ıd2". Hem "ıd1" ve "ıd2" adımlar tamamlanana kadar bu adımı yürütülen olmaz.
+* `when: ["-"]`-diğer adımlara bağımlılığı olmadığını gösterir. `when: ["-"]` belirten bir adım yürütme hemen başlayacaktır ve eşzamanlı adım yürütülmesine olanak sağlayacaktır.
+* `when: ["id1", "id2"]`-adımın "ID1" `id` ve "ID2" `id` olan adımlara bağlı olduğunu gösterir. "ID1" ve "ID2" adımları tamamlanana kadar bu adım yürütülmez.
 
-Varsa `when` belirtilmediyse bir adım, bu adım önceki adımda tamamlanmasına bağımlı olduğu `acr-task.yaml` dosya.
+Bir adımda `when` belirtilmemişse, bu adım `acr-task.yaml` dosyasındaki önceki adımın tamamlanmasına bağlıdır.
 
-Sıralı adım yürütülmeden `when`:
+`when`olmadan sıralı adım yürütme:
 
 ```azurecli
 az acr run -f when-sequential-default.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -418,7 +417,7 @@ az acr run -f when-sequential-default.yaml https://github.com/Azure-Samples/acr-
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/when-sequential-default.yaml -->
 [!code-yml[task](~/acr-tasks/when-sequential-default.yaml)]
 
-Adım sıralı yürütme ile `when`:
+`when`ile sıralı adım yürütme:
 
 ```azurecli
 az acr run -f when-sequential-id.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -427,7 +426,7 @@ az acr run -f when-sequential-id.yaml https://github.com/Azure-Samples/acr-tasks
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/when-sequential-id.yaml -->
 [!code-yml[task](~/acr-tasks/when-sequential-id.yaml)]
 
-Paralel görüntüleri oluşturun:
+Paralel görüntü oluşturma:
 
 ```azurecli
 az acr run -f when-parallel.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -436,7 +435,7 @@ az acr run -f when-parallel.yaml https://github.com/Azure-Samples/acr-tasks.git
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/when-parallel.yaml -->
 [!code-yml[task](~/acr-tasks/when-parallel.yaml)]
 
-Paralel görüntüsü derleme ve test bağımlı:
+Paralel görüntü oluşturma ve bağımlı test:
 
 ```azurecli
 az acr run -f when-parallel-dependent.yaml https://github.com/Azure-Samples/acr-tasks.git
@@ -445,55 +444,151 @@ az acr run -f when-parallel-dependent.yaml https://github.com/Azure-Samples/acr-
 <!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/when-parallel-dependent.yaml -->
 [!code-yml[task](~/acr-tasks/when-parallel-dependent.yaml)]
 
-## <a name="run-variables"></a>Değişkenleri çalıştırın
+## <a name="run-variables"></a>Değişkenleri Çalıştır
 
-ACR görevleri bunlar yürüttüğünüzde, görev adımları için kullanılabilen değişkenleri varsayılan kümesini içerir. Bu değişkenler biçimini kullanarak erişilebilir `{{.Run.VariableName}}`burada `VariableName` aşağıdakilerden biridir:
+ACR görevleri, yürütdiklerinde görev adımları için kullanılabilen varsayılan bir değişken kümesi içerir. Bu değişkenlere `{{.Run.VariableName}}`biçim kullanılarak erişilebilir; burada `VariableName` aşağıdakilerden biridir:
 
 * `Run.ID`
+* `Run.SharedVolume`
 * `Run.Registry`
+* `Run.RegistryName`
 * `Run.Date`
+* `Run.OS`
+* `Run.Architecture`
 * `Run.Commit`
 * `Run.Branch`
+* `Run.TaskName`
+
+Değişken adları genellikle kendi kendine açıklayıcıdır. Sık kullanılan değişkenler için Ayrıntılar aşağıda verilmiştir. YAML sürüm `v1.1.0`itibariyle, çoğu çalıştırma değişkeninin yerine kısaltılmış, önceden tanımlanmış bir [görev diğer adı](#aliases) kullanabilirsiniz. Örneğin, `{{.Run.Registry}}`yerine `$Registry` diğer adı kullanın.
 
 ### <a name="runid"></a>Run.ID
 
-Her aracılığıyla Çalıştır, `az acr run`, veya aracılığıyla oluşturulan görevler tabanlı olarak yürütülmesini tetiklemek `az acr task create` benzersiz bir kimliğe sahip Kimlik, şu anda yürütülmekte olan çalıştırma temsil eder.
+Her çalıştırma, `az acr run`veya `az acr task create`kullanılarak oluşturulan görevlerin tetiklenmesi, benzersiz bir KIMLIĞE sahiptir. KIMLIK Şu anda yürütülmekte olan çalışmayı temsil eder.
 
-Genellikle bir benzersiz olarak görüntüyü etiketlemek için kullanılır:
-
-```yml
-version: v1.0.0
-steps:
-    - build: -t {{.Run.Registry}}/hello-world:{{.Run.ID}} .
-```
-
-### <a name="runregistry"></a>Run.Registry
-
-Kayıt defteri tam sunucu adı. Genellikle, görevin çalıştırıldığı kayıt defteri genel olarak başvurmak için kullanılır.
+Genellikle bir görüntüyü benzersiz bir şekilde etiketlemek için kullanılır:
 
 ```yml
-version: v1.0.0
+version: v1.1.0
 steps:
-  - build: -t {{.Run.Registry}}/hello-world:{{.Run.ID}} .
+    - build: -t $Registry/hello-world:$ID .
 ```
 
-### <a name="rundate"></a>Run.Date
+### <a name="runregistry"></a>Çalıştır. kayıt defteri
 
-Geçerli UTC saatine çalıştırma başladı.
+Kayıt defterinin tam sunucu adı. Genellikle görevin çalıştırıldığı kayıt defterine genel olarak başvurmak için kullanılır.
 
-### <a name="runcommit"></a>Run.Commit
+```yml
+version: v1.1.0
+steps:
+  - build: -t $Registry/hello-world:$ID .
+```
 
-Bir GitHub deposuna işleme tanımlayıcısı için bir işleme tarafından tetiklenen bir görev.
+### <a name="runregistryname"></a>Çalışma. RegistryName
 
-### <a name="runbranch"></a>Run.Branch
+Kapsayıcı kayıt defterinin adı. Genellikle, bir tam sunucu adı gerektirmeyen görev adımlarında kullanılır, örneğin, kayıt defterlerinde Azure CLı komutlarını çalıştıran adımlar `cmd`.
 
-Bir GitHub deposu, dal adı için bir işleme tarafından tetiklenen bir görev.
+```yml
+version 1.1.0
+steps:
+# List repositories in registry
+- cmd: az login --identity
+- cmd: az acr repository list --name $RegistryName
+```
+
+### <a name="rundate"></a>Run. Date
+
+Çalıştırmanın başladığı geçerli UTC saati.
+
+### <a name="runcommit"></a>Run. COMMIT
+
+GitHub deposuna yapılan bir kayıt tarafından tetiklenen bir görev için, COMMIT tanımlayıcısı.
+
+### <a name="runbranch"></a>Run. Branch
+
+GitHub deposuna yapılan bir kayıt tarafından tetiklenen bir görev için, dal adı.
+
+## <a name="aliases"></a>Diğer adlar
+
+`v1.1.0`itibariyle ACR görevleri, yürütme sırasında görev adımları için kullanılabilen diğer adları destekler. Diğer adlar, Bash 'de desteklenen diğer adlar (komut kısayolları) kavramıyla benzerdir. 
+
+Bir diğer ad ile, tek bir kelime girerek herhangi bir komutu veya komut grubunu (Seçenekler ve dosya adları dahil) başlatabilirsiniz.
+
+ACR görevleri, önceden tanımlanmış birkaç diğer adı ve ayrıca oluşturduğunuz özel diğer adları destekler.
+
+### <a name="predefined-aliases"></a>Önceden tanımlanmış diğer adlar
+
+Aşağıdaki görev diğer adları, [çalıştırma değişkenlerinin](#run-variables)yerine kullanılabilir:
+
+| Diğer ad | Çalıştırma değişkeni |
+| ----- | ------------ |
+| `ID` | `Run.ID` |
+| `SharedVolume` | `Run.SharedVolume` |
+| `Registry` | `Run.Registry` |
+| `RegistryName` | `Run.RegistryName` |
+| `Date` | `Run.Date` |
+| `OS` | `Run.OS` |
+| `Architecture` | `Run.Architecture` |
+| `Commit` | `Run.Commit` |
+| `Branch` | `Run.Branch` |
+
+Görev adımları ' nda, bu örnekte olduğu gibi `$` yönergesi ile bir diğer addan önce gelmeli:
+
+```yaml
+version: v1.1.0
+steps:
+  - build: -t $Registry/hello-world:$ID -f hello-world.dockerfile .
+```
+
+### <a name="image-aliases"></a>Görüntü diğer adları
+
+Aşağıdaki diğer adların her biri Microsoft Container Registry (MCR) içindeki kararlı bir görüntüye işaret eder. Bir yönerge kullanmadan bir görev dosyasının `cmd` bölümünde bunların her birine başvurabilirsiniz.
+
+| Diğer ad | Görüntü |
+| ----- | ----- |
+| `acr` | `mcr.microsoft.com/acr/acr-cli:0.1` |
+| `az` | `mcr.microsoft.com/acr/azure-cli:d0725bc` |
+| `bash` | `mcr.microsoft.com/acr/bash:d0725bc` |
+| `curl` | `mcr.microsoft.com/acr/curl:d0725bc` |
+
+Aşağıdaki örnek görev, çalışma kayıt defterindeki `samples/hello-world`, çalışma kayıt defterindeki 7 günden daha eski olan görüntü etiketlerini [temizlemek](container-registry-auto-purge.md) için birkaç diğer ad kullanır:
+
+```yaml
+version: v1.1.0
+steps:
+  - cmd: acr tag list --registry $RegistryName --repository samples/hello-world
+  - cmd: acr purge --registry $RegistryName --filter samples/hello-world:.* --ago 7d
+```
+
+### <a name="custom-alias"></a>Özel diğer ad
+
+YAML dosyanızda özel bir diğer ad tanımlayın ve aşağıdaki örnekte gösterildiği gibi kullanın. Diğer ad yalnızca alfasayısal karakterler içerebilir. Diğer adı genişletmek için varsayılan yönerge `$` karakterdir.
+
+```yml
+version: v1.1.0
+alias:
+  values:
+    repo: myrepo
+steps:
+  - build: -t $Registry/$repo/hello-world:$ID -f Dockerfile .
+```
+
+Özel diğer ad tanımları için uzak veya yerel bir YAML dosyasına bağlantı oluşturabilirsiniz. Aşağıdaki örnek, Azure Blob depolama alanındaki bir YAML dosyasına bağlantı sağlar:
+
+```yml
+version: v1.1.0
+alias:
+  src:  # link to local or remote custom alias files
+    - 'https://link/to/blob/remoteAliases.yml?readSasToken'
+[...]
+```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Çok adımlı görevler genel bakış için bkz. [ACR görevleri çok adımlı derleme, test ve düzeltme eki görevleri çalıştırmak](container-registry-tasks-multi-step.md).
+Çok adımlı görevlere genel bakış için [ACR görevlerinde multi-step Build, test ve Patch görevlerini çalıştırma](container-registry-tasks-multi-step.md)sayfasına bakın.
 
-Tek adımlı yapıları için bkz. [ACR görevlere genel bakış](container-registry-tasks-overview.md).
+Tek adımlı derlemeler için bkz. [ACR görevlerine genel bakış](container-registry-tasks-overview.md).
+
+
 
 <!-- IMAGES -->
 

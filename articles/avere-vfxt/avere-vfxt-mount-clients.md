@@ -1,38 +1,38 @@
 ---
-title: Avere vFXT - Azure'ı bağlama
-description: Azure için Avere vFXT istemcilerle takma
+title: Avere vFXT-Azure 'ı bağlama
+description: Azure için avere vFXT ile istemcileri bağlama
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 10/31/2018
-ms.author: v-erkell
-ms.openlocfilehash: 41065b4ac6bc486e204c2bfd72b78ba8722270c4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: c461b379629927e8f367fad9bfc70b87413f47b7
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60409384"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72255391"
 ---
-# <a name="mount-the-avere-vfxt-cluster"></a>Avere vFXT kümesini takma  
+# <a name="mount-the-avere-vfxt-cluster"></a>Avere vFXT kümesini bağlama  
 
-İstemci makineler vFXT kümenize bağlanmak için aşağıdaki adımları izleyin.
+İstemci makinelerini vFXT kümenize bağlamak için aşağıdaki adımları izleyin.
 
-1. Karar, küme düğümleri arasında istemci trafik yükünü dengele öğreneceksiniz. Okuma [istemci Yük Dengeleme](#balance-client-load), aşağıdaki Ayrıntılar için. 
-1. Bağlama için IP adresi ve bağlantı yolunu belirleyin.
-1. Sorunu [bağlama komutu](#mount-command-arguments), uygun bağımsız değişkenlerle.
+1. İstemci trafiğinin Küme düğümleriniz arasında nasıl yük dengelenmesi gerektiğine karar verin. Ayrıntılar için, aşağıda [istemci yükünü](#balance-client-load)okuyun. 
+1. Takılacak IP adresini ve birleşim yolunu belirler.
+1. [Bağlama komutunu](#mount-command-arguments)uygun bağımsız değişkenlerle verin.
 
-## <a name="balance-client-load"></a>İstemci Yük Dengeleme
+## <a name="balance-client-load"></a>İstemci yükünü dengeleme
 
-Dengeleme istemci isteklerini kümedeki tüm düğümler arasında yardımcı olmak için tam istemci'e dönük IP adresleri aralığını istemcilere bağlamak. Bu görevi otomatik hale getirmek için basit birkaç yolu vardır.
+İstemci isteklerinin kümedeki tüm düğümler arasında dengelenmesi için, istemcileri istemciye yönelik tüm IP adreslerinin tam aralığına bağlamanız gerekir. Bu görevi otomatikleştirmenin birkaç basit yolu vardır.
 
 > [!TIP] 
-> Diğer Yük Dengeleme yöntemi büyük veya karmaşık sistemleri için uygun olabilir; [bir destek bileti açın](avere-vfxt-open-ticket.md#open-a-support-ticket-for-your-avere-vfxt) Yardım.)
+> Diğer yük dengeleme yöntemleri büyük veya karmaşık sistemler için uygun olabilir; yardım için [bir destek bileti açın](avere-vfxt-open-ticket.md#open-a-support-ticket-for-your-avere-vfxt) .)
 > 
-> Otomatik sunucu tarafı Yük Dengeleme için DNS sunucusu kullanmak istiyorsanız, ayarlayın ve Azure içinde kendi DNS sunucunuzu yönetin. Bu durumda, bu belgede göre vFXT kümesi için DNS hepsini bir kez deneme yapılandırabilirsiniz: [Avere küme DNS yapılandırması](avere-vfxt-configure-dns.md).
+> Otomatik sunucu tarafı yük dengelemesi için bir DNS sunucusu kullanmayı tercih ederseniz, Azure 'da kendi DNS sunucunuzu ayarlamanız ve yönetmeniz gerekir. Bu durumda, vFXT kümesi için hepsini bir kez deneme DNS 'yi bu belgeye göre yapılandırabilirsiniz: [avere Cluster DNS yapılandırması](avere-vfxt-configure-dns.md).
 
-### <a name="sample-balanced-client-mounting-script"></a>Örnek dengeli istemci betiği oluşturma
+### <a name="sample-balanced-client-mounting-script"></a>Örnek dengeli istemci bağlama betiği
 
-Bu kod örneği, tüm vFXT kümenin kullanılabilir IP adreslerini istemcilere dağıtmak için randomizing bir öğe olarak istemci IP adreslerini kullanır.
+Bu kod örneği, istemcileri vFXT kümesinin kullanılabilir IP adreslerine dağıtmak için istemci IP adreslerini rastgele bir öğe olarak kullanır.
 
 ```bash
 function mount_round_robin() {
@@ -57,69 +57,69 @@ function mount_round_robin() {
 } 
 ```
 
-Yukarıdaki işlevi kullanılabilir Batch örnek parçasıdır [Avere vFXT örnekler](https://github.com/Azure/Avere#tutorials) site.
+Yukarıdaki işlev, [avere vFXT örnekleri](https://github.com/Azure/Avere#tutorials) sitesinde bulunan Batch örneği 'nin bir parçasıdır.
 
-## <a name="create-the-mount-command"></a>Bağlama komutu oluştur 
+## <a name="create-the-mount-command"></a>Bağlama komutunu oluşturma 
 
 > [!NOTE]
-> Bağlantısındaki Avere vFXT kümenizi oluştururken, yeni bir Blob kapsayıcı oluşturmadıysanız, [depolamayı yapılandırma](avere-vfxt-add-storage.md) istemcileri bağlamaya çalışırken önce.
+> Avere vFXT kümenizi oluştururken yeni bir blob kapsayıcısı oluşturmadıysanız, istemcileri bağlamaya çalışmadan önce [depolamayı yapılandırma](avere-vfxt-add-storage.md) bölümündeki adımları izleyin.
 
-İstemcisinden ``mount`` komutu, yerel dosya sisteminde bir yola vFXT kümesinde sanal sunucu (vserver) eşler. Biçimi ``mount <vFXT path> <local path> {options}``
+@No__t-0 komutu, vFXT kümesindeki sanal sunucuyu (vServer) yerel FileSystem 'daki bir yola eşler. Biçim ``mount <vFXT path> <local path> {options}``
 
-Bağlama komut üç öğe vardır: 
+Bağlama komutunda üç öğe vardır: 
 
-* vFXT yol - (aşağıda açıklanan IP adresi ve ad alanı birleşim yolu bir birleşimi)
-* Yerel yol - istemci üzerindeki yol 
-* komut seçenekleri - bağlama (listelenen [bağlama komut satırı bağımsız değişkenlerini](#mount-command-arguments))
+* vFXT yolu-(aşağıda açıklanan IP adresi ve ad alanı birleşim yolu birleşimi)
+* Yerel yol-istemcideki yol 
+* bağlama komutu seçenekleri-( [Mount komut bağımsız değişkenlerinde](#mount-command-arguments)listelenir)
 
-### <a name="junction-and-ip"></a>Birleşim ve IP
+### <a name="junction-and-ip"></a>Kavşak ve IP
 
-Bir birleşimi vserver yoludur, *IP adresi* yolu artı bir *ad alanı birleşim*. Ad alanı birleşim depolama sistemi eklendiğinde, tanımlanan sanal bir yoludur.
+VServer yolu, *IP adresinin* bir birleşimidir ve bir *ad alanı birleşiminin*yoludur. Ad alanı birleşimi, depolama sistemi eklendiğinde tanımlanan bir sanal yoldur.
 
-Kümenizi, Blob Depolama ile oluşturulmuş olsa bile, ad alanı yoludur `/msazure`
+Kümeniz BLOB depolama ile oluşturulduysa, ad alanı yolu `/msazure` ' dır
 
 Örnek: ``mount 10.0.0.12:/msazure /mnt/vfxt``
 
-Küme oluşturulduktan sonra depolama eklediyseniz, ad alanı birleşim yolun içinde ayarlanan değere karşılık gelen **Namespace yolu** birleşim oluştururken. Örneğin, kullandıysanız ``/avere/files`` , ad alanı yolu, istemcilerinizin bağlaması *IP*: / avere/dosyalarını kendi yerel bağlama noktasına.
+Kümeyi oluşturduktan sonra depolama eklediyseniz, ad alanı birleşim yolu, birleşim oluştururken **ad alanı yolunda** ayarladığınız değere karşılık gelir. Örneğin, ad alanı yolunuzda ``/avere/files`` ' ı kullandıysanız istemcileriniz, ıpır/Files' ı yerel bağlama noktasına bağlayabilir.
 
-!["Yeni birleşim Ekle" iletişim/avere/dosyalarıyla ad alanı yolu alanı](media/avere-vfxt-create-junction-example.png)
+![Ad alanı yolu alanındaki/avere/Files ile "yeni birleşim Ekle" iletişim kutusu](media/avere-vfxt-create-junction-example.png)
 
 
-IP adresini istemciye yönelik IP adresleri için vserver tanımlı biridir. İstemciye yönelik iki yerde Avere Denetim Masası'nda IP'ler, aralığın bulabilirsiniz:
+IP adresi, vServer için tanımlanan istemciye yönelik IP adreslerinden biridir. İstemci ile karşılıklı IP aralığını avere Denetim Masası 'nda iki yerde bulabilirsiniz:
 
-* **VServers** tablo (Pano sekmesi) - 
+* **Vservers** tablosu (Pano sekmesi)- 
 
-  ![Daire içinde VServer sekmesi, graf ve IP adresi bölümü altında veri tablosundaki seçili Avere Denetim Masası Pano sekmesi](media/avere-vfxt-ip-addresses-dashboard.png)
+  ![Grafiğin altındaki veri tablosunda seçili olan VServer sekmesi ve IP adresi bölümü daire içinde olan avere Denetim Masası Pano sekmesi](media/avere-vfxt-ip-addresses-dashboard.png)
 
-* **İstemci'e yönelik ağ** Ayarları sayfası - 
+* **Istemciye yönelik ağ** ayarları sayfası- 
 
-  ![Ayarlar > VServer > Tablo belirli vserver için adres aralığı bölümünü etrafında bir daire ile istemci bakan ağ yapılandırma sayfası](media/avere-vfxt-ip-addresses-settings.png)
+  ![Belirli bir vServer için tablonun adres aralığı bölümünün etrafında bir daire olan sanal sunucu > Istemciye yönelik ağ yapılandırması sayfası > Ayarlar](media/avere-vfxt-ip-addresses-settings.png)
 
-Yol yanı sıra eklemeyi [bağlama komut satırı bağımsız değişkenlerini](#mount-command-arguments) her istemci bağlarken aşağıda açıklanmıştır.
+Yollara ek olarak, her bir istemciyi bağlamak için aşağıda açıklanan [bağlama komutu bağımsız değişkenlerini](#mount-command-arguments) ekleyin.
 
-### <a name="mount-command-arguments"></a>Komut satırı bağımsız değişkenlerini bağlama
+### <a name="mount-command-arguments"></a>Bağlama komutu bağımsız değişkenleri
 
-Sorunsuz istemci bağlama emin olmak için bu ayarları ve bağımsız değişkenler, bağlama komutu geçirin: 
+Sorunsuz bir istemci bağlama sağlamak için, bu ayarları ve bağımsız değişkenleri bağlama komutunuz geçirin: 
 
 ``mount -o hard,nointr,proto=tcp,mountproto=tcp,retry=30 ${VSERVER_IP_ADDRESS}:/${NAMESPACE_PATH} ${LOCAL_FILESYSTEM_MOUNT_POINT}``
 
 
-| Gerekli ayarları | |
+| Gerekli ayarlar | |
 --- | --- 
-``hard`` | Yazılım takar vFXT kümeye uygulama hatalarına ve olası veri kaybı ile ilişkilidir. 
-``proto=netid`` | Bu seçenek NFS ağ hataları uygun olarak işlenmesini destekler.
-``mountproto=netid`` | Bu seçenek, bağlama işlemleri için uygun ağ hatalarının işlenmesini destekler.
-``retry=n`` | Ayarlama ``retry=30`` geçici bağlama hatalarını önlemek için. (Farklı bir değer ön plan takar önerilir.)
+``hard`` | VFXT kümesine yönelik hafif bağlar, uygulama hatalarıyla ve olası veri kaybı ile ilişkilendirilir. 
+``proto=netid`` | Bu seçenek NFS ağ hatalarının uygun işlenmesini destekler.
+``mountproto=netid`` | Bu seçenek, bağlama işlemleri için ağ hatalarının uygun işlenmesini destekler.
+``retry=n`` | Geçici bağlama hatalarından kaçınmak için ``retry=30`` olarak ayarlayın. (Ön plan takmaları farklı bir değer önerilir.)
 
-| Tercih edilen ayarları  | |
+| Tercih edilen ayarlar  | |
 --- | --- 
-``nointr``            | "nointr" seçeneği ile eski çekirdekler (Nisan 2008 önce) bu seçeneği desteklemek istemciler için tercih edilir. ' % S'seçeneği "Giriş" varsayılan olduğuna dikkat edin.
+``nointr``            | "Nointr" seçeneği, bu seçeneği destekleyen eski çekirdekler (2008 Nisan 'dan önce) olan istemciler için tercih edilir. "INTR" seçeneğinin varsayılan olduğunu unutmayın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-İstemciler bağladınız sonra arka uç veri depolama (çekirdek dosyalayıcı) doldurmak için kullanabilirsiniz. Ek kurulum görevleri hakkında daha fazla bilgi için bu belgelere bakın:
+İstemcileri bağladıktan sonra, arka uç veri depolama alanını (çekirdek Filer) doldurmak için bunları kullanabilirsiniz. Ek kurulum görevleri hakkında daha fazla bilgi edinmek için bu belgelere başvurun:
 
-* [Verileri taşımak için küme çekirdek dosyalayıcı](avere-vfxt-data-ingest.md) -verimli bir şekilde verilerinizi karşıya yüklemek için birden çok istemci ve iş parçacığı kullanma
-* [Küme ayarlama özelleştirme](avere-vfxt-tuning.md) -küme ayarlarını yükünüz uyacak şekilde uyarlayın
-* [Kümeyi yönetmek](avere-vfxt-manage-cluster.md) -başlatma veya kümeyi durdurun ve düğümlerini yönetme
+* [Verileri küme çekirdeği Içine taşıma](avere-vfxt-data-ingest.md) -verilerinizi verimli bir şekilde yüklemek için birden çok istemci ve iş parçacığı kullanma
+* [Küme ayarlamayı özelleştirme](avere-vfxt-tuning.md) -küme ayarlarını iş yükünüze uyacak şekilde uyarlayın
+* [Kümeyi yönetme](avere-vfxt-manage-cluster.md) -kümeyi başlatma veya durdurma ve düğümleri yönetme

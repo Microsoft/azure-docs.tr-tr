@@ -1,57 +1,53 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Machine Learning Studio Belgeleri
+### YamlMime:Landing
+title: Azure Machine Learning Studio (klasik) belgeleri
+summary: Machine Learning Studio (klasik) tahmine dayalı analiz çözümleri oluşturma, test etme ve dağıtma amacıyla kullanabileceğiniz bir sürükle ve bırak aracıdır.
 metadata:
-  title: 'Azure Machine Learning Studio Belgeleri - Öğreticiler, Başvuru | Microsoft Docs'
-  description: 'Machine Learning Studio, verilerinizde tahmine dayalı analiz çözümleri oluşturma, test etme ve dağıtma amacıyla kullanabileceğiniz işbirliğine dayalı bir sürükle ve bırak aracıdır. Öğreticiler, videolar ve örnek modeller Studio’yu kullanarak makine öğrenimi modelleri oluşturma ve dağıtma konusunda bilgi sağlar.'
+  title: Machine Learning Studio (klasik) belgeleri - Azure
+  description: Machine Learning Studio (klasik) tahmine dayalı analiz çözümleri oluşturma, test etme ve dağıtma amacıyla kullanabileceğiniz bir sürükle ve bırak aracıdır.
   services: machine-learning
   ms.service: machine-learning
   ms.subservice: studio
   ms.topic: landing-page
+  ms.collection: collection
   author: j-martens
   ms.author: jmartens
-  ms.tgt_pltfrm: na
-  ms.devlang: na
-  ms.date: 02/24/2019
-abstract:
-  description: 'Azure Machine Learning Studio, verilerinizde tahmine dayalı analiz çözümleri oluşturmaya, test etmeye ve dağıtmaya yönelik işbirliğine dayalı bir sürükle ve bırak aracıdır. Öğreticiler, videolar ve örnek modeller Studio’yu kullanarak makine öğrenimi modelleri oluşturma ve dağıtma konusunda bilgi sağlar.'
-sections:
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Model oluşturma ve dağıtma konusunda size yol gösterecek genişletilmiş öğreticileri uygulayın:'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="create-experiment">İlk Studio denemenizi oluşturma</a>
-          - html: <a href="tutorial-part1-credit-risk">Kredi riski için tahmine dayalı çözüm oluşturma ve dağıtma</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="powershell-module">PowerShell modülleri</a></p>
-          - title: Modüller
-            html: '<p><a href="https://msdn.microsoft.com/library/azure/dn905974.aspx">Algoritmalar ve Modül başvurusu</a></p>'
-          - title: REST
-            html: '<p><a href="https://docs.microsoft.com/rest/api/machinelearning/">REST yönetim API’leri</a></p><p><a href="web-service-error-codes">Web hizmeti hata kodları</a></p>'
-  - title: Diğer Azure Machine Learning teknolojileri
-    items:
-      - type: paragraph
-        text: 'Azure Machine Learning’de kullanılabilen diğer teknolojiler:'
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Machine Learning hizmeti
-            href: /azure/machine-learning/service/
-            image:
-              src: media/index/i_machine-learning.svg
-              href: /azure/machine-learning/service/
-          - title: Veri Bilimi Sanal Makinesi
-            href: /azure/machine-learning/data-science-virtual-machine/
-            image:
-              src: media/index/virtual-machines.svg
-              href: /azure/machine-learning/data-science-virtual-machine/
+  ms.date: 09/04/2019
+  ms.openlocfilehash: 651c816b72dd63845b786dcf73a8c395b9c8f337
+  ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73492881"
+landingContent:
+- title: Studio (klasik) ile çalışmaya başlama
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Studio (klasik) nedir?
+      url: what-is-ml-studio.md
+    - text: İlk ML denemenizi oluşturma
+      url: create-experiment.md
+    - text: Tahmine dayalı çözüm oluşturma
+      url: tutorial-part1-credit-risk.md
+- title: Başvuru içeriğini keşfetme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: PowerShell modülleri
+      url: powershell-module.md
+    - text: Algoritma ve modüller
+      url: https://docs.microsoft.com/azure/machine-learning/studio-module-reference/index
+    - text: REST yönetim API'leri
+      url: https://docs.microsoft.com/rest/api/machinelearning/
+    - text: Web hizmeti hata kodları
+      url: web-service-error-codes.md
+- title: Diğer Azure ML teknolojileri
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure Machine Learning
+      url: /azure/machine-learning/
+    - text: Veri Bilimi Sanal Makinesi
+      url: /azure/machine-learning/data-science-virtual-machine
+    - text: ML ürünlerimizi karşılaştırın
+      url: https://docs.microsoft.com/azure/architecture/data-guide/technology-choices/data-science-and-machine-learning?context=azure/machine-learning/studio/context/ml-context

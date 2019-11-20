@@ -3,48 +3,64 @@ author: aahill
 ms.author: aahi
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 06/20/2019
-ms.openlocfilehash: 1ea0b01997d3d5cecff73f951c51de5898c2f07a
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.date: 10/08/2019
+ms.openlocfilehash: a7ae6cb1231e4c202dfd0a39602c03b33099d088
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67503472"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72554701"
 ---
-Aşağıdaki Azure CLI komutları bir Anomali algılayıcısı kaynak ücretsiz fiyatlandırma katmanında sağlanır. Tıklayarak **deneyin** düğmesi, kodu yapıştırın ve enter tuşuna basın Azure cloud Shell'i çalıştırılacak. Bu, uygulamanızın kimliğini doğrulamak için anahtarlarınızı yazdırır. Tamamlandıktan sonra [bir ortam değişkenini oluşturmak](../articles/cognitive-services/cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) , anahtarlardan birini için adlı `ANOMALY_DETECTOR_KEY`.
+Aşağıdaki Azure kaynaklarından birini oluşturarak anomali algılayıcı hizmetini kullanmaya başlayın.
 
-> [!NOTE]
-> * İsteğe bağlı olarak şunları yapabilirsiniz:
->    * kullanarak bir kaynak oluşturun [Azure portalında](../articles/cognitive-services/cognitive-services-apis-create-account.md), veya [Azure CLI](../articles/cognitive-services/cognitive-services-apis-create-account.md) yerel makinenizde.
->    * Alma bir [deneme anahtarı](https://azure.microsoft.com/try/cognitive-services/#decision) geçerli 7 gün boyunca ücretsiz. Bunun imzalama üzerinde kullanıma sunulacak sonra [Azure Web sitesi](https://azure.microsoft.com/try/cognitive-services/my-apis/).
->    * Bu kaynak görünümünde [Azure portalında](https://portal.azure.com/). 
+* [Deneme kaynağı](https://azure.microsoft.com/try/cognitive-services/#decision) (Azure aboneliği gerekmez): 
+    * Ücretsiz olarak yedi gün için geçerlidir. Kaydolduktan sonra [Azure Web sitesinde](https://azure.microsoft.com/try/cognitive-services/my-apis/)bir deneme anahtarı ve uç noktası kullanılabilir olacaktır. 
+    * Anomali algılayıcısı denemek istiyorsanız, Azure aboneliğiniz yoksa bu harika bir seçenektir.
 
-Bilişsel hizmetler, sağladığınız Azure kaynakları tarafından temsil edilir. Tüm Bilişsel Hizmetler hesabı (ve ilişkili Azure kaynağı) bir Azure kaynak grubuna ait olmalıdır.
+* [Anomali algılayıcı kaynağı](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesAnomalyDetector):
+    * Kaynak silininceye kadar [Azure Portal](https://ms.portal.azure.com#blade/HubsExtension/BrowseResourceGroupBlade) ile kullanılabilir.
+    * Ücretsiz fiyatlandırma katmanını kullanarak hizmeti deneyin ve daha sonra üretime yönelik ücretli bir katmana yükseltin.
 
-1. Bir Azure kaynak grubu oluşturun
+### <a name="create-an-environment-variable"></a>Ortam değişkeni oluşturma
 
-    ```azurecli-interactive
-    az group create \
-        --name example-anomaly-detector-resource-group \
-        --location westus2
-    ```
+>[!NOTE]
+> 1 Temmuz 2019 ' den sonra oluşturulan deneme olmayan kaynaklar için uç noktalar aşağıda gösterilen özel alt etki alanı biçimini kullanır. Daha fazla bilgi ve bölgesel uç noktaların tamamen listesi için bkz. bilişsel [Hizmetler Için özel alt etki alanı adları](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-custom-subdomains). 
 
-2. Ücretsiz katmanında bir Anomali algılayıcısı kaynağı oluşturun
+Oluşturduğunuz kaynaktan anahtarınızı ve uç noktayı kullanarak, kimlik doğrulama için iki ortam değişkeni oluşturun:
 
-    ```azurecli-interactive
-    az cognitiveservices account create \
-        --name example-anomaly-detector-resource \
-        --resource-group example-anomaly-detector-resource-group \
-        --kind AnomalyDetector \
-        --sku F0 \
-        --location westus2 \
-        --yes
-    ```
+* `ANOMALY_DETECTOR_KEY`-isteklerinizin kimliğini doğrulamak için kaynak anahtarı.
+* `ANOMALY_DETECTOR_ENDPOINT`-API isteklerinin gönderilmesi için kaynak uç noktası. Şöyle görünür: 
+  * `https://<your-custom-subdomain>.api.cognitive.microsoft.com` 
 
-3. Kaynağınızın anahtarları listeleme
+İşletim sisteminiz için yönergeleri kullanın.
 
-    ```azurecli-interactive
-    az cognitiveservices account keys list \
-        --name example-anomaly-detector-resource \
-        --resource-group example-anomaly-detector-resource-group
-    ```
+#### <a name="windowstabwindows"></a>[Windows](#tab/windows)
+
+```console
+setx ANOMALY_DETECTOR_KEY your-anomaly-detector-key
+setx ANOMALY_DETECTOR_ENDPOINT your-anomaly-detector-endpoint
+```
+
+Ortam değişkenini ekledikten sonra konsol penceresini yeniden başlatın.
+
+#### <a name="linuxtablinux"></a>[Linux](#tab/linux)
+
+```bash
+export ANOMALY_DETECTOR_KEY=your-anomaly-detector-key
+export ANOMALY_DETECTOR_ENDPOINT=your-anomaly-detector-endpoint
+```
+
+Ortam değişkenini ekledikten sonra değişiklikleri uygulamak için konsol pencerenizden `source ~/.bashrc` çalıştırın.
+
+#### <a name="macostabunix"></a>[macOS](#tab/unix)
+
+@No__t_0 düzenleyin ve ortam değişkenini ekleyin:
+
+```bash
+export ANOMALY_DETECTOR_KEY=your-anomaly-detector-key
+export ANOMALY_DETECTOR_ENDPOINT=your-anomaly-detector-endpoint
+```
+
+Ortam değişkenini ekledikten sonra değişiklikleri uygulamak için konsol pencerenizden `source .bash_profile` çalıştırın.
+
+***

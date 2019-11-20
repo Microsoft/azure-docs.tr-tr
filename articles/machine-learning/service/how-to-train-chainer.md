@@ -1,54 +1,56 @@
 ---
-title: Bağlayıcı modelleri eğitme ve kaydetme
-titleSuffix: Azure Machine Learning service
-description: Bu makalede eğitme ve Azure Machine Learning hizmetini kullanarak bir bağlayıcı modeli kaydetmeyi gösterilmektedir.
+title: Derin öğrenme Chainer modellerini eğitme
+titleSuffix: Azure Machine Learning
+description: Azure Machine Learning Chainer tahmin aracı sınıfını kullanarak pytorch eğitim betiklerinizi kurumsal ölçekte çalıştırmayı öğrenin.  Örnek betik, el yazısı y 'nin üstünde çalışan Chainer Python kitaplığını kullanarak derin bir öğrenme sinir ağı oluşturmak için el ile yazılmış rakam görüntülerini sınıflandırır.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
-ms.author: sgilley
-author: sdgilley
-ms.date: 06/15/2019
-ms.openlocfilehash: 5057a8cf6c8769761a1a1a9f513ec46d152289ab
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
+ms.author: maxluk
+author: maxluk
+ms.reviewer: sdgilley
+ms.date: 08/02/2019
+ms.openlocfilehash: a7c19486fe6787c4548a77dcdd93a92a92c97d8c
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67488665"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73931106"
 ---
-# <a name="train-and-register-chainer-models-at-scale-with-azure-machine-learning-service"></a>Eğitim ve uygun ölçekte Chainer modeller Azure Machine Learning hizmeti ile kaydetme
+# <a name="train-and-register-chainer-models-at-scale-with-azure-machine-learning"></a>Azure Machine Learning ile Chainer modellerini eğitme ve kaydetme
+[!INCLUDE [applies-to-skus](../../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Bu makalede eğitme ve Azure Machine Learning hizmetini kullanarak bir bağlayıcı modeli kaydetmeyi gösterilmektedir. Popüler kullanan [MNIST dataset](http://yann.lecun.com/exdb/mnist/) kullanılarak oluşturulan bir derin sinir ağı (DNN) kullanarak el ile yazılmış rakam sınıflandırmak için [Chainer Python Kitaplığı](https://Chainer.org) üstünde çalışan [numpy](https://www.numpy.org/).
+Bu makalede, Azure Machine Learning [Chainer tahmin aracı](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.dnn.chainer?view=azure-ml-py) sınıfını kullanarak [Chainer](https://chainer.org/) eğitim betiklerinizi kurumsal ölçekte çalıştırmayı öğrenin. Bu makaledeki örnek eğitim betiği, el yazısı [y](https://www.numpy.org/)'nin üstünde çalışan Chainer Python kitaplığı kullanılarak oluşturulan derin bir sinir ağı (DNN) kullanarak el yazısı rakamları sınıflandırmak için popüler [veri kümesini](http://yann.lecun.com/exdb/mnist/) kullanır.
 
-Bağlayıcı, üst düzey bir sinir ağı geliştirmeyi kolaylaştıran diğer popüler DNN altyapıları üstte çalıştırabilen API ' dir. Azure Machine Learning hizmeti ile eğitim işleri elastik bulut bilgi işlem kaynaklarını kullanarak hızlı bir şekilde ölçeklendirebilirsiniz. Ayrıca izleyebilirsiniz eğitim çalıştırmaları, sürüm modelleri, modelleri ve daha fazlasını dağıtın.
+Derin bir öğrenme Chainer modelini baştan sona eğiyor veya mevcut bir modeli buluta çıkardığınızı, elastik bulut işlem kaynaklarını kullanarak açık kaynaklı eğitim işlerini ölçeklendirmek için Azure Machine Learning kullanabilirsiniz. Azure Machine Learning ile üretim sınıfı modellerini oluşturabilir, dağıtabilir, sürüm ve izleyebilirsiniz. 
 
-Azure Machine Learning hizmeti, sıfırdan Chainer modelden geliştiriyor ister mevcut bir model buluta getirdiğiniz, üretime hazır modelleri oluşturmanıza yardımcı olabilir.
+[Derin öğrenme ve makine öğrenimi](concept-deep-learning-vs-machine-learning.md)hakkında daha fazla bilgi edinin.
 
-Azure aboneliğiniz yoksa başlamadan önce ücretsiz bir hesap oluşturun. Deneyin [Azure Machine Learning hizmetinin ücretsiz veya Ücretli sürümüne](https://aka.ms/AMLFree) bugün.
+Azure aboneliğiniz yoksa başlamadan önce ücretsiz bir hesap oluşturun. [Azure Machine Learning ücretsiz veya ücretli sürümünü](https://aka.ms/AMLFree) bugün deneyin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu kod, bu ortamların birini çalıştırın:
+Bu kodu şu ortamlardan birinde çalıştırın:
 
-- Azure Machine Learning not defteri VM - herhangi bir indirme veya yükleme gerekli
+- Azure Machine Learning Not defteri VM-indirme veya yükleme gerekli değil
 
-    - Tamamlamak [bulut tabanlı bir not defteri hızlı](quickstart-run-cloud-notebook.md) adanmış notebook sunucusu önceden yüklenmiş SDK'sı ve örnek depoyu oluşturmak için.
-    - Not Defteri sunucusu örnekleri klasöründe, tamamlanmış bir not defteri ve dosya Bul **how-to-use-azureml/training-with-deep-learning/train-hyperparameter-tune-deploy-with-chainer** klasör.  Not Defteri, akıllı hiper parametre ayarı, model dağıtımı ve not defteri pencere öğeleri kapsayan genişletilmiş bölümler içerir.
+    - Öğreticiyi doldurun: SDK ve örnek depoyla önceden yüklenmiş adanmış bir not defteri sunucusu oluşturmak için [ortamı ve çalışma alanını kurma](tutorial-1st-experiment-sdk-setup.md) .
+    - Not defteri sunucusundaki örnekler derin öğrenimi klasöründe, **nasıl yapılır-kullan-azureml > ml-çerçeveleri > chainer > deployment > tren-hyperparameter-ayarla-dağıt-Chainer klasörünü içeren** tamamlanmış bir not defteri ve dosya bulun.  Not defteri, akıllı hiper parametre ayarlamayı, model dağıtımını ve Not defteri pencere öğelerini kapsayan genişletilmiş bölümler içerir.
 
-- Kendi Jupyter Notebook sunucusu
+- Kendi Jupyter Notebook sunucunuz
 
-    - [Azure Machine için Python SDK'sı Learning yükleme](setup-create-workspace.md#sdk)
-    - [Çalışma alanı yapılandırma dosyası oluşturma](setup-create-workspace.md#write-a-configuration-file)
-    - Örnek komut dosyasını indirme [chainer_mnist.py](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/training-with-deep-learning/train-hyperparameter-tune-deploy-with-chainer/chainer_mnist.py)
-     - Ayrıca bir tamamlanmış bulabilirsiniz [Jupyter Not Defteri sürüm](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/training-with-deep-learning/train-hyperparameter-tune-deploy-with-chainer/train-hyperparameter-tune-deploy-with-chainer.ipynb) GitHub örnekleri sayfasında bu kılavuzun. Not Defteri, akıllı hiper parametre ayarı, model dağıtımı ve not defteri pencere öğeleri kapsayan genişletilmiş bölümler içerir.
+    - [Azure Machine Learning SDK 'Sını yükler](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py).
+    - [Bir çalışma alanı yapılandırma dosyası oluşturun](how-to-configure-environment.md#workspace).
+    - Örnek betik dosyası [chainer_mnist. Kopyala](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/training-with-deep-learning/train-hyperparameter-tune-deploy-with-chainer/chainer_mnist.py)' yı indirin.
+     - GitHub örnekleri sayfasında bu kılavuzun tamamlanmış bir [Jupyter Notebook sürümünü](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/ml-frameworks/chainer/deployment/train-hyperparameter-tune-deploy-with-chainer/train-hyperparameter-tune-deploy-with-chainer.ipynb) de bulabilirsiniz. Not defteri, akıllı hiper parametre ayarlamayı, model dağıtımını ve Not defteri pencere öğelerini kapsayan genişletilmiş bölümler içerir.
 
-## <a name="set-up-the-experiment"></a>Deneme ayarlama
+## <a name="set-up-the-experiment"></a>Denemeyi ayarlama
 
-Bu bölümde, gerekli python paketlerini yükleme, bir çalışma alanı başlatma, deneme oluşturma ve eğitim verilerini ve eğitim betikleriniz karşıya eğitim denemesini ayarlar.
+Bu bölüm, gerekli Python paketlerini yükleyerek, bir çalışma alanı başlatarak, bir deneme oluşturarak ve eğitim verilerini ve eğitim betikleri karşıya yükleyerek Eğitim denemesini ayarlar.
 
 ### <a name="import-packages"></a>Paketleri içeri aktarma
 
-İlk olarak, Python kitaplığı ad görüntü sürüm numarasını azureml.core içeri aktarın.
+İlk olarak, azureml. Core Python kitaplığını içeri aktarın ve sürüm numarasını görüntüleyin.
 
 ```
 # Check core SDK version number
@@ -57,18 +59,18 @@ import azureml.core
 print("SDK version:", azureml.core.VERSION)
 ```
 
-### <a name="initialize-a-workspace"></a>Bir çalışma alanını Başlat
+### <a name="initialize-a-workspace"></a>Çalışma alanını başlatma
 
-[Azure Machine Learning hizmeti çalışma alanında](concept-workspace.md) hizmeti için en üst düzey bir kaynaktır. Oluşturduğunuz tüm yapıları ile çalışma için merkezi bir yerde sağlar. Python SDK'da çalışma yapıları oluşturarak erişebileceğiniz bir [ `workspace` ](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py) nesne.
+[Azure Machine Learning çalışma alanı](concept-workspace.md) , hizmet için en üst düzey kaynaktır. Oluşturduğunuz tüm yapıtlarla çalışmak için merkezi bir yer sağlar. Python SDK 'sında, [`workspace`](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py) nesnesi oluşturarak çalışma alanı yapılarına erişebilirsiniz.
 
-Bir çalışma alanı nesne oluşturmak `config.json` 'te dosya oluşturulduğunda [Önkoşullar bölümüne](#prerequisites).
+[Önkoşullar bölümünde](#prerequisites)oluşturulan `config.json` dosyasını okuyarak bir çalışma alanı nesnesi oluşturun:
 
 ```Python
 ws = Workspace.from_config()
 ```
 
 ### <a name="create-a-project-directory"></a>Proje dizini oluşturma
-Uzak kaynak erişimi için gerekir, yerel makinenizde tüm gerekli kodu içeren bir dizin oluşturun. Bu eğitim betiğini ve eğitim betiğinizi bağımlı başka dosyalar içerir.
+Yerel makinenizden uzak kaynak üzerinde erişmeniz gereken tüm gerekli kodu içerecek bir dizin oluşturun. Bu eğitim betiğini ve eğitim betiğinizin bağımlı olduğu diğer dosyaları içerir.
 
 ```
 import os
@@ -77,13 +79,15 @@ project_folder = './chainer-mnist'
 os.makedirs(project_folder, exist_ok=True)
 ```
 
-### <a name="prepare-training-script"></a>Eğitim betiği hazırlama
+### <a name="prepare-training-script"></a>Eğitim betiğini hazırla
 
-Bu öğreticide, bir eğitim betiğini **chainer_mnist.py** zaten size sağlanır. Uygulamada, olan ve uygulamayı Azure ML ile kodunuzu değiştirmek zorunda kalmadan herhangi özel bir eğitim betiğini alın mümkün olması gerekir.
+Bu öğreticide, sizin için eğitim betiği **chainer_mnist. Kopyala** zaten sağlanmış. Uygulamada, herhangi bir özel eğitim betiğini olduğu gibi götürebilmeniz ve kodunuzu değiştirmek zorunda kalmadan Azure ML ile çalıştırmanız gerekir.
 
-Azure ML'ın izleme ve ölçümler özellikleri kullanmak için az miktarda bir eğitim betiğinizi içinde Azure ML kod eklemeniz gerekir.  Eğitim betiğini **chainer_mnist.py** bazı ölçümler, Azure ML çalıştırmak için oturum işlemi gösterilmektedir. Bunu yapmak için Azure ML erişim `Run` betik içinde nesne.
+Azure ML 'nin izleme ve ölçüm yeteneklerini kullanmak için eğitim betiğinizin içine küçük miktarda Azure ML kodu ekleyin.  Eğitim betiği **chainer_mnist. Kopyala** , bazı ÖLÇÜMLERIN Azure ML çalıştırmak için betik içinde `Run` nesnesini kullanarak nasıl günlüğe alınacağını gösterir.
 
-Eğitim betiği kopyalayın **chainer_mnist.py** , proje dizinine.
+Belirtilen eğitim betiği, Chainer `datasets.mnist.get_mnist` işlevindeki örnek verileri kullanır.  Kendi verileriniz için verileri eğitim sırasında kullanılabilir hale getirmek üzere veri [kümesini ve betikleri karşıya yükleme](how-to-train-keras.md#data-upload) gibi adımları kullanmanız gerekebilir.
+
+Eğitim betiğini **chainer_mnist.** Kopyala öğesini proje dizininize kopyalayın.
 
 ```
 import shutil
@@ -91,9 +95,9 @@ import shutil
 shutil.copy('chainer_mnist.py', project_folder)
 ```
 
-### <a name="create-an-experiment"></a>Deneme oluşturma
+### <a name="create-a-deep-learning-experiment"></a>Derin öğrenme denemesi oluşturun
 
-Bir deney ve eğitim betiklerinizi tutmak için bir klasör oluşturun. Bu örnekte, "bağlayıcı mnıst" adlı bir deneme oluşturun.
+Deneme oluşturma. Bu örnekte, "Chainer-mnist" adlı bir deneme oluşturun.
 
 ```
 from azureml.core import Experiment
@@ -103,11 +107,11 @@ experiment = Experiment(ws, name=experiment_name)
 ```
 
 
-## <a name="create-or-get-a-compute-target"></a>Oluşturun veya bir işlem hedefine alın
+## <a name="create-or-get-a-compute-target"></a>İşlem hedefi oluştur veya al
 
-İhtiyacınız olacak bir [hedef işlem](concept-compute-target.md) modelinizi eğitim için. Bu öğreticide, Azure ML yönetilen bilgi işlem (AmlCompute) için Uzak eğitim işlem kaynağı kullanır.
+Modelinize eğitim için bir [işlem hedefine](concept-compute-target.md) ihtiyacınız vardır. Bu örnekte, uzaktan eğitim işlem kaynağınız için Azure ML yönetilen işlem (AmlCompute) kullanacaksınız.
 
-**Oluşturma, AmlCompute yaklaşık 5 dakika sürer**. Bu ada sahip AmlCompute çalışma alanınızda zaten varsa, bu kod oluşturma işlemini atlar.  
+**AmlCompute oluşturma işlemi yaklaşık 5 dakika sürer**. Bu ada sahip AmlCompute zaten çalışma alanınızda varsa, bu kod oluşturma işlemini atlar.  
 
 ```Python
 from azureml.core.compute import ComputeTarget, AmlCompute
@@ -135,11 +139,11 @@ print(compute_target.get_status().serialize())
 
 İşlem hedefleri hakkında daha fazla bilgi için bkz. [işlem hedefi nedir](concept-compute-target.md) makalesi.
 
-## <a name="create-a-chainer-estimator"></a>Bir bağlayıcı tahmin oluşturma
+## <a name="create-a-chainer-estimator"></a>Chainer tahmin aracı oluşturma
 
-[Chainer estimator](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.dnn.chainer?view=azure-ml-py) işlem hedef Chainer eğitim işleri başlatılıyor, basit bir yol sağlar.
+[Chainer tahmin aracı](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.dnn.chainer?view=azure-ml-py) , işlem Hedefinizdeki Chainer eğitim işlerini başlatmanın basit bir yolunu sağlar.
 
-Bağlayıcı estimator genel uygulanır [ `estimator` ](https://docs.microsoft.com//python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) herhangi bir çerçeveyi desteklemek için kullanılan sınıf. Genel tahmin Aracı'nı kullanarak modellerin eğitimi hakkında daha fazla bilgi için bkz. [tahmin Aracı'nı kullanarak Azure Machine Learning modellerini eğitin](how-to-train-ml-models.md)
+Chainer tahmin aracı, herhangi bir çerçeveyi desteklemek için kullanılabilen genel [`estimator`](https://docs.microsoft.com//python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) sınıfı aracılığıyla uygulanır. Genel tahmin aracı kullanan eğitim modelleri hakkında daha fazla bilgi için bkz. [tahmin aracı kullanarak Azure Machine Learning modelleri eğitme](how-to-train-ml-models.md)
 
 ```Python
 from azureml.train.dnn import Chainer
@@ -158,49 +162,58 @@ estimator = Chainer(source_directory=project_folder,
                     use_gpu=True)
 ```
 
-## <a name="submit-a-run"></a>Bir farklı çalıştır gönderin
+## <a name="submit-a-run"></a>Bir çalıştırma gönder
 
-[Nesnesini çalıştırmak](https://docs.microsoft.com/python/api/azureml-core/azureml.core.run%28class%29?view=azure-ml-py) işi devam ederken ve tamamlandıktan sonra çalıştırma geçmişini arabirim sağlar.
+[Run nesnesi](https://docs.microsoft.com/python/api/azureml-core/azureml.core.run%28class%29?view=azure-ml-py) , iş çalışırken ve tamamlandıktan sonra çalışma geçmişi için arabirim sağlar.
 
 ```Python
 run = exp.submit(est)
 run.wait_for_completion(show_output=True)
 ```
 
-Çalıştırma yürütülür gibi aşağıdaki aşamalarının geçer:
+Çalıştırma yürütüldüğü için aşağıdaki aşamalardan geçer:
 
-- **Hazırlama**: Bir docker görüntüsü Chainer estimator göre oluşturulur. Görüntü çalışma alanınızın container registry'ye yüklendi ve sonraki çalıştırmalar için önbelleğe alınır. Günlükler için çalıştırma geçmişi de aktarılır ve ilerleme durumunu izlemek için görüntülenebilir.
+- **Hazırlama**: bir Docker görüntüsü, Chainer Estimator öğesine göre oluşturulur. Görüntü, çalışma alanının kapsayıcı kayıt defterine yüklenir ve daha sonra çalışacak şekilde önbelleğe alınır. Günlükler, çalıştırma geçmişine de kaydedilir ve ilerlemeyi izlemek için görüntülenebilir.
 
-- **Ölçeklendirme**: Daha fazla düğüm çalıştırma şu anda mevcut olandan yürütmek için Batch AI kümesi gerektiriyorsa, Ölçek kümesi çalışır.
+- **Ölçeklendirme**: Batch AI kümesi, çalışmayı yürütmek için daha fazla düğüm gerektiriyorsa, küme ölçeği büyütmeyi dener ve şu anda kullanılabilir.
 
-- **Çalışan**: Betik klasöründeki tüm betikler işlem hedefine yüklenen, veri depoları bağlı veya kopyalanır ve entry_script yürütülür. Stdout çıkışları ve. / Günlükler klasöründe için çalıştırma geçmişi aktarılır ve çalıştırmasını izlemek için kullanılabilir.
+- **Çalışıyor**: betik klasöründeki tüm betikler işlem hedefine yüklenir, veri depoları bağlanır veya kopyalanır ve entry_script yürütülür. Stdout ve./logs klasörü çıkışları, çalıştırma geçmişine akışla kaydedilir ve çalıştırmayı izlemek için kullanılabilir.
 
-- **İşleme sonrası**: . / Çalışma klasörüne kopyalanır üzerinden için çalıştırma geçmişi çıkarır.
+- **Işlem sonrası**: çalıştırmanın./çıktılar klasörü, çalışma geçmişine kopyalanır.
 
-## <a name="save-and-register-the-model"></a>Kaydet ve modeli kaydedin
+## <a name="save-and-register-the-model"></a>Modeli kaydetme ve kaydetme
 
-Modeli eğittiğimize sonra Kaydet ve çalışma alanınıza kaydedin. Model kaydı sağlar, depolama ve sürüm Modellerinizi basitleştirmek için çalışma alanınızdaki [model yönetimi ve dağıtım](concept-model-management-and-deployment.md).
+Modeli eğittikten sonra, çalışma alanınıza kaydedebilir ve kaydedebilirsiniz. Model kaydı, [model yönetimi ve dağıtımını](concept-model-management-and-deployment.md)basitleştirmek için modellerinizi çalışma alanınızda depolamanızı ve sürümlerini oluşturmanıza imkan tanır.
 
-Eğitim betiğe aşağıdaki kodu ekleyin **chainer_mnist.py**, modeli kaydedin. 
 
-``` Python
-    serializers.save_npz(os.path.join(args.output_dir, 'model.npz'), model)
-```
-
-Aşağıdaki kod ile çalışma alanınıza modeli kaydedin.
+Model eğitimi tamamlandıktan sonra, aşağıdaki kodla modeli çalışma alanınıza kaydedin.  
 
 ```Python
 model = run.register_model(model_name='chainer-dnn-mnist', model_path='outputs/model.npz')
 ```
 
+> [!TIP]
+> Yeni kaydettiğiniz model, eğitim için kullandığınız tahmin aracı 'dan bağımsız olarak, Azure Machine Learning ' deki diğer tüm kayıtlı modellerle aynı şekilde dağıtılır. Dağıtım nasıl yapılır, model kaydettirme hakkında bir bölüm içerir, ancak zaten kayıtlı bir modeliniz olduğundan, dağıtım için doğrudan [bir işlem hedefi oluşturmaya](how-to-deploy-and-where.md#choose-a-compute-target) geçebilirsiniz.
 
+Ayrıca modelin yerel bir kopyasını da indirebilirsiniz. Bu, ek model doğrulama işini yerel olarak gerçekleştirmek için yararlı olabilir. Eğitim betikindeki `chainer_mnist.py`, bir koruyucu nesnesi modeli yerel bir klasöre (yerel olarak işlem hedefine) devam ettirir. Veri deposundan bir kopya indirmek için Run nesnesini kullanabilirsiniz.
+
+```Python
+# Create a model folder in the current directory
+os.makedirs('./model', exist_ok=True)
+
+for f in run.get_file_names():
+    if f.startswith('outputs/model'):
+        output_file_path = os.path.join('./model', f.split('/')[-1])
+        print('Downloading from {} to {} ...'.format(f, output_file_path))
+        run.download_file(name=f, output_file_path=output_file_path)
+```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, Azure Machine Learning hizmetinde bir bağlayıcı modelin eğitim. 
+Bu makalede, Azure Machine Learning üzerinde Chainer kullanarak derin bir öğrenme, sinir ağı eğitildiniz ve kaydettiniz. Modeli dağıtmayı öğrenmek için [model dağıtım](how-to-deploy-and-where.md) makalemize devam edin.
 
-* Model dağıtma konusunda bilgi almak için devam etmek için sunduğumuz [model dağıtım](how-to-deploy-and-where.md) makalesi.
+* [Hiper parametreleri ayarla](how-to-tune-hyperparameters.md)
 
-* [Hiperparametreleri ayarlama](how-to-tune-hyperparameters.md)
+* [Eğitim sırasında çalıştırma ölçümlerini izleyin](how-to-track-experiments.md)
 
-* [İzleme ölçümlerini eğitim sırasında çalıştırın](how-to-track-experiments.md)
+* [Azure 'da dağıtılmış derin öğrenme eğitimi için başvuru mimarimizi görüntüleyin](/azure/architecture/reference-architectures/ai/training-deep-learning)

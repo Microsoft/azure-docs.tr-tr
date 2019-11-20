@@ -1,6 +1,6 @@
 ---
-title: Şablonları kullanarak API Management Geliştirici portalını özelleştirme-Azure | Microsoft Docs
-description: Şablonları kullanarak Azure API Management Geliştirici portalını özelleştirmeyi öğrenin.
+title: Şablonları kullanarak API Management Geliştirici Portalını Özelleştirme-Azure | Microsoft Docs
+description: Şablonları kullanarak Azure API Management geliştirici portalını özelleştirmeyi öğrenin.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -10,60 +10,61 @@ ms.assetid: a195675b-f7d0-4fc9-90bf-860e6f17ccf7
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/09/2017
+ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: 00d5e3df78e85d19a519786dad1a1b176ad7fa08
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9657414c56296ee710f17663bf0bbdd3a4d67ac8
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60837258"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73176804"
 ---
-# <a name="how-to-customize-the-azure-api-management-developer-portal-using-templates"></a>Şablonları kullanarak Azure API Management Geliştirici portalını özelleştirme
+# <a name="how-to-customize-the-azure-api-management-developer-portal-using-templates"></a>Şablonları kullanarak Azure API Management Geliştirici Portalını Özelleştirme
 
 Azure API Management'ta geliştirici portalını özelleştirmek için kullanılabilecek üç temel yöntem vardır:
 
 * [Statik sayfaların ve sayfa düzeni öğelerinin içeriğini düzenleme][modify-content-layout]
-* [Geliştirici portalının tamamında sayfa öğeleri için kullanılan stilleri güncelleştirme][customize-styles]
-* [Portal tarafından oluşturulan sayfalar için kullanılan şablonları değiştirme] [ portal-templates] (Bu kılavuzda açıklanmıştır)
+* [Geliştirici portalı genelinde sayfa öğeleri için kullanılan stilleri güncelleştirme][customize-styles]
+* [Portal tarafından oluşturulan sayfalar için kullanılan şablonları değiştirme][portal-templates] (Bu kılavuzda açıklanmıştır)
 
-Şablonları, sistem tarafından oluşturulan Geliştirici Portalı sayfalarının (örneğin, API belgeleri, ürünler, kullanıcı kimlik doğrulaması, vb.) içeriğini özelleştirmek için kullanılır. Kullanarak [DotLiquid](http://dotliquidmarkup.org/) söz dizimi ve yerelleştirilmiş bir dize kaynakları, simgeler ve sayfa denetimleri, sağlanan bir dizi sayfaların içeriğini istediğiniz şekilde yapılandırmak için harika esnekliğine sahip olursunuz.
+Şablonlar, sistem tarafından oluşturulan geliştirici portalı sayfalarının (örneğin, API belgeleri, ürünler, Kullanıcı kimlik doğrulaması vb.) içeriğini özelleştirmek için kullanılır. [Dotlikit](http://dotliquidmarkup.org/) sözdizimi ve sağlanan yerelleştirilmiş dize kaynakları, simgeler ve sayfa denetimleri kullanılarak sayfaların içeriğini uygun gördüğünüz şekilde yapılandırmak için harika bir esneklik vardır.
+
+[!INCLUDE [api-management-portal-legacy.md](../../includes/api-management-portal-legacy.md)]
 
 [!INCLUDE [premium-dev-standard-basic.md](../../includes/api-management-availability-premium-dev-standard-basic.md)]
 
-## <a name="developer-portal-templates-overview"></a>Geliştirici portal şablonları genel bakış
+## <a name="developer-portal-templates-overview"></a>Geliştirici portalı şablonlarına genel bakış
 
-Şablonları düzenlemek **Geliştirici Portalı** yönetici olarak oturum açmış oluştu. Var. İlk Azure portalı açık alın ve **Geliştirici Portalı** API Management örneğinizin hizmet araç çubuğundan.
+Şablonları düzenleyici, yönetici olarak oturum açarken **Geliştirici portalından** yapılır. Önce Azure portal açın ve API Management örneğinizin hizmet araç çubuğundan **Geliştirici Portalı** ' na tıklayın.
 
-Geliştirici portal şablonları erişmek için soldaki özelleştirme menüsünü görüntüleme ve özelleştirme simgesine tıklayın **şablonları**.
+Geliştirici portalı şablonlarına erişmek için sol taraftaki Özelleştir simgesine tıklayarak özelleştirme menüsünü görüntüleyin ve **Şablonlar**' a tıklayın.
 
-![Geliştirici portal şablonları][api-management-customize-menu]
+![Geliştirici portalı şablonları][api-management-customize-menu]
 
-Şablonları farklı Geliştirici Portalı sayfalarında kapsayan çeşitli kategorileri şablonları listesini görüntüler. Her şablon farklıdır, ancak bunları düzenlemek ve değişiklikleri yayımlamak için adımları aynıdır. Bir şablonu düzenlemek için şablonun adını tıklayın.
+Şablonlar listesi, geliştirici portalındaki farklı sayfaları kapsayan birkaç şablon kategorisini görüntüler. Her şablon farklıdır, ancak bunları düzenleme ve değişiklikleri yayımlama adımları aynıdır. Bir şablonu düzenlemek için şablonun adına tıklayın.
 
-![Geliştirici portal şablonları][api-management-templates-menu]
+![Geliştirici portalı şablonları][api-management-templates-menu]
 
-Bir şablon tıkladığınızda, şablon tarafından özelleştirilebilir Geliştirici portal sayfasına yönlendirilirsiniz. Bu örnekte, **ürün listesi** şablonu görüntülenir. **Ürün listesi** şablon kırmızı dikdörtgenin tarafından gösterilen ekran alanı denetler.
+Bir şablona tıkladığınızda bu şablon tarafından özelleştirilebilen geliştirici portalı sayfasına gidersiniz. Bu örnekte, **ürün listesi** şablonu görüntülenir. **Ürün listesi** şablonu, ekranın kırmızı dikdörtgenle belirtilen alanını denetler.
 
-![Ürünleri liste şablonu][api-management-developer-portal-templates-overview]
+![Ürün listesi şablonu][api-management-developer-portal-templates-overview]
 
-Bazı şablonlar ister **kullanıcı profili** şablonları, farklı bölümleri aynı sayfayı özelleştirme.
+**Kullanıcı profili** şablonları gibi bazı şablonlar, aynı sayfanın farklı parçalarını özelleştirir.
 
 ![Kullanıcı profili şablonları][api-management-user-profile-templates]
 
-Her geliştirici portal şablonu için düzenleyici sayfasının en altında görüntülenen iki bölümden oluşur. Sol taraftaki şablon düzenleme bölmesi ve şablon için veri modeli sağ tarafı görüntüler.
+Her geliştirici portalı şablonunun Düzenleyicisi, sayfanın alt kısmında iki bölümden oluşur. Sol tarafta, şablonun düzenlenme bölmesi görüntülenir ve sağ taraftaki şablon için veri modeli görüntülenir.
 
-Şablon bölmesinde düzenleme görünümünü ve davranışını Geliştirici portalında karşılık gelen sayfanın denetimleri biçimlendirmeyi içerir. Şablondaki biçimlendirme kullanan [DotLiquid](http://dotliquidmarkup.org/) söz dizimi. DotLiquid için popüler bir düzenleyici [tasarımcılarına yönelik DotLiquid](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers). Düzenleme sırasında şablonuna yapılan değişiklikleri gerçek zamanlı olarak görüntülenir tarayıcıda ancak dek müşterileriniz için görünür değildir [Kaydet](#to-save-a-template) ve [yayımlama](#to-publish-a-template) şablonu.
+Şablon düzenlemesi bölmesi, geliştirici portalındaki karşılık gelen sayfanın görünümünü ve davranışını denetleyen biçimlendirmeyi içerir. Şablondaki biçimlendirme, [Dotlikit](http://dotliquidmarkup.org/) sözdizimini kullanır. Dotlikit için popüler bir düzenleyici, [tasarımcılar Için Dotlikit](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers)' dir. Düzen sırasında şablonda yapılan tüm değişiklikler tarayıcıda gerçek zamanlı olarak görüntülenir, ancak şablonu [kaydedip](#to-save-a-template) [yayımlaana](#to-publish-a-template) kadar müşterilerinize görülemez.
 
-![Şablon biçimlendirme][api-management-template]
+![Şablon biçimlendirmesi][api-management-template]
 
-**Şablon verileri** bölmesi, belirli bir şablonda kullanılabilir varlıklar için veri modeli için bir kılavuz sağlar. Bu kılavuz, şu anda Geliştirici Portalı'nda görüntülenen canlı verileri görüntüleyerek sağlar. Sağ üst köşesindeki dikdörtgen tıklayarak şablon bölmeleri genişletebilirsiniz **şablon verileri** bölmesi.
+**Şablon verileri** bölmesi, belirli bir şablonda kullanıma sunulan varlıkların veri modeline kılavuzluk sağlar. Geliştirici Portalında Şu anda görüntülenen canlı verileri görüntüleyerek bu kılavuzu sağlar. Şablon bölmeleri, **şablon verileri** bölmesinin sağ üst köşesindeki dikdörtgene tıklayarak genişletebilirsiniz.
 
 ![Şablon veri modeli][api-management-template-data]
 
-Önceki örnekte, görüntülenen verileri alındı Geliştirici portalında gösterilen iki ürünü mevcuttur **şablon verileri** bölmesinde, aşağıdaki örnekte gösterildiği gibi:
+Önceki örnekte, aşağıdaki örnekte gösterildiği gibi, **şablon verileri** bölmesinde görüntülenen verilerden alınan Geliştirici Portalında iki ürün görüntülenir:
 
 ```json
 {
@@ -101,7 +102,7 @@ Her geliştirici portal şablonu için düzenleyici sayfasının en altında gö
 }
 ```
 
-İşaretlemede **ürün listesi** istenen çıkış bilgileri ve bağlantı için her bir ürün görüntülenecek ürünleri koleksiyonu ile Yinelem yaparak sağlamak için veri şablonunu işler. Not `<search-control>` ve `<page-control>` işaretleme öğeleri. Bu sayfadaki denetimleri sayfalama ve arama görünümünü denetler. `ProductsStrings|PageTitleProducts` içeren bir yerelleştirilmiş dize arar: başvuru `h2` sayfa için üstbilgi metni. Dize kaynakları, sayfa denetimleri ve geliştirici portal şablonları için kullanılabilir simgeler listesi için bkz. [API Management Geliştirici portal şablonları başvurusu](api-management-developer-portal-templates-reference.md).
+**Ürün listesi** şablonundaki biçimlendirme, bilgileri ve her bir ürüne yönelik bir bağlantıyı göstermek üzere ürünlerin toplanması yoluyla istenen çıktıyı sağlamak üzere verileri işler. İşaretlemede `<search-control>` ve `<page-control>` öğelerine göz önünde edin. Bu denetim sayfada arama ve sayfalama denetimleri görüntülenir. `ProductsStrings|PageTitleProducts`, sayfanın `h2` üst bilgi metnini içeren yerelleştirilmiş bir dize başvurusudur. Geliştirici portalı şablonlarında kullanılabilecek dize kaynakları, sayfa denetimleri ve simgelerin bir listesi için, bkz. [API Management geliştirici portalı şablonları başvurusu](api-management-developer-portal-templates-reference.md).
 
 ```html
 <search-control></search-control>
@@ -130,61 +131,61 @@ Her geliştirici portal şablonu için düzenleyici sayfasının en altında gö
 ```
 
 ## <a name="to-save-a-template"></a>Bir şablonu kaydetmek için
-Bir şablonu kaydetmek için şablonu Düzenleyicisi'nde Kaydet'e tıklayın.
+Bir şablonu kaydetmek için şablon düzenleyicisinde Kaydet ' e tıklayın.
 
-![Şablonu kaydetme][api-management-save-template]
+![Şablonu kaydet][api-management-save-template]
 
-Kaydedilen değişiklikleri yayımlanmalarından kadar Geliştirici Portalı'nda Canlı değildir.
+Kayıtlı değişiklikler yayımlanana kadar Geliştirici Portalında canlı değildir.
 
-## <a name="to-publish-a-template"></a>Şablon yayımlama
-Kaydedilen şablonları, ayrı ayrı veya tümünü bir araya yayımlanabilir. Tek bir şablonu yayımlamak için tıklatın şablonu Düzenleyicisi'nde yayımlayın.
+## <a name="to-publish-a-template"></a>Şablon yayımlamak için
+Kaydedilmiş şablonlar tek tek veya hepsi birlikte yayımlanabilir. Tek bir şablonu yayımlamak için şablon düzenleyicisinde Yayımla ' ya tıklayın.
 
 ![Şablonu yayımlama][api-management-publish-template]
 
-Tıklayın **Evet** onaylamak ve şablonun sağlamak için live Geliştirici portalında.
+Onaylamak için **Evet** ' e tıklayın ve şablonu Geliştirici Portalında canlı hale getirin.
 
-![Onayla yayımlama][api-management-publish-template-confirm]
+![Yayımlamayı Onayla][api-management-publish-template-confirm]
 
-Şu anda yayımlanmamış tüm sürümlerine yayımlamak için tıklatın **Yayımla** şablonları listesinde. Yayımlanmamış şablonları şablonu adından bir yıldız işaretiyle belirtilir. Bu örnekte, **ürün listesi** ve **ürün** şablonları yayımlanır.
+Kaldırılmış olan tüm şablon sürümlerini yayımlamak için şablonlar listesinde **Yayımla** ' ya tıklayın. Yayımdan kaldırılan şablonlar, şablon adından sonra bir yıldız işaretiyle atanır. Bu örnekte, **ürün listesi** ve **ürün** şablonları yayımlanıyor.
 
 ![Şablonları Yayımlama][api-management-publish-templates]
 
-Tıklayın **Özelleştirmeleri Yayımla** onaylamak için.
+Onaylamak için **Özelleştirmeleri Yayımla** ' ya tıklayın.
 
-![Onayla yayımlama][api-management-publish-customizations]
+![Yayımlamayı Onayla][api-management-publish-customizations]
 
-Yeni yayımlanan şablonların Geliştirici Portalı'nda hemen etkili olur.
+Yeni yayınlanan şablonlar, Geliştirici Portalında hemen etkili olur.
 
-## <a name="to-revert-a-template-to-the-previous-version"></a>Bir şablonu önceki sürüme geri döndürmek için
-Bir şablonu önceki yayımlanan sürüme geri döndürmek için tıklatın şablonu Düzenleyicisi'nde döndürün.
+## <a name="to-revert-a-template-to-the-previous-version"></a>Bir şablonu önceki sürüme geri dönüştürmek için
+Bir şablonu önceki yayımlanmış sürüme geri dönüştürmek için şablon düzenleyicisinde geri çevir ' e tıklayın.
 
-![Şablon geri döndür][api-management-revert-template]
+![Şablonu tekrar çevir][api-management-revert-template]
 
 Onaylamak için **Evet**’e tıklayın.
 
 ![Onayla][api-management-revert-template-confirm]
 
-Geri döndürme işlemi tamamlandıktan sonra daha önce yayımlanmış bir şablonu Geliştirici Portalı'nda Canlı sürümüdür.
+Bir şablonun daha önce yayımlanmış olan sürümü, bir önceki olarak, iade işlemi tamamlandıktan sonra Geliştirici Portalında canlı olur.
 
-## <a name="to-restore-a-template-to-the-default-version"></a>Bir şablon için varsayılan sürüm geri yüklemek için
-Şablonları, varsayılan sürümüne geri yüklemek iki adımlı bir işlemdir. Şablonları öncelikle geri yüklenmesi gerekir ve ardından geri yüklenen sürümler yayımlanması gerekir.
+## <a name="to-restore-a-template-to-the-default-version"></a>Bir şablonu varsayılan sürüme geri yüklemek için
+Şablonları varsayılan sürümüne geri yüklemek iki adımlı bir işlemdir. Önce şablonların geri yüklenmesi gerekir ve ardından geri yüklenen sürümlerin yayımlanması gerekir.
 
-Tek bir varsayılan sürüm şablonuna geri yüklemek için şablonu Düzenleyicisi'ni geri yükleme'yi tıklatın.
+Tek bir şablonu varsayılan sürüme geri yüklemek için şablon düzenleyicisinde geri yükle ' ye tıklayın.
 
-![Şablon geri döndür][api-management-reset-template]
+![Şablonu tekrar çevir][api-management-reset-template]
 
 Onaylamak için **Evet**’e tıklayın.
 
 ![Onayla][api-management-reset-template-confirm]
 
-Tüm şablonları varsayılan sürümlerine geri yüklemek için **geri varsayılan şablonları** şablonu listesinde.
+Tüm şablonları varsayılan sürümlerine geri yüklemek için şablon listesinde **varsayılan şablonları geri yükle** ' ye tıklayın.
 
 ![Şablonları geri yükleme][api-management-restore-templates]
 
-Geri yüklenen şablonları sonra tek tek veya tek seferde içindeki adımları izleyerek yayımlanmalıdır [şablon yayımlama için](#to-publish-a-template).
+Geri yüklenen şablonlar, [bir şablon yayımlamak için](#to-publish-a-template)içindeki adımları izleyerek tek seferde veya her bir kez yayımlanmalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Geliştirici portal şablonları, dize kaynakları, simgeler ve sayfa denetimleri için başvuru bilgileri için bkz [API Management Geliştirici portal şablonları başvurusu](api-management-developer-portal-templates-reference.md).
+Geliştirici portalı şablonları, dize kaynakları, simgeler ve sayfa denetimleri için başvuru bilgileri için bkz. [API Management geliştirici portalı şablonları başvurusu](api-management-developer-portal-templates-reference.md).
 
 [modify-content-layout]: api-management-modify-content-layout.md
 [customize-styles]: api-management-customize-styles.md

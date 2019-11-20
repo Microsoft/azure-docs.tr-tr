@@ -1,6 +1,6 @@
 ---
-title: Öğretici - paylaşım Azure uzamsal Çıpasıyla oturumları ve cihazlar arasında bir Azure Cosmos DB arka ucu | Microsoft Docs
-description: Bu öğreticide, Azure uzamsal bağlayıcılarını tanımlayıcıları Unity Android/iOS cihazlarını bir arka uç hizmeti ve Azure Cosmos DB ile paylaşılmasını öğrenin.
+title: Öğretici-Azure Cosmos DB arka ucu ile oturumlar ve cihazlar arasında Azure uzamsal çıpası paylaşma | Microsoft Docs
+description: Bu öğreticide, bir arka uç hizmetiyle ve Azure Cosmos DB Unity 'de Android/iOS cihazlarında Azure uzamsal bağlayıcı tanımlayıcılarını paylaşmayı öğreneceksiniz.
 author: ramonarguelles
 manager: vicenterivera
 services: azure-spatial-anchors
@@ -8,69 +8,46 @@ ms.author: rgarcia
 ms.date: 02/24/2019
 ms.topic: tutorial
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: fc172b5327d72687fea7d13ddb706ecc7ab630b6
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: 7ddbff563f79992f21aef5182177f4fb60c61dab
+ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "67135375"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72882159"
 ---
-# <a name="tutorial-share-azure-spatial-anchors-across-sessions-and-devices-with-an-azure-cosmos-db-back-end"></a>Öğretici: Paylaşım Azure uzamsal bağlayıcılarını oturumları ve cihazlar arasında bir Azure Cosmos DB ile arka uç
+# <a name="tutorial-sharing-azure-spatial-anchors-across-sessions-and-devices-with-an-azure-cosmos-db-back-end"></a>Öğretici: Azure uzamsal bağlayıcılarını Azure Cosmos DB arka ucu ile oturumlar ve cihazlar arasında paylaşma
 
-Bu öğreticide, nasıl kullanılacağını öğreneceksiniz [Azure uzamsal bağlayıcılarını](../overview.md) bir oturumu sırasında yer işaretleri oluşturmanız ve ardından aynı cihaz veya farklı bir başka bir oturum sırasında bulun. Örneğin, ikinci oturum başka bir gün olabilir. Bu aynı çıpalarını da aynı yerde ve aynı anda birden çok cihaz tarafından bulunamıyor.
+Bu öğretici, [Azure uzamsal Tutturucuların oturumlar ve cihazlar arasında paylaşılmasının](../../../articles/spatial-anchors/tutorials/tutorial-share-anchors-across-devices.md) bir devamıdır. Azure Cosmos DB, oturum ve cihazlarda Azure uzamsal bağlayıcıları paylaşırken arka uç depolama alanı olarak sunmak için daha fazla özellik ekleme sürecinde size kılavuzluk eder.
 
-![GIF gösteren nesne kalıcılığı](./media/persistence.gif)
+![Nesne kalıcılığını gösteren GIF](./media/persistence.gif)
 
-[Azure uzamsal bağlayıcılarını](../overview.md) konumlarına cihazlar arasında zaman içinde kalıcı nesneler ile karma gerçeklik deneyimleri oluşturmak için kullanabileceğiniz bir platformlar arası Geliştirici hizmetidir. İşiniz bittiğinde, iki veya daha fazla cihaza dağıttığınız bir uygulamayı sahip olacaksınız. Bir örneği tarafından oluşturulan uzamsal bağlayıcılarını Azure Cosmos DB kullanarak kendi tanımlayıcıları başkalarıyla paylaşır.
-
-Şunları öğrenirsiniz:
-
-> [!div class="checklist"]
-> * Yer işaretleri, paylaşmak için kullanılan Azure Cosmos DB'de saklamadan azure'da ASP.NET Core web uygulaması dağıtın.
-> * Yer işaretleri Web Uygulama Paylaşımı yararlanmak için Azure hızlı başlangıçlar Unity örneğinden AzureSpatialAnchorsLocalSharedDemo Sahne yapılandırın.
-> * Bir veya daha fazla cihazlara uygulama dağıtın ve çalıştırın.
-
-[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
-
-[!INCLUDE [Share Anchors Sample Prerequisites](../../../includes/spatial-anchors-share-sample-prereqs.md)]
-
-Bu, Unity ve Azure Cosmos DB Bu öğreticide kullanacaksınız ancak uzamsal bağlayıcılarını tanımlayıcıları cihaz üzerinden paylaşmalarını ilişkin bir örnek size olduğu, hatalarının ayıklanabileceğini belirtmekte yarar. Kullanıcı, diğer diller ve arka uç teknolojilerinden aynı hedefe ulaşmak için kullanabilirsiniz. Ayrıca, bu öğreticide kullanılan ASP.NET Core web uygulaması, .NET Core 2.2 SDK'sını gerektirir. İçin Web Apps Windows düzgün çalışıyor, ancak şu anda Linux üzerinde Web Apps çalışmaz.
-
-[!INCLUDE [Create Spatial Anchors resource](../../../includes/spatial-anchors-get-started-create-resource.md)]
+Bu öğreticide Unity ve Azure Cosmos DB kullanacağınızı, ancak bu öğreticide yalnızca uzamsal bağlayıcı tanımlayıcılarının nasıl paylaşılacağını gösteren bir örnek sunacağınızı unutmayın. Aynı amaca ulaşmak için diğer dillere ve arka uç teknolojilerine kullanıcı ekleyebilirsiniz. Ayrıca, bu öğreticide kullanılan ASP.NET Core Web uygulaması .NET Core 2,2 SDK 'sını gerektirir. Windows için Web Apps üzerinde ince çalışır, ancak şu anda Linux için Web Apps üzerinde çalışmaz.
 
 ## <a name="create-a-database-account"></a>Veritabanı hesabı oluşturma
 
+Daha önce oluşturduğunuz kaynak grubuna bir Azure Cosmos veritabanı ekleyin. 
+
 [!INCLUDE [cosmos-db-create-dbaccount-table](../../../includes/cosmos-db-create-dbaccount-table.md)]
 
-Kopyalama `Connection String` olduğundan buna ihtiyacınız olacak.
+`Connection String`, ihtiyacınız olacak şekilde kopyalayın.
 
-## <a name="download-the-unity-sample-project"></a>Unity örnek projeyi indirin
+## <a name="make-minor-changes-to-the-sharingservice-files"></a>SharingService dosyalarında küçük değişiklikler yapın
 
-[!INCLUDE [Clone Sample Repo](../../../includes/spatial-anchors-clone-sample-repository.md)]
+**Çözüm Gezgini**' de `SharingService\Startup.cs`açın.
 
-## <a name="deploy-the-sharing-anchors-service"></a>Paylaşım bağlayıcılarını hizmetini dağıtma
+Dosyanın üst kısmında `#define INMEMORY_DEMO` bulun ve bu çizginin dışına yorum yapın. Dosyayı kaydedin.
 
-Projede açık ve Visual Studio ve açık `Sharing\SharingServiceSample` klasör.
+**Çözüm Gezgini**' de `SharingService\appsettings.json`açın.
 
-### <a name="configure-the-service-to-use-your-azure-cosmos-db-database"></a>Hizmet, Azure Cosmos DB veritabanınızı kullanacak şekilde yapılandırma
+`StorageConnectionString` özelliğini bulun ve değeri [veritabanı hesabı oluştur adımında](#create-a-database-account)kopyaladığınız `Connection String` değeriyle aynı olacak şekilde ayarlayın. Dosyayı kaydedin.
 
-İçinde **Çözüm Gezgini**açın `SharingService\Startup.cs`.
-
-Bulun `#define INMEMORY_DEMO` hat çıkışı dosyası ve yorum üstünde. Dosyayı kaydedin.
-
-İçinde **Çözüm Gezgini**açın `SharingService\appsettings.json`.
-
-Bulun `StorageConnectionString` özelliği ve aynı olacak şekilde değeri ayarlayın `Connection String` içinde kopyaladığınız değeri [bir veritabanı hesabı adım oluşturma](#create-a-database-account). Dosyayı kaydedin.
-
-[!INCLUDE [Publish Azure](../../../includes/spatial-anchors-publish-azure.md)]
-
-[!INCLUDE [Run Share Anchors Sample](../../../includes/spatial-anchors-run-share-sample.md)]
+Paylaşım hizmetini yeniden yayımlayabilir ve örnek uygulamayı çalıştırabilirsiniz.
 
 [!INCLUDE [Clean-up section](../../../includes/clean-up-section-portal.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Azure Cosmos DB bağlantı tanımlayıcıları cihaz üzerinden paylaşmalarını kullandınız. Yeni bir Unity HoloLens uygulama Azure uzamsal bağlayıcıları kullanma hakkında daha fazla bilgi edinmek için sonraki öğreticiye devam edin.
+Bu öğreticide, cihazlarda bağlantı tanımlayıcılarını paylaşmak için Azure Cosmos DB kullandınız. Azure uzamsal çıpalarını yeni bir Unity HoloLens uygulamasında kullanma hakkında daha fazla bilgi edinmek için sonraki öğreticiye geçin.
 
 > [!div class="nextstepaction"]
-> [Yeni bir Android uygulaması başlatılıyor](./tutorial-new-unity-hololens-app.md)
+> [Yeni bir Unity HoloLens uygulaması başlatılıyor](./tutorial-new-unity-hololens-app.md)

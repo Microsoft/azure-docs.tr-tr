@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.date: 09/25/2017
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: b007aa4619effbd34e4e969e4ce7b58f3b0c4cf6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1690adfe5336ea85328e16755c5e3bc82b6d240a
+ms.sourcegitcommit: 64798b4f722623ea2bb53b374fb95e8d2b679318
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66510535"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67835619"
 ---
 # <a name="secure-your-restful-service-by-using-client-certificates"></a>İstemci sertifikaları kullanarak, RESTful hizmeti güvenli hale getirme
 
@@ -47,24 +47,24 @@ Ayarlamak için **Azure App Service** istemci sertifikaları gerektirmek için w
 >Ayar hakkında daha fazla bilgi için **clientCertEnabled** özelliği bkz [web uygulamaları için yapılandırma TLS karşılıklı kimlik doğrulamayı](https://docs.microsoft.com/azure/app-service-web/app-service-web-configure-tls-mutual-auth).
 
 ## <a name="step-2-upload-your-certificate-to-azure-ad-b2c-policy-keys"></a>2\. adım: Sertifikanızı karşıya yüklemek için Azure AD B2C İlkesi anahtarları
-Ayarlandıktan sonra `clientCertEnabled` için *true*, RESTful API'niz ile iletişimi bir istemci sertifikası gerektirir. Edinme, yükleme ve istemci sertifikası, Azure AD B2C kiracınızda depolamak için aşağıdakileri yapın: 
+Ayarlandıktan sonra `clientCertEnabled` için *true*, RESTful API'niz ile iletişimi bir istemci sertifikası gerektirir. Edinme, yükleme ve istemci sertifikası, Azure AD B2C kiracınızda depolamak için aşağıdakileri yapın:
 1. Azure AD B2C kiracınızı seçin **B2C ayarlarını** > **kimlik deneyimi çerçevesi**.
 
 2. Kiracınızda kullanılabilir anahtarlarını görüntülemek için seçin **ilke anahtarları**.
 
-3. **Add (Ekle)** seçeneğini belirleyin.  
+3. **Add (Ekle)** seçeneğini belirleyin.
     **Anahtar oluşturma** penceresi açılır.
 
 4. İçinde **seçenekleri** kutusunda **karşıya**.
 
-5. İçinde **adı** kutusuna **B2cRestClientCertificate**.  
+5. İçinde **adı** kutusuna **B2cRestClientCertificate**.
     Önek *B2C_1A_* otomatik olarak eklenir.
 
 6. İçinde **karşıya dosya yükleme** kutusunda, özel bir anahtarla sertifikanızın .pfx dosyasını seçin.
 
 7. İçinde **parola** sertifikanın parolası yazın.
 
-    ![İlke anahtarı karşıya yükle](media/aadb2c-ief-rest-api-netfw-secure-cert/rest-api-netfw-secure-client-cert-upload.png)
+    ![Azure portalında bir anahtar sayfası oluşturma ilke anahtarını karşıya yükleyin](media/aadb2c-ief-rest-api-netfw-secure-cert/rest-api-netfw-secure-client-cert-upload.png)
 
 7. **Oluştur**’u seçin.
 
@@ -85,7 +85,7 @@ Ayarlandıktan sonra `clientCertEnabled` için *true*, RESTful API'niz ile ileti
     <Item Key="AuthenticationType">ClientCertificate</Item>
     ```
 
-5. Kapatma sonrasında hemen `<Metadata>` öğesi, aşağıdaki XML parçacığını ekleyin: 
+5. Kapatma sonrasında hemen `<Metadata>` öğesi, aşağıdaki XML parçacığını ekleyin:
 
     ```xml
     <CryptographicKeys>
@@ -119,12 +119,12 @@ Ayarlandıktan sonra `clientCertEnabled` için *true*, RESTful API'niz ile ileti
 
 2. Açık **B2C_1A_signup_signin**, yüklenmiş ve ardından bağlı olan taraf (RP) özel ilke **Şimdi Çalıştır**.
 
-3. İşlem yazarak test edin **Test** içinde **verilen ad** kutusu.  
-    Azure AD B2C, pencerenin en üstünde bir hata iletisi görüntüler.    
+3. İşlem yazarak test edin **Test** içinde **verilen ad** kutusu.
+    Azure AD B2C, pencerenin en üstünde bir hata iletisi görüntüler.
 
-    ![Kimliğinizi API testi](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-test.png)
+    ![Verilen ad metin kutusu vurgulanır ve doğrulama hatası gösterilen giriş](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-test.png)
 
-4. İçinde **verilen ad** ("Test" dışında) bir ad yazın.  
+4. İçinde **verilen ad** ("Test" dışında) bir ad yazın.
     Azure AD B2C kullanıcı oturum açtığında ve uygulamanızı bir bağlılık sayı gönderir. Bu JWT örnek sayısında dikkat edin:
 
    ```
@@ -152,7 +152,7 @@ Ayarlandıktan sonra `clientCertEnabled` için *true*, RESTful API'niz ile ileti
    >Hata iletisi alırsanız *adı geçerli değil, Lütfen geçerli bir ad sağlayın*, istemci sertifikası sunulan sırasında Azure AD B2C'yi başarıyla RESTful hizmetiniz çağrılan anlamına gelir. Sonraki adım, sertifika doğrulamaktır.
 
 ## <a name="step-6-add-certificate-validation"></a>6\. Adım: Sertifika doğrulama ekleme
-Azure AD B2C, RESTful hizmetinize gönderen istemci sertifikası doğrulama sertifikası var olup olmadığını denetlemek dışında Azure App Service platformu tarafından geçeriz değil. Sertifika doğrulanırken web uygulamasının sorumluluğundadır. 
+Azure AD B2C, RESTful hizmetinize gönderen istemci sertifikası doğrulama sertifikası var olup olmadığını denetlemek dışında Azure App Service platformu tarafından geçeriz değil. Sertifika doğrulanırken web uygulamasının sorumluluğundadır.
 
 Bu bölümde, kimlik doğrulama amacıyla sertifika özellikleri doğrular örnek ASP.NET kodunu ekleyin.
 
@@ -171,7 +171,7 @@ Daha önce oluşturduğunuz Visual Studio projede aşağıdaki uygulama ayarlar�
 Sertifikanın değiştirin **konu adı**, **verenin adı**, ve **sertifika parmak izi** değerlerini, sertifika değerlere sahip.
 
 ### <a name="62-add-the-isvalidclientcertificate-function"></a>6.2 IsValidClientCertificate işlevi Ekle
-Açık *Controllers\IdentityController.cs* dosya ve ardından eklemek `Identity` denetleyici sınıfı aşağıdaki işlevi: 
+Açık *Controllers\IdentityController.cs* dosya ve ardından eklemek `Identity` denetleyici sınıfı aşağıdaki işlevi:
 
 ```csharp
 private bool IsValidClientCertificate()
@@ -219,7 +219,7 @@ private bool IsValidClientCertificate()
         Trace.TraceError($"Subject name '{clientCertInRequest.Subject}' is not valid");
         return false;
     }
-    
+
     // 3. Check the issuer name of the certificate
     bool foundIssuerCN = false;
     string[] certIssuerData = clientCertInRequest.Issuer.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
@@ -273,7 +273,7 @@ Yukarıdaki örnek kodda, biz yalnızca aşağıdaki tüm koşullar karşılanı
 >Hizmetinizi duyarlılığına bağlı olarak, daha fazla doğrulamaları eklemeniz gerekebilir. Örneğin, güvenilir kök yetkilisi, veren kuruluş adı doğrulama ve benzeri sertifika zincir olup olmadığını sınamak gerekebilir.
 
 ### <a name="63-call-the-isvalidclientcertificate-function"></a>6.3 IsValidClientCertificate işlevi çağırın.
-Açık *Controllers\IdentityController.cs* dosyasını ve ardından başındaki `SignUp()` işlev, aşağıdaki kod parçacığını ekleyin: 
+Açık *Controllers\IdentityController.cs* dosyasını ve ardından başındaki `SignUp()` işlev, aşağıdaki kod parçacığını ekleyin:
 
 ```csharp
 if (IsValidClientCertificate() == false)
@@ -299,4 +299,4 @@ Bu adım sorun gidermeniz gerekiyorsa, bkz. [Application Insights'ı kullanarak 
 
 ## <a name="optional-download-the-complete-policy-files-and-code"></a>(İsteğe bağlı) Tüm ilke dosyaları ve kodu indirin
 * Tamamladıktan sonra [özel ilkeleri kullanmaya başlama](active-directory-b2c-get-started-custom.md) izlenecek yol, öneririz senaryonuz kendi özel ilke dosyalarını kullanarak oluşturun. Referans olması açısından sağladık [örnek ilke dosyaları](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/scenarios/aadb2c-ief-rest-api-netfw-secure-cert).
-* Tam koddan indirebileceğiniz [başvuru için örnek Visual Studio çözümü](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/scenarios/aadb2c-ief-rest-api-netfw/Contoso.AADB2C.API). 
+* Tam koddan indirebileceğiniz [başvuru için örnek Visual Studio çözümü](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/scenarios/aadb2c-ief-rest-api-netfw/Contoso.AADB2C.API).

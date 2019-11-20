@@ -6,16 +6,16 @@ ms.service: azure-migrate
 ms.topic: article
 ms.date: 04/01/2019
 ms.author: snehaa
-ms.openlocfilehash: f90140e9464ee72e9ceae8ca140bd060c51aade8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b45a158569b3be8250728293c1bf73c1a860a0f6
+ms.sourcegitcommit: 47ce9ac1eb1561810b8e4242c45127f7b4a4aa1a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60597106"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67808015"
 ---
 # <a name="scale-migration-of-vms-using-azure-site-recovery"></a>Azure Site Recovery kullanarak bir VM ölçek geçiş
 
-Bu makalede Azure Site RECOVERY'yi kullanarak VM'lerin çok sayıda geçirmek için betikleri kullanma işlemi anlamanıza yardımcı olur. Bu komut dosyalarını, yükleme için kullanılabilir [Azure PowerShell örnekleri](https://github.com/Azure/azure-docs-powershell-samples/tree/master/azure-migrate/migrate-at-scale-with-site-recovery) github deposu. Betikler, Azure ve Destek yönetilen diskler'e geçiş için VMware, AWS, GCP Vm'leri ve fiziksel sunucuları geçirmek için kullanılabilir. Bu betikler, fiziksel sunucuları olarak sanal makineleri geçiriyorsanız Hyper-V sanal makineleri geçirmek için de kullanabilirsiniz. Azure Site Recovery belgelenen PowerShell betikleri yararlanarak [burada](https://docs.microsoft.com/azure/site-recovery/vmware-azure-disaster-recovery-powershell).
+Bu makalede Azure Site RECOVERY'yi kullanarak VM'lerin çok sayıda geçirmek için betikleri kullanma anlamanıza yardımcı olur. Bu komut dosyalarını, yükleme için kullanılabilir [Azure PowerShell örnekleri](https://github.com/Azure/azure-docs-powershell-samples/tree/master/azure-migrate/migrate-at-scale-with-site-recovery) github deposu. Betikler, VMware, AWS, GCP Vm'leri ve fiziksel sunucuları azure'da yönetilen disklere geçirmek için kullanılabilir. Bu betikler, fiziksel sunucuları olarak sanal makineleri geçiriyorsanız Hyper-V sanal makineleri geçirmek için de kullanabilirsiniz. Azure Site Recovery PowerShell yararlanan komut dosyalarını belgelenmiştir [burada](https://docs.microsoft.com/azure/site-recovery/vmware-azure-disaster-recovery-powershell).
 
 ## <a name="current-limitations"></a>Geçerli sınırlamalar:
 - ' % S'hedef sanal makine, yalnızca birincil NIC için statik IP adresi belirtme desteği
@@ -52,7 +52,7 @@ CSV hazır hale geldikten sonra şirket içi sanal makineleri geçirmek için a�
 
 **Adım #** | **Betik adı** | **Açıklama**
 --- | --- | ---
-1 | asr_startmigration.ps1 | Tüm sanal makineler için çoğaltmayı etkinleştirme csv dosyasında listelenen, betik iş ayrıntılarını CSV çıkışında, her VM için oluşturur.
+1\. | asr_startmigration.ps1 | Tüm sanal makineler için çoğaltmayı etkinleştirme csv dosyasında listelenen, betik iş ayrıntılarını CSV çıkışında, her VM için oluşturur.
 2 | asr_replicationstatus.ps1 | Çoğaltma durumunu, betik durumu ile bir csv, her VM için oluşturur.
 3 | asr_updateproperties.ps1 | Çoğaltılan ve korumalı Vm'leri olduktan sonra VM (işlem ve ağ özellikleri) hedef özelliklerini güncelleştirmek için bu betiği kullanın
 4 | asr_propertiescheck.ps1 | Özellikleri uygun şekilde güncelleştirilir olmadığını doğrulayın

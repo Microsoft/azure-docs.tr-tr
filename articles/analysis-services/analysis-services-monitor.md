@@ -1,90 +1,93 @@
 ---
-title: Azure Analysis Services sunucu ölçümlerini izleme | Microsoft Docs
-description: Analysis Services sunucu ölçümlerini da Azure portal'ı izleme hakkında bilgi edinin.
+title: Azure Analysis Services Server ölçümlerini izleme | Microsoft Docs
+description: Sunucularınızın performansını ve sistem durumunu izlemenize yardımcı olması için portaldaki ücretsiz bir araç olan Azure Ölçüm Gezgini Analysis Services nasıl kullanacağınızı öğrenin.
 author: minewiskan
-manager: kfile
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 01/09/2019
+ms.date: 10/30/2019
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: cdffa8e138062a91bd1876ac6e44728c47d9cdd7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9e6eab38e0f7bd55fa671aa8c1e99693eeb54c84
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61065072"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73572725"
 ---
 # <a name="monitor-server-metrics"></a>Sunucu ölçümlerini izleme
 
-Analysis Services, performansı ve durumu sunucularınızın izlemenize yardımcı olması için ölçümler sağlar. Örneğin, bellek ve CPU kullanımı, istemci bağlantıları ve sorgu kaynak tüketimi sayısını izleyin. Analysis Services, çoğu diğer Azure hizmetlerinde aynı izleme framework kullanır. Daha fazla bilgi için bkz. [Microsoft azure'da ölçümleri](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md).
+Analysis Services, portaldaki ücretsiz bir araç olan Azure Ölçüm Gezgini ve sunucularınızın performansını ve sistem durumunu izlemenize yardımcı olmak için ölçümler sağlar. Örneğin, bellek ve CPU kullanımını, istemci bağlantı sayısını ve sorgu kaynak tüketimini izleyin. Analysis Services, diğer Azure hizmetleriyle aynı izleme çerçevesini kullanır. Daha fazla bilgi için bkz. [Azure Ölçüm Gezgini](../azure-monitor/platform/metrics-getting-started.md)kullanmaya başlama.
 
-Daha ayrıntılı tanılama işlemleri gerçekleştirmek için izleme, performans ve birden çok hizmet kaynaklarını bir kaynak grubu veya abonelik arasında eğilimleri belirlemek, kullanın [Azure İzleyici](https://azure.microsoft.com/services/monitor/). Azure İzleyici (hizmet) hizmet ücretlerinin alınmasına neden.
+Daha ayrıntılı tanılama gerçekleştirmek, performansı izlemek ve bir kaynak grubunda veya abonelikte birden çok hizmet kaynağı arasındaki eğilimleri belirlemek için [Azure izleyici](../azure-monitor/overview.md)'yi kullanın. Azure Izleyici (hizmet), faturalandırılabilir bir hizmetle sonuçlanabilir.
 
 
-## <a name="to-monitor-metrics-for-an-analysis-services-server"></a>Bir Analysis Services sunucu ölçümlerini izleme
+## <a name="to-monitor-metrics-for-an-analysis-services-server"></a>Analysis Services sunucuya yönelik ölçümleri izlemek için
 
-1. Azure portalında **ölçümleri**.
+1. Azure portal, **ölçümler**' i seçin.
 
     ![Azure portalında izleme](./media/analysis-services-monitor/aas-monitor-portal.png)
 
-2. İçinde **kullanılabilir ölçümler**, grafiğinizde içerecek şekilde ölçümleri seçin. 
+2. **Ölçüm**bölümünde, grafiğinizde içerilecek ölçümleri seçin. 
 
-    ![İzleyici grafiği](./media/analysis-services-monitor/aas-monitor-chart.png)
+    ![Grafiği izle](./media/analysis-services-monitor/aas-monitor-chart.png)
 
 <a id="#server-metrics"></a>
 
 ## <a name="server-metrics"></a>Sunucu ölçümleri
 
-Hangi ölçümleri izleme senaryonuz için en iyi olduğunu belirlemek için bu tabloyu kullanın. Aynı grafiğe yalnızca aynı birimden ölçümler gösterilebilir.
+İzleme senaryolarınız için hangi ölçümlerin en iyi olduğunu anlamak için bu tabloyu kullanın. Aynı grafikte yalnızca aynı birimin ölçümleri görüntülenebilir.
 
-|Ölçüm|Ölçüm görünen adı|Birim|Toplama Türü|Açıklama|
+|Ölçüm|Ölçüm görünen adı|Birim|Toplama türü|Açıklama|
 |---|---|---|---|---|
-|CommandPoolJobQueueLength|Komut havuzu iş kuyruğu uzunluğu|Count|Ortalama|Komut iş parçacığı havuzu kuyruğundaki iş sayısı.|
-|CurrentConnections|Bağlantı: Geçerli bağlantılar|Count|Ortalama|Kurulan istemci bağlantılarının geçerli sayısı.|
-|CurrentUserSessions|Geçerli kullanıcı oturumları|Sayı|Ortalama|Geçerli kullanıcı oturumlarının sayısı.|
-|mashup_engine_memory_metric|M altyapı belleği|Bayt|Ortalama|Karma altyapısı işlemleri tarafından bellek kullanımı|
-|mashup_engine_qpu_metric|M altyapı QPU'su|Count|Ortalama|Karma altyapısı işlemleri tarafından kullanılan qpu|
-|memory_metric|Bellek|Bayt|Ortalama|Bellek. 0-25 GB S1, S2 için 0-50 GB ve 0-100 aralığında S4 için GB|
-|memory_thrashing_metric|Bellek çok yavaş|Yüzde|Ortalama|Ortalama bellek temizleme.|
-|CleanerCurrentPrice|Bellek: Temizleyici geçerli fiyatı|Count|Ortalama|Geçerli fiyat, bellek $/ bayt/zaman normalleştirilmiş 1000.|
-|CleanerMemoryNonshrinkable|Bellek: Temizleyici belleği daraltılamaz|Bayt|Ortalama|Tarafından arka plan Temizleyicisi kapsamında olmayan bayt cinsinden bellek miktarı.|
-|CleanerMemoryShrinkable|Bellek: Temizleyici belleği daraltılabilir|Bayt|Ortalama|Tarafından arka plan Temizleyicisi temizleme bayt cinsinden bellek miktarı.|
-|MemoryLimitHard|Bellek: Bellek sınırı sabit|Bayt|Ortalama|Yapılandırma dosyasından sabit bellek sınırı.|
-|MemoryLimitHigh|Bellek: Bellek sınırı yüksek|Bayt|Ortalama|Yapılandırma dosyasından yüksek bellek sınırı.|
-|MemoryLimitLow|Bellek: Bellek sınırı düşük|Bayt|Ortalama|Yapılandırma dosyasından düşük bellek sınırı.|
-|MemoryLimitVertiPaq|Bellek: Bellek sınırı VertiPaq|Bayt|Ortalama|Yapılandırma dosyasından bellek içi sınır.|
-|MemoryUsage|Bellek: Bellek kullanımı|Bayt|Ortalama|Temizleyici bellek fiyatı hesaplanırken kullanılan sunucu işlemi bellek kullanımı. Process\PrivateBytes artı eşlenmiş veya altyapısı bellek sınırını aşan bellek içi analiz altyapısı (VertiPaq) tarafından ayrılan bir bellek yok sayılıyor, bellekle eşlenen verilerin boyutunu sayaç eşittir.|
-|Kota|Bellek: Kota|Bayt|Ortalama|Bayt cinsinden geçerli bellek kotası. Bellek kotası bellek ataması veya bellek ayırma de denir.|
-|QuotaBlocked|Bellek: Kota engellendi|Count|Ortalama|Diğer bellek kotaları serbest bırakılana kadar engellenen kota isteklerinin geçerli sayısı.|
-|VertiPaqNonpaged|Bellek: Disk belleği olmayan VertiPaq|Bayt|Ortalama|Bayt bellek kullanımı için bellek içi altyapısı tarafından belirlenen çalışma kilitli.|
-|VertiPaqPaged|Bellek: Disk belleği olan VertiPaq|Bayt|Ortalama|Bellek içi veriler için disk belleğine alınan bellek bayt sayısı.|
-|ProcessingPoolJobQueueLength|İşleme havuzu iş kuyruğu uzunluğu|Count|Ortalama|İşleme iş parçacığı havuzu kuyruğundaki/ç olmayan iş sayısı.|
-|RowsConvertedPerSec|İşleme: Satır sayısı / sn dönüştürüldü|CountPerSecond|Ortalama|İşleme sırasında dönüştürülen bir satır oranı.|
-|RowsReadPerSec|İşleme: Satır sayısı / sn okuyun|CountPerSecond|Ortalama|Satır oranı tüm ilişkisel veritabanlarından okunan.|
-|RowsWrittenPerSec|İşleme: Saniye yazılan satır|CountPerSecond|Ortalama|İşleme sırasında yazılan satır oranı.|
-|qpu_metric|QPU|Count|Ortalama|QPU. S1, S2 için 0-200 ve S4 için 0-400 için 0-100 aralığında|
-|QueryPoolBusyThreads|Sorgu havuzu meşgul iş parçacıkları|Sayı|Ortalama|Sorgu iş parçacığı havuzundaki meşgul iş parçacığı sayısı.|
-|SuccessfullConnectionsPerSec|Saniye başına başarılı bağlantılar|CountPerSecond|Ortalama|Başarıyla tamamlanan bağlantı oranı.|
-|CommandPoolBusyThreads|İş parçacıkları: Komut havuzu meşgul iş parçacıkları|Sayı|Ortalama|Komut iş parçacığı havuzundaki meşgul iş parçacığı sayısı.|
-|CommandPoolIdleThreads|İş parçacıkları: Komut havuzu boşta iş parçacıkları|Count|Ortalama|Komut iş parçacığı havuzundaki boşta iş parçacığı sayısı.|
-|LongParsingBusyThreads|İş parçacıkları: Uzun ayrıştırma meşgul iş parçacıkları|Sayı|Ortalama|Uzun iş parçacığı İnceleme havuzundaki meşgul iş parçacığı sayısı.|
-|LongParsingIdleThreads|İş parçacıkları: Uzun ayrıştırma boşta iş parçacıkları|Sayı|Ortalama|Uzun iş parçacığı İnceleme havuzundaki boşta iş parçacığı sayısı.|
-|LongParsingJobQueueLength|İş parçacıkları: Uzun ayrıştırma iş kuyruğu uzunluğu|Sayı|Ortalama|Uzun ayrıştırma iş parçacığı havuzu kuyruğundaki iş sayısı.|
-|ProcessingPoolIOJobQueueLength|İş parçacıkları: İşleme havuzu g/ç iş kuyruğu uzunluğu|Count|Ortalama|İşleme iş parçacığı havuzu kuyruğundaki g/ç iş sayısı.|
-|ProcessingPoolBusyIOJobThreads|İş parçacıkları: İşleme havuzu meşgul g/ç işi iş parçacıkları|Count|Ortalama|İşleme iş parçacığı havuzunda g/ç işleri çalıştıran iş parçacığı sayısı.|
-|ProcessingPoolBusyNonIOThreads|İş parçacıkları: İşleme havuzu meşgul/ç olmayan iş parçacıkları|Count|Ortalama|İşleme iş parçacığı havuzunda olmayan g/Ç işleri çalıştıran iş parçacığı sayısı.|
-|ProcessingPoolIdleIOJobThreads|İş parçacıkları: İşleme havuzu boşta g/ç işi iş parçacıkları|Sayı|Ortalama|İşleme iş parçacığı havuzundaki g/ç işleri için boşta iş parçacığı sayısı.|
-|ProcessingPoolIdleNonIOThreads|İş parçacıkları: İşleme havuzu boşta/ç olmayan iş parçacıkları|Count|Ortalama|/ Ç olmayan işler için ayrılan işleme iş parçacığı havuzundaki boşta iş parçacığı sayısı.|
-|QueryPoolIdleThreads|İş parçacıkları: Sorgu havuzu boşta iş parçacıkları|Sayı|Ortalama|İşleme iş parçacığı havuzundaki g/ç işleri için boşta iş parçacığı sayısı.|
-|QueryPoolJobQueueLength|İş parçacıkları: Sorgu havuzu iş kuyruğu uzunluğu|Sayı|Ortalama|Sorgu iş parçacığı havuzu kuyruğundaki iş sayısı.|
-|ShortParsingBusyThreads|İş parçacıkları: Kısa ayrıştırma meşgul iş parçacıkları|Count|Ortalama|Kısa ayrıştırma iş parçacığı havuzundaki meşgul iş parçacığı sayısı.|
-|ShortParsingIdleThreads|İş parçacıkları: Kısa ayrıştırma boşta iş parçacıkları|Count|Ortalama|Kısa ayrıştırma iş parçacığı havuzundaki boşta iş parçacığı sayısı.|
-|ShortParsingJobQueueLength|İş parçacıkları: Kısa ayrıştırma iş kuyruğu uzunluğu|Count|Ortalama|Kısa ayrıştırma iş parçacığı havuzu kuyruğundaki iş sayısı.|
-|TotalConnectionFailures|Toplam bağlantı hataları|Sayı|Ortalama|Toplam bağlantı denemesi başarısız oldu.|
-|TotalConnectionRequests|Toplam bağlantı istekleri|Sayı|Ortalama|Toplam bağlantı istekleri. |
+|CommandPoolJobQueueLength|Komut havuzu Iş kuyruğu uzunluğu|Sayı|Ortalama|Komut iş parçacığı havuzu sırasındaki iş sayısı.|
+|CurrentConnections|Bağlantı: geçerli bağlantılar|Sayı|Ortalama|Kurulan istemci bağlantılarının geçerli sayısı.|
+|CurrentUserSessions|Geçerli Kullanıcı oturumları|Sayı|Ortalama|Geçerli kullanıcı oturumlarının sayısı.|
+|mashup_engine_memory_metric|D motoru belleği|Sayacının|Ortalama|Karma altyapı işlemlerine göre bellek kullanımı|
+|mashup_engine_qpu_metric|A motoru QPU|Sayı|Ortalama|Karma altyapı işlemlerine göre QPU kullanımı|
+|memory_metric|Bellek|Sayacının|Ortalama|Bellek. S1 için 0-25 GB, S2 için 0-50 GB ve S4 için 0-100 GB|
+|memory_thrashing_metric|Bellek dağılması|Yüzde|Ortalama|Ortalama bellek miktarı.|
+|CleanerCurrentPrice|Bellek: temizleyici geçerli fiyatı|Sayı|Ortalama|Geçerli bellek fiyatı, $/Byte/Time, 1000 olarak normalleştirilemez.|
+|Cleanermemorynonınkable|Bellek: temizleyici bellek daraltılamaz|Sayacının|Ortalama|Arka plan temizleyici tarafından temizlenme konusu değil, bayt cinsinden bellek miktarı.|
+|Cleanermemoryshrınkable|Bellek: temizleyici bellek shrınılabilir|Sayacının|Ortalama|Arka plan temizleyici tarafından temizlenme konusu bayt cinsinden bellek miktarı.|
+|MemoryLimitHard|Bellek: bellek sınırı sabit|Sayacının|Ortalama|Yapılandırma dosyasından sabit bellek sınırı.|
+|Memoryhighlimit|Bellek: bellek sınırı yüksek|Sayacının|Ortalama|Yapılandırma dosyasından yüksek bellek sınırı.|
+|MemoryLimitLow|Bellek: bellek sınırı düşük|Sayacının|Ortalama|Yapılandırma dosyasından düşük bellek sınırı.|
+|MemoryLimitVertiPaq|Bellek: bellek sınırı VertiPaq|Sayacının|Ortalama|Yapılandırma dosyasından bellek içi sınır.|
+|MemoryUsage|Bellek: bellek kullanımı|Sayacının|Ortalama|Sunucu işleminin temizleyici bellek fiyatını hesaplamada kullanılan bellek kullanımı. Altyapı bellek sınırının fazla olması halinde bellek içi analiz altyapısı (VertiPaq) tarafından eşlenen veya ayrılan belleği yok sayan, bellek eşlemeli verilerin boyutuna eşit.|
+|private_bytes_metric|Özel baytlar |Sayacının|Ortalama|Analysis Services altyapısı işleminin ve karma kapsayıcı işlemlerinin ayırdığı, diğer işlemlerle paylaşılan bellek dahil değil toplam bellek miktarı.|
+|virtual_bytes_metric|Sanal baytlar |Sayacının|Ortalama|Analysis Services altyapısı işleminin ve mashup kapsayıcı işlemlerinin kullandığı sanal adres alanının geçerli boyutu.|
+|mashup_engine_private_bytes_metric|D motoru özel baytlar |Sayacının|Ortalama|Diğer işlemlerle paylaşılan bellek dahil değil, ayrılan bellek karma kapsayıcı işlemlerinin toplam miktarı.|
+|mashup_engine_virtual_bytes_metric|D motoru sanal bayt sayısı |Sayacının|Ortalama|Sanal adres alanı karma kapsayıcı işlemlerinin geçerli boyutu kullanıyor.|
+|Kota|Bellek: kota|Sayacının|Ortalama|Bayt cinsinden geçerli bellek kotası. Bellek kotası, bellek verme veya bellek ayırma olarak da bilinir.|
+|Quotabkilitli|Bellek: kota engellendi|Sayı|Ortalama|Diğer bellek kotaları boşaltılana kadar engellenen kota isteklerinin geçerli sayısı.|
+|Vertipaqdisk belleksiz|Bellek: VertiPaq disk belleksiz|Sayacının|Ortalama|Bellek içi altyapı tarafından kullanılmak üzere çalışma kümesinde kilitlenen bellek baytları.|
+|Vertipaqdisk|Bellek: VertiPaq disk belleğine|Sayacının|Ortalama|Bellek içi veriler için kullanılan disk belleğine alınan bellek miktarı.|
+|ProcessingPoolJobQueueLength|İşleme havuzu Iş kuyruğu uzunluğu|Sayı|Ortalama|İşleme iş parçacığı havuzu kuyruğundaki g/ç dışı iş sayısı.|
+|RowsConvertedPerSec|İşleme: dönüştürülen satır sayısı/saniye|Sayaçpersaniye|Ortalama|İşlem sırasında dönüştürülen satır oranı.|
+|RowsReadPerSec|İşleme: okunan satır sayısı/saniye|Sayaçpersaniye|Ortalama|Tüm ilişkisel veritabanlarından okunan satır oranı.|
+|RowsWrittenPerSec|İşleme: yazılan satır sayısı/saniye|Sayaçpersaniye|Ortalama|İşlem sırasında yazılan satır oranı.|
+|qpu_metric|QPU|Sayı|Ortalama|QPU. S1 için 0-100 aralığı, S2 için 0-200 ve S4 için 0-400|
+|Querypoolbusyıthreads|Sorgu havuzu meşgul Iş parçacıkları|Sayı|Ortalama|Sorgu iş parçacığı havuzundaki meşgul iş parçacığı sayısı.|
+|Başarılı bir bağlantı Spersec|Saniyedeki başarılı bağlantı sayısı|Sayaçpersaniye|Ortalama|Başarılı bağlantı tamamlama oranı.|
+|Commandpoolbusyıthreads|İş parçacıkları: komut havuzu meşgul iş parçacıkları|Sayı|Ortalama|Komut iş parçacığı havuzundaki meşgul iş parçacığı sayısı.|
+|Commandpokaydlithreads|İş parçacıkları: komut havuzu boşta iş parçacıkları|Sayı|Ortalama|Komut iş parçacığı havuzundaki boşta iş parçacığı sayısı.|
+|Longparsingbusyıthreads|İş parçacıkları: uzun ayrıştırma meşgul iş parçacıkları|Sayı|Ortalama|Uzun ayrıştırma iş parçacığı havuzundaki meşgul iş parçacığı sayısı.|
+|LongParsingIdleThreads|İş parçacıkları: uzun ayrıştırma boşta iş parçacıkları|Sayı|Ortalama|Uzun ayrıştırma iş parçacığı havuzundaki boşta iş parçacığı sayısı.|
+|LongParsingJobQueueLength|İş parçacıkları: uzun ayrıştırma işi sıra uzunluğu|Sayı|Ortalama|Uzun ayrıştırma iş parçacığı havuzu kuyruğundaki iş sayısı.|
+|Processingpokayojobqueuelength|İş parçacıkları: Işleme havuzu g/ç iş kuyruğu uzunluğu|Sayı|Ortalama|İşleme iş parçacığı havuzu kuyruğundaki g/ç işlerinin sayısı.|
+|Processingpoolbusyıiojobthreads|İş parçacıkları: Işleme havuzu meşgul g/ç işi iş parçacıkları|Sayı|Ortalama|İşleme iş parçacığı havuzunda g/ç işleri çalıştıran iş parçacığı sayısı.|
+|Processingpoolbusınonıothreads|İş parçacıkları: Işleme havuzu meşgul olmayan g/ç iş parçacıkları|Sayı|Ortalama|İşleme iş parçacığı havuzunda g/ç olmayan işler çalıştıran iş parçacığı sayısı.|
+|Processingpokaydliiojobthreads|İş parçacıkları: Işleme havuzu boşta g/ç işi iş parçacıkları|Sayı|Ortalama|İşleme iş parçacığı havuzundaki g/ç işleri için boşta iş parçacığı sayısı.|
+|Processingpokaydlenoniothreads|İş parçacıkları: Işleme havuzu boşta g/ç olmayan iş parçacıkları|Sayı|Ortalama|İşleme iş parçacığı havuzunda g/ç dışı işlere adanmış boşta iş parçacığı sayısı.|
+|Querypokaydlithreads|İş parçacıkları: sorgu havuzu boşta iş parçacıkları|Sayı|Ortalama|İşleme iş parçacığı havuzundaki g/ç işleri için boşta iş parçacığı sayısı.|
+|QueryPoolJobQueueLength|İş parçacıkları: sorgu havuzu iş kuyruğu uzunluğu|Sayı|Ortalama|Sorgu iş parçacığı havuzu kuyruğundaki iş sayısı.|
+|Shortparsingbusyıthreads|İş parçacıkları: kısa ayrıştırma meşgul iş parçacıkları|Sayı|Ortalama|Kısa ayrıştırma iş parçacığı havuzundaki meşgul iş parçacığı sayısı.|
+|ShortParsingIdleThreads|İş parçacıkları: kısa ayrıştırma boşta iş parçacıkları|Sayı|Ortalama|Kısa ayrıştırma iş parçacığı havuzundaki boşta iş parçacığı sayısı.|
+|ShortParsingJobQueueLength|İş parçacıkları: kısa ayrıştırma iş kuyruğu uzunluğu|Sayı|Ortalama|Kısa ayrıştırma iş parçacığı havuzu sırasındaki iş sayısı.|
+|Totalconnectionarızaları|Toplam bağlantı başarısızlığı sayısı|Sayı|Ortalama|Toplam başarısız bağlantı denemesi.|
+|TotalConnectionRequests|Toplam bağlantı Isteği sayısı|Sayı|Ortalama|Toplam bağlantı isteği sayısı. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Microsoft Azure'da izleme](../monitoring-and-diagnostics/monitoring-overview.md)   
-[Microsoft azure'da ölçümleri](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md)   
-[Azure İzleyici REST API de ölçümleri](/rest/api/monitor/metrics)
+[Azure izlemeye genel bakış](../azure-monitor/overview.md)      
+[Azure Ölçüm Gezgini ile çalışmaya](../azure-monitor/platform/metrics-getting-started.md) başlama      
+[Azure Izleyici 'de ölçümler REST API](/rest/api/monitor/metrics)

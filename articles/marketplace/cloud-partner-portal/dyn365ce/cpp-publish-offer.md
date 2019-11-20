@@ -1,44 +1,22 @@
 ---
-title: Dynamics 365 müşteri katılımı için uygulama teklifi yayımlama | Azure Market
-description: İşlem ve Dynamics 365 Customer Engagement uygulama teklifine AppSource Market'te yayımlamak için gereken adımları açıklar.
+title: Dynamics 365 for Customer Engagement uygulaması teklifini yayımlayın | Azure Marketi
+description: Kullanım dışı olan CPP makalesi, bılgısayar makalesine bağlı; was, AppSource Market 'te müşteri için Dynamics 365 için bir Dynamics uygulaması sunma işlemini ve adımlarını açıklamaktadır. "
 services: Azure, AppSource, Marketplace, Cloud Partner Portal, Dynamics 365 for Customer Engagement
-author: v-miclar
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 12/28/2018
-ms.author: pabutler
-ms.openlocfilehash: 65df08d5fa2b7e4e7f6654f520f9caacc696f7c3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: v-chjen
+ms.openlocfilehash: cf2961f5def6933b46cdca099a176d952fb940b2
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942296"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824708"
 ---
-# <a name="publish-a-dynamics-365-for-customer-engagement-offer"></a>Dynamics 365 müşteri katılımı teklifi yayımlama
+# <a name="publish-a-dynamics-365-for-customer-engagement-offer"></a>Dynamics 365 for Customer Engagement teklifini yayımlama
 
-Şirket bilgileri sağlayarak yeni bir teklif oluşturduktan sonra **yeni teklif** sayfasında teklif yayımlayabilirsiniz. Seçin **Yayımla** yayımlama işlemini başlatmak için.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık Dynamics 365 müşteri katılımı tekliflerinin oluşturulmasını ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Customer Engagement for the PowerApps teklifi &](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer).
 
-
-Aşağıdaki diyagramda "Canlı gitmek" bir teklif için yayımlama işlemi ana adımları gösterir.
-
-  ![Teklif yayımlama adımları](./media/offer-publishing-steps.png)
-
-## <a name="detailed-description-of-publishing-steps"></a>Yayımlama adımları ayrıntılı bir açıklaması
-
-Aşağıdaki tabloda her adımı tamamlamak için bir zaman tahmin (maksimum) olan her yayımlama adımlarını açıklar.
-Aşağıdaki tabloda her yayımlama adımlarını açıklar. Her adımı tamamlamak için tahmini bir saat de verilir.
-
-
-|    Yayımlama Adım             |   Zaman      |   Açıklama                                                              |
-|  -------------------           | --------    | ---------------                                                            |
-| Önkoşulları doğrulama         | 15 dakika   | Bilgi sunan ve ayarlar doğrulanır sunar.                        |
-| Sertifika                  | 1 hafta | Teklif, Azure sertifika ekibi tarafından analiz edilir. Bu teklif, virüsler, kötü amaçlı yazılım, emniyet uyumluluk ve güvenlik sorunları için taranır. Bu teklif, tüm uygunluk ölçütlerini karşıladığını görmek için denetlenir. Daha fazla bilgi için [önkoşulları](./cpp-prerequisites.md). Bir sorun bulunursa geri bildirim sağlanır. |
-| Paketleme | 1 saat  | Teklife ilişkin teknik varlıkları müşteri kullanılmak üzere hazırlanmıştır ve müşteri adayı sistemleri yapılandırılır ve kurulumu. |
-|  Yayımcı Oturumu Kapat             |  -        | Son yayımcı gözden geçirme ve teklif Canlı geçmeden önce onay. Teklifinizi (adımlarda teklif bilgi) seçili Aboneliklerdeki tüm gereksinimleri karşıladığından emin doğrulamak için dağıtabilirsiniz.  Seçin **Go Live** için teklifinizi sonraki adıma geçebilirsiniz. |
-| Paketleme                 | 1 saat | Tamamlanmış teklif Market üretim sistemlerine ve bölgelerde çoğaltılır. | 
-| Canlı                           | 4 gün |Teklif serbest, gerekli bölgelerde çoğaltılır ve genel kullanıma sunulan. |
-|  |  |  |
-
-## <a name="next-steps"></a>Sonraki adımlar
-
-Yayımlama işleminin tamamlanması 10 iş günü için izin ve teklif yayımlanır. Yayımlama işlemini tamamladıktan sonra teklifinizi listelenir [Microsoft AppSource Marketplace](https://appsource.microsoft.com/marketplace/apps/).
+Müşteri için yeni bir Dynamics 365 teklif teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Customer Engagement & PowerApps teklifini](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer) oluşturma bölümündeki yönergeleri izleyin.

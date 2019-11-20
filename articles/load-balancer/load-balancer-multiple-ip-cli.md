@@ -1,10 +1,10 @@
 ---
-title: Azure CLI kullanarak birden çok IP yapılandırmalarında Yük Dengelemesi
+title: Azure CLı kullanarak birden çok IP yapılandırmasında Yük Dengeleme
 titlesuffix: Azure Load Balancer
-description: Azure CLI kullanarak bir sanal makineye birden çok IP adresi atama hakkında bilgi edinin.
+description: Azure CLı kullanarak bir sanal makineye birden çok IP adresi atamayı öğrenin.
 services: virtual-network
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.custom: seodec18
 ms.service: load-balancer
 ms.devlang: na
@@ -12,51 +12,51 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/25/2018
-ms.author: kumud
-ms.openlocfilehash: 1e8911847a555e3b6326f15d15a09344a4472f2c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: allensu
+ms.openlocfilehash: c1606f14650843ea42cfe55381b5f23bf2742a58
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60860564"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68274713"
 ---
-# <a name="load-balancing-on-multiple-ip-configurations-using-azure-cli"></a>Azure CLI kullanarak birden çok IP yapılandırmalarında Yük Dengelemesi
+# <a name="load-balancing-on-multiple-ip-configurations-using-azure-cli"></a>Azure CLı kullanarak birden çok IP yapılandırmasında Yük Dengeleme
 
-Bu makalede, bir ikincil ağ arabirimi (NIC) üzerinde birden çok IP adresi ile Azure Load Balancer kullanmayı açıklar. Bu senaryoda, her birincil ve ikincil bir NIC ile Windows çalıştıran iki sanal makine sunuyoruz İkincil ağ arabirimlerine her iki IP yapılandırması vardır. Her VM, hem Web sitesi contoso.com ve fabrikam.com barındırır. Her Web sitesi IP yapılandırmaları birine ikincil NIC üzerinde bağlı Azure Load Balancer iki ön uç IP adresi, bir Web sitesi için ilgili IP yapılandırması trafiği dağıtmak için her Web sitesi için kullanıma sunmak için kullanırız. Bu senaryo aynı bağlantı noktası numarasını hem ön uçlar, hem de arasında her iki arka uç havuz IP adreslerini kullanır.
+Bu makalede, bir ikincil ağ arabirimi (NIC) üzerinde birden çok IP adresi ile Azure Load Balancer nasıl kullanılacağı açıklanır. Bu senaryo için, her biri birincil ve ikincil NIC olan Windows çalıştıran iki sanal makine vardır. İkincil NIC 'lerin her birinin iki IP yapılandırması vardır. Her VM, hem contoso.com hem de fabrikam.com Web sitelerini barındırır. Her Web sitesi, ikincil NIC 'deki IP yapılandırmalarından birine bağlıdır. Her Web sitesi için bir tane olmak üzere, bir Web sitesi için ilgili IP yapılandırmasına trafik dağıtmak üzere iki ön uç IP adresini kullanıma sunmak için Azure Load Balancer kullanırız. Bu senaryo, hem ön uç havuzu IP adresleri hem de ön uçlarda aynı bağlantı noktası numarasını kullanır.
 
-![LB senaryo görüntüsü](./media/load-balancer-multiple-ip/lb-multi-ip.PNG)
+![LB senaryo resmi](./media/load-balancer-multiple-ip/lb-multi-ip.PNG)
 
-## <a name="steps-to-load-balance-on-multiple-ip-configurations"></a>Yük dengelemek birden fazla IP yapılandırması için adımları
+## <a name="steps-to-load-balance-on-multiple-ip-configurations"></a>Birden çok IP yapılandırmasında yük dengelemeye yönelik adımlar
 
-Bu makalede açıklanan senaryo elde etmek için aşağıdaki adımları tamamlayın:
+Bu makalede özetlenen senaryoya ulaşmak için aşağıdaki adımları izleyin:
 
-1. [Azure CLI'yi yükleme ve yapılandırma](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) Azure hesabınıza bağlı makale ve günlük adımları izleyerek.
-2. [Bir kaynak grubu oluşturma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-resource-group) adlı *contosofabrikam* gibi:
+1. Bağlantılı makaledeki adımları izleyerek [Azure CLI 'Yı yükleyip yapılandırın](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) ve Azure hesabınızda oturum açın.
+2. *Contosofabrikam* adlı [bir kaynak grubunu](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-resource-group) aşağıdaki gibi oluşturun:
 
     ```azurecli
     az group create contosofabrikam westcentralus
     ```
 
-3. [Kullanılabilirlik kümesi oluşturma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-an-availability-set) için iki VM için. Bu senaryo için aşağıdaki komutu kullanın:
+3. İki VM için için [bir kullanılabilirlik kümesi oluşturun](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-an-availability-set) . Bu senaryo için aşağıdaki komutu kullanın:
 
     ```azurecli
     az vm availability-set create --resource-group contosofabrikam --location westcentralus --name myAvailabilitySet
     ```
 
-4. [Sanal ağ oluşturma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-virtual-network-and-subnet) adlı *myVNet* ve bir alt ağı adlı *mySubnet*:
+4. *Myvnet* adlı [bir sanal ağ](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-virtual-network-and-subnet) ve *Mysubnet*adlı bir alt ağ oluşturun:
 
     ```azurecli
     az network vnet create --resource-group contosofabrikam --name myVnet --address-prefixes 10.0.0.0/16  --location westcentralus --subnet-name MySubnet --subnet-prefix 10.0.0.0/24
 
     ```
 
-5. [Yük Dengeleyici oluşturma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json) adlı *mylb*:
+5. *Mylb*adlı [Yük dengeleyiciyi oluşturun](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json) :
 
     ```azurecli
     az network lb create --resource-group contosofabrikam --location westcentralus --name mylb
     ```
 
-6. İki dinamik genel IP adresleri için ön uç IP yapılandırmaları yük dengeleyicinizin oluşturun:
+6. Yük dengeleyicinizin ön uç IP yapılandırması için iki dinamik genel IP adresi oluşturun:
 
     ```azurecli
     az network public-ip create --resource-group contosofabrikam --location westcentralus --name PublicIp1 --domain-name-label contoso --allocation-method Dynamic
@@ -64,14 +64,14 @@ Bu makalede açıklanan senaryo elde etmek için aşağıdaki adımları tamamla
     az network public-ip create --resource-group contosofabrikam --location westcentralus --name PublicIp2 --domain-name-label fabrikam --allocation-method Dynamic
     ```
 
-7. İki ön uç IP yapılandırmaları oluşturma *contosofe* ve *fabrikamfe* sırasıyla:
+7. Sırasıyla *contosofe* ve *fabrikamfe* olmak üzere iki ön uç IP yapılandırması oluşturun:
 
     ```azurecli
     az network lb frontend-ip create --resource-group contosofabrikam --lb-name mylb --public-ip-name PublicIp1 --name contosofe
     az network lb frontend-ip create --resource-group contosofabrikam --lb-name mylb --public-ip-name PublicIp2 --name fabrkamfe
     ```
 
-8. Arka uç adres havuzları - oluşturma *contosopool* ve *fabrikampool*, [araştırma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json) - *HTTP*ve yükleme Dengeleme kurallarını - *HTTPc* ve *HTTPf*:
+8. Arka uç adres havuzlarınızı oluşturun *-contosopool* ve *fabrikampool*, bir [araştırma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json) - *http*ve yük dengeleme kurallarınızı- *httpc* ve *httpf*:
 
     ```azurecli
     az network lb address-pool create --resource-group contosofabrikam --lb-name mylb --name contosopool
@@ -83,13 +83,13 @@ Bu makalede açıklanan senaryo elde etmek için aşağıdaki adımları tamamla
     az network lb rule create --resource-group contosofabrikam --lb-name mylb --name HTTPf --protocol tcp --probe-name http --frontend-port 5000 --backend-port 5000 --frontend-ip-name fabrkamfe --backend-address-pool-name fabrikampool
     ```
 
-9. Çıktıyı denetleyin [load balancer'ınız doğrulayın](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json) aşağıdaki komutu çalıştırarak doğru şekilde oluşturulmuş:
+9. Aşağıdaki komutu çalıştırarak [Yük dengeleyicinizin](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json) doğru şekilde oluşturulduğunu doğrulamak için çıktıyı denetleyin:
 
     ```azurecli
     az network lb show --resource-group contosofabrikam --name mylb
     ```
 
-10. [Bir genel IP oluşturma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-public-ip-address), *Mypublicıp*, ve [depolama hesabı](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json), *mystorageaccont1* ilk sanal makinenizi VM1 kılmak için:
+10. *Mystorageaccont1* ilk sanal makineniz için [bir genel IP](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-public-ip-address), *mypublicıp*ve [depolama hesabı](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json)oluşturun, VM1 aşağıdaki gibi:
 
     ```azurecli
     az network public-ip create --resource-group contosofabrikam --location westcentralus --name myPublicIP --domain-name-label mypublicdns345 --allocation-method Dynamic
@@ -97,7 +97,7 @@ Bu makalede açıklanan senaryo elde etmek için aşağıdaki adımları tamamla
     az storage account create --location westcentralus --resource-group contosofabrikam --kind Storage --sku-name GRS mystorageaccount1
     ```
 
-11. [Ağ arabirimlerini oluşturma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-virtual-nic) VM1 için ve ikinci bir IP Yapılandırması Ekle *VM1 ipconfig2*, ve [VM oluşturma](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-vm) gibi:
+11. VM1 için [ağ arabirimlerini oluşturun](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-virtual-nic) ve ıkıncı bir IP yapılandırması, *VM1-ipconfig2*ekleyin ve [VM 'yi](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-vm) şu şekilde oluşturun:
 
     ```azurecli
     az network nic create --resource-group contosofabrikam --location westcentralus --subnet-vnet-name myVnet --subnet-name mySubnet --name VM1Nic1 --ip-config-name NIC1-ipconfig1
@@ -106,7 +106,7 @@ Bu makalede açıklanan senaryo elde etmek için aşağıdaki adımları tamamla
     az vm create --resource-group contosofabrikam --name VM1 --location westcentralus --os-type linux --nic-names VM1Nic1,VM1Nic2  --vnet-name VNet1 --vnet-subnet-name Subnet1 --availability-set myAvailabilitySet --vm-size Standard_DS3_v2 --storage-account-name mystorageaccount1 --image-urn canonical:UbuntuServer:16.04.0-LTS:latest --admin-username <your username>  --admin-password <your password>
     ```
 
-12. İkinci sanal Makineniz için 10-11. adımları yineleyin:
+12. İkinci VM 'niz için 10-11 adımlarını yineleyin:
 
     ```azurecli
     az network public-ip create --resource-group contosofabrikam --location westcentralus --name myPublicIP2 --domain-name-label mypublicdns785 --allocation-method Dynamic
@@ -117,8 +117,8 @@ Bu makalede açıklanan senaryo elde etmek için aşağıdaki adımları tamamla
     az vm create --resource-group contosofabrikam --name VM2 --location westcentralus --os-type linux --nic-names VM2Nic1,VM2Nic2 --vnet-name VNet1 --vnet-subnet-name Subnet1 --availability-set myAvailabilitySet --vm-size Standard_DS3_v2 --storage-account-name mystorageaccount2 --image-urn canonical:UbuntuServer:16.04.0-LTS:latest --admin-username <your username>  --admin-password <your password>
     ```
 
-13. Son olarak, DNS kaynak kayıtlarını yük dengeleyicinin ilgili ön uç IP adresine işaret edecek şekilde yapılandırmanız gerekir. Azure DNS etki alanlarınızı barındırabilir. Load Balancer ile Azure DNS kullanma hakkında daha fazla bilgi için bkz. [kullanarak Azure DNS diğer Azure hizmetleriyle](../dns/dns-for-azure-services.md).
+13. Son olarak, DNS kaynak kayıtlarını Load Balancer ilgili ön uç IP adresini gösterecek şekilde yapılandırmanız gerekir. Etki alanlarınızı Azure DNS barındırabilirsiniz. Load Balancer ile Azure DNS kullanma hakkında daha fazla bilgi için bkz. [diğer Azure hizmetleriyle Azure DNS kullanma](../dns/dns-for-azure-services.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Yük Dengeleme hizmetlerini Azure kapsamında birleştirme hakkında daha fazla bilgi [Azure'da Yük Dengeleme hizmetlerini kullanarak](../traffic-manager/traffic-manager-load-balancing-azure.md).
-- Günlükleri farklı türde Azure'da yönetmek ve yük dengeleyicide sorunlarını gidermek için nasıl kullanacağınızı öğrenin [Azure Load Balancer için Log analytics](../load-balancer/load-balancer-monitor-log.md).
+- Azure 'da yük [Dengeleme hizmetlerini kullanarak](../traffic-manager/traffic-manager-load-balancing-azure.md)Yük Dengeleme hizmetlerini Azure 'da birleştirme hakkında daha fazla bilgi edinin.
+- [Azure Load Balancer Için Log Analytics](../load-balancer/load-balancer-monitor-log.md)'te yük dengeleyiciyi yönetmek ve sorunlarını gidermek için Azure 'da farklı türlerdeki günlükleri nasıl kullanabileceğinizi öğrenin.

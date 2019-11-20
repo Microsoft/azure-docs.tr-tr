@@ -1,0 +1,142 @@
+- name: Azure Web Uygulaması Güvenlik Duvarı Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure Web Uygulaması Güvenlik Duvarı nedir?
+      href: overview.md
+    - name: Application Gateway
+      items:
+        - name: Application Gateway üzerinde Web Uygulaması Güvenlik Duvarı
+          href: ./ag/ag-overview.md
+        - name: Yenilikler
+          href: ./ag/whats-new.md
+    - name: Front Door
+      items:
+        - name: Azure Front Door üzerinde Web Uygulaması Güvenlik Duvarı
+          href: ./afds/afds-overview.md
+- name: Öğreticiler
+  items:
+    - name: Application Gateway
+      items:
+        - name: Web Uygulaması Güvenlik Duvarı'nı etkinleştirme
+          href: ./ag/application-gateway-web-application-firewall-portal.md
+    - name: Front Door
+      items:
+        - name: WAF ilkesi yapılandırma - portal
+          href: ./afds/waf-front-door-create-portal.md
+- name: Örnekler
+  items:
+    - name: Azure PowerShell
+      href: ./ag/powershell-samples.md
+    - name: Resource Manager şablonları
+      href: ./ag/resource-manager-template-samples.md
+- name: Kavramlar
+  items:
+    - name: Application Gateway
+      items:
+        - name: Yönetilen Kurallar
+          href: ./ag/application-gateway-crs-rulegroups-rules.md
+        - name: Özel kurallara genel bakış
+          href: ./ag/custom-waf-rules-overview.md
+        - name: İstek boyutu sınırları ve dışlama listeleri
+          href: ./ag/application-gateway-waf-configuration.md
+    - name: Front Door
+      items:
+        - name: Özel kurallar
+          href: ./afds/waf-front-door-custom-rules.md
+        - name: İlke ayarları
+          href: ./afds/waf-front-door-policy-settings.md
+        - name: Coğrafi filtreleme
+          href: ./afds/waf-front-door-geo-filtering.md
+        - name: SSS
+          href: ./afds/waf-faq.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Application Gateway
+      items:
+        - name: WAF ilkesi oluşturma
+          href: ./ag/create-waf-policy-ag.md
+        - name: Web Uygulaması Güvenlik Duvarı’nı Yapılandırma
+          items:
+            - name: Azure PowerShell
+              href: ./ag/tutorial-restrict-web-traffic-powershell.md
+            - name: Azure CLI
+              href: ./ag/tutorial-restrict-web-traffic-cli.md
+        - name: WAF ilkesi geçirme
+          href: ./ag/migrate-policy.md
+        - name: WAF kurallarını özelleştirme
+          items:
+            - name: Azure portal
+              href: ./ag/application-gateway-customize-waf-rules-portal.md
+            - name: Azure PowerShell
+              href: ./ag/application-gateway-customize-waf-rules-powershell.md
+            - name: Azure CLI
+              href: ./ag/application-gateway-customize-waf-rules-cli.md
+        - name: WAF v2 özel kuralını yapılandırma - PowerShell
+          href: ./ag/configure-waf-custom-rules.md
+        - name: Özel kural örnekleri
+          href: ./ag/create-custom-waf-rules.md
+        - name: Bot koruması
+          href: ./ag/bot-protection.md
+        - name: İlkeyi mevcut Application Gateway ile ilişkilendirme
+          href: ./ag/associate-waf-policy-existing-gateway.md
+        - name: Tanılama günlükleri
+          href: ./ag/web-application-firewall-logs.md
+        - name: WAF sorunlarını giderme
+          href: ./ag/web-application-firewall-troubleshoot.md
+    - name: Front Door
+      items:
+        - name: WAF ilkesini yapılandırma - PowerShell
+          href: ./afds/waf-front-door-custom-rules-powershell.md
+        - name: Bot korumasını yapılandırma
+          href: ./afds/waf-front-door-policy-configure-bot-protection.md
+        - name: Özel yanıt kodunu yapılandırma
+          href: ./afds/waf-front-door-configure-custom-response-code.md
+        - name: IP kısıtlamalarını yapılandırma
+          href: ./afds/waf-front-door-configure-ip-restriction.md
+        - name: Hız sınırını yapılandırma - PowerShell
+          href: ./afds/waf-front-door-rate-limit-powershell.md
+        - name: Coğrafi filtreleme WAF ilkesini yapılandırma
+          href: ./afds/waf-front-door-tutorial-geo-filtering.md
+        - name: İzleme ve günlüğe kaydetme
+          href: ./afds/waf-front-door-monitor.md
+- name: Sorun giderme
+  items:
+    - name: Application Gateway
+      items:
+        - name: WAF sorunlarını giderme
+          href: ./ag/web-application-firewall-troubleshoot.md
+        - name: Log Analytics
+          href: ./ag/log-analytics.md
+- name: Başvuru
+  items:
+    - name: CRS kuralları
+      href: ./ag/application-gateway-crs-rulegroups-rules.md
+    - name: Azure CLI
+      href: /cli/azure/ext/azure-firewall/network/firewall
+    - name: Azure PowerShell
+      href: /powershell/module/az.network/new-azfirewall
+    - name: .NET
+      href: /dotnet/api
+    - name: Java
+      href: /java/api
+    - name: Node.js
+      href: 'https://azure.microsoft.com/develop/nodejs/#azure-sdk'
+    - name: Python
+      href: 'https://azure.microsoft.com/develop/python/'
+    - name: REST
+      href: /rest/api/firewall
+    - name: Azure Resource Manager
+      href: ../azure-resource-manager/resource-group-overview.md
+- name: Kaynaklar
+  items:
+    - name: Yazar şablonları
+      href: ../azure-resource-manager/resource-group-authoring-templates.md
+    - name: Azure Yol Haritası
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: Topluluk şablonları
+      href: 'https://azure.microsoft.com/documentation/templates'
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/web-application-firewall/'
+    - name: Bölgesel kullanılabilirlik
+      href: 'https://azure.microsoft.com/regions/services/'

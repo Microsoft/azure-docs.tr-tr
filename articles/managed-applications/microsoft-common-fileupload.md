@@ -1,6 +1,6 @@
 ---
-title: Azure dosya yükleme kullanıcı Arabirimi öğesi | Microsoft Docs
-description: Azure portalına yönelik Microsoft.Common.FileUpload UI öğesi açıklar.
+title: Azure FileUpload Kullanıcı arabirimi öğesi | Microsoft Docs
+description: Azure portal için Microsoft. Common. FileUpload Kullanıcı arabirimi öğesini açıklar. Kullanıcıların yönetilen bir uygulamayı dağıttığı sırada dosyaları karşıya yüklemesi gereksinimini sağlar.
 services: managed-applications
 documentationcenter: na
 author: tfitzmac
@@ -13,20 +13,23 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 09/05/2018
 ms.author: tomfitz
-ms.openlocfilehash: 92a5f7c058904015cb22a239b7e7c4938ae1fdae
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 03eff6afb22ea3306bf7f8191f4eca3ccad39938
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61044665"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74151556"
 ---
-# <a name="microsoftcommonfileupload-ui-element"></a>Microsoft.Common.FileUpload kullanıcı Arabirimi öğesi
-Karşıya yüklenecek bir veya daha fazla dosyaları belirtmek bir kullanıcı olanak sağlayan bir denetimdir.
+# <a name="microsoftcommonfileupload-ui-element"></a>Microsoft. Common. FileUpload Kullanıcı arabirimi öğesi
 
-## <a name="ui-sample"></a>Örnek kullanıcı Arabirimi
-![Microsoft.Common.FileUpload](./media/managed-application-elements/microsoft.common.fileupload.png)
+Kullanıcının karşıya yüklenecek bir veya daha fazla dosya belirtmesini sağlayan denetim.
+
+## <a name="ui-sample"></a>UI örneği
+
+![Microsoft. Common. FileUpload](./media/managed-application-elements/microsoft.common.fileupload.png)
 
 ## <a name="schema"></a>Şema
+
 ```json
 {
   "name": "element1",
@@ -47,23 +50,15 @@ Karşıya yüklenecek bir veya daha fazla dosyaları belirtmek bir kullanıcı o
 }
 ```
 
-## <a name="remarks"></a>Açıklamalar
-- `constraints.accept` Tarayıcının dosya iletişim kutusunda gösterilen dosya türlerini belirtir. Bkz: [HTML5 belirtimi](https://www.w3.org/TR/html5/forms.html#attr-input-accept) için izin verilen değerler. Varsayılan değer **null**.
-- Varsa `options.multiple` ayarlanır **true**, kullanıcının birden fazla dosya seçin tarayıcının dosya iletişim kutusunda izni. Varsayılan değer **false**.
-- Bu öğenin değerine göre iki modda yükleme dosyalarını destekler. `options.uploadMode`. Varsa **dosya** belirtilirse, çıkış dosyasının BLOB içeriğini sahiptir. Varsa **url** belirtilmişse dosyayı geçici bir konuma yüklenir ve çıktıyı blobun URL'sini içerir. 24 saat sonra geçici blobları temizlenecek. Varsayılan değer **dosya**.
-- Karşıya yüklenen bir dosya korunur. Çıkış URL'sini içeren bir [SAS belirteci](../storage/common/storage-dotnet-shared-access-signature-part-1.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) dağıtım sırasında dosyasına erişim için.
-- Değerini `options.openMode` nasıl dosya okunurken belirler. Dosya, düz metin olması bekleniyorsa, belirtin **metin**; başka belirtin **ikili**. Varsayılan değer **metin**.
-- Varsa `options.uploadMode` ayarlanır **dosya** ve `options.openMode` ayarlanır **ikili**, base64 ile kodlanmış çıktı.
-- `options.encoding` Dosya okunurken kullanılacak kodlamayı belirtir. Varsayılan değer **UTF-8**ve kullanılan yalnızca `options.openMode` ayarlanır **metin**.
-
 ## <a name="sample-output"></a>Örnek çıktı
-Options.Multiple false ise ve options.uploadMode dosyasıdır, çıkış dosyasının içeriğini bir JSON dizesi sahiptir:
+
+Options. Multiple değeri false ve Options. uploadMode dosyası ise çıktı, dosyanın içeriğine JSON dizesi olarak sahiptir:
 
 ```json
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 ```
 
-Options.Multiple doğruysa and'options.uploadMode dosyasıdır ve çıktıda dosyaların içeriğini bir JSON dizisi olarak bulunur:
+Options. Multiple değeri true ve 'options. uploadMode dosyası ise çıktı, dosyaların içeriğini JSON dizisi olarak içerir:
 
 ```json
 [
@@ -74,13 +69,13 @@ Options.Multiple doğruysa and'options.uploadMode dosyasıdır ve çıktıda dos
 ]
 ```
 
-Options.Multiple false ise ve options.uploadMode URL'dir. çıkış bir JSON dizesi bir URL vardır:
+Options. Multiple değeri false ve Options. uploadMode, URL ise çıkışın JSON dizesi olarak bir URL 'SI vardır:
 
 ```json
 "https://myaccount.blob.core.windows.net/pictures/profile.jpg?sv=2013-08-15&st=2013-08-16&se=2013-08-17&sr=c&sp=r&rscd=file;%20attachment&rsct=binary &sig=YWJjZGVmZw%3d%3d&sig=a39%2BYozJhGp6miujGymjRpN8tsrQfLo9Z3i8IRyIpnQ%3d"
 ```
 
-Options.Multiple true ise ve options.uploadMode url çıktıda URL'lerin bir listesini bir JSON dizisi olarak bulunur:
+Options. Multiple değeri true ve Options. uploadMode URL ise, çıktıda JSON dizisi olarak URL 'Lerin bir listesi bulunur:
 ```json
 [
   "https://myaccount.blob.core.windows.net/pictures/profile1.jpg?sv=2013-08-15&st=2013-08-16&se=2013-08-17&sr=c&sp=r&rscd=file;%20attachment&rsct=binary &sig=YWJjZGVmZw%3d%3d&sig=a39%2BYozJhGp6miujGymjRpN8tsrQfLo9Z3i8IRyIpnQ%3d",
@@ -89,9 +84,19 @@ Options.Multiple true ise ve options.uploadMode url çıktıda URL'lerin bir lis
 ]
 ```
 
-Bir CreateUiDefinition test ederken URL'leri tarayıcı konsolunu Microsoft.Common.FileUpload öğe tarafından oluşturulan bazı tarayıcılar (örneğin, Google Chrome) olacak şekilde kısaltın. Tam URL'leri kopyalamak için tek bağlantılar sağ gerekebilir.
+Bir Createuıdefinition test edilirken, bazı tarayıcılar (Google Chrome gibi) tarayıcı konsolundaki Microsoft. Common. FileUpload öğesi tarafından oluşturulan URL 'Leri keser. Tam URL 'Leri kopyalamak için tek tek bağlantılara sağ tıklamanız gerekebilir.
 
+## <a name="remarks"></a>Açıklamalar
+
+- `constraints.accept` tarayıcının dosya iletişim kutusunda gösterilen dosya türlerini belirtir. İzin verilen değerler için [HTML5 belirtimine](https://html.spec.whatwg.org/multipage/input.html#attr-input-accept) bakın. Varsayılan değer **null**.
+- `options.multiple` **true**olarak ayarlanırsa, kullanıcının tarayıcının dosya iletişim kutusunda birden fazla dosya seçmesini sağlar. Varsayılan değer **false**.
+- Bu öğe, `options.uploadMode`değerine göre iki modda dosya yüklemeyi destekler. **Dosya** belirtilmişse, çıkış dosyanın içeriğini blob olarak içerir. **URL** belirtilmişse, dosya geçici bir konuma yüklenir ve çıktının blob URL 'si vardır. Geçici Bloblar 24 saat sonra temizlenir. Varsayılan değer **Dosya**' dır.
+- Karşıya yüklenen bir dosya korunuyor. Çıkış URL 'SI, dağıtım sırasında dosyaya erişmek için bir [SAS belirteci](../storage/common/storage-dotnet-shared-access-signature-part-1.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) içerir.
+- `options.openMode` değeri, dosyanın nasıl okunacağını belirler. Dosyanın düz metin olması bekleniyorsa, **metin**belirtin; Aksi takdirde, **ikili**belirtin. Varsayılan değer **metindir**.
+- `options.uploadMode` **Dosya** olarak ayarlandıysa ve `options.openMode` **ikili**olarak ayarlandıysa, çıkış Base64 kodlamalı olur.
+- `options.encoding` dosya okunurken kullanılacak kodlamayı belirtir. Varsayılan değer **UTF-8**' dir ve yalnızca `options.openMode` **metin**olarak ayarlandığında kullanılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* UI tanımları oluşturma, bir giriş için bkz. [createuidefinition dosyasını kullanmaya başlama](create-uidefinition-overview.md).
-* Ortak Özellikler UI öğelerinin açıklaması için bkz. [CreateUiDefinition öğeleri](create-uidefinition-elements.md).
+
+* UI tanımları oluşturmaya giriş için bkz. [Createuıdefinition ile çalışmaya başlama](create-uidefinition-overview.md).
+* UI öğelerindeki ortak özelliklerin açıklaması için bkz. [Createuıdefinition Elements](create-uidefinition-elements.md).

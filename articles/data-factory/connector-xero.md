@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory (Önizleme) ile Xero verileri kopyalama | Microsoft Docs
-description: Desteklenen bir havuz veri depolarına Xero bir Azure Data Factory işlem hattında kopyalama etkinliği'ni kullanarak veri kopyalama hakkında bilgi edinin.
+title: Azure Data Factory kullanarak Xero 'tan veri kopyalama
+description: Azure Data Factory bir işlem hattındaki kopyalama etkinliğini kullanarak Xero 'tan desteklenen havuz veri depolarına veri kopyalamayı öğrenin.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -10,52 +10,54 @@ ms.service: data-factory
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.date: 12/07/2018
+ms.date: 10/25/2019
 ms.author: jingwang
-ms.openlocfilehash: 6793fbcc50711e10231b87fa6e1f11f54f90d325
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: d52e536170c649cbc84b6c6dce92afb76ffe3125
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60445443"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73680015"
 ---
-# <a name="copy-data-from-xero-using-azure-data-factory-preview"></a>Azure Data Factory (Önizleme) ile Xero veri kopyalama
+# <a name="copy-data-from-xero-using-azure-data-factory"></a>Azure Data Factory kullanarak Xero 'tan veri kopyalama
 
-Bu makalede, kopyalama etkinliği Azure Data Factory'de Xero veri kopyalamak için nasıl kullanılacağını özetlenmektedir. Yapılar [kopyalama etkinliği'ne genel bakış](copy-activity-overview.md) kopyalama etkinliği genel bir bakış sunan makalesi.
+Bu makalede, Xero ' den veri kopyalamak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı özetlenmektedir. Kopyalama etkinliğine genel bir bakış sunan [kopyalama etkinliğine genel bakış](copy-activity-overview.md) makalesinde oluşturulur.
 
-> [!IMPORTANT]
-> Bu bağlayıcı, şu anda Önizleme aşamasındadır. Deneyin ve geri bildirim sağlayın. Çözümünüzde bir önizleme bağlayıcısı bağımlılığı olmasını istiyorsanız lütfen [Azure desteğine](https://azure.microsoft.com/support/) başvurun.
+## <a name="supported-capabilities"></a>Desteklenen yetenekler
 
-## <a name="supported-capabilities"></a>Desteklenen özellikler
+Bu Xero Bağlayıcısı aşağıdaki etkinlikler için desteklenir:
 
-Xero tüm desteklenen havuz veri deposuna veri kopyalayabilirsiniz. Kaynakları/havuz kopyalama etkinliği tarafından desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablo.
+- [Desteklenen kaynak/havuz matrisi](copy-activity-overview.md) ile [kopyalama etkinliği](copy-activity-overview.md)
+- [Arama etkinliği](control-flow-lookup-activity.md)
 
-Özellikle, bu Xero bağlayıcı'yı destekler:
+Xero 'ten desteklenen herhangi bir havuz veri deposuna veri kopyalayabilirsiniz. Kopyalama etkinliği tarafından kaynak/havuz olarak desteklenen veri depolarının listesi için [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablosuna bakın.
 
-- Xero [özel uygulama](https://developer.xero.com/documentation/getting-started/api-application-types) ancak ortak uygulama.
-- "Rapor" hariç tüm Xero tabloların (API uç noktaları). 
+Özellikle, bu Xero Bağlayıcısı şunları destekler:
 
-Azure Data Factory bağlantısını etkinleştirmek için yerleşik bir sürücü sağlar, bu nedenle bu bağlayıcıyı kullanarak herhangi bir sürücü el ile yüklemeniz gerekmez.
+- Xero [özel uygulama](https://developer.xero.com/documentation/getting-started/api-application-types) ancak ortak uygulama değil.
+- Tüm Xero tabloları (API uç noktaları), "raporlar" hariç. 
+
+Azure Data Factory, bağlantıyı etkinleştirmek için yerleşik bir sürücü sağlar, bu nedenle bu bağlayıcıyı kullanarak herhangi bir sürücüyü el ile yüklemeniz gerekmez.
 
 ## <a name="getting-started"></a>Başlarken
 
 [!INCLUDE [data-factory-v2-connector-get-started](../../includes/data-factory-v2-connector-get-started.md)]
 
-Aşağıdaki bölümler, Data Factory varlıklarını belirli Xero bağlayıcıya tanımlamak için kullanılan özellikleri hakkında ayrıntılı bilgi sağlar.
+Aşağıdaki bölümlerde Xero bağlayıcısına özgü Data Factory varlıkları tanımlamak için kullanılan özellikler hakkında ayrıntılı bilgi sağlanmaktadır.
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
 
-Xero bağlı hizmeti için aşağıdaki özellikleri destekler:
+Aşağıdaki özellikler Xero bağlı hizmeti için desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Type özelliği ayarlanmalıdır: **Xero** | Evet |
-| host | Xero sunucu uç noktası (`api.xero.com`).  | Evet |
-| consumerKey | Xero uygulamayla ilişkili tüketici anahtarı. Data Factory'de güvenle depolamak için bir SecureString olarak bu alanı işaretleyin veya [Azure Key Vault'ta depolanan bir gizli dizi başvuru](store-credentials-in-key-vault.md). | Evet |
-| privateKey | Özel anahtar, Xero özel uygulama için oluşturulan .pem dosyasından bkz [bir ortak/özel anahtar çifti oluşturma](https://developer.xero.com/documentation/api-guides/create-publicprivate-key). Not **numbits 512 ile privatekey.pem oluşturmak** kullanarak `openssl genrsa -out privatekey.pem 512`; 1024 desteklenmiyor. .Pem dosyasından UNIX satırı endings(\n) dahil olmak üzere tüm metni eklemek, aşağıdaki örneğe bakın.<br/><br/>Data Factory'de güvenle depolamak için bir SecureString olarak bu alanı işaretleyin veya [Azure Key Vault'ta depolanan bir gizli dizi başvuru](store-credentials-in-key-vault.md). | Evet |
-| useEncryptedEndpoints | Veri kaynağı uç noktaları HTTPS kullanılarak şifrelenmiş olup olmadığını belirtir. Varsayılan değer true olur.  | Hayır |
-| useHostVerification | SSL üzerinden bağlanırken sunucu ana bilgisayar adını eşleştirmek için ana bilgisayar adı sunucunun sertifikasında gerekip gerekmediğini belirtir. Varsayılan değer true olur.  | Hayır |
-| usePeerVerification | SSL üzerinden bağlanırken sunucu kimliğinin doğrulanıp doğrulanmayacağını belirtir. Varsayılan değer true olur.  | Hayır |
+| type | Type özelliği: **Xero** olarak ayarlanmalıdır | Evet |
+| Konağının | Xero sunucusunun uç noktası (`api.xero.com`).  | Evet |
+| consumerKey | Xero uygulamasıyla ilişkili tüketici anahtarı. Data Factory güvenli bir şekilde depolamak için bu alanı SecureString olarak işaretleyin veya [Azure Key Vault depolanan bir gizli dizi başvurusu](store-credentials-in-key-vault.md)yapın. | Evet |
+| privateKey | Xero özel uygulamanız için oluşturulan. ped dosyasındaki özel anahtar, bkz. [ortak/özel anahtar çifti oluşturma](https://developer.xero.com/documentation/api-guides/create-publicprivate-key). `openssl genrsa -out privatekey.pem 512`kullanarak **PrivateKey. pek numbits of 512 ile oluşturma** 1024 desteklenmiyor. . Ped dosyasındaki, Unix satır sonları (\n) dahil tüm metni ekleyin, aşağıdaki örneğe bakın.<br/><br/>Data Factory güvenli bir şekilde depolamak için bu alanı SecureString olarak işaretleyin veya [Azure Key Vault depolanan bir gizli dizi başvurusu](store-credentials-in-key-vault.md)yapın. | Evet |
+| useEncryptedEndpoints | Veri kaynağı uç noktalarının HTTPS kullanılarak şifrelenip şifrelenmediğini belirtir. Varsayılan değer true 'dur.  | Hayır |
+| Usehostdoğrulaması | SSL üzerinden bağlanırken sunucunun ana bilgisayar adıyla eşleşmesi için Sunucu sertifikasında ana bilgisayar adının gerekli olup olmadığını belirtir. Varsayılan değer true 'dur.  | Hayır |
+| Usepeerdoğrulaması | SSL üzerinden bağlanırken sunucunun kimliğini doğrulayıp doğrulamayamayacağını belirtir. Varsayılan değer true 'dur.  | Hayır |
 
 **Örnek:**
 
@@ -81,7 +83,7 @@ Xero bağlı hizmeti için aşağıdaki özellikleri destekler:
 
 **Örnek özel anahtar değeri:**
 
-.Pem dosyasını UNIX satırı endings(\n) dahil olmak üzere tüm metni içerir.
+. Ped dosyasındaki, Unix satır sonları (\n) dahil tüm metni ekleyin.
 
 ```
 "-----BEGIN RSA PRIVATE KEY-----\nMII***************************************************P\nbu****************************************************s\nU/****************************************************B\nA*****************************************************W\njH****************************************************e\nsx*****************************************************l\nq******************************************************X\nh*****************************************************i\nd*****************************************************s\nA*****************************************************dsfb\nN*****************************************************M\np*****************************************************Ly\nK*****************************************************Y=\n-----END RSA PRIVATE KEY-----"
@@ -89,14 +91,14 @@ Xero bağlı hizmeti için aşağıdaki özellikleri destekler:
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
 
-Bölümleri ve veri kümeleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [veri kümeleri](concepts-datasets-linked-services.md) makalesi. Bu bölümde, Xero veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
+Veri kümelerini tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. [veri kümeleri](concepts-datasets-linked-services.md) makalesi. Bu bölüm, Xero veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
 
-Xero verileri kopyalamak için dataset öğesinin type özelliği ayarlamak **XeroObject**. Aşağıdaki özellikler desteklenir:
+Xero öğesinden veri kopyalamak için, veri kümesinin Type özelliğini **XeroObject**olarak ayarlayın. Aşağıdaki özellikler desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Dataset öğesinin type özelliği ayarlanmalıdır: **XeroObject** | Evet |
-| tableName | Tablonun adı. | Hayır (etkinlik kaynağı "sorgu" belirtilmişse) |
+| type | DataSet 'in Type özelliği: **XeroObject** olarak ayarlanmalıdır | Evet |
+| tableName | Tablonun adı. | Hayır (etkinlik kaynağı içinde "sorgu" belirtilmişse) |
 
 **Örnek**
 
@@ -105,27 +107,28 @@ Xero verileri kopyalamak için dataset öğesinin type özelliği ayarlamak **Xe
     "name": "XeroDataset",
     "properties": {
         "type": "XeroObject",
+        "typeProperties": {},
+        "schema": [],
         "linkedServiceName": {
             "referenceName": "<Xero linked service name>",
             "type": "LinkedServiceReference"
-        },
-        "typeProperties": {}
+        }
     }
 }
 ```
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
 
-Bölümleri ve etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları](concepts-pipelines-activities.md) makalesi. Bu bölümde, Xero kaynak tarafından desteklenen özelliklerin bir listesini sağlar.
+Etkinlikleri tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. işlem [hatları](concepts-pipelines-activities.md) makalesi. Bu bölüm Xero kaynağı tarafından desteklenen özelliklerin bir listesini sağlar.
 
-### <a name="xero-as-source"></a>Xero kaynağı olarak
+### <a name="xero-as-source"></a>Kaynak olarak Xero
 
-Xero verileri kopyalamak için kopyalama etkinliği için kaynak türünü ayarlayın. **XeroSource**. Kopyalama etkinliği aşağıdaki özellikler desteklenir **kaynak** bölümü:
+Xero adresinden veri kopyalamak için kopyalama etkinliğindeki kaynak türünü **XeroSource**olarak ayarlayın. Aşağıdaki özellikler, etkinlik **kaynağını** kopyalama bölümünde desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Kopyalama etkinliği kaynağı öğesinin type özelliği ayarlanmalıdır: **XeroSource** | Evet |
-| query | Verileri okumak için özel bir SQL sorgusu kullanın. Örneğin: `"SELECT * FROM Contacts"`. | Yok (veri kümesinde "TableName" değeri belirtilmişse) |
+| type | Kopyalama etkinliği kaynağının Type özelliği: **XeroSource** olarak ayarlanmalıdır | Evet |
+| sorgu | Verileri okumak için özel SQL sorgusunu kullanın. Örneğin: `"SELECT * FROM Contacts"`. | Hayır (veri kümesinde "tableName" belirtilmişse) |
 
 **Örnek:**
 
@@ -159,13 +162,13 @@ Xero verileri kopyalamak için kopyalama etkinliği için kaynak türünü ayarl
 ]
 ```
 
-Xero sorguyu oluştururken aşağıdakileri unutmayın:
+Xero sorgusunu belirtirken aşağıdakileri aklınızda edin:
 
-- Karmaşık öğeleri içeren tablolar için birden çok tablo bölünür. Örneğin, banka işlemleri sahip bir karmaşık veri yapısı "Lineıtems" banka işlem verilerini eşlenmiş şekilde tablosuna `Bank_Transaction` ve `Bank_Transaction_Line_Items`, ile `Bank_Transaction_ID` birbirine bağlamak için yabancı anahtar olarak.
+- Karmaşık öğeler içeren tablolar birden çok tabloya bölünecektir. Örneğin, banka işlemleri "LineItems" karmaşık bir veri yapısına sahiptir, bu nedenle banka işleminin verileri tablo `Bank_Transaction` ve `Bank_Transaction_Line_Items`eşlenir ve bu sayede birlikte bağlamak üzere yabancı anahtar olarak `Bank_Transaction_ID`.
 
-- Xero veri iki şemaları kullanılabilir: `Minimal` (varsayılan) ve `Complete`. İstenen sorgu yapmadan önce ek veriler (örn: sütun kimliği) gerektiren önkoşul çağrı tablolar tam şema var.
+- Xero verileri iki şema aracılığıyla kullanılabilir: `Minimal` (varsayılan) ve `Complete`. Tüm şema, istenen sorguyu yapmadan önce ek veriler (ör. ID sütunu) gerektiren önkoşul çağrı tabloları içerir.
 
-Aşağıdaki tablolarda, aynı bilgileri en az ve tam şemada vardır. API çağrılarının sayısını azaltmak için en az bir şema (varsayılan) kullanın.
+Aşağıdaki tablolar, en küçük ve tamamen şema ile aynı bilgilere sahiptir. API çağrılarının sayısını azaltmak için en az şemayı kullanın (varsayılan).
 
 - Bank_Transactions
 - Contact_Groups 
@@ -180,38 +183,43 @@ Aşağıdaki tablolarda, aynı bilgileri en az ve tam şemada vardır. API çağ
 - Expense_Claim_Validation_Errors
 - Faturalar 
 - Invoices_Credit_Notes
-- Invoices_ ödemeler 
+- Invoices_ Peşinatları 
 - Invoices_Overpayments 
 - Manual_Journals 
-- Fazla ödeme 
+- Fazla ödemeler 
 - Overpayments_Allocations 
-- Ödemeler 
+- Peşinatları 
 - Prepayments_Allocations 
-- Giriş 
+- Lü 
 - Receipt_Validation_Errors 
 - Tracking_Categories
 
-Aşağıdaki tablolarda, yalnızca tam şemasıyla sorgulanabilir:
+Aşağıdaki tablolar yalnızca tüm şemayla sorgulanabilir:
 
-- Complete.Bank_Transaction_Line_Items 
-- Complete.Bank_Transaction_Line_Item_Tracking 
-- Complete.Contact_Group_Contacts 
-- Complete.Contacts_Contact_ kişiler 
-- Complete.Credit_Note_Line_Items 
-- Complete.Credit_Notes_Line_Items_Tracking 
-- Complete.Expense_Claim_ ödemeler 
-- Complete.Expense_Claim_Receipts 
-- Complete.Invoice_Line_Items 
-- Complete.Invoices_Line_Items_Tracking
-- Complete.Manual_Journal_Lines 
-- Complete.Manual_Journal_Line_Tracking 
-- Complete.Overpayment_Line_Items 
-- Complete.Overpayment_Line_Items_Tracking 
-- Complete.Prepayment_Line_Items 
-- Complete.Prepayment_Line_Item_Tracking 
-- Complete.Receipt_Line_Items 
-- Complete.Receipt_Line_Item_Tracking 
-- Complete.Tracking_Category_Options
+- Tamamlanmış. Bank_Transaction_Line_Items 
+- Tamamlanmış. Bank_Transaction_Line_Item_Tracking 
+- Tamamlanmış. Contact_Group_Contacts 
+- Tamamlanmış. Contacts_Contact_ kişileri 
+- Tamamlanmış. Credit_Note_Line_Items 
+- Tamamlanmış. Credit_Notes_Line_Items_Tracking 
+- Tam. Expense_Claim_ ödemeleri 
+- Tamamlanmış. Expense_Claim_Receipts 
+- Tamamlanmış. Invoice_Line_Items 
+- Tamamlanmış. Invoices_Line_Items_Tracking
+- Tamamlanmış. Manual_Journal_Lines 
+- Tamamlanmış. Manual_Journal_Line_Tracking 
+- Tamamlanmış. Overpayment_Line_Items 
+- Tamamlanmış. Overpayment_Line_Items_Tracking 
+- Tamamlanmış. Prepayment_Line_Items 
+- Tamamlanmış. Prepayment_Line_Item_Tracking 
+- Tamamlanmış. Receipt_Line_Items 
+- Tamamlanmış. Receipt_Line_Item_Tracking 
+- Tamamlanmış. Tracking_Category_Options
+
+## <a name="lookup-activity-properties"></a>Arama etkinliği özellikleri
+
+Özelliklerle ilgili ayrıntıları öğrenmek için [arama etkinliğini](control-flow-lookup-activity.md)denetleyin.
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Kopyalama etkinliği tarafından desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).

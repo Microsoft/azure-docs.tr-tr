@@ -1,52 +1,48 @@
 ---
-title: Bilişsel arama - Azure Search görüntüleri işleme ve ayıklama metinden
-description: İşleme ve ayıklama metin ve görüntüleri bilişsel diğer bilgi işlem hatları Azure Search'te arama.
-services: search
-manager: pablocas
-author: luiscabrer
-ms.service: search
-ms.devlang: NA
-ms.workload: search
-ms.topic: conceptual
-ms.date: 05/02/2019
+title: Görüntülerden metin Ayıkla
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama işlem hatları 'ndaki görüntülerden metin ve diğer bilgileri işleyin ve ayıklayın.
+manager: nitinme
+author: LuisCabrer
 ms.author: luisca
-ms.custom: seodec2018
-ms.openlocfilehash: 8bea47467d141869b1a668668bc57451a882a54b
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: f81bcd84dfb07958f3205f779937b8beac74166f
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448445"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113841"
 ---
-#  <a name="how-to-process-and-extract-information-from-images-in-cognitive-search-scenarios"></a>Bilişsel arama senaryolarda görüntülerdeki bilgileri işleme ve ayıklama nasıl
+# <a name="how-to-process-and-extract-information-from-images-in-ai-enrichment-scenarios"></a>AI zenginleştirme senaryolarında görüntülerden bilgi işleme ve ayıklama
 
-Bilişsel arama, görüntü ve resim dosyaları ile çalışma için çeşitli özellikleri vardır. Belge çözme sırasında kullandığınız *imageAction* fotoğraf veya resimleri Durma işareti "Durdur" sözcüğü gibi alfasayısal metni içeren metin ayıklamak için parametre. Diğer senaryolar için bir fotoğraf bir dandelion ya da "Sarı" rengi "dandelion" gibi bir görüntü metin gösterimi oluşturma içerir. Görüntünün boyutuna gibi hakkındaki meta verileri de ayıklayabilirsiniz.
+Azure Bilişsel Arama, görüntülerle ve görüntü dosyalarıyla çalışmaya yönelik çeşitli yeteneklere sahiptir. Belge çözme sırasında, bir Dur işareti içinde "Durdur" sözcüğü gibi fotoğraflardan veya alfasayısal metin içeren resimlerden metin ayıklamak için *ımageaction* parametresini kullanabilirsiniz. Diğer senaryolar, bir resmin metin gösterimini (örneğin, dans eden bir fotoğraf veya "sarı" rengi) oluşturmayı içerir. Görüntü hakkında, boyutu gibi meta verileri de ayıklayabilirsiniz.
 
-Bu makalede, görüntü işleme daha ayrıntılı olarak ele alınmaktadır ve bilişsel arama ardışık düzeninde görüntüleri ile çalışmak için yönergeler sağlar.
+Bu makale, görüntü işlemeyi daha ayrıntılı bir şekilde ele alır ve bir AI zenginleştirme ardışık düzeninde görüntülerle çalışmaya yönelik rehberlik sağlar.
 
 <a name="get-normalized-images"></a>
 
-## <a name="get-normalized-images"></a>Normalleştirilmiş görüntü alma
+## <a name="get-normalized-images"></a>Normalleştirilmiş görüntüleri al
 
-Belge çözme işleminin bir parçası olarak yeni bir görüntü dosya veya görüntü dosyaları katıştırılmış işlemek için dizin oluşturucuyu yapılandırma parametreleri kümesi vardır. Bu parametreler, görüntüleri daha da aşağı akış işleme için'leri normalleştirmek için kullanılır. Görüntüleri normalleştirme bunların daha tekdüzen sağlar. Büyük resimler için bir maksimum yükseklik ve genişlik kullanılabilir hale getirmek için yeniden boyutlandırılır. Meta veriler üzerinde yönlendirme sağlanarak görüntüleri için görüntü döndürme dikey yükleme için ayarlanır. Meta veri ayarlamalar her görüntü için oluşturulan karmaşık bir tür içinde yakalanır. 
+Belge çözme kapsamında, görüntü dosyalarını veya dosyalarda gömülü görüntüleri işlemek için yeni bir Dizin Oluşturucu yapılandırma parametreleri kümesi vardır. Bu parametreler, daha fazla aşağı akış işleme için görüntüleri normalleştirmek üzere kullanılır. Görüntülerin normalleştirilmesi, daha Tekdüzen hale gelir. Büyük görüntüler, tüketilebilir hale getirmek için maksimum yüksekliğe ve genişliğe göre yeniden boyutlandırılır. Yönlendirme üzerine meta veri sağlayan görüntüler için, görüntü döndürme dikey yükleme için ayarlanır. Meta veri ayarlamaları her görüntü için oluşturulan karmaşık bir tür içinde yakalanır. 
 
-Görüntü normalleştirmeyi kapatamazsınız. Görüntüleri yineleme becerileri normalleştirilmiş görüntüsü bekler. Bir dizin oluşturucu görüntü normalleştirmede etkinleştirme bir beceri kümesi için dizin oluşturucu eklenmesi gerekir.
+Resim normalleştirmesini kapatamaz. Görüntüler üzerinde yineleme yapan yetenekler, normalleştirilmiş görüntüler bekler. Bir dizin oluşturucuda görüntü normalleştirmesini etkinleştirmek için, bu dizin oluşturucuya bir beceri eklenmiş olması gerekir.
 
 | Yapılandırma parametresi | Açıklama |
 |--------------------|-------------|
-| imageAction   | Katıştırılmış görüntüler veya görüntü dosyaları karşılaştığında, hiçbir işlem yapılmadı "none" ayarlayın. <br/>Belge kırma bir parçası olarak bir dizi normalleştirilmiş görüntüleri oluşturmak için "generateNormalizedImages için" ayarlayın.<br/>Veri kaynağınızdaki PDF için bir çıkış görüntüye her sayfanın burada işlenir normalleştirilmiş görüntüleri bir dizi oluşturmak için "generateNormalizedImagePerPage için" ayarlayın.  İşlevselliğini PDF olmayan dosya türleri için "generateNormalizedImages" ile aynıdır.<br/>"None" olmayan herhangi bir seçenek için görüntü içinde kullanıma sunulacak *normalized_images* alan. <br/>"None". varsayılan değer Bu yapılandırma yalnızca "dataToExtract" "contentAndMetadata" olarak ayarlandığında veri kaynakları, blob testlerinizle ilgili olabilecek <br/>En fazla 1000 görüntülerin belirli bir belgeden ayıklanır. Bir belgede 1000'den fazla görüntü varsa, ilk 1000 ayıklanır ve bir uyarı oluşturulur. |
-|  normalizedImageMaxWidth | Oluşturulan normalleştirilmiş görüntüleri için en büyük genişliği (piksel cinsinden). Varsayılan değer 2000'dir.|
-|  normalizedImageMaxHeight | Oluşturulan normalleştirilmiş görüntüleri için en fazla yükseklik (piksel cinsinden). Varsayılan değer 2000'dir.|
+| ımageaction   | Katıştırılmış görüntüler veya resim dosyaları ile karşılaşıldığında hiçbir işlem yapılması bekleniyorsa "none" olarak ayarlayın. <br/>Belge çözme işleminin bir parçası olarak normalleştirilmiş görüntülerin bir dizisini oluşturmak için "Generatenormalizedileges" olarak ayarlayın.<br/>Veri kaynağınızdaki PDF 'Ler için her sayfa bir çıkış görüntüsüne işlendiğinde, bir dizi normalleştirilmiş görüntü oluşturmak için "generateNormalizedImagePerPage" olarak ayarlayın.  Bu işlevsellik, PDF olmayan dosya türleri için "Generatenormalizediges" ile aynıdır.<br/>"None" olmayan herhangi bir seçenek için, görüntüler *normalized_images* alanında görüntülenir. <br/>Varsayılan değer "none" dır. Bu yapılandırma, "dataToExtract" ayarı "contentAndMetadata" olarak ayarlandığında yalnızca blob veri kaynaklarıyla ilgili olur. <br/>Verilen bir belgeden en fazla 1000 resim ayıklanacaktır. Bir belgede 1000 ' den fazla görüntü varsa, ilk 1000 ayıklanır ve bir uyarı oluşturulur. |
+|  normalizedImageMaxWidth | Oluşturulan normalleştirilmiş görüntülerin en büyük genişliği (piksel cinsinden). Varsayılan değer 2000 ' dir. İzin verilen en büyük değer 10000 ' dir. | 
+|  normalizedImageMaxHeight | Oluşturulan normalleştirilmiş görüntülerin en büyük yüksekliği (piksel cinsinden). Varsayılan değer 2000 ' dir. İzin verilen en büyük değer 10000 ' dir.|
 
 > [!NOTE]
-> Ayarlarsanız *imageAction* özellik "none" dışında bir olmayacak ayarlayamaz *parsingMode* özelliğini "varsayılan" dışında her şey.  Yalnızca iki bu özelliklerden biri için varsayılan olmayan bir değeri, dizin oluşturucu yapılandırmasında ayarlayabilir.
+> *Imageaction* özelliğini "none" dışında bir şeye ayarlarsanız, *parsingmode* özelliğini "varsayılan" dışında bir şeye ayarlayamazsınız.  Bu iki özelliklerden birini, Dizin Oluşturucu yapılandırmanızda varsayılan olmayan bir değere ayarlayabilirsiniz.
 
-Ayarlama **parsingMode** parametresi `json` (her blob olarak tek bir belge dizini oluşturmak için) veya `jsonArray` (JSON dizileri içeren, blobları ve ayrı bir belge olarak kabul edilmesi için bir dizideki her öğe ihtiyacınız varsa).
+**Parsingmode** parametresini `json` (her Blobun tek bir belge olarak dizinini oluşturma) veya `jsonArray` (BLOBLARıNıZ JSON dizileri içeriyorsa ve bir dizinin her bir öğesi ayrı bir belge olarak değerlendirilmelidir) olarak ayarlayın.
 
-Varsayılan değer 2000 piksel normalleştirilmiş görüntüleri en fazla genişlik ve yükseklik tarafından desteklenen en büyük boyutlar dayalı [OCR beceri](cognitive-search-skill-ocr.md) ve [görüntü analizi beceri](cognitive-search-skill-image-analysis.md). İşleme, maksimum sınırı artırmak istiyorsanız, daha büyük görüntülerinde başarısız olabilir.
+Normalleştirilmiş görüntüler için varsayılan değer olan 2000 piksel en fazla genişlik ve yükseklik, [OCR becerisi](cognitive-search-skill-ocr.md) ve [görüntü analizi yeteneği](cognitive-search-skill-image-analysis.md)tarafından desteklenen boyut üst sınırını temel alır. [OCR becerisi](cognitive-search-skill-ocr.md) , İngilizce dışındaki diller için maksimum genişlik ve yükseklik 4200 ve ingilizce için 10000 ' i destekler.  Maksimum sınırları artırırsanız, Beceri tanımınıza ve belgelerin diline bağlı olarak daha büyük görüntülerde işleme başarısız olabilir. 
 
-
-İçinde imageAction belirtin, [dizin oluşturucu tanımı](https://docs.microsoft.com/rest/api/searchservice/create-indexer) gibi:
+Aşağıdaki şekilde, [Dizin Oluşturucu tanımınızda](https://docs.microsoft.com/rest/api/searchservice/create-indexer) ımageaction öğesini belirtirsiniz:
 
 ```json
 {
@@ -62,19 +58,20 @@ Varsayılan değer 2000 piksel normalleştirilmiş görüntüleri en fazla geni�
 }
 ```
 
-Zaman *imageAction* bir değere diğer sonra "none" ayarlanmış yeni *normalized_images* alanı görüntüleri dizisi içerir. Her görüntü aşağıdaki üyeleri içerir karmaşık bir türdür:
+*Imageaction* , "none" dışındaki bir değere ayarlandığında, yeni *normalized_images* alanı bir görüntü dizisi içerir. Her görüntü, aşağıdaki üyelere sahip karmaşık bir türdür:
 
 | Görüntü üyesi       | Açıklama                             |
 |--------------------|-----------------------------------------|
-| data               | BASE64 kodlamalı dize JPEG biçiminde bir normalleştirilmiş görüntüsü.   |
-| Genişlik              | Normalleştirilmiş görüntüsünün piksel cinsinden genişliği. |
-| Yükseklik             | Normalleştirilmiş görüntüsünün piksel cinsinden yüksekliği. |
-| originalWidth      | Normalleştirme önce görüntünün özgün genişliği. |
-| originalHeight      | Normalleştirme önce görüntünün özgün yüksekliği. |
-| rotationFromOriginal |  Saat yönünün döndürme normalleştirilmiş görüntüyü oluşturmaya oluştu derece cinsinden. 0 derece ve 360 derece arasında bir değer. Bu adım bir kamera veya tarayıcı tarafından oluşturulan görüntü meta verileri okur. Genellikle 90 derece katı. |
-| contentOffset |Gelen görüntü burada ayıklanan içerik alandaki karakter uzaklığı. Bu alan yalnızca katıştırılmış görüntüler ile dosyaları için geçerlidir. |
+| data               | JPEG biçimindeki normalleştirilmiş görüntünün BASE64 kodlamalı dizesi.   |
+| Genişlik              | Normalleştirilmiş resmin piksel cinsinden genişliği. |
+| Yükseklik             | Normalleştirilmiş resmin piksel cinsinden yüksekliği. |
+| originalWidth      | Normalleştirme yapmadan önce resmin orijinal genişliği. |
+| originalHeight      | Normalleştirme yapmadan önce resmin orijinal yüksekliği. |
+| rotationFromOriginal |  Normalleştirilmiş görüntüyü oluşturmak için oluşan derece saat yönünde döndürme. 0 derece ve 360 derece arasında bir değer. Bu adım, kamera veya tarayıcı tarafından oluşturulan görüntüden meta verileri okur. Genellikle 90 derecenin katları. |
+| Contenentoffset | Görüntünün ayıklandığı içerik alanı içindeki karakter konumu. Bu alan yalnızca katıştırılmış görüntülere sahip dosyalar için geçerlidir. |
+| pageNumber | Görüntü bir PDF 'den ayıklandıysa veya işlendiğinde, bu alan, 1 ' den başlayarak ayıklanan veya işlenen PDF 'deki sayfa numarasını içerir.  Görüntü bir PDF 'den değilse, bu alan 0 olur.  |
 
- Örnek değeri *normalized_images*:
+ *Normalized_images*örnek değeri:
 ```json
 [
   {
@@ -84,36 +81,35 @@ Zaman *imageAction* bir değere diğer sonra "none" ayarlanmış yeni *normalize
     "originalWidth": 5000,  
     "originalHeight": 3000,
     "rotationFromOriginal": 90,
-    "contentOffset": 500  
+    "contentOffset": 500,
+    "pageNumber": 2
   }
 ]
 ```
 
-## <a name="image-related-skills"></a>Görüntü ile ilgili beceriler
+## <a name="image-related-skills"></a>Görüntüyle ilgili yetenekler
 
-Görüntüleri girdi olarak ele iki yerleşik bilişsel beceriler vardır: [OCR](cognitive-search-skill-ocr.md) ve [görüntü analizi](cognitive-search-skill-image-analysis.md). 
+Resimleri giriş olarak alan iki yerleşik Bilişsel Beceri vardır: [OCR](cognitive-search-skill-ocr.md) ve [görüntü analizi](cognitive-search-skill-image-analysis.md). 
 
-Şu anda bu yetenekler yalnızca belge çözme adımda oluşturulan görüntüleri ile çalışır. Bu nedenle, yalnızca desteklenen giriştir `"/document/normalized_images"`.
+Şu anda bu yetenekler yalnızca belge çözme adımından oluşturulan görüntülerle çalışır. Bu nedenle, desteklenen tek giriş `"/document/normalized_images"`.
 
-### <a name="image-analysis-skill"></a>Görüntü analizi beceri
+### <a name="image-analysis-skill"></a>Görüntü analizi yeteneği
 
-[Görüntü analizi beceri](cognitive-search-skill-image-analysis.md) zengin görsel özellikleri görüntüsü içeriğine göre ayıklar. Örneğin, bir görüntüden bir açıklamalı alt yazı oluştur, etiketleri oluşturmak veya ünlüleri ve önemli yerleri belirlemek.
+[Görüntü analizi](cognitive-search-skill-image-analysis.md) özelliği, görüntü içeriğine göre zengin bir görsel özellikler kümesini ayıklar. Örneğin, bir görüntüden açıklamalı alt yazı oluşturabilir, Etiketler oluşturabilir veya ünlüleri ve yer işaretlerini tanımlayabilir.
 
-### <a name="ocr-skill"></a>OCR beceri
+### <a name="ocr-skill"></a>OCR becerisi
 
-[OCR beceri](cognitive-search-skill-ocr.md) görüntü dosyaları jpg formatından PNG'ler ve bit eşlemler gibi metin ayıklar. Metin ayıklayabilmeniz için Düzen bilgilerinin yanı sıra. Her tanımlanan dizeler için sınırlama kutusu ilişkin düzen bilgilerini sağlar.
+[OCR becerisi](cognitive-search-skill-ocr.md) , jpgs, png 'ler ve bit eşlemler gibi görüntü dosyalarından metin ayıklar. Ayrıca, metin ve düzen bilgilerini ayıklayabilir. Düzen bilgileri, tanımlanan dizelerin her biri için sınırlayıcı kutular sağlar.
 
-OCR beceri metin görüntülerinizi algılamak için kullanılacak algoritmayı seçmenizi sağlar. Şu anda bu iki algoritması, yazdırılan metin için ve başka bir elle yazılmış metinlerde destekler.
+## <a name="embedded-image-scenario"></a>Katıştırılmış resim senaryosu
 
-## <a name="embedded-image-scenario"></a>Katıştırılmış Resim senaryosu
+Yaygın bir senaryo, aşağıdaki adımları gerçekleştirerek hem metin hem de görüntü kaynağı metin olan tüm dosya içeriklerini içeren tek bir dize oluşturmayı kapsar:  
 
-Yaygın bir senaryo, aşağıdaki adımları gerçekleştirerek tüm dosya içeriğini, hem metin ve resim başlangıç noktasının metin içeren tek bir dize oluşturmayı içerir:  
+1. [Normalized_images Ayıkla](#get-normalized-images)
+1. `"/document/normalized_images"` giriş olarak kullanarak OCR becerisi çalıştırma
+1. Bu görüntülerin metin gösterimini dosyadan ayıklanan ham metinle birleştirin. Metin [birleştirme](cognitive-search-skill-textmerger.md) beceriye her iki metin öbeklerini tek bir büyük dizedeki birleştirmek için kullanabilirsiniz.
 
-1. [Normalized_images ayıklayın](#get-normalized-images)
-1. OCR beceri kullanarak çalıştırma `"/document/normalized_images"` giriş
-1. Bu görüntüleri metin gösterimi dosyasından ayıklanan ham metni ile birleştirin. Kullanabileceğiniz [metin birleştirme](cognitive-search-skill-textmerger.md) beceri hem metin öbekleri büyük tek bir dize olarak birleştirilecek.
-
-Aşağıdaki örnek becerilerine oluşturur bir *merged_text* belgenizin metinsel içeriği içeren alan. Ayrıca, her katıştırılmış görüntüler OCRed metni içerir. 
+Aşağıdaki örnek Beceri, belgenizin metinsel içeriğini içeren bir *merged_text* alanı oluşturur. Ayrıca, katıştırılmış görüntülerden her birinden OCRed metni de içerir. 
 
 #### <a name="request-body-syntax"></a>İstek gövdesi sözdizimi
 ```json
@@ -166,15 +162,15 @@ Aşağıdaki örnek becerilerine oluşturur bir *merged_text* belgenizin metinse
 }
 ```
 
-Merged_text alana sahip olduğunuza göre dizin oluşturucu Tanımınızda aranabilir bir alanı eşleyebilirsiniz. Tüm metin görüntüleri dahil olmak üzere dosyalarınızın içeriği, arama yapılabilir.
+Artık merged_text alana sahip olduğunuza göre, Dizin Oluşturucu tanımınızda aranabilir bir alan olarak eşleyebilirsiniz. Resimlerin metni de dahil olmak üzere dosyalarınızın tüm içeriği aranabilir olacaktır.
 
-## <a name="visualize-bounding-boxes-of-extracted-text"></a>Ayıklanan metin kutuları sınırlayıcı görselleştirin
+## <a name="visualize-bounding-boxes-of-extracted-text"></a>Ayıklanan metnin sınırlayıcı kutularını görselleştirin
 
-Başka bir yaygın bir senaryo arama sonuçları Düzen bilgileri görselleştirmenin. Örneğin, arama sonuçlarındaki bir parçası olarak bir metin parçası görüntüdeki bulunduğu vurgulamak isteyebilirsiniz.
+Diğer bir yaygın senaryo, arama sonuçları düzen bilgilerini görselleştiriliyor. Örneğin, arama sonuçlarının bir parçası olarak görüntüde bir metin parçasının nerede olduğunu vurgulamak isteyebilirsiniz.
 
-OCR adım normalleştirilmiş görüntülerinde gerçekleştirilir olduğundan, Düzen koordinatları normalleştirilmiş görüntü alanındadır. Normalleştirilmiş görüntü görüntülenirken koordinatları varlığını genellikle bir sorun değildir, ancak bazı koşullarda özgün resmin görüntülemek isteyebilirsiniz. Bu durumda, her bir düzende koordinat noktası için özgün görüntü koordinat sistemi dönüştürün. 
+Normalleştirilmiş görüntülerde OCR adımı gerçekleştirildiğinden, düzen koordinatları normalleştirilmiş görüntü alanında yer alır. Normalleştirilmiş görüntüyü görüntülerken, koordinatların varlığı genellikle bir sorun değildir, ancak bazı durumlarda özgün görüntüyü görüntülemek isteyebilirsiniz. Bu durumda, düzendeki her bir koordinat noktasını özgün görüntü koordinat sistemine dönüştürün. 
 
-Bir yardımcı, özgün koordinat, normalleştirilmiş koordinatlarına dönüştüren gerekiyorsa aşağıdaki algoritmadan kullanabilirsiniz:
+Yardımcı olarak, normalleştirilmiş koordinatları özgün koordinat alanına dönüştürmeniz gerekiyorsa aşağıdaki algoritmayı kullanabilirsiniz:
 
 ```csharp
         /// <summary>
@@ -218,9 +214,9 @@ Bir yardımcı, özgün koordinat, normalleştirilmiş koordinatlarına dönüş
 ```
 
 ## <a name="see-also"></a>Ayrıca bkz.
-+ [Dizin Oluşturucu (REST) oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-indexer)
-+ [Görüntü beceri analiz edin](cognitive-search-skill-image-analysis.md)
-+ [OCR beceri](cognitive-search-skill-ocr.md)
-+ [Metin birleştirme beceri](cognitive-search-skill-textmerger.md)
-+ [Bir beceri kümesi tanımlama](cognitive-search-defining-skillset.md)
-+ [Zenginleştirilmiş alanlarını eşleme](cognitive-search-output-field-mapping.md)
++ [Dizin Oluşturucu oluştur (REST)](https://docs.microsoft.com/rest/api/searchservice/create-indexer)
++ [Görüntü becermesini çözümle](cognitive-search-skill-image-analysis.md)
++ [OCR becerisi](cognitive-search-skill-ocr.md)
++ [Metin birleştirme yeteneği](cognitive-search-skill-textmerger.md)
++ [Beceri tanımlama](cognitive-search-defining-skillset.md)
++ [Zenginleştirilmiş alanları eşleme](cognitive-search-output-field-mapping.md)

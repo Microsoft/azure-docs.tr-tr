@@ -1,6 +1,6 @@
 ---
-title: Azure aboneliğinizi iptal | Microsoft Docs
-description: Ücretsiz deneme aboneliği gibi Azure aboneliğinizi iptal etmeyi açıklar
+title: Azure aboneliğinizi iptal etme | Microsoft Docs
+description: Ücretsiz Deneme aboneliği gibi Azure aboneliğinizin nasıl iptal edileceğini açıklar
 author: bandersmsft
 manager: amberb
 tags: billing
@@ -10,52 +10,62 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 06/03/2019
+ms.date: 10/01/2019
 ms.author: banders
-ms.openlocfilehash: 8f4279d9ac085cdd1ded0dfdda4fad9d3fe12fb8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
-ms.translationtype: MT
+ms.openlocfilehash: 0c681a3374529c4f973c7cd247ad8d387682b564
+ms.sourcegitcommit: a19f4b35a0123256e76f2789cd5083921ac73daf
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66480226"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71719706"
 ---
-# <a name="cancel-your-subscription-for-azure"></a>Azure aboneliğiniz iptal et
+# <a name="cancel-your-azure-subscription"></a>Azure aboneliğinizi iptal etme
 
-Bir Azure aboneliğine [Hesap Yöneticisi](billing-subscription-transfer.md#whoisaa) bir Azure aboneliği iptal edebilirsiniz. Azure Abonelik Yöneticisi ayrıca [başka bir kullanıcı bir abonelik Yöneticisi olarak atamak](billing-add-change-azure-subscription-administrator.md#assign-a-user-as-an-administrator-of-a-subscription) böylece bir aboneliği iptal edebilir. Abonelik iptal edildikten sonra Azure hizmet ve kaynaklara erişiminizi sona erer.
+Artık abonelik gerekmiyorsa, Azure portalında Azure aboneliğinizi iptal edebilirsiniz. 
 
 Aboneliğinizi iptal etmeden önce:
+* Verilerinizi yedekleyin. Örneğin, verileri Azure depolama alanında veya SQL’de depoluyorsanız bir kopya indirin. Sanal makineniz varsa, bir görüntüsünü yerel olarak kaydedin.
+* Hizmetlerinizi kapatın. [Yönetim portalında kaynaklar sayfasına](https://ms.portal.azure.com/?flight=1#blade/HubsExtension/Resources/resourceType/Microsoft.Resources%2Fresources) gidin ve tüm çalışan sanal makineleri, uygulamaları ve diğer hizmetleri **Durdurun**.
+* Verilerinizi geçirmeyi düşünün. Bkz. [Kaynakları yeni kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/resource-group-move-resources.md).
+* Tüm kaynakları ve tüm kaynak gruplarını silin. Bir aboneliği iptal edebilmeniz için önce bunların silinmesi gerekir. Her kaynak grubunun ayrı ayrı silinmesi gerekir. Kaynak grubu silinirken, kaynak grubu adını yazarak silme işlemini onaylamanız gerekir.
+* `AssignableScopes` içinde bu aboneliğe başvuran özel bir rolünüz varsa, aboneliği kaldırmak için bu özel rolleri güncelleştirmeniz gerekir. Bir aboneliği iptal ettikten sonra özel bir rolü güncelleştirmeye çalışırsanız bir hata alabilirsiniz. Daha fazla bilgi için bkz. [Özel rollerle ilgili sorunları giderme](../role-based-access-control/troubleshooting.md#problems-with-custom-roles) ve [Azure kaynakları için özel roller](../role-based-access-control/custom-roles.md).
 
-* Verilerinizi yedekleyin. Örneğin, verileri Azure depolama veya SQL depoluyorsanız bir kopyasını indirin. Bir sanal makine görüntüsü, yerel olarak kaydedin.
-* Hizmetlerinizi kapatın. Git [Yönetim Portalı'nda kaynaklar sayfası](https://ms.portal.azure.com/?flight=1#blade/HubsExtension/Resources/resourceType/Microsoft.Resources%2Fresources), ve **Durdur** tüm sanal makineleri, uygulamaları veya diğer hizmetleri çalıştırma.
-* Verilerinizi geçirme göz önünde bulundurun. Bkz: [kaynakları yeni kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/resource-group-move-resources.md).
-* Tüm kaynaklar ve tüm kaynak grupları silmeniz gerekir. Bir aboneliği iptal edebilir önce bunların silinmesi gereklidir. Tek tek her kaynak grubunun silinmesi gerekir. Kaynak grubu silme işlemi sırasında kaynak grubu adını yazarak, silmeyi onaylamanız gerekir.
-* Bu abonelikte başvuran herhangi bir özel rol varsa `AssignableScopes`, aboneliğini kaldırmak için özel roller güncelleştirmeniz gerekir. Abonelik iptal edildikten sonra özel bir rol güncelleştirme denerseniz, bir hata alabilirsiniz. Daha fazla bilgi için [özel roller ile ilgili sorunları giderme](../role-based-access-control/troubleshooting.md#problems-with-custom-roles) ve [Azure kaynakları için özel roller](../role-based-access-control/custom-roles.md).
+Ücretli bir Azure Desteği planını iptal ederseniz abonelik döneminin kalan bölümü için faturalandırılırsınız. Daha fazla bilgi için bkz. [Azure destek planları](https://azure.microsoft.com/support/plans/).
 
-Ücretli bir Azure destek planı iptal ederseniz abonelik dönemi için rest yine de faturalandırılır. Daha fazla bilgi için [Azure destek planları](https://azure.microsoft.com/support/plans/).
+## <a name="cancel-subscription-in-the-azure-portal"></a>Azure portalında aboneliği iptal etme
 
-## <a name="cancel-subscription-using-the-azure-portal"></a>Azure portalını kullanarak bir aboneliği iptal et
-
-1. Aboneliğinizden seçin [Azure portalındaki abonelikler sayfasından](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
+1. [Azure portalındaki abonelik sayfasından](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade) aboneliğinizi seçin.
 2. İptal etmek istediğiniz aboneliği seçin.
-3. Seçin **genel bakış**ve ardından **aboneliği iptal et**.
-
+3. **Genel Bakış**’ı ve sonra **Aboneliği iptal et**’i seçin.
     ![İptal düğmesini gösteren ekran görüntüsü](./media/billing-how-to-cancel-azure-subscription/cancel_ibiza.png)
-3. Komut istemlerini izleyin ve iptal tamamlayabilirsiniz.
+3. Yönergeleri izleyerek iptal etme işlemini tamamlayın.
 
-## <a name="what-happens-after-i-cancel-my-subscription"></a>Aboneliğimi iptal sonra ne olur?
 
-Faturalandırma, iptal edildikten sonra hemen durduruldu. Ancak, portalda göstermek iptal 10 dakikaya kadar sürebilir. Bir faturalandırma döneminde ortasında iptal ederseniz, süresi sona erdikten sonra tipik fatura tarihinde son fatura göndereceğiz.
+## <a name="who-can-cancel-a-subscription"></a>Aboneliği kim iptal edebilir?
 
-İptal sonra hizmetleriniz devre dışı. Bu, sanal makinelerinizi paylaştırılmamış, geçici IP adreslerini serbest ve depolama salt okunur anlamına gelir.
+Aşağıdaki tabloda, bir aboneliği iptal etmek için gereken izinler açıklanmaktadır.
 
-Biz, verilerinize erişim sağlaması gereken veya fikrinizi değiştirmeniz durumunda kalıcı olarak silinmeden önce 90 gün bekleyin. Biz, veri koruma için ücret almayız. Daha fazla bilgi için bkz. [Microsoft Trust Center - verilerinizi nasıl yönetilir](https://go.microsoft.com/fwLink/p/?LinkID=822930&clcid=0x409).
+|Abonelik türü     |İptal edebilen kişi  |
+|---------|---------|
+|Azure web sitesi üzerinden Azure’a kaydolduğunuzda oluşturulan abonelikler. Örneğin, bir [Ücretsiz Azure Hesabına](https://azure.microsoft.com/offers/ms-azr-0044p/), [kullandıkça öde fiyatlarına tabi hesaba](https://azure.microsoft.com/offers/ms-azr-0003p/) veya [Visual Studio abonesi](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/) olarak kaydolduğunuzda. |  Aboneliğin hesap yöneticisi, sahipleri ve katkıda bulunanları  |
+|[Microsoft Kurumsal Anlaşma](https://azure.microsoft.com/pricing/enterprise-agreement/) ve [Kurumsal Geliştirme ve Test](https://azure.microsoft.com/offers/ms-azr-0148p/)     |  Aboneliğin hesap sahibi, sahipleri ve katkıda bulunanları       |
+|[Azure planı](https://azure.microsoft.com/offers/ms-azr-0017g/) ve [DevTest için Azure planı](https://azure.microsoft.com/offers/ms-azr-0148g/)     |  Aboneliğin sahipleri ve katkıda bulunanları      |
+
+
+## <a name="what-happens-after-i-cancel-my-subscription"></a>Aboneliğimi iptal edersem ne olur?
+
+İptal etmenizin ardından faturalama hemen durdurulur. Ancak iptalin portalda gösterilmesi 10 dakika kadar sürebilir. Bir faturalama döneminin ortasında iptal ederseniz, son faturayı dönem sona erdikten sonra normal fatura tarihinizde göndeririz.
+
+İptal etmenizin ardından hizmetleriniz devre dışı bırakılır. Başka bir deyişle, sanal makineleriniz serbest bırakılır, geçici IP adresleri serbest bırakılır ve depolama salt okunur olur.
+
+Verilerinize erişmeniz gerekmesi veya fikrinizi değiştirmeniz durumunda verilerinizi kalıcı olarak silmeden önce 90 gün bekleriz. Verileri saklamak için size ücret yansıtmayız. Daha fazla bilgi edinmek için bkz. [Microsoft Güven Merkezi - Verilerinizi nasıl yönetiriz?](https://go.microsoft.com/fwLink/p/?LinkID=822930&clcid=0x409)
 
 ## <a name="reactivate-subscription"></a>Aboneliği yeniden etkinleştirme
 
-Kullandıkça Öde aboneliğinizi yanlışlıkla iptal ederseniz yapabilecekleriniz [hesapları Merkezi'nde yeniden](billing-subscription-become-disable.md).
+Kullandıkça Öde fiyatlarına tabi aboneliğinizi yanlışlıkla iptal ederseniz, [Hesap Merkezinde bunu yeniden etkinleştirebilirsiniz](billing-subscription-become-disable.md).
 
-Aboneliğinizi Kullandıkça Öde değilse, aboneliğinizi yeniden etkinleştirmek için İptal 90 gün içinde destek başvurun.
+Aboneliğiniz, Kullandıkça Öde fiyatlarına tabi bir abonelik değilse, aboneliğinizi yeniden etkinleştirmek için iptali izleyen 90 gün içinde desteğe başvurun.
 
-## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun.
+## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bize ulaşın.
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://go.microsoft.com/fwlink/?linkid=2083458).
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).

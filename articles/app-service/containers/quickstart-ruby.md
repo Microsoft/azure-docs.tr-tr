@@ -1,5 +1,5 @@
 ---
-title: -Azure App Service Linux üzerinde Ruby web uygulaması oluşturma | Microsoft Docs
+title: Linux 'ta Ruby Web uygulaması oluşturma-Azure App Service | Microsoft Docs
 description: Linux üzerinde App Service ile Ruby on Rails uygulaması oluşturmayı öğrenin.
 keywords: azure app service, linux, oss, ruby, rails
 services: app-service
@@ -11,32 +11,31 @@ ms.assetid: 6d00c73c-13cb-446f-8926-923db4101afa
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
-ms.date: 03/27/2019
+ms.date: 07/11/2019
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: 29126171a2d808153c7578d911e0725641ec39ff
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: cfcea4c4450ea806b36d1d46c17c6676f7d92893
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62117644"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70071077"
 ---
 # <a name="create-a-ruby-on-rails-app-in-app-service-on-linux"></a>Linux üzerinde App Service'te Ruby on Rails uygulaması oluşturma
 
-[Linux’ta Azure App Service](app-service-linux-intro.md) yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar. Bu hızlı başlangıçta, basit bir [Ruby on Rails](https://rubyonrails.org/) uygulaması oluşturup Linux’ta bir Web App olarak Azure’a nasıl dağıtabileceğiniz açıklanır.
+[Linux’ta App Service](app-service-linux-intro.md) Linux işletim sistemini kullanan yüksek oranda ölçeklenebilir, otomatik olarak düzeltme eki uygulayan bir web barındırma hizmeti sağlar. Bu hızlı başlangıç öğreticisinde, [Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)kullanılarak Linux üzerinde Azure App Service bir Ruby on rayın uygulamasının nasıl dağıtılacağı gösterilmektedir.
 
 > [!NOTE]
-> Ruby geliştirme yığını şu anda yalnızca Ruby on Rails'i desteklemektedir. Sinatra gibi farklı bir platform kullanmak istiyorsanız veya kullanmak istiyorsanız bir [desteklenmeyen Ruby sürümü](app-service-linux-intro.md), yapmanız [özel bir kapsayıcıda çalıştırmak](quickstart-docker-go.md).
+> Ruby geliştirme yığını şu anda yalnızca Ruby on Rails'i desteklemektedir. Sinatra gibi farklı bir platform kullanmak istiyorsanız veya [Desteklenmeyen bir Ruby sürümü](app-service-linux-intro.md)kullanmak istiyorsanız, [bunu özel bir kapsayıcıda çalıştırmanız](quickstart-docker-go.md)gerekir.
 
-![Hello-world](./media/quickstart-ruby/hello-world-updated.png)
+![Hello-world](./media/quickstart-ruby/hello-world-configured.png)
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* <a href="https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller" target="_blank">Ruby 2.3 veya üzerini yükleyin</a>
+* <a href="https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller" target="_blank">Ruby 2,6 veya üstünü yükler</a>
 * <a href="https://git-scm.com/" target="_blank">Git'i yükleyin</a>
 
 ## <a name="download-the-sample"></a>Örneği indirme
@@ -51,7 +50,7 @@ git clone https://github.com/Azure-Samples/ruby-docs-hello-world
 
 Azure'a dağıttığınızda nasıl görüneceğini görmek için uygulamayı yerel olarak çalıştırın. Bir terminal penceresi açın, `hello-world` dizinine geçiş yapın ve sunucuyu başlatmak için `rails server` komutunu kullanın.
 
-İlk adım, gerekli gem'leri yüklemektir. Örneğe bir `Gemfile` dahil edildiğinden yüklenecek gem'leri belirtmeniz gerekmez. Bunun için bundler'ı kullanacağız:
+İlk adım, gerekli gem'leri yüklemektir. `Gemfile` Örneğe dahil edilmiştir, bu nedenle yalnızca aşağıdaki komutu çalıştırın:
 
 ```bash
 bundle install
@@ -65,7 +64,7 @@ bundle exec rails server
 
 Web tarayıcınızı kullanarak uygulamayı yerel olarak test etmek için `http://localhost:3000` yoluna gidin.
 
-![Hello World yapılandırıldı](./media/quickstart-ruby/hello-world-configured.png)
+![Hello World yapılandırıldı](./media/quickstart-ruby/hello-world-updated.png)
 
 [!INCLUDE [Try Cloud Shell](../../../includes/cloud-shell-try-it.md)]
 
@@ -79,7 +78,7 @@ Web tarayıcınızı kullanarak uygulamayı yerel olarak test etmek için `http:
 
 [!INCLUDE [Create web app](../../../includes/app-service-web-create-web-app-ruby-linux-no-h.md)] 
 
-Yerleşik görüntü ile yeni oluşturduğunuz web uygulamasını görmek için siteye göz atın. _&lt;app name>_ değerini kendi web uygulamanızın adıyla değiştirin.
+Yeni oluşturduğunuz Web uygulamanızı yerleşik görüntüyle görmek için uygulamaya gidin. _&lt;app name>_ değerini kendi web uygulamanızın adıyla değiştirin.
 
 ```bash
 http://<app_name>.azurewebsites.net
@@ -91,47 +90,42 @@ Yeni web uygulamanız aşağıdaki gibi görünmelidir:
 
 ## <a name="deploy-your-application"></a>Uygulamanızı dağıtma
 
-Yerel uygulamayı Azure web sitenize dağıtmak için aşağıdaki komutları çalıştırın:
+Yerel uygulamayı Azure Web uygulamanıza dağıtmak için aşağıdaki komutları çalıştırın:
 
 ```bash
 git remote add azure <Git deployment URL from above>
-git add -A
-git commit -m "Initial deployment commit"
 git push azure master
 ```
 
 Uzaktan dağıtım işlemlerinin başarılı olarak bildirildiğini doğrulayın. Komutlar aşağıdaki metne benzer bir çıktı oluşturur:
 
 ```bash
-remote: Using sass-rails 5.0.6
-remote: Updating files in vendor/cache
-remote: Bundle gems are installed into ./vendor/bundle
-remote: Updating files in vendor/cache
-remote: ~site/repository
+remote: Using turbolinks 5.2.0
+remote: Using uglifier 4.1.20
+remote: Using web-console 3.7.0
+remote: Bundle complete! 18 Gemfile dependencies, 78 gems now installed.
+remote: Bundled gems are installed into `/tmp/bundle`
+remote: Zipping up bundle contents
+remote: .......
+remote: ~/site/repository
 remote: Finished successfully.
 remote: Running post deployment command(s)...
 remote: Deployment successful.
-To https://<your web app name>.scm.azurewebsites.net/<your web app name>.git
-  579ccb....2ca5f31  master -> master
-myuser@ubuntu1234:~workspace/<app name>$
+remote: App container will begin restart within 10 seconds.
+To https://<app-name>.scm.azurewebsites.net/<app-name>.git
+   a6e73a2..ae34be9  master -> master
 ```
 
-Dağıtım tamamlandığında, dağıtımın etkili olması için burada gösterildiği gibi [`az webapp restart`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-restart) komutunu kullanarak web uygulamanızı yeniden başlatın:
-
-```azurecli-interactive
-az webapp restart --name <app name> --resource-group myResourceGroup
-```
-
-Sitenize gidin ve sonuçları doğrulayın.
+Dağıtım tamamlandıktan sonra, Web uygulamasının yeniden başlatılması için 10 saniye bekleyin ve sonra Web uygulamasına gidip sonuçları doğrulayın.
 
 ```bash
-http://<app name>.azurewebsites.net
+http://<app-name>.azurewebsites.net
 ```
 
-![güncelleştirilen web uygulaması](./media/quickstart-ruby/hello-world-updated.png)
+![güncelleştirilen web uygulaması](./media/quickstart-ruby/hello-world-configured.png)
 
 > [!NOTE]
-> Uygulama yeniden başlatıldığı sırada siteye göz atmaya çalışılması, `Error 503 Server unavailable` şeklinde bir HTTP durum koduna yol açar. Tamamen yeniden başlatılması birkaç dakika sürebilir.
+> Uygulama yeniden başlatılırken, tarayıcıda http durum kodunu `Error 503 Server unavailable` `Hey, Ruby developers!` veya varsayılan sayfayı gözlemleyebilirsiniz. Uygulamanın tam olarak yeniden başlatılması birkaç dakika sürebilir.
 >
 
 [!INCLUDE [Clean-up section](../../../includes/cli-script-clean-up.md)]
@@ -139,7 +133,7 @@ http://<app name>.azurewebsites.net
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Öğretici: Postgres ile Ruby on Rails](tutorial-ruby-postgres-app.md)
+> [Öğretici: Postgres ile Ruby on rayları](tutorial-ruby-postgres-app.md)
 
 > [!div class="nextstepaction"]
 > [Ruby uygulamasını yapılandırma](configure-language-ruby.md)

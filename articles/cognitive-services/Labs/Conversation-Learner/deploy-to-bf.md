@@ -1,7 +1,7 @@
 ---
-title: Microsoft Bilişsel hizmetler - konuşma Öğrenici bot dağıtma | Microsoft Docs
+title: Conversation Learner bot 'ı dağıtma-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici bot dağıtmayı öğrenin.
+description: Conversation Learner bot 'ı dağıtmayı öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,26 +10,27 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: 5522f762f3893f1d67cd3755b1e022f0118cc004
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 05fd83506aac26df33f18bec83dcadac8dee2d90
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66385311"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68705280"
 ---
-# <a name="how-to-deploy-a-conversation-learner-bot"></a>Konuşma Öğrenici bot dağıtma
+# <a name="how-to-deploy-a-conversation-learner-bot"></a>Conversation Learner bot nasıl dağıtılır
 
-Bu belgede bir konuşma Öğrenici bot--yerel olarak veya azure'a dağıtmak nasıl açıklanmaktadır.
+Bu belgede, yerel olarak veya Azure 'a Conversation Learner bir bot 'ın nasıl dağıtılacağı açıklanmaktadır.
 
-## <a name="prerequisite-determine-the-model-id"></a>Önkoşul: model kimliği belirleme 
+## <a name="prerequisite-determine-the-model-id"></a>Önkoşul: model KIMLIĞINI belirleme 
 
-Konuşma Öğrenici UI dışında bir bot çalıştırmak için robot kullanacağı--konuşma Öğrenici model kimliği başka bir deyişle, konuşma Öğrenici buluttaki makine öğrenme modeli kimliği ayarlamanız gerekir.  (Aksine, bot konuşma Öğrenici kullanıcı Arabirimi aracılığıyla çalıştırırken, kullanıcı Arabiriminin hangi model kimliği seçer).  
+Conversation Learner UI dışında bir bot çalıştırmak için, bot 'ın kullanacağı Conversation Learner model KIMLIĞINI (örneğin, Conversation Learner buluttaki makine öğrenimi modelinin KIMLIĞINI) ayarlamanız gerekir.  (Buna karşılık, Conversation Learner Kullanıcı arabirimi aracılığıyla bot çalıştırırken, Kullanıcı arabirimi hangi model KIMLIĞINI seçer.).  
 
-Model kimliği almak nasıl aşağıda verilmiştir:
+Model KIMLIĞINI elde etmek için şu adımları uygulayın:
 
-1. Botunuzun ve konuşma Öğrenici UI'ı başlatın.  Tam yönergeler için Hızlı Başlangıç Kılavuzu'na bakın; özetlersek:
+1. Bot ' u ve Conversation Learner Kullanıcı arabirimini başlatın.  Tam yönergeler için hızlı başlangıç kılavuzuna bakın; özetlemek için:
 
-    Bir komut penceresinde:
+    Tek bir komut penceresinde:
 
     ```
     [open a command window]
@@ -37,7 +38,7 @@ Model kimliği almak nasıl aşağıda verilmiştir:
     npm start
     ```
 
-    Sahiplenilmiş komut penceresinde
+    Oluşturulduğu komut penceresinde
 
     ```bash
     [open second command prompt window]
@@ -45,27 +46,27 @@ Model kimliği almak nasıl aşağıda verilmiştir:
     npm run ui
     ```
 
-2. Tarayıcıyı Aç `http://localhost:5050` 
+2. Tarayıcıyı açmak için`http://localhost:5050` 
 
-3. Konuşma Öğrenici model Kimliğini almak istediğiniz tıklayın
+3. KIMLIĞI almak istediğiniz Conversation Learner modeline tıklayın
 
-4. Sol gezinti çubuğunda "Ayarlar" üzerinde tıklayın.
+4. Sol taraftaki Gezinti çubuğunda "Ayarlar" a tıklayın.
 
-5. "Model kimliği" GUID, sayfanın üst kısımda görüntülenir.
+5. "Model KIMLIĞI" GUID 'SI sayfanın en üstüne yakın bir şekilde görüntülenir.
 
-## <a name="option-1-deploying-a-conversation-learner-bot-to-run-locally"></a>1\. seçenek: Yerel olarak çalıştırmak için bir konuşma Öğrenici bot dağıtma
+## <a name="option-1-deploying-a-conversation-learner-bot-to-run-locally"></a>Seçenek 1: Yerel olarak çalıştırmak için Conversation Learner bot dağıtma
 
-Bu yerel makinenize bir bot dağıtır ve Bot Framework öykünücüsü'nü kullanarak nasıl erişeceği gösterilmektedir.
+Bu, yerel makinenize bir bot dağıtır ve bot Framework öykünücüsünü kullanarak nasıl erişekullanabileceğinizi gösterir.
 
-### <a name="configure-your-bot-for-access-outside-the-conversation-learner-ui"></a>Botunuzun konuşma Öğrenici kullanıcı Arabirimi dışından erişim için yapılandırma
+### <a name="configure-your-bot-for-access-outside-the-conversation-learner-ui"></a>Conversation Learner Kullanıcı arabirimi dışında erişim için bot 'ı yapılandırma
 
-Bir bot yerel olarak çalışırken, uygulama kimliği botun ekleme `.env` dosyası:
+Bir bot 'ı yerel olarak çalıştırırken, bot 'ın `.env` dosyasına uygulama kimliği ekleyin:
 
     ```
     CONVERSATION_LEARNER_MODEL_ID=<YOUR_MODEL_ID>
     ```
 
-Ardından, botunuzun başlatın:
+Ardından, bot uygulamanızı başlatın:
 
     ```
     [open a command window]
@@ -73,9 +74,9 @@ Ardından, botunuzun başlatın:
     npm start
     ```
 
-Bot artık yerel olarak çalışıyor.  Bot Framework öykünücü ile erişebilirsiniz.
+Bot artık yerel olarak çalışıyor.  Bot Framework öykünücüsü ile erişebilirsiniz.
 
-### <a name="download-and-install-the-emulator"></a>Öykünücüyü yükleyip
+### <a name="download-and-install-the-emulator"></a>Öykünücüyü indirme ve yükleme
 
     ```
     git clone https://github.com/Microsoft/BotFramework-Emulator
@@ -84,45 +85,45 @@ Bot artık yerel olarak çalışıyor.  Bot Framework öykünücü ile erişebil
     npm start
     ```
 
-### <a name="connect-the-emulator-to-your-bot"></a>Botunuz için öykünücü bağlanma
+### <a name="connect-the-emulator-to-your-bot"></a>Öykünücüyü bot 'a bağlama
 
-1. Girin, sol üst öykünücüsü, kutusuna "uç nokta URL'nizi girin" `http://127.0.0.1:3978/api/messages`.  Diğer alanları boş bırakın ve "Bağlan" düğmesine tıklayın.
+1. Öykünücüsünün sol üst kısmında, "uç nokta URL 'nizi girin" kutusuna girin `http://127.0.0.1:3978/api/messages`.  Diğer alanları boş bırakın ve "Bağlan" a tıklayın.
 
-2. Şimdi, botunuzun ile konuşmaya.
+2. Artık bot 'unuza söyleşolursunuz.
 
-## <a name="option-2-deploy-to-azure"></a>2\. seçenek: Azure’a dağıtma
+## <a name="option-2-deploy-to-azure"></a>Seçenek 2: Azure’a dağıtma
 
-Konuşma Öğrenici botunuzun benzer şekilde aynı diğer herhangi bir bot yayımlamak istediğiniz yayımlayın. Yüksek bir düzeyde kodunuzu barındırılan bir Web sitesine yükleme, uygun yapılandırma değerleri ayarlayın ve ardından çeşitli kanallarla bot kaydetme. Ayrıntılı yönergeleri kullanarak Azure Bot hizmeti botunuza yayımlama gösteren Bu videoda verilmiştir.
+Conversation Learner bot uygulamanızı, diğer tüm botların yayımlanacağı şekilde yayımlayın. Yüksek düzeyde, kodunuzu barındırılan bir Web sitesine yükler, uygun yapılandırma değerlerini ayarlar ve ardından bot 'ı çeşitli kanallarla kaydedersiniz. Bu videoda, Azure bot hizmeti kullanılarak botunuzu yayımlamayı gösteren ayrıntılı yönergeler bulunmaktadır.
 
-Bot dağıtıldıktan sonra çalıştırdığınız farklı kanallar için Facebook, Teams, Skype vb. gibi bağlanabilirsiniz. bir Azure Bot kanal kaydı kullanarak. İşlem bkz hakkında daha fazla bilgi için: https://docs.microsoft.com/bot-framework/bot-service-quickstart-registration
+Bot dağıtıldıktan ve çalışmaya başladıktan sonra, Facebook, takımlar, Skype vb. gibi farklı kanallarla bağlantı sağlayabilirsiniz. Azure bot kanal kaydını kullanma. Bu işlem hakkındaki belgeler için bkz.: https://docs.microsoft.com/bot-framework/bot-service-quickstart-registration
 
-Konuşma Öğrenici Bot Azure'a dağıtmak için adım adım yönergeler aşağıda verilmiştir.  Bu yönergeler, bot kaynağınızı Azure DevOps Services, GitHub, BitBucket veya OneDrive gibi bulut tabanlı bir kaynak kullanılabilir ve botunuzun sürekli dağıtım için yapılandırıp yapılandırmayacağınız varsayar.
+Aşağıda, Azure 'a Conversation Learner bot dağıtmaya yönelik adım adım yönergeler verilmiştir.  Bu yönergelerde, bot kaynağınızın Azure DevOps Services, GitHub, BitBucket veya OneDrive gibi bulut tabanlı bir kaynaktan kullanılabileceğini ve botunuzu sürekli dağıtım için yapılandıracağına dair varsayılmaktadır.
 
-1. Adresinden Azure portalında oturum açın https://portal.azure.com
+1. Azure portal şurada oturum açın: https://portal.azure.com
 
-2. Yeni bir "Web App Botu" Kaynak Oluştur 
+2. Yeni bir "Web uygulaması bot" kaynağı oluşturma 
 
-    1. Bot, bir ad verin
-    2. "Bot şablona"'a tıklayın, "Node.js" seçin, "Temel"'i seçin ve ardından "Seçin" düğmesine tıklayın
-    3. "Web App Botu oluşturmak için Oluştur"'i tıklatın.
-    4. Oluşturulacak Web App Botu kaynak için bekleyin.
+    1. Bot 'a bir ad verin
+    2. "Bot şablonu" na tıklayın, "Node. js" öğesini seçin, "temel" i seçin ve ardından "Seç" düğmesine tıklayın
+    3. Web uygulaması bot 'u oluşturmak için "Oluştur" düğmesine tıklayın.
+    4. Web uygulaması bot kaynağının oluşturulmasını bekleyin.
 
-3. Azure portalında yeni oluşturduğunuz Web App Botu kaynak düzenleyin.
+3. Azure portal, az önce oluşturduğunuz Web App bot kaynağını düzenleyin.
 
-   1. Sol taraftaki gezinti öğesi "Uygulama ayarları" tıklayın
-   1. "Uygulama ayarları" bölümüne inin
+   1. Soldaki "uygulama ayarları" gezinti öğesini tıklatın
+   1. Aşağı kaydırarak "uygulama ayarları" bölümüne gidin
    2. Bu ayarları ekleyin:
 
        Ortam değişkeni | value
        --- | --- 
        CONVERSATION_LEARNER_SERVICE_URI | "https://westus.api.cognitive.microsoft.com/conversationlearner/v1.0/"
-       CONVERSATION_LEARNER_MODEL_ID      | Uygulama kimliği GUID, elde edilen modeli için "ayarlar" altında konuşma Öğrenici arabiriminden >
-       LUIS_AUTHORING_KEY               | Bu model için anahtar yazma LUIS
-       LUIS_SUBSCRIPTION_KEY            | Yazma kotanızı kullanmaktan kaçınmak yayımlanan botlar önerilir ancak gerekli değildir.
+       CONVERSATION_LEARNER_MODEL_ID      | Model için "Ayarlar" altındaki Conversation Learner kullanıcı arabiriminden elde edilen uygulama kimliği GUID >
+       LUIS_AUTHORING_KEY               | Bu model için LUSıS yazma anahtarı
+       LUIS_SUBSCRIPTION_KEY            | Gerekli değildir, ancak yazma kotayı kullanmaktan kaçınmak için yayımlanmış botların kullanılması önerilir.
     
-   4. Sayfanın üst kısımda "Kaydet"'a tıklayın
-   5. Sol taraftaki gezinti öğesi "Derleme" açın
-   6. "Üzerinde sürekli dağıtımı Yapılandır" tıklayın 
+   4. Sayfanın üst kısmındaki "Kaydet" e tıklayın
+   5. Sol taraftaki "derleme" gezinti öğesini aç
+   6. "Sürekli dağıtımı Yapılandır" düğmesine tıklayın 
    7. Dağıtımlar altında "Kurulum" simgesine tıklayın
-   8. "Ayarları gerekli" tıklayın
-   9. Bot kodunuzu nerede kullanılabilir kaynağını seçin ve kaynak yapılandırın.
+   8. "Gerekli ayarlar" a tıklayın
+   9. Bot kodunuzun kullanılabildiği kaynağı seçin ve kaynağı yapılandırın.

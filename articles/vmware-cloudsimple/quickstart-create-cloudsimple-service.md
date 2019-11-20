@@ -1,99 +1,89 @@
 ---
-title: Azure VMware çözümü tarafından CloudSimple hızlı başlangıç - hizmet oluşturma
-description: CloudSimple hizmetin nasıl oluşturulacağını öğrenin düğümleri sağlama ve yedeği düğümler
+title: CloudSimple hızlı başlangıç-Azure VMware çözümü-hizmet oluşturma
+description: CloudSimple hizmeti, satın alma düğümleri ve ayrılan düğümleri oluşturma hakkında bilgi edinin
 author: sharaths-cs
 ms.author: dikamath
-ms.date: 04/10/2019
+ms.date: 08/16/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 5732ea726bdecc10d0757224870ee5d8be83a2b2
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 228ca0f43322c271b1a6db55a37c852ca1f66799
+ms.sourcegitcommit: 7c2dba9bd9ef700b1ea4799260f0ad7ee919ff3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67164216"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71828897"
 ---
-# <a name="quickstart---create-service"></a>Hızlı Başlangıç - hizmet oluşturma
+# <a name="quickstart---create-azure-vmware-solution-by-cloudsimple-service"></a>Hızlı başlangıç-CloudSimple hizmeti tarafından Azure VMware çözümü oluşturma
 
-Başlamak için Azure portalında CloudSimple tarafından Azure VMware çözümü oluşturun.
+Başlamak için Azure portal Azure VMware çözümünü CloudSimple ile oluşturun.
 
-## <a name="vmware-solution-by-cloudsimple---service-overview"></a>VMware çözümüyle CloudSimple - hizmetine genel bakış
+## <a name="vmware-solution-by-cloudsimple---service-overview"></a>CloudSimple-Service 'e göre VMware çözümü
 
-CloudSimple service, Azure VMware CloudSimple çözümüyle kullanmasını sağlar.  Hizmet oluşturma sağlama düğümlerine sağlar düğümler ayırmak ve özel Bulutlar oluştur.  CloudSimple hizmet kullanılabilir olduğu her Azure bölgesinde CloudSimple hizmet ekleyin.  Hizmet, Azure VMware CloudSimple çözümüyle uç ağı tanımlar.  Bu uç ağı, VPN ve ExpressRoute Internet bağlantısı için özel bulutlarınızın içeren hizmetler için kullanılır.
+CloudSimple hizmeti, CloudSimple ile Azure VMware çözümünü kullanmanıza olanak sağlar.  Hizmetin oluşturulması, düğüm sağlamanıza, düğümleri ayırmanızı ve özel bulutlar oluşturmanıza olanak sağlar.  Cloudsimple hizmetini, CloudSimple hizmetinin kullanılabildiği her bir Azure bölgesine eklersiniz.  Hizmet, CloudSimple tarafından Azure VMware çözümünün Edge ağını tanımlar.  Bu Edge ağı VPN, ExpressRoute ve özel bulutlarınıza Internet bağlantısı içeren hizmetler için kullanılır.
 
-CloudSimple hizmet eklemek için bir ağ geçidi alt ağı oluşturmanız gerekir. Ağ geçidi alt ağı/28 gerektirir ve edge ağ oluştururken kullanılır CIDR bloğu. Ağ geçidi alt ağ adres alanı benzersiz olmalıdır. Herhangi bir şirket içi ağ adresi alanlarını veya Azure sanal ağ adres alanı ile çakışamaz.
+CloudSimple hizmetini eklemek için bir ağ geçidi alt ağı oluşturmanız gerekir. Ağ geçidi alt ağı, Edge ağı oluşturulurken kullanılır ve bir/28 CıDR bloğu gerektirir. Ağ geçidi alt ağ adresi alanı benzersiz olmalıdır. Şirket içi ağ adresi alanları veya Azure sanal ağ adres alanı ile çakışamaz.
 
-## <a name="sign-in-to-azure"></a>Azure'da oturum açma
+## <a name="before-you-begin"></a>Başlamadan önce
+
+Ağ geçidi alt ağı için bir/28 CıDR bloğu ayırın.  CloudSimple hizmeti başına bir ağ geçidi alt ağı gerekir ve oluşturulduğu bölge için benzersizdir. Ağ geçidi alt ağı, CloudSimple Edge Network Services tarafından Azure VMware çözümü için kullanılır ve bir/28 CıDR bloğu gerektirir. Ağ geçidi alt ağ adresi alanı benzersiz olmalıdır. CloudSimple ortamıyla iletişim kuran herhangi bir ağla çakışmamalıdır.  CloudSimple ile iletişim kuran ağlarda şirket içi ağlar ve Azure sanal ağları bulunur.
+
+[Ağ önkoşullarını](cloudsimple-network-checklist.md)gözden geçirin. 
+
+## <a name="sign-in-to-azure"></a>Azure'da oturum açın
 
 [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
-
-## <a name="enable-microsoftvmwarecloudsimple-resource-provider"></a>Microsoft.VMwareCloudSimple kaynak Sağlayıcısı'nı etkinleştir
-
-Kaynak sağlayıcı CloudSimple hizmeti etkinleştirmek için aşağıdaki adımları izleyin.
-
-1. **Tüm Hizmetler**’i seçin.
-2. Arayın ve seçin **abonelikleri**.
-
-    ![Abonelikleri seçin](media/cloudsimple-service-select-subscriptions.png)
-
-3. CloudSimple hizmetini etkinleştirmek istediğiniz aboneliği seçin
-4. Tıklayarak **kaynak sağlayıcıları** abonelik için
-5. Kullanım **Microsoft.VMwareCloudSimple** kaynak sağlayıcısı filtrelemek için
-6. Seçin **Microsoft.VMwareCloudSimple** kaynak sağlayıcısı ve tıklayarak **kaydetme**
-
-    ![Kaynak sağlayıcısını kaydetme](media/cloudsimple-service-enable-resource-provider.png)
 
 ## <a name="create-the-service"></a>Hizmeti oluşturma
 
 1. **Tüm Hizmetler**’i seçin.
-2. Arama **CloudSimple hizmet**.
+2. **Cloudsimple hizmeti**için arama yapın.
 
-    ![Arama CloudSimple hizmeti](media/create-cloudsimple-service-search.png)
+    ![CloudSimple hizmeti ara](media/create-cloudsimple-service-search.png)
 
-3. Seçin **CloudSimple Hizmetleri**.
-4. Tıklayın **Ekle** yeni bir hizmet oluşturmak için.
+3. **Cloudsimple Hizmetleri**' ni seçin.
+4. Yeni bir hizmet oluşturmak için **Ekle** ' ye tıklayın.
 
-    ![CloudSimple Hizmet Ekle](media/create-cloudsimple-service-add.png)
+    ![CloudSimple hizmeti Ekle](media/create-cloudsimple-service-add.png)
 
 5. CloudSimple hizmetini oluşturmak istediğiniz aboneliği seçin.
-6. Hizmeti için kaynak grubunu seçin. Yeni bir kaynak grubu eklemek için tıklatın **Yeni Oluştur**.
-7. Hizmetinizi tanımlayabilmek için adı girin.
-8. Hizmet ağ geçidi için CIDR girin. Bir/28'i belirtin. tüm şirket içi alt ağlar, Azure alt ağlar veya planlanan CloudSimple alt ağlar ile çakışmayacak bir alt ağ. Hizmet oluşturulduktan sonra CIDR değiştiremezsiniz.
+6. Hizmet için kaynak grubunu seçin. Yeni bir kaynak grubu eklemek için **Yeni oluştur**' a tıklayın.
+7. Hizmeti tanımlamak için ad girin.
+8. Hizmet ağ geçidi için CıDR girin. Şirket içi alt ağlarınızın, Azure alt ağlarının veya planlı CloudSimple alt ağlarının hiçbiriyle çakışmayacak bir/28 alt ağı belirtin. Hizmet oluşturulduktan sonra CıDR 'yi değiştiremezsiniz.
 
     ![CloudSimple hizmeti oluşturma](media/create-cloudsimple-service.png)
 
-9. **Tamam**'ı tıklatın.
+9. **Tamam**’a tıklayın.
 
 Hizmet oluşturulur ve hizmetler listesine eklenir.
 
 ## <a name="provision-nodes"></a>Sağlama düğümleri
 
-Ödeme--, go kapasite CloudSimple özel bulut ortamı ayarlamak için ilk Azure portalında düğümleri sağlayın.
+CloudSimple özel bulut ortamı için Kullandıkça Öde kapasitesini ayarlamak için, önce Azure portal düğümleri sağlayın.
 
 1. **Tüm Hizmetler**’i seçin.
-2. Arama **CloudSimple düğümleri**.
+2. **Cloudsimple düğümleri**için arama yapın.
 
-    ![Arama CloudSimple düğümleri](media/create-cloudsimple-node-search.png)
+    ![CloudSimple düğümlerinde arama yapın](media/create-cloudsimple-node-search.png)
 
-3. Seçin **CloudSimple düğümleri**.
-4. Tıklayın **Ekle** düğümleri oluşturma.
+3. **Cloudsimple düğümlerini**seçin.
+4. Düğüm oluşturmak için **Ekle** ' ye tıklayın.
 
-    ![CloudSimple düğümleri Ekle](media/create-cloudsimple-node-add.png)
+    ![CloudSimple düğümleri ekleme](media/create-cloudsimple-node-add.png)
 
-5. CloudSimple düğümleri sağlamak istediğiniz aboneliği seçin.
-6. Düğümleri için kaynak grubunu seçin. Yeni bir kaynak grubu eklemek için tıklatın **Yeni Oluştur**.
+5. CloudSimple düğümlerini sağlamak istediğiniz aboneliği seçin.
+6. Düğümlerin kaynak grubunu seçin. Yeni bir kaynak grubu eklemek için **Yeni oluştur**' a tıklayın.
 7. Düğümleri tanımlamak için ön eki girin.
-8. Düğüm kaynakların konumunu seçin.
-9. Düğümü kaynaklarını barındıracak ayrılmış konumu seçin.
-10. Düğüm türü seçin. Seçebileceğiniz [CS28 veya CS36 seçeneği](cloudsimple-node.md). İkinci seçeneği, en fazla işlem ve bellek kapasitesini içerir.
-11. Sağlama için düğüm sayısını seçin.
-12. Seçin **gözden geçir + Oluştur**.
-13. Ayarları gözden geçirin. Herhangi bir ayarı değiştirmek için tıklayın **önceki**.
-14. **Oluştur**’u seçin.
+8. Düğüm kaynaklarının konumunu seçin.
+9. Düğüm kaynaklarını barındıracak ayrılmış konumu seçin.
+10. [Düğüm türünü](cloudsimple-node.md)seçin.
+11. Sağlanacak düğüm sayısını seçin.
+12. **Gözden geçir + oluştur**' u seçin.
+13. Ayarları gözden geçirin. Ayarları değiştirmek için **önceki**'ni tıklatın.
+14. **Oluştur**'u seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Özel bulut oluşturma ve ortamını yapılandırma](quickstart-create-private-cloud.md)
-* Daha fazla bilgi edinin [CloudSimple hizmeti](https://docs.azure.cloudsimple.com/cloudsimple-service)
+* [Özel bulut oluşturma ve ortamı yapılandırma](quickstart-create-private-cloud.md)
+* [Cloudsimple hizmeti](https://docs.azure.cloudsimple.com/cloudsimple-service) hakkında daha fazla bilgi edinin

@@ -1,52 +1,60 @@
 ---
-title: Gözcü Azure Önizleme için cloud App Security veri bağlayın | Microsoft Docs
-description: Azure Gözcü için cloud App Security veri bağlanmayı öğreneceksiniz.
+title: Cloud App Security verilerini Azure Sentinel 'e bağlama | Microsoft Docs
+description: Cloud App Security verilerini Azure Sentinel 'e bağlamayı öğrenin.
 services: sentinel
 documentationcenter: na
 author: rkarlin
 manager: rkarlin
 editor: ''
-ms.assetid: cd9e5e27-fdd4-4717-8924-be4c1c430f23
-ms.service: sentinel
+ms.service: azure-sentinel
+ms.subservice: azure-sentinel
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/07/2019
+ms.date: 10/23/2019
 ms.author: rkarlin
-ms.openlocfilehash: a418bb318654752eaf48ffbdd05b80cabb487ece
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 32e7e79465b68caca9a636019f65b9f08284fc72
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65207559"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73928209"
 ---
-# <a name="connect-data-from-microsoft-cloud-app-security"></a>Microsoft Cloud App Security'den veri bağlama 
+# <a name="connect-data-from-microsoft-cloud-app-security"></a>Microsoft Cloud App Security verileri bağlama 
 
-> [!IMPORTANT]
-> Azure Sentinel şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-Günlüklerinden akışını [Cloud App Security](https://docs.microsoft.com/cloud-app-security/what-is-cloud-app-security) Azure Gözcü tek bir tıklamayla içine. Bu bağlantı, Cloud App Security uyarılardan Azure Gözcü akışını sağlar. 
+
+[Cloud App Security](https://docs.microsoft.com/cloud-app-security/what-is-cloud-app-security) günlüklerini Azure Sentinel 'e tek bir tıklama ile akışla aktarabilirsiniz. Bu bağlantı, uyarıları Azure Sentinel 'e Cloud App Security akışını sağlar. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Genel yönetici veya güvenlik yöneticisi izinleri ile kullanıcı
+- Genel yönetici veya Güvenlik Yöneticisi izinlerine sahip Kullanıcı
+- Azure Sentinel 'de Cloud Discovery günlüklerini akışa almak için, [Microsoft Cloud App Security olarak Azure Sentinel 'i etkinleştirin](https://aka.ms/AzureSentinelMCAS).
 
-## <a name="connect-to-cloud-app-security"></a>Cloud App Security'ye bağlama
+> [!IMPORTANT]
+> Cloud Discovery günlüklerin alımı Şu anda genel önizlemededir.
+> Bu özellik, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez.
+> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+ 
+## <a name="connect-to-cloud-app-security"></a>Cloud App Security Bağlan
 
-Cloud App Security zaten varsa, olduğundan emin olun [ağınızda etkin](https://docs.microsoft.com/cloud-app-security/getting-started-with-cloud-app-security).
-Cloud App Security dağıtılan ve verileriniz başlayan kümeniz, uyarı verileri kolayca Azure Gözcü aktarılabilir.
+Zaten Cloud App Security varsa, [Ağınızda etkinleştirildiğinden](https://docs.microsoft.com/cloud-app-security/getting-started-with-cloud-app-security)emin olun.
+Cloud App Security dağıtılırsa ve verileriniz geri alıyorsa, uyarı verileri kolayca Azure Sentinel 'e akışla eklenebilir.
 
 
-1. Azure Gözcü içinde seçin **veri bağlayıcıları** ve ardından **Cloud App Security** Döşe.
+1. Azure Sentinel 'de **veri bağlayıcıları**' nı, **Cloud App Security** kutucuğunu ve **bağlayıcı sayfasını aç**' ı seçin.
 
-2. **Bağlan**'a tıklayın.
+1. Azure Sentinel 'e hangi günlükleri aktarmak istediğinizi seçin, **Uyarılar** ve **Cloud Discovery günlükleri** (Önizleme) seçeneğini belirleyebilirsiniz. 
 
-3. İlgili şema için Cloud App Security uyarıları Log Analytics'te kullanmak için arama **SecurityAlert**.
+1. **Bağlan**'a tıklayın.
+
+1. Cloud App Security uyarıları için Log Analytics ilgili şemayı kullanmak için, **Securityalert**aratın.
+
+
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu belgede, Azure Gözcü için Microsoft Cloud App Security bağlanma öğrendiniz. Azure Gözcü hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
-- Bilgi nasıl [görünürlük almak, veri ve olası tehditleri](quickstart-get-visibility.md).
-- Başlama [Azure Gözcü kullanarak tehditleri algılama](tutorial-detect-threats.md).
+Bu belgede Microsoft Cloud App Security Azure Sentinel 'e bağlamayı öğrendiniz. Azure Sentinel hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+- [Verilerinize nasıl görünürlük alabileceğinizi ve olası tehditleri](quickstart-get-visibility.md)öğrenin.
+- [Azure Sentinel ile tehditleri algılamaya](tutorial-detect-threats.md)başlayın.

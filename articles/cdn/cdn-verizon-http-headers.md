@@ -7,19 +7,19 @@ author: mdgattuso
 manager: danielgi
 editor: ''
 ms.assetid: ''
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 04/16/2018
 ms.author: magattus
-ms.openlocfilehash: b9f7a5332c8529753f2e22efd6af3d04cb3f44b6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a5881bea578f2791f8dc0d6e760fd15c6f47e435
+ms.sourcegitcommit: ccb9a7b7da48473362266f20950af190ae88c09b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66479757"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67593256"
 ---
 # <a name="verizon-specific-http-headers-for-azure-cdn-rules-engine"></a>Azure CDN kurallar altyapısı Verizon'a özgü HTTP üstbilgileri
 
@@ -39,7 +39,7 @@ Aşağıdaki tabloda, Verizon CDN POP ' isteğindeki ekleyen üstbilgileri açı
 X-iletilen-için | İstek sahibinin IP adresini gösterir.| 10.10.10.10
 X iletilen Proto | İsteğin protokol gösterir. | http
 X-Host | İsteğin ana bilgisayar adını belirtir. | CDN.mydomain.com
-X-Midgress | İstek proxy ek bir CDN sunucu olup olmadığını gösterir. Örneğin, POP Sunucusu kaynağı kalkan sunucu veya POP server ADN ağ geçidi sunucusu. <br />Yalnızca midgress trafiği gerçekleştiğinde bu üst bilgi isteği eklendi. Bu durumda, üst bilgi isteği ek bir CDN sunucu proxy olduğunu belirtmek için 1 olarak ayarlanır.| 1
+X-Midgress | İstek proxy ek bir CDN sunucu olup olmadığını gösterir. Örneğin, POP Sunucusu kaynağı kalkan sunucu veya POP server ADN ağ geçidi sunucusu. <br />Yalnızca midgress trafiği gerçekleştiğinde bu üst bilgi isteği eklendi. Bu durumda, üst bilgi isteği ek bir CDN sunucu proxy olduğunu belirtmek için 1 olarak ayarlanır.| 1\.
 [Ana Bilgisayar](#host-request-header) | Konak ve istenen içeriğin bulunduğu bağlantı noktasını tanımlar. | Marketing.mydomain.com:80
 [X-Gateway-List](#x-gateway-list-request-header) | ADN: Bir müşteri kaynağa atanmış ADN ağ geçidi sunucusu yük devretme listesini tanımlar. <br />Kaynak koruma: Bir müşteri kaynağa atanmış kaynak kalkan sunucuları kümesini gösterir. | `icn1,hhp1,hnd1`
 X-EC - _&lt;adı&gt;_ | İle başlar ve istek üstbilgileri *X-EC* (örneğin, X-EC-etiketi, [X-EC-Debug](cdn-http-debug-headers.md)) CDN tarafından kullanım için ayrılmıştır.| waf üretim

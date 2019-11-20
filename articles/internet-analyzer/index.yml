@@ -1,0 +1,49 @@
+### YamlMime:Landing
+title: Azure Internet Analyzer belgeleri (Önizleme)
+summary: Internet Analyzer, ağ altyapısındaki değişikliklerin müşterilerinizin performansını nasıl etkileyeceğini test etmenize olanak tanıyan bir istemci tarafı ölçüm platformudur. Şirket içinden Azure'a geçerken veya yeni bir Azure hizmetini değerlendirirken, Internet Analyzer kullanıcılarınızın verilerinden ve Microsoft'un zengin analiz özelliklerinden edindiğiniz bilgilerle geçiş öncesinde Azure'ın yardımıyla ağ mimarinizi daha iyi anlamanızı ve iyileştirmenizi sağlar.
+metadata:
+  title: Azure Internet Analyzer belgeleri (Önizleme)
+  description: Internet Analyzer, ağ altyapısındaki değişikliklerin müşterilerinizin performansını nasıl etkileyeceğini test etmenize olanak tanıyan bir istemci tarafı ölçüm platformudur. Şirket içinden Azure'a geçerken veya yeni bir Azure hizmetini değerlendirirken, Internet Analyzer kullanıcılarınızın verilerinden ve Microsoft'un zengin analiz özelliklerinden edindiğiniz bilgilerle geçiş öncesinde Azure'ın yardımıyla ağ mimarinizi daha iyi anlamanızı ve iyileştirmenizi sağlar.
+  services: internet-analyzer
+  ms.service: internet-analyzer
+  ms.topic: landing-page
+  author: megan-beatty
+  ms.author: mebeatty
+  ms.date: 10/16/2019
+  ms.openlocfilehash: d7c9b0c848087048d676a2e30bba40e182e8e673
+  ms.sourcegitcommit: dbde4aed5a3188d6b4244ff7220f2f75fce65ada
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/19/2019
+  ms.locfileid: "74185639"
+landingContent:
+- title: Internet Analyzer hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Internet Analyzer nedir?
+      url: internet-analyzer-overview.md
+- title: Başlarken
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Portalı kullanarak Internet Analyzer oluşturma
+      url: internet-analyzer-create-test-portal.md
+    - text: CLI kullanarak Internet Analyzer oluşturma
+      url: internet-analyzer-cli.md
+  - linkListType: how-to-guide
+    links:
+    - text: Internet Analyzer İstemcisini Ekleme
+      url: internet-analyzer-embed-client.md
+    - text: Özel Uç Nokta Yapılandırma
+      url: internet-analyzer-custom-endpoint.md
+- title: Kaynaklar
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Internet Analyzer hakkında SSS
+      url: internet-analyzer-faq.md
+    - text: Karnenizi yorumlama
+      url: internet-analyzer-scorecard.md
+    - text: Internet Analyzer CLI başvurusu
+      url: https://docs.microsoft.com/cli/azure/ext/internet-analyzer/internet-analyzer?view=azure-cli-latest

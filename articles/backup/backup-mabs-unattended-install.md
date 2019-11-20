@@ -1,33 +1,28 @@
 ---
-title: Azure Backup sunucusu V2 sessiz yüklemesi
-description: Azure Backup sunucusu V2 sessizce yüklemek için bir PowerShell betiğini kullanın. Bu tür bir yükleme, katılımsız bir yükleme olarak da adlandırılır.
-services: backup
-author: rayne-wiselman
-manager: carmonm
-ms.service: backup
+title: Azure Backup Sunucusu v2 sessiz yüklemesi
+description: Azure Backup Sunucusu v2 'yi sessizce yüklemek için bir PowerShell betiği kullanın. Bu tür bir yüklemeye katılımsız yükleme de denir.
 ms.topic: conceptual
 ms.date: 11/13/2018
-ms.author: raynew
-ms.openlocfilehash: 66ed5765a91b607bc5b765926c5df87d13ff6a24
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1539089e713bcf8e959707c6ff4a608f062a7c00
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60253849"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172238"
 ---
-# <a name="run-an-unattended-installation-of-azure-backup-server"></a>Azure Backup sunucusu katılımsız yükleme çalıştırma
+# <a name="run-an-unattended-installation-of-azure-backup-server"></a>Katılımsız Azure Backup Sunucusu yüklemesi çalıştırma
 
-Azure Backup sunucusu için katılımsız bir yükleme çalıştırmayı öğrenin.
+Azure Backup Sunucusu katılımsız bir yüklemesini çalıştırmayı öğrenin.
 
-Azure Backup sunucusu V1 yüklüyorsanız bu adımları geçerli değildir.
+Azure Backup Sunucusu v1 yüklüyorsanız bu adımlar uygulanmaz.
 
-## <a name="install-backup-server"></a>Backup Sunucusu'nu Yükle
+## <a name="install-backup-server"></a>Yedekleme sunucusunu yükler
 
-1. Sunucuda barındıran Azure Backup sunucusu V2 veya daha sonra bir metin dosyası oluşturun. (Dosyayı Not Defteri'nde veya başka bir metin düzenleyicisinde oluşturabilirsiniz.) Dosyayı MABSSetup.ini kaydedin.
+1. Azure Backup Sunucusu v2 veya üstünü barındıran sunucuda bir metin dosyası oluşturun. (Dosyayı Not defteri 'nde veya başka bir metin düzenleyicisinde oluşturabilirsiniz.) Dosyayı MABSSetup. ini olarak kaydedin.
 
-2. Aşağıdaki kod MABSSetup.ini dosyaya yapıştırın. Köşeli ayraçlar içindeki metni değiştirin (\< \>) ortamınızdaki değerlerle. Aşağıda bir örnek gösterilmiştir:
+2. Aşağıdaki kodu MABSSetup. ini dosyasına yapıştırın. Köşeli ayracın içindeki metni (\< \>) ortamınızdaki değerlerle değiştirin. Aşağıdaki metin bir örnektir:
 
-   ```
+   ```text
    [OPTIONS]
    UserName=administrator
    CompanyName=<Microsoft Corporation>
@@ -48,22 +43,23 @@ Azure Backup sunucusu V1 yüklüyorsanız bu adımları geçerli değildir.
    UseExistingSQL=<1/0 use or do not use existing SQL>
    ```
 
-3. Dosyayı kaydedin. Daha sonra yükleme sunucusundaki yükseltilmiş bir komut istemi, şu komutu girin:
+3. Dosyayı kaydedin. Sonra, yükleme sunucusundaki yükseltilmiş bir komut isteminde şu komutu girin:
 
-   ```
+   ```cmd
    start /wait <cdlayout path>/Setup.exe /i  /f <.ini file path>/setup.ini /L <log path>/setup.log
    ```
 
-Bu bayraklar yükleme için kullanabilirsiniz:</br>
-**/f**: .ini dosyasının yolu</br>
-**/l**: Günlük dosyası yolu</br>
-**/i**: Yükleme yolu</br>
-**/x**: Yol kaldırma</br>
+Yükleme için bu bayrakları kullanabilirsiniz:</br>
+**/f**:. ini dosya yolu</br>
+**/l**: günlük yolu</br>
+**/i**: yükleme yolu</br>
+**/x**: yolu kaldır</br>
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Backup sunucusu yükledikten sonra sunucunuzu hazırlama veya bir iş yükü korumaya başlamak öğrenin.
 
-- [Backup sunucusu iş yükleri hazırlama](backup-azure-microsoft-azure-backup.md)
-- [Bir VMware sunucusunu yedeklemek için Backup sunucusu kullanma](backup-azure-backup-server-vmware.md)
-- [SQL sunucusunu yedeklemek için Backup sunucusu kullanma](backup-azure-sql-mabs.md)
-- [Modern yedekleme depolama alanı, yedekleme sunucusuna Ekle](backup-mabs-add-storage.md)
+Yedekleme sunucusunu yükledikten sonra, sunucunuzu nasıl hazırlayacağınızı veya bir iş yükünü korumaya nasıl başlayacağınızı öğrenin.
+
+- [Yedekleme sunucusu iş yüklerini hazırlama](backup-azure-microsoft-azure-backup.md)
+- [Bir VMware sunucusunu yedeklemek için yedekleme sunucusu kullanma](backup-azure-backup-server-vmware.md)
+- [Yedekleme sunucusunu kullanarak yedekleme SQL Server](backup-azure-sql-mabs.md)
+- [Yedekleme sunucusuna Modern Yedekleme Alanı Ekle](backup-mabs-add-storage.md)

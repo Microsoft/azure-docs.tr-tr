@@ -1,7 +1,7 @@
 ---
-title: 'Her zaman şifreli: Windows sertifika deposu - Azure SQL veritabanı | Microsoft Docs'
-description: Bu makalede SQL Server Management Studio (SSMS) her zaman şifreli sihirbazını kullanarak hassas verileri bir SQL veritabanında veritabanı şifreleme güvenliğinin nasıl sağlanacağını gösterir. Ayrıca, Windows sertifika depolama alanında, şifreleme anahtarlarını depolamak nasıl gösterir.
-keywords: Always Encrypted verileri, sql şifrelemesi, veritabanı şifreleme, hassas verileri şifreleyin
+title: Always Encrypted-Windows sertifika deposu
+description: Bu makalede, SQL Server Management Studio (SSMS) ' de Always Encrypted Sihirbazı 'Nı kullanarak bir SQL veritabanında hassas verilerin nasıl güvenli hale kullanılacağı gösterilmektedir. Ayrıca, şifreleme anahtarlarınızı Windows sertifika depolama alanında nasıl depolayabileceği de gösterilmektedir.
+keywords: verileri, SQL şifrelemesini, veritabanı şifrelemesini, hassas verileri, Always Encrypted şifreleyin
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
@@ -11,73 +11,72 @@ ms.topic: conceptual
 author: VanMSFT
 ms.author: vanto
 ms.reviwer: ''
-manager: craigg
 ms.date: 03/08/2019
-ms.openlocfilehash: 5226ec05af95cf305008968cf945070532274ee5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 82c3c3274a8a9d66019ce906ee7be47cedac7470
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61420135"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73822053"
 ---
-# <a name="always-encrypted-protect-sensitive-data-and-store-encryption-keys-in-the-windows-certificate-store"></a>Her zaman şifreli: Hassas verilerin korunmasına ve şifreleme anahtarlarını Windows sertifika deposuna kaydedin
+# <a name="always-encrypted-protect-sensitive-data-and-store-encryption-keys-in-the-windows-certificate-store"></a>Always Encrypted: hassas verileri koruma ve şifreleme anahtarlarını Windows sertifika deposunda depolama
 
-Bu makalede, hassas verileri bir SQL veritabanında veritabanı şifrelemesi kullanarak güvenli hale getirme işlemini göstermektedir [her zaman şifreli sihirbazını](https://msdn.microsoft.com/library/mt459280.aspx) içinde [SQL Server Management Studio (SSMS)](https://msdn.microsoft.com/library/hh213248.aspx). Ayrıca, Windows sertifika depolama alanında, şifreleme anahtarlarını depolamak nasıl gösterir.
+Bu makalede, [SQL Server Management Studio (SSMS)](https://msdn.microsoft.com/library/hh213248.aspx)' de [Always Encrypted Sihirbazı 'Nı](https://msdn.microsoft.com/library/mt459280.aspx) kullanarak bir SQL veritabanında hassas verilerin nasıl güvenli hale kullanılacağı gösterilmektedir. Ayrıca, şifreleme anahtarlarınızı Windows sertifika depolama alanında nasıl depolayabileceği de gösterilmektedir.
 
-Her zaman şifreli Azure SQL veritabanı'nda yeni bir veri şifreleme teknolojisi ve yardımcı olan bir SQL Server istemci ile sunucu arasında taşıma sırasında sunucu üzerinde bekleyen hassas verileri korumak ve veri kullanımda olsa da, hassas verilerin asla sağlama olarak görünür düz metin içinde veritabanı sistemidir. Veri şifreleme sonra yalnızca istemci uygulamaları veya anahtarlarının erişimi uygulama sunucuları düz metin verilere erişebilir. Ayrıntılı bilgi için bkz. [(veritabanı altyapısı)'Always Encrypted](https://msdn.microsoft.com/library/mt163865.aspx).
+Always Encrypted, Azure SQL veritabanı 'ndaki yeni bir veri şifreleme teknolojisidir ve SQL Server, istemci ve sunucu arasındaki taşıma sırasında ve veriler kullanımda olduğunda, önemli verilerin şu şekilde göründüğünden emin olmak için sunucuda bekleyen hassas verileri korumaya yardımcı olur. veritabanı sisteminin içinde düz metin. Verileri şifreledikten sonra, yalnızca anahtarlara erişimi olan istemci uygulamaları veya uygulama sunucuları düz metin verilerine erişebilir. Ayrıntılı bilgi için bkz. [Always Encrypted (veritabanı altyapısı)](https://msdn.microsoft.com/library/mt163865.aspx).
 
-Always Encrypted kullanılacak veritabanını yapılandırdıktan sonra şifrelenmiş verilerle çalışmak için Visual Studio ile C# bir istemci uygulaması oluşturacaksınız.
+Veritabanını Always Encrypted kullanacak şekilde yapılandırdıktan sonra, şifrelenen verilerle çalışmak için Visual Studio C# ile birlikte bir istemci uygulaması oluşturacaksınız.
 
-Her zaman şifreli için bir Azure SQL veritabanı hakkında bilgi edinmek için bu makaledeki adımları izleyin. Bu makalede, aşağıdaki görevlerin nasıl gerçekleştirileceğini öğreneceksiniz:
+Azure SQL veritabanı için Always Encrypted ayarlamayı öğrenmek için bu makaledeki adımları izleyin. Bu makalede, aşağıdaki görevlerin nasıl gerçekleştirileceğini öğreneceksiniz:
 
-* Her zaman şifreli sihirbazını SSMS'de oluşturulacağı [her zaman şifreli anahtarları](https://msdn.microsoft.com/library/mt163865.aspx#Anchor_3).
-  * Oluşturma bir [sütun ana anahtarı (CMK)](https://msdn.microsoft.com/library/mt146393.aspx).
-  * Oluşturma bir [sütun şifreleme anahtarı (CEK)](https://msdn.microsoft.com/library/mt146372.aspx).
-* Bir veritabanı tablosu oluşturun ve sütun şifreleme.
-* Ekler, seçer ve şifrelenmiş sütundaki verileri görüntüleyen bir uygulama oluşturun.
+* [Always Encrypted anahtarlar](https://msdn.microsoft.com/library/mt163865.aspx#Anchor_3)oluşturmak için SSMS 'deki Always Encrypted Sihirbazı 'nı kullanın.
+  * Bir [sütun ana anahtarı (CMK)](https://msdn.microsoft.com/library/mt146393.aspx)oluşturun.
+  * Bir [sütun şifreleme anahtarı (cek)](https://msdn.microsoft.com/library/mt146372.aspx)oluşturun.
+* Veritabanı tablosu oluşturun ve sütunları şifreleyin.
+* Şifrelenmiş sütunlardan veri ekleyen, seçen ve görüntüleyen bir uygulama oluşturun.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Bu öğreticide, şunları yapmanız gerekir:
+Bu öğreticide şunlar gerekir:
 
-* Bir Azure hesabı ve aboneliği Yoksa, oturum açmak için bir [ücretsiz deneme sürümü](https://azure.microsoft.com/pricing/free-trial/).
-* [SQL Server Management Studio](https://msdn.microsoft.com/library/mt238290.aspx) 13.0.700.242 sürümü veya üzeri.
-* [.NET framework 4.6](https://msdn.microsoft.com/library/w0x726c2.aspx) veya üzeri (istemci bilgisayarda).
+* Bir Azure hesabı ve aboneliği Bir hesabınız yoksa, [ücretsiz deneme](https://azure.microsoft.com/pricing/free-trial/)için kaydolun.
+* [SQL Server Management Studio](https://msdn.microsoft.com/library/mt238290.aspx) sürüm 13.0.700.242 veya üzeri.
+* [.NET Framework 4,6](https://msdn.microsoft.com/library/w0x726c2.aspx) veya üzeri (istemci bilgisayarda).
 * [Visual Studio](https://www.visualstudio.com/downloads/download-visual-studio-vs.aspx).
 
 ## <a name="create-a-blank-sql-database"></a>Boş bir SQL veritabanı oluşturma
 
-1. [Azure Portal](https://portal.azure.com/) oturum açın.
-2. Tıklayın **kaynak Oluştur** > **veri + depolama** > **SQL veritabanı**.
-3. Oluşturma bir **boş** adlı veritabanı **Clinic** yeni veya var olan bir sunucu üzerinde. Azure portalında veritabanı oluşturma hakkında ayrıntılı yönergeler için bkz: [ilk Azure SQL veritabanınızı](sql-database-single-database-get-started.md).
+1. [Azure portalında](https://portal.azure.com/) oturum açın.
+2. **Kaynak oluştur** > **veri + depolama** > **SQL veritabanı**' na tıklayın.
+3. Yeni veya var olan bir sunucuda **Clinic** adlı **boş** bir veritabanı oluşturun. Azure portal veritabanı oluşturma hakkında ayrıntılı yönergeler için bkz. [Ilk Azure SQL veritabanınız](sql-database-single-database-get-started.md).
 
     ![Boş veritabanı oluşturma](./media/sql-database-always-encrypted/create-database.png)
 
-Öğreticide daha sonra bağlantı dizesi gerekir. Veritabanı oluşturulduktan sonra yeni Clinic veritabanına gidin ve bağlantı dizesini kopyalayın. Herhangi bir zamanda bağlantı dizesini elde edebilirsiniz, ancak Azure portalında işiniz kopyalamak daha kolaydır.
+Öğreticide daha sonra bağlantı dizesine ihtiyacınız olacak. Veritabanı oluşturulduktan sonra, yeni Clinic veritabanına gidin ve bağlantı dizesini kopyalayın. Bağlantı dizesini istediğiniz zaman alabilirsiniz, ancak Azure portal olduğunuzda kopyalamak kolaydır.
 
-1. Tıklayın **SQL veritabanları** > **Clinic** > **veritabanı bağlantı dizelerini Göster**.
-2. İçin bağlantı dizesini kopyalayın **ADO.NET**.
+1. **SQL veritabanları** > **Clinic** > **veritabanı bağlantı dizelerini göster**' e tıklayın.
+2. **ADO.net**için bağlantı dizesini kopyalayın.
 
     ![Bağlantı dizesini kopyalayın](./media/sql-database-always-encrypted/connection-strings.png)
 
 ## <a name="connect-to-the-database-with-ssms"></a>SSMS ile veritabanına bağlanma
 
-SSMS'yi açın ve Clinic veritabanı sunucusuna bağlanın.
+SSMS 'yi açın ve Clinic veritabanıyla sunucuya bağlanın.
 
-1. SSMS’i açın. (Tıklayın **Connect** > **veritabanı altyapısı** açmak için **sunucuya Bağlan** penceresi açık değilse).
-2. Sunucu adı ve kimlik bilgilerini girin. Sunucu adı SQL veritabanı dikey penceresinde bulunabilir ve bağlantı dizesini, daha önce kopyaladığınız. Tam sunucu adını içeren tür *database.windows.net*.
+1. SSMS’i açın. (Açık değilse **sunucuya Bağlan** penceresini açmak Için > **veritabanı altyapısına** **Bağlan** ' a tıklayın).
+2. Sunucu adınızı ve kimlik bilgilerinizi girin. Sunucu adı, SQL veritabanı dikey penceresinde ve daha önce kopyaladığınız bağlantı dizesinde bulunabilir. *Database.Windows.net*dahil olmak üzere tüm sunucu adını yazın.
 
     ![Bağlantı dizesini kopyalayın](./media/sql-database-always-encrypted/ssms-connect.png)
 
-Varsa **yeni güvenlik duvarı kuralı** penceresi açılır; oturum açma ve Azure'a let SSMS sizin için yeni bir güvenlik duvarı kuralı oluşturun.
+**Yeni güvenlik duvarı kuralı** penceresi açılırsa Azure 'da oturum açın ve SSMS 'nin sizin için yeni bir güvenlik duvarı kuralı oluşturmasına izin verin.
 
 ## <a name="create-a-table"></a>Bir tablo oluşturma
 
-Bu bölümde, Hasta verileri tutmak için bir tablo oluşturacaksınız. Bu normal bir tablo başlangıçta--olacaktır şifreleme sonraki bölümde yapılandıracak.
+Bu bölümde, hasta verilerini tutacak bir tablo oluşturacaksınız. Bu, başlangıçta normal bir tablo olacaktır ve bir sonraki bölümde şifrelemeyi yapılandıracaksınız.
 
-1. Genişletin **veritabanları**.
-2. Sağ **Clinic** tıklayın ve veritabanı **yeni sorgu**.
-3. Yeni sorgu penceresine aşağıdaki Transact-SQL (T-SQL) yapıştırın ve **yürütme** bu.
+1. **Veritabanları**' nı genişletin.
+2. **Clinic** veritabanına sağ tıklayın ve **Yeni sorgu**' ya tıklayın.
+3. Aşağıdaki Transact-SQL (T-SQL) ' i yeni sorgu penceresine yapıştırın ve **yürütün** .
 
         CREATE TABLE [dbo].[Patients](
          [PatientId] [int] IDENTITY(1,1),
@@ -93,87 +92,87 @@ Bu bölümde, Hasta verileri tutmak için bir tablo oluşturacaksınız. Bu norm
          PRIMARY KEY CLUSTERED ([PatientId] ASC) ON [PRIMARY] );
          GO
 
-## <a name="encrypt-columns-configure-always-encrypted"></a>(Her zaman şifreli yapılandırma) sütun şifreleme
+## <a name="encrypt-columns-configure-always-encrypted"></a>Sütunları şifreleyin (Always Encrypted Yapılandır)
 
-SSMS kolayca ayarlayarak CMK CEK ve şifrelenmiş sütunlar için Always Encrypted yapılandırmak için bir sihirbaz sağlar.
+SSMS, sizin için CMK, CEK ve şifrelenmiş sütunları ayarlayarak Always Encrypted kolayca yapılandırmak için bir sihirbaz sağlar.
 
-1. Genişletin **veritabanları** > **Clinic** > **tabloları**.
-2. Sağ **Hastalara** tablosunu seçip **şifrelemek sütunları** her zaman şifreli sihirbazını açmak için:
+1. **Veritabanları** > **Clinic** > **tabloları**' nı genişletin.
+2. **Hastalar** tablosuna sağ tıklayın ve Always Encrypted Sihirbazı 'nı açmak Için **sütunları şifreleyin** ' ı seçin:
 
-    ![Sütun şifreleme](./media/sql-database-always-encrypted/encrypt-columns.png)
+    ![Sütunları şifreleyin](./media/sql-database-always-encrypted/encrypt-columns.png)
 
-Her zaman şifreli sihirbazını aşağıdaki bölümleri içerir: **Sütun seçimini**, **ana anahtarı yapılandırma** (CMK) **doğrulama**, ve **özeti**.
+Always Encrypted Sihirbazı aşağıdaki bölümleri içerir: **sütun seçimi**, **ana anahtar yapılandırması** (CMK), **doğrulama**ve **Özet**.
 
-### <a name="column-selection"></a>Sütun Seçimi
+### <a name="column-selection"></a>Sütun seçimi
 
-Tıklayın **sonraki** üzerinde **giriş** sayfasını açmak için **sütun seçimi** sayfası. Bu sayfada, şifrelemek istediğiniz sütunları seçersiniz [şifreleme türünü ve hangi sütun şifreleme anahtarı (CEK)](https://msdn.microsoft.com/library/mt459280.aspx#Anchor_2) kullanılacak.
+**Giriş** sayfasında, **sütun seçim** sayfasını açmak için **İleri** ' ye tıklayın. Bu sayfada, hangi sütunları şifrelemek istediğinizi, [şifreleme türünü ve kullanılacak sütun şifreleme anahtarını (cek)](https://msdn.microsoft.com/library/mt459280.aspx#Anchor_2) seçersiniz.
 
-Şifreleme **SSN** ve **BirthDate** her hasta için bilgi. **SSN** sütun eşitlik aramalar, birleştirmeler ve Grupla destekler belirlenimci şifreleme kullanır. **BirthDate** sütun işlemlerini desteklemeyen rastgele şifreleme kullanır.
+Her hasta için **SSK** ve **Doğum tarihi** bilgilerini şifreleyin. **SSK** sütunu, eşitlik aramalarını, birleştirmeleri ve gruplama tarafından desteklenen belirleyici şifrelemeyi kullanır. **Doğum tarihi** sütunu, işlemleri desteklemeyen rastgele şifrelemeyi kullanır.
 
-Ayarlama **şifreleme türü** için **SSN** sütuna **Deterministic** ve **doğum tarihi** sütuna **Randomized** . **İleri**’ye tıklayın.
+**SSN** sütunu Için **şifreleme türünü** **belirleyici** ve **Doğum tarihi** sütununu **rastgele**olarak ayarlayın. **İleri**’ye tıklayın.
 
-![Sütun şifreleme](./media/sql-database-always-encrypted/column-selection.png)
+![Sütunları şifreleyin](./media/sql-database-always-encrypted/column-selection.png)
 
-### <a name="master-key-configuration"></a>Ana anahtarını yapılandırma
+### <a name="master-key-configuration"></a>Ana anahtar yapılandırması
 
-**Ana anahtarı yapılandırma** sayfasıdır Burada, CMK ayarlayın ve anahtar depolama sağlayıcısı seçin CMK depolanacağı. Şu anda bir CMK Windows sertifika deposu, Azure anahtar kasası veya bir donanım güvenlik modülü (HSM) depolayabilirsiniz. Bu öğreticide, anahtarlarınızı Windows sertifika deposuna gösterilmektedir.
+**Ana anahtar yapılandırma** sayfası, CMK 'nizi ayarladığınız ve CMK 'ın depolanacağı anahtar deposu sağlayıcısını seçtiğiniz yerdir. Şu anda, bir CMK 'yi Windows sertifika deposunda, Azure Key Vault veya bir donanım güvenlik modülünde (HSM) depolayabilmeniz gerekir. Bu öğreticide, anahtarlarınızı Windows sertifika depolama alanında nasıl depolayabileceği gösterilmektedir.
 
-Doğrulayın **Windows sertifika deposu** tıklatın ve seçili **sonraki**.
+**Windows sertifika deposunun** seçili olduğunu doğrulayın ve **İleri**' ye tıklayın.
 
-![Ana anahtarını yapılandırma](./media/sql-database-always-encrypted/master-key-configuration.png)
+![Ana anahtar yapılandırması](./media/sql-database-always-encrypted/master-key-configuration.png)
 
 ### <a name="validation"></a>Doğrulama
 
-Sütunları şifrelemek veya daha sonra çalıştırmak için bir PowerShell komut dosyasını kaydedin. Bu öğreticide, seçin **artık tamamlanması devam** tıklatıp **sonraki**.
+Sütunları şimdi şifreleyebilir veya daha sonra çalıştırmak için bir PowerShell betiği kaydedebilirsiniz. Bu öğreticide **Şimdi sona ermesini sağlamak Için devam** 'ı seçin ve **İleri**' ye tıklayın.
 
 ### <a name="summary"></a>Özet
 
-Ayarların doğru olduğunu ve tıklayın doğrulayın **son** her zaman şifreli için kurulumu tamamlamak için.
+Ayarların doğru olduğundan emin olun ve Always Encrypted kurulumunu gerçekleştirmek için **son** ' a tıklayın.
 
 ![Özet](./media/sql-database-always-encrypted/summary.png)
 
-### <a name="verify-the-wizards-actions"></a>Sihirbaz eylemleri doğrulayın
+### <a name="verify-the-wizards-actions"></a>Sihirbazın eylemlerini doğrulama
 
-Sihirbaz tamamlandıktan sonra veritabanı her zaman şifreli için ayarlanmıştır. Sihirbaz aşağıdaki eylemleri:
+Sihirbaz tamamlandıktan sonra veritabanınız Always Encrypted ayarlanır. Sihirbaz aşağıdaki eylemleri gerçekleştirdi:
 
 * Bir CMK oluşturuldu.
 * Bir CEK oluşturuldu.
-* Seçili sütunları şifreleme için yapılandırılmış. **Hastalara** tablo şu anda hiç veri yok, ancak seçili olan sütunlardaki var olan tüm verileri artık şifrelenir.
+* Şifreleme için seçili sütunlar yapılandırıldı. **Hastalar** tablonuzda Şu anda hiç veri yok, ancak seçili sütunlardaki tüm mevcut veriler artık şifrelendi.
 
-SSMS anahtarların oluşturulması giderek doğrulayabilirsiniz **Clinic** > **güvenlik** > **her zaman şifreli anahtarları**. Artık, sihirbaz sizin için oluşturulan yeni anahtarları görebilirsiniz.
+SSMS 'de anahtarların oluşturulmasını, **Clinic** > **güvenlik** > **Always Encrypted anahtarlarına**giderek doğrulayabilirsiniz. Artık sihirbazın sizin için oluşturduğu yeni anahtarları görebilirsiniz.
 
-## <a name="create-a-client-application-that-works-with-the-encrypted-data"></a>Şifrelenmiş veriler ile uygun bir istemci uygulaması oluşturma
+## <a name="create-a-client-application-that-works-with-the-encrypted-data"></a>Şifrelenmiş verilerle birlikte çalışarak bir istemci uygulaması oluşturma
 
-Always Encrypted ayarlamak, gerçekleştiren bir uygulama oluşturabilirsiniz *ekler* ve *seçer* şifrelenmiş sütun. Örnek uygulamayı çalıştırabilmeniz için bunu aynı bilgisayarda her zaman şifreli sihirbazını çalıştığı çalıştırmanız gerekir. Başka bir bilgisayarda uygulamayı çalıştırmak için Always Encrypted sertifikalarınızı istemci uygulamasını çalıştıran bilgisayara dağıtmanız gerekir.  
+Always Encrypted ayarlandığına *göre,* şifrelenmiş sütunlarda *eklemeleri* ve seçimi gerçekleştiren bir uygulama oluşturabilirsiniz. Örnek uygulamayı başarılı bir şekilde çalıştırmak için, onu Always Encrypted Sihirbazı 'nı çalıştırdığınız bilgisayarda çalıştırmanız gerekir. Uygulamayı başka bir bilgisayarda çalıştırmak için, Always Encrypted sertifikalarınızı istemci uygulamasını çalıştıran bilgisayara dağıtmanız gerekir.  
 
 > [!IMPORTANT]
-> Uygulamanızı kullanmalısınız [SqlParameter](https://msdn.microsoft.com/library/system.data.sqlclient.sqlparameter.aspx) düz metin veri sütunları Always Encrypted ile sunucuya geçerken nesneleri. SqlParameter nesneleri kullanmadan değişmez değerler geçirerek bir özel durumu oluşur.
+> Uygulamanızın, Always Encrypted sütunları ile sunucuya düz metin verileri geçirirken [SqlParameter](https://msdn.microsoft.com/library/system.data.sqlclient.sqlparameter.aspx) nesneleri kullanması gerekir. SqlParameter nesneleri kullanılmadan değişmez değerler geçirilmesi bir özel durumla sonuçlanır.
 
-1. Visual Studio'yu açın ve yeni bir C# konsol uygulaması oluşturun. Projeniz emin olun kümesine **.NET Framework 4.6** veya üzeri.
-2. Projeyi adlandırın **AlwaysEncryptedConsoleApp** tıklatıp **Tamam**.
+1. Visual Studio 'Yu açın ve yeni C# bir konsol uygulaması oluşturun. Projenizin **.NET Framework 4,6** veya üzeri bir sürüme ayarlandığından emin olun.
+2. Projeyi **Alwaysencryptedconsoleapp** olarak adlandırın ve **Tamam**' a tıklayın.
 
 ![Yeni konsol uygulaması](./media/sql-database-always-encrypted/console-app.png)
 
-## <a name="modify-your-connection-string-to-enable-always-encrypted"></a>Always Encrypted'ı etkinleştirmek için bağlantı dizesini değiştirme
+## <a name="modify-your-connection-string-to-enable-always-encrypted"></a>Always Encrypted etkinleştirmek için Bağlantı dizenizi değiştirin
 
-Bu bölümde, veritabanı bağlantı dizenizi Always Encrypted'ı etkinleştirmek açıklanmaktadır. "Örnek konsol uygulaması her zaman şifrelenir." sonraki bölümde, az önce oluşturduğunuz konsol uygulaması değiştirir
+Bu bölümde, veritabanı bağlantı dizeniz Always Encrypted nasıl etkinleştirileceği açıklanmaktadır. Yeni oluşturduğunuz konsol uygulamasını, "Always Encrypted örnek konsol uygulaması" bölümünde değiştirirsiniz.
 
-Always Encrypted'ı etkinleştirmek için eklemeniz gerekir **sütun şifreleme ayarı** anahtar sözcüğü, bağlantı dizesi ve ayarlamak **etkin**.
+Always Encrypted etkinleştirmek için, bağlantı dizeniz için **sütun şifreleme ayarı** anahtar sözcüğünü eklemeniz ve **etkin**olarak ayarlamanız gerekir.
 
-Bu doğrudan bağlantı dizesinde ayarlayabilirsiniz veya kullanarak ayarlayabilirsiniz bir [SqlConnectionStringBuilder](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnectionstringbuilder.aspx). Sonraki bölümde örnek uygulamada nasıl kullanılacağını gösterir **SqlConnectionStringBuilder**.
+Bunu doğrudan bağlantı dizesinde ayarlayabilir veya bir [SqlConnectionStringBuilder](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnectionstringbuilder.aspx)kullanarak ayarlayabilirsiniz. Sonraki bölümde bulunan örnek uygulama, **SqlConnectionStringBuilder**'ın nasıl kullanılacağını gösterir.
 
 > [!NOTE]
-> Bu, her zaman şifreli için belirli bir istemci uygulaması gerekli yalnızca değişikliktir. Bağlantı dizesini harici olarak depolayan var olan bir uygulama varsa (diğer bir deyişle, bir yapılandırma dosyasında), Always Encrypted, herhangi bir kod değişikliği olmadan etkinleştirmek mümkün olabilir.
+> Bu, Always Encrypted özgü bir istemci uygulamasında gerekli tek değişikdir. Bağlantı dizesini dışarıdan depolayan mevcut bir uygulamanız varsa (yani bir yapılandırma dosyasında), herhangi bir kodu değiştirmeden Always Encrypted etkinleştirebilirsiniz.
 
-### <a name="enable-always-encrypted-in-the-connection-string"></a>Bağlantı dizesinde Always Encrypted'ı etkinleştir
+### <a name="enable-always-encrypted-in-the-connection-string"></a>Bağlantı dizesinde Always Encrypted etkinleştir
 
-Aşağıdaki anahtar sözcüğü, bağlantı dizesi ekleyin:
+Bağlantı dizeniz için aşağıdaki anahtar sözcüğü ekleyin:
 
     Column Encryption Setting=Enabled
 
-### <a name="enable-always-encrypted-with-a-sqlconnectionstringbuilder"></a>Her zaman bir SqlConnectionStringBuilder ile şifrelenmiş etkinleştir
+### <a name="enable-always-encrypted-with-a-sqlconnectionstringbuilder"></a>SqlConnectionStringBuilder ile Always Encrypted etkinleştirme
 
-Aşağıdaki kod her zaman şifreli ayarlayarak etkinleştirme gösterir [SqlConnectionStringBuilder.ColumnEncryptionSetting](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnectionstringbuilder.columnencryptionsetting.aspx) için [etkin](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnectioncolumnencryptionsetting.aspx).
+Aşağıdaki kod, [SqlConnectionStringBuilder. ColumnEncryptionSetting ayarını](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnectionstringbuilder.columnencryptionsetting.aspx) [etkin](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnectioncolumnencryptionsetting.aspx)olarak ayarlayarak always Encrypted nasıl etkinleştirileceğini gösterir.
 
     // Instantiate a SqlConnectionStringBuilder.
     SqlConnectionStringBuilder connStringBuilder =
@@ -183,17 +182,17 @@ Aşağıdaki kod her zaman şifreli ayarlayarak etkinleştirme gösterir [SqlCon
     connStringBuilder.ColumnEncryptionSetting =
        SqlConnectionColumnEncryptionSetting.Enabled;
 
-## <a name="always-encrypted-sample-console-application"></a>Her zaman şifreli örnek konsol uygulaması
+## <a name="always-encrypted-sample-console-application"></a>Always Encrypted örnek konsol uygulaması
 
-Bu örnek gösterir nasıl yapılır:
+Bu örnekte nasıl yapılacağı gösterilmektedir:
 
-* Always Encrypted'ı etkinleştirmek için bağlantı dizesini değiştirin.
-* Veriler şifrelenmiş sütuna ekleyin.
-* Şifrelenmiş bir sütunda belirli bir değeri filtreleyerek bir kaydı seçin.
+* Always Encrypted sağlamak için Bağlantı dizenizi değiştirin.
+* Şifrelenmiş sütunlara veri ekleyin.
+* Şifrelenmiş bir sütunda belirli bir değeri filtreleyerek bir kayıt seçin.
 
-Öğesinin içeriğini değiştirin **Program.cs** aşağıdaki kod ile. Geçerli bağlantı dizenizi Azure portalından doğrudan Main yönteminin üzerine satır genel connectionString değişken için bağlantı dizesini değiştirin. Bu kod için yapmanız gereken tek değişiklik budur.
+**Program.cs** içeriğini aşağıdaki kodla değiştirin. Ana yöntemin üzerindeki genel connectionString değişkeni için bağlantı dizesini, Azure portal geçerli bağlantı dizeniz ile değiştirin. Bu kodda yapmanız gereken tek değişiklik budur.
 
-Always Encrypted nasıl çalıştığını görmek için uygulamayı çalıştırın.
+Always Encrypted eylemi görmek için uygulamayı çalıştırın.
 
 ```cs
 using System;
@@ -499,49 +498,49 @@ namespace AlwaysEncryptedConsoleApp
 }
 ```
 
-## <a name="verify-that-the-data-is-encrypted"></a>Verilerin şifrelendiğinden emin olun
+## <a name="verify-that-the-data-is-encrypted"></a>Verilerin şifrelendiğini doğrulama
 
-Sorgulayarak sunucunun gerçek veriler şifrelenir hızlı bir şekilde denetleyebilirsiniz **Hastalara** SSMS ile veri. (Burada sütun şifreleme ayarı henüz etkinleştirilmedi, geçerli bir bağlantı kullanın.)
+Sunucu üzerindeki gerçek verilerin, SSMS ile **hastalar** verileri sorgulanarak şifrelenip şifrelenmediğini kolayca kontrol edebilirsiniz. (Sütun şifreleme ayarının henüz etkinleştirilmediği geçerli bağlantınızı kullanın.)
 
 Clinic veritabanında aşağıdaki sorguyu çalıştırın.
 
     SELECT FirstName, LastName, SSN, BirthDate FROM Patients;
 
-Herhangi bir düz metin veri içermemesi şifrelenmiş sütunları görebilirsiniz.
+Şifrelenmiş sütunlarda herhangi bir düz metin verisi içermediğini görebilirsiniz.
 
    ![Yeni konsol uygulaması](./media/sql-database-always-encrypted/ssms-encrypted.png)
 
-Düz metin verilerine erişmek için SSMS kullanmak için ekleyebilirsiniz **sütun şifreleme ayarı = etkin** bağlantı parametresi.
+SSMS 'yi düz metin verilerine erişmek üzere kullanmak için, bağlantı **sütunu şifreleme ayarı = Enabled** parametresini bağlantıya ekleyebilirsiniz.
 
-1. SSMS'de, sunucuya sağ tıklayın **Nesne Gezgini**ve ardından **Bağlantıyı Kes**.
-2. Tıklayın **Connect** > **veritabanı altyapısı** açmak için **sunucuya Bağlan** penceresi ve ardından **seçenekleri**.
-3. Tıklayın **ek bağlantı parametreleri** ve türü **sütun şifreleme ayarı = etkin**.
+1. SSMS 'de sunucunuza **Nesne Gezgini**sağ tıklayın ve ardından **bağlantıyı kes**' e tıklayın.
+2. **Sunucuya Bağlan** penceresini açmak Için > **veritabanı altyapısına** **Bağlan** ' a tıklayın ve ardından **Seçenekler**' e tıklayın.
+3. **Ek bağlantı parametreleri** ve tür **sütunu şifreleme ayarı = etkin**öğesine tıklayın.
 
     ![Yeni konsol uygulaması](./media/sql-database-always-encrypted/ssms-connection-parameter.png)
-4. Aşağıdaki sorguyu çalıştırın **Clinic** veritabanı.
+4. **Clinic** veritabanında aşağıdaki sorguyu çalıştırın.
 
         SELECT FirstName, LastName, SSN, BirthDate FROM Patients;
 
-     Şimdi, şifrelenmiş sütunlarda düz metin verileri görebilirsiniz.
+     Artık şifrelenmiş sütunlarda düz metin verileri görebilirsiniz.
 
     ![Yeni konsol uygulaması](./media/sql-database-always-encrypted/ssms-plaintext.png)
 
 > [!NOTE]
-> SSMS (veya herhangi bir istemci) başka bir bilgisayardan bağlanıyorsanız, şifreleme anahtarları erişim sahip değil ve verilerin şifresini çözmek mümkün olmayacaktır.
+> Farklı bir bilgisayardan SSMS (veya herhangi bir istemci) ile bağlanıyorsanız, şifreleme anahtarlarına erişemez ve verilerin şifresini çözemeyecektir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Always Encrypted kullanan bir veritabanı oluşturduktan sonra aşağıdakileri yapmak isteyebilirsiniz:
+Always Encrypted kullanan bir veritabanı oluşturduktan sonra şunları yapmak isteyebilirsiniz:
 
-* Bu örnek, farklı bir bilgisayardan çalıştırın. Düz metin verilerine erişimi olmaz ve başarıyla çalışmaz şifreleme anahtarlarına erişimi olmaz.
-* [Döndürme ve anahtarlarınızı Temizleme](https://msdn.microsoft.com/library/mt607048.aspx).
-* [Always Encrypted ile zaten şifrelenmiş verileri geçirmek](https://msdn.microsoft.com/library/mt621539.aspx).
-* [Always Encrypted sertifikalarını diğer istemci makinelerine dağıtma](https://msdn.microsoft.com/library/mt723359.aspx#Anchor_1) ("Yapmadan sertifikalar kullanılabilir uygulamaların ve kullanıcıların" bölümüne bakın).
+* Bu örneği farklı bir bilgisayardan çalıştırın. Şifreleme anahtarlarına erişemez, bu nedenle düz metin verilerine erişemez ve başarıyla çalıştırılmaz.
+* [Anahtarlarınızı döndürün ve temizleyin](https://msdn.microsoft.com/library/mt607048.aspx).
+* [Always encrypted ile zaten şifrelenmiş olan verileri geçirin](https://msdn.microsoft.com/library/mt621539.aspx).
+* [Always Encrypted sertifikalarını diğer istemci makinelere dağıtın](https://msdn.microsoft.com/library/mt723359.aspx#Anchor_1) ("sertifikaları uygulamalar ve kullanıcılar Için kullanılabilir hale getirme" bölümüne bakın).
 
 ## <a name="related-information"></a>İlgili bilgiler
 
-* [(İstemci geliştirme) her zaman şifreli](https://msdn.microsoft.com/library/mt147923.aspx)
-* [Saydam veri şifrelemesi](https://msdn.microsoft.com/library/bb934049.aspx)
+* [Always Encrypted (istemci geliştirme)](https://msdn.microsoft.com/library/mt147923.aspx)
+* [Saydam Veri Şifrelemesi](https://msdn.microsoft.com/library/bb934049.aspx)
 * [SQL Server şifreleme](https://msdn.microsoft.com/library/bb510663.aspx)
-* [Her zaman şifreli sihirbazını](https://msdn.microsoft.com/library/mt459280.aspx)
-* [Always Encrypted'e blogu](https://blogs.msdn.com/b/sqlsecurity/archive/tags/always-encrypted/)
+* [Always Encrypted Sihirbazı](https://msdn.microsoft.com/library/mt459280.aspx)
+* [Always Encrypted blogu](https://blogs.msdn.com/b/sqlsecurity/archive/tags/always-encrypted/)

@@ -16,18 +16,18 @@ ms.date: 05/18/2018
 ms.author: mimart
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fc9287aac567c8989564094564b92b82662e603f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7aaf2eb282bc3fd0b9f3853ce493c479a3d3c3a9
+ms.sourcegitcommit: 47ce9ac1eb1561810b8e4242c45127f7b4a4aa1a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65825926"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67807849"
 ---
 # <a name="how-to-configure-an-application-proxy-application"></a>Uygulama proxy'si uygulaması yapılandırma
 
 Bu makalede, şirket içi uygulamaları bulutta kullanıma sunmak için bir uygulama proxy'si uygulamasını Azure AD'ye nasıl anlamanıza yardımcı olur.
 
-## <a name="recommended-documents"></a>Önerilen belgeler 
+## <a name="recommended-documents"></a>Önerilen belgeler
 
 İlk Yapılandırma ve Yönetim Portalı üzerinden bir uygulama proxy'si uygulaması oluşturma hakkında bilgi edinmek için izleyin [Azure AD uygulama ara sunucusu kullanarak uygulama yayımlama](application-proxy-add-on-premises-application.md).
 
@@ -39,19 +39,15 @@ Sertifikaları karşıya yükleme ve özel etki alanlarını kullanma hakkında 
 
 Adımları takip ediyorsanız [Azure AD uygulama ara sunucusu kullanarak uygulama yayımlama](application-proxy-add-on-premises-application.md) belgeleri ve bu bilgi için hata ayrıntılarına ve düzeltmeye ilişkin öneriler görürsünüz alınırken bir hata uygulaması oluşturma uygulama. Çoğu hata iletileri, önerilen düzeltmeyi içerir. Sık karşılaşılan hataları önlemek için aşağıdakileri doğrulayın:
 
--   Uygulama proxy'si uygulaması oluşturmak için izne sahip bir yöneticisiniz
-
--   İç URL benzersizdir
-
--   Dış URL benzersizdir
-
--   URL'leri http veya https ile başlayamaz ve bitemez bir "/"
-
--   URL bir etki alanı adı veya IP adresi olmalıdır
+- Uygulama proxy'si uygulaması oluşturmak için izne sahip bir yöneticisiniz
+- İç URL benzersizdir
+- Dış URL benzersizdir
+- URL'leri http veya https ile başlayamaz ve bitemez bir "/"
+- URL bir etki alanı adı veya IP adresi olmalıdır
 
 Uygulamayı oluştururken sağ üst köşedeki hata iletisi görüntülenmelidir. Hata iletilerini görmek için bildirim simgesini de seçebilirsiniz.
 
-   ![Uyarı istemi](./media/application-proxy-config-how-to/error-message.png)
+![Uyarı istemi, Azure portalında nerede bulacağını gösterir](./media/application-proxy-config-how-to/error-message.png)
 
 ## <a name="configure-connectorsconnector-groups"></a>Bağlayıcıların/bağlayıcı gruplarını yapılandırma
 
@@ -61,19 +57,16 @@ Bağlayıcılarınızı devre dışı ise bu hizmete bağlanamıyoruz anlamına 
 
 ## <a name="upload-certificates-for-custom-domains"></a>Özel etki alanları için sertifikaları karşıya yükle
 
-Özel etki alanlarına etki alanı, dış URL'leri belirtmenizi sağlar. Özel etki alanlarını kullanmak için bu etki alanı için sertifika karşıya gerekir. Özel etki alanları ve sertifikalar hakkında daha fazla bilgi için bkz: [Azure AD uygulama proxy'sinde özel etki alanları ile çalışma](application-proxy-configure-custom-domain.md). 
+Özel etki alanlarına etki alanı, dış URL'leri belirtmenizi sağlar. Özel etki alanlarını kullanmak için bu etki alanı için sertifika karşıya gerekir. Özel etki alanları ve sertifikalar hakkında daha fazla bilgi için bkz: [Azure AD uygulama proxy'sinde özel etki alanları ile çalışma](application-proxy-configure-custom-domain.md).
 
 Sertifikanızı karşıya yüklemeyi sorunlarla karşılaşıyorsanız, sertifikayla ilgili bir sorun hakkında daha fazla bilgi için portaldaki hata iletilerini arayın. Ortak sertifika sorunları şunlardır:
 
--   Süresi dolan sertifika
-
--   Otomatik olarak imzalanan sertifika
-
--   Sertifika özel anahtar eksik
+- Süresi dolan sertifika
+- Otomatik olarak imzalanan sertifika
+- Sertifika özel anahtar eksik
 
 Sertifikayı karşıya yüklemek çalışırken sağ üst köşedeki hata iletisini görüntüler. Hata iletilerini görmek için bildirim simgesini de seçebilirsiniz.
 
-   ![Uyarı istemi](./media/application-proxy-config-how-to/error-message2.png)
-
 ## <a name="next-steps"></a>Sonraki adımlar
+
 [Azure AD uygulama ara sunucusu kullanarak uygulama yayımlama](application-proxy-add-on-premises-application.md)

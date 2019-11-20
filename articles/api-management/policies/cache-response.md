@@ -1,6 +1,6 @@
 ---
-title: Azure API management ilkesi örneği - bir arka uç hizmetine yetenekleri ekleme | Microsoft Docs
-description: Azure API management ilke örneği - özellikleri bir arka uç hizmetine ekleme işlemini gösterir. Örneğin, hava durumu tahmini API'sinde enlem ve boylam yerine bir yer adını kabul edin.
+title: Azure API yönetimi ilkesi örneği-arka uç hizmetine özellik ekleme | Microsoft Docs
+description: Azure API Management ilkesi örneği-bir arka uç hizmetine nasıl özellik ekleneceğini gösterir. Örneğin, hava durumu tahmini API'sinde enlem ve boylam yerine bir yer adını kabul edin.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,30 +9,29 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 10/13/2017
 ms.author: apimpm
-ms.openlocfilehash: 7c9edbf4b2d231453cd336521a04ba6b7714b696
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 705d7e44f64f8dc3bba669cd80dafdab078fcccc
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61062216"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70067765"
 ---
-# <a name="add-capabilities-to-a-backend-service"></a>Bir arka uç hizmetine özellikleri ekleyin
+# <a name="add-capabilities-to-a-backend-service"></a>Arka uç hizmetine özellik ekleme
 
-Bu makalede, bir arka uç hizmetine özellikleri eklemek nasıl oluşturulduğunu gösteren bir Azure API management ilke örnek gösterilmektedir. Örneğin, hava durumu tahmini API'sinde enlem ve boylam yerine bir yer adını kabul edin. Ayarlama veya ilke kodu düzenleme için açıklanan adımları izleyin [ayarlama veya düzenleme ilke](../set-edit-policies.md). Diğer örnekler için bkz [ilkesi örnekleri](../policy-samples.md).
+Bu makalede, bir arka uç hizmetine nasıl özellik ekleneceğini gösteren bir Azure API yönetim ilkesi örneği gösterilmektedir. Örneğin, hava durumu tahmini API'sinde enlem ve boylam yerine bir yer adını kabul edin. Bir ilke kodu ayarlamak veya düzenlemek için, [Ilke ayarlama veya düzenleme](../set-edit-policies.md)bölümünde açıklanan adımları izleyin. Diğer örnekleri görmek için bkz. [ilke örnekleri](../policy-samples.md).
 
 ## <a name="policy"></a>İlke
 
-Kodun içine yapıştırın **gelen** blok.
+Kodu **gelen** bloğa yapıştırın.
 
 [!code-xml[Main](../../../api-management-policy-samples/examples/Call out to an HTTP endpoint and cache the response.policy.xml)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-APIM ilkeleri hakkında daha fazla bilgi edinin:
+APıM ilkeleri hakkında daha fazla bilgi edinin:
 
 + [Dönüştürme ilkeleri](../api-management-transformation-policies.md)
 + [İlke örnekleri](../policy-samples.md)

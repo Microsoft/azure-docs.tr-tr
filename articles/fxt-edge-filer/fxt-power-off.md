@@ -1,39 +1,39 @@
 ---
-title: Nasıl bir Microsoft Azure FXT Edge dosyalayıcı birim Kapat
-description: Başlangıç ve bir Azure FXT Edge dosyalayıcı düğümünün güvenli kapatma için yordamlar
+title: Microsoft Azure FXT Edge Filer birimini kapatma
+description: Azure FXT Edge Filer düğümünü başlatma ve güvenle kapanmaya yönelik yordamlar
 author: ekpgh
 ms.service: fxt-edge-filer
-ms.topic: how-to
+ms.topic: conceptual
 ms.date: 07/01/2019
-ms.author: v-erkell
-ms.openlocfilehash: 8d779547040da9855409d3408827af2e4acd17a7
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.author: rohogue
+ms.openlocfilehash: 91445c4219abaa67385105f52515f52c87e2cf06
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67542871"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72255991"
 ---
-# <a name="how-to-safely-power-off-azure-fxt-edge-filer-hardware"></a>Nasıl güvenli bir şekilde Azure FXT Edge dosyalayıcı donanım kapatmasına
+# <a name="how-to-safely-power-off-azure-fxt-edge-filer-hardware"></a>Azure FXT Edge Filer donanımını güvenle kapatma
 
-Tek bir düğümde geçiş yapmak için fiziksel bir güç düğmesini kullanabilirsiniz, ancak, bu normal koşullar altında birim kapatmaya kullanmamanız gerekir.
+Tek bir düğüme geçiş yapmak için fiziksel güç düğmesini kullanabilseniz de, birimi normal koşullarda kapatmak için kullanmamalısınız.
 
-Bir kümenin parçası olarak Azure FXT Edge dosyalayıcı düğüm olduktan sonra donanım kapatmak için küme Denetim Masası yazılımı kullanmanız gerekir. 
+Bir Azure FXT Edge Filer düğümü bir kümenin parçası olarak kullanıldıktan sonra, donanımı kapatmak için küme Denetim Masası yazılımını kullanmanız gerekir. 
 
 > [!NOTE] 
-> Olası veri kaybı veya bozulması önlemek için her zaman bir Azure FXT Edge dosyalayıcı kapatmak için Denetim Masası yazılımı kullanın. Microsoft Müşteri Hizmetleri ve desteği tarafından Bunu yapmak için başlatmamanız sürece fiziksel güç düğmesine kapatma için kullanmayın.
+> Olası veri kaybını veya bozulmasını önlemek için, her zaman Denetim Masası yazılımını kullanarak bir Azure FXT Edge filu 'ni kapatın. Microsoft Müşteri Hizmetleri ve destek ile ilgili olarak belirtilmedikçe, kapatma için fiziksel güç düğmesini kullanmayın.
 > 
-> Elektrik Acil güç kablosu kesmek veya verilerinizi center'ın elektrik mekanizması bağlantısını kesin.
+> Elektrik acil bir durumda, güç bağlantılarının bağlantısını kesin veya veri merkezinizi elektrik bağlantısı kesme mekanizmasını kullanın.
 
-## <a name="shut-down-a-node-from-the-control-panel"></a>Denetim Masası'ndan bir düğüm kapatma
+## <a name="shut-down-a-node-from-the-control-panel"></a>Denetim masasından bir düğümü kapatma
 
-Güvenli bir şekilde bir Azure FXT Edge dosyalayıcı düğümü devre dışı güç için bu yönergeleri izleyin:
+Azure FXT Edge Filer düğümünü güvenle kapatmak için bu yönergeleri izleyin:
 
-1. Denetim Masası kümeye oturum açın. (Yönde [ayarları sayfaları](fxt-cluster-create.md#open-the-settings-pages))
-1. Tıklayın **ayarları** sekmesine ve ardından Yük **küme** > **FXT düğümleri** sayfası.
-1. Kapatmak istediğiniz bir küme düğümlerinin listesinde bulun. Tıklayın **kapatın** düğmesine kendi **eylemleri** sütun. 
-1. Birkaç dakika bekleyin. Düğümü Kapat ve kendisini gücünün kapatılmasını.
+1. Küme denetim masasında oturum açın. ( [Ayarlar sayfalarında açık](fxt-cluster-create.md#open-the-settings-pages)olan yönergeler)
+1. **Ayarlar** sekmesine tıklayın, sonra **küme** > **FXT düğümleri** sayfasını yükleyin.
+1. Küme düğümleri listesinde, kapatmak istediğiniz bir tane bulun. **Eylemler** sütununda, **Güç aşağı** düğmesine tıklayın. 
+1. Birkaç dakika bekleyin. Düğüm kapanır ve devre dışı bırakılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Durum LED'lerini ve diğer göstergeleri hakkında [İzleyici Azure FXT Edge dosyalayıcı donanım durumunu](fxt-monitor.md).
-* Azure FXT Edge dosyalayıcı power hakkında daha fazla bilgi sağlayan içinde [power kabloları bağlayın](fxt-network-power.md#connect-power-cables).
+* [Azure FXT Edge Filer donanım durumunu izlemek](fxt-monitor.md)Için durum LED 'leri ve diğer göstergeler hakkında bilgi edinin.
+* [Power kabloları](fxt-network-power.md#connect-power-cables)ile Azure FXT Edge Filer güç kaynakları hakkında daha fazla bilgi edinin.

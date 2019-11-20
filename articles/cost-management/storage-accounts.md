@@ -35,7 +35,7 @@ AWS yoksa basit depolama hizmeti (S3 için) demetine bir oluşturmanız gerekir.
 
 Yapılandırdığınız Cloudyn tarafından kullanılmak üzere Azure depolama oldukça basittir. Depolama hesabı ayrıntılarını toplayın ve bunları Cloudyn portalında kopyalayın.
 
-1. https://portal.azure.com adresinden Azure portalında oturum açın.
+1. [https://portal.azure.com](https://portal.azure.com ) adresinden Azure portalında oturum açın.
 2. Tıklayın **tüm hizmetleri**seçin **depolama hesapları**, ardından hesabını seçin ve istediğiniz depolama hesabına gidin.
 3. Depolama hesabı sayfanıza altında **ayarları**, tıklayın **erişim anahtarlarını**.
 4. Kopyalama, **depolama hesabı adı** ve **bağlantı dizesi** key1 altında.  

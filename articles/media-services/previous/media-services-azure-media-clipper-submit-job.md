@@ -1,30 +1,30 @@
 ---
-title: Azure Media Clipper'ı kırpma işlerini gönderme | Microsoft Docs
-description: Azure Media Clipper'ı kırpma işlerini gönderme adımları
+title: Azure Media Clipper kırpma işleri gönderme | Microsoft Docs
+description: Azure Media Clipper 'dan kırpma işleri gönderme adımları
 services: media-services
-keywords: clip;subclip;encoding;media
-author: dbgeorge
-manager: jasonsue
-ms.author: dwgeo
+keywords: klip; alt klip; kodlama; medya
+author: Juliako
+manager: femila
+ms.author: juliako
 ms.date: 03/14/2019
 ms.topic: article
 ms.service: media-services
-ms.openlocfilehash: f0dc6879ccbb22dbebd57de98e4610cd593318db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 04d0d2bb8939c8036ec6817c58f9ac2fbb3acd72
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61242856"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73684969"
 ---
-# <a name="submit-clipping-jobs-from-azure-media-clipper"></a>Azure Media Clipper'ı kırpma işlerini gönderme 
+# <a name="submit-clipping-jobs-from-azure-media-clipper"></a>Azure Media Clipper 'dan kırpma işleri gönderme 
 
-Azure Media Clipper'ı gerektiren bir **submitSubclipCallback** kırpma iş gönderme işlemek için uygulanması gereken yöntemini. Bu işlev, bir HTTP POST Clipper çıktının bir web hizmeti uygulamak için kullanılır. Kodlama işinin gönderebileceği bu web hizmetidir. Clipper çıktısını ya da bir medya Kodlayıcı işlenen işleri için hazır ya da dinamik bildirim filtresi çağrıları için REST API yükü kodlama standarttır. Doğrudan bu model, medya hizmetleri hesabı kimlik bilgileri istemcinin tarayıcıda güvenli olmadığı için gereklidir.
+Azure Media Clipper, kırpma işi gönderimini işlemek için uygulanması gereken bir **Submitsubclipcallback** yöntemi gerektirir. Bu işlev, bir Web hizmetine Clipper çıkışının HTTP GÖNDERISINI uygulamak içindir. Bu Web hizmeti, kodlama işini gönderebileceğiniz yerdir. Clipper çıkışı, işlenmiş işler için Media Encoder Standard kodlama ön kümesi veya dinamik bildirim filtresi çağrıları için REST API yükü olur. Media Services hesabı kimlik bilgileri istemcisinin tarayıcısında güvenli olmadığından, bu geçişli model gereklidir.
 
-Aşağıdaki sıralama diyagramı tarayıcı istemcisi, web hizmeti ve Azure Media Services arasında iş akışı gösterilmektedir: ![Azure Media Clipper sıralı diyagram](media/media-services-azure-media-clipper-submit-job/media-services-azure-media-clipper-sequence-diagram.PNG)
+Aşağıdaki sıralı diyagram, tarayıcı istemcisi, Web hizmetiniz ve Azure Media Services: ![Azure Media Clipper sıra diyagramı arasındaki iş akışını gösterir](media/media-services-azure-media-clipper-submit-job/media-services-azure-media-clipper-sequence-diagram.PNG)
 
-Yukarıdaki diyagramda, dört varlıklardır: son kullanıcının tarayıcı, web hizmetiniz, barındırma Clipper kaynakları ve Azure Media Services CDN uç noktası. Son kullanıcının web sayfasına gittiğinde, sayfanın Clipper JavaScript ve CSS kaynakları barındıran bir CDN uç noktasından alır. Son kullanıcı iş kırpma veya tarayıcıları dinamik bildirim filtresi oluşturma çağrısından yapılandırır. Son kullanıcı iş veya filtre oluşturma çağrı gönderdiğinde, tarayıcı dağıtmalısınız bir web hizmeti için iş yükü getirir. Bu web hizmetini sonuçta kırpma işi gönderir veya hesap kimlik bilgilerini kullanarak medya dosyalarınızı Azure Media Services filtresi oluşturma çağrısına Hizmetleri.
+Önceki diyagramda dört varlık şunlardır: son kullanıcının tarayıcısı, Web hizmetiniz, Clipper kaynaklarını barındıran CDN uç noktası ve Azure Media Services. Son Kullanıcı Web sayfanıza gittiğinde, sayfa, barındırma CDN uç noktasındaki Clipper JavaScript ve CSS kaynaklarını alır. Son Kullanıcı, tarayıcıdan kırpma işini veya dinamik bildirim filtresi oluşturma çağrısını yapılandırır. Son Kullanıcı işi veya filtre oluşturma çağrısını gönderdiğinde, tarayıcı iş yükünü dağıtmanız gereken bir Web hizmetine koyar. Bu Web hizmeti, Media Services hesabınızın kimlik bilgilerini kullanarak Azure Media Services için kırpma işini veya filtre oluşturma çağrısını gönderir.
 
-Aşağıdaki kod örneği bir örnek göstermektedir **submitSubclipCallback** yöntemi. Bu yöntemde, Media Encoder Standard kodlama Önayarı, HTTP POST uygulayın. POST başarılı olduysa (**sonucu**), **Promise** , aksi takdirde, bu hata ayrıntılarıyla reddedildi çözümlenir.
+Aşağıdaki kod örneğinde örnek bir **Submitsubclipcallback** yöntemi gösterilmektedir. Bu yöntemde, Media Encoder Standard Encoding önayarının HTTP GÖNDERISINI uygulayacağınızı görürsünüz. GÖNDERI başarılı olduysa (**sonuç**) **Promise** çözümlenirse, aksi takdirde hata ayrıntıları ile reddedilir.
 
 ```javascript
 // Submit Subclip Callback
@@ -55,12 +55,12 @@ var subclipper = new subclipper({
     submitSubclipCallback: onSubmitSubclip,
 });
 ```
-İş gönderme çıktısını işlenen iş için Media Encoder Standard kodlama Önayarı ya da dinamik bildirim filtreleri için REST API yükü var.
+İş gönderimi çıktısı, işlenen iş için Media Encoder Standard kodlama ön kümesi veya dinamik bildirim filtreleri için REST API yükü olur.
 
-## <a name="submitting-encoding-job-to-create-video"></a>Görüntü oluşturmak için kodlama işi gönderiliyor
-Çerçeve doğru video klip oluşturma, Media Encoder Standard bir kodlama iş gönderebilirsiniz. Videoları işlenen iş üretim kodlama, yeni bir MP4 dosyasını parçalanmış.
+## <a name="submitting-encoding-job-to-create-video"></a>Video oluşturmak için kodlama işi gönderiliyor
+Çerçeveye doğru bir video klibi oluşturmak için bir Media Encoder Standard Encoding işi gönderebilirsiniz. Kodlama işi, yeni bir parçalanmış MP4 dosyası olan işlenmiş videoları üretir.
 
-Proje çıkış sözleşme işlenmiş kırpma için aşağıdaki özelliklere sahip bir JSON nesnesidir:
+İşlenmiş kırpmayla ilgili iş çıkış sözleşmesi, aşağıdaki özelliklere sahip bir JSON nesnesidir:
 
 ```json
 {
@@ -153,10 +153,10 @@ Proje çıkış sözleşme işlenmiş kırpma için aşağıdaki özelliklere sa
 }
 ```
 
-Kodlama işi gerçekleştirmek göndermek için Media Encoder Standard ile ilişkili kodlama işi hazır. Kodlama gönderme hakkında bilgi için bu makalenin işleri görmek [.NET SDK'sı](https://docs.microsoft.com/azure/media-services/media-services-dotnet-encode-with-media-encoder-standard) veya [REST API](https://docs.microsoft.com/azure/media-services/media-services-rest-encode-asset).
+Kodlama işini gerçekleştirmek için, Media Encoder Standard kodlama işini ilişkili ön ayarla birlikte gönderebilirsiniz. [.NET SDK](https://docs.microsoft.com/azure/media-services/media-services-dotnet-encode-with-media-encoder-standard) veya [REST API](https://docs.microsoft.com/azure/media-services/media-services-rest-encode-asset)kullanarak kodlama işleri gönderme hakkında daha fazla bilgi için bu makaleye bakın.
 
-## <a name="quickly-creating-video-clips-without-encoding"></a>Hızlı bir şekilde kodlama içermeyen video klip oluşturma
-Bir kodlama işi oluşturmaya alternatif, dinamik bildirim filtreleri oluşturmak için Azure Media Clipper'ı kullanabilirsiniz. Filtreler kodlama gerektirmeyen ve hızlı bir şekilde yeni bir varlık değil oluşturulurken oluşturulabilir. Çıkış sözleşmenin bir filtre kırpma için aşağıdaki özelliklere sahip bir JSON nesnesidir:
+## <a name="quickly-creating-video-clips-without-encoding"></a>Kodlama olmadan hızla video klipleri oluşturma
+Bir kodlama işi oluşturmaya alternatif olarak, dinamik bildirim filtreleri oluşturmak için Azure Media Clipper 'ı kullanabilirsiniz. Filtreler kodlama gerektirmez ve yeni bir varlık oluşturulmadığından hızlı bir şekilde oluşturulabilir. Filtre kırpması için çıkış sözleşmesi, aşağıdaki özelliklere sahip bir JSON nesnesidir:
 
 ```json
 {
@@ -229,4 +229,4 @@ Bir kodlama işi oluşturmaya alternatif, dinamik bildirim filtreleri oluşturma
 }
 ```
 
-İlişkilendirilen filtre yükü kullanarak dinamik bildirim filtresi oluşturmak için REST çağrısı göndermek için Gönder [REST API](https://docs.microsoft.com/azure/media-services/media-services-rest-dynamic-manifest).
+Dinamik bildirim filtresi oluşturmaya yönelik REST çağrısını göndermek için [REST API](https://docs.microsoft.com/azure/media-services/media-services-rest-dynamic-manifest)kullanarak ilişkili filtre yükünü iletin.

@@ -1,7 +1,7 @@
 ---
-title: Azure DDoS koruması Azure portalını kullanarak standart yönetme
+title: Azure portal kullanarak Azure DDoS koruması standardını yönetme
 titlesuffix: Azure Virtual Network
-description: Azure DDoS koruması standart telemetri Azure İzleyici'de bir saldırının etkilerini hafifletmek için nasıl kullanılacağını öğrenin.
+description: Bir saldırıyı azaltmak için Azure Izleyici 'de Azure DDoS koruması standart telemetrisini nasıl kullanacağınızı öğrenin.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -16,220 +16,220 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/17/2019
 ms.author: kumud
-ms.openlocfilehash: 53185caa6a0492702035041a893f20a78cf1ea4d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 37a8799ca1ea986d5b47dad6e17781d7dfbacfab
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65911251"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71261692"
 ---
-# <a name="manage-azure-ddos-protection-standard-using-the-azure-portal"></a>Azure DDoS koruması Azure portalını kullanarak standart yönetme
+# <a name="manage-azure-ddos-protection-standard-using-the-azure-portal"></a>Azure portal kullanarak Azure DDoS koruması standardını yönetme
 
-Etkinleştir ve dağıtılmış engelleme (DDoS) hizmeti koruma devre dışı bırakın ve telemetri ile standart Azure DDoS koruması, DDoS saldırılarının etkisini azaltmak için kullanma hakkında bilgi edinin. DDoS koruması standart sanal makineler, yük Dengeleyiciler ve sahip bir Azure uygulama ağ geçitleri gibi Azure kaynaklarını koruyan [genel IP adresi](virtual-network-public-ip-address.md) atanmış. DDoS koruması standart ve özellikleri hakkında daha fazla bilgi için bkz: [DDoS koruması standart genel bakış](ddos-protection-overview.md).
+Dağıtılmış hizmet reddi (DDoS) korumasını etkinleştirmeyi ve devre dışı bırakmayı öğrenin ve Azure DDoS koruma standardı ile DDoS saldırılarını azaltmak için telemetri ' i kullanın. DDoS koruma standardı, sanal makineler, yük dengeleyiciler ve kendisine atanmış bir Azure [genel IP adresi](virtual-network-public-ip-address.md) olan uygulama ağ geçitleri gibi Azure kaynaklarını korur. DDoS koruma standardı ve özellikleri hakkında daha fazla bilgi edinmek için bkz. [DDoS koruması standardına genel bakış](ddos-protection-overview.md).
 
-Bu öğreticide herhangi tamamlama adımları önce adresinden Azure portalında oturum https://portal.azure.com atanmış bir hesap ile [ağ Katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolü veya bir [özel rol](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) atanan uygun listelenen eylemler [izinleri](#permissions).
+Bu öğreticide herhangi bir adımı tamamlamadan önce, [ağ katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolüne atanan bir https://portal.azure.com hesapla veya [izinlerde](#permissions)listelenen uygun eylemlere atanmış [özel bir rol](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) ile Azure Portal 'de oturum açın.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
-## <a name="create-a-ddos-protection-plan"></a>Bir DDoS koruma planı oluşturma
+## <a name="create-a-ddos-protection-plan"></a>Bir DDoS koruması planı oluşturma
 
-Bir DDoS koruma planı DDoS koruma standardını, abonelikler arasında etkin olan sanal ağlar kümesi tanımlar. Bir DDoS koruma planı kuruluşunuz ve bağlantı aynı planı için birden çok aboneliklerden Sanal Ağları için yapılandırabilirsiniz. DDoS koruma planı kendisi de plan oluşturma sırasında seçtiğiniz abonelik ile ilişkilidir. DDoS koruma planı, bölgeler ve abonelikler üzerinde çalışır. Örnek-kiracınızda bölge Doğu ABD ve bağlantı #1. abonelik planı oluşturabilirsiniz. Aynı planı için sanal ağlar farklı bölgelerde, diğer Aboneliklerdeki kiracınız bağlanabilir. Korumalı genel IP adresi sayısı 100 değerini aşmasına durumunda abonelik planı doğurur için fazla kullanım ücretleri, yanı sıra planı için yinelenen aylık fatura ilişkilidir. DDoS fiyatlandırması hakkında daha fazla bilgi için bkz. [fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/ddos-protection/).
+DDoS koruma planı, aboneliklerde DDoS koruma standardı etkin olan bir sanal ağ kümesini tanımlar. Kuruluşunuz için bir DDoS koruma planı yapılandırabilir ve sanal ağları birden çok abonelikten aynı plana bağlayabilirsiniz. DDoS koruma planının kendisi de planın oluşturulması sırasında seçtiğiniz bir abonelikle ilişkilendirilir. DDoS koruma planı bölgeler ve abonelikler arasında çalışmaktadır. Örnek-planı Doğu ABD bölgesinde oluşturabilir ve kiracınızdaki abonelik #1 bağlantı oluşturabilirsiniz. Aynı plan, kiracınız genelinde farklı bölgelerdeki diğer aboneliklerdeki sanal ağlara bağlanabilir. Planın ilişkilendirildiği abonelik, plan için aylık yinelenen faturanızı ve korunan genel IP adreslerinin sayısının 100 ' i aşması durumunda fazla kullanım ücreti sağlar. DDoS fiyatlandırması hakkında daha fazla bilgi için bkz. [fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/ddos-protection/).
 
-Birden fazla plan oluşturulmasını çoğu kuruluş için gerekli değildir. Bir plan, abonelikler arasında taşınamaz. Bir planın aboneliğinizi değiştirmek istiyorsanız, zorunda [var olan bir planı silme](#work-with-ddos-protection-plans) ve yeni bir tane oluşturun.
+Çoğu kuruluş için birden fazla planın oluşturulması gerekli değildir. Bir plan abonelikler arasında taşınamaz. Bir planın bulunduğu aboneliği değiştirmek istiyorsanız, [var olan planı silmeniz](#work-with-ddos-protection-plans) ve yeni bir tane oluşturmanız gerekir.
 
-1. Seçin **kaynak Oluştur** Azure portalında sol üst köşesindeki.
-2. Arama *DDoS*. Zaman **DDos koruma planı** arama sonuçlarında görünür.
+1. Azure portal sol üst köşesinde **kaynak oluştur** ' u seçin.
+2. *DDoS*araması yapın. Ara sonuçlarda **DDoS koruma planı** göründüğünde, bunu seçin.
 3. **Oluştur**’u seçin.
-4. Girin veya kendi değerlerinizi seçin veya girin veya aşağıdaki örneği değerleri seçin ve ardından **Oluştur**:
+4. Kendi değerlerinizi girin veya seçin ya da aşağıdaki örnek değerleri girin veya seçin ve ardından **Oluştur**' u seçin:
 
-    |Ayar        |Değer                                              |
+    |Ayar        |Value                                              |
     |---------      |---------                                          |
-    |Ad           | myDdosProtectionPlan                              |
-    |Abonelik   | Aboneliğinizi seçin.                         |
-    |Kaynak grubu | Seçin **Yeni Oluştur** girin *myResourceGroup* |
-    |Location       | Doğu ABD                                           |
+    |Name           | myDdosProtectionPlan                              |
+    |Subscription   | Aboneliğinizi seçin.                         |
+    |Resource group | **Yeni oluştur** ' u seçin ve *myresourcegroup* girin |
+    |Location       | East US                                           |
 
-## <a name="enable-ddos-for-a-new-virtual-network"></a>Yeni bir sanal ağ için DDoS etkinleştir
+## <a name="enable-ddos-for-a-new-virtual-network"></a>Yeni bir sanal ağ için DDoS 'ı etkinleştir
 
-1. Seçin **kaynak Oluştur** Azure portalında sol üst köşesindeki.
+1. Azure portal sol üst köşesinde **kaynak oluştur** ' u seçin.
 2. **Ağ**’ı ve sonra **Sanal ağ**’ı seçin.
-3. Girin veya ENTER kendi değerlerinizi seçin veya aşağıdaki örneği değerleri seçin, kalan varsayılan değerleri kabul edin ve ardından **Oluştur**:
+3. Kendi değerlerinizi girin veya seçin, aşağıdaki örnek değerleri girin veya seçin, kalan Varsayılanları kabul edin ve **Oluştur**' u seçin:
 
-    | Ayar         | Değer                                                        |
+    | Ayar         | Value                                                        |
     | ---------       | ---------                                                    |
-    | Ad            | myVirtualNetwork                                             |
-    | Abonelik    | Aboneliğinizi seçin.                                    |
-    | Kaynak grubu  | **Var olanı kullan**’ı seçin ve sonra **myResourceGroup** seçeneğini belirleyin |
-    | Location        | Doğu ABD                                                      |
-    | DDos koruması | Seçin **standart** altındaki **DDoS koruması**seçin **myDdosProtectionPlan**. Seçtiğiniz planı aynı veya farklı Abonelikteki sanal ağdan olabilir ancak her iki aboneliğin aynı Azure Active Directory kiracısı ile ilişkilendirilmesi gerekir.|
+    | Name            | myVirtualNetwork                                             |
+    | Subscription    | Aboneliğinizi seçin.                                    |
+    | Resource group  | **Var olanı kullan**’ı seçin ve sonra **myResourceGroup** seçeneğini belirleyin |
+    | Location        | East US                                                      |
+    | DDos koruması | **Standart** ' ı seçin ve **DDoS koruması**altında **myddosprotectionplan**' ı seçin. Seçtiğiniz plan, sanal ağdan aynı veya farklı bir abonelikte olabilir, ancak her iki aboneliğin de aynı Azure Active Directory kiracısıyla ilişkilendirilmesi gerekir.|
 
-DDoS standart sanal ağ için etkinleştirildiğinde bir sanal ağ başka bir kaynak grubuna veya aboneliğe taşınamıyor. Taşımanız gerekirse, DDoS standart bir sanal ağda etkin, DDoS standart ilk devre dışı bırakın, sanal ağ taşıma ve DDoS standart'ı etkinleştirin. Taşıma sonrasında, tüm korumalı genel IP adresleri sanal ağ için otomatik olarak ayarlanmış ilke eşikler sıfırlanır.
+Sanal ağ için DDoS standardı etkinleştirildiğinde bir sanal ağı başka bir kaynak grubuna veya aboneliğe taşıyamazsınız. DDoS standart özellikli bir sanal ağı taşımanız gerekiyorsa, önce DDoS standardını devre dışı bırakın, sanal ağı taşıyın ve ardından DDoS standardını etkinleştirin. Taşıma işleminden sonra, sanal ağ içindeki tüm korumalı genel IP adresleri için otomatik olarak ayarlanan ilke eşikleri sıfırlanır.
 
-## <a name="enable-ddos-for-an-existing-virtual-network"></a>Mevcut bir sanal ağı DDoS etkinleştir
+## <a name="enable-ddos-for-an-existing-virtual-network"></a>Mevcut bir sanal ağ için DDoS 'ı etkinleştir
 
-1. İçindeki adımları tamamlayarak bir DDoS koruma planı oluşturma [bir DDoS koruma planı oluşturma](#create-a-ddos-protection-plan), var olan bir DDoS koruma planı yoksa.
-2. Seçin **kaynak Oluştur** Azure portalında sol üst köşesindeki.
-3. DDoS koruması için standart, etkinleştirmek istediğiniz sanal ağ adını **arama kaynakları, hizmetleri ve belgeleri kutusu** portalın üst kısmındaki. Sanal ağın adı arama sonuçlarında görüntülendiğinde seçin.
-4. Seçin **DDoS koruması**altında **ayarları**.
-5. Seçin **standart**. Altında **DDoS koruma planı**var olan bir DDoS koruma planı ya da 1. adımda oluşturduğunuz planı seçin ve ardından **Kaydet**. Seçtiğiniz planı aynı veya farklı Abonelikteki sanal ağdan olabilir ancak her iki aboneliğin aynı Azure Active Directory kiracısı ile ilişkilendirilmesi gerekir.
+1. DDoS koruma planı [oluşturma](#create-a-ddos-protection-plan)bölümündeki adımları tamamlayarak bir DDoS koruma planı oluşturun.
+2. Azure portal sol üst köşesinde **kaynak oluştur** ' u seçin.
+3. Portalın üst kısmındaki **kaynakları, hizmetleri ve belgeleri ara kutusuna** Için DDoS koruması standardını etkinleştirmek istediğiniz sanal ağın adını girin. Arama sonuçlarında sanal ağın adı göründüğünde seçin.
+4. **Ayarlar**altında **DDoS koruması**' nı seçin.
+5. **Standart**' ı seçin. **DDoS koruma planı**altında var olan bir DDoS koruma planı veya 1. adımda oluşturduğunuz planı seçin ve ardından **Kaydet**' i seçin. Seçtiğiniz plan, sanal ağdan aynı veya farklı bir abonelikte olabilir, ancak her iki aboneliğin de aynı Azure Active Directory kiracısıyla ilişkilendirilmesi gerekir.
 
-## <a name="disable-ddos-for-a-virtual-network"></a>Sanal ağı DDoS devre dışı bırak
+## <a name="disable-ddos-for-a-virtual-network"></a>Sanal ağ için DDoS 'ı devre dışı bırakma
 
-1. İçinde DDoS koruma standardını devre dışı bırakmak istediğiniz sanal ağ adını **arama kaynakları, hizmetleri ve belgeleri kutusu** portalın üst kısmındaki. Sanal ağın adı arama sonuçlarında görüntülendiğinde seçin.
-2. Seçin **DDoS koruması**altında **ayarları**.
-3. Seçin **temel** altında **DDoS koruma planı** seçip **Kaydet**.
+1. Portalın üst kısmındaki **kaynakları, hizmetleri ve belgeleri arayın kutusuna** Için DDoS koruması standardını devre dışı bırakmak istediğiniz sanal ağın adını girin. Arama sonuçlarında sanal ağın adı göründüğünde seçin.
+2. **Ayarlar**altında **DDoS koruması**' nı seçin.
+3. **DDoS koruma planı** altında **temel** ' yı seçin ve ardından **Kaydet**' i seçin.
 
-## <a name="work-with-ddos-protection-plans"></a>DDoS koruma planları ile çalışma
+## <a name="work-with-ddos-protection-plans"></a>DDoS koruma planlarıyla çalışma
 
-1. Seçin **tüm hizmetleri** portalın sol üst köşesindeki,.
-2. Girin *DDoS* içinde **filtre** kutusu. Zaman **DDoS koruma planları** sonuçlarda görüntülenmesi, onu seçin.
-3. Listeden görüntülemek istediğiniz koruma planı seçin.
+1. Portalın sol tarafındaki **tüm hizmetler** ' i seçin.
+2. **Filtre** kutusuna *DDoS* girin. **DDoS koruma planları** sonuçlarda görüntülendiğinde, bunu seçin.
+3. Listeden görüntülemek istediğiniz koruma planını seçin.
 4. Planla ilişkili tüm sanal ağlar listelenir.
-5. Bir planı silmek istiyorsanız, tüm sanal ağları verilerden ilişkilendirmesini kaldırmanız gerekir. Bir sanal ağdan bir plan ile ilişkisini kaldırma edinmek için bkz [bir sanal ağ için devre dışı DDoS](#disable-ddos-for-a-virtual-network).
+5. Bir planı silmek istiyorsanız, önce tüm sanal ağların ilişkisini kaldırmanız gerekir. Bir planın bir sanal ağla ilişkilendirmesini kaldırmak için bkz. [sanal ağ Için DDoS 'ı devre dışı bırakma](#disable-ddos-for-a-virtual-network).
 
 ## <a name="configure-alerts-for-ddos-protection-metrics"></a>DDoS koruma ölçümleri için uyarıları yapılandırma
 
-Azure İzleyici uyarı yapılandırması'nı kullanarak herhangi bir saldırı sırasında etkin bir risk azaltma olduğunda sizi uyarmak için kullanılabilir DDoS koruma ölçümleri seçebilirsiniz. Belirtilen adresi, koşullar karşılandığında bir uyarı e-posta alır:
+Azure Izleyici uyarı yapılandırması kullanılarak saldırı sırasında etkin bir risk azaltma olduğunda sizi uyarmak için kullanılabilir DDoS koruma ölçümlerinden herhangi birini seçebilirsiniz. Koşullar karşılandığında, belirtilen adres bir uyarı e-postası alır:
 
-1. Seçin **tüm hizmetleri** portalın sol üst köşesindeki,.
-2. Girin *İzleyici* içinde **filtre** kutusu. Zaman **İzleyici** göründüğü sonuçlarında seçin.
-3. Seçin **ölçümleri** altında **paylaşılan hizmetleri**.
-4. Girin veya kendi değerlerinizi seçin veya aşağıdaki örneği değerleri girin, geri kalan varsayılan ayarları kabul edin ve ardından **Tamam**:
+1. Portalın sol tarafındaki **tüm hizmetler** ' i seçin.
+2. **Filtre** kutusuna *izleyiciyi* girin. Sonuçlarda **izleyici** göründüğünde seçin.
+3. **PAYLAŞıLAN hizmetler**altında **ölçümler** ' i seçin.
+4. Kendi değerlerinizi girin veya seçin veya aşağıdaki örnek değerleri girip, kalan Varsayılanları kabul edin ve ardından **Tamam**' ı seçin:
 
-    |Ayar                  |Değer                                                                                               |
+    |Ayar                  |Value                                                                                               |
     |---------                |---------                                                                                           |
-    |Ad                     | myDdosAlert                                                                                        |
-    |Abonelik             | Uyarıları almak istediğiniz genel IP adresini içeren aboneliği seçin.        |
-    |Kaynak grubu           | Uyarıları almak istediğiniz genel IP adresini içeren kaynak grubunu seçin.      |
-    |Resource                 | Uyarıları almak istediğiniz genel IP adresini içeren bir genel IP adresi seçin. Bir sanal ağdaki kaynaklara atanan genel IP adresleri DDoS izler. Herhangi bir kaynağa genel IP adresleri sanal ağ içinde yoksa, öncelikle bir genel IP adresiyle bir kaynak oluşturmanız gerekir. Genel IP adresini kaynak listelenen Yöneticisi aracılığıyla (Klasik değil) dağıtılan tüm kaynakları izleyebilirsiniz [Azure Hizmetleri için sanal ağ](virtual-network-for-azure-services.md#services-that-can-be-deployed-into-a-virtual-network), Azure App Service ortamları ve Azure VPN ağ geçidi dışında. Bu öğretici ile devam etmek için hızlı bir şekilde oluşturabileceğiniz bir [Windows](../virtual-machines/windows/quick-create-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json) veya [Linux](../virtual-machines/linux/quick-create-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json) sanal makine.                   |
-    |Ölçüm                   | Altında DDoS saldırı veya değil                                                                            |
-    |Eşik                | 1 - **1** saldırı altında olduğu anlamına gelir. **0** Saldırıya uğramış olmamak anlamına gelir.                         |
-    |Dönem                   | Seçtiğiniz herhangi bir değer seçin.                                                                   |
-    |E-posta ile bildir         | Onay kutusunu işaretleyin                                                                                  |
-    |Ek yönetici | Bir e-posta sahibi, katkıda bulunan veya okuyucu aboneliğin değilseniz, e-posta adresinizi girin. |
+    |Name                     | myDdosAlert                                                                                        |
+    |Subscription             | Uyarılarını almak istediğiniz genel IP adresini içeren aboneliği seçin.        |
+    |Resource group           | Uyarılarını almak istediğiniz genel IP adresini içeren kaynak grubunu seçin.      |
+    |Resource                 | Uyarıları almak istediğiniz genel IP adresini içeren genel IP adresini seçin. DDoS, bir sanal ağ içindeki kaynaklara atanan genel IP adreslerini izler. Sanal ağda genel IP adresleri olan kaynaklarınız yoksa, önce genel IP adresine sahip bir kaynak oluşturmanız gerekir. Azure App Service ortamları ve Azure VPN Gateway dışında [Azure hizmetleri Için sanal ağda](virtual-network-for-azure-services.md#services-that-can-be-deployed-into-a-virtual-network)listelenen Kaynak Yöneticisi (klasik değil) aracılığıyla dağıtılan tüm KAYNAKLARıN genel IP adresini izleyebilirsiniz. Bu öğreticiye devam etmek için hızlı bir şekilde [Windows](../virtual-machines/windows/quick-create-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json) veya [Linux](../virtual-machines/linux/quick-create-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json) sanal makinesi oluşturabilirsiniz.                   |
+    |Ölçüm                   | DDoS saldırısı altında                                                                            |
+    |Eşik                | 1- **1** saldırı altında olduğunuz anlamına gelir. **0** saldırı altında olmayan anlamına gelir.                         |
+    |Süre                   | Seçtiğiniz değeri seçin.                                                                   |
+    |E-postayla bildir         | Onay kutusunu işaretleyin                                                                                  |
+    |Ek yönetici | Abonelik için bir e-posta sahibi, katkıda bulunan veya okuyucu değilseniz e-posta adresinizi girin. |
 
-    Saldırı algılama birkaç dakika içinde Azure İzleyici ölçümleri şu resme benzer bir e-posta alırsınız:
+    Birkaç dakika içinde saldırı algılama sırasında, Azure Izleyici ölçümlerinden aşağıdaki resme benzer bir e-posta alırsınız:
 
-    ![Saldırı uyarı](./media/manage-ddos-protection/ddos-alert.png)
+    ![Saldırı Uyarısı](./media/manage-ddos-protection/ddos-alert.png)
 
 
-Uyarınız doğrulamak için bir DDoS saldırısının benzetimini yapmak için bkz: [doğrulama DDoS algılama](#validate-ddos-detection).
+Uyarı doğrulamanızı sağlamak için DDoS saldırısının benzetimini yapmak için bkz. [DDoS algılamayı doğrulama](#validate-ddos-detection).
 
-Ayrıca daha fazla bilgi edinebilirsiniz [Web kancalarını yapılandırma](../azure-monitor/platform/alerts-webhooks.md?toc=%2fazure%2fvirtual-network%2ftoc.json) ve [logic apps](../logic-apps/logic-apps-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) uyarılar oluşturmak için.
+Ayrıca, uyarı oluşturmak için [Web kancaları](../azure-monitor/platform/alerts-webhooks.md?toc=%2fazure%2fvirtual-network%2ftoc.json) ve [Logic Apps](../logic-apps/logic-apps-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) yapılandırma hakkında daha fazla bilgi edinebilirsiniz.
 
-## <a name="use-ddos-protection-telemetry"></a>DDoS koruması telemetri kullanma
+## <a name="use-ddos-protection-telemetry"></a>DDoS koruması telemetrisini kullanma
 
-Telemetri bir saldırı, gerçek zamanlı olarak Azure İzleyici sağlanır. Telemetri, genel bir IP adresi altında azaltma süresi için kullanılabilir. Önce veya bir saldırıya ortadan kalktıktan sonra telemetrisi görmüyorum.
+Bir saldırının telemetrisi, Azure Izleyici aracılığıyla gerçek zamanlı olarak sağlanır. Telemetri yalnızca genel bir IP adresinin risk altında olduğu süre boyunca kullanılabilir. Bir saldırının etkilerinin azaltılmadan önce veya sonra telemetri görmezsiniz.
 
-1. Seçin **tüm hizmetleri** portalın sol üst köşesindeki,.
-2. Girin *İzleyici* içinde **filtre** kutusu. Zaman **İzleyici** göründüğü sonuçlarında seçin.
-3. Seçin **ölçümleri**altında **paylaşılan hizmetleri**.
-4. Seçin **abonelik** ve **kaynak grubu** için telemetri istediğiniz genel IP adresini içerir.
-5. Seçin **genel IP adresi** için **kaynak türü**, ardından telemetri için istediğiniz belirli genel IP adresini seçin.
-6. Bir dizi **kullanılabilir ölçümler** ekranın sol tarafında görünür. İçinde seçili olduğunda, bu ölçümleri grafiği çizilecek **Azure İzleyici ölçüm grafiği** genel bakış ekranında.
-7. Seçin **toplama** olarak yazın **Maks**
+1. Portalın sol tarafındaki **tüm hizmetler** ' i seçin.
+2. **Filtre** kutusuna *izleyiciyi* girin. Sonuçlarda **izleyici** göründüğünde seçin.
+3. **PAYLAŞıLAN hizmetler**altında **ölçümler**' i seçin.
+4. Telemetriyi istediğiniz genel IP adresini içeren **aboneliği** ve **kaynak grubunu** seçin.
+5. **Kaynak türü**IÇIN **genel IP adresi** ' ni seçin ve ardından Telemetriyi istediğiniz belirli genel IP adresini seçin.
+6. Ekranın sol tarafında bir dizi **kullanılabilir ölçüm** görüntülenir. Bu ölçümler seçildiğinde, genel bakış ekranında **Azure Izleyici ölçümleri grafiğinde** grafiği kaldırılır.
+7. **Toplama** türünü **en fazla** olarak seçin
 
-Ölçüm adları farklı paket türleri ve paketleri karşılaştırması bayt etiket adları her ölçümü üzerinde temel bir yapısı ile aşağıdaki gibi sunar:
+Ölçüm adları farklı paket türleri ve bayt ve paketlerin yanı sıra, her ölçüm üzerinde aşağıdaki gibi temel bir etiket adı vardır:
 
-- **Bırakılan etiket adı** (örneğin, **gelen paketlerin bırakılan DDoS**): Paket DDoS koruma sistemi tarafından bırakılan/tersten sayısı.
-- **İletilen etiket adı** (örneğin **gelen paketlerin iletilmesi DDoS**): ' % S'hedef VIP – filtre uygulanmamış trafik DDoS sistem tarafından iletilen paketler sayısı.
-- **Hiçbir etiket adı** (örneğin **gelen paketlerin DDoS**): Bırakılan ve iletilen paketlerinin toplamını temsil eden temizleme sisteme – gelen paketlerinin toplam sayısı.
+- **Bırakılan etiket adı** (örneğin, **gelen paketler, DDoS bırakıldı**): DDoS koruma sistemi tarafından bırakılan/itilen paketlerin sayısı.
+- **İletilen etiket adı** (örneğin, **DDoS Ileten gelen paketler**): DDoS sistemi tarafından, filtrelenmemiş hedef VIP 'ye iletilen paketlerin sayısı.
+- **Etiket adı yok** (örneğin, **gelen paketler DDoS**): Bırakılan ve iletilen paketlerin toplamını temsil eden, temizleme sistemine gelen toplam paket sayısı.
 
-Telemetri doğrulamak için bir DDoS saldırısının benzetimini yapmak için bkz: [doğrulama DDoS algılama](#validate-ddos-detection).
+Telemetrinin doğrulanması için DDoS saldırısının benzetimini yapmak için bkz. [DDoS algılamayı doğrulama](#validate-ddos-detection).
 
-## <a name="view-ddos-mitigation-policies"></a>DDoS önleme ilkelerini görüntüle
+## <a name="view-ddos-mitigation-policies"></a>DDoS risk azaltma ilkelerini görüntüleme
 
-DDoS koruması standart DDoS etkin olan sanal ağda korumalı kaynağa her genel IP adresi için üç otomatik olarak ayarlanmış bir risk azaltma ilkeleri (TCP SYN, TCP ve UDP) uygular. İlke eşikleri seçerek görüntüleyebilirsiniz **DDoS saldırılarının tetiklemek için TCP gelen paketleri** ve **DDoS saldırılarının tetiklemek için gelen UDP paketlerini** Ölçümleriyle **toplama** 'Max' aşağıdaki resimde gösterildiği gibi yazın:
+DDoS koruması standardı, DDoS 'ın etkinleştirildiği sanal ağdaki korumalı kaynağın her genel IP adresi için otomatik olarak ayarlanmış üç hafifletme ilkesi (TCP SYN, TCP & UDP) uygular. Aşağıdaki resimde gösterildiği gibi, **toplama** türü olan DDoS azaltma ölçümlerini ' Max ' olarak tetiklemek Için, DDoS azaltma ve **gelen UDP paketlerini** **tetiklemek üzere gelen TCP paketlerini** seçerek ilke eşiklerini görüntüleyebilirsiniz:
 
-![Risk azaltma ilkeleri görüntüle](./media/manage-ddos-protection/view-mitigation-policies.png)
+![Risk azaltma ilkelerini görüntüleme](./media/manage-ddos-protection/view-mitigation-policies.png)
 
-Azure machine learning tabanlı ağ trafiği profil aracılığıyla otomatik yapılandırılmış ilke eşikleri. Yalnızca ilke eşik aşıldığında DDoS saldırılarının saldırıya IP adresi için oluşuyor.
+İlke eşikleri, Azure Machine Learning tabanlı ağ trafiği profili oluşturma yöntemiyle otomatik olarak yapılandırılır. Yalnızca ilke eşiğine ulaşıldığında, saldırı altındaki IP adresi için DDoS risk azaltma meydana gelir.
 
-## <a name="configure-ddos-attack-analytics"></a>DDoS saldırı analytics yapılandırın
-Azure DDoS koruması standart saldırı ayrıntılı Öngörüler ve görselleştirme DDoS saldırı analizlerle sağlar. Müşterilerin sanal ağlarında DDoS saldırılarına karşı koruma, saldırı trafiği ve saldırı azaltma raporlar ve risk azaltma akış günlükleri aracılığıyla saldırının etkilerini hafifletmek için gerçekleştirilen eylemleri görünürlük ayrıntılı. 
+## <a name="configure-ddos-attack-analytics"></a>DDoS saldırı analizlerini yapılandırma
+Azure DDoS koruması standardı, DDoS saldırı analiziyle ayrıntılı saldırı öngörüleri ve görselleştirmeleri sağlar. Sanal ağlarını DDoS saldırılarına karşı koruyan müşteriler, saldırı saldırılarına karşı saldırı ve risk azaltma & raporları aracılığıyla saldırının etkilerini azaltmak için gerçekleştirilen saldırı ve eylemler hakkında ayrıntılı görünürlük sağlar. 
 
-## <a name="configure-ddos-attack-mitigation-reports"></a>DDoS saldırı azaltma raporlarını yapılandırma
-Saldırı azaltma raporlarını kaynağınızda saldırı hakkında ayrıntılı bilgi sağlamak için toplanır Netflow Protokolü verileri kullanır. Bir genel IP kaynağı, Saldırıya uğramış olduğundan her zaman, risk azaltma başlar başlamaz rapor oluşturma başlatılır. Olacaktır artımlı bir rapor için tüm risk azaltma süresi 5 dakikada bir ve azaltma sonrası raporu oluşturulur. Bu, DDoS saldırılarının daha uzun bir süre devam eder, bir olay, her 5 dakikada en geçerli anlık görüntü azaltma raporu görüntülemek mümkün olmayacak ve tam bir kez saldırısı riskini azaltma özeti üzerinde olduğundan emin olun içindir. 
+## <a name="configure-ddos-attack-mitigation-reports"></a>DDoS saldırı risk azaltma raporlarını yapılandırma
+Saldırı risk azaltma raporları, kaynak üzerinde saldırı hakkında ayrıntılı bilgi sağlamak için toplanan Netflow protokol verilerini kullanır. Genel bir IP kaynağı saldırı altında olduğunda, risk azaltma başladıktan sonra rapor oluşturma başlatılır. Her 5 dakikada bir ve risk azaltma süresi boyunca bir azaltma sonrası raporuyla oluşturulan bir artımlı rapor olacaktır. Bu, DDoS saldırısının daha uzun bir süre boyunca devam ettiğinden emin olmak için, risk azaltma süresi bittikten sonra, her 5 dakikada bir azaltma raporunun en güncel anlık görüntüsünü ve tüm Özeti görüntüleyebileceksiniz. 
 
-1. Seçin **tüm hizmetleri** portalın sol üst köşesindeki,.
-2. Girin *İzleyici* içinde **filtre** kutusu. Zaman **İzleyici** göründüğü sonuçlarında seçin.
-3. Altında **ayarları**seçin **tanılama ayarları**.
-4. Seçin **abonelik** ve **kaynak grubu** oturum istediğiniz genel IP adresini içerir.
-5. Seçin **genel IP adresi** için **kaynak türü**, ölçümler için oturumu istediğiniz belirli genel IP adresi'ı seçin.
-6. Seçin **DDoSMitigationReports günlükleri toplamak için tanılamayı açın** ve gereksinim duyduğunuz kadar çok aşağıdaki seçeneklerden birini seçin:
+1. Portalın sol tarafındaki **tüm hizmetler** ' i seçin.
+2. **Filtre** kutusuna *izleyiciyi* girin. Sonuçlarda **izleyici** göründüğünde seçin.
+3. **Ayarlar**altında **Tanılama ayarları**' nı seçin.
+4. Günlüğe kaydetmek istediğiniz genel IP adresini içeren **aboneliği** ve **kaynak grubunu** seçin.
+5. **Kaynak türü**IÇIN **genel IP adresi** ' ni seçin ve ardından ölçümlerini günlüğe kaydetmek istediğiniz belirli genel IP adresini seçin.
+6. **DDoSMitigationReports günlüğünü toplamak için tanılamayı aç** ' ı seçin ve ardından ihtiyacınız olan aşağıdaki seçeneklerden birçoğunu seçin:
 
-    - **Bir depolama hesabında arşivle**: Veriler bir Azure depolama hesabına yazılır. Bu seçenek hakkında daha fazla bilgi için bkz. [tanılama günlüklerini arşivleme](../azure-monitor/platform/archive-diagnostic-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
-    - **Olay hub'ına Stream**: Günlük alıcı günlüklerini kullanarak bir Azure olay hub'ı seçmenizi sağlar. Event hubs Splunk veya diğer SIEM sistemleriyle tümleştirme olanak tanır. Bu seçenek hakkında daha fazla bilgi için bkz. [Stream tanılama günlükleri Olay hub'ına](../azure-monitor/platform/diagnostic-logs-stream-event-hubs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
-    - **Log Analytics'e gönderme**: Günlükleri Azure İzleyici'hizmetine yazar. Bu seçenek hakkında daha fazla bilgi için bkz. [kullanımı Azure İzleyici günlüklerine ait günlükleri toplayın](../azure-monitor/platform/collect-azure-metrics-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+    - **Bir depolama hesabına Arşivle**: Veriler bir Azure depolama hesabına yazılır. Bu seçenek hakkında daha fazla bilgi edinmek için bkz. [Arşiv tanılama günlükleri](../azure-monitor/platform/archive-diagnostic-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+    - **Bir olay hub 'ına akış**: Bir Azure Olay Hub 'ı kullanarak günlük alıcısının günlükleri seçmesine izin verir. Olay Hub 'ları, splunk veya diğer SıEM sistemleriyle tümleştirmeyi etkinleştirir. Bu seçenek hakkında daha fazla bilgi edinmek için bkz. [bir olay hub 'ına tanılama günlüklerini akışa](../azure-monitor/platform/resource-logs-stream-event-hubs.md?toc=%2fazure%2fvirtual-network%2ftoc.json)alma.
+    - **Log Analytics gönder**: Günlükleri Azure Izleyici hizmetine yazar. Bu seçenek hakkında daha fazla bilgi edinmek için bkz. [Azure izleyici günlüklerinde kullanılacak günlükleri toplama](../azure-monitor/platform/collect-azure-metrics-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
 
-Artımlı ve sonrası saldırı azaltma raporları aşağıdaki alanları içerir.
-- Saldırı vektörlerinin
+Hem artımlı & saldırı sonrası risk azaltma raporları aşağıdaki alanları içerir
+- Saldırı vektörleri
 - Trafik istatistikleri
-- Atılan paketlerin nedeni
-- Protokollerin çeşitliliğinden
-- Kaynak ülke veya bölgelerde 10 üst
-- İlk 10 kaynak Asn'ler
+- Bırakılan paketlerin nedeni
+- Dahil edilen protokoller
+- İlk 10 kaynak ülke veya bölge
+- İlk 10 kaynak ASNs
 
-## <a name="configure-ddos-attack-mitigation-flow-logs"></a>DDoS saldırı azaltma akış günlüklerini yapılandırma
-Saldırı azaltma akış günlükleri trafiğin bırakılmasına gözden geçirmek izin trafiği ve diğer ilginç datapoints'ler neredeyse gerçek zamanlı etkin bir DDoS saldırı sırasında iletilir. Bu veri akışını sabit SIEM Sistemlerinizle neredeyse gerçek zamanlı izleme, olay hub'ı aracılığıyla içine alma, olası eylemleri ve savunma işlemlerinizin ihtiyacını ele. 
+## <a name="configure-ddos-attack-mitigation-flow-logs"></a>DDoS saldırısı risk azaltma akış günlüklerini yapılandırma
+Saldırı risk azaltma akış günlükleri, etkin bir DDoS saldırısı sırasında bırakılan trafiği, iletilen trafiği ve diğer ilgi çekici veri noktalarını neredeyse gerçek zamanlı olarak incelemenizi sağlar. Bu verilerin sabit akışını, neredeyse gerçek zamanlı izleme için Olay Hub 'ı aracılığıyla SıEM sistemlerinize alabilir, olası eylemleri gerçekleştirebilir ve savunma operasyonlarınızın gereksinimini ortadan kaldırabilirsiniz. 
 
-1. Seçin **tüm hizmetleri** portalın sol üst köşesindeki,.
-2. Girin *İzleyici* içinde **filtre** kutusu. Zaman **İzleyici** göründüğü sonuçlarında seçin.
-3. Altında **ayarları**seçin **tanılama ayarları**.
-4. Seçin **abonelik** ve **kaynak grubu** oturum istediğiniz genel IP adresini içerir.
-5. Seçin **genel IP adresi** için **kaynak türü**, ölçümler için oturumu istediğiniz belirli genel IP adresi'ı seçin.
-6. Seçin **DDoSMitigationFlowLogs günlükleri toplamak için tanılamayı açın** ve gereksinim duyduğunuz kadar çok aşağıdaki seçeneklerden birini seçin:
+1. Portalın sol tarafındaki **tüm hizmetler** ' i seçin.
+2. **Filtre** kutusuna *izleyiciyi* girin. Sonuçlarda **izleyici** göründüğünde seçin.
+3. **Ayarlar**altında **Tanılama ayarları**' nı seçin.
+4. Günlüğe kaydetmek istediğiniz genel IP adresini içeren **aboneliği** ve **kaynak grubunu** seçin.
+5. **Kaynak türü**IÇIN **genel IP adresi** ' ni seçin ve ardından ölçümlerini günlüğe kaydetmek istediğiniz belirli genel IP adresini seçin.
+6. **DDoSMitigationFlowLogs günlüğünü toplamak için tanılamayı aç** ' ı seçin ve ardından ihtiyacınız olan aşağıdaki seçeneklerden birçoğunu seçin:
 
-    - **Bir depolama hesabında arşivle**: Veriler bir Azure depolama hesabına yazılır. Bu seçenek hakkında daha fazla bilgi için bkz. [tanılama günlüklerini arşivleme](../azure-monitor/platform/archive-diagnostic-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
-    - **Olay hub'ına Stream**: Günlük alıcı günlüklerini kullanarak bir Azure olay hub'ı seçmenizi sağlar. Event hubs Splunk veya diğer SIEM sistemleriyle tümleştirme olanak tanır. Bu seçenek hakkında daha fazla bilgi için bkz. [Stream tanılama günlükleri Olay hub'ına](../azure-monitor/platform/diagnostic-logs-stream-event-hubs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
-    - **Log Analytics'e gönderme**: Günlükleri Azure İzleyici'hizmetine yazar. Bu seçenek hakkında daha fazla bilgi için bkz. [kullanımı Azure İzleyici günlüklerine ait günlükleri toplayın](../azure-monitor/platform/collect-azure-metrics-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
-1. Azure analiz panosunda akış günlükleri verilerini görüntülemek için örnek panoyu içeri aktarabilirsiniz https://github.com/Anupamvi/Azure-DDoS-Protection/raw/master/flowlogsbyip.zip
+    - **Bir depolama hesabına Arşivle**: Veriler bir Azure depolama hesabına yazılır. Bu seçenek hakkında daha fazla bilgi edinmek için bkz. [Arşiv tanılama günlükleri](../azure-monitor/platform/archive-diagnostic-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+    - **Bir olay hub 'ına akış**: Bir Azure Olay Hub 'ı kullanarak günlük alıcısının günlükleri seçmesine izin verir. Olay Hub 'ları, splunk veya diğer SıEM sistemleriyle tümleştirmeyi etkinleştirir. Bu seçenek hakkında daha fazla bilgi edinmek için bkz. [bir olay hub 'ına tanılama günlüklerini akışa](../azure-monitor/platform/resource-logs-stream-event-hubs.md?toc=%2fazure%2fvirtual-network%2ftoc.json)alma.
+    - **Log Analytics gönder**: Günlükleri Azure Izleyici hizmetine yazar. Bu seçenek hakkında daha fazla bilgi edinmek için bkz. [Azure izleyici günlüklerinde kullanılacak günlükleri toplama](../azure-monitor/platform/collect-azure-metrics-logs.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+1. Azure Analytics panosu 'nda akış günlüğü verilerini görüntülemek için, örnek panoyu şuradan içeri aktarabilirsiniz https://github.com/Anupamvi/Azure-DDoS-Protection/raw/master/flowlogsbyip.zip
 
-Akış günlükleri aşağıdaki alanları olacaktır: 
+Akış günlükleri aşağıdaki alanlara sahip olur: 
 - Kaynak IP
 - Hedef IP
 - Kaynak Bağlantı Noktası 
 - Hedef bağlantı noktası 
 - Protokol türü 
-- Risk azaltma sırasında gerçekleştirilen eylem
+- Risk azaltma sırasında gerçekleştirilecek eylem
 
 
 
-## <a name="validate-ddos-detection"></a>DDoS algılama doğrula
+## <a name="validate-ddos-detection"></a>DDoS algılamayı doğrulama
 
-Microsoft ile kurdu [BreakingPoint Cloud](https://www.ixiacom.com/products/breakingpoint-cloud) burada oluşturun DDoS koruması etkinleştirilmiş genel IP adresleri simülasyonlar için trafiği bir arabirim oluşturmak için. Kesme noktası bulut benzetim yapmanıza olanak sağlar:
+Microsoft, simülasyon için DDoS koruması etkinleştirilmiş genel IP adreslerine karşı trafik oluşturabileceğiniz bir arabirim oluşturmak üzere [BreakingPoint bulutu](https://www.ixiacom.com/products/breakingpoint-cloud) ile işbirliği yaptı. Kesme noktası bulutu benzetimi şunları yapmanıza olanak sağlar:
 
-- Microsoft Azure DDoS koruması, Azure kaynaklarınızı DDoS saldırılarına karşı nasıl koruduğunu doğrula
-- Olay yanıtlama işleminize DDoS saldırıya en iyi duruma getirme
-- Belge DDoS uygunluk
-- Ağ güvenlik gruplarını eğitin
+- DDoS korumasının Microsoft Azure Azure kaynaklarınızı DDoS saldırılarına karşı koruduğunu doğrulayın
+- DDoS saldırısı kapsamındaki olay yanıt sürecinizi iyileştirin
+- DDoS uyumluluğunu belgele
+- Ağ Güvenlik ekiplerinizi eğitme
 
-## <a name="view-ddos-protection-alerts-in-azure-security-center"></a>Azure Güvenlik Merkezi'ndeki DDoS koruması Uyarıları görüntüle
+## <a name="view-ddos-protection-alerts-in-azure-security-center"></a>Azure Güvenlik Merkezi 'nde DDoS koruma uyarılarını görüntüleme
 
-Azure Güvenlik Merkezi bir listesini sağlar [güvenlik uyarıları](/azure/security-center/security-center-managing-and-responding-alerts), araştırın ve sorunları düzeltmenize yardımcı olacak bilgiler ile. Bu özellik sayesinde, uyarılar, DDoS saldırı ilgili uyarıları ve yakın zamanda saldırının etkilerini hafifletmek için yapılan Eylemler dahil olmak üzere, birleşik bir görünümünü alırsınız.
-İki belirli uyarılar için herhangi bir DDoS göreceği saldırı algılama ve önleme vardır:
+Azure Güvenlik Merkezi, sorunları araştırmaya ve düzeltmeye yardımcı olacak bilgiler içeren [güvenlik uyarılarının](/azure/security-center/security-center-managing-and-responding-alerts)bir listesini sağlar. Bu özellikle, DDoS saldırılarıyla ilgili uyarılar ve saldırıyı neredeyse güncel olarak azaltmak için gerçekleştirilecek eylemler dahil olmak üzere uyarıların birleştirilmiş bir görünümünü alırsınız.
+Tüm DDoS saldırıları algılama ve risk azaltma için göreceğiniz iki özel uyarı vardır:
 
-- **DDoS saldırı algılandığında genel IP için**: DDoS koruması hizmeti, genel IP adreslerinden birini bir DDoS saldırısının hedef olduğunu algıladığında, bu uyarı oluşturulur.
-- **DDoS saldırılarının azaltılabilir genel IP için**: Genel IP adresini bir saldırı azaltılabilir olduğunda bu uyarı oluşturulur.
-Uyarıları görüntülemek için Aç **Güvenlik Merkezi** Azure portalında. Altında **tehdit koruması**seçin **güvenlik uyarıları**. Aşağıdaki ekran görüntüsünde, DDoS saldırı uyarılar örneği gösterilmektedir.
+- **Genel IP Için DDoS saldırısı algılandı**: Bu uyarı, DDoS Koruması hizmeti, genel IP adreslerinizin bir DDoS saldırısı hedefi olduğunu algıladığında üretilir.
+- **Genel IP Için DDoS saldırısı azaltıldığında**: Bu uyarı, genel IP adresindeki bir saldırı azaltıldığında oluşturulur.
+Uyarıları görüntülemek için Azure portal **Güvenlik Merkezi** 'ni açın. **Tehdit koruması**altında **güvenlik uyarıları**' nı seçin. Aşağıdaki ekran görüntüsünde, DDoS saldırı uyarılarının bir örneği gösterilmektedir.
 
-![Azure Güvenlik Merkezi'nde DDoS uyarı](./media/manage-ddos-protection/ddos-alert-asc.png)
+![Azure Güvenlik Merkezi 'nde DDoS uyarısı](./media/manage-ddos-protection/ddos-alert-asc.png)
 
-Uyarılar, saldırı, coğrafi ve tehdit bilgileri ve düzeltmeler adımları altında olan ortak IP adresi hakkında genel bilgiler içerir.
+Uyarılar, saldırı altında genel IP adresi, coğrafi ve tehdit bilgileri ve düzeltmeler adımları hakkında genel bilgiler içerir.
 
 ## <a name="permissions"></a>İzinler
 
-DDoS koruma planları ile çalışmak için hesabınızı atanmalıdır [ağ Katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolü veya bir [özel](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) uygun eylemleri atanan rolü aşağıdaki tabloda listelenen:
+DDoS koruma planlarıyla çalışmak için, hesabınız [ağ katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolüne veya aşağıdaki tabloda listelenen uygun eylemlere atanmış [özel](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) bir role atanmalıdır:
 
-| Eylem                                            | Ad                                     |
+| Action                                            | Name                                     |
 | ---------                                         | -------------                            |
-| Microsoft.Network/ddosProtectionPlans/read        | Bir DDoS koruma planı okuma              |
-| Microsoft.Network/ddosProtectionPlans/write       | Bir DDoS koruma planı güncelle  |
-| Microsoft.Network/ddosProtectionPlans/delete      | DDoS koruma planı silme            |
-| Microsoft.Network/ddosProtectionPlans/join/action | Bir DDoS koruma planı katılın              |
+| Microsoft. Network/Ddosprotectionplanlar/okuma        | DDoS koruma planını okuyun              |
+| Microsoft. Network/Ddosprotectionplanlar/yazma       | DDoS koruma planı oluşturma veya güncelleştirme  |
+| Microsoft. Network/Ddosprotectionplanlar/silme      | DDoS koruma planını silme            |
+| Microsoft. Network/Ddosprotectionplanlar/JOIN/Action | DDoS koruma planına ekleme              |
 
-DDoS koruması için bir sanal ağ'ı etkinleştirmek için hesabınıza da uygun atanmalıdır [sanal ağlar için Eylemler](manage-virtual-network.md#permissions).
+Bir sanal ağ için DDoS korumasını etkinleştirmek üzere hesabınıza [sanal ağlar için uygun eylemler](manage-virtual-network.md#permissions)de atanmalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Oluşturma ve uygulama [Azure İlkesi](policy-samples.md) sanal ağlar için
+- Sanal ağlar için [Azure ilkesi](policy-samples.md) oluşturma ve uygulama

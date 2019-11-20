@@ -2,14 +2,14 @@
 author: blackmist
 ms.service: machine-learning
 ms.topic: include
-ms.date: 05/10/2019
+ms.date: 11/06/2019
 ms.author: larryfr
-ms.openlocfilehash: 04e3b95f0c5c3ea840a095a8803ff91fa8eea803
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: a54e31a29ce1db8ffc71c1c40fc4dabe30369254
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188464"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73800182"
 ---
 > [!IMPORTANT]
-> Yalnızca oluşturduğunuz veya güvenilen bir kaynaktan elde modelleri kullanmanız gerekir. Güvenlik açıklarını çeşitli popüler biçimlerde içinde bulunan olarak seri hale getirilmiş modelleri kod olarak düşünülmelidir. Ayrıca, modelleri popülasyon veya hatalı çıkış sağlamak için kötü amaçlı kasıtlı olarak geliştirilebilir.
+> Yalnızca bir güvenilen kaynaktan oluşturduğunuz veya aldığınız modelleri kullanmanız gerekir. Bir dizi popüler biçimde güvenlik açıkları bulunduğundan, serileştirilmiş modelleri kod olarak değerlendirmelisiniz. Ayrıca, modeller taraflı veya hatalı çıktılar sağlamak üzere kötü amaçlı olarak kötü amaçlı olarak eğitilmiş olabilir.

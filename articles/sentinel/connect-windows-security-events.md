@@ -1,52 +1,53 @@
 ---
-title: Gözcü Azure Önizleme için Windows Güvenlik Olay verileri bağlayın | Microsoft Docs
-description: Azure Gözcü için Windows Güvenlik Olay verileri bağlanmayı öğreneceksiniz.
+title: Windows Güvenliği olay verilerini Azure Sentinel 'e bağlama | Microsoft Docs
+description: Windows Güvenliği olay verilerini Azure Sentinel 'e bağlamayı öğrenin.
 services: sentinel
 documentationcenter: na
 author: rkarlin
 manager: rkarlin
 editor: ''
 ms.assetid: d51d2e09-a073-41c8-b396-91d60b057e6a
-ms.service: sentinel
+ms.service: azure-sentinel
+ms.subservice: azure-sentinel
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/17/2019
+ms.date: 09/23/2019
 ms.author: rkarlin
-ms.openlocfilehash: 36d38aa82b4f0ec8d7d9ef6ebb1145b1fcc334df
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.openlocfilehash: 34762d561edfa5b37b1841c55f3fff6a4b8337a3
+ms.sourcegitcommit: 992e070a9f10bf43333c66a608428fcf9bddc130
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67190581"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71240513"
 ---
 # <a name="connect-windows-security-events"></a>Windows güvenlik olaylarını bağlama 
 
-> [!IMPORTANT]
-> Azure Sentinel şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-Tüm güvenlik olayları Azure Gözcü çalışma alanınıza bağlı Windows sunucularından akışını yapabilirsiniz. Bu bağlantı, panoları görüntülemesine, özel uyarıları oluşturma ve araştırma geliştirmek sağlar. Bu, kuruluşunuzun ağ daha fazla öngörü sağlar ve güvenlik işlemi yeteneklerinizi geliştirir.  Hangi olayların akışı seçebilirsiniz:
 
-- **Tüm olaylar** -tüm Windows Güvenlik ve AppLocker olayları.
-- **Ortak** -olayları denetim amacıyla standart bir dizi. Tam kullanıcı denetim kaydı bu kümesindeki dahil edilir. Örneğin, bu ayarla, hem kullanıcı oturum açma bilgileri ve kullanıcı oturum kapatma (olay kimliği 4634) içerir. Güvenlik grubu değişikliklerini, anahtar etki alanı denetleyicisi Kerberos işlemleri ve sektör kuruluşlar tarafından önerilen diğer olaylar gibi eylemleri denetimi ekliyoruz.
+Azure Sentinel çalışma alanınıza bağlı Windows sunucularından tüm güvenlik olaylarını akışla aktarabilirsiniz. Bu bağlantı, panoları görüntülemenizi, özel uyarılar oluşturmanızı ve araştırmanızı sağlar. Bu, kuruluşunuzun ağı hakkında daha ayrıntılı bilgi verir ve güvenlik işlemi yeteneklerini geliştirir.  Hangi olayların akışını seçebilirsiniz:
+
+- **Tüm olaylar** -tüm Windows güvenliği ve AppLocker olayları.
+- **Ortak** -denetim amaçlarıyla standart bir olay kümesi. Bu küme, tam Kullanıcı denetim izi içerir. Örneğin, bu küme hem Kullanıcı oturum açma hem de Kullanıcı oturumu kapatma olaylarını içerir (olay KIMLIĞI 4634). Güvenlik grubu değişikliklerini, anahtar etki alanı denetleyicisi Kerberos işlemleri ve sektör kuruluşlar tarafından önerilen diğer olaylar gibi eylemleri denetimi ekliyoruz.
 
 Tüm olayları üzerine miktarının azaltılmasını ve belirli olay filtre için olduğunu seçin için ana motivasyon olarak ortak çok düşük bir birime sahip olayları dahil edilmişti.
-- **En az** -küçük bir olayların olası tehditleri gösterebilir. Bu seçenek etkinleştirildiğinde, tam denetim kaydı mümkün olmayacaktır.  Bu, başarılı bir ihlal işaret eden olayları ve çok düşük bir birime sahip önemli olayları kapsar. Örneğin, bu kullanıcının başarılı ve başarısız oturum açma (olay kimliği 4624 4625) içerir, ancak denetim için önemlidir, ancak algılama için anlamlı ve görece yüksek hacimli olan oturum kapatma içermiyor. Bu veri hacmini çoğunu, oturum açma olayları ve işlem oluşturma olayı (olay kimliği 4688) olur.
-- **Hiçbiri** -hiçbir güvenlik veya AppLocker olayı.
+- **Minimal** -olası tehditleri gösterebilen küçük bir olay kümesi. Bu seçeneği etkinleştirerek, tam denetim izinin olması mümkün olmayacaktır.  Bu küme, yalnızca başarılı bir ihlal ve çok düşük bir birimi olan önemli olayları gösterebilen olayları ele alır. Örneğin, bu küme kullanıcı başarılı ve başarısız oturum açma bilgilerini (olay kimlikleri 4624, 4625) içerir, ancak bu, denetim için önemli olmayan, algılama için anlamlı olan ve görece yüksek hacimde olan oturum kapatma bilgilerini içermez. Bu küme veri hacminin çoğu, oturum açma olayları ve işlem oluşturma olayıdır (olay KIMLIĞI 4688).
+- **Hiçbiri** -güvenlik veya AppLocker olayı yok.
 
 > [!NOTE]
 > 
-> - Veriler Azure Gözcü çalıştırıyorsanız çalışma alanının coğrafi konumda depolanır.
+> - Veriler, Azure Sentinel çalıştırdığınız çalışma alanının coğrafi konumunda depolanır.
+> - Azure Güvenlik Merkezi ve Azure Sentinel aynı çalışma alanında çalışıyorsa, güvenlik olayları Bağlayıcısı yalnızca Azure Güvenlik Merkezi 'nden veya Azure Sentinel 'ten bağlanabilir. Bu olayları Azure Sentinel 'ten yönetmek için, Azure Güvenlik Merkezi bağlantısını kesmeniz ve yalnızca Azure Sentinel 'e bağlamanız önerilir.
 
-Aşağıdaki listede, her küme için olay kimlikleri güvenlik ve App Locker tam bir dökümünü sağlar:
+
+Aşağıdaki listede her bir küme için güvenlik ve uygulama dolabı olay kimliklerinin tamamen bir dökümü verilmiştir:
 
 | Veri katmanı | Toplanan olay göstergeleri |
 | --- | --- |
 | En az | 1102,4624,4625,4657,4663,4688,4700,4702,4719,4720,4722,4723,4724,4727,4728,4732,4735,4737,4739,4740,4754,4755, |
 | | 4756,4767,4799,4825,4946,4948,4956,5024,5033,8001,8002,8003,8004,8005,8006,8007,8222 |
-| Common | 1,299,300,324,340,403,404,410,411,412,413,431,500,501,1100,1102,1107,1108,4608,4610,4611,4614,4622, |
+| Common | 1, 299, 300, 324, 340, 403, 404, 410, 411, 412, 413, 431, 500, 501, 1100, 1102, 1107, 1108, 4608, 4610, 4611, 4614, 4622, |
 | |  4624,4625,4634,4647,4648,4649,4657,4661,4662,4663,4665,4666,4667,4688,4670,4672,4673,4674,4675,4689,4697, |
 | | 4700,4702,4704,4705,4716,4717,4718,4719,4720,4722,4723,4724,4725,4726,4727,4728,4729,4733,4732,4735,4737, |
 | | 4738,4739,4740,4742,4744,4745,4746,4750,4751,4752,4754,4755,4756,4757,4760,4761,4762,4764,4767,4768,4771, |
@@ -54,23 +55,23 @@ Aşağıdaki listede, her küme için olay kimlikleri güvenlik ve App Locker ta
 | | 4904,4905,4907,4931,4932,4933,4946,4948,4956,4985,5024,5033,5059,5136,5137,5140,5145,5632,6144,6145,6272, |
 | | 6273,6278,6416,6423,6424,8001,8002,8003,8004,8005,8006,8007,8222,26401,30004 |
 
-## <a name="set-up-the-windows-security-events-connector"></a>Windows Güvenlik olayları Bağlayıcısı'nı Ayarla
+## <a name="set-up-the-windows-security-events-connector"></a>Windows güvenlik olayları bağlayıcısını ayarlama
 
-Tam olarak Windows Güvenlik olaylarınız Gözcü Azure ile tümleştirmek için:
+Windows Güvenlik olaylarınızı Azure Sentinel ile tam olarak bütünleştirmek için:
 
-1. Gözcü Azure portalında **veri bağlayıcıları** ve ardından **Windows Güvenlik olayları** Döşe. 
-1. Akışı yapmak istediğiniz veri türlerini seçin.
+1. Azure Sentinel portalında, **veri bağlayıcıları** ' nı seçin ve ardından **Windows güvenlik olayları** kutucuğuna tıklayın. 
+1. Hangi veri türlerini akışa almak istediğinizi seçin.
 1. Tıklayın **güncelleştirme**.
-6. İlgili şema için Windows Güvenlik olaylarını Log Analytics'e kullanmak için arama **SecurityEvent**.
+6. Windows güvenlik olayları için Log Analytics ilgili şemayı kullanmak için, **Securityevent**araması yapın.
 
 ## <a name="validate-connectivity"></a>Bağlantıyı doğrula
 
-Bu, Log Analytics'te görünmesini günlüklerinizi başlatana kadar yaklaşık 20 dakika sürebilir. 
+Günlüklerinizin Log Analytics görünmeye başlaması 20 dakika kadar sürebilir. 
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu belgede, Azure Gözcü için Windows Güvenlik olayları bağlanma öğrendiniz. Azure Gözcü hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
-- Bilgi nasıl [görünürlük almak, veri ve olası tehditleri](quickstart-get-visibility.md).
-- Başlama [Azure Gözcü kullanarak tehditleri algılama](tutorial-detect-threats.md).
+Bu belgede, Windows Güvenlik olaylarını Azure Sentinel 'e bağlamayı öğrendiniz. Azure Sentinel hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+- [Verilerinize nasıl görünürlük alabileceğinizi ve olası tehditleri](quickstart-get-visibility.md)öğrenin.
+- [Azure Sentinel ile tehditleri algılamaya](tutorial-detect-threats-built-in.md)başlayın.
 

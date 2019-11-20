@@ -1,21 +1,22 @@
 ---
-title: Öğretici - Azure Container Instances için bir container Registry'yi hazırlama
-description: Azure Container Instances Öğreticisi bölüm 2 / 3 - bir Azure container Registry'yi hazırlama ve bir görüntü gönderme
+title: Öğretici-Azure Container Instances için bir kapsayıcı kayıt defteri hazırlama
+description: Azure Container Instances öğreticisi Bölüm 2/3-bir Azure Container Registry hazırlama ve görüntü gönderme
 services: container-instances
 author: dlepow
+manager: gwallace
 ms.service: container-instances
 ms.topic: tutorial
 ms.date: 03/21/2018
 ms.author: danlep
 ms.custom: seodec18, mvc
-ms.openlocfilehash: c1a4313f9a8174b9ea6e6cff694b9a0a9cf395d1
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: b3c907eacb14ed65410a60fcf22ebe99fd8cc3bb
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60685672"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68325618"
 ---
-# <a name="tutorial-deploy-an-azure-container-registry-and-push-a-container-image"></a>Öğretici: Bir Azure container Registry'yi dağıtma ve kapsayıcı görüntüsü gönderme
+# <a name="tutorial-deploy-an-azure-container-registry-and-push-a-container-image"></a>Öğretici: Azure Container Registry dağıtımı yapın ve kapsayıcı görüntüsünü gönderin
 
 Bu öğretici, üç bölümden oluşan bir serinin ikinci bölümüdür. Öğreticinin [birinci bölümünde](container-instances-tutorial-prepare-app.md), Node.js web uygulaması için bir Docker kapsayıcı görüntüsü oluşturuldu. Bu öğreticide, görüntüyü Azure Container Registry’ye göndereceksiniz. Henüz kapsayıcı görüntüsünü oluşturmadıysanız [Öğretici 1 - Kapsayıcı görüntüsü oluşturma](container-instances-tutorial-prepare-app.md) bölümüne geri dönün.
 
@@ -42,7 +43,7 @@ Kapsayıcı kayıt defterinizi oluşturmadan önce bunun dağıtılacağı bir *
 az group create --name myResourceGroup --location eastus
 ```
 
-Kaynak grubunu oluşturduktan sonra [az acr create][az-acr-create] komutuyla bir Azure kapsayıcı kayıt defteri oluşturun. Kapsayıcı kayıt defteri adı Azure’da benzersiz olmalı ve 5-50 arası alfasayısal karakter içermelidir. `<acrName>` değerini kayıt defteriniz için benzersiz bir adla değiştirin:
+Kaynak grubunu oluşturduktan sonra, [az ACR Create][az-acr-create] komutuyla bir Azure Container Registry oluşturun. Kapsayıcı kayıt defteri adı Azure’da benzersiz olmalı ve 5-50 arası alfasayısal karakter içermelidir. `<acrName>` değerini kayıt defteriniz için benzersiz bir adla değiştirin:
 
 ```azurecli
 az acr create --resource-group myResourceGroup --name <acrName> --sku Basic --admin-enabled true
@@ -94,7 +95,7 @@ Login Succeeded
 
 Azure Container Registry gibi bir özel kayıt defterine kapsayıcı görüntüsü göndermek için önce görüntüyü kayıt defterinin oturum açma sunucusunun tam adıyla etiketlemeniz gerekir.
 
-İlk olarak Azure kapsayıcı kayıt defteriniz için tam oturum açma sunucu adını alın. Aşağıdaki [az acr show][az-acr-show] komutunu çalıştırın ve `<acrName>` değerini, yeni oluşturduğunuz kayıt defterinin adıyla değiştirin:
+İlk olarak Azure kapsayıcı kayıt defteriniz için tam oturum açma sunucu adını alın. Aşağıdaki [az ACR Show][az-acr-show] komutunu çalıştırın ve yeni oluşturduğunuz kayıt `<acrName>` defterinin adıyla değiştirin:
 
 ```azurecli
 az acr show --name <acrName> --query loginServer --output table
@@ -109,7 +110,7 @@ Result
 mycontainerregistry082.azurecr.io
 ```
 
-Şimdi [docker images][docker-images] komutunu kullanarak yerel görüntülerinizin listesini görüntüleyin:
+Şimdi [Docker görüntüleri][docker-images] komutuyla yerel görüntülerinizin listesini görüntüleyin:
 
 ```bash
 docker images
@@ -123,7 +124,7 @@ REPOSITORY          TAG       IMAGE ID        CREATED           SIZE
 aci-tutorial-app    latest    5c745774dfa9    39 minutes ago    68.1 MB
 ```
 
-Kapsayıcı kayıt defterinizin loginServer’ı için *aci-tutorial-app* görüntüsünü etiketleyin. Ayrıca görüntü sürüm numarasını belirtmek için görüntü adının sonuna `:v1` etiketini ekleyin. `<acrLoginServer>` değerini, az önce çalıştırdığınız [az acr show][az-acr-show] komutunun sonucuyla değiştirin.
+Kapsayıcı kayıt defterinizin loginServer’ı için *aci-tutorial-app* görüntüsünü etiketleyin. Ayrıca görüntü sürüm numarasını belirtmek için görüntü adının sonuna `:v1` etiketini ekleyin. Daha `<acrLoginServer>` önce yürüttüğünüz [az ACR Show][az-acr-show] komutunun sonucuyla değiştirin.
 
 ```bash
 docker tag aci-tutorial-app <acrLoginServer>/aci-tutorial-app:v1
@@ -140,7 +141,7 @@ mycontainerregistry082.azurecr.io/aci-tutorial-app    v1        5c745774dfa9    
 
 ## <a name="push-image-to-azure-container-registry"></a>Azure Container Registry’ye görüntü gönderme
 
-*aci-tutorial-app* görüntüsünü, özel kayıt defterinizin tam oturum açma sunucusu adıyla etiketlediğinize göre şimdi [docker push][docker-push] komutunu kullanarak bunu kayıt defterine gönderebilirsiniz. `<acrLoginServer>` değerini, önceki adımda aldığınız tam oturum açma sunucusu adıyla değiştirin.
+*Aci-öğreticisi-App* görüntüsünü özel kayıt defterinizin tam oturum açma sunucusu adıyla etiketledikten sonra, [Docker Push][docker-push] komutuyla kayıt defterine gönderebilirsiniz. `<acrLoginServer>` değerini, önceki adımda aldığınız tam oturum açma sunucusu adıyla değiştirin.
 
 ```bash
 docker push <acrLoginServer>/aci-tutorial-app:v1
@@ -162,7 +163,7 @@ v1: digest: sha256:ed67fff971da47175856505585dcd92d1270c3b37543e8afd46014d328f05
 
 ## <a name="list-images-in-azure-container-registry"></a>Azure Container Registry’deki görüntüleri listeleme
 
-Gönderdiğiniz görüntünün aslında Azure kapsayıcı kayıt defterinizde olduğunu doğrulamak için, [az acr repository list][az-acr-repository-list] komutunu kullanarak kayıt defterinizdeki görüntüleri listeleyin. `<acrName>` komutunu, kapsayıcı kayıt defterinizin adıyla değiştirin.
+Az önce gönderdiğiniz görüntünün Azure Container kayıt defterinizde gerçekten olduğunu doğrulamak için, [az ACR Repository List][az-acr-repository-list] komutuyla kayıt defterinizde bulunan görüntüleri listeleyin. `<acrName>` komutunu, kapsayıcı kayıt defterinizin adıyla değiştirin.
 
 ```azurecli
 az acr repository list --name <acrName> --output table
@@ -177,7 +178,7 @@ Result
 aci-tutorial-app
 ```
 
-Belirli bir görüntünün *etiketlerini* görmek için, [az acr repository show-tags][az-acr-repository-show-tags] komutunu kullanın.
+Belirli bir görüntünün *etiketlerini* görmek için [az ACR Repository Show-Tags][az-acr-repository-show-tags] komutunu kullanın.
 
 ```azurecli
 az acr repository show-tags --name <acrName> --repository aci-tutorial-app --output table

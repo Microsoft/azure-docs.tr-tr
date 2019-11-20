@@ -1,7 +1,6 @@
 ---
-title: Azure MFA ile oturum açma iki aşamalı doğrulama - Azure Active Directory | Microsoft Docs
-description: Bu sayfa üzerinde çeşitli oturum Azure MFA ile kullanılabilecek yöntemleri görmek için yapılması gerekenler Kılavuzu sağlayacaktır.
-keywords: Kullanıcı kimlik doğrulaması, oturum açma deneyimi, cep telefonu ile oturum ofis telefonu ile oturum açın
+title: İki öğeli doğrulama kullanarak oturum açın-Azure AD
+description: Çeşitli iki öğeli doğrulama yöntemlerini kullanarak iş veya okul hesabınızda oturum açmayı öğrenin.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -15,77 +14,78 @@ ms.author: lizross
 ms.reviewer: librown
 ms.custom: end-user, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1350b2d86e18f213d99f1c27d64e371451f5f9b7
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: de080a613c69dd6f48f548c4ba89b2728e8c5e1d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60334446"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820436"
 ---
-# <a name="the-sign-in-experience-with-azure-multi-factor-authentication"></a>Azure multi-Factor Authentication ile oturum açma deneyimi
+# <a name="sign-in-to-your-work-or-school-account-using-two-factor-verification"></a>İki öğeli doğrulama kullanarak iş veya okul hesabınızda oturum açın
+
 > [!NOTE]
-> Bu makalenin amacı, bir normal oturum açma deneyimi boyunca size yol sağlamaktır. Oturum açma sorunlarını gidermek için veya Yardım için bkz: [Azure multi-Factor Authentication sorununuz](multi-factor-authentication-end-user-troubleshoot.md).
+> Bu makalenin amacı, tipik bir oturum açma deneyiminde izlenecek bir deneyimdir. Oturum açmaya yönelik yardım veya sorunları gidermek için bkz. [Azure Multi-Factor Authentication](multi-factor-authentication-end-user-troubleshoot.md)sorun giderme.
 
-## <a name="what-will-your-sign-in-experience-be"></a>Ne oturum açma deneyiminiz olacaktır?
-Oturum açma deneyimini, ikinci bir faktör olarak kullanmak istediğinize bağlı olarak farklılık gösterir: telefon araması, bir kimlik doğrulama uygulaması veya metinleri. En iyi ne yaptığınızı açıklayan bir seçenek belirleyin:
+## <a name="what-will-your-sign-in-experience-be"></a>Oturum açma deneyiminiz ne olacak?
+Oturum açma deneyiminiz, bir telefon araması, kimlik doğrulama uygulaması veya metinler için seçtiğiniz seçeneğe bağlı olarak farklılık gösterir. Yaptığınız işlemleri en iyi şekilde açıklayan seçeneği belirleyin:
 
-| Nasıl oturum? |
+| Nasıl oturum açabilirim? |
 | --- |
-| [Mobil veya ofis telefonumu için bir telefon çağrısı ile](#signing-in-with-a-phone-call) |
-| [Cep telefonuma metin ile](#signing-in-with-a-text-message)
-| [Microsoft Authenticator uygulamasından ile bildirimleri](#to-sign-in-with-a-notification-from-the-microsoft-authenticator-app) |
-| Microsoft Authenticator uygulaması ile doğrulama kodları |
-| [Alternatif bir yöntem ile tercih edilen yöntemimi şu anda kullanamazsınız çünkü](#signing-in-with-an-alternate-method) |
+| [Cep telefonu veya ofis telefonuma telefon çağrısıyla](#signing-in-with-a-phone-call) |
+| [Cep telefonum ile metin ile](#signing-in-with-a-text-message)
+| [Microsoft Authenticator uygulamasındaki bildirimler ile](#to-sign-in-with-a-notification-from-the-microsoft-authenticator-app) |
+| Microsoft Authenticator uygulamasındaki doğrulama kodları ile |
+| [Şu anda tercih ediyorum yöntemi kullanamadığı için alternatif bir yöntem ile](#signing-in-with-an-alternate-method) |
 
-## <a name="signing-in-with-a-phone-call"></a>Telefonla Oturum imzalama
-Aşağıdaki bilgiler, mobil veya ofis telefonunuza bir çağrı iki aşamalı doğrulama deneyimine açıklar.
+## <a name="signing-in-with-a-phone-call"></a>Telefon çağrısıyla oturum açma
+Aşağıdaki bilgiler, mobil veya Office telefonunuza yapılan bir çağrı ile iki adımlı doğrulama deneyimini açıklar.
 
-1. Bir uygulama veya hizmet, kullanıcı adı ve parolanızı kullanarak Office 365 gibi oturum açın.  
-2. Microsoft, çağırır.  
+1. Kullanıcı adınızı ve parolanızı kullanarak Office 365 gibi bir uygulama veya hizmette oturum açın.  
+2. Microsoft sizi çağırır.  
 3. Telefonu yanıtlayın ve # tuşuna basın.  
 
-## <a name="signing-in-with-a-text-message"></a>Kısa mesaj ile imzalama
-Aşağıdaki bilgiler, cep telefonunuza bir kısa mesaj iki aşamalı doğrulama deneyimine açıklar:
+## <a name="signing-in-with-a-text-message"></a>Kısa mesajla oturum açma
+Aşağıdaki bilgiler, cep telefonunuza bir SMS mesajı ile iki adımlı doğrulama deneyimini anlatmaktadır:
 
-1. Bir uygulama veya hizmet, kullanıcı adı ve parolanızı kullanarak Office 365 gibi oturum açın.
-2. Microsoft, size bir numara kodu içeren bir kısa mesaj gönderir.
-3. Oturum açma sayfada sağlanan kutuya kodu girin.
+1. Kullanıcı adınızı ve parolanızı kullanarak Office 365 gibi bir uygulama veya hizmette oturum açın.
+2. Microsoft size sayı kodu içeren bir kısa mesaj gönderir.
+3. Oturum açma sayfasında belirtilen kutuya kodu girin.
 
-## <a name="signing-in-with-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasını açın imzalama
-Aşağıdaki bilgiler, iki aşamalı doğrulama işlemleri için Microsoft Authenticator uygulamasını kullanma deneyimi açıklanmıştır. Uygulamayı kullanmak için iki farklı yolu vardır. Cihazınızda anında iletme bildirimleri alabilir veya ve uygulamayı bir doğrulama kodu açabilirsiniz.
+## <a name="signing-in-with-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamayla oturum açma
+Aşağıdaki bilgiler, iki adımlı doğrulama için Microsoft Authenticator uygulamasını kullanma deneyimini açıklamaktadır. Uygulamayı kullanmanın iki farklı yolu vardır. Cihazınızda anında iletme bildirimleri alabilir veya bir doğrulama kodu almak için uygulamayı açabilirsiniz.
 
-### <a name="to-sign-in-with-a-notification-from-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasından bir bildirim oturum açmanız
-1. Bir uygulama veya hizmet, kullanıcı adı ve parolanızı kullanarak Office 365 gibi oturum açın.
-2. Microsoft, Cihazınızda Microsoft Authenticator uygulamasına bir bildirim gönderir.
+### <a name="to-sign-in-with-a-notification-from-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasından bir bildirim ile oturum açmak için
+1. Kullanıcı adınızı ve parolanızı kullanarak Office 365 gibi bir uygulama veya hizmette oturum açın.
+2. Microsoft, cihazınızda Microsoft Authenticator uygulamasına bir bildirim gönderir.
 
-   ![Microsoft, bildirim gönderir.](./media/multi-factor-authentication-end-user-signin/notify.png)
+   ![Microsoft bildirim gönderiyor](./media/multi-factor-authentication-end-user-signin/notify.png)
 
-3. Telefon ve seçim bildirimi açın **doğrulama** anahtarı. Şirketiniz bir PIN gerektiriyorsa, buraya girin.
-4. Artık oturum açmanız.
+3. Telefonunuzda bildirimi açın ve **Doğrula** anahtarını seçin. Şirketiniz PIN gerektiriyorsa buraya girin.
+4. Artık oturum açmış olmanız gerekir.
 
-### <a name="to-sign-in-using-a-verification-code-with-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulaması ile doğrulama kodunu kullanarak oturum açmanız
+### <a name="to-sign-in-using-a-verification-code-with-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamayla bir doğrulama kodu kullanarak oturum açmak için
 
-Doğrulama kodları almak için Microsoft Authenticator uygulamasını kullanın, uygulamayı açtığınızda sonra birkaç hesap adınızın altında görürsünüz. Böylece iki kere aynı sayıda kullanmayın, bu sayı her 30 saniyede değiştirir. İçin bir doğrulama kodu sorulduğunda, uygulamayı açın ve şu anda görüntülenen sayıyı kullanın.
+Doğrulama kodlarını almak için Microsoft Authenticator uygulamasını kullanıyorsanız, uygulamayı açtığınızda hesap adınızın altına bir sayı görürsünüz. Bu sayı, her 30 saniyede bir değişir; böylece aynı numarayı iki kez kullanamazsınız. Bir doğrulama kodu istendiğinde, uygulamayı açın ve şu anda hangi numaranın görüntülendiğini kullanın.
 
-1. Bir uygulama veya hizmet, kullanıcı adı ve parolanızı kullanarak Office 365 gibi oturum açın.
-2. Microsoft için bir doğrulama kodu ister.
+1. Kullanıcı adınızı ve parolanızı kullanarak Office 365 gibi bir uygulama veya hizmette oturum açın.
+2. Microsoft sizden bir doğrulama kodu ister.
 
    ![Doğrulama kodunu girin](./media/multi-factor-authentication-end-user-signin/verify3.png)
 
-3. Telefonunuza Microsoft Authenticator uygulamasını açın ve kodu nerede açtığınız kutuya girin.
+3. Microsoft Authenticator uygulamasını telefonunuzda açın ve oturum açtığınız kutuya kodu girin.
 
-## <a name="signing-in-with-an-alternate-method"></a>Alternatif bir yöntem ile imzalama
-Bazı durumlarda telefon veya, tercih edilen doğrulama yöntemi olarak ayarladığınız cihaz yok. Hesabınız için yedekleme yöntemleri ayarlamanızı öneririz neden bu durumda. Aşağıdaki bölümde, birincil yöntemi kullanılamayabilir oturum alternatif bir yöntem oturum işlemini göstermektedir.
+## <a name="signing-in-with-an-alternate-method"></a>Alternatif bir yöntemle oturum açma
+Bazen tercih ettiğiniz doğrulama yöntemi olarak ayarladığınız telefonun veya cihazınızın olması gerekmez. Bu durum, hesabınız için yedekleme yöntemleri ayarlamanızı öneririz. Aşağıdaki bölümde, birincil yönteminizin kullanılamadığı durumlarda alternatif bir yöntemle nasıl oturum alabileceğiniz gösterilmektedir.
 
-1. Bir uygulama veya hizmet, kullanıcı adı ve parolanızı kullanarak Office 365 gibi oturum açın.
-2. Seçin **farklı bir doğrulama seçeneği kullanma**. Kaç, Kurulum olmadığına göre farklı bir kimlik doğrulama seçenekleri görürsünüz.
+1. Kullanıcı adınızı ve parolanızı kullanarak Office 365 gibi bir uygulama veya hizmette oturum açın.
+2. **Farklı bir doğrulama seçeneği kullan**' ı seçin. Ayarlamış olduğunuz sayısına göre farklı doğrulama seçenekleri görürsünüz.
 3. Alternatif bir yöntem seçin ve oturum açın.
 
-   ![Alternatif yöntemi kullanın](./media/multi-factor-authentication-end-user-signin/alt.png)
+   ![Alternatif yöntemi kullan](./media/multi-factor-authentication-end-user-signin/alt.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- İki aşamalı doğrulaması ile oturum açma sorunları varsa, daha fazla bilgi edinin [Azure multi-Factor Authentication sorununuz](multi-factor-authentication-end-user-troubleshoot.md).
+- İki aşamalı doğrulama ile oturum açma sorunlarıyla karşılaşırsanız, [Azure Multi-Factor Authentication sorun yaşamadan](multi-factor-authentication-end-user-troubleshoot.md)daha fazla bilgi alın.
 
-- Bilgi edinmek için nasıl [iki adımlı doğrulama ayarlarınızı yönetme](multi-factor-authentication-end-user-manage-settings.md).
+- [İki adımlı doğrulama ayarlarınızı yönetme](multi-factor-authentication-end-user-manage-settings.md)hakkında bilgi edinin.
 
-- Hakkında bilgi edinin [Microsoft Authenticator uygulaması ile çalışmaya başlama](user-help-auth-app-download-install.md) böylece bildirimleri, telefon görüşmeleri ve metinler yerine oturum açmak için kullanabilirsiniz.
+- Metin ve telefon görüşmeleri yerine oturum açmak üzere bildirimleri kullanabilmeniz için [Microsoft Authenticator uygulamasını kullanmaya nasıl başlabileceğinizi](user-help-auth-app-download-install.md) öğrenin.

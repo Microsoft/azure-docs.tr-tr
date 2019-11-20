@@ -53,6 +53,16 @@
           href: pim-how-to-change-default-settings.md
         - name: Uyarı yapılandırma
           href: pim-how-to-configure-security-alerts.md
+        - name: Özel roller önizlemesi
+          items:
+            - name: Özel bir rolü etkinleştirme
+              href: azure-ad-custom-roles-activate.md
+            - name: Özel bir rolü atama
+              href: azure-ad-custom-roles-assign.md
+            - name: Rol atamasını kaldırma
+              href: azure-ad-custom-roles-update-remove.md
+            - name: Özel rolleri yapılandırma
+              href: azure-ad-custom-roles-configure.md
         - name: Denetim geçmişini görüntüleme
           href: pim-how-to-use-audit-log.md
     - name: Azure kaynağı rollerini yönetme
@@ -73,6 +83,8 @@
           href: azure-pim-resource-rbac.md
         - name: Özel rolleri kullanma
           href: pim-resource-roles-custom-role-policy.md
+    - name: PIM sorunlarını giderme
+      href: pim-troubleshoot.md
     - name: Erişim gözden geçirmeleri
       items:
         - name: Azure AD rolleri

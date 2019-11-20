@@ -1,7 +1,7 @@
 ---
-title: Konuşma Öğrenici sahip bir Model - Microsoft Bilişsel hizmetler birden çok değerli varlıklar kullanma | Microsoft Docs
+title: Conversation Learner modeliyle çok değerli varlıklar kullanma-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici modeliyle birden çok değerli varlıkların kullanmayı öğrenin.
+description: Conversation Learner modeliyle çok değerli varlıkların nasıl kullanılacağını öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,93 +10,94 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: 1f62def5e498f3f744beaed0cda207e1a75bfdf2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 7911dd561da0f1e7b62b1b457ae5b059d5d54767
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66387954"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68704096"
 ---
-# <a name="how-to-use-multi-value-entities-with-a-conversation-learner-model"></a>Konuşma Öğrenici modeli ile birden çok değerli varlıklar kullanma
-Bu öğreticide, varlıkların birden çok değerli özellik gösterilir.
+# <a name="how-to-use-multi-value-entities-with-a-conversation-learner-model"></a>Conversation Learner modeliyle Çoklu değerli varlıklar kullanma
+Bu öğreticide varlıkların çok değerli özelliği gösterilmektedir.
 
 ## <a name="video"></a>Video
 
-[![Birden çok değerli varlıkların öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_MultiValued_Preview)](https://aka.ms/cl_Tutorial_v3_MultiValued)
+[![Çok değerli varlıklar öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_MultiValued_Preview)](https://aka.ms/cl_Tutorial_v3_MultiValued)
 
 ## <a name="requirements"></a>Gereksinimler
-Bu öğreticide, genel öğretici Bot çalışıyor olması gerekir
+Bu öğreticide, genel öğretici bot 'ın çalışıyor olması gerekir
 
     npm run tutorial-general
 
 ## <a name="details"></a>Ayrıntılar
-Birden çok değerli varlıkları tek bir değer depolamak yerine bir liste değerleri toplar.  Bu varlıklar, kullanıcıların birden fazla değer belirtebilirsiniz olduğunda yararlıdır. Örneğin bir pizza üzerinde toppings.
+Birden çok değerli varlıklar, değerleri tek bir değer depolamak yerine bir listede biriktir.  Bu varlıklar, kullanıcılar birden fazla değer belirtişinize yarayacaktır. Örneğin, bir pizza toppings.
 
-Varlıklar birden çok değerli Botun bellekte bir listeye eklenen varlığın tanınan her örneği olarak işaretlenmiş. Sonraki tanıma varlığın değeri yerine üzerine ekler.
+Çoklu değer olarak işaretlenen varlıkların, her tanınan varlık örneği, bot 'ın belleğindeki bir listeye eklenir. Sonraki tanıma, varlığın değerine, üzerine yazılması yerine ekler.
 
 ## <a name="steps"></a>Adımlar
 
-Giriş sayfasında Web kullanıcı arabiriminde başlatın.
+Web Kullanıcı arabirimindeki giriş sayfasında başlatın.
 
 ### <a name="create-the-model"></a>Model oluşturma
 
-1. Seçin **yeni modeli**.
-2. Girin **MultiValueEntities** için **adı**.
+1. **Yeni model**' i seçin.
+2. **Ad**Için **multivalueentities** girin.
 3. **Oluştur**’u seçin.
 
 ### <a name="entity-creation"></a>Varlık oluşturma
 
-1. Seçin **varlıkları** sol bölmesinde, ardından **yeni varlık**.
-2. Seçin **eğitilmiş özel** için **varlık türü**.
-3. Girin **toppings** için **varlık adı**.
-4. Denetleme **birden çok değerli** varlık etkinleştirmek için bir veya daha fazla değer accumulate.
-5. Denetleme **değişkeni yoksayılamaz**.
+1. Sol panelde **varlıklar** ' ı ve sonra **yeni varlık**' ı seçin.
+2. **Varlık türü**Için **özel eğitimli** ' i seçin.
+3. **Varlık adı**için **toppings** girin.
+4. Varlığın bir veya daha fazla değer birikmesini sağlamak için **Çoklu değerli** ' i işaretleyin.
+5. **Negatifi tabloyu**denetle.
 6. **Oluştur**’u seçin.
 
 ![](../media/T07_entity_create.png)
 
-### <a name="create-the-first-action"></a>İlk Eylem oluştur
+### <a name="create-the-first-action"></a>Ilk eylemi oluşturma
 
-1. Seçin **eylemleri** sol bölmesinde, ardından **yeni eylem**.
-2. Girin **, toppings şunlardır: $toppings** için **Botun yanıt...** . Önde gelen dolar işareti bir varlık başvurusu gösterir.
+1. Sol panelde **Eylemler** ' i ve sonra **yeni eylem**' i seçin.
+2. Toppings: bot 'un yanıtı için **$toppings buraya** girin **...** Önde gelen dolar işareti bir varlık başvurusunu gösterir.
 3. **Oluştur**’u seçin.
 
 ![](../media/T07_action_create_1.png)
 
-### <a name="create-the-second-action"></a>İkinci Eylem oluştur
+### <a name="create-the-second-action"></a>Ikinci eylemi oluşturma
 
-1. Seçin **eylemleri** sol bölmesinde, ardından **yeni eylem**.
-2. Girin **hangi toppings ister misiniz?** için **Botun yanıt...** .
-3. Girin **toppings** için **eleyerek sağlar**.
+1. Sol panelde **Eylemler** ' i ve sonra **yeni eylem**' i seçin.
+2. Botonun **yanıtı**için **hangi toppings** istediğinizi girin?...
+3. Ayırt **edici sahibine**için **toppings** girin.
 4. **Oluştur**’u seçin.
 
-Artık iki eylem var.
+Artık iki eylemleriniz vardır.
 
 ![](../media/T07_action_create_2.png)
 
 ### <a name="train-the-model"></a>Modeli eğitme
 
-1. Seçin **eğitme iletişim kutuları** sol bölmesinde, ardından **yeni Train iletişim**.
-2. Girin **Merhaba** kullanıcının utterance sol sohbet panelinde için.
-3. Seçin **puan Eylemler**.
-4. Seçin **hangi toppings ister misiniz?** eylemler listesinden. % 100 olarak temel kısıtlamalar yalnızca geçerli eylem yüzdebirliktir.
-5. Girin **peynirlerine ayırıyor ve mushrooms** kullanıcının utterance sol sohbet panelinde için.
-6. Vurgulama **peynirlerine ayırıyor** seçip **+ toppings**.
-7. Vurgulama **mushrooms** seçip **+ toppings**.
-8. Seçin **puan Eylemler**.
-9. Seçin **, toppings şunlardır: $toppings** eylemler listesinden.
-10. Girin **Biber ekleme** kullanıcının sonraki utterance sol sohbet panelinde için.
-11. Vurgulama **Biber** seçip **+ toppings**.
-12. Seçin **puan Eylemler**.
-13. Seçin **, toppings şunlardır: $toppings** eylemler listesinden.
-14. Girin **peynirlerine ayırıyor kaldırmak** kullanıcının üçüncü utterance sol sohbet panelinde için.
-15. Vurgulama **peynirlerine ayırıyor** seçip **-toppings**.
-16. Seçin **puan Eylemler**.
-17. Seçin **, toppings şunlardır: $toppings** eylemler listesinden.
+1. Sol panelde iletişim **kutularını eğitme** ' yi ve ardından **Yeni eğitme iletişim kutusunu**seçin.
+2. Sol sohbet panelinde kullanıcının utterliği için **Merhaba** yazın.
+3. **Puan eylemlerini**seçin.
+4. Eylemler listesinden **ne toppings** istediğinizi seçin. Yüzdebirlik değeri, kısıtlamalara göre geçerli olan tek eylem olarak% 100 ' dir.
+5. Sol sohbet panelinde kullanıcının utterliği için **Cheese ve mushodalar** girin.
+6. **Cheese** 'yi vurgulayın ve **+ toppings**seçeneğini belirleyin.
+7. **Mushodalar** ' ı vurgulayın ve **+ toppings**öğesini seçin.
+8. **Puan eylemlerini**seçin.
+9. Eylemler listesinden **toppings: $toppings** seçin.
+10. Sol sohbet panelinde kullanıcının sonraki utterine için **Add peber** yazın.
+11. **Peber** 'yi vurgulayın ve **+ toppings**seçeneğini belirleyin.
+12. **Puan eylemlerini**seçin.
+13. Eylemler listesinden **toppings: $toppings** seçin.
+14. Sol sohbet panelinde kullanıcının üçüncü utterliği için **Cheese kaldır** ' a katılın.
+15. **Cheese** 'yi vurgulayın ve sonra **-toppings**seçeneğini belirleyin.
+16. **Puan eylemlerini**seçin.
+17. Eylemler listesinden **toppings: $toppings** seçin.
 
 ![](../media/T07_training.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Önceden eğitilmiş varlıklar](./08-pre-trained-entities.md)
+> [Önceden eğitilen varlıklar](./08-pre-trained-entities.md)

@@ -1,108 +1,106 @@
 ---
-title: 'İki sınıflı karar ormanı: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Bir machine learning modeli karar ormanları algoritmadan yola çıkılarak oluşturmak için Azure Machine Learning hizmetinde iki sınıflı karar ormanı modülünü kullanmayı öğrenin.
+title: 'İki sınıf karar ormanı: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Karar ormanları algoritmaya dayalı bir makine öğrenimi modeli oluşturmak için Azure Machine Learning ' de Iki sınıf karar ormanı modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 73b7822c56e2b07eeefdedce1bce6d410d110ebc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: ebe9a0368f2111fa6787b7fa4f4432d7ad4106c3
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65411500"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73485943"
 ---
-# <a name="two-class-decision-forest-module"></a>İki sınıflı karar ormanı Modülü
+# <a name="two-class-decision-forest-module"></a>İki sınıf karar ormanı modülü
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Bir machine learning modeli karar ormanları algoritmadan yola çıkılarak oluşturmak için bu modülü kullanın.  
+Karar ormanları algoritmaya dayalı bir makine öğrenimi modeli oluşturmak için bu modülü kullanın.  
 
-Karar ormanları hızlı, denetimli topluluğu modelleridir. Bir hedef en fazla iki sonuçlarını tahmin etmek istiyorsanız, bu modül iyi bir seçimdir. 
+Karar ormanları hızlı, denetimli modellerdir. En fazla iki sonuç içeren bir hedef tahmin etmek istiyorsanız bu modül iyi bir seçimdir. 
 
 ## <a name="understanding-decision-forests"></a>Karar ormanları anlama
 
-Bu karar ormanı sınıflandırma görevleri için hedeflenen yöntemi öğrenme bir topluluğu algoritmasıdır. Topluluğu yöntemler, genel ilkeye dayalı, tek bir model üzerinde güvenmek yerine, daha iyi sonuçlar ve daha genel bir model birden çok ilgili modelleri oluşturarak ve bunları başka bir yolla birleştirme alabilirsiniz. Genellikle, topluluğu modeller, daha iyi kapsamı ve tek karar ağaçları'den doğruluk sağlar. 
+Bu karar ormanı algoritması, sınıflandırma görevlerine yönelik bir ensebir öğrenme yöntemidir. Ensebirleştirileyen Yöntemler, tek bir modele güvenmek yerine, daha iyi sonuçlar ve daha genelleştirilmiş bir model oluşturarak, birden fazla ilgili model oluşturup bunları bir şekilde birleştirerek daha fazla bilgi edinebilirsiniz. Genel olarak, en iyi şekilde modelleyen modeller, tek karar ağaçlarından daha iyi kapsam ve doğruluk sağlar. 
 
-Tek tek modeller oluşturun ve bunları bir topluluğu içinde birleştirmek için birçok yolu vardır. Bu belirli uygulama karar ormanı çalışan birden çok karar ağaçları oluşturarak ve ardından **oylama** en popüler çıkış sınıfı üzerinde. Oylama bir topluluğu modelinde sonuçlar oluşturma better-known yöntemleri biridir. 
+Tek tek modeller oluşturmanın ve bunları bir ensede birleştirmenin birçok yolu vardır. Karar ormanı 'nın bu belirli uygulanması, birden çok karar ağacı oluşturup en popüler çıkış sınıfı üzerinde **Oylama** yaparak işe yarar. Oylama, bir ensebir modelde sonuç oluşturmaya yönelik daha iyi bilinen yöntemlerden biridir. 
 
-+ Tüm veri kümesini kullanarak birçok ayrı sınıflandırma ağaçları oluşturulur ancak farklı (genellikle başlangıç noktaları rastgele). Bu, ayrı ayrı karar ağaçları rastgele veriler veya özellikler bölümü yalnızca kullanabilir rastgele orman yaklaşımından farklıdır.
-+ Etiketlerin sıklığını Normalleştirilmemiş histogram karar ormanı ağacı her ağacında çıkarır. 
-+ Toplama işlemi, bu Histogram toplar ve her etiket için "sayısal" almak için sonuca normalleştirir. 
-+ Yüksek tahmin olmanızı ağaçları büyük ağırlık topluluğu son kararı sahip olur.
++ Birçok ayrı sınıflandırma ağacının tamamı, tüm veri kümesi kullanılarak oluşturulur, ancak farklı (genellikle rastgele) başlangıç noktaları kullanılır. Bu, tek tek karar ağaçlarının yalnızca rastgele veri veya özellik bölümünü kullanabileceği rastgele orman yaklaşımına göre farklılık gösterir.
++ Karar ormanı ağacındaki her bir ağaç, etiketlerin normalleştirilmiş olmayan bir sıklık histogramını çıktı. 
++ Toplama işlemi, bu histogramları toplar ve her etiket için "olasılıkların" elde edilmesine ilişkin sonucu normalleştirir. 
++ Yüksek tahmin güvenli olan ağaçlar, en son kararının son kararına göre daha büyük bir ağırlığa sahip olacaktır.
 
-Karar ağaçları genel sınıflandırma görevleri için birçok avantaj vardır:
+Genel içindeki karar ağaçları, sınıflandırma görevlerinde birçok avantaj sağlar:
   
-- Bunlar, doğrusal olmayan karar sınırları yakalayabilirsiniz.
-- Eğitim ve verimli hesaplama ve bellek kullanımı gibi pek çok veri tahmin edin.
-- Özellik Seçimi, eğitim ve sınıflandırma işlemlerinde tümleşiktir.  
-- Ağaçları gürültülü veri ve birçok özellik barındırabilir.  
-- Değiştirilen dağıtımlar verilerle başa çıkabilir anlamı parametrik olmayan modelleri değildirler. 
+- Bu kişiler, doğrusal olmayan karar sınırlarını yakalayabilir.
+- Hesaplama ve bellek kullanımında çok sayıda veriyi eğitebilir ve tahmin edebilirsiniz.
+- Özellik seçimi eğitim ve sınıflandırma işlemlerinde tümleşiktir.  
+- Ağaçlar, gürültülü verilere ve birçok özelliğe sahip olabilir.  
+- Bunlar parametrik olmayan modellerdir, yani değişen dağıtımlar ile verileri işleyebilir. 
 
-Ancak, basit karar ağaçları veri overfit ve ağaç Kümelemeler daha az genelleştirilebilir.
+Ancak, basit karar ağaçları verilere fazla uyum sağlayabilir ve Tree Kümelemeler 'tan daha az genelleştirilebilir.
 
-Daha fazla bilgi için [karar ormanları](https://go.microsoft.com/fwlink/?LinkId=403677).  
+Daha fazla bilgi için bkz. [karar ormanları](https://go.microsoft.com/fwlink/?LinkId=403677).  
 
 ## <a name="how-to-configure"></a>Yapılandırma
   
-1.  Ekleme **iki sınıflı karar ormanı** modülü, Azure Machine learning'de ve açık bir denemenize **özellikleri** modülünün bölmesi. 
+1.  Azure Machine Learning ' de **Iki sınıf karar ormanı** modülünü ardışık düzene ekleyin ve modülün **Özellikler** bölmesini açın. 
 
-    Modül altında bulabilirsiniz **Machine Learning**. Genişletin **başlatmak**, ardından **sınıflandırma**.  
+    Modül **Machine Learning**altında bulunabilir. **Başlat**' ı ve ardından **Sınıflandırma**' yı genişletin.  
   
-2.  İçin **yöntemi örnekleme**, tek tek ağacı oluşturmak için kullanılan yöntemi seçin.  Aralarından seçim yapabileceğiniz **Bagging** veya **çoğaltmak**.  
+2.  Yeniden **örnekleme yöntemi**için, bireysel ağaçları oluşturmak için kullanılan yöntemi seçin.  **Bagging** veya **çoğaltma**seçeneklerinden birini belirleyebilirsiniz.  
   
-    -   **Bagging**: Bagging da çağrılır *önyükleme toplayarak*. Bu yöntemde her ağacı boyutu özgün bir veri kümeniz kadar rastgele değiştirme ile özgün veri kümesinden örnekleme tarafından oluşturulmuş olan yeni bir örneği şeylerde.  
+    -   **Bagging**: Bagging de *önyükleme toplama*olarak adlandırılır. Bu yöntemde, her ağaç yeni bir örnek üzerinde büyüerek orijinal veri kümesini rastgele örnekleyerek, özgün veri kümesinin orijinal bir veri kümesine sahip olana kadar bir şekilde oluşturulur.  
   
-         Model çıktıları tarafından birleştirilir *oylama*, bir form toplama olduğu. Her ormanda bir sınıflandırma karar etiketlerin bir Normalleştirilmemiş sıklığı histogram çıkarır. Bu çubuk grafikler toplamak ve her etiket için "sayısal" almak için'leri normalleştirmek için toplama var. Bu şekilde, yüksek tahmin olmanızı ağaçları topluluğu son kararı büyük bir ağırlık sahip olur.  
+         Modellerin çıkışları, bir toplama biçimi olan *Oylama*tarafından birleştirilir. Sınıflandırma kararı ormanındaki her ağaç, etiketlerin Normalleştirilmemiş bir sıklık histogramı çıkarır. Toplama işlemi, her etiket için "olasılıklara" almak üzere bu histogramları ve normalleştirerek toplanacak. Bu şekilde, yüksek tahmine sahip olan ağaçlar, en son karar veren kararının daha büyük bir ağırlığına sahip olacaktır.  
   
-         Daha fazla bilgi için önyükleme toplamak için Wikipedia girişine bakın.  
+         Daha fazla bilgi için bkz. önyükleme toplama için Vikipedi girişi.  
   
-    -   **Çoğaltma**: Çoğaltmasında her ağaç tam olarak aynı giriş verileri eğitildi. Belirlenmesi hangi bölünmüş koşulu her ağaç düğümü için kullanılan rastgele olarak kalır ve ağaçları farklı olacaktır.   
+    -   **Çoğaltma:** çoğaltmadaki her ağaç, tam olarak aynı giriş verilerinde eğitilir. Her ağaç düğümü için hangi bölünmüş koşulun kullanıldığını belirleme rasgele kalır ve ağaçlar birbirinden farklı olur.   
   
-3.  Model, ayarlayarak düşünürler nasıl istediğinizi belirtmek **Oluştur trainer modu** seçeneği.  
+3.  Model **oluşturma modunu** ayarlayarak modelin eğitilme şeklini belirleyin.  
   
-    -   **Tek bir parametre**: Model yapılandırmak istediğiniz nasıl biliyorsanız, bağımsız değişken olarak belirli bir değerler kümesi sağlayabilirsiniz.
+    -   **Tek parametre**: modeli nasıl yapılandırmak istediğinizi biliyorsanız bağımsız değişken olarak belirli bir değer kümesi sağlayabilirsiniz.
   
-4.  İçin **karar ağaçları sayısı**, topluluğu içinde oluşturulabilir karar ağaçları en fazla sayısını yazın. Daha fazla karar ağaçları oluşturarak potansiyel olarak daha iyi kapsamı elde edebilirsiniz, ancak eğitim süresini artırır.  
+4.  **Karar ağaçları sayısı**için, en fazla, en fazla sayıda karar ağacının oluşturulabilecek en fazla sayısını yazın. Daha fazla karar ağacı oluşturarak daha iyi tedarik sağlayabilirsiniz, ancak eğitim süresi artar.  
   
     > [!NOTE]
-    >  Bu değer, eğitilen model görselleştirirken kullanılacak görüntülenen ağaçları sayısını da denetler. Bakın veya tek bir ağaç yazdırma istiyorsanız, değer 1 olarak ayarlayabilirsiniz. Ancak, yalnızca bir ağaç olabilir (ilk parametre kümesiyle ağacı) üretilen ve herhangi bir yinelemenin gerçekleştirilir.
+    >  Bu değer aynı zamanda eğitilen modeli görselleştirirken gösterilecek ağaç sayısını da denetler. Tek bir ağacı görmek veya yazdırmak istiyorsanız, değeri 1 olarak ayarlayabilirsiniz. Ancak, yalnızca bir ağaç üretilebilir (ilk parametre kümesine sahip ağaç) ve başka yineleme yapılmaz.
   
-5.  İçin **karar ağaçları maksimum derinliğini**, herhangi bir karar ağacını maksimum derinliğini sınırlamak için bir sayı yazın. Ağaç derinliği artırma duyarlığı, overfitting ve artan eğitim süre at the risk of.
+5.  **Karar ağaçlarının maksimum derinliği**için, herhangi bir karar ağacının maksimum derinliğini sınırlamak üzere bir sayı yazın. Ağacın derinliğini artırmak, bazı fazla sığdırma ve daha fazla eğitim süresi riskinde duyarlık artırabilir.
   
-6.  İçin **düğüm başına rastgele bölmelerini sayısı**, her düğüm ağacı oluşturulurken kullanılacak bölmelerini sayısını yazın. A *bölme* anlamına gelir (node) ağacının her düzeyinde özellikleri rastgele ayrılmıştır.
+6.  **Düğüm başına rastgele bölme sayısı**için, ağacın her düğümünü oluştururken kullanılacak bölme sayısını yazın. *Bölünmüş* , ağaç (node) düzeyindeki özelliklerin rastgele bölündüğü anlamına gelir.
   
-7.  İçin **yaprak düğüm başına örnek sayısı alt sınırı**, terminal düğümlerinden (yaprak) içinde bir ağaç oluşturmak için gereken durumlarda en az sayısını belirtin.
+7.  **Yaprak düğüm başına minimum örnek sayısı**için, bir ağaçta herhangi bir Terminal düğümü (yaprak) oluşturmak için gereken minimum durum sayısını belirtin.
   
-     Bu değer artırarak yeni kurallar oluşturma için eşik artırın. Örneğin, varsayılan değer olan 1 ile tek bir çalışmasını oluşturulacak yeni bir kural neden olabilir. 5 değerine artırmak istiyorsanız, eğitim verilerini aynı koşulları karşılayan en az beş servis taleplerini içerir etmesi gerekir.  
+     Bu değeri artırarak, yeni kurallar oluşturma eşiğini artırırsınız. Örneğin, varsayılan 1 değeri ile tek bir durum bile yeni bir kuralın oluşturulmasına neden olabilir. Değeri 5 ' e artırırsanız eğitim verilerinin aynı koşulları karşılayan en az beş durum içermesi gerekir.  
   
-8.  Seçin **kategorik özellikleri için bilinmeyen değerlere izin** eğitimi veya doğrulama kümelerinde bilinmeyen değerler için bir grup oluşturmak için seçeneği. Model için bilinen değerleri daha az kesin olabilir, ancak daha iyi tahminler elde etmek için yeni (bilinmiyor) değerler sağlayabilirsiniz. 
+8.  Eğitim veya doğrulama kümelerinde bilinmeyen değerler için bir grup oluşturmak üzere **kategorik özellikler için bilinmeyen değerlere Izin ver** seçeneğini belirleyin. Model, bilinen değerler için daha az kesin olabilir, ancak yeni (bilinmiyor) değerler için daha iyi tahminler sağlayabilir. 
 
-     Bu seçeneğin işaretini kaldırırsanız, model eğitim verilerde bulunan değerleri kabul edebilir.
+     Bu seçeneğin işaretini kaldırırsanız model yalnızca eğitim verilerinde bulunan değerleri kabul edebilir.
   
-9. Etiketlenmiş bir veri kümesi ve bir ekleme [eğitim modülleri](module-reference.md):  
+9. Etiketli bir veri kümesi ve [eğitim modüllerinden](module-reference.md)birini ekleyin:  
   
-    -   Ayarlarsanız **Oluştur trainer modu** için **tek parametre**, kullanın [modeli eğitme](./train-model.md) modülü.  
+    -   **Tek parametreye**oluşturma ve ayarlama **modunu** ayarlarsanız, [model eğitme](./train-model.md) modülünü kullanın.  
   
     
 ## <a name="results"></a>Sonuçlar
 
-Alıştırma tamamlandıktan sonra:
+Eğitim tamamlandıktan sonra:
 
-+ Çıktısı, her yineleme üzerinde oluşturuldu ağaç görmek için sağ [modeli eğitme](./train-model.md) modülü ve select **Görselleştir**.
++ Her yinelemede oluşturulan ağacı görmek için [eğitim modeli](./train-model.md) modülünün çıktısına sağ tıklayın ve **Görselleştir**' i seçin.
   
-    Her ağaç gruplama detaya gitme ve her düğüm için kuralları görmek için tıklayın.
+    Her bir ağaca tıklayarak her bir düğümün kurallarını inceleyin ve her bir düğüm için kuralları görüntüleyin.
 
-+ Model anlık görüntüsünü kaydetmek için sağ **eğitilen Model** çıktı ve seçin **Modeli Kaydet**. Denemeyi art arda gelen çalışır kaydedilmiş model güncelleştirilmez.
++ Modelin anlık görüntüsünü kaydetmek için **eğitilen model** çıktısına sağ tıklayın ve **modeli Kaydet**' i seçin. Kaydedilen model, ardışık düzenin art arda çalıştırmaları üzerinde güncelleştirilmedi.
 
-+ Modeli Puanlama için kullanmak için ekleyin **Score Model** modülünü deneme.
-
++ Puanlama için modeli kullanmak üzere, bir işlem hattına **puan modeli** modülünü ekleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

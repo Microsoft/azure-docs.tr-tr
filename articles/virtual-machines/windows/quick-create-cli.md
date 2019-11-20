@@ -1,27 +1,26 @@
 ---
-title: Hızlı Başlangıç - Azure PowerShell ile Windows VM Oluşturma | Microsoft Docs
-description: Bu hızlı başlangıçta Azure PowerShell’i kullanarak Windows sanal makinesi oluşturmayı öğrenirsiniz
+title: Hızlı başlangıç-Azure CLı kullanarak Windows VM oluşturma
+description: Bu hızlı başlangıçta, Azure CLı kullanarak bir Windows sanal makinesi oluşturma hakkında bilgi edineceksiniz.
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 07/02/2019
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: aaa9441064b7bcf5a105b61c61fc5e64f5687dc7
-ms.sourcegitcommit: 978e1b8cac3da254f9d6309e0195c45b38c24eb5
+ms.openlocfilehash: a3ad81091fa93993f71c6d65175e50f6ee216757
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67551645"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073462"
 ---
 # <a name="quickstart-create-a-windows-virtual-machine-with-the-azure-cli"></a>Hızlı Başlangıç: Azure CLI ile Windows sanal makinesi oluşturma
 
@@ -33,7 +32,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 Azure Cloud Shell, bu makaledeki adımları çalıştırmak için kullanabileceğiniz ücretsiz bir etkileşimli kabuktur. Yaygın Azure araçları, kabuğa önceden yüklenmiştir ve kabuk, hesabınızla birlikte kullanılacak şekilde yapılandırılmıştır. 
 
-Cloud Shell'i açmak için kod bloğunun sağ üst köşesinden **Deneyin**'i seçmeniz yeterlidir. İsterseniz [https://shell.azure.com/bash](https://shell.azure.com/bash) adresine giderek Cloud Shell'i ayrı bir tarayıcı sekmesinde de başlatabilirsiniz. Seçin **kopyalama** kod bloklarını kopyalamak için Cloud Shell ve ENTER tuşuna yapıştırın **Enter** çalıştırmak için.
+Cloud Shell'i açmak için kod bloğunun sağ üst köşesinden **Deneyin**'i seçmeniz yeterlidir. İsterseniz [https://shell.azure.com/bash](https://shell.azure.com/bash) adresine giderek Cloud Shell'i ayrı bir tarayıcı sekmesinde de başlatabilirsiniz. Kod bloklarını kopyalamak için **Kopyala** ' yı seçin, Cloud Shell yapıştırın ve **ENTER** tuşuna basarak çalıştırın.
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
@@ -45,10 +44,10 @@ az group create --name myResourceGroup --location eastus
 
 ## <a name="create-virtual-machine"></a>Sanal makine oluşturma
 
-[az vm create](/cli/azure/vm) ile bir VM oluşturun. Aşağıdaki örnekte *myVM* adlı bir VM oluşturulur. Bu örnekte *azureuser* için yönetici kullanıcı adı. 
+[az vm create](/cli/azure/vm) ile bir VM oluşturun. Aşağıdaki örnekte *myVM* adlı bir VM oluşturulur. Bu örnek, bir Yönetici Kullanıcı adı için *azureuser* kullanır. 
 
-Değerini değiştirmeniz gerekir `--admin-password` veya başarısız olur. Uyan bir parola değiştirme [Azure Vm'leri için parola gereksinimlerini](/azure/virtual-machines/windows/faq#what-are-the-password-requirements-when-creating-a-vm
-). Sanal Makineye bağlandığınızda kullanıcı adını ve parolayı daha sonra kullanılır.
+`--admin-password` değerini değiştirmeniz gerekir veya başarısız olur. [Azure VM 'lerinin parola gereksinimlerini](/azure/virtual-machines/windows/faq#what-are-the-password-requirements-when-creating-a-vm
+)karşılayan bir parolayla değiştirin. SANAL makineye bağlandığınızda Kullanıcı adı ve parola daha sonra kullanılacaktır.
 
 ```azurecli-interactive
 az vm create \
@@ -92,7 +91,7 @@ Yerel bilgisayarınızdan bir uzak masaüstü oturumu oluşturmak için aşağı
 mstsc /v:publicIpAddress
 ```
 
-## <a name="install-web-server"></a>Web sunucusunu yükleyin
+## <a name="install-web-server"></a>Web sunucusunu yükleme
 
 Sanal makinenizin çalıştığını görmek için IIS web sunucusunu yükleyin. VM’de bir PowerShell istemi açın ve şu komutu çalıştırın:
 

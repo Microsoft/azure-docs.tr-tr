@@ -3,16 +3,16 @@ title: Premium Verizon'dan Azure CDN kural altyapısı özellikleri | Microsoft 
 description: Kural altyapısı özellikleri Azure CDN from Verizon Premium için başvuru belgeleri.
 services: cdn
 author: mdgattuso
-ms.service: cdn
+ms.service: azure-cdn
 ms.topic: article
 ms.date: 05/31/2019
 ms.author: magattus
-ms.openlocfilehash: 7e75a6ffe28aa74ea2fad30bbe2728317712d86b
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 9177ac544c83305ae95ad681d3dc9f84ac64ea36
+ms.sourcegitcommit: ccb9a7b7da48473362266f20950af190ae88c09b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67443484"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67593235"
 ---
 # <a name="azure-cdn-from-verizon-premium-rules-engine-features"></a>Azure CDN Verizon Premium kural altyapısı özellikleri
 
@@ -173,7 +173,7 @@ Ad | Amaç
 
 **Amaç**: İstek sahibine gönderilen yanıtta bir Age yanıtı üstbilgisi içerilip içerilmeyeceğini belirler.
 
-Değer|Sonuç
+Value|Sonuç
 --|--
 Enabled | Age yanıtı üstbilgisi istek sahibine gönderilen yanıt dahil edilir.
 Devre dışı | Age yanıtı üstbilgisi istek sahibine gönderilen yanıtından çıkarılır.
@@ -228,7 +228,7 @@ Prebuf saniye|Bu seçenek POP'ları bant genişliği daraltma kadar beklenecek s
 
 **Amaç:** İstek önbelleğe almayı Atla gerekmediğini belirler.
 
-Değer|Sonuç
+Value|Sonuç
 --|--
 Enabled|İçerik POP'ları üzerinde önceden önbelleğe alınmış olsa bile kaynak sunucuya geçiş tüm istekleri neden olur.
 Devre dışı|POP önbellek varlıklara göre kendi yanıt üst bilgilerinde tanımlanmış önbellek İlkesi neden olur.
@@ -296,7 +296,7 @@ Anahtar bilgileri:
 
 Bu tür bir yapılandırma yapmanın en kolay yolu dış Max-Age ve Cache-Control üst bilgisi işleme özellikleri aynı deyimde yerleştirmektir.
 
-Değer|Sonuç
+Value|Sonuç
 --|--
 Üzerine yaz|Aşağıdaki eylemler gerçekleşir sağlar:<br/> -Yazar `Cache-Control` kaynak sunucu tarafından oluşturulan üstbilgi. <br/>-Ekler `Cache-Control` üstbilgi üretilen yanıta dış Max-Age özelliği.
 Geçişi|Sağlar `Cache-Control` dış Max-Age özelliği tarafından üretilen üst bilgi yanıtı hiçbir zaman eklenir. <br/> Kaynak sunucu oluşturursa bir `Cache-Control` başlık arabimini aracılığıyla son kullanıcıya. <br/> Kaynak sunucu değil oluşturmak, bir `Cache-Control` üst bilgi, ardından bu seçeneği yanıt üst bilgisi olmayan öğeler neden olabilir bir `Cache-Control` başlığı.
@@ -320,7 +320,7 @@ Anahtar bilgileri:
 - Bir veya daha fazla sorgu dizesi parametresi adları belirtin ve parametre adları tek bir boşluk ile ayırın.
 - Bu özellik, sorgu dizesi parametreleri dahil veya önbellek anahtarından dışlanan olup olmadığını belirler. Aşağıdaki tabloda her seçeneğe ilişkin ek bilgiler sağlanmaktadır.
 
-Tür|Açıklama
+Type|Açıklama
 --|--
  İçerir|  Belirtilen her parametre önbellek anahtarını dahil olduğunu gösterir. Bu özellik içinde tanımlanan bir sorgu dizesi parametresi için benzersiz bir değer içeren her istek için benzersiz bir önbellek anahtarı oluşturulur.
  Tüm ekleme  |Benzersiz sorgu dizesi içeren bir varlık için her istek için benzersiz bir önbellek anahtarı oluşturulduğunu gösterir. Küçük bir önbellek isabet yüzdesi neden olabileceği için bu yapılandırma türü genellikle önerilmez. Daha fazla isteklere hizmet gerekir çünkü düşük bir önbellek isabet sayısı, kaynak sunucu üzerindeki yükü artırır. Bu yapılandırma, "benzersiz-cache" sorgu dizesi önbelleğe alma sayfasında olarak bilinen bir önbelleğe alma davranışı çoğaltır.
@@ -441,7 +441,7 @@ Kısmi önbellek isabetsizliği genellikle bir kullanıcı bir indirme iptal son
 
 HTTP büyük bir platform için varsayılan yapılandırma, müşteri kaynak sunucu üzerindeki yükü azaltır ve, müşterilerinizin içerik indirme hızını artırır çünkü tutun.
 
-Değer|Sonuç
+Value|Sonuç
 --|--
 Enabled|Varsayılan davranışını geri yükler. Varlık kaynak sunucusundan bir arka planda getirme başlatmak için POP zorlamak için varsayılan davranıştır. Sonra varlık POP'ın yerel önbellek üzerinde olacaktır.
 Devre dışı|POP, varlık için bir arka planda getirme gerçekleştirmesini engeller. Bir sonraki istek için o varlığı o bölgenin müşteri kaynak sunucudan istemek POP neden sonucudur.
@@ -551,7 +551,7 @@ Hata ayıklama önbellek yanıt üst bilgileri, aşağıdaki üst bilgi ve belir
 
 X-EC-Debug: x-ec-cache,x-ec-check-cacheable,x-ec-cache-key,x-ec-cache-state
 
-Değer|Sonuç
+Value|Sonuç
 -|-
 Enabled|Hata ayıklama önbellek yanıt üstbilgileri için istekleri X-EC-Debug üst bilgi içeren bir yanıt döndürür.
 Devre dışı|X-EC-Debug yanıt üst bilgisi yanıttan edilmeyecek.
@@ -612,7 +612,7 @@ Hangi önbellek ayarları izlenen şekilde nedeniyle, bu özellik aşağıdaki e
 
 **Amaç**: Bir 403 Yasak yanıtı ile reddedilen tüm istekleri olup olmadığını belirler.
 
-Değer | Sonuç
+Value | Sonuç
 ------|-------
 Enabled| Bir 403 Yasak yanıtı ile reddedilir eşleştirme ölçütü karşılayan tüm isteklerin neden olur.
 Devre dışı| Varsayılan davranışını geri yükler. Döndürülecek yanıt türünü belirlemek kaynak sunucuya izin vermek için varsayılan davranıştır.
@@ -678,7 +678,7 @@ Anahtar bilgileri:
 
 - İstekleri, yalnızca aynı platform için karşılık gelen CNAME'ler uca yönlendirilebilir.
 
-Değer|Sonuç
+Value|Sonuç
 -|-
 Enabled|İstekleri yeniden yönlendirilebilir.
 Devre dışı|İstekleri yeniden yönlendirilmeyecek.
@@ -758,7 +758,7 @@ Anahtar bilgileri:
 
 Bir no-cache isteği HTTP istemcisi gönderdiğinde oluşur bir `Cache-Control: no-cache` ve/veya `Pragma: no-cache` HTTP isteği üstbilgisi.
 
-Değer|Sonuç
+Value|Sonuç
 --|--
 Enabled|Bir HTTP istemci no-cache istekleri kaynak sunucuya iletilmesi için ve kaynak sunucu HTTP istemcisine geri yanıt üst bilgileri ve gövdesini POP aracılığıyla döndüreceği sağlar.
 Devre dışı|Varsayılan davranışını geri yükler. No-cache istekleri kaynak sunucuya iletilmesini önlemek için varsayılan davranıştır.
@@ -1017,7 +1017,7 @@ Anahtar bilgileri:
 
 Kısmi Bu önbellek, ardından istenen içeriğin tam olarak önbelleğe kadar bu içeriği için yeni isteklerini karşılamak için kullanılabilir.
 
-Değer|Sonuç
+Value|Sonuç
 -|-
 Enabled|İstekleri kısmen önbelleğe alınmış içeriği oluşturabilirsiniz.
 Devre dışı|İstekleri yalnızca istenen içeriğin tam olarak önbelleğe alınmış bir sürümü oluşturabilirsiniz.
@@ -1081,7 +1081,7 @@ Aşağıdaki HTTP üst bilgilerini varsayılan listede yer:
 
 Geçerli değerler şunlardır:
 
-Değer|Sonuç
+Value|Sonuç
 --|--
 Enabled|Varlık kaynak sunucudan öğeleri tekrar Al POP'a neden olur.
 Devre dışı|Varsayılan davranışını geri yükler. İstek üzerine geçerli önbellek kıymetler hizmet için varsayılan davranıştır.
@@ -1148,7 +1148,7 @@ Belirtilen üst bilgi adı aşağıdaki adları hiçbirini eşleşmediğini emin
 
 **Amaç:** Talep edilen içeriği müşteri kaynak sunucudan alınırken bir hata önbellek yeniden doğrulama sırasında veya ortaya çıktığında önbelleğe alınmış içerikleri teslim süresi olup olmadığını belirler.
 
-Değer|Sonuç
+Value|Sonuç
 -|-
 Enabled|Bir kaynak sunucuya bağlanma sırasında bir hata oluştuğunda eski içeriği istemciye hizmet verir.
 Devre dışı|Kaynak sunucunun hata olarak iletilir.
@@ -1192,7 +1192,7 @@ Belirteç tabanlı kimlik doğrulaması etkinleştirilirse, şifrelenmiş bir be
 
 Bu özellik URL yeniden yazma özelliği hariç olmak üzere çoğu özelliği daha önceliklidir.
 
-Değer | Sonuç
+Value | Sonuç
 ------|---------
 Enabled | Belirteç tabanlı kimlik doğrulaması ile istenen içeriği korunur. Yalnızca geçerli bir belirteç sağlayın ve kendi gereksinimlerini istemcilerden gelen istekleri kabul edilir. FTP işlemleri, belirteç tabanlı kimlik doğrulamasını bırakılır.
 Devre dışı| Varsayılan davranışını geri yükler. Bir isteğin güvenli olup olmadığını belirlemek belirteç tabanlı kimlik doğrulaması yapılandırmanızı izin vermek için varsayılan davranıştır.
@@ -1240,7 +1240,7 @@ URL yeniden yönlendirmesi, yalnızca 3xx yanıt kodları için geçerlidir.
 
 İsteğe bağlı üst bilgi değeri seçenek alfasayısal karakterler, tırnak işareti ve boşluk destekler.
 
-#### <a name="authentication"></a>Kimlik Doğrulaması
+#### <a name="authentication"></a>Authentication
 
 Bu özellik, WWW-Authenticate üstbilgisi için belirteç tabanlı kimlik doğrulaması tarafından korunan içeriği yetkisiz bir isteğe yanıt verirken ekleyin yeteneğini destekler. WWW-Authenticate üstbilgisi yapılandırmanızda "temel" olarak ayarlanmışsa, yetkisiz bir kullanıcı hesabı kimlik bilgileri istenir.
 
@@ -1270,7 +1270,7 @@ Bu özellik tarafından etkilenen Parametreler şunlardır:
 
 Geçerli değerler şunlardır:
 
-Değer|Sonuç
+Value|Sonuç
 ---|----
 Enabled|URL'ler için belirteç tabanlı kimlik doğrulama parametreleri karşılaştırılırken durumu yok saymak POP neden olur.
 Devre dışı|Varsayılan davranışını geri yükler. URL karşılaştırmalar büyük küçük harfe duyarlı olması belirteci kimlik doğrulaması için varsayılan davranıştır.
@@ -1293,7 +1293,7 @@ Anahtar bilgileri:
 - Değer seçeneği "ec_token" ayarlanamaz
 - Değer seçeneği tanımlanan adın yalnızca geçerli URL karakterlerini içerdiğinden emin olun.
 
-Değer|Sonuç
+Value|Sonuç
 ----|----
 Enabled|Değer seçeneği belirteçleri tanımlanmalıdır sorgu dizesi parametresinin adını tanımlar.
 Devre dışı|İstek URL'si içinde tanımlanmamış bir sorgu dizesi parametresi olarak bir belirteç belirtilebilir.

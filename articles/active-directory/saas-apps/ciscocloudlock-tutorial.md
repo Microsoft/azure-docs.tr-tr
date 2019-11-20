@@ -1,5 +1,5 @@
 ---
-title: 'Öğretici: Bulut güvenlik yapısı ile Azure Active Directory Tümleştirme | Microsoft Docs'
+title: 'Öğretici: Cloud Security dokusuna Azure Active Directory tümleştirme | Microsoft Docs'
 description: Azure Active Directory ve bulut güvenlik doku arasında çoklu oturum açmayı yapılandırmayı öğrenin.
 services: active-directory
 documentationCenter: na
@@ -13,107 +13,84 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 04/15/2019
+ms.date: 07/18/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 70f4b900a1ccc2769e397c32b452ef939da00099
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c0b1471abd7e057af919ed274547daf94d356c2b
+ms.sourcegitcommit: ac29357a47cc05afdf0f84834de5277598f4d87c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67105530"
+ms.lasthandoff: 09/03/2019
+ms.locfileid: "70213595"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-cloud-security-fabric"></a>Öğretici: Bulut güvenlik yapısı ile Azure Active Directory Tümleştirme
+# <a name="tutorial-integrate-the-cloud-security-fabric-with-azure-active-directory"></a>Öğretici: Cloud Security dokusunu Azure Active Directory ile tümleştirin
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile bulut güvenlik yapısı tümleştirme konusunda bilgi edinin.
-Bulut güvenlik yapısı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, bulut güvenlik dokusunun Azure Active Directory (Azure AD) ile nasıl tümleştirileceğini öğreneceksiniz. Bulut güvenlik dokusunu Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Bulut güvenlik yapısı erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak bulut güvenlik yapısı (çoklu oturum açma) için oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de, bulut güvenlik dokusuna erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla bulut güvenlik dokusuna otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile bulut güvenlik yapısı yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa alabileceğiniz bir [ücretsiz hesap](https://azure.microsoft.com/free/)
-* Bulut güvenlik Fabric çoklu oturum açmayı abonelik etkin.
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Cloud Security Fabric çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* Bulut güvenlik Fabric destekler **SP** tarafından başlatılan
+* Cloud Security Fabric, **SP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-cloud-security-fabric-from-the-gallery"></a>Bulut güvenlik yapısı galeri ekleme
+## <a name="adding-the-cloud-security-fabric-from-the-gallery"></a>Bulut güvenlik yapısı galeri ekleme
 
 Azure AD bulut güvenlik yapısı tümleştirilmesi yapılandırmak için bulut güvenliği yapısı Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Bulut güvenlik yapısı Galeriden eklemek için aşağıdaki adımları gerçekleştirin:**
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **Cloud Security dokusunu** yazın.
+1. Sonuçlar panelinden **Cloud Security Fabric** ' i seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
-
-    ![Azure Active Directory düğmesi](common/select-azuread.png)
-
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
-
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
-
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
-
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
-
-4. Arama kutusuna **bulut güvenlik yapısı**seçin **bulut güvenlik yapısı** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
-
-    ![Sonuç listesinde bulut güvenlik yapısı](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırma ve bulut güvenlik adlı bir test kullanıcı tabanlı yapı ile Azure AD çoklu oturum açmayı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve bulut güvenlik dokusunda ilgili kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+**B. Simon**adlı bir test kullanıcısı kullanarak Azure AD SSO 'Yu bulut güvenlik dokusunda yapılandırın ve test edin. SSO 'nun çalışması için, bulut güvenlik dokusunda bir Azure AD kullanıcısı ve ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma bulut güvenlik yapı ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD SSO 'yu bulut güvenlik dokusuna göre yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Bulut güvenlik Fabric çoklu oturum açmayı yapılandırma](#configure-cloud-security-fabric-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Bulut güvenlik yapısı test kullanıcısı oluşturma](#create-cloud-security-fabric-test-user)**  - bulut güvenlik dokusunda, kullanıcının Azure AD gösterimini bağlı Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+2. **[Cloud Security fabrıc SSO 'Yu yapılandırma](#configure-the-cloud-security-fabric-sso)** -uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+5. Kullanıcının Azure AD gösterimine bağlı olan bulut güvenlik dokusunda B. Simon 'a sahip olmak için **[Cloud Security Fabric test kullanıcısını oluşturun](#create-the-cloud-security-fabric-test-user)** .
+6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-Azure AD çoklu oturum açma bulut güvenlik yapısı ile yapılandırmak için aşağıdaki adımları gerçekleştirin:
+1. [Azure Portal](https://portal.azure.com/), **Cloud Security Fabric** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **bulut güvenlik yapısı** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
-
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
-
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
-
-    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
-
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
-
-    ![Bulut güvenlik Fabric etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier.png)
-
-    a. İçinde **oturum açma URL'si** metin kutusuna bir URL yazın:
+    a. **Oturum açma URL 'si** metin kutusuna bir URL yazın:
 
     | |
     |--|
     | `https://platform.cloudlock.com` |
     | `https://app.cloudlock.com` |
 
-    b. İçinde **tanımlayıcı (varlık kimliği)** metin kutusuna şu biçimi kullanarak bir URL yazın:
+    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:
 
     | |
     |--|
@@ -121,85 +98,68 @@ Azure AD çoklu oturum açma bulut güvenlik yapısı ile yapılandırmak için 
     | `https://app.cloudlock.com/gate/saml/sso/<subdomain>` |
 
     > [!NOTE]
-    > Tanımlayıcı değerini gerçek değil. Değerini gerçek tanımlayıcısıyla güncelleştirin. İlgili kişi [bulut güvenlik Fabric istemci Destek ekibine](mailto:support@cloudlock.com) değeri alınamıyor. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Tanımlayıcı değerini gerçek değil. Değerini gerçek tanımlayıcısıyla güncelleştirin. İlgili kişi [bulut güvenlik Fabric istemci Destek ekibine](mailto:support@cloudlock.com) değeri alınamıyor. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **Federasyon meta veri XML**  bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+4. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **Federasyon meta verileri XML** 'i bulun ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
     ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-6. Üzerinde **bulut güvenlik dokusunu ayarlama** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+5. **İmzalama** seçeneklerini gereksiniminize göre değiştirmek Için, **SAML imzalama sertifikası** Iletişim kutusunu açmak için **Düzenle** düğmesine tıklayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![SAML yanıtı](./media/ciscocloudlock-tutorial/saml.png)
 
-    a. Oturum Açma URL'si:
+    a. **Imzalama seçeneği**için **SAML yanıtı ve onaylama seçeneğini imzala** seçeneğini belirleyin.
 
-    b. Azure AD Tanımlayıcısı
+    b. **Imzalama algoritması**için **SHA-256** seçeneğini belirleyin.
 
-    c. Oturum Kapatma URL'si
+    c. **Kaydet**’e tıklayın.  
 
-### <a name="configure-cloud-security-fabric-single-sign-on"></a>Bulut güvenlik Fabric çoklu oturum açmayı yapılandırın
+6. **Cloud Security dokusunu ayarlama** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-Çoklu oturum açmayı yapılandırma **bulut güvenlik yapısı** tarafı, indirilen göndermek için ihtiyacınız **Federasyon meta verileri XML** ve uygun Azure portalına kopyalanan URL'lerden [Cloud Security Fabric destek ekibi](mailto:support@cloudlock.com). Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
+### <a name="configure-the-cloud-security-fabric-sso"></a>Cloud Security Fabric SSO 'yu yapılandırma
+
+**Cloud Security Fabric** tarafında çoklu oturum açmayı yapılandırmak için, Indirilen **Federasyon meta veri XML** 'sini ve Azure Portal ' den uygun kopyalanmış URL 'leri [Cloud Security Fabric destek ekibine](mailto:support@cloudlock.com)göndermeniz gerekir. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
-
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
-
-2. Seçin **yeni kullanıcı** ekranın üstünde.
-
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
-
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
-
-    ![Kullanıcı iletişim kutusu](common/user-properties.png)
-
-    a. İçinde **adı** alana **BrittaSimon**.
-  
-    b. İçinde **kullanıcı adı** alan türü `brittasimon@yourcompanydomain.extension`. Örneğin, BrittaSimon@contoso.com
-
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
-
-    d. **Oluştur**’a tıklayın.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Seçin **yeni kullanıcı** ekranın üstünde.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına, username@companydomain.extensiongirin. Örneğin: `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, bulut güvenliği yapısı için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Bu bölümde, bulut güvenlik dokusuna erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **bulut güvenlik yapısı**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde **bulut güvenlik yapısı**.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-2. Uygulamalar listesinde **bulut güvenlik yapısı**.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![Uygulamalar listesini bulut güvenliği yapısı bağlantıdaki](common/all-applications.png)
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+### <a name="create-the-cloud-security-fabric-test-user"></a>Cloud Security Fabric test kullanıcısını oluşturma
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+Bu bölümde, bulut güvenlik dokusunda B. Simon adlı bir Kullanıcı oluşturacaksınız. Cloud Security Fabric platformunda kullanıcıları eklemek için [Cloud Security Fabric destek ekibi](mailto:support@cloudlock.com) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
-    ![Atama Ekle bölmesi](common/add-assign-user.png)
-
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
-
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
-
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
-
-### <a name="create-cloud-security-fabric-test-user"></a>Bulut güvenlik yapısı test kullanıcısı oluşturma
-
-Bu bölümde, bulut güvenliği Dokusunda Britta Simon adlı bir kullanıcı oluşturun. Çalışmak [bulut güvenlik Fabric destek ekibi](mailto:support@cloudlock.com) bulut güvenlik Fabric platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
-
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
+### <a name="test-sso"></a>Test SSO 'SU 
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli bulut güvenlik yapısı kutucuğa tıkladığınızda, size otomatik olarak bulut güvenlik SSO'yu ayarlama dokusuna oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde Cloud Security Fabric kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız bulut güvenlik dokusuna otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
@@ -207,5 +167,4 @@ Erişim paneli bulut güvenlik yapısı kutucuğa tıkladığınızda, size otom
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

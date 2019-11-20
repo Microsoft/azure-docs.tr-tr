@@ -1,44 +1,38 @@
 ---
-title: Kapsayıcılar için Azure İzleyici'yi kullanarak performans uyarıları oluşturma | Microsoft Docs
-description: Bu makalede, bellek ve CPU kullanımı için günlük sorguları dayalı özel uyarılar oluşturmak için kapsayıcılar için Azure İzleyici kullanmayı açıklar.
-services: azure-monitor
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
+title: Kapsayıcılar için Azure Izleyicisini kullanarak performans uyarıları oluşturma | Microsoft Docs
+description: Bu makalede, bellek ve CPU kullanımı için günlük sorgularına dayalı özel uyarılar oluşturmak üzere kapsayıcılar için Azure Izleyici 'nin nasıl kullanılacağı açıklanır.
 ms.service: azure-monitor
+ms.subservice: ''
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 04/26/2019
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 46ac6794272728069d50479f8cd097185bfeeb1a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 04/26/2019
+ms.openlocfilehash: c71893ec9eae844fb213114f6a3805815ff5894f
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65072397"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555456"
 ---
-# <a name="how-to-set-up-alerts-for-performance-problems-in-azure-monitor-for-containers"></a>Kapsayıcılar için Azure İzleyici'de performans sorunları için uyarılar ayarlama
-Kapsayıcılar için Azure İzleyici, Azure Container Instances veya yönetilen için barındırılan Kubernetes kümeleri için Azure Kubernetes Service'teki (AKS) dağıtılan kapsayıcı iş yüklerinin performansını izler.
+# <a name="how-to-set-up-alerts-for-performance-problems-in-azure-monitor-for-containers"></a>Kapsayıcılar için Azure Izleyici 'de performans sorunları için uyarıları ayarlama
+Kapsayıcılar için Azure Izleyici, Azure Kubernetes Service (AKS) üzerinde barındırılan, Azure Container Instances veya yönetilen Kubernetes kümelerine dağıtılan kapsayıcı iş yüklerinin performansını izler.
 
-Bu makalede aşağıdaki durumlar için uyarılar etkinleştirme:
+Bu makalede, aşağıdaki durumlar için uyarıların nasıl etkinleştirileceği açıklanır:
 
-- Küme düğümlerinde CPU veya bellek kullanımı eşiği aştığında
-- Bir denetleyici içinde herhangi bir kapsayıcı CPU veya bellek kullanımı, karşılık gelen kaynak üzerinde ayarlanmış olan bir sınır karşılaştırıldığında bir eşiği aştığında
-- *NotReady* durumu düğümünde sayar
-- *Başarısız*, *bekleyen*, *bilinmeyen*, *çalıştıran*, veya *başarılı* aşaması pod sayıları
-- Boş disk alanı küme düğümlerinde bir eşiği aştığında 
+- Küme düğümlerinde CPU veya bellek kullanımı bir eşiği aştığında
+- Bir denetleyici içindeki herhangi bir kapsayıcıdaki CPU veya bellek kullanımı, karşılık gelen kaynak üzerinde ayarlanan sınıra kıyasla bir eşiği aşarsa
+- *NotReady* durum düğümü sayıları
+- *Başarısız*, *bekleyen*, *Bilinmeyen*, *çalışan*veya *başarılı* Pod-aşama sayıları
+- Küme düğümlerindeki boş disk alanı bir eşiği aştığında 
 
-Yüksek CPU veya bellek kullanımı ya da küme düğümlerinde düşük boş disk alanı uyarı için bir ölçüm uyarısı veya bir ölçüm ölçüsü uyarı oluşturmak için sağlanan sorgu kullanın. Ölçüm uyarıları günlük uyarıları daha düşük gecikme süresi vardır. Ancak, gelişmiş sorgulama ve daha gelişmiş algoritmaların günlük uyarıları sağlar. Günlük uyarıları kullanarak sorgular için geçerli bir datetime karşılaştırma *artık* işleci ve bir saat geri giderek. (Kapsayıcılar için azure İzleyici, tüm tarihleri Eşgüdümlü Evrensel Saat (UTC) biçiminde depolar.)
+Yüksek CPU veya bellek kullanımı veya küme düğümlerinde düşük boş disk alanı için uyarı vermek üzere, bir ölçüm uyarısı veya ölçüm ölçüm uyarısı oluşturmak için belirtilen sorguları kullanın. Ölçüm uyarıları, günlük uyarılarından daha düşük gecikme süresine sahiptir. Ancak, günlük uyarıları gelişmiş sorgulama ve daha büyük gelişmiş algoritmaların mümkündür sağlar. Günlük uyarıları sorguları, *Now* işlecini kullanarak ve bir saat geri dönerek bir tarih saatini mevcut ile karşılaştırır. (Kapsayıcılar için Azure Izleyici tüm tarihleri Eşgüdümlü Evrensel Saat (UTC) biçiminde depolar.)
 
-Azure İzleyici uyarılarla ilgili bilgi sahibi değilseniz bkz [Microsoft azure'da uyarılara genel bakış](../platform/alerts-overview.md) başlamadan önce. Günlük sorguları kullanan uyarılar hakkında daha fazla bilgi edinmek için [Azure İzleyici'de günlük uyarıları](../platform/alerts-unified-log.md). Ölçüm Uyarıları hakkında daha fazla bilgi için bkz. [Azure İzleyici ölçüm uyarıları](../platform/alerts-metric-overview.md).
+Azure Izleyici uyarılarını bilmiyorsanız, başlamadan önce bkz. [Microsoft Azure uyarılara genel bakış](../platform/alerts-overview.md) . Günlük sorgularını kullanan uyarılar hakkında daha fazla bilgi edinmek için bkz. [Azure izleyici 'de günlük uyarıları](../platform/alerts-unified-log.md). Ölçüm uyarıları hakkında daha fazla bilgi için bkz. [Azure izleyici 'de ölçüm uyarıları](../platform/alerts-metric-overview.md).
 
-## <a name="resource-utilization-log-search-queries"></a>Kaynak kullanımı günlük arama sorguları
-Bu bölümdeki sorguların her uyarı senaryoyu destekler. 7\. adımda alışık değilseniz [uyarı oluşturma](#create-an-alert-rule) bu makalenin.
+## <a name="resource-utilization-log-search-queries"></a>Kaynak kullanım günlüğü arama sorguları
+Bu bölümdeki sorgular her uyarı senaryosunu destekler. Bu makalenin [uyarı oluştur](#create-an-alert-rule) bölümünde 7. adımda kullanılırlar.
 
-Aşağıdaki sorgu ortalama CPU kullanımı ortalama olarak dakikada üye düğümlerinin CPU kullanımının hesaplar.  
+Aşağıdaki sorgu ortalama CPU kullanımını her dakikada ortalama üye düğümlerin CPU kullanımı olarak hesaplar.  
 
 ```kusto
 let endDateTime = now();
@@ -73,7 +67,7 @@ KubeNodeInventory
 | summarize AggregatedValue = avg(UsagePercent) by bin(TimeGenerated, trendBinSize), ClusterName
 ```
 
-Aşağıdaki sorgu ortalama bellek kullanımı ortalama olarak dakikada üye düğümlerinin bellek kullanımının hesaplar.
+Aşağıdaki sorgu ortalama bellek kullanımını her dakikada ortalama üye düğümlerinin bellek kullanımı olarak hesaplar.
 
 ```kusto
 let endDateTime = now();
@@ -108,9 +102,9 @@ KubeNodeInventory
 | summarize AggregatedValue = avg(UsagePercent) by bin(TimeGenerated, trendBinSize), ClusterName
 ```
 >[!IMPORTANT]
->Aşağıdaki sorgularda yer tutucu değerlerini kullanın \<your-kümesi-adı > ve \<Denetleyici adı Sihirbazı > Küme ve denetleyici temsil etmek için. Uyarıları ayarlama, ortamınıza özgü değerlerle değiştirin.
+>Aşağıdaki sorgular, kümenizi ve denetleyicinizi temsil etmek için \<your-Cluster-name > ve \<your-Controller-name > yer tutucu değerlerini kullanır. Uyarıları ayarlarken bunları ortamınıza özgü değerlerle değiştirin.
 
-Aşağıdaki sorgu ortalama CPU kullanımı bir denetleyicideki tüm kapsayıcıların CPU kullanımı bir denetleyicide her kapsayıcı örneği dakikada ortalama olarak hesaplar. Ölçüm, bir kapsayıcı için ayarlanan sınırı yüzdesidir.
+Aşağıdaki sorgu, bir denetleyicideki tüm kapsayıcıların ortalama CPU kullanımını, her dakikada bir denetleyicideki her kapsayıcı örneğinin ortalama CPU kullanımı olarak hesaplar. Ölçüm, bir kapsayıcı için ayarlanan sınırın yüzdesidir.
 
 ```kusto
 let endDateTime = now();
@@ -150,7 +144,7 @@ KubePodInventory
 | summarize AggregatedValue = avg(UsagePercent) by bin(TimeGenerated, trendBinSize) , ContainerName
 ```
 
-Aşağıdaki sorgu tüm kapsayıcıların bir denetleyicide ortalama bellek kullanımı her kapsayıcı örneği bir denetleyicide'nın bellek kullanımı dakikada ortalama olarak hesaplar. Ölçüm, bir kapsayıcı için ayarlanan sınırı yüzdesidir.
+Aşağıdaki sorgu, bir denetleyicideki tüm kapsayıcıların ortalama bellek kullanımını, her dakikada bir denetleyicideki her kapsayıcı örneğinin ortalama bellek kullanımı olarak hesaplar. Ölçüm, bir kapsayıcı için ayarlanan sınırın yüzdesidir.
 
 ```kusto
 let endDateTime = now();
@@ -190,7 +184,7 @@ KubePodInventory
 | summarize AggregatedValue = avg(UsagePercent) by bin(TimeGenerated, trendBinSize) , ContainerName
 ```
 
-Aşağıdaki sorgu tüm düğümleri ve durumuna sahip sayıları döndürür *hazır* ve *NotReady*.
+Aşağıdaki sorgu, bir durumu *Ready* ve *NotReady*olan tüm düğümleri ve sayıları döndürür.
 
 ```kusto
 let endDateTime = now();
@@ -217,7 +211,7 @@ KubeNodeInventory
             NotReadyCount = todouble(NotReadyCount) / ClusterSnapshotCount
 | order by ClusterName asc, Computer asc, TimeGenerated desc
 ```
-Pod aşama sayar aşağıdaki sorgunun döndürdüğü, tüm aşamalarına temel: *Başarısız*, *bekleyen*, *bilinmeyen*, *çalıştıran*, veya *başarılı*.  
+Aşağıdaki sorgu tüm aşamalara göre Pod aşama sayısını döndürüyor: *başarısız*, *bekleyen*, *bilinmiyor*, *çalışıyor*veya *başarılı*.  
 
 ```kusto
 let endDateTime = now();
@@ -254,9 +248,9 @@ let endDateTime = now();
 ```
 
 >[!NOTE]
->Gibi belirli pod aşamalarına uyarmak için *bekleyen*, *başarısız*, veya *bilinmeyen*, sorgunun son satırı değiştirin. Örneğin, uyarı için *FailedCount* kullanın: <br/>`| summarize AggregatedValue = avg(FailedCount) by bin(TimeGenerated, trendBinSize)`
+>*Bekleyen*, *başarısız*veya *Bilinmeyen*gibi bazı Pod aşamalarda uyarı almak için sorgunun son satırını değiştirin. Örneğin, *FailedCount* kullanım durumunda uyarı almak için: <br/>`| summarize AggregatedValue = avg(FailedCount) by bin(TimeGenerated, trendBinSize)`
 
-Aşağıdaki sorguda kullanılan boş alan % 90'ı aşan küme düğümleri diskleri döndürür. Küme Kimliği almak için önce aşağıdaki sorguyu çalıştırın ve değeri Şuradan Kopyala: `ClusterId` özelliği:
+Aşağıdaki sorgu kullanılan %90 boş alanı aşan küme düğümleri disklerini döndürür. Küme KIMLIĞINI almak için, önce aşağıdaki sorguyu çalıştırın ve `ClusterId` özelliğinden değeri kopyalayın:
 
 ```kusto
 InsightsMetrics
@@ -274,7 +268,7 @@ InsightsMetrics
 | where TimeGenerated < endDateTime
 | where TimeGenerated >= startDateTime
 | where Origin == 'container.azm.ms/telegraf'            
-| where Namespace == 'disk'            
+| where Namespace == 'container.azm.ms/disk'            
 | extend Tags = todynamic(Tags)            
 | project TimeGenerated, ClusterId = Tags['container.azm.ms/clusterId'], Computer = tostring(Tags.hostName), Device = tostring(Tags.device), Path = tostring(Tags.path), DiskMetricName = Name, DiskMetricValue = Val   
 | where ClusterId =~ clusterId       
@@ -284,34 +278,34 @@ InsightsMetrics
 ```
 
 ## <a name="create-an-alert-rule"></a>Uyarı kuralı oluşturma
-Daha önce sağlanan günlük arama kurallarını kullanarak günlük uyarısı Azure İzleyici'de oluşturmak için aşağıdaki adımları izleyin.  
+Daha önce sağlanmış olan günlük arama kurallarından birini kullanarak Azure Izleyici 'de günlük uyarısı oluşturmak için bu adımları izleyin.  
 
 >[!NOTE]
->Kapsayıcı kaynak kullanımı için yeni bir günlük geçiş yapmanızı gerektirir bir uyarı kuralı oluşturmak için aşağıdaki yordamı uyarıları API açıklandığı [günlük uyarıları için API anahtarı tercihi](../platform/alerts-log-api-switch.md).
+>Kapsayıcı kaynak kullanımı için bir uyarı kuralı oluşturmak için aşağıdaki yordam, [günlük uyarıları Için anahtar API tercihi](../platform/alerts-log-api-switch.md)bölümünde açıklandığı gibi yeni bir günlük uyarıları API 'sine geçmeniz gerekir.
 >
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **İzleyici** sol tarafındaki bölmeden. Altında **Insights**seçin **kapsayıcıları**.
-3. Üzerinde **izlenen kümeleri** sekmesinde, listeden bir kümeyi seçin.
-4. Sol tarafındaki bölmede **izleme**seçin **günlükleri** Azure İzleyici günlüklerine sayfasını açın. Yazma ve Azure Log Analytics sorgularını yürütmek için bu sayfayı kullanın.
-5. Üzerinde **günlükleri** sayfasında **+ yeni uyarı kuralı**.
-6. İçinde **koşul** bölümünden **her özel günlük arama \<tanımsız mantık >** özel günlük koşulu önceden tanımlanmış. **Özel günlük araması** sinyal türü doğrudan Azure İzleyici günlüklerine sayfasından bir uyarı kuralı oluşturmakta olduğumuz için otomatik olarak seçilir.  
-7. Aşağıdakilerden birini yapıştırın [sorguları](#resource-utilization-log-search-queries) halinde daha önce sağlanan **arama sorgusu** alan.
-8. Uyarı aşağıdaki gibi yapılandırın:
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.
+2. Sol taraftaki bölmeden **izleyici** ' yi seçin. **Öngörüler**altında **kapsayıcılar**' ı seçin.
+3. **Izlenen kümeler** sekmesinde listeden bir küme seçin.
+4. **İzleme**altında sol taraftaki bölmede **Günlükler** ' i seçerek Azure izleyici günlükleri sayfasını açın. Azure Log Analytics sorgularını yazmak ve yürütmek için bu sayfayı kullanın.
+5. **Günlükler** sayfasında **+ Yeni uyarı kuralı**' nı seçin.
+6. **Koşul** bölümünde, **özel günlük araması her ne zaman tanımsız >** önceden tanımlanmış özel günlük koşulunu \<logic seçin. Doğrudan Azure Izleyici günlükleri sayfasından bir uyarı kuralı oluşturduğumuz için **özel günlük araması** sinyali türü otomatik olarak seçilir.  
+7. Daha önce belirtilen [sorgulardan](#resource-utilization-log-search-queries) birini **arama sorgusu** alanına yapıştırın.
+8. Uyarıyı şu şekilde yapılandırın:
 
-    1. Aşağı açılan **Tetikleyici** listesinden **Metrik ölçüm**'ü seçin. Ölçüm ölçüsü, bizim belirtilen eşiğin üstünde bir değere sahip sorgudaki her nesne için bir uyarı oluşturur.
-    1. İçin **koşul**seçin **büyüktür**girin **75** ilk bir temel olarak **eşiği** CPU ve bellek kullanımı uyarılar . Yetersiz disk alanı uyarı için girin **90**. Veya ölçütlerinizi karşılayan farklı bir değer girin.
-    1. İçinde **tetikleyici uyarı dayalı** bölümünden **ardışık ihlaller**. Aşağı açılan listesinden **büyüktür**girin **2**.
-    1. Kapsayıcı CPU veya bellek kullanımı için bir uyarı altında yapılandırmak için **bulunan**seçin **ContainerName**. Küme düğümü için düşük disk uyarı yapılandırmak için seçin **Lclusterıd**.
-    1. İçinde **göre Evaluated** bölümünde, **süresi** değerini **60 dakika**. Kural her 5 dakikada çalıştırın ve son bir saat geçerli saatten içinde oluşturulmuş olan kayıtları döndürür. Geniş penceresi hesaplarına olası veri gecikme süresi için süre ayarlama. Sorgu hiçbir zaman içinde uyarı tetikler false negatif önlemek için veri döndüren sağlar.
+    1. Aşağı açılan **Tetikleyici** listesinden **Metrik ölçüm**'ü seçin. Ölçüm ölçümü, sorgudaki her bir nesne için belirtilen eşiğin üzerinde bir değer olan bir uyarı oluşturur.
+    1. **Koşul**Için, **büyüktür**' i seçin ve CPU ve bellek kullanımı uyarıları için ilk temel **eşik** olarak **75** girin. Yetersiz disk alanı uyarısı için **90**girin. Ya da ölçütlerinizi karşılayan farklı bir değer girin.
+    1. **Tetikleme uyarısı bölümüne göre** , **ardışık ihlal**' ı seçin. Aşağı açılan listeden **büyüktür**' i seçin ve **2**yazın.
+    1. Kapsayıcı CPU veya bellek kullanımı için bir uyarı yapılandırmak için, **toplama**altında, **kapsayıcıadı**' nı seçin. Küme düğümü düşük disk uyarısını yapılandırmak için **Clusterıd**' yi seçin.
+    1. **Göre değerlendirilen** bölümünde, **Dönem** değerini **60 dakika**olarak ayarlayın. Kural, her 5 dakikada bir çalışır ve geçerli zamandan son bir saat içinde oluşturulan kayıtları döndürür. Olası veri gecikmesi için zaman aralığını geniş bir pencere hesabına ayarlama. Ayrıca, uyarının hiçbir şekilde tetiklendiği yanlış negatifi önlemek için sorgunun verileri döndürdüğünden emin olmanızı sağlar.
 
-9. Seçin **Bitti** uyarı kuralını tamamlayın.
-10. Bir ad girin **uyarı kuralı adı** alan. Belirtin bir **açıklama** , uyarı hakkında ayrıntılar sağlar. Ve sağlanan seçeneklerden bir uygun önem derecesini seçin.
-11. Hemen uyarı kuralı etkinleştirmek için varsayılan değeri kabul **oluşturulduktan sonra kuralı etkinleştir**.
-12. Mevcut bir seçin **eylem grubu** veya yeni bir grup oluşturun. Bu adım, bir uyarı tetiklenir her seferinde aynı eylemleri alınacağını sağlar. Yapılandırma bağlı BT ya da DevOps operasyon ekibinin olayları yönetir.
-13. Seçin **uyarı kuralı oluştur** uyarı kuralını tamamlayın. Hemen çalıştırılmaya başlar.
+9. Uyarı kuralını gerçekleştirmek için **bitti** ' yi seçin.
+10. **Uyarı kuralı adı** alanına bir ad girin. Uyarı hakkındaki ayrıntıları sağlayan bir **Açıklama** belirtin. Ve, belirtilen seçeneklerden uygun bir önem derecesi düzeyi seçin.
+11. Uyarı kuralını hemen etkinleştirmek için, **oluşturma sırasında kuralı etkinleştir**için varsayılan değeri kabul edin.
+12. Mevcut bir **eylem grubu** seçin veya yeni bir grup oluşturun. Bu adım, bir uyarının tetiklendiği her seferinde aynı eylemlerin alınmasını sağlar. BT veya DevOps işlemleri takımınızın olayları yönetme şeklini temel alarak yapılandırın.
+13. Uyarı kuralını gerçekleştirmek için **Uyarı kuralı oluştur** ' u seçin. Hemen çalıştırılmaya başlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Görünüm [sorgu örnekleri oturum](container-insights-log-search.md#search-logs-to-analyze-data) önceden tanımlanmış sorgular ve değerlendirme veya uyarı, görselleştirme veya kümelerinizi çözümleme için özelleştirmek için örnekler görmek için.
-- Azure İzleyici ve diğer yönleri AKS kümenizi izleme hakkında daha fazla bilgi için bkz: [görünümü Azure Kubernetes hizmeti sistem durumu](container-insights-analyze.md).
+- Daha önceden tanımlanmış sorguları ve Uyarıları izlemek için değerlendirmek veya özelleştirmek üzere ön tanımlı sorguları ve örnekleri görmek için [günlük sorgusu örneklerini](container-insights-log-search.md#search-logs-to-analyze-data) görüntüleyin, kümelerinizi görselleştirmeyi veya çözümlemeyi inceleyin.
+- Azure Izleyici hakkında daha fazla bilgi edinmek ve AKS kümenizin diğer yönlerini izlemek için bkz. [Azure Kubernetes hizmet durumunu görüntüleme](container-insights-analyze.md).

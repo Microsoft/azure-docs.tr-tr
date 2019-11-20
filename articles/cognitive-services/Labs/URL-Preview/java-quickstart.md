@@ -1,5 +1,5 @@
 ---
-title: "Hızlı Başlangıç: Proje URL'si Önizleme, Java"
+title: "Hızlı Başlangıç: Proje URL 'SI önizlemesi, Java"
 titlesuffix: Azure Cognitive Services
 description: Java ile URL Önizleme Projesini kullanmaya başlamak için örnek betik.
 services: cognitive-services
@@ -9,13 +9,14 @@ ms.service: cognitive-services
 ms.subservice: url-preview
 ms.topic: quickstart
 ms.date: 04/24/2018
-ms.author: rosh, v-gedod
-ms.openlocfilehash: f4acab2cb4522048f4a78b12ca41161695a31e18
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: rosh
+ROBOTS: NOINDEX
+ms.openlocfilehash: ec9d9757a776601bdf79b796cf6b7b2987411257
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60712506"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68705180"
 ---
 # <a name="quickstart-url-preview-with-java"></a>Hızlı Başlangıç: Java ile URL önizlemesi
 
@@ -23,11 +24,11 @@ Aşağıdaki Java örneği SwiftKey Web sitesi için bir URL Önizlemesi oluştu
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-[Bilişsel Hizmetler Laboratuvarları](https://aka.ms/answersearchsubscription) ücretsiz denemesi için erişim anahtarı alın
+[Bilişsel Hizmetler Laboratuvarları](https://labs.cognitive.microsoft.com/en-us/project-answer-search) ücretsiz denemesi için erişim anahtarı alın
 
 ## <a name="request"></a>İstek 
 
-Aşağıdaki kod oluşturur bir `WebRequest`erişim anahtar üstbilgisini ayarlar ve bir sorgu dizesi için "https:\//swiftkey.com/en".  Ardından isteği gönderir ve yanıtı JSON metnini içeren bir dizeye atar.
+Aşağıdaki kod bir `WebRequest`oluşturur, erişim anahtarı üst bilgisini ayarlar ve "https:\//SwiftKey.com/en" için bir sorgu dizesi ekler.  Ardından isteği gönderir ve yanıtı JSON metnini içeren bir dizeye atar.
 
 ```
     // construct URL of search request (endpoint + query string)

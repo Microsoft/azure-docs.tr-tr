@@ -1,83 +1,105 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Bing Özel Arama Belgeleri
+summary: Özel bir arama deneyimi oluşturmak için Bing Özel Arama portalını ve API'sini kullanmayı öğrenin.
 metadata:
-  title: 'Bing Özel Arama API''si Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvurusu - Microsoft Bilişsel Hizmetler | Microsoft Docs'
-  description: Özel bir arama deneyimi oluşturmak için Bing Özel Arama portalını ve API'sini kullanmayı öğrenin
+  title: Bing Özel Arama API’si Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları
+  titleSuffix: Azure Cognitive Services
+  description: Bing Özel Arama API'sini kullanarak önem verdiğiniz konular için bir arama örneği oluşturun. Aranacak etki alanlarını ve web sayfalarını belirtin, arama deneyiminizi tümüyle özelleştirmek için arama derecelendirmelerini ayarlayın.
   services: cognitive-services
-  author: v-deken
-  manager: cgronlun
+  author: aahill
+  manager: nitinme
   layout: LandingPage
   ms.service: cognitive-services
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: bing-custom-search
   ms.topic: landing-page
-  ms.date: 01/16/2019
-  ms.author: v-deken
-abstract:
-  description: 'Bing Özel Arama API''sini kullanarak önem verdiğiniz konular için bir arama örneği oluşturun. Aranacak etki alanlarını ve web sayfalarını belirtin, arama deneyiminizi tümüyle özelleştirmek için arama derecelendirmelerini ayarlayın.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/bing-custom-search/overview
-            html: <p>Bing Özel Arama API'si hakkında bilgi edinin</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Bing Özel Arama API'si nedir?
-          - href: /azure/cognitive-services/bing-custom-search/quick-start
-            html: <p>Arama deneyiminizi uyarlayarak web'in özel bir görünümünü oluşturmayı öğrenin.</p>
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: Özel Bing arama örneği oluşturma
-          - href: /azure/cognitive-services/bing-custom-search/hosted-ui
-            html: <p>Barındırılan bir kullanıcı arabirimini web sayfalarına ve web uygulamalarına kolayca tümleştirmeyi öğrenin.</p>
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: Barındırılan kullanıcı arabirimi deneyimini yapılandırma
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Web sayfanızın özel görünümünü şunu kullanarak arayın:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/logo_Csharp.svg
-            href: sdk-csharp-quick-start
-            text: 'C&#35;'
-          - image:
-              src: media/logo_java.svg
-            href: call-endpoint-java
-            text: Java
-          - image:
-              src: media/logo_nodejs.svg
-            href: call-endpoint-nodejs
-            text: Node.js
-          - image:
-              src: media/logo_python.svg
-            href: call-endpoint-python
-            text: Python
-  - title: Adım Adım Öğretici
-    items:
-      - type: paragraph
-        text: 'Bing Özel Arama API’sini kullanarak uygulama geliştirmeyi öğrenin:'
-      - type: paragraph
-        text: <a href="tutorials/custom-search-web-page">Özel Arama web sayfası oluşturma</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: API'ler
-            html: '<p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference">Özel Arama API’si v7</a></p> <p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-autosuggest-api-v7-reference">Özel Otomatik Öneri API''si v7</a></p> <p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-images-api-v7-reference">Özel Resim Arama API''si v7</a></p> <p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-videos-api-v7-reference">Özel Video Arama API''si v7</a></p>'
-          - title: SDK’lar
-            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingcustomsearch?view=azure-dotnet">.NET</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customsearch?view=azure-java-stable">Java - Özel Arama</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customimagesearch?view=azure-java-stable">Java - Özel Görüntü Arama</a></p> <p><a href="https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/customsearch?view=azure-python">Python</a></p> <p><a href="https://docs.microsoft.com/javascript/api/azure-cognitiveservices-customsearch?view=azure-node-latest">Node.js</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/customsearch">Go - Özel Arama</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/customimagesearch">Go - Özel Görüntü Arama</a></p>'
-          - title: PowerShell
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest">Azure CLI</a></p>'
+  ms.date: 10/31/2019
+  ms.author: aahill
+  ms.openlocfilehash: 5555aca9308b9854b7189b483e996792c24852c5
+  ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/07/2019
+  ms.locfileid: "73746071"
+landingContent:
+- title: Bing Özel Arama API'si hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Bing Özel Arama API'si nedir?
+      url: overview.md
+    - text: Bing Arama uygulamalarını karşılaştırma
+      url: ../bing-web-search/bing-api-comparison.md
+- title: Web sayfanızın özel görünümünü tümleştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Özel arama örneğinizi yapılandırma
+      url: define-your-custom-view.md
+    - text: Resim arama sonuçlarını alma
+      url: get-images-from-instance.md
+    - text: Video arama sonuçlarını alma
+      url: get-videos-from-instance.md
+    - text: Özel arama örneğinizi çağırma
+      url: search-your-custom-view.md
+    - text: Arama sonuçlarını sayfalandırma
+      url: ../bing-web-search/paging-search-results.md
+    - text: İsabet vurgulamayı gerçekleştirme
+      url: ../bing-web-search/hit-highlighting.md
+    - text: Barındırılan kullanıcı arabirimini yapılandırma ve tümleştirme
+      url: hosted-ui.md
+    - text: Özel otomatik öneriler tanımlama
+      url: define-custom-suggestions.md
+    - text: Özel arama örneğinizi paylaşma
+      url: share-your-custom-search.md
+- title: SDK başvurusu
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: .NET
+      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingcustomsearch?view=azure-dotnet
+    - text: Python
+      url: https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/customsearch?view=azure-python
+    - text: Go - Özel Arama
+      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/customsearch
+    - text: Go - Özel Görüntü
+      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/customimagesearch
+    - text: Java - Özel Arama
+      url: https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingcustomsearch?view=azure-java-stable
+    - text: Java - Özel Görüntü Arama
+      url: https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingcustomimagesearch?view=azure-java-stable
+    - text: Node.js
+      url: https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-customsearch/?view=azure-node-latest
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+    - text: Azure CLI
+      url: /cli/azure/cognitiveservices#az-cognitiveservices-list
+- title: Web'den özel arama sonuçları alma
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Özel arama örneği oluşturma
+      url: quick-start.md
+  - linkListType: quickstart
+    links:
+    - text: C# kullanma
+      url: sdk-csharp-quick-start.md
+    - text: Python’u kullanma
+      url: sdk-python-quickstart.md
+    - text: Java'yı kullanma
+      url: sdk-java-quickstart.md
+  - linkListType: tutorial
+    links:
+    - text: Özel arama web sayfası oluşturma
+      url: tutorials/custom-search-web-page.md
+- title: REST API Başvurusu
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Özel Arama REST API'si v7
+      url: https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference
+    - text: Özel Otomatik Öneri REST API'si v7
+      url: https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-autosuggest-api-v7-reference
+    - text: Özel Resim Arama REST API'si v7
+      url: https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-images-api-v7-reference
+    - text: Özel Video Arama REST API'si v7
+      url: https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-videos-api-v7-reference

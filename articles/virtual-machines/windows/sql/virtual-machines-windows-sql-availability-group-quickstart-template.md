@@ -1,6 +1,6 @@
 ---
-title: Azure hızlı başlangıç şablonları, Azure VM'deki SQL Server Always On kullanılabilirlik grubu yapılandırmak için kullanın
-description: Azure hızlı başlangıç şablonları, Windows Yük devretme kümesi oluşturma, SQL Server Vm'leri kümeye, dinleyiciyi oluşturun ve Azure'da iç Load Balancer yapılandırma için kullanın.
+title: Kullanılabilirlik grubunu yapılandırma (Azure hızlı başlangıç şablonu)
+description: Windows Yük devretme kümesi oluşturmak, kümeye SQL Server VM 'Leri eklemek, dinleyiciyi oluşturmak ve Azure 'da iç yük dengeleyiciyi yapılandırmak için Azure hızlı başlangıç şablonları 'nı kullanın.
 services: virtual-machines-windows
 documentationcenter: na
 author: MashaMSFT
@@ -8,192 +8,199 @@ manager: craigg
 tags: azure-resource-manager
 ms.assetid: aa5bf144-37a3-4781-892d-e0e300913d03
 ms.service: virtual-machines-sql
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 01/04/2019
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: fb09d91bb3204a1ab3dc4f9df71eabd2ee7d2bd1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.custom: seo-lt-2019
+ms.openlocfilehash: edf810dfc975eebaf261eac7b89106c9e29c759c
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60591346"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74022376"
 ---
-# <a name="use-azure-quickstart-templates-to-configure-always-on-availability-group-for-sql-server-on-an-azure-vm"></a>Azure hızlı başlangıç şablonları, Azure VM'deki SQL Server Always On kullanılabilirlik grubu yapılandırmak için kullanın
-Bu makalede, Azure hızlı başlangıç şablonları kısmen SQL Server sanal makineleri için azure'da bir Always On kullanılabilirlik grubu yapılandırmasının dağıtımını otomatikleştirmek için kullanmayı açıklar. Bu işlemde kullanılan iki Azure hızlı başlangıç şablonları vardır. 
+# <a name="use-azure-quickstart-templates-to-configure-an-availability-group-for-sql-server-on-an-azure-vm"></a>Azure VM 'de SQL Server için bir kullanılabilirlik grubu yapılandırmak üzere Azure hızlı başlangıç şablonlarını kullanma
+Bu makalede, Azure 'da SQL Server sanal makineler için her zaman açık kullanılabilirlik grubu yapılandırmasının dağıtımını kısmen otomatik hale getirmek üzere Azure hızlı başlangıç şablonlarının nasıl kullanılacağı açıklanır. Bu işlemde iki Azure hızlı başlangıç şablonu kullanılır: 
 
    | Şablon | Açıklama |
    | --- | --- |
-   | [101-sql-vm-ag-setup](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-ag-setup) | Windows Yük devretme kümesi oluşturur ve SQL Server Vm'leri için birleştirir. |
-   | [101-sql-vm-aglistener-setup](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-aglistener-setup) | Kullanılabilirlik grubu dinleyicisi oluşturur ve iç Yük Dengeleyiciyi yapılandırır. Bu şablon, Windows Yük devretme kümesi ile oluşturulmuş olsa bile yalnızca kullanılabilir **101-sql-vm-ag-setup** şablonu. |
+   | [101-SQL-VM-AG-kurulum](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-ag-setup) | Windows Yük devretme kümesini oluşturur ve SQL Server VM 'lerine birleştirir. |
+   | [101-sql-vm-aglistener-setup](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-aglistener-setup) | Kullanılabilirlik grubu dinleyicisini oluşturur ve iç yük dengeleyiciyi yapılandırır. Bu şablon yalnızca Windows Yük devretme kümesi **101-SQL-VM-AG-Setup** şablonuyla oluşturulduysa kullanılabilir. |
    | &nbsp; | &nbsp; |
 
-Kullanılabilirlik grubu yapılandırmasının diğer bölümlerini kullanılabilirlik grubunu oluşturma ve iç Load Balancer oluşturma gibi el ile yapmanız gerekir. Bu makalede, otomatik ve el ile adımlar dizisi sağlanır.
+Kullanılabilirlik grubu yapılandırmasının diğer bölümlerinin, kullanılabilirlik grubu oluşturma ve iç yük dengeleyiciyi oluşturma gibi el ile yapılması gerekir. Bu makalede otomatik ve el ile yapılan adımların sırası sağlanmaktadır.
  
 
 ## <a name="prerequisites"></a>Önkoşullar 
-Hızlı Başlangıç şablonlarını kullanarak bir Always On kullanılabilirlik grubunun Kurulum otomatikleştirmek için aşağıdaki önkoşulları zaten olması gerekir: 
+Hızlı Başlangıç şablonlarını kullanarak her zaman açık kullanılabilirlik grubunun kurulumunu otomatik hale getirmek için aşağıdaki önkoşullara sahip olmanız gerekir: 
 - Bir [Azure aboneliği](https://azure.microsoft.com/free/).
-- Bir etki alanı denetleyicisi ile bir kaynak grubu. 
-- Bir veya daha fazla etki alanına katılmış [Vm'leri Azure çalışan SQL Server 2016 (veya üzeri) Enterprise Edition'da](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-server-provision) olan aynı kullanılabilirlik kümesi veya kullanılabilirlik bölgesinde [SQL VM kaynak sağlayıcısınakayıtlı](virtual-machines-windows-sql-ahb.md#register-sql-server-vm-with-sql-resource-provider).  
-- (Herhangi bir varlık tarafından kullanılmaz) iki kullanılabilir IP adresleri, bir iç Load Balancer ve kullanılabilirlik Grup dinleyicisinin kullanılabilirlik grubu olarak aynı alt ağ içinde bir. Ardından var olan bir yük dengeleyici kullanılıyorsa yalnızca bir kullanılabilir IP adresi gereklidir.  
+- Etki alanı denetleyicisi olan bir kaynak grubu. 
+- Azure 'da, aynı Kullanılabilirlik kümesi veya kullanılabilirlik bölgesindeki ve [SQL VM kaynak sağlayıcısına kaydedilmiş](virtual-machines-windows-sql-register-with-resource-provider.md) [SQL Server 2016 (veya üzeri) Enterprise Edition çalıştıran](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-server-provision) , etki alanına katılmış bir veya daha fazla VM.  
+- Biri iç yük dengeleyici için, diğeri ise kullanılabilirlik grubuyla aynı alt ağdaki kullanılabilirlik grubu dinleyicisi için olmak üzere iki kullanılabilir (herhangi bir varlık tarafından kullanılmaz) IP adresleri. Mevcut bir yük dengeleyici kullanılıyorsa, yalnızca bir tane kullanılabilir IP adresi gerekir.  
 
 ## <a name="permissions"></a>İzinler
-Azure hızlı başlangıç şablonlarını kullanarak Always On kullanılabilirlik grubu yapılandırmak aşağıdaki izinler gereklidir: 
+Azure hızlı başlangıç şablonlarını kullanarak Always on kullanılabilirlik grubunu yapılandırmak için aşağıdaki izinler gereklidir: 
 
-- Etki alanında 'Bilgisayar nesnesi oluşturma' iznine sahip bir varolan etki alanı kullanıcı hesabı.  Örneğin, bir etki alanı yönetici hesabı genellikle yeterli izni (örn: account@domain.com). _Bu hesap, kümeyi oluşturmak için her VM'deki yerel yönetici grubunun bir parçası olarak da olmalıdır._
-- SQL Server hizmetini denetler etki alanı kullanıcı hesabı. 
+- Etki alanında **bilgisayar nesnesi oluşturma** iznine sahip olan mevcut bir etki alanı kullanıcı hesabı.  Örneğin, bir etki alanı yönetici hesabı genellikle yeterli izne sahiptir (örneğin: account@domain.com). _Bu hesap, kümeyi oluşturmak için her VM 'de yerel yönetici grubunun da bir parçası olmalıdır._
+- SQL Server hizmetini denetleyen etki alanı kullanıcı hesabı. 
 
 
-## <a name="step-1---create-the-wsfc-and-join-sql-server-vms-to-the-cluster-using-quickstart-template"></a>1\. adım - WSFC oluşturma ve SQL Server Vm'leri Hızlı Başlangıç şablonu kullanarak kümeye ekleyin. 
-SQL VM yeni kaynak sağlayıcısı ile SQL Server sanal makineleriniz üzere kaydettikten sonra SQL Server Vm'leri içine katılabilir *SqlVirtualMachineGroups*. Meta veri sürümü, sürüm, tam etki alanı adı, hem küme hem de SQL Hizmeti yönetmek için AD hesapları ve bulut depolama hesabı dahil olmak üzere Windows Yük devretme kümesi bu kaynak tanımlar Tanık. SQL Server Vm'leri için ekleme *SqlVirtualMachineGroups* kaynak grubu kümeyi oluşturmak için Windows Yük devretme Küme hizmetinin bootstraps ve ardından bu SQL Server Vm'leri bu kümeye birleştirir. Bu adım ile otomatik olarak **101-sql-vm-ag-setup** Hızlı Başlangıç şablonu ve aşağıdaki adımlarla uygulanabilir:
+## <a name="step-1-create-the-failover-cluster-and-join-sql-server-vms-to-the-cluster-by-using-a-quickstart-template"></a>1\. Adım: bir hızlı başlangıç şablonu kullanarak yük devretme kümesi oluşturma ve SQL Server VM 'Leri kümeye katma 
+SQL Server sanal makinelerinizin SQL VM kaynak sağlayıcısına kaydolduktan sonra, SQL Server sanal *makinelerinizi Sqlvirtualmachinegroups*öğesine ekleyebilirsiniz. Bu kaynak Windows Yük devretme kümesinin meta verilerini tanımlar. Meta veriler, hem kümeyi hem de SQL Server hizmetini ve depolama hesabını bulut tanığı olarak yönetmek için sürüm, sürüm, tam etki alanı adı, Active Directory hesapları içerir. 
 
-1. Gidin [ **101-sql-vm-ag-setup** ](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-ag-setup) Hızlı Başlangıç şablonu seçip **azure'a Dağıt** Hızlı Başlangıç şablonu Azure portalındaki başlatmak için.
-1. Windows Yük devretme kümesi meta verileri yapılandırmak için gerekli alanları doldurun. İsteğe bağlı alanları boş bırakılabilir.
+SQL Server VM 'Leri *Sqlvirtualmachinegroups* kaynak grubuna eklemek Için Windows Yük devretme kümesi hizmeti 'ni önyükleme ve ardından SQL Server bu sanal makineleri bu kümeye birleştirir. Bu adım **101-SQL-VM-AG-Setup** hızlı başlangıç şablonuyla otomatikleştirilir. Aşağıdaki adımları kullanarak gerçekleştirebilirsiniz:
 
-    Aşağıdaki tabloda, şablon için gerekli değerleri gösterir: 
+1. [**101-SQL-VM-AG-Setup**](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-ag-setup) hızlı başlangıç şablonuna gidin. Ardından, Azure portal hızlı başlangıç şablonunu açmak için **Azure 'A dağıt** ' ı seçin.
+1. Windows Yük devretme kümesi için meta verileri yapılandırmak üzere gerekli alanları doldurun. İsteğe bağlı alanları boş bırakabilirsiniz.
+
+   Aşağıdaki tabloda, şablon için gerekli değerler gösterilmektedir: 
 
    | **Alan** | Değer |
    | --- | --- |
-   | **Abonelik** |  SQL Server sanal makineleriniz bulunduğu abonelik. |
-   |**Kaynak grubu** | SQL Server sanal makineleriniz bulunduğu kaynak grubu. | 
-   |**Yük devretme kümesi adı** | Yeni Windows Yük devretme kümeniz için istenen ad. |
-   | **Var olan Vm listesi** | SQL Server, kullanılabilirlik grubundaki ve bu nedenle, katılmak istediğiniz, bu yeni kümesinin parçası olacak Vm'leri. Bu değerleri boşluk ve virgül ile ayırın. (örn: SQLVM1, SQLVM2). |
-   | **SQL Server sürümü** | Açılan listeden SQL Server sanal makineleriniz SQL Server sürümünü seçin. Şu anda yalnızca SQL 2016 ve 2017 SQL resimler desteklenir. |
-   | **Var olan tam etki alanı adı** | Mevcut SQL Server sanal makinelerinizin içinde bulunduğu etki alanının FQDN'si. |
-   | **Mevcut etki alanı hesabı** | Etki alanında 'Bilgisayar nesnesi oluşturma' iznine sahip mevcut bir etki alanı kullanıcı hesabı [CNO](/windows-server/failover-clustering/prestage-cluster-adds) şablon dağıtımı sırasında oluşturulur. Örneğin, bir etki alanı yönetici hesabı genellikle yeterli izni (örn: account@domain.com). *Bu hesap, kümeyi oluşturmak için her VM'deki yerel yönetici grubunun bir parçası olarak da olmalıdır.*| 
-   | **Etki alanı hesabı parolası** | Yukarıda belirtilen etki alanı kullanıcı hesabının parolası. | 
-   | **Mevcut Sql Hizmeti hesabı** | Denetimleri etki alanı kullanıcı hesabı [SQL Server hizmeti](/sql/database-engine/configure-windows/configure-windows-service-accounts-and-permissions) kullanılabilirlik grubu dağıtımı sırasında (örn: account@domain.com). |
-   | **SQL Hizmeti parola** | SQL Server hizmetini denetleyen etki alanı kullanıcı hesabı tarafından kullanılan parola. |
-   | **Bulut tanığı adı** | Oluşturulan ve bulut tanığı için kullanılan yeni bir Azure depolama hesabı budur. Bu adı değiştirilmiş. |
-   | **\_yapıtları konumu** | Bu alan, varsayılan olarak ayarlanır ve değiştirilmemelidir. |
-   | **\_yapıtları konumu Sas belirteci** | Bu alan, bilerek boş bırakılır. |
+   | **Abonelik** |  SQL Server sanal makinelerinizin bulunduğu abonelik. |
+   |**Kaynak grubu** | SQL Server sanal makinelerinizin bulunduğu kaynak grubu. | 
+   |**Yük devretme kümesi adı** | Yeni Windows Yük devretme kümeniz için istediğiniz ad. |
+   | **Mevcut VM listesi** | Kullanılabilirlik grubuna katılmasını istediğiniz sanal makineler SQL Server ve bu yeni kümenin bir parçası olmalıdır. Bu değerleri virgül ve bir boşluk ile ayırın (örneğin: *SQLVM1, SQLVM2*). |
+   | **SQL Server sürümü** | SQL Server sanal makinelerinizin SQL Server sürümü. Açılır listeden seçin. Şu anda yalnızca SQL Server 2016 ve SQL Server 2017 görüntü desteklenir. |
+   | **Var olan tam etki alanı adı** | SQL Server sanal makinelerinizin bulunduğu etki alanı için mevcut FQDN. |
+   | **Var olan etki alanı hesabı** | Şablon dağıtımı sırasında [CNO](/windows-server/failover-clustering/prestage-cluster-adds) olarak etki alanında **bilgisayar nesnesi oluşturma** iznine sahip olan mevcut bir etki alanı kullanıcı hesabı. Örneğin, bir etki alanı yönetici hesabı genellikle yeterli izne sahiptir (örneğin: account@domain.com). *Bu hesap, kümeyi oluşturmak için her VM 'de yerel yönetici grubunun da bir parçası olmalıdır.*| 
+   | **Etki alanı hesabı parolası** | Daha önce bahsedilen etki alanı kullanıcı hesabının parolası. | 
+   | **Mevcut SQL hizmeti hesabı** | Kullanılabilirlik grubu dağıtımı sırasında [SQL Server hizmetini](/sql/database-engine/configure-windows/configure-windows-service-accounts-and-permissions) denetleyen etki alanı kullanıcı hesabı (örneğin: account@domain.com). |
+   | **SQL hizmeti parolası** | SQL Server hizmetini denetleyen etki alanı kullanıcı hesabı tarafından kullanılan parola. |
+   | **Bulut tanığı adı** | Bulut tanığı için oluşturulacak ve kullanılacak yeni bir Azure depolama hesabı. Bu adı değiştirebilirsiniz. |
+   | **\_yapıt konumu** | Bu alan varsayılan olarak ayarlanır ve değiştirilmemelidir. |
+   | **\_yapıt konumu SAS belirteci** | Bu alan kasıtlı olarak boş bırakılır. |
    | &nbsp; | &nbsp; |
 
-1. Hüküm ve koşulları kabul ediyorsanız, yanındaki onay kutusunu işaretleyin **hüküm ve koşulları yukarıda belirtilen kabul ediyorum** seçip **satın alma** hızlı başlangıç şablon dağıtımı sonlandırmak için. 
-1. Dağıtımınızı izlemek için dağıtımdan seçin **bildirimleri** çan simgesine, üst gezinti başlığı veya gidin, **kaynak grubu** Azure portalında  **Dağıtımları** içinde **ayarları** alanı ve 'Microsoft.Template' dağıtımı'nı seçin. 
+1. Hüküm ve koşulları kabul ediyorsanız, **yukarıda belirtilen hüküm ve koşulları kabul** ediyorum onay kutusunu işaretleyin. Ardından, hızlı başlangıç şablonunun dağıtımını son vermek için **satın al** ' ı seçin. 
+1. Dağıtımınızı izlemek için, üst gezinti başlığındaki **Bildirimler** Bell simgesinden dağıtımı seçin ya da Azure Portal **kaynak grubuna** gidin. **Ayarlar**' ın altında **dağıtımlar** ' ı seçin ve **Microsoft. Template** dağıtımını seçin. 
 
-   >[!NOTE]
-   > Şablon dağıtımı sırasında sağlanan kimlik bilgileri yalnızca dağıtım uzunluğu için depolanır. Dağıtım tamamlandıktan sonra bu parolaları kaldırılır ve kümeye daha fazla SQL Server Vm'leri eklemelisiniz sağlayacağını yeniden istenir. 
+>[!NOTE]
+> Şablon dağıtımı sırasında belirtilen kimlik bilgileri yalnızca dağıtım uzunluğu için depolanır. Dağıtım tamamlandıktan sonra, bu parolalar kaldırılır. Kümeye daha fazla SQL Server VM eklerseniz bunları yeniden sağlamanız istenecektir. 
 
 
-## <a name="step-2---manually-create-the-availability-group"></a>2\. adım: kullanılabilirlik grubunu el ile oluşturma 
-Normalde, kullanarak yaptığınız gibi el ile kullanılabilirlik grubunu oluşturma [SQL Server Management Studio](/sql/database-engine/availability-groups/windows/use-the-availability-group-wizard-sql-server-management-studio), [PowerShell](/sql/database-engine/availability-groups/windows/create-an-availability-group-sql-server-powershell), veya [Transact-SQL](/sql/database-engine/availability-groups/windows/create-an-availability-group-transact-sql). 
+## <a name="step-2-manually-create-the-availability-group"></a>2\. Adım: kullanılabilirlik grubunu el Ile oluşturma 
+Kullanılabilirlik grubunu, [SQL Server Management Studio](/sql/database-engine/availability-groups/windows/use-the-availability-group-wizard-sql-server-management-studio), [PowerShell](/sql/database-engine/availability-groups/windows/create-an-availability-group-sql-server-powershell)veya [Transact-SQL](/sql/database-engine/availability-groups/windows/create-an-availability-group-transact-sql)kullanarak normal şekilde yaptığınız şekilde el ile oluşturun. 
 
-  >[!IMPORTANT]
-  > Yapmak **değil** bir dinleyicisi bu tarafından otomatik olarak şu anda oluşturulamıyor **101-sql-vm-aglistener-setup** adım 4'te Hızlı Başlangıç şablonu. 
+>[!IMPORTANT]
+> Şu anda bir *dinleyici oluşturmayın:* **101-SQL-VM-aglistener-Setup** hızlı başlangıç şablonu, adım 4 ' te otomatik olarak yapılır. 
 
-## <a name="step-3---manually-create-the-internal-load-balancer-ilb"></a>3\. adım - iç yük dengeleyici (ILB) el ile oluşturma
-Always On kullanılabilirlik grubu (ağ) dinleyicisi, iç Azure yük dengeleyici (ILB) gerektirir. ILB daha hızlı yük devretme ve yeniden bağlanmayı sağlayan ağ dinleyicisi "kayan" IP adresi sunar. SQL Server Vm'leri bir kullanılabilirlik grubuna varsa aynı kullanılabilirlik kümesinin parçası ve ardından bir temel yük dengeleyici kullanabilirsiniz; Aksi takdirde, bir Standard Load Balancer'ı kullanmanız gerekir.  **ILB, SQL Server VM örnekleri ile aynı sanal ağda olmalıdır.** ILB yalnızca oluşturulabilir, yapılandırmayı geri kalanını gerekir (gibi bir arka uç havuzu, sistem durumu araştırması ve Yük Dengeleme kuralları) tarafından işlenen **101-sql-vm-aglistener-setup** adım 4'te Hızlı Başlangıç şablonu. 
+## <a name="step-3-manually-create-the-internal-load-balancer"></a>3\. Adım: iç yük dengeleyiciyi El Ile oluşturma
+Always on kullanılabilirlik grubu dinleyicisi bir Azure Load Balancer iç örneğini gerektirir. İç yük dengeleyici, daha hızlı yük devretme ve yeniden bağlantı sağlayan kullanılabilirlik grubu dinleyicisi için "kayan" bir IP adresi sağlar. Bir kullanılabilirlik grubundaki SQL Server VM 'Ler aynı Kullanılabilirlik kümesinin parçasıysa, temel bir yük dengeleyici kullanabilirsiniz. Aksi takdirde, standart yük dengeleyici kullanmanız gerekir. 
 
-1. Azure portalında SQL Server sanal makineleri içeren kaynak grubunu açın. 
-2. Kaynak grubunda tıklayın **Ekle**.
-3. Arama **yük dengeleyici** ve ardından, arama sonuçlarında **Load Balancer**, tarafından yayımlanan **Microsoft**.
-4. Üzerinde **yük dengeleyici** dikey penceresinde tıklayın **Oluştur**.
-5. İçinde **yük dengeleyici Oluştur** iletişim kutusunda, Yük Dengeleyiciyi şu şekilde yapılandırın:
+> [!IMPORTANT]
+> İç yük dengeleyici SQL Server VM örneklerle aynı sanal ağda olmalıdır. 
+
+Yalnızca iç yük dengeleyici oluşturmanız gerekir. 4\. adımda, **101-SQL-VM-aglistener-Setup** hızlı başlangıç şablonu, yapılandırmanın geri kalanını (arka uç havuzu, sistem durumu araştırması ve yük dengeleme kuralları gibi) işler. 
+
+1. Azure portal, SQL Server sanal makinelerini içeren kaynak grubunu açın. 
+2. Kaynak grubunda **Ekle**' yi seçin.
+3. **Yük dengeleyici**için arama yapın. Arama sonuçlarında, **Microsoft**tarafından yayınlanan **Load Balancer**' yi seçin.
+4. **Load Balancer** dikey penceresinde **Oluştur**' u seçin.
+5. **Yük dengeleyici oluştur** iletişim kutusunda yük dengeleyiciyi şu şekilde yapılandırın:
 
    | Ayar | Değer |
    | --- | --- |
-   | **Ad** |Yük Dengeleyiciyi temsil eden bir metin adı. Örneğin, **sqlLB**. |
-   | **Tür** |**İç**: Çoğu uygulamalarının kullanılabilirlik grubuna bağlanmak uygulamaların aynı sanal ağ içinde veren bir iç yük dengeleyici kullanın.  </br> **Dış**: Uygulamaların kullanılabilirlik grubuna ortak bir Internet bağlantısı üzerinden bağlanmasına izin verir. |
-   | **Sanal ağ** | SQL Server örnekleri olan sanal ağı seçin. |
-   | **Alt ağ** | SQL Server örnekleri olan bir alt ağ seçin. |
-   | **IP adresi ataması** |**Statik** |
-   | **Özel IP adresi** | Kullanılabilir bir IP adresi alt ağ belirtin. |
-   | **Abonelik** |Birden fazla aboneliğiniz varsa, bu alanda görüntülenir. Bu kaynak ile ilişkilendirmek istediğiniz aboneliği seçin. Normalde, kullanılabilirlik grubunun tüm kaynaklarını aynı abonelik olur. |
-   | **Kaynak grubu** |SQL Server örnekleri olan kaynak grubunu seçin. |
-   | **Konum** |SQL Server örnekleri olan Azure konumu seçin. |
+   | **Adı** |Yük dengeleyiciyi temsil eden bir metin adı girin. Örneğin, **Sqllb**yazın. |
+   | **Tür** |**İç**: çoğu uygulama, aynı sanal ağ içindeki uygulamaların kullanılabilirlik grubuna bağlanmasına izin veren bir iç yük dengeleyici kullanır.  </br> **Harici**: uygulamaların genel bir internet bağlantısı aracılığıyla kullanılabilirlik grubuna bağlanmasına izin verir. |
+   | **Sanal ağ** | SQL Server örneklerinin bulunduğu sanal ağı seçin. |
+   | **Alt ağ** | SQL Server örneklerinin bulunduğu alt ağı seçin. |
+   | **IP adresi ataması** |**Se** |
+   | **Özel IP adresi** | Alt ağdan kullanılabilir bir IP adresi belirtin. |
+   | **Abonelik** |Birden çok aboneliğiniz varsa, bu alan görünebilir. Bu kaynakla ilişkilendirmek istediğiniz aboneliği seçin. Normalde kullanılabilirlik grubu için tüm kaynaklarla aynı abonelikte olur. |
+   | **Kaynak grubu** |SQL Server örneklerinin bulunduğu kaynak grubunu seçin. |
+   | **Konum** |SQL Server örneklerinin bulunduğu Azure konumunu seçin. |
    | &nbsp; | &nbsp; |
 
-6. **Oluştur**’u seçin. 
+6. **Oluştur**'u seçin. 
 
 
-  >[!IMPORTANT]
-  > Standart Load Balancer ile uyumlu olacak şekilde standart bir SKU her SQL Server VM için genel IP kaynağına sahip olmalıdır. Sanal makinenizin genel IP kaynağı SKU'su belirlemek için gidin, **kaynak grubu**seçin, **genel IP adresi** istenen SQL Server VM, kaynak ve değerin altında bulun **SKU**  , **genel bakış** bölmesi. 
+>[!IMPORTANT]
+> Her bir SQL Server VM genel IP kaynağının standart yük dengeleyiciye uyumlu olması için standart bir SKU 'SU olmalıdır. SANAL makinenizin genel IP kaynağının SKU 'sunu belirlemek için **kaynak grubu**' na gidin, SQL Server VM IÇIN **genel IP adresi** kaynağınızı seçin ve **genel bakış** bölmesinde **SKU** altındaki değeri bulun. 
 
-## <a name="step-4---create-the-ag-listener-and-configure-the-ilb-with-the-quickstart-template"></a>4\. adım - AG dinleyiciyi oluşturun ve ILB ile Hızlı Başlangıç şablonu yapılandırma
+## <a name="step-4-create-the-availability-group-listener-and-configure-the-internal-load-balancer-by-using-the-quickstart-template"></a>4\. Adım: kullanılabilirlik grubu dinleyicisini oluşturma ve hızlı başlangıç şablonunu kullanarak iç yük dengeleyiciyi yapılandırma
 
-Kullanılabilirlik grubu dinleyicisi oluşturun ve iç yük dengeleyici (ILB) ile otomatik olarak yapılandırma **101-sql-vm-aglistener-setup** Hızlı Başlangıç şablonu olarak Microsoft.SqlVirtualMachine/ sağlar SqlVirtualMachineGroups/AvailabilityGroupListener kaynak. **101-sql-vm-aglistener-setup** SQL VM kaynak sağlayıcısı aracılığıyla Hızlı Başlangıç şablonu aşağıdaki eylemleri yapar:
+Kullanılabilirlik grubu dinleyicisini oluşturun ve **101-SQL-VM-aglistener-Setup** hızlı başlangıç şablonunu kullanarak iç yük dengeleyiciyi otomatik olarak yapılandırın. Şablon, Microsoft. SqlVirtualMachine/SqlVirtualMachineGroups/kullanılabilirliği Bilitygrouplistener kaynağını sağlar. **101-SQL-VM-aglistener-Setup** hızlı başlangıç şablonu, SQL VM kaynak sağlayıcısı aracılığıyla aşağıdaki eylemleri yapar:
 
- - Dinleyici için (dağıtım sırasında sağlanan IP adresi değere göre) yeni bir ön uç IP kaynağı oluşturur. 
- - Ağ ayarları küme ve ILB için yapılandırır. 
- - ILB arka uç havuzu, sistem durumu araştırması ve yük dengelemeyi yapılandırır kuralları.
- - Ağ dinleyicisi adını ve belirtilen IP adresi ile oluşturur.
+- Dinleyici için yeni bir ön uç IP kaynağı (dağıtım sırasında belirtilen IP adresi değerine göre) oluşturur. 
+- Küme ve iç yük dengeleyici için ağ ayarlarını yapılandırır. 
+- İç yük dengeleyici, sistem durumu araştırması ve yük dengeleme kuralları için arka uç havuzunu yapılandırır.
+- Verilen IP adresi ve adı ile kullanılabilirlik grubu dinleyicisi oluşturur.
  
-   >[!NOTE]
-   > **101-sql-vm-aglistener-setup** yalnızca Windows Yük devretme kümesi ile oluşturulmuşsa kullanılabilir **101-sql-vm-ag-setup** şablonu.
+>[!NOTE]
+> **101-SQL-VM-aglistener-Setup** ' i yalnızca Windows Yük devretme kümesi **101-SQL-VM-AG-Setup** şablonuyla oluşturulduysa kullanabilirsiniz.
    
    
-ILB yapılandırmak ve /AG dinleyicisi oluşturmak için aşağıdakileri yapın:
-1. Gidin [ **101-sql-vm-aglistener-setup** ](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-aglistener-setup) Hızlı Başlangıç şablonu seçip **azure'a Dağıt** Hızlı Başlangıç şablonu Azure portalındaki başlatmak için.
-1. ILB yapılandırmak için gerekli alanları doldurun ve kullanılabilirlik grubu dinleyicisi oluşturun. İsteğe bağlı alanları boş bırakılabilir. 
+İç yük dengeleyiciyi yapılandırmak ve kullanılabilirlik grubu dinleyicisini oluşturmak için aşağıdakileri yapın:
+1. [101-SQL-VM-aglistener-Setup](https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-vm-aglistener-setup) hızlı başlangıç şablonuna gidin ve Azure Portal Hızlı Başlangıç şablonunu başlatmak için **Azure 'a dağıt** ' ı seçin.
+1. İç yük dengeleyiciyi yapılandırmak için gerekli alanları doldurun ve kullanılabilirlik grubu dinleyicisini oluşturun. İsteğe bağlı alanları boş bırakabilirsiniz. 
 
-    Aşağıdaki tabloda, şablon için gerekli değerleri gösterir: 
+   Aşağıdaki tabloda, şablon için gerekli değerler gösterilmektedir: 
 
    | **Alan** | Değer |
    | --- | --- |
-   |**Kaynak grubu** | SQL Server Vm'leri ve kullanılabilirlik grubunun bulunduğu kaynak grubu. | 
-   |**Mevcut yük devretme kümesi adı** | SQL Server Vm'leri için katılan kümesinin adı. |
-   | **Mevcut Sql kullanılabilirlik grubu**| SQL Server sanal makinelerinizin bir parçası olan kullanılabilirlik grubu adı. |
-   | **Var olan Vm listesi** | Yukarıda belirtilen kullanılabilirlik grubunun parçası olan SQL Server Vm'leri adları. Adları boşluk ve virgül ile ayrılmalıdır (örn: SQLVM1, SQLVM2). |
-   | **Dinleyici** | DNS adı dinleyiciye atamak istersiniz. Varsayılan olarak, bu şablon adı 'aglistener' belirtiyor, ancak değiştirilebilir. Ad 15 karakteri aşmamalıdır. |
-   | **Dinleyici bağlantı noktası** | Dinleyici kullanmak istediğiniz bağlantı noktası. Genellikle, bu bağlantı noktası 1433 varsayılan bağlantı noktası olmalıdır ve bu nedenle, bu şablon tarafından belirtilen bağlantı noktası numarası budur. Varsayılan bağlantı noktasını değiştirdiyseniz ancak ardından dinleyicisi bağlantı noktası değeri yerine kullanmanız gerekir. | 
-   | **Dinleyici IP** | IP kullanmak için dinleyici istersiniz.  Bu IP adresi, şablon dağıtımı sırasında oluşturulur, bu nedenle zaten kullanılmayan bir IP adresi sağlayın.  |
-   | **Mevcut alt ağı** | *Adı* iç alt ağın SQL Server sanal makinelerinizin (örn: varsayılan). Giderek bu değeri belirlenebilir, **kaynak grubu**, seçme, **vNet**u seçerek **alt ağlar** altında **ayarları**bölmesi ve değerin altında kopyalama **adı**. |
-   | **Var olan bir iç yük dengeleyici** | 3\. adımda oluşturulan ILB adı. |
-   | **Araştırma bağlantı noktası** | ILB kullanmak istediğiniz araştırma bağlantı noktası. Şablon, varsayılan olarak 59999 kullanır ancak bu değeri değiştirilebilir. |
+   |**Kaynak grubu** | SQL Server sanal makinelerinizin ve kullanılabilirlik grubunuzun bulunduğu kaynak grubu. | 
+   |**Mevcut yük devretme kümesi adı** | SQL Server sanal makinelerinizin katıldığı kümenin adı. |
+   | **Mevcut SQL kullanılabilirlik grubu**| SQL Server sanal makinelerinizin parçası olduğu kullanılabilirlik grubunun adı. |
+   | **Mevcut VM listesi** | Daha önce bahsedilen kullanılabilirlik grubunun parçası olan SQL Server VM 'lerinin adları. Adları virgül ve boşluk ile ayırın (örneğin: *SQLVM1, SQLVM2*). |
+   | **Oluşturulurken** | Dinleyiciye atamak istediğiniz DNS adı. Varsayılan olarak, bu şablon "aglistener" adını belirtir, ancak bunu değiştirebilirsiniz. Ad en fazla 15 karakter uzunluğunda olmalıdır. |
+   | **Dinleyici bağlantı noktası** | Dinleyicisinin kullanmasını istediğiniz bağlantı noktası. Genellikle, bu bağlantı noktası varsayılan olarak 1433 olmalıdır. Bu, şablonun belirttiği bağlantı noktası numarasıdır. Ancak varsayılan bağlantı noktası değiştirildiyse, bunun yerine dinleyici bağlantı noktası bu değeri kullanmalıdır. | 
+   | **Dinleyici IP 'si** | Dinleyicisinin kullanmasını istediğiniz IP adresi. Bu adres, şablon dağıtımı sırasında oluşturulacaktır, bu nedenle zaten kullanımda olmayan bir tane sağlayın.  |
+   | **Mevcut alt ağ** | SQL Server sanal makinelerinizin iç alt ağının adı (örneğin: *varsayılan*). Bu değeri **kaynak grubuna**giderek, Sanal ağınızı seçerek, **Ayarlar** bölmesinde **alt ağlar** ' ı seçerek ve değeri **ad**' ın altına kopyalayarak belirleyebilirsiniz. |
+   | **Mevcut Iç Load Balancer** | Adım 3 ' te oluşturduğunuz iç yük dengeleyicinin adı. |
+   | **Araştırma bağlantı noktası** | İç yük dengeleyicinin kullanmasını istediğiniz araştırma bağlantı noktası. Şablon varsayılan olarak 59999 kullanır, ancak bu değeri değiştirebilirsiniz. |
    | &nbsp; | &nbsp; |
 
-1. Hüküm ve koşulları kabul ediyorsanız, yanındaki onay kutusunu işaretleyin **hüküm ve koşulları yukarıda belirtilen kabul ediyorum** seçip **satın alma** hızlı başlangıç şablon dağıtımı sonlandırmak için. 
-1. Dağıtımınızı izlemek için dağıtımdan seçin **bildirimleri** çan simgesine, üst gezinti başlığı veya gidin, **kaynak grubu** Azure portalında  **Dağıtımları** içinde **ayarları** alanı ve 'Microsoft.Template' dağıtımı'nı seçin. 
+1. Hüküm ve koşulları kabul ediyorsanız, **yukarıda belirtilen hüküm ve koşulları kabul** ediyorum onay kutusunu işaretleyin. Hızlı başlangıç şablonunun dağıtımını son vermek için **satın al** ' ı seçin. 
+1. Dağıtımınızı izlemek için, üst gezinti başlığındaki **Bildirimler** Bell simgesinden dağıtımı seçin ya da Azure Portal **kaynak grubuna** gidin. **Ayarlar**' ın altında **dağıtımlar** ' ı seçin ve **Microsoft. Template** dağıtımını seçin. 
 
-   >[!NOTE]
-   >Yarı aşamalardaki, dağıtım başarısız olursa, el ile yapmanız gerekir [yeni oluşturulan dinleyiciyi kaldırmak](#remove-availability-group-listener) yeniden dağıtmadan önce PowerShell kullanarak **101-sql-vm-aglistener-setup** Hızlı Başlangıç şablonu. 
+>[!NOTE]
+>Dağıtımınız yarı olarak başarısız olursa, **101-SQL-VM-aglistener-Setup** hızlı başlangıç şablonunu yeniden dağıtmadan önce PowerShell 'i kullanarak [Yeni oluşturulan dinleyiciyi](#remove-the-availability-group-listener) el ile kaldırmanız gerekir. 
 
-## <a name="remove-availability-group-listener"></a>Kullanılabilirlik grubu dinleyicisi Kaldır
-Daha sonra şablon tarafından yapılandırılan kullanılabilirlik grubu dinleyicisi kaldırmanız gerekirse, SQL VM kaynak sağlayıcısı aracılığıyla gitmeniz gerekir. Dinleyicisi SQL VM kaynak sağlayıcısı kayıtlı olduğundan, SQL Server Management Studio silmeden yeterli değildir. PowerShell kullanarak SQL VM kaynak sağlayıcısı gerçekten silinmesi gerekir. Bunun yapılması, AG dinleyici meta veriler SQL VM kaynak Sağlayıcısı'ndan kaldırır ve fiziksel kullanılabilirlik grubu dinleyicisi siler. 
+## <a name="remove-the-availability-group-listener"></a>Kullanılabilirlik grubu dinleyicisini kaldır
+Daha sonra şablonun yapılandırıldığı kullanılabilirlik grubu dinleyicisini kaldırmanız gerekirse, SQL VM kaynak sağlayıcısı ' na gitmeniz gerekir. Dinleyici SQL VM kaynak sağlayıcısı aracılığıyla kaydedildiğinden, SQL Server Management Studio aracılığıyla silmeniz yeterlidir. 
 
-Aşağıdaki kod parçacığı, hem SQL kaynak sağlayıcısı ve kullanılabilirlik grubunuzun SQL kullanılabilirlik grubu dinleyicisini siler: 
+En iyi yöntem, PowerShell 'de aşağıdaki kod parçacığını kullanarak SQL VM kaynak sağlayıcısı aracılığıyla bunu silmektir. Bunun yapılması, kullanılabilirlik grubu dinleyicisi meta verilerini SQL VM kaynak sağlayıcısından kaldırır. Ayrıca, dinleyiciyi kullanılabilirlik grubundan fiziksel olarak siler. 
 
-```powershell
-# Remove the AG listener
+```PowerShell
+# Remove the availability group listener
 # example: Remove-AzResource -ResourceId '/subscriptions/a1a11a11-1a1a-aa11-aa11-1aa1a11aa11a/resourceGroups/SQLAG-RG/providers/Microsoft.SqlVirtualMachine/SqlVirtualMachineGroups/Cluster/availabilitygrouplisteners/aglistener' -Force
 Remove-AzResource -ResourceId '/subscriptions/<SubscriptionID>/resourceGroups/<resource-group-name>/providers/Microsoft.SqlVirtualMachine/SqlVirtualMachineGroups/<cluster-name>/availabilitygrouplisteners/<listener-name>' -Force
 ```
  
 ## <a name="common-errors"></a>Sık karşılaşılan hatalar
-Bu bölümde, bazı bilinen sorunlar ve olası bunların çözümü açıklanmaktadır. 
+Bu bölümde bazı bilinen sorunlar ve olası çözümleri açıklanmaktadır. 
 
-### <a name="availability-group-listener-for-availability-group-ag-name-already-exists"></a>Kullanılabilirlik grubu için kullanılabilirlik grubu dinleyicisi '\<AG-Name >' zaten var.
-Ağ dinleyicisi Azure Hızlı Başlangıç şablonu zaten kullanılan seçilmiş olan kullanılabilirlik grubu dinleyicisi, kullanılabilirlik grubu içinde fiziksel olarak veya meta verileri içindeki SQL VM kaynak sağlayıcısı olarak içerir.  Kullanarak dinleyiciyi kaldırmak [PowerShell](#remove-availability-group-listener) dağıtarak önce **101-sql-vm-aglistener-setup** Hızlı Başlangıç şablonu. 
+### <a name="availability-group-listener-for-availability-group-ag-name-already-exists"></a>'\<AG-name > ' kullanılabilirlik grubunun kullanılabilirlik grubu dinleyicisi zaten var
+Kullanılabilirlik grubu dinleyicisi için Azure hızlı başlangıç şablonunda kullanılan seçili kullanılabilirlik grubu zaten bir dinleyici içeriyor. Kullanılabilirlik grubu dahilinde fiziksel olarak veya meta verileri SQL VM kaynak sağlayıcısı içinde kalır. **101-SQL-VM-aglistener-Setup** hızlı başlangıç şablonunu yeniden dağıtmaya başlamadan önce [PowerShell](#remove-the-availability-group-listener) 'i kullanarak dinleyiciyi kaldırın. 
 
-### <a name="connection-only-works-from-primary-replica"></a>Bağlantı yalnızca birincil çoğaltmadan çalışır
-Bu büyük olasılıkla başarısız, davranıştır **101-sql-vm-aglistener-setup** şablon dağıtımı ILB yapılandırması tutarsız bir durumda bırakır. Arka uç havuzu kullanılabilirlik kümesi listeler ve kuralları için durum araştırması ve Yük Dengeleme kuralları için mevcut olduğunu doğrulayın. Herhangi bir şey eksikse, daha sonra ILB tutarsız bir duruma yapılandırmadır. 
+### <a name="connection-only-works-from-primary-replica"></a>Bağlantı yalnızca birincil çoğaltmadan kullanılabilir
+Bu davranış, iç yük dengeleyicinin yapılandırmasını tutarsız bir durumda bıraktı, başarısız bir **101-SQL-VM-aglistener-Setup** şablon dağıtımından kaynaklanıyor olabilir. Arka uç havuzunun kullanılabilirlik kümesini listelediğinden ve sistem durumu araştırması ve yük dengeleme kuralları için bu kuralların mevcut olduğunu doğrulayın. Herhangi bir şey eksikse, iç yük dengeleyicinin yapılandırması tutarsız bir durumdur. 
 
-Bu davranışı düzeltmek için kullanarak dinleyiciyi kaldırmak [PowerShell](#remove-availability-group-listener), Azure portalından iç Yük Dengeleyiciyi silmek ve adım 3'ı yeniden başlatın. 
+Bu davranışı çözümlemek için, [PowerShell](#remove-the-availability-group-listener)'i kullanarak dinleyiciyi kaldırın, Azure Portal aracılığıyla iç yük dengeleyiciyi silin ve adım 3 ' te yeniden başlatın. 
 
-### <a name="badrequest---only-sql-virtual-machine-list-can-be-updated"></a>BadRequest - yalnızca SQL sanal makine listesi güncelleştirilebilir
-Dağıtırken bu hata oluşabilir **101-sql-vm-aglistener-setup** şablon dinleyicisi, SQL Server Management Studio (SSMS) aracılığıyla silindi ancak SQL VM kaynak Sağlayıcısı'ndan silinmedi. SSMS ile bir dinleyici silinmesi, meta verileri dinleyicisinin SQL VM kaynak Sağlayıcısı'ndan kaldırmaz; Dinleyici kullanarak kaynak Sağlayıcısı'ndan silinmelidir [PowerShell](#remove-availability-group-listener). 
+### <a name="badrequest---only-sql-virtual-machine-list-can-be-updated"></a>Rozet Isteği-yalnızca SQL sanal makine listesi güncelleştirilemiyor
+Bu hata, dinleyicinin SQL Server Management Studio (SSMS) ile silinmiş ancak SQL VM kaynak sağlayıcısından silinmediğinden **101-SQL-VM-aglistener-Setup** şablonunu dağıttığınızda meydana gelebilir. SSD 'ler aracılığıyla dinleyicinin silinmesi, SQL VM kaynak sağlayıcısından dinleyicinin meta verilerini kaldırmaz. Dinleyici, [PowerShell](#remove-the-availability-group-listener)aracılığıyla kaynak sağlayıcısından silinmelidir. 
 
 ### <a name="domain-account-does-not-exist"></a>Etki alanı hesabı yok
-Bu hata iki nedenden biri tarafından neden olabilir. Belirtilen etki alanı hesabı gerçekten yok veya eksik olduğu [kullanıcı asıl adı (UPN)](/windows/desktop/ad/naming-properties#userprincipalname) veri. **101-sql-vm-ag-setup** şablon UPN biçiminde bir etki alanı hesabı bekliyor (yani user@domain.com), ancak bazı etki alanı hesapları, eksik olabilir. Bu genellikle sunucunun bir etki alanı denetleyicisine yükseltildiğinde ilk etki alanı yöneticisi hesabı olması bir yerel kullanıcı geçişi veya PowerShell aracılığıyla bir kullanıcının oluşturulduğu oluşabilir. 
+Bu hatanın iki nedeni olabilir. Belirtilen etki alanı hesabı yok veya [Kullanıcı asıl adı (UPN)](/windows/desktop/ad/naming-properties#userprincipalname) verileri eksik. **101-SQL-VM-AG-Setup** şablonu, UPN biçiminde (yani *user@domain.com* ) bir etki alanı hesabı bekler, ancak bazı etki alanı hesaplarında bu hesap eksik olabilir. Bu genellikle, sunucu bir etki alanı denetleyicisine yükseltildiğinde veya PowerShell aracılığıyla bir kullanıcı oluşturulduğunda, yerel bir Kullanıcı ilk etki alanı yönetici hesabı olacak şekilde geçirildiğinde gerçekleşir. 
 
- Hesap mevcut olduğunu doğrulayın. Aksi halde ikinci durum çalışıyor olabilir. Bu sorunu gidermek için aşağıdakileri yapın:
+Hesabın var olduğunu doğrulayın. Bu durumda, ikinci duruma çalışıyor olabilirsiniz. Bunu çözmek için aşağıdakileri yapın:
 
-1. Etki alanı denetleyicisinde açın **Active Directory Kullanıcıları ve Bilgisayarları** penceresinden **Araçları** seçeneğini **Sunucu Yöneticisi**. 
-2. Seçerek hesabına gidin **kullanıcılar** sol bölmede.
-3. İstenen hesabını sağ tıklatın ve seçin **özellikleri**.
-4. Seçin **hesabı** doğrulayın ve sekme **kullanıcı oturum açma adı** boştur. Eğer öyleyse, hatanın nedeni budur. 
+1. Etki alanı denetleyicisinde, **Sunucu Yöneticisi** **Araçlar** seçeneğinde **Active Directory Kullanıcıları ve bilgisayarları** penceresini açın. 
+2. Sol bölmedeki **Kullanıcılar** ' i seçerek hesaba gidin.
+3. Hesaba sağ tıklayın ve **Özellikler**' i seçin.
+4. **Hesap** sekmesini seçin. **Kullanıcı oturum açma adı** kutusu boş ise, bu hatanın nedendir. 
 
-    ![Boş bir kullanıcı hesabı eksik UPN gösterir](media/virtual-machines-windows-sql-availability-group-quickstart-template/account-missing-upn.png)
+    ![Boş Kullanıcı hesabı eksik UPN 'yi gösterir](media/virtual-machines-windows-sql-availability-group-quickstart-template/account-missing-upn.png)
 
-5. Doldurun **kullanıcı oturum açma adı** kullanıcı adını eşleştirmek ve aşağı açılan listeden uygun etki alanını seçin. 
-6. Seçin **Uygula** değişikliklerinizi kaydedip seçerek iletişim kutusunu kapatmak için **Tamam**. 
+5. Kullanıcının adıyla eşleşecek şekilde **Kullanıcı oturum açma adı** kutusunu doldurup aşağı açılan listeden doğru etki alanını seçin. 
+6. Değişikliklerinizi kaydetmek için **Uygula** ' yı seçin ve **Tamam**' ı seçerek iletişim kutusunu kapatın. 
 
-   Bu değişiklikler yapıldıktan sonra bir kez daha fazla Azure Hızlı Başlangıç şablonu dağıtmak çalışır. 
+Bu değişiklikleri yaptıktan sonra Azure hızlı başlangıç şablonunu daha fazla dağıtmayı deneyin. 
 
 
 
@@ -201,11 +208,11 @@ Bu hata iki nedenden biri tarafından neden olabilir. Belirtilen etki alanı hes
 
 Daha fazla bilgi için aşağıdaki makalelere bakın: 
 
-* [SQL Server sanal makinesi genel bakış](virtual-machines-windows-sql-server-iaas-overview.md)
-* [SQL Server VM SSS](virtual-machines-windows-sql-server-iaas-faq.md)
-* [SQL Server VM fiyatlandırma Kılavuzu](virtual-machines-windows-sql-server-pricing-guidance.md)
-* [SQL Server VM sürüm notları](virtual-machines-windows-sql-server-iaas-release-notes.md)
-* [SQL Server sanal makinesi için lisanslama modelleri değiştirme](virtual-machines-windows-sql-ahb.md)
+* [SQL Server VM 'lerine genel bakış](virtual-machines-windows-sql-server-iaas-overview.md)
+* [SQL Server VM 'Ler için SSS](virtual-machines-windows-sql-server-iaas-faq.md)
+* [SQL Server VM 'Leri için fiyatlandırma Kılavuzu](virtual-machines-windows-sql-server-pricing-guidance.md)
+* [SQL Server VM 'Ler için sürüm notları](virtual-machines-windows-sql-server-iaas-release-notes.md)
+* [SQL Server VM için lisans modellerini değiştirme](virtual-machines-windows-sql-ahb.md)
 
 
 

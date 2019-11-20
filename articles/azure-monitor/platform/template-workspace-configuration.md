@@ -1,65 +1,53 @@
 ---
-title: Azure Resource Manager şablonları oluşturma ve Log Analytics çalışma alanı yapılandırma | Microsoft Docs
-description: Azure Resource Manager şablonları oluşturmak ve Log Analytics çalışma alanları yapılandırmak için kullanabilirsiniz.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: d21ca1b0-847d-4716-bb30-2a8c02a606aa
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Log Analytics çalışma alanı oluşturmak ve yapılandırmak için Azure Resource Manager şablonları kullanma | Microsoft Docs
+description: Log Analytics çalışma alanları oluşturmak ve yapılandırmak için Azure Resource Manager şablonlarını kullanabilirsiniz.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 02/21/2019
+author: MGoedtel
 ms.author: magoedte
-ms.openlocfilehash: 39dbb504603544a468907d87d236338cb95e39a3
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 10/22/2019
+ms.openlocfilehash: 5410d6ef11c3f95bb4f02dbd914a1aacbd068a1b
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67441624"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73176389"
 ---
-# <a name="manage-log-analytics-workspace-using-azure-resource-manager-templates"></a>Azure Resource Manager şablonlarını kullanarak Log Analytics çalışma alanını yönetme
+# <a name="manage-log-analytics-workspace-using-azure-resource-manager-templates"></a>Azure Resource Manager şablonları kullanarak Log Analytics çalışma alanını yönetme
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Kullanabileceğiniz [Azure Resource Manager şablonları](../../azure-resource-manager/resource-group-authoring-templates.md) oluşturmak ve Azure İzleyici'de Log Analytics çalışma alanları yapılandırmak için. Şablonlar ile gerçekleştirebileceğiniz görevler örnekleri şunlardır:
+Azure Izleyici 'de Log Analytics çalışma alanları oluşturmak ve yapılandırmak için [Azure Resource Manager şablonlarını](../../azure-resource-manager/resource-group-authoring-templates.md) kullanabilirsiniz. Şablonlarla gerçekleştirebileceğiniz görevlere örnekler şunlar olabilir:
 
-* Fiyatlandırma katmanını ayarlama dahil olmak üzere bir çalışma alanı oluşturma 
+* Fiyatlandırma katmanını ayarlama dahil bir çalışma alanı oluşturma 
 * Çözüm ekleme
-* Kaydedilmiş arama oluştur
-* Bir bilgisayar grubu oluşturun
-* Windows aracısının yüklü olduğu IIS günlükler bilgisayarlardan koleksiyonunu etkinleştir
-* Linux ve Windows bilgisayarlardan performans sayaçlarını Topla
-* Linux Bilgisayarları'nda syslog olaylarını Topla 
-* Windows olay günlüklerinden olaylarını Topla
-* Bir Azure sanal makinesi için log analytics aracısını ekleme
-* Azure Tanılama'yı kullanarak toplanan dizin verileri log analytics'e yapılandırın
+* Kayıtlı aramalar oluştur
+* Bilgisayar grubu oluşturma
+* Windows aracısının yüklü olduğu bilgisayarlardan IIS günlükleri toplamayı etkinleştir
+* Linux ve Windows bilgisayarlarından performans sayaçlarını toplayın
+* Linux bilgisayarlarda Syslog 'tan olay topla 
+* Windows olay günlüklerinden olay topla
+* Windows bilgisayarından özel günlükleri topla
+* Log Analytics aracısını bir Azure sanal makinesine ekleme
+* Log Analytics 'i Azure tanılama kullanılarak toplanan verileri dizinleyecek şekilde yapılandırma
 
-Bu makalede, şablonları ile gerçekleştirebileceğiniz yapılandırma bazılarını göstermeyi şablonu örnekleri sağlar.
+Bu makale, şablonlarla gerçekleştirebileceğiniz bazı yapılandırmayı gösteren şablon örnekleri sağlar.
 
 ## <a name="api-versions"></a>API sürümleri
-Aşağıdaki tabloda, bu örnekte kullanılan kaynaklar için API sürümü listeler.
 
-| Resource | Kaynak türü | API sürümü |
+Aşağıdaki tabloda, bu örnekte kullanılan kaynakların API sürümü listelenmektedir.
+
+| Kaynak | Kaynak türü | API sürümü |
 |:---|:---|:---|
-| Çalışma alanı   | Çalışma alanları    | 2017-03-15-Önizleme |
-| Ara      | savedSearches | 2015-03-20 |
-| Veri kaynağı | veri kaynakları   | 2015-11-01-Önizleme |
+| Çalışma Alanı   | Onlarla    | 2017-03-15-Önizleme |
+| Arama      | Savedaramalarındaki aramalar | 2015-03-20 |
+| Veri kaynağı | kaynağı   | 2015-11-01-Önizleme |
 | Çözüm    | çözümler     | 2015-11-01-Önizleme |
 
 ## <a name="create-a-log-analytics-workspace"></a>Log Analytics çalışma alanı oluşturma
-Aşağıdaki örnek, yerel makinenizden bir şablonu kullanarak bir çalışma alanı oluşturur. JSON şablonunu, çalışma alanının adı için yalnızca isteyecek şekilde yapılandırılmış ve büyük olasılıkla ortamınızdaki standart bir yapılandırma olarak kullanılacak diğer parametreler için varsayılan bir değer belirtir.  
 
-Aşağıdaki parametreleri varsayılan değeri ayarlayın:
-
-* Konum - Doğu ABD için varsayılanları
-* Nisan 2018'de yayınlanan yeni GB başına fiyatlandırma katmanına varsayılan fiyatlandırma modelinde SKU-
-
-> [!NOTE]
->Oluşturma veya yeni Nisan 2018 fiyatlandırma modelini tercih bir Abonelikteki Log Analytics çalışma alanını yapılandırma, yalnızca geçerli Log Analytics fiyatlandırma katmanı ise **PerGB2018**.  
->Bazı abonelikler varsa, [pre-Nisan 2018 fiyatlandırma modeline](https://docs.microsoft.com/azure/azure-monitor/platform/usage-estimated-costs#new-pricing-model), belirtebileceğiniz **tek başına** fiyatlandırma katmanı ve bu başarılı olur pre-Nisan 2018 fiyatlandırma modelinde iki abonelik için ve yeni abonelikler için fiyatlandırma. Fiyatlandırma katmanını yeni proicing modeli benimseyen Aboneliklerde çalışma alanları için ayarlanacak **PerGB2018**. 
+Aşağıdaki örnek, yerel makinenizden bir şablon kullanarak bir çalışma alanı oluşturur. JSON şablonu yalnızca yeni çalışma alanının adını ve konumunu gerektirecek şekilde yapılandırılmıştır (fiyatlandırma katmanı ve bekletme gibi diğer çalışma alanı parametreleri için varsayılan değerleri kullanarak).  
 
 ### <a name="create-and-deploy-template"></a>Şablon oluşturma ve dağıtma
 
@@ -79,26 +67,35 @@ Aşağıdaki parametreleri varsayılan değeri ayarlayın:
         "location": {
             "type": "String",
             "allowedValues": [
-              "eastus",
-              "westus"
+              "australiacentral", 
+              "australiaeast", 
+              "australiasoutheast", 
+              "brazilsouth",
+              "canadacentral", 
+              "centralindia", 
+              "centralus", 
+              "eastasia", 
+              "eastus", 
+              "eastus2", 
+              "francecentral", 
+              "japaneast", 
+              "koreacentral", 
+              "northcentralus", 
+              "northeurope", 
+              "southafricanorth", 
+              "southcentralus", 
+              "southeastasia", 
+              "uksouth", 
+              "ukwest", 
+              "westcentralus", 
+              "westeurope", 
+              "westus", 
+              "westus2" 
             ],
-            "defaultValue": "eastus",
             "metadata": {
               "description": "Specifies the location in which to create the workspace."
             }
-        },
-        "sku": {
-            "type": "String",
-            "allowedValues": [
-              "Standalone",
-              "PerNode",
-              "PerGB2018"
-            ],
-            "defaultValue": "PerGB2018",
-            "metadata": {
-            "description": "Specifies the service tier of the workspace: Standalone, PerNode, Per-GB"
         }
-          }
     },
     "resources": [
         {
@@ -107,9 +104,6 @@ Aşağıdaki parametreleri varsayılan değeri ayarlayın:
             "apiVersion": "2015-11-01-preview",
             "location": "[parameters('location')]",
             "properties": {
-                "sku": {
-                    "Name": "[parameters('sku')]"
-                },
                 "features": {
                     "searchVersion": 1
                 }
@@ -118,37 +112,40 @@ Aşağıdaki parametreleri varsayılan değeri ayarlayın:
        ]
     }
     ```
-2. Gereksinimlerinizi karşılayacak şekilde şablonunu düzenleyin.  Gözden geçirme [Microsoft.OperationalInsights/workspaces şablon](https://docs.microsoft.com/azure/templates/microsoft.operationalinsights/workspaces) başvuru hangi özellikler ve değerler desteklendiğini öğrenin. 
-3. Bu dosyayı farklı Kaydet **deploylaworkspacetemplate.json** yerel bir klasöre.
-4. Bu şablonu dağıtmaya hazırsınız. Çalışma alanı oluşturmak için PowerShell veya komut satırı'nı kullanın.
 
-   * PowerShell için şablonu içeren klasörden aşağıdaki komutları kullanın:
+2. Gereksinimlerinizi karşılayacak şekilde şablonu düzenleyin. Hangi özelliklerin ve değerlerin desteklendiğini öğrenmek için [Microsoft. Operationalınsights/Workspaces şablon](https://docs.microsoft.com/azure/templates/microsoft.operationalinsights/workspaces) başvurusunu gözden geçirin. 
+3. Bu dosyayı bir yerel klasöre **deploylaworkspace Template. JSON** olarak kaydedin.
+4. Bu şablonu dağıtmaya hazırsınız. Çalışma alanını oluşturmak için PowerShell veya komut satırı kullanın, bu durumda, komutun bir parçası olarak çalışma alanı adı ve konumu belirtin. Çalışma alanı adı tüm Azure abonelikleri genelinde genel olarak benzersiz olmalıdır.
+
+   * PowerShell için, şablonu içeren klasörden aşağıdaki komutları kullanın:
    
         ```powershell
-        New-AzResourceGroupDeployment -Name <deployment-name> -ResourceGroupName <resource-group-name> -TemplateFile deploylaworkspacetemplate.json
+        New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile deploylaworkspacetemplate.json -workspaceName <workspace-name> -location <location>
         ```
 
-   * Komut satırı için şablonu içeren klasörden aşağıdaki komutları kullanın:
+   * Komut satırı için, şablonu içeren klasörden aşağıdaki komutları kullanın:
 
         ```cmd
         azure config mode arm
-        azure group deployment create <my-resource-group> <my-deployment-name> --TemplateFile deploylaworkspacetemplate.json
+        azure group deployment create <my-resource-group> <my-deployment-name> --TemplateFile deploylaworkspacetemplate.json --workspaceName <workspace-name> --location <location>
         ```
 
-Dağıtımın tamamlanması birkaç dakika sürebilir. Tamamlandığında, sonuç içeren aşağıdakine benzer bir ileti görürsünüz:<br><br> ![Dağıtım tamamlandığında örnek sonucu](./media/template-workspace-configuration/template-output-01.png)
+Dağıtımın tamamlanması birkaç dakika sürebilir. Tamamlandığında, sonucu içeren aşağıdakine benzer bir ileti görürsünüz:<br><br> ![Dağıtım tamamlandığında örnek sonuç](./media/template-workspace-configuration/template-output-01.png)
 
-## <a name="configure-a-log-analytics-workspace"></a>Log Analytics çalışma alanını yapılandırma
-Aşağıdaki örnek şablonu göstermektedir nasıl yapılır:
+## <a name="configure-a-log-analytics-workspace"></a>Log Analytics çalışma alanı yapılandırma
 
-1. Çözüm çalışma alanına ekleme
-2. Kaydedilmiş arama oluştur
-3. Bir bilgisayar grubu oluşturun
-4. Windows aracısının yüklü olduğu IIS günlükler bilgisayarlardan koleksiyonunu etkinleştir
-5. Mantıksal Disk performans sayaçları Linux bilgisayarından toplar (% kullanılan Inode'ları; Boş megabayt; % Kullanılan alan; Disk aktarımı/sn; Disk Okuma/sn; Disk Yazma/sn)
-6. Linux bilgisayarlardan Syslog olaylarını Topla
-7. Windows bilgisayarlardan uygulama olay günlüğü'ndeki hata ve uyarı olaylarını Topla
-8. Windows bilgisayarlardan bellek kullanılabilir MBayt performans sayacı Topla
-9. IIS günlükleri ve Azure tanılama tarafından bir depolama hesabına yazılan Windows olay günlüklerini Topla
+Aşağıdaki şablon örneği nasıl yapılacağını göstermektedir:
+
+1. Çalışma alanına çözümler ekleme
+2. Kayıtlı aramalar oluştur
+3. Bilgisayar grubu oluşturma
+4. Windows aracısının yüklü olduğu bilgisayarlardan IIS günlükleri toplamayı etkinleştir
+5. Linux bilgisayarlardan mantıksal disk performans sayaçlarını toplayın (% kullanılan ınomdes; Boş megabayt; % Kullanılan alan; Disk aktarımı/sn; Disk Okuma/sn; Disk yazma/sn)
+6. Linux bilgisayarlardan Syslog olaylarını topla
+7. Windows bilgisayarlardan uygulama olay günlüğünden hata ve uyarı olaylarını toplayın
+8. Windows bilgisayarlarından bellek kullanılabilir MBayt performans sayacını topla
+9. Azure tanılama tarafından bir depolama hesabına yazılan IIS günlüklerini ve Windows olay günlüklerini toplayın
+10. Windows bilgisayarından özel günlükleri topla
 
 ```json
 {
@@ -161,19 +158,21 @@ Aşağıdaki örnek şablonu göstermektedir nasıl yapılır:
         "description": "Workspace name"
       }
     },
-    "serviceTier": {
+    "pricingTier": {
       "type": "string",
       "allowedValues": [
+        "PerGB2018",
         "Free",
         "Standalone",
         "PerNode",
-        "PerGB2018"
+        "Standard",
+        "Premium"
       ],
       "defaultValue": "PerGB2018",
       "metadata": {
-        "description": "Pricing tier: PerGB2018 or legacy tiers (Free, Standalone or PerNode) which are not available to all customers"
-    }
-      },
+        "description": "Pricing tier: PerGB2018 or legacy tiers (Free, Standalone, PerNode, Standard or Premium) which are not available to all customers."
+      }
+    },
     "dataRetention": {
       "type": "int",
       "defaultValue": 30,
@@ -183,21 +182,44 @@ Aşağıdaki örnek şablonu göstermektedir nasıl yapılır:
         "description": "Number of days of retention. Workspaces in the legacy Free pricing tier can only have 7 days."
       }
     },
-    {
     "immediatePurgeDataOn30Days": {
       "type": "bool",
+      "defaultValue": "[bool('false')]",
       "metadata": {
-        "description": "If set to true when changing retention to 30 days, older data will be immediately deleted. This only applies when retention is being set to 30 days."
+        "description": "If set to true when changing retention to 30 days, older data will be immediately deleted. Use this with extreme caution. This only applies when retention is being set to 30 days."
       }
     },
     "location": {
       "type": "string",
       "allowedValues": [
-        "East US",
-        "West Europe",
-        "Southeast Asia",
-        "Australia Southeast"
-      ]
+        "australiacentral", 
+        "australiaeast", 
+        "australiasoutheast", 
+        "brazilsouth",
+        "canadacentral", 
+        "centralindia", 
+        "centralus", 
+        "eastasia", 
+        "eastus", 
+        "eastus2", 
+        "francecentral", 
+        "japaneast", 
+        "koreacentral", 
+        "northcentralus", 
+        "northeurope", 
+        "southafricanorth", 
+        "southcentralus", 
+        "southeastasia", 
+        "uksouth", 
+        "ukwest", 
+        "westcentralus", 
+        "westeurope", 
+        "westus", 
+        "westus2"
+      ],
+      "metadata": {
+        "description": "Specifies the location in which to create the workspace."
+      }
     },
     "applicationDiagnosticsStorageAccountName": {
         "type": "string",
@@ -210,22 +232,28 @@ Aşağıdaki örnek şablonu göstermektedir nasıl yapılır:
         "metadata": {
           "description": "The resource group name containing the storage account with Azure diagnostics output"
         }
-    }
-  },
-  "variables": {
-    "Updates": {
-      "Name": "[Concat('Updates', '(', parameters('workspaceName'), ')')]",
-      "GalleryName": "Updates"
     },
-    "AntiMalware": {
-      "Name": "[concat('AntiMalware', '(', parameters('workspaceName'), ')')]",
-      "GalleryName": "AntiMalware"
+    "customLogName": {
+    "type": "string",
+    "metadata": {
+      "description": "The custom log name"
+      }
+     }
     },
-    "SQLAssessment": {
-      "Name": "[Concat('SQLAssessment', '(', parameters('workspaceName'), ')')]",
-      "GalleryName": "SQLAssessment"
-    },
-    "diagnosticsStorageAccount": "[resourceId(parameters('applicationDiagnosticsStorageAccountResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('applicationDiagnosticsStorageAccountName'))]"
+    "variables": {
+      "Updates": {
+        "Name": "[Concat('Updates', '(', parameters('workspaceName'), ')')]",
+        "GalleryName": "Updates"
+      },
+      "AntiMalware": {
+        "Name": "[concat('AntiMalware', '(', parameters('workspaceName'), ')')]",
+        "GalleryName": "AntiMalware"
+      },
+      "SQLAssessment": {
+        "Name": "[Concat('SQLAssessment', '(', parameters('workspaceName'), ')')]",
+        "GalleryName": "SQLAssessment"
+      },
+      "diagnosticsStorageAccount": "[resourceId(parameters('applicationDiagnosticsStorageAccountResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('applicationDiagnosticsStorageAccountName'))]"
   },
   "resources": [
     {
@@ -234,10 +262,13 @@ Aşağıdaki örnek şablonu göstermektedir nasıl yapılır:
       "name": "[parameters('workspaceName')]",
       "location": "[parameters('location')]",
       "properties": {
-        "sku": {
-          "Name": "[parameters('serviceTier')]"
+        "retentionInDays": "[parameters('dataRetention')]",
+        "features": {
+          "immediatePurgeDataOn30Days": "[parameters('immediatePurgeDataOn30Days')]"
         },
-    "retentionInDays": "[parameters('dataRetention')]"
+        "sku": {
+          "name": "[parameters('pricingTier')]"
+        }
       },
       "resources": [
         {
@@ -379,6 +410,55 @@ Aşağıdaki örnek şablonu göstermektedir nasıl yapılır:
         },
         {
           "apiVersion": "2015-11-01-preview",
+          "type": "dataSources",
+          "name": "[concat(parameters('workspaceName'), parameters('customLogName'))]",
+          "dependsOn": [
+            "[concat('Microsoft.OperationalInsights/workspaces/', '/', parameters('workspaceName'))]"
+          ],
+          "kind": "CustomLog",
+          "properties": {
+            "customLogName": "[parameters('customLogName')]",
+            "description": "this is a description",
+            "extractions": [
+              {
+                "extractionName": "TimeGenerated",
+                "extractionProperties": {
+                  "dateTimeExtraction": {
+                    "regex": [
+                      {
+                        "matchIndex": 0,
+                        "numberdGroup": null,
+                        "pattern": "((\\d{2})|(\\d{4}))-([0-1]\\d)-(([0-3]\\d)|(\\d))\\s((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9]"
+                      }
+                    ]
+                  }
+                },
+                "extractionType": "DateTime"
+              }
+            ],
+            "inputs": [
+              {
+                "location": {
+                  "fileSystemLocations": {
+                    "linuxFileTypeLogPaths": null,
+                    "windowsFileTypeLogPaths": [
+                      "[concat('c:\\Windows\\Logs\\',parameters('customLogName'))]"
+                    ]
+                  }
+                },
+                "recordDelimiter": {
+                  "regexDelimiter": {
+                    "matchIndex": 0,
+                    "numberdGroup": null,
+                    "pattern": "(^.*((\\d{2})|(\\d{4}))-([0-1]\\d)-(([0-3]\\d)|(\\d))\\s((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9].*$)"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "apiVersion": "2015-11-01-preview",
           "type": "datasources",
           "name": "sampleLinuxPerfCollection1",
           "dependsOn": [
@@ -494,41 +574,51 @@ Aşağıdaki örnek şablonu göstermektedir nasıl yapılır:
       "type": "int",
       "value": "[reference(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName')), '2015-11-01-preview').retentionInDays]"
     },
+    "immediatePurgeDataOn30Days": {  
+      "type": "bool",
+      "value": "[reference(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName')), '2015-11-01-preview').features.immediatePurgeDataOn30Days]"
+    },
     "portalUrl": {
       "type": "string",
       "value": "[reference(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName')), '2015-11-01-preview').portalUrl]"
     }
   }
 }
-
 ```
+
 ### <a name="deploying-the-sample-template"></a>Örnek şablonu dağıtma
+
 Örnek şablonu dağıtmak için:
 
-1. Bağlı örnek bir dosyaya, örneğin kaydedin `azuredeploy.json` 
-2. İstediğiniz yapılandırmaya sahip bir şablon Düzenle
-3. Şablonu dağıtmak için PowerShell veya komut satırı'nı kullanın
+1. Ekli örneği bir dosyaya kaydedin, örneğin `azuredeploy.json` 
+2. Şablonu istediğiniz yapılandırmaya sahip olacak şekilde düzenleyin
+3. Şablonu dağıtmak için PowerShell veya komut satırını kullanma
 
 #### <a name="powershell"></a>PowerShell
+
 ```powershell
 New-AzResourceGroupDeployment -Name <deployment-name> -ResourceGroupName <resource-group-name> -TemplateFile azuredeploy.json
 ```
 
 #### <a name="command-line"></a>Komut satırı
+
 ```cmd
 azure config mode arm
 azure group deployment create <my-resource-group> <my-deployment-name> --TemplateFile azuredeploy.json
 ```
 
-## <a name="example-resource-manager-templates"></a>Örnek Resource Manager şablonları
-Azure hızlı başlangıç Şablon Galerisi de dahil olmak üzere Log Analytics için birkaç şablon içerir:
+## <a name="example-resource-manager-templates"></a>Örnek Kaynak Yöneticisi şablonları
 
-* [Log Analytics VM uzantısı ile Windows çalıştıran bir sanal makine dağıtma](https://azure.microsoft.com/documentation/templates/201-oms-extension-windows-vm/)
-* [Log Analytics VM uzantısı ile Linux çalıştıran bir sanal makine dağıtma](https://azure.microsoft.com/documentation/templates/201-oms-extension-ubuntu-vm/)
+Azure hızlı başlangıç Şablonu Galerisi, aşağıdakiler dahil olmak üzere Log Analytics için çeşitli şablonlar içerir:
+
+* [Windows çalıştıran bir sanal makineyi Log Analytics VM uzantısıyla dağıtma](https://azure.microsoft.com/documentation/templates/201-oms-extension-windows-vm/)
+* [Log Analytics VM uzantısıyla Linux çalıştıran bir sanal makineyi dağıtma](https://azure.microsoft.com/documentation/templates/201-oms-extension-ubuntu-vm/)
 * [Mevcut bir Log Analytics çalışma alanını kullanarak Azure Site Recovery izleme](https://azure.microsoft.com/documentation/templates/asr-oms-monitoring/)
-* [Mevcut bir Log Analytics çalışma alanını kullanarak Azure Web uygulamalarını izleme](https://azure.microsoft.com/documentation/templates/101-webappazure-oms-monitoring/)
-* [Mevcut bir depolama hesabı için Log Analytics Ekle](https://azure.microsoft.com/resources/templates/oms-existing-storage-account/)
+* [Mevcut bir Log Analytics çalışma alanını kullanarak Azure Web Apps izleme](https://azure.microsoft.com/documentation/templates/101-webappazure-oms-monitoring/)
+* [Log Analytics var olan bir depolama hesabı ekleyin](https://azure.microsoft.com/resources/templates/oms-existing-storage-account/)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Azure Resource Manager şablonu kullanarak sanal makinelere Windows aracısını dağıtmak](../../virtual-machines/extensions/oms-windows.md).
-* [Linux aracısını dağıtmak için Azure Resource Manager şablonu kullanarak Vm'leri](../../virtual-machines/extensions/oms-linux.md).
+
+* [Kaynak Yöneticisi şablonu kullanarak Azure VM 'Lerine Windows Aracısı dağıtın](../../virtual-machines/extensions/oms-windows.md).
+
+* [Kaynak Yöneticisi şablonu kullanarak Azure VM 'Lerine Linux Aracısı dağıtın](../../virtual-machines/extensions/oms-linux.md).

@@ -1,45 +1,67 @@
 ---
-author: tamram
+author: roygara
 ms.service: storage
 ms.topic: include
 ms.date: 12/11/2018
-ms.author: tamram
-ms.openlocfilehash: 57ba55ce284030a4103077553b0dcfce01a93678
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rogarana
+ms.openlocfilehash: 02e9553b9704c96794e0c1113ab3e06458f0f7c8
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67125774"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72391821"
 ---
-Azure dosya eşitleme aracısının sorunlarını gidermek için ve yeni işlevler eklemek için düzenli olarak güncelleştirilir. Kullanılabilir olarak Azure dosya eşitleme Aracısı güncelleştirmelerini almak için Microsoft Update'i yapılandırma öneririz.
+Azure Dosya Eşitleme Aracısı, yeni işlevsellik eklemek ve sorunları gidermek için düzenli olarak güncelleştirilir. Microsoft Update, Azure Dosya Eşitleme aracısına ait güncelleştirmeleri kullanıma almak için yapılandırmanızı öneririz.
 
-#### <a name="major-vs-minor-agent-versions"></a>Büyük küçük Aracı sürümleri karşılaştırması
-* Ana Aracı sürümleri, genellikle yeni özellikler içerir ve duymuşsunuzdur sürüm numarasının ilk parçası olarak sahip. Örneğin: \*2.\*.\*\*
-* Küçük Aracı sürümleri "düzeltme" olarak da adlandırılır ve ana sürümler daha sık kullanıma sunulur. Bunlar genellikle hata düzeltmeleri ve geliştirmeleri daha küçük ancak herhangi bir yeni özellik içerir. Örneğin: \* \*.3.\*\*
+#### <a name="major-vs-minor-agent-versions"></a>Birincil ve ikincil Aracı sürümleri
+* Ana Aracı sürümleri genellikle yeni özellikler içerir ve sürüm numarasının ilk bölümü olarak artan bir sayı içerir. Örneğin: \*2. \*. \* @ no__t-3
+* Alt Aracı sürümleri "yamalar" olarak da adlandırılır ve Ana sürümlerden daha sık yayımlanır. Bunlar genellikle hata düzeltmeleri ve daha küçük geliştirmeler içerir ancak yeni özellikler içermez. Örneğin: \* @ no__t-1.3. \* @ no__t-3
 
 #### <a name="upgrade-paths"></a>Yükseltme yolları
-Dört Onaylandı ve test Azure dosya eşitleme Aracısı güncelleştirmelerini yüklemek için yollar vardır. 
-1. **(Tercih edilir) Aracı güncelleştirmeleri otomatik olarak indirip Microsoft Update yapılandırın.**  
-    Her zaman sunucu aracı için en son düzeltmeleri erişimi olduğundan emin olmak için her bir Azure dosya eşitleme güncelleştirmesi sürüyor öneririz. Microsoft Update bu işlem sorunsuz, otomatik olarak indirerek ve güncelleştirmeleri için yükleme sağlar.
-2. **Aracı güncelleştirmeleri karşıdan yüklenip kurulacak AfsUpdater.exe kullanın.**  
-    AfsUpdater.exe aracı yükleme dizininde bulunur. Aracı Güncelleştirmeleri indirmek ve yüklemek için yürütülebilir dosyaya çift tıklayın. 
-3. **Mevcut bir Azure dosya eşitleme aracısının, bir Microsoft Update düzeltme eki dosyası veya yürütülebilir bir .msp kullanarak düzeltme eki. En son Azure dosya eşitleme güncelleştirme paketini indirilebileceğini [Microsoft Update Kataloğu](https://www.catalog.update.microsoft.com/Search.aspx?q=Azure%20File%20Sync).**  
-    Yürütülebilir bir .msp çalışan otomatik olarak önceki yükseltme yolu Microsoft Update tarafından kullanılan aynı yönteme ile Azure dosya eşitleme yüklemenizi yükseltir. Microsoft Update düzeltme eki uygulama, bir Azure dosya eşitleme yüklemesini yerinde yükseltme gerçekleştirin.
-4. **En yeni Azure dosya eşitleme Aracısı Yükleyicisi'nden indirin [Microsoft Download Center](https://go.microsoft.com/fwlink/?linkid=858257).**  
-    Var olan bir Azure dosya eşitleme Aracısı yüklemesini yükseltmek için eski sürümü kaldırın ve ardından indirilen Yükleyicisi'nden en son sürümünü yükleyin. Sunucu kaydı, eşitleme grupları ve diğer ayarları Azure dosya eşitleme yükleyici tarafından korunur.
+Azure Dosya Eşitleme Aracısı güncelleştirmelerini yüklemek için dört onaylı ve test edilmiş yol vardır. 
+1. **Sındadır Aracı güncelleştirmelerini otomatik olarak indirmek ve yüklemek için Microsoft Update yapılandırın.**  
+    Sunucu aracısına yönelik en son düzeltmelerde erişiminizin olduğundan emin olmak için her zaman Azure Dosya Eşitleme güncelleştirme yapmanız önerilir. Microsoft Update, güncelleştirmeleri otomatik olarak indirip yükleyerek bu işlemi sorunsuz hale getirir.
+2. **Aracı güncelleştirmelerini indirmek ve yüklemek için Afsgüncelleştirici. exe ' yi kullanın.**  
+    Afsgüncelleştirici. exe aracı yükleme dizininde bulunur. Aracı güncelleştirmelerini indirmek ve yüklemek için çalıştırılabilire çift tıklayın. 
+3. **Microsoft Update bir düzeltme eki dosyası veya. msp yürütülebilir dosyası kullanarak var olan bir Azure Dosya Eşitleme aracısına yama yapın. En son Azure Dosya Eşitleme güncelleştirme paketi [Microsoft Update kataloğundan](https://www.catalog.update.microsoft.com/Search.aspx?q=Azure%20File%20Sync)indirilebilir.**  
+    Bir. msp yürütülebilir dosyası çalıştırmak, Azure Dosya Eşitleme yüklemenizi önceki yükseltme yolundaki Microsoft Update otomatik olarak kullanılan yöntemle yükseltir. Microsoft Update bir düzeltme eki uygulandığında, Azure Dosya Eşitleme yüklemesinin yerinde yükseltilmesi gerçekleştirilir.
+4. **En yeni Azure Dosya Eşitleme Aracı yükleyicisini [Microsoft Indirme merkezi](https://go.microsoft.com/fwlink/?linkid=858257)' nden indirin.**  
+    Mevcut bir Azure Dosya Eşitleme Aracısı yüklemesini yükseltmek için eski sürümü kaldırın ve ardından indirilen yükleyiciden en son sürümü yüklemeniz gerekir. Sunucu kaydı, eşitleme grupları ve diğer tüm ayarlar Azure Dosya Eşitleme yükleyicisi tarafından korunur.
 
 #### <a name="automatic-agent-lifecycle-management"></a>Otomatik aracı yaşam döngüsü yönetimi
-Aracı sürümü 6 ile dosya eşitleme takım bir aracı otomatik yükseltme özelliğini kullanıma sundu. İki moddan birini seçebilir ve sunucuda yükseltme denenmesi bir bakım penceresi belirtin. Bu özellik, aracı yaşam döngüsü yönetimi ile ya da sona erme, Aracıdan engelleyen bir guardrail sağlayarak yardımcı olur ya da geçerli ayar kalın bir sorunsuz için izin verme için tasarlanmıştır.
-1. **Varsayılan ayar** sona erme Aracıdan önleme girişiminde bulunur. Bir aracı gönderilen sona erme tarihini 21 gün içinde aracı kendi kendine yükseltme dener. Haftada bir kez süre sonundan önce ve seçili bakım penceresinde 21 gün içinde yükseltme girişimi başlayacak. **Bu seçeneği, normal Microsoft Update düzeltme ekleri alma ihtiyacını ortadan kaldırmaz.**
-2. İsteğe bağlı olarak, yeni bir aracı sürümü kullanılabilir hemen sonra aracıyı otomatik olarak kendisini yükseltecek olduğunu seçebilirsiniz (şu an kümelenmiş sunucular için geçerlidir). Bu güncelleştirme, seçili bakım penceresi sırasında oluşur ve genel kullanıma sunulduğunda hemen sonra yeni özellikler ve geliştirmeleri avantajlarından yararlanarak sunucuya izin. Normal güncelleştirme düzeltme ekleri sunucunuza yanı sıra büyük Aracı sürümleri sağlayacak, sorunsuz, Önerilen ayar budur. Yayımlanan her GA kalitede aracısıdır. Microsoft, bu seçeneği seçerseniz, size en yeni aracı sürümü uçuş. Kümelenmiş sunucular hariç tutulur. Yayını tamamlandıktan sonra aracı da kullanılabilir hale gelir [Microsoft Download Center](https://go.microsoft.com/fwlink/?linkid=858257) aka.ms/AFS/agent.
+Aracı sürümü 6 ile, dosya eşitleme ekibi bir aracı otomatik yükseltme özelliği sunmuştur. İki moddan birini seçebilir ve sunucuda yükseltmenin denendiği bir bakım penceresi belirtebilirsiniz. Bu özellik aracı yaşam döngüsü yönetimine yardımcı olmak için tasarlanmıştır. Bu özellik, aracılarınızın süresinin dolması veya sorunsuz bir şekilde izin vermesi için bir guardraıl sağlayarak, geçerli ayarı güncel tutun.
+1. **Varsayılan ayar** , aracının süre sonunu engellemeye çalışır. Aracının, bir aracının deftere nakledildiği son kullanma tarihinden itibaren 21 gün içinde, aracı kendi kendine yükseltmeyi dener. Süre sonu ve seçilen bakım penceresinde 21 gün içinde bir hafta sonra bir kez yükseltme girişiminde yer alacak. **Bu seçenek, normal Microsoft Update düzeltme ekleri alma gereksinimini ortadan kaldırmaz.**
+1. İsteğe bağlı olarak, yeni bir aracı sürümü kullanılabilir hale geldiğinde (Şu anda kümelenmiş sunucular için geçerli değildir), aracının otomatik olarak kendisini yükseltediğini seçebilirsiniz. Bu güncelleştirme, seçilen bakım penceresi sırasında gerçekleşir ve sunucunuzun, genel kullanıma sunulduğunda yeni özelliklerden ve geliştirmelerden yararlanmasına olanak tanır. Bu, ana aracı sürümlerinin yanı sıra sunucunuza düzenli güncelleştirme yamaları sağlayan önerilen, sorunsuz bir ayardır. Yayınlanan her aracı GA kalitesine göre yapılır. Bu seçeneği belirlerseniz, Microsoft en yeni aracı sürümünü size vermeyecektir. Kümelenmiş sunucular hariç tutulur. Fışıklandırma tamamlandıktan sonra, aracı [Microsoft Indirme merkezi](https://go.microsoft.com/fwlink/?linkid=858257) aka.MS/AFS/Agent ' de de kullanılabilir hale gelir.
 
-#### <a name="agent-lifecycle-and-change-management-guarantees"></a>Aracı yaşam döngüsü ve değişiklik Yönetimi garanti eder
-Azure dosya eşitleme sürekli olarak yeni özellikler ve geliştirmeler sağlayan bir bulut hizmetidir. Bu, belirli bir Azure dosya eşitleme Aracısı sürümü yalnızca sınırlı bir süre için desteklenmesi anlamına gelir. Dağıtımınızı kolaylaştırmak için aşağıdaki kurallar yeterli süre ve aracı güncelleştirmeler/yükseltmeler değişiklik Yönetimi işleminizin uyum sağlamak için bildirim olması garanti:
+ ##### <a name="changing-the-auto-upgrade-setting"></a>Otomatik yükseltme ayarını değiştirme
 
-- İlk yayın tarihinden itibaren en az altı ay için ana Aracı sürümleri desteklenir.
-- En az üç aylık büyük Aracı sürümleri desteğini arasında bir çakışma var. garanti ediyoruz. 
-- Uyarılar, süre sonundan önce en az üç ay yakında olacak süresi dolmuş Aracısı'nı kullanarak kayıtlı sunucular için verilir. Kayıtlı sunucu depolama eşitleme hizmeti kayıtlı sunucuları bölümü altında aracının eski bir sürümünü kullanıp kullanmadığını kontrol edebilirsiniz.
-- Küçük aracı sürümü ömrünü ilişkili ana sürüme bağlıdır. Örneğin, Aracı sürüm 3.0 yayınlandığında, Aracı sürümleri 2. \* tüm birlikte süresi dolacak şekilde ayarlanır.
+Aşağıdaki yönergelerde, değişiklikler yapmanız gerekiyorsa, yükleyiciyi tamamladıktan sonra ayarların nasıl değiştirileceği açıklanır.
+
+Bir PowerShell konsolu açın ve eşitleme aracısını yüklediğiniz dizine gidin ve sunucu cmdlet 'lerini içeri aktarın. Bu, varsayılan olarak şuna benzer:
+```powershell
+cd 'C:\Program Files\Azure\StorageSyncAgent'
+Import-Module -Name \StorageSync.Management.ServerCmdlets.dll
+```
+
+Geçerli ilke ayarını denetlemek ve değiştirmek istediğinizi öğrenmek için `Get-StorageSyncAgentAutoUpdatePolicy` ' yı çalıştırabilirsiniz.
+
+Geçerli ilke ayarını gecikmeli güncelleştirme izlemesine göre değiştirmek için şunları kullanabilirsiniz:
+```powershell
+Set-StorageSyncAgentAutoUpdatePolicy -PolicyMode UpdateBeforeExpiration
+```
+
+Geçerli ilke ayarını anında güncelleştirme izi olarak değiştirmek için şunları kullanabilirsiniz:
+```powershell
+Set-StorageSyncAgentAutoUpdatePolicy -PolicyMode InstallLatest
+```
+
+#### <a name="agent-lifecycle-and-change-management-guarantees"></a>Aracı yaşam döngüsü ve değişiklik yönetimi garantisi
+Azure Dosya Eşitleme, sürekli olarak yeni özellikler ve geliştirmeler sunan bir bulut hizmetidir. Bu, belirli bir Azure Dosya Eşitleme Aracısı sürümünün yalnızca sınırlı bir süre için desteklenebilir olduğu anlamına gelir. Dağıtımınızı kolaylaştırmak için aşağıdaki kurallar, değişiklik yönetimi işleminizde aracı güncelleştirmelerini/yükseltmelerini karşılamaya yetecek zaman ve bildirimin olduğunu garanti eder:
+
+- Ana Aracı sürümleri ilk yayın tarihinden en az altı ay boyunca desteklenir.
+- Ana Aracı sürümleri desteği arasında en az üç aydan oluşan bir çakışma olduğunu garanti ediyoruz. 
+- Son kullanma süresi dolmadan önce en az üç ay sonra, kayıtlı sunucular için uyarılar verilir. Kayıtlı bir sunucunun, bir depolama eşitleme hizmeti 'nin kayıtlı sunucular bölümünde aracının daha eski bir sürümünü kullanıp kullan, kontrol edebilirsiniz.
+- Bir alt Aracı sürümünün ömrü, ilişkili ana sürüme bağlanır. Örneğin, aracı sürümü 3,0 bırakıldığında, 2. \* Aracı sürümleri birlikte sona ermeyecek şekilde ayarlanır.
 
 > [!Note]
-> Bir süre sonu uyarısı ile bir aracı sürümü yüklemek bir uyarı görüntüler ancak başarılı. Yükleyin veya bir süresi dolmuş aracı sürümü ile bağlayın çalışılıyor desteklenmiyor ve engellenir.
+> Bir aracı sürümünü bir süre sonu uyarısıyla yüklemek bir uyarı görüntüler, ancak başarılı olur. Zaman aşımına uğradı bir Aracı sürümüyle yüklenmeye veya bağlanmaya çalışılması desteklenmez ve engellenir.

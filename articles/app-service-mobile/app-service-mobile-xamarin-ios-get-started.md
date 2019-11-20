@@ -14,19 +14,20 @@ ms.devlang: dotnet
 ms.topic: conceptual
 ms.date: 06/25/2019
 ms.author: emalani
-ms.openlocfilehash: 57867eeca9f29cfc3983cbdca94c830aa7a20500
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 14fb925896fc94def59b753711eb74f155b2e139
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67446256"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72388351"
 ---
-# <a name="create-a-xamarinios-app"></a>Yeni bir Xamarin.iOS uygulaması oluşturma
+# <a name="create-a-xamarinios-app"></a>Xamarin.iOS Uygulaması oluşturma
 [!INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
 
 > [!NOTE]
-> Visual Studio App Center, mobil uygulama geliştirme merkezi hizmetlerinde yeni ve tümleşik yatırım yapıyor. Geliştiriciler **derleme**, **Test** ve **Dağıt** hizmetlerinin sürekli tümleştirme ve teslim işlem hattı ayarlayın. Uygulama dağıtıldığında, geliştiriciler kendi uygulamasını kullanarak kullanımı ve durumu izleyebilirsiniz **Analytics** ve **tanılama** kullanarak kullanıcılarla etkileşim kurun ve hizmetlerini **anında iletme** hizmeti. Geliştiriciler de yararlanabilir **Auth** , kullanıcıların kimliğini doğrulamak ve **veri** kalıcı hale getirmek ve uygulama verilerini bulutta eşitleme hizmeti. Kullanıma [App Center](https://appcenter.ms/?utm_source=zumo&utm_campaign=app-service-mobile-xamarin-ios-get-started) bugün.
+> Visual Studio App Center mobil uygulama dağıtımında merkezi konumdaki uçtan uca ve tümleşik hizmetleri destekler. Geliştiriciler Sürekli Tümleştirme ve Teslim işlem hattını ayarlamak için **Oluşturma**, **Test** ve **Dağıtım** hizmetlerini kullanabilir. Uygulama dağıtıldıktan sonra, geliştiriciler **Analiz** ve **Tanılama** hizmetlerini kullanarak uygulamanın durumunu ve kullanımını izleyebilir, **Gönderme** hizmetini kullanarak kullanıcılarla etkileşim kurabilir. Geliştiriciler ayrıca kullanıcıların kimliğini doğrulamak için **Kimlik Doğrulaması**'ndan ve uygulama verilerini bulutta kalıcı hale getirmek ve eşitlemek için **Veri** hizmetinden yararlanabilir.
 >
+> Mobil uygulamanızda bulut hizmetlerini tümleştirmek istiyorsanız bugün [App Center](https://appcenter.ms/?utm_source=zumo&utm_medium=Azure&utm_campaign=zumo%20doc) kaydolun.
 
 ## <a name="overview"></a>Genel Bakış
 Bu öğreticide, bir Xamarin.iOS mobil uygulamasına Azure mobil uygulaması arka ucunu kullanarak bulut tabanlı arka uç hizmetini nasıl ekleyeceğiniz gösterilir.  Hem yeni bir mobil arka uç hem de Azure’da uygulama verilerini depolayan basit bir *Yapılacaklar listesi* oluşturursunuz.
@@ -36,34 +37,34 @@ Bu öğreticiyi tamamlamak, Azure App Service’de Mobile Apps özelliğini kull
 ## <a name="prerequisites"></a>Önkoşullar
 Bu öğreticiyi tamamlamak için aşağıdaki önkoşulları karşılamanız gerekir:
 
-* Etkin bir Azure hesabı. Hesabınız yoksa Azure deneme sürümü için kaydolun ve deneme süreniz bittikten sonra bile kullanmaya devam edebileceğiniz 10 ücretsiz mobil uygulama edinin. Ayrıntılar için bkz [Azure ücretsiz deneme sürümü](https://azure.microsoft.com/pricing/free-trial/).
-* Mac için Visual Studio Bkz: [Kurulum ve Mac için Visual Studio için yükleme](https://docs.microsoft.com/visualstudio/mac/installation?view=vsmac-2019)
-* Mac'te Xcode 9.0 veya sonraki bir sürümü.
+* Etkin bir Azure hesabı. Hesabınız yoksa Azure deneme sürümü için kaydolun ve deneme süreniz bittikten sonra bile kullanmaya devam edebileceğiniz 10 ücretsiz mobil uygulama edinin. Ayrıntılı bilgi için bkz. [Azure Ücretsiz Deneme Sürümü](https://azure.microsoft.com/pricing/free-trial/).
+* Mac için Visual Studio. [Mac için Visual Studio için bkz. Kurulum ve yükleme](https://docs.microsoft.com/visualstudio/mac/installation?view=vsmac-2019)
+* Xcode 9,0 veya üzeri bir Mac.
   
 ## <a name="create-an-azure-mobile-app-backend"></a>Azure Mobil Uygulama arka ucu oluşturma
 [!INCLUDE [app-service-mobile-dotnet-backend-create-new-service](../../includes/app-service-mobile-dotnet-backend-create-new-service.md)]
 
-## <a name="create-a-database-connection-and-configure-the-client-and-server-project"></a>Veritabanı bağlantısı oluşturma ve istemci ve sunucu projesi yapılandırma
+## <a name="create-a-database-connection-and-configure-the-client-and-server-project"></a>Bir veritabanı bağlantısı oluşturma ve istemciyi ve sunucu projesini yapılandırma
 [!INCLUDE [app-service-mobile-configure-new-backend](../../includes/app-service-mobile-configure-new-backend.md)]
 
-## <a name="run-the-xamarinios-app"></a>Xamarin iOS uygulamasını çalıştırma
-1. Xamarin.iOS projesi açın.
+## <a name="run-the-xamarinios-app"></a>Xamarin. iOS uygulamasını çalıştırma
+1. Xamarin. iOS projesini açın.
 
-2. Git [Azure portalında](https://portal.azure.com/) ve oluşturduğunuz mobil uygulamaya gidin. Üzerinde `Overview` dikey penceresinde mobil uygulamanız için genel bir uç nokta URL'sini arayın. Örnek - sitename my app name "test123" için olacak https://test123.azurewebsites.net.
+2. [Azure Portal](https://portal.azure.com/) gidin ve oluşturduğunuz mobil uygulamaya gidin. @No__t-0 dikey penceresinde, mobil uygulamanız için genel uç nokta olan URL 'YI arayın. Örnek-uygulamamın adı "test123" olan SiteName değeri https://test123.azurewebsites.net olacaktır.
 
-3. Dosyayı açmak `QSTodoService.cs` bu klasördeki - xamarin.iOS/ZUMOAPPNAME. Uygulama adı `ZUMOAPPNAME`.
+3. Bu klasördeki `QSTodoService.cs` dosyasını açın-Xamarin. iOS/ZUMOAPPNAME. Uygulama adı `ZUMOAPPNAME` ' dır.
 
-4. İçinde `QSTodoService` sınıfı, yerine `ZUMOAPPURL` yukarıdaki genel uç noktası ile değişken.
+4. @No__t-0 sınıfında, `ZUMOAPPURL` değişkenini Yukarıdaki genel uç nokta ile değiştirin.
 
     `const string applicationURL = @"ZUMOAPPURL";`
 
-    olur
+    geldiğinde
     
     `const string applicationURL = @"https://test123.azurewebsites.net";`
     
-5. Dağıtmak ve bir iPhone öykünücüsünde uygulamayı çalıştırmak için F5 tuşuna basın.
+5. Uygulamayı bir iPhone öykünücüsünde dağıtmak ve çalıştırmak için F5 tuşuna basın.
 
-6. Uygulamada, gibi anlamlı bir metin yazın *öğreticiye* ve ardından + düğmesini.
+6. Uygulamada, *öğreticiyi doldurun* gibi anlamlı bir metin yazın ve ardından + düğmesine tıklayın.
 
     ![][10]
 

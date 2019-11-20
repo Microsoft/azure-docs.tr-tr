@@ -1,6 +1,7 @@
 ---
-title: Ulusal bulutlarda Azure Active Directory'yi kullanarak kimlik doğrulaması
-description: Ulusal Bulutlar için uygulama kaydı ve kimlik doğrulama uç hakkında bilgi edinin.
+title: Ulusal bulutlarda Azure Active Directory kullanarak kimlik doğrulaması
+titleSuffix: Microsoft identity platform
+description: Ulusal bulutlar için uygulama kaydı ve kimlik doğrulama uç noktaları hakkında bilgi edinin.
 services: active-directory
 documentationcenter: ''
 author: negoe
@@ -9,83 +10,80 @@ editor: ''
 ms.service: active-directory
 ms.subservice: develop
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 05/07/2019
+ms.date: 08/28/2019
 ms.author: negoe
 ms.reviewer: negoe,CelesteDG
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fd37366697a9c1f5019d2864e6d81a4dcd02e3a2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 70f1f80744043893dd7206bc6388b8e080c07d0f
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66235482"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72803889"
 ---
-# <a name="national-clouds"></a>Ulusal Bulutlar
+# <a name="national-clouds"></a>Ulusal bulutlar
 
-Ulusal Bulutlar Azure fiziksel olarak izole edilmiş örnekleridir. Bu Azure bölgelerine veri yerleşikliği, özerkliği ve uyumluluk gereksinimlerini coğrafi bölge içinde karşılanmasını emin olmak için tasarlanmıştır.
+Ulusal bulutlar, Azure 'un fiziksel olarak yalıtılmış örnekleridir. Azure 'un bu bölgeleri, verilerin yer aldığı, egemenlik ve uyumluluk gereksinimlerinin coğrafi sınırlar içinde kabul edilen şekilde sağlandığından emin olmak için tasarlanmıştır.
 
-Genel bulut dahil olmak üzere, Azure Active Directory (Azure AD) aşağıdaki Ulusal bulutlarda dağıtılır:  
+Genel bulut dahil, Azure Active Directory (Azure AD) aşağıdaki Ulusal bulutlara dağıtılır:  
 
-- Azure Kamu
+- Azure Devlet Kurumları
 - Azure Almanya
 - Azure Çin 21Vianet
 
-Ulusal Bulutlar benzersizdir ve Azure genel ayrı bir ortam. Bu ortamlar için uygulamanızı geliştirmeye devam ederken önemli farklılıklara dikkat edin önemlidir. Uygulamaları kaydetme, belirteçlerini almak ve uç noktaları yapılandırma farklılıkları içerir.
+Ulusal bulutlar benzersizdir ve Azure Global 'in ayrı bir ortamıdır. Uygulamanızı bu ortamlar için geliştirirken önemli farklılıkları bilmeniz önemlidir. Farklı uygulamalar kaydetme, belirteçleri alma ve uç noktaların yapılandırılması dahildir.
 
 ## <a name="app-registration-endpoints"></a>Uygulama kayıt uç noktaları
 
-Ulusal Bulutlar her biri için ayrı bir Azure portalı yoktur. Microsoft kimlik platformu Ulusal bulut uygulamalarını tümleştirmek için ayrı ayrı her Azure Portal'da ortama özgü kaydedin isteniyor.
+Ulusal bulutların her biri için ayrı bir Azure portal vardır. Uygulamaları ulusal bir bulutta Microsoft Identity platformu ile bütünleştirmek için, uygulamanızı ortama özgü her bir Azure portal ayrı olarak kaydetmeniz gerekir.
 
-Aşağıdaki tabloda temel bir uygulama her Ulusal bulut kaydetmek için kullanılan Azure AD uç noktaların URL'leri listeler.
+Aşağıdaki tabloda, her bir ulusal bulut için bir uygulamayı kaydetmek üzere kullanılan Azure AD uç noktaları için temel URL 'Ler listelenmektedir.
 
-| Ulusal bulut | Azure AD portalı uç noktası |
+| Ulusal bulut | Azure AD Portal uç noktası |
 |----------------|--------------------------|
 | ABD kamu için Azure AD | `https://portal.azure.us` |
 | Azure AD Almanya | `https://portal.microsoftazure.de` |
-| 21Vianet tarafından işletilen Azure AD Çin | `https://portal.azure.cn` |
+| 21Vianet tarafından çalıştırılan Azure AD Çin | `https://portal.azure.cn` |
 | Azure AD (küresel hizmet) |`https://portal.azure.com` |
 
 ## <a name="azure-ad-authentication-endpoints"></a>Azure AD kimlik doğrulama uç noktaları
 
-Ulusal bulutlarda tüm ayrı ayrı her ortamda kullanıcıların kimliğini doğrulama ve kimlik doğrulama uç sahip.
+Tüm ulusal bulutlar, kullanıcıların kimliklerini her ortamda ayrı olarak doğrular ve ayrı kimlik doğrulama uç noktaları vardır.
 
-Aşağıdaki tabloda her Ulusal bulut belirteçlerini almak için kullanılan Azure AD uç noktalar için temel URL'leri listeler.
+Aşağıdaki tabloda, her bir ulusal bulut için belirteçleri elde etmek üzere kullanılan Azure AD uç noktaları için temel URL 'Ler listelenmektedir.
 
 | Ulusal bulut | Azure AD kimlik doğrulama uç noktası |
 |----------------|-------------------------|
 | ABD kamu için Azure AD | `https://login.microsoftonline.us` |
 | Azure AD Almanya| `https://login.microsoftonline.de` |
-| 21Vianet tarafından işletilen Azure AD Çin | `https://login.chinacloudapi.cn` |
+| 21Vianet tarafından çalıştırılan Azure AD Çin | `https://login.chinacloudapi.cn` |
 | Azure AD (küresel hizmet)| `https://login.microsoftonline.com` |
 
-İlgili bölgeye özgü temel URL'ı kullanarak Azure AD yetkilendirme veya belirteç uç noktaları için istek oluşturabilir. Örneğin, Azure Almanya için:
+Uygun bölgeye özgü temel URL 'YI kullanarak Azure AD yetkilendirmesi veya belirteç uç noktalarına istek oluşturabilirsiniz. Örneğin, Azure Almanya için:
 
-  - Yetkilendirme ortak uç nokta `https://login.microsoftonline.de/common/oauth2/authorize`.
+  - Yetkilendirme ortak uç noktası `https://login.microsoftonline.de/common/oauth2/authorize`.
   - Belirteç ortak uç noktası `https://login.microsoftonline.de/common/oauth2/token`.
 
-Tek kiracılı uygulamalar için "Genel" önceki URL'lerde Kiracı kimliği veya adı ile değiştirin. `https://login.microsoftonline.de/contoso.com` bunun bir örneğidir.
+Tek kiracılı uygulamalarda, önceki URL 'Lerdeki "ortak" i kiracı KIMLIĞINIZLE veya adınızla değiştirin. `https://login.microsoftonline.de/contoso.com` bunun bir örneğidir.
 
-> [!NOTE]
-> [Azure AD v2.0 yetkilendirme]( https://docs.microsoft.com/azure/active-directory/develop/active-directory-appmodel-v2-overview) ve belirteç uç noktaları yalnızca küresel hizmet için kullanılabilir. Bunlar, Ulusal bulut dağıtımları için desteklenmiyor.
+## <a name="microsoft-graph-api"></a>Microsoft Graph API 'SI
 
-## <a name="microsoft-graph-api"></a>Microsoft Graph API'si
-
-Ulusal bulut ortamında Microsoft Graph API'lerini çağırma öğrenmek için Git [Ulusal bulut dağıtımlarında Microsoft Graph](https://developer.microsoft.com/graph/docs/concepts/deployments).
+Ulusal bir bulut ortamında Microsoft Graph API 'Lerini nasıl çağıracağınızı öğrenmek için, [Ulusal bulut dağıtımlarında Microsoft Graph](https://developer.microsoft.com/graph/docs/concepts/deployments)' a gidin.
 
 > [!IMPORTANT]
-> Bazı hizmetler ve küresel hizmet belirli bölgelerde özellikler tüm Ulusal bulutlarda kullanılabilir olmayabilir. Hangi hizmetlerin kullanılabilir olduğunu öğrenmek için Git [bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/?products=all&regions=usgov-non-regional,us-dod-central,us-dod-east,usgov-arizona,usgov-iowa,usgov-texas,usgov-virginia,china-non-regional,china-east,china-east-2,china-north,china-north-2,germany-non-regional,germany-central,germany-northeast).
+> Küresel hizmetin belirli bölgelerinde bulunan belirli hizmetler ve özellikler, tüm ulusal bulutlarda kullanılamayabilir. Hangi hizmetlerin kullanılabilir olduğunu öğrenmek için [bölgeye göre kullanılabilir ürünlere](https://azure.microsoft.com/global-infrastructure/services/?products=all&regions=usgov-non-regional,us-dod-central,us-dod-east,usgov-arizona,usgov-iowa,usgov-texas,usgov-virginia,china-non-regional,china-east,china-east-2,china-north,china-north-2,germany-non-regional,germany-central,germany-northeast)gidin.
 
-Microsoft kimlik platformu kullanarak bir uygulama oluşturmayı öğrenmek için izleyin [Microsoft Authentication Library (MSAL) öğretici](msal-national-cloud.md). Özellikle, bu uygulama bir kullanıcının oturum açmasını ve Microsoft Graph API'sini çağırmak için bir erişim belirteci alın.
+Microsoft Identity platformunu kullanarak bir uygulama oluşturmayı öğrenmek için, [Microsoft kimlik doğrulama kitaplığı (msal) öğreticisini](msal-national-cloud.md)izleyin. Özellikle, bu uygulama bir kullanıcıya oturum açacaktır ve Microsoft Graph API 'sini çağırmak için bir erişim belirteci alır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi:
+Aşağıdakiler hakkında daha fazla bilgi edinin:
 
 - [Azure Devlet Kurumları](https://docs.microsoft.com/azure/azure-government/)
 - [Azure Çin 21Vianet](https://docs.microsoft.com/azure/china/)
 - [Azure Almanya](https://docs.microsoft.com/azure/germany/)
-- [Azure AD kimlik doğrulaması temel bilgileri](authentication-scenarios.md)
+- [Azure AD kimlik doğrulaması temelleri](authentication-scenarios.md)

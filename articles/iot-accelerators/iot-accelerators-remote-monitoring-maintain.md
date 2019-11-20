@@ -1,5 +1,5 @@
 ---
-title: Uzaktan izleme çözümünde uyarıları kullanma ve cihaz sorunlarını giderme öğreticisi - Azure | Microsoft Docs
+title: Uzaktan Izleme çözümünde uyarıları kullanma-Azure | Microsoft Docs
 description: Bu öğreticide Uzaktan İzleme çözümünde uyarıların nasıl kullanılacağı ve bu çözüme bağlı cihazlarla ilgili sorunların nasıl yönetileceği gösterilmektedir.
 author: dominicbetts
 manager: timlt
@@ -9,12 +9,12 @@ services: iot-accelerators
 ms.date: 11/08/2018
 ms.topic: tutorial
 ms.custom: mvc
-ms.openlocfilehash: 1cd1eb9a0bd4b8457ea82303a747acb2553ab707
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 853fa2b80e04dd8d9225d023db8030fed044ed7f
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61452694"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890916"
 ---
 # <a name="tutorial-troubleshoot-and-fix-device-issues"></a>Öğretici: Cihaz sorunlarını giderme ve düzeltme
 
@@ -84,6 +84,6 @@ Uyarı bulunan cihaz listesinde sıcaklık uyarısının oluşturulmasından sor
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide cihazlarınızla ilgili sorunları tanımlamak için uyarıları kullanmayı ve sorunları çözmek için cihazlar üzerinde işlem gerçekleştirmeyi öğrendiniz. Nasıl yapılır makaleleriyle devam gerçek bir cihaz, çözüm hızlandırıcısına bağlamayı öğrenin.
+Bu öğreticide cihazlarınızla ilgili sorunları tanımlamak için uyarıları kullanmayı ve sorunları çözmek için cihazlar üzerinde işlem gerçekleştirmeyi öğrendiniz. Çözüm hızlandırıcısına gerçek bir cihaz bağlamayı öğrenmek için nasıl yapılır makalelerine devam edin.
 
 Cihaz sorunlarını yönetmeyi öğrendiniz, önerilen bir sonraki adımda [Cihazınızı Uzaktan İzleme çözümü hızlandırıcısına bağlamayı](iot-accelerators-connecting-devices.md) öğrenmeniz önerilir.

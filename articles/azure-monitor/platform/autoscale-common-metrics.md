@@ -1,6 +1,6 @@
 ---
-title: Otomatik ölçeklendirme ortak ölçümleri
-description: Hangi ölçümleri otomatik ölçeklendirme için yaygın olarak kullanıldığı hakkında bilgi edinin, bulut Hizmetleri, sanal makineler ve Web uygulamaları.
+title: Ortak ölçümleri otomatik ölçeklendirme
+description: Cloud Services, sanal makinelerinizi ve Web Apps otomatik ölçeklendirme için hangi ölçümlerin yaygın olarak kullanıldığını öğrenin.
 author: anirudhcavale
 services: azure-monitor
 ms.service: azure-monitor
@@ -9,41 +9,41 @@ ms.date: 12/6/2016
 ms.author: ancav
 ms.subservice: autoscale
 ms.openlocfilehash: 9da8e5fb88ff34e561b579b760973ecd23c884a3
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.sourcegitcommit: 13d5eb9657adf1c69cc8df12486470e66361224e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
+ms.lasthandoff: 07/31/2019
 ms.locfileid: "66129741"
 ---
-# <a name="azure-monitor-autoscaling-common-metrics"></a>Azure İzleyici otomatik ölçeklendirme ortak ölçümleri
+# <a name="azure-monitor-autoscaling-common-metrics"></a>Azure Izleyici ortak ölçümleri otomatik ölçeklendirme
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Azure İzleyici otomatik ölçeklendirmesini (ölçüler) telemetri verilerini temel alarak çalışan örnek sayısı yukarı veya aşağı ölçeklendirmenize olanak tanıyor. Bu belgede kullanmak isteyebileceğiniz ortak ölçümler açıklanmıştır. Azure portalında göre ölçeklendirmek için kaynak ölçüm seçebilirsiniz. Ancak, göre ölçeklendirmek için farklı bir kaynaktan herhangi bir ölçüm seçebilirsiniz.
+Azure Izleyici otomatik ölçeklendirme, çalışan örneklerin sayısını telemetri verilerine (ölçümler) göre yukarı veya aşağı ölçeklendirmenize olanak tanır. Bu belge kullanmak isteyebileceğiniz ortak ölçümleri açıklar. Azure portal, ölçeklendirmek için kaynağın ölçüsünü seçebilirsiniz. Ancak, ölçeklendirmek üzere farklı bir kaynaktan herhangi bir ölçümü de seçebilirsiniz.
 
-Azure İzleyici otomatik ölçeklendirme için yalnızca geçerlidir [sanal makine ölçek kümeleri](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/), [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/), ve [APIManagementHizmetleri](https://docs.microsoft.com/azure/api-management/api-management-key-concepts). Diğer Azure Hizmetleri farklı ölçeklendirme yöntemlerini kullanın.
+Azure Izleyici otomatik ölçeklendirme yalnızca [Sanal Makine Ölçek Kümeleri](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/), [App Service-Web Apps](https://azure.microsoft.com/services/app-service/web/)ve [API Management Hizmetleri](https://docs.microsoft.com/azure/api-management/api-management-key-concepts)için geçerlidir. Diğer Azure Hizmetleri farklı ölçekleme yöntemleri kullanır.
 
-## <a name="compute-metrics-for-resource-manager-based-vms"></a>Ölçümler, Resource Manager tabanlı VM'ler için işlem
-Resource Manager tabanlı sanal makineler ve sanal makine ölçek kümeleri, varsayılan olarak, temel (konak düzeyinde) ölçümler gösterin. Ayrıca, bir Azure VM ve VMSS için tanılama veri toplamayı yapılandırırken, Azure tanılama uzantısı ("ölçümleri konuk işletim sistemi" yaygın olarak bilinir) konuk işletim sistemi performans sayaçları da yayar.  Bu ölçümleri otomatik ölçeklendirme kuralları kullanın.
+## <a name="compute-metrics-for-resource-manager-based-vms"></a>Kaynak Yöneticisi tabanlı VM 'Ler için işlem ölçümleri
+Varsayılan olarak, Kaynak Yöneticisi tabanlı sanal makineler ve sanal makine ölçek kümeleri temel (konak düzeyi) ölçümlerini yayar. Ayrıca, bir Azure VM ve VMSS için tanılama veri toplamayı yapılandırdığınızda, Azure tanılama uzantısı da konuk işletim sistemi performans sayaçlarını (genellikle "Konuk-işletim sistemi ölçümleri" olarak bilinir) yayar.  Tüm bu ölçümleri otomatik ölçeklendirme kurallarında kullanırsınız.
 
-Kullanabileceğiniz `Get MetricDefinitions` VMSS kaynağınız için kullanılabilir ölçümleri görüntülemek için API/PoSH/CLI.
+VMSS kaynağınız için `Get MetricDefinitions` kullanılabilen ölçümleri görüntülemek için API/Posh/CLI kullanabilirsiniz.
 
-VM ölçek kümeleri kullanıyorsanız ve listelenen belirli bir ölçüm görmüyor varsa büyük olasılıkla *devre dışı* , tanılama uzantısı'nda.
+VM Ölçek Kümeleri kullanıyorsanız ve belirli bir ölçümü listede görmüyorsanız, bu durumda tanılama uzantıda *devre dışı bırakılır* .
 
-Belirli bir ölçüm değil olup olmadığını örneklenen veya istediğiniz sıklıkta aktarılan tanılama yapılandırması güncelleştirebilirsiniz.
+Belirli bir ölçüm örneklenmiyor veya istediğiniz sıklıkta aktarılmadığından, tanılama yapılandırmasını güncelleştirebilirsiniz.
 
-Yukarıdaki her iki durumda da true ise, daha sonra gözden [PowerShell kullanarak Windows çalıştıran bir sanal makine Azure tanılamayı etkinleştirerek](../../virtual-machines/extensions/diagnostics-windows.md) yapılandırmak ve ölçüm etkinleştirmek için Azure VM tanılama uzantınızın güncelleştirmek için PowerShell hakkında. Bu makalede ayrıca örnek tanılama yapılandırma dosyası içerir.
+Yukarıdaki Case değeri true ise, Azure VM tanılama uzantınızı yapılandırmak ve güncelleştirmek için PowerShell ile [Windows çalıştıran bir sanal makinede Azure tanılama etkinleştirmek üzere PowerShell kullanın](../../virtual-machines/extensions/diagnostics-windows.md) ' ı gözden geçirin. Bu makalede ayrıca bir örnek tanılama yapılandırma dosyası de bulunur.
 
-### <a name="host-metrics-for-resource-manager-based-windows-and-linux-vms"></a>Resource Manager tabanlı Windows ve Linux VM'ler için konak ölçümleri
-Aşağıdaki konak düzeyinde ölçümler, varsayılan olarak Azure VM ve VMSS için hem Windows hem de Linux örnekleri gönderilir. Bu ölçümler Azure VM açıklamaktadır, ancak Azure VM konağı yerine Konuk sanal Makinede yüklü bir aracı üzerinden toplanır. Otomatik ölçeklendirme kuralları, bu ölçümleri kullanabilirsiniz.
+### <a name="host-metrics-for-resource-manager-based-windows-and-linux-vms"></a>Kaynak Yöneticisi tabanlı Windows ve Linux VM 'Leri için konak ölçümleri
+Aşağıdaki konak düzeyi ölçümleri, hem Windows hem de Linux örneklerinde Azure VM ve VMSS için varsayılan olarak dağıtılır. Bu ölçümler, Azure VM 'nizi anlatmaktadır, ancak Konuk VM 'de yüklü aracı aracılığıyla değil, Azure VM konağından toplanır. Bu ölçümleri otomatik ölçeklendirme kurallarında kullanabilirsiniz.
 
-- [Resource Manager tabanlı Windows ve Linux VM'ler için konak ölçümleri](../../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachines)
-- [Resource Manager tabanlı Windows ve Linux VM ölçek kümeleri için ana ölçümleri](../../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachinescalesets)
+- [Kaynak Yöneticisi tabanlı Windows ve Linux VM 'Leri için konak ölçümleri](../../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachines)
+- [Kaynak Yöneticisi tabanlı Windows ve Linux VM Ölçek Kümeleri için konak ölçümleri](../../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachinescalesets)
 
-### <a name="guest-os-metrics-resource-manager-based-windows-vms"></a>Konuk işletim sistemi ölçümleri Resource Manager tabanlı Windows Vm'leri
-Azure'da bir VM oluşturduğunuzda, tanılama tanılama uzantısını kullanarak etkinleştirilir. Tanılama uzantısını VM içinde alınan ölçümleri bir dizi yayar. Başka bir deyişle, varsayılan olarak yayılan değil ölçümleri dışına otomatik ölçeklendirme yapabilirsiniz.
+### <a name="guest-os-metrics-resource-manager-based-windows-vms"></a>Konuk işletim sistemi ölçümleri Kaynak Yöneticisi tabanlı Windows VM 'Leri
+Azure 'da bir VM oluşturduğunuzda, Tanılamalar tanılama uzantısı kullanılarak etkinleştirilir. Tanılama uzantısı, VM 'nin içinden alınan bir dizi ölçümü yayar. Bu, varsayılan olarak yayılmayan ölçümlerin sırasını otomatik olarak kapatabilmeniz anlamına gelir.
 
-PowerShell'de aşağıdaki komutu kullanarak, ölçümlerin bir listesini oluşturabilirsiniz.
+PowerShell 'de aşağıdaki komutu kullanarak ölçümlerin bir listesini oluşturabilirsiniz.
 
 ```
 Get-AzMetricDefinition -ResourceId <resource_id> | Format-Table -Property Name,Unit
@@ -53,38 +53,38 @@ Aşağıdaki ölçümler için bir uyarı oluşturabilirsiniz:
 
 | Ölçüm Adı | Birim |
 | --- | --- |
-| \Processor(_Total)\% Processor Time |Yüzde |
-| \Processor(_Total)\% ayrıcalıklı zaman |Yüzde |
-| \Processor(_Total)\% kullanıcı zamanı |Yüzde |
-| \Processor bilgi (_Total) \Processor sıklığı |Count |
-| \System\Processes |Sayı |
-| \Process (_Total) \Thread sayısı |Sayı |
-| \Process (_Total) \Handle sayısı |Count |
-| \Memory\% Kaydedilmiş Bayt yüzdesi |Yüzde |
+| \Processor(_Total)\% Processor Time |Percent |
+| \ İşlemci (_Toplam\% ) ayrıcalıklı zaman |Percent |
+| \Processor (_Total)\% Kullanıcı saati |Percent |
+| \İşlemci bilgileri (_Toplam) \ işlemci sıklığı |Count |
+| \System\Processes |Count |
+| \Process (_Toplam) \ iş parçacığı sayısı |Count |
+| \Process (_Total) \Tanıtıcı sayısı |Count |
+| \ Kullanılan\% bellek kaydedilmiş bayt sayısı |Percent |
 | \Memory\Available Bytes |Bayt |
-| \Memory\Committed bayt |Bayt |
-| \Memory\Commit sınırı |Bayt |
-| \Memory\Pool disk belleğine alınan bayt |Bayt |
-| \Memory\Pool olmayan havuz bayt sayısı |Bayt |
-| \PhysicalDisk(_Total)\% disk zamanı |Yüzde |
-| \PhysicalDisk(_Total)\% disk okuma süresi |Yüzde |
-| \PhysicalDisk(_Total)\% disk yazma saati |Yüzde |
-| \PhysicalDisk (_Total) \Disk aktarımı/sn |CountPerSecond |
-| \PhysicalDisk (_Total) \Disk Okuma/sn |CountPerSecond |
-| \PhysicalDisk (_Total) \Disk Yazma/sn |CountPerSecond |
-| \PhysicalDisk (_Total) \Disk bayt/sn |BytesPerSecond |
-| \PhysicalDisk (_Total) \Disk Okuma Bayt/sn |BytesPerSecond |
-| \PhysicalDisk (_Total) \Disk Yazma Bayt/sn |BytesPerSecond |
-| \Avg \PhysicalDisk (_Total). Disk kuyruğu uzunluğu |Count |
-| \Avg \PhysicalDisk (_Total). Disk okuma kuyruğu uzunluğu |Count |
-| \Avg \PhysicalDisk (_Total). Disk yazma kuyruğu uzunluğu |Sayı |
-| \LogicalDisk(_Total)\% boş alanı |Yüzde |
-| \LogicalDisk (_Total) \Free megabayt sayısı |Sayı |
+| \ Bellek \ kaydedilmiş baytlar |Bayt |
+| \Memory\commıt limiti |Bayt |
+| \Bellek\havuz disk belleğine alınan baytlar |Bayt |
+| \Bellek\havuz disk belleksiz baytlar |Bayt |
+| \Fizikseldisk (\% _Total) disk saati |Percent |
+| \Fiziksel disk (_Total\% ) disk okuma zamanı |Percent |
+| \Fiziksel disk (_Total\% ) disk yazma zamanı |Percent |
+| \Fiziksel disk (_Total) \Disk aktarımı/sn |CountPerSecond |
+| \Fiziksel disk (_Total) \Disk Okuma/sn |CountPerSecond |
+| \Fiziksel disk (_Total) \Disk yazma/sn |CountPerSecond |
+| \Fiziksel disk (_Total) \Disk bayt/sn |BytesPerSecond |
+| \Fiziksel disk (_Total) \Disk okuma bayt/sn |BytesPerSecond |
+| \Fiziksel disk (_Total) \Disk yazma bayt/sn |BytesPerSecond |
+| \Fiziksel disk (_Total) \Avg. Disk Kuyruğu Uzunluğu |Count |
+| \Fiziksel disk (_Total) \Avg. Disk okuma sırası uzunluğu |Count |
+| \Fiziksel disk (_Total) \Avg. Disk yazma sırası uzunluğu |Count |
+| \MantıksalDisk (_Total\% ) boş alanı |Percent |
+| \Mantıksaldisk (_Total) \ boş megabayt |Count |
 
-### <a name="guest-os-metrics-linux-vms"></a>Konuk işletim sistemi ölçümleri Linux Vm'leri
-Azure'da bir VM oluşturduğunuzda, tanılama tanılama uzantısını kullanarak varsayılan olarak etkindir.
+### <a name="guest-os-metrics-linux-vms"></a>Konuk işletim sistemi ölçümleri Linux VM 'Leri
+Azure 'da bir VM oluşturduğunuzda, Tanılamalar, tanılama uzantısı kullanılarak varsayılan olarak etkinleştirilir.
 
-PowerShell'de aşağıdaki komutu kullanarak, ölçümlerin bir listesini oluşturabilirsiniz.
+PowerShell 'de aşağıdaki komutu kullanarak ölçümlerin bir listesini oluşturabilirsiniz.
 
 ```
 Get-AzMetricDefinition -ResourceId <resource_id> | Format-Table -Property Name,Unit
@@ -94,26 +94,26 @@ Get-AzMetricDefinition -ResourceId <resource_id> | Format-Table -Property Name,U
 
 | Ölçüm Adı | Birim |
 | --- | --- |
-| \Memory\AvailableMemory |Bayt |
-| \Memory\PercentAvailableMemory |Yüzde |
-| \Memory\UsedMemory |Bayt |
-| \Memory\PercentUsedMemory |Yüzde |
-| \Memory\PercentUsedByCache |Yüzde |
-| \Memory\PagesPerSec |CountPerSecond |
-| \Memory\PagesReadPerSec |CountPerSecond |
+| \Bellek\kullanılabilirlik blememory |Bayt |
+| \Memory\yüztavailablememory |Percent |
+| \Bellek\usedmemory |Bayt |
+| \Memory\yüztusedmemory |Percent |
+| \Memory\yüztusedbycache |Percent |
+| \Bellek\pagespersec |CountPerSecond |
+| \Bellek\pagesreadpersec |CountPerSecond |
 | \Memory\PagesWrittenPerSec |CountPerSecond |
 | \Memory\AvailableSwap |Bayt |
-| \Memory\PercentAvailableSwap |Yüzde |
-| \Memory\UsedSwap |Bayt |
-| \Memory\PercentUsedSwap |Yüzde |
-| \Processor\PercentIdleTime |Yüzde |
-| \Processor\PercentUserTime |Yüzde |
-| \Processor\PercentNiceTime |Yüzde |
-| \Processor\PercentPrivilegedTime |Yüzde |
-| \Processor\PercentInterruptTime |Yüzde |
-| \Processor\PercentDPCTime |Yüzde |
-| \Processor\PercentProcessorTime |Yüzde |
-| \Processor\PercentIOWaitTime |Yüzde |
+| \Memory\yüztavailableswap |Percent |
+| \Bellek\usedswap |Bayt |
+| \Memory\yüztusedswap |Percent |
+| \Processor\PercentIdleTime |Percent |
+| \Processor\PercentUserTime |Percent |
+| \Processor\PercentNiceTime |Percent |
+| \Processor\PercentPrivilegedTime |Percent |
+| \Processor\PercentInterruptTime |Percent |
+| \Processor\PercentDPCTime |Percent |
+| \Processor\PercentProcessorTime |Percent |
+| \Processor\PercentIOWaitTime |Percent |
 | \PhysicalDisk\BytesPerSecond |BytesPerSecond |
 | \PhysicalDisk\ReadBytesPerSecond |BytesPerSecond |
 | \PhysicalDisk\WriteBytesPerSecond |BytesPerSecond |
@@ -121,45 +121,45 @@ Get-AzMetricDefinition -ResourceId <resource_id> | Format-Table -Property Name,U
 | \PhysicalDisk\ReadsPerSecond |CountPerSecond |
 | \PhysicalDisk\WritesPerSecond |CountPerSecond |
 | \PhysicalDisk\AverageReadTime |Saniye |
-| \PhysicalDisk\AverageWriteTime |Saniye |
+| \ Physicaldisk\averagewritetime |Saniye |
 | \PhysicalDisk\AverageTransferTime |Saniye |
-| \PhysicalDisk\AverageDiskQueueLength |Sayı |
-| \NetworkInterface\BytesTransmitted |Bayt |
+| \ Physicaldisk\averagediskqueuelength |Count |
+| \Networkınterface\bytestransmderlenen |Bayt |
 | \NetworkInterface\BytesReceived |Bayt |
-| \NetworkInterface\PacketsTransmitted |Sayı |
-| \NetworkInterface\PacketsReceived |Count |
-| \NetworkInterface\BytesTotal |Bayt |
-| \NetworkInterface\TotalRxErrors |Count |
-| \NetworkInterface\TotalTxErrors |Sayı |
-| \NetworkInterface\TotalCollisions |Sayı |
+| \Networkınterface\packetstransmderlenen |Count |
+| \Networkınterface\packetsalındı |Count |
+| \Networkınterface\bytestotal |Bayt |
+| \Networkınterface\totalrxerrors |Count |
+| \NetworkInterface\TotalTxErrors |Count |
+| \Networkınterface\totalçarpışmalar |Count |
 
 ## <a name="commonly-used-web-server-farm-metrics"></a>Yaygın olarak kullanılan Web (sunucu grubu) ölçümleri
-Ayrıca, Http kuyruk uzunluğu gibi yaygın web sunucusu ölçümleri temel alan otomatik ölçeklendirme gerçekleştirebilir. Ölçüm adı olan **HttpQueueLength**.  Aşağıdaki bölümde, kullanılabilir bir sunucu grubu (Web uygulamaları) ölçümlerini listelenmektedir.
+Ayrıca, http kuyruğu uzunluğu gibi genel Web sunucusu ölçümlerine göre otomatik ölçeklendirme yapabilirsiniz. Ölçüm adı **Httpqueuelength**olur.  Aşağıdaki bölümde, kullanılabilir sunucu grubu (Web Apps) ölçümleri listelenmektedir.
 
 ### <a name="web-apps-metrics"></a>Web Apps ölçümleri
-PowerShell'de aşağıdaki komutu kullanarak, Web Apps ölçümlerin bir listesini oluşturabilirsiniz.
+PowerShell 'de aşağıdaki komutu kullanarak Web Apps ölçümlerinin bir listesini oluşturabilirsiniz.
 
 ```
 Get-AzMetricDefinition -ResourceId <resource_id> | Format-Table -Property Name,Unit
 ```
 
-Uyarı veya ölçeklendirme bu ölçümlere göre.
+Bu ölçümler ile uyarı verebilir veya ölçeklendirebilirsiniz.
 
 | Ölçüm Adı | Birim |
 | --- | --- |
-| CpuPercentage |Yüzde |
-| MemoryPercentage |Yüzde |
+| Cpuyüzdesi |Percent |
+| MemoryPercentage |Percent |
 | DiskQueueLength |Count |
 | HttpQueueLength |Count |
 | BytesReceived |Bayt |
 | BytesSent |Bayt |
 
 ## <a name="commonly-used-storage-metrics"></a>Yaygın olarak kullanılan depolama ölçümleri
-Depolama kuyruğundaki iletileri sayısı depolama kuyruğu uzunluğu olarak ölçeklendirebilirsiniz. Depolama kuyruk uzunluğu özel bir ölçüm ve eşik örnek başına ileti sayısı. Kuyruktaki iletilerin toplam sayısını 200 Örneğin, iki örneği varsa ve Eşiği 100'e ayarlanırsa, ölçeklendirme gerçekleşir. Örnek başına 100 iletileri, en fazla 200 veya daha fazlasını ekleyen 120 ve 80 veya herhangi bir birleşimini olabilir.
+Depolama kuyruğu uzunluğuna göre ölçeklendirebilirsiniz, bu da depolama sırasındaki ileti sayısıdır. Depolama kuyruğu uzunluğu özel bir ölçümdür ve eşik, örnek başına düşen ileti sayısıdır. Örneğin, iki örnek varsa ve eşik 100 olarak ayarlandıysa, sıradaki toplam ileti sayısı 200 olduğunda ölçeklendirme oluşur. Bu, örnek başına 100 ileti, 120 ve 80 veya 200 ya da daha fazlasını ekleyen herhangi bir bileşim olabilir.
 
-Bu ayar Azure portalında yapılandırmanız **ayarları** dikey penceresi. VM ölçek kümeleri için kullanmak üzere Resource Manager şablonu otomatik ölçeklendirme ayarı güncelleştirebilirsiniz *metricName* olarak *ApproximateMessageCount* ve depolama kuyruğu kimliği geçirin  *metricResourceUri*.
+**Ayarlar** dikey penceresindeki Azure Portal bu ayarı yapılandırın. VM Ölçek Kümeleri için, Kaynak Yöneticisi şablonundaki otomatik ölçeklendirme ayarını, *MetricName* değerini *yaklaşık temessagecount* olarak KULLANABILIR ve depolama kuyruğunun kimliğini *metricresourceuri*olarak geçirebilirsiniz.
 
-Örneğin, bir Klasik depolama hesabı ile otomatik ölçeklendirme ayarı metricTrigger aşağıdakileri içerir:
+Örneğin, klasik bir depolama hesabıyla, metricTrigger otomatik ölçeklendirme ayarı şunları içerir:
 
 ```
 "metricName": "ApproximateMessageCount",
@@ -167,7 +167,7 @@ Bu ayar Azure portalında yapılandırmanız **ayarları** dikey penceresi. VM �
  "metricResourceUri": "/subscriptions/SUBSCRIPTION_ID/resourceGroups/RES_GROUP_NAME/providers/Microsoft.ClassicStorage/storageAccounts/STORAGE_ACCOUNT_NAME/services/queue/queues/QUEUE_NAME"
  ```
 
-MetricTrigger (Klasik olmayan) depolama hesabı için aşağıdakileri içerir:
+(Klasik olmayan) bir depolama hesabı için, metricTrigger şunları içerir:
 
 ```
 "metricName": "ApproximateMessageCount",
@@ -176,9 +176,9 @@ MetricTrigger (Klasik olmayan) depolama hesabı için aşağıdakileri içerir:
 ```
 
 ## <a name="commonly-used-service-bus-metrics"></a>Yaygın olarak kullanılan Service Bus ölçümleri
-Service Bus kuyruğundaki iletileri sayısı Service Bus kuyruk uzunluğuna göre ölçeklendirebilirsiniz. Service Bus kuyruğu uzunluğu özel bir ölçüm ve eşik örnek başına ileti sayısı. Kuyruktaki iletilerin toplam sayısını 200 Örneğin, iki örneği varsa ve Eşiği 100'e ayarlanırsa, ölçeklendirme gerçekleşir. Örnek başına 100 iletileri, en fazla 200 veya daha fazlasını ekleyen 120 ve 80 veya herhangi bir birleşimini olabilir.
+Service Bus sırasındaki ileti sayısı olan Service Bus kuyruğu uzunluğuna göre ölçeklendirebilirsiniz. Service Bus kuyruğu uzunluğu özel bir ölçümdür ve eşik, örnek başına düşen ileti sayısıdır. Örneğin, iki örnek varsa ve eşik 100 olarak ayarlandıysa, sıradaki toplam ileti sayısı 200 olduğunda ölçeklendirme oluşur. Bu, örnek başına 100 ileti, 120 ve 80 veya 200 ya da daha fazlasını ekleyen herhangi bir bileşim olabilir.
 
-VM ölçek kümeleri için kullanmak üzere Resource Manager şablonu otomatik ölçeklendirme ayarı güncelleştirebilirsiniz *metricName* olarak *ApproximateMessageCount* ve depolama kuyruğu kimliği geçirin  *metricResourceUri*.
+VM Ölçek Kümeleri için, Kaynak Yöneticisi şablonundaki otomatik ölçeklendirme ayarını, *MetricName* değerini *yaklaşık temessagecount* olarak KULLANABILIR ve depolama kuyruğunun kimliğini *metricresourceuri*olarak geçirebilirsiniz.
 
 ```
 "metricName": "MessageCount",
@@ -187,7 +187,7 @@ VM ölçek kümeleri için kullanmak üzere Resource Manager şablonu otomatik �
 ```
 
 > [!NOTE]
-> Service Bus için kaynak grubu kavramını yok ancak Azure Resource Manager bölge başına varsayılan kaynak grubu oluşturur. Kaynak grubu genellikle 'Default - ServiceBus-[Bölge]' biçimindedir. Örneğin, 'Varsayılan-ServiceBus-EastUS', 'Varsayılan-ServiceBus-WestUS', 'Varsayılan-ServiceBus-AustraliaEast' vb.
+> Service Bus için kaynak grubu kavramı yok, Azure Resource Manager her bölge için varsayılan bir kaynak grubu oluşturur. Kaynak grubu genellikle ' default-ServiceBus-[Region] ' biçiminde olur. Örneğin, 'Varsayılan-ServiceBus-EastUS', 'Varsayılan-ServiceBus-WestUS', 'Varsayılan-ServiceBus-AustraliaEast' vb.
 >
 >
 

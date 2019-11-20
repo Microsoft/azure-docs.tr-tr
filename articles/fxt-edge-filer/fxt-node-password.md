@@ -1,69 +1,69 @@
 ---
-title: Donanım - Microsoft Azure FXT Edge dosyalayıcı Başlat
-description: Bir başlangıç parolası Azure FXT Edge dosyalayıcı düğümlerinde ayarlama
+title: Donanım Microsoft Azure FXT Edge Filer 'ı başlatma
+description: Azure FXT Edge Filer düğümlerinde başlangıç parolası ayarlama
 author: ekpgh
 ms.service: fxt-edge-filer
 ms.topic: tutorial
 ms.date: 06/20/2019
-ms.author: v-erkell
-ms.openlocfilehash: 11cf9f49014648fff1e78aff91c5a724a812e9e7
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.author: rohogue
+ms.openlocfilehash: 080aa05af77b996bc0eb71287a3dfef25c24629a
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67450299"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72256023"
 ---
-# <a name="tutorial-set-hardware-passwords"></a>Öğretici: Kümesi donanım parolaları
+# <a name="tutorial-set-hardware-passwords"></a>Öğretici: donanım parolalarını ayarlama
 
-İlk kez, bir Azure FXT Edge dosyalayıcı düğümü güç bir kök parola ayarlamanız gerekir. Donanım düğümleri varsayılan parola ile birlikte gönderilmeyen. 
+Azure FXT Edge Filer düğümünü ilk kez açtığınızda bir kök parolası ayarlamanız gerekir. Donanım düğümleri varsayılan parolayla birlikte verilmez. 
 
-Ağ bağlantı noktaları kadar parolayı ayarlayın ve kök kullanıcı oturum açtıktan sonra devre dışı bırakıldı.
+Ağ bağlantı noktaları, parola ayarlanana ve kök kullanıcı oturum açana kadar devre dışı bırakılır.
 
-Yükleme ve düğüm kablo sonra ancak kümeyi oluşturmak denemeden önce bu adımı uygulayın. 
+Düğümü yükledikten ve kabloladıktan sonra, ancak Kümeyi oluşturmaya çalışmadan önce bu adımı izleyin. 
 
-Bu öğreticide, donanım düğüme bağlanmak ve parola ayarlama açıklanmaktadır. 
+Bu öğretici, donanım düğümüne bağlanmayı ve parolayı ayarlamayı açıklamaktadır. 
 
-Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz: 
+Bu öğreticide, aşağıdakileri nasıl yapacağınızı öğreneceksiniz: 
 
 > [!div class="checklist"]
-> * Klavye ve monitör düğüme bağlanmak ve açın
-> * Bu düğümde iDRAC bağlantı noktası ve kök kullanıcı için parola ayarlama
-> * Kök olarak oturum açın 
+> * Bir klavye ve izleyiciyi düğüme bağlayın ve üzerinde güç yapın
+> * Bu düğümdeki Idrac bağlantı noktası ve kök kullanıcı için parolaları ayarla
+> * Kök olarak oturum aç 
 
-Kümenizde kullanacağınız her düğüm için bu adımları yineleyin. 
+Bu adımları, kümenizde kullanacağınız her düğüm için tekrarlayın. 
 
-Bu öğreticinin tamamlanması yaklaşık 15 dakika sürer. 
+Bu öğreticinin tamamlanabilmesi yaklaşık 15 dakika sürer. 
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Prerequisites
 
-Bu öğreticiye başlamadan önce aşağıdaki adımları tamamlayın: 
+Bu öğreticiye başlamadan önce şu adımları uygulayın: 
 
-* [Yükleme](fxt-install.md) her Azure FXT Edge dosyalayıcı düğümünde bir donanım raf, güç kabloları ekleme ve ağ erişimi açıklandığı [önceki öğretici](fxt-network-power.md). 
-* USB bağlantılı bir klavye ve donanım düğümlere ekleyebilirsiniz VGA bağlı bir izleyici bulun. (Parola ayarlamadan önce düğümün seri bağlantı noktası etkin değil.)
+* Her bir Azure FXT Edge Filer düğümünü bir ekipman rafından [yükleyip](fxt-install.md) [daha önceki öğreticide](fxt-network-power.md)açıklandığı gibi güç kabloları ve ağ erişimi ekleyin. 
+* Donanım düğümlerine ekleyebileceğiniz, USB bağlantılı bir klavye ve VGA bağlantılı bir izleyici bulun. (Parolayı ayarlamadan önce düğümün seri bağlantı noktası etkin değil.)
 
-## <a name="connect-a-keyboard-and-monitor-to-the-node"></a>Klavye ve monitör düğümüne bağlanma
+## <a name="connect-a-keyboard-and-monitor-to-the-node"></a>Bir klavye ve izleyiciyi düğüme bağlama
 
-Fiziksel olarak izleme ve klavye Azure FXT Edge dosyalayıcı düğüme bağlanılamadı. 
+Azure FXT Edge Filer düğümüne fiziksel olarak bir izleyiciyi ve klavyeyi bağlayın. 
 
-* İzleyici VGA bağlantı noktasına bağlayın.
-* Klavyenin USB bağlantı noktalarından birine bağlanın. 
+* İzleyiciyi VGA bağlantı noktasına bağlayın.
+* Klavyeyi USB bağlantı noktalarından birine bağlayın. 
 
-Kasa arkasında bağlantı noktalarını bulmak için bu başvuru diyagramı kullanın. 
+Kasanın arkasında yer alan bağlantı noktalarını bulmak için bu başvuru diyagramını kullanın. 
 
 > [!NOTE]
-> Parola ayarlandıktan sonra seri bağlantı noktası kadar etkin değil. 
+> Seri bağlantı noktası, parola ayarlanana kadar etkin değildir. 
 
-![Diyagram, Azure FXT Edge dosyalayıcı arkasına seri, VGA, ile ve USB bağlantı noktaları](media/fxt-back-serial-vga-usb.png)
+![seri, VGA ve etiketli USB bağlantı noktalarıyla Azure FXT Edge Filer 'ın geri diyagramı](media/fxt-back-serial-vga-usb.png)
 
-Birden fazla düğüm aynı çevre birimlerine bağlanmak istiyorsanız, KVM anahtarı kullanabilirsiniz. 
+Aynı çevre birimlerine birden fazla düğüm bağlamak istiyorsanız KVM anahtarını kullanabilirsiniz. 
 
-Ön güç düğmesine basarak düğümde gücü. 
+Ön uçın üzerindeki güç düğmesine basarak düğümü güçlendirin. 
 
-![Güç düğmesi hepsini Azure FXT Edge dosyalayıcı - ön diyagramı üst kısımda doğru etiketli](media/fxt-front-annotated.png)
+![Azure FXT Edge Filer 'ın önünde bulunan bir diyagramı, sağ üst köşedeki etiketlendi](media/fxt-front-annotated.png)
 
-## <a name="set-initial-passwords"></a>İlk parolaları ayarlama 
+## <a name="set-initial-passwords"></a>Başlangıç parolalarını ayarla 
 
-Azure FXT Edge dosyalayıcı düğüm önyükleme yaparken izlemek için çeşitli iletilerini yazdırır. Birkaç dakika sonra böyle bir kurulum ilk ekran gösterilmektedir:
+Azure FXT Edge Filer düğümü, önyükleme sırasında izleyicisine çeşitli iletiler yazdırır. Birkaç dakika sonra, aşağıdaki gibi bir ilk kurulum ekranı gösterir:
 
 ```
 ------------------------------------------------------
@@ -78,15 +78,15 @@ Enter new password:
 
 Girdiğiniz parola iki şey için kullanılır: 
 
-* Bu Azure FXT Edge dosyalayıcı düğüm için geçici kök paroladır. 
+* Bu Azure FXT Edge Filer düğümü için geçici kök paroladır. 
 
-  Bu düğümü kullanarak bir küme oluşturduğunuzda ya da bu düğüm kümeye eklediğinizde bu parola değişecektir. Küme yönetimi parolası (kullanıcıyla ilişkili ``admin``) da bir kümedeki tüm düğümler için kök parola değil.
+  Bu parola, bu düğümü kullanarak bir küme oluşturduğunuzda veya bu düğümü kümeye eklediğinizde değişecektir. Küme yönetimi parolası (kullanıcıyla ilişkili ``admin``), bir kümedeki tüm düğümler için de kök paroladır.
 
-* İDRAC/IPMI donanım yönetim bağlantı noktası için uzun vadeli paroladır.
+* Bu, Idrac/ıPMı donanım yönetimi bağlantı noktası için uzun süreli paroladır.
 
-  Bir donanım sorunu gidermek için oturum IPMI daha sonra oturum açmak gerekirse parolayı anımsa emin olun.
+  Donanım sorunuyla ilgili sorunları gidermek için, daha sonra ıPMı ile oturum açmanız gereken parolayı hatırladığınızdan emin olun.
 
-Girin ve parolayı onaylayın: 
+Parolayı girin ve onaylayın: 
 
 ```
 Enter new password:**********
@@ -94,22 +94,22 @@ Re-enter password:**********
 Loading AvereOS......
 ```
 
-Parolasını girdikten sonra sistem önyüklemeye devam eder. Tamamlandığında, verir bir ``login:`` istemi. 
+Parolayı girdikten sonra, sistem önyüklemeye devam eder. Tamamlandığında, ``login:`` istemi verir. 
 
-## <a name="sign-in-as-root"></a>Kök olarak oturum açın
+## <a name="sign-in-as-root"></a>Kök olarak oturum aç
 
-Olarak oturum ``root`` parolayla ayarlamanız yeterlidir. 
+Yeni ayarladığınız parolayla ``root`` olarak oturum açın. 
 
 ```
 login: root
 Password:**********
 ```
 
-Kök olarak oturum açtıktan sonra ağ bağlantı noktalarının etkindir ve DHCP sunucusu IP adreslerinin bağlantı kurar. 
+Kök olarak oturum açtıktan sonra, ağ bağlantı noktaları etkin olur ve IP adresleri için DHCP sunucusuyla iletişim kuracaktır. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Düğüm kümesinin parçası olacak şekilde hazırdır. Azure FXT Edge dosyalayıcı kümeyi oluşturmak için kullanabilir veya [mevcut bir kümeye ekleme](fxt-add-nodes.md). 
+Düğüm, bir kümenin parçası olmaya hazırlanıyor. Azure FXT Edge Filer kümesini oluşturmak için kullanabilirsiniz veya [var olan bir kümeye ekleyebilirsiniz](fxt-add-nodes.md). 
 
 > [!div class="nextstepaction"]
 > [Küme oluşturma](fxt-cluster-create.md)

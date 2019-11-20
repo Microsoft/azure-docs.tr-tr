@@ -1,20 +1,16 @@
 ---
-title: Örnek - Depolama hesabı için yalnızca HTTPS trafiğini olun
-description: Bu örnek ilke tanımı, HTTPS trafiği için kullanılacak depolama hesabı gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-depolama hesapları için HTTPS trafiğine emin olun
+description: Bu örnek ilke tanımı, depolama hesaplarının HTTPS trafiği kullanmasını gerektirir.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 044091ab83d64676c011ea25c73c8bf00528a6b8
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: c61ccecb72d568ff3a1f4bfce542a2cbbf7d8330
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545376"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076232"
 ---
-# <a name="sample---ensure-https-traffic-only-for-storage-account"></a>Örnek - Depolama hesabı için yalnızca HTTPS trafiğini olun
+# <a name="sample---ensure-https-traffic-only-for-storage-account"></a>Örnek-yalnızca depolama hesabı için HTTPS trafiğine emin olun
 
 Bu ilke, depolama hesaplarının HTTPS trafiği kullanmasını gerektirir.
 
@@ -28,7 +24,7 @@ Bu ilke, depolama hesaplarının HTTPS trafiği kullanmasını gerektirir.
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FStorage%2Fhttps-traffic-only%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FStorage%2Fhttps-traffic-only%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

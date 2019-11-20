@@ -1,62 +1,64 @@
 ---
-title: İletileri ve Azure SignalR hizmeti bağlantıları
-description: Temel kavramları iletileri ve Azure SignalR hizmeti bağlantıları hakkında genel bakış.
+title: Azure SignalR hizmetindeki mesajlar ve bağlantılar
+description: Azure SignalR hizmetindeki iletiler ve bağlantılarla ilgili temel kavramlara genel bakış.
 author: sffamily
 ms.service: signalr
 ms.topic: conceptual
 ms.date: 03/01/2019
 ms.author: zhshang
-ms.openlocfilehash: e82ce8f5c97aed7e2cb832d8e808ff84691f7c9e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2785d85db47ed3b214044e673566a2837b83e984
+ms.sourcegitcommit: e0a1a9e4a5c92d57deb168580e8aa1306bd94723
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61401211"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72285494"
 ---
-# <a name="messages-and-connections-in-azure-signalr-service"></a>İletileri ve Azure SignalR hizmeti bağlantıları
+# <a name="messages-and-connections-in-azure-signalr-service"></a>Azure SignalR hizmetindeki mesajlar ve bağlantılar
 
-Azure SignalR hizmeti için faturalandırma modeli, bağlantı sayısı ve iletilerin sayısını temel alır. Bu makalede nasıl iletileri ve bağlantıları tanımlanır ve faturalandırma için sayılan açıklanmaktadır.
+Azure SignalR hizmeti için faturalandırma modeli, bağlantı sayısını ve ileti sayısını temel alır. Bu makalede, iletilerin ve bağlantıların faturalandırma için nasıl tanımlandığı ve sayılacağı açıklanmaktadır.
 
 
-## <a name="message-formats"></a>İleti formatları 
+## <a name="message-formats"></a>İleti biçimleri 
 
-Azure SignalR hizmeti, ASP.NET Core SignalR olarak aynı biçimi destekler: [JSON](https://www.json.org/) ve [MessagePack](/aspnet/core/signalr/messagepackhubprotocol).
+Azure SignalR hizmeti ASP.NET Core SignalR: [JSON](https://www.json.org/) ve [MessagePack](/aspnet/core/signalr/messagepackhubprotocol)ile aynı biçimleri destekler.
 
 ## <a name="message-size"></a>İleti boyutu
 
-Azure SignalR hizmeti, iletileri için boyut sınırı vardır.
+Azure SignalR hizmetinin iletiler için boyut sınırı yoktur.
 
-Büyük iletileri en fazla 2 KB her küçük iletilere bölme ve ayrı olarak iletilebilir. SDK'ları, bölme ve birleştirme ileti işler. Hiçbir Geliştirici çalışmalarını gereklidir.
+Büyük iletiler 2 KB 'tan fazla olmayan ve ayrı olarak aktarılan daha küçük iletilere ayrılır. SDK 'lar ileti bölme ve montaj işlemesi. Geliştirici çabalarına gerek yoktur.
 
-Büyük iletileri Mesajlaşma performansı olumsuz şekilde etkileyebilir. Her kullanım örneği senaryosu için en iyi ileti boyutunu belirlemek için test ve küçük ileti mümkün olduğunca kullanın.
+Büyük iletiler, mesajlaşma performansını olumsuz etkiler. Mümkün olan her durumda daha küçük iletileri kullanın ve her bir kullanım örneği senaryosu için en iyi ileti boyutunu belirleme sınamasını yapın.
 
-## <a name="how-messages-are-counted-for-billing"></a>İletileri için faturalandırma nasıl sayılır
+## <a name="how-messages-are-counted-for-billing"></a>Faturalandırmayla ilgili mesajlar nasıl sayılır?
 
-Azure SignalR hizmeti yalnızca giden iletiler için faturalandırma, sayılır. İstemciler ve sunucular arasında ping iletilerine göz ardı edilir.
+Faturalandırma için yalnızca Azure SignalR hizmetinden gelen giden iletiler sayılır. İstemciler ve sunucular arasındaki ping iletileri yok sayılır.
 
-2 KB'den daha büyük iletiler 2 KB birden çok ileti olarak sayılır. Azure portalında ileti sayısı grafiği güncelleştirilmiş hub başına 100 her ileti.
+2 KB 'den büyük mesajlar her biri 2 KB 'lık birden fazla ileti olarak sayılır. Azure portal ileti sayısı grafiği her Hub için her 100 ileti için güncelleştirilir.
 
-Örneğin, üç istemcileri ve bir uygulama sunucusu olduğunu düşünün. Bir istemci, sunucunun tüm istemcilere yayın bildirmek için 4 KB'lık ileti gönderir. İleti sayısı sekiz olduğu: uygulama sunucusu ve istemcilere hizmetinden üç iletileri hizmetinden bir ileti. Her ileti iki 2 KB'lık mesaj olarak sayılır.
+Örneğin, üç istemciniz ve bir uygulama sunucunuz olduğunu varsayalım. Bir istemci, sunucunun tüm istemcilere yayınlamasına izin vermek için 4 KB 'lik bir ileti gönderir. İleti sayısı sekiz ' dır: hizmetten uygulama sunucusuna bir ileti ve hizmetten istemcilere yapılan üç ileti. Her ileti iki adet 2 KB 'lik ileti olarak sayılır.
 
-Azure portalında gösterilen mesaj sayısı 0 ermesine 100'den büyük olarak toplanır.
+Azure portal gösterilen ileti sayısı, 100 ' den fazla olacak şekilde biriktirene kadar 0 olarak kalır.
 
-## <a name="how-connections-are-counted"></a>Bağlantıları nasıl sayılır
+## <a name="how-connections-are-counted"></a>Bağlantılar nasıl sayılır?
 
-Sunucu bağlantısı ve istemci bağlantıları vardır. Varsayılan olarak, her uygulama sunucusu başına hub'ı Azure SignalR hizmeti ile beş bağlantıları vardır ve her bir istemciye Azure SignalR hizmeti ile bir istemci bağlantısı olur.
+Azure SignalR hizmeti ile sunucu bağlantıları ve istemci bağlantıları vardır. Varsayılan olarak, her bir uygulama sunucusu hub başına beş ilk bağlantı ile başlar ve her istemcide bir istemci bağlantısı vardır.
 
-Azure portalında gösterilen bağlantı sayısı, hem sunucu bağlantıları hem de istemci bağlantılarını içerir.
+Azure portal gösterilen bağlantı sayısı hem sunucu bağlantılarını hem de istemci bağlantılarını içerir.
 
-Örneğin, iki uygulama sunucuları vardır ve kodun içinde beş hub'ları tanımlamak varsayılır. Sunucu bağlantısı sayısı 50 olur: 2 uygulama sunucuları * 5 hubs * hub başına 5 bağlantı.
+Örneğin, iki uygulama sunucunuz olduğunu ve kodda beş hub tanımladığınızı varsayalım. Sunucu bağlantı sayısı 50 olacaktır: 2 App Servers * 5 hub *, hub başına 5 bağlantı.
 
-ASP.NET SignalR, farklı bir yolla sunucu bağlantılarını hesaplar. Bu, tanımladığınız hub'ları ek olarak bir varsayılan hub içerir. Varsayılan olarak, her uygulama sunucusunun beş daha fazla sunucu bağlantısı gerekir. Varsayılan hub için bağlantı sayısı, diğer hub'lar ile tutarlı kalır.
+ASP.NET SignalR sunucu bağlantılarını farklı bir şekilde hesaplar. Bu, tanımladığınız hublara ek olarak bir varsayılan Hub içerir. Varsayılan olarak, her uygulama sunucusunun beş daha fazla ilk sunucu bağlantısı olması gerekir. Varsayılan Hub için ilk bağlantı sayısı, diğer hub 'larla tutarlı kalır.
 
-## <a name="how-inboundoutbound-traffic-is-counted"></a>Gelen/giden trafik sayılır nasıl
+Uygulama sunucusunun kullanım ömrü boyunca, hizmet ve uygulama sunucusu eşitleme bağlantısı durumunu tutar ve daha iyi performans ve hizmet kararlılığı için sunucu bağlantılarında ayarlama yapar. Bu nedenle sunucu bağlantı numarası değişikliğini zaman zaman görebilirsiniz.
 
-Azure SignalR hizmeti perspektifi de gelen ve giden trafiği arasındaki ayrımı temel alır. Trafiğin bayt cinsinden hesaplanır. Trafik, ileti sayısı gibi bir örnekleme hızı de vardır. Azure portalında gelen/giden grafik güncelleştirilir hub başına her 100 KB.
+## <a name="how-inboundoutbound-traffic-is-counted"></a>Gelen/giden trafik nasıl sayılır?
+
+Gelen trafik ve giden trafik arasındaki ayrım, Azure SignalR hizmeti perspektifine dayanır. Trafik bayt cinsinden hesaplanır. İleti sayısı gibi trafik da bir örnekleme oranına sahiptir. Azure portal gelen/giden grafik, hub başına her 100 KB güncelleştirilir.
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-- [Azure İzleyici'de toplama türleri](/azure/azure-monitor/platform/metrics-supported#microsoftsignalrservicesignalr )
-- [ASP.NET Core SignalR yapılandırma](/aspnet/core/signalr/configuration)
+- [Azure Izleyici 'de toplama türleri](/azure/azure-monitor/platform/metrics-supported#microsoftsignalrservicesignalr )
+- [ASP.NET Core SignalR yapılandırması](/aspnet/core/signalr/configuration)
 - [JSON](https://www.json.org/)
 - [MessagePack](/aspnet/core/signalr/messagepackhubprotocol)

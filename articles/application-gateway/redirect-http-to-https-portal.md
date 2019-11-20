@@ -1,18 +1,18 @@
 ---
-title: Application gateway, Azure portalını kullanarak HTTPS yeniden yönlendirmesi için HTTP ile oluşturma
+title: Portalda HTTP-HTTPS yeniden yönlendirmesi-Azure Application Gateway
 description: HTTP yeniden yönlendirilen trafiğin Azure portalını kullanarak HTTPS ile bir uygulama ağ geçidi oluşturmayı öğrenin.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: article
-ms.date: 12/7/2018
+ms.date: 11/13/2019
 ms.author: victorh
-ms.openlocfilehash: 17eef2fc2608ca4ccbabff8179cd63798d275582
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d67270896792ea506d2df04dcc3745a43d3d8251
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62101478"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74012875"
 ---
 # <a name="create-an-application-gateway-with-http-to-https-redirection-using-the-azure-portal"></a>Application gateway, Azure portalını kullanarak HTTPS yeniden yönlendirmesi için HTTP ile oluşturma
 
@@ -31,7 +31,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Bu öğretici Azure PowerShell modülü sürüm 1.0.0 gerektirir veya daha sonra bir sertifika oluşturun ve IIS yükleyin. Sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). Bu öğreticideki komutları çalıştırmak için de çalışmasına ihtiyacınız `Login-AzAccount` Azure ile bir bağlantı oluşturmak için.
+Bu öğretici, bir sertifika oluşturmak ve IIS yüklemek için Azure PowerShell modülü sürüm 1.0.0 veya üstünü gerektirir. Sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). Bu öğreticideki komutları çalıştırmak için de çalışmasına ihtiyacınız `Login-AzAccount` Azure ile bir bağlantı oluşturmak için.
 
 ## <a name="create-a-self-signed-certificate"></a>Otomatik olarak imzalanan sertifika oluşturma
 
@@ -90,7 +90,7 @@ Bir sanal ağ, oluşturduğunuz kaynakları arasındaki iletişim için gereklid
 7. Sanal ağı ve alt ağı oluşturmak için **Tamam**’a tıklayın.
 8. Altında **ön uç IP yapılandırması**, olun **IP adresi türü** olduğu **genel**, ve **Yeni Oluştur** seçilir. Girin *myAGPublicIPAddress* adı. Diğer ayarların varsayılan değerlerini kabul edin ve sonra **Tamam**’a tıklayın.
 9. Altında **dinleyici Yapılandırması**seçin **HTTPS**, ardından **bir dosya seçin** gidin *c:\appgwcert.pfx* dosya ve seçin **açık**.
-10. Tür *appgwcert* sertifika adını ve *Azure123456!* girin.
+10. Tür *appgwcert* sertifika adını ve *Azure123456!* Parola.
 11. Web uygulaması güvenlik duvarı devre dışı bırakın ve ardından **Tamam**.
 12. Özet sayfasında ayarları gözden geçirin ve ardından **Tamam** ağ kaynaklarının ve uygulama ağ geçidi oluşturmak için. Bu, uygulama ağ geçidinin oluşturulması, sonraki bölüme geçmeden önce dağıtımın başarıyla tamamlanana kadar bekleyin birkaç dakika sürebilir.
 
@@ -146,7 +146,7 @@ Bu örnekte uygulama ağ geçidinde arka uç havuzu için sunucu sağlayan bir s
 12. Altında **ağ**, olun **Yük Dengeleme seçeneklerini seçin** ayarlanır **Application Gateway**.
 13. Olun **uygulama ağ geçidi** ayarlanır **myAppGateway**.
 14. Olun **alt** ayarlanır **myBackendSubnet**.
-15. **Oluştur**’u seçin.
+15. **Oluştur**'u seçin.
 
 ### <a name="associate-the-scale-set-with-the-proper-backend-pool"></a>Ölçek kümesini uygun arka uç havuzu ile ilişkilendirme
 

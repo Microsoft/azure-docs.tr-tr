@@ -1,39 +1,29 @@
 ---
-title: 'Azure Durum İzleyicisi v2 API Başvurusu: İzleme altyapısı devre dışı bırakma | Microsoft Docs'
-description: Durum İzleyicisi'ni v2 API'si başvurusu. Disable-InstrumentationEngine. Web sitesi yeniden dağıtmaya gerek kalmadan Web sitesi performansını izleyin. ASP.NET web uygulamaları ile çalışır, şirket içi Vm'leri içinde veya azure'da barındırılan.
-services: application-insights
-documentationcenter: .net
-author: MS-TimothyMothra
-manager: alexklim
-ms.assetid: 769a5ea4-a8c6-4c18-b46c-657e864e24de
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Aracısı API başvurusu
+description: Aracı API başvurusunu Application Insights. Disable-ınstrumentationengine. Web sitesini yeniden dağıtmaya gerek kalmadan Web sitesi performansını izleyin. Şirket içinde, VM 'lerde veya Azure 'da barındırılan ASP.NET Web Apps ile birlikte kullanılır.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 04/23/2019
+author: TimothyMothra
 ms.author: tilee
-ms.openlocfilehash: b5ff218ce7bc7593d38f496b22d2a03402a00cdc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 04/23/2019
+ms.openlocfilehash: dd546107164632c821c1ee9a1629fe0a1ca071fc
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66514421"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899754"
 ---
-# <a name="status-monitor-v2-api-disable-instrumentationengine-v021-alpha"></a>Durum İzleyicisi'ni v2 API'si: Disable-InstrumentationEngine (v0.2.1-alpha)
+# <a name="application-insights-agent-api-disable-instrumentationengine"></a>Application Insights aracı API 'SI: Disable-ınstrumentationengine
 
-Bu makalede bir üyesi olan bir cmdlet [Az.ApplicationMonitor PowerShell Modülü](https://www.powershellgallery.com/packages/Az.ApplicationMonitor/).
-
-> [!IMPORTANT]
-> Durum İzleyicisi'ni v2 şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor ve bazıları kısıtlı yeteneklere sahip.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Bu makalede, [az. ApplicationMonitor PowerShell modülünün](https://www.powershellgallery.com/packages/Az.ApplicationMonitor/)üyesi olan bir cmdlet açıklanmaktadır.
 
 ## <a name="description"></a>Açıklama
-İzleme altyapısının bazı kayıt defteri anahtarlarını kaldırarak devre dışı bırakır.
-Değişikliklerin etkili olması için IIS yeniden başlatın.
+Bazı kayıt defteri anahtarlarını kaldırarak izleme altyapısını devre dışı bırakır.
+Değişikliklerin etkili olması için IIS 'yi yeniden başlatın.
 
 > [!IMPORTANT] 
-> Bu cmdlet, yönetici izinlerine sahip bir PowerShell oturumu gerektirir.
+> Bu cmdlet yönetici izinlerine sahip bir PowerShell oturumu gerektirir.
 
 ## <a name="examples"></a>Örnekler
 
@@ -43,13 +33,13 @@ PS C:\> Disable-InstrumentationEngine
 
 ## <a name="parameters"></a>Parametreler 
 
-### <a name="-verbose"></a>-Verbose
-**Ortak parametresi.** Ayrıntılı günlük çıktısını almak için bu anahtarı kullanın.
+### <a name="-verbose"></a>-Ayrıntılı
+**Ortak parametre.** Ayrıntılı günlükleri çıkarmak için bu anahtarı kullanın.
 
 ## <a name="output"></a>Çıktı
 
 
-#### <a name="example-output-from-successfully-disabling-the-instrumentation-engine"></a>Örnek çıktı öğesinden başarıyla izleme altyapısı devre dışı bırakma
+#### <a name="example-output-from-successfully-disabling-the-instrumentation-engine"></a>İzleme altyapısını başarıyla devre dışı bırakma örnek çıkışı
 
 ```
 Configuring IIS Environment for instrumentation engine...
@@ -62,5 +52,5 @@ Configuring registry for instrumentation engine...
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
- Durum İzleyicisi v2 ile daha fazlasını yapın:
- - Kılavuzunu kullanın [sorun giderme](status-monitor-v2-troubleshoot.md) Durum İzleyicisi v2.
+ Application Insights aracısıyla daha fazlasını yapın:
+ - Application Insights Aracısı [sorunlarını gidermek](status-monitor-v2-troubleshoot.md) için kılavuzumuzu kullanın.

@@ -1,76 +1,72 @@
 ---
-title: Azure veri fabrikası veri akışı şema değişikliklerini eşleme
-description: Esnek şema değişikliklerini ile Azure Data factory'de veri akışları oluşturun
+title: Veri akışı eşleme içinde şema kayması | Azure Data Factory
+description: Şema kayması ile Azure Data Factory dayanıklı veri akışları oluşturun
 author: kromerm
 ms.author: makromer
-ms.reviewer: douglasl
+ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
-ms.date: 10/04/2018
-ms.openlocfilehash: aadab68185347dc0a12e0802f675efe13ecea545
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/12/2019
+ms.openlocfilehash: 8c2764535515d0aeb1eb65a1621148fa58317cac
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61262168"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72553703"
 ---
-# <a name="mapping-data-flow-schema-drift"></a>Veri akışı şema değişikliklerini eşleme
+# <a name="schema-drift-in-mapping-data-flow"></a>Eşleme veri akışı 'nda şema kayması
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
+Şema kayması, kaynaklarınızın genellikle meta verileri değiştirme durumdur. Alanlar, sütunlar ve türler anında eklenebilir, kaldırılabilir veya değiştirilebilir. Şema kayması için işlem yapılmadan veri akışınız, yukarı akış veri kaynağı değişikliklerine karşı savunmasız hale gelir. Gelen sütunlar ve alanlar bu kaynak adlarına bağlı olduğundan, tipik ETL desenleri başarısız olur.
 
-Şema değişikliklerini kavramını burada kaynaklarınızı meta verileri genellikle değiştirme durumdur. Alanlar, sütunlar, türleri, vb. eklenebilir, kaldırıldı veya çalışma sırasında değiştirildi. Şema değişikliklerini için işleme olmadan, veri akışı Yukarı Akış veri kaynağı değişiklikleri değişikliklere karşı savunmasız hale gelir. Gelen sütun ve alanları değiştirdiğinizde, bu kaynak adlarını bağlanması eğilimli olduğundan tipik ETL düzenlerindeki başarısız.
+Şema driine karşı korunmak için bir veri akışı aracında tesislerin, bir veri mühendisi olarak şunları yapmasına olanak tanımak önemlidir:
 
-Şema değişikliklerini karşı korumak için bir veri mühendisi izin vermek için bir veri akışı aracında olanakları sağlamak önemlidir:
+* Değişebilir alan adlarına, veri türlerine, değerlere ve boyutlara sahip kaynakları tanımlama
+* Sabit kodlanmış alanlar ve değerler yerine veri desenleriyle çalışkullanılabilecek dönüştürme parametreleri tanımlayın
+* Adlandırılmış alanları kullanmak yerine gelen alanlarla eşleşecek desenleri anlayan ifadeler tanımlayın
 
-* Mutable alan adları, veri türleri, değerleri ve boyutları olan kaynakları tanımlama
-* Sabit kodlanmış alanları ve değerleri yerine veri desenleri çalışabilirsiniz dönüştürme parametrelerini tanımlayın
-* Ad alanları kullanmak yerine gelen alanları eşleştirmeye biçimlerini ifadelerini tanımlama
+Azure Data Factory, yürütme durumundan yürütmeye değişen esnek şemaları, veri akışlarınızı yeniden derlemenize gerek kalmadan genel veri dönüştürme mantığı oluşturabilmeniz için yerel olarak destekler.
 
-## <a name="how-to-implement-schema-drift"></a>Şema değişikliklerini gerçekleştirme
+Akış genelinde şema drını kabul etmek için veri akışınızda bir mimari karar vermeniz gerekir. Bunu yaptığınızda, kaynaklardaki şema değişikliklerine karşı koruma sağlayabilirsiniz. Ancak, veri akışınız boyunca sütunlarınızın ve türlerinizi erken bağlamayı kaybedersiniz. Azure Data Factory, şema kuruta akışlarını geç bağlama akışları olarak değerlendirir. bu nedenle, dönüştürmelerinizi oluştururken düzeltebilecekler sütun adları, akış genelindeki şema görünümlerinde sizin için kullanılamaz.
 
-* "Kaynak Dönüşümünüzü şema değişikliklerini izin ver" seçin
+## <a name="schema-drift-in-source"></a>Kaynaktaki şema kayması
 
-<img src="media/data-flow/schemadrift001.png" width="400">
+Kaynak tanımınızdan veri akışınıza gelen sütunlar, kaynak projeksiyonda mevcut olmadığında "düzeltebilecekler" olarak tanımlanır. Kaynak dönüşümünüzü yansıtma sekmesinden Kaynak projeksiyonunu görüntüleyebilirsiniz. Kaynağınız için bir veri kümesi seçtiğinizde, ADF otomatik olarak veri kümesinden şemayı alır ve bu veri kümesi şema tanımından bir proje oluşturur.
 
-* Bu seçeneği seçtiğinizde, tüm gelen alanları her veri akışı yürütme kaynağınızdan okuyun ve havuz için tüm akışı geçirilir.
+Kaynak dönüşümünde, şema kayması, veri kümesi şemanız tanımlı olmayan okuma sütunları olarak tanımlanmıştır. Şema drmasını etkinleştirmek için, kaynak dönüşümünüze **şema Drçıkmasına Izin ver** ' i işaretleyin.
 
-* Böylece tüm yeni alanlar çekilen yukarı alıp, hedefte geldiğimizi tüm yeni alanlar, havuz dönüşümünde eşlemek için "Otomatik-Map"'ı kullandığınızdan emin olun:
+![Şema DRFT kaynağı](media/data-flow/schemadrift001.png "Şema DRFT kaynağı")
 
-<img src="media/data-flow/automap.png" width="400">
+Şema drında, tüm gelen alanlar yürütme sırasında kaynağınızdan alınır ve tüm akış havuza gönderilir. Varsayılan olarak, *düzeltebilecekler sütunları*olarak bilinen tüm yeni algılanan sütunlar dize veri türü olarak gelir. Veri akışınız için düzeltebilecekler sütunların veri türlerini otomatik olarak çıkarması gerekirse, kaynak ayarlarınızda **düzeltebilecekler sütun türlerini** kontrol edin.
 
-* Yeni alanlar, basit bir senaryoyla sunulduğunda her şey çalışır kaynak havuzu -> (kopyalamak olarak da bilinir) eşleme.
+## <a name="schema-drift-in-sink"></a>Havuzda DRFT şeması
 
-* Şema değişikliklerini işleyen bu iş akışında dönüşümleri eklemek için desen eşleştirme sütun adı, türü ve değeri ile eşleşmesi için kullanabilirsiniz.
+Bir havuz dönüşümünde şema kayması, havuz veri şemasında tanımlananla ilgili ek sütunlar yazdığınızda oluşur. Şema kayması 'nı etkinleştirmek için havuz dönüşümünüzün **şema Drçıkmasına Izin ver** ' i işaretleyin.
 
-* "Ekle sütun deseni" türetilmiş sütun veya toplama dönüştürme "Şema değişikliklerini" anlayan bir dönüştürme isterseniz tıklayın.
+![Şema DRFT havuzu](media/data-flow/schemadrift002.png "Şema DRFT havuzu")
 
-<img src="media/data-flow/columnpattern.png" width="400">
+Şema kayması etkinleştirilirse, eşleme sekmesindeki **otomatik eşleme** kaydırıcısının açık olduğundan emin olun. Bu kaydırıcı üzerinde, tüm gelen sütunlar hedefe yazılır. Aksi takdirde, düzeltebilecekler sütunları yazmak için kural tabanlı eşleme kullanmanız gerekir.
 
-> [!NOTE]
-> Akışınızın tamamında şema değişikliklerini kabul etmek için veri akışında bir mimari karar vermeniz gerekir. Bunu yaptığınızda, kaynaktan şema değişikliklerine karşı koruyabilir. Ancak, veri akışı bağlama erken sütunları ve türleri kaybedersiniz. Geç bağlama akışları Azure Data Factory işler şema değişikliklerini akışlar şekilde Bağlantılarınızdaki yapılandırdığınızda, sütun adlarını, akışı boyunca şema görünümlerde kullanılabilir olmaz.
+![Havuz otomatik eşleme](media/data-flow/automap.png "Havuz otomatik eşleme")
 
-<img src="media/data-flow/taxidrift1.png" width="400">
+## <a name="transforming-drifted-columns"></a>Düzeltebilecekler sütunlarını dönüştürme
 
-Taksi tanıtım örnek veri akışı, bir örnek şema değişikliklerini TripFare kaynak alt veri akışı yok. Toplama dönüşümü, biz "sütun deseni" tasarım toplama alanları kullanıyoruz dikkat edin. Belirli sütunlarını adlandırmaya veya konuma göre sütunlar için bakarak yerine verileri değiştirebilir ve çalıştırmaları arasında aynı sırada görünmeyebilir varsayıyoruz.
+Veri akışınız düzeltebilecekler sütunlara sahip olduğunda, bu dosyalara dönüşümlerinizi aşağıdaki yöntemlerle erişebilirsiniz:
 
-Azure Data Factory, veri akışı şema değişikliklerini işleyen, bu örnekte, oluşturduğumuz ve toplama, veri etki alanının her bir gidiş dönüş için fiyatlar içerdiğini bilerek 'double', türü sütunlar tarar. Ardından bir toplama matematik hesaplama kaynağında burada sütunu gölünüzdeki bağımsız olarak ve sütunun adlandırma bağımsız olarak tüm double alanları genelinde gerçekleştirebiliriz.
+* Bir sütuna ada veya konum numarasına göre açıkça başvurmak için `byPosition` ve `byName` ifadelerini kullanın.
+* Türetilmiş bir sütuna veya toplama dönüşümüne, herhangi bir ad, akış, konum veya tür birleşimiyle eşleşecek bir sütun stili ekleyin
+* Bir SELECT veya Sink dönüşümünde kural tabanlı eşlemeyi, bir model aracılığıyla düzeltebilecekler sütunları sütunlara göre diğer adlarla eşleşecek şekilde ekleyin
 
-Azure Data Factory, veri akışı söz dizimi $ eşleşen her sütun, eşleşen deseni temsil etmek için kullanır. Sütun adları karmaşık dize arama ve normal ifade işlevleri kullanarak da eşleştirebilirsiniz. Bu durumda, sütun 'double' türünün her eşleşmeye göre yeni bir birleşik alan adı oluşturun ve metin ekleme kullanacağız ```_total``` bunların her biri için eşleşen adları: 
+Sütun desenlerinin nasıl uygulanacağı hakkında daha fazla bilgi için bkz. [eşleme veri akışında sütun desenleri](concepts-data-flow-column-pattern.md).
 
-```concat($$, '_total')```
+### <a name="map-drifted-columns-quick-action"></a>Map düzeltebilecekler sütunları hızlı eylemi
 
-Daha sonra yuvarlama ve her eşleşen sütunlar için değerlerin toplamı:
+Düzeltebilecekler sütunlara açıkça başvurmak için, veri önizleme hızlı eylemi aracılığıyla bu sütunlara yönelik eşlemeleri hızlıca oluşturabilirsiniz. [Hata ayıklama modu](concepts-data-flow-debug-mode.md) açıldıktan sonra, veri önizleme sekmesine gidin ve **Yenile** ' ye tıklayarak bir veri önizlemesi getirin. Data Factory, düzeltebilecekler sütunlarının mevcut olduğunu algılarsa, **Map düzeltebilecekler** ' e tıklayabilir ve şema görünümlerinde tüm düzeltebilecekler sütunlarına başvurmanıza olanak tanıyan bir türetilmiş sütun oluşturabilirsiniz.
 
-```round(sum ($$))```
+![Düzeltebilecekler eşle](media/data-flow/mapdrifted1.png "Düzeltebilecekler eşle")
 
-Azure Data Factory, veri akışı örnek "Taksi tanıtım" ile bu genişletme test edebilirsiniz. Sonuçlarınızı etkileşimli olarak görebilmeniz için veri akışı tasarım yüzeyinin üst kısmında hata ayıklama iki durumlu düğmeyi kullanarak hata ayıklama oturumunda anahtarı:
+Oluşturulan türetilmiş sütun dönüşümünde, her düzeltebilecekler sütunu algılanan ad ve veri türü ile eşlenir. Yukarıdaki veri önizlemede, ' Movieıd ' sütunu bir tamsayı olarak algılanır. **Map düzeltebilecekler** tıklatıldıktan sonra, Movieıd, türetilmiş sütunda `toInteger(byName('movieId'))` olarak tanımlanır ve aşağı akış dönüşümlerinde şema görünümlerine dahil edilir.
 
-<img src="media/data-flow/taxidrift2.png" width="800">
-
-## <a name="access-new-columns-downstream"></a>Yeni sütunlar aşağı yönde erişim
-
-Yeni sütunlar sütun desenlerle oluşturduğunuzda, bu yeni sütunların "byName" ifadesi işlevini kullanarak daha sonra veri akışı dönüşümleri erişebilirsiniz.
+![Düzeltebilecekler eşle](media/data-flow/mapdrifted2.png "Düzeltebilecekler eşle")
 
 ## <a name="next-steps"></a>Sonraki adımlar
-
-İçinde [veri akışı ifade dili](data-flow-expression-functions.md) sütun desenleri ve şema değişikliklerini "byName" ve "byPosition" gibi ek özellikleri bulabilirsiniz.
+[Veri akışı Ifade dilinde](data-flow-expression-functions.md), sütun desenleri ve "byName" ve "byposition" gibi şema kayması için ek tesisler bulacaksınız.

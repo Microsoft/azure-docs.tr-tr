@@ -1,6 +1,6 @@
 ---
-title: Azure Logic Apps'ten Yammer'a bağlanın | Microsoft Docs
-description: Görevler ve izleme, gönderin ve Azure Logic Apps'i kullanarak ileti, akışları ve diğer Yammer'da yönetme iş akışlarını otomatikleştirin
+title: Azure Logic Apps 'den Yammer 'a bağlanma | Microsoft Docs
+description: Azure Logic Apps kullanarak Yammer 'da iletileri, akışları ve daha fazlasını izleyen, görüntüleyen ve yöneten görevleri ve iş akışlarını otomatikleştirin
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -11,67 +11,67 @@ ms.assetid: b5ae0827-fbb3-45ec-8f45-ad1cc2e7eccc
 ms.topic: article
 tags: connectors
 ms.date: 08/25/2018
-ms.openlocfilehash: ca2d28f3438fd166fa282488206662c95777bf3b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9228a94dcf27d8987b16e2caa2681cf973db0657
+ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62104740"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70050647"
 ---
-# <a name="monitor-and-manage-your-yammer-account-by-using-azure-logic-apps"></a>İzleme ve Azure Logic Apps kullanarak Yammer hesabınızı yönetme
+# <a name="monitor-and-manage-your-yammer-account-by-using-azure-logic-apps"></a>Azure Logic Apps kullanarak Yammer hesabınızı izleyin ve yönetin
 
-Azure Logic Apps ve Yammer Bağlayıcısı ile otomatik görevler ve izleme ve iletileri, akışları ve diğer eylemlerin yanı sıra, Yammer hesabınızdaki daha fazla örneğin yönetme iş akışları oluşturabilirsiniz:
+Azure Logic Apps ve Yammer Bağlayıcısı sayesinde, diğer eylemlerle birlikte, Yammer hesabınızda iletileri, akışları ve daha fazlasını izleyen ve yöneten otomatik görevler ve iş akışları oluşturabilirsiniz, örneğin:
 
-* Yeni iletileri izlenen akışları ve grupları görünen zamana yönelik İzleyici.
-* İletileri, grupları, ağlar, kullanıcıların Ayrıntılar ve daha fazla bilgi alın.
-* Gönderin ve ileti ister.
+* Yeni iletilerin izlenen akışlar ve Gruplar bölümünde ne zaman göründüğünü izleyin.
+* İletileri, grupları, ağları, kullanıcıların ayrıntılarını ve daha fazlasını alın.
+* İletileri gönderin ve beğenin.
 
-Çıkış diğer eylemler için kullanılabilir hale getirmek ve yanıtları Yammer hesabınızdan alma Tetikleyicileri kullanabilirsiniz. Yammer hesabınızla görevleri gerçekleştiren eylemlerini kullanabilirsiniz. Ayrıca, Yammer eylemleri çıktısını kullanan diğer eylemler olabilir. Örneğin, yeni iletiler akışları ya da grupları göründüğünde, bu iletileri Slack Bağlayıcısı ile paylaşabilirsiniz. Logic apps kullanmaya yeni başladıysanız gözden [Azure Logic Apps nedir?](../logic-apps/logic-apps-overview.md)
+Yammer hesabınızdan yanıt alan Tetikleyicileri kullanabilir ve çıktıyı diğer eylemler için kullanılabilir hale getirebilirsiniz. Yammer hesabınızla görev gerçekleştiren eylemleri kullanabilirsiniz. Ayrıca, başka eylemlere Yammer eylemlerinden gelen çıktıyı da kullanabilirsiniz. Örneğin, akışlar veya gruplar içinde yeni iletiler görüntülendiğinde, bu iletileri bolluk bağlayıcısıyla paylaşabilirsiniz. Logic Apps 'e yeni başladıysanız [ne Azure Logic Apps](../logic-apps/logic-apps-overview.md) olduğunu gözden geçirin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure aboneliği. Azure aboneliğiniz yoksa <a href="https://azure.microsoft.com/free/" target="_blank">ücretsiz bir Azure hesabı için kaydolun</a>. 
+* Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/). 
 
-* Yammer hesabı ve kullanıcı bilgilerinizi
+* Yammer hesabınız ve Kullanıcı kimlik bilgileriniz
 
-   Mantıksal uygulamanızı bir bağlantı oluşturun ve Yammer hesabınıza erişmek için kimlik bilgilerinizi yetkilendirin.
+   Kimlik bilgileriniz, bir bağlantı oluşturmak ve Yammer hesabınıza erişmek için mantıksal uygulamanızı yetkilendirirsiniz.
 
-* Hakkında temel bilgilere [mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+* [Mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md) hakkında temel bilgi
 
-* Yammer hesabınıza erişmek için istediğiniz mantıksal uygulaması. Bir Yammer tetikleyici ile başlayın için [boş mantıksal uygulama oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md). Yammer eylem kullanmak için mantıksal uygulamanız başka bir tetikleyici ile örneğin başlatın, **yinelenme** tetikleyici.
+* Yammer hesabınıza erişmek istediğiniz mantıksal uygulama. Bir Yammer tetikleyicisiyle başlamak için [boş bir mantıksal uygulama oluşturun](../logic-apps/quickstart-create-first-logic-app-workflow.md). Bir Yammer eylemi kullanmak için, mantıksal uygulamanızı başka bir tetikleyici ile başlatın, örneğin **yineleme** tetikleyicisi.
 
-## <a name="connect-to-yammer"></a>Yammer'a bağlanın
+## <a name="connect-to-yammer"></a>Yammer 'a Bağlan
 
 [!INCLUDE [Create connection general intro](../../includes/connectors-create-connection-general-intro.md)]
 
-1. Oturum [Azure portalında](https://portal.azure.com)ve Logic Apps Tasarımcısı'nda mantıksal uygulamanızı açın, açık değilse.
+1. [Azure Portal](https://portal.azure.com)oturum açın ve daha önce açık değilse mantıksal uygulama Tasarımcısı 'nda mantıksal uygulamanızı açın.
 
-1. Bir yolu seçin: 
+1. Bir yol seçin: 
 
-   * Boş mantıksal uygulamaları, arama kutusuna filtreniz olarak "yammer" girin. 
-   Tetikleyiciler listesinde istediğiniz tetikleyicisini seçin. 
+   * Boş Logic Apps için, arama kutusuna filtreniz olarak "Yammer" yazın. 
+   Tetikleyiciler listesinde istediğiniz tetikleyiciyi seçin. 
 
-     veya
+     -veya-
 
-   * Var olan mantıksal uygulamalar için: 
+   * Mevcut mantıksal uygulamalar için: 
    
-     * Son adım, bir eylem eklemek istediğiniz altında seçin **yeni adım**. 
+     * Eylem eklemek istediğiniz son adım altında **yeni adım**' ı seçin. 
 
-       veya
+       -veya-
 
-     * Bir eylem eklemek istediğiniz adımları arasında işaretçinizi adımlar arasındaki okun üzerine getirin. 
-     Artı işaretini seçin ( **+** ), görünür ve ardından **Eylem Ekle**.
+     * Eylem eklemek istediğiniz adımlar arasında, işaretçinizi adımlar arasındaki oka taşıyın. 
+     Görüntülenen artı işaretini ( **+** ) seçin ve ardından **Eylem Ekle**' yi seçin.
      
-       Arama kutusuna filtreniz olarak "yammer" girin. 
-       Eylemler listesinde, istediğiniz eylemi seçin.
+       Arama kutusuna filtreniz olarak "Yammer" yazın. 
+       Eylemler listesi altında istediğiniz eylemi seçin.
 
-1. Erişime izin verebilir böylece şimdi oturum açma Yammer'a oturum açmanız istenirse, şimdi oturum açın.
+1. Yammer 'da oturum açmanız istenirse, erişime izin vermek için şimdi oturum açın.
 
-1. Seçili tetikleyici veya eylem için gerekli bilgileri sağlayın ve mantıksal uygulamanızın iş akışı oluşturmaya devam edin.
+1. Seçtiğiniz tetikleyici veya eyleminiz için gerekli ayrıntıları sağlayın ve mantıksal uygulamanızın iş akışını oluşturmaya devam edin.
 
 ## <a name="connector-reference"></a>Bağlayıcı başvurusu
 
-Tetikleyiciler ve Eylemler sınırları hakkında teknik ayrıntılar için bağlayıcının Openapı'nin açıklanmıştır (önceki adıyla Swagger) açıklama, bağlayıcının gözden [başvuru sayfası](/connectors/yammer/).
+Bağlayıcının Openapı (eski adıyla Swagger) açıklaması tarafından tanımlanan Tetikleyiciler, Eylemler ve limitlerle ilgili teknik ayrıntılar için bağlayıcının [başvuru sayfasını](/connectors/yammer/)gözden geçirin.
 
 ## <a name="get-support"></a>Destek alın
 
@@ -80,4 +80,4 @@ Tetikleyiciler ve Eylemler sınırları hakkında teknik ayrıntılar için bağ
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Diğer hakkında bilgi edinin [Logic Apps bağlayıcıları](../connectors/apis-list.md)
+* Diğer [Logic Apps bağlayıcıları](../connectors/apis-list.md) hakkında bilgi edinin

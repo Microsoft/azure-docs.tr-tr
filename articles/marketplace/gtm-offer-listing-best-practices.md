@@ -1,60 +1,85 @@
 ---
-title: Go-To-Market Hizmetleri - teklif listesi en iyi uygulamalar | Azure
-description: Go-To-Market Hizmetleri - bu bölümde bir teklif için liste en iyi uygulamalar açıklanmaktadır.
+title: Go-to-market Services-teklif listesi en iyi uygulamalar | Mavisi
+description: Go-to-market Services-Bu bölümde, bir teklif için en iyi uygulamalar listelenmektedir
 services: Azure, Marketplace, Compute, Storage, Networking, Blockchain, Security
 author: qianw211
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 12/21/2018
 ms.author: ellacroi
-ms.openlocfilehash: c06a338ec041c83588c3ee5126795b8c445ef469
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 439617c07b8059860c6d412cc60d56d4ac8c36a5
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64937980"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818657"
 ---
 # <a name="offer-listing-best-practices"></a>En iyi teklif listeleme deneyimleri
 
-Bu bölümdeki tablolarda, oluşturma ve Marketi tekliflerini ilgi çekici önerileri sağlar. Yazma ve kendi pazarlama malzemelerinize yapılandırmak için Git [bulut iş ortağı portalı](https://cloudpartner.azure.com/#insights). 
+Bu bölümdeki tablolarda Market teklifleri oluşturma ve ilgi çekici öneriler sağlanır. Pazarlama malzemelerinizi yazmak ve yapılandırmak için [bulut Iş ortağı portalına](https://cloudpartner.azure.com/#insights)gidin. 
 
-## <a name="storefront-offer-details"></a>StoreFront teklifi ayrıntıları
-| StoreFront ayarı | En iyi yöntem |
+## <a name="storefront-offer-details"></a>Storefront teklif ayrıntıları
+| Storefront ayarı | En iyi yöntem |
 |:--- |:--- |  
-| Teklif Adı | Güçlü bir başlık girin:<br> <ul> <li> Uygulama adınız, müşterileriniz için çekirdek değer iletişim kurmanız gerekir. </li> <li> Arama motoru sonuçlarında yüksek derecelendirme almak için uygulama başlık arama anahtar sözcükleri içerir. </li> </ul> Danışmanlık hizmeti listeleme için kümesi başlık biçimi izleyin:<br>[Teklif adı]: [süresi] [Teklif türü] (örneğin, *Contoso: 2 hafta uygulama*) <br><br> Marka yönergelerine uyun:<br>İzleyin [Microsoft Trademark ve marka yönergelerine](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx) ve Microsoft ticari markaları ve Microsoft yazılım ürünleri ve Hizmetleri adlarını başvurduğunuzda ilgili, ürüne özgü diğer yönergeleri. |
-| Teklif açıklaması | NET teklif açıklaması sağlayın:<br> <ul> <li> Açıklamanızı ilk birkaç cümle içinde ürününüzün değer önerisi NET bir şekilde açıklayın. </li> <li> İlk birkaç cümle arama motoru sonuçlarında görüntülenebilir aklınızda bulundurun. </li> <li> Özellikler ve İşlevler, ürün satış üzerinde güvenmeyin. Bunun yerine, teslim değere odaklanmak. </li> <li> Sektöre özel sözlük veya avantajı tabanlı ifadesi mümkün olduğunca kullanın.</li> <li> Ayrıca, danışmanlık hizmeti listeleme açıkça sağladığınız profesyonel hizmet belirtmelidir. </li></ul> Temel bileşenleri, değer önerisi, aşağıdaki bilgileri içermelidir:<ul><li>Ürün açıklaması.</li><li>Ürün avantajlar kullanıcının türü.</li><li>Müşteri gereksinimi veya ürün adresleri kolaylaştırın.</li></ul> |
+| Teklif Adı | Güçlü bir başlık sağlayın:<br> <ul> <li> Uygulamanızın adı müşterilerinizin çekirdek değerini iletmelidir. </li> <li> Arama motoru sonuçlarında daha yüksek derecelendirme almak için uygulama başlığınızı arama anahtar sözcüklerini ekleyin. </li> </ul> Danışmanlık hizmeti listelerinin ayarlanan başlık biçimini izleyin:<br>[Teklif adı: [Duration] [teklif türü] (örneğin, *contoso: 2 haftalık uygulama*) <br><br> Marka yönergelerine uyar:<br>Microsoft ticari markaları ve Microsoft yazılımlarının, ürünlerinin ve hizmetlerinin adlarına başvurduğunuzda, [Microsoft ticari marka ve marka kılavuzlarını](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx) ve ilgili, ürüne özgü diğer yönergeleri izleyin. |
+| Teklif açıklaması | Net bir teklif açıklaması sağlayın:<br> <ul> <li> Tanımınızın ilk birkaç cümlede teklifinizin değer teklifini açık bir şekilde açıklamalıdır. </li> <li> İlk birkaç tümcenin arama motoru sonuçlarında görüntülenebileceğini aklınızda bulundurun. </li> <li> Ürününüzü satmaya yönelik özelliklere ve işlevlere güvenmeyin. Bunun yerine, teslim ettiğiniz değere odaklanın. </li> <li> Sektöre özgü sözlük veya avantaj temelli bir ifade mümkün olduğunca yararlanın.</li> <li> Ayrıca, danışmanlık hizmeti listeleri sağladığınız profesyonel hizmeti açıkça sağlamalıdır. </li></ul> Değer önerinizdeki çekirdek bileşenleri aşağıdaki bilgileri içermelidir:<ul><li>Ürünün açıklaması.</li><li>Üründen faydalanan Kullanıcı türü.</li><li>Müşterinin ürün adresi olması veya sorun olması.</li></ul> |
 
-## <a name="storefront-listing-details"></a>StoreFront dökümü ayrıntıları
-| StoreFront ayarı | En iyi yöntem |
+## <a name="storefront-listing-details"></a>Storefront listeleme ayrıntıları
+| Storefront ayarı | En iyi yöntem |
 |:--- |:--- |  
-| Sektörler: AppSource uygulamaları ve danışmanlık hizmetleri yalnızca | Sektöre özgü ihtiyaçları teklifinizi adresleri değişirse sektörler seçin: <ul><li> Teklif açıklamanızı sektöre özgü özellikleri kullanıma çağırın.</li> </ul> **Not**: Seçenekleri sayısı teklif türüne göre değişir ve belirtilen [bulut iş ortağı portalı](https://cloudpartner.azure.com/#insights). |
-| Categories | Teklifinizle en iyi hizalamak kategorileri seçin:<br> <ul> <li> Müşteriler bunları ilgili uygulamalar için aranacak kullandığından kategorileri dikkatlice seçin. </li> <li> Nasıl teklifinizi kategoriye özgü ihtiyaçları teklif açıklamasında destekleyip çağırdığınızdan emin olun. </li> </ul> **Not**: Seçenekleri sayısı teklif türüne göre değişir ve belirtilen [bulut iş ortağı portalı](https://cloudpartner.azure.com/#insights). |
-| Uygulamanızı çalışır (3 ile en fazla) ürünleri: AppSource uygulamaları | Ek ürünler ve çözümünüzü genişletir veya kullanan teknolojileri listeleyin. Örneğin, Azure IOT Hub veya Azure Machine Learning. |
-| Arama anahtar sözcükleri (en fazla 3) | Arama anahtar sözcükleri ararken teklifinizi iş bulmalarına yardımcı olabilir <ul> <li> Azure Market'te </li> <li> Appsource'ta </li> <li> arama motorları kullanma </li> </ul> Listenizi bu aramalarda görünür şunları yapmanız gerekir: <ul> <li> Teklifiniz için en çok üç arama anahtar sözcükleri belirleyin; </li> <li> Arama anahtar sözcükleri teklif Özet ve açıklama ekleyebilirsiniz; </li> <li> Burada arama anahtar sözcükleri listeler. </li> </ul> |
+| Sektörler: yalnızca AppSource uygulamaları ve danışmanlık hizmetleri | Teklifinizin sektöre özgü ihtiyaçları varsa sektörlerin seçimini yapın: <ul><li> Teklif tanımlarınızın sektöre özgü yeteneklerini çağırın.</li> </ul> **Note**: en fazla seçenek sayısı teklif türüne göre değişir ve [bulut iş ortağı portalında](https://cloudpartner.azure.com/#insights)belirtilir. |
+| Kategoriler | Teklifinizin en iyi şekilde hizalanmasını sağlayan kategorileri seçin:<br> <ul> <li> Müşteriler ilgili uygulamaları aramak için onları kullandığından, kategorileri dikkatle seçin. </li> <li> Teklifinizin teklif açıklamasında kategoriye özgü ihtiyaçları nasıl desteklediğine dikkat edin. </li> </ul> **Note**: en fazla seçenek sayısı teklif türüne göre değişir ve [bulut iş ortağı portalında](https://cloudpartner.azure.com/#insights)belirtilir. |
+| Uygulamanızın üzerinde çalışması gereken ürünler (en fazla 3): yalnızca AppSource uygulamaları | Çözümünüzün kullandığı veya genişlettiği ek ürünleri ve teknolojileri listeleyin. Örneğin, Azure IoT Hub veya Azure Machine Learning. |
+| Anahtar sözcükleri ara (en fazla 3) | Arama anahtar sözcükleri, iş kullanıcılarının arama sırasında teklifinizi bulmasına yardımcı olabilir <ul> <li> Azure Marketi 'nde </li> <li> AppSource 'ta </li> <li> Arama altyapılarını kullanma </li> </ul> Listelerinizin Bu aramalarda görünmesi için şunları yapmanız gerekir: <ul> <li> Teklifiniz için en üstteki üç arama anahtar sözcüğünü belirler; </li> <li> Arama anahtar sözcüklerini teklif özetinizdeki ve açıklamasında ekleyin; </li> <li> Arama anahtar sözcüklerini buraya listeleyin. </li> </ul> |
 
-## <a name="storefront-marketing-details"></a>StoreFront pazarlama ayrıntıları
-| StoreFront ayarı | En iyi yöntem |
+### <a name="category"></a>Kategori
+
+Azure Marketi ve Microsoft AppSource, farklı ve benzersiz müşteri gereksinimlerine yönelik olarak tasarlanmıştır. Müşterilerinizi role göre hedeflemek için her teklifin doğru storefront ve kategorilerini seçin. 
+
+Bir teklif için en fazla iki kategori ve iki alt kategori seçebilirsiniz. Aşağıda listelenen Kategoriler ve alt kategoriler, her iki stokın içinde de kullanılabilir.  Kategori seçiminizin amaçlanan hedef kitle, teklif açıklaması ve teklifinizin değer teklifi ile hizalandığından emin olun.
+
+| **Standardındaki**    | **Alt sektör**  | 
+| :------------------- | :-------------------|
+| \* Oto     | \* Oto |
+| Tarım     | \* Diğer-kesimli |
+| Dağıtım    | \* Toptan <br> \* Paket & paket dağıtımı |
+| Eğitim     | \* Daha yüksek eğitim <br> \* Birincil & Ikincil Eğitim/K-12 <br> \* Kitaplıklar & Museums |
+| Finansal Hizmetler     | \* Bankacılık & sermaye piyasaları <br> \* Sigorta |
+| Devlet    | \* Savunma & Zeka (Ulusal ve genel güvenlik olarak adlandırılabilmesi için kullanılır) <br> \* Genel güvenlik & Let <br> \* Cıvilian kamu |
+| Sağlık (sistem durumu olarak adlandırılabilecek şekilde kullanılır)   | \* Sağlık payor <br> \* Sistem durumu sağlayıcısı <br> \* İlaç |
+| Üretim & kaynakları (üretim olarak adlandırılabilmesi için kullanılır)   | \* Kimyasal & Agrokimyasal <br> \* Ayrık üretim <br> \* Enerji |
+| Perakende & tüketici malları (perakende olarak adlandırılabilmesi için kullanılır)  | \* Tüketici malları <br> \* Perakendeciler |
+| \* Medya & Iletişimleri (medya ve eğlence olarak adlandırılabilmesi için kullanılır)  | \* Media & eğlence <br> \* Telekomünikasyon |
+| Mesleki Hizmetler  | \* Yasal <br> \* İş ortağı profesyonel hizmetler |
+| \* Mimari & oluşturma (mimari Mühendisliği olarak adlandırılabilmesi için kullanılır)  | \* Diğer-kesimli |
+| \* & Yolculuklama  | \* Oteller & boş <br> \* Seyahat & ulaşım <br> \* Restoran hizmetleri & Restoranlar |
+| \* Diğer kamu sektörü endüstrileri  | \* Orman & balığa cılık <br> \* Kar amacı |
+| \* Emlak  | \* Diğer-kesimli |
+
+## <a name="storefront-marketing-details"></a>Storefront pazarlama ayrıntıları
+| Storefront ayarı | En iyi yöntem |
 |:--- |:--- |  
-| Logo sunar (PNG biçiminde 48&nbsp;&times;&nbsp;48): arama sayfası | Tasarım ve logonuz dijital bir ortam için en iyi duruma getir:<br>PNG biçiminde logonuzu teklifiniz için arama sayfası. |
-| Logo sunar (PNG biçiminde 216&nbsp;&times;&nbsp;216): Uygulama Ayrıntıları sayfası | Tasarım ve logonuz dijital bir ortam için en iyi duruma getir:<br>PNG biçiminde logonuzu teklifinizi sayfasının listeleme uygulama ayrıntıları. |
-| "Daha fazla bilgi edinin" belgeleri | Satış destek içerir ve "Daha fazla bilgi" altında varlıkları pazarlama, bazı örnekler verilmiştir: <ul> <li> teknik incelemeler </li> <li> Broşür </li> <li> Denetim listeleri, veya </li> <li> PowerPoint sunumları.</li> </ul>Tüm dosyalar için PDF biçiminde kaydedin. Amacınız burada müşterileri bilgilendirin, onlara satmak değil olmalıdır. <br><br>Tüm belgeleri, uygulama giriş sayfası için bir bağlantı eklemek ve Ziyaretçiler ve deneme izlemenize yardımcı olması için URL parametreleri ekleyin. |
-| Videolar: AppSource, danışmanlık hizmetleri veya yalnızca SaaS teklifleri | Güçlü video teklifinizi anlatım formunda değerini iletişim kurar:<ul> <li> Müşterinizin değil şirketiniz, hero hikayesinin olun. </li> <li> Videonuzu asıl talepler ve hedeflerinden biri, hedef müşteri adresi. </li> <li> Önerilen uzunluğu: 60-90 saniye.</li> <li> Videoları adını kullanan anahtar arama sözcükleri dahil edilip derecelendirilir. </li> <li> Nasıl yapılır konuları, başlama veya müşteri görüşleri gibi ek video eklemeyi düşünün. </li> </ul> |
-| Ekran (1280&nbsp;&times;&nbsp;720) | En fazla beş ekran görüntüleri ekleyin:<br>Anahtar arama sözcükleri dosya adlarını dahil edilip derecelendirilir. |
+| Teklif logosu (PNG biçimi, 48&nbsp;&times;&nbsp;48): arama sayfası | Dijital bir ortam için logonuzu tasarlayın ve iyileştirin:<br>Amblemini PNG biçiminde karşıya yükleyerek teklifinizin arama sayfasına yükleyin. |
+| Teklif logosu (PNG biçimi, 216&nbsp;&times;&nbsp;216): uygulama ayrıntıları sayfası | Dijital bir ortam için logonuzu tasarlayın ve iyileştirin:<br>Logonuzu uygulama ayrıntıları listesi sayfasına PNG biçiminde karşıya yükleyin. |
+| "Daha fazla bilgi" belgeleri | "Daha fazla bilgi" altında destekleyici satış ve pazarlama varlıklarının dahil olduğu bazı örnekler şunlardır: <ul> <li> teknik incelemeler, </li> <li> Broşürler </li> <li> denetim listeleri veya </li> <li> PowerPoint sunuları.</li> </ul>Tüm dosyaları PDF biçiminde kaydedin. Burada Hedefiniz, müşterileri satmak değil, müşterileri eğitmek için olmalıdır. <br><br>Tüm belgelerinize uygulama giriş sayfanız için bir bağlantı ekleyin ve ziyaretçi ve deneme sürümlerini izlemenize yardımcı olması için URL parametreleri ekleyin. |
+| Videolar: yalnızca AppSource, danışmanlık hizmetleri ve SaaS teklifleri | En güçlü videolar, sizin teklifinizin değerini, anlatım formunda iletişim kurar:<ul> <li> Müşterinizin, hikayenin herbirini değil, müşteriniz yapın. </li> <li> Videonuzun, hedef müşterinizin sorumlu güçlüklerine ve hedeflerine yönelik olması gerekir. </li> <li> Önerilen Uzunluk: 60-90 saniye.</li> <li> Videoların adını kullanan anahtar arama sözcüklerini ekleyin. </li> <li> Nasıl yapılır, Başlarken veya müşteri referansları gibi ek videolar eklemeyi göz önünde bulundurun. </li> </ul> |
+| Ekran görüntüleri (1280&nbsp;&times;&nbsp;720) | En fazla beş ekran görüntüsü ekleyin:<br>Anahtar arama sözcüklerini dosya adlarına ekleyin. |
 
-## <a name="link-to-your-offer-page-from-your-website"></a>Teklif sayfanıza sitenizden bağlantı
+## <a name="link-to-your-offer-page-from-your-website"></a>Web sitenizdeki teklif sayfanıza bağlantı
 
-AppSource veya Azure Market'ten rozet sitenizde listenizi Market'te bağladığınızda, güçlü analiz ve raporlama dahil olmak üzere aşağıdaki sorgu parametrelerini URL'nin sonundaki tarafından destekleyebilir:
-* **src**: Trafik AppSource (Web sitesi, LinkedIn veya Facebook gibi) yönlendirilir kaynak içerir.
-* **mktcmpid**: Herhangi bir bileşimini harfler en fazla 16 karakter içerebilir, pazarlama kampanyası Kimliğiniz, alt çizgi, sayılar ve kısa çizgi (örneğin, *blogpost_12*).
+Sitenizdeki AppSource veya Azure Market rozetini Market 'teki listelemenize bağladığınızda, URL 'nin sonuna aşağıdaki sorgu parametrelerini ekleyerek güçlü analiz ve raporlamayı destekleyebilirsiniz:
+* **src**: trafiğin appsource 'a yönlendirildiği kaynağı (örneğin, Web sitesi, LinkedIn veya Facebook) dahil edin.
+* **mktcmpıd**: herhangi bir harf, sayı, alt çizgi ve kısa çizgi birleşimine kadar en fazla 16 karakter içerebilen pazarlama kampanyası Kimliğiniz (örneğin, *blogpost_12*).
 
-Aşağıdaki örnek URL Yukarıdaki sorgu parametrelerinin her ikisini de içerir: `https://appsource.microsoft.com/product/dynamics-365/mscrm.04931187-431c-415d-8777-f7f482ba8095?src=website&mktcmpid=blogpost_12`
+Aşağıdaki örnek URL, önceki sorgu parametrelerinin her ikisini de içerir: `https://appsource.microsoft.com/product/dynamics-365/mscrm.04931187-431c-415d-8777-f7f482ba8095?src=website&mktcmpid=blogpost_12`
 
-AppSource URL'nizi parametreleri ekleyerek kampanyanızı analiz panosunda bulunan etkisini gözden geçirebilirsiniz [bulut iş ortağı portalı](https://cloudpartner.azure.com/#insights).
+AppSource URL 'nize parametreler ekleyerek, [bulut Iş ortağı portalındaki](https://cloudpartner.azure.com/#insights)analiz panosunda kampanyanızın verimliliğini gözden geçirebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Market GTM hizmetleri hakkında daha fazla bilgi için şuraya gidin [Go-to-market Hizmetleri](https://partner.microsoft.com/reach-customers/gtm).
+[Ticari Market avantajlarınız](https://docs.microsoft.com/azure/marketplace/gtm-your-marketplace-benefits)hakkında daha fazla bilgi edinin.
 
-Oturum [bulut iş ortağı portalı](https://cloudpartner.azure.com) oluşturmak ve teklifinizi yapılandırmak için.
+Teklifinizi oluşturmak ve yapılandırmak için [bulut iş ortağı portalı](https://cloudpartner.azure.com) oturum açın.
 
 ---

@@ -1,36 +1,36 @@
 ---
-title: 'Microsoft Genomiks: sorun giderme kılavuzu | Microsoft Docs'
-titleSuffix: Azure
-description: Sorun giderme stratejileri hakkında daha fazla bilgi edinin
+title: Sorun Giderme Kılavuzu
+titleSuffix: Microsoft Genomics
+description: Hata iletileri ve bunları çözme gibi Microsoft Genomiks kullanımı için sorun giderme stratejileri hakkında bilgi edinin.
 keywords: sorun giderme, hata, hata ayıklama
-services: microsoft-genomics
+services: genomics
 author: ruchir
 editor: jasonwhowell
 ms.author: ruchir
 ms.service: genomics
 ms.workload: genomics
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 10/29/2018
-ms.openlocfilehash: 78084e6beac7b390b1ea1afe888030c5224856b6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f6ef56e4188a7541036db096e4ab35a1b95fc141
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60790513"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73486006"
 ---
 # <a name="troubleshooting-guide"></a>Sorun giderme kılavuzu
 
-İşte birkaç MSGEN'i Microsoft Genomics hizmeti kullanırken karşılaştığınız yaygın sorunlardan bazılarını için sorun giderme ipuçları.
+Aşağıda, Microsoft Genomiks hizmeti, MSGEN kullanılırken olabilecek bazı yaygın sorunlardan bazıları için birkaç sorun giderme ipucu verilmiştir.
 
- Sorun giderme için ilgili olmayan SSS için [sık sorulan sorular](frequently-asked-questions-genomics.md).
-## <a name="step-1-locate-error-codes-associated-with-the-workflow"></a>1\. adım: İş akışı ile ilişkili hata kodları bulun
+ Sorun giderme hakkında bilgi için, bkz. [genel sorular](frequently-asked-questions-genomics.md).
+## <a name="step-1-locate-error-codes-associated-with-the-workflow"></a>1\. Adım: iş akışıyla ilişkili hata kodlarını bulma
 
-İş akışı tarafından ile ilişkili hata iletileri bulabilirsiniz:
+İş akışıyla ilişkili hata iletilerini şu şekilde bulabilirsiniz:
 
-1. Komut satırını kullanarak ve yazarak  `msgen status`
-2. Standardoutput.txt içeriğini inceleniyor.
+1. Komut satırını kullanma ve `msgen status` yazma
+2. StandardOutput. txt içeriğini İnceleme.
 
-### <a name="1-using-the-command-line-msgen-status"></a>1. Komut satırını kullanarak `msgen status`
+### <a name="1-using-the-command-line-msgen-status"></a>1. komut satırı `msgen status` kullanma
 
 ```bash
 msgen status -u URL -k KEY -w ID 
@@ -39,20 +39,20 @@ msgen status -u URL -k KEY -w ID
 
 
 
-Üç gerekli bağımsız değişkenleri şunlardır:
+Gerekli üç bağımsız değişken vardır:
 
-* Adresa URL – API için ana URI
-* ANAHTARI - Genomiks hesabı için erişim anahtarı
-    * URL'sini ve ANAHTARINI bulmak için Azure portalına gidin ve Microsoft Genomics hesap sayfanızı açın. Altında **Yönetim** başlığı seçin **erişim anahtarları**. Burada, hem API URL'sine ve erişim tuşlarınızı bulun.
+* URL-API için temel URI
+* ANAHTAR-Genomiks hesabınız için erişim anahtarı
+    * URL 'nizi ve ANAHTARıNıZı bulmak için Azure portal adresine gidin ve Microsoft Genomiks hesabınızı açın. **Yönetim** başlığı altında **erişim tuşları**' nı seçin. Burada, API URL 'SI ve erişim anahtarlarınız bulunur.
 
   
-* Kimliği - iş akışı kimliği
-    * İş akışı kimliği türünüz bulunacak `msgen list` komutu. Yapılandırma dosyanızı URL'si ve erişim tuşlarınızı içerir ve bulunduğu msgen'i exe dosyanızın ile aynı konumda olan komut şöyle görünür: 
+* KIMLIK-iş akışı KIMLIĞI
+    * `msgen list` komutunda iş akışı KIMLIK türünü bulmak için. Yapılandırma dosyanızın URL 'YI ve erişim anahtarlarınızı içerdiğini ve bulunduğu varsayılırsa, msgen 'i exe 'niz ile aynı konumda bulunur, komut şöyle görünür: 
         
         ```bash
         msgen list -f "config.txt"
         ```
-        Bu komutun çıktısı şuna benzeyecektir:
+        Bu komutun çıktısı şöyle görünür:
         
         ```bash
             Microsoft Genomics command-line client v0.7.4
@@ -74,73 +74,73 @@ msgen status -u URL -k KEY -w ID
         ```
 
   > [!NOTE]
-  >  Alternatif olarak, doğrudan URL'sini ve ANAHTARINI girmek yerine yapılandırma dosyasının yolu ekleyebilirsiniz. Yapılandırma dosyası yanı sıra komut satırında bu bağımsız değişkenler dahil ederseniz, komut satırı bağımsız değişkenleri öncelikli olur.  
+  >  Alternatif olarak, URL ve anahtarı doğrudan girmek yerine yapılandırma dosyasının yolunu dahil edebilirsiniz. Bu bağımsız değişkenleri komut satırına ve yapılandırma dosyasına eklerseniz, komut satırı bağımsız değişkenleri öncelikli olur.  
 
-İş akışı kimliği 1001 ve config.txt dosyasına msgen'i aynı yol yürütülebilir yerleştirilir, komut şöyle görünür:
+İş akışı KIMLIĞI 1001 ve config. txt dosyası msgen 'i yürütülebiliri ile aynı yola yerleştirildiğinde, komut şöyle görünür:
 
 ```bash
 msgen status -w 1001 -f "config.txt"
 ```
 
-### <a name="2--examine-the-contents-of-standardoutputtxt"></a>2.  Standardoutput.txt içeriğini inceleyin 
-Çıkış kapsayıcısı için söz konusu iş akışını bulun. MSGEN'i oluşturur `[workflowfilename].logs.zip` her iş akışı yürütme sonrasında klasör. Klasör içeriğini görüntülemek için sıkıştırmasını açın:
+### <a name="2--examine-the-contents-of-standardoutputtxt"></a>2. StandardOutput. txt içeriğini inceleyin 
+Söz konusu iş akışının çıkış kapsayıcısını bulun. MSGEN, her iş akışı yürütmeden sonra bir `[workflowfilename].logs.zip` klasörü oluşturur. İçeriğini görüntülemek için klasörü sıkıştırmayı açın:
 
-* outputFileList.txt - iş akışı sırasında oluşturulan çıktı dosyaları listesi
-* StandardError.txt - Bu dosya boş olur.
-* StandardOutput.txt - iş akışı çalıştırılırken oluşan hatalar dahil olmak üzere tüm üst düzey durum iletileri günlüğe kaydeder.
-* GATK günlük dosyalarını - diğer tüm dosyalarda `logs` klasörü
+* outputFileList. txt-iş akışı sırasında oluşturulan çıkış dosyalarının listesi
+* standartem. txt-Bu dosya boş.
+* StandardOutput. txt-iş akışı çalıştırılırken oluşan hatalar da dahil olmak üzere tüm üst düzey durum iletilerini günlüğe kaydeder.
+* GATK günlük dosyaları-`logs` klasördeki diğer tüm dosyalar
 
-Sorun giderme için standardoutput.txt içeriğini incelemek ve görünen herhangi bir hata iletisi dikkat edin.
+Sorun giderme için, StandardOutput. txt içeriğini inceleyin ve görüntülenen tüm hata iletilerini unutmayın.
 
 
-## <a name="step-2-try-recommended-steps-for-common-errors"></a>2\. adım: Sık karşılaşılan sorunlar için önerilen adımları deneyin
+## <a name="step-2-try-recommended-steps-for-common-errors"></a>2\. Adım: sık karşılaşılan hatalar için önerilen adımları deneyin
 
-Bu bölümde kısaca Microsoft Genomics hizmeti (msgen'i) ve bunları gidermek için kullanabileceğiniz stratejiler yaygın hataları çıkış vurgular. 
+Bu bölüm, Microsoft Genomiks hizmeti (msgen) tarafından karşılaşılan genel hataları ve bunları çözümlemek için kullanabileceğiniz stratejileri kısaca vurgular. 
 
-Microsoft Genomics hizmetine (msgen'i) hataları aşağıdaki iki tür durum oluşturabilir:
+Microsoft Genomiks hizmeti (msgen) aşağıdaki iki hata türünü oluşturabilir:
 
-1. İç hizmet hataları: Parametreleri veya giriş dosyaları düzelterek çözülebilir hizmete, iç hata. Bazen iş akışını yeniden göndermeyi bu hataları düzeltebilir.
-2. Giriş hataları: Doğru bağımsız değişkenleri kullanarak veya dosya biçimleri düzeltme çözülmüş hataları.
+1. İç hizmet hataları: parametreler veya giriş dosyaları düzeltilerek çözümlenemeyebilir, hizmette iç hatalar. Bazen iş akışını yeniden gönderme bu hataları çözebilir.
+2. Giriş hataları: doğru bağımsız değişkenler kullanılarak çözülebileceğiniz veya dosya biçimlerini düzelterek hatalar.
 
-### <a name="1-internal-service-errors"></a>1. İç hizmet hataları
+### <a name="1-internal-service-errors"></a>1. iç hizmet hataları
 
-Bir iç hizmet hatası kullanıcı eyleme dönüştürülebilir değil. İş akışını yeniden ancak bu işe yaramazsa, Microsoft Genomics desteğe başvurun.
+Bir Iç hizmet hatası kullanıcıya eylem uygulanabilir değil. İş akışını yeniden gönderebilirsiniz ancak bu işe çalışmazsa Microsoft Genomiks desteğiyle iletişim kurun
 
 | Hata iletisi                                                                                                                            | Önerilen sorun giderme adımları                                                                                                                                   |
 |------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Bir iç hata oluştu. İş akışını yeniden göndermeyi deneyin. Bu hata yeniden görürseniz, Yardım için Microsoft Genomiks desteğine başvurun. | İş akışını yeniden gönderin. Kişi Microsoft Genomics destek oluşturarak sorun devam ederse, Yardım için destek [bilet](file-support-ticket-genomics.md ). |
+| Bir iç hata oluştu. İş akışını yeniden göndermeyi deneyin. Bu hatayı bir daha görürseniz, yardım için Microsoft Genomiks desteğiyle iletişime geçin | İş akışını yeniden gönder. Bir destek [bileti](file-support-ticket-genomics.md )oluşturarak sorun devam ederse yardım Için Microsoft Genomiks desteğine başvurun. |
 
 ### <a name="2-input-errors"></a>2. Giriş hataları
 
-Bu eyleme dönüştürülebilir kullanıcı hatalardır. Dosya ve hata kodu türüne bağlı olarak, Microsoft Genomics hizmeti farklı hata kodları çıkarır. Aşağıda listelenen önerilen sorun giderme adımlarını izleyin.
+Bu hatalar Kullanıcı tarafından işlem yapılabilir. Dosya türüne ve hata koduna göre, Microsoft Genomiks hizmeti ayrı hata kodları verir. Aşağıda listelenen önerilen sorun giderme adımlarını izleyin.
 
 | Dosya türü | Hata kodu | Hata iletisi                                                                           | Önerilen sorun giderme adımları                                                                                         |
 |--------------|------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| Tüm          | 701        | Okuma [readId] [numberOfBases] tabanları var, ancak sınırı [maxReadLength]           | Bu hatanın en yaygın nedeni, iki okuma bir birleşimi için önde gelen dosyasının bozuk olmasıdır. Giriş dosyalarınızı denetleyin. |
-| BAM          | 200        |   '[YourFileName]' dosyası okunamıyor.                                                                                       | BAM dosyası biçimini denetleyin. İş akışı düzgün şekilde biçimlendirilmiş bir dosyayla yeniden gönderin.                                                                           |
-| BAM          | 201        |  [File_name] BAM dosyası okunamıyor.                                                                                      |BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                            |
-| BAM          | 202        | [File_name] BAM dosyası okunamıyor. Çok küçük ve eksik dosya üstbilgisi.                                                                                        | BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                            |
-| BAM          | 203        |   [File_name] BAM dosyası okunamıyor. Üstbilgi dosyası bozuktu.                                                                                      |BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                           |
-| BAM          | 204        |    [File_name] BAM dosyası okunamıyor. Üstbilgi dosyası bozuktu.                                                                                     | BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                           |
-| BAM          | 205        |    [File_name] BAM dosyası okunamıyor. Üstbilgi dosyası bozuktu.                                                                                     | BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                            |
-| BAM          | 206        |   [File_name] BAM dosyası okunamıyor. Üstbilgi dosyası bozuktu.                                                                                      | BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                            |
-| BAM          | 207        |  [File_name] BAM dosyası okunamıyor. Dosya uzaklığı [uzaklığı] kesildi.                                                                                       | BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                            |
-| BAM          | 208        |   BAM dosyası geçersiz. ReadID [Read_Id] [File_name] dosyasında hiçbir dizisi vardır.                                                                                      | BAM dosyası biçimini denetleyin.  İş akışı, doğru biçimlendirilmiş bir dosya ile gönderin.                                                                             |
-| FASTQ        | 300        |  FASTQ dosyası okunamıyor. [File_name] bir yeni satır ile sonlanmıyor.                                                                                     | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                           |
-| FASTQ        | 301        |   [File_name] FASTQ dosyası okunamıyor. FASTQ kaydıdır uzaklık arabellek boyutu büyüktür: [_offset]                                                                                      | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                         |
-| FASTQ        | 302        |     FASTQ söz dizimi hatası. Dosya [File_name] boş bir satır vardır.                                                                                    | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                         |
-| FASTQ        | 303        |       FASTQ söz dizimi hatası. [Dosya_adı] dosyasının uzaklığında geçersiz bir başlangıç karakter içeriyor: [_offset] satırdan: [line_type] karakter: [_char]                                                                                  | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                         |
-| FASTQ        | 304      |  [_ReadID] readID FASTQ sözdizimi hatası.  Toplu işin ilk okuma readID /1 [File_name] dosyasında sonu yok                                                                                       | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                         |
-| FASTQ        | 305        |  [_ReadID] readID FASTQ sözdizimi hatası. İkinci okuma batch readID [File_name] dosyasında /2 sonu yok                                                                                      | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                          |
-| FASTQ        | 306        |  [_ReadID] readID FASTQ sözdizimi hatası. Çiftin ilk okuma [File_name] dosyasında /1 biten bir Kimliğe sahip değil                                                                                       | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                          |
-| FASTQ        | 307        |   [_ReadID] readID FASTQ sözdizimi hatası. ReadID /1 ile bitmiyor veya / 2. [Dosya_adı] dosyasının bir eşleştirilmiş FASTQ dosyası olarak kullanılamaz.                                                                                      |FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                          |
-| FASTQ        | 308        |  FASTQ okuma hatası. Okuma ikisinde'nın farklı bir şekilde yanıt verdi. Doğru FASTQ dosyası seçtiğiniz?                                                                                       | FASTQ dosya biçimi düzeltin ve iş akışını yeniden gönderin.                                                                         |
+| Herhangi biri          | 701        | Read [Readıd], [Numberoftabansayısı] temellerine sahip ancak sınır [maxReadLength]           | Bu hatanın en yaygın nedeni, iki okuma birleştirmesi için dosya bozulması 'nın lideri olur. Giriş dosyalarınızı denetleyin. |
+| BAM          | 200        |   ' [YourFileName] ' dosyası okunamıyor.                                                                                       | Baa dosyasının biçimini denetleyin. Düzgün şekilde biçimlendirilen bir dosyayla iş akışını yeniden gönderebilirsiniz.                                                                           |
+| BAM          | 201        |  Bad dosyası [dosya_adı] okunamıyor.                                                                                      |Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                            |
+| BAM          | 202        | Bad dosyası [dosya_adı] okunamıyor. Dosya çok küçük ve üst bilgi eksik.                                                                                        | Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                            |
+| BAM          | 203        |   Bad dosyası [dosya_adı] okunamıyor. Dosya üstbilgisi bozuk.                                                                                      |Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                           |
+| BAM          | 204        |    Bad dosyası [dosya_adı] okunamıyor. Dosya üstbilgisi bozuk.                                                                                     | Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                           |
+| BAM          | 205        |    Bad dosyası [dosya_adı] okunamıyor. Dosya üstbilgisi bozuk.                                                                                     | Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                            |
+| BAM          | 206        |   Bad dosyası [dosya_adı] okunamıyor. Dosya üstbilgisi bozuk.                                                                                      | Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                            |
+| BAM          | 207        |  Bad dosyası [dosya_adı] okunamıyor. Dosya, [fark] yakınında kesildi.                                                                                       | Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                            |
+| BAM          | 208        |   Geçersiz Bad dosyası. Readıd [Read_Id], [dosya_adı] dosyasında sıraya sahip değil.                                                                                      | Baa dosyasının biçimini denetleyin.  Doğru biçimli bir dosyayla iş akışını gönder.                                                                             |
+| FASTQ        | 300        |  FASTQ dosyası okunamıyor. [Dosya_adı] bir yeni satır ile bitmiyor.                                                                                     | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                           |
+| FASTQ        | 301        |   FASTQ dosyası [dosya_adı] okunamıyor. FASTQ kaydı, uzaklığında arabellek boyutundan büyük: [_fark]                                                                                      | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                         |
+| FASTQ        | 302        |     FASTQ sözdizimi hatası. [Dosya_adı] dosyası boş bir satıra sahip.                                                                                    | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                         |
+| FASTQ        | 303        |       FASTQ sözdizimi hatası. [Dosya_adı] dosyasının uzaklığında geçersiz bir başlangıç karakteri vardır: [_uzaklığında], satır türü: [line_type], karakter: [_Char]                                                                                  | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                         |
+| FASTQ        | 304      |  FASTQ sözdizimi hatası: Readıd [_Readıd].  Toplu işin ilk okuışı, [dosya_adı] dosyasında/1 içinde hiç bitmedi.                                                                                       | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                         |
+| FASTQ        | 305        |  FASTQ sözdizimi hatası: Readıd [_Readıd]. Toplu işin ikinci okuışı dosyada/2 ' de bir                                                                                      | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                          |
+| FASTQ        | 306        |  FASTQ sözdizimi hatası: Readıd [_Readıd]. İkiliden ilk okuma, [dosya_adı] dosyasında/1 ile biten bir KIMLIĞE sahip değil                                                                                       | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                          |
+| FASTQ        | 307        |   FASTQ sözdizimi hatası: Readıd [_Readıd]. Readıd/1 veya/2 ile bitmedi. [Dosya_adı] dosyası eşleştirilmiş bir FASTQ dosyası olarak kullanılamaz.                                                                                      |FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                          |
+| FASTQ        | 308        |  FASTQ okuma hatası. Her iki ucu da farklı şekilde yanıt verdi. Doğru FASTQ dosyalarını mı seçdunuz?                                                                                       | FASTQ dosyasının biçimini düzeltip iş akışını yeniden gönderebilirsiniz.                                                                         |
 |        |       |                                                                                        |                                                                           |
 
-## <a name="step-3-contact-microsoft-genomics-support"></a>3\. adım: Microsoft Genomiks desteğe başvurun
+## <a name="step-3-contact-microsoft-genomics-support"></a>3\. Adım: Microsoft Genomiks desteğiyle Iletişim kurun
 
-İş hataları devam ederseniz veya diğer herhangi bir sorunuz varsa, Azure portalında Microsoft Genomiks desteğe başvurun. Bir destek talebi göndermek nasıl hakkında daha fazla bilgi bulunabilir [burada](file-support-ticket-genomics.md).
+İş hatalarıyla karşılaşmaya devam ederseniz veya başka sorularınız varsa, Azure portal Microsoft Genomiks desteğiyle iletişime geçin. Destek isteği gönderme hakkında daha fazla bilgi [burada](file-support-ticket-genomics.md)bulunabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, siz ve Microsoft Genomics hizmeti ile ilgili yaygın sorunları gidermek nasıl öğrendiniz. Daha fazla bilgi ve daha Genel SSS için bkz. [sık sorulan sorular](frequently-asked-questions-genomics.md). 
+Bu makalede, Microsoft Genomiks hizmetiyle ilgili sık karşılaşılan sorunları nasıl giderebileceğiniz ve giderebileceğiniz hakkında daha fazla öğrendiniz. Daha fazla bilgi ve genel SSS hakkında daha fazla bilgi için bkz. [genel sorular](frequently-asked-questions-genomics.md). 

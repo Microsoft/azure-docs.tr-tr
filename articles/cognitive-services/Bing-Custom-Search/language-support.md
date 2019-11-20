@@ -86,7 +86,7 @@ Kullanarak bir ülke/bölge belirtin `cc` sorgu parametresi. Bir ülke/bölge be
 |Finlandiya|Fince|FI-FI|
 |Fransa|Fransızca|fr-FR|
 |Almanya|Almanca|de-DE|
-|Hong Kong, SAR|Geleneksel Çince|zh-HK|
+|Hong Kong ÖİB|Geleneksel Çince|zh-HK|
 |Hindistan|Türkçe|tr-giriş|
 |Endonezya|Türkçe|tr kimliği|
 |İtalya|İtalyanca|İt-IT|

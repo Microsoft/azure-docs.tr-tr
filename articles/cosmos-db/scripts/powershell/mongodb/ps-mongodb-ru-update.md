@@ -1,19 +1,20 @@
 ---
-title: Azure PowerShell Betiği - MongoDB API'si için Azure Cosmos DB Update RU/sn
-description: Azure PowerShell Betiği - MongoDB API'si için Azure Cosmos DB Update RU/sn
+title: MongoDB API 'SI için Azure PowerShell betiği Azure Cosmos DB güncelleştirme RU/s
+description: MongoDB API 'SI için Azure PowerShell betiği Azure Cosmos DB güncelleştirme RU/s
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: samples
+ms.subservice: cosmosdb-mongo
+ms.topic: sample
 ms.date: 05/18/2019
 ms.author: mjbrown
-ms.openlocfilehash: 4fc8a8c8cc8e5d516ace4a1523a0d1845b6f7edf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d2dd99d5a5f1d0f03c5fe4980fde376ffdd55bca
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66247432"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71178824"
 ---
-# <a name="update-rus-for-a-database-or-collection-for-azure-cosmos-db---mongodb-api"></a>Bir veritabanı veya Azure Cosmos DB - MongoDB API'si için toplama güncelleştirme RU/sn
+# <a name="update-rus-for-a-database-or-collection-for-azure-cosmos-db---mongodb-api"></a>Azure Cosmos DB-MongoDB API 'si için bir veritabanı veya koleksiyon için RU/sn 'yi güncelleştirme
 
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
@@ -38,8 +39,8 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 |**Azure kaynakları**| |
-| [Yeni AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
-|**Azure kaynak grupları**| |
+| [New-AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
+|**Azure Kaynak grupları**| |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 |||
 

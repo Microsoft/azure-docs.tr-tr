@@ -1,142 +1,142 @@
 ---
-title: Birden çok kiracıyı destekleyen VMware VM'LERİNDE olağanüstü durum kurtarma için Azure (Azure Site Recovery kullanarak CSP) için genel bakış | Microsoft Docs
-description: Çok kiracılı ortam (CSP) programında azure'a VMWare olağanüstü durum kurtarma için Azure Site Recovery desteğine genel bakış sağlar.
+title: Azure Site Recovery ile VMware VM çok kiracılı olağanüstü durum kurtarma
+description: Çok kiracılı bir ortam (CSP) programında Azure 'a yönelik VMWare olağanüstü durum kurtarma desteğine yönelik Azure Site Recovery bir genel bakış sağlar.
 author: mayurigupta13
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/27/2018
 ms.author: mayg
-ms.openlocfilehash: d227b8d038dd686bde9b031ca2c58adc7dd6d76b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 840049265d3b6e4d2fddd794646bfd5691aab9a1
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60718130"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083985"
 ---
-# <a name="overview-of-multi-tenant-support-for-vmware-disaster-recovery-to-azure-with-csp"></a>VMware olağanüstü durum kurtarma için Azure CSP ile çok kiracılı desteği'ne genel bakış
+# <a name="overview-of-multi-tenant-support-for-vmware-disaster-recovery-to-azure-with-csp"></a>CSP ile Azure 'da VMware olağanüstü durum kurtarma için çok kiracılı desteğe genel bakış
 
-[Azure Site Recovery](site-recovery-overview.md) Kiracı abonelikler için çok kiracılı ortamlarını destekler. Oluşturulan ve Microsoft bulut çözümü sağlayıcısı (CSP) programı aracılığıyla yönetilen Kiracı abonelikler için çok kiracılı modeli de destekler.
+[Azure Site Recovery](site-recovery-overview.md) , kiracı abonelikleri için çok kiracılı ortamları destekler. Ayrıca, Microsoft Bulut çözümü sağlayıcısı (CSP) programı aracılığıyla oluşturulup yönetilen kiracı abonelikleri için çoklu kiracıyı destekler.
 
-Bu makalede, uygulama ve çok kiracılı Vmware'den Azure'a çoğaltma yönetmeye genel bakış sağlar.
+Bu makalede, çok kiracılı VMware 'yi Azure çoğaltmaya uygulama ve yönetmeye ilişkin bir genel bakış sunulmaktadır.
 
-## <a name="multi-tenant-environments"></a>Çok kiracılı ortamlarda
+## <a name="multi-tenant-environments"></a>Çok kiracılı ortamlar
 
-Üç ana çok kiracılı modeli vardır:
+Üç büyük çok kiracılı model vardır:
 
-* **Paylaşılan barındırma hizmet sağlayıcısı (HSP)** : İş ortağı fiziksel altyapı sahip ve aynı altyapıda paylaşılan kaynaklar (vCenter, veri merkezleri, fiziksel depolama alanı ve benzeri) birden çok Kiracı Vm'leri barındırmak için kullanır. İş ortağı, yönetilen bir hizmet olarak olağanüstü durum kurtarma Yönetimi sağlayabilir veya Kiracı Self Servis bir çözüm olarak olağanüstü durum kurtarma sahip olabilir.
+* **Paylaşılan barındırma hizmetleri sağlayıcısı (HSP)** : ortak fiziksel altyapıyı kullanır ve aynı altyapıda birden çok Kiracı VM barındırmak için paylaşılan kaynaklar (vCenter, datacenters, fiziksel depolama vb.) kullanır. Ortak, yönetilen bir hizmet olarak olağanüstü durum kurtarma yönetimi sağlayabilir veya kiracı bir self servis çözümü olarak olağanüstü durum kurtarma yapabilir.
 
-* **Barındırma hizmet sağlayıcısı adanmış**: İş ortağı fiziksel altyapı sahip, ancak ayrı bir altyapı üzerinde her bir kiracının sanal makineleri barındırmak için adanmış kaynaklar (birden çok vCenters, fiziksel veri depoları vb.) kullanır. İş ortağı, yönetilen bir hizmet olarak olağanüstü durum kurtarma Yönetimi sağlayabilir veya Kiracı Self Servis bir çözüm olarak bulunabilir.
+* **Adanmış barındırma hizmetleri sağlayıcısı**: iş ortağı fiziksel altyapıyı kullanır, ancak her kiracının sanal makinelerini ayrı bir altyapıda barındırmak için adanmış kaynakları (birden çok sanal ortalar, fiziksel veri depoları vb.) kullanır. Ortak, yönetilen bir hizmet olarak olağanüstü durum kurtarma yönetimi sağlayabilir veya kiracı bunu self servis çözümü olarak kullanabilir.
 
-* **Yönetilen Hizmetler Sağlayıcısı (MSP)** : Müşteri sanal makineleri barındıran fiziksel altyapı sahip olan ve iş ortağı olağanüstü durum kurtarma etkinleştirme ve yönetimi sağlar.
+* **Yönetilen hizmetler sağlayıcısı (MSP)** : müşteri, VM 'leri barındıran fiziksel altyapının sahibidir ve iş ortağı olağanüstü durum kurtarma etkinleştirme ve yönetimi sağlar.
 
-## <a name="shared-hosting-services-provider-hsp"></a>Paylaşılan barındırma hizmet sağlayıcısı (HSP)
+## <a name="shared-hosting-services-provider-hsp"></a>Paylaşılan barındırma hizmetleri sağlayıcısı (HSP)
 
-Diğer iki senaryo paylaşılan barındırma senaryo kümeleridir ve bunların aynı ilkeleri kullanın. Paylaşılan barındırma Kılavuzu sonunda farklar açıklanmaktadır.
+Diğer iki senaryo, paylaşılan barındırma senaryosunun alt kümeleridir ve aynı ilkeleri kullanır. Farklar, paylaşılan barındırma kılavuzunun sonunda açıklanmıştır.
 
-Temel bir çok kiracılı senaryosunda kiracılar yalıtılmış gereksinimidir. Bir kiracı ne, başka bir kiracıda barındırılan gözlemleyin olmamalıdır. İş ortağı tarafından yönetilen bir ortamda, bu gereksinim, burada kritik olabilir bir Self Servis ortamında olduğu gibi önemli değil. Bu makalede, Kiracı yalıtımı gerekli olduğunu varsayar.
+Çok kiracılı bir senaryoda temel gereksinim, kiracıların yalıtılmış olması gerekir. Bir kiracı, başka bir kiracının barındırıldığı şeyi gözlemlayamaz. İş ortağı tarafından yönetilen bir ortamda, bu gereksinim, bir self servis ortamında olduğu için önemli değildir ve burada önemli olabilir. Bu makalede, kiracı yalıtımının gerekli olduğu varsayılır.
 
-Aşağıdaki diyagramda mimari gösterilmektedir.
+Mimari aşağıdaki diyagramda gösterilmiştir.
 
 ![Bir vCenter ile paylaşılan HSP](./media/vmware-azure-multi-tenant-overview/shared-hosting-scenario.png)  
 
-**Paylaşılan barındırma bir vCenter sunucusu ile**
+**Bir vCenter Server ile paylaşılan barındırma**
 
-Diyagramda, her müşteri ayrı yönetim sunucusu vardır. Bu yapılandırma kiracıya özgü Vm'leri Kiracı erişimi sınırlar ve Kiracı yalıtımını etkinleştirir. VMware VM çoğaltma Vm'leri bulma ve aracıları yüklemek için yapılandırma sunucusunu kullanır. VCenter erişim denetimi kullanarak VM bulmayı sınırlandırma eklenmesi ile çok kiracılı ortamları için aynı ilkeler geçerlidir.
+Diyagramda, her müşterinin ayrı bir yönetim sunucusu vardır. Bu yapılandırma, kiracıya özgü VM 'lere kiracı erişimini kısıtlar ve kiracı yalıtımı sağlar. VMware VM çoğaltma, VM 'Leri bulacak ve aracıları yükleyecek yapılandırma sunucusunu kullanır. Aynı ilkeler, çok kiracılı ortamlar için, vCenter Access Control kullanılarak VM bulmayı kısıtlama eklenmesiyle de geçerlidir.
 
-Veri yalıtımı gereksinim tüm hassas altyapı bilgileri (örneğin, erişim kimlik bilgileri) kiracılara belirlenmemiş kaldığı anlamına gelir. Bu nedenle, tüm bileşenleri yönetim sunucusunun iş ortağı özel denetimi altında kalmasını öneririz. Yönetim sunucusu bileşenleri şunlardır:
+Veri yalıtımı gereksinimi, tüm hassas altyapı bilgilerinin (örneğin, erişim kimlik bilgileri) kiracıların açıklanmadığını ortadan kaldırmasıdır. Bu nedenle, yönetim sunucusu tüm bileşenlerinin iş ortağının özel denetimi altında kalmasını öneririz. Yönetim sunucusu bileşenleri şunlardır:
 
-* Yapılandırma sunucusu
+* Yapılandırma Sunucusu
 * İşlem sunucusu
-* Ana hedef sunucusu
+* Ana hedef sunucu
 
-Ayrı bir genişleme işlem sunucusu ayrıca iş ortağının altında denetimidir.
+Ayrı bir genişleme işlem sunucusu ayrıca iş ortağının denetimi altındadır.
 
-## <a name="configuration-server-accounts"></a>Configuration server hesapları
+## <a name="configuration-server-accounts"></a>Yapılandırma sunucusu hesapları
 
-Her yapılandırma sunucusu çoklu kiracı senaryosunda, iki hesap kullanır:
+Çoklu kiracı senaryosunda bulunan her yapılandırma sunucusu iki hesap kullanır:
 
-- **vCenter hesabının**: Bu hesap, Kiracı Vm'leri bulmak için kullanılır. Kendisine atanmış vCenter erişim izinleri var. Erişim sızıntılarını önlemeye yardımcı olmak için iş ortakları Yapılandırma Aracı'nda bu kimlik girin öneririz.
+- **vCenter erişim hesabı**: Bu hesap, Kiracı VM 'lerini saptamak için kullanılır. Kendisine atanmış vCenter erişim izinleri vardır. Erişim sızıntılarını önlemeye yardımcı olmak için iş ortaklarının bu kimlik bilgilerini yapılandırma aracında girmesini öneririz.
 
-- **Sanal makine erişim hesabı**: Bu hesap, Kiracı sanal makineleri, otomatik bir anında iletme ile Mobility hizmeti aracısı yüklemek için kullanılır. Genellikle, bir kiracı için bir iş ortağı sağlayabilir bir etki alanı hesabı veya iş ortağı doğrudan yönetebileceği bir hesabı olur. Bir kiracı ayrıntılarını iş ortağıyla doğrudan paylaşmak istediğiniz değil, sınırlı süreli erişim kimlik bilgilerini yapılandırma sunucusuna girebilirsiniz. Veya, iş ortağının yüklemişse, Mobility Hizmeti Aracısı el ile yükleyebilirsiniz.
+- **Sanal makine erişim hesabı**: Bu hesap, bir otomatik gönderim ile, Kiracı VM 'lerine Mobility hizmet Aracısı 'nı yüklemek için kullanılır. Genellikle bir kiracının iş ortağı tarafından sağlayabilecek bir etki alanı hesabı veya ortağın doğrudan yönetebileceği bir hesaptır. Bir kiracı, ayrıntıları iş ortağıyla doğrudan paylaşmak istemiyor, yapılandırma sunucusuna sınırlı süreli erişim yoluyla kimlik bilgilerini girebilirler. Ya da iş ortağının yardımı ile Mobility hizmeti aracısını el ile yükleyebilir.
 
 ## <a name="vcenter-account-requirements"></a>vCenter hesabı gereksinimleri
 
-Yapılandırma sunucusu, özel bir rol atanmış olan bir hesap ile yapılandırın.
+Yapılandırma sunucusunu, kendisine atanmış özel bir role sahip bir hesapla yapılandırın.
 
-- Rol ataması gerekir vCenter erişim hesabını her vCenter nesne için uygulanır ve yayılan alt nesneler için yok. Diğer nesnelere erişim yayma yanlışlıkla erişim sağladığından, bu yapılandırma Kiracı yalıtımı sağlar.
+- Rol atamasının her vCenter nesnesi için vCenter erişim hesabına uygulanması ve alt nesnelere yayılmaması gerekir. Bu yapılandırma, kiracı yalıtımı sağlar, çünkü erişim yayılması diğer nesnelere yanlışlıkla erişim elde edebilir.
 
-    ![Alt nesneleri seçeneği yay](./media/vmware-azure-multi-tenant-overview/assign-permissions-without-propagation.png)
+    ![Alt nesnelere yay seçeneği](./media/vmware-azure-multi-tenant-overview/assign-permissions-without-propagation.png)
 
-- Kullanıcı hesabı ve veri merkezi nesnesi rolü atayın ve bunları alt nesneleri yaymak için alternatif bir yaklaşım olan. Ardından hesabı verin bir **erişemez** rol (örneğin, diğer kiracılara ait VM'ler) her nesne için olması gereken belirli bir kiracıya erişilemez. Bu yapılandırma, yavaşlatan bir yöntemdir. Her yeni alt nesne da otomatik olarak bir üst nesneden devralındıysa erişim verilir çünkü yanlışlıkla erişim denetimlerini gösterir. Bu nedenle, bir ilk yaklaşım kullanmanızı öneririz.
+- Alternatif yaklaşım, veri merkezi nesnesine kullanıcı hesabı ve rolü atamak ve bunları alt nesnelere yaymalıdır. Ardından, belirli bir kiracıya erişilemeyen her nesne için hesaba **erişim** rolü (diğer kiracılara ait VM 'ler gibi) verin. Bu yapılandırma, kısaberbir yapılandırmadır. Her yeni alt nesneye Ayrıca otomatik olarak üst öğeden devralınan erişim verildiğinden, bu, yanlışlıkla erişim denetimleri sunar. Bu nedenle, ilk yaklaşımı kullanmanızı öneririz.
 
-### <a name="create-a-vcenter-account"></a>Bir vCenter hesabı oluşturun
+### <a name="create-a-vcenter-account"></a>VCenter hesabı oluşturma
 
-1. Önceden tanımlanmış kopyalayarak yeni bir rol oluşturmak *salt okunur* rolünü ve ardından (örneğin, bu örnekte gösterildiği gibi Azure_Site_Recovery) uygun bir ad verin.
-2. Bu rol için aşağıdaki izinler atayın:
+1. Önceden tanımlanmış *salt okunurdur* rolünü kopyalayarak yeni bir rol oluşturun ve ardından buna uygun bir ad verin (örneğin, bu örnekte gösterildiği gibi Azure_Site_Recovery).
+2. Bu role aşağıdaki izinleri atayın:
 
-   * **Veri deposu**: Ayırma boşluk, göz atma veri deposu, düşük düzeyli dosya işlemleri, dosya, sanal makine dosyalarını güncelleştirme Kaldır
-   * **Ağ**: Ağ atama
-   * **Kaynak**: VM güç VM geçişi, VM üzerinde desteklenen geçiş kaynak havuzuna atayın
-   * **Görevleri**: Görev, güncelleme görevi oluşturun
-   * **VM - yapılandırma**: Tümü
-   * **VM - etkileşim** > yanıt soru, cihaz bağlantısı, CD yapılandırma ortamı, disket ortamını yapılandırma, kapatma, açma, VMware araçlarını yükleme
-   * **VM - Envanter** > oluşturma varolandan Yeni Oluştur, kaydetme, kaydı kaldırma
-   * **VM - sağlama** > sanal makine indirmeye izin, izin sanal makine dosyalarını karşıya yükleme
-   * **VM - anlık görüntü Yönetimi** > anlık görüntüleri kaldırma
+   * **Veri deposu**: alan ayır, veri deposuna gözatmaya, alt düzey dosya işlemlerine, dosya kaldırma, sanal makine dosyalarını güncelleştirme
+   * **Ağ**: ağ atama
+   * **Kaynak**: VM 'yi kaynak havuzuna ata, sanal makineyi kapalı GEÇIR, VM 'ye geçiş yap
+   * **Görevler**: görev oluştur, görevi Güncelleştir
+   * **VM-yapılandırma**: tümü
+   * **VM-etkileşim** > Yanıt sorusu, cihaz BAĞLANTıSı, CD medyasını yapılandırma, disket medyasını yapılandırma, kapatma, açma, VMware araçları yüklemesi
+   * **VM-envanter** > Mevcut, yeni oluştur, Kaydet, kayıt Sil
+   * **VM-sağlama** > sanal makine Indirmesine izin ver, sanal makine dosyalarının karşıya yüklenmesine izin ver
+   * **VM-anlık görüntü yönetimi** > anlık görüntüleri kaldır
 
        ![Rolü Düzenle iletişim kutusu](./media/vmware-azure-multi-tenant-overview/edit-role-permissions.png)
 
-3. (Kiracı yapılandırma sunucusunda kullanılan) vCenter hesabı için erişim düzeyleri gibi çeşitli nesneler için ata:
+3. Çeşitli nesneler için aşağıdaki gibi, vCenter hesabına (kiracı yapılandırma sunucusunda kullanılır) erişim düzeyleri atayın:
 
->| Object | Rol | Açıklamalar |
+>| Nesne | Rol | Açıklamalar |
 >| --- | --- | --- |
->| vCenter | Salt okunur | Yalnızca farklı nesneleri yönetmek için vCenter erişime izin vermek gerekli. Tüm yönetim işlemleri vcenter için kullanılan veya hesabı bir kiracıya sağlanacak hiçbir zaman edecekse bu izni kaldırabilirsiniz. |
+>| vCenter | Salt okunurdur | Yalnızca farklı nesneleri yönetmek için vCenter erişimine izin vermek için gereklidir. Hesap hiçbir şekilde bir kiracıya sağlanmaması veya vCenter 'daki herhangi bir yönetim işlemi için kullanılması durumunda bu izni kaldırabilirsiniz. |
 >| Veri merkezi | Azure_Site_Recovery |  |
->| Konak ve konak kümesi | Azure_Site_Recovery | Böylece yalnızca erişilebilir ana Kiracı Vm'leri yük devretmeden önce ve sonra yeniden çalışma nesne düzeyinde erişim olmasını yeniden sağlar. |
->| Veri deposu ve veri deposu küme | Azure_Site_Recovery | Önceki aynıdır. |
+>| Konak ve konak kümesi | Azure_Site_Recovery | Erişim 'in, yük devretmeden önce ve yeniden çalışma sonrasında yalnızca erişilebilir ana bilgisayarların Kiracı VM 'Leri olması için, erişimin nesne düzeyinde olduğundan emin olur. |
+>| Veri deposu ve veri deposu kümesi | Azure_Site_Recovery | Önceki gibi. |
 >| Ağ | Azure_Site_Recovery |  |
->| Yönetim sunucusu | Azure_Site_Recovery | CS makine dışında tüm bileşenleri (CS, PS ve MT) erişimi içerir. |
->| Kiracı VM | Azure_Site_Recovery | Herhangi bir yeni Kiracı Vm'leri belirli bir kiracının aynı zamanda bu erişim elde veya bunlar Azure Portalı aracılığıyla bulunabilir olmayacaktır sağlar. |
+>| Yönetim sunucusu | Azure_Site_Recovery | CS makinesi dışındaki tüm bileşenlere (CS, PS ve MT) erişim içerir. |
+>| Kiracı VM 'Leri | Azure_Site_Recovery | Belirli bir kiracının tüm yeni kiracı VM 'lerinin de bu erişimi almasını sağlar veya Azure portal aracılığıyla keşfedilemez. |
 
-VCenter hesabı erişimi tamamlanmıştır. Bu adım, yeniden çalışma işlemlerini tamamlamak için en düşük izinlere gereksinimi karşılar. Bu izinler, mevcut ilkeleri ile de kullanabilirsiniz. Yalnızca mevcut izinlerinizi daha önce ayrıntılı rol izinleri, 2. adımda içerecek şekilde değiştirin.
+VCenter hesabı erişimi artık tamamlanmış. Bu adım, yeniden çalışma işlemlerini tamamlamaya yönelik en düşük izinler gereksinimini karşılar. Ayrıca, bu erişim izinlerini mevcut ilkelerinizle birlikte kullanabilirsiniz. Mevcut izinlerinizi, daha önce ayrıntılandırılan adım 2 ' den rol izinleri içerecek şekilde değiştirmeniz yeterlidir.
 
-### <a name="failover-only"></a>Yalnızca Yük devretme
-Yalnızca Yük devretme gönderinizi olağanüstü durum kurtarma işlemlerini kısıtlamak için (diğer bir deyişle, yeniden çalışma özellikleri olmadan), bu özel durumları ile önceki yordamı kullanın:
+### <a name="failover-only"></a>Yalnızca yük devretme
+Olağanüstü durum kurtarma işlemlerini yalnızca yük devretme yapılıncaya kadar (yani, yeniden çalışma özellikleri olmadan) kısıtlamak için, önceki yordamı aşağıdaki özel durumlarla kullanın:
 
-- Atama yerine *Azure_Site_Recovery* vCenter erişim hesabı rol atama yalnızca bir *salt okunur* bu hesaba rol. VM çoğaltma ve yük devretme bu izin kümesi sağlar ve yeniden çalışma izin vermiyor.
-- Önceki işlemin her şey, olduğu gibi kalır. Kiracı yalıtımı sağlamak ve VM bulma kısıtlamak için her izin hala yalnızca nesne düzeyinde atanmış olup yayılan alt nesneler için yok.
+- *Azure_Site_Recovery* rolünü vCenter erişim hesabına atamak yerine, bu hesaba yalnızca *salt okunurdur* bir rol atayın. Bu izin kümesi VM çoğaltma ve yük devretme işlemlerini sağlar ve yeniden çalışmaya izin vermez.
+- Önceki işlemdeki diğer her şey olduğu gibi kalır. Kiracı yalıtımı sağlamak ve VM bulmayı kısıtlamak için, her izin hala nesne düzeyinde atanır ve alt nesnelere yayılmaz.
 
-### <a name="deploy-resources-to-the-tenant-subscription"></a>Kiracı aboneliği için kaynakları dağıtma
+### <a name="deploy-resources-to-the-tenant-subscription"></a>Kaynakları kiracı aboneliğine dağıtma
 
-1. Azure portalında bir kaynak grubu oluşturun ve sonra bir kurtarma Hizmetleri kasası normal işlem başına dağıtın.
-2. Kasa kayıt anahtarını indir
-3. CS, Kiracı için kasa kayıt anahtarını kullanarak kaydedin.
-4. İki erişim hesapları, vCenter sunucusuna erişmek için hesabınız ve sanal Makineye erişmek için hesap kimlik bilgilerini girin.
+1. Azure portal, bir kaynak grubu oluşturun ve her zamanki işlem başına bir kurtarma hizmetleri Kasası dağıtın.
+2. Kasa kayıt anahtarını indirin.
+3. Kasa kayıt anahtarını kullanarak kiracı için CS 'yi kaydettirin.
+4. İki erişim hesabı için kimlik bilgilerini, vCenter sunucusuna erişmek için kullanılacak hesabı ve sanal makineye erişmek için hesabı girin.
 
-    ![Yönetici yapılandırması sunucu hesapları](./media/vmware-azure-multi-tenant-overview/config-server-account-display.png)
+    ![Yönetici yapılandırma sunucusu hesapları](./media/vmware-azure-multi-tenant-overview/config-server-account-display.png)
 
-### <a name="register-servers-in-the-vault"></a>Sunucuları kasaya kaydedin.
+### <a name="register-servers-in-the-vault"></a>Kasadaki sunucuları kaydetme
 
-1. Daha önce oluşturduğunuz kasa Azure portalında oluşturduğunuz vCenter hesabı kullanarak yapılandırma sunucusunu, vCenter Server'a kaydeder.
-2. "Altyapıyı Hazırlama" işlemi için Site Recovery normal işlemini tamamlayın.
-3. Sanal makinelerin çoğaltılması artık hazırsınız. Yalnızca kiracının sanal makineleri içinde görüntülendiğini doğrulayın **çoğaltmak** > **sanal makineleri**.
+1. Daha önce oluşturduğunuz kasadaki Azure portal, vCenter sunucusunu, oluşturduğunuz vCenter hesabını kullanarak yapılandırma sunucusuna kaydedin.
+2. Her zamanki işleme göre Site Recovery için "altyapıyı hazırla" işlemini sona erdirin.
+3. VM 'Ler artık çoğaltılmaya hazırdır. **Sanal makineler seçin** > **çoğaltma** ' da yalnızca kiracının VM 'lerinin görüntülendiğini doğrulayın.
 
-## <a name="dedicated-hosting-solution"></a>Ayrılmış barındırma çözümü
+## <a name="dedicated-hosting-solution"></a>Adanmış barındırma çözümü
 
-Aşağıdaki diyagramda gösterildiği gibi mimari, adanmış bir barındırma çözümü yalnızca bu Kiracı için her bir kiracının altyapı ayarlandığını farktır.
+Aşağıdaki diyagramda gösterildiği gibi, adanmış bir barındırma çözümünde mimari fark, her kiracının altyapısının yalnızca o kiracı için ayarlanansıdır.
 
-![Mimari paylaşılan hsp](./media/vmware-azure-multi-tenant-overview/dedicated-hosting-scenario.png)  
-**Birden çok vCenters ayrılmış barındırma senaryosunda**
+![mimarisi-paylaşılan-HSP](./media/vmware-azure-multi-tenant-overview/dedicated-hosting-scenario.png)  
+**Birden çok vCenter ile adanmış barındırma senaryosu**
 
 ## <a name="managed-service-solution"></a>Yönetilen hizmet çözümü
 
-Aşağıdaki diyagramda gösterildiği gibi yönetilen hizmet çözümü mimari fark her bir kiracının altyapısı ayrıca diğer kiracıların altyapısından ayrı fiziksel olmasıdır. Bu senaryo genellikle Kiracı altyapıya sahip ve istediği olağanüstü durum kurtarma yönetimi için bir çözüm sağlayıcısı yok.
+Aşağıdaki diyagramda gösterildiği gibi, yönetilen bir hizmet çözümünde mimari fark, her kiracının altyapısının diğer kiracıların altyapısından da fiziksel olarak ayrılması gerektiğidir. Bu senaryo genellikle kiracı altyapının sahibi olduğunda ve bir çözüm sağlayıcısının olağanüstü durum kurtarmayı yönetmesini istediğinde vardır.
 
-![Mimari paylaşılan hsp](./media/vmware-azure-multi-tenant-overview/managed-service-scenario.png)  
-**Birden çok vCenters hizmet senaryosuyla yönetilen**
+![mimarisi-paylaşılan-HSP](./media/vmware-azure-multi-tenant-overview/managed-service-scenario.png)  
+**Birden çok vCenter ile yönetilen hizmet senaryosu**
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Daha fazla bilgi edinin](site-recovery-role-based-linked-access-control.md) Site recovery'de rol tabanlı erişim denetimi ile ilgili.
-- Bilgi edinmek için nasıl [Azure'da VMware vm'lerinin olağanüstü durum kurtarma ayarlama](vmware-azure-tutorial.md).
-- Daha fazla bilgi edinin [VMWare Vm'leri için CSP ile çok kiracılı](vmware-azure-multi-tenant-csp-disaster-recovery.md).
+- Site Recovery ' de rol tabanlı erişim denetimi hakkında [daha fazla bilgi edinin](site-recovery-role-based-linked-access-control.md) .
+- [VMware VM 'Lerinin Azure 'a olağanüstü durum kurtarmayı ayarlamayı](vmware-azure-tutorial.md)öğrenin.
+- [VMware VM 'leri IÇIN CSP ile çoklu kiralama](vmware-azure-multi-tenant-csp-disaster-recovery.md)hakkında daha fazla bilgi edinin.

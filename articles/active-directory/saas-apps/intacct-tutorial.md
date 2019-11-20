@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile Intacct | Microsoft Docs'
-description: Azure Active Directory ve Intacct arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: bağlantı noktası \ bağlantı ile Azure Active Directory tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve, Ntakct arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -13,240 +13,218 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 03/14/2019
+ms.date: 08/12/2019
 ms.author: jeedes
-ms.openlocfilehash: 4a80d354e0aed1d12bc64c99242e818787e93344
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.collection: M365-identity-device-management
+ms.openlocfilehash: b28390dba009226d493f5bfc6a5270b067f5bba0
+ms.sourcegitcommit: 5d6c8231eba03b78277328619b027d6852d57520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67099950"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "73570533"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-intacct"></a>Öğretici: Intacct ile Azure Active Directory Tümleştirme
+# <a name="tutorial-integrate-sage-intacct-with-azure-active-directory"></a>Öğretici: Azure Active Directory ile yerleşik olarak tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Intacct tümleştirme konusunda bilgi edinin.
-Azure AD ile Intacct tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, u 'nin Azure Active Directory (Azure AD) ile nasıl tümleştirileceğini öğreneceksiniz. U 'nin Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Intacct erişimi, Azure AD'de kontrol edebilirsiniz.
-* Otomatik olarak (çoklu oturum açma) Intacct için kendi Azure AD hesapları ile oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de, o Taktacct erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla şirket içinde yerleşik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Azure AD Tümleştirmesi ile Intacct yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik Intacct çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* , Tek oturum açma (SSO) özellikli abonelik.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* Intacct destekler **IDP** tarafından başlatılan
+* Ise Intacct, **IDP** tarafından başlatılan SSO 'yu destekliyor
 
-## <a name="adding-intacct-from-the-gallery"></a>Galeriden Intacct ekleme
+## <a name="adding-sage-intacct-from-the-gallery"></a>Galeriden NtAcct ekleme
 
-Azure AD'de Intacct tümleştirmesini yapılandırmak için Intacct Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Nıntacct 'ın Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden, yönetilen SaaS uygulamaları listenize
 
-**Galeriden Intacct eklemek için aşağıdaki adımları gerçekleştirin:**
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **bağla Intacct** yazın.
+1. Sonuçlar panelinden, **It** ' i seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+## <a name="configure-and-test-azure-ad-single-sign-on-for-sage-intacct"></a>U NtAcct için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-    ![Azure Active Directory düğmesi](common/select-azuread.png)
+**B. Simon**adlı bir test kullanıcısı kullanarak, Azure AD SSO 'Yu, It Intacct ile yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ile bağlantılı Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+Azure AD SSO 'yu, It Intacct ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    1. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+    1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için, o **[Intacct SSO 'Yu yapılandırın](#configure-sage-intacct-sso)** .
+    1. Kullanıcının Azure AD gösterimine bağlı olan, nıntacct 'da B. Simon 'a sahip olmak için, o şirket içi **[test kullanıcısı oluşturun](#create-sage-intacct-test-user)** .
+6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-4. Arama kutusuna **Intacct**seçin **Intacct** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+1. [Azure Portal](https://portal.azure.com/), **yerleşik uygulama tümleştirmesi** sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-     ![Sonuç listesinde Intacct](common/search-new-app.png)
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+1. **Temel SAML yapılandırması** bölümünde, aşağıdaki alanlar için değerleri girin:
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma Intacct adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısının Intacct ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+    **Yanıt URL** 'si metin kutusuna bir URL yazın: `https://www.intacct.com/ia/acct/sso_response.phtml`
 
-Yapılandırma ve Azure AD çoklu oturum açma Intacct ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+1. E Intacct uygulaması, SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde SAML onayları bekliyor. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir. Kullanıcı öznitelikleri iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Intacct çoklu oturum açmayı yapılandırma](#configure-intacct-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Intacct test kullanıcısı oluşturma](#create-intacct-test-user)**  - kullanıcı Azure AD gösterimini bağlı Intacct Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+    ![image](common/edit-attribute.png)
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+1. Yukarıdaki ' a ek olarak, e Intacct uygulaması SAML yanıtına daha fazla özniteliğin geri geçirilmesini bekler. **Kullanıcı öznitelikleri** Iletişim kutusundaki **Kullanıcı talepleri** bölümünde AŞAĞıDAKI tabloda gösterildiği gibi SAML belirteci özniteliği eklemek için aşağıdaki adımları gerçekleştirin:
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+    | Ad  |  Kaynak özniteliği|
+    | ---------------| --------------- |
+    | Şirket Adı | **Şirket Içi şirket KIMLIĞI** |
+    | ad | Değer, öğreticide daha sonra **açıklanacak olan IT Intacct test kullanıcısına**girdiğiniz **nıntacct kullanıcı kimliğiyle**aynı olmalıdır |
+    | http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier | Değer, öğreticide daha sonra **açıklanacak olan yerleşik bir test kullanıcısı Oluştur bölümünde**girdiğiniz, yerleşik BIR **Federasyon SSO kullanıcı kimliğiyle**aynı olmalıdır |
 
-Azure AD çoklu oturum açma ile Intacct yapılandırmak için aşağıdaki adımları gerçekleştirin:
+    a. **Kullanıcı taleplerini Yönet** iletişim kutusunu açmak için **yeni talep Ekle** ' ye tıklayın.
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **Intacct** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+    b. **Ad** metin kutusuna, bu satır için gösterilen öznitelik adını yazın.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    c. **Ad alanını** boş bırakın.
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+    d. **Öznitelik**olarak kaynak seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    e. **Kaynak özniteliği** listesinde, bu satır için gösterilen öznitelik değerini yazın.
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+    f. **Tamam 'a** tıklayın
 
-    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
+    g. **Kaydet** düğmesine tıklayın.
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
-
-    ![Intacct etki alanı ve URL'ler tek oturum açma bilgileri](common/idp-reply.png)
-
-    İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:
-    | |
-    |--|
-    | `https://<companyname>.intacct.com/ia/acct/sso_response.phtml`|
-    | `https://www.intacct.com/ia/acct/sso_response.phtml` |
-
-    > [!NOTE]
-    > Değer, gerçek değil. Değerini gerçek yanıt URL'si ile güncelleştirin. İlgili kişi [Intacct istemci Destek ekibine](https://us.intacct.com/support) değeri alınamıyor. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
-
-5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama sertifikası** bölümünde **sertifika bulun (base64)** ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. Üzerinde **Intacct kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+1. J şirket içinde **Ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-    b. Azure AD Tanımlayıcısı
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-    c. Oturum Kapatma URL'si
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extensiongirin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**'a tıklayın.
 
-### <a name="configure-intacct-single-sign-on"></a>Intacct tek oturum açmayı yapılandırın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-1. Farklı bir web tarayıcı penceresinde Intacct şirketinizin sitesi için bir yönetici olarak oturum açın.
+Bu bölümde, B. Simon 'u, e-postayla erişim izni vererek Azure çoklu oturum açma özelliğini kullanacak şekilde etkinleştireceksiniz.
 
-1. Tıklayın **şirket** sekmesine ve ardından **şirket bilgisi**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **zu Intacct**' ı seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-    ![Şirket](./media/intacct-tutorial/ic790037.png "şirket")
+   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-1. Tıklayın **güvenlik** sekmesine ve ardından **Düzenle**.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![Güvenlik](./media/intacct-tutorial/ic790038.png "güvenlik")
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-1. İçinde **çoklu oturum açma (SSO)** bölümünde, aşağıdaki adımları gerçekleştirin:
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    ![Çoklu oturum](./media/intacct-tutorial/ic790039.png "tekli oturum")
+## <a name="configure-sage-intacct-sso"></a>Zu Intacct SSO 'yu yapılandırma
 
-    a. Seçin **etkinleştirme çoklu oturum açma**.
+1. Farklı bir Web tarayıcısı penceresinde, şirket içi şirket sitenizde yönetici olarak oturum açın.
 
-    b. Olarak **kimlik sağlayıcısı türü**seçin **SAML 2.0**.
+1. **Şirket** sekmesine tıklayın ve ardından **Şirket bilgileri**' ne tıklayın.
 
-    c. İçinde **veren URL'si** metin değerini yapıştırın **Azure Ad tanımlayıcısı** , Azure Portalı'ndan kopyaladığınız.
+    ![Şirket](./media/intacct-tutorial/ic790037.png "şirketi")
 
-    d. İçinde **oturum açma URL'si** metin değerini yapıştırın **oturum açma URL'si** , Azure Portalı'ndan kopyaladığınız.
+1. **Güvenlik** sekmesine tıklayın ve ardından **Düzenle**' ye tıklayın.
 
-    e. Açık, **base-64** kodlanmış sertifika Not Defteri'nde, içeriğini, panoya kopyalayın ve ardından ona yapıştırın **sertifika** kutusu.
+    ![Güvenlik](./media/intacct-tutorial/ic790038.png "güvenliği")
 
-    f. **Kaydet**’e tıklayın.
+1. **Çoklu oturum açma (SSO)** bölümünde aşağıdaki adımları uygulayın:
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+    ![Çoklu oturum]açma(./media/intacct-tutorial/ic790039.png "Çoklu oturum") açma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+    a. **Çoklu oturum açmayı etkinleştir '** i seçin.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+    b. **Kimlik sağlayıcısı türü**olarak **SAML 2,0**' i seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    c. **Veren URL** metin kutusuna, Azure Portal KOPYALADıĞıNıZ **Azure AD tanımlayıcısının**değerini yapıştırın.
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+    d. **Oturum açma URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si**değerini yapıştırın.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    e. **Base-64** kodlu sertifikanızı Not defteri 'nde açın, içeriğini panonuza kopyalayın ve ardından **sertifika** kutusuna yapıştırın.
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+    f. **Kaydet** düğmesine tıklayın.
 
-    ![Kullanıcı iletişim kutusu](common/user-properties.png)
+### <a name="create-sage-intacct-test-user"></a>It Intacct test kullanıcısı oluştur
 
-    a. İçinde **adı** alana **BrittaSimon**.
-  
-    b. İçinde **kullanıcı adı** alan türü **brittasimon@yourcompanydomain.extension**  
-    Örneğin, BrittaSimon@contoso.com
+Azure AD kullanıcılarını, o şekilde çalışır durumda oturum açabilirler. böylece, bu kişiler, It 'nin içine sağlanması gerekir. O Ntakct için, sağlama el ile gerçekleştirilen bir görevdir.
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+**Kullanıcı hesaplarını sağlamak için aşağıdaki adımları uygulayın:**
 
-    d. **Oluştur**’a tıklayın.
+1. E- **Tacct** kiracınızda oturum açın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+1. **Şirket** sekmesine tıklayın ve ardından **Kullanıcılar**' a tıklayın.
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için Intacct erişim vererek Britta Simon etkinleştirin.
+    ![Kullanıcı](./media/intacct-tutorial/ic790041.png "kullanıcıları")
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **Intacct**.
+1. **Ekle** sekmesine tıklayın.
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+    ![](./media/intacct-tutorial/ic790042.png "Ekle") Ekle
 
-2. Uygulamalar listesinde **Intacct**.
+1. **Kullanıcı bilgileri** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Uygulamalar listesinde Intacct bağlantı](common/all-applications.png)
+    ![Kullanıcı bilgileri](./media/intacct-tutorial/ic790043.png "Kullanıcı bilgileri")
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+    a. Kullanıcı **kimliği**, **Soyadı**, **adı, ad**, **e-posta adresi**, **başlık**ve **Kullanıcı bilgileri** bölümüne sağlamak istediğiniz bir Azure AD hesabının **telefonunu** girin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    > [!NOTE]
+    > Yukarıdaki ekran görüntüsünde **Kullanıcı kimliğinin** ve Azure Portal Içindeki **Kullanıcı öznitelikleri** bölümünde **ad** özniteliğiyle eşlenen **kaynak öznitelik** değerinin aynı olması gerekir.
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+    b. Sağlamak istediğiniz bir Azure AD hesabının **yönetici ayrıcalıklarını** seçin.
 
-    ![Atama Ekle bölmesi](common/add-assign-user.png)
+    c. **Kaydet** düğmesine tıklayın. 
+    
+    d. Azure AD hesap sahibi bir e-posta alır ve etkin hale gelmeden önce hesaplarını doğrulamak için bir bağlantıyı izler.
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+1. **Çoklu oturum açma** sekmesine tıklayın ve aşağıda yer alan **Federasyon SSO kullanıcı kimliğinin** ve Azure Portal içindeki **Kullanıcı öznitelikleri** bölümündeki `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier` eşlenen **kaynak öznitelik** değerinin aynı olması gerekir.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
-
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
-
-### <a name="create-intacct-test-user"></a>Intacct test kullanıcısı oluşturma
-
-Bunlar için Intacct oturum açabilmeniz Azure AD kullanıcıları ayarlamak için bunların Intacct sağlanması gerekir. Intacct için sağlama bir el ile gerçekleştirilen bir görevdir.
-
-**Kullanıcı hesapları sağlamak için aşağıdaki adımları gerçekleştirin:**
-
-1. Oturum açın, **Intacct** Kiracı.
-
-1. Tıklayın **şirket** sekmesine ve ardından **kullanıcılar**.
-
-    ![Kullanıcılar](./media/intacct-tutorial/ic790041.png "kullanıcılar")
-
-1. Tıklayın **Ekle** sekmesi.
-
-    ![Ekleme](./media/intacct-tutorial/ic790042.png "Ekle")
-
-1. İçinde **kullanıcı bilgilerini** bölümünde, aşağıdaki adımları gerçekleştirin:
-
-    ![Kullanıcı bilgilerini](./media/intacct-tutorial/ic790043.png "kullanıcı bilgileri")
-
-    a. Girin **kullanıcı kimliği**, **Soyadı**, **ad**, **e-posta adresi**, **başlık**ve **Telefon** zbilgisayarlar istediğiniz bir Azure AD hesabının **kullanıcı bilgilerini** bölümü.
-
-    b. Seçin **yönetici ayrıcalıkları** sağlamak istediğiniz bir Azure AD hesabı.
-
-    c. **Kaydet**’e tıklayın. Azure AD hesap sahibinin e-posta alır ve etkin hale gelir önce hesabını onaylamak için bir bağlantı izler.
+    ![Kullanıcı bilgileri](./media/intacct-tutorial/ic790044.png "Kullanıcı bilgileri")
 
 > [!NOTE]
-> Azure AD kullanıcı hesapları sağlamak için diğer Intacct kullanıcı hesabı oluşturma araçları veya Intacct tarafından sağlanan API'leri kullanabilirsiniz.
+> Azure AD Kullanıcı hesaplarını sağlamak için, diğer şirket Içi Kullanıcı hesabı oluşturma araçlarını veya,,, m/
 
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
+## <a name="test-sso"></a>Test SSO 'SU
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim paneli Intacct kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama Intacct için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde, bir e-nİç bağlantı kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız yerleşik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

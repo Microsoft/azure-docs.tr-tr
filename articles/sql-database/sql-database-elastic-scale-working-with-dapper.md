@@ -1,6 +1,6 @@
 ---
-title: Dapper ile esnek veritabanı istemci kitaplığını kullanma | Microsoft Docs
-description: Dapper ile esnek veritabanı istemci kitaplığı kullanılarak.
+title: Kaber ile elastik veritabanı istemci kitaplığı kullanma
+description: Kaber ile elastik veritabanı istemci kitaplığı kullanma.
 services: sql-database
 ms.service: sql-database
 ms.subservice: scale-out
@@ -10,58 +10,57 @@ ms.topic: conceptual
 author: stevestein
 ms.author: sstein
 ms.reviewer: ''
-manager: craigg
 ms.date: 12/04/2018
-ms.openlocfilehash: c6ca7637c8e251fa29781503ffc18227c51bb4da
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 83d24d45d7628a2e02068c8757fa6568d6d3fc37
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60335304"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823467"
 ---
-# <a name="using-elastic-database-client-library-with-dapper"></a>Dapper ile esnek veritabanı istemci kitaplığı kullanma
-Bu belge uygulamalar üzerinde Dapper kullanır ancak ayrıca Kucak isteyen geliştiricilere yöneliktir [esnek veritabanı araçları](sql-database-elastic-scale-introduction.md) kendi veri katmanı genişletmek için bu uygulama parçalama uygulamalar oluşturmak için.  Bu belge Dapper tabanlı uygulamalar, elastik veritabanı araçları ile tümleştirme gereken değişiklikler gösterilmektedir. Elastik veritabanı parça yönetimi ve Dapper ile verilere bağımlı yönlendirme buradaki kazanmasının olur. 
+# <a name="using-elastic-database-client-library-with-dapper"></a>Kaber ile elastik veritabanı istemci kitaplığı kullanma
+Bu belge, uygulamalar oluşturmak için daber 'yi kullanan geliştiricilere yöneliktir, ancak aynı zamanda veri katmanını ölçeklendirmek için parçalara ayırma uygulayan uygulamalar oluşturmak üzere [elastik veritabanı](sql-database-elastic-scale-introduction.md) araçlarını benimseyin.  Bu belge, elastik veritabanı araçlarıyla tümleştirme için gerekli olan paber tabanlı uygulamalardaki değişiklikleri gösterir. Odaklanmamız, elastik veritabanı oluşturma yönetimini ve veri odaklı yönlendirmeyi kaber ile oluşturmaya yönelik. 
 
-**Örnek kod**: [Azure SQL veritabanı - Dapper tümleştirme için esnek veritabanı araçlarını](https://code.msdn.microsoft.com/Elastic-Scale-with-Azure-e19fc77f).
+**Örnek kod**: [Azure SQL veritabanı için elastik veritabanı araçları-paber tümleştirmesi](https://code.msdn.microsoft.com/Elastic-Scale-with-Azure-e19fc77f).
 
-Tümleştirme **Dapper** ve **DapperExtensions** ile esnek veritabanı istemci kitaplığı Azure SQL veritabanı için kolaydır. Uygulamalarınızı oluşturma değiştirme ve, yeni açarak verilere bağımlı yönlendirme kullanabilirsiniz [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) nesneleri [OpenConnectionForKey](https://msdn.microsoft.com/library/azure/dn807226.aspx) çağırmanıza [istemci kitaplığı ](https://msdn.microsoft.com/library/azure/dn765902.aspx). Yeni bir bağlantı oluşturulur ve açık olduğunda bu yalnızca uygulamanızdaki değişiklikleri sınırlar. 
+Azure SQL veritabanı için elastik veritabanı istemci kitaplığı ile **daber** ve **dapperextensions** 'ın tümleştirilmesi kolaydır. Uygulamalarınız, yeni [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) nesnelerinin oluşturulmasını ve açılmasını, [Istemci kitaplığından](https://msdn.microsoft.com/library/azure/dn765902.aspx) [openconnectionforkey](https://msdn.microsoft.com/library/azure/dn807226.aspx) çağrısını kullanacak şekilde değiştirerek veriye bağlı yönlendirmeyi kullanabilir. Bu, uygulamanızdaki değişiklikleri yalnızca yeni bağlantıların oluşturulduğu ve açıldığı yerde sınırlandırır. 
 
-## <a name="dapper-overview"></a>Dapper genel bakış
-**Dapper** bir nesne-ilişkisel eşleyicisidir. Bu, .NET nesnelerini ilişkisel veritabanına (ve tersi) uygulamanızın eşler. Elastik veritabanı istemci kitaplığı nasıl Dapper tabanlı uygulamalarıyla tümleştirebilirsiniz örnek kodun ilk bölümünü göstermektedir. Örnek kodu ikinci bölümü, hem Dapper hem de DapperExtensions kullanırken tümleştirmek gösterilmektedir.  
+## <a name="dapper-overview"></a>Kaber genel bakış
+**Kaber** , nesne ilişkisel bir eşleştiricisidir. Uygulamanızdaki .NET nesnelerini bir ilişkisel veritabanına (ve tam tersi) eşler. Örnek kodun ilk bölümü, esnek veritabanı istemci kitaplığını, paber tabanlı uygulamalarla nasıl tümleştirebileceğinizi gösterir. Örnek kodun ikinci bölümü, hem daber hem de DapperExtensions kullanılırken nasıl tümleştirileceğini gösterir.  
 
-Dapper Eşleyici İşlevler, yürütme veya veritabanını sorgulama için gönderen T-SQL bildirimleri basitleştirin, veritabanı bağlantıları üzerinde genişletme yöntemleri sağlar. Örneğin Dapper .NET nesnelerinizi ve parametreler için SQL deyimlerinin arasında eşleme kolaylaştırır **yürütme** çağrıları, veya .NET nesneleri kullanarak sonuçları SQL sorgularınızı tüketmeye **sorgu** Dapper gelen çağrıları. 
+Paber 'deki Eşleyici işlevselliği, yürütme veya veritabanını sorgulama için T-SQL deyimlerinin gönderilmesini kolaylaştıran Veritabanı bağlantılarında uzantı yöntemleri sağlar. Örneğin, Korber, **yürütme** çağrıları için .net nesneleriniz ile SQL deyimlerinin parametreleri arasında eşlemeyi kolaylaştırır veya katin **sorgu** çağrılarını kullanarak SQL sorgularınızın sonuçlarını .net Objects 'e tüketebilir. 
 
-DapperExtensions kullanırken, artık SQL deyimlerini sağlamanız gerekir. Uzantı yöntemleri gibi **GetList** veya **Ekle** veritabanı bağlantısı üzerinden arka planda SQL deyimleri oluşturma.
+DapperExtensions kullanırken, artık SQL deyimlerini sağlamanız gerekmez. {1 & gt; veritabanı & lt; 1} **bağlantı gibi uzantılar** Yöntemler arka planda SQL deyimlerini oluşturur.
 
-Dapper hem de DapperExtensions başka bir avantajı, uygulama veritabanı bağlantısı oluşturulmasını denetleyen içindir. Bu aracıları veritabanı bağlantıları parçacıklara veritabanlarına eşleme temel esnek veritabanı istemci kitaplığı ile etkileşime yardımcı olur.
+Daber ve ayrıca Daperextensions 'ın başka bir avantajı da uygulamanın veritabanı bağlantısı oluşturulmasını denetliyorsa. Bu, veritabanı bağlantılarını, veritabanlarının veritabanlarına yönelik olarak eşleşmesini temel alan elastik veritabanı istemci kitaplığıyla etkileşime geçmesini sağlar.
 
-Dapper derlemeleri almak için bkz. [Dapper dot net](https://www.nuget.org/packages/Dapper/). Dapper uzantıları için bkz: [DapperExtensions](https://www.nuget.org/packages/DapperExtensions).
+Kaber derlemelerini almak için bkz. [PBER dot net](https://www.nuget.org/packages/Dapper/). Daber uzantıları için bkz. [Dapperextensions](https://www.nuget.org/packages/DapperExtensions).
 
-## <a name="a-quick-look-at-the-elastic-database-client-library"></a>Elastik veritabanı istemci kitaplığı hızlı bir bakış
-Elastik veritabanı istemci kitaplığı ile uygulama verilerinizi adlı bölümlerini tanımladığınız *parçacıklara*, bunları veritabanlarıyla eşleyin ve onlar tarafından belirleme *parçalama anahtarları*. Gerekir ve bu veritabanları arasında parçacıklara dağıtmak kadar veritabanı olabilir. Parçalama anahtarı değerleri veritabanlarına eşleme kitaplığın API'leri tarafından sağlanan bir parça eşlemesi tarafından depolanır. Bu özellik adında **parça eşleme Yönetimi**. Parça eşlemesi, ayrıca bir parçalama anahtarı taşıma istekler için veritabanı bağlantı aracısı olarak işlev görür. Bu özellik olarak adlandırılır **verilere bağımlı yönlendirme**.
+## <a name="a-quick-look-at-the-elastic-database-client-library"></a>Elastik veritabanı istemci kitaplığına hızlı bakış
+Elastik veritabanı istemci kitaplığı ile, uygulama verilerinizin parçalarını *parçalarım*olarak tanımlar, bunları veritabanlarına eşleyin ve bunları *parçalara*ayırarak belirleyin. İhtiyacınız olan çok sayıda veritabanınız olabilir ve bu veritabanlarına ait kıardlarınızı dağıtabilirsiniz. Parçalı anahtar değerlerini veritabanlarına eşleme, kitaplığın API 'Leri tarafından sunulan bir parça eşlemesi tarafından depolanır. Bu yetenek, parça **eşleme yönetimi**olarak adlandırılır. Parça eşleme aynı zamanda bir parçalama anahtarı taşıyan istekler için veritabanı bağlantıları Aracısı olarak da kullanılır. Bu yetenek, **verilere bağımlı yönlendirme**olarak adlandırılır.
 
-![Parça eşlemeleri ve verilere bağımlı yönlendirme][1]
+![Parça haritaları ve verilere bağımlı yönlendirme][1]
 
-Parça eşleme Yöneticisi kullanıcı veritabanlarında eşzamanlı parçacık yönetim işlemlerini olay meydana gelir gerektiğinde oluşabilecek parçacık verilerin tutarsız görünümleri korur. Bunu yapmak için veritabanı bağlantıları kitaplığı ile oluşturulmuş bir uygulama için parça eşlemesi aracı. Parça yönetim işlemlerini parçacık etkileyebilir, bu bir veritabanı bağlantısı otomatik olarak sonlandırmak parça Haritası işlevini sağlar. 
+Parça eşleme Yöneticisi, kullanıcıların eş zamanlı kıardalım yönetim işlemleri veritabanlarında meydana gelen verileri tutarsız görünümlerden, parçalı verilerle korur. Bunu yapmak için, parça haritaları, kitaplıkla oluşturulmuş bir uygulama için veritabanı bağlantılarını Broker. Parça yönetimi işlemleri, parçalamayı etkileyebilecek şekilde, parça eşleme işlevinin bir veritabanı bağlantısını otomatik olarak sonlandırmasına olanak tanır. 
 
-Dapper için bağlantılar oluşturmak için geleneksel biçimini kullanmak yerine, kullanmanız gereken [OpenConnectionForKey yöntemi](https://msdn.microsoft.com/library/azure/dn824099.aspx). Bu, tüm doğrulama gerçekleşir ve verileri parçalar arasında taşındığında bağlantılar düzgün bir şekilde yönetilir sağlar.
+Kaber için bağlantı oluşturmanın geleneksel yolunu kullanmak yerine, [Openconnectionforkey yöntemini](https://msdn.microsoft.com/library/azure/dn824099.aspx)kullanmanız gerekir. Bu, tüm doğrulamanın gerçekleşmesini ve parçaların arasında herhangi bir veri taşındığı zaman bağlantıların doğru yönetilmesini sağlar.
 
-### <a name="requirements-for-dapper-integration"></a>Dapper tümleştirme gereksinimleri
-Elastik veritabanı istemci kitaplığı ve Dapper API'leri ile çalışırken, aşağıdaki özellikleri korumak istediğiniz:
+### <a name="requirements-for-dapper-integration"></a>Kaber tümleştirmesi için gereksinimler
+Hem elastik veritabanı istemci kitaplığı hem de kaber API 'Leri ile çalışırken, aşağıdaki özellikleri sürdürmek istersiniz:
 
-* **Ölçeği genişletme**: Veritabanları kapasite gereksinimlerini karşılamak için gerektiği şekilde parçalı uygulama uygulamanın veri katmanından ekleyip istiyoruz. 
-* **Tutarlılık**: Parçalama kullanarak uygulama ölçeklendirilir, verilere bağımlı yönlendirme gerçekleştirmek gerekir. Bunu yapmak için kitaplık verilere bağımlı yönlendirme yeteneklerini kullanılacak istiyoruz. Özellikle, doğrulama saklamak istediğiniz ve parça eşleme Yöneticisi Bozulması veya yanlış sorgu sonuçları önlemek için aracılı bağlantılar tarafından sağlanan tutarlılığını garanti eder. Bu, belirli bir parçacık bağlantı reddedildi veya (örneğin) bir parçacık ayırma/birleştirme API'lerini kullanarak farklı bir parçaya şu anda taşınırsa durduruldu sağlar.
-* **Eşleme nesnesi**: Dapper uygulama sınıfları ve temel alınan veritabanı yapılarını arasında çeviri yapmak için sağladığı eşlemeleri kolaylık elde tutmak istiyoruz. 
+* **Ölçeği genişletme**: uygulamanın kapasite taleplerini için gereken şekilde, parçalı uygulamanın veri katmanında veritabanı eklemek veya kaldırmak istiyoruz. 
+* **Tutarlılık**: uygulama parçalama kullanılarak azaltıldığından, verilere bağımlı yönlendirme yapmanız gerekir. Bunu yapmak için kitaplığın veriye bağımlı yönlendirme özelliklerini kullanmak istiyoruz. Özellikle, bozulmaları veya yanlış sorgu sonuçlarının olmaması için parça eşleme Yöneticisi aracılığıyla aracılı bağlantılar tarafından sunulan doğrulama ve tutarlılık garantilerini sürdürmek istiyorsunuz. Bu, (örneğin), parça/birleştirme API 'Leri kullanılarak parçalanan farklı bir parçaya taşınabilmesi durumunda belirli bir parçalanmaya yönelik bağlantıların reddedildiğini veya durdurulmasını sağlar.
+* **Nesne eşleme**: uygulamadaki sınıflar ve temel alınan veritabanı yapıları arasında çeviri yapmak Için daber tarafından sunulan eşlemelerin rahatlığını sürdürmek istiyoruz. 
 
-Aşağıdaki bölümde dayalı uygulamalar için bu gereksinimleri yönelik yönergeler sağlanmaktadır **Dapper** ve **DapperExtensions**.
+Aşağıdaki bölümde, **daber** ve **dapperextensions**tabanlı uygulamalar için bu gereksinimlere yönelik yönergeler sağlanmaktadır.
 
-## <a name="technical-guidance"></a>Teknik rehberlik
-### <a name="data-dependent-routing-with-dapper"></a>Dapper ile verilere bağımlı yönlendirme
-Dapper ile uygulama oluşturmayı ve temel alınan veritabanı bağlantılarını açmak için genelde sorumludur. .NET koleksiyonlarına türü t Dapper gerçekleştirir eşleme T-SQL sonuç sütunları t türü nesneler için uygulama tarafından belirli bir türe T, Dapper sorgu sonuçlarını döndürür Benzer şekilde, Dapper .NET nesnelerini SQL değerleri veya veri işleme dili (DML) deyimleri için parametreleri eşler. Dapper normal üzerinde genişletme yöntemleri aracılığıyla bu işlevselliği sunar [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) ADO .NET SQL istemci kitaplıklarından nesne. DDR için esnek ölçeklendirme API'leri tarafından döndürülen SQL bağlantısı normal ayrıca [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) nesneleri. Bu basit bir SQL istemcisi bağlantı de olduğu gibi doğrudan Dapper uzantıları üzerinden istemci kitaplığının DDR API'si tarafından döndürülen tür kullanacak olanak tanır.
+## <a name="technical-guidance"></a>Teknik kılavuz
+### <a name="data-dependent-routing-with-dapper"></a>Kaber ile verilere bağımlı yönlendirme
+Kaber ile uygulama genellikle temel alınan veritabanına yönelik bağlantıları oluşturup açmaktan sorumludur. Uygulama tarafından bir tür T verildiğinde, Korber sorgu sonuçlarını T türünde .NET koleksiyonları olarak döndürüyor. Davber, t-SQL sonuç satırlarından t türünde nesnelere eşleme yapar. Benzer şekilde, Davber .NET nesnelerini SQL değerlerine veya veri işleme dili (DML) ifadelerine yönelik parametrelere eşler. Kaber, ADO .NET SQL Istemci kitaplıklarından normal [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) nesnesindeki genişletme yöntemleri aracılığıyla bu işlevselliği sunar. DDR için elastik ölçek API 'Leri tarafından döndürülen SQL bağlantısı da normal [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) nesneleridir. Bu, aynı zamanda basit bir SQL Istemci bağlantısı olduğundan, istemci kitaplığının DDR API 'SI tarafından döndürülen tür üzerinde doğrudan paber uzantılarını kullanmamızı sağlar.
 
-Bu gözlemler kullanımı için Dapper ile esnek veritabanı istemci kitaplığı aracılı kolay olun.
+Bu gözlemler, paber için elastik veritabanı istemci kitaplığı tarafından aracılı bağlantıları kullanmayı kolaylaştırır.
 
-Bu kod örneği (eşlik eden örnekten) burada parçalama anahtarı doğru parçaya Bağlantı Aracısı için uygulama kitaplığı tarafından sağlanan yaklaşımı da gösterir.   
+Bu kod örneği (eşlik eden örnekten), sağ parça bağlantısını aracıya bağlamak için, uygulama tarafından, uygulamanın, parçalara ayırma anahtarının sağlandığı yaklaşımı gösterir.   
 
     using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
                      key: tenantId1,
@@ -76,15 +75,15 @@ Bu kod örneği (eşlik eden örnekten) burada parçalama anahtarı doğru parç
                         );
     }
 
-Çağrı [OpenConnectionForKey](https://msdn.microsoft.com/library/azure/dn807226.aspx) API, varsayılan oluşturma ve SQL istemci bağlantısı açılırken değiştirir. [OpenConnectionForKey](https://msdn.microsoft.com/library/azure/dn807226.aspx) çağrı verilere bağımlı yönlendirme için gerekli olan bağımsız değişkenleri alır: 
+[Openconnectionforkey](https://msdn.microsoft.com/library/azure/dn807226.aspx) API 'sine yapılan çağrı, bir SQL istemci bağlantısının varsayılan oluşturma ve açma işlemini değiştirir. [Openconnectionforkey](https://msdn.microsoft.com/library/azure/dn807226.aspx) çağrısı, verilere bağımlı yönlendirme için gerekli olan bağımsız değişkenleri alır: 
 
-* Verilere bağımlı yönlendirme erişmek için parça eşlemesi arabirimleri
-* Parçalama anahtarı parçacık tanımlamak için
-* Kimlik bilgilerini (kullanıcı adı ve parola) parçaya bağlanma
+* Veri bağımlı yönlendirme arabirimlerine erişim için parça eşlemesi
+* Parçalama anahtarı, kıardlet 'yi belirlemek için
+* Parçaya bağlanmak için kimlik bilgileri (Kullanıcı adı ve parola)
 
-Parça eşleme nesnesi belirtilen parçalama anahtarı için parçacık tutan parça bir bağlantı oluşturur. Elastik veritabanı istemci API'leri Ayrıca kendi tutarlılık garantisi uygulamak için bağlantı etiketi. Çağrısından sonra [OpenConnectionForKey](https://msdn.microsoft.com/library/azure/dn807226.aspx) normal SQL istemci bağlantı nesnesi, sonraki çağrı döndürür **yürütme** Dapper şuradan genişleme metodu standart Dapper uygulama izler.
+Parça eşleme nesnesi, verilen parçalı anahtar için parçalama ile aynı parçayı tutan bir bağlantı oluşturur. Elastik veritabanı istemci API 'Leri, tutarlılık garantilerini uygulamak için bağlantıyı etiketleyebilir. [Openconnectionforkey](https://msdn.microsoft.com/library/azure/dn807226.aspx) çağrısı normal bir SQL istemci bağlantı nesnesi döndürdüğünden, bir sonraki yöntemden **Execute** genişletme yöntemine yapılan çağrı standart kaber uygulamasını izler.
 
-Sorguları hemen hemen aynı şekilde çalışır - ilk bağlantıyı kullanarak açmak [OpenConnectionForKey](https://msdn.microsoft.com/library/azure/dn807226.aspx) istemci API'si. Ardından .NET nesnelerini SQL Sorgunuzun sonuçlarını eşleştirmek için normal Dapper genişletme yöntemleri kullanın:
+Sorgular çok çok aynı şekilde çalışır. ilk önce bağlantıyı istemci API 'sinden [Openconnectionforkey](https://msdn.microsoft.com/library/azure/dn807226.aspx) kullanarak açarsınız. Daha sonra, SQL sorgunuzun sonuçlarını .NET nesneleriyle eşlemek için normal kaber uzantı yöntemlerini kullanın:
 
     using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
                     key: tenantId1,
@@ -104,12 +103,12 @@ Sorguları hemen hemen aynı şekilde çalışır - ilk bağlantıyı kullanarak
             }
     }
 
-Unutmayın **kullanarak** DDR bağlantı kapsamlarla tenantId1 nerede tutulur bir parçaya bloğu içinde tüm veritabanı işlemleri engelleyin. Sorgu, geçerli parça üzerinde depolanan blogları, ancak başka bir parça üzerinde depolanan olanları değil yalnızca döndürür. 
+DDR bağlantısı olan **using** bloğunun, blok içindeki tüm veritabanı Işlemlerini, tenantId1 'in tutulduğu bir parçaya kadar bir parçadır. Sorgu yalnızca geçerli parça üzerinde depolanan blogları döndürür, ancak diğer parçalara depolanamazlar. 
 
-## <a name="data-dependent-routing-with-dapper-and-dapperextensions"></a>Dapper ile DapperExtensions verilere bağımlı yönlendirme
-Dapper bir veritabanı uygulamaları geliştirirken daha kullanışlı ve veritabanından Özet sağlayan ek uzantı ekosistemi ile birlikte gelir. DapperExtensions örneğidir. 
+## <a name="data-dependent-routing-with-dapper-and-dapperextensions"></a>Daber ve DapperExtensions ile verilere bağımlı yönlendirme
+Kaber, veritabanı uygulamaları geliştirirken veritabanına daha kolay ve soyutlama sağlayan ek uzantıların bir ekosistemiyle gelir. DapperExtensions bir örnektir. 
 
-Uygulamanızda DapperExtensions kullanarak veritabanı bağlantıları nasıl oluşturulduğunu ve yönetilen değiştirmez. Bunu hala bağlantıları uygulamanın sorumluluğundadır ve normal SQL istemci bağlantı nesneleri genişletme yöntemleri tarafından beklenir. Bağımlı olduğumuz [OpenConnectionForKey](https://msdn.microsoft.com/library/azure/dn807226.aspx) yukarıda ana hatlarıyla. Aşağıdaki kod örnekleri gösterdiği gibi tek değişiklik, artık T-SQL deyimleri yazmanıza olmasıdır:
+Uygulamanızda Daperextensions kullanılması, veritabanı bağlantılarının oluşturulma ve yönetilme şeklini değiştirmez. Uygulamanın bağlantıları açma sorumluluğu hala vardır ve uzantı yöntemleri tarafından düzenli SQL Istemci bağlantısı nesneleri beklenmektedir. Yukarıda özetlenen [Openconnectionforkey](https://msdn.microsoft.com/library/azure/dn807226.aspx) öğesine güvenebiliriz. Aşağıdaki kod örnekleri de gösterildiği gibi tek değişiklik, artık T-SQL deyimlerini yazmanız gerekmez:
 
     using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
                     key: tenantId2,
@@ -120,7 +119,7 @@ Uygulamanızda DapperExtensions kullanarak veritabanı bağlantıları nasıl ol
            sqlconn.Insert(blog);
     }
 
-Ve sorgu için kod örneği aşağıdadır: 
+Sorgu için kod örneği aşağıda verilmiştir: 
 
     using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
                     key: tenantId2,
@@ -136,10 +135,10 @@ Ve sorgu için kod örneği aşağıdadır:
            }
     }
 
-### <a name="handling-transient-faults"></a>Geçici hataların işlenmesi
-Microsoft Patterns ve uygulamalar ekibi yayımlanan [geçici hata işleme uygulama bloğu](https://msdn.microsoft.com/library/hh680934.aspx) uygulama geliştiricilerin bulutta çalışırken karşılaşılan yaygın geçici hata koşulları azaltılmasına yardımcı olmak için. Daha fazla bilgi için [Perseverance, tüm Triumphs gizli anahtarı: Geçici hata işleme uygulama bloğu kullanarak](https://msdn.microsoft.com/library/dn440719.aspx).
+### <a name="handling-transient-faults"></a>Geçici hataları işleme
+Microsoft düzenleri & Yöntemler ekibi, uygulama geliştiricilerinin bulutta çalışırken karşılaşılan yaygın geçici hata koşullarını azaltmalarına yardımcı olmak için [geçici hata Işleme uygulama bloğunu](https://msdn.microsoft.com/library/hh680934.aspx) yayımladı. Daha fazla bilgi için, bkz. [Tüm Anferance, geçici hata Işleme uygulama bloğunu kullanma](https://msdn.microsoft.com/library/dn440719.aspx).
 
-Geçici hata kitaplığı, geçici hataların karşı korumak için kod örneği kullanır. 
+Kod örneği, geçici hatalara karşı korumak için geçici hata kitaplığını kullanır. 
 
     SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() =>
     {
@@ -151,16 +150,16 @@ Geçici hata kitaplığı, geçici hataların karşı korumak için kod örneği
           }
     });
 
-**SqlDatabaseUtils.SqlRetryPolicy** Yukarıdaki kod olarak tanımlanan bir **SqlDatabaseTransientErrorDetectionStrategy** 10 ve 5 saniye ile bir yeniden deneme sayısı, yeniden denemeler arasındaki süre bekleyin. İşlem kullanıyorsanız, yeniden deneme kapsamı geri geçici bir hata durumunda işlem başlangıcına gider emin emin olun.
+Yukarıdaki koddaki **SqlDatabaseUtils. SqlRetryPolicy** , yeniden deneme sayısı 10 olan bir **SqlDatabaseTransientErrorDetectionStrategy** olarak tanımlanır ve yeniden denemeler arasında 5 saniye bekleyin. İşlem kullanıyorsanız, yeniden deneme kapsamınızda geçici bir hata olması durumunda işlemin başlangıcına doğru gitdiğinizden emin olun.
 
 ## <a name="limitations"></a>Sınırlamalar
-Bu belgede özetlenen yaklaşımları birkaç sınırlama dahildir:
+Bu belgede özetlenen yaklaşımların birkaç sınırlaması vardır:
 
-* Bu belge için örnek kod, parçalar arasında şema yönetme göstermemiz gerekmez.
-* Bir istek alındığında, tüm veritabanı işlemleri istek tarafından sağlanan parçalama anahtarı tarafından tanımlandığı gibi tek bir parçanın içinde bulunur varsayıyoruz. Bir parçalama anahtarı kullanılabilir hale getirmek mümkün değildir, ancak bu varsayımı her zaman, örneğin, tutmaz. Bunu ele almak için elastik veritabanı istemci kitaplığı içerir. [MultiShardQuery sınıfı](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardexception.aspx). Sınıfı birden çok parça sorgulama için bir bağlantı Özet uygular. MultiShardQuery Dapper ile birlikte bu belgenin kapsamı dışındadır kullanmaktır.
+* Bu belgenin örnek kodu parçalar genelinde şemanın nasıl yönetileceğini göstermez.
+* İstek verildiğinde, tüm veritabanı işlemlerinin, istek tarafından sağlanan parçalı anahtar tarafından tanımlanan tek bir parça içinde yer aldığı varsayılır. Ancak, bu varsayım her zaman ayrı tutulmaz, örneğin bir parçalama anahtarı kullanılabilir hale getirmek mümkün değildir. Bunu çözmek için, elastik veritabanı istemci kitaplığı [Multishardquery sınıfını](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardexception.aspx)içerir. Sınıfı, çeşitli parçaları sorgulamak için bir bağlantı soyutlaması uygular. Çoklu Shardquery 'nin kaber ile birlikte kullanılması, bu belgenin kapsamının ötesinde.
 
 ## <a name="conclusion"></a>Sonuç
-Dapper ile DapperExtensions uygulamalar, kolayca Azure SQL veritabanı için esnek Veritabanı Araçları'ndan yararlanabilir. Bu belgede özetlenen adımları oluşturma değiştirme ve, yeni açarak verilere bağımlı yönlendirme için bu uygulamaların Aracı'nın özellik kullanmaya [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) nesneleri [ OpenConnectionForKey](https://msdn.microsoft.com/library/azure/dn807226.aspx) elastik veritabanı istemci Kitaplığı'nın çağrısı. Bu yeni bağlantıları burada oluşturulur ve açılır bu yerlerin gerekli uygulama değişiklikleri sınırlar. 
+Daber ve DapperExtensions kullanan uygulamalar, Azure SQL veritabanı için elastik veritabanı araçlarından kolayca yararlanabilir. Bu belgede özetlenen adımlarda, bu uygulamalar, yeni [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) nesnelerinin oluşturulmasını ve açılmasını esnek bir [Openconnectionforkey](https://msdn.microsoft.com/library/azure/dn807226.aspx) çağrısını kullanacak şekilde değiştirerek, veri bağımlı yönlendirme için aracın özelliğini kullanabilir veritabanı istemci kitaplığı. Bu, yeni bağlantıların oluşturulduğu ve açıldığı yerlerde gerekli olan uygulama değişikliklerini kısıtlar. 
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 

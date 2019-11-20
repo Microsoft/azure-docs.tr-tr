@@ -1,60 +1,145 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: MySQL Belgeleri için Azure Veritabanı
+### YamlMime:Landing
+title: MySQL için Azure Veritabanı belgeleri
+summary: MySQL için Azure Veritabanı, MySQL Community Edition tarafından desteklenen bir ilişkisel veritabanı hizmetidir.  Bu, kritik iş yüklerini teslim edebilen, tahmin edilebilir performans ve dinamik ölçeklenebilirlik sunan, tam olarak yönetilen bir hizmet olarak veritabanıdır. MySQL için Azure Veritabanı ile açık kaynak araçları ve seçtiğiniz platformu kullanarak uygulamalar geliştirin. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, MySQL için Azure Veritabanı’nı kullanmayı öğrenin.
 metadata:
-  document_id: 8d915ae6-9101-ad37-0736-3eaa59c2dd34
-  title: 'Azure MySQL Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: 'MySQL için Azure Veritabanı, açık kaynak MySQL veritabanı altyapısını temel alan, Microsoft bulutunda geliştiriciler için oluşturulmuş ilişkisel bir veritabanı hizmetidir.'
+  description: MySQL için Azure Veritabanı, MySQL Community Edition tarafından desteklenen, Microsoft bulutunda geliştiriciler için oluşturulmuş bir ilişkisel veritabanı hizmetidir.
   author: ajlam
   ms.author: andrela
+  ms.date: 09/03/2019
   ms.service: mysql
   ms.topic: landing-page
-  ms.date: 02/25/2019
-abstract:
-  description: 'MySQL için Azure Veritabanı, açık kaynak MySQL Server altyapısını temel alan ilişkisel bir veritabanı hizmetidir.  Bu, kritik iş yüklerini teslim edebilen, tahmin edilebilir performans ve dinamik ölçeklenebilirlik sunan, tam olarak yönetilen bir hizmet olarak veritabanıdır. MySQL için Azure Veritabanı ile açık kaynak araçları ve seçtiğiniz platformu kullanarak uygulamalar geliştirin. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, MySQL için Azure Veritabanı’nı kullanmayı öğrenin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Şunları kullanarak Azure üzerinde MySQL veritabanı oluşturmayı öğrenin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/virtual-machines/linux/media/index/portal.svg
-            text: Azure Portal
-            href: /azure/mysql/quickstart-create-mysql-server-database-using-azure-portal
-          - image:
-              src: /azure/virtual-machines/linux/media/index/cli.svg
-            text: Azure CLI
-            href: /azure/mysql/quickstart-create-mysql-server-database-using-azure-cli
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Veritabanı tasarlamayı ve uygulama geliştirmeyi öğrenin:'
-      - type: list
-        style: ordered
-        items:
-          - html: 'Veritabanı Tasarlama&#58; <a href="/azure/mysql/tutorial-design-database-using-portal">Azure portalı</a> | <a href="/azure/mysql/tutorial-design-database-using-cli">Azure CLI</a>'
-          - html: 'Web Uygulaması Oluşturma&#58; <a href="https://portal.azure.com/#create/hub">Wordpress - Portal</a> | <a href="../app-service-web/app-service-web-tutorial-php-mysql.md?toc=%2fazure%2fmysql%2ftoc.json">PHP - Azure CLI</a>'
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Genel görevleri yönetmeye yönelik betikleri bulun.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/mysql/sample-scripts-azure-cli">Azure CLI</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/cli/azure/mysql">Azure CLI</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/mysql">REST API</a></p>
-          - title: Azure Resource Manager
-            html: <p><a href="/azure/templates/microsoft.dbformysql/allversions">Resource Manager şablonları</a></p>
+  ms.openlocfilehash: 6ccf544b524ad1ccd45b0aa814610902d54c0fd9
+  ms.sourcegitcommit: f176e5bb926476ec8f9e2a2829bda48d510fbed7
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/04/2019
+  ms.locfileid: "70309297"
+landingContent:
+- title: MySQL için Azure Veritabanı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: MySQL için Azure Veritabanı nedir?
+      url: overview.md
+  - linkListType: whats-new
+    links:
+    - text: Blogumuza göz atın
+      url: https://techcommunity.microsoft.com/t5/Azure-Database-for-MySQL/bg-p/ADforMySQL
+- title: Sunucu oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Portal kullanarak sunucu oluşturma
+      url: quickstart-create-mysql-server-database-using-azure-portal.md
+    - text: Azure CLI kullanarak sunucu oluşturma
+      url: quickstart-create-mysql-server-database-using-azure-cli.md
+  - linkListType: concept
+    links:
+    - text: Fiyatlandırma katmanlarını anlama
+      url: concepts-pricing-tiers.md
+    - text: Sınırları anlama
+      url: concepts-limits.md
+    - text: Desteklenen MySQL sürümlerini anlama
+      url: concepts-supported-versions.md
+    - text: Sunucu parametrelerini yapılandırma
+      url: howto-server-parameters.md
+    - text: Yüksek kullanılabilirlik planı
+      url: concepts-high-availability.md
+  - linkListType: tutorial
+    links:
+    - text: Azure portal kullanarak Veritabanı tasarlama
+      url: tutorial-design-database-using-portal.md
+    - text: Azure CLI kullanarak Veritabanı tasarlama
+      url: tutorial-design-database-using-cli.md
+    - text: Kapsayıcılarda Wordpress dağıtma
+      url: ../app-service/containers/tutorial-multi-container-app.md?toc=%2fazure%2fmysql%2ftoc.json&bc=%2Fazure%2Fbread%2Ftoc.json
+    - text: Azure CLI’de PHP kullanarak Web Uygulaması oluşturma
+      url: ../app-service/app-service-web-tutorial-php-mysql.md?toc=%2fazure%2fmysql%2ftoc.json&bc=%2Fazure%2Fbread%2Ftoc.json
+- title: Verileri yedekleme ve geçirme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Yedekleme ve geri yükleme
+      url: concepts-backup.md
+    - text: Döküm ve geri yükleme kullanarak geçirme
+      url: concepts-migrate-dump-restore.md
+    - text: İçeri ve dışarı aktarma kullanarak geçirme
+      url: concepts-migrate-import-export.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure portalı kullanarak sunucuyu geri yükleme
+      url: howto-restore-server-portal.md
+    - text: Azure CLI’yi kullanarak sunucuyu geri yükleme
+      url: howto-restore-server-cli.md
+    - text: En düşük kapalı kalma süresiyle geçiş
+      url: howto-migrate-online.md
+- title: MySQL için Azure Veritabanı'na bağlanma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Güvenlik duvarını anlama
+      url: concepts-firewall-rules.md
+    - text: SSL’yi anlama
+      url: concepts-ssl-connection-security.md
+    - text: Sanal Ağları anlama
+      url: concepts-data-access-and-security-vnet.md
+  - linkListType: how-to-guide
+    links:
+    - text: Güvenlik duvarı kuralları oluşturma
+      url: howto-manage-firewall-using-portal.md
+    - text: SSL bağlantısını yapılandırma
+      url: howto-configure-ssl.md
+    - text: Mevcut bir Azure App Service’i bağlama
+      url: howto-connect-webapp.md
+    - text: Bağlantı dizeleri
+      url: howto-connection-string.md
+    - text: Bağlantı sorunlarını giderme
+      url: howto-troubleshoot-common-connection-issues.md
+  - linkListType: get-started
+    links:
+    - text: MySQL Workbench kullanarak bağlanma
+      url: connect-workbench.md
+    - text: PHP kullanarak bağlanma
+      url: connect-php.md
+    - text: Java kullanarak bağlanma
+      url: connect-java.md
+    - text: .NET kullanarak bağlanma
+      url: connect-csharp.md
+    - text: Python kullanarak bağlanma
+      url: connect-python.md
+    - text: Node.js kullanarak bağlanma
+      url: connect-nodejs.md
+    - text: Ruby kullanarak bağlanma
+      url: connect-ruby.md
+    - text: C++ kullanarak bağlanma
+      url: connect-cpp.md
+    - text: Go kullanarak bağlanma
+      url: connect-go.md
+- title: Veri çoğaltma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Veri içinde çoğaltmayı anlama
+      url: concepts-data-in-replication.md
+    - text: Okuma amaçlı çoğaltmaları anlama
+      url: concepts-read-replicas.md
+  - linkListType: how-to-guide
+    links:
+    - text: Veri içinde çoğaltmayı yapılandırma
+      url: howto-data-in-replication.md
+    - text: Azure portalı kullanarak okuma amaçlı çoğaltma oluşturma
+      url: howto-read-replicas-portal.md
+- title: Programlama API’leri ile kod yazma
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Ortak görevler için Azure CLI betikleri
+      url: /azure/mysql/sample-scripts-azure-cli
+  - linkListType: reference
+    links:
+    - text: Azure CLI geliştirici başvurusu
+      url: /rest/api/mysql/
+    - text: REST API geliştirici başvurusu
+      url: /cli/azure/mysql
+    - text: Azure Resource Manager şablonları
+      url: /azure/templates/microsoft.dbformysql/allversions

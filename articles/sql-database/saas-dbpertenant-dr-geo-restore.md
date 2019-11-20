@@ -1,381 +1,380 @@
 ---
-title: 'SaaS uygulamaları için: Azure SQL veritabanı coğrafi olarak yedekli yedeklemeleri için olağanüstü durum kurtarma | Microsoft Docs'
-description: Çok kiracılı bir SaaS uygulama kesinti durumunda kurtarmayı coğrafi olarak yedekli Azure SQL veritabanı yedeklemeleri kullanmayı öğrenin
+title: 'SaaS uygulamaları: olağanüstü durum kurtarma için coğrafi olarak yedekli yedeklemeler'
+description: Bir kesinti durumunda çok kiracılı SaaS uygulamasını kurtarmak için Azure SQL veritabanı coğrafi olarak yedekli yedeklemeleri kullanmayı öğrenin
 services: sql-database
 ms.service: sql-database
 ms.subservice: scenario
-ms.custom: ''
+ms.custom: seo-lt-2019
 ms.devlang: ''
 ms.topic: conceptual
 author: AyoOlubeko
-ms.author: ayolubek
+ms.author: craigg
 ms.reviewer: sstein
-manager: craigg
 ms.date: 01/14/2019
-ms.openlocfilehash: c96f2dc2b44ea2118d9f0dd6c988017efcba5800
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 270fc157fa14efa19ed30d35b614fb769804b72e
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60557078"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826467"
 ---
-# <a name="use-geo-restore-to-recover-a-multitenant-saas-application-from-database-backups"></a>Coğrafi geri yükleme, çok kiracılı bir SaaS uygulaması, veritabanı yedeklerinden kurtarma için kullanın
+# <a name="use-geo-restore-to-recover-a-multitenant-saas-application-from-database-backups"></a>Bir çok kiracılı SaaS uygulamasını veritabanı yedeklemelerinden kurtarmak için coğrafi geri yükleme kullanın
 
-Bu öğretici, bir uygulanan kiracılı model başına veritabanı ile çok kiracılı bir SaaS uygulaması için eksiksiz olağanüstü durum kurtarma senaryosuna açıklar. Kullandığınız [coğrafi geri yükleme](sql-database-recovery-using-backups.md) katalog ve Kiracı veritabanları, bir alternatif kurtarma bölgeye otomatik olarak tutulan coğrafi olarak yedekli yedeklemelerden kurtarmak için. Kesinti giderildikten sonra kullandığınız [coğrafi çoğaltma](sql-database-geo-replication-overview.md) repatriate kendi özgün bölgeye değişen veritabanları için.
+Bu öğretici, kiracı modeline göre veritabanı ile uygulanan çok kiracılı bir SaaS uygulaması için tam bir olağanüstü durum kurtarma senaryosunu araştırır. [Coğrafi geri yüklemeyi](sql-database-recovery-using-backups.md) , Katalog ve kiracı veritabanlarını otomatik olarak korunan coğrafi olarak yedekli yedeklerden alternatif bir kurtarma bölgesine kurtarmak için kullanabilirsiniz. Kesinti çözümlendikten sonra, değişen veritabanlarını özgün bölgelerine yeniden eklemek için [coğrafi çoğaltma](sql-database-geo-replication-overview.md) kullanırsınız.
 
-![Coğrafi geri yükleme mimarisi](media/saas-dbpertenant-dr-geo-restore/geo-restore-architecture.png)
+![Coğrafi geri yükleme-mimari](media/saas-dbpertenant-dr-geo-restore/geo-restore-architecture.png)
 
-Coğrafi geri yükleme, Azure SQL veritabanı için düşük maliyetli olağanüstü durum kurtarma çözümüdür. Ancak, coğrafi olarak yedekli yedeklemelerden geri yükleme, bir saate kadar veri kaybına neden olabilir. Her veritabanı boyutuna bağlı olarak uzun zaman alabilir. 
+Coğrafi geri yükleme, Azure SQL veritabanı için en düşük maliyetli olağanüstü durum kurtarma çözümüdür. Ancak, coğrafi olarak yedekli yedeklerden geri yükleme işlemi bir saate kadar veri kaybına neden olabilir. Her bir veritabanının boyutuna bağlı olarak bu, önemli ölçüde zaman alabilir. 
 
 > [!NOTE]
-> Coğrafi geri yükleme yerine coğrafi çoğaltma ile mümkün olan en düşük RPO ve RTO uygulamalarla kurtarın.
+> Coğrafi geri yükleme yerine coğrafi çoğaltma kullanarak, mümkün olan en düşük RPO ve RTO ile uygulamaları kurtarın.
 
-Bu öğretici, geri yükleme hem repatriation iş akışları açıklar. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
+Bu öğretici hem geri yükleme hem de repama iş akışlarını araştırır. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 > [!div class="checklist"]
 > 
-> * Veritabanı ve elastik havuzu yapılandırma bilgilerini Kiracı kataloğa eşitleyin.
-> * Uygulama, sunucuları ve havuzları içeren bir kurtarma bölgesinde bir Ayna görüntüsünü ortamı ayarlayın.   
-> * Coğrafi geri yükleme ile katalog ve Kiracı veritabanlarını kurtarın.
-> * Coğrafi çoğaltma, kesinti giderildikten sonra değiştirilen Kiracı veritabanları ve Kiracı Kataloğu repatriate için kullanın.
-> * Her bir veritabanına geri (repatriated ya da gibi) güncelleştirme Kataloğu da Etkin kopyanın her bir kiracının veritabanının geçerli konumunu izlemek için.
-> * Uygulama ve Kiracı veritabanı her zaman gecikmesini azaltmak için aynı Azure bölgesinde birlikte bulunduğundan emin olun. 
+> * Veritabanı ve elastik havuz yapılandırma bilgilerini kiracı kataloğu 'nda eşitleyin.
+> * Uygulama, sunucular ve havuzlar içeren bir kurtarma bölgesinde yansıtma görüntüsü ortamı ayarlayın.   
+> * Coğrafi geri yükleme kullanarak kataloğu ve kiracı veritabanlarını kurtarın.
+> * Kaybı çözmeden sonra kiracı kataloğunu yeniden eklemek ve kiracı veritabanlarını değiştirilen Coğrafi çoğaltmayı kullanın.
+> * Her bir veritabanı geri yüklendiği (veya onarımda) her bir kiracının veritabanının etkin kopyasının geçerli konumunu izlemek için kataloğu güncelleştirin.
+> * Gecikme süresini azaltmak için uygulama ve kiracı veritabanının aynı Azure bölgesinde her zaman birlikte bulunduğundan emin olun. 
  
 
-Bu öğreticiye başlamadan önce aşağıdaki önkoşulları tamamlayın:
-* Wingtip bilet SaaS veritabanı başına Kiracı uygulama dağıtın. Beş dakikadan kısa bir süre içinde dağıtmak için bkz. [Dağıt ve Kiracı uygulama başına Wingtip bilet SaaS veritabanı keşfedin](saas-dbpertenant-get-started-deploy.md). 
-* Azure PowerShell'i yükleyin. Ayrıntılar için bkz [Azure PowerShell'i kullanmaya başlama](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+Bu öğreticiye başlamadan önce aşağıdaki önkoşulları doldurun:
+* Kiracı uygulaması başına Wingtip bilet SaaS veritabanını dağıtın. Beş dakikadan kısa bir süre içinde dağıtmak için bkz. [kiracı uygulaması başına Wingtip bilet SaaS veritabanını dağıtma ve](saas-dbpertenant-get-started-deploy.md)İnceleme. 
+* Azure PowerShell'i yükleyin. Ayrıntılar için bkz. [Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps)kullanmaya başlama.
 
-## <a name="introduction-to-the-geo-restore-recovery-pattern"></a>Coğrafi geri yükleme kurtarma düzeniyle giriş
+## <a name="introduction-to-the-geo-restore-recovery-pattern"></a>Coğrafi geri yükleme kurtarma düzenine giriş
 
-Olağanüstü Durum Kurtarma (DR), uyumluluk nedenleriyle veya iş sürekliliği için birçok uygulama için önemli bir konu olmasına. Süren hizmet kesintisi ise iyi hazırlanmış bir kurtarma planı iş kesintileri en aza indirebilirsiniz. Bir kurtarma planı üzerinde coğrafi geri yükleme tabanlı çeşitli hedeflere ulaşmak gerekir:
- * Seçilen kurtarma bölgesindeki tüm gerekli kapasite Kiracı veritabanlarını geri yüklemek kullanılabilir olduğundan emin olmak için mümkün olan en kısa sürede saklı tutarız.
- * Özgün havuz ve veritabanı yapılandırmasını yansıtan bir Ayna görüntüsünü kurtarma ortamı oluşturun. 
- * Özgün bölge tekrar çevrimiçi olursa geri yükleme işleminin ortasında uçuştaki iptaline izin verin.
- * Yeni Kiracı ekleme mümkün olan en kısa sürede yeniden için hızlı sağlama Kiracı etkinleştirin.
- * Kiracılar öncelik sırasına geri yüklemek için en iyi duruma getirilmiş.
- * Pratik olduğunda paralel adımları uygulayarak çevrimiçi kiracılar'ı olabildiğince çabuk almak için en iyi duruma getirilmiş.
- * Hata, yeniden başlatılabilir ve etkili dayanıklı olması.
- * Kesinti giderildikten sonra özgün bölgelerini veritabanlarına kiracılar için minimum etkiyle repatriate.  
+Olağanüstü durum kurtarma (DR), uyumluluk nedenleri veya iş sürekliliği gibi birçok uygulama için önemli bir konudur. Uzun süren bir hizmet kesintisi varsa, iyi hazırlanmış bir DR planı İş kesintisini en aza indirebilir. Coğrafi geri yüklemeyi temel alan bir DR planı çeşitli hedefleri yerine getirmelidir:
+ * Kiracı veritabanlarının geri yüklenmesi için kullanılabilir olduğundan emin olmak için, seçilen kurtarma bölgesinde gereken tüm kapasiteyi olabildiğince çabuk ayırın.
+ * Özgün havuzu ve veritabanı yapılandırmasını yansıtan bir yansıtma görüntüsü kurtarma ortamı oluşturun. 
+ * Özgün bölge yeniden çevrimiçi olduğunda geri yükleme işleminin orta uçuşta iptal edilmesine izin verin.
+ * Yeni kiracı ekleme işlemini mümkün olan en kısa sürede yeniden başlatmak için kiracı sağlamayı hızlı bir şekilde etkinleştirin.
+ * Kiracılar 'ı öncelik sırasına göre geri yüklemek için iyileştirilmelidir.
+ * Adımları paralel olarak, mümkün olduğunca kısa sürede almak için en iyi duruma getirilmiş bir işlem yapın.
+ * Hataya, yeniden başlatılabilir ve ıdempotent için dayanıklı olun.
+ * Kesinti çözümlendiğinde kiracılar için en az etkiyle veritabanlarını özgün bölgelerine yeniden boyar.  
 
 > [!NOTE]
-> Uygulamayı, uygulamanın dağıtıldığı bölge eşleştirilmiş bölgeye kurtarılır. Daha fazla bilgi için [Azure eşleştirilmiş bölgeleri](https://docs.microsoft.com/azure/best-practices-availability-paired-regions).   
+> Uygulama, uygulamanın dağıtıldığı bölgenin eşleştirilmiş bölgesine kurtarılır. Daha fazla bilgi için bkz. [Azure eşlenmiş bölgeler](https://docs.microsoft.com/azure/best-practices-availability-paired-regions).   
 
-Bu öğretici, bu sorunları gidermek üzere Azure SQL veritabanı ve Azure platformunun özelliklerini kullanır:
+Bu öğretici, Azure SQL veritabanı ve Azure platformunun özelliklerini kullanarak bu sorunları ele alır:
 
-* [Azure Resource Manager şablonları](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-create-first-template), tüm gerekli kapasite mümkün olan en kısa sürede ayırmak için. Azure Resource Manager şablonları, bir Ayna görüntüsünü özgün sunucuları ve kurtarma bölgedeki elastik havuzların sağlamak için kullanılır. Yeni kiracılar sağlama için ayrı bir sunucu ve havuzu da oluşturulur.
-* [Elastik veritabanı istemci Kitaplığı](sql-database-elastic-database-client-library.md) (oluşturmak ve bir kiracı veritabanı Kataloğu korumak için EDCL),. Genişletilmiş Kataloğu düzenli aralıklarla Yenilenen havuz ve veritabanı yapılandırma bilgilerini içerir.
-* [Parça yönetim kurtarma özellikleri](sql-database-elastic-database-recovery-manager.md) Katalog veritabanı konumu girişlerini kurtarma ve repatriation sırasında korumak için EDCL.  
-* [Coğrafi geri yükleme](sql-database-disaster-recovery.md), otomatik olarak tutulan coğrafi olarak yedekli yedeklemelerden katalog ve Kiracı veritabanlarını kurtarmak için. 
-* [Zaman uyumsuz geri yükleme işlemleri](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations), Kiracı öncelik sırasına gönderilen, sistem tarafından her havuzu için sıraya alındı ve havuz aşırı yüklü değilse toplu olarak işlenir. Bu işlemler, önce veya gerekirse yürütme sırasında iptal edilebilir.   
-* [Coğrafi çoğaltma](sql-database-geo-replication-overview.md)kesinti sonra veritabanları özgün bölgeye repatriate için. Yapıldığında hiçbir veri kaybı ve Kiracı üzerinde en az etki coğrafi çoğaltma kullanın.
-* [SQL sunucu DNS diğer adları](dns-alias-overview.md)konumuna bakılmaksızın etkin Kataloğu'na bağlanmak kataloğun eşitleme işlemini izin vermek için.  
+* Tüm gerekli kapasiteyi mümkün olduğunca hızlı bir şekilde ayırmak için [şablonlar Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-create-first-template). Azure Resource Manager şablonlar, kurtarma bölgesindeki özgün sunucuların ve elastik havuzların ayna görüntüsünü sağlamak için kullanılır. Yeni kiracılar sağlamak için ayrı bir sunucu ve havuz de oluşturulur.
+* Kiracı veritabanı kataloğu oluşturmak ve sürdürmek için [elastik veritabanı Istemci kitaplığı](sql-database-elastic-database-client-library.md) (edcl). Genişletilmiş Katalog, düzenli aralıklarla yenilenen havuz ve veritabanı yapılandırma bilgilerini içerir.
+* Kurtarma ve geri alma sırasında katalogdaki veritabanı konumu girdilerini sürdürmek için EDCL 'nin parça [Yönetimi kurtarma özellikleri](sql-database-elastic-database-recovery-manager.md) .  
+* [Coğrafi geri yükleme](sql-database-disaster-recovery.md), Katalog ve kiracı veritabanlarını otomatik olarak korunan coğrafi olarak yedekli yedeklerden kurtarmak için. 
+* Kiracı öncelikli sırada gönderilen [zaman uyumsuz geri yükleme işlemleri](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations), sistem tarafından her havuz için sıraya alınır ve havuzun aşırı yüklü olmaması için toplu olarak işlenir. Bu işlemler gerekirse, yürütme sırasında veya sırasında iptal edilebilir.   
+* [Coğrafi çoğaltma](sql-database-geo-replication-overview.md), kesintiden sonra veritabanlarını özgün bölgeye yeniden boyar. Coğrafi Çoğaltma kullandığınızda, kiracı üzerinde veri kaybı ve en az etkisi yoktur.
+* Katalog eşitleme işleminin, konumundan bağımsız olarak etkin kataloğa bağlanmasına izin vermek için [SQL Server DNS diğer adları](dns-alias-overview.md).  
 
-## <a name="get-the-disaster-recovery-scripts"></a>Olağanüstü durum kurtarma betiklerini alma
+## <a name="get-the-disaster-recovery-scripts"></a>Olağanüstü durum kurtarma betiklerini al
 
-Bu öğreticide kullanılan DR betikler kullanılabilir [GitHub deposundan Kiracı başına veritabanı Wingtip bilet SaaS](https://github.com/Microsoft/WingtipTicketsSaaS-DbPerTenant). Kullanıma [genel rehberlik](saas-tenancy-wingtip-app-guidance-tips.md) adımları indirin ve Wingtip bilet yönetim komut dosyaları engelini kaldırmak için.
+Bu öğreticide kullanılan DR betikleri, [kiracı GitHub deposu başına Wingtip bilet SaaS veritabanında](https://github.com/Microsoft/WingtipTicketsSaaS-DbPerTenant)bulunur. Wingtip bilet yönetim betiklerini indirme ve engellemesini kaldırma adımları için [genel kılavuza](saas-tenancy-wingtip-app-guidance-tips.md) göz atın.
 
 > [!IMPORTANT]
-> Tüm Wingtip bilet yönetim komut dosyaları gibi DR betikleri örnek kalitesi ve üretim ortamında kullanılmamalıdır.
+> Tüm Wingtip bilet yönetimi betiklerinde olduğu gibi, DR betikleri örnek kalitelidir ve üretimde kullanılmamalıdır.
 
-## <a name="review-the-healthy-state-of-the-application"></a>Uygulamanın sistem durumunu gözden geçirin
-Kurtarma işlemine başlamadan önce uygulama normal sağlıklı durumunu gözden geçirin.
+## <a name="review-the-healthy-state-of-the-application"></a>Uygulamanın sağlıklı durumunu gözden geçirin
+Kurtarma işlemine başlamadan önce, uygulamanın normal sağlıklı durumunu gözden geçirin.
 
-1. Wingtip bilet olay hub'ı web tarayıcınızda açın (http://events.wingtip-dpt.&lt ; kullanıcı&gt;. trafficmanager.net değiştirin &lt; kullanıcı&gt; dağıtımınızın kullanıcı değeri ile).
+1. Web tarayıcınızda, Wingtip bilet olayları hub 'ını açın (http://events.wingtip-dpt.&lt; User&gt;. trafficmanager.net, &lt;Kullanıcı&gt; yerine dağıtımınızın Kullanıcı değeri).
     
-   Sayfanın en altına gidin ve kataloğu sunucu adını ve konumunu altbilgisindeki dikkat edin. Uygulamanın dağıtıldığı bölge konumdur.    
+   Sayfanın alt kısmına ilerleyin ve altbilgide katalog sunucusu adı ve konumuna dikkat edin. Konum, uygulamayı dağıttığınız bölgedir.    
 
    > [!TIP]
-   > Fare görünen büyütmek için konumu üzerinde gelin.
+   > Ekranı büyütmek için fareyi konumun üzerine getirin.
 
-   ![Olay hub'ı sağlıklı duruma özgün bölgede](media/saas-dbpertenant-dr-geo-restore/events-hub-original-region.png)
+   ![Özgün bölgedeki Olay Hub 'ı sağlıklı durumu](media/saas-dbpertenant-dr-geo-restore/events-hub-original-region.png)
 
-2. Contoso Konser Salonu kiracısı seçin ve kendi olay sayfasını açın.
+2. Contoso Concert Salı kiracısı ' ni seçin ve olay sayfasını açın.
 
-   Alt bilgisinde kiracının sunucu adına dikkat edin. Konumun Kataloğu sunucunun konumu ile aynıdır.
+   Altbilgide, kiracının sunucu adına dikkat edin. Konum, katalog sunucusunun konumuyla aynıdır.
 
-   ![Contoso Konser Salonu özgün bölge](media/saas-dbpertenant-dr-geo-restore/contoso-original-location.png) 
+   ![Contoso Concert salonu orijinal bölgesi](media/saas-dbpertenant-dr-geo-restore/contoso-original-location.png) 
 
-3. İçinde [Azure portalında](https://portal.azure.com)gözden geçirip uygulamayı dağıttığınız kaynak grubunu açın.
+3. [Azure Portal](https://portal.azure.com), uygulamayı dağıttığınız kaynak grubunu gözden geçirin ve açın.
 
-   Kaynaklar ve SQL veritabanı sunucularını ve uygulama hizmet bileşenleri dağıtılan bölge dikkat edin.
+   Uygulama Hizmeti bileşenlerinin ve SQL veritabanı sunucularının dağıtıldığı kaynaklara ve bölgeye dikkat edin.
 
-## <a name="sync-the-tenant-configuration-into-the-catalog"></a>Kataloğa Kiracı yapılandırmayı eşitleyemedi
+## <a name="sync-the-tenant-configuration-into-the-catalog"></a>Kiracı yapılandırmasını katalogla eşitleme
 
-Bu görevde, sunucuları, elastik havuzları ve veritabanlarını yapılandırmasını Kiracı kataloğa eşitlemek için bir işlem başlatın. Bu bilgiler daha sonra kurtarma bölgesinde bir Ayna görüntüsünü ortamını yapılandırmak için kullanılır.
+Bu görevde, sunucuların, elastik havuzların ve veritabanlarının yapılandırmasını kiracı kataloğuna eşitlemek için bir işlem başlatabilirsiniz. Bu bilgiler daha sonra kurtarma bölgesinde bir yansıtma görüntüsü ortamı yapılandırmak için kullanılır.
 
 > [!IMPORTANT]
-> Kolaylık olması için yerel PowerShell işleri veya istemci kullanıcı oturum açma bilgilerinizi altında çalışan oturumları olarak bu örnekler, eşitleme işlemini ve diğer uzun süreli kurtarma ve repatriation işlemler uygulanır. Oturum açtığınızda verilen kimlik doğrulama belirteçlerinizi birkaç saat sonra süresi dolacak ve ardından işleri başarısız olur. Bir üretim senaryosunda, uzun süre çalışan işlemler güvenilir Azure Hizmetleri çalıştıran bir hizmet sorumlusu altında tür olarak uygulanmalıdır. Bkz: [bir sertifika ile hizmet sorumlusu oluşturmak için Azure PowerShell kullanarak](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authenticate-service-principal). 
+> Kolaylık olması için, eşitleme işlemi ve uzun süre çalışan diğer kurtarma ve geri alma işlemleri bu örneklerde, istemci kullanıcı oturumu açma bölümünde çalışan yerel PowerShell işleri veya oturumları olarak uygulanır. Oturum açtığınızda verilen kimlik doğrulama belirteçleri birkaç saat sonra sona erdiğinde ve işler başarısız olur. Bir üretim senaryosunda, uzun süre çalışan süreçler, bir hizmet sorumlusu altında çalışan bazı tür güvenilir Azure hizmetleri olarak uygulanmalıdır. Bkz. [sertifika ile hizmet sorumlusu oluşturmak için Azure PowerShell kullanma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authenticate-service-principal). 
 
-1. PowerShell ISE'de ...\Learning Modules\UserConfig.psm1 dosyasını açın. Değiştirin `<resourcegroup>` ve `<user>` satırlarında 10 ve 11 uygulamasını dağıtırken kullandığınız değerine sahip. Dosyayı kaydedin.
+1. PowerShell ıSE 'de. ..\Learning Modules\userconfig.exe dosyasını açın. 10 ve 11. satırlardaki `<resourcegroup>` ve `<user>`, uygulamayı dağıtırken kullanılan değerle değiştirin. Dosyayı kaydedin.
 
-2. PowerShell ISE'de betik Modules\Business sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 ...\Learning açın.
+2. PowerShell ıSE 'de. ..\Learning Modules\iş sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betiği ' ni açın.
 
-    Bu öğreticide, senaryoların her biri bu PowerShell Betiği çalıştırın, böylece bu dosya açık tutun.
+    Bu öğreticide, bu PowerShell betiğinin her bir senaryosunu çalıştırırsınız, bu yüzden bu dosyayı açık tutun.
 
-3. Aşağıdakileri ayarlayın:
+3. Şunları ayarlayın:
 
-    $DemoScenario = 1: Kiracı sunucusuna ve havuzu yapılandırma bilgilerini kataloğa eşitlenen bir arka plan işi başlatın.
+    $DemoScenario = 1: kiracı sunucusunu ve havuz yapılandırma bilgilerini katalogla eşitlenen bir arka plan işi başlatın.
 
-4. Eşitleme betiği çalıştırmak için F5'i seçin. 
+4. Eşitleme betiğini çalıştırmak için F5 ' i seçin. 
 
-    Bu bilgiler daha sonra kurtarma kurtarma bölgesinde bir Ayna görüntüsünü sunucuları, havuzları ve veritabanlarını oluşturduğundan emin olmak için kullanılır.  
+    Bu bilgiler daha sonra kurtarmanın kurtarma bölgesindeki sunucuların, havuzların ve veritabanlarının yansıtılmış bir görüntüsünü oluşturduğundan emin olmak için kullanılır.  
 
     ![Eşitleme işlemi](media/saas-dbpertenant-dr-geo-restore/sync-process.png)
 
-Arka planda çalışan PowerShell penceresine bırakın ve bu öğreticinin geri kalanını ile devam edin.
+PowerShell penceresini arka planda çalışır durumda bırakın ve Bu öğreticinin geri kalanına devam edin.
 
 > [!NOTE]
-> Eşitleme işlemi katalog bir DNS diğer adı aracılığıyla bağlanır. Geri yükleme ve etkin Kataloğu'na işaret edecek şekilde repatriation sırasında diğer ad değiştirildi. Eşitleme işlemi Katalog Kurtarma bölgesinde veritabanı veya havuz yapılandırma değişiklikleri ile güncel tutar. Repatriation sırasında bu değişiklikleri özgün bölgede eşdeğer kaynaklara uygulanır.
+> Eşitleme işlemi, kataloğa bir DNS diğer adı aracılığıyla bağlanır. Diğer ad, etkin kataloğa işaret etmek için geri yükleme ve yeniden yükleme sırasında değiştirilir. Eşitleme işlemi, kurtarma bölgesinde yapılan herhangi bir veritabanı veya havuz yapılandırma değişiklikleriyle kataloğu güncel tutar. Bu değişiklikler, repama sırasında özgün bölgedeki eşdeğer kaynaklara uygulanır.
 
 ## <a name="geo-restore-recovery-process-overview"></a>Coğrafi geri yükleme kurtarma işlemine genel bakış
 
-Coğrafi geri yükleme kurtarma işlemi, bir uygulama dağıtır ve veritabanları kurtarma bölgeye yedeklerden geri yükler.
+Coğrafi geri yükleme kurtarma işlemi, uygulamayı dağıtır ve veritabanlarını yedeklerden kurtarma bölgesine geri yükler.
 
 Kurtarma işlemi şunları yapar:
 
-1. Azure Traffic Manager uç noktası web uygulamasının özgün bölgede devre dışı bırakır. Uç noktanın devre dışı kullanıcılar geçersiz bir durumda uygulama için özgün bölge Kurtarma sırasında çevrimiçi olması bağlanmasını engeller.
+1. Özgün bölgedeki Web uygulaması için Azure Traffic Manager uç noktasını devre dışı bırakır. Uç noktanın devre dışı bırakılması, kullanıcıların, kurtarma sırasında özgün bölgenin çevrimiçi olması gerekir.
 
-2. Hükümleri Kurtarma bir katalog veritabanı sunucusu kurtarma bölgede coğrafi geri yükleme işlemleri katalog ve geri yüklenen katalog sunucusuna işaret edecek şekilde activecatalog diğer güncelleştirir. Katalog diğer adının değiştirilmesi, kataloğu eşitleme işlemini her zaman etkin kataloğa eşitler sağlar.
+2. Kurtarma bölgesinde bir kurtarma kataloğu sunucusu sağlar, katalog veritabanını coğrafi olarak geri yükler ve activecatalog diğer adını geri yüklenen katalog sunucusuna işaret etmek üzere güncelleştirir. Katalog diğer adının değiştirilmesi, katalog eşitleme işleminin her zaman etkin katalogla eşitlenmesine olanak sağlar.
 
-3. Bunlar geri yüklenmeden önce Kiracı veritabanlarına erişimi engellemek için tüm mevcut kiracıda kurtarma Kataloğu çevrimdışı olarak işaretler.
+3. Geri yüklenmeden önce kiracı veritabanlarına erişimi engellemek için kurtarma kataloğundaki tüm mevcut kiracılar ' i çevrimdışı olarak işaretler.
 
-4. Uygulama Kurtarma bölgesinde bir örneğini sağlar ve bu bölgede geri yüklenen Kataloğu kullanacak şekilde yapılandırır. En az gecikme süresini tutmak için örnek uygulamayı her zaman aynı bölgede Kiracı veritabanına bağlanmak için tasarlanmıştır.
+4. Kurtarma bölgesinde uygulamanın bir örneğini sağlar ve bu bölgedeki geri yüklenen kataloğu kullanacak şekilde yapılandırır. Gecikme süresini en az bir durumda tutmak için örnek uygulama, her zaman aynı bölgedeki bir kiracı veritabanına bağlanacak şekilde tasarlanmıştır.
 
-5. Yeni kiracılar sağlanan sunucusu ve esnek bir havuz sağlar. Bu kaynakları oluşturma, yeni kiracılar sağlama var olan kiracılar kurtarılmasını müdahale etmediği sağlar.
+5. Yeni kiracıların sağlandığı bir sunucu ve elastik havuz sağlar. Bu kaynakların oluşturulması, yeni kiracının sağlanması, mevcut kiracıların kurtarılmasına engel olmamasını sağlar.
 
-6. Yeni Kiracı veritabanları kurtarma bölgesindeki sunucuya işaret edecek şekilde yeni Kiracı diğer güncelleştirir. Bu diğer adı değiştirme, tüm yeni kiracılara veritabanları kurtarma bölgesinde sağlanmasını önler.
+6. Yeni kiracı diğer adını, kurtarma bölgesindeki yeni kiracı veritabanları için sunucuya işaret etmek üzere güncelleştirir. Bu diğer adı değiştirmek, tüm yeni kiracılar için veritabanlarının kurtarma bölgesinde sağlanmasını sağlar.
         
-7. Sunucuları ve Kiracı veritabanlarını geri yüklemek için kurtarma bölgedeki elastik havuzlar sağlar. Bu sunucular ve havuzları bir Ayna görüntüsünü özgün bölgede yapılandırmasının var. Önden havuzları sağlama tüm veritabanlarını geri yüklemek için gereken kapasite ayırır.
+7. , Kiracı veritabanlarını geri yüklemek için kurtarma bölgesinde sunucular ve elastik havuzlar sağlar. Bu sunucular ve havuzlar, özgün bölgedeki yapılandırmanın yansıtma görüntüsüdür. Sağlama havuzları ön uç, tüm veritabanlarını geri yüklemek için gereken kapasiteyi saklı tutar.
 
-    Bir bölgede kesinti önemli baskısı eşlenen bölgesi içinde kullanılabilir kaynaklara yerleştirebilirsiniz. DR için coğrafi geri yükleme üzerinde güveniyorsanız, kaynaklar'ı hızlı bir şekilde ayırma önerilir. Coğrafi çoğaltma kritik ise bir uygulama belirli bir bölgede kurtarılmadan göz önünde bulundurun. 
+    Bir bölgedeki kesinti, eşleştirilmiş bölgede bulunan kaynaklara önemli bir basınç yerleştirebilir. DR için coğrafi geri yükleme kullanıyorsanız, kaynakları hızlı bir şekilde rezerve etmeniz önerilir. Bir uygulamanın belirli bir bölgede kurtarılması önemliyse, Coğrafi çoğaltmayı göz önünde bulundurun. 
 
-8. Kurtarma bölgesindeki web uygulaması için Traffic Manager uç nokta sağlar. Bu uç noktayı etkinleştirme, yeni kiracılar sağlama uygulaması sağlar. Bu aşamada, var olan kiracılar hala çevrimdışı.
+8. Kurtarma bölgesindeki Web uygulaması için Traffic Manager uç noktasını etkinleştirilir. Bu uç noktanın etkinleştirilmesi, uygulamanın yeni kiracılar sağlamasına izin verir. Bu aşamada, mevcut kiracılar hala çevrimdışı.
 
-9. Toplu işleri öncelik sırasına göre veritabanlarını geri yüklemek için istek gönderir. 
+9. Veritabanlarını öncelik sırasına göre geri yüklemek için istek toplu işlemleri gönderir. 
 
-    * Tüm havuzlar arasında veritabanlarını paralel olarak geri yüklenir, böylece toplu işler halinde düzenlenir.  
+    * Toplu işler, veritabanlarının tüm havuzlarda paralel olarak geri yüklenmesi için düzenlenir.  
 
-    * Geri yükleme isteği gönderildiğinde zaman uyumsuz olarak hızlı bir şekilde gönderildi ve her havuzda yürütme için sıraya alındı.
+    * Geri yükleme istekleri zaman uyumsuz olarak gönderilir, böylece bunlar hızlı bir şekilde gönderilir ve her havuzda yürütülmek üzere sıraya alınır.
 
-    * Geri yükleme istekleri tüm havuzlardaki paralel olarak işlenir, çünkü önemli kiracılar birçok havuzlar arasında dağıtmak daha iyidir. 
+    * Geri yükleme istekleri tüm havuzlarda paralel olarak işlendiğinden, önemli kiracıların çoğunu birçok havuza dağıtmak daha iyidir. 
 
-10. Ne zaman veritabanlarını geri belirlemek için SQL veritabanı hizmeti izler. Bir kiracı veritabanı geri yüklendikten sonra çevrimiçi katalogda işaretlenir ve rowversion toplam Kiracı veritabanı için kaydedilir. 
+10. Veritabanlarının ne zaman geri yüklendiğini anlamak için SQL veritabanı hizmetini izler. Bir kiracı veritabanı geri yüklendikten sonra katalogda çevrimiçi olarak işaretlenir ve Kiracı veritabanı için bir rowversion toplamı kaydedilir. 
 
-    * Katalogda çevrimiçi işaretlenmiş hemen sonra Kiracı veritabanlarını uygulama tarafından erişilebilir.
+    * Kiracı veritabanlarına, katalogda çevrimiçi olarak işaretlendikleri anda, uygulama tarafından erişilebilir.
 
-    * Rowversion değerler Kiracı veritabanında bir toplamı Kataloğu'nda depolanır. Bu toplam veritabanı bir kurtarma bölgesinde güncelleştirildiği belirlenemiyor repatriation işlem veren parmak izi görür.       
+    * Kiracı veritabanındaki rowversion değerlerinin toplamı katalogda depolanır. Bu Sum, kurtarma bölgesinde veritabanının güncelleştirilip güncelleştirilmediğini belirlemesine izin veren bir parmak izi görevi görür.       
 
-## <a name="run-the-recovery-script"></a>Kurtarma betiği çalıştırın
+## <a name="run-the-recovery-script"></a>Kurtarma betiğini Çalıştır
 
 > [!IMPORTANT]
-> Bu öğreticide, coğrafi olarak yedekli yedeklemelerden veritabanlarını geri yükler. Bu yedeklemeler 10 dakika içinde genellikle kullanılabilir, ancak bir saat sürebilir. Betiği, kullanılabilir oluncaya kadar duraklatılır.
+> Bu öğretici, coğrafi olarak yedekli yedeklerden veritabanlarını geri yükler. Bu yedeklemeler genellikle 10 dakika içinde kullanılabilir olsa da, bir saat kadar sürebilir. Betik, kullanılabilir olana kadar duraklatılır.
 
-İçinde uygulama dağıtılan ve kurtarma betiği çalıştırmak bir bölgede kesinti olduğunu düşünün:
+Uygulamanın dağıtıldığı bölgede bir kesinti olduğunu düşünün ve kurtarma betiğini çalıştırın:
 
-1. PowerShell ISE'de ...\Learning Modules\Business sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betikte aşağıdaki değeri ayarlayın:
+1. PowerShell ıSE 'de,. ..\Learning Modules\iş sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betiğine aşağıdaki değeri ayarlayın:
 
-    $DemoScenario = 2: Uygulama, coğrafi olarak yedekli yedeklemelerden geri yükleyerek bir kurtarma bölgeye kurtarın.
+    $DemoScenario = 2: coğrafi olarak yedekli yedeklerden geri yükleyerek uygulamayı bir kurtarma bölgesine kurtarın.
 
-2. Betiği çalıştırmak için F5'i seçin.  
+2. Betiği çalıştırmak için F5 ' i seçin.  
 
-    * Betik yeni bir PowerShell penceresi açar ve bir dizi paralel olarak çalışan PowerShell işler başlatır. Bu işleri kurtarma bölgeye sunucuları, havuzları ve veritabanlarını geri yükleyin.
+    * Komut dosyası yeni bir PowerShell penceresinde açılır ve sonra paralel olarak çalışan bir PowerShell işleri kümesini başlatır. Bu işler, sunucuları, havuzları ve veritabanlarını kurtarma bölgesine geri yükler.
 
-    * Uygulamanın dağıtıldığı Azure bölgesi ile ilişkili eşleştirilmiş bölge kurtarma bölgedir. Daha fazla bilgi için [Azure eşleştirilmiş bölgeleri](https://docs.microsoft.com/azure/best-practices-availability-paired-regions). 
+    * Kurtarma bölgesi, uygulamayı dağıttığınız Azure bölgesiyle ilişkili eşleştirilmiş bölgedir. Daha fazla bilgi için bkz. [Azure eşlenmiş bölgeler](https://docs.microsoft.com/azure/best-practices-availability-paired-regions). 
 
-3. PowerShell penceresinde kurtarma işleminin durumunu izleyin.
+3. Kurtarma işleminin durumunu PowerShell penceresinde izleyin.
 
     ![Kurtarma işlemi](media/saas-dbpertenant-dr-geo-restore/dr-in-progress.png)
 
 > [!NOTE]
-> Kodu kurtarma işleri için keşfetmek için PowerShell betikleri ...\Learning Modules\Business sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\RecoveryJobs klasöründe gözden geçirin.
+> Kurtarma işlerinin kodunu araştırmak için,. ..\Learning Modules\iş sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\RecoveryJobs klasöründeki PowerShell betiklerini inceleyin.
 
-## <a name="review-the-application-state-during-recovery"></a>Kurtarma sırasında uygulama durumunu gözden geçirin
-Uygulama, uygulama uç noktasını Traffic Manager'da devre dışı bırakıldığında kullanılamaz. Katalog geri ve tüm kiracılar çevrimdışı olarak işaretlenir. Uygulama uç noktasını kurtarma bölgesindeki sonra etkinleştirilir ve uygulama yeniden çevrimiçi olacak. Uygulama kullanılabilir olsa da, kiracıların kendi veritabanlarını geri yüklenene kadar olay hub'ında çevrimdışı görünür. Çevrimdışı Kiracı veritabanlarını işlemek için uygulamanızı tasarlamak önemlidir.
+## <a name="review-the-application-state-during-recovery"></a>Kurtarma sırasında uygulama durumunu gözden geçirme
+Uygulama uç noktası Traffic Manager devre dışı bırakılsa da, uygulama kullanılamaz. Katalog geri yüklenir ve tüm kiracılar çevrimdışı olarak işaretlenir. Kurtarma bölgesindeki uygulama uç noktası daha sonra etkinleştirilir ve uygulama yeniden çevrimiçi olur. Uygulama kullanılabilir olsa da, veritabanları geri yüklenene kadar kiracılar olayları hub 'ında çevrimdışı olarak görünür. Uygulamanızı çevrimdışı kiracı veritabanlarını işleyecek şekilde tasarlamak önemlidir.
 
-* Katalog veritabanı kurtarıldıktan sonra ancak kiracılar tekrar çevrimiçi hale gelebilmesi web tarayıcınızda Wingtip bilet olay hub'ı yenileyin.
+* Katalog veritabanı kurtarıldıktan ve kiracılar yeniden çevrimiçi olduktan önce, Web tarayıcınızda Wingtip bilet olayları merkezini yenileyin.
 
-  * Alt bilgisinde katalog sunucusu adı artık olduğuna dikkat edin - kurtarma sonek ve kurtarma bölgede bulunuyor.
+  * Altbilgide, katalog sunucusu adının şimdi bir kurtarma sonekine sahip olduğunu ve kurtarma bölgesinde bulunduğunu unutmayın.
 
-  * Henüz geri yüklenmemiş kiracılar çevrimdışı olarak işaretlenir ve seçilemeyen dikkat edin.   
+  * Henüz geri yüklenmemiş kiracıların çevrimdışı olarak işaretlendiğinden ve seçilemediğini unutmayın.   
  
     ![Kurtarma işlemi](media/saas-dbpertenant-dr-geo-restore/events-hub-tenants-offline-in-recovery-region.png)    
 
-  * Bir kiracının olayları sayfası doğrudan Kiracı çevrimdışı durumdayken açarsanız, sayfanın Kiracı çevrimdışı bir bildirim görüntüler. Contoso Konser Salonu çevrimdışı olduğunda, örneğin, açmaya http://events.wingtip-dpt.&lt ; kullanıcı&gt;.trafficmanager.net/contosoconcerthall.
+  * Kiracı çevrimdışıyken bir kiracının Olaylar sayfasını açarsanız, sayfada kiracı çevrimdışı bildirimi görüntülenir. Örneğin, contoso Concert Salı çevrimdışıysa http://events.wingtip-dpt.&ltaçmayı deneyin; User&gt;. trafficmanager.net/contosoconcerthall.
 
     ![Kurtarma işlemi](media/saas-dbpertenant-dr-geo-restore/dr-in-progress-offline-contosoconcerthall.png)
 
-## <a name="provision-a-new-tenant-in-the-recovery-region"></a>Kurtarma bölgesinde yeni bir kiracı sağlama
-Hatta Kiracı veritabanlarını geri yüklenmeden önce kurtarma bölgesinde yeni kiracılar sağlayabilirsiniz. Yeni Kiracı veritabanları kurtarma bölgesinde sağlanan, kurtarılan veritabanları ile daha sonra repatriated.   
+## <a name="provision-a-new-tenant-in-the-recovery-region"></a>Kurtarma bölgesinde yeni bir kiracı sağlayın
+Kiracı veritabanları geri yüklenmeden önce bile, kurtarma bölgesinde yeni kiracılar sağlayabilirsiniz. Kurtarma bölgesinde sağlanan yeni kiracı veritabanları, kurtarılan veritabanlarıyla daha sonra yeniden boyar.   
 
-1. PowerShell ISE'de ...\Learning Modules\Business sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betikte aşağıdaki özelliği ayarlayın:
+1. PowerShell ıSE 'de,. ..\Learning Modules\iş sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betiğine aşağıdaki özelliği ayarlayın:
 
-    $DemoScenario = 3: Kurtarma bölgesinde yeni bir kiracı sağlayın.
+    $DemoScenario = 3: kurtarma bölgesinde yeni bir kiracı sağlayın.
 
-2. Betiği çalıştırmak için F5'i seçin.
+2. Betiği çalıştırmak için F5 ' i seçin.
 
-3. Tamamlandığında sağlanırken, Hawthorn Hall olayları sayfası tarayıcıda açılır. 
+3. Sağlama tamamlandığında, tarayıcıda, Havth, Salon Salonu olayları sayfası açılır. 
 
-    Hawthorn Hall veritabanı kurtarma bölgesinde bulunduğunu dikkat edin.
+    , Havuz veritabanının kurtarma bölgesinde bulunduğundan emin olun.
 
-    ![Hawthorn kurtarma bölgede sağlanan Hall](media/saas-dbpertenant-dr-geo-restore/hawthorn-hall-provisioned-in-recovery-region.png)
+    ![Kurtarma bölgesinde sağlanan havthtsalonu](media/saas-dbpertenant-dr-geo-restore/hawthorn-hall-provisioned-in-recovery-region.png)
 
-4. Tarayıcıda, Hawthorn Hall dahil görmek için Wingtip bilet olay hub'ı sayfayı yenileyin. 
+4. Tarayıcıda, Wingtip bilet olayları hub 'ını yenileyerek, havdan dahil edilen malzemeleri görüntüleyin. 
 
-    Geri yüklemek diğer kiracılar için beklemenize gerek kalmadan Hawthorn Hall sağladıysanız, diğer kiracılardan çevrimdışı olabilir.
+    Diğer kiracıları geri yüklemek için beklemeden, diğer kiracılar hala çevrimdışı olabilir.
 
-## <a name="review-the-recovered-state-of-the-application"></a>Uygulamasını kurtarılan durumunu gözden geçirin
+## <a name="review-the-recovered-state-of-the-application"></a>Uygulamanın kurtarılan durumunu gözden geçirin
 
-Kurtarma işlemi tamamlandığında, uygulama ve tüm kiracılar kurtarma bölgesinde tam işlevlidir. 
+Kurtarma işlemi tamamlandığında, uygulama ve tüm kiracılar kurtarma bölgesinde tamamen işlevseldir. 
 
-1. Bir PowerShell konsol penceresi içinde görünen tüm kiracılar kurtarıldığı gösterdikten sonra olay hub'ı yenileyin. 
+1. PowerShell konsolu penceresinde görüntülenen tüm kiracılar varsa, Olay Hub 'ını yenileyin. 
 
-    Tüm kiracılar yeni Kiracı, Hawthorn Hall dahil olmak üzere, çevrimiçi olarak görünür.
+    Kiracıların hepsi, yeni kiracı, Havsalda dahil olmak üzere çevrimiçi olarak görünür.
 
-    ![Olay hub'ı kurtarılan ve yeni kiracılar](media/saas-dbpertenant-dr-geo-restore/events-hub-with-hawthorn-hall.png)
+    ![Olaylar hub 'ında kurtarılan ve yeni kiracılar](media/saas-dbpertenant-dr-geo-restore/events-hub-with-hawthorn-hall.png)
 
-2. Contoso Konser Salonu üzerinde tıklayın ve kendi olayları sayfasını açın. 
+2. Contoso Concert Salı ' na tıklayın ve olayları sayfasını açın. 
 
-    Alt bilgisinde, veritabanı kurtarma bölgesinde bulunan kurtarma sunucusunda bulunur dikkat edin.
+    Altbilgide, veritabanının kurtarma bölgesinde bulunan kurtarma sunucusunda bulunduğundan emin olun.
 
-    ![Kurtarma bölgesindeki contoso](media/saas-dbpertenant-dr-geo-restore/contoso-recovery-location.png)
+    ![Kurtarma bölgesinde contoso](media/saas-dbpertenant-dr-geo-restore/contoso-recovery-location.png)
 
-3. İçinde [Azure portalında](https://portal.azure.com), kaynak grupları listesini açın.  
+3. [Azure Portal](https://portal.azure.com), kaynak grupları listesini açın.  
 
-    Kurtarma sonekiyle dağıttığınız kaynak grubunu yanı sıra, Kurtarma kaynak grubunda dikkat edin. Kurtarma kaynak grubunun tüm kurtarma işlemi sırasında oluşturulan kaynakları kesinti sırasında oluşturulan yeni kaynakları içerir. 
+    Dağıttığınız kaynak grubuna ve kurtarma kaynak grubuna ve kurtarma sonekine sahip olun. Kurtarma kaynak grubu, kurtarma işlemi sırasında oluşturulan tüm kaynakları ve kesinti sırasında oluşturulan yeni kaynakları içerir. 
 
-4. Kurtarma kaynak grubunu açın ve aşağıdaki öğeleri dikkat edin:
+4. Kurtarma kaynak grubunu açın ve aşağıdaki öğelere dikkat edin:
 
-   * Katalog ve tenants1 sunucularının kurtarma sürümler kurtarma sonekine sahip. Tüm bu sunucularda geri yüklenen katalog ve Kiracı veritabanlarını orijinal bölgede kullanılan adları vardır.
+   * -Recovery sonekiyle Katalog ve tenants1 sunucularının kurtarma sürümleri. Bu sunuculardaki geri yüklenen Katalog ve kiracı veritabanlarının hepsi özgün bölgede kullanılan adlara sahiptir.
 
-   * Tenants2-dpt -&lt;kullanıcı&gt;-kurtarma SQL server. Bu sunucu, kesinti sırasında yeni kiracılar sağlama için kullanılır.
+   * Tenants2-DPT-&lt;User&gt;-Recovery SQL Server. Bu sunucu, kesinti sırasında yeni kiracılar sağlamak için kullanılır.
 
-   * App service adlı olayları-wingtip-dpt -&lt;recoveryregion&gt;-&lt;kullanıcı&gt;, etkinlikler uygulaması kurtarma örneği olduğu.
+   * Olayları adlı App Service-Wingtip-DPT-&lt;recoveryregion&gt;-olaylar uygulamasının kurtarma örneği olan Kullanıcı&gt;&lt;.
 
      ![Kurtarma bölgesindeki contoso kaynakları](media/saas-dbpertenant-dr-geo-restore/resources-in-recovery-region.png) 
     
-5. Tenants2 açın-dpt -&lt;kullanıcı&gt;-kurtarma SQL server. Veritabanı hawthornhall ve elastik havuz Pool1 içerdiğine dikkat edin. Hawthornhall veritabanı Pool1 elastik havuzdaki esnek bir veritabanı olarak yapılandırılır.
+5. Tenants2-DPT-&lt;User&gt;-Recovery SQL Server 'ı açın. Hawthornhall veritabanı ve elastik havuz Pool1 içerdiğini unutmayın. Hawthornhall veritabanı, Pool1 elastik havuzunda elastik bir veritabanı olarak yapılandırılır.
 
 ## <a name="change-the-tenant-data"></a>Kiracı verilerini değiştirme 
-Bu görevde, geri yüklenen Kiracı veritabanlarından birini güncelleştirin. Repatriation işlem kopyalar özgün bölgeye değişmiş olan veritabanlarının geri. 
+Bu görevde, geri yüklenen kiracı veritabanlarından birini güncelleştirin. Repama işlemi, geri yüklenen veritabanlarını özgün bölgeye kopyalar. 
 
-1. Tarayıcınızda, olaylar listesini bulmak için Contoso Konser Salonu, olayları kaydırın ve son olayın, ciddi Strauss dikkat edin.
+1. Tarayıcınızda, contoso Concert salonu için olaylar listesini bulun, olaylar arasında ilerleyin ve son olaya, önemli ölçüde dikkat edin.
 
-2. PowerShell ISE'de ...\Learning Modules\Business sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betikte aşağıdaki değeri ayarlayın:
+2. PowerShell ıSE 'de,. ..\Learning Modules\iş sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betiğine aşağıdaki değeri ayarlayın:
 
-    $DemoScenario = 4: Kurtarma bölgesinde bir kiracıdan gelen bir olay silin.
+    $DemoScenario = 4: kurtarma bölgesindeki bir kiracıdan bir olayı silin.
 
-3. Betiği çalıştırmak için F5'i seçin.
+3. Betiği yürütmek için F5 ' i seçin.
 
-4. Contoso Konser Salonu olayları sayfayı yenileyin (http://events.wingtip-dpt.&lt ; kullanıcı&gt;.trafficmanager.net/contosoconcerthall) ve ciddi Strauss olay eksik olduğuna dikkat edin.
+4. Contoso Concert sald olayları sayfasını (http://events.wingtip-dpt.&lt; User&gt;. trafficmanager.net/contosoconcerthall) yenileyin ve olay önemli deyimlerini eksik olduğuna dikkat edin.
 
-Bu öğreticide kurtarma bölgesinde artık çalıştıran uygulama kurtardı. Kurtarma bölgesinde yeni bir kiracı hazırladıktan ve geri yüklenen kiracılar birinin veri değiştirilmiş.  
+Öğreticinin bu noktasında, artık kurtarma bölgesinde çalışan uygulamayı kurtardı. Kurtarma bölgesinde yeni bir kiracı sağladınız ve geri yüklenen Kiracılardan birinin verilerini değiştirmiş olursunuz.  
 
 > [!NOTE]
-> Diğer öğreticileri örnek, Kurtarma durumu uygulamayı çalıştırmak için tasarlanmamıştır. Diğer öğreticileri keşfedin istiyorsanız, önce uygulama repatriate emin olun.
+> Örnekteki diğer öğreticiler, kurtarma durumunda uygulamayla çalışacak şekilde tasarlanmamıştır. Diğer öğreticileri araştırmak isterseniz, önce uygulamayı yeniden incelemeyi unutmayın.
 
-## <a name="repatriation-process-overview"></a>Repatriation işlemine genel bakış
+## <a name="repatriation-process-overview"></a>Repama işlemine genel bakış
 
-Kesinti çözümlendikten sonra uygulama ve onun özgün bölgeye veritabanlarında repatriation işlem döner.
+Yeniden yapılandırma işlemi, bir kesinti çözümlendikten sonra uygulamayı ve veritabanlarını özgün bölgesine geri döndürür.
 
-![Coğrafi geri yükleme repatriation](media/saas-dbpertenant-dr-geo-restore/geo-restore-repatriation.png) 
+![Coğrafi geri yükleme yeniden yükleme](media/saas-dbpertenant-dr-geo-restore/geo-restore-repatriation.png) 
 
 İşlem:
 
-1. Tüm devam eden geri yükleme etkinlikleri durdurur ve herhangi bir bekleyen veya uçuşan veritabanı geri yükleme isteğini iptal eder.
+1. Devam eden geri yükleme etkinliklerini durdurup bekleyen veya uçuş dışı veritabanı geri yükleme isteklerini iptal eder.
 
-2. Kesinti beri değiştirilmedi özgün bölge Kiracı veritabanlarındaki yeniden etkinleştirir. Bu veritabanları, henüz kurtarılamaz ve kurtarılan ancak sonradan değişmemiş içerir. Yeniden etkinleştirilen veritabanları tam olarak son, kiracılar tarafından erişilir.
+2. Kesinti sonrasında değiştirilmemiş olan özgün bölgede kiracı veritabanlarında yeniden etkinleştirir. Bu veritabanları henüz kurtarılmayan ve kurtarılan ancak daha sonra değişmemiş olanları içerir. Yeniden etkinleştirilen veritabanları, kiracılar tarafından tam olarak son erişimlerdir.
 
-3. Bir Ayna görüntüsünü özgün bölgede yeni kiracının sunucusu ve elastik havuzu sağlar. Bu işlem tamamlandıktan sonra yeni Kiracı diğer bu sunucuya işaret edecek şekilde güncelleştirilir. Diğer güncelleştirme, yeni Kiracı ekleme kurtarma bölgesindeki yerine özgün bölgede oluşmasına neden olur.
+3. Yeni kiracının sunucusunun ve esnek havuzunun orijinal bölgede ayna görüntüsünü sağlar. Bu eylem tamamlandıktan sonra, yeni kiracı diğer adı bu sunucuyu işaret etmek üzere güncelleştirilir. Diğer adı güncelleştirme, yeni kiracı ekleme işleminin kurtarma bölgesi yerine özgün bölgede oluşmasına neden olur.
 
-3. Katalog özgün bölgeye kurtarma bölgeden taşımak için coğrafi çoğaltma kullanır.
+3. , Kataloğu kurtarma bölgesinden özgün bölgeye taşımak için Coğrafi çoğaltmayı kullanır.
 
-4. Havuz yapılandırmasını özgün bölgede kesinti sırasında kurtarma bölgesinde yapılan değişiklikler ile tutarlı olacak şekilde güncelleştirir.
+4. Havuz yapılandırmasını, kesinti sırasında kurtarma bölgesinde yapılan değişikliklerle tutarlı olması için özgün bölgede güncelleştirir.
 
-5. Gerekli sunucular ve kesinti sırasında oluşturulan tüm yeni veritabanlarını barındırmak için havuzları oluşturur.
+5. Kesinti sırasında oluşturulan tüm yeni veritabanlarını barındırmak için gerekli sunucuları ve havuzları oluşturur.
 
-6. Coğrafi çoğaltma geri repatriate Kiracı güncelleştirilip güncelleştirilmediğini veritabanlarını geri yükleme sonrası ve kesinti sırasında sağlanan tüm yeni Kiracı veritabanlarını kullanır. 
+6. Geri yükleme sonrası güncelleştirilmiş geri yüklenen kiracı veritabanlarının ve kesinti sırasında sağlanan tüm yeni kiracı veritabanlarının yeniden onarımda olması için Coğrafi çoğaltmayı kullanır. 
 
 7. Geri yükleme işlemi sırasında kurtarma bölgesinde oluşturulan kaynakları temizler.
 
-Repatriated gereken Kiracı veritabanlarının sayısını sınırlamak için 1-3 adımları en kısa sürede gerçekleştirilir.  
+Yeniden onarılamayan kiracı veritabanlarının sayısını sınırlandırmak için 1 ile 3 arasındaki adımlar hemen yapılır.  
 
-4\. adım, yalnızca Katalog Kurtarma bölgesinde kesinti sırasında değiştirildiyse gerçekleştirilir. Kataloğa yeni Kiracı oluşturduysanız veya herhangi bir veritabanı veya havuz yapılandırma kurtarma bölgesinde değiştirilirse güncelleştirilir.
+4\. adım yalnızca kurtarma bölgesindeki Katalog kesinti sırasında değiştirilmişse yapılır. Yeni kiracılar oluşturulduysa veya kurtarma bölgesinde herhangi bir veritabanı veya havuz yapılandırması değiştirilirse Katalog güncelleştirilir.
 
-7\. adım, kiracılar için en az neden olur ve veri kaybı olmamasına önemlidir. Bu hedefe ulaşmak için coğrafi çoğaltma işlemi kullanır.
+Adım 7 ' nin kiracılar için en düşük kesintiye neden olmasının ve verilerin kaybedilmesi önemli değildir. Bu hedefe ulaşmak için, işlem coğrafi çoğaltma kullanır.
 
-Her veritabanı, coğrafi olarak çoğaltılmış önce özgün bölgede karşılık gelen veritabanı silinir. Veritabanı kurtarma bölgede coğrafi çoğaltmalı ikincil bir çoğaltmaya özgün bölgede oluşturma, ise. Çoğaltma tamamlandıktan sonra Kiracı veritabanına herhangi bir bağlantı kurtarma bölgesinde keser kataloğunda çevrimdışı olarak işaretlenmiş. Veritabanı sonra Yük devretme, işlemleri ikincil kadar hiçbir veriyi işlemek için bekleyen neden kaybolur. 
+Her veritabanı coğrafi olarak çoğaltılmadan önce, özgün bölgedeki karşılık gelen veritabanı silinir. Kurtarma bölgesindeki veritabanı daha sonra coğrafi olarak çoğaltılır ve özgün bölgede ikincil bir çoğaltma oluşturulur. Çoğaltma tamamlandıktan sonra, kiracı katalogda çevrimdışı olarak işaretlenir ve bu, kurtarma bölgesindeki veritabanına olan bağlantıları keser. Daha sonra veritabanı yük devretmeye devam eder, ancak hiçbir bekleyen işlem ikincil üzerinde işleme sağlar, böylece hiç veri kaybı olmaz. 
 
-Yük devretmede, veritabanı rolleri alınır. İkincil bölgedeki özgün birincil okuma / yazma veritabanı haline gelir ve salt okunur bir ikincil veritabanı kurtarma bölgesindeki olur. Özgün bölgede veritabanı başvurmak için Kiracı giriş kataloğunda güncelleştirilir ve Kiracı çevrimiçi olarak işaretlenir. Bu noktada, veritabanının repatriation tamamlanmıştır. 
+Yük devretmede, veritabanı rolleri tersine çevrilir. Özgün bölgedeki ikincil, birincil okuma/yazma veritabanı olur ve kurtarma bölgesindeki veritabanı salt okunurdur. Katalogdaki kiracı girdisi, özgün bölgedeki veritabanına başvuracak şekilde güncelleştirilir ve kiracı çevrimiçi olarak işaretlenir. Bu noktada, veritabanının onarımına ilişkin bir değer tamamlanmıştır. 
 
-Bunlar otomatik olarak bağlantılar bozuk olduğunda yeniden emin olmak için yeniden deneme mantığı ile uygulamaların yeniden yazılması gerekir. Aracı yeniden bağlanmak için kataloğun kullandıkları, özgün bölgede repatriated veritabanına bağlanın. Kısa Kes fark genelde olsa da, çalışma saatleri dışında veritabanları repatriate seçebilirsiniz.
+Bağlantılar kesildiği zaman otomatik olarak yeniden bağlandıklarından emin olmak için uygulamaların yeniden deneme mantığı ile yazılması gerekir. Yeniden bağlantı kurmak için kataloğunu kullandıklarında, özgün bölgedeki bir önceki veritabanına bağlanırlar. Kısa bağlantı kesilmesi genellikle fark edilmese de, veritabanlarını iş saatleri dışına yeniden çekmeyi tercih edebilirsiniz.
 
-Bir veritabanı repatriated sonra ikincil veritabanı kurtarma bölgesindeki silinebilir. Veritabanını özgün bölgede daha sonra yeniden coğrafi geri yükleme için DR koruma kullanır.
+Bir veritabanı yeniden onarımladıktan sonra, kurtarma bölgesindeki ikincil veritabanı silinebilir. Özgün bölgedeki veritabanı, daha sonra DR koruması için coğrafi geri yükleme ' yi kullanır.
 
-Adım 8'de, Kurtarma bölgesinde kurtarma sunucuları ve havuzları da dahil olmak üzere kaynaklar silinir.
+8\. adımda, kurtarma sunucuları ve havuzları da dahil olmak üzere kurtarma bölgesindeki kaynaklar silinir.
 
-## <a name="run-the-repatriation-script"></a>Repatriation betiği çalıştırın
-Şimdi kesinti çözümlendi ve repatriation betiğini çalıştırmak düşünün.
+## <a name="run-the-repatriation-script"></a>Repama betiğini çalıştırma
+Kesinti çözümlendiğini ve repama betiğini çalıştırmayı düşünün.
 
-Öğreticiyi takip, değiştirilmemiş olduğundan betik hemen Fabrikam Caz kulübü ve özgün bölgede kızılcık Dojo yeniden etkinleştirir. Ardından, değiştirilmiş olduğundan yeni Kiracı Hawthorn Hall ve Contoso Konser Salonu repatriates. Betik ayrıca Hawthorn Hall sağlanırken güncelleştirildi Kataloğu repatriates.
+Öğreticiyi takip ediyorsanız, komut dosyası değiştirilmeden oldukları için, özgün bölgedeki fabrikam Cakkkkkisini ve Dogwood Dojo 'yı hemen yeniden etkinleştirir. Daha sonra, değiştirilmiş olduğu için yeni kiracıyı ve contoso Concert salonu 'u yeniden boyar. Komut dosyası aynı zamanda, Havunsalya salonu sağlandığında güncelleştirilmiş olan kataloğu de boyar.
   
-1. PowerShell ISE'de Modules\Business sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betik ...\Learning Katalog eşitleme işlemi, PowerShell örneğinde hala çalıştığından emin olun. Gerekirse, ayarlayarak yeniden başlatın:
+1. PowerShell ıSE 'de. ..\Learning Modules\iş sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betiği içinde, katalog eşitleme işleminin hala PowerShell örneğinde çalıştığını doğrulayın. Gerekirse, şu ayarları yaparak yeniden başlatın:
 
-    $DemoScenario = 1: Kiracı sunucu, havuz ve veritabanı yapılandırma bilgilerini kataloğa eşitleme başlatın.
+    $DemoScenario = 1: kiracı sunucusu, havuz ve veritabanı yapılandırma bilgilerini katalogla eşitlemeye başlayın.
 
-    Betiği çalıştırmak için F5'i seçin.
+    Betiği çalıştırmak için F5 ' i seçin.
 
-2.  Ardından repatriation işlemini başlatmak için aşağıdakileri ayarlayın:
+2.  Ardından, yeniden deneme işlemini başlatmak için şunu ayarlayın:
 
-    $DemoScenario = 5: Uygulama, kendi özgün bölgeye repatriate.
+    $DemoScenario = 5: uygulamayı özgün bölgesine yeniden boyar.
 
-    Yeni bir PowerShell penceresi kurtarma betiği çalıştırmak için F5'i seçin. Repatriation birkaç dakika sürer ve PowerShell penceresinde izlenebilir.
+    Kurtarma betiğini yeni bir PowerShell penceresinde çalıştırmak için F5 ' i seçin. Repama, birkaç dakika sürer ve PowerShell penceresinde izlenebilir.
 
-3. Komut dosyası çalıştırılırken, olay hub'ı sayfayı yenileyin (http://events.wingtip-dpt.&lt ; kullanıcı&gt;. trafficmanager.net).
+3. Betik çalışırken, Olay Hub 'ı sayfasını (http://events.wingtip-dpt.&lt; User&gt;. trafficmanager.net) yenileyin.
 
-    Tüm kiracılar çevrimiçi ve erişilebilir bu süreci boyunca olduğuna dikkat edin.
+    Bu süreç boyunca tüm kiracıların çevrimiçi ve erişilebilir olduğuna dikkat edin.
 
-4. Fabrikam Caz kulübü açmak için seçin. Bu Kiracı değiştirirseniz yaramadı zaten sunucusudur altbilginin bildirimi özgün sunucuya geri döndürüldü.
+4. Bu öğeyi açmak için fabrikam caz kulübü seçin. Bu kiracıyı değiştirmediyseniz, altbilginin, sunucunun zaten özgün sunucuya geri döndürüldüğünü fark edersiniz.
 
-5. Contoso Konser Salonu olayları sayfayı yenileyin veya açın. Alt bilgisinden başlangıçta veritabanı hala kurtarma sunucusunda, dikkat edin. 
+5. Contoso Concert salon etkinlikleri sayfasını açın veya yenileyin. İlk olarak, veritabanının hala-kurtarma sunucusunda olduğunu belirten alt bilgiden dikkat edin. 
 
-6. Repatriation işlem tamamlandığında Contoso Konser Salonu olayları sayfası ve veritabanı artık özgün bölgenizde olduğuna dikkat edin yenileyin.
+6. Repama işlemi tamamlandığında contoso Concert salonı olayları sayfasını yenileyin ve veritabanının şimdi özgün bölgenizde olduğunu fark edersiniz.
 
-7. Olay hub'ı tekrar yenileyin ve Hawthorn Hall açın. Veritabanını özgün bölgede de bulunuyor dikkat edin. 
+7. Olay Hub 'ını yeniden yenileyin ve sonra da bir açık Havsalda açın. Veritabanının özgün bölgede de bulunduğundan emin olun. 
 
-## <a name="clean-up-recovery-region-resources-after-repatriation"></a>Kurtarma bölgesi kaynakları repatriation sonra Temizleme
-Repatriation tamamlandıktan sonra kurtarma bölgesinde kaynakları silmek güvenlidir. 
+## <a name="clean-up-recovery-region-resources-after-repatriation"></a>Kurtarma bölgesi kaynaklarını temizlemeden sonra temizle
+Repama geri alma işlemi tamamlandıktan sonra kurtarma bölgesindeki kaynakları silmek güvenlidir. 
 
 > [!IMPORTANT]
-> En kısa sürede onlar için tüm faturalandırma işlemlerini durdurmak için şu kaynakları silin.
+> Tüm faturalandırmaları durdurmak için bu kaynakları hemen silin.
 
-Geri yükleme işlemi bir kurtarma kaynak grubundaki tüm kurtarma kaynakları oluşturur. Temizleme işlemi, bu kaynak grubunu siler ve tüm kaynaklara başvurular Kataloğu'ndan kaldırır. 
+Geri yükleme işlemi, bir kurtarma kaynak grubundaki tüm kurtarma kaynaklarını oluşturur. Temizleme işlemi bu kaynak grubunu siler ve katalogdaki kaynakların tüm başvurularını kaldırır. 
 
-1. PowerShell ISE'de ...\Learning Modules\Business sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betikte ayarlayın:
+1. PowerShell ıSE 'de,. ..\Learning Modules\iş sürekliliği ve olağanüstü durum Recovery\DR-RestoreFromBackup\Demo-RestoreFromBackup.ps1 betiği ' nde şunları ayarlayın:
     
-    $DemoScenario = 6: Kurtarma bölgesi artık kullanılmayan kaynakları silin.
+    $DemoScenario = 6: kurtarma bölgesinden kullanılmayan kaynakları silin.
 
-2. Betiği çalıştırmak için F5'i seçin.
+2. Betiği çalıştırmak için F5 ' i seçin.
 
-Komut dosyalarını temizlendikten sonra geri başlattığınız yerde uygulamasıdır. Bu noktada, betiği yeniden çalıştırın veya diğer öğreticileri deneyin.
+Betikleri temizledikten sonra uygulama başlatıldığı yerde geri gönderilir. Bu noktada, betiği yeniden çalıştırabilir veya diğer öğreticileri deneyebilirsiniz.
 
-## <a name="designing-the-application-to-ensure-that-the-app-and-the-database-are-co-located"></a>Uygulama ve veritabanı birlikte bulunan olmasını sağlamak için uygulama tasarlama 
-Uygulama, kiracının veritabanı ile aynı bölgede örneğinden her zaman bağlanmak için tasarlanmıştır. Bu tasarım, uygulama ve veritabanı arasındaki gecikme süresini azaltır. Bu iyileştirme, uygulama veritabanı etkileşimi uygulama için kullanıcı etkileşimi chattier olduğunu varsayar.  
+## <a name="designing-the-application-to-ensure-that-the-app-and-the-database-are-co-located"></a>Uygulamanın ve veritabanının birlikte bulunduğundan emin olmak için uygulamayı tasarlama 
+Uygulama, kiracının veritabanıyla aynı bölgedeki bir örnekten her zaman bağlanacak şekilde tasarlanmıştır. Bu tasarım, uygulama ve veritabanı arasındaki gecikmeyi azaltır. Bu en iyi duruma getirme, uygulamadan veritabanına etkileşimin, kullanıcıdan uygulamaya müdahaleden chattier olduğunu varsayar.  
 
-Kiracı veritabanlarını kurtarma ve özgün bölgeler arasında bir süre boyunca repatriation yayılıyor olabilir. Her veritabanı için veritabanı Kiracı sunucu adı bir DNS araması yaparak bulunur bölge uygulama arar. SQL veritabanı'nda bir diğer ad sunucu adıdır. Diğer adlı sunucu adını, bölge adını içerir. Uygulama, veritabanı ile aynı bölgede değilse, veritabanı sunucusu ile aynı bölgede örneğine yeniden yönlendirir. Aynı bölgede veritabanı örneğine yönlendirerek uygulama ve veritabanı arasındaki gecikme süresini en aza indirir.  
+Kiracı veritabanları, geri alma sırasında bir süre boyunca kurtarma ve özgün bölgelere yayılabilen olabilir. Her veritabanı için, uygulama, kiracı sunucusu adında bir DNS araması gerçekleştirerek veritabanının bulunduğu bölgeyi arar. SQL veritabanında sunucu adı bir diğer addır. Diğer ad sunucu adı, bölge adını içerir. Uygulama veritabanıyla aynı bölgede değilse, veritabanı sunucusuyla aynı bölgedeki örneğe yeniden yönlendirir. Veritabanı ile aynı bölgedeki örneğe yeniden yönlendirme, uygulama ve veritabanı arasındaki gecikmeyi en aza indirir.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 > [!div class="checklist"]
 > 
-> * Başka bir bölgede oluşturulacak bir Ayna görüntüsünü kurtarma ortamı sağlayan düzenli aralıklarla yenilenen yapılandırma bilgilerini saklamak için Kiracı Kataloğu kullanın.
-> * Azure SQL veritabanı coğrafi geri yükleme ile kurtarma bölgeye kurtarın.
-> * Kiracı kataloğa geri yüklenen Kiracı veritabanı konumları yansıtacak şekilde güncelleştirin. 
-> * Yeniden yapılandırma olmadan Kiracı Kataloğu'na bağlanmak bir uygulama için bir DNS diğer adı kullanın.
-> * Coğrafi çoğaltma, kesinti giderildikten sonra kurtarılan veritabanları kendi özgün bölgeye repatriate için kullanın.
+> * Bir yansıtma görüntüsü kurtarma ortamının başka bir bölgede oluşturulmasına izin veren düzenli aralıklarla yenilenen yapılandırma bilgilerini tutmak için kiracı kataloğunu kullanın.
+> * Coğrafi geri yükleme kullanarak Azure SQL veritabanlarını kurtarma bölgesine kurtarın.
+> * Kiracı kataloğunu, geri yüklenen Kiracı veritabanı konumlarını yansıtacak şekilde güncelleştirin. 
+> * Bir uygulamanın kiracı kataloğuna yeniden yapılandırma olmadan bağlanmasını sağlamak için bir DNS diğer adı kullanın.
+> * Bir kesinti çözümlendikten sonra kurtarılan veritabanlarını özgün bölgelerine yeniden eklemek için Coğrafi çoğaltmayı kullanın.
 
-Deneyin [coğrafi veri tabanı çoğaltmayı kullanarak çok kiracılı bir SaaS uygulaması için olağanüstü durum kurtarma](saas-dbpertenant-dr-geo-replication.md) coğrafi çoğaltma büyük ölçekli, çok kiracılı bir uygulama kurtarmak için gereken zamanı önemli ölçüde azaltmak için nasıl kullanılacağını öğrenmek için öğreticiye.
+Büyük ölçekli çok kiracılı bir uygulamayı kurtarmak için gereken süreyi önemli ölçüde azaltmak üzere Coğrafi çoğaltmayı nasıl kullanacağınızı öğrenmek için, [çok kiracılı SaaS uygulaması için veritabanı coğrafi çoğaltma öğreticisini kullanarak olağanüstü durum kurtarmayı](saas-dbpertenant-dr-geo-replication.md) deneyin.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-[Wingtip SaaS uygulamasına geliştirecek ek öğreticilerden](saas-dbpertenant-wingtip-app-overview.md#sql-database-wingtip-saas-tutorials)
+[Wingtip SaaS uygulaması üzerine inşa eden ek öğreticiler](saas-dbpertenant-wingtip-app-overview.md#sql-database-wingtip-saas-tutorials)

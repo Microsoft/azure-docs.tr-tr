@@ -6,14 +6,12 @@ metadata:
   title: 'Azure Container Service Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
   meta.description: 'Azure Container Service allows you to quickly deploy a production ready Kubernetes, DC/OS, or Docker Swarm cluster. Learn how to use Azure Container Service with these quickstarts, tutorials, and samples.'
   services: container-service
-  author: czeumault
-  manager: carolz
+  author: georgewallace
+  manager: gwallace
   ms.service: container-service
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
   ms.date: 07-21-2017
-  ms.author: carolz
+  ms.author: gwallace
 abstract:
   description: 'Azure Container Service, üretime hazır Kubernetes, DC/OS veya Docker Swarm kümelerini hızlı bir şekilde dağıtmanızı sağlar. Bu hızlı başlangıç kılavuzlarından, öğreticilerden ve örneklerden yararlanarak Azure Container Service kullanmayı öğrenin.'
 sections:

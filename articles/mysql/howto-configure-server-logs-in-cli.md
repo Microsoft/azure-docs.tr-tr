@@ -1,35 +1,35 @@
 ---
-title: MySQL için Azure veritabanı'nda Azure CLI kullanarak erişim yavaş sorgu günlüklerini
-description: Bu makalede, Azure CLI kullanarak MySQL için Azure veritabanı'nda yavaş sorgu günlüklerini erişmeye açıklar.
-author: andrela
-ms.author: ajlam
+title: Azure CLı kullanarak MySQL için Azure veritabanı 'nda yavaş sorgu günlüklerine erişin
+description: Bu makalede, Azure CLı kullanarak MySQL için Azure veritabanı 'ndaki yavaş sorgu günlüklerine nasıl erişebileceğiniz açıklanır.
+author: ajlam
+ms.author: andrela
 ms.service: mysql
 ms.devlang: azurecli
 ms.topic: conceptual
-ms.date: 06/12/219
-ms.openlocfilehash: 740dbce579fba6347b1a7f2cfc6bcae40d3503ab
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 06/12/2019
+ms.openlocfilehash: 0ab4162d11642ec7df53040bd744711002227497
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67052701"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72030626"
 ---
-# <a name="configure-and-access-slow-query-logs-by-using-azure-cli"></a>Yapılandırma ve Azure CLI kullanarak yavaş sorgu günlüklerini erişin
-MySQL yavaş sorgu günlüklerini için Azure veritabanı Azure CLI, Azure komut satırı yardımcı programını kullanarak indirebilirsiniz.
+# <a name="configure-and-access-slow-query-logs-by-using-azure-cli"></a>Azure CLı kullanarak yavaş sorgu günlüklerini yapılandırma ve erişme
+Azure komut satırı yardımcı programı olan Azure CLı 'yı kullanarak MySQL için Azure veritabanı yavaş sorgu günlüklerini indirebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu nasıl yapılır kılavuzunda adımlamak için ihtiyacınız vardır:
-- [MySQL sunucusu için Azure veritabanı](quickstart-create-mysql-server-database-using-azure-cli.md)
-- [Azure CLI](/cli/azure/install-azure-cli) veya tarayıcıda Azure Cloud Shell
+Bu nasıl yapılır kılavuzunda ilerlemek için şunlar gerekir:
+- [MySQL için Azure veritabanı sunucusu](quickstart-create-mysql-server-database-using-azure-cli.md)
+- Tarayıcıda [Azure CLI](/cli/azure/install-azure-cli) veya Azure Cloud Shell
 
-## <a name="configure-logging"></a>Günlük tutmayı yapılandırma
-MySQL yavaş sorgu günlüğü aşağıdaki adımları izleyerek erişmek için sunucu yapılandırabilirsiniz:
-1. Yavaş sorgu günlüğü ayarlayarak etkinleştirirseniz **yavaş\_sorgu\_günlük** on parametresi.
-2. Diğer parametreler gibi ayarlayın **uzun\_sorgu\_zaman** ve **günlük\_yavaş\_yönetici\_deyimleri**.
+## <a name="configure-logging"></a>Günlüğe kaydetmeyi yapılandırma
+Aşağıdaki adımları gerçekleştirerek, sunucuyu MySQL yavaş sorgu günlüğüne erişecek şekilde yapılandırabilirsiniz:
+1. **Yavaş @ no__t-1query @ no__t-2Log** parametresini açık olarak ayarlayarak yavaş sorgu günlüğünü açın.
+2. **Long @ no__t-1query @ no__t-2time** ve **log @ no__t-4yavaş @ no__t-5admin @ no__t-6deyimlerini**gibi diğer parametreleri ayarlayın.
 
-Azure CLI aracılığıyla bu parametre değeri hakkında bilgi edinmek için bkz: [sunucu parametrelerini yapılandırma](howto-configure-server-parameters-using-cli.md).
+Bu parametrelerin değerini Azure CLı aracılığıyla ayarlamayı öğrenmek için bkz. [sunucu parametrelerini yapılandırma](howto-configure-server-parameters-using-cli.md).
 
-Örneğin, aşağıdaki CLI komutunu yavaş sorgu oturum açar, uzun sorgu süresi 10 saniye olarak ayarlar ve ardından yavaş yönetici deyiminin günlüğünü kapatır. Son olarak, gözden geçirmeniz için yapılandırma seçeneklerini listeler.
+Örneğin, aşağıdaki CLı komutu yavaş sorgu günlüğünü açar, uzun sorgu süresini 10 saniye olarak ayarlar ve sonra yavaş yönetici bildiriminin günlüğe kaydedilmesini kapatır. Son olarak, gözden geçirmeniz için yapılandırma seçeneklerini listeler.
 ```azurecli-interactive
 az mysql server configuration set --name slow_query_log --resource-group myresourcegroup --server mydemoserver --value ON
 az mysql server configuration set --name long_query_time --resource-group myresourcegroup --server mydemoserver --value 10
@@ -37,20 +37,20 @@ az mysql server configuration set --name log_slow_admin_statements --resource-gr
 az mysql server configuration list --resource-group myresourcegroup --server mydemoserver
 ```
 
-## <a name="list-logs-for-azure-database-for-mysql-server"></a>MySQL sunucusu için Azure veritabanı için liste günlükleri
-Sunucunuzun kullanılabilir yavaş sorgu günlük dosyalarını listelemek için çalıştırma [az mysql server-logs listesi](/cli/azure/mysql/server-logs#az-mysql-server-logs-list) komutu.
+## <a name="list-logs-for-azure-database-for-mysql-server"></a>MySQL için Azure veritabanı sunucusu için günlükleri listeleme
+Sunucunuzun kullanılabilir yavaş sorgu günlük dosyalarını listelemek için [az MySQL Server-Logs List](/cli/azure/mysql/server-logs#az-mysql-server-logs-list) komutunu çalıştırın.
 
-Sunucu için günlük dosyalarını listeleyebilirsiniz **demosunucum.MySQL.Database.Azure.com** kaynak grubu altında **myresourcegroup**. Ardından adlı bir metin dosyasına günlük dosyalarının listesi doğrudan **günlük\_dosyaları\_list.txt**.
+Sunucu **mydemoserver.MySQL.Database.Azure.com** için günlük dosyalarını **myresourcegroup**kaynak grubu altında listeleyebilirsiniz. Ardından günlük dosyaları listesini **log @ no__t-1files\_list.txt**adlı bir metin dosyasına yönlendirin.
 ```azurecli-interactive
 az mysql server-logs list --resource-group myresourcegroup --server mydemoserver > log_files_list.txt
 ```
-## <a name="download-logs-from-the-server"></a>Sunucudan günlükleri indir
-İle [az mysql server-logs indirme](/cli/azure/mysql/server-logs#az-mysql-server-logs-download) komutunu sunucunuz için ayrı günlük dosyalarına karşıdan yükleyebilirsiniz. 
+## <a name="download-logs-from-the-server"></a>Günlükleri sunucudan indir
+[Az MySQL Server-Logs Download](/cli/azure/mysql/server-logs#az-mysql-server-logs-download) komutuyla, sunucunuza ait günlük dosyalarını tek tek indirebilirsiniz. 
 
-Sunucu için belirli günlük dosyasını indirmek için aşağıdaki örneği kullanın **demosunucum.MySQL.Database.Azure.com** kaynak grubu altında **myresourcegroup** yerel ortamınıza.
+Yerel ortamınıza **myresourcegroup** kaynak grubu altında sunucu **mydemoserver.MySQL.Database.Azure.com** için belirli günlük dosyasını indirmek üzere aşağıdaki örneği kullanın.
 ```azurecli-interactive
 az mysql server-logs download --name 20170414-mydemoserver-mysql.log --resource-group myresourcegroup --server mydemoserver
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Hakkında bilgi edinin [yavaş sorgu, MySQL için Azure veritabanı'nda oturum](concepts-server-logs.md).
+- [MySQL Için Azure veritabanı 'nda yavaş sorgu günlükleri](concepts-server-logs.md)hakkında bilgi edinin.

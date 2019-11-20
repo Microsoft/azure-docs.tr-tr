@@ -1,154 +1,153 @@
 ---
-title: Azure dosya eşitleme'yi izleyin | Microsoft Docs
-description: Azure dosya eşitleme izlemeyi öğrenin.
-services: storage
+title: İzleyici Azure Dosya Eşitleme | Microsoft Docs
+description: Azure Dosya Eşitleme nasıl izlenir.
 author: roygara
 ms.service: storage
-ms.topic: article
+ms.topic: conceptual
 ms.date: 06/28/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 86c4bf328430bbc623d8e493eec5db520d50ef82
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: ac09f9b59bc6f47adc9311cc910352c1a0d73b5d
+ms.sourcegitcommit: 800f961318021ce920ecd423ff427e69cbe43a54
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67485989"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68699284"
 ---
 # <a name="monitor-azure-file-sync"></a>Azure Dosya Eşitleme’yi izleme
 
-Kuruluşunuzun dosya paylaşımlarını Azure dosyaları'nda esneklik, performans ve bir şirket içi dosya sunucusunun uyumluluğu korurken merkezileştirmek için Azure dosya eşitleme'yi kullanın. Azure dosya eşitleme Windows Server, Azure dosya paylaşımınızın hızlı bir önbelleğine dönüştürür. SMB, NFS ve FTPS gibi verilerinizi yerel olarak erişmek için Windows Server üzerinde kullanılabilir olan herhangi bir protokolünü kullanabilirsiniz. Dünya genelinde gereken sayıda önbellek olabilir.
+Şirket içi bir dosya sunucusunun esnekliğini, performansını ve uyumluluğunu koruyarak kuruluşunuzun dosya paylaşımlarını Azure dosyalarında merkezileştirmek için Azure Dosya Eşitleme kullanın. Azure Dosya Eşitleme, Windows Server 'ı Azure dosya paylaşımınızın hızlı önbelleğine dönüştürür. SMB, NFS ve FTPS dahil olmak üzere verilerinize yerel olarak erişmek için Windows Server 'da bulunan herhangi bir protokolü kullanabilirsiniz. Dünyanın dört bir yanında ihtiyacınız olan sayıda önbellekler olabilir.
 
-Bu makalede, Azure İzleyici, depolama eşitleme hizmeti ve Windows Server'ı kullanarak Azure dosya eşitleme dağıtımınızı izleme açıklar.
+Bu makalede, Azure Izleyici, depolama eşitleme hizmeti ve Windows Server kullanılarak Azure Dosya Eşitleme dağıtımınızın nasıl izleneceği açıklanır.
 
-Aşağıdaki izleme seçeneklerini şu anda kullanılabilir.
+Aşağıdaki izleme seçenekleri şu anda kullanılabilir.
 
 ## <a name="azure-monitor"></a>Azure İzleyici
 
-Kullanım [Azure İzleyici](https://docs.microsoft.com/azure/azure-monitor/overview) ölçümleri görüntüleyin ve Eşitleme uyarılarını yapılandırmak için bulut katmanlama ve sunucu bağlantısı.  
+Ölçümleri görüntülemek ve eşitleme, bulut katmanlama ve sunucu bağlantısı için uyarıları yapılandırmak üzere [Azure izleyici](https://docs.microsoft.com/azure/azure-monitor/overview) 'yi kullanın.  
 
 ### <a name="metrics"></a>Ölçümler
 
-Azure dosya eşitleme için ölçümleri, varsayılan olarak etkindir ve Azure İzleyici her 15 dakikada gönderilir.
+Azure Dosya Eşitleme ölçümleri varsayılan olarak etkindir ve 15 dakikada bir Azure Izleyicisine gönderilir.
 
-Azure İzleyici'de Azure dosya eşitleme ölçümleri görüntülemek için seçin **depolama Eşitleme Hizmetleri** kaynak türü.
+Azure Izleyici 'de Azure Dosya Eşitleme ölçümleri görüntülemek için **depolama Eşitleme Hizmetleri** kaynak türünü seçin.
 
-Aşağıdaki ölçümler Azure dosya eşitleme için Azure İzleyici'de kullanılabilir:
+Azure Dosya Eşitleme için aşağıdaki ölçümler Azure Izleyici 'de bulunabilir:
 
 | Ölçüm adı | Açıklama |
 |-|-|
-| Eşitlenen bayt | (Karşıya yükleme ve indirme) aktarılan verilerin boyutu.<br><br>Birim: Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
-| Bulut katmanlaması geri çağırma | Geri verilerin boyutu.<br><br>**Not**: Bu ölçüm gelecekte kaldırılacaktır. Bulut katmanlaması geri çağırma boyut ölçümü geri verilerin boyutunu izlemek için kullanın.<br><br>Birim: Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu adı |
-| Bulut katmanlaması geri çağırma boyutu | Geri verilerin boyutu.<br><br>Birim: Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu adı, eşitleme grubu adı |
-| Uygulama tarafından katmanlama geri çağırma boyutu bulut | Uygulama tarafından geri verilerin boyutu.<br><br>Birim: Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Uygulama adı, sunucu adı, eşitleme grubu adı |
-| Bulut katmanlaması geri çağırma aktarım hızı | Verileri geri çağırma Aktarım boyutu.<br><br>Birim: Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu adı, eşitleme grubu adı |
-| Dosyalar eşitleniyor değil | Eşitleme başarısız olan dosya sayısı.<br><br>Birim: Count<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
-| Eşitlenmiş dosyaları | Dosya sayısı (karşıya yükleme ve indirme) aktardı.<br><br>Birim: Sayı<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
-| Sunucu çevrimiçi durumu | Sunucudan alınan sinyal sayısı.<br><br>Birim: Count<br>Toplama türü: Maksimum<br>Geçerli boyut: Sunucu adı |
-| Eşitleme oturumu sonucu | Eşitleme oturumu sonucu (1 = başarılı eşitleme oturumu; 0 başarısız eşitleme oturumu =)<br><br>Birim: Sayı<br>Toplama türleri: Maksimum<br>Geçerli boyut: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
+| Eşitlenen baytlar | Aktarılan verilerin boyutu (karşıya yükleme ve indirme).<br><br>Birim Bayt<br>Toplama türü: Toplam<br>Geçerli Boyutlar: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
+| Bulut katmanlama geri çağırma | Geri çekilen verilerin boyutu.<br><br>**Not**: Bu ölçüm gelecekte kaldırılacak. Geri çekilen verilerin boyutunu izlemek için bulut katmanlama geri çekme boyutu ölçümünü kullanın.<br><br>Birim Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu adı |
+| Bulut katmanlama geri çağırma boyutu | Geri çekilen verilerin boyutu.<br><br>Birim Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu adı, eşitleme grubu adı |
+| Uygulamaya göre bulut katmanlama geri çağırma boyutu | Uygulama tarafından geri çekilen verilerin boyutu.<br><br>Birim Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Uygulama adı, sunucu adı, eşitleme grubu adı |
+| Bulut katmanlama geri çekme performansı | Veri geri çağırma üretilen iş boyutu.<br><br>Birim Bayt<br>Toplama türü: Toplam<br>Geçerli boyut: Sunucu adı, eşitleme grubu adı |
+| Dosyalar eşitlenmiyor | Eşitleme başarısız olan dosyaların sayısı.<br><br>Birim Count<br>Toplama türü: Toplam<br>Geçerli Boyutlar: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
+| Eşitlenen dosyalar | Aktarılan dosya sayısı (karşıya yükleme ve indirme).<br><br>Birim Count<br>Toplama türü: Toplam<br>Geçerli Boyutlar: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
+| Sunucu çevrimiçi durumu | Sunucudan alınan sinyal sayısı.<br><br>Birim Count<br>Toplama türü: Maksimum<br>Geçerli boyut: Sunucu adı |
+| Eşitleme oturumu sonucu | Eşitleme oturumu sonucu (1 = başarılı eşitleme oturumu; 0 = başarısız eşitleme oturumu)<br><br>Birim Count<br>Toplama türleri: Maksimum<br>Geçerli Boyutlar: Sunucu uç noktası adı, eşitleme yönü, eşitleme grubu adı |
 
 ### <a name="alerts"></a>Uyarılar
 
-Azure İzleyici'de uyarıları yapılandırmak için depolama eşitleme hizmeti seçin ve ardından [Azure dosya eşitleme ölçüm](https://docs.microsoft.com/azure/storage/files/storage-sync-files-monitoring#metrics) uyarı için kullanılacak.  
+Azure Izleyici 'de uyarıları yapılandırmak için depolama eşitleme hizmeti ' ni seçin ve ardından uyarı için kullanılacak [Azure dosya eşitleme ölçümünü](https://docs.microsoft.com/azure/storage/files/storage-sync-files-monitoring#metrics) seçin.  
 
-Aşağıdaki tabloda bazı örnek senaryoları izlemek için ve uyarı için kullanılacak uygun ölçüm listeler:
+Aşağıdaki tabloda, izlemek için bazı örnek senaryolar ve uyarı için kullanılacak uygun ölçüm listelenmektedir:
 
-| Senaryo | Ölçüm uyarısı için kullanılacak |
+| Senaryo | Uyarı için kullanılacak ölçüm |
 |-|-|
-| Sunucu uç noktası durumu Portalı'nda hata = | Eşitleme oturumu sonucu |
-| Dosyaları bir sunucuya eşitleme ya da bulut uç noktası başarısız oluyor | Dosyalar eşitleniyor değil |
-| Kayıtlı sunucu depolama eşitleme hizmeti ile iletişim kurmak başarısız oluyor | Sunucu çevrimiçi durumu |
-| Bulut katmanlaması geri çağırma boyutunu bir gün içinde 500GiB aştı  | Bulut katmanlaması geri çağırma boyutu |
+| Portalda sunucu uç noktası sistem durumu = hata | Eşitleme oturumu sonucu |
+| Dosyalar bir sunucu veya bulut uç noktasına eşitlenemiyor | Dosyalar eşitlenmiyor |
+| Kayıtlı sunucu, depolama eşitleme hizmeti ile iletişim kuramıyor | Sunucu çevrimiçi durumu |
+| Bulut katmanlama geri çağırma boyutu günde 500 gib 'yi aştı  | Bulut katmanlama geri çağırma boyutu |
 
-Azure İzleyici'de uyarıları yapılandırma hakkında daha fazla bilgi edinmek için [Microsoft azure'da uyarılara genel bakış]( https://docs.microsoft.com/azure/azure-monitor/platform/alerts-overview).
+Azure Izleyici 'de uyarıları yapılandırma hakkında daha fazla bilgi edinmek için bkz. [Microsoft Azure uyarılara genel bakış]( https://docs.microsoft.com/azure/azure-monitor/platform/alerts-overview).
 
-## <a name="storage-sync-service"></a>Depolama eşitleme hizmeti
+## <a name="storage-sync-service"></a>Depolama Eşitleme Hizmeti
 
-Kayıtlı sunucu sistem durumu, sunucu uç noktası durumu ve ölçümleri görüntülemek için Azure portalında depolama eşitleme hizmeti gidin. Kayıtlı sunucu durumunu görüntüleyebileceğiniz **kayıtlı sunucuları** dikey penceresinde ve sunucu uç noktası durumu **eşitleme grupları** dikey.
+Kayıtlı sunucu sistem durumu, sunucu uç noktası sistem durumu ve ölçümleri görüntülemek için Azure portal depolama Eşitleme hizmetine gidin. Kayıtlı sunucu sistem durumunu **kayıtlı sunucular** dikey penceresinde ve sunucu uç noktası sistem durumu ' nu **eşitleme grupları** dikey penceresinde görüntüleyebilirsiniz.
 
 ### <a name="registered-server-health"></a>Kayıtlı sunucu durumu
 
-- Varsa **kayıtlı sunucu** durumu **çevrimiçi**, sunucunun başarıyla hizmetiyle iletişim kurulurken.
-- Varsa **kayıtlı sunucu** durumu **çevrimdışı görünür**, sunucudaki depolama eşitleme İzleyicisi (AzureStorageSyncMonitor.exe) işleminin çalıştığını doğrulayın. Sunucu güvenlik duvarı veya proxy arkasında olup olmadığını [bu makalede](https://docs.microsoft.com/azure/storage/files/storage-sync-files-firewall-and-proxy) proxy ve Güvenlik Duvarı'nı yapılandırmak için.
+- **Kayıtlı sunucu** durumu **çevrimiçi**ise, sunucu hizmetle başarılı bir şekilde iletişim kuruyor.
+- **Kayıtlı sunucu** durumu **çevrimdışı görünüyorsa**, sunucuda depolama eşitleme Izleyicisi (AzureStorageSyncMonitor. exe) işleminin çalıştığını doğrulayın. Sunucu bir güvenlik duvarı veya proxy 'nin arkasındaysa, güvenlik duvarını ve proxy 'yi yapılandırmak için [Bu makaleye](https://docs.microsoft.com/azure/storage/files/storage-sync-files-firewall-and-proxy) bakın.
 
-### <a name="server-endpoint-health"></a>Sunucu uç noktası durumu
+### <a name="server-endpoint-health"></a>Sunucu uç noktası sistem durumu
 
-- Sunucu uç noktası durumu Portalı'nda sunucunun (ID 9102 ve 9302) Telemetri olay günlüğüne kaydedilir eşitleme olayları temel alır. Hata iptal gibi bir eşitleme oturumunu geçici bir hata nedeniyle başarısız olursa, geçerli eşitleme oturumu ilerleme kaydediyor mu sürece eşitleme hala portalda sağlıklı görünebilir. Olay Kimliği 9302 dosyaları uygulanmış olup olmadığını belirlemek için kullanılır. Daha fazla bilgi için [eşitleme durumu](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#broken-sync) ve [eşitleme ilerleme](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#how-do-i-monitor-the-progress-of-a-current-sync-session).
-- Eşitleme İlerleme kaydediyor değil çünkü portalı bir eşitleme hatası gösterirse bkz [sorun giderme belgelerinin](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=portal1%2Cazure-portal#common-sync-errors) Kılavuzu.
+- Portaldaki sunucu uç noktası sistem durumu, sunucudaki telemetri olay günlüğüne kaydedilen eşitleme olaylarını temel alır (KIMLIK 9102 ve 9302). Hata iptal edildiğinde, eşitleme oturumu geçici bir hata nedeniyle başarısız olursa, eşitleme, geçerli eşitleme oturumu devam ettiği sürece portalda hala sağlıklı olarak görünebilir. Olay KIMLIĞI 9302, dosyaların uygulanmakta olup olmadığını belirlemekte kullanılır. Daha fazla bilgi için bkz. [eşitleme durumu](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#broken-sync) ve [Eşitleme ilerleme durumu](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#how-do-i-monitor-the-progress-of-a-current-sync-session).
+- Eşitleme ilerleme yaptığından Portal bir eşitleme hatası gösteriyorsa, rehberlik için [sorun giderme belgelerine](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=portal1%2Cazure-portal#common-sync-errors) bakın.
 
 ### <a name="metric-charts"></a>Ölçüm grafikleri
 
-- Depolama eşitleme hizmeti Portalı'nda aşağıdaki ölçüm grafikleri görünür:
+- Aşağıdaki ölçüm grafikleri, depolama eşitleme hizmeti portalında görüntülenebilir:
 
-  | Ölçüm adı | Açıklama | Dikey adı |
+  | Ölçüm adı | Açıklama | Dikey pencere adı |
   |-|-|-|
-  | Eşitlenen bayt | (Karşıya yükleme ve indirme) aktarılan verilerin boyutu | Eşitleme grubu, sunucu uç noktası |
-  | Bulut katmanlaması geri çağırma | Geri veri boyutu | Kayıtlı sunucular |
-  | Dosyalar eşitleniyor değil | Eşitleme başarısız olan dosya sayısı | Sunucu uç noktası |
-  | Eşitlenmiş dosyaları | Dosya sayısı (karşıya yükleme ve indirme) aktarılan | Eşitleme grubu, sunucu uç noktası |
+  | Eşitlenen baytlar | Aktarılan verilerin boyutu (karşıya yükleme ve indirme) | Eşitleme grubu, sunucu uç noktası |
+  | Bulut katmanlama geri çağırma | Geri çekilen verilerin boyutu | Kayıtlı sunucular |
+  | Dosyalar eşitlenmiyor | Eşitleme başarısız olan dosyaların sayısı | Sunucu uç noktası |
+  | Eşitlenen dosyalar | Aktarılan dosya sayısı (karşıya yükleme ve indirme) | Eşitleme grubu, sunucu uç noktası |
   | Sunucu çevrimiçi durumu | Sunucudan alınan sinyal sayısı | Kayıtlı sunucular |
 
-- Daha fazla bilgi için bkz. [Azure İzleyici](https://docs.microsoft.com/azure/storage/files/storage-sync-files-monitoring#azure-monitor).
+- Daha fazla bilgi için bkz. [Azure izleyici](https://docs.microsoft.com/azure/storage/files/storage-sync-files-monitoring#azure-monitor).
 
   > [!Note]  
-  > Depolama eşitleme hizmeti Portalı'nda grafikleri, 24 saatlik bir zaman aralığı vardır. Farklı tarih aralıkları veya boyutlar görüntülemek için Azure İzleyici'yi kullanın.
+  > Depolama eşitleme hizmeti portalındaki grafiklerde 24 saatlik bir zaman aralığı vardır. Farklı zaman aralıklarını veya boyutları görüntülemek için Azure Izleyici 'yi kullanın.
 
 ## <a name="windows-server"></a>Windows Server
 
-Windows Server'da bulut katmanlama, kayıtlı sunucu görüntüleyebilir ve sistem durumu eşitleyin.
+Windows Server 'da bulut katmanlaması, kayıtlı sunucu ve eşitleme sistem durumunu görüntüleyebilirsiniz.
 
 ### <a name="event-logs"></a>Olay günlükleri
 
-Telemetri olay günlüğüne sunucuda kayıtlı sunucu, eşitleme ve bulut katmanlaması sistem durumu izlemek için kullanın. Telemetri olay günlüğü altında Olay Görüntüleyicisi'nde bulunan *uygulamalar ve Services\Microsoft\FileSync\Agent*.
+Kayıtlı sunucu, eşitleme ve bulut katmanlama durumunu izlemek için sunucuda telemetri olay günlüğünü kullanın. Telemetri olay günlüğü, *uygulamalar ve Services\Microsoft\FileSync\Agent*altında Olay Görüntüleyicisi bulunur.
 
 Eşitleme durumu:
 
-- Eşitleme oturumu sona erdikten sonra olay kimliği 9102 günlüğe kaydedilir. Eşitleme oturumları başarılı olup olmadığını belirlemek için bu olayı kullanın (**HResult = 0**) ve öğe başına olup olmadığını Eşitleme hataları. Daha fazla bilgi için [eşitleme durumu](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#broken-sync) ve [öğesi başına hataları](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#how-do-i-see-if-there-are-specific-files-or-folders-that-are-not-syncing) belgeleri.
+- Olay KIMLIĞI 9102, bir eşitleme oturumu bittikten sonra günlüğe kaydedilir. Eşitleme oturumlarının başarılı olup olmadığını (**HRESULT = 0**) ve öğe başına Eşitleme hataları olup olmadığını öğrenmek için bu olayı kullanın. Daha fazla bilgi için bkz. [eşitleme durumu](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#broken-sync) ve [öğe başına hatalar](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#how-do-i-see-if-there-are-specific-files-or-folders-that-are-not-syncing) belgeleri.
 
   > [!Note]  
-  > Bazen Eşitleme oturumları genel başarısız veya sıfır olmayan PerItemErrorCount vardır. Ancak yine de ilerleme yapmaları ve bazı dosyalar başarıyla eşitleyin. Uygulanan alanları AppliedFileCount, AppliedDirCount AppliedTombstoneCount ve AppliedSizeBytes gibi görebilirsiniz. Bu alanlar oturumun ne kadar başarılı söyleyin. Bir satırda başarısız birden çok eşitleme oturumu bakın ve artan bir uygulanan sayımı sahiptirler, bir destek bileti açmadan önce yeniden denemek için zaman verin.
+  > Bazen eşitleme oturumları genel başarısız olur ya da sıfır olmayan bir PerItemErrorCount sayısına sahiptir. Ancak, yine de ilerleme durumu ve bazı dosyalar başarıyla eşitlenir. Bunu, AppliedFileCount, AppliedDirCount, AppliedTombstoneCount ve AppliedSizeBytes gibi uygulanan alanlarda görebilirsiniz. Bu alanlar, oturumun ne kadarının başarılı olduğunu bildirir. Bir satırda birden çok eşitleme oturumu başarısız görürseniz ve artan uygulanmış sayımla karşılaşırsanız, bir destek bileti açmadan önce yeniden denemek için eşitleme süresi verin.
 
-- Bir active eşitleme oturumu varsa olay kimliği 9302 5-10 dakikada bir günlüğe kaydedilir. Geçerli eşitleme oturumu ilerleme kaydediyor mu belirlemek için bu olayı kullanın (**AppliedItemCount > 0**). Eşitleme İlerleme kaydediyor değil, eşitleme oturumu sonunda başarısız olması ve bir olay kimliği 9102 hata günlüğe kaydedilir. Daha fazla bilgi için [eşitleme ilerleme belgeleri](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#how-do-i-monitor-the-progress-of-a-current-sync-session).
+- Etkin bir eşitleme oturumu varsa olay KIMLIĞI 9302, her 5 dakikada bir günlüğe kaydedilir. Geçerli eşitleme oturumunun ilerleme yapıp yapmadığını (**AppliedItemCount > 0**) öğrenmek için bu olayı kullanın. Eşitleme ilerlemeye devam etmez, eşitleme oturumunun sonunda başarısız olması gerekir ve hata ile 9102 olay KIMLIĞI günlüğe kaydedilir. Daha fazla bilgi için bkz. [eşitleme ilerlemesi belgeleri](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=server%2Cazure-portal#how-do-i-monitor-the-progress-of-a-current-sync-session).
 
-Kayıtlı sunucu sistem durumu:
+Kayıtlı sunucu durumu:
 
-- Olay Kimliği 9301 oluşturun ne zaman bir sunucu işler hizmetini sorgular her 30 saniyede bir günlüğe kaydedilir. GetNextJob ile sonuçlansa **durumu = 0**, sunucu hizmeti ile iletişim kuramıyor. GetNextJob bir hata ile sonuçlansa denetleyin [sorun giderme belgelerinin](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=portal1%2Cazure-portal#common-sync-errors) Kılavuzu.
+- Olay KIMLIĞI 9301, bir sunucu işler için hizmeti sorguladığında her 30 saniyede bir günlüğe kaydedilir. GetNextJob **durum = 0**ile sonlandıysanız, sunucu hizmetle iletişim kurabilir. GetNextJob bir hata ile sonlandıysanız, kılavuzluk için [sorun giderme belgelerini](https://docs.microsoft.com/azure/storage/files/storage-sync-files-troubleshoot?tabs=portal1%2Cazure-portal#common-sync-errors) denetleyin.
 
-Katmanlama sağlık bulut:
+Bulut katmanlama durumu:
 
-- Bir sunucuda katmanlama etkinliğini izlemek için olay kimliği 9003 9016 ve 9029 Telemetri olay günlüğündeki Olay Görüntüleyicisi'ni altında bulunan, kullanmak *uygulamalar ve Services\Microsoft\FileSync\Agent*.
+- Bir sunucudaki katmanlama etkinliğini izlemek için, *uygulamalar ve Services\Microsoft\FileSync\Agent*altında Olay Görüntüleyicisi bulunan telemetri olay GÜNLÜĞÜNDE olay kimliği 9003, 9016 ve 9029 kullanın.
 
-  - Olay Kimliği 9003 sunucu uç noktası için hata dağıtımını sağlar. Örneğin: Toplam hata sayısı ve hata kodu. Hata kodu bir olay günlüğe kaydedilir.
-  - Olay Kimliği 9016 hayalet sonuçları için bir birim sağlar. Örneğin: Boş alan yüzdesi, oturumda hayalet kopyası dosyalarının sayısıdır ve dosya sayısını hayalet başarısız oldu.
-  - Olay Kimliği 9029 hayalet oturum bilgilerini sunucu uç noktası sağlar. Örneğin: Dosya sayısı oturumda çalıştı dosyaların sayısı, oturumda katmanlı ve dosyaların sayısı, zaten katmanlı.
+  - Olay KIMLIĞI 9003, bir sunucu uç noktası için hata dağıtımı sağlar. Örneğin: Toplam hata sayısı ve hata kodu. Hata kodu başına bir olay günlüğe kaydedilir.
+  - Olay kimliği 9016, bir birim için hayalet kopya oluşturuluyor sonuçları sağlar. Örneğin: Boş alan yüzdesi, oturumdaki hayalet dosya sayısı ve hayalet dosya sayısı ile başarısız oldu.
+  - Olay kimliği 9029, bir sunucu uç noktası için hayalet kopya oluşturuluyor oturum bilgileri sağlar. Örneğin: Oturumda denenen dosya sayısı, oturumda katmanlı dosya sayısı ve zaten katmanlı dosya sayısı.
   
-- Bir sunucuya geri çağırma etkinliği izlemek için olay kimliği 9005 9006 ve 9009 9059 Telemetri olay günlüğündeki Olay Görüntüleyicisi'ni altında bulunan, kullanmak *uygulamalar ve Services\Microsoft\FileSync\Agent*.
+- Bir sunucudaki geri çekme etkinliğini izlemek için, *uygulamalar ve Services\Microsoft\FileSync\Agent*altında Olay Görüntüleyicisi bulunan telemetri olay GÜNLÜĞÜNDE olay kimliği 9005, 9006, 9009 ve 9059 kullanın.
 
-  - Olay Kimliği 9005 sunucu uç noktası için geri çağırma güvenilirlik sağlar. Örneğin: Toplam benzersiz dosya erişilen ve toplam benzersiz dosyalarıyla başarısız erişim.
-  - Sunucu uç noktası için geri çağırma hatası dağıtım öğesini belirten Olay No. 9006 sağlar. Örneğin: Toplam başarısız istek ve hata kodu. Hata kodu bir olay günlüğe kaydedilir.
-  - Olay Kimliği 9009 sunucu uç noktası için geri çağırma oturum bilgilerini sağlar. Örneğin: DurationSeconds CountFilesRecallSucceeded ve CountFilesRecallFailed.
-  - Olay Kimliği 9059 uygulama geri çekme dağıtım için sunucu uç noktası sağlar. Örneğin: ShareId, uygulama adı ve TotalEgressNetworkBytes.
+  - Olay KIMLIĞI 9005, bir sunucu uç noktası için geri çağırma güvenilirliği sağlar. Örneğin: Erişilen toplam benzersiz dosya ve hatalı erişimi olan toplam benzersiz dosya sayısı.
+  - Olay KIMLIĞI 9006, bir sunucu uç noktası için geri çağırma hatası dağıtımı sağlar. Örneğin: Toplam başarısız Istek ve hata kodu. Hata kodu başına bir olay günlüğe kaydedilir.
+  - Olay KIMLIĞI 9009, bir sunucu uç noktası için geri çağırma oturumu bilgilerini sağlar. Örneğin: DurationSeconds, CountFilesRecallSucceeded ve CountFilesRecallFailed.
+  - Olay KIMLIĞI 9059, bir sunucu uç noktası için uygulama geri çağırma dağıtımı sağlar. Örneğin: Shareıd, Application Name ve TotalEgressNetworkBytes.
 
 ### <a name="performance-counters"></a>Performans sayaçları
 
-Azure dosya eşitleme performans sayaçları sunucuda eşitleme etkinliğini izlemek için kullanın.
+Eşitleme etkinliğini izlemek için sunucuda Azure Dosya Eşitleme performans sayaçlarını kullanın.
 
-Azure dosya eşitleme performans sayaçları sunucuda görüntülemek için Performans İzleyicisi'ni (Perfmon.exe) açın. Altına sayaçları bulabilirsiniz **AFS aktarılan bayt** ve **AFS eşitleme işlemleri** nesneleri.
+Sunucuda Azure Dosya Eşitleme performans sayaçlarını görüntülemek için, performans Izleyicisi 'ni (Perfmon. exe) açın. Sayaçları, **aktarılan AFS bayt** ve **AFS eşitleme işlemleri** nesneleri altında bulabilirsiniz.
 
-Azure dosya eşitleme aşağıdaki performans sayaçlarını Performans İzleyicisi'nde kullanılabilir:
+Azure Dosya Eşitleme için aşağıdaki performans sayaçları performans Izleyicisinde kullanılabilir:
 
-| Performans Object\Counter adı | Açıklama |
+| Performans Object\sayaç adı | Açıklama |
 |-|-|
-| AFS bayt Transferred\Downloaded bayt/sn | Saniye başına indirilen bayt sayısı. |
-| AFS bayt Transferred\Uploaded bayt/sn | Saniye başına karşıya yüklenen bayt sayısı. |
-| AFS bayt Transferred\Total bayt/sn | Toplam bayt / saniye (karşıya yükleme ve indirme). |
-| AFS eşitleme Operations\Downloaded eşitleme dosyaları/sn | Saniye başına indirilen dosyaların sayısı. |
-| AFS eşitleme Operations\Uploaded eşitleme dosyaları/sn | Saniye başına karşıya yüklenen dosya sayısı. |
-| AFS eşitleme Operations\Total eşitleme dosya işlemi/sn | Eşitlenmiş dosyaları (karşıya yükleme ve indirme) toplam sayısı. |
+| AFS bayt Transferred\indirilen bayt/sn | Saniye başına indirilen bayt sayısı. |
+| AFS bayt Transferred\karşıya yüklenen bayt/sn | Saniye başına karşıya yüklenen bayt sayısı. |
+| AFS bayt Transferred\toplam bayt/sn | Toplam bayt/saniye (karşıya yükleme ve indirme). |
+| AFS Sync Operations\indirilen eşitleme dosyaları/sn | Saniye başına indirilen dosya sayısı. |
+| AFS Sync Operations\karşıya yüklenen eşitleme dosyaları/sn | Saniye başına karşıya yüklenen dosya sayısı. |
+| AFS Sync Operations\toplam eşitleme dosyası Işlemi/sn | Eşitlenen toplam dosya sayısı (karşıya yükleme ve indirme). |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - [Bir Azure dosya eşitleme dağıtımı planlama](storage-sync-files-planning.md)
-- [Güvenlik Duvarı ve Ara sunucu ayarlarını göz önünde bulundurun.](storage-sync-files-firewall-and-proxy.md)
-- [Azure dosya eşitleme işlemi dağıtma](storage-sync-files-deployment-guide.md)
-- [Azure dosya eşitleme sorunlarını giderme](storage-sync-files-troubleshoot.md)
+- [Güvenlik duvarını ve proxy ayarlarını değerlendirin](storage-sync-files-firewall-and-proxy.md)
+- [Azure Dosya Eşitleme’yi dağıtma](storage-sync-files-deployment-guide.md)
+- [Azure Dosya Eşitleme ile ilgili sorunları giderme](storage-sync-files-troubleshoot.md)
 - [Azure dosyaları hakkında sık sorulan sorular](storage-files-faq.md)

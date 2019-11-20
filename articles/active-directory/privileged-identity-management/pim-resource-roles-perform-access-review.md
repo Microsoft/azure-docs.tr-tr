@@ -1,10 +1,10 @@
 ---
-title: PIM - Azure Active Directory Azure kaynak rolleri için erişimi gözden geçir | Microsoft Docs
-description: Azure AD Privileged Identity Management (PIM) Azure kaynak rolleri erişimi gözden geçirmeyi öğrenin.
+title: PıM-Azure AD 'de Azure Kaynak rollerine erişimi gözden geçirme | Microsoft Docs
+description: Azure AD Privileged Identity Management (PıM) içindeki Azure Kaynak rollerinin erişimini incelemeyi öğrenin.
 services: active-directory
 documentationcenter: ''
-author: rolyon
-manager: mtillman
+author: curtand
+manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
@@ -12,46 +12,42 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: pim
-ms.date: 03/30/2018
-ms.author: rolyon
+ms.date: 11/08/2019
+ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ede412292caf682c3078002d23e1956bd68d1378
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7ddb4d0ff1339f1427c5041528cdbe464a345b37
+ms.sourcegitcommit: 16c5374d7bcb086e417802b72d9383f8e65b24a7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65602222"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73847010"
 ---
-# <a name="review-access-to-azure-resource-roles-in-pim"></a>PIM Azure kaynak rolleri için erişim gözden geçirin
-Azure Active Directory (Azure AD) Privileged Identity Management (PIM), kuruluşların azure'daki kaynaklara ayrıcalıklı erişimi yönetme sürecini basitleştirir. 
+# <a name="review-access-to-azure-resource-roles-in-privileged-identity-management"></a>Privileged Identity Management Azure Kaynak rollerine erişimi gözden geçirin
 
-Bir yönetici rolüne atanırsa, kuruluşunuzun ayrıcalıklı Rol Yöneticisi yine de bu rol için işinizi gerektiğini düzenli olarak doğrulamanızı isteyebilir. Bir bağlantısını içeren bir e-posta alabilir veya doğrudan gidebilirsiniz [Azure portalında](https://portal.azure.com). Bir kendi kendini gözden geçirin, atanan rollerinin gerçekleştirmek için bu makaledeki adımları izleyin.
+Privileged Identity Management (PıM) erişim incelemeleri, Azure Active Directory (Azure AD) ayrıcalıklı rollere güvenli erişim sağlanmasına yardımcı olabilir. Bu makalede, bir Azure AD erişim incelemesinin ayrıcalıklı rol atamalarınızı gözden geçirmeyi tamamlamaya yönelik adımlar.
 
-Erişim gözden geçirmelerine ilgilenen bir ayrıcalıklı rol yöneticisi değilseniz, daha fazla bilgi edinin [erişim gözden geçirmesi başlatma](pim-resource-roles-start-access-review.md).
+Bir Yönetim rolüne atandıysanız, bir rol gereksinimini onaylamak için yöneticiniz tarafından bir erişim incelemesi gerçekleştirmeniz gerekebilir. Onay isteği bir bağlantı içeren bir e-posta veya [Azure Portal](https://portal.azure.com)doğrulayabilirsiniz.
 
-## <a name="add-the-privileged-identity-management-application"></a>Privileged Identity Management uygulamasını ekleme
-Azure Active Directory (Azure AD) PIM uygulamasında kullanabileceğiniz [Azure portalında](https://portal.azure.com/) , gözden geçirmek için. Portalınızda uygulamanız yoksa, başlamak için aşağıdaki adımları izleyin.
+Erişim gözden geçirmeleriyle ilgilenen ayrıcalıklı bir rol yöneticisiyseniz, [erişim incelemesi başlatma hakkında](pim-resource-roles-start-access-review.md)daha fazla ayrıntı alın.
 
-1. [Azure Portal](https://portal.azure.com/) oturum açın.
-2. Kullanıcı Azure portalının sağ üst köşedeki adlandırın ve burada yapacaklarınız dizini seçin seçin çalışıyor olabilir.
-3. Seçin **tüm hizmetleri**ve **filtre** aramak için arama kutusunu *Azure AD Privileged Identity Management*.
-4. Denetleme **panoya Sabitle**ve ardından **Oluştur**. PIM uygulamasını açar.
+## <a name="approve-or-deny-access"></a>Erişimi onayla veya Reddet
 
-## <a name="approve-or-deny-access"></a>Onaylayın veya reddedin erişim
-Onaylayabilir ya da erişimi reddetmek yalnızca Gözden Geçiren, yine de bu rolü veya kullanıp kullanmadığını belirten. Seçin **Onayla** rolünde kalmak istiyorsanız veya **Reddet** erişim artık ihtiyacınız yoksa. Gözden Geçiren sonuçlar yalnızca geçerli olduğu durumlarda durumunuzu değiştirir.
+Bu rolü kullanmaya devam etmenize bağlı olarak erişimi onaylayabilir veya reddedebilirsiniz. Rol üzerinde kalmak istiyorsanız **Onayla** ' yı seçin veya artık erişime Ihtiyacınız yoksa **Reddet** ' i seçin. Durumunuz yalnızca gözden geçiren sonuçları uyguladıktan sonra değişir.
 
-Erişim değerlendirmesi tamamlama ve bulmak için aşağıdaki adımları izleyin:
-1. Azure AD PIM uygulamaya göz atın.
-2. Seçin **erişimi gözden geçir** dikey penceresi.
+Erişim gözden geçirmesini bulmak ve gerçekleştirmek için şu adımları izleyin:
 
-   ![Seçili gözden geçirme erişim dikey penceresi ekran görüntüsü, PIM uygulamanızdan](media/pim-resource-roles-perform-access-review/rbac-access-review-complete.png)
+1. [Azure portalında](https://portal.azure.com/) oturum açın.
+1. **Azure Active Directory** seçin ve **Privileged Identity Management**açın.
+1. **Erişimi gözden geçir**' i seçin.
 
-3. Gözden geçirmeyi tamamlamak istiyorsanız seçin. 
-4. Seçin ya da **onaylama** veya **Reddet**. İçinde **neden kutusu sağlama**, kararınız için bir neden eklemeniz gerekir.
+   ![Gözden geçirme erişimi dikey penceresi seçiliyken Privileged Identity Management uygulamasının ekran görüntüsü](media/pim-resource-roles-perform-access-review/rbac-access-review-complete.png)
 
-   ![Ekran görüntüsü, gözden geçirme Ayrıntıları sayfası](media/pim-resource-roles-perform-access-review/rbac-access-review-choice.png)
+1. Gerçekleştirmek istediğiniz gözden geçirmeyi seçin.
+1. **Onayla** veya **Reddet**' i seçin. **Bir neden belirtin kutusunda**, gerekirse kararınız için bir iş gerekçe girin.
+
+   ![Ayrıntıları gözden geçirme sayfasının ekran görüntüsü](media/pim-resource-roles-perform-access-review/rbac-access-review-choice.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [PIM'de erişim gözden geçirmesi Azure AD'ye rollerim gerçekleştirin](pim-how-to-perform-security-review.md)
+- [Privileged Identity Management Azure AD rollerimin erişim incelemesini gerçekleştirin](pim-how-to-perform-security-review.md)

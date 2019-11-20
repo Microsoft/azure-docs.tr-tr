@@ -1,6 +1,6 @@
 ---
-title: Hata ekleme güncelleştirme yönetimi, değişiklik izleme ve stok sorunlarını giderme
-description: Güncelleştirme yönetimi, değişiklik izleme ve stok çözümleriyle ekleme hatalarında sorun giderme hakkında bilgi edinin
+title: Güncelleştirme Yönetimi, Değişiklik İzleme ve envanteri ekleme hatalarını giderme
+description: Güncelleştirme Yönetimi, Değişiklik İzleme ve envanter çözümleriyle ekleme hatalarını giderme hakkında bilgi edinin
 services: automation
 author: bobbytreed
 ms.author: robreed
@@ -8,24 +8,55 @@ ms.date: 05/22/2019
 ms.topic: conceptual
 ms.service: automation
 manager: carmonm
-ms.openlocfilehash: 3687a2fdcba9c2078bbbd9344089b5a22467682c
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 8b4ee999bb23abdcea3411720bde244b2da4e89f
+ms.sourcegitcommit: f5cc71cbb9969c681a991aa4a39f1120571a6c2e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477494"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68516408"
 ---
-# <a name="troubleshoot-errors-when-onboarding-solutions"></a>Hatalarında sorun giderme, onboarding çözümleri
+# <a name="troubleshoot-errors-when-onboarding-solutions"></a>Çözüm ekleme sırasında hata giderme
 
-Güncelleştirme yönetimi veya değişiklik izleme ve sayım gibi çözümleri ekleme sırasında hatalarla karşılaşabilirsiniz. Bu makalede, oluşabilecek çeşitli hataları ve bunların nasıl çözüleceğine açıklanır.
+Güncelleştirme Yönetimi veya Değişiklik İzleme ve envanter gibi çözümleri eklerken hatalarla karşılaşabilirsiniz. Bu makalede oluşabilecek çeşitli hatalar ve bunların nasıl giderileceği açıklanmaktadır.
 
-## <a name="general-errors"></a>Genel hatalar
+## <a name="known-issues"></a>Bilinen sorunlar
 
-### <a name="missing-write-permissions"></a>Senaryo: Çözüm etkinleştirilemiyor - ekleme iletisi ile başarısız oluyor
+### <a name="node-rename"></a>Senaryon Kayıtlı bir düğümü yeniden adlandırmak için kayıt silme/kaydetme gerekir
 
 #### <a name="issue"></a>Sorun
 
-Yerleşik bir çözüm için bir sanal makine denediğinizde aşağıdaki iletilerinden birini alabilirsiniz:
+Bir düğüm Azure Otomasyonu 'na kaydedilir ve işletim sistemi ComputerName değişir.  Düğüm içindeki raporlar özgün adla görünmeye devam eder.
+
+#### <a name="cause"></a>Nedeni
+
+Kayıtlı düğümlerin yeniden adlandırılması, Azure Automation 'da düğüm adını güncelleştirmez.
+
+#### <a name="resolution"></a>Çözüm
+
+Azure Otomasyonu durum yapılandırması ' ndan düğümün kaydını kaldırın ve yeniden kaydedin.  Bu süreden önce hizmette yayınlanan raporların artık kullanılamayacak.
+
+
+### <a name="resigning-cert"></a>Senaryon HTTPS proxy 'si aracılığıyla sertifikaların yeniden imzalanması desteklenmiyor
+
+#### <a name="issue"></a>Sorun
+
+Müşteriler, HTTPS trafiğini sonlandıran bir ara sunucu çözümüyle bağlantı kurulurken ve ardından yeni bir sertifika kullanarak trafiği yeniden şifrelediği bildirilen hizmet bağlantıya izin vermez.
+
+#### <a name="cause"></a>Nedeni
+
+Azure Otomasyonu, trafiği şifrelemek için kullanılan sertifikaların yeniden imzalanmasını desteklemez.
+
+#### <a name="resolution"></a>Çözüm
+
+Bu sorun için geçici çözüm yoktur.
+
+## <a name="general-errors"></a>Genel hatalar
+
+### <a name="missing-write-permissions"></a>Senaryon Ekleme iletiyle başarısız olur-çözüm etkinleştirilemiyor
+
+#### <a name="issue"></a>Sorun
+
+Bir çözüme sanal makine eklemek istediğinizde aşağıdaki iletilerden birini alırsınız:
 
 ```error
 The solution cannot be enabled due to missing permissions for the virtual machine or deployments
@@ -37,17 +68,17 @@ The solution cannot be enabled on this VM because the permission to read the wor
 
 #### <a name="cause"></a>Nedeni
 
-Bu hata, çalışma alanında, sanal makine veya kullanıcı için eksik veya hatalı izinleri kaynaklanır.
+Bu hata, sanal makinede, çalışma alanında veya Kullanıcı için hatalı veya eksik izinlere neden olur.
 
 #### <a name="resolution"></a>Çözüm
 
-Sanal makine eklemek için doğru izinlere sahip olun. Gözden geçirme [makine için gereken izinleri](../automation-role-based-access-control.md#onboarding) ve ekleme için çözümü yeniden deneyin. Hatasını alırsanız `The solution cannot be enabled on this VM because the permission to read the workspace is missing`, olduğundan emin olun `Microsoft.OperationalInsights/workspaces/read` VM için bir çalışma alanına eklenen olup olmadığını öğrenmek için izni.
+Sanal makineyi eklemek için doğru izinlere sahip olduğunuzdan emin olun. [Makineleri eklemek için gereken izinleri](../automation-role-based-access-control.md#onboarding) gözden geçirin ve çözümü yeniden çalıştırmayı deneyin. Hatayı `The solution cannot be enabled on this VM because the permission to read the workspace is missing`alırsanız, sanal makinenin bir çalışma alanına eklendi olup `Microsoft.OperationalInsights/workspaces/read` olmadığını bulmak için izninizin olduğundan emin olun.
 
-### <a name="diagnostic-logging"></a>Senaryo: Otomasyon hesabı için tanılama günlük kaydı yapılandırması başarısız oldu. ileti - ekleme başarısız oluyor
+### <a name="diagnostic-logging"></a>Senaryon Ekleme, iletiyle başarısız olur-Otomasyon hesabını tanılama günlüğü için yapılandırma başarısız oldu
 
 #### <a name="issue"></a>Sorun
 
-Yerleşik bir çözüm için bir sanal makine çalıştığınızda şu iletiyi alırsınız:
+Bir çözüme sanal makine yüklemeye çalıştığınızda aşağıdaki iletiyi alırsınız:
 
 ```error
 Failed to configure automation account for diagnostic logging
@@ -55,53 +86,53 @@ Failed to configure automation account for diagnostic logging
 
 #### <a name="cause"></a>Nedeni
 
-Fiyatlandırma katmanı, aboneliğin faturalama modeliyle eşleşmiyor ise bu hataya neden olabilir. Daha fazla bilgi için [kullanım ve Tahmini maliyetler Azure İzleyici'de izleme](https://aka.ms/PricingTierWarning).
+Fiyatlandırma Katmanı aboneliğin faturalama modeliyle eşleşmezse bu hataya neden olmuş olabilir. Daha fazla bilgi için bkz. [Azure izleyici 'de kullanımı ve tahmini maliyetleri izleme](https://aka.ms/PricingTierWarning).
 
 #### <a name="resolution"></a>Çözüm
 
-Log Analytics çalışma alanınızın el ile oluşturun ve oluşturulan çalışma alanını ekleme işlemi yineleyin.
+Log Analytics çalışma alanınızı el ile oluşturun ve oluşturduğunuz çalışma alanını seçmek için ekleme işlemini tekrarlayın.
 
-### <a name="computer-group-query-format-error"></a>Senaryo: ComputerGroupQueryFormatError
+### <a name="computer-group-query-format-error"></a>Senaryon ComputerGroupQueryFormatError
 
 #### <a name="issue"></a>Sorun
 
-Bu hata kodu, çözüm hedeflemek için kayıtlı arama bilgisayar grubu sorgusu düzgün biçimlendirilmemiş anlamına gelir. 
+Bu hata kodu, çözümü hedeflemek için kullanılan kayıtlı arama bilgisayar grubu sorgusunun doğru biçimlendirilmediği anlamına gelir. 
 
 #### <a name="cause"></a>Nedeni
 
-Sorgu değiştirmiş veya sistem tarafından değiştirilmiş olabilir.
+Sorguyu değiştirmiş olabilirsiniz veya sistem tarafından değiştirilmiş olabilir.
 
 #### <a name="resolution"></a>Çözüm
 
-Bu çözüm ve sorguyu yeniden oluşturur çözüm reonboard için sorgu silebilirsiniz. Sorgu içinde çalışma alanınızda, altında bulunabilir **kayıtlı aramalar**. Sorgu adı **MicrosoftDefaultComputerGroup**, ve sorgu kategorisini bu sorguyla ilişkilendirilen çözüm adıdır. Birden çok çözümü etkinleştirilip etkinleştirilmediğini **MicrosoftDefaultComputerGroup** altında birden çok kez gösterir **kayıtlı aramalar**.
+Bu çözüm için sorguyu silebilir ve çözümü yeniden ekleyebilirsiniz ve sorguyu yeniden oluşturur. Sorgu, **kayıtlı aramalar**altında çalışma alanınız içinde bulunabilir. Sorgunun adı **Microsoftdefaultcomputergroup**, sorgunun kategorisi ise bu sorguyla ilişkili çözümün adıdır. Birden çok çözüm etkinse, **Microsoftdefaultcomputergroup** **kayıtlı aramalarda**birden çok kez görünür.
 
-### <a name="policy-violation"></a>Senaryo: PolicyViolation
+### <a name="policy-violation"></a>Senaryon Policyihla
 
 #### <a name="issue"></a>Sorun
 
-Bu hata kodu dağıtımda bir veya daha fazla ilke ihlali nedeniyle başarısız olduğunu gösterir.
+Bu hata kodu, bir veya daha fazla ilke ihlalinden dolayı dağıtımın başarısız olduğu anlamına gelir.
 
 #### <a name="cause"></a>Nedeni 
 
-İşlemin tamamlanmasını engelleyen bir yerde bir ilkedir.
+İşlemin tamamlanmasını önleyen bir ilke yerinde.
 
 #### <a name="resolution"></a>Çözüm
 
-Çözüm başarıyla dağıtmak için belirtilen ilke değiştirmeyi göz önüne almanız gerekir. Farklı türlerde tanımlanabilir ilkeleri gibi gerekli belirli değişiklikleri ihlal ilkesindeki bağlıdır. Bir ilke, belirli bir türdeki kaynakları bu kaynak grubunda içeriğini değiştirme izni olan bir kaynak grubu tanımlanmışsa, örneğin, örneğin, aşağıdakilerden birini yapmanız olabilir:
+Çözümü başarıyla dağıtmak için, belirtilen ilkeyi değiştirmeyi göz önünde bulundurmanız gerekir. Tanımlanabilir çok sayıda farklı ilke türü olduğundan, gerekli olan belirli değişiklikler ihlal edilen ilkeye bağlıdır. Örneğin, bir ilke, kaynak grubu içindeki belirli kaynak türlerinin içeriğini değiştirme iznini reddeden bir kaynak grubunda tanımlanmışsa, örneğin, aşağıdakilerden birini yapabilirsiniz:
 
-* İlke kaydetme işlemini tamamen kaldırın.
-* Farklı kaynak grubuna eklemek için bu seçeneği deneyin.
-* İlke ile bir örneğin gözden geçirin:
-  * Yeniden hedefleme İlkesi belirli bir kaynağa (gibi belirli bir Otomasyon hesabı).
-  * Düzeltme kümesi kaynakları bu ilke reddetmek üzere yapılandırıldı.
+* İlkeyi tamamen kaldırın.
+* Farklı bir kaynak grubuna ekleme yapmayı deneyin.
+* İlkeyi, örneğin:
+  * İlkeyi belirli bir kaynak için yeniden hedefleme (örneğin, belirli bir Otomasyon hesabı).
+  * İlkenin reddedecek şekilde yapılandırıldığı kaynak kümesini düzeltme.
 
-Azure portalının sağ üst köşedeki bildirimleri denetleyin veya seçin ve Otomasyon hesabını içeren kaynak grubuna gidin **dağıtımları** altında **ayarları** başarısız görüntülemek için Dağıtım. Azure İlkesi ziyaret hakkında daha fazla bilgi için: [Azure İlkesi'ne genel bakış](../../governance/policy/overview.md?toc=%2fazure%2fautomation%2ftoc.json).
+Azure portal, sağ üst köşedeki bildirimleri denetleyin veya Otomasyon hesabınızı içeren kaynak grubuna gidin ve başarısız dağıtımı görüntülemek için **Ayarlar** ' ın altında **dağıtımlar** ' ı seçin. Azure Ilkesi hakkında daha fazla bilgi için ziyaret edin: [Azure Ilkesine genel bakış](../../governance/policy/overview.md?toc=%2fazure%2fautomation%2ftoc.json).
 
-### <a name="unlink"></a>Senaryo: Bir çalışma alanının bağlantısını Kaldır çalışılırken hatalar
+### <a name="unlink"></a>Senaryon Çalışma alanının bağlantısının kaldırılması sırasında hatalar oluştu
 
 #### <a name="issue"></a>Sorun
 
-Bir çalışma alanının bağlantısını Kaldır çalışırken aşağıdaki hatayı alırsınız:
+Bir çalışma alanının bağlantısını kaldırılmaya çalışırken şu hatayı alıyorsunuz:
 
 ```error
 The link cannot be updated or deleted because it is linked to Update Management and/or ChangeTracking Solutions.
@@ -109,41 +140,41 @@ The link cannot be updated or deleted because it is linked to Update Management 
 
 #### <a name="cause"></a>Nedeni
 
-Bağımlı bağlantılandırılan Otomasyon hesabının ve Log Analytics çalışma alanınızda etkin çalışma alanınızdaki çözümleri Log Analytics hâlâ bu hata oluşur.
+Bu hata, Otomasyon hesabınıza bağlı olan Log Analytics çalışma alanınızda hala etkin olan çözümlere sahip olduğunuzda ve bağlantılı bir Analtus çalışma alanını günlüğe kaydettiğinizde oluşur.
 
 ### <a name="resolution"></a>Çözüm
 
-Bu sorunu gidermek için bunları kullanıyorsanız aşağıdaki çözümlerin çalışma alanınızdan kaldırmak yapmanız gerekir:
+Bu sorunu çözmek için, bunları kullanıyorsanız, çalışma alanınızdan aşağıdaki çözümleri kaldırmanız gerekir:
 
 * Güncelleştirme Yönetimi
 * Değişiklik İzleme
 * Hizmetin kapalı olduğu saatlerde Sanal Makineleri Başlatma/Durdurma
 
-Çözümleri kaldırdıktan sonra çalışma alanınızı kesebilir. Bu çözümleri çalışma alanı ve Otomasyon hesabı var olan tüm yapılardan temizlemek önemlidir.  
+Çözümleri kaldırdıktan sonra, çalışma alanınızın bağlantısını kaldırabilirsiniz. Çalışma alanınızda ve otomasyon hesabınızda bulunan bu çözümlerdeki mevcut yapıtları de temizlemek önemlidir.  
 
 * Güncelleştirme Yönetimi
-  * Güncelleştirme dağıtımları (zamanlamalar) Otomasyon hesabınızdan kaldırın
+  * Otomasyon hesabınızdan güncelleştirme dağıtımlarını (zamanlamalar) kaldırma
 * Hizmetin kapalı olduğu saatlerde Sanal Makineleri Başlatma/Durdurma
-  * Otomasyon hesabınız kapsamında tüm çözüm bileşenlerini kilitler kaldırmak **ayarları** > **kilitleri**.
-  * Vm'leri başlatma/durdurma sırasında yoğun olmayan saatlerde çözüm kaldırmak ek adımlar için bkz, [VM başlatma/durdurma sırasında yoğun olmayan saatlerde çözüm Kaldır](../automation-solution-vm-management.md##remove-the-solution).
+  * Otomasyon hesabınızdaki Çözüm bileşenlerinde bulunan kilitleri **Ayarlar** > **kilitleri**altında kaldırın.
+  * Çalışma saatleri dışında VM 'Leri Başlat/Durdur çözümünü kaldırma hakkında ek adımlar için bkz. [çalışma saatleri dışında sanal makineyi Başlat/Durdur çözümünü kaldırma](../automation-solution-vm-management.md##remove-the-solution).
 
-## <a name="mma-extension-failures"></a>MMA uzantısı hatalarında
+## <a name="mma-extension-failures"></a>MMA uzantısı sorunları
 
 [!INCLUDE [log-analytics-agent-note](../../../includes/log-analytics-agent-note.md)] 
 
-Bir çözümü dağıtırken, çeşitli ilgili kaynaklara dağıtılır. Bu kaynakları Linux için Microsoft Monitoring Agent uzantısı veya Log Analytics aracısını biridir. Bu ikili dosyaları indiriliyor, sonraki koordinasyon amacıyla yapılandırılan Log Analytics çalışma alanıyla iletişim kurmak için sorumlu olduğu bir sanal makinenin Konuk aracısı tarafından yüklenen sanal makine uzantıları ve diğer dosyalar İşiniz çözüm ekleme bağlı olduğu yürütme başladıktan sonra.
-Genellikle ilk Linux yükleme hatalarını bildirim Merkezi'nde görünen bildirim için MMA veya Log Analytics Aracısı'nın haberdar edilir. Bu bildirimi tıklayarak daha fazla belirli hata hakkında bilgi sağlar. Kaynak grupları kaynağa ve içerdiği dağıtımları öğeye gezinme, ayrıca oluşan dağıtım hatalarının ayrıntıları sağlar.
-Linux için MMA veya Log Analytics aracısını yükleme çeşitli nedenlerden dolayı başarısız olabilir ve bu hataları gidermek için adımları, soruna bağlı olarak değişebilir. Belirli sorun giderme adımlarını izleyin.
+Bir çözüm dağıtırken ilgili birçok kaynak dağıtılır. Bu kaynaklardan biri, Linux için Microsoft Monitoring Agent uzantısıdır veya Log Analytics aracısıdır. Bunlar, sanal makinenin Konuk Aracısı tarafından, yapılandırılmış Log Analytics çalışma alanıyla iletişim sağlanmasından sorumlu olan sanal makine uzantılarıdır ve bu, ikili dosyaların ve ekleme yaptığınız çözüm, yürütülmeye başladıktan sonra bağlı olarak değişir.
+Genellikle ilk olarak, bildirim merkezinde görüntülenen bir bildirimden Linux yükleme hatalarının MMA veya Log Analytics aracısından haberdar olursunuz. Bu bildirime tıkladığınızda, belirli hata hakkında daha fazla bilgi verilir. Kaynak grupları kaynağına, sonra da içindeki dağıtımlar öğesine gezinti, gerçekleşen dağıtım hatalarıyla ilgili ayrıntılar sağlar.
+Linux için MMA veya Log Analytics aracısının yüklenmesi çeşitli nedenlerden dolayı başarısız olabilir ve bu hataların ele geçirilmesiyle ilgili adımlar soruna bağlı olarak farklılık gösterir. Belirli sorun giderme adımları izleyin.
 
-Aşağıdaki bölümde onboarding MMA uzantısı dağıtımda bir hata neden olduğunda, gelen arasında çeşitli sorunlar açıklanmaktadır.
+Aşağıdaki bölümde, ekleme sırasında, MMA uzantısının dağıtımında hata oluşmasına neden olabilecek çeşitli sorunlar açıklanmaktadır.
 
-### <a name="webclient-exception"></a>Senaryo: WebClient isteği sırasında bir özel durum oluştu
+### <a name="webclient-exception"></a>Senaryon WebClient isteği sırasında özel durum oluştu
 
-Sanal makinede MMA uzantısı başarısız dış kaynaklara ve dağıtım ile iletişim kuramıyor.
+Sanal makinedeki MMA uzantısı dış kaynaklarla iletişim kuramıyor ve dağıtım başarısız oluyor.
 
 #### <a name="issue"></a>Sorun
 
-Döndürülen hata iletilerini örnekleri şunlardır:
+Aşağıda döndürülen hata iletilerinin örnekleri verilmiştir:
 
 ```error
 Please verify the VM has a running VM agent, and can establish outbound connections to Azure storage.
@@ -155,23 +186,23 @@ Please verify the VM has a running VM agent, and can establish outbound connecti
 
 #### <a name="cause"></a>Nedeni
 
-Bu hata için olası nedenleri şunlardır:
+Bu hatanın olası nedenleri şunlardır:
 
-* Yalnızca belirli bağlantı noktalarına izin veren bir VM'de, yapılandırılmış bir proxy yoktur.
+* VM 'de yapılandırılmış ve yalnızca belirli bağlantı noktalarına izin veren bir ara sunucu vardır.
 
-* Bir güvenlik duvarı ayarını, gerekli bağlantı noktaları ve adres erişimi engelledi.
+* Bir güvenlik duvarı ayarı, gerekli bağlantı noktalarına ve adreslere erişimi engelledi.
 
 #### <a name="resolution"></a>Çözüm
 
-Doğru bağlantı noktalarının olması ve iletişim için adreslerini açmak emin olun. Bağlantı noktaları ve adresleri listesi için bkz. [ağınızı planlama](../automation-hybrid-runbook-worker.md#network-planning).
+İletişim için uygun bağlantı noktalarına ve adreslere sahip olduğunuzdan emin olun. Bağlantı noktalarının ve adreslerin listesi için bkz. [ağınızı planlama](../automation-hybrid-runbook-worker.md#network-planning).
 
-### <a name="transient-environment-issue"></a>Senaryo: Geçici ortam sorunları nedeniyle yükleme başarısız oldu
+### <a name="transient-environment-issue"></a>Senaryon Geçici bir ortam sorunları nedeniyle yüklenemedi
 
-Microsoft Monitoring Agent uzantısını yükleme dağıtım sırasında başka bir yükleme veya yüklemeyi engelleme eylemi nedeniyle başarısız oldu
+Başka bir yükleme veya yüklemeyi engelleyen bir eylem nedeniyle Microsoft Monitoring Agent uzantısının yüklenmesi dağıtım sırasında başarısız oldu
 
 #### <a name="issue"></a>Sorun
 
-Döndürülen hata iletilerini örnekleri şunlardır:
+Aşağıda, hata iletileri örnekleri gösterilebilir:
 
 ```error
 The Microsoft Monitoring Agent failed to install on this machine. Please try to uninstall and reinstall the extension. If the issue persists, please contact support.
@@ -187,22 +218,22 @@ The Microsoft Monitoring Agent failed to install on this machine. Please try to 
 
 #### <a name="cause"></a>Nedeni
 
-Bu hata için olası nedenleri şunlardır:
+Bu hatanın olası nedenleri şunlardır:
 
 * Başka bir yükleme devam ediyor
-* Şablon dağıtımı sırasında yeniden başlatmak için sistem tetiklenir
+* Sistem, şablon dağıtımı sırasında yeniden başlatılacak şekilde tetiklenir
 
 #### <a name="resolution"></a>Çözüm
 
-Bu hata, yapısı geçici bir hatadır. Uzantıyı yüklemek için dağıtımı yeniden deneyin.
+Bu hata, doğası gereği geçici bir hatadır. Uzantıyı yüklemek için dağıtımı yeniden deneyin.
 
-### <a name="installation-timeout"></a>Senaryo: Yükleme zaman aşımı
+### <a name="installation-timeout"></a>Senaryon Yükleme zaman aşımı
 
-MMA uzantının yüklenmesi bir zaman aşımı nedeniyle tamamlanmadı.
+Bir zaman aşımı nedeniyle MMA uzantısının yüklenmesi tamamlanmadı.
 
 #### <a name="issue"></a>Sorun
 
-Aşağıdaki örnek, döndürülen bir hata iletisini aynıdır:
+Aşağıdaki örnek, döndürülebilecek bir hata iletisidir:
 
 ```error
 Install failed for plugin (name: Microsoft.EnterpriseCloud.Monitoring.MicrosoftMonitoringAgent, version 1.0.11081.4) with exception Command C:\Packages\Plugins\Microsoft.EnterpriseCloud.Monitoring.MicrosoftMonitoringAgent\1.0.11081.4\MMAExtensionInstall.exe of Microsoft.EnterpriseCloud.Monitoring.MicrosoftMonitoringAgent has exited with Exit code: 15614
@@ -210,16 +241,16 @@ Install failed for plugin (name: Microsoft.EnterpriseCloud.Monitoring.MicrosoftM
 
 #### <a name="cause"></a>Nedeni
 
-Bu hata oluşur yükleme sırasında yoğun yük altında olan sanal makine.
+Bu hata, sanal makinenin yükleme sırasında ağır bir yük altında olması nedeniyle oluşur.
 
 ### <a name="resolution"></a>Çözüm
 
-VM daha düşük bir yük altında olduğunda MMA uzantıyı yükleme girişimi.
+VM daha düşük bir yük altında olduğunda MMA uzantısını yükleme girişimi.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sorununuzu görmediniz veya sorununuzu çözmenize yüklenemiyor, daha fazla destek için aşağıdaki kanalları birini ziyaret edin:
+Sorununuzu görmüyorsanız veya sorununuzu çözemediyseniz, daha fazla destek için aşağıdaki kanallardan birini ziyaret edin:
 
 * [Azure Forumları](https://azure.microsoft.com/support/forums/) aracılığıyla Azure uzmanlarından yanıtlar alın
 * [@AzureSupport](https://twitter.com/azuresupport) hesabı ile bağlantı kurun. Bu resmi Microsoft Azure hesabı, müşteri deneyimini geliştirmek için Azure topluluğunu doğru kaynaklara ulaştırır: yanıtlar, destek ve uzmanlar.
-* Daha fazla yardıma ihtiyacınız varsa, bir Azure destek olayına dosya. Git [Azure Destek sitesi](https://azure.microsoft.com/support/options/) seçip **alma desteği**.
+* Daha fazla yardıma ihtiyacınız varsa, bir Azure destek olayı dosyası gönderebilirsiniz. [Azure destek sitesine](https://azure.microsoft.com/support/options/) gidin ve **Destek Al**' ı seçin.

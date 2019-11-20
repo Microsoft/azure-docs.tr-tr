@@ -1,0 +1,16 @@
+- name: Azure yönetim grupları belgeleri
+  href: ./index.yml
+- name: Genel Bakış
+  expanded: true
+  items:
+    - name: Azure Yönetimi
+      href: ../azure-management.md
+    - name: Yönetim grupları
+      href: ./overview.md
+- name: Nasıl yapılır kılavuzları
+  expanded: true
+  items:
+    - name: Yönetim grupları oluşturma
+      href: ./create.md
+    - name: Kaynaklarınızı yönetme
+      href: ./manage.md

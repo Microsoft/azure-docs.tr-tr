@@ -9,12 +9,16 @@
   items:
     - name: 'ASP.NET Core - C#'
       href: signalr-quickstart-dotnet-core.md
+    - name: 'ASP.NET - C#'
+      href: signalr-quickstart-dotnet.md
     - name: Azure İşlevleri - JavaScript
       href: signalr-quickstart-azure-functions-javascript.md
     - name: 'Azure İşlevleri - C#'
       href: signalr-quickstart-azure-functions-csharp.md
     - name: Azure İşlevleri - Java
       href: signalr-quickstart-azure-functions-java.md
+    - name: Azure İşlevleri - Python
+      href: signalr-quickstart-azure-functions-python.md
     - name: REST API
       href: signalr-quickstart-rest-api.md
 - name: Öğreticiler
@@ -51,6 +55,8 @@
       href: signalr-concept-performance.md
     - name: Kimlik Doğrulaması
       href: signalr-concept-authenticate-oauth.md
+    - name: Olay işleme
+      href: signalr-concept-event-grid-integration.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Ölçek
@@ -65,6 +71,8 @@
       items:
         - name: Azure İşlevleri bağlamaları
           href: signalr-concept-azure-functions.md
+        - name: Event Grid tümleştirmesi
+          href: signalr-howto-event-grid-integration.md
 - name: Başvurular
   items:
     - name: Azure CLI

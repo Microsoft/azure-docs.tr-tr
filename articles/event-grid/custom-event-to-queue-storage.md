@@ -1,22 +1,22 @@
 ---
-title: Depolama kuyruğuna - Event Grid, Azure CLI özel olaylar gönderin
-description: Azure Event Grid'i ve Azure CLI'yı kullanarak bir konu yayımlayın ve o olaya abone olun. Uç nokta için bir depolama kuyruğu kullanılır.
+title: 'Hızlı başlangıç: depolama kuyruğuna özel olayları gönderme-Event Grid, Azure CLı'
+description: 'Hızlı başlangıç: bir konu yayımlamak ve bu olaya abone olmak için Azure Event Grid ve Azure CLı kullanın. Uç nokta için bir depolama kuyruğu kullanılır.'
 services: event-grid
 keywords: ''
 author: spelluru
 ms.author: spelluru
-ms.date: 01/07/2019
+ms.date: 11/05/2019
 ms.topic: quickstart
 ms.service: event-grid
 ms.custom: seodec18
-ms.openlocfilehash: 9d1d9caccac0fcdeb4e1d2dae40e677f36de40ea
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 44ffa570cfda39c186966866ee5755ab090083a5
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66170244"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73721458"
 ---
-# <a name="quickstart-route-custom-events-to-azure-queue-storage-with-azure-cli-and-event-grid"></a>Hızlı Başlangıç: Azure CLI ve Event Grid ile özel olayları Azure Kuyruk depolamaya yönlendirme
+# <a name="quickstart-route-custom-events-to-azure-queue-storage-with-azure-cli-and-event-grid"></a>Hızlı başlangıç: Azure CLı ve Event Grid ile Azure kuyruk depolama 'ya özel olayları yönlendirme
 
 Azure Event Grid, bulut için bir olay oluşturma hizmetidir. Azure Kuyruk depolama, desteklenen olay işleyicilerinden biridir. Bu makalede Azure CLI ile özel bir konu oluşturacak, bu özel konuya abone olacak ve olayı tetikleyerek sonucu görüntüleyeceksiniz. Kuyruk depolamaya olayları gönderirsiniz.
 
@@ -24,14 +24,14 @@ Azure Event Grid, bulut için bir olay oluşturma hizmetidir. Azure Kuyruk depol
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-Azure portalında Cloud Shell kullanmak yerine, yerel makinenizde Azure CLI veya Azure PowerShell kullanıyorsanız, Azure CLI ve Azure PowerShell'ın şu sürümleri olduğundan emin olun. 
+Azure portal Cloud Shell kullanmak yerine yerel makinenizde Azure CLı veya Azure PowerShell kullanıyorsanız, aşağıdaki Azure CLı ve Azure PowerShell sürümlerine sahip olduğunuzdan emin olun. 
 
-- Azure CLI Sürüm 2.0.56 veya büyük. Azure CLI'ın en son sürümü yükleme hakkında yönergeler için bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli). 
-- Azure PowerShell sürüm 1.1.0 veya büyük. Windows makinenizde Azure PowerShell'in en son sürümünde indirme [Azure indirmeleri - komut satırı araçları](https://azure.microsoft.com/downloads/). 
+- Azure CLı sürüm 2.0.56 veya üstü. Azure CLı 'nın en son sürümünü yükleme yönergeleri için bkz. [Azure CLI 'Yı yükleme](/cli/azure/install-azure-cli). 
+- Sürüm 1.1.0 veya üstünü Azure PowerShell. [Azure İndirmeleri-komut satırı araçlarından](https://azure.microsoft.com/downloads/)Windows makinenize Azure PowerShell en son sürümünü indirin. 
 
-Bu makalede, Azure CLI kullanmak için komutlar sağlar. 
+Bu makale, Azure CLı kullanmaya yönelik komutlar sağlar. 
 
-## <a name="create-a-resource-group"></a>Kaynak grubu oluşturun
+## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
 Event Grid konuları Azure kaynaklarıdır ve bir Azure kaynak grubuna yerleştirilmelidir. Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal koleksiyondur.
 
@@ -67,7 +67,7 @@ az storage queue create --name $queuename --account-name $storagename
 
 ## <a name="subscribe-to-a-custom-topic"></a>Özel konuya abone olma
 
-Event Grid’e hangi olayları izlemek istediğinizi bildirmek için bir özel konuya abone olursunuz. Aşağıdaki örnek oluşturduğunuz özel konuya abone olur ve uç nokta Kuyruk depolama kaynak kimliğini iletir. Azure CLI ile uç nokta olarak Kuyruk depolama kimliğini geçirirsiniz. Uç nokta şu biçimdedir:
+İzlemek istediğiniz olayları Event Grid söylemek için özel bir konuya abone olursunuz. Aşağıdaki örnek, oluşturduğunuz özel konuya abone olur ve uç nokta için sıra depolama alanının kaynak KIMLIĞINI geçirir. Azure CLI ile uç nokta olarak Kuyruk depolama kimliğini geçirirsiniz. Uç nokta şu biçimdedir:
 
 `/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/Microsoft.Storage/storageAccounts/<storage-name>/queueservices/default/queues/<queue-name>`
 

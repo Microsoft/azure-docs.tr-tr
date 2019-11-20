@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı - yapılandırma tek | Microsoft Docs
-description: Yapılandırma ve Azure SQL veritabanı - tek veritabanını yönetme hakkında bilgi edinin
+title: Tek bir veritabanını yapılandırma
+description: Azure SQL veritabanı 'nı yapılandırma ve yönetme hakkında bilgi edinin-tek veritabanı
 services: sql-database
 ms.service: sql-database
 ms.subservice: single-database
@@ -10,68 +10,67 @@ ms.topic: conceptual
 author: jovanpop-msft
 ms.author: jovanpop
 ms.reviewer: carlr
-manager: craigg
 ms.date: 02/08/2019
-ms.openlocfilehash: 4c6799372f203f021a07ae52a1d7f591aae5afad
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3c03797c97a354eb06b6c3b1d76ba5c39d512c18
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60339015"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73811215"
 ---
-# <a name="how-to-use-a-single-database-in-azure-sql-database"></a>Azure SQL veritabanı'nda tek bir veritabanını kullanma
+# <a name="how-to-use-a-single-database-in-azure-sql-database"></a>Azure SQL veritabanı 'nda tek bir veritabanı kullanma
 
-Bu bölümde, çeşitli kılavuzları, betikler ve yönetmenizi ve Azure SQL veritabanı'nda, tek veritabanı yapılandırma yardımcı olabilecek açıklamaları bulabilirsiniz
+Bu bölümde, Azure SQL veritabanı 'nda tek veritabanınızı yönetmenize ve yapılandırmanıza yardımcı olabilecek çeşitli kılavuzlar, betikler ve açıklamalar bulabilirsiniz
 
 ## <a name="migrate"></a>Geçiş
 
-- [SQL veritabanı'na geçirme](sql-database-single-database-migrate.md) – yönetilen örneğe geçiş araçları ve önerilen geçiş işlemi hakkında bilgi edinin.
-- Bilgi edinmek için nasıl [geçişten sonra SQL veritabanını yönetme](sql-database-manage-after-migration.md).
+- [SQL veritabanına](sql-database-single-database-migrate.md) geçiş – yönetilen bir örneğe geçiş için önerilen geçiş işlemi ve araçları hakkında bilgi edinin.
+- [Geçişten sonra SQL veritabanını yönetmeyi](sql-database-manage-after-migration.md)öğrenin.
 
 ## <a name="configure-features"></a>Yapılandırma özellikleri
 
-- [İşlem çoğaltma yapılandırma](replication-to-sql-database.md) tarihinizden veritabanları arasında çoğaltmak için.
-- [Tehdit algılamayı yapılandırma](sql-database-threat-detection.md) Azure SQL veritabanı, SQL ekleme veya şüpheli konumlardan erişim gibi şüpheli etkinlikleri tanımlamak izin vermek için.
-- [Dinamik veri maskelemeyi yapılandırma](sql-database-dynamic-data-masking-get-started-portal.md) hassas verilerinizi korumak için.
-- [Yedek saklama yapılandırma](sql-database-long-term-backup-retention-configure.md) Azure Blob Depolama alanında Yedeklemelerinizin tutulacağı bir veritabanı için. Var olan bir alternatifi olarak [(kullanım dışı) Azure kasası kullanarak yedekleme bekletmeyi yapılandırma](sql-database-long-term-backup-retention-configure-vault.md) yaklaşım.
-- [Coğrafi çoğaltmayı yapılandırma](sql-database-geo-replication-portal.md) başka bir bölgede veritabanınızın bir kopyasını tutmak için.
-- [Coğrafi çoğaltmalar için güvenliği yapılandırma](sql-database-geo-replication-security-config.md).
+- Tarih veritabanlarını veritabanları arasında çoğaltmak için [İşlemsel çoğaltmayı yapılandırın](replication-to-sql-database.md) .
+- Azure SQL veritabanı 'nın SQL ekleme veya şüpheli konumlardan erişim gibi şüpheli etkinlikleri belirlemesine izin vermek için [tehdit algılamayı yapılandırın](sql-database-threat-detection.md) .
+- Gizli verilerinizi korumak için [dinamik veri maskeleme yapılandırın](sql-database-dynamic-data-masking-get-started-portal.md) .
+- Yedeklemelerinizi Azure Blob depolama alanı üzerinde tutmak için bir veritabanı için [yedekleme bekletmesini yapılandırın](sql-database-long-term-backup-retention-configure.md) . Alternatif olarak, [Azure Kasası (kullanım dışı) yaklaşımını kullanarak yedekleme bekletmesini yapılandırın](sql-database-long-term-backup-retention-configure-vault.md) .
+- [Coğrafi çoğaltmayı](sql-database-geo-replication-portal.md) , veritabanınızın bir çoğaltmasını başka bir bölgede tutmak için yapılandırın.
+- [Coğrafi çoğaltmalar için güvenliği yapılandırın](sql-database-geo-replication-security-config.md).
 
-## <a name="monitor-and-tune-your-database"></a>İzleme ve veritabanınızı ayarlayın
+## <a name="monitor-and-tune-your-database"></a>Veritabanınızı izleme ve ayarlama
 
-- [Otomatik ayarlamayı etkinleştirme](sql-database-automatic-tuning-enable.md) Azure SQL veritabanı'nın İş yükünüzün performansını en iyi duruma izin vermek için.
-- [Otomatik ayarlama e-posta bildirimlerini etkinleştirme](sql-database-automatic-tuning-email-notifications.md) ayarlama önerileri hakkında bilgi almak için.
-- [Performans önerilerini uygulama](sql-database-advisor-portal.md) ve veritabanınızı iyileştirin.
-- [Uyarı oluşturma](sql-database-insights-alerts-portal.md) Azure SQL veritabanı'ndan bildirimleri almak için.
-- [Bağlantı sorunlarını giderme](sql-database-troubleshoot-common-connection-issues.md) bazı uygulamalar ve veritabanı arasında bağlantı sorunları fark ederseniz. Ayrıca [bağlantı sorunları için kaynak durumu](sql-database-resource-health.md).
-- [Dosya alanı yönetmek](sql-database-file-space-management.md) veritabanı depolama alanı kullanımı izlemek için.
+- Azure SQL veritabanı 'nın iş yükünüzün performansını iyileştirmelerine izin vermek için [otomatik ayarlamayı etkinleştirin](sql-database-automatic-tuning-enable.md) .
+- Ayarlama önerileri hakkında bilgi almak için [otomatik ayarlama için e-posta bildirimlerini etkinleştirin](sql-database-automatic-tuning-email-notifications.md) .
+- [Performans önerilerini uygulayın](sql-database-advisor-portal.md) ve veritabanınızı iyileştirin.
+- Azure SQL veritabanından bildirimleri almak için [uyarılar oluşturun](sql-database-insights-alerts-portal.md) .
+- Uygulamalar ve veritabanı arasında bazı bağlantı sorunlarıyla karşılaşırsanız [bağlantı sorunlarını giderin](sql-database-troubleshoot-common-connection-issues.md) . [Bağlantı sorunları için kaynak durumu](sql-database-resource-health.md)de kullanabilirsiniz.
+- Veritabanınızdaki depolama kullanımını izlemek için [Dosya alanını yönetin](sql-database-file-space-management.md) .
 
 ## <a name="query-distributed-data"></a>Sorgu dağıtılmış verileri
 
-- [Dikey olarak bölümlenmiş verileri Sorgulama](sql-database-elastic-query-getting-started-vertical.md) birden çok veritabanı genelinde.
-- [Ölçeklendirilmiş veri katmanı arasında rapor](sql-database-elastic-query-horizontal-partitioning.md).
-- [Farklı şemalarla tablolar üzerinden sorgu](sql-database-elastic-query-vertical-partitioning.md).
+- [Dikey olarak bölümlenmiş verileri](sql-database-elastic-query-getting-started-vertical.md) birden çok veritabanı arasında sorgulayın.
+- [Ölçeği genişletilmiş veri katmanı üzerinden raporla](sql-database-elastic-query-horizontal-partitioning.md).
+- [Farklı şemalarla tablolar arasında sorgu](sql-database-elastic-query-vertical-partitioning.md).
 
 ## <a name="elastic-database-jobs"></a>Elastik Veritabanı İşleri
 
-- [Oluşturma ve yönetme](elastic-jobs-powershell.md) PowerShell kullanarak elastik veritabanı işleri.
-- [Oluşturma ve yönetme](elastic-jobs-tsql.md) Transact-SQL kullanarak elastik veritabanı işleri.
-- [Eski esnek işten geçirme](elastic-jobs-migrate.md).
+- [Oluşturma ve yönetme](elastic-jobs-powershell.md) PowerShell kullanarak elastik veritabanı Işleri.
+- [Oluşturma ve yönetme](elastic-jobs-tsql.md) Transact-SQL kullanan elastik veritabanı Işleri.
+- [Eski elastik Işten geçiş yapın](elastic-jobs-migrate.md).
 
 ## <a name="database-sharding"></a>Veritabanı parçalama
 
-- [Yükseltme elastik veritabanı istemci Kitaplığı](sql-database-elastic-scale-upgrade-client-library.md).
-- [Parçalı uygulama oluşturma](sql-database-elastic-scale-get-started.md).
-- [Yatay olarak parçalı verileri Sorgulama](sql-database-elastic-query-getting-started.md).
-- Çalıştırma [çok parçalı sorgular](sql-database-elastic-scale-multishard-querying.md).
-- [Parçalı verileri taşıma](sql-database-elastic-scale-configure-deploy-split-and-merge.md).
-- [Güvenlik Yapılandırma](sql-database-elastic-scale-split-merge-security-configuration.md) veritabanı parçalardaki.
-- [Parça ekleme](sql-database-elastic-scale-add-a-shard.md) veritabanı parçalarını geçerli dizi.
-- [Parça eşleme sorunlarını düzeltme](sql-database-elastic-database-recovery-manager.md).
-- [Parçalı veritabanını geçirme](sql-database-elastic-convert-to-use-elastic-tools.md).
-- [Sayaç oluşturma](sql-database-elastic-database-perf-counters.md).
-- [Kullanım entity framework](sql-database-elastic-scale-use-entity-framework-applications-visual-studio.md) sorgu parçalı veriler için.
-- [Kullanım Dapper framework](sql-database-elastic-scale-working-with-dapper.md) sorgu parçalı veriler için.
+- [Elastik veritabanı istemci kitaplığını yükseltin](sql-database-elastic-scale-upgrade-client-library.md).
+- Parçalı [uygulama oluşturun](sql-database-elastic-scale-get-started.md).
+- [Yatay olarak parçalı verileri sorgulayın](sql-database-elastic-query-getting-started.md).
+- [Çok parçalı sorgular](sql-database-elastic-scale-multishard-querying.md)çalıştırın.
+- Parçalı [verileri taşıyın](sql-database-elastic-scale-configure-deploy-split-and-merge.md).
+- Veritabanı parçaları 'nda [güvenliği yapılandırma](sql-database-elastic-scale-split-merge-security-configuration.md) .
+- Geçerli veritabanı parçaları kümesine parça [ekleyin](sql-database-elastic-scale-add-a-shard.md) .
+- Parça [eşleme sorunlarını giderin](sql-database-elastic-database-recovery-manager.md).
+- Parçalı [DB 'Yi geçirin](sql-database-elastic-convert-to-use-elastic-tools.md).
+- [Sayaç oluşturun](sql-database-elastic-database-perf-counters.md).
+- Parçalı verileri sorgulamak için [Entity Framework 'Ü kullanın](sql-database-elastic-scale-use-entity-framework-applications-visual-studio.md) .
+- Parçalı verileri sorgulamak için [kaber çerçevesini kullanın](sql-database-elastic-scale-working-with-dapper.md) .
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Daha fazla bilgi edinin [yönetilen örnek için nasıl yapılır kılavuzları](sql-database-howto-managed-instance.md)
+- [Yönetilen örnek Için nasıl yapılır kılavuzlarından](sql-database-howto-managed-instance.md) daha fazla bilgi edinin

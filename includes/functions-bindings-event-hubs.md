@@ -4,52 +4,52 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 03/05/2019
 ms.author: cshoe
-ms.openlocfilehash: 421e0db48f045c5cbce52a0641902e6d2a11276e
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 0f94c89a52de138b261796cbef25c0acb57622c4
+ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188167"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73800179"
 ---
 ## <a name="trigger"></a>Tetikleyici
 
-İşlev tetikleyicisi için bir olay hub'ı olay akışı gönderilen olaya yanıt vermek için kullanın. Tetikleyicinin ayarlamak için temel olay hub'ına okuma erişimi olmalıdır. İşlev tetiklendiğinde, işleve geçirilen ileti bir dize olarak yazılır.
+Bir olay hub 'ı olay akışına gönderilen olaya yanıt vermek için işlev tetikleyicisini kullanın. Tetikleyiciyi ayarlamak için temeldeki Olay Hub 'ına okuma erişiminizin olması gerekir. İşlev tetiklendiğinde, işleve geçirilen ileti bir dize olarak yazılır.
 
-## <a name="trigger---scaling"></a>Tetikleme - ölçeklendirme
+## <a name="trigger---scaling"></a>Tetikleyici-ölçekleme
 
-Bir olayı tetiklendi işlevi her bir örneği tarafından tek bir yedeklenen [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) örneği. Yalnızca bir (olay hub'ları tarafından desteklenen) tetikleyici sağlar [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) örneği, belirli bir bölüme bir kira alabilirsiniz.
+Olay tetiklenen bir işlevin her örneği tek bir [Eventprocessorhost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) örneği tarafından desteklenir. Tetikleyici (Event Hubs tarafından desteklenir) yalnızca bir [Eventprocessorhost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) örneğinin belirli bir bölüm üzerinde kira almasını sağlar.
 
-Örneğin, bir olay hub'ı aşağıdaki gibi düşünün:
+Örneğin, aşağıdaki gibi bir olay hub 'ı göz önünde bulundurun:
 
-* 10 bölümleri
-* Her bölümde 100 iletileri olan tüm bölümler arasında eşit olarak dağıtılmış 1.000 olayları
+* 10 Bölüm
+* 1\.000 olay, her bölümde 100 ileti ile tüm bölümler arasında eşit olarak dağıtılır
 
-İlk işlevinizi etkinleştirildiğinde, yalnızca bir örneğini işlevi yoktur. İlk işlev örneği adlandıralım `Function_0`. `Function_0` İşleve sahip tek bir örneğini [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) kira tüm on bölümlerde tutan. Bu örnek, 0-9 bölümlerden olayları okunuyor. Bu noktadan itibaren aşağıdakilerden biri gerçekleşir:
+İşleviniz ilk etkinleştirildiğinde, işlevin yalnızca bir örneği vardır. `Function_0`ilk işlev örneğini arayalım. `Function_0` işlevi, her on bölümde bir kira tutan [Eventprocessorhost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) öğesinin tek bir örneğine sahiptir. Bu örnek, 0-9 bölümlerinden olayları okuyor. Bu noktadan sonra aşağıdakilerden biri olur:
 
-* **Yeni işlev örnekleri gerekmeyen**: `Function_0` mantıksal ölçeklendirme işlevi etkinleşmeden önce tüm 1.000 olayları işleyebilir. Bu durumda, tüm 1.000 iletileri tarafından işlenen `Function_0`.
+* **Yeni işlev örnekleri gerekli değildir**: `Function_0` işlevler ölçekleme mantığı yürürlüğe girmeden önce tüm 1.000 olaylarını işleyebilir. Bu durumda, tüm 1.000 iletileri `Function_0`tarafından işlenir.
 
-* **Ek işlev örneği eklenen**: Varsa işlevleri belirleyen mantıksal ölçeklendirme `Function_0` daha yeni bir işlev uygulaması örneği işlem daha fazla ileti yok (`Function_1`) oluşturulur. Bu yeni işlev de ilişkili bir örneği olduğu [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor). Temel Event hubs'ı yeni bir ana bilgisayar örneği iletileri okumak çalışıyor algılıyoruz, yükü dengelenen bölümler arasında kendi ana bilgisayar örneği. Örneğin, 0-4 bölüm için atanabilir `Function_0` ve 5-9 bölümleri `Function_1`.
+* **Ek bir işlev örneği eklendi**: işlevlerin ölçeklendirilmesi mantığı `Function_0`, yeni bir işlev uygulama örneği (`Function_1`) oluşturulur. Bu yeni işlevin aynı zamanda [Eventprocessorhost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor)ilişkili bir örneği de vardır. Temeldeki Event Hubs, yeni bir konak örneğinin okunmuş iletileri denediğinden emin olup, bu yükleme, bölümleri konak örnekleri genelinde dengeler. Örneğin, 0-4 bölümleri `Function_1``Function_0` ve Bölüm 5-9 ' e atanabilir.
 
-* **Daha fazla işlev örneği eklenir N**: Varsa işlevleri belirleyen mantıksal ölçeklendirme hem `Function_0` ve `Function_1` sahip kullanıcılar, yeni işleyebileceğinden daha fazla ileti `Functions_N` işlevi uygulama örneği oluşturulur.  Uygulamalar noktasına oluşturulan burada `N` olay hub'ı bölümleri sayısından büyüktür. Yük dengeleyen bölümleri, bu durumda örneklerinde Örneğimizde, Event Hubs yeniden `Function_0`... `Functions_9`.
+* **N daha fazla işlev örneği eklendi**: işlevler ölçeklendirme mantığı, hem `Function_0` hem de `Function_1` işleyebileceğinden daha fazla ileti olduğunu belirlerse, yeni `Functions_N` işlevi uygulama örnekleri oluşturulur.  Uygulamalar, `N` Olay Hub 'ı bölümlerinin sayısından daha büyük olduğu noktaya oluşturulur. Bizim örneğimizde, bu durumda `Function_0`...`Functions_9`örnekleri arasında Event Hubs yeniden yükleme, bölümleri daha sonra dengeler.
 
-Ne zaman, Ölçek, işlev `N` örnekleri olan olay hub'ı bölümleri sayısından büyük bir sayı. Bunu sağlamak için yapılır [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) örneği diğer örneklerin kullanılabilir oldukça bölümler kilitler elde etmek kullanılabilir. Yalnızca işlev örneği yürütüldüğünde kullanılan kaynaklar için ücretlendirilirsiniz. Diğer bir deyişle, bu aşırı sağlama için ücretlendirilmez.
+Işlevler ölçeklenirken, `N` örnekleri, Olay Hub 'ı bölümlerinin sayısından daha büyük bir sayıdır. Bu işlem, [Eventprocessorhost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) örneklerinin diğer örneklerden kullanılabilir hale gelebileceği bölümlerde kilitleri elde etmek için kullanılabilir olmasını sağlamak için yapılır. Yalnızca işlev örneği yürütüldüğünde kullanılan kaynaklar için ücretlendirilirsiniz. Diğer bir deyişle, bu aşırı sağlama için ücretlendirilirsiniz.
 
-Tüm işlev yürütme (ile veya hata olmadan) tamamlandığında denetim noktaları ilişkili depolama hesabına eklenir. Onay işaret eden başarılı olduğunda, tüm 1.000 ileti hiçbir zaman yeniden alınır.
+Tüm işlev yürütmesi tamamlandığında (hata ile veya hatasız), denetim noktaları ilişkili depolama hesabına eklenir. İade etme işlemi başarılı olduğunda, tüm 1.000 iletileri hiçbir zaman geri alınamaz.
 
-## <a name="trigger---example"></a>Tetikleyici - örnek
+## <a name="trigger---example"></a>Tetikleyici-örnek
 
 Dile özgü örneğe bakın:
 
 * [C#](#trigger---c-example)
-* [C# betiği (.csx)](#trigger---c-script-example)
+* [C#betik (. CSX)](#trigger---c-script-example)
 * [F#](#trigger---f-example)
 * [Java](#trigger---java-example)
 * [JavaScript](#trigger---javascript-example)
 * [Python](#trigger---python-example)
 
-### <a name="trigger---c-example"></a>Tetikleyici - C# örneği
+### <a name="trigger---c-example"></a>Tetikleyici- C# örnek
 
-Aşağıdaki örnekte gösterildiği bir [C# işlevi](../articles/azure-functions/functions-dotnet-class-library.md) , günlükleri Olay hub'ı tetikleyicisi ileti gövdesi.
+Aşağıdaki örnek, Olay Hub 'ı tetikleyicisinin ileti gövdesini günlüğe kaydeden bir [ C# işlevi](../articles/azure-functions/functions-dotnet-class-library.md) gösterir.
 
 ```csharp
 [FunctionName("EventHubTriggerCSharp")]
@@ -59,7 +59,7 @@ public static void Run([EventHubTrigger("samples-workitems", Connection = "Event
 }
 ```
 
-Erişim elde etmek için [olay meta verilerinin](#trigger---event-metadata) işlevi kod içinde bağlama bir [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata) nesne (bir kullanılması deyimi için `Microsoft.Azure.EventHubs`). Aynı özellikleri Yöntem imzasında bağlama ifadeleri kullanarak da erişebilirsiniz.  Aşağıdaki örnek, aynı verileri almak için her iki yönde gösterir:
+İşlev kodundaki [olay meta verilerine](#trigger---event-metadata) erişim sağlamak Için bir [eventdata](/dotnet/api/microsoft.servicebus.messaging.eventdata) nesnesine bağlayın (`Microsoft.Azure.EventHubs`için bir using açıklaması gerekir). Ayrıca, yöntem imzasında bağlama ifadeleri kullanarak aynı özelliklere erişebilirsiniz.  Aşağıdaki örnek, aynı verileri almanın her iki yolunu da göstermektedir:
 
 ```csharp
 [FunctionName("EventHubTriggerCSharp")]
@@ -82,10 +82,10 @@ public static void Run(
 }
 ```
 
-Bir toplu işte olayları almak, olun `string` veya `EventData` dizisi.  
+Bir toplu işteki olayları almak için `string` veya `EventData` bir dizi oluşturun.  
 
 > [!NOTE]
-> Yukarıdaki örnekte ile yöntemi parametrelerine bağlanamıyor toplu alırken ister `DateTime enqueuedTimeUtc` ve bunlar her almalıdır `EventData` nesnesi  
+> Bir toplu işte alırken Yukarıdaki örnekte olduğu gibi Yöntem parametrelerine `DateTime enqueuedTimeUtc` bağlanamaz ve bunları her bir `EventData` nesnesinden almalıdır  
 
 ```cs
 [FunctionName("EventHubTriggerCSharp")]
@@ -99,13 +99,13 @@ public static void Run([EventHubTrigger("samples-workitems", Connection = "Event
 }
 ```
 
-### <a name="trigger---c-script-example"></a>Tetikleyici - C# betiği örneği
+### <a name="trigger---c-script-example"></a>Tetikleyici- C# betik örneği
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [C# betik işlevi](../articles/azure-functions/functions-reference-csharp.md) bağlama kullanan. İşlevi, olay hub'ı tetikleyicisi ileti gövdesi günlüğe kaydeder.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir olay hub 'ı tetikleme bağlantısını ve bağlamayı kullanan bir [ C# betik işlevini](../articles/azure-functions/functions-reference-csharp.md) gösterir. İşlevi, Olay Hub 'ı tetikleyicisinin ileti gövdesini günlüğe kaydeder.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir.
 
-#### <a name="version-2x"></a>Sürüm 2.x
+#### <a name="version-2x"></a>Sürüm 2. x
 
 ```json
 {
@@ -117,7 +117,7 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-#### <a name="version-1x"></a>Sürüm 1.x
+#### <a name="version-1x"></a>Sürüm 1. x
 
 ```json
 {
@@ -129,7 +129,7 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-C# betik kodunu şu şekildedir:
+C# Betik kodu aşağıda verilmiştir:
 
 ```cs
 using System;
@@ -140,7 +140,7 @@ public static void Run(string myEventHubMessage, TraceWriter log)
 }
 ```
 
-Erişim elde etmek için [olay meta verilerinin](#trigger---event-metadata) işlevi kod içinde bağlama bir [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata) nesne (bir kullanılması deyimi için `Microsoft.Azure.EventHubs`). Aynı özellikleri Yöntem imzasında bağlama ifadeleri kullanarak da erişebilirsiniz.  Aşağıdaki örnek, aynı verileri almak için her iki yönde gösterir:
+İşlev kodundaki [olay meta verilerine](#trigger---event-metadata) erişim sağlamak Için bir [eventdata](/dotnet/api/microsoft.servicebus.messaging.eventdata) nesnesine bağlayın (`Microsoft.Azure.EventHubs`için bir using açıklaması gerekir). Ayrıca, yöntem imzasında bağlama ifadeleri kullanarak aynı özelliklere erişebilirsiniz.  Aşağıdaki örnek, aynı verileri almanın her iki yolunu da göstermektedir:
 
 ```cs
 #r "Microsoft.Azure.EventHubs"
@@ -168,7 +168,7 @@ public static void Run(EventData myEventHubMessage,
 }
 ```
 
-Bir toplu işte olayları almak, olun `string` veya `EventData` dizisi:
+Bir toplu işteki olayları almak için `string` veya `EventData` bir dizi oluşturun:
 
 ```cs
 public static void Run(string[] eventHubMessages, TraceWriter log)
@@ -180,13 +180,13 @@ public static void Run(string[] eventHubMessages, TraceWriter log)
 }
 ```
 
-### <a name="trigger---f-example"></a>Tetikleyici - F# örneği
+### <a name="trigger---f-example"></a>Tetikleyici- F# örnek
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [ F# işlevi](../articles/azure-functions/functions-reference-fsharp.md) bağlama kullanan. İşlevi, olay hub'ı tetikleyicisi ileti gövdesi günlüğe kaydeder.
+Aşağıdaki örnek, bir *function. JSON* dosyası ve bağlamayı kullanan bir [ F# işlev](../articles/azure-functions/functions-reference-fsharp.md) içindeki bir olay hub 'ı tetikleme bağlantısını göstermektedir. İşlevi, Olay Hub 'ı tetikleyicisinin ileti gövdesini günlüğe kaydeder.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya. 
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir. 
 
-#### <a name="version-2x"></a>Sürüm 2.x
+#### <a name="version-2x"></a>Sürüm 2. x
 
 ```json
 {
@@ -198,7 +198,7 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-#### <a name="version-1x"></a>Sürüm 1.x
+#### <a name="version-1x"></a>Sürüm 1. x
 
 ```json
 {
@@ -210,20 +210,20 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-İşte F# kod:
+F# Kod şu şekildedir:
 
 ```fsharp
 let Run(myEventHubMessage: string, log: TraceWriter) =
     log.Log(sprintf "F# eventhub trigger function processed work item: %s" myEventHubMessage)
 ```
 
-### <a name="trigger---javascript-example"></a>Tetikleyici - JavaScript örneği
+### <a name="trigger---javascript-example"></a>Trigger-JavaScript örneği
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [JavaScript işlevi](../articles/azure-functions/functions-reference-node.md) bağlama kullanan. İşlev okur [olay meta verilerinin](#trigger---event-metadata) ve iletiyi günlüğe kaydeder.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir olay hub 'ı tetikleme bağlantısını ve bağlamayı kullanan bir [JavaScript işlevini](../articles/azure-functions/functions-reference-node.md) gösterir. İşlevi [olay meta verilerini](#trigger---event-metadata) okur ve iletiyi günlüğe kaydeder.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir.
 
-#### <a name="version-2x"></a>Sürüm 2.x
+#### <a name="version-2x"></a>Sürüm 2. x
 
 ```json
 {
@@ -235,7 +235,7 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-#### <a name="version-1x"></a>Sürüm 1.x
+#### <a name="version-1x"></a>Sürüm 1. x
 
 ```json
 {
@@ -247,10 +247,10 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-JavaScript kod aşağıdaki gibidir:
+JavaScript kodu aşağıda verilmiştir:
 
 ```javascript
-module.exports = function (context, eventHubMessage) {
+module.exports = function (context, myEventHubMessage) {
     context.log('Function triggered to process a message: ', myEventHubMessage);
     context.log('EnqueuedTimeUtc =', context.bindingData.enqueuedTimeUtc);
     context.log('SequenceNumber =', context.bindingData.sequenceNumber);
@@ -260,9 +260,9 @@ module.exports = function (context, eventHubMessage) {
 };
 ```
 
-Bir toplu işte olayları almak için ayarlanmış `cardinality` için `many` içinde *function.json* aşağıdaki örneklerde gösterildiği gibi dosya.
+Bir toplu işteki olayları almak için, aşağıdaki örneklerde gösterildiği gibi, `cardinality` *function. JSON* dosyasında `many` olarak ayarlayın.
 
-#### <a name="version-2x"></a>Sürüm 2.x
+#### <a name="version-2x"></a>Sürüm 2. x
 
 ```json
 {
@@ -275,7 +275,7 @@ Bir toplu işte olayları almak için ayarlanmış `cardinality` için `many` i�
 }
 ```
 
-#### <a name="version-1x"></a>Sürüm 1.x
+#### <a name="version-1x"></a>Sürüm 1. x
 
 ```json
 {
@@ -288,7 +288,7 @@ Bir toplu işte olayları almak için ayarlanmış `cardinality` için `many` i�
 }
 ```
 
-JavaScript kod aşağıdaki gibidir:
+JavaScript kodu aşağıda verilmiştir:
 
 ```javascript
 module.exports = function (context, eventHubMessages) {
@@ -305,11 +305,11 @@ module.exports = function (context, eventHubMessages) {
 };
 ```
 
-### <a name="trigger---python-example"></a>Tetikleyici - Python örnek
+### <a name="trigger---python-example"></a>Trigger-Python örneği
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [funkce Pythonu](../articles/azure-functions/functions-reference-python.md) bağlama kullanan. İşlev okur [olay meta verilerinin](#trigger---event-metadata) ve iletiyi günlüğe kaydeder.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir olay hub 'ı tetikleme bağlantısını ve bağlamayı kullanan bir [Python işlevini](../articles/azure-functions/functions-reference-python.md) gösterir. İşlevi [olay meta verilerini](#trigger---event-metadata) okur ve iletiyi günlüğe kaydeder.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir.
 
 ```json
 {
@@ -321,11 +321,12 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-Python kod aşağıdaki gibidir:
+Python kodu aşağıda verilmiştir:
 
 ```python
 import logging
 import azure.functions as func
+
 
 def main(event: func.EventHubEvent):
     logging.info('Function triggered to process a message: ', event.get_body())
@@ -334,9 +335,9 @@ def main(event: func.EventHubEvent):
     logging.info('  Offset =', event.offset)
 ```
 
-### <a name="trigger---java-example"></a>Tetikleyici - Java örnek
+### <a name="trigger---java-example"></a>Trigger-Java örneği
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [Java işlevi](../articles/azure-functions/functions-reference-java.md) bağlama kullanan. İşlevi, olay hub'ı tetikleyicisi ileti gövdesi günlüğe kaydeder.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir olay hub 'ı tetikleme bağlantısını ve bağlamayı kullanan bir [Java işlevini](../articles/azure-functions/functions-reference-java.md) gösterir. İşlevi, Olay Hub 'ı tetikleyicisinin ileti gövdesini günlüğe kaydeder.
 
 ```json
 {
@@ -360,13 +361,13 @@ public void eventHubProcessor(
  }
 ```
 
- İçinde [Java Çalışma Zamanı Kitaplığı işlevleri](/java/api/overview/azure/functions/runtime), kullanın `EventHubTrigger` değerini olay Hub'ından gelen parametre üzerindeki ek açıklama. Bu ek açıklamalar parametrelerle bir olay geldiğinde çalıştırmak işlev neden.  Bu ek açıklama yerel Java türler, pojo'ları veya isteğe bağlı kullanarak boş değer atanabilir değer ile kullanılabilir<T>.
+ [Java işlevleri çalışma zamanı kitaplığı](/java/api/overview/azure/functions/runtime)'nda, değeri Olay Hub 'ından gelen parametrelerde `EventHubTrigger` ek açıklamasını kullanın. Bu ek açıklamaların bulunduğu parametreler, bir olay geldiğinde işlevin çalışmasına neden olur.  Bu ek açıklama, Isteğe bağlı\<T > kullanılarak yerel Java türleri, POJOs veya null yapılabilir değerler ile kullanılabilir.
 
-## <a name="trigger---attributes"></a>Tetikleyici - öznitelikleri
+## <a name="trigger---attributes"></a>Tetikleyici-öznitelikler
 
-İçinde [C# sınıfı kitaplıklar](../articles/azure-functions/functions-dotnet-class-library.md), kullanın [EventHubTriggerAttribute](https://github.com/Azure/azure-webjobs-sdk/blob/master/src/Microsoft.Azure.WebJobs.Extensions.EventHubs/EventHubTriggerAttribute.cs) özniteliği.
+[ C# Sınıf kitaplıkları](../articles/azure-functions/functions-dotnet-class-library.md)' nda [eventhubtriggerattribute](https://github.com/Azure/azure-functions-eventhubs-extension/blob/master/src/Microsoft.Azure.WebJobs.Extensions.EventHubs/EventHubTriggerAttribute.cs) özniteliğini kullanın.
 
-Özniteliğin oluşturucusu, olay hub'ı adı, tüketici grubu adını ve bağlantı dizesini içeren bir uygulama ayarı adı alır. Bu ayarlar hakkında daha fazla bilgi için bkz. [tetikleyecek yapılandırma bölümü](#trigger---configuration). İşte bir `EventHubTriggerAttribute` özniteliği örneği:
+Özniteliğin Oluşturucusu, Olay Hub 'ının adını, tüketici grubunun adını ve bağlantı dizesini içeren bir uygulama ayarının adını alır. Bu ayarlar hakkında daha fazla bilgi için [tetikleyici yapılandırma bölümüne](#trigger---configuration)bakın. İşte bir `EventHubTriggerAttribute` özniteliği örneği:
 
 ```csharp
 [FunctionName("EventHubTriggerCSharp")]
@@ -376,68 +377,68 @@ public static void Run([EventHubTrigger("samples-workitems", Connection = "Event
 }
 ```
 
-Tam bir örnek için bkz. [tetikleyici - C# örneği](#trigger---c-example).
+Tam bir örnek için bkz. [tetikleyici- C# örnek](#trigger---c-example).
 
-## <a name="trigger---configuration"></a>Tetikleyici - yapılandırma
+## <a name="trigger---configuration"></a>Tetikleyici-yapılandırma
 
-Aşağıdaki tabloda ayarladığınız bağlama yapılandırma özelliklerini açıklayan *function.json* dosya ve `EventHubTrigger` özniteliği.
+Aşağıdaki tabloda, *function. JSON* dosyasında ve `EventHubTrigger` özniteliğinde ayarladığınız bağlama yapılandırma özellikleri açıklanmaktadır.
 
-|Function.JSON özelliği | Öznitelik özelliği |Açıklama|
+|function. JSON özelliği | Öznitelik özelliği |Açıklama|
 |---------|---------|----------------------|
-|**type** | yok | Ayarlanmalıdır `eventHubTrigger`. Bu özellik, Azure portalında tetikleyicisi oluşturduğunuzda otomatik olarak ayarlanır.|
-|**direction** | yok | Ayarlanmalıdır `in`. Bu özellik, Azure portalında tetikleyicisi oluşturduğunuzda otomatik olarak ayarlanır. |
-|**Adı** | yok | İşlev kodunu olay öğeyi temsil eden değişken adı. |
-|**Yolu** |**EventHubName** | 1\.x yalnızca çalışır. Olay hub'ının adı. Bu değer, olay hub'ı adı da bağlantı dizesinde mevcut olduğunda, çalışma zamanında bu özellik geçersiz kılar. |
-|**EventHubName** |**EventHubName** | 2\.x yalnızca çalışır. Olay hub'ının adı. Bu değer, olay hub'ı adı da bağlantı dizesinde mevcut olduğunda, çalışma zamanında bu özellik geçersiz kılar. |
-|**consumerGroup** |**consumerGroup** | Ayarlar isteğe bağlı bir özellik [tüketici grubu](../articles/event-hubs/event-hubs-features.md)#event-tüketicileri) hub'ındaki olayları abone olmak için kullanılır. Atlanırsa, `$Default` tüketici grubu kullanılır. |
-|**önem düzeyi** | yok | JavaScript için. Kümesine `many` toplu işleme etkinleştirmek için.  Atlanırsa veya kümesine `one`, tek bir ileti için işleve geçirildi. |
-|**bağlantı** |**bağlantı** | Olay hub'ın ad bağlantı dizesi içeren bir uygulama ayarı adı. Tıklayarak, bu bağlantı dizesini kopyalayın **bağlantı bilgilerini** için düğme [ad alanı](../articles/event-hubs/event-hubs-create.md)#create-bir-event-hubs-ad alanı), olay hub kendisi değil. Bu bağlantı dizesini en az tetikleyici etkinleştirmek için Okuma izinlerine sahip olmalıdır.|
-|**Yolu**|**EventHubName**|Olay hub'ının adı. Uygulama ayarları başvurulabilir `%eventHubName%`|
+|**type** | yok | `eventHubTrigger`olarak ayarlanmalıdır. Bu özellik, Azure portal tetikleyiciyi oluşturduğunuzda otomatik olarak ayarlanır.|
+|**direction** | yok | `in`olarak ayarlanmalıdır. Bu özellik, Azure portal tetikleyiciyi oluşturduğunuzda otomatik olarak ayarlanır. |
+|**ada** | yok | İşlev kodundaki olay öğesini temsil eden değişkenin adı. |
+|**Yolun** |**EventHubName** | Yalnızca 1. x işlevleri. Olay Hub 'ının adı. Aynı zamanda, Olay Hub 'ı adı bağlantı dizesinde de mevcutsa, bu değer çalışma zamanında bu özelliği geçersiz kılar. |
+|**eventHubName** |**EventHubName** | Yalnızca 2. x işlevleri. Olay Hub 'ının adı. Aynı zamanda, Olay Hub 'ı adı bağlantı dizesinde de mevcutsa, bu değer çalışma zamanında bu özelliği geçersiz kılar. |
+|**consumerGroup** |**ConsumerGroup** | Hub 'daki olaylara abone olmak için kullanılan [Tüketici grubunu](../articles/event-hubs/event-hubs-features.md#event-consumers) ayarlayan isteğe bağlı bir özellik. Atlanırsa, `$Default` Tüketici grubu kullanılır. |
+|**ite** | yok | JavaScript için. Toplu işleme ' i etkinleştirmek için `many` olarak ayarlayın.  Atlanırsa veya `one`olarak ayarlandıysa, tek bir ileti işleve geçirilir. |
+|**bağlanma** |**Bağlanma** | Olay Hub 'ının ad alanına bağlantı dizesini içeren bir uygulama ayarının adı. Bu bağlantı dizesini, Olay Hub 'ının değil, [ad alanı](../articles/event-hubs/event-hubs-create.md#create-an-event-hubs-namespace)Için **bağlantı bilgileri** düğmesine tıklayarak kopyalayın. Bu bağlantı dizesinin tetikleyiciyi etkinleştirmek için en azından okuma izinlerine sahip olması gerekir.|
+|**Yolun**|**EventHubName**|Olay Hub 'ının adı. Uygulama ayarları aracılığıyla başvurulabilirler `%eventHubName%`|
 
 [!INCLUDE [app settings to local.settings.json](../articles/azure-functions/../../includes/functions-app-settings-local.md)]
 
-## <a name="trigger---event-metadata"></a>Tetikleyici - olay meta verileri
+## <a name="trigger---event-metadata"></a>Tetikleyici-olay meta verileri
 
-Olay hub'ları tetikleme birkaç sağlar [meta veri özelliklerini](../articles/azure-functions/./functions-bindings-expressions-patterns.md). Bu özellikler, diğer bağlamalar bağlama ifadelerinde parçası olarak veya kodunuzu parametreler olarak kullanılabilir. Bu özellikleri olan [EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata) sınıfı.
+Event Hubs tetikleyicisi çeşitli [meta veri özellikleri](../articles/azure-functions/./functions-bindings-expressions-patterns.md)sağlar. Bu özellikler, diğer bağlamalardaki veya kodunuzda parametre olarak bağlama ifadelerinin bir parçası olarak kullanılabilir. Bunlar [eventdata](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata) sınıfının özellikleridir.
 
 |Özellik|Tür|Açıklama|
 |--------|----|-----------|
-|`PartitionContext`|[PartitionContext](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.partitioncontext)|`PartitionContext` Örneği.|
-|`EnqueuedTimeUtc`|`DateTime`|Sıraya alınan saati UTC diliminde saat.|
-|`Offset`|`string`|Verileri olay hub'ı bölüm akışa göre uzaklığı. Uzaklık, bir işaretçi veya Event Hubs akış içinde bir olay için tanımlayıcı dayalıdır. Event Hubs akış ilişkin bir bölüm içinde benzersiz tanımlayıcısıdır.|
-|`PartitionKey`|`string`|İçin hangi olay veri gönderilmesi gereken bir bölüm.|
-|`Properties`|`IDictionary<String,Object>`|Kullanıcı özellikleri olay verileri.|
-|`SequenceNumber`|`Int64`|Olay mantıksal sıra sayısı.|
-|`SystemProperties`|`IDictionary<String,Object>`|Olay verileri dahil olmak üzere Sistem Özellikleri.|
+|`PartitionContext`|[PartitionContext](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.partitioncontext)|`PartitionContext` örneği.|
+|`EnqueuedTimeUtc`|`DateTime`|UTC olarak sıraya alınan zaman.|
+|`Offset`|`string`|Olay Hub 'ı bölüm akışına göre verilerin uzaklıkları. Bu, Event Hubs akışı içindeki bir olayın işaretçisi veya tanımlayıcısıdır. Tanımlayıcı, Event Hubs akışının bir bölümü içinde benzersizdir.|
+|`PartitionKey`|`string`|Olay verilerinin gönderileceği bölüm.|
+|`Properties`|`IDictionary<String,Object>`|Olay verilerinin Kullanıcı özellikleri.|
+|`SequenceNumber`|`Int64`|Etkinliğin mantıksal sıra numarası.|
+|`SystemProperties`|`IDictionary<String,Object>`|Olay verileri de dahil olmak üzere sistem özellikleri.|
 
-Bkz: [kod örnekleri](#trigger---example) bu makalenin önceki bölümlerinde bu özellikleri kullanın.
+Bu makalenin önceki kısımlarında bu özellikleri kullanan [kod örneklerine](#trigger---example) bakın.
 
-## <a name="trigger---hostjson-properties"></a>Tetikleyici - host.json özellikleri
+## <a name="trigger---hostjson-properties"></a>Trigger-Host. JSON özellikleri
 
-[Host.json](../articles/azure-functions/functions-host-json.md#eventhub) dosyası Event Hubs tetikleyici davranışını denetleyen ayarları içerir.
+[Host. JSON](../articles/azure-functions/functions-host-json.md#eventhub) dosyası Event Hubs tetikleme davranışını denetleyen ayarları içerir.
 
 [!INCLUDE [functions-host-json-event-hubs](../articles/azure-functions/../../includes/functions-host-json-event-hubs.md)]
 
 ## <a name="output"></a>Çıktı
 
-Event Hubs çıkış olayları için olay akışının yazmaya bağlaması kullanın. Olaylar için yazma olay hub'ına gönderme izni olmalıdır.
+Olayları bir olay akışına yazmak için Event Hubs çıkış bağlamasını kullanın. Olayları yazmak için bir olay hub 'ına gönderme izninizin olması gerekir.
 
-Gerekli paket başvuruları karşılandığından emin olun: 1.x işlevleri veya 2.x işlevleri
+Gerekli paket başvurularının yerinde olduğundan emin olun: 1. x veya Işlevler 2. x Işlevleri
 
-## <a name="output---example"></a>Çıkış - örnek
+## <a name="output---example"></a>Çıkış-örnek
 
 Dile özgü örneğe bakın:
 
 * [C#](#output---c-example)
-* [C# betiği (.csx)](#output---c-script-example)
+* [C#betik (. CSX)](#output---c-script-example)
 * [F#](#output---f-example)
 * [Java](#output---java-example)
 * [JavaScript](#output---javascript-example)
 * [Python](#output---python-example)
 
-### <a name="output---c-example"></a>Çıkış - C# örneği
+### <a name="output---c-example"></a>Çıkış- C# örnek
 
-Aşağıdaki örnekte gösterildiği bir [C# işlevi](../articles/azure-functions/functions-dotnet-class-library.md) , Yazar bir ileti yönteminin dönüş değeri çıkış olarak kullanan bir olay hub'ına:
+Aşağıdaki örnek, bir olay hub 'ına bir ileti yazan, çıkış olarak yöntem dönüş değeri kullanan bir [ C# işlevi](../articles/azure-functions/functions-dotnet-class-library.md) göstermektedir:
 
 ```csharp
 [FunctionName("EventHubOutput")]
@@ -449,7 +450,7 @@ public static string Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILog
 }
 ```
 
-Aşağıdaki örnek nasıl kullanılacağını gösterir `IAsyncCollector` toplu iletiler göndermek için arabirim. Bir olay Hub'ından gelen ve sonucu başka bir olay Hub'ına gönderme iletilerini işlerken bu yaygın bir senaryodur.
+Aşağıdaki örnek, `IAsyncCollector` arabiriminin bir toplu ileti göndermek için nasıl kullanılacağını gösterir. Bu senaryo, bir olay hub 'ından gelen iletileri işlerken ve sonucu başka bir olay hub 'ına gönderdiğinizde yaygındır.
 
 ```csharp
 [FunctionName("EH2EH")]
@@ -469,11 +470,11 @@ public static async Task Run(
 }
 ```
 
-### <a name="output---c-script-example"></a>Çıkış - C# betiği örneği
+### <a name="output---c-script-example"></a>Çıkış C# betiği örneği
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [C# betik işlevi](../articles/azure-functions/functions-reference-csharp.md) bağlama kullanan. İşlevi, bir olay hub'ına bir ileti yazar.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir olay hub 'ı tetikleme bağlantısını ve bağlamayı kullanan bir [ C# betik işlevini](../articles/azure-functions/functions-reference-csharp.md) gösterir. İşlevi bir olay hub 'ına bir ileti yazar.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya. İlk örnek için olan 2.x işlevleri ve ikincisi için işlevleri olan 1.x. 
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir. İlk örnek 2. x Işlevleri içindir ve ikincisi 1. x Işlevleri içindir. 
 
 ```json
 {
@@ -495,7 +496,7 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya. İlk ör
 }
 ```
 
-Bir ileti oluşturan C# betik kodunu şu şekildedir:
+Aşağıda bir C# ileti oluşturan betik kodu verilmiştir:
 
 ```cs
 using System;
@@ -509,7 +510,7 @@ public static void Run(TimerInfo myTimer, out string outputEventHubMessage, ILog
 }
 ```
 
-Birden çok ileti oluşturan aşağıda verilmiştir; C# betik kodu:
+Birden çok C# ileti oluşturan betik kodu aşağıda verilmiştir:
 
 ```cs
 public static void Run(TimerInfo myTimer, ICollector<string> outputEventHubMessage, ILogger log)
@@ -521,11 +522,11 @@ public static void Run(TimerInfo myTimer, ICollector<string> outputEventHubMessa
 }
 ```
 
-### <a name="output---f-example"></a>Çıkış - F# örneği
+### <a name="output---f-example"></a>Çıkış- F# örnek
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [ F# işlevi](../articles/azure-functions/functions-reference-fsharp.md) bağlama kullanan. İşlevi, bir olay hub'ına bir ileti yazar.
+Aşağıdaki örnek, bir *function. JSON* dosyası ve bağlamayı kullanan bir [ F# işlev](../articles/azure-functions/functions-reference-fsharp.md) içindeki bir olay hub 'ı tetikleme bağlantısını göstermektedir. İşlevi bir olay hub 'ına bir ileti yazar.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya. İlk örnek için olan 2.x işlevleri ve ikincisi için işlevleri olan 1.x. 
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir. İlk örnek 2. x Işlevleri içindir ve ikincisi 1. x Işlevleri içindir. 
 
 ```json
 {
@@ -546,7 +547,7 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya. İlk ör
 }
 ```
 
-İşte F# kod:
+F# Kod şu şekildedir:
 
 ```fsharp
 let Run(myTimer: TimerInfo, outputEventHubMessage: byref<string>, log: ILogger) =
@@ -555,11 +556,11 @@ let Run(myTimer: TimerInfo, outputEventHubMessage: byref<string>, log: ILogger) 
     outputEventHubMessage <- msg;
 ```
 
-### <a name="output---javascript-example"></a>Çıkış - JavaScript örneği
+### <a name="output---javascript-example"></a>Output-JavaScript örneği
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [JavaScript işlevi](../articles/azure-functions/functions-reference-node.md) bağlama kullanan. İşlevi, bir olay hub'ına bir ileti yazar.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir olay hub 'ı tetikleme bağlantısını ve bağlamayı kullanan bir [JavaScript işlevini](../articles/azure-functions/functions-reference-node.md) gösterir. İşlevi bir olay hub 'ına bir ileti yazar.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya. İlk örnek için olan 2.x işlevleri ve ikincisi için işlevleri olan 1.x. 
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir. İlk örnek 2. x Işlevleri içindir ve ikincisi 1. x Işlevleri içindir. 
 
 ```json
 {
@@ -581,7 +582,7 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya. İlk ör
 }
 ```
 
-Tek bir ileti gönderir JavaScript kodu aşağıda verilmiştir:
+Tek bir ileti gönderen JavaScript kodu aşağıda verilmiştir:
 
 ```javascript
 module.exports = function (context, myTimer) {
@@ -592,7 +593,7 @@ module.exports = function (context, myTimer) {
 };
 ```
 
-Birden çok ileti gönderen JavaScript kodunu aşağıda verilmiştir:
+Birden çok ileti gönderen JavaScript kodu aşağıda verilmiştir:
 
 ```javascript
 module.exports = function(context) {
@@ -607,11 +608,11 @@ module.exports = function(context) {
 };
 ```
 
-### <a name="output---python-example"></a>Çıkış - Python örnek
+### <a name="output---python-example"></a>Output-Python örneği
 
-Aşağıdaki örnek, bir olay hub'ı tetikleyicisi bağlama gösterir. bir *function.json* dosyası ve bir [funkce Pythonu](../articles/azure-functions/functions-reference-python.md) bağlama kullanan. İşlevi, bir olay hub'ına bir ileti yazar.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir olay hub 'ı tetikleme bağlantısını ve bağlamayı kullanan bir [Python işlevini](../articles/azure-functions/functions-reference-python.md) gösterir. İşlevi bir olay hub 'ına bir ileti yazar.
 
-Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
+Aşağıdaki örneklerde, *function. JSON* dosyasında Event Hubs bağlama verisi gösterilmektedir.
 
 ```json
 {
@@ -623,25 +624,26 @@ Event Hubs, veri bağlama Aşağıdaki örnekler *function.json* dosya.
 }
 ```
 
-Tek bir ileti gönderir Python kodu aşağıda verilmiştir:
+İşte tek bir ileti gönderen Python kodu:
 
 ```python
 import datetime
 import logging
 import azure.functions as func
 
+
 def main(timer: func.TimerRequest) -> str:
     timestamp = datetime.datetime.utcnow()
-    logging.info('Message created at: %s', timestamp);   
+    logging.info('Message created at: %s', timestamp)
     return 'Message created at: {}'.format(timestamp)
 ```
 
-### <a name="output---java-example"></a>Çıkış - Java örnek
+### <a name="output---java-example"></a>Output-Java örneği
 
-Aşağıdaki örnek, geçerli saati bir olay Hub'ına ileti contianing yazan bir Java işlev gösterir.
+Aşağıdaki örnek, bir olay hub 'ına geçerli zamanı contianing bir ileti yazan bir Java işlevini gösterir.
 
 ```java
-@}FunctionName("sendTime")
+@FunctionName("sendTime")
 @EventHubOutput(name = "event", eventHubName = "samples-workitems", connection = "AzureEventHubConnection")
 public String sendTime(
    @TimerTrigger(name = "sendTimeTrigger", schedule = "0 *&#47;5 * * * *") String timerInfo)  {
@@ -649,13 +651,13 @@ public String sendTime(
  }
 ```
 
-İçinde [Java Çalışma Zamanı Kitaplığı işlevleri](/java/api/overview/azure/functions/runtime), kullanın `@EventHubOutput` ek açıklama parametreleri değeri, olay Hub'ına yayımlanan.  Tür parametresi olmalıdır `OutputBinding<T>` , burada T bir POJO'ya veya herhangi bir yerel Java türü.
+[Java işlevleri çalışma zamanı kitaplığı](/java/api/overview/azure/functions/runtime)'nda, değeri Olay Hub 'ına yayımlanacak parametrelerde `@EventHubOutput` ek açıklamasını kullanın.  Parametrenin `OutputBinding<T>` türünde olması gerekir; burada T bir POJO veya herhangi bir yerel Java türüdür.
 
-## <a name="output---attributes"></a>Çıkış - öznitelikleri
+## <a name="output---attributes"></a>Çıkış-öznitelikler
 
-İçin [C# sınıfı kitaplıklar](../articles/azure-functions/functions-dotnet-class-library.md), kullanın [EventHubAttribute](https://github.com/Azure/azure-webjobs-sdk/blob/master/src/Microsoft.Azure.WebJobs.ServiceBus/EventHubs/EventHubAttribute.cs) özniteliği.
+[ C# Sınıf kitaplıkları](../articles/azure-functions/functions-dotnet-class-library.md)için [eventhubattribute](https://github.com/Azure/azure-webjobs-sdk/blob/master/src/Microsoft.Azure.WebJobs.ServiceBus/EventHubs/EventHubAttribute.cs) özniteliğini kullanın.
 
-Özniteliğin oluşturucusu, olay hub'ı adını ve bağlantı dizesini içeren bir uygulama ayarı adı alır. Bu ayarlar hakkında daha fazla bilgi için bkz. [çıkışı - yapılandırma](#output---configuration). İşte bir `EventHub` özniteliği örneği:
+Özniteliğin Oluşturucusu, Olay Hub 'ının adını ve bağlantı dizesini içeren bir uygulama ayarının adını alır. Bu ayarlar hakkında daha fazla bilgi için bkz. [çıkış-yapılandırma](#output---configuration). İşte bir `EventHub` özniteliği örneği:
 
 ```csharp
 [FunctionName("EventHubOutput")]
@@ -666,43 +668,43 @@ public static string Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILog
 }
 ```
 
-Tam bir örnek için bkz. [çıkış - C# örneği](#output---c-example).
+Tam bir örnek için bkz. [Çıkış- C# örnek](#output---c-example).
 
-## <a name="output---configuration"></a>Çıkış - yapılandırma
+## <a name="output---configuration"></a>Çıkış-yapılandırma
 
-Aşağıdaki tabloda ayarladığınız bağlama yapılandırma özelliklerini açıklayan *function.json* dosya ve `EventHub` özniteliği.
+Aşağıdaki tabloda, *function. JSON* dosyasında ve `EventHub` özniteliğinde ayarladığınız bağlama yapılandırma özellikleri açıklanmaktadır.
 
-|Function.JSON özelliği | Öznitelik özelliği |Açıklama|
+|function. JSON özelliği | Öznitelik özelliği |Açıklama|
 |---------|---------|----------------------|
-|**type** | yok | "EventHub için" olarak ayarlanmalıdır. |
-|**direction** | yok | "Out" ayarlanmalıdır. Bu parametre, Azure portalında bağlamayı oluşturduğunuzda otomatik olarak ayarlanır. |
-|**name** | yok | Olay temsil eden işlevi kod içinde kullanılan değişken adı. |
-|**Yolu** |**EventHubName** | 1\.x yalnızca çalışır. Olay hub'ının adı. Bu değer, olay hub'ı adı da bağlantı dizesinde mevcut olduğunda, çalışma zamanında bu özellik geçersiz kılar. |
-|**EventHubName** |**EventHubName** | 2\.x yalnızca çalışır. Olay hub'ının adı. Bu değer, olay hub'ı adı da bağlantı dizesinde mevcut olduğunda, çalışma zamanında bu özellik geçersiz kılar. |
-|**bağlantı** |**bağlantı** | Olay hub'ın ad bağlantı dizesi içeren bir uygulama ayarı adı. Tıklayarak, bu bağlantı dizesini kopyalayın **bağlantı bilgilerini** için düğme *ad alanı*, olay hub kendisi değil. Bu bağlantı dizesi için olay akışını ileti göndermek için gönderme izinleri olmalıdır.|
+|**type** | yok | "EventHub" olarak ayarlanmalıdır. |
+|**direction** | yok | "Out" olarak ayarlanmalıdır. Bu parametre, Azure portal bağlamayı oluşturduğunuzda otomatik olarak ayarlanır. |
+|**ada** | yok | Olayı temsil eden işlev kodunda kullanılan değişken adı. |
+|**Yolun** |**EventHubName** | Yalnızca 1. x işlevleri. Olay Hub 'ının adı. Aynı zamanda, Olay Hub 'ı adı bağlantı dizesinde de mevcutsa, bu değer çalışma zamanında bu özelliği geçersiz kılar. |
+|**eventHubName** |**EventHubName** | Yalnızca 2. x işlevleri. Olay Hub 'ının adı. Aynı zamanda, Olay Hub 'ı adı bağlantı dizesinde de mevcutsa, bu değer çalışma zamanında bu özelliği geçersiz kılar. |
+|**bağlanma** |**Bağlanma** | Olay Hub 'ının ad alanına bağlantı dizesini içeren bir uygulama ayarının adı. Bu bağlantı dizesini, Olay Hub 'ının değil, *ad alanı*Için **bağlantı bilgileri** düğmesine tıklayarak kopyalayın. Bu bağlantı dizesinin iletiyi olay akışına göndermek için gönderme izinleri olmalıdır.|
 
 [!INCLUDE [app settings to local.settings.json](../articles/azure-functions/../../includes/functions-app-settings-local.md)]
 
-## <a name="output---usage"></a>Çıkış - kullanım
+## <a name="output---usage"></a>Çıkış kullanımı
 
-C# ve C# betik gibi bir yöntem parametresi kullanarak ileti göndermek `out string paramName`. C# komut dosyası `paramName` değeri belirtilen `name` özelliği *function.json*. Birden çok ileti yazmak için kullanabileceğiniz `ICollector<string>` veya `IAsyncCollector<string>` yerine `out string`.
+C# Ve C# komut dosyasında, `out string paramName`gibi bir yöntem parametresi kullanarak iletiler gönderin. Betik C# ' de, `paramName` *function. json*' nin `name` özelliğinde belirtilen değerdir. Birden çok ileti yazmak için `out string`yerine `ICollector<string>` veya `IAsyncCollector<string>` kullanabilirsiniz.
 
-JavaScript'te, çıkış olayı kullanarak erişim `context.bindings.<name>`. `<name>` değer belirtilen `name` özelliği *function.json*.
+JavaScript 'te `context.bindings.<name>`kullanarak çıkış olayına erişin. `<name>`, *function. JSON*' nin `name` özelliğinde belirtilen değerdir.
 
 ## <a name="exceptions-and-return-codes"></a>Özel durumlar ve dönüş kodları
 
-| Bağlama | Başvuru |
+| Bağlayıcısı | Başvuru |
 |---|---|
 | Olay Hub'ı | [İşlemler Kılavuzu](https://docs.microsoft.com/rest/api/eventhub/publisher-policy-operations) |
 
 <a name="host-json"></a>  
 
-## <a name="hostjson-settings"></a>Host.JSON ayarları
+## <a name="hostjson-settings"></a>Host. JSON ayarları
 
-Bu bölümde sürümünde bu bağlama için kullanılabilen genel yapılandırma ayarları açıklanmaktadır 2.x. Aşağıdaki örnek host.json dosyasını yalnızca bu bağlama için sürüm 2.x ayarları içerir. Sürümündeki genel yapılandırma ayarları hakkında daha fazla bilgi için 2.x bkz [sürümü Azure işlevleri için host.json başvurusu 2.x](../articles/azure-functions/functions-host-json.md).
+Bu bölümde, sürüm 2. x içinde bu bağlama için kullanılabilen genel yapılandırma ayarları açıklanmaktadır. Aşağıdaki örnek Host. JSON dosyası, bu bağlamanın yalnızca sürüm 2. x ayarlarını içerir. Sürüm 2. x içindeki genel yapılandırma ayarları hakkında daha fazla bilgi için bkz. [Azure işlevleri sürüm 2. x için Host. JSON başvurusu](../articles/azure-functions/functions-host-json.md).
 
 > [!NOTE]
-> İşlevlerde host.json başvurusu için 1.x, bkz: [Azure işlevleri için host.json başvurusu 1.x](../articles/azure-functions/functions-host-json-v1.md).
+> 1\. x Işlevleri içindeki Host. JSON başvurusu için bkz. [Azure işlevleri için Host. JSON başvurusu 1. x](../articles/azure-functions/functions-host-json-v1.md).
 
 ```json
 {
@@ -721,6 +723,6 @@ Bu bölümde sürümünde bu bağlama için kullanılabilen genel yapılandırma
 
 |Özellik  |Varsayılan | Açıklama |
 |---------|---------|---------|
-|maxBatchSize|64|Alma döngü alınan en yüksek olay sayısı.|
-|prefetchCount|yok|Varsayılan temel alınan EventProcessorHost tarafından kullanılacak PrefetchCount.|
-|batchCheckpointFrequency|1|Bir EventHub imleç denetim noktası oluşturmadan önce işlenecek olay yığın sayısı.|
+|maxBatchSize|64|Alma döngüsü başına alınan en yüksek olay sayısı.|
+|prefetchCount|yok|Temel alınan EventProcessorHost tarafından kullanılacak varsayılan PrefetchCount.|
+|Batchcheckpointflik|1|Bir EventHub imleç denetim noktası oluşturmadan önce işlenecek olay toplu işlemlerinin sayısı.|

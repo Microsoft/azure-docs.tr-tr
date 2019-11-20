@@ -1,5 +1,18 @@
 - name: Geliştirme Belgelerinin Güvenliğini Sağlama
   href: index.yml
+- name: Örnek uygulamalar
+  expanded: true
+  items:
+    - name: Güvenli geliştirmedeki yenilikler
+      items:
+        - name: Linux kapsayıcısında web uygulaması
+          href: secure-web-app.md
+        - name: Azure Active Directory ile web uygulaması
+          href: secure-aad-app.md
+    - name: Endüstride uyumlu çözümler
+      items:
+        - name: Ödeme kartı endüstrisi
+          href: secure-pci-web-app.md
 - name: Kavramlar
   expanded: true
   items:
@@ -13,3 +26,62 @@
           href: secure-develop.md
         - name: Güvenli uygulamalar dağıtma
           href: secure-deploy.md
+- name: Kaynaklar
+  expanded: true
+  items:
+    - name: Microsoft Güvenlik Kodu Analizi
+      items:
+        - name: Genel Bakış
+          href: security-code-analysis-overview.md
+        - name: Ekleme ve yükleme
+          href: security-code-analysis-onboard.md
+        - name: Yapılandırma
+          href: security-code-analysis-customize.md
+        - name: SSS
+          href: security-code-analysis-faq.md
+    - name: Microsoft Tehdit Modelleme aracı
+      displayName: stride
+      href: threat-modeling-tool.md
+      items:
+        - name: Başlarken
+          href: threat-modeling-tool-getting-started.md
+        - name: Özelliklere genel bakış
+          href: threat-modeling-tool-feature-overview.md
+        - name: Tehditler
+          href: threat-modeling-tool-threats.md
+        - name: Yayınlar
+          href: threat-modeling-tool-releases.md
+          items:
+            - name: Threat Modeling Tool genel kullanım sürümü 7.1.5091.2 - 12 Eylül 2018
+              href: threat-modeling-tool-releases-71509112.md
+            - name: Threat Modeling Tool güncelleştirme sürümü 7.1.51023.1 - 1 Kasım 2018
+              href: threat-modeling-tool-releases-71510231.md
+            - name: Threat Modeling Tool güncelleştirme sürümü 7.1.60126.1 - 29 Ocak 2019
+              href: threat-modeling-tool-releases-71601261.md
+            - name: Threat Modeling Tool güncelleştirme sürümü 7.1.60408.1 - 9 Nisan 2019
+              href: threat-modeling-tool-releases-71604081.md
+            - name: Threat Modeling Tool güncelleştirme sürümü 7.1.60702.1 - 02/7/2019
+              href: threat-modeling-tool-releases-71607021.md
+        - name: Risk Azaltıcı Etkenler
+          href: threat-modeling-tool-mitigations.md
+          items:
+            - name: Denetim ve günlüğe kaydetme
+              href: threat-modeling-tool-auditing-and-logging.md
+            - name: Kimlik Doğrulaması
+              href: threat-modeling-tool-authentication.md
+            - name: Yetkilendirme
+              href: threat-modeling-tool-authorization.md
+            - name: İletişim güvenliği
+              href: threat-modeling-tool-communication-security.md
+            - name: Yapılandırma yönetimi
+              href: threat-modeling-tool-configuration-management.md
+            - name: Şifreleme
+              href: threat-modeling-tool-cryptography.md
+            - name: Özel durum yönetimi
+              href: threat-modeling-tool-exception-management.md
+            - name: Giriş doğrulaması
+              href: threat-modeling-tool-input-validation.md
+            - name: Hassas veriler
+              href: threat-modeling-tool-sensitive-data.md
+            - name: Oturum yönetimi
+              href: threat-modeling-tool-session-management.md

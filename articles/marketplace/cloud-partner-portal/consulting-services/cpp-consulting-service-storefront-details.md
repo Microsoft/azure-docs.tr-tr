@@ -1,110 +1,111 @@
 ---
-title: Teklif danışmanlık için mağaza ayrıntılarını girin | Azure Market
-description: Bir Azure ya da Dynamics 365 danışmanlık hizmeti teklifte Cloud iş ortağı Portalı'nda mağaza ayrıntılarını tanımlayın.
+title: Danışmanlık teklifi için storefront ayrıntılarını girin | Azure Marketi
+description: Bulut İş Ortağı Portalı bir Azure veya Dynamics 365 danışmanlık hizmeti teklifinde storefront ayrıntılarını tanımlayın.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: qianw211
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/23/2019
 ms.author: pabutler
-ms.openlocfilehash: 1b028fe016d6ae3df8c1dfce548fc0c11479d5a6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3d741361cdeb25d6fc063f95da7bc301178f31fc
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942706"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818090"
 ---
 # <a name="storefront-details-tab"></a>StoreFront Ayrıntıları sekmesi
 
-Bu makalede, mağaza için ayrıntıları girin açıklanmaktadır. **Mağaza ayrıntıları** sekmesi aşağıdaki bölümlerden oluşur:
+Bu makalede, storefront 'nizin ayrıntılarının nasıl girilmesi açıklanmaktadır. **Storefront details** sekmesi aşağıdaki bölümlerden oluşur:
 
 -   **Teklif Ayrıntıları**
--   **Yayımcı bilgisi**
--   **Liste ayrıntıları**
--   **Pazarlama Yapıtları**
+-   **Yayımcı bilgileri**
+-   **Listeleme ayrıntıları**
+-   **Pazarlama yapıtları**
 
-![Yeni danışmanlık hizmet teklifi - vitrin Ayrıntılar sekmesi oluşturma](media/consultingoffer-storefront-details.png)
+![Yeni bir danışmanlık hizmeti teklifi-storefront Ayrıntıları sekmesi oluşturma](media/consultingoffer-storefront-details.png)
 
 
-## <a name="offer-details"></a>Teklif Ayrıntıları
+## <a name="offer-details"></a>Teklif ayrıntıları
 
 **Teklif Ayrıntıları** bölümü aşağıdaki kutuları içerir:
 
--   **Teklif özeti\***
+-   **Teklif Özeti\***
 -   **Teklif açıklaması\***
 
 
-### <a name="offer-summary"></a>Teklif özeti\*
+### <a name="offer-summary"></a>Teklif Özeti\*
 
-Teklif, yalnızca teklif adı altında görünür teklifinizi kısa bir açıklamasını özetidir. Düz metin teklif özeti, tüm satır sonlarını olmadan girmek için kullanın. İyi teklif özetleri karşılık gelen teklif adlarıyla birlikte verilebilir.
+Teklif Özeti, teklif adının hemen altında görüntülenen teklifinizin kısa bir açıklamasıdır. Satır sonları olmadan teklif özetini girmek için düz metin kullanın. Aşağıdaki örnekler, ilgili teklif adlarıyla birlikte iyi teklif özetleridir.
 
 *Örnek 1*
 
--   **Teklif adı**: Bulut analizi: 3 günlük Atölyesi
--   **Özet teklif**: Microsoft Azure ve Power BI, geçerli ortam ve mini POC değerlendirmesi genel bakış.
+-   **Teklif adı**: bulut Analizi: 3 günlük atölye
+-   **Teklif Özeti**: Microsoft Azure ve Power BI genel bakış, geçerli ortam değerlendirmesi ve MINI POC.
 
 *Örnek 2*
 
--   **Teklif adı**: Azure IOT endüstriyel: 30 günlük kavram kanıtı
--   **Özet teklif**: Donanım alanında panolar, raporlar ve bildirimler ile bir Azure IOT hub'ı çözümü güvenli bir şekilde bağlanmak için bir ürün endüstriyel bağlı pilot oluşturun.
+-   **Teklif adı**: Endüstriyel Azure IoT: 30 günlük kavram kanıtı
+-   **Teklif Özeti**: alandaki donatımı panolar, raporlar ve bildirimler ile Azure IoT Hub çözümüne güvenli bir şekilde bağlamak için endüstriyel bağlantılı bir ürün pilot oluşturun.
 
 *Örnek 3*
 
--   **Teklif adı**: Profesyonel Hizmetler: 1 saatlik bilgilendirme
--   **Özet teklif**: Genel bakış ve Profesyonel hizmetler için Gelişmiş Yönetim projeleri, faturalandırma ve kaynaklar sağlayan Operations çözüm için önceden yapılandırılmış, genişletilmiş Dynamics 365 Tanıtımı.
+-   **Teklif adı**: profesyonel hizmetler: 1-hr briing
+-   **Teklif Özeti**: profesyonel hizmetler için projelerin, faturalandırın ve kaynakların gelişmiş yönetimini sağlayan, önceden yapılandırılmış, genişletilmiş Dynamics 365, Operations çözümü için genel bakış ve tanıtım.
 
 *Örnek 4*
 
--   **Teklif adı**: Power BI, dünyada: 4-hr Atölyesi
--   **Özet teklif**: İlk panonuzu ayarlayıp çalıştırmaya başlamasına ve en iyi adımları öğrenin. 12 adede kadar öğrenciler için şirkete getirilmemeleri yürütülür.
+-   **Teklif adı**: dünyayı Power BI: 4-HR Workshop
+-   **Teklif Özeti**: ilk panonuz ile çalışmaya başlayın ve en iyi yöntemleri öğrenin. 12 öğrenciye kadar, yerinde yönetilir.
 
 *Örnek 5*
 
--   **Teklif adı**: Dynamics ve projeleri: 3 günlük değerlendirme
--   **Özet teklif**: Gereksinimleri toplama ve profesyonel hizmet şirketleri ve proje temelli işletmeler için tasarlanmış bir ERP çözümü için değerlendirme.
+-   **Teklif adı**: Dynamics ve projeler: 3 günlük değerlendirme
+-   **Teklif Özeti**: profesyonel hizmetler firmaları ve proje odaklı işletmeler için tasarlanan bir ERP çözümü için gereksinimler toplanıyor ve değerlendirmesi.
 
 
 ### <a name="offer-description"></a>Teklif açıklaması\*
 
-Danışmanlık hizmet teklifi açıklaması girin **teklif açıklaması** kutusu. İyi teklif açıklaması engagement benzer ve müşteri için teslim edilebilir son hakkında tam Ayrıntılar kapsar. Açıkça müşterinin ne aldıkları anlamanıza yardımcı olacaktır. Teklifinizin, danışmanlık hizmetleri sunduğunuz Microsoft ürününe nasıl ilişkili olduğunu içerir.
+**Teklif açıklaması** kutusunda danışmanlık hizmeti teklifinin açıklamasını girin. İyi bir teklif açıklaması, görevlendirmenin nasıl göründüğünü ve müşteriye son teslim edilebilirinin tam ayrıntılarını içerir. Müşterinin aldıkları şeyi anlamasına açıkça yardımcı olmalıdır. Teklifinizin danışmanlık hizmetleri sunan Microsoft ürünüyle ilişkisini ekleyin.
 
-E-posta adresi veya telefon numaranızı teklif Tanımınızda dahil değildir. A **benimle iletişim kurun** düğmesidir teklifinizle müşteri adayları karşıya yüklemek için dahil edilen teklifiniz için tanımlayan sağlama yönetim hedef.
+Teklif açıklamalarınız için e-posta adresinizi veya telefon numaranızı eklemeyin. Teklif için belirttiğiniz müşteri adayı yönetim hedefine müşteri adaylarını karşıya yükleme teklifinizle birlikte bir **Iletişim kurun** düğmesi eklenmiştir.
 
-Teklif açıklaması, Markdown biçiminde girin. Markdown'ı veya HTML biçimlendirmeyi alışkın değilseniz bkz [docs yazmak için Markdown kullanma](https://docs.microsoft.com/contribute/how-to-write-use-markdown).
+Teklif açıklamasını markın biçiminde girin. Markaşağı veya HTML için biçimlendirme konusunda bilgi sahibi değilseniz bkz. [belgeleri yazmak Için Marku kullanma](https://docs.microsoft.com/contribute/how-to-write-use-markdown).
 
-Bu biçimler teklifinizi okumak müşterileriniz için kolay olduğundan emin olmak için kullanın.
+Teklifinizin müşterilerinizin okuması için kolay olduğundan emin olmak için bu biçimleri kullanın.
 
-Teklif açıklamanızı kısa tutun ve kullanıcıları uzun metin okuma istemeyiz çünkü için karakter sınırı kullanır. Pazarlama broşürler, olgu sayfaları ve daha ayrıntılı ayrıntı teklife açıklayan diğer belgelerin da karşıya yükleyebilirsiniz.
+Kullanıcılar uzun metin okumak zorunda olmadığından, teklif açıklamanızı kısa tutun ve karakter sınırına uyar. Ayrıca, Pazarlama broşürleri, olgu sayfaları ve teklifinizi daha ayrıntılı bir şekilde tanımlayan diğer belgeleri de karşıya yükleyebilirsiniz.
 
-Aşağıdaki örnek, bir iyi oluşan teklif açıklaması ve ilgili adı ve özeti gösterir:
+Aşağıdaki örnekte, iyi oluşturulmuş bir teklif açıklaması ve ilgili adı ve özeti gösterilmektedir:
 
-**Teklif adı**: Bulut analizi: 3 günlük Atölyesi
+**Teklif adı**: bulut Analizi: 3 günlük atölye
 
-**Özet teklif**: Microsoft Azure ve Power BI, geçerli ortam ve mini POC değerlendirmesi genel bakış.
+**Teklif Özeti**: Microsoft Azure ve Power BI genel bakış, geçerli ortam değerlendirmesi ve MINI POC.
 
-**Teklif açıklaması**: Bu 3 günlük Atölyesi için teknik ve işletmeye liderleri olduğu ve istemcinin olanağı yerinde tutulur.
+**Teklif açıklaması**: Bu 3 günlük atölye, teknik ve iş liderlerine yöneliktir ve istemci tesisinde yerinde tutulur.
 
 Ajanda
 
-1\. gün
+Gün 1
 
--   Güvenli, ölçeklendirme ve Azure Data Lake, Azure HDInsight veya Azure SQL veri ambarı'nı kullanarak verileri Microsoft bulut dahilinde düzenleme nasıl ele alınmaktadır.
+-   Azure Data Lake, Azure HDInsight veya Azure SQL veri ambarı kullanılarak Microsoft bulutundaki verileri güvenli hale getirme, ölçeklendirme ve düzenleme konusunda odaklanır.
 
-2\. gün
+Gün 2
 
--   Yapılandırma ve Microsoft R ve Azure Machine Learning ile Gelişmiş analiz çözümleri dağıtmak nasıl etkinleştireceğinizi de açıklar.
+-   Microsoft R ve Azure Machine Learning ile gelişmiş analiz çözümlerini yapılandırma ve dağıtma konularını ele alır.
 
-3\. günde
+Gün 3
 
--   Eyleme dönüştürülebilir içgörüler çizmek ve analytics Power BI ile kullanıma hazır hale getirmek nasıl etkinleştireceğinizi de açıklar ve bir Power BI Panosu cobuild için işbirliğine dayalı bir oturumu içerir.
+-   Power BI ile eyleme dönüştürülebilir içgörüler ve yük oluşturma analizlerinin nasıl çizileceğini kapsar ve bir Power BI panosunu coderleştirmek için işbirliğine dayalı bir oturum içerir.
 
 Teslim edilebilir öğeler
 
-Atölyesi sonunda istemci üst düzey bir plan ve bir uygulama Haritası veri ve analiz çözümleri için Microsoft bulut'ta tanımlayabilirsiniz.
+Atölye 'in sonunda, istemci, Microsoft bulutundaki veri ve analiz çözümleri için yüksek düzey bir plan ve uygulama yol haritası tanımlayabilir.
 
-Aşağıdaki örnek Markdown dosyası eski teklifte verilmiştir:
+Aşağıdaki örnek Markaşağı dosyası, önceki teklif içindir:
 
-    This 3-day workshop is for technical and business leaders and is held on-site at the client’s facility.
+    This 3-day workshop is for technical and business leaders and is held on-site at the client's facility.
 
       ### Agenda
 
@@ -125,87 +126,87 @@ Aşağıdaki örnek Markdown dosyası eski teklifte verilmiştir:
       By the end of the workshop, the client will be able to define a high-level plan and an implementation roadmap for data and analytics solutions in the Microsoft cloud.
 
 
-## <a name="publisher-information"></a>Yayımcı bilgisi
+## <a name="publisher-information"></a>Yayımcı bilgileri
 
-**MPN KİMLİĞİ**
+**MPN KIMLIĞI**
 
-Dokuz basamak Microsoft iş ortağı ağı (MPN) kimliğiniz girin. MPN kimliği yoksa, Microsoft Partner Center'da alabilirsiniz.
+Dokuz basamaklı Microsoft İş Ortağı Ağı (MPN) KIMLIĞINIZI girin. MPN KIMLIĞINIZ yoksa, Microsoft Iş Ortağı Merkezi ' nde bir tane edinebilirsiniz.
 
-**İş ortağı Merkezi Kimliği**
+**İş Ortağı Merkezi KIMLIĞI**
 
-Varsa, yeni iş ortağı merkezi Kimliğinizi girin.
+Varsa, yeni Iş Ortağı Merkezi KIMLIĞINIZI girin.
 
-**MPN KİMLİĞİ**
+**MPN KIMLIĞI**
 
-Canlı geçmeden önce appsource'ta teklifinizin önizlemesi için gizli bir anahtar girin.
-Bu tanımlayıcı, bir parola değil.
+Teklifinizi, etkin olmadan önce AppSource 'ta önizlemek için bir gizli anahtar girin.
+Bu tanımlayıcı bir parola değil.
 
 
-## <a name="listing-details"></a>Liste ayrıntıları
+## <a name="listing-details"></a>Listeleme ayrıntıları
 
-**Danışmanlık hizmet türü**
+**Danışmanlık hizmeti türü**
 
-Sabit süresi, tahmini veya sabit yalnızca sabit kapsam Microsoft odaklanır Fiyat (veya ücretsiz) ve öncelikli olarak satış öncesi yönelimli hizmet teklifleri için tek bir Müşteri danışmanlık. Hizmet türleri şunlardır: değerlendirme, bilgilendirme, uygulamasında, kavram ve şirkete getirilmemeleri veya neredeyse gerçekleştirilen Atölyesi teklifler sağlama. Danışmanlık Hizmetleri Marketi listelerini desteklemez AppSource yönetilen veya abonelik hizmetleri.
+Microsoft, tek bir müşteri için yalnızca sabit kapsam, sabit süre, tahmini veya sabit fiyat (veya ücretsiz) ve öncelikli olarak önceden satış odaklı danışmanlık hizmeti tekliflerinden odaklanır. Hizmet türleri değerlendirme, brilama, uygulama, kavram kanıtı ve atölye teklifleri yerinde veya neredeyse gerçekleştirilen bir şekilde gerçekleştirilir. AppSource danışmanlık hizmetleri Marketi, yönetilen veya abonelik hizmetleri için dökümleri desteklemez.
 
 >[!Note]
->AppSource danışmanlık hizmetleri Market abonelik veya isteğe bağlı eğitimleri uygun değildir.
+>AppSource Danışmanlık Hizmetleri, abonelik ya da isteğe bağlı seyahat için uygun Market değildir.
 
-Teklifleri aşağıdaki beş türlerini dahil edilir:
+Aşağıdaki beş tür teklif dahil edilmiştir:
 
--   **Değerlendirme**: Bir çözüm uygulanabilirliğini belirlemek ve tahmini maliyet ve zamanlama sağlamak için bir müşterinin ortamının değerlendirme.
--   **Briefing**: Bir çözüm veya çerçeveleri, tanıtımlar ve müşteri örnekleri kullanarak müşteri vade farkı çizmek için danışmanlık hizmeti giriş. Bilgilendirmelerden yararlanıyor tesise gerçekleştirilmesi gerekir.
--   **Uygulama**: Tam olarak çalışan bir çözüm içinde sonuçları tam bir yükleme. Bu Pilot aşaması için uygulanan bir hafta veya daha az çözümlerin sınırlama Microsoft önerir.
--   **Kavram kanıtı**: Bir çözümü, bir müşterinin gereksinimlerini karşılayıp karşılamadığını belirlemek için sınırlı kapsamı uygulaması.
--   **Atölyesi**: Eğitim oturumları, bilgilendirmelerden yararlanıyor, değerlendirmeler veya müşterinin veri veya ortam oluşturulan tanıtımları içerebilen bir müşterinin şirket etkileşimli etkileşim yürütülür.
+-   **Değerlendirme**: bir çözümün uygulanabilirliğini tespit etmek ve maliyet ve zamanlama tahmini sağlamak için müşterinin ortamının değerlendirmesi.
+-   **Briing**: çerçeveler, tanıtımlar ve müşteri örneklerini kullanarak müşteri ilgilenmesini çizmek için bir çözüme veya bir danışmanlık hizmetine giriş. Brifler yerinde yapılmalıdır.
+-   **Uygulama**: tam olarak çalışan bir çözüme neden olan tam bir yükleme. Bu pilot için Microsoft, bir hafta veya daha az bir hafta içinde uygulanabilen çözümlere kısıtlama öneriyor.
+-   **Kavram kanıtı**: bir çözümün müşterinin gereksinimlerini karşılayıp karşılamadığını tespit etmek için sınırlı kapsamlı bir uygulama.
+-   **Workshop**: müşterinin şirket içinde, müşterinin verilerine veya ortamına yerleştirilmiş eğitim oturumları, brilar, değerlendirmeler veya tanıtımlar içerebilen etkileşimli bir katılım.
 
 **Ülke/bölge kullanılabilirliği**
 
-Ülke ve bölge danışma bu hizmet teklifinin kullanılabildiği seçin. Tek bir teklif, birden çok ülkede veya bölgede yayımlanamaz. Yeni bir teklif, her bir ülke veya bölge için oluşturulmuş olması gerekir.
+Bu danışmanlık hizmeti teklifinin kullanılabildiği ülkeyi ve bölgeyi seçin. Tek bir teklif birden çok ülkede veya bölgede yayımlanamaz. Her ülke veya bölge için yeni bir teklif oluşturulması gerekir.
 
 >[!Note]
->AppSource danışmanlık hizmetleri şu anda Amerika Birleşik Devletleri, Birleşik Krallık ve Kanada canlıdır. Henüz Canlı değil bir ülke/bölge için bir teklif gönderebilir ve onu gözden geçirilebilir ve çalışmaya hazır. En az sayıda kullanıma hazır Canlı teklifler teklifleri Canlı olmayan ülkeler/bölgeler için teşvik yeni ülke/bölge, açmak için gereklidir.
+>AppSource danışmanlık hizmetleri şu anda Birleşik Devletler, Birleşik Krallık ve Kanada 'da etkin. Henüz canlı olmayan bir ülke/bölge için teklif gönderebilirsiniz ve gözden geçirilir ve canlı çalışmaya hazır hale gelir. Yeni bir ülke/bölge açmak için etkin olmaya en az sayıda teklif gerekir. bu nedenle, canlı olmayan ülkeler/bölgeler için teklifler önerilir.
 
 **Sektörler**
 
-Danışmanlık hizmetinize sunmak için en uygun olan sektörler seçin.
+Danışmanlık hizmeti teklifinizin en uygun olduğu endüstrileri seçin.
 
-**Süresi**
+**Sürenin**
 
-Bir sayı (örneğin, 3 veya 4) altında seçin **süresi**ve ardından **saat**, **gün**, veya **hafta**.
+**Süre**altında bir sayı (örneğin, 3 veya 4) seçin ve ardından **saat**, **gün**veya **hafta**' yı seçin.
 
-**Birincil ürünleri**
+**Birincil ürünler**
 
-Azure Marketi'nde içerik yayımlamak için seçin **Azure** birincil ürünü olarak. İlgili seçip **çözüm alanları**.
+Azure Market 'Te yayımlamak için birincil ürün olarak **Azure** ' u seçin. Ardından ilgili **çözüm alanını**seçin.
 
-Appsource'ta yayımlama için seçin **Dynamics 365**, **Power BI**, veya **PowerApps** birincil ürünü olarak. Ayrıca diğer ilgili seçebilirsiniz **uygun ürünler**. Daha sonra her appsource'ta bu ürünlerin ile ilişkili olan dökümdeki danışmanlık hizmeti teklifinizi gösterir.
+AppSource 'a yayımlamak için, **Dynamics 365**, **Power BI**veya **PowerApps** ' i birincil ürününüz olarak seçin. Ayrıca ilgili **geçerli ürünleri**de seçebilirsiniz. Sonra danışmanlık hizmeti teklifiniz, AppSource 'ta bu ürünlerin her biriyle ilişkili listelerde görünür.
 
-**İlgili uzmanlıklar**
+**İlgili Uzmanlıklar**
 
-Teklif ayrıntılarını birlikte görüntülenen için bu teklifle ilgili uzmanlıklar seçin.
+Teklif ayrıntıları ile birlikte görüntülenmesini sağlamak için bu teklifle ilgili Uzmanlıklar seçin.
 
-## <a name="marketing-artifacts"></a>Yapıtları pazarlama
+## <a name="marketing-artifacts"></a>Pazarlama yapıtları
 
-**Şirket logosunu (.png biçimi, 48 x 48 piksel)**
+**Şirket logosu (. png biçimi, 48 x 48 piksel)**
 
-Teklifinizi teklif Galeri görünümü sayfasında kutucuğunda görüntülenen bir görüntü yükleyin. Görüntünün bir .png görüntü ile 48 x 48 piksel çözünürlüğü olmalıdır.
+Teklif Galerisi görünümü sayfasında teklifinizin kutucuğunda görüntülenen bir görüntüyü karşıya yükleyin. Görüntü, 48 x 48 piksel çözünürlüğe sahip bir. png görüntüsü olmalıdır.
 
-**Şirket logosunu (.png biçimi, 216 x 216 piksel)**
+**Şirket logosu (. png biçimi, 216 x 216 piksel)**
 
-Teklifinizi Ayrıntıları sayfasında görünen bir görüntü yükleyin. Görüntünün bir .png görüntü ile bir çözümlenmesini 216 x 216 piksel olmalıdır.
+Teklifinizin ayrıntılar sayfasında görüntülenen bir görüntüyü karşıya yükleyin. Görüntü, 216 x 216 piksel çözünürlüğe sahip bir. png görüntüsü olmalıdır.
 
-**Videoları (dört ile sınırlı)**
+**Videolar (dört ile sınırlıdır)**
 
-En fazla dört müşteri örnek olay incelemesi videolar veya müşteri başvuru videoları karşıya yükleyin. Sizde yoksa, şirketinizin uzmanlığı teklife ilgili açıklayan bir video karşıya yükleyin. Bir Power BI ya da PowerApps çözüm gösterimimizde varsa, burada gösterimi videoyu karşıya yükleyin. YouTube veya Vimeo video bağlantıları olmalıdır.
+Dört adede kadar müşteri örneği incelemesi videosunu veya müşteri başvuru videolarını karşıya yükleyin. Herhangi bir hesabınız yoksa, şirketinizin teklifiyle ilgili uzmanlığınızı açıklayan bir video yükleyin. Power BI veya PowerApps çözüm gösterimi varsa, bu videoyu buraya yükleyin. Video bağlantıları YouTube veya Vimeo için olmalıdır.
 
-**Belgelerini (üç ile sınırlıdır)**
+**Belgeler (üç ile sınırlıdır)**
 
-Ayrıntılı danışmanlık hizmeti teklifinizi tanımlayan pazarlama Broşürü karşıya yükleyin. Örnek olay incelemeleri, olgu sayfaları veya bir şirket genel da karşıya yükleyebilirsiniz. Belgelerinizi öne çıkan ürünleri geçerli adlarını kullanın ve Microsoft rakip ürünleri özelliği olmayan emin olun.
+Danışmanlık hizmeti teklifinizi ayrıntılı olarak açıklayan pazarlama broşürinizi karşıya yükleyin. Ayrıca, bir şirkete genel bakış, olgu sayfaları veya örnek olay incelemeleri de yükleyebilirsiniz. Belgelerinizin öne çıkan ürünlerin güncel adlarını kullanmasını ve Microsoft 'un rekabet eden ürünlerini kullanmaytığınızdan emin olun.
 
-**Ekran görüntüleri (beş için sınırlı)**
+**Ekran görüntüleri (beş ile sınırlıdır)**
 
-Teklifiniz, kendi teslim edilebilirleri ya da şirketiniz hakkında daha fazla bilgi sağlayan beş adede kadar görüntüleri karşıya yükleyin. Pazarlama broşürünüze ilgili slayttan bir sunum ya da şirket satışlarının veya uzmanlık gösteren bir resim, bir kod parçacığı bazı örnekler verilmiştir.
+Teklifiniz, teslim edilebilirler veya şirketiniz hakkında daha fazla bilgi sağlayan beş adede kadar görüntüyü karşıya yükleyin. Pazarlama broşürizin parçacığı, bir sunudaki ilgili bir slayt veya şirket itici güç veya uzmanlığı gösteren bir görüntü bazı örneklerdir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Artık hazır [, danışmanlık hizmetleri yayımlama](./cpp-consulting-service-publish-offer.md) sunar.
+Şimdi [danışmanlık hizmetleri teklifinizi yayımlamaya](./cpp-consulting-service-publish-offer.md) hazırsınız.

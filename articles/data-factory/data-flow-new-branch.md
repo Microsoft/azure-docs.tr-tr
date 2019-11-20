@@ -1,32 +1,32 @@
 ---
-title: Yeni dal dönüştürme Azure veri fabrikası eşleme veri akışı
-description: Yeni dal dönüştürme Azure veri fabrikası eşleme veri akışı
+title: Azure Data Factory eşleme veri akışı yeni dal dönüştürmesi
+description: Azure Data Factory eşleme veri akışı yeni dal dönüştürmesi
 author: kromerm
 ms.author: makromer
 ms.reviewer: douglasl
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 02/12/2019
-ms.openlocfilehash: 9fac78f21f2f128ccb040e176891c33d39bf2820
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: de8cb74d788e3ca7599f226e4204c4b09112e70c
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61349177"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72387210"
 ---
-# <a name="azure-data-factory-mapping-data-flow-new-branch-transformation"></a>Yeni dal dönüştürme Azure veri fabrikası eşleme veri akışı
+# <a name="azure-data-factory-mapping-data-flow-new-branch-transformation"></a>Azure Data Factory eşleme veri akışı yeni dal dönüştürmesi
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
 
-![Dal seçenekleri](media/data-flow/menu.png "menüsü")
 
-Dallanma, veri akışında geçerli veri akışını almak ve başka bir akışa çoğaltın. İşlemler ve dönüştürmeler aynı veri akışı karşı birden çok gerçekleştirmek için yeni dal ayarlar.
+![Dal seçenekleri](media/data-flow/menu.png "Menü")
 
-Örnek: Veri akışınızı, sütunları ve veri türü dönüşümleri seçili kümesiyle bir dönüştürme kaynak vardır. Ardından, bu kaynağı takip türetilmiş sütun de yerleştirebilirsiniz. Türetilmiş sütununda olduğunuz oluşturduğunuz yeni bir alan bu birleştirir ad ve Soyadı yeni bir "tam adı" alanını hale getirin.
+Dallandırma, veri akışınızda geçerli veri akışını alacak ve bunu başka bir akışa çoğaltacaktır. Aynı veri akışına karşı birden çok işlem ve dönüşüm kümesi gerçekleştirmek için yeni dalı kullanın.
 
-Yeni bir akışı dönüşümleri ve bir havuz üzerinde bir satır kümesi ile işle ve burada aynı veriye sahip farklı bir dizi dönüştürme dönüştürebilirsiniz. Bu akışın bir kopyasını oluşturmak için yeni bir dalı kullanın. Ayrı bir daldaki kopyalanan bu verileri dönüştürerek, ayrı bir konuma verilerin daha sonra havuz.
+Örnek: veri akışınız, seçili sütun kümesi ve veri türü dönüştürmeleri içeren bir kaynak dönüşümüyle bulunur. Ardından, bu kaynağı hemen takip eden bir türetilmiş sütun yerleştirebilirsiniz. Türetilmiş sütununda, yeni bir "tam ad" alanı oluşturmak için adı ve soyadı birleştiren yeni bir alan oluşturdunuz.
+
+Bu yeni akışı bir dizi dönüşümle ve havuz kümesiyle ve bu akışın farklı bir dönüştürme kümesiyle aynı verileri dönüştürebileceğiniz bir kopyasını oluşturmak için kullanabilirsiniz. Kopyalanmış verileri ayrı bir dalda dönüştürerek, daha sonra bu verileri ayrı bir konuma havuza alabilirsiniz.
 
 > [!NOTE]
-> "Yeni dal" yalnızca gösterir bir eylem olarak üzerinde + burada çalıştığınız dalı geçerli konumu aşağıdaki sonraki dönüştürme olduğunda dönüştürme menüsü. başka bir dönüştürme seçin sonra eklediğiniz başka bir deyişle, burada sonunda bir "Dalı" seçeneği göremez
+> "Yeni dal", yalnızca dallandırma yapmaya çalıştığınız geçerli konumdan sonraki bir dönüşüm varsa + dönüştürme menüsünde bir eylem olarak gösterilir. Yani, select öğesinden sonra başka bir dönüşüm ekleyene kadar burada bir "yeni dal" seçeneği görmezsiniz
 
-![Dal](media/data-flow/branch2.png "dal 2")
+![Öğede](media/data-flow/branch2.png "Şube 2")

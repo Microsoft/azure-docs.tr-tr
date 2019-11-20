@@ -1,54 +1,55 @@
 ---
-title: Kullanıcı bir VHD'yi bir Azure VM'den dağıtma | Azure Market
-description: Bir Azure VM örneği oluşturmak için bir kullanıcı VHD görüntüsü dağıtma işlemi açıklanmaktadır.
+title: Bir Kullanıcı VHD 'sinden Azure VM dağıtma | Azure Marketi
+description: Bir Azure VM örneği oluşturmak için bir Kullanıcı VHD görüntüsünün nasıl dağıtılacağını açıklar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 11/29/2018
 ms.author: pabutler
-ms.openlocfilehash: e4da523fa54a513fe77fda037aea0a5fd530250b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8421e9b7b7e2b7d13054e977da83be044b4e6af7
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938235"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73816638"
 ---
-# <a name="deploy-an-azure-vm-from-a-user-vhd"></a>VHD bir kullanıcıdan bir Azure VM dağıtma
+# <a name="deploy-an-azure-vm-from-a-user-vhd"></a>Bir Azure VM 'yi bir Kullanıcı VHD 'sinden dağıtma
 
-Bu makalede, Azure PowerShell Betiği ve sağlanan Azure Resource Manager şablonu kullanarak yeni bir Azure VM kaynak oluşturmak için genelleştirilmiş bir VHD görüntüsünün nasıl dağıtılacağı açıklanmaktadır.
+Bu makalede, sağlanan Azure Resource Manager şablonu ve Azure PowerShell betiği kullanılarak yeni bir Azure VM kaynağı oluşturmak için genelleştirilmiş bir VHD görüntüsünün nasıl dağıtılacağı açıklanır.
 
 [!INCLUDE [updated-for-az](../../../../includes/updated-for-az.md)]
 
 ## <a name="vhd-deployment-template"></a>VHD dağıtım şablonu
 
-Azure Resource Manager şablonu kopyalayın [VHD dağıtım](cpp-deploy-json-template.md) adlı yerel bir dosyaya `VHDtoImage.json`.  Aşağıdaki parametreler için değerler sağlamak için bu dosyayı düzenleyin. 
+[VHD dağıtımı](cpp-deploy-json-template.md) için Azure Resource Manager şablonunu `VHDtoImage.json`adlı yerel bir dosyaya kopyalayın.  Aşağıdaki parametreler için değerler sağlamak üzere bu dosyayı düzenleyin. 
 
-|  **Parametre**             |   **Açıklama**                                                              |
+|  **Parametresinin**             |   **Açıklama**                                                              |
 |  -------------             |   ---------------                                                              |
-| ResourceGroupName          | Var olan Azure kaynak grubu adı.  Genellikle, key vault ile ilişkili aynı RG kullanın  |
-| TemplateFile               | Dosyanın tam yol adı `VHDtoImage.json`                                    |
+| ResourceGroupName          | Mevcut Azure Kaynak grubu adı.  Genellikle anahtar kasanız ile ilişkili RG 'yi kullanın  |
+| TemplateFile               | Dosya `VHDtoImage.json` tam yol adı                                    |
 | userStorageAccountName     | Depolama hesabının adı                                                    |
-| sNameForPublicIP           | Genel IP için DNS adı. Küçük olmalıdır                                  |
+| Snameforpublicıp           | Genel IP için DNS adı. Küçük harfle yazılmalıdır                                  |
 | subscriptionId             | Azure abonelik tanımlayıcısı                                                  |
-| Location                   | Kaynak grubunun Azure standart coğrafi konum                       |
+| Konum                   | Kaynak grubunun standart Azure coğrafi konumu                       |
 | vmName                     | Sanal makinenin adı                                                    |
-| VaultName                  | Anahtar kasasının adı                                                          |
+| vaultName                  | Anahtar kasasının adı                                                          |
 | vaultResourceGroup         | Anahtar kasasının kaynak grubu
-| certificateUrl             | Örneğin anahtar kasasında depolanan sürüm dahil olmak üzere sertifika URL'si:  `https://testault.vault.azure.net/secrets/testcert/b621es1db241e56a72d037479xab1r7` |
-| vhdUrl                     | Sanal sabit disk URL'si                                                   |
-| vmSize                     | Sanal makine örnek boyutu                                           |
-| publicIPAddressName        | Genel IP adresinin adı                                                  |
-| virtualNetworkName         | Sanal ağ adı                                                    |
-| NIC adı                    | Sanal ağ için ağ arabirimi kartı adı                     |
-| adminUserName              | Yönetici hesabının kullanıcı adı                                          |
+| Sertifika URL 'si             | Anahtar kasasında depolanan sürüm dahil olmak üzere sertifikanın URL 'si (örneğin: `https://testault.vault.azure.net/secrets/testcert/b621es1db241e56a72d037479xab1r7`) |
+| vhdUrl                     | Sanal sabit diskin URL 'SI                                                   |
+| vmSize                     | Sanal makine örneğinin boyutu                                           |
+| Publicıpaddressname        | Genel IP adresinin adı                                                  |
+| virtualNetworkName         | Sanal ağın adı                                                    |
+| nicName                    | Sanal ağ için ağ arabirim kartının adı                     |
+| adminUserName              | Yönetici hesabının Kullanıcı adı                                          |
 | adminPassword              | Yönetici parolası                                                          |
 |  |  |
 
 
-## <a name="powershell-script"></a>PowerShell Betiği
+## <a name="powershell-script"></a>PowerShell betiği
 
-Kopyalama ve değerlerini sağlamak için aşağıdaki betiği düzenleyin `$storageaccount` ve `$vhdUrl` değişkenleri.  Bir Azure VM kaynağı mevcut genelleştirilmiş VHD'den oluşturmak üzere yürütün.
+`$storageaccount` ve `$vhdUrl` değişkenleri için değerler sağlamak üzere aşağıdaki betiği kopyalayın ve düzenleyin.  Mevcut Genelleştirilmiş VHD 'nizden bir Azure VM kaynağı oluşturmak için yürütün.
 
 ```powershell
 # storage account of existing generalized VHD 
@@ -66,4 +67,4 @@ New-AzResourceGroupDeployment -Name "dplisvvm$postfix" -ResourceGroupName "$rgNa
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sanal makinenizin dağıtıldıktan sonra hazır olduğunuz [VM görüntünüzü sertifika](./cpp-certify-vm.md).
+VM 'niz dağıtıldıktan sonra [VM görüntünüzü onaylamaya](./cpp-certify-vm.md)hazırsınızdır.

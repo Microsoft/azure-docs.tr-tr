@@ -1,32 +1,32 @@
 ---
-title: 'İş sürekliliği ve olağanüstü durum kurtarma (BCDR): Azure eşleştirilmiş bölgeleri | Microsoft Docs'
-description: Uygulamaları sırasında veri merkezi arızalarına karşı dayanıklı olmasını sağlamak için Azure bölgesel eşleme hakkında bilgi edinin.
+title: İş sürekliliği & olağanüstü durum kurtarma-Azure eşleştirilmiş bölgeler
+description: Veri merkezi sorunları sırasında uygulamaların dayanıklı olmasını sağlamak için Azure bölgesel eşleştirme hakkında bilgi edinin.
 author: rayne-wiselman
 manager: carmon
 ms.service: multiple
 ms.topic: article
 ms.date: 07/01/2019
 ms.author: raynew
-ms.openlocfilehash: 81ba993e6cbe55b45d34325545754bec561ce479
-ms.sourcegitcommit: 6cb4dd784dd5a6c72edaff56cf6bcdcd8c579ee7
+ms.openlocfilehash: b71048412f5715fd1b8ef3edf742716916672bd5
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67514467"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718753"
 ---
-# <a name="business-continuity-and-disaster-recovery-bcdr-azure-paired-regions"></a>İş sürekliliği ve olağanüstü durum kurtarma (BCDR): Azure eşleştirilmiş bölgeleri
+# <a name="business-continuity-and-disaster-recovery-bcdr-azure-paired-regions"></a>İş sürekliliği ve olağanüstü durum kurtarma (BCDR): Azure eşlenmiş bölgeler
 
-## <a name="what-are-paired-regions"></a>Eşleştirilmiş bölgeleri nelerdir?
+## <a name="what-are-paired-regions"></a>Eşleştirilmiş bölgeler nelerdir?
 
-Azure dünyanın dört bir yanındaki birden çok coğrafi çalışmaktadır. Her Azure coğrafyası dünyanın en az bir Azure bölgesi içeren tanımlanmış bir alandır. Bir Azure bölgesine bir veya daha fazla veri içeren bir coğrafyadaki alanıdır.
+Azure dünyanın dört bir yanındaki birden fazla coğrafi ortamda çalışır. Azure coğrafya, en az bir Azure bölgesi içeren, dünyanın tanımlı bir alanıdır. Bir Azure bölgesi, bir veya daha fazla veri merkezi içeren coğrafya içindeki bir alandır.
 
-Her Azure bölgesi aynı coğrafyadaki birlikte bölgesel çift yaparak başka bir bölgeyle eşleştirilir. Brezilya Güney, kendi Coğrafya dışında bir bölgeyle eşleştirilir istisnadır. Bölge çiftlerinin arasında Azure platform güncelleştirmelerinin (Planlı bakım) serileştiren, böylece yalnızca bir eşleştirilmiş bölge aynı anda güncelleştirilir. Kurtarma için birden çok bölgede etkileyen bir kesinti olması durumunda en az bir bölge çiftindeki her öncelik verilir.
+Her Azure bölgesi aynı coğrafya içindeki başka bir bölge ile eşleştirilir ve bir bölgesel çift oluşturur. Özel durum, Coğrafya dışında bir bölgeyle eşleştirilmiş Brezilya Güney. Tek seferde yalnızca bir eşleştirilmiş bölge güncelleştirildiğinden, Azure bölge çiftleri arasında Platform güncelleştirmelerini (planlı bakım) seri hale getirir. Birden çok bölgeyi etkileyen kesinti durumunda, her bir çiftin en az bir bölgesine kurtarma için öncelik alınacaktır.
 
 ![AzureGeography](./media/best-practices-availability-paired-regions/GeoRegionDataCenter.png)
 
-Şekil 1 – Azure bölgesel çiftler
+Şekil 1 – Azure bölgesel çiftleri
 
-| Geography | Eşleştirilmiş bölgeler |  |
+| Coğrafya | Eşleştirilmiş bölgeler |  |
 |:--- |:--- |:--- |
 | Asya |Doğu Asya |Güneydoğu Asya |
 | Avustralya |Avustralya Doğu |Avustralya Güneydoğu |
@@ -42,10 +42,10 @@ Her Azure bölgesi aynı coğrafyadaki birlikte bölgesel çift yaparak başka b
 | Hindistan |Batı Hindistan |Güney Hindistan |
 | Japonya |Japonya Doğu |Japonya Batı |
 | Güney Kore |Kore Orta |Kore Güney |
-| Kuzey Amerika |East US |Batı ABD |
+| Kuzey Amerika |Doğu ABD |Batı ABD |
 | Kuzey Amerika |Doğu ABD 2 |Orta ABD |
 | Kuzey Amerika |Orta Kuzey ABD |Orta Güney ABD |
-| Kuzey Amerika |Batı ABD 2 |Batı Orta ABD 
+| Kuzey Amerika |Batı ABD 2 |Orta Batı ABD 
 | Güney Afrika | Güney Afrika Kuzey | Güney Afrika Batı
 | UK |Birleşik Krallık Batı |Birleşik Krallık Güney |
 | Birleşik Arap Emirlikleri | BAE Kuzey | BAE Orta
@@ -54,49 +54,49 @@ Her Azure bölgesi aynı coğrafyadaki birlikte bölgesel çift yaparak başka b
 | ABD Devleti |US Gov Iowa |ABD Devleti Virginia |
 | ABD Devleti |ABD Devleti Virginia |ABD Devleti Texas |
 
-Tablo 1 - Azure bölgesel çiftler eşleme
+Tablo 1-Azure bölgesel çiftlerinin eşleme
 
-- Batı Hindistan, tek yönlü eşleştirilir. Güney Hindistan Batı Hindistan'ın ikincil bölgeye olduğu halde Orta Hindistan Güney Hindistan'ın ikincil bölgeye olduğu.
-- Brezilya Güney benzersiz olduğundan, kendi Coğrafya dışında bir bölgeyle eşleştirilir. Brezilya Güney'nın ikincil bölgeye Orta Güney ABD ' dir. Güney Brezilya Güney Orta ABD'ın ikincil bölgeye değil.
-- ABD Devleti Iowa'nın ikincil bölgeye ABD Devleti Virginia ' dir.
-- ABD Devleti Virginia'nın ikincil bölgeye US Gov Teksas ' dir.
-- ABD Devleti Texas ikincil bölgeye ABD Devleti Arizona ' dir.
+- Batı Hindistan yalnızca bir yönde eşleştirilmiş. Batı Hindistan ikincil bölgesi Güney Hindistan, ancak Güney Hindistan ikincil bölgesi Orta Hindistan.
+- Brezilya Güney, kendi Coğrafya dışında bir bölgeyle eşleştirildiği için benzersizdir. Brezilya Güney ikincil bölgesi Orta Güney ABD. Orta Güney ABD ikincil bölgesi Brezilya Güney değil.
+- US Gov Iowa ikincil bölgesi US Gov Virginia.
+- US Gov Virginia ikincil bölgesi US Gov Teksas.
+- US Gov Teksas ' ikincil bölgesi US Gov Arizona.
 
 
-İş sürekliliği, olağanüstü durum kurtarma (BCDR) yapılandırma Azure'un yalıtım ve kullanılabilirlik ilkelerinden yararlanmak için bölgesel çiftler arasında öneririz. Birden çok etkin bölgeler destekleyen uygulamalar için mümkün olduğu durumlarda bir bölge çiftindeki her iki bölgeleri kullanmanızı öneririz. Bu, en iyi uygulamalar ve olağanüstü bir simge durumuna küçültülmüş kurtarma zamanı kullanılabilirliği garanti eder. 
+Azure 'un yalıtım ve kullanılabilirlik ilkelerinden faydalanmasını sağlamak için iş sürekliliği olağanüstü durum kurtarma (BCDR) ' i bölgesel çiftler arasında yapılandırmanızı öneririz. Birden çok etkin bölgeyi destekleyen uygulamalar için, mümkün olan yerlerde her iki bölgeyi de bir bölge çiftinde kullanmanızı öneririz. Bu, uygulamalar için en iyi kullanılabilirliği ve olağanüstü durum durumunda kurtarma süresini en aza indirmesini sağlayacaktır. 
 
-## <a name="an-example-of-paired-regions"></a>Eşleştirilmiş bölgeler örneği
-Şekil 2'in altında olağanüstü durum kurtarma için bölgesel çift kullanan kuramsal bir uygulamanın gösterir. Yeşil sayıları (Azure işlem, depolama ve veritabanı) üç Azure Hizmetleri ve bölgeler arasında çoğaltmak için nasıl yapılandırılacağı bölgeler arası etkinliklerini vurgulayın. Eşleştirilmiş bölgeler arasında dağıtma benzersiz avantajları turuncu sayılarla vurgulanır.
+## <a name="an-example-of-paired-regions"></a>Eşleştirilmiş bölgelere örnek
+Aşağıdaki şekil 2 ' de olağanüstü durum kurtarma için bölgesel çifti kullanan bir kuramsal uygulama gösterilmektedir. Yeşil sayılar, üç Azure hizmetinin (Azure işlem, depolama ve veritabanı) çapraz bölge etkinliklerini ve bölgeler arasında çoğaltma için nasıl yapılandırıldığını vurgular. Eşleştirilmiş bölgeler arasında dağıtmanın benzersiz avantajları turuncu sayılarla vurgulanır.
 
-![Eşleştirilmiş bölge avantajları genel bakış](./media/best-practices-availability-paired-regions/PairedRegionsOverview2.png)
+![Eşleştirilmiş bölge avantajlarına genel bakış](./media/best-practices-availability-paired-regions/PairedRegionsOverview2.png)
 
-Şekil 2 – kuramsal Azure bölgesel çift
+Şekil 2 – kuramsal Azure bölgesel çifti
 
-## <a name="cross-region-activities"></a>Bölgeler arası etkinlikleri
-Şekil 2 ' başvurulan gibi.
+## <a name="cross-region-activities"></a>Çapraz bölge etkinlikleri
+Şekil 2 ' de adlandırılmaktadır.
 
-![Iaas](./media/best-practices-availability-paired-regions/1Green.png) **Azure (Iaas) işlem** – kaynakları kullanılabilir başka bir bölgede bir olağanüstü durum sırasında önceden sağlamak için ek işlem kaynakları hazırlamanız gerekir. Daha fazla bilgi için [Azure dayanıklılık teknik Kılavuzu](resiliency/resiliency-technical-guidance.md).
+IaaS](./media/best-practices-availability-paired-regions/1Green.png) **Azure işlem (IaaS)** ![: bir olağanüstü durum sırasında kaynakların başka bir bölgede kullanılabilmesini sağlamak için daha önce ek işlem kaynakları sağlamalısınız. Daha fazla bilgi için bkz. [Azure dayanıklılık Teknik Kılavuzu](https://github.com/uglide/azure-content/blob/master/articles/resiliency/resiliency-technical-guidance.md).
 
-![Depolama](./media/best-practices-availability-paired-regions/2Green.png) **Azure depolama** - yönetilen diskleri kullanıyorsanız, hakkında bilgi edinin [bölgeler arası yedeklemeleri](https://docs.microsoft.com/azure/architecture/resiliency/recovery-loss-azure-region#virtual-machines) Azure Backup ile ve [Vm'lerini çoğaltma](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-enable-replication) bir bölgeden başka Azure Site Recovery ile. Ardından depolama hesapları kullanıyorsanız, Azure depolama hesabınız oluşturulduğunda coğrafi olarak yedekli depolama (GRS) varsayılan olarak yapılandırılır. GRS ile verileriniz otomatik olarak üç kez birincil bölge içinde ve üç kez eşleştirilmiş bölge içinde çoğaltılır. Daha fazla bilgi için [Azure depolama Yedekliliği seçenekleri](storage/common/storage-redundancy.md).
+![depolama](./media/best-practices-availability-paired-regions/2Green.png) **Azure Storage** -yönetilen diskler kullanıyorsanız, Azure Backup olan [çapraz bölge yedeklemeleri](https://docs.microsoft.com/azure/architecture/resiliency/recovery-loss-azure-region#virtual-machines) hakkında bilgi edinin ve Azure Site Recovery Ile bir bölgeden diğer [VM 'leri çoğaltma](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-enable-replication) . Depolama hesapları kullanıyorsanız, coğrafi olarak yedekli depolama (GRS), bir Azure depolama hesabı oluşturulduğunda varsayılan olarak yapılandırılır. GRS ile, verileriniz birincil bölgede otomatik olarak üç kez ve eşleştirilmiş bölgede üç kez çoğaltılır. Daha fazla bilgi için bkz. [Azure Storage artıklık seçenekleri](storage/common/storage-redundancy.md).
 
-![Azure SQL](./media/best-practices-availability-paired-regions/3Green.png) **Azure SQL veritabanı** – ile Azure SQL veritabanı coğrafi çoğaltma, dünyanın herhangi bir bölgesine işlemlerin zaman uyumsuz çoğaltma yapılandırabilirsiniz; ancak, bu kaynakları dağıtma öneririz bir Çoğu olağanüstü durum kurtarma senaryoları için eşleştirilmiş bölge. Daha fazla bilgi için [coğrafi çoğaltma, Azure SQL veritabanı'nda](sql-database/sql-database-geo-replication-overview.md).
+Azure SQL](./media/best-practices-availability-paired-regions/3Green.png) Azure **SQL veritabanı** ![-Azure SQL veritabanı coğrafi çoğaltma ile, işlemlerin zaman uyumsuz çoğaltmasını dünyanın herhangi bir bölgesine yapılandırabilirsiniz; Ancak, bu kaynakları birçok olağanüstü durum kurtarma senaryosunda eşleştirilmiş bir bölgeye dağıtmanızı öneririz. Daha fazla bilgi için bkz. [Azure SQL veritabanı 'Nda coğrafi çoğaltma](sql-database/sql-database-geo-replication-overview.md).
 
-![Resource Manager](./media/best-practices-availability-paired-regions/4Green.png) **Azure Resource Manager** -Resource Manager bölgeler arasında kendiliğinden bileşenlerinin mantıksal yalıtım sağlar. Başka bir deyişle, bir bölgede mantıksal hataları başka bir etkisi daha düşüktür.
+![Kaynak Yöneticisi](./media/best-practices-availability-paired-regions/4Green.png) **Azure Resource Manager** -Kaynak Yöneticisi doğal olarak bölgeler arasında bileşenlerin mantıksal yalıtımı sağlar. Bu, bir bölgedeki mantıksal hataların diğer etkileri daha az olabilir.
 
-## <a name="benefits-of-paired-regions"></a>Eşleştirilmiş bölgeler avantajları
-Şekil 2 ' başvurulan gibi.  
+## <a name="benefits-of-paired-regions"></a>Eşleştirilmiş bölgelerin avantajları
+Şekil 2 ' de adlandırılmaktadır.  
 
-![Yalıtım](./media/best-practices-availability-paired-regions/5Orange.png)
-**fiziksel yalıtım** – bu tüm coğrafyalardaki pratik veya mümkün olmasa da mümkün olan Azure en az 300 mil ayırma bir bölge çiftindeki veri merkezleri arasında tercih ettiği zaman. Fiziksel veri merkezi ayrımı, doğal felaketler, toplumsal karmaşa, güç kesintileri veya her iki bölgeleri aynı anda etkileyen bir fiziksel ağ kesintisi olasılığını azaltır. Yalıtım coğrafyadaki (Coğrafya boyutu, güç/ağ altyapı kullanılabilirliğini, düzenlemelere, vb.) kısıtlamalara tabidir.  
+![yalıtım](./media/best-practices-availability-paired-regions/5Orange.png)
+**fiziksel yalıtım** – mümkün olduğunda Azure, bölgesel çiftteki veri merkezleri arasında en az 300 mil ayırmayı tercih eder, ancak bu özellik tüm coğrafi bölgelerde pratik veya mümkün değildir. Fiziksel veri merkezi ayrımı, her iki bölgeyi aynı anda etkileyen doğal felaketler, hukuki geri kalan, güç kesintileri veya fiziksel ağ kesintileri olasılığını azaltır. Yalıtım, coğrafya içindeki kısıtlamalara tabidir (Coğrafya boyutu, güç/ağ altyapısı kullanılabilirliği, yönetmelikler vb.).  
 
-![Çoğaltma](./media/best-practices-availability-paired-regions/6Orange.png)
-**Platform tarafından sağlanan çoğaltma** -otomatik çoğaltma eşleştirilmiş bölgeye coğrafi olarak yedekli depolama alanı gibi bazı hizmetler sağlar.
+![çoğaltma](./media/best-practices-availability-paired-regions/6Orange.png)
+**platform tarafından sağlanmış çoğaltma** -coğrafi olarak yedekli depolama gibi bazı hizmetler eşleştirilmiş bölgeye otomatik çoğaltma sağlar.
 
-![Kurtarma](./media/best-practices-availability-paired-regions/7Orange.png)
-**bölge kurtarma sipariş** – olay geniş kapsamlı bir kesinti her çiftte bir bölgenin kurtarılmasına öncelik verilir. Eşleştirilmiş bölgeler arasında dağıtılan uygulamalar öncelikte kurtarılan bölgelerden birine sahip olacağı garanti edilir. Bir uygulama değil eşleştirilmiş bölgeler arasında dağıtılması durumunda kurtarma – seçilen bölgeleri kurtarılması için son iki olabilecek en kötü durumda gecikebilir.
+![kurtarma](./media/best-practices-availability-paired-regions/7Orange.png)
+**Bölgesi kurtarma sırası** – geniş bir kesinti durumunda, bir bölgenin kurtarılması her çiftin dışında bir önceliğe sahiptir. Eşleştirilmiş bölgeler arasında dağıtılan uygulamaların, önceliğe sahip bölgelerden birine sahip olduğu garanti edilir. Bir uygulama eşlenmez bölgeler arasında dağıtılırsa kurtarma geciktirilebilir. en kötü durumda, seçilen bölgeler kurtarılacak son iki durumda olabilir.
 
-![Güncelleştirmeleri](./media/best-practices-availability-paired-regions/8Orange.png)
-**sıralı güncelleştirme** – planlı Azure sistem güncelleştirmeleri sağlık bölge çiftlerine sırayla (değil aynı zamanda) kapalı kalma süresi, hataları ve nadir bozuk mantıksal hataları etkisini en aza indirmek için güncelleştirin.
+**sıralı güncelleştirmeler**](./media/best-practices-availability-paired-regions/8Orange.png)
+![güncelleştirmeler – planlı Azure sistem güncelleştirmeleri, kapalı kalma süresini en aza indirmek için (aynı anda değil) sıralı olarak, hataların etkisini ve hatalı bir güncelleştirmenin nadir olayında mantıksal hataları kullanıma almıştır.
 
-![Veri](./media/best-practices-availability-paired-regions/9Orange.png)
-**veri yerleşikliği** – vergi ve yasa uygulama dairesi amacıyla veri yerleşikliğinin karşılanması için (hariç, Brezilya Güney) çiftiyle aynı coğrafyada bulunan bir bölgede bulunuyor.
+![veri](./media/best-practices-availability-paired-regions/9Orange.png)
+**veri** yerleşimi – bir bölge, çift ile aynı coğrafya dahilinde (Brezilya Güney dışında), vergi ve yasalar zorlama yasaları için veri fazlalığını karşılamak amacıyla yer alır.

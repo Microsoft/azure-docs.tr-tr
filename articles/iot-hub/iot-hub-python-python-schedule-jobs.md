@@ -1,181 +1,200 @@
 ---
-title: Azure IOT hub'ı (Python) ile işleri zamanlama | Microsoft Docs
-description: Birden fazla cihazda doğrudan yöntem çağırmak için bir Azure IOT hub'ı işini zamanlamak nasıl. Python için Azure IOT SDK'ları, sanal cihaz uygulamaları ve işi çalıştırmak için bir hizmet uygulaması'nı uygulamak için kullanın.
-author: kgremban
-manager: philmea
+title: İşleri Azure IoT Hub zamanlayın (Python) | Microsoft Docs
+description: Birden çok cihazda doğrudan yöntem çağırmak için bir Azure IoT Hub işi zamanlama. İşi çalıştırmak için sanal cihaz uygulamalarını ve bir hizmet uygulamasını uygulamak üzere Python için Azure IoT SDK 'larını kullanın.
+author: robinsh
 ms.service: iot-hub
 services: iot-hub
 ms.devlang: python
 ms.topic: conceptual
-ms.date: 02/16/2019
-ms.author: kgremban
-ms.openlocfilehash: c15db0766da3b4c18c306106ffdd5fc75a9143aa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/16/2019
+ms.author: robinsh
+ms.openlocfilehash: f1fbfcaa80a3d1781878fe3d6eb14558a3b298a5
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64569309"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "70999506"
 ---
-# <a name="schedule-and-broadcast-jobs-python"></a>Zamanlama ve yayınlama işleri (Python)
+# <a name="schedule-and-broadcast-jobs-python"></a>İşleri zamanlama ve yayınlama (Python)
 
 [!INCLUDE [iot-hub-selector-schedule-jobs](../../includes/iot-hub-selector-schedule-jobs.md)]
 
-Azure IOT Hub oluşturma ve zamanlama ve milyonlarca cihaza güncelleştirme işleri izlemek bir arka uç uygulaması sağlayan tam olarak yönetilen bir hizmettir.  İşleri için aşağıdaki eylemler kullanılabilir:
+Azure IoT Hub, bir arka uç uygulamasının milyonlarca cihazı zamanlamayı ve güncelleştirmeyi sağlayan işleri oluşturmasına ve izlemesine olanak tanıyan, tam olarak yönetilen bir hizmettir.  İşler aşağıdaki eylemler için kullanılabilir:
 
 * İstenen özellikleri güncelleştirme
-* Etiketleri güncelleştirin
-* Doğrudan metotları çağırma
+* Etiketleri Güncelleştir
+* Doğrudan metotları çağır
 
-Kavramsal olarak, bir işi bu eylemlerden biri, sarmalar ve bir cihaz ikizi sorgu tarafından tanımlanan bir dizi cihazda karşı yürütme ilerleme durumunu izler.  Örneğin, bir arka uç uygulaması, bir işi 10.000 cihaz, cihaz ikizi sorgu tarafından belirtilen ve gelecekteki zaman için programlanmış bir yeniden başlatma yöntemini çağırmak için kullanabilirsiniz.  Bu cihazların her biri alın ve yeniden başlatma yöntemi uygulamak, uygulamanın sonra ilerleme durumunu izleyebilirsiniz.
+Kavramsal olarak, bir iş bu eylemlerden birini sarmalar ve yürütmenin ilerlemesini bir cihaz ikizi sorgusu tarafından tanımlanan bir cihaz kümesiyle izler.  Örneğin, bir arka uç uygulaması, bir cihaz ikizi sorgusu tarafından belirtilen ve gelecekteki bir zamanda zamanlanan 10.000 cihazlarda yeniden başlatma yöntemini çağırmak için bir iş kullanabilir.  Bu uygulama daha sonra bu cihazların her biri tarafından yeniden başlatma yöntemini alıp yürütebileceği ilerlemeyi izleyebilir.
 
-Bu makaleler, bu özelliklerin her biri hakkında daha fazla bilgi edinin:
+Bu makalelerdeki her bir özellik hakkında daha fazla bilgi edinin:
 
-* Cihaz ikizi ve özellikleri: [Cihaz ikizlerini kullanmaya başlama](iot-hub-python-twin-getstarted.md) ve [Öğreticisi: Cihaz ikizi özelliklerini kullanma](tutorial-device-twins.md)
+* Cihaz ikizi ve özellikleri: [Cihaz](iot-hub-python-twin-getstarted.md) ikizlerini ve [öğreticisini kullanmaya başlayın: Cihaz ikizi özelliklerini kullanma](tutorial-device-twins.md)
 
-* Doğrudan yöntemler: [IOT Hub Geliştirici Kılavuzu - doğrudan yöntemler](iot-hub-devguide-direct-methods.md) ve [Öğreticisi: doğrudan yöntemler](quickstart-control-device-python.md)
+* Doğrudan Yöntemler: [IoT Hub Geliştirici Kılavuzu-doğrudan Yöntemler](iot-hub-devguide-direct-methods.md) ve [öğretici: doğrudan Yöntemler](quickstart-control-device-python.md)
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
 Bu öğretici şunların nasıl yapıldığını gösterir:
 
-* Sağlayan bir doğrudan yöntem olan Python sanal cihaz uygulaması oluşturma **lockDoor**, hangi çağrılabilir çözüm arka ucu tarafından.
+* Çözüm arka ucu tarafından çağrılabilen **Lockkapısı**sağlayan doğrudan yöntemine sahip bir Python sanal cihaz uygulaması oluşturun.
 
-* Çağıran bir Python konsol uygulaması oluşturacaksınız **lockDoor** yöntemi bir iş ve güncelleştirmeleri kullanarak bir cihaz iş istenen özellikleri kullanarak sanal cihaz uygulamasında doğrudan.
+* Bir iş kullanarak sanal cihaz uygulamasındaki **Lockkapısı** doğrudan yöntemini çağıran ve bir cihaz işi kullanarak istenen özellikleri güncelleştiren bir Python konsol uygulaması oluşturun.
 
-Bu öğreticinin sonunda iki Python uygulamaları vardır:
+Bu öğreticinin sonunda iki Python uygulamanız vardır:
 
-**simDevice.py**, cihaz kimliğiyle IOT hub'ınıza bağlanır ve aldığı kaydeden bir **lockDoor** doğrudan yöntemi.
+**simDevice.py**, IoT Hub 'ınıza cihaz kimliğiyle bağlanır ve bir **lockkapısı** doğrudan yöntemi alır.
 
-**scheduleJobService.py**, sanal cihaz uygulamasında bir doğrudan yöntem çağrıları ve cihaz ikizinin güncelleştirmeleri kullanarak bir proje özelliklerini istenen.
-
-Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
-
-* [Python 2.x veya 3.x](https://www.python.org/downloads/). Kurulumunuzun gereksinimine uygun olarak 32 bit veya 64 bit yüklemeyi kullanmaya dikkat edin. Yükleme sırasında istendiğinde, platforma özgü ortam değişkeninize Python’u eklediğinizden emin olun. Python 2.x kullanıyorsanız, [Python paket yönetim sistemi *pip*'yi yüklemeniz veya yükseltmeniz](https://pip.pypa.io/en/stable/installing/) gerekebilir.
-
-* Windows işletim sistemi kullanıyorsanız, Python’dan yerel DLL’lerin kullanımına olanak tanımak için [Visual C++ yeniden dağıtılabilir paketi](https://www.microsoft.com/download/confirmation.aspx?id=48145).
-
-* Etkin bir Azure hesabı. (Hesabınız yoksa, oluşturabileceğiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial/) yalnızca birkaç dakika içinde.)
+**scheduleJobService.py**, sanal cihaz uygulamasında doğrudan bir yöntemi çağırır ve bir işi kullanarak Device ikizi 'ın istenen özelliklerini güncelleştirir.
 
 > [!NOTE]
-> **Python için Azure IOT SDK'sı** doğrudan desteklemez **işleri** işlevselliği. Bunun yerine Bu öğreticide, zaman uyumsuz iş parçacıkları ve zamanlayıcılar kullanan alternatif bir çözüm sunar. Daha fazla güncelleştirmeler için bkz **hizmeti istemci SDK'sı** özellik listesinde [Python için Azure IOT SDK'sı](https://github.com/Azure/azure-iot-sdk-python) sayfası. 
+> **Python Için Azure ıOT SDK** , **iş** işlevlerini doğrudan desteklemez. Bu öğreticide, zaman uyumsuz iş parçacıkları ve zamanlayıcılar kullanan alternatif bir çözüm sunulmaktadır. Daha fazla güncelleştirme için, [Python Için Azure ıOT SDK](https://github.com/Azure/azure-iot-sdk-python) sayfasında **hizmet istemci SDK 'sı** özellik listesi ' ne bakın.
 >
+
+[!INCLUDE [iot-hub-include-python-sdk-note](../../includes/iot-hub-include-python-sdk-note.md)]
+
+## <a name="prerequisites"></a>Önkoşullar
+
+[!INCLUDE [iot-hub-include-python-installation-notes](../../includes/iot-hub-include-python-installation-notes.md)]
 
 ## <a name="create-an-iot-hub"></a>IoT hub oluşturma
 
 [!INCLUDE [iot-hub-include-create-hub](../../includes/iot-hub-include-create-hub.md)]
 
-### <a name="retrieve-connection-string-for-iot-hub"></a>IOT hub için bağlantı dizesi alma
-
-[!INCLUDE [iot-hub-include-find-connection-string](../../includes/iot-hub-include-find-connection-string.md)]
-
-## <a name="register-a-new-device-in-the-iot-hub"></a>Yeni bir cihaz IOT hub'ı Kaydet
+## <a name="register-a-new-device-in-the-iot-hub"></a>IoT Hub 'a yeni bir cihaz kaydetme
 
 [!INCLUDE [iot-hub-include-create-device](../../includes/iot-hub-include-create-device.md)]
 
 ## <a name="create-a-simulated-device-app"></a>Sanal cihaz uygulaması oluşturma
 
-Bu bölümde, bir sanal tetikler bulut tarafından çağrılan doğrudan bir yönteme yanıt veren bir Python konsol uygulaması oluşturma **lockDoor** yöntemi.
+Bu bölümde, bulut tarafından çağrılan doğrudan bir yönteme yanıt veren bir Python konsol uygulaması oluşturacaksınız ve bu da sanal bir **Lockkapısı** metodunu tetikler.
 
-1. Komut isteminizde yüklemek için aşağıdaki komutu çalıştırın **azure IOT cihaz istemci** paket:
+1. Komut istemindeki **Azure-IoT-Device** paketini yüklemek için aşağıdaki komutu çalıştırın:
 
     ```cmd/sh
-    pip install azure-iothub-device-client
+    pip install azure-iot-device
     ```
 
-2. Bir metin düzenleyicisi kullanarak yeni bir oluşturma **simDevice.py** çalışma dizininizde dosya.
+   > [!NOTE]
+   > Azure-ıothub-Service-Client için PIP paketleri şu anda yalnızca Windows işletim sistemi için kullanılabilir. Linux/Mac OS için lütfen [geliştirme ortamınızı Python](https://github.com/Azure/azure-iot-sdk-python/blob/master/doc/python-devbox-setup.md) gönderisini hazırlama bölümündeki linux ve Mac OS özgü bölümlere bakın.
+   >
 
-3. Aşağıdaki `import` deyimlerini ve değişkenlerini başlangıcında **simDevice.py** dosya. Değiştirin `deviceConnectionString` yukarıda oluşturduğunuz cihaz bağlantı dizesiyle:
+2. Bir metin düzenleyicisi kullanarak çalışma dizininizde yeni bir **simDevice.py** dosyası oluşturun.
+
+3. **SimDevice.py** dosyasının başlangıcında `import` aşağıdaki deyimleri ve değişkenleri ekleyin. Yukarıda `deviceConnectionString` oluşturduğunuz cihazın bağlantı dizesiyle değiştirin:
 
     ```python
+    import threading
     import time
-    import sys
+    from azure.iot.device import IoTHubDeviceClient, MethodResponse
 
-    import iothub_client
-    from iothub_client import IoTHubClient, IoTHubClientError, IoTHubTransportProvider, IoTHubClientResult
-    from iothub_client import IoTHubError, DeviceMethodReturnValue
-
-    METHOD_CONTEXT = 0
-    TWIN_CONTEXT = 0
-    WAIT_COUNT = 10
-
-    PROTOCOL = IoTHubTransportProvider.MQTT
     CONNECTION_STRING = "{deviceConnectionString}"
     ```
 
-4. İşlemek için aşağıdaki işlev geri çağırma ekleme **lockDoor** yöntemi:
+4. **Kilit kapısı** metodunu işlemek için aşağıdaki işlev geri aramasını ekleyin:
 
     ```python
-    def device_method_callback(method_name, payload, user_context):
-        if method_name == "lockDoor":
-            print ( "Locking Door!" )
+    def lockdoor_listener(client):
+        while True:
+            # Receive the direct method request
+            method_request = client.receive_method_request("lockDoor")  # blocking call
+            print( "Locking Door!" )
 
-            device_method_return_value = DeviceMethodReturnValue()
-            device_method_return_value.response = "{ \"Response\": \"lockDoor called successfully\" }"
-            device_method_return_value.status = 200
-            return device_method_return_value
+            resp_status = 200
+            resp_payload = {"Response": "lockDoor called successfully"}
+            method_response = MethodResponse(method_request.request_id, resp_status, resp_payload)
+            client.send_method_response(method_response)
     ```
 
-5. Cihaz ikizlerini güncelleştirmeleri işlemek için başka bir işlev geri çağırma ekleyin:
+5. Cihaz TWINS güncelleştirmelerini işlemek için başka bir işlev geri çağırması ekleyin:
 
     ```python
-    def device_twin_callback(update_state, payload, user_context):
-        print ( "")
-        print ( "Twin callback called with:")
-        print ( "payload: %s" % payload )
+    def twin_update_listener(client):
+        while True:
+            patch = client.receive_twin_desired_properties_patch()  # blocking call
+            print ("")
+            print ("Twin desired properties patch received:")
+            print (patch)
     ```
 
-6. İşleyicisini kaydetmek için aşağıdaki kodu ekleyin **lockDoor** yöntemi. De `main` yordam:
+6. **Kilit kapısı** yöntemi için işleyiciyi kaydetmek üzere aşağıdaki kodu ekleyin. Ayrıca, `main` yordamını da dahil edin:
 
     ```python
     def iothub_jobs_sample_run():
         try:
-            client = IoTHubClient(CONNECTION_STRING, PROTOCOL)
-            client.set_device_method_callback(device_method_callback, METHOD_CONTEXT)
-            client.set_device_twin_callback(device_twin_callback, TWIN_CONTEXT)
+            client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
 
-            print ( "Direct method initialized." )
-            print ( "Device twin callback initialized." )
-            print ( "IoTHubClient waiting for commands, press Ctrl-C to exit" )
+            print( "Beginning to listen for 'lockDoor' direct method invocations...")
+            lockdoor_listener_thread = threading.Thread(target=lockdoor_listener, args=(client,))
+            lockdoor_listener_thread.daemon = True
+            lockdoor_listener_thread.start()
 
+            # Begin listening for updates to the Twin desired properties
+            print ( "Beginning to listen for updates to Twin desired properties...")
+            twin_update_listener_thread = threading.Thread(target=twin_update_listener, args=(client,))
+            twin_update_listener_thread.daemon = True
+            twin_update_listener_thread.start()
+            
             while True:
-                status_counter = 0
-                while status_counter <= WAIT_COUNT:
-                    time.sleep(10)
-                    status_counter += 1
+                time.sleep(1000)
 
-        except IoTHubError as iothub_error:
-            print ( "Unexpected error %s from IoTHub" % iothub_error )
-            return
         except KeyboardInterrupt:
-            print ( "IoTHubClient sample stopped" )
+            print ( "IoTHubDeviceClient sample stopped" )
 
     if __name__ == '__main__':
         print ( "Starting the IoT Hub Python jobs sample..." )
-        print ( "    Protocol %s" % PROTOCOL )
-        print ( "    Connection string=%s" % CONNECTION_STRING )
+        print ( "IoTHubDeviceClient waiting for commands, press Ctrl-C to exit" )
 
         iothub_jobs_sample_run()
     ```
 
-7. Kaydet ve Kapat **simDevice.py** dosya.
+7. **SimDevice.py** dosyasını kaydedin ve kapatın.
 
 > [!NOTE]
-> Sade ve basit bir anlatım gözetildiği için bu öğretici herhangi bir yeniden deneme ilkesi uygulamaz. Üretim kodunda yeniden deneme ilkelerini (örneğin, bir üstel geri alma), makalesinde önerildiği uygulamalıdır [geçici hata işleme](/azure/architecture/best-practices/transient-faults).
+> Sade ve basit bir anlatım gözetildiği için bu öğretici herhangi bir yeniden deneme ilkesi uygulamaz. Üretim kodunda, [geçici hata işleme](/azure/architecture/best-practices/transient-faults)makalesinde önerildiği gibi yeniden deneme ilkelerini (üstel geri alma gibi) uygulamanız gerekir.
 >
 
-## <a name="schedule-jobs-for-calling-a-direct-method-and-updating-a-device-twins-properties"></a>Bir doğrudan yöntem çağırma ve bir cihaz ikizinin özelliklerini güncelleştirmek için işleri zamanlama
+## <a name="get-the-iot-hub-connection-string"></a>IoT Hub bağlantı dizesini al
 
-Bu bölümde, bir uzak başlatan bir Python konsol uygulaması oluşturma **lockDoor** bir cihazda doğrudan yöntem kullanarak ve cihaz ikizinin özelliklerini güncelleştirir.
+Bu makalede, bir cihazda doğrudan yöntem çağıran ve cihazı ikizi güncelleştiren bir arka uç hizmeti oluşturursunuz. Hizmet, bir cihazda doğrudan yöntem çağırmak için **hizmet Connect** iznine sahip olmalıdır. Ayrıca hizmet, kimlik kayıt defterini okuyup yazmak için **kayıt defteri okuma** ve **kayıt defteri yazma** izinlerine sahip olmalıdır. Yalnızca bu izinleri içeren bir varsayılan paylaşılan erişim ilkesi yoktur, bu nedenle bir tane oluşturmanız gerekir.
 
-1. Komut isteminizde yüklemek için aşağıdaki komutu çalıştırın **azure-IOT-service-client** paket:
+**Hizmet bağlantısı**, **kayıt defteri okuma**ve **kayıt defteri yazma** izinleri veren bir paylaşılan erişim ilkesi oluşturmak ve bu ilkeyle ilgili bir bağlantı dizesi almak için aşağıdaki adımları izleyin:
+
+1. IoT Hub 'ınızı [Azure Portal](https://portal.azure.com)açın. IoT Hub 'ınıza almanın en kolay yolu **kaynak grupları**seçmek, IoT Hub 'ınızın bulunduğu kaynak grubunu seçmek ve ardından kaynak listesinden IoT Hub 'ınızı seçmeniz gerekir.
+
+2. IoT Hub 'ınızın sol tarafındaki bölmede **paylaşılan erişim ilkeleri**' ni seçin.
+
+3. İlke listesinin üstündeki en üstteki menüden **Ekle**' yi seçin.
+
+4. **Paylaşılan erişim Ilkesi Ekle** bölmesinde, ilkeniz için açıklayıcı bir ad girin; Örneğin: *Serviceandregistryreadwrite*. **İzinler**altında **hizmet Connect** ve **kayıt defteri yazma** (kayıt defteri **yazma**seçeneğini belirlediğinizde**kayıt defteri okuma** otomatik olarak seçilir) seçeneğini belirleyin. Ardından **Oluştur**’u seçin.
+
+    ![Yeni bir paylaşılan erişim ilkesinin nasıl ekleneceğini göster](./media/iot-hub-python-python-schedule-jobs/add-policy.png)
+
+5. **Paylaşılan erişim ilkeleri** bölmesine geri döndüğünüzde, ilkeler listesinden yeni ilkenizi seçin.
+
+6. **Paylaşılan erişim anahtarları**altında, **bağlantı dizesi--birincil anahtar** için Kopyala simgesini seçin ve değeri kaydedin.
+
+    ![Bağlantı dizesinin nasıl alınacağını göster](./media/iot-hub-python-python-schedule-jobs/get-connection-string.png)
+
+IoT Hub paylaşılan erişim ilkeleri ve izinleri hakkında daha fazla bilgi için bkz. [erişim denetimi ve izinleri](./iot-hub-devguide-security.md#access-control-and-permissions).
+
+## <a name="schedule-jobs-for-calling-a-direct-method-and-updating-a-device-twins-properties"></a>Bir doğrudan yöntem çağırmak ve bir cihaz ikizi özelliklerini güncelleştirmek için işleri zamanlama
+
+Bu bölümde, doğrudan yöntem kullanan bir cihazda uzak **Lockkapısı** Başlatan bir Python konsol uygulaması oluşturursunuz ve Device ikizi 'in özelliklerini güncelleştirebilirsiniz.
+
+1. Komut istemindeki **Azure-IoT-Service-Client** paketini yüklemek için aşağıdaki komutu çalıştırın:
 
     ```cmd/sh
     pip install azure-iothub-service-client
     ```
 
-2. Bir metin düzenleyicisi kullanarak yeni bir oluşturma **scheduleJobService.py** çalışma dizininizde dosya.
+   > [!NOTE]
+   > Azure-ıothub-Service-Client ve Azure-ıothub-Device-Client için PIP paketleri şu anda yalnızca Windows işletim sistemi için kullanılabilir. Linux/Mac OS için lütfen [geliştirme ortamınızı Python](https://github.com/Azure/azure-iot-sdk-python/blob/master/doc/python-devbox-setup.md) gönderisini hazırlama bölümündeki linux ve Mac OS özgü bölümlere bakın.
+   >
 
-3. Aşağıdaki `import` deyimlerini ve değişkenlerini başlangıcında **scheduleJobService.py** dosyası:
+2. Bir metin düzenleyicisi kullanarak çalışma dizininizde yeni bir **scheduleJobService.py** dosyası oluşturun.
+
+3. **ScheduleJobService.py** dosyasının başlangıcında `import` aşağıdaki deyimleri ve değişkenleri ekleyin. Yer tutucusunu `{IoTHubConnectionString}` , [IoT Hub bağlantı dizesini al](#get-the-iot-hub-connection-string)bölümünde daha önce kopyaladığınız IoT Hub bağlantı dizesiyle değiştirin. Yer tutucusunu `{deviceId}` , [IoT Hub 'ına yeni bir cihaz kaydet](#register-a-new-device-in-the-iot-hub)' de kaydettiğiniz cihaz kimliğiyle değiştirin:
 
     ```python
     import sys
@@ -197,7 +216,7 @@ Bu bölümde, bir uzak başlatan bir Python konsol uygulaması oluşturma **lock
     WAIT_COUNT = 5
     ```
 
-4. Kullanılan aşağıdaki işlevi ekleyin sorgulamak cihazlar için:
+4. Cihazları sorgulamak için kullanılan aşağıdaki işlevi ekleyin:
 
     ```python
     def query_condition(device_id):
@@ -214,7 +233,7 @@ Bu bölümde, bir uzak başlatan bir Python konsol uygulaması oluşturma **lock
         return 0
     ```
 
-5. Doğrudan yöntem ve cihaz ikizi çağrı işlerini çalıştırmak için aşağıdaki yöntemleri ekleyin:
+5. Doğrudan yöntem ve cihaz ikizi çağıran işleri çalıştırmak için aşağıdaki yöntemleri ekleyin:
 
     ```python
     def device_method_job(job_id, device_id, wait_time, execution_time):
@@ -244,7 +263,7 @@ Bu bölümde, bir uzak başlatan bir Python konsol uygulaması oluşturma **lock
             print ( "Device twin updated." )
     ```
 
-6. İşleri zamanlama ve iş durumu güncelleştirmek için aşağıdaki kodu ekleyin. De `main` yordam:
+6. İşleri zamanlamak ve iş durumunu güncelleştirmek için aşağıdaki kodu ekleyin. Ayrıca, `main` yordamını da dahil edin:
 
     ```python
     def iothub_jobs_sample_run():
@@ -299,32 +318,32 @@ Bu bölümde, bir uzak başlatan bir Python konsol uygulaması oluşturma **lock
         iothub_jobs_sample_run()
     ```
 
-7. Kaydet ve Kapat **scheduleJobService.py** dosya.
+7. **ScheduleJobService.py** dosyasını kaydedin ve kapatın.
 
 ## <a name="run-the-applications"></a>Uygulamaları çalıştırma
 
 Şimdi uygulamaları çalıştırmaya hazırsınız.
 
-1. Çalışma dizininizdeki komut isteminde, yeniden başlatma doğrudan yöntem için dinleme başlamak için aşağıdaki komutu çalıştırın:
+1. Çalışma dizininizde komut isteminde, önyükleme doğrudan metodunu dinlemeye başlamak için aşağıdaki komutu çalıştırın:
 
     ```cmd/sh
     python simDevice.py
     ```
 
-2. Çalışma dizininizdeki başka bir komut isteminde işlerinin kapısını kilitleme ve ikiz güncelleştirmesi tetiklemek için aşağıdaki komutu çalıştırın:
+2. Çalışma dizininizde bulunan başka bir komut isteminde, kapıyı kilitlemek ve ikizi güncelleştirmek için işleri tetiklemek üzere aşağıdaki komutu çalıştırın:
   
     ```cmd/sh
     python scheduleJobService.py
     ```
 
-3. Doğrudan yöntem cihaz yanıtlarını görebilir ve cihaz ikizleri konsolda güncelleştirilmesi.
+3. Konsolundaki doğrudan yöntem ve cihaz TWINS güncelleştirmesine yönelik cihaz yanıtlarını görürsünüz.
 
-    ![IoT Hub Job örnek 1--cihaz çıktısı](./media/iot-hub-python-python-schedule-jobs/sample1-deviceoutput.png)
+    ![IoT Hub Iş örneği 1--cihaz çıkışı](./media/iot-hub-python-python-schedule-jobs/sample1-deviceoutput.png)
 
-    ![IoT Hub Job 2--örnek cihaz çıktısı](./media/iot-hub-python-python-schedule-jobs/sample2-deviceoutput.png)
+    ![IoT Hub Iş örneği 2--cihaz çıkışı](./media/iot-hub-python-python-schedule-jobs/sample2-deviceoutput.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, bir işi bir doğrudan yöntem bir cihaz ve cihaz ikizinin özelliklerini güncelleştirme için zamanlamak için kullanılır.
+Bu öğreticide, bir cihaza doğrudan yöntem zamanlamak ve Device ikizi 'in özelliklerinin güncelleştirilmesi için bir iş kullandınız.
 
-IOT Hub ve cihaz yönetim modellerini uzaktan gibi ile hava üretici yazılımı güncelleştirme başlamak için bkz: [üretici yazılımlarını güncelleştirme nasıl](tutorial-firmware-update.md).
+AIR üretici yazılımı güncelleştirmesi üzerinden uzak gibi IoT Hub ve cihaz yönetim desenleriyle çalışmaya devam etmek için bkz. [nasıl yapılır bir bellenim güncelleştirmesi](tutorial-firmware-update.md).

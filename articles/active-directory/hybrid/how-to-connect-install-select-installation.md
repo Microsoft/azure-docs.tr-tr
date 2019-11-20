@@ -44,7 +44,7 @@ Bunu varsayılır:
 
 Seçenekler burada Express kullanmaya devam edebilirsiniz:
 
-- Tüm OU'larda eşitlenecek istemiyorsanız hala Express ve kullanabilirsiniz son sayfasında seçimini kaldır **... eşitleme işlemini ***. Yükleme Sihirbazı'nı yeniden çalıştırın ve alanındaki OU'ları değiştirmek [yapılandırma seçenekleri](how-to-connect-installation-wizard.md#customize-synchronization-options) ve zamanlanmış eşitlemeyi etkinleştirin.
+- Tüm OU'larda eşitlenecek istemiyorsanız hala Express ve kullanabilirsiniz son sayfasında seçimini kaldır **...eşitleme işlemini** *. Yükleme Sihirbazı'nı yeniden çalıştırın ve alanındaki OU'ları değiştirmek [yapılandırma seçenekleri](how-to-connect-installation-wizard.md#customize-synchronization-options) ve zamanlanmış eşitlemeyi etkinleştirin.
 - Bir Azure AD Premium, parola geri yazma gibi özellikleri etkinleştirmek istiyorsunuz. Önce ilk yükleme almak için express gidin. Yükleme Sihirbazı'nı yeniden çalıştırın ve değiştirme [yapılandırma seçenekleri](how-to-connect-installation-wizard.md#customize-synchronization-options).
 
 ## <a name="custom"></a>Özel
@@ -56,7 +56,7 @@ Seçenekler burada Express kullanmaya devam edebilirsiniz:
 - Birden fazla ormanınız veya birden fazla orman gelecekte eşitlemek planlama.
 - Connect sunucusundan ulaşılabilir değil, ormanınızdaki etki alanınız.
 - Kullanıcı oturum açma için Federasyon veya geçişli kimlik doğrulaması kullanmayı planlayın.
-- 100\. 000'den fazla nesneniz ve tam SQL Server'ı kullanmanız gerekir.
+- 100. 000'den fazla nesneniz ve tam SQL Server'ı kullanmanız gerekir.
 - Grup tabanlı filtreleme ve yalnızca etki alanı veya OU tabanlı filtreleme kullanmayı planlayın.
 
 ## <a name="upgrade-from-dirsync"></a>DirSync'ten yükseltme

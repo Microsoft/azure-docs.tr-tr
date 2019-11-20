@@ -8,12 +8,12 @@ ms.topic: sample
 ms.date: 04/05/2018
 author: wmengmsft
 ms.author: wmeng
-ms.openlocfilehash: 977b59c3344eaf2c4877f51afea176455d22ecc9
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: 7611af5f4d5b79ddb2abb7546f2e3ea6c0d4c4c5
+ms.sourcegitcommit: f176e5bb926476ec8f9e2a2829bda48d510fbed7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62130526"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70308404"
 ---
 # <a name="how-to-use-azure-table-storage-or-the-azure-cosmos-db-table-api-from-nodejs"></a>Node.js uygulamasından Azure Tablo depolama veya Azure Cosmos DB Tablo API’sini kullanma
 [!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
@@ -365,7 +365,7 @@ dc.table.queryEntities(tableName,
 
 `continuationToken` nesnesini incelerseniz, tüm sonuçlar arasında yineleme yapmak için kullanılabilecek `nextPartitionKey`, `nextRowKey` ve `targetLocation` gibi özellikleri bulursunuz.
 
-Ayrıca `top` ile birlikte `continuationToken` için sayfa boyutunu ayarlayın. 
+Ayrıca, sayfa boyutunu `top` ayarlamak için `continuationToken` ile birlikte kullanabilirsiniz. 
 
 ## <a name="work-with-shared-access-signatures"></a>Paylaşılan erişim imzaları ile çalışma
 Paylaşılan erişim imzaları (SAS), Depolama hesabı adınızı veya anahtarlarınızı sağlamadan tablolara ayrıntılı erişim sağlamanın güvenli bir yoludur. SAS çoğu zaman verilerinize sınırlı erişim sağlamak (örneğin, bir mobil uygulamanın kayıtları sorgulamasına izin verme) için kullanılır.
@@ -394,7 +394,7 @@ var host = tableSvc.host;
 
 SAS sahibi tabloya erişmeye çalıştığında gerekli olacağı için ana bilgisayar bilgilerini de sağlamanız gerektiğini unutmayın.
 
-Daha sonra istemci uygulaması, tabloya karşı işlemleri gerçekleştirmek için **TableServiceWithSAS** ile SAS’ı kullanır. Aşağıdaki örnek, tabloya bağlanır ve bir sorgu gerçekleştirir. Bkz: [paylaşılan erişim imzaları kullanma](../storage/common/storage-dotnet-shared-access-signature-part-1.md#examples-of-sas-uris) makalesine tableSAS biçimi. 
+Daha sonra istemci uygulaması, tabloya karşı işlemleri gerçekleştirmek için **TableServiceWithSAS** ile SAS’ı kullanır. Aşağıdaki örnek, tabloya bağlanır ve bir sorgu gerçekleştirir. Bkz. tableSAS biçimi için [paylaşılan erişim imzaları (SAS) makalesini kullanarak Azure depolama kaynaklarına sınırlı erişim verme](../storage/common/storage-sas-overview.md) . 
 
 ```javascript
 // Note in the following command, host is in the format: `https://<your_storage_account_name>.table.core.windows.net` and the tableSAS is in the format: `sv=2018-03-28&si=saspolicy&tn=mytable&sig=9aCzs76n0E7y5BpEi2GvsSv433BZa22leDOZXX%2BXXIU%3D`;
@@ -459,6 +459,6 @@ Daha fazla bilgi için aşağıdaki kaynaklara bakın.
 
 * [Microsoft Azure Depolama Gezgini](../vs-azure-tools-storage-manage-with-storage-explorer.md), Microsoft’un Windows, macOS ve Linux üzerinde Azure Depolama verileriyle görsel olarak çalışmanızı sağlayan ücretsiz ve tek başına uygulamasıdır.
 * GitHub’da [Node.js için Azure Depolama SDK’sı](https://github.com/Azure/azure-storage-node) deposu.
-* [Node.js Geliştiricileri için Azure](https://docs.microsoft.com/javascript/azure/?view=azure-node-latest)
+* [Node.js Geliştiricileri için Azure](https://docs.microsoft.com/azure/javascript/)
 * [Azure’da Node.js web uygulaması oluşturma](../app-service/app-service-web-get-started-nodejs.md)
 * [Bir Node.js uygulaması derleme ve Azure Cloud Service’e dağıtma](../cloud-services/cloud-services-nodejs-develop-deploy-app.md) (Windows PowerShell kullanarak)

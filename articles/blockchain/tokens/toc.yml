@@ -1,0 +1,32 @@
+- name: Azure Blok Zinciri Belirteçleri (Önizleme)
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure Blok Zinciri Belirteçleri hakkında
+      href: overview.md
+- name: Kavramlar
+  items:
+    - name: Hesap yönetimi
+      href: account-management.md
+    - name: Şablonlar
+      href: templates.md
+    - name: Oluşturulabilirlik
+      href: composability.md
+- name: Kaynaklar
+  items:
+    - name: Blog
+      href: 'https://azure.microsoft.com/blog/topics/blockchain/'
+    - name: Azure Blok Zinciri Hizmeti Visual Studio Code uzantısı
+      href: 'https://github.com/Microsoft/vscode-azure-blockchain-ethereum/wiki'
+    - name: Kod örnekleri
+      href: 'https://github.com/Azure-Samples/blockchain'
+    - name: Topluluk
+      href: 'https://techcommunity.microsoft.com/t5/Blockchain/bd-p/AzureBlockchain'
+    - name: Forum
+      href: 'https://aka.ms/workbenchforum'
+    - name: Ürün geri bildirimi
+      href: 'https://feedback.azure.com/forums/586780-blockchain'
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/blockchain-tokens'
+    - name: Stack Overflow
+      href: 'https://stackoverflow.com/questions/tagged/AzureBlockchainService'

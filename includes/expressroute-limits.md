@@ -5,31 +5,31 @@ services: expressroute
 author: cherylmc
 ms.service: expressroute
 ms.topic: include
-ms.date: 05/28/2019
+ms.date: 07/25/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 9f7f9b1504533e0ec503e97c086c380da71671a0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 45d34297bf37a6e46bc57e95ff49def49051e32e
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66299712"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "67622129"
 ---
-| Resource | Varsayılan/üst sınır |
+| Resource | Varsayılan/en yüksek sınır |
 | --- | --- |
 | Abonelik başına ExpressRoute devreleri |10 |
-| ExpressRoute bağlantı hatları ile Azure Resource Manager, abonelik başına bölge başına |10 |
-| Azure özel standart ExpressRoute eşdüzey hizmet sağlama için en fazla yol sayısı tanıtılan |4,000 |
-| Azure özel ExpressRoute Premium eklentisi ile eşleme için en fazla yol sayısı tanıtılan |10,000 |
-| Maksimum sayısı, Azure özel bir ExpressRoute bağlantısı için sanal ağ adresi alanından eşlemeden tanıtılan |200 |
-| En fazla yol sayısı ile standart ExpressRoute eşlemesi Microsoft'a tanıtılan |200 |
-| Maksimum sayısı, ExpressRoute Premium eklentisi ile eşleme Microsoft'a tanıtılan |200 |
-| ExpressRoute bağlantı hatları ile aynı konumda eşleme aynı sanal ağa bağlı en fazla sayısı |4 |
-| ExpressRoute devreleri farklı eşleme konumları aynı sanal ağa bağlı en fazla sayısı |4 |
-| ExpressRoute bağlantı hattı izin verilen sanal ağ bağlantılarının sayısı |Bkz: [ExpressRoute bağlantı hattı başına sanal ağ sayısı](#vnetpercircuit) tablo.  |
+| Abonelik başına her bölge için ExpressRoute devreleri, Azure Resource Manager ile |10 |
+| ExpressRoute standardı ile Azure özel eşlemesine tanıtılan en fazla yol sayısı |4,000 |
+| ExpressRoute Premium eklentisi ile Azure özel eşleme 'ye tanıtılan en fazla yol sayısı |10,000 |
+| ExpressRoute bağlantısı için VNet adres alanından Azure özel eşlemeden tanıtılan en fazla yol sayısı |200 |
+| ExpressRoute standardı ile Microsoft eşlemesine tanıtılan en fazla yol sayısı |200 |
+| ExpressRoute Premium eklentisi ile Microsoft eşlemesi 'ne tanıtılan en fazla yol sayısı |200 |
+| Aynı eşleme konumunda aynı sanal ağa bağlı olan maksimum ExpressRoute bağlantı hattı sayısı |4 |
+| Farklı eşleme konumlarında aynı sanal ağa bağlı olan maksimum ExpressRoute bağlantı hattı sayısı |4 |
+| ExpressRoute bağlantı hattı başına izin verilen sanal ağ bağlantısı sayısı |[ExpressRoute bağlantı hattı başına sanal ağ sayısını](#vnetpercircuit) görüntüleyin.  |
 
-#### <a name="vnetpercircuit"></a> ExpressRoute bağlantı hattı başına sanal ağ sayısı
-| **Bağlantı hattı boyutu** | **Standart sanal ağ bağlantılarının sayısı** | **Premium eklenti ile sanal ağ bağlantılarının sayısı** |
+#### <a name="vnetpercircuit"></a>ExpressRoute bağlantı hattı başına sanal ağ sayısı
+| **Devre boyutu** | **Standart için sanal ağ bağlantısı sayısı** | **Premium eklentisi olan sanal ağ bağlantısı sayısı** |
 | --- | --- | --- |
 | 50 Mbps |10 |20 |
 | 100 Mbps |10 |25 |
@@ -42,4 +42,4 @@ ms.locfileid: "66299712"
 | 40 Gbps* |10 |100 |
 | 100 Gbps* |10 |100 |
 
-\* Yalnızca ExpressRoute doğrudan
+**Yalnızca 100 Gbps ExpressRoute doğrudan*

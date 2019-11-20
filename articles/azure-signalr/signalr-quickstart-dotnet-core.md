@@ -1,37 +1,37 @@
 ---
-title: Azure SignalR hizmeti kullanma hakkında bilgi edinmek için hızlı başlangıç
+title: Azure SignalR hizmetini kullanmayı öğrenmek için hızlı başlangıç
 description: Azure SignalR Hizmeti’ni kullanarak ASP.NET Core MVC uygulamaları ile bir sohbet odası oluşturmaya yönelik hızlı başlangıç.
 author: sffamily
 ms.service: signalr
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.date: 03/01/2019
+ms.date: 11/04/2019
 ms.author: zhshang
-ms.openlocfilehash: 3dc893ea10e47e867110f674a458498a6bd24a4f
-ms.sourcegitcommit: 179918af242d52664d3274370c6fdaec6c783eb6
+ms.openlocfilehash: 022780f2b37c8bed49c81774d443b69bae41e5e7
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/13/2019
-ms.locfileid: "65560712"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73476753"
 ---
-# <a name="quickstart-create-a-chat-room-by-using-signalr-service"></a>Hızlı Başlangıç: SignalR hizmetini kullanarak sohbet odası oluşturamadı.
+# <a name="quickstart-create-a-chat-room-by-using-signalr-service"></a>Hızlı başlangıç: SignalR hizmetini kullanarak sohbet odası oluşturma
 
 
-Azure SignalR Hizmeti, geliştiricilerin gerçek zamanlı özelliklerle web uygulamalarını kolayca derlemesine yardımcı olan bir Azure hizmetidir. Bu hizmet [ASP.NET Core 2.0 için SignalR](https://docs.microsoft.com/aspnet/core/signalr/introduction)’yi temel alır.
+Azure SignalR Hizmeti, geliştiricilerin gerçek zamanlı özelliklerle web uygulamalarını kolayca derlemesine yardımcı olan bir Azure hizmetidir. Bu hizmet [ASP.NET Core 2,1 Için SignalR](https://docs.microsoft.com/aspnet/core/signalr/introduction?view=aspnetcore-2.1)tabanlıdır, ancak [ASP.NET Core 3,0 için SignalR](https://docs.microsoft.com/aspnet/core/signalr/introduction?view=aspnetcore-3.0)'yi de destekler.
 
-Bu makalede Azure SignalR Hizmeti ile çalışmaya başlama işlemi gösterilmektedir. Bu hızlı başlangıçta, bir ASP.NET Core MVC web uygulaması kullanarak sohbet uygulaması oluşturacaksınız. Bu uygulama, gerçek zamanlı içerik güncelleştirmelerini etkinleştirmek üzere Azure SignalR Hizmeti kaynağınızla bağlantı kuracaktır. Web uygulamasını yerel olarak barındırmak ve birden çok tarayıcı istemcileriyle bağlanmak. Her istemci, diğer tüm istemcilere içerik güncelleştirmeleri gönderebilecektir. 
+Bu makalede Azure SignalR Hizmeti ile çalışmaya başlama işlemi gösterilmektedir. Bu hızlı başlangıçta, bir ASP.NET Core MVC web uygulaması kullanarak bir sohbet uygulaması oluşturacaksınız. Bu uygulama, gerçek zamanlı içerik güncelleştirmelerini etkinleştirmek üzere Azure SignalR Hizmeti kaynağınızla bağlantı kuracaktır. Web uygulamasını yerel olarak barındıracak ve birden çok tarayıcı istemcisine bağlanırsınız. Her istemci, diğer tüm istemcilere içerik güncelleştirmeleri gönderebilecektir. 
 
-Bu hızlı başlangıçtaki adımları tamamlamak için herhangi bir kod düzenleyicisini kullanabilirsiniz. Bir seçenek [Visual Studio Code](https://code.visualstudio.com/), Windows, macOS ve Linux platformlarını kullanılabilir olduğu.
+Bu hızlı başlangıçtaki adımları tamamlamak için herhangi bir kod düzenleyicisini kullanabilirsiniz. Bir seçenek, Windows, macOS ve Linux platformlarında kullanılabilen [Visual Studio Code](https://code.visualstudio.com/).
 
-Bu öğreticinin kodu [AzureSignalR-samples GitHub deposundan](https://github.com/aspnet/AzureSignalR-samples/tree/master/samples/ChatRoom) indirilebilir. Ayrıca takip ederek, bu hızlı başlangıçta kullanılan Azure kaynaklarını oluşturabilirsiniz [SignalR hizmeti betik oluşturma](scripts/signalr-cli-create-service.md).
+Bu öğreticinin kodu [AzureSignalR-samples GitHub deposundan](https://github.com/aspnet/AzureSignalR-samples/tree/master/samples/ChatRoom) indirilebilir. Ayrıca, bu hızlı başlangıçta kullanılan Azure kaynaklarını [bir SignalR Hizmet betiği oluştur](scripts/signalr-cli-create-service.md)' u izleyerek oluşturabilirsiniz.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Yükleme [.NET Core SDK'sı](https://www.microsoft.com/net/download/windows).
-* İndirin veya kopyalayın [AzureSignalR örnek](https://github.com/aspnet/AzureSignalR-samples) GitHub deposu. 
+* [.NET Core SDK](https://www.microsoft.com/net/download/windows)'i yükler.
+* [AzureSignalR-Sample](https://github.com/aspnet/AzureSignalR-samples) GitHub deposunu indirin veya kopyalayın. 
 
 ## <a name="create-an-azure-signalr-resource"></a>Azure SignalR kaynağı oluşturma
 
@@ -39,20 +39,20 @@ Bu öğreticinin kodu [AzureSignalR-samples GitHub deposundan](https://github.co
 
 ## <a name="create-an-aspnet-core-web-app"></a>ASP.NET Core web uygulaması oluşturma
 
-Bu bölümde, kullandığınız [.NET Core komut satırı arabirimi (CLI)](https://docs.microsoft.com/dotnet/core/tools/) bir ASP.NET Core MVC web uygulaması projesi oluşturmak için. Visual Studio üzerinde .NET Core CLI kullanmanın avantajı, Windows, macOS ve Linux platformlar arasında kullanılabilir olmasıdır. 
+Bu bölümde, bir ASP.NET Core MVC web uygulaması projesi oluşturmak için [.NET Core komut satırı arabirimini (CLI)](https://docs.microsoft.com/dotnet/core/tools/) kullanacaksınız. Visual Studio üzerinden .NET Core CLI kullanmanın avantajı, Windows, macOS ve Linux platformları genelinde kullanılabilir hale gelir. 
 
-1. Projeniz için bir klasör oluşturun. Bu hızlı başlangıçta kullanılmaktadır *E:\Testing\chattest* klasör.
+1. Projeniz için bir klasör oluşturun. Bu hızlı başlangıç, *E:\Testing\chattest* klasörünü kullanır.
 
-2. Yeni klasör içinde projeyi oluşturmak için aşağıdaki komutu çalıştırın:
+2. Yeni klasörde, projeyi oluşturmak için aşağıdaki komutu çalıştırın:
 
         dotnet new mvc
 
 
 ## <a name="add-secret-manager-to-the-project"></a>Projeye Gizli Dizi Yöneticisi ekleme
 
-Bu bölümde, ekleyeceksiniz [gizli dizi Yöneticisi aracını](https://docs.microsoft.com/aspnet/core/security/app-secrets) projenize. Gizli dizi Yöneticisi aracını, proje ağacı dışında geliştirme çalışması için hassas verileri depolar. Bu yaklaşım, özel olarak kaynak kodunda yanlışlıkla uygulama sırrı paylaşılmasını önlemeye yardımcı olur.
+Bu bölümde, projenize [gizli yönetici aracını](https://docs.microsoft.com/aspnet/core/security/app-secrets) ekleyeceksiniz. Gizli dizi Yöneticisi Aracı, geliştirme çalışması için hassas verileri proje ağacınızdaki dışında depolar. Bu yaklaşım, kaynak kodundaki uygulama gizli anahtarlarının yanlışlıkla paylaşılmasını önlemeye yardımcı olur.
 
-1. *.csproj* dosyanızı açın. *Microsoft.Extensions.SecretManager.Tools* öğesini dahil etmek için bir `DotNetCliToolReference` öğesi ekleyin. Ayrıca bir `UserSecretsId` için aşağıdaki kodda gösterildiği gibi öğesi *chattest.csproj*ve dosyayı kaydedin.
+1. *.csproj* dosyanızı açın. `DotNetCliToolReference`Microsoft.Extensions.SecretManager.Tools*öğesini dahil etmek için bir* öğesi ekleyin. Ayrıca, *chattest. csproj*için aşağıdaki kodda gösterildiği gibi bir `UserSecretsId` öğesi ekleyin ve dosyayı kaydedin.
 
     ```xml
     <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -72,30 +72,30 @@ Bu bölümde, ekleyeceksiniz [gizli dizi Yöneticisi aracını](https://docs.mic
 
 ## <a name="add-azure-signalr-to-the-web-app"></a>Web uygulamasına Azure SignalR ekleme
 
-1. Bir başvuru ekleyin `Microsoft.Azure.SignalR` aşağıdaki komutu çalıştırarak NuGet paketi:
+1. Aşağıdaki komutu çalıştırarak `Microsoft.Azure.SignalR` NuGet paketine bir başvuru ekleyin:
 
         dotnet add package Microsoft.Azure.SignalR
 
-2. Projeniz için paketler geri yüklemek için aşağıdaki komutu çalıştırın:
+2. Projenizin paketlerini geri yüklemek için aşağıdaki komutu çalıştırın:
 
         dotnet restore
 
 3. Gizli Dizi Yöneticisi’ne *Azure:SignalR:ConnectionString* adlı bir gizli dizi ekleyin. 
 
-    Bu gizli dizi, SignalR Hizmetinizin kaynağına erişmeye yarayan bağlantı dizesini içerir. *Azure: SignalR:ConnectionString* SignalR arayan bir bağlantı kurmak için varsayılan yapılandırma anahtardır. Aşağıdaki komutta değeri, SignalR hizmet kaynağınızın bağlantı dizesiyle değiştirin.
+    Bu gizli dizi, SignalR Hizmetinizin kaynağına erişmeye yarayan bağlantı dizesini içerir. *Azure: SignalR: ConnectionString* , bir bağlantı kurmak Için SignalR 'nin aradığı varsayılan yapılandırma anahtarıdır. Aşağıdaki komutta bulunan değeri, SignalR hizmet kaynağınızın bağlantı dizesiyle değiştirin.
 
-    Aynı dizinde bu komutu çalıştırmanız gerekir *.csproj* dosya.
+    Bu komutu *. csproj* dosyasıyla aynı dizinde çalıştırmalısınız.
 
     ```
     dotnet user-secrets set Azure:SignalR:ConnectionString "<Your connection string>"    
     ```
 
-    Gizli dizi Yöneticisi'ni yerel olarak barındırılan sırasında yalnızca web uygulamasını test etmek için kullanılır. Bir sonraki öğreticide, Azure için Sohbet web uygulamasına dağıtacaksınız. Web uygulamasını Azure'a dağıtıldıktan sonra bağlantı dizesi ile gizli dizi Yöneticisi depolamak yerine bir uygulama ayarı kullanacaksınız.
+    Gizli dizi Yöneticisi, yalnızca yerel olarak barındırılırken Web uygulamasını test etmek için kullanılacaktır. Daha sonraki bir öğreticide, sohbet web uygulamasını Azure 'a dağıtırsınız. Web uygulaması Azure 'a dağıtıldıktan sonra, bağlantı dizesini gizli yönetici ile depolamak yerine bir uygulama ayarı kullanırsınız.
 
-    Bu gizli dizi yapılandırma API'si ile erişilir. İki nokta üst üste (:) Yapılandırma adı tüm desteklenen platformlarda yapılandırma API'si ile çalışır. Bkz: [ortama göre yapılandırma](https://docs.microsoft.com/aspnet/core/fundamentals/configuration/index?tabs=basicconfiguration&view=aspnetcore-2.0). 
+    Bu gizli dizi Yapılandırma API 'siyle erişilir. İki nokta (:) yapılandırma adında, desteklenen tüm platformlarda Yapılandırma API 'SI ile birlikte kullanılır. Bkz. [ortama göre yapılandırma](https://docs.microsoft.com/aspnet/core/fundamentals/configuration/index?tabs=basicconfiguration&view=aspnetcore-2.0). 
 
 
-4. *Startup.cs* dosyasını açın ve `services.AddSignalR().AddAzureSignalR()` yöntemini çağırarak `ConfigureServices` yöntemini Azure SignalR Hizmeti’ni kullanacak şekilde güncelleştirin:
+4. *Startup.cs* 'i açın ve yalnızca ASP.NET Core 2 için `services.AddSignalR().AddAzureSignalR()` metodunu çağırarak Azure SignalR hizmetini kullanmak üzere `ConfigureServices` yöntemini güncelleştirin:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -104,10 +104,11 @@ Bu bölümde, ekleyeceksiniz [gizli dizi Yöneticisi aracını](https://docs.mic
         services.AddSignalR().AddAzureSignalR();
     }
     ```
+    ASP.NET Core 3 + için, `ConfigureServices` yöntemi için gereken bir değişiklik yoktur.
 
-    Bir parametre geçmiyor tarafından `AddAzureSignalR()`, bu kod, SignalR hizmet kaynak bağlantı dizesi için varsayılan yapılandırma anahtarı kullanır. Varsayılan yapılandırma anahtarı *Azure: SignalR:ConnectionString*.
+    `AddAzureSignalR()`bir parametre geçirilmeyen Bu kod, SignalR hizmeti kaynak bağlantı dizesinin varsayılan yapılandırma anahtarını kullanır. Varsayılan yapılandırma anahtarı *Azure: SignalR: ConnectionString*.
 
-5. *Startup.cs* dosyasında da `app.UseStaticFiles()` çağrısını aşağıdaki kod ile değiştirerek `Configure` yöntemini güncelleştirin ve dosyayı kaydedin.
+5. Ayrıca *Startup.cs*içinde, aşağıdaki kodla `app.UseStaticFiles()` çağrısını değiştirerek `Configure` yöntemi güncelleştirin ve dosyayı yalnızca ASP.NET Core 2 için kaydedin.
 
     ```csharp
     app.UseFileServer();
@@ -116,19 +117,31 @@ Bu bölümde, ekleyeceksiniz [gizli dizi Yöneticisi aracını](https://docs.mic
         routes.MapHub<Chat>("/chat");
     });
     ```            
+    ASP.NET Core 3 + için yukarıdaki kodu ile değiştirin:
+
+    ```csharp
+    app.UseFileServer();
+    app.UseRouting();
+    app.UseAuthorization();
+
+    app.UseEndpoints(routes =>
+    {
+        routes.MapHub<Chat>("/chat");
+    });
+    ```
 
 ### <a name="add-a-hub-class"></a>Hub sınıfı ekleme
 
-SignalR öğesinde bir hub istemciden çağrılan yöntemler kümesi gösterir bir çekirdek bileşenidir. Bu bölümde, iki yöntemle bir hub sınıf tanımlayacaksınız: 
+SignalR 'de, bir hub, istemciden çağrılabilen bir yöntemler kümesini kullanıma sunan bir çekirdek bileşendir. Bu bölümde, iki yöntemle bir hub sınıf tanımlayacaksınız: 
 
-* `Broadcast`: Bu yöntem, tüm istemciler için bir ileti yayımlar.
-* `Echo`: Bu yöntem çağırana geri bir ileti gönderir.
+* `Broadcast`: Bu yöntem bir iletiyi tüm istemcilere yayınlar.
+* `Echo`: Bu yöntem bir iletiyi çağırana geri gönderir.
 
-Her iki yöntem kullanmak `Clients` sağlayan ASP.NET Core SignalR SDK'sı arabirimi. Bu arabirim, istemcilerinize içerik gönderebilmek için şekilde bağlanan tüm istemciler için erişmenizi sağlar.
+Her iki yöntem de ASP.NET Core SignalR SDK 'nın sağladığı `Clients` arabirimini kullanır. Bu arabirim, istemcilere içerik gönderebilmeniz için tüm bağlı istemcilere erişmenizi sağlar.
 
 1. Proje dizininizde *Hub* adlı yeni bir klasör ekleyin. Yeni klasöre *Chat.cs* adlı yeni bir hub kod dosyası ekleyin.
 
-2. Aşağıdaki kodu ekleyin *Chat.cs* hub sınıfınıza tanımlama ve dosyayı kaydedin. 
+2. Hub sınıfınızı tanımlamak ve dosyayı kaydetmek için *chat.cs* 'e aşağıdaki kodu ekleyin. 
 
     *Chattest* dışında bir proje adı kullandıysanız bu sınıfın ad alanını güncelleştirin.
 
@@ -153,13 +166,13 @@ Her iki yöntem kullanmak `Clients` sağlayan ASP.NET Core SignalR SDK'sı arabi
     }
     ```
 
-### <a name="add-the-client-interface-for-the-web-app"></a>Web uygulaması için istemci arabirimini ekleyin
+### <a name="add-the-client-interface-for-the-web-app"></a>Web uygulaması için istemci arabirimini ekleme
 
-Bu sohbet odası uygulama için istemci kullanıcı arabirimi, HTML ve JavaScript adındaki bir dosyaya oluşacaktır *index.html* içinde *wwwroot* dizin.
+Bu sohbet odası uygulamasının istemci kullanıcı arabirimi, *Wwwroot* dizinindeki *index. html* adlı bir dosyadaki HTML ve JavaScript 'ten oluşur.
 
-Kopyalama *index.html* dosyası *css* klasöründe ve *betikleri* klasöründen *wwwroot* klasörü [örnekleri Depo](https://github.com/aspnet/AzureSignalR-samples/tree/master/samples/ChatRoom/wwwroot). Bunları projenizin yapıştırın *wwwroot* klasör.
+[Samples deposunun](https://github.com/aspnet/AzureSignalR-samples/tree/master/samples/ChatRoom/wwwroot) *Wwwroot* klasöründen *index. html* dosyasını, *CSS* klasörünü ve *Scripts* klasörünü kopyalayın. Bunları projenizin *Wwwroot* klasörüne yapıştırın.
 
-Ana kodunu işte *index.html*: 
+*İndex. html*' in ana kodu aşağıda verilmiştir: 
 
 ```javascript
 var connection = new signalR.HubConnectionBuilder()
@@ -175,19 +188,19 @@ connection.start()
     });
 ```    
 
-Kodda *index.html* çağrıları `HubConnectionBuilder.build()` Azure SignalR kaynak için bir HTTP bağlantısı yapma.
+*İndex. html* dosyasındaki kod, Azure SignalR kaynağına http bağlantısı kurmak için `HubConnectionBuilder.build()` çağırır.
 
 Bağlantı başarılı olursa, o bağlantı `bindConnectionMessage` konumuna geçirilir ve istemciye gönderilen gelen içerik için olay işleyicileri ekler. 
 
-`HubConnection.start()`, hub ile iletişim başlatır. Ardından, `onConnected()` düğmesi olay işleyicisi ekler. Bu işleyiciler, bağlantıyı kullanarak bu istemcinin tüm bağlı istemcilere içerik güncelleştirmeleri göndermesine olanak tanır.
+`HubConnection.start()`, hub ile iletişim başlatır. Sonra, `onConnected()` düğme olay işleyicilerini ekler. Bu işleyiciler, bağlantıyı kullanarak bu istemcinin tüm bağlı istemcilere içerik güncelleştirmeleri göndermesine olanak tanır.
 
 ## <a name="add-a-development-runtime-profile"></a>Geliştirme çalışma zamanı profili ekleme
 
-Bu bölümde, ASP.NET Core için geliştirme çalışma zamanı ortamı ekleyeceksiniz. Daha fazla bilgi için [ASP.NET Core birden çok ortamda çalışın](https://docs.microsoft.com/aspnet/core/fundamentals/environments).
+Bu bölümde, ASP.NET Core için bir geliştirme çalışma zamanı ortamı ekleyeceksiniz. Daha fazla bilgi için bkz. [ASP.NET Core birden çok ortamla çalışma](https://docs.microsoft.com/aspnet/core/fundamentals/environments).
 
-1. Adlı bir klasör oluşturun *özellikleri* projenizdeki.
+1. Projenizde *Özellikler* adlı bir klasör oluşturun.
 
-2. Adlı yeni bir dosya ekleyin *launchSettings.json* klasörüne aşağıdaki içeriğe sahip ve dosyayı kaydedin.
+2. Aşağıdaki içerikle, *Launchsettings. JSON* adlı yeni bir dosyayı klasöre ekleyin ve dosyayı kaydedin.
 
     ```json
     {
@@ -208,17 +221,17 @@ Bu bölümde, ASP.NET Core için geliştirme çalışma zamanı ortamı ekleyece
     ```
 
 
-## <a name="build-and-run-the-app-locally"></a>Derleme ve uygulamayı yerel olarak çalıştırma
+## <a name="build-and-run-the-app-locally"></a>Uygulamayı yerel olarak derleyin ve çalıştırın
 
-1. .NET Core CLI'yı kullanarak uygulamayı oluşturmak için komut kabuğu'nda aşağıdaki komutu çalıştırın:
+1. .NET Core CLI kullanarak uygulamayı derlemek için komut kabuğu 'nda aşağıdaki komutu çalıştırın:
 
         dotnet build
 
-2. Yapılandırma başarıyla tamamlandıktan sonra web uygulamasını yerel olarak çalıştırmak için aşağıdaki komutu çalıştırın:
+2. Oluşturma başarıyla tamamlandıktan sonra, Web uygulamasını yerel olarak çalıştırmak için aşağıdaki komutu çalıştırın:
 
         dotnet run
 
-    Uygulama bizim geliştirme çalışma zamanı profilinde yapılandırılan 5000 numaralı yerel olarak barındırılacak:
+    Uygulama, geliştirme çalışma zamanı profilinizde yapılandırıldığı şekilde 5000 numaralı bağlantı noktasında yerel olarak barındırılır:
 
         E:\Testing\chattest>dotnet run
         Hosting environment: Development
@@ -226,32 +239,32 @@ Bu bölümde, ASP.NET Core için geliştirme çalışma zamanı ortamı ekleyece
         Now listening on: http://localhost:5000
         Application started. Press Ctrl+C to shut down.    
 
-3. İki tarayıcı penceresi açın. Her tarayıcıda Git `http://localhost:5000`. Adınızı girmeniz istenir. İstemcileri hem de test kullanarak her iki istemci arasında ileti içeriği gönderme için istemci adını **Gönder** düğmesi.
+3. İki tarayıcı penceresi açın. Her tarayıcıda `http://localhost:5000`' a gidin. Adınızı girmeniz istenir. Her iki istemci için bir istemci adı girin ve **Gönder** düğmesini kullanarak ileti içeriğini her iki istemci arasında iletme sınamasını yapın.
 
-    ![Azure SignalR bir grup Sohbeti örneği](media/signalr-quickstart-dotnet-core/signalr-quickstart-complete-local.png)
+    ![Azure SignalR grup sohbeti örneği](media/signalr-quickstart-dotnet-core/signalr-quickstart-complete-local.png)
 
 
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Sonraki öğreticiye devam edeceğiz, bu hızlı başlangıçta oluşturulan kaynakları tutmak ve bunları yeniden kullanın.
+Sonraki öğreticiye devam ederseniz, bu hızlı başlangıçta oluşturulan kaynakları tutabilir ve yeniden kullanabilirsiniz.
 
-Hızlı Başlangıç örnek uygulaması ile tamamlanan, ücretlerden kaçınmak için bu hızlı başlangıçta oluşturulan Azure kaynaklarını silebilirsiniz. 
+Hızlı Başlangıç örnek uygulamasıyla işiniz bittiğinde, ücretlerden kaçınmak için bu hızlı başlangıçta oluşturulan Azure kaynaklarını silebilirsiniz. 
 
 > [!IMPORTANT]
-> Bir kaynak grubu silme işlemi geri alınamaz ve gruptaki tüm kaynakları içerir. Yanlış kaynak grubunu veya kaynakları yanlışlıkla silmediğinizden emin olun. Bu örnek, korumak istediğiniz kaynakları içeren mevcut bir kaynak grubunda barındırmak için kaynaklar oluşturduysanız, her kaynak ayrı ayrı kaynak grubunun silinmesi yerine kendi dikey penceresinden silebilirsiniz.
+> Bir kaynak grubunun silinmesi geri alınamaz ve bu gruptaki tüm kaynakları içerir. Yanlış kaynak grubunu veya kaynakları yanlışlıkla silmediğinizden emin olun. Bu örneği tutmak istediğiniz kaynakları içeren mevcut bir kaynak grubunda barındırmak için kaynaklar oluşturduysanız, kaynak grubunu silmek yerine her kaynağı dikey penceresinden ayrı ayrı silebilirsiniz.
 > 
 > 
 
 [Azure portalda](https://portal.azure.com) oturum açın ve **Kaynak grupları**’nı seçin.
 
-İçinde **ada göre filtrele** metin kutusuna, kaynak grubunuzun adını yazın. Bu hızlı başlangıçtaki yönergelerde *SignalRTestResources* adlı bir kaynak grubu kullanılmıştır. Sonuç listesinde, kaynak grubu üzerinde üç noktayı seçin (**...** ) > **Kaynak grubunu Sil**.
+**Ada göre filtrele** metin kutusuna kaynak grubunuzun adını yazın. Bu hızlı başlangıçtaki yönergelerde *SignalRTestResources* adlı bir kaynak grubu kullanılmıştır. Sonuç listesindeki kaynak grubunuzda, **kaynak grubunu silmek**> üç nokta ( **...** ) simgesini seçin.
 
    
-![Bir kaynak grubu silme seçimleri](./media/signalr-quickstart-dotnet-core/signalr-delete-resource-group.png)
+![Kaynak grubunu silmeye yönelik seçimler](./media/signalr-quickstart-dotnet-core/signalr-delete-resource-group.png)
 
 
-Kaynak grubunun silinmesini onaylamanız istenir. Onayla ve kaynak grubunuzun adını girin **Sil**.
+Kaynak grubunun silinmesini onaylamanız istenir. Onaylamak için kaynak grubunuzun adını girin ve **Sil**' i seçin.
    
 Birkaç dakika sonra kaynak grubu ve bu gruptaki kaynakların tümü silinir.
 
@@ -259,7 +272,7 @@ Birkaç dakika sonra kaynak grubu ve bu gruptaki kaynakların tümü silinir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, yeni bir Azure SignalR hizmeti kaynağı oluşturdunuz. Ardından ASP.NET Core web uygulaması ile içerik güncelleştirmeleri gerçek zamanlı olarak birden fazla bağlı istemcilere göndermek için kullanılır. Azure SignalR hizmeti kullanma hakkında daha fazla bilgi edinmek için kimlik doğrulaması gösteren öğreticiye devam edin.
+Bu hızlı başlangıçta yeni bir Azure SignalR hizmeti kaynağı oluşturdunuz. Daha sonra, içerik güncelleştirmelerini gerçek zamanlı olarak birden çok bağlı istemciye göndermek için bir ASP.NET Core Web uygulamasıyla kullandınız. Azure SignalR hizmetini kullanma hakkında daha fazla bilgi edinmek için, kimlik doğrulamasını gösteren öğreticiye geçin.
 
 > [!div class="nextstepaction"]
 > [Azure SignalR Hizmeti kimlik doğrulaması](./signalr-concept-authenticate-oauth.md)

@@ -1,25 +1,18 @@
 ---
-title: Azure Iaas Linux VM diskleri hakkında sık sorulan sorular (SSS) | Microsoft Docs
-description: Azure Iaas Linux sanal diskler ve premium disklerin (yönetilen ve yönetilmeyen) hakkında sık sorulan sorular
-services: virtual-machines-linux
-documentationcenter: ''
+title: Azure IaaS Linux VM diskleri hakkında sık sorulan sorular (SSS)
+description: Azure IaaS Linux VM diskleri ve Premium diskler hakkında sık sorulan sorular (yönetilen ve yönetilmeyen)
 author: roygara
-manager: jeconnoc
-editor: tysonn
-ms.assetid: e2a20625-6224-4187-8401-abadc8f1de91
 ms.service: virtual-machines-linux
-ms.workload: ''
-ms.tgt_pltfrm: vm-linux
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 06/15/2017
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: 924214b7acb6280c691200b05dcc68b95cef3d00
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 71399c2e0e6065a01f84bac2d4c92a3be518e8d7
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60728760"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036180"
 ---
+# <a name="frequently-asked-questions-about-azure-iaas-vm-disks-and-managed-and-unmanaged-premium-disks"></a>Azure IaaS VM diskleri ve yönetilen ve yönetilmeyen Premium diskler hakkında sık sorulan sorular
 [!INCLUDE [virtual-machines-faq-for-disks](../../../includes/virtual-machines-faq-for-disks.md)]

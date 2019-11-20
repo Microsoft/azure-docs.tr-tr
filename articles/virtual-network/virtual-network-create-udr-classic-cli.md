@@ -1,10 +1,10 @@
 ---
-title: Denetim içinde bir Azure sanal ağ - CLI - Klasik yönlendirme | Microsoft Docs
-description: Klasik dağıtım modelinde Azure CLI kullanarak sanal ağ yönlendirmesini denetlemeyi öğrenin
+title: Azure sanal ağında denetim yönlendirme-CLı-klasik | Microsoft Docs
+description: Klasik dağıtım modelinde Azure CLı kullanarak VNET 'lerde yönlendirmeyi nasıl denetleyeceğinizi öğrenin
 services: virtual-network
 documentationcenter: na
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 tags: azure-service-management
 ms.assetid: ca2b4638-8777-4d30-b972-eb790a7c804f
@@ -15,14 +15,14 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/15/2016
 ms.author: genli
-ms.openlocfilehash: e1b8bb3544a08b60564ceb5bd7e1666214059e09
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1193145b315175e6394db4caf93ab2e76a942ed9
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60743930"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71058780"
 ---
-# <a name="control-routing-and-use-virtual-appliances-classic-using-the-azure-cli"></a>Yönlendirilmesini denetlemesini ve Azure CLI kullanarak sanal gereçler (Klasik) kullanma
+# <a name="control-routing-and-use-virtual-appliances-classic-using-the-azure-cli"></a>Azure CLı kullanarak yönlendirmeyi denetleme ve sanal gereçler (klasik) kullanma
 
 > [!div class="op_single_selector"]
 > * [PowerShell](tutorial-create-route-table-powershell.md)
@@ -34,16 +34,16 @@ ms.locfileid: "60743930"
 
 [!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
 
-Bu makale, klasik dağıtım modelini kapsamaktadır. Ayrıca [denetim Yönlendirme ve Resource Manager dağıtım modelinde sanal gereçler kullanma](tutorial-create-route-table-cli.md).
+Bu makale, klasik dağıtım modelini kapsamaktadır. Ayrıca [Kaynak Yöneticisi dağıtım modelinde yönlendirmeyi denetleyebilir ve sanal gereçler kullanabilirsiniz](tutorial-create-route-table-cli.md).
 
 [!INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
 
-Aşağıdaki örnek Azure CLI komutları, yukarıdaki senaryo temel alınarak oluşturulmuş basit bir ortam bekler. Bu belgede gösterildiği komutları çalıştırmak istiyorsanız, gösterilen ortam oluşturma [Azure CLI kullanarak bir Vnet'e (Klasik) oluşturmak](virtual-networks-create-vnet-classic-cli.md).
+Aşağıdaki örnek Azure CLı komutları, yukarıdaki senaryoya göre önceden oluşturulmuş basit bir ortam bekliyor. Komutları bu belgede görüntülendikleri gibi çalıştırmak istiyorsanız, [Azure CLI kullanarak VNET (klasik) oluşturma](virtual-networks-create-vnet-classic-cli.md)bölümünde gösterilen ortamı oluşturun.
 
 [!INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
 
-## <a name="create-the-udr-for-the-front-end-subnet"></a>Ön uç alt ağı için UDR oluşturun
-Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota oluşturmak için aşağıdaki adımları izleyin.
+## <a name="create-the-udr-for-the-front-end-subnet"></a>Ön uç alt ağı için UDR oluşturma
+Yukarıdaki senaryoya göre ön uç alt ağı için gereken yol tablosu ve yolu oluşturmak için aşağıdaki adımları izleyin.
 
 1. Klasik moda geçmek için aşağıdaki komutu çalıştırın:
 
@@ -55,7 +55,7 @@ Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota 
 
         info:    New mode is asm
 
-2. Bir ön uç alt ağı için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın:
+2. Ön uç alt ağı için bir yol tablosu oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```azurecli
     azure network route-table create -n UDR-FrontEnd -l uswest
@@ -72,9 +72,9 @@ Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota 
    
     Parametreler:
    
-   * **-l (veya --konum)** . Yeni NSG oluşturulacağı azure bölgesi. Bizim senaryomuz için *westus*.
-   * **-n (veya --name)** . Yeni NSG'nin adı. Bizim senaryomuz için *NSG ön uç*.
-3. İçin bir yol arka uç alt ağına (192.168.2.0/24) hedefleyen tüm trafiği göndermek için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın **FW1** VM (192.168.0.4):
+   * **-l (veya --konum)** . Yeni NSG 'nin oluşturulacağı Azure bölgesi. Senaryolarımız için *westus*.
+   * **-n (veya --name)** . Yeni NSG için ad. Senaryolarımız için *NSG-ön uç*.
+3. Bir arka uç alt ağına (192.168.2.0/24) giden tüm trafiği **FW1** VM 'sine (192.168.0.4) göndermek için yol tablosunda bir yol oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```azurecli
     azure network route-table route set -r UDR-FrontEnd -n RouteToBackEnd -a 192.168.2.0/24 -t VirtualAppliance -p 192.168.0.4
@@ -89,11 +89,11 @@ Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota 
    
     Parametreler:
    
-   * **-r (veya--yol tablosu adı)** . Rota ekleneceği yol tablosunun adı. Bizim senaryomuz için *UDR ön uç*.
-   * **-a (veya--adres-önek)** . Burada paketleri birleştirilmek üzere bir alt ağ için adres ön eki. Bizim senaryomuz için *192.168.2.0/24*.
-   * **-t (veya--sonraki atlama türü)** . Nesne trafik türü için gönderilir. Olası değerler *VirtualAppliance*, *VirtualNetworkGateway*, *VNETLocal*, *Internet*, veya *yok*.
-   * **-p (veya--sonraki atlama IP adresi**). Sonraki atlama IP adresi. Bizim senaryomuz için *192.168.0.4*.
-4. Oluşturulan rota tablosunu ilişkilendirmek için aşağıdaki komutu çalıştırın **ön uç** alt ağı:
+   * **-r (veya--Route-table-name)** . Yolun ekleneceği yol tablosunun adı. Senaryolarımız için *UDR-ön uç*.
+   * **-a (veya--adres-önek)** . Paketlerin hedefi olan alt ağın adres ön eki. Senaryolarımız için *192.168.2.0/24*.
+   * **-t (veya--Next-Hop-Type)** . Nesne trafiğinin türüne gönderileceği yer. Olası değerler *Virtualappliance*, *virtualnetworkgateway*, *vnetlocal*, *Internet*veya *none*.
+   * **-p (veya--Next-atlama-IP-adresi**). Sonraki atlama için IP adresi. Senaryolarımız için *192.168.0.4*.
+4. **Ön uç** alt ağıyla oluşturulan yol tablosunu ilişkilendirmek için aşağıdaki komutu çalıştırın:
 
     ```azurecli
     azure network vnet subnet route-table add -t TestVNet -n FrontEnd -r UDR-FrontEnd
@@ -114,25 +114,25 @@ Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota 
    
     Parametreler:
    
-   * **-t (veya--vnet-ad)** . Alt ağ bulunduğu Vnet'in adı. Bizim senaryomuz için bu *TestVNet* ’tir.
-   * **-n (veya--alt ağ adı**. Adı alt ağın yol tablosuna eklenir. Bizim senaryomuz için bu *FrontEnd* ’dir.
+   * **-t (veya--VNET-adı)** . Alt ağın bulunduğu VNet 'in adı. Bizim senaryomuz için bu *TestVNet* ’tir.
+   * **-n (veya--alt ağ-adı**. Yol tablosunun ekleneceği alt ağın adı. Bizim senaryomuz için bu *FrontEnd* ’dir.
 
-## <a name="create-the-udr-for-the-back-end-subnet"></a>Arka uç alt ağı için UDR oluşturun
-Yol tablosu ve senaryo temel alınarak arka uç alt ağı için rota oluşturmak için aşağıdaki adımları tamamlayın:
+## <a name="create-the-udr-for-the-back-end-subnet"></a>Arka uç alt ağı için UDR 'yi oluşturma
+Senaryoya bağlı olarak arka uç alt ağı için yol tablosu ve yolu oluşturmak üzere aşağıdaki adımları izleyin:
 
-1. Arka uç alt ağı için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın:
+1. Arka uç alt ağı için bir yol tablosu oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```azurecli
     azure network route-table create -n UDR-BackEnd -l uswest
     ```
 
-2. İçin bir yol (192.168.1.0/24) ön uç alt ağı hedefleyen tüm trafiği göndermek için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın **FW1** VM (192.168.0.4):
+2. Ön uç alt ağına (192.168.1.0/24) giden tüm trafiği **FW1** VM 'sine (192.168.0.4) göndermek için yol tablosunda bir yol oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```azurecli
     azure network route-table route set -r UDR-BackEnd -n RouteToFrontEnd -a 192.168.1.0/24 -t VirtualAppliance -p 192.168.0.4
     ```
 
-3. Yol tablosu ile ilişkilendirmek için aşağıdaki komutu çalıştırın **arka uç** alt ağı:
+3. Yol tablosunu **arka uç** alt ağıyla ilişkilendirmek için aşağıdaki komutu çalıştırın:
 
     ```azurecli
     azure network vnet subnet route-table add -t TestVNet -n BackEnd -r UDR-BackEnd

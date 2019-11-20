@@ -4,15 +4,15 @@ description: VPN ağ geçidi ölçümler üzerinde uyarılar yapılandırma adı
 services: vpn-gateway
 author: anzaman
 ms.service: vpn-gateway
-ms.topic: conceptional
+ms.topic: conceptual
 ms.date: 04/22/2019
 ms.author: alzam
-ms.openlocfilehash: e54dadbda0582095e8152ea30376d369177bfd86
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d57663f683ba4e2107ec6813a19fac7b2dcdd26a
+ms.sourcegitcommit: f10ae7078e477531af5b61a7fe64ab0e389830e8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65509900"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67605225"
 ---
 # <a name="set-up-alerts-on-vpn-gateway-metrics"></a>VPN ağ geçidi ölçümler üzerinde uyarılar ayarlayın
 
@@ -23,7 +23,7 @@ Bu makalede Azure VPN ağ geçidi ölçümler ile ilgili uyarılar ayarlamanıza
 |---       | ---        | ---       | ---            | ---       |
 |**AverageBandwidth**| Bayt/sn  | 5 dakika| Ortalama ağ geçidine siteden siteye bağlantılarda tüm birleştirilmiş bant genişliği kullanımı.     |
 |**P2SBandwidth**| Bayt/sn  | 1 dakika  | Ortalama ağ geçidi tüm noktadan siteye bağlantıları birleştirilmiş bant genişliği kullanımı.    |
-|**P2SConnectionCount**| Sayı  | 1 dakika  | Ağ geçidinde noktadan siteye bağlantıları sayısı.   |
+|**P2SConnectionCount**| Count  | 1 dakika  | Ağ geçidinde noktadan siteye bağlantıları sayısı.   |
 |**TunnelAverageBandwidth** | Bayt/sn    | 5 dakika  | Ortalama ağ geçidi üzerinde oluşturulan tünelleri bant genişliği kullanımı. |
 |**TunnelEgressBytes** | Bayt | 5 dakika | Giden trafiği ağ geçidi üzerinde oluşturulan tünelinde.   |
 |**TunnelEgressPackets** | Count | 5 dakika | Ağ geçidi üzerinde oluşturulan tünelinde giden paketlerin sayısı.   |

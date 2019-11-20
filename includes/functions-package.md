@@ -2,24 +2,24 @@
 title: include dosyası
 description: include dosyası
 services: functions
-author: tdykstra
+author: ggailey777
 manager: cfowler
-ms.service: functions
+ms.service: azure-functions
 ms.topic: include
 ms.date: 05/23/2018
-ms.author: tdykstra
+ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 3a28cd710d1ca2f1d54293c5342300b05a8e7180
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 55e57d12b6d632f19318f221a49668804724e865
+ms.sourcegitcommit: c0419208061b2b5579f6e16f78d9d45513bb7bbc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188164"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67659921"
 ---
 Aşağıdaki tabloda, bu bağlama için destek her geliştirme ortamında nasıl ekleyeceğiniz anlatılmaktadır.
 
 | Geliştirme ortamı               | Desteği eklemek için <br>İşlevler 1.x  |
 |----------------------|----------------|
-|Yerel geliştirme - C# sınıf kitaplığı       | [Paketi yükleyin](../articles/azure-functions/functions-bindings-register.md#c-class-library-with-visual-studio-2019) | 
+|Yerel geliştirme - C# sınıf kitaplığı       | [Paketi yükleyin](../articles/azure-functions/functions-bindings-register.md#vs) | 
 |Yerel geliştirme - C# komut dosyası, JavaScriptF# |Otomatik         |
 |Portal geliştirme|  Otomatik    |

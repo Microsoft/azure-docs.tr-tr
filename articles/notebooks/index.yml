@@ -2,14 +2,13 @@
 documentType: LandingData
 title: Azure Notebooks Belgeleri
 metadata:
-  title: 'Azure Notebooks Belgeleri - Hızlı Başlangıçlar, Öğreticiler, Kılavuzlar | Microsoft Docs'
+  title: Azure Notebooks Belgeleri
   description: 'Barındırılan Azure Notebooks hizmeti aracılığıyla Jupyter not defterlerini oluşturmayı, çalıştırmayı ve paylaşmayı öğrenin.'
   services: notebooks
   author: kraigb
-  manager: douge
+  manager: barbkess
   ms.service: azure-notebooks
   ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
   ms.date: 12/04/2018
   ms.author: kraigb

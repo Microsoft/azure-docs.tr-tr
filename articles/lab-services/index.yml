@@ -1,56 +1,89 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Lab Services ve Azure DevTest Labs Belgeleri
+### YamlMime:Landing
+title: Azure DevTest Labs belgeleri
+summary: Azure DevTest Labs’i kullanarak bulutta takımınız veya öğrencileriniz için bir geliştirme, test, hackathon ya da sınıf laboratuvarını hızla ayarlamayı öğrenin.
 metadata:
-  title: 'Azure Lab Services Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: 'Azure Lab Services’i kullanarak bulutta takımınız veya öğrencileriniz için bir geliştirme, test, hackathon ya da sınıf laboratuvarını hızlıca ayarlama hakkında bilgi edinin. Azure Öğreticileri, örnekler ve diğer kaynaklarda laboratuvarları oluşturma, yönetme ve güvenli hale getirme hakkında bilgi verilmektedir.'
+  title: Azure DevTest Labs belgeleri
+  description: Azure DevTest Labs’i kullanarak bulutta takımınız veya öğrencileriniz için bir geliştirme, test, hackathon ya da sınıf laboratuvarını hızla ayarlamayı öğrenin.
   services: lab-services
-  author: spelluru
-  manager: null
   ms.service: lab-services
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: 
   ms.topic: landing-page
-  ms.date: 04/06/2018
+  ms.collection: collection
+  author: spelluru
   ms.author: spelluru
-abstract:
-  description: 'Azure Lab Services’i kullanarak bulutta takımınız veya öğrencileriniz için bir geliştirme, test, hackathon ya da sınıf laboratuvarını hızlıca ayarlama hakkında bilgi edinin. Azure Öğreticileri, örnekler ve diğer kaynaklarda laboratuvarları oluşturma, yönetme ve güvenli hale getirme hakkında bilgi verilmektedir.'
-sections:
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Azure Lab Services’i kullanarak bir <b>sınıf laboratuvarı</b> oluşturma ve kullanma hakkında bilgi edinin.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/lab-services/classroom-labs/tutorial-setup-lab-account">Bir laboratuvar hesabı ayarlama</a>
-          - html: <a href="/azure/lab-services/classroom-labs/tutorial-setup-classroom-lab">Bir sınıf laboratuvarı ayarlama</a>
-          - html: <a href="/azure/lab-services/classroom-labs/tutorial-connect-virtual-machine-classroom-lab">Bir sınıf laboratuvarına erişim</a>
-      - type: paragraph
-        text: Azure DevTest Labs kullanarak bir <b>laboratuvar</b> oluşturup kullanmayı öğrenin.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/lab-services/tutorial-create-custom-lab">Laboratuvar ayarlama</a>
-          - html: <a href="/azure/lab-services/tutorial-use-custom-lab">Laboratuvara erişme</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Lab Services ile çalışmak için aşağıdaki örnekleri kullanın.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: '<a href="https://github.com/Azure/azure-devtestlab/tree/master/samples/DevTestLabs/QuickStartTemplates">Resource Manager şablonları</a>'
-          - html: <a href="/azure/lab-services/samples-cli">Azure CLI</a>
-          - html: <a href="/azure/lab-services/samples-powershell">Azure PowerShell</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: '<p><a href="/cli/azure/lab">Azure CLI</a></p><p><a href="/powershell/module/az.devtestlabs/#devtest_labs">Azure PowerShell</a></p>'
-          - title: REST
-            html: <p><a href="/rest/api/dtl">REST API</a></p>
+  ms.date: 09/26/2019
+  ms.openlocfilehash: 1cfb86a37068d4cd928081446e6bf9ad381bbd86
+  ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/23/2019
+  ms.locfileid: "72790958"
+landingContent:
+- title: Başlarken
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: DevTest Laboratuvarları Hakkında
+      url: devtest-lab-overview.md
+    - text: DevTest Labs ve Lab Services hakkında
+      url: lab-services-overview.md
+  - linkListType: concept
+    links:
+    - text: DevTest Labs kavramları
+      url: devtest-lab-concepts.md
+    - text: Popüler senaryolar
+      url: devtest-lab-guidance-get-started.md
+  - linkListType: tutorial
+    links:
+    - text: Laboratuvar ayarlama
+      url: tutorial-create-custom-lab.md
+    - text: Laboratuvara erişme
+      url: tutorial-use-custom-lab.md
+- title: Yapıtlar
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: VM’ye yapıt ekleme
+      url: add-artifact-vm.md
+    - text: Özel yapıtlar oluşturma
+      url: devtest-lab-artifact-author.md
+    - text: Zorunlu yapıtları belirtme
+      url: devtest-lab-mandatory-artifacts.md
+    - text: Yapıt sorunlarını giderme
+      url: devtest-lab-troubleshoot-artifact-failure.md
+- title: Ortamlar
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Genel ortamları yapılandırma ve kullanma
+      url: devtest-lab-configure-use-public-environments.md
+    - text: Ortam oluşturma
+      url: devtest-lab-create-environment-from-arm.md
+    - text: Hizmet olarak platform hizmetlerini kullanma
+      url: use-paas-services.md
+    - text: Laboratuvarın sanal ağına bağlanma
+      url: connect-environment-lab-virtual-network.md
+    - text: Ortam hatalarında sorun giderme
+      url: troubleshoot-vm-environment-creation-failures.md
+- title: Başvuru içeriğimizi keşfetme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure CLI
+      url: /cli/azure/lab
+    - text: PowerShell
+      url: /powershell/module/az.devtestlabs/#devtest_labs
+    - text: REST
+      url: /rest/api/dtl
+- title: Şablonlar
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Özel görüntü ve Formül
+      url: devtest-lab-comparing-vm-base-image-types.md
+  - linkListType: how-to-guide
+    links:
+    - text: VM’den özel görüntü oluşturma
+      url: devtest-lab-create-custom-image-from-vm-using-portal.md
+    - text: Formülleri yönetme
+      url: devtest-lab-manage-formulas.md

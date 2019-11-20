@@ -1,7 +1,6 @@
 ---
 title: 'Öğretici: AzCopy komutunu kullanarak Azure Depolama’ya şirket içi verileri geçirme| Microsoft Docs'
 description: Bu öğreticide AzCopy komutunu kullanarak blob, tablo ve dosya içeriğine/içeriğinden verileri geçirecek veya kopyalayacaksınız. Yerel depolama alanınızdan Azure Depolama’ya kolayca verileri geçirin.
-services: storage
 author: normesta
 ms.service: storage
 ms.topic: tutorial
@@ -9,12 +8,12 @@ ms.date: 05/14/2019
 ms.author: normesta
 ms.reviewer: seguler
 ms.subservice: common
-ms.openlocfilehash: 193c00354b6222152e26476d0b06cfb1555c207e
-ms.sourcegitcommit: 45e4466eac6cfd6a30da9facd8fe6afba64f6f50
+ms.openlocfilehash: 5f09ae7dc625ad579e31fd49d70331f30e6a708a
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/07/2019
-ms.locfileid: "66754886"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68844897"
 ---
 #  <a name="tutorial-migrate-on-premises-data-to-cloud-storage-by-using-azcopy"></a>Öğretici: AzCopy komutunu kullanarak bulut depolamaya şirket içi verileri geçirme
 
@@ -32,7 +31,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticiyi tamamlamak için en güncel AzCopy sürümünü indirin. Bkz: [Azcopy'i kullanmaya başlama](storage-use-azcopy-v10.md).
+Bu öğreticiyi tamamlayabilmeniz için AzCopy 'in en son sürümünü indirin. Bkz. [AzCopy ile çalışmaya başlama](storage-use-azcopy-v10.md).
 
 Windows kullanıyorsanız bu öğreticide görev zamanlamak için kullanılan [Schtasks](https://msdn.microsoft.com/library/windows/desktop/bb736357(v=vs.85).aspx) uygulamasını edinmeniz gerekir. Linux kullanıcıları bunun yerine crontab komutunu kullanacaktır.
 
@@ -53,17 +52,17 @@ Kapsayıcı harfleri bir harf veya sayı ile başlamalıdır. Bunlar yalnızca h
 
 ## <a name="download-azcopy"></a>AzCopy indirin
 
-AzCopy V10 yürütülebilir dosyasını indirin.
+AzCopy Ile v10 arasındaki çalıştırılabilir dosyasını indirin.
 
-- [Windows](https://aka.ms/downloadazcopy-v10-windows) (zip)
-- [Linux](https://aka.ms/downloadazcopy-v10-linux) (tar)
-- [MacOS](https://aka.ms/downloadazcopy-v10-mac) (zip)
+- [Windows](https://aka.ms/downloadazcopy-v10-windows) zip
+- [Linux](https://aka.ms/downloadazcopy-v10-linux) IK
+- [MacOS](https://aka.ms/downloadazcopy-v10-mac) zip
 
-AzCopy dosyasını bilgisayarınızdaki herhangi bir yere yerleştirin. Bu yürütülebilir dosyayı bilgisayarınızda herhangi bir klasörden başvurabilmeniz için dosyanın konumunu sistem path değişkenine ekleyin.
+AzCopy dosyasını bilgisayarınızda herhangi bir yere yerleştirin. Bilgisayarınızdaki herhangi bir klasörden bu yürütülebilir dosyaya başvurabilmeniz için dosyanın konumunu sistem yolu değişkeninizden ekleyin.
 
 ## <a name="authenticate-with-azure-ad"></a>Azure AD ile kimlik doğrulaması
 
-İlk olarak, Ata [depolama Blob verileri katkıda bulunan](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-queue-data-contributor) kimliğinize rol. Bkz: [verilere Azure blob ve kuyruk RBAC ile Azure portalında erişim ver](https://docs.microsoft.com/azure/storage/common/storage-auth-aad-rbac-portal).
+İlk olarak, [Depolama Blobu veri katılımcısı](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-queue-data-contributor) rolünü kimliğinize atayın. Bkz. [Azure Blob 'a erişim verme ve Azure Portal RBAC ile kuyruk verileri](https://docs.microsoft.com/azure/storage/common/storage-auth-aad-rbac-portal).
 
 Ardından, bir komut istemi açın, aşağıdaki komutu yazın ve ENTER tuşuna basın.
 
@@ -71,11 +70,11 @@ Ardından, bir komut istemi açın, aşağıdaki komutu yazın ve ENTER tuşuna 
 azcopy login
 ```
 
-Bu komut, kimlik doğrulaması kodu ve bir Web sitesinin URL'sini döndürür. Web sitesini açmak, kodu sağlayın ve ardından **sonraki** düğmesi.
+Bu komut, bir kimlik doğrulama kodu ve bir Web sitesinin URL 'sini döndürür. Web sitesini açın, kodu sağlayın ve sonra **İleri** düğmesini seçin.
 
 ![Bir kapsayıcı oluşturma](media/storage-use-azcopy-v10/azcopy-login.png)
 
-Bir oturum açma penceresi görünür. Bu pencerede, Azure hesabı kimlik bilgilerinizi kullanarak Azure hesabınızda oturum açın. Oturumunuz başarıyla açıldıktan sonra tarayıcı penceresini kapatın ve AzCopy kullanarak başlayın.
+Oturum açma penceresi görüntülenir. Bu pencerede, Azure hesabı kimlik bilgilerinizi kullanarak Azure hesabınızda oturum açın. Başarıyla oturum açtıktan sonra, tarayıcı penceresini kapatabilir ve AzCopy kullanmaya başlayabilirsiniz.
 
 ## <a name="upload-contents-of-a-folder-to-blob-storage"></a>Bir klasörün içeriğini Blob depolama alanına yükleme
 
@@ -85,31 +84,31 @@ AzCopy komutunu kullanarak, bir klasördeki tüm dosyaları, [Windows](https://d
 azcopy copy "<local-folder-path>" "https://<storage-account-name>.<blob or dfs>.core.windows.net/<container-name>" --recursive=true
 ```
 
-* Değiştirin `<local-folder-path>` dosyalarını içeren bir klasörün yolu ile yer tutucu (örneğin: `C:\myFolder` veya `/mnt/myFolder`).
+* Yer tutucusunu `<local-folder-path>` , dosya içeren bir klasörün yolu ile değiştirin (örneğin: `C:\myFolder` veya `/mnt/myFolder`).
 
-* Değiştirin `<storage-account-name>` depolama hesabınızın adıyla yer tutucu.
+* `<storage-account-name>` Yer tutucusunu depolama hesabınızın adıyla değiştirin.
 
-* Değiştirin `<container-name>` tutucusunu oluşturduğunuz kapsayıcısının adı.
+* Yer tutucusunu `<container-name>` , oluşturduğunuz kapsayıcının adıyla değiştirin.
 
-Belirtilen dizinin içeriklerini Blob depolama alanına yinelemeli olarak yüklemek için belirtin `--recursive` seçeneği. Bu seçenekle, AzCopy çalıştırdığınızda tüm alt klasörler ve bunların dosyaları da karşıya yüklenir.
+Belirtilen dizinin içeriğini BLOB depolama alanına yinelemeli olarak yüklemek için, `--recursive` seçeneğini belirtin. AzCopy komutunu bu seçenekle çalıştırdığınızda, tüm alt klasörler ve dosyaları da karşıya yüklenir.
 
 ## <a name="upload-modified-files-to-blob-storage"></a>Değiştirilen dosyaları Blob depolama alanına yükleme
 
-Kendi son değiştirilme zamanına göre dosyaları karşıya yüklemek için AzCopy kullanabilirsiniz. 
+En son değiştirilme zamanına göre dosyaları karşıya yüklemek için AzCopy kullanabilirsiniz. 
 
-Bunu denemek için, test amacıyla kaynak dizininizde yeni dosyalar oluşturun veya değiştirin. Ardından, Azcopy'yi kullanma `sync` komutu.
+Bunu denemek için, test amacıyla kaynak dizininizde yeni dosyalar oluşturun veya değiştirin. Ardından AzCopy `sync` komutunu kullanın.
 
 ```AzCopy
 azcopy sync "<local-folder-path>" "https://<storage-account-name>.blob.core.windows.net/<container-name>" --recursive=true
 ```
 
-* Değiştirin `<local-folder-path>` dosyalarını içeren bir klasörün yolu ile yer tutucu (örneğin: `C:\myFolder` veya `/mnt/myFolder`.
+* Yer tutucusunu `<local-folder-path>` , dosya içeren bir klasörün yolu ile değiştirin (örneğin: `C:\myFolder` veya `/mnt/myFolder`.
 
-* Değiştirin `<storage-account-name>` depolama hesabınızın adıyla yer tutucu.
+* `<storage-account-name>` Yer tutucusunu depolama hesabınızın adıyla değiştirin.
 
-* Değiştirin `<container-name>` tutucusunu oluşturduğunuz kapsayıcısının adı.
+* Yer tutucusunu `<container-name>` , oluşturduğunuz kapsayıcının adıyla değiştirin.
 
-Hakkında daha fazla bilgi edinmek için `sync` komutu, bkz: [eşitleme dosyaları](storage-use-azcopy-blobs.md#synchronize-files).
+`sync` Komutu hakkında daha fazla bilgi edinmek için bkz. [Synchronize Files](storage-use-azcopy-blobs.md#synchronize-files).
 
 ## <a name="create-a-scheduled-task"></a>Zamanlanmış görev oluşturma
 
@@ -117,10 +116,10 @@ AzCopy komut betiğini çalıştıran bir zamanlanmış görev veya sıralanmı�
 
 AzCopy komutunu bir metin düzenleyiciye kopyalayın. AzCopy komutunun parametre değerlerini uygun değerlerle güncelleştirin. Dosyayı, AzCopy için `script.sh` (Linux) veya `script.bat` (Windows) olarak kaydedin. 
 
-Bu örnekler klasörünüze adlandırıldığını varsayar `myFolder`, depolama hesabınızın adını `mystorageaccount` ve kapsayıcı adınız `mycontainer`.
+Bu örneklerde, klasörünüzün adlandırıldığı `myFolder`, depolama hesabınızın `mystorageaccount` adı ve kapsayıcının adı olduğu `mycontainer`varsayılır.
 
 > [!NOTE]
-> Linux örnek bir SAS belirteci ekler. Komutunuz birinde sağlamanız gerekir. AzCopy V10'ın geçerli sürümü, Azure AD yetkilendirme cron işlerinde desteklemiyor.
+> Linux örneği bir SAS belirteci ekler. Komutunuz için bir tane sağlamanız gerekir. AzCopy Ile v10 arasındaki 'ın geçerli sürümü cron işlerinde Azure AD yetkilendirmesini desteklemez.
 
 # <a name="linuxtablinux"></a>[Linux](#tab/linux)
 
@@ -151,7 +150,7 @@ Komutta `*/5 * * * *` sıralanmış iş ifadesi belirtilmesi, `script.sh` kabuk 
 
 Windows üzerinde zamanlanmış görev oluşturmak için, komut satırına veya PowerShell’e aşağıdaki komutu girin:
 
-Bu örnek kodunuzu, bilgisayarın kök sürücüsünde bulunur, ancak betiğinizi, her yerde, istediğiniz olabilir varsayar.
+Bu örnek, betiğinizin bilgisayarınızın kök sürücüsünde bulunduğunu varsayar, ancak betiğinizin istediğiniz her yerde olabilir.
 
 ```cmd
 schtasks /CREATE /SC minute /MO 5 /TN "AzCopy Script" /TR C:\script.bat
@@ -175,14 +174,14 @@ Zamanlanmış görevin/sıralanmış işin düzgün şekilde çalıştığını 
 
 * [Azure Depolamadan/Depolamaya veri taşıma](https://docs.microsoft.com/azure/storage/common/storage-moving-data?toc=%2fazure%2fstorage%2ffiles%2ftoc.json).  
 
-AzCopy hakkında daha fazla bilgi için şu makalelerden herhangi birine bakın:
+AzCopy hakkında daha fazla bilgi için şu makalelerden birine bakın:
 
-* [Azcopy'i kullanmaya başlama](storage-use-azcopy-v10.md)
+* [AzCopy ile çalışmaya başlama](storage-use-azcopy-v10.md)
 
-* [AzCopy ve blob depolama ile veri aktarma](storage-use-azcopy-blobs.md)
+* [AzCopy ve BLOB Storage ile veri aktarma](storage-use-azcopy-blobs.md)
 
 * [AzCopy ve dosya depolama ile veri aktarma](storage-use-azcopy-files.md)
 
 * [AzCopy ve Amazon S3 demetleri ile veri aktarma](storage-use-azcopy-s3.md)
  
-* [Yapılandırma, en iyi duruma getirmek ve AzCopy sorunlarını giderme](storage-use-azcopy-configure.md)
+* [AzCopy 'i yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)

@@ -1,6 +1,6 @@
 ---
-title: Uzaktan izleme çözümünü yerel olarak (Visual Studio Code) - Azure'ı dağıtma | Microsoft Docs
-description: Bu nasıl yapılır kılavuzunda test ve geliştirme için Visual Studio Code kullanarak yerel makinenize Uzaktan izleme çözüm Hızlandırıcısını dağıtmayı gösterir.
+title: Uzaktan Izleme çözümünü yerel olarak dağıtma-Visual Studio Code-Azure | Microsoft Docs
+description: Bu nasıl yapılır kılavuzunda, test ve geliştirme için Visual Studio Code kullanarak uzaktan izleme çözümü hızlandırıcısının yerel makinenize nasıl dağıtılacağı gösterilmektedir.
 author: avneet723
 manager: hegate
 ms.author: avneets
@@ -8,99 +8,99 @@ ms.service: iot-accelerators
 services: iot-accelerators
 ms.date: 01/17/2019
 ms.topic: conceptual
-ms.openlocfilehash: ed3301eb0e723e05e2a642ffea2f1609032553b4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8f1d20e9a6a78d99a23fe4b98aeb4f3eb8359da7
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66730184"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890950"
 ---
-# <a name="deploy-the-remote-monitoring-solution-accelerator-locally---visual-studio-code"></a>Uzaktan izleme çözüm Hızlandırıcısını yerel olarak - Visual Studio kod dağıtma
+# <a name="deploy-the-remote-monitoring-solution-accelerator-locally---visual-studio-code"></a>Uzaktan Izleme çözüm hızlandırıcıyı yerel olarak dağıtma-Visual Studio Code
 
 [!INCLUDE [iot-accelerators-selector-local](../../includes/iot-accelerators-selector-local.md)]
 
-Bu makalede, test ve geliştirme için yerel makinenize Uzaktan izleme çözüm Hızlandırıcısını dağıtma işlemini göstermektedir. Mikro hizmetler, Visual Studio Code'da çalıştırmayı öğrenin. Yerel mikro hizmetlerin dağıtımı aşağıdaki bulut hizmetlerini kullanır: IOT Hub, Cosmos DB, Azure akış analizi ve Azure Time Series Insights.
+Bu makalede, test ve geliştirme için uzaktan Izleme çözümü hızlandırıcısının yerel makinenize nasıl dağıtılacağı gösterilmektedir. Visual Studio Code 'de mikro hizmetleri çalıştırmayı öğreneceksiniz. Yerel bir mikro hizmet dağıtımı şu bulut hizmetlerini kullanır: IoT Hub, Cosmos DB, Azure Akış Analizi ve Azure Time Series Insights.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Uzaktan izleme çözüm Hızlandırıcısını tarafından kullanılan Azure Hizmetleri dağıtmak için bir etkin Azure aboneliği gerekir.
+Uzaktan Izleme çözümü Hızlandırıcısı tarafından kullanılan Azure hizmetlerini dağıtmak için etkin bir Azure aboneliğine ihtiyacınız vardır.
 
-Hesabınız yoksa yalnızca birkaç dakika içinde ücretsiz bir deneme sürümü hesabı oluşturabilirsiniz. Ayrıntılar için bkz [Azure ücretsiz deneme sürümü](https://azure.microsoft.com/pricing/free-trial/).
+Hesabınız yoksa yalnızca birkaç dakika içinde ücretsiz bir deneme sürümü hesabı oluşturabilirsiniz. Ayrıntılar için bkz. [Azure Ücretsiz Deneme](https://azure.microsoft.com/pricing/free-trial/).
 
 ### <a name="machine-setup"></a>Makine Kurulumu
 
-Yerel dağıtımını tamamlamak için aşağıdaki araçları, yerel geliştirme makinenizde yüklü gerekir:
+Yerel dağıtımı tamamlamaya yönelik olarak, yerel geliştirme makinenizde aşağıdaki araçların yüklü olması gerekir:
 
 * [Git](https://git-scm.com/)
 * [.NET Core](https://dotnet.microsoft.com/download)
 * [Docker](https://www.docker.com)
-* [Nginx](https://nginx.org/en/download.html)
+* [NGINX](https://nginx.org/en/download.html)
 * [Visual Studio Code](https://code.visualstudio.com/)
-* [VS Code'nın C# uzantısı](https://code.visualstudio.com/docs/languages/csharp)
-* [Node.js v8](https://nodejs.org/) -bu yazılımları Azure kaynaklarını oluşturmayı betiklerini kullanan bilgisayarları CLI önkoşuldur. Node.js v10 kullanmayın
+* [VS Code C# uzantısı](https://code.visualstudio.com/docs/languages/csharp)
+* [Node. js V8](https://nodejs.org/) -bu yazılım, betiklerin Azure kaynakları oluşturmak IÇIN KULLANDıĞı bilgisayar CLI için bir önkoşuldur. Node. js ile v10 arasındaki kullanma
 
 > [!NOTE]
 > Visual Studio Code, Windows, Mac ve Ubuntu için kullanılabilir.
 
 [!INCLUDE [iot-accelerators-local-setup](../../includes/iot-accelerators-local-setup.md)]
 
-## <a name="run-the-microservices"></a>Mikro Hizmetleri çalıştırın
+## <a name="run-the-microservices"></a>Mikro hizmetleri çalıştırma
 
-Bu bölümde, Uzaktan izleme mikro Hizmetleri çalıştırın. Web kullanıcı Arabirimi yerel olarak çalıştırdığınızda Docker cihaz benzetimi hizmetinde ve Visual Studio code'da mikro hizmetler.
+Bu bölümde, uzaktan Izleme mikro hizmetlerini çalıştırırsınız. Web Kullanıcı arabirimini yerel olarak, Docker 'daki cihaz benzetimi hizmetini ve Visual Studio Code mikro hizmetleri çalıştırın.
 
 ### <a name="build-the-code"></a>Kodu oluşturma
 
-Komut isteminde azure-iot-pcs-remote-monitoring-dotnet\services gidin ve Kodu derlemek için aşağıdaki komutları çalıştırın.
+Komut isteminde Azure-iot-PCs-Remote-Monitoring-dotnet\services adresine gidin ve kodu derlemek için aşağıdaki komutları çalıştırın.
 
 ```cmd
 dotnet restore
 dotnet build -c Release
 ```
 
-### <a name="deploy-all-other-microservices-on-local-machine"></a>Yerel makinede diğer mikro hizmetlerin dağıtımı
+### <a name="deploy-all-other-microservices-on-local-machine"></a>Tüm diğer mikro hizmetleri yerel makinede dağıt
 
-Aşağıdaki adımlar Visual Studio Code'da Uzaktan izleme mikro hizmetleri çalıştırma işlemini gösterir:
+Aşağıdaki adımlarda, Visual Studio Code 'de uzaktan Izleme mikro hizmetlerinin nasıl çalıştırılacağı gösterilmektedir:
 
 1. Visual Studio Code'u başlatın.
-1. VS Code'da açın **azure-iot-pcs-remote-monitoring-dotnet** klasör.
-1. Adlı yeni bir klasör oluşturun **.vscode** içinde **azure-iot-pcs-remote-monitoring-dotnet** klasör.
-1. Dosyaları kopyalama **launch.json** ve **tasks.json** services\scripts\local\launch\idesettings\vscode için gelen **.vscode** oluşturduğunuz klasör.
-1. Açık **hata ayıklama paneli** VS Code ve çalışma **çalıştırmak tüm mikro Hizmetleri** yapılandırma. Bu yapılandırma, cihaz benzetimi mikro hizmet Docker'da çalıştırılır ve diğer mikro hizmetler hata ayıklayıcıda çalıştırır.
+1. VS Code, **Azure-IoT-PCs-Remote-Monitoring-DotNet** klasörünü açın.
+1. **Azure-IoT-PCs-Remote-Monitoring-DotNet** klasöründe **. vscode** adlı yeni bir klasör oluşturun.
+1. '. **JSON** ve **Tasks. JSON** dosyalarını services\scripts\local\launch\ıdesettings\vscode konumundan yeni oluşturduğunuz **. vscode** klasörüne kopyalayın.
+1. VS Code **Hata Ayıkla panelini** açın ve **tüm mikro hizmetler yapılandırmasını Çalıştır** ' a çalıştırın. Bu yapılandırma, Docker 'da cihaz benzetimi mikro hizmetini çalıştırır ve hata ayıklayıcıda diğer mikro hizmetleri çalıştırır.
 
-Çıkış çalışmasını **tümünü Çalıştır microsoervices** hata ayıklama konsolunda aşağıdaki gibi görünür:
+Çalıştırma hatası, hata ayıklama konsolundaki **tüm mikro soervıces** çalıştırma sırasında aşağıdaki gibi görünür:
 
-[![Dağıtma-yerel-mikro hizmetler](./media/deploy-locally-vscode/auth-debug-results-inline.png)](./media/deploy-locally-vscode/auth-debug-results-expanded.png#lightbox)
+[![dağıtımı-yerel-mikro hizmetler](./media/deploy-locally-vscode/auth-debug-results-inline.png)](./media/deploy-locally-vscode/auth-debug-results-expanded.png#lightbox)
 
-### <a name="run-the-web-ui"></a>Web kullanıcı arabirimini çalıştırma
+### <a name="run-the-web-ui"></a>Web Kullanıcı arabirimini çalıştırma
 
-Bu adımda, web kullanıcı Arabirimi başlatın. Gidin **azure-iot-pcs-remote-monitoring-dotnet\webui** yerel klasöre kopyalayın ve aşağıdaki komutları çalıştırın:
+Bu adımda, Web Kullanıcı arabirimini başlatın. Yerel kopyanızı **Azure-iot-PCs-Remote-Monitoring-dotnet\webui** klasörüne gidin ve aşağıdaki komutları çalıştırın:
 
 ```cmd
 npm install
 npm start
 ```
 
-Başlangıç tamamlandıktan sonra tarayıcınızı sayfası görüntüler **http:\//localhost:3000 / Pano**. Bu sayfadaki hataları beklenmektedir. Uygulama hatasız görüntülemek için aşağıdaki adımı tamamlayın.
+Başlangıç tamamlandığında tarayıcınızda **http:\//localhost: 3000/Dashboard**sayfası görüntülenir. Bu sayfadaki hatalar beklenmektedir. Uygulamayı hata olmadan görüntülemek için aşağıdaki adımı izleyin.
 
-### <a name="configure-and-run-nginx"></a>Yapılandırma ve NGINX çalıştırma
+### <a name="configure-and-run-nginx"></a>NGıNX 'i yapılandırma ve çalıştırma
 
-Yerel makinenizde çalışan mikro hizmetler ve web uygulaması bağlamak için bir ters proxy sunucuyu ayarlayın:
+Yerel makinenizde çalışan Web uygulamasını ve mikro hizmetleri bağlamak için bir ters proxy sunucusu ayarlayın:
 
-* Kopyalama **nginx.conf** dosya **webui\scripts\localhost** klasörüne **nginx\conf** yükleme dizini.
-* Çalıştırma **ngınx**.
+* **NGINX. conf** dosyasını **webui\scripts\localhost** klasöründen **nginx\conf** install dizinine kopyalayın.
+* **NGINX**'i çalıştırın.
 
-Çalıştırma hakkında daha fazla bilgi için **ngınx**, bkz: [nginx Windows için](https://nginx.org/en/docs/windows.html).
+**NGINX**çalıştırma hakkında daha fazla bilgi için bkz. [Windows için NGINX](https://nginx.org/en/docs/windows.html).
 
-### <a name="connect-to-the-dashboard"></a>Panoya bağlanma
+### <a name="connect-to-the-dashboard"></a>Panoya Bağlan
 
-Uzaktan izleme çözümü panosuna erişmek için http gidin:\/tarayıcınızda /localhost:9000.
+Uzaktan Izleme çözümü panosuna erişmek için tarayıcınızda http:\//localhost: 9000 adresine gidin.
 
 ## <a name="clean-up"></a>Temizleme
 
-Gereksiz önlemek için bulut Hizmetleri ücretleri sınamanızı tamamladığınızda, Azure aboneliğinizden kaldırın. Hizmetlerini kaldırmak için gidin [Azure portalında](https://ms.portal.azure.com) ve delete kaynak grubunda **start.cmd** oluşturulan komut dosyası.
+Gereksiz ücretlerden kaçınmak için, testlerinizi bitirdiğinizde Azure aboneliğinizden bulut hizmetlerini kaldırın. Hizmetleri kaldırmak için [Azure Portal](https://ms.portal.azure.com) gidin ve **Start. cmd** betiğinin oluşturulduğu kaynak grubunu silin.
 
-Ayrıca, kaynak kodunu github'dan kopyaladığınız oluşturulan uzaktan izleme depo yerel kopyasını silebilirsiniz.
+Ayrıca, kaynak kodu GitHub 'dan Klonladığınız zaman oluşturulan uzaktan Izleme deposunun yerel kopyasını da silebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Uzaktan izleme çözüm dağıttığınıza göre sonraki adım olarak [çözüm panosunun özelliklerini keşfedin](quickstart-remote-monitoring-deploy.md).
+Uzaktan Izleme çözümünü dağıttığınıza göre, bir sonraki adım [çözüm panosunun yeteneklerini araştırmakta](quickstart-remote-monitoring-deploy.md).

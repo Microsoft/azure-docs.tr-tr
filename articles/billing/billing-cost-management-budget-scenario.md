@@ -1,9 +1,9 @@
 ---
-title: Azure'da faturalandırma ve maliyet Yönetimi bütçe senaryosu | Microsoft Docs
-description: Belirli bir bütçe eşiklere dayanarak Vm'leri kapatmak için Azure otomasyonunu kullanmayı öğrenin.
+title: Azure faturalama ve maliyet yönetimi bütçe senaryosu | Microsoft Docs
+description: Azure Otomasyonu’nu kullanarak VM’leri belirli bütçe eşiklerine göre kapatma hakkında bilgi edinin.
 services: billing
 documentationcenter: ''
-author: Erikre
+author: bandersmsft
 manager: dougeby
 editor: ''
 tags: billing
@@ -13,322 +13,322 @@ ms.devlang: na
 ms.topic: reference
 ms.tgt_pltfrm: na
 ms.workload: billing
-ms.date: 03/13/2019
-ms.author: erikre
-ms.openlocfilehash: 4bf76ac0bdd59764815f18a40a3e243d7cf9d920
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
-ms.translationtype: MT
+ms.date: 10/01/2019
+ms.author: banders
+ms.openlocfilehash: bc35ba74acb2ce807597230fee0685606a93a775
+ms.sourcegitcommit: 7868d1c40f6feb1abcafbffcddca952438a3472d
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60617427"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71958356"
 ---
 # <a name="manage-costs-with-azure-budgets"></a>Azure Budgets ile maliyetleri yönetme
 
-Maliyet denetimi, bulutta yatırımınızın değerini en üst düzeye çıkarma için kritik bir bileşenidir. Maliyet görünürlük, raporlama ve maliyet tabanlı düzenleme sürekli işletme işlemleri için çok önemli olduğu bazı senaryolar vardır. [Azure maliyet Yönetimi API'leri](https://docs.microsoft.com/rest/api/consumption/) bu senaryoların her biri desteklemek için API kümesi sağlar. API'leri, ayrıntılı örnek düzeyi maliyetlerini görüntülemenizi sağlayan kullanım ayrıntılarını sağlar.
+Maliyet denetimi, buluttaki yatırımınızın değerini en üst düzeye çıkarmak için kritik bir bileşendir. Maliyet görünürlüğü, raporlama ve maliyet tabanlı düzenlemenin devam eden işletme operasyonları için kritik öneme sahip olduğu çeşitli senaryolar vardır. [Azure Maliyet Yönetimi API’leri](https://docs.microsoft.com/rest/api/consumption/), bu senaryoların her birini desteklemek için bir dizi API sağlar. API’ler kullanım ayrıntılarını sağlayarak örnek düzeyinde maliyetlerinizi ayrıntılı olarak görüntülemenize olanak tanır.
 
-Bütçe maliyet denetimi bir parçası olarak yaygın olarak kullanılır. Azure'da bütçelerini sınırlayabilirsiniz. Örneğin, bütçe görünümünüzü abonelik, kaynak grupları veya kaynak koleksiyonunu göre daraltabilirsiniz. Kullanabileceğiniz bir bütçe Eşiğe ulaşıldığında e-posta ile bilgilendirmek üzere API bütçelerini kullanmanın yanı sıra [Azure İzleyici Eylem grupları](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups) eylemlerin bir bütçe olay sonucu olarak düzenlenmiş bir dizi tetiklemek için.
+Bütçeler genellikle maliyet denetiminin bir parçası olarak kullanılır. Bütçelerin kapsamı Azure’da belirlenebilir. Örneğin, bütçe görünümünüzü abonelik, kaynak grupları veya kaynak koleksiyonu temelinde daraltabilirsiniz. Bütçe eşiğine ulaşıldığında e-posta yoluyla bildirim almak için bütçeler API'sini kullanmanın yanı sıra, bütçe olayının sonucu olarak düzenlenmiş bir eylemler kümesini tetiklemek için [Azure İzleyici eylem gruplarını](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups) kullanabilirsiniz.
 
-Bütçe karşı yönetin ve tahmin edilebilir bir bedeli baktığımda bir aylık fatura ayrıca Al istediklerinde kritik olmayan bir iş yükü çalıştıran bir müşteri için yaygın bir bütçe senaryo gerçekleşebilir. Bu senaryo, bazı Azure ortamının bir parçası olan kaynakların maliyet tabanlı düzenleme gerektirir. Bu senaryoda, 1000 abonelik için aylık bir bütçe ayarlanır. Ayrıca, bazı düzenlemeler tetiklemek için uyarı eşikleri ayarlanır. Bu senaryoda, kaynak grubundaki tüm Vm'leri durdurur bir maliyet % 80 eşiğini başlar **isteğe bağlı**. Ardından, % 100 maliyet eşiğine tüm sanal makine örnekleri durdurulur.
-Bu senaryo yapılandırmak için bu öğreticideki her bölümde verilen adımları izleyerek aşağıdaki eylemleri tamamlanır.
+Kritik olmayan iş yükü çalıştıran bir müşteriye yönelik yaygın bir bütçe senaryosu, müşteri, iş yükünü bütçeye göre yönetmek ve aynı zamanda aylık faturaya bakarken öngörülebilir bir maliyete ulaşmak istediğinde gerçekleşebilir. Bu senaryo, Azure ortamının bir parçası olan kaynakların maliyet tabanlı düzenlemesini gerektirir. Bu senaryoda, abonelik için 1000 ABD doları aylık bütçe ayarlanır. Ayrıca, bildirim eşikleri birkaç düzenlemeyi tetikleyecek şekilde ayarlanır. Bu senaryo, **İsteğe Bağlı** kaynak grubundaki tüm VM’leri durduracak olan %80’lik maliyet eşiği ile başlar. Ardından, %100 maliyet eşiğine ulaşıldığında tüm VM örnekleri durdurulur.
+Bu senaryoyu yapılandırmak için, bu öğreticinin her bir bölümünde belirtilen adımları izleyerek aşağıdaki eylemleri tamamlayacaksınız.
 
-Bu öğreticide dahil bu eylemleri için izin ver:
+Bu öğreticide yer alan eylemler şunları yapmanıza olanak sağlar:
 
-- Web kancalarını kullanarak sanal makineleri durdurmak için bir Azure Otomasyonu Runbook'u oluşturma.
-- Bütçe eşiği değerine göre tetiklenmesi için bir Azure Logic App oluşturma ve doğru parametrelere sahip runbook çağırın.
-- Bütçe eşiğine ulaşıldığında, Azure Logic App tetiklemek için yapılandırılmış bir Azure İzleyici eylem grubu oluşturun.
-- Azure bütçe ile istediğiniz eşikleri oluşturun ve eylem grubuna bağlayabilirsiniz.
+- Web kancalarını kullanarak VM’leri durdurmak için bir Azure Otomasyonu Runbook'u oluşturma.
+- Bütçe eşiği değerine göre tetiklenecek bir Azure mantıksal uygulaması oluşturma ve runbook’u doğru parametrelerle çağırma.
+- Bütçe eşiğine ulaşıldığında Azure mantıksal uygulamasını tetikleyecek şekilde yapılandırılacak bir Azure İzleyici Eylem Grubu oluşturma.
+- İstenen eşiklerle Azure bütçesini oluşturma ve eylem grubuna bağlama.
 
-## <a name="create-an-azure-automation-runbook"></a>Azure Otomasyonu Runbook'u oluşturma
+## <a name="create-an-azure-automation-runbook"></a>Azure Otomasyonu Runbook’u oluşturma
 
-[Azure Otomasyonu](https://docs.microsoft.com/azure/automation/automation-intro) betik, kaynak yönetim görevlerinin çoğunu ve zamanlanmış veya isteğe bağlı olarak bu görevleri çalıştırmak sağlayan bir hizmettir. Bu senaryonun bir parçası olarak, oluşturacağınız bir [Azure Otomasyonu runbook'u](https://docs.microsoft.com/azure/automation/automation-runbook-types) durdurmak üzere kullanılır. Kullanacağınız [Azure V2 sanal makinesi durdurma](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) grafik runbook'tan [galeri](https://docs.microsoft.com/azure/automation/automation-runbook-gallery) bu senaryoyu oluşturmak için. Bu runbook, Azure hesabınızda oturum içeri aktarma ve yayımlama bütçe Eşiğe ulaşıldığında durdurmak mümkün olacaktır.
+[Azure Otomasyonu](https://docs.microsoft.com/azure/automation/automation-intro), kaynak yönetimi görevlerinizin çoğu için betik oluşturmanıza ve bu görevleri zamanlanmış ya da isteğe bağlı olarak çalıştırmanıza olanak tanıyan bir hizmettir. Bu senaryonun bir parçası olarak, VM’leri durdurmak için kullanılacak bir [Azure Otomasyonu runbook'u](https://docs.microsoft.com/azure/automation/automation-runbook-types) oluşturacaksınız. Bu senaryoyu oluşturmak için [galerideki](https://docs.microsoft.com/azure/automation/automation-runbook-gallery) [Azure V2 VM’lerini Durdur](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) grafik runbook’unu kullanacaksınız. Bu runbook’u Azure hesabınıza aktarıp yayımlayarak, bir bütçe eşiğine ulaşıldığında VM’leri durdurabilirsiniz.
 
 ### <a name="create-an-azure-automation-account"></a>Azure Otomasyonu hesabı oluşturma
 
 1. Azure hesabınızın kimlik bilgileriyle [Azure portalında](https://portal.azure.com/) oturum açın.
-2. Tıklayın **kaynak Oluştur** düğmesi Azure sol üst köşesinde bulunan.
-3. Seçin **Yönetim Araçları** > **Otomasyon**.
+2. Azure’ın sol üst köşesinde bulunan **Kaynak oluştur** düğmesine tıklayın.
+3. **Yönetim Araçları** > **Otomasyon**’u seçin.
    > [!NOTE]
-   > Bir Azure hesabınız yoksa, oluşturabileceğiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/free/).
-4. Hesap bilgilerini girin. İçin **oluşturma Azure farklı çalıştır hesabı**, seçin **Evet** Azure kimlik doğrulamasını kolaylaştırmak için gereken ayarları otomatik olarak sağlamak.
+   > Azure hesabınız yoksa [ücretsiz hesap](https://azure.microsoft.com/free/) oluşturabilirsiniz.
+4. Hesap bilgilerinizi girin. Azure’da kimlik doğrulamasını kolaylaştırmak için gereken ayarları otomatik olarak etkinleştirmek üzere **Azure Farklı Çalıştır hesabı oluştur** alanında **Evet**’i seçin.
 5. İşlemi tamamladığınızda Otomasyon hesabı dağıtımını başlatmak için **Oluştur**'a tıklayın.
 
-### <a name="import-the-stop-azure-v2-vms-runbook"></a>Azure V2 sanal makinesi durdurma runbook'u İçeri Aktar
+### <a name="import-the-stop-azure-v2-vms-runbook"></a>Azure V2 VM’lerini Durdur runbook’unu içeri aktarma
 
-Kullanarak bir [Azure Otomasyonu runbook'u](https://docs.microsoft.com/azure/automation/automation-runbook-types), içeri aktarma [Azure V2 sanal makinesi durdurma](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) grafik runbook Galerisi.
+[Azure Otomasyonu runbook’unu](https://docs.microsoft.com/azure/automation/automation-runbook-types) kullanarak, galeriden [Azure V2 VM’lerini Durdur](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) grafik runbook’unu içeri aktarın.
 
 1.  Azure hesabınızın kimlik bilgileriyle [Azure portalında](https://portal.azure.com/) oturum açın.
-2.  Otomasyon hesabınızı seçerek açın **tüm hizmetleri** > **Otomasyon hesapları**. Ardından, Otomasyon hesabınızı seçin.
-3.  Tıklayın **Runbook'lar Galerisi** gelen **süreç otomasyonu** bölümü.
-4.  Ayarlama **galeri kaynağı** için **betik Merkezi** seçip **Tamam**.
-5.  Bulun ve seçin [Azure V2 sanal makinesi durdurma](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) Azure portalındaki galeri öğesi.
-6.  Tıklayın **alma** görüntülemek için düğmeyi **alma** dikey penceresinde ve select **Tamam**. Runbook genel bakış dikey penceresinde görüntülenir.
-7.  Runbook içeri aktarma işlemi tamamlandıktan sonra seçin **Düzenle** grafik runbook düzenleyici ve yayımlama seçeneğini görüntülemek için.
+2.  **Tüm hizmetler** > **Otomasyon Hesapları**’nı seçerek Otomasyon hesabınızı açın. Ardından Otomasyon Hesabınızı seçin.
+3.  **İşlem Otomasyonu** bölümünden **Runbook galerisi**’ne tıklayın.
+4.  **Galeri Kaynağı**’nı **Betik Merkezi** olarak ayarlayıp **Tamam**’ı seçin.
+5.  Azure portalındaki [Azure V2 VM’lerini Durdur](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) galeri öğesini bulup seçin.
+6.  **İçeri Aktar** düğmesine tıklayarak **İçeri Aktar** dikey penceresini görüntüleyin ve **Tamam**’ı seçin. Runbook’a genel bakış dikey penceresi görüntülenir.
+7.  Runbook, içeri aktarma işlemini tamamladıktan sonra **Düzenle**’yi seçerek grafik runbook düzenleyicisini ve yayımlama seçeneğini görüntüleyin.
 
-    ![Azure - grafik runbook'u Düzenle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-01.png)
-8.  Tıklayın **Yayımla** runbook'u yayımlayamadı ve ardından düğmeyi **Evet** istendiğinde. Bir runbook yayımladığınızda, herhangi bir mevcut yayımlanan sürümü taslak sürümle geçersiz kılar. Bu durumda, runbook oluşturduğunuzdan hiçbir yayımlanan bir sürüme sahip.
+    ![Azure - Grafik runbook’u düzenleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-01.png)
+8.  Runbook’u yayımlamak için **Yayımla** düğmesine tıklayın ve sorulduğunda **Evet**’i seçin. Runbook yayımladığınızda, yayımlanmış herhangi bir sürümü taslak sürümle geçersiz kılarsınız. Örneğimizde, runbook’u siz oluşturduğunuz için yayımlanmış sürümünüz yoktur.
 
-    Runbook yayımlama hakkında daha fazla bilgi için bkz. [grafik runbook'u oluşturma](https://docs.microsoft.com/azure/automation/automation-first-runbook-graphical).
+    Runbook yayımlama hakkında daha fazla bilgi için bkz. [Grafik runbook oluşturma](https://docs.microsoft.com/azure/automation/automation-first-runbook-graphical).
 
-## <a name="create-webhooks-for-the-runbook"></a>Runbook için Web kancaları oluşturma
+## <a name="create-webhooks-for-the-runbook"></a>Runbook için web kancaları oluşturma
 
-Kullanarak [Azure V2 sanal makinesi durdurma](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) grafiksel runbook tek bir HTTP isteği ile Azure Otomasyonu'nda runbook başlatmaya iki Web kancaları oluşturacaktır. İlk Web kancası durdurulması isteğe bağlı Vm'leri izin vererek bir parametre olarak bir kaynak grubu adı ile % 80 bütçe eşiği, runbook'u çağırır. Ardından, ikinci bir Web kancası, kalan tüm sanal makine örnekleri durdurulur parametresiz (% 100), bir runbook çağırır.
+[Azure V2 VM’lerini durdur](https://gallery.technet.microsoft.com/scriptcenter/Stop-Azure-ARM-VMs-1ba96d5b) grafik runbook’unu kullanarak, tek bir HTTP isteği ile Azure Otomasyonu’nda runbook’u başlatmak için iki Web kancası oluşturacaksınız. İlk web kancası, parametre olarak kaynak grubu adını kullanarak %80 bütçe eşiğinde runbook’u çağırır ve isteğe bağlı VM’lerin durdurulmasına olanak tanır. Ardından, ikinci web kancası, runbook’u bir parametre olmadan (%100’de) çağırır, bu da kalan tüm VM örneklerini durdurur.
 
-1. Gelen **runbook'ları** sayfasını [Azure portalında](https://portal.azure.com/), tıklayın **StopAzureV2Vm** runbook'un genel bakış dikey penceresinde görüntüler runbook.
-2. Tıklayın **Web kancası** açmak için sayfanın üst kısmındaki **Web kancası Ekle** dikey penceresi.
-3. Tıklayın **yeni Web kancası oluşturma** açmak için **yeni Web kancası oluşturma** dikey penceresi.
-4. Ayarlama **adı** için Web kancasının **isteğe bağlı**. **Etkin** özelliği olmalıdır **Evet**. **Expires** değeri değiştirilmesi gerekmez. Web kancası özellikleri hakkında daha fazla bilgi için bkz. [bir Web kancası ayrıntılarını](https://docs.microsoft.com/azure/automation/automation-webhooks#details-of-a-webhook).
-5. URL değerin yanında, Web kancası URL'sini kopyalamak için Kopyala simgesine tıklayın.
+1. [Azure portalındaki](https://portal.azure.com/) **Runbook’lar** sayfasında, runbook’a genel bakış dikey penceresini gösteren **StopAzureV2Vm** runbook’una tıklayın.
+2. Sayfanın üst kısmındaki **Web Kancası**’na tıklayarak **Web Kancası Ekle** dikey penceresini açın.
+3. **Yeni web kancası oluştur**’a tıklayarak **Yeni web kancası oluştur** dikey penceresini açın.
+4. Web kancasının **Ad** değerini **İsteğe Bağlı** olarak ayarlayın. **Etkin** özelliği **Evet** olmalıdır. **Süre sonu** değerinin değiştirilmesi gerekmez. Web kancası özellikleri hakkında daha fazla bilgi için bkz. [Web kancasının ayrıntıları](https://docs.microsoft.com/azure/automation/automation-webhooks#details-of-a-webhook).
+5. URL değerinin yanındaki Kopyala simgesine tıklayarak web kancası URL’sini kopyalayın.
    > [!IMPORTANT]
-   > Adlı Web kancası URL'sini Kaydet **isteğe bağlı** güvenli bir yerde. Bu öğreticide daha sonra URL'yi kullanır. Güvenlik nedeniyle, Web kancası oluşturulduktan sonra görüntüleyemez veya URL'sini yeniden alın.
-6. Tıklayın **Tamam** yeni Web kancası oluşturmak için.
-7. Tıklayın **parametrelerini yapılandırma ve çalıştırma ayarları** parametresi görüntülemek için runbook için değerler.
+   > **İsteğe Bağlı** adlı web kancasının URL’sini güvenli bir yere kaydedin. URL’yi bu öğreticinin sonraki bölümlerinde kullanacaksınız. Güvenlik nedeniyle, web kancasını oluşturduktan sonra URL’yi tekrar görüntüleyemezsiniz veya alamazsınız.
+6. Yeni web kancasını oluşturmak için **Tamam**’a tıklayın.
+7. Runbook’un parametre değerlerini görüntülemek için **Parametreleri yapılandır ve ayarları çalıştır**’a tıklayın.
    > [!NOTE]
-   > Runbook zorunlu parametrelere sahipse, sonra değerleri belirtilmediği sürece, Web kancası oluşturmanız mümkün değildir.
-8. Tıklayın **Tamam** Web kancası parametre değerlerini kabul etmek için.
-9. Tıklayın **Oluştur** Web kancası oluşturmak için.
-10. Ardından, adlı ikinci bir Web kancası oluşturmak için yukarıdaki adımları **tam**.
+   > Runbook’un zorunlu parametreleri varsa, değer sağlanmaması durumunda web kancasını oluşturamazsınız.
+8. Web kancası parametre değerlerini kabul etmek için **Tamam**’a tıklayın.
+9. Web kancasını oluşturmak için **Oluştur**’a tıklayın.
+10. Ardından, yukarıdaki adımları izleyerek **Tam** adlı ikinci bir web kancası oluşturun.
     > [!IMPORTANT]
-    > Her iki Web kancası URL'leri daha sonra Bu öğreticide kullanmak üzere kaydettiğinizden emin olun. Güvenlik nedeniyle, Web kancası oluşturulduktan sonra görüntüleyemez veya URL'sini yeniden alın.
+    > Bu öğreticinin sonraki bölümlerinde kullanmak üzere her iki web kancası URL’sini de kaydettiğinizden emin olun. Güvenlik nedeniyle, web kancasını oluşturduktan sonra URL’yi tekrar görüntüleyemezsiniz veya alamazsınız.
 
-Şimdi iki ile kullanılabilir her kaydettiğiniz URL'leri yapılandırılmış Web kancalarını da olmalıdır.
+Artık her birine, kaydettiğiniz URL’ler kullanılarak ulaşılabilen iki web kancanız yapılandırılmış olmalıdır.
 
-![Web kancaları - isteğe bağlı ve tam](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-02.png)
+![Web kancaları - İsteğe Bağlı ve Tam](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-02.png)
 
-Azure Otomasyonu Kurulum artık hazırsınız. Web kancası çalışır durumda olduğunu doğrulamak için basit bir Postman test ile Web kancalarını test edebilirsiniz. Ardından, düzenleme için mantıksal uygulama oluşturmanız gerekir.
+Azure Otomasyonu kurulumunu tamamladınız. Web kancalarının çalıştığını doğrulamak için basit bir Postman testi uygulayabilirsiniz. Daha sonra, düzenleme için mantıksal uygulamayı oluşturmanız gerekir.
 
-## <a name="create-an-azure-logic-app-for-orchestration"></a>Düzenleme için bir Azure Logic App oluşturma
+## <a name="create-an-azure-logic-app-for-orchestration"></a>Düzenleme için bir Azure mantıksal uygulaması oluşturma
 
-Mantıksal uygulamalar oluşturun, zamanlayın ve böylece kuruluşlar veya kuruluşlar arasında uygulamaları, verileri, sistemleri ve Hizmetleri tümleştirebilirsiniz iş akışları olarak işlemleri otomatikleştirme yardımcı olur. Bu senaryoda, [mantıksal uygulama](https://docs.microsoft.com/azure/logic-apps/) oluşturduğunuz oluşturduğunuz Otomasyonu Web kancası çağrısı biraz daha fazlasını yapın.
+Logic Apps, farklı kurum veya kuruluşlardaki uygulamaları, verileri, sistemleri ve hizmetleri tümleştirebilmeniz için işlemleri iş akışları olarak oluşturmanıza, zamanlamanıza ve otomatikleştirmenize yardımcı olur. Bu senaryoda, oluşturduğunuz [mantıksal uygulama](https://docs.microsoft.com/azure/logic-apps/) yalnızca oluşturduğunuz otomasyon web kancasını çağırmaktan biraz daha fazlasını yapacaktır.
 
-Bütçe belirtilen eşiği karşılandığında bir uyarı tetiklemek için ayarlanabilir. Bildirim almak için birden çok eşikleri sağlayabilir ve mantıksal uygulama karşılanıyor eşiği temel alarak farklı eylemler gerçekleştirmesini becerisini gösterilecektir. Bu örnekte, ayarlar bütçesinin % 100 olduğunda ikinci bildirim bütçesinin % 80'e ulaştı ve ulaşıldığı için birkaç bildirimleri aldığınız bir senaryoyu oluşturan ilk bildirimidir. Mantıksal uygulama, kaynak grubundaki tüm Vm'leri kapatmak için kullanılır. İlk olarak, **isteğe bağlı** eşik % 80 sınırına ve Abonelikteki tüm sanal makineler burada kapatılacak ikinci Eşiğe ulaşıldığında.
+Bütçeler, belirtilen bir eşiğe ulaşıldığında bildirim tetikleyecek şekilde ayarlanabilir. Bildirim almak için birden fazla eşik belirtebilirsiniz. Mantıksal uygulama, ulaşılan eşiğe göre farklı eylemler gerçekleştirmenize olanak tanır. Bu örnekte, iki bildirim alacağınız bir senaryo ayarlayacaksınız. İlk bildirim bütçenin %80’ine ulaşıldığında, ikinci bildirim ise bütçenin %100’üne ulaşıldığında gönderilir. Mantıksal uygulama, kaynak grubundaki tüm VM’leri kapatmak için kullanılacaktır. İlk olarak, %80’de **İsteğe Bağlı** eşiğine, daha sonra ise abonelikteki tüm VM’lerin kapatılacağı ikinci eşiğe ulaşılır.
 
-Logic apps, HTTP tetikleyicisi için örnek bir şema sağlar, ancak, ayarlamanızı zorunlu izin **Content-Type** başlığı. Eylem grubu için Web kancasını özel üst bilgiler olmadığı için ayrı bir adım yükteki ayrıştırabilir gerekir. Kullanacağınız **ayrıştırma** eylem ve bir örnek yük ile sağlayın.
+Mantıksal uygulamalar, HTTP tetikleyicisi için örnek bir şema sağlamanıza olanak tanır ancak **Content-Type** üst bilgisini ayarlamanızı gerektirir. Eylem grubu, web kancası için özel üst bilgilere sahip olmadığından yükü ayrı bir adımda ayrıştırmanız gerekir. **Ayrıştır** eylemini kullanarak ve bir örnek yük sağlayacaksınız.
 
-### <a name="create-the-logic-app"></a>Mantıksal uygulama oluşturma
+### <a name="create-the-logic-app"></a>Mantıksal uygulamayı oluşturma
 
-Mantıksal uygulama çeşitli eylemler gerçekleştirir. Aşağıdaki listede, üst düzey bir mantıksal uygulama gerçekleştireceği eylemlerin kümesini sağlar:
-- Bir HTTP isteği alındığında tanır.
-- Geçirilen ulaşıldı eşik değeri belirlemek için JSON verilerini ayrıştırma
-- % 100'e eşit veya eşik miktarı % 80 veya daha fazla bütçe aralığını ancak büyüktür ulaşıp ulaşmadığını kontrol etmek için bir koşullu ifade'ı kullanın.
-    - Bu eşik miktarı sınırına adlı Web kancası kullanarak bir HTTP POST gönderin **isteğe bağlı**. Bu eylem, "İsteğe bağlı" grubundaki VM'lerin kapatır.
-- Eşik miktarı ulaştı veya % Bütçe değeri 100'ü aştı olup olmadığını denetlemek için koşullu bir deyim kullanın.
-    - Eşik miktarı sınırına adlı Web kancası kullanarak bir HTTP POST gönderin **tam**. Bu eylem, tüm kalan Vm'leri kapatacak.
+Mantıksal uygulama çeşitli eylemler gerçekleştirir. Aşağıdaki liste, mantıksal uygulamanın gerçekleştireceği yüksek düzeyli bir dizi eylem sağlar:
+- Bir HTTP isteği alındığında bunu algılar
+- Ulaşılan eşik değerini belirlemek için geçirilen JSON verilerini ayrıştırma
+- Eşik miktarının %100 veya daha yüksek olmayacak şekilde, bütçenin %80 veya daha yüksek bir oranına ulaşıp ulaşmadığını denetlemek için koşullu bir ifade kullanın.
+    - Bu eşik miktarına ulaşıldıysa, **İsteğe Bağlı** adlı web kancasını kullanarak bir HTTP POST gönderin. Bu işlem "İsteğe Bağlı" grubundaki VM’leri kapatır.
+- Eşik miktarına ulaşılıp ulaşılmadığını veya bütçe değerinin %100’ünün aşılıp aşılmadığını denetlemek için bir koşullu deyim kullanın.
+    - Eşik miktarına ulaşıldıysa, **Tam** adlı web kancasını kullanarak bir HTTP POST gönderin. Bu eylem kalan tüm VM’leri kapatır.
 
-Yukarıdaki adımları gerçekleştiren mantıksal uygulamanızı oluşturmak için aşağıdaki adımları gerekir:
+Yukarıdaki adımları gerçekleştirecek mantıksal uygulamayı oluşturmak için aşağıdaki adımların uygulanması gerekir:
 
-1.  İçinde [Azure portalında](https://portal.azure.com/)seçin **kaynak Oluştur** > **tümleştirme** > **mantıksal uygulama**.
+1.  [Azure portalında](https://portal.azure.com/) **Kaynak oluştur** > **Tümleştirme** > **Mantıksal Uygulama**’yı seçin.
 
-    ![Azure - mantıksal uygulama kaynağı seçin](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-03.png)
-2.  İçinde **mantıksal uygulama oluştur** dikey penceresinde, select, mantıksal uygulamanızı oluşturmak gereken ayrıntılarını sağlamaya **panoya Sabitle**, tıklatıp **Oluştur**.
+    ![Azure - Mantıksal uygulama kaynağını seçme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-03.png)
+2.  **Mantıksal uygulama oluştur** dikey penceresinde, mantıksal uygulamanızı oluşturmak için gereken ayrıntıları sağlayın, **Panoya sabitle**’yi seçin ve **Oluştur**’a tıklayın.
 
-    ![Azure - mantıksal uygulama oluşturma](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-03a.png)
+    ![Azure - Mantıksal uygulama oluşturma](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-03a.png)
 
-Azure mantıksal uygulamanızı dağıttıktan sonra **Logic Apps Tasarımcısı'nda** açılır ve bir giriş içeren bir dikey pencere, video ve sık kullanılan Tetikleyicileri gösterir.
+Mantıksal uygulamanız Azure tarafından dağıtıldıktan sonra **Logic Apps Tasarımcısı** açılır ve bir tanıtım videosu ile sık kullanılan tetikleyicilerin bulunduğu bir dikey pencere görüntülenir.
 
-### <a name="add-a-trigger"></a>Bir tetikleyici ekleme
+### <a name="add-a-trigger"></a>Tetikleyici ekleme
 
-Her mantıksal uygulama, belirli bir olay gerçekleştiğinde ya da belirli bir koşul karşılandığında tetiklenen bir tetikleyiciyle başlamalıdır. Tetikleyici her etkinleştirildiğinde Logic Apps altyapısı iş akışınızı başlatan ve çalıştıran bir mantıksal uygulama örneği oluşturur. Eylemler tetikleyiciden sonra gerçekleşen tüm adımlardır.
+Her mantıksal uygulama, belirli bir olay gerçekleştiğinde ya da belirli bir koşul karşılandığında tetiklenen bir tetikleyiciyle başlamalıdır. Tetikleyici her etkinleştirildiğinde Logic Apps altyapısı iş akışınızı başlatan ve çalıştıran bir mantıksal uygulama örneği oluşturur. Eylemler, tetikleyiciden sonra gerçekleşen tüm adımlardır.
 
-1.  Altında **şablonları** , **Logic Apps Tasarımcısı'nda** dikey penceresinde, seçin **boş mantıksal uygulama**.
-2.  Ekleme bir [tetikleyici](https://docs.microsoft.com/azure/logic-apps/logic-apps-overview#logic-app-concepts) içinde "http isteği" girerek **Logic Apps Tasarımcısı'nda** bulmak ve adlı tetikleyici seçmek için arama kutusuna **isteği-zaman bir HTTP isteği alındığında**.
+1.  **Logic Apps Tasarımcısı** dikey penceresinin **Şablonlar** bölümünün altında **Boş Mantıksal Uygulama**’yı seçin.
+2.  Bir [tetikleyici](https://docs.microsoft.com/azure/logic-apps/logic-apps-overview#logic-app-concepts) eklemek için, **Logic Apps Tasarımcısı** arama kutusuna "http isteği" yazarak **İstek – Bir HTTP isteği alındığında** adlı tetikleyiciyi bulup seçin.
 
-    ![Azure - mantıksal uygulama - Http tetikleyicisi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-04.png)
-3.  Seçin **yeni adım** > **Eylem Ekle**.
+    ![Azure - Mantıksal uygulama - Http tetikleyicisi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-04.png)
+3.  **Yeni adım** > **Eylem ekle**’yi seçin.
 
-    ![Azure - yeni adım - Eylem Ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-05.png)
-4.  İçin "JSON Ayrıştır" arama **Logic Apps Tasarımcısı'nda** bulmak ve seçmek için arama kutusuna **veri işlemleri - JSON Ayrıştır** [eylem](https://docs.microsoft.com/azure/logic-apps/logic-apps-overview#logic-app-concepts).
+    ![Azure - Yeni adım - Eylem ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-05.png)
+4.  **Logic Apps Tasarımcısı** arama kutusuna "JSON ayrıştırma" yazarak **Veri İşlemleri - JSON Ayrıştırma** [eylemini](https://docs.microsoft.com/azure/logic-apps/logic-apps-overview#logic-app-concepts) bulup seçin.
 
-    ![Azure - mantıksal uygulama - ekleme eylemi JSON Ayrıştır](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-06.png)
-5.  "Yükü" olarak girin **içeriği** adı için JSON Ayrıştır yükü veya dinamik içerik "Body" etiketini kullanın.
-6.  Seçin **şema oluşturmak için örnek yük kullanma** seçeneğini **JSON Ayrıştır** kutusu.
+    ![Azure - Mantıksal uygulama - JSON ayrıştırma eylemi ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-06.png)
+5.  JSON Ayrıştırma yükü için **İçerik** adı olarak "Yük" yazın veya dinamik içerikten "Gövde" etiketini kullanın.
+6.  **JSON Ayrıştırma** kutusunda **Şema oluşturmak için örnek yük kullan** seçeneğini belirleyin.
 
-    ![Şema oluşturmak için azure - mantıksal uygulama - örnek JSON verileri kullanın](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-07.png)
-7.  Aşağıdaki JSON örnek yük aşağıdaki metin kutusuna yapıştırın: `{"schemaId":"AIP Budget Notification","data":{"SubscriptionName":"CCM - Microsoft Azure Enterprise - 1","SubscriptionId":"<GUID>","SpendingAmount":"100","BudgetStartDate":"6/1/2018","Budget":"50","Unit":"USD","BudgetCreator":"email@contoso.com","BudgetName":"BudgetName","BudgetType":"Cost","ResourceGroup":"","NotificationThresholdAmount":"0.8"}}`
+    ![Azure - Mantıksal uygulama - Şema oluşturmak için örnek JSON verilerini kullanma](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-07.png)
+7.  Aşağıdaki JSON örnek yükünü metin kutusuna yapıştırın: `{"schemaId":"AIP Budget Notification","data":{"SubscriptionName":"CCM - Microsoft Azure Enterprise - 1","SubscriptionId":"<GUID>","SpendingAmount":"100","BudgetStartDate":"6/1/2018","Budget":"50","Unit":"USD","BudgetCreator":"email@contoso.com","BudgetName":"BudgetName","BudgetType":"Cost","ResourceGroup":"","NotificationThresholdAmount":"0.8"}}`
 
     Metin kutusu aşağıdaki gibi görünür:
 
-    ![Azure - mantıksal uygulama - örnek JSON yükü](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-08.png)
+    ![Azure - Mantıksal uygulama - Örnek JSON yükü](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-08.png)
 8.  **Bitti**’ye tıklayın.
 
 ### <a name="add-the-first-conditional-action"></a>İlk koşullu eylemi ekleme
 
-% 100'e eşit veya eşik miktarı % 80 veya daha fazla bütçe aralığını ancak büyüktür ulaşıp ulaşmadığını kontrol etmek için bir koşullu ifade'ı kullanın. Bu eşik miktarı sınırına adlı Web kancası kullanarak bir HTTP POST gönderin **isteğe bağlı**. Bu işlem sanal makineleri kapatır **isteğe bağlı** grubu.
+Eşik miktarının %100 veya daha yüksek olmayacak şekilde, bütçenin %80 veya daha yüksek bir oranına ulaşıp ulaşmadığını denetlemek için koşullu bir ifade kullanın. Bu eşik miktarına ulaşıldıysa, **İsteğe Bağlı** adlı web kancasını kullanarak bir HTTP POST gönderin. Bu işlem **İsteğe Bağlı** grubundaki VM’leri kapatır.
 
-1.  Seçin **yeni adım** > **koşul Ekle**.
+1.  **Yeni adım** > **Koşul ekle**'yi seçin.
 
-    ![Azure - mantıksal uygulama - koşul Ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-09.png)
-2.  İçinde **koşul** kutusunda, metin kutusu içeren **bir değer seçin** kullanılabilir değerler listesini görüntüleyin.
+    ![Azure - Mantıksal uygulama - Koşul ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-09.png)
+2.  **Koşul** kutusunda **Değer seçin** ifadesini içeren metin kutusuna tıklayarak kullanılabilir değerlerin bir listesini görüntüleyin.
 
-    ![Azure - mantıksal uygulama - koşul kutusu](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-10.png)
+    ![Azure - Mantıksal uygulama - Koşul kutusu](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-10.png)
 
-3.  Tıklayın **ifade** listenin üst kısmındaki ve ifade düzenleyicisinde şu ifadeyi girin: `float()`
+3.  Listenin en üstünde bulunan **İfade**’ye tıklayın ve ifade düzenleyicisine şu ifadeyi girin: `float()`
 
-    ![Azure - mantıksal uygulama - Float ifadesi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-11.png)
+    ![Azure - Mantıksal uygulama - Float ifadesi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-11.png)
 
-4.  Seçin **dinamik içerik**parantez () imleci yerleştirin ve seçin **NotificationThresholdAmount** tam ifade doldurmak için listeden.
+4.  **Dinamik içerik**’i seçin, imleci parantez () içine yerleştirin ve tam ifadeyi doldurmak için listeden **NotificationThresholdAmount** öğesini seçin.
 
-    İfade, aşağıdakiler olur:<br>
+    İfade aşağıdaki gibi olacaktır:<br>
     `float(body('Parse_JSON')?['data']?['NotificationThresholdAmount'])`
 
-5.  Seçin **Tamam** ifade ayarlanamadı.
-6.  Seçin **büyüktür veya eşittir** açılan kutusunda **koşul**.
-7.  İçinde **bir değer seçin** koşulu kutusuna `.8`.
+5.  İfadeyi ayarlamak için **Tamam**’ı seçin.
+6.  **Koşul** açılır kutusundaki **büyüktür veya eşittir** öğesini seçin.
+7.  Koşulun **Değer seçin** kutusuna `.8` değerini girin.
 
-    ![Azure - mantıksal uygulama - Float ifade değeri](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-12.png)
+    ![Azure - Mantıksal uygulama - Değeri olan Float ifadesi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-12.png)
 
-8.  Tıklayın **Ekle** > **Satır Ekle** ek bir koşul bölümünü eklemek için koşulu kutusuna.
-9.  İçinde **koşul** kutusunda, metin kutusu içeren **bir değer seçin**.
-10. Tıklayın **ifade** listenin üst kısmındaki ve ifade düzenleyicisinde şu ifadeyi girin: `float()`
-11. Seçin **dinamik içerik**parantez () imleci yerleştirin ve seçin **NotificationThresholdAmount** tam ifade doldurmak için listeden.
-12. Seçin **Tamam** ifade ayarlanamadı.
-13. Seçin **olduğu küçüktür** açılan kutusunda **koşul**.
-14. İçinde **bir değer seçin** koşulu kutusuna `1`.
+8.  Koşul kutusunda **Ekle** > **Satır ekle**’ye tıklayarak koşulun başka bir kısmını ekleyin.
+9.  **Koşul** kutusunda **Değer seçin** ifadesini içeren metin kutusuna tıklayın.
+10. Listenin en üstünde bulunan **İfade**’ye tıklayın ve ifade düzenleyicisine şu ifadeyi girin: `float()`
+11. **Dinamik içerik**’i seçin, imleci parantez () içine yerleştirin ve tam ifadeyi doldurmak için listeden **NotificationThresholdAmount** öğesini seçin.
+12. İfadeyi ayarlamak için **Tamam**’ı seçin.
+13. **Koşul** açılır kutusunda **küçüktür**’ü seçin.
+14. Koşulun **Değer seçin** kutusuna `1` değerini girin.
 
-    ![Azure - mantıksal uygulama - Float ifade değeri](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-13.png)
+    ![Azure - Mantıksal uygulama - Değeri olan Float ifadesi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-13.png)
 
-15. İçinde **doğruysa** kutusunda **Eylem Ekle**. İsteğe bağlı Vm'leri kapatacak bir HTTP POST eylem ekleyeceksiniz.
+15. **True ise** kutusunda **Eylem ekle** seçeneğini belirleyin. İsteğe bağlı VM’leri kapatacak bir HTTP POST eylemi ekleyeceksiniz.
 
-    ![Azure - mantıksal uygulama - Eylem Ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-14.png)
+    ![Azure - Mantıksal uygulama - Eylem ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-14.png)
 
-16. Girin **HTTP** HTTP eylemini arayın ve seçin için **HTTP-HTTP** eylem.
+16. HTTP eylemini aramak için **HTTP** yazın ve **HTTP – HTTP** eylemini seçin.
 
-    ![Azure - mantıksal uygulama - ekleme HTTP eylemi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-15.png)
+    ![Azure - Mantıksal uygulama - HTTP eylemi ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-15.png)
 
-17. Seçin **Post** olarak için **yöntemi** değeri.
-18. Adlı Web kancası URL'sini **isteğe bağlı** Bu öğreticinin önceki bölümünde oluşturduğunuz **URI** değeri.
+17. **Yöntem** değeri için **Post** seçeneğini belirleyin.
+18. **Uri** değeri olarak, bu öğreticide daha önce oluşturduğunuz **İsteğe Bağlı** adlı web kancasının URL’sini girin.
 
-    ![Azure - mantıksal uygulama - HTTP eylemi URI'si](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-16.png)
+    ![Azure - Mantıksal uygulama - HTTP eylemi URI’si](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-16.png)
 
-19. Seçin **Eylem Ekle** içinde **doğruysa** kutusu. İsteğe bağlı Vm'leri kapatıldığından alıcı bildiren bir e-posta gönderecek bir e-posta eylem ekleyeceksiniz.
-20. "E-postası gönderme için" bulup seçin bir *e-posta Gönder* eylem tabanlı e-posta hizmetini kullanın.
+19. **True ise** kutusunda **Eylem ekle** seçeneğini belirleyin. Alıcıya, isteğe bağlı VM’lerin kapatıldığını bildiren bir e-posta gönderecek olan e-posta eylemini ekleyeceksiniz.
+20. "E-posta gönder" ifadesini arayın ve kullandığınız e-posta hizmetine bağlı olarak bir *e-posta gönder* eylemi seçin.
 
-    ![Azure - mantıksal uygulama - gönderme e-posta eylemi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-17.png)
+    ![Azure - Mantıksal uygulama - E-posta gönder eylemi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-17.png)
 
     Kişisel Microsoft hesapları için **Outlook.com** girişini seçin. Azure iş veya okul hesapları için **Office 365 Outlook** girişini seçin. Önceden bir bağlantınız yoksa e-posta hesabınızda oturum açmanız istenir. Logic Apps, e-posta hesabınıza bir bağlantı oluşturur.
 
-    Mantıksal uygulama, e-posta bilgilerinize erişmek izin gerekir.
+    Mantıksal uygulamanın e-posta bilgilerinize erişmesine izin vermeniz gerekir.
 
-    ![Azure - mantıksal uygulama - erişim bildirimi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-18.png)
+    ![Azure - Mantıksal uygulama - Erişim bildirimi](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-18.png)
 
-21. Ekleme **için**, **konu**, ve **gövdesi** isteğe bağlı Vm'leri kapatıldığından alıcı bildiren e-posta metni. Kullanım **BudgetName** ve **NotificationThresholdAmount** konu ve gövde alanları doldurmak için dinamik içerik.
+21. Alıcıya, isteğe bağlı VM’lerin kapatıldığını bildiren e-postaya **Kime**, **Konu** ve **Gövde** metnini ekleyin. Konu ve gövde alanlarını doldurmak için **BudgetName** ve **NotificationThresholdAmount** dinamik içeriğini kullanın.
 
-    ![Azure - mantıksal uygulama - e-posta ayrıntıları](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-19.png)
+    ![Azure - Mantıksal uygulama - E-posta ayrıntıları](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-19.png)
 
 ### <a name="add-the-second-conditional-action"></a>İkinci koşullu eylemi ekleme
 
-Eşik miktarı ulaştı veya % Bütçe değeri 100'ü aştı olup olmadığını denetlemek için koşullu bir deyim kullanın. Eşik miktarı sınırına adlı Web kancası kullanarak bir HTTP POST gönderin **tam**. Bu eylem, tüm kalan Vm'leri kapatacak.
+Eşik miktarına ulaşılıp ulaşılmadığını veya bütçe değerinin %100’ünün aşılıp aşılmadığını denetlemek için bir koşullu deyim kullanın. Eşik miktarına ulaşıldıysa, **Tam** adlı web kancasını kullanarak bir HTTP POST gönderin. Bu eylem kalan tüm VM’leri kapatır.
 
-1.  Seçin **yeni adım** > **koşul Ekle**.
+1.  **Yeni adım** > **Koşul Ekle**'yi seçin.
 
-    ![Azure - mantıksal uygulama - Eylem Ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-20.png)
+    ![Azure - Mantıksal uygulama - Eylem ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-20.png)
 
-2.  İçinde **koşul** kutusunda, metin kutusu içeren **bir değer seçin** kullanılabilir değerler listesini görüntüleyin.
-3.  Tıklayın **ifade** listenin üst kısmındaki ve ifade düzenleyicisinde şu ifadeyi girin: `float()`
-4.  Seçin **dinamik içerik**parantez () imleci yerleştirin ve seçin **NotificationThresholdAmount** tam ifade doldurmak için listeden.
+2.  **Koşul** kutusunda **Değer seçin** ifadesini içeren metin kutusuna tıklayarak kullanılabilir değerlerin bir listesini görüntüleyin.
+3.  Listenin en üstünde bulunan **İfade**’ye tıklayın ve ifade düzenleyicisine şu ifadeyi girin: `float()`
+4.  **Dinamik içerik**’i seçin, imleci parantez () içine yerleştirin ve tam ifadeyi doldurmak için listeden **NotificationThresholdAmount** öğesini seçin.
 
-    İfade, aşağıdakiler olur:<br>
+    İfade aşağıdaki gibi olacaktır:<br>
     `float(body('Parse_JSON')?['data']?['NotificationThresholdAmount'])`
 
-5.  Seçin **Tamam** ifade ayarlanamadı.
-6.  Seçin **büyüktür veya eşittir** açılan kutusunda **koşul**.
-7.  İçinde **Seç değer kutusu** koşulunu girin `1`.
+5.  İfadeyi ayarlamak için **Tamam**’ı seçin.
+6.  **Koşul** açılır kutusundaki **büyüktür veya eşittir** öğesini seçin.
+7.  Koşulun **Değer seçin** kutusuna `1` değerini girin.
 
-    ![Azure - mantıksal uygulama - koşul değerini ayarla](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-21.png)
+    ![Azure - Mantıksal uygulama - Koşul değerini ayarlama](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-21.png)
 
-8.  İçinde **doğruysa** kutusunda **Eylem Ekle**. Tüm kalan Vm'leri kapatacak bir HTTP POST eylem ekleyeceksiniz.
+8.  **True ise** kutusunda **Eylem ekle** seçeneğini belirleyin. Kalan tüm VM’leri kapatacak bir HTTP POST eylemi ekleyeceksiniz.
 
-    ![Azure - mantıksal uygulama - Eylem Ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-22.png)
+    ![Azure - Mantıksal uygulama - Eylem ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-22.png)
 
-9.  Girin **HTTP** HTTP eylemini arayın ve seçin için **HTTP-HTTP** eylem.
-10. Seçin **Post** olarak için **yöntemi** değeri.
-11. Adlı Web kancası URL'sini **tam** Bu öğreticinin önceki bölümünde oluşturduğunuz **URI** değeri.
+9.  HTTP eylemini aramak için **HTTP** yazın ve **HTTP – HTTP** eylemini seçin.
+10. **Yöntem** değeri için **Post** seçeneğini belirleyin.
+11. **Uri** değeri olarak, bu öğreticide daha önce oluşturduğunuz **Tam** adlı web kancasının URL’sini girin.
 
-    ![Azure - mantıksal uygulama - Eylem Ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-23.png)
+    ![Azure - Mantıksal uygulama - Eylem ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-23.png)
 
-12. Seçin **Eylem Ekle** içinde **doğruysa** kutusu. Kalan VM'ler kapatıldığından alıcı bildiren bir e-posta gönderecek bir e-posta eylem ekleyeceksiniz.
-13. "E-postası gönderme için" bulup seçin bir *e-posta Gönder* eylem tabanlı e-posta hizmetini kullanın.
-14. Ekleme **için**, **konu**, ve **gövdesi** isteğe bağlı Vm'leri kapatıldığından alıcı bildiren e-posta metni. Kullanım **BudgetName** ve **NotificationThresholdAmount** konu ve gövde alanları doldurmak için dinamik içerik.
+12. **True ise** kutusunda **Eylem ekle** seçeneğini belirleyin. Alıcıya, kalan VM’lerin kapatıldığını bildiren bir e-posta gönderecek olan e-posta eylemini ekleyeceksiniz.
+13. "E-posta gönder" ifadesini arayın ve kullandığınız e-posta hizmetine bağlı olarak bir *e-posta gönder* eylemi seçin.
+14. Alıcıya, isteğe bağlı VM’lerin kapatıldığını bildiren e-postaya **Kime**, **Konu** ve **Gövde** metnini ekleyin. Konu ve gövde alanlarını doldurmak için **BudgetName** ve **NotificationThresholdAmount** dinamik içeriğini kullanın.
 
-    ![Azure - mantıksal uygulama - gönderme e-posta ayrıntıları](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-24.png)
+    ![Azure - Mantıksal uygulama - E-posta gönderme ayrıntıları](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-24.png)
 
-15. Tıklayın **Kaydet** en üstündeki **mantıksal Uygulama Tasarımcısı** dikey penceresi.
+15. **Mantıksal Uygulama Tasarımcısı** dikey penceresinin en üstünde bulunan **Kaydet**’e tıklayın.
 
 ### <a name="logic-app-summary"></a>Mantıksal uygulama özeti
 
-İşiniz bittiğinde mantıksal uygulamanız nasıl göründüğünü aşağıda verilmiştir. İçinde en temel senaryo yok gerek duyduğunuz herhangi bir eşik tabanlı düzenleme Otomasyon betiği doğrudan çağırabilir **İzleyici** ve atlama **mantıksal uygulama** adım.
+İşiniz bittiğinde mantıksal uygulamanız aşağıdaki gibi görünür. Eşik temelli düzenlemeye gerek duymadığınız en basit senaryolarda, otomasyon betiğini doğrudan **İzleyici**’den çağırabilir ve **Mantıksal Uygulama** adımını atlayabilirsiniz.
 
-   ![Azure - mantıksal uygulama - tam görünümü](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-25.png)
+   ![Azure - Mantıksal uygulama - Tam görünüm](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-25.png)
 
-Mantıksal uygulamanızı kaydettiğinizde, bir URL arayabilmesi için olacaktır oluşturuldu. Bu URL'ye Bu öğreticinin sonraki bölümde kullanacaksınız.
+Mantıksal uygulamanızı kaydettiğinizde, çağırabileceğiniz bir URL oluşturulmuştur. Bu URL’yi öğreticinin bir sonraki bölümünde kullanacaksınız.
 
-## <a name="create-an-azure-monitor-action-group"></a>Azure İzleyici eylem grubu oluştur
+## <a name="create-an-azure-monitor-action-group"></a>Azure İzleyici Eylem Grubu oluşturma
 
-Bir eylem grubu, tanımladığınız bildirim tercihleri koleksiyonudur. Bir uyarı tetiklendiğinde, belirli bir eylem grubu bildirim tarafından uyarı alabilirsiniz. Azure uyarı proaktif olarak belirli koşullara göre bir bildirim oluşturur ve eylem olanağı sunar. Bir uyarı, ölçüm ve günlükleri de dahil olmak üzere birden fazla kaynaktan veri kullanabilirsiniz.
+Eylem grubu, tanımladığınız bir bildirim tercihleri koleksiyonudur. Bir uyarı tetiklendiğinde, belirli bir eylem grubu bilgilendirilerek uyarıyı alabilir. Azure uyarısı, belirli koşullara göre ileriye dönük bir bildirim oluşturur ve eylem yapma fırsatı sağlar. Uyarıda, ölçümler ve günlükler de dahil olmak üzere birden çok kaynaktaki veriler kullanılabilir.
 
-Eylem, bütçenizi tümleştirilecek tek bir uç nokta gruplarıdır. Çok sayıda kanalı bildirimlerini ayarlayabilirsiniz, ancak bu öğreticide daha önce oluşturduğunuz mantıksal uygulama üzerinde odaklanır. Bu senaryo için.
+Eylem grupları, bütçenizle tümleştireceğiniz tek uç noktadır. Bildirimleri birkaç kanalda ayarlayabilirsiniz ancak bu senaryo için, daha önce bu öğreticide oluşturduğunuz mantıksal uygulamaya odaklanacaksınız.
 
-### <a name="create-an-action-group-in-azure-monitor"></a>Azure İzleyici'de bir eylem grubu oluştur
+### <a name="create-an-action-group-in-azure-monitor"></a>Azure İzleyici’de eylem grubu oluşturma
 
-Eylem grubu oluşturduğunuzda, bu öğreticide daha önce oluşturduğunuz mantıksal uygulamaya yönlendirir.
+Eylem grubu oluştururken, bu öğreticide daha önce oluşturduğunuz mantıksal uygulamayı işaret edeceksiniz.
 
-1.  Zaten oturum açmış için kök kullanıcı değilseniz [Azure portalında](https://portal.azure.com/), oturum açma ve seçin **tüm hizmetleri** > **İzleyici**.
-2.  Seçin **Eylem grupları** gelen **ayarı** bölümü.
-3.  Seçin **eylem grubu ekleme** gelen **Eylem grupları** dikey penceresi.
-4.  Ekleyin ve aşağıdaki öğeleri doğrulayın:
+1.  [Azure portalında](https://portal.azure.com/) henüz oturum açmadıysanız oturum açın ve **Tüm hizmetler** > **İzleyici**’yi seçin.
+2.  **Uyarılar**'ı ve ardından **Eylemleri yönet**'i seçin.
+3.  **Eylem grupları** dikey penceresinden **Eylem grubu ekle**’yi seçin.
+4.  Aşağıdaki öğeleri ekleyin ve doğrulayın:
     - Eylem grubu adı
     - Kısa ad
     - Abonelik
     - Kaynak grubu
 
-    ![Azure - mantıksal uygulama - bir eylem grubu Ekle](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-26.png)
+    ![Azure - Mantıksal uygulama - Eylem grubu ekleme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-26.png)
 
-5.  İçinde **eylem grubu Ekle** bölmesinde, bir mantıksal uygulama eylemi ekleyin. Eylem adı **bütçe BudgetLA**. İçinde **mantıksal uygulama** bölmesinde **abonelik** ve **kaynak grubu**. Ardından, **mantıksal uygulama** Bu öğreticide daha önce oluşturduğunuz.
-6.  Tıklayın **Tamam** mantıksal uygulama ayarlamak için. Ardından, **Tamam** içinde **eylem grubu Ekle** bölmesinde eylem grubunu oluşturmak için.
+5.  **Eylem grubu ekle** bölmesinde bir LogicApp eylemi ekleyin. Eylemi **Budget-BudgetLA** olarak adlandırın. **Mantıksal Uygulama** bölmesinden **Abonelik** ve **Kaynak grubu**’nu seçin. Ardından, bu öğreticide daha önce oluşturduğunuz **mantıksal uygulamayı** seçin.
+6.  Mantıksal uygulamayı ayarlamak için **Tamam**’a tıklayın. Ardından, eylem grubunu oluşturmak için **Eylem grubu oluştur** bölmesindeki **Tamam**’ı seçin.
 
-Bütçenizi verimli düzenlemek için gerekli tüm destekleyici bileşenleri ile hazırsınız. Şimdi tek yapmanız gereken bütçenin oluşturabilir ve oluşturduğunuz eylem grubu kullanacak şekilde yapılandırın.
+Bütçenizi etkin bir şekilde düzenlemek için gereken tüm destekleyici bileşenleri tamamladınız. Şimdi tüm yapmanız gereken, bütçeyi oluşturup oluşturduğunuz eylem grubunu kullanacak şekilde yapılandırmaktır.
 
-## <a name="create-the-azure-budget"></a>Azure bütçe oluşturun
+## <a name="create-the-azure-budget"></a>Azure Bütçesi Oluşturma
 
-Portal kullanarak azure'da bir bütçe oluşturabilirsiniz [bütçe özellik](../cost-management/tutorial-acm-create-budgets.md) maliyet Yönetimi'nde. Veya REST API'ler, Powershell cmdlet'lerini kullanarak bir bütçe oluşturun veya CLI kullanın. Aşağıdaki yordam, REST API kullanır. REST API'yi çağırmadan önce bir yetkilendirme belirteci gerekir. Bir yetkilendirme belirteci oluşturmak için kullanabileceğiniz [ARMClient](https://github.com/projectkudu/ARMClient) proje. **ARMClient** kendiniz için Azure Resource Manager kimliğini doğrulamak ve API'leri çağırmak için bir belirteç almak sağlar.
+Maliyet Yönetimi’nde [Bütçe özelliğini](../cost-management/tutorial-acm-create-budgets.md) kullanarak Azure portalında bir bütçe oluşturabilirsiniz. Ya da REST API’leri, PowerShell cmdlet’leri veya CLI kullanarak bir bütçe oluşturabilirsiniz. Aşağıdaki yordamda REST API’si kullanılmıştır. REST API’sini çağırmadan önce bir yetkilendirme belirtecine ihtiyacınız olacaktır. Yetkilendirme belirteci oluşturmak için [ARMClient](https://github.com/projectkudu/ARMClient) projesini kullanabilirsiniz. **ARMClient**, Azure Resource Manager’da kimliğinizi doğrulamanıza ve API’leri çağırmak için bir belirteç almanıza olanak tanır.
 
-### <a name="create-an-authentication-token"></a>Bir kimlik doğrulama belirteci oluştur
+### <a name="create-an-authentication-token"></a>Kimlik doğrulaması belirteci oluşturma
 
-1.  Gidin [ARMClient](https://github.com/projectkudu/ARMClient) github'daki proje.
-2.  Yerel bir kopyasını almak için deposunu kopyalayın.
-3.  Projeyi Visual Studio'da açın ve derleyin.
-4.  Derleme başarılı olduktan sonra yürütülebilir dosya içinde olmalıdır *\bin\debug* klasör.
-5.  ARMClient çalıştırın. Bir komut istemi açın ve gidin *\bin\debug* proje kök klasöründen.
-6.  Oturum açma ve kimlik doğrulaması yapmak için komut isteminde aşağıdaki komutu girin:<br>
+1.  GitHub üzerinde [ARMClient](https://github.com/projectkudu/ARMClient) projesine gidin.
+2.  Yerel bir kopya almak için depoyu klonlayın.
+3.  Projeyi Visual Studio’da açın ve derleyin.
+4.  Derleme başarılı olduktan sonra yürütülebilir dosya *\bin\debug* klasöründe olmalıdır.
+5.  ARMClient’ı çalıştırın. Bir komut istemi açın ve proje kökünden *\bin\debug* klasörüne gidin.
+6.  Oturum açmak ve kimlik doğrulaması yapmak için komut istemine aşağıdaki komutu girin:<br>
     `ARMClient login prod`
-7.  Kopyalama **abonelik guid'ini** çıktısından.
-8.  Bir yetkilendirme belirteci panonuza kopyalamak için komut isteminde, ancak emin yukarıdaki adımdan kopyalanan abonelik kimliği kullanmak aşağıdaki komutu girin: <br>
+7.  Çıktıdan **abonelik guid’si** değerini kopyalayın.
+8.  Yetkilendirme belirtecini panonuza kopyalamak için komut istemine aşağıdaki komutu girin, ancak yukarıdaki adımda kopyaladığınız abonelik kimliğini kullandığınızdan emin olun: <br>
     `ARMClient token <subscription GUID from previous step>`
 
-    Yukarıdaki adımı tamamladıktan sonra aşağıdaki görürsünüz:<br>
+    Yukarıdaki adımı tamamladıktan sonra aşağıdakileri görürsünüz:<br>
     **Belirteç başarıyla panoya kopyalandı.**
-9.  Bu öğreticinin sonraki bölümünde açıklanan adımları izleyerek için kullanılacak belirteci kaydedin.
+9.  Bu öğreticinin sonraki bölümünde yer alan adımlar için kullanılacak belirteci kaydedin.
 
-### <a name="create-the-budget"></a>Bütçe oluşturun
+### <a name="create-the-budget"></a>Bütçe Oluşturma
 
-Ardından, yapılandıracağınız **Postman** Azure tüketim REST API'lerini çağırarak bir bütçe oluşturmak için. Postman, bir API geliştirme ortamıdır. Postman içinde ortam ve koleksiyon dosyaları içeri aktaracak. Koleksiyon Azure tüketim REST API'lerini çağırma HTTP isteklerinin gruplandırılmış tanımları içerir. Koleksiyon tarafından kullanılan değişkenleri ortam dosyası içerir.
+Ardından, Azure Tüketim REST API’lerini çağırarak bütçe oluşturmak için **Postman**’i yapılandıracaksınız. Postman bir API Geliştirme ortamıdır. Ortamı ve koleksiyon dosyalarını Postman’e aktaracaksınız. Koleksiyon, Azure Tüketim REST API’lerini çağıran HTTP isteklerinin gruplandırılmış tanımlarını içerir. Ortam dosyası, koleksiyon tarafından kullanılan değişkenleri içerir.
 
-1.  İndir ve Aç [Postman REST istemcisi](https://www.getpostman.com/) REST API'lerini yürütülecek.
-2.  Postman içinde yeni bir istek oluşturun.
+1.  REST API’lerini yürütmek için [Postman REST istemcisini](https://www.getpostman.com/) indirip açın.
+2.  Postman’de yeni bir istek oluşturun.
 
-    ![Postman - yeni bir istek oluşturun](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-27.png)
+    ![Postman - Yeni istek oluşturma](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-27.png)
 
-3.  Yeni istek hiçbir şey üzerinde sahip olacak şekilde yeni istek koleksiyon olarak kaydedin.
+3.  Yeni isteği koleksiyon olarak kaydedin, böylece üzerinde hiçbir şey olmaz.
 
-    ![Postman - yeni isteği Kaydet](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-28.png)
+    ![Postman - Yeni isteği kaydetme](./media/billing-cost-management-budget-scenario/billing-cost-management-budget-scenario-28.png)
 
-4.  Değişiklik isteğini bir `Get` için bir `Put` eylem.
-5.  Değiştirerek aşağıdaki URL'yi Değiştir `{subscriptionId}` ile **abonelik kimliği** Bu öğreticinin önceki bölümünde kullanılan. Ayrıca, "SampleBudget" değeri olarak dahil edilecek URL değiştirme `{budgetName}`: `https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{budgetName}?api-version=2018-03-31`
-6.  Seçin **üstbilgileri** Postman içine sekmesi.
-7.  Yeni bir **anahtar** "Yetkilendirme" adlı.
-8.  Ayarlama **değer** ArmClient son bölümde sonunda kullanılarak oluşturulmuş belirtecine.
-9.  Seçin **gövdesi** Postman içine sekmesi.
-10. Seçin **ham** seçenek düğmesini.
-11. Metin kutusuna yapıştırın örnek bütçe tanımı ancak gerekir değiştirdiğiniz **subscriptionıd**, **budgetname**, ve **actiongroupname** parametrelerle, Abonelik kimliği, bütçenizi için benzersiz bir ad ve hem URL hem de istek gövdesi içinde oluşturulan eylem grubu adı:
+4.  İsteği `Get` eyleminden `Put` eylemine değiştirin.
+5.  `{subscriptionId}` değerini bu öğreticinin bir önceki bölümünde kullandığınız **Abonelik Kimliği** ile değiştirin. Ayrıca, URL’yi `{budgetName}`: `https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{budgetName}?api-version=2018-03-31` değeri olarak "SampleBudget" içerecek şekilde değiştirin
+6.  Postman içindeki **Üst Bilgiler** sekmesini seçin.
+7.  "Yetkilendirme" adlı yeni bir **Anahtar** ekleyin.
+8.  **Değer**’i son bölümün sonundaki ArmClient kullanılarak oluşturulan belirtece ayarlayın.
+9.  Postman içindeki **Gövde** sekmesini seçin.
+10. **Ham** düğme seçeneğini belirleyin.
+11. Metin kutusuna aşağıdaki örnek bütçe tanımını yapıştırın, ancak **subscriptionid**, **budgetname** ve **actiongroupname** parametrelerini abonelik kimliğiniz, bütçeniz için benzersiz bir ad ve hem URL’de hem de istek gövdesinde oluşturduğunuz eylem grubu adı ile değiştirmeniz gerekir:
 
     ```
         {
@@ -365,25 +365,25 @@ Ardından, yapılandıracağınız **Postman** Azure tüketim REST API'lerini ç
             }
         }
     ```
-12. Tuşuna **Gönder** isteği göndermek için.
+12. İsteği göndermek için **Gönder**’e basın.
 
-Çağırmak için gereken tüm parçaları artık sahip [API bütçesinin](https://docs.microsoft.com/rest/api/consumption/budgets). Bütçelerini API Başvurusu, aşağıdakiler dahil olmak üzere belirli istekler hakkında ayrıntılar bulunur:
-    - **budgetName** -birden çok bütçe desteklenir.  Bütçe adları benzersiz olmalıdır.
-    - **Kategori** -olmalıdır **maliyet** veya **kullanım**. API hem maliyet ve kullanım bütçeleriyle destekler.
-    - **timeGrain** -aylık, üç aylık veya yıllık bir bütçe. Tutarı, dönem sonunda sıfırlar.
-    - **filtreler** -filtreler seçili kapsamındaki kaynakların belirli bir dizi bütçeye daraltmak sağlar. Örneğin, bir filtre koleksiyonu için bir abonelik düzeyi bütçe kaynak grupları olabilir.
-    - **bildirimleri** – eşikleri ve bildirim ayrıntılarını belirler. Birden çok eşikleri ayarlayın ve bir e-posta adresi veya bir bildirim almak için bir eylem grubu sağlayın.
+Artık [Bütçeler API](https://docs.microsoft.com/rest/api/consumption/budgets)'sini çağırmak için ihtiyacınız olan tüm öğelere sahipsiniz. Bütçeler API başvurusu, aşağıdakiler de dahil olmak üzere belirli istekler hakkında ek ayrıntılar içerir:
+    - **budgetName**: Birden çok bütçe desteklenir.  Bütçe adları benzersiz olmalıdır.
+    - **category**: **Maliyet** veya **Kullanım** olmalıdır. API hem maliyet hem de kullanım bütçelerini destekler.
+    - **timeGrain**: Aylık, üç aylık veya yıllık bütçe. Süre sonunda miktar sıfırlanır.
+    - **filters**: Filtreler, bütçeyi seçili kapsam içindeki belirli bir kaynak kümesine daraltmanıza olanak tanır. Örneğin, filtre, abonelik düzeyindeki bir bütçe için kaynak grupları koleksiyonu olabilir.
+    - **notifications**: Bildirim ayrıntılarını ve eşiklerini belirler. Birden çok eşik ayarlayabilir ve bildirim almak için bir e-posta adresi veya bir eylem grubu belirtebilirsiniz.
 
 ## <a name="summary"></a>Özet
 
-Bu öğreticideki adımları uygulayarak şunları öğrendiniz:
-- Sanal makineleri durdurmak için bir Azure Otomasyonu Runbook'u oluşturma
-- Tetiklenen Azure mantıksal uygulaması oluşturma, bütçe eşiği değerlerine göre ve ilişkili runbook doğru parametrelere sahip çağırın.
-- Barındıracak Azure İzleyici eylem grubu oluşturma, bütçe eşiğine ulaşıldığında, Azure Logic App tetiklemek için yapılandırıldı.
-- Azure oluşturma ile istediğiniz eşikleri bütçe ve eylem grubuna bağlayabilirsiniz.
+Bu öğreticiyi takip ederek şunları öğrendiniz:
+- VM’leri durdurmak için Azure Otomasyonu Runbook’u oluşturma.
+- Bütçe eşiği değerlerine göre tetiklenecek bir Azure mantıksal uygulaması oluşturma ve runbook’u doğru parametrelerle çağırma.
+- Bütçe eşiğine ulaşıldığında Azure mantıksal uygulamasını tetikleyecek şekilde yapılandırılmış bir Azure İzleyici Eylem Grubu oluşturma.
+- İstenen eşiklerle Azure bütçesini oluşturma ve eylem grubuna bağlama.
 
-Yapılandırılan bütçe eşikleri ulaştığında artık tam olarak işlevsel bir bütçe kapatacak, aboneliğiniz için Vm'lerinizi sahipsiniz.
+Artık aboneliğiniz için, yapılandırılmış bütçe eşiklerinize ulaştığınızda sanal makinelerinizi kapatacak tamamen çalışan bir bütçeniz var.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Fatura Azure senaryolarla ilgili daha fazla bilgi için bkz. [faturalandırma ve maliyet Yönetimi Otomasyon senaryoları](billing-cost-management-automation-scenarios.md).
+- Azure faturalama senaryoları hakkında daha fazla bilgi için bkz. [Faturalandırma ve maliyet yönetimi otomasyonu senaryoları](billing-cost-management-automation-scenarios.md).

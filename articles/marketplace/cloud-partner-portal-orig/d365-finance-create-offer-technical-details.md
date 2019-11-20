@@ -1,53 +1,24 @@
 ---
-title: Nasıl teknik bilgi formu doldurun
-description: İçin değerler girin açıklanmaktadır yeni bir Dynamics 365 Business Central uygulaması için teknik bilgi form üzerinde.
+title: Teknik bilgi formunu doldurun
+description: Kullanım dışı ve ilgili PC makaleleriyle bağlantılı; "yeni bir Dynamics 365 Iş Merkezi uygulaması için teknik bilgi formuna değerlerin nasıl girilmesi açıklanmaktadır."
 services: Azure, Marketplace, Cloud Partner Portal,
-author: v-miclar
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 09/13/2018
+ms.date: 09/18/2019
 ms.author: pabutler
-ms.openlocfilehash: dbc38fab5bd8e55f6dd280ecc46af1b1a5ae7ede
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ffd8b22b19b8b73c99901e854b18465586fc9e7b
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935057"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820034"
 ---
-<a name="how-to-fill-out-the-technical-info-form"></a>Nasıl teknik bilgi formu doldurun
-===========================================
+# <a name="how-to-fill-out-the-technical-info-form"></a>Teknik bilgi formunu doldurun
 
-1.  İçinde **seçtiğiniz uygulama türüne** bölümünde uzantı paketi dosyanızı (.app) yükleyin ve herhangi bir uzantı paketi dosyalarını uzantınızı bir bağımlılığa sahiptir.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık Dynamics 365 İş Merkezi tekliflerinin oluşturulmasını ve yönetilmesini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 Iş Merkezi teklifi oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-business-central-offer).
 
-    ![Uygulama paketi bilgileri](./media/d365-financials/image015.png)
+## <a name="next-steps"></a>Sonraki adımlar
 
--   **Paket dosyası uzantıları** --gerekli - uzantı paketini dosyası (.app).
-
--   **Bağımlılık paket dosyası** --uygulamayı Appsource'ta yayımlanan başka bir uygulama üzerinde bir bağımlılık olup olmadığını gerekli. Geçerli uygulamanın bağımlı olduğu appsource'ta, önceden yayımlanmış uzantı bu .app dosyası. 
-
--   **Kitaplık paket dosyası** -uygulama, başka bir uygulama üzerinde bir bağımlılık olup olmadığını gerekli *değil* Appsource'ta yayımlandı. Değiştirilmediğinden ve Appsource'ta yayımlanmaz bu .app dosyası mevcut bir uygulamayı, ancak biri.
-
--   **Uygulamayı Test Otomasyonu** --gerekli - otomatik uzantılarını test için oluşturmanız gereken VS kodlanmış test paketi.
-
-1. İçinde **uzantısı için ek bilgiler** bölümünde, daha fazla bilgi için uzantıyı yükleyin. Bu bilgiler, doğrulama sırasında kullanılır.
-
-   ![Daha fazla bilgi için uygulama uzantısı formu](./media/d365-financials/image016.png)
-
-
--   **Ürün belgelerinin URL'si** uzantı belgelerine--gerekli - URL.
-
--   **Anahtar kullanım senaryoları** --gerekli - belgeye uzantısı için adım adım Kurulum ve kullanım ayrıntılarını listeler. Bir örnek makalesinde bulunabilir [kullanıcı senaryo belgeleri](https://docs.microsoft.com/dynamics-nav/compliance/apptest-userscenario/).
-
--   **Hedef sürüm** --gerekli - uygulamayı dağıtmak için sürüm seçin. Seçin **geçerli** piyasaya sürümü geçerli dağıtmak için. Seçin **yanındaki küçük** yayımlanacak sonraki alt sürüm ile dağıtılacak. Seçin **sonraki ana** yayımlanacak sonraki ana sürümünden ile dağıtılacak.
-
--   **Premium SKU gerektirir** --isteğe bağlı - Select Premium düğmesi uygulamayı Premium SKU gerektiriyorsa. Hizmet Yönetimi ve üretim yalnızca premium üzerinde kullanılabilir. Ayrıntılı bilgi temel vs Premium makalesinde bulunabilir [değiştirme özellikleri görüntülenir](https://docs.microsoft.com/dynamics365/financials/ui-experiences).
-
--   **Kod çözümleme hataları için açıklama** listeler ve gereksinimlerini karşılamadığı herhangi bir kod yaslar--isteğe bağlı - belge.
-
--   **Çekirdek işlevsellik etkilenmiş açıklaması** listeler ve sınırlı bir uzantısı tarafından herhangi bir çekirdek işlevi anlatan--isteğe bağlı - belge.
-
--   **Test hesapları** uzak Hizmetleri, web siteleri, uçtan uca kullanım test tamamlamak için gereken vb. için--isteğe bağlı - kullanıcı hesapları.
-
--   **UX gereksinimleri özel durumları** listeler ve herhangi bir kullanıcı deneyimi gereksinimi karşılanmadı uzantısı tarafından yaslar--isteğe bağlı - belge.
-
-Sonraki adımda, teklifinizi mağaza ayrıntılarını eklemektir.
+Yeni bir Dynamics 365 Iş Merkezi teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 Iş Merkezi teklifi oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-business-central-offer) bölümündeki yönergeleri izleyin.

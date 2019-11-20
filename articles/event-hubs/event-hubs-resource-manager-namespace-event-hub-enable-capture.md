@@ -1,5 +1,5 @@
 ---
-title: Etkin - yakalama ile Azure Event Hubs bir olay hub'ı Oluştur | Microsoft Docs
+title: Yakalama etkinken bir olay hub 'ı oluşturma-Azure Event Hubs | Microsoft Docs
 description: Bir olay hub'ı ile bir Azure Event Hubs ad alanı oluşturma ve Azure Resource Manager şablonu kullanarak Yakalamayı etkinleştirme
 services: event-hubs
 documentationcenter: .net
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: dotnet
 ms.workload: na
 ms.date: 02/06/2019
 ms.author: shvija
-ms.openlocfilehash: 804ef04f0066a8b8dd9df82aef03fcfc32d7cb43
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 5d980cefa5aa953a3fb9683adb589bf202e73250
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60343739"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826290"
 ---
 # <a name="create-a-namespace-with-event-hub-and-enable-capture-using-a-template"></a>Olay hub’ı ile bir ad alanı oluşturma ve şablon kullanarak Yakalamayı etkinleştirm
 
@@ -27,17 +27,17 @@ Bu makalede, bir olay hub’ı örneği ile [Event Hubs](event-hubs-what-is-even
 
 Bu makalede ayrıca seçtiğiniz hedefe göre olayları Azure Storage Bloblarında veya bir Azure Data Lake Store’da yakalamayı belirteceğiniz gösterilmektedir.
 
-Şablon oluşturma hakkında daha fazla bilgi için bkz. [Azure Resource Manager şablonları yazma][Authoring Azure Resource Manager templates]. JSON söz dizimi ve bir şablonunda kullanmak için özellikler için bkz: [Microsoft.EventHub kaynak türleri](/azure/templates/microsoft.eventhub/allversions).
+Şablon oluşturma hakkında daha fazla bilgi için bkz. [Azure Resource Manager şablonları yazma][Authoring Azure Resource Manager templates]. Bir şablonda kullanılacak JSON sözdizimi ve özellikler için bkz. [Microsoft. EventHub kaynak türleri](/azure/templates/microsoft.eventhub/allversions).
 
-Azure Kaynakları adlandırma kurallarına ilişkin uygulama ve yapılar için bkz. [Azure Kaynakları Adlandırma Kuralları][Azure Resources naming conventions].
+Azure kaynakları adlandırma kurallarına ilişkin desenler ve uygulamalar hakkında daha fazla bilgi için bkz. [Azure kaynakları adlandırma kuralları][Azure Resources naming conventions].
 
 Tam şablonlar için aşağıdaki GitHub bağlantılarına tıklayın:
 
-- [Olay hub'ı ve Depolama alanına Yakalamayı etkinleştirme şablonu][Event Hub and enable Capture to Storage template] 
-- [Olay hub'ı ve Azure Data Lake Store’a Yakalamayı etkinleştirme şablonu][Event Hub and enable Capture to Azure Data Lake Store template]
+- [Olay Hub 'ı ve depolama şablonu yakalamayı etkinleştir][Event Hub and enable Capture to Storage template] 
+- [Olay Hub 'ı ve Azure Data Lake Store şablona yakalamayı etkinleştir][Event Hub and enable Capture to Azure Data Lake Store template]
 
 > [!NOTE]
-> En yeni şablonları denetlemek için [Azure Hızlı Başlangıç Şablonları][Azure Quickstart Templates] galerisini ziyaret edin ve Event Hubs araması yapın.
+> En son şablonları denetlemek için [Azure hızlı başlangıç şablonları][Azure Quickstart Templates] Galerisi ' ni ziyaret edin ve Event Hubs arayın.
 > 
 > 
 
@@ -387,7 +387,7 @@ Bir olay hub’ı ile **EventHub** türünde bir ad alanı oluşturur ve aynı z
 ```
 
 > [!NOTE]
-> Etkinleştirmek ya da boş dosyaları kullanarak yakalama penceresi sırasında olay meydana geldiğinde yaymayı devre dışı **skipEmptyArchives** özelliği. 
+> **Skipemptyarchives** özelliğini kullanarak yakalama penceresinde hiçbir olay gerçekleşirken boş dosyaları yaymayı etkinleştirebilir veya devre dışı bırakabilirsiniz. 
 
 ## <a name="commands-to-run-deployment"></a>Dağıtımı çalıştırma komutları
 
@@ -439,6 +439,6 @@ Aşağıdaki bağlantıları inceleyerek Event Hubs hakkında daha fazla bilgi e
 
 [Authoring Azure Resource Manager templates]: ../azure-resource-manager/resource-group-authoring-templates.md
 [Azure Quickstart Templates]:  https://azure.microsoft.com/documentation/templates/?term=event+hubs
-[Azure Resources naming conventions]: https://azure.microsoft.com/documentation/articles/guidance-naming-conventions/
+[Azure Resources naming conventions]: /azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging
 [Event hub and enable Capture to Storage template]: https://github.com/Azure/azure-quickstart-templates/tree/master/201-eventhubs-create-namespace-and-enable-capture
 [Event hub and enable Capture to Azure Data Lake Store template]: https://github.com/Azure/azure-quickstart-templates/tree/master/201-eventhubs-create-namespace-and-enable-capture-for-adls

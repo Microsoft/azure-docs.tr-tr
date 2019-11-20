@@ -9,21 +9,20 @@ editor: ''
 tags: azure-service-management
 ms.assetid: de5d4285-9c7d-4735-a695-288264047375
 ms.service: app-service
-ms.devlang: multiple
 ms.topic: sample
 ms.tgt_pltfrm: na
 ms.workload: web
 ms.date: 03/20/2017
 ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: 44bc78ee0e9d3fddf91aaeb677c53716c2ce2597
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: d740dbfb1b5d16d84872ef183a52454549be617e
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66136373"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098228"
 ---
-# <a name="scale-a-web-app-manually-using-powershell"></a>PowerShell kullanarak el ile bir web uygulamasını ölçeklendirme
+# <a name="scale-a-web-app-manually-using-powershell"></a>PowerShell kullanarak bir Web uygulamasını el ile ölçeklendirme
 
 Bu senaryoda bir kaynak grubu, app service planı ve web uygulaması oluşturmayı öğreneceksiniz. Daha sonra App Service Planını tek bir örnekten birden fazla örneğe ölçeklendireceksiniz.
 
@@ -50,7 +49,7 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 | [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [Yeni AzAppServicePlan](/powershell/module/az.websites/new-azappserviceplan) | App Service planı oluşturur. |
+| [New-AzAppServicePlan](/powershell/module/az.websites/new-azappserviceplan) | App Service planı oluşturur. |
 | [New-AzWebApp](/powershell/module/az.websites/new-azwebapp) | Bir web uygulaması oluşturur. |
 | [Set-AzWebApp](/powershell/module/az.websites/set-azwebapp) | Web uygulamasının yapılandırmasını değiştirir. |
 

@@ -1,68 +1,68 @@
 ---
-title: Microsoft Azure Site Recovery sağlayıcısı yükseltme sorunlarını giderme | Microsoft Docs
-description: Anlama ve
-author: vDonGlover
-manager: jarrettr
+title: Microsoft Azure Site Recovery sağlayıcısının yükseltilmesiyle ilgili sorunları giderme
+description: Microsoft Azure Site Recovery sağlayıcısı yükseltilirken oluşan yaygın sorunları çözün.
+author: rayne-wiselman
+manager: carmonm
 ms.service: site-recovery
 ms.topic: troubleshooting
-ms.date: 02/05/2019
-ms.author: v-doglov
-ms.openlocfilehash: fc50be2a960784895947f3f154a0251f41716fc7
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/10/2019
+ms.author: raynew
+ms.openlocfilehash: 0e6631d36f8b8153c34f787f8941b45b7522aceb
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60565710"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083918"
 ---
 # <a name="troubleshoot-microsoft-azure-site-recovery-provider-upgrade-failures"></a>Microsoft Azure Site Recovery Sağlayıcısını yükseltme hatalarını giderme
 
-Bu makalede yükseltme sırasında bir Microsoft Azure Site Recovery sağlayıcısı hatalara neden olabilen sorunları çözmenize yardımcı olur.
+Bu makale, Microsoft Azure Site Recovery sağlayıcı yükseltmesi sırasında hatalara neden olabilecek sorunları çözmenize yardımcı olur.
 
-## <a name="the-upgrade-fails-reporting-that-the-latest-site-recovery-provider-is-already-installed"></a>En son Site Recovery sağlayıcısı zaten yüklü olduğunu bildirdiği yükseltme başarısız
+## <a name="the-upgrade-fails-reporting-that-the-latest-site-recovery-provider-is-already-installed"></a>Yükseltme, en son Site Recovery sağlayıcının zaten yüklü olduğunu bildiriyor
 
-Microsoft Azure Site kurtarma sağlayıcısı (DRA) yükseltme yaparken, birleşik Kurulum'u yükseltme başarısız olur ve hata iletisi verir:
+Microsoft Azure Site Recovery sağlayıcısını (DRA) yükseltirken, Birleşik kurulum yükseltmesi başarısız olur ve hata iletisini yayınlar:
 
-Yazılımı daha yüksek bir sürümü zaten yüklü olarak yükseltme desteklenmez.
+Yazılımın daha yüksek bir sürümü zaten yüklü olduğundan yükseltme desteklenmiyor.
 
 Yükseltmek için aşağıdaki adımları kullanın:
 
-1. İndirme Microsoft Azure Site Recovery birleşik Kurulumu:
-   1. "Şu anda desteklenen güncelleştirme paketlerini bağlantılar" bölümünde [hizmet güncelleştirmeleri Azure Site recovery'de](service-updates-how-to.md##links-to-currently-supported-update-rollups) makalesi, kendisine yükselttiğiniz bir sağlayıcıyı seçin.
-   2. Toplama sayfasında bulun **güncelleştirme bilgileri** bölümü ve Microsoft Azure Site Recovery birleşik kurulumu için güncelleştirme paketi yükleyin.
+1. Birleşik kurulum Site Recovery Microsoft Azure indirin:
+   1. [Azure Site Recovery makalesindeki hizmet güncelleştirmelerinin](service-updates-how-to.md##links-to-currently-supported-update-rollups) "Şu anda desteklenen güncelleştirme paketlerinin bağlantıları" bölümünde, yükseltmekte olduğunuz sağlayıcıyı seçin.
+   2. Toplama sayfasında, **güncelleştirme bilgileri** bölümünü bulun ve Site Recovery birleşik kurulum Microsoft Azure Için güncelleştirme paketini indirin.
 
-2. Bir komut istemi açın ve birleşik kurulum dosyasını karşıdan yüklediğiniz klasöre gidin. Kurulum dosyalarını kullanarak aşağıdaki komut, MicrosoftAzureSiteRecoveryUnifiedSetup.exe /q x: indirilerek ayıklamak&lt;ayıklanan dosyaları için klasör yolu&gt;.
+2. Bir komut istemi açın ve Birleşik kurulum dosyasını indirdiğiniz klasöre gidin. Aşağıdaki komutu kullanarak kurulum dosyalarını indirden ayıklayın, MicrosoftAzureSiteRecoveryUnifiedSetup. exe/q/x:&lt;ayıklanan dosyalar için klasör yolu&gt;.
     
     Örnek komut:
 
-    MicrosoftAzureSiteRecoveryUnifiedSetup.exe /q /x:C:\Temp\Extracted
+    MicrosoftAzureSiteRecoveryUnifiedSetup. exe/q/x: C:\temp\ayıklanmış
 
-3. Komut isteminde, dosyaları ayıkladığınız klasöre gidin ve aşağıdaki yükleme komutları çalıştırın:
+3. Komut isteminde, dosyaları ayıkladığınız klasöre gidin ve aşağıdaki yükleme komutlarını çalıştırın:
    
-    CX_THIRDPARTY_SETUP. EXE /VERYSILENT /SUPPRESSMSGBOXES/NORESTART UCX_SERVER_SETUP. EXE /VERYSILENT /SUPPRESSMSGBOXES/NORESTART / UPGRADE
+    CX_THIRDPARTY_SETUP. EXE/VERYSILENT/SUPPRESSMSGKUTULAR/NORESTART UCX_SERVER_SETUP. EXE/VERYSILENT/SUPPRESSMSGKUTULAR/NORESTART/UPGRADE
 
-1. Birleşik Kurulum yüklediğiniz klasöre geri dönmek ve MicrosoftAzureSiteRecoveryUnifiedSetup.exe yükseltmeyi tamamlamak için çalıştırın. 
+1. Birleşik kurulumu indirdiğiniz klasöre dönün ve yükseltme işleminin ardından MicrosoftAzureSiteRecoveryUnifiedSetup. exe ' yi çalıştırın. 
 
-## <a name="upgrade-failure-due-to-the-3rd-party-folder-being-renamed"></a>Yükseltme hatası nedeniyle adlandırılan 3. taraf klasörü
+## <a name="upgrade-failure-due-to-the-3rd-party-folder-being-renamed"></a>Yeniden adlandırılmakta olan üçüncü taraf klasör nedeniyle yükseltme hatası
 
-Yükseltmenin başarılı olması için 3. taraf klasörü kaydedilmelidir değil.
+Yükseltmenin başarılı olması için 3. taraf klasörü yeniden adlandırılmamalıdır.
 
-Bu sorunu çözmek için.
+Sorunu gidermek için.
 
-1. Kayıt Defteri Düzenleyicisi'ni (regedit.exe) başlatın ve HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\InMage Systems\Installed Products\10 dalı açın.
-1. İnceleme `Build_Version` anahtar değeri. En son sürüme olarak ayarlanırsa sürüm numarası azaltın. Örneğin, en son sürümü 9.22 ise. \* ve `Build_Version` anahtar değeri kümesine, sonra için 9.21 azaltın.\*.
-1. En son Microsoft Azure Site Recovery birleşik Kurulumu indirme:
-   1. "Şu anda desteklenen güncelleştirme paketlerini bağlantılar" bölümünde [hizmet güncelleştirmeleri Azure Site recovery'de](service-updates-how-to.md##links-to-currently-supported-update-rollups) makalesi, kendisine yükselttiğiniz bir sağlayıcıyı seçin.
-   2. Toplama sayfasında bulun **güncelleştirme bilgileri** bölümü ve Microsoft Azure Site Recovery birleşik kurulumu için güncelleştirme paketi yükleyin.
-1. Bir komut istemi açın ve için indirdiğiniz birleşik kurulum dosyası ve ayıklama klasöre kurulum dosyalarını kullanarak aşağıdaki komut, MicrosoftAzureSiteRecoveryUnifiedSetup.exe /q x: indirilerek gidin&lt;için klasör yolu Ayıklanan dosyaları&gt;.
+1. Kayıt Defteri Düzenleyicisi 'Ni (Regedit. exe) başlatın ve HKEY_LOCAL_MACHINE \Software\wow6432node\ınmage Systems\yüklü Products\10 dalını açın.
+1. `Build_Version` anahtar değerini inceleyin. En son sürüme ayarlanırsa sürüm numarasını küçültün. Örneğin, en son sürüm 9,22 ise.\* ve `Build_Version` anahtarı bu değere ayarlanır, sonra 9,21 olarak küçültün.\*.
+1. Birleşik kurulum Site Recovery en son Microsoft Azure indirin:
+   1. [Azure Site Recovery makalesindeki hizmet güncelleştirmelerinin](service-updates-how-to.md##links-to-currently-supported-update-rollups) "Şu anda desteklenen güncelleştirme paketlerinin bağlantıları" bölümünde, yükseltmekte olduğunuz sağlayıcıyı seçin.
+   2. Toplama sayfasında, **güncelleştirme bilgileri** bölümünü bulun ve Site Recovery birleşik kurulum Microsoft Azure Için güncelleştirme paketini indirin.
+1. Bir komut istemi açın ve birleştirilmiş kurulum dosyasını indirdiğiniz klasöre gidin ve aşağıdaki komutu kullanarak kurulum dosyalarını indirmeden ayıklayın, MicrosoftAzureSiteRecoveryUnifiedSetup. exe/q/x:&lt;ayıklanan dosyalar için klasör yolu&gt;.
 
     Örnek komut:
 
-    MicrosoftAzureSiteRecoveryUnifiedSetup.exe /q /x:C:\Temp\Extracted
+    MicrosoftAzureSiteRecoveryUnifiedSetup. exe/q/x: C:\temp\ayıklanmış
 
-1. Komut isteminde, dosyaları ayıkladığınız klasöre gidin ve aşağıdaki yükleme komutları çalıştırın:
+1. Komut isteminde, dosyaları ayıkladığınız klasöre gidin ve aşağıdaki yükleme komutlarını çalıştırın:
    
-    CX_THIRDPARTY_SETUP. EXE /VERYSILENT /SUPPRESSMSGBOXES/NORESTART
+    CX_THIRDPARTY_SETUP. EXE/VERYSILENT/SUPPRESSMSGKUTULAR/NORESTART
 
-1. Yüklemenin ilerleme durumunu izlemek için Görev Yöneticisi'ni kullanın. Zaman CX_THIRDPARTY_SETUP işlemi. EXE artık Görev Yöneticisi'nde göründüğünden, sonraki adıma geçin.
-1. C:\thirdparty var olduğundan ve klasörün RRD kitaplıkları içerdiğini doğrulayın.
-1. Birleşik Kurulum yüklediğiniz klasöre geri dönmek ve MicrosoftAzureSiteRecoveryUnifiedSetup.exe yükseltmeyi tamamlamak için çalıştırın. 
+1. Yüklemenin ilerlemesini izlemek için Görev Yöneticisi 'ni kullanın. CX_THIRDPARTY_SETUP için işlem. EXE artık görev yöneticisi 'nde görünmez, sonraki adıma geçin.
+1. C:\üçüncü taraf olduğunu ve klasörün RRD kitaplıklarını içerdiğini doğrulayın.
+1. Birleşik kurulumu indirdiğiniz klasöre dönün ve yükseltme işleminin ardından MicrosoftAzureSiteRecoveryUnifiedSetup. exe ' yi çalıştırın. 

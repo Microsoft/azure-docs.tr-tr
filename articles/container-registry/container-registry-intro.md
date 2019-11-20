@@ -1,27 +1,28 @@
 ---
-title: Özel Docker kapsayıcısı kayıt defterleri Azure - genel bakış
+title: Azure 'da özel Docker kapsayıcısı kayıt defterleri-genel bakış
 description: Bulut tabanlı, yönetilen, özel Docker kayıt defterleri sağlayan Azure Container Kayıt Defteri hizmetine giriş.
 services: container-registry
 author: stevelas
+manager: gwallace
 ms.service: container-registry
 ms.topic: overview
-ms.date: 04/03/2019
+ms.date: 06/28/2019
 ms.author: stevelas
 ms.custom: seodec18, mvc
-ms.openlocfilehash: ce870bfb8d29f7a808962e4d273388ab31186f10
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 2262948a8368f9448d876166b712ebaf670b5a56
+ms.sourcegitcommit: 1752581945226a748b3c7141bffeb1c0616ad720
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60828605"
+ms.lasthandoff: 09/14/2019
+ms.locfileid: "70994370"
 ---
 # <a name="introduction-to-private-docker-container-registries-in-azure"></a>Azure'da özel Docker kapsayıcısı kayıt defterlerine giriş
 
-Azure Container Kayıt Defteri, açık kaynak Docker Registry 2.0’ı temel alan bir yönetilen [Docker kayıt defteri](https://docs.docker.com/registry/) hizmetidir. Özel [Docker kapsayıcısı](https://www.docker.com/what-docker) görüntülerinizi depolamak ve yönetmek için Azure kapsayıcısı kayıt defterleri oluşturun ve bunların bakımını yapın.
+Azure Container Registry, açık kaynaklı Docker kayıt defteri 2,0 ' i temel alan yönetilen, özel bir Docker kayıt defteri hizmetidir. Özel Docker kapsayıcı görüntülerinizi depolamak ve yönetmek için Azure Container Registry oluşturma ve bakımını yapma.
 
-Azure kapsayıcı kayıt defterleri, mevcut kapsayıcı geliştirme ve dağıtım işlem hatlarınızla veya kullanın [ACR görevleri](#azure-container-registry-tasks) azure'da kapsayıcı görüntülerini oluşturmak için. İsteğe bağlı olarak oluşturun veya kaynak kodu yürütme ve temel görüntü güncelleştirmesi oluşturma tetikleyicileri ile yapıları tamamen otomatik hale getirin.
+Azure Container Registry 'yi mevcut kapsayıcı geliştirme ve dağıtım işlem hatlarınız ile birlikte kullanın veya Azure 'da kapsayıcı görüntüleri oluşturmak için Azure Container Registry görevleri kullanın. İstek üzerine derleyin veya kaynak kodu işleme ve temel görüntü güncelleştirmeleri gibi tetikleyicilerle yapıları tamamen otomatikleştirin.
 
-Docker ve kapsayıcılarla ilgili arka plan bilgileri için bkz. [Docker’a genel bakış](https://docs.docker.com/engine/docker-overview/).
+Docker ve kayıt defteri kavramları hakkında daha fazla bilgi için bkz. [Docker 'a genel bakış](https://docs.docker.com/engine/docker-overview/) ve kayıt [defterleri, depolar ve görüntüler hakkında](container-registry-concepts.md).
 
 ## <a name="use-cases"></a>Uygulama alanları
 
@@ -30,36 +31,26 @@ Azure kapsayıcısı kayıt defterinden çeşitli dağıtım hedeflerine görün
 * [Kubernetes](https://kubernetes.io/docs/), [DC/OS](https://docs.mesosphere.com/) ve [Docker Swarm](https://docs.docker.com/swarm/) dahil olmak üzere konak kümeleri arasında kapsayıcı haline getirilmiş uygulamaları yöneten **ölçeklenebilir düzenleme sistemleri**.
 * [Azure Kubernetes Service (AKS)](../aks/index.yml), [App Service](../app-service/index.yml), [Batch](../batch/index.yml), [Service Fabric](/azure/service-fabric/) ve diğerleri gibi uygun ölçekte uygulama oluşturulmasını ve çalıştırılmasını destekleyen **Azure hizmetleri**.
 
-Geliştiriciler bir kapsayıcı geliştirme iş akışı kapsamında bir kapsayıcı kayıt defterine de öğe itebilir. Örneğin, [Azure DevOps Services](https://docs.microsoft.com/azure/devops/) veya [Jenkins](https://jenkins.io/) gibi bir sürekli tümleştirme ve dağıtım aracından bir kapsayıcı kayıt defteri hedeflenebilir.
+Geliştiriciler bir kapsayıcı geliştirme iş akışı kapsamında bir kapsayıcı kayıt defterine de öğe itebilir. Örneğin, [Azure Pipelines](/azure/devops/pipelines/ecosystems/containers/acr-template) veya [Jenkins](https://jenkins.io/)gibi bir sürekli tümleştirme ve teslim aracından bir kapsayıcı kayıt defteri hedefleyin.
 
-ACR görevleri, kendi temel görüntüleri güncelleştirildiğinde uygulama görüntüleri otomatik olarak yeniden yapılandırma ya da ekibinizin kod bir Git deposuna onayladığında görüntü oluşturmayı otomatikleştirme. Oluşturma, test etme ve bulutta paralel birden çok kapsayıcı görüntülerini düzeltme otomatik hale getirmek için çok adımlı Görevler oluşturun.
+ACR görevlerini, temel görüntülerinin güncelleştirildiği sırada uygulama görüntülerini otomatik olarak yeniden oluşturmak üzere yapılandırın veya ekibiniz bir git deposuna kod onayladığınızda görüntü derlemelerini otomatikleştirin. Bulutta paralel olarak birden çok kapsayıcı görüntüsünü oluşturma, test etme ve düzeltme eki uygulama işlemlerini otomatik hale getirmek için çok adımlı Görevler oluşturun.
 
-Azure, Azure komut satırı arabirimi, Azure portal ve API desteği, Azure kapsayıcısı kayıt defterleri yönetme gibi araçları sağlar. İsteğe bağlı olarak yükleme [Visual Studio Code için Docker uzantısını](https://code.visualstudio.com/docs/azure/docker) ve [Azure hesabı](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account) uzantısı, Azure kapsayıcısı kayıt defterleri ile çalışma. Çekme ve bir Azure container registry'ye görüntüleri gönderme veya Visual Studio Code içinde tüm ACR görevler çalıştırabilirsiniz.
+Azure, Azure Container kayıt zincirlerinizi yönetmek için Azure komut satırı arabirimi, Azure portal ve API desteği dahil olmak üzere araç sağlar. İsteğe bağlı olarak [Visual Studio Code Için Docker uzantısını](https://code.visualstudio.com/docs/azure/docker) ve Azure Container Registry 'larınız ile birlikte çalışmak Için [Azure hesap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account) uzantısını yükler. Azure Container Registry 'ye görüntü çekme ve gönderme veya ACR görevlerini Visual Studio Code.
 
-## <a name="key-concepts"></a>Önemli kavramlar
+## <a name="key-features"></a>Önemli özellikler
 
-* **Kayıt Defteri** - Azure aboneliğinizde bir veya daha fazla kapsayıcı kayıt defteri oluşturun. Kayıt defterleri üç Sku'da kullanılabilir: [Temel, standart ve Premium](container-registry-skus.md), Web kancası tümleştirmesi, kayıt defteri kimlik doğrulamasını Azure Active Directory ve silme işlevlerini destekleyen her biri. Kapsayıcı görüntülerinizin yerel, kapalı bir ağda depolanmasının avantajlarından yararlanmak için dağıtımlarınızla aynı Azure konumunda bir kayıt defteri oluşturun. Gelişmiş çoğaltma ve kapsayıcı görüntüsü dağıtma senaryoları için Premium kayıt defterlerinin [coğrafi çoğaltma](container-registry-geo-replication.md) özelliğini kullanın. Tam kayıt defteri adı `myregistry.azurecr.io` biçimindedir.
+* **Kayıt defteri SKU 'ları** -Azure aboneliğinizde bir veya daha fazla kapsayıcı kayıt defteri oluşturun. Kayıt defterleri üç SKU 'da kullanılabilir: Her biri Web kancası tümleştirmesini, Azure Active Directory ile kayıt defteri kimlik doğrulamasını ve silme işlevini destekleyen [temel, standart ve Premium](container-registry-skus.md). Kapsayıcı görüntülerinizin yerel, kapalı bir ağda depolanmasının avantajlarından yararlanmak için dağıtımlarınızla aynı Azure konumunda bir kayıt defteri oluşturun. Gelişmiş çoğaltma ve kapsayıcı görüntüsü dağıtma senaryoları için Premium kayıt defterlerinin [coğrafi çoğaltma](container-registry-geo-replication.md) özelliğini kullanın. 
 
-  [Erişimini](container-registry-authentication.md) kullanarak bir Azure kimlik Azure Active Directory destekli bir kapsayıcı kayıt defterine [hizmet sorumlusu](../active-directory/develop/app-objects-and-service-principals.md), ya sağlanan yönetici hesabı. Azure CLI veya standardını kullanarak kayıt defterini oturum `docker login` komutu.
+  Bir Azure kimliği, Azure Active Directory ile desteklenen bir [hizmet sorumlusu](../active-directory/develop/app-objects-and-service-principals.md)veya sağlanmış bir yönetici hesabı kullanarak bir kapsayıcı kayıt defterine [erişimi kontrol](container-registry-authentication.md) edersiniz. Azure CLI veya standart `docker login` komutunu kullanarak kayıt defterinde oturum açın.
 
-* **Depo** -bir kayıt defteri sanal aynı ad ancak farklı bir etiket veya özetler ile kapsayıcı görüntüleri grubu olan bir veya birden çok depo içerir. Azure Container Kayıt Defteri, çok düzeyli depo ad alanlarını destekler. Çok düzeyli ad alanlarıyla, belirli bir uygulamayla veya uygulama koleksiyonuyla ilişkili görüntü koleksiyonlarını belirli geliştirme veya işlem ekipleri halinde gruplandırabilirsiniz. Örneğin:
+* **Desteklenen görüntüler ve yapıtlar** -bir depoda gruplandırılır, her görüntü Docker uyumlu kapsayıcının salt okunurdur. Azure kapsayıcısı kayıt defterleri hem Windows hem de Linux görüntüleri içerebilir. Tüm kapsayıcı dağıtımlarınız için görüntü adlarını siz denetlersiniz. Bir depoya görüntü itmek ya da bir depodan görüntü çekmek için standart [Docker komutlarını](https://docs.docker.com/engine/reference/commandline/) kullanın. Docker kapsayıcı görüntülerine ek olarak, Azure Container Registry, [Held grafikleri](container-registry-helm-repos.md) ve [Açık KAPSAYıCı girişimi (OCI) görüntü biçimi belirtimine](https://github.com/opencontainers/image-spec/blob/master/spec.md)göre oluşturulan görüntüler gibi [ilgili içerik biçimlerini](container-registry-image-formats.md) depolar.
 
-  * `myregistry.azurecr.io/aspnetcore:1.0.1`, kurum çapında bir görüntüyü temsil eder
-  * `myregistry.azurecr.io/warrantydept/dotnet-build`, garanti departmanı genelinde paylaşılan .NET uygulamaları oluşturmak için kullanılan bir görüntüyü temsil eder
-  * `myregistry.azurecr.io/warrantydept/customersubmissions/web`, garanti departmanına ait olan müşteri gönderileri uygulamasında gruplandırılan bir web görüntüsünü temsil eder
+* **Azure Container Registry görevler** -Azure 'da görüntü oluşturma, test etme, iletme ve dağıtma işlemlerini kolaylaştırmak Için [Azure Container Registry görevleri](container-registry-tasks-overview.md) (ACR görevleri) kullanın. Örneğin, Azure 'a `docker build` işlemleri boşaltarak geliştirme iç döngüsünü buluta genişletmek için ACR görevlerini kullanın. Kapsayıcı işletim sisteminizi ve çerçeve düzeltme eki uygulama işlem hattınızı otomatikleştirmek ve ekibiniz kaynak denetiminde kod yürüttüğünde otomatik olarak görüntü oluşturmak için oluşturma görevleri yapılandırın.
 
-* **Görüntü** -bir depoda depolanan görüntülerin her uyumlu Docker kapsayıcısının salt okunur anlık görüntüsüdür. Azure kapsayıcısı kayıt defterleri hem Windows hem de Linux görüntüleri içerebilir. Tüm kapsayıcı dağıtımlarınız için görüntü adlarını siz denetlersiniz. Bir depoya görüntü itmek ya da bir depodan görüntü çekmek için standart [Docker komutlarını](https://docs.docker.com/engine/reference/commandline/) kullanın. Docker kapsayıcı görüntüleri ek olarak, Azure Container Registry depolar [ilgili içerik biçimlerini](container-registry-image-formats.md) gibi [Helm grafikleri](container-registry-helm-repos.md) ve yerleşik görüntüleri [açık kapsayıcı girişim (OCI) görüntüsü Biçim belirtimi](https://github.com/opencontainers/image-spec/blob/master/spec.md).
-
-* **Kapsayıcı** - Kapsayıcı, bir yazılım uygulamasını ve uygulamanın bağımlılıklarını kod, çalışma zamanı, sistem araçları ve kitaplıkları içeren eksiksiz bir dosya sistemi şeklinde sarmalanmış bir halde tanımlar. Docker kapsayıcılarını bir kapsayıcı kayıt defterinden çektiğiniz Windows veya Linux görüntülerine bağlı olarak çalıştırın. Tek bir makinede çalışan kapsayıcılar işletim sistemi çekirdeğini paylaşır. Docker kapsayıcıları tüm büyük Linux dağıtımlarına, macOS ve Windows'a tümüyle taşınabilir.
-
-## <a name="azure-container-registry-tasks"></a>Azure Container Registry Görevleri
-
-[Azure Container Registry Görevleri](container-registry-tasks-overview.md) (ACR Görevleri), Azure’da kolaylaştırılmış ve verimli Docker kapsayıcı görüntüsü derlemeleri sağlayan bir Azure Container Registry özellik paketidir. `docker build` işlemlerini Azure’a aktararak geliştirme iç döngünüzü buluta genişletmek için ACR Görevleri kullanın. Kapsayıcı işletim sisteminizi ve çerçeve düzeltme eki uygulama işlem hattınızı otomatikleştirmek ve ekibiniz kaynak denetiminde kod yürüttüğünde otomatik olarak görüntü oluşturmak için oluşturma görevleri yapılandırın.
-
-[Çok adımlı görevler](container-registry-tasks-overview.md#multi-step-tasks) oluşturmaya, test etme ve bulutta kapsayıcı görüntülerini düzeltme adım tabanlı görev tanımı ve yürütme sağlayın. Görev adımları, tek tek kapsayıcı derleme ve gönderme işlemlerini tanımlar. Ayrıca, her adımın kapsayıcıyı kendi yürütme ortamı olarak kullanmasıyla bir veya daha fazla kapsayıcının yürütülmesini de tanımlayabilirler.
+  [Çok adımlı görevler](container-registry-tasks-overview.md#multi-step-tasks) , bulutta kapsayıcı görüntüleri oluşturmak, test etmek ve düzeltme eki uygulamak için adım tabanlı görev tanımı ve yürütme sağlar. Görev adımları, tek tek kapsayıcı derleme ve gönderme işlemlerini tanımlar. Ayrıca, her adımın kapsayıcıyı kendi yürütme ortamı olarak kullanmasıyla bir veya daha fazla kapsayıcının yürütülmesini de tanımlayabilirler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Azure portalını kullanarak kapsayıcı kayıt defteri oluşturma](container-registry-get-started-portal.md)
 * [Azure CLI’yı kullanarak kapsayıcı kayıt defteri oluşturma](container-registry-get-started-azure-cli.md)
-* [ACR Görevleri ile işletim sistemi ve çerçeve düzeltme eki uygulamayı otomatikleştirme](container-registry-tasks-overview.md)
+* [ACR görevleriyle kapsayıcı derlemelerini ve bakımını otomatikleştirin](container-registry-tasks-overview.md)

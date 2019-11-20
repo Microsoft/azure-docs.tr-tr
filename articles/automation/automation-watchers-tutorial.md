@@ -1,6 +1,6 @@
 ---
-title: İzleyici görevi Azure Otomasyonu hesabı oluşturma
-description: İzleyici görevi, bir klasörde oluşturulan yeni dosyaları izlemek üzere Azure Otomasyonu hesabı oluşturmayı öğrenin.
+title: Azure Otomasyonu hesabında izleyici görevi oluşturma
+description: Bir klasörde oluşturulan yeni dosyaları izlemek için Azure Otomasyonu hesabında izleyici görevi oluşturmayı öğrenin.
 services: automation
 ms.service: automation
 ms.subservice: process-automation
@@ -8,104 +8,118 @@ author: eamonoreilly
 ms.author: eamono
 ms.topic: conceptual
 ms.date: 10/30/2018
-ms.openlocfilehash: bee414ada61e2cfcf7609b02ef1da7323a0fe0e3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 75341fa2df6972dbf05542577d56ab35315919e6
+ms.sourcegitcommit: 5b76581fa8b5eaebcb06d7604a40672e7b557348
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61304648"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68989245"
 ---
-# <a name="create-an-azure-automation-watcher-tasks-to-track-file-changes-on-a-local-machine"></a>Bir Azure Otomasyonu izleyicisini yerel bir makinede dosya değişiklikleri izlemek için görevleri oluşturun
+# <a name="create-an-azure-automation-watcher-tasks-to-track-file-changes-on-a-local-machine"></a>Yerel bir makinedeki dosya değişikliklerini izlemek için bir Azure Otomasyonu izleyici görevi oluşturma
 
-Azure Otomasyonu İzleyici görevleri için olayları izleyin ve PowerShell runbook'ları ile eylemleri tetiklemek için kullanır. Bu öğreticide bir dizine yeni bir dosya eklendiğinde izlemek için bir izleyici görevi oluşturma işleminde size yol gösterir.
+Azure Otomasyonu, PowerShell runbook 'ları ile olayları izlemek ve eylemleri tetiklemek için izleyici görevlerini kullanır. Bu öğreticide, bir dizine yeni bir dosya eklendiğinde izlenecek bir izleyici görevi oluşturma işlemi adım adım açıklanmaktadır.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Bir izleyici runbook'u İçeri Aktar
-> * Bir Otomasyon değişkeni oluşturma
-> * Eylem runbook oluşturma
+> * İzleyici runbook 'unu içeri aktarma
+> * Otomasyon değişkeni oluşturma
+> * Eylem runbook 'u oluşturma
 > * İzleyici görevi oluşturma
-> * Tetikleyici bir izleyici
-> * Çıktıyı İnceleme
+> * İzleyici tetikleyin
+> * Çıktıyı inceleyin
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu öğreticiyi tamamlamak için aşağıdakiler gereklidir:
 
 * Azure aboneliği. Henüz bir aboneliğiniz yoksa [MSDN abone avantajlarınızı etkinleştirebilir](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/) ya da [ücretsiz hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) için kaydolabilirsiniz.
-* [Otomasyon hesabı](automation-offering-get-started.md) izleyiciyi, eylem runbook'ları ve İzleyici görevi tutacak.
-* A [karma runbook çalışanı](automation-hybrid-runbook-worker.md) İzleyici görevi çalıştığı.
+* İzleyici ve eylem runbook 'larını ve Izleyici görevini tutacak [Otomasyon hesabı](automation-offering-get-started.md) .
+* İzleyici görevinin çalıştırıldığı [karma bir runbook worker](automation-hybrid-runbook-worker.md) .
 
 > [!NOTE]
-> İzleyici görevleri Azure Çin'de desteklenmez.
+> İzleyici görevleri Azure Çin 'de desteklenmez.
 
-## <a name="import-a-watcher-runbook"></a>Bir izleyici runbook'u İçeri Aktar
+## <a name="import-a-watcher-runbook"></a>İzleyici runbook 'unu içeri aktarma
 
-Bu öğreticide adlı bir izleyici runbook'u **Watch NewFile** yeni dosyaları bir dizinde aramak için. Bir izleyici runbook'u bir klasördeki dosyaları için son bilinen yazma zamanını alır ve bu eşik daha yeni olan herhangi bir dosya arar. Bu adımda, bu runbook, Otomasyon hesabına aktarın.
+Bu öğretici, bir dizindeki yeni dosyaları aramak için **Watch-NewFile** adlı bir izleyici runbook 'unu kullanır. İzleyici runbook 'u, son bilinen yazma süresini bir klasördeki dosyalara alır ve bu filigrandan daha yeni olan dosyalara bakar.
 
-1. Otomasyon hesabınızı açın ve tıklayarak **runbook'ları** sayfası.
-2. Tıklayarak **Galeriye Gözat** düğmesi.
-3. "İzleyici runbook'u", select Ara **yeni dosyaları bir dizinde bakan İzleyici runbook'u** seçip **alma**.
-  ![Kullanıcı Arabiriminden Otomasyon runbook'u İçeri Aktar](media/automation-watchers-tutorial/importsourcewatcher.png)
-1. Runbook'a bir ad ve açıklama ve select vermek **Tamam** runbook Otomasyon hesabınızda içeri aktarmak için.
-1. Seçin **Düzenle** ve ardından **Yayımla**. Zaman seçim istenir **Evet** runbook'u yayımlayamadı.
+Bu içeri aktarma işlemi [PowerShell Galerisi](https://www.powershellgallery.com)aracılığıyla yapılabilir.
 
-## <a name="create-an-automation-variable"></a>Bir Otomasyon değişkeni oluşturma
+1. [Watch-NewFile. ps1](https://gallery.technet.microsoft.com/scriptcenter/Watcher-runbook-that-looks-36fc82cd)için Galeri sayfasına gidin.
+2. **Azure Otomasyonu** sekmesi altında **Azure Otomasyonu 'na dağıt**' a tıklayın.
 
-Bir [automation değişkeni](automation-variables.md) önceki runbook okuyan ve depolar her bir dosyadan zaman damgaları depolamak için kullanılır.
+Ayrıca, aşağıdaki adımları kullanarak bu runbook 'u portaldan Otomasyon hesabınıza aktarabilirsiniz.
 
-1. Seçin **değişkenleri** altında **paylaşılan kaynakları** seçip **+ değişken Ekle**.
-1. "Watch-NewFileTimestamp" adını girin
-1. DateTime türünü seçin.
-1. Tıklayarak **Oluştur** düğmesi. Bu Otomasyon değişkeni oluşturur.
+1. Otomasyon hesabınızı açın ve **runbook 'lar** sayfasına tıklayın.
+2. **Galeriye gözatamıyorum** düğmesine tıklayın.
+3. "Izleyici runbook" ifadesini arayın, **bir dizinde yeni dosyalar için görünen izleyici runbook 'unu** seçin ve **içeri aktar**' ı seçin.
+  ![Otomasyon Runbook 'unu kullanıcı arabiriminden içeri aktar](media/automation-watchers-tutorial/importsourcewatcher.png)
+1. Runbook 'a bir ad ve açıklama verin ve Runbook 'u Otomasyon hesabınıza aktarmak için **Tamam** ' ı seçin.
+1. **Düzenle** ' yi seçin ve ardından **Yayımla**' ya tıklayın. İstendiğinde, runbook 'u yayımlamak için **Evet** ' i seçin.
 
-## <a name="create-an-action-runbook"></a>Eylem runbook oluşturma
+## <a name="create-an-automation-variable"></a>Otomasyon değişkeni oluşturma
 
-Eylem runbook bir izleyici görevi, bir izleyici runbook'tan geçirilen verileri üzerinde işlem için kullanılır. PowerShell iş akışı runbook'ları İzleyici görevleri tarafından desteklenmiyor, PowerShell runbook'ları kullanmanız gerekir. Bu adımda, içeri aktarma güncelleştirme "İşlem NewFile" adlı önceden tanımlanmış eylem runbook.
+Bir [Otomasyon değişkeni](automation-variables.md) , önceki runbook 'un her bir dosyadan okuduğu ve depoladığı zaman damgalarını depolamak için kullanılır.
 
-1. Otomasyon hesabınıza gidin ve seçin **runbook'ları** altında **süreç OTOMASYONU** kategorisi.
-1. Tıklayarak **Galeriye Gözat** düğmesi.
-1. "İzleyici eylemi için" arayıp seçin **bir izleyici runbook'u tarafından tetiklenen olayları işler İzleyici eylemi** seçip **alma**.
-  ![Kullanıcı Arabiriminden eylemi runbook'u İçeri Aktar](media/automation-watchers-tutorial/importsourceaction.png)
-1. Runbook'a bir ad ve açıklama ve select vermek **Tamam** runbook Otomasyon hesabınızda içeri aktarmak için.
-1. Seçin **Düzenle** ve ardından **Yayımla**. Zaman seçim istenir **Evet** runbook'u yayımlayamadı.
+1. **PAYLAŞıLAN kaynaklar** altında **değişkenler** ' i seçin ve **+ değişken Ekle**' yi seçin.
+1. Ad için "Watch-NewFileTimestamp" yazın
+1. Tür için tarih saati seçin.
+1. **Oluştur** düğmesine tıklayın. Bu, Otomasyon değişkenini oluşturur.
+
+## <a name="create-an-action-runbook"></a>Eylem runbook 'u oluşturma
+
+Bir işlem runbook 'u, bir izleyici runbook 'tan kendisine geçirilen veriler üzerinde işlem yapmak için bir izleyici görevinde kullanılır. PowerShell Iş akışı runbook 'ları izleyici görevleri tarafından desteklenmiyor, PowerShell runbook 'ları kullanmanız gerekir. **İşlem-NewFile**adlı önceden tanımlanmış bir eylem runbook 'unu içeri aktarmanız gerekir.
+
+Bu içeri aktarma işlemi [PowerShell Galerisi](https://www.powershellgallery.com)aracılığıyla yapılabilir.
+
+1. [Process-NewFile. ps1](https://gallery.technet.microsoft.com/scriptcenter/Watcher-action-that-b4ff7cdf)için Galeri sayfasına gidin.
+2. **Azure Otomasyonu** sekmesi altında **Azure Otomasyonu 'na dağıt**' a tıklayın.
+
+Ayrıca, aşağıdaki adımları kullanarak bu runbook 'u portaldan Otomasyon hesabınıza aktarabilirsiniz.
+
+1. Otomasyon hesabınıza gidin ve **Işlem Otomasyonu** kategorisi altında **runbook 'lar** ' ı seçin.
+1. **Galeriye gözatamıyorum** düğmesine tıklayın.
+1. "Izleyici eylemi" araması yapın ve **bir izleyici runbook 'u tarafından tetiklenen olayları Işleyen izleyici eylemini** seçin ve **içeri aktar**' ı seçin.
+  ![Eylem runbook 'unu kullanıcı arabiriminden içeri aktar](media/automation-watchers-tutorial/importsourceaction.png)
+1. Runbook 'a bir ad ve açıklama verin ve Runbook 'u Otomasyon hesabınıza aktarmak için **Tamam** ' ı seçin.
+1. **Düzenle** ' yi seçin ve ardından **Yayımla**' ya tıklayın. İstendiğinde, runbook 'u yayımlamak için **Evet** ' i seçin.
 
 ## <a name="create-a-watcher-task"></a>İzleyici görevi oluşturma
 
-İzleyici görevi iki bölüm içerir. İzleyiciyi, eylem. İzleyici görevi'içinde tanımlanan bir aralıkta İzleyicisi çalıştırır. İzleyici runbook'u verileri, eylem runbook geçirilir. Bu adımda, önceki adımlarda tanımlanan izleyiciyi, eylem runbook'ları başvuran İzleyici görevi yapılandırın.
+İzleyici görevi iki bölümden oluşur. İzleyici ve eylem. İzleyici izleyici görevinde tanımlanan bir aralıkta çalışır. İzleyici runbook 'una ait veriler runbook 'a geçirilir. Bu adımda, önceki adımlarda tanımlanan izleyici ve eylem runbook 'larına başvuran izleyici görevini yapılandırırsınız.
 
-1. Otomasyon hesabınıza gidin ve seçin **İzleyici görevleri** altında **süreç OTOMASYONU** kategorisi.
-1. İzleyici görevleri sayfasını seçin ve tıklayın **+ İzleyici görevi Ekle** düğmesi.
-1. "WatchMyFolder" adı girin.
+1. Otomasyon hesabınıza gidin ve **Işlem Otomasyonu** kategorisi altındaki **izleyici görevleri** ' ni seçin.
+1. Izleyici görevleri sayfasını seçin ve **+ izleyici görevi Ekle** düğmesine tıklayın.
+1. Ad olarak "WatchMyFolder" yazın.
 
-1. Seçin **yapılandırma İzleyicisi** seçip **Watch NewFile** runbook.
+1. İzleyiciyi **Yapılandır** ' ı seçin ve **Izle-NewFile** runbook 'unu seçin.
 
 1. Parametreler için aşağıdaki değerleri girin:
 
-   * **FOLDERPATH** -karma çalışanı yeni dosya oluşturulduğu bir klasör. d:\examplefiles
-   * **UZANTI** -tüm dosya uzantılarını işlemek için boş bırakın.
-   * **RECURSE** -bu değeri varsayılan olarak bırakın.
-   * **ÇALIŞTIRMA ayarları** -karma çalışanı'nı seçin.
+   * **FOLDERPATH** -yeni dosyaların oluşturulduğu karma çalışan bir klasör. d:\examplefiles
+   * **Uzantı** -tüm dosya uzantılarını işlemek için boş bırakın.
+   * **Recurse** -bu değeri varsayılan olarak bırakın.
+   * **Çalışma ayarları** -karma çalışanı seçin.
 
-1. Tamam'a tıklayın ve ardından İzleyicisi sayfasına geri dönün.
-1. Seçin **eylemini yapılandırma** ve "İşlem NewFile" runbook'u seçin.
+1. Tamam ' a tıklayın ve ardından izleyici sayfasına dönmek için öğesini seçin.
+1. **Eylemi Yapılandır** ' ı seçin ve "Işlem-NewFile" runbook 'unu seçin.
 1. Parametreler için aşağıdaki değerleri girin:
 
-   * **EVENTDATA** -boş bırakın. Veri İzleyicisi runbook'tan geçirilir.  
-   * **Çalıştırma ayarları** -olarak Azure'a bırakın Bu runbook Otomasyon hizmeti çalışırken.
+   * **Eventdata** -boş bırakın. Veriler izleyici runbook 'tan geçirilir.
+   * **Çalıştır ayarları** -bu runbook 'un Otomasyon hizmetinde çalıştığından Azure olarak bırakın.
 
-1. Tıklayın **Tamam**ve ardından İzleyicisi sayfasına geri dönün.
-1. Tıklayın **Tamam** İzleyici görevi oluşturmak için.
+1. **Tamam**' a tıklayın ve ardından izleyici sayfasına dönmek Için öğesini seçin.
+1. İzleyici görevini oluşturmak için **Tamam** ' ı tıklatın.
 
-![Kullanıcı arabiriminden İzleyici eylemi yapılandırın](media/automation-watchers-tutorial/watchertaskcreation.png)
+![Kullanıcı arabiriminden izleyici eylemini yapılandırma](media/automation-watchers-tutorial/watchertaskcreation.png)
 
-## <a name="trigger-a-watcher"></a>Tetikleyici bir izleyici
+## <a name="trigger-a-watcher"></a>İzleyici tetikleyin
 
-İzleyici test beklendiği gibi çalıştığından, bir test dosyası oluşturmanız gerekir.
+İzleyicinin beklendiği gibi çalıştığını test etmek için bir test dosyası oluşturmanız gerekir.
 
-Uzak bağlantı karma çalışanı kurun. Açık **PowerShell** ve klasöründe bir sınama dosyası oluşturun.
-  
+Karma çalışana uzaktan. **PowerShell** 'i açın ve klasörde bir test dosyası oluşturun.
+
 ```azurepowerShell-interactive
 New-Item -Name ExampleFile1.txt
 ```
@@ -121,16 +135,16 @@ Mode                LastWriteTime         Length Name
 -a----       12/11/2017   9:05 PM              0 ExampleFile1.txt
 ```
 
-## <a name="inspect-the-output"></a>Çıktıyı İnceleme
+## <a name="inspect-the-output"></a>Çıktıyı inceleyin
 
-1. Otomasyon hesabınıza gidin ve seçin **İzleyici görevleri** altında **süreç OTOMASYONU** kategorisi.
-1. İzleyici görevi "WatchMyFolder" seçin.
-1. Tıklayarak **İzleyici akışlarını görüntüle** altında **akışları** İzleyicisi yeni dosyası bulundu ve eylemi runbook'u başlatan görmek için.
-1. Eylem runbook işlerini görmek için tıklayın **İzleyici eylemi işlerini görüntüleme**. Her bir iş olabilir Seçili işin ayrıntılarını görüntüleyin.
+1. Otomasyon hesabınıza gidin ve **Işlem Otomasyonu** kategorisi altındaki **izleyici görevleri** ' ni seçin.
+1. "WatchMyFolder" izleyici görevini seçin.
+1. İzleyicinin yeni dosyayı bulup runbook 'u başlatmadığını görmek için **akışlar** ' ın altındaki **izleyici akışlarını görüntüle** ' ye tıklayın.
+1. Runbook işlerini görmek için izleyiciyi **görüntüle eylem işleri**' ne tıklayın. Her iş seçilebilir ve işin ayrıntıları görüntülenir.
 
-   ![İzleyici eylemi işlerini kullanıcı arabiriminden](media/automation-watchers-tutorial/WatcherActionJobs.png)
+   ![Kullanıcı arabiriminden izleyici eylem işleri](media/automation-watchers-tutorial/WatcherActionJobs.png)
 
-Aşağıdaki örnekte yeni bir dosya bulunduğunda beklenen çıktıyı görülebilir:
+Yeni dosya bulunduğunda beklenen çıkış aşağıdaki örnekte görülebilir:
 
 ```output
 Message is Process new file...
@@ -145,15 +159,15 @@ Passed in data is @{FileName=D:\examplefiles\ExampleFile1.txt; Length=0}
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 
 > [!div class="checklist"]
-> * Bir izleyici runbook'u İçeri Aktar
-> * Bir Otomasyon değişkeni oluşturma
-> * Eylem runbook oluşturma
+> * İzleyici runbook 'unu içeri aktarma
+> * Otomasyon değişkeni oluşturma
+> * Eylem runbook 'u oluşturma
 > * İzleyici görevi oluşturma
-> * Tetikleyici bir izleyici
-> * Çıktıyı İnceleme
+> * İzleyici tetikleyin
+> * Çıktıyı inceleyin
 
-Kendi runbook yazma hakkında daha fazla bilgi için bu bağlantıyı izleyin.
+Kendi runbook 'unuzu yazma hakkında daha fazla bilgi edinmek için bu bağlantıyı izleyin.
 
 > [!div class="nextstepaction"]
-> [İlk PowerShell runbook'um](automation-first-runbook-textual-powershell.md).
+> [Ilk PowerShell runbook 'Um](automation-first-runbook-textual-powershell.md).
 

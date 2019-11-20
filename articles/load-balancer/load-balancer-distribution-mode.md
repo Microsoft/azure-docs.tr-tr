@@ -4,7 +4,7 @@ titlesuffix: Azure Load Balancer
 description: Kaynak IP benzeşimi desteklemek Azure Load Balancer için dağıtım modunu yapılandırma
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
@@ -12,13 +12,13 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/25/2017
-ms.author: kumud
-ms.openlocfilehash: afa840bd0b48cc9df1e9711caa035b85e8ec3855
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: allensu
+ms.openlocfilehash: 0d3ddf2e005338a19972cfcdef025579764f7f23
+ms.sourcegitcommit: 8e1fb03a9c3ad0fc3fd4d6c111598aa74e0b9bd4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66122411"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70114711"
 ---
 # <a name="configure-the-distribution-mode-for-azure-load-balancer"></a>Azure Load Balancer için dağıtım modunu yapılandırma
 
@@ -32,7 +32,7 @@ Azure Load Balancer için varsayılan dağıtım modu bir 5 bölütlü karmadır
 
 ## <a name="source-ip-affinity-mode"></a>Kaynak IP benzeşimi modu
 
-Yük Dengeleyici kaynak IP benzeşimi dağıtım modunu kullanarak de yapılandırılabilir. Bu dağıtım olarak da bilinen oturum benzeşimi veya istemci IP benzeşimi modudur. 3'lü demet (kaynak IP, hedef IP ve protokol türü) karma şekilde kullanılabilir sunuculara trafik eşlemek için ya da 2-tanımlama grubu (kaynak IP ve hedef IP) modunu kullanır. Kaynak IP benzeşimi kullanarak, aynı istemci bilgisayardan başlatılır bağlantıları aynı DIP uç noktasına gidin.
+Yük Dengeleyici kaynak IP benzeşimi dağıtım modunu kullanarak de yapılandırılabilir. Bu dağıtım olarak da bilinen oturum benzeşimi veya istemci IP benzeşimi modudur. 3'lü demet (kaynak IP, hedef IP ve protokol türü) karma şekilde kullanılabilir sunuculara trafik eşlemek için ya da 2-tanımlama grubu (kaynak IP ve hedef IP) modunu kullanır. Kaynak IP benzeşimini kullanarak, aynı istemci bilgisayarından başlatılan bağlantılar aynı DIP uç noktasına gider.
 
 Aşağıdaki şekilde, 2 bölütlü yapılandırma gösterilmektedir. 2 bölütlü yük dengeleyiciden sanal makineye 1 (VM1) nasıl çalıştığını dikkat edin. VM1, ardından VM2 ve VM3 tarafından yedeklenir.
 
@@ -42,7 +42,7 @@ Kaynak IP benzeşimi modu, Azure Load Balancer ve Uzak Masaüstü Ağ Geçidi (R
 
 Başka bir kullanım örneği senaryosu medya karşıya yükleme ' dir. UDP karşıya veri yükleme olur, ancak denetim düzlemi TCP elde edilir:
 
-* Bir istemci, yük dengeli genel adresine TCP oturumu başlatır ve belirli bir DÜŞÜŞ yönlendirilir. Kanal, bağlantı durumunu izlemek için etkin kalır.
+* İstemci, yük dengeli ortak adrese bir TCP oturumu başlatır ve belirli bir DIP 'ye yönlendirilir. Kanal, bağlantı durumunu izlemek için etkin kalır.
 * Aynı yük dengeli genel uç noktası için yeni bir UDP oturumu aynı istemci bilgisayardan başlatılır. Bağlantı, önceki TCP bağlantı olarak aynı DIP uç noktasına yönlendirilir. Medya karşıya yükleme, bir denetim kanalı üzerinden TCP korurken yüksek aktarım hızını çalıştırılabilir.
 
 > [!NOTE]
@@ -50,9 +50,26 @@ Başka bir kullanım örneği senaryosu medya karşıya yükleme ' dir. UDP kar�
 
 ## <a name="configure-source-ip-affinity-settings"></a>Kaynak IP benzeşimi ayarlarını yapılandırma
 
-Resource Manager ile dağıtılan sanal makineler için mevcut bir Yük Dengeleme kuralı üzerinde yük dengeleyici dağıtım ayarlarını değiştirmek için PowerShell kullanın. Bu dağıtım modunu güncelleştirir: 
+### <a name="azure-portal"></a>Azure portal
 
-```powershell
+Portalda Yük Dengeleme kuralını değiştirerek dağıtım modunun yapılandırmasını değiştirebilirsiniz.
+
+1. Azure portal oturum açın ve **kaynak grupları**' na tıklayarak değiştirmek istediğiniz yük dengeleyiciyi Içeren kaynak grubunu bulun.
+2. Yük Dengeleyiciye genel bakış dikey penceresinde, **Ayarlar**' ın altındaki **Yük Dengeleme kuralları** ' na tıklayın.
+3. Yük Dengeleme kuralları dikey penceresinde, Dağıtım modunu değiştirmek istediğiniz yük dengeleme kuralına tıklayın.
+4. Kural altında, **oturum kalıcılığı** açılan kutusu değiştirilerek dağıtım modu değiştirilir.  Aşağıdaki seçenekler mevcuttur:
+    
+    * **Hiçbiri (karma tabanlı)** -aynı istemciden gelen ardışık isteklerin herhangi bir sanal makine tarafından işlenebileceğini belirtir.
+    * **ISTEMCI IP (kaynak IP benzeşimi 2-kayıt düzeni)** -aynı istemci IP adresinden gelen isteklerin aynı sanal makine tarafından işleneceğini belirtir.
+    * **İstemci IP 'si ve Protokolü (kaynak IP benzeşimi 3-kayıt)** -aynı istemci IP adresi ve protokol birleşimlerinden gelen ardışık isteklerin aynı sanal makine tarafından işleneceğini belirtir.
+
+5. Dağıtım modunu seçin ve ardından **Kaydet**' e tıklayın.
+
+### <a name="azure-powershell"></a>Azure PowerShell
+
+Kaynak Yöneticisi ile dağıtılan sanal makineler için, var olan bir yük dengeleme kuralında yük dengeleyici dağıtım ayarlarını değiştirmek için PowerShell kullanın. Aşağıdaki komut Dağıtım modunu güncelleştirir: 
+
+```azurepowershell-interactive
 $lb = Get-AzLoadBalancer -Name MyLb -ResourceGroupName MyLbRg
 $lb.LoadBalancingRules[0].LoadDistribution = 'sourceIp'
 Set-AzLoadBalancer -LoadBalancer $lb
@@ -60,7 +77,7 @@ Set-AzLoadBalancer -LoadBalancer $lb
 
 Klasik sanal makineler için dağıtım ayarlarını değiştirmek için Azure PowerShell kullanırsınız. Bir sanal makineye Azure uç nokta ekleyin ve yük dengeleyici dağıtım modunu yapılandırın:
 
-```powershell
+```azurepowershell-interactive
 Get-AzureVM -ServiceName mySvc -Name MyVM1 | Add-AzureEndpoint -Name HttpIn -Protocol TCP -PublicPort 80 -LocalPort 8080 –LoadBalancerDistribution sourceIP | Update-AzureVM
 ```
 
@@ -88,13 +105,13 @@ Bir uç nokta yük dengeleyici dağıtım modu yapılandırma, bu ayarları kull
     IdleTimeoutInMinutes : 15
     LoadBalancerDistribution : sourceIP
 
-Zaman `LoadBalancerDistribution` öğesi yoksa, Azure Load Balancer varsayılan 5-tuple algoritması kullanır.
+`LoadBalancerDistribution` Öğe yoksa, Azure Load Balancer varsayılan 5 demet algoritmasını kullanır.
 
 ### <a name="configure-distribution-mode-on-load-balanced-endpoint-set"></a>Yük dengeli uç nokta kümesine dağıtım modunu yapılandırma
 
 Uç noktaları yük dengeli uç nokta kümesinin bir parçası olduğunda dağıtım modunu yük dengeli uç nokta kümesinde yapılandırılması gerekir:
 
-```azurepowershell
+```azurepowershell-interactive
 Set-AzureLoadBalancedEndpoint -ServiceName MyService -LBSetName LBSet1 -Protocol TCP -LocalPort 80 -ProbeProtocolTCP -ProbePort 8080 –LoadBalancerDistribution sourceIP
 ```
 

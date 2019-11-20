@@ -1,67 +1,67 @@
 ---
-title: Azure Blockchain sınırları
-description: Azure Blockchain hizmetindeki işlev sınırları ve hizmet genel bakış
+title: Azure blok zinciri sınırları
+description: Azure blok zinciri hizmetindeki hizmet ve işlevsel sınırlara genel bakış
 services: azure-blockchain
-keywords: Blok zinciri
+keywords: ''
 author: PatAltimore
 ms.author: patricka
 ms.date: 05/02/2019
-ms.topic: article
+ms.topic: conceptual
 ms.service: azure-blockchain
 ms.reviewer: janders
 manager: femila
-ms.openlocfilehash: 169ec7a8ef407af3f754046aa8e3b06793a7e962
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 20c26db9453220270d17801b74d904384c74cb36
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65028178"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73577212"
 ---
-# <a name="limits-in-azure-blockchain-service"></a>Azure Blockchain hizmet sınırları
+# <a name="limits-in-azure-blockchain-service"></a>Azure blok zinciri hizmeti sınırları
 
-Azure Blockchain hizmet, hizmet ve düğümleri üyesi olabilir, consortium kısıtlamaları ve depolama alanı miktarları sayısı gibi işlevsel sınırları vardır.
+Azure blok zinciri hizmeti, bir üyenin sahip olduğu düğüm sayısı, konsorsiyum kısıtlamaları ve depolama tutarları gibi hizmet ve işlevsel sınırlara sahiptir.
 
 ## <a name="pricing-tier"></a>Fiyatlandırma katmanı
 
-Temel veya standart fiyatlandırma katmanları Azure blok zinciri hizmeti olup sağlama işlemleri ve Doğrulayıcı düğümleri sınırlarını bağlıdır.
+İşlem ve doğrulayıcı düğümlerine yönelik en fazla sınır, Azure blok zinciri hizmetini temel veya standart fiyatlandırma katmanlarında sağlayıp sağlamadığınıza bağlıdır.
 
 | Fiyatlandırma katmanı | En fazla işlem düğümleri | En fazla Doğrulayıcı düğümleri |
 |:---|:---:|:---:|
 | Temel | 10 | 1 |
 | Standart | 10 | 2 |
 
-Üye oluşturma desteklenmiyor sonra fiyatlandırma katmanını temel ve standart arasında değiştirme.
+Üye oluşturulduktan sonra temel ve standart arasındaki fiyatlandırma katmanını değiştirmek desteklenmez.
 
 ## <a name="storage-capacity"></a>Depolama kapasitesi
 
-En fazla düğüm başına kayıt defteri verileri ve günlükleri için kullanılan depolama 1 terabayt miktarıdır.
+Muhasebe verileri ve Günlükler için düğüm başına kullanılabilecek maksimum depolama alanı miktarı 1,8 terabayt 'dir.
 
-Muhasebe ve günlük depolama boyutunu küçültme desteklenmiyor.
+Azalan defter ve günlük depolama boyutu desteklenmiyor.
 
-## <a name="consortium-limits"></a>Consortium sınırları
+## <a name="consortium-limits"></a>Konsorsiyum sınırları
 
-* **Consortium ve üye adları benzersiz olmalıdır** Azure blok zinciri hizmetindeki diğer consortium ve üye adlarından.
+* **Konsorsiyumun ve üye adlarının** Azure blok zinciri hizmetindeki diğer konsorsiyum ve üye adlarından benzersiz olması gerekir.
 
-* **Üye ve consortium adları değiştirilemez.**
+* **Üye ve konsorsiyum adları değiştirilemez**
 
-* **Konsorsiyumu tüm üyeleri aynı fiyatlandırma katmanında olmalıdır**
+* **Bir konsorsiyumun tüm üyeleri aynı fiyatlandırma katmanında olmalıdır**
 
-* **İçinde bir konsorsiyum katılan tüm üyeleri aynı bölgede bulunmalıdır.**
+* **Bir konsorsiyumde katılan tüm Üyeler aynı bölgede bulunmalıdır**
 
-    İlk üye Konsorsiyumu içinde oluşturulan bölgeyi belirler. Davet edilen üye consortium ilk üye ile aynı bölgede bulunmalıdır. Tüm üyeleri aynı bölgeye sınırlama, ağ fikir birliğine varılmış olumsuz etkilenmez garanti eder.
+    Bir konsorsiyda oluşturulan ilk üye bölgeyi belirler. Bir konsorsiyumye davet edilen Üyeler ilk üyeyle aynı bölgede bulunmalıdır. Tüm üyelerin aynı bölgeye sınırlandırılması, ağ konsensus 'in olumsuz şekilde etkilenmemesini sağlamaya yardımcı olur.
 
-* **Konsorsiyumu en az bir yönetici olması gerekir**
+* **Konsorsiyumun en az bir Yöneticisi olmalıdır**
 
-    İçinde bir konsorsiyum yalnızca bir yönetici ise bunlar kendilerini consortium kaldıramaz veya üye başka bir yöneticinin eklendiğinde veya consortium yükseltilen kadar sil.
+    Bir konsorsiyumda yalnızca bir yönetici varsa, bu kullanıcılar kendi konsorsiyumdan kaldıramazlar veya konsorsiyumun başka bir Yöneticisi eklenip yükseltilene kadar üyelerini silmez.
 
-* **Consortium kaldırılan üyeler tekrar eklenemez.**
+* **Konsorsiyumun kaldırıldığı Üyeler yeniden eklenemez**
 
-    Bunun yerine, bunlar consortium katılın ve yeni bir üye oluşturmak için ortamına yeniden davet gerekir. Mevcut kullanıcıların üye kaynağı, geçmiş işlemleri korumak için silinmez.
+    Bunun yerine, konsorsiyumun katılması için yeniden davet edilmesi ve yeni bir üye oluşturulması gerekir. Geçmiş işlemleri korumak için mevcut üye kaynakları silinmez.
 
-* **Konsorsiyumu tüm üyeleri aynı kayıt defteri sürüm kullanıyor olmalıdır**
+* **Bir konsorsiyumun tüm üyeleri aynı muhasebe sürümünü kullanıyor olmalıdır**
 
-    Düzeltme eki uygulama, güncelleştirmeleri ve Azure blok zinciri hizmetinde kullanılabilir muhasebe sürümleri hakkında daha fazla bilgi için bkz. [düzeltme eki uygulama, güncelleştirmeleri ve sürümleri](ledger-versions.md).
+    Azure blok zinciri hizmeti 'nde kullanılabilen düzeltme eki, güncelleştirmeler ve genel muhasebe sürümleri hakkında daha fazla bilgi için bkz. [düzeltme eki uygulama, güncelleştirmeler ve sürümler](ledger-versions.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Düzeltme eki uygulama, güncelleştirmeleri ve sürümleri](ledger-versions.md)
+* [Düzeltme eki uygulama, güncelleştirmeler ve sürümler](ledger-versions.md)

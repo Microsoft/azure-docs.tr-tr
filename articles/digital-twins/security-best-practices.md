@@ -1,77 +1,80 @@
 ---
-title: En iyi güvenlik uygulamaları, Azure dijital İkizlerini anlama | Microsoft Docs
-description: Azure dijital İkizlerini güvenlik en iyi yöntemler.
-author: kingdomofends
-manager: alinast
+title: En iyi güvenlik yöntemlerini anlama-Azure dijital TWINS | Microsoft Docs
+description: Azure dijital TWINS ve Nesnelerin İnterneti için en iyi güvenlik yöntemleri hakkında bilgi edinin.
+ms.author: alinast
+author: alinamstanciu
+manager: bertvanhoof
 ms.service: digital-twins
 services: digital-twins
 ms.topic: conceptual
-ms.date: 01/15/2019
-ms.author: v-adgera
-ms.openlocfilehash: 1d7194beeac1f6f0034738c842e0fc3a58668a13
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.openlocfilehash: 9f3f98863f9a7cd0e6328ddc75b1154ee933fe0b
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65966967"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74009245"
 ---
-# <a name="security-best-practices"></a>En iyi güvenlik uygulamaları
+# <a name="azure-digital-twins-security-best-practices"></a>Azure Digital TWINS güvenliği en iyi yöntemleri
 
-Azure dijital İkizlerini güvenlik belirli kaynaklara ve işlemlere, IOT Graph'te tam erişim sağlar. Bunu ayrıntılı rol ve adlı izin Yönetimi yapar [rol tabanlı erişim denetimi](./security-role-based-access-control.md).
+Azure dijital TWINS güvenliği, IoT grafiğinizde belirli kaynaklara ve eylemlere kesin erişim sağlar. Bu, ayrıntılı rol ve [rol tabanlı erişim denetimi](./security-role-based-access-control.md)adlı izin yönetimini kolaylaştırır.
 
-Azure dijital İkizlerini, Azure Active Directory (Azure AD) dahil olmak üzere Azure IOT içinde mevcut olan diğer güvenlik özellikleri de kullanır. Bu nedenle, yapılandırma ve Azure dijital İkizlerini üzerinde oluşturulan uygulamaları güvenli hale getirme birçoğu aynı kullanılmasına [Azure IOT güvenlik uygulamaları](../iot-fundamentals/iot-security-best-practices.md) şu anda önerilir.
+Azure dijital TWINS Ayrıca, Azure Active Directory (Azure AD) dahil olmak üzere Azure IoT 'de mevcut olan diğer güvenlik özelliklerini de kullanır. Bu nedenle, Azure dijital TWINS üzerinde oluşturulmuş uygulamaların yapılandırılması ve güvenliğini sağlamak, şu anda önerilen aynı [Azure IoT güvenlik uygulamalarının](../iot-fundamentals/iot-security-best-practices.md) birçoğunu kullanmayı içerir.
 
-Bu makalede izlemek için anahtar en iyi yöntemler özetlenmiştir.
+Bu makalede, izlenecek başlıca en iyi yöntemler özetlenmektedir.
 
 > [!IMPORTANT]
-> IOT alanınızın düzeyde güvenlik sağlamak için ek güvenlik kaynakları gözden geçirin. Cihaz satıcılarınıza eklediğinizden emin olun.
+> IoT alanınız için maxhayvan güvenliği sağlamak üzere ek güvenlik kaynakları ' nı gözden geçirin. Cihaz satıcılarınızı eklediğinizden emin olun.
+
+> [!TIP]
+> IoT güvenlik tehditlerini ve güvenlik açıklarını algılamaya yardımcı olması için [IoT Için Azure Güvenlik Merkezi](https://docs.microsoft.com/azure/asc-for-iot/) 'ni kullanın.
 
 ## <a name="iot-security-best-practices"></a>IoT güvenliği için en iyi uygulamalar
 
-Güvenle IOT cihazlarınızı güvenli hale getirmek için bazı önemli yöntemler şunlardır:
+IoT cihazlarınızı güvenle güvenli hale getirmeye yönelik bazı önemli uygulamalar şunlardır:
 
 > [!div class="checklist"]
-> * IOT alanınıza artıklığının şekilde bağlı her cihazı güvenli hale getirin.
-> * Her cihaz, sensör ve IOT alanınız içinde kişi rolünü sınırlayın. İhlal edilmesi durumunda etkisini en aza indirilir.
-> * Cihaz IP olası kullanımını göz önünde bulundurun filtreleme, adres ve bağlantı noktası kısıtlama.
-> * Performansı artırmak için g/ç ve cihaz bant genişliğini sınırlayın. Hız sınırlama, hizmet reddi saldırılarını önleyerek güvenliğini artırabilirsiniz.
-> * Cihaz üretici yazılımını güncel tutun.
+> * IoT alanınıza bağlı her cihazı, yetkisiz kullanım için güvenli hale getirin.
+> * IoT alanınızdaki her bir cihaz, algılayıcı ve kişinin rolünü sınırlayın. Tehlikeye atılırsa, efekt en aza indirilir.
+> * Cihaz IP adresi filtrelemesi ve bağlantı noktası kısıtlamasının olası kullanımını göz önünde bulundurun.
+> * Performansı artırmak için g/ç ve cihaz bant genişliğini sınırlayın. Hız sınırlaması, hizmet reddi saldırılarını önlemek için güvenliği iyileştirebilir.
+> * Cihaz bellenimini güncel tutun.
+> * Geliştirme ve gelişmeye devam ettikleri için cihaz, ağ ve ağ geçidi güvenlik en iyi uygulamalarını düzenli olarak denetleyin ve inceleyin.
 
-Güvenle IOT alanına güvenli hale getirmek için bazı önemli yöntemler şunlardır:
+IoT alanını güvenle güvenli hale getirmeye yönelik bazı önemli uygulamalar şunlardır:
 
 > [!div class="checklist"]
 > * Kaydedilmiş, depolanmış veya kalıcı verileri şifreleyin.
-> * Parola veya anahtarlarını düzenli aralıklarla değiştirildi veya yenilenmesi gerekir.
-> * Role göre dikkatli bir şekilde erişim ve izinleri kısıtlayın. Bölümüne bakın [rol tabanlı erişim denetimi en iyi](#rbac) aşağıda.
-> * Güçlü şifreleme kullanın. Uzun parola gerektirir ve güvenli protokolleri ve iki öğeli kimlik doğrulaması kullanın.
+> * Parolaların veya anahtarların düzenli aralıklarla değiştirilmesini veya yenilenmesini gerektir.
+> * Erişimi ve izinleri role göre dikkatle kısıtlayın. Aşağıda, [rol tabanlı erişim denetimi en iyi uygulamaları](#role-based-access-control-best-practices) bölümüne bakın.
+> * Her ağdaki cihazların diğerlerinden yalıtılmış olması için bölünmüş bir ağ topolojisini göz önünde bulundurun.
+> * Güçlü şifreleme kullanın. Uzun parolalar gerektir ve güvenli protokoller ve iki öğeli kimlik doğrulama kullanın.
 
-[İzleyici](./how-to-configure-monitoring.md) aykırı değerleri, tehditleri veya normal işlem aralığı dışında kalan kaynak parametreleri izlemek üzere IOT kaynakları. Yönetim izlemek için Azure Analytics'i kullanma.
+[İzleme](./how-to-configure-monitoring.md) Her zamanki işlem aralığının dışında kalan aykırı ler, tehditler veya kaynak parametreleri için izlenecek IoT kaynakları. İzleme Yönetimi için Azure Analytics 'i kullanın.
 
 > [!NOTE]
-> Olay işleme ve izleme hakkında daha fazla bilgi için bkz. [rota olayları ve iletileri Azure dijital çiftleri ile](./concepts-events-routing.md).
+> Olay işleme ve izleme hakkında daha fazla bilgi için bkz. [Azure Digital TWINS ile olayları ve Iletileri yönlendirme](./concepts-events-routing.md).
 
-## <a name="azure-active-directory-best-practices"></a>Azure Active Directory en iyi uygulamaları
+## <a name="azure-active-directory-best-practices"></a>En iyi Azure Active Directory uygulamalar
 
-Azure dijital İkizlerini, kullanıcıların kimliklerini doğrulamak ve uygulamaları korumak için Azure Active Directory kullanır. Azure Active Directory, çeşitli modern mimarileri için kimlik doğrulamasını destekler. Tüm OAuth 2.0 veya Openıd Connect gibi endüstri standardı protokoller temel. IOT alanınız için Azure Active Directory güvenliğini sağlamak için birkaç önemli yöntemler şunlardır:
+Azure dijital TWINS, kullanıcıların kimliğini doğrulamak ve uygulamaları korumak için Azure Active Directory kullanır. Azure Active Directory, çeşitli modern mimarilerin kimlik doğrulamasını destekler. Bunlar, OAuth 2,0 veya OpenID Connect gibi endüstri standardı protokoller temel alınarak yapılır. Azure Active Directory IoT alanınızı güvenli hale getirmeye yönelik birkaç temel uygulama şunlardır:
 
 > [!div class="checklist"]
-> * Azure Active Directory Uygulama gizli dizileri ve anahtarları güvenli bir konumda gibi Store [Azure anahtar kasası](https://azure.microsoft.com/services/key-vault/).
-> * Güvenilen bir tarafından yayınlanan bir sertifika kullanmak [sertifika yetkilisi](../active-directory/authentication/active-directory-certificate-based-authentication-get-started.md) kimliğini doğrulamak için uygulama gizli anahtarlarının yerine.
-> * OAuth 2.0 belirteç için erişim kapsamını sınırlandırın.
-> * Bir belirtecin geçerli olduğu süreyi doğrulayın ve bir belirteç olup geçerli kalır.
-> * Uygun uzunlukta belirteçleri için geçerli olan süreyi ayarlayın.
-> * Süresi dolan yenileyin.
+> * Azure Active Directory uygulama gizli dizilerini ve anahtarlarını [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)gibi güvenli bir konuma depolayın.
+> * Kimlik doğrulaması yapmak için uygulama gizli dizileri yerine güvenilen bir [sertifika yetkilisi](../active-directory/authentication/active-directory-certificate-based-authentication-get-started.md) tarafından verilen bir sertifika kullanın.
+> * Belirteç için OAuth 2,0 erişim kapsamını sınırlayın.
+> * Belirtecin geçerli olduğu sürenin uzunluğunu ve belirtecin geçerli olmaya devam edilip edilmeyeceğini doğrulayın.
+> * Belirteçlerin geçerli olduğu sürenin uzunluğunu ayarlayın.
+> * Süre dolma belirteçleri yenileyin.
 
-<div id="rbac"></div>
-
-## <a name="role-based-access-control-best-practices"></a>Rol tabanlı erişim denetimi en iyi uygulamalar
+## <a name="role-based-access-control-best-practices"></a>Rol tabanlı erişim denetimi en iyi yöntemleri
 
 [!INCLUDE [digital-twins-rbac-best-practices](../../includes/digital-twins-rbac-best-practices.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Azure IOT en iyi uygulamalar hakkında daha fazla bilgi edinmek için [IOT güvenlik en iyi](../iot-fundamentals/iot-security-best-practices.md).
+* Azure IoT en iyi uygulamaları hakkında daha fazla bilgi edinmek için [IoT güvenliği en iyi yöntemlerini](../iot-fundamentals/iot-security-best-practices.md)okuyun.
 
-* Rol tabanlı erişim denetimi hakkında bilgi edinmek için [rol tabanlı erişim denetimi](./security-role-based-access-control.md).
+* Rol tabanlı erişim denetimi hakkında bilgi edinmek için [rol tabanlı erişim denetimi](./security-role-based-access-control.md)makalesini okuyun.
 
-* Kimlik doğrulaması hakkında bilgi edinmek için [API'leri ile kimlik doğrulama](./security-authenticating-apis.md).
+* Kimlik doğrulaması hakkında bilgi edinmek için, [API 'Lerle kimlik doğrulamasını](./security-authenticating-apis.md)okuyun.

@@ -1,32 +1,28 @@
 ---
-title: Öğretici - Azure Kubernetes Service (AKS) ansible'ı kullanarak Azure CNI ağ yapılandırma | Microsoft Docs
-description: Azure Kubernetes Service (AKS) kümesi içinde ağ kubernetes yapılandırmak için Ansible'ı kullanmayı öğrenin
-keywords: ansible'ı, azure, devops, bash, cloudshell, playbook, aks, kapsayıcı, aks, kubernetes
+title: Öğretici-Azure Kubernetes Service 'te (AKS) Azure CNı ağını, anormal bir şekilde yapılandırma
+description: Azure Kubernetes Service (AKS) kümesinde Kubernetes kullanan ağını yapılandırmak için nasıl kullanılacağını öğrenin
+keywords: anyalabilen, Azure, DevOps, Bash, cloudshell, PlayBook, aks, Container, aks, Kubernetes
 ms.topic: tutorial
-ms.service: ansible
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.date: 04/30/2019
-ms.openlocfilehash: 2d43b1ffbb7910b16c81df2ff5b21e67dbcb0193
-ms.sourcegitcommit: 2ce4f275bc45ef1fb061932634ac0cf04183f181
+ms.openlocfilehash: e3667ad7a561f56d5fddaacad705c53d1de9ac36
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/07/2019
-ms.locfileid: "65231367"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74156904"
 ---
-# <a name="tutorial-configure-azure-cni-networking-in-azure-kubernetes-service-aks-using-ansible"></a>Öğretici: Azure Kubernetes Service (AKS) ansible'ı kullanarak Azure CNI ağı yapılandırma
+# <a name="tutorial-configure-azure-cni-networking-in-azure-kubernetes-service-aks-using-ansible"></a>Öğretici: Azure Kubernetes Service 'te (AKS) Azure CNı ağını, anormal bir şekilde yapılandırma
 
 [!INCLUDE [ansible-28-note.md](../../includes/ansible-28-note.md)]
 
 [!INCLUDE [open-source-devops-intro-aks.md](../../includes/open-source-devops-intro-aks.md)]
 
-AKS kullanarak, aşağıdaki ağ modelleri kullanarak bir kümeyi dağıtabilirsiniz:
+AKS 'i kullanarak, aşağıdaki ağ modellerini kullanarak bir küme dağıtabilirsiniz:
 
-- [Kubernetes ağ](/azure/aks/configure-kubenet) -ağ kaynaklarını genellikle oluşturulur ve AKS kümesi dağıtılır olarak yapılandırılmış.
-- [Azure CNI ağ](/azure/aks/configure-azure-cni) -AKS kümesini mevcut sanal ağ (VNET) kaynakları ve yapılandırmaların bağlı.
+- [Kubenet Networking](/azure/aks/configure-kubenet) -ağ kaynakları genellikle aks kümesi dağıtıldığında oluşturulur ve yapılandırılır.
+- [Azure CNI ağı](/azure/aks/configure-azure-cni) -aks kümesi, var olan sanal ağ (VNet) kaynaklarına ve yapılandırmalarına bağlanır.
 
-Uygulamalarınıza aks'deki ağ hakkında daha fazla bilgi için bkz. [kavramları aks'deki uygulamalar için ağ](/azure/aks/concepts-network).
+AKS 'deki uygulamalarınızın ağı hakkında daha fazla bilgi için bkz. [AKS 'teki uygulamalar Için ağ kavramları](/azure/aks/concepts-network).
 
 [!INCLUDE [ansible-tutorial-goals.md](../../includes/ansible-tutorial-goals.md)]
 
@@ -43,10 +39,10 @@ Uygulamalarınıza aks'deki ağ hakkında daha fazla bilgi için bkz. [kavramlar
 
 ## <a name="create-a-virtual-network-and-subnet"></a>Sanal ağ ve alt ağ oluşturma
 
-Bu bölümdeki örnek playbook kodu için kullanılır:
+Bu bölümdeki örnek PlayBook kodu şu şekilde kullanılır:
 
-- Sanal ağ oluştur
-- Sanal ağ içindeki alt ağ oluşturma
+- Sanal ağ oluşturma
+- Sanal ağ içinde bir alt ağ oluşturma
 
 Aşağıdaki playbook'u `vnet.yml` olarak kaydedin:
 
@@ -67,11 +63,11 @@ Aşağıdaki playbook'u `vnet.yml` olarak kaydedin:
   register: subnet
 ```
 
-## <a name="create-an-aks-cluster-in-the-virtual-network"></a>Sanal ağda bir AKS kümesi oluşturma
+## <a name="create-an-aks-cluster-in-the-virtual-network"></a>Sanal ağda AKS kümesi oluşturma
 
-Bu bölümdeki örnek playbook kodu için kullanılır:
+Bu bölümdeki örnek PlayBook kodu şu şekilde kullanılır:
 
-- Bir sanal ağ içindeki bir AKS kümesi oluşturun.
+- Bir sanal ağ içinde AKS kümesi oluşturun.
 
 Aşağıdaki playbook'u `aks.yml` olarak kaydedin:
 
@@ -106,21 +102,21 @@ Aşağıdaki playbook'u `aks.yml` olarak kaydedin:
   register: aks
 ```
 
-Örnek playbook'u ile çalışırken dikkate alınması gereken bazı önemli notlar şunlardır:
+Örnek PlayBook ile çalışırken göz önünde bulundurmanız gereken bazı önemli notlar şunlardır:
 
-- Kullanım `azure_rm_aks_version` desteklenen sürümü bulmak için modül.
-- `vnet_subnet_id` Önceki bölümde oluşturduğunuz alt ağı.
-- Playbook'u yükler `ssh_key` gelen `~/.ssh/id_rsa.pub`. Değiştirirseniz, tek satırlı biçimde (tırnak işaretleri olmadan) "ssh-rsa" ile başlayan - kullanın.
-- `client_id` Ve `client_secret` gelen yüklenen değerler `~/.azure/credentials`, varsayılan kimlik bilgileri dosyası olduğu. Bu değerleri hizmetinize asıl ayarlayabilir veya bu değerleri ortam değişkenlerinden yükleyin:
+- Desteklenen sürümü bulmak için `azure_rm_aks_version` modülünü kullanın.
+- `vnet_subnet_id`, önceki bölümde oluşturulan alt ağıdır.
+- PlayBook, `~/.ssh/id_rsa.pub``ssh_key` yükler. Bunu değiştirirseniz, "SSH-RSA" (tırnak işaretleri olmadan) ile başlayan tek satır biçimini kullanın.
+- `client_id` ve `client_secret` değerleri, varsayılan kimlik bilgisi dosyası olan `~/.azure/credentials`'dan yüklenir. Bu değerleri hizmet sorumlusu olarak ayarlayabilir veya bu değerleri ortam değişkenlerinden yükleyebilirsiniz:
 
     ```yml
     client_id: "{{ lookup('env', 'AZURE_CLIENT_ID') }}"
     client_secret: "{{ lookup('env', 'AZURE_SECRET') }}"
     ```
 
-## <a name="run-the-sample-playbook"></a>Örnek playbook çalıştırın
+## <a name="run-the-sample-playbook"></a>Örnek PlayBook 'u çalıştırma
 
-Bu bölümdeki örnek playbook kodu, Bu öğretici boyunca gösterilen çeşitli özelliklerini test etmek için kullanılır.
+Bu bölümdeki örnek PlayBook kodu, bu öğretici genelinde gösterilen çeşitli özellikleri test etmek için kullanılır.
 
 Aşağıdaki playbook'u `aks-azure-cni.yml` olarak kaydedin:
 
@@ -150,19 +146,19 @@ Aşağıdaki playbook'u `aks-azure-cni.yml` olarak kaydedin:
            var: aks
 ```
 
-Örnek playbook'u ile çalışırken dikkate alınması gereken bazı önemli notlar şunlardır:
+Örnek PlayBook ile çalışırken göz önünde bulundurmanız gereken bazı önemli notlar şunlardır:
 
-- Değişiklik `aksansibletest` kaynak grubunuzun adı değeri.
-- Değişiklik `aksansibletest` AKS adınızla değeri.
-- Değişiklik `eastus` değeri, kaynak grubu konumu.
+- `aksansibletest` değerini kaynak grubu adı olarak değiştirin.
+- `aksansibletest` değerini AKS adınızla değiştirin.
+- `eastus` değerini kaynak grubu konumuyla değiştirin.
 
-Ansible playbook komutunu kullanarak playbook çalıştırın:
+Anerişilebilir-PlayBook komutunu kullanarak PlayBook 'u çalıştırın:
 
 ```bash
 ansible-playbook aks-azure-cni.yml
 ```
 
-Playbook'u çalıştırdıktan sonra aşağıdaki sonuçları benzer bir çıktı görürsünüz:
+PlayBook çalıştırıldıktan sonra aşağıdaki sonuçlara benzer bir çıktı görürsünüz:
 
 ```Output
 PLAY [localhost] 
@@ -248,11 +244,11 @@ localhost                  : ok=9    changed=4    unreachable=0    failed=0    s
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, bu makalede oluşturduğunuz kaynakları silin. 
+Artık gerekli değilse, bu makalede oluşturulan kaynakları silin. 
 
-Bu bölümdeki örnek playbook kodu için kullanılır:
+Bu bölümdeki örnek PlayBook kodu şu şekilde kullanılır:
 
-- Bir kaynak grubu için başvurulan silme `vars` bölümü.
+- `vars` bölümünde başvurulan bir kaynak grubunu silin.
 
 Aşağıdaki playbook'u `cleanup.yml` olarak kaydedin:
 
@@ -269,12 +265,12 @@ Aşağıdaki playbook'u `cleanup.yml` olarak kaydedin:
             force: yes
 ```
 
-Örnek playbook'u ile çalışırken dikkate alınması gereken bazı önemli notlar şunlardır:
+Örnek PlayBook ile çalışırken göz önünde bulundurmanız gereken bazı önemli notlar şunlardır:
 
-- Değiştirin `{{ resource_group_name }}` yer tutucusu yerine kaynak grubunuzun adını.
-- Belirtilen kaynak grubu içindeki tüm kaynaklar silinir.
+- `{{ resource_group_name }}` yer tutucusunu kaynak grubunuzun adıyla değiştirin.
+- Belirtilen kaynak grubundaki tüm kaynaklar silinecek.
 
-Ansible playbook komutunu kullanarak playbook çalıştırın:
+Anerişilebilir-PlayBook komutunu kullanarak PlayBook 'u çalıştırın:
 
 ```bash
 ansible-playbook cleanup.yml
@@ -283,4 +279,4 @@ ansible-playbook cleanup.yml
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Öğretici: Azure Active Directory Ansible kullanarak AKS yapılandırın](./ansible-aks-configure-rbac.md)
+> [Öğretici: anormal kullanarak AKS 'de Azure Active Directory yapılandırma](./ansible-aks-configure-rbac.md)

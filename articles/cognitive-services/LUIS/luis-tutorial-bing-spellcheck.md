@@ -1,6 +1,6 @@
 ---
-title: Doğru yanlış yazılan sözcükleri
-titleSuffix: Azure
+title: Yanlış yazılmış kelimeleri Düzelt-LUSıS
+titleSuffix: Azure Cognitive Services
 description: Bing yazım denetimi API'si V7 LUIS uç nokta sorgulara ekleyerek konuşma doğru yanlış yazılan sözcükleri.
 services: cognitive-services
 author: diberry
@@ -8,26 +8,30 @@ manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 03/04/2019
+ms.topic: conceptual
+ms.date: 11/15/2019
 ms.author: diberry
-ms.openlocfilehash: 1e5536b08b3b78f35426207369f444e6eb21c87d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 238b76040559148c48aa67b99e856a5987b71a7e
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60495037"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74123166"
 ---
 # <a name="correct-misspelled-words-with-bing-spell-check"></a>Bing yazım denetimi ile doğru yanlış yazılan sözcükleri
 
 LUIS uygulamanızı ile tümleştirebilirsiniz [Bing yazım denetimi API'si V7](https://azure.microsoft.com/services/cognitive-services/spell-check/) LUIS puanı ve utterance varlıklarının tahmin önce Konuşma yanlış yazılan sözcükleri düzeltmek için. 
+
+[!INCLUDE [Not supported in V3 API prediction endpoint](./includes/v2-support-only.md)]
+
 
 ## <a name="create-first-key-for-bing-spell-check-v7"></a>Bing yazım denetimi V7'için ilk tuşu oluşturma
 [İlk Bing yazım denetimi API'si v7 anahtarı](https://azure.microsoft.com/try/cognitive-services/?api=spellcheck-api) ücretsizdir. 
 
 ![Ücretsiz anahtarı oluşturma](./media/luis-tutorial-bing-spellcheck/free-key.png)
 
-< bir adı "Oluştur-subscription-key" ></a>
+<a name="create-subscription-key"></a>
+
 ## <a name="create-endpoint-key"></a>Uç noktası anahtarı oluşturma
 Ücretsiz anahtarınızı süresi bir uç noktası anahtarı oluşturun.
 
@@ -89,7 +93,13 @@ Uç nokta URL'si doğru geçirilmesi gereken birkaç değer sahiptir. Bing yazı
 ```
 
 ## <a name="ignore-spelling-mistakes"></a>Yazım hatalarını yoksay
-Bing yazım denetimi API'si v7 hizmetini kullanmayı istemiyorsanız, yazım hatalarını sahip ve böylece LUIS uygun yazım ve bunun yanı sıra yazım hatası edinebilirsiniz konuşma etiketleyebilirsiniz. Bu seçenek bir yazım denetleyicisi kullanmaktan daha fazla etiketleme çaba gerektirir.
+
+Bing Yazım Denetimi API'si v7 hizmetini kullanmak istemiyorsanız, doğru ve yanlış yazım denetimi eklemeniz gerekir. 
+
+İki çözüm vardır:
+
+* Her türlü farklı yazımlar içeren, LUTO 'ın doğru yazım ve yazım hataları öğrenmeleri için etiketlenmesi gereken her türlü etiket örneği. Bu seçenek bir yazım denetleyicisi kullanmaktan daha fazla etiketleme çaba gerektirir.
+* Sözcüğün tüm çeşitlemelerine sahip bir tümcecik listesi oluşturun. Bu çözümle, örnek çeşitlerdeki sözcük çeşitlemelerini etiketlemenize gerek yoktur. 
 
 ## <a name="publishing-page"></a>Yayımlama Sayfası
 [Yayımlama](luis-how-to-publish-app.md) sayfasına sahip bir **etkinleştirme Bing yazım denetleyicisi** onay kutusu. Anahtar oluşturun ve uç nokta URL'sini nasıl değiştiğini anlamak için bir kolaylık budur. Yine de her utterance için düzeltilen yazım sahip olmak için doğru uç noktaya parametreleri kullanmak zorunda. 

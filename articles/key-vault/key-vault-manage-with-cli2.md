@@ -1,71 +1,70 @@
 ---
-title: Azure anahtar Kasası'nın CLI - Azure Key Vault kullanarak yönetme | Microsoft Docs
-description: Azure CLI kullanarak anahtar Kasası'nda ortak görevleri otomatik hale getirmek için bu makaleyi kullanın.
+title: CLı-Azure Key Vault kullanarak Azure Key Vault yönetme | Microsoft Docs
+description: Azure CLı kullanarak Key Vault ortak görevleri otomatikleştirmek için bu makaleyi kullanın
 services: key-vault
-author: barclayn
-manager: barbkess
-tags: azure-resource-manager
+author: msmbaldwin
+manager: rkarlin
 ms.service: key-vault
-ms.topic: conceptual
-ms.date: 01/10/2019
-ms.author: barclayn
-ms.openlocfilehash: d7d76458601b2afecafc1313e334215bf08b6545
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: tutorial
+ms.date: 08/12/2019
+ms.author: mbaldwin
+ms.openlocfilehash: 51e5c654da95732409c3bbb7acae088d8935a59d
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64713842"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71000633"
 ---
-# <a name="manage-key-vault-using-the-azure-cli"></a>Azure CLI ile anahtar Kasası'nı yönetme 
+# <a name="manage-key-vault-using-the-azure-cli"></a>Azure CLı kullanarak Key Vault yönetme 
 
-Bu makalede, Azure CLI kullanarak Azure anahtar kasası ile çalışmaya başlamak nasıl ele alınmaktadır.  Şirket bilgileri görebilirsiniz:
+Bu makalede, Azure CLı kullanarak Azure Key Vault ile çalışmaya başlama işlemi açıklanır.  Şu bilgileri görebilirsiniz:
 
-- Azure'da sağlamlaştırılmış bir kapsayıcı (kasa) oluşturma
-- Bir anahtar kasasına bir anahtar, parola veya sertifika ekleme
-- Bir uygulamayı Azure Active Directory'ye kaydetme
-- Bir uygulamayı bir anahtar veya gizli dizi kullanmak için yetkilendirme
-- Anahtar kasası erişim ilkeleri gelişmiş ayar
-- Donanım güvenlik modülleri (HSM'ler) ile çalışma
-- Anahtar kasasını ve ilişkili anahtarları ve gizli anahtarları silme
+- Azure 'da sağlamlaştırılmış bir kapsayıcı (kasa) oluşturma
+- Anahtar kasasına anahtar, gizli dizi veya sertifika ekleme
+- Azure Active Directory ile uygulama kaydetme
+- Bir uygulamayı anahtar veya gizli dizi kullanacak şekilde yetkilendirme
+- Anahtar Kasası Gelişmiş erişim ilkelerini ayarlama
+- Donanım güvenlik modülleri (HSM 'ler) ile çalışma
+- Anahtar kasasını ve ilişkili anahtarları ve gizli dizileri silme
 - Çeşitli Azure platformlar arası komut satırı arabirimi komutları
 
 
 Azure Anahtar Kasası çoğu bölgede kullanılabilir. Daha fazla bilgi için bkz. [Anahtar Kasası fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/key-vault/).
 
 > [!NOTE]
-> Bu makalede adımlarından biri, bir anahtar veya gizli anahtar Kasası'nda kullanmak için bir uygulamanın nasıl gösterir içerdiğini Azure uygulaması yazma yönergeleri içermez.
+> Bu makalede, bir uygulamanın anahtar kasasında anahtar veya gizli dizi kullanma yetkisini nasıl yetkilendirecek hakkında, adımlardan birine dahil olmak üzere Azure uygulamasını yazma yönergeleri dahil değildir.
 >
 
-Azure anahtar kasası genel bakış için bkz. [Azure anahtar kasası nedir?](key-vault-whatis.md)
+Azure Key Vault genel bir bakış için bkz. [Azure Key Vault nedir?](key-vault-overview.md)
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu makalede Azure CLI komutlarını kullanmak için aşağıdakilerin olması gerekir:
+Bu makaledeki Azure CLı komutlarını kullanmak için aşağıdaki öğelere sahip olmanız gerekir:
 
 * Bir Microsoft Azure aboneliği. Hesabınız yoksa, [ücretsiz deneme için kaydolabilirsiniz](https://azure.microsoft.com/pricing/free-trial).
-* Azure komut satırı arabirimi 2.0 veya sonraki bir sürümü. En son sürümünü yüklemek için bkz: [Azure CLI'yı yükleme](/cli/azure/install-azure-cli).
-* Bir anahtar ya da bu makalede oluşturduğunuz parola kullanmak için yapılandırılmış bir uygulama. [Microsoft Yükleme Merkezi](https://www.microsoft.com/download/details.aspx?id=45343)'nde örnek bir uygulama kullanılabilir. Yönergeler için dahil edilen Benioku dosyasına bakın.
+* Azure komut satırı arabirimi sürüm 2,0 veya üzeri. En son sürümü yüklemek için bkz. [Azure CLI 'Yı yüklemek](/cli/azure/install-azure-cli).
+* Bu makalede oluşturduğunuz anahtar veya parolayı kullanacak şekilde yapılandırılacak bir uygulama. [Microsoft Yükleme Merkezi](https://www.microsoft.com/download/details.aspx?id=45343)'nde örnek bir uygulama kullanılabilir. Yönergeler için, eklenen Benioku dosyasına bakın.
 
-### <a name="getting-help-with-azure-cross-platform-command-line-interface"></a>Azure platformlar arası komut satırı arabirimi ile Yardım alma
+### <a name="getting-help-with-azure-cross-platform-command-line-interface"></a>Azure platformlar arası komut satırı arabirimi ile ilgili yardım alma
 
-Bu makalede, komut satırı arabirimi (Bash, Terminal, komut istemi) ile ilgili bilgi sahibi olduğunuz varsayılır.
+Bu makalede komut satırı arabirimi (Bash, Terminal, komut istemi) hakkında bilgi sahibi olduğunuz varsayılır.
 
-Yardım veya -h parametresi, özel komutlar için Yardım görüntülemek için kullanılabilir. Alternatif olarak, Azure help [komut] [Seçenekler] biçimi de çok kullanılabilir. Emin olamadığınız durumlarda bir komut tarafından gerekli parametreler hakkında daha fazla yardıma başvurun. Örneğin, tüm aşağıdaki komutları aynı bilgileri döndürür:
+--Help veya-h parametresi, belirli komutların yardımını görüntülemek için kullanılabilir. Alternatif olarak, Azure Help [komut] [Options] biçimi de kullanılabilir. Bir komut için gereken parametreler hakkında şüpheli olduğunda, Yardım ' a bakın. Örneğin, aşağıdaki komutların hepsi aynı bilgileri döndürür:
 
 ```azurecli
 az account set --help
 az account set -h
 ```
 
-Ayrıca Azure platformlar arası komut satırı arabirimi içinde Azure Resource Manager hakkında bilgi almak için aşağıdaki makaleleri okuyabilirsiniz:
+Azure platformlar arası komut satırı arabirimindeki Azure Resource Manager hakkında bilgi edinmek için aşağıdaki makaleleri de okuyabilirsiniz:
 
 * [Azure CLI'yı yükleme](/cli/azure/install-azure-cli)
-* [Azure CLI ile çalışmaya başlama](/cli/azure/get-started-with-azure-cli)
+* [Azure CLı ile çalışmaya başlama](/cli/azure/get-started-with-azure-cli)
 
-## <a name="how-to-create-a-hardened-container-a-vault-in-azure"></a>Azure'da sağlamlaştırılmış bir kapsayıcı (kasa) oluşturma
+## <a name="how-to-create-a-hardened-container-a-vault-in-azure"></a>Azure 'da sağlamlaştırılmış bir kapsayıcı (kasa) oluşturma
 
-Kasalar, donanım güvenlik modülleri tarafından desteklenen kapsayıcıları güvenlidir. Kasalar, uygulama gizli dizilerinin depolanmasını merkezi hale getirerek güvenlik bilgilerini kazayla kaybetme olasılığını azaltmaya yardımcı olur. Anahtar Kasaları ayrıca içlerinde depolanmış her şeye erişimi denetler ve günlüğe kaydeder. Azure Key Vault, sağlam bir sertifika yaşam döngüsü yönetim çözümü için gereken özellikleri sağlayarak Aktarım Katmanı Güvenliği (TLS) sertifikalarını isteme ve yenileme işlemlerini gerçekleştirebilir. Sonraki adımlarda, bir kasası oluşturacaksınız.
+Kasaları, donanım güvenlik modülleri tarafından desteklenen güvenli kapsayıcılardır. Kasalar, uygulama gizli dizilerinin depolanmasını merkezi hale getirerek güvenlik bilgilerini kazayla kaybetme olasılığını azaltmaya yardımcı olur. Anahtar Kasaları ayrıca içlerinde depolanmış her şeye erişimi denetler ve günlüğe kaydeder. Azure Key Vault, sağlam bir sertifika yaşam döngüsü yönetim çözümü için gereken özellikleri sağlayarak Aktarım Katmanı Güvenliği (TLS) sertifikalarını isteme ve yenileme işlemlerini gerçekleştirebilir. Sonraki adımlarda bir kasa oluşturacaksınız.
 
 ### <a name="connect-to-your-subscriptions"></a>Aboneliklerinize bağlanma
 
@@ -74,35 +73,35 @@ Etkileşimli olarak oturum açmak için aşağıdaki komutu kullanın:
 ```azurecli
 az login
 ```
-Bir kurumsal hesap kullanarak oturum açmanız, kendi kullanıcı adı ve parola geçirebilirsiniz.
+Bir kuruluş hesabı kullanarak oturum açmak için Kullanıcı adınızı ve parolanızı geçirebilirsiniz.
 
 ```azurecli
 az login -u username@domain.com -p password
 ```
 
-Birden fazla aboneliğiniz varsa ve kullanılacağını belirtmek ihtiyacınız varsa, hesabınız için abonelikleri görmek için aşağıdaki komutu yazın:
+Birden fazla aboneliğiniz varsa ve hangisinin kullanılacağını belirtmeniz gerekiyorsa, hesabınıza yönelik abonelikleri görmek için aşağıdakileri yazın:
 
 ```azurecli
 az account list
 ```
 
-Bir aboneliğe abonelik parametresiyle belirtirsiniz.
+Abonelik parametresine sahip bir abonelik belirtin.
 
 ```azurecli
 az account set --subscription <subscription name or ID>
 ```
 
-Azure platformlar arası komut satırı arabirimi yapılandırma hakkında daha fazla bilgi için bkz. [Azure CLI yükleme](/cli/azure/install-azure-cli).
+Azure platformlar arası komut satırı arabirimini yapılandırma hakkında daha fazla bilgi için bkz. [Azure CLI 'Yı yüklemeye](/cli/azure/install-azure-cli).
 
-### <a name="create-a-new-resource-group"></a>Yeni bir kaynak grubu oluşturma
+### <a name="create-a-new-resource-group"></a>Yeni kaynak grubu oluştur
 
-Azure Resource Manager kullanırken, tüm ilgili kaynakları bir kaynak grubu içinde oluşturulur. Mevcut bir kaynak grubunda bir anahtar kasası oluşturabilirsiniz. Yeni bir kaynak grubu kullanmak istiyorsanız, yeni bir tane oluşturabilirsiniz.
+Azure Resource Manager kullanırken, tüm ilgili kaynaklar bir kaynak grubu içinde oluşturulur. Mevcut bir kaynak grubunda bir Anahtar Kasası oluşturabilirsiniz. Yeni bir kaynak grubu kullanmak istiyorsanız yeni bir tane oluşturabilirsiniz.
 
 ```azurecli
 az group create -n "ContosoResourceGroup" -l "East Asia"
 ```
 
-İlk parametre kaynak grubu adı ve ikinci parametre konumu. Tüm olası bir listesini almak için konumları yazın:
+İlk parametre kaynak grubu adıdır ve ikinci parametre konumudur. Tüm olası konumların bir listesini almak için:
 
 ```azurecli
 az account list-locations
@@ -110,7 +109,7 @@ az account list-locations
 
 ### <a name="register-the-key-vault-resource-provider"></a>Key Vault kaynak sağlayıcısını kaydetme
 
- "Abonelik 'Microsoft.KeyVault' ad alanını kullanacak şekilde kaydedilmemiş" hatasıyla karşılaşabilirsiniz çalıştığınızda yeni bir anahtar kasası oluşturun. Bu ileti görüntülenirse, bu anahtar kasası kaynak sağlayıcısının aboneliğinize kayıtlı olduğundan emin olun. Bu, her bir abonelik için tek seferlik bir işlemdir.
+ Yeni bir Anahtar Kasası oluşturmaya çalıştığınızda "abonelik ' Microsoft. Keykasasının ad alanını kullanmak için kayıtlı değil" hatasını görebilirsiniz. Bu ileti görüntülenirse, Key Vault kaynak sağlayıcısı 'nın aboneliğinize kayıtlı olduğundan emin olun. Bu, her bir abonelik için tek seferlik bir işlemdir.
 
 ```azurecli
 az provider register -n Microsoft.KeyVault
@@ -118,9 +117,9 @@ az provider register -n Microsoft.KeyVault
 
 ### <a name="create-a-key-vault"></a>Bir anahtar kasası oluşturma
 
-Kullanım `az keyvault create` anahtar kasası oluşturma komutu. Bu betik, üç zorunlu parametreye sahiptir: bir kaynak grubu adı, anahtar kasası adı ve coğrafi konumu.
+Bir Anahtar Kasası oluşturmak için komutunukullanın.`az keyvault create` Bu betik üç zorunlu parametreye sahiptir: bir kaynak grubu adı, bir Anahtar Kasası adı ve coğrafi konum.
 
-Adlı yeni bir kasa oluşturun için **ContosoKeyVault**, kaynak grubundaki **ContosoResourceGroup**, içindeki kaynaklarınızda bulunan **Doğu Asya** konumu, türü: 
+**Contosokeykasası**adında yeni bir kasa oluşturmak için, **Doğu Asya** konumunda bulunan **contosoresourcegroup**kaynak grubunda şunu yazın: 
 
 ```azurecli
 az keyvault create --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --location "East Asia"
@@ -128,42 +127,42 @@ az keyvault create --name "ContosoKeyVault" --resource-group "ContosoResourceGro
 
 Bu komutun çıktısı, oluşturduğunuz anahtar kasasının özelliklerini gösterir. En önemli iki özellik şunlardır:
 
-* **Ad**: Bu örnekte, ContosoKeyVault adıdır. Bu adı diğer Key Vault komutları için kullanacaksınız.
-* **vaultUri**: Örnekte, URI'dir https://contosokeyvault.vault.azure.net. REST API'si aracılığıyla kasanızı kullanan uygulamaların bu URI'yi kullanması gerekir.
+* **ad**: Örnekte, bu ad Contosokeykasadır. Bu adı diğer Key Vault komutları için kullanacaksınız.
+* **Vaulturi**: Örnekte, URI olur https://contosokeyvault.vault.azure.net. REST API'si aracılığıyla kasanızı kullanan uygulamaların bu URI'yi kullanması gerekir.
 
-Azure hesabınız artık bu anahtar kasasında herhangi bir işlemi gerçekleştirmeye yetkilidir. Henüz itibariyle, sizden başka kimse yetkisi.
+Azure hesabınız artık bu anahtar kasasında herhangi bir işlemi gerçekleştirmeye yetkilidir. Henüz hiç olmadığı için, başka hiç kimse yetkili değil.
 
-## <a name="adding-a-key-secret-or-certificate-to-the-key-vault"></a>Bir anahtar kasasına bir anahtar, parola veya sertifika ekleme
+## <a name="adding-a-key-secret-or-certificate-to-the-key-vault"></a>Anahtar kasasına anahtar, gizli dizi veya sertifika ekleme
 
-Azure anahtar Kasası'nın sizin için yazılım korumalı bir anahtar oluşturmasını istiyorsanız kullanın `az key create` komutu.
+Sizin için yazılım korumalı bir anahtar oluşturmak Azure Key Vault istiyorsanız `az key create` komutunu kullanın.
 
 ```azurecli
 az keyvault key create --vault-name "ContosoKeyVault" --name "ContosoFirstKey" --protection software
 ```
 
-.Pem dosyasında var olan bir anahtar varsa, Azure anahtar Kasası'na karşıya yükleyebilirsiniz. Yazılım veya HSM anahtarıyla korumak seçebilirsiniz. Bu örnek .pem dosyasından anahtarı içeri aktarır ve "hVFkk965BuUv" parolasını kullanarak yazılım ile koruma:
+. Ped dosyasında mevcut bir anahtarınız varsa, Azure Key Vault yükleyebilirsiniz. Anahtarı yazılım veya HSM ile korumayı seçebilirsiniz. Bu örnek, "hVFkk965BuUv" parolasını kullanarak anahtarı. ped dosyasından içeri aktarır ve yazılımla koruyabilir:
 
 ```azurecli
 az keyvault key import --vault-name "ContosoKeyVault" --name "ContosoFirstKey" --pem-file "./softkey.pem" --pem-password "hVFkk965BuUv" --protection software
 ```
 
-Artık oluşturduğunuz veya Azure anahtar Kasası'na URI'sini kullanarak yüklediğiniz anahtar başvurabilirsiniz. Kullanım **https://ContosoKeyVault.vault.azure.net/keys/ContosoFirstKey** her zaman geçerli sürümü almak için. Kullanım https://[keyvault-name].vault.azure.net/keys/[keyname]/[key-unique-id] bu belirli sürümü almak için. Örneğin, **https://ContosoKeyVault.vault.azure.net/keys/ContosoFirstKey/cgacf4f763ar42ffb0a1gca546aygd87** . 
+Artık oluşturduğunuz veya Azure Key Vault ' a yüklediğiniz anahtara URI 'sini kullanarak başvurabilirsiniz. Her **https://ContosoKeyVault.vault.azure.net/keys/ContosoFirstKey** zaman geçerli sürümü almak için kullanın. Bu belirli sürümü almak için https://[keykasası-Name]. kasa. Azure. net/Keys/[KeyName]/[key-Unique-ID] kullanın. Örneğin, **https://ContosoKeyVault.vault.azure.net/keys/ContosoFirstKey/cgacf4f763ar42ffb0a1gca546aygd87** . 
 
-SQLPassword adlı bir paroladır, kasaya bir gizli dizi eklemek ve Azure anahtar kasaları için "hVFkk965BuUv" değerine sahip. 
+Kasaya bir gizli dizi ekleyin, bu, SQLPassword adlı bir paroladır ve "hVFkk965BuUv" değerini Azure Anahtar Kasası 'na taşır. 
 
 ```azurecli
 az keyvault secret set --vault-name "ContosoKeyVault" --name "SQLPassword" --value "hVFkk965BuUv "
 ```
 
-Bu parola, URI'sini kullanarak başvuru. Kullanım **https://ContosoVault.vault.azure.net/secrets/SQLPassword** her zaman geçerli sürümü ve https://[keyvault-name].vault.azure.net/secret/[secret-name]/[secret-unique-id almak için] bu belirli sürümü almak için. Örneğin, **https://ContosoVault.vault.azure.net/secrets/SQLPassword/90018dbb96a84117a0d2847ef8e7189d** .
+Bu parolaya URI 'sini kullanarak başvurun. Bu **https://ContosoVault.vault.azure.net/secrets/SQLPassword** belirli sürümü almak için her zaman geçerli sürümü almak için kullanın ve https://[keykasaadı]. kasa. Azure. net/Secret/[gizli-adı]/[gizli-Unique-ID]. Örneğin, **https://ContosoVault.vault.azure.net/secrets/SQLPassword/90018dbb96a84117a0d2847ef8e7189d** .
 
-Sertifika .pem veya .pfx kullanarak kasaya içeri aktarın.
+. Pek veya. pfx kullanarak kasaya bir sertifika aktarın.
 
 ```azurecli
 az keyvault certificate import --vault-name "ContosoKeyVault" --file "c:\cert\cert.pfx" --name "ContosoCert" --password "hVFkk965BuUv"
 ```
 
-Anahtar, gizli ya da oluşturduğunuz sertifika şimdi görüntüleyin:
+Oluşturduğunuz anahtarı, gizliliği veya sertifikayı görüntüleyelim:
 
 * Anahtarlarınızı görüntülemek için şunu yazın: 
 
@@ -171,7 +170,7 @@ Anahtar, gizli ya da oluşturduğunuz sertifika şimdi görüntüleyin:
 az keyvault key list --vault-name "ContosoKeyVault"
 ```
 
-* Gizli anahtarlarınız görüntülemek için şunu yazın: 
+* Gizli dizilerinizi görüntülemek için şunu yazın: 
 
 ```azurecli
 az keyvault secret list --vault-name "ContosoKeyVault"
@@ -183,83 +182,83 @@ az keyvault secret list --vault-name "ContosoKeyVault"
 az keyvault certificate list --vault-name "ContosoKeyVault"
 ```
 
-## <a name="registering-an-application-with-azure-active-directory"></a>Bir uygulamayı Azure Active Directory'ye kaydetme
+## <a name="registering-an-application-with-azure-active-directory"></a>Azure Active Directory ile uygulama kaydetme
 
-Bu adım genellikle ayrı bir bilgisayarda bir geliştirici tarafından yapılır. Azure Key Vault'a özgü değildir, ancak burada için tanıma dahildir. Uygulama kaydı tamamlamak için hesabınızın, kasa ve uygulama aynı Azure dizininde olması gerekir.
+Bu adım genellikle ayrı bir bilgisayarda bir geliştirici tarafından yapılır. Azure Key Vault özgü değildir ancak tanıma için buraya dahil edilmiştir. Uygulama kaydını tamamlamaya yönelik hesabınız, kasalarınızın ve uygulamanın aynı Azure dizininde olması gerekir.
 
-Bir anahtar kasası kullanan uygulamaların, Azure Active Directory'den bir belirteç kullanarak kimlik doğrulama yapması gerekir.  Uygulama sahibinin öncelikle Azure Active Directory'de kaydetmelisiniz. Kaydın sonunda, uygulama sahibi aşağıdaki değerleri elde eder:
+Bir anahtar kasası kullanan uygulamaların, Azure Active Directory'den bir belirteç kullanarak kimlik doğrulama yapması gerekir.  Uygulamanın sahibi ilk olarak Azure Active Directory kaydolmalıdır. Kaydın sonunda, uygulama sahibi aşağıdaki değerleri elde eder:
 
-- Bir **uygulama kimliği** (AAD istemci kimliği veya AppID olarak da bilinir)
+- **Uygulama kimliği** (AAD istemci kimliği veya AppID olarak da bilinir)
 - **Kimlik doğrulaması anahtarı** (paylaşılan gizli dizi olarak da bilinir). 
 
-Uygulamanın bir belirteç almak için bu değerlerin her ikisini de Azure Active Directory'ye sunması gerekir. Bir uygulama bir belirteç almak üzere nasıl yapılandırılacağı uygulamaya göre değişir. [Key Vault örnek uygulaması](https://www.microsoft.com/download/details.aspx?id=45343) için uygulama sahibi bu değerleri app.config dosyasında ayarlar.
+Uygulamanın bir belirteç almak için bu değerlerin her ikisini de Azure Active Directory'ye sunması gerekir. Bir uygulama belirteç almak üzere yapılandırıldığında uygulamaya bağlı olur. [Key Vault örnek uygulaması](https://www.microsoft.com/download/details.aspx?id=45343) için uygulama sahibi bu değerleri app.config dosyasında ayarlar.
 
-Bir uygulamayı Azure Active Directory'ye kaydetme hakkında ayrıntılı adımlar için başlıklı makaleleri gözden geçirmeniz gereken [uygulamaları Azure Active Directory ile tümleştirme](../active-directory/develop/active-directory-integrating-applications.md), [Azure Active oluşturmak için portalı kullanma Dizin uygulaması ve kaynaklara erişebilen hizmet sorumlusu](../active-directory/develop/howto-create-service-principal-portal.md), ve [Azure, Azure CLI ile hizmet sorumlusu oluşturma](/cli/azure/create-an-azure-service-principal-azure-cli).
+Azure Active Directory ile uygulama kaydetme hakkında ayrıntılı adımlar için, [uygulamaları Azure Active Directory Ile tümleştirme](../active-directory/develop/active-directory-integrating-applications.md)başlıklı makaleleri gözden geçirmeniz gerekir, [Portal 'ı kullanarak bir Azure Active Directory uygulama ve hizmet oluşturun kaynaklara erişebilen](../active-directory/develop/howto-create-service-principal-portal.md)ve [Azure CLI Ile bir Azure hizmet sorumlusu oluşturabileceğiniz](/cli/azure/create-an-azure-service-principal-azure-cli)sorumlu.
 
-Bir uygulamayı Azure Active Directory'ye kaydetmek için:
+Bir uygulamayı Azure Active Directory kaydetmek için:
 
 ```azurecli
 az ad sp create-for-rbac -n "MyApp" --password "hVFkk965BuUv" --skip-assignment
 # If you don't specify a password, one will be created for you.
 ```
 
-## <a name="authorizing-an-application-to-use-a-key-or-secret"></a>Bir uygulamayı bir anahtar veya gizli dizi kullanmak için yetkilendirme
+## <a name="authorizing-an-application-to-use-a-key-or-secret"></a>Bir uygulamayı anahtar veya gizli dizi kullanacak şekilde yetkilendirme
 
-Anahtar veya gizli anahtarı kasadaki erişmek için uygulamayı yetkilendirme için kullanın `az keyvault set-policy` komutu.
+Uygulamanın kasada anahtara veya gizli anahtara erişmesini yetkilendirmek için `az keyvault set-policy` komutunu kullanın.
 
-Örneğin, kasa adınızdır ContosoKeyVault, uygulamanın bir AppID 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed varsa ve kasanızdaki anahtarlarla oturum ve şifresini çözmek için yetkilendirmek istiyorsanız aşağıdaki komutu kullanın:
+Örneğin, kasa adınız Contosokeykasası ise, uygulamanın 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed 'e sahip olması ve uygulamanın kasadaki anahtarlarla şifresini çözmesine ve oturum açmalarına izin vermek istiyorsanız aşağıdaki komutu kullanın:
 
 ```azurecli
 az keyvault set-policy --name "ContosoKeyVault" --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --key-permissions decrypt sign
 ```
 
-Aynı uygulamayı kasanızdaki gizli anahtarları okumak için yetkilendirmek için aşağıdaki komutu yazın:
+Kasadaki gizli dizileri okumak için aynı uygulamayı yetkilendirmek üzere aşağıdaki komutu yazın:
 
 ```azurecli
 az keyvault set-policy --name "ContosoKeyVault" --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --secret-permissions get
 ```
 
-## <a name="bkmk_KVperCLI"></a> Anahtar kasası erişim ilkeleri gelişmiş ayar
+## <a name="bkmk_KVperCLI"></a>Anahtar Kasası Gelişmiş erişim ilkelerini ayarlama
 
-Kullanım [az keyvault update](/cli/azure/keyvault#az-keyvault-update) anahtar kasası için Gelişmiş ilkelerini etkinleştirmek için.
+Anahtar Kasası için gelişmiş ilkeleri etkinleştirmek üzere [az keykasa Update](/cli/azure/keyvault#az-keyvault-update) kullanın.
 
- Key Vault dağıtım için etkinleştir: Kasasından gizli diziler olarak depolanan sertifikaları almak için sanal makineler sağlar.
+ Dağıtım için Key Vault etkinleştir: Sanal makinelerin kasadan gizli dizi olarak depolanan sertifikaları almasına izin verir.
 
  ```azurecli
  az keyvault update --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --enabled-for-deployment "true"
  ```
 
-Anahtar kasası disk şifrelemesi için etkinleştir: Kasa Azure Disk şifrelemesi için kullanılırken gereklidir.
+Key Vault disk şifrelemesi için etkinleştir: Azure disk şifrelemesi Kasası kullanılırken gereklidir.
 
  ```azurecli
  az keyvault update --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --enabled-for-disk-encryption "true"
  ```  
 
-Key Vault için şablon dağıtımı etkinleştir: Gizli dizileri kasadan almak için Kaynak Yöneticisi'ni sağlar.
+Şablon dağıtımı için Key Vault etkinleştir: Kaynak Yöneticisi kasalardan gizli dizileri almasına izin verir.
 
 ```azurecli 
  az keyvault update --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --enabled-for-template-deployment "true"
  ```
 
-## <a name="working-with-hardware-security-modules-hsms"></a>Donanım güvenlik modülleri (HSM'ler) ile çalışma
+## <a name="working-with-hardware-security-modules-hsms"></a>Donanım güvenlik modülleri (HSM 'ler) ile çalışma
 
-Ek güvence için HSM sınırını asla terk donanım güvenlik modülleri (HSM'ler) anahtarları oluşturmak veya içeri aktarma kullanabilirsiniz. HSM'ler, FIPS 140-2 Düzey 2 doğrulanmasına sahiptir. Bu gereksinim için geçerli değilse bu bölümü atlayın ve anahtar kasasını ve ilişkili anahtarları ve gizli anahtarları silme gidin.
+Ek güvence için, HSM sınırını hiçbir şekilde bırakmamış donanım güvenlik modüllerinden (HSM 'ler) anahtarları içeri aktarabilir veya oluşturabilirsiniz. HSM'ler, FIPS 140-2 Düzey 2 doğrulanmasına sahiptir. Bu gereksinim sizin için uygun değilse, bu bölümü atlayın ve anahtar kasasını ve ilişkili anahtarları ve gizli dizileri silme ' ye gidin.
 
-Bu HSM korumalı anahtarları oluşturmak için HSM korumalı anahtarları destekleyen bir kasa aboneliğinizin olması gerekir.
+Bu HSM korumalı anahtarları oluşturmak için HSM korumalı anahtarları destekleyen bir kasa aboneliğine sahip olmanız gerekir.
 
-Anahtar kasası oluşturduğunuzda 'sku' parametresini ekleyin:
+Anahtar Kasası oluşturduğunuzda, ' SKU ' parametresini ekleyin:
 
 ```azurecli
 az keyvault create --name "ContosoKeyVaultHSM" --resource-group "ContosoResourceGroup" --location "East Asia" --sku "Premium"
 ```
 
-Bu kasaya yazılım korumalı anahtarlar ve HSM korumalı anahtarlar (daha önce gösterildiği gibi) ekleyebilirsiniz. HSM korumalı bir anahtar oluşturmak için hedef parametresini 'HSM' ayarlayın:
+Bu kasaya yazılım korumalı anahtarlar ve HSM korumalı anahtarlar (daha önce gösterildiği gibi) ekleyebilirsiniz. HSM korumalı bir anahtar oluşturmak için, hedef parametreyi ' HSM ' olarak ayarlayın:
 
 ```azurecli
 az keyvault key create --vault-name "ContosoKeyVaultHSM" --name "ContosoFirstHSMKey" --protection "hsm"
 ```
 
-Bilgisayarınızda bir .pem dosyasından bir anahtarı içeri aktarmak için aşağıdaki komutu kullanabilirsiniz. Bu komut, anahtarı Anahtar Kasası hizmetindeki HSM'lere aktarır:
+Bilgisayarınızdaki. ped dosyasından bir anahtarı içeri aktarmak için aşağıdaki komutu kullanabilirsiniz. Bu komut, anahtarı Anahtar Kasası hizmetindeki HSM'lere aktarır:
 
 ```azurecli
 az keyvault key import --vault-name "ContosoKeyVaultHSM" --name "ContosoFirstHSMKey" --pem-file "/.softkey.pem" --protection "hsm" --pem-password "PaSSWORD"
@@ -271,11 +270,11 @@ Bir sonraki komut bir "kendi anahtarınızı getirin" (BYOK) paketini içeri akt
 az keyvault key import --vault-name "ContosoKeyVaultHSM" --name "ContosoFirstHSMKey" --byok-file "./ITByok.byok" --protection "hsm"
 ```
 
-Daha ayrıntılı bu BYOK paketini oluşturma hakkında yönergeler için bkz. [HSM-Protected anahtarları Azure Key Vault ile kullanmak nasıl](key-vault-hsm-protected-keys.md).
+Bu BYOK paketini oluşturma hakkında daha ayrıntılı yönergeler için bkz. [Azure Key Vault Ile HSM korumalı anahtarları kullanma](key-vault-hsm-protected-keys.md).
 
-## <a name="deleting-the-key-vault-and-associated-keys-and-secrets"></a>Anahtar kasasını ve ilişkili anahtarları ve gizli anahtarları silme
+## <a name="deleting-the-key-vault-and-associated-keys-and-secrets"></a>Anahtar kasasını ve ilişkili anahtarları ve gizli dizileri silme
 
-Key vault ve anahtarlar veya parolalar artık ihtiyacınız yoksa anahtar kasasını kullanarak silebilirsiniz `az keyvault delete` komutu:
+Artık anahtar kasası ve anahtarları veya gizli dizileri gerekmiyorsa, şu `az keyvault delete` komutu kullanarak anahtar kasasını silebilirsiniz:
 
 ```azurecli
 az keyvault delete --name "ContosoKeyVault"
@@ -289,9 +288,9 @@ az group delete --name "ContosoResourceGroup"
 
 ## <a name="miscellaneous-azure-cross-platform-command-line-interface-commands"></a>Çeşitli Azure platformlar arası komut satırı arabirimi komutları
 
-Azure anahtar Kasası'nı yönetmede kullanışlı bulabileceğiniz diğer komutlar.
+Azure Key Vault yönetmek için yararlı bulabileceğiniz diğer komutlar.
 
-Bu komut tüm anahtarların ve seçilen özelliklerin tablosal bir görüntüsünü listeler:
+Bu komut, tüm anahtarların ve seçilen özelliklerin tablolu bir görüntüsünü listeler:
 
 ```azurecli
 az keyvault key list --vault-name "ContosoKeyVault"
@@ -303,19 +302,19 @@ Bu komut, belirtilen anahtar için özelliklerin tam bir listesini görüntüler
 az keyvault key show --vault-name "ContosoKeyVault" --name "ContosoFirstKey"
 ```
 
-Bu komut tüm gizli adların ve seçilen özelliklerin tablosal bir görüntüsünü listeler:
+Bu komut, tüm gizli adların ve seçilen özelliklerin tablolu bir görüntüsünü listeler:
 
 ```azurecli
 az keyvault secret list --vault-name "ContosoKeyVault"
 ```
 
-Belirli bir anahtarın nasıl kaldırılacağına örneği aşağıda verilmiştir:
+Aşağıda, belirli bir anahtarın nasıl kaldırılacağını gösteren bir örnek verilmiştir:
 
 ```azurecli
 az keyvault key delete --vault-name "ContosoKeyVault" --name "ContosoFirstKey"
 ```
 
-Belirli bir gizli dizi kaldırmaya ilişkin bir örnek aşağıda verilmiştir:
+Aşağıda, belirli bir parolayı kaldırmaya ilişkin bir örnek verilmiştir:
 
 ```azurecli
 az keyvault secret delete --vault-name "ContosoKeyVault" --name "SQLPassword"
@@ -323,8 +322,8 @@ az keyvault secret delete --vault-name "ContosoKeyVault" --name "SQLPassword"
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Anahtar kasası komutları için tam Azure CLI başvurusu için bkz. [anahtar kasası CLI başvurusu](/cli/azure/keyvault).
+- Anahtar Kasası komutlarına yönelik tüm Azure CLı başvurusu için bkz. [Key Vault CLI başvurusu](/cli/azure/keyvault).
 
-- Programlama başvuruları için bkz: [Azure anahtar kasası Geliştirici Kılavuzu](key-vault-developers-guide.md)
+- Programlama başvuruları için [Azure Key Vault Geliştirici Kılavuzu](key-vault-developers-guide.md) ' na bakın.
 
-- Azure Key Vault ve HSM'ler hakkında daha fazla bilgi için bkz: [HSM-Protected anahtarları Azure Key Vault ile kullanmak nasıl](key-vault-hsm-protected-keys.md).
+- Azure Key Vault ve HSM 'ler hakkında bilgi için bkz. [Azure Key Vault Ile HSM korumalı anahtarları kullanma](key-vault-hsm-protected-keys.md).

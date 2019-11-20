@@ -1,20 +1,20 @@
 ---
-title: "Öğretici: Azure Power BI veri Gezgini'nde verileri görselleştirin"
+title: "Öğretici: Azure Veri Gezgini verilerini Power BI'da görselleştirme"
 description: Bu öğreticide Power BI ile Azure Veri Gezgini'ne bağlanmayı ve verilerinizi görselleştirmeyi öğreneceksiniz.
 author: orspod
 ms.author: orspodek
-ms.reviewer: mblythe
+ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: tutorial
 ms.date: 09/24/2018
-ms.openlocfilehash: 70a06b75db9ff49222c2de4aa78519b32d863478
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: ec1579792a6e247bf49946bb8609a626154fbd46
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60775109"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037352"
 ---
-# <a name="tutorial-visualize-data-from-azure-data-explorer-in-power-bi"></a>Öğretici: Azure Power BI veri Gezgini'nde verileri görselleştirin
+# <a name="tutorial-visualize-data-from-azure-data-explorer-in-power-bi"></a>Öğretici: Azure Veri Gezgini verilerini Power BI'da görselleştirme
 
 Azure Veri Gezgini, günlük ve telemetri verileri için hızlı ve yüksek oranda ölçeklenebilir veri keşfetme hizmetidir. Power BI, verilerinizi görselleştirmenizi ve sonuçları kuruluşunuzda paylaşmanızı sağlayan bir iş analizi çözümüdür. Bu öğreticide ilk olarak Azure Veri Gezgini'nde görsel oluşturmayı öğreneceksiniz. Ardından Power BI ile Azure Veri Gezgini'ne bağlanıp örnek verileri temel alan bir rapor oluşturacak ve bu raporu Power BI hizmetinde yayımlayacaksınız.
 
@@ -35,9 +35,9 @@ Bu öğreticiyi tamamlamak için Azure ve Power BI aboneliklerine ek olarak aşa
 
 * [Test kümesi ve veritabanı](create-cluster-database-portal.md)
 
-* [Örnek verileri StormEvents](ingest-sample-data.md). [!INCLUDE [data-explorer-storm-events](../../includes/data-explorer-storm-events.md)]
+* [StormEvents örnek verileri](ingest-sample-data.md). [!INCLUDE [data-explorer-storm-events](../../includes/data-explorer-storm-events.md)]
 
-* [Power BI Desktop](https://powerbi.microsoft.com/get-started/) (seçin **DOWNLOAD FREE**)
+* [Power BI Desktop](https://powerbi.microsoft.com/get-started/) ( **indirmeyi ücretsiz**Seç)
 
 ## <a name="render-visuals-in-azure-data-explorer"></a>Azure Veri Gezgini'nde görsel oluşturma
 
@@ -81,17 +81,17 @@ Artık Power BI'a geçebiliriz ancak Azure Veri Gezgini'nde yapabileceklerinizin
 
 Artık Power BI Desktop'tan Azure Veri Gezgini'ne bağlanabilirsiniz.
 
-1. Power BI Desktop'ta üzerinde **giriş** sekmesinde **Veri Al** ardından **daha fazla**.
+1. **Giriş** sekmesinde Power BI Desktop **veri al** ' ı **seçin.**
 
     ![Verileri alma](media/visualize-power-bi/get-data-more.png)
 
-1. Arama *Azure Veri Gezgini*seçin **Azure Veri Gezgini (Beta)**, ardından **Connect**.
+1. *Azure Veri Gezgini*araması yapın, **Azure Veri Gezgini (Beta)** seçeneğini belirleyin ve sonra **bağlantısını**yapın.
 
     ![Arama ve veri alma](media/visualize-power-bi/search-get-data.png)
 
 1. **Bağlayıcıyı önizle** ekranında **Devam**'ı seçin.
 
-1. Sonraki ekranda, test kümesi ve veritabanı adını girin. Küme `https://<ClusterName>.<Region>.kusto.windows.net` biçiminde olmalıdır. Tablo adı olarak *StormEvents* yazın. Diğer seçenekleri varsayılan değerleriyle bırakın ve **Tamam**'ı seçin.
+1. Sonraki ekranda, test kümenizin ve veritabanınızın adını girin. Küme `https://<ClusterName>.<Region>.kusto.windows.net` biçiminde olmalıdır. Tablo adı olarak *StormEvents* yazın. Diğer seçenekleri varsayılan değerleriyle bırakın ve **Tamam**'ı seçin.
 
     ![Küme, veritabanı, tablo seçenekleri](media/visualize-power-bi/cluster-database-table.png)
 
@@ -219,7 +219,7 @@ Oluşturduğunuz raporu saklamak istemiyorsanız *storm-events.pbix* dosyasını
 
 1. **Çalışma alanım** sayfasında **RAPORLAR** bölümüne inin ve **storm-events** adlı raporu bulun.
 
-1. **storm-events** girişinin yanındaki üç noktayı (**. . .**) ve ardından **KALDIR**'ı seçin.
+1. **storm-events** girişinin yanındaki üç noktayı ( **. . .** ) ve ardından **KALDIR**'ı seçin.
 
     ![Raporu kaldırma](media/visualize-power-bi/remove-report.png)
 

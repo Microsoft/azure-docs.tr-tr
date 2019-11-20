@@ -1,20 +1,20 @@
 ---
-title: 'Hızlı Başlangıç: Bir Azure Veri Gezgini kümesi ile veritabanı oluşturma'
+title: 'Hızlı Başlangıç: Azure Veri Gezgini kümesi ve veritabanı oluşturma'
 description: Bu hızlı başlangıçta Azure Veri Gezgini kümesi ve veritabanı oluşturup veri almayı (yüklemeyi) öğreneceksiniz.
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
-ms.date: 03/25/2019
-ms.openlocfilehash: 41a15a29798953cb32029b7c4d1167020074e49f
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 07/22/2019
+ms.openlocfilehash: 10030cf69009c59fa607ad68c3b7ab19c7a22860
+ms.sourcegitcommit: e9936171586b8d04b67457789ae7d530ec8deebe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60760106"
+ms.lasthandoff: 09/27/2019
+ms.locfileid: "71326721"
 ---
-# <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>Hızlı Başlangıç: Bir Azure Veri Gezgini kümesi ile veritabanı oluşturma
+# <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>Hızlı Başlangıç: Azure Veri Gezgini kümesi ve veritabanı oluşturma
 
 > [!div class="op_single_selector"]
 > * [Portal](create-cluster-database-portal.md)
@@ -22,10 +22,10 @@ ms.locfileid: "60760106"
 > * [PowerShell](create-cluster-database-powershell.md)
 > * [C#](create-cluster-database-csharp.md)
 > * [Python](create-cluster-database-python.md)
->  
+> * [ARM şablonu](create-cluster-database-resource-manager.md)
 
 
-Azure Veri Gezgini, günlük ve telemetri verileri için hızlı ve yüksek oranda ölçeklenebilir veri keşfetme hizmetidir. Azure veri gezginini kullanmak için ilk küme oluşturma ve bu kümede bir veya daha fazla veritabanı oluşturun. Ardından karşı sorgular çalıştırabileceği şekilde onlara bir veritabanına (yükle) veri alın. Bu hızlı başlangıçta bir küme ve bir veritabanı oluşturacaksınız.
+Azure Veri Gezgini, günlük ve telemetri verileri için hızlı ve yüksek oranda ölçeklenebilir veri keşfetme hizmetidir. Azure Veri Gezgini kullanmak için, önce bir küme oluşturun ve bu kümede bir veya daha fazla veritabanı oluşturursunuz. Daha sonra sorguları bu verilere karşı çalıştırmak için bir veritabanına (yükleme) sahip olursunuz. Bu hızlı başlangıçta bir küme ve bir veritabanı oluşturacaksınız.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/) oluşturun.
 
@@ -35,32 +35,33 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir Azure hesabı](https:
 
 ## <a name="create-a-cluster"></a>Küme oluşturma
 
-Bir Azure kaynak grubu işlem ve depolama kaynakları tanımlı bir dizi ile bir Azure Veri Gezgini kümesi oluşturun.
+Azure Kaynak grubunda tanımlı bir dizi işlem ve depolama kaynağı içeren bir Azure Veri Gezgini kümesi oluşturun.
 
 1. Portalın sol üst köşesinde bulunan **Kaynak oluştur** düğmesini (+) seçin.
 
 1. *Azure Veri Gezgini* için arama yapın.
 
-   ![Kaynak arama](media/create-cluster-database-portal/search-resources.png)
+   ![Kaynak ara](media/create-cluster-database-portal/search-resources.png)
 
 1. **Azure Veri Gezgini**'nin altında, ekranın en alt bölümünde **Oluştur**'u seçin.
 
-1. Temel küme ayrıntıları aşağıdaki bilgilerle doldurun.
+1. Aşağıdaki bilgilerle temel küme ayrıntılarını doldurun.
 
-   ![Küme formu oluşturma](media/create-cluster-database-portal/create-cluster-form.png)
+   ![Küme formu oluşturma](media/create-cluster-database-portal/create-cluster-form2.png)
 
     **Ayar** | **Önerilen değer** | **Alan açıklaması**
     |---|---|---|
-    | Abonelik | Aboneliğiniz | Kümeniz için kullanmak istediğiniz Azure aboneliğini seçin.|
-    | Kaynak grubu | *test-resource-group* | Mevcut bir kaynak grubunu kullanın veya yeni bir kaynak grubu oluşturun. |
-    | Küme adı | Benzersiz küme adı | Kümenizi tanımlayan benzersiz bir ad seçin. Örneğin, *mydataexplorercluster*. Girdiğiniz küme adının sonuna *[bölge].servicebus.windows.net* etki alanı adı eklenir. Ad yalnızca küçük harf ve sayı içerebilir. 3-22 karakter arası uzunlukta olmalıdır.
-    | Location | *Batı ABD* | Bu hızlı başlangıç için *Batı ABD* değerini seçin. Üretim sisteminde ihtiyaçlarınıza en uygun bölgeyi seçmeniz gerekir.
+    | Subscription | Aboneliğiniz | Kümeniz için kullanmak istediğiniz Azure aboneliğini seçin.|
+    | Resource group | Kaynak grubunuz | Mevcut bir kaynak grubunu kullanın veya yeni bir kaynak grubu oluşturun. |
+    | Küme adı | Benzersiz küme adı | Kümenizi tanımlayan benzersiz bir ad seçin. Girdiğiniz küme adının sonuna *[bölge].servicebus.windows.net* etki alanı adı eklenir. Ad yalnızca küçük harf ve sayı içerebilir. 4 ile 22 karakter arasında olmalıdır.
+    | Bölge | *Batı ABD* veya *Batı ABD 2* | Bu hızlı başlangıç için *Batı ABD* veya *Batı ABD 2* (kullanılabilirlik alanları kullanılıyorsa) seçeneğini belirleyin. Üretim sisteminde ihtiyaçlarınıza en uygun bölgeyi seçmeniz gerekir.
+    | Kullanılabilirlik alanları | *1*, *2*, ve/veya *3* | Küme örneklerini aynı bölgedeki çeşitli kullanılabilirlik bölgelerine yerleştirin (isteğe bağlı). [Azure kullanılabilirlik alanları](/azure/availability-zones/az-overview) aynı Azure bölgesi içindeki benzersiz fiziksel konumlardır. Azure Veri Gezgini kümesini ve kısmi bölge hatasından verileri korur. Küme düğümleri varsayılan olarak, aynı veri merkezinde oluşturulur. Çeşitli kullanılabilirlik alanları ' nı seçerek, tek bir başarısızlık noktasını ortadan kaldırabilir ve yüksek kullanılabilirlik sağlayabilirsiniz. Kullanılabilirlik bölgelerine dağıtım yalnızca küme oluşturma sırasında mümkündür ve daha sonraki bir tarihte değiştirilemez.
     | İşlem belirtimleri | *D13_v2* | Bu hızlı başlangıç için en düşük fiyatlı özelliği seçin. Üretim sisteminde ihtiyaçlarınıza en uygun özelliği seçmeniz gerekir.
-    | | |
+    | | | |
 
-1. Seçin **gözden + Oluştur** , küme ayrıntıları gözden geçirmek ve **Oluştur** kümesi sağlamak için. Sağlama genellikle yaklaşık 10 dakika sürer.
+1. Küme ayrıntılarınızı gözden geçirmek için **gözden geçir + oluştur** ' u seçin ve kümeyi sağlamak için **oluşturun** . Sağlama genellikle yaklaşık 10 dakika sürer.
 
-1. Dağıtım tamamlandığında seçin **kaynağa Git**.
+1. Dağıtım tamamlandığında **Kaynağa Git**' i seçin.
 
     ![Kaynağa git](media/create-cluster-database-portal/notification-resource.png)
 
@@ -70,7 +71,7 @@ Artık işlemin ikinci adımı olan veritabanı oluşturma bölümüne geçebili
 
 1. **Genel bakış** sekmesinde **Veritabanı oluştur**'u seçin.
 
-    ![2. adım: bir veritabanı oluşturma](media/create-cluster-database-portal/database-creation.png)
+    ![2\. Adım: veritabanı oluşturma](media/create-cluster-database-portal/database-creation.png)
 
 1. Formu aşağıdaki bilgilerle doldurun.
 
@@ -79,23 +80,23 @@ Artık işlemin ikinci adımı olan veritabanı oluşturma bölümüne geçebili
     **Ayar** | **Önerilen değer** | **Alan açıklaması**
     |---|---|---|
     | Veritabanı adı | *TestDatabase* | Veritabanı adı küme içinde benzersiz olmalıdır.
-    | Bekletme süresi | *3650* | Kendisi için bu verileri sorgulamak kullanılabilen tutulur sağlanır zaman aralığı (gün cinsinden). Zaman aralığı verilerin alındığı andan itibaren hesaplanır.
-    | Önbellek süresi | *31* | Zaman aralığı (gün) SSD depolama veya RAM, sık sık sorgulanan veriler kullanılabilir tutmak istediğiniz yerine daha uzun vadeli depolama.
+    | Bekletme süresi | *3650* | Verilerin sorgu için kullanılabilir durumda tutulması garantisini veren zaman aralığı (gün cinsinden). Zaman aralığı verilerin alındığı andan itibaren hesaplanır.
+    | Önbellek süresi | *31* | Sık sorgulanan verilerin, daha uzun vadeli depolama yerine SSD depolamada veya RAM 'de kullanılabildiği zaman aralığı (gün cinsinden).
     | | | |
 
-1. Seçin **Oluştur** veritabanını oluşturmak için. Oluşturma işlemi genellikle bir dakikadan kısa sürer. İşlem tamamlandığında yeniden kümenin **Genel bakış** sekmesi görüntülenir.
+1. Veritabanını oluşturmak için **Oluştur** ' u seçin. Oluşturma işlemi genellikle bir dakikadan kısa sürer. İşlem tamamlandığında yeniden kümenin **Genel bakış** sekmesi görüntülenir.
 
 ## <a name="run-basic-commands-in-the-database"></a>Veritabanında temel komutları çalıştırma
 
 Artık bir kümeye ve veritabanına sahip olduğunuza göre sorgu ve komut çalıştırabilirsiniz. Veritabanında henüz veri yok ancak yine de araçların nasıl çalıştığını görebilirsiniz.
 
-1. Kümenizde **Sorgu**'yu seçin. Komutu yapıştırın `.show databases` sorgu penceresine seçip **çalıştırma**.
+1. Kümenizde **Sorgu**'yu seçin. @No__t-0 komutunu sorgu penceresine yapıştırın ve **Çalıştır**' ı seçin.
 
     ![Veritabanlarını göster komutu](media/create-cluster-database-portal/show-databases.png)
 
     Sonuç kümesi, kümedeki tek veritabanı olan **TestDatabase** veritabanını gösterir.
 
-1. Komutu yapıştırın `.show tables` seçin ve sorgu penceresi içine **çalıştırma**.
+1. Sorgu penceresine `.show tables` komutunu yapıştırın ve **Çalıştır**' ı seçin.
 
     Henüz bir tablonuz olmadığı için bu komut boş sonuç kümesi döndürür. Bu dizinin bir sonraki makalesinde tablo ekleyeceksiniz.
 
@@ -109,19 +110,19 @@ Artık bir kümeye ve veritabanına sahip olduğunuza göre sorgu ve komut çal�
 
 1. Kümeyi yeniden başlatmak için **Genel bakış** sekmesinin en üstünden **Başlat**'ı seçin.
 
-    Küme yeniden başlatıldığında, (ne zaman, başlangıçta sağlanan gibi) kullanılabilir hale gelmesi için yaklaşık 10 dakika sürer. Verilerin sık erişim önbelleğine yüklenmesi daha uzun zaman alabilir.  
+    Küme yeniden başlatıldığında, bunun kullanılabilir olması yaklaşık 10 dakika sürer (ilk sağlandığı gibi). Verilerin sık erişim önbelleğine yüklenmesi daha uzun zaman alabilir.  
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Diğer hızlı başlangıçlar ve öğreticilerle takip etmeyi planlıyorsanız, oluşturduğunuz kaynakları tutun. Aksi takdirde, kaynak grubu yinelenen maliyetler oluşmasını önlemek için temizleyin.
+Diğer hızlı başlangıç ve öğreticilerle izlemeyi planlıyorsanız, oluşturduğunuz kaynakları saklayın. Aksi takdirde, maliyetlerinizi önlemek için kaynak grubunuzu temizleyin.
 
-1. Azure portalında **kaynak grupları** en solda bulunan sol ve sonra kaynak grubu, Veri Gezgini'ni kümenizi içerir.  
+1. Azure portal, en solda bulunan **kaynak grupları** ' nı seçin ve sonra Veri Gezgini kümenizi içeren kaynak grubunu seçin.  
 
-1. Seçin **kaynak grubunu Sil** kaynak grubunun tamamını silmek için. Mevcut bir kaynak grubu kullanıyorsanız, yalnızca Veri Gezgini kümeyi silmek isteyebilirsiniz.
+1. Kaynak grubunun tamamını silmek için **kaynak grubunu sil** ' i seçin. Mevcut bir kaynak grubu kullanıyorsanız, yalnızca Veri Gezgini kümesini silmeyi seçebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Hızlı Başlangıç: Azure veri Gezgini'ne olay Hub'ından veri alma](ingest-data-event-hub.md)
+> [Hızlı Başlangıç: Olay Hub 'ından Azure 'a veri alma Veri Gezgini @ no__t-0
 
 

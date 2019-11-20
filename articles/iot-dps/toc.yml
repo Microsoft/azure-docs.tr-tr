@@ -141,6 +141,12 @@
       href: how-to-legacy-device-symm-key.md
     - name: Geliştirme için SDK araçlarını kullanma
       href: how-to-use-sdk-tools.md
+    - name: Cihazlardan ek veriler gönderme
+      href: how-to-send-additional-data.md
+    - name: Sorun giderme
+      href: how-to-troubleshoot-dps.md
+    - name: MQTT protokolünü kullanarak DPS ile iletişim kurma
+      href: iot-dps-mqtt-support.md
 - name: Başvuru
   items:
     - name: REST API
@@ -161,25 +167,27 @@
   items:
     - name: Çözümler
       items:
-        - name: IoT çözüm hızlandırıcıları
-          href: /azure/iot-suite
         - name: IoT Central
           href: 'https://docs.microsoft.com/microsoft-iot-central/'
-    - name: Platform hizmetleri
+        - name: IoT çözüm hızlandırıcıları
+          href: /azure/iot-accelerators
+    - name: Platform Hizmetleri
       items:
         - name: IoT Hub
           href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
         - name: IoT Hub Cihazı Sağlama Hizmeti
           href: /azure/iot-dps
+        - name: IoT Hizmet SDK’ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
         - name: Haritalar
           href: /azure/azure-maps
-        - name: Hizmet SDK'ları
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
         - name: Time Series Insights
           href: /azure/time-series-insights
-    - name: Edge
+    - name: IoT Edge
       items:
-        - name: IoT Edge
+        - name: Azure IoT Edge
           href: /azure/iot-edge
         - name: IoT Cihaz SDK'ları
           href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'

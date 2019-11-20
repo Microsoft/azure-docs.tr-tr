@@ -8,22 +8,22 @@ ms.topic: include
 ms.date: 05/06/2019
 ms.author: heidist
 ms.custom: include file
-ms.openlocfilehash: 1e147e8bd9260cd1ece60b70641968a229995ec1
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 380a0a76de763df5f2cc6ff702750b36d233728d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188750"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818335"
 ---
-Bir abonelik içindeki birden çok hizmeti oluşturabilirsiniz. Her biri belirli bir katman üzerinden sağlanabilir. Yalnızca her katmanında izin verilen hizmetler sayısına göre sınırlama getirilir. Örneğin, en fazla 12 temel katmanında ve başka bir 12 Hizmetleri aynı abonelik içindeki S1 katmanında oluşturabilirsiniz. Katmanları hakkında daha fazla bilgi için bkz. [bir SKU veya katmanı için Azure Search seçin](../articles/search/search-sku-tier.md).
+Bir abonelik içinde birden çok hizmet oluşturabilirsiniz. Her biri, belirli bir katmanda sağlanabilir. Yalnızca her katmanda izin verilen hizmet sayısıyla sınırlı olursunuz. Örneğin, temel katmanda 12 ' ye kadar hizmet ve aynı abonelik içindeki S1 katmanında başka bir 12 hizmet oluşturabilirsiniz. Katmanlar hakkında daha fazla bilgi için bkz. [Azure bilişsel arama için BIR SKU veya katman seçme](../articles/search/search-sku-tier.md).
 
-En yüksek hizmet sınırları, istek üzerine oluşturulabilir. Diğer hizmetler aynı abonelik içindeki gerekiyorsa, Azure desteğine başvurun.
+İstek üzerine en fazla hizmet sınırı oluşturulabilir. Aynı abonelik içinde daha fazla hizmete ihtiyacınız varsa Azure desteği 'ne başvurun.
 
-| Resource            | Ücretsiz<sup>1</sup> | Temel | S1  | S2 | S3 | S3&nbsp;HD | L1 | L2 |
+| Kaynak            | Ücretsiz<sup>1</sup> | Temel | S1  | S2 | S3 | S3&nbsp;HD | L1 | L2 |
 | ------------------- | ---- | ----- | --- | -- | -- | ----- | -- | -- |
-| En fazla Hizmetleri    |1     | 16    | 16  | 8  | 6  | 6     | 6  | 6  |
-| Maksimum ölçek, arama birimi (SU)<sup>2</sup> |Yok |3 SU |36 SU |36 SU |36 SU |36 SU |36 SU |36 SU |
+| En yüksek hizmet    |1     | 16    | 16  | 8  | 6  | 6     | 6  | 6  |
+| Arama birimlerinde maksimum ölçek (SU)<sup>2</sup> |Yok |3 SU |36 SU |36 SU |36 SU |36 SU |36 SU |36 SU |
 
-<sup>1</sup> ücretsiz, paylaşılan ve ayrılmış, kaynaklarda dayanır. Ölçek büyütme paylaşılan kaynaklar üzerinde desteklenmiyor.
+<sup>1</sup> boş, paylaşılan, adanmış olmayan kaynaklara dayalıdır. Paylaşılan kaynaklarda ölçek artırma desteklenmez.
 
-<sup>2</sup> arama birimleri olarak ayrılan birimleri, faturalama bir *çoğaltma* veya *bölüm*. Her iki kaynakları, depolama, dizinleme ve sorgu işlemleri için gerekir. SU hesaplamalar hakkında daha fazla bilgi için bkz: [sorgu ve dizin iş yükleri için kaynak düzeylerini ölçeklendirme](../articles/search/search-capacity-planning.md). 
+<sup>2</sup> arama birimi, bir *çoğaltma* ya da *bölüm*olarak ayrılan faturalandırma birimleridir. Depolama, dizin oluşturma ve sorgu işlemleri için her iki kaynağa de ihtiyacınız vardır. SU hesaplamaları hakkında daha fazla bilgi edinmek için bkz. [sorgu ve Dizin iş yükleri Için ölçek kaynak düzeyleri](../articles/search/search-capacity-planning.md). 

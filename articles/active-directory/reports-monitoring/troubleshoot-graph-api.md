@@ -1,9 +1,9 @@
 ---
-title: Azure Active Directory raporlama API'SİYLE hatalarını giderme | Microsoft Docs
-description: Bir çözüm hataları için Azure Active Directory raporlama API'lerini çağrılırken sağlar.
+title: Azure Active Directory Reporting API 'de hata giderme | Microsoft Docs
+description: Azure Active Directory Raporlama API 'Lerini çağırırken hata çözümü sağlar.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: cawrites
 manager: daveba
 editor: ''
 ms.assetid: 0030c5a4-16f0-46f4-ad30-782e7fea7e40
@@ -14,54 +14,54 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
 ms.date: 11/13/2018
-ms.author: markvi
+ms.author: chadam
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8b517204fb650020bdebf8172186f30fff58f722
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e6f1f34dcece9acb20d0db091152b24b26cb9fa2
+ms.sourcegitcommit: 5b76581fa8b5eaebcb06d7604a40672e7b557348
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60285001"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68989525"
 ---
-# <a name="troubleshoot-errors-in-azure-active-directory-reporting-api"></a>Azure Active Directory raporlama API'SİYLE hatalarını giderme
+# <a name="troubleshoot-errors-in-azure-active-directory-reporting-api"></a>Azure Active Directory Raporlama API 'sindeki hataların sorunlarını giderme
 
-Bu makalede, bunların çözümü için adımları ve MS Graph API'sini kullanarak Etkinlik raporlarını erişirken içine çalışabilir genel hata iletileri listelenir.
+Bu makalede, MS Graph API kullanarak etkinlik raporlarına ve bunların çözünürlüğüne yönelik adımlara erişirken karşılaşabileceğiniz ortak hata iletileri listelenmektedir.
 
-### <a name="500-http-internal-server-error-while-accessing-microsoft-graph-v2-endpoint"></a>Microsoft Graph V2 uç noktası erişirken 500 HTTP iç sunucu hatası
+### <a name="500-http-internal-server-error-while-accessing-microsoft-graph-v2-endpoint"></a>Microsoft Graph v2 uç noktasına erişirken HTTP iç sunucu hatası 500
 
-Şu anda Microsoft Graph v2 uç noktası desteklemiyoruz - Microsoft Graph v1 uç noktayı kullanarak etkinlik günlüklerini emin olun.
+Şu anda Microsoft Graph v2 uç noktasını desteklemiyoruz-Microsoft Graph v1 uç noktasını kullanarak etkinlik günlüklerine erişebildiğinizden emin olun.
 
-### <a name="error-failed-to-get-user-roles-from-ad-graph"></a>Hata: AD grafikten kullanıcı rolleri alınamadı
+### <a name="error-failed-to-get-user-roles-from-ad-graph"></a>Hata: AD grafiğinden Kullanıcı rolleri alınamadı
 
-Oturum açma erişmeye çalışırken bu hata iletisini alabilirsiniz Graph Gezgini kullanarak. Oturum açma düğmelerinin her ikisi de Graph Gezgini Arabiriminde kullanarak hesabınızda aşağıdaki görüntüde gösterildiği gibi oturumunuz emin olun. 
+Bu hata iletisini, Graph Explorer kullanarak oturum açma erişimlerine erişmeye çalışırken alabilirsiniz. Aşağıdaki görüntüde gösterildiği gibi, Graph Explorer Kullanıcı arabirimindeki oturum açma düğmelerinden her ikisini kullanarak hesabınızda oturum açtığınızdan emin olun. 
 
 ![Graph Gezgini](./media/troubleshoot-graph-api/graph-explorer.png)
 
-### <a name="error-failed-to-do-premium-license-check-from-ad-graph"></a>Hata: AD grafikten Premium lisansı denetimi yapmak başarısız oldu 
+### <a name="error-failed-to-do-premium-license-check-from-ad-graph"></a>Hata: AD grafiğinden Premium lisans denetimi yapılamadı 
 
-Oturum açma erişmeye çalışırken bu hatayı çalıştırırsanız Graph Gezgini kullanma, seçim **değiştirme izinlerini** hesabınızın sol gezinti ve seçim altında **Tasks.ReadWrite** ve **Directory.Read.All**. 
+Graph Explorer kullanarak oturum açma erişimiyle çalışmaya çalışırken bu hata iletisiyle karşılaşırsanız, sol gezinti bölmesinde hesabınızın altındaki **Izinleri Değiştir** ' i seçin ve **Görevler. ReadWrite** ve **Dizin. Read. All**' ı seçin. 
 
-![UI izinleri değiştirme](./media/troubleshoot-graph-api/modify-permissions.png)
+![İzin Kullanıcı arabirimini değiştirme](./media/troubleshoot-graph-api/modify-permissions.png)
 
 
-### <a name="error-neither-tenant-is-b2c-or-tenant-doesnt-have-premium-license"></a>Hata: Ne B2C kiracısının olduğu veya kiracının premium lisansı yok
+### <a name="error-neither-tenant-is-b2c-or-tenant-doesnt-have-premium-license"></a>Hata: Hiçbir kiracı B2C değil veya kiracıda Premium lisansa sahip değil
 
-Oturum açma raporları erişim gerektiren bir Azure Active Directory premium 1 (P1) lisans. Oturum açma erişirken bu hata iletisini görürseniz, bir Azure AD P1 lisansı ile kiracınıza lisansının olduğunu doğrulayın.
+Oturum açma raporlarına erişmek için Azure Active Directory Premium 1 (P1) lisansı gerekir. Oturum açma işlemleri sırasında bu hata iletisini görürseniz, kiracınızın bir Azure AD P1 lisansıyla lisanslanmasını sağlayın.
 
-### <a name="error-user-is-not-in-the-allowed-roles"></a>Hata: Kullanıcı, izin verilen rollerinde değil 
+### <a name="error-user-is-not-in-the-allowed-roles"></a>Hata: Kullanıcı izin verilen rollerde değil 
 
-Denetim günlükleri veya oturum açma API'sini kullanarak erişmeye çalışırken bu hatayı görürseniz, hesabınızın bir parçası olduğundan emin olun **güvenlik okuyucusu** veya **rapor okuyucu** Azure Active Directory'niz içindeki rolü Kiracı. 
+API kullanarak denetim günlüklerine veya oturum açma erişimine erişmeye çalışırken bu hata iletisini görürseniz, hesabınızın Azure Active Directory kiracınızdaki **güvenlik okuyucusu** veya **rapor okuyucu** rolünün bir parçası olduğundan emin olun. 
 
-### <a name="error-application-missing-aad-read-directory-data-permission"></a>Hata: Uygulamanın AAD 'Dizin verilerini okuma' izni yok 
+### <a name="error-application-missing-aad-read-directory-data-permission"></a>Hata: Uygulamada AAD ' Read Directory Data ' izni eksik 
 
-Lütfen adımları [Azure Active Directory raporlama API'SİYLE erişmek için Önkoşullar](howto-configure-prerequisites-for-reporting-api.md) için uygulamanızın doğru izin kümesi ile çalıştığından emin olun. 
+Lütfen uygulamanızın doğru izin kümesiyle çalıştığından emin olmak için [Azure Active Directory Raporlama API 'sine erişmek üzere ön koşullar](howto-configure-prerequisites-for-reporting-api.md) bölümündeki adımları izleyin. 
 
-### <a name="error-application-missing-msgraph-api-read-all-audit-log-data-permission"></a>Hata: Uygulama MSGraph API 'tüm denetim günlük verileri okuma' izni yok
+### <a name="error-application-missing-msgraph-api-read-all-audit-log-data-permission"></a>Hata: Uygulama eksik MSGraph API 'SI ' tüm denetim günlüğü verilerini oku ' izni
 
-Lütfen adımları [Azure Active Directory raporlama API'SİYLE erişmek için Önkoşullar](howto-configure-prerequisites-for-reporting-api.md) için uygulamanızın doğru izin kümesi ile çalıştığından emin olun. 
+Lütfen uygulamanızın doğru izin kümesiyle çalıştığından emin olmak için [Azure Active Directory Raporlama API 'sine erişmek üzere ön koşullar](howto-configure-prerequisites-for-reporting-api.md) bölümündeki adımları izleyin. 
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-[API Başvurusu denetim kullanmak](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/directoryaudit)
-[oturum açma etkinliği raporunu API başvuru kullanın](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/signin)
+[Denetim API 'si başvurusunu](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/directoryaudit)
+kullanma[oturum açma etkinlik raporu API başvurusunu kullan](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/signin)

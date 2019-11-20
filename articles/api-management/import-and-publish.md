@@ -9,17 +9,16 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.custom: mvc
 ms.topic: tutorial
 ms.date: 02/24/2019
 ms.author: apimpm
-ms.openlocfilehash: 0e104f4cbdef7edc5c109781509e3924400e5ba4
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: bae762b4603b2f5f80447a16671fed4e37e62b95
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62123527"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74108545"
 ---
 # <a name="import-and-publish-your-first-api"></a>İlk API’nizi içeri aktarma ve yayımlama 
 
@@ -48,11 +47,11 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 Bu bölümde, bir OpenAPI belirtimi arka uç API’sinin nasıl içeri aktarılacağı ve yayımlanacağı gösterilmektedir.
  
 1. **API YÖNETİMİ** bölümünden **API’ler** öğesini seçin.
-2. Seçin **Openapı belirtimi** listesi ve **tam** içinde açılır.
+2. Listeden **Openapı belirtimini** seçin ve açılır pencerede **tam** ' ı tıklatın.
 
     ![Bir API oluşturma](./media/api-management-get-started/create-api.png)
 
-    **Ayarlar** sekmesine giderek oluşturma sırasında veya sonrasında API değerlerini ayarlayabilirsiniz. Bir alanın yanındaki kırmızı yıldız, alanın zorunlu olduğunu belirtir.
+    **Ayarlar** sekmesine giderek, oluşturma sırasında veya daha sonra API değerlerini ayarlayabilirsiniz. Bir alanın yanındaki kırmızı yıldız alanın gerekli olduğunu gösterir.
 
     İlk API'nizi oluşturmak için aşağıdaki tabloda yer alan değerleri kullanın.
 
@@ -60,23 +59,23 @@ Bu bölümde, bir OpenAPI belirtimi arka uç API’sinin nasıl içeri aktarıla
     |---------------------------|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
     | **OpenAPI Belirtimi** | https://conferenceapi.azurewebsites.net?format=json | API’yi uygulayan hizmete başvurur. API Management istekleri bu adrese iletir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
     | **Görünen ad**          | *Tanıtım Konferansı API’si*                              | Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur. <br/>Bu ad, Geliştirici portalında görüntülenir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-    | **Ad**                  | *demo-conference-api*                              | API için benzersiz bir ad sağlar. <br/>Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+    | **Adı**                  | *demo-conference-api*                              | API için benzersiz bir ad sağlar. <br/>Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
     | **Açıklama**           | API için isteğe bağlı bir açıklama sağlayın.        | Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
     | **URL düzeni**            | *HTTPS*                                            | API’ye erişmek için hangi protokollerin kullanılabileceğini belirler.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
     | **API URL’si soneki**        | *conference*                                       | Sonek, API yönetimi hizmetinin temel URL’sinin sonuna eklenir. API Management API'leri soneklerine bakarak ayırt eder; dolayısıyla belirli bir yayımcıdaki her API için sonekin benzersiz olması gerekir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-    | **Ürünler**              | *Sınırsız*                                        | Ürünler bir veya daha fazla API arasındaki ilişkilendirmelerdir. Bir Ürüne birkaç API ekleyebilir ve bunları geliştirici portalı aracılığıyla geliştiricilere sunabilirsiniz. <br/>API’yi bir ürünle ilişkilendirerek yayımlarsınız (bu örnekte, *Sınırsız*). Bu yeni API’yi bir ürüne eklemek için ürün adını yazın (**Ayarlar** sayfasından da bunu yapabilirsiniz). Bu adım, API’yi birden fazla ürüne eklemek için birçok defa yinelenebilir.<br/>API’ye erişim elde etmek için geliştiricilerin önce bir ürüne abone olması gerekir. Abone olduklarında, ilgili üründeki tüm API’ler için geçerli olan bir abonelik anahtarı edinirler. <br/> APIM örneğini siz oluşturduysanız zaten bir yöneticisinizdir ve tüm ürünlere abone olmuşsunuz demektir.<br/> Varsayılan olarak, her bir API Management örneği iki örnek ürün ile birlikte gelir: **Başlangıç** ve **sınırsız**. |
-    | **Etiketler**                  |                                                    | API'leri düzenlemek için etiketleri. Etiketler, arama, gruplandırma veya filtreleme için kullanılabilir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-    | **Sürüm bu API?**     |                                                    | Sürüm oluşturma hakkında daha fazla bilgi için bkz. [API’nizin birden çok sürümünü yayımlama](api-management-get-started-publish-versions.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+    | **Ürünler**              | *Sınırsız*                                        | Ürünler bir veya daha fazla API arasındaki ilişkilendirmelerdir. Bir Ürüne birkaç API ekleyebilir ve bunları geliştirici portalı aracılığıyla geliştiricilere sunabilirsiniz. <br/>API’yi bir ürünle ilişkilendirerek yayımlarsınız (bu örnekte, *Sınırsız*). Bu yeni API’yi bir ürüne eklemek için ürün adını yazın (**Ayarlar** sayfasından da bunu yapabilirsiniz). Bu adım, API’yi birden fazla ürüne eklemek için birçok defa yinelenebilir.<br/>API’ye erişim elde etmek için geliştiricilerin önce bir ürüne abone olması gerekir. Abone olduklarında, ilgili üründeki tüm API’ler için geçerli olan bir abonelik anahtarı edinirler. <br/> APIM örneğini siz oluşturduysanız zaten bir yöneticisinizdir ve tüm ürünlere abone olmuşsunuz demektir.<br/> Varsayılan olarak, her bir API Management örneği iki örnek ürün ile birlikte gelir: **Başlangıç** ve **Sınırsız**. |
+    | **Etiketler**                  |                                                    | API 'Leri düzenlemek için Etiketler. Etiketler arama, gruplama veya filtreleme için kullanılabilir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+    | **Bu API sürümünü mi kullanıyorsunuz?**     |                                                    | Sürüm oluşturma hakkında daha fazla bilgi için bkz. [API’nizin birden çok sürümünü yayımlama](api-management-get-started-publish-versions.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
     >[!NOTE]
     > API’yi yayımlamak için bir ürünle ilişkilendirmeniz gerekir. **Ayarlar sayfasından** bunu yapabilirsiniz.
 
-3. **Oluştur**’u seçin.
+3. **Oluştur**'u seçin.
 
 > [!TIP]
 > Kendi API tanımınızı içeri aktarma konusunda sorun yaşıyorsanız [bilinen sorunlar ve kısıtlamalar listesine bakın](api-management-api-import-restrictions.md).
 
-## <a name="test-the-new-apim-api-in-the-azure-portal"></a>Azure portalında yeni APIM API’sini test etme
+## <a name="test-the-new-api-in-the-azure-portal"></a>Azure portal yeni API 'YI test etme
 
 ![API haritasını test etme](./media/api-management-get-started/01-import-first-api-01.png)
 
@@ -89,23 +88,6 @@ Bu bölümde, bir OpenAPI belirtimi arka uç API’sinin nasıl içeri aktarıla
 
     Arka uç, **200 OK** ve bazı verilerle yanıt verir.
 
-## <a name="call-operation"> </a>Geliştirici portalından işlem çağırma
-
-API’leri test etmek için **Geliştirici portalından** da işlemler çağrılabilir.
-
-1. **Geliştirici portalına** gidin.
-
-    ![Geliştirici portalı](./media/api-management-get-started/developer-portal.png)
-
-2. **API'ler**’i seçip **Tanıtım Konferansı API'si**’ne ve ardından **GetSpeakers**’a tıklayın.
-
-    Sayfa, sorgu parametreleri alanlarını ve üst bilgileri görüntüler, ancak bu durumda bir alan yok. Bu API ile ilişkilendirilmiş ürünün abonelik anahtarı için, üst bilgilerden biri "Ocp-Apim-Subscription-Key" üst bilgisidir. APIM örneğini siz oluşturduysanız zaten bir yöneticisinizdir ve anahtar otomatik olarak doldurulur.
-
-3. **Deneyin**’e basın.
-4. **Gönder**’e basın.
-
-    Bir işlem çağrıldıktan sonra geliştirici portalı yanıtları gösterir.  
-
 ## <a name="next-steps"> </a>Sonraki adımlar
 
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
@@ -113,7 +95,6 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 > [!div class="checklist"]
 > * İlk API’nizi içeri aktarma
 > * Azure portalında API’yi test etme
-> * Geliştirici portalında API’yi test etme
 
 Sonraki öğreticiye ilerleyin:
 

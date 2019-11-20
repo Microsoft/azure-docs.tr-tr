@@ -6,12 +6,12 @@ description: Microsoft Azure Cloud Services’ı kullanarak güçlü uygulamalar
 ms.topic: hub-page
 featureFlags:
 - clicktale
-ms.openlocfilehash: f7a0afd8058d2de277da8f7ab3d1eb37abae4add
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: 4c1b7c49002d9ff6cd8c782c3308edaaa5d2373d
+ms.sourcegitcommit: 3f8017692169bd75483eefa96c225d45cd497f06
 ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67544177"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73519843"
 ---
 <div id="main" class="v2">
     <div class="container">
@@ -27,7 +27,7 @@ ms.locfileid: "67544177"
                                     </div>
                                 </div>
                                 <div class="cardText">
-                                    <span class="likeAnH3">Azure Geliştiricileri için Başlarken Kılavuzu</span>
+                                    <span class="likeAnH3">Azure Geliştiricileri için Başlangıç Kılavuzu</span>
                                 </div>
                             </div>
                         </div>
@@ -108,14 +108,14 @@ ms.locfileid: "67544177"
                                             <div class="cardText">
                                                 <h3>Kaynakları koruma ve yönetme</h3>
                                                 <ul class="noBullet">
-                                                    <li><a class="barLink" href="/azure/security-center/">Azure Güvenlik Merkezi</a></li>
-                                                    <li><a class="barLink" href="/azure/monitoring-and-diagnostics/">Azure İzleyici</a></li>
-                                                    <li><a class="barLink" href="/azure/application-insights/">Azure Application Insights</a></li>
-                                                    <li><a class="barLink" href="/azure/cost-management/">Azure Maliyet Yönetimi</a></li>
                                                     <li><a class="barLink" href="/azure/backup/">Azure Backup</a></li>
-                                                    <li><a class="barLink" href="/azure/site-recovery/">Azure Site Recovery</a></li>
+                                                    <li><a class="barLink" href="/azure/cost-management/">Azure Maliyet Yönetimi</a></li>
                                                     <li><a class="barLink" href="/azure/migrate/">Azure Geçişi</a></li>
+                                                    <li><a class="barLink" href="/azure/monitoring-and-diagnostics/">Azure İzleyici</a></li>
                                                     <li><a class="barLink" href="/azure/governance/policy/">Azure İlkesi</a></li>
+                                                    <li><a class="barLink" href="/azure/security-center/">Azure Güvenlik Merkezi</a></li>
+                                                    <li><a class="barLink" href="/azure/lighthouse/">Azure Lighthouse</a></li>
+                                                    <li><a class="barLink" href="/azure/site-recovery/">Azure Site Recovery</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -139,38 +139,32 @@ ms.locfileid: "67544177"
                                     <div class="cardPadding">
                                         <div class="card">
                                             <div class="cardText">
-                                                <h3>Uygulama geliştirme</h3>
+                                                <h3>Uygulamaları geliştirme</h3>
                                                 <table cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top-color:transparent!important;padding-left:0;">
                                                 <ul class="noBullet">
                                                     <li>
                                                         <a class="barLink" href="/dotnet/azure/?view=azure-dotnet">
-                                                            <img src="media/index/logo_NET.svg" alt="">
-.NET</a>
+                                                            <img src="media/index/logo_NET.svg" alt=""> .NET</a>
                                                     </li>
                                                     <li>
-                                                        <a class="barLink" href="/python/azure/">
-                                                            <img src="media/index/logo_python.svg" alt="">
-Python</a>
+                                                        <a class="barLink" href="/azure/python/">
+                                                            <img src="media/index/logo_python.svg" alt=""> Python</a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/java/azure/">
-                                                            <img src="media/index/logo_java.svg" alt="">
-Java</a>
+                                                            <img src="media/index/logo_java.svg" alt=""> Java</a>
                                                     </li></ul></td><td style="border-top-color:transparent!important;padding-left:0;"><ul class="noBullet">
                                                     <li>
                                                         <a class="barLink" href="/azure/app-service-web/app-service-web-get-started-php">
-                                                            <img src="media/index/logo_PHP.svg" alt="">
-PHP</a>
+                                                            <img src="media/index/logo_PHP.svg" alt=""> PHP</a>
                                                     </li>
                                                     <li>
-                                                        <a class="barLink" href="/javascript/azure/">
-                                                            <img src="media/index/logo_nodejs.svg" alt="">
-Node.js</a>
+                                                        <a class="barLink" href="/azure/javascript/">
+                                                            <img src="media/index/logo_nodejs.svg" alt=""> Node.js</a>
                                                     </li>
                                                     <li>
-                                                        <a class="barLink" href="/go/azure/">
-                                                            <img src="https://docs.microsoft.com/media/logos/logo_Go-lightblue.svg" alt="">
-Go</a>
+                                                        <a class="barLink" href="/azure/go/">
+                                                            <img src="https://docs.microsoft.com/media/logos/logo_Go-lightblue.svg" alt=""> Go</a>
                                                     </li>
                                                 </ul></td></tr></table>
                                                <h4>Uygulama Modelleri</h4>
@@ -194,9 +188,10 @@ Go</a>
                                                 <h3>Veri ve Yapay Zeka yönetimi</h3>
                                                 <h4>İlişkisel Veritabanları</h4>
                                                 <ul class="noBullet">
-                                                    <li><a class="barLink" href="/azure/sql-database/">Hizmet olarak SQL veritabanı</a></li>
+                                                    <li><a class="barLink" href="/azure/sql-database/">Hizmet olarak SQL Veritabanı</a></li>
+                                                    <li><a class="barLink" href="/azure/sql-database-edge/">Edge için SQL Veritabanı</a></li>
                                                     <li><a class="barLink" href="/azure/virtual-machines/windows/sql/">Azure VM’lerde SQL Server</a></li>
-                                                    <li><a class="barLink" href="/azure/sql-data-warehouse/">Hizmet olarak SQL Veri Ambarı</a></li>
+                                                    <li><a class="barLink" href="/azure/sql-data-warehouse/">Synapse Analytics (eski adı SQL DW)</a></li>
                                                     <li><a class="barLink" href="/azure/postgresql/">Hizmet olarak PostgreSQL veritabanı</a></li>
                                                     <li><a class="barLink" href="/azure/mysql/">Hizmet olarak MySQL veritabanı</a></li>
                                                 </ul>
@@ -228,23 +223,19 @@ Go</a>
                                                 <ul class="noBullet">
                                                     <li>
                                                         <a class="barLink" href="/cli/azure">
-                                                            <img src="media/index/azure_dev-7.svg" alt="">
-Azure CLI </a>
+                                                            <img src="media/index/azure_dev-7.svg" alt=""> Azure CLI </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/powershell/azure/overview">
-                                                            <img src="media/index/azure_dev-8.svg" alt="">
-Azure PowerShell </a>
+                                                            <img src="media/index/azure_dev-8.svg" alt=""> Azure PowerShell </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/azure/azure-portal/">
-                                                            <img src="https://docs.microsoft.com/media/logos/logo_azure.svg" alt="">
-Azure portalı </a>
+                                                            <img src="https://docs.microsoft.com/media/logos/logo_azure.svg" alt=""> Azure portalı </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="https://azure.microsoft.com/features/azure-portal/mobile-app/">
-                                                            <img src="https://docs.microsoft.com/media/common/i_mobile-app-developement.svg" alt="">
-Azure mobil uygulaması </a>
+                                                            <img src="https://docs.microsoft.com/media/common/i_mobile-app-developement.svg" alt=""> Azure mobil uygulaması </a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -261,38 +252,31 @@ Azure mobil uygulaması </a>
                                                 <ul class="noBullet">
                                                     <li>
                                                         <a class="barLink" href="https://docs.microsoft.com/azure/devops">
-                                                            <img src="https://docs.microsoft.com/media/logos/logo_vs-team-services.svg" alt="">
-Azure DevOps </a>
+                                                            <img src="https://docs.microsoft.com/media/logos/logo_vs-team-services.svg" alt=""> Azure DevOps </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="https://docs.microsoft.com/azure/devops/pipelines/index">
-                                                            <img src="https://docs.microsoft.com/azure/devops/_img/index/devopsiconpipelines96.svg" alt="">
-Azure Pipelines </a>
+                                                            <img src="https://docs.microsoft.com/azure/devops/_img/index/devopsiconpipelines96.svg" alt=""> Azure Pipelines </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/azure/ansible/">
-                                                            <img src="media/index/ansible.svg" alt="">
-Ansible </a>
+                                                            <img src="media/index/ansible.svg" alt=""> Ansible </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/azure/chef">
-                                                            <img src="chef/media/Chef_Regular.svg" alt="">
-Chef </a>
+                                                            <img src="chef/media/Chef_Regular.svg" alt=""> Chef </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/azure/jenkins">
-                                                            <img src="https://docs.microsoft.com/media/logos/logo_jenkins.svg" alt="">
-Jenkins </a>
+                                                            <img src="https://docs.microsoft.com/media/logos/logo_jenkins.svg" alt=""> Jenkins </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/azure/terraform">
-                                                            <img src="https://docs.microsoft.com/media/logos/logo_terraform.svg" alt="">
-Terraform </a>
+                                                            <img src="https://docs.microsoft.com/media/logos/logo_terraform.svg" alt=""> Terraform </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/azure/devops-project/">
-                                                            <img src="https://docs.microsoft.com/media/logos/logo_vs-team-services.svg" alt="">
-Azure DevOps Projeleri </a>
+                                                            <img src="https://docs.microsoft.com/media/logos/logo_vs-team-services.svg" alt=""> Azure DevOps Projeleri </a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -309,23 +293,19 @@ Azure DevOps Projeleri </a>
                                                 <ul class="noBullet">
                                                     <li>
                                                         <a class="barLink" href="/learn/modules/tour-azure-portal/">
-                                                            <img src="https://docs.microsoft.com/learn/achievements/tour-azure-services-and-features.svg" alt="">
-Azure hizmetleri ve özellikleri turuna katılın </a>
+                                                            <img src="https://docs.microsoft.com/learn/achievements/tour-azure-services-and-features.svg" alt=""> Azure hizmetleri ve özellikleri turuna katılın </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/learn/modules/principles-cloud-computing/">
-                                                            <img src="https://docs.microsoft.com/learn/achievements/principles-cloud-computing.svg" alt="">
-Bulut bilgi işlem ilkeleri </a>
+                                                            <img src="https://docs.microsoft.com/learn/achievements/principles-cloud-computing.svg" alt=""> Bulut bilgi işlem ilkeleri </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/learn/modules/control-azure-services-with-cli/">
-                                                            <img src="https://docs.microsoft.com/learn/achievements/control-azure-services-with-cli.svg" alt="">
-Azure hizmetlerini CLI ile denetleme </a>
+                                                            <img src="https://docs.microsoft.com/learn/achievements/control-azure-services-with-cli.svg" alt=""> Azure hizmetlerini CLI ile denetleme </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/learn/modules/automate-azure-tasks-with-powershell/">
-                                                            <img src="https://docs.microsoft.com/learn/achievements/automate-azure-tasks-with-powershell.svg" alt="">
-PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
+                                                            <img src="https://docs.microsoft.com/learn/achievements/automate-azure-tasks-with-powershell.svg" alt=""> PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                                     </li>
                                                     <li>
                                                         <a class="barLink" href="/learn/browse/?products=azure">Daha fazla etkileşimli öğrenme içeriği...</a>
@@ -352,7 +332,7 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                 <a href="#products">Ürünler</a>
                 <ul id="products">
                     <li>
-                        <a href="#all">Tümü</a>
+                        <a data-default="true" href="#all">Tümü</a>
                         <ul id="all" class="directory">
                             <li>
                                 <div class="group">
@@ -366,7 +346,7 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                         </li>
                                         <li>
                                             <a href="/azure/cognitive-services/welcome">
-                                                <img src="media/index/machinelearning.svg" alt="" />
+                                                <img src="media/index/i_azure-cognitive-services-color.svg" alt="" />
                                                 <p>Bilişsel Hizmetler</p>
                                             </a>
                                         </li>
@@ -609,8 +589,8 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                     <ul>
                                         <li>
                                             <a href="/azure/sql-data-warehouse/">
-                                                <img src="media/index/sqldatawarehouse.svg" alt="" />
-                                                <p>SQL Veri Ambarı</p>
+                                                <img src="media/index/azure_synapse_icon.svg" alt="" />
+                                                <p>Azure Synapse Analytics (eski adı SQL DW)</p>
                                             </a>
                                         </li>
                                         <li>
@@ -706,6 +686,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             <a href="/azure/data-lake-store/">
                                                 <img src="media/index/Azure-Data-Lake-Store-COLOR.svg" alt="" />
                                                 <p>Data Lake Storage Gen1</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/azure/data-share/">
+                                                <img src="media/index/data-share.svg" alt="" />
+                                                <p>Azure Veri Paylaşımı</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -840,6 +826,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="/azure/cognitive-services/cognitive-services-container-support/">
+                                                <img src="media/index/i_azure-cognitive-services-color.svg" alt="" />
+                                                <p>Bilişsel Hizmetler</p>
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a href="/azure/service-fabric/">
                                                 <img src="media/index/Fabric.svg" alt="" />
                                                 <p>Service Fabric</p>
@@ -872,6 +864,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="/azure/sql-database-edge/">
+                                                <img src="media/index/sqldatabaseedge.svg" alt="" />
+                                                <p>Uç Cihazlar için Azure SQL Veritabanı</p>
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a href="/azure/cosmos-db/">
                                                 <img src="media/index/cosmosdb.svg" alt="" />
                                                 <p>Azure Cosmos DB</p>
@@ -879,8 +877,8 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                         </li>
                                         <li>
                                             <a href="/azure/sql-data-warehouse/">
-                                                <img src="media/index/SQLDataWarehouse.svg" alt="" />
-                                                <p>SQL Veri Ambarı</p>
+                                                <img src="media/index/azure_synapse_icon.svg" alt="" />
+                                                <p>Azure Synapse Analytics (eski adı SQL DW)</p>
                                             </a>
                                         </li>
                                         <li>
@@ -1137,6 +1135,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="/azure/iot-pnp/">
+                                                <img src="media/index/cloud-check.svg" alt="" />
+                                                <p>IoT Tak Çalıştır</p>
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a href="/azure/iot-suite/">
                                                 <img src="media/index/iot-solution-accelerators.svg" alt="" />
                                                 <p>IoT çözüm hızlandırıcıları</p>
@@ -1373,6 +1377,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                                 <p>Faturalandırma</p>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="/azure/lighthouse/">
+                                                <img src="media/index/azure-resource-manager.svg" alt="" />
+                                                <p>Azure Lighthouse</p>
+                                            </a>
+                                        </li>
                                     </ul>
                                     <h3>Medya</h3>
                                     <ul>
@@ -1498,9 +1508,9 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                     <h3>Cep telefonu</h3>
                                     <ul>
                                         <li>
-                                            <a href="/azure/app-service-mobile/">
-                                                <img src="media/index/app-service-mobile.svg" alt="" />
-                                                <p>App Service - Mobile Apps</p>
+                                            <a href="/appcenter/">
+                                                <img src="https://docs.microsoft.com/media/logos/logo_vs-mobile-center.svg" alt="" />
+                                                <p>Visual Studio App Center</p>
                                             </a>
                                         </li>
                                         <li>
@@ -1516,12 +1526,6 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/appcenter/">
-                                                <img src="https://docs.microsoft.com/media/logos/logo_vs-mobile-center.svg" alt="" />
-                                                <p>Visual Studio App Center</p>
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="/azure/azure-maps/">
                                                 <img src="media/index/azure-maps-icon-portal.svg" alt="" />
                                                 <p>Azure Haritalar</p>
@@ -1531,6 +1535,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             <a href="https://azure.microsoft.com/features/xamarin">
                                                 <img src="media/index/logo_xamarin.svg" alt="" />
                                                 <p>Xamarin</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/azure/app-service-mobile/">
+                                                <img src="media/index/app-service-mobile.svg" alt="" />
+                                                <p>App Service - Mobile Apps</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -1620,6 +1630,36 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                                 <p>Azure Bastion</p>
                                             </a>
                                         </li>
+                                        <li>
+                                          <a href="/azure/web-application-firewall/">
+                                                <img src="media/index/web-app-firewall.svg" alt="" />
+                                                <p>Web Uygulaması Güvenlik Duvarı</p>
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a href="https://go.microsoft.com/fwlink/?linkid=2097091">
+                                                <img src="media/index/private-link.svg" alt="" />
+                                                <p>Azure Özel Bağlantı</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/azure/peering-service/">
+                                                <img src="media/index/peering-service.svg" alt="" />
+                                                <p>Eşleme Hizmeti</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/azure/firewall-manager/">
+                                                <img src="media/index/icon-networking-361-azure-firewall-manager.svg" alt="" />
+                                                <p>Azure Güvenlik Duvarı Yöneticisi</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/azure/internet-analyzer/">
+                                                <img src="media/index/internet-analyzer.svg" alt="" />
+                                                <p>Azure Internet Analyzer</p>
+                                            </a>
+                                        </li>
                                     </ul>
                                     <h3>Güvenlik</h3>
                                     <ul>
@@ -1642,19 +1682,19 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             </a>
                                         </li>
                                         <li>
-                                        <li>
                                             <a href="/azure/dedicated-hsm">
                                                 <img src="media/index/dedicated-hsm.svg" alt="" />
                                                 <p>Azure Ayrılmış HSM</p>
                                             </a>
                                         </li>
+                                        <li>
                                             <a href="/azure/virtual-network/ddos-protection-overview">
                                                 <img src="media/index/ddos-protection.svg" alt="" />
                                                 <p>Azure DDoS koruması</p>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/azure/security/azure-threat-detection">
+                                            <a href="/azure/security/fundamentals/threat-detection">
                                                 <img src="media/index/SecurityCenter.svg" alt="" />
                                                 <p>Azure Gelişmiş Tehdit Koruması</p>
                                             </a>
@@ -1864,6 +1904,15 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             <a href="/azure/azure-signalr/">
                                                 <img src="media/index/azure-signalr.svg" alt="" />
                                                 <p>Azure SignalR Service</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <h3>Windows Sanal Masaüstü</h3>
+                                    <ul>
+                                        <li>
+                                            <a href="/azure/virtual-desktop/">
+                                                <img src="media/index/windows-virtual-desktop.svg" alt="" />
+                                                <p>Windows Sanal Masaüstü</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -2197,12 +2246,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             <div class="card">
                                                 <div class="cardImageOuter">
                                                     <div class="cardImage">
-                                                        <img src="media/index/sqldatawarehouse.svg" alt="" />
+                                                        <img src="media/index/azure_synapse_icon.svg" alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>SQL Veri Ambarı</h3>
-                                                    <p>Kurumsal sınıf özellikler içeren, esnek, hizmet olarak veri ambarı</p>
+                                                    <h3>Azure Synapse Analytics (eski adı SQL DW)</h3>
+                                                    <p>Benzeri görülmemiş bir sürede içgörü sağlayan sınırsız analiz hizmeti</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2297,7 +2346,7 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Stream Analytics</h3>
-                                                    <p>Milyonlarca IoT cihazından gerçek zamanlı veri akışı işleme</p>
+                                                    <p>Uygulamalardan ve cihazlardan hızlı veri akışlarında gerçek zamanlı analiz</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2551,6 +2600,25 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/azure/data-share/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/data-share.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Azure Veri Paylaşımı</h3>
+                                                    <p>Dış kuruluşlarla büyük verileri paylaşmaya yönelik kolay ve güvenli bir hizmet</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -2597,7 +2665,7 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                         </ul>
                     </li>
                     <li>
-                        <a data-default="true" href="#Compute">İşlem</a>
+                        <a href="#Compute">İşlem</a>
                         <ul id="Compute" class="cardsA">
                             <li>
                                 <a href="/azure/virtual-machines/linux/">
@@ -2707,6 +2775,25 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                                 <div class="cardText">
                                                     <h3>Container Instances</h3>
                                                     <p>Kapsayıcıları tek bir komutla kolayca çalıştırın</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/azure/cognitive-services/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/i_azure-cognitive-services-color.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Bilişsel Hizmetler</h3>
+                                                    <p>Görme, duyma, konuşma ve anlama için uygulamalara, web sitelerine ve botlara zeka ekleyin</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2966,6 +3053,25 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                 </a>
                             </li>
                             <li>
+                                <a href="/azure/cognitive-services/cognitive-services-container-support/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/i_azure-cognitive-services-color.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Bilişsel Hizmetler</h3>
+                                                    <p>Azure Bilişsel Hizmetler kapsayıcılarını Docker, Kubernetes, AKS ve Container Instances ile kullanma</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/azure/service-fabric/">
                                     <div class="cardSize">
                                         <div class="cardPadding">
@@ -3085,6 +3191,25 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                 </a>
                             </li>
                             <li>
+                                <a href="/azure/sql-database-edge/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/sqldatabaseedge.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Uç Cihazlar için Azure SQL Veritabanı</h3>
+                                                    <p>IoT ve uç dağıtımları için iyileştirilmiş ilişkisel veritabanı altyapısı.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/azure/cosmos-db/">
                                     <div class="cardSize">
                                         <div class="cardPadding">
@@ -3110,12 +3235,12 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                             <div class="card">
                                                 <div class="cardImageOuter">
                                                     <div class="cardImage">
-                                                        <img src="media/index/SQLDataWarehouse.svg" alt="" />
+                                                        <img src="media/index/azure_synapse_icon.svg" alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>SQL Veri Ambarı</h3>
-                                                    <p>Kurumsal sınıf özellikler içeren, esnek, hizmet olarak veri ambarı</p>
+                                                    <h3>Azure Synapse Analytics (eski adı SQL DW)</h3>
+                                                    <p>Benzeri görülmemiş bir sürede içgörü sağlayan sınırsız analiz hizmeti</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -3908,6 +4033,25 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                 </a>
                             </li>
                             <li>
+                                <a href="/azure/iot-pnp/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/cloud-check.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>IoT Tak Çalıştır</h3>
+                                                    <p>Hiç cihaz kodu yazmadan cihazları IoT çözümünüze bağlayın</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/azure/iot-suite/">
                                     <div class="cardSize">
                                         <div class="cardPadding">
@@ -4653,6 +4797,25 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/azure/lighthouse/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/azure-resource-manager.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Azure Lighthouse</h3>
+                                                    <p>Müşteri kaynaklarını uygun ölçekte yönetme</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -5017,18 +5180,18 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                         <a href="#mobile">Mobil</a>
                         <ul id="mobile" class="cardsA">
                             <li>
-                                <a href="/azure/app-service-mobile">
+                                <a href="/appcenter">
                                     <div class="cardSize">
                                         <div class="cardPadding">
                                             <div class="card">
                                                 <div class="cardImageOuter">
                                                     <div class="cardImage">
-                                                        <img src="media/index/app-service-mobile.svg" alt="" />
+                                                        <img alt="" src="https://docs.microsoft.com/media/logos/logo_vs-mobile-center.svg">
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>App Service - Mobile Apps</h3>
-                                                    <p>Tüm mobil uygulamalar için arka uç oluşturun ve barındırın</p>
+                                                    <h3>Visual Studio App Center</h3>
+                                                    <p>Uygulama yaşam döngülerini otomatikleştirerek uygulamalarınızı daha hızlı kullanıma sunun</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -5074,25 +5237,6 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                 </a>
                             </li>
                             <li>
-                                <a href="/appcenter">
-                                    <div class="cardSize">
-                                        <div class="cardPadding">
-                                            <div class="card">
-                                                <div class="cardImageOuter">
-                                                    <div class="cardImage">
-                                                        <img alt="" src="https://docs.microsoft.com/media/logos/logo_vs-mobile-center.svg">
-                                                    </div>
-                                                </div>
-                                                <div class="cardText">
-                                                    <h3>Visual Studio App Center</h3>
-                                                    <p>Uygulama yaşam döngülerini otomatikleştirerek uygulamalarınızı daha hızlı kullanıma sunun</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="/azure/azure-maps">
                                     <div class="cardSize">
                                         <div class="cardPadding">
@@ -5130,6 +5274,25 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/azure/app-service-mobile">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/app-service-mobile.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>App Service - Mobile Apps</h3>
+                                                    <p>Tüm mobil uygulamalar için arka uç oluşturun ve barındırın</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>                            
                         </ul>
                     </li>
                     <li>
@@ -5420,24 +5583,19 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                     </div>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#security">Güvenlik</a>
-                        <ul id="security" class="cardsA">
                             <li>
-                                <a href="/azure/security/">
+                                <a href="/azure/web-application-firewall/">
                                     <div class="cardSize">
                                         <div class="cardPadding">
                                             <div class="card">
                                                 <div class="cardImageOuter">
                                                     <div class="cardImage">
-                                                        <img src="media/index/SecurityCenter.svg" alt="" />
+                                                        <img src="media/index/web-app-firewall.svg" alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Güvenlik Bilgileri</h3>
-                                                    <p>Azure'ın, bulut çözümlerinizi oluşturabileceğiniz güvenli altyapıyı nasıl sağladığını öğrenin</p>
+                                                    <h3>Web Uygulaması Güvenlik Duvarı</h3>
+                                                    <p>Web uygulamalarınız için yaygın güvenlik açıklarına ve açıklardan yararlanma işlemlerine karşı merkezi bir koruma sağlayın</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -5445,7 +5603,67 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                 </a>
                             </li>
                             <li>
-                                <a href="/azure/security-center">
+                                <a href="/azure/peering-service/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/peering-service.svg" alt="" />
+                                                    </div>
+                                            </div>
+                                            <div class="cardText">
+                                                    <h3>Eşleme Hizmeti</h3>
+                                                    <p>Microsoft ağına erişmek için en uygun İnternet bağlantısını elde edin</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#security">Güvenlik</a>
+                        <ul id="security" class="cardsA">
+                            <li>
+                                <a href="https://go.microsoft.com/fwlink/?linkid=2097091">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/private-link.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Azure Özel Bağlantı</h3>
+                                                    <p>Verilerinizi Microsoft ağında tutarak, Azure platformunda barındırılan hizmetlere özel erişim elde edin</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/azure/firewall-manager/">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/icon-networking-361-azure-firewall-manager.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Azure Güvenlik Duvarı Yöneticisi</h3>
+                                                    <p>Küresel olarak dağıtılan güvenlik yönetim hizmeti</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                               <a href="/azure/security-center/">
                                     <div class="cardSize">
                                         <div class="cardPadding">
                                             <div class="card">
@@ -5521,7 +5739,7 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                 </a>
                             </li>
                             <li>
-                                <a href="/azure/security/azure-threat-detection">
+                                <a href="/azure/security/fundamentals/threat-detection">
                                     <div class="cardSize">
                                         <div class="cardPadding">
                                             <div class="card">
@@ -6183,6 +6401,30 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#windowsvirtualdesktop">Windows Sanal Masaüstü</a>
+                        <ul id="windowsvirtualdesktop" class="cardsA">
+                            <li>
+                                <a href="/azure/virtual-desktop">
+                                    <div class="cardSize">
+                                        <div class="cardPadding">
+                                            <div class="card">
+                                                <div class="cardImageOuter">
+                                                    <div class="cardImage">
+                                                        <img src="media/index/windows-virtual-desktop.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="cardText">
+                                                    <h3>Windows Sanal Masaüstü</h3>
+                                                    <p>Dilediğiniz cihaza bulut ölçeğinde sanal bir masaüstü deneyimi sunun</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
              <li>
@@ -6232,10 +6474,10 @@ PowerShell betiklerini kullanarak Azure görevlerini otomatikleştirme </a>
                                                 <h3>
 Python Geliştiricileri için Azure </h3>
                                                 <p>
-                                                    <a href="/python/azure">Kullanmaya başlayın</a>
+                                                    <a href="/azure/python">Kullanmaya başlayın</a>
                                                 </p>
                                                 <p>
-                                                    <a href="/python/api/overview/azure/">API başvurusu</a>
+                                                    <a href="/python/api/?view=azure-python">API başvurusu</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -6255,7 +6497,7 @@ Python Geliştiricileri için Azure </h3>
                                                 <h3>
 Node.js Geliştiricileri için Azure </h3>
                                                 <p>
-                                                    <a href="/javascript/azure/">Kullanmaya başlayın</a>
+                                                    <a href="/azure/javascript/">Kullanmaya başlayın</a>
                                                 </p>
                                                 <p>
                                                     <a href="/javascript/api/overview/azure/">API başvurusu</a>
@@ -6301,7 +6543,7 @@ Java Geliştiricileri için Azure </h3>
                                                 <h3>
 Go Geliştiricileri için Azure </h3>
                                                 <p>
-                                                    <a href="/go/azure/">Kullanmaya başlayın</a>
+                                                    <a href="/azure/go/">Kullanmaya başlayın</a>
                                                 </p>
                                                 <p>
                                                     <a href="https://godoc.org/github.com/Azure/azure-sdk-for-go">API Başvurusu</a>

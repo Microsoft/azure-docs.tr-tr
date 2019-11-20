@@ -1,6 +1,6 @@
 ---
-title: Son kullanıcı deneyimlerini uygulamalar - Azure Active Directory | Microsoft Docs
-description: Azure Active Directory (Azure AD), kuruluşunuzdaki son kullanıcılar uygulamaları dağıtmak için çeşitli özelleştirilebilir yol sağlar.
+title: Uygulamalar için son kullanıcı deneyimleri-Azure Active Directory | Microsoft Docs
+description: Azure Active Directory (Azure AD), kuruluşunuzdaki son kullanıcılara uygulama dağıtmak için çeşitli özelleştirilebilir yollar sunar.
 services: active-directory
 author: msmimart
 manager: CelesteDG
@@ -8,66 +8,74 @@ ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/03/2019
+ms.date: 09/27/2019
 ms.author: mimart
 ms.reviewer: arvindh
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 23e5fc24e426c87bbc5062183f2ee2db0e546484
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e4a091abff02e544f97f5621b56836cf6ba6e237
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66388209"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73175963"
 ---
-# <a name="end-user-experiences-for-applications-in-azure-active-directory"></a>Azure Active Directory'de uygulamalar için son kullanıcı deneyimleri
-Azure Active Directory (Azure AD), kuruluşunuzdaki son kullanıcılar uygulamaları dağıtmak için çeşitli özelleştirilebilir yol sağlar:
+# <a name="end-user-experiences-for-applications-in-azure-active-directory"></a>Azure Active Directory uygulamalar için son kullanıcı deneyimleri
+
+Azure Active Directory (Azure AD), kuruluşunuzdaki son kullanıcılara uygulama dağıtmak için çeşitli özelleştirilebilir yollar sağlar:
 
 * Azure AD erişim paneli
-* Office 365 uygulama Başlatıcısı
+* Office 365 uygulama başlatıcısı
 * Birleştirilmiş uygulamalarda doğrudan oturum açma
 * Birleştirilmiş, parola tabanlı veya var olan uygulamalara yönelik ayrıntılı bağlantılar
 
-Kuruluşunuzda dağıtmayı tercih hangi yöntemleri kümeleri olur.
+Kuruluşunuzda dağıtmayı seçtiğiniz Yöntem (ler) sizin için önemlidir.
 
 ## <a name="azure-ad-access-panel"></a>Azure AD erişim paneli
-Adresinden erişim Paneli'nde https://myapps.microsoft.com Azure görüntülemek için Active Directory'de son kullanıcı bir kurumsal hesap ile sağlayan web tabanlı bir portal ve Azure AD yöneticinizin erişim verilen başlatma bulut tabanlı uygulamalar, olan. Son kullanıcı ile başladıysanız [Azure Active Directory Premium](https://azure.microsoft.com/pricing/details/active-directory/), ayrıca erişim paneli ile Self Servis Grup Yönetimi özellikleri kullanabilir.
 
-![Azure AD erişim paneli](media/what-is-single-sign-on/azure-ad-access-panel.png)
+https://myapps.microsoft.com erişim paneli, Azure Active Directory bir kuruluş hesabına sahip bir son kullanıcının Azure AD yöneticisi tarafından erişim izni verilen bulut tabanlı uygulamaları görüntülemesine ve açmasına izin veren Web tabanlı bir portaldır. [Azure Active Directory Premium](https://azure.microsoft.com/pricing/details/active-directory/)olan son bir Kullanıcı Ise, erişim paneli aracılığıyla Self Servis Grup yönetimi yeteneklerini de kullanabilirsiniz.
 
-Erişim paneli, Azure Portalı'ndan ayrıdır ve kullanıcıların bir Azure aboneliği veya Office 365 aboneliğine sahip olmasını gerektirmez.
+![Ekran görüntüsü Azure AD erişim paneli portalını gösterir](media/what-is-single-sign-on/azure-ad-access-panel.png)
 
-Azure AD erişim paneli hakkında daha fazla bilgi için bkz. [erişim Paneli'ne giriş](../user-help/active-directory-saas-access-panel-introduction.md).
+Varsayılan olarak, tüm uygulamalar tek bir sayfada birlikte listelenir. Ancak, ilgili uygulamaları gruplamak ve bunları ayrı bir sekmede sunmak, daha kolay bulunmalarını sağlamak için çalışma alanlarını kullanabilirsiniz. Örneğin, belirli iş rolleri, görevler, projeler vb. için mantıksal uygulama gruplandırmaları oluşturmak üzere çalışma alanlarını kullanabilirsiniz. Bilgi için bkz. [Kullanıcı erişimi panellerini (Önizleme) özelleştirmek Için uygulamalarımı kullanma çalışma alanları](access-panel-workspaces.md). 
 
-## <a name="office-365-application-launcher"></a>Office 365 uygulama Başlatıcısı
-Office 365 dağıtmış olan kuruluşlar için Azure AD üzerinden kullanıcılara atanan uygulamalar ayrıca Office 365 portalında görünür [ https://portal.office.com/myapps ](https://portal.office.com/myapps). Bu ikinci bir portal kullanmak zorunda kalmadan uygulamalarını başlatmak için bir kuruluştaki kullanıcılar için kolay getirir ve Office 365 kullanan kuruluşlar için önerilen uygulama başlatılırken çözüm.
+Erişim paneli Azure portal ayrıdır ve kullanıcıların bir Azure aboneliğine veya Office 365 aboneliğine sahip olmasını gerektirmez.
 
-![Office 365 portalı](./media/end-user-experiences/microsoft-365-portal-office-com.png)
+Azure AD erişim paneli hakkında daha fazla bilgi için [erişim paneline giriş](../user-help/active-directory-saas-access-panel-introduction.md)bölümüne bakın.
 
-Office 365 uygulama başlatıcısında hakkında daha fazla bilgi için bkz: [uygulamanızın Office 365 uygulama başlatıcısında sahip](https://msdn.microsoft.com/office/office365/howto/connect-your-app-to-o365-app-launcher).
+## <a name="office-365-application-launcher"></a>Office 365 uygulama başlatıcısı
+
+Office 365 ' i dağıtmış olan kuruluşlar için, Azure AD aracılığıyla kullanıcılara atanan uygulamalar da [https://portal.office.com/myapps](https://portal.office.com/myapps)adresindeki Office 365 portalında görünür. Bu, bir kuruluştaki kullanıcıların ikinci bir portal kullanmak zorunda kalmadan uygulamalarını başlatmasını kolaylaştırır ve Office 365 kullanan kuruluşlar için önerilen uygulama başlatma çözümüdür.
+
+![Ekran görüntüsünde Office 365 Portalı gösterilmektedir](./media/end-user-experiences/microsoft-365-portal-office-com.png)
+
+Office 365 uygulama Başlatıcısı hakkında daha fazla bilgi için bkz. [uygulamanızın Office 365 uygulama başlatıcısı 'nda görünmesini sağlamak](https://msdn.microsoft.com/office/office365/howto/connect-your-app-to-o365-app-launcher).
 
 ## <a name="direct-sign-on-to-federated-apps"></a>Birleştirilmiş uygulamalarda doğrudan oturum açma
-SAML 2.0, WS-Federation ve Openıd destekleyen en Federasyon uygulamaları, kullanıcıların uygulamayı başlatın ve ardından Azure AD kullanarak otomatik yeniden yönlendirme veya bir bağlantıya tıklayarak oturum açmak için oturum de destek bağlanın. Bu hizmet sağlayıcısı olarak bilinir-oturum açma başlatılan ve Azure AD uygulama galerisinde en Federasyon uygulamalarına destek (Ayrıntılar için Azure Portalı'nda uygulamanın çoklu oturum açma Yapılandırması Sihirbazı'ndan belgelerine bağlı bu bakın).
 
-![Bir mobil uygulama oturum açma sayfası örneği](./media/end-user-experiences/workdaymobile.png)
+SAML 2,0, WS-Federation veya OpenID Connect 'i destekleyen çoğu Federasyon uygulaması, kullanıcıların uygulamada başlatma yeteneğini de destekler ve sonra otomatik yeniden yönlendirme veya oturum açmak için bir bağlantıya tıklayarak Azure AD aracılığıyla oturum açabilirler. Bu, hizmet sağlayıcı tarafından başlatılan oturum açma olarak bilinir ve Azure AD uygulama galerisindeki çoğu Federasyon uygulaması bunu destekler (Ayrıntılar için Azure portal uygulamanın çoklu oturum açma yapılandırma sihirbazından bağlantılı belgelere bakın).
 
-## <a name="direct-sign-on-links"></a>Oturum açma doğrudan bağlantılar
-Azure AD çoklu oturum açma uygulamalar için doğrudan bağlantılar parola tabanlı çoklu oturum açma, bağlantılı çoklu oturum açma ve herhangi bir biçimde Federasyon çoklu oturum açmayı destekleyen tek tek de destekler.
+![Mobil uygulama oturum açma sayfası örneği](./media/end-user-experiences/workdaymobile.png)
 
-Bu bağlantılar bir kullanıcı belirli bir uygulama için Azure AD oturum açma işlemi aracılığıyla bunları Azure ad erişim paneli veya Office 365 kullanıcı başlatma gerek kalmadan gönderme özel olarak hazırlanmış URL'leri verilmiştir. Bunlar **kullanıcı erişim URL'leri** mevcut kurumsal uygulamalar özelliklerini altında bulunabilir. Azure portalında **Azure Active Directory** > **kurumsal uygulamalar**. Uygulamayı seçin ve ardından **özellikleri**.
+## <a name="direct-sign-on-links"></a>Doğrudan oturum açma bağlantıları
 
-![Kullanıcı erişim URL'SİNDEN Twitter özelliklerinde örneği](media/end-user-experiences/direct-sign-on-link.png)
+Azure AD Ayrıca, parola tabanlı çoklu oturum açma, bağlantılı çoklu oturum açma ve herhangi bir Federasyon çoklu oturum açma biçimini destekleyen tek tek uygulamalara doğrudan çoklu oturum açma bağlantılarını destekler.
 
-Bu bağlantıları kopyalanır ve seçilen uygulamanın oturum açma bağlantı sağlamak için istediğiniz yere yapıştırılan. Bu e-posta ya da kullanıcı uygulama erişimi için ayarladığınız tüm özel web tabanlı portal olabilir. Bir Azure AD doğrudan çoklu oturum açma URL'si için Twitter'ın bir örnek aşağıda verilmiştir:
+Bu bağlantılar, bir kullanıcıyı Azure AD erişim panelinden veya Office 365 ' den başlatmaya gerek kalmadan, belirli bir uygulama için Azure AD oturum açma işlemi aracılığıyla gönderen özel olarak hazırlanmış URL 'lardır. Bu **Kullanıcı erişimi URL 'leri** , kullanılabilir kurumsal uygulamaların özellikleri altında bulunabilir. Azure portal **Kurumsal uygulamaları** > **Azure Active Directory** seçin. Uygulamayı seçin ve ardından **Özellikler**' i seçin.
+
+![Twitter özelliklerindeki Kullanıcı erişimi URL 'SI örneği](media/end-user-experiences/direct-sign-on-link.png)
+
+Bu bağlantılar, seçilen uygulamaya bir oturum açma bağlantısı sağlamak istediğiniz yere kopyalanabilir ve yapıştırılabilir. Bu bir e-postada veya Kullanıcı uygulama erişimi için ayarladığınız özel Web tabanlı portalda olabilir. Twitter için bir Azure AD doğrudan çoklu oturum açma URL 'SI örneği aşağıda verilmiştir:
 
 `https://myapps.microsoft.com/signin/Twitter/230848d52c8745d4b05a60d29a40fced`
 
-Kuruluşa özgü URL'lere erişim paneli için benzer, daha fazla bu URL'yi dizininiz için etkin veya doğrulanmış etki alanlarından biri myapps.microsoft.com etki alanından sonra ekleyerek özelleştirebilirsiniz. Bu, tüm kurumsal markayı hemen oturum açma sayfasında kullanıcının ilk kullanıcı kimliği girildikten gerek yüklenir sağlar:
+Erişim paneli için kuruluşa özgü URL 'Lerle benzer şekilde, myapps.microsoft.com etki alanından sonra dizininiz için etkin veya doğrulanmış etki alanlarından birini ekleyerek bu URL 'YI daha da özelleştirebilirsiniz. Bu, tüm kurumsal markalamayı, kullanıcının kullanıcı KIMLIĞINI öncelikle girmesi gerekmeden oturum açma sayfasına hemen yüklenmesini sağlar:
 
 `https://myapps.microsoft.com/contosobuild.com/signin/Twitter/230848d52c8745d4b05a60d29a40fced`
 
-Yetkili bir kullanıcı bu uygulamaya özgü bağlantılardan birini tıkladığında, bunlar ilk olarak (Bunlar zaten oturum varsayılarak), Kurumsal oturum açma sayfasına bakın ve oturum açma işleminden sonra uygulamasının adresinden erişim Paneli'nde durdurmadan yönlendirilirsiniz. Kullanıcı, parola tabanlı çoklu oturum açma tarayıcı uzantısı gibi bir uygulamaya erişmek için ön koşullar eksik ardından bağlantıyı eksik uzantıyı yüklemek için girmesini ister. Bağlantı URL'si de uygulama için tek oturum açma yapılandırması değiştiğinde olursa sabit kalır.
+Yetkili bir Kullanıcı bu uygulamaya özgü bağlantılardan birine tıkladığında, önce kurumsal oturum açma sayfasını (henüz oturum açmamış olduğunu varsayarak) görür ve oturum açma sonrasında, erişim panelinde durdurulmadan önce, uygulamaya yeniden yönlendirildikten sonra. Kullanıcı, uygulamaya erişmek için parola tabanlı tek imza tarayıcısı uzantısı gibi önkoşulların önkoşulları eksikse, bağlantı kullanıcıdan eksik uzantıyı yüklemesini ister. Uygulamanın çoklu oturum açma yapılandırması değişirse bağlantı URL 'SI de sabit kalır.
 
-Bu bağlantıları erişim panelinde ve Office 365 olarak aynı erişim denetimi mekanizmaları kullanın ve yalnızca bu kullanıcılar veya gruplar, Azure portalında uygulamanıza atanan kimliğini başarıyla doğrulamak mümkün olacaktır. Ancak, yetkilendirilmemiş herhangi bir kullanıcı, erişim verilmemiş ve erişim sahip oldukları mevcut uygulamaları görüntülemek için erişim paneli yüklemek için bir bağlantı verilen açıklayan bir ileti görürsünüz.
+Bu bağlantılar, erişim paneli ve Office 365 ile aynı erişim denetimi mekanizmalarını kullanır ve yalnızca Azure portal uygulamaya atanmış olan kullanıcılar veya gruplar başarıyla kimlik doğrulayabilecektir. Ancak yetkilendirilmemiş olan her Kullanıcı, erişim verilmediğini belirten bir ileti görür ve erişim paneli 'nin erişimleri olan kullanılabilir uygulamaları görüntülemek için bir bağlantı verildiğini kabul eder.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Dağıtım planları için bkz: [Azure Active Directory dağıtım planları](../fundamentals/active-directory-deployment-plans.md)
+
+Dağıtım planları için bkz. [Azure Active Directory dağıtım planları](../fundamentals/active-directory-deployment-plans.md)

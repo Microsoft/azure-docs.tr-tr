@@ -1,100 +1,103 @@
 ---
-title: Bağlantı ve Azure IOT Hub cihaz SDK'ları kullanarak güvenilir Mesajlaşma yönetme
-description: Cihaz bağlantısı ve Azure IOT Hub cihazı SDK'ları kullanırken Mesajlaşma artırmayı öğrenin
+title: Güvenilir Mesajlaşma w/cihaz SDK 'Ları & IoT Hub bağlantısını yönetme
+description: Azure IoT Hub cihaz SDK 'larını kullanırken cihaz bağlantınızın ve iletilerinizin nasıl iyileştireceğinizi öğrenin
 services: iot-hub
-author: yzhong94
-ms.author: yizhon
+author: robinsh
+ms.author: robinsh
 ms.date: 07/07/2018
 ms.topic: article
 ms.service: iot-hub
-ms.openlocfilehash: 838d0cd4f40666bc3fced22a607b9f94f27b08d3
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.openlocfilehash: 8774129b3a1d3c9a1095e7a7c478dd94086b5867
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67535500"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954488"
 ---
-# <a name="manage-connectivity-and-reliable-messaging-by-using-azure-iot-hub-device-sdks"></a>Bağlantı ve Azure IOT Hub cihaz SDK'ları kullanarak güvenilir Mesajlaşma yönetme
+# <a name="manage-connectivity-and-reliable-messaging-by-using-azure-iot-hub-device-sdks"></a>Azure IoT Hub cihaz SDK 'larını kullanarak bağlantı ve güvenilir mesajlaşma yönetimi
 
-Bu makalede yardımcı olmak için üst düzey rehberlik sağlanır karşı daha dayanıklı olan cihaz uygulamaları tasarlayın. Azure IOT cihaz SDK'ları bağlantısı ve güvenilir bir Mesajlaşma özelliklerini yararlanmak nasıl gösterir. Bu kılavuzun aşağıdaki senaryolarda yönetmenize yardımcı olmaktır:
+Bu makalede daha dayanıklı olan cihaz uygulamaları tasarlamanıza yardımcı olacak üst düzey rehberlik sunulmaktadır. Azure IoT cihaz SDK 'larının bağlantı ve güvenilir mesajlaşma özelliklerinden nasıl yararlanabilmeniz gösterilmektedir. Bu kılavuzun amacı, aşağıdaki senaryoları yönetmenize yardımcı olmaktır:
 
-* Ağ bağlantısı düzeltme
+* Bırakılan bir ağ bağlantısı düzeltiliyor
 
 * Farklı ağ bağlantıları arasında geçiş yapma
 
 * Hizmet geçici bağlantı hataları nedeniyle yeniden bağlanıyor
 
-Uygulama Ayrıntıları dile göre değişiklik gösterebilir. Daha fazla bilgi için belirli SDK'sı ve API belgelerine bakın:
+Uygulama ayrıntıları dile göre farklılık gösterebilir. Daha fazla bilgi için bkz. API belgeleri veya belirli SDK:
 
-* [C/Python/iOS SDK'sı](https://github.com/azure/azure-iot-sdk-c)
+* [C/iOS SDK 'Sı](https://github.com/azure/azure-iot-sdk-c)
 
-* [.NET SDK](https://github.com/Azure/azure-iot-sdk-csharp/blob/master/iothub/device/devdoc/requirements/retrypolicy.md)
+* [.NET SDK](https://github.com/Azure/azure-iot-sdk-csharp/blob/master/iothub/device/devdoc/retrypolicy.md)
 
 * [Java SDK](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/devdoc/requirement_docs/com/microsoft/azure/iothub/retryPolicy.md)
 
-* [Düğüm SDK'sı](https://github.com/Azure/azure-iot-sdk-node/wiki/Connectivity-and-Retries#types-of-errors-and-how-to-detect-them)
+* [Düğüm SDK 'Sı](https://github.com/Azure/azure-iot-sdk-node/wiki/Connectivity-and-Retries#types-of-errors-and-how-to-detect-them)
+
+* [Python SDK](https://github.com/Azure/azure-iot-sdk-python) (henüz güvenilirlik uygulanmadı)
 
 ## <a name="designing-for-resiliency"></a>Dayanıklı olacak şekilde tasarlama
 
-IOT cihazları (örneğin, GSM veya uydu) sürekli olmayan veya kararsız ağ bağlantılarında genellikle kullanır. Cihazları aralıklı hizmet kullanılabilirliği ve altyapı düzeyinde veya geçici hatalar nedeniyle bulut tabanlı hizmetler ile etkileşim kurduğunuzda hatalar oluşabilir. Bağlantı, yeniden bağlantı ve ileti gönderme ve alma için yeniden deneme mantığı için mekanizmaları yönetmek bir cihaz üzerinde çalışan bir uygulama vardır. Ayrıca, yeniden deneme stratejisi gereksinimleri yoğun bir şekilde bağlıdır cihazın IOT senaryosu, bağlam, özellikleri.
+IoT cihazları genellikle sürekli olmayan veya kararsız ağ bağlantılarına bağlıdır (örneğin, GSM veya uydu). Cihazlar, aralıklı hizmet kullanılabilirliği ve altyapı düzeyi veya geçici hatalar nedeniyle bulut tabanlı hizmetlerle etkileşim kurarken hatalar oluşabilir. Cihazda çalışan bir uygulamanın bağlantı, yeniden bağlanma mekanizmalarını ve ileti göndermek ve almak için yeniden deneme mantığı yönetmesi gerekir. Ayrıca, yeniden deneme stratejisi gereksinimleri cihazın IoT senaryosuna, içeriğine ve özelliklerine göre büyük ölçüde değişir.
 
-Azure IOT Hub cihazı SDK'ları bağlanma ve bulut-cihaz ve CİHAZDAN buluta iletişim kurarken basitleştirmek için hedeflenir. Bu SDK'ları, Azure IOT Hub ve kapsamlı ileti gönderme ve alma için seçenekleri bağlanmak için güçlü bir yol sağlar. Geliştiriciler, belirli bir senaryo için daha iyi bir yeniden deneme stratejisi özelleştirmek için varolan uygulama de değiştirebilirsiniz.
+Azure IoT Hub cihaz SDK 'Ları, buluttan cihaza ve cihazdan buluta bağlanmayı ve iletişim kurmasını basitleştirecek şekilde hedeflenir. Bu SDK 'lar, Azure IoT Hub bağlanmak için güçlü bir yol ve ileti göndermek ve almak için kapsamlı bir seçenek kümesi sağlar. Geliştiriciler ayrıca, belirli bir senaryo için daha iyi bir yeniden deneme stratejisi özelleştirmek üzere mevcut uygulamayı değiştirebilir.
 
-Bağlantı ve güvenilir Mesajlaşma destekleyen ilgili SDK özelliklerinin aşağıdaki bölümlerde ele alınmıştır.
+Bağlantı ve güvenilir mesajlaşma 'Yı destekleyen ilgili SDK özellikleri aşağıdaki bölümlerde ele alınmıştır.
 
-## <a name="connection-and-retry"></a>Bağlantı ve yeniden deneyin
+## <a name="connection-and-retry"></a>Bağlantı ve yeniden deneme
 
-Bu bölüm, bağlantıları yönetirken yeniden bağlantı ve yeniden deneme desenleri için genel bir bakış sağlar. Bu cihaz uygulamanızın farklı yeniden deneme İlkesi'ni kullanarak Uygulama Kılavuzu ayrıntıları ve ilgili API'lerinden cihaz SDK'ları listeler.
+Bu bölüm, bağlantıları yönetirken yeniden bağlantı ve yeniden deneme desenlerine genel bir bakış sunar. Cihaz uygulamanızda farklı bir yeniden deneme ilkesi kullanma ve cihaz SDK 'larından ilgili API 'Leri listelemede uygulama kılavuzu ayrıntılarını vermektedir.
 
 ### <a name="error-patterns"></a>Hata desenleri
 
-Birçok düzeyde bağlantı hataları oluşabilir:
+Bağlantı arızaları birçok düzeyde olabilir:
 
-* Ağ hataları: bağlantısı kesildi ve yuva adı çözümleme hataları
+* Ağ hataları: bağlantısı kesilen yuva ve ad çözümlemesi hataları
 
-* Protokol düzeyinde HTTP, AMQP ve MQTT taşıma için hataları: ayrılmış bağlantılar veya oturum süresi doldu
+* HTTP, AMQP ve MQTT taşıması için protokol düzeyi hataları: ayrılmış bağlantılar veya süre sonu oturumları
 
-* Ya da yerel hatalarından kaynaklanan hatalar uygulama düzeyi: Geçersiz kimlik bilgileri veya hizmet davranışı (örneğin, kotasını veya azaltma)
+* Yerel hatalardan kaynaklanan uygulama düzeyi hataları: geçersiz kimlik bilgileri veya hizmet davranışı (örneğin, kotayı aşma veya daraltma)
 
-Cihaz SDK'ları, tüm üç düzeyde hataları algılayın. İşletim sistemi ile ilgili hataları ve donanım hataları algılanmaz ve cihaz SDK'ları tarafından işlenir. SDK'sı tasarım dayanır [işleme geçici hata Kılavuzu](/azure/architecture/best-practices/transient-faults#general-guidelines) Azure Mimari Merkezi.
+Cihaz SDK 'Ları, her üç düzeydeki hataları algılar. İşletim sistemi ile ilgili hatalar ve donanım hataları, cihaz SDK 'Ları tarafından algılanmaz ve işlenmez. SDK tasarımı, Azure Mimari Merkezi [geçici hata Işleme kılavuzlarını](/azure/architecture/best-practices/transient-faults#general-guidelines) temel alır.
 
-### <a name="retry-patterns"></a>Desenler yeniden deneyin
+### <a name="retry-patterns"></a>Yeniden deneme desenleri
 
-Bağlantı hatalar algılandığında, aşağıdaki adımları yeniden deneme işlemi açıklanmaktadır:
+Aşağıdaki adımlar bağlantı hataları algılandığında yeniden deneme işlemini anlatmaktadır:
 
-1. SDK'sı, ağ, protokolü veya uygulama hata ve ilgili hatayı algılar.
+1. SDK hatayı ve ağ, protokol veya uygulamadaki ilişkili hatayı algılar.
 
-2. SDK'sı hata filtre hata türü belirlemek ve bir yeniden deneme gerekip gerekmediğini karar vermek için kullanır.
+2. SDK hata türünü belirlemek için hata filtresini kullanır ve yeniden deneme gerekli olup olmadığına karar verir.
 
-3. SDK'sı tanımlıyorsa bir **kurtarılamaz hata**, bağlantısı gibi işlemleri göndermek ve almak durdurulur. SDK'sı, kullanıcıya bildirir. Kurtarılamaz hatalar bir kimlik doğrulama hatası ve hatalı uç nokta hata verilebilir.
+3. SDK **kurtarılamaz bir hata**tanımlarsa bağlantı, gönderme ve alma gibi işlemler durdurulur. SDK, kullanıcıya bildirir. Kurtarılamaz hatalara örnek olarak bir kimlik doğrulama hatası ve hatalı bir uç nokta hatası verilebilir.
 
-4. SDK'sı tanımlıyorsa bir **kurtarılamaz bir hata**, tanımlı zaman aşımı sona erdiğinde kadar belirtilen yeniden deneme ilkesine göre yeniden dener.  SDK'sını kullanan Not **Üstsel geri alma ile değişimi** varsayılan yeniden deneme ilkesi.
-5. Tanımlanan zaman aşımı süresi dolduğunda, SDK'sı, bağlanmak veya göndermeye çalışırken durdurur. Bunu kullanıcıya bildirir.
+4. SDK **kurtarılabilir bir hata**tanımlarsa, tanımlanan zaman aşımı sona erdiğinde belirtilen yeniden deneme ilkesine göre yeniden dener.  SDK 'nın varsayılan olarak değişim yeniden deneme ilkesi **Ile üstel geri kapatmayı** kullandığını unutmayın.
+5. Tanımlı zaman aşımı süresi dolduğunda, SDK bağlanmayı veya gönderilmesini denemeyi sonlandırır. Kullanıcıya bildirir.
 
-6. SDK'sı kullanıcının bağlantı durumu değişiklikleri almak amacıyla bir geri çağırma eklemesine izin verir.
+6. SDK, kullanıcının bağlantı durumu değişikliklerini almak için bir geri çağırma eklemesine izin verir.
 
-SDK'ları üç yeniden deneme ilkelerine sağlar:
+SDK 'lar üç yeniden deneme ilkesi sağlar:
 
-* **Üstel geri alma değişimi ile**: Bu varsayılan yeniden deneme ilkesi başlangıcında agresif ve en büyük gecikme ulaşana dek zaman içinde yavaşlamasına eğilimindedir. Tasarım dayanır [yeniden deneme Kılavuzu Azure Mimari Merkezi](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific). 
+* **Değişim Ile üstel geri dönüş**: Bu varsayılan yeniden deneme İlkesi başlangıçta agresif ve en yüksek gecikmeye kadar zaman içinde yavaşlıyor. Tasarım, [Azure mimari merkezi yeniden deneme](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)yönergelerine dayalıdır. 
 
-* **Özel bir yeniden deneme**: SDK bazı diller için daha iyi senaryonuz için uygun olan ve ardından RetryPolicy ekleme bir özel bir yeniden deneme ilkesi tasarlayabilirsiniz. Özel bir yeniden deneme üzerinde C SDK'sı yoktur.
+* **Özel yeniden deneme**: bazı SDK dilleri için, senaryonuza daha uygun olan özel bir yeniden deneme ilkesi tasarlayabilmeniz ve sonra bunu retrypolicy 'e ekleyebilmeniz gerekir. Özel yeniden deneme C SDK 'da kullanılamaz.
 
-* **Yeniden deneme yok**: "Yeniden deneme mantığının devre dışı bırakan yeniden deneme yok," için yeniden deneme ilkesi ayarlayabilirsiniz. Bağlantının kurulduğu varsayılarak kez bağlanmak ve bu kez, bir ileti göndermek SDK'sı çalışır. Bu ilke genellikle bant genişliği veya maliyet konuları ile senaryolarda kullanılır. Bu seçeneği belirlerseniz, gönderemiyor iletileri kaybolur ve geri alınamaz.
+* **Yeniden deneme yok**: yeniden deneme mantığını devre dışı bırakan "yeniden deneme yok" olarak yeniden deneme ilkesini ayarlayabilirsiniz. SDK bir kez bağlanmaya çalışır ve bağlantının kurulduğu varsayılarak bir kez ileti gönderir. Bu ilke genellikle bant genişliği veya maliyet sorunları olan senaryolarda kullanılır. Bu seçeneği belirlerseniz, göndermeyecek iletiler kaybolur ve kurtarılamaz.
 
-### <a name="retry-policy-apis"></a>Yeniden deneme ilkesi API'leri
+### <a name="retry-policy-apis"></a>İlke API 'Lerini yeniden dene
 
    | SDK | SetRetryPolicy yöntemi | İlke uygulamaları | Uygulama kılavuzu |
    |-----|----------------------|--|--|
-   |  C/Python/iOS  | [IOTHUB_CLIENT_RESULT IoTHubClient_SetRetryPolicy](https://github.com/Azure/azure-iot-sdk-c/blob/2018-05-04/iothub_client/inc/iothub_client.h#L188)        | **Varsayılan**: [IOTHUB_CLIENT_RETRY_EXPONENTIAL_BACKOFF](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies)<BR>**Özel:** kullanım kullanılabilir [retryPolicy](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies)<BR>**Yeniden deneme:** [IOTHUB_CLIENT_RETRY_NONE](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies)  | [C/Python/iOS uygulaması](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#)  |
-   | Java| [SetRetryPolicy](https://docs.microsoft.com/java/api/com.microsoft.azure.sdk.iot.device.deviceclientconfig.setretrypolicy?view=azure-java-stable)        | **Varsayılan**: [ExponentialBackoffWithJitter sınıfı](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/NoRetry.java)<BR>**Özel:** uygulamak [RetryPolicy arabirimi](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/RetryPolicy.java)<BR>**Yeniden deneme:** [NoRetry sınıfı](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/NoRetry.java)  | [Java uygulaması](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/devdoc/requirement_docs/com/microsoft/azure/iothub/retryPolicy.md) |
-   | .NET| [DeviceClient.SetRetryPolicy](/dotnet/api/microsoft.azure.devices.client.deviceclient.setretrypolicy?view=azure-dotnet) | **Varsayılan**: [ExponentialBackoff sınıfı](/dotnet/api/microsoft.azure.devices.client.exponentialbackoff?view=azure-dotnet)<BR>**Özel:** uygulamak [IRetryPolicy arabirimi](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.iretrypolicy?view=azure-dotnet)<BR>**Yeniden deneme:** [NoRetry sınıfı](/dotnet/api/microsoft.azure.devices.client.noretry?view=azure-dotnet) | [C# uygulaması](https://github.com/Azure/azure-iot-sdk-csharp) | |
-   | Düğüm| [SetRetryPolicy](/javascript/api/azure-iot-device/client?view=azure-iot-typescript-latest) | **Varsayılan**: [ExponentialBackoffWithJitter sınıfı](/javascript/api/azure-iot-common/exponentialbackoffwithjitter?view=azure-iot-typescript-latest)<BR>**Özel:** uygulamak [RetryPolicy arabirimi](/javascript/api/azure-iot-common/retrypolicy?view=azure-iot-typescript-latest)<BR>**Yeniden deneme:** [NoRetry sınıfı](/javascript/api/azure-iot-common/noretry?view=azure-iot-typescript-latest) | [Düğüm uygulama](https://github.com/Azure/azure-iot-sdk-node/wiki/Connectivity-and-Retries#types-of-errors-and-how-to-detect-them) |
+   |  C/iOS  | [IOTHUB_CLIENT_RESULT IoTHubClient_SetRetryPolicy](https://github.com/Azure/azure-iot-sdk-c/blob/2018-05-04/iothub_client/inc/iothub_client.h#L188)        | **Varsayılan**: [IOTHUB_CLIENT_RETRY_EXPONENTIAL_BACKOFF](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies)<BR>**Özel:** kullanılabilir [retrypolicy](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies) kullanın<BR>**Yeniden deneme yok:** [IOTHUB_CLIENT_RETRY_NONE](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies)  | [C/iOS uygulama](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#)  |
+   | Java| [SetRetryPolicy](https://docs.microsoft.com/java/api/com.microsoft.azure.sdk.iot.device.deviceclientconfig.setretrypolicy?view=azure-java-stable)        | **Varsayılan**: [üs albackoffwithdeğişim sınıfı](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/NoRetry.java)<BR>**Özel:** [retrypolicy arabirimini](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/RetryPolicy.java) Uygula<BR>**Yeniden deneme yok:** [NoRetry sınıfı](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/NoRetry.java)  | [Java uygulama](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/devdoc/requirement_docs/com/microsoft/azure/iothub/retryPolicy.md) |
+   | .NET| [DeviceClient. SetRetryPolicy](/dotnet/api/microsoft.azure.devices.client.deviceclient.setretrypolicy?view=azure-dotnet) | **Varsayılan**: [üs albackoff sınıfı](/dotnet/api/microsoft.azure.devices.client.exponentialbackoff?view=azure-dotnet)<BR>**Özel:** [ıretrypolicy arabirimini](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.iretrypolicy?view=azure-dotnet) Uygula<BR>**Yeniden deneme yok:** [NoRetry sınıfı](/dotnet/api/microsoft.azure.devices.client.noretry?view=azure-dotnet) | [C#paylaşır](https://github.com/Azure/azure-iot-sdk-csharp) | |
+   | Node| [setRetryPolicy](/javascript/api/azure-iot-device/client?view=azure-iot-typescript-latest) | **Varsayılan**: [üs albackoffwithdeğişim sınıfı](/javascript/api/azure-iot-common/exponentialbackoffwithjitter?view=azure-iot-typescript-latest)<BR>**Özel:** [retrypolicy arabirimini](/javascript/api/azure-iot-common/retrypolicy?view=azure-iot-typescript-latest) Uygula<BR>**Yeniden deneme yok:** [NoRetry sınıfı](/javascript/api/azure-iot-common/noretry?view=azure-iot-typescript-latest) | [Düğüm uygulama](https://github.com/Azure/azure-iot-sdk-node/wiki/Connectivity-and-Retries#types-of-errors-and-how-to-detect-them) |
+   | Python| Çok yakında | Çok yakında | Çok yakında
 
-Aşağıdaki kod örnekleri, bu akış gösterilmektedir:
+Aşağıdaki kod örnekleri bu akışı göstermektedir:
 
 #### <a name="net-implementation-guidance"></a>.NET Uygulama Kılavuzu
 
-Aşağıdaki kod örneği, tanımlama ve varsayılan yeniden deneme ilkesi ayarlama işlemi gösterilmektedir:
+Aşağıdaki kod örneği, varsayılan yeniden deneme ilkesinin nasıl tanımlanacağını ve ayarlanacağını göstermektedir:
 
    ```csharp
    // define/set default retry policy
@@ -102,9 +105,9 @@ Aşağıdaki kod örneği, tanımlama ve varsayılan yeniden deneme ilkesi ayarl
    SetRetryPolicy(retryPolicy);
    ```
 
-Yüksek CPU kullanımından kaçınmak için kod hemen başarısız olursa yeniden deneme sayısı azaltılır. Örneğin, hiçbir ağ veya hedef yolu. Sonraki yeniden deneme yürütmek için minimum süre 1 saniyedir.
+Yüksek CPU kullanımını önlemek için, kod hemen başarısız olursa yeniden denemeler azaltılır. Örneğin, hedefe ağ veya yol olmadığında. Bir sonraki yeniden denemeden yürütülecek en kısa süre 1 saniyedir.
 
-Hizmet ile azaltma bir hata verirse yeniden deneme ilkesi farklıdır ve ortak API aracılığıyla değiştirilemez:
+Hizmet bir azaltma hatasıyla yanıt verirse, yeniden deneme ilkesi farklıdır ve ortak API aracılığıyla değiştirilemez:
 
    ```csharp
    // throttled retry policy
@@ -112,19 +115,21 @@ Hizmet ile azaltma bir hata verirse yeniden deneme ilkesi farklıdır ve ortak A
      TimeSpan.FromSeconds(60), TimeSpan.FromSeconds(5)); SetRetryPolicy(retryPolicy);
    ```
 
-Yeniden deneme mekanizmasını sonra durdurur `DefaultOperationTimeoutInMilliseconds`, şu anda 4 dakika olarak ayarlanmış.
+Yeniden deneme mekanizması, şu anda 4 dakika olarak ayarlanan `DefaultOperationTimeoutInMilliseconds`sonra duraklar.
 
-#### <a name="other-languages-implementation-guidance"></a>Diğer diller Uygulama Kılavuzu
+#### <a name="other-languages-implementation-guidance"></a>Diğer diller uygulama kılavuzu
 
-Diğer dillerde kod örnekleri için aşağıdaki uygulama belgeleri gözden geçirin. Depo yeniden deneme ilkesi API'leri kullanımını gösteren örnekler içerir.
+Diğer dillerdeki kod örnekleri için aşağıdaki uygulama belgelerini gözden geçirin. Depo, yeniden deneme ilkesi API 'lerinin kullanımını gösteren örnekler içerir.
 
-* [C/Python/iOS SDK'sı](https://github.com/azure/azure-iot-sdk-c)
+* [C/iOS SDK 'Sı](https://github.com/azure/azure-iot-sdk-c)
 
 * [.NET SDK](https://github.com/Azure/azure-iot-sdk-csharp/blob/master/iothub/device/devdoc/retrypolicy.md)
 
 * [Java SDK](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/devdoc/requirement_docs/com/microsoft/azure/iothub/retryPolicy.md)
 
-* [Düğüm SDK'sı](https://github.com/Azure/azure-iot-sdk-node/wiki/Connectivity-and-Retries#types-of-errors-and-how-to-detect-them)
+* [Düğüm SDK 'Sı](https://github.com/Azure/azure-iot-sdk-node/wiki/Connectivity-and-Retries#types-of-errors-and-how-to-detect-them)
+
+* [Python SDK'sı](https://github.com/Azure/azure-iot-sdk-python)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -136,4 +141,4 @@ Diğer dillerde kod örnekleri için aşağıdaki uygulama belgeleri gözden ge�
 
 * [Mobil cihazlar için geliştirme](./iot-hub-how-to-develop-for-mobile-devices.md)
 
-* [Sorun giderme cihaz bağlantısını keser](iot-hub-troubleshoot-connectivity.md)
+* [Cihaz bağlantısı kesilme sorunlarını giderme](iot-hub-troubleshoot-connectivity.md)

@@ -1,48 +1,47 @@
 ---
-title: Bir Azure sanal makinesi için WinRM erişimi ayarlama | Microsoft Docs
-description: WinRM erişimi kullanmak için bir Azure Resource Manager dağıtım modelinde oluşturulan sanal makine ile ayarlayın.
+title: Azure VM için WinRM erişimi ayarlama
+description: Kaynak Yöneticisi dağıtım modelinde oluşturulan bir Azure sanal makinesiyle kullanılmak üzere WinRM erişimi ayarlayın.
 services: virtual-machines-windows
 documentationcenter: ''
 author: singhkays
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 9718e85b-d360-4621-90b8-0b0b84a21208
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 06/16/2016
 ms.author: kasing
-ms.openlocfilehash: c4df3d6a55021cafa04bb6bcba643be41dc0e612
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: ca52a458104b4de0f7b3ed2aa3f76109a5623c97
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67273763"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74067323"
 ---
-# <a name="setting-up-winrm-access-for-virtual-machines-in-azure-resource-manager"></a>Azure Resource Manager'da sanal makineler için WinRM erişimi ayarlama
+# <a name="setting-up-winrm-access-for-virtual-machines-in-azure-resource-manager"></a>Azure Resource Manager 'de sanal makineler için WinRM erişimi ayarlanıyor
 
-WinRM bağlantı ile bir VM'yi ayarlamak için atmanız gereken adımlar aşağıda verilmiştir
+WinRM bağlantısı ile bir VM kurmak için gerçekleştirmeniz gereken adımlar şunlardır
 
 1. Anahtar kasası oluşturma
 2. Otomatik olarak imzalanan sertifika oluşturma
-3. Anahtar Kasası'na otomatik olarak imzalanan sertifikanızı karşıya yükleme
-4. Anahtar Kasası'nda, otomatik olarak imzalanan sertifika URL'sini alma
-5. Bir VM oluşturulurken otomatik olarak imzalanan sertifikalar URL'nizi başvurusu
+3. Otomatik olarak imzalanan sertifikanızı Key Vault karşıya yükleyin
+4. Key Vault otomatik olarak imzalanan sertifikanızın URL 'sini alın
+5. VM oluştururken otomatik olarak imzalanan sertifika URL 'nize başvurma
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-## <a name="step-1-create-a-key-vault"></a>1\. adım: Anahtar kasası oluşturma
-Kullanabileceğiniz aşağıdaki anahtar kasası oluşturma komutu
+## <a name="step-1-create-a-key-vault"></a>1\. Adım: Key Vault oluşturma
+Key Vault oluşturmak için aşağıdaki komutu kullanabilirsiniz
 
 ```
 New-AzKeyVault -VaultName "<vault-name>" -ResourceGroupName "<rg-name>" -Location "<vault-location>" -EnabledForDeployment -EnabledForTemplateDeployment
 ```
 
-## <a name="step-2-create-a-self-signed-certificate"></a>2\. adım: Otomatik olarak imzalanan sertifika oluşturma
-Bu PowerShell Betiği kullanılarak otomatik olarak imzalanan bir sertifika oluşturabilir.
+## <a name="step-2-create-a-self-signed-certificate"></a>2\. Adım: otomatik olarak imzalanan sertifika oluşturma
+Bu PowerShell betiğini kullanarak kendinden imzalı bir sertifika oluşturabilirsiniz
 
 ```
 $certificateName = "somename"
@@ -56,8 +55,8 @@ $password = Read-Host -Prompt "Please enter the certificate password." -AsSecure
 Export-PfxCertificate -Cert $cert -FilePath ".\$certificateName.pfx" -Password $password
 ```
 
-## <a name="step-3-upload-your-self-signed-certificate-to-the-key-vault"></a>3\. adım: Anahtar Kasası'na otomatik olarak imzalanan sertifikanızı karşıya yükleme
-1\. adımda oluşturulan Key vault'a sertifika yüklemeden önce dönüştürülen Microsoft.Compute kaynak sağlayıcısına anlayabileceği bir biçime gerekir. Aşağıdaki PowerShell Betiği, bunu izin verir
+## <a name="step-3-upload-your-self-signed-certificate-to-the-key-vault"></a>3\. Adım: Key Vault otomatik olarak imzalanan sertifikanızı karşıya yükleyin
+Sertifikayı adım 1 ' de oluşturulan Key Vault yüklemeden önce, Microsoft. COMPUTE kaynak sağlayıcısı 'nın anlayabilmesi için bir biçime dönüştürülmesi gerekir. Aşağıdaki PowerShell betiği şunları yapmanıza izin verir
 
 ```
 $fileName = "<Path to the .pfx file>"
@@ -76,28 +75,28 @@ $jsonObjectBytes = [System.Text.Encoding]::UTF8.GetBytes($jsonObject)
 $jsonEncoded = [System.Convert]::ToBase64String($jsonObjectBytes)
 
 $secret = ConvertTo-SecureString -String $jsonEncoded -AsPlainText –Force
-Set-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>" -SecretValue $secret
+Set-AzKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>" -SecretValue $secret
 ```
 
-## <a name="step-4-get-the-url-for-your-self-signed-certificate-in-the-key-vault"></a>4\. Adım: Anahtar Kasası'nda, otomatik olarak imzalanan sertifika URL'sini alma
-Microsoft.Compute kaynak sağlayıcısına VM sağlarken içinde Key Vault'a gizli dizi için bir URL gerekiyor. Bu, gizli diziyi indirmek ve VM'de eşdeğer sertifika oluşturmak Microsoft.Compute kaynak sağlayıcısına sağlar.
+## <a name="step-4-get-the-url-for-your-self-signed-certificate-in-the-key-vault"></a>4\. Adım: Key Vault otomatik olarak imzalanan sertifikanızın URL 'sini alın
+Microsoft. COMPUTE kaynak sağlayıcısı, VM sağlanırken Key Vault içindeki gizliliğe bir URL 'ye ihtiyaç duyuyor. Bu, Microsoft. COMPUTE kaynak sağlayıcısı 'nın gizli anahtarı indirmesini ve sanal makinede eşdeğer sertifikayı oluşturmasını sağlar.
 
 > [!NOTE]
-> Gizli dizi URL'sini sürümü de dahil etmek gerekir. URL https gibi görünen bir örnek:\//contosovault.vault.azure.net:443/secrets/contososecret/01h9db0df2cd4300a20ence585a6s7ve
+> Gizli dizinin URL 'sinin sürümü de içermesi gerekir. Https aşağıdaki gibi bir örnek URL:\//contosovault.vault.azure.net:443/secrets/contososecret/01h9db0df2cd4300a20ence585a6s7ve
 
 #### <a name="templates"></a>Şablonlar
-Şablon kullanarak URL bağlantısı alabilirsiniz kodun altına
+Aşağıdaki kodu kullanarak şablondaki URL bağlantısını edinebilirsiniz
 
     "certificateUrl": "[reference(resourceId(resourceGroup().name, 'Microsoft.KeyVault/vaults/secrets', '<vault-name>', '<secret-name>'), '2015-06-01').secretUriWithVersion]"
 
 #### <a name="powershell"></a>PowerShell
-Bu URL'yi kullanarak alabileceğiniz aşağıdaki PowerShell komutu
+Aşağıdaki PowerShell komutunu kullanarak bu URL 'YI edinebilirsiniz
 
     $secretURL = (Get-AzKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>").Id
 
-## <a name="step-5-reference-your-self-signed-certificates-url-while-creating-a-vm"></a>5\. Adım: Bir VM oluşturulurken otomatik olarak imzalanan sertifikalar URL'nizi başvurusu
+## <a name="step-5-reference-your-self-signed-certificates-url-while-creating-a-vm"></a>5\. Adım: VM oluştururken otomatik olarak imzalanan sertifika URL 'nize başvurma
 #### <a name="azure-resource-manager-templates"></a>Azure Resource Manager şablonları
-Şablonlar aracılığıyla bir VM oluştururken, sertifika gizli anahtarları ve winRM bölümleri aşağıda gösterildiği gibi başvurulan:
+Şablonlar aracılığıyla bir VM oluştururken, sertifikaya gizli diziler bölümünde ve winRM bölümünde şu şekilde başvurulur:
 
     "osProfile": {
           ...
@@ -131,9 +130,9 @@ Bu URL'yi kullanarak alabileceğiniz aşağıdaki PowerShell komutu
           }
         },
 
-Yukarıdaki için bir örnek şablonu, burada bulunabilir [201-vm-winrm-keyvault-windows](https://azure.microsoft.com/documentation/templates/201-vm-winrm-keyvault-windows)
+Yukarıdaki bir örnek şablon, burada [201-VM-WinRM-keykasasında](https://azure.microsoft.com/documentation/templates/201-vm-winrm-keyvault-windows) bulunabilir.
 
-Bu şablon için kaynak kodu bulunabilir [GitHub](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-winrm-keyvault-windows)
+Bu şablon için kaynak kodu [GitHub](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-winrm-keyvault-windows) 'da bulabilirsiniz
 
 #### <a name="powershell"></a>PowerShell
     $vm = New-AzVMConfig -VMName "<VM name>" -VMSize "<VM Size>"
@@ -144,16 +143,16 @@ Bu şablon için kaynak kodu bulunabilir [GitHub](https://github.com/Azure/azure
     $CertificateStore = "My"
     $vm = Add-AzVMSecret -VM $vm -SourceVaultId $sourceVaultId -CertificateStore $CertificateStore -CertificateUrl $secretURL
 
-## <a name="step-6-connecting-to-the-vm"></a>6\. Adım: Sanal Makineye bağlanma
-Emin olmak için gerekir VM bağlanmadan önce makinenizi WinRM uzaktan yönetim için yapılandırılmış. Yönetici olarak PowerShell'i başlatın ve yürütme emin olmak için aşağıdaki komutu, ayarlamış.
+## <a name="step-6-connecting-to-the-vm"></a>6\. Adım: VM 'ye bağlanma
+VM 'ye bağlanabilmeniz için makinenizin WinRM uzaktan yönetimi için yapılandırıldığından emin olmanız gerekir. PowerShell 'i yönetici olarak başlatın ve ayarladığınızdan emin olmak için aşağıdaki komutu yürütün.
 
     Enable-PSRemoting -Force
 
 > [!NOTE]
-> Yukarıdaki işe yaramazsa WinRM hizmetinin çalıştığından emin olmak gerekebilir. Bu kullanarak yapabilirsiniz. `Get-Service WinRM`
+> Yukarıdaki işlem çalışmazsa WinRM hizmetinin çalıştığından emin olmanız gerekebilir. Bunu `Get-Service WinRM` kullanarak yapabilirsiniz
 > 
 > 
 
-Kurulum tamamlandıktan sonra VM kullanarak bağlanabilirsiniz aşağıdaki komutu
+Kurulum tamamlandıktan sonra aşağıdaki komutu kullanarak VM 'ye bağlanabilirsiniz
 
     Enter-PSSession -ConnectionUri https://<public-ip-dns-of-the-vm>:5986 -Credential $cred -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck) -Authentication Negotiate

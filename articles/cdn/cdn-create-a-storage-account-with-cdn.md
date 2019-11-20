@@ -1,5 +1,5 @@
 ---
-title: Hızlı Başlangıç - Azure depolama hesabını Azure CDN ile tümleştirme | Microsoft Docs
+title: Hızlı başlangıç-Azure CDN bir Azure Depolama hesabını tümleştirme
 description: Azure İçerik Teslim Ağı'nı (CDN) Azure Depolama'dan önbelleğe blob alarak yüksek bant genişlikli içerik sunmak için kullanmayı öğrenin.
 services: cdn
 documentationcenter: ''
@@ -7,7 +7,7 @@ author: mdgattuso
 manager: danielgi
 editor: ''
 ms.assetid: cbc2ff98-916d-4339-8959-622823c5b772
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,14 +15,14 @@ ms.topic: quickstart
 ms.date: 05/24/2018
 ms.author: magattus
 ms.custom: mvc
-ms.openlocfilehash: ea4134c486310592f1f0f344ae26a11276143faf
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 729ae34d90fd2415fc44fc75391950f18fee6fc0
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60680139"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083069"
 ---
-# <a name="quickstart-integrate-an-azure-storage-account-with-azure-cdn"></a>Hızlı Başlangıç: Bir Azure depolama hesabını Azure CDN ile tümleştirme
+# <a name="quickstart-integrate-an-azure-storage-account-with-azure-cdn"></a>Hızlı Başlangıç: Azure depolama hesabını Azure CDN ile tümleştirme
 Bu hızlı başlangıçta [Azure İçerik Teslim Ağı'nı (CDN)](cdn-overview.md) Azure depolamadan önbelleğe içerik almak için etkinleştireceksiniz. Azure CDN, geliştiricilere yüksek bant genişlikli içerik sunmak için genel bir çözüm sunmaktadır. İşlem örneklerinin bloblarını ve statik içeriğini Birleşik Devletler, Avrupa, Asya, Avustralya ve Güney Amerika'daki fiziksel düğümlerde önbelleğe alabilir.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
@@ -31,7 +31,7 @@ Bu hızlı başlangıçta [Azure İçerik Teslim Ağı'nı (CDN)](cdn-overview.m
 Azure hesabınızla [Azure portalında](https://portal.azure.com) oturum açın.
 
 ## <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
-Bir Azure aboneliğine yönelik yeni bir depolama hesabı oluşturmak için aşağıdaki yordamı kullanın. Bir depolama hesabı Azure Depolama hizmetlerine erişmenizi sağlar. Depolama hesabı Azure depolama hizmeti bileşenlerinin her biri erişmek için ad alanı en üst düzey temsil eder: Azure Blob, kuyruk ve tablo depolama. Daha fazla bilgi için bkz: [Microsoft Azure Storage'a giriş](../storage/common/storage-introduction.md).
+Bir Azure aboneliğine yönelik yeni bir depolama hesabı oluşturmak için aşağıdaki yordamı kullanın. Bir depolama hesabı Azure Depolama hizmetlerine erişmenizi sağlar. Depolama hesabı Azure Blob, Kuyruk ve Tablo depolama Azure Depolama hizmeti bileşenlerinin her birine erişmek için en yüksek düzeydeki ad alanını temsil eder. Daha fazla bilgi için bkz: [Microsoft Azure Storage'a giriş](../storage/common/storage-introduction.md).
 
 Bir depolama hesabı oluşturmak için hizmetin yöneticisi veya ilişkili aboneliğin bir ortak yöneticisi olmanız gerekir.
 
@@ -55,9 +55,9 @@ Bir depolama hesabı oluşturmak için Azure portal ve PowerShell dahil olmak ü
    
     Bu değer, aboneliğin blob, kuyruk veya tablo kaynağı adreslerine ulaşmak için kullanılan URI içindeki konak adı olur. Blob depolamadaki bir kapsayıcı kaynağının adresine ulaşmak için aşağıdaki biçimde bir URI kullanın:
    
-    http://*&lt;StorageAcountLabel&gt;*.blob.core.windows.net/*&lt;kapsayicim&gt;*
+    http:// *&lt;StorageAcountLabel&gt;* .blob.core.windows.net/ *&lt;kapsayicim&gt;*
 
-    Burada  *&lt;StorageAccountLabel&gt;*, **Ad** kutusuna girdiğiniz değeri gösterir.
+    Burada  *&lt;StorageAccountLabel&gt;* , **Ad** kutusuna girdiğiniz değeri gösterir.
    
     > [!IMPORTANT]    
     > URL etiketi, depolama hesabının URI'sinin alt etki alanını oluşturur ve Azure'da barındırılan tüm hizmetler arasında benzersiz olması gerekir.
@@ -73,9 +73,9 @@ Bir depolama hesabı oluşturmak için Azure portal ve PowerShell dahil olmak ü
     | **Konum**    | Açılan listeden **Orta ABD**’yi seçin. |
     | **Çoğaltma** | Varsayılan değeri kullanın. |
     | **Performans** | Varsayılan değeri kullanın. |
-    | **Güvenli aktarım gerekir** | Varsayılan değeri kullanın. |
+    | **Güvenli aktarım gereklidir** | Varsayılan değeri kullanın. |
     | **Abonelik** | Açılan listeden bir Azure aboneliği seçin. |
-    | **Kaynak grubu** | **Yeni oluştur**’u seçin ve kaynak grubu adınız olarak *my-resource-group-123* girin. Bu adın küresel olarak benzersiz olması gerekir. Ad daha önceden kullanılmışsa, farklı bir ad girebilir ya da **Var olanı kullan**'ı seçip aşağı açılan listeden **my-resource-group-123**'ü seçebilirsiniz. <br />Kaynak grupları hakkında daha fazla bilgi için bkz. [Azure Resource Manager’a genel bakış](../azure-resource-manager/resource-group-overview.md#resource-groups).| 
+    | **Kaynak grubu** | **Yeni oluştur**’u seçin ve kaynak grubu adınız olarak *my-resource-group-123* girin. Bu adın küresel olarak benzersiz olması gerekir. Ad zaten kullanılıyorsa, farklı bir ad girebilir ya da **Var olanı kullan**'ı seçip açılan listeden **my-resource-group-123**'ü seçebilirsiniz. <br />Kaynak grupları hakkında daha fazla bilgi için bkz. [Azure Resource Manager’a genel bakış](../azure-resource-manager/resource-group-overview.md#resource-groups).| 
     | **Sanal ağları yapılandırma** | Varsayılan değeri kullanın. |  
     
 5. Oluşturulduktan sonra depolama hesabını panonuza kaydetmek için **Panoya sabitle**'yi seçin.
@@ -96,9 +96,9 @@ Azure CDN'yi doğrudan depolama hesabınızdan depolama hesabınız için etkinl
 
     | Ayar  | Değer |
     | -------- | ----- |
-    | **CDN profili** | Seçin **Yeni Oluştur** ve profil adınızı girin, örneğin, *my-cdn-profile-123*. Bu adın küresel olarak benzersiz olması gerekir.  |
+    | **CDN profili** | **Yeni oluştur** ' u seçin ve profil adınızı girin, örneğin, *My-CDN-profile-123*. Bu adın küresel olarak benzersiz olması gerekir.  |
     | **Fiyatlandırma katmanı** | Açılan listeden **Standart Verizon**’u seçin. |
-    | **CDN uç noktası adı** | Uç nokta konak adınız, yani girin *my-endpoint-123*. Bu adın küresel olarak benzersiz olması gerekir. Bu ad, _&lt;uç nokta adı&gt;_.azureedge.net etki alanındaki önbelleğe alınmış kaynaklarınıza erişmek için kullanılır. |
+    | **CDN uç noktası adı** | Uç nokta ana bilgisayar adını girin (örneğin, *My-Endpoint-123*). Bu adın küresel olarak benzersiz olması gerekir. Bu ad, _&lt;uç nokta adı&gt;_ .azureedge.net etki alanındaki önbelleğe alınmış kaynaklarınıza erişmek için kullanılır. |
     | **Kaynak konak adı** | Yeni CDN uç noktası, kaynak sunucu için varsayılan olarak depolama hesabınızın konak adını kullanır. |
 
 3. **Oluştur**’u seçin. Uç nokta oluşturulduktan sonra uç nokta listesinde görünür.
@@ -146,5 +146,5 @@ Azure CDN'de daha önce önbelleğe alınmış bir nesne, yaşam süresi sona er
 CDN uç noktanıza özel etki alanı ekleme ve uç noktada HTTPS'yi etkinleştirme hakkında bilgi edinmek için aşağıdaki öğreticiye bakın:
 
 > [!div class="nextstepaction"]
-> [Öğretici: HTTPS üzerinden bir Azure CDN özel etki alanını kullanarak depolama blob'lara erişim](cdn-storage-custom-domain-https.md)
+> [Öğretici: Depolama bloblarına HTTPS üzerinden Azure CDN özel etki alanı kullanarak erişme](cdn-storage-custom-domain-https.md)
 

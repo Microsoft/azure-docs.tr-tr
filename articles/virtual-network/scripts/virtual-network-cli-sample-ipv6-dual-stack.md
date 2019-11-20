@@ -1,7 +1,7 @@
 ---
-title: Azure CLI betik örneği - yapılandırma IPv6 sanal ağ uç noktaları (Önizleme)
+title: Azure CLı betik örneği-IPv6 sanal ağ uç noktalarını yapılandırma (Önizleme)
 titlesuffix: Azure Virtual Network
-description: Azure CLI kullanarak Azure sanal ağında IPv6 uç noktalarını etkinleştirin
+description: Azure sanal ağ 'da Azure CLı kullanarak IPv6 uç noktalarını etkinleştirme
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -12,31 +12,33 @@ ms.topic: article
 ms.workload: infrastructure-services
 ms.date: 04/23/2019
 ms.author: kumud
-ms.openlocfilehash: a1c8f151a4c6459064d92ff2efb44fa8b74f8fc1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3df475ce89a3b1f5a1acfb20dc427fdb7a9b7d16
+ms.sourcegitcommit: a6873b710ca07eb956d45596d4ec2c1d5dc57353
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "63761449"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68248894"
 ---
-# <a name="configure-ipv6-endpoints-in-virtual-network-script-sample-preview"></a>Sanal ağ betik örneği (Önizleme) IPv6 uç noktalarını yapılandırma
+# <a name="configure-ipv6-endpoints-in-virtual-network-script-sample-preview"></a>Sanal ağ betiği örneğinde IPv6 uç noktalarını yapılandırma (Önizleme)
 
-Bu makalede, azure'da çift yığın sanal ağ ile bir yük dengeleyici ön uç çift (IPv4 + IPv6) yapılandırmalar, ikili bir IP yapılandırmasına sahip NIC ile VM ile bir çift yığın alt ağ içeren bir ikili yığın (IPv4 + IPv6) uygulamasının nasıl dağıtılacağı gösterir, çift ağ güvenlik grubu kuralları ve ikili genel IP'ler.
+Bu makalede, çift yığın alt ağına sahip bir çift yığın sanal ağı, Çift (IPv4 + IPv6) ön uç yapılandırmalarına sahip bir yük dengeleyici, çift IP yapılandırmasına sahip NIC 'Ler olan sanal makineler içeren bir çift yığın (IPv4 + IPv6) uygulamasının nasıl dağıtılacağı gösterilmektedir. Çift ağ güvenlik grubu kuralları ve ikili genel IP 'Ler.
 
 Azure [Cloud Shell](https://shell.azure.com/bash)’den veya yerel bir Azure CLI yüklemesinden betiği yürütebilirsiniz. CLI’yi yerel olarak kullanıyorsanız bu betik, 2.0.28 veya üzeri bir sürümü çalıştırmanızı gerektirir. Yüklü sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekirse bkz. [Azure CLI’yı yükleme](/cli/azure/install-azure-cli). CLI’yi yerel olarak çalıştırıyorsanız Azure bağlantısı oluşturmak için `az login` komutunu da çalıştırmanız gerekir.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
-Azure sanal ağ özelliği için IPv6 kullanmak için aboneliğinizi yalnızca bir kez aşağıda açıklandığı şekilde yapılandırmanız gerekir:
+Azure sanal ağ için IPv6 özelliğini kullanmak üzere aboneliğinizi aşağıdaki şekilde yalnızca bir kez yapılandırmanız gerekir:
 
 ```azurecli
 az feature register --name AllowIPv6VirtualNetwork --namespace Microsoft.Network
+az feature register --name AllowIPv6CAOnStandardLB --namespace Microsoft.Network
 ```
-Özellik kaydı tamamlanması 30 dakika kadar sürer. Aşağıdaki Azure CLI komutunu çalıştırarak, kayıt durumunu kontrol edebilirsiniz:
+Özellik kaydının tamamlanabilmesi 30 dakika kadar sürer. Aşağıdaki Azure CLı komutunu çalıştırarak kayıt durumunuzu kontrol edebilirsiniz:
 
 ```azurelci
 az feature show --name AllowIPv6VirtualNetwork --namespace Microsoft.Network
+az feature show --name AllowIPv6CAOnStandardLB --namespace Microsoft.Network
 ```
 Kayıt tamamlandıktan sonra aşağıdaki komutu çalıştırın:
 

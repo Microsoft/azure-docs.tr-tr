@@ -1,62 +1,62 @@
 ---
-title: Azure Site Recovery kullanarak çok katmanlı bir SharePoint uygulaması için olağanüstü durum kurtarma ayarlama | Microsoft Docs
-description: Bu makalede, Azure Site Recovery özelliklerini kullanarak çok katmanlı bir SharePoint uygulaması için olağanüstü durum kurtarma ayarlamayı açıklar.
+title: Azure Site Recovery kullanarak çok katmanlı bir SharePoint uygulaması için olağanüstü durum kurtarma
+description: Bu makalede, Azure Site Recovery özellikleri kullanılarak çok katmanlı bir SharePoint uygulaması için olağanüstü durum kurtarmanın nasıl ayarlanacağı açıklanır.
 author: sujayt
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 6/27/2019
 ms.author: sutalasi
-ms.openlocfilehash: 4b4edec43d01878bbc5899487f6ee1d2816eb135
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
+ms.openlocfilehash: cc72cb4134e6492478805421e448df26a8dc4554
+ms.sourcegitcommit: 6c2c97445f5d44c5b5974a5beb51a8733b0c2be7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67491827"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73622420"
 ---
-# <a name="set-up-disaster-recovery-for-a-multi-tier-sharepoint-application-for-disaster-recovery-using-azure-site-recovery"></a>Azure Site Recovery ile olağanüstü durum kurtarma için çok katmanlı bir SharePoint uygulaması için olağanüstü durum kurtarmayı ayarlama
+# <a name="set-up-disaster-recovery-for-a-multi-tier-sharepoint-application-for-disaster-recovery-using-azure-site-recovery"></a>Azure Site Recovery kullanarak olağanüstü durum kurtarma için çok katmanlı bir SharePoint uygulaması için olağanüstü durum kurtarmayı ayarlama
 
-Bu makalede kullanarak bir SharePoint uygulama koruma konusunda ayrıntılı olarak [Azure Site Recovery](site-recovery-overview.md).
+Bu makalede, [Azure Site Recovery](site-recovery-overview.md)kullanarak bir SharePoint uygulamasını nasıl koruyabileceğiniz ayrıntılı bilgiler açıklanmaktadır.
 
 
 ## <a name="overview"></a>Genel Bakış
 
-Microsoft SharePoint grubu yardımcı olabilecek güçlü bir uygulamadır veya departman düzenlemek, işbirliği yapın ve bilgi paylaşın. SharePoint intranet portalları, belge ve dosya yönetimi, işbirliği, sosyal ağlar, extranet'ler, Web siteleri, kurumsal arama ve iş zekası sağlayabilir. Ayrıca, sistem tümleştirmesi, süreç tümleştirme ve iş akışı Otomasyonu özellikleri de vardır. Genellikle, kuruluşlar, 1. Katman uygulama olarak kapalı kalma süresi ve veri kaybına karşı duyarlı göz önünde bulundurun.
+Microsoft SharePoint, bir grup veya departmanın bilgileri düzenleme, işbirliği yapma ve paylaşma konusunda yardımcı olabilecek güçlü bir uygulamadır. SharePoint, intranet portalları, belge ve dosya yönetimi, işbirliği, sosyal ağlar, extranet 'ler, Web siteleri, kurumsal arama ve iş zekası sağlayabilir. Ayrıca sistem tümleştirmesi, işlem tümleştirme ve iş akışı Otomasyonu özellikleri de vardır. Genellikle, kuruluşlar bunu kapalı kalma süresi ve veri kaybına duyarlı bir katman 1 uygulaması olarak kabul etyordu.
 
-Bugün, Microsoft SharePoint, herhangi bir kullanıma hazır olağanüstü durum kurtarma özellikleri sağlamaz. Tür ve olağanüstü bir durum ölçeğini bakılmaksızın, Kurtarma grubuna kurtarabilirsiniz bir yedek veri merkezi kullanımını içerir. Yedek veri merkezleri, burada yerel olarak yedekli sistemler ve yedeklemeler birincil veri merkezinde kesinti kurtaramazsınız senaryoları için gereklidir.
+Günümüzde Microsoft SharePoint, kullanıma hazır bir olağanüstü durum kurtarma özelliği sağlamıyor. Bir olağanüstü durumdan oluşan tür ve ölçeğe bakılmaksızın kurtarma, grubu kurtarabileceğiniz bir bekleme veri merkezi kullanımını içerir. Yerel yedekli sistemlerin ve yedeklemelerin birincil veri merkezindeki kesintiden kurtulamadığında senaryolar için bekleme veri merkezleri gerekir.
 
-İyi bir olağanüstü durum kurtarma çözümü modelleme kurtarma planları, SharePoint gibi karmaşık uygulama mimarileri etrafında izin vermelidir. Ayrıca, çeşitli katmanları ve bu nedenle tek tıklamayla yük devretme ile daha düşük bir RTO olağanüstü bir durumda sağlama arasındaki uygulama eşlemeleri işlemek için özelleştirilmiş adım ekleme olanağı da olmalıdır.
+İyi bir olağanüstü durum kurtarma çözümü, SharePoint gibi karmaşık uygulama mimarilerinin etrafında kurtarma planlarının modellenmesi için izin almalıdır. Ayrıca, çeşitli katmanlar arasında uygulama eşlemelerini işlemek için özelleştirilmiş adımlar ekleyebilmelidir ve bu nedenle olağanüstü bir durum oluşması durumunda tek tıklamayla bir yük devretme işlemi daha düşüktür.
 
-Bu makalede kullanarak bir SharePoint uygulama koruma konusunda ayrıntılı olarak [Azure Site Recovery](site-recovery-overview.md). Bu makalede ele alınacaktır üç çoğaltmaya yönelik en iyi Azure, olağanüstü durum kurtarma tatbikatı nasıl yapabilirsiniz ve uygulamayı azure'a yük devretme getirmeyi SharePoint uygulama katmanı.
+Bu makalede, [Azure Site Recovery](site-recovery-overview.md)kullanarak bir SharePoint uygulamasını nasıl koruyabileceğiniz ayrıntılı bilgiler açıklanmaktadır. Bu makalede, üç katmanlı bir SharePoint uygulamasını Azure 'a çoğaltmaya yönelik en iyi uygulamalar ele alınmaktadır, olağanüstü durum kurtarma detayına nasıl gidebileceğiniz ve uygulamanın Azure 'da nasıl yük devredebileceğiniz açıklanır.
 
-İzleyebilir çok katmanlı uygulamayı azure'a kurtarma hakkında videonun altında.
+Çok katmanlı bir uygulamayı Azure 'a kurtarmak için aşağıdaki videoyu izleyebilirsiniz.
 
 > [!VIDEO https://channel9.msdn.com/Series/Azure-Site-Recovery/Disaster-Recovery-of-load-balanced-multi-tier-applications-using-Azure-Site-Recovery/player]
 
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Başlamadan önce aşağıdakileri bildiğinizden emin olun:
+Başlamadan önce, aşağıdakileri anladığınızdan emin olun:
 
-1. [Bir sanal makine Azure'a çoğaltılırken](site-recovery-vmware-to-azure.md)
-2. Nasıl yapılır [bir kurtarma ağı tasarlama](site-recovery-network-design.md)
-3. [Azure'a yük devretme testi yapılması](site-recovery-test-failover-to-azure.md)
-4. [Azure'a yük devretme gerçekleştirmeden](site-recovery-failover.md)
-5. Nasıl yapılır [bir etki alanı denetleyicisi çoğaltma](site-recovery-active-directory.md)
-6. Nasıl yapılır [SQL Server çoğaltma](site-recovery-sql.md)
+1. [Bir sanal makineyi Azure 'a çoğaltma](site-recovery-vmware-to-azure.md)
+2. [Kurtarma ağını tasarlama](site-recovery-network-design.md)
+3. [Azure 'a yük devretme testi yapma](site-recovery-test-failover-to-azure.md)
+4. [Azure 'a yük devretme işlemi yapma](site-recovery-failover.md)
+5. [Bir etki alanı denetleyicisini çoğaltma](site-recovery-active-directory.md)
+6. [SQL Server çoğaltma](site-recovery-sql.md)
 
 ## <a name="sharepoint-architecture"></a>SharePoint mimarisi
 
-SharePoint sunucularında, bir veya daha çok katmanlı topoloji ve sunucu rollerini belirli hedefleriniz ve amaçlarınız uyan bir grup tasarım uygulamak için kullanılarak dağıtılabilir. Çok sayıda eşzamanlı kullanıcıyı ve çok sayıda içerik öğeleri destekleyen bir tipik büyük, çok talep edilen SharePoint sunucu grubu hizmeti gruplandırma kendi ölçeklenebilirlik stratejisinin bir parçası kullanın. Bu yaklaşım, bu hizmetler birlikte gruplandırarak ve ardından sunucularını bir grup olarak ölçeklendirme belinlenmiş sunuculara Hizmetleri çalıştırılmasını içerir. Aşağıdaki topoloji hizmet ve sunucu gruplandırma üç katmanlı bir SharePoint sunucu grubu gösterir. SharePoint belgeleri ve ürün satır mimarileri farklı SharePoint topolojiler hakkında ayrıntılı yönergeler için lütfen bakın. SharePoint 2013 dağıtımı hakkında daha fazla ayrıntı bulabilirsiniz [bu belgeyi](https://technet.microsoft.com/library/cc303422.aspx).
+SharePoint, belirli hedefleri ve hedefleri karşılayan bir grup tasarımı uygulamak için katmanlı topolojiler ve sunucu rolleri kullanılarak bir veya daha fazla sunucuya dağıtılabilir. Çok sayıda eşzamanlı kullanıcıyı ve çok sayıda içerik öğesini destekleyen tipik bir büyük ve yüksek talebe sahip SharePoint sunucu grubu, ölçeklenebilirlik stratejilerinin bir parçası olarak hizmet gruplama 'yı kullanır. Bu yaklaşım adanmış sunucularda hizmetleri çalıştırmayı, bu Hizmetleri birlikte gruplandırmayı ve sonra sunucuları bir grup olarak ölçeklendirmeyi içerir. Aşağıdaki topolojide üç katmanlı bir SharePoint sunucu grubu için hizmet ve sunucu gruplandırması gösterilmektedir. Farklı SharePoint topolojileriyle ilgili ayrıntılı yönergeler için lütfen SharePoint belgelerine ve ürün hattı mimarilerine bakın. [Bu belgede](https://technet.microsoft.com/library/cc303422.aspx)SharePoint 2013 dağıtımı hakkında daha fazla ayrıntı bulabilirsiniz.
 
 
 
-![Dağıtım modeli 1](./media/site-recovery-sharepoint/sharepointarch.png)
+![Dağıtım kalıbı 1](./media/site-recovery-sharepoint/sharepointarch.png)
 
 
 ## <a name="site-recovery-support"></a>Site Recovery desteği
 
-Bu makalede oluşturmak için Windows Server 2012 R2 Enterprise ile VMware sanal makinelerini kullanıldı. SharePoint 2013 Enterprise edition ve SQL server 2014 Enterprise Edition sürümü kullanılmıştır. Site Recovery çoğaltma uygulamadan bağımsız olduğundan, burada sağlanan öneriler de aşağıdaki senaryolar için beklemeye beklenir.
+Site Recovery, uygulama belirsiz ve desteklenen bir makinede çalışan herhangi bir SharePoint sürümüyle birlikte çalışmalıdır. Bu makaleyi oluşturmak için, Windows Server 2012 R2 Enterprise ile VMware sanal makineleri kullanılmıştır. SharePoint 2013 Enterprise Edition ve SQL Server 2014 Enterprise Edition kullanıldı.
 
 ### <a name="source-and-target"></a>Kaynak ve hedef
 
@@ -67,144 +67,137 @@ Bu makalede oluşturmak için Windows Server 2012 R2 Enterprise ile VMware sanal
 **Fiziksel sunucu** | Evet | Evet
 **Azure** | NA | Evet
 
-### <a name="sharepoint-versions"></a>SharePoint sürümleri
-Aşağıdaki SharePoint server sürümleri desteklenir.
 
-* SharePoint server 2013'ün standart
-* SharePoint server 2013 Enterprise
-* SharePoint server 2016 Standard
-* SharePoint server 2016 Enterprise
+### <a name="things-to-keep-in-mind"></a>Göz önünde bulundurmanız gerekenler
 
-### <a name="things-to-keep-in-mind"></a>Akılda tutulması gereken noktalar
+Uygulamanızda herhangi bir katman olarak paylaşılan disk tabanlı bir küme kullanıyorsanız, bu sanal makineleri çoğaltmak için Site Recovery çoğaltma kullanamazsınız. Uygulama tarafından sağlanmış yerel çoğaltmayı kullanabilir ve sonra tüm katmanların yükünü devretmek için bir [kurtarma planı](site-recovery-create-recovery-plans.md) kullanabilirsiniz.
 
-Uygulamanızda herhangi bir katmanı paylaşılan disk tabanlı küme kullanıyorsanız, daha sonra bu sanal makineleri çoğaltmak için Site Recovery çoğaltması kullanmak mümkün olmayacaktır. Uygulama tarafından sağlanan yerel çoğaltma kullanın ve ardından bir [kurtarma planı](site-recovery-create-recovery-plans.md) yük devretme için tüm katmanları.
+## <a name="replicating-virtual-machines"></a>Sanal makineleri çoğaltma
 
-## <a name="replicating-virtual-machines"></a>Çoğaltılan sanal makineler
+Sanal makineyi Azure 'a Çoğaltmaya başlamak için [Bu kılavuzu](site-recovery-vmware-to-azure.md) izleyin.
 
-İzleyin [bu kılavuz](site-recovery-vmware-to-azure.md) sanal makineyi Azure'a çoğaltmaya başlamak için.
+* Çoğaltma tamamlandıktan sonra her bir katmanın her bir sanal makinesine gitdiğinizden ve ' çoğaltılan öğe > ayarları > Özellikler > Işlem ve ağ ' ' de aynı Kullanılabilirlik kümesini seçtiğinizden emin olun. Örneğin, Web katmanınızda 3 VM varsa, tüm 3 VM 'Lerin Azure 'da aynı Kullanılabilirlik kümesinin parçası olacak şekilde yapılandırıldığından emin olun.
 
-* Çoğaltma işlemi tamamlandıktan sonra her katman, her sanal makineye gidin ve aynı kullanılabilirlik kümesinde seçin emin ' çoğaltılan öğe > Ayarlar > Özellikler > işlem ve ağ '. Örneğin, web katmanınızın 3 sanal makineye sahipse, 3 tüm VM'lerin aynı kullanılabilirlik kümesi Azure'da bir parçası olarak yapılandırıldığından emin olun.
+    ![Set-AVAILABILITY-set](./media/site-recovery-sharepoint/select-av-set.png)
 
-    ![Kümesi kullanılabilirlik kümesi](./media/site-recovery-sharepoint/select-av-set.png)
+* Active Directory ve DNS 'yi koruma hakkında yönergeler için bkz. [koruma Active Directory ve DNS](site-recovery-active-directory.md) belgesi.
 
-* Active Directory ve DNS'yi koruma ile ilgili yönergeler için bkz [korumak Active Directory ve DNS](site-recovery-active-directory.md) belge.
-
-* Veritabanı katmanı SQL sunucusunda çalışan koruma ile ilgili yönergeler için bkz [SQL Server koruma](site-recovery-active-directory.md) belge.
+* SQL Server üzerinde çalışan veritabanı katmanını koruma hakkında yönergeler için bkz. [koruma SQL Server](site-recovery-active-directory.md) belgesi.
 
 ## <a name="networking-configuration"></a>Ağ yapılandırması
 
-### <a name="network-properties"></a>Ağ Özellikleri
+### <a name="network-properties"></a>Ağ özellikleri
 
-* Böylece yük devretme işleminden sonra VM'lerin doğru DR ağa bağlı uygulama ve Web Katmanı VM'ler için ağ ayarları Azure portalında yapılandırın.
+* Uygulama ve Web katmanı VM 'Leri için, VM 'Lerin yük devretmeden sonra doğru DR ağına bağlanması için Azure portal ağ ayarlarını yapılandırın.
 
     ![Ağ seçin](./media/site-recovery-sharepoint/select-network.png)
 
 
-* Statik IP kullanıyorsanız, ardından sanal makineyi yapılacağını istediğiniz IP belirtin **hedef IP** alan
+* Statik IP kullanıyorsanız, sanal makinenin **hedef IP** alanında yerine gelmesı istediğiniz IP 'yi belirtin
 
-    ![Statik IP ayarlayın](./media/site-recovery-sharepoint/set-static-ip.png)
+    ![Statik IP 'yi ayarla](./media/site-recovery-sharepoint/set-static-ip.png)
 
 ### <a name="dns-and-traffic-routing"></a>DNS ve trafik yönlendirme
 
-Internet'e yönelik siteler için ['Öncelik' türünde bir Traffic Manager profili oluşturma](../traffic-manager/traffic-manager-create-profile.md) Azure aboneliğinde. Ve ardından, DNS ve Traffic Manager profilinizi şu şekilde yapılandırın.
+İnternet 'e yönelik siteler için, Azure aboneliğinde [' Priority ' türünde bir Traffic Manager profili oluşturun](../traffic-manager/traffic-manager-create-profile.md) . Ve sonra DNS ve Traffic Manager profilinizi aşağıdaki şekilde yapılandırın.
 
 
-| **Burada** | **Kaynak** | **Hedef**|
+| **Olmadığı** | **Kaynak** | **Hedef**|
 | --- | --- | --- |
-| Genel DNS | SharePoint siteleri için Genel DNS <br/><br/> Örn: sharepoint.contoso.com | Traffic Manager <br/><br/> contososharepoint.trafficmanager.net |
-| Şirket içi DNS | sharepointonprem.contoso.com | Şirket içi Grup genel IP |
+| Genel DNS | SharePoint siteleri için genel DNS <br/><br/> Örn.: sharepoint.contoso.com | Traffic Manager <br/><br/> contososharepoint.trafficmanager.net |
+| Şirket içi DNS | sharepointonprem.contoso.com | Şirket içi grupta genel IP |
 
 
-Traffic Manager profilindeki [birincil ve kurtarma uç noktaları oluşturma](../traffic-manager/traffic-manager-configure-priority-routing-method.md). Şirket içi uç noktası ve genel IP için Azure uç noktası için dış uç noktası'nı kullanın. Öncelik şirket içi uç noktasına daha yüksek ayarlanmış olduğundan emin olun.
+Traffic Manager profilinde, [birincil ve kurtarma uç noktalarını oluşturun](../traffic-manager/traffic-manager-configure-priority-routing-method.md). Şirket içi uç nokta için dış uç noktayı ve Azure uç noktası için genel IP 'yi kullanın. Önceliğin şirket içi uç noktayla daha yüksek ayarlandığından emin olun.
 
-Belirli bir bağlantı noktasını (örneğin, 800) bir test sayfası sırada kullanılabilirlik yük devretme sonrasında otomatik olarak algılamak için Traffic Manager'için SharePoint web katmanındaki barındırın. Anonim kimlik doğrulaması SharePoint siteleriniz birini etkinleştiremiyor durumunda geçici bir çözüm budur.
+Kullanılabilirlik sonrası yük devretmeyi otomatik olarak algılamak üzere Traffic Manager için SharePoint Web katmanındaki belirli bir bağlantı noktasında (örneğin, 800) bir sınama sayfası barındırın. Bu, SharePoint sitelerinizin hiçbirinde anonim kimlik doğrulamasını etkinleştirebilmeniz durumunda geçici bir çözümdür.
 
-[Traffic Manager profilinin yapılandırma](../traffic-manager/traffic-manager-configure-priority-routing-method.md) ile ayarları aşağıda.
+[Traffic Manager profilini](../traffic-manager/traffic-manager-configure-priority-routing-method.md) aşağıdaki ayarlarla yapılandırın.
 
-* Yönlendirme yöntemi - 'Öncelik'
-* DNS süresi (TTL) - ' 30 saniye
-* Anonim kimlik doğrulamasını etkinleştirirseniz, uç nokta İzleyicisi ayarları - belirli bir Web uç noktası verebilirsiniz. Veya bir test sayfası, belirli bir bağlantı noktasında (örneğin, 800) kullanabilirsiniz.
+* Yönlendirme yöntemi-' Priority '
+* DNS yaşam süresi (TTL)-' 30 saniye '
+* Uç nokta izleyici ayarları-anonim kimlik doğrulamasını etkinleştirebiliyorsanız, belirli bir Web sitesi uç noktası sağlayabilirsiniz. Ya da, belirli bir bağlantı noktasında bir sınama sayfası kullanabilirsiniz (örneğin, 800).
 
-## <a name="creating-a-recovery-plan"></a>Bir kurtarma planı oluşturma
+## <a name="creating-a-recovery-plan"></a>Kurtarma planı oluşturma
 
-Bir kurtarma planı yük devretme çok katmanlı bir uygulama, bu nedenle, çeşitli katmanlarda uygulama tutarlılığı sürdürmeye sıralama sağlar. İzleyin aşağıdaki çok katmanlı web uygulaması için bir kurtarma planı oluşturulurken adımları. [Bir kurtarma planı oluşturma hakkında daha fazla bilgi edinin](site-recovery-runbook-automation.md#customize-the-recovery-plan).
+Kurtarma planı, çok katmanlı bir uygulamadaki çeşitli katmanların yük devretmesini sıralamayı sağlar, bu nedenle uygulama tutarlılığını koruyun. Çok katmanlı bir Web uygulaması için kurtarma planı oluştururken aşağıdaki adımları izleyin. [Kurtarma planı oluşturma hakkında daha fazla bilgi edinin](site-recovery-runbook-automation.md#customize-the-recovery-plan).
 
-### <a name="adding-virtual-machines-to-failover-groups"></a>Sanal makineler için yük devretme grupları ekleme
+### <a name="adding-virtual-machines-to-failover-groups"></a>Yük devretme gruplarına sanal makineler ekleme
 
-1. Web Katmanı Vm'leri ve uygulama ekleyerek bir kurtarma planı oluşturun.
-2. 'Sanal makineleri gruplandırmak için Özelleştir' tıklayın. Varsayılan olarak, tüm VM'ler 'Grubu 1' bir parçasıdır.
+1. Uygulama ve Web katmanı VM 'lerini ekleyerek bir kurtarma planı oluşturun.
+2. VM 'Leri gruplandırmak için ' Özelleştir 'e tıklayın. Varsayılan olarak, tüm VM 'Ler ' Grup 1 ' in bir parçasıdır.
 
-    ![RP özelleştirme](./media/site-recovery-sharepoint/rp-groups.png)
+    ![RP 'yi özelleştirme](./media/site-recovery-sharepoint/rp-groups.png)
 
-3. Başka bir grup (Grup 2) oluşturabilir ve Web Katmanı Vm'lerini yeni gruba taşıyın. Uygulama katmanınızı VM'ler 'Grubu 1' bölümü olmalıdır ve Web Katmanı Vm'lerini 'Grubu 2' parçası olmalıdır. Uygulama katmanı VM'ler önyükleme yukarı emin olmak için ilk Web Katmanı VM'ler tarafından izlenen budur.
+3. Başka bir grup (Grup 2) oluşturun ve Web katmanı VM 'lerini yeni gruba taşıyın. Uygulama katmanı sanal makinelerinizin ' Grup 1 ' in parçası olması ve Web katmanı VM 'lerinin ' Group 2 ' ın parçası olması gerekir. Bu, uygulama katmanı VM 'lerinin önce Web katmanı VM 'Leri tarafından önyüklemesinin ardından olmasını sağlamaktır.
 
 
-### <a name="adding-scripts-to-the-recovery-plan"></a>Betikler, kurtarma planına ekleme
+### <a name="adding-scripts-to-the-recovery-plan"></a>Kurtarma planına betikler ekleme
 
-En yaygın olarak kullanılan Azure Site Recovery betikleri için 'Azure'a Dağıt' düğmesini Otomasyon hesabınıza dağıtabilirsiniz. Yayımlanan herhangi bir komut dosyası kullanırken, komut dosyasındaki yönergeleri emin olun.
+En yaygın olarak kullanılan Azure Site Recovery betikleri aşağıdaki ' Azure 'a Dağıt ' düğmesine tıklayarak Otomasyon hesabınıza dağıtabilirsiniz. Yayımlanmış herhangi bir betiği kullanırken, betikteki yönergeleri izlediğinizden emin olun.
 
 [![Azure’a dağıtma](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)](https://aka.ms/asr-automationrunbooks-deploy)
 
-1. Bir ön eylem betiği 'Grubu 1' için yük devretme SQL kullanılabilirlik grubuna ekleyin. Örnek betiklerde yayımlanan 'ASR-SQL-FailoverAG' betiğini kullanın. Komut dosyasındaki yönergeleri izleyin ve komut dosyasında gerekli değişiklikleri yapın, uygun şekilde emin olun.
+1. SQL kullanılabilirlik grubu yük devretmesi için ' Group 1 ' öğesine bir ön eylem betiği ekleyin. Örnek betikte yayımlanan ' ASR-SQL-FailoverAG ' betiğini kullanın. Betikteki yönergeleri izlediğinizden ve betikteki gerekli değişiklikleri uygun şekilde seçtiğinizden emin olun.
 
-    ![Ekle-AG-betik--1. adım](./media/site-recovery-sharepoint/add-ag-script-step1.png)
+    ![Add-AG-SCRIPT-adım-1](./media/site-recovery-sharepoint/add-ag-script-step1.png)
 
-    ![Ekle-AG-betik--2. adım](./media/site-recovery-sharepoint/add-ag-script-step2.png)
+    ![Add-AG-SCRIPT-adım-2](./media/site-recovery-sharepoint/add-ag-script-step2.png)
 
-2. Yük dengeleyicide başarısız eklemek için son eylem betik ekleme yükü devredilen sanal makineler, Web Katmanı (Grup 2). Örnek betiklerde yayımlanan 'AddSingleLoadBalancer ASR' betiğini kullanın. Komut dosyasındaki yönergeleri izleyin ve komut dosyasında gerekli değişiklikleri yapın, uygun şekilde emin olun.
+2. Yük dengeleyiciyi web katmanının yükü devredilen sanal makinelere (Grup 2) eklemek için bir post eylem betiği ekleyin. Örnek betikte yayımlanan ' ASR-AddSingleLoadBalancer ' betiğini kullanın. Betikteki yönergeleri izlediğinizden ve betikteki gerekli değişiklikleri uygun şekilde seçtiğinizden emin olun.
 
-    ![Ekle-LB-betik--1. adım](./media/site-recovery-sharepoint/add-lb-script-step1.png)
+    ![Add-LB-SCRIPT-adım-1](./media/site-recovery-sharepoint/add-lb-script-step1.png)
 
-    ![Ekle-LB-betik--2. adım](./media/site-recovery-sharepoint/add-lb-script-step2.png)
+    ![Add-LB-SCRIPT-adım-2](./media/site-recovery-sharepoint/add-lb-script-step2.png)
 
-3. Azure'da yeni grubuna işaret edecek şekilde DNS kayıtlarını güncelleştirmeye yönelik el ile bir adım ekleyin.
+3. DNS kayıtlarını Azure 'daki yeni gruba işaret etmek üzere güncelleştirmek için el ile bir adım ekleyin.
 
-    * Siteleri için Internet'e, yük devretme sonrasında gerekli hiçbir DNS güncelleştirmelerdir. Traffic Manager'ı yapılandırmak için 'Ağ Kılavuzu' bölümünde açıklanan adımları izleyin. Traffic Manager profili önceki bölümde açıklanan şekilde ayarlandığını gösterdiğinde, Azure sanal makinesinde işlevsiz bağlantı (örnekte 800) açmak için bir komut dosyası ekleyin.
+    * İnternet 'e yönelik siteler için, yük devretme sonrası bir DNS güncelleştirmesi gerekmez. Traffic Manager yapılandırmak için ' Ağ Kılavuzu ' bölümünde açıklanan adımları izleyin. Traffic Manager profili önceki bölümde açıklandığı gibi ayarlandıysa, Azure VM 'de kukla bağlantı noktasını (örnekteki 800) açmak için bir komut dosyası ekleyin.
 
-    * İç kullanıma yönelik siteler için DNS kaydı için yeni Web Katmanı sanal makinenin yük dengeleyici IP işaret edecek şekilde güncelleştirmek için el ile bir adım ekleyin.
+    * İç kullanıma yönelik siteler için, DNS kaydını yeni Web katmanı VM 'sinin yük dengeleyici IP 'sine işaret etmek üzere güncelleştirmek için el ile bir adım ekleyin.
 
-4. Arama uygulaması bir yedekten geri yükleyin veya yeni bir arama hizmeti başlatmak için el ile bir adım ekleyin.
+4. Arama uygulamasını bir yedekten geri yüklemek veya yeni bir arama hizmeti başlatmak için el ile bir adım ekleyin.
 
-5. Arama hizmeti uygulaması bir yedeklemeden geri yüklemek için aşağıdaki adımları izleyin.
+5. Arama hizmeti uygulamasını bir yedekten geri yüklemek için aşağıdaki adımları izleyin.
 
-    * Bu yöntem, arama hizmeti uygulaması yedeğini felaket önce gerçekleştirildi ve yedekleme DR sitede kullanılabilir olduğunu varsayar.
-    * Bu kolayca Yedekleme Zamanlama (örneğin, her gün bir kez) ve yedekleme DR sitede yerleştirmek için bir kopya yordam kullanılarak gerçekleştirilebilir. Kopyalama yordamları AzCopy (Azure kopyalama) veya DFSR (Dağıtılmış Dosya Hizmetleri çoğaltma) ayarlama gibi betikleştirilmiş programları içerebilir.
-    * SharePoint grubu çalıştırıyor, Merkezi 'Yedekleme ve geri yükleme' yönetim gidin ve geri yükleme seçeneğini belirleyin. Belirtilen yedekleme konumuna geri interrogates (değeri olarak güncelleştirmeniz gerekebilir). Arama hizmeti uygulaması yedeklemeyi geri yüklemek istediğiniz seçin.
-    * Geri arama. Aynı bulmak için geri yükleme bekliyor akılda tutulması topolojisi (aynı sayıda sunucuları) ve aynı sabit sürücü harfini bu sunuculara atanmış. Daha fazla bilgi için ['Geri arama hizmeti uygulaması SharePoint 2013'te '](https://technet.microsoft.com/library/ee748654.aspx) belge.
+    * Bu yöntem, Arama Hizmeti uygulamasının bir yedeğinin çok zararlı olaydan önce gerçekleştirildiğini ve yedeklemenin DR sitesinde kullanılabilir olduğunu varsayar.
+    * Bu, yedeklemenin (örneğin, her gün) planlanarak ve yedeklemenin DR sitesine yerleştirileceği bir kopyalama yordamı kullanılarak kolayca elde edilebilir. Kopyalama yordamları AzCopy (Azure kopyası) veya DFSR (dağıtılmış dosya hizmetleri çoğaltması) gibi betikleştirilmiş programları içerebilir.
+    * Artık SharePoint grubu çalışıyor olduğuna göre, Yönetim Merkezi, ' yedekleme ve geri yükleme ' ' ye gidin ve geri yükle ' yi seçin. Geri yükleme, yedekleme konumunu belirtilen şekilde yedekler (değeri güncelleştirmeniz gerekebilir). Geri yüklemek istediğiniz Arama Hizmeti uygulama yedeklemesini seçin.
+    * Arama geri yüklendi. Geri yüklemenin aynı topolojiyi (aynı sayıda sunucu) ve bu sunuculara atanmış sabit sürücü harflerini bulmasını beklediğini aklınızda bulundurun. Daha fazla bilgi için, bkz. [' SharePoint 2013 'de arama hizmeti uygulaması geri yükleme '](https://technet.microsoft.com/library/ee748654.aspx) belgesi.
 
 
-6. Yeni bir arama hizmeti uygulaması'nı başlatmak için aşağıdaki adımları izleyin.
+6. Yeni bir arama hizmeti uygulamasıyla başlamak için aşağıdaki adımları izleyin.
 
-    * Bu yöntem, "Arama yönetimi" veritabanının bir yedeğini DR sitede kullanılabilir olduğunu varsayar.
-    * Bir arama hizmeti uygulaması veritabanları çoğaltılamaz olduğundan, yeniden oluşturulması gerekir. Bunu yapmak için Yönetim Merkezi'ne gidin ve arama hizmeti uygulaması silin. Arama dizini barındıran tüm sunucularda dizin dosyaları silin.
-    * Arama hizmeti uygulaması yeniden oluşturun ve bu veritabanlarını yeniden oluşturur. GUI aracılığıyla tüm eylemleri gerçekleştirmek mümkün olmadığından, bu hizmet uygulaması yeniden oluşturan hazırlanmış bir komut dosyası olması önerilir. Örneğin, dizin sürücü konumunu ayarlama ve arama topolojisini yapılandırma yalnızca SharePoint PowerShell cmdlet'lerini kullanarak mümkündür. Geri yükleme-SPEnterpriseSearchServiceApplication Windows PowerShell cmdlet'ini kullanın ve günlük aktarmalı ve çoğaltılan arama yönetim veritabanı, Search_Service__DB belirtin. Bu cmdlet, arama yapılandırması, şema, yönetilen özellikleri, kuralları ve kaynakları sunar ve diğer bileşenleri varsayılan kümesi oluşturur.
-    * Arama hizmeti uygulaması olan sonra yeniden oluşturulan arama hizmetini geri yüklemek her bir içerik kaynağı için tam gezinme başlatmanız gerekir. Şirket içi grup, arama önerileri gibi bazı analytics bilgileri kaybedersiniz.
+    * Bu yöntem, DR sitesinde "arama yönetimi" veritabanının bir yedeğinin bulunduğunu varsayar.
+    * Diğer Arama Hizmeti uygulama veritabanları çoğaltılmadığından, yeniden oluşturulması gerekir. Bunu yapmak için, Merkezi Yönetim ' e gidin ve Arama Hizmeti uygulamasını silin. Arama dizinini barındıran tüm sunucularda dizin dosyalarını silin.
+    * Arama Hizmeti uygulamasını yeniden oluşturun ve bu veritabanlarını yeniden oluşturur. Tüm eylemleri GUI aracılığıyla gerçekleştirmek mümkün olmadığından, bu hizmet uygulamasını yeniden oluşturan hazırlanmış bir betiğin olması önerilir. Örneğin, Dizin sürücüsü konumunu ayarlama ve arama topolojisini yapılandırma yalnızca SharePoint PowerShell cmdlet 'leri kullanılarak yapılabilir. Windows PowerShell cmdlet 'ini geri yükleme-SPEnterpriseSearchServiceApplication kullanın ve günlük ile gönderilen ve çoğaltılan arama Yönetim veritabanını Search_Service__DB. Bu cmdlet, arama yapılandırmasını, şemayı, yönetilen özellikleri, kuralları ve kaynakları verir ve diğer bileşenlerin varsayılan bir kümesini oluşturur.
+    * Arama Hizmeti uygulama yeniden oluşturulduktan sonra, Arama Hizmeti geri yüklemek için her bir içerik kaynağı için tam bir gezinme başlatmanız gerekir. Arama önerileri gibi şirket içi gruptaki bazı analiz bilgilerini kaybedersiniz.
 
-7. Sonra tüm adımları tamamlanır, kurtarma planını ve nihai kurtarma planı aşağıdaki gibi görünür.
+7. Tüm adımlar tamamlandıktan sonra kurtarma planını kaydedin ve son kurtarma planı aşağıdaki gibi görünür.
 
-    ![Kaydedilen RP](./media/site-recovery-sharepoint/saved-rp.png)
+    ![Kayıtlı RP](./media/site-recovery-sharepoint/saved-rp.png)
 
-## <a name="doing-a-test-failover"></a>Yük devretme testi yapılması
-İzleyin [bu kılavuz](site-recovery-test-failover-to-azure.md) yük devretme testi yapmak için.
+## <a name="doing-a-test-failover"></a>Yük devretme testi yapma
+Yük devretme testi yapmak için [Bu kılavuzu](site-recovery-test-failover-to-azure.md) izleyin.
 
-1.  Azure portalına gidin ve kurtarma Hizmetleri kasanızı seçin.
-2.  SharePoint uygulaması için oluşturulmuş kurtarma planına tıklayın.
-3.  'Test yük devretme sırasında' tıklayın.
-4.  Kurtarma noktası ve test yük devretme işlemini başlatmak için Azure sanal ağı seçin.
-5.  İkincil ortamı çalışır duruma geldiğinde, uygulamanızı doğrulamaları gerçekleştirebilirsiniz.
-6.  Doğrulama tamamlandıktan sonra 'Yük devretme testini Temizle' kurtarma planı üzerinde tıklayın ve yük devretme test ortamı temizlendi.
+1.  Azure portal gidin ve kurtarma hizmeti kasanızı seçin.
+2.  SharePoint uygulaması için oluşturulan kurtarma planına tıklayın.
+3.  ' Test yük devretmesi ' seçeneğine tıklayın.
+4.  Yük devretme testi işlemini başlatmak için kurtarma noktasını ve Azure sanal ağını seçin.
+5.  İkincil ortam kurulduktan sonra, doğrulamaları gerçekleştirebilirsiniz.
+6.  Doğrulamalar tamamlandıktan sonra kurtarma planında ' test yük devretmesini Temizle ' düğmesine tıklayabilirsiniz ve yük devretme testi ortamı temizlenir.
 
-AD için yük devretme testi yapılması yönergeler ve DNS, başvurduğu [Test yük devretme konuları için bir AD ve DNS](site-recovery-active-directory.md#test-failover-considerations) belge.
+AD ve DNS için yük devretme testi yapmaya yönelik yönergeler için bkz. [ad ve DNS belgesi Için test yük devretmesi konuları](site-recovery-active-directory.md#test-failover-considerations) .
 
-Yük devretme testi SQL Always ON kullanılabilirlik grupları yapılması ile ilgili yönergeler için bkz [gerçekleştiren uygulama DR ile Azure Site Recovery ile yük devretme testi yapılması](site-recovery-sql.md#disaster-recovery-of-application) belge.
+SQL Always ON kullanılabilirlik grupları için yük devretme testi gerçekleştirme hakkında yönergeler için bkz. [Azure Site Recovery Ile uygulama kurtarma ve yük devretme testi belgesi gerçekleştirme](site-recovery-sql.md#disaster-recovery-of-an-application) .
 
-## <a name="doing-a-failover"></a>Bir yük devretme gerçekleştirmeden
-İzleyin [bu kılavuz](site-recovery-failover.md) bir yük devretme gerçekleştirme.
+## <a name="doing-a-failover"></a>Yük devretme yapma
+Yük devretme işlemi gerçekleştirmek için [Bu yönergeleri](site-recovery-failover.md) izleyin.
 
-1.  Azure portalına gidin ve kurtarma Hizmetleri kasanızı seçin.
-2.  SharePoint uygulaması için oluşturulmuş kurtarma planına tıklayın.
-3.  'Yük devretme sırasında' tıklayın.
-4.  Yük devretme işlemini başlatmak için kurtarma noktası seçin.
+1.  Azure portal gidin ve kurtarma hizmetleri kasanızı seçin.
+2.  SharePoint uygulaması için oluşturulan kurtarma planına tıklayın.
+3.  ' Yük devretme ' seçeneğine tıklayın.
+4.  Yük devretme işlemini başlatmak için kurtarma noktası ' nı seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Daha fazla bilgi edinebilirsiniz [diğer uygulamaların çoğaltılması](site-recovery-workload.md) Site RECOVERY'yi kullanarak.
+Site Recovery kullanarak [diğer uygulamaları çoğaltma](site-recovery-workload.md) hakkında daha fazla bilgi edinebilirsiniz.

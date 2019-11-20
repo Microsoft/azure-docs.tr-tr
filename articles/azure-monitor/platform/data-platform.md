@@ -1,94 +1,94 @@
 ---
-title: Azure İzleyici, veri platformu | Microsoft Docs
-description: İzleme verilerine Azure İzleyicisi tarafından toplanan, basit ve gerçek zamanlı senaryoları destekleme özelliğine sahip olan ölçümleri ve Gelişmiş analiz için kullanılan günlükleri ayrılır.
+title: Azure Izleyici veri platformu | Microsoft Docs
+description: Azure Izleyici tarafından toplanan izleme verileri, basit ve gelişmiş analizler için kullanılan neredeyse gerçek zamanlı senaryoları ve günlükleri destekleyebilen, hafif ve desteklenebilecek ölçümlere ayrılmıştır.
 documentationcenter: ''
 author: bwren
 manager: carmonm
 editor: tysonn
-ms.service: monitoring
+ms.service: azure-monitor
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/26/2019
 ms.author: bwren
-ms.openlocfilehash: 8883c1e7f2874e1e2e61b8eca122f2ec294c7849
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 48357adccea201aaeb99863b39e9c8cabce915ce
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60808938"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71262061"
 ---
-# <a name="azure-monitor-data-platform"></a>Azure İzleyici, veri platformu
+# <a name="azure-monitor-data-platform"></a>Azure Izleyici veri platformu
 
-Günümüzün karmaşık bilgi işlem ortamlarında hem buluttaki hem de şirket içi hizmetleri kullanan dağıtılmış uygulamaları çalıştıran observability etkinleştirme, her katman ve dağıtılmış bir sistemin her bileşen işletimsel veri toplanmasını gerektirir. Bu veriler üzerinde ayrıntılı Öngörüler gerçekleştirmek ve cam ile kuruluşunuzdaki çok sayıda proje katılımcıları desteklemek için farklı perspektiflerini tek bir bölme gelişmişe olmanız gerekir.
+Günümüzün bulut ve şirket içi hizmetlere dayalı dağıtılmış uygulamaları çalıştıran karmaşık bilgi işlem ortamlarında Observability etkinleştirme, her katmandan ve dağıtılmış sistemin her bileşenlerinden işlemsel verilerin toplanmasını gerektirir. Bu verilerde derin içgörüler gerçekleştirebiliyor ve bu verileri farklı perspektiflerle tek bir cam bölmeden birleştiren, kuruluşunuzda çok sayıda paydaşya sahip olmanız gerekir.
 
-[Azure İzleyici](../overview.md) toplar ve çeşitli kaynakları burada kullanılabileceği analiz, Görselleştirme ve uyarı amacıyla ortak bir veri platformu ile verileri toplar. Bu, ayrıntılı Öngörüler izlenen tüm kaynaklarınız genelinde ve verilerle bile diğer hizmetlerden verilerine Azure İzleyicisi'nde depolama sağlayan, birden çok kaynaktan veri üzerinde tutarlı bir deneyim sağlar.
+[Azure izleyici](../overview.md) , çeşitli kaynaklardan veri toplar ve bunları analiz, görselleştirme ve uyarı için kullanılabilecek ortak bir veri platformuna toplar. Birden fazla kaynaktaki verilerin üzerine tutarlı bir deneyim sunar. Bu, tüm izlenen kaynaklarda ve hatta verilerini Azure Izleyici 'de depolayan diğer hizmetlerden gelen verilerle birlikte ayrıntılı öngörüler sağlar.
 
 
 ![Azure İzleyiciye Genel Bakış](media/data-platform/overview.png)
 
-## <a name="observability-data-in-azure-monitor"></a>Azure İzleyicisi'nde observability verileri
-Ölçümler, günlükler ve dağıtılmış izlemelerini sık için observability üç yapı taşları adlandırılır. Bunlar, bir izleme aracı toplamak ve izlenen bir sistemin yeterli observability sağlamak için analiz verileri farklı türde olur. Observability, verileri birden çok yapı taşları arasında bağlantı kurarak ve tüm izlenen kaynakları kümesi arasında verileri toplama tarafından gerçekleştirilebilir. Azure İzleyici birlikte birden çok kaynaktan veri depoladığından, veriler ilişkili olabilir ve Araçlar ortak bir dizi kullanarak Analiz. Ayrıca birden fazla Azure abonelikleri ve diğer hizmetlere yönelik verileri barındıran ek kiracılar, veri ilişkilendirir.
+## <a name="observability-data-in-azure-monitor"></a>Azure Izleyici 'de verileri Observability
+Ölçümler, Günlükler ve dağıtılmış izlemeler, yaygın olarak Observability 'in üç paragraf adı olarak adlandırılır. Bunlar, izlenen bir sistemin yeterli Observability sağlamak için bir izleme aracının toplaması ve analiz edilmesi gereken farklı veri türleridir. Observability birden çok ve daha fazla şekilde verilerle ilişkilendirerek ve izlenen tüm kaynak kümesi genelinde veri toplanarak elde edilebilir. Azure Izleyici birden fazla kaynaktaki verileri birlikte depoladığından, veriler ortak bir araç kümesi kullanılarak bağıntılı ve analiz edilebilir. Ayrıca, diğer hizmetlere yönelik verilerin barındırılmasına ek olarak, verileri birden çok Azure aboneliği ve kiracılar arasında da ilişkilendirir.
 
-Azure kaynaklarını izleme önemli ölçüde oluşturur. Azure İzleyici ölçümleri veya günlükleri bir platform ya da izleme verilerini diğer kaynaklardan yanı sıra bu verileri birleştirir. Her izleme belirli senaryolar için optimize edilmiştir ve Azure İzleyici'de her farklı özellikleri destekler. Veri analizi, görsel öğeler veya uyarı gibi özellikleri en verimli ve hesaplı bir şekilde gerekli senaryonuz uygulayabilmesi farkları gerektirir. Insights gibi Azure İzleyici'de [Application Insights](../app/app-insights-overview.md) veya [VM'ler için Azure İzleyici](../insights/vminsights-overview.md) anlamak zorunda kalmadan belirli izleme senaryoları üzerinde odaklanmanıza olanak tanıyan çözümleme araçları iki veri türleri arasındaki farklar. 
+Azure kaynakları, önemli miktarda izleme verisi üretir. Azure Izleyici, bu verileri diğer kaynaklardaki izleme verileriyle birlikte ölçüm veya günlük platformu olarak birleştirir. Her biri belirli izleme senaryoları için iyileştirilmiştir ve her biri Azure Izleyici 'de farklı özellikleri destekler. Veri analizi, görselleştirmeler veya uyarı gibi özellikler, gerekli senaryonuzu en verimli ve ekonomik şekilde uygulayabilmeniz için farkları anlamanız gerekir. [Application Insights](../app/app-insights-overview.md) veya [VM'ler için Azure izleyici](../insights/vminsights-overview.md) gibi Azure izleyici içgörüleri, iki veri türü arasındaki farklılıkları anlamak zorunda kalmadan belirli izleme senaryosuna odaklanabilmenize olanak tanıyan analiz araçlarına sahiptir. 
 
 
 ### <a name="metrics"></a>Ölçümler
-[Ölçümleri](data-platform-metrics.md) zaman içinde belirli bir noktada bir sistem bazı yönlerini açıklayan bir sayısal değerler. Bunlar düzenli aralıklarla toplanır ve bir zaman damgası, bir ad, değer ve bir veya daha fazla tanımlama etiketi ile tanımlanır. Diğer ölçümlere karşılaştırıldığında ve zaman içinde eğilimler için analiz algoritmaları, çeşitli ölçümleri toplanabilir. 
+[Ölçümler](data-platform-metrics.md) , belirli bir noktadaki sistemin bazı yönlerini tanımlayan sayısal değerlerdir. Bunlar düzenli aralıklarla toplanır ve bir zaman damgası, bir ad, bir değer ve bir veya daha fazla etiket tanımlama ile tanımlanır. Ölçümler, diğer ölçümler ile karşılaştırıldığında çeşitli algoritmalar kullanılarak toplanabilir ve zaman içinde Eğilimler için analiz edilebilir. 
 
-Azure İzleyicisi'nde ölçümler zaman damgası veri çözümlemesi için iyileştirilmiş bir zaman serisi veritabanına depolanır. Bu özellikle uyarı vermek için uygun ve hızlı ölçümler sağlar sorunları algılama. Sisteminizi performansıyla size ancak genelde sorunların kök nedenini belirlemek için günlükleri ile birleştirilmesi gerekir.
+Azure Izleyici ölçümleri, zaman damgalı verileri çözümlemek için en iyi duruma getirilmiş bir zaman serisi veritabanında depolanır. Bu, ölçümleri uyarı ve hızlı bir şekilde algılama için özellikle uygun hale getirir. Bunlar sisteminizin nasıl çalıştığını söyleyebilir, ancak genellikle sorunların temel nedenini belirlemek için günlüklerle birleştirilmesi gerekir.
 
-Azure portalı ile etkileşimli analiz için kullanılabilir ölçümleri [ölçüm Gezgini](../app/metrics-explorer.md). İçin eklenebilir bir [Azure panosuna](../learn/tutorial-app-dashboards.md) diğer verilerle birlikte Görselleştirme ve neredeyse gerçek zamanlı için kullanılan [uyarı](alerts-metric.md).
+Ölçümler, [Ölçüm Gezgini](../app/metrics-explorer.md)Azure Portal etkileşimli analiz için kullanılabilir. Bunlar, başka verilerle birlikte görselleştirme için bir [Azure panosuna](../learn/tutorial-app-dashboards.md) eklenebilir ve neredeyse gerçek zamanlı [Uyarı](alerts-metric.md)için kullanılabilir.
 
-Veri kaynakları dahil olmak üzere Azure İzleyici ölçümleri hakkında daha fazla bilgiyi [Azure İzleyicisi'nde ölçümler](data-platform-metrics.md).
+Azure izleyici [ölçümlerinde](data-platform-metrics.md)bulunan veri kaynakları da dahil olmak üzere Azure izleyici ölçümleri hakkında daha fazla bilgi edinin.
 
 ### <a name="logs"></a>Günlükler
-[Günlükleri](data-platform-logs.md) sistem içinde gerçekleşen olaylardır. Bunlar farklı türlerde veri içerebilir ve yapılandırılmış veya serbest biçimli metin bir zaman damgasına sahip. Bunlar, günlük girişlerini ortamında olaylar oluşturmak ve bir sistem ağır yük altında daha fazla günlük birimi genellikle oluşturacak tutularak oluşturulabilir.
+[Günlükler](data-platform-logs.md) , sistem içinde gerçekleşen olaylardır. Farklı türlerde veriler içerebilir ve zaman damgasıyla yapılandırılmış veya serbest biçimli metinler olabilir. Ortamdaki olaylar günlük girişleri oluşturabileceğinden ve ağır yük altında bir sistem genellikle daha fazla günlük birimi oluşturabileceğinden, tek tek oluşturulabilir.
 
-Azure İzleyici günlüklerine temel alan bir Log Analytics çalışma alanında depolanır [Azure Veri Gezgini](/azure/data-explorer/) güçlü analiz altyapısı sağlar ve [zengin sorgu dili](/azure/kusto/query/). Günlükleri genellikle tanımlanmakta sorunun tam bağlam sağlamak için yeterli bilgi sağlar ve sorunların kök durumu belirlemek için değerlidir.
+Azure Izleyici 'deki Günlükler, güçlü bir analiz altyapısı ve [zengin sorgu dili](/azure/kusto/query/)sağlayan [Azure Veri Gezgini](/azure/data-explorer/) temel alan Log Analytics çalışma alanında depolanır. Günlükler genellikle tanımlanmakta olan sorunun tamamen bağlamını sağlamak için yeterli bilgi sağlar ve bu sorunların kök durumunu tanımlamak için değerlidir.
 
 > [!NOTE]
-> Azure İzleyici günlüklerine ve azure'da günlük veri kaynakları arasındaki farkı anlamak önemlidir. Örneğin, azure'da abonelik düzeyindeki olayların yazılan bir [etkinlik günlüğü](activity-logs-overview.md) , Azure İzleyici Menüsü'nden görüntüleyebilirsiniz. En fazla kaynak için kullanım bilgileri yazacak bir [tanılama günlüğü](diagnostic-logs-overview.md) , farklı konumlara iletebilir. Azure İzleyici günlüklerine etkinlik günlükleri ve diğer izleme verilerinin tüm kaynak kümesini üzerinde ayrıntılı analiz sağlamak üzere birlikte tanılama günlükleri toplayan bir günlük veri platformudur.
+> Azure Izleyici günlüklerini ve Azure 'da günlük verilerinin kaynaklarını ayırt etmek önemlidir. Örneğin, Azure 'daki abonelik düzeyi olayları, Azure Izleyici menüsünden görüntüleyebileceğiniz bir [etkinlik günlüğüne](activity-logs-overview.md) yazılır. Çoğu kaynak, işletimsel bilgileri farklı konumlara iletebilmeniz için bir [Tanılama günlüğüne](resource-logs-overview.md) yazar. Azure Izleyici günlükleri, tüm kaynak kümesinde derin analiz sağlamak üzere diğer izleme verileriyle birlikte etkinlik günlüklerini ve tanılama günlüklerini toplayan bir günlük veri platformudur.
 
 
- Çalışabileceğiniz [oturum sorguları](../log-query/log-query-overview.md) ile etkileşimli olarak [Log Analytics](../log-query/portals.md) Azure portalında veya sonuçları Ekle bir [Azure panosuna](../learn/tutorial-app-dashboards.md) birlikte görselleştirme için diğer veri. Ayrıca oluşturabilirsiniz [günlük uyarıları](alerts-log.md) , zamanlama sorgu sonuçlarına dayalı bir uyarı tetiklemek.
+ Azure portal [Log Analytics](../log-query/portals.md) ile [günlük sorgularıyla](../log-query/log-query-overview.md) etkileşimli olarak çalışabilir veya sonuçları diğer verilerle birlikte görselleştirme için bir [Azure panosuna](../learn/tutorial-app-dashboards.md) ekleyebilirsiniz. Ayrıca, bir zamanlama sorgusunun sonuçlarına dayalı olarak bir uyarı tetikleyecek [günlük uyarıları](alerts-log.md) da oluşturabilirsiniz.
 
-Azure İzleyici veri kaynakları dahil olmak üzere günlükleri hakkında daha fazla bilgiyi [Azure İzleyici'de oturum](data-platform-logs.md).
+Azure izleyici ['Deki günlüklerde](data-platform-logs.md)bulunan veri kaynaklarını Içeren Azure izleyici günlükleri hakkında daha fazla bilgi edinin.
 
-### <a name="distributed-traces"></a>Dağıtılmış izlemeleri
-İzlemeleri bir kullanıcı isteği aracılığıyla dağıtılmış bir sistemde izleyin ilgili olaylar dizisi ' dir. Farklı işlem performansını ve uygulama kodu davranışını belirlemek için kullanılabilir. Günlükler genellikle dağıtılmış bir sistemin tek tek bileşenler tarafından oluşturulur, ancak bir izleme işlemi ve uygulamanızın performansını tüm bileşenler kümesi arasında ölçer.
+### <a name="distributed-traces"></a>Dağıtılmış izlemeler
+İzlemeler, dağıtılmış bir sistem aracılığıyla bir Kullanıcı isteğini izleyen ilgili olay serisidir. Uygulama kodu davranışlarını ve farklı işlemlerin performansını belirlemede kullanılabilir. Günlükler genellikle dağıtılmış bir sistemin ayrı bileşenleri tarafından oluşturulsa da, bir izleme uygulamanızın tüm bileşen kümesi genelinde işlem ve performansını ölçer.
 
-Azure İzleyici'de dağıtılmış izleme ile etkin [Application Insights SDK'sı](../app/distributed-tracing.md), ve izleme verilerini, Application Insights tarafından toplanan diğer uygulama günlük verileriyle depolanır. Kullanılabilir günlük sorguları, panolar ve uyarılar gibi diğer günlük verilerini olarak aynı analiz araçları sağlar.
+Azure Izleyici 'de dağıtılmış izleme [APPLICATION INSIGHTS SDK](../app/distributed-tracing.md)ile etkinleştirilir ve izleme verileri, Application Insights tarafından toplanan diğer uygulama günlüğü verileriyle birlikte depolanır. Bu, günlük sorguları, panolar ve uyarılar dahil olmak üzere diğer günlük verileriyle aynı analiz araçlarının kullanılabilmesini sağlar.
 
-Daha fazla bilgi, izleme dağıtılmış edinin [dağıtılmış izleme nedir?](../app/distributed-tracing.md).
+Dağıtılmış izleme hakkında daha fazla bilgi için [bkz. dağıtılmış izleme nedir?](../app/distributed-tracing.md).
 
 
-## <a name="compare-azure-monitor-metrics-and-logs"></a>Azure İzleyici ölçüm ve günlükleri karşılaştırın
+## <a name="compare-azure-monitor-metrics-and-logs"></a>Azure Izleyici ölçümlerini ve günlüklerini karşılaştırın
 
-Aşağıdaki tabloda, ölçüm ve günlükleri Azure İzleyici'de karşılaştırır.
+Aşağıdaki tabloda Azure Izleyici 'de ölçümler ve Günlükler karşılaştırılmaktadır.
 
 | Öznitelik  | Ölçümler | Günlükler |
 |:---|:---|:---|
-| Avantajlar | Basit ve uyarı verme gibi neredeyse gerçek zamanlı senaryoları yeteneğine. Sorunları hızlı algılanması için idealdir. | Analiz ile zengin sorgu dili. Ayrıntılı analiz ve kök nedenini belirlemek için idealdir. |
-| Veriler | Yalnızca sayısal değerler | Metin veya sayısal veri |
-| Yapı | Standart örnek saati, izlenmekte olan kaynak, sayısal bir değer özellikler kümesidir. Bazı ölçümler daha fazla tanımı için birden çok boyutta içerir. | Günlük türüne bağlı olarak bir özellik kümesi. |
-| Koleksiyon | Düzenli aralıklarla toplanır. | Oluşturulacak Kayıt olaylarını tetiklemek gibi zaman zaman toplanan olabilir. |
-| Azure portalında görüntüleme | Ölçüm Gezgini | Log Analytics |
-| Veri kaynakları içerir | Platform ölçümleri Azure kaynaklarından toplanan.<br>Application Insights tarafından izlenen uygulamalar.<br>Uygulama veya API tarafından tanımlanan özel. | Uygulama ve tanılama günlükleri.<br>İzleme çözümleri.<br>Aracılar ve VM uzantıları.<br>Uygulama istekleri ve özel durumlar.<br>Azure Güvenlik Merkezi.<br>Veri Toplayıcı API'si |
+| Avantajlar | Uyarı gibi neredeyse gerçek zamanlı senaryolara sahip hafif ve yetenekli senaryolar. Sorunların hızlı algılanması için idealdir. | Zengin sorgu diliyle çözümlendi. Derin analiz ve temel nedeni tanımlama için idealdir. |
+| Data | Yalnızca sayısal değerler | Metin veya sayısal veriler |
+| Yapı | Örnek saat, izlenen kaynak ve sayısal bir değer dahil olmak üzere standart özellikler kümesi. Bazı ölçümler, daha fazla tanım için birden çok boyut içerir. | Günlük türüne göre benzersiz özellik kümesi. |
+| Collection | Düzenli aralıklarla toplanır. | , Olayların oluşturulması için bir kayıt tetiklemesi olarak toplanabilir. |
+| Azure portal içinde görüntüle | Ölçüm Gezgini | Log Analytics |
+| Veri kaynakları şunlardır | Azure kaynaklarından toplanan platform ölçümleri.<br>Application Insights tarafından izlenen uygulamalar.<br>Uygulama veya API tarafından tanımlanan özel. | Uygulama ve tanılama günlükleri.<br>Çözümleri izleme.<br>Aracılar ve VM uzantıları.<br>Uygulama istekleri ve özel durumlar.<br>Azure Güvenlik Merkezi.<br>Veri Toplayıcı API 'SI. |
 
-## <a name="collect-monitoring-data"></a>İzleme verilerini toplama
-Farklı [Azure İzleyici için veri kaynaklarını](data-sources.md) bir Log Analytics çalışma alanı (günlük) veya Azure İzleyici ölçüm veritabanı (ölçüler) ya da her ikisi için yazar. Diğer Azure depolama gibi başka bir konuma yazma ve günlükleri veya ölçümleri doldurmak için bazı yapılandırma gerektiren bazı kaynaklar doğrudan bu veri depoları için yazar. 
+## <a name="collect-monitoring-data"></a>İzleme verilerini topla
+[Azure izleyici için farklı veri kaynakları](data-sources.md) , Log Analytics çalışma alanına (Günlükler) ya da Azure izleyici ölçümleri veritabanına (ölçümler) veya her ikisine de yazılır. Bazı kaynaklar bu veri depolarına doğrudan yazılır, diğerleri ise Azure depolama gibi başka bir konuma yazabilir ve günlükleri veya ölçümleri doldurmak için bazı yapılandırmalar gerektirir. 
 
-Bkz: [Azure İzleyicisi'nde ölçümler](data-platform-metrics.md) ve [Azure İzleyici'de oturum](data-platform-logs.md) her tür doldurmak farklı veri kaynakları listesi için.
+Her türü dolduran farklı veri kaynaklarının listesi için bkz. Azure izleyici 'de Azure Izleyici ve [günlüklerde](data-platform-logs.md) [bulunan ölçümler](data-platform-metrics.md) .
 
 
 ## <a name="stream-data-to-external-systems"></a>Stream veri harici sistemlere bağlanma
-İzleme verilerini analiz etmek için Azure'da araçlarını kullanabilmenin yanı sıra güvenlik bilgileri ve Olay yönetimi (SIEM) ürün gibi bir dış araç iletmek için bir gereksinim olabilir. Bu iletme genellikle doğrudan izlenen kaynakları üzerinden yapılır [Azure Event Hubs](/azure/event-hubs/). Bazı kaynakları, gerekli verileri almak için bir mantıksal uygulama gibi başka bir işlem kullanabilirsiniz, ancak verileri olay hub'ına doğrudan göndermek için yapılandırılabilir. Bkz: [Stream dış bir araç tarafından izleme verileri tüketim için olay hub'ına Azure](stream-monitoring-data-event-hubs.md) Ayrıntılar için.
+İzleme verilerini analiz etmek için Azure'da araçlarını kullanabilmenin yanı sıra güvenlik bilgileri ve Olay yönetimi (SIEM) ürün gibi bir dış araç iletmek için bir gereksinim olabilir. Bu iletme genellikle doğrudan izlenen kaynakları üzerinden yapılır [Azure Event Hubs](/azure/event-hubs/). Bazı kaynaklar, gerekli verileri almak için mantıksal uygulama gibi başka bir işlem de kullanabilmeniz sırasında, verileri doğrudan bir olay hub 'ına gönderecek şekilde yapılandırılabilir. Ayrıntılar için bkz. [bir dış araçla tüketim Için Azure izleme verilerini bir olay hub 'ına akış](stream-monitoring-data-event-hubs.md) .
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [Azure İzleyicisi'nde ölçümler](data-platform-metrics.md).
-- Daha fazla bilgi edinin [Azure İzleyici'de oturum](data-platform-logs.md).
+- [Azure izleyici 'de ölçümler](data-platform-metrics.md)hakkında daha fazla bilgi edinin.
+- [Azure izleyici 'de Günlükler](data-platform-logs.md)hakkında daha fazla bilgi edinin.
 - Hakkında bilgi edinin [izleme verilerini kullanılabilir](data-sources.md) azure'daki farklı kaynakları.

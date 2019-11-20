@@ -1,6 +1,6 @@
 ---
-title: EDIFACT iletilerini UNH 2.5 segements - Azure Logic Apps ile işleme | Microsoft Docs
-description: Azure Logic Apps Enterprise Integration Pack ile UNH2.5 parçalarla EDIFACT belgelerini çözümleme
+title: EDIOLGU iletilerinde UNH 2,5 segmentleri-Azure Logic Apps
+description: Enterprise Integration Pack ile Azure Logic Apps içindeki UNH 2.5 kesimlerle EDIOLGU iletilerini çözümleyin
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -8,45 +8,62 @@ author: divyaswarnkar
 ms.author: divswa
 ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
-ms.assetid: cf44af18-1fe5-41d5-9e06-cc57a968207c
 ms.date: 04/27/2017
-ms.openlocfilehash: 926c9ebe8675d8b50d4544be813ae0b15492ae35
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c30c35375a45171c938f80e94dd7d9be4c3ee8b1
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60681687"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72679952"
 ---
-# <a name="handle-edifact-documents-with-unh25-segments-in-azure-logic-apps"></a>Azure Logic apps'te UNH2.5 parçalarla EDIFACT belgelerini
+# <a name="handle-edifact-documents-with-unh25-segments-in-azure-logic-apps"></a>Azure Logic Apps 'de UNH 2.5 segmentiyle EDIOLGU belgelerini işleme
 
-EDIFACT belgede UNH2.5 olduğunda şema arama için kullanılıyor. 
+Bir EDIOLGU belgesinde bir UNH 2.5 segmenti varsa, segment şema araması için kullanılır. Örneğin, bu örnek EDIOLGU iletisinde UNH alanı `EAN008`:
 
-Örnek: UNH alan **EAN008** EDIFACT iletisi  
-UNH+SSDD1+ORDERS:D:03B:UN:**EAN008**'  
+`UNH+SSDD1+ORDERS:D:03B:UN:EAN008`
 
-İletisini işlemek için izlemeniz gereken adımlar 
-1. Şemayı Güncelleştir
-2. Sözleşme ayarlarını kontrol edin  
+Bu iletiyi işlemek için aşağıda açıklanan adımları izleyin:
 
-## <a name="update-the-schema"></a>Şemayı Güncelleştir
-İletiyi işlemek için bir şema UNH2.5 kök düğümü adı ile dağıtmanız gerekebilir.  Verilen bir örnek için şema kök adı olacaktır **EFACT_D03B_ORDERS_EAN008**  
+1. Şemayı güncelleştirin.
 
-Farklı bir UNH2.5 segmenti ile her D03B_ORDERS için ayrı bir şema dağıtmak gerekir.  
+1. Anlaşma ayarlarını kontrol edin.
 
-## <a name="add-schema-to-the-edifact-agreement"></a>EDIFACT sözleşmesini şema ekleme
-### <a name="edifact-decode"></a>EDIFACT kodunu çözme
-Gelen ileti kodunu çözmek için şema yapılandırma EDIFACT sözleşmesi alma ayarları
-1. Şemayı tümleştirme hesabına ekleyin    
-2. Şema yapılandırma ayarlarını alma sözleşmesindeki EDIFACT içinde. 
-3. EDIFACT Sözleşmesi'ni seçip tıklayın **JSON olarak Düzenle**.  UNH2.5 değer alma sözleşmesindeki Ekle **schemaReferences**
-![](./media/logic-apps-enterprise-integration-edifact_inputfile_unh2.5/image1.png)
+## <a name="update-the-schema"></a>Şemayı güncelleştirme
 
-### <a name="edifact-encode"></a>EDIFACT kodlama
-Gelen ileti kodlamak için EDIFACT anlaşma gönderme ayarlarında şema yapılandırma
-1. Şemayı tümleştirme hesabına ekleyin    
-2. Şema EDIFACT anlaşma gönderme ayarlarında yapılandırın. 
-3. EDIFACT Sözleşmesi'ni seçip tıklayın **JSON olarak Düzenle**.  Gönderme anlaşması'nda UNH2.5 değer Ekle **schemaReferences**
-![](./media/logic-apps-enterprise-integration-edifact_inputfile_unh2.5/image2.png)
+İletiyi işlemek için, UNH 2.5 kök düğüm adına sahip bir şemayı dağıtmanız gerekir. Örneğin, örnek UNH alanı için şema kök adı `EFACT_D03B_ORDERS_EAN008`. Farklı bir UNH 2.5 kesimine sahip olan her bir `D03B_ORDERS` için, tek bir şemayı dağıtmanız gerekir.
 
-## <a name="next-steps"></a>Sonraki Adımlar
-* [Tümleştirme hesabı sözleşmeleri hakkında daha fazla bilgi](../logic-apps/logic-apps-enterprise-integration-agreements.md "Kurumsal tümleştirme anlaşmalar hakkında bilgi edinin")  
+## <a name="add-schema-to-edifact-agreement"></a>EDıOLGU anlaşmasına şema ekle
+
+### <a name="edifact-decode"></a>EDIOLGU kod çözme
+
+Gelen iletinin kodunu çözmek için, EDıOLGU sözleşmesinin alma ayarlarında şemayı ayarlayın:
+
+1. [Azure Portal](https://portal.azure.com)tümleştirme hesabınızı açın.
+
+1. Şemayı tümleştirme hesabınıza ekleyin.
+
+1. Yapılandırma, EDıOLGU sözleşmesinin alma ayarlarında yapılandırılır.
+
+1. EDIOLGU Sözleşmesi ' ni seçin ve **JSON olarak Düzenle**' yi seçin. Alma sözleşmesinin `schemaReferences` bölümüne UNH 2.5 değerini ekleyin:
+
+   ![Sözleşmeyi almak için UNH 2.5 ekleyin](./media/logic-apps-enterprise-integration-edifact_inputfile_unh2.5/image1.png)
+
+### <a name="edifact-encode"></a>EDIOLGU kodlama
+
+Gelen iletiyi kodlamak için, bu şemayı EDıOLGU sözleşmesi gönderme ayarları ' nda yapılandırın
+
+1. [Azure Portal](https://portal.azure.com)tümleştirme hesabınızı açın.
+
+1. Şemayı tümleştirme hesabınıza ekleyin.
+
+1. EDıOLGU sözleşmesinin gönderme ayarlarındaki şemayı yapılandırın.
+
+1. EDIOLGU Sözleşmesi ' ni seçin ve **JSON olarak Düzenle**' ye tıklayın.  Gönderme sözleşmesi 'nde UNH 2.5 değeri ekleyin **schemaReferences**
+
+1. EDIOLGU Sözleşmesi ' ni seçin ve **JSON olarak Düzenle**' yi seçin. UNH 2.5 değerini gönderme sözleşmesinin `schemaReferences` bölümüne ekleyin:
+
+   ![Anlaşmayı göndermek için UNH 2.5 ekleyin](./media/logic-apps-enterprise-integration-edifact_inputfile_unh2.5/image2.png)
+
+## <a name="next-steps"></a>Sonraki adımlar
+
+* [Tümleştirme hesabı sözleşmeleri](../logic-apps/logic-apps-enterprise-integration-agreements.md) hakkında daha fazla bilgi edinin

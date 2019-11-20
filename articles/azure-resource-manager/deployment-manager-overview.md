@@ -1,26 +1,23 @@
 ---
-title: Azure Deployment Manager bölgeye - güvenli dağıtım uygulamalarını
+title: Bölgeler arasında güvenli dağıtım-Azure Dağıtım Yöneticisi
 description: Azure Deployment Manager ile pek çok bölge üzerinde bir hizmet dağıtmayı açıklar. Bu, tüm bölgelere sunulmadan önce dağıtımınızı kararlılığını doğrulamak için güvenli dağıtım uygulamalarını gösterir.
-author: tfitzmac
-ms.service: azure-resource-manager
 ms.topic: conceptual
 ms.date: 05/31/2019
-ms.author: tomfitz
 ms.custom: seodec18
-ms.openlocfilehash: 6a25444f0207ec5eceb029c5d31d222a31813e22
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0a0d13150086b393e10bc16c5c2cef173ab0abab
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67066833"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74147199"
 ---
-# <a name="enable-safe-deployment-practices-with-azure-deployment-manager-public-preview"></a>Azure Deployment Manager (genel Önizleme) ile güvenli dağıtım uygulamalarını etkinleştirme
+# <a name="enable-safe-deployment-practices-with-azure-deployment-manager-public-preview"></a>Azure Dağıtım Yöneticisi ile güvenli dağıtım uygulamalarını etkinleştirme (Genel Önizleme)
 
 Birçok bölgede hizmetinizi dağıtmadan ve her bölgede beklendiği gibi çalıştığından emin olmak için Azure Deployment Manager hizmetinin aşamalı bir sunum koordine etmek için kullanabilirsiniz. Tüm Azure dağıtımı için yaptığınız gibi kaynakları hizmetinizde tanımladığınız [Resource Manager şablonları](resource-group-authoring-templates.md). Şablonları oluşturduktan sonra Dağıtım Yöneticisi hizmetiniz için topoloji ve nasıl, alınması açıklamak için kullanın.
 
 Dağıtım Yöneticisi Kaynak Yöneticisi'nin bir özelliktir. Bu, dağıtım sırasında yeteneklerinizi genişletir. Karmaşık bir servis olduğunda Dağıtım Yöneticisi'ni kullanın, çeşitli bölgelere dağıtılması gerekiyor. Hizmetinizi aşamalı kullanıma sunarak, tüm bölgelere dağıtılmadan önce olası sorunları bulabilirsiniz. Aşamalı dağıtım, ek güvenlik önlemleri gerekmiyorsa, standart kullanma [dağıtım seçenekleri](resource-group-template-deploy-portal.md) için Resource Manager. Dağıtım Yöneticisi, sürekli tümleştirme ve sürekli teslim (CI/CD) teklifleri gibi Resource Manager dağıtımlarını destekleyen tüm mevcut üçüncü taraf araçları sorunsuzca tümleştirilir.
 
-Azure Deployment Manager Önizleme aşamasındadır. Özellik sağlayarak geliştirmemize yardımcı olun [geri bildirim](https://aka.ms/admfeedback).
+Azure Dağıtım Yöneticisi önizlemededir. [Geri bildirim](https://aka.ms/admfeedback)sağlayarak özelliği geliştirmemize yardımcı olun.
 
 Deployment Manager'ı kullanmak için dört dosyaları oluşturmak gerekir:
 
@@ -33,16 +30,16 @@ Topoloji şablon, dağıtım şablonu dağıtmadan önce dağıtın.
 
 Ek kaynaklar:
 
-- [Azure Deployment Manager REST API'si başvurusunda](https://docs.microsoft.com/rest/api/deploymentmanager/).
-- [Öğretici: Deployment Manager'ı Azure Resource Manager şablonlarıyla kullanma](./deployment-manager-tutorial.md).
-- [Öğretici: Azure Dağıtım Yöneticisi'nde sistem durumu denetimi kullanın](./deployment-manager-tutorial-health-check.md).
-- [Azure Deployment Manager örnek](https://github.com/Azure-Samples/adm-quickstart).
+- [Azure Dağıtım Yöneticisi REST API başvurusu](https://docs.microsoft.com/rest/api/deploymentmanager/).
+- [Öğretici: Azure Dağıtım Yöneticisi kaynak yöneticisi şablonlarıyla kullanın](./deployment-manager-tutorial.md).
+- [Öğretici: Azure dağıtım Yöneticisi 'da sistem durumu denetimi kullanın](./deployment-manager-tutorial-health-check.md).
+- [Azure dağıtım Yöneticisi örneği](https://github.com/Azure-Samples/adm-quickstart).
 
 ## <a name="identity-and-access"></a>Kimlik ve erişim
 
 Dağıtım Yöneticisi ile bir [yönetilen kullanıcı tarafından atanan kimliği](../active-directory/managed-identities-azure-resources/overview.md) dağıtım eylemleri gerçekleştirir. Bu kimlik, dağıtımınıza başlamadan önce oluşturun. Bu abonelik için hizmet dağıtıyorsanız ve dağıtımı tamamlamak için yeterli izne erişiminiz olmalıdır. Rolleri verilen eylemler hakkında daha fazla bilgi için bkz: [Azure kaynakları için yerleşik roller](../role-based-access-control/built-in-roles.md).
 
-Kimlik, sunum ile aynı konumda bulunmalıdır.
+Kimliğin dağıtım ile aynı konumda bulunması gerekir.
 
 ## <a name="topology-template"></a>Topoloji şablonu
 
@@ -180,7 +177,7 @@ Dağıtım şablonu, hizmeti dağıtırken atılması gereken adımları açıkl
 
 * Yapıt kaynağı
 * Adım
-* Piyasaya çıkma
+* Kullanıma sunma
   * Adım grupları
     * Dağıtım işlemlerini
 
@@ -196,7 +193,7 @@ Dağıtım şablonu ve hizmeti dağıtmak için ihtiyacınız ikililer için yap
 
 ### <a name="steps"></a>Adımlar
 
-Önce veya sonra dağıtım işlemi gerçekleştirmek için bir adım tanımlayabilirsiniz. Şu anda yalnızca `wait` adım ve 'healthCheck' adım vardır.
+Önce veya sonra dağıtım işlemi gerçekleştirmek için bir adım tanımlayabilirsiniz. Şu anda yalnızca `wait` adımı ve ' healthCheck ' adımı kullanılabilir.
 
 Devam etmeden önce dağıtım bekleme adım duraklatır. Hizmetiniz bir sonraki hizmet birimi dağıtmadan önce beklendiği gibi çalıştığını doğrulamak sağlar. Aşağıdaki örnek, bir bekleme adımı genel biçimi gösterir.
 
@@ -217,7 +214,7 @@ Devam etmeden önce dağıtım bekleme adım duraklatır. Hizmetiniz bir sonraki
 
 Süresi özelliği kullanan [ISO 8601 standardına](https://en.wikipedia.org/wiki/ISO_8601#Durations). Yukarıdaki örnekte, bir dakikalık bekleme belirtir.
 
-Sistem durumu onay adımı hakkında daha fazla bilgi için bkz. [Azure Deployment Manager için sistem tümleştirme piyasaya tanıtmak](./deployment-manager-health-check.md) ve [Öğreticisi: Azure Dağıtım Yöneticisi'nde sistem durumu denetimi kullanın](./deployment-manager-tutorial-health-check.md).
+Sistem durumu denetimi adımı hakkında daha fazla bilgi için bkz. [Azure 'da sistem durumu tümleştirmesi dağıtımı dağıtım Yöneticisi](./deployment-manager-health-check.md) ve [öğretici: Azure dağıtım Yöneticisi 'da sistem durumu denetimi kullanma](./deployment-manager-tutorial-health-check.md).
 
 Daha fazla bilgi için [adımları şablon başvurusu](/azure/templates/Microsoft.DeploymentManager/steps).
 
@@ -340,4 +337,4 @@ Yeni klasör oluşturma ve bu kök dizininde amaçlıyoruz geçirerek tutulan da
 Bu makalede, Deployment Manager hakkında bilgi edindiniz. Deployment Manager ile dağıtma hakkında bilgi edinmek için sonraki makaleye geçin.
 
 > [!div class="nextstepaction"]
-> [Öğretici: Deployment Manager'ı Azure Resource Manager şablonlarıyla kullanma](./deployment-manager-tutorial.md)
+> [Öğretici: Azure Dağıtım Yöneticisi'ni kullanın Resource Manager şablonları ile](./deployment-manager-tutorial.md)

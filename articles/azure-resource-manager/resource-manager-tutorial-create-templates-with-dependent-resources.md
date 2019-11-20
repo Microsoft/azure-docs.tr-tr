@@ -1,32 +1,24 @@
 ---
-title: Bağımlı kaynaklarla Azure Resource Manager şablonları oluşturma | Microsoft Docs
+title: Bağımlı kaynaklarla şablon
 description: Birden fazla kaynakla bir Azure Resource Manager şablonu oluşturmayı ve Azure portalı kullanarak dağıtmayı öğrenin
-services: azure-resource-manager
-documentationcenter: ''
 author: mumian
-manager: dougeby
-editor: tysonn
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 03/04/2019
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 486a13db9cf18cb44a063d37dde4a657f6dc625c
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: 3e7d397b097691b79f4f74dfd5aa9079af3a84f9
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62103680"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149348"
 ---
 # <a name="tutorial-create-azure-resource-manager-templates-with-dependent-resources"></a>Öğretici: Bağımlı kaynaklarla Azure Resource Manager şablonları oluşturma
 
-Birden çok kaynak dağıtma ve dağıtım düzeni yapılandırmak için bir Azure Resource Manager şablonunun nasıl oluşturulacağını öğrenin. Şablonu oluşturduktan sonra Azure portaldan Cloud Shell kullanarak dağıtacaksınız.
+Birden çok kaynağı dağıtmak ve dağıtım sırasını yapılandırmak için Azure Resource Manager şablonu oluşturmayı öğrenin. Şablonu oluşturduktan sonra Azure portaldan Cloud Shell kullanarak dağıtacaksınız.
 
 Bu öğreticide bir depolama hesabı, bir sanal makine, bir sanal ağ ve ek birkaç bağımlı kaynak oluşturacaksınız. Kaynakların bazıları başka bir kaynak var olana kadar dağıtılamaz. Örneğin depolama hesabı ve ağ arabirimi oluşturulmadan sanal makineyi oluşturamazsınız. Bu ilişkiyi, kaynakların birini diğer kaynaklara bağımlı hale getirerek tanımlarsınız. Resource Manager, kaynaklar arasındaki bağımlılıkları değerlendirir ve bunları bağımlılık sırasına göre dağıtır. Resource Manager, birbirine bağımlı olmayan kaynakları paralel olarak dağıtır. Daha fazla bilgi için bkz. [Azure Resource Manager şablonlarındaki kaynakları dağıtma sırasını belirleme](./resource-group-define-dependencies.md).
 
-![Kaynak Yöneticisi şablonu bağımlı kaynaklar dağıtım sırasını diyagramı](./media/resource-manager-tutorial-create-templates-with-dependent-resources/resource-manager-template-dependent-resources-diagram.png)
+![Resource Manager şablonuna bağımlı kaynaklar dağıtım sırası diyagramı](./media/resource-manager-tutorial-create-templates-with-dependent-resources/resource-manager-template-dependent-resources-diagram.png)
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
@@ -47,7 +39,7 @@ Bu makaleyi tamamlamak için gerekenler:
     ```azurecli-interactive
     openssl rand -base64 32
     ```
-    Azure Key Vault şifreleme anahtarları ve diğer gizli dizileri korumak üzere tasarlanmıştır. Daha fazla bilgi için [Öğreticisi: Resource Manager şablon dağıtımı Azure anahtar kasası tümleştirme](./resource-manager-tutorial-use-key-vault.md). Ayrıca parolanızı üç ayda bir güncelleştirmenizi öneririz.
+    Azure Key Vault şifreleme anahtarları ve diğer gizli dizileri korumak üzere tasarlanmıştır. Daha fazla bilgi için bkz. [Öğretici: Azure Key Vault'u Resource Manager şablonu dağıtımıyla tümleştirme](./resource-manager-tutorial-use-key-vault.md). Ayrıca parolanızı üç ayda bir güncelleştirmenizi öneririz.
 
 ## <a name="open-a-quickstart-template"></a>Hızlı başlangıç şablonunu açma
 
@@ -125,7 +117,7 @@ Bağımlılıkların belirtilmesi, Resource Manager'ın çözümü verimli bir �
     ![Azure portal Cloud shell dosya karşıya yükleme](./media/resource-manager-tutorial-create-templates-with-dependent-resources/azure-portal-cloud-shell-upload-file.png)
 4. Öğreticide daha önce kaydettiğiniz şablonu seçin. Varsayılan ad **azuredeploy.json** olur.  Aynı dosya adına sahip bir dosyanız varsa bildirim gösterilmeden eski dosyanın üzerine yazılır.
 
-    İsteğe bağlı olarak kullanabileceğiniz **ls $HOME** komut ve **$HOME/azuredeploy.json Kedi** dosyaları areis başarıyla karşıya yüklendi doğrulamak için komutu. 
+    İsteğe bağlı olarak, dosyaların başarıyla karşıya yüklendiğini doğrulamak için **ls $Home** komutunu ve **Cat $Home/azuredeploy.JSON** komutunu kullanabilirsiniz. 
 
 5. Cloud Shell'de aşağıdaki PowerShell komutlarını çalıştırın. Güvenliği artırmak istiyorsanız sanal makine yönetici hesabı için oluşturulmuş bir parola kullanın. [Ön koşullara](#prerequisites) bakın.
 

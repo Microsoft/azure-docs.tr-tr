@@ -1,40 +1,35 @@
 ---
-title: Akıllı algılama - Azure Application ınsights izleme önem derecesi oranı düşüş | Microsoft Docs
-description: Azure Application Insights ile uygulama izlemeleri için izleme telemetrisi olağandışı desenleri izleyin.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: ea2a28ed-4cd9-4006-bd5a-d4c76f4ec20b
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Akıllı algılama-Azure Application Insights izleme önem derecesine göre düşme | Microsoft Docs
+description: İzleme telemetride olağandışı desenler için Azure Application Insights ile uygulama izlemelerini izleyin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 11/27/2017
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 10b909fd5239546047aa4696a1f6a68a703778c0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/27/2017
+ms.openlocfilehash: 83c1296beabaaae78289a653c6b30f6665f725c2
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60306403"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820535"
 ---
-# <a name="degradation-in-trace-severity-ratio-preview"></a>İzleme önem derecesi oranı (Önizleme) içinde performans düşüşü
+# <a name="degradation-in-trace-severity-ratio-preview"></a>İzleme önem oranına göre düşme (Önizleme)
 
-Bunlar perde arkasında neler hikayeyi anlatmalarına yardımcı olmak gibi izlemeleri uygulamalarında yaygın olarak kullanılır. İşler kötüye gittiğinde izlemeleri istenmeyen duruma önde gelen olayların sırası önemli görünürlük sağlar. İzlemeleri genel olarak yapılandırılmamış olsa da, concretely bunları – önem düzeylerini öğrenilmesi bir şey yoktur. Bir uygulamanın durağan biz "good" izlemeleri arasındaki oran beklediğiniz (*bilgisi* ve *ayrıntılı*) ve "bozuk" izlemeleri (*uyarı*, *hata*, ve *kritik*) tutarlı kalmasını. "Kötü" izlemeleri düzenli olarak belirli bir ölçüde birkaç nedenden dolayı ortaya çıkabilir varsayılır (örneğin geçici ağ sorunları). Ancak gerçek bir soruna büyüyen başladığında, bu genellikle bir artış "kötü" izlemeleri vs "good" izlemeleri göreli oranı olarak bildirimleri. Application Insights, akıllı algılama otomatik olarak uygulamanız tarafından günlüğe izlemeleri analiz eder ve olağan dışı önem derecesi, izleme telemetrisi yaklaşımlar hakkında uyarır.
+İzlemeler, arka planda neler olduğunu söyleyecektir. uygulamalarda yaygın olarak kullanılır. İşlemler yanlış gittiğinde, izleme işlemleri istenmeyen duruma kadar olan olayların dizisine önemli görünürlük sağlar. İzlemeler genellikle yapılandırılmamış olsa da, bunların önem derecesindeki bir şekilde öğrenilmesi gereken bir şey vardır. Bir uygulamanın kararlı durumunda, "iyi" izlemeler (*bilgi* ve *ayrıntı*) ve "kötü" izlemeler (*Uyarı*, *hata*ve *kritik*) arasındaki oranı kararlı kalacak şekilde bekletireceğiz. Bu varsayımla, "kötü" izlemelerinin herhangi bir sayıda nedenden dolayı (örneğin geçici ağ sorunları) belirli bir ölçüde düzenli olarak gerçekleşebileceği varsayılır. Ancak gerçek bir sorun büyümeye başladığında, genellikle "kötü" izlemelerinin ve "iyi" izlemelerinin göreli oranındaki artış olarak bildirim yapılır. Application Insights akıllı algılama, uygulamanız tarafından günlüğe kaydedilen izlemeleri otomatik olarak analiz eder ve izleme telemetrinizin önem derecesine göre sizi olağan dışı desenler hakkında uyarabilir.
 
-Bu özellik, uygulamanız için izleme günlüğü yapılandırma dışında hiçbir özel kurulum gerektirir (görmek için bir izleme günlüğü dinleyici yapılandırma [.NET](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net-trace-logs) veya [Java](https://docs.microsoft.com/azure/application-insights/app-insights-java-trace-logs)). Uygulamanızın yeterli özel durum telemetrisi oluşturduğunda etkin değil.
+Bu özellik, uygulamanız için izleme günlüğü yapılandırma dışında özel bir kurulum gerektirmez (bkz. [.net](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net-trace-logs) veya [Java](https://docs.microsoft.com/azure/application-insights/app-insights-java-trace-logs)için izleme günlüğü dinleyicisini yapılandırma). Uygulamanız yeterli sayıda özel durum telemetrisi oluşturduğunda etkin olur.
 
-## <a name="when-would-i-get-this-type-of-smart-detection-notification"></a>Bu tür bir akıllı algılama bildirim ne zaman elde edersiniz?
-Bu tür bir bildirim geri alabilirsiniz "good" izlemeleri arasındaki oran (bir düzeyde günlüğe izlemeleri *bilgisi* veya *ayrıntılı*) ve "bozuk" izlemeleri (bir düzeyde günlüğe izlemeleri *uyarı*, *Hata*, veya *önemli*) son yedi gün hesaplanan temel karşılaştırıldığında belirli bir gün içinde düşürmesini.
+## <a name="when-would-i-get-this-type-of-smart-detection-notification"></a>Bu tür akıllı algılama bildirimini ne zaman alabilirim?
+"İyi" izlemeler (bir *bilgi* düzeyiyle günlüğe kaydedilmiş *izlemeler) ve*"kötü" izlemeler (bir *Uyarı*düzeyi ile günlüğe kaydedilen izlemeler, *hata*veya *önemli*) ile birlikte düşürülmesi durumunda bu tür bir bildirim alabilirsiniz. önceki yedi gün içinde hesaplanan bir taban çizgisine kıyasla belirli bir gün.
 
-## <a name="does-my-app-definitely-have-a-problem"></a>Uygulamamı kesinlikle bir sorun var mı?
-Hayır, bir bildirim uygulamanızı kesinlikle bir sorun olduğu anlamına gelmez. "Good" ve "bozuk" izlemeleri arasındaki oran düşüş bir uygulama sorunu olduğunu belirtebilir olsa da, bu değişikliği oranı, zararsız olabilir. Örneğin, artış için mevcut akışları değerinden daha fazla "kötü" izlemeleri yayma uygulama yeni bir akışta olabilir).
+## <a name="does-my-app-definitely-have-a-problem"></a>Uygulamamın kesinlikle bir sorunu var mı?
+Hayır, bir bildirim uygulamanızın kesinlikle bir sorun olduğu anlamına gelmez. "İyi" ve "kötü" izlemeler arasındaki orandaki bir azalma bir uygulama sorunu belirtebilse de, bu oran değişikliği zararsız olabilir. Örneğin, artış, uygulamadaki yeni bir akışın var olan akışlardan daha fazla "kötü" izlemeler yaymasına neden olmuş olabilir.
 
-## <a name="how-do-i-fix-it"></a>Bunu nasıl düzeltirim?
-Bildirimler tanılama işleminde desteklemek için tanılama bilgileri içerir:
-1. **Değerlendirme.** Bildirim kaç operations etkilediğini gösterir. Bu sorun için bir öncelik atamanıza yardımcı olabilir.
-2. **Kapsam.** Sorun, tüm trafiği veya yalnızca bazı işlem etkileniyor? Bu bilgiler gelen bildirim elde edilebilir.
-3. **Tanılayın.** İlgili öğeleri kullanabilirsiniz ve daha fazla yardımcı olacak bilgiler için destek bağlama raporları sorunu tanılayın.
+## <a name="how-do-i-fix-it"></a>Nasıl yaparım? düzeltilsin mi?
+Bildirimler tanılama sürecinde desteklanacak tanılama bilgilerini içerir:
+1. **Değerlendirme.** Bildirim, kaç tane işlemin etkilendiğini gösterir. Bu, soruna bir öncelik atamanıza yardımcı olabilir.
+2. **Kapsam.** Sorun tüm trafiği etkiliyor mu, yoksa yalnızca bir işlem mi? Bu bilgiler bildirimden elde edilebilir.
+3. **Tanın.** Sorunu daha da tanılamanıza yardımcı olması için, destek bilgilerine bağlanan ilgili öğeleri ve raporları kullanabilirsiniz.
 
 

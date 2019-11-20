@@ -1,6 +1,6 @@
 ---
-title: Azure SizeSelector UI öğesi | Microsoft Docs
-description: Azure portalına yönelik Microsoft.Compute.SizeSelector UI öğesi açıklar.
+title: Azure SizeSelector Kullanıcı arabirimi öğesi | Microsoft Docs
+description: Azure portal için Microsoft. COMPUTE. SizeSelector Kullanıcı arabirimi öğesini açıklar. Bir sanal makinenin boyutunu seçmek için kullanın.
 services: managed-applications
 documentationcenter: na
 author: tfitzmac
@@ -13,27 +13,29 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/27/2018
 ms.author: tomfitz
-ms.openlocfilehash: e5be5635964ebeedc7be4d1d1f5403e4d281b55c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f3a8426856e1345306acff69946beb4860d5f905
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64722355"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74151526"
 ---
-# <a name="microsoftcomputesizeselector-ui-element"></a>Microsoft.Compute.SizeSelector kullanıcı Arabirimi öğesi
-Bir veya daha fazla sanal makine örnekleri için bir boyut seçmek için bir denetim.
+# <a name="microsoftcomputesizeselector-ui-element"></a>Microsoft. COMPUTE. SizeSelector Kullanıcı arabirimi öğesi
 
-## <a name="ui-sample"></a>Örnek kullanıcı Arabirimi
+Bir veya daha fazla sanal makine örneği için boyut seçmeye yönelik bir denetim.
 
-Kullanıcı Seçici öğe tanımında varsayılan değerlerle görür.
+## <a name="ui-sample"></a>UI örneği
 
-![Microsoft.Compute.SizeSelector](./media/managed-application-elements/microsoft.compute.sizeselector.png)
+Kullanıcı, öğe tanımından varsayılan değerlerle bir seçici görüyor.
 
-Kullanıcı denetimi seçtikten sonra Genişletilmiş görünümde kullanılabilir boyutlar görür.
+![Microsoft. COMPUTE. SizeSelector](./media/managed-application-elements/microsoft.compute.sizeselector.png)
 
-![Genişletilmiş Microsoft.Compute.SizeSelector](./media/managed-application-elements/microsoft.compute.sizeselector-expanded.png)
+Denetim seçildikten sonra Kullanıcı, kullanılabilir boyutların genişletilmiş bir görünümünü görür.
+
+![Microsoft. COMPUTE. SizeSelector genişletildi](./media/managed-application-elements/microsoft.compute.sizeselector-expanded.png)
 
 ## <a name="schema"></a>Şema
+
 ```json
 {
   "name": "element1",
@@ -65,21 +67,24 @@ Kullanıcı denetimi seçtikten sonra Genişletilmiş görünümde kullanılabil
 }
 ```
 
-## <a name="remarks"></a>Açıklamalar
-- `recommendedSizes` en az bir boyuta sahip olmalıdır. İlk önerilen boyut, varsayılan olarak kullanılır. Kullanılabilir boyutların listesi önerilen durumuna göre sıralanmamış. Önerilen durumuna göre sıralamak için bu sütun kullanıcı seçebilirsiniz.
-- Önerilen boyut Seçilen konumda kullanılabilir değilse, boyutu otomatik olarak atlanır. Bunun yerine, bir sonraki önerilen boyuta kullanılır.
-- `constraints.allowedSizes` ve `constraints.excludedSizes` hem de isteğe bağlıdır, ancak aynı anda kullanılamaz. Kullanılabilir boyutların listesi çağırarak belirlenebilir [listesinden bir abonelik için kullanılabilir sanal makine boyutlarını](/rest/api/compute/virtualmachines/virtualmachines-list-sizes-region). Belirtilen değil herhangi bir boyutta `constraints.allowedSizes` gizlidir, belirtilen değil tüm boyutlardaki `constraints.excludedSizes` gösterilir.
-- `osPlatform` belirtilmiş olmalı ve aşağıdakilerden biri olması **Windows** veya **Linux**. Sanal makinelerin donanım maliyetlerini belirlemek için kullanılır.
-- `imageReference` ancak üçüncü taraf görüntüleri için sağlanan birinci taraf görüntülerini atlanır. Sanal makinelerin yazılım maliyetleri belirlemek için kullanılır.
-- `count` öğesi için uygun çarpan ayarlamak için kullanılır. Statik bir değer gibi destekler **2**, veya dinamik bir değerin başka bir öğeden `[steps('step1').vmCount]`. Varsayılan değer **1**.
-- `numAvailabilityZonesRequired` 1, 2 veya 3 olabilir.
-- Varsayılan olarak, `hideDiskTypeFilter` olduğu **false**. Disk türü filtresi tüm disk türleri veya yalnızca SSD görmesine olanak sağlar.
-
 ## <a name="sample-output"></a>Örnek çıktı
+
 ```json
 "Standard_D1"
 ```
 
+## <a name="remarks"></a>Açıklamalar
+
+- `recommendedSizes` en az bir boyuta sahip olmalıdır. Önerilen ilk boyut varsayılan olarak kullanılır. Kullanılabilir boyutların listesi önerilen duruma göre sıralanmaz. Kullanıcı önerilen duruma göre sıralamak için bu sütunu seçebilir.
+- Seçilen konumda önerilen bir boyut yoksa, boyut otomatik olarak atlanır. Bunun yerine önerilen sonraki boyut kullanılır.
+- `constraints.allowedSizes` ve `constraints.excludedSizes` her ikisi de isteğe bağlıdır, ancak aynı anda kullanılamaz. Kullanılabilir boyutların listesi, [bir abonelik için kullanılabilir sanal makine boyutları](/rest/api/compute/virtualmachines/virtualmachines-list-sizes-region)çağırarak belirlenebilir. `constraints.allowedSizes` belirtilen herhangi bir boyut gizlidir ve `constraints.excludedSizes` belirtilen tüm boyut gösterilir.
+- `osPlatform` belirtilmelidir ve **Windows** ya da **Linux**olabilir. Bu, sanal makinelerin donanım maliyetlerini belirlemede kullanılır.
+- `imageReference`, birinci taraf görüntüleri için atlanır, ancak üçüncü taraf görüntüler için sağlanır. Bu, sanal makinelerin Yazılım maliyetlerini belirlemede kullanılır.
+- `count`, öğe için uygun çarpanı ayarlamak için kullanılır. **2**gibi bir statik değeri veya `[steps('step1').vmCount]`gibi başka bir öğeden dinamik bir değeri destekler. Varsayılan değer **1**' dir.
+- `numAvailabilityZonesRequired` 1, 2 veya 3 olabilir.
+- Varsayılan olarak, `hideDiskTypeFilter` **false 'tur**. Disk türü filtresi, kullanıcının tüm disk türlerini veya yalnızca SSD 'yi görmesini sağlar.
+
 ## <a name="next-steps"></a>Sonraki adımlar
-* UI tanımları oluşturma, bir giriş için bkz. [createuidefinition dosyasını kullanmaya başlama](create-uidefinition-overview.md).
-* Ortak Özellikler UI öğelerinin açıklaması için bkz. [CreateUiDefinition öğeleri](create-uidefinition-elements.md).
+
+* UI tanımları oluşturmaya giriş için bkz. [Createuıdefinition ile çalışmaya başlama](create-uidefinition-overview.md).
+* UI öğelerindeki ortak özelliklerin açıklaması için bkz. [Createuıdefinition Elements](create-uidefinition-elements.md).

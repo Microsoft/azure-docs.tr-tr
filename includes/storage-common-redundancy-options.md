@@ -5,19 +5,19 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: include
-ms.date: 03/26/2018
+ms.date: 06/28/2019
 ms.author: tamram
 ms.custom: include file
-ms.openlocfilehash: 60912adbecbfdb4e6bebd7ddfea59eafa09b985e
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 5df0fe23183b53f13d6c6545e248724324434cde
+ms.sourcegitcommit: df7942ba1f28903ff7bef640ecef894e95f7f335
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188594"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69029876"
 ---
 Bir depolama hesabına yönelik çoğaltma seçeneklerine şunlar dahildir:
 
-* [Yerel olarak yedekli depolama (LRS)](../articles/storage/common/storage-redundancy-lrs.md): Basit, düşük maliyetli bir çoğaltma stratejisi. Veriler tek bir depolama ölçeği birimi içinde çoğaltılır.
-* [Bölgesel olarak yedekli depolama (ZRS)](../articles/storage/common/storage-redundancy-zrs.md): Yüksek kullanılabilirlik ve dayanıklılık için çoğaltma. Veriler üç kullanılabilirlik alanında zaman uyumlu bir şekilde çoğaltılır. 
-* [Coğrafi olarak yedekli depolama (GRS)](../articles/storage/common/storage-redundancy-grs.md): Bölge genelinde kullanılamazlık karşı korumak için bölgeler arası çoğaltma.
-* [Okuma erişimli coğrafi olarak yedekli depolama (RA-GRS)](../articles/storage/common/storage-redundancy-grs.md#read-access-geo-redundant-storage): Bölgeler arası çoğaltma çoğaltma okuma erişimi.
+* [Yerel olarak yedekli depolama (LRS)](../articles/storage/common/storage-redundancy-lrs.md): Basit, düşük maliyetli bir çoğaltma stratejisi. Veriler, birincil bölge içinde eşzamanlı olarak üç kez çoğaltılır.
+* Bölgesel olarak [yedekli depolama (ZRS)](../articles/storage/common/storage-redundancy-zrs.md): Yüksek kullanılabilirlik gerektiren senaryolar için çoğaltma. Veriler, birincil bölgedeki üç Azure kullanılabilirlik bölgesi arasında zaman uyumlu olarak çoğaltılır.
+* [Coğrafi olarak yedekli depolama (GRS)](../articles/storage/common/storage-redundancy-grs.md): Bölgesel kesintilere karşı koruma için çapraz bölgesel çoğaltma. Veriler birincil bölgede zaman uyumlu olarak üç kez çoğaltılır ve ardından zaman uyumsuz olarak ikincil bölgeye çoğaltılır. İkincil bölgedeki verilere yönelik okuma erişimi için Okuma Erişimli Coğrafi olarak yedekli depolamayı (RA-GRS) etkinleştirin.
+* [Coğrafi bölge yedekli depolama (GZRS) (Önizleme)](../articles/storage/common/storage-redundancy-gzrs.md): Hem yüksek kullanılabilirlik hem de maksimum dayanıklılık gerektiren senaryolar için çoğaltma. Veriler, birincil bölgedeki üç Azure kullanılabilirlik alanı arasında zaman uyumlu olarak çoğaltılır ve ardından zaman uyumsuz olarak ikincil bölgeye çoğaltılır. İkincil bölgedeki verilere yönelik okuma erişimi için, Okuma Erişimli Coğrafi bölge yedekli depolamayı (RA-GZRS) etkinleştirin.

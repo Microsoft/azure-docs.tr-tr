@@ -1,6 +1,6 @@
 ---
-title: Maliyetlerinizi - Azure'ı düzenlemek için fatura bölümler oluşturma
-description: Fatura bölümleri ile maliyetlerinizi düzenlemek öğrenin.
+title: Maliyetlerinizi düzenlemek için faturanızda bölümler oluşturma - Azure
+description: Maliyetlerinizi fatura bölümleriyle düzenlemeyi öğrenin.
 author: amberbhargava
 manager: amberb
 editor: banders
@@ -8,52 +8,52 @@ tags: billing
 ms.service: billing
 ms.topic: conceptual
 ms.workload: na
-ms.date: 07/01/2019
+ms.date: 10/01/2019
 ms.author: banders
-ms.openlocfilehash: eadaf34dc5bdd93af532362e8f8542de3f17f414
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: 77dd8a5e54697a37a2039238ecdedb3e2a2fa326
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67490752"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72375471"
 ---
-# <a name="create-sections-on-your-invoice-to-organize-your-costs"></a>Maliyetlerinizi düzenlemek için fatura bölümler oluşturma
+# <a name="create-sections-on-your-invoice-to-organize-your-costs"></a>Maliyetlerinizi düzenlemek için faturanızda bölümler oluşturma
 
-Faturanızı maliyetlerinizi geliştirme ortamı, bir bölüme göre düzenlemek için bölümler oluşturun veya kuruluşunuzun ihtiyaçlarına göre. Daha sonra başkalarının bölümüne faturalandırılır Azure abonelikleri oluşturabilmesi için izin verin. Ardından tüm kullanım ücretleri ve abonelik satın alma işlemleri bölümüne faturalandırılır. Azure portalında faturanızla ilgili bölüm için Toplam ücret görüntüleyebilir veya bunları Azure maliyet analizi gözden geçirin. Daha fazla bilgi için [görüntüleme işlemleri fatura bölümleri](billing-mca-understand-your-bill.md#view-transactions-by-invoice-sections).
+Maliyetlerinizi bir bölüme, geliştirme ortamına göre veya kuruluşunuzun ihtiyaçlarına göre düzenlemek için faturanızda bölümler oluşturun. Daha sonra diğer kullanıcılara, bölüme faturalandırılan Azure abonelikleri oluşturma izni verin. Aboneliklere yönelik tüm kullanım ücretleri ve satın alma işlemleri daha sonra bölüme faturalandırılır. Azure portalında, faturanızdaki bölüm için toplam ücretleri görüntüleyebilir veya Azure maliyet analizinde bunları gözden geçirebilirsiniz. Daha fazla bilgi için bkz. [Fatura bölümlerine göre işlemleri görüntüleme](billing-mca-understand-your-bill.md#view-transactions-by-invoice-sections).
 
-Bu makale, bir faturalama hesabı için bir Microsoft Müşteri sözleşmesi için geçerlidir. [Microsoft Müşteri sözleşmesi erişimi olup olmadığını denetlemek](#check-access-to-a-microsoft-customer-agreement).
+Bu makale, Microsoft Müşteri Sözleşmesi’ne ilişkin ödeme hesabı için geçerlidir. [Microsoft Müşteri Sözleşmesi’ne erişiminiz olup olmadığını denetleyin](#check-access-to-a-microsoft-customer-agreement).
 
-## <a name="create-an-invoice-section-in-the-azure-portal"></a>Azure portalında bir fatura bölümü oluşturma
+## <a name="create-an-invoice-section-in-the-azure-portal"></a>Azure portalında fatura bölümü oluşturma
 
-Olmasına gerek fatura bölüm oluşturmak için bir **fatura Profil sahibi** veya **faturalandırma profili katkıda bulunanı**. Daha fazla bilgi için [yönetmek profili faturalama, fatura bölümleri](billing-understand-mca-roles.md#manage-invoice-sections-for-billing-profile).
+Fatura bölümü oluşturmak için **faturalama profili sahibi** veya **faturalama profili katkıda bulunanı** olmanız gerekir. Daha fazla bilgi için bkz. [faturalama profili için fatura bölümlerini yönetme](billing-understand-mca-roles.md#manage-invoice-sections-for-billing-profile).
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 
-2. Arama **maliyet Yönetimi + faturalandırma**.
+2. **Maliyet Yönetimi + Faturalama** araması yapın.
 
-   ![Azure portalı arama gösteren ekran görüntüsü](./media/billing-mca-section-invoice/billing-search-cost-management-billing.png)
+   ![Azure portalı aramasını gösteren ekran görüntüsü](./media/billing-mca-section-invoice/billing-search-cost-management-billing.png)
 
-3. Seçin **fatura bölümleri** sol bölmesinden. Erişiminizi bağlı olarak, bir faturalandırma profili ya da bir faturalama hesabı seçin ve ardından gerekebilir **fatura bölümleri**.
+3. Sol bölmeden **Fatura bölümleri**’ni seçin. Erişiminize bağlı olarak, bir faturalama profili hesabı veya faturalama profili seçmeniz ve sonra **Fatura bölümleri** seçmeniz gerekebilir.
 
-   ![Fatura bölüm listesi gösteren ekran görüntüsü](./media/billing-mca-section-invoice/mca-select-invoice-sections.png)
+   ![Fatura bölümü listesini gösteren ekran görüntüsü](./media/billing-mca-section-invoice/mca-select-invoice-sections.png)
 
 4. Sayfanın üst kısmında **Ekle**'yi seçin.
 
-5. Fatura bölümü için bir ad girin ve faturalandırma profili seçin. Her bir abonelik ve satın alma işlemleri bölümüne atadığınız kullanımını yansıtan fatura bu profilin faturasında bölümü görürsünüz. 
+5. Fatura bölümü için bir ad girin ve bir faturalama profili seçin. Bu faturalama profilinizin faturasında her bir aboneliğin kullanım bilgilerini ve bölüme atadığınız satın almaları yansıtan bölümü görürsünüz. 
 
-   ![Fatura bölüm oluşturma sayfasını gösteren ekran görüntüsü](./media/billing-mca-section-invoice/mca-create-invoice-section.png)
+   ![Fatura bölümü oluşturma sayfasını gösteren ekran görüntüsü](./media/billing-mca-section-invoice/mca-create-invoice-section.png)
 
 6. **Oluştur**’u seçin.
 
-## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri sözleşmesi için erişim denetimi
+## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri Sözleşmesi’ne erişimi denetleme
 [!INCLUDE [billing-check-mca](../../includes/billing-check-mca.md)]
 
-## <a name="need-help-contact-support"></a>Yardım mı gerekiyor? Desteğe başvurun
+## <a name="need-help-contact-support"></a>Yardıma mı ihtiyacınız var? Desteğe başvurun
 
-Yardıma ihtiyacınız varsa [desteğe](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için.
+Yardıma ihtiyacınız varsa sorununuzun hızla çözülmesini sağlamak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Microsoft Müşteri sözleşmesi için ek bir Azure aboneliği oluşturun](billing-mca-create-subscription.md)
-- [Diğer Azure aboneliği oluşturma izni verin](billing-mca-create-subscription.md#give-others-permission)
-- [Diğer faturalandırma hesaplarında kullanıcıların Azure abonelik faturalandırma sahipliğini al](billing-mca-request-billing-ownership.md)
+- [Microsoft Müşteri Sözleşmesi için ek Azure aboneliği oluşturma](billing-mca-create-subscription.md)
+- [Azure portalında faturalama rollerini yönetme](billing-understand-mca-roles.md#manage-billing-roles-in-the-azure-portal)
+- [Diğer ödeme hesaplarındaki kullanıcılardan Azure aboneliklerinin fatura sahipliğini alma](billing-mca-request-billing-ownership.md)

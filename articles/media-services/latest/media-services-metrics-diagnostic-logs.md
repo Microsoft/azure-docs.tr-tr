@@ -1,6 +1,6 @@
 ---
-title: Media Services ölçümleri ve tanılama günlüklerini Azure İzleyici ile izleme | Microsoft Docs
-description: Bu makalede, Media Services ölçümleri ve tanılama günlüklerini Azure İzleyici ile izleme hakkında genel bakış sağlar.
+title: Azure Izleyici aracılığıyla Azure Media Services ölçümleri ve tanılama günlüklerini izleme | Microsoft Docs
+description: Bu makalede, Azure Izleyici aracılığıyla Azure Media Services ölçümleri ve tanılama günlüklerinin nasıl izleneceği hakkında genel bir bakış sunulmaktadır.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -11,81 +11,106 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/05/2019
+ms.date: 07/08/2019
 ms.author: juliako
-ms.openlocfilehash: bbf43ecb07947fad8cc1ee064d2038e4a21d4444
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1c77cdf57978af81accc7802575d262b97d08fe2
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65964757"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71261067"
 ---
-# <a name="monitor-media-services-metrics-and-diagnostic-logs"></a>Media Services ölçümleri ve tanılama günlüklerini izleyin
+# <a name="monitor-media-services-metrics-and-diagnostic-logs"></a>Media Services ölçümleri ve tanılama günlüklerini izleme
 
-[Azure İzleyici](../../azure-monitor/overview.md) ölçümlerini izleme ve yardımcı olacak tanılama günlüklerini anlama, uygulamalarınızın performansını sağlar. Azure İzleyici tarafından toplanan tüm verileri ölçüm ve günlükleri olmak üzere iki temel türünden birini uyar. Media Services tanılama günlüklerini izleyin ve uyarılar ve bildirimler için toplanan bir ölçüm ve günlükleri oluşturun. Görselleştirme ve ölçüm verileri kullanarak Analiz [ölçüm Gezgini](../../azure-monitor/platform/metrics-getting-started.md). Günlükleri size gönderebilir [Azure depolama](https://azure.microsoft.com/services/storage/), kendisine akış [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/)ve bunları dışarı aktarma [Log Analytics](https://azure.microsoft.com/services/log-analytics/), veya 3. taraf hizmetleri kullanın.
+[Azure izleyici](../../azure-monitor/overview.md) , uygulamalarınızın nasıl çalıştığını anlamanıza yardımcı olan ölçümleri ve tanılama günlüklerini izlemenize olanak sağlar. Azure Izleyici tarafından toplanan tüm veriler, iki temel tür, ölçüm ve günlüklerden birine uyar. Media Services tanılama günlüklerini izleyebilir, toplanan ölçümler ve Günlükler için uyarılar ve bildirimler oluşturabilirsiniz. Ölçüm [Gezgini](../../azure-monitor/platform/metrics-getting-started.md)'ni kullanarak ölçüm verilerini görselleştirebilir ve çözümleyebilirsiniz. [Azure depolama](https://azure.microsoft.com/services/storage/)'ya Günlükler gönderebilir, bunları [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/)akışa alabilir ve [Log Analytics](https://azure.microsoft.com/services/log-analytics/)ya da üçüncü taraf hizmetleri kullanabilirsiniz.
 
-Ayrıntılı bir bakış için bkz: [Azure İzleyici ölçümleri](../../azure-monitor/platform/data-platform.md) ve [Azure İzleyici tanılama günlükleri](../../azure-monitor/platform/diagnostic-logs-overview.md).
+Ayrıntılı bir genel bakış için bkz. [Azure Izleyici ölçümleri](../../azure-monitor/platform/data-platform.md) ve [Azure izleyici tanılama günlükleri](../../azure-monitor/platform/resource-logs-overview.md).
 
-Bu konuda şu anda kullanılabilir anlatılmaktadır [Media Services ölçüm](#media-services-metrics) ve [Media Services tanılama günlükleri](#media-services-diagnostic-logs).
+Bu konu, desteklenen [Media Services ölçümlerini](#media-services-metrics) ve [Media Services tanılama günlüklerini](#media-services-diagnostic-logs)açıklamaktadır.
 
-## <a name="media-services-metrics"></a>Medya Hizmetleri ölçümleri
+## <a name="media-services-metrics"></a>Media Services ölçümleri
 
-Ölçümler, değeri değiştirir olup olmadığını düzenli aralıklarla toplanır. Bunlar sık örneklenebilir ve bir uyarı ile göreceli olarak basit bir mantıksal hızla harekete çünkü uyarmak için yararlıdır.
+Ölçümler, değeri değiştirir olup olmadığını düzenli aralıklarla toplanır. Bunlar sık örneklenebilir ve bir uyarı ile göreceli olarak basit bir mantıksal hızla harekete çünkü uyarmak için yararlıdır. Ölçüm uyarıları oluşturma hakkında daha fazla bilgi için bkz. [Azure izleyici kullanarak ölçüm uyarıları oluşturma, görüntüleme ve yönetme](../../azure-monitor/platform/alerts-metric.md).
 
-Şu anda aşağıdaki Media Services [akış uç noktalarını](https://docs.microsoft.com/rest/api/media/streamingendpoints) ölçümleri Azure tarafından yayılan:
+Media Services aşağıdaki kaynaklar için izleme ölçümlerini destekler:
 
-|Ölçüm|Display name|Açıklama|
+* Hesap
+* Akış Uç Noktası
+ 
+### <a name="account"></a>Hesap
+
+Aşağıdaki hesap ölçümlerini izleyebilirsiniz. 
+
+|Ölçüm adı|Display name|Açıklama|
 |---|---|---|
-|İstekler|İstekler|Akış uç noktası hizmet isteklerinin toplam sayısı etrafında ayrıntılarını verir.|
-|Çıkış|Çıkış|Toplam çıkış bayt sayısı. Örneğin, akış uç noktası tarafından akışa bayt.|
-|Başarı E2e|Başarı uçtan uca gecikme süresi| Başarılı isteklerin uçtan uca gecikme süresi hakkında bilgi sağlar.|
+|AssetCount|Varlık sayısı|Hesabınızdaki varlıklar.|
+|AssetQuota|Varlık kotası|Hesabınızdaki varlık kotası.|
+|AssetQuotaUsedPercentage|Kullanılan varlık kotası yüzdesi|Zaten kullanılan varlık kotasının yüzdesi.|
+|ContentKeyPolicyCount|İçerik anahtarı Ilke sayısı|Hesabınızdaki içerik anahtarı Ilkeleri.|
+|ContentKeyPolicyQuota|İçerik anahtarı Ilke kotası|Hesabınızdaki içerik anahtarı Ilkeleri kotası.|
+|ContentKeyPolicyQuotaUsedPercentage|İçerik anahtarı Ilke kotası kullanılan yüzde|Zaten kullanılan Içerik anahtarı Ilke kotasının yüzdesi.|
+|Streammingpolicycount|Akış Ilkesi sayısı|Hesabınızdaki akış Ilkeleri.|
+|StreamingPolicyQuota|Akış Ilkesi kotası|Hesabınızdaki akış Ilkeleri kotası.|
+|StreamingPolicyQuotaUsedPercentage|Akış Ilkesi kotası kullanılan yüzde|Zaten kullanılan akış Ilkesi kotasının yüzdesi.|
+ 
+[Hesap kotalarını ve kısıtlamalarını](limits-quotas-constraints.md)da gözden geçirmeniz gerekir.
 
-Örneğin, "Çıkış" ölçümleri CLI ile almak için aşağıdaki çalıştırırsınız `az monitor metrics` CLI komutunu:
+### <a name="streaming-endpoint"></a>Akış Uç Noktası
 
-```cli
-az monitor metrics list --resource \
-   "/subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Media/mediaservices/<Media Services account name>/streamingendpoints/<streaming endpoint name>" \
-   --metric "Egress"
-```
+Aşağıdaki Media Services [akış uç noktası](https://docs.microsoft.com/rest/api/media/streamingendpoints) ölçümleri desteklenir:
 
-Ölçüm uyarıları oluşturma hakkında daha fazla bilgi için bkz: [oluşturun, görüntüleyin ve Azure İzleyicisi'ni kullanarak ölçüm Uyarıları yönetme](../../azure-monitor/platform/alerts-metric.md).
+|Ölçüm adı|Display name|Açıklama|
+|---|---|---|
+|İstekler|İstekler|Akış uç noktası tarafından hizmet verilen toplam HTTP isteği sayısını sağlar.|
+|Çıkış|Çıkış|Çıkış baytlarının toplam sayısı. Örneğin, akış uç noktası tarafından akan baytlar.|
+|Başarı E2e|Başarılı uçtan uca gecikme süresi|Akış uç noktasının, yanıtın son baytı gönderilirken isteği aldığı zaman süresi.|
 
-## <a name="media-services-diagnostic-logs"></a>Media Services tanılama günlükleri
+### <a name="why-would-i-want-to-use-metrics"></a>Ölçümleri neden kullanmak istiyorum? 
 
-Şu anda aşağıdaki tanılama günlükleri elde edebilirsiniz:
+İzleme Media Services ölçümlerinin uygulamalarınızın nasıl çalıştığını anlamanıza yardımcı olabilecek örnekler aşağıda verilmiştir. Media Services ölçümleriyle giderilebililecek bazı sorular şunlardır:
 
-|Ad|Açıklama|
+* Sınırları aşdığımda emin olmak için standart akış uç noktası mi Nasıl yaparım??
+* Nasıl yaparım? en fazla Premium akış uç noktası ölçek birimi olup olmadığı hakkında bilgi sahibi misiniz? 
+* Akış uç noktalarımı ne zaman ölçeklendirebileceğinizi öğrenmek için bir uyarı ayarlayabilirim?
+* Nasıl yaparım?, hesapta yapılandırılan en fazla çıkış ne zaman ulaşılırsa emin olmak için bir uyarı ayarladı musunuz?
+* Başarısız olan isteklerin dökümünü nasıl görebilirim ve hataya neden olmuş olabilir?
+* Paketleyiciyi kaç tane HLS veya DASH isteğinin çekmekte olduğunu nasıl görebilirim?
+* Nasıl yaparım? başarısız isteklerin eşik değeri ne zaman isabet olduğunu bildirmek için bir uyarı ayarla. 
+
+### <a name="example"></a>Örnek
+
+Bkz. [Media Services ölçümlerini izleme](media-services-metrics-howto.md)
+
+## <a name="media-services-diagnostic-logs"></a>Tanılama günlüklerini Media Services
+
+Tanılama günlükleri, bir Azure kaynağının çalışması hakkında zengin, sık veriler sağlar. Daha fazla bilgi için bkz. [Azure kaynaklarınızdan günlük verilerini toplama ve kullanma](../../azure-monitor/platform/resource-logs-overview.md).
+
+Media Services aşağıdaki tanılama günlüklerini destekler:
+
+* Anahtar teslimi
+
+### <a name="key-delivery"></a>Anahtar teslimi
+
+|Name|Açıklama|
 |---|---|
-|Anahtar teslim hizmet isteği|Anahtar dağıtımı hizmetiyle Göster günlükleri bilgi isteyin. Daha fazla ayrıntı için [şemaları](media-services-diagnostic-logs-schema.md).|
+|Anahtar teslim hizmeti isteği|Anahtar teslim hizmeti istek bilgilerini gösteren Günlükler. Daha ayrıntılı bilgi için bkz. [şemalar](media-services-diagnostic-logs-schema.md).|
 
-Tanılama günlükleri bir depolama hesabında depolama etkinleştirmek için aşağıdaki çalıştıracağınız `az monitor diagnostic-settings` CLI komutunu: 
+### <a name="why-would-i-want-to-use-diagnostics-logs"></a>Tanılama günlüklerini neden kullanmak istiyorum? 
 
-```cli
-az monitor diagnostic-settings create --name <diagnostic name> \
-    --storage-account <name or ID of storage account> \
-    --resource <target resource object ID> \
-    --resource-group <storage account resource group> \
-    --logs '[
-    {
-        "category": <category name>,
-        "enabled": true,
-        "retentionPolicy": {
-            "days": <# days to retain>,
-            "enabled": true
-        }
-    }]'
-```
+Anahtar teslimi tanılama günlükleri ile inceleyebileceğiniz bazı şeyler şunlardır:
 
-Örneğin:
+* DRM türü tarafından sunulan lisansların sayısını görün
+* İlke tarafından teslim edilen lisansların sayısını görün 
+* Bkz. DRM veya ilke türüne göre hatalar
+* İstemcilerden gelen yetkisiz lisans isteği sayısına bakın
 
-```cli
-az monitor diagnostic-settings create --name amsv3diagnostic \
-    --storage-account storageaccountforamsv3  \
-    --resource "/subscriptions/00000000-0000-0000-0000-0000000000/resourceGroups/amsv3ResourceGroup/providers/Microsoft.Media/mediaservices/amsv3account" \
-    --resource-group "amsv3ResourceGroup" \
-    --logs '[{"category": "KeyDeliveryRequests",  "enabled": true, "retentionPolicy": {"days": 3, "enabled": true }}]'
-```
+### <a name="example"></a>Örnek
+
+Bkz. [Media Service tanılama günlüklerini izleme](media-services-diagnostic-logs-howto.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar 
 
-[Azure kaynaklarınızdan günlük verilerini toplamak ve nasıl](../../azure-monitor/platform/diagnostic-logs-overview.md).
+* [Azure kaynaklarınızdan günlük verilerini toplama ve kullanma](../../azure-monitor/platform/resource-logs-overview.md)
+* [Azure Izleyici kullanarak ölçüm uyarıları oluşturma, görüntüleme ve yönetme](../../azure-monitor/platform/alerts-metric.md)
+* [Media Services ölçümlerini izleme](media-services-metrics-howto.md)
+* [Medya hizmeti tanılama günlüklerini izleme](media-services-diagnostic-logs-howto.md)

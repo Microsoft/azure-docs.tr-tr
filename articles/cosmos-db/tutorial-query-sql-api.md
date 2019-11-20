@@ -1,21 +1,21 @@
 ---
-title: Azure Cosmos DB’de SQL ile sorgulama
-description: Azure Cosmos DB’de SQL ile sorgulamayı öğrenin
-author: rimman
-ms.author: rimman
+title: 'Öğretici: Azure Cosmos DB SQL ile sorgulama nasıl yapılır?'
+description: 'Öğretici: Azure Cosmos DB SQL ile sorgulamayı öğrenin'
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.custom: tutorial-develop, mvc
 ms.topic: tutorial
-ms.date: 05/21/2019
+ms.date: 11/05/2019
 ms.reviewer: sngun
-ms.openlocfilehash: 9c6bd2040cb90f7a837efdf11d33a6e6999bc944
-ms.sourcegitcommit: e9a46b4d22113655181a3e219d16397367e8492d
+ms.openlocfilehash: 295b4168d858238a94e737b1abc3a38e2419370f
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65965487"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73720730"
 ---
-# <a name="tutorial-query-azure-cosmos-db-by-using-the-sql-api"></a>Öğretici: SQL API'sini kullanarak Azure Cosmos DB'yi sorgulama
+# <a name="tutorial-query-azure-cosmos-db-by-using-the-sql-api"></a>Öğretici: SQL API’sini kullanarak Azure Cosmos DB’yi sorgulama
 
 Azure Cosmos DB [SQL API’si](documentdb-introduction.md), SQL kullanılarak belgelerin sorgulanmasını destekler. Bu makalede, örnek bir belge ve iki örnek SQL sorgusu ve sonuçları sağlanmaktadır.
 
@@ -58,14 +58,14 @@ Bu makaledeki SQL sorguları aşağıdaki örnek belgeyi kullanır.
 ```
 ## <a name="where-can-i-run-sql-queries"></a>SQL sorgularını nerede çalıştırabilirim?
 
-Mevcut örnek veri kümesinde sorgular çalıştıran [Sorgu oyun alanı](https://www.documentdb.com/sql/demo) ve [REST API’si ve SDK’ları](sql-api-sdk-dotnet.md) aracılığıyla, Azure portalındaki Veri Gezgini’ni kullanarak sorgular çalıştırabilirsiniz.
+Mevcut örnek veri kümesinde sorgular çalıştıran [Sorgu oyun alanı](sql-api-sdk-dotnet.md) ve [REST API’si ve SDK’ları](https://www.documentdb.com/sql/demo) aracılığıyla, Azure portalındaki Veri Gezgini’ni kullanarak sorgular çalıştırabilirsiniz.
 
 SQL sorguları hakkında daha fazla bilgi için bkz:
-* [SQL sorgusu ve SQL sözdizimi](how-to-sql-query.md)
+* [SQL sorgusu ve SQL sözdizimi](sql-query-getting-started.md)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Bu öğreticide, bir Azure Cosmos DB hesabınız ve koleksiyonunuz olduğu varsayılır. Bunlardan biri yok mu? [5 dakikalık hızlı başlangıcı](create-mongodb-nodejs.md) tamamlayın.
+Bu öğreticide, bir Azure Cosmos DB hesabınız ve koleksiyonunuz olduğu varsayılır. Bunlardan biri yok mu? [5 dakikalık hızlı başlangıcı](create-cosmosdb-resources-portal.md) tamamlayın.
 
 ## <a name="example-query-1"></a>Örnek sorgu 1
 
@@ -121,7 +121,7 @@ Sonraki sorgu, ailede kimlikleri `WakefieldFamily` ile eşleşen çocukların t�
 
 **Sonuçlar**
 
-[{"givenName": "Jesse" }, { "givenName": "Lisa"}]
+[ { "givenName": "Jesse" }, { "givenName": "Lisa" } ]
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

@@ -1,106 +1,113 @@
 ---
-title: Sistem durumu denetimi - Azure Container Registry için hata başvurusu
-description: Hata kodları ve Azure Container Registry'de az acr denetimi durumu tanılama komutu çalıştırarak bulunan sorunların olası çözümleri
+title: Sistem durumu denetimi için hata başvurusu-Azure Container Registry
+description: Azure Container Registry ' de az ACR Check-Health Diagnostic komutu çalıştırılarak bulunan sorunlara yönelik olası çözümler ve hata kodları
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: article
 ms.date: 07/02/2019
 ms.author: danlep
-ms.openlocfilehash: fc29b27cbb7eea983140c59529d981ad95c27ae8
-ms.sourcegitcommit: 978e1b8cac3da254f9d6309e0195c45b38c24eb5
+ms.openlocfilehash: 3bb81f33823fff5fb47f5bbbf6bb9b798b26d8af
+ms.sourcegitcommit: bc3a153d79b7e398581d3bcfadbb7403551aa536
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67555117"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68840363"
 ---
 # <a name="health-check-error-reference"></a>Sistem durumu denetimi hata başvurusu
 
-Tarafından döndürülen hata kodları hakkında ayrıntılar verilmiştir [az acr onay durumunu][az-acr-check-health] komutu. Her bir hata için olası çözümleri listelenmiştir.
+[Az ACR Check-Health][az-acr-check-health] komutu tarafından döndürülen hata kodlarıyla ilgili ayrıntılar aşağıda verilmiştir. Her hata için olası çözümler listelenir.
 
-## <a name="dockercommanderror"></a>DOCKER_COMMAND_ERROR
+## <a name="docker_command_error"></a>DOCKER_COMMAND_ERROR
 
-Bu hata, CLI için Docker istemcisinin bulunamadı anlamına gelir. Sonuç olarak, aşağıdaki ek denetimleri çalıştırılamaz: Docker sürüm Docker'ı değerlendirirken, arka plan programı durumu bulma ve çalıştıran bir Docker pull komutu.
+Bu hata, CLı için Docker istemcisinin bulunamadığı anlamına gelir. Sonuç olarak, aşağıdaki ek denetimler çalıştırılmaz: Docker sürümü bulunuyor, Docker Daemon durumunu değerlendiriyor ve Docker Pull komutu çalıştırılıyor.
 
-*Olası çözümleri*: Docker İstemcisi'ni yükleme; Docker yolu için sistem değişkenlerini ekleyin.
+*Olası çözümler*: Docker Client 'ı yükler; Sistem değişkenlerine Docker yolu ekleyin.
 
-## <a name="dockerdaemonerror"></a>DOCKER_DAEMON_ERROR
+## <a name="docker_daemon_error"></a>DOCKER_DAEMON_ERROR
 
-Bu hata, Docker cinini durumu kullanılamıyor veya bunu CLI kullanarak erişilemedi, anlamına gelir. Sonuç olarak, Docker işlemleri (gibi `docker login` ve `docker pull`) CLI aracılığıyla kullanılamaz.
+Bu hata, Docker Daemon durumunun kullanılamadığı veya CLı kullanılarak erişilemeyen anlamına gelir. Sonuç olarak, Docker işlemleri ( `docker login` ve `docker pull`gibi) CLI aracılığıyla kullanılamaz.
 
-*Olası çözümleri*: Docker Daemon programını yeniden başlatın veya düzgün şekilde yüklendiğini doğrulayın.
+*Olası çözümler*: Docker Daemon programını yeniden başlatın veya düzgün bir şekilde yüklendiğini doğrulayın.
 
-## <a name="dockerversionerror"></a>DOCKER_VERSION_ERROR
+## <a name="docker_version_error"></a>DOCKER_VERSION_ERROR
 
-Bu hata, CLI komutunu çalıştırmak mümkün olmadığını anlamına gelir `docker --version`.
+Bu hata, CLı 'nin komutu `docker --version`çalıştıramayacağı anlamına gelir.
 
-*Olası çözümleri*: Komut el ile çalıştırın, en yeni CLI sürümüne sahip ve hata iletisini inceleyin emin olun.
+*Olası çözümler*: Komutu el ile çalıştırmayı deneyin, en son CLı sürümüne sahip olduğunuzdan emin olun ve hata iletisini araştırın.
 
-## <a name="dockerpullerror"></a>DOCKER_PULL_ERROR
+## <a name="docker_pull_error"></a>DOCKER_PULL_ERROR
 
-Bu hata, CLI ortamınıza bir örnek görüntü çekme okuyamamış anlamına gelir.
+Bu hata, CLı 'nin ortamınıza örnek bir görüntü çekemediği anlamına gelir.
 
-*Olası çözümleri*: Görüntü çekmek gerekli tüm bileşenleri düzgün şekilde çalıştığını doğrulayın.
+*Olası çözümler*: Bir görüntüyü çekmek için gereken tüm bileşenlerin düzgün şekilde çalıştığını doğrulayın.
 
-## <a name="helmcommanderror"></a>HELM_COMMAND_ERROR
+## <a name="helm_command_error"></a>HELM_COMMAND_ERROR
 
-Bu hata, Helm istemci diğer Helm işlemler ışığının CLI tarafından bulunamadı anlamına gelir.
+Bu hata, diğer HELI işlemlerini daha fazla kullanan CLı tarafından, Helu istemcisinin bulunamadıkları anlamına gelir.
 
-*Olası çözümleri*: Helm istemci yüklendikten ve yolu için sistem ortam değişkenlerini eklendiğini doğrulayın.
+*Olası çözümler*: Hele istemcisinin yüklü olduğunu ve yolunun sistem ortam değişkenlerine eklendiğini doğrulayın.
 
-## <a name="helmversionerror"></a>HELM_VERSION_ERROR
+## <a name="helm_version_error"></a>HELM_VERSION_ERROR
 
-Bu hata, CLI'yı yüklü Helm sürümü belirlenemiyor anlamına gelir. Bu durum oluşabilir Azure CLI sürümünü (veya Helm sürümü) kullanılan kullanımdan kalkmıştır.
+Bu hata, CLı 'nin yüklü Held sürümünü belirleyemediği anlamına gelir. Bu durum, kullanılmakta olan Azure CLı sürümü (veya Held sürümü) kullanılmıyorsa oluşabilir.
 
-*Olası çözümleri*: En son Azure CLI sürümünü veya önerilen Helm sürüm için güncelleştirme; komutu el ile çalıştırın ve hata iletisini inceleyin.
+*Olası çözümler*: En son Azure CLı sürümüne veya önerilen Held sürümüne güncelleştirin; komutu el ile çalıştırın ve hata iletisini araştırın.
 
-## <a name="connectivitydnserror"></a>CONNECTIVITY_DNS_ERROR
+## <a name="connectivity_dns_error"></a>CONNECTIVITY_DNS_ERROR
 
-Bu hata, belirli kayıt defteri oturum açma sunucusu için DNS işten ancak, kullanılamadığı anlamına gelir yanıt vermedi anlamına gelir. Bu, bazı bağlantı sorunlarını gösterebilir. Alternatif olarak, kayıt mevcut, kullanıcı (kendi oturum açma sunucusu düzgün bir şekilde almak için) kayıt defteri izinlere sahip olmayabilir veya Azure CLI içinde kullanılan olandan farklı bir bulutta hedef kayıt defteridir.
+Bu hata, verilen kayıt defteri oturum açma sunucusu için DNS 'nin ping işlemi yaptığı ancak yanıt vermediği anlamına gelir; bu da kullanılamaz. Bu, bazı bağlantı sorunlarını gösterebilir. Alternatif olarak, kayıt defteri mevcut olmayabilir, Kullanıcı kayıt defteri üzerinde izinlere sahip olmayabilir (oturum açma sunucusunu düzgün bir şekilde almak için) veya hedef kayıt defteri, Azure CLı 'de kullanılandan farklı bir bulutta bulunuyor olabilir.
 
-*Olası çözümleri*: Bağlantıyı doğrulamak; kayıt defteri yazımını doğrulayın ve bu kayıt defteri var; Kullanıcı doğru izinleri olduğunu ve kayıt defterinin bulut Azure CLI içinde kullandığınız aynı olduğunu doğrulayın.
+*Olası çözümler*: Bağlantıyı doğrulama; kayıt defterinin var olduğunu ve kayıt defteri olduğunu doğrulayın; kullanıcının üzerinde doğru izinlere sahip olduğunu ve kayıt defterinin bulutu 'nın Azure CLı 'de kullanılan aynı olduğunu doğrulayın.
 
-## <a name="connectivityforbiddenerror"></a>CONNECTIVITY_FORBIDDEN_ERROR
+## <a name="connectivity_forbidden_error"></a>CONNECTIVITY_FORBIDDEN_ERROR
 
-Bu hata belirli bir kayıt sınaması uç nokta 403 Yasak HTTP durum koduyla yanıt anlamına gelir. Bu hata, bir sanal ağ yapılandırması nedeniyle büyük olasılıkla kayıt defterine kullanıcılar erişime sahip olmadığından anlamına gelir.
+Bu hata, verilen kayıt defteri için zorluk bitiş noktasının 403 yasaklanmış bir HTTP durumuyla yanıt verdiğini gösterir. Bu hata, büyük olasılıkla bir sanal ağ yapılandırması nedeniyle, kullanıcıların kayıt defterine erişemeyeceği anlamına gelir. Yapılandırılmış olan güvenlik duvarı kurallarını görmek için öğesini çalıştırın `az acr show --query networkRuleSet --name <registry>`.
 
-*Olası çözümleri*: Sanal ağ kuralları kaldırın veya geçerli istemci IP adresi izin verilenler listesine ekleyin.
+*Olası çözümler*: Sanal ağ kurallarını kaldırın veya geçerli istemci IP adresini izin verilen listeye ekleyin.
 
-## <a name="connectivitychallengeerror"></a>CONNECTIVITY_CHALLENGE_ERROR
+## <a name="connectivity_challenge_error"></a>CONNECTIVITY_CHALLENGE_ERROR
 
-Bu hata, hedef kayıt sınaması uç noktası bir sınama vermedi anlamına gelir.
+Bu hata, hedef kayıt defterinin sınama uç noktasının bir zorluk yayınlamadığı anlamına gelir.
 
-*Olası çözümleri*: Süre sonra yeniden deneyin. Hata devam ederse, bir sorun açın https://aka.ms/acr/issues.
+*Olası çözümler*: Bir süre sonra yeniden deneyin. Hata devam ederse, öğesinde https://aka.ms/acr/issues bir sorun açın.
 
-## <a name="connectivityaadloginerror"></a>CONNECTIVITY_AAD_LOGIN_ERROR
+## <a name="connectivity_aad_login_error"></a>CONNECTIVITY_AAD_LOGIN_ERROR
 
-Bu hata, hedef kayıt sınaması uç noktası bir sınama verildi, ancak kayıt defterine Azure Active Directory kimlik doğrulamasını desteklemez anlamına gelir.
+Bu hata, hedef kayıt defterinin sınama uç noktasının bir zorluk verdiği, ancak kayıt defterinin Azure Active Directory kimlik doğrulamasını desteklemediği anlamına gelir.
 
-*Olası çözümleri*: Örneğin, yönetici kimlik bilgilerinizle kimliğinizi doğrulamanız farklı bir şekilde deneyin. Kullanıcılar Azure Active Directory'yi kullanarak kimlik doğrulaması gerekiyorsa, bir sorun açın https://aka.ms/acr/issues.
+*Olası çözümler*: Örneğin, yönetici kimlik bilgileriyle kimlik doğrulaması yapmanın farklı bir yolunu deneyin. Kullanıcıların Azure Active Directory kullanarak kimlik doğrulaması yapması gerekiyorsa, ' de https://aka.ms/acr/issues bir sorun açın.
 
-## <a name="connectivityrefreshtokenerror"></a>CONNECTIVITY_REFRESH_TOKEN_ERROR
+## <a name="connectivity_refresh_token_error"></a>CONNECTIVITY_REFRESH_TOKEN_ERROR
 
-Bu hata, hedef kayıt defterine erişim reddedildi için kayıt defteri oturum açma sunucusu bir yenileme belirteci ile yanıtlamadı anlamına gelir. Bu hata, kullanıcı kayıt defterini doğru izinlere sahip değilse veya kullanıcı kimlik bilgileri Azure CLI için eski olduğunda ortaya çıkabilir.
+Bu hata, kayıt defteri oturum açma sunucusunun yenileme belirteciyle yanıt vermediği anlamına gelir; bu nedenle hedef kayıt defterine erişim reddedildi. Bu hata, kullanıcının kayıt defterinde doğru izinlere sahip olmaması veya Azure CLı için Kullanıcı kimlik bilgilerinin eski olması durumunda meydana gelebilir.
 
-*Olası çözümleri*: Kullanıcının kayıt defterine doğru izinlere sahip olup olmadığını doğrulayın; çalıştırma `az login` izinleri, belirteçleri ve kimlik bilgilerini yenilemek için.
+*Olası çözümler*: Kullanıcının kayıt defterinde doğru izinlere sahip olduğunu doğrulayın; izinleri `az login` , belirteçleri ve kimlik bilgilerini yenilemek için ' i çalıştırın.
 
-## <a name="connectivityaccesstokenerror"></a>CONNECTIVITY_ACCESS_TOKEN_ERROR
+## <a name="connectivity_access_token_error"></a>CONNECTIVITY_ACCESS_TOKEN_ERROR
 
-Hedef kayıt defterine erişim engellendi, böylece bu hata, kayıt defteri oturum açma sunucusu bir erişim belirteci ile yanıt vermedi anlamına gelir. Bu hata, kullanıcı kayıt defterini doğru izinlere sahip değilse veya kullanıcı kimlik bilgileri Azure CLI için eski olduğunda ortaya çıkabilir.
+Bu hata, kayıt defteri oturum açma sunucusunun bir erişim belirteciyle yanıt vermediği, hedef kayıt defterine erişimin reddedilmediği anlamına gelir. Bu hata, kullanıcının kayıt defterinde doğru izinlere sahip olmaması veya Azure CLı için Kullanıcı kimlik bilgilerinin eski olması durumunda meydana gelebilir.
 
-*Olası çözümleri*: Kullanıcının kayıt defterine doğru izinlere sahip olup olmadığını doğrulayın; çalıştırma `az login` izinleri, belirteçleri ve kimlik bilgilerini yenilemek için.
+*Olası çözümler*: Kullanıcının kayıt defterinde doğru izinlere sahip olduğunu doğrulayın; izinleri `az login` , belirteçleri ve kimlik bilgilerini yenilemek için ' i çalıştırın.
 
-## <a name="loginservererror"></a>LOGIN_SERVER_ERROR
+## <a name="connectivity_ssl_error"></a>CONNECTIVITY_SSL_ERROR
 
-Bu hata CLI verilen kayıt defterinin oturum açma sunucusu bulamadı geçerli bulut için varsayılan sonek bulundu anlamına gelir. Kayıt defterindeki Bulut ve geçerli Azure CLI bulut eşleşmiyorsa, kullanıcı doğru izinlere kayıt yoksa, kayıt defteri, mevcut değilse veya Azure CLI sürümü eski ise bu hata oluşabilir.
+Bu hata, istemcinin kapsayıcı kayıt defterine güvenli bir bağlantı kurmadığını gösterir. Bu hata genellikle bir ara sunucu çalıştırıyorsanız veya kullanıyorsanız oluşur.
 
-*Olası çözümleri*: Yazım denetimi doğru olduğunu ve kayıt defteri var olduğunu doğrulayın; doğrulayın, kullanıcı kayıt defterini doğru izinlere sahip ve kayıt defteri CLI ortam ve bulut eşleşen; Azure CLI, en son sürüme güncelleştirin.
+*Olası çözümler*: Proxy 'nin arkasında çalışan hakkında daha fazla bilgi [burada bulunabilir](https://github.com/Azure/azure-cli/blob/master/doc/use_cli_effectively.md#working-behind-a-proxy).
+
+## <a name="login_server_error"></a>LOGIN_SERVER_ERROR
+
+Bu hata, CLı 'nin verilen kayıt defteri 'nin oturum açma sunucusunu bulamadığı ve geçerli bulut için varsayılan sonekin bulunmadığı anlamına gelir. Kayıt defteri yoksa, kullanıcının kayıt defterinde doğru izinleri yoksa, kayıt defterinin bulutu ve geçerli Azure CLı bulutu eşleşmiyorsa veya Azure CLı sürümü artık kullanılmıyor ise bu hata oluşabilir.
+
+*Olası çözümler*: Yazımın doğru olduğundan ve kayıt defterinin var olduğundan emin olun; kullanıcının kayıt defterinde doğru izinlere sahip olduğunu ve kayıt defterinin ve CLı ortamının bulutlarının eşleştiğini doğrulayın; Azure CLı 'yı en son sürüme güncelleştirin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bir kayıt defteri durumunu denetlemek seçenekleri için bkz [Azure container registry durumunu denetleme](container-registry-check-health.md).
+Bir kayıt defterinin sistem durumunu denetleme seçenekleri için bkz. [Azure Container Registry 'nin sistem durumunu denetleme](container-registry-check-health.md).
 
-Bkz: [SSS](container-registry-faq.md) sık sorulan sorular ve Azure Container Registry hakkında bilinen diğer sorunlar için.
+Sık sorulan sorular ve Azure Container Registry ilgili diğer bilinen sorunlar için [SSS](container-registry-faq.md) bölümüne bakın.
 
 
 

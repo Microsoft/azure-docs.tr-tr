@@ -1,4 +1,4 @@
-- name: Container Instances
+- name: Container Instances belgeleri
   href: index.yml
 - name: Genel Bakış
   items:
@@ -29,6 +29,10 @@
           href: container-instances-multi-container-yaml.md
         - name: Kapsayıcı grubu dağıtma - Resource Manager
           href: container-instances-multi-container-group.md
+    - name: Azure Hizmetleri ile tümleştirme
+      items:
+        - name: Azure İşlevleri'yle tetikleme
+          href: container-instances-tutorial-azure-function-trigger.md
 - name: Örnekler
   items:
     - name: Kod örnekleri
@@ -61,7 +65,7 @@
           href: container-instances-restart-policy.md
         - name: Ortam değişkenlerini belirleme (env)
           href: container-instances-environment-variables.md
-        - name: Kapsayıcı giriş noktasını geçersiz kılma
+        - name: Kapsayıcı başlangıç komutunu ayarlama (entrypoint)
           href: container-instances-start-command.md
         - name: Komut yürütme (exec)
           href: container-instances-exec.md
@@ -87,6 +91,8 @@
       items:
         - name: Canlılık yoklaması yapılandırma
           href: container-instances-liveness-probe.md
+        - name: Hazır olma yoklamalarını yapılandırma
+          href: container-instances-readiness-probe.md
         - name: Kapsayıcıları durdurma ve başlatma
           href: container-instances-stop-start.md
         - name: Çalışan kapsayıcıları güncelleştirme
@@ -97,7 +103,7 @@
           href: container-instances-monitor.md
         - name: Kapsayıcı günlüklerini ve olaylarını alma
           href: container-instances-get-logs.md
-        - name: Azure Log Analytics ile günlüğe kaydetme
+        - name: Azure İzleyici günlükleriyle günlüğe kaydetme
           href: container-instances-log-analytics.md
     - name: Sorun giderme
       items:
@@ -121,6 +127,10 @@
       href: /javascript/api/overview/azure/containerinstances
     - name: Resource Manager şablonu
       href: /azure/templates/microsoft.containerinstance/containergroups
+    - name: YAML
+      href: container-instances-reference-yaml.md
+    - name: Bağlayıcı
+      href: /connectors/aci
 - name: Kaynaklar
   items:
     - name: Microsoft Learn ile becerilerinizi geliştirin
@@ -137,3 +147,5 @@
       href: 'https://stackoverflow.com/questions/tagged/azure-container-instances'
     - name: Videolar
       href: 'https://azure.microsoft.com/resources/videos/index/?services=container-instances&sort=newest'
+    - name: SSS
+      href: container-instances-faq.md

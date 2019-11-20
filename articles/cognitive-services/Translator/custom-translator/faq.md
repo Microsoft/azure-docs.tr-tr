@@ -1,54 +1,54 @@
 ---
-title: Sık sorulan sorular - özel Translator
+title: Sık sorulan sorular-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Özel Translator hakkında sık sorulan soruların yanıtlarını sağlar.
+description: Bu makale, Azure bilişsel hizmetler özel çevirmeni hakkında sık sorulan soruların yanıtlarını içerir.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: reference
-ms.openlocfilehash: 00921eeb9f966ed62d1a2d7605419432a9fa50f5
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 97d399f4a8ec704fd90eb6c49f0835be7e9e4537
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67443412"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73836606"
 ---
-# <a name="frequently-asked-questions"></a>Sık sorulan sorular
+# <a name="custom-translator-frequently-asked-questions"></a>Özel Translator hakkında sık sorulan sorular
 
-Bu makale, hakkında sık sorulan soruların yanıtlarını içerir. [özel Translator](https://portal.customtranslator.azure.ai).
+Bu makale, [özel çevirici](https://portal.customtranslator.azure.ai)hakkında sık sorulan soruların yanıtlarını içerir.
 
-## <a name="what-are-the-current-restrictions-in-custom-translator"></a>Geçerli özel Translator sınırlamaları nelerdir?
+## <a name="what-are-the-current-restrictions-in-custom-translator"></a>Özel Çevirmendeki geçerli kısıtlamalar nelerdir?
 
-Kısıtlamaları ve dosya boyutu, model eğitiminin ve model dağıtımı ile ilgili sınırları vardır. Oluşturan eğitim özel Translator bir model oluşturmak için ayarlarken, bu kısıtlamaları göz önünde bulundurun.
+Dosya boyutu, model eğitimi ve model dağıtımına göre sınırlamalar ve sınırlamalar vardır. Özel çevirmende bir model oluşturmak için öğreticinizi ayarlarken bu kısıtlamaları göz önünde bulundurun.
 
-- Gönderilen dosya boyutu 100 MB'den az olmalıdır.
-- Tek dilli Kinsoku'ya veri desteklenmiyor.
+- Gönderilen dosyalar boyutu 100 MB 'tan az olmalıdır.
+- Monolingual verileri desteklenmez.
 
-## <a name="when-should-i-request-deployment-for-a-translation-system-that-has-been-trained"></a>Dağıtım için eğitim vermiş bir çeviri sistemi istediğinizde?
+## <a name="when-should-i-request-deployment-for-a-translation-system-that-has-been-trained"></a>Eğitilen bir çeviri sistemi için ne zaman dağıtım isteymem gerekir?
 
-Bu, projeniz için en uygun çeviri sistemi oluşturmak için birkaç eğitimleri sürebilir. BLEU puanı ve / veya test sonuçlarını kabul edilebilir değilse, daha fazla eğitim verileri veya daha dikkatli bir şekilde filtrelenmiş verileri kullanarak denemek isteyebilirsiniz. Katı olmalıdır ve dikkatli tasarlama, kümenizi ayarlama ve testinizi, terminolojisi ve malzeme çevirmek istediğiniz stili tam temsili olarak ayarlanmalıdır. Eğitim verilerinizi oluşturma içinde daha serbest ve farklı seçeneklerle denemeler yapın. Sistem test sonuçlarında çevirilerinizi memnun olduğunuzda, bir sistem dağıtım talep eğitilen sisteminizi geliştirmek için eğitim eklemek için daha fazla veri içermeyen ve eğitilen model API'leri aracılığıyla erişmesini istediğiniz.
+Projeniz için en uygun çeviri sistemini oluşturmak birkaç önlem alabilir. BLEU puanı ve/veya test sonuçları tatmin edici değilse, daha fazla eğitim verisi veya daha dikkatli Filtrelenmiş veriler kullanmayı denemek isteyebilirsiniz. Ayarlama kümesini ve test kümesini tasarlarken, çevirmek istediğiniz terimleri ve malzeme stillerinin tam olarak temsili olacak şekilde katı ve dikkatli olmanız gerekir. Eğitim verilerinizi oluşturma konusunda daha fazla özgürlük olabilir ve farklı seçeneklerle denemeler yapabilirsiniz. Sistem dağıtımı iste sistem test sonuçlarınızda çevirileri karşıladığınızda, eğitilen sisteminizin geliştirilmesi için eğitime eklenecek daha fazla veri yok ve API 'Ler aracılığıyla eğitilen modele erişmek istiyorsunuz.
 
-## <a name="how-many-trained-systems-can-be-deployed-in-a-project"></a>Kaç eğitilen sistemleri bir proje içinde dağıtılabilir mi?
+## <a name="how-many-trained-systems-can-be-deployed-in-a-project"></a>Bir projede kaç eğitilen sistem dağıtılabilecek?
 
-Proje yalnızca bir eğitilen sistem dağıtılabilir. Projeniz için bir uygun çeviri sistemi oluşturmak için birkaç eğitimleri alabilir ve en iyi sonuç veren bir eğitim dağıtımını istemenizi öneririz. Eğitim kalitesini BLEU puana göre belirleyebilirsiniz (yüksek değer daha iyi) ve çevirilerin kalitesini dağıtımına uygun olduğuna karar vermeyle ilgili önce gözden geçirenlerle danışmanlık.
+Her proje için yalnızca bir eğitilen sistem dağıtılabilir. Projeniz için uygun bir çeviri sistemi oluşturmak için çeşitli olanaklar alabilir ve size en iyi sonucu veren bir eğitim dağıtımı istemeniz önerilir. Eğitimin puanına (daha yüksek) göre eğitim kalitesini ve çevirilerin kalitesinin dağıtıma uygun olduğuna karar vermeden önce gözden geçirenlere danışarak saptayabilirsiniz.
 
-## <a name="when-can-i-expect-my-trainings-to-be-deployed"></a>Dağıtılacak my eğitimleri ne beklemeliyim?
+## <a name="when-can-i-expect-my-trainings-to-be-deployed"></a>Gelişimin dağıtılmasını ne zaman bekleyebilir?
 
-Dağıtım, genellikle bir saatten az sürer.
+Dağıtım genellikle bir saatten daha az sürer.
 
-## <a name="how-do-you-access-a-deployed-system"></a>Dağıtılmış bir sistemde nasıl erişim sağlanır?
+## <a name="how-do-you-access-a-deployed-system"></a>Dağıtılan bir sisteme nasıl erişirsiniz?
 
-Dağıtılmış sistemler CategoryID belirterek Microsoft Translator Text API v3 sürümüne erişilebilir. Translator metin çevirisi API'si hakkında daha fazla bilgi bulunabilir [API Başvurusu](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference) Web sayfası.
+Dağıtılmış sistemlere CategoryID 'yi belirterek Microsoft Translator Metin Çevirisi API'si v3 aracılığıyla erişilebilir. Translator Metin Çevirisi API'si hakkında daha fazla bilgi [API başvuru](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference) Web sayfasında bulunabilir.
 
-## <a name="how-do-i-skip-alignment-and-sentence-breaking-if-my-data-is-already-sentence-aligned"></a>Nasıl miyim hizalama ve verilerimi hizalı cümle ise bozucu cümle atlamaz?
+## <a name="how-do-i-skip-alignment-and-sentence-breaking-if-my-data-is-already-sentence-aligned"></a>Verilerim zaten tümce hizalanmışsa hizalama ve tümce Nasıl yaparım? atlayın mi?
 
-Tümce hizalama ve cümle bozucu metin dosyalarını ve TMX dosyaları için özel Translator atlar `.align` uzantısı. `.align` dosyaları kullanıcılar bozucu özel Translator'ın cümle ve mükemmel bir şekilde hizalı olup ve başka hiçbir işleme gerek dosyalar için hizalama işlemi atlamak için bir seçenek sunuyoruz. Kullanmanızı öneririz `.align` mükemmel bir şekilde hizalı dosyalarının uzantısı.
+Özel çevirmen, TMX dosyaları için tümce hizalamasını ve tümce ve `.align` uzantılı metin dosyalarını atlar. `.align` dosyalar, kullanıcılara, kusursuz hizalanmış dosyalar için özel çevirmenin tümce ve hizalama sürecini atlama ve daha fazla işlem olmaması gereken bir seçenek sunar. Yalnızca kusursuz hizalanmış dosyalar için `.align` uzantısı kullanmanızı öneririz.
 
-Ayıklanan cümleler sayısı aynı temel ada sahip iki dosya eşleşmiyorsa, özel Translator hala cümle aligner çalıştıracağı `.align` dosyaları.
+Ayıklanan Tümcelerin sayısı aynı temel ada sahip iki dosya ile eşleşmezse, özel çevirici `.align` dosyalarında tümce Aligner ' i yine de çalıştıracaktır.
 
-## <a name="i-tried-uploading-my-tmx-but-it-says-document-processing-failed"></a>My TMX karşıya çalıştım, ancak "Belge işleme başarısız oldu" diyor.
+## <a name="i-tried-uploading-my-tmx-but-it-says-document-processing-failed"></a>TMX sayfamı karşıya yüklemeye çalıştım, ancak "belge işleme başarısız oldu" diyor.
 
-TMX TMX 1.4b uymasını sağlamak belirtimi, <https://www.gala-global.org/tmx-14b>.
+TMX 'in <https://www.gala-global.org/tmx-14b>' de TMX 1.4 b belirtimine uyduğundan emin olun.

@@ -1,23 +1,18 @@
 ---
-title: Redis için Azure Önbelleği Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs
+title: Redis için Azure Cache Belgeleri - Öğreticiler, API Başvurusu
 description: Uygulamaların verilere hızla erişmesini sağlayan güvenli bir veri arabelleği ve mesajlaşma aracısı olan Redis için Azure Önbelleği'ni nasıl kullanacağınızı öğrenin. Öğreticiler, API başvuruları ve daha fazlası.
-services: cache
 author: yegu-ms
-manager: jubbard
 layout: LandingPage
-ms.assetid: ''
 ms.service: cache
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: yegu
-ms.openlocfilehash: c5de77f3862f3ca315c586e1ec1cbfc7b5b453a1
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 02d28874d18debc73054ad47fe1604e21dd44d85
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60829948"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74122550"
 ---
 # <a name="azure-cache-for-redis-documentation"></a>Redis için Azure Önbelleği Belgeleri
 

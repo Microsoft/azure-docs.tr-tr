@@ -1,101 +1,102 @@
 ---
-title: Satıcı Insights SSS
-description: Hakkında sık sorulan sorular bulut iş ortağı portalı satıcı Insights özelliğidir.
+title: Satıcı öngörüleri SSS
+description: Bulut İş Ortağı Portalı 'nin satıcı öngörüleri özelliği hakkında sık sorulan sorular.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/14/2018
 ms.author: pabutler
-ms.openlocfilehash: 2719b6b47225576f2eadeb5e5b40b3aa7b39444d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b015d21005448d24d24923ba424a10a4af0d47b1
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943080"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821609"
 ---
-<a name="seller-insights-faq"></a>Satıcı Insights SSS
+<a name="seller-insights-faq"></a>Satıcı öngörüleri SSS
 ===================
 
-Bu makalede, yaygın kullanıcı yordamlar ve satıcı Insights hakkında sorular için yönergeler sağlar.
+Bu makalede, içindeki genel Kullanıcı yordamlarına yönelik yönergeler ve satıcı öngörüleri hakkında sorular sunulmaktadır.
 
 
-<a name="find-definitions-for-the-values-in-the-downloaded-transaction-file"></a>Değerler için tanımları indirilen işlem dosyasında Bul
+<a name="find-definitions-for-the-values-in-the-downloaded-transaction-file"></a>İndirilen işlem dosyasındaki değerler için tanımları bul
 ------------------------------------------------------------------
 
-İşlem dosyasına ölçüm değerleri tanımlarını makalesinde bulunan [satıcı Insights tanımları](./si-insights-definitions-v4.md).
+İşlem dosyasındaki ölçüm değerlerinin tanımları, [satıcı öngörüleri tanımlarında](./si-insights-definitions-v4.md)bulunur.
 
 
-<a name="see-customer-details-of-transactions-for-which-ive-been-paid"></a>İşlem için ödeme yapmıştım Müşteri ayrıntıları bakın
+<a name="see-customer-details-of-transactions-for-which-ive-been-paid"></a>Ücretli işlemlerin müşteri ayrıntılarına bakın
 -------------------------------------------------------------
 
-Ödeme modülünden işlemlerinizi indirdikten sonra etiketli sütununu bulun **ödeme durumu**ve yalnızca "Ücretli aşımı" değeri görüntülemek için filtre uygulayın Müşteri ayrıntıları içeren aşağıdaki sütunlar görüntülenir: **Şirket adı**, **müşteri e-posta**, **Müşteri Ülke**, **Müşteri durumu**, ve **müşterinin posta kodunu**.
+Ödeme modülünden işlemlerinizi indirdikten sonra, **ödeme durumu**etiketli sütunu bulun ve filtreyi yalnızca "ücretli" değeri görüntüleyecek şekilde uygulayın. Müşteri ayrıntılarını içeren aşağıdaki sütunlar görüntülenir: **Şirket adı**, **müşteri e-postası**, **Müşteri ülkesi**, **Müşteri durumu**ve **Müşteri posta kodu**.
 
 
-<a name="calculate-my-open-accounts-receivable"></a>My Aç hesapları Hesapla
+<a name="calculate-my-open-accounts-receivable"></a>Açık hesaplarımı hesapla
 -------------------------------------
 
-Ödeme modülünden işlemlerinizi indirdikten sonra etiketli sütununu bulun **ödeme durumu**ve yalnızca değeri "Gelecek ödeme" ve "İçin hazır değil ödeme." görüntülemek için filtre uygulayın Ardından etiketli sütunu Topla **ödeme tutarı (PC)** .
+Ödeme modülünden işlemlerinizi indirdikten sonra, **ödeme durumu**etiketli sütunu bulun ve filtreyi yalnızca "yaklaşan ödeme" ve "ödeme Için hazır değil" değerini görüntüleyecek şekilde uygulayın. Ardından, **ödeme tutarı (PC)** olarak etiketlenen sütunu toplayın.
 
 
-<a name="calculate-revenue-by-customer-usage-period"></a>Müşteri kullanım döneme göre gelir hesaplayın
+<a name="calculate-revenue-by-customer-usage-period"></a>Müşteri kullanım dönemine göre geliri hesapla
 ------------------------------------------
 
-Ödeme modülünden işlemlerinizi indirdikten sonra etiketli sütununu bulun **işlem durumu**ve filtre "Ücretli" değeri.   Listelenen her işlem için etiketli sütun **ödeme tutarı (PC)**  ödediğiniz tutar temsil eder.  Sütun işlemle ilişkili kullanım dönemi tahmin etmek için kullanmak **ödeme tarihi**, kullanım işlem geçerli olduğu dönemin son günü Kapat bir yaklaşığını olduğu.
+Ödeme modülünden işlemlerinizi indirdikten sonra, **Işlem durumu**etiketli sütunu bulun ve "ücretli" değeri filtreleyin.   Listelenen her işlem için, **ödeme tutarı (PC)** olarak etiketlenmiş olan sütun, ücretli miktarı temsil eder.  Hareketle ilişkili kullanım süresini tahmin etmek için, hareketin geçerli olduğu dönem için son kullanım gününün bir kapanış günü olan sütun **ücreti tarihini**kullanın.
 
 
-<a name="calculate-your-bad-debt"></a>Hatalı borç hesaplayın
+<a name="calculate-your-bad-debt"></a>Hatalı borcunu hesaplayın
 ---------------------
 
-Ödeme modülünden işlemlerinizi indirdikten sonra etiketli sütununu bulun **son koleksiyon durumu**ve yalnızca görüntüleme değeri "yazma devre dışı." filtresini uygulayın. Ardından etiketli sütunu Topla **ödeme tutarı (PC)** .
+Ödeme modülünden işlemlerinizi indirdikten sonra, **son toplama durumu**etiketli sütunu bulun ve filtreyi yalnızca "yazma kapalı" değerini görüntüleyecek şekilde uygulayın. Ardından, **ödeme tutarı (PC)** olarak etiketlenen sütunu toplayın.
 
 
-<a name="view-payout-or-customer-contact-information"></a>Ödeme veya müşteri irtibat bilgilerini görüntüleyin
+<a name="view-payout-or-customer-contact-information"></a>Ödeme veya müşteri iletişim bilgilerini görüntüleme
 -------------------------------------------
 
-"Sahip" rolü ve "katılımcı" rolü olan bir kullanıcı olarak oturum açın. Sahip rolü, ödeme ve müşteri bilgileri görürsünüz. Bu makalede kullanıcı rolleri hakkında daha fazla bilgi bulabilirsiniz [kullanıcıları yönetme](./cloud-partner-portal-manage-users.md).
+"Katkıda bulunan" rolüyle değil, "sahip" rolüne sahip bir kullanıcı olarak oturum açın. Ödeme ve müşteri bilgilerini yalnızca sahip rolü görebilir. Kullanıcı rolleri hakkında daha fazla bilgi için [kullanıcıları yönetme](./cloud-partner-portal-manage-users.md)makalesine ulaşabilirsiniz.
 
 
-<a name="calculate-my-advance-payouts"></a>My öncelikli ödeme hesaplayın
+<a name="calculate-my-advance-payouts"></a>Ön ödelerimi hesapla
 ----------------------------
 
-Ödeme modülünden işlemlerinizi indirdikten sonra etiketli sütununu bulun **işlem türü**ve yalnızca "Ücretsiz" değeri görüntülemek için filtre uygulayın Ardından, etiketli sütununu bulun **son koleksiyon durumu**ve yalnızca "Sürüyor" değeri görüntülemek için filtre uygulayın. Son olarak, sum **ödeme tutarı (PC)** tüm geliştirmeleri hesaplamak için sütun Ücretli için önce koleksiyonu müşteriden.
+Ödeme modülünden işlemlerinizi indirdikten sonra, **Işlem türü**etiketli sütunu bulun ve filtreyi yalnızca "ücret" değerini görüntüleyecek şekilde uygulayın. Ardından, **Son koleksiyon durumu**etiketli sütunu bulun ve filtreyi yalnızca "sürüyor" değerini görüntüleyecek şekilde uygulayın. Son olarak, müşterinin koleksiyonundan önce size ödenen tüm geliştirmeleri hesaplamak için **ödeme tutarı (PC)** sütununu toplayın.
 
 
-<a name="calculate-customer-refunds"></a>Müşteri para iadesi hesaplayın
+<a name="calculate-customer-refunds"></a>Müşteri para iadelerini hesapla
 --------------------------
 
-Ödeme modülünden işlemlerinizi indirdikten sonra etiketli sütununu bulun **son koleksiyon durumu**ve yalnızca "Para iadesi" değeri görüntülemek için filtre uygulayın Sum **ücret tutarı (PC)** tüm para iadesi hesaplamak için sütun müşterileriniz için işlenen.
+Ödeme modülünden işlemlerinizi indirdikten sonra, **son toplama durumu**etiketli sütunu bulun ve filtreyi yalnızca "iadesi" değerini görüntüleyecek şekilde uygulayın. Müşterileriniz için işlenen tüm para iadelerini hesaplamak için **ücret tutarı (PC)** sütununu toplayın.
 
 
-<a name="identify-which-transactions-involved-a-microsoft-channel-partner"></a>Bir Microsoft iş ortağı kanalı hangi işlemleri söz konusu tanımlama
+<a name="identify-which-transactions-involved-a-microsoft-channel-partner"></a>Hangi işlemlerin Microsoft kanal Iş ortağı ile ilgili olduğunu belirler
 ----------------------------------------------------------------
 
-Sütundaki tüm işlemleri **Azure lisans türü** içeren bir Microsoft iş ortağı kanalı "Bulut çözümü sağlayıcısı" ve "Kurumsal aracılığıyla satıcısı" değerleri görüntülemek için filtre. İş ortağı ile ilgili daha fazla ayrıntı için bulabilirsiniz, **satıcı adı** ve **satıcı e-posta** ödeme Modül yükleme ve müşteri modül indirme.
+"Satıcı aracılığıyla kurumsal" ve "bulut çözümü sağlayıcısı" değerlerini görüntüleyecek şekilde filtrelenmiş **Azure lisans türündeki** tüm işlemler, bir Microsoft kanal iş ortağı içerir. İş ortağı hakkında daha fazla bilgi için, **satıcı adı** ve **satıcı e-** postalarını, ödeme modülü indirme ve müşteri modülünün indirilmesi ' nde bulabilirsiniz.
 
 
-<a name="identify-trial-usage-and-trial-conversions"></a>Deneme kullanımı ve deneme dönüştürmeleri tanımlar
+<a name="identify-trial-usage-and-trial-conversions"></a>Deneme kullanımı ve deneme dönüşümlerini tanımla
 ------------------------------------------
 
-Sipariş, kullanım ve ödeme modülü yüklemeleri artık içeren **deneme bitiş tarihi** deneme süresi belirli Bu sipariş için uygunsa bittiğinde anlamanıza yardımcı olacak. Deneme kullanımı ve siparişler görmek için bulun **SKU türü faturalama** sütun indirmeler ve yalnızca "Deneme" değeri görüntülemek için filtre uygulayın Deneme dönüştürmeler görmek için bulun **deneme bitiş tarihi** sütun indirmeler ve uygulama yalnızca görüntülemek için filtre siparişleri **deneme bitiş tarihi** bugünün tarihi ve **İptal tarihi** sütun boş veya daha sonraki **deneme bitiş tarihi**.
+Sipariş, kullanım ve ödeme modülü İndirmeleri **artık deneme süresi** , bu belirli bir sıra için ne zaman sona erdiğini anlamanıza yardımcı olur. Deneme kullanımı ve siparişlerini görmek için, indirmelerde **SKU faturalandırma türü** sütununu bulun ve filtreyi yalnızca "deneme" değerini görüntülemek için uygulayın. Deneme dönüştürmelerini görmek için indirmelerin **deneme bitiş tarihi** sütununu bulun ve yalnızca **deneme bitiş tarihi sona erdiğinde** ve **Iptal tarihi** sütununun, **deneme bitiş tarihinden**sonra boş veya sonrasında olan siparişleri görüntülemek için filtreyi uygulayın.
 
 
-<a name="when-is-my-monthly-payout-calculated"></a>My aylık ödeme yaptığınızda hesaplanır
+<a name="when-is-my-monthly-payout-calculated"></a>Aylık ödeme ne zaman hesaplanır
 ------------------------------------
 
-Ödemeler, her ay 15 tarafından doğrulanmak için hazır olan tüm tutarlar için önceki ayın son takvim günü tarafından verilir. Ayın üçüncü günü Microsoft önceki ayın ödeme tutarı hesaplamak ve "Gelecek ödeme" ile indirme işleminiz tüm geçerli ücret işlemleri güncelleştirmek **ödeme durumu** sütun. Ödeme istek banka hesabı için aynı zamanda gönderilene kadar bu işlem bu durumda kalır, **ödeme durumu** "Ücretli çıkış" güncelleştirilir ve "Ödeme tarihi" tarihi size gönderilen gösterecek şekilde güncelleştirilir Ödeme bankanız isteğine.
+Ödemeler, önceki ayın son takvim günü için hazır olan tüm miktarlar için her ayın 15. gününde size verilir. Microsoft, ayın üçüncü gününde, önceki ayın ödeme tutarını hesaplar ve geri yükleme işleminizdeki tüm geçerli ücret hareketlerini, **ödeme durumu** sütununda "yaklaşan ödeme" ile güncelleştirir. Bu işlemler, ödeme isteği banka hesabınıza gönderilinceye kadar bu durumda kalır. bu süre, ödeme **durumu** "ücretli" olarak güncelleştirilir ve "ödeme tarihi" ödeme isteğini gönderdiğimiz tarihi gösterecek şekilde güncellenecektir. z.
 
 
-<a name="calculate-customer-acquisition-and-loss"></a>Müşteri edinme ve zarar hesaplayın
+<a name="calculate-customer-acquisition-and-loss"></a>Müşteri alımı ve kaybını hesapla
 ---------------------------------------
 
-Müşteri ilk satın tekliflerinizi birini bularak tarih gördüğünüz **tarih alınan** müşteri indirme sütunu. Benzer şekilde, daha sonra artık sahip oldukları herhangi bir teklifin sizin tarafınızdan bularak yayımlanan tarih gördüğünüz **tarih kayıp** müşteri indirme sütunu.
+Müşterinin teklifinizden birini ilk kez satın aldığı tarihi, müşteri indirideki **Tarih alındı** sütununu bularak görebilirsiniz. Benzer şekilde, müşterinin indirileceği **Tarih kayıp** sütununu bularak, sizin tarafınızdan yayımlanmış herhangi bir teklifi olmayan tarihi görebilirsiniz.
 
 
 <a name="finding-more-help"></a>Daha fazla yardım bulma
 -----------------
 
-- [Satıcı Insights tanımları](./si-insights-definitions-v4.md) -Ölçümler ve verileri için tanımları Bul
+- [Satıcı öngörüleri tanımları](./si-insights-definitions-v4.md) -ölçümler ve veriler için tanımları bulun
 
-- [Satıcı Insights'ı kullanmaya başlama](./si-getting-started.md) -satıcı öngörü özelliği giriş.
+- [Satıcı öngörüleri ile çalışmaya](./si-getting-started.md) başlama-satıcı öngörüleri özelliğine giriş.
 

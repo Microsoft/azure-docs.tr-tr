@@ -2,17 +2,16 @@
 documentType: LandingData
 title: Bing Varlık Arama Belgeleri
 metadata:
-  title: 'Bing Varlık Arama API''si Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları | Microsoft Docs'
+  title: 'Bing Varlık Arama API’si Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları'
+  titleSuffix: Azure Cognitive Services
   description: 'Kişiler, yerler veya tanımlanan diğer konularla ilgili bilgiler edinmek için Bing Varlık Arama API’si nasıl kullanılır? Öğreticilerde bu hizmeti kullanan uygulamaların nasıl derleneceği açıklanmaktadır.'
   services: cognitive-services
   author: aahill
   manager: nitinme
   ms.service: cognitive-services
   ms.subservice: bing-entity-search
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 02/01/2019
+  ms.date: 07/25/2019
   ms.author: aahi
 abstract:
   description: 'Bing Varlık Arama API''si uygulamalarınızın arama sorgularında algılanan varlıklar hakkında bilgi almasını sağlar. Bunlar kişiler, yerler ve medya başlıkları gibi varlıklar olabilir.'
@@ -92,7 +91,7 @@ sections:
           - title: API'ler
             html: '<p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference">Bing Varlık Arama API’si v7</a></p>'
           - title: SDK’lar
-            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingentitysearchapi?view=azure-dotnet">.NET</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/entitysearch?view=azure-java-stable">Java</a></p> <p><a href="https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/entitysearch?view=azure-python">Python</a></p> <p><a href="https://docs.microsoft.com/javascript/api/azure-cognitiveservices-entitysearch?view=azure-node-latest">Node.js</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/entitysearch">Go</a></p>'
+            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingentitysearchapi?view=azure-dotnet">.NET</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingentitysearchapi?view=azure-java-stable">Java</a></p> <p><a href="https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/entitysearch?view=azure-python">Python</a></p> <p><a href="https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-entitysearch/?view=azure-node-latest">Node.js</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/entitysearch">Go</a></p>'
           - title: PowerShell
             html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
           - title: CLI

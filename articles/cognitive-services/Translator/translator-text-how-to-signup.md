@@ -1,7 +1,7 @@
 ---
-title: Çalışmaya başlama - Translator metin çevirisi API'si
+title: Kullanmaya başlayın-Translator Metin Çevirisi API'si
 titleSuffix: Azure Cognitive Services
-description: Translator metin çevirisi API'si için kaydolarak bir abonelik anahtarı öğrenin.
+description: Bu makalede, Azure bilişsel hizmetler Translator Metin Çevirisi API'si kaydolma ve abonelik anahtarı alma işlemlerinin nasıl yapılacağı gösterilir.
 services: cognitive-services
 author: swmachan
 manager: nitinme
@@ -11,56 +11,56 @@ ms.topic: conceptual
 ms.date: 06/04/2019
 ms.author: swmachan
 ms.custom: seodec18
-ms.openlocfilehash: e51e6875681618b5f558d5c52ed5a2b14095b079
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: cfae5318213e8af164c8d0cc9ed378705a5644b0
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67434962"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73835701"
 ---
-# <a name="how-to-sign-up-for-the-translator-text-api"></a>Translator metin çevirisi API'si için kaydolma
+# <a name="how-to-sign-up-for-the-translator-text-api"></a>Translator Metin Çevirisi API'si kaydolma
 
 ## <a name="sign-in-to-the-azure-portal"></a>Azure portalında oturum açın
 
 - Hesabınız yok mu? Deneme yapmak için [ücretsiz hesap](https://azure.microsoft.com/free/) oluşturabilirsiniz.
 - Hesabınız var mı? [Oturum Aç](https://ms.portal.azure.com/)
 
-## <a name="create-a-subscription-to-the-translator-text-api"></a>Translator Text API aboneliği oluşturma
+## <a name="create-a-subscription-to-the-translator-text-api"></a>Translator Metin Çevirisi API'si abonelik oluşturma
 
-Portalda oturum açtıktan sonra Translator Text API aboneliği gibi oluşturabilirsiniz:
+Portalda oturum açtıktan sonra, aşağıdaki gibi Translator Metin Çevirisi API'si bir abonelik oluşturabilirsiniz:
 
 1. **+ Kaynak oluştur**’u seçin.
-1. İçinde **markette Ara** girin, arama kutusuna **Translator metin çevirisi** ve sonuçları seçin.
-1. Seçin **Oluştur** abonelik ayrıntılarını tanımlamak için.
-1. Gelen **fiyatlandırma katmanı** listesinde, gereksinimlerinize en uygun fiyatlandırma katmanını seçin.
-    1. Her aboneliğin bir ücretsiz katmanı vardır. Ücretsiz katman aynı özellikler ve İşlevler Ücretli planlardan olarak sahiptir ve süresi sona ermiyor.
+1. Market aramasını **Ara** kutusuna **Translator metin çevirisi** girin ve sonra sonuçlardan seçin.
+1. Abonelik ayrıntılarını tanımlamak için **Oluştur** ' u seçin.
+1. **Fiyatlandırma katmanı** listesinden gereksinimlerinize en uygun fiyatlandırma katmanını seçin.
+    1. Her abonelik ücretsiz bir katmana sahiptir. Ücretsiz katman, ücretli planlar ile aynı özelliklere ve işlevlere sahiptir ve süresi dolmaz.
     1. Hesabınız için yalnızca bir ücretsiz aboneliğiniz olabilir.
-1. Seçin **Oluştur** abonelik oluşturmayı tamamlayın.
+1. Abonelik oluşturmayı bitirmeden **Oluştur** ' u seçin.
 
 ## <a name="authentication-key"></a>Kimlik doğrulama anahtarı
 
-Translator metin çevirisi için kaydolduğunuzda, kişiselleştirilmiş erişim tuşu benzersiz aboneliğinize alın. Translator metin çevirisi API'si her çağrıda bu anahtar gereklidir.
+Translator Metin Çevirisi kaydolduğunuzda, aboneliğiniz için benzersiz olan kişiselleştirilmiş bir erişim anahtarı alırsınız. Bu anahtar, Translator Metin Çevirisi API'si her çağrıda gereklidir.
 
-1. Uygun aboneliği seçerek, kimlik doğrulama anahtarını alın.
-1. Seçin **anahtarları** içinde **kaynak yönetimi** aboneliğinizin ayrıntıları bölümü.
-1. Aboneliğiniz için listelenen anahtarları birini kopyalayın.
+1. Önce uygun aboneliği seçerek kimlik doğrulama anahtarınızı alın.
+1. Aboneliğinizin ayrıntılarının **kaynak yönetimi** bölümünde **anahtarlar** ' ı seçin.
+1. Aboneliğiniz için listelenen anahtarlardan birini kopyalayın.
 
-## <a name="learn-test-and-get-support"></a>Bilgi, test etme ve destek alın
+## <a name="learn-test-and-get-support"></a>Öğrenme, test etme ve destek alma
 
-- [Github'daki kod örnekleri](https://github.com/MicrosoftTranslator)
-- [Microsoft Translator Destek Forumu](https://www.aka.ms/TranslatorForum)
+- [GitHub 'daki kod örnekleri](https://github.com/MicrosoftTranslator)
+- [Microsoft Translator destek forumu](https://www.aka.ms/TranslatorForum)
 
-Microsoft Translator genel abonelik hesap durumu doğruladı önce geçmesi, ilk birkaç istek sağlar. İlk birkaç Microsoft Translator API isteklerinin ardından çağrıları başarısız istekler başarılı olursa hata yanıtı sorun gösterecektir. Lütfen API yanıtı nedeni görebilmeniz için oturum açın.
+Microsoft Translator, genellikle ilk birkaç isteğin, abonelik hesabı durumunu doğrulamadan önce geçmesini sağlar. İlk birkaç Microsoft Translator API isteği başarılı olursa, çağrılar başarısız olur, hata yanıtı sorunu gösterir. Nedenini görmek için lütfen API yanıtını günlüğe kaydedin.
 
 ## <a name="pricing-options"></a>Fiyatlandırma seçenekleri
 
-- [Translator metin çevirisi API'si](https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/)
+- [Translator Metin Çevirisi API'si](https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/)
 
 ## <a name="customization"></a>Özelleştirme
 
-Özel Translator çevirilerinizi özelleştirin ve terminoloji ve genel Microsoft Translator sinirsel makine çevirisi sistemlerden başlangıç stili ayarlanmış bir çeviri sistemi oluşturmak için kullanın. [Daha fazla bilgi](customization.md)
+Özel çeviriciyi kullanarak, çevirileri özelleştirin ve genel Microsoft Translator sinir makine çevirisi sistemlerinden başlayarak kendi terminolojisine ve stilinize ayarlanmış bir çeviri sistemi oluşturun. [Daha fazla bilgi](customization.md)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-- [(3 dakikalık video) Azure'u kullanmaya başlama](https://azure.microsoft.com/get-started/?b=16.24)
+- [Azure 'ı kullanmaya başlama (3 dakikalık video)](https://azure.microsoft.com/get-started/?b=16.24)
 - [Fatura ile ödeme yapma](https://azure.microsoft.com/pricing/invoicing/)

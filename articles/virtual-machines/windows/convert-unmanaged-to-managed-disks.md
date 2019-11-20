@@ -1,49 +1,40 @@
 ---
-title: Bir Windows sanal makine yönetilmeyen disklerden yönetilen disklere - Azure yönetilen diskleri dönüştürme | Microsoft Docs
-description: Yönetilmeyen diskler için bir Windows VM dönüştürmek Resource Manager dağıtım modelinde PowerShell kullanarak yönetilen diskleri
-services: virtual-machines-windows
-documentationcenter: ''
+title: Windows sanal makinesini yönetilmeyen disklerden yönetilen disklere dönüştürme-Azure yönetilen diskler
+description: Windows VM 'yi, Kaynak Yöneticisi dağıtım modelinde PowerShell kullanarak yönetilmeyen disklerden yönetilen disklere dönüştürme
 author: roygara
-manager: twooley
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.workload: infrastructure-services
-ms.tgt_pltfrm: vm-windows
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 07/12/2018
 ms.author: rogarana
-ms.openlocfilehash: 9cbee4f9f4f694510e852fe3790c8242ef346576
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 92f70cbfcf261c218ea43b159ed49126f7b2ecd5
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66416063"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74033908"
 ---
-# <a name="convert-a-windows-virtual-machine-from-unmanaged-disks-to-managed-disks"></a>Bir Windows sanal makine yönetilmeyen disklerden yönetilen disklere dönüştürme
+# <a name="convert-a-windows-virtual-machine-from-unmanaged-disks-to-managed-disks"></a>Windows sanal makinesini yönetilmeyen disklerden yönetilen disklere dönüştürme
 
-Mevcut Windows yönetilmeyen diskler kullanan sanal makineleri (VM'ler) varsa, VM'lerin üzerinden yönetilen diskleri kullanma dönüştürebilirsiniz [Azure yönetilen diskler](managed-disks-overview.md) hizmeti. Bu işlem, hem işletim sistemi diski hem de bağlı veri diskleri dönüştürür.
+Yönetilmeyen diskler kullanan mevcut Windows sanal makinelerinizi (VM) varsa, [Azure yönetilen diskler](managed-disks-overview.md) hizmeti aracılığıyla VM 'leri yönetilen diskleri kullanacak şekilde dönüştürebilirsiniz. Bu işlem hem işletim sistemi diskini hem de bağlı veri disklerini dönüştürür.
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
 
-* Gözden geçirme [yönetilen Diskler'e geçiş planı](on-prem-to-azure.md#plan-for-the-migration-to-managed-disks).
+* [Yönetilen disklere geçiş planını](on-prem-to-azure.md#plan-for-the-migration-to-managed-disks)gözden geçirin.
 
-* Gözden geçirme [yönetilen Diskler'e geçiş hakkında SSS](faq-for-disks.md#migrate-to-managed-disks).
+* [Yönetilen disklere geçiş hakkında SSS 'yi](faq-for-disks.md#migrate-to-managed-disks)gözden geçirin.
 
 [!INCLUDE [virtual-machines-common-convert-disks-considerations](../../../includes/virtual-machines-common-convert-disks-considerations.md)]
 
-* Özgün VHD’ler ve dönüştürme öncesinde VM tarafından kullanılan depolama hesabı silinmez. Ücretler uygulanmaya devam eder. Bunlar için ücret alınmasını önlemek istiyorsanız, dönüştürmenin tamamlandığını doğruladıktan sonra özgün VHD bloblarını silin. Makalemizi silmek için bu kullanıma açılmamış diskleri bulma gerekiyorsa bkz [bulup silmesine eklenmemiş Azure yönetilen ve yönetilmeyen disk](find-unattached-disks.md).
+* Özgün VHD’ler ve dönüştürme öncesinde VM tarafından kullanılan depolama hesabı silinmez. Ücretler uygulanmaya devam eder. Bunlar için ücret alınmasını önlemek istiyorsanız, dönüştürmenin tamamlandığını doğruladıktan sonra özgün VHD bloblarını silin. Bunları silmek için eklenmemiş olan diskleri bulmanız gerekiyorsa, [eklenmemiş Azure yönetilen ve yönetilmeyen disklerini bulma ve silme](find-unattached-disks.md)makalemize bakın.
 
 
-## <a name="convert-single-instance-vms"></a>Tek Örnekli VM'ler Dönüştür
-Bu bölümde, tek örnek Azure Vm'leri yönetilmeyen disklerden yönetilen disklere dönüştürme ele alınmaktadır. (Bir kullanılabilirlik kümesindeki sanal makineleriniz varsa sonraki bölüme bakın.) 
+## <a name="convert-single-instance-vms"></a>Tek örnekli VM 'Leri dönüştürme
+Bu bölümde, tek örnekli Azure VM 'lerinin yönetilmeyen disklerden yönetilen disklere nasıl dönüştürüleceği ele alınmaktadır. (Sanal makinelerleriniz bir kullanılabilirlik kümesinde ise, sonraki bölüme bakın.) 
 
-1. Kullanarak VM'yi serbest bırakın [Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) cmdlet'i. Aşağıdaki örnekte adlı VM serbest bırakılır `myVM` adlı kaynak grubunda `myResourceGroup`: 
+1. [Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) cmdlet 'ini kullanarak VM 'yi serbest bırakın. Aşağıdaki örnek, `myResourceGroup`adlı kaynak grubunda `myVM` adlı VM 'yi kaldırır: 
 
    ```azurepowershell-interactive
    $rgName = "myResourceGroup"
@@ -51,7 +42,7 @@ Bu bölümde, tek örnek Azure Vm'leri yönetilmeyen disklerden yönetilen diskl
    Stop-AzVM -ResourceGroupName $rgName -Name $vmName -Force
    ```
 
-2. Kullanarak VM'yi yönetilen disklere dönüştürme [ConvertTo-AzVMManagedDisk](https://docs.microsoft.com/powershell/module/az.compute/convertto-azvmmanageddisk) cmdlet'i. Aşağıdaki işlem, işletim sistemi diski ve varsa veri diskleri dahil olmak üzere önceki VM dönüştürür ve sanal makineyi başlatır:
+2. [ConvertTo-AzVMManagedDisk](https://docs.microsoft.com/powershell/module/az.compute/convertto-azvmmanageddisk) cmdlet 'INI kullanarak VM 'yi yönetilen disklere dönüştürün. Aşağıdaki işlem, işletim sistemi diski ve veri diskleri dahil olmak üzere önceki VM 'yi dönüştürür ve sanal makineyi başlatır:
 
    ```azurepowershell-interactive
    ConvertTo-AzVMManagedDisk -ResourceGroupName $rgName -VMName $vmName
@@ -59,11 +50,11 @@ Bu bölümde, tek örnek Azure Vm'leri yönetilmeyen disklerden yönetilen diskl
 
 
 
-## <a name="convert-vms-in-an-availability-set"></a>Vm'leri bir kullanılabilirlik kümesine dönüştürme
+## <a name="convert-vms-in-an-availability-set"></a>Kullanılabilirlik kümesindeki VM 'Leri dönüştürme
 
-Dönüştürmek istediğiniz Vm'leri yönetilen diskleri olan bir kullanılabilirlik kümesindeki, ilk kullanılabilirlik kümesini bir yönetilen kullanılabilirlik kümesine dönüştürmeniz gerekir.
+Yönetilen disklere dönüştürmek istediğiniz VM 'Ler bir kullanılabilirlik kümesinde ise, önce kullanılabilirlik kümesini yönetilen bir kullanılabilirlik kümesine dönüştürmeniz gerekir.
 
-1. Kullanılabilirlik kümesini kullanarak dönüştürme [güncelleştirme AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/update-azavailabilityset) cmdlet'i. Aşağıdaki örnekte adlı kullanılabilirlik kümesi güncelleştirmeleri `myAvailabilitySet` adlı kaynak grubunda `myResourceGroup`:
+1. [Update-AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/update-azavailabilityset) cmdlet 'ini kullanarak kullanılabilirlik kümesini dönüştürün. Aşağıdaki örnek, `myResourceGroup`adlı kaynak grubunda `myAvailabilitySet` adlı kullanılabilirlik kümesini güncelleştirir:
 
    ```azurepowershell-interactive
    $rgName = 'myResourceGroup'
@@ -73,14 +64,14 @@ Dönüştürmek istediğiniz Vm'leri yönetilen diskleri olan bir kullanılabili
    Update-AzAvailabilitySet -AvailabilitySet $avSet -Sku Aligned 
    ```
 
-   Burada, kullanılabilirlik kümesi bölge yer alıyorsa yalnızca 2 yönetilen hata etki alanları var ancak yönetilmeyen hata etki alanları sayısı 3, bu komut "3 belirtilen hata etki alanı sayısı 1-2 aralığında olmalıdır." benzer bir hata gösterir Hatayı gidermek için hata etki alanı 2 güncelleştirmesi güncelleştirin ve `Sku` için `Aligned` gibi:
+   Kullanılabilirlik kümesi 'nin bulunduğu bölge yalnızca 2 yönetilen hata etki alanına sahipse, ancak yönetilmeyen hata etki alanlarının sayısı 3 ise, bu komut "belirtilen hata etki alanı sayısı 3 ' e kadar 2 ' ye denk gelmelidir" hatasıyla benzer bir hata gösterir. Hatayı gidermek için, hata etki alanını 2 ' ye güncelleştirin ve `Sku` `Aligned` aşağıdaki şekilde güncelleştirin:
 
    ```azurepowershell-interactive
    $avSet.PlatformFaultDomainCount = 2
    Update-AzAvailabilitySet -AvailabilitySet $avSet -Sku Aligned
    ```
 
-2. Serbest bırakın ve kullanılabilirlik kümesindeki Vm'leri dönüştürün. Aşağıdaki betiği kullanarak, her VM serbest bırakılır [Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) cmdlet'ini dönüştürür, kullanarak [ConvertTo-AzVMManagedDisk](https://docs.microsoft.com/powershell/module/az.compute/convertto-azvmmanageddisk)ve otomatik olarak uzaklıkta dönüştürme işleminin yeniden başlatır:
+2. Kullanılabilirlik kümesindeki VM 'Leri serbest bırakın ve dönüştürün. Aşağıdaki betik, [stop-azvm](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) cmdlet 'ini kullanarak her VM 'yi ayırır, [ConvertTo-AzVMManagedDisk](https://docs.microsoft.com/powershell/module/az.compute/convertto-azvmmanageddisk)kullanarak dönüştürür ve dönüştürme işleminin ayrı olarak otomatik olarak yeniden başlatır:
 
    ```azurepowershell-interactive
    $avSet = Get-AzAvailabilitySet -ResourceGroupName $rgName -Name $avSetName
@@ -96,24 +87,24 @@ Dönüştürmek istediğiniz Vm'leri yönetilen diskleri olan bir kullanılabili
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-Dönüştürme sırasında bir hata varsa veya bir VM, önceki bir dönüştürme sorunları nedeniyle başarısız bir durumda ise, çalıştırın `ConvertTo-AzVMManagedDisk` cmdlet'ini yeniden. Basit bir yeniden deneme durum genellikle engellemesini kaldırır.
-Dönüştürmeden önce dönüştürme 409 hata kodu ile başarısız olur ya da tüm VM Uzantıları 'sağlama başarılı' durumda olduğundan emin olun.
+Dönüştürme sırasında bir hata oluşursa veya bir VM önceki bir dönüşümdeki sorunlar nedeniyle başarısız durumdaysa, `ConvertTo-AzVMManagedDisk` cmdlet 'ini yeniden çalıştırın. Basit bir yeniden deneme genellikle durumun engellemesini kaldırır.
+Dönüştürmeden önce, tüm VM uzantılarının ' sağlama başarılı ' durumunda olduğundan emin olun veya dönüştürme 409 hata koduyla başarısız olur.
 
-## <a name="convert-using-the-azure-portal"></a>Azure portalını kullanarak dönüştürme
+## <a name="convert-using-the-azure-portal"></a>Azure portal kullanarak Dönüştür
 
-Yönetilmeyen diskler için yönetilen diskler Azure portalını kullanarak da dönüştürebilirsiniz.
+Azure portal kullanarak, yönetilmeyen diskleri yönetilen disklere de dönüştürebilirsiniz.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Portalda sanal makinelerinin listeden VM'yi seçin.
-3. VM dikey penceresinde, seçin **diskleri** menüsünde.
-4. Üst kısmındaki **diskleri** dikey penceresinde **yönetilen disklere geçirme**.
-5. Bir kullanılabilirlik kümesindeki sanal makinenizin ise olacaktır uyarı üzerinde **yönetilen disklere geçirme** dikey kullanılabilirlik kümesini önce dönüştürmeniz gerekir. Uyarı kullanılabilirlik kümesini dönüştürmek için tıklayabileceği bir bağlantı olması gerekir. Kullanılabilirlik kümesi dönüştürüldükten sonra veya sanal makinenize bir kullanılabilirlik kümesine değilse tıklayın **geçirme** , diskleri yönetilen disklere geçirme işlemini başlatmak için.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Portaldaki VM 'Ler listesinden VM 'yi seçin.
+3. VM 'nin dikey penceresinde, menüden **diskler** ' i seçin.
+4. **Diskler** dikey penceresinin üst kısmında, **yönetilen disklere geçir**' i seçin.
+5. VM 'niz bir kullanılabilirlik kümesi içinde ise, önce kullanılabilirlik kümesini dönüştürmeniz gereken **yönetilen disklere geçiş** dikey penceresinde bir uyarı olacaktır. Uyarı, kullanılabilirlik kümesini dönüştürmek için tıklabileceğiniz bir bağlantıya sahip olmalıdır. Kullanılabilirlik kümesi dönüştürüldükten veya VM 'niz bir kullanılabilirlik kümesinde değilse, disklerinizi yönetilen disklere geçirme işlemini başlatmak için **Taşı** ' ya tıklayın.
 
-Sanal makine durdurulacak ve geçiş tamamlandıktan sonra yeniden başlatılacak.
+Geçiş tamamlandıktan sonra VM durdurulur ve yeniden başlatılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Standart yönetilen diskler için premium Dönüştür](convert-disk-storage.md)
+[Standart yönetilen diskleri Premium 'a Dönüştür](convert-disk-storage.md)
 
-Kullanarak bir VM salt okunur bir kopyasını alın [anlık görüntüleri](snapshot-copy-managed-disk.md).
+[Anlık görüntüler](snapshot-copy-managed-disk.md)kullanarak VM 'nin salt okunurdur bir kopyasını alın.
 

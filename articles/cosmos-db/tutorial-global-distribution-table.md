@@ -1,5 +1,5 @@
 ---
-title: Tablo API'si için Azure Cosmos DB genel dağıtım Öğreticisi
+title: Tablo API'si için Azure Cosmos DB küresel dağıtım öğreticisi
 description: Tablo API’sini kullanarak Azure Cosmos DB genel dağıtımını ayarlamayı öğrenin.
 author: wmengmsft
 ms.author: wmeng
@@ -8,12 +8,12 @@ ms.subservice: cosmosdb-table
 ms.topic: tutorial
 ms.date: 12/13/2018
 ms.reviewer: sngun
-ms.openlocfilehash: 372f2ffc6b64cefb93f8dfa17e1ba752fd81b538
-ms.sourcegitcommit: cababb51721f6ab6b61dda6d18345514f074fb2e
+ms.openlocfilehash: 8562d37d81ce02e150e6ad1cc2a440cf7bb1e5e3
+ms.sourcegitcommit: 800f961318021ce920ecd423ff427e69cbe43a54
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66477853"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68693350"
 ---
 # <a name="set-up-azure-cosmos-db-global-distribution-using-the-table-api"></a>Tablo API’sini kullanarak Azure Cosmos DB genel dağıtımını ayarlama
 
@@ -28,7 +28,7 @@ Bu makale aşağıdaki görevleri kapsar:
 
 ## <a name="connecting-to-a-preferred-region-using-the-table-api"></a>Tablo API’sini kullanarak tercih edilen bir bölgeye bağlanma
 
-[Genel dağıtımdan](distribute-data-globally.md) yararlanmak için istemci uygulamaları, belge işlemlerini gerçekleştirmek için kullanılacak bölgelerin tercihe göre sıralanmış listesini belirtebilir. [TableConnectionPolicy.PreferredLocations](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmosdb.table.tableconnectionpolicy.preferredlocations?view=azure-dotnet#Microsoft_Azure_CosmosDB_Table_TableConnectionPolicy_PreferredLocations) özelliği ayarlanarak bu yapılabilir. Azure Cosmos DB Tablo API’si SDK’sı, hesap yapılandırmasına, geçerli bölgesel kullanılabilirliğe ve sağlanan tercih listesine göre iletişim kurmak için en iyi uç noktayı seçer.
+[Genel dağıtımdan](distribute-data-globally.md) yararlanmak için istemci uygulamaları, belge işlemlerini gerçekleştirmek için kullanılacak bölgelerin tercihe göre sıralanmış listesini belirtebilir. [TableConnectionPolicy.PreferredLocations](/dotnet/api/microsoft.azure.documents.client.connectionpolicy.preferredlocations?view=azure-dotnet) özelliği ayarlanarak bu yapılabilir. Azure Cosmos DB Tablo API’si SDK’sı, hesap yapılandırmasına, geçerli bölgesel kullanılabilirliğe ve sağlanan tercih listesine göre iletişim kurmak için en iyi uç noktayı seçer.
 
 PreferredLocations, okuma için tercih edilen (çok girişli) konumların virgülle ayrılmış listesini içermelidir. Her istemci düşük gecikme okumaları için tercih edilen sırayla bu bölgelerin bir alt kümesini belirtebilir. Bölgeler [görünen adları](https://msdn.microsoft.com/library/azure/gg441293.aspx) kullanılarak adlandırılmalıdır, örneğin `West US`.
 

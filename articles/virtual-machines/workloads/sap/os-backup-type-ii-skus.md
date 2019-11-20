@@ -1,89 +1,92 @@
 ---
-title: İşletim sistemi yedekleme ve geri yükleme (büyük örnekler) Azure üzerinde SAP hana yazın II SKU'lara | Microsoft Docs
-description: Type II SKU'lara (büyük örnekler) Azure üzerinde SAP HANA için Operatign sistem yedekleme ve geri yükleme gerçekleştirme
+title: Azure 'da SAP HANA işletim sistemi yedeklemesi ve geri yüklemesi (büyük örnekler) tür II SKU 'Ları | Microsoft Docs
+description: Azure 'da SAP HANA için Işletim sistemi yedeklemesi ve geri yükleme gerçekleştirin (büyük örnekler) tür II SKU 'Ları
 services: virtual-machines-linux
 documentationcenter: ''
 author: saghorpa
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 06/27/2018
-ms.author: saghorpa
+ms.date: 07/12/2019
+ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: c82c5c74fe13bad99528486be69089df5f477457
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 046daed4f548d24010c3d3bef177cee8cf24a55e
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60708604"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098731"
 ---
-# <a name="os-backup-and-restore-for-type-ii-skus"></a>İşletim sistemi yedekleme ve geri yükleme Type II SKU'lara yönelik
+# <a name="os-backup-and-restore-for-type-ii-skus-of-revision-3-stamps"></a>Düzeltme 3 damgalarının tür II SKU 'Ları için işletim sistemi yedekleme ve geri yükleme
 
-Bu belgede bir işletim sistemi dosya düzeyi yedekleme gerçekleştirir ve geri yüklemek için adımları açıklanmaktadır **Type II SKU'lara** HANA büyük örnekleri. 
+Bu belgede, bir işletim sistemi dosya düzeyinde yedekleme gerçekleştirme ve düzeltme 3 ' ün HANA büyük örneklerinin **tür II SKU 'ları** için geri yükleme adımları açıklanır. 
+
+>[!Important]
+> **Bu makale, düzeltme 4 HANA büyük örnek damgalarındaki tür II SKU dağıtımları için geçerlidir.** Düzeltme 4 HANA büyük örnek damgalarına dağıtılmış olan II HANA büyük örnek birimlerinin önyükleme LUN 'leri, düzeltme 3 damgalarının tür ı SKU 'su olan bu durum olduğu için depolama anlık görüntüleriyle yedeklenebilir.
+
 
 >[!NOTE]
->İşletim sistemi yedekleme betiklerini sunucuda önceden yüklenmiş olan arka yazılım kullanır.  
+>İşletim sistemi yedekleme betikleri, sunucuda önceden yüklenmiş olan arka yazılımı kullanır.  
 
-Varsayılan olarak, Microsoft Hizmet Yönetimi ekibi tarafından tamamlandıktan sonra dosya sistemi yedeklemek için iki yedekleme zamanlama ile yapılandırılmış işletim sisteminin düzeyi yedekleyin. Yedekleme işinin zamanlamasını, aşağıdaki komutu kullanarak denetleyebilirsiniz:
+Sağlama, Microsoft `Service Management` ekibi tarafından tamamlandıktan sonra varsayılan olarak, işletim sisteminin dosya sistemi düzeyini yedeklemek için iki yedekleme zamanlamalarıyla yapılandırılır. Aşağıdaki komutu kullanarak yedekleme işlerinin zamanlamalarını kontrol edebilirsiniz:
 ```
 #crontab –l
 ```
-Yedekleme zamanlamasını aşağıdaki komutu kullanarak istediğiniz zaman değiştirebilirsiniz:
+Aşağıdaki komutu kullanarak yedekleme zamanlamasını dilediğiniz zaman değiştirebilirsiniz:
 ```
 #crontab -e
 ```
-## <a name="how-to-take-a-manual-backup"></a>El ile yedekleyin nasıl?
+## <a name="how-to-take-a-manual-backup"></a>El ile yedekleme nasıl yapılır?
 
-İşletim sistemi dosya sistemi yedeği kullanarak zamanlanmış bir **sıralanmış işin** zaten. Ancak, işletim sistemi dosya düzeyinde yedekleme el ile de gerçekleştirebilirsiniz. El ile Yedekleme gerçekleştirmek için aşağıdaki komutu çalıştırın:
+İşletim sistemi dosya sistemi yedeklemesi, zaten bir **cron işi** kullanılarak zamanlandı. Ancak, işletim sistemi dosya düzeyi yedeklemesini de el ile gerçekleştirebilirsiniz. El ile yedekleme gerçekleştirmek için aşağıdaki komutu çalıştırın:
 
 ```
 #rear -v mkbackup
 ```
-Aşağıdaki ekran göster örnek el ile yedekleme gösterir:
+Aşağıdaki ekran gösteri, örnek el ile yedeklemeyi gösterir:
 
-![Nasıl](media/HowToHLI/OSBackupTypeIISKUs/HowtoTakeManualBackup.PNG)
+![oluşturulacağı](media/HowToHLI/OSBackupTypeIISKUs/HowtoTakeManualBackup.PNG)
 
 
-## <a name="how-to-restore-a-backup"></a>Bir yedekleme geri yükleme
+## <a name="how-to-restore-a-backup"></a>Yedekleme nasıl geri yüklenir?
 
-Tam yedekleme veya tek bir dosyayı bir yedekten geri yükleyebilirsiniz. Geri yüklemek için aşağıdaki komutu kullanın:
+Bir tam yedeklemeyi veya tek bir dosyayı yedekten geri yükleyebilirsiniz. Geri yüklemek için şu komutu kullanın:
 
 ```
 #tar  -xvf  <backup file>  [Optional <file to restore>]
 ```
-Geçerli çalışma dizininde dosyanın geri yüklemeden sonra kurtarılır.
+Geri yükleme işleminden sonra dosya geçerli çalışma dizininde kurtarılır.
 
-Aşağıdaki komut bir dosyanın geri gösterir */etc/fstabfrom* yedekleme dosyasını *backup.tar.gz*
+Aşağıdaki komut, yedekleme dosyasından bir */etc/fstabfile* yedeğinden geri yüklemeyi gösterir *. tar. gz*
 ```
 #tar  -xvf  /osbackups/hostname/backup.tar.gz  etc/fstab 
 ```
 >[!NOTE] 
->Yedeklemeden geri yüklendikten sonra dosyayı istediğiniz konuma kopyalamanız gerekecektir.
+>Yedeklemeden geri yüklendikten sonra dosyayı istenen konuma kopyalamanız gerekir.
 
-Aşağıdaki ekran görüntüsünde, bir tam yedekleme geri yükleme gösterilmektedir:
+Aşağıdaki ekran görüntüsünde, tüm yedeklemenin geri yüklenmesi gösterilmektedir:
 
-![HowtoRestoreaBackup.PNG](media/HowToHLI/OSBackupTypeIISKUs/HowtoRestoreaBackup.PNG)
+![HowtoRestoreaBackup. PNG](media/HowToHLI/OSBackupTypeIISKUs/HowtoRestoreaBackup.PNG)
 
-## <a name="how-to-install-the-rear-tool-and-change-the-configuration"></a>Arka Aracı'nı yükleme ve yapılandırmasını değiştirmek nasıl? 
+## <a name="how-to-install-the-rear-tool-and-change-the-configuration"></a>Arka aracı nasıl yüklenir ve yapılandırma nasıl değiştirilir? 
 
-Relax-ve-Kurtarma (arka) paketleri **önceden yüklenmiş** içinde **Type II SKU'lara** HANA büyük örnekleri ve yapmanız gereken herhangi bir eylemi. Doğrudan işletim sistemi yedekleme için arka kullanarak da başlatabilirsiniz.
-Ancak, kendi içindeki paketleri yüklemek için gerek duyduğunuz durumlarda, yüklemek ve arka Aracı'nı yapılandırmak için listelenen adımları takip edebilirsiniz.
+Rahat ve-kurtar (arka) paketleri, HANA büyük örneklerinin **tür II SKU 'larına** **önceden yüklenir** ve sizin için hiçbir işlem yapmanız gerekmez. İşletim sistemi yedeklemesi için arka öğesini kullanmaya doğrudan başlayabilirsiniz.
+Ancak, paketleri kendi kendinize yüklemeniz gereken durumlarda, arka aracı yüklemek ve yapılandırmak için listelenen adımları izleyebilirsiniz.
 
-Yüklenecek **arka** yedekleme paketleri, aşağıdaki komutları kullanın:
+**Arka** yedekleme paketlerini yüklemek için aşağıdaki komutları kullanın:
 
-İçin **SLES** işletim sistemi, aşağıdaki komutu kullanın:
+**SLES** işletim sistemi için aşağıdaki komutu kullanın:
 ```
 #zypper install <rear rpm package>
 ```
-İçin **RHEL** işletim sistemi, aşağıdaki komutu kullanın: 
+**RHEL** işletim sistemi için aşağıdaki komutu kullanın: 
 ```
 #yum install rear -y
 ```
-Arka Aracı'nı yapılandırmak için parametreleri güncelleştirmeye gerek duyduğunuz **OUTPUT_URL** ve **BACKUP_URL** içinde */etc/rear/local.conf dosya*.
+Arka Aracı yapılandırmak için, */etc/rear/Local.exe dosyasında* **OUTPUT_URL** ve **BACKUP_URL** parametrelerini güncelleştirmeniz gerekir.
 ```
 OUTPUT=ISO
 ISO_MKISOFS_BIN=/usr/bin/ebiso
@@ -96,4 +99,4 @@ EXCLUDE_VG=( vgHANA-data-HC2 vgHANA-data-HC3 vgHANA-log-HC2 vgHANA-log-HC3 vgHAN
 BACKUP_PROG_EXCLUDE=("${BACKUP_PROG_EXCLUDE[@]}" '/media' '/var/tmp/*' '/var/crash' '/hana' '/usr/sap'  ‘/proc’)
 ```
 
-Aşağıdaki ekran görüntüsünde, bir tam yedekleme geri yükleme gösterilmektedir: ![RearToolConfiguration.PNG](media/HowToHLI/OSBackupTypeIISKUs/RearToolConfiguration.PNG)
+Aşağıdaki ekran görüntüsünde, tüm yedeklemenin geri yüklenmesi gösterilmektedir: ![RearToolConfiguration. PNG](media/HowToHLI/OSBackupTypeIISKUs/RearToolConfiguration.PNG)

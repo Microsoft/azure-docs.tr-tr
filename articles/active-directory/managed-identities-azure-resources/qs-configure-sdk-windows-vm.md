@@ -1,6 +1,6 @@
 ---
-title: Azure kaynakları için yönetilen kimliklerle bir VM'yi yapılandırmak için bir Azure SDK'sını kullanma
-description: Adım adım yapılandırma ve kullanma yönergeleri için Azure SDK'sını kullanarak Azure VM, Azure kaynaklarında kimlik yönetilen.
+title: Azure kaynakları için yönetilen kimliklere sahip bir VM 'yi yapılandırmak için bir Azure SDK kullanma
+description: Azure SDK kullanarak bir Azure VM 'de Azure kaynakları için yönetilen kimlikleri yapılandırmak ve kullanmak için adım adım yönergeler.
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -15,37 +15,37 @@ ms.workload: identity
 ms.date: 09/28/2017
 ms.author: markvi
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 29446f6f0a86a00cc92fe46211caddd22aaa4859
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 5b4f5a26f240656911fb9627d273de8b69edff6a
+ms.sourcegitcommit: ec2b75b1fc667c4e893686dbd8e119e7c757333a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66112566"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72809177"
 ---
-# <a name="configure-a-vm-with-managed-identities-for-azure-resources-using-an-azure-sdk"></a>Bir Azure SDK'sını kullanarak Azure kaynakları için yönetilen kimliklerle bir VM yapılandırma
+# <a name="configure-a-vm-with-managed-identities-for-azure-resources-using-an-azure-sdk"></a>Azure SDK kullanarak Azure kaynakları için yönetilen kimliklerle VM yapılandırma
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
 
-Azure kaynakları için yönetilen kimlikleri otomatik olarak yönetilen bir kimlik Azure Active Directory (AD) ile Azure hizmetleri sağlar. Bu kimlik, Azure AD kimlik doğrulaması, kimlik bilgilerini kodunuzda zorunda kalmadan destekleyen herhangi bir hizmeti kimlik doğrulaması için kullanabilirsiniz. 
+Azure kaynakları için Yönetilen kimlikler, Azure Active Directory (AD) içinde otomatik olarak yönetilen bir kimlikle Azure hizmetleri sağlar. Bu kimliği, kodunuzda kimlik bilgileri olmadan Azure AD kimlik doğrulamasını destekleyen herhangi bir hizmette kimlik doğrulaması yapmak için kullanabilirsiniz. 
 
-Bu makalede, etkinleştirmek ve bir Azure SDK'sını kullanarak Azure VM için Azure kaynakları için yönetilen kimlikleri kaldırma öğrenin.
+Bu makalede, Azure SDK kullanarak bir Azure VM için Azure kaynakları için yönetilen kimliklerin nasıl etkinleştirileceğini ve kaldırılacağını öğrenirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [msi-qs-configure-prereqs](../../../includes/active-directory-msi-qs-configure-prereqs.md)]
 
-## <a name="azure-sdks-with-managed-identities-for-azure-resources-support"></a>Azure SDK'ları Azure kaynakları için yönetilen kimliklerle desteği 
+## <a name="azure-sdks-with-managed-identities-for-azure-resources-support"></a>Azure kaynakları için yönetilen kimliklerle Azure SDK 'Ları desteği 
 
-Azure, bir dizi birden çok programlama platformları destekler [Azure SDK'ları](https://azure.microsoft.com/downloads). Birkaç Azure kaynakları için yönetilen kimliklerini desteklemek ve kullanımını göstermek için ilgili örnekleri sağlamak için güncelleştirildi. Bu liste, ek destek eklendikçe güncelleştirilir:
+Azure, bir dizi [Azure SDK 'sı](https://azure.microsoft.com/downloads)aracılığıyla birden çok programlama platformunu destekler. Bunların bazıları Azure kaynakları için yönetilen kimlikleri destekleyecek şekilde güncelleştirilmiştir ve kullanımı göstermek için karşılık gelen örnekler sağlar. Ek destek eklendikçe bu liste güncelleştirilir:
 
 | SDK | Örnek |
 | --- | ------ | 
-| .NET   | [Etkin Azure kaynakları için yönetilen kimliklerle etkin bir VM'den kaynak yönetme](https://azure.microsoft.com/resources/samples/aad-dotnet-manage-resources-from-vm-with-msi/) |
-| Java   | [Azure kaynakları için yönetilen kimliklerle etkin bir VM'den depolama alanını Yönet](https://azure.microsoft.com/resources/samples/compute-java-manage-resources-from-vm-with-msi-in-aad-group/)|
-| Node.js| [Etkin sistem tarafından atanan yönetilen kimlikle bir VM oluşturma](https://azure.microsoft.com/resources/samples/compute-node-msi-vm/) |
-| Python | [Etkin sistem tarafından atanan yönetilen kimlikle bir VM oluşturma](https://azure.microsoft.com/resources/samples/compute-python-msi-vm/) |
-| Ruby   | [Sistem tarafından atanan kimliği etkin bir Azure VM oluşturma](https://azure.microsoft.com/resources/samples/compute-ruby-msi-vm/) |
+| .NET   | [Azure kaynakları için yönetilen kimliklerle etkin bir VM 'den kaynak yönetme etkin](https://azure.microsoft.com/resources/samples/aad-dotnet-manage-resources-from-vm-with-msi/) |
+| Java   | [Azure kaynakları için Yönetilen kimlikler ile etkinleştirilen bir VM 'den depolamayı yönetme](https://azure.microsoft.com/resources/samples/compute-java-manage-resources-from-vm-with-msi-in-aad-group/)|
+| Node.js| [Sistem tarafından atanan yönetilen kimlik etkin bir VM oluşturma](https://azure.microsoft.com/resources/samples/compute-node-msi-vm/) |
+| Python | [Sistem tarafından atanan yönetilen kimlik etkin bir VM oluşturma](https://azure.microsoft.com/resources/samples/compute-python-msi-vm/) |
+| Ruby   | [Sistem tarafından atanan bir kimlik etkinken Azure VM oluşturma](https://github.com/Azure-Samples/compute-ruby-msi-vm/) |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Altında ilgili makaleleri görmek **Azure VM için kimlik yapılandırma**, Azure portalı, PowerShell, CLI ve kaynak şablonları da nasıl kullanabileceğinizi öğrenin.
+- Azure portal, PowerShell, CLı ve kaynak şablonlarını nasıl kullanabileceğinizi öğrenmek için **bir Azure VM Için kimlik yapılandırma**bölümündeki ilgili makalelere bakın.

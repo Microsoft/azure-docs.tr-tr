@@ -1,7 +1,7 @@
 ---
-title: HDInsight - Azure üzerinde Spark MLlib ile Machine learning örneği
-description: Spark MLlib Lojistik regresyon aracılığıyla sınıflandırmasını kullanan bir veri kümesini analiz ederek bir makine öğrenimi uygulaması oluşturmak için kullanmayı öğrenin.
-keywords: spark machine Learning, spark machine learning örneği
+title: HDInsight 'ta Spark MLlib ile makine öğrenimi örneği-Azure
+description: Lojistik gerileme aracılığıyla sınıflandırma kullanarak bir veri kümesini analiz eden bir makine öğrenimi uygulaması oluşturmak için Spark MLlib 'i nasıl kullanacağınızı öğrenin.
+keywords: Spark Machine Learning, Spark Machine Learning örneği
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -9,43 +9,43 @@ ms.custom: hdinsightactive,hdiseo17may2017
 ms.topic: conceptual
 ms.date: 06/17/2019
 ms.author: hrasheed
-ms.openlocfilehash: bdc645bf8de95265158c3bb7ebf71952369e4ab2
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.openlocfilehash: c8ead7abc454df387db31b2ce65d2ba714b0067d
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67190903"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494082"
 ---
-# <a name="use-apache-spark-mllib-to-build-a-machine-learning-application-and-analyze-a-dataset"></a>Bir machine learning uygulama oluşturmak ve bir veri kümesini analiz etmek için Apache Spark MLlib kullanın
+# <a name="use-apache-spark-mllib-to-build-a-machine-learning-application-and-analyze-a-dataset"></a>Machine Learning uygulaması derlemek ve bir veri kümesini çözümlemek için Apache Spark MLlib kullanın
 
-Apache Spark'ı kullanmayı öğrenin [MLlib](https://spark.apache.org/mllib/) bir machine learning açık bir veri kümesini basit Tahmine dayalı analiz yapmak için uygulama oluşturmak için. Kitaplıkları Spark'ın yerleşik makine öğrenimi, bu örnekte *sınıflandırma* Lojistik regresyon aracılığıyla. 
+Açık bir veri kümesi üzerinde basit bir tahmine dayalı analiz yapmak için, bir makine öğrenimi uygulaması oluşturmak üzere [Mllib](https://spark.apache.org/mllib/) Apache Spark nasıl kullanacağınızı öğrenin. Spark 'ın yerleşik makine öğrenimi kitaplıklarından Bu örnek Lojistik gerileme aracılığıyla *Sınıflandırmayı* kullanır. 
 
-MLlib için uygun yardımcı programlar da dahil olmak üzere, makine öğrenimi görevlerini yararlı birçok yardımcı programlar sağlayan bir çekirdek Spark kitaplığıdır:
+MLlib, aşağıdakiler için uygun olan yardımcı programlar dahil olmak üzere makine öğrenimi görevleri için yararlı birçok yardımcı program sağlayan bir temel Spark kitaplığıdır:
 
 * Sınıflandırma
 * Regresyon
-* Kümeleme
+* Lenmesi
 * Konu modelleme
-* Tekil değer ayrıştırma (SVD) ve asıl bileşende analiz (PCA)
-* Test etme ve örnek istatistikleri hesaplama varsayım
+* Tekil değer ayrıştırma (SVD) ve asıl bileşen analizi (PCA)
+* Örnek istatistiklerini test etme ve hesaplama
 
-## <a name="understand-classification-and-logistic-regression"></a>Sınıflandırma ve lojistik regresyon anlama
-*Sınıflandırma*, popüler makine öğrenme görev, girdi verilerini kategorilere sıralama işlemidir. Bunu nasıl sağlayan veri girişi için "labels" atamak için bir sınıflandırma algoritmasıdır işidir. Örneğin, stok bilgilerini giriş olarak kabul eder ve iki kategoride stok böler bir makine öğrenimi algoritmasının kadar aklınıza: Satış satımında ve paylaşımında tutmanız gerekir stocks.
+## <a name="understand-classification-and-logistic-regression"></a>Sınıflandırmayı ve lojistik regresyonunu anlayın
+Popüler bir makine öğrenimi görevi *sınıflandırması*, giriş verilerini kategorilere sıralama işlemidir. Bu, sağladığınız giriş verilerine nasıl "etiket" atanacağını anlamak için bir sınıflandırma algoritmasının işleridir. Örneğin, stok bilgilerini girdi olarak kabul eden bir makine öğrenimi algoritması ve stoku iki kategoriye böler: Satım ve tutmanız gereken hisse senetleri.
 
-Lojistik regresyon kullandığınız için sınıflandırma algoritmasıdır. Spark'ın Lojistik regresyon API için kullanışlıdır *ikili sınıflandırma*, ya da iki gruba birini giriş veri sınıflandırma. Lojistik gerilemeleri hakkında daha fazla bilgi için bkz: [Wikipedia](https://en.wikipedia.org/wiki/Logistic_regression).
+Lojistik regresyon, sınıflandırma için kullandığınız algoritmadır. Spark 'un lojistik regresyon API 'SI, *ikili sınıflandırmada*veya giriş verilerinin iki gruptan birinde sınıflandırılmasına yardımcı olur. Lojistik gerilemeleri hakkında daha fazla bilgi için bkz. [Vikipedi](https://en.wikipedia.org/wiki/Logistic_regression).
 
-Özet olarak, lojistik regresyon işlemi üreten bir *Lojistik işlevi* Giriş bir vektör bir grup veya diğer ait olasılığını tahmin etmek için kullanılabilir.  
+Özet olarak, lojistik regresyon süreci, bir giriş vektörünün bir grupta veya diğeri ait olma olasılığını tahmin etmek için kullanılabilecek bir *lojistik işlevi* üretir.  
 
-## <a name="predictive-analysis-example-on-food-inspection-data"></a>Gıda denetimi veri üzerinde Tahmine dayalı analiz örneği
-Bu örnekte, Yemek İnceleme verilerinizde bazı Tahmine dayalı analiz gerçekleştirmek için Spark kullanın (**Food_Inspections1.csv**) aracılığıyla alındı [Şehir, Chicago veri portalı](https://data.cityofchicago.org/). Bu veri kümesi her kuruluş, (varsa) bulunan ihlalleri ve denetleme sonuçlarını hakkında bilgiler dahil olmak üzere Chicago'daki gerçekleştirildi Gıda kurma incelemeleri hakkındaki bilgileri içerir. CSV verileri dosyası zaten kümeyle ilişkili depolama hesabı kullanılabilir **/HdiSamples/HdiSamples/FoodInspectionData/Food_Inspections1.csv**.
+## <a name="predictive-analysis-example-on-food-inspection-data"></a>Yiyecek İnceleme verilerinde tahmine dayalı analiz örneği
+Bu örnekte, [Chicago veri portalının şehri](https://data.cityofchicago.org/)aracılığıyla elde edilen yiyecek İnceleme verileri (**Food_Inspections1. csv**) üzerinde bazı tahmine dayalı analiz gerçekleştirmek için Spark 'ı kullanırsınız. Bu veri kümesi, her bir oluşturma hakkında bilgiler, bulunan ihlaller (varsa) ve inceleme sonuçları dahil olmak üzere Chicago 'da yürütülen yiyecek oluşturma incelemeleri hakkında bilgiler içerir. CSV veri dosyası, **/HdiSamples/HdiSamples/FoodInspectionData/Food_Inspections1.csv**adresindeki kümeyle ilişkili depolama hesabında zaten kullanılabilir.
 
-Aşağıdaki adımlarda, Geçti veya başarısız bir yemek İnceleme kadar sürdüğünü görmek için bir model geliştirmektir.
+Aşağıdaki adımlarda, bir yiyecek incelemesini geçirmek veya başarısız kılmak için ne olduğunu görmek üzere bir model geliştirirsiniz.
 
-## <a name="create-an-apache-spark-mllib-machine-learning-app"></a>Bir Apache Spark MLlib makine öğrenimi uygulaması oluşturma
+## <a name="create-an-apache-spark-mllib-machine-learning-app"></a>Apache Spark MLlib makine öğrenimi uygulaması oluşturma
 
 1. PySpark çekirdeği kullanarak bir Jupyter not defteri oluşturun. Yönergeler için bkz. [Jupyter not defteri oluşturma](./apache-spark-jupyter-spark-sql.md#create-a-jupyter-notebook).
 
-2. Bu uygulama için gerekli olan türleri içeri aktarın. Kopyalayın ve aşağıdaki kodu boş bir hücreye yapıştırın ve sonra basın **SHIFT + ENTER**.
+2. Bu uygulama için gereken türleri içeri aktarın. Aşağıdaki kodu kopyalayıp boş bir hücreye yapıştırın ve ardından **SHIFT + enter**tuşlarına basın.
 
     ```PySpark
     from pyspark.ml import Pipeline
@@ -55,13 +55,13 @@ Aşağıdaki adımlarda, Geçti veya başarısız bir yemek İnceleme kadar sür
     from pyspark.sql.functions import UserDefinedFunction
     from pyspark.sql.types import *
     ```
-    PySpark çekirdeği nedeniyle açıkça bir bağlam oluşturmanız gerekmez. Birinci kod hücresini çalıştırdığınızda Spark ve Hive bağlamları sizin için otomatik olarak oluşturulur. 
+    PySpark çekirdeği nedeniyle, açıkça herhangi bir bağlam oluşturmanız gerekmez. Birinci kod hücresini çalıştırdığınızda Spark ve Hive bağlamları sizin için otomatik olarak oluşturulur. 
 
-## <a name="construct-the-input-dataframe"></a>Giriş veri çerçevesi oluşturun
+## <a name="construct-the-input-dataframe"></a>Giriş veri çerçevesini oluşturun
 
-Bir CSV biçiminde ham veriler olduğu için dosyayı belleğe yapılandırılmamış metin olarak çekmek için Spark bağlamını kullanır ve ardından her veri satırı ayrıştırmak için Python'un CSV kitaplığını kullanın.
+Ham veriler CSV biçiminde olduğundan, dosyayı belleğe yapılandırılmamış metin olarak çekmek için Spark bağlamını kullanabilir, sonra da her bir veri satırını ayrıştırmak için Python 'un CSV kitaplığını kullanabilirsiniz.
 
-1. Bir dayanıklı Dağıtılmış veri kümesi (RDD) girdi verilerini ayrıştırma ile oluşturmak için aşağıdaki satırları çalıştırın.
+1. Giriş verilerini içeri aktarıp ayrıştırarak esnek bir dağıtılmış veri kümesi (RDD) oluşturmak için aşağıdaki satırları çalıştırın.
 
     ```PySpark
     def csvParse(s):
@@ -76,13 +76,13 @@ Bir CSV biçiminde ham veriler olduğu için dosyayı belleğe yapılandırılma
                     .map(csvParse)
     ```
 
-2. Böylece, bir veri şeması görünümünü bir satır RDD almak için aşağıdaki kodu çalıştırın:
+2. RDD 'den bir satır almak için aşağıdaki kodu çalıştırın, bu nedenle veri şemasına göz atabilirsiniz:
 
     ```PySpark
     inspections.take(1)
     ```
 
-    Çıktı.
+    Çıktı:
 
     ```
     [['413707',
@@ -104,9 +104,9 @@ Bir CSV biçiminde ham veriler olduğu için dosyayı belleğe yapılandırılma
         '(41.97583445690982, -87.7107455232781)']]
     ```
 
-    Çıktı, girdi dosyasının şeması hakkında bir fikir sunar. Bu, her kuruluş, kuruluş, adres, incelemeleri ve konum, başka şeylerin yanında, veri türü adını içerir. 
+    Çıktı, size giriş dosyasının şeması hakkında fikir verir. Her bir oluşturma adı, kurma türü, adres, İncelemeleri ve konum gibi diğer şeyler arasında yer alır. 
 
-3. Bir dataframe oluşturmak için aşağıdaki kodu çalıştırın (*df*) ve geçici bir tabloya (*CountResults*) ile Tahmine dayalı analiz için kullanışlı olan birkaç sütunu. `sqlContext` yapılandırılmış veriler üzerinde dönüştürmeler gerçekleştirmek için kullanılır. 
+3. Bir dataframe (*df*) ve geçici bir tablo (*countresults*) oluşturmak için aşağıdaki kodu çalıştırarak, tahmine dayalı analiz için yararlı olan birkaç sütun oluşturun. `sqlContext`, yapılandırılmış verilerde dönüşümler gerçekleştirmek için kullanılır. 
 
     ```PySpark
     schema = StructType([
@@ -119,15 +119,15 @@ Bir CSV biçiminde ham veriler olduğu için dosyayı belleğe yapılandırılma
     df.registerTempTable('CountResults')
     ```
 
-    Dört sütunların veri çerçevesi ilgilendiğiniz **kimliği**, **adı**, **sonuçları**, ve **ihlalleri**.
+    Veri çerçevesindeki ilgilendiğiniz dört sütun **kimlik**, **ad**, **sonuçlar**ve **ihlallerdir**.
 
-4. Küçük bir örnek veri almak için aşağıdaki kodu çalıştırın:
+4. Verilerin küçük bir örneğini almak için aşağıdaki kodu çalıştırın:
 
     ```PySpark
     df.show(5)
     ```
 
-    Çıktı.
+    Çıktı:
 
     ```
     +------+--------------------+-------+--------------------+
@@ -141,17 +141,17 @@ Bir CSV biçiminde ham veriler olduğu için dosyayı belleğe yapılandırılma
     +------+--------------------+-------+--------------------+
     ```
 
-## <a name="understand-the-data"></a>Verileri anlama
+## <a name="understand-the-data"></a>Verileri anlayın
 
-Hangi veri kümesini içeren bir fikir almak şimdi başlayın. 
+Veri kümesinin neleri içerdiğini bir fikir almaya başlayalım. 
 
-1. Benzersiz değerleri göstermek için aşağıdaki kodu çalıştırın **sonuçları** sütun:
+1. **Sonuçlar** sütunundaki ayrı değerleri göstermek için aşağıdaki kodu çalıştırın:
 
     ```PySpark
     df.select('results').distinct().show()
     ```
 
-    Çıktı.
+    Çıktı:
 
     ```
     +--------------------+
@@ -165,21 +165,21 @@ Hangi veri kümesini içeren bir fikir almak şimdi başlayın.
     +--------------------+
     ```
 
-2. Bu sonuçların dağılımını görselleştirmek için aşağıdaki kodu çalıştırın:
+2. Bu sonuçların dağıtımını görselleştirmek için aşağıdaki kodu çalıştırın:
 
     ```PySpark
     %%sql -o countResultsdf
     SELECT COUNT(results) AS cnt, results FROM CountResults GROUP BY results
     ```
 
-    `%%sql` Sihirli arkasından `-o countResultsdf` sorgunun çıkışı (genellikle bir kümenin baş) Jupyter sunucu üzerinde yerel olarak kalıcı olmasını sağlar. Çıktı olarak kalıcı bir [Pandas](https://pandas.pydata.org/) belirtilen ada sahip bir dataframe **countResultsdf**. Hakkında daha fazla bilgi için `%%sql` sihrinin yanı sıra, PySpark çekirdeği kullanılabilen diğer sihirler bkz [Apache Spark HDInsight kümeleri ile Jupyter not defterlerinde kullanılabilen çekirdekler](apache-spark-jupyter-notebook-kernels.md#parameters-supported-with-the-sql-magic).
+    `%%sql` Magic tarafından izlenen `-o countResultsdf`, sorgunun çıkışının jupi sunucusunda (genellikle kümenin baş düğümüne) yerel olarak kalıcı olmasını sağlar. Çıktı, belirtilen **Countresultsdf**adlı bir [Pandas](https://pandas.pydata.org/) dataframe olarak kalıcıdır. `%%sql` Magic ve PySpark çekirdeği ile kullanılabilen diğer mıknatık hakkında daha fazla bilgi için bkz. [Apache Spark HDInsight kümeleri Ile Jupyter not defterlerinde kullanılabilen çekirdekler](apache-spark-jupyter-notebook-kernels.md#parameters-supported-with-the-sql-magic).
 
-    Çıktı.
+    Çıktı:
 
     ![SQL sorgu çıktısı](./media/apache-spark-machine-learning-mllib-ipython/spark-machine-learning-query-output.png "SQL sorgu çıktısı")
 
 
-3. Ayrıca [Matplotlib](https://en.wikipedia.org/wiki/Matplotlib), bir çizim oluşturmak için veri görselleştirme oluşturmak için kullanılan bir kitaplık. Çizim oluşturulması gerektiğinden yerel olarak kalıcı gelen **countResultsdf** dataframe, kod parçacığı ile başlamalıdır `%%local` Sihirli. Bu kod Jupyter sunucusunda yerel olarak çalıştırmanızı sağlar.
+3. Ayrıca, bir çizim oluşturmak için veri görselleştirmesini oluşturmak için kullanılan bir kitaplık olan [Matplotlib](https://en.wikipedia.org/wiki/Matplotlib)' ı da kullanabilirsiniz. Çizimin yerel olarak kalıcı **Countresultsdf** dataframe 'den oluşturulması gerektiğinden, kod parçacığının `%%local` Magic ile başlaması gerekir. Bu, kodun Jupyıter sunucusunda yerel olarak çalıştırılmasını sağlar.
 
     ```PySpark
     %%local
@@ -193,24 +193,24 @@ Hangi veri kümesini içeren bir fikir almak şimdi başlayın.
     plt.axis('equal')
     ```
 
-    Çıktı.
+    Çıktı:
 
-    ![Spark machine learning uygulama çıkışı - beş farklı denetimi sonuçlarını pasta grafiği](./media/apache-spark-machine-learning-mllib-ipython/spark-machine-learning-result-output-1.png "Spark machine learning sonuç çıkış")
+    ![Spark Machine Learning uygulama çıkışı-beş ayrı inceleme sonucu olan pasta grafik](./media/apache-spark-machine-learning-mllib-ipython/spark-machine-learning-result-output-1.png "Spark Machine Learning sonuç çıkışı")
 
-    Yemek İnceleme sonuçlarını tahmin etmek için üzerinde ihlalleri dayalı bir model geliştirmektir gerekir. Lojistik regresyon ikili sınıflandırma yöntemi olduğundan, sonuçta elde edilen veri iki kategoriler altında gruplandırmak için mantıklıdır: **Başarısız** ve **geçirmek**:
+    Yiyecek denetimi sonucunu tahmin etmek için ihlallere göre bir model geliştirmeniz gerekir. Lojistik regresyon bir ikili sınıflandırma yöntemi olduğundan, sonuç verilerini iki kategoride gruplamak mantıklı olur: **başarısız** ve **Pass**:
 
-   - Geçişi
-       - Geçişi
-       - Koşullar ile geçirin
-   - Başarısız
-       - Başarısız
-   - Atma
-       - İş bulunan değil
-       - İş dışında
+   - Aktar
+       - Aktar
+       - W/koşullarını geçir
+   - Neden
+       - Neden
+   - Mı
+       - İş bulunamadı
+       - Iş dışı
 
-     Diğer sonuçları ("İş değil bulunan" veya "İş dışı") ile veri kullanışlı değildir ve küçük bir bölümü sonuçları yine de olun.
+     Diğer sonuçlara sahip veriler ("Iş bulunamadı" veya "Iş dışı") yararlı değildir ve sonuç olarak sonuçların çok küçük bir yüzdesini yapar.
 
-4. Mevcut veri çerçevesi dönüştürmek için aşağıdaki kodu çalıştırın (`df`) içine her inceleme etiket ihlalleri çift olarak temsil burada yeni bir veri çerçevesi. Bu durumda, bir etiketi içinde `0.0` hata, bir etiketi temsil eder `1.0` başarı ve bir etiketi temsil eden `-1.0` bu iki yanı sıra bazı sonuçlarını temsil eder. 
+4. Varolan veri çerçevesini (`df`) her İnceleme bir etiket ihlalleri çifti olarak temsil edildiği yeni bir veri çerçevesine dönüştürmek için aşağıdaki kodu çalıştırın. Bu durumda, `0.0` bir etiketi bir hata temsil eder, bir `1.0` etiketi bir başarıyı temsil eder ve bir `-1.0` etiketi bu iki durumun yanı sıra bazı sonuçları temsil eder. 
 
     ```PySpark
     def labelForResults(s):
@@ -224,25 +224,25 @@ Hangi veri kümesini içeren bir fikir almak şimdi başlayın.
     labeledData = df.select(label(df.results).alias('label'), df.violations).where('label >= 0')
     ```
 
-5. Bir satır etiketli veri göstermek için aşağıdaki kodu çalıştırın:
+5. Etiketli verilerin bir satırını göstermek için aşağıdaki kodu çalıştırın:
 
     ```PySpark
     labeledData.take(1)
     ```
 
-    Çıktı.
+    Çıktı:
 
     ```
     [Row(label=0.0, violations=u"41. PREMISES MAINTAINED FREE OF LITTER, UNNECESSARY ARTICLES, CLEANING  EQUIPMENT PROPERLY STORED - Comments: All parts of the food establishment and all parts of the property used in connection with the operation of the establishment shall be kept neat and clean and should not produce any offensive odors.  REMOVE MATTRESS FROM SMALL DUMPSTER. | 35. WALLS, CEILINGS, ATTACHED EQUIPMENT CONSTRUCTED PER CODE: GOOD REPAIR, SURFACES CLEAN AND DUST-LESS CLEANING METHODS - Comments: The walls and ceilings shall be in good repair and easily cleaned.  REPAIR MISALIGNED DOORS AND DOOR NEAR ELEVATOR.  DETAIL CLEAN BLACK MOLD LIKE SUBSTANCE FROM WALLS BY BOTH DISH MACHINES.  REPAIR OR REMOVE BASEBOARD UNDER DISH MACHINE (LEFT REAR KITCHEN). SEAL ALL GAPS.  REPLACE MILK CRATES USED IN WALK IN COOLERS AND STORAGE AREAS WITH PROPER SHELVING AT LEAST 6' OFF THE FLOOR.  | 38. VENTILATION: ROOMS AND EQUIPMENT VENTED AS REQUIRED: PLUMBING: INSTALLED AND MAINTAINED - Comments: The flow of air discharged from kitchen fans shall always be through a duct to a point above the roofline.  REPAIR BROKEN VENTILATION IN MEN'S AND WOMEN'S WASHROOMS NEXT TO DINING AREA. | 32. FOOD AND NON-FOOD CONTACT SURFACES PROPERLY DESIGNED, CONSTRUCTED AND MAINTAINED - Comments: All food and non-food contact equipment and utensils shall be smooth, easily cleanable, and durable, and shall be in good repair.  REPAIR DAMAGED PLUG ON LEFT SIDE OF 2 COMPARTMENT SINK.  REPAIR SELF CLOSER ON BOTTOM LEFT DOOR OF 4 DOOR PREP UNIT NEXT TO OFFICE.")]
     ```
 
-## <a name="create-a-logistic-regression-model-from-the-input-dataframe"></a>Giriş veri çerçevesi bir Lojistik regresyon modeli oluşturun
+## <a name="create-a-logistic-regression-model-from-the-input-dataframe"></a>Giriş veri çerçevesinden bir lojistik regresyon modeli oluşturma
 
-Etiketli veri Lojistik regresyon tarafından çözümlenebilir bir biçime dönüştürmek için son görevdir bakın. Giriş bir Lojistik regresyon algoritmasına bir dizi olması gereken *etiketi özelliği vektör çiftleri*giriş noktasını temsil eden bir sayıdan oluşan bir vektörü "özellik vektör" olduğu. Bu nedenle, yarı yapılandırılmış ve serbest metin, makine bir kolayca anlayabileceği bir gerçek sayı dizisi için birçok açıklamalar içeren "ihlalleri" sütununa dönüştürülecek gerekir.
+Son görev, etiketli verileri Lojistik gerileme tarafından çözümlenebilecek bir biçime dönüştürmelidir. Bir lojistik regresyon algoritmasına giriş, "özellik vektörü" ın giriş noktasını temsil eden sayıların vektörü olduğu bir *etiket özelliği vektör çiftleri*kümesi gerektirir. Bu nedenle, yarı yapılandırılmış olan ve serbest metinli çok sayıda yorum içeren "ihlalleri" sütununu, makinenin kolayca anlayabileceği gerçek sayı dizisine dönüştürmeniz gerekir.
 
-Bir standart machine learning doğal dil işleme için bir yaklaşım, "Index" her benzersiz sözcüğü atayın ve ardından bir vektör makine her dizinin değeri içeren metin dizesi, bir sözcüğün sıklıkta olduğunu öğrenme algoritmasına geçirmek sağlamaktır.
+Doğal dili işlemeye yönelik bir standart makine öğrenimi yaklaşımı, her bir ayrı sözcüğü bir "Dizin" olarak atamak ve ardından makine öğrenimi algoritmasına bir vektör iletmektir. bu nedenle her bir dizin değeri, metin dizesindeki sözcüğün göreli sıklığını içerir.
 
-MLlib bu işlemi gerçekleştirmek için kolay bir yol sağlar. İlk olarak, "kelimeler her bir dizenin almak için her ihlalleri dize simgeleştirin". Ardından, bir `HashingTF` belirteçleri her kümesi, bir model oluşturmak için Lojistik regresyon algoritması geçirilebilen özellik vektör dönüştürmek için. "İşlem hattı" kullanılarak sırayla tüm adımları gerçekleştirin.
+MLlib bu işlemi gerçekleştirmek için kolay bir yol sağlar. İlk olarak, her bir dizedeki tek kelimeleri almak için her bir ihlal dizesi olan "simgeize". Ardından, her bir belirteç kümesini bir özellik vektörüne dönüştürmek için bir `HashingTF` kullanın, böylece bir model oluşturmak için lojistik regresyon algoritmasına geçirilebilirler. Bu adımların tümünü bir "işlem hattı" kullanarak sırayla gerçekleştirebilirsiniz.
 
 ```PySpark
 tokenizer = Tokenizer(inputCol="violations", outputCol="words")
@@ -253,11 +253,11 @@ pipeline = Pipeline(stages=[tokenizer, hashingTF, lr])
 model = pipeline.fit(labeledData)
 ```
 
-## <a name="evaluate-the-model-using-another-dataset"></a>Başka bir veri kümesini kullanarak modeli değerlendirin
+## <a name="evaluate-the-model-using-another-dataset"></a>Başka bir veri kümesi kullanarak modeli değerlendirme
 
-Daha önce oluşturduğunuz modeli kullandığınız *tahmin* ne yeni incelemeleri sonuçlarını olacaktır, gözlemlenmedi ihlaller üzerinde temel. Bu model bir veri kümesini eğitilmiş **Food_Inspections1.csv**. İkinci bir veri kümesi kullanabileceğiniz **Food_Inspections2.csv**, *değerlendirmek* bu modeli yeni verilere gücü. Bu ikinci bir veri kümesi (**Food_Inspections2.csv**) kümeyle ilişkilendirilmiş varsayılan depolama kapsayıcısını bulunmaktadır.
+Daha önce oluşturduğunuz modeli, gözlemlenecek ihlallere göre yeni İncelemeleri sonuçlarının ne olacağı *tahmin* etmek için kullanabilirsiniz. Bu modeli, **Food_Inspections1. csv**veri kümesi üzerinde eğitildi. Yeni verilerde bu modelin gücünü *değerlendirmek* için ikinci bir veri kümesi olan **Food_Inspections2. csv**' yi kullanabilirsiniz. Bu ikinci veri kümesi (**Food_Inspections2. csv**), kümeyle ilişkili varsayılan depolama kapsayıcısıdır.
 
-1. Yeni bir dataframe oluşturmak için aşağıdaki kodu çalıştırın **predictionsDf** modeli tarafından oluşturulan öngörü içerir. Kod parçacığı da adlı geçici bir tablo oluşturur **Öngörüler** dataframe üzerinde temel.
+1. Model tarafından oluşturulan tahmini içeren **predictionsDf** yeni bir veri çerçevesi oluşturmak için aşağıdaki kodu çalıştırın. Kod parçacığı Ayrıca veri çerçevesini temel alan **tahminler** adlı geçici bir tablo oluşturur.
 
     ```PySpark
     testData = sc.textFile('wasbs:///HdiSamples/HdiSamples/FoodInspectionData/Food_Inspections2.csv')\
@@ -283,14 +283,14 @@ Daha önce oluşturduğunuz modeli kullandığınız *tahmin* ne yeni incelemele
         'prediction']
     ```
 
-1. Öngörüler birini arayın. Bu kod parçacığını çalıştırın:
+1. Tahminlerden birine bakın. Bu kod parçacığını Çalıştır:
 
     ```PySpark
     predictionsDf.take(1)
     ```
 
-   Tahmin için ilk giriş sınama veri kümesi yok.
-1. `model.transform()` Yöntemi yeni veriler aynı şemaya sahip aynı dönüştürmeyi uygular ve verileri sınıflandırmak nasıl bir tahmini ulaşır. Ne kadar doğru tahmin edilen bir fikir almak için bazı basit istatistikleri yapabilirsiniz:
+   Test veri kümesindeki ilk giriş için bir tahmin vardır.
+1. `model.transform()` yöntemi aynı dönüşümü aynı şemaya sahip tüm yeni verilere uygular ve verilerin sınıflandırılacağı bir tahmine ulaşır. Tahmine dayalı olarak ne kadar doğru olduğunu öğrenmek için bazı basit istatistikler yapabilirsiniz:
 
     ```PySpark
     numSuccesses = predictionsDf.where("""(prediction = 0 AND results = 'Fail') OR
@@ -309,12 +309,12 @@ Daha önce oluşturduğunuz modeli kullandığınız *tahmin* ne yeni incelemele
     This is a 86.8169618894% success rate
     ```
 
-    Spark ile Lojistik regresyon kullanarak İngilizce ihlalleri açıklamaları ve belirli bir iş veya geçirmek Gıda denetimi başarısız arasındaki ilişkinin doğru bir model sunar.
+    Spark ile Lojistik gerileme kullanılması, Ingilizce 'deki ihlal açıklamaları arasındaki ilişkinin doğru bir modelini ve belirli bir işin bir yiyecek incelemesini geçmesi veya başarısız olup olmayacağını sağlar.
 
-## <a name="create-a-visual-representation-of-the-prediction"></a>Tahmin görsel bir temsilini oluşturma
-Artık yardımcı olması için son bir görselleştirme oluşturabilirsiniz bu testin sonuçları hakkında neden.
+## <a name="create-a-visual-representation-of-the-prediction"></a>Tahmine ilişkin görsel bir temsili oluşturun
+Artık bu testin sonuçları hakkında neden olacak bir son görselleştirme oluşturabilirsiniz.
 
-1. Farklı tahminler ve sonuçları ayıklayarak başlayın gelen **Öngörüler** daha önce oluşturulan geçici bir tablo. Çıktı olarak aşağıdaki sorguları ayrı *true_positive*, *false_positive*, *true_negative*, ve *false_negative*. Aşağıdaki sorgularda, görselleştirme kullanarak etkinleştirmeniz `-q` ve ayrıca çıkış kaydedin (kullanarak `-o`) ile kullanılabilecek veri çerçevelerini olarak `%%local` magic.
+1. Daha önce oluşturulan tahmine **dayalı geçici tablodaki farklı tahminleri ve** sonuçları çıkartarak başlayabilirsiniz. Aşağıdaki sorgular çıktıyı *true_positive*, *false_positive*, *true_negative*ve *false_negative*olarak ayırır. Aşağıdaki sorgularda, `-q` kullanarak görselleştirmeyi devre dışı bırakır ve ayrıca çıktıyı (`-o`kullanarak), daha sonra `%%local` Magic ile kullanılabilecek veri çerçeveleri olarak kaydeder.
 
     ```PySpark
     %%sql -q -o true_positive
@@ -336,7 +336,7 @@ Artık yardımcı olması için son bir görselleştirme oluşturabilirsiniz bu 
     SELECT count(*) AS cnt FROM Predictions WHERE prediction = 1 AND (results = 'Pass' OR results = 'Pass w/ Conditions')
     ```
 
-1. Son olarak, çizim kullanarak oluşturmak için aşağıdaki kod parçacığını kullanın **Matplotlib**.
+1. Son olarak, **Matplotlib**kullanarak çizim oluşturmak için aşağıdaki kod parçacığını kullanın.
 
     ```PySpark
     %%local
@@ -352,30 +352,30 @@ Artık yardımcı olması için son bir görselleştirme oluşturabilirsiniz bu 
 
     Aşağıdaki çıktıyı görmeniz gerekir:
 
-    ![Spark makine öğrenme uygulama çıkışı - başarısız Gıda incelemeleri pasta grafiği yüzdesi. ](./media/apache-spark-machine-learning-mllib-ipython/spark-machine-learning-result-output-2.png "Spark machine learning sonuç çıkış")
+    ![Spark Machine Learning uygulama çıkışı-başarısız yiyecek incelemeleri için pasta grafik yüzdeleri.](./media/apache-spark-machine-learning-mllib-ipython/spark-machine-learning-result-output-2.png "Spark Machine Learning sonuç çıkışı")
 
-    Geçirilen bir inceleme için negatif bir sonuç başvuruyor ancak bu grafikte, sonuç "sıfırdan" başarısız yemek İnceleme için ifade eder.
+    Bu grafikte, "pozitif" bir sonuç başarısız yiyecek incelemesini ifade ederken, negatif bir sonuç de geçen bir inceleme anlamına gelir.
 
-## <a name="shut-down-the-notebook"></a>Not defterini Kapat
-Uygulamayı çalıştırmayı tamamladıktan sonra kaynakları serbest bırakmak için Not defterini kapatmanız gerekir. Bunu yapmak için not defterindeki **Dosya** menüsünde **Kapat ve Durdur**’u seçin. Bu işlem kapanır ve not defterini kapatır.
+## <a name="shut-down-the-notebook"></a>Not defterini kapatma
+Uygulamayı çalıştırmayı bitirdikten sonra, kaynakları serbest bırakmak için Not defterini kapatmanız gerekir. Bunu yapmak için not defterindeki **Dosya** menüsünde **Kapat ve Durdur**’u seçin. Bu, kapanır ve Not defterini kapatır.
 
 ## <a name="seealso"></a>Ayrıca bkz.
-* [Genel Bakış: Azure HDInsight üzerinde Apache Spark](apache-spark-overview.md)
+* [Genel Bakış: Azure HDInsight’ta Apache Spark](apache-spark-overview.md)
 
 ### <a name="scenarios"></a>Senaryolar
-* [Apache Spark ile BI: BI araçları ile HDInsight Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](apache-spark-use-bi-tools.md)
-* [Apache Spark Machine Learning ile: HVAC verilerini kullanarak bina sıcaklığını çözümlemek için HDInsight içindeki Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
-* [HDInsight Apache Spark'ı kullanarak Web sitesi günlüğü çözümlemesi](apache-spark-custom-library-website-log-analysis.md)
+* [BI ile Apache Spark: bı araçlarıyla HDInsight 'ta Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](apache-spark-use-bi-tools.md)
+* [Machine Learning ile Apache Spark: HVAC verilerini kullanarak oluşturma sıcaklığını çözümlemek için HDInsight 'ta Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
+* [HDInsight 'ta Apache Spark kullanarak Web sitesi günlüğü Analizi](apache-spark-custom-library-website-log-analysis.md)
 
 ### <a name="create-and-run-applications"></a>Uygulamaları oluşturma ve çalıştırma
 * [Scala kullanarak tek başına uygulama oluşturma](apache-spark-create-standalone-application.md)
-* [Apache Livy kullanarak bir Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
+* [Apache Livy kullanarak Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
 
 ### <a name="tools-and-extensions"></a>Araçlar ve uzantılar
 * [Spark Scala uygulamaları oluşturmak ve göndermek amacıyla IntelliJ IDEA için HDInsight Araçları Eklentisini kullanma](apache-spark-intellij-tool-plugin.md)
-* [Apache Spark uygulamalarında uzaktan hata ayıklamak amacıyla Intellij Idea için HDInsight araçları eklentisi kullanma](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
-* [HDInsight üzerinde Apache Spark kümesi ile Apache Zeppelin not defterlerini kullanma](apache-spark-zeppelin-notebook.md)
-* [HDInsight için Apache Spark kümesinde Jupyter not defteri için kullanılabilir çekirdekler](apache-spark-jupyter-notebook-kernels.md)
+* [Apache Spark uygulamalarında uzaktan hata ayıklama için IntelliJ fıkır için HDInsight Araçları eklentisini kullanın](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
+* [HDInsight 'ta Apache Spark kümesiyle Apache Zeppelin not defterlerini kullanma](apache-spark-zeppelin-notebook.md)
+* [HDInsight için Apache Spark kümesindeki Jupyter Not defteri için kullanılabilir kernels](apache-spark-jupyter-notebook-kernels.md)
 * [Jupyter not defterleri ile dış paketleri kullanma](apache-spark-jupyter-notebook-use-external-packages.md)
 * [Jupyter’i bilgisayarınıza yükleme ve bir HDInsight Spark kümesine bağlanma](apache-spark-jupyter-notebook-install-locally.md)
 

@@ -1,11 +1,10 @@
 ---
-title: Azure Güvenlik Merkezi Öğreticisi - Kaynaklarınızı Azure Güvenlik Merkezi ile koruma | Microsoft Docs
-description: Bu öğreticide, tam zamanında VM erişimi ilkesinin ve uygulama denetim ilkesinin nasıl yapılandırılacağı gösterilmektedir.
+title: Erişim & uygulama denetimleri öğreticisi-Azure Güvenlik Merkezi
+description: Bu öğreticide, tam zamanında VM erişim ilkesinin ve uygulama denetim ilkesinin nasıl yapılandırılacağı gösterilir.
 services: security-center
 documentationcenter: na
-author: monhaber
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: 61e95a87-39c5-48f5-aee6-6f90ddcd336e
 ms.service: security-center
 ms.devlang: na
@@ -13,51 +12,49 @@ ms.topic: tutorial
 ms.custom: mvc
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/3/2018
-ms.author: v-mohabe
-ms.openlocfilehash: 8fc287826d1a98b5d61229979544fdb3780455d4
-ms.sourcegitcommit: e9a46b4d22113655181a3e219d16397367e8492d
+ms.date: 12/03/2018
+ms.author: memildin
+ms.openlocfilehash: 4b40b7c6f755eb2107a09b1b881ea33fa2187f29
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65967931"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73686340"
 ---
 # <a name="tutorial-protect-your-resources-with-azure-security-center"></a>Öğretici: Kaynaklarınızı Azure Güvenlik Merkezi ile koruma
-Güvenlik Merkezi, kötü amaçlı etkinliği engellemek için erişim ve uygulama denetimlerini kullanarak tehditlere maruz kalma riskinizi sınırlar. Just-ın-Time (JIT) sanal makine (VM) erişimi, Vm'lere kalıcı erişimi engellemenize olanak sağlayarak saldırılarına maruz kalma riskinizi azaltır. Bunun yerine, VM'ler için yalnızca gerektiğinde denetimli ve denetlenen erişim sağlamış olursunuz. Uyarlamalı uygulama denetimleri hangi uygulamaların VM'leriniz üzerinde çalışabileceğini denetleyerek kötü amaçlı yazılımlara karşı VM'lerin sağlamlaştırılmasına yardımcı olur. Güvenlik Merkezi, makine öğrenimi özelliklerini kullanarak VM'de çalışan işlemleri analiz eder ve bu bilgileri kullanarak beyaz listeye ekleme kuralları uygulamanıza yardımcı olur.
+Güvenlik Merkezi, kötü amaçlı etkinliği engellemek için erişim ve uygulama denetimlerini kullanarak tehditlere maruz kalma riskinizi sınırlar. Tam zamanında (JıT) sanal makine (VM) erişimi, VM 'lere kalıcı erişimi reddetmenizi sağlayarak saldırılara maruz kalmayı azaltır. Bunun yerine, VM'ler için yalnızca gerektiğinde denetimli ve denetlenen erişim sağlamış olursunuz. Uyarlamalı uygulama denetimleri hangi uygulamaların VM'leriniz üzerinde çalışabileceğini denetleyerek kötü amaçlı yazılımlara karşı VM'lerin sağlamlaştırılmasına yardımcı olur. Güvenlik Merkezi, makine öğrenimi özelliklerini kullanarak VM'de çalışan işlemleri analiz eder ve bu bilgileri kullanarak beyaz listeye ekleme kuralları uygulamanıza yardımcı olur.
 
-Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Tam zamanında VM erişimi denetimini yapılandırma
+> * Tam zamanında VM erişimi ilkesi yapılandırma
 > * Uygulama denetim ilkesi yapılandırma
 
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial/) oluşturun.
-
-## <a name="prerequisites"></a>Önkoşullar
-Bu öğreticide ele alınan özellikleri adım adım görmek için Güvenlik Merkezi’nin Standart fiyatlandırma katmanında olmanız gerekir. Ücretsiz olarak Güvenlik Merkezi standart deneyebilirsiniz. Daha fazla bilgi için bkz. [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/security-center/). [Azure aboneliğinizi Güvenlik Merkezi Standart katmanına ekleme](security-center-get-started.md) başlıklı hızlı başlangıçta Standart katmanına nasıl yükseltebileceğiniz adım adım açıklanmıştır.
+## <a name="prerequisites"></a>Ön koşullar
+Bu öğreticide ele alınan özellikleri adım adım görmek için Güvenlik Merkezi’nin Standart fiyatlandırma katmanında olmanız gerekir. Güvenlik Merkezi Standart 'ı ücretsiz olarak deneyebilirsiniz. Daha fazla bilgi için bkz. [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/security-center/). [Azure aboneliğinizi Güvenlik Merkezi Standart katmanına ekleme](security-center-get-started.md) başlıklı hızlı başlangıçta Standart katmanına nasıl yükseltebileceğiniz adım adım açıklanmıştır.
 
 ## <a name="manage-vm-access"></a>VM erişimini yönetme
-JIT VM erişimi, Vm'lere gerektiğinde bağlanılabilmesi için kolay erişim sağlamanın yanı sıra saldırılara maruz kalma riskinizi azaltır, Azure Vm'lere gelen trafiği kilitlemek için kullanılabilir.
+JıT VM erişimi, Azure VM 'lerinize gelen trafiği kilitlemek ve gerektiğinde VM 'lere bağlanmak için kolay erişim sağlarken saldırılara maruz kalma olasılığını azaltmak için kullanılabilir.
 
-Yönetim bağlantı noktalarının her zaman açık olması gerekmez. Bunların yalnızca VM’ye bağlı olduğunuzda (örneğin, yönetim veya bakım görevleri gerçekleştirmek için) açık olması gerekir. Tam zamanında erişim etkinleştirildiğinde Güvenlik Merkezi, yönetim bağlantı noktalarının saldırganlar tarafından hedeflenememesi için bunlara erişimi kısıtlayan Ağ Güvenlik Grubu (NSG) kurallarını kullanır.
+Yönetim bağlantı noktalarının her zaman açık olması gerekmez. Bunların yalnızca VM’ye bağlı olduğunuzda (örneğin, yönetim veya bakım görevleri gerçekleştirmek için) açık olması gerekir. Tam zamanında etkinleştirildiğinde Güvenlik Merkezi, ağ güvenlik grubu (NSG) kurallarını kullanır ve bu sayede, saldırganlar tarafından hedeflenememesi için yönetim bağlantı noktalarına erişimi kısıtlar.
 
-1. Güvenlik Merkezi ana menüsünde seçin **tam zamanında VM erişimi** altında **Gelişmiş bulut SAVUNMASI**.
+1. Güvenlik Merkezi ana menüsünde **GELIŞMIŞ bulut savunması**altında **tam zamanında VM erişimi** ' ni seçin.
 
-   ![Anlık VM erişimi][1]
+   ![Tam zamanında VM erişimi][1]
 
-   **Tam zamanında VM erişimi** , Vm'lerinizin durumu hakkında bilgi sağlar:
+   **Tam ZAMANıNDA VM erişimi** , VM 'lerinizin durumu hakkında bilgi sağlar:
 
-   - **Yapılandırılan** - Tam zamanında VM erişimini destekleyecek şekilde yapılandırılmış VM’lerdir.
-   - **Önerilen** - Tam zamanında VM erişimini destekleyebilen ancak bunun için yapılandırılmamış VM’lerdir.
+   - **Yapılandırıldı** -tam zamanında VM erişimini destekleyecek şekilde yapılandırılmış VM 'ler.
+   - Tam zamanında VM erişimini destekleyebilen, ancak olarak yapılandırılmamış VM 'ler **önerilir** .
    - **Öneri olmayan** - Bir VM’nin önerilmemesinin olası nedenleri şunlardır:
 
-     - NSG yok - Tam zamanında erişim çözümü için NSG’nin mevcut olması gerekir.
-     - Klasik VM - Güvenlik Merkezi tam zamanında VM erişimi şu anda yalnızca Azure Resource Manager üzerinden dağıtılan VM’leri desteklemektedir.
-     - Diğer - Aboneliğin veya kaynak grubunun güvenlik ilkesinde tam zamanında erişim çözümü kapatılmışsa VM bu kategoridedir ya da bu kategorideki bir VM’de genel IP adresi eksik olabilir ve bir NSG mevcut olmayabilir.
+     - Eksik NSG-tam zamanında çözüm, bir NSG 'nin yerinde olmasını gerektirir.
+     - Klasik VM-Güvenlik Merkezi tam zamanında VM erişimi şu anda yalnızca Azure Resource Manager aracılığıyla dağıtılan VM 'Leri desteklemektedir.
+     - Diğer-bir sanal makine, aboneliğin veya kaynak grubunun güvenlik ilkesinde tam zamanında çözüm kapatılmışsa veya VM 'nin genel IP 'si eksikse ve bir NSG yoksa, bu kategoride olur.
 
-2. Önerilen bir VM’yi seçin ve bu VM için bir tam zamanında ilkesi yapılandırmak üzere **1 VM’de JIT’yi etkinleştir** seçeneğine tıklayın:
+2. Önerilen bir VM seçin ve bu VM için tam zamanında bir ilke yapılandırmak üzere **1 VM 'de JIT 'ı etkinleştir** ' e tıklayın:
 
-   Güvenlik Merkezi’nin önerdiği varsayılan bağlantı noktalarını kaydedebilir veya tam zamanında erişim çözümünü etkinleştirmek için kullanmak istediğiniz yeni bir bağlantı noktası ekleyip yapılandırabilirsiniz. Bu öğreticide **Ekle** seçeneğini belirleyerek bir bağlantı noktası ekleyeceğiz.
+   Güvenlik Merkezi 'nin önerdiği varsayılan bağlantı noktalarını kaydedebilir veya tam zamanında çözümü etkinleştirmek istediğiniz yeni bir bağlantı noktası ekleyip yapılandırabilirsiniz. Bu öğreticide **Ekle** seçeneğini belirleyerek bir bağlantı noktası ekleyeceğiz.
 
    ![Bağlantı noktası yapılandırması ekleme][2]
 
@@ -73,17 +70,15 @@ Yönetim bağlantı noktalarının her zaman açık olması gerekmez. Bunların 
 ## <a name="harden-vms-against-malware"></a>VM’leri kötü amaçlı yazılımlara karşı sağlamlaştırma
 Uyarlamalı uygulama denetimleri, diğer avantajlarının yanı sıra VM’lerinizin kötü amaçlı yazılımlara karşı sağlamlaştırılmasına yardımcı olan yapılandırılmış kaynak grupları üzerinde çalışmasına izin verilen uygulamalar tanımlamanıza yardımcı olur. Güvenlik Merkezi, makine öğrenimi özelliklerini kullanarak VM'de çalışan işlemleri analiz eder ve bu bilgileri kullanarak beyaz listeye ekleme kuralları uygulamanıza yardımcı olur.
 
-Bu özellik yalnızca Windows makinelerde kullanılabilir.
-
 1. Güvenlik Merkezi ana menüsüne geri dönün. **GELİŞMİŞ BULUT SAVUNMASI** bölümünde **Uyarlamalı uygulama denetimleri** seçeneğini belirleyin.
 
    ![Uyarlamalı uygulama denetimleri][3]
 
    **Kaynak grupları** bölümünde üç sekme bulunur:
 
-   - **Yapılandırılmış**: Uygulama denetimiyle yapılandırılan Vm'leri içeren kaynak gruplarının listesi.
-   - **Önerilen**: Uygulama denetimi önerilir kaynak gruplarının listesi.
-   - **Öneri olmayan**: Uygulama denetimi önerisi olmayan Vm'leri içeren kaynak gruplarının listesi. Örneğin, uygulamaların sürekli değiştiği ve kararlı bir duruma geçmediği VM'ler.
+   - **Yapılandırılan**: Uygulama denetimiyle yapılandırılan VM’leri içeren kaynak gruplarının listesidir.
+   - **Önerilen**: Uygulama denetiminin önerildiği kaynak gruplarının listesidir.
+   - **Öneri olmayan**: Uygulama denetimi önerisi olmayan VM’leri içeren kaynak gruplarının listesidir. Örneğin, uygulamaların sürekli değiştiği ve kararlı bir duruma geçmediği VM'ler.
 
 2. Uygulama denetimi önerilerinin bulunduğu kaynak gruplarının listesi için **Önerilen** sekmesini seçin.
 
@@ -91,15 +86,15 @@ Bu özellik yalnızca Windows makinelerde kullanılabilir.
 
 3. **Uygulama denetimi kuralları oluştur** seçeneğini açmak için bir kaynak grubunu seçin. **VM'leri Seç** bölümünde önerilen VM'lerin listesini gözden geçirin ve uygulama denetimi gerçekleştirmek istemediklerinizin yanındaki onay işaretini kaldırın. **Beyaz listeye ekleme kuralları için işlemleri seçin** bölümünde önerilen uygulamaların listesini gözden geçirin ve uygulamak istemediklerinizin yanındaki onay işaretini kaldırın. Liste aşağıdakileri içerir:
 
-   - **AD**: Tam uygulama yolu
-   - **İŞLEMLER**: Her yolun içinde bulunan nasıl uygulama sayısı
-   - **ORTAK**: "Evet seçeneği", bu işlemlerin bu kaynak grubundaki VM'lerin çoğunda yürütüldüğünü gösterir
-   - **AÇIKLARDAN**: Bir uyarı simgesi, uygulamaların bir saldırgan tarafından uygulama beyaz listesini atlamak için kullanılabilir olmadığını gösterir. Bu uygulamaları onaylamadan önce gözden geçirmeniz önerilir.
+   - **AD**: Uygulamanın tam yolu
+   - **İŞLEMLER**: Her yolun içinde bulunan uygulama sayısı
+   - **ORTAK**: "Evet", bu işlemlerin söz konusu kaynak grubundaki VM’lerin birçoğunda yürütüldüğünü belirtir
+   - **AÇIKLARDAN YARARLANABİLİR**: Bir uyarı simgesi, uygulamaların bir saldırgan tarafından uygulama beyaz listesini atlamak için kullanılabileceğini belirtir. Bu uygulamaları onaylamadan önce gözden geçirmeniz önerilir.
 
 4. Seçimlerinizi tamamladıktan sonra **Oluştur**’u seçin.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
-Bu koleksiyondaki diğer hızlı başlangıçlar ve öğreticiler bu hızlı başlangıcı temel alır. Sonraki hızlı başlangıç ve öğreticilerle çalışmaya devam etmeyi planlıyorsanız Standart katmanını çalıştırmaya devam edin ve otomatik sağlamayı etkinleştirilmiş halde tutun. Devam etmeyi planlamıyorsanız veya Ücretsiz katmanına dönmek istiyorsanız:
+Bu koleksiyondaki diğer hızlı başlangıçlar ve öğreticiler bu hızlı başlangıcı temel alır. Sonraki hızlı başlangıç ve öğreticilerle çalışmaya devam etmeyi planlıyorsanız, standart katmanı çalıştırmaya devam edin ve otomatik sağlamayı etkin tutun. Devam etmeyi planlamıyorsanız veya Ücretsiz katmanına dönmek istiyorsanız:
 
 1. Güvenlik Merkezi ana menüsüne dönüp **Güvenlik İlkesi**’ni seçin.
 2. Ücretsiz katmanına döndürmek istediğiniz aboneliği veya ilkeyi seçin. **Güvenlik ilkesi** açılır.
@@ -122,7 +117,7 @@ Otomatik sağlamayı devre dışı bırakmak istiyorsanız:
 Bu öğreticide, aşağıdaki işlemleri gerçekleştirerek, tehditlere maruz kalma riskinizi nasıl sınırlayabileceğinizi öğrendiniz:
 
 > [!div class="checklist"]
-> * VM’lere yalnızca gerektiğinde denetimli ve denetlenen erişim sağlamak için bir tam zamanında VM erişimi ilkesi yapılandırma
+> * Yalnızca gerektiğinde VM 'lere denetimli ve denetlenen erişim sağlamak için tam zamanında VM erişim ilkesi yapılandırma
 > * VM’lerinizde hangi uygulamaların çalışabileceğini denetlemek için uyarlamalı uygulama denetimleri ilkesi yapılandırma
 
 Güvenlik olaylarına yanıt verme hakkında bilgi edinmek için bir sonraki öğreticiye geçin.

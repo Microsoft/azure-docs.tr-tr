@@ -1,24 +1,23 @@
 ---
-title: "Şirket içi ağınıza, Expressroute'a genel bakış - özel bir bağlantı üzerinden Azure'a genişletme: Azure | Microsoft Docs"
+title: "Azure ExpressRoute 'A genel bakış: özel bir bağlantı üzerinden Bağlan"
 description: ExpressRoute’a Teknik Genel Bakış bölümünde, şirket içi ağınızı bir özel bağlantı üzerinden Azure’a genişletmek üzere ExpressRoute bağlantısının nasıl çalıştığı açıklanmaktadır.
 services: expressroute
 author: mialdrid
 ms.service: expressroute
 ms.topic: overview
-ms.date: 05/20/2019
+ms.date: 09/18/2019
 ms.author: mialdrid
-ms.custom: seodec18
-ms.openlocfilehash: 6d83cb76abad3923dc7f0473f4a609938093d990
-ms.sourcegitcommit: 1aefdf876c95bf6c07b12eb8c5fab98e92948000
+ms.openlocfilehash: db728de120a50461257d8e85e708aa4c7f4d6190
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66730490"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083418"
 ---
 # <a name="expressroute-overview"></a>ExpressRoute'a genel bakış
-ExpressRoute, bağlantı sağlayıcı tarafından kolaylaştırılan özel bağlantı üzerinden şirket içi ağlarınızı Microsoft bulutuna genişletmenizi sağlar. ExpressRoute'u kullanarak Microsoft Azure, Office 365 ve Dynamics 365 gibi Microsoft bulut hizmetleriyle bağlantı kurabilirsiniz.
+ExpressRoute, bağlantı sağlayıcı tarafından kolaylaştırılan özel bağlantı üzerinden şirket içi ağlarınızı Microsoft bulutuna genişletmenizi sağlar. ExpressRoute ile Microsoft Azure ve Office 365 gibi Microsoft bulut hizmetleriyle bağlantı kurabilirsiniz.
 
-Ortak yerleşim tesisinde bağlantı sağlayıcısı üzerinden herhangi bir ağdan herhangi bir ağa (IP VP), noktadan noktaya Ethernet ağı veya sanal çapraz bağlantısından bağlantı olabilir. ExpressRoute bağlantıları ortak İnternet üzerinden geçmemektedir. Bu, daha fazla güvenilirlik, daha yüksek hız, tutarlı gecikme süreleri ve daha yüksek güvenlik tipik Internet üzerinden ExpressRoute bağlantılarına izin verir. ExpressRoute kullanarak ağınızı Microsoft’a bağlama hakkında bilgi için bkz. [ExpressRoute bağlantı modelleri](expressroute-connectivity-models.md).
+Ortak yerleşim tesisinde bağlantı sağlayıcısı üzerinden herhangi bir ağdan herhangi bir ağa (IP VPN), noktadan noktaya Ethernet ağı veya sanal çapraz bağlantısından bağlantı olabilir. ExpressRoute bağlantıları ortak İnternet üzerinden geçmemektedir. Bu, ExpressRoute bağlantılarına Internet üzerinden tipik bağlantılardan daha fazla güvenilirlik, daha hızlı hız, tutarlı gecikme süreleri ve daha yüksek güvenlik sunma olanağı sağlar. ExpressRoute kullanarak ağınızı Microsoft’a bağlama hakkında bilgi için bkz. [ExpressRoute bağlantı modelleri](expressroute-connectivity-models.md).
 
 ![ExpressRoute bağlantısına genel bakış](./media/expressroute-introduction/expressroute-connection-overview.png)
 
@@ -46,7 +45,6 @@ Her ExpressRoute bağlantı hattı, bağlantı sağlayıcısından veya ağını
 ExpressRoute bağlantıları aşağıdaki hizmetlere erişim sağlar:
 * Microsoft Azure hizmetleri
 * Microsoft Office 365 hizmetleri
-* Microsoft Dynamics 365
 
 > [!NOTE]
 > [!INCLUDE [expressroute-office365-include](../../includes/expressroute-office365-include.md)]
@@ -60,10 +58,10 @@ ExpressRoute üzerinde desteklenen hizmetlerin ayrıntılı listesi için [Expre
 Örneğin, Microsoft'a Amsterdam'da ExpressRoute aracılığıyla bağlandıysanız Kuzey ve Batı Avrupa'da barındırılan tüm Microsoft bulut hizmetlerine erişiminiz olur. Jeopolitik bölgeler, ilişkili Microsoft bulut bölgeleri ve karşılık gelen ExpressRoute eşleme konumlarına genel bakış için [ExpressRoute iş ortakları ve eşleme konumları](expressroute-locations.md) makalesine bakın.
 
 ### <a name="global-connectivity-with-expressroute-premium"></a>ExpressRoute Premium ile genel bağlantı
-Etkinleştirebilirsiniz [ExpressRoute Premium](expressroute-faqs.md) coğrafi sınırlar arasındaki bağlantıyı genişletmek için. Örneğin, Microsoft'a Amsterdam'da ExpressRoute aracılığıyla bağlanırsanız dünyadaki tüm bölgelerde barındırılan tüm Microsoft bulut hizmetlerine (ulusal bulutlar dışında) erişiminiz olur. Güney Amerika ve Avustralya'da dağıtılan hizmetlere Kuzey ve Batı Avrupa bölgeleriyle aynı şekilde erişebilirsiniz.
+Gentik sınırlar arasında bağlantıyı genişletmek için [ExpressRoute Premium](expressroute-faqs.md) 'u etkinleştirebilirsiniz. Örneğin, Microsoft'a Amsterdam'da ExpressRoute aracılığıyla bağlanırsanız dünyadaki tüm bölgelerde barındırılan tüm Microsoft bulut hizmetlerine (ulusal bulutlar dışında) erişiminiz olur. Güney Amerika ve Avustralya'da dağıtılan hizmetlere Kuzey ve Batı Avrupa bölgeleriyle aynı şekilde erişebilirsiniz.
 
 ### <a name="local-connectivity-with-expressroute-local"></a>ExpressRoute yerel ile yerel bağlantı
-Sağlayarak, uygun maliyetli bir veri aktarabileceğini [yerel SKU](expressroute-faqs.md) verilerinizi bir ExpressRoute konumuna istediğiniz Azure bölgeyi getirebilir. Yerel ile ExpressRoute bağlantı noktası ücreti veri aktarımı dahildir. 
+Verilerinizi istediğiniz Azure bölgenize yakın bir ExpressRoute konumuna getirebiliyorsanız, [Yerel SKU 'yu](expressroute-faqs.md) etkinleştirerek verileri uygun maliyetli bir şekilde aktarabilirsiniz. Yerel ile veri aktarımı ExpressRoute bağlantı noktası ücretine dahil edilmiştir. 
 
 ### <a name="across-on-premises-connectivity-with-expressroute-global-reach"></a>ExpressRoute Global Reach ile şirket içi bağlantılar
 ExpressRoute bağlantı hattınızı bağlayarak şirket içi siteleriniz arasında veri alışverişi yapmak için ExpressRoute Global Reach’i etkinleştirebilirsiniz. Örneğin Kaliforniya’da, Silikon Vadisi’ndeki ExpressRoute’a bağlanmış olan özel bir veri merkeziniz ve Teksas'ta, Dallas'taki ExpressRoute'a bağlanmış bir başka özel veri merkeziniz varsa ExpressRoute Global Reach ile özel veri merkezlerinizi iki ExpressRoute bağlantı hattı aracılığıyla birbirlerine bağlayabilirsiniz. Veri merkezleri arası trafiğiniz Microsoft ağı üzerinden geçer.
@@ -81,7 +79,7 @@ ExpressRoute Direct, müşterilere Microsoft'un dünya çapında stratejik nokta
 ExpressRoute Direct'in başlıca özellikleri arasında diğerlerinin yanı sıra şunlar bulunur:
 
 * Depolama ve Cosmos DB gibi hizmetler için Büyük Veri Alımı özelliği
-* Fiziksel yalıtım düzenlenen ve gerektiren sektörler için adanmış ve bağlantı gibi yalıtılmış: Banka, devlet ve perakende
+* Bankacılık, kamu ve perakendecilik gibi denetime tâbi, adanmış ve yalıtılmış bağlantı gerektiren sektörler için fiziksel yalıtım
 * Bağlantı hattı dağıtımının iş birimine dayalı detaylı denetimi
 
 Daha fazla bilgi için bkz. [ExpressRoute Direct Hakkında](https://go.microsoft.com/fwlink/?linkid=2022973).
@@ -90,9 +88,9 @@ Daha fazla bilgi için bkz. [ExpressRoute Direct Hakkında](https://go.microsoft
 ExpressRoute bağlantı hattını çeşitli sayıda bant genişlikleriyle satın alabilirsiniz. Desteklenen bant genişlikleri aşağıda listelenmiştir. Destekledikleri bant genişliklerini belirlemek için bağlantı sağlayıcınıza başvurmayı unutmayın.
 
 * 50 Mbps
-* 100 Mbps
+* 100 Mb/sn
 * 200 Mbps
-* 500 Mbps
+* 500 Mb/sn
 * 1 Gbps
 * 2 Gbps
 * 5 Gbps

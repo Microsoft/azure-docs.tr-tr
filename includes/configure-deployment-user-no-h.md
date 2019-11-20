@@ -8,26 +8,24 @@ ms.topic: include
 ms.date: 06/14/2019
 ms.author: cephalin
 ms.custom: include file
-ms.openlocfilehash: ebea8bfd69a4df605142ab82f3efbc7d97d34529
-ms.sourcegitcommit: 22c97298aa0e8bd848ff949f2886c8ad538c1473
+ms.openlocfilehash: 4e699707db02de07f3d1ebb7d1fa8d0575a10aa3
+ms.sourcegitcommit: 64798b4f722623ea2bb53b374fb95e8d2b679318
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67143962"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67836892"
 ---
-Dağıtım kimlik bilgileri Azure Cloud Shell'de yapılandırma [ `az webapp deployment user set` ](/cli/azure/webapp/deployment/user?view=azure-cli-latest#az-webapp-deployment-user-set) komutu. FTP ve yerel Git dağıtımını web uygulamasında bu dağıtım kullanıcısını kullanın. Kullanıcı adı ve parola, hesap düzeyindedir. _Bunlar, Azure aboneliği kimlik bilgilerinizden farklı._
+FTP ve yerel Git için bir Azure web uygulaması kullanarak dağıtabilirsiniz bir *dağıtım kullanıcısı*. Dağıtım kullanıcı yapılandırdıktan sonra tüm Azure dağıtımlarınız için kullanabilirsiniz. Hesap düzeyinde dağıtım kullanıcı adı ve parola, Azure aboneliği kimlik bilgilerinizden farklıdır. 
 
-Aşağıdaki örnekte, değiştirin  *\<kullanıcıadı >* ve  *\<parola >* , yeni kullanıcı adı ve parola köşeli ayraçlar dahil. Kullanıcı adı Azure içinde benzersiz olmalıdır. Parola en az sekiz karakter uzunluğunda olmalı, şu üç öğeyi sahip olmalıdır: harf, rakam ve semboller.
+Dağıtım kullanıcısı yapılandırma için çalıştırın [az webapp deployment kullanıcı kümesi](/cli/azure/webapp/deployment/user?view=azure-cli-latest#az-webapp-deployment-user-set) Azure Cloud shell'de komutu. Değiştirin \<username > ve \<parola > Dağıtım kullanıcı adı ve parola ile. 
+
+- Kullanıcı adı Azure içinde benzersiz olmalıdır ve yerel Git için bildirim içermemelidir ' @' sembolü. 
+- Parola en az sekiz karakter uzunluğunda olmalı, şu üç öğeyi sahip olmalıdır: harf, rakam ve semboller. 
 
 ```azurecli-interactive
 az webapp deployment user set --user-name <username> --password <password>
 ```
 
-Olarak gösterilen parolayla bir JSON çıkışı size `null`. `'Conflict'. Details: 409` hatası alırsanız kullanıcı adını değiştirin. `'Bad Request'. Details: 400` hatası alırsanız daha güçlü bir parola kullanın. Dağıtım kullanıcı adı değil içermelidir ' @' yerel Git gönderim için simge.
+Parola olarak JSON çıktısını gösterir `null`. `'Conflict'. Details: 409` hatası alırsanız kullanıcı adını değiştirin. `'Bad Request'. Details: 400` hatası alırsanız daha güçlü bir parola kullanın. 
 
-Bu dağıtım kullanıcısını yalnızca bir kez yapılandırın. Tüm Azure dağıtımlarınız için kullanabilirsiniz.
-
-> [!NOTE]
-> Kullanıcı adı ve parolayı kaydedin. Daha sonra web uygulamasının dağıtımı için bunlara ihtiyacınız olacaktır.
->
->
+Kullanıcı adı ve web uygulamalarınızı dağıtmak için kullanılacak parolayı kaydedin.

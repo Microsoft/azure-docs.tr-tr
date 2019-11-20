@@ -1,19 +1,19 @@
 ---
-title: Azure PowerShell Betiği - Azure Cosmos hesabınız için değişiklik yük devretme öncelik
-description: Azure PowerShell betik örneği - Azure Cosmos hesabınız için değişiklik yük devretme öncelik
+title: Azure PowerShell betiği-yük devretme önceliğini değiştirme veya bir Azure Cosmos hesabı için yük devretmeyi tetikleme
+description: Azure PowerShell betik örneği-Azure Cosmos hesabı için yük devretme önceliğini değiştirme veya yük devretmeyi tetikleme
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: samples
-ms.date: 05/06/2019
+ms.topic: sample
+ms.date: 09/20/2019
 ms.author: mjbrown
-ms.openlocfilehash: 785ca8941c24014fd00d8135b66cefccd99d2951
-ms.sourcegitcommit: d3b1f89edceb9bff1870f562bc2c2fd52636fc21
+ms.openlocfilehash: e4406124a7ea4eac213d830d0e5960e76fb6d364
+ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67561212"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71155397"
 ---
-# <a name="change-failover-priority-for-an-azure-cosmos-account-using-powershell"></a>Bir Azure Cosmos hesabının PowerShell kullanılarak yük devretme önceliğini değiştirmek
+# <a name="change-failover-priority-or-trigger-failover-for-an-azure-cosmos-account-using-powershell"></a>PowerShell kullanarak bir Azure Cosmos hesabı için yük devretme önceliğini değiştirme veya yük devretmeyi tetikleme
 
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
@@ -21,7 +21,12 @@ ms.locfileid: "67561212"
 
 ## <a name="sample-script"></a>Örnek betik
 
-[!code-powershell[main](../../../../../powershell_scripts/cosmosdb/sql/ps-account-failover-priority-update.ps1 "Update failover priority for an Azure Cosmos account")]
+> [!NOTE]
+> Bir bölgedeki `failoverPriority=0` herhangi bir değişiklik, el ile yük devretme tetikler ve yalnızca el ile yük devretme için yapılandırılmış bir hesaba yapılabilir. Diğer tüm bölgelerde yapılan değişiklikler yalnızca Cosmos hesabının yük devretme önceliğini değiştirir.
+> [!NOTE]
+> Bu örnekte bir SQL (Core) API hesabı kullanılması gösterilmektedir. Bu örneği diğer API 'Ler için kullanmak üzere ilgili özellikleri kopyalayın ve API 'ye özel betiğe uygulayın
+
+[!code-powershell[main](../../../../../powershell_scripts/cosmosdb/common/ps-account-failover-priority-update.ps1 "Update failover priority for an Azure Cosmos account or trigger a manual failover")]
 
 ## <a name="clean-up-deployment"></a>Dağıtımı temizleme
 
@@ -38,8 +43,8 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 |**Azure kaynakları**| |
-| [Çağırma AzResourceAction](https://docs.microsoft.com/powershell/module/az.resources/invoke-azresourceaction) | Kaynak üzerinde bir eylemi çağırır. |
-|**Azure kaynak grupları**| |
+| [Invoke-AzResourceAction](https://docs.microsoft.com/powershell/module/az.resources/invoke-azresourceaction) | Kaynak üzerinde bir eylemi çağırır. |
+|**Azure Kaynak grupları**| |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 |||
 

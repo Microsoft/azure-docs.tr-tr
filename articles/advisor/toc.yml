@@ -18,10 +18,14 @@
       href: advisor-performance-recommendations.md
     - name: Hizmet maliyetlerini azaltma
       href: advisor-cost-recommendations.md
+    - name: Operasyonel mükemmelliğe ulaşın
+      href: advisor-operational-excellence-recommendations.md
     - name: Önerileri yapılandırma
       href: view-recommendations.md
     - name: İzinler ve engellenen eylemler
       href: permissions.md
+    - name: Öneriler için Uyarıları yapılandırma
+      href: advisor-alerts.md
 - name: Başvuru
   items:
     - name: Güvenlik Merkezi

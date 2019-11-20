@@ -1,41 +1,33 @@
 ---
-title: Resource Manager dağıtım sorunlarını giderme | Microsoft Docs
-description: İzleme ve sorun giderme Resource Manager dağıtımları hakkında bilgi edinin.
-services: azure-resource-manager
-documentationcenter: ''
+title: Dağıtımlarla ilgili sorunları giderme
+description: Azure Resource Manager şablonu dağıtımlarını izlemeyi ve sorun gidermeyi öğrenin. Etkinlik günlüklerini ve dağıtım geçmişini gösterir.
 author: mumian
-manager: dougeby
-editor: tysonn
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 01/15/2019
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: c889c3123160680d96889227d6964ff197dc41cc
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: be390b35a69f44aae38bec100deb2d3c07ad6355
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60388667"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149340"
 ---
-# <a name="tutorial-troubleshoot-resource-manager-template-deployments"></a>Öğretici: Resource Manager şablon dağıtımları sorunlarını giderme
+# <a name="tutorial-troubleshoot-resource-manager-template-deployments"></a>Öğretici: Kaynak Yöneticisi şablonu dağıtımlarının sorunlarını giderme
 
-Resource Manager şablonu dağıtım hatalarını giderme hakkında bilgi edinin. Bu öğreticide, bir şablon iki hataları ayarlama ve sorunları gidermek için etkinlik günlükleri ve dağıtım geçmişini kullanmayı öğrenin.
+Kaynak Yöneticisi şablonu dağıtım hatalarını giderme hakkında bilgi edinin. Bu öğreticide, bir şablonda iki hata ayarlarsınız ve sorunları çözmek için etkinlik günlüklerinin ve dağıtım geçmişinin nasıl kullanılacağını öğreneceksiniz.
 
-Şablon dağıtımı için ilişkili hatalar iki tür vardır:
+Şablon dağıtımıyla ilgili iki tür hata vardır:
 
-- **Doğrulama hataları** dağıtımdan önce belirlenebilir senaryoları durumlardan kaynaklanır. Söz dizimi hataları şablonunuzu veya abonelik kotanızı aşılmasına kaynakları dağıtılmaya çalışılırken içerirler. 
-- **Dağıtım hataları** dağıtım işlemi sırasında ortaya koşullarını durumlardan kaynaklanır. Paralel olarak dağıtılan bir kaynağa erişmeye içerirler.
+- Dağıtımdan önce belirlenebileceği senaryolardan **doğrulama hataları** oluşur. Bunlar şablonunuzdaki söz dizimi hataları veya abonelik kotalarınızı aşabilecek kaynak dağıtımı denemeleri olabilir. 
+- Dağıtım işlemi sırasında oluşan koşullardan **dağıtım hataları** oluşur. Bu paralel olarak dağıtılan bir kaynağa erişme denemesi olabilir.
 
-Her iki türde hatalar dağıtım sorunlarını gidermek için kullandığınız hata kodunu döndürür. Hatalar her iki tür etkinlik günlüğü'nde görünür. Ancak, dağıtım hiç başlatılmadı olduğundan doğrulama hatalarını deployment geçmişinizi görünmez.
+Her iki tür hata da dağıtım sorunlarını gidermek için kullanabileceğiniz bir hata kodu döndürür. Etkinlik günlüğünde her iki tür hata da görünür. Öte yandan doğrulama hataları dağıtım geçmişinizde görüntülenmez çünkü dağıtım hiç başlatılmamıştır.
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
 > [!div class="checklist"]
-> * Sorunlu bir şablon oluşturma
-> * Doğrulama hataları sorunlarını giderme
+> * Sorunlu şablon oluşturma
+> * Doğrulama hatalarında sorun giderme
 > * Dağıtım hatalarını giderme
 > * Kaynakları temizleme
 
@@ -47,11 +39,11 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](htt
 
 Bu makaleyi tamamlamak için gerekenler:
 
-- [Resource Manager Araçları uzantısı](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#prerequisites) içeren [Visual Studio Code](https://code.visualstudio.com/).
+- [Resource Manager Araçları uzantısı](https://code.visualstudio.com/) içeren [Visual Studio Code](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#prerequisites).
 
-## <a name="create-a-problematic-template"></a>Sorunlu bir şablon oluşturma
+## <a name="create-a-problematic-template"></a>Sorunlu şablon oluşturma
 
-Adlı bir şablonu açmak [standart depolama hesabı oluşturma](https://azure.microsoft.com/resources/templates/101-storage-account-create/) gelen [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/)ve iki şablon sorunlarını ayarlayın.
+[Azure hızlı başlangıç şablonlarından](https://azure.microsoft.com/resources/templates/) [Standart depolama hesabı oluşturma](https://azure.microsoft.com/resources/templates/101-storage-account-create/) adlı bir şablon açın ve iki şablon sorunu kurun.
 
 1. Visual Studio Code’dan **Dosya**>**Dosya Aç**’ı seçin.
 2. **Dosya adı**’na şu URL’yi yapıştırın:
@@ -60,35 +52,35 @@ Adlı bir şablonu açmak [standart depolama hesabı oluşturma](https://azure.m
     https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-storage-account-create/azuredeploy.json
     ```
 3. Dosyayı açmak için **Aç**’ı seçin.
-4. Değişiklik **apiVersion** aşağıdaki satırı için satır:
+4. **Apiversion** satırını şu satıra değiştirin:
 
     ```json
     "apiVersion1": "2018-07-02",
     ```
-    - **apiVersion1** geçersiz öğe adı. Bir doğrulama hatası var.
-    - API sürümü "2018-07-01" olmalıdır.  Dağıtım bir hatadır.
+    - **apiVersion1** geçersiz öğe adı. Bu bir doğrulama hatasıdır.
+    - API sürümü "2018-07-01" olacaktır.  Bu bir dağıtım hatasıdır.
 
-5. Dosyayı yerel bilgisayarınıza **azuredeploy.json** olarak kaydetmek için **Dosya**>**Farklı Kaydet**’i seçin.
+5. Dosyayı yerel bilgisayarınıza **azuredeploy.json** olarak kaydetmek için >Dosya**Farklı Kaydet**’i seçin.
 
-## <a name="troubleshoot-the-validation-error"></a>Doğrulama hatasını giderme
+## <a name="troubleshoot-the-validation-error"></a>Doğrulama hatası sorunlarını giderme
 
-Başvurmak [şablonu dağıtmak](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#deploy-the-template) şablonu dağıtmak için bölüm.
+Şablonu dağıtmak için [şablonu dağıtma](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#deploy-the-template) bölümüne bakın.
 
-Bir hata kabuğundan benzer alacaksınız:
+Kabuktan şuna benzer bir hata alacaksınız:
 
 ```
 New-AzResourceGroupDeployment : 4:29:24 PM - Error: Code=InvalidRequestContent; Message=The request content was invalid and could not be deserialized: 'Could not find member 'apiVersion1' on object of type 'TemplateResource'. Path 'properties.template.resources[0].apiVersion1', line 36, position 24.'.
 ```
 
-Sorunu ile hata iletisi gösterir **apiVersion1**.
+Hata iletisi, sorunun **apiVersion1**olduğunu gösterir.
 
-Değiştirerek sorunu düzeltmek için Visual Studio Code'u kullanmak **apiVersion1** için **apiVersion**ve şablonu kaydedin.
+**ApiVersion1** to **apiversion**ile değiştirerek sorunu düzeltmek için Visual Studio Code kullanın ve şablonu kaydedin.
 
-## <a name="troubleshoot-the-deployment-error"></a>Dağıtım hatasını giderme
+## <a name="troubleshoot-the-deployment-error"></a>Dağıtım hatası sorunlarını giderme
 
-Başvurmak [şablonu dağıtmak](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#deploy-the-template) şablonu dağıtmak için bölüm.
+Şablonu dağıtmak için [şablonu dağıtma](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#deploy-the-template) bölümüne bakın.
 
-Bir hata kabuğundan benzer alacaksınız:
+Kabuktan şuna benzer bir hata alacaksınız:
 
 ```
 New-AzResourceGroupDeployment : 4:48:50 PM - Resource Microsoft.Storage/storageAccounts 'storeqii7x2rce77dc' failed with message '{
@@ -99,31 +91,31 @@ New-AzResourceGroupDeployment : 4:48:50 PM - Resource Microsoft.Storage/storageA
 }'
 ```
 
-Dağıtım hatası aşağıdaki yordamı kullanarak Azure portalından bulunabilir:
+Dağıtım hatası, aşağıdaki yordam kullanılarak Azure portal bulunabilir:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Kaynak grubu seçerek açın **kaynak grupları** ve sonra kaynak grubu adı. Göreceksiniz **1 başarısız** altında **dağıtım**.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Kaynak **grupları** ' nı ve ardından kaynak grubu adı ' nı seçerek kaynak grubunu açın. **Dağıtım**altında **1 başarısız** olduğunu göreceksiniz.
 
-    ![Resource Manager Öğreticisi sorun giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-error.png)
-3. Seçin **hata ayrıntılarını**.
+    ![Kaynak Yöneticisi öğretici sorunlarını giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-error.png)
+3. **Hata ayrıntılarını**seçin.
 
-    ![Resource Manager Öğreticisi sorun giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-error-details.png)
+    ![Kaynak Yöneticisi öğretici sorunlarını giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-error-details.png)
 
-    Hata iletisi daha önce gösterilene aynıdır:
+    Hata iletisi, daha önce gösterilenle aynıdır:
 
-    ![Resource Manager Öğreticisi sorun giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-error-summary.png)
+    ![Kaynak Yöneticisi öğretici sorunlarını giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-error-summary.png)
 
-Ayrıca, etkinlik günlüklerinden hata bulabilirsiniz:
+Ayrıca, etkinlik günlüklerinden hatayı bulabilirsiniz:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **İzleyici** > **etkinlik günlüğü**.
-3. Günlük bulmak için filtreleri kullanın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. **İzleme** > **etkinlik günlüğü**' nü seçin.
+3. Günlüğü bulmak için filtreleri kullanın.
 
-    ![Resource Manager Öğreticisi sorun giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-activity-log.png)
+    ![Kaynak Yöneticisi öğretici sorunlarını giderme](./media/resource-manager-tutorial-troubleshoot/resource-manager-template-deployment-activity-log.png)
 
 Sorunu düzeltmek için Visual Studio Code kullanın ve ardından şablonu yeniden dağıtın.
 
-Sık karşılaşılan bir listesi için bkz. [Azure Resource Manager ile yaygın Azure dağıtım hatalarını giderme](./resource-manager-common-deployment-errors.md).
+Yaygın hataların listesi için bkz. [Azure Resource Manager ile yaygın Azure dağıtım hatalarıyla Ilgili sorunları giderme](./resource-manager-common-deployment-errors.md).
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
@@ -136,4 +128,4 @@ Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığı
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Resource Manager şablonu dağıtım hatalarını giderme öğrendiniz.  Daha fazla bilgi için [Azure Resource Manager ile yaygın Azure dağıtım hatalarını giderme](./resource-manager-common-deployment-errors.md).
+Bu öğreticide, Kaynak Yöneticisi şablonu dağıtım hatalarını giderme hakkında öğrenirsiniz.  Daha fazla bilgi için bkz. [Azure Resource Manager ile yaygın Azure dağıtım hatalarıyla Ilgili sorunları giderme](./resource-manager-common-deployment-errors.md).

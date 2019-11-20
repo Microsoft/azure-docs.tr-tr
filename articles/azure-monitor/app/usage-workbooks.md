@@ -1,130 +1,125 @@
 ---
-title: Azure İzleyici çalışma kitapları ile etkileşimli raporlar oluşturun | Microsoft docs
-description: Önceden oluşturulmuş ve özel parametreli çalışma kitapları ile karmaşık raporlama basitleştirin
-services: application-insights
-documentationcenter: ''
-author: NumberByColors
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Izleyici çalışma kitapları ile etkileşimli raporlar oluşturma | Microsoft docs
+description: Önceden oluşturulmuş ve özel parametreli çalışma kitapları ile karmaşık raporlamayı kolaylaştırın
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: NumberByColors
+ms.author: daviste
 ms.date: 09/19/2018
 ms.reviewer: mbullwin
-ms.pm_owner: daviste;NumberByColors
-ms.author: daviste
-ms.openlocfilehash: 6d84ad69b067f730bbfbcad9e46bdc9ae2036ead
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bbbf511286c63acf4a939e0a0e7d9c3dc9efa75b
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64569611"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899384"
 ---
-# <a name="create-interactive-reports-with-azure-monitor-workbooks"></a>Azure İzleyici çalışma kitapları ile etkileşimli raporlar oluşturun
+# <a name="create-interactive-reports-with-azure-monitor-workbooks"></a>Azure Izleyici çalışma kitapları ile etkileşimli raporlar oluşturma
 
-Çalışma kitapları, metin, birleştirme [analiz sorguları](https://docs.microsoft.com/azure/application-insights/app-insights-analytics), Azure ölçümleri ve zengin etkileşimli raporları parametreleri. Çalışma kitapları, aynı Azure kaynaklarına erişimi olan tüm diğer ekip üyeleri tarafından düzenlenebilir.
+Çalışma kitapları metin, [analiz sorguları](https://docs.microsoft.com/azure/application-insights/app-insights-analytics), Azure ölçümleri ve parametreleri zengin etkileşimli raporlarla birleştirir. Çalışma kitapları aynı Azure kaynaklarına erişimi olan diğer takım üyeleri tarafından düzenlenebilir.
 
-Çalışma kitapları gibi senaryolar için yararlıdır:
+Çalışma kitapları, şunun gibi senaryolar için yararlıdır:
 
-* İlgilendiğiniz ölçümleri önceden bilmediğinizde uygulamanızın kullanımını keşfetme: kullanıcılar, elde tutma oranları, dönüştürme oranlarını vb. sayısı. Başka kullanım analizi Araçları çalışma kitapları, birden çok türde görselleştirmeler ve analizleri, bu tür bir serbest biçimli araştırması için harika yönetilmelerini birleştirmek olanak tanır.
-* Ekibinizin yeni kullanıma sunulan bir özellik performansıyla açıklanması, anahtar etkileşimleri ve diğer ölçümleri gösteren bir kullanıcı tarafından sayar.
-* Bir A sonuçların paylaşılması / B deneme takımınızın diğer üyeleriyle uygulamanızda. Hedefler için metin ile deneme açıklar ve her bir kullanım ölçümü ve her ölçümü yukarıda veya aşağıda-hedefi olup için açık çağrı-çıkarmayı birlikte deneme değerlendirmek için kullanılan bir Analytics sorgusunu göster.
-* Kesinti etkisini veri, açıklama metnini ve gelecekte kesintileri önlemek için sonraki adımlar ayrıntılı bir birleştirme uygulamanızın kullanım raporlama.
+* Daha önce ilgilendiğiniz ölçümleri bilmiyorsanız uygulamanızın kullanımını keşfetme: Kullanıcı sayısı, bekletme oranları, dönüştürme ücretleri vb. Diğer kullanım analizi araçlarının aksine, çalışma kitapları birden çok görselleştirme ve analizler birleştirerek bu tür bir serbest biçim araştırması için harika hale getirir.
+* Yeni yayınlanan bir özelliğin nasıl çalıştığını, önemli etkileşimler ve diğer ölçümler için Kullanıcı sayısını göstererek takımınıza açıklayan.
+* Uygulamanızdaki bir A/B denemesinin sonuçlarını takımınızın diğer üyeleriyle paylaşma. Denemeye ilişkin hedefleri açıklayabileceğiniz için, her bir metriğin hedefin üstünde mi yoksa altında mı olduğunu gösteren açık çağrı durumuyla birlikte denemeyi değerlendirmek için kullanılan her kullanım ölçümünü ve analitik sorguyu gösterebilirsiniz.
+* Uygulamanızın kullanımıyla ilgili bir kesinti etkisini raporlama, verileri, metin açıklamasını birleştirme ve gelecekte kesintiye neden olan kesintileri önlemeye yönelik sonraki adımların bir tartışmasını bildirme.
 
-## <a name="starting-with-a-template-or-saved-workbook"></a>Bir şablonla başlayarak veya kaydedilmiş bir çalışma kitabı
+## <a name="starting-with-a-template-or-saved-workbook"></a>Şablon veya kaydedilmiş çalışma kitabından başlayarak
 
-Bir çalışma kitabı oluşan bağımsız olarak düzenlenebilir grafikleri, tablolar, metin, bölümlerini yapılır ve giriş denetimleri. Çalışma kitapları daha iyi anlamak için bir açık en iyisidir. 
+Çalışma kitabı, bağımsız olarak düzenlenebilir grafiklerden, tablolardan, metinden ve giriş denetimlerinden oluşan bölümlerden oluşur. Çalışma kitaplarını daha iyi anlamak için en iyisi bir tane açılır. 
 
-Seçin **çalışma kitapları** içinde sol taraftaki menüden uygulamanız için Application Insights karşılaşırsınız.
+Sol taraftaki menüden, uygulamanızın Application Insights deneyiminin içinden **çalışma kitapları** ' nı seçin.
 
-![Çalışma kitapları için Gezinti bölmesinin ekran görüntüsü](./media/usage-workbooks/001-workbooks.png)
+![Çalışma kitaplarına gezinmenin ekran görüntüsü](./media/usage-workbooks/001-workbooks.png)
 
-Bu, bir çalışma kitabı Galerisi başlamanıza yardımcı olmak için önceden oluşturulmuş çalışma kitaplarını sayısı ile başlatır.
+Bu işlem, başlamanıza yardımcı olacak çok sayıda önceden oluşturulmuş çalışma kitabı içeren bir çalışma kitabı Galerisi başlatır.
 
-![Çalışma kitabı galeri görüntüsü](./media/usage-workbooks/002-workbook-gallery.png)
+![Çalışma kitabı galerinin ekran görüntüsü](./media/usage-workbooks/002-workbook-gallery.png)
 
-İle başlayacağız **varsayılan şablon**, başlığı altında bulunan **Hızlı Başlangıç**.
+**Hızlı başlangıç**başlığı altında bulunan **varsayılan şablonla**başlayacağız.
 
-![Çalışma kitabı galeri görüntüsü](./media/usage-workbooks/003-default-template.png)
+![Çalışma kitabı galerinin ekran görüntüsü](./media/usage-workbooks/003-default-template.png)
 
-## <a name="editing-rearranging-cloning-and-deleting-workbook-sections"></a>Düzenleme, yeniden düzenleme, kopyalama ve çalışma kitabı bölümleri silme
+## <a name="editing-rearranging-cloning-and-deleting-workbook-sections"></a>Çalışma kitabı bölümlerini düzenleme, yeniden düzenleme, kopyalama ve silme
 
-Çalışma kitapları iki mod vardır: **düzenleme modunda**, ve **Okuma modunda**. Varsayılan çalışma kitabı ilk kez başlatıldığında açılır **düzenleme modunda**. Bu, tüm adımlar ve aksi takdirde gizli parametreleri de dahil olmak üzere çalışma kitabının içeriğini gösterir. **Okuma Modu** Basitleştirilmiş rapor stil görünümünü sunar. Bu, hemen yine de temel alınan mekanizması yalnızca birkaç tıklamayla ulaşabiliyoruz değiştirilmek üzere gerektiğinde yaparken bir raporu oluşturmaya giden karmaşıklığı soyutlamak sağlar.
+Çalışma kitaplarında iki mod vardır: **Düzen modu**ve **Okuma modu**. Varsayılan çalışma kitabı ilk başlatıldığında, **Düzen modunda**açılır. Bu, başka bir şekilde gizlenen tüm adımlar ve parametreler dahil olmak üzere çalışma kitabının tüm içeriğini gösterir. **Okuma modu** , Basitleştirilmiş bir rapor stili görünümü sunar. Bu, rapor oluşturma ile ilgili karmaşıklığın, yalnızca değişiklik için gerektiğinde yalnızca birkaç tıklamaya sahip olmaya devam etmenize olanak sağlar.
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/editing-controls-new.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/editing-controls-new.png)
 
-1. Bitirdiğinizde bir bölümünü Düzenleyen, tıklayın **düzenleme Bitti** bölümünün sol alt köşedeki.
+1. Bir bölümü düzenlemenizi bitirdiğinizde, bölümünün sol alt köşesinde bulunan **Düzenle** ' ye tıklayın.
 
-2. Bir bölümün bir kopyasını oluşturmak için tıklayın **bu bölümü kopyalayın** simgesi. Yinelenen bölümleri oluşturmak, önceki yinelemelerin kaybetmeden bir sorgu üzerinde gezinmek için yol için harika bir işlemdir.
+2. Bir bölümün bir kopyasını oluşturmak için **Bu bölümü Kopyala** simgesine tıklayın. Yinelenen bölümler oluşturmak, önceki yinelemeleri kaybetmeden bir sorgu üzerinde yinelemek için harika bir yoldur.
 
-3. Bir çalışma kitabı bir bölümde yukarı taşımak için tıklatın **Yukarı Taşı** veya **Aşağı Taşı** simgesi.
+3. Çalışma kitabındaki bir bölümü yukarı taşımak için **Yukarı taşı** veya **aşağı taşı** simgesine tıklayın.
 
-4. Bir bölümün kalıcı olarak kaldırmak için tıklayın **Kaldır** simgesi.
+4. Bir bölümü kalıcı olarak kaldırmak için **Kaldır** simgesine tıklayın.
 
-## <a name="adding-text-and-markdown-sections"></a>Metin ve Markdown bölümleri ekleme
+## <a name="adding-text-and-markdown-sections"></a>Metin ve Markaşağı bölümleri ekleme
 
-Başlıklarını, açıklamaları ve yorum, çalışma kitaplarına ekleme yardımcı tablolar ve grafikler bir dizi bir anlatım açın. Çalışma kitapları destek metin bölümlerinde [Markdown söz dizimi](https://daringfireball.net/projects/markdown/) başlıklar, kalın, italik ve madde işaretli listeler gibi biçimlendirme metin.
+Çalışma kitaplarınıza başlıklar, açıklamalar ve yorum eklemek, bir dizi tablo ve grafiği bir anlatıcı haline dönüştürmenize yardımcı olur. Çalışma kitaplarındaki metin bölümleri, metin biçimlendirme için başlıklar, kalın, italik ve madde işaretli listeler gibi [markı sözdizimini](https://daringfireball.net/projects/markdown/) destekler.
 
-Bir metin bölümüne çalışma kitabınıza eklemek için **metin eklemek** çalışma kitabını sayfanın alt kısmında veya herhangi bir bölümü altındaki düğmeyi.
+Çalışma kitabınıza bir metin bölümü eklemek için, çalışma kitabının alt kısmındaki veya herhangi bir bölümün altındaki **metin ekle** düğmesini kullanın.
 
 ## <a name="adding-query-sections"></a>Sorgu bölümleri ekleme
 
-![Sorgu bölümünde çalışma kitapları](./media/usage-workbooks/analytics-section-new.png)
+![Çalışma kitaplarında sorgu bölümü](./media/usage-workbooks/analytics-section-new.png)
 
-Çalışma kitabınıza sorgu bölümü eklemek için **Sorgu Ekle** çalışma kitabını alt kısmındaki ya da herhangi bir bölümü altındaki düğmesi.
+Çalışma kitabınıza sorgu bölümü eklemek için, çalışma kitabının alt kısmındaki **Sorgu Ekle** düğmesini ya da herhangi bir bölümün alt kısmını kullanın.
 
-Sorgu bölümler son derece esnektir ve aşağıdaki gibi sorulara yanıt için kullanılabilir:
+Sorgu bölümleri son derece esnektir ve şunun gibi soruları yanıtlamak için kullanılabilir:
 
-* Kaç özel bir reddetme kullanımı ile aynı süre boyunca sitenizin durumunu oluşturamadı?
-* Sayfa yükleme sürelerinin sayfa görüntüleme kullanıcılar için dağıtım neydi?
-* Kaç kullanıcının bazı sayfalar kümesi sitenizde görüntülenebilir, ancak olmayan bazı diğer sayfalarında ayarlanmış? Bu kümeleri farklı alt kümelerinde sitenizin işlevselliği kullanan kullanıcı olup olmadığını anlamak yararlı olabilir (kullanın `join` işleciyle `kind=leftanti` değiştiricisi [Kusto sorgu dili](/azure/kusto/query/)).
+* Siteniz, kullanımda olan bir reddetme ile aynı zaman diliminde kaç özel durum oluşturur?
+* Bazı sayfaları görüntüleyen kullanıcılar için sayfa yükleme sürelerinin dağılımı nedir?
+* Kaç Kullanıcı sitenizde bazı sayfa kümesini görüntüledi, ancak başka bir sayfa kümesi değil mi? Bu, sitenizin işlevselliğinin farklı alt kümelerini kullanan Kullanıcı kümelerine sahip olup olmadığını anlamak için yararlı olabilir (`join` işlecini [kusto sorgu dilinde](/azure/kusto/query/)`kind=leftanti` değiştiricisiyle kullanın).
 
-Siz de yalnızca sınırlı olmayan çalışma kitabından veri başlatılan uygulama bağlamında, sorgulama. Bu kaynaklara erişim iznine sahip olduğu sürece birden fazla Application Insights'ın izlenen uygulamalar olarak Log Analytics çalışma alanlarını sorgulayabilirsiniz.
+Ayrıca, yalnızca çalışma kitabını başlattığınız uygulamanın bağlamından sorgulama sınırlı değildir. Bu kaynaklara erişim iznine sahip olduğunuz sürece, birden fazla Application Insights izlenen uygulama ve Log Analytics çalışma alanı genelinde sorgulama yapabilirsiniz.
 
-Ek dış Application Insights kaynakları kullanımdan Sorgulanacak **uygulama** tanımlayıcısı.
+Ek dış Application Insights kaynaklarından sorgulamak için **uygulama** tanımlayıcısı ' nı kullanın.
 
 ```
 union app('app01').requests, app('app02').requests, requests
 | summarize count() by bin(timestamp, 1h)
 ```  
 
-Bu sorgu, üç farklı uygulama isteklerinden birleştirmektir. Bir uygulama app01, app02 ve yerel Application Insights kaynağı gelen istekleri adlı bir uygulama adı.
+Bu sorgu, istekleri üç farklı uygulamadan birleştirilüdir. App01 adlı bir uygulama, app02 adlı bir uygulama ve yerel Application Insights kaynağından gelen istekler.
 
-Dış bir Log Analytics çalışma alanı kullanım verilerini çekmesini **çalışma** tanımlayıcısı.
+Dış Log Analytics çalışma alanından verileri çekmek için **çalışma alanı** tanımlayıcısı kullanın.
 
-Bilgi edinmek için kaynaklar arası sorguları hakkında daha fazla başvurmak [resmi rehberlik](https://docs.microsoft.com/azure/log-analytics/log-analytics-cross-workspace-search).
+Çapraz kaynak sorguları hakkında daha fazla bilgi edinmek için [resmi kılavuza](https://docs.microsoft.com/azure/log-analytics/log-analytics-cross-workspace-search)bakın.
 
 ### <a name="advanced-analytic-query-settings"></a>Gelişmiş analitik sorgu ayarları
 
-Her bölüm ayarlar simgesi erişilebilir kendi Gelişmiş ayarları olan ![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/005-settings.png) sağında bulunan **parametreleri ekleme** düğmesi.
+Her bölümde kendi gelişmiş ayarları bulunur, bu ayarlar ![Application Insights çalışma kitapları bölümü Düzenle](./media/usage-workbooks/005-settings.png) **parametre Ekle** düğmesinin sağında bulunur.
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/0006-settings-expanded.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/0006-settings-expanded.png)
 
    |         |          |
    | ---------------- |:-----|
-   | **Özel bir genişlik**    | Daha iyi grafikler ve tablolar etkileşimli zengin raporlar düzenlemenize olanak sağlayan tek bir satırda öğe sayısını sığacak şekilde bir öğenin bir rastgele boyutu haline getirmek için bunu ayarlayın.  |
-   | **Koşullu olarak görünür** | Okuma modunda olduğunda bir parametresini temel alan adımları gizlemek için bunu kullanın. |
-   | **Parametreyi Dışarı Aktar**| Bu kılavuzda veya değerleri değiştirmesini veya görünür olmasını için sonraki adımları neden grafik seçili bir satır sağlar.  |
-   | **Düzenlenmediği sırada sorguyu Göster** | Bu, yukarıdaki grafiğe veya tabloya bile sorgu Okuma modunda olduğunda görüntüler.
-   | **Düzenlenmediği sırada analiz düğmesi açık Göster** | Bu, tek tıklamayla erişim izni vermek için grafiğin sağ köşesinde için mavi Analytics simgesi ekler.|
+   | **Özel genişlik**    | Bunu bir öğe için rastgele bir boyut haline getirmek üzere ayarlayın; böylece grafikleri ve tablolarınızı zengin etkileşimli raporlarda daha iyi düzenlemenizi sağlayabilirsiniz.  |
+   | **Koşullu olarak görünür** | Okuma modundayken bir parametreye göre adımları gizlemek için bunu kullanın. |
+   | **Bir parametreyi dışarı aktarma**| Bu, kılavuz veya grafikteki seçili bir satırın sonraki adımların değer değiştirmesine veya görünür hale gelmesine neden olmasını sağlar.  |
+   | **Düzenlenmediğinden sorguyu göster** | Bu, okuma modundayken bile grafiğin veya tablonun üzerindeki sorguyu görüntüler.
+   | **Düzenlenmediğinden Analytics 'te aç düğmesini göster** | Bu, tek tıklamayla erişime izin vermek için grafiğin sağ köşesine mavi analiz simgesini ekler.|
 
-Bu ayarların birçoğu oldukça kolay anlaşılır ancak anlamak için **parametreyi dışarı aktar** bir çalışma kitabı incelemek iyidir yapar bu işlevi kullanın.
+Bu ayarların çoğu oldukça sezgisel, ancak **bir parametreyi dışarı aktarmayı** anlamak için bu işlevi kullanan bir çalışma kitabını incelemek daha iyidir.
 
-Önceden oluşturulmuş çalışma kitaplarını biri etkin kullanıcılar bilgi sağlar.
+Önceden oluşturulmuş çalışma kitaplarından biri, etkin kullanıcılar hakkında bilgiler sağlar.
 
-Çalışma kitabı ilk bölümünü analitik sorgu veri dayanır:
+Çalışma kitabının ilk bölümü analitik sorgu verilerine dayalıdır:
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/003-active-users.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/003-active-users.png)
 
-İkinci bölüm de analitik sorgu verilere dayalı, ancak ilk tabloda bir satır seçilmesi grafik içeriğini etkileşimli olarak güncelleştirir:
+İkinci bölüm de analitik sorgu verilerine dayalıdır, ancak ilk tablodaki bir satırı seçmek, grafiğin içeriğini etkileşimli olarak güncelleştirir:
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/004-active-users-trend.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/004-active-users-trend.png)
 
- Bu aracılığıyla mümkündür **bir öğe seçildiğinde, parametreyi dışarı aktar** Gelişmiş tablonun Analytics sorgunuzda etkin ayarlar.
+ Bu, **bir öğe seçildiğinde** , tablonun analiz sorgusunda etkinleştirilen bir parametre gelişmiş ayarlarını dışarı aktarmak için kullanılabilir.
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/007-settings-export.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/007-settings-export.png)
 
-Bir satır seçili olduğunda ikinci analiz sorgusunu sonra verilen değerleri kullanır. Hiçbir satır seçilmişse genel değerleri temsil eden satır için varsayılan olarak. 
+İkinci analiz sorgusu daha sonra bir satır seçildiğinde, bu değerleri kullanır. Hiçbir satır seçilmezse, varsayılan değerleri temsil eden satırı varsayılan olarak alır. 
 
 ```
 let start = startofday(ago({TimeRange} + {Metric}));
@@ -139,60 +134,60 @@ union customEvents, pageViews
 | render timechart 
 ```
 
-## <a name="adding-metrics-sections"></a>Ölçümleri bölümleri ekleme
+## <a name="adding-metrics-sections"></a>Ölçüm bölümleri ekleme
 
-Ölçümleri bölümleri etkileşimli raporlarınızda içeri Azure İzleyici ölçüm verilerini birleştirmek için tam erişim verin. Birçok önceden oluşturulmuş çalışma kitapları hem analitik sorgu verileri hem de tek bir yerde her iki özelliği en iyi şekilde tam anlamıyla yararlanmanıza olanak tanıyan ölçüm verileri içerir. Ayrıca, erişiminiz olan Aboneliklerde kaynaklardan gelen ölçüm verilerini çekin olanağı vardır.
+Ölçüm bölümleri, Azure Izleyici ölçüm verilerini etkileşimli raporlarınıza katmak için size tam erişim sağlar. Önceden oluşturulmuş çalışma kitaplarının çoğu hem analitik sorgu verileri hem de ölçüm verileri içerir ve her iki özellikten en iyi şekilde tek bir yerde yararlanmanızı sağlar. Ayrıca, erişiminiz olan aboneliklerdeki kaynaklardan ölçüm verilerini çekme olanağınız da vardır.
 
-Sanal makine verilerinin kılavuz görselleştirme CPU performans sağlamak için bir çalışma kitabına çekilen bir örnek aşağıda verilmiştir:
+Aşağıda, bir çalışma kitabına eklenen ve CPU performansının kılavuz bir görselleştirmesi sağlayan sanal makine verilerinin bir örneği verilmiştir:
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/008-metrics-grid.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/008-metrics-grid.png)
 
 ## <a name="adding-parameter-sections"></a>Parametre bölümleri ekleme
 
-Çalışma kitabı parametreleri sorgu veya metin bölümleri el ile düzenlemek zorunda kalmadan değerleri çalışma kitabında değiştirmenize izin verir.  Bu, temel alınan analytics sorgu dili anlamanıza gerek kalmadan gerekliliğini ortadan kaldırır ve çalışma kitabı tabanlı raporlama olası hedef kitle büyük ölçüde genişletir.
+Çalışma kitabı parametreleri, sorgu veya metin bölümlerini el ile düzenlemeniz gerekmeden çalışma kitabındaki değerleri değiştirmenize izin verir.  Bu, temel analiz sorgu dilini anlamaya gerek gereksinimini ortadan kaldırır ve çalışma kitabı tabanlı raporlamanın potansiyel kitlelerini büyük ölçüde genişletir.
 
-Parametre değerlerini sorgu, metin veya diğer parametre bölümleri gibi köşeli ayraçlar parametrenin adını koyarak değiştirilir ``{parameterName}``.  Parametre adları benzer kurallara JavaScript tanımlayıcıları, temelde alfabetik karakterleri veya alt çizgi, ardından alfasayısal karakterler veya alt çizgi sınırlıdır. Örneğin, **a1** izin verilir, ancak **1a** izin verilmiyor.
+Parametre değerleri, ``{parameterName}`` gibi küme ayraçları içine yerleştirerek sorgu, metin veya diğer parametre bölümlerinde yer alır.  Parametre adları, JavaScript tanımlayıcıları, temelde alfabetik karakterler veya alt çizgiler, sonra alfasayısal karakterler veya alt çizgiler ile benzer kurallarla sınırlandırılmıştır. Örneğin, **a1** 'ye izin verilir, ancak **1a** buna izin verilmez.
 
-Çalışma kitabının En üstten başlayarak ve sonraki adımları aşağı akan doğrusal parametrelerdir.  Bir çalışma kitabında olarak bildirilen parametreleri ayarlama daha fazla bildirilmiş o geçersiz kılabilirsiniz.  Bu kullanım sorguları tanımlanan parametreler değerlere erişmek için daha fazla yukarı parametreleri de sağlar.  Bir parametrenin adım içinde kendisi de burada aynı o adımda daha önce bildirilen bir parametre sağa parametreleri güvenebileceğiniz soldan sağa doğrusal parametrelerdir.
+Parametreler doğrusal, bir çalışma kitabının üstünden başlayıp daha sonraki adımlara akar.  Daha sonra bir çalışma kitabında bildirildiği parametreler, daha önce tanımlananlar tarafından geçersiz kılınabilir.  Bu Ayrıca, daha sonra tanımlanan parametrelerden değerlere erişmek için sorgular kullanan parametrelere izin verir.  Bir parametrenin adımının kendisi içinde, parametreler aynı adımda daha önce belirtilen bir parametreye bağlı olabileceği gibi, parametreler de doğrusal, soldan sağa doğru yapılır.
  
-Dört farklı şu anda desteklenen parametre türleri vardır:
+Şu anda desteklenen dört farklı parametre türü vardır:
 
   |         |          |
    | ---------------- |:-----|
-   | **Text**    | Kullanıcı bir metin kutusu düzenleyeceğiz ve isteğe bağlı olarak, varsayılan değeri doldurmak için bir sorgu sağlayabilirsiniz. |
-   | **Açılan menü** | Kullanıcı, bir değerler kümesinden seçersiniz. |
-   | **Zaman aralığı Seçici**| Kullanıcıya önceden tanımlı bir zaman aralığı değerleri kümesinden seçin veya bir özel zaman aralığı seçin.|
-   | **Kaynak Seçici** | Kullanıcı, çalışma kitabı için seçilen kaynakları arasından seçim yapacağı.|
+   | **Metin**    | Kullanıcı bir metin kutusunu düzenler ve isteğe bağlı olarak varsayılan değeri dolduracak bir sorgu sağlayabilirsiniz. |
+   | **Açılır liste** | Kullanıcı bir değer kümesinden seçim yapmak için kullanılır. |
+   | **Zaman aralığı seçici**| Kullanıcı önceden tanımlanmış bir zaman aralığı değerleri kümesinden seçim yapmak veya özel bir zaman aralığından seçim yapmak için kullanılır.|
+   | **Kaynak seçici** | Kullanıcı çalışma kitabı için seçilen kaynaklardan seçim yapmak için kullanılır.|
 
-### <a name="using-a-text-parameter"></a>Bir metin parametresini kullanma
+### <a name="using-a-text-parameter"></a>Metin parametresi kullanma
 
-Değer metin kutusuna bir kullanıcı türleri kaçış veya Alıntısı, doğrudan sorgusunda değiştirilir. Gereksinim duyduğunuz değer bir dize ise, sorgu parametresi tırnak olmalıdır (gibi **'{parameter}'** ).
+Metin kutusundaki Kullanıcı türlerinin değeri, kaçış veya tırnak içine alma olmadan doğrudan sorguda değiştirilmiştir. İhtiyacınız olan değer bir dize ise, sorgunun parametre etrafında tırnak işareti olmalıdır ( **' {Parameter} '** gibi).
 
-Bu, herhangi bir kullanılmak üzere bir metin kutusundaki değeri sağlar. Tablo adı, sütun adı, işlev adı, işleç, vb. olabilir.
+Bu, bir metin kutusundaki değerin her yerde kullanılmasına izin verir. Tablo adı, sütun adı, işlev adı, işleç vb. olabilir.
 
-Bir ayar metin typ parametru **varsayılan değeri analiz sorgusundan Al**, bir sorgu, metin kutusu için varsayılan değer doldurmak için kullanılacak çalışma kitabı yazarı sağlar.
+Metin parametre türü, **analiz sorgusundan varsayılan değeri Al**ayarına sahiptir ve bu, çalışma kitabı yazarının bu metin kutusu için varsayılan değeri doldurmak üzere bir sorgu kullanmasına izin verir.
 
-(Satır 0, 0 sütun) ilk satırın yalnızca ilk değer, bir analytics sorgusunu varsayılan değerden kullanırken, varsayılan değer olarak kullanılır. Bu nedenle, yalnızca bir satır ve bir sütun döndürmek için sorguyu sınırlamak için önerilir. Sorgu tarafından döndürülen diğer veriler yoksayılır. 
+Bir analiz sorgusundan varsayılan değer kullanılırken, varsayılan değer olarak yalnızca ilk satırın ilk değeri (satır 0, sütun 0) kullanılır. Bu nedenle, sorgunuzu yalnızca bir satır ve bir sütun döndürecek şekilde sınırlandırmaya önerilir. Sorgu tarafından döndürülen diğer veriler yok sayılır. 
 
-Her sorgunun döndürdüğü değer doğrudan hiçbir kaçış veya Alıntısı ile değiştirilecek. Sorgu hiçbir satır döndürürse, parametre sonuçları (parametre gerekli değilse), boş bir dize olan veya (parametre gerekli ise) tanımlı değil.
+Sorgunun döndürdüğü değer, doğrudan kaçış veya tırnak işareti olmadan değişir. Sorgu hiçbir satır döndürürse, parametrenin sonucu boş bir dizedir (parametre gerekli değilse) ya da tanımsız (parametre gerekliyse).
 
-### <a name="using-a-dropdown"></a>Bir açılır menüyü kullanarak
+### <a name="using-a-dropdown"></a>Açılan menü kullanma
 
-Açılan parametre türü, bir açılan menü denetimi oluşturun, bir veya daha çok değerlerin seçilmesine olanak verecek sağlar.
+Açılan parametre türü, bir veya daha fazla değer seçimine izin veren bir açılan denetim oluşturmanıza olanak sağlar.
 
-Açılan bir analytics sorgusunun tarafından doldurulur. Sorgu bir sütun döndürürse, bu sütun her ikisi de değerler **değer** ve **etiket** aşağı açılır denetimden. Sorgu iki sütun döndürürse, ilk sütundur **değer**, ve ikinci sütun **etiket** açılan listede gösterilen.  Sorgu üç sütun döndürürse, 3 sütun, aşağı açılır menüde varsayılan seçimi göstermek için kullanılır.  Bu sütun her türlü olabilir, ancak basit bool veya sayısal türler, burada 0 false ve 1 true kullanmaktır.
+Açılan menü, bir analiz sorgusuyla doldurulur. Sorgu bir sütun döndürürse, bu sütundaki değerler hem **değeri** hem de açılan denetimdeki **etikettir** . Sorgu iki sütun döndürürse, ilk sütun **değerdir**ve ikinci sütun, açılan menüde gösterilen **etikettir** .  Sorgu üç sütun döndürürse, bu açılan menüdeki varsayılan seçimi göstermek için 3. sütun kullanılır.  Bu sütun herhangi bir tür olabilir, ancak en basit değer bool veya sayısal türler kullanmaktır; burada 0, false, 1 ise doğrudur.
 
- Sütun bir dize türü ise, null veya boş dize false olarak kabul edilir ve başka bir değer true olarak değerlendirilir. Tek seçim listeler için varsayılan seçim true değerine sahip ilk değer kullanılır.  Birden çok seçimi açılan için varsayılan seçili kümesi olarak true değerine sahip tüm değerler kullanılır. Açılır öğelerde hangi sırada satırları sorgu döndürülen gösterilmektedir. 
+ Sütun bir dize türü ise, null/boş dize yanlış olarak değerlendirilir ve diğer tüm değerler doğru olarak değerlendirilir. Tek seçim açılan listeleri için, true değeri olan ilk değer varsayılan seçim olarak kullanılır.  Çoklu seçim açılan listeleri için, true değeri olan tüm değerler varsayılan seçili küme olarak kullanılır. Açılan menüdeki öğeler, sorgunun satırları döndürdüğü sırada gösterilir. 
 
-Etkin kullanıcılar raporda mevcut parametreler bakalım. Düzenle simgesini tıklayın **TimeRange**.
+Etkin kullanıcılar raporunda bulunan parametrelere bakalım. **Timerange**' ın yanındaki Düzenle simgesine tıklayın.
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/009-time-range.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/009-time-range.png)
 
-Bu düzen parametresi menü öğesi başlatılır:
+Bu işlem parametre Düzenle menü öğesini başlatır:
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/010-time-range-edit.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/010-time-range-edit.png)
 
-Sorgu bir özellik adında analytics sorgu dili kullanır. bir **datatable** olanak tanıyan, tam Basit hava dışında içeriğinin rastgele bir tablo oluşturun! Örneğin, aşağıdaki analytics sorgusu:
+Sorgu, rastgele bir tablo oluşturmanıza olanak sağlayan bir **DataTable** adlı analiz sorgu dilinin bir özelliğini kullanır. Örneğin, aşağıdaki analiz sorgusu:
 
 ```
 datatable( column1:string, column2:string )
@@ -202,11 +197,11 @@ datatable( column1:string, column2:string )
 ]
 ```
 
-Sonucu oluşturur:
+Sonucu üretir:
 
-![Application Insights çalışma kitapları bölümünde düzenleme denetimleri](./media/usage-workbooks/011-data-table.png)
+![Application Insights çalışma kitapları bölümü Düzenle denetimleri](./media/usage-workbooks/011-data-table.png)
 
-Bir açılan ülkeler/bölgeler kümesinden adına göre seçmek için daha uygun bir örnek kullanır:
+Daha uygun bir örnek, bir ülke/bölge kümesinden ada göre seçim yapmak için bir açılan menü kullanmaktır:
 
 ```
 customEvents
@@ -217,49 +212,49 @@ customEvents
 | order by client_CountryOrRegion asc
 ```
 
-Sorgu sonuçları aşağıdaki gibi görüntülenir:
+Sorgu sonuçları şu şekilde görüntüler:
 
 ![Ülke açılan kutusu](./media/usage-workbooks/012-country-dropdown.png)
 
-Açılan özelleştirme ve etkileşimli raporlar oluşturmak için son derece güçlü araçlardır.
+Açılan araçlar, etkileşimli raporları özelleştirmeye ve oluşturmaya yönelik inanılmaz güçlü araçlardır.
 
 ### <a name="time-range-parameters"></a>Zaman aralığı parametreleri
 
-Kendi özel zaman aralığı parametresi açılan parametre türü aracılığıyla yapabilirsiniz, ancak aynı derecede esnekliğe ihtiyacınız yoksa kullanıma hazır zaman aralığı parametre türü kullanabilirsiniz. 
+Açılan parametre türü aracılığıyla kendi özel zaman aralığı parametresini de yapabilirsiniz, ancak aynı esneklik derecesine gerek duymuyorsanız, kutudan çıkar zaman aralığı parametre türünü de kullanabilirsiniz. 
 
-Beş dakika veya Son 90 gün önce 15 varsayılan aralıklarını zaman aralığı parametre türleri vardır. Açık Başlat'ı seçin ve zaman aralığına ilişkin değerleri durdurmak rapor operatörü izin veren özel saat aralığı seçimine izin vermek için bir seçenek de mevcuttur.
+Zaman aralığı parametre türlerinde beş dakikadan son 90 güne kadar geçen 15 varsayılan Aralık vardır. Ayrıca, özel zaman aralığı seçimine izin veren bir seçenek de vardır. Bu, raporun işlecinin, zaman aralığı için açık başlatma ve durdurma değerlerini seçmesine olanak sağlar.
 
-### <a name="resource-picker"></a>Kaynak Seçici
+### <a name="resource-picker"></a>Kaynak seçici
 
-Kaynak Seçici parametre türü, bazı kaynak türleri için raporun kapsamını olanağı sağlar. Kaynak Seçici türü yararlanan önceden oluşturulmuş çalışma kitabının bir örneğini **hatası Insights** çalışma kitabı.
+Kaynak seçici parametre türü, raporunuzu belirli kaynak türlerine göre kapsam yeteneği sağlar. Kaynak seçici türünü kullanan önceden oluşturulmuş çalışma kitabının bir örneği, **hata öngörüleri** çalışma kitabıdır.
 
 ![Ülke açılan kutusu](./media/usage-workbooks/013-resource-picker.png)
 
-## <a name="saving-and-sharing-workbooks-with-your-team"></a>Kaydetme ve çalışma kitapları takımınızla paylaşma
+## <a name="saving-and-sharing-workbooks-with-your-team"></a>Çalışma kitaplarını ekibinizle kaydetme ve paylaşma
 
-Çalışma kitapları, içinde bir Application Insights kaynağı kaydedilir **raporlarım** , hem de özel bölümü **paylaşılmış olan raporlar** erişimi olan herkesin erişebileceği bölümü Application Insights kaynağı. Kaynakta tüm çalışma kitaplarını görüntülemek için tıklayın **açık** eylem çubuğunda düğme.
+Çalışma kitapları, sizin veya Application Insights kaynağına erişimi olan herkes tarafından erişilebilen **paylaşılan raporlar** bölümünde veya sizin için özel **Raporlarım** bölümünde veya Application Insights bir kaynak içinde kaydedilir. Kaynaktaki tüm çalışma kitaplarını görüntülemek için Eylem çubuğundaki **Aç** düğmesine tıklayın.
 
-Şu anda kullanımda bir çalışma kitabını paylaşmak için **raporlarım**:
+Şu anda **Raporlarım**bir çalışma kitabını paylaşmak için:
 
-1. Tıklayın **açık** eylem çubuğunda
-2. Paylaşmak istediğiniz çalışma kitabını yanındaki "…" düğmesine tıklayın
-3. Tıklayın **paylaşılan Raporlar'a Taşı**.
+1. Eylem çubuğunda **Aç** ' a tıklayın
+2. "..." Düğmesine tıklayın. paylaşmak istediğiniz çalışma kitabının yanındaki düğme
+3. **Paylaşılan raporlara taşı**' ya tıklayın.
 
-Bir çalışma kitabı bağlantısını içeren bir ya da e-posta ile paylaşmak için tıklatın **paylaşmak** eylem çubuğunda. Bağlantının alıcıları çalışma kitabını görüntülemek için Azure portalında bu kaynağa erişimi gerektiğini aklınızda bulundurun. Gereken en az alıcılar düzenlemeler yapmak için kaynak için katkıda bulunan izinleri.
+Bir çalışma kitabını bir bağlantı ile veya e-posta ile paylaşmak için, eylem çubuğunda **paylaşma** ' ya tıklayın. Bağlantı alıcılarının, çalışma kitabını görüntülemek için Azure portal bu kaynağa erişmesi gerektiğini aklınızda bulundurun. Düzenleme yapmak için, alıcıların kaynak için en az katkıda bulunan izinleri olması gerekir.
 
-Azure panosu için bir çalışma kitabı bağlantısını sabitlemek için:
+Bir Azure panosuna çalışma kitabına bir bağlantı sabitlemek için:
 
-1. Tıklayın **açık** eylem çubuğunda
-2. Sabitlemek istediğiniz çalışma kitabının yanındaki "…" düğmesine tıklayın
-3. Tıklayın **panoya Sabitle**.
+1. Eylem çubuğunda **Aç** ' a tıklayın
+2. "..." Düğmesine tıklayın. sabitlemek istediğiniz çalışma kitabının yanındaki düğme
+3. **Panoya sabitle**' ye tıklayın.
 
-## <a name="contributing-workbook-templates"></a>Çalışma kitabı şablonlarına katkıda bulunan
+## <a name="contributing-workbook-templates"></a>Katkıda bulunan çalışma kitabı şablonları
 
-Sahip olduğunuz bir mükemmel çalışma kitabı şablonu oluşturduğunuz ve toplulukla paylaşmak istiyorsunuz? Daha fazla bilgi edinmek için sunduğumuz [GitHub deposunu](https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/README.md).
+Bir başar çalışma kitabı şablonu oluşturdunuz ve bunu topluluk ile paylaşmak istiyor musunuz? Daha fazla bilgi edinmek için [GitHub](https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/README.md)deponuzu ziyaret edin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Kullanım deneyimlerini etkinleştirmek için göndermeye başlayın [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views).
-- Özel olay veya sayfa görüntülemesi zaten gönderirseniz, kullanıcıların hizmetinizin nasıl öğrenmek için kullanım araçları keşfedin.
+- Kullanım deneyimlerini etkinleştirmek için [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views)göndermeye başlayın.
+- Özel olayları veya sayfa görünümlerini zaten gönderirseniz, kullanıcıların hizmetinizi nasıl kullandığını öğrenmek için kullanım araçları ' nı araştırın.
     - [Kullanıcılar, Oturumlar, Etkinlikler](../../azure-monitor/app/usage-segmentation.md)
     - [Huniler](../../azure-monitor/app/usage-funnels.md)
     - [Bekletme](../../azure-monitor/app/usage-retention.md)

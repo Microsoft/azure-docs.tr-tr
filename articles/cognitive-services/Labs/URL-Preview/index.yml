@@ -12,6 +12,6 @@ metadata:
   ms.devlang: na
   ms.topic: landing-page
   ms.date: 03/19/2018
-  ms.author: 'rosh, v-gedod'
+  ms.author: rosh
 abstract:
   description: 'Bing URL Preview API’si bir hedef URL ile ilgili açıklama, isFamilyFriendly bayrağı, temsili resmi ve sayfa bağlantısı gibi kısa bilgileri edinir.'

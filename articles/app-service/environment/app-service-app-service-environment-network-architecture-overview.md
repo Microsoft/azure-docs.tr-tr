@@ -1,6 +1,6 @@
 ---
-title: Ağ mimarisine genel App Service ortamları - Azure
-description: Ağ topolojisi ofApp Service ortamları mimari genel bakış.
+title: App Service ortamlara yönelik ağ mimarisine genel bakış-Azure
+description: Uygulama hizmeti ortamlarının ağ topolojisine yönelik mimari genel bakış.
 services: app-service
 documentationcenter: ''
 author: stefsch
@@ -10,81 +10,80 @@ ms.assetid: 13d03a37-1fe2-4e3e-9d57-46dfb330ba52
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 10/04/2016
 ms.author: stefsch
 ms.custom: seodec18
-ms.openlocfilehash: 0d7d4af46e54ad89e0d084cb15af13e56115e996
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 98eb4d7440126bedb3d2e1de5711141eaac8b07a
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60765320"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70070060"
 ---
 # <a name="network-architecture-overview-of-app-service-environments"></a>App Service Ortamlarının Ağ Mimarisine Genel Bakış
 ## <a name="introduction"></a>Giriş
-App Service ortamları her zaman bir alt ağ içinde oluşturulmuş bir [sanal ağ] [ virtualnetwork] -App Service ortamında çalışan uygulamalar aynı içinde sanal bulunan özel uç noktalar ile iletişim kurabilir Ağ topolojisi.  Müşterilerin kendi sanal ağ altyapısı bölümlerini kilitleme olduğundan, bir App Service ortamı ile ortaya çıkan ağ iletişimi akışlar türlerini anlamak önemlidir.
+App Service ortamları her zaman bir [sanal ağ][virtualnetwork] alt ağı içinde oluşturulur; bir App Service ortamı çalıştıran uygulamalar aynı sanal ağ topolojisinde bulunan özel uç noktalarla iletişim kurabilir.  Müşteriler sanal ağ altyapısının parçalarını kilitleyebileceğinizden, bir App Service Ortamı oluşan ağ iletişim akışlarının türlerini anlamak önemlidir.
 
 ## <a name="general-network-flow"></a>Genel ağ akışı
-App Service ortamı (ASE) uygulamaları için bir genel sanal IP adresi (VIP) kullandığında, tüm gelen trafiği üzerinde genel VIP ulaşır.  Bu uygulamalar için HTTP ve HTTPS trafiğini yanı sıra, diğer trafik FTP, uzaktan hata ayıklama işlevselliği ve Azure yönetim işlemlerini içerir.  Genel VIP üzerinde kullanılabilir olan belirli bağlantı noktalarını (gerekli ve isteğe bağlı) tam listesi için makaleye bakın [gelen trafiği denetleme] [ controllinginboundtraffic] bir App Service ortamı için. 
+Bir App Service Ortamı (Ao), uygulamalar için ortak sanal IP adresi (VIP) kullandığında, tüm gelen trafik bu genel VIP 'ye ulaşır.  Bu, uygulamalar için HTTP ve HTTPS trafiği, FTP, uzaktan hata ayıklama işlevselliği ve Azure yönetim işlemleri için de ek trafik içerir.  Genel VIP 'de bulunan belirli bağlantı noktalarının (hem zorunlu hem de isteğe bağlı) tam listesi için, [gelen trafiği][controllinginboundtraffic] bir App Service ortamı denetleme makalesine bakın. 
 
-App Service ortamları, ayrıca bir ILB (iç yük dengeleyici) adresi da adlandırılan yalnızca bir sanal ağ iç adresi, ilişkili çalışan uygulamaları destekler.  ILB etkin ASE, HTTP ve HTTPS trafiğini uzaktan hata ayıklama çağrıları yanı sıra, uygulamalar için ILB adresini temel ulaşır.  En yaygın ILB ASE yapılandırmaları için FTP/FTPS trafiğinin ILB adresini temel de ulaşır.  Ancak Azure yönetim işlemleri hala bir ILB, genel VIP üzerindeki bağlantı noktalarına 454/455 akar ASE etkin.
+App Service ortamlar, yalnızca bir sanal ağ iç adresine bağlanan, ıLB (iç yük dengeleyici) adresi olarak da adlandırılan uygulamaları çalıştırmayı da destekler.  ILB etkin bir ASE 'de, uygulamalar için HTTP ve HTTPS trafiğinin yanı sıra uzaktan hata ayıklama çağrıları da ıLB adresine ulaşır.  Çoğu ortak ıLB-Ao yapılandırması için, FTP/FTPS trafiği de ıLB adresine ulaşır.  Ancak Azure yönetim işlemleri yine de ıLB etkin bir AO 'nun genel VIP 'sine 454/455 bağlantı noktasına akacaktır.
 
-Aşağıdaki diyagramda, uygulamaları burada bir genel sanal IP adresine bağlı olan bir App Service ortamı için çeşitli gelen ve giden ağ akışlarına genel bakış gösterilmektedir:
+Aşağıdaki diyagramda, uygulamaların ortak bir sanal IP adresine bağlandığı bir App Service Ortamı için çeşitli gelen ve giden ağ akışlarına ilişkin genel bir bakış gösterilmektedir:
 
-![Genel ağ akışlar][GeneralNetworkFlows]
+![Genel ağ akışları][GeneralNetworkFlows]
 
-App Service ortamı, çeşitli özel müşteri uç noktaları ile iletişim kurabilir.  Örneğin, App Service ortamında çalışan uygulamalar, aynı sanal ağ topolojisinde Iaas sanal makinelerde çalışan veritabanı sunucuları için bağlanabilirsiniz.
+Bir App Service Ortamı, çeşitli özel müşteri uç noktalarıyla iletişim kurabilir.  Örneğin, App Service Ortamı çalıştıran uygulamalar aynı sanal ağ topolojisinde IaaS sanal makinelerinde çalışan veritabanı sunucusuna bağlanabilir.
 
 > [!IMPORTANT]
-> Ağ diyagramın bakarak, "diğer işlem kaynakları" App Service Ortamı'ndan farklı bir alt ağda dağıtılır. ASE ile aynı alt ağdaki kaynaklara dağıtma ASE bağlantısı bu kaynaklara (dışında belirli içi ASE yönlendirme) engeller. Farklı bir alt ağa (aynı sanal ağda) bunun yerine dağıtın. App Service ortamı, ardından bağlanmak mümkün olacaktır. Hiçbir ek yapılandırma gerekli değildir.
+> Ağ diyagramına baktığınızda, "diğer Işlem kaynakları" App Service Ortamı farklı bir alt ağda dağıtılır. Kaynakları Ale ile aynı alt ağda dağıtmak, Ao kaynaklarına yönelik bağlantıyı (belirli bir iç site içi yönlendirme hariç) engeller. Yerine farklı bir alt ağa dağıtın (aynı VNET 'te). App Service Ortamı daha sonra bağlantı kurabiliyor. Ek yapılandırma gerekmez.
 > 
 > 
 
-App Service ortamları yönetme ve App Service ortamı işletme için gerekli kaynaklar ayrıca Azure depolama ve Sql DB ile iletişim kurar.  Diğer uzak Azure bölgelerinde bulunan App Service ortamı ile iletişim kuran Sql ve depolama kaynakları bazıları App Service ortamı ile aynı bölgede yer alır.  Sonuç olarak, İnternet'e giden bağlantı her zaman düzgün çalışması App Service ortamı için gerekli değildir. 
+App Service ortamlar ayrıca, App Service Ortamı yönetmek ve çalıştırmak için gereken SQL DB ve Azure depolama kaynaklarıyla iletişim kurar.  App Service Ortamı ile iletişim kuran SQL ve depolama kaynaklarından bazıları App Service Ortamı aynı bölgede bulunur, diğerleri ise uzak Azure bölgelerinde bulunur.  Sonuç olarak, App Service Ortamı düzgün çalışması için Internet 'e giden bağlantı her zaman gereklidir. 
 
-App Service ortamı, bir alt ağda dağıtılmış olduğundan, alt ağına gelen trafiği denetlemek için ağ güvenlik grupları kullanılabilir.  Bir App Service ortamına gelen trafiği denetleme konusunda bilgi için şu [makale][controllinginboundtraffic].
+Bir alt ağda App Service Ortamı dağıtıldığı için ağ güvenlik grupları alt ağa gelen trafiği denetlemek için kullanılabilir.  Bir App Service Ortamı gelen trafiği denetleme hakkında daha fazla bilgi için aşağıdaki [makaleye][controllinginboundtraffic]bakın.
 
-Bir App Service ortamından giden Internet bağlantısına izin hakkında ayrıntılı bilgi görmek için aşağıdaki makaleyi ile çalışma hakkında [Express Route][ExpressRoute].  Siteden siteye bağlantı ile çalışırken aynı yaklaşımı adlı makalede açıklanan uygular ve Kullanarak zorlamalı tünel.
+App Service Ortamı giden Internet bağlantısına izin verme hakkında daha fazla bilgi için bkz. [Express Route][ExpressRoute]ile çalışma hakkında aşağıdaki makaleye bakın.  Makalede açıklanan yaklaşım, siteden siteye bağlantı ile çalışırken ve Zorlamalı tünel kullanılırken geçerlidir.
 
 ## <a name="outbound-network-addresses"></a>Giden ağ adresleri
-Bir IP adresi, her zaman bir App Service ortamı giden bir çağrı yaptığında, giden çağrıları ile ilişkilidir.  Kullanılan belirli bir IP adresi, çağrılan uç sanal ağ topolojisi içinde veya sanal ağ topolojisini dışında bulunan olmasına göre değişir.
+App Service Ortamı giden çağrılar yaptığında, her zaman giden çağrılarla bir IP adresi ilişkilendirilir.  Kullanılan belirli IP adresi, Çağrılmakta olan bitiş noktasının sanal ağ topolojisi içinde veya sanal ağ topolojisinin dışında olup olmamasına bağlıdır.
 
-Çağrılan uç noktaysa **dışında** sanal ağ topolojisi, ardından kullanılan çıkış (giden NAT adresi olarak da bilinir) App Service ortamı, genel VIP adresidir.  Bu adres, Özellikler dikey penceresinde App Service ortamı için portal kullanıcı arabiriminde bulunabilir.
+Çağrılmakta olan bitiş noktası sanal ağ topolojisinin **dışındaysa** , kullanılan giden adres (giden NAT adresi) App SERVICE ORTAMı genel VIP 'dir.  Bu adres, Özellikler dikey penceresindeki App Service Ortamı Portal Kullanıcı arabiriminde bulunabilir.
 
 ![Giden IP adresi][OutboundIPAddress]
 
-Bu adres, yalnızca App Service ortamında uygulama oluşturma ve ardından gerçekleştirerek bir genel VIP sahip Ase'ler için de belirlenebilir bir *nslookup* uygulamanın adresinde. Sonuç IP adresi, hem genel VIP hem de App Service ortamının giden NAT adresi ' dir.
+Bu adres, yalnızca App Service Ortamı bir uygulama oluşturarak ve sonra uygulamanın adresinde bir *nslookup* işlemini gerçekleştirerek ortak bir VIP 'Nin bulunduğu ASE 'ler için de belirlenebilir. Sonuç IP adresi hem genel VIP hem de App Service Ortamı giden NAT adresidir.
 
-Çağrılan uç noktaysa **içinde** sanal ağ topolojisi, çağıran uygulama giden adresini uygulamayı çalıştıran tek bir işlem kaynağı iç IP adresi olur.  Ancak yok kalıcı uygulamalara iç IP adreslerini sanal ağ eşlemesi.  Uygulamaları, farklı işlem kaynaklarına ve havuzu kullanılabilir bilgi işlem kaynakları bir App Service ortamı ölçeklendirme işlemleri nedeniyle değiştirebilirsiniz arasında taşıyabilirsiniz.
+Çağrılmakta olan bitiş noktası sanal ağ topolojisinin **içindeyse** , çağıran uygulamanın giden adresi, uygulamayı çalıştıran bireysel işlem KAYNAĞıNıN iç IP adresi olacaktır.  Ancak, sanal ağ iç IP adreslerinin uygulamalara kalıcı bir şekilde eşlenmesi değildir.  Uygulamalar farklı işlem kaynakları arasında hareket edebilir ve bir App Service Ortamı kullanılabilir işlem kaynakları havuzu ölçeklendirme işlemleri nedeniyle değişebilir.
 
-Ancak, bir App Service ortamı her zaman bir alt ağ içinde bulunduğundan, iç IP adresi bir uygulama çalıştıran bir işlem kaynağı her zaman alt ağın CIDR aralığında kalan garanti edilir.  Ayrıntılı ACL veya ağ güvenlik grupları sanal ağ içindeki diğer Uç noktalara erişimi güvenli hale getirmek için kullanıldığında, sonuç olarak, App Service ortamını içeren alt ağ aralığı erişim verilmesi gerekir.
+Ancak, App Service Ortamı her zaman bir alt ağ içinde bulunduğundan, uygulamayı çalıştıran bir işlem kaynağının iç IP adresinin her zaman alt ağın CıDR aralığında yer aldığı garanti edilir.  Sonuç olarak, sanal ağ içindeki diğer uç noktalara erişimi güvenli hale getirmek için hassas ACL 'Ler veya ağ güvenlik grupları kullanıldığında, App Service Ortamı içeren alt ağ aralığına erişim verilmesi gerekir.
 
-Aşağıdaki diyagram bu kavramları daha ayrıntılı olarak gösterilmiştir:
+Aşağıdaki diyagramda bu kavramlar daha ayrıntılı gösterilmektedir:
 
 ![Giden ağ adresleri][OutboundNetworkAddresses]
 
 Yukarıdaki diyagramda:
 
-* App Service ortamı, genel VIP 192.23.1.2 olduğundan, "Internet" uç noktalarına çağrı yapılırken kullanılan giden IP adresidir.
-* 10\.0.1.0/26 için App Service ortamını içeren alt ağın CIDR aralığı.  Diğer uç noktalar aynı sanal ağ alt yapısında uygulamalardan gelen çağrıları yere bu adres aralığında kaynaklanan olarak görürsünüz.
+* App Service Ortamı genel VIP 'si 192.23.1.2 olduğundan, bu, "Internet" uç noktalarına çağrı yaparken kullanılan giden IP adresidir.
+* App Service Ortamı için kapsayan alt ağın CıDR aralığı 10.0.1.0/26 ' dır.  Aynı sanal ağ altyapısının içindeki diğer uç noktalar, bu adres aralığındaki bir yerde bulunan uygulamalardan gelen çağrıları görür.
 
-## <a name="calls-between-app-service-environments"></a>App Service ortamları arasında çağrıları
-Daha karmaşık bir senaryo, aynı sanal ağda birden fazla App Service ortamlarında dağıtmak ve başka bir App Service ortamı için bir App Service ortamından giden çağrıları yapmak ortaya çıkabilir.  Bu tür alanları arası App Service ortamı çağrılar da "Internet" çağrısı olarak kabul edilir.
+## <a name="calls-between-app-service-environments"></a>App Service ortamları arasındaki çağrılar
+Aynı sanal ağda birden çok App Service ortamı dağıtırsanız ve bir App Service Ortamı giden çağrıları başka bir App Service Ortamı yaparsanız daha karmaşık bir senaryo meydana gelebilir.  Bu tür çapraz App Service Ortamı aramalar Ayrıca "Internet" çağrıları olarak kabul edilir.
 
-Bir App Service ortamında uygulamaları ile katmanlı mimari örneği aşağıdaki diyagramda (örn gösterilmektedir Web uygulamaları "Ön kapı") uygulamaları (örneğin iç arka uç API apps hazırlanmamış Internet'ten erişilebilir olmasını) ikinci bir App Service ortamı çağırma. 
+Aşağıdaki diyagramda, tek bir App Service Ortamı uygulamalarla katmanlı mimari bir örnek gösterilmektedir (ör. Uygulamaları ikinci bir App Service Ortamı arayan "ön kapı" Web uygulamaları) (örneğin, Internet 'ten erişilebilmesi amaçlanan iç arka uç API Apps). 
 
-![App Service ortamları arasında çağrıları][CallsBetweenAppServiceEnvironments] 
+![App Service ortamları arasındaki çağrılar][CallsBetweenAppServiceEnvironments] 
 
-Yukarıdaki örnekte, App Service ortamı "ASE bir" 192.23.1.2 giden IP adresi vardır.  App Service ortamı giden bir çağrı bir ikinci App Service ortamında ("ASE iki") çalışan bir uygulamanın aynı sanal ağdaki giden çağrı bulunan yapar olur, bu üzerinde çalışan bir uygulamanın, bir "Internet" çağrısı olarak kabul.  Sonuç olarak, ikinci gelen ağ trafiğini App Service ortamı gösterilir (yani olmayan alt ağ adres aralığı ilk App Service ortamı) 192.23.1.2 kaynaklanan olarak.
+Yukarıdaki örnekte, "Ao One" App Service Ortamı, 192.23.1.2 giden bir IP adresine sahiptir.  Bu App Service Ortamı çalışan bir uygulama, aynı sanal ağda bulunan ikinci bir App Service Ortamı ("AKEN Iki") üzerinde çalışan bir uygulamaya giden bir çağrı yapıyorsa, giden çağrı "Internet" çağrısı olarak kabul edilir.  Sonuç olarak, ikinci App Service Ortamı gelen ağ trafiği, 192.23.1.2 'tan kaynaklanan (yani ilk App Service Ortamı alt ağ adres aralığı değil) görünür.
 
-Aynı Azure bölgesinde iki App Service ortamları bulunduğunda, farklı App Service ortamları arasında çağrıları "Internet" çağrısı olarak kabul edilir olsa bile ağ trafiğini bölgesel Azure ağı üzerinde kalır ve fiziksel olarak akış üzerinden sağlamaz Genel İnternet'e.  Bir ağ güvenlik grubu ikinci App Service ortamı alt ağda yalnızca ilk App Service (giden IP adresleri 192.23.1.2 değer) bu nedenle uygulama arasında güvenli iletişim sağlama ortamı, gelen çağrıların izin vermek için sonuç olarak kullanabilirsiniz Service ortamları.
+Farklı App Service ortamları arasındaki çağrılar "Internet" çağrıları olarak kabul edilir, ancak her iki App Service ortamı da aynı Azure bölgesinde bulunuyorsa, ağ trafiği bölgesel Azure ağında kalır ve bu, fiziksel olarak genel Internet.  Sonuç olarak, ikinci App Service Ortamı alt ağında bir ağ güvenlik grubu kullanarak yalnızca ilk App Service Ortamı gelen çağrılara (giden IP adresi 192.23.1.2) izin verebilir, böylece uygulama arasında güvenli iletişim sağlayabilirsiniz Hizmet ortamları.
 
-## <a name="additional-links-and-information"></a>Ek bağlantıları ve bilgileri
-App Service ortamları tarafından kullanılan bağlantı noktaları hakkında ayrıntılı bilgi gelen ve gelen trafiği denetlemek için ağ güvenlik gruplarını kullanarak kullanılabilir [burada][controllinginboundtraffic].
+## <a name="additional-links-and-information"></a>Ek bağlantılar ve bilgiler
+App Service ortamları tarafından kullanılan ve gelen trafiği denetlemek için ağ güvenlik gruplarını kullanan gelen bağlantı noktaları hakkındaki ayrıntılar [burada][controllinginboundtraffic]bulunabilir.
 
-Kullanıcı kullanımıyla ilgili ayrıntılar tanımlı bu mevcut App Service ortamları için giden Internet erişimi vermek için yollar [makale][ExpressRoute]. 
+App Service ortamlara giden Internet erişimi sağlamak için Kullanıcı tanımlı yolların kullanımıyla ilgili ayrıntılar bu [makalede][ExpressRoute]sunulmaktadır. 
 
 <!-- LINKS -->
 [virtualnetwork]: https://azure.microsoft.com/services/virtual-network/

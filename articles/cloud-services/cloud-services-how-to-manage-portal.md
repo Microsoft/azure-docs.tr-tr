@@ -1,132 +1,126 @@
 ---
-title: Bulut hizmeti ilgili genel yönetim görevleri | Microsoft Docs
-description: Azure portalında cloud Services yönetmeyi öğrenin. Bu örnekler, Azure portalını kullanın.
+title: Ortak bulut hizmeti yönetim görevleri | Microsoft Docs
+description: Azure portal Cloud Services yönetmeyi öğrenin. Bu örnekler Azure portal kullanır.
 services: cloud-services
 documentationcenter: ''
-author: jpconnock
-manager: timlt
-editor: ''
-ms.assetid: cb218ad9-77d4-4149-83db-71159c00767e
+author: georgewallace
 ms.service: cloud-services
-ms.workload: tbd
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 07/05/2017
-ms.author: jeconnoc
-ms.openlocfilehash: d3d1ae759f0f3fa5edd417da61f1fa50b5d9cde7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: gwallace
+ms.openlocfilehash: 8ec7784fb51d0fa4de2563f76444b0b5e5f34902
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61433962"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68359603"
 ---
-# <a name="manage-cloud-services-in-the-azure-portal"></a>Azure portalında bulut hizmetlerini yönetme
-İçinde **Cloud Services** alanında Azure portal'ın, şunları yapabilirsiniz:
+# <a name="manage-cloud-services-in-the-azure-portal"></a>Azure portal Cloud Services yönetme
+Azure portal **Cloud Services** alanında şunları yapabilirsiniz:
 
-* Bir hizmeti rolü veya bir dağıtım güncelleştirin.
-* Aşamalı bir dağıtım üretime yükseltin.
-* Kaynakları kaynak bağımlılıkları görmek ve ölçek kaynakları birlikte, bulut hizmetine bağlayabilirsiniz.
-* Bir bulut hizmeti ya da bir dağıtımı silin.
+* Bir hizmet rolünü veya dağıtımını güncelleştirin.
+* Hazırlanmış bir dağıtımı üretime yükseltin.
+* Kaynak bağımlılıklarını görebilmeniz ve kaynakları birlikte ölçeklendirmeniz için kaynakları bulut hizmetinize bağlayın.
+* Bulut hizmetini veya bir dağıtımı silin.
 
-Bulut hizmetinizi ölçeklendirin hakkında daha fazla bilgi için bkz. [portalda bir bulut hizmeti için otomatik ölçeklendirme yapılandırma](cloud-services-how-to-scale-portal.md).
+Bulut hizmetinizi ölçeklendirme hakkında daha fazla bilgi için bkz. [portalda bir bulut hizmeti için otomatik ölçeklendirmeyi yapılandırma](cloud-services-how-to-scale-portal.md).
 
-## <a name="update-a-cloud-service-role-or-deployment"></a>Bir bulut hizmeti rolü veya dağıtımını güncelleştirme
-Bulut hizmetiniz için uygulama kodu güncelleştirmeniz gerekirse kullanın **güncelleştirme** bulut hizmeti dikey. Tek bir rol veya tüm rolleri güncelleştirebilirsiniz. Güncelleştirmek için yeni hizmet paketi veya hizmet yapılandırma dosyasını karşıya yükleyebilirsiniz.
+## <a name="update-a-cloud-service-role-or-deployment"></a>Bulut hizmeti rolünü veya dağıtımını güncelleştirme
+Bulut hizmetiniz için uygulama kodunu güncelleştirmeniz gerekiyorsa, bulut hizmeti dikey penceresinde **Güncelleştir** ' i kullanın. Tek bir rolü veya tüm rolleri güncelleştirebilirsiniz. Güncelleştirmek için yeni bir hizmet paketi veya hizmet yapılandırma dosyası yükleyebilirsiniz.
 
-1. İçinde [Azure portalında][Azure portal], güncelleştirmek istediğiniz bulut hizmeti seçin. Bu adım, bulut hizmeti örneği dikey penceresinde açılır.
+1. [Azure Portal][Azure portal], güncelleştirmek istediğiniz bulut hizmetini seçin. Bu adım, bulut hizmeti örneği dikey penceresini açar.
 
-2. Dikey pencerede seçin **güncelleştirme**.
+2. Dikey pencerede **Güncelleştir**' i seçin.
 
-    ![Güncelleştir düğmesi](./media/cloud-services-how-to-manage-portal/update-button.png)
+    ![Güncelleştirme düğmesi](./media/cloud-services-how-to-manage-portal/update-button.png)
 
-3. Dağıtım, yeni hizmet paketi dosyasının (.cspkg) ve hizmet yapılandırma dosyasının (.cscfg) ile güncelleştirin.
+3. Dağıtımı yeni bir hizmet paketi dosyası (. cspkg) ve hizmet yapılandırma dosyası (. cscfg) ile güncelleştirin.
 
     ![UpdateDeployment](./media/cloud-services-how-to-manage-portal/update-blade.png)
 
-4. İsteğe bağlı olarak, depolama hesabı ve dağıtım etiketi güncelleştirin.
+4. İsteğe bağlı olarak, depolama hesabını ve dağıtım etiketini güncelleştirin.
 
-5. Herhangi bir rolü yalnızca bir rol örneği varsa, seçin **bir veya daha fazla rol tek bir örnek içeriyorsa bile Dağıt** devam etmek yükseltmeyi etkinleştirmek için onay kutusu.
+5. Herhangi bir rolün yalnızca bir rol örneği varsa, yükseltmenin devam etmesini sağlamak için **bir veya daha fazla rol tek bir örnek içeriyorsa bile dağıt** ' ı seçin.
 
-    Her role en az iki rol örneği (sanal makineler) varsa, azure bulut hizmeti güncelleştirme sırasında yalnızca yüzde 99,95 hizmet kullanılabilirliği garanti edebilir. Diğer güncelleştirilirken iki rol örneği ile bir sanal makine istemci isteklerini işler.
+    Her rolde en az iki rol örneği (sanal makine) varsa, Azure, bir bulut hizmeti güncelleştirmesi sırasında yalnızca yüzde 99,95 hizmet kullanılabilirliğini garanti edebilir. İki rol örneğiyle, bir sanal makine, diğer güncelleştirirken istemci isteklerini işler.
 
-6. Seçin **Başlat dağıtım** paketin karşıya yüklenmesi tamamlandıktan sonra güncelleştirmeyi uygulamak için onay kutusunu işaretleyin.
+6. Paketin karşıya yüklenmesi tamamlandıktan sonra güncelleştirmeyi uygulamak için **dağıtımı Başlat** onay kutusunu seçin.
 
-7. Seçin **Tamam** hizmet güncelleştirilirken başlatmak için.
+7. Hizmeti güncelleştirmeye başlamak için **Tamam ' ı** seçin.
 
-## <a name="swap-deployments-to-promote-a-staged-deployment-to-production"></a>Aşamalı bir üretim dağıtımına yükseltmek üzere dağıtımları değiştirme
-Yeni bir yayın aşama bir bulut hizmeti dağıtma ve yeni sürümünüzü bulut hizmetini hazırlama ortamınızda test etmek karar verdiğinizde. Kullanım **takas** iki dağıtım ele alınır ve üretim yeni bir sürüme yükseltin, URL'leri geçiş yapmak için.
+## <a name="swap-deployments-to-promote-a-staged-deployment-to-production"></a>Aşamalı dağıtımı üretime yükseltmek için takas dağıtımları
+Bulut hizmetinin yeni bir sürümünü dağıtmaya karar verirken, yeni yayınınızı bulut hizmeti hazırlama ortamınızda hazırlayın ve test edin. İki dağıtımın giderildiği URL 'Leri değiştirmek ve yeni bir yayını üretime yükseltmek için **değiştirme** 'yi kullanın.
 
-Dağıtımları, takas **Cloud Services** bir sayfaya veya panoya.
+Dağıtımları **Cloud Services** sayfasından veya Panodan takas edebilirsiniz.
 
-1. İçinde [Azure portalında][Azure portal], güncelleştirmek istediğiniz bulut hizmeti seçin. Bu adım, bulut hizmeti örneği dikey penceresinde açılır.
+1. [Azure Portal][Azure portal], güncelleştirmek istediğiniz bulut hizmetini seçin. Bu adım, bulut hizmeti örneği dikey penceresini açar.
 
-2. Dikey pencerede seçin **takas**.
+2. Dikey pencerede **Değiştir**' i seçin.
 
-    ![Bulut Hizmetleri değiştirme düğmesi](./media/cloud-services-how-to-manage-portal/swap-button.png)
+    ![Cloud Services takas düğmesi](./media/cloud-services-how-to-manage-portal/swap-button.png)
 
 3. Aşağıdaki onay istemi açılır:
 
-    ![Bulut Hizmetleri değiştirme](./media/cloud-services-how-to-manage-portal/swap-prompt.png)
+    ![Cloud Services takas et](./media/cloud-services-how-to-manage-portal/swap-prompt.png)
 
-4. Dağıtım bilgileri doğruladıktan sonra seçin **Tamam** dağıtımları değiştirme.
+4. Dağıtım bilgilerini doğruladıktan sonra, dağıtımları değiştirmek için **Tamam** ' ı seçin.
 
-    Sanal IP adresleri (VIP) değiştiren tek şey, çünkü dağıtım Takas dağıtımları için hızlı bir şekilde gerçekleşir.
+    Tek şey, dağıtımlar için sanal IP adresleri (VIP) olduğundan, dağıtım takası hızlı bir şekilde gerçekleşir.
 
-    Bilgi işlem maliyetlerinden tasarruf için hazırlama dağıtımını, üretim dağıtımınızı beklendiği gibi çalıştığını doğruladıktan sonra silebilirsiniz.
+    İşlem maliyetlerini kaydetmek için, üretim dağıtımınızın beklendiği gibi çalıştığını doğruladıktan sonra hazırlama dağıtımını silebilirsiniz.
 
 ### <a name="common-questions-about-swapping-deployments"></a>Dağıtımları değiştirme hakkında sık sorulan sorular
 
-**Dağıtımları takas için Önkoşullar nelerdir?**
+**Dağıtımları değiştirme önkoşulları nelerdir?**
 
-Başarılı dağıtım Takas için iki anahtar Önkoşullar vardır:
+Başarılı bir dağıtım takası için iki temel önkoşul vardır:
 
-- Statik bir IP adresi için üretim yuvası kullanmak istiyorsanız, bir hazırlama yuvasına de ayırmanız gerekir. Aksi takdirde değiştirme başarısız olur.
+- Üretim yuvalarınız için statik bir IP adresi kullanmak istiyorsanız, hazırlama yuvalarınız için bir tane de ayırmanız gerekir. Aksi takdirde, değiştirme başarısız olur.
 
-- Değiştirmeyi gerçekleştirmek için önce tüm rol örneklerini çalışıyor olması gerekir. Örneklerinizin durumunu kontrol edebilirsiniz **genel bakış** Azure portal'ın dikey penceresi. Alternatif olarak, [Get-AzureRole](/powershell/module/servicemanagement/azure/get-azurerole?view=azuresmps-3.7.0) Windows PowerShell komutu.
+- Değiştirme işlemini gerçekleştirebilmeniz için rollerinizin tüm örneklerinin çalışıyor olması gerekir. Örneklerinizin durumunu Azure portal **genel bakış** dikey penceresinde kontrol edebilirsiniz. Alternatif olarak, Windows PowerShell 'de [Get-AzureRole](/powershell/module/servicemanagement/azure/get-azurerole?view=azuresmps-3.7.0) komutunu da kullanabilirsiniz.
 
-Konuk işletim sistemi güncelleştirmeleri ve hizmet işlemleri de Düzeltme Dağıtım takasları başarısız olmasına neden olabileceğini unutmayın. Daha fazla bilgi için [cloud service dağıtım sorunlarını giderme](cloud-services-troubleshoot-deployment-problems.md).
+Konuk işletim sistemi güncelleştirmelerinin ve hizmet düzeltme işlemlerinin de dağıtım yamasının başarısız olmasına neden olabileceğini unutmayın. Daha fazla bilgi için bkz. [Cloud Service dağıtım sorunlarını giderme](cloud-services-troubleshoot-deployment-problems.md).
 
-**Uygulamam için kapalı kalma süresi bir takas tabi? Bunu nasıl işlemesi gerekir?**
+**Bir değiştirme uygulamam için kapalı kalma süresine neden olur mu? Bunu nasıl işleymem gerekir?**
 
-Yalnızca bir yapılandırma değişikliği Azure yük dengeleyicide olduğu için önceki bölümde açıklandığı gibi bir dağıtım Takas genellikle hızlı çalışır. Bazı durumlarda, geçici bağlantı hataları 10 veya daha fazla saniye ve sonuç alabilir. Müşterilerinizin etkisini sınırlamak için uygulamayı düşünün [istemci yeniden deneme mantığı](../best-practices-retry-general.md).
+Önceki bölümde açıklandığı gibi, Azure Yük dengeleyicide yalnızca bir yapılandırma değişikliği olduğundan, dağıtım takası genellikle hızlıdır. Bazı durumlarda, 10 veya daha fazla saniye sürebilir ve geçici bağlantı hatalarıyla sonuçlanır. Müşterilerinizin etkisini sınırlandırmak için, [istemci yeniden deneme mantığını](../best-practices-retry-general.md)uygulamayı düşünün.
 
-## <a name="delete-deployments-and-a-cloud-service"></a>Dağıtımları ve bulut hizmeti Sil
-Bir bulut hizmetini silebilmeniz için önce var olan her dağıtım silmeniz gerekir.
+## <a name="delete-deployments-and-a-cloud-service"></a>Dağıtımları ve bulut hizmetini silme
+Bir bulut hizmetini silebilmeniz için, mevcut her bir dağıtımı silmeniz gerekir.
 
-Bilgi işlem maliyetlerinden tasarruf için hazırlama dağıtımını, üretim dağıtımınızı beklendiği gibi çalıştığını doğruladıktan sonra silebilirsiniz. İşlem maliyetleri durdurulur dağıtılan rol örnekleri için faturalandırılırsınız.
+İşlem maliyetlerini kaydetmek için, üretim dağıtımınızın beklendiği gibi çalıştığını doğruladıktan sonra hazırlama dağıtımını silebilirsiniz. Durdurulmuş olan dağıtılan rol örnekleri için işlem maliyetleri için faturalandırılırsınız.
 
-Bir dağıtımı veya Bulut hizmetinizi silmek için aşağıdaki yordamı kullanın.
+Bir dağıtımı veya bulut hizmetinizi silmek için aşağıdaki yordamı kullanın.
 
-1. İçinde [Azure portalında][Azure portal], silmek istediğiniz bulut hizmeti seçin. Bu adım, bulut hizmeti örneği dikey penceresinde açılır.
+1. [Azure Portal][Azure portal], silmek istediğiniz bulut hizmetini seçin. Bu adım, bulut hizmeti örneği dikey penceresini açar.
 
-2. Dikey pencerede seçin **Sil**.
+2. Dikey pencerede **Sil**' i seçin.
 
-    ![Bulut Hizmetleri Sil düğmesi](./media/cloud-services-how-to-manage-portal/delete-button.png)
+    ![Cloud Services Sil düğmesi](./media/cloud-services-how-to-manage-portal/delete-button.png)
 
-3. Tüm bulut hizmeti silmek için işaretleyin **bulut hizmeti ve hizmetin dağıtımları** onay kutusu. Veya ya da tercih edebilirsiniz **Üretim dağıtımı** veya **hazırlama dağıtımı** onay kutusu.
+3. Tüm bulut hizmetini silmek için **bulut hizmeti ve dağıtımları** onay kutusunu seçin. Ya da **Üretim dağıtımı** veya **hazırlama dağıtımı** onay kutusunu seçebilirsiniz.
 
-    ![Bulut Hizmetleri Sil](./media/cloud-services-how-to-manage-portal/delete-blade.png)
+    ![Cloud Services silme](./media/cloud-services-how-to-manage-portal/delete-blade.png)
 
-4. Seçin **Sil** altındaki.
+4. Alt kısımdaki **Sil** ' i seçin.
 
-5. Bulut hizmeti silmek için işaretleyin **bulut hizmet Sil'i**. Ardından, onay isteminde **Evet**.
+5. Bulut hizmetini silmek için **bulut hizmetini Sil**' i seçin. Ardından, onay isteminde **Evet**' i seçin.
 
 > [!NOTE]
-> Bir bulut hizmeti silindi ve ayrıntılı izleme yapılandırılmış verileri depolama hesabınızdan el ile silmelisiniz. Tabulky Metrik nerede bulunacağı hakkında daha fazla bilgi için bkz. [izleme hizmeti, buluta giriş](cloud-services-how-to-monitor.md).
+> Bir bulut hizmeti silindiğinde ve ayrıntılı izleme yapılandırıldığında, verileri depolama hesabınızdan el ile silmeniz gerekir. Ölçüm tablolarının nerede bulunacağı hakkında daha fazla bilgi için bkz. [bulut hizmeti Izlemeye giriş](cloud-services-how-to-monitor.md).
 
 
-## <a name="find-more-information-about-failed-deployments"></a>Başarısız dağıtımlar hakkında daha fazla bilgi
-**Genel bakış** dikey penceresinde, bir durum çubuğu üstünde bulunur. Çubuğu seçtiğinizde, yeni bir dikey pencere açılır ve hata bilgilerini görüntüler. Dağıtım hataları içermiyorsa, bilgileri dikey penceresi boş olur.
+## <a name="find-more-information-about-failed-deployments"></a>Başarısız dağıtımlar hakkında daha fazla bilgi edinin
+**Genel bakış** dikey penceresinin üst kısımdaki bir durum çubuğu vardır. Çubuğu seçtiğinizde, yeni bir dikey pencere açılır ve hata bilgilerini görüntüler. Dağıtım herhangi bir hata içermiyorsa, bilgi dikey penceresi boştur.
 
-![Bulut hizmetlerine genel bakış](./media/cloud-services-how-to-manage-portal/status-info.png)
+![Cloud Services genel bakış](./media/cloud-services-how-to-manage-portal/status-info.png)
 
 
 
 [Azure portal]: https://portal.azure.com
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Bulut hizmetinizin genel yapılandırma](cloud-services-how-to-configure-portal.md).
-* Bilgi edinmek için nasıl [bir bulut hizmeti dağıtma](cloud-services-how-to-create-deploy-portal.md).
-* Yapılandırma bir [özel etki alanı adı](cloud-services-custom-domain-name-portal.md).
-* Yapılandırma [SSL sertifikaları](cloud-services-configure-ssl-certificate-portal.md).
+* [Bulut hizmetinizin genel yapılandırması](cloud-services-how-to-configure-portal.md).
+* [Bulut hizmetini dağıtmayı](cloud-services-how-to-create-deploy-portal.md)öğrenin.
+* Özel bir [etki alanı adı](cloud-services-custom-domain-name-portal.md)yapılandırın.
+* [SSL sertifikalarını](cloud-services-configure-ssl-certificate-portal.md)yapılandırma.

@@ -1,6 +1,6 @@
 ---
-title: 'Başarısız olan devreyi - ExpressRoute sıfırlama: PowerShell: Azure | Microsoft Docs'
-description: Bu makalede, hatalı bir durumda bir ExpressRoute bağlantı hattı sıfırlamanıza yardımcı olur.
+title: 'Başarısız bir devre sıfırlama-ExpressRoute: PowerShell: Azure | Microsoft Docs'
+description: Bu makale, başarısız durumundaki bir ExpressRoute devresini sıfırlamanıza yardımcı olur.
 services: expressroute
 author: anzaman
 ms.service: expressroute
@@ -8,20 +8,20 @@ ms.topic: article
 ms.date: 11/28/2018
 ms.author: anzaman
 ms.custom: seodec18
-ms.openlocfilehash: f6fd8e5f0e5730e55fa5bbe13f74be796dd6a4cb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: deeb1c65cae7e3a5b42230dbda1ad8efa717ba0b
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66115846"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73748114"
 ---
-# <a name="reset-a-failed-expressroute-circuit"></a>Başarısız bir ExpressRoute bağlantı hattı Sıfırla
+# <a name="reset-a-failed-expressroute-circuit"></a>Başarısız bir ExpressRoute devresini sıfırlama
 
-Bir ExpressRoute bağlantı hattı üzerinde bir işlem başarıyla tamamlanmazsa, bağlantı hattının 'başarısız' durumu gidebilir. Bu makale, başarısız bir Azure ExpressRoute bağlantı hattı sıfırlamanıza yardımcı olur.
+ExpressRoute bağlantı hattı üzerindeki bir işlem başarıyla tamamlanmazsa, devre bir ' başarısız ' durumuna geçebilir. Bu makale, başarısız bir Azure ExpressRoute devresini sıfırlamanıza yardımcı olur.
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
-## <a name="reset-a-circuit"></a>Bir devreyi sıfırlama
+## <a name="reset-a-circuit"></a>Devre sıfırlama
 
 1. Azure Resource Manager PowerShell cmdlet'lerinin en son sürümünü yükleyin. Daha fazla bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/install-az-ps).
 
@@ -40,7 +40,7 @@ Bir ExpressRoute bağlantı hattı üzerinde bir işlem başarıyla tamamlanmazs
    ```azurepowershell-interactive
    Select-AzSubscription -SubscriptionName "Replace_with_your_subscription_name"
    ```
-5. Başarısız bir durumda olan devreyi sıfırlama için aşağıdaki komutları çalıştırın:
+5. Başarısız durumundaki bir devreyi sıfırlamak için aşağıdaki komutları çalıştırın:
 
    ```azurepowershell-interactive
    $ckt = Get-AzExpressRouteCircuit -Name "ExpressRouteARMCircuit" -ResourceGroupName "ExpressRouteResourceGroup"
@@ -48,8 +48,8 @@ Bir ExpressRoute bağlantı hattı üzerinde bir işlem başarıyla tamamlanmazs
    Set-AzExpressRouteCircuit -ExpressRouteCircuit $ckt
    ```
 
-Artık bağlantı hattı iyi durumda olmalıdır. Bir destek bileti açın [Microsoft Destek](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) devre hala başarısız bir durumda ise.
+Devre artık sağlıklı olmalıdır. Devre hala başarısız durumdaysa, [Microsoft desteğiyle](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) bir destek bileti açın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bir destek bileti açın [Microsoft Destek](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorunları yaşamaya devam ediyorsanız.
+Sorun yaşamaya devam ediyorsanız [Microsoft desteği](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) ile bir destek bileti açın.

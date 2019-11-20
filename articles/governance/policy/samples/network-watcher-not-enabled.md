@@ -1,20 +1,16 @@
 ---
-title: Örnek - bölge için Ağ İzleyicisi etkin değilse denetim
-description: Belirtilen bir bölgede Ağ İzleyicisi etkin değilse, bu örnek ilke tanımını denetimleri
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-ağ Izleyicisi olmayan bölgeler için denetim
+description: Bu örnek ilke tanımı, ağ izleyicisinin belirtilen bölge için etkin olup olmadığını denetler
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 7614b000f69eb74c83084aec0849a2741c82cd5a
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 8d820cfea34eec91c7d4b050d58046b357f2ddd9
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60511341"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74070002"
 ---
-# <a name="sample---audit-if-network-watcher-is-not-enabled-for-region"></a>Örnek - bölge için Ağ İzleyicisi etkin değilse denetim
+# <a name="sample---audit-if-network-watcher-is-not-enabled-for-region"></a>Örnek-ağ izleyicisinin bölge için etkin olup olmadığını denetleyin
 
 Bu ilke, belirli bir bölge için Ağ İzleyicisi etkinleştirilmediğinde denetler. Ağ İzleyicisi’nin etkin olup olmadığını denetlemek için bir bölge adı belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke, belirli bir bölge için Ağ İzleyicisi etkinleştirilmediğinde denet
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Faudit-network-watcher-existence%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Faudit-network-watcher-existence%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

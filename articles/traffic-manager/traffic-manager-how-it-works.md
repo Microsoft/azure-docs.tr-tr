@@ -1,6 +1,6 @@
 ---
-title: Azure Traffic Manager nasıl çalışır? | Microsoft Docs
-description: Bu makalede, yüksek performans ve kullanılabilirlik, web uygulamaları için trafik Traffic Manager tarafından nasıl yönlendirdiği anlamanıza yardımcı olur
+title: Azure Traffic Manager nasıl çalışacaktır? | Microsoft Docs
+description: Bu makale, Web uygulamalarınızın yüksek performans ve kullanılabilirlik trafiğini Traffic Manager nasıl yönlendirdiğini anlamanıza yardımcı olur
 services: traffic-manager
 documentationcenter: ''
 author: asudbring
@@ -12,69 +12,92 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/05/2019
 ms.author: allensu
-ms.openlocfilehash: a74af002dfdad5df9640be4b5fdd7f657b183bd4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 281e1e591d7c3cc31b77a116fb42af49dc27798c
+ms.sourcegitcommit: f5075cffb60128360a9e2e0a538a29652b409af9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67071180"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68312140"
 ---
-# <a name="how-traffic-manager-works"></a>Traffic Manager nasıl çalışır?
+# <a name="how-traffic-manager-works"></a>Traffic Manager nasıl kullanılır?
 
-Azure Traffic Manager, uygulama uç noktalar genelinde trafiğinin dağıtımını denetlemenizi sağlar. Uç nokta, Azure içinde veya dışında barındırılan İnternet'e yönelik bir hizmettir.
+Azure Traffic Manager, uygulama uç noktalarınız genelinde trafiğin dağıtımını denetlemenize olanak sağlar. Uç nokta, Azure içinde veya dışında barındırılan İnternet'e yönelik bir hizmettir.
 
-Traffic Manager, iki temel fayda sağlar:
+Traffic Manager iki temel avantaj sağlar:
 
-- Dağıtım birkaç birine göre trafik [trafik yönlendirme yöntemleri](traffic-manager-routing-methods.md)
-- [Uç nokta durumunu sürekli izleme](traffic-manager-monitoring.md) ve uç noktaları başarısız olduğunda otomatik yük devretme
+- Trafiğin birkaç [trafik yönlendirme yönteminden](traffic-manager-routing-methods.md) birine göre dağıtılması
+- Uç noktalar başarısız olduğunda [uç nokta durumunu](traffic-manager-monitoring.md) ve otomatik yük devretmeyi sürekli izleme
 
-Bir istemci bir hizmete bağlanma girişiminde bulunduğunda, bu hizmetin DNS adını bir IP adresi için ilk çözmeniz gerekir. Ardından, istemci hizmete erişmek için bu IP adresine bağlanır.
+Bir istemci bir hizmete bağlanmaya çalıştığında, önce hizmetin DNS adını bir IP adresine çözümlemelidir. İstemci daha sonra hizmete erişmek için o IP adresine bağlanır.
 
-**Anlamak için en önemli nokta Traffic Manager DNS düzeyinde çalışmasıdır.**  Traffic Manager trafik yönlendirme yönteminin kurallara göre belirli hizmet uç noktaları istemcilere yönlendirmek için DNS kullanır. İstemcileri seçili uç noktaya bağlanmak **doğrudan**. Traffic Manager, bir proxy ya da bir ağ geçidi değil. Traffic Manager, istemci ile hizmet arasında geçen trafiği görmez.
+**Anlamanız gereken en önemli nokta, Traffic Manager DNS düzeyinde çalışmaktadır.**  Traffic Manager, istemcileri trafik yönlendirme yönteminin kurallarına göre belirli hizmet uç noktalarına yönlendirmek için DNS kullanır. İstemciler seçili uç noktaya **doğrudan**bağlanır. Traffic Manager bir proxy veya ağ geçidi değil. Traffic Manager istemci ile hizmet arasında geçen trafiği görmez.
 
 ## <a name="traffic-manager-example"></a>Traffic Manager örneği
 
-Contoso Corp yeni bir iş ortağı portalı geliştirilmiştir. Bu portalı URL'si https://partners.contoso.com/login.aspx. Uygulama Azure üç bölgede barındırılır. Kullanılabilirliği geliştirmek ve genel performansı en üst düzeye çıkarmak için Traffic Manager kullanılabilir en yakın uç noktasına istemci trafiğini dağıtmak için kullanırlar.
+Contoso Corp yeni bir iş ortağı portalı geliştirmiş. Bu portalın https://partners.contoso.com/login.aspx URL 'si. Uygulama, Azure 'un üç bölgesinde barındırılır. Kullanılabilirliği artırmak ve genel performansı en üst düzeye çıkarmak için, istemci trafiğini kullanılabilir en yakın uç noktaya dağıtmak üzere Traffic Manager kullanırlar.
 
-Bu yapılandırma elde etmek için aşağıdaki adımları tamamlayın:
+Bu yapılandırmayı başarmak için aşağıdaki adımları tamamlarlar:
 
-1. Üç hizmet örneği dağıtın. Bu dağıtımları DNS adları 'contoso-us.cloudapp .net', 'contoso-eu.cloudapp .net' ve 'contoso-asia.cloudapp .net' dir.
-1. 'Contoso.trafficmanager.net' adlı Traffic Manager profili oluşturun ve üç uç noktalar genelinde 'Performans' trafik yönlendirme yöntemini kullanacak şekilde yapılandırın.
-1. Kullanıcıların gösterim etki alanı adı, '' bir DNS CNAME kaydı kullanılarak ', contoso.trafficmanager.NET'e yönlendirmek için partners.contoso.com','nı yapılandırın.
+1. Hizmetin üç örneğini dağıtın. Bu dağıtımların DNS adları ' contoso-us.cloudapp.net ', ' contoso-eu.cloudapp.net ' ve ' contoso-asia.cloudapp.net '.
+1. ' Contoso.trafficmanager.net ' adlı bir Traffic Manager profili oluşturun ve üç uç nokta genelinde ' Performance ' trafik yönlendirme yöntemini kullanacak şekilde yapılandırın.
+1. ' Partners.contoso.com ', ' contoso.trafficmanager.net ' öğesini işaret eden bir DNS CNAME kaydı kullanarak bu etki alanı adını yapılandırın.
 
-![Traffic Manager DNS yapılandırması][1]
+![DNS yapılandırması Traffic Manager][1]
 
 > [!NOTE]
-> Gösterim etki alanı ile Azure Traffic Manager kullanırken, Traffic Manager etki alanı adınızı gösterim etki alanı adınızı işaret edecek bir CNAME kullanmanız gerekir. DNS standartları 'apex' (veya kök) bir etki alanına bir CNAME oluşturmanızı izin vermez. Bu nedenle, 'contoso.com' ('naked' etki alanı olarak da adlandırılır) için bir CNAME oluşturamazsınız. Yalnızca 'contoso.com' gibi 'www.contoso.com' altındaki bir etki alanı için CNAME oluşturabilirsiniz. Bu sınırlamaya geçici bir çözüm için şirket DNS etki alanınızı barındırmaya öneririz [Azure DNS](../dns/dns-overview.md) ve kullanarak [diğer ad kayıtlarını](../dns/tutorial-alias-tm.md) traffic manager profilinize yönlendirin. Alternatif olarak, "contoso.com" için "www.contoso.com" gibi bir diğer ad doğrudan istekleri için basit bir HTTP yeniden yönlendirme kullanabilirsiniz.
+> Azure Traffic Manager ile bir gösterim etki alanı kullanırken, gösterim etki alanı adınızı Traffic Manager etki alanı adına göstermek için bir CNAME kullanmanız gerekir. DNS standartları, bir etki alanının ' tepesinde ' (veya kökündeki) ' de bir CNAME oluşturmanıza izin vermez. Bu nedenle, ' contoso.com ' için bir CNAME oluşturamazsınız (bazen ' Naked ' etki alanı olarak adlandırılır). Yalnızca ' contoso.com ' altında 'www.contoso.com' gibi bir etki alanı için CNAME oluşturabilirsiniz. Bu sınırlamaya geçici bir çözüm bulmak için, DNS etki alanınızı [Azure DNS](../dns/dns-overview.md) ve Traffic Manager profilinize Işaret eden [diğer ad kayıtlarını](../dns/tutorial-alias-tm.md) kullanarak barındırmalarını öneririz. Alternatif olarak, 'contoso.com' isteklerini 'www.contoso.com' gibi alternatif bir ada yönlendirmek için basit bir HTTP yeniden yönlendirme kullanabilirsiniz.
 
-### <a name="how-clients-connect-using-traffic-manager"></a>Traffic Manager'ı kullanarak istemcilerin nasıl bağlanacağını
+### <a name="how-clients-connect-using-traffic-manager"></a>İstemciler Traffic Manager kullanarak nasıl bağlanır
 
-Önceki örnekten devam ederek bir istemci istediğinde sayfa https://partners.contoso.com/login.aspx, istemci DNS adı ve bağlantı çözmek için aşağıdaki adımları gerçekleştirir:
+Önceki örnekte devam edildiğinde, istemci sayfayı https://partners.contoso.com/login.aspx istediğinde, istemci, DNS adını çözümlemek ve bir bağlantı kurmak için aşağıdaki adımları gerçekleştirir:
 
-![Traffic Manager'ı kullanarak bağlantı kurma][2]
+![Traffic Manager kullanarak bağlantı kurma][2]
 
-1. İstemci adı 'partners.contoso.com' çözmek için yapılandırılan özyinelemeli DNS hizmeti için bir DNS sorgusu gönderir. 'Yerel DNS' hizmet olarak da adlandırılan bir özyinelemeli DNS hizmeti, DNS etki alanlarınızı doğrudan barındırmıyor. Bunun yerine, istemciyi çeşitli yetkili DNS hizmetleri bir DNS ad çözümlemesi için gereken Internet üzerinden iletişim kurmasını işini off-loads.
-2. Özyinelemeli DNS hizmeti DNS adını çözümlemek için 'contoso.com' etki alanı için ad sunucularını bulur. Ardından 'partners.contoso.com' DNS kaydı istemek için bu ad sunucularıyla iletişim kurar. Contoso.com DNS sunucuları için contoso.trafficmanager.net CNAME kaydı döndürür.
-3. Ardından, özyinelemeli DNS hizmeti, Azure Traffic Manager hizmeti tarafından sağlanan 'trafficmanager.net' etki alanı için ad sunucularını bulur. Ardından bu DNS sunucuları için 'contoso.trafficmanager.net' DNS kaydı için bir istek gönderir.
-4. Traffic Manager ad sunucularıyla isteği alır. Bunlar, temel bir uç nokta seçin:
+1. İstemci, yapılandırılmış özyinelemeli DNS hizmetine ' partners.contoso.com ' adını çözümlemek için bir DNS sorgusu gönderir. Bazen ' yerel DNS ' hizmeti olarak adlandırılan özyinelemeli bir DNS hizmeti, DNS etki alanlarını doğrudan barındırmaz. Bunun yerine, istemci devre dışı-bir DNS adını çözümlemek için gereken çeşitli yetkili DNS hizmetlerine bağlantı kurma işini yükler.
+2. DNS adını çözümlemek için, özyinelemeli DNS hizmeti ' contoso.com ' etki alanı için ad sunucularını bulur. Daha sonra ' partners.contoso.com ' DNS kaydını istemek için bu ad sunucularıyla iletişim kurar. Contoso.com DNS sunucuları, contoso.trafficmanager.net 'e işaret eden CNAME kaydını döndürür.
+3. Ardından, özyinelemeli DNS hizmeti, Azure Traffic Manager hizmeti tarafından belirtilen ' trafficmanager.net ' etki alanı için ad sunucularını bulur. Daha sonra bu DNS sunucularına ' contoso.trafficmanager.net ' DNS kaydı için bir istek gönderir.
+4. Traffic Manager ad sunucuları isteği alır. Şunları temel alan bir uç nokta seçer:
 
-    - Yapılandırılan her bir uç nokta durumunu (devre dışı uç noktalar alınmadı)
-    - Traffic Manager durumu tarafından belirlenen her uç noktasının, geçerli durumunu denetler. Daha fazla bilgi için [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md).
-    - Seçtiğiniz trafik yönlendirme yöntemi. Daha fazla bilgi için [Traffic Manager yönlendirme yöntemleri](traffic-manager-routing-methods.md).
+    - Her uç noktanın yapılandırılmış durumu (devre dışı uç noktalar döndürülmez)
+    - Traffic Manager sistem durumu denetimleri tarafından belirlendiği şekilde, her uç noktanın geçerli sistem durumu. Daha fazla bilgi için bkz. [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md).
+    - Seçilen trafik-yönlendirme yöntemi. Daha fazla bilgi için bkz. [Traffic Manager yönlendirme yöntemleri](traffic-manager-routing-methods.md).
 
-5. Seçtiğiniz uç nokta başka bir DNS CNAME kaydı döndürülür. Bu durumda, contoso us.cloudapp.net döndürülen bize varsayalım.
-6. Ardından, özyinelemeli DNS hizmeti 'cloudapp.net' etki alanı için ad sunucularını bulur. 'Contoso-us.cloudapp .net' istemek için bu ad sunucularını indirecekse DNS kaydı. ABD tabanlı hizmet uç noktasının IP adresini içeren bir DNS 'A' kaydı döndürülür.
+5. Seçilen uç nokta, başka bir DNS CNAME kaydı olarak döndürülür. Bu durumda, contoso-us.cloudapp.net döndürüldüğünü varsayalım.
+6. Ardından, özyinelemeli DNS hizmeti ' cloudapp.net ' etki alanı için ad sunucularını bulur. ' Contoso-us.cloudapp.net ' DNS kaydını istemek için bu ad sunucularıyla iletişim kurar. ABD tabanlı hizmet uç noktasının IP adresini içeren bir DNS ' A ' kaydı döndürülür.
 7. Özyinelemeli DNS hizmeti, sonuçları birleştirir ve istemciye tek bir DNS yanıtı döndürür.
-8. İstemci, DNS sonuçlarını alır ve belirli bir IP adresine bağlar. İstemci uygulama Hizmeti uç noktası için Traffic Manager aracılığıyla değil, doğrudan bağlanır. Bir HTTPS uç noktası olduğundan, istemci gerekli SSL/TLS el sıkışma gerçekleştirir ve sonra bir HTTP GET isteği yapar ' / login.aspx' sayfa.
+8. İstemci DNS sonuçlarını alır ve verilen IP adresine bağlanır. İstemci, Traffic Manager aracılığıyla değil, doğrudan uygulama hizmeti uç noktasına bağlanır. Bir HTTPS uç noktası olduğundan, istemci gerekli SSL/TLS el sıkışma işlemini gerçekleştirir ve ardından '/Login.aspx ' sayfası için bir HTTP GET isteği oluşturur.
 
-Özyinelemeli DNS hizmeti aldığı DNS yanıtlarını önbelleğe kaydeder. DNS çözümleyicisi istemci cihazında da sonucu önbelleğe alır. Önbelleğe alma, önbellekten verileri kullanarak yerine diğer ad sunucularını sorgulama daha hızlı bir şekilde yanıtlanması gereken sonraki DNS sorguları sağlar. Önbellek süresi 'zaman yaşam' (TTL) özelliği her bir DNS kaydı tarafından belirlenir. Kısa değerler daha hızlı önbellek süre sonu ve bu nedenle daha fazla gidiş dönüş için Traffic Manager ad sunucularıyla neden. Daha uzun değerleri, başarısız bir uç nokta uzağa trafiği daha uzun sürebilir, anlamına gelir. Traffic Manager 0 saniye kadar düşük ile 2.147.483.647 saniye olarak yüksek olması için Traffic Manager DNS yanıtlarını kullanılan TTL değerini yapılandırmanıza olanak tanır (ile uyumlu en büyük aralık [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt)), değeri sayesinde, en iyi Uygulamanızın ihtiyaçlarını dengeler.
+Özyinelemeli DNS hizmeti, aldığı DNS yanıtlarını önbelleğe alır. İstemci cihazdaki DNS Çözümleyicisi de sonucu önbelleğe alır. Önbelleğe alma, sonraki DNS sorgularının diğer ad sunucularını sorgulamak yerine önbellekteki verileri kullanarak daha hızlı yanıtlanmasını sağlar. Önbelleğin süresi, her DNS kaydının ' yaşam süresi ' (TTL) özelliği tarafından belirlenir. Daha kısa değerler, daha hızlı önbellek süre sonu ve bu nedenle Traffic Manager ad sunucularına daha fazla gidiş dönüş elde ediyor. Daha uzun değerler, trafiğin başarısız bir uç noktadan uzaklaşmak için daha uzun sürebileceği anlamına gelir. Traffic Manager, Traffic Manager DNS yanıtlarında kullanılan TTL 'yi 0 saniye ve en fazla 2.147.483.647 saniye ( [RFC-1035](https://www.ietf.org/rfc/rfc1035.txt)ile uyumlu en yüksek Aralık) olarak yapılandırmak ve bu sayede, gereksinimlerini en iyi şekilde dengeleyen değeri seçmenizi sağlar. uygulamanız.
 
+## <a name="faqs"></a>SSS
+
+* [Traffic Manager hangi IP adresi kullanır?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-ip-address-does-traffic-manager-use)
+
+* [Traffic Manager kullanılarak hangi türde trafik yönlendirilebilir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-types-of-traffic-can-be-routed-using-traffic-manager)
+
+* ["Sticky" oturumlarını Traffic Manager destekler mi?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#does-traffic-manager-support-sticky-sessions)
+
+* [Traffic Manager kullanırken neden HTTP hatası görüyorum?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#why-am-i-seeing-an-http-error-when-using-traffic-manager)
+
+* [Traffic Manager kullanmanın performans etkisi nedir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-is-the-performance-impact-of-using-traffic-manager)
+
+* [Traffic Manager ile hangi uygulama protokollerini kullanabilirim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-application-protocols-can-i-use-with-traffic-manager)
+
+* [Traffic Manager, "Naked" etki alanı adıyla kullanabilir miyim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#can-i-use-traffic-manager-with-a-naked-domain-name)
+
+* [DNS sorgularını işlerken istemci alt ağ adresini göz önüne Traffic Manager mı?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#does-traffic-manager-consider-the-client-subnet-address-when-handling-dns-queries)
+
+* [DNS TTL nedir ve Kullanıcılarımı nasıl etkiler?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-is-dns-ttl-and-how-does-it-impact-my-users)
+
+* [Traffic Manager yanıtları için TTL 'yi ne kadar yüksek veya düşük bir şekilde ayarlayabilirim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-high-or-low-can-i-set-the-ttl-for-traffic-manager-responses)
+
+* [Profilim 'e gelen sorguların hacmini nasıl anlayabilirim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-can-i-understand-the-volume-of-queries-coming-to-my-profile)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Traffic Manager hakkında daha fazla bilgi edinin [uç nokta izleme ve otomatik yük devretme](traffic-manager-monitoring.md).
+Traffic Manager [uç nokta izleme ve otomatik yük devretme](traffic-manager-monitoring.md)hakkında daha fazla bilgi edinin.
 
-Traffic Manager hakkında daha fazla bilgi edinin [trafik yönlendirme yöntemlerini](traffic-manager-routing-methods.md).
+Traffic Manager [trafik yönlendirme yöntemleri](traffic-manager-routing-methods.md)hakkında daha fazla bilgi edinin.
 
 <!--Image references-->
 [1]: ./media/traffic-manager-how-traffic-manager-works/dns-configuration.png

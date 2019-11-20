@@ -1,6 +1,6 @@
 ---
-title: Azure İzleyici günlüklerini kullanarak Azure Active Directory etkinlik günlüklerini çözümleme | Microsoft Docs
-description: Azure İzleyici günlüklerini kullanarak Azure Active Directory etkinlik günlükleri analiz etmeyi öğrenin
+title: Azure Izleyici günlüklerini kullanarak etkinlik günlüklerini çözümleme | Microsoft Docs
+description: Azure Izleyici günlüklerini kullanarak Azure Active Directory etkinlik günlüklerini çözümlemeyi öğrenin
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -14,52 +14,58 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
 ms.date: 04/18/2019
-ms.author: priyamo
-ms.reviewer: markvi
+ms.author: markvi
+ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1651bb2898a2bd1e3e0c3fbbce77dc4106d76e7a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 2d6212692465270182db541889bed5f03a08a345
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60438237"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74008283"
 ---
-# <a name="analyze-azure-ad-activity-logs-with-azure-monitor-logs"></a>Azure AD çözümleme Azure İzleyici günlükleri ile etkinlik günlükleri
+# <a name="analyze-azure-ad-activity-logs-with-azure-monitor-logs"></a>Azure Izleyici günlükleri ile Azure AD etkinlik günlüklerini çözümleme
 
-Çalıştırdıktan sonra [Azure AD tümleştirme etkinlik günlükleri ile Azure İzleyici günlüklerine](howto-integrate-activity-logs-with-log-analytics.md), ortamınız hakkında Öngörüler elde etmek için Azure İzleyici günlüklerine gücünü kullanın. Ayrıca yükleyebilirsiniz [oturum Analiz görünümleri için Azure AD etkinlik günlükleri](howto-install-use-log-analytics-views.md) ortamınıza erişmek için Denetim ve oturum açma olaylarını önceden oluşturulmuş raporları.
+Azure [ad etkinlik günlüklerini Azure izleyici günlükleri ile tümleştirdikten](howto-integrate-activity-logs-with-log-analytics.md)sonra, ortamınız hakkında öngörüler elde etmek Için Azure izleyici günlüklerinin gücünü kullanabilirsiniz. Ortamınızdaki denetim ve oturum açma olayları etrafında önceden oluşturulmuş raporlara erişim sağlamak için [Azure ad etkinlik günlükleri Için Log Analytics görünümlerini](howto-install-use-log-analytics-views.md) de yükleyebilirsiniz.
 
-Bu makalede, Azure analiz etmeyi öğrenin AD etkinlik günlüklerini Log Analytics çalışma alanınızda. 
+Bu makalede, Log Analytics çalışma alanınızdaki Azure AD etkinlik günlüklerini çözümlemeyi öğreneceksiniz. 
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar 
 
-Örneği takip etmek için ihtiyacınız vardır:
+Bu arada izlemek için şunlar gerekir:
 
-* Azure aboneliğinizdeki bir Log Analytics çalışma. Bilgi edinmek için nasıl [Log Analytics çalışma alanı oluşturma](https://docs.microsoft.com/azure/log-analytics/log-analytics-quick-create-workspace).
-* İlk olarak, adımları tamamlamak [rota Azure AD etkinlik günlüklerini Log Analytics çalışma alanınıza](howto-integrate-activity-logs-with-log-analytics.md).
-
+* Azure aboneliğinizdeki bir Log Analytics çalışma alanı. [Log Analytics çalışma alanı oluşturmayı](https://docs.microsoft.com/azure/log-analytics/log-analytics-quick-create-workspace)öğrenin.
+* İlk olarak, [Azure ad etkinlik günlüklerini Log Analytics çalışma alanınıza yönlendirmekte](howto-integrate-activity-logs-with-log-analytics.md)olan adımları doldurun.
+*  Log Analytics çalışma alanına [erişim](https://docs.microsoft.com/azure/azure-monitor/platform/manage-access#manage-access-using-workspace-permissions)
+* Azure Active Directory 'de aşağıdaki roller (Azure Active Directory Portal üzerinden Log Analytics erişiyorsanız)
+    - Güvenlik Yöneticisi
+    - Güvenlik okuyucusu
+    - Rapor okuyucu
+    - Genel Yönetici
+    
 ## <a name="navigate-to-the-log-analytics-workspace"></a>Log Analytics çalışma alanına gidin
 
-1. [Azure Portal](https://portal.azure.com) oturum açın. 
+1. [Azure portalında](https://portal.azure.com) oturum açın. 
 
-2. Seçin **Azure Active Directory**ve ardından **günlükleri** gelen **izleme** bölümü, Log Analytics çalışma alanını açın. Çalışma alanı bir varsayılan sorgu ile açılır.
+2. **Azure Active Directory**' yi seçin ve sonra Log Analytics çalışma alanınızı açmak için **izleme** bölümünde **Günlükler** ' i seçin. Çalışma alanı varsayılan bir sorgu ile açılır.
 
     ![Varsayılan sorgu](./media/howto-analyze-activity-logs-log-analytics/defaultquery.png)
 
 
-## <a name="view-the-schema-for-azure-ad-activity-logs"></a>Azure AD etkinlik şemasını görüntülemek günlükleri
+## <a name="view-the-schema-for-azure-ad-activity-logs"></a>Azure AD etkinlik günlükleri için şemayı görüntüleme
 
-Günlükleri depoya **AuditLogs** ve **SigninLogs** çalışma alanında Tablo. Bu tablo şemasını görüntülemek için:
+Günlükler, çalışma alanındaki **auditlogs** ve **signınlogs** tablolarına gönderilir. Bu tabloların şemasını görüntülemek için:
 
-1. Önceki bölümde varsayılan sorgu görünümünde seçin **şema** ve çalışma alanını genişletin. 
+1. Önceki bölümde bulunan varsayılan sorgu görünümünden **şema** ' ı seçin ve çalışma alanını genişletin. 
 
-2. Genişletin **günlük yönetimi** bölümünde ve ya da genişletin **AuditLogs** veya **SignInLogs** günlük şemasını görüntülemek için.
-    ![Denetim günlükleri](./media/howto-analyze-activity-logs-log-analytics/auditlogschema.png) ![Signın günlükleri](./media/howto-analyze-activity-logs-log-analytics/signinlogschema.png)
+2. Günlük **yönetimi** bölümünü genişletin ve ardından günlük şemasını görüntülemek Için **Auditlogs** veya **signınlogs** seçeneklerinden birini genişletin.
+    ![denetim günlüklerini](./media/howto-analyze-activity-logs-log-analytics/auditlogschema.png) ![oturum açma günlükleri](./media/howto-analyze-activity-logs-log-analytics/signinlogschema.png)
 
-## <a name="query-the-azure-ad-activity-logs"></a>Sorgu Azure AD etkinlik günlükleri
+## <a name="query-the-azure-ad-activity-logs"></a>Azure AD etkinlik günlüklerini sorgulama
 
-Çalışma alanınızda günlükleri sahip olduğunuza göre artık sorguları bunlara karşı çalıştırabilirsiniz. Örneğin, son bir hafta içinde kullanılan en iyi uygulamaları almak için varsayılan sorguyu seçin ve aşağıdaki ile değiştirin **çalıştırın**
+Artık çalışma alanınızda bulunan günlüklere sahip olduğunuza göre artık sorguları bunlara karşı çalıştırabilirsiniz. Örneğin, son hafta içinde kullanılan en iyi uygulamaları almak için varsayılan sorguyu aşağıdaki ile değiştirin ve **Çalıştır** ' ı seçin.
 
 ```
 SigninLogs 
@@ -68,7 +74,7 @@ SigninLogs
 | sort by signInCount desc 
 ```
 
-Geçen haftaya göre üst denetim olaylarını almak için aşağıdaki sorguyu kullanın:
+Son hafta içinde en iyi denetim olaylarını almak için aşağıdaki sorguyu kullanın:
 
 ```
 AuditLogs 
@@ -76,37 +82,37 @@ AuditLogs
 | summarize auditCount = count() by OperationName 
 | sort by auditCount desc 
 ```
-## <a name="alert-on-azure-ad-activity-log-data"></a>Azure AD etkinlik günlüğü verileri temelinde uyar
+## <a name="alert-on-azure-ad-activity-log-data"></a>Azure AD etkinlik günlüğü verilerinde uyarı
 
-Sorgunuzda uyarıları da ayarlayabilirsiniz. Örneğin, 10'dan fazla olduğunda bir uyarı yapılandırmak için uygulamaları son bir hafta içinde olarak kullanılmıştır:
+Ayrıca, sorgunuzda uyarıları da ayarlayabilirsiniz. Örneğin, son hafta 10 ' dan fazla uygulama kullanıldığında bir uyarı yapılandırmak için:
 
-1. Çalışma alanından seçin **uyarı ayarlama** açmak için **oluşturma kuralı** sayfası.
+1. Çalışma alanından, **kural oluştur** sayfasını açmak Için **uyarı ayarla** ' yı seçin.
 
-    ![Uyarı ayarlama](./media/howto-analyze-activity-logs-log-analytics/setalert.png)
+    ![Uyarı ayarla](./media/howto-analyze-activity-logs-log-analytics/setalert.png)
 
-2. Varsayılan seçin **Uyarı ölçütleri** uyarı ve güncelleştirme oluşturulan **eşiği** 10 varsayılan ölçümündeki.
+2. Uyarıda oluşturulan varsayılan **Uyarı ölçütlerini** seçin ve varsayılan ölçümdeki **eşiği** 10 olarak güncelleştirin.
 
     ![Uyarı ölçütleri](./media/howto-analyze-activity-logs-log-analytics/alertcriteria.png)
 
-3. Bir ad ve uyarı için bir açıklama girin ve önem derecesini seçin. Bizim örneğimizde, biz ayarlayabilirsiniz **bilgilendirici**.
+3. Uyarı için bir ad ve açıklama girin ve önem derecesini seçin. Bizim örneğimiz için, bunu **bilgilendirici**olarak ayarlayabiliriz.
 
-4. Seçin **eylem grubu** , uyarılmak sinyali oluştuğunda. Web kancaları, Azure işlevleri veya mantıksal uygulamalar'ı kullanarak eyleme otomatikleştirmek veya e-posta veya SMS mesajı aracılığıyla ekibinizi bilgilendirin seçebilirsiniz. Daha fazla bilgi edinin [grupları Azure portalında uyarı oluşturma ve yönetme](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups).
+4. Sinyal oluştuğunda uyarı verilecek **Eylem grubunu** seçin. Ekibinize e-posta veya kısa mesaj yoluyla bildirimde bulunabilir veya Web kancaları, Azure işlevleri veya Logic Apps kullanarak eylemi otomatikleştirebileceğinizi seçebilirsiniz. [Azure Portal Uyarı grupları oluşturma ve yönetme](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups)hakkında daha fazla bilgi edinin.
 
-5. Uyarı yapılandırıldıktan sonra seçin **Oluştur uyarı** etkinleştirin. 
+5. Uyarıyı yapılandırdıktan sonra, etkinleştirmek için **uyarı oluştur** ' u seçin. 
 
-## <a name="install-and-use-pre-built-views-for-azure-ad-activity-logs"></a>Yükleyip önceden oluşturulmuş görünümler için Azure AD etkinlik günlükleri
+## <a name="install-and-use-pre-built-views-for-azure-ad-activity-logs"></a>Azure AD etkinlik günlükleri için önceden oluşturulmuş görünümleri yükleyip kullanın
 
-Azure AD etkinlik için önceden oluşturulmuş bir log analytics görünümleri de indirebilirsiniz günlükleri. Görünümler, Denetim ve oturum açma olayları ile ilgili yaygın senaryolar için ilgili çeşitli raporlar sağlar. Ayrıca tüm raporların, sağlanan verilerin önceki bölümde açıklanan adımları kullanarak uyarabilir.
+Azure AD etkinlik günlükleri için önceden oluşturulmuş Log Analytics görünümlerini de indirebilirsiniz. Görünümler, denetim ve oturum açma olaylarını içeren yaygın senaryolarla ilgili birkaç rapor sağlar. Ayrıca, önceki bölümde açıklanan adımları kullanarak raporlarda belirtilen verileri de uyarabilir.
 
-* **Azure AD hesabı olayları sağlama**: Bu görünümde sağlanan yeni kullanıcı sayısı gibi sağlama etkinliği denetim ile ilgili raporlar gösterilir ve sağlama hataları, kullanıcı sayısı güncelleştirildi ve güncelleştirme hataları ve kullanıcılar da sağlanan ve karşılık gelen hataları sayısı.    
-* **Oturum açma olayları**: Bu görünümde, oturum açma etkinliği, uygulama, kullanıcı, cihaz yanı sıra oturum açma sayısı zamanla izleme Özet görünümünü tarafından oturum açma işlemleri gibi izleme ile ilgili en ilgili raporlar gösterilir.
-* **Kullanıcı onayı gerçekleştirme**: Bu görünüm, gibi tüm onay tabanlı uygulamalar için uygulama tarafından oturum açma yanı sıra kullanıcı, oturum açma işlemleri tarafından izin verilen kullanıcılar tarafından izin verir. kullanıcı onayı için ilgili raporları gösterir. 
+* **Azure AD hesabı sağlama olayları**: Bu görünüm, sağlanan Yeni Kullanıcı sayısı ve sağlama hatalarının sayısı, Kullanıcı sayısı güncelleştirilmiş ve güncelleştirme başarısızlıklarını ve kullanıcı sayısını ve bunlara karşılık gelen hataların sayısını gösterir.    
+* **Oturum açma olayları**: Bu görünüm, uygulama, Kullanıcı, cihaz, oturum açma işlemleri ve zaman içinde oturum açma sayısını izleyen bir Özet görünümü gibi oturum açma etkinliklerini izlemeye ilişkin en ilgili raporları gösterir.
+* **İzin veren kullanıcılar**: Bu görünüm, kullanıcıya izin verilen onay, izin veren kullanıcıların oturum açma işlemleri ve tüm izin tabanlı uygulamalar için uygulamayla oturum açma işlemleri gibi kullanıcı onayı ile ilgili raporları gösterir. 
 
-Bilgi nasıl [yüklemek ve log analytics görünümleri kullanmak için Azure AD etkinlik günlüklerini](howto-install-use-log-analytics-views.md). 
+[Azure ad etkinlik günlükleri için Log Analytics görünümlerini yüklemeyi ve kullanmayı](howto-install-use-log-analytics-views.md)öğrenin. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure İzleyici günlüklerine sorguları kullanmaya başlama](https://docs.microsoft.com/azure/log-analytics/query-language/get-started-queries)
-* [Azure portalında uyarı gruplarını oluşturma ve yönetme](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups)
-* [Yükleme ve Azure Active Directory için log analytics görünümleri kullanma](howto-install-use-log-analytics-views.md)
+* [Azure Izleyici günlüklerinde sorguları kullanmaya başlama](https://docs.microsoft.com/azure/log-analytics/query-language/get-started-queries)
+* [Azure portal uyarı grupları oluşturma ve yönetme](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups)
+* [Azure Active Directory için Log Analytics görünümlerini yükleyip kullanın](howto-install-use-log-analytics-views.md)

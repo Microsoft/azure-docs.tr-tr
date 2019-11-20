@@ -1,65 +1,66 @@
 ---
 title: Azure ve AppSource Market teklifleri
-description: Oluşturma ve yönetme, Azure ve AppSource Marketlerden sunar
+description: Azure ve AppSource marketlerine yönelik teklifler oluşturma ve yönetme
 services: Azure, AppSource, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 03/27/2019
 ms.author: pabutler
-ms.openlocfilehash: 2d440adc5111db11486d1fc606abbda0ffae9595
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f1e561e84daed6c24ca0d9b7832af3d975082e25
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942527"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818768"
 ---
 # <a name="azure-and-appsource-marketplace-offers"></a>Azure ve AppSource Market teklifleri
 
-Bu bölümde bu ilk kısmı oluşturup AppSource Marketlerden ve Azure için teklifleri yönetmek için kullanılan genel işlemler sunar.  Bu bölümü, tüm ortak teknik bilgileri yanı sıra belirli teklif türlerini yönetmek için anlamanız gereken arka plan türleri sunulur sağlar.  Bu bölümde çoğunu oluşturmak ve belirli teklif türlerini yönetmek ayrıntılı yönergeler içerir.  
+Bu bölümün ilk bölümünde, Azure ve AppSource marketlerine yönelik teklifler oluşturmak ve bunları yönetmek için kullanılan genel işlemler tanıtılmaktadır.  Bu bölümde, belirli teklif türlerini yönetmek için anlamanız gereken arka plan ve tüm teklif türlerinde ortak olan teknik bilgiler yer almaktadır.  Bu bölümün çoğu, belirli teklif türlerini oluşturma ve yönetme hakkında ayrıntılı yönergeler içerir.  
 
-Aşağıdaki videoda, çeşitli özellikleri ve Azure Market veya Appsource'ta kullanılabilir farklı teklife türlerini tanıtır.  Ayrıca, önemli teknik ve bu marketlerden içinde bir uygulama veya hizmet yayımlama iş yönlerini kapsar.
+Aşağıdaki videoda, Azure Market veya AppSource 'ta bulunan çeşitli yetenekler ve farklı teklif türleri tanıtılmaktadır.  Ayrıca, bu Pazar konumlarında bir uygulama veya hizmet yayımlamanın önemli teknik ve iş yönlerini de ele alır.
 
 > [!VIDEO https://channel9.msdn.com/Events/Build/2018/BRK2513/player]
 
-**Yapı uygulamalar ve hizmetler için Azure Market ve AppSource - oluşturun 2018**
+**Azure Market ve AppSource için uygulama ve hizmet oluşturma-derleme 2018**
 
-Bu Market hakkında daha fazla bilgi için bkz. [Azure Market'te ve Appsource'ta yayımlama Kılavuzu](../marketplace-publishers-guide.md).
+Bu pazar yerleri hakkında daha fazla bilgi için bkz. [Azure Marketi ve AppSource Yayımlama Kılavuzu](../marketplace-publishers-guide.md).
 
 
-## <a name="common-offer-operations"></a>Sık kullanılan teklif işlemler
+## <a name="common-offer-operations"></a>Ortak teklif işlemleri
 
-Yeni bir teklif oluşturma işlemini büyük ölçüde teklif türleri arasında örneğin arasında farklı bir [Azure uygulaması teklif](./azure-applications/cpp-azure-app-offer.md) ve [danışmanlık hizmet teklifinin](./consulting-services/cloud-partner-portal-consulting-services-publishing-offer.md).  Buna karşılık, diğer işlemlerinin birçoğu bir teklife gerçekleştirdiğiniz [bulut iş ortağı portalı](https://cloudpartner.azure.com) teklif türleri arasında oldukça standartlaştırılmıştır.  Bu yaygın işlemler — yayımlama, Görünüm durumu, güncelleştirme ve silme de dahil olmak üzere — bölümünde ele alınmıştır [teklifler yönetme](./manage-offers/cpp-manage-offers.md)
+Yeni bir teklif oluşturma işlemi, örneğin bir [Azure Uygulama teklifi](./azure-applications/cpp-azure-app-offer.md) ve [danışmanlık hizmeti teklifi](./consulting-services/cloud-partner-portal-consulting-services-publishing-offer.md)arasında teklif türlerine göre büyük ölçüde farklılık gösterir.  Buna karşılık, [bulut iş ortağı portalı](https://cloudpartner.azure.com) bir teklif üzerinde gerçekleştirdiğiniz diğer işlemlerin çoğu teklif türleri arasında oldukça standartlaştırılmış.  Yayımla, durumu görüntüle, Güncelleştir ve Sil gibi yaygın işlemler, [teklifleri yönetme](./manage-offers/cpp-manage-offers.md) bölümünde ele alınmıştır.
 
 
 ## <a name="test-drive"></a>Test Sürüşü
 
-*Sürücü test* "satın almadan önce deneyin" tanıtım seçeneği etkin şekilde her teklif için müşteri sağlayan bir Market özelliğidir.  Teklif türleri aşağıdaki alt kümesi için Test Sürüşü yeteneği sınırlıdır: [Azure uygulamaları](./azure-applications/cpp-azure-app-offer.md), [Dynamics 365 Business Central](../cloud-partner-portal-orig/cpp-business-central-offer.md), [Dynamics 365 müşteri katılımı için](./dyn365ce/cpp-customer-engagement-offer.md), [Finans ve operasyon için Dynamics 365](../cloud-partner-portal-orig/cpp-dynamics-365-operations-offer.md), [ SaaS uygulamaları](./saas-app/cpp-saas-offer.md), ve [sanal makineler](./virtual-machine/cpp-virtual-machine-offer.md).  Bu yetenek, yayımcı, teklif için özelleştirilmiş bir Test Sürüşü şablonu oluşturmak gereklidir.  Daha fazla bilgi için konudaki [Test Sürüşü](./test-drive/what-is-test-drive.md).
+*Test sürüşü* , müşterilerin her bir teklif için "tanıtım için deneme" gösterimi seçeneğini sunan bir market özelliğidir.  Test sürücüsü özelliği, teklif türlerinin aşağıdaki alt kümesiyle sınırlıdır: [Azure uygulamaları](./azure-applications/cpp-azure-app-offer.md), [Dynamics 365 iş merkezi](../cloud-partner-portal-orig/cpp-business-central-offer.md), [Dynamics 365 for Customer Engagement](./dyn365ce/cpp-customer-engagement-offer.md), [finans ve işlemler için Dynamics 365](../cloud-partner-portal-orig/cpp-dynamics-365-operations-offer.md), [SaaS uygulamalar](./saas-app/cpp-saas-offer.md)ve [sanal makineler](./virtual-machine/cpp-virtual-machine-offer.md).  Bu özellik, yayımcının teklifi için özelleştirilmiş bir test sürücü şablonu oluşturmasını gerektirir.  Daha fazla bilgi için, bkz. [test sürücüsü](./test-drive/what-is-test-drive.md).
 
-Test Sürüşü tanıtımlar uygulayarak sahip mevcut Market tekliflerini göz atabilirsiniz [test sürücü filtre](https://azuremarketplace.microsoft.com/en-us/marketplace/apps?filters=test-drive). 
+Test sürüşü test [sürücüsü filtresi](https://azuremarketplace.microsoft.com/marketplace/apps?filters=test-drive)uygulayarak test sürücüsü gösterimine sahip mevcut Market tekliflerine gidebilirsiniz. 
 
 
-## <a name="azure-marketplace-and-appsource-offer-types"></a>Azure Market ve AppSource türleri sunulur.
+## <a name="azure-marketplace-and-appsource-offer-types"></a>Azure Marketi ve AppSource teklif türleri
 
-Tarafından desteklenen geçerli teklif türleri aşağıdaki tabloda [bulut iş ortağı portalı](https://cloudpartner.azure.com).  Her bir teklif türü için teklif burada listelenebilir marketplace(s) yanı sıra, teklif çözümü teknolojiye genel bir açıklamasını listeler.
+Aşağıdaki tabloda [bulut iş ortağı portalı](https://cloudpartner.azure.com)tarafından desteklenen geçerli teklif türleri listelenmektedir.  Her teklif türü için, teklifin listelenbileceği Market (ler) i ve teklif çözümü teknolojisinin genel bir açıklamasını listeler.
 
 |                Teklif Türü                |  Market  |   Açıklama                                                           |
 |                ----------                |  -----------  |   -----------                                                           |
-| [Azure uygulaması](./azure-applications/cpp-azure-app-offer.md) | Azure | Çözüm, bir veya daha fazla bir Azure Resource Manager şablonu aracılığıyla dağıtılan sanal makinelerin (VM'ler), isteğe bağlı özel Azure Kod oluşur.  Dağıtım veya yayımcı tarafından yönetilen bir çözüm şablonu müşteri tarafından ya da olabilir. Bu tür, sağlanan sanal makine teklif türüne göre daha fazla esneklik sağlamak için kullanılır.  |
-| [Danışmanlık hizmeti](./consulting-services/cloud-partner-portal-consulting-services-publishing-offer.md) | Her ikisi de | Microsoft ile nitelenen danışmanlar özel etki alanı hizmetlerini Azure Market veya Appsource'ta listeleyebilirsiniz.  Uzmanlara sorunlarını değerlendirme oluşturma ve doğru çözümleri dağıtma müşterilerin kendi iş hedeflerinize ulaşmanızı yardımcı olur.  |
-| [Kapsayıcı](./containers/cpp-containers-offer.md)  | Azure | Kubernetes tabanlı bir hizmet veya Azure Container Instances olarak sağlanan bir Docker kapsayıcı görüntüsü çözümüdür. |
-| [Dynamics 365 Business Central](../cloud-partner-portal-orig/cpp-business-central-offer.md) | AppSource | Bu Kurumsal Kaynak planlama (ERP) genişleten paketi ve iş yönetim sistemi. |
-| [Dynamics 365 müşteri katılımı için](./dyn365ce/cpp-customer-engagement-offer.md) | AppSource | Bu müşteri genişleten bir paket kaynak yönetimi (CRM) sistemi, satış, hizmet, proje hizmeti ve alan hizmeti modülleri  |
-| [Finans ve operasyon için Dynamics 365](../cloud-partner-portal-orig/cpp-dynamics-365-operations-offer.md) | AppSource | Bu Kurumsal Kaynak planlama (ERP) hizmeti bu Gelişmiş destekler Finans, işlemler, üretim ve tedarik zinciri yönetimi genişleten bir paket |
-| [IOT Edge Modülü](./iot-edge-module/cpp-offer-process-parts.md) | Azure | Bir IOT Edge cihazında çalıştırılır ve Docker ile uyumlu kapsayıcısı.  Bu, özel kod, diğer Azure Hizmetleri ve 3. taraf hizmetleri kullanan küçük hesaplama modüller içerir. |
-| [Power BI uygulaması](./power-bi/cpp-power-bi-offer.md) | AppSource | Veri kümeleri, raporlar ve panolar da dahil olmak üzere özelleştirilebilir Power BI içerik paketleri bir Power BI uygulaması |
-| [SaaS uygulama](./saas-app/cpp-saas-offer.md) | Azure | Hangi kullanıcıların Azure Active Directory kullanan özelleştirilmiş bir arabirim oturum açın bir yayımcı tarafından yönetilen bir hizmet olarak yazılım abonelikte çözümüdür. |
-| [Sanal makine](./virtual-machine/cpp-virtual-machine-offer.md)  | Azure  | Çözüm, müşterinin hizmet aboneliği dağıtılan tek bir sanal makine içinde yer alır.  |
+| [Azure uygulaması](./azure-applications/cpp-azure-app-offer.md) | Azure | Çözüm, bir Azure Resource Manager şablonuyla dağıtılan bir veya daha fazla sanal makineden (VM), isteğe bağlı özel Azure kodundan oluşur.  Dağıtım, bir çözüm şablonu aracılığıyla müşteri tarafından ya da yayımcı tarafından yönetilebilir. Bu tür, sağlanan sanal makine teklif türünden daha fazla esneklik sağlamak için kullanılır.  |
+| [Danışmanlık hizmeti](./consulting-services/cloud-partner-portal-consulting-services-publishing-offer.md) | İs | Microsoft-Qualified Consultants, etki alanına özgü hizmetlerini Azure Market veya AppSource 'ta listeleyebilir.  Uzmanlığı müşterilerin sorunlarını değerlendirmesine ve iş hedeflerini karşılamak üzere doğru çözümler oluşturup dağıtmalarına yardımcı olur.  |
+| [Kapsayıcı](./containers/cpp-containers-offer.md)  | Azure | Çözüm, bir Kubernetes tabanlı hizmet ya da Azure Container Instances olarak sağlanan bir Docker kapsayıcı görüntüsüdür. |
+| [Dynamics 365 Iş Merkezi](../cloud-partner-portal-orig/cpp-business-central-offer.md) | AppSource | Bu kurumsal kaynak planlama (ERP) ve iş yönetim sistemini genişleten bir paket. |
+| [Müşteri katılımı için Dynamics 365](./dyn365ce/cpp-customer-engagement-offer.md) | AppSource | Bu müşteri kaynak yönetimi (CRM) sistemini Sales, Service, Project Service ve Field Service modülleri aracılığıyla genişleten bir paket  |
+| [Finans ve Işlemler için Dynamics 365](../cloud-partner-portal-orig/cpp-dynamics-365-operations-offer.md) | AppSource | Gelişmiş finans, işlemler, üretim ve tedarik zinciri yönetimini destekleyen bu kurumsal kaynak planlama (ERP) hizmetini genişleten bir paket |
+| [IoT Edge modülü](./iot-edge-module/cpp-offer-process-parts.md) | Azure | IoT Edge cihazda çalışan Docker ile uyumlu bir kapsayıcı.  Özel kod, diğer Azure hizmetleri ve üçüncü taraf hizmetler birleşimini kullanan küçük hesaplama modüllerinden oluşur. |
+| [Power BI uygulaması](./power-bi/cpp-power-bi-offer.md) | AppSource | Veri kümeleri, raporlar ve panolar gibi Özelleştirilebilir Power BI içeriği paketleyen Power BI uygulaması |
+| [SaaS uygulaması](./saas-app/cpp-saas-offer.md) | Azure | Çözüm, yayımcı tarafından yönetilen, kullanıcıların Azure Active Directory kullanan özelleştirilmiş bir arabirim aracılığıyla oturum açmasını sağlayan bir hizmet olarak yazılım yazılımıdır. |
+| [Sanal makine](./virtual-machine/cpp-virtual-machine-offer.md)  | Azure  | Çözüm, müşterinin aboneliğine dağıtılan tek bir sanal makine içinde bulunur.  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |   |   |
 
-Daha fazla bilgi için [yayımlama Kılavuzu'nu teklif türüne göre](../publisher-guide-by-offer-type.md).
+Daha fazla bilgi için bkz. [teklif türüne göre kılavuz yayımlama](../publisher-guide-by-offer-type.md).
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Market teklifleri ve ortak teknik öznitelikler ve varlıklar makaledeki gerçekleştirebileceğiniz genel işlemler hakkında bilgi edineceksiniz [Yönetme Teklifler](./manage-offers/cpp-manage-offers.md).
+Market tekliflerinde gerçekleştirebileceğiniz genel işlemleri ve bu kişilerin [tekliflerini yönetme](./manage-offers/cpp-manage-offers.md)makalesindeki ortak teknik özniteliklerini ve varlıklarını öğreneceksiniz.

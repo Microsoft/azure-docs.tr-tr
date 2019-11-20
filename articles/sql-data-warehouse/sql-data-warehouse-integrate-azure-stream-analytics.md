@@ -1,6 +1,6 @@
 ---
-title: SQL veri ambarı ile Azure Stream Analytics'i kullanma | Microsoft Docs
-description: Azure Stream Analytics ile Azure SQL veri ambarı çözümleri geliştirmek için kullanma hakkında ipuçları.
+title: Azure Stream Analytics kullan
+description: Çözümleri geliştirmek için Azure SQL veri ambarı ile Azure Stream Analytics kullanmaya yönelik ipuçları.
 services: sql-data-warehouse
 author: mlee3gsd
 manager: craigg
@@ -10,62 +10,63 @@ ms.subservice: integration
 ms.date: 03/22/2019
 ms.author: martinle
 ms.reviewer: igorstan
-ms.openlocfilehash: 94646c41d9894dd00018ff5ca44d76534d35e8c5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 63803f3ac477e48d8d1c14a72e2ee9b9d4860047
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65873275"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685726"
 ---
-# <a name="use-azure-stream-analytics-with-sql-data-warehouse"></a>SQL veri ambarı ile Azure Stream Analytics'i kullanma
-Azure Stream Analytics, akış verileri bulutta üzerinden düşük gecikme süreli, yüksek oranda kullanılabilir ve ölçeklenebilir karmaşık olay işleme sağlayan tam olarak yönetilen bir hizmettir. Okuyarak temellerini öğrenebilirsiniz [Azure Stream analytics'e giriş][Introduction to Azure Stream Analytics]. Stream Analytics ile izleyerek uçtan uca çözüm oluşturmaya nasıl ardından öğrenebilirsiniz [Azure Stream Analytics'i kullanmaya başlama] [ Get started using Azure Stream Analytics] öğretici.
+# <a name="use-azure-stream-analytics-with-sql-data-warehouse"></a>SQL veri ambarı ile Azure Stream Analytics kullanma
+Azure Stream Analytics, bulutta akış verileri üzerinde düşük gecikmeli, yüksek oranda kullanılabilir ve ölçeklenebilir karmaşık olay işleme sağlayan, tam olarak yönetilen bir hizmettir. [Azure Stream Analytics tanıtım][Introduction to Azure Stream Analytics]bilgilerini okuyarak temelleri öğrenebilirsiniz. Daha sonra, Azure Stream Analytics öğreticisini [kullanmaya başlarken][Get started using Azure Stream Analytics] ' i izleyerek Stream Analytics ile uçtan uca bir çözüm oluşturmayı öğrenebilirsiniz.
 
-Bu makalede, Stream Analytics işleri için çıkış havuzu olarak Azure SQL Data Warehouse veritabanınıza kullanmayı öğreneceksiniz.
+Bu makalede, Azure SQL veri ambarı veritabanınızı Stream Analytics işleriniz için çıkış havuzu olarak kullanmayı öğreneceksiniz.
 
-## <a name="prerequisites"></a>Önkoşullar
-Aşağıdaki adımlarda ilk olarak, üzerinde işlem [Azure Stream Analytics'i kullanmaya başlama] [ Get started using Azure Stream Analytics] öğretici.  
+## <a name="prerequisites"></a>Ön koşullar
+İlk olarak, Azure Stream Analytics öğreticisini [kullanmaya başlarken][Get started using Azure Stream Analytics] ' de aşağıdaki adımları gerçekleştirin.  
 
-1. Bir olay hub'ı girdi oluşturma
-2. Yapılandırma ve olay Oluşturucu uygulamasını başlatma
-3. Bir Stream Analytics işi sağlama
-4. İş Girişi ve sorgu belirtin
+1. Olay Hub 'ı girişi oluşturma
+2. Olay Oluşturucu uygulamasını yapılandırma ve başlatma
+3. Stream Analytics işi sağlama
+4. İş girişi ve sorgu belirtme
 
-Ardından, bir Azure SQL Data Warehouse veritabanı oluşturma
+Ardından, bir Azure SQL veri ambarı veritabanı oluşturun
 
-## <a name="specify-job-output-azure-sql-data-warehouse-database"></a>İş çıktısı belirtin: Azure SQL veri ambarı veritabanı
+## <a name="specify-job-output-azure-sql-data-warehouse-database"></a>İş çıkışını belirtin: Azure SQL veri ambarı veritabanı
 ### <a name="step-1"></a>1\. Adım
-Stream Analytics işinizi tıklayın **çıkış** sayfasının ve ardından üst **ekleme**.
+Stream Analytics işiniz sayfanın üst kısmından **Çıkış** ' a tıklayın ve ardından **Ekle**' ye tıklayın.
 
 ### <a name="step-2"></a>2\. Adım
-SQL veritabanı'nı seçin.
+SQL veritabanı ' nı seçin.
 
-### <a name="step-3"></a>3\. Adım
-Sonraki sayfasında aşağıdaki değerleri girin:
+### <a name="step-3"></a>Adım 3
+Sonraki sayfada aşağıdaki değerleri girin:
 
-* *Çıkış diğer adı*: Bu iş çıktısı için bir kolay ad girin.
+* *Çıkış diğer adı*: Bu iş çıktısı için kolay bir ad girin.
 * *Abonelik*:
-  * SQL Data Warehouse veritabanınıza Stream Analytics işiyle aynı abonelikte gerekiyorsa geçerli abonelikten SQL veritabanını kullan'ı seçin.
-  * Farklı bir abonelikte, veritabanınızı ise SQL veritabanını kullan başka bir aboneliği seçin.
-* *Veritabanı*: Hedef veritabanının adını belirtin.
-* *Sunucu adı*: Yalnızca belirtilen veritabanı sunucusu adını belirtin. Bunu bulmak için Azure portalını kullanabilirsiniz.
+  * SQL veri ambarı veritabanınız Stream Analytics işle aynı abonelikte yer alıyorsa, geçerli abonelikteki SQL veritabanı kullan ' ı seçin.
+  * Veritabanınız farklı bir abonelikte yer alıyorsa, başka bir abonelikteki SQL veritabanını kullan ' ı seçin.
+* *Veritabanı*: hedef veritabanının adını belirtin.
+* *Sunucu adı*: az önce belirttiğiniz veritabanının sunucu adını belirtin. Bunu bulmak için Azure portal kullanabilirsiniz.
 
 ![][server-name]
 
-* *Kullanıcı adı*: Yazma veritabanı için izinleri olan bir hesabın kullanıcı adını belirtin.
-* *Parola*: Belirtilen kullanıcı hesabı için parola sağlayın.
-* *Tablo*: Veritabanında hedef tablonun adını belirtin.
+* *Kullanıcı adı*: veritabanı için yazma izinlerine sahip olan bir hesabın kullanıcı adını belirtin.
+* *Parola*: belirtilen kullanıcı hesabı için parola belirtin.
+* *Tablo*: veritabanındaki hedef tablonun adını belirtin.
 
 ![][add-database]
 
 ### <a name="step-4"></a>4\. Adım
-Bu iş çıktısı eklemek ve Stream Analytics, veritabanına başarıyla bağlantı kurabildiğimizi doğrulamak için onay işaretine tıklayın.
+Bu iş çıktısını eklemek ve Stream Analytics veritabanına başarıyla bağlanabildiğini doğrulamak için onay düğmesine tıklayın.
 
-Veritabanı bağlantısı başarılı olduğunda, portalda bir bildirim görürsünüz. Veritabanı bağlantısını test etmek için Test tıklayabilirsiniz.
+Veritabanı bağlantısı başarılı olduğunda portalda bir bildirim görürsünüz. Veritabanına bağlantıyı test etmek için test ' e tıklayabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Tümleştirme genel bakış için bkz. [SQL veri ambarı tümleştirmesine genel bakış][SQL Data Warehouse integration overview].
+Tümleştirmeye genel bakış için bkz. [SQL veri ambarı tümleştirmesine genel bakış][SQL Data Warehouse integration overview].
 
-Geliştirme ile ilgili daha fazla ipucu için bkz. [SQL Veri Ambarı’nda geliştirmeye genel bakış][SQL Data Warehouse development overview].
+Geliştirme ile ilgili daha fazla ipucu için bkz. [SQL Data Warehouse geliştirmeye genel bakış][SQL Data Warehouse development overview].
 
 <!--Image references-->
 

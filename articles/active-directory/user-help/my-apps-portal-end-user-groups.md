@@ -1,6 +1,6 @@
 ---
-title: Uygulamalarım portalında - Azure Active Directory grupları bilgilerinizi güncelleştirmeniz | Microsoft Docs
-description: Sahip olduğunuz gruplar görüntüleme dahil olmak üzere, grupları ile ilgili bilgilerinizi görebilecek ve hakkında bilgi edinin, yeni grup oluşturma, görüntüleme, zaten bir üye olduğunuz ve herhangi bir birleştirme, gruplar, grupları olmayan zaten bir parçası.
+title: My Apps Portalındaki gruplarınızın bilgilerini güncelleştirme-Azure AD
+description: Sahip olduğunuz grupları görüntüleme, yeni gruplar oluşturma, zaten üyesi olduğunuz grupları görüntüleme ve henüz bir parçası olmayan gruplara katılma dahil olmak üzere gruplarla ilgili bilgilerinizi görüntülemeyi ve güncelleştirmeyi öğrenin.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -13,71 +13,74 @@ ms.author: lizross
 ms.reviewer: kasimpso
 ms.custom: user-help, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 578ca5fa1de338a92280e2dc7cc252fb616e2111
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: aa251ee361af12ecf3fef3c7cd437fa06c1cea52
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64706685"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73803931"
 ---
-# <a name="update-your-groups-info-from-the-my-apps-portal"></a>Uygulamalarım portalında grupları bilgilerinizi güncelleştirin
-Web tabanlı iş veya Okul hesabınızı kullanabilirsiniz **uygulamalarım** görüntülemek ve bazı görmek için profili ve hesabı bilgilerinizi güncelleştirmek için kuruluşunuzun bulut tabanlı uygulamalar, birçoğu başlatmak için portal, **grupları** bilgi edinmek ve gerçekleştirmek için **erişim gözden geçirmeleriyle** grupları ve uygulamaları için. Erişiminiz yoksa, **uygulamalarım** portal, Yardım masanız için izni başvurmanız gerekir.
+# <a name="update-your-groups-info-on-the-my-apps-portal"></a>Uygulamalarım portalınızdaki gruplar bilgilerini güncelleştirme
+
+İş veya okul hesabınızı Web tabanlı **My Apps** portalından kullanarak kuruluşunuzun bulut tabanlı uygulamalarının çoğunu görüntüleyip başlatabilir, profil ve hesap bilgilerinizin bazılarını güncelleştirebilir, **gruplarınızın** bilgilerini görebilir ve şunları yapabilirsinizUygulamalarınız ve gruplarınız için erişim gözden geçirmeleri. **Uygulamalarım** portalına erişiminiz yoksa, Izin Için yardım masasına başvurmanız gerekir.
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-end-user-my-apps-portal.md)]
 
 >[!Important]
->Bu içerik kullanıcılara yöneliktir. Yöneticiyseniz, bulut tabanlı uygulamalarınızı yönetin ve ayarlama hakkında daha fazla bilgi bulabilirsiniz [uygulama yönetimi belgeleri](https://docs.microsoft.com/azure/active-directory/manage-apps).
+>Bu içerik kullanıcılara yöneliktir. Yöneticiyseniz, [uygulama yönetimi belgelerinde](https://docs.microsoft.com/azure/active-directory/manage-apps)bulut tabanlı uygulamalarınızın nasıl ayarlanacağı ve yönetileceği hakkında daha fazla bilgi edinebilirsiniz.
 
-## <a name="view-your-groups-information"></a>Grupları bilgilerinizi görüntüleyin
-Yöneticiniz, görüntülemesine izin vermişse **grupları** kutucuk, şunları yapabilirsiniz:
+## <a name="view-your-groups-information"></a>Grup bilgilerinizi görüntüleyin
 
-- **Bir grubu üyesi olarak.** Ayrıntıları görüntülemek veya herhangi bir grubu bırakın.
+Yöneticiniz, **gruplar** kutucuğunu görüntüleme izni verdiyse şunları yapabilirsiniz:
 
-- **Bir grup sahibi.** Ayrıntılarını görüntülemek, yeni bir grup oluşturma, ekleme veya üyeleri kaldırın veya grubunuzu silin.
+- **Bir grup üyesi olarak.** Ayrıntıları görüntüleyin veya herhangi bir gruptan ayrılın.
 
-### <a name="to-view-your-groups-information"></a>Grupları bilgilerinizi görüntülemek için
+- **Bir grup sahibi olarak.** Ayrıntıları görüntüleyin, yeni bir grup oluşturun, üye ekleyin veya kaldırın ya da grubunuzu silin.
 
-1.  İş veya Okul hesabınızda oturum açın.
+### <a name="to-view-your-groups-information"></a>Grup bilgilerinizi görüntülemek için
 
-2.  Web tarayıcınızı açın ve gidin https://myapps.microsoft.com, veya kuruluşunuz tarafından sağlanan bağlantıyı kullanabilirsiniz. Örneğin, özelleştirilmiş bir sayfaya, kuruluşunuz için gibi yönlendirilebilir https://myapps.microsoft.com/contoso.com.
+1. İş veya okul hesabınızda oturum açın.
 
-    **Uygulamaları** sayfası görüntülenirse, tüm bulut tabanlı uygulamalar, kuruluşunuzun sahip olduğu ve kullanmanız için kullanılabilir gösteriliyor.
+2. Web tarayıcınızı açın ve https://myapps.microsoft.comgidin veya kuruluşunuz tarafından sunulan bağlantıyı kullanın. Örneğin, kuruluşunuz için https://myapps.microsoft.com/contoso.comgibi özelleştirilmiş bir sayfaya yönlendirilmeyebilirsiniz.
 
-    ![Uygulamalarım portalında uygulamalar sayfası](media/my-apps-portal/my-apps-portal-apps-page-groups-tile.png)
+    Kuruluşunuzun sahip olduğu ve kullanabileceğiniz bulut tabanlı uygulamaların tümünü gösteren **uygulamalar** sayfası görüntülenir.
 
-3. Seçin **grupları** grubu ile ilgili bilgilerinizi görmek için kutucuğu.
+    ![Uygulamalarım portalındaki uygulamalar sayfası](media/my-apps-portal/my-apps-portal-apps-page-groups-tile.png)
 
-    ![Grupları sayfası hem sahip olduğu ve üye grupları](media/my-apps-portal/my-apps-portal-groups-page.png)
+3. Grup ile ilgili bilgilerinizi görmek için **gruplar** kutucuğunu seçin.
 
-4. Kullanabileceğiniz izinlerinize bağlı olarak, **grupları** sayfasına:
+    ![Sahip ve üye grupları olan gruplar sayfası](media/my-apps-portal/my-apps-portal-groups-page.png)
 
-    - **Sahip olduğunuz gruplarını gözden geçirin.** Görünümü grupları hakkında bilgi sahibi kuruluşunuz içinde **olduğum gruplar** alan. Belirli bir grup adı seçerek grup türü, üye sayısı, JOIN ilkenin ve etkin üye listesi dahil olmak üzere Grup hakkında daha fazla ayrıntı sağlar.
+4. İzinlerinize bağlı olarak, **gruplar** sayfasını kullanarak şunları yapabilirsiniz:
 
-    - **Yeni bir grup oluşturun.** Yeni bir grup ile sahibinden olarak oluşturduğunuz **olduğum gruplar** alan. Belirli adımlar için bkz: [yeni bir grup oluşturmak](#create-a-new-group) bu makalenin.
+    - **Sahip olduğunuz grupları gözden geçirin.** **Sahip olduğunuz gruplardan** , kuruluşunuz dahilinde sahip olduğunuz tüm gruplar hakkındaki bilgileri görüntüleyin. Belirli bir grup adının seçilmesi, Grup hakkında Grup türü, üye sayısı, JOIN ilkesi ve etkin Üyeler listesi dahil olmak üzere daha fazla ayrıntı sağlar.
 
-    - **Varolan bir grubu düzenleyin.** Kendi gruplarınızı hiçbiri için ayrıntıları düzenleyin. Belirli adımlar için bkz: [varolan bir grubu düzenleme](#edit-an-existing-group) bu makalenin.
+    - **Yeni bir grup oluşturun.** Sahip olduğunuz **gruplardan** sahip olarak sizinle yeni bir grup oluşturun. Belirli adımlar için, bu makalenin [Yeni Grup oluşturma](#create-a-new-group) bölümüne bakın.
 
-    - **Üye ekleme veya kaldırma.** Ekleyin veya sahip olduğunuz gruplar için üyeleri kaldırın. Belirli adımlar için bkz: [ekleme veya kaldırma üyesi](#add-or-remove-a-member) bu makalenin.
+    - **Var olan bir grubu düzenleyin.** Kendi gruplarınızdan herhangi birinin ayrıntılarını düzenleyin. Belirli adımlar için, bu makalenin [mevcut grubunu düzenleme](#edit-an-existing-group) bölümüne bakın.
 
-    - **Bir Office 365 grubu yenileyin.** Kuruluşunuz izin veriyorsa, Office 365 grupları yenileyebilirsiniz. Belirli adımlar için bkz: [bir Office 365 grubu yenileme](#renew-an-office-365-group) bu makalenin. 
+    - **Üye ekleme veya kaldırma.** Sahip olduğunuz gruplar için üye ekleyin veya kaldırın. Belirli adımlar için, bu makalenin [üye ekleme veya kaldırma](#add-or-remove-a-member) bölümüne bakın.
 
-    - **Bir grubu siler.** Sahip olduğunuz tüm grupları kaldırın. Belirli adımlar için bkz: [grup silme](#delete-a-group) bu makalenin.
+    - **Office 365 grubunu yenileyin.** Kuruluşunuz izin veriyorsa, Office 365 gruplarınızı yenileyebilirsiniz. Belirli adımlar için, bu makalenin [Office 365 grubunu yenileme](#renew-an-office-365-group) bölümüne bakın. 
 
-    - **Bir parçası olduğunuz gruplarını gözden geçirin.** Herhangi bir gruba hangi olduğunuz bir üye adları görüntülemek **ben de grupları** alan. Belirli bir grup adı seçerek grup türü, üye sayısı, JOIN ilkenin ve etkin üye listesi dahil olmak üzere Grup hakkında daha fazla ayrıntı sağlar.
+    - **Bir grubu silin.** Sahip olduğunuz tüm grupları silin. Belirli adımlar için, bu makalenin [grubu silme](#delete-a-group) bölümüne bakın.
 
-    - **Bir gruba katılma.** Kendisi için olmadığınız zaten bir üye gelen varolan bir gruba katılmak **ben de grupları** alan. Belirli adımlar için bkz: [varolan bir gruba katılmak](#join-an-existing-group).
+    - **Bir parçası olduğunuz grupları gözden geçirin.** Alanındayken **bulunan gruplardan** üye olduğunuz grupların adlarını görüntüleyin. Belirli bir grup adının seçilmesi, Grup hakkında Grup türü, üye sayısı, JOIN ilkesi ve etkin Üyeler listesi dahil olmak üzere daha fazla ayrıntı sağlar.
+
+    - **Gruba katın.** Zaten bir üyesi olmadığınız var olan bir gruba katılarak, alan **Içindeki gruplar** ' dan. Belirli adımlar için bkz. [var olan bir gruba ekleme](#join-an-existing-group).
 
 ## <a name="create-a-new-group"></a>Yeni grup oluşturma
-1. Üzerinde **grupları** sayfasında **bir grup oluşturmak** gelen **olduğum gruplar** alan.
+
+1. **Gruplar** sayfasında, **sahip** olduğu gruplardan **Grup Oluştur** ' u seçin.
 
     **Grup Oluştur** kutusu görüntülenir.
 
-    ![Grup kutusu oluşturma](media/my-apps-portal/my-apps-portal-create-group-page.png)
+    ![Grup kutusu oluştur](media/my-apps-portal/my-apps-portal-create-group-page.png)
 
 2. Gerekli bilgileri girin:
 
     - **Grup türü:**
-        
+
         - **Güvenlik.** Bir kullanıcı grubu için paylaşılan kaynaklara üye ve bilgisayar erişimini yönetmek için kullanılır. Örneğin, belirli bir güvenlik ilkesi için bir güvenlik grubu oluşturabilirsiniz. Böylece, her bir üyeye ayrı ayrı izin eklemek zorunda kalmadan aynı anda tüm üyelere bir dizi izin verebilirsiniz.
 
         - **Office 365.** Üyelerin paylaşılan posta kutusuna, takvime, takvime, dosyalara, SharePoint sitesine vb.’ye erişmesini sağlayarak işbirliği fırsatları sunar. Bu seçenek, kuruluşunuzun dışındaki kişilerin de gruba erişmesini sağlar.
@@ -86,87 +89,96 @@ Yöneticiniz, görüntülemesine izin vermişse **grupları** kutucuk, şunları
 
     - **Grup açıklaması (isteğe bağlı).** Grubunuza isteğe bağlı bir açıklama ekler.
 
-    - **Grup İlkesi.** Herkes grubuna katılın veya yalnızca Grup sahibi üye eklemek izin verecek şekilde izin vermek için seçin.
+    - **Grup ilkesi.** Herkesin gruba katılmasına izin vermek ya da yalnızca grubun sahibinin üye eklemesine izin vermek için seçin.
 
-3. **Oluştur**’u seçin.
+3. **Oluştur**'u seçin.
 
-    Sahibi olarak, yeni grup oluşturulur ve görünür, **olduğum gruplar** listesi. Sahibi olduğunuzdan, bu Grup ayrıca şurada görünür **ben de grupları** listesi.
+    Yeni Grup sizinle birlikte oluşturulur ve sahip olduğunuz **gruplar kendi listem** listesinde görünür. Sahip olduğunuz için bu grup, **Listediğim gruplar** listesinde de görünür.
 
-## <a name="edit-an-existing-group"></a>Varolan bir grubu düzenleme
-Bir grubu oluşturduktan sonra mevcut bilgilerini güncelleştirme gibi ayrıntılarını düzenleyebilirsiniz.
+## <a name="edit-an-existing-group"></a>Var olan bir grubu Düzenle
 
-### <a name="to-edit-your-details"></a>Ayrıntılarını düzenlemek için
-1. Gelen düzenlemek istediğiniz grubu seçin **grupları** sayfasında ve ardından **Ayrıntıları Düzenle** üzerinde *&lt;grup_adı&gt;* sayfası.
+Bir grup oluşturduktan sonra, mevcut bilgilerin hiçbirini güncelleştirmek dahil olmak üzere ayrıntılarını düzenleyebilirsiniz.
 
-    **Ayrıntıları Düzenle** kutusu görünür ve Grup ilk oluşturulduğunda eklenen bilgiler güncelleştirebilirsiniz.
+### <a name="to-edit-your-details"></a>Ayrıntılarınızı düzenlemek için
 
-2. Tüm değişikliklerinizi yapın ve ardından **güncelleştirme**.
+1. **Gruplar** sayfasından düzenlemek istediğiniz grubu seçin ve ardından *&lt;group_name&gt;* sayfasında **Ayrıntıları Düzenle** ' yi seçin.
 
-## <a name="add-or-remove-a-member"></a>Ekleme veya bir üye kaldırma
-Ekleme veya üyeleri kendi gruplarınızı birini kaldırın.
+    **Ayrıntıları Düzenle** kutusu görünür ve ilk olarak grubu oluştururken eklediğiniz bilgileri güncelleştirebilirsiniz.
 
-### <a name="to-add-or-remove-a-member"></a>Veya üye kaldırılamıyor
-1. Üye eklemek ve ardından istediğiniz grubu seçin **+** üzerinde *&lt;grup_adı&gt;* sayfası.
+2. Tüm değişikliklerinizi yapın ve ardından **Güncelleştir**' i seçin.
 
-    ![Vurgulanan oturum + ile bir grup üyesi Ekle](media/my-apps-portal/my-apps-portal-add-member-link.png)
+## <a name="add-or-remove-a-member"></a>Üye ekleme veya kaldırma
 
-2. Eklemek istediğiniz üye Ara gelen **üye ekleme** kutusuna ve ardından **Ekle**.
+Kendi gruplarınızdan herhangi biri için üye ekleyebilir veya kaldırabilirsiniz.
 
-    ![Üyeleri kutusunu eklemek için yeni üye Ekle](media/my-apps-portal/my-apps-portal-add-member-page.png)
+### <a name="to-add-or-remove-a-member"></a>Üye eklemek veya kaldırmak için
 
-    Kuruluşun uygulamalara kullanmaya başlamak için yeni üye için bir davet gönderilir.
+1. Üye eklemek istediğiniz grubu seçin ve ardından *&lt;group_name&gt;* sayfasında **+** ' yi seçin.
 
-3. Yanlışlıkla bir üye eklendiğinde ya da üye kuruluşunuz ayrıldıysa seçerek üye kaldırabilirsiniz **üye kaldırma** üzerinde üyenin adının yanındaki *&lt;grup_adı&gt;* sayfası.
+    ![\+ İşaretiyle vurgulanmış bir grup üyesi ekleyin](media/my-apps-portal/my-apps-portal-add-member-link.png)
 
-    ![Temizleme bağlantısının vurgulandığı, üye kaldırma](media/my-apps-portal/my-apps-portal-remove-member-link.png)
+2. **Üye Ekle** kutusundan eklemek istediğiniz üyeyi arayın ve ardından **Ekle**' yi seçin.
 
-## <a name="renew-an-office-365-group"></a>Bir Office 365 grubu yenileme
-Kuruluşunuz izin veriyorsa, sona erme tarihi genişletme bir Office 365 grubu yenileyebilirsiniz.
+    ![Eklenecek yeni üyeyle üye kutusu Ekle](media/my-apps-portal/my-apps-portal-add-member-page.png)
+
+    Kuruluşun uygulamalarına erişmeye başlamak için yeni üyeye bir davetiye gönderilir.
+
+3. Bir üyeyi yanlışlıkla eklediyseniz veya bir üye kuruluşunuzu bıraktıysanız, *&lt;group_name&gt;* sayfasında üyenin adının yanındaki **üyeyi kaldır** ' ı seçerek üyeyi kaldırabilirsiniz.
+
+    ![Kaldırma bağlantısı vurgulanmış şekilde bir üyeyi kaldırma](media/my-apps-portal/my-apps-portal-remove-member-link.png)
+
+## <a name="renew-an-office-365-group"></a>Office 365 grubunu yenileme
+
+Kuruluşunuz buna izin veriyorsa, sona erme tarihini genişleterek bir Office 365 grubunu yenileyebilirsiniz.
 
 ### <a name="to-renew-a-group"></a>Bir grubu yenilemek için
-1. Yenileyin ve ardından istediğiniz Office 365 grubunu seçin **yenileme grubu**.
 
-    ![Sona erme tarihini genişletme bir Office 365 grubu yenileme](media/my-apps-portal/my-apps-portal-renew-group-link.png)
+1. Yenilemek istediğiniz Office 365 grubunu seçin ve ardından **grubu Yenile**' yi seçin.
 
-2. Tıklayın **Tamam** onay iletisi kapatın.
+    ![Bir Office 365 grubunu yenileyin ve sona erme tarihini genişleterek](media/my-apps-portal/my-apps-portal-renew-group-link.png)
 
-    Sayfayı yeniledikten sonra güncelleştirilmiş görürsünüz **son yenilenmiş** ve **Grup süre sonu** tarihler.
+2. Onay iletisini kapatmak için **Tamam** ' ı tıklatın.
 
-## <a name="delete-a-group"></a>Grup silme
-Kendi gruplarınızı istediğiniz zaman silebilirsiniz. Ancak bir grup yanlışlıkla silerseniz oluşturun ve üyeleri yeniden eklemeniz gerekecektir.
+    Sayfayı yeniledikten sonra, güncelleştirilmiş **Son yenileme** ve **Grup süre sonu** tarihlerini görürsünüz.
 
-### <a name="to-delete-the-group"></a>Grup silinemedi
-1. Kalıcı olarak silmek ve ardından istediğiniz grubu seçin **grubunu Sil** üzerinde *&lt;grup_adı&gt;* sayfası.
+## <a name="delete-a-group"></a>Bir grubu silme
 
-    ![Delete grubu bağlantısının vurgulandığı < grup_adı > sayfası](media/my-apps-portal/my-apps-portal-delete-group-link.png)
+İstediğiniz zaman kendi gruplarınızı silebilirsiniz. Ancak, bir grubu yanlışlıkla silerseniz, oluşturmanız ve üyeleri tekrar eklemeniz gerekir.
 
-2. Seçin **Evet** onaylama iletisinde.
+### <a name="to-delete-the-group"></a>Grubu silmek için
 
-    Grup kalıcı olarak silinir. 
-    
-## <a name="join-an-existing-group"></a>Mevcut bir gruba katılma
-Zaten varolan bir gruptan katılabilir **grupları** sayfası.
+1. Kalıcı olarak silmek istediğiniz grubu seçin ve ardından *&lt;group_name&gt;* sayfasında **Grubu Sil** ' i seçin.
 
-### <a name="to-join-or-leave-a-group"></a>Katılma veya gruptan ayrılma
+    ![Grup silme bağlantısı vurgulanmış olarak < Group_name > sayfası](media/my-apps-portal/my-apps-portal-delete-group-link.png)
 
-1. Üzerinde **grupları** sayfasında **gruba Katıl** gelen **ben de grupları** alan.
+2. Onay iletisinde **Evet** ' i seçin.
 
-    **Katılın grupları** sayfası görüntülenir.
+    Grup kalıcı olarak silinir.
 
-    ![Grupları sayfasında birleştirme grubu düğmesi vurgulanmış katılın](media/my-apps-portal/my-apps-portal-join-group-link.png)
+## <a name="join-an-existing-group"></a>Var olan bir gruba ekleme
 
-2. Üzerinde **katılın grupları** sayfasında, grubun kullanılabiliyorsa, ardından katılın ve ilişkili Grup ayrıntılarını görüntülemek istediğiniz grubun adını seçin **gruba Katıl**.
+**Gruplar** sayfasından zaten var olan bir gruba katabilirsiniz.
 
-    Grup üyeliğini onaylamasını Grup sahibi gerektiriyorsa, neden Gruba katılmak gerektiğini için bir iş gerekçesi girmeniz istenir ve ardından **istek**. Grup onay gerektirmez, hemen bir üyesi olarak eklenir ve grup görünür, **ben de grupları** listesi.
+### <a name="to-join-or-leave-a-group"></a>Gruba katılması veya gruptan ayrılmak için
 
-3. Artık parçası olması gerektiğinde, grup adı seçin veya yanlışlıkla bir gruba katılmış **katılın grupları** sayfasında ve ardından **Gruptan Ayrıl**.
+1. **Gruplar** sayfasında, alan **içinde olduğum gruplardan** **grubu Birleştir** ' i seçin.
 
-    ![Grupları sayfasında, izin grubu düğmesi vurgulanmış katılın](media/my-apps-portal/my-apps-portal-leave-group-link.png)    
+    **Grupları birleştir** sayfası görüntülenir.
+
+    ![Grubu Birleştir düğmesi vurgulanmış şekilde grupları birleştir sayfası](media/my-apps-portal/my-apps-portal-join-group-link.png)
+
+2. **Grupları birleştir** sayfasında, birleştirmek istediğiniz grubun adını seçin, ilişkili Grup ayrıntılarını görüntüleyin ve grup kullanılabiliyorsa **grubu Birleştir**' i seçin.
+
+    Grup, üyeliği onaylaması için Grup sahibi gerektiriyorsa, gruba katılması gerekmesinin nedeni için bir iş doğrulaması girmeniz ve sonra **istek**' ı seçmeniz istenir. Grup onay gerektirmiyorsa, bir üye olarak hemen eklenir ve Grup, **Listediğim gruplar** listesinde görünür.
+
+3. Bir gruba yanlışlıkla katılırsanız veya bir parçası olması gerekmiyorsa, **grupları birleştir** sayfasından grup adını seçebilir ve sonra **grubu bırak**' ı seçebilirsiniz.
+
+    ![Grup bırak düğmesi vurgulanmış şekilde, grupları birleştir sayfası](media/my-apps-portal/my-apps-portal-leave-group-link.png)    
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Erişmeyi ve uygulamaları uygulamalarım portalında](my-apps-portal-end-user-access.md).
+- [Uygulamalarım portalındaki uygulamalara erişin ve bunları kullanın](my-apps-portal-end-user-access.md).
 
-- [Profil bilginizi değiştirmek](my-apps-portal-end-user-update-profile.md).
+- [Profil bilgilerinizi değiştirin](my-apps-portal-end-user-update-profile.md).
 
-- [Kendi erişim gözden geçirmeleri gerçekleştirmek](my-apps-portal-end-user-access-reviews.md).
+- [Kendi erişim incelemelerinizi gerçekleştirin](my-apps-portal-end-user-access-reviews.md).

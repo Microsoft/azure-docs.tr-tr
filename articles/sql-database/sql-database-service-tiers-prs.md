@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı Premium RS hizmet katmanı devre dışı bırakma | Microsoft Docs
-description: Premium RS Hizmet katmanını devre dışı bırakılıyor ve desteği sona eriyor - geçiş seçenekleri bakın.
+title: Hizmet katmanı kullanımdan kaldırma Premium RS
+description: Premium RS hizmet katmanı kullanımdan kaldırılıyor ve bu hizmet için destek sonlandırılıyor-bkz. geçiş seçenekleri.
 services: sql-database
 ms.service: sql-database
 ms.subservice: service
@@ -10,95 +10,94 @@ ms.topic: conceptual
 author: stevestein
 ms.author: sstein
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 02/07/2019
-ms.openlocfilehash: 7f184178343f69f522148777752c51afc5c5dcb6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f00ecd19877ba6236bde5de73d450967abc1fe15
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65790403"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821037"
 ---
-# <a name="azure-sql-database-premium-rs-service-tier-preview-is-being-retired---options-for-migration"></a>Azure SQL veritabanı Premium RS hizmet Katmanı (Önizleme) kullanımdan - geçiş seçenekleri
+# <a name="azure-sql-database-premium-rs-service-tier-preview-is-being-retired---options-for-migration"></a>Azure SQL Veritabanı Premium RS hizmet katmanı (Önizleme) kullanımdan kaldırılıyor-geçiş seçenekleri
 
-Şubat 2018'de Microsoft Azure SQL veritabanı Premium RS hizmet katmanında genel kullanıma sunulduktan değil ve artık 31 Ocak 2019 sonra desteklenen duyurdu. Bu destek son sonuna 30 Haziran 2019 için genişletilmiştir. Bu makalede, başka bir hizmet katmanına Premium RS hizmet katmanından geçiş seçenekleriniz açıklanır. 30 Haziran 2019'dan sonra Microsoft Premium RS veritabanınızın performans gereksinimleriyle en yakından eşleşen bir genel kullanıma sunulan hizmet katmanı için Premium RS veritabanlarınızı otomatik olarak geçirir.
+Microsoft, Şubat 2018 ' de Azure SQL veritabanı 'ndaki Premium RS hizmet katmanının genel kullanıma sunulmayacak olduğunu ve 31 Ocak 2019 ' den sonra desteklenmediğini duyurmuştur. Destek son tarihinin bu sonu 30 Haziran 2019 ' e genişletilmiştir. Bu makalede Premium RS hizmet katmanından başka bir hizmet katmanına geçiş için kullanabileceğiniz seçenekler açıklanmaktadır. Microsoft, 30 Haziran 2019 ' den sonra, Premium RS veritabanlarınızı Premium RS veritabanınızın performans gereksinimleriyle en yakından eşleşen genel kullanıma açık bir hizmet katmanına otomatik olarak geçirecektir.
 
-Geçiş hedefler ve Premium RS müşteriler için uygun bir fiyatlandırma seçenekleri aşağıda verilmiştir:
+Premium RS müşterileri için uygun olabilecek geçiş hedefleri ve fiyatlandırma seçenekleri şunlardır:
 
 - Sanal çekirdek hizmet katmanları
 
-  **Genel amaçlı** ve **iş açısından kritik** hizmet katmanlarında [sanal çekirdek tabanlı satın alma modeli](sql-database-service-tiers-vcore.md). Bu iki hizmet katmanı, genel kullanım aşamasındadır. Sanal çekirdek tabanlı satın alma modeli de sunar **hiper ölçekli** uyum sağlayan isteğe bağlı veritabanı başına en fazla 100 TB otomatik ölçeklendirme ile İş yükünüzün gereksinimlerini hizmet katmanı. G/ç performansı için Premium hizmet katmanında karşılaştırılabilir hiper ölçekli hizmet katmanı sunar [DTU tabanlı satın alma modeli](sql-database-service-tiers-dtu.md) fiyattan daha yakın Premium RS hizmet katmanı için.
+  [Sanal çekirdek tabanlı satın alma modelindeki](sql-database-service-tiers-vcore.md) **genel amaçlı** ve **iş açısından kritik** hizmet katmanları. Bu iki hizmet katmanı genel kullanıma sunulduğuna göre yapılır. Sanal çekirdek tabanlı satın alma modeli Ayrıca, iş yükünüzün ihtiyaçlarına göre isteğe bağlı olarak, veritabanı başına 100 TB 'a kadar otomatik ölçeklendirme sağlayan **hiper ölçekli** hizmet katmanını da sunar. Hiper ölçek hizmeti katmanı, Premium RS hizmet katmanına daha yakın bir fiyata [DTU tabanlı satın alma modelindeki](sql-database-service-tiers-dtu.md) Premium hizmet KATMANıNA benzer GÇ performansı sağlar.
 - Geliştirme ve Test fiyatlandırması
 
-  [Geliştirme ve test fiyatlandırması](https://azure.microsoft.com/pricing/dev-test/) Visual Studio aboneliğinizle %55 lisansın dahil edildiği oranları karşı varan tasarruf sağlar.
-- Azure hibrit avantajı ve ayrılmış kapasite fiyatlandırması
+  [Geliştirme ve test fiyatlandırması](https://azure.microsoft.com/pricing/dev-test/) , Visual Studio aboneliğinizle lisans dahil olmak üzere %55 ' e kadar tasarruf sağlar.
+- Azure Hibrit Avantajı ve ayrılmış kapasite fiyatlandırması
 
-  [Azure hibrit avantajı ve ayrılmış kapasite fiyatlandırması](https://azure.microsoft.com/pricing/details/sql-database/) % 80'lisansın dahil edildiği oranları karşı tasarruf sağlayın. Bu seçenekler hakkında daha fazla bilgi için bkz. [SQL Server için Azure hibrit avantajı](https://azure.microsoft.com/pricing/hybrid-benefit/) ve [Azure SQL veritabanı ayrılan kapasite](sql-database-reserved-capacity.md).
+  [Azure hibrit avantajı ve ayrılmış kapasite fiyatlandırması,](https://azure.microsoft.com/pricing/details/sql-database/) %80 ve lisans dahil ücretlere kadar tasarruf sağlar. Bu seçenekler hakkında daha fazla bilgi için bkz. SQL Server ve [Azure SQL veritabanı ayrılmış kapasitesi](sql-database-reserved-capacity.md) [Azure hibrit avantajı](https://azure.microsoft.com/pricing/hybrid-benefit/) .
 
-## <a name="act-now-to-migrate-your-premium-rs-databases-to-alternative-sql-database-service-tiers"></a>Premium RS veritabanlarınızı alternatif SQL veritabanı hizmet katmanları için şimdi geçirmek için harekete geçin
+## <a name="act-now-to-migrate-your-premium-rs-databases-to-alternative-sql-database-service-tiers"></a>Artık Premium RS veritabanlarınızı alternatif SQL veritabanı hizmet katmanlarına geçirmeye çalışır
 
-Yanı sıra sunduğumuz fiyatlandırma ve belgeler Premium RS iş yükleriniz için doğru geçiş destination(s) belirlemek için bu makaledeki yönergeleri inceleyin.
+Premium RS iş yüklerinize yönelik doğru geçiş hedefini öğrenmek için bu makaledeki Kılavuzu ve fiyatlarımızla birlikte gözden geçirin.
 
-## <a name="migrate-compute-intensive-workloads-and-save"></a>Yoğun işlem gücü kullanımlı iş yüklerini geçirin ve kaydedin
+## <a name="migrate-compute-intensive-workloads-and-save"></a>İşlem yoğunluğu yoğun iş yüklerini geçirme ve kaydetme
 
-Yoğun işlem gücü kullanımlı Premium RS iş yükleriniz için SQL Server ve ayrılmış kapasite teklifler için Azure hibrit avantajı kullanılarak lisansın dahil edildiği oranları ve daha fazla tasarruf edin ve genel olarak kullanılabilir sanal çekirdek tabanlı genel amaçlı hizmet katmanımız geçirme öneririz. Bir DTU tabanlı satın alma seçeneği yerine kalır, standart hizmet katmanı için yoğun işlem gücü kullanımlı Premium RS veritabanlarınızı geçirme ve hala (bunu genel kullanıma geçmiş) Premium RS genel kullanılabilirlik fiyatlandırması ile kaydedin.
+İşlem yoğunluğu yoğun Premium RS iş yükleriniz için, genel olarak kullanılabilir sanal çekirdek tabanlı Genel Amaçlı hizmet katmanlarımıza geçiş yapmanızı ve SQL Server ve ayrılmış kapasite teklifleri için Azure Hibrit Avantajı kullanarak daha fazla lisans dahil ücret tasarrufu yapmanızı öneririz. DTU tabanlı bir satın alma seçeneğinde kalırsa, işlem yoğunluklu Premium RS veritabanlarınızı standart bir hizmet katmanına geçirebilir ve yine de Premium RS genel kullanım fiyatlandırmasına karşı tasarruf edebilirsiniz (genel kullanıma sunulmasaydı).
 
 > [!WARNING]
-> DTU tabanlı Premium hizmet katmanları için Premium RS iş yüklerinizin geçişini Premium RS geçerli fiyatlandırma karşı aylık maliyetlerinizi artırabilir. Azure hibrit avantajı ve ayrılmış kapasite Premium RS daha benzer veya daha düşük maliyetler korumak için fiyatlandırma ile hiper ölçekli veya iş açısından kritik katmanları dikkate öneririz.
+> Premium RS iş yüklerinizi DTU tabanlı Premium hizmet katmanlarına geçirmek, aylık maliyetleri ve geçerli Premium RS fiyatlandırmaya karşı artırabilir. Premium RS kıyasla benzer veya daha düşük maliyetleri korumak için, Azure Hibrit Avantajı ve ayrılmış kapasite fiyatlandırmasına sahip Hyperscale veya İş Açısından Kritik katmanlarını dikkate etmenizi öneririz.
 
 ### <a name="premium-rs-databases"></a>Premium RS veritabanları
 
-|**Şu anda...**|**Benzer şekilde, sanal çekirdek tabanlı geçirme...**|**Karşılaştırılabilir için DTU tabanlı geçirme...**|
+|**Şu anda açık...**|**Karşılaştırılabilir sanal çekirdek tabanlı ' a geçiş yapın...**|**Karşılaştırılabilir DTU tabanlı ' a geçiş yapın...**|
 |---|---|---|
-|Premium RS 1|Genel amaçlı 1 sanal çekirdek (4. nesil)|Standart 3|
-|Premium RS 2|Genel amaçlı, 2 sanal çekirdek (4. nesil)|Standart 4|
-|Premium RS 4|Genel amaçlı 4 sanal çekirdek (4. nesil)|Standart 6|
-|Premium RS 6|Genel amaçlı 6 sanal çekirdek (4. nesil)|Standart 7|
+|Premium RS 1|Genel Amaçlı 1 sanal çekirdek (4. nesil)|Standart 3|
+|Premium RS 2|Genel Amaçlı 2 sanal çekirdekler (4. nesil)|Standart 4|
+|Premium RS 4|Genel Amaçlı 4 sanal çekirdek (4. nesil)|Standart 6|
+|Premium RS 6|Genel Amaçlı 6 sanal çekirdek (4. nesil)|Standart 7|
 
-### <a name="premium-rs-pools"></a>Premium RS havuzlar
+### <a name="premium-rs-pools"></a>Premium RS havuzları
 
-|**Şu anda...**|**Benzer şekilde, sanal çekirdek tabanlı geçirme...**|**Karşılaştırılabilir için DTU tabanlı geçirme...**|
+|**Şu anda açık...**|**Karşılaştırılabilir sanal çekirdek tabanlı ' a geçiş yapın...**|**Karşılaştırılabilir DTU tabanlı ' a geçiş yapın...**|
 |---|---|---|
-|Premium RS 125 DTU havuzu|Genel amaçlı 1 sanal çekirdek (4. nesil)|Standart havuz 100 edtu'ları|
-|Premium RS 250 DTU havuzu|Genel amaçlı, 2 sanal çekirdek (4. nesil)|250 standart havuz edtu'ları|
-|Premium RS 500 DTU havuzu|Genel amaçlı 4 sanal çekirdek (4. nesil)|500 standart havuz edtu'ları|
-|Premium RS 1000 DTU havuzu|Genel amaçlı 8 sanal çekirdek (4. nesil)|Standart havuz 1000 edtu'ları|
+|Premium RS havuzu 125 DTU|Genel Amaçlı 1 sanal çekirdek (4. nesil)|Standart Havuz 100 eDTU|
+|Premium RS havuzu 250 DTU|Genel Amaçlı 2 sanal çekirdekler (4. nesil)|Standart Havuz 250 eDTU|
+|Premium RS havuzu 500 DTU|Genel Amaçlı 4 sanal çekirdek (4. nesil)|Standart Havuz 500 eDTU|
+|Premium RS havuzu 1000 DTU|Genel Amaçlı 8 sanal çekirdekler (4. nesil)|Standart Havuz 1000 eDTU|
 
-## <a name="optimize-savings-and-performance-for-your-io-intensive-workloads"></a>Tasarruf ve performansı yoğun g/ç iş yükleriniz için en iyi duruma getirme
+## <a name="optimize-savings-and-performance-for-your-io-intensive-workloads"></a>GÇ yoğun iş yükleriniz için tasarruf ve performansı iyileştirin
 
-Bizim sanal çekirdek tabanlı hiper ölçekli katmanında, şu anda Önizleme ve en iyi performans ve maliyet birleşimi için genel kullanıma sunulan iş açısından kritik katmanımız, yoğun g/ç veritabanı havuzları, yoğun g/ç tek veritabanlarınızı geçirme öneririz.  Aşağıdaki sanal çekirdek tabanlı seçenekleri korumak veya geçerli performansınızı artırın ve Azure karma avantajı ile birlikte ve ayrılmış kapasite fiyatlandırması paradan tasarruf.
+En iyi performans ve maliyet birleşimi için, GÇ yoğun tek veritabanlarınızı sanal çekirdek tabanlı hiper ölçek katmanımızı, şu anda önizleme aşamasında olan ve GÇ yoğun veritabanı havuzlarınızı genel kullanıma açık İş Açısından Kritik katmanımızla geçirmeyi öneririz.  Aşağıdaki vCore tabanlı seçenekler, geçerli performanslarını korur veya iyileştirir ve Azure Hibrit Avantajı ve ayrılmış kapasite fiyatlandırmasıyla birlikte ne kadar tasarruf etmenizi sağlayabilir.
 
-|**Şu anda...**|**Benzer şekilde, sanal çekirdek tabanlı geçirme...**|**Karşılaştırılabilir için DTU tabanlı geçirme...**|
+|**Şu anda açık...**|**Karşılaştırılabilir sanal çekirdek tabanlı ' a geçiş yapın...**|**Karşılaştırılabilir DTU tabanlı ' a geçiş yapın...**|
 |---|---|---|
-|Premium RS 1| Hiper ölçekli 1 sanal çekirdek (4. nesil) veya kritik iş 1 sanal çekirdek (4. nesil)|Premium 1|
-|Premium RS 2| Hiper ölçekli 2 sanal çekirdek (4. nesil) veya kritik iş 2 sanal çekirdek (4. nesil|Premium 2|
-|Premium RS 4| Hiper ölçekli 4 sanal çekirdek (4. nesil) ya da iş kritik 4 sanal çekirdek (4. nesil)|Premium 4
-|Premium RS 6| Hiper ölçekli 6 sanal çekirdek (4. nesil) ya da iş kritik 6 sanal çekirdek (4. nesil)|Premium 6|
+|Premium RS 1| Hiperscale 1 sanal çekirdek (4. nesil) veya İş Açısından Kritik 1 sanal çekirdek (4. nesil)|Premium 1|
+|Premium RS 2| Hiper ölçek 2 sanal çekirdekler (4. nesil) veya İş Açısından Kritik 2 sanal çekirdek (4. nesil|Premium 2|
+|Premium RS 4| Hiper ölçek 4 sanal çekirdek (4. nesil) veya İş Açısından Kritik 4 sanal çekirdek (4. nesil)|Premium 4
+|Premium RS 6| Hyperscale 6 sanal çekirdekleri (4. nesil) veya İş Açısından Kritik 6 sanal çekirdek (4. nesil)|Premium 6|
 
-|**Şu anda...**|**Benzer şekilde, sanal çekirdek tabanlı geçirme...**|**Karşılaştırılabilir için DTU tabanlı geçirme...**|
+|**Şu anda açık...**|**Karşılaştırılabilir sanal çekirdek tabanlı ' a geçiş yapın...**|**Karşılaştırılabilir DTU tabanlı ' a geçiş yapın...**|
 |---|---|---|
-|Premium RS 125 DTU havuzu|İş kritik 2 sanal çekirdek (4. nesil)|Premium havuz 125 Edtu|
-|Premium RS 250 DTU havuzu|İş kritik 2 sanal çekirdek (4. nesil)|Premium 250 havuz edtu'ları|
-|Premium RS 500 DTU havuzu|İş kritik 4 sanal çekirdek (4. nesil)|Premium havuz 500 Edtu|
-|Premium RS 1000 DTU havuzu|İş kritik 8 sanal çekirdek (4. nesil)|Premium havuz 1000 Edtu|
+|Premium RS havuzu 125 DTU|İş Açısından Kritik 2 sanal çekirdekler (4. nesil)|Premium havuz 125 eDTU|
+|Premium RS havuzu 250 DTU|İş Açısından Kritik 2 sanal çekirdekler (4. nesil)|Premium havuz 250 eDTU|
+|Premium RS havuzu 500 DTU|İş Açısından Kritik 4 sanal çekirdek (4. nesil)|Premium havuz 500 eDTU|
+|Premium RS havuzu 1000 DTU|İş Açısından Kritik 8 sanal çekirdekler (4. nesil)|Premium havuz 1000 eDTU|
 
 ## <a name="take-advantage-of-our-new-offers"></a>Yeni tekliflerimizden yararlanın
 
-Sanal çekirdek tabanlı satın alma modeli bizim hizmet katmanlarında % 80'lisans dahil fiyatlandırma karşı kaydedebilirsiniz özel teklifler için uygundur. En fazla 55 ile lisans dahil fiyatlandırma karşı % kaydetmek için etkin Yazılım Güvencesi içeren SQL Server Standard veya Enterprise sürümü lisanslarınızı kullanın [SQL Server için Azure hibrit avantajı](https://azure.microsoft.com/pricing/hybrid-benefit/). Hibrit avantajı ile birleştirebilirsiniz [Azure SQL veritabanı ayrılan kapasite](sql-database-reserved-capacity.md) fiyatlandırma ve ön bir veya üç yıllık işleme % 80 tasarruf terim.  Bugün Azure portalından hem avantajları etkinleştirin.
+Sanal çekirdek tabanlı satın alma modelindeki hizmet katmanlarımız, size %80 ve lisans dahil fiyatlandırmaya karşı tasarruf sağlayan özel teklifler için uygun değildir. [SQL Server için Azure hibrit avantajı](https://azure.microsoft.com/pricing/hybrid-benefit/)ve lisans dahil olmak üzere %55 ' e varan bir lisansa sahip SQL Server Standard veya Enterprise Edition lisanslarını kullanın. Karma avantajını [Azure SQL veritabanı ayrılmış kapasite](sql-database-reserved-capacity.md) fiyatlandırmasıyla birleştirebilir ve en öne bir veya üç yıllık bir dönem boyunca kaydolduğunuzda %80 ' e kadar tasarruf edebilirsiniz.  Azure portal avantajlarından her ikisi de hemen etkinleştirin.
 
-Herhangi bir sorunuz veya bu ilgili endişeleriniz değiştirin ya da geçiş Yardım gerekiyorsa başvurun [Microsoft](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview).
+Bu değişiklik ile ilgili sorularınız veya endişeleriniz varsa veya geçiş yardımı gerekiyorsa, [Microsoft](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)'a başvurun.
 
-## <a name="migration-from-a-premium-rs-service-tier-to-a-service-tier-in-either-the-dtu-or-the-vcore-model"></a>DTU ya da sanal çekirdek modeli bir hizmet katmanı için bir Premium RS hizmet katmanından geçiş
+## <a name="migration-from-a-premium-rs-service-tier-to-a-service-tier-in-either-the-dtu-or-the-vcore-model"></a>DTU veya vCore modelinde bir Premium RS hizmet katmanından bir hizmet katmanına geçiş
 
-### <a name="migration-of-a-database"></a>Bir veritabanı geçişi
+### <a name="migration-of-a-database"></a>Bir veritabanının geçirilmesi
 
-Premium RS hizmetinden bir veritabanını geçirme herhangi bir hizmet katmanı için DTU katmanı veya sanal çekirdek modeli yükseltme veya indirgeme Premium RS hizmet katmanındaki hizmet katmanları arasında benzerdir.
+Bir veritabanını Premium RS hizmet katmanından DTU veya vCore modelindeki bir hizmet katmanına geçirmek, Premium RS hizmet katmanındaki hizmet katmanları arasında yükseltme veya eski sürüme düşürme konusunda da benzerdir.
 
-### <a name="using-database-copy-to-convert-a-premium-rs-database-to-a-dtu-based-or-vcore-based-database"></a>Premium RS veritabanı DTU veya sanal çekirdek tabanlı veritabanına dönüştürmek için veritabanı kopyalama kullanma
+### <a name="using-database-copy-to-convert-a-premium-rs-database-to-a-dtu-based-or-vcore-based-database"></a>Premium RS veritabanını DTU tabanlı veya sanal çekirdek tabanlı veritabanına dönüştürmek için veritabanı kopyası kullanma
 
-Premium RS işlem boyutu ile herhangi bir veritabanı DTU veya sanal çekirdek tabanlı işlem boyutu kısıtlamaları veya kaynak veritabanının en büyük veritabanı boyutu hedef işlem boyutu desteklediği sürece özel sıralaması olmayan bir veritabanına kopyalayabilirsiniz. Veritabanı kopyalama, kopyalama işleminin başlangıç tarihindeki verileri anlık görüntüsünü oluşturur ve kaynak ve hedef arasında veri eşitlemeye gerçekleştirmez.
+Hedef işlem boyutu, kaynak veritabanının en büyük veritabanı boyutunu desteklediği sürece, kısıtlama tabanlı veya sanal çekirdek tabanlı işlem boyutu olmadan bir veritabanına Premium RS işlem boyutu olan bir veritabanını kopyalayabilir. Veritabanı kopyalama işlemi, kopyalama işleminin başlangıç saatinden itibaren verilerin anlık görüntüsünü oluşturur ve kaynak ile hedef arasında veri eşitlemesi gerçekleştirmez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Özel hakkında ayrıntılı bilgi işlem boyutları ve tek veritabanı için kullanılabilir depolama boyutu seçenekleri için bkz: [tek veritabanları için SQL veritabanı sanal çekirdek tabanlı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md)
-- Özel hakkında ayrıntılı bilgi işlem boyutları ve elastik havuzlar için kullanılabilir depolama boyutu seçenekleri için bkz: [elastik havuzlar için SQL veritabanı sanal çekirdek tabanlı kaynak sınırları](sql-database-vcore-resource-limits-elastic-pools.md).
+- Tek veritabanı için kullanılabilen belirli işlem boyutları ve depolama boyutu seçimleri hakkındaki ayrıntılar için bkz. [tek veritabanları Için SQL veritabanı sanal çekirdek tabanlı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md)
+- Elastik havuzlarda bulunan belirli işlem boyutları ve depolama boyutu seçimleri hakkındaki ayrıntılar için bkz. [elastik havuzlar Için SQL veritabanı sanal çekirdek tabanlı kaynak sınırları](sql-database-vcore-resource-limits-elastic-pools.md).

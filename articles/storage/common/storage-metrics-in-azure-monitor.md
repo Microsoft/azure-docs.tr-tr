@@ -1,52 +1,51 @@
 ---
-title: Azure İzleyici'de Azure depolama ölçümleri | Microsoft Docs
-description: Azure İzleyici'den sunulan yeni ölçümler hakkında bilgi edinin.
-services: storage
+title: Azure Izleyici 'de Azure depolama ölçümleri | Microsoft Docs
+description: Azure Izleyici 'den sunulan yeni ölçümler hakkında bilgi edinin.
 author: normesta
 ms.service: storage
-ms.topic: article
+ms.topic: conceptual
 ms.date: 09/05/2017
 ms.author: normesta
 ms.reviewer: fryu
 ms.subservice: common
-ms.openlocfilehash: 8b091ecce98a626f18fe6547445d898b6710e1a5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c2f6847a286a9c106fc094e9f0aa315d6b1f337d
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65510558"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71257096"
 ---
 # <a name="azure-storage-metrics-in-azure-monitor"></a>Azure İzleyici’de Azure Depolama ölçümleri
 
-Azure depolama ölçümleri ile izleme istekleri olan kullanım eğilimlerini çözümleyebilir ve depolama hesabınızla ilgili sorunları tanılayın.
+Azure depolama ile ilgili ölçümler sayesinde kullanım eğilimlerini çözümleyebilir, istekleri izleyebilir ve depolama hesabınızla ilgili sorunları tanılayabilirsiniz.
 
-Azure İzleyici, farklı Azure Hizmetleri genelinde izleme için birleştirilmiş bir kullanıcı arabirimi sağlar. Daha fazla bilgi için [Azure İzleyici](../../monitoring-and-diagnostics/monitoring-overview.md). Azure depolama, Azure İzleyici ölçüm verilerini Azure İzleyici platforma göndererek tümleştirir.
+Azure Izleyici, farklı Azure hizmetleri genelinde izleme için birleştirilmiş kullanıcı arabirimleri sağlar. Daha fazla bilgi için bkz. [Azure izleyici](../../monitoring-and-diagnostics/monitoring-overview.md). Azure depolama, Azure izleyici platformuna ölçüm verileri göndererek Azure Izleyicisini tümleştirir.
 
 ## <a name="access-metrics"></a>Erişim ölçümleri
 
-Azure İzleyici ölçümlerine erişim birden çok yol sağlar. Bunları erişebileceğiniz [Azure portalında](https://portal.azure.com), Event Hubs gibi analiz çözümleri ve Azure İzleyici API'leri (REST ve .NET). Daha fazla bilgi için [Azure İzleyici ölçümleri](../../monitoring-and-diagnostics/monitoring-overview-metrics.md).
+Azure İzleyici ölçümlerine erişim birden çok yol sağlar. Bunlara [Azure Portal](https://portal.azure.com), Azure Izleyici API 'LERI (REST ve .net) ve Event Hubs gibi çözümleme çözümlerini de erişebilirsiniz. Daha fazla bilgi için bkz. [Azure Izleyici ölçümleri](../../monitoring-and-diagnostics/monitoring-overview-metrics.md).
 
-Ölçümler, varsayılan olarak etkindir ve son 93 günün verilerini erişebilir. Uzun bir süre saklamak istiyorsanız ölçüm verileri bir Azure depolama hesabına arşivleyebilir. Bu yapılandırılan [tanılama ayarları](../../azure-monitor/platform/diagnostic-logs-overview.md) Azure İzleyici'de.
+Ölçümler varsayılan olarak etkindir ve son 93 güne kadar veri erişimi sağlayabilirsiniz. Uzun bir süre saklamak istiyorsanız ölçüm verileri bir Azure depolama hesabına arşivleyebilir. Bu yapılandırılan [tanılama ayarları](../../azure-monitor/platform/resource-logs-overview.md) Azure İzleyici'de.
 
-### <a name="access-metrics-in-the-azure-portal"></a>Azure portalında erişim ölçümleri
+### <a name="access-metrics-in-the-azure-portal"></a>Azure portal ölçümler 'e erişin
 
-Azure portalında zaman içinde ölçümleri izleyebilirsiniz. Aşağıdaki örnek nasıl görüntüleneceğini gösterir **işlemleri** hesap düzeyinde.
+Azure portal ölçümleri zaman içinde izleyebilirsiniz. Aşağıdaki örnek, **işlemlerin** hesap düzeyinde nasıl görüntüleneceğini gösterir.
 
-![Azure portalında ölçümleri erişme ekran görüntüsü](./media/storage-metrics-in-azure-monitor/access-metrics-in-portal.png)
+![Azure portal ölçümlere erişme ekran görüntüsü](./media/storage-metrics-in-azure-monitor/access-metrics-in-portal.png)
 
-Boyutlar destekleyen ölçümler için istenen boyut değeri Metrik filtreleyebilirsiniz. Aşağıdaki örnek nasıl görüntüleneceğini gösterir **işlemleri** hesap düzeyinde değerlerini seçerek belirli bir işlemi **API adı** boyut.
+Boyutları destekleyen ölçümler için, ölçüyü istenen boyut değeriyle filtreleyebilirsiniz. Aşağıdaki örnek, **API ad** boyutu için değerler seçilerek belirli bir işlemdeki hesap düzeyinde **işlemlerin** nasıl görüntüleneceğini gösterir.
 
-![Azure portalında boyutlu ölçümler erişme ekran görüntüsü](./media/storage-metrics-in-azure-monitor/access-metrics-in-portal-with-dimension.png)
+![Azure portal Dimension ile ölçümlere erişme ekran görüntüsü](./media/storage-metrics-in-azure-monitor/access-metrics-in-portal-with-dimension.png)
 
-### <a name="access-metrics-with-the-rest-api"></a>REST API'si ile erişim ölçümleri
+### <a name="access-metrics-with-the-rest-api"></a>REST API ölçümler ile erişin
 
-Azure İzleyicisi'nin sağladığı [REST API'leri](/rest/api/monitor/) ölçüm tanımı ve değerleri okunamıyor. Bu bölümde, depolama ölçümlerini okuma işlemini göstermektedir. Kaynak Kimliği, tüm REST API'leri kullanılır. Depolama Hizmetleri için kaynak kimliği anlama, daha fazla bilgi için lütfen okuyun.
+Azure Izleyici, ölçüm tanımını ve değerlerini okumak için [REST API 'ler](/rest/api/monitor/) sağlar. Bu bölümde, depolama ölçümlerini nasıl okuyabilmeniz gösterilmektedir. Kaynak KIMLIĞI, tüm REST API 'lerinde kullanılır. Daha fazla bilgi için lütfen depolama alanındaki hizmetler için kaynak KIMLIĞINI anlama konusunu okuyun.
 
-Aşağıdaki örnek nasıl kullanılacağını gösterir [ArmClient](https://github.com/projectkudu/ARMClient) REST API ile test etmeyi kolaylaştırmak için komut satırına.
+Aşağıdaki örnek, REST API test etmeyi basitleştirmek için komut satırında [Armclient](https://github.com/projectkudu/ARMClient) 'ın nasıl kullanılacağını gösterir.
 
-#### <a name="list-account-level-metric-definition-with-the-rest-api"></a>REST API'si ile hesap düzeyinde ölçüm tanımını listeleme
+#### <a name="list-account-level-metric-definition-with-the-rest-api"></a>Hesap düzeyi ölçüm tanımını REST API listeleyin
 
-Aşağıdaki örnek, hesap düzeyinde ölçüm tanımını listeleme gösterilmiştir:
+Aşağıdaki örnek, ölçüm tanımının hesap düzeyinde nasıl ekleneceğini gösterir:
 
 ```
 # Login to Azure and enter your credentials when prompted.
@@ -56,9 +55,9 @@ Aşağıdaki örnek, hesap düzeyinde ölçüm tanımını listeleme gösterilmi
 
 ```
 
-Blob, tablo, dosya veya kuyruk ölçüm tanımlarını listelemek istiyorsanız, API ile her hizmet için farklı kaynak kimliklerini belirtmeniz gerekir.
+Blob, tablo, dosya veya kuyruğun ölçüm tanımlarını listelemek istiyorsanız, API ile her hizmet için farklı kaynak kimlikleri belirtmeniz gerekir.
 
-Yanıta JSON biçiminde ölçüm tanımı içerir:
+Yanıt, JSON biçiminde ölçüm tanımını içerir:
 
 ```Json
 {
@@ -91,18 +90,18 @@ Yanıta JSON biçiminde ölçüm tanımı içerir:
 
 ```
 
-#### <a name="read-account-level-metric-values-with-the-rest-api"></a>REST API ile salt okunur hesap düzeyinde ölçüm değerleri
+#### <a name="read-account-level-metric-values-with-the-rest-api"></a>Hesap düzeyindeki ölçüm değerlerini REST API ile okuyun
 
-Aşağıdaki örnek, hesap düzeyinde ölçüm verileri okumak gösterilmektedir:
+Aşağıdaki örnek, ölçüm verilerinin hesap düzeyinde nasıl okunacağını gösterir:
 
 ```
 > armclient GET "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/providers/microsoft.insights/metrics?metricnames=Availability&api-version=2018-01-01&aggregation=Average&interval=PT1H"
 
 ```
 
-Blob, tablo, dosya veya kuyruk için ölçüm değerleri okumak istiyorsanız, yukarıdaki örnekte, her hizmet için farklı kaynak kimliklerini API ile belirtmeniz gerekir.
+Yukarıdaki örnekte, blob, tablo, dosya veya kuyrukla ilgili ölçüm değerlerini okumak istiyorsanız, API ile her hizmet için farklı kaynak kimlikleri belirtmeniz gerekir.
 
-Şu yanıtı JSON biçiminde ölçüm değerleri içerir:
+Aşağıdaki yanıt, JSON biçiminde ölçüm değerleri içerir:
 
 ```Json
 {
@@ -135,15 +134,15 @@ Blob, tablo, dosya veya kuyruk için ölçüm değerleri okumak istiyorsanız, y
 
 ```
 
-### <a name="access-metrics-with-the-net-sdk"></a>.NET SDK'sı ile erişim ölçümleri
+### <a name="access-metrics-with-the-net-sdk"></a>.NET SDK ile ölçümlere erişin
 
-Azure İzleyicisi'nin sağladığı [.NET SDK'sı](https://www.nuget.org/packages/Microsoft.Azure.Management.Monitor/) ölçüm tanımı ve değerleri okunamıyor. [Örnek kod](https://azure.microsoft.com/resources/samples/monitor-dotnet-metrics-api/) SDK'sı ile farklı parametreler kullanma işlemini gösterir. Kullanmanız gereken `0.18.0-preview` veya sonraki sürümü için depolama ölçümleri. Kaynak Kimliği, .NET SDK kullanılır. Depolama Hizmetleri için kaynak kimliği anlama, daha fazla bilgi için lütfen okuyun.
+Azure Izleyici, ölçüm tanımını ve değerlerini okumak için [.NET SDK](https://www.nuget.org/packages/Microsoft.Azure.Management.Monitor/) sağlar. [Örnek kod](https://azure.microsoft.com/resources/samples/monitor-dotnet-metrics-api/) , SDK 'nın farklı parametrelerle nasıl kullanılacağını gösterir. Depolama ölçümleri için veya `0.18.0-preview` sonraki sürümü kullanmanız gerekir. Kaynak KIMLIĞI .NET SDK 'da kullanılır. Daha fazla bilgi için lütfen depolama alanındaki hizmetler için kaynak KIMLIĞINI anlama konusunu okuyun.
 
-Aşağıdaki örnek, Azure İzleyici .NET SDK'sı depolama ölçümlerini okuma için nasıl kullanılacağını gösterir.
+Aşağıdaki örnek, depolama ölçümlerini okumak için Azure Izleyici .NET SDK 'sını nasıl kullanacağınızı gösterir.
 
-#### <a name="list-account-level-metric-definition-with-the-net-sdk"></a>.NET SDK'sı ile hesap düzeyinde ölçüm tanımını listeleme
+#### <a name="list-account-level-metric-definition-with-the-net-sdk"></a>.NET SDK ile hesap düzeyi ölçüm tanımını listeleme
 
-Aşağıdaki örnek, hesap düzeyinde ölçüm tanımını listeleme gösterilmiştir:
+Aşağıdaki örnek, ölçüm tanımının hesap düzeyinde nasıl ekleneceğini gösterir:
 
 ```csharp
     public static async Task ListStorageMetricDefinition()
@@ -176,11 +175,11 @@ Aşağıdaki örnek, hesap düzeyinde ölçüm tanımını listeleme gösterilmi
 
 ```
 
-Blob, tablo, dosya veya kuyruk ölçüm tanımlarını listelemek istiyorsanız, API ile her hizmet için farklı kaynak kimliklerini belirtmeniz gerekir.
+Blob, tablo, dosya veya kuyruğun ölçüm tanımlarını listelemek istiyorsanız, API ile her hizmet için farklı kaynak kimlikleri belirtmeniz gerekir.
 
-#### <a name="read-metric-values-with-the-net-sdk"></a>.NET SDK'sı ile okuma ölçüm değerleri
+#### <a name="read-metric-values-with-the-net-sdk"></a>.NET SDK ile ölçüm değerlerini okuma
 
-Aşağıdaki örnek nasıl okunduğunu gösterir `UsedCapacity` hesap düzeyinde veri:
+Aşağıdaki örnek, hesap düzeyinde verilerin nasıl `UsedCapacity` okunacağını gösterir:
 
 ```csharp
     public static async Task ReadStorageMetricValue()
@@ -226,13 +225,13 @@ Aşağıdaki örnek nasıl okunduğunu gösterir `UsedCapacity` hesap düzeyinde
 
 ```
 
-Blob, tablo, dosya veya kuyruk için ölçüm değerleri okumak istiyorsanız, yukarıdaki örnekte, her hizmet için farklı kaynak kimliklerini API ile belirtmeniz gerekir.
+Yukarıdaki örnekte, blob, tablo, dosya veya kuyrukla ilgili ölçüm değerlerini okumak istiyorsanız, API ile her hizmet için farklı kaynak kimlikleri belirtmeniz gerekir.
 
-#### <a name="read-multi-dimensional-metric-values-with-the-net-sdk"></a>.NET SDK ile çok boyutlu ölçüm değerleri okuyun
+#### <a name="read-multi-dimensional-metric-values-with-the-net-sdk"></a>.NET SDK ile çok boyutlu ölçüm değerlerini okuma
 
-Çok boyutlu ölçümler için belirli bir boyut değeri ölçüm verilerini okumak istiyorsanız, meta veri filtresini tanımlamanız gerekir.
+Çok boyutlu ölçümler için, belirli bir boyut değerindeki ölçüm verilerini okumak istiyorsanız meta veri filtresini tanımlamanız gerekir.
 
-Aşağıdaki örnek, birden çok boyut destekleyen ölçüm ölçüm verileri okumak gösterilmektedir:
+Aşağıdaki örnek, çoklu boyut desteği ile ölçüm verilerinin nasıl okunacağını gösterir:
 
 ```csharp
     public static async Task ReadStorageMetricValueTest()
@@ -281,29 +280,29 @@ Aşağıdaki örnek, birden çok boyut destekleyen ölçüm ölçüm verileri ok
 
 ```
 
-## <a name="understanding-resource-id-for-services-in-azure-storage"></a>Azure Storage Hizmetleri için kaynak kimliği anlama
+## <a name="understanding-resource-id-for-services-in-azure-storage"></a>Azure depolama 'daki hizmetler için kaynak KIMLIĞINI anlama
 
-Kaynak Kimliği, azure'da bir kaynağın benzersiz bir tanımlayıcıdır. Ölçüm tanımları veya değerleri okumak için Azure İzleyici REST API'sini kullandığınızda, çalışmak istediğiniz kaynak için kaynak Kimliğini kullanmanız gerekir. Kaynak Kimliği şablonu şu biçimdedir:
+Kaynak KIMLIĞI, Azure 'daki bir kaynağın benzersiz tanımlayıcısıdır. Ölçüm tanımlarını veya değerlerini okumak için Azure Izleyici REST API kullandığınızda, üzerinde çalışmak istediğiniz kaynak için kaynak KIMLIĞI ' ni kullanmanız gerekir. Kaynak KIMLIĞI şablonu şu biçimdedir:
 
 ```
 /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 ```
 
-Depolama ölçümleri hem depolama hesabı düzeyinde hem de Azure İzleyici ile hizmet düzeyi sağlar. Örneğin, yalnızca Blob Depolama için ölçümleri de alabilirsiniz. Her düzey kendi kaynak kimliğinin, bu düzey için ölçümleri almak için kullanılır.
+Depolama, Azure Izleyici ile hem depolama hesabı düzeyinde hem de hizmet düzeyinde ölçümler sağlar. Örneğin, yalnızca BLOB depolama için ölçümleri alabilirsiniz. Her düzeyin kendi kaynak KIMLIĞI vardır. Bu, yalnızca o düzeydeki ölçümleri almak için kullanılır.
 
-### <a name="resource-id-for-a-storage-account"></a>Bir depolama hesabı kaynak kimliği
+### <a name="resource-id-for-a-storage-account"></a>Depolama hesabı için kaynak KIMLIĞI
 
-Bir depolama hesabı kaynak kimliği belirlemek için biçimi gösterir.
+Aşağıda, bir depolama hesabı için kaynak KIMLIĞINI belirtme biçimi gösterilmektedir.
 
 ```
 /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}
 ```
 
-### <a name="resource-id-for-the-storage-services"></a>Depolama Hizmetleri için kaynak kimliği
+### <a name="resource-id-for-the-storage-services"></a>Depolama Hizmetleri için kaynak KIMLIĞI
 
-Aşağıdaki Depolama hizmetlerinin her biri için kaynak Kimliğini belirtme biçimi gösterir.
+Aşağıda, depolama hizmetlerinin her biri için kaynak KIMLIĞINI belirtme biçimi gösterilmektedir.
 
-* BLOB hizmeti kaynak kimliği
+* Blob hizmeti kaynak kimliği
 ```
 /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/blobServices/default
 ```
@@ -320,105 +319,105 @@ Aşağıdaki Depolama hizmetlerinin her biri için kaynak Kimliğini belirtme bi
 /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/fileServices/default
 ```
 
-### <a name="resource-id-in-azure-monitor-rest-api"></a>Azure İzleyici REST API kaynak kimliği
+### <a name="resource-id-in-azure-monitor-rest-api"></a>Azure Izleyici REST API kaynak KIMLIĞI
 
-Azure İzleyici REST API'sini çağırmak çalışırken kullanılan düzeni göstermektedir.
+Aşağıda, Azure Izleyici REST API çağrılırken kullanılan desenler gösterilmektedir.
 
 ```
 GET {resourceId}/providers/microsoft.insights/metrics?{parameters}
 ```
 
 ## <a name="capacity-metrics"></a>Kapasite ölçümleri
-Kapasite ölçüm değerleri her saat için Azure İzleyici gönderilir. Değerleri günlük olarak yenilenir. Zaman dilimi ölçüm değerleri sunulduğu zaman aralığını tanımlar. Desteklenen zaman dilimi için tüm kapasite ölçümleri bir (PT1H) saattir.
+Kapasite ölçümleri değerleri her saat Azure Izleyici 'ye gönderilir. Değerler günlük olarak yenilenir. Zaman dilimi, ölçüm değerlerinin sunulduğu zaman aralığını tanımlar. Tüm kapasite ölçümleri için desteklenen zaman dilimi bir saattir (PT1H).
 
-Azure depolama, Azure İzleyici'de aşağıdaki kapasite ölçümleri sağlar.
+Azure depolama, Azure Izleyici 'de aşağıdaki kapasite ölçümlerini sağlar.
 
 ### <a name="account-level"></a>Hesap düzeyi
 
 | Ölçüm Adı | Açıklama |
 | ------------------- | ----------------- |
-| UsedCapacity | Depolama hesabı tarafından kullanılan depolama miktarı. Standart depolama hesapları için blob, tablo, dosya ve kuyruk tarafından kullanılan kapasitenin toplamıdır. Premium depolama ve Blob Depolama hesapları için BlobCapacity ile aynıdır. <br/><br/> Birim: Bayt <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
+| UsedCapacity | Depolama hesabı tarafından kullanılan depolama miktarı. Standart depolama hesapları için blob, tablo, dosya ve kuyruk tarafından kullanılan kapasitenin toplamıdır. Premium depolama ve Blob Depolama hesapları için BlobCapacity ile aynıdır. <br/><br/> Birim Bayt <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
 
 ### <a name="blob-storage"></a>Blob depolama
 
 | Ölçüm Adı | Açıklama |
 | ------------------- | ----------------- |
-| BlobCapacity | Blob Depolama depolama hesabında kullanılan toplamı. <br/><br/> Birim: Bayt <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 <br/> Boyutlar: **BlobType**, ve **BlobTier** ([tanımı](#metrics-dimensions)) |
-| BLOB sayısı    | Depolama hesabında blob nesne sayısı. <br/><br/> Birim: Count <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 <br/> Boyutlar: **BlobType**, ve **BlobTier** ([tanımı](#metrics-dimensions)) |
-| ContainerCount    | Depolama hesabındaki kapsayıcıları sayısı. <br/><br/> Birim: Sayı <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
-| IndexCapacity     | ADLS Gen2 hiyerarşik dizin tarafından kullanılan depolama miktarı <br/><br/> Birim: Bayt <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
+| BlobCapacity | Depolama hesabında kullanılan BLOB depolama alanı toplamı. <br/><br/> Birim Bayt <br/> Toplama türü: Average <br/> Değer örneği: 1024 <br/> Boyutlar: **Blobtype**ve **blobtier** ([tanım](#metrics-dimensions)) |
+| BLOB sayısı    | Depolama hesabında depolanan BLOB nesnelerinin sayısı. <br/><br/> Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 <br/> Boyutlar: **Blobtype**ve **blobtier** ([tanım](#metrics-dimensions)) |
+| ContainerCount    | Depolama hesabındaki kapsayıcıların sayısı. <br/><br/> Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
+| Dizin kapasitesi     | ADLS 2. hiyerarşik dizin tarafından kullanılan depolama miktarı <br/><br/> Birim Bayt <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
 
-### <a name="table-storage"></a>Table Storage
+### <a name="table-storage"></a>Tablo depolama alanı
 
 | Ölçüm Adı | Açıklama |
 | ------------------- | ----------------- |
-| TableCapacity | Depolama hesabı olarak kullanılan tablo depolama miktarı. <br/><br/> Birim: Bayt <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
-| TableCount   | Depolama hesabındaki tablolar sayısı. <br/><br/> Birim: Count <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
-| TableEntityCount | Depolama hesabındaki tablo varlıklarının sayısı. <br/><br/> Birim: Count <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
+| TableCapacity | Depolama hesabı tarafından kullanılan tablo depolaması miktarı. <br/><br/> Birim Bayt <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
+| TableCount   | Depolama hesabındaki tablo sayısı. <br/><br/> Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
+| TableEntityCount | Depolama hesabındaki tablo varlıklarının sayısı. <br/><br/> Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
 
 ### <a name="queue-storage"></a>Kuyruk depolama
 
 | Ölçüm Adı | Açıklama |
 | ------------------- | ----------------- |
-| QueueCapacity | Depolama hesabı tarafından kullanılan kuyruk depolama miktarı. <br/><br/> Birim: Bayt <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
-| QueueCount   | Depolama hesabındaki sıraların sayısı. <br/><br/> Birim: Sayı <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
-| QueueMessageCount | Depolama hesabındaki süresi dolmamış kuyruk ileti sayısı. <br/><br/>Birim: Count <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
+| QueueCapacity | Depolama hesabı tarafından kullanılan kuyruk depolama miktarı. <br/><br/> Birim Bayt <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
+| QueueCount   | Depolama hesabındaki sıraların sayısı. <br/><br/> Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
+| QueueMessageCount | Depolama hesabındaki süre dolma edilmemiş sıra iletilerinin sayısı. <br/><br/>Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
 
 ### <a name="file-storage"></a>Dosya depolama
 
 | Ölçüm Adı | Açıklama |
 | ------------------- | ----------------- |
-| FileCapacity | Depolama hesabı tarafından kullanılan dosya depolama miktarı. <br/><br/> Birim: Bayt <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
-| FileCount   | Depolama hesabındaki dosya sayısı. <br/><br/> Birim: Sayı <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
-| FileShareCount | Dosya sayısı depolama hesabında paylaşır. <br/><br/> Birim: Count <br/> Toplama türü: Ortalama <br/> Değeri örneği: 1024 |
+| Dosya kapasitesi | Depolama hesabı tarafından kullanılan dosya depolama alanı miktarı. <br/><br/> Birim Bayt <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
+| FileCount   | Depolama hesabındaki dosyaların sayısı. <br/><br/> Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
+| Dosya ShareCount | Depolama hesabındaki dosya paylaşımlarının sayısı. <br/><br/> Birim Count <br/> Toplama türü: Average <br/> Değer örneği: 1024 |
 
 ## <a name="transaction-metrics"></a>İşlem ölçümleri
 
-İşlem ölçümlerini her istek, Azure Depolama'dan Azure İzleyici için bir depolama hesabına gönderilir. Depolama hesabınızda hiç etkinlik olması durumunda olacaktır veri üzerinde işlem ölçümlerini dönem içinde. Tüm işlem ölçümlerini hesabı hem de hizmet düzeyinde (Blob Depolama, tablo depolama, Azure dosyaları ve kuyruk depolama) kullanılabilir. Zaman dilimi ölçüm değerleri sunulan zaman aralığını tanımlar. Tüm işlem ölçümlerini için desteklenen zaman grains PT1H ve PT1M ' dir.
+İşlem ölçümleri, Azure depolama 'daki bir depolama hesabına yönelik her istek için Azure Izleyici 'ye dağıtılır. Depolama hesabınızda hiçbir etkinlik olmaması durumunda, dönem içinde işlem ölçümlerinde hiç veri olmayacaktır. Tüm işlem ölçümleri hem hesap hem de hizmet düzeyinde (BLOB depolama, tablo depolama, Azure dosyaları ve kuyruk depolama) kullanılabilir. Zaman dilimi, ölçüm değerlerinin sunulduğu zaman aralığını tanımlar. Tüm işlem ölçümleri için desteklenen saat graıns PT1H ve PT1M.
 
-Azure depolama, Azure İzleyici'de aşağıdaki işlem ölçümlerini sağlar.
+Azure depolama, Azure Izleyici 'de aşağıdaki işlem ölçümlerini sağlar.
 
 | Ölçüm Adı | Açıklama |
 | ------------------- | ----------------- |
-| İşlemler | Bir depolama hizmetine yapılan isteklerin veya belirtilen API işlemi sayısı. Bu sayı, başarılı ve başarısız istekleri ve hata üreten istekleri içerir. <br/><br/> Birim: Count <br/> Toplama türü: Toplam <br/> Geçerli boyut: ResponseType, GeoType ApiName ve kimlik doğrulaması ([tanımı](#metrics-dimensions))<br/> Değeri örneği: 1024 |
-| Giriş | Giriş verileri miktarı. Bu sayı, dış istemciden Azure Depolama'ya giren ve Azure içinde giren verileri içerir. <br/><br/> Birim: Bayt <br/> Toplama türü: Toplam <br/> Geçerli boyut: GeoType ApiName ve kimlik doğrulaması ([tanımı](#metrics-dimensions)) <br/> Değeri örneği: 1024 |
-| Çıkış | Çıkış verileri miktarı. Bu sayı, dış istemciden Azure Depolama'ya çıkan ve Azure içinde çıkan verileri içerir. Sonuç olarak bu sayı, faturalanabilir çıkışı yansıtmaz. <br/><br/> Birim: Bayt <br/> Toplama türü: Toplam <br/> Geçerli boyut: GeoType ApiName ve kimlik doğrulaması ([tanımı](#metrics-dimensions)) <br/> Değeri örneği: 1024 |
-| SuccessServerLatency | Azure Depolama tarafından gerçekleştirilen başarılı bir isteği işlemek için kullanılan ortalama süre. Bu değer, Başarı E2E Gecikme Süresi’nde belirtilen ağ gecikme süresini içermez. <br/><br/> Birim: Milisaniye <br/> Toplama türü: Ortalama <br/> Geçerli boyut: GeoType ApiName ve kimlik doğrulaması ([tanımı](#metrics-dimensions)) <br/> Değeri örneği: 1024 |
-| Başarı E2e | Bir depolama hizmetine yapılan başarılı isteklerin veya belirtilen API işleminin ortalama uçtan uca gecikme süresi. Bu değer, isteği okumak, yanıtı göndermek ve yanıtın onayını almak için Azure Depolama içinde gerekli işleme süresini içerir. <br/><br/> Birim: Milisaniye <br/> Toplama türü: Ortalama <br/> Geçerli boyut: GeoType ApiName ve kimlik doğrulaması ([tanımı](#metrics-dimensions)) <br/> Değeri örneği: 1024 |
-| Kullanılabilirlik | Depolama hizmetinin veya belirtilen API işleminin kullanılabilirlik yüzdesi. Kullanılabilirlik, toplam faturalandırılabilir istek değerinin beklenmeyen hata üreten istekler dahil olmak üzere ilgili istek sayısına bölünmesiyle hesaplanır. Azaltılmış kullanılabilirlik ve depolama hizmetine veya belirtilen API işlemi için beklenmeyen tüm hatalar sonuçlanır. <br/><br/> Birim: Yüzde <br/> Toplama türü: Ortalama <br/> Geçerli boyut: GeoType ApiName ve kimlik doğrulaması ([tanımı](#metrics-dimensions)) <br/> Değeri örneği: 99.99 |
+| İşlemler | Bir depolama hizmetine yapılan isteklerin veya belirtilen API işlemi sayısı. Bu sayı, başarılı ve başarısız istekleri ve hata üreten istekleri içerir. <br/><br/> Birim Count <br/> Toplama türü: Toplam <br/> Geçerli Boyutlar: ResponseType, GeoType, ApiName ve Authentication ([tanım](#metrics-dimensions))<br/> Değer örneği: 1024 |
+| Giriş | Giriş verileri miktarı. Bu sayı, dış istemciden Azure Depolama'ya giren ve Azure içinde giren verileri içerir. <br/><br/> Birim Bayt <br/> Toplama türü: Toplam <br/> Geçerli Boyutlar: GeoType, ApiName ve Authentication ([tanım](#metrics-dimensions)) <br/> Değer örneği: 1024 |
+| Çıkış | Çıkış verileri miktarı. Bu sayı, dış istemciden Azure Depolama'ya çıkan ve Azure içinde çıkan verileri içerir. Sonuç olarak bu sayı, faturalanabilir çıkışı yansıtmaz. <br/><br/> Birim Bayt <br/> Toplama türü: Toplam <br/> Geçerli Boyutlar: GeoType, ApiName ve Authentication ([tanım](#metrics-dimensions)) <br/> Değer örneği: 1024 |
+| SuccessServerLatency | Azure Depolama tarafından gerçekleştirilen başarılı bir isteği işlemek için kullanılan ortalama süre. Bu değer, Başarı E2E Gecikme Süresi’nde belirtilen ağ gecikme süresini içermez. <br/><br/> Birim Milisaniye <br/> Toplama türü: Average <br/> Geçerli Boyutlar: GeoType, ApiName ve Authentication ([tanım](#metrics-dimensions)) <br/> Değer örneği: 1024 |
+| Başarı E2e | Bir depolama hizmetine yapılan başarılı isteklerin veya belirtilen API işleminin ortalama uçtan uca gecikme süresi. Bu değer, isteği okumak, yanıtı göndermek ve yanıtın onayını almak için Azure Depolama içinde gerekli işleme süresini içerir. <br/><br/> Birim Milisaniye <br/> Toplama türü: Average <br/> Geçerli Boyutlar: GeoType, ApiName ve Authentication ([tanım](#metrics-dimensions)) <br/> Değer örneği: 1024 |
+| Kullanılabilirlik | Depolama hizmetinin veya belirtilen API işleminin kullanılabilirlik yüzdesi. Kullanılabilirlik, toplam faturalandırılabilir istek değerinin beklenmeyen hata üreten istekler dahil olmak üzere ilgili istek sayısına bölünmesiyle hesaplanır. Azaltılmış kullanılabilirlik ve depolama hizmetine veya belirtilen API işlemi için beklenmeyen tüm hatalar sonuçlanır. <br/><br/> Birim Percent <br/> Toplama türü: Average <br/> Geçerli Boyutlar: GeoType, ApiName ve Authentication ([tanım](#metrics-dimensions)) <br/> Değer örneği: 99,99 |
 
 ## <a name="metrics-dimensions"></a>Ölçümleri boyutları
 
-Azure İzleyicisi'nde ölçümler için boyut şu Azure Storage'ı destekler.
+Azure depolama, Azure Izleyici 'de ölçümler için aşağıdaki boyutları destekler.
 
-| Boyut adı | Açıklama |
+| Boyut Adı | Açıklama |
 | ------------------- | ----------------- |
-| **BlobType** | Yalnızca Blob ölçümler için blob türü. Desteklenen değerler şunlardır: **BlockBlob**, **PageBlob**, ve **Azure Data Lake Storage**. Ekleme Blob BlockBlob içinde bulunur. |
-| **BlobTier** | Azure depolama, blob nesne verilerini en uygun maliyetli bir şekilde depolamanızı sağlayan farklı erişim katmanı sunuyor. Daha fazla bilgi bkz [Azure depolama blob katmanı](../blobs/storage-blob-storage-tiers.md). Desteklenen değerler şunlardır: <br/> <li>**Sık erişimli**: Sık erişimli katmanı</li> <li>**Seyrek erişimli**: Seyrek erişimli katman</li> <li>**Arşiv**: Arşiv katmanı</li> <li>**Premium**: Premium katman için blok blobu</li> <li>**P4/P6/P10/P15/P20/P30/P40/P50/P60**: Premium sayfa blobu için katman türleri</li> <li>**Standart**: Standard sayfa blobu için katman türü</li> <li>**Untiered**: Genel amaçlı v1 depolama hesabı için katman türü</li> |
-| **GeoType** | Birincil veya ikincil kümeden işlem. Kullanılabilir değerler **birincil** ve **ikincil**. Okuma erişimli coğrafi olarak yedekli Storage(RA-GRS) nesneleri ikincil kiracıdan okurken uygulanır. |
-| **ResponseType** | İşlem yanıt türü. Kullanılabilir değerler şunlardır: <br/><br/> <li>**ServerOtherError**: Açıklananlar hariç diğer tüm sunucu tarafı hatalar </li> <li>**ServerBusyError**: HTTP 503 durum kodu döndüren, kimliği doğrulanmış istek. </li> <li>**ServerTimeoutError**: HTTP 500 durum kodu döndüren, zaman aşımına uğramış ve kimliği doğrulanmış istek. Zaman aşımı bir sunucu hatası nedeniyle gerçekleşti. </li> <li>**AuthorizationError**: Yetkisiz veri erişimi veya yetkilendirme hatası nedeniyle başarısız olmuş bir kimliği doğrulanmış istek. </li> <li>**NetworkError**: Ağ hataları nedeniyle başarısız olmuş bir kimliği doğrulanmış istek. Çoğunlukla bir istemci, zaman aşımı süre sonundan önce bağlantıyı erkenden kapattığında gerçekleşir. </li> <li>**ClientThrottlingError**: İstemci tarafı azaltma hatası. </li> <li>**ClientTimeoutError**: HTTP 500 durum kodu döndüren, zaman aşımına uğramış ve kimliği doğrulanmış istek. İstemcinin ağ zaman aşımı veya istek zaman aşımı depolama hizmetinin beklediğinden düşük bir değere ayarlanmışsa beklenen bir zaman aşımıdır. Aksi takdirde, bir ServerTimeoutError olarak bildirilir. </li> <li>**ClientOtherError**: Açıklananlar hariç diğer tüm istemci tarafı hatalar. </li> <li>**Success**: Başarılı istek</li> <li> **SuccessWithThrottling**: SMB istemcisi ilk girişimleri içinde kısıtlanan ancak denemeden sonra başarılı başarılı istek.</li> |
-| **ApiName** | İşlem adı. Örneğin: <br/> <li>**CreateContainer**</li> <li>**DeleteBlob**</li> <li>**GetBlob**</li> Tüm işlem adları için bkz [belge](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages). |
-| **Kimlik Doğrulaması** | İşlemlerde kullanılan kimlik doğrulaması türü. Kullanılabilir değerler şunlardır: <br/> <li>**AccountKey**: İşlem, depolama hesabı anahtarı ile kimlik doğrulaması yapılır.</li> <li>**SAS**: İşlem, paylaşılan erişim imzaları ile kimlik doğrulaması yapılır.</li> <li>**OAuth**: İşlem, OAuth erişim belirteçleri ile doğrulanır.</li> <li>**Anonim**: İşlem anonim olarak istenir. Bu denetim öncesi isteği içermez.</li> <li>**AnonymousPreflight**: Denetim öncesi isteği bir işlemdir.</li> |
+| **BlobType** | Yalnızca blob ölçümleri için blob türü. Desteklenen değerler **Blockblob**, **pageblob**ve **Azure Data Lake Storage**. Append blobu BlockBlob 'a dahildir. |
+| **BlobTier** | Azure depolama, blob nesne verilerini en düşük maliyetli biçimde depolamanıza olanak sağlayan farklı erişim katmanları sunar. Bkz. [Azure Storage blob katmanında](../blobs/storage-blob-storage-tiers.md)daha fazla bilgi. Desteklenen değerler şunlardır: <br/> <li>**Sık**erişimli: Etkin katman</li> <li>Seyrek **erişimli:** Cool katmanı</li> <li>**Arşiv**: Arşiv katmanı</li> <li>**Premium**: Blok Blobu için Premium katman</li> <li>**P4/P6/P10/P15/P20/P30/P40/P50/P60**: Premium Sayfa Blobu için katman türleri</li> <li>**Standart**: Standart Sayfa Blobu için katman türü</li> <li>**Katmanlı olmayan**: Genel amaçlı v1 depolama hesabı için katman türü</li> |
+| **GeoType** | Birincil veya Ikincil kümeden işlem. Kullanılabilir değerler **PRIMARY** ve **Secondary**' i içerir. İkincil kiracının nesnelerini okurken Okuma Erişimli Coğrafi olarak yedekli depolama (RA-GRS) için geçerlidir. |
+| **ResponseType** | İşlem yanıt türü. Kullanılabilir değerler şunlardır: <br/><br/> <li>**ServerOtherError**: Açıklananlar hariç diğer tüm sunucu tarafı hatalar </li> <li>**ServerBusyError**: HTTP 503 durum kodu döndüren, kimliği doğrulanmış istek. </li> <li>**ServerTimeoutError**: HTTP 500 durum kodu döndüren, zaman aşımına uğramış ve kimliği doğrulanmış istek. Zaman aşımı bir sunucu hatası nedeniyle gerçekleşti. </li> <li>**AuthorizationError**: Yetkisiz veri erişimi veya yetkilendirme hatası nedeniyle başarısız olmuş bir kimliği doğrulanmış istek. </li> <li>**NetworkError**: Ağ hataları nedeniyle başarısız olmuş bir kimliği doğrulanmış istek. Çoğunlukla bir istemci, zaman aşımı süre sonundan önce bağlantıyı erkenden kapattığında gerçekleşir. </li> <li>**ClientThrottlingError**: İstemci tarafı azaltma hatası. </li> <li>**ClientTimeoutError**: HTTP 500 durum kodu döndüren, zaman aşımına uğramış ve kimliği doğrulanmış istek. İstemcinin ağ zaman aşımı veya istek zaman aşımı depolama hizmetinin beklediğinden düşük bir değere ayarlanmışsa beklenen bir zaman aşımıdır. Aksi takdirde, bir ServerTimeoutError olarak bildirilir. </li> <li>**ClientOtherError**: Açıklananlar hariç diğer tüm istemci tarafı hatalar. </li> <li>**Success**: Başarılı istek</li> <li> **Başarılı bir kısıtlama**: Bir SMB istemcisi ilk denemede kısıtlandığında, ancak yeniden denemeler yapıldıktan sonra başarılı olan istek başarılı oldu.</li> |
+| **ApiName** | İşlemin adı. Örneğin: <br/> <li>**CreateContainer**</li> <li>**DeleteBlob**</li> <li>**GetBlob**</li> Tüm işlem adları için bkz. [belge](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages). |
+| **Kimlik Doğrulaması** | İşlemlerde kullanılan kimlik doğrulaması türü. Kullanılabilir değerler şunlardır: <br/> <li>**Accountkey**: İşlem, depolama hesabı anahtarıyla doğrulanır.</li> <li>**SAS**: İşlem, paylaşılan erişim imzaları ile doğrulanır.</li> <li>**OAuth**: İşlem, OAuth erişim belirteçleriyle doğrulanır.</li> <li>**Anonim**: İşlem anonim olarak istendi. Bu, ön kontrol isteklerini içermez.</li> <li>**Anonymousön hazırlığı**: İşlem, ön kontrol isteği.</li> |
 
-Ölçümleri destekleyen boyutları için karşılık gelen bir ölçüm değerleri görmek için boyut değerini belirtmeniz gerekir. Örneğin bakarsanız **işlemleri** değeri başarılı yanıtlar için filtre uygulamak gereken **ResponseType** ile Boyut **başarı**. Veya bakarsanız **BLOB sayısı** değeri filtrelemek ihtiyacınız blok blobu için **BlobType** ile Boyut **BlockBlob**.
+Boyutları destekleyen ölçümler için, karşılık gelen ölçüm değerlerini görmek için boyut değerini belirtmeniz gerekir. Örneğin, başarılı yanıtlar için **işlem** değerine bakarsanız, **responseType** boyutunu **başarılı**olarak filtrelemeniz gerekir. Ya da Blok Blobu için **Blobcount** değerine bakarsanız, **Blobtype** boyutunu **blockblob**ile filtrelemeniz gerekir.
 
-## <a name="service-continuity-of-legacy-metrics"></a>Hizmet sürekliliğini eski ölçüm
+## <a name="service-continuity-of-legacy-metrics"></a>Eski ölçümlerin hizmet sürekliliği
 
-Eski ölçümler, yönetilen Azure İzleyici ölçümleri ile paralel kullanılabilir. Azure depolama ölçümleri eski hizmette sonlandırılana kadar destek aynı kalmasını sağlar.
+Eski ölçümler Azure Izleyici yönetilen ölçümleriyle paralel olarak kullanılabilir. Destek, Azure Storage hizmeti eski ölçümlerde sona erdirene kadar aynı kalır.
 
 ## <a name="faq"></a>SSS
 
-**Yeni ölçümler, Klasik depolama hesabı destekliyor mu?**
+**Yeni ölçümler klasik depolama hesabını destekliyor mu?**
 
-Hayır, Azure İzleyici yalnızca destek Azure Resource Manager depolama hesaplarında yeni ölçümler. Depolama hesaplarında ölçümleri kullanmak istiyorsanız, Azure Resource Manager depolama hesaplarına geçirmek gerekir. Bkz: [Azure Resource Manager'a geçiş](https://docs.microsoft.com/azure/virtual-machines/windows/migration-classic-resource-manager-overview).
+Hayır, Azure Izleyici 'de yeni ölçümler yalnızca Azure Resource Manager depolama hesaplarını destekler. Depolama hesaplarında ölçümleri kullanmak istiyorsanız, Azure Resource Manager depolama hesabına geçiş yapmanız gerekir. Bkz. [Azure Resource Manager 'ye geçirme](https://docs.microsoft.com/azure/virtual-machines/windows/migration-classic-resource-manager-overview).
 
-**Yönetilen diskler veya yönetilmeyen diskler için Azure depolama ölçümleri destekliyor mu?**
+**Azure depolama, yönetilen diskler veya yönetilmeyen diskler için ölçümleri destekliyor mu?**
 
-Hayır, Azure işlem ölçümleri disklerde destekler. Bkz: [makale](https://azure.microsoft.com/blog/per-disk-metrics-managed-disks/) daha fazla ayrıntı için.
+Hayır, Azure Işlem disklerdeki ölçümleri destekler. Daha fazla bilgi için [makalesine](https://azure.microsoft.com/blog/per-disk-metrics-managed-disks/) bakın.
 
-**Harita ve yeni ölçümler ile klasik ölçüm geçirmek nasıl?**
+**Klasik ölçümler yeni ölçümler ile nasıl eşlenir ve geçirilir?**
 
-İçinde yeni ölçümler ile klasik ölçüm arasında ayrıntılı eşleme bulabilirsiniz [Azure depolama ölçümleri geçiş](./storage-metrics-migration.md).
+Klasik ölçümler ve yeni ölçümler arasında ayrıntılı eşlemeyi [Azure depolama ölçümleri geçişi](./storage-metrics-migration.md)'nde bulabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

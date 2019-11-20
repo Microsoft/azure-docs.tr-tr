@@ -1,30 +1,29 @@
 ---
-title: Azure sanal makinelere RDP bağlantısı yaptığınızda bir iç hata oluşur. | Microsoft Docs
+title: Azure sanal makinelerine RDP bağlantısı yaptığınızda bir iç hata oluşur | Microsoft Docs
 description: Microsoft azure'da iç hatalar RDP sorunlarını gidermeyi öğrenin. | Microsoft Docs
 services: virtual-machines-windows
 documentationCenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/22/2018
 ms.author: genli
-ms.openlocfilehash: 4476e4732dfcf8d79c9678a7ff4719eba10e48f3
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: dac941b621c8df6b5c242bb5d0e0d5cdd1f864a9
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60319437"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71057959"
 ---
 #  <a name="an-internal-error-occurs-when-you-try-to-connect-to-an-azure-vm-through-remote-desktop"></a>Uzak Masaüstü aracılığıyla Azure VM'ye bağlanmaya çalışırken bir iç hata oluşur.
 
 Bu makalede, Microsoft azure'da bir sanal makineye (VM) bağlanmaya çalışırken karşılaşabileceğiniz hata açıklanır.
 > [!NOTE]
-> Azure'da oluşturmaya ve kaynaklarla çalışmaya yönelik iki farklı dağıtım modeli vardır: [Resource Manager ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makale, Klasik dağıtım modeli yerine yeni dağıtımlar için kullanmanızı öneririz Resource Manager dağıtım modelini kullanarak kapsar.
+> Azure 'da kaynak oluşturmak ve bunlarla çalışmak için iki farklı dağıtım modeli vardır: [Kaynak Yöneticisi ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makale, Klasik dağıtım modeli yerine yeni dağıtımlar için kullanmanızı öneririz Resource Manager dağıtım modelini kullanarak kapsar.
 
 ## <a name="symptoms"></a>Belirtiler
 
@@ -55,7 +54,7 @@ Bu sorunu gidermek için seri konsolu veya [çevrimdışı VM'yi onarın](#repai
 Bağlanma [seri konsol ve PowerShell örneği](./serial-console-windows.md#use-cmd-or-powershell-in-serial-console
 ). Seri konsol sanal makinenizde etkin değilse, Git [çevrimdışı VM'yi onarın](#repair-the-vm-offline) bölümü.
 
-#### <a name="step-1-check-the-rdp-port"></a>Adım: RDP bağlantı noktası 1 denetleyin
+#### <a name="step-1-check-the-rdp-port"></a>Indan 1 RDP bağlantı noktasını denetleyin
 
 1. Bir PowerShell örneği içinde kullanmak [NETSTAT](https://docs.microsoft.com/windows-server/administration/windows-commands/netstat
 ) 8080 bağlantı noktası başka bir uygulama tarafından kullanılıp kullanılmadığını kontrol etmek için:
@@ -87,7 +86,7 @@ Bağlanma [seri konsol ve PowerShell örneği](./serial-console-windows.md#use-c
 
     3. [Yeni bağlantı noktası için ağ güvenlik grubu güncelleştirme](../../virtual-network/security-overview.md) Azure portal RDP bağlantı noktası.
 
-#### <a name="step-2-set-correct-permissions-on-the-rdp-self-signed-certificate"></a>2\. adım: RDP otomatik olarak imzalanan sertifikayı doğru izinleri ayarlayın
+#### <a name="step-2-set-correct-permissions-on-the-rdp-self-signed-certificate"></a>2\. adım: RDP otomatik olarak imzalanan sertifika üzerinde doğru izinleri ayarla
 
 1.  Bir PowerShell örneği, RDP otomatik olarak imzalanan sertifikayı yenilemek için aşağıdaki komutları tek tek çalıştırın:
 

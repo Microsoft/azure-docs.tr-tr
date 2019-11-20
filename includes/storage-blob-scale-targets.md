@@ -2,25 +2,27 @@
 author: tamram
 ms.service: storage
 ms.topic: include
-ms.date: 4/20/2019
+ms.date: 11/08/2019
 ms.author: tamram
-ms.openlocfilehash: aab17966862c57a52f252b3c4e9b757673078b0a
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 0fda881b805eb3a967cf3b05f6c6df8c65d20730
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188583"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73905802"
 ---
-| Resource | Hedef        |
+| Kaynak | Hedef        |
 |----------|---------------|
-| Tek bir blob kapsayıcısı en büyük boyutu | En fazla depolama hesabı kapasitesi aynı |
-| En fazla bir blok içinde blok blob veya ekleme blobu | 50.000 blok |
-| Bir bloğu içinde bir blok blobunun en büyük boyutu | 100 MiB |
-| Blok blobunun en büyük boyutu | 50.000 x 100 MIB (yaklaşık 4,75 tib'a kadar) |
-| Bir bloğu içinde bir ek blobu en büyük boyutu | 4 MiB |
-| Bir ek blobunun en büyük boyutu | 50.000 x 4 MIB (yaklaşık 195 GiB) |
-| Bir sayfa blobu en büyük boyutu | 8 TiB |
-| Saklı erişim ilkeleri blob kapsayıcı başına en fazla sayısı | 5 |
-|Tek bir blob için hedef performans düzeyleri |Depolama hesabı giriş/çıkış limitlerde<sup>1</sup> |
+| Tek blob kapsayıcısının en büyük boyutu | Maksimum depolama hesabı kapasitesinden aynı |
+| Blok Blobu veya ekleme blobu içindeki maksimum blok sayısı | 50.000 bloklar |
+| Blok Blobu içindeki bir bloğun en büyük boyutu | 100 MIB |
+| Blok Blobun en büyük boyutu | 50.000 X 100 MIB (yaklaşık 4,75 TiB) |
+| Bir ekleme blobundan maksimum blok boyutu | 4 MIB |
+| Bir ekleme blobunun maksimum boyutu | 50.000 x 4 MiB (yaklaşık 195 GiB) |
+| Sayfa Blobun en büyük boyutu | 8 TiB |
+| Blob kapsayıcısı başına en fazla depolanan erişim ilkesi sayısı | 5 |
+|Tek bir blob için hedef istek oranı | Saniyede en fazla 500 istek |
+|Tek sayfalı blob için hedef işleme | Saniyede 60 MIB 'ye kadar |
+|Tek Blok Blobu için hedef aktarım hızı |Depolama hesabı giriş/çıkış sınırlarını artırma<sup>1</sup> |
 
-<sup>1</sup> tek nesne aktarım hızı, ancak bunlarla sınırlı olmamak gibi çeşitli etkenlere bağlıdır: eşzamanlılık, istek boyutu, performans katmanı, yüklemeleri için kaynak ve hedef yüklemeleri için hızı. Yararlanmak için [yüksek performanslı blok blobu](https://azure.microsoft.com/blog/high-throughput-with-azure-blob-storage/) performans geliştirmeleri, Put blobu veya blok yerleştirme istek boyutu > 4 MIB (> 256 KiB Data Lake depolama Gen2'ye veya premium performans blok blobu depolama için) kullanın.
+<sup>1</sup> tek nesne aktarım hızı, aşağıdakiler dahil olmak üzere çeşitli faktörlere bağlıdır, ancak bunlarla sınırlı değildir: eşzamanlılık, istek boyutu, performans katmanı, karşıya yükleme için kaynak hızı ve indirmeleri için hedef. [Yüksek performanslı Blok Blobu](https://azure.microsoft.com/blog/high-throughput-with-azure-blob-storage/) performans geliştirmelerinden faydalanmak için, > 4 MIB 'Nin bir put blob 'Unu veya put blok isteği boyutunu (Premium performans bloğu BLOB depolama alanı veya Data Lake Storage 2. için > 256 KiB) kullanın.

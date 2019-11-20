@@ -1,5 +1,5 @@
 ---
-title: Linux - Azure App Service üzerinde PHP uygulaması oluşturma | Microsoft Docs
+title: Linux 'ta PHP uygulaması oluşturma-Azure App Service | Microsoft Docs
 description: Linux’ta App Service ile birkaç dakika içinde ilk PHP Merhaba Dünya uygulamanızı dağıtın.
 services: app-service\web
 documentationcenter: ''
@@ -10,25 +10,24 @@ ms.assetid: 6feac128-c728-4491-8b79-962da9a40788
 ms.service: app-service-web
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
 ms.date: 03/27/2019
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: c0dde4c59c2fe9cde23a9f88c69f3e2673942812
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: 414d34065b78db0f76683752b93d5ed89ebcdf75
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62117694"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70071193"
 ---
-# <a name="create-a-php-app-in-app-service-on-linux"></a>Linux üzerinde App Service'te bir PHP uygulaması oluşturma
+# <a name="create-a-php-app-in-app-service-on-linux"></a>Linux üzerinde App Service bir PHP uygulaması oluşturma
 
 > [!NOTE]
-> Bu makalede bir uygulamanın Linux üzerinde App Service'e dağıtımı yapılır. App Service dağıtmak için _Windows_, bkz: [Azure'da bir PHP uygulaması oluşturma](../app-service-web-get-started-php.md).
+> Bu makalede bir uygulamanın Linux üzerinde App Service'e dağıtımı yapılır. _Windows_üzerinde App Service dağıtmak için bkz. [Azure 'Da php uygulaması oluşturma](../app-service-web-get-started-php.md).
 >
 
-[Linux’ta App Service](app-service-linux-intro.md) Linux işletim sistemini kullanan yüksek oranda ölçeklenebilir, otomatik olarak düzeltme eki uygulayan bir web barındırma hizmeti sağlar. Bu hızlı başlangıç öğreticisinde, Linux’ta Azure App Service’e bir PHP uygulamasının nasıl dağıtılacağı gösterilmektedir. Kullanarak yerleşik görüntü ile uygulama oluşturma [Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) Cloud Shell'de ve PHP kodunu App Service uygulamasına dağıtmak için Git kullanabilirsiniz.
+[Linux’ta App Service](app-service-linux-intro.md) Linux işletim sistemini kullanan yüksek oranda ölçeklenebilir, otomatik olarak düzeltme eki uygulayan bir web barındırma hizmeti sağlar. Bu hızlı başlangıç öğreticisinde, [Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)kullanarak Linux üzerinde Azure App SERVICE bir PHP uygulamasının nasıl dağıtılacağı gösterilmektedir.
 
 ![Azure'da çalışan örnek uygulama](media/quickstart-php/hello-world-in-browser.png)
 
@@ -80,13 +79,13 @@ Terminal pencerenizde **Ctrl+C** tuşlarına basarak web sunucusundan çıkın.
 
 [!INCLUDE [Create web app](../../../includes/app-service-web-create-web-app-php-linux-no-h.md)] 
 
-Yerleşik görüntü ile yeni oluşturulmuş uygulamanızı görmek için siteye göz atın. Değiştirin  _&lt;uygulama adı >_ uygulamanızın adıyla.
+Yeni oluşturduğunuz uygulamanızı yerleşik görüntüyle görmek için siteye gidin. _&lt;Uygulama adını >_ uygulama adınızla değiştirin.
 
 ```bash
 http://<app_name>.azurewebsites.net
 ```
 
-İşte yeni uygulamanız aşağıdaki gibi görünmelidir:
+Yeni uygulamanızın şöyle görünmesi gerekir:
 
 ![Boş uygulama sayfası](media/quickstart-php/app-service-web-service-created.png)
 
@@ -125,7 +124,7 @@ Web tarayıcınızı kullanarak, dağıtılan uygulamanın konumuna gidin.
 http://<app_name>.azurewebsites.net
 ```
 
-PHP örnek kodu, yerleşik görüntü ile Linux üzerinde App Service'te çalışıyor.
+PHP örnek kodu, yerleşik görüntüyle Linux üzerinde App Service çalışmaktadır.
 
 ![Azure'da çalışan örnek uygulama](media/quickstart-php/hello-world-in-browser.png)
 
@@ -150,11 +149,11 @@ Dağıtım tamamlandıktan sonra **Uygulamaya göz atma** adımında açılan ta
 
 ![Azure'da çalışan güncelleştirilmiş örnek uygulama](media/quickstart-php/hello-azure-in-browser.png)
 
-## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetme
+## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetin
 
-Git <a href="https://portal.azure.com" target="_blank">Azure portalında</a> oluşturduğunuz uygulamayı yönetmek için.
+Oluşturduğunuz uygulamayı yönetmek için <a href="https://portal.azure.com" target="_blank">Azure Portal</a> gidin.
 
-Sol menüden **uygulama hizmetleri**ve ardından Azure uygulamanızın adına tıklayın.
+Sol menüden **uygulama hizmetleri**' ne ve ardından Azure uygulamanızın adına tıklayın.
 
 ![Azure uygulamasına portal gezintisi](./media/quickstart-php/php-docs-hello-world-app-service-list.png)
 

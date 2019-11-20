@@ -1,68 +1,62 @@
 ---
-title: Azure İzleyici günlük sorguları | Microsoft Docs
-description: Azure İzleyici'de günlük sorguları yazmayı öğrenmek için kaynaklara başvurular.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici günlük sorguları | Microsoft Docs
+description: Azure Izleyici 'de günlük sorgularının nasıl yazılacağını öğrenmek için kaynaklara başvurular.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 01/11/2019
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 6fae245e4d72f7f6f7809d85da17023deb1518e5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 01/11/2019
+ms.openlocfilehash: 7c6530416f0eb6b822b6f5f3eb53f59aeae05d53
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65560843"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72894344"
 ---
-# <a name="azure-monitor-log-queries"></a>Azure İzleyici günlük sorguları
-Azure İzleyici günlüklerine Azure Veri Gezgini oluşturulur ve Azure İzleyici günlük sorguları aynı Kusto sorgu dil sürümü kullanın. [Kusto sorgu dili belgeleri](/azure/kusto/query) tüm dil ayrıntılarını sahiptir ve Azure İzleyici günlük sorguları yazmak için birincil kaynak olmalıdır. Bu sayfa, sorgu yazmayı öğrenmek ve farkları dilinin Azure İzleyici uygulaması ile diğer kaynakların bağlantılarını sağlar.
+# <a name="azure-monitor-log-queries"></a>Azure Izleyici günlük sorguları
+Azure Izleyici günlükleri Azure Veri Gezgini kurulmuştur ve Azure Izleyici günlük sorguları aynı kusto sorgu dilinin bir sürümünü kullanır. [Kusto sorgu dili belgeleri](/azure/kusto/query) , dilin tüm ayrıntılarına sahiptir ve Azure izleyici günlük sorgularını yazmak için birincil kaynağınız olmalıdır. Bu sayfa, dilin Azure Izleyici uygulamasıyla nasıl sorgu yazılacağını ve farklılıkları hakkında bilgi almak için diğer kaynaklara bağlantılar sağlar.
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-## <a name="getting-started"></a>Başlarken
+## <a name="getting-started"></a>Başlangıç
 
-- [Azure İzleyici Log Analytics ile çalışmaya başlama](get-started-portal.md) sorguları yazma ve Azure portalında sonuçları ile çalışmak için bir Ders şu oldu.
-- [Azure İzleyici günlük sorguları kullanmaya başlama](get-started-queries.md) Azure İzleyici günlük verilerini kullanarak sorgular yazmak için bir Ders şu oldu.
+- [Azure izleyici 'yi kullanmaya başlama Log Analytics](get-started-portal.md) , sorgu yazma ve sonuçlarla çalışma ile ilgili bir ders olan Azure Portal.
+- [Azure izleyici günlük sorgularını kullanmaya başlama](get-started-queries.md) , Azure izleyici günlük verilerini kullanarak sorgu yazma dersi.
 
 ## <a name="concepts"></a>Kavramlar
-- [Azure İzleyici'de günlük verilerini analiz etmek](../../azure-monitor/log-query/log-query-overview.md) verir günlük kısa bir genel bakış sorgular ve Azure İzleyici günlük verilerini nasıl yapılandırıldığını açıklar.
-- [Azure İzleyici'de günlük verilerini çözümleme ve görüntüleme](../../azure-monitor/log-query/portals.md) oluşturduğunuz ve günlük sorguları çalıştırma portallar açıklamaktadır.
+- [Azure izleyici 'de günlük verilerini analiz etmek](../../azure-monitor/log-query/log-query-overview.md) , günlük sorgularına kısa bir genel bakış sağlar ve Azure izleyici günlük verilerinin nasıl yapılandırıldığını açıklar.
+- [Azure izleyici 'de günlük verilerini görüntüleme ve çözümleme](../../azure-monitor/log-query/portals.md) , günlük sorguları oluşturup çalıştırdığınız portalları açıklar.
 
 ## <a name="reference"></a>Başvuru
 
-- [Sorgu dili başvurusu](/azure/kusto/query) Kusto sorgu dili için tam dil başvurudur.
-- [Azure İzleyici günlük sorgu dili farklılıkları](data-explorer-difference.md) Kusto sorgu dil sürümü arasındaki farkları açıklar.
-- [Azure İzleyici'de standart özellikler günlük kayıtlarının](../../azure-monitor/platform/log-standard-properties.md) tüm Azure İzleyici günlük verileri için standart özellikler açıklanmaktadır.
-- [Azure İzleyici'de kaynaklar arası günlük sorguları gerçekleştirmek](../../azure-monitor/log-query/cross-workspace-query.md) verileri birden fazla Log Analytics çalışma alanları ve Application Insights uygulamaları kullanarak günlük sorguları yazma işlemini açıklamaktadır.
+- [Sorgu dili başvurusu](/azure/kusto/query) , kusto sorgu dili için tüm dil başvurusudur.
+- [Azure izleyici günlük sorgusu dil farkları](data-explorer-difference.md) , kusto sorgu dilinin sürümleri arasındaki farkları açıklar.
+- [Azure İzleyici günlüğü kayıtlarında standart özellikler](../../azure-monitor/platform/log-standard-properties.md) tüm Azure izleyici günlük verileri için standart olan özellikleri açıklar.
+- [Azure izleyici 'de çapraz kaynak günlük sorguları gerçekleştirme](../../azure-monitor/log-query/cross-workspace-query.md) birden çok Log Analytics çalışma alanından ve Application Insights uygulamadan veri kullanan günlük sorgularının nasıl yazılacağını açıklar.
 
 
 ## <a name="examples"></a>Örnekler
 
-- [Azure İzleyici günlük sorgu örnekleri](examples.md) Azure İzleyici günlük verilerini kullanarak örnek sorguları sağlar.
+- [Azure izleyici günlük sorgusu örnekleri](examples.md) , Azure izleyici günlük verilerini kullanarak örnek sorgular sağlar.
 
 
 
 ## <a name="lessons"></a>Dersler
 
-- [Azure İzleyici günlük sorguları dizelerle çalışma](string-operations.md) dize verileri ile çalışma açıklar.
-- [Azure İzleyici günlük sorguları tarih saat değerleri ile çalışma](datetime-operations.md) tarih ve saat verileri ile çalışma açıklar. 
-- [Azure İzleyici toplamaları sorguları oturum](aggregations.md) ve [Azure İzleyici günlük sorguları toplamalara Gelişmiş](advanced-aggregations.md) toplamak ve verilerini özetle açıklar.
-- [Azure izleyici günlüğü sorgularda birleşimler](joins.md) birden çok tablodan veri birleştirme işlemini açıklamaktadır.
-- [JSON ve veri yapıları Azure izleyici günlüğü sorgularda çalışma](json-data-structures.md) json verileri ayrıştırmak açıklar.
-- [Gelişmiş yazma, sorgular Azure İzleyici'de oturum](advanced-query-writing.md) karmaşık sorgular oluşturma ve kod yeniden stratejilerini açıklar.
-- [Azure izleyici günlüğü sorgularından grafikleri ve diyagramları oluşturma](charts.md) günlük sorgusu verilerini görselleştirmek açıklar.
+- [Azure izleyici günlük sorgularında dizelerle çalışma](string-operations.md) , dize verileriyle nasıl çalışabileceğinizi açıklar.
+- [Azure izleyici günlük sorgularında tarih saat değerleriyle çalışma](datetime-operations.md) , tarih ve saat verileriyle nasıl çalışabileceğinizi açıklar. 
+- Azure izleyici günlük sorguları ve [Gelişmiş toplamalar](advanced-aggregations.md) içindeki [toplamalar](aggregations.md) , verileri nasıl toplayacağını ve özetleyeceğinizi açıklamaktadır.
+- [Azure izleyici günlük sorgularında birleşimler,](joins.md) birden çok tablodan verilerin nasıl birleştirileceğini açıklar.
+- [Azure izleyici günlük SORGULARıNDA JSON ve veri yapıları Ile çalışma](json-data-structures.md) , JSON verilerinin nasıl ayrıştırılacağını açıklar.
+- [Azure izleyici 'de Gelişmiş günlük sorguları yazma](advanced-query-writing.md) , karmaşık sorgular oluşturma ve kodu yeniden kullanma stratejilerini açıklar.
+- [Azure izleyici günlük sorgularından grafikler ve diyagramlar oluşturma,](charts.md) günlük sorgusundan verilerin nasıl görselleştirileneceğini açıklar.
 
 ## <a name="cheatsheets"></a>Başvuru sayfaları
 
--  [Azure İzleyici günlük sorgusu SQL](sql-cheatsheet.md) SQL ile ilgili bilgi sahibi olan kullanıcılara yardımcı olur.
--  [Azure İzleyici günlük sorgusu için Splunk](splunk-cheatsheet.md) Splunk ile ilgili bilgi sahibi olan kullanıcılara yardımcı olur.
+-  [SQL 'Den Azure 'A izleyici günlük sorgusu SQL 'e](sql-cheatsheet.md) zaten tanıdık olan kullanıcılara yardımcı olur.
+-  [Azure izleyici günlük sorgusuna yönelik splunk](splunk-cheatsheet.md) , splunk ile zaten tanıdık olan kullanıcılara yardımcı olur.
  
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Tam erişim [başvuru belgeleri Kusto sorgu dili için](/azure/kusto/query/).
+- [Kusto sorgu dili için tüm başvuru belgelerine](/azure/kusto/query/)erişin.

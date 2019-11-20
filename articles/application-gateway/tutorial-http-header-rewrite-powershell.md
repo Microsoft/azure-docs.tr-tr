@@ -1,31 +1,31 @@
 ---
-title: Azure Application Gateway, HTTP üst bilgilerini yeniden yazma
-description: Bu makalede Azure Application Gateway oluşturma ve Azure PowerShell kullanarak HTTP üst bilgilerini yeniden yazma hakkında bilgi sağlar.
+title: Azure Application Gateway oluşturma & HTTP üstbilgilerini yeniden yazma
+description: Bu makale, Azure Application Gateway oluşturma ve Azure PowerShell kullanarak HTTP üstbilgilerini yeniden yazma hakkında bilgi sağlar
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: article
-ms.date: 4/30/2019
+ms.date: 11/19/2019
 ms.author: absha
-ms.openlocfilehash: ba74bb8970949a15425a66f7cd4475749fd183df
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2663c049245a7025b5948a64fc5008bb9e7dee90
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64947101"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74173728"
 ---
-# <a name="create-an-application-gateway-and-rewrite-http-headers"></a>Application gateway oluşturma ve HTTP üst bilgilerini yeniden yazma
+# <a name="create-an-application-gateway-and-rewrite-http-headers"></a>Uygulama ağ geçidi oluşturma ve HTTP üstbilgilerini yeniden yazma
 
-Azure PowerShell yapılandırmak için kullanabileceğiniz [HTTP istek ve yanıt üst bilgileri yeniden yazma kuralları](rewrite-http-headers.md) oluşturduğunuzda, yeni [otomatik ölçeklendirme ve bölgesel olarak yedekli application gateway SKU](https://docs.microsoft.com/azure/application-gateway/application-gateway-autoscaling-zone-redundant)
+Yeni [Otomatik ölçeklendirme ve bölgesel olarak yedekli uygulama ağ geçidi SKU 'su](https://docs.microsoft.com/azure/application-gateway/application-gateway-autoscaling-zone-redundant) oluştururken [http istek ve yanıt üst bilgilerini yeniden yazma kurallarını](rewrite-http-headers.md) yapılandırmak için Azure PowerShell kullanabilirsiniz.
 
 Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
 >
-> * Otomatik ölçeklendirme sanal ağ oluşturma
+> * Otomatik ölçeklendirme sanal ağı oluşturma
 > * Ayrılmış genel IP adresi oluşturma
-> * Uygulama ağ geçidi altyapısını kurma
-> * Http üst bilgisini yeniden yazma kuralı yapılandırmasını belirtin
+> * Uygulama ağ geçidi altyapınızı ayarlama
+> * Http üst bilgisi yeniden yazma kuralı yapılandırmanızı belirtin
 > * Otomatik ölçeklendirmeyi belirtme
 > * Uygulama ağ geçidi oluşturma
 > * Uygulama ağ geçidini test etme
@@ -34,7 +34,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu makalede, Azure PowerShell'i yerel olarak çalıştırmanızı gerektirir. Sonraki bir sürümünün yüklü veya modülü sürüm 1.0.0 Az olmalıdır. Çalıştırma `Import-Module Az` ardından`Get-Module Az` sürümü bulmak için. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](https://docs.microsoft.com/powershell/azure/install-az-ps). PowerShell sürümünü doğruladıktan sonra, Azure ile bağlantı oluşturmak için `Login-AzAccount` komutunu çalıştırın.
+Bu makale, Azure PowerShell yerel olarak çalıştırmanızı gerektirir. Az Module Version 1.0.0 veya daha yeni bir sürümün yüklü olması gerekir. `Import-Module Az` çalıştırıp sürümü bulmak için`Get-Module Az`. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](https://docs.microsoft.com/powershell/azure/install-az-ps). PowerShell sürümünü doğruladıktan sonra, Azure ile bağlantı oluşturmak için `Login-AzAccount` komutunu çalıştırın.
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
@@ -56,7 +56,7 @@ New-AzResourceGroup -Name $rg -Location $location
 
 ## <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
-Otomatik ölçeklendirme uygulama ağ geçidi için ayrılmış bir alt ağ ile sanal ağ oluşturun. Şu anda her ayrılmış alt ağda yalnızca bir otomatik ölçeklendirme yapan uygulama ağ geçidi dağıtılabilir.
+Otomatik ölçeklendirme uygulama ağ geçidi için bir ayrılmış alt ağa sahip bir sanal ağ oluşturun. Şu anda her ayrılmış alt ağda yalnızca bir otomatik ölçeklendirme yapan uygulama ağ geçidi dağıtılabilir.
 
 ```azurepowershell
 #Create VNet with two subnets
@@ -68,7 +68,7 @@ $vnet = New-AzvirtualNetwork -Name "AutoscaleVNet" -ResourceGroupName $rg `
 
 ## <a name="create-a-reserved-public-ip"></a>Ayrılmış genel IP adresi oluşturma
 
-Publicıpaddress ayırma yöntemini belirtin **statik**. Otomatik ölçeklendirme yapan uygulama ağ geçidi VIP’si yalnızca statik olabilir. Dinamik IP’ler desteklenmez. Yalnızca standart PublicIpAddress SKU’su desteklenir.
+Publicıpaddress 'in ayırma yöntemini **static**olarak belirtin. Otomatik ölçeklendirme yapan uygulama ağ geçidi VIP’si yalnızca statik olabilir. Dinamik IP’ler desteklenmez. Yalnızca standart PublicIpAddress SKU’su desteklenir.
 
 ```azurepowershell
 #Create static public IP
@@ -78,7 +78,7 @@ $pip = New-AzPublicIpAddress -ResourceGroupName $rg -name "AppGwVIP" `
 
 ## <a name="retrieve-details"></a>Ayrıntıları alma
 
-Uygulama ağ geçidi için IP yapılandırma ayrıntıları oluşturmak için yerel bir nesne, kaynak grubu, alt ağ ve IP bilgilerini alın.
+Uygulama ağ geçidinin IP yapılandırma ayrıntılarını oluşturmak için yerel bir nesnede kaynak grubunun, alt ağın ve IP 'nin ayrıntılarını alın.
 
 ```azurepowershell
 $resourceGroup = Get-AzResourceGroup -Name $rg
@@ -87,9 +87,9 @@ $vnet = Get-AzvirtualNetwork -Name "AutoscaleVNet" -ResourceGroupName $rg
 $gwSubnet = Get-AzVirtualNetworkSubnetConfig -Name "AppGwSubnet" -VirtualNetwork $vnet
 ```
 
-## <a name="configure-the-infrastructure"></a>Altyapısını yapılandırma
+## <a name="configure-the-infrastructure"></a>Altyapıyı yapılandırma
 
-IP yapılandırması, ön uç IP yapılandırması, arka uç havuzu, HTTP ayarları, sertifika, bağlantı noktası ve dinleyici mevcut standart uygulama ağ geçidi için aynı biçimde yapılandırın. Yeni SKU, standart SKU ile aynı nesne modelini izler.
+IP yapılandırması, ön uç IP yapılandırması, arka uç havuzu, HTTP ayarları, sertifika, bağlantı noktası ve dinleyiciyi aynı biçimde mevcut standart uygulama ağ geçidine göre yapılandırın. Yeni SKU, standart SKU ile aynı nesne modelini izler.
 
 ```azurepowershell
 $ipconfig = New-AzApplicationGatewayIPConfiguration -Name "IPConfig" -Subnet $gwSubnet
@@ -105,15 +105,15 @@ $setting = New-AzApplicationGatewayBackendHttpSettings -Name "BackendHttpSetting
           -Port 80 -Protocol Http -CookieBasedAffinity Disabled
 ```
 
-## <a name="specify-your-http-header-rewrite-rule-configuration"></a>HTTP üst bilgisini yeniden yazma kuralı yapılandırmasını belirtin
+## <a name="specify-your-http-header-rewrite-rule-configuration"></a>HTTP üst bilgisi yeniden yazma kuralı yapılandırmanızı belirtin
 
-Http üstbilgileri yeniden yazma için gereken yeni nesneler yapılandırın:
+HTTP üstbilgilerini yeniden yazmak için gereken yeni nesneleri yapılandırın:
 
-- **RequestHeaderConfiguration**: Bu nesne yeniden yazmak için istediğinize isteği üst bilgi alanları ve özgün üstbilgileri için yazılması gereken yeni değeri belirtmek için kullanılır.
-- **ResponseHeaderConfiguration**: Bu nesne yeniden yazmak için istediğinize yanıt üstbilgi alanlarını ve özgün üstbilgileri için yazılması gereken yeni değeri belirtmek için kullanılır.
-- **ActionSet**: Bu nesne, yukarıda belirtilen istek ve yanıt üstbilgileri yapılandırmalarını içerir. 
-- **RewriteRule**: Bu nesnenin tüm içeren *actionSets* yukarıda belirtilen. 
-- **RewriteRuleSet**-tüm bu nesneyi içeren *rewriteRules* ve bir istek yönlendirme kuralı - temel veya yol tabanlı eklenmesi gerekir.
+- **Requestheaderconfiguration**: Bu nesne, yeniden yazmayı düşündüğünüz istek üst bilgisi alanlarını ve özgün üstbilgilerin yeniden yazılması gereken yeni değeri belirtmek için kullanılır.
+- **Responseheaderconfiguration**: Bu nesne, yeniden yazmayı düşündüğünüz yanıt üst bilgisi alanlarını ve özgün üstbilgilerin yeniden yazılması gereken yeni değeri belirtmek için kullanılır.
+- **Actionset**: Bu nesne, yukarıda belirtilen istek ve yanıt üst bilgilerinin yapılandırmasını içerir. 
+- **Yeniden Writerule**: Bu nesne yukarıda belirtilen tüm *actionsets gruplarını* içerir. 
+- **Rewriterutaset**-bu nesne tüm *yeniden writerules* 'leri içerir ve bir istek yönlendirme kuralına (temel veya yol tabanlı) eklenmelidir.
 
    ```azurepowershell
    $requestHeaderConfiguration = New-AzApplicationGatewayRewriteRuleHeaderConfiguration -HeaderName "X-isThroughProxy" -HeaderValue "True"
@@ -125,7 +125,7 @@ Http üstbilgileri yeniden yazma için gereken yeni nesneler yapılandırın:
 
 ## <a name="specify-the-routing-rule"></a>Yönlendirme kuralını belirtin
 
-İstek yönlendirme kuralı oluşturun. Oluşturulduktan sonra bu yeniden yazma yapılandırma kaynağı dinleyicisi aracılığıyla yönlendirme kuralı eklenir. Temel bir yönlendirme kuralını kullanırken, üstbilgi yeniden yapılandırma kaynağı dinleyici ile ilişkili ve genel üstbilgi yeniden yazma. Yola dayalı kural kullanıldığında, URL yolu haritada üstbilgi yeniden yapılandırma tanımlanır. Bu nedenle, yalnızca bir sitenin belirli bir yol alanı için geçerlidir. Aşağıda, temel bir yönlendirme kuralı oluşturulur ve yeniden yazma kuralı kümesine eklenir.
+İstek yönlendirme kuralı oluşturun. Oluşturulduktan sonra, bu yeniden yazma yapılandırması, kaynak dinleyicisine yönlendirme kuralı aracılığıyla eklenir. Temel bir yönlendirme kuralı kullanırken, üst bilgi yeniden yazma yapılandırması bir kaynak dinleyicisi ile ilişkilendirilir ve genel üst bilgi yeniden yazma işlemi olur. Yol tabanlı bir yönlendirme kuralı kullanıldığında, üstbilgi yeniden yazma yapılandırması URL yol eşlemesinde tanımlanmıştır. Bu nedenle, yalnızca bir sitenin belirli yol alanı için geçerlidir. Aşağıda temel bir yönlendirme kuralı oluşturulur ve yeniden yazma kuralı kümesi iliştirilir.
 
 ```azurepowershell
 $rule01 = New-AzApplicationGatewayRequestRoutingRule -Name "Rule1" -RuleType basic `
@@ -134,7 +134,7 @@ $rule01 = New-AzApplicationGatewayRequestRoutingRule -Name "Rule1" -RuleType bas
 
 ## <a name="specify-autoscale"></a>Otomatik ölçeklendirmeyi belirtme
 
-Artık uygulama ağ geçidi için otomatik ölçeklendirme yapılandırması belirtebilirsiniz. İki otomatik ölçeklendirme yapılandırması türü desteklenir:
+Artık uygulama ağ geçidi için otomatik ölçeklendirme yapılandırmasını belirtebilirsiniz. İki otomatik ölçeklendirme yapılandırması türü desteklenir:
 
 * **Sabit kapasite modu**. Bu modda, uygulama ağ geçidi otomatik ölçeklendirme yapmaz ve sabit bir Ölçek Birimi kapasitesinde çalışır.
 
@@ -151,7 +151,7 @@ Artık uygulama ağ geçidi için otomatik ölçeklendirme yapılandırması bel
 
 ## <a name="create-the-application-gateway"></a>Uygulama ağ geçidi oluşturma
 
-Uygulama ağ geçidi oluşturma ve yedeklilik bölgeler ve otomatik ölçeklendirme yapılandırması içerir.
+Uygulama ağ geçidini oluşturun ve artıklık bölgelerini ve otomatik ölçeklendirme yapılandırmasını ekleyin.
 
 ```azurepowershell
 $appgw = New-AzApplicationGateway -Name "AutoscalingAppGw" -Zone 1,2,3 -ResourceGroupName $rg -Location $location -BackendAddressPools $pool -BackendHttpSettingsCollection $setting -GatewayIpConfigurations $ipconfig -FrontendIpConfigurations $fip -FrontendPorts $fp01 -HttpListeners $listener01 -RequestRoutingRules $rule01 -Sku $sku -AutoscaleConfiguration $autoscaleConfig -RewriteRuleSet $rewriteRuleSet
@@ -159,7 +159,7 @@ $appgw = New-AzApplicationGateway -Name "AutoscalingAppGw" -Zone 1,2,3 -Resource
 
 ## <a name="test-the-application-gateway"></a>Uygulama ağ geçidini test etme
 
-Uygulama ağ geçidinin genel IP adresini almak için get-AzPublicIPAddress kullanın. Genel IP adresini veya DNS adını kopyalayıp tarayıcınızın adres çubuğuna yapıştırın.
+Uygulama ağ geçidinin genel IP adresini almak için Get-Azpublicıpaddress komutunu kullanın. Genel IP adresini veya DNS adını kopyalayıp tarayıcınızın adres çubuğuna yapıştırın.
 
 ```azurepowershell
 Get-AzPublicIPAddress -ResourceGroupName $rg -Name AppGwVIP
@@ -169,7 +169,7 @@ Get-AzPublicIPAddress -ResourceGroupName $rg -Name AppGwVIP
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-İlk uygulama ağ geçidi ile oluşturulan kaynakları keşfedin. Ardından, artık ihtiyaç duyulan, kullanabileceğiniz `Remove-AzResourceGroup` komutunu kullanarak kaynak grubunu, uygulama ağ geçidini kaldırmak için ve tüm ilgili kaynakları.
+İlk olarak, uygulama ağ geçidiyle oluşturulan kaynakları araştırın. Daha sonra, artık gerekli olmadığında, kaynak grubunu, uygulama ağ geçidini ve tüm ilgili kaynakları kaldırmak için `Remove-AzResourceGroup` komutunu kullanabilirsiniz.
 
 `Remove-AzResourceGroup -Name $rg`
 

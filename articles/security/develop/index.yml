@@ -1,44 +1,59 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Geliştirme Belgelerinin Güvenliğini Sağlama
+### YamlMime:Landing
+title: Geliştirme belgelerinin güvenliğini sağlama
+summary: Örnek uygulamalarımız, en iyi yöntemler ve kılavuzlar ile Azure’da güvenli uygulamalar geliştirmeyi ve dağıtmayı öğrenin.
 metadata:
-  document_id: null
-  title: Microsoft Azure’da Geliştirme Belgelerinin Güvenliğini Sağlama
-  meta.description: Learn how to develop secure apps on Azure.
+  title: Microsoft Azure’da geliştirme belgelerinin güvenliğini sağlama
+  description: Azure’da güvenli uygulamalar geliştirmeyi öğrenin.
   services: security
-  author: TerryLanfear
-  manager: barbkess
   ms.service: security
   ms.subservice: develop
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 06/11/2019
+  author: TerryLanfear
   ms.author: terrylan
-abstract:
-  description: 'Örnek uygulamalarımız, en iyi yöntemler ve kılavuzlar ile Azure’da güvenli uygulamalar geliştirmeyi ve dağıtmayı öğrenin.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 2
-        items:
-          - href: /azure/security/develop/secure-dev-overview
-            html: <p>Azure'da güvenli bir web uygulamasını dağıtma</p>
-            image:
-              src: /media/common/i_get-started.svg
-            title: başlarken
-          - href: 'https://docs.microsoft.com/learn/modules/top-5-security-items-to-consider'
-            html: <p>Web uygulamaları için en iyi beş güvenlik öğesi</p>
-            image:
-              src: /media/common/i_learn-about.svg
-            title: Microsoft Learn ile becerilerinizi geliştirin
-  - title: Kavramlar
-    items:
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/security/develop/secure-dev-overview">Güvenli geliştirme en iyi uygulamaları</a>
-          - html: <a href="/azure/security/azure-security-threat-modeling-tool">Tehdit modelleme</a>
+  manager: rkarlin
+  ms.date: 10/24/2019
+  ms.openlocfilehash: 53e59e7d5ef28d8cb09015b7de296b298af9c3f7
+  ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/25/2019
+  ms.locfileid: "72934076"
+landingContent:
+- title: Güvenli örnek uygulamalar geliştirme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Linux kapsayıcısında web uygulaması
+      url: secure-web-app.md
+    - text: Azure Active Directory ile web uygulaması
+      url: secure-aad-app.md
+    - text: Ödeme kartı endüstrisi
+      url: secure-pci-web-app.md
+- title: Başlarken
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: En iyi güvenli geliştirme deneyimleri
+      url: secure-dev-overview.md
+    - text: Tasarım aşaması
+      url: secure-design.md
+    - text: Geliştirme aşaması
+      url: secure-develop.md
+    - text: Dağıtım aşaması
+      url: secure-deploy.md
+- title: Güvenli geliştirme çalışmanıza analiz araçları ekleme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Güvenlik kodu analizi
+      url: security-code-analysis-overview.md
+    - text: Tehdit modelleme
+      url: threat-modeling-tool.md
+- title: Becerilerinizi geliştirme
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: İlk 5 güvenlik öğesi
+      url: https://docs.microsoft.com/learn/modules/top-5-security-items-to-consider
+    - text: Azure'da bulut uygulamalarınızın güvenliğini sağlama
+      url: https://docs.microsoft.com/learn/paths/secure-your-cloud-apps

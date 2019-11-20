@@ -1,88 +1,57 @@
 ---
-title: 'Application Insights: programlama dilleri, platformlar ve tümleştirmeler| Microsoft Belgeleri'
-description: Application Insights için programlama dilleri, platformlar ve tümleştirmeler bulunmaktadır
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 974db106-54ff-4318-9f8b-f7b3a869e536
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: 'Application Insights: diller, platformlar ve tümleştirmeler | Microsoft Docs'
+description: Application Insights için kullanılabilen diller, platformlar ve tümleştirmeler
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 05/16/2019
-ms.reviewer: olegan
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 99245dd7628aa4d25e44266a3e798e2f96501f1e
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.date: 07/18/2019
+ms.reviewer: olegan
+ms.openlocfilehash: 01cebc3a86808d549f1a7dc3adfd2883bc289076
+ms.sourcegitcommit: f7f70c9bd6c2253860e346245d6e2d8a85e8a91b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67275390"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73061442"
 ---
-# <a name="developer-analytics-languages-platforms-and-integrations"></a>Geliştirici analizleri: programlama dilleri, platformlar ve tümleştirmeler
-Bu öğeler, bildiğimiz [Application Insights](../../azure-monitor/app/app-insights-overview.md) uygulamalardır. Bunlardan bazıları üçüncü taraflar aracılığıyla sunulur.
+# <a name="supported-languages"></a>Desteklenen diller
 
-## <a name="languages---officially-supported-by-application-insights-team"></a>Application Insights ekibi tarafından resmi olarak desteklenen programlama dilleri
 * [C#|VB (.NET)](../../azure-monitor/app/asp-net.md)
 * [Java](../../azure-monitor/app/java-get-started.md)
-* [JavaScript web sayfaları](../../azure-monitor/app/javascript.md)
+* [JavaScript](../../azure-monitor/app/javascript.md)
 * [Node.JS](../../azure-monitor/app/nodejs.md)
+* [Python (Önizleme)](../../azure-monitor/app/opencensus-python.md)
 
-## <a name="languages---community-supported"></a>Topluluk tarafından desteklenen programlama dilleri
-* [F#](https://safe-stack.github.io/docs/template-azure-ai/)
-* [Go](https://github.com/Microsoft/ApplicationInsights-go)
-* [PHP](https://github.com/Microsoft/ApplicationInsights-PHP)
-* [Python](https://pypi.python.org/pypi/applicationinsights/0.1.0)
-* [Ruby](https://rubygems.org/gems/application_insights)
-* [Diğer her şey](#projects)
+## <a name="supported-platforms-and-frameworks"></a>Desteklenen platformlar ve çerçeveler
 
-## <a name="platforms-and-frameworks"></a>Platformlar ve altyapıları
-* [ASP.NET](../../azure-monitor/app/asp-net.md)
+### <a name="instrumentation-for-already-deployed-applications-codeless-agent-based"></a>Zaten dağıtılan uygulamalar için izleme (codeless, aracı tabanlı)
+* [Azure VM ve Azure sanal makine ölçek kümeleri](../../azure-monitor/app/azure-vm-vmss-apps.md)
+* [Azure App Service](../../azure-monitor/app/azure-web-apps.md)
 * [ASP.NET - zaten canlı olan uygulamalar için](../../azure-monitor/app/monitor-performance-live-website-now.md)
+* Hem Web hem de çalışan rolleri dahil olmak üzere [Azure Cloud Services](../../azure-monitor/app/cloudservices.md)
+* [Azure İşlevleri](https://docs.microsoft.com/azure/azure-functions/functions-monitoring)
+### <a name="instrumentation-through-code-sdks"></a>Kod üzerinden izleme (SDK)
+* [ASP.NET](../../azure-monitor/app/asp-net.md)
 * [ASP.NET Core](../../azure-monitor/app/asp-net-core.md)
 * [Android](../../azure-monitor/learn/mobile-center-quickstart.md) (App Center)
-* [Android](https://github.com/Microsoft/ApplicationInsights-Android) (App Center)
-* [Angular](https://github.com/MarkPieszak/angular-application-insights)
-* [Azure uygulama hizmeti](../../azure-monitor/app/azure-web-apps.md)
-* [Azure Bulut Hizmetleri](../../azure-monitor/app/cloudservices.md)&#151;hem web hem de çalışan rolleri dahil
-* [Azure İşlevleri](https://docs.microsoft.com/azure/azure-functions/functions-monitoring)
-* [Docker](../../azure-monitor/app/docker.md)
-* [Glimpse](https://azure.microsoft.com/blog/glimpse-application-insights/)
 * [iOS](../../azure-monitor/learn/mobile-center-quickstart.md) (App Center)
-* [Ionic](https://github.com/SoftwarePioniere/ionic-application-insights)
-* [iOS](https://github.com/Microsoft/ApplicationInsights-iOS) (App Center)
 * [Java EE](../../azure-monitor/app/java-get-started.md)
 * [Node.JS](https://www.npmjs.com/package/applicationinsights)
-* [OSX](https://github.com/Microsoft/ApplicationInsights-OSX)
-* [SAFE Yığını](https://safe-stack.github.io/docs/template-azure-ai/)
+* [Python (Önizleme)](../../azure-monitor/app/opencensus-python.md)
 * [Evrensel Windows uygulaması](../../azure-monitor/learn/mobile-center-quickstart.md) (App Center)
-* [WCF](https://github.com/Microsoft/ApplicationInsights-SDK-Labs/blob/master/WCF/readme.md)
 * [Windows masaüstü uygulamaları, hizmetleri ve çalışan rolleri](../../azure-monitor/app/windows-desktop.md)
-* [Diğer her şey](#projects)
 
 ## <a name="logging-frameworks"></a>Günlük altyapıları
 * [ILogger](https://docs.microsoft.com/azure/azure-monitor/app/ilogger)
 * [Log4Net, NLog veya System.Diagnostics.Trace](../../azure-monitor/app/asp-net-trace-logs.md)
 * [Java, Log4J veya Logback](../../azure-monitor/app/java-trace-logs.md)
-* [Semantik Günlük (SLAB)](https://github.com/fidmor89/SLAB_AppInsights) - [Semantik Günlük Uygulama Bloğu](https://msdn.microsoft.com/library/dn440729.aspx) ile tümleşir
-* [Bulut tabanlı yük testi](https://blogs.msdn.com/b/visualstudioalm/archive/2015/07/30/getting-application-insights-counters-with-cloud-based-load-testing.aspx)
 * [LogStash eklentisi](https://github.com/Azure/azure-diagnostics-tools/tree/master/Logstash/logstash-output-applicationinsights)
-* [Logary](https://www.nuget.org/packages/Logary.Targets.AppInsights/)
-* [Logrus](https://github.com/jjcollinge/logrus-appinsights)
 * [Azure İzleyici](https://blogs.technet.microsoft.com/msoms/2016/09/26/application-insights-connector-in-oms/)
 
-## <a name="content-management-systems"></a>İçerik Yönetim Sistemleri
-* [Concrete](https://github.com/fidmor89/appInsights-Concrete)
-* [Drupal](https://github.com/fidmor89/AppInsights-Drupal)
-* [Joomla](https://github.com/fidmor89/AppInsights-Joomla)
-* [Orchard](https://azure.microsoft.com/blog/integrating-application-insights-into-a-modular-cms-and-a-multi-tenant-public-saas/preview/)
-* [SharePoint](../../azure-monitor/app/sharepoint.md)
-* [WordPress](https://wordpress.org/plugins/application-insights/)
-
-## <a name="export-and-data-analysis"></a>Dışarı Aktarma ve Veri Analizi
+## <a name="export-and-data-analysis"></a>Dışarı aktarma ve veri analizi
 * [Power BI](https://blogs.msdn.com/b/powerbi/archive/2015/11/04/explore-your-application-insights-data-with-power-bi.aspx)
-* [Akış Analizi](../../azure-monitor/app/export-power-bi.md )
+* [Akış Analizi](../../azure-monitor/app/export-power-bi.md)
 
-## <a name="projects"></a>Kendi SDK'nizi oluşturun
-Programlama diliniz veya platformunuz için henüz bir SDK yoksa belki de bir SDK oluşturmanızın zamanı gelmiştir. [GitHub’da Application Insights SDK projesi](https://github.com/Microsoft/AppInsights-Home) altında listelenen mevcut SDK kodlarını gözden geçirin.
+## <a name="unsupported-sdks"></a>Desteklenmeyen SDK’lar
+Diğer topluluk tarafından desteklenen birkaç SDK 'nın mevcut olduğunu biliyoruz. Ancak, Azure Izleyici yalnızca bu sayfada listelenen desteklenen SDK 'Ları kullanırken destek sağlar. Diğer dillere yönelik desteğimizi genişletmeyi sürekli olarak değerlendirdik, bu nedenle en son SDK haberlerini almak için [GitHub duyuruları](https://github.com/microsoft/ApplicationInsights-Announcements/issues) sayfamızı izleyin. 

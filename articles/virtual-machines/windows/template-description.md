@@ -1,36 +1,35 @@
 ---
-title: Sanal makineler bir Azure Resource Manager şablonu | Microsoft Azure
-description: Sanal makine kaynağı bir Azure Resource Manager şablonunun nasıl tanımlandığı hakkında daha fazla bilgi edinin.
+title: Bir Azure Resource Manager şablonundaki sanal makineler | Microsoft Azure
+description: Sanal makine kaynağının bir Azure Resource Manager şablonunda nasıl tanımlandığı hakkında daha fazla bilgi edinin.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: f63ab5cc-45b8-43aa-a4e7-69dc42adbb99
 ms.service: virtual-machines-windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 01/03/2019
 ms.author: cynthn
-ms.openlocfilehash: f4a69fd57bf2e9535fdb1664365b074927e27585
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e1b513344b6ea16c25d829939e64cd5ca1063c87
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64707270"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838901"
 ---
-# <a name="virtual-machines-in-an-azure-resource-manager-template"></a>Sanal makineler bir Azure Resource Manager şablonu
+# <a name="virtual-machines-in-an-azure-resource-manager-template"></a>Azure Resource Manager şablonundaki sanal makineler
 
-Bu makalede sanal makineleri için geçerli bir Azure Resource Manager şablonu yönlerini açıklar. Bu makalede, bir sanal makine oluşturmak için tam bir şablon olarak açıklanmamaktadır; Bunun için depolama hesapları, ağ arabirimleri, ortak IP adresleri ve sanal ağlar için kaynak tanımları gerekir. Bu kaynakları nasıl birlikte tanımlanabilir hakkında daha fazla bilgi için bkz. [Resource Manager şablonu Kılavuzu](../../azure-resource-manager/resource-manager-template-walkthrough.md).
+Bu makalede, sanal makinelere uygulanan Azure Resource Manager şablonun yönleri açıklanmaktadır. Bu makale, sanal makine oluşturmaya yönelik tüm şablonları tanımlamaz; Bunun için, depolama hesapları, ağ arabirimleri, genel IP adresleri ve sanal ağlar için kaynak tanımlarına ihtiyacınız vardır. Bu kaynakların nasıl birlikte tanımlanbileceğine ilişkin daha fazla bilgi için [Kaynak Yöneticisi şablonu izlenecek yol](../../azure-resource-manager/resource-manager-template-walkthrough.md)başlığına bakın.
 
-Kullanabileceğiniz birçok [galerideki şablonları](https://azure.microsoft.com/documentation/templates/?term=VM) VM kaynağını içerir. Bir şablona dahil tüm öğeler burada açıklanmıştır.
+Galerideki VM kaynağını içeren birçok [şablon](https://azure.microsoft.com/documentation/templates/?term=VM) vardır. Bir şablonda yer alan öğelerin hepsi burada açıklanmamaktadır.
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-Bu örnek belirtilen sayıda VM'ler oluşturmak için bir şablon tipik kaynak bölümünü gösterir:
+Bu örnek, belirtilen sayıda VM oluşturmak için bir şablonun tipik bir kaynak bölümünü gösterir:
 
 ```json
 "resources": [
@@ -148,30 +147,30 @@ Bu örnek belirtilen sayıda VM'ler oluşturmak için bir şablon tipik kaynak b
 ``` 
 
 > [!NOTE] 
->Bu örnek, daha önce oluşturulmuş bir depolama hesabı kullanır. Şablonu dağıtarak, depolama hesabı oluşturabilirsiniz. Bu örnek ayrıca bir ağ arabirimi ve şablonda tanımlanan bağımlı kaynaklarını kullanır. Bu kaynaklar, örnekte gösterilmez.
+>Bu örnek, daha önce oluşturulmuş bir depolama hesabını kullanır. Şablondan dağıtarak depolama hesabı oluşturabilirsiniz. Örnek ayrıca, şablonda tanımlanacak bir ağ arabirimine ve bağımlı kaynaklarına bağımlıdır. Bu kaynaklar örnekte gösterilmez.
 >
 >
 
-## <a name="api-version"></a>API Sürümü
+## <a name="api-version"></a>API sürümü
 
-Şablon kullanarak kaynakları dağıtırken, kullanılacak API sürümünü belirtmeniz gerekir. Örneğin, bu apiVersion öğesini kullanarak sanal makine kaynağı gösterir:
+Kaynakları bir şablon kullanarak dağıttığınızda, API 'nin kullanmak için bir sürümünü belirtmeniz gerekir. Örnekte bu apiVersion öğesi kullanılarak sanal makine kaynağı gösterilmektedir:
 
 ```
 "apiVersion": "2016-04-30-preview",
 ```
 
-Şablonunuzda belirttiğiniz API sürümü, şablonda tanımladığınız hangi özellikleri etkiler. Genel olarak, şablon oluştururken en güncel API sürümünü seçmelisiniz. Var olan şablonları için önceki bir API sürümü kullanmaya devam etmek istiyor veya şablonunuzu yeni özelliklerden yararlanmak için en son sürümü için güncelleştirme olup olmadığını karar verebilirsiniz.
+Şablonunuzda belirttiğiniz API sürümü şablonda tanımlayabileceğiniz özellikleri etkiler. Genel olarak, şablon oluştururken en son API sürümünü seçmeniz gerekir. Mevcut şablonlar için, önceki bir API sürümünü kullanmaya devam etmek istediğinize karar verebilir veya yeni özelliklerden yararlanmak için şablonunuzu en son sürüm için güncelleştirebilirsiniz.
 
-En son API sürümlerini almak için bu fırsatlar kullanın:
+En son API sürümlerini almak için bu fırsatları kullanın:
 
-- REST API - [tüm kaynak sağlayıcıları Listele](https://docs.microsoft.com/rest/api/resources/providers)
-- PowerShell - [Get-AzResourceProvider](https://docs.microsoft.com/powershell/module/az.resources/get-azresourceprovider)
-- Azure CLI - [az provider show](https://docs.microsoft.com/cli/azure/provider)
+- REST API- [tüm kaynak sağlayıcılarını listeleme](https://docs.microsoft.com/rest/api/resources/providers)
+- PowerShell- [Get-AzResourceProvider](https://docs.microsoft.com/powershell/module/az.resources/get-azresourceprovider)
+- Azure CLı- [az Provider Show](https://docs.microsoft.com/cli/azure/provider)
 
 
 ## <a name="parameters-and-variables"></a>Parametreler ve değişkenler
 
-[Parametreleri](../../resource-group-authoring-templates.md) çalıştırdığınızda şablon değerlerini belirtmek kolaylaştırır. Bu parametreler bölümü örnekte kullanılır:
+[Parametreler](../../resource-group-authoring-templates.md) , çalıştırdığınızda şablon için değer belirtmenizi kolaylaştırır. Bu parametreler bölümü örnekte kullanılır:
 
 ```        
 "parameters": {
@@ -181,9 +180,9 @@ En son API sürümlerini almak için bu fırsatlar kullanın:
 },
 ```
 
-Örnek şablonu dağıtırken, değerleri adı ve parola yönetici hesabı oluşturmak için her sanal makine ve sanal makinelerin sayısını girin. Şablonla yönetilen ayrı bir dosyada parametre değerleri belirtme veya sorulduğunda değerleri sağlayarak seçeneğiniz vardır.
+Örnek şablonu dağıttığınızda, her VM 'de yönetici hesabının adı ve parolası ve oluşturulacak sanal makine sayısı için değerler girersiniz. Parametre değerlerini şablonla yönetilen ayrı bir dosyada belirtme veya istendiğinde değer sağlama seçeneğiniz vardır.
 
-[Değişkenleri](../../resource-group-authoring-templates.md) şablonunda kullanılan sürekli olarak bunu veya zamanla değiştirebilirsiniz değerlerini ayarlamak kolaylaştırır. Bu değişkenler bölümü örnekte kullanılır:
+[Değişkenler](../../resource-group-authoring-templates.md) , şablonda sürekli olarak kullanılan veya zaman içinde değiştirebileceğiniz değerleri ayarlamanıza olanak kolaylaştırır. Bu değişkenler bölümü örnekte kullanılır:
 
 ```
 "variables": { 
@@ -216,11 +215,11 @@ En son API sürümlerini almak için bu fırsatlar kullanın:
 }, 
 ```
 
-Örnek şablonu dağıtırken, değişken değerler adı ve önceden oluşturduğunuz depolama hesabının tanımlayıcısı için kullanılır. Değişkenleri de tanılama uzantısı ayarlarını belirtmek için kullanılır. Kullanım [Azure Resource Manager şablonları oluşturmaya yönelik en iyi uygulamalar](../../resource-manager-template-best-practices.md) nasıl parametreler ve değişkenler şablonunuzdaki yapısı istediğinize karar verirken size yardımcı olmak için.
+Örnek şablonu dağıttığınızda, değişken değerleri daha önce oluşturulan depolama hesabının adı ve tanımlayıcısı için kullanılır. Değişkenler, tanılama uzantısının ayarlarını sağlamak için de kullanılır. Şablonunuzda parametreleri ve değişkenleri nasıl yapılandırmak istediğinize karar vermenize yardımcı olmak üzere [Azure Resource Manager şablonları oluşturmak için en iyi uygulamaları](../../resource-manager-template-best-practices.md) kullanın.
 
-## <a name="resource-loops"></a>Kaynak döngüler
+## <a name="resource-loops"></a>Kaynak döngüleri
 
-Uygulamanız için birden fazla sanal makine gerektiğinde, copy öğesinde bir şablon kullanabilirsiniz. Bu isteğe bağlı öğe, bir parametre olarak belirtilen VM sayısını oluşturma işleminde döngüsü:
+Uygulamanız için birden fazla sanal makineye ihtiyacınız olduğunda, bir şablon içinde bir kopyalama öğesi kullanabilirsiniz. Bu isteğe bağlı öğe, bir parametre olarak belirttiğiniz VM sayısını oluşturma döngülerine sahiptir:
 
 ```
 "copy": {
@@ -229,7 +228,7 @@ Uygulamanız için birden fazla sanal makine gerektiğinde, copy öğesinde bir 
 },
 ```
 
-Ayrıca, örnekte dikkat edin. döngü dizini belirtirken bazı kaynak için değerler kullanılır. Örneğin, üç örnek sayısı girdiyseniz, işletim sistemi diskleri adlarını myOSDisk1 myOSDisk2 ve myOSDisk3 şunlardır:
+Ayrıca, örneğin, kaynak için bazı değerleri belirtirken döngü dizininin kullanıldığını unutmayın. Örneğin, üç örnek sayısı girdiyseniz, işletim sistemi disklerinin adları myOSDisk1, myOSDisk2 ve myOSDisk3 ' dir:
 
 ```
 "osDisk": { 
@@ -240,11 +239,11 @@ Ayrıca, örnekte dikkat edin. döngü dizini belirtirken bazı kaynak için de�
 ```
 
 > [!NOTE] 
->Bu örnek sanal makineler için yönetilen diskler kullanır.
+>Bu örnek, sanal makineler için yönetilen diskleri kullanır.
 >
 >
 
-Bu şablonda bir kaynak için bir döngü oluşturma oluştururken ya da diğer kaynaklara erişim döngü kullanmanızı gerektirebilir göz önünde bulundurun. Örneğin, üç VM oluşturma işleminde, şablonunuzu döngü, aynı zamanda üç ağ arabirimlerini oluşturma işleminde döngü gerekir böylece birden çok sanal makine aynı ağ arabirimini kullanamazsınız. Bir VM'ye ağ arabirimi atamasını yaparken, döngü dizini tanımlamak için kullanılır:
+Şablondaki bir kaynak için bir döngü oluşturmanın, diğer kaynakları oluştururken veya erişirken döngüyü kullanmanızı gerektirebilir. Örneğin, birden çok VM aynı ağ arabirimini kullanamaz. bu nedenle, şablonunuz üç VM oluşturma yoluyla döngüleriniz, üç ağ arabirimi oluşturma aracılığıyla da döngüye alınmalıdır. Bir sanal makineye bir ağ arabirimi atarken, bu işlemi tanımlamak için döngü dizini kullanılır:
 
 ```
 "networkInterfaces": [ { 
@@ -253,9 +252,9 @@ Bu şablonda bir kaynak için bir döngü oluşturma oluştururken ya da diğer 
 } ]
 ```
 
-## <a name="dependencies"></a>Bağımlılıkları
+## <a name="dependencies"></a>Bağımlılıklar
 
-En fazla kaynak düzgün çalışması için diğer kaynaklara bağımlı. Sanal makineler, bir ağ arabirimi gerekiyor yapmak için bir sanal ağ ile ilişkili olmalıdır. [DependsOn](../../resource-group-define-dependencies.md) öğesi, ağ arabiriminin VM oluşturmadan önce kullanıma hazır olduğundan emin olmak için kullanılır:
+Kaynakların çoğu, doğru şekilde çalışmak için diğer kaynaklara bağımlıdır. Sanal makinelerin bir sanal ağla ilişkilendirilmesi ve bir ağ arabirimine ihtiyacı olması gerekir. [Bağımlıdson](../../resource-group-define-dependencies.md) öğesi, ağ arabiriminin VM 'ler oluşturulmadan önce kullanılabilir olduğundan emin olmak için kullanılır:
 
 ```
 "dependsOn": [
@@ -263,9 +262,9 @@ En fazla kaynak düzgün çalışması için diğer kaynaklara bağımlı. Sanal
 ],
 ```
 
-Resource Manager dağıtılan başka bir kaynağa bağımlı olmayan tüm kaynakları paralel olarak dağıtır. Yanlışlıkla gereksiz bağımlılıkları belirterek dağıtımınızı yavaşlatabileceği için bağımlılıklar ayarlarken dikkatli olun. Bağımlılıklar, birden çok kaynaklarında zincirleyebilirsiniz. Örneğin, ağ arabirimi genel IP adresi ve sanal ağ kaynaklarına bağlıdır.
+Kaynak Yöneticisi, dağıtılmakta olan başka bir kaynağa bağımlı olmayan herhangi bir kaynak paralel olarak dağıtılır. Gereksiz bağımlılıkları belirterek dağıtımınızı yanlışlıkla yavaşlatabileceğinden, bağımlılıkları ayarlarken dikkatli olun. Bağımlılıklar birden çok kaynak arasında zincir oluşturabilir. Örneğin, ağ arabirimi genel IP adresine ve sanal ağ kaynaklarına bağlıdır.
 
-Nasıl bir bağımlılık gerekli olup olmadığını bilebilirsiniz? Şablonda ayarlanan değerlerle bakın. Bir öğe varsa sanal makine kaynak tanımı noktaları aynı şablonda dağıtılan başka bir kaynak için bir bağımlılık gerekir. Örneğin, örnek sanal makine bir ağ profili tanımlar:
+Bağımlılığın gerekli olup olmadığını nasıl anlarsınız? Şablonda ayarladığınız değerlere bakın. Sanal makine kaynak tanımındaki bir öğe aynı şablonda dağıtılan başka bir kaynağı gösteriyorsa, bir bağımlılığa ihtiyacınız vardır. Örneğin, örnek sanal makineniz bir ağ profili tanımlar:
 
 ```
 "networkProfile": { 
@@ -276,25 +275,25 @@ Nasıl bir bağımlılık gerekli olup olmadığını bilebilirsiniz? Şablonda 
 },
 ```
 
-Bu özelliği ayarlamak için ağ arabirimi mevcut olması gerekir. Bu nedenle, bir bağımlılık gerekir. Ayrıca başka bir kaynak (üst) içinde bir kaynak (alt) tanımlandığında, bir bağımlılık ayarlamanız gerekir. Örneğin, tanılama ayarları ve özel betik uzantıları hem de sanal makine alt kaynakları tanımlanır. Sanal makinenin var kadar bunlar oluşturulamaz. Bu nedenle, her iki kaynaklar sanal makineye bağlı olarak işaretlenir.
+Bu özelliği ayarlamak için, ağ arabiriminin mevcut olması gerekir. Bu nedenle, bir bağımlılığa ihtiyacınız vardır. Ayrıca, bir kaynak (alt öğe) başka bir kaynak (üst öğe) içinde tanımlandığında bir bağımlılık ayarlamanız gerekir. Örneğin, Tanılama ayarları ve özel Betik uzantıları, sanal makinenin alt kaynakları olarak tanımlanır. Sanal makine mevcut olana kadar oluşturuamazlar. Bu nedenle, her iki kaynak de sanal makineye bağımlı olarak işaretlenir.
 
 ## <a name="profiles"></a>Profiller
 
-Birkaç profil öğeleri, bir sanal makine kaynağı tanımlarken kullanılır. Bazı gerekli ve isteğe bağlı bazılarıdır. Örneğin, hardwareProfile, osProfile Datadisks ve networkProfile öğeleri gereklidir, ancak diagnosticsProfile isteğe bağlıdır. Bu profiller ayarları gibi tanımlayın:
+Bir sanal makine kaynağı tanımlarken çeşitli profil öğeleri kullanılır. Bazıları gereklidir ve bazıları isteğe bağlıdır. Örneğin, hardwareProfile, osProfile, storageProfile ve networkProfile öğeleri gereklidir, ancak diagnosticsProfile isteğe bağlıdır. Bu profiller gibi ayarları tanımlar:
    
-- [Boyutu](sizes.md)
-- [adı](/azure/architecture/best-practices/naming-conventions) ve kimlik bilgileri
+- [boyutla](sizes.md)
+- [ad](/azure/architecture/best-practices/resource-naming) ve kimlik bilgileri
 - disk ve [işletim sistemi ayarları](cli-ps-findimage.md)
 - [Ağ arabirimi](../../virtual-network/virtual-network-deploy-multinic-classic-ps.md) 
-- Önyükleme tanılaması
+- önyükleme tanılaması
 
-## <a name="disks-and-images"></a>Diskleri ve görüntüleri
+## <a name="disks-and-images"></a>Diskler ve görüntüler
    
-Azure'da, vhd dosyalarını temsil edebilen [disk veya görüntü](managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). Belirli bir VM'ye olması için işletim sistemi vhd dosyasındaki özel olduğunda, bir disk olarak adlandırılır. Çok sayıda VM oluşturmak için kullanılacak genelleştirilmiş bir vhd dosyasındaki işletim sistemi, bunu bir görüntü olarak adlandırılır.   
+Azure 'da, VHD dosyaları [diskleri veya görüntüleri](managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)temsil edebilir. Bir VHD dosyasındaki işletim sistemi belirli bir sanal makine olmak üzere özelleştirildiğinde, disk olarak adlandırılır. Bir VHD dosyasındaki işletim sistemi çok sayıda VM oluşturmak için genelleştirildiğinde, görüntü olarak adlandırılır.   
     
-### <a name="create-new-virtual-machines-and-new-disks-from-a-platform-image"></a>Yeni sanal makineler ve yeni diskler bir platform görüntüsünden oluşturma
+### <a name="create-new-virtual-machines-and-new-disks-from-a-platform-image"></a>Yeni sanal makineler ve bir platform görüntüsünden yeni diskler oluşturma
 
-Bir VM oluşturduğunuzda, hangi işletim sistemi kullanmaya karar vermeniz gerekir. Imagereference öğesi, yeni bir sanal makine işletim sistemini tanımlamak için kullanılır. Örnek, bir Windows Server işletim sistemi için bir tanımı göstermektedir:
+Bir VM oluşturduğunuzda, hangi işletim sisteminin kullanılması gerektiğine karar vermelisiniz. ImageReference öğesi, yeni bir sanal makinenin işletim sistemini tanımlamak için kullanılır. Örnek, bir Windows Server işletim sistemi için bir tanım gösterir:
 
 ```
 "imageReference": { 
@@ -305,7 +304,7 @@ Bir VM oluşturduğunuzda, hangi işletim sistemi kullanmaya karar vermeniz gere
 },
 ```
 
-Bir Linux işletim sistemi oluşturmak istiyorsanız, bu tanımı kullanabilirsiniz:
+Bir Linux işletim sistemi oluşturmak istiyorsanız bu tanımı kullanabilirsiniz:
 
 ```
 "imageReference": {
@@ -316,7 +315,7 @@ Bir Linux işletim sistemi oluşturmak istiyorsanız, bu tanımı kullanabilirsi
 },
 ```
 
-İşletim sistemi diski için yapılandırma ayarlarını osDisk öğeyle atanır. Önbelleğe alma modu ayarlandığında yeni bir yönetilen disk örnek tanımlar **ReadWrite** ve disk alanından oluşturulmakta olan bir [platform görüntüsü](cli-ps-findimage.md):
+İşletim sistemi diski için yapılandırma ayarları osDisk öğesiyle atanır. Örnek, önbelleğe alma modu, **ReadWrite** olarak ayarlanan ve diskin bir [Platform görüntüsünden](cli-ps-findimage.md)oluşturulduğu yeni bir yönetilen disk tanımlar:
 
 ```
 "osDisk": { 
@@ -326,9 +325,9 @@ Bir Linux işletim sistemi oluşturmak istiyorsanız, bu tanımı kullanabilirsi
 },
 ```
 
-### <a name="create-new-virtual-machines-from-existing-managed-disks"></a>Mevcut yönetilen diskleri yeni sanal makineler oluşturun
+### <a name="create-new-virtual-machines-from-existing-managed-disks"></a>Mevcut yönetilen disklerden yeni sanal makineler oluşturma
 
-Var olan disklerden sanal makineleri oluşturmak istiyorsanız, Imagereference ve osProfile öğeleri kaldırın ve bu disk ayarlarını tanımlayın:
+Mevcut disklerden sanal makineler oluşturmak istiyorsanız, ImageReference ve osProfile öğelerini kaldırın ve şu disk ayarlarını tanımlayın:
 
 ```
 "osDisk": { 
@@ -341,9 +340,9 @@ Var olan disklerden sanal makineleri oluşturmak istiyorsanız, Imagereference v
 },
 ```
 
-### <a name="create-new-virtual-machines-from-a-managed-image"></a>Yönetilen bir görüntüden yeni sanal makineler oluşturma
+### <a name="create-new-virtual-machines-from-a-managed-image"></a>Yönetilen görüntüden yeni sanal makineler oluşturma
 
-Yönetilen bir görüntüden sanal makine oluşturmak istiyorsanız, Imagereference öğeyi değiştirmek ve bu disk ayarlarını tanımlayın:
+Yönetilen görüntüden bir sanal makine oluşturmak istiyorsanız, ImageReference öğesini değiştirin ve bu disk ayarlarını tanımlayın:
 
 ```
 "storageProfile": { 
@@ -359,9 +358,9 @@ Yönetilen bir görüntüden sanal makine oluşturmak istiyorsanız, Imagerefere
 },
 ```
 
-### <a name="attach-data-disks"></a>Veri diski ekleme
+### <a name="attach-data-disks"></a>Veri disklerini iliştirme
 
-İsteğe bağlı olarak, Vm'lere veri diskleri ekleyebilirsiniz. [Diskleri sayısı](sizes.md) kullandığınız işletim sistemi disk boyutuna bağlıdır. Standard_DS1_v2'için ayarlanmış Vm'leri ile kendisine eklenemedi veri diskleri sayısı iki boyutudur. Örnekte, her VM için bir yönetilen veri diski eklenirse:
+İsteğe bağlı olarak VM 'lere veri diskleri ekleyebilirsiniz. [Disk sayısı](sizes.md) , kullandığınız işletim sistemi diskinin boyutuna bağlıdır. VM 'lerin boyutu Standard_DS1_v2 olarak ayarlandığında, bunlara eklenebilecek en fazla veri diski sayısı ikdir. Örnekte, her VM 'ye bir yönetilen veri diski ekleniyor:
 
 ```
 "dataDisks": [
@@ -377,7 +376,7 @@ Yönetilen bir görüntüden sanal makine oluşturmak istiyorsanız, Imagerefere
 
 ## <a name="extensions"></a>Uzantılar
 
-Ancak [uzantıları](extensions-features.md) ayrı bir kaynak, Vm'lere yakından bağlı değilsiniz. Uzantılar alt kaynak sanal makinenin veya ayrı bir kaynak olarak eklenebilir. Örnekte gösterildiği [tanılama uzantısını](extensions-diagnostics-template.md) Vm'lere eklenen:
+[Uzantılar](extensions-features.md) ayrı bir kaynak olmakla birlikte, sanal makinelere yakın bir şekilde bağlanır. Uzantılar, VM 'nin alt kaynağı veya ayrı bir kaynak olarak eklenebilir. Örnek, VM 'lere eklenen [Tanılama uzantısını](extensions-diagnostics-template.md) gösterir:
 
 ```
 { 
@@ -410,9 +409,9 @@ Ancak [uzantıları](extensions-features.md) ayrı bir kaynak, Vm'lere yakından
 },
 ```
 
-Bu uzantı kaynak storageName değişkeni ve tanılama değişkenlerin değerlerini sağlamak için kullanır. Bu uzantı tarafından toplanan verileri değiştirmek istiyorsanız, daha fazla performans sayaçları wadperfcounters değişkene ekleyebilirsiniz. VM diskleri depolandığı değerinden farklı bir depolama hesabına tanılama verilerini yerleştirmek seçebilirsiniz.
+Bu uzantı kaynağı, değer sağlamak için storageName değişkenini ve tanılama değişkenlerini kullanır. Bu uzantı tarafından toplanan verileri değiştirmek istiyorsanız, wadperfcounters değişkenine daha fazla performans sayacı ekleyebilirsiniz. Ayrıca, tanılama verilerini VM disklerinin depolandığı yerden farklı bir depolama hesabına koymaya de seçim yapabilirsiniz.
 
-Bir VM'ye yükleyebilirsiniz birçok uzantılar vardır, ancak büyük olasılıkla en kullanışlı olduğu [özel betik uzantısı](extensions-customscript.md). İlk kez başlatıldığında örnekte, her sanal makinede start.ps1 adlı bir PowerShell komut dosyasını çalıştırır:
+Bir VM 'ye yükleyebileceğiniz birçok uzantı vardır, ancak en iyi yöntem büyük olasılıkla [Özel Betik uzantısıdır](extensions-customscript.md). Örnekte, Start. ps1 adlı bir PowerShell betiği, ilk başladığında her bir VM üzerinde çalışır:
 
 ```
 {
@@ -439,27 +438,27 @@ Bir VM'ye yükleyebilirsiniz birçok uzantılar vardır, ancak büyük olasılı
 }
 ```
 
-Start.ps1 betiği çok sayıda yapılandırma görevleri gerçekleştirebilirsiniz. Örneğin, örnekte vm'lere eklenen veri disklerini başlatılmış değil; özel bir betik, bunları başlatmak için kullanabilirsiniz. Birden çok başlangıç görevleri yapmak için varsa, Azure depolama alanında başka PowerShell betikleri çağrılacak start.ps1 dosyası kullanabilirsiniz. Bu örnek PowerShell kullanır ancak kullanmakta olduğunuz işletim sisteminde kullanılabilir olan herhangi bir komut dosyası yöntemi kullanabilirsiniz.
+Start. ps1 betiği birçok yapılandırma görevini gerçekleştirebilir. Örneğin, örnekteki sanal makinelere eklenen veri diskleri başlatılmaz; bunları başlatmak için özel bir komut dosyası kullanabilirsiniz. Yapılacak birden çok başlangıç göreviniz varsa, Azure Storage 'daki diğer PowerShell betiklerini çağırmak için Start. ps1 dosyasını kullanabilirsiniz. Örnek PowerShell kullanır, ancak kullanmakta olduğunuz işletim sisteminde bulunan herhangi bir betik yöntemini kullanabilirsiniz.
 
-Yüklü uzantılar portalında uzantılarının ayarlarından durumunu görebilirsiniz:
+Yüklü uzantıların durumunu portalda uzantılar ayarlarından görebilirsiniz:
 
-![Uzantı durumu alma](./media/template-description/virtual-machines-show-extensions.png)
+![Uzantı durumunu al](./media/template-description/virtual-machines-show-extensions.png)
 
-Uzantı bilgileri kullanarak da alabilirsiniz **Get-AzVMExtension** PowerShell komutunu **vm uzantısı get** Azure CLI komutunu veya **uzantısı bilgialma**REST API.
+Ayrıca, **Get-Azvmexgerpowershell** komutunu, **VM Uzantısı** Azure CLI 'yı Al komutunu veya REST API **uzantısını al bilgilerini** kullanarak uzantı bilgileri alabilirsiniz.
 
 ## <a name="deployments"></a>Dağıtımlar
 
-Şablon dağıtımı yaptığınızda Azure kaynakları bir grup olarak dağıtılan ve otomatik olarak dağıtılan bu grup için bir ad atar izler. Dağıtım adı şablon adı ile aynıdır.
+Bir şablon dağıttığınızda, Azure bir grup olarak dağıttığınız kaynakları izler ve bu dağıtılan gruba otomatik olarak bir ad atar. Dağıtımın adı, şablonun adı ile aynıdır.
 
-Kaynakların dağıtım durumu hakkında merak ediyorsanız, Azure portalında kaynak grubunu görüntüleyin:
+Dağıtımdaki kaynakların durumunu merak ediyorsanız, Azure portal kaynak grubunu görüntüleyin:
 
-![Dağıtım bilgileri Al](./media/template-description/virtual-machines-deployment-info.png)
+![Dağıtım bilgilerini al](./media/template-description/virtual-machines-deployment-info.png)
     
-Bu kaynakları oluşturmak veya var olan kaynakları güncelleştirme için aynı şablonu kullanmak için bir sorun değildir. Şablon dağıtımı komutlarını kullanırken, hangi söylemek fırsatına sahip [modu](../../resource-group-template-deploy.md) kullanmak istiyorsunuz. Modu olarak ayarlanabilir **tam** veya **artımlı**. Artımlı güncelleştirmeler yapmak için varsayılandır. Kullanırken dikkatli olun **tam** modu nedeniyle yanlışlıkla kaynakları da silebilirsiniz. Modu ayarlandığında **tam**, Resource Manager şablon olmayan kaynak grubundaki tüm kaynakları siler.
+Kaynak oluşturmak veya mevcut kaynakları güncelleştirmek için aynı şablonu kullanma sorunu değildir. Şablonları dağıtmak için komutlar kullandığınızda, hangi [modu](../../resource-group-template-deploy.md) kullanmak istediğinizi söylemeniz gerekir. Mod **tamamen** veya **artımlı**olarak ayarlanabilir. Varsayılan değer artımlı güncelleştirmeler gerçekleştirmemesidir. Kaynakları yanlışlıkla silebileceğinden, **Tüm** modunu kullanırken dikkatli olun. Modu, **tamamlanacak**şekilde ayarladığınızda, Kaynak Yöneticisi şablonda olmayan kaynak grubundaki tüm kaynakları siler.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-- Kendi şablonunu kullanarak oluşturduğunuz [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md).
-- Kullanılarak oluşturulan şablonu dağıtma [Resource Manager şablonu ile Windows sanal makine oluşturma](ps-template.md).
-- Geçirerek, oluşturduğunuz sanal makineleri yönetmeyi öğrenin [oluşturun ve Azure PowerShell modülü ile Windows Vm'leri yönetme](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
-- JSON söz dizimi ve özelliklerini şablonlarında kaynak türleri için bkz [Azure Resource Manager şablon başvurusu](/azure/templates/).
+- [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md)kullanarak kendi şablonunuzu oluşturun.
+- Bir [Kaynak Yöneticisi şablonuyla Windows sanal makinesi oluşturma](ps-template.md)kullanarak oluşturduğunuz şablonu dağıtın.
+- [Azure PowerShell modülü Ile Windows VM 'Leri oluşturma ve yönetme](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)konusunu Inceleyerek oluşturduğunuz VM 'leri yönetmeyi öğrenin.
+- Şablonlarda kaynak türlerinin JSON sözdizimi ve özellikleri için bkz. [Azure Resource Manager şablonu başvurusu](/azure/templates/).

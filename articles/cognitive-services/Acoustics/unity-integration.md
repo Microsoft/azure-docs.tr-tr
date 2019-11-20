@@ -1,69 +1,73 @@
 ---
-title: Akustik Unity tümleştirme ve dağıtım projesi
+title: Project Acoustics Unity tümleştirmesi ve dağıtımı
 titlesuffix: Azure Cognitive Services
-description: Bu nasıl yapılır Unity projeniz, proje akustik Unity eklentinin tümleştirmeye açıklar.
+description: Bu makalede, Project Acoustics Unity eklentisinin Unity projenize nasıl tümleştirileceği açıklanır.
 services: cognitive-services
-author: kegodin
+author: NoelCross
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: acoustics
-ms.topic: how-to
+ms.topic: conceptual
 ms.date: 03/20/2019
-ms.author: kegodin
-ms.openlocfilehash: 8605fe2ea86f875b5c5fd8ea451a287442dcd51b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: noelc
+ROBOTS: NOINDEX
+ms.openlocfilehash: a8ddb0e4ca2ee4396a25a70c8b60b653aebb72d8
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64922500"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72243006"
 ---
-# <a name="project-acoustics-unity-integration"></a>Project akustik Unity tümleştirmesi
-Bu nasıl yapılır Unity projeniz, proje akustik Unity eklentinin tümleştirmeye açıklar.
+# <a name="project-acoustics-unity-integration"></a>Project Acoustics Unity tümleştirmesi
+Bu makalede, Project Acoustics Unity eklentisinin Unity projenize nasıl tümleştirileceği açıklanır.
 
 Yazılım gereksinimleri:
-* [Unity 2018.2 +](https://unity3d.com) Windows için
-* [Proje akustik Unity paketini](https://www.microsoft.com/download/details.aspx?id=57346)
+* Windows için [Unity 2018.2 +](https://unity3d.com)
+* [Project Acoustics Unity paketi](https://www.microsoft.com/download/details.aspx?id=57346)
 
-## <a name="import-the-plugin"></a>Eklenti Al
-Akustik UnityPackage projenize içeri aktarın. 
-* Unity içinde Git **varlıklar > paketi İçeri Aktar > özel paket...**
+## <a name="import-the-plug-in"></a>Eklentiyi içeri aktarma
+1. Acoustics UnityPackage 'ı projenize aktarın. 
+ Unity 'de **varlıklar**' a  > **paketi içeri aktar** > **özel paket**' e gidin.
 
-    ![Unity içeri aktarma paketini ekran menü](media/import-package.png)  
+    ![Unity Içeri aktarma paketi menüsü](media/import-package.png)  
 
-* Seçin **ProjectAcoustics.unitypackage**
+1. **Projectacoustik. unitypackage**' ı seçin.
 
-Varolan bir projeye eklentisini içe aktarıyorsanız, projenize zaten olabilir bir **mcs.rsp** dosyasında proje kök dizinini, C# derleyici seçenekleri belirtir. Proje akustik eklentisi ile birlikte gelen mcs.rsp dosyayı bu dosyayla içeriğini birleştirmek gerekir.
+1. Unity paketini projenize bütünleştirmek için **Içeri aktar** düğmesini seçin.
 
-## <a name="enable-the-plugin"></a>Eklentisini etkinleştirme
-Akustik Araç Seti hazırlama kısmı .NET 4.x komut dosyası çalışma zamanı sürümünü gerektirir. Paketi içeri aktarma, Unity oynatıcı ayarlarını güncelleştirir. Etkili olması için bu ayar için Unity yeniden başlatın.
+    ![Unity Içeri aktarma paketi iletişim kutusu](media/import-dialog.png)  
 
-![Unity Player ayarları ekran paneli](media/player-settings.png)
+Eklentiyi mevcut bir projeye içeri aktarıyorsanız, projeniz proje kökünde bir *MCS. rsp* dosyasına sahip olabilir. Bu dosya C# derleyicinin seçeneklerini belirtir. Bu dosyanın içeriğini Project Acoustics eklentisiyle birlikte gelen MCS. rsp dosyası ile birleştirin.
 
-![.NET 4. 5'in seçili paneliyle Unity Player ayarları ekran görüntüsü](media/net45.png)
+## <a name="enable-the-plug-in"></a>Eklentiyi etkinleştirin
+Acoustics araç setinin hazırlama kısmı .NET 4 gerektirir. *x* Scripting Runtime sürümü. Paket içeri aktarma Unity oynatıcı ayarlarınızı güncelleştirir. Bu ayarın etkili olması için Unity 'yi yeniden başlatın.
 
-## <a name="set-up-audio-dsp"></a>Ses DSP ayarlayın
-Proje akustik ses çalışma zamanı Unity Ses altyapısı spatializer altyapısına tümleştirilen DSP içerir. Bu, hem HRTF tabanlı ve kaydırma spatialization içerir. Unity ses ayarlarını kullanarak proje akustik DSP etkinleştirmek **Düzenle > Proje Ayarları > Ses**, ardından seçerek **proje akustik** olarak **Spatializereklentisi** projeniz için. Emin **DSP arabellek boyutu** en iyi performans için ayarlanmıştır.
+![Unity oynatıcı ayarları paneli](media/player-settings.png)
 
-![Unity proje ayarları ekran paneli](media/project-settings.png)  
+![.NET 4,5 ile Unity oynatıcı ayarları paneli seçili](media/net45.png)
 
-![Seçilen proje akustik spatializer ile Unity Spatializer ekran ayarlar paneli](media/choose-spatializer.png)
+## <a name="set-up-audio-dsp"></a>Ses DSP 'si ayarlama
+Project Acoustics, Unity Audio Engine spatializer çerçevesi ile tümleşen ses çalışma zamanı DSP 'sini içerir. Hem HRTF tabanlı hem de birlikte bulunan istenmeyen kullanım özelliğini içerir. Proje Acoustics DSP 'sini etkinleştirmek için, Unity ses ayarlarını açmak üzere  > **Proje ayarlarını** **Düzenle** > **Ses** seçeneğine gidin. Projeniz için **Spatializer eklentisi** olarak **Project Acoustics** ' ı seçin. **DSP arabellek boyutunun** *en iyi performansa*ayarlandığından emin olun.
 
-Ses Mixer'ı açın (**penceresi > ses Mixer**). Bir grup ile en az bir Mixer olduğundan emin olun. Sağındaki '+' düğmesine tıklarsanız yoksa **Karıştırıcılar**. Kanal Şerit etkileri bölümünde alt sağ tıklayın ve Ekle **proje akustik Mixer** efekt. Bir kerede yalnızca bir proje akustik Mixer desteklenip desteklenmediğini unutmayın.
+![Unity proje ayarları menüsü](media/project-settings.png)  
 
-![Ekran görüntüsü, Unity ses karıştırıcı proje akustik barındırma Mixer](media/audio-mixer.png)
+![Project Acoustics spatializer seçiliyken Unity Spatializer ayarları paneli](media/choose-spatializer.png)
 
-## <a name="enable-acoustics-on-sound-sources"></a>Ses kaynaklarında akustik etkinleştir
-Bir ses kaynağı oluşturun. Bildiren AudioSource'nın denetçisi panelinin altındaki onay kutusuna tıklayın **Spatialize**. Emin **uzamsal Blend** tam 3B'ye ayarlanır.  
+Ardından, ses karıştırıcı (**pencere** > **Ses karıştırıcı**) öğesini açın. Tek bir grup ile en az bir karıştırıcıya sahip olduğunuzdan emin olun. Bir tane yoksa, **karıştırıcılar**' nin sağındaki **+** düğmesini seçin. Etkiler bölümünde kanal şeridinin altına sağ tıklayın ve **Microsoft Acoustics karıştırıcı** efektini ekleyin. Tek seferde yalnızca bir Project Acoustics Mixer desteklenir.
 
-![Unity ses kaynağı ekran paneli](media/audio-source.png)
+![Project Acoustics Mixer 'i barındıran Unity ses karıştırıcı](media/audio-mixer.png)
 
-## <a name="enable-acoustic-design"></a>Akustik tasarım etkinleştir
-Betik ekleme **AcousticsAdjust** ses kaynağına tıklayarak ek kaynak tasarım parametreleri etkinleştirmek için sahnedeki **Bileşen Ekle** seçip **betikleri > akustik Ayarla** :
+## <a name="enable-acoustics-on-sound-sources"></a>Acoustics 'i ses kaynaklarında etkinleştir
+Ses kaynağı oluşturma: AudioSource Inspector panelinin altındaki **maça** onay kutusunu seçin. **Uzamsal Blend** 'In tam *3B*olarak ayarlandığından emin olun.  
 
-![Unity AcousticsAdjust ekran komut dosyası](media/acoustics-adjust.png)
+![Unity ses kaynağı paneli](media/audio-source.png)
+
+## <a name="enable-acoustic-design"></a>Akustik tasarımı etkinleştir
+Ek kaynak Tasarım parametrelerini etkinleştirmek için sahnedeki bir ses kaynağına *AcousticsAdjust* betiğini ekleyin: **Bileşen Ekle** ' yi seçin ve **betikler** > **Acoustics ayarla ' yı**seçin.
+
+![Unity AcousticsAdjust betiği](media/acoustics-adjust.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Sahneniz için Unity proje akustik ile hazırlama](unity-baking.md)
-* [Azure Batch hesabı oluşturma](create-azure-account.md) buluttaki sahneniz hazırlama için
-* Keşfedin [akustik Unity proje tasarım işlemi](unity-workflow.md).
-
+* [Unity Için Project Acoustics ile sahne bakın](unity-baking.md).
+* [Bir Azure Batch hesabı oluşturarak](create-azure-account.md) , sahneye buluta bakın.
+* [Project Acoustics Unity tasarım sürecini](unity-workflow.md)gezin.

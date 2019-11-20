@@ -1,30 +1,29 @@
 ---
-title: "\"Yüksek kullanılabilirliği\" bir SAP sistemiyle elde etmek üzere Azure altyapı VM yeniden yazılımınız | Microsoft Docs"
-description: "\"Yüksek kullanılabilirlik\" SAP uygulama elde etmek üzere Azure altyapı VM yeniden kullanma"
+title: SAP sisteminin "daha yüksek kullanılabilirlik" düzeyine ulaşmak için Azure altyapı VM yeniden başlatma işlemini kullanma | Microsoft Docs
+description: SAP uygulamalarının "daha yüksek kullanılabilirlik" düzeyine ulaşmak için Azure altyapı VM yeniden başlatması kullanın
 services: virtual-machines-windows,virtual-network,storage
 documentationcenter: saponazure
 author: goraco
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.assetid: f0b2f8f0-e798-4176-8217-017afe147917
 ms.service: virtual-machines-windows
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 05/05/2017
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: cda0b1c0774ed33bf550e0edf329cc22a2807be3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 64db278807b40f8b142513ac06247e916be74f4b
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60825683"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70078036"
 ---
-# <a name="utilize-azure-infrastructure-vm-restart-to-achieve-higher-availability-of-an-sap-system"></a>"Yüksek kullanılabilirliği" bir SAP sistemiyle elde etmek üzere Azure altyapı VM yeniden kullanma
+# <a name="utilize-azure-infrastructure-vm-restart-to-achieve-higher-availability-of-an-sap-system"></a>SAP sisteminin "daha yüksek kullanılabilirlik" düzeyine ulaşmak için Azure altyapı VM yeniden başlatma işlemini kullanma
 
 [1909114]: https://launchpad.support.sap.com/#/notes/1909114
 [1928533]:https://launchpad.support.sap.com/#/notes/1928533
@@ -126,7 +125,7 @@ ms.locfileid: "60825683"
 [sap-ha-guide-9.1]:#31c6bd4f-51df-4057-9fdf-3fcbc619c170
 [sap-ha-guide-9.1.1]:#a97ad604-9094-44fe-a364-f89cb39bf097
 
-[sap-ha-multi-sid-guide]:sap-high-availability-multi-sid.md (SAP çoklu SID yüksek kullanılabilirliği yapılandırma)
+[sap-ha-multi-sid-guide]:sap-high-availability-multi-sid.md (SAP çoklu SID yüksek kullanılabilirlik yapılandırması)
 
 [Logo_Linux]:media/virtual-machines-shared-sap-shared/Linux.png
 [Logo_Windows]:media/virtual-machines-shared-sap-shared/Windows.png
@@ -214,74 +213,73 @@ ms.locfileid: "60825683"
 > ![Windows][Logo_Windows] Windows ve ![Linux][Logo_Linux] Linux
 >
 
-(Şu anda yalnızca için SUSE Linux Enterprise Server [SLES] 12 ve sonrasında desteklenir) Linux üzerinde Windows Server Yük Devretme Kümelemesi (WSFC) veya Pacemaker gibi işlevler kullanmamaya karar verirseniz, Azure VM yeniden başlatma için kullanılır. Bu, Azure fiziksel sunucu altyapısı ve genel bir temel alınan Azure platformunda SAP sistemlerini planlanmış ve planlanmamış kesinti süreleri karşı korur.
+Linux üzerinde Windows Server Yük Devretme Kümelemesi (WSFC) veya Paceyapıcısı gibi işlevleri kullanmamaya karar verirseniz (Şu anda yalnızca SUSE Linux Enterprise Server [SLES] 12 ve üzeri için desteklenmektedir), Azure VM yeniden başlatması kullanılır. Azure fiziksel sunucu altyapısının ve temel alınan Azure platformunun planlanmış ve planlanmamış kapalı kalma süresine karşı SAP sistemlerini korur.
 
 > [!NOTE]
-> Azure VM yeniden başlatma, öncelikli olarak Vm'leri korur ve *değil* uygulamalar. VM yeniden başlatma SAP uygulamaları için yüksek kullanılabilirlik sağlamaz. ancak, belirli düzeyde bir altyapı kullanılabilirlik sunar. Ayrıca dolaylı olarak, SAP sistemlerini "daha yüksek kullanılabilirlik" sunar. Bu yöntem yüksek kullanılabilirlik, SAP sistemine kritik bileşenleri için uygun olmasını sağlayan bir planlı veya plansız konak güç kesintisi sonra bir VM'yi yeniden başlatma süresini için SLA bulunmaktadır. Kritik bileşenleri örnekleri ASCS/SCS örneği veya veritabanı yönetim sistemi (DBMS) olabilir.
+> Azure VM yeniden başlatma, birincil olarak uygulamaları *değil* VM 'leri korur. VM yeniden başlatma, SAP uygulamaları için yüksek kullanılabilirlik sunmasa da, belirli bir altyapı kullanılabilirliği düzeyi sağlar. Ayrıca, SAP sistemlerinin de dolaylı olarak "daha yüksek kullanılabilirliği" sağlar. Planlı veya planlanmamış bir ana bilgisayar kesintiinden sonra VM 'yi yeniden başlatmak için gereken bir SLA yoktur, bu da yüksek kullanılabilirlik yöntemi bir SAP sisteminin kritik bileşenleri için uygun olmayabilir. Kritik bileşenlere örnek olarak bir ASCS/SCS örneği veya bir veritabanı yönetim sistemi (DBMS) olabilir.
 >
 >
 
-Yüksek kullanılabilirlik için başka bir önemli altyapı öğesi depolamadır. Örneğin, Azure depolama SLA'sı % 99,9 kullanılabilirlik kümesidir. Tüm sanal makineler ve tek bir Azure depolama hesabında disklerini dağıtırsanız, olası bir Azure depolama yetersizlik söz konusu depolama hesabına yerleştirilen tüm sanal makineler ve sanal makinelerin içinde çalışan tüm SAP bileşenler kullanılamama neden olur.  
+Yüksek kullanılabilirlik için başka bir önemli altyapı öğesi depolama alanı. Örneğin, Azure Storage SLA% 99,9 kullanılabilir. Tüm VM 'Leri ve bunların disklerini tek bir Azure depolama hesabında dağıtırsanız, olası Azure depolama alanı, bu depolama hesabına yerleştirilmiş tüm VM 'lerin ve VM 'lerin içinde çalışan tüm SAP bileşenlerinde yer olmamasından oluşmasına neden olur.  
 
-Tüm VM'lerin bir tek bir Azure depolama hesabına almak yerine, her VM için ayrılmış depolama hesapları kullanabilirsiniz. Birden çok bağımsız bir Azure depolama hesabı kullanarak, genel sanal makine ve SAP uygulama kullanılabilirliğini artırın.
+Tüm VM 'Leri tek bir Azure depolama hesabına koymak yerine, her VM için ayrılmış depolama hesapları kullanabilirsiniz. Birden çok bağımsız Azure depolama hesabı kullanarak genel VM ve SAP uygulama kullanılabilirliğini artırırsınız.
 
-Azure yönetilen diskleri otomatik olarak hata etki alanı için bağlı sanal makinenin yerleştirilir. İki sanal makine bir kullanılabilirlik kümesine yerleştirin ve yönetilen diskleri kullanma, platform yönetilen diskler de farklı hata etki alanlarına dağıtma üstlenir. Premium depolama hesabı kullanmayı planlıyorsanız, yönetilen diskleri kullanarak önerilir.
+Azure yönetilen diskler, eklendiği sanal makinenin hata etki alanına otomatik olarak yerleştirilir. İki sanal makineyi bir kullanılabilirlik kümesine yerleştirirseniz ve yönetilen diskler kullanıyorsanız, platform yönetilen diskleri farklı hata etki alanlarına dağıtmayı de gerçekleştirir. Premium depolama hesabı kullanmayı planlıyorsanız, yönetilen diskleri kullanmanızı kesinlikle öneririz.
 
-Azure altyapı yüksek kullanılabilirlik ve depolama hesaplarını kullandığı bir SAP NetWeaver sisteminin örnek bir mimarisi şuna benzeyebilir:
+Azure altyapı yüksek kullanılabilirlik ve depolama hesapları kullanan bir SAP NetWeaver sisteminin örnek mimarisi şuna benzeyebilir:
 
-![SAP uygulama "daha yüksek kullanılabilirlik" elde etmek için yüksek kullanılabilirlik Azure altyapısı kullanma][planning-guide-figure-2900]
+![SAP uygulamasının "daha yüksek kullanılabilirlik" düzeyine ulaşmak için Azure altyapı yüksek kullanılabilirliği kullanın][planning-guide-figure-2900]
 
-Azure altyapı yüksek kullanılabilirlik ve yönetilen diskler kullanan bir SAP NetWeaver sisteminin örnek bir mimarisi şuna benzeyebilir:
+Azure altyapı yüksek kullanılabilirliği ve yönetilen diskler kullanan bir SAP NetWeaver sisteminin örnek mimarisi şuna benzeyebilir:
 
-![SAP uygulama "daha yüksek kullanılabilirlik" elde etmek için yüksek kullanılabilirlik Azure altyapısı kullanma][planning-guide-figure-2901]
+![SAP uygulamasının "daha yüksek kullanılabilirlik" düzeyine ulaşmak için Azure altyapı yüksek kullanılabilirliği kullanın][planning-guide-figure-2901]
 
-Kritik SAP bileşenleri için aşağıdaki şu ana kadar kazandığınız:
+Kritik SAP bileşenleri için şu ana kadar şunu elde edersiniz:
 
-* SAP uygulama sunucuları, yüksek kullanılabilirlik
+* SAP uygulama sunucularının yüksek kullanılabilirliği
 
-    SAP uygulama sunucusu örneklerinin yedekli bileşenlerdir. Her SAP uygulama sunucusu örneği, bir Azure farklı hata ve yükseltme etki alanı içinde çalışan kendi VM üzerinde dağıtılır. Daha fazla bilgi için [hata etki alanları] [ planning-guide-3.2.1] ve [yükseltme etki alanlarında] [ planning-guide-3.2.2] bölümler. 
+    SAP uygulama sunucusu örnekleri, yedekli bileşenlerdir. Her SAP uygulama sunucusu örneği, farklı bir Azure hata ve yükseltme etki alanında çalışan kendi VM 'sine dağıtılır. Daha fazla bilgi için bkz. [hata etki alanları][planning-guide-3.2.1] ve [yükseltme etki alanları][planning-guide-3.2.2] bölümleri. 
 
-    Bu yapılandırma, Azure kullanılabilirlik kümeleri kullanarak sağlayabilirsiniz. Daha fazla bilgi için [Azure kullanılabilirlik kümeleri] [ planning-guide-3.2.3] bölümü. 
+    Bu yapılandırmanın Azure kullanılabilirlik kümelerini kullanarak emin olabilirsiniz. Daha fazla bilgi için bkz. [Azure kullanılabilirlik kümeleri][planning-guide-3.2.3] bölümü. 
 
-    Azure hata veya yükseltme etki alanı olası planlanmış veya planlanmamış kullanılamazlık Vm'leri sınırlı sayıda kullanım dışı kalması ile SAP uygulama sunucusu örnekleri neden olur.
+    Bir Azure hata veya yükseltme etki alanının olası planlanmış veya planlanmamış kullanım dışı kalması, SAP uygulama sunucusu örnekleriyle sınırlı sayıda VM 'nin kullanılamamasına neden olur.
 
-    Her SAP uygulama sunucusu örneği, kendi Azure depolama hesabında yer alır. Bir Azure depolama hesabının olası olmadığından, SAP uygulama sunucusu örneği ile yalnızca bir VM kullanılamama neden olur. Ancak, bir Azure aboneliğinde Azure depolama hesabı sayısına bir sınır açık olduğunu unutmayın. ASCS/SCS örneği otomatik olarak başlamasını VM'yi yeniden başlatma sonrası emin olmak için açıklanan ASCS/SCS örneği başlatma profili Autostart parametresini ayarlayın. [Autostart kullanarak SAP örnekleri için] [ planning-guide-11.5] bölümü.
+    Her SAP uygulama sunucusu örneği kendi Azure depolama hesabına yerleştirilir. Bir Azure depolama hesabının olası olmaması, SAP uygulama sunucusu örneğiyle yalnızca bir VM 'nin kullanılamamasına neden olur. Ancak, bir Azure aboneliği içindeki Azure depolama hesabı sayısı için bir sınır olduğunu unutmayın. VM yeniden başlatıldıktan sonra bir ASCS/SCS örneğinin otomatik başlamasını sağlamak için, [sap örnekleri Için autostart 'ı kullanma][planning-guide-11.5] bölümünde açıklanan ascs/SCS örneği başlangıç profilinde autostart $ parametresini ayarlayın.
   
-    Daha fazla bilgi için [SAP uygulama sunucuları için yüksek kullanılabilirlik][planning-guide-11.4.1].
+    Daha fazla bilgi için bkz. [SAP uygulama sunucuları Için yüksek kullanılabilirlik][planning-guide-11.4.1].
 
-    Yönetilen diskleri kullanıyor olsanız bile, disklerin bir Azure depolama hesabında depolanır ve bir depolama kesintisi olması durumunda kullanılamayabilir.
+    Yönetilen diskler kullanıyor olsanız bile, diskler bir Azure depolama hesabında depolanır ve depolama kesintisi durumunda kullanılamayabilir.
 
-* *Yüksek kullanılabilirlik* SAP ASCS/SCS örnekleri
+* SAP ASCS/SCS örneklerinin *daha yüksek kullanılabilirliği*
 
-    Bu senaryoda, yüklü SAP ASCS/SCS örneği ile bir sanal Makineyi korumak için Azure VM yeniden başlatma kullanır. Planlı veya plansız kapalı kalma süresi Azure sunucularının söz konusu olduğunda, Vm'leri başka bir kullanılabilir sunucu yeniden başlatılır. Azure VM yeniden başlatma daha önce bahsedildiği gibi öncelikli olarak Vm'leri korur ve *değil* uygulamalar, bu durumda ASCS/SCS örneği. VM yeniden başlatma dolaylı olarak "daha yüksek kullanılabilirliği" SAP ASCS/SCS örneği ulaşın. 
+    Bu senaryoda VM 'yi yüklü SAP ASCS/SCS örneğiyle korumak için Azure VM yeniden başlatma 'yı kullanın. Azure sunucularının planlanmış veya planlanmamış kapalı kalma süresi söz konusu olduğunda, VM 'Ler kullanılabilir başka bir sunucuda yeniden başlatılır. Daha önce belirtildiği gibi, Azure VM yeniden başlatması öncelikle VM 'leri korur, bu durumda yoks/SCS örneği. VM yeniden başlatıldığında, SAP Ass/SCS örneğinin "daha yüksek kullanılabilirliğine" sahip olursunuz. 
 
-    ASCS/SCS örneği otomatik olarak başlamasını VM'yi yeniden başlatma sonrası emin olmak için Autostart ASCS/SCS örneği başlatma profilinde açıklandığı parametre [Autostart kullanarak SAP örnekleri için] [ planning-guide-11.5] bölümü . Bu ayar, tek bir hata (SPOF) tek bir VM'de çalışan noktası olarak ASCS/SCS örneği tüm SAP ortamı kullanılabilirliğini belirler anlamına gelir.
+    VM yeniden başlatıldıktan sonra Ass/SCS örneğinin otomatik başlamasını sağlamak için, [sap örnekleri Için autostart 'ı kullanma][planning-guide-11.5] bölümünde açıklandığı gıbı, ascs/SCS örnek başlangıç profilinde autostart parametresini ayarlayın. Bu ayar, Ass/SCS örneğinin tek bir VM 'de çalışan tek bir hata noktası (SPOF) olarak tüm SAP yatay kullanılabilirliğini belirleyeceğini gösterir.
 
-* *Yüksek kullanılabilirlik* DBMS sunucusunun
+* DBMS sunucusunun *daha yüksek kullanılabilirliği*
 
-    Olduğu gibi önceki SAP ASCS/SCS örneği için kullanım örneği, yüklü DBMS yazılım ile bir sanal Makineyi korumak için Azure VM yeniden başlatma yazılımınız ve "yüksek kullanılabilirliğini" DBMS yazılım VM yeniden başlatma aracılığıyla elde etmek.
+    Önceki SAP yoks/SCS örnek kullanım örneğinde olduğu gibi, VM 'yi yüklü DBMS yazılımıyla korumak için Azure VM yeniden başlatma 'yı kullanırsınız ve VM yeniden başlatma aracılığıyla DBMS yazılımının "daha yüksek kullanılabilirliği" elde edersiniz.
   
-    Tek bir VM'de çalışan bir DBMS aynı zamanda bir SPOF, ve, tamamı SAP ortamı kullanılabilirliğini determinative faktördür.
+    Tek bir VM 'de çalışan bir DBMS de bir SOF olur ve tüm SAP yatay kullanılabilirliği için belirleyici bir etkendir.
 
-## <a name="using-autostart-for-sap-instances"></a>SAP örnekleri için AutoStart'ı kullanma
-SAP, SAP örnekleri başlatılmasından VM içindeki işletim sistemi hemen sonra başlamanıza olanak sağlayan bir ayar sunar. Yönergeleri SAP Bilgi Bankası makalesinde belirtilmiştir [1909114]. Ancak, SAP artık ayarı kullanılmasını önerir, Denetim, sırasına göre izin vermediğinden örneğini birden fazla VM etkileniyorsa veya birden çok örnek sanal makine olarak çalıştırıyorsanız yeniden başlatır. 
+## <a name="using-autostart-for-sap-instances"></a>SAP örnekleri için autostart 'ı kullanma
+SAP, VM 'deki işletim sistemi başladıktan hemen sonra SAP örnekleri başlatabilmenizi sağlayan bir ayar sunar. Yönergeler SAP Bilgi Bankası makalesi [1909114]' de belgelenmiştir. Ancak SAP, daha fazla VM etkileniyorsa veya VM başına birden çok örnek çalışıyorsa, örnek yeniden başlatma sırası denetimine izin vermediğinden, bu ayarın kullanımını artık önermez. 
 
-Azure tipik bir senaryo, bir SAP uygulama sunucusu örneği bir VM ve sonunda yeniden tek bir VM varsayıldığında, Autostart önemli değildir. Ancak SAP Gelişmiş iş uygulaması programlama (ABAP) veya Java örneğinin başlangıç profiline şu parametre ekleyerek etkinleştirebilirsiniz:
+Bir VM 'deki ve tek bir VM 'deki bir SAP uygulama sunucusu örneği için tipik bir Azure senaryosunun, kısa bir süre sonra yeniden başlatıldığında, autostart kritik değildir. Ancak SAP Advanced Business Application Programming (ABAP) veya Java örneğinin başlangıç profiline aşağıdaki parametreyi ekleyerek etkinleştirebilirsiniz:
 
       Autostart = 1
 
 
   > [!NOTE]
-  > Autostart parametresi de belirli eksiklikleri vardır. Özellikle ilgili Windows veya Linux hizmet örneği başlatıldığında parametresi bir SAP ABAP veya Java örneğinin başlamasını tetikler. İşletim sistemi önyükleme yaptığında bu dizisi gerçekleşir. Bununla birlikte, SAP hizmetleri yeniden ayrıca SAP yazılım yaşam döngüsü yönetimi işlevleri gibi yazılım güncelleştirme Yöneticisi (SUM) sık karşılaştıkları diğer güncelleştirir veya veya yükseltir. Bu işlevler, otomatik olarak yeniden başlatılmasını örneği beklenmiyor. Bu tür görevleri çalıştırmadan önce bu nedenle, Autostart parametresi devre dışı bırakılmalıdır. Autostart parametresi gibi ASCS/SCS/CI kümelenir SAP örnekleri için de kullanılmamalıdır.
+  > Autostart parametresinin de belirli eksikler de vardır. Özellikle, bu parametre, örneğin ilgili Windows veya Linux hizmeti başlatıldığında SAP ABAP veya Java örneğinin başlangıcını tetikler. Bu sıra, işletim sistemi önyüklendiğinde oluşur. Ancak, SAP hizmetlerinin yeniden başlatılması, yazılım güncelleştirme Yöneticisi (SUM) veya diğer güncelleştirmeler ya da yükseltmeler gibi SAP yazılım yaşam döngüsü yönetim işlevleri için de yaygın bir oluşumdır. Bu işlevler, bir örneğin otomatik olarak yeniden başlatılmasını beklemiyordu. Bu nedenle, bu tür görevleri çalıştırmadan önce autostart parametresi devre dışı bırakılmalıdır. Autostart parametresi, Ass/SCS/CI gibi kümelenmiş SAP örnekleri için de kullanılmamalıdır.
   >
   >
 
-  SAP örnekleri için Autostart hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
+  SAP örnekleri için autostart hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
 
-  * [Başlatma veya durdurma SAP ile birlikte, UNIX sunucusu başlatma/durdurma](https://scn.sap.com/community/unix/blog/2012/08/07/startstop-sap-along-with-your-unix-server-startstop)
-  * [Başlatma ve durdurma SAP NetWeaver yönetim aracıları](https://help.sap.com/saphelp_nwpi711/helpdata/en/49/9a15525b20423ee10000000a421938/content.htm)
-  * [HANA veritabanı AutoStart'ı etkinleştirme](http://www.freehanatutorials.com/2012/10/how-to-enable-auto-start-of-hana.html)
+  * [UNIX sunucu başlatma/durdurma ile birlikte SAP başlatma veya durdurma](https://scn.sap.com/community/unix/blog/2012/08/07/startstop-sap-along-with-your-unix-server-startstop)
+  * [SAP NetWeaver yönetim aracılarını başlatma ve durdurma](https://help.sap.com/saphelp_nwpi711/helpdata/en/49/9a15525b20423ee10000000a421938/content.htm)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Tam SAP NetWeaver uygulama durumunu algılayan yüksek kullanılabilirlik hakkında daha fazla bilgi için bkz. [Azure Iaas üzerinde SAP uygulama yüksek kullanılabilirlik][sap-high-availability-architecture-scenarios-sap-app-ha].
+Tam SAP NetWeaver uygulamayla uyumlu yüksek kullanılabilirlik hakkında bilgi için bkz. [Azure IaaS 'de SAP uygulaması yüksek kullanılabilirliği][sap-high-availability-architecture-scenarios-sap-app-ha].

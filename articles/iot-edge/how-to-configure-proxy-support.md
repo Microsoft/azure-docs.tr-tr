@@ -9,81 +9,82 @@ ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 ms.custom: seodec18
-ms.openlocfilehash: 34a94a1b9c38070f5c9de22d9a9e4f24183a876c
-ms.sourcegitcommit: 6e6813f8e5fa1f6f4661a640a49dc4c864f8a6cb
+ms.openlocfilehash: 47d3018015d05d0587e841c216a5eb89f2a0ae20
+ms.sourcegitcommit: c556477e031f8f82022a8638ca2aec32e79f6fd9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67151016"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68414556"
 ---
 # <a name="configure-an-iot-edge-device-to-communicate-through-a-proxy-server"></a>Bir proxy sunucu üzerinden iletişim kurmak için IOT Edge cihazı yapılandırma
 
-IOT Edge cihazları, IOT Hub ile iletişim kurmak için HTTPS isteği gönderir. Cihazınızı bir ara sunucu kullanıyorsa bir ağa bağlıysa, sunucu üzerinden iletişim kurmak için IOT Edge çalışma zamanı'nı yapılandırmanız gerekir. Bunlar IOT Edge hub'ı ile yönlendirilen olmayan HTTP veya HTTPS istekleri yapıyorsa proxy sunucuları tek tek bir IOT Edge modüllerinin da etkileyebilir. 
+IOT Edge cihazları, IOT Hub ile iletişim kurmak için HTTPS isteği gönderir. Cihazınızı bir ara sunucu kullanıyorsa bir ağa bağlıysa, sunucu üzerinden iletişim kurmak için IOT Edge çalışma zamanı'nı yapılandırmanız gerekir. Proxy sunucular Ayrıca, IoT Edge hub 'ı üzerinden yönlendirilmeyen HTTP veya HTTPS isteklerini IoT Edge bağımsız modülleri etkileyebilir. 
 
-Bu makalede, yapılandırmak ve ardından bir proxy sunucusunun arkasında bir IOT Edge cihazı yönetmek için aşağıdaki dört adım adım yönergeler sağlanmıştır: 
+Bu makalede, bir proxy sunucusunun arkasında bir IoT Edge cihazını yapılandırmak ve yönetmek için aşağıdaki dört adım izlenecek yol gösterilmektedir: 
 
-1. **IOT Edge çalışma zamanı, Cihazınızda yükleyin.**
+1. **IoT Edge çalışma zamanını cihazınıza yükler.**
 
-   Cihazınızı bu isteğinde bulunmak için proxy sunucu üzerinden iletişim kurması gereken şekilde IOT Edge yükleme betikleri, paketleri ve dosyaları internet'ten çekin. Ayrıntılı adımlar için bkz. [bir ara sunucu aracılığıyla çalışma zamanı yükleme](#install-the-runtime-through-a-proxy) bu makalenin. Windows cihazları için yükleme komut dosyası ayrıca sağlar bir [çevrimdışı yükleme](how-to-install-iot-edge-windows.md#offline-installation) seçeneği. 
+   IoT Edge yükleme betikleri, paketleri ve dosyaları internet 'ten çeker, böylece cihazınızın bu istekleri yapması için proxy sunucusu üzerinden iletişim kurması gerekir. Ayrıntılı adımlar için, bu makalenin [bir ara sunucu aracılığıyla çalışma zamanını Install](#install-the-runtime-through-a-proxy) bölümüne bakın. Windows cihazlarında, yükleme betiği de [çevrimdışı bir yükleme](how-to-install-iot-edge-windows.md#offline-installation) seçeneği sağlar. 
 
-   Bu adım, ilk önce onu ayarlarken, IOT Edge cihazında gerçekleştirilen tek seferlik bir işlemdir. IOT Edge çalışma zamanı güncelleştirdiğinizde aynı bağlantıları da gereklidir. 
+   Bu adım, ilk kez ayarladığınızda IoT Edge cihazında gerçekleştirilen tek seferlik bir işlemdir. IoT Edge çalışma zamanını güncelleştirdiğinizde aynı bağlantılar da gereklidir. 
 
-2. **Docker daemon'ı ve IOT Edge arka plan programı, Cihazınızda yapılandırın.**
+2. **Cihazınızda Docker Daemon 'u ve IoT Edge arka plan programını yapılandırın.**
 
-   IOT Edge, cihazdaki ikisi için de ara sunucu üzerinden web isteklerinde bulunmak için gereken iki Daemon'ları kullanır. IOT Edge arka plan programı, IOT Hub ile iletişim için sorumludur. Moby arka plan programı kapsayıcı yönetiminden sorumlu, bu nedenle kapsayıcı kayıt defterleri ile iletişim kurar. Ayrıntılı adımlar için bkz. [Daemon'ları yapılandırma](#configure-the-daemons) bu makalenin. 
+   IoT Edge, cihazda iki Daemon 'ları kullanır ve bunların her ikisi de proxy sunucusu üzerinden Web istekleri yapması gerekir. IoT Edge Daemon, IoT Hub iletişiminden sorumludur. Moby arka plan programı kapsayıcı yönetiminden sorumludur, bu nedenle kapsayıcı kayıt defterleri ile iletişim kurar. Ayrıntılı adımlar için, bu makalenin [Daemon 'ları yapılandırma](#configure-the-daemons) bölümüne bakın. 
 
-   Bu adım, ilk önce onu ayarlarken, IOT Edge cihazında gerçekleştirilen tek seferlik bir işlemdir.
+   Bu adım, ilk kez ayarladığınızda IoT Edge cihazında gerçekleştirilen tek seferlik bir işlemdir.
 
-3. **Cihazınızda config.yaml dosyasındaki IOT Edge aracı özelliklerini yapılandırın.**
+3. **Cihazınızdaki config. YAML dosyasında IoT Edge Aracısı özelliklerini yapılandırın.**
 
-   IOT Edge arka plan programı edgeAgent modülü başlangıçta başlatır, ancak ardından edgeAgent modülü dağıtım bildirimi IOT Hub'ından alınıyor ve tüm diğer modülleri başlangıç sorumludur. IOT Edge Aracısı IOT Hub'ına ilk bağlantıyı kurmak edgeAgent modülü ortam değişkenlerini cihazda el ile yapılandırın. İlk bağlantının ardından edgeAgent modülü uzaktan yapılandırabilirsiniz. Ayrıntılı adımlar için bkz. [IOT Edge Aracısı'nı yapılandırma](#configure-the-iot-edge-agent) bu makalenin.
+   IoT Edge Daemon, başlangıçta edgeAgent modülünü başlatır, ancak edgeAgent modülü, IoT Hub ' dan dağıtım bildirimini almaktan ve diğer tüm modüllerin başlatılmasına karşı sorumludur. IoT Edge aracısının ilk bağlantıyı IoT Hub hale getirmek için, edgeAgent modülü ortam değişkenlerini cihazın kendisinde el ile yapılandırın. İlk bağlantıdan sonra, edgeAgent modülünü uzaktan yapılandırabilirsiniz. Ayrıntılı adımlar için, bu makalenin [IoT Edge aracısını yapılandırma](#configure-the-iot-edge-agent) bölümüne bakın.
 
-   Bu adım, ilk önce onu ayarlarken, IOT Edge cihazında gerçekleştirilen tek seferlik bir işlemdir.
+   Bu adım, ilk kez ayarladığınızda IoT Edge cihazında gerçekleştirilen tek seferlik bir işlemdir.
 
-4. **Tüm modül gelecekteki dağıtımlar için proxy sunucusu üzerinden iletişim kuran herhangi bir modül için ortam değişkenlerini ayarlayın.**
+4. **Tüm gelecek modül dağıtımları için, proxy üzerinden iletişim kuran herhangi bir modülün ortam değişkenlerini ayarlayın.**
 
-   IOT Edge Cihazınızı ayarlamak ve proxy sunucusu üzerinden IOT Hub'ına bağlı sonra tüm modül gelecekteki dağıtımlar bağlantıyı korumak için gerekir. Ayrıntılı adımlar için bkz. [yapılandırma dağıtım bildirimleri](#configure-deployment-manifests) bu makalenin. 
+   IoT Edge cihazınız kurulduktan ve proxy sunucusu üzerinden IoT Hub bağlandıktan sonra, bağlantıyı gelecekteki tüm modül dağıtımlarında korumanız gerekir. Ayrıntılı adımlar için, bu makalenin [dağıtım bildirimlerini yapılandırma](#configure-deployment-manifests) bölümüne bakın. 
 
-   Bu adım, cihazın özelliği, Ara sunucu üzerinden iletişim kurmak için her yeni modül veya dağıtım güncelleştirme korur, böylece uzaktan gerçekleştirilen devam eden bir işlemdir. 
+   Bu adım, her yeni modül veya dağıtım güncelleştirmesinin, cihazın ara sunucu üzerinden iletişim kurma yeteneğini sakladığı şekilde uzaktan gerçekleştirilen bir işlemdir. 
 
 ## <a name="know-your-proxy-url"></a>Proxy URL'nizi bildirin
 
-Bu makaledeki adımları başlamadan önce proxy URL'sini de bilmeniz gerekir.
+Bu makaledeki adımlardan herhangi birine başlamadan önce, proxy URL 'nizi bilmeniz gerekir.
 
 Ara sunucu URL'leri şu biçimde olması: **Protokolü**://**proxy_host**:**proxy_port**.
 
-* **Protokolü** HTTP veya HTTPS. Docker Daemon programını kapsayıcı kayıt defteri ayarlarınıza bağlı olarak her iki protokolü kullanabilirsiniz ancak arka plan programı ve çalışma zamanı IOT Edge kapsayıcıları, proxy sunucusuna bağlanmak için HTTP her zaman kullanmalısınız.
+* **Protokolü** HTTP veya HTTPS. Docker Daemon, kapsayıcı kayıt defteri ayarlarınıza bağlı olarak her iki protokolü de kullanabilir, ancak IoT Edge Daemon ve Runtime kapsayıcıları, proxy 'ye bağlanmak için her zaman HTTP 'yi kullanmalıdır.
 
-* **Proxy_host** bir proxy sunucusunun adresidir. Ara sunucunuz kimlik doğrulaması gerektiriyorsa, kimlik bilgilerinizi proxy konağını bir parçası olarak aşağıdaki biçimde sağlayabilir: **kullanıcı**:**parola**\@**proxy_host** .
+* **Proxy_host** bir proxy sunucusunun adresidir. Proxy sunucunuz kimlik doğrulaması gerektiriyorsa, kimlik bilgilerinizi proxy konağının bir parçası olarak aşağıdaki biçimde sağlayabilirsiniz: **User**:**Password**\@**proxy_host**.
 
 * **Proxy_port** proxy ağ trafiğini yanıt ağ bağlantı noktası.
 
-## <a name="install-the-runtime-through-a-proxy"></a>Bir ara sunucu aracılığıyla çalışma zamanını yükleme
+## <a name="install-the-runtime-through-a-proxy"></a>Çalışma zamanını bir ara sunucu aracılığıyla yükler
 
-IOT Edge Cihazınızı Windows veya Linux'ta çalışan olsun, proxy sunucusu üzerinden yükleme paketleri erişmeniz gerekir. İşletim sisteminize bağlı olarak, IOT Edge çalışma zamanı bir ara sunucu üzerinden yüklemek için adımları izleyin. 
+IoT Edge cihazınızın Windows veya Linux üzerinde çalışıp çalışmadığını, yükleme paketlerine proxy sunucusu üzerinden erişmeniz gerekir. İşletim sisteminize bağlı olarak, IoT Edge çalışma zamanını bir ara sunucuya yüklemek için adımları izleyin. 
 
 ### <a name="linux"></a>Linux
 
-Bir Linux cihaza IOT Edge çalışma zamanı'nı yüklüyorsanız, yükleme paketi erişmek için Ara sunucu üzerinden gitmesi için Paket Yöneticisi'ni yapılandırın. Örneğin, [apt-get bir http Ara sunucusunu kullanacak şekilde](https://help.ubuntu.com/community/AptGet/Howto/#Setting_up_apt-get_to_use_a_http-proxy). Paket Yöneticisi'ni yapılandırıldıktan sonra yönergeleri izleyin [yükleme Azure IOT Edge çalışma zamanı (ARM32v7/armhf) Linux'ta](how-to-install-iot-edge-linux-arm.md) veya [(x64) Linux üzerinde Azure IOT Edge çalışma zamanı yükleme](how-to-install-iot-edge-linux.md) zamanki.
+Bir Linux cihaza IOT Edge çalışma zamanı'nı yüklüyorsanız, yükleme paketi erişmek için Ara sunucu üzerinden gitmesi için Paket Yöneticisi'ni yapılandırın. Örneğin, [apt-get bir http Ara sunucusunu kullanacak şekilde](https://help.ubuntu.com/community/AptGet/Howto/#Setting_up_apt-get_to_use_a_http-proxy). Paket yöneticiniz yapılandırıldıktan sonra, [Linux üzerinde Azure IoT Edge Runtime 'ı](how-to-install-iot-edge-linux.md) her zamanki gibi Install ' daki yönergeleri izleyin.
 
 ### <a name="windows"></a>Windows
 
-Bir Windows cihaza IOT Edge çalışma zamanı'nı yüklüyorsanız, proxy sunucusu üzerinden iki kez gitmeniz gerekiyor. İlk bağlantı Yükleyici komut dosyasını yükler ve gerekli bileşenleri yüklemek için yükleme sırasında ikinci bir bağlantı olur. Proxy bilgileri Windows ayarlarını yapılandırın veya proxy bilgilerinizi doğrudan PowerShell komutları içerir. 
+IoT Edge çalışma zamanını bir Windows cihazına yüklüyorsanız, proxy sunucusu üzerinden iki kez gitmeniz gerekir. İlk bağlantı yükleyici betik dosyasını indirir ve ikinci bağlantı yükleme sırasında gerekli bileşenleri indirmek için kullanılır. Windows ayarları 'nda ara sunucu bilgilerini yapılandırabilir veya proxy bilgilerinizi doğrudan PowerShell komutlarına dahil edebilirsiniz. 
 
-Aşağıdaki adımları kullanarak bir windows yükleme örneği gösteren `-proxy` bağımsız değişkeni:
+Aşağıdaki adımlarda, `-proxy` bağımsız değişkenini kullanarak bir Windows yüklemesinin örneği gösterilmektedir:
 
-1. Invoke-WebRequest komut yükleyicisi betiği erişmek için Ara sunucu bilgileri gerekir. Daha sonra dağıtım IoTEdge komutu yükleme dosyalarının indirileceği proxy bilgisi gerekir. 
+1. Invoke-WebRequest komutu, yükleyici betiğine erişmek için ara sunucu bilgilerine sahip olmalıdır. Ardından, dağıtım-ıotedge komutunun yükleme dosyalarını indirmesi için proxy bilgilerine ihtiyacı vardır. 
 
    ```powershell
    . {Invoke-WebRequest -proxy <proxy URL> -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge -proxy <proxy URL>
    ```
 
-2. Initialize-IoTEdge komut ikinci adım, Ara sunucu bilgilerini yalnızca Invoke-WebRequest gerektirir. proxy sunucusu üzerinden konulunca gerekmez.
+2. Initialize-ıotedge komutunun ara sunucu üzerinden gitmesi gerekmez, bu nedenle ikinci adım yalnızca Invoke-WebRequest için proxy bilgileri gerektirir.
 
    ```powershell
    . {Invoke-WebRequest -proxy <proxy URL> -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
+   ```
 
-If you have complicated credentials for the proxy server that can't be included in the URL, use the `-ProxyCredential` parameter within `-InvokeWebRequestParameters`. For example,
+Proxy sunucusu için URL 'ye dahil olmayan karmaşık kimlik bilgileriniz varsa, içindeki `-ProxyCredential` `-InvokeWebRequestParameters`parametresini kullanın. Örneğin,
 
 ```powershell
 $proxyCredential = (Get-Credential).GetNetworkCredential()
@@ -91,30 +92,30 @@ $proxyCredential = (Get-Credential).GetNetworkCredential()
 Deploy-IoTEdge -InvokeWebRequestParameters @{ '-Proxy' = '<proxy URL>'; '-ProxyCredential' = $proxyCredential }
 ```
 
-Ara sunucu parametreleri hakkında daha fazla bilgi için bkz. [Invoke-WebRequest](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest). Çevrimdışı yükleme dahil olmak üzere Windows yükleme seçenekleri hakkında daha fazla bilgi için bkz. [Windows yükleme Azure IOT Edge çalışma zamanına](how-to-install-iot-edge-windows.md).
+Ara sunucu parametreleri hakkında daha fazla bilgi için bkz. [Invoke-WebRequest](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest). Çevrimdışı yükleme dahil Windows yükleme seçenekleri hakkında daha fazla bilgi için bkz. [Windows üzerinde Azure IoT Edge çalışma zamanı yükleme](how-to-install-iot-edge-windows.md).
 
 ## <a name="configure-the-daemons"></a>Daemon'ları yapılandırma
 
-IOT Edge, IOT Edge cihaz üzerinde çalışan iki Daemon bağımlıdır. Moby arka plan programı, web istekleri kapsayıcı kayıt defterleri için kapsayıcı görüntüleri çekmeniz hale getirir. IOT Edge arka plan programı, IOT Hub ile iletişim kurmak için web isteği yapar.
+IoT Edge, IoT Edge cihazında çalışan iki Daemon 'ları dayanır. Moby cini, Web isteklerini kapsayıcı kayıt defterlerinden kapsayıcı görüntüleri çekmek için yapar. IOT Edge arka plan programı, IOT Hub ile iletişim kurmak için web isteği yapar.
 
-Moby hem IOT Edge Daemon'ları için devam eden cihazın işlevselliğini proxy sunucusu kullanacak şekilde yapılandırılması gerekir. Bu adım, ilk cihaz kurulumu sırasında IOT Edge cihazında yerini alır. 
+Hem Moby hem de IoT Edge Daemon 'ları, devam eden cihaz işlevselliği için proxy sunucusunu kullanacak şekilde yapılandırılmalıdır. Bu adım ilk cihaz kurulumu sırasında IoT Edge cihazında gerçekleşir. 
 
-### <a name="moby-daemon"></a>Moby arka plan programı
+### <a name="moby-daemon"></a>Moby Daemon
 
-Docker üzerinde Moby kurulu olduğundan, ortam değişkenleriyle Moby daemon'ı yapılandırmak için Docker belgelerine bakın. Çoğu kapsayıcı kayıt defterleri (DockerHub ve Azure kapsayıcı kayıt defterleri dahil) ayarlamalısınız parametredir HTTPS istekleri desteklediğimizden **erişmek**. Aktarım Katmanı Güvenliği (TLS) desteklemeyen bir kayıt defterinden görüntüleri çekmek sonra ayarlamalısınız **HTTP_PROXY** parametresi. 
+Moby Docker üzerine inşa edildiğinden, Moby cini ortam değişkenleriyle yapılandırmak için Docker belgelerine bakın. Çoğu kapsayıcı kayıt defterleri (DockerHub ve Azure kapsayıcı kayıt defterleri dahil) ayarlamalısınız parametredir HTTPS istekleri desteklediğimizden **erişmek**. Aktarım Katmanı Güvenliği (TLS) desteklemeyen bir kayıt defterinden görüntüleri çekmek sonra ayarlamalısınız **HTTP_PROXY** parametresi. 
 
-IOT Edge cihaz işletim sistemi için makaleyi seçin: 
+IoT Edge cihaz işletim sisteminiz için geçerli olan makaleyi seçin: 
 
-* [Linux'ta Docker daemon'ı yapılandırma](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
-    * Linux cihazlarda Moby daemon Docker adı tutar.
-* [Windows Docker daemon yapılandırma](https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/configure-docker-daemon#proxy-configuration)
-    * Windows cihazlarda Moby daemon iotedge moby çağrılır. Docker Masaüstü hem de Moby bir Windows cihazında paralel olarak çalıştırmak mümkün olduğundan farklı bir adlarıdır. 
+* [Linux 'ta Docker Daemon 'ı yapılandırma](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
+    * Linux cihazlarındaki Moby Daemon, Docker adını tutar.
+* [Windows 'da Docker Daemon yapılandırma](https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/configure-docker-daemon#proxy-configuration)
+    * Windows cihazlarındaki Moby Daemon, ıotedge-Moby olarak adlandırılır. Bir Windows cihazında hem Docker Desktop hem de Moby paralel olarak çalıştırılabilmesini sağladığından adlar farklıdır. 
 
 ### <a name="iot-edge-daemon"></a>IOT Edge arka plan programı
 
-IOT Edge arka plan programı Moby arka plan programı için benzer şekilde yapılandırılır. İşletim sisteminize bağlı hizmeti için bir ortam değişkenini ayarlamak için aşağıdaki adımları kullanın. 
+IoT Edge Daemon, Moby cinine benzer bir şekilde yapılandırılmıştır. İşletim sisteminize bağlı hizmeti için bir ortam değişkenini ayarlamak için aşağıdaki adımları kullanın. 
 
-IOT Edge arka plan programı, IOT Hub'ına istekleri göndermek için her zaman HTTPS kullanır.
+IoT Edge Daemon, istekleri IoT Hub göndermek için her zaman HTTPS kullanır.
 
 #### <a name="linux"></a>Linux
 
@@ -131,7 +132,7 @@ Aşağıdaki metni girin değiştirerek  **\<proxy URL'si >** proxy sunucu adres
 Environment="https_proxy=<proxy URL>"
 ```
 
-IOT Edge için yeni yapılandırma yerden devam edebiliyorduk service manager'ı yenileyin.
+IoT Edge için yeni yapılandırmayı seçmek üzere Service Manager 'ı yenileyin.
 
 ```bash
 sudo systemctl daemon-reload
@@ -163,15 +164,15 @@ IOT Edge değişikliklerin etkili olması için yeniden başlatın.
 Restart-Service iotedge
 ```
 
-## <a name="configure-the-iot-edge-agent"></a>IOT Edge Aracısı'nı yapılandırma
+## <a name="configure-the-iot-edge-agent"></a>IoT Edge aracısını yapılandırma
 
-IOT Edge Aracısı'nı, üzerinde herhangi bir IOT Edge cihazı başlatmak için ilk bir modüldür. IOT Edge config.yaml dosyanın içindeki bilgileri temel alan ilk kez başlatılır. IOT Edge Aracısı'nı, ardından, diğer modüllerin neler olması gerektiğini bildirin ve dağıtım bildirimlerini almak için IOT Hub'ına bağlanır cihazda dağıtılabilir.
+IoT Edge Aracısı, herhangi bir IoT Edge cihazında başlatılacak ilk modüldür. IOT Edge config.yaml dosyanın içindeki bilgileri temel alan ilk kez başlatılır. IoT Edge Aracısı daha sonra dağıtım bildirimlerini almak için IoT Hub bağlanır, bu da cihaza hangi modüllerin dağıtılması gerektiğini bildirir.
 
-Bu adım, cihaz ilk kurulum sırasında bir kez IOT Edge cihazında yerini alır. 
+Bu adım ilk cihaz kurulumu sırasında IoT Edge cihaza bir kez gerçekleşir. 
 
-1. IOT Edge Cihazınızda config.yaml dosyasını açın. Linux sistemlerinde, bu dosya şu konumdadır **/etc/iotedge/config.yaml**. Windows sistemlerde, bu dosya şu konumdadır **C:\ProgramData\iotedge\config.yaml**. Yapılandırma dosyası korunur ve ona erişmek için yönetici ayrıcalıkları gerekir. Linux sistemleri `sudo` tercih edilen bir metin Düzenleyicisi'nde dosyasını açmadan önce komutu. Windows, yönetici olarak Not Defteri gibi bir metin düzenleyicisinde açın ve ardından dosyasını açın. 
+1. IOT Edge Cihazınızda config.yaml dosyasını açın. Linux sistemlerinde, bu dosya şu konumdadır **/etc/iotedge/config.yaml**. Windows sistemlerde, bu dosya şu konumdadır **C:\ProgramData\iotedge\config.yaml**. Yapılandırma dosyası korunur ve ona erişmek için yönetici ayrıcalıkları gerekir. Linux sistemlerinde, dosyayı tercih ettiğiniz `sudo` metin düzenleyicisinde açmadan önce komutunu kullanın. Windows 'ta, Not Defteri gibi bir metin düzenleyicisini yönetici olarak açın ve dosyayı açın. 
 
-2. Config.yaml dosyasında **Edge Aracısı modülü spec** bölümü. IOT Edge Aracısı tanımını içeren bir **env** ortam değişkenlerini ekleyebileceğiniz parametresi. 
+2. Config.yaml dosyasında **Edge Aracısı modülü spec** bölümü. IoT Edge Aracısı tanımı, ortam değişkenleri ekleyebileceğiniz bir **env** parametresi içerir. 
 
 3. Env parametresi için yer tutucular ve yeni bir satıra yeni bir değişken ekleyin, küme parantezleri kaldırın. YAML içinde girintileri iki boşluk olduğunu unutmayın. 
 
@@ -203,23 +204,23 @@ Bu adım, cihaz ilk kurulum sırasında bir kez IOT Edge cihazında yerini alır
 
 ## <a name="configure-deployment-manifests"></a>Dağıtım bildirimleri yapılandırma  
 
-IOT Edge Cihazınızı proxy sunucunuz ile çalışmak üzere yapılandırıldı sonra ileride dağıtım bildirimleri ortam değişkenleri bildirmek devam etmeniz gerekir. Azure portalı sihirbazını kullanarak dağıtım bildirimleri düzenleyebilir ya da bir dağıtım düzenleyerek bildirim JSON dosyası. 
+IoT Edge cihazınız ara sunucu ile çalışacak şekilde yapılandırıldıktan sonra, gelecekteki dağıtım bildirimlerinde ortam değişkenlerini bildirmeye devam etmeniz gerekir. Azure portal sihirbazını kullanarak veya bir dağıtım bildirimi JSON dosyasını düzenleyerek dağıtım bildirimlerini düzenleyebilirsiniz. 
 
-Her zaman iki çalışma zamanı modülü ve edgeAgent edgeHub, IOT Hub ile bağlantı sağlamak için proxy sunucu üzerinden iletişim kurmak için yapılandırın. Proxy bilgileri edgeAgent modülünden kaldırırsanız, bağlantıyı yeniden kurmak için tek cihazda config.yaml dosyasını düzenleyerek önceki bölümde açıklandığı gibi yoludur. 
+İki çalışma zamanı modülünü, edgeAgent ve edgeHub 'ı her zaman, IoT Hub ile bir bağlantı sürdürmek için proxy sunucu üzerinden iletişim kurmak üzere yapılandırın. EdgeAgent modülünden proxy bilgilerini kaldırırsanız, bağlantıyı yeniden kurmak için tek yol, önceki bölümde açıklandığı gibi, cihazdaki config. YAML dosyasını düzenlemedir. 
 
-İnternet'e bağlanan diğer IOT Edge modülleri, çok proxy sunucu üzerinden iletişim kurması için yapılandırılması gerekir. Ancak, kendi iletileri edgeHub aracılığıyla yönlendirmek veya yalnızca iletişim modül cihazdaki diğer modüllerle proxy sunucusu ayrıntılarının gerekmez. 
+İnternet 'e bağlanan diğer IoT Edge modülleri de ara sunucu üzerinden iletişim kuracak şekilde yapılandırılmalıdır. Ancak, iletilerini edgeHub aracılığıyla yönlendiren veya yalnızca cihazdaki diğer modüllerle iletişim kuran modüller ara sunucu ayrıntılarına gerek kalmaz. 
 
-Bu adım, IOT Edge cihazı ömrü devam ediyor. 
+Bu adım IoT Edge cihazının ömrü boyunca devam etmektedir. 
 
 ### <a name="azure-portal"></a>Azure portal
 
 Kullanırken **modülleri ayarlama** cihazları IOT Edge dağıtımlarını oluşturmak için Sihirbazı her bir modüle sahip bir **ortam değişkenlerini** proxy sunucu bağlantılarını yapılandırmak için kullanabileceğiniz bir bölüm. 
 
-IOT Edge hub'ı modülleri ve IOT Edge Aracısı'nı yapılandırmak için seçin **Gelişmiş Edge çalışma zamanı ayarları Yapılandır** Sihirbazı'nın ilk adımında. 
+IoT Edge Aracısı ve IoT Edge hub modüllerini yapılandırmak için sihirbazın ilk adımında **Gelişmiş Edge çalışma zamanı ayarlarını yapılandır** ' ı seçin. 
 
 ![Gelişmiş Edge Çalışma Zamanı ayarlarını yapılandırma](./media/how-to-configure-proxy-support/configure-runtime.png)
 
-Ekleme **erişmek** ortam değişkeni IOT Edge aracısı ve IOT Edge hub'ı modül tanımları. Dahil ettiyseniz **UpstreamProtocol** IOT Edge Cihazınızda config.yaml dosyasında ortam değişkeni ekleyin, IOT Edge Aracısı modülü tanımına çok. 
+**Https_proxy** ortam değişkenini hem IoT Edge Aracısı hem de IoT Edge hub modülünün tanımına ekleyin. IoT Edge cihazınızdaki config. YAML dosyasına **Upstreamprotocol** ortam değişkenini eklediyseniz, bunu IoT Edge aracı modül tanımına da ekleyin. 
 
 ![Erişmek ortam değişken Ayarla](./media/how-to-configure-proxy-support/edgehub-environmentvar.png)
 
@@ -258,7 +259,7 @@ Ortam değişkenleri dahil, modül tanımınızı edgeHub aşağıdaki örnektek
 }
 ```
 
-Dahil ettiyseniz **UpstreamProtocol** IOT Edge Cihazınızda confige.yaml dosyasında ortam değişkeni ekleyin, IOT Edge Aracısı modülü tanımına çok. 
+IoT Edge cihazınızdaki confige. YAML dosyasına **Upstreamprotocol** ortam değişkenini eklediyseniz, bunu IoT Edge aracı modül tanımına da ekleyin. 
 
 ```json
 "env": {

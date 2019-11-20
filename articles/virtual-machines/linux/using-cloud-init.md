@@ -1,10 +1,10 @@
 ---
-title: Azure'da Linux sanal makineleri için cloud-init desteğine genel bakış | Microsoft Docs
-description: Microsoft azure'da cloud-init özelliklerine genel bakış
+title: Azure 'da Linux sanal makineleri için Cloud-init desteğine genel bakış
+description: Microsoft Azure 'deki Cloud-init özelliklerine genel bakış
 services: virtual-machines-linux
 documentationcenter: ''
-author: rickstercdn
-manager: jeconnoc
+author: danielsollondon
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 195c22cd-4629-4582-9ee3-9749493f1d72
@@ -13,55 +13,59 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.topic: article
-ms.date: 11/29/2017
-ms.author: rclaus
-ms.openlocfilehash: 377ad49ae3a5ae0f61cd0fd93b68dd817d617397
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 10/11/2019
+ms.author: danis
+ms.openlocfilehash: d372b94ac0df4cef3c43fab10686e9bf20633bfe
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67050810"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74034243"
 ---
-# <a name="cloud-init-support-for-virtual-machines-in-azure"></a>Azure'da sanal makineler için cloud-init desteği
-Bu makale için mevcut destek açıklar [cloud-init](https://cloudinit.readthedocs.io) bir sanal makine (VM) ya da sanal makineyi yapılandırmak için ölçek kümeleri (VMSS zaman azure'da sağlama sırasında). Kaynakları Azure tarafından sağlanan sonra ilk önyüklemede bu cloud-init betikleri çalıştırın.  
+# <a name="cloud-init-support-for-virtual-machines-in-azure"></a>Azure 'da sanal makineler için Cloud-init desteği
+Bu makalede, Azure 'da sağlama sırasında bir sanal makineyi (VM) veya sanal makine ölçek kümelerini yapılandırmak üzere [Cloud-init](https://cloudinit.readthedocs.io) için mevcut destek açıklanmaktadır. Bu Cloud-init betikleri, kaynaklar Azure tarafından sağlandıktan sonra ilk önyüklemede çalışır.  
 
 ## <a name="cloud-init-overview"></a>Cloud-init genel bakış
 [Cloud-init](https://cloudinit.readthedocs.io), Linux VM’sini ilk kez önyüklendiğinde özelleştirmeyi sağlayan, sık kullanılan bir yaklaşımdır. cloud-init’i paket yükleme, dosyalara yazma ve kullanıcılar ile güvenliği yapılandırma işlemleri için kullanabilirsiniz. Cloud-init önyükleme işlemi sırasında çağrıldığı için ek adımlar veya yapılandırmanıza uygulayabileceğiniz gerekli aracı yoktur.  Düzgün bir şekilde biçimlendirme hakkında daha fazla bilgi için `#cloud-config` dosyaları görmek [cloud-init belgeler sitesinde](https://cloudinit.readthedocs.io/en/latest/topics/format.html#cloud-config-data).  `#cloud-config` dosyaları, base64 ile kodlanmış metin dosyalarıdır.
 
 Cloud-init, dağıtımlar arasında da çalışır. Örneğin, bir paket yüklemek için **apt-get install** veya **yum install** kullanmazsınız. Bunun yerine, yüklenecek paketlerin listesini tanımlayabilirsiniz. Cloud-init, seçtiğiniz dağıtım için yerel paket yönetim aracını otomatik olarak kullanır.
 
- Etkin olarak desteklenen Linux distro ortaklarımızla birlikte kullanılabilir cloud-init etkinleştirilmiş görüntüleri Azure Market'te sahip olmak için çalışıyoruz. Bu görüntüler, cloud-init dağıtımlarınızı yapar ve yapılandırmaları Vm'leri ve VM ölçek kümeleri (VMSS) ile sorunsuz bir şekilde çalışır. Aşağıdaki tabloda, Azure platformunda geçerli cloud-init etkinleştirilmiş görüntüleri kullanılabilirliği açıklanmaktadır:
+Etkin olarak desteklenen Linux distro ortaklarımızla birlikte kullanılabilir cloud-init etkinleştirilmiş görüntüleri Azure Market'te sahip olmak için çalışıyoruz. Bu görüntüler, Cloud-init dağıtımlarınızın ve yapılandırmalarının VM 'Ler ve sanal makine ölçek kümeleri ile sorunsuz bir şekilde çalışmasını sağlayacak. Aşağıdaki tabloda, Azure platformunda geçerli cloud-init etkinleştirilmiş görüntüleri kullanılabilirliği açıklanmaktadır:
 
 | Yayımcı | Sunduğu | SKU | Sürüm | cloud-init hazır |
 |:--- |:--- |:--- |:--- |:--- |
-|Canonical |UbuntuServer |18.04-LTS |en son |evet | 
-|Canonical |UbuntuServer |17.10 |en son |evet | 
-|Canonical |UbuntuServer |16.04-LTS |en son |evet | 
-|Canonical |UbuntuServer |14.04.5-LTS |en son |evet |
-|CoreOS |CoreOS |Dengeli |en son |evet |
-|OpenLogic |CentOS |7-CI |en son |önizleme |
-|RedHat |RHEL |7-RAW-CI |en son |önizleme |
+|Canonical |UbuntuServer |18.04-LTS |latest |evet | 
+|Canonical |UbuntuServer |16.04-LTS |latest |evet | 
+|Canonical |UbuntuServer |14.04.5-LTS |latest |evet |
+|CoreOS |CoreOS |Dengeli |latest |evet |
+|OpenLogic 7,7 |CentOS |7-CI |7.7.20190920 |önizleme |
+|RedHat 7,6 |RHEL |7-RAW-CI |7.6.2019072418 |evet |
+|RedHat 7,7 |RHEL |7-RAW-CI |7.7.2019081601 |önizleme |
+    
+Şu anda Azure Stack, Cloud-init kullanarak RHEL 7. x ve CentOS 7. x sağlamasını desteklemez.
 
-Şu anda Azure Stack RHEL 7.4 ve CentOS cloud-init kullanarak 7.4 sağlama desteklemez.
+* RHEL 7,6, Cloud-init paketi için desteklenen paket: *18.2-1. el7_6.2* 
+* RHEL 7,7 (Önizleme) için, Cloud-init paketi, Önizleme paketi: *18.5 -3. EL7*
+* CentOS 7,7 (Önizleme) için, Cloud-init paketi, Önizleme paketi: *18.5 -3. EL7. CentOS*
 
-## <a name="what-is-the-difference-between-cloud-init-and-the-linux-agent-wala"></a>Cloud-init ve Linux Aracısı'nı (WALA) arasındaki fark nedir?
-WALA sağlamak ve Vm'leri yapılandırma ve Azure uzantılarını işlemek için kullanılan bir Azure platforma özgü aracısıdır. Mevcut cloud-init müşteriler kendi geçerli cloud-init betikleri kullanmaya izin vermek üzere yerine Linux Aracısı cloud-init kullanmak için Vm'leri yapılandırma görevini güçlendirerek.  Linux sistemleri yapılandırma için cloud-init betiklerdeki mevcut Yatırımlar varsa, vardır **gerekli hiçbir ek ayar** bunları etkinleştirmek için. 
+## <a name="what-is-the-difference-between-cloud-init-and-the-linux-agent-wala"></a>Cloud-init ve Linux Aracısı (WALA) arasındaki fark nedir?
+WALA, VM 'Leri sağlamak ve yapılandırmak ve Azure uzantılarını işlemek için kullanılan bir Azure platforma özgü aracıdır. Mevcut Cloud-init müşterilerinin geçerli Cloud-init betiklerini kullanmasına izin vermek için, VM 'Leri Linux Aracısı yerine Cloud-init kullanacak şekilde yapılandırma görevini geliştirdik.  Linux sistemlerini yapılandırmaya yönelik Cloud-init komut dosyalarında mevcut yatırımlarınızın varsa, bunları etkinleştirmek için **başka bir ayar yapmanız gerekmez** . 
 
-Azure CLI'yı eklemezseniz `--custom-data` zaman WALA sağlama sırasında anahtar en az VM VM sağlama ve dağıtım varsayılanları ile tamamlamak için gereken parametreleri sağlama alır.  Cloud-init başvuruyorsa `--custom-data` değiştirmek, her özel verilerinizi (ayrı ayrı ayarlar veya tam betik) içinde yer alan WALA varsayılan ayarları geçersiz kılar. 
+Sağlama zamanında Azure CLı `--custom-data` anahtarını eklemezseniz, WALA VM 'yi sağlamak için gereken en düşük VM sağlama parametrelerini alır ve varsayılan olarak dağıtımı tamamlar.  Cloud-init `--custom-data` anahtarına başvurduğunuzda, özel verilerinizde (bireysel ayarlar veya tam komut dosyası) bulunan her şey WALA varsayılanlarını geçersiz kılar. 
 
-VM'lerin WALA yapılandırmaları zaman sağlama maksimum VM içinde çalışacak şekilde zaman kısıtlı.  Cloud-init yapılandırma Vm'lere uygulanan zaman kısıtlamalarına sahip değildir ve bir dağıtım tarafından zaman aşımından başarısız olmasına neden olmaz. 
+VM 'lerin WALA yapılandırmalarının, en yüksek VM sağlama süresi içinde çalışması için zaman kısıtlanıyor.  VM 'lere uygulanan Cloud init yapılandırmalarının zaman kısıtlamaları yoktur ve zaman aşımına uğraarak dağıtımın başarısız olmasına neden olmaz. 
 
-## <a name="deploying-a-cloud-init-enabled-virtual-machine"></a>Sanal makine etkin bir cloud-init dağıtma
-Dağıtım sırasında bir cloud-init etkinleştirilmiş dağıtım başvuru olarak, cloud-init etkinleştirilmiş sanal makine dağıtımına kadar kolaydır.  Linux dağıtım maintainers etkinleştirin ve kullanıcıların temel Azure yayımlanan görüntülere cloud-init tümleştirmek seçmeniz gerekir. Dağıtmak istediğiniz görüntüyü cloud-init etkinleştirilmiş olduğunu doğruladıktan sonra görüntüyü dağıtmak için Azure CLI'yı kullanabilirsiniz. 
+## <a name="deploying-a-cloud-init-enabled-virtual-machine"></a>Cloud-init etkin bir sanal makine dağıtma
+Cloud-init etkin bir sanal makine dağıtmak, dağıtım sırasında bulut-init özellikli bir dağıtıma başvurmak kadar basittir.  Linux dağıtım bakım ve Cloud-init ' i temel Azure yayımlanmış görüntülerine etkinleştirip tümleştirmelerini tercih etmek gerekir. Dağıtmak istediğiniz görüntünün Cloud-init ' i onayladıktan sonra, görüntüyü dağıtmak için Azure CLı ' yi kullanabilirsiniz. 
 
-Bu görüntü dağıtımı ilk adımı, bir kaynak grubu oluşturmaktır [az grubu oluşturma](/cli/azure/group) komutu. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
+Bu görüntüyü dağıtmanın ilk adımı, [az Group Create](/cli/azure/group) komutuyla bir kaynak grubu oluşturmaktır. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
 
 Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
 
 ```azurecli-interactive 
 az group create --name myResourceGroup --location eastus
 ```
-Adlı geçerli kabuğunuzun içinde bir dosya oluşturmak için sonraki adımdır *cloud-init.txt* oluşturup aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud shell'de oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud-init.txt` adını girin. Kullanılacak #1 seçin **nano** Düzenleyici. Başta birinci satır olmak üzere cloud-init dosyasının tamamının doğru bir şekilde kopyalandığından emin olun:
+Sonraki adım, geçerli kabuğunuzun içinde *kabuğunuzda Cloud-init. txt* adlı bir dosya oluşturmak ve aşağıdaki yapılandırmayı yapıştırmaktır. Bu örnekte, dosyayı yerel makinenizde değil Cloud Shell oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud-init.txt` adını girin. **Nano** düzenleyiciyi kullanmak için #1 seçin. Başta birinci satır olmak üzere cloud-init dosyasının tamamının doğru bir şekilde kopyalandığından emin olun:
 
 ```yaml
 #cloud-config
@@ -69,11 +73,11 @@ package_upgrade: true
 packages:
   - httpd
 ```
-Basın `ctrl-X` dosya çıkmak için şunu yazın `y` tuşuna basın ve dosyayı kaydetmek için `enter` çıkış dosya adını doğrulamak için.
+Dosyadan çıkmak için `ctrl-X` tuşuna basın, dosyayı kaydetmek için `y` yazın ve çıkışta dosya adını doğrulamak için `enter` 'e basın.
 
-Bir VM oluşturmak için son adımdır [az vm oluşturma](/cli/azure/vm) komutu. 
+Son adım [az VM Create](/cli/azure/vm) komutuyla bir VM oluşturmaktır. 
 
-Aşağıdaki örnekte adlı bir VM oluşturur *centos74* ve bunlar zaten varsayılan anahtar konumunda yoksa SSH anahtarları oluşturulur. Belirli bir anahtar kümesini kullanmak için `--ssh-key-value` seçeneğini kullanın.  `--custom-data` parametresini kullanarak cloud-init yapılandırma dosyanızı geçirin. Dosyayı mevcut çalışma dizininizin dışına kaydettiyseniz *cloud-init.txt* yapılandırmasının tam yolunu belirtin. Aşağıdaki örnekte adlı bir VM oluşturur *centos74*:
+Aşağıdaki örnek, *centos74* adlı bir sanal makine oluşturur ve varsayılan anahtar konumunda henüz yoksa SSH anahtarları oluşturur. Belirli bir anahtar kümesini kullanmak için `--ssh-key-value` seçeneğini kullanın.  `--custom-data` parametresini kullanarak cloud-init yapılandırma dosyanızı geçirin. Dosyayı mevcut çalışma dizininizin dışına kaydettiyseniz *cloud-init.txt* yapılandırmasının tam yolunu belirtin. Aşağıdaki örnek, *centos74*adlı bir sanal makine oluşturur:
 
 ```azurecli-interactive 
 az vm create \
@@ -84,20 +88,20 @@ az vm create \
   --generate-ssh-keys 
 ```
 
-VM oluşturulduğunda Azure CLI bilgi dağıtımınıza özgü gösterir. `publicIpAddress` değerini not edin. Bu adres, VM’ye erişmek için kullanılır.  Sanal Makinenin oluşturulması paketlerin yüklenmesi ve uygulamanın başlatılması için biraz zaman alabilir. Azure CLI sizi isteme geri döndürdükten sonra çalışmaya devam eden arka plan görevleri vardır. VM'ye SSH olabilir ve cloud-init günlükleri görüntülemek için sorun giderme bölümünde açıklanan adımları kullanın. 
+VM oluşturulduğunda Azure CLı, dağıtımınıza özgü bilgileri gösterir. `publicIpAddress` değerini not edin. Bu adres, VM’ye erişmek için kullanılır.  VM 'nin oluşturulması, yüklenecek paketlerin ve başlatılacak uygulamayı biraz zaman alır. Azure CLI sizi isteme geri döndürdükten sonra çalışmaya devam eden arka plan görevleri vardır. VM 'de SSH oluşturabilir ve Cloud-init günlüklerini görüntülemek için sorun giderme bölümünde özetlenen adımları kullanabilirsiniz. 
 
 ## <a name="troubleshooting-cloud-init"></a>Cloud-init sorunlarını giderme
-VM sağlandıktan, cloud-init ile tüm modüllerin çalışır ve betik tanımlanan sonra `--custom-data` VM'yi yapılandırmak için.  Herhangi bir hata veya eksikliklerden yapılandırmasından sorun gidermeniz gerekiyorsa, modül adı için arama yapmanız (`disk_setup` veya `runcmd` gibi) cloud-init günlüğünde - bulunan **/var/log/cloud-init.log**.
+VM sağlandıktan sonra Cloud-init, VM 'yi yapılandırmak için `--custom-data` tanımlanmış tüm modüller ve betiklerle çalışır.  Yapılandırmadan herhangi bir hata veya iş sorunu gidermeniz gerekiyorsa, **/var/log/Cloud-init.log**dosyasında bulunan Cloud-init günlüğünde modül adını (örneğin`disk_setup` veya `runcmd`) aramanız gerekir.
 
 > [!NOTE]
-> Her modülü hatası sonuçları içinde önemli bir cloud-init genel yapılandırma hatası. Örneğin, kullanarak `runcmd` modülü, komut başarısız olursa, cloud-init yine de rapor sağlama başarılı runcmd modülü yürütülen olduğundan.
+> Her modül hatası önemli bir Cloud-init genel yapılandırma hatasına neden olmaz. Örneğin, `runcmd` modülünü kullanarak, komut dosyası başarısız olursa, runcmd modülü yürütüldüğü için Cloud-init hala sağlama başarılı olur.
 
-Cloud-init günlüğü daha fazla ayrıntı için başvurmak [cloud-init belgeleri](https://cloudinit.readthedocs.io/en/latest/topics/logging.html) 
+Cloud-init günlüğü hakkında daha fazla bilgi için [Cloud-init belgelerine](https://cloudinit.readthedocs.io/en/latest/topics/logging.html) bakın 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yapılandırma değişiklikleri cloud-init örnekleri için aşağıdaki belgelere bakın:
+Cloud-init yapılandırma değişikliklerinin örnekleri için aşağıdaki belgelere bakın:
  
-- [Bir VM'ye ek Linux kullanıcı ekleme](cloudinit-add-user.md)
-- [İlk önyüklemede mevcut paketlerini güncelleştirmek için bir paket Yöneticisi'ni çalıştırın](cloudinit-update-vm.md)
-- [VM yerel ana bilgisayar adını değiştirin](cloudinit-update-vm-hostname.md) 
-- [Bir uygulama paketi yükleme, yapılandırma dosyasını güncelleyin ve anahtarları ekleme](tutorial-automate-vm-deployment.md)
+- [VM 'ye ek bir Linux kullanıcısı ekleme](cloudinit-add-user.md)
+- [İlk önyüklemede var olan paketleri güncelleştirmek için bir paket yöneticisi çalıştırın](cloudinit-update-vm.md)
+- [VM yerel ana bilgisayar adını değiştir](cloudinit-update-vm-hostname.md) 
+- [Uygulama paketi yüklemesi, yapılandırma dosyalarını güncelleştirme ve anahtarları ekleme](tutorial-automate-vm-deployment.md)

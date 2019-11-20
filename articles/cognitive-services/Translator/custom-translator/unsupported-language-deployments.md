@@ -1,7 +1,7 @@
 ---
-title: Desteklenmeyen dil dağıtımları - özel Translator
+title: Desteklenmeyen dil dağıtımları-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Desteklenmeyen dil çiftlerinde özel Translator'ı dağıtma
+description: Bu makalede, Azure bilişsel hizmetler özel çeviricisinde desteklenmeyen dil çiftlerinin nasıl dağıtılacağı gösterilir.
 services: cognitive-services
 author: swmachan
 manager: nitinme
@@ -10,51 +10,51 @@ ms.subservice: translator-text
 ms.topic: reference
 ms.date: 04/24/2019
 ms.author: swmachan
-ms.openlocfilehash: 284a7e98c088edb73a2c770a4c14bb0a479a6621
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 3c5c74fc853b5a2425a58e1704aad43350cba212
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67436063"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73837444"
 ---
 # <a name="unsupported-language-deployments"></a>Desteklenmeyen dil dağıtımları
 
 <!--Custom Translator provides the highest-quality translations possible using the latest techniques in neural machine learning. While Microsoft intends to make neural training available in all languages, there are some limitations that prevent us from being able to offer neural machine translation in all language pairs.-->  
 
-Microsoft Translator Hub'ın yakın zamanda kullanımdan ile Microsoft şu anda hub'ı aracılığıyla dağıtılan tüm modelleri undeploying. Birçoğunuzun olan dil çiftleri özel Translator içinde desteklenmeyen hub'ında dağıtılan modelleri vardır.  Bu durumda kullanıcıların içeriklerini çevirmek için hiçbir sunduğumuz sahip istemezsiniz.
+Microsoft Translator hub 'ının yakında kullanımdan kaldırılması sayesinde Microsoft, hub aracılığıyla dağıtılmış olan tüm modellerin dağıtımını kaldırır. Çoğu, dil çiftleri özel çevirmende desteklenmeyen hub 'da dağıtılan modellerdir.  Bu durumda olan kullanıcıların içeriğini çevirmek için bir yanıt olmaması gerekmez.
 
-Artık desteklenmeyen Modellerinizi özel Translator aracılığıyla dağıtmanıza olanak tanıyan bir işlem var.  Bu işlem en son V3 API'sini kullanarak içeriği çevirmek devam etmenize olanak tanır.  Bu modeller, bunları dağıtımını kaldırmayı seçin veya dil çifti özel Translator içinde kullanılabilir duruma kadar barındırılacak.  Bu makalede, desteklenmeyen dil çiftleriyle modelleri dağıtma işlemi açıklanmaktadır.
+Artık, desteklenmeyen modellerinizi özel çevirici aracılığıyla dağıtmanıza izin veren bir işlemdir.  Bu işlem, en son v3 API 'sini kullanarak içerik çevirmeye devam etmenize olanak sağlar.  Bu modeller, dağıtımını kaldırmak seçinceye kadar veya dil çiftinin özel çevirmende kullanılabilir hale gelene kadar barındırılacak.  Bu makalede, desteklenmeyen dil çiftlerine sahip modelleri dağıtma işlemi açıklanmaktadır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Sırayla Modellerinizi dağıtım için aday olmak için aşağıdaki ölçütleri karşılaması gerekir:
-* Modeli içeren proje hub'dan geçiş aracını kullanarak özel Translator'a geçirilmiştir gerekir.  İşlem geçirme projeleri ve çalışma alanları için bulunabilir [burada](how-to-migrate.md).
-* Geçiş gerçekleştiğinde model dağıtılmış durumda olması gerekir.  
-* Model dili çiftinin özel Translator içindeki bir desteklenmeyen dili çifti olmalıdır.  Bir dil İngilizce'den ya da desteklenir ancak çifti İngilizce içermez dil çiftleri Desteklenmeyen dil dağıtımlar için bir adaydır.  Örneğin, Hub modeli için bir Fransızca, Almanca dil çifti için bir desteklenmeyen dili çifti bile ancak Fransızca İngilizce ve Almanca olan İngilizce için desteklenen dil çifti olarak kabul edilir.
+Modellerinizin dağıtıma aday olması için aşağıdaki ölçütleri karşılaması gerekir:
+* Modeli içeren proje, geçiş aracı kullanılarak hub 'dan özel çevirmene geçirilmiş olmalıdır.  Projeleri ve çalışma alanlarını geçirme işlemi [burada](how-to-migrate.md)bulunabilir.
+* Geçiş gerçekleştiğinde modelin dağıtılmış durumda olması gerekir.  
+* Modelin dil çifti, özel çevirmende desteklenmeyen bir dil çifti olmalıdır.  Bir dilin Ingilizce veya Ingilizce tarafından desteklendiği, ancak çiftin kendisi Ingilizce, desteklenmeyen dil dağıtımları için aday olan dil çiftleri.  Örneğin, Fransızca ile Almanca arasında bir çift dil çifti için bir hub modeli, Ingilizce ve Ingilizce 'ye Fransızca 'nın desteklenen dil çifti olmasına rağmen desteklenmeyen bir dil çifti olarak değerlendirilir.
 
-## <a name="process"></a>Process
-Dağıtım için aday niteliği taşıyan Hub'ından modelleri geçirdikten sonra bunları şuraya giderek bulabilirsiniz **ayarları** çalışma alanınızı ve göreceğiniz sayfanın sonuna kadar kaydırma için sayfasına bir **desteklenmiyor Translator Hub eğitimleri** bölümü.  Bu bölümde, yalnızca yukarıda açıklanan önkoşulları karşılaması projeler varsa görüntülenir.
+## <a name="process"></a>Süreç
+Dağıtım için aday olan hub 'dan modelleri geçirdikten sonra, çalışma alanınızın **Ayarlar** sayfasına gidip, **Desteklenmeyen bir çevirici hub 'ı** ile ilgili bir bölümü görebileceğiniz sayfanın sonuna kadar kaydırma yaparak bunları bulabilirsiniz.  Bu bölüm yalnızca yukarıda bahsedilen önkoşulları karşılayan projeleriniz varsa görüntülenir.
 
-![Hub'ından geçirme](media/unsupported-language-deployments/unsupported-translator-hub-trainings.jpg)
+![Hub 'dan geçiş yapma](media/unsupported-language-deployments/unsupported-translator-hub-trainings.jpg)
 
-İçinde **desteklenmeyen Translator Hub eğitimleri** Seçimi sayfasında, **eğitimleri istenmemiş** sekmesi dağıtım için uygun olan modeller içerir.  Modelleri dağıtmak ve bir istek göndermek istediğiniz seçin.   30 Nisan dağıtım son tarihinden önce dağıtım için istediğiniz sayıda model seçebilirsiniz.
+**Desteklenmeyen çevirici hub 'ı** seçim sayfasında, **istenmeyen traçler** sekmesi dağıtım için uygun olan modelleri içerir.  Dağıtmak istediğiniz modelleri seçin ve bir istek gönderebilirsiniz.   30 Nisan dağıtım son tarihinden önce, dağıtım için istediğiniz kadar model seçebilirsiniz.
  
-![Hub'ından geçirme](media/unsupported-language-deployments/unsupported-translator-hub-trainings-list.jpg)
+![Hub 'dan geçiş yapma](media/unsupported-language-deployments/unsupported-translator-hub-trainings-list.jpg)
 
-Gönderilen sonra model üzerinde kullanılabilir olmayacak **eğitimleri istenmemiş** sekmesini ve bunun yerine görünür **eğitimleri istenen** sekmesi.  İstediğiniz zaman, istenen eğitimleri görüntüleyebilirsiniz.
+Gönderildikten sonra, model artık **istenmeyen insanlar** sekmesinde kullanılabilir olmayacaktır ve bunun yerine **istenen seyahat** sekmesinde görüntülenir.  İstediğiniz zaman istediğiniz zaman izleyebilirsiniz.
 
-![Hub'ından geçirme](media/unsupported-language-deployments/request-unsupported-trainings.jpg) 
+![Hub 'dan geçiş yapma](media/unsupported-language-deployments/request-unsupported-trainings.jpg) 
 
 ## <a name="whats-next"></a>Sırada ne var?
 
-Dağıtım için seçtiğiniz modelleri, hub'ı kullanımdan kaldırıldı ve tüm modelleri dağıtılmamış sonra kaydedilir.  Desteklenmeyen model dağıtımı için istekleri göndermek için 24 Mayıs kadar sahip.  Bu noktada, Translator V3 API aracılığıyla erişilebilir Bu modeller üzerinde 15 Haziran dağıtacağız.  Ayrıca, bunlar 1 Temmuz'a kadar V2 API aracılığıyla kullanılabilir.  
+Dağıtım için seçtiğiniz modeller, hub kullanımdan çıkarıldı ve tüm modeller dağıtıldıktan sonra kaydedilir.  Desteklenmeyen modellerin dağıtımına yönelik istekleri göndermek 24 Mayıs 'a kadar.  Bu modelleri 15 Haziran 'da, Translator v3 API aracılığıyla erişilebilecek bir noktada dağıtacağız.  Bunlara ek olarak, 1 Temmuz 'dan itibaren v2 API 'SI üzerinden de kullanılabilir.  
 
-Kullanımdan kaldırma Hub denetiminin önemli tarihleri hakkında daha fazla bilgi için [burada](https://www.microsoft.com/translator/business/hub/).
-Bir kez dağıtılan, normal barındırma ücretleri geçerli olacaktır.  Bkz: [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/) Ayrıntılar için.  
+Hub 'ın kullanımdan kaldırılması sırasında önemli tarihler hakkında daha fazla bilgi için [buraya](https://www.microsoft.com/translator/business/hub/)bakın.
+Dağıtıldıktan sonra, normal barındırma ücretleri uygulanır.  Ayrıntılar için bkz. [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/) .  
 
-Standart özel Translator modeller, çok bölgeli barındırma ücretleri uygulanmaz şekilde Hub modelleri yalnızca tek bir bölgede kullanılabilir olacak.  Uygulama dağıtıldıktan sonra Hub modelinizin dağıtımı geri geçirilen özel Translator proje aracılığıyla herhangi bir zamanda mümkün olacaktır.
+Standart özel çevirici modellerinden farklı olarak, hub modelleri yalnızca tek bir bölgede kullanıma sunulacaktır; bu nedenle çok bölgeli barındırma ücretleri uygulanmaz.  Dağıtıldıktan sonra, geçirilen özel çevirmen projesi aracılığıyla hub modelinizi dilediğiniz zaman dağıtabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Bir model eğitip](how-to-train-model.md).
-- Dağıtılan özel çeviri modeliniz aracılığıyla kullanmaya başlama [Microsoft Translator Text API v3 sürümüne](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl).
+- [Bir modeli eğitme](how-to-train-model.md).
+- Dağıtılmış özel çeviri modelinizi [Microsoft Translator metin çevirisi API'si v3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl)aracılığıyla kullanmaya başlayın.

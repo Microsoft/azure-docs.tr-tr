@@ -1,100 +1,101 @@
 ---
-title: SaaS yerine getirme API v2 | Azure Market
-description: Bu makalede, oluşturup bir SaaS teklifi Azure Market ve AppSource ilişkili yerine getirme kullanarak yönetmek açıklanmaktadır v2 API'leri.
+title: SaaS karşılama API v2 | Azure Marketi
+description: Bu makalede, ilişkili karşılama v2 API 'Leri kullanılarak AppSource ve Azure Marketi üzerinde bir SaaS teklifinin nasıl oluşturulacağı ve yönetileceği açıklanmaktadır.
 services: Azure, Marketplace, Cloud Partner Portal,
-author: v-miclar
+author: qianw211
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
-ms.date: 05/23/2019
+ms.date: 10/18/2019
 ms.author: evansma
-ms.openlocfilehash: ecee1669c29d7b298741f9e5521de03da6dd7e3b
-ms.sourcegitcommit: 08138eab740c12bf68c787062b101a4333292075
+ms.openlocfilehash: 4c73a59352422626ec3c6012607009995479d0cc
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/22/2019
-ms.locfileid: "67331630"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73816600"
 ---
-# <a name="saas-fulfillment-apis-version-2"></a>SaaS yerine getirme API'leri, sürüm 2 
+# <a name="saas-fulfillment-apis-version-2"></a>SaaS karşılama API 'Leri, sürüm 2 
 
-Bu makalede, SaaS uygulamalarında AppSource markete ve Azure Marketi'nde satmak üzere iş ortakları sağlayan API'leri ayrıntıları. Azure Market ve AppSource üzerinde transactable SaaS gereksinimini sunan bu apı'lerdir.
+Bu makalede, iş ortaklarının, SaaS uygulamalarını AppSource marketi ve Azure Marketi 'nde satmasını sağlayan API 'Ler ayrıntılı olarak anlatılmaktadır. Bu API 'Ler, AppSource ve Azure Marketi üzerinde transactable SaaS teklifleri için bir gereksinimdir.
 
-## <a name="managing-the-saas-subscription-life-cycle"></a>SaaS abonelik yaşam döngüsünü yönetme
+## <a name="managing-the-saas-subscription-life-cycle"></a>SaaS Abonelik yaşam döngüsünü yönetme
 
-Azure SaaS, SaaS aboneliği satın aldığınız tüm yaşam döngüsünü yönetir. Bu, gerçek yerine getirme sürücü için bir mekanizma API'leri yerine getirme kullanır, planlar ve iş ortağı abonelikle silme dönüşür. Müşteri'nin fatura Microsoft'un SaaS aboneliğin durumunu alır. Aşağıdaki diyagram, durumları ve durumları değişiklikleri sürücü işlemleri gösterir.
+Azure SaaS, SaaS aboneliği satın alma 'nın tüm yaşam döngüsünü yönetir. Gerçek yerine getirme, planlardaki değişiklikler ve iş ortağı ile aboneliğin silinmesi için bir mekanizma olarak yerine getirme API 'Lerini kullanır. Müşterinin faturanız, Microsoft 'un koruduğu SaaS aboneliğinin durumuna bağlıdır. Aşağıdaki diyagramda durumları ve durumları arasındaki değişiklikleri sağlayan işlemler gösterilmektedir.
 
-![SaaS abonelik yaşam döngüsü durumları](./media/saas-subscription-lifecycle-api-v2.png)
+![SaaS aboneliği yaşam döngüsü durumları](./media/saas-subscription-lifecycle-api-v2.png)
 
 
-### <a name="states-of-a-saas-subscription"></a>Bir SaaS abonelik durumları
+### <a name="states-of-a-saas-subscription"></a>SaaS aboneliğinin durumları
 
-Aşağıdaki tablo, bir açıklama ve sıralı diyagramı her biri için (varsa) da dahil olmak üzere bir SaaS abonelik için sağlama durumları listeler. 
+Aşağıdaki tabloda her biri için bir açıklama ve sıra diyagramı (varsa) dahil olmak üzere SaaS aboneliğinin sağlama durumları listelenmektedir. 
 
 #### <a name="provisioning"></a>Sağlama
 
-Bir müşteri satın başlattığında, iş ortağı bu bilgileri bir URL parametresini kullanan bir müşteri etkileşimli web sayfasındaki bir yetkilendirme kodu alır. Bir örnek `https://contoso.com/signup?token=..`iş ortağı Merkezi'nde giriş sayfası URL'si bilgileriyse `https://contoso.com/signup`. Yetkilendirme kodu doğrulanır ve sağlama hizmetinin ayrıntılarını çözmek API'sini çağırarak değişimi.  Bir SaaS hizmeti sağlama tamamlandığında, bir etkinleştirme çağrı yerine getirme tamamlandıktan ve müşteri faturalandırılır sinyal gönderir. 
+Bir müşteri satın alma işlemini başlattığında, iş ortağı bu bilgileri bir URL parametresi kullanan müşteri etkileşimli Web sayfasındaki bir yetkilendirme kodunda alır. Bir örnek `https://contoso.com/signup?token=..`, ancak Iş ortağı merkezindeki giriş sayfası URL 'SI `https://contoso.com/signup`. Yetkilendirme kodu, Resolve API 'SI çağırarak sağlama hizmetinin ayrıntıları için doğrulanabilir ve değiştirilebilir.  SaaS hizmeti sağlamayı tamamladığında, tamamlama işleminin tamamlandığını ve müşterinin faturalandırılabileceği sinyali veren bir etkinleştirme çağrısı gönderir. 
 
-Aşağıdaki diyagramda bir sağlama senaryosu için API çağrıları dizisini gösterir.  
+Aşağıdaki diyagramda, bir sağlama senaryosu için API çağrılarının sırası gösterilmektedir.  
 
-![Bir SaaS hizmet sağlanması için API çağrıları](./media/saas-post-provisioning-api-v2-calls.png)
+![SaaS hizmeti sağlamak için API çağrıları](./media/saas-post-provisioning-api-v2-calls.png)
 
 #### <a name="provisioned"></a>Sağlanan
 
-Bu durum sağlanan bir hizmet kararlı durumudur.
+Bu durum, sağlanan bir hizmetin kararlı durumudur.
 
 ##### <a name="provisioning-for-update"></a>Güncelleştirme için sağlama 
 
-Bu durum, mevcut bir hizmet için bir güncelleştirme Beklemede olduğunu gösterir. Böyle bir güncelleştirme Market ya da SaaS hizmeti (yalnızca doğrudan müşteri işlemler için) müşteri tarafından başlatılabilir.
+Bu durum, var olan bir hizmete yönelik bir güncelleştirmenin beklendiğini belirtir. Bu tür bir güncelleştirme, müşteri tarafından Market 'ten veya SaaS hizmetinden (yalnızca doğrudan müşteri işlemleri için) başlatılabilir.
 
-##### <a name="provisioning-for-update-when-its-initiated-from-the-marketplace"></a>(Bu marketten başlatıldığında) güncelleştirmesi sağlama
+##### <a name="provisioning-for-update-when-its-initiated-from-the-marketplace"></a>Güncelleştirme için sağlama (Market 'ten başlatıldığında)
 
-Marketten bir güncelleştirme başlatıldığında bir dizi eylem Aşağıdaki diyagramda gösterilmektedir.
+Aşağıdaki diyagramda, Market 'ten bir güncelleştirme başlatıldığında eylemlerin sırası gösterilmektedir.
 
-![Market'ten güncelleştirme başlatıldığında API çağrıları](./media/saas-update-api-v2-calls-from-marketplace-a.png)
+![Market 'ten güncelleştirme başlatıldığında API çağrıları](./media/saas-update-api-v2-calls-from-marketplace-a.png)
 
-##### <a name="provisioning-for-update-when-its-initiated-from-the-saas-service"></a>(Bu SaaS hizmeti başlatıldığında) güncelleştirmesi sağlama
+##### <a name="provisioning-for-update-when-its-initiated-from-the-saas-service"></a>Güncelleştirme için sağlama (SaaS hizmetinden başlatıldığında)
 
-Aşağıdaki diyagramda, bir güncelleştirme SaaS hizmeti başlatıldığında eylemleri gösterir. (Web kancası çağrısı SaaS hizmeti tarafından başlatılan bir abonelik için bir güncelleştirme ile değiştirilir.) 
+Aşağıdaki diyagramda, SaaS hizmetinden bir güncelleştirme başlatıldığında eylemler gösterilmektedir. (Web kancası çağrısı, SaaS hizmeti tarafından başlatılan abonelikle bir güncelleştirmeyle değiştirilmiştir.) 
 
-![Güncelleştirme SaaS hizmeti başlatıldığında, API çağrıları](./media/saas-update-api-v2-calls-from-saas-service-a.png) 
+![SaaS hizmetinden güncelleştirme başlatıldığında API çağrıları](./media/saas-update-api-v2-calls-from-saas-service-a.png) 
 
-#### <a name="suspended"></a>Askıya alındı
+#### <a name="suspended"></a>Alın
 
-Bu durum, bir müşterinin Ödeme alınan taşınmadığından gösterir. Müşteri aboneliğini önce yetkisiz kullanım süresi bir ilke tarafından sağlarız. Bu durumda bir aboneliğiniz olduğunda: 
+Bu durum, bir müşterinin ödemesinin alınmadığını gösterir. İlkeye göre, aboneliği iptal etmeden önce müşteriye yetkisiz kullanım süresi sağlıyoruz. Bu durumda bir abonelik olduğunda: 
 
-- Bir iş ortağı olarak düşebilir veya hizmet kullanıcının erişimi engellemek tercih edebilirsiniz.
-- Abonelik ayarları ya da veri kaybı olmadan tam işlevselliğini geri yüklemek bir kurtarılabilir durumda tutulması gerekir. 
-- Eski duruma getirme isteği yerine getirme API'ler aracılığıyla bu abonelik ya da serbest sağlama isteği için yetkisiz kullanım süresi sonunda yararlanmayı beklersiniz. 
+- İş ortağı olarak, kullanıcının hizmete erişimini düşürmeye veya engellemeye seçim yapabilirsiniz.
+- Abonelik, verilerin veya ayarların kaybedilmesi gerekmeden tam işlevselliği geri yükleyen kurtarılabilir bir durumda tutulmalıdır. 
+- Bu abonelik için kabul eden API 'Ler veya yetkisiz kullanım süresi sonunda bir ön sağlama isteği aracılığıyla bu abonelik için bir yeniden etkinleştirme isteği almanız bekleniyor. 
 
-#### <a name="unsubscribed"></a>Aboneliği 
+#### <a name="unsubscribed"></a>Kaldırıldı 
 
-Abonelikler, yanıt bir açık müşteri isteği veya ücretlerin ödenmemesi nedeniyle, bu durumda ulaşın. Ortaktan müşterinin veri kurtarma isteğinde belirli sayıda gün boyunca saklanır ve ardından silinir beklenir. 
+Abonelikler, açık müşteri isteğine veya Dues 'nin ödemesine yanıt olarak bu duruma ulaşacak. İş ortağının beklentisi, müşterinin verilerinin belirli bir gün sayısı için istek üzerine kurtarılmasına ve sonra silinmesine bağlıdır. 
 
 
 ## <a name="api-reference"></a>API başvurusu
 
-Bu bölümde SaaS belgeleri *abonelik API* ve *Operations API'si*.  Değerini `api-version` API sürüm 2 için parametredir `2018-08-31`.  
+Bu bölüm SaaS *aboneliği API 'si* ve *işlemler API*'sini belgeler.  Sürüm 2 API 'Leri için `api-version` parametresinin değeri `2018-08-31`.  
 
 
-### <a name="parameter-and-entity-definitions"></a>Bir parametre ve tanımları
+### <a name="parameter-and-entity-definitions"></a>Parametre ve varlık tanımları
 
-Aşağıdaki tabloda ortak parametrelerini ve yerine getirme API'leri tarafından kullanılan varlıkları tanımlarını listeler.
+Aşağıdaki tabloda, API 'Leri karşılama tarafından kullanılan ortak parametre ve varlıkların tanımları listelenmektedir.
 
 |     Varlık/parametre     |     Tanım                         |
 |     ----------------     |     ----------                         |
-| `subscriptionId`         | Bir SaaS kaynak GUID tanımlayıcısı.  |
-| `name`                   | Bu kaynak için müşteri tarafından sağlanan bir kolay ad. |
-| `publisherId`            | Her yayımcı için bir benzersiz tanımlayıcı (örneğin: "contoso"). |
-| `offerId`                | Her teklif için bir benzersiz dize tanımlayıcı (örneğin: "offer1").  |
-| `planId`                 | Her planı/SKU'yu için bir benzersiz tanımlayıcı (örneğin: "Gümüş"). |
-| `operationId`            | Belirli bir işlem için GUID tanımlayıcısı.  |
-|  `action`                | Bir kaynakta ya da gerçekleştirilmekte olan eylemin `subscribe`, `unsubscribe`, `suspend`, `reinstate`, veya `changePlan`, `changeQuantity`, `transfer`.  |
+| `subscriptionId`         | SaaS kaynağı için GUID tanımlayıcısı.  |
+| `name`                   | Müşteri tarafından bu kaynak için bir kolay ad belirtildi. |
+| `publisherId`            | Her yayımcı için benzersiz bir dize tanımlayıcısı (örneğin: "contoso"). |
+| `offerId`                | Her teklif için benzersiz bir dize tanımlayıcı (örneğin: "offer1").  |
+| `planId`                 | Her plan/SKU için benzersiz bir dize tanımlayıcısı (örneğin: "Gümüş"). |
+| `operationId`            | Belirli bir işlemin GUID tanımlayıcısı.  |
+|  `action`                | `Unsubscribe`, `Suspend`, `Reinstate`veya `ChangePlan`, `ChangeQuantity`, `Transfer`bir kaynakta gerçekleştirilen eylem. |
 |   |   |
 
-Genel olarak benzersiz tanımlayıcıları ([GUID'leri](https://en.wikipedia.org/wiki/Universally_unique_identifier)) genellikle otomatik olarak oluşturulan 128-bit (32 onaltılık) sayılardır. 
+Genel olarak benzersiz tanımlayıcılar ([GUID 'ler](https://en.wikipedia.org/wiki/Universally_unique_identifier)) genellikle otomatik olarak oluşturulan 128 bitlik (32-onaltılı) sayılardır. 
 
-#### <a name="resolve-a-subscription"></a>Bir abonelik çözümleyin 
+#### <a name="resolve-a-subscription"></a>Aboneliği çözümle 
 
-Bir kalıcı kaynak kimliği için bir Market belirteci çözülemedi yayımcı Çözümle uç nokta sağlar Kaynak Kimliği SaaS abonelik için benzersiz tanımlayıcısıdır. Bir kullanıcı bir iş ortağının Web sitesine yönlendirilir, sorgu parametrelerinde bir belirteç URL'sini içerir. İş ortağı Bu belirteci kullanmasına ve bu sorunu çözmek için istekte beklenir. Yanıtın benzersiz SaaS abonelik kimliği, adı, Teklif kimliği ve kaynak planlama içerir. Bu belirteci yalnızca bir saat boyunca geçerlidir. 
+Çözümleme uç noktası, yayımcının bir market belirtecini kalıcı bir kaynak KIMLIĞINE çözümlemesine olanak sağlar. Kaynak KIMLIĞI, SaaS aboneliğinin benzersiz tanımlayıcısıdır. Bir Kullanıcı bir iş ortağının Web sitesine yeniden yönlendirildiğinde, URL sorgu parametrelerinde bir belirteç içerir. Ortağın bu belirteci kullanması ve bunu çözümlemek için bir istek yapması beklenmektedir. Yanıt, kaynak için benzersiz SaaS Abonelik KIMLIĞI, adı, teklif KIMLIĞI ve planı içerir. Bu belirteç yalnızca bir saat için geçerlidir. 
 
 ##### <a name="postbrhttpsmarketplaceapimicrosoftcomapisaassubscriptionsresolveapi-versionapiversion"></a>Yayınla<br>`https://marketplaceapi.microsoft.com/api/saas/subscriptions/resolve?api-version=<ApiVersion>`
 
@@ -102,22 +103,22 @@ Bir kalıcı kaynak kimliği için bir Market belirteci çözülemedi yayımcı 
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|  ApiVersion        |  Bu istek için kullanılacak işlem sürümü.  |
+|  ApiVersion        |  Bu istek için kullanılacak işlemin sürümü.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
  
 |                    |                   |
 |  ---------------   |  ---------------  |
 |  İçerik türü      | `application/json` |
-|  x-ms-requestid    |  İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-|  x-ms-bağıntı kimliği |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). |
-|  x-ms-Pazar-token  |  Kullanıcı, Azure SaaS iş ortağının Web sitesine yönlendirilir, URL'deki belirteci sorgu parametresi (örneğin: `https://contoso.com/signup?token=..`). *Not:* URL, kullanmadan önce tarayıcıdan belirteç değeri kodunu çözer.  |
+|  x-MS-RequestId    |  İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır. |
+|  x-MS-bağıntıkimliği |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). Örneğin: "`Bearer <access_token>`". |
+|  x-MS-Market-belirteç  |  Kullanıcı SaaS ortağının Web sitesine Azure 'dan yönlendirildiğinde, URL 'deki belirteç sorgu parametresi (örneğin: `https://contoso.com/signup?token=..`). *Note:* URL, kullanılmadan önce tarayıcıdan belirteç değerinin kodunu çözer.  |
 
 *Yanıt kodları:*
 
 Kod: 200<br>
-Donuk belirteç SaaS aboneliği çözümler. Yanıt gövdesi:
+Donuk belirteci bir SaaS aboneliğine çözümler. Yanıt gövdesi:
  
 
 ```json
@@ -131,10 +132,10 @@ Donuk belirteç SaaS aboneliği çözümler. Yanıt gövdesi:
 ```
 
 Kod: 400<br>
-Hatalı istek. x-ms-Pazar-belirteci eksik, hatalı veya süresi dolmuş.
+Hatalı istek. x-MS-Market-belirteç eksik, hatalı biçimlendirilmiş veya süresi dolmuştur.
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.
@@ -151,14 +152,14 @@ Kod: 500<br>
 }
 ```
 
-### <a name="subscription-api"></a>Abonelik API
+### <a name="subscription-api"></a>Abonelik API 'SI
 
-Abonelik API aşağıdaki HTTPS işlemleri destekler: **Alma**, **Post**, **düzeltme eki**, ve **Sil**.
+Abonelik API 'SI şu HTTPS işlemlerini destekler: **Get**, **Post**, **Patch**ve **Delete**.
 
 
-#### <a name="list-subscriptions"></a>Liste abonelikler
+#### <a name="list-subscriptions"></a>Abonelikleri Listele
 
-Bir yayımcı tüm SaaS abonelikleri listeler.
+Bir yayımcının tüm SaaS aboneliklerini listeler.
 
 ##### <a name="getbrhttpsmarketplaceapimicrosoftcomapisaassubscriptionsapi-versionapiversion"></a>Al<br>`https://marketplaceapi.microsoft.com/api/saas/subscriptions?api-version=<ApiVersion>`
 
@@ -166,22 +167,26 @@ Bir yayımcı tüm SaaS abonelikleri listeler.
 
 |             |                   |
 |  --------   |  ---------------  |
-| ApiVersion  |  Bu istek için kullanılacak işlem sürümü.  |
+| ApiVersion  |  Bu istek için kullanılacak işlemin sürümü.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
 | İçerik türü       |  `application/json`  |
-| x-ms-requestid     |  İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-| x-ms-bağıntı kimliği |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-| authorization      |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  |
+| x-MS-RequestId     |  İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır. |
+| x-MS-bağıntıkimliği |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+| yetkisi      |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). Örneğin: "`Bearer <access_token>`".  |
 
 *Yanıt kodları:*
 
 Kod: 200 <br/>
-Kimlik doğrulama belirteci temel alınarak, yayımcının tüm teklifler için karşılık gelen abonelikler ve yayımcı alır.
-Yanıt yükü:<br>
+Kimlik doğrulama belirtecine göre yayımcının tüm teklifleri için yayımcıyı ve ilgili abonelikleri alır.
+
+>[!Note]
+>[Sahte API 'ler](#mock-apis) , teklifi ilk geliştirirken kullanılır, ancak teklif yayımlandığında gerçek API 'lerin kullanılması gerekir.  Gerçek API 'ler ve sahte API 'Ler kodun ilk satırına göre farklılık gösterir.  Gerçek API 'de, bu bölüm, sahte API için mevcut olmadığından `subscription` bölümü vardır.
+
+Sahte API için yanıt yükü:<br>
 
 ```json
 {
@@ -199,21 +204,66 @@ Yanıt yükü:<br>
           "purchaser": { // Tenant that purchased the SaaS subscription. These could be different for reseller scenario
               "tenantId": "<guid>"
           },
+            "term": {
+                "startDate": "2019-05-31",
+                "endDate": "2019-06-29",
+                "termUnit": "P1M"
+          },
           "allowedCustomerOperations": [
               "Read" // Possible Values: Read, Update, Delete.
           ], // Indicates operations allowed on the SaaS subscription. For CSP-initiated purchases, this will always be Read.
           "sessionMode": "None", // Possible Values: None, DryRun (Dry Run indicates all transactions run as Test-Mode in the commerce stack)
+          "isFreeTrial": "true", // true - the customer subscription is currently in free trial, false - the customer subscription is not currently in free trial.
           "saasSubscriptionStatus": "Subscribed" // Indicates the status of the operation: [NotStarted, PendingFulfillmentStart, Subscribed, Suspended, Unsubscribed]
       }
   ],
   "continuationToken": ""
 }
 ```
+Ve gerçek API için: <br>
 
-Devamlılık belirteci almak için planlar, ek "sayfalar" varsa mevcut olacaktır. 
+```json
+{
+  "subscriptions": [
+      {
+          "id": "<guid>",
+          "name": "Contoso Cloud Solution",
+          "publisherId": "contoso",
+          "offerId": "offer1",
+          "planId": "silver",
+          "quantity": "10",
+          "beneficiary": { // Tenant, object id and email address for which SaaS subscription is purchased.
+              "emailId": "<email>",
+              "objectId": "<guid>",                     
+              "tenantId": "<guid>"
+          },
+          "purchaser": { // Tenant, object id and email address that purchased the SaaS subscription. These could be different for reseller scenario
+              "emailId": "<email>",
+              "objectId": "<guid>",                      
+              "tenantId": "<guid>"
+          },
+            "term": {
+                "startDate": "2019-05-31",
+                "endDate": "2019-06-29",
+                "termUnit": "P1M"
+          },
+          "allowedCustomerOperations": [
+              "Read" // Possible Values: Read, Update, Delete.
+          ], // Indicates operations allowed on the SaaS subscription. For CSP-initiated purchases, this will always be Read.
+          "sessionMode": "None", // Possible Values: None, DryRun (Dry Run indicates all transactions run as Test-Mode in the commerce stack)
+          "isFreeTrial": true, // true - the customer subscription is currently in free trial, false - the customer subscription is not currently in free trial.(optional field - default false)
+          "isTest": false, //indicating whether the current subscription is a test asset
+          "sandboxType": "None", // Possible Values: None, Csp (Csp sandbox purchase)
+          "saasSubscriptionStatus": "Subscribed" // Indicates the status of the operation: [NotStarted, PendingFulfillmentStart, Subscribed, Suspended, Unsubscribed]
+      }
+  ],
+  "@nextLink": ""
+}
+```
+Devamlılık belirteci yalnızca alınacak planların ek "sayfaları" varsa mevcut olacaktır. 
 
 Kod: 403 <br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor. 
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor. 
 
 Kod: 500<br>
 İç sunucu hatası.
@@ -229,7 +279,7 @@ Kod: 500<br>
 
 #### <a name="get-subscription"></a>Abonelik al
 
-Belirtilen SaaS abonelik alır. Bu çağrı, lisans bilgilerini almak ve planlama bilgileri için kullanın.
+Belirtilen SaaS aboneliğini alır. Lisans bilgilerini ve plan bilgilerini almak için bu çağrıyı kullanın.
 
 ##### <a name="getbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidapi-versionapiversion"></a>Al<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId?api-version=<ApiVersion>`
 
@@ -237,22 +287,22 @@ Belirtilen SaaS abonelik alır. Bu çağrı, lisans bilgilerini almak ve planlam
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-| subscriptionId     |   Belirteç çözmek API aracılığıyla çözdükten sonra elde edilen SaaS aboneliği benzersiz tanımlayıcısı.   |
-|  ApiVersion        |   Bu istek için kullanılacak işlem sürümü.   |
+| subscriptionId     |   Belirteci çözümle API aracılığıyla çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz tanıtıcısı.   |
+|  ApiVersion        |   Bu istek için kullanılacak işlemin sürümü.   |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
 |  İçerik türü      |  `application/json`  |
-|  x-ms-requestid    |  İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-|  x-ms-bağıntı kimliği |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). |
+|  x-MS-RequestId    |  İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır. |
+|  x-MS-bağıntıkimliği |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). Örneğin: "`Bearer <access_token>`".  |
 
 *Yanıt kodları:*
 
 Kod: 200<br>
-SaaS abonelik tanımlayıcıdan alır. Yanıt yükü:<br>
+Tanımlayıcıdan SaaS aboneliğini alır. Yanıt yükü:<br>
 
 ```json
 Response Body:
@@ -271,12 +321,18 @@ Response Body:
           },
         "allowedCustomerOperations": ["Read"], // Indicates operations allowed on the SaaS subscription. For CSP-initiated purchases, this will always be Read.
         "sessionMode": "None", // Dry Run indicates all transactions run as Test-Mode in the commerce stack
+        "isFreeTrial": "true", // true - customer subscription is currently in free trial, false - customer subscription is not currently in free trial.
         "status": "Subscribed", // Indicates the status of the operation.
+          "term": { //This gives the free trial term start and end date
+            "startDate": "2019-05-31",
+            "endDate": "2019-06-29",
+            "termUnit": "P1M" //where P1M: Monthly, P1Y: Yearly 
+        },
 }
 ```
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.<br> 
@@ -292,9 +348,9 @@ Kod: 500<br>
     }  
 ```
 
-#### <a name="list-available-plans"></a>Kullanılabilir planlar listesi
+#### <a name="list-available-plans"></a>Kullanılabilir planları listeleme
 
-Geçerli yayımcı herhangi bir özel veya genel tekliflere olup olmadığını öğrenmek için bu çağrıyı kullanın.
+Geçerli yayımcı için özel veya genel teklifler olup olmadığını bulmak için bu çağrıyı kullanın.
 
 ##### <a name="getbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidlistavailableplansapi-versionapiversion"></a>Al<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>/listAvailablePlans?api-version=<ApiVersion>`
 
@@ -302,21 +358,21 @@ Geçerli yayımcı herhangi bir özel veya genel tekliflere olup olmadığını 
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|  ApiVersion        |   Bu istek için kullanılacak işlem sürümü.  |
+|  ApiVersion        |   Bu istek için kullanılacak işlemin sürümü.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
 |   İçerik türü     |  `application/json` |
-|   x-ms-requestid   |   İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-|  x-ms-bağıntı kimliği  | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). |
+|   x-MS-RequestId   |   İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır. |
+|  x-MS-bağıntıkimliği  | İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır. |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  Örneğin: "`Bearer <access_token>`". |
 
 *Yanıt kodları:*
 
 Kod: 200<br>
-Bir müşteri için uygun bir plan listesini alır. Yanıt gövdesi:
+Bir müşteri için kullanılabilir planların bir listesini alır. Yanıt gövdesi:
 
 ```json
 {
@@ -332,7 +388,7 @@ Kod: 404<br>
 Bulunamadı.<br> 
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor. <br> 
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor. <br> 
 
 Kod: 500<br>
 İç sunucu hatası.<br>
@@ -345,7 +401,7 @@ Kod: 500<br>
     } 
 ```
 
-#### <a name="activate-a-subscription"></a>Bir aboneliği etkinleştirin
+#### <a name="activate-a-subscription"></a>Aboneliği etkinleştir
 
 ##### <a name="postbrhttpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidactivateapi-versionapiversion"></a>Yayınla<br>`https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>/activate?api-version=<ApiVersion>`
 
@@ -353,17 +409,17 @@ Kod: 500<br>
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|  ApiVersion        |  Bu istek için kullanılacak işlem sürümü.  |
-| subscriptionId     | Çözmek API'sini kullanarak belirteci çözdükten sonra elde edilen SaaS aboneliği benzersiz tanımlayıcısı.  |
+|  ApiVersion        |  Bu istek için kullanılacak işlemin sürümü.  |
+| subscriptionId     | Çözümle API 'SI kullanılarak belirteç çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz tanıtıcısı.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
  
 |                    |                   |
 |  ---------------   |  ---------------  |
 |  İçerik türü      | `application/json`  |
-|  x-ms-requestid    | İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  x-ms-bağıntı kimliği  | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu dize istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). |
+|  x-MS-RequestId    | İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  x-MS-bağıntıkimliği  | İstemcideki işlem için benzersiz bir dize değeri. Bu dize, istemci işlemindeki tüm olayları sunucu tarafında bulunan olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  Örneğin: "`Bearer <access_token>`". |
 
 *İstek yükü:*
 
@@ -377,13 +433,13 @@ Kod: 500<br>
 *Yanıt kodları:*
 
 Kod: 200<br>
-Abonelik etkinleştirir.<br>
+Aboneliği etkinleştirir.<br>
 
 Kod: 400<br>
-Hatalı istek: doğrulama hataları.
+Hatalı istek: doğrulama sorunları.
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.
@@ -400,27 +456,27 @@ Kod: 500<br>
 }
 ```
 
-#### <a name="change-the-plan-on-the-subscription"></a>Abonelik planını değiştirin
+#### <a name="change-the-plan-on-the-subscription"></a>Abonelikte planı değiştirme
 
-Abonelik planını güncelleştirin.
+Abonelikte planı güncelleştirin.
 
-##### <a name="patchbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidapi-versionapiversion"></a>Düzeltme Eki<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>?api-version=<ApiVersion>`
+##### <a name="patchbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidapi-versionapiversion"></a>Düzeltmesi<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>?api-version=<ApiVersion>`
 
 *Sorgu parametreleri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|  ApiVersion        |  Bu istek için kullanılacak işlem sürümü.  |
-| subscriptionId     | Çözmek API'sini kullanarak belirteci çözdükten sonra elde edilen SaaS aboneliği benzersiz tanımlayıcısı.  |
+|  ApiVersion        |  Bu istek için kullanılacak işlemin sürümü.  |
+| subscriptionId     | Çözümle API 'SI kullanılarak belirteç çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz tanıtıcısı.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
 |  İçerik türü      | `application/json` |
-|  x-ms-requestid    |   İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  x-ms-bağıntı kimliği  |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.    |
-| authorization      |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  |
+|  x-MS-RequestId    |   İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  x-MS-bağıntıkimliği  |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.    |
+| yetkisi      |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  Örneğin: "`Bearer <access_token>`".  |
 
 *İstek yükü:*
 
@@ -431,22 +487,22 @@ Request Body:
 }
 ```
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-| İşlem konumu | İşlemin durumunu almak için bir kaynak bağlantısı.   |
+| İşlem-konum | İşlemin durumunu almak için bir kaynağa olan bağlantı.   |
 
 *Yanıt kodları:*
 
 Kod: 202<br>
-Planı değiştirmek için istek kabul edildi. İş ortağı başarı veya başarısızlığı belirlemek için işlem konum yoklamak için bekleniyor. <br>
+Planı değiştirme isteği kabul edildi. Ortağın, bir başarı veya başarısızlık tespit etmek için Işlem konumunu yoklamak üzere olması beklenir. <br>
 
 Kod: 400<br>
-Hatalı istek: doğrulama hataları.
+Hatalı istek: doğrulama sorunları.
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.
@@ -464,29 +520,29 @@ Kod: 500<br>
 ```
 
 >[!Note]
->Bir plan veya miktarı yalnızca tek seferde düzeltme, ikisi birden değil. Bir Abonelikteki ile düzenler **güncelleştirme** değil `allowedCustomerOperations`.
+>Tek seferde değil yalnızca bir plan veya miktar düzeltme eki uygulanabilir. **Güncelleştirme** ile bir abonelikte yapılan düzenlemeler `allowedCustomerOperations`değil.
 
-#### <a name="change-the-quantity-on-the-subscription"></a>Abonelik üzerinde miktarı Değiştir
+#### <a name="change-the-quantity-on-the-subscription"></a>Abonelikteki miktarı değiştirme
 
-Abonelik miktarındaki güncelleştirin.
+Abonelikteki miktarı güncelleştirin.
 
-##### <a name="patchbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidapi-versionapiversion"></a>Düzeltme Eki:<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>?api-version=<ApiVersion>`
+##### <a name="patchbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidapi-versionapiversion"></a>Düzeltmesi<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>?api-version=<ApiVersion>`
 
 *Sorgu parametreleri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|  ApiVersion        |  Bu istek için kullanılacak işlem sürümü.  |
-| subscriptionId     | Çözmek API'sini kullanarak belirteci çözdükten sonra elde edilen SaaS aboneliği benzersiz tanımlayıcısı.  |
+|  ApiVersion        |  Bu istek için kullanılacak işlemin sürümü.  |
+| subscriptionId     | Çözümle API 'SI kullanılarak belirteç çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz tanıtıcısı.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
 |  İçerik türü      | `application/json` |
-|  x-ms-requestid    |   İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  x-ms-bağıntı kimliği  |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.    |
-| authorization      |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  |
+|  x-MS-RequestId    |   İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  x-MS-bağıntıkimliği  |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.    |
+| yetkisi      |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  Örneğin: "`Bearer <access_token>`".  |
 
 *İstek yükü:*
 
@@ -497,23 +553,23 @@ Request Body:
 }
 ```
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-| İşlem konumu | İşlemin durumunu almak için bir kaynak bağlayın.   |
+| İşlem-konum | İşlemin durumunu almak için bir kaynağa bağlayın.   |
 
 *Yanıt kodları:*
 
 Kod: 202<br>
-Miktar değiştirme isteğini kabul etti. İş ortağı başarı veya başarısızlığı belirlemek için işlem konum yoklamak için bekleniyor. <br>
+Miktarı değiştirme isteği kabul edildi. Ortağın, bir başarı veya başarısızlık tespit etmek için Işlem konumunu yoklamak üzere olması beklenir. <br>
 
 Kod: 400<br>
-Hatalı istek: doğrulama hataları.
+Hatalı istek: doğrulama sorunları.
 
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.
@@ -531,11 +587,11 @@ Kod: 500<br>
 ```
 
 >[!Note]
->Bir plan veya miktarı yalnızca tek seferde düzeltme, ikisi birden değil. Bir Abonelikteki ile düzenler **güncelleştirme** değil `allowedCustomerOperations`.
+>Tek seferde değil yalnızca bir plan veya miktar düzeltme eki uygulanabilir. **Güncelleştirme** ile bir abonelikte yapılan düzenlemeler `allowedCustomerOperations`değil.
 
-#### <a name="delete-a-subscription"></a>Aboneliği silme
+#### <a name="delete-a-subscription"></a>Abonelik silme
 
-Aboneliği iptal et ve belirtilen abonelik silin.
+Belirtilen aboneliği kaldırın ve silin.
 
 ##### <a name="deletebr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionid-api-versionapiversion"></a>Sil<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId> ?api-version=<ApiVersion>`
 
@@ -543,28 +599,28 @@ Aboneliği iptal et ve belirtilen abonelik silin.
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|  ApiVersion        |  Bu istek için kullanılacak işlem sürümü.  |
-| subscriptionId     | Çözmek API'sini kullanarak belirteci çözdükten sonra elde edilen SaaS aboneliği benzersiz tanımlayıcısı.  |
+|  ApiVersion        |  Bu istek için kullanılacak işlemin sürümü.  |
+| subscriptionId     | Çözümle API 'SI kullanılarak belirteç çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz tanıtıcısı.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
  
 |                    |                   |
 |  ---------------   |  ---------------  |
 |   İçerik türü     |  `application/json` |
-|  x-ms-requestid    |   İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.   |
-|  x-ms-bağıntı kimliği  |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.   |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  |
+|  x-MS-RequestId    |   İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.   |
+|  x-MS-bağıntıkimliği  |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.   |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  Örneğin: "`Bearer <access_token>`".  |
 
 *Yanıt kodları:*
 
 Kod: 202<br>
-İş ortağı, SaaS abonelik aboneliğinizi iptal etmek için bir çağrı başlattı.<br>
+İş ortağı bir SaaS aboneliğinin aboneliğini kaldırma çağrısını başlattı.<br>
 
 Kod: 400<br>
-Bir abonelikle silmek **Sil** değil `allowedCustomerOperations`.
+**Silme** `allowedCustomerOperations`olmayan bir abonelikte silme.
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.
@@ -582,11 +638,11 @@ Kod: 500<br>
 ```
 
 
-### <a name="operations-api"></a>API işlemleri
+### <a name="operations-api"></a>İşlem API 'SI
 
-Operations API'si aşağıdaki düzeltme eki ve Get işlemleri destekler.
+Operations API 'SI aşağıdaki düzeltme ekini ve Al işlemlerini destekler.
 
-#### <a name="list-outstanding-operations"></a>Bekleyen işlemlerin listesi 
+#### <a name="list-outstanding-operations"></a>Bekleyen işlemleri Listele 
 
 Geçerli yayımcı için bekleyen işlemleri listeler. 
 
@@ -596,21 +652,21 @@ Geçerli yayımcı için bekleyen işlemleri listeler.
 
 |             |        |
 |  ---------------   |  ---------------  |
-|    ApiVersion                |   Bu istek için kullanılacak işlem sürümü.                |
-| subscriptionId     | Çözmek API'sini kullanarak belirteci çözdükten sonra elde edilen SaaS aboneliği benzersiz tanımlayıcısı.  |
+|    ApiVersion                |   Bu istek için kullanılacak işlemin sürümü.                |
+| subscriptionId     | Çözümle API 'SI kullanılarak belirteç çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz tanıtıcısı.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
  
 |                    |                   |
 |  ---------------   |  ---------------  |
 |   İçerik türü     |  `application/json` |
-|  x-ms-requestid    |  İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  x-ms-bağıntı kimliği |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  |
+|  x-MS-RequestId    |  İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  x-MS-bağıntıkimliği |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  Örneğin: "`Bearer <access_token>`".  |
 
 *Yanıt kodları:*
 
-Kod: 200<br> Bekleyen işlemler bir Abonelikteki listesini alır. Yanıt yükü:
+Kod: 200<br> Bir abonelikte bekleyen işlemlerin listesini alır. Yanıt yükü:
 
 ```json
 [{
@@ -629,10 +685,10 @@ Kod: 200<br> Bekleyen işlemler bir Abonelikteki listesini alır. Yanıt yükü:
 
 
 Kod: 400<br>
-Hatalı istek: doğrulama hataları.
+Hatalı istek: doğrulama sorunları.
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.
@@ -650,9 +706,9 @@ Kod: 500<br>
 
 ```
 
-#### <a name="get-operation-status"></a>İşlem durumunu Al
+#### <a name="get-operation-status"></a>İşlem durumunu al
 
-Belirtilen tetiklenen zaman uyumsuz işlemin durumunu izlemek yayımcı sağlar (gibi `subscribe`, `unsubscribe`, `changePlan`, veya `changeQuantity`).
+Yayımcının belirtilen tetiklenen zaman uyumsuz işlemin durumunu izlemesini sağlar (örneğin, `Subscribe`, `Unsubscribe`, `ChangePlan`veya `ChangeQuantity`).
 
 ##### <a name="getbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidoperationsoperationidapi-versionapiversion"></a>Al<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>/operations/<operationId>?api-version=<ApiVersion>`
 
@@ -660,20 +716,20 @@ Belirtilen tetiklenen zaman uyumsuz işlemin durumunu izlemek yayımcı sağlar 
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|  ApiVersion        |  Bu istek için kullanılacak işlem sürümü.  |
+|  ApiVersion        |  Bu istek için kullanılacak işlemin sürümü.  |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
 |  İçerik türü      |  `application/json`   |
-|  x-ms-requestid    |   İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  x-ms-bağıntı kimliği |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  |
+|  x-MS-RequestId    |   İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  x-MS-bağıntıkimliği |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır.  |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app). Örneğin: "`Bearer <access_token>`".  |
 
 *Yanıt kodları:*<br>
 
-Kod: 200<br> Belirtilen SaaS işlemi alır. Yanıt yükü:
+Kod: 200<br> Belirtilen bekleyen SaaS işlemini alır. Yanıt yükü:
 
 ```json
 Response body:
@@ -693,10 +749,10 @@ Response body:
 ```
 
 Kod: 400<br>
-Hatalı istek: doğrulama hataları.
+Hatalı istek: doğrulama sorunları.
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
  
 Kod: 404<br>
 Bulunamadı.
@@ -712,28 +768,28 @@ Kod: 500<br> İç sunucu hatası.
 }
 
 ```
-#### <a name="update-the-status-of-an-operation"></a>Bir işlemin durumunu güncelleştirme
+#### <a name="update-the-status-of-an-operation"></a>İşlemin durumunu güncelleştirme
 
-Başarı veya başarısızlık sağlanan değerlerle belirtmek için bir işlemin durumunu güncelleştirin.
+Bir işlemin durumunu, belirtilen değerlerle başarı veya başarısızlığı gösterecek şekilde güncelleştirin.
 
-##### <a name="patchbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidoperationsoperationidapi-versionapiversion"></a>Düzeltme Eki<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>/operations/<operationId>?api-version=<ApiVersion>`
+##### <a name="patchbr-httpsmarketplaceapimicrosoftcomapisaassubscriptionssubscriptionidoperationsoperationidapi-versionapiversion"></a>Düzeltmesi<br> `https://marketplaceapi.microsoft.com/api/saas/subscriptions/<subscriptionId>/operations/<operationId>?api-version=<ApiVersion>`
 
 *Sorgu parametreleri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
-|   ApiVersion       |  Bu istek için kullanılacak işlem sürümü.  |
-| subscriptionId     | Çözmek API'sini kullanarak belirteci çözdükten sonra elde edilen SaaS aboneliği benzersiz tanımlayıcısı.  |
-|  operationId       | Tamamlanmakta işlem. |
+|   ApiVersion       |  Bu istek için kullanılacak işlemin sürümü.  |
+| subscriptionId     | Çözümle API 'SI kullanılarak belirteç çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz tanıtıcısı.  |
+|  operationId       | Tamamlanan işlem. |
 
-*İstek bağlıkları:*
+*İstek üst bilgileri:*
 
 |                    |                   |
 |  ---------------   |  ---------------  |
 |   İçerik türü     | `application/json`   |
-|   x-ms-requestid   |   İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-|  x-ms-bağıntı kimliği |  İstemci üzerinde işlem için benzersiz bir dize değeri. Bu parametre istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer belirtilmezse, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-|  authorization     |  [JSON web token (JWT) taşıyıcı belirteci alma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  |
+|   x-MS-RequestId   |   İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır. |
+|  x-MS-bağıntıkimliği |  İstemcideki işlem için benzersiz bir dize değeri. Bu parametre, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanacaktır. |
+|  yetkisi     |  [JSON Web belirteci (JWT) taşıyıcı belirtecini al](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app).  Örneğin: "`Bearer <access_token>`".  |
 
 *İstek yükü:*
 
@@ -748,19 +804,19 @@ Başarı veya başarısızlık sağlanan değerlerle belirtmek için bir işlemi
 
 *Yanıt kodları:*
 
-Kod: 200<br> Tamamlama iş ortağı tarafında bir işlemin bildirmek için bir çağrı. Örneğin, bu yanıt, lisans planları veya değişiklik sinyal.
+Kod: 200<br> İş ortağı tarafındaki bir işlemin tamamlandığını bilgilendirmek için bir çağrı. Örneğin, bu yanıt, koltuk veya planların değiştirilmesini işaret verebilir.
 
 Kod: 400<br>
-Hatalı istek: doğrulama hataları.
+Hatalı istek: doğrulama sorunları.
 
 Kod: 403<br>
-Yetkisiz. Kimlik doğrulama belirteci sağlanmadı veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alım erişmeye çalışıyor.
+Erişilmesini. Kimlik doğrulama belirteci sağlanmamış veya geçersiz ya da istek geçerli yayımcıya ait olmayan bir alıcıyla erişmeye çalışıyor.
 
 Kod: 404<br>
 Bulunamadı.
 
 Kod: 409<br>
-Çakışma oluştu. Örneğin, daha yeni bir işlem zaten yerine getirilir.
+Uzantıları. Örneğin, daha yeni bir işlem zaten yerine getirilir.
 
 Kod: 500<br> İç sunucu hatası.
 
@@ -774,16 +830,17 @@ Kod: 500<br> İç sunucu hatası.
 
 ```
 
-## <a name="implementing-a-webhook-on-the-saas-service"></a>Bir Web kancası SaaS hizmeti üzerinde uygulama
+## <a name="implementing-a-webhook-on-the-saas-service"></a>SaaS hizmetinde Web kancası uygulama
 
-Yayımcı, Web kancası proaktif olarak kendi hizmetindeki değişiklikler kullanıcılara bildirmek için bu SaaS hizmetinde uygulamalıdır. SaaS hizmeti doğrulamak ve Web kancası bildirim eylemi gerçekleştirmeden önce onları yetkilendirmek için API işlemleri çağırmak için bekleniyor.
+Yayımcının, kullanıcılarına hizmetinde değişiklik yapmak için bu SaaS hizmetinde bir Web kancası uygulaması gerekir. SaaS hizmetinin, Web kancası bildiriminde bir işlem yapmadan önce doğrulamak ve yetkilendirmek için Operations API 'sini çağırması beklenmektedir.
+
 
 ```json
 {
   "id": "<this is a GUID operation id, you can call operations API with this to get status>",
   "activityId": "<this is a Guid correlation id>",
   "subscriptionId": "<Guid to uniquely identify this resource>",
-  "publisherId": "<this is the publisher’s name>",
+  "publisherId": "<this is the publisher's name>",
   "offerId": "<this is the offer name>",
   "planId": "<this is the plan id>",
   "quantity": "<the number of seats, will be null if not per-seat saas offer>",
@@ -793,35 +850,34 @@ Yayımcı, Web kancası proaktif olarak kendi hizmetindeki değişiklikler kulla
 
 }
 ```
-Burada eylemi aşağıdakilerden biri olabilir: 
-- `subscribe` (kaynak ne zaman etkinleştirildi)
-- `unsubscribe` (kaynak ne zaman silinmiş)
-- `changePlan` (değişiklik planı işlemi tamamlandığında)
-- `changeQuantity` (değişiklik miktar işlemi tamamlandığında)
-- `suspend` (zaman kaynak askıya alındı)
-- `reinstate` (zaman kaynak sonra askıya alma uzatılamaz)
+Eylemin aşağıdakilerden biri olabilir: 
+- `Unsubscribe` (kaynak silindiğinde)
+- `ChangePlan` (değişiklik planı işlemi tamamlandığında)
+- `ChangeQuantity` (miktar değiştirme işlemi tamamlandığında)
+- `Suspend` (kaynak askıya alındığında)
+- `Reinstate` (kaynak askıya alındıktan sonra tekrar ifade edildiğinde)
 
-Burada durumu aşağıdakilerden biri olabilir: 
+Durum aşağıdakilerden biri olabilir: 
 - **NotStarted** <br>
- - **Devam ediyor** <br>
-- **Başarılı oldu** <br>
-- **Başarısız** <br>
-- **Çakışma** <br>
+ - **Ediyor** <br>
+- **Baarı** <br>
+- **Başaramadı** <br>
+- **Uzantıları** <br>
 
-Eyleme dönüştürülebilir durumları ya da bir Web kancası bildirimde olan **başarılı** ve **başarısız**. Bir işlemin yaşam döngüsü olduğunu **NotStarted** gibi bir terminal durumuna **başarılı**, **başarısız**, veya **çakışma**. Alırsanız **NotStarted** veya **Inprogress**, eylemi gerçekleştirmeden önce işlemi terminal durumuna ulaşana kadar durum alma API aracılığıyla isteği devam. 
+Web kancası bildiriminde, işlem yapılabilir durumlar **başarılı** ve **başarısız**olabilir. Bir işlemin yaşam döngüsü, **NotStarted** 'den **başarılı**, **başarısız**veya **Çakışma**gibi bir Terminal durumuna kadar olur. **NotStarted** veya **InProgress**alırsanız, işlem yapılmadan önce işlem bir TERMINAL durumuna ulaşıncaya kadar API al aracılığıyla durumu isteme işlemine devam edin. 
 
-## <a name="mock-apis"></a>Sahte API'leri
+## <a name="mock-apis"></a>Sahte API 'Ler
 
-Sahte API'leri ile geliştirme, prototip oluşturma özellikle de olarak test projeleri başlamanıza yardımcı olmak için kullanabilirsiniz. 
+Geliştirme, özellikle Prototipleme ve projeleri test etme ile çalışmaya başlamanıza yardımcı olması için, sahte API 'lerimizi kullanabilirsiniz. 
 
-Uç nokta ana bilgisayar: `https://marketplaceapi.microsoft.com/api` (gerekli kimlik doğrulamasız)<br/>
+Konak uç noktası: `https://marketplaceapi.microsoft.com/api` (kimlik doğrulaması gerekmez)<br/>
 API sürümü: `2018-09-15`<br/>
 Örnek URI: `https://marketplaceapi.microsoft.com/api/saas/subscriptions?api-version=2018-09-15` <br/>
 
-Sahte ve gerçek API'leri API uç nokta yolları aynıdır, ancak API sürümlerini farklıdır. Sürüm `2018-09-15` için sahte bir sürümüne ve `2018-08-31` uygulamanın üretim sürümü için. 
+API uç noktası yolları hem sahte hem de gerçek API 'lerde aynıdır, ancak API sürümleri farklıdır. Sürüm, sahte sürüm için `2018-09-15` ve üretim sürümü için `2018-08-31`. 
 
-Herhangi bir API çağrısı bu makalede sahte konak uç noktaya yapılabilir. Genel olarak sahte veri yanıt olarak geri almak bekler. Sahte API üzerinde güncelleştirme abonelik yöntemlere yapılan çağrılar, her zaman 500 döndürür. 
+Bu makaledeki API çağrılarından herhangi biri, sahte konak uç noktasına yapılabilir. Genel olarak, sahte verileri yanıt olarak geri almak beklenir. Sahte API üzerinde abonelik güncelleştirme yöntemlerine yapılan çağrılar her zaman 500 ' i döndürür. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Geliştiriciler ayrıca programlı bir şekilde alabilir ve iş yükleri, teklifler ve yayımcı profilleri kullanarak işleme [bulut iş ortağı portalı REST API'lerini](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-api-overview).
+Geliştiriciler, [bulut iş ortağı PORTALı REST API 'lerini](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-api-overview)kullanarak iş yüklerini, teklifleri ve yayımcı profillerini de programlı bir şekilde alıp işleyebilir.

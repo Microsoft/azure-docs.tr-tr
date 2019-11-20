@@ -1,6 +1,6 @@
 ---
-title: Java kullanıcı tanımlı işlev (UDF Apache Hive, HDInsight - Azure)
-description: Apache Hive ile çalışan bir Java tabanlı kullanıcı tanımlı işlev (UDF) oluşturmayı öğrenin. Bu örnek, bir küçük metin dizesi tablosunu UDF dönüştürür.
+title: Apache Hive Azure HDInsight ile Java Kullanıcı tanımlı işlev (UDF)
+description: Apache Hive ile birlikte çalışarak Java tabanlı kullanıcı tanımlı bir işlev (UDF) oluşturmayı öğrenin. Bu örnek UDF bir metin dizesi tablosunu küçük harfe dönüştürür.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,40 +8,40 @@ ms.custom: hdinsightactive,hdiseo17may2017
 ms.topic: conceptual
 ms.date: 03/21/2019
 ms.author: hrasheed
-ms.openlocfilehash: 24c2e8b9600b3d622d3d6b42b3bc3615a87ff853
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5690f2cc5bc85d7bcdbf1d05930a05bcc2e764c0
+ms.sourcegitcommit: 38251963cf3b8c9373929e071b50fd9049942b37
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64686622"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73044789"
 ---
-# <a name="use-a-java-udf-with-apache-hive-in-hdinsight"></a>Bir Java kullanma UDF ile Apache Hive HDInsight
+# <a name="use-a-java-udf-with-apache-hive-in-hdinsight"></a>HDInsight 'ta Apache Hive Java UDF kullanma
 
-Apache Hive ile çalışan bir Java tabanlı kullanıcı tanımlı işlev (UDF) oluşturmayı öğrenin. Bu örnekte Java UDF bir metin dizesi tablosunu tümü küçük harf karakterlere dönüştürür.
+Apache Hive ile birlikte çalışarak Java tabanlı kullanıcı tanımlı bir işlev (UDF) oluşturmayı öğrenin. Bu örnekteki Java UDF, metin dizelerinin bir tablosunu tümüyle küçük harfli karakterlere dönüştürür.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* HDInsight Hadoop kümesinde. Bkz: [Linux'ta HDInsight kullanmaya başlama](./apache-hadoop-linux-tutorial-get-started.md).
-* [Java Developer Kit (JDK) 8 sürümü](https://aka.ms/azure-jdks)
-* [Apache Maven](https://maven.apache.org/download.cgi) düzgün [yüklü](https://maven.apache.org/install.html) Apache göre.  Maven derleme sistemi Java projeleri için proje olur.
-* [URI şeması](../hdinsight-hadoop-linux-information.md#URI-and-scheme) kümeleri birincil depolama alanı için. Bu wasb olacaktır: / / abfs olan Azure depolama için: / / Azure Data Lake depolama Gen2'ye veya adl: / / Azure Data Lake depolama Gen1. Güvenli aktarım, Azure Depolama'da veya Data Lake depolama Gen2 için etkinse, URI wasbs olacaktır: / / ya da abfss: / /, sırasıyla ayrıca bakın [güvenli aktarım](../../storage/common/storage-require-secure-transfer.md).
+* HDInsight üzerinde bir Hadoop kümesi. Bkz. [Linux 'Ta HDInsight kullanmaya başlama](./apache-hadoop-linux-tutorial-get-started.md).
+* [Java geliştirici seti (JDK) sürüm 8](https://aka.ms/azure-jdks)
+* Apache [Maven](https://maven.apache.org/download.cgi) , Apache 'e göre düzgün şekilde [yüklendi](https://maven.apache.org/install.html) .  Maven, Java projeleri için bir proje derleme sistemidir.
+* Kümelerinizin birincil depolama alanı için [URI şeması](../hdinsight-hadoop-linux-information.md#URI-and-scheme) . Bu, Azure Storage için wasb://, Azure Data Lake Storage 2. için abfs://veya adl://için Azure Data Lake Storage 1. olacaktır. Azure depolama için güvenli aktarım etkinleştirilirse, URI `wasbs://`olur.  Ayrıca bkz. [Güvenli aktarım](../../storage/common/storage-require-secure-transfer.md).
 
-* Bir metin düzenleyicisi veya Java IDE
+* Bir metin Düzenleyicisi veya Java IDE
 
     > [!IMPORTANT]  
-    > Bir Windows istemcisi üzerinde Python dosyaları oluşturursanız, bir satır sonu olarak LF kullanan bir düzenleyici kullanmanız gerekir. Düzenleyici LF veya CRLF kullanıp emin değilseniz bkz [sorun giderme](#troubleshooting) kaldırmayı CR karakteri adımlar bölümüne.
+    > Python dosyalarını bir Windows istemcisinde oluşturursanız, bir satır sonunda LF kullanan bir düzenleyici kullanmanız gerekir. Düzenleyicinizde LF veya CRLF kullanıp kullanmadığını bilmiyorsanız, CR karakterini kaldırma adımları için [sorun giderme](#troubleshooting) bölümüne bakın.
 
 ## <a name="test-environment"></a>Test ortamı
-Windows 10 çalıştıran bir bilgisayar için bu makalede kullanılan ortamı oluştu.  Komutları komut isteminde yürütüldü ve çeşitli dosyaların Notepad ile düzenlendi. Uygun şekilde değiştirin, ortamınız için.
+Bu makale için kullanılan ortam, Windows 10 çalıştıran bir bilgisayardır.  Komutlar bir komut isteminde yürütülürler ve çeşitli dosyalar Notepad ile düzenlendi. Ortamınız için uygun şekilde değiştirin.
 
-Bir komut isteminden çalışma ortamı oluşturmak için aşağıdaki komutları girin:
+Bir komut isteminden, çalışan bir ortam oluşturmak için aşağıdaki komutları girin:
 
 ```cmd
 IF NOT EXIST C:\HDI MKDIR C:\HDI
 cd C:\HDI
 ```
 
-## <a name="create-an-example-java-udf"></a>Örnek Java UDF oluşturma
+## <a name="create-an-example-java-udf"></a>Örnek bir Java UDF oluşturma
 
 1. Aşağıdaki komutu girerek yeni bir Maven projesi oluşturun:
 
@@ -49,22 +49,22 @@ cd C:\HDI
     mvn archetype:generate -DgroupId=com.microsoft.examples -DartifactId=ExampleUDF -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     ```
 
-    Bu komut, adlı bir dizin oluşturur. `exampleudf`, Maven projesi içerir.
+    Bu komut, Maven projesini içeren `exampleudf`adlı bir dizin oluşturur.
 
-2. Proje oluşturulduktan sonra Sil `exampleudf/src/test` aşağıdaki komutu girerek projenin bir parçası oluşturulan dizini:
+2. Proje oluşturulduktan sonra, aşağıdaki komutu girerek projenin bir parçası olarak oluşturulan `exampleudf/src/test` dizinini silin:
 
     ```cmd
     cd ExampleUDF
     rmdir /S /Q "src/test"
     ```
 
-3. Açık `pom.xml` aşağıdaki komutu girerek:
+3. Aşağıdaki komutu girerek `pom.xml` ' yı açın:
 
     ```cmd
     notepad pom.xml
     ```
 
-    Ardından varolan `<dependencies>` şu XML ile giriş:
+    Ardından mevcut `<dependencies>` girişini aşağıdaki XML ile değiştirin:
 
     ```xml
     <dependencies>
@@ -83,9 +83,9 @@ cd C:\HDI
     </dependencies>
     ```
 
-    Bu giriş, Hadoop ve Hive ile HDInsight 3.6 dahil sürümünü belirtin. Hadoop ve Hive HDInsight ile sağlanan sürümleri hakkında bilgi bulabilirsiniz [HDInsight bileşen sürümü oluşturma](../hdinsight-component-versioning.md) belge.
+    Bu girişler, HDInsight 3,6 ' de bulunan Hadoop ve Hive sürümünü belirtir. HDInsight [Bileşen sürümü oluşturma](../hdinsight-component-versioning.md) belgesinden HDInsight Ile sunulan Hadoop ve Hive sürümleri hakkında bilgi edinebilirsiniz.
 
-    Ekleme bir `<build>` önce bölümünde `</project>` dosyanın sonuna satır. Bu bölümde, aşağıdaki XML içermesi gerekir:
+    Dosyanın sonundaki `</project>` satırından önce bir `<build>` bölümü ekleyin. Bu bölüm aşağıdaki XML 'i içermelidir:
 
     ```xml
     <build>
@@ -139,17 +139,17 @@ cd C:\HDI
     </build>
     ```
 
-    Bu girişler, projeyi oluşturmak nasıl tanımlayın. Özellikle, proje kullanan Java ve nasıl bir uberjar Küme dağıtımı için derleme sürümü.
+    Bu girişler projenin nasıl oluşturulacağını tanımlar. Özellikle, projenin kullandığı Java sürümü ve kümeye dağıtım için bir uberjar oluşturma.
 
-    Değişikliklerinizi yaptıktan sonra dosyayı kaydedin.
+    Değişiklikler yapıldıktan sonra dosyayı kaydedin.
 
-4. Oluşturmak ve yeni bir dosya açmak için aşağıdaki komutu girin `ExampleUDF.java`:
+4. `ExampleUDF.java`yeni bir dosya oluşturmak ve açmak için aşağıdaki komutu girin:
 
     ```cmd
     notepad src/main/java/com/microsoft/examples/ExampleUDF.java
     ```
 
-    Ardından kopyalayıp aşağıdaki java kod yeni dosyasına yapıştırın. Dosyayı kaydedip kapatın.
+    Ardından aşağıdaki Java kodunu kopyalayıp yeni dosyaya yapıştırın. Sonra dosyayı kapatın.
 
     ```java
     package com.microsoft.examples;
@@ -176,21 +176,21 @@ cd C:\HDI
     }
     ```
 
-    Bu kod, bir dize değeri kabul eder ve küçük bir sürüm dizesinin döndüren bir UDF uygular.
+    Bu kod bir dize değeri kabul eden bir UDF uygular ve dizenin küçük harfli bir sürümünü döndürür.
 
-## <a name="build-and-install-the-udf"></a>Derleme ve UDF yükleyin
+## <a name="build-and-install-the-udf"></a>UDF derleme ve yüklemesi
 
-Aşağıdaki komutların yerini `sshuser` gerçek kullanıcı farklı olması durumunda. Değiştirin `mycluster` gerçek bir küme adı ile.
+Aşağıdaki komutlarda, farklı olursa `sshuser` gerçek kullanıcı adıyla değiştirin. `mycluster` gerçek küme adıyla değiştirin.
 
-1. Derleme ve aşağıdaki komutu girerek UDF paketi:
+1. Aşağıdaki komutu girerek UDF 'yi derleyin ve paketleyin:
 
     ```cmd
     mvn compile package
     ```
 
-    Bu komut, yapılar ve paketler halinde UDF `exampleudf/target/ExampleUDF-1.0-SNAPSHOT.jar` dosya.
+    Bu komut UDF 'i `exampleudf/target/ExampleUDF-1.0-SNAPSHOT.jar` dosyasına oluşturur ve paketler.
 
-2. Kullanım `scp` komut dosyası, aşağıdaki komutu girerek HDInsight kümesine kopyalamak için:
+2. Aşağıdaki komutu girerek dosyayı HDInsight kümesine kopyalamak için `scp` komutunu kullanın:
 
     ```cmd
     scp ./target/ExampleUDF-1.0-SNAPSHOT.jar sshuser@mycluster-ssh.azurehdinsight.net:
@@ -202,36 +202,36 @@ Aşağıdaki komutların yerini `sshuser` gerçek kullanıcı farklı olması du
     ssh sshuser@mycluster-ssh.azurehdinsight.net
     ```
 
-4. Açık SSH oturumundan, HDInsight depolama alanına jar dosyasını kopyalayın.
+4. Açık SSH oturumunda, JAR dosyasını HDInsight depolama alanına kopyalayın.
 
     ```bash
     hdfs dfs -put ExampleUDF-1.0-SNAPSHOT.jar /example/jars
     ```
 
-## <a name="use-the-udf-from-hive"></a>UDF kovanından kullanın
+## <a name="use-the-udf-from-hive"></a>Hive 'den UDF kullanma
 
-1. Beeline istemci SSH oturumunda aşağıdaki komutu girerek başlayın:
+1. Aşağıdaki komutu girerek, SSH oturumundan Beeline istemcisini başlatın:
 
     ```bash
     beeline -u 'jdbc:hive2://localhost:10001/;transportMode=http'
     ```
 
-    Bu komut varsayılan değer olarak kullanılan varsayar **yönetici** kümeniz için oturum açma hesabı için.
+    Bu komut, kümeniz için oturum açma hesabı için **yönetici** varsayılanını kullandığınızı varsayar.
 
-2. Sonra ulaşırsınız `jdbc:hive2://localhost:10001/>` isteminde, UDF için Hive ekleyin ve bir işlev olarak göstermek için aşağıdakileri girin.
+2. `jdbc:hive2://localhost:10001/>` istemine ulaştıktan sonra, UDF 'yi Hive 'ye eklemek ve işlevi bir işlev olarak göstermek için aşağıdakileri girin.
 
     ```hiveql
     ADD JAR wasbs:///example/jars/ExampleUDF-1.0-SNAPSHOT.jar;
     CREATE TEMPORARY FUNCTION tolower as 'com.microsoft.examples.ExampleUDF';
     ```
 
-3. UDF küçük dizeleri bir tablodan alınan değerlerini dönüştürmek için kullanın.
+3. Bir tablodan alınan değerleri küçük harf dizelerine dönüştürmek için UDF 'yi kullanın.
 
     ```hiveql
     SELECT tolower(state) AS ExampleUDF, state FROM hivesampletable LIMIT 10;
     ```
 
-    Bu sorgu durumu tablodan seçer, düşük durumda ve değiştirilmemiş adının yanı sıra bunları görüntülemek için bir dizeye dönüştürün. Çıktı aşağıdaki metne benzer görünür:
+    Bu sorgu, tablodan durumu seçer, dizeyi küçük harfe dönüştürür ve ardından bunları değiştirilmemiş adla birlikte görüntüler. Çıktı aşağıdaki metne benzer şekilde görünür:
 
         +---------------+---------------+--+
         |  exampleudf   |     state     |
@@ -250,13 +250,13 @@ Aşağıdaki komutların yerini `sshuser` gerçek kullanıcı farklı olması du
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-Hive işi çalıştırılırken aşağıdaki metne benzer bir hatayla karşılaşabilirsiniz:
+Hive işini çalıştırırken aşağıdaki metne benzer bir hatayla karşılaşabilirsiniz:
 
     Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An error occurred while reading or writing to your custom script. It may have crashed with an error.
 
-Bu sorunun nedeni Python dosyasındaki satır sonlarını. CRLF sondaysa satır ancak Linux uygulamaları genellikle çok sayıda Windows düzenleyicileri varsayılan LF bekler.
+Bu sorun, Python dosyasındaki satır sonları nedeniyle oluşabilir. Birçok Windows Düzenleyicisi, satır sonu olarak CRLF 'yi varsayılan olarak kullanmaktır, ancak Linux uygulamaları genellikle LF bekler.
 
-HDInsight için dosyayı karşıya yüklemeden önce CR karakter kaldırmak için aşağıdaki PowerShell ifadeleri kullanabilirsiniz:
+Dosyayı HDInsight 'a yüklemeden önce CR karakterlerini kaldırmak için aşağıdaki PowerShell deyimlerini kullanabilirsiniz:
 
 ```PowerShell
 # Set $original_file to the python file path
@@ -266,6 +266,6 @@ $text = [IO.File]::ReadAllText($original_file) -replace "`r`n", "`n"
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hive ile çalışmak diğer yolları için bkz. [HDInsight ile Hive kullanma Apache](hdinsight-use-hive.md).
+Hive ile çalışmanın diğer yolları için bkz. [HDInsight ile Apache Hive kullanma](hdinsight-use-hive.md).
 
-Hive User-Defined işlevleri hakkında daha fazla bilgi için bkz. [Apache Hive işleçleri ve kullanıcı tanımlı işlevler](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF) Apache.org Hive wiki bölümü.
+Hive Kullanıcı tanımlı Işlevler hakkında daha fazla bilgi için apache.org adresindeki Hive wiki 'nin [Apache Hive işleçler ve Kullanıcı tanımlı işlevler](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF) bölümüne bakın.

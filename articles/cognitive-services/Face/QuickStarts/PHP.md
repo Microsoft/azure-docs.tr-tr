@@ -1,5 +1,5 @@
 ---
-title: 'Hızlı Başlangıç: REST API ve PHP ile bir resimdeki yüz algılama'
+title: 'Hızlı Başlangıç: REST API ve PHP kullanarak görüntüdeki yüzeyleri algılama'
 titleSuffix: Azure Cognitive Services
 description: Bu hızlı başlangıçta, PHP ile Yüz Tanıma API’sini kullanarak bir görüntüdeki yüzleri algılayacaksınız.
 services: cognitive-services
@@ -8,29 +8,29 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: face-api
 ms.topic: quickstart
-ms.date: 03/27/2019
+ms.date: 09/06/2019
 ms.author: pafarley
-ms.openlocfilehash: 280143d54e516fb626bb2d5afd01653e03d8a82c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: a0704f9e9a77eba2eb0d4f00bc1d880011e767de
+ms.sourcegitcommit: 65131f6188a02efe1704d92f0fd473b21c760d08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60815441"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70859220"
 ---
-# <a name="quickstart-detect-faces-in-an-image-using-the-rest-api-and-php"></a>Hızlı Başlangıç: REST API ve PHP ile bir resimdeki yüz algılama
+# <a name="quickstart-detect-faces-in-an-image-using-the-rest-api-and-php"></a>Hızlı Başlangıç: REST API ve PHP kullanarak görüntüdeki yüzeyleri algılama
 
-Bu hızlı başlangıçta, bir resimdeki İnsan yüzlerini algılamak için PHP ile Azure yüz REST API'sini kullanır.
+Bu hızlı başlangıçta, bir görüntüdeki insan yüzlerini algılamak için Azure yüz REST API PHP ile kullanacaksınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Yüz tanıma API'si abonelik anahtarı. Ücretsiz deneme aboneliği anahtarından alabilirsiniz [Bilişsel Hizmetler'i deneyin](https://azure.microsoft.com/try/cognitive-services/?api=face-api). Veya yönergeleri [Bilişsel Hizmetler hesabı oluşturma](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) yüz tanıma API'si hizmete abone ve anahtarınızı alın.
-- Bir kod Düzenleyicisi gibi [Visual Studio Code](https://code.visualstudio.com/download).
-- PHP [HTTP_Request2](https://pear.php.net/package/HTTP_Request2) paket.
-- Bir PHP özellikli web tarayıcısı. Bu ayarlamış olduğunuz değil, yükleme ve ayarlama ile bunu yapabilirsiniz [XAMPP](https://www.apachefriends.org/) makinenizde.
+- [Visual Studio Code](https://code.visualstudio.com/download)gibi bir kod Düzenleyicisi.
+- PHP [HTTP_Request2](https://pear.php.net/package/HTTP_Request2) paketi.
+- PHP özellikli bir Web tarayıcısı. Bu ayarı yaptıysanız, makinenizde [XAMPP](https://www.apachefriends.org/) 'yi yükleyip kurarak bunu yapabilirsiniz.
 
-## <a name="initialize-the-html-file"></a>HTML dosyasını başlatın
+## <a name="initialize-the-html-file"></a>HTML dosyasını başlatma
 
-Yeni bir HTML dosyası oluşturun *detectFaces.html*ve aşağıdaki kodu ekleyin.
+Yeni bir HTML dosyası oluşturun, *detectFaces. html*ve aşağıdaki kodu ekleyin.
 
 ```html
 <html>
@@ -41,19 +41,17 @@ Yeni bir HTML dosyası oluşturun *detectFaces.html*ve aşağıdaki kodu ekleyin
 </html>
 ```
 
-## <a name="write-the-php-script"></a>PHP komut dosyası yazma
+## <a name="write-the-php-script"></a>PHP betiğini yazma
 
-Aşağıdaki kodu ekleyin `body` öğesi belgenin. Bu URL alana sahip bir temel kullanıcı arabirimini ayarlar bir **yüz analiz** düğmesi, bir yanıtı bölme ve bir görüntü bölmesini görüntüle.
+Aşağıdaki kodu belgenin `body` öğesi içine ekleyin. Bu kod, bir URL alanı, bir çözüm **Çözümle** düğmesi, yanıt bölmesi ve görüntü görüntü bölmesi ile temel bir kullanıcı arabirimi ayarlar.
 
 ```php
 <?php
 // Replace <Subscription Key> with a valid subscription key.
 $ocpApimSubscriptionKey = '<Subscription Key>';
 
-// You must use the same location in your REST call as you used to obtain
-// your subscription keys. For example, if you obtained your subscription keys
-// from westus, replace "westcentralus" in the URL below with "westus".
-$uriBase = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/';
+// Replace <My Endpoint String> with the string in your endpoint URL.
+$uriBase = 'https:/<My Endpoint String>.com/face/v1.0/';
 
 $imageUrl =
     'https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg';
@@ -101,11 +99,13 @@ catch (HttpException $ex)
 ?>
 ```
 
-Güncellemeniz gerekecektir `subscriptionKey` alan abonelik anahtarınız ve değeri ile değiştirmek gerekebilir `uriBase` doğru bölge tanımlayıcısı içeren dize (bkz [yüz tanıma API'si belgeleri](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236) tüm bölge listesi uç noktaları). `returnFaceAttributes` Alanı almak için hangi yüz öznitelikleri belirtir; Bu dize öngörülen kullanımınıza bağlı olarak değiştirmek isteyebilirsiniz.
+`subscriptionKey` Alanı abonelik anahtarınızın değeriyle güncelleştirmeniz gerekir ve `uriBase` dizeyi doğru uç nokta dizesini içerecek şekilde değiştirmeniz gerekir. Alan `returnFaceAttributes` , alınacak yüz özniteliklerini belirtir; bu dizeyi amaçlanan kullanıma bağlı olarak değiştirmek isteyebilirsiniz.
+
+[!INCLUDE [subdomains-note](../../../../includes/cognitive-services-custom-subdomains-note.md)]
 
 ## <a name="run-the-script"></a>Betiği çalıştırın
 
-Dosyayı bir PHP özellikli bir web tarayıcısında açın. Yüz tanıma veri, aşağıdaki gibi bir JSON dizesi almanız gerekir.
+Dosyayı PHP özellikli bir Web tarayıcısında açın. Aşağıdaki gibi yüz verilerinden oluşan bir JSON dizesi almalısınız.
 
 ```json
 [

@@ -1,216 +1,221 @@
 ---
-title: Azure İzleyici uyarılar için Eylem kuralları
-description: Eylem kuralları nelerdir ve nasıl yapılandırılacağı ve yönetileceğine anlama.
-author: anantr
-services: azure-monitor
+title: Azure Izleyici uyarıları için eylem kuralları
+description: Azure Izleyici 'deki eylem kurallarının ne olduğunu ve bunların nasıl yapılandırılacağını ve yönetileceğini anlamak.
 ms.service: azure-monitor
+ms.subservice: alerts
 ms.topic: conceptual
+author: anantr
+ms.author: robb
 ms.date: 04/25/2019
-ms.author: anantr
-ms.component: alerts
-ms.openlocfilehash: 212e6b042caec5f24a620dc491dc674417816df7
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.openlocfilehash: a858388a11cfdf36bacb1e5840f00fc6ef097867
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67310374"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555711"
 ---
 # <a name="action-rules-preview"></a>Eylem kuralları (Önizleme)
 
-Eylem kuralları eylemleri (veya eylemleri gizleme) tüm Resource Manager kapsam (abonelik, kaynak grubu, veya kaynak) tanımlamanızı sağlar. Belirli alt uygulamak istediğiniz uyarı örneklerinin daraltmak olanak tanıyan filtreler çeşitli sahiptirler. 
+Eylem kuralları herhangi bir Azure Resource Manager kapsamında (Azure aboneliği, kaynak grubu veya hedef kaynak) eylemleri tanımlamanıza veya gösterkullanmanıza yardımcı olur. Üzerinde işlem yapmak istediğiniz uyarı örneklerinin belirli bir alt kümesini daraltmanıza yardımcı olan çeşitli filtreleri vardır.
 
-## <a name="why-and-when-should-you-use-action-rules"></a>Neden ve ne zaman eylem kurallarını kullanmalısınız?
+## <a name="why-and-when-should-you-use-action-rules"></a>Eylem kurallarını neden ve ne zaman kullanmalısınız?
 
-### <a name="suppression-of-alerts"></a>Uyarı gizleme
+### <a name="suppression-of-alerts"></a>Uyarıların gizlemesi
 
-Genellikle burada bu planlı bakım penceresi sırasında gizleme gizleme iş saatleri dışında da uyarıları tarafından oluşturulan bildirimleri göstermemeye yararlı olacaktır birçok senaryo daha vardır. Örneğin, 'ContosoVM için' sorumlu ekip 'ContosoVM' planlı bakımda olduğundan gelecek hafta için uyarı bildirimleri göstermemeye ister. Kullanıcılar sırada her uyarı 'Üzerinde ContosoVM' el ile yapılandırılmış bir kural (ve Bakım sonrası yeniden etkinleştirme) devre dışı bırakmak, basit bir deneyim değil. Eylem kuralları uyarı gizleme uygun ölçekte esnek bir şekilde gizleme yapılandırın olanağı tanımlamanızı sağlar. Takım, önceki örneğe geri dönerseniz, artık 'hafta için tüm uyarı bildirimleri bastırır ContosoVM' bir eylem kuralı tanımlayabilirsiniz.
+Uyarıların oluşturduğu bildirimleri gizlemek için yararlı olduğu birçok senaryo vardır. Bu senaryolar, planlanan bir bakım penceresi sırasında, iş dışı saatlerde gizlemenin gizlenme sürecinde değişir. Örneğin, **contosovm** 'den sorumlu olan ekip, **contosovm** planlanmış bakımda olduğundan yaklaşan hafta sonu için uyarı bildirimlerini bastırmak istiyor. 
+
+Ekip, **Contosovm** 'de yapılandırılmış olan her bir uyarı kuralını el ile devre dışı bırakabilse de (bakım sonrasında tekrar etkinleştirirseniz) basit bir işlem değildir. Eylem kuralları, göstermeme süresini esnek bir şekilde yapılandırma özelliği ile ölçeklendirerek uyarı gizleme tanımlamanıza yardımcı olur. Önceki örnekte, takım, **Contosovm** 'de, hafta sonu için tüm uyarı bildirimlerini gösteren bir eylem kuralı tanımlayabilir.
 
 
-### <a name="actions-at-scale"></a>Uygun ölçekte eylemleri
+### <a name="actions-at-scale"></a>Ölçekteki eylemler
 
-Uyarı kuralları bir uyarı oluşturulduğunda tetikleyen bir eylem grubu tanımlamanıza izin verse de, müşteriler genellikle operations kapsamlarına arasında ortak bir eylem grubu için eğilimindedir. Örneğin, kaynak grubu için 'ContosoRG' sorumlu bir ekip büyük olasılıkla 'ContosoRG' içinde tanımlanan tüm uyarı kuralları için aynı eylem grubunu tanımlarsınız. İşlem kuralları, böylece bir eylem grubu için yapılandırılmış kapsamda oluşturulan herhangi bir uyarı tetiklenebilir, uygun ölçekte, eylemleri tanımlamak olanak tanıyarak bu işlemi basitleştireceksiniz olanak tanır. Takım, önceki örneğe geri dönerseniz, artık 'içinde oluşturulan tüm uyarılar için aynı eylem grubu tetikleyecek ContosoRG' bir eylem kuralı tanımlayabilirsiniz.
+Uyarı kuralları, uyarı oluşturulduğunda tetiklenen eylem grubunu tanımlamanıza yardımcı olmakla birlikte, müşteriler genellikle işlem kapsamları genelinde ortak bir eylem grubuna sahiptir. Örneğin, **ContosoRG** kaynak grubundan sorumlu bir ekip, büyük olasılıkla **ContosoRG**içinde tanımlanan tüm uyarı kuralları için aynı eylem grubunu tanımlayacaktır. 
+
+Eylem kuralları bu işlemi basitleştirmeye yardımcı olur. Eylemleri ölçekli olarak tanımlayarak, yapılandırılmış kapsamda oluşturulan herhangi bir uyarı için bir eylem grubu tetiklenebilir. Önceki örnekte, takım, içinde oluşturulan tüm uyarılar için aynı eylem grubunu tetikleyecek **ContosoRG** üzerinde bir eylem kuralı tanımlayabilir.
 
 > [!NOTE]
-> Eylem kuralları şu anda hizmet durumu uyarıları için geçerli değildir.
+> Eylem kuralları şu anda Azure hizmet durumu uyarıları için geçerli değildir.
 
-## <a name="configuring-an-action-rule"></a>Bir eylem kuralı yapılandırma
+## <a name="configuring-an-action-rule"></a>Eylem kuralını yapılandırma
 
-Özellik seçerek erişebilirsiniz **işlemleri yönetmenizi** Azure İzleyici'de giriş sayfası uyarılar. Ardından **eylem kuralları (Önizleme)** . Seçerek erişebilirsiniz **eylem kuralları (Önizleme)** uyarılar için giriş sayfasının panosundan.
+Azure Izleyici 'de **Uyarılar** giriş sayfasından **eylemleri Yönet** ' i seçerek özelliğe erişebilirsiniz. Ardından **Eylem kuralları (Önizleme)** öğesini seçin. Uyarılar için giriş sayfasının panosundan **Eylem kuralları (Önizleme)** seçeneğini belirleyerek kurallara erişebilirsiniz.
 
-![Azure İzleyici giriş sayfasından eylemi kuralları](media/alerts-action-rules/action-rules-landing-page.png)
+![Azure Izleyici giriş sayfasından eylem kuralları](media/alerts-action-rules/action-rules-landing-page.png)
 
-Seçin **+ yeni eylem kural**. 
+**+ Yeni eylem kuralı**' nı seçin. 
 
-![Yeni Eylem Kuralı Ekle](media/alerts-action-rules/action-rules-new-rule.png)
+![Yeni eylem kuralı ekle](media/alerts-action-rules/action-rules-new-rule.png)
 
-Alternatif olarak, bir uyarı kuralını yapılandırırken bir eylem kuralı oluşturmak de seçebilirsiniz.
+Alternatif olarak, bir uyarı kuralı yapılandırırken bir eylem kuralı oluşturabilirsiniz.
 
-![Yeni Eylem Kuralı Ekle](media/alerts-action-rules/action-rules-alert-rule.png)
+![Yeni eylem kuralı ekle](media/alerts-action-rules/action-rules-alert-rule.png)
 
-Şimdi eylem kural oluşturma akışı açın görmeniz gerekir. Aşağıdaki öğeler yapılandırın: 
+Artık eylem kuralları oluşturmak için akış sayfasını görmeniz gerekir. Aşağıdaki öğeleri yapılandırın: 
 
-![Yeni Eylem kural oluşturma akış](media/alerts-action-rules/action-rules-new-rule-creation-flow.png)
+![Yeni eylem kuralı oluşturma akışı](media/alerts-action-rules/action-rules-new-rule-creation-flow.png)
 
-### <a name="scope"></a>`Scope`
+### <a name="scope"></a>Kapsam
 
-İlk kapsamı, diğer bir deyişle, hedef kaynak, kaynak grubu veya abonelik seçin. Yukarıdakilerin tümü (içinde tek bir abonelik) birleşimi çoklu seçim özelliği de vardır. 
+Önce kapsamı (Azure aboneliği, kaynak grubu veya hedef kaynak) seçin. Ayrıca, tek bir abonelik içindeki kapsamların bir birleşimini seçebilirsiniz.
 
-![Eylem Kural kapsamı](media/alerts-action-rules/action-rules-new-rule-creation-flow-scope.png)
+![Eylem kuralı kapsamı](media/alerts-action-rules/action-rules-new-rule-creation-flow-scope.png)
 
 ### <a name="filter-criteria"></a>Filtre ölçütü
 
-Ayrıca, belirli bir alt kümesini tanımlanmış kapsamda uyarıları aşağı daha da daraltmak için filtreleri tanımlayabilirsiniz. 
+Ayrıca, uyarıların belirli bir alt kümesine daraltmak için filtreler tanımlayabilirsiniz. 
 
-Kullanılabilir filtreleri şunlardır: 
+Kullanılabilir filtreler şunlardır: 
 
-* **Önem derecesi**: Bir veya daha fazla uyarı önem dereceleri seçin. Önem derecesi = Sev1 anlamına gelir eylem kural önem derecesi Sev1 olarak tüm uyarılar için geçerlidir.
-* **Hizmet izleme**: Kaynak izleme hizmetini temel alan filtre. Ayrıca çoklu seçim yöntemdir. Örneğin, izleme hizmeti "Application Insights" = uyarılara dayalı olarak eylem kuralı tüm "Application Insights için" uygun olduğu anlamına gelir.
-* **Kaynak türü**: Belirli kaynak türüne göre filtreleyin. Ayrıca çoklu seçim yöntemdir. Örneğin, kaynak türü = "Sanal makineler" anlamına gelir Eylem kuralı tüm sanal makineler için geçerlidir.
-* **Uyarı kuralı kimliği**: Uyarı kuralı Resource Manager Kimliğini kullanarak özel uyarı kuralları için filtrelemenize olanak tanır.
-* **İzleme koşulu**: "Fired" veya "Çözüldü" uyarı örneği için izleme koşulu filtreleyin.
-* **Açıklama**: Uyarı kuralının bir parçası tanımlanan açıklama içinde eşleşen normal ifade.
-* **Uyarı bağlamı (yükü)** : Normal ifade içinde eşleşen [uyarı bağlamı](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-definitions#alert-context-fields) uyarı örneği alanları.
+* **Önem derecesi**: bir veya daha fazla uyarı kümesi seçin. **Önem derecesi = Sev1** , eylem kuralının Sev1 olarak ayarlanan tüm uyarılar için geçerli olduğu anlamına gelir.
+* **Izleme hizmeti**: kaynak izleme hizmetini temel alan bir filtre. Bu filtre Ayrıca birden çok seçim olur. Örneğin, **Monitor Service = "Application Insights"** , eylem kuralının tüm Application Insights tabanlı uyarılar için geçerli olduğu anlamına gelir.
+* **Kaynak türü**: belirli bir kaynak türünü temel alan bir filtre. Bu filtre Ayrıca birden çok seçim olur. Örneğin, **kaynak türü = "sanal makineler"** , eylem kuralının tüm sanal makineler için geçerli olduğu anlamına gelir.
+* **Uyarı KURALı kimliği**: uyarı KURALıNıN Kaynak Yöneticisi kimliğini kullanarak belirli uyarı kurallarını filtreleme seçeneği.
+* **Izleme koşulu**: izleme koşulu olarak **tetiklenen** veya **çözümlenen** uyarı örnekleri için bir filtre.
+* **Açıklama**: uyarı kuralının bir parçası olarak tanımlanan, açıklamaya karşı bir dize eşleşmesi tanımlayan bir Regex (normal ifade) eşleşir. Örneğin, **Açıklama ' prod ' içerir** açıklamalarındaki "üretim" dizesini içeren tüm uyarılarla eşleşir.
+* **Uyarı bağlamı (yük)** : bir uyarı yükünün uyarı bağlam alanlarına karşı bir dize eşleşmesi tanımlayan bir Regex eşleşmesi. Örneğin, **Uyarı bağlamı (yük) ' bilgisayar-01 ' içeriyorsa** , yükleri "bilgisayar-01" dizesini içeren tüm uyarılarla eşleşir.
 
-Bu filtreler birlikte bir başkasına uygulanır. Örneğin, 'Kaynak türü' ayarlarım, 'Sanal makineleri' ve 'Önem' = 'Sev0' tüm 'Sev0' uyarılar için yalnızca my Vm'lerde filtreledi sonra =. 
+Bu filtreler bir diğeri ile birlikte uygulanır. Örneğin, **' = sanal makineler** ve **önem derecesi ' = Sev0**kaynak türünü ayarlarsanız, yalnızca sanal makinelerinizdeki tüm **Sev0** uyarılarını filtrelediyseniz. 
 
-![Eylem kural filtreleri](media/alerts-action-rules/action-rules-new-rule-creation-flow-filters.png)
+![Eylem kuralı filtreleri](media/alerts-action-rules/action-rules-new-rule-creation-flow-filters.png)
 
-### <a name="suppression-or-action-group-configuration"></a>Gizleme veya eylem grubu yapılandırma
+### <a name="suppression-or-action-group-configuration"></a>Gizleme veya eylem grubu yapılandırması
 
-Sonraki eylem kural uyarı gizleme veya eylem grubu desteği için yapılandırın. Her ikisini seçemezsiniz. Yapılandırma, filtreleri ve önceden tanımlanmış kapsamını eşleşen tüm uyarı örneklerinde çalışır.
+Sonra, eylem kuralını uyarı gizleme veya eylem grubu desteği için yapılandırın. Her ikisini de seçemezsiniz. Yapılandırma, daha önce tanımlanan kapsam ve filtrelerle eşleşen tüm uyarı örneklerinde çalışır.
 
 #### <a name="suppression"></a>Gizleme
 
-Seçerseniz **gizleme**, Eylemler ve bildirimleri bastırma süresince yapılandırın. Aşağıdakilerden birini seçin:
-* **Bugünden itibaren (her zaman)** : Süresiz olarak tüm bildirimleri engeller.
-* **Zamanlanan tarihte**: Sınırlı bir süre içinde bildirimlerini bastır.
-* **Bir yineleme ile**: Günlük, haftalık veya Aylık yinelenme zamanlamasına göre gizle.
+**Gizleme**' yi seçerseniz, eylemlerin ve bildirimlerin gizlemesi için süreyi yapılandırın. Aşağıdaki seçeneklerden birini belirleyin:
+* **Şu andan itibaren (her zaman)** : tüm bildirimleri süresiz olarak bastırır.
+* **Zamanlanan saatte**: bir sınırlanmış süre içinde bildirimleri bastırır.
+* **Tekrarda**: yinelenen günlük, haftalık veya aylık zamanlamaya göre bildirimleri bastırır.
 
-![Eylem kural gizleme](media/alerts-action-rules/action-rules-new-rule-creation-flow-suppression.png)
+![Eylem kuralı gizleme](media/alerts-action-rules/action-rules-new-rule-creation-flow-suppression.png)
 
-#### <a name="action-group"></a>eylem grubu
+#### <a name="action-group"></a>Eylem grubu
 
-Seçerseniz **eylem grubu** geçiş ya da var olan bir eylem grubu ekleyin veya yeni bir tane oluşturun. 
+Geçiş sırasında **eylem grubu** ' nu seçerseniz, var olan bir eylem grubu ekleyin ya da yeni bir tane oluşturun. 
 
 > [!NOTE]
-> Yalnızca bir eylem grubu Eylem kuralı ile ilişkilendirebilirsiniz.
+> Bir eylem kuralıyla yalnızca bir eylem grubunu ilişkilendirebilirsiniz.
 
-![Eylem kural eylem grubu](media/alerts-action-rules/action-rules-new-rule-creation-flow-action-group.png)
+![Eylem grubu seçerek yeni eylem kuralı Ekle veya oluştur](media/alerts-action-rules/action-rules-new-rule-creation-flow-action-group.png)
 
-### <a name="action-rule-details"></a>Eylem kural ayrıntıları
+### <a name="action-rule-details"></a>Eylem kuralı ayrıntıları
 
-Son olarak, aşağıdaki eylemi kuralın ayrıntılarını Yapılandır
-* Ad
-* Kaynak grubu içinde kaydedilecek
+Son olarak, eylem kuralı için aşağıdaki ayrıntıları yapılandırın:
+* Adı
+* Kaydedildiği kaynak grubu
 * Açıklama 
 
 ## <a name="example-scenarios"></a>Örnek senaryolar
 
-### <a name="scenario-1-suppression-of-alerts-based-on-severity"></a>Senaryo 1: Önem derecesine göre uyarıları gizleme
+### <a name="scenario-1-suppression-of-alerts-based-on-severity"></a>Senaryo 1: önem derecesine göre uyarıların gizlemesi
 
-Contoso, tüm sanal makineler, abonelik 'ContosoSub' her hafta içindeki tüm Sev4 uyarılar için bildirimleri bastır ister.
+Contoso **, her hafta sonu için tüm VM** 'Lerdeki tüm VM 'Lerde tüm Sev4 uyarılarını bildirimleri bastırmak istiyor.
 
-**Çözüm:** Bir eylem kuralı oluşturun
-* Kapsam 'ContosoSub' =
+**Çözüm:** İle bir eylem kuralı oluşturun:
+* Kapsam = **Contososub**
 * Filtreler
-    * Önem derecesi = 'Sev4'
-    * Kaynak türü 'Sanal makineleri' =
-* Haftalık yinelenme ile gizleme ayarlayın ve 'Cumartesi' ve 'Pazar' işaretli
+    * Önem derecesi = **Sev4**
+    * Kaynak türü = **sanal makineler**
+* Yinelenme ile haftalık olarak ayarlanan gizleme ve **Cumartesi** ve **Pazar** işaretli
 
-### <a name="scenario-2-suppression-of-alerts-based-on-alert-context-payload"></a>Senaryo 2: Uyarı bağlamı (yükü) tabanlı uyarı gizleme
+### <a name="scenario-2-suppression-of-alerts-based-on-alert-context-payload"></a>Senaryo 2: Uyarı bağlamına göre uyarıların gizlemesi (yük)
 
-Contoso isteyen tüm günlük 'İçin bilgisayar-01' oluşturulan uyarılar için bildirimleri bastır 'İçinde ContosoSub' süresiz olarak gibi bakım yapmamanın geçiyor.
+Contoso, **Contososub** 'da **bilgisayar-01** için oluşturulan tüm günlük uyarılarına ilişkin bildirimleri bakım sırasında olduğu kadar gizlemek istiyor.
 
-**Çözüm:** Bir eylem kuralı oluşturun
-* Kapsam 'ContosoSub' =
+**Çözüm:** İle bir eylem kuralı oluşturun:
+* Kapsam = **Contososub**
 * Filtreler
-    * Hizmet İzleme 'Log Analytics' =
-    * Uyarı bağlamı (yükü) 'Bilgisayar-01' içeriyor
-* Gizleme kümesine ' bugünden itibaren (her zaman)'
+    * İzleme hizmeti = **Log Analytics**
+    * Uyarı bağlamı (yük) **bilgisayar içeriyor-01**
+* Gizleme **Şu andan itibaren olarak ayarlandı (her zaman)**
 
-### <a name="scenario-3-action-group-defined-at-a-resource-group"></a>Senaryo 3: Bir kaynak grubu tanımlanan eylem grubu
+### <a name="scenario-3-action-group-defined-at-a-resource-group"></a>Senaryo 3: bir kaynak grubunda tanımlanan eylem grubu
 
-Contoso tanımlanmış [abonelik düzeyinde ölçüm Uyarısı](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-metric-overview#monitoring-at-scale-using-metric-alerts-in-azure-monitor), ancak özellikle kendi kaynak grubundan 'ContosoRG' oluşturulan uyarılar için tetikleme eylemleri tanımlamak ister.
+Contoso, [abonelik düzeyinde bir ölçüm uyarısı](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-metric-overview#monitoring-at-scale-using-metric-alerts-in-azure-monitor)tanımladı. Ancak, **ContosoRG**kaynak grubundan oluşturulan uyarılar için özel olarak tetiklenecek eylemleri tanımlamak istemektedir.
 
-**Çözüm:** Bir eylem kuralı oluşturun
-* Scope = 'ContosoRG'
-* Filtre
-* 'ContosoActionGroup için' eylem grubu ayarlayın
+**Çözüm:** İle bir eylem kuralı oluşturun:
+* Kapsam = **ContosoRG**
+* Filtre yok
+* Eylem grubu **Contosoactiongroup** olarak ayarlandı
 
 > [!NOTE]
-> **Eylem grupları tanımlanan eylem kuralların ve uyarı kuralları işletmek bağımsız olarak, hiçbir yinelenenleri kaldırma ile**. Bir eylem grubu varsa, yukarıda açıklanan senaryoda uyarı kuralı için tanımlanmış, eylem kuralda tanımlanan eylem grubu ile birlikte tetikler. 
+> *Eylem kuralları ve uyarı kuralları içinde tanımlanan eylem grupları, yinelenenleri kaldırma olmadan bağımsız olarak çalışır.* Daha önce açıklanan senaryoda, uyarı kuralı için bir eylem grubu tanımlanmışsa, eylem kuralında tanımlanan eylem grubuyla birlikte tetiklenir. 
 
 ## <a name="managing-your-action-rules"></a>Eylem kurallarınızı yönetme
 
-Görüntüleyebilir ve aşağıda gösterildiği liste görünümü, eylem kurallarını yönetin.
+Eylem kurallarınızı liste görünümünden görüntüleyebilir ve yönetebilirsiniz:
 
-![Eylem kuralları listesi görünümü](media/alerts-action-rules/action-rules-list-view.png)
+![Eylem kuralları liste görünümü](media/alerts-action-rules/action-rules-list-view.png)
 
-Buradan, bunların yanındaki onay kutusunu seçerek etkinleştir/devre dışı bırakma/silme eylemi kurallarına uygun ölçekte kullanabilirsiniz. Herhangi bir eylem kural'ı tıklatarak, böylece tanımını güncelleştirin ve bu etkinleştir/devre kendi yapılandırma sayfası açılır.
+Buradan eylem kurallarını etkinleştirebilir, devre dışı bırakabilir veya yanındaki onay kutusunu işaretleyerek bu kuralları ölçeklendirerek silebilirsiniz. Bir eylem kuralı seçtiğinizde, yapılandırma sayfası açılır. Sayfa, eylem kuralının tanımını güncelleştirmenize ve etkinleştirebilir veya devre dışı bırakmanızı sağlar.
 
 ## <a name="best-practices"></a>En iyi uygulamalar
 
-Günlük uyarıları ile oluşturulan ['sonuç sayısı'](alerts-unified-log.md) oluşturma seçeneği **tek bir uyarı örneği** kullanarak (örneğin, birden fazla bilgisayara olabilir) tüm arama sonuç. Bir eylem Kuralı 'Uyarı bağlamı (yükü)' filtresi kullanıyorsa bir eşleşme var olduğu sürece bu senaryoda, uyarı örneğinde davranır. Senaryo 2 'Bilgisayar-01' hem 'Bilgisayar-02' oluşturulan günlüğü uyarısı için arama sonuçlarını içeriyorsa, daha önce anlatıldığı gibi tüm bildirim bastırılır (diğer bir deyişle, 'Bilgisayar-02' için hiç oluşturulan bildirim yoktur).
+[Sonuç sayısı](alerts-unified-log.md) seçeneği ile oluşturduğunuz günlük uyarıları, tüm arama sonucunu (birden çok bilgisayara yayılabilen) kullanarak tek bir uyarı örneği oluşturur. Bu senaryoda, bir eylem kuralı **Uyarı bağlamı (yük)** filtresini kullanıyorsa, eşleşme olduğu sürece uyarı örneği üzerinde işlem yapar. Daha önce açıklanan senaryo 2 ' de, oluşturulan günlük uyarısıyla ilgili arama sonuçları hem **bilgisayar-01** hem de **Bilgisayar-02**içeriyorsa, tüm bildirim bastırılır. **Bilgisayar-02** için hiçbir bildirim üretilmez.
 
 ![Eylem kuralları ve günlük uyarıları (sonuç sayısı)](media/alerts-action-rules/action-rules-log-alert-number-of-results.png)
 
-En iyi yararlanarak günlük uyarıları için eylem kurallarla, biz ile günlüğü uyarıları oluşturma için öneri ['Ölçüm ölçüsü'](alerts-unified-log.md) seçeneği. Bu seçeneği kullanarak, ayrı bir uyarı örnekleri grubu tanımlanan alana göre oluşturulur. Ardından Senaryo 2'de, 'Bilgisayar-01' ve 'Bilgisayar-02' için ayrı bir uyarı örneği oluşturulur. Bildirim 'Bilgisayar-02' için normal olarak harekete olmaya devam eder ancak senaryoda açıklanan eylemi kural ile yalnızca bildirim için 'Bilgisayar-01' atlanması.
+Günlük uyarılarını eylem kuralları ile en iyi şekilde kullanmak için, [ölçüm ölçümü](alerts-unified-log.md) seçeneğiyle günlük uyarıları oluşturun. Ayrı uyarı örnekleri, tanımlı grup alanı temel alınarak bu seçenek tarafından oluşturulur. Ardından, Senaryo 2 ' de, **bilgisayar-01** ve **Bilgisayar-02**için ayrı uyarı örnekleri oluşturulur. Senaryoda açıklanan eylem kuralı nedeniyle yalnızca **bilgisayar-01** için bildirim bastırılır. **Bilgisayar-02** ' e yönelik bildirim normal olarak çalışmaya devam eder.
 
 ![Eylem kuralları ve günlük uyarıları (sonuç sayısı)](media/alerts-action-rules/action-rules-log-alert-metric-measurement.png)
 
 ## <a name="faq"></a>SSS
 
-* S. Bir eylem kuralını yapılandırırken, böylece yinelenen bildirimler kaçınabilirim eylem çakışan tüm olası kuralları görmek istiyorum. Bunu yapmak mümkündür?
+### <a name="while-im-configuring-an-action-rule-id-like-to-see-all-the-possible-overlapping-action-rules-so-that-i-avoid-duplicate-notifications-is-it-possible-to-do-that"></a>Bir eylem kuralı yapılandırmadım, ancak yinelenen bildirimlerin oluşmasını önlemek için tüm olası çakışan eylem kurallarını görmek istiyorum. Bunu yapmak mümkün midir?
 
-    A. Bir eylem kuralını yapılandırırken bir kapsam tanımlama sonra aynı kapsamda (varsa) çakışma eylem kurallarının bir listesini görebilirsiniz. Bu çakışma şunlardan biri olabilir:
-    * Tam eşleşme: Örneğin, aynı abonelikte tanımladığınız eylem kural ve çakışan Eylem kuralı vardır.
-    * Alt küme: Örneğin, tanımladığınız bir eylem kuralı bir abonelikte olduğundan ve abonelik içindeki kaynak grubu çakışan eylem kural etkindir.
-    * Üst küme: Örneğin, tanımladığınız eylemi bir kaynak grubu üzerinde kuralıdır ve kaynak grubu içeren abonelik üzerinde çakışan eylem kuralıdır.
-    * Kesişim: Örneğin, tanımladığınız eylem 'VM1' ve 'VM2' kuralıdır ve çakışan eylem 'VM2' ve 'VM3' kuralıdır.
+Bir eylem kuralı yapılandırırken bir kapsam tanımladıktan sonra, aynı kapsamda (varsa) çakışan eylem kurallarının bir listesini görebilirsiniz. Bu örtüşme, aşağıdaki seçeneklerden biri olabilir:
 
-    ![Çakışan eylem kuralları](media/alerts-action-rules/action-rules-overlapping.png)
+* Tam eşleşme: Örneğin, tanımladığınız eylem kuralı ve çakışan eylem kuralı aynı abonelikte bulunur.
+* Alt küme: Örneğin, tanımladığınız eylem kuralı bir abonelikte ve çakışan eylem kuralı, abonelik içindeki bir kaynak grubunda bulunur.
+* Bir üst küme: Örneğin, tanımladığınız eylem kuralı bir kaynak grubunda ve çakışan eylem kuralı kaynak grubunu içeren abonelikte bulunur.
+* Bir kesişim: Örneğin, tanımladığınız eylem kuralı **VM1** ve **VM2**ve çakışan eylem kuralı **VM2** ve **VM3**üzerinde.
 
-* S. Bir uyarı kuralı yapılandırma olsa da mümkün olup olmadığını zaten işlem kuralları, tanımlanan bilmek tanımlama uyarı kuralı üzerinde hareket?
+![Çakışan eylem kuralları](media/alerts-action-rules/action-rules-overlapping.png)
 
-    A. Uyarı, kural için hedef kaynak tanımladıktan sonra aynı kapsamda (varsa) üzerinde davranan 'Actions' bölümünde 'Görünüm eylemleri yapılandırdığına' ı tıklatarak eylem kurallarının listesini görebilirsiniz. Bu liste, aşağıdaki senaryolar için kapsama göre doldurulur:
-    * Tam eşleşme: Örneğin, tanımladığınız bir uyarı kuralı ve Eylem kuralı aynı abonelikte olan.
-    * Alt küme: Örneğin, tanımladığınız bir uyarı kuralı bir abonelikte olduğundan ve abonelik içindeki kaynak grubuna eylem kural etkindir.
-    * Üst küme: Örneğin, tanımladığınız bir uyarı kuralı olan bir kaynak grubu ve kaynak grubu içeren abonelik üzerinde eylem kuralıdır.
-    * Kesişim: Örneğin, tanımladığınız bir uyarı kuralı durumda 'VM1' ve 'VM2' ve 'VM2' ve 'VM3' eylem kuralıdır.
+### <a name="while-im-configuring-an-alert-rule-is-it-possible-to-know-if-there-are-already-action-rules-defined-that-might-act-on-the-alert-rule-im-defining"></a>Bir uyarı kuralı yapılandırmadım, ancak tanımladığım uyarı kuralında işlem yapabilecek bir işlem kuralları olup olmadığını bilmelidir.
+
+Uyarı kuralınız için hedef kaynağı tanımladıktan sonra, **Eylemler** bölümü altında **yapılandırılan eylemleri görüntüle** ' yi seçerek aynı kapsamda (varsa) davranan eylem kurallarının listesini görebilirsiniz. Bu liste, kapsam için aşağıdaki senaryolara göre doldurulur:
+
+* Tam eşleşme: Örneğin, tanımladığınız uyarı kuralı ve eylem kuralı aynı abonelikte bulunur.
+* Alt küme: Örneğin, tanımladığınız uyarı kuralı bir abonelikte ve eylem kuralı, abonelik içindeki bir kaynak grubunda yer alır.
+* Bir üst küme: Örneğin, tanımladığınız uyarı kuralı bir kaynak grubunda ve eylem kuralı kaynak grubunu içeren abonelikte bulunur.
+* Bir kesişim: Örneğin, tanımladığınız uyarı kuralı **VM1** ve **VM2**ve eylem kuralı **VM2** ve **VM3**üzerinde.
     
-    ![Çakışan eylem kuralları](media/alerts-action-rules/action-rules-alert-rule-overlapping.png)
+![Çakışan eylem kuralları](media/alerts-action-rules/action-rules-alert-rule-overlapping.png)
 
-* S. Bir eylem kuralı tarafından gizlenen uyarılar görebilir miyim?
+### <a name="can-i-see-the-alerts-that-have-been-suppressed-by-an-action-rule"></a>Eylem kuralı tarafından gizlenen uyarıları görebilir miyim?
 
-    A. İçinde [uyarılar liste sayfası](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-managing-alert-instances), çağrılan 'gizleme Status' seçilebilir ek bir sütun yok. Bildirim uyarı örneği için engellendi, listeden durumu gösterebilir.
+[Uyarılar listesi sayfasında](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-managing-alert-instances), **gizleme durumu**adlı ek bir sütun seçebilirsiniz. Bir uyarı örneği için bildirim gizlenemedi, listede bu durum gösterilir.
 
-    ![Gizlenen bir uyarı örneği](media/alerts-action-rules/action-rules-suppressed-alerts.png)
+![Gizlenen uyarı örnekleri](media/alerts-action-rules/action-rules-suppressed-alerts.png)
 
-* S. Varsa bir eylem grubu ile bir eylem kuralı ve başka bir gizleme etkin aynı kapsamda ne olur?
+### <a name="if-theres-an-action-rule-with-an-action-group-and-another-with-suppression-active-on-the-same-scope-what-happens"></a>Bir eylem grubu ve aynı kapsamda etkin gizleme içeren bir eylem kuralı varsa, ne olur?
 
-    A. **Gizleme her zaman aynı kapsamına göre önceliklidir**.
+Gizleme her zaman aynı kapsamda öncelik alır.
 
-* S. İki ayrı bir eylem kurallarında izlenen bir kaynak varsa ne olur? Bir veya iki bildirim alabilir miyim? Bu senaryoda örnek 'VM2':
+### <a name="what-happens-if-i-have-a-resource-thats-monitored-in-two-separate-action-rules-do-i-get-one-or-two-notifications-for-example-vm2-in-the-following-scenario"></a>İki ayrı eylem kurallarında izlenen bir kaynağınız varsa ne olur? Bir veya iki bildirim alıyorum? Örneğin, aşağıdaki senaryoda **VM2** :
 
-      action rule 'AR1' defined for 'VM1' and 'VM2' with action group 'AG1'
-      action rule 'AR2' defined for 'VM2' and 'VM3' with action group 'AG1'
+      action rule AR1 defined for VM1 and VM2 with action group AG1
+      action rule AR2 defined for VM2 and VM3 with action group AG1
 
-    A. 'VM1' ve 'VM3' her uyarı için bir kez 'AG1' eylem grubu tetiklenen. Her uyarı için 'VM2' üzerinde 'AG1' eylem grubu iki kez tetiklenmesi (**eylem kuralları değil XML'deki yinelenen Eylemler**). 
+VM1 ve VM3 üzerindeki her uyarı için, eylem grubu AG1 bir kez tetiklenir. **VM2**üzerindeki her uyarı için, eylem kuralları yinelenen işlemleri kaldırmadığı için eylem grubu AG1 iki kez tetiklenecektir. 
 
-* S. İki ayrı bir eylem kurallarında izlenen bir kaynak sahibim ve bir hatayla gizleme için başka bir eylem gerektirdiğinden ne olur? Örneğin, bu senaryoda ' VM2':
+### <a name="what-happens-if-i-have-a-resource-monitored-in-two-separate-action-rules-and-one-calls-for-action-while-another-for-suppression-for-example-vm2-in-the-following-scenario"></a>İki ayrı eylem kuralına göre izlenen bir kaynaktır ve diğeri de gizleme için bir eylem aradığında ne olur? Örneğin, aşağıdaki senaryoda **VM2** :
 
-      action rule 'AR1' defined for 'VM1' and 'VM2' with action group 'AG1' 
-      action rule 'AR2' defined for 'VM2' and 'VM3' with suppression
+      action rule AR1 defined for VM1 and VM2 with action group AG1 
+      action rule AR2 defined for VM2 and VM3 with suppression
 
-    A. 'VM1' her uyarı için bir kez 'AG1' eylem grubu tetiklenen. Eylemler ve 'VM2' ve 'VM3' her uyarı için bildirimleri gizlenir. 
+VM1 üzerindeki her uyarı için, eylem grubu AG1 bir kez tetiklenir. VM2 ve VM3 üzerindeki her uyarı için Eylemler ve bildirimler bastırılır. 
 
-* S. Bir uyarı kuralı ve farklı eylem grupları çağırma aynı kaynak için tanımlanan bir eylem kuralı varsa ne olur? Örneğin, bu senaryoda ' VM1':
+### <a name="what-happens-if-i-have-an-alert-rule-and-an-action-rule-defined-for-the-same-resource-calling-different-action-groups-for-example-vm1-in-the-following-scenario"></a>Farklı eylem gruplarını çağıran aynı kaynak için bir uyarı kuralınız ve bir eylem kuralı tanımsam ne olur? Örneğin, aşağıdaki senaryoda **VM1** :
 
-      alert rule  'rule1' on          'VM1' with action group 'AG2'
-      action rule 'AR1'   defined for 'VM1' with action group 'AG1' 
+      alert rule rule1 on VM1 with action group AG2
+      action rule AR1 defined for VM1 with action group AG1 
  
-    A. 'VM1' her uyarı için bir kez 'AG1' eylem grubu tetiklenen. 'Bağlanma1' uyarı kuralı tetiklendiğinde, ayrıca 'AG2' de tetikler. **Eylem grupları tanımlanan eylem kuralların ve uyarı kuralları işletmek bağımsız olarak, hiçbir yinelenenleri kaldırma ile**. 
+VM1 üzerindeki her uyarı için, eylem grubu AG1 bir kez tetiklenir. "Rule1" uyarı kuralı tetiklendiğinde, ayrıca AG2 de tetiklenecektir. Eylem kuralları ve uyarı kuralları içinde tanımlanan eylem grupları, yinelenenleri kaldırma olmadan bağımsız olarak çalışır. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure'daki uyarılar hakkında daha fazla bilgi edinin](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-overview)
+- [Azure 'da uyarılar hakkında daha fazla bilgi edinin](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-overview)

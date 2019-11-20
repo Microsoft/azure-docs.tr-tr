@@ -4,14 +4,14 @@ description: Dizin oluşturma ve Azure Cosmos DB ve SQL API'si ile uzamsal nesne
 author: SnehaGunda
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/23/2019
+ms.date: 07/23/2019
 ms.author: sngun
-ms.openlocfilehash: d0571608e154915a473145374ce007854aaa57f1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1b26f78c6d44123ef1baa3c55fd16c3340d59dd4
+ms.sourcegitcommit: e42c778d38fd623f2ff8850bb6b1718cdb37309f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66480129"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69616852"
 ---
 # <a name="use-geospatial-and-geojson-location-data-with-azure-cosmos-db-sql-api-account"></a>Azure Cosmos DB SQL API hesabı ile Jeo-uzamsal ve GeoJSON konum verileri kullanın
 
@@ -142,7 +142,7 @@ await client.CreateDocumentAsync(
     });
 ```
 
-Enlem ve boylam bilgilerine sahip değilseniz, ancak fiziksel adres veya şehir veya ülkede/bölgede gibi konum adı, Bing Haritalar REST Hizmetleri gibi bir coğrafi kodlama hizmetini kullanarak gerçek koordinatları bakabilirsiniz. Bing Haritalar ile coğrafi kodlama hakkında daha fazla bilgi [burada](https://msdn.microsoft.com/library/ff701713.aspx).
+Enlem ve Boylam bilgisine sahip değilseniz, ancak şehir veya ülke/bölge gibi fiziksel adreslere veya konuma sahipseniz, Bing Haritalar REST hizmetleri gibi bir coğrafi kodlama hizmeti kullanarak gerçek koordinatları arayabilirsiniz. Bing Haritalar ile coğrafi kodlama hakkında daha fazla bilgi [burada](https://msdn.microsoft.com/library/ff701713.aspx).
 
 ## <a name="querying-spatial-types"></a>Uzamsal türler sorgulanıyor
 Biz Jeo-uzamsal veriler ekleme işlemini Anlamadıysanız ayırdıktan sonra SQL ve LINQ kullanarak Azure Cosmos DB kullanarak bu verileri sorgulamak nasıl bir göz atalım.
@@ -249,7 +249,7 @@ Bu işlevler, çokgenler doğrulamak için de kullanılabilir. Örneğin, burada
 ### <a name="linq-querying-in-the-net-sdk"></a>LINQ içinde .NET SDK'sı sorgulanıyor
 SQL .NET SDK'sını da sağlayıcıları yöntem Saplaması `Distance()` ve `Within()` LINQ ifadeler içinde kullanmak için. Bu yöntem SQL LINQ sağlayıcısı çevirir eşdeğer SQL yerleşik işlev çağrıları çağrı (ST_DISTANCE ve ST_WITHIN sırasıyla). 
 
-"Konum" değeri olan bir 30 km belirtilen yarıçap içinde noktası LINQ kullanarak Azure Cosmos DB koleksiyondaki tüm belgeleri bulur bir LINQ Sorgu örneği aşağıda verilmiştir.
+Aşağıda, "location" değeri, LINQ kullanarak belirtilen noktanın bir yarıçapı içinde olan Azure Cosmos kapsayıcısındaki tüm belgeleri bulan LINQ sorgusunun bir örneği verilmiştir.
 
 **LINQ sorgusu için uzaklık**
 

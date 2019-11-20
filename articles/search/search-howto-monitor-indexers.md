@@ -1,92 +1,91 @@
 ---
-title: Dizin Oluşturucu durumunu ve sonuçları - Azure Search izleme
-description: Durum, ilerleme ve REST API'si veya .NET SDK kullanarak Azure portalındaki Azure Search dizin oluşturucularında sonuçlarını izleyin.
-ms.date: 06/28/2019
-author: RobDixon22
-manager: HeidiSteen
-ms.author: v-rodixo
-services: search
-ms.service: search
+title: Dizin Oluşturucu durumunu ve sonuçlarını izleme
+titleSuffix: Azure Cognitive Search
+description: REST API veya .NET SDK kullanarak Azure portal Azure Bilişsel Arama dizin oluşturucularının durumunu, ilerlemesini ve sonuçlarını izleyin.
+manager: nitinme
+author: HeidiSteen
+ms.author: heidist
 ms.devlang: rest-api
+ms.service: cognitive-search
 ms.topic: conceptual
-ms.custom: seodec2018
-ms.openlocfilehash: 07b4fe2ef830c3ce09b655cf4b433d14923229a9
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.date: 11/04/2019
+ms.openlocfilehash: 699b5a4e5a7f10c883667ca5030dd971855467f5
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67486291"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74112982"
 ---
-# <a name="how-to-monitor-azure-search-indexer-status-and-results"></a>Azure Search dizin oluşturucu durumunu ve sonuçlarını izleme
+# <a name="how-to-monitor-azure-cognitive-search-indexer-status-and-results"></a>Azure Bilişsel Arama Dizin Oluşturucu durumunu ve sonuçlarını izleme
 
-Azure arama, durum ve izleme her Indexer'ın geçerli ve geçmiş çalıştırma hakkında bilgi sağlar.
+Azure Bilişsel Arama her dizin oluşturucunun geçerli ve geçmiş çalıştırmaları hakkında durum ve izleme bilgileri sağlar.
 
-Dizin Oluşturucu izleme istediğinizde yararlı olur:
+Şunları yapmak istediğinizde Dizin Oluşturucu izleme yararlı olur:
 
-* İzleme sırasında devam eden bir dizin oluşturucu ilerlemesini çalıştırın.
-* Devam eden veya önceki dizin oluşturucuyu çalıştırma sonuçlarını gözden geçirin.
-* Üst düzey bir dizin oluşturucu tanımlamak hatalarını ve hata veya uyarı hakkında tek tek belgeler dizine ekleniyor.
+* Bir dizin oluşturucunun ilerlemesini devam eden bir çalıştırma sırasında izleyin.
+* Devam eden veya önceki Dizin Oluşturucu çalıştırmasının sonuçlarını gözden geçirin.
+* En üst düzey Dizin Oluşturucu hatalarını ve dizin oluşturulan tek belgelerle ilgili hataları veya uyarıları belirler.
 
-## <a name="find-indexer-status-and-history-details"></a>Dizin Oluşturucu durumu ve geçmişi ayrıntılarını bulun
+## <a name="get-status-and-history"></a>Durum ve geçmişi al
 
-Dizin Oluşturucu izleme bilgilerini dahil olmak üzere çeşitli yollarla erişebilirsiniz:
+Dizin Oluşturucu izleme bilgilerine aşağıdakiler dahil olmak üzere çeşitli yollarla erişebilirsiniz:
 
 * [Azure portalında](#portal)
-* Kullanarak [REST API](#restapi)
-* Kullanarak [.NET SDK'sı](#dotnetsdk)
+* [REST API](#restapi) kullanma
+* [.NET SDK 'yı](#dotnetsdk) kullanma
 
-(Biçimleri farklı veri erişimi yöntemi kullanılan temel rağmen) izleme bilgilerini kullanılabilir dizin oluşturucu tüm şunları içerir:
+Kullanılabilir Dizin Oluşturucu izleme bilgileri aşağıdakilerin tümünü içerir (ancak veri biçimleri kullanılan erişim yöntemine göre farklılık gösterir):
 
-* Dizin oluşturucunun kendisi hakkında durum bilgileri
-* En son hakkında bilgi Oluşturucusu durumunu, başlangıç ve bitiş zamanlarını ve ayrıntılı hatalar ve uyarılar dahil olmak üzere, çalıştırın.
-* Geçmiş dizin oluşturucu çalıştırıldığında ve durumlar, sonuçları, hataları ve Uyarıları listesi.
+* Dizin oluşturucunun kendisi ile ilgili durum bilgileri
+* Dizin oluşturucunun durum, başlangıç ve bitiş zamanları, ayrıntılı hatalar ve uyarılar dahil en son çalışması hakkında bilgiler.
+* Geçmiş dizin oluşturucunun bir listesi, durumları, sonuçları, hataları ve uyarıları çalışır.
 
-Büyük miktarda veri işleyen dizin oluşturucular çalıştırmak uzun sürebilir. Örneğin, milyonlarca kaynak belge işleme dizin oluşturucular, 24 saat çalıştırma ve hemen yeniden başlatın. Yüksek hacimli dizin oluşturucular için durumu her zaman diyebilirsiniz **sürüyor** portalında. Bir dizin oluşturucu bile çalışırken, devam eden ilerlemeyi ve önceki çalıştırmaları hakkında ayrıntı bulabilirsiniz.
+Büyük hacimler veri işleyen Dizin oluşturucular çalıştırmak uzun sürebilir. Örneğin, milyonlarca kaynak belgeyi işleyen Dizin oluşturucular 24 saat boyunca çalıştırılabilir ve hemen hemen yeniden başlatılabilir. Yüksek hacimli dizin oluşturucularının durumu her zaman portalda **devam** edebilir. Bir Dizin Oluşturucu çalışırken bile devam eden ilerleme ve önceki çalıştırmalar hakkında ayrıntılar bulunur.
 
 <a name="portal"></a>
 
-## <a name="monitor-indexers-in-the-portal"></a>İzleyici dizin oluşturucular portalda
+## <a name="monitor-using-the-portal"></a>Portalı kullanarak izleme
 
-Tüm, dizin oluşturucularda geçerli durumunu görebilirsiniz **dizin oluşturucular** arama hizmeti genel bakış sayfanıza listesi.
+Tüm Dizin oluşturucularınızın geçerli durumunu, arama hizmeti genel bakış sayfanızdaki **Dizin oluşturucular** listesinde görebilirsiniz.
 
-   ![Dizin oluşturucuların listesini](media/search-monitor-indexers/indexers-list.png "Dizin oluşturucuların listesini")
+   ![Dizin oluşturucular listesi](media/search-monitor-indexers/indexers-list.png "Dizin oluşturucular listesi")
 
-Ne zaman bir dizin oluşturucu yürütülmekte listesi gösterir durumu **sürüyor**ve **Docs başarılı** değeri şu ana kadar işlenen belge sayısı gösterilir. Portalda dizin oluşturucu durum değerleri güncelleştirme birkaç dakika sürebilir ve belge sayılarını.
+Bir Dizin Oluşturucu yürütüldüğü zaman, listedeki durum **devam ediyor**' i gösterir ve **docs başarılı** değeri, şimdiye kadar işlenen belgelerin sayısını gösterir. Portalın Dizin Oluşturucu durum değerlerini ve belge sayılarını güncelleştirmesi birkaç dakika sürebilir.
 
-Bir dizin oluşturucu, en son çalıştırma başarılı gösterir olan **başarı**. Tek tek belgeler hataları olsa bile hatalarının sayısını oluşturucunun altındaysa dizin oluşturucunun çalıştırılması başarılı olabileceğini **başarısız öğe maksimum sayısı** ayarı.
+En son çalıştırma başarılı olan bir Dizin Oluşturucu **başarılı**gösterir. Hata sayısı, dizin oluşturucunun **en fazla başarısız öğe** ayarından daha küçükse, tek tek belgelerde hata olsa bile Dizin Oluşturucu çalıştırması başarılı olabilir.
 
-En son bir hata ile sona erdi çalıştırırsanız, durumunun **başarısız**. Durumu **sıfırlama** oluşturucunun değişiklik izleme durumu sıfırlandı anlamına gelir.
+En son çalıştırma bir hatayla bitdiyse, durum **başarısız**' ı gösterir. **Reset** durumu, dizin oluşturucunun değişiklik izleme durumunun sıfırlandığı anlamına gelir.
 
-Hakkında daha fazla ayrıntı oluşturucunun geçerli ve yeni görmek için listedeki bir dizin oluşturucu tıklayarak çalıştırır.
+Dizin oluşturucunun geçerli ve son çalıştırmaları hakkında daha fazla ayrıntı görmek için listedeki bir dizin oluşturucuya tıklayın.
 
-   ![Dizin Oluşturucu özeti ve yürütme geçmişini](media/search-monitor-indexers/indexer-summary.png "dizin oluşturucu özeti ve yürütme geçmişi")
+   ![Dizin Oluşturucu Özeti ve yürütme geçmişi](media/search-monitor-indexers/indexer-summary.png "Dizin Oluşturucu Özeti ve yürütme geçmişi")
 
-**Dizin oluşturucu özeti** grafik, en son çalışır'işlenen belge sayısı bir grafiği görüntüler.
+**Dizin Oluşturucu Özet** grafiğinde, en son çalıştırmalarından işlenen belgelerin sayısını görüntüleyen bir grafik görüntülenir.
 
-**Yürütme ayrıntıları** 50 en son yürütme sonuçlarının listesini gösterir.
+**Yürütme ayrıntıları** listesinde en son yürütme sonuçlarının 50 ' i gösterilir.
 
-Çalıştırılan ilgili ayrıntıları görmek için listenin bir yürütme sonuca tıklayın. Bu, başlangıç ve bitiş zamanlarını ve hataları ve oluşan uyarıları içerir.
+Bu çalıştıra ilişkin ayrıntıları görmek için listede bir yürütme sonucuna tıklayın. Bu, başlangıç ve bitiş zamanlarını ve oluşan hata ve uyarıları içerir.
 
-   ![Dizin Oluşturucu yürütme ayrıntıları](media/search-monitor-indexers/indexer-execution.png "dizin oluşturucusu yürütme ayrıntıları")
+   ![Dizin Oluşturucu yürütme ayrıntıları](media/search-monitor-indexers/indexer-execution.png "Dizin Oluşturucu yürütme ayrıntıları")
 
-Çalıştırma sırasında belgeye özgü sorunlar varsa, hataları ve Uyarıları alanları listelenir.
+Çalıştırma sırasında belgeye özgü sorunlar varsa, bunlar hatalar ve uyarılar alanlarında listelenecektir.
 
-   ![Dizin Oluşturucu ayrıntıları hatalarla](media/search-monitor-indexers/indexer-execution-error.png "hatalarla dizin oluşturucu ayrıntıları")
+   ![Dizin Oluşturucu ayrıntıları hatalarla](media/search-monitor-indexers/indexer-execution-error.png "Dizin Oluşturucu ayrıntıları hatalarla")
 
-Uyarılar, dizin oluşturucular bazı türleri yaygın olarak bulunur ve her zaman bir sorun göstermez. Örneğin, görüntü veya PDF dosyalarını işlemek için herhangi bir metin içermeyen bilişsel Hizmetler'i kullanma dizin oluşturucular uyarıları bildirebilirsiniz.
+Uyarılar bazı Dizin oluşturucular türleriyle ortaktır ve her zaman bir sorun göstermez. Örneğin bilişsel hizmetler kullanan Dizin oluşturucular, görüntü veya PDF dosyaları işlemek için herhangi bir metin içermiyorsa uyarıları rapor edebilir.
 
-Dizin Oluşturucu hataları ve Uyarıları araştırma hakkında daha fazla bilgi için bkz. [Azure Search'te yaygın dizin oluşturucu sorunları giderme](search-indexer-troubleshooting.md).
+Dizin Oluşturucu hatalarını ve uyarılarını araştırma hakkında daha fazla bilgi için bkz. [Azure bilişsel arama 'da ortak Dizin Oluşturucu sorunlarını giderme](search-indexer-troubleshooting.md).
 
 <a name="restapi"></a>
 
-## <a name="monitor-indexers-using-the-rest-api"></a>REST API kullanarak dizin oluşturucular izleyin
+## <a name="monitor-using-rest-apis"></a>REST API 'Leri kullanarak izleme
 
-Bir dizin oluşturucu kullanarak, durum ve yürütme geçmişini alabilirsiniz [dizin oluşturucu durumunu Al komutu](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status):
+Dizin Oluşturucu [durumunu Al komutunu](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status)kullanarak bir dizin oluşturucunun durum ve yürütme geçmişini alabilirsiniz:
 
     GET https://[service name].search.windows.net/indexers/[indexer name]/status?api-version=2019-05-06
     api-key: [Search service admin key]
 
-Yanıt, genel dizin oluşturucu durumu, son (veya devam eden) dizin oluşturucuyu çağırmayı ve son dizin oluşturucu çağrılarını geçmişini içerir.
+Yanıt genel Dizin Oluşturucu durumunu, son (veya sürmekte olan) Dizin Oluşturucu çağrısını ve son Dizin Oluşturucu etkinleştirmeleri geçmişini içerir.
 
     {
         "status":"running",
@@ -114,23 +113,23 @@ Yanıt, genel dizin oluşturucu durumu, son (veya devam eden) dizin oluşturucuy
         }]
     }
 
-Kadar geriye doğru kronolojik sırayla (en son gerçekleşen en başta) sıralanır 50 en son çalıştığında, yürütme geçmişini içerir.
+Yürütme geçmişi, geriye doğru kronolojik sıraya (en son ilk) göre sıralanan en güncel 50 çalıştırmaya kadar içerir.
 
-İki farklı durum değerleri olduğuna dikkat edin. Dizinleyici için üst düzey durumudur. Bir dizin oluşturucu durumunu **çalıştıran** dizin oluşturucu doğru ayarlandığından ve şu anda kullanılabilir değil onun çalıştırılacak kullanıcının anlamına gelir çalışıyor.
+İki farklı durum değeri olduğunu aklınızda edin. En üst düzey durum, dizin oluşturucunun kendisi içindir. Öğesinin Dizin Oluşturucu durumu, dizin oluşturucunun doğru şekilde ayarlandığı ve çalıştırılabileceği, ancak şu anda çalıştığı **anlamına gelir.**
 
-Her dizin oluşturucunun ayrıca o yürütmenin devam eden olup olmadığını belirtir, kendi durum vardır (**çalıştıran**), veya zaten tamamlandı bir **başarı**, **transientFailure**, veya **persistentFailure** durumu. 
+Dizin oluşturucunun her çalışmasının Ayrıca, belirli yürütmenin devam eden (**çalışıyor**) veya **başarılı**, **geçişli bir hata**veya **kalıcı bir hata** durumuyla tamamlanmış olup olmadığını belirten kendi durumu vardır. 
 
-Değişiklik izleme durumunu yenilemek için bir dizin oluşturucu sıfırladığınızda ayrı yürütme geçmişi girişi ile eklendiğinde bir **sıfırlama** durumu.
+Bir Dizin Oluşturucu değişiklik izleme durumunu yenilemek üzere sıfırlandığında, **sıfırlama** durumuyla ayrı bir yürütme geçmişi girişi eklenir.
 
-Durum kodları ve dizin oluşturucu izleme verileri hakkında daha fazla ayrıntı için [GetIndexerStatus](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status).
+Durum kodları ve Dizin Oluşturucu izleme verileri hakkında daha fazla bilgi için bkz. [GetIndexerStatus](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status).
 
 <a name="dotnetsdk"></a>
 
-## <a name="monitor-indexers-using-the-net-sdk"></a>.NET SDK kullanarak dizin oluşturucular izleyin
+## <a name="monitor-using-the-net-sdk"></a>.NET SDK 'Yı kullanarak izleme
 
-Azure Search .NET SDK'sını kullanarak bir dizin oluşturucu zamanlaması tanımlayabilirsiniz. Bunu yapmak için dahil **zamanlama** oluşturulurken veya güncelleştirilirken bir dizin oluşturucu özelliği.
+Bir dizin oluşturucunun zamanlamasını Azure Bilişsel Arama .NET SDK kullanarak tanımlayabilirsiniz. Bunu yapmak için, bir Dizin Oluşturucu oluştururken veya güncelleştirirken **Schedule** özelliğini ekleyin.
 
-Aşağıdaki C# örnek, bir oluşturucunun durumu hakkındaki bilgileri yazar ve konsola sonuçlarını, en son (veya devam eden) çalıştırın.
+Aşağıdaki C# örnek, bir dizin oluşturucunun durumuyla ilgili bilgileri ve en son (veya devam eden) konsolunun konsola çalıştırılmasını yazar.
 
 ```csharp
 static void CheckIndexerStatus(Indexer indexer, SearchServiceClient searchService)
@@ -162,7 +161,7 @@ static void CheckIndexerStatus(Indexer indexer, SearchServiceClient searchServic
 }
 ```
 
-Konsolunda çıktısı aşağıdakine benzer görünecektir:
+Konsolundaki çıktı şuna benzer şekilde görünür:
 
     Indexer has run 18 times.
     Indexer Status: Running
@@ -173,14 +172,14 @@ Konsolunda çıktısı aşağıdakine benzer görünecektir:
       ErrorMessage: none
       Document Errors: 0, Warnings: 0
 
-İki farklı durum değerleri olduğuna dikkat edin. Üst düzey durum dizinleyicinin durumudur. Bir dizin oluşturucu durumunu **çalıştıran** dizin oluşturucu doğru ayarlandığından anlamına gelir ve yürütme, ancak bu BT yürütülmekte için kullanılabilir.
+İki farklı durum değeri olduğunu aklınızda edin. Üst düzey durum, dizin oluşturucunun durumunun kendisidir. Öğesinin Dizin Oluşturucu durumu, dizin oluşturucunun doğru şekilde ayarlandığı ve yürütme için kullanılabilir olduğu, ancak şu anda yürütülmekte olduğu **anlamına gelir.**
 
-Her dizin oluşturucunun ayrıca ilgili yürütme devam ediyor için kendi durum vardır (**çalıştıran**), veya ile zaten tamamlandığından bir **başarı** veya **TransientError** durumu. 
+Dizin oluşturucunun her çalışmasının Ayrıca, belirli yürütmenin devam eden (**çalışıyor**) veya **başarılı** veya **geçişli** bir durum ile zaten tamamlanmış olup olmadığı için kendi durumu vardır. 
 
-Değişiklik izleme durumunu yenilemek için bir dizin oluşturucu sıfırlandığında, ayrı bir geçmiş girişi ile eklendiğinde bir **sıfırlama** durumu.
+Bir Dizin Oluşturucu değişiklik izleme durumunu yenilemek üzere sıfırlandığında, **sıfırlama** durumuyla ayrı bir geçmiş girişi eklenir.
 
-Durum kodları ve dizin oluşturucu izleme bilgileri hakkında daha fazla ayrıntı için [GetIndexerStatus](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status) REST API'de.
+Durum kodları ve Dizin Oluşturucu izleme bilgileri hakkında daha fazla bilgi için REST API [GetIndexerStatus](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status) bakın.
 
-Belgeye özgü hatalar veya uyarılar hakkında ayrıntılar listeleri numaralandırarak alınabilir `IndexerExecutionResult.Errors` ve `IndexerExecutionResult.Warnings`.
+`IndexerExecutionResult.Errors` ve `IndexerExecutionResult.Warnings`listeleri numaralandırarak belgeye özgü hatalar veya uyarılar hakkında ayrıntılı bilgi alınabilir.
 
-Dizin oluşturucular izlemek için kullanılan .NET SDK sınıfları hakkında daha fazla bilgi için bkz. [IndexerExecutionInfo](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexerexecutioninfo?view=azure-dotnet) ve [IndexerExecutionResult](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexerexecutionresult?view=azure-dotnet).
+Dizin oluşturucuyu izlemek için kullanılan .NET SDK sınıfları hakkında daha fazla bilgi için bkz. [IndexerExecutionInfo](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexerexecutioninfo?view=azure-dotnet) and [IndexerExecutionResult](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexerexecutionresult?view=azure-dotnet).

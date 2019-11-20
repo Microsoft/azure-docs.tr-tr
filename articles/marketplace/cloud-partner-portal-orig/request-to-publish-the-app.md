@@ -1,30 +1,31 @@
 ---
-title: Uygulama yayımlama isteği
+title: Uygulamayı yayımlama isteği
 description: .
 services: Azure, Marketplace, Cloud Partner Portal,
 author: pbutlerm
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: e272d051af6070007bcebc0f697d2854cd721497
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9558e7684fa8ab742319890940800da85daa1706
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943577"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73814748"
 ---
 # <a name="request-to-publish-the-app"></a>Uygulamayı yayımlama isteği
 
-![Yayımlama için tıklayın](./media/CRMScreenShot18.png)
+![Yayımlamak için tıklayın](./media/CRMScreenShot18.png)
 
-1. Teklifinizi sertifika ekibimize göndermek için Yayımla düğmesine tıklayın. Teklifinizi altında bulunan Durum sekmesindeki durumunu görüntülemek mümkün olacaktır.
+1. Teklifinizi sertifika ekibimize göndermek için Yayımla düğmesine tıklayın. Durum sekmesi altında teklifinizin durumunu görüntüleyebileceksiniz.
 
-![Yayın durumu gözden geçirin](./media/CRMScreenShot19.png)
+![Yayın durumunu gözden geçir](./media/CRMScreenShot19.png)
 
-## <a name="republish-the-app"></a>Uygulamayı yeniden yayımlaması
+## <a name="republish-the-app"></a>Uygulamayı yeniden yayımlama
 
- Bir uygulamayı yeniden yayımlaması için istekte bulunmak ihtiyacınız varsa, durum sekmesinde ilk Yayımlamayı İptal Et düğmesine tıklayın (isteği artık etkin değil, bu adımı atlayın). Uygulamaya değişikliklerinizi yapın, teklif uygun şekilde güncelleştirin ve sonra yeniden göndermek için Yayımla düğmesine tıklayın. # Microsoft Dynamics 365 Business Edition Lütfen Not Microsoft Dynamics 365 Business sürümleri için oluşturulmuş çözümler Business Edition sınırları emin olmak için sertifika sırasında ek denetimler geçmeleri için özel hususlar için bağlı. İşletme sürümü sınırlar aşağıda belirtilmiştir. # Yardım alma. Sorun yaşarsanız tıklayarak bir destek bileti oturum açabilir sağ üst köşedeki ve giderek.
+ Bir uygulamayı yeniden yayımlamak için bir istek yapmanız gerekiyorsa, önce durum sekmesi altındaki yayınla Iptal et düğmesine tıklayın (istek artık etkin değilse, bu adımı atlayın). Uygulamada değişikliklerinizi yapın, teklifi uygun şekilde güncelleştirin ve sonra yeniden göndermek için Yayımla düğmesine tıklayın. Microsoft Dynamics 365 Business Edition için özel hususlar lütfen, Iş sürümü sınırlarının ' ye uygunluğunu sağlamak üzere Microsoft Dynamics 365 Iş sürümleri için oluşturulan çözümlerin sertifika sırasında ek denetimler olacağını unutmayın. Iş sürümü sınırları burada belgelenmiştir. # Yardım alma. Sorunlarla karşılaşırsanız, sağ üst köşedeki ' a tıklayarak ve ' a giderek bir destek bileti günlüğe kaydedebilirsiniz.
 
 ![Uygulamayı yeniden yayımlama](./media/CRMScreenShot20.png)

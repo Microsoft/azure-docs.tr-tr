@@ -1,6 +1,6 @@
 ---
 title: Azure Traffic Manager ayarlarını doğrulama
-description: Bu makalede, Traffic Manager ayarlarınızı doğrulamanıza yardımcı olur.
+description: Bu makalede, Traffic Manager ayarlarınızı doğrulamayı ve trafik yönlendirme yöntemini test yapmayı öğrenin.
 services: traffic-manager
 author: asudbring
 ms.service: traffic-manager
@@ -10,61 +10,61 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/16/2017
 ms.author: allensu
-ms.openlocfilehash: 19ef08a40d0a84aecb070e71bbb8c9b6a88ae059
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ad74e5c51d5939218ebb546993d416b3df1cd04b
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67070934"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74023521"
 ---
 # <a name="verify-traffic-manager-settings"></a>Traffic Manager ayarlarını doğrulama
 
-Traffic Manager ayarlarınızı test etme için birden çok istemciyi çeşitli yerlerde, testlerinizi çalıştırmak gerekir. Ardından, uç noktaları Traffic Manager profilinizin teker teker aşağı getirin.
+Traffic Manager ayarlarınızı test etmek için, çeşitli konumlarda testlerinizi çalıştırabileceğiniz birden fazla istemciniz olması gerekir. Ardından, Traffic Manager profilinizde uç noktaları tek seferde aşağı taşıyın.
 
-* Hızlı bir şekilde (örneğin, 30 saniye) değişiklikleri yaymak için DNS TTL değeri düşük ayarlayın.
-* Azure bulut hizmetlerinizi ve Web siteleri, sınadığınız profilindeki IP adreslerini bildirin.
-* Bir DNS adı bir IP adresine çözümlemek ve bu adresi görüntüler olanak tanıyan Araçlar kullanın.
+* Değişikliklerin hızlıca yayılması için DNS TTL değerini düşük olarak ayarlayın (örneğin, 30 saniye).
+* Azure bulut hizmetlerinizin ve test ettiğiniz profildeki Web sitelerinin IP adreslerini öğrenin.
+* DNS adını bir IP adresine çözümleyecek ve bu adresi görüntüleyecek olan araçları kullanın.
 
-DNS adları profilinizde bitiş IP adreslerini çözümlemeye olduğunu görmek için iade ederler. Adlar Traffic Manager profilinde tanımlanan bir trafik yönlendirme yöntemini ile tutarlı şekilde çözümlenmesi gerekir. Araçları gibi kullanabileceğiniz **nslookup** veya **dig** DNS adlarını çözümlemek için.
+DNS adlarının profilinizdeki uç noktaların IP adreslerine çözümlenip çözümlenmeyeceği denetleniyor. Adlar, Traffic Manager profilinde tanımlanan trafik yönlendirme yöntemiyle tutarlı bir şekilde çözümlenmelidir. DNS adlarını çözümlemek için **nslookup** veya **derinlemesine** gibi araçları kullanabilirsiniz.
 
-Aşağıdaki örnekler Traffic Manager profilinizin test etmenize yardımcı olur.
+Aşağıdaki örnekler Traffic Manager profilinizi test etmenize yardımcı olur.
 
-### <a name="check-traffic-manager-profile-using-nslookup-and-ipconfig-in-windows"></a>Traffic Manager profili içinde Windows nslookup ve ipconfig kullanarak denetleme
+### <a name="check-traffic-manager-profile-using-nslookup-and-ipconfig-in-windows"></a>Windows 'da nslookup ve ipconfig kullanarak Traffic Manager profilini denetleme
 
-1. Bir komut veya Windows PowerShell istemini yönetici olarak açın.
-2. Tür `ipconfig /flushdns` DNS çözümleyicisi önbelleğini temizlemek için.
-3. `nslookup <your Traffic Manager domain name>`yazın. Örneğin, aşağıdaki komutu bir etki alanı adı ön eki denetler *myapp.contoso*
+1. Yönetici olarak bir komut veya Windows PowerShell istemi açın.
+2. DNS çözümleyici önbelleğini temizlemek için `ipconfig /flushdns` yazın.
+3. `nslookup <your Traffic Manager domain name>` yazın. Örneğin, aşağıdaki komut etki alanı adını *MyApp. contoso* önekiyle denetler
 
         nslookup myapp.contoso.trafficmanager.net
 
-    Tipik bir sonuç, aşağıdaki bilgileri gösterir:
+    Tipik bir sonuç aşağıdaki bilgileri gösterir:
 
-    + Bu Traffic Manager etki alanı adını çözümlemek için erişilen DNS sunucusunun IP adresi ve DNS adı.
-    + Traffic Manager etki alanı adını Traffic Manager etki alanına çözümler yapılacağı IP adresi "nslookup" sonra komut satırında yazdınız. İkinci IP adresini kontrol etmek için önemli bir sertifikadır. Bu, bulut Hizmetleri veya Web sitesi test ettiğiniz Traffic Manager profili biri için bir genel sanal IP (VIP) adresi eşleşmelidir.
+    + Bu Traffic Manager etki alanı adını çözümlemek için erişilmekte olan DNS sunucusunun DNS adı ve IP adresi.
+    + Komut satırına yazdığınız Traffic Manager etki alanı adı "nslookup" ve Traffic Manager etki alanının çözümlediği IP adresi. İkinci IP adresi, denetlenecek önemli bir adrestir. Test ettiğiniz Traffic Manager profilindeki bulut hizmetlerinden veya Web sitelerinden biri için genel bir sanal IP (VIP) adresi ile eşleşmelidir.
 
-## <a name="how-to-test-the-failover-traffic-routing-method"></a>Yük devretme trafik yönlendirme yöntemini test etme
+## <a name="how-to-test-the-failover-traffic-routing-method"></a>Yük devretme trafiği yönlendirme yöntemini test etme
 
-1. Tüm uç noktalar ayarlama bırakın.
-2. Tek bir istemci kullanarak DNS çözümlemesi nslookup veya benzer bir yardımcı programını kullanarak, şirketinizin etki alanı adı isteği.
-3. Çözümlenen IP adresini birincil uç noktaya eşleştiğinden emin olun.
-4. Birincil uç noktanızı taşıyın veya Traffic Manager, uygulama kapalı olduğunu düşündüğü izleme dosyasını kaldırın.
-5. DNS zaman yaşam için (TTL) Traffic Manager profili ve iki dakika bekleyin. Örneğin, DNS TTL 300 saniyedir (5 dakika) ise, yedi dakika beklemeniz gerekir.
-6. Nslookup ile DNS istemci önbelleği ve istek DNS çözümlemenizin temizler. Windows içinde ipconfig/flushdns komutu, DNS önbelleğini boşaltabilirsiniz.
-7. Çözümlenen IP adresini ikincil uç noktanız eşleştiğinden emin olun.
-8. Her uç noktası sırayla getirme işlemi yineleyin. DNS listesinde sonraki uç noktasının IP adresini döndürdüğünden emin olun. Tüm uç noktalar kapalı olduğunda, birincil uç noktasının IP adresini yeniden edinmeleri gerekir.
+1. Tüm uç noktaları çalışır durumda bırakın.
+2. Tek bir istemci kullanarak, nslookup veya benzer bir yardımcı programı kullanarak şirketinizin etki alanı adınız için DNS çözümlemesi isteyin.
+3. Çözümlenen IP adresinin birincil uç noktayla eşleştiğinden emin olun.
+4. Uygulamanın aşağı doğru olmasını sağlamak için birincil uç noktanızı getirin veya izleme Traffic Manager dosyasını kaldırın.
+5. Traffic Manager profilinin DNS yaşam süresi (TTL) değerini ve ek olarak iki dakika bekleyin. Örneğin, DNS TTL 'niz 300 saniye (5 dakika) ise yedi dakika beklemeniz gerekir.
+6. DNS istemci önbelleğinizi boşaltıp nslookup kullanarak DNS çözümlemesi isteyin. Windows 'da, Ipconfig/flushdns komutuyla DNS önbelleğinizi boşaltabilirsiniz.
+7. Çözümlenen IP adresinin ikincil uç noktanızla eşleştiğinden emin olun.
+8. İşlemi tekrarlayarak her bir uç noktayı sırayla getirin. DNS 'nin listedeki bir sonraki bitiş noktasının IP adresini döndürdüğünden emin olun. Tüm uç noktalar kapatıldığında, birincil uç noktanın IP adresini yeniden edinmeniz gerekir.
 
 ## <a name="how-to-test-the-weighted-traffic-routing-method"></a>Ağırlıklı trafik yönlendirme yöntemini test etme
 
-1. Tüm uç noktalar ayarlama bırakın.
-2. Tek bir istemci kullanarak DNS çözümlemesi nslookup veya benzer bir yardımcı programını kullanarak, şirketinizin etki alanı adı isteği.
-3. Çözümlenen IP adresini, uç noktalardan biri eşleştiğinden emin olun.
-4. DNS istemci önbelleğinizi temizlemek ve her uç nokta için 2 ve 3. adımları tekrarlayın. Farklı IP adreslerini her uç noktalarınız için döndürülen görmeniz gerekir.
+1. Tüm uç noktaları çalışır durumda bırakın.
+2. Tek bir istemci kullanarak, nslookup veya benzer bir yardımcı programı kullanarak şirketinizin etki alanı adınız için DNS çözümlemesi isteyin.
+3. Çözümlenen IP adresinin bitiş noktalarından biriyle eşleştiğinden emin olun.
+4. DNS istemci önbelleğinizi boşaltıp her bir uç nokta için 2 ve 3. adımları yineleyin. Uç noktalarınızın her biri için farklı IP adresleri döndürüldüğünü görmeniz gerekir.
 
 ## <a name="how-to-test-the-performance-traffic-routing-method"></a>Performans trafiği yönlendirme yöntemini test etme
 
-Performans trafiği yönlendirme metodunu etkili bir şekilde test etmek için dünyanın farklı bölümlerinde yer alan istemciler olması gerekir. İstemciler, hizmetlerinizi test etmek için kullanılan farklı Azure bölgelerinde oluşturabilirsiniz. Global bir ağda varsa, uzaktan dünyanın diğer bölgelerindeki istemciler için oturum açın ve buradan testlerinizi çalıştırın.
+Performans trafiği yönlendirme yöntemini etkili bir şekilde test etmek için, istemcilerin dünyanın farklı bölümlerinde yer alan istemcilere sahip olmanız gerekir. Hizmetlerinizi test etmek için kullanılabilecek farklı Azure bölgelerinde istemciler oluşturabilirsiniz. Küresel bir ağınız varsa, dünyanın diğer bölümlerinde bulunan istemcilerde uzaktan oturum açabilir ve testlerinizi buradan çalıştırabilirsiniz.
 
-Alternatif olarak, ücretsiz web tabanlı DNS araması ve vardır dig Hizmetleri kullanılabilir. Bu araçlardan bazıları, dünyanın her yerindeki çeşitli konumlardan DNS ad çözümlemesi denetleme olanağı sağlar. Örnekler üzerinde "DNS araması" araması yapın. Üçüncü taraf hizmetleri gibi Gomez veya açılış profillerinizi trafiği beklendiği gibi dağıtıyorsanız onaylamak için kullanılabilir.
+Alternatif olarak, Web tabanlı ücretsiz DNS araması ve derinlemesine hizmetleri mevcuttur. Bu araçlardan bazıları, dünyanın dört bir yanındaki çeşitli konumlardan DNS ad çözümlemesini denetleme olanağı sunar. Örnekler için "DNS araması" üzerinde arama yapın. Gomez veya Keynote gibi üçüncü taraf hizmetler, profillerin trafiği beklendiği gibi dağıttığını doğrulamak için kullanılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

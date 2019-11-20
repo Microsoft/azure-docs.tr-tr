@@ -1,20 +1,16 @@
 ---
-title: Örnek - kullanıcı tanımlı yönlendirme tablosundaki
-description: Bu örnek ilke tanımı, bir kullanıcı tanımlı yol tablosu ile dağıtılan sanal ağlara yasaklar.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-Kullanıcı tanımlı yol tablosu yok
+description: Bu örnek ilke tanımı, sanal ağların Kullanıcı tanımlı bir yol tablosuyla dağıtılmasını yasaklar.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 330ffc8451f538e5765425522b37f83231d782c0
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 2cc5b78a774a9c50c31738e5043b20d7a4cd59b8
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60510182"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74069927"
 ---
-# <a name="sample---no-user-defined-route-table"></a>Örnek - kullanıcı tanımlı yönlendirme tablosundaki
+# <a name="sample---no-user-defined-route-table"></a>Örnek-Kullanıcı tanımlı yol tablosu yok
 
 Bu ilke, sanal ağların kullanıcı tanımlı bir yönlendirme tablosu ile dağıtılmasını engeller.
 
@@ -28,7 +24,7 @@ Bu ilke, sanal ağların kullanıcı tanımlı bir yönlendirme tablosu ile dağ
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fno-route-table-in-ER-Network%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fno-route-table-in-ER-Network%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

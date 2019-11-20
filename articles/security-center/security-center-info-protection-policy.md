@@ -1,11 +1,10 @@
 ---
-title: Azure Güvenlik Merkezi'nde SQL bilgi koruması İlkesi özelleştirme | Microsoft Docs
-description: Azure Güvenlik Merkezi'nde bilgi koruma ilkelerine özelleştirmeyi öğrenin.
+title: SQL Information Protection 'ı özelleştirme-Azure Güvenlik Merkezi
+description: Azure Güvenlik Merkezi 'nde bilgi koruma ilkelerini özelleştirmeyi öğrenin.
 services: security-center
 documentationcenter: na
-author: rkarlin
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: 2ebf2bc7-232a-45c4-a06a-b3d32aaf2500
 ms.service: security-center
 ms.devlang: na
@@ -13,79 +12,76 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/29/2019
-ms.author: rkarlin
-ms.openlocfilehash: e2bcd92ffc8799b2edf04251b6ce160e96c7609c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: memildin
+ms.openlocfilehash: d37333c0ca3f8acab7a35c23bbab67beef056b72
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64875600"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73664385"
 ---
-# <a name="customize-the-sql-information-protection-policy-in-azure-security-center-preview"></a>Azure Güvenlik Merkezi (Önizleme) SQL bilgi koruması ilkesinde özelleştirme
+# <a name="customize-the-sql-information-protection-policy-in-azure-security-center-preview"></a>Azure Güvenlik Merkezi 'nde SQL Information Protection ilkesini özelleştirme (Önizleme)
  
-Bir SQL bilgi koruması ilkesi tanımlı ve Azure Güvenlik Merkezi'nde tüm Azure kiracınız için özelleştirilebilir.
+Azure Güvenlik Merkezi 'nde tüm Azure kiracınız için bir SQL Information Protection ilkesi tanımlayabilir ve özelleştirebilirsiniz.
 
-Information protection, bulma, Sınıflandırma, etiketleme ve hassas verileri Azure veri kaynaklarınızı korumak için bir Gelişmiş bir güvenlik özelliğidir. Bulma ve sınıflandırma en hassas verileriniz (iş, Finans, sağlık, PII, vb.), kuruluş bilgilerini koruma stature içinde rol yürütebilirsiniz. Altyapı olarak hizmet eder:
-- Veri gizliliği standartlarını ve yasal uyumluluk gereksinimlerini karşılamak yardımcı olma
-- (Denetim) izleme gibi çeşitli güvenlik senaryoları ve anormal hassas verilere erişimi hakkında uyarı
-- Son derece hassas verileri içeren erişimini denetleme ve verilerinin güvenliğini artırma depolar
+Information Protection, Azure veri kaynaklarınızda hassas verileri keşfetme, sınıflandırma, etiketleme ve korumanın gelişmiş bir güvenlik özelliğidir. En hassas verilerinizi bulma ve sınıflandırma (iş, finans, Sağlık Hizmetleri, kişisel veriler vb.), kurumsal bilgi koruma ortamınızda bir özetleme rolü yürütebilir. Bu, için altyapı işlevi görebilir:
+- Veri gizliliği standartları ve yasal uyumluluk gereksinimlerini karşılamanıza yardımcı olma
+- Hassas verilere anormal erişimle izleme (denetim) ve uyarı verme gibi güvenlik senaryoları
+- Son derece hassas veriler içeren veri depolarının güvenliğine erişimi denetleme ve güvenliği artırma
  
-[SQL bilgi koruması](../sql-database/sql-database-data-discovery-and-classification.md) şu anda Azure SQL veritabanı için desteklenen SQL veri depoları için bu paradigma uygular. SQL bilgi koruması otomatik olarak bulur ve hassas olabilecek verileri sınıflandırır, sınıflandırma özniteliklere sahip gizli verileri kalıcı olarak etiketleme için etiketleme bir mekanizma sağlar ve ayrıntılı bir panoya gösteren sağlar Sınıflandırma veritabanının durumu. Ayrıca, böylece hassas verileri ayıklamak sorguları açıkça denetlenebilir SQL sorguları duyarlılığına sonuç kümesi ve veri korumalı hesaplar. SQL bilgi koruması hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı veri bulma ve sınıflandırma](../sql-database/sql-database-data-discovery-and-classification.md).
+[Sql Information Protection](../sql-database/sql-database-data-discovery-and-classification.md) Şu anda Azure SQL veritabanı IÇIN desteklenen SQL veri depolarınız için Bu paradigma uygular. SQL Information Protection, potansiyel olarak hassas verileri otomatik olarak bulur ve sınıflandırır, hassas verileri sınıflandırma öznitelikleriyle kalıcı olarak etiketlemek için etiketleme mekanizması sağlar ve şu şekilde gösterildiği ayrıntılı bir pano sağlar veritabanının sınıflandırma durumu. Ayrıca, hassas verileri çıkaran sorguların açıkça denetlenmesi ve verilerin korunabilmesi için SQL sorgularının sonuç kümesi duyarlılığını hesaplar. SQL Information Protection hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı veri bulma ve sınıflandırma](../sql-database/sql-database-data-discovery-and-classification.md).
  
-Sınıflandırma mekanizması, sınıflandırma sınıflandırma - olun iki birincil yapılar dayalı **etiketleri** ve **bilgi türleri**.
-- **Etiketleri** – sütunda depolanan verilerin duyarlılık düzeyi tanımlamak için kullanılan ana sınıflandırma öznitelikleri. 
-- **Bilgi türleri** – sütunda depolanan verilerin türünü içine ek ayrıntı düzeyi sağlar.
+Sınıflandırma mekanizması, sınıflandırma- **Etiketler** ve **bilgi türlerini**oluşturan iki birincil yapıları temel alır.
+- **Etiketler** : sütunda depolanan verilerin duyarlılık düzeyini tanımlamak için kullanılan ana sınıflandırma öznitelikleri. 
+- **Bilgi türleri** : sütunda depolanan verilerin türüne ek ayrıntı düzeyi sağlar.
  
-Information Protection etiketleri ve varsayılan olarak kullanılan bilgi türleri, yerleşik bir dizi ile birlikte gelir. Bunlar özelleştirmek için Azure Güvenlik Merkezi'nde Information protection ilkesinin özelleştirebilirsiniz.
+Information Protection, varsayılan olarak kullanılan yerleşik Etiketler ve bilgi türleri kümesiyle birlikte gelir. Bu etiketleri ve türleri özelleştirmek için, güvenlik merkezi 'nde bilgi koruma ilkesini özelleştirebilirsiniz.
  
 ## <a name="customize-the-information-protection-policy"></a>Bilgi koruma ilkesini özelleştirme
-Kiracınızda Azure Information protection ilkesinin özelleştirmek için ihtiyacınız [kiracının kök yönetim grubunda yönetim ayrıcalıkları](security-center-management-groups.md). 
+Azure kiracınız için Information Protection ilkesini özelleştirmek üzere [kiracının kök yönetim grubunda yönetici ayrıcalıklarına](security-center-management-groups.md)sahip olmanız gerekir. 
  
-1. Ana menü, Güvenlik Merkezi **kaynak güvenlik SAĞLIĞI** Git **veri ve depolama** tıklayın **SQL bilgi koruması** düğmesi.
+1. Güvenlik Merkezi ana menüsünde, **kaynak güvenliği HYGIENE** ' ın altında **veri & depolama alanına** gidin ve **SQL Information Protection** düğmesine tıklayın.
 
-   ![Information protection ilkesini yapılandırma](./media/security-center-info-protection-policy/security-policy.png) 
+   ![Bilgi koruma ilkesini yapılandırma](./media/security-center-info-protection-policy/security-policy.png) 
  
-2. İçinde **SQL bilgi koruması** sayfasında etiketleri geçerli kümesini görüntüleyebilirsiniz. Hassasiyet düzeyini verilerinizi kategorilere ayırmak için kullanılan ana sınıflandırma öznitelikleri şunlardır. Buradan, yapılandırabileceğiniz **Information protection etiketlerini** ve **bilgi türleri** Kiracı. 
+2. **SQL Information Protection** sayfasında, geçerli etiket kümesini görüntüleyebilirsiniz. Bunlar, verilerinizin duyarlılık düzeyini kategorilere ayırmak için kullanılan ana sınıflandırma öznitelikleridir. Buradan, kiracı için **bilgi koruma etiketlerini** ve **bilgi türlerini** yapılandırabilirsiniz. 
  
 ### <a name="customizing-labels"></a>Etiketleri özelleştirme
  
-1. Düzenleyebilir veya var olan bir etiketi silme veya yeni bir etiket ekleyebilirsiniz. Var olan bir etiketi düzenlemek için bu etiketi seçin ve ardından **yapılandırma**, üst veya sağ taraftaki bağlam menüsü. Yeni bir etiket eklemek için tıklatın **Oluştur etiket** üst menü çubuğundaki veya etiketleri tablonun alt kısmındaki.
-2. İçinde **yapılandırma duyarlılık etiketi** ekranı oluşturabilir veya etiket adını ve açıklamasını değiştirin. Etiket getirerek etkin veya devre dışı olup olmadığını da ayarlayabilirsiniz **etkin** Aç veya kapat. Son olarak, ekleme veya etiketle ilişkili bilgi türlerini kaldırın. Sınıflandırma önerileri ilişkili duyarlılık etiketi, bilgi türünü otomatik olarak içerecektir eşleşen herhangi bir veri bulundu.
-3. **Tamam**'ı tıklatın.
+1. Varolan herhangi bir etiketi düzenleyebilir veya silebilir veya yeni bir etiket ekleyebilirsiniz. Varolan bir etiketi düzenlemek için, bu etiketi seçin ve sonra üstteki ya da sağdaki bağlam menüsünde **Yapılandır**' a tıklayın. Yeni bir etiket eklemek için üstteki menü çubuğunda veya Etiketler tablosunun en altında **etiket oluştur** ' a tıklayın.
+2. **Duyarlılık etiketini Yapılandır** ekranında, etiket adı ve açıklamasını oluşturabilir veya değiştirebilirsiniz. Ayrıca, **etkin** anahtarı değiştirerek veya devre dışı bırakmak için etiketin etkin veya devre dışı olduğunu da ayarlayabilirsiniz. Son olarak, etiketle ilişkili bilgi türlerini ekleyebilir veya kaldırabilirsiniz. Bu bilgi türüyle eşleşen tüm veriler, sınıflandırma önerilerine ilişkili duyarlılık etiketini otomatik olarak dahil eder.
+3. **Tamam** düğmesine tıklayın.
  
-   ![Duyarlılık etiketi yapılandırma](./media/security-center-info-protection-policy/config-sensitivity-label.png)
+   ![Duyarlılık etiketini Yapılandır](./media/security-center-info-protection-policy/config-sensitivity-label.png)
  
-4. Etiketleri duyarlılık artan, sırasına göre listelenir. Etiketler arasında sıralamasını değiştirmek için tablodaki yeniden sıralamak veya etiketlerin sürükleyin **Yukarı Taşı** ve **Aşağı Taşı** sırasını değiştirmek için düğmeler. 
+4. Etiketler, artan duyarlılık sırasına göre listelenmiştir. Etiketler arasındaki derecelendirmeyi değiştirmek için etiketleri tablo içinde yeniden sıralamak üzere sürükleyin veya sıralamayı değiştirmek için **yukarı** taşı ve **aşağı taşı** düğmelerini kullanın. 
  
-    ![Information protection ilkesini yapılandırma](./media/security-center-info-protection-policy/move-up.png)
+    ![Bilgi koruma ilkesini yapılandırma](./media/security-center-info-protection-policy/move-up.png)
  
-5. Tıkladığınızdan emin olun **Kaydet** işiniz bittiğinde ekranın üstünde.
+5. İşiniz bittiğinde ekranın en üstündeki **Kaydet** ' e tıkladığınızdan emin olun.
  
  
-## <a name="adding-and-customizing-information-types"></a>Ekleme ve bilgi türlerini özelleştirme
+## <a name="adding-and-customizing-information-types"></a>Bilgi türlerini ekleme ve özelleştirme
  
-1. Tıklayarak bilgi türlerini özelleştirme ve yönetme **bilgi türlerini yönetme**.
-2. Yeni bir **bilgi türü**seçin **bilgi türünü oluşturma** üst menüdeki. Ad, açıklama, yapılandırma ve desen dizeleri için arama **bilgi türü**. Arama deseni dizesi anahtar sütunların meta verileri temel alarak veritabanlarınızda hassas verileri tanımlamak için otomatik bulma altyapısı kullanan joker karakterler ('%' karakter kullanarak), isteğe bağlı olarak kullanabilirsiniz.
+1. Bilgi türlerini **Yönet**' i tıklatarak bilgi türlerini yönetebilir ve özelleştirebilirsiniz.
+2. Yeni bir **bilgi türü**eklemek için üst menüde **bilgi türü oluştur** ' u seçin. **Bilgi türü**için bir ad, açıklama ve arama deseninin dizelerini yapılandırabilirsiniz. Arama desenli dizeler, isteğe bağlı olarak joker karakterlerle ('% ' karakterini kullanarak) anahtar sözcükleri kullanabilir ve bu da otomatik bulma altyapısının, veritabanınızdaki gizli verileri, sütunların meta verilerine göre belirlemek için kullanır.
  
-    ![Information protection ilkesini yapılandırma](./media/security-center-info-protection-policy/info-types.png)
+    ![Bilgi koruma ilkesini yapılandırma](./media/security-center-info-protection-policy/info-types.png)
  
-3. Ayrıca yerleşik yapılandırabilirsiniz **bilgi türleri** bazı mevcut dizeleri devre dışı bırakma ek arama deseni dizeleri ekleyerek veya açıklamayı değiştirerek. Yerleşik nelze odstranit **bilgi türleri** veya adlarını düzenleyin. 
-4. **Bilgi türlerini** , bulma derecelendirme türleri listede daha önce Eşleştir dener anlamına gelir, artan sıraya göre listelenmiştir. Derecelendirme bilgi türleri arasında değiştirmek için türleri tablo doğru yere sürükleyin veya kullanın **Yukarı Taşı** ve **Aşağı Taşı** sırasını değiştirmek için düğmeler. 
-5. Tıklayın **Tamam** işiniz bittiğinde.
-6. Bilgi türlerinizi yönetme tamamladıktan sonra tıklayarak ilgili etiketlerle ilgili türleri ilişkilendirdiğinizden emin olun **yapılandırma** belirli bir etiket ve uygun olarak bilgi türleri ekleme veya silme.
-7. Tıkladığınızdan emin olun **Kaydet** ana **etiketleri** dikey penceresinde yaptığınız değişiklikleri uygulamak için.
+3. Ayrıca, ek arama model dizeleri ekleyerek, var olan dizelerin bazılarını devre dışı bırakarak veya açıklamayı değiştirerek yerleşik **bilgi türlerini** yapılandırabilirsiniz. Yerleşik **bilgi türlerini** silemez veya adlarını düzenleyemezsiniz. 
+4. **Bilgi türleri** , artan bulma derecelendirmesi sırasına göre listelenmiştir, yani listede daha yüksek olan türlerin birinciden eşleştirmeye çalışır. Bilgi türleri arasındaki derecelendirmeyi değiştirmek için, türleri tablodaki doğru noktaya sürükleyin veya sıralamayı değiştirmek için **Yukarı taşı** ve **aşağı taşı** düğmelerini kullanın. 
+5. İşiniz bittiğinde **Tamam** ' a tıklayın.
+6. Bilgi türlerinizi yönetmeyi tamamladıktan sonra, belirli bir etiket için **Yapılandır** ' a tıklayarak ve bilgi türlerini uygun şekilde ekleyerek veya silerek ilgili türleri ilgili etiketlerle ilişkilendirdiğinizden emin olun.
+7. Tüm değişikliklerinizi uygulamak için ana **Etiketler** dikey penceresinde **Kaydet** ' e tıkladığınızdan emin olun.
  
-Information protection ilkenizi tam olarak tanımlanan kaydedilir ve sonra kiracınızdaki tüm Azure SQL veritabanlarında veri sınıflandırmasını uygulanır.
+Bilgi koruma ilkeniz tam olarak tanımlandıktan ve kaydedildikten sonra, kiracınızdaki tüm Azure SQL veritabanlarında verilerin sınıflandırmasına uygulanır.
  
  
 ## <a name="next-steps"></a>Sonraki adımlar
  
-Bu makalede, Azure Güvenlik Merkezi'nde bir SQL bilgi koruması ilkesi tanımlama hakkında bilgi edindiniz. Sınıflandırmak ve SQL veritabanlarınızı hassas verileri korumak için SQL bilgi koruması kullanma hakkında daha fazla bilgi edinmek için [Azure SQL veritabanı veri bulma ve sınıflandırma](../sql-database/sql-database-data-discovery-and-classification.md). 
+Bu makalede, Azure Güvenlik Merkezi 'nde bir SQL Information Protection ilkesi tanımlamayı öğrendiniz. SQL veritabanlarındaki hassas verileri sınıflandırmak ve korumak için SQL Information Protection kullanma hakkında daha fazla bilgi edinmek için bkz. [Azure SQL veritabanı veri bulma ve sınıflandırma](../sql-database/sql-database-data-discovery-and-classification.md). 
 
-Güvenlik ilkeleri ve Azure Güvenlik Merkezi veri güvenliği hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
+Azure Güvenlik Merkezi 'nde güvenlik ilkeleri ve veri güvenliği hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
  
-- [Güvenlik ilkelerine genel bakış](security-center-policies-overview.md): Güvenlik Merkezi'nde güvenlik ilkelerini genel bir bakış edinin
-- [Azure Güvenlik Merkezi'nde güvenlik ilkelerini ayarlama](tutorial-security-policy.md): Azure Abonelikleriniz ve kaynak grupları için güvenlik ilkelerini yapılandırma hakkında bilgi edinin
-- [Azure Güvenlik Merkezi veri güvenliği](security-center-data-security.md): Güvenlik Merkezi nasıl yönetir ve verileri koruyan öğrenin
-
-
+- [Azure Güvenlik Merkezi 'nde güvenlik Ilkelerini ayarlama](tutorial-security-policy.md): Azure abonelikleriniz ve kaynak gruplarınız için güvenlik ilkelerini yapılandırma hakkında bilgi edinin
+- [Azure Güvenlik Merkezi veri güvenliği](security-center-data-security.md): Güvenlik Merkezi 'nin verileri nasıl yönettiğini ve korumalarını öğrenin

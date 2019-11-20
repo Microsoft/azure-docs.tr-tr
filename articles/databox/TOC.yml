@@ -95,8 +95,10 @@
               href: data-box-disk-deploy-set-up.md
             - name: 3 - Kopyalama ve doğrulama
               href: data-box-disk-deploy-copy-data.md
-            - name: '4 - İade etme, karşıya yükleme, doğrulama'
+            - name: 4 - Döndürme
               href: data-box-disk-deploy-picked-up.md
+            - name: 5 - Karşıya yüklemeyi doğrulama
+              href: data-box-disk-deploy-upload-verify.md
         - name: Kavramlar
           items:
             - name: Gereksinimleri inceleme
@@ -143,10 +145,20 @@
               items:
                 - name: SMB aracılığıyla
                   href: data-box-heavy-deploy-copy-data.md
+                - name: NFS aracılığıyla
+                  href: data-box-heavy-deploy-copy-data-via-nfs.md
+                - name: REST aracılığıyla
+                  href: data-box-heavy-deploy-copy-data-via-rest.md
+                - name: Veri kopyalama hizmeti aracılığıyla
+                  href: data-box-heavy-deploy-copy-data-via-copy-service.md
+                - name: Yönetilen disklere
+                  href: data-box-heavy-deploy-copy-data-from-vhds.md
             - name: '4 - İade etme, karşıya yükleme, doğrulama'
               href: data-box-heavy-deploy-picked-up.md
         - name: Kavramlar
           items:
+            - name: Güvenlik yönergelerini okuyun
+              href: data-box-heavy-safety.md
             - name: İzleme ve günlüğe kaydetmeyi gözden geçirme
               href: data-box-logs.md
             - name: Gereksinimleri inceleme

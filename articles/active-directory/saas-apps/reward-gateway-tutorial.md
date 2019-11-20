@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Ödül ağ geçidi ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve ödül ağ geçidi arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Reward Gateway ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve daha fazla ağ geçidi arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -15,49 +15,49 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/26/2019
 ms.author: jeedes
-ms.openlocfilehash: 1cdc4420758b67dc3a578b9530fb7039ed53ee66
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fcd12b0c47dc587153df51d4d30eb2abe4cc2657
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67092793"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74081951"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-reward-gateway"></a>Öğretici: Ödül ağ geçidi ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-reward-gateway"></a>Öğretici: Reward Gateway ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile ödül ağ geçidi tümleştirme konusunda bilgi edinin.
-Ödül ağ geçidi, Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Reward Gateway 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Azure AD ile Reward ağ geçidini tümleştirmek aşağıdaki avantajları sağlar:
 
-* Erişebilir ödül ağ geçidi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) için ağ geçidi ödül oturum açmış, kullanıcıların etkinleştirebilirsiniz.
+* Azure AD 'de, yeniden erişim ağ geçidine erişimi olan denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla ağ geçidini (çoklu oturum açma) yeniden almak için otomatik olarak oturum açmasını sağlayabilirsiniz.
 * Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile ödül ağ geçidi yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini, Reward Gateway ile yapılandırmak için aşağıdaki öğelere ihtiyacınız vardır:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa alabileceğiniz bir [ücretsiz hesap](https://azure.microsoft.com/free/)
-* Ödül Gateway çoklu oturum açmayı abonelik etkin.
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/) alabilirsiniz
+* Yeniden temellendirme ağ geçidi çoklu oturum açma etkin aboneliği
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Ağ geçidi destekler ödüllendirin **IDP** tarafından başlatılan
+* Reward Gateway, **IDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-reward-gateway-from-the-gallery"></a>Galeriden ödül ağ geçidi ekleme
+## <a name="adding-reward-gateway-from-the-gallery"></a>Galeriden Reward Gateway ekleme
 
-Azure AD'de ödül ağ geçidi tümleştirmesini yapılandırmak için ödül ağ geçidi Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Reward Gateway 'in Azure AD 'ye tümleştirilmesini yapılandırmak için, galerinizden yönetilen SaaS uygulamaları listenize Reward Gateway eklemeniz gerekir.
 
-**Galeriden ödül ağ geçidi eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden Reward Gateway eklemek için aşağıdaki adımları uygulayın:**
 
 1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
@@ -65,47 +65,47 @@ Azure AD'de ödül ağ geçidi tümleştirmesini yapılandırmak için ödül a�
 
     ![Yeni Uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **ödül ağ geçidi**seçin **ödül ağ geçidi** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna, **Reward Gateway**yazın, sonuç panelinden **yeniden ağ geçidi** ' ni seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde ödül ağ geçidi](common/search-new-app.png)
+     ![Sonuçlar listesinde ağ geçidini yeniden dengeleme](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma ödül adlı bir test kullanıcı tabanlı ağ geçidi ile test etme **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve ilgili kullanıcı ödül ağ geçidi arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına bağlı olarak Reward ağ geçidiyle yapılandırıp test edersiniz.
+Çoklu oturum açma 'nın çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı arasındaki bir bağlantı ilişkisinin oluşturulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma ödül ağ geçidi ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açmayı, Reward Gateway ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
 1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Ödül Gateway çoklu oturum açmayı yapılandırma](#configure-reward-gateway-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+2. , Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için, **[Reward Gateway çoklu oturum açmayı yapılandırın](#configure-reward-gateway-single-sign-on)** .
 3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
 4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Ödül ağ geçidi test kullanıcısı oluşturma](#create-reward-gateway-test-user)**  - kullanıcı Azure AD gösterimini bağlı ödül Gateway'de Britta simon'un bir karşılığı vardır.
+5. **[Reward Gateway test kullanıcısı oluşturma](#create-reward-gateway-test-user)** -kullanıcının Azure AD gösterimine bağlı olan, Reward ağ geçidinde Britta Simon 'a sahip olmak için.
 6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ödül ağ geçidi ile yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı, Reward Gateway ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **ödül ağ geçidi** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **Reward Gateway** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
     ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
 3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında, aşağıdaki adımları gerçekleştirin:
+4. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, aşağıdaki adımları uygulayın:
 
-    ![Ödül ağ geçidi etki alanı ve URL'ler tek oturum açma bilgileri](common/idp-intiated.png)
+    ![Reward Gateway etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-intiated.png)
 
-    a. İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak bir URL yazın:
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:
     
     | |
     |--|
@@ -114,7 +114,7 @@ Azure AD çoklu oturum açma ödül ağ geçidi ile yapılandırmak için aşağ
     | `https://<companyname>.rewardgateway.co.nz/`|
     | `https://<companyname>.rewardgateway.com.au/`|
 
-    b. İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:
+    b. **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:
     
     | |
     |--|
@@ -124,25 +124,25 @@ Azure AD çoklu oturum açma ödül ağ geçidi ile yapılandırmak için aşağ
     | `https://<companyname>.rewardgateway.com.au/Authentication/EndLogin?idp=<Unique Id>`|
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek tanımlayıcısı ve yanıt URL'si ile güncelleştirin. Bu değerleri almak için ödül Manager portalında bir tümleştirme ayarlama başlatın. Ayrıntıları bulunabilir https://success.rewardgateway.com/authentication-integrations/microsoft-azure-for-authentication
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı ve yanıt URL 'siyle güncelleştirin. Bu değerleri almak için, Reward Manager portalında bir tümleştirme ayarlamaya başlayın. Ayrıntılar https://success.rewardgateway.com/hc/en-us/articles/360038650573-Microsoft-Azure-for-Authentication bulunabilir
 
-5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **Federasyon meta veri XML**  bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+5. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imza sertifikası** bölümünde, **Federasyon meta veri XML** 'sini gereksiniminize göre belirtilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-6. Üzerinde **ödül ağ geçidi ayarlama** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. **Reward Gateway ayarlama** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
     a. Oturum Açma URL'si:
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
     c. Oturum Kapatma URL'si
 
-### <a name="configure-reward-gateway-single-sign-on"></a>Ödül Gateway çoklu oturum açmayı yapılandırın
+### <a name="configure-reward-gateway-single-sign-on"></a>Reward Gateway 'ı çoklu oturum açmayı yapılandırma
 
-Çoklu oturum açmayı yapılandırma **ödül ağ geçidi** yan için bir tümleştirme ayarlama ödül Manager portalında başlatın. Sertifika imzalama elde edilir ve yapılandırma sırasında karşıya yüklenen meta veriler kullanın. Ayrıntıları bulunabilir https://success.rewardgateway.com/authentication-integrations/microsoft-azure-for-authentication
+**Reward Gateway** tarafında çoklu oturum açma 'yı yapılandırmak Için, Reward Manager portalında bir tümleştirme ayarlamaya başlayın. Imza sertifikanızı almak ve yapılandırma sırasında karşıya yüklemek için indirilen meta verileri kullanın. Ayrıntılar https://success.rewardgateway.com/hc/en-us/articles/360038650573-Microsoft-Azure-for-Authentication bulunabilir
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
@@ -154,56 +154,56 @@ Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcıs
 
 2. Seçin **yeni kullanıcı** ekranın üstünde.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
 3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü `brittasimon@yourcompanydomain.extension`  
+    b. **Kullanıcı adı** alan türü ' nde `brittasimon@yourcompanydomain.extension`  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’a tıklayın.
+    d. **Oluştur**’ tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, ödül ağ geçidine erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Bu bölümde, Reward Gateway 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **ödül ağ geçidi**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **yeniden ağ geçidi**' ni seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **ödül ağ geçidi**.
+2. Uygulamalar listesinde, **Reward Gateway**' i seçin.
 
-    ![Uygulamalar listesinde ödül ağ geçidi bağlantısı](common/all-applications.png)
+    ![Uygulamalar listesinde Reward Gateway bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
     !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
 5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-reward-gateway-test-user"></a>Ödül ağ geçidi test kullanıcısı oluşturma
+### <a name="create-reward-gateway-test-user"></a>Reward Gateway test kullanıcısı oluşturma
 
-Bu bölümde, ağ geçidi ödül Britta Simon adlı bir kullanıcı oluşturun. Çalışmak [ödül ağ geçidi Destek ekibine](mailto:clientsupport@rewardgateway.com) ödül ağ geçidi platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
+Bu bölümde, Reward Gateway 'de Britta Simon adlı bir Kullanıcı oluşturacaksınız. Reward Gateway platformunda kullanıcıları eklemek için [Reward Gateway destek ekibi](mailto:clientsupport@rewardgateway.com) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli ödül ağ geçidi kutucuğa tıkladığınızda, size otomatik olarak ödül SSO'yu ayarlama ağ geçidine oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde ödül ağ geçidi kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız ödül ağ geçidinde otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
@@ -211,4 +211,4 @@ Erişim paneli ödül ağ geçidi kutucuğa tıkladığınızda, size otomatik o
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

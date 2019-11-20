@@ -9,12 +9,12 @@ manager: carmonm
 ms.topic: tutorial
 ms.date: 05/10/2018
 ms.custom: mvc
-ms.openlocfilehash: d247369647106cf1671a8770a6dce21f1a34a4b9
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: cacd9206eb0213d410a11ee3a2dcf5c0e28989c6
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60739633"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72372826"
 ---
 # <a name="onboard-update-and-change-tracking-solutions-to-azure-automation"></a>Güncelleştirme ve değişiklik izleme çözümlerini Azure Otomasyonu’na ekleme
 
@@ -81,7 +81,7 @@ Güncelleştirme yönetimi çözümü yüklenirken mavi renkli bir başlık gös
    ![VM için güncelleştirme çözümünü etkinleştirme](media/automation-onboard-solutions/enable-update.png)
 
 > [!NOTE]
-> Bir sonraki çözümü etkinleştirmek diğer çözümün tamamlanmasını beklemez belirten bir ileti alırsınız: *Diğer çözümün yüklenmesi bu ya da farklı bir sanal makine sürüyor. Yükleme tamamlandığında, Etkinleştir düğmesi etkinleştirilecektir, çözümün bu sanal makineye yüklenmesini isteyebilirsiniz.*
+> Diğer çözümün tamamlanmasını beklerseniz, bir sonraki çözümü etkinleştirirken, *Bu veya farklı bir sanal makinede başka bir çözümün yüklenmesi durumunda olduğunu belirten bir ileti alırsınız. Yükleme tamamlandığında, etkinleştir düğmesi etkinleştirilir ve çözümün bu sanal makineye yüklenmesini isteyebilirsiniz.*
 
 ## <a name="install-and-update-modules"></a>Modülleri yükleme ve güncelleştirme
 
@@ -130,6 +130,13 @@ Bu runbook’u başlatmak için değişiklik izleme çözümünü veya güncelle
 
 1. Runbook işini başlatmak için **Tamam**’ı seçin.
 1. Runbook işi sayfasında ilerlemeyi ve hataları izleyin.
+
+## <a name="clean-up-resources"></a>Kaynakları temizleme
+
+Bir sanal makineyi Güncelleştirme Yönetimi kaldırmak için:
+
+* Log Analytics çalışma alanınızda, kapsam yapılandırması için kayıtlı aramadan VM 'yi kaldırın `MicrosoftDefaultScopeConfig-Updates`. Kayıtlı aramalar, çalışma alanınızda **genel** altında bulunabilir.
+* Linux için [Microsoft Monitoring Agent](../azure-monitor/learn/quick-collect-windows-computer.md#clean-up-resources) 'ı veya [Log Analytics aracısını](../azure-monitor/learn/quick-collect-linux-computer.md#clean-up-resources)kaldırın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

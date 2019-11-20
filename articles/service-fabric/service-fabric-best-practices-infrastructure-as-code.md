@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric iyi kod olarak altyapı | Microsoft Docs
-description: Service Fabric kod olarak altyapı olarak yönetmek için en iyi yöntemler.
+title: Kod En Iyi uygulamalar olarak Azure Service Fabric altyapısı | Microsoft Docs
+description: Kod olarak altyapı olarak Service Fabric yönetmeye yönelik en iyi uygulamalar.
 services: service-fabric
 documentationcenter: .net
 author: peterpogorski
@@ -14,22 +14,22 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 01/23/2019
 ms.author: pepogors
-ms.openlocfilehash: 2dfe1493c6611fb69a417895aaa1028ad5881b9c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 83439a913989875c5e26ee51901f10558e5debd5
+ms.sourcegitcommit: 0f54f1b067f588d50f787fbfac50854a3a64fff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66237426"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "68955606"
 ---
 # <a name="infrastructure-as-code"></a>Kod olarak altyapı
 
-Bir üretim senaryosunda, Resource Manager şablonlarını kullanarak Azure Service Fabric kümeleri oluşturma. Resource Manager şablonları, kaynak özelliklerinin daha fazla denetim sağlamak ve tutarlı bir kaynak modeli olduğundan emin olun.
+Bir üretim senaryosunda, Kaynak Yöneticisi şablonları kullanarak Azure Service Fabric kümeleri oluşturun. Kaynak Yöneticisi şablonlar, kaynak özellikleri üzerinde daha fazla denetim sağlar ve tutarlı bir kaynak modeline sahip olduğunuzdan emin olun.
 
-Windows ve Linux için örnek Resource Manager şablonları kullanılabilir [github'daki Azure örnekleri](https://github.com/Azure-Samples/service-fabric-cluster-templates). Bu şablonlar, küme şablonunuza için başlangıç noktası olarak kullanılabilir. İndirme `azuredeploy.json` ve `azuredeploy.parameters.json` ve onları özel gereksinimlerinizi karşılayacak şekilde düzenleyebilirsiniz.
+Örnek Kaynak Yöneticisi şablonlar, [GitHub 'Daki Azure örneklerinde](https://github.com/Azure-Samples/service-fabric-cluster-templates)Windows ve Linux 'ta kullanılabilir. Bu şablonlar, küme şablonunuz için bir başlangıç noktası olarak kullanılabilir. Özel `azuredeploy.json` gereksinimlerinizi `azuredeploy.parameters.json` karşılayacak şekilde indirin ve düzenleyin.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Dağıtılacak `azuredeploy.json` ve `azuredeploy.parameters.json` yukarıda indirdiğiniz şablonları aşağıdaki Azure CLI komutları kullanın:
+Yukarıda indirdiğiniz `azuredeploy.json` ve `azuredeploy.parameters.json` şablonlarını dağıtmak için aşağıdaki Azure CLI komutlarını kullanın:
 
 ```azurecli
 ResourceGroupName="sfclustergroup"
@@ -39,7 +39,7 @@ az group create --name $ResourceGroupName --location $Location
 az group deployment create --name $ResourceGroupName  --template-file azuredeploy.json --parameters @azuredeploy.parameters.json
 ```
 
-PowerShell kullanarak bir kaynak oluşturma
+PowerShell kullanarak kaynak oluşturma
 
 ```powershell
 $ResourceGroupName="sfclustergroup"
@@ -53,52 +53,54 @@ New-AzResourceGroupDeployment -Name $ResourceGroupName -TemplateFile $Template -
 
 ## <a name="azure-service-fabric-resources"></a>Azure Service Fabric kaynakları
 
-Uygulama ve hizmetlerinizi Service Fabric kümesine Azure Resource Manager üzerinden dağıtabilirsiniz. Bkz: [uygulamaları ve Hizmetleri Azure Resource Manager kaynaklarını yönetmek](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-arm-resource) Ayrıntılar için. Resource Manager şablonu kaynaklarınızı eklemek için en iyi yöntem Service Fabric uygulaması belirli kaynaklar aşağıda verilmiştir.
+Uygulama ve hizmetlerinizi Service Fabric kümesine Azure Resource Manager üzerinden dağıtabilirsiniz. Ayrıntılar için bkz. [Uygulamaları ve hizmetleri Azure Resource Manager kaynak olarak yönetme](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-arm-resource) . Aşağıda, Kaynak Yöneticisi Şablon kaynaklarınıza dahil etmek üzere uygulamaya özgü kaynaklar Service Fabric en iyi uygulamadır.
 
 ```json
 {
-    "apiVersion": "2017-07-01-preview",
+    "apiVersion": "2019-03-01",
     "type": "Microsoft.ServiceFabric/clusters/applicationTypes",
     "name": "[concat(parameters('clusterName'), '/', parameters('applicationTypeName'))]",
     "location": "[variables('clusterLocation')]",
 },
 {
-    "apiVersion": "2017-07-01-preview",
+    "apiVersion": "2019-03-01",
     "type": "Microsoft.ServiceFabric/clusters/applicationTypes/versions",
     "name": "[concat(parameters('clusterName'), '/', parameters('applicationTypeName'), '/', parameters('applicationTypeVersion'))]",
     "location": "[variables('clusterLocation')]",
 },
 {
-    "apiVersion": "2017-07-01-preview",
+    "apiVersion": "2019-03-01",
     "type": "Microsoft.ServiceFabric/clusters/applications",
     "name": "[concat(parameters('clusterName'), '/', parameters('applicationName'))]",
     "location": "[variables('clusterLocation')]",
 },
 {
-    "apiVersion": "2017-07-01-preview",
+    "apiVersion": "2019-03-01",
     "type": "Microsoft.ServiceFabric/clusters/applications/services",
     "name": "[concat(parameters('clusterName'), '/', parameters('applicationName'), '/', parameters('serviceName'))]",
     "location": "[variables('clusterLocation')]"
 }
 ```
 
-Azure Resource Manager kullanarak uygulamanızı dağıtmak için önce [bir sfpkg oluşturma](https://docs.microsoft.com/azure/service-fabric/service-fabric-package-apps#create-an-sfpkg) Service Fabric uygulama paketi. Aşağıdaki python betiğini bir sfpkg oluşturmak nasıl bir örneğidir:
+Azure Resource Manager kullanarak uygulamanızı dağıtmak için önce [bir sfpkg](https://docs.microsoft.com/azure/service-fabric/service-fabric-package-apps#create-an-sfpkg) Service Fabric uygulama paketi oluşturmanız gerekir. Aşağıdaki Python betiği bir sfpkg oluşturma örneğidir:
 
 ```python
 # Create SFPKG that needs to be uploaded to Azure Storage Blob Container
-microservices_sfpkg = zipfile.ZipFile(self.microservices_app_package_name, 'w', zipfile.ZIP_DEFLATED)
+microservices_sfpkg = zipfile.ZipFile(
+    self.microservices_app_package_name, 'w', zipfile.ZIP_DEFLATED)
 package_length = len(self.microservices_app_package_path)
 
 for root, dirs, files in os.walk(self.microservices_app_package_path):
     root_folder = root[package_length:]
     for file in files:
-        microservices_sfpkg.write(os.path.join(root, file), os.path.join(root_folder, file))
+        microservices_sfpkg.write(os.path.join(
+            root, file), os.path.join(root_folder, file))
 
 microservices_sfpkg.close()
 ```
 
-## <a name="azure-virtual-machine-operating-system-automatic-upgrade-configuration"></a>Azure sanal makine işletim sistemi otomatik yükseltme yapılandırması 
-Sanal makinelerinizi yükseltme olan bir kullanıcı tarafından başlatılan işlemi ve kullanmanız önerilir [sanal makine ölçek kümesi otomatik işletim sistemi yükseltme](https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade) konak düzeltme eki yönetimi; Azure Service Fabric kümeleri için Düzeltme eki düzenleme uygulamasıdır POA, Azure'da sanal makine işletim sistemini otomatik yükseltme tercih edilmesi genel bir neden azure'da POA barındırma yükünü kullanılabilir olsa da, Azure'nın dışında barındırıldığında yöneliktir alternatif bir çözüm POA. Otomatik işletim sistemi yükseltme etkinleştirmek için sanal makine ölçek kümesi kaynak yöneticisi işlem şablonu özellikleri şunlardır:
+## <a name="azure-virtual-machine-operating-system-automatic-upgrade-configuration"></a>Azure sanal makine Işletim sistemi otomatik yükseltme yapılandırması 
+Sanal makinelerinizin yükseltilmesi Kullanıcı tarafından başlatılan bir işlemdir ve Azure Service Fabric kümeleri ana bilgisayar düzeltme eki yönetimi için [sanal makine ölçek kümesi otomatik Işletim sistemi yükseltmesini](https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade) kullanmanız önerilir; Düzeltme Eki düzenleme uygulaması, Azure 'ın dışında barındırılmasına yönelik bir diğer çözümdür, ancak Azure 'da POA 'nın, sanal makine Işletim sistemi otomatik yükseltmesini tercih etmek için sık karşılaşılan bir nedenle Azure 'da POA 'nın barındırılmasına olanak sağlar. fazla. Otomatik işletim sistemi yükseltmesini etkinleştirmek için, Işlem Sanal Makine Ölçek Kümesi Kaynak Yöneticisi şablonu özellikleri aşağıda verilmiştir:
 
 ```json
 "upgradePolicy": {
@@ -109,11 +111,11 @@ Sanal makinelerinizi yükseltme olan bir kullanıcı tarafından başlatılan i�
     }
 },
 ```
-Otomatik işletim sistemi yükseltmelerini Service Fabric ile kullanırken, yeni işletim sistemi görüntüsü Service Fabric'te çalışan hizmetler yüksek kullanılabilirliğini sürdürmek için bir zaman bir güncelleme etki alanı alınır. Service fabric'te otomatik işletim sistemi yükseltmelerini kullanmasına izin kümenizi Silver dayanıklılık katmanı kullanmak için yapılandırılmış veya üzeri olması gerekir.
+Service Fabric ile otomatik IŞLETIM sistemi yükseltmeleri kullanırken, yeni işletim sistemi görüntüsü aynı anda bir güncelleştirme etki alanını kullanıma alarak Service Fabric çalıştıran hizmetlerin yüksek kullanılabilirliğe sahip olur. Service Fabric otomatik işletim sistemi yükseltmelerini kullanmak için, kümenizin gümüş dayanıklılık katmanını veya üstünü kullanacak şekilde yapılandırılması gerekir.
 
-Aşağıdaki kayıt defteri anahtarını eşgüdümlü olmayan güncelleştirmeleri windows konak makinelerinizi engellemek için false olarak ayarlandığından emin olun: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU.
+Windows konak makinelerinizin Eşgüdümlü olmayan güncelleştirmeleri başlatmasını engellemek için aşağıdaki kayıt defteri anahtarının yanlış olarak ayarlandığından emin olun: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU.
 
-Windows Update kayıt defteri anahtarı false olarak ayarlamak için sanal makine ölçek kümesi kaynak yöneticisi işlem şablonu özellikleri şunlardır:
+Aşağıda, WindowsUpdate kayıt defteri anahtarını false olarak ayarlamak için, Işlem Sanal Makine Ölçek Kümesi Kaynak Yöneticisi Şablon özellikleri verilmiştir:
 ```json
 "osProfile": {
         "computerNamePrefix": "{vmss-name}",
@@ -126,12 +128,12 @@ Windows Update kayıt defteri anahtarı false olarak ayarlamak için sanal makin
       },
 ```
 
-## <a name="azure-service-fabric-cluster-upgrade-configuration"></a>Azure Service Fabric kümesini yükseltme yapılandırması
-Resource Manager şablonu özelliğine otomatik yükseltmesini etkinleştirmek için Service Fabric kümesi verilmiştir:
+## <a name="azure-service-fabric-cluster-upgrade-configuration"></a>Azure Service Fabric kümesi yükseltme yapılandırması
+Otomatik yükseltmeyi etkinleştirmek için Service Fabric kümesi Kaynak Yöneticisi şablonu özelliği aşağıda verilmiştir:
 ```json
 "upgradeMode": "Automatic",
 ```
-El ile kümenizi yükseltmek için cab/deb dağıtım bir küme sanal makineye indirmek ve sonra aşağıdaki PowerShell Çağır:
+Kümenizi el ile yükseltmek için, bir küme sanal makinesine cab/Deb dağıtımını indirin ve ardından aşağıdaki PowerShell 'i çağırın:
 ```powershell
 Copy-ServiceFabricClusterPackage -Code -CodePackagePath <"local_VM_path_to_msi"> -CodePackagePathInImageStore ServiceFabric.msi -ImageStoreConnectionString "fabric:ImageStore"
 Register-ServiceFabricClusterPackage -Code -CodePackagePath "ServiceFabric.msi"
@@ -140,6 +142,6 @@ Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion <"msi_code_version">
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Vm'leri veya Windows Server çalıştıran bilgisayarlarda bir küme oluşturun: [Windows Server için Service Fabric kümesi oluşturma](service-fabric-tutorial-create-vnet-and-windows-cluster.md)
-* Bir küme sanal makineleri veya Linux çalıştıran bilgisayarlara oluşturun: [Bir Linux kümesi oluşturma](service-fabric-tutorial-create-vnet-and-linux-cluster.md)
+* Windows Server çalıştıran VM 'lerde veya bilgisayarlarda küme oluşturma: [Windows Server için Service Fabric kümesi oluşturma](service-fabric-tutorial-create-vnet-and-windows-cluster.md)
+* VM 'lerde veya Linux çalıştıran bilgisayarlarda küme oluşturma: [Linux kümesi oluşturma](service-fabric-tutorial-create-vnet-and-linux-cluster.md)
 * [Service Fabric destek seçenekleri](service-fabric-support.md) hakkında bilgi edinin

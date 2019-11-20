@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 07/11/2018
+ms.date: 07/10/2019
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 28201e09a4025c0c8820abc6836a5923e48eb885
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f531174c889948308e27109ab4fd80a481ec6bdc
+ms.sourcegitcommit: 66237bcd9b08359a6cce8d671f846b0c93ee6a82
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66742301"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67798196"
 ---
 # <a name="configuring-the-custom-banned-password-list"></a>Özel yasaklı parola listesi yapılandırma
 
@@ -29,7 +29,7 @@ ms.locfileid: "66742301"
 1. Oturum [Azure portalında](https://portal.azure.com) ve **Azure Active Directory**, **kimlik doğrulama yöntemleri**, ardından **parola koruması**.
 1. Seçenek kümesi **zorla özel liste**, **Evet**.
 1. Dizelere ekleme **özel parola listesine Yasaklanmış**, her satırda bir dize
-   * Özel yasaklı parola listesi en fazla 1000 sözcükler içerebilir.
+   * Özel yasaklı parola listesi, 1000 adede kadar koşulları içerebilir.
    * Özel yasaklı parola listesi büyük/küçük harf duyarlıdır.
    * Özel yasaklı parola listesi ortak karakter değiştirme göz önünde bulundurur.
       * Örnek: "o" ve "0" veya "a" ve "\@"
@@ -39,6 +39,9 @@ ms.locfileid: "66742301"
 > [!NOTE]
 > Uygulanacak özel yasaklı parola listesi bu güncelleştirmeler için birkaç saat sürebilir.
 
+> [!NOTE]
+> Özel yasaklı parola listesi en fazla 1000 koşulları bulunması sınırlıdır. Bu, son derece büyük listeler parolaların engellemek için tasarlanmamıştır. Tam olarak özel yasaklı parola listesi avantajlarından yararlanmak için önce gözden önerir ve amaçlanan tasarımını ve özel yasaklı parola listesi kullanımını anlama (bkz [özel parola listesine Yasaklanmış](concept-password-ban-bad.md#custom-banned-password-list)), ve ayrıca parola değerlendirme algoritma (bkz [de parolaları nasıl değerlendirilir](concept-password-ban-bad.md#how-are-passwords-evaluated)).
+
 ![Azure Portalı'nda kimlik doğrulama yöntemleri altında özel yasaklı parola listesi değiştirme](./media/howto-password-ban-bad/authentication-methods-password-protection.png)
 
 ## <a name="how-it-works"></a>Nasıl çalışır?
@@ -47,9 +50,10 @@ Bir kullanıcının veya yöneticinin sıfırlar veya bir Azure AD parola deği�
 
 ## <a name="what-do-users-see"></a>Kullanıcıların ne görecek
 
-Bir kullanıcı yasaklandı şeye parola sıfırlamaya çalıştığında şu hata iletisini görürler:
+Bir kullanıcı yasaklandı şeye parola sıfırlamaya çalıştığında, aşağıdaki hata iletilerinden birini bakın:
 
-Ne yazık ki parolanızı bir sözcük, tümcecik veya parolanızı kolayca tahmin edilebilir olmasını sağlayan yapan deseni içerir. Lütfen farklı bir parola ile yeniden deneyin.
+* Ne yazık ki parolanızı bir sözcük, tümcecik veya parolanızı kolayca tahmin edilebilir olmasını sağlayan yapan deseni içerir. Lütfen farklı bir parola ile yeniden deneyin.
+* Ne yazık ki, sözcük veya yöneticiniz tarafından engellenen karakter içerdiği için bu parolayı kullanamazsınız. Lütfen farklı bir parola ile yeniden deneyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

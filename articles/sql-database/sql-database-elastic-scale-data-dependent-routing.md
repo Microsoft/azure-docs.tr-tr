@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı ile verilere bağımlı yönlendirme | Microsoft Docs
-description: Verilere bağımlı yönlendirme, Azure SQL veritabanı'nda parçalı veritabanlarından oluşan bir özellik için .NET uygulamalarında ShardMapManager sınıfı kullanma
+title: Verilere bağımlı yönlendirme
+description: Azure SQL veritabanı 'nda parçalı veritabanlarının bir özelliği olan verilere bağımlı yönlendirme için .NET uygulamalarında ShardMapManager sınıfını kullanma
 services: sql-database
 ms.service: sql-database
 ms.subservice: scale-out
@@ -10,33 +10,32 @@ ms.topic: conceptual
 author: stevestein
 ms.author: sstein
 ms.reviewer: ''
-manager: craigg
 ms.date: 01/25/2019
-ms.openlocfilehash: fe9098592fcfde2d5e23b78a3e33f2b4ebb9e2dc
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e5212ba7ed349f3596047fc0c027829b8667ddc5
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60584973"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823675"
 ---
-# <a name="use-data-dependent-routing-to-route-a-query-to-appropriate-database"></a>Veri bağımlı bir sorgu için uygun veritabanı yönlendirmek için yönlendirme kullanın
+# <a name="use-data-dependent-routing-to-route-a-query-to-appropriate-database"></a>Bir sorguyu uygun veritabanına yönlendirmek için veriye bağımlı yönlendirmeyi kullanma
 
-**Verilere bağımlı yönlendirme** veri isteği yönlendirmek için uygun bir veritabanı için sorguda kullanma yeteneğidir. Veri bağımlı yönlendirme temel düzeni, parçalı veritabanları ile çalışırken. Özellikle parçalama anahtarı sorgunun bir parçası değilse, istek bağlamı isteği yönlendirmek için de kullanılabilir. Her özel bir sorgu veya verilere bağımlı yönlendirme kullanarak uygulama işlemde istek başına bir veritabanı erişimi sınırlıdır. Azure SQL veritabanı elastik araçlar için bu yönlendirme ile gerçekleştirilir **ShardMapManager** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapmanager.shardmapmanager), [.NET](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager)) sınıfı.
+**Veriye bağımlı yönlendirme** , isteği uygun bir veritabanına yönlendirmek için bir sorgudaki verileri kullanma olanağıdır. Verilere bağımlı yönlendirme, parçalı veritabanlarıyla çalışırken temel bir modeldir. İstek bağlamı, özellikle de parçalama anahtarı sorgunun bir parçası değilse isteği yönlendirmek için de kullanılabilir. Veriye bağlı yönlendirmeyi kullanan bir uygulamadaki her bir özel sorgu veya işleme, istek başına tek bir veritabanına erişmek için kısıtlanır. Azure SQL veritabanı elastik araçları için bu yönlendirme, **Shardmapmanager** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapmanager.shardmapmanager), [.net](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager)) sınıfıyla gerçekleştirilir.
 
-Uygulama çeşitli bağlantı dizelerini veya farklı parçalı ortamında veri dilimleri ilişkili DB konumları izlemeniz gerekmez. Bunun yerine, [parça eşleme Yöneticisi](sql-database-elastic-scale-shard-map-management.md) parça eşlemesi ve uygulamanın isteğin hedefi parçalama anahtarı değerini veriler temelinde gerekli değilse, doğru veritabanlarına bağlantı açar. Genellikle anahtardır *customer_id*, *Kiracı*, *date_key*, veya bir temel veritabanı istek parametresi bazı bir belirli tanımlayıcısı.
+Uygulamanın, parçalı ortamdaki farklı veri dilimleriyle ilişkili çeşitli bağlantı dizelerini veya DB konumlarını izlemesi gerekmez. Bunun yerine, parça [eşleme Yöneticisi](sql-database-elastic-scale-shard-map-management.md) , verileri, parça haritadaki verilere ve uygulama isteğinin hedefi olan parçalı anahtar değerine göre gerektiğinde doğru veritabanlarına açar. Anahtar genellikle *customer_id*, *tenant_id*, *date_key*veya veritabanı isteğinin temel bir parametresi olan başka bir özel tanımlayıcı olur.
 
-Daha fazla bilgi için [ölçeklendirme kullanıma SQL Server ile verilere bağımlı yönlendirme](https://technet.microsoft.com/library/cc966448.aspx).
+Daha fazla bilgi için bkz. [veri bağımlı yönlendirme ile SQL Server genişletme](https://technet.microsoft.com/library/cc966448.aspx).
 
-## <a name="download-the-client-library"></a>İstemci Kitaplığı'nı indirin
+## <a name="download-the-client-library"></a>İstemci kitaplığını indirin
 
 İndirmek için:
 
-* Java sürümü kitaplığının görmek [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Celastic-db-tools).
-* .NET sürümü kitaplığının görmek [NuGet](https://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Client/).
+* Kitaplığın Java sürümü, bkz. [Maven merkezi deposu](https://search.maven.org/#search%7Cga%7C1%7Celastic-db-tools).
+* Kitaplığın .NET sürümü, bkz. [NuGet](https://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Client/).
 
-## <a name="using-a-shardmapmanager-in-a-data-dependent-routing-application"></a>Verilere bağımlı yönlendirme uygulamada bir ShardMapManager kullanma
+## <a name="using-a-shardmapmanager-in-a-data-dependent-routing-application"></a>Veri bağımlı yönlendirme uygulamasında bir ShardMapManager kullanma
 
-Uygulamaları örneğini **ShardMapManager** başlatma sırasında Fabrika kullanarak **GetSQLShardMapManager** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapmanager.shardmapmanagerfactory.getsqlshardmapmanager), [.NET ](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.getsqlshardmapmanager)). Bu örnekte, hem bir **ShardMapManager** ve belirli bir **ShardMap** içerdiği başlatılır. Bu örnek GetSqlShardMapManager ve GetRangeShardMap gösterir ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapmanager.shardmapmanager.getrangeshardmap), [.NET](https://docs.microsoft.com/previous-versions/azure/dn824173(v=azure.100))) yöntemleri.
+Uygulamalar, başlatma sırasında **Getsqlshardmapmanager** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapmanager.shardmapmanagerfactory.getsqlshardmapmanager), [.net](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.getsqlshardmapmanager)) fabrika çağrısını kullanarak **shardmapmanager 'ın** örneğini oluşturmalıdır. Bu örnekte, hem **Shardmapmanager** hem de içerdiği belirli bir **shardmap** başlatılır. Bu örnek, GetSqlShardMapManager ve GetRangeShardMap ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapmanager.shardmapmanager.getrangeshardmap), [.net](https://docs.microsoft.com/previous-versions/azure/dn824173(v=azure.100))) yöntemlerini gösterir.
 
 ```Java
 ShardMapManager smm = ShardMapManagerFactory.getSqlShardMapManager(connectionString, ShardMapManagerLoadPolicy.Lazy);
@@ -48,13 +47,13 @@ ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnection
 RangeShardMap<int> customerShardMap = smm.GetRangeShardMap<int>("customerMap"); 
 ```
 
-### <a name="use-lowest-privilege-credentials-possible-for-getting-the-shard-map"></a>Parça eşlemesini almak için olası en düşük ayrıcalıklı kimlik bilgileri kullanın.
+### <a name="use-lowest-privilege-credentials-possible-for-getting-the-shard-map"></a>Parça haritasını almak için mümkün olan en düşük ayrıcalık kimlik bilgilerini kullanın
 
-Bir uygulama parça eşlemesi düzenleme yok, Fabrika yöntemde kullanılan kimlik bilgileri salt okunur izinlere sahip **genel parça eşleme** veritabanı. Bu kimlik bilgileri, parça eşleme Yöneticisi için bağlantıları'nı açmak için kullanılan kimlik bilgileri genellikle farklıdır. Ayrıca bkz: [elastik veritabanı istemci kitaplığı erişmek için kimlik bilgileri kullanılan](sql-database-elastic-scale-manage-credentials.md).
+Bir uygulama parça haritasını işlemediği takdirde, Factory yönteminde kullanılan kimlik bilgileri, **genel parça eşleme** veritabanında salt okuma izinlerine sahip olmalıdır. Bu kimlik bilgileri genellikle parça eşleme yöneticisiyle bağlantıları açmak için kullanılan kimlik bilgilerinden farklıdır. Ayrıca bkz. [elastik veritabanı istemci kitaplığına erişmek için kullanılan kimlik bilgileri](sql-database-elastic-scale-manage-credentials.md).
 
-## <a name="call-the-openconnectionforkey-method"></a>OpenConnectionForKey yöntemini çağırın
+## <a name="call-the-openconnectionforkey-method"></a>OpenConnectionForKey metodunu çağırın
 
-**ShardMap.OpenConnectionForKey yöntemi** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapper.listshardmapper.openconnectionforkey), [.NET](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.openconnectionforkey)) bir bağlantı hazır değerini temel alarak uygun veritabanı komutları verme döndürür **anahtar** parametresi. Parça bilgi uygulama tarafından önbelleğe alınan **ShardMapManager**, bu istekler genellikle veritabanı arama içermeyen **genel parça eşleme** veritabanı.
+**Shardmap. OpenConnectionForKey yöntemi** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapper.listshardmapper.openconnectionforkey), [.net](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.openconnectionforkey)), **anahtar** parametresinin değerine göre uygun veritabanına komut verme için hazır bir bağlantı döndürür. Parça bilgileri, uygulama tarafından **Shardmapmanager**tarafından önbelleğe alınır, bu nedenle bu Istekler genellikle **küresel parça eşleme** veritabanına karşı bir veritabanı aramasını içermez.
 
 ```Java
 // Syntax:
@@ -66,15 +65,15 @@ public Connection openConnectionForKey(Object key, String connectionString, Conn
 public SqlConnection OpenConnectionForKey<TKey>(TKey key, string connectionString, ConnectionOptions options)
 ```
 
-* **Anahtar** parametre bir arama anahtarı parça eşlemesine istek için uygun veritabanı belirlemek için kullanılır.
-* **ConnectionString** yalnızca istenen bağlantı kullanıcı kimlik bilgilerini geçirmek için kullanılır. Hiçbir veritabanı adı veya sunucu adı bu dahildir *connectionString* yöntemi veritabanı ve sunucu kullanarak belirler. bu yana **ShardMap**.
-* **ConnectionOptions** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapper.connectionoptions), [.NET](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.connectionoptions)) ayarlanmalıdır **ConnectionOptions.Validate** nerede parça eşlemeleri Mayıs bir ortam ise değişiklik ve satır bölme ve birleştirme işlemleri sonucu olarak başka bir veritabanına taşınabilir. Bu doğrulama hedef yerel parça eşlemesine kısa bir sorgu içerir bağlantı uygulamaya teslim edilmeden önce veritabanı (değil genel parça eşleme için).
+* **Anahtar** parametresi, istek için uygun veritabanını tespit etmek üzere parça eşlemesinde bir arama anahtarı olarak kullanılır.
+* **ConnectionString** , istenen bağlantının yalnızca Kullanıcı kimlik bilgilerini geçirmek için kullanılır. Bu *ConnectionString* 'e veritabanı adı veya sunucu adı dahil değildir çünkü yöntem, **shardmap**'i kullanarak veritabanını ve sunucuyu belirler.
+* **ConnectionOptions** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapper.connectionoptions), [.net](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.connectionoptions)), **ConnectionOptions** olarak ayarlanmalıdır. parça haritalarının değiştirebildiği bir ortam ve satırların bölünmüş veya birleştirme işlemlerinin sonucu olarak diğer veritabanlarına taşınabileceğini doğrulayın. Bu doğrulama, bağlantı uygulamaya teslim edilmeden önce hedef veritabanındaki (Global parça eşlemesinde değil) yerel parça eşlemesine kısa bir sorgu içerir.
 
-(Önbellek yanlış olduğunu belirten) yerel parça eşlemesi karşı doğrulama başarısız olursa, parça eşleme Yöneticisi, arama için yeni doğru değeri elde etmek, önbellek, güncelleştirme ve elde ve uygun veritabanı bağlantısı dönmek için global parça eşleme sorgular. .
+Yerel parça eşlemesine yönelik doğrulama başarısız olursa (önbelleğin yanlış olduğunu gösteren), parça eşleme Yöneticisi genel parça haritasını sorgular, arama için yeni doğru değeri elde etmek, önbelleği güncelleştirmek ve uygun veritabanı bağlantısını almak ve döndürmek için sorgular .
 
-Kullanım **ConnectionOptions.None** uygulama çevrimiçi durumdayken yalnızca zaman parça eşleme değişiklikleri beklenmiyor. Bu durumda, önbelleğe alınan değerler her zaman doğru olarak kabul edilebilir ve hedef veritabanına ek gidiş dönüş doğrulama çağrısı güvenli bir şekilde atlanabilir. Bu, veritabanı trafiğini azaltır. **ConnectionOptions** parçalama değişiklikleri beklenen olup olmadığını belirtmek için bir yapılandırma dosyası veya bir süre boyunca değil bir değer da ayarlanabilir.  
+**ConnectionOptions. None** yalnızca bir uygulama çevrimiçi olduğunda parça eşleme değişiklikleri beklenmiyorsa desteklenmez. Bu durumda, önbelleğe alınan değerlerin her zaman doğru olduğu kabul edilebilir ve hedef veritabanına yönelik ek gidiş dönüş doğrulama çağrısı güvenle atlanabilir. Bu, veritabanı trafiğini azaltır. **ConnectionOptions** Ayrıca, bir süre boyunca parça değişikliklerinin beklenip beklenmediğini göstermek için bir yapılandırma dosyasındaki bir değer aracılığıyla ayarlanabilir.  
 
-Bu örnekte bir tamsayı anahtarı değerini **CustomerID**kullanarak bir **ShardMap** adlı nesne **customerShardMap**.  
+Bu örnek, **customershardmap**adlı bir **shardmap** nesnesi kullanılarak **MüşteriNo**tamsayı anahtarının değerini kullanır.  
 
 ```Java
 int customerId = 12345;
@@ -110,17 +109,17 @@ using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, Co
 }  
 ```
 
-**OpenConnectionForKey** yöntemi doğru veritabanına yeni bir bağlantı zaten açık döndürür. Bu şekilde kullanılan bağlantılar, hala bağlantı havuzu tam avantajından faydalanın.
+**Openconnectionforkey** yöntemi, doğru veritabanına önceden açık olan yeni bir bağlantı döndürür. Bu şekilde kullanılan bağlantılar, bağlantı havuzlarından tamamen faydalanır.
 
-**OpenConnectionForKeyAsync yöntemi** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapper.listshardmapper.openconnectionforkeyasync), [.NET](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.openconnectionforkeyasync)) da uygulamanızın kullanım zaman uyumsuz programlama yaparsa kullanılabilir.
+**Openconnectionforkeyasync yöntemi** ([Java](/java/api/com.microsoft.azure.elasticdb.shard.mapper.listshardmapper.openconnectionforkeyasync), [.net](https://docs.microsoft.com/dotnet/api/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.openconnectionforkeyasync)), uygulamanız zaman uyumsuz programlama kullanıyorsa de kullanılabilir.
 
-## <a name="integrating-with-transient-fault-handling"></a>Geçici hata işleme ile tümleştirme
+## <a name="integrating-with-transient-fault-handling"></a>Geçici hata işlemeyle tümleştirme
 
-Veri erişimi uygulamaları bulutta geliştirilmesi konusunda en iyi uygulama, geçici hataların uygulama tarafından yakalanır ve işlemleri bir hata atamadan önce birkaç kez şartıyla sağlamaktır. Geçici hata işleme bulut uygulamaları için geçici hata işleme sırasında ele alınmıştır ([Java](/java/api/com.microsoft.azure.elasticdb.core.commons.transientfaulthandling), [.NET](https://docs.microsoft.com/previous-versions/msp-n-p/dn440719(v=pandp.60))).
+Bulutta veri erişimi uygulamaları geliştirmedeki en iyi yöntem, geçici hataların uygulama tarafından yakalanıp bir hata oluşturmadan önce işlemlerin birkaç kez yeniden denenmemesini sağlamaktır. Bulut uygulamaları için geçici hata işleme, geçici hata Işlemede ([Java](/java/api/com.microsoft.azure.elasticdb.core.commons.transientfaulthandling), [.net](https://docs.microsoft.com/previous-versions/msp-n-p/dn440719(v=pandp.60))) ele alınmıştır.
 
-Geçici hata işleme verilere bağımlı yönlendirme desen ile doğal olarak bulunabilir. Tüm veri erişim isteği dahil olmak üzere yeniden denemek için önemli gereksinimdir **kullanarak** verilere bağımlı yönlendirme bağlantısı elde edilen blok. Yukarıdaki örnekte şu şekilde yazılması.
+Geçici hata işleme, verilere bağımlı yönlendirme düzeniyle doğal olarak bir arada bulunabilir. Temel gereksinim, verilere bağımlı yönlendirme bağlantısını elde eden **using** bloğu dahil tüm veri erişim isteğini yeniden denemelidir. Yukarıdaki örnek aşağıdaki şekilde yeniden yazılabilir.
 
-### <a name="example---data-dependent-routing-with-transient-fault-handling"></a>Örnek - verilere bağımlı yönlendirme ile geçici hata işleme
+### <a name="example---data-dependent-routing-with-transient-fault-handling"></a>Örnek-geçici hata işleme ile verilere bağımlı yönlendirme
 
 ```Java
 int customerId = 12345;
@@ -169,14 +168,14 @@ Configuration.SqlRetryPolicy.ExecuteAction(() =&gt;
 });
 ```
 
-Esnek veritabanı örnek uygulamasını derlerken, geçici hata işleme uygulamak için gerekli paketleri otomatik olarak yüklenir.
+Geçici hata işleme uygulamak için gereken paketler, elastik veritabanı örnek uygulaması oluşturduğunuzda otomatik olarak indirilir.
 
 ## <a name="transactional-consistency"></a>İşlem tutarlılığı
 
-İşlem özellikleri tüm işlemler için yerel bir parçaya garanti edilir. Örneğin, bağlantı için hedef parça kapsamında verilere bağımlı Yönlendirme aracılığıyla gönderilen işlemler yürütün. Şu anda bir işlem içinde birden çok bağlantı kaydetme için sağlanan hiçbir özellikleri vardır ve bu nedenle parçalar arasında gerçekleştirilen işlemleri için işlemsel tutarlılık garantisi yoktur.
+İşlemsel özellikler, bir parça için yerel olan tüm işlemler için garanti edilir. Örneğin, veriye bağımlı yönlendirme aracılığıyla gönderilen işlemler, bağlantı için hedef parçanın kapsamı içinde yürütülür. Şu anda, birden çok bağlantıyı bir işlem içine listelemek için hiçbir özellik sağlanmamıştır ve bu nedenle parçalar arasında gerçekleştirilen işlemler için işlem garantisi yoktur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bir parçaya ayırmak için veya bir parça yeniden eklemek için bkz: [parça eşleme sorunlarını düzeltme RecoveryManager sınıfı kullanma](sql-database-elastic-database-recovery-manager.md)
+Parçayı ayırmak veya parçayı yeniden eklemek için bkz [. parça eşleme sorunlarını onarmak Için RecoveryManager sınıfını kullanma](sql-database-elastic-database-recovery-manager.md)
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]

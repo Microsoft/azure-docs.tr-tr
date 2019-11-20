@@ -1,6 +1,6 @@
 ---
-title: Azure aboneliği, üst düzey bilgileri verme | Microsoft Docs
-description: Tüm Azure abonelik kimlikleri hesabınızla ilişkili nasıl görüntüleyebileceğiniz açıklanır.
+title: Azure aboneliğinizin en üst düzey bilgilerini dışarı aktarma | Microsoft Docs
+description: Hesabınızla ilişkili tüm Azure abonelik kimliklerini nasıl görüntüleyebileceğinizi açıklar.
 keywords: ''
 services: billing
 documentationcenter: ''
@@ -16,23 +16,23 @@ ms.topic: conceptual
 ms.date: 06/15/2018
 ms.author: banders
 ms.openlocfilehash: 8a3d1a3a6b1dce1d729942715bbe5962837ff093
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
-ms.translationtype: MT
+ms.sourcegitcommit: 3e7646d60e0f3d68e4eff246b3c17711fb41eeda
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
+ms.lasthandoff: 09/11/2019
 ms.locfileid: "60918832"
 ---
-# <a name="export-and-view-your-top-level-subscription-information"></a>Dışarı aktarma ve üst düzey abonelik bilgilerinizi görüntüleyin
-Abonelik kimliklerini, kullanıcı kimlik bilgileriyle ilişkili kümesini görüntülemek istiyorsanız [abonelik bilgilerinizi içeren bir .json dosyası Azure hesap Merkezi'nden](https://account.azure.com/subscriptions/download).
+# <a name="export-and-view-your-top-level-subscription-information"></a>En üst düzey Abonelik bilgilerinizi dışarı aktarma ve görüntüleme
+Kullanıcı kimlik bilgilerinizle ilişkili abonelik kimliklerini görüntülemeniz gerekiyorsa, [Azure Hesap Merkezi’nden abonelik bilgilerinizi içeren .json dosyasını indirin](https://account.azure.com/subscriptions/download).
 
 [!INCLUDE [gdpr-dsr-and-stp-note](../../includes/gdpr-dsr-and-stp-note.md)]
 
-İndirilen bir .json dosyası, aşağıdaki bilgileri sağlar:
+İndirilen .json dosyası şu bilgileri sağlar:
 - E-posta: Hesabınızla ilişkili e-posta adresi.
-- PUID: Fatura hesabınızla ilişkilendirilmiş benzersiz tanımlayıcısı.
-- Subscriptionıds: Abonelik kimliğine göre listelenmiş hesabınıza ait aboneliklerin listesi
+- Puid: Faturalama hesabınızla ilişkili benzersiz tanımlayıcı.
+- Abonelik Kimlikleri: Hesabınıza ait olan ve abonelik kimliğine göre numaralandırılan aboneliklerin listesi.
 
-### <a name="subscriptionsjson-sample"></a>Subscriptions.JSON örnek
+### <a name="subscriptionsjson-sample"></a>subscriptions.json örneği
 
 ```json
 {

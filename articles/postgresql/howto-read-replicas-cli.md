@@ -1,103 +1,194 @@
 ---
-title: Salt okunur çoğaltmalar için Azure veritabanı, PostgreSQL - Azure CLI üzerinden tek bir sunucu için yönetme
-description: PostgreSQL - Azure CLI üzerinden tek bir sunucu için Azure veritabanı'nda salt okunur çoğaltmalar yönetmeyi öğrenin.
+title: PostgreSQL için Azure veritabanı için okuma çoğaltmalarını yönetme-Azure CLı 'dan tek sunuculu sunucu REST API
+description: PostgreSQL için Azure veritabanı-Azure CLı ve REST API arasındaki okuma çoğaltmalarını yönetme hakkında bilgi edinin
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
 ms.topic: conceptual
-ms.date: 05/28/2019
-ms.openlocfilehash: 9a6a1a744a8441d2f082d4d14a3aba8aa1cfc09e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/12/2019
+ms.openlocfilehash: e146a0f42b6487545321ebfbc9ec523da5e78c8a
+ms.sourcegitcommit: 1752581945226a748b3c7141bffeb1c0616ad720
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66306030"
+ms.lasthandoff: 09/14/2019
+ms.locfileid: "70995348"
 ---
-# <a name="create-and-manage-read-replicas-from-the-azure-cli"></a>Oluşturma ve Azure CLI üzerinden salt okunur çoğaltmalar yönetme
+# <a name="create-and-manage-read-replicas-from-the-azure-cli-rest-api"></a>Azure CLı 'dan okuma çoğaltmaları oluşturun ve yönetin REST API
 
-Bu makalede, oluşturma ve Azure clı'dan PostgreSQL için Azure veritabanı'nda salt okunur çoğaltmalar yönetme konusunda bilgi edinin. Salt okunur çoğaltmalar hakkında daha fazla bilgi için bkz: [genel bakış](concepts-read-replicas.md).
+Bu makalede, Azure CLı ve REST API kullanarak PostgreSQL için Azure veritabanı 'nda okuma çoğaltmaları oluşturmayı ve yönetmeyi öğreneceksiniz. Okuma çoğaltmaları hakkında daha fazla bilgi edinmek için bkz. [genel bakış](concepts-read-replicas.md).
 
-> [!IMPORTANT]
-> Salt okunur bir çoğaltması, ana sunucunuz ile aynı bölgede ya da diğer Azure bölgesinde, tercih ettiğiniz oluşturabilirsiniz. Bölgeler arası çoğaltma şu anda genel Önizleme aşamasındadır.
+## <a name="azure-cli"></a>Azure CLI
+Azure CLı kullanarak okuma çoğaltmaları oluşturabilir ve yönetebilirsiniz.
 
-## <a name="prerequisites"></a>Önkoşullar
-- Bir [PostgreSQL sunucusu için Azure veritabanı](quickstart-create-server-up-azure-cli.md) ana sunucu olarak.
+### <a name="prerequisites"></a>Önkoşullar
 
-[!INCLUDE [cloud-shell-try-it](../../includes/cloud-shell-try-it.md)]
-
-CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale için Azure CLI 2.0 veya sonraki bir sürümünü kullanmanız gerekir. Yüklü sürümü görmek için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme]( /cli/azure/install-azure-cli). 
+- [Azure CLI 2.0’ı yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
+- [PostgreSQL Için Azure veritabanı sunucusunun](quickstart-create-server-up-azure-cli.md) ana sunucu olması.
 
 
-## <a name="prepare-the-master-server"></a>Ana sunucu hazırlama
-Bu adımlar, genel amaçlı veya bellek için iyileştirilmiş katmanlarındaki ana sunucu hazırlamak için kullanılmalıdır.
+### <a name="prepare-the-master-server"></a>Ana sunucuyu hazırlama
+Bu adımların Genel Amaçlı veya bellek için Iyileştirilmiş katmanlarda bir ana sunucu hazırlamak için kullanılması gerekir.
 
-`azure.replication_support` Parametresi ayarlanmalıdır **çoğaltma** ana sunucu üzerinde. Bu statik parametre değiştiğinde, değişikliğin etkili olması için sunucunun yeniden başlatılması gereklidir.
+Parametrenin ana sunucuda çoğaltma olarak ayarlanması gerekir. `azure.replication_support` Bu statik parametre değiştirildiğinde, değişikliğin etkili olması için sunucu yeniden başlatması gerekir.
 
-1. Ayarlama `azure.replication_support` çoğaltmaya.
+1. Çoğaltma `azure.replication_support` olarak ayarlayın.
 
    ```azurecli-interactive
    az postgres server configuration set --resource-group myresourcegroup --server-name mydemoserver --name azure.replication_support --value REPLICA
    ```
 
-2. Sunucuya değişikliği uygulamak için yeniden başlatın.
+2. Değişikliği uygulamak için sunucuyu yeniden başlatın.
 
    ```azurecli-interactive
    az postgres server restart --name mydemoserver --resource-group myresourcegroup
    ```
 
-## <a name="create-a-read-replica"></a>Salt okunur bir çoğaltma oluşturma
+### <a name="create-a-read-replica"></a>Salt okunur bir çoğaltma oluşturma
 
-[Az postgres server çoğaltma oluşturma](/cli/azure/postgres/server/replica?view=azure-cli-latest#az-postgres-server-replica-create) komut takip eden parametreleri gerektiriyor:
+[Az Postgres Server Replication Create](/cli/azure/postgres/server/replica?view=azure-cli-latest#az-postgres-server-replica-create) komutu aşağıdaki parametreleri gerektirir:
 
 | Ayar | Örnek değer | Açıklama  |
 | --- | --- | --- |
-| resource-group | myresourcegroup |  Çoğaltma sunucusu oluşturulacağı kaynak grubu.  |
+| resource-group | myresourcegroup |  Çoğaltma sunucusunun oluşturulacağı kaynak grubu.  |
 | name | mydemoserver-çoğaltma | Oluşturulan yeni çoğaltma sunucusunun adı. |
-| source-server | mydemoserver | Çoğaltma kaynağı adı veya kaynak kimliği mevcut ana sunucu. |
+| source-server | mydemoserver | Çoğaltılacak var olan ana sunucunun adı veya kaynak KIMLIĞI. |
 
-CLI aşağıdaki örnekte, Çoğaltma Yöneticisi olarak aynı bölgede oluşturulur.
+Aşağıdaki CLı örneğinde, çoğaltma, ana öğe ile aynı bölgede oluşturulur.
 
 ```azurecli-interactive
 az postgres server replica create --name mydemoserver-replica --source-server mydemoserver --resource-group myresourcegroup
 ```
 
-Çapraz oluşturmak için bölge çoğaltma okuma, kullanın `--location` parametresi. Aşağıdaki CLI örneği, Batı ABD bölgesinde çoğaltmasını oluşturur.
+Bir çapraz bölge okuma çoğaltması oluşturmak için `--location` parametresini kullanın. Aşağıdaki CLı örneği Batı ABD içinde çoğaltmayı oluşturur.
 
 ```azurecli-interactive
 az postgres server replica create --name mydemoserver-replica --source-server mydemoserver --resource-group myresourcegroup --location westus
 ```
 
-Ayarlamadıysanız `azure.replication_support` parametresi **çoğaltma** üzerinde bir genel amaçlı veya ana sunucu ve sunucu yeniden bellek için iyileştirilmiş, bir hata alırsınız. Bir çoğaltma oluşturmadan önce bu iki adımı tamamlayın.
+> [!NOTE]
+> İçinde bir çoğaltma oluşturabileceğiniz bölgeler hakkında daha fazla bilgi edinmek için [çoğaltma kavramlarını oku makalesini](concepts-read-replicas.md)ziyaret edin. 
 
-Çoğaltma Yöneticisi olarak aynı sunucu yapılandırmasını kullanarak oluşturulur. Bir çoğaltma oluşturulduktan sonra birkaç ayar bağımsız olarak ana sunucu ile değiştirilebilir: işlem oluşturma, sanal çekirdek, depolama ve yedekleme bekletme süresi. Fiyatlandırma katmanı da ayrı ayrı değiştirilebilir ya da temel katmandan hariç.
+`azure.replication_support` Parametreyi genel amaçlı veya bellek için iyileştirilmiş ana sunucuda **çoğaltma** olarak ayarlamadıysanız ve sunucuyu yeniden başlattıktan sonra bir hata alırsınız. Bir çoğaltma oluşturmadan önce bu iki adımı uygulayın.
+
+Bir çoğaltma, ana öğe ile aynı işlem ve depolama ayarları kullanılarak oluşturulur. Bir çoğaltma oluşturulduktan sonra, birden fazla ayar ana sunucudan bağımsız olarak değiştirilebilir: işlem oluşturma, sanal çekirdek, depolama ve yedekleme saklama süresi. Fiyatlandırma Katmanı, temel katmandan veya dışında bağımsız olarak da değiştirilebilir.
 
 > [!IMPORTANT]
-> Bir ana sunucu yapılandırması için yeni değerleri güncelleştirilmeden önce çoğaltma yapılandırması eşit veya daha fazla değerlerle güncelleştirin. Bu eylem, çoğaltma ana dala yapılan değişiklikler ile koruyabilirsiniz sağlar.
+> Ana sunucu ayarı yeni bir değere güncellenmesinden önce, çoğaltma ayarını eşit veya daha büyük bir değere güncelleştirin. Bu eylem, çoğaltmanın ana üzerinde yapılan değişikliklerle devam etmesine yardımcı olur.
 
-## <a name="list-replicas"></a>Liste çoğaltmalar
-Ana sunucu çoğaltmalarını listesini kullanarak görüntüleyebileceğiniz [az postgres server çoğaltma listesi](/cli/azure/postgres/server/replica?view=azure-cli-latest#az-postgres-server-replica-list) komutu.
+### <a name="list-replicas"></a>Çoğaltmaları Listele
+[Az Postgres Server Replica List](/cli/azure/postgres/server/replica?view=azure-cli-latest#az-postgres-server-replica-list) komutunu kullanarak bir ana sunucunun çoğaltmalarının listesini görüntüleyebilirsiniz.
 
 ```azurecli-interactive
 az postgres server replica list --server-name mydemoserver --resource-group myresourcegroup 
 ```
 
-## <a name="stop-replication-to-a-replica-server"></a>Bir çoğaltma sunucusu için çoğaltma durdurma
-Bir ana sunucu ve bir salt okunur çoğaltma arasında çoğaltmayı kullanarak durdurabilirsiniz [az postgres server çoğaltma durdurma](/cli/azure/postgres/server/replica?view=azure-cli-latest#az-postgres-server-replica-stop) komutu.
+### <a name="stop-replication-to-a-replica-server"></a>Bir çoğaltma sunucusu için çoğaltma durdurma
+[Az Postgres Server Replication stop](/cli/azure/postgres/server/replica?view=azure-cli-latest#az-postgres-server-replica-stop) komutunu kullanarak, bir ana sunucu ve okuma çoğaltması arasındaki çoğaltmayı durdurabilirsiniz.
 
-Çoğaltma için ana sunucu ve salt okunur bir çoğaltması durdurduktan sonra geri alınamaz. Salt okunur çoğaltma hem okuma hem de yazma işlemleri destekleyen bir tek başına sunucuya olur. Tek başına sunucu ile bir çoğaltma yeniden yapılamıyor.
+Bir ana sunucu ve bir okuma çoğaltması için çoğaltmayı durdurduktan sonra geri alınamaz. Okuma çoğaltması, hem okuma hem de yazma işlemlerini destekleyen tek başına bir sunucu haline gelir. Tek başına sunucu tekrar bir çoğaltmaya yapılamaz.
 
 ```azurecli-interactive
 az postgres server replica stop --name mydemoserver-replica --resource-group myresourcegroup 
 ```
 
-## <a name="delete-a-master-or-replica-server"></a>Bir ana veya çoğaltma sunucusu silme
-Bir ana veya çoğaltma sunucusu silmek için kullandığınız [az postgres server delete](/cli/azure/postgres/server?view=azure-cli-latest#az-postgres-server-delete) komutu.
+### <a name="delete-a-master-or-replica-server"></a>Ana veya çoğaltma sunucusunu silme
+Ana veya çoğaltma sunucusunu silmek için [az Postgres Server DELETE](/cli/azure/postgres/server?view=azure-cli-latest#az-postgres-server-delete) komutunu kullanın.
 
-Ana sunucu sildiğinizde tüm salt okunur çoğaltmalar için çoğaltma durdurulur. Salt okunur çoğaltmaların artık hem okuma hem de yazma işlemlerini destekleyen tek başına sunucuları olur.
+Bir ana sunucuyu sildiğinizde, tüm okuma çoğaltmalarına çoğaltma durdurulur. Okuma çoğaltmaları artık hem okuma hem de yazma işlemlerini destekleyen tek başına sunucular haline gelir.
 
 ```azurecli-interactive
 az postgres server delete --name myserver --resource-group myresourcegroup
 ```
 
+## <a name="rest-api"></a>REST API
+[Azure REST API](/rest/api/azure/)kullanarak okuma çoğaltmaları oluşturabilir ve yönetebilirsiniz.
+
+### <a name="prepare-the-master-server"></a>Ana sunucuyu hazırlama
+Bu adımların Genel Amaçlı veya bellek için Iyileştirilmiş katmanlarda bir ana sunucu hazırlamak için kullanılması gerekir.
+
+Parametrenin ana sunucuda çoğaltma olarak ayarlanması gerekir. `azure.replication_support` Bu statik parametre değiştirildiğinde, değişikliğin etkili olması için sunucu yeniden başlatması gerekir.
+
+1. Çoğaltma `azure.replication_support` olarak ayarlayın.
+
+   ```http
+   PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{masterServerName}/configurations/azure.replication_support?api-version=2017-12-01
+   ```
+
+   ```JSON
+   {
+    "properties": {
+    "value": "replica"
+    }
+   }
+   ```
+
+2. Değişikliği uygulamak için [sunucuyu yeniden başlatın](/rest/api/postgresql/servers/restart) .
+
+   ```http
+   POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{masterServerName}/restart?api-version=2017-12-01
+   ```
+
+### <a name="create-a-read-replica"></a>Salt okunur bir çoğaltma oluşturma
+[Oluşturma API](/rest/api/postgresql/servers/create)'sini kullanarak bir okuma çoğaltması oluşturabilirsiniz:
+
+```http
+PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{replicaName}?api-version=2017-12-01
+```
+
+```json
+{
+  "location": "southeastasia",
+  "properties": {
+    "createMode": "Replica",
+    "sourceServerId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{masterServerName}"
+  }
+}
+```
+
+> [!NOTE]
+> İçinde bir çoğaltma oluşturabileceğiniz bölgeler hakkında daha fazla bilgi edinmek için [çoğaltma kavramlarını oku makalesini](concepts-read-replicas.md)ziyaret edin. 
+
+`azure.replication_support` Parametreyi genel amaçlı veya bellek için iyileştirilmiş ana sunucuda **çoğaltma** olarak ayarlamadıysanız ve sunucuyu yeniden başlattıktan sonra bir hata alırsınız. Bir çoğaltma oluşturmadan önce bu iki adımı uygulayın.
+
+Bir çoğaltma, ana öğe ile aynı işlem ve depolama ayarları kullanılarak oluşturulur. Bir çoğaltma oluşturulduktan sonra, birden fazla ayar ana sunucudan bağımsız olarak değiştirilebilir: işlem oluşturma, sanal çekirdek, depolama ve yedekleme saklama süresi. Fiyatlandırma Katmanı, temel katmandan veya dışında bağımsız olarak da değiştirilebilir.
+
+
+> [!IMPORTANT]
+> Ana sunucu ayarı yeni bir değere güncellenmesinden önce, çoğaltma ayarını eşit veya daha büyük bir değere güncelleştirin. Bu eylem, çoğaltmanın ana üzerinde yapılan değişikliklerle devam etmesine yardımcı olur.
+
+### <a name="list-replicas"></a>Çoğaltmaları Listele
+[Çoğaltma LISTESI API](/rest/api/postgresql/replicas/listbyserver)'sini kullanarak bir ana sunucunun çoğaltmalarının listesini görüntüleyebilirsiniz:
+
+```http
+GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{masterServerName}/Replicas?api-version=2017-12-01
+```
+
+### <a name="stop-replication-to-a-replica-server"></a>Bir çoğaltma sunucusu için çoğaltma durdurma
+[GÜNCELLEŞTIRME API](/rest/api/postgresql/servers/update)'sini kullanarak bir ana sunucu ve okuma çoğaltması arasındaki çoğaltmayı durdurabilirsiniz.
+
+Bir ana sunucu ve bir okuma çoğaltması için çoğaltmayı durdurduktan sonra geri alınamaz. Okuma çoğaltması, hem okuma hem de yazma işlemlerini destekleyen tek başına bir sunucu haline gelir. Tek başına sunucu tekrar bir çoğaltmaya yapılamaz.
+
+```http
+PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{masterServerName}?api-version=2017-12-01
+```
+
+```json
+{
+  "properties": {
+    "replicationRole":"None"  
+   }
+}
+```
+
+### <a name="delete-a-master-or-replica-server"></a>Ana veya çoğaltma sunucusunu silme
+Ana veya çoğaltma sunucusunu silmek için, [SILME API](/rest/api/postgresql/servers/delete)'sini kullanın:
+
+Bir ana sunucuyu sildiğinizde, tüm okuma çoğaltmalarına çoğaltma durdurulur. Okuma çoğaltmaları artık hem okuma hem de yazma işlemlerini destekleyen tek başına sunucular haline gelir.
+
+```http
+DELETE https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}?api-version=2017-12-01
+```
+
 ## <a name="next-steps"></a>Sonraki adımlar
-Daha fazla bilgi edinin [PostgreSQL için Azure veritabanı'nda çoğaltmaları okuma](concepts-read-replicas.md).
+* [PostgreSQL Için Azure veritabanı 'nda okuma çoğaltmaları](concepts-read-replicas.md)hakkında daha fazla bilgi edinin.
+* [Azure Portal okuma çoğaltmaları oluşturmayı ve yönetmeyi](howto-read-replicas-portal.md)öğrenin.

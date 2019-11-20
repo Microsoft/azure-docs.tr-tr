@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory kullanarak Web tablodan veri kopyalama | Microsoft Docs
-description: Web tablosu Bağlayıcısı, Azure veri sağlayan fabrikası hakkında havuz Data Factory tarafından desteklenen veri depolarının bir web tablodan veri kopyalayın öğrenin.
+title: Azure Data Factory kullanarak Web tablosundan veri kopyalama
+description: Web tablosundan Data Factory tarafından desteklenen veri depolarına veri depolarına veri kopyalamanızı sağlayan Azure Data Factory Web tablosu Bağlayıcısı hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -10,54 +10,59 @@ ms.service: data-factory
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.date: 12/20/2018
+ms.date: 08/01/2019
 ms.author: jingwang
-ms.openlocfilehash: e578b3a6b3905569567b568b0130c1ed1b90d915
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a13f3c2d2bbebd2cd6fa95bd7aa144722447ac9d
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60557775"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73680053"
 ---
-# <a name="copy-data-from-web-table-by-using-azure-data-factory"></a>Web tablosu, Azure Data Factory kullanarak verileri kopyalama
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="copy-data-from-web-table-by-using-azure-data-factory"></a>Azure Data Factory kullanarak Web tablosundan veri kopyalama
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](v1/data-factory-web-table-connector.md)
 > * [Geçerli sürüm](connector-web-table.md)
 
-Bu makalede, kopyalama etkinliği Azure Data Factory'de bir Web tablosu veritabanından veri kopyalamak için nasıl kullanılacağını özetlenmektedir. Yapılar [kopyalama etkinliği'ne genel bakış](copy-activity-overview.md) kopyalama etkinliği genel bir bakış sunan makalesi.
+Bu makalede, bir Web tablosu veritabanından veri kopyalamak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı özetlenmektedir. Kopyalama etkinliğine genel bir bakış sunan [kopyalama etkinliğine genel bakış](copy-activity-overview.md) makalesinde oluşturulur.
 
-Bu Web tablo Bağlayıcısı arasındaki fark [REST'e bağlayıcı](connector-rest.md) ve [HTTP Bağlayıcısı](connector-http.md) şunlardır:
+Bu Web tablosu Bağlayıcısı arasındaki fark, [rest Bağlayıcısı](connector-rest.md) ve [http Bağlayıcısı](connector-http.md) şunlardır:
 
-- **Web tablosu Bağlayıcısı** tablo bir HTML Web sayfası içeriği ayıklar.
-- **REST'e bağlayıcı** özellikle RESTful API'lerinden veri kopyalama desteği.
-- **HTTP Bağlayıcısı** örn herhangi bir HTTP uç noktasından veri almaya genel dosya indirilemedi. 
+- **Web tablosu Bağlayıcısı** , tablo IÇERIĞINI bir HTML Web sayfasından ayıklar.
+- **Rest Bağlayıcısı** , verilerin yeniden oluşturulmuş API 'lerden kopyalanmasını özellikle destekler.
+- **Http Bağlayıcısı** , örneğin dosyayı indirmek için HERHANGI bir HTTP uç noktasından veri almak için geneldir. 
 
-## <a name="supported-capabilities"></a>Desteklenen özellikler
+## <a name="supported-capabilities"></a>Desteklenen yetenekler
 
-Web tablosu veritabanından herhangi bir desteklenen havuz veri deposuna veri kopyalayabilirsiniz. Kaynakları/havuz kopyalama etkinliği tarafından desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablo.
+Bu Web tablosu Bağlayıcısı aşağıdaki etkinlikler için desteklenir:
 
-Özellikle, bu Web tablo bağlayıcı destekler **HTML sayfasından tablo içeriğini ayıklanması**.
+- [Desteklenen kaynak/havuz matrisi](copy-activity-overview.md) ile [kopyalama etkinliği](copy-activity-overview.md)
+- [Arama etkinliği](control-flow-lookup-activity.md)
 
-## <a name="prerequisites"></a>Önkoşullar
+Web tablosu veritabanından desteklenen herhangi bir havuz veri deposuna veri kopyalayabilirsiniz. Kopyalama etkinliği tarafından kaynak/havuz olarak desteklenen veri depolarının listesi için [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablosuna bakın.
 
-Bu Web tablo bağlayıcısını kullanmak için şirket içinde barındırılan tümleştirme çalışma zamanını oluşturan gerekir. Bkz: [şirket içinde barındırılan tümleştirme çalışma zamanı](create-self-hosted-integration-runtime.md) makale Ayrıntılar için.
+Özellikle, bu Web tablosu Bağlayıcısı **HTML sayfasından tablo içeriğini ayıklamayı**destekler.
+
+## <a name="prerequisites"></a>Ön koşullar
+
+Bu Web tablosu bağlayıcısını kullanmak için, kendinden konak Integration Runtime ayarlamanız gerekir. Ayrıntılar için bkz. [Şirket içinde barındırılan Integration Runtime](create-self-hosted-integration-runtime.md) makalesi.
 
 ## <a name="getting-started"></a>Başlarken
 
 [!INCLUDE [data-factory-v2-connector-get-started](../../includes/data-factory-v2-connector-get-started.md)]
 
-Aşağıdaki bölümler, Data Factory varlıklarını belirli Web tablo bağlayıcıya tanımlamak için kullanılan özellikleri hakkında ayrıntılı bilgi sağlar.
+Aşağıdaki bölümler, Web tablosu bağlayıcısına özgü Data Factory varlıkları tanımlamak için kullanılan özellikler hakkında ayrıntılı bilgi sağlar.
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
 
-Web tablosu için bağlı hizmet, aşağıdaki özellikler desteklenir:
+Web tablosu bağlı hizmeti için aşağıdaki özellikler desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Type özelliği ayarlanmalıdır: **Web** |Evet |
-| url | Web kaynağına URL'si |Evet |
-| authenticationType | İzin verilen değeri şudur: **Anonim**. |Evet |
-| connectVia | [Integration Runtime](concepts-integration-runtime.md) veri deposuna bağlanmak için kullanılacak. Belirtildiği gibi bir şirket içinde barındırılan tümleştirme çalışma zamanı gereklidir [önkoşulları](#prerequisites). |Evet |
+| type | Type özelliği: **Web** olarak ayarlanmalıdır |Evet |
+| url | Web kaynağının URL 'SI |Evet |
+| authenticationType | İzin verilen değer: **Anonymous**. |Evet |
+| connectVia | Veri deposuna bağlanmak için kullanılacak [Integration Runtime](concepts-integration-runtime.md) . [Önkoşul](#prerequisites)bölümünde belirtildiği gibi, kendinden konak Integration Runtime gereklidir. |Evet |
 
 **Örnek:**
 
@@ -80,15 +85,15 @@ Web tablosu için bağlı hizmet, aşağıdaki özellikler desteklenir:
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
 
-Bölümleri ve veri kümeleri tanımlamak için mevcut özelliklerin tam listesi için veri kümeleri makalesine bakın. Bu bölümde, Web tablosu veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
+Veri kümelerini tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. [veri kümeleri](concepts-datasets-linked-services.md) makalesi. Bu bölüm, Web tablosu veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
 
-Web tablodan veri kopyalamak için dataset öğesinin type özelliği ayarlamak **WebTable**. Aşağıdaki özellikler desteklenir:
+Web tablosundan veri kopyalamak için veri kümesinin Type özelliğini **Webtable**olarak ayarlayın. Aşağıdaki özellikler desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Dataset öğesinin type özelliği ayarlanmalıdır: **WebTable** | Evet |
-| path |Tablo içeren bir kaynak için göreli bir URL. |Hayır. Yalnızca bağlı hizmet tanımında belirtilen URL yolu belirtilmemiş olduğunda kullanılır. |
-| index |Kaynak tablodaki dizini. Bkz [Get dizini bir HTML sayfasında bir tablonun](#get-index-of-a-table-in-an-html-page) bölüm için bir HTML sayfasında bir tablo dizininin başlangıç adımları. |Evet |
+| type | DataSet 'in Type özelliği: **Webtable** olarak ayarlanmalıdır | Evet |
+| Yolun |Tabloyu içeren kaynağın göreli URL 'SI. |Hayır. Yol belirtilmediğinde, yalnızca bağlı hizmet tanımında belirtilen URL kullanılır. |
+| indeks |Kaynaktaki tablonun dizini. HTML sayfasındaki bir tablonun dizinini alma adımları için bkz. [HTML sayfasındaki tablonun dizinini alma](#get-index-of-a-table-in-an-html-page) bölümü. |Evet |
 
 **Örnek:**
 
@@ -97,13 +102,14 @@ Web tablodan veri kopyalamak için dataset öğesinin type özelliği ayarlamak 
     "name": "WebTableInput",
     "properties": {
         "type": "WebTable",
-        "linkedServiceName": {
-            "referenceName": "<Web linked service name>",
-            "type": "LinkedServiceReference"
-        },
         "typeProperties": {
             "index": 1,
             "path": "AFI's_100_Years...100_Movies"
+        },
+        "schema": [],
+        "linkedServiceName": {
+            "referenceName": "<Web linked service name>",
+            "type": "LinkedServiceReference"
         }
     }
 }
@@ -111,11 +117,11 @@ Web tablodan veri kopyalamak için dataset öğesinin type özelliği ayarlamak 
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
 
-Bölümleri ve etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları](concepts-pipelines-activities.md) makalesi. Bu bölümde, Web tablosu kaynak tarafından desteklenen özelliklerin bir listesini sağlar.
+Etkinlikleri tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. işlem [hatları](concepts-pipelines-activities.md) makalesi. Bu bölüm, Web tablosu kaynağı tarafından desteklenen özelliklerin bir listesini sağlar.
 
 ### <a name="web-table-as-source"></a>Kaynak olarak Web tablosu
 
-Web tablodan veri kopyalamak için kopyalama etkinliği için kaynak türünü ayarlayın. **WebSource**, hiçbir ek özellikler desteklenir.
+Web tablosundan veri kopyalamak için kopyalama etkinliğindeki kaynak türünü **Websource**olarak ayarlayın, ek özellikler desteklenmez.
 
 **Örnek:**
 
@@ -148,34 +154,38 @@ Web tablodan veri kopyalamak için kopyalama etkinliği için kaynak türünü a
 ]
 ```
 
-## <a name="get-index-of-a-table-in-an-html-page"></a>Bir HTML sayfasında bir tablo dizinini Al
+## <a name="get-index-of-a-table-in-an-html-page"></a>HTML sayfasındaki bir tablonun dizinini al
 
-Yapılandırmanız gereken bir tablo dizininin almak için [veri kümesi özellikleri](#dataset-properties), örneğin Excel 2016 aşağıdaki gibi bir araç olarak kullanabilirsiniz:
+[Veri kümesi özelliklerinde](#dataset-properties)yapılandırmanız gereken bir tablonun dizinini almak için, aşağıdaki gibi bir araç olarak örneğin, Excel 2016 'yi kullanabilirsiniz:
 
-1. Başlatma **Excel 2016** geçin **veri** sekmesi.
-2. Tıklayın **yeni sorgu** araç çubuğunda işaret **diğer kaynaklardan** tıklatıp **Web'den**.
+1. **Excel 2016** ' i başlatın ve **veri** sekmesine geçin.
+2. Araç çubuğunda **Yeni sorgu** ' ya tıklayın, **diğer kaynaklardan** üzerine gelin ve **Web 'den**' ye tıklayın.
 
     ![Power Query menüsü](./media/copy-data-from-web-table/PowerQuery-Menu.png)
-3. İçinde **Web'den** iletişim kutusuna **URL** bağlı hizmet JSON içinde kullanırsınız (örneğin: https://en.wikipedia.org/wiki/) yolu belirtmek için veri kümesi ile birlikte (örneğin: AFI % 27s_100_Years... 100_Movies) tıklayıp **Tamam**.
+3. **Web 'den** , bağlantılı hizmet JSON 'Da kullanacağınız **URL 'yi** girin (örneğin, veri kümesi için belirttiğiniz yol ile birlikte https://en.wikipedia.org/wiki/) (örneğin: AFI% 27S_100_yıllar... 100 _Filmler) ve ardından **Tamam**' a tıklayın.
 
     ![Web iletişim kutusundan](./media/copy-data-from-web-table/FromWeb-DialogBox.png)
 
-    Bu örnekte kullanılan URL'si: https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Movies
-4. Görürseniz **erişim Web içeriği** iletişim kutusunda, sağdaki seçin **URL**, **kimlik doğrulaması**, tıklatıp **Connect**.
+    Bu örnekte kullanılan URL: https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Movies
+4. **Web Içeriği erişimi** iletişim kutusu ' nu görürseniz, doğru **URL**'yi, **kimlik doğrulamasını**seçin ve **Bağlan**' a tıklayın.
 
-   ![Web içerik iletişim kutusuna erişin](./media/copy-data-from-web-table/AccessWebContentDialog.png)
-5. ' A tıklayın bir **tablo** öğesi içeriği tablosundan görebilirsiniz ve ardından ağaç görünümünde **Düzenle** altındaki düğmesini.  
+   ![Web içeriğine eriş iletişim kutusu](./media/copy-data-from-web-table/AccessWebContentDialog.png)
+5. Tablodaki içeriği görmek için ağaç görünümündeki bir **tablo** öğesine tıklayın ve ardından alt kısımdaki **Düzenle** düğmesine tıklayın.  
 
    ![Gezgin iletişim kutusu](./media/copy-data-from-web-table/Navigator-DialogBox.png)
-6. İçinde **sorgu Düzenleyicisi** penceresinde tıklayın **Gelişmiş Düzenleyici** araç çubuğunda.
+6. **Sorgu Düzenleyicisi** penceresinde, araç çubuğunda **Gelişmiş Düzenleyici** düğme ' ye tıklayın.
 
     ![Gelişmiş Düzenleyici düğmesi](./media/copy-data-from-web-table/QueryEditor-AdvancedEditorButton.png)
-7. Gelişmiş Düzenleyici iletişim kutusuna dizin "Kaynak" yanındaki sayıdır.
+7. Gelişmiş Düzenleyici iletişim kutusunda, "kaynak" nın yanındaki sayı dizindir.
 
-    ![Gelişmiş Düzenleyici - dizin](./media/copy-data-from-web-table/AdvancedEditor-Index.png)
+    ![Gelişmiş Düzenleyici-Dizin](./media/copy-data-from-web-table/AdvancedEditor-Index.png)
 
-Excel 2013 kullanıyorsanız, [Excel için Microsoft Power Query](https://www.microsoft.com/download/details.aspx?id=39379) dizin alınamıyor. Bkz: [bir web sayfasına bağlanma](https://support.office.com/article/Connect-to-a-web-page-Power-Query-b2725d67-c9e8-43e6-a590-c0a175bd64d8) makale Ayrıntılar için. Kullanıyorsanız benzer adımlarla [Microsoft Power BI Desktop için](https://powerbi.microsoft.com/desktop/).
+Excel 2013 kullanıyorsanız, dizini almak için [Excel için Microsoft Power Query](https://www.microsoft.com/download/details.aspx?id=39379) kullanın. Ayrıntılar için bkz. [Web sayfasına bağlanma](https://support.office.com/article/Connect-to-a-web-page-Power-Query-b2725d67-c9e8-43e6-a590-c0a175bd64d8) makalesi. [Masaüstü Için Microsoft Power BI](https://powerbi.microsoft.com/desktop/)kullanıyorsanız, bu adımlar benzerdir.
 
+
+## <a name="lookup-activity-properties"></a>Arama etkinliği özellikleri
+
+Özelliklerle ilgili ayrıntıları öğrenmek için [arama etkinliğini](control-flow-lookup-activity.md)denetleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Data Factory kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).
+Azure Data Factory içindeki kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).

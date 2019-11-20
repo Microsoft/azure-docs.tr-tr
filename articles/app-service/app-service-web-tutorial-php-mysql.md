@@ -277,7 +277,7 @@ Değişiklikleri kaydedin.
 
 ### <a name="configure-ssl-certificate"></a>SSL sertifikası yapılandırma
 
-Varsayılan olarak, MySQL için Azure Veritabanı, istemcilerden gelen SSL bağlantılarını zorlar. Azure’da MySQL veritabanınıza bağlanmak üzere MySQL için Azure Veritabanı tarafından sağlanan [_.pem_ sertifikasını kullanmanız gerekir](../mysql/howto-configure-ssl.md).
+Varsayılan olarak, MySQL için Azure Veritabanı, istemcilerden gelen SSL bağlantılarını zorlar. Azure’da MySQL veritabanınıza bağlanmak üzere MySQL için Azure Veritabanı tarafından sağlanan [ _.pem_ sertifikasını kullanmanız gerekir](../mysql/howto-configure-ssl.md).
 
 _config/database.php_ dosyasını açın ve aşağıdaki kodda gösterildiği gibi `sslmode` ve `options` parametrelerini `connections.mysql` içine ekleyin.
 
@@ -402,7 +402,7 @@ Cloud Shell’de [`az resource update`](/cli/azure/resource#az-resource-update) 
 az resource update --name web --resource-group myResourceGroup --namespace Microsoft.Web --resource-type config --parent sites/<app_name> --set properties.virtualApplications[0].physicalPath="site\wwwroot\public" --api-version 2015-06-01
 ```
 
-Varsayılan olarak Azure App Service, kök sanal uygulama yolunu (_/_) dağıtılmış uygulama dosyalarının kök dizinine (_sites\wwwroot_) yönlendirir.
+Varsayılan olarak Azure App Service, kök sanal uygulama yolunu ( _/_ ) dağıtılmış uygulama dosyalarının kök dizinine (_sites\wwwroot_) yönlendirir.
 
 ### <a name="push-to-azure-from-git"></a>Git üzerinden Azure'a gönderme
 

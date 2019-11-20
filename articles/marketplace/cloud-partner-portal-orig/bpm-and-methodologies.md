@@ -1,36 +1,23 @@
 ---
-title: İş işlemi kitaplıkları | Azure Market
-description: İş işlemi kitaplıkları ve yöntemlerini açıklaması.
+title: İş süreci kitaplıkları | Azure Marketi
+description: Bu CPP ve PC makalesine bağlı olan bu makalede kullanım dışı bırakıldı. "İş süreci kitaplıklarının açıklaması ve yöntemleri."
 services: Azure, Marketplace, Cloud Partner Portal,
-author: pbutlerm
+author: ChJenk
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 09/13/2018
-ms.author: pabutler
-ms.openlocfilehash: 870e77f3390c820278970f5ffda002b4826b82a4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.author: v-chjen
+ms.openlocfilehash: f23bc3374b50271398979271bd43ab7533f5214b
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935618"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819760"
 ---
-# <a name="business-process-libraries"></a>İş işlemi kitaplıkları
+# <a name="business-process-libraries"></a>İş süreci kitaplıkları
 
-İş işlemi kitaplıkları, uçtan uca senaryo kılavuzları görev ancak hiçbir şey vardır. İş işlem kitaplığı doğrudan pazarlama içeriğinizi ile hizalamanız gerekir. İş işlem Kitaplığı'ndaki her bir iş sürecini olmalıdır bir [görev kayıt](https://docs.microsoft.com/dynamics365/operations/dev-itpro/user-interface/task-recorder) ilişkili. Lütfen operasyonlar için Dynamics 365 dışındaki işlemler varsa, bir Visio BPM kitaplığınıza ekleyin.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık finans ve operasyon teklifleri için Dynamics 365 oluşturma ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer).
 
-Bkz: [iş işlem Modelleyicisi](https://docs.microsoft.com/dynamics365/operations/dev-itpro/lcs-solutions/business-process-modeler-libraries-lcs-solutions) daha fazla bilgi için.
-
-## <a name="methodologies"></a>Yöntemleri
-
-Microsoft Dynamics yaşam döngüsü Hizmetleri (LCS) daha tekrarlanabilir ve öngörülebilir bir uygulama Proje deneyimi sağlamak için kullanabileceğiniz yöntemleri sağlar. Sağlanan yöntemlerden birini kullanın veya kendinizinkini oluşturun. Bir yöntem ile kolayca izleyebilir ve, ilerleme üzerinde rapor.
-
-Bir Metodoloji aşamaları, görevleri ve kilometre taşları oluşur. Her aşama, görevlerin bazıları zorunlu olan herhangi bir sayı olabilir. Tüm aşama, görevlerin tamamlandığında, aşama tamamlandı olarak işaretlenebilir. Bir aşama tamamlanması beklenir, bir kilometre taşı için de oluşturabilirsiniz. Aşağıdaki yöntemleri LCS projesinde dahildir:
-
-- Uygulama
-- Emin adım
-- Geliştirme hakkında bilgi edinin
-- Geçiş ve çözümleri oluşturma
-- Çözümleri kullanma
-
-Bkz: [LCS yöntemlerini](https://docs.microsoft.com/dynamics365/operations/dev-itpro/lifecycle-services/create-methodology) daha fazla bilgi için.
+Yeni bir Dynamics 365 for Operations teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer) bölümündeki yönergeleri izleyin.

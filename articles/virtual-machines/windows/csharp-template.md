@@ -1,49 +1,48 @@
 ---
-title: C# ve Resource Manager şablonu kullanarak bir VM dağıtma | Microsoft Docs
-description: Nasıl bir Azure VM dağıtmak için C# ve Resource Manager şablonu kullanmayı öğrenin.
+title: Ve Kaynak Yöneticisi şablonu kullanarak C# VM dağıtma
+description: Azure VM dağıtmak için ve C# Kaynak Yöneticisi şablonu kullanmayı öğrenin.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: bfba66e8-c923-4df2-900a-0c2643b81240
 ms.service: virtual-machines-windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 07/14/2017
 ms.author: cynthn
-ms.openlocfilehash: 80c2a1f4b9b724058b8b573f265a3cb2a99302a0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c88b060104a4c17e3edad2e23cfb23a54661b969
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66305953"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74033809"
 ---
-# <a name="deploy-an-azure-virtual-machine-using-c-and-a-resource-manager-template"></a>C# ve Resource Manager şablonu kullanarak bir Azure sanal makine dağıtma
+# <a name="deploy-an-azure-virtual-machine-using-c-and-a-resource-manager-template"></a>Bir Azure sanal makinesini ve Kaynak Yöneticisi C# şablonu kullanarak dağıtma
 
-Bu makalede, C# kullanarak bir Azure Resource Manager şablonu dağıtma işlemini göstermektedir. Oluşturduğunuz şablonun yeni bir sanal ağda tek bir alt ağ ile Windows Server çalıştıran tek bir sanal makine dağıtır.
+Bu makalede, kullanarak C#Azure Resource Manager şablonu dağıtma gösterilmektedir. Oluşturduğunuz şablon, tek bir alt ağa sahip yeni bir sanal ağda Windows Server çalıştıran tek bir sanal makine dağıtır.
 
-Sanal makine kaynağı ayrıntılı bir açıklaması için bkz. [sanal makineler bir Azure Resource Manager şablonunda](template-description.md). Bir şablonda tüm kaynaklar hakkında daha fazla bilgi için bkz. [Azure Resource Manager şablonu Kılavuzu](../../azure-resource-manager/resource-manager-template-walkthrough.md).
+Sanal makine kaynağının ayrıntılı açıklaması için, bkz. [Azure Resource Manager şablonundaki sanal makineler](template-description.md). Şablondaki tüm kaynaklar hakkında daha fazla bilgi için bkz. [Azure Resource Manager Template izlenecek yol](../../azure-resource-manager/resource-manager-template-walkthrough.md).
 
-Bu adımların tamamlanması yaklaşık 10 dakika sürer.
+Bu adımların uygulanması yaklaşık 10 dakika sürer.
 
 ## <a name="create-a-visual-studio-project"></a>Visual Studio projesi oluşturma
 
-Bu adımda, Visual Studio'nun yüklü olduğu ve şablonu dağıtmak için kullanılan bir konsol uygulaması oluşturun emin olun.
+Bu adımda, Visual Studio 'nun yüklü olduğundan ve şablonu dağıtmak için kullanılan bir konsol uygulaması oluşturduğunuzdan emin olursunuz.
 
-1. Henüz yapmadıysanız, yükleme [Visual Studio](https://docs.microsoft.com/visualstudio/install/install-visual-studio). Seçin **.NET masaüstü geliştirme** iş yükleri sayfası ve ardından **yükleme**. Özet olarak, gördüğünüz gibi **.NET Framework 4-4.6 geliştirme araçları** sizin için otomatik olarak seçilir. Visual Studio zaten yüklediyseniz, Visual Studio Başlatıcısı'nı kullanarak .NET iş yükü ekleyebilirsiniz.
+1. Henüz yapmadıysanız, [Visual Studio 'yu](https://docs.microsoft.com/visualstudio/install/install-visual-studio)yükleyemezsiniz. Iş yükleri sayfasında **.net masaüstü geliştirme** ' yi seçin ve ardından **yükler**' i tıklatın. Özet içinde, **.NET Framework 4-4,6 geliştirme araçlarının** sizin için otomatik olarak seçili olduğunu görebilirsiniz. Visual Studio 'Yu önceden yüklediyseniz, Visual Studio başlatıcısı 'nı kullanarak .NET iş yükünü ekleyebilirsiniz.
 2. Visual Studio’da, **Dosya** > **Yeni** > **Proje**’ye tıklayın.
-3. İçinde **şablonları** > **Visual C#** seçin **konsol uygulaması (.NET Framework)** , girin *myDotnetProject* adı Proje, projenin konumunu seçin ve ardından **Tamam**.
+3. **Visual C#**  > **Şablonlar** ' da **konsol uygulaması (.NET Framework)** seçeneğini belirleyin, projenin adı için *myDotnetProject* girin, projenin konumunu seçin ve ardından **Tamam**' a tıklayın.
 
-## <a name="install-the-packages"></a>Paketleri yükleme
+## <a name="install-the-packages"></a>Paketleri yükler
 
-NuGet paketlerini bu adımları tamamlamak için gereken kitaplıklarını yüklemek için en kolay yoludur. Visual Studio'da ihtiyacınız kitaplıkları edinmek için şu adımları uygulayın:
+NuGet paketleri, bu adımları tamamlaması için gereken kitaplıkları yüklemenin en kolay yoludur. Visual Studio 'da ihtiyacınız olan kitaplıkları almak için şu adımları uygulayın:
 
-1. Tıklayın **Araçları** > **Nuget Paket Yöneticisi**ve ardından **Paket Yöneticisi Konsolu**.
-2. Konsolunda aşağıdaki komutları yazın:
+1. **Araçlar** > **NuGet Paket Yöneticisi**' ne ve ardından **Paket Yöneticisi konsolu**' na tıklayın.
+2. Konsola şu komutları yazın:
 
     ```powershell
     Install-Package Microsoft.Azure.Management.Fluent
@@ -52,11 +51,11 @@ NuGet paketlerini bu adımları tamamlamak için gereken kitaplıklarını yükl
 
 ## <a name="create-the-files"></a>Dosyaları oluşturma
 
-Bu adımda, kaynakları dağıtan bir şablon dosyası ve şablon parametre değerlerini sağlayan bir parametre dosyası oluşturun. Azure Resource Manager işlemlerini gerçekleştirmek için kullanılan bir yetkilendirme dosyası oluşturabilir.
+Bu adımda, şablona parametre değerleri sağlayan bir şablon dosyası ve bir parametre dosyası oluşturacaksınız. Ayrıca, Azure Resource Manager işlemleri gerçekleştirmek için kullanılan bir yetkilendirme dosyası da oluşturursunuz.
 
 ### <a name="create-the-template-file"></a>Şablon dosyası oluşturma
 
-1. Çözüm Gezgini'nde sağ *myDotnetProject* > **Ekle** > **yeni öğe**ve ardından **metindosyası** içinde *Visual C# öğeleri*. Dosya adı *CreateVMTemplate.json*ve ardından **Ekle**.
+1. Çözüm Gezgini ' de, > *myDotnetProject* ' ye sağ tıklayıp **Yeni > öğe** **Ekle** ' ye sağ tıklayın ve *ardından C# görsel öğelerde* **metin dosyası** seçin. *Createvmtemplate. JSON*dosyasını adlandırın ve ardından **Ekle**' ye tıklayın.
 2. Bu JSON kodunu oluşturduğunuz dosyaya ekleyin:
 
     ```json
@@ -162,13 +161,13 @@ Bu adımda, kaynakları dağıtan bir şablon dosyası ve şablon parametre değ
     }
     ```
 
-3. CreateVMTemplate.json dosyayı kaydedin.
+3. CreateVMTemplate. json dosyasını kaydedin.
 
-### <a name="create-the-parameters-file"></a>Parametre dosyasını oluşturma
+### <a name="create-the-parameters-file"></a>Parametreler dosyası oluşturma
 
-Şablonda kaynak parametrelerinin değerlerini belirtmek için değerleri içeren bir parametre dosyası oluşturun.
+Şablondaki kaynak parametrelerinin değerlerini belirtmek için değerleri içeren bir parametre dosyası oluşturursunuz.
 
-1. Çözüm Gezgini'nde sağ *myDotnetProject* > **Ekle** > **yeni öğe**ve ardından **metindosyası** içinde *Visual C# öğeleri*. Dosya adı *Parameters.json*ve ardından **Ekle**.
+1. Çözüm Gezgini ' de, > *myDotnetProject* ' ye sağ tıklayıp **Yeni > öğe** **Ekle** ' ye sağ tıklayın ve *ardından C# görsel öğelerde* **metin dosyası** seçin. *Parameters. JSON*dosyasını adlandırın ve ardından **Ekle**' ye tıklayın.
 2. Bu JSON kodunu oluşturduğunuz dosyaya ekleyin:
 
     ```json
@@ -182,14 +181,14 @@ Bu adımda, kaynakları dağıtan bir şablon dosyası ve şablon parametre değ
     }
     ```
 
-4. Parameters.json dosyayı kaydedin.
+4. Parameters. json dosyasını kaydedin.
 
-### <a name="create-the-authorization-file"></a>Yetkilendirme dosyası oluşturma
+### <a name="create-the-authorization-file"></a>Yetkilendirme dosyasını oluşturma
 
-Bir şablonu dağıtmadan önce erişimi olmasını emin olun. bir [Active Directory Hizmet sorumlusu](../../active-directory/develop/howto-authenticate-service-principal-powershell.md). Hizmet sorumlusundan istekleri için Azure Resource Manager kimliğini doğrulamak için bir belirteç edinme. Uygulama kimliği ve kimlik doğrulama anahtarı yetkilendirme dosyasında gereken Kiracı kimliği de kaydetmeniz gerekir.
+Bir şablonu dağıtabilmeniz için önce bir [Active Directory Hizmet sorumlusuna](../../active-directory/develop/howto-authenticate-service-principal-powershell.md)erişiminizin olduğundan emin olun. Hizmet sorumlusu ' ndan Azure Resource Manager kimlik doğrulaması için bir belirteç elde edersiniz. Ayrıca, yetkilendirme dosyasında ihtiyaç duyduğunuz uygulama KIMLIĞI, kimlik doğrulama anahtarı ve kiracı KIMLIĞINI de kaydetmeniz gerekir.
 
-1. Çözüm Gezgini'nde sağ *myDotnetProject* > **Ekle** > **yeni öğe**ve ardından **metindosyası** içinde *Visual C# öğeleri*. Dosya adı *azureauth.properties*ve ardından **Ekle**.
-2. Bu yetkilendirme özellikleri ekleyin:
+1. Çözüm Gezgini ' de, > *myDotnetProject* ' ye sağ tıklayıp **Yeni > öğe** **Ekle** ' ye sağ tıklayın ve *ardından C# görsel öğelerde* **metin dosyası** seçin. Dosyayı *azureauth. Properties*olarak adlandırın ve **Ekle**' ye tıklayın.
+2. Şu yetkilendirme özelliklerini ekleyin:
 
     ```
     subscription=<subscription-id>
@@ -202,10 +201,10 @@ Bir şablonu dağıtmadan önce erişimi olmasını emin olun. bir [Active Direc
     graphURL=https://graph.windows.net/
     ```
 
-    Değiştirin **&lt;subscrıptıon-ID&gt;** , abonelik tanımlayıcısı ile **&lt;uygulama-kimliği&gt;** ile Active Directory uygulaması tanımlayıcı, **&lt;kimlik doğrulama anahtarı&gt;** uygulama anahtarına sahip ve **&lt;Kiracı-kimliği&gt;** Kiracı tanımlayıcısı ile.
+    **&lt;abonelik kimliği&gt;** abonelik tanımınızla değiştirin, **uygulama kimliği&gt;** Active Directory uygulama tanımlayıcısı ile&lt;,&lt;**kimlik doğrulama anahtarı** ile uygulama anahtarı ve&gt;**Kiracı kimliği**&lt;kiracı tanımlayıcısı ile&gt;.
 
-3. Azureauth.properties dosyayı kaydedin.
-4. Örneğin bir ortam değişkeninde Windows, oluşturduğunuz yetkilendirme dosyasının tam yolu AZURE_AUTH_LOCATION adlı kümesi, aşağıdaki PowerShell komutunu kullanabilirsiniz:
+3. Azureauth. Properties dosyasını kaydedin.
+4. Windows adlandırılmış AZURE_AUTH_LOCATION içinde, oluşturduğunuz yetkilendirme dosyasının tam yolu ile bir ortam değişkeni ayarlayın, örneğin, aşağıdaki PowerShell komutunu kullanabilirsiniz:
 
     ```powershell
     [Environment]::SetEnvironmentVariable("AZURE_AUTH_LOCATION", "C:\Visual Studio 2019\Projects\myDotnetProject\myDotnetProject\azureauth.properties", "User")
@@ -215,7 +214,7 @@ Bir şablonu dağıtmadan önce erişimi olmasını emin olun. bir [Active Direc
 
 ## <a name="create-the-management-client"></a>Yönetim istemcisi oluşturma
 
-1. Oluşturduğunuz proje için Program.cs dosyasını açın. Ardından bu dosyasının en üstüne using deyimlerini mevcut deyimlerini ekleyin:
+1. Oluşturduğunuz proje için Program.cs dosyasını açın. Ardından, bu using deyimlerini dosyanın en üstündeki mevcut deyimlere ekleyin:
 
     ```csharp
     using Microsoft.Azure.Management.Compute.Fluent;
@@ -227,7 +226,7 @@ Bir şablonu dağıtmadan önce erişimi olmasını emin olun. bir [Active Direc
     using Microsoft.WindowsAzure.Storage.Blob;
     ```
 
-2. Yönetim istemcisi oluşturmak için bu kodu Main yöntemine ekleyin:
+2. Yönetim istemcisini oluşturmak için bu kodu Main yöntemine ekleyin:
 
     ```csharp
     var credentials = SdkContext.AzureCredentialsFactory
@@ -242,7 +241,7 @@ Bir şablonu dağıtmadan önce erişimi olmasını emin olun. bir [Active Direc
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-Uygulama değerlerini belirtmek için kod Main yöntemine ekleyin:
+Uygulamanın değerlerini belirtmek için, ana yönteme kod ekleyin:
 
 ```csharp
 var groupName = "myResourceGroup";
@@ -255,7 +254,7 @@ var resourceGroup = azure.ResourceGroups.Define(groupName)
 
 ## <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 
-Şablon ve parametreleri, azure'da bir depolama hesabından dağıtılır. Bu adımda, hesabı oluşturun ve dosyalarını karşıya yükleyin. 
+Şablon ve parametreler, Azure 'daki bir depolama hesabından dağıtılır. Bu adımda, hesabı oluşturur ve dosyaları karşıya yüklersiniz. 
 
 Hesabı oluşturmak için bu kodu Main yöntemine ekleyin:
 
@@ -295,7 +294,7 @@ paramblob.UploadFromFileAsync("..\\..\\Parameters.json").Result();
 
 ## <a name="deploy-the-template"></a>Şablonu dağıtma
 
-Şablon ve parametreleri oluşturulduğu depolama hesabından dağıtın. 
+Şablon ve parametreleri oluşturulan depolama hesabından dağıtın. 
 
 Şablonu dağıtmak için bu kodu Main yöntemine ekleyin:
 
@@ -314,9 +313,9 @@ Console.ReadLine();
 
 ## <a name="delete-the-resources"></a>Kaynakları Sil
 
-Azure'da kullanılan kaynaklar için ücretlendirilirsiniz, her zaman artık gerekli olmayan kaynakları silmek için iyi bir uygulama olmasıdır. Her kaynak ayrı ayrı bir kaynak grubundan silmeniz gerekmez. Kaynak grubunu silin ve tüm kaynakları otomatik olarak silinir. 
+Azure 'da kullanılan kaynaklar için ücretlendirildiğiniz için, artık gerekli olmayan kaynakları silmek her zaman iyi bir uygulamadır. Her kaynağı bir kaynak grubundan ayrı olarak silmeniz gerekmez. Kaynak grubunu silin ve tüm kaynakları otomatik olarak silinir. 
 
-Kaynak grubunu silmek için bu kodu Main yöntemine ekleyin:
+Kaynak grubunu silmek için, bu kodu Main yöntemine ekleyin:
 
 ```csharp
 azure.ResourceGroups.DeleteByName(groupName);
@@ -324,13 +323,13 @@ azure.ResourceGroups.DeleteByName(groupName);
 
 ## <a name="run-the-application"></a>Uygulamayı çalıştırma
 
-Bu son tamamlanması tamamen başından çalıştırmak bu konsol uygulamasını yaklaşık beş dakika sürer. 
+Bu konsol uygulamasının başlangıçtan sonuna kadar tam olarak çalıştırılması yaklaşık beş dakika sürer. 
 
-1. Konsol uygulamasını çalıştırmak için tıklayın **Başlat**.
+1. Konsol uygulamasını çalıştırmak için **Başlat**' a tıklayın.
 
-2. Basmadan önce **Enter** kaynakları silme başlatmak için Azure portalında kaynaklarının oluşturulmasını doğrulamak için birkaç dakika sürebilir. Dağıtım durumu, dağıtım hakkında bilgi için tıklayın.
+2. Kaynakları silmeye başlamak üzere **ENTER** tuşuna basmadan önce Azure Portal kaynakların oluşturulmasını doğrulamak birkaç dakika sürebilir. Dağıtım hakkındaki bilgileri görmek için dağıtım durumuna tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Dağıtımla ilgili sorunlar varsa, bir sonraki adım bakmak için olacaktır [Azure Resource Manager ile yaygın Azure dağıtım hatalarını giderme](../../resource-manager-common-deployment-errors.md).
-* Bir sanal makine ve destek kaynaklarını gözden geçirerek dağıtmayı öğrenin [bir Azure sanal makine kullanarak C# dağıtma](csharp.md).
+* Dağıtım ile ilgili sorunlar varsa, bir sonraki adım [Azure Resource Manager Genel Azure dağıtım hatalarıyla Ilgili sorunları giderme](../../resource-manager-common-deployment-errors.md)bölümüne bakmak olacaktır.
+* [Kullanarak C#bir Azure sanal makinesini dağıtmayı ](csharp.md)inceleyerek bir sanal makineyi ve destekleyici kaynaklarını dağıtmayı öğrenin.

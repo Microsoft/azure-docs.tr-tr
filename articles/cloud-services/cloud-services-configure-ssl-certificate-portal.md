@@ -1,58 +1,52 @@
 ---
-title: Bir bulut hizmeti için SSL'yi yapılandırma | Microsoft Docs
-description: Bir web rolü için bir HTTPS uç noktasının nasıl belirtileceğini ve uygulamanızın güvenliğini sağlamak için bir SSL sertifikasının nasıl yükleneceğini öğrenin. Bu örnekler, Azure portalını kullanın.
+title: Bir bulut hizmeti için SSL 'yi yapılandırma | Microsoft Docs
+description: Bir Web rolü için HTTPS uç noktası belirtme ve uygulamanızın güvenliğini sağlamak için SSL sertifikası yükleme hakkında bilgi edinin. Bu örnekler Azure portal kullanır.
 services: cloud-services
 documentationcenter: .net
-author: jpconnock
-manager: timlt
-editor: ''
-ms.assetid: 371ba204-48b6-41af-ab9f-ed1d64efe704
+author: georgewallace
 ms.service: cloud-services
-ms.workload: tbd
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 05/26/2017
-ms.author: jeconnoc
-ms.openlocfilehash: 2a9879ebc55a5f25c1a358e386697dce1c55ec90
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: gwallace
+ms.openlocfilehash: cc5b142558a21d1364254e555f3cf8f64bba0e58
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61434101"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73469027"
 ---
-# <a name="configuring-ssl-for-an-application-in-azure"></a>Azure'daki uygulama için SSL'yi yapılandırma
+# <a name="configuring-ssl-for-an-application-in-azure"></a>Azure 'da bir uygulama için SSL 'yi yapılandırma
 
 Güvenli Yuva Katmanı (SSL) şifrelemesi, İnternet üzerinden gönderilen verilerin güvenliğini sağlamak için en yaygın kullanılan yöntemdir. Bu yaygın görev bir web rolü için HTTPS uç noktasının nasıl belirtileceğini ve uygulamanızın güvenliğini sağlamak için SSL sertifikasının nasıl yükleneceğini ele alır.
 
 > [!NOTE]
-> Yordamlar bu görevi, Azure bulut Hizmetleri için uygulanır. Uygulama hizmetleri için bkz: [bu](../app-service/app-service-web-tutorial-custom-ssl.md).
+> Bu görevdeki yordamlar Azure Cloud Services için geçerlidir; Uygulama Hizmetleri için [bkz..](../app-service/configure-ssl-bindings.md)
 >
 
-Bu görev, bir üretim dağıtımı kullanır. Bu konunun sonunda hazırlama dağıtımı hakkında bilgi sağlanır.
+Bu görev bir üretim dağıtımı kullanır. Hazırlama dağıtımı kullanmayla ilgili bilgiler bu konunun sonunda verilmiştir.
 
-Okuma [bu](cloud-services-how-to-create-deploy-portal.md) bir bulut hizmeti henüz oluşturmadıysanız, ilk.
+Henüz bir bulut hizmeti oluşturmadıysanız [bunu](cloud-services-how-to-create-deploy-portal.md) okuyun.
 
-## <a name="step-1-get-an-ssl-certificate"></a>1\. adım: Bir SSL sertifikası alma
-Bir uygulama için SSL'yi yapılandırmak için ilk olarak bir sertifika yetkilisi (CA) sertifika bu amaç için sorunları güvenilen bir üçüncü taraf imzalanmış bir SSL sertifikası almanız gerekir. Zaten bir yoksa, bir SSL sertifikaları satan bir şirketten edinmeniz gerekir.
+## <a name="step-1-get-an-ssl-certificate"></a>1\. Adım: SSL sertifikası edinme
+Bir uygulamanın SSL 'yi yapılandırmak için, önce bu amaçla sertifika veren güvenilir bir üçüncü taraf olan bir sertifika yetkilisi (CA) tarafından imzalanmış bir SSL sertifikası almanız gerekir. Henüz bir tane yoksa, SSL sertifikaları satan bir şirketten bir tane edinmeniz gerekir.
 
-Sertifika, azure'da SSL sertifikaları için aşağıdaki gereksinimleri karşılaması gerekir:
+Sertifikanın, Azure 'daki SSL sertifikaları için aşağıdaki gereksinimleri karşılaması gerekir:
 
-* Sertifika özel anahtar içermelidir.
-* Sertifikanın bir kişisel bilgi değişimi (.pfx) dosyasına aktarılabilen anahtar değişimi için oluşturulmuş olması gerekir.
-* Sertifikanın konu adı, bulut hizmetine erişmek için kullanılan etki alanı eşleşmesi gerekir. Cloudapp.net etki alanı için bir sertifika yetkilisinden (CA) bir SSL sertifikası alınamıyor. Kullanılacak özel etki alanı adı edinmeniz gerekir hizmetinize erişim. Sertifikanın konu adı, bir CA'dan bir sertifika talep ettiğinizde, uygulamanıza erişmek için kullanılan özel etki alanı adı eşleşmelidir. Örneğin, özel etki alanı adınızı ise **contoso.com** Sertifika yetkilinizden için bir sertifika isteği * **. contoso.com** veya **www\.contoso.com**.
-* Sertifikanın en az 2048 bit şifreleme kullanmanız gerekir.
+* Sertifika bir özel anahtar içermelidir.
+* Sertifika, anahtar değişimi için, kişisel bilgi değişimi (. pfx) dosyasına verilebilir şekilde oluşturulmalıdır.
+* Sertifikanın konu adı, bulut hizmetine erişmek için kullanılan etki alanı ile aynı olmalıdır. Cloudapp.net etki alanı için bir sertifika yetkilisinden (CA) bir SSL sertifikası edinemezsiniz. Hizmetinize erişirken kullanmak için özel bir etki alanı adı almanız gerekir. CA 'dan bir sertifika istediğinizde, sertifikanın konu adı, uygulamanıza erişmek için kullanılan özel etki alanı adıyla aynı olmalıdır. Örneğin, özel etki alanı adınız **contoso.com** ise, " **. contoso.com** veya **www\.contoso.com**için CA 'nızdan bir sertifika istemeniz gerekir.
+* Sertifika en az 2048 bit şifreleme kullanmalıdır.
 
-Test amaçları için yapabilecekleriniz [oluşturma](cloud-services-certs-create.md) ve otomatik olarak imzalanan bir sertifika kullanın. Kendinden imzalı bir sertifika bir CA ile kimlik doğrulaması yapılamıyor ve cloudapp.net etki alanı Web sitesi URL'si olarak kullanabilirsiniz. Örneğin, aşağıdaki görev sertifikada kullanılan ortak ad (CN) olan otomatik olarak imzalanan bir sertifika kullanır **sslexample.cloudapp.net**.
+Test amaçları için otomatik olarak imzalanan bir sertifika [oluşturup](cloud-services-certs-create.md) kullanabilirsiniz. Otomatik olarak imzalanan bir sertifika, CA aracılığıyla kimlik doğrulaması içermez ve cloudapp.net etki alanını Web sitesi URL 'SI olarak kullanabilir. Örneğin, aşağıdaki görev, sertifikada kullanılan ortak adın (CN) **sslexample.cloudapp.net**olduğu kendinden imzalı bir sertifika kullanır.
 
-Ardından, hizmet tanımı ve hizmet yapılandırma dosyalarını sertifikayla ilgili bilgileri içermelidir.
+Daha sonra, hizmet tanımınızda sertifika ile ilgili bilgileri ve hizmet yapılandırma dosyalarını dahil etmeniz gerekir.
 
-<a name="modify"></a>
+<a name="modify"> </a>
 
-## <a name="step-2-modify-the-service-definition-and-configuration-files"></a>2\. adım: Hizmet tanım ve yapılandırma dosyalarını değiştirme
-Uygulamanız sertifika kullanacak şekilde yapılandırılması gerekir ve bir HTTPS uç noktası eklenmelidir. Sonuç olarak, güncelleştirilecek hizmet yapılandırma dosyalarını ve hizmet tanımı gerekir.
+## <a name="step-2-modify-the-service-definition-and-configuration-files"></a>2\. Adım: hizmet tanımını ve yapılandırma dosyalarını değiştirme
+Uygulamanızın sertifikayı kullanacak şekilde yapılandırılması ve bir HTTPS uç noktasının eklenmesi gerekir. Sonuç olarak, hizmet tanımı ve hizmet yapılandırma dosyalarının güncellenmesi gerekir.
 
-1. Geliştirme ortamınızda Hizmet tanım dosyası (CSDEF) açın, ekleme bir **sertifikaları** içinde bölümünde **WebRole** bölümünde ve sertifikası hakkında aşağıdaki bilgileri ekleyin (ve Ara sertifikalar için):
+1. Geliştirme ortamınızda, hizmet tanım dosyası (CSDEF) ' nı açın, **WebRole** bölümü Içinde bir **Sertifikalar** bölümü ekleyin ve sertifika (ve ara sertifikalar) hakkında aşağıdaki bilgileri ekleyin:
 
    ```xml
     <WebRole name="CertificateTesting" vmsize="Small">
@@ -78,16 +72,16 @@ Uygulamanız sertifika kullanacak şekilde yapılandırılması gerekir ve bir H
     </WebRole>
     ```
 
-   **Sertifikaları** bölümü, sertifika, konumunu ve bunu bulunduğu depo adını adını tanımlar.
+   **Sertifikalar** bölümü, sertifikamızın adını, konumunu ve bulunduğu deponun adını tanımlar.
 
-   İzinler (`permissionLevel` özniteliği) aşağıdaki değerlerden birine ayarlayın:
+   İzinler (`permissionLevel` özniteliği) aşağıdaki değerlerden birine ayarlanabilir:
 
    | İzin değeri | Açıklama |
    | --- | --- |
-   | limitedOrElevated |**(Varsayılan)**  Tüm rol işlemler özel anahtara erişebilir. |
-   | yükseltilmiş |Yalnızca yükseltilmiş işlemleri özel anahtara erişebilir. |
+   | Limitedoretavated |**(Varsayılan)** Tüm rol işlemlerinde özel anahtara erişim sağlayabilirsiniz. |
+   | kaynağa |Yalnızca yükseltilmiş süreçler özel anahtara erişebilir. |
 
-2. Hizmet tanımı dosyasında ekleme bir **Inputendpoint** öğesiyle **uç noktaları** bölüm HTTPS'yi etkinleştirmek için:
+2. Hizmet tanımı dosyanızda, HTTPS 'yi etkinleştirmek için **uç noktalar** bölümüne bir **ınputendpoint** öğesi ekleyin:
 
    ```xml
     <WebRole name="CertificateTesting" vmsize="Small">
@@ -100,7 +94,7 @@ Uygulamanız sertifika kullanacak şekilde yapılandırılması gerekir ve bir H
     </WebRole>
     ```
 
-3. Hizmet tanımı dosyasında ekleme bir **bağlama** öğesiyle **siteleri** bölümü. Bu öğe, sitenize uç noktaya eşlemek için bir HTTPS bağlamasına ekler:
+3. Hizmet tanımı dosyanızda, **siteler** bölümünün Içine bir **bağlama** öğesi ekleyin. Bu öğe, uç noktasını sitenize eşlemek için bir HTTPS bağlaması ekler:
 
    ```xml
     <WebRole name="CertificateTesting" vmsize="Small">
@@ -116,8 +110,8 @@ Uygulamanız sertifika kullanacak şekilde yapılandırılması gerekir ve bir H
     </WebRole>
     ```
 
-   Hizmet tanım dosyası için gerekli tüm değişiklikleri tamamladınız; Ancak, yine sertifika bilgileri service yapılandırma dosyasına eklemeniz gerekir.
-4. Hizmet yapılandırma dosyasında (CSCFG) ServiceConfiguration.Cloud.cscfg, ekleme bir **sertifikaları** sertifikanızın, ile değeri. Aşağıdaki kod örneği ayrıntılarını sunan **sertifikaları** parmak izi değeri dışında bir bölüm.
+   Hizmet tanımı dosyasında gerekli tüm değişiklikler tamamlandı; Ancak, yine de sertifika bilgilerini hizmet yapılandırma dosyasına eklemeniz gerekir.
+4. Hizmet yapılandırma dosyanızda (CSCFG), ServiceConfiguration. Cloud. CSCFG ' de, sertifikanıza sahip bir **sertifika** değeri ekleyin. Aşağıdaki kod örneği, parmak izi değeri dışında **Sertifikalar** bölümünün ayrıntılarını sağlar.
 
    ```xml
     <Role name="Deployment">
@@ -134,51 +128,51 @@ Uygulamanız sertifika kullanacak şekilde yapılandırılması gerekir ve bir H
     </Role>
     ```
 
-(Bu örnekte **sha1** parmak izi algoritması için. Sertifikanızın parmak izi algoritması için uygun değeri belirtin.)
+(Bu örnek, parmak izi algoritması için **SHA1** kullanır. Sertifikanızın parmak izi algoritmanız için uygun değeri belirtin.)
 
-Hizmet yapılandırma dosyalarını ve hizmet tanımı güncelleştirildi, dağıtımınızı Azure'a yükleme paketi. Kullanıyorsanız **cspack**, kullanmayın **/generateConfigurationFile** , yeni eklediğiniz sertifika bilgileri üzerine yazılacağından, bayrak.
+Artık hizmet tanımı ve hizmet yapılandırma dosyaları güncelleştirildiğinden, dağıtımınızı Azure 'a yüklemek için paketleyin. **Cspack**kullanıyorsanız, az önce eklediğiniz sertifika bilgilerinin üzerine yazılacak şekilde **/Generateconfigurationfile** bayrağını kullanmayın.
 
-## <a name="step-3-upload-a-certificate"></a>3\. adım: Sertifikayı karşıya yükleyin
-Azure Portalı'na bağlanmak ve...
+## <a name="step-3-upload-a-certificate"></a>3\. Adım: bir sertifikayı karşıya yükleme
+Azure portal Bağlan ve...
 
-1. İçinde **tüm kaynakları** bölüm portalın bulut hizmetinizi seçin.
+1. Portalın **tüm kaynaklar** bölümünde bulut hizmetinizi seçin.
 
     ![Bulut hizmetinizi yayımlayın](media/cloud-services-configure-ssl-certificate-portal/browse.png)
 
-2. Tıklayın **sertifikaları**.
+2. **Sertifikalar**' a tıklayın.
 
-    ![Sertifikaları simgesine tıklayın](media/cloud-services-configure-ssl-certificate-portal/certificate-item.png)
+    ![Sertifikalar simgesine tıklayın](media/cloud-services-configure-ssl-certificate-portal/certificate-item.png)
 
-3. Tıklayın **karşıya** sertifikaları alanının üstünde.
+3. Sertifikalar alanının en üstünde **karşıya yükle** ' ye tıklayın.
 
-    ![Karşıya yükleme menü öğesini tıklatın](media/cloud-services-configure-ssl-certificate-portal/Upload_menu.png)
+    ![Karşıya Yükle menü öğesine tıklayın](media/cloud-services-configure-ssl-certificate-portal/Upload_menu.png)
 
-4. Sağlamak **dosya**, **parola**, ardından **karşıya** veri giriş alanı alt kısmındaki.
+4. **Dosyayı**, **parolayı**girin ve ardından veri girişi alanının altındaki **karşıya yükle** ' ye tıklayın.
 
-## <a name="step-4-connect-to-the-role-instance-by-using-https"></a>4\. Adım: HTTPS kullanarak rol örneğine bağlanın
-Dağıtımınızı Azure'da hazır ve çalışır durumda, HTTPS üzerinden ona bağlanabilirsiniz.
+## <a name="step-4-connect-to-the-role-instance-by-using-https"></a>4\. Adım: rol örneğine HTTPS kullanarak bağlanma
+Artık dağıtımınız Azure 'da çalışır durumda olduğundan, HTTPS kullanarak buna bağlanabilirsiniz.
 
-1. Tıklayın **Site URL'si** web tarayıcısını açın.
+1. Web tarayıcısını açmak için **site URL 'sine** tıklayın.
 
-   ![Site URL'si tıklayın](media/cloud-services-configure-ssl-certificate-portal/navigate.png)
+   ![Site URL 'sine tıklayın](media/cloud-services-configure-ssl-certificate-portal/navigate.png)
 
-2. Web tarayıcınızda kullanmak üzere bağlantıyı değiştirin **https** yerine **http**ve ardından sayfasını ziyaret edin.
+2. Web tarayıcınızda, bağlantıyı **http**yerine **https** kullanacak şekilde değiştirin ve ardından sayfayı ziyaret edin.
 
    > [!NOTE]
-   > Otomatik olarak imzalanan sertifikayla ilişkili bir HTTPS uç noktasına göz atarken otomatik olarak imzalanan bir sertifika kullanıyorsanız, bir sertifika hatası tarayıcıda görebilirsiniz. Bir güvenilen sertifika yetkilisi tarafından imzalanmış bir sertifika kullanarak bu sorunu ortadan kaldırır; Bu arada, hatayı yoksayabilirsiniz. (Otomatik olarak imzalanan sertifikayı kullanıcının güvenilen sertifika yetkilisi sertifika deposuna eklemek için başka bir seçenek içindir.)
+   > Kendinden imzalı bir sertifika kullanıyorsanız, otomatik olarak imzalanan sertifikayla ilişkili bir HTTPS uç noktasına gözattığınızda tarayıcıda bir sertifika hatası görebilirsiniz. Güvenilen bir sertifika yetkilisi tarafından imzalanan bir sertifika kullanmak bu sorunu ortadan kaldırır; Bu sırada, hatayı yoksayabilirsiniz. (Diğer bir seçenek de kullanıcının güvenilen sertifika yetkilisi sertifika deposuna otomatik olarak imzalanan sertifikayı eklemektir.)
    >
    >
 
-   ![Site Önizleme](media/cloud-services-configure-ssl-certificate-portal/show-site.png)
+   ![Site önizlemesi](media/cloud-services-configure-ssl-certificate-portal/show-site.png)
 
    > [!TIP]
-   > Hazırlama dağıtımı yerine Üretim dağıtımı için SSL kullanmak istiyorsanız, önce hazırlama dağıtımı için kullanılan URL belirlemek gerekir. Bulut hizmetinizin dağıtıldıktan sonra hazırlık ortamına URL tarafından belirlenir **dağıtım kimliği** GUID şu biçimde: `https://deployment-id.cloudapp.net/`  
+   > Bir üretim dağıtımı yerine bir hazırlama dağıtımı için SSL kullanmak istiyorsanız, önce hazırlama dağıtımı için kullanılan URL 'YI belirlemeniz gerekir. Bulut hizmetiniz dağıtıldıktan sonra, hazırlama ortamının URL 'SI **DAĞıTıM kimliği** GUID 'si tarafından şu biçimde belirlenir: `https://deployment-id.cloudapp.net/`  
    >
-   > Ortak ad (CN) GUID tabanlı URL eşit bir sertifika oluşturun (örneğin, **328187776e774ceda8fc57609d404462.cloudapp.net**). Portal, sertifikayı, hazırlanmış bir bulut hizmetine eklemek için kullanın. Ardından, sertifika bilgileri CSDEF ve CSCFG dosyalarınıza eklemek, uygulamanızı yeniden paketleyin ve yeni paketi kullanmak için hazırlanan dağıtımınızı güncelleştirin.
+   > GUID tabanlı URL 'ye (örneğin, **328187776e774ceda8fc57609d404462.cloudapp.net**) eşit ortak ada (CN) sahip bir sertifika oluşturun. Sertifikayı hazırlanan bulut hizmetinize eklemek için portalını kullanın. Daha sonra, CSDEF ve CSCFG dosyalarınıza sertifika bilgilerini ekleyin, uygulamanızı yeniden paketleyin ve hazırlanan dağıtımınızı yeni paketi kullanacak şekilde güncelleştirin.
    >
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Bulut hizmetinizin genel yapılandırma](cloud-services-how-to-configure-portal.md).
-* Bilgi edinmek için nasıl [bir bulut hizmeti dağıtma](cloud-services-how-to-create-deploy-portal.md).
-* Yapılandırma bir [özel etki alanı adı](cloud-services-custom-domain-name-portal.md).
-* [Bulut hizmetinizi yönetme](cloud-services-how-to-manage-portal.md).
+* [Bulut hizmetinizin genel yapılandırması](cloud-services-how-to-configure-portal.md).
+* [Bulut hizmetini dağıtmayı](cloud-services-how-to-create-deploy-portal.md)öğrenin.
+* Özel bir [etki alanı adı](cloud-services-custom-domain-name-portal.md)yapılandırın.
+* [Bulut hizmetinizi yönetin](cloud-services-how-to-manage-portal.md).

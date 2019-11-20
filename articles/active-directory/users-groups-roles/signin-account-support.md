@@ -1,39 +1,39 @@
 ---
-title: Bir Azure AD oturum açma sayfası Microsoft hesapları kabul ediyorsa bilmek nasıl | Microsoft Docs
-description: Nasıl ekran Mesajlaşma yansıtır kullanıcı adı arama oturum açma sırasında
+title: Azure AD oturum açma sayfam Microsoft hesaplarını kabul ediyor | Microsoft Docs
+description: Ekran mesajlaşması, oturum açma sırasında Kullanıcı adı aramasını yansıtır
 services: active-directory
 author: curtand
-manager: mtillman
+manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: users-groups-roles
 ms.topic: article
-ms.date: 04/10/2019
+ms.date: 11/08/2019
 ms.author: curtand
 ms.reviewer: kexia
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2d26ff0f9259e3531259673f94fe477444cc786b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 221ab7c50a84650f1b2adf3fdb2b284365795f42
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60468216"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74024277"
 ---
-# <a name="sign-in-options-for-microsoft-accounts-in-azure-active-directory"></a>Azure Active Directory'de Microsoft hesapları için oturum açma seçenekleri
+# <a name="sign-in-options-for-microsoft-accounts-in-azure-active-directory"></a>Azure Active Directory 'de Microsoft hesapları için oturum açma seçenekleri
 
-İş veya Okul hesapları ve Microsoft hesapları Azure Active Directory (Azure AD) için Microsoft 365 oturum açma sayfası destekler, ancak kullanıcının durumuna bağlı olarak bir ya da diğer veya her ikisi de olabilir. Örneğin, Azure AD oturum açma sayfasının destekler:
+Azure Active Directory (Azure AD) için Microsoft 365 oturum açma sayfası iş veya okul hesaplarını ve Microsoft hesaplarını destekler, ancak kullanıcının durumuna bağlı olarak bir veya iki ya da her ikisi birden olabilir. Örneğin, Azure AD oturum açma sayfası şunları destekler:
 
-* Oturum açma hesabı her iki tür kabul uygulamalar
-* Konuklar kabul kuruluşlar
+* Her iki hesap türünden oturum açma işlemlerini kabul eden uygulamalar
+* Konukları kabul eden kuruluşlar
 
-## <a name="identification"></a>Tanımlama
-Kuruluşunuzda kullanılan oturum açma sayfasında kullanıcı adı alanındaki ipucu metnini bakarak Microsoft hesapları destekleyip desteklemediğini söyleyebilirsiniz. İpucu metni, "E-posta, telefon veya Skype" derse, oturum açma sayfası Microsoft hesaplarını destekler.
+## <a name="identification"></a>İsi
+Kuruluşunuzun kullandığı oturum açma sayfasının, Kullanıcı adı alanındaki ipucu metnine bakarak Microsoft hesaplarını destekleyip desteklemediğini söyleyebilirsiniz. İpucu metni "e-posta, telefon veya Skype" diyor ise, oturum açma sayfası Microsoft hesaplarını destekler.
 
-![Hesap oturum açma sayfalarını arasındaki fark](./media/signin-account-support/ui-prompt.png)
+![Hesap oturum açma sayfaları arasındaki fark](./media/signin-account-support/ui-prompt.png)
 
-[İş yalnızca kişisel Microsoft hesapları için ek oturum açma seçenekleri](https://azure.microsoft.com/updates/microsoft-account-signin-options/ ) ancak oturum açmak için iş veya Okul hesabı kaynaklarına için kullanılamaz.
+[Ek oturum açma seçenekleri yalnızca kişisel Microsoft hesaplarında çalışır](https://azure.microsoft.com/updates/microsoft-account-signin-options/ ) , ancak iş veya okul hesabı kaynaklarında oturum açmak için kullanılamaz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Oturum açma markalamayı özelleştirme](../fundamentals/add-custom-domain.md)
+[Oturum açma markanızı özelleştirin](../fundamentals/add-custom-domain.md)

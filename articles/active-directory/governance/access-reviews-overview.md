@@ -1,10 +1,10 @@
 ---
 title: Erişim gözden geçirmeleri nedir? -Azure Active Directory | Microsoft Docs
-description: Azure Active Directory erişim gözden geçirmelerini kullanarak, yönetim, risk yönetimi ve kuruluşunuzdaki uyumluluk girişimlerini karşılamak için Grup üyeliği ve uygulama erişimini denetleyebilirsiniz.
+description: Azure Active Directory erişim gözden geçirmeleri kullanarak, kuruluşunuzdaki idare, risk yönetimi ve uyumluluk girişimlerini karşılamak için Grup üyeliği ve uygulama erişimini denetleyebilirsiniz.
 services: active-directory
 documentationcenter: ''
-author: rolyon
-manager: mtillman
+author: msaburnley
+manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
@@ -12,84 +12,82 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: compliance
-ms.date: 06/05/2019
-ms.author: rolyon
+ms.date: 08/05/2019
+ms.author: ajburnle
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7fcc804db66430598e72e9ebf31a8837eda1cca6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 65def17622f026aa4869a4c60e7cb5146d56c5b0
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67204601"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72389536"
 ---
-# <a name="what-are-azure-ad-access-reviews"></a>Nelerdir Azure AD erişim gözden geçirmeleri?
+# <a name="what-are-azure-ad-access-reviews"></a>Azure AD erişim gözden geçirmesi nedir?
 
-Azure Active Directory (Azure AD) erişim gözden geçirmeleri, kuruluşların grup üyeliğini yönetme, erişim kurumsal uygulamalar ve rol atamalarını verimli bir şekilde olanak sağlar. Kullanıcının erişimini yalnızca doğru kişilere erişim devam emin olmak için düzenli olarak gözden geçirilebilir.
+Azure Active Directory (Azure AD) erişim gözden geçirmeleri, kuruluşların grup üyeliklerini verimli bir şekilde yönetmesine, kurumsal uygulamalara erişime ve rol atamalarına olanak tanır. Kullanıcının erişimi, yalnızca doğru kişilerin erişmeye devam ettiğinden emin olmak için düzenli olarak incelenebilir.
 
-Erişim gözden geçirmeleri hızlı bir genel bakış sağlayan bir video şu şekildedir:
+Erişim incelemelerine hızlı bir genel bakış sağlayan bir video aşağıda verilmiştir:
 
 >[!VIDEO https://www.youtube.com/embed/kDRjQQ22Wkk]
 
-## <a name="why-are-access-reviews-important"></a>Erişimi neden önemli incelemeleri?
+## <a name="why-are-access-reviews-important"></a>Erişim gözden geçirmeleri neden önemlidir?
 
-Azure AD, dahili olarak, kuruluşunuz içinde ve iş ortakları gibi dış kuruluşlardan kullanıcılarla işbirliği sağlar. Kullanıcıları gruplara katılmak, konuklar davet, bulut uygulamalarına bağlanın ve kendi iş veya kişisel cihazlardan uzaktan çalışın. Self Servis gücünden yararlanan kolaylık daha iyi erişim yönetimi özellikleri gereksinimini açmıştır.
+Azure AD, kuruluşunuzun içinde ve iş ortakları gibi harici kuruluşlardaki kullanıcılarla işbirliği yapmanızı sağlar. Kullanıcılar gruplara katılabilir, konukları davet edebilir, bulut uygulamalarına bağlanabilir ve kendi iş veya kişisel cihazlarından uzaktan çalışabilir. Self Servis 'nin gücünden yararlanma kolaylığı, daha iyi erişim yönetimi özelliklerine ihtiyaç duymasına yol açmıştır.
 
-- Nasıl yeni çalışanlar katılma gibi üretken olmak için doğru erişime sahip oldukları emin olabilirim?
-- Nasıl kişiler, takımlar taşıyın veya şirketten gibi özellikle Konukları gerektirdiğinde, eski erişim kaldırıldı emin olabilirim?
-- Aşırı erişim hakları geldikleri erişim üzerinde denetim olmaması gibi denetim bulgularını ve güvenlik ihlalleri neden olabilir.
-- Kaynak sahiplerine kaynaklarına kimlerin erişebileceğini, düzenli olarak gözden emin olmak için proaktif olarak etkileşim kurmak zorunda.
+- Yeni çalışanlar katılırsanız, doğru erişimi sağlamak için bunların üretken olmasını nasıl sağlayabilirsiniz?
+- İnsanlar takımları taşıdıkça veya şirketten ayrıldığında, özellikle de konukları içeriyorsa eski erişiminin kaldırılmasına nasıl emin olabilirsiniz?
+- Aşırı erişim hakları, erişim üzerinde denetim olmaması durumunda bulmalar ve bulguları denetlemeye yol açabilir.
+- Kaynaklarına kimlerin erişimi olduğunu düzenli olarak gözden geçirdiklerinden emin olmak için kaynak sahipleriyle önceden önlem almanız gerekir.
 
-## <a name="when-to-use-access-reviews"></a>Ne zaman kullanılır erişim gözden geçirmeleri?
+## <a name="when-to-use-access-reviews"></a>Erişim gözden geçirmeleri ne zaman kullanılır?
 
-- **Çok sayıda kullanıcı ayrıcalıklı roller:** Kaç kullanıcının yönetici erişimi denetlemek için iyi bir fikirdir, kaç bunları genel Yöneticiler, konuklar veya bir yönetim görevi gerçekleştirmek için atandıktan sonra kaldırılmamış iş ortakları ve olmadığını davet. Rol ataması kullanıcılar onaylayabilirsiniz [Azure AD rolleri](../privileged-identity-management/pim-how-to-perform-security-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) gibi genel Yöneticiler veya [Azure kaynak rolleri](../privileged-identity-management/pim-resource-roles-perform-access-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) gibi kullanıcı erişimi Yöneticisi'nde [Azure AD Privileged Identity Management (PIM)](../privileged-identity-management/pim-configure.md) karşılaşırsınız.
-- **Ne zaman Otomasyon olanaksız olacaktır:** Güvenlik grupları veya Office 365 gruplarında dinamik üyelik ancak ne ik veri Azure AD'de değil veya kullanıcılar yine de erişim grubu kendi değiştirme eğitmek için bırakarak sonra ihtiyacınız varsa için kurallar oluşturabilir miyim? Yine de erişmesi gereken kişiler erişimi devam etmesi gerekip emin olmak için bu Grup İnceleme oluşturabilirsiniz.
-- **Bir gruba yeni bir amaç için kullanıldığında:** Azure AD ile eşitlenmesi için gittiği bir grubunuz varsa ya da satış ekibi gruptaki herkes için Salesforce uygulama etkinleştirmeyi planlıyorsanız, önce bir farklı risk ortak kullanılan grubun grup üyeliğini gözden geçirmek için Grup sahibi istemek yararlı olacaktır içeriği.
-- **İş kritik veri erişimi:** belirli kaynaklar için onu dışında istemem için gerekli olabilecek düzenli olarak oturumunu kapatmak ve neden erişim denetim amacıyla için ihtiyaç duydukları üzerinde bir gerekçe vermek mümkün KILAR.
-- **Bir ilkenin özel durum listesi tutmak için:** İdeal bir dünyada, tüm kullanıcılar, kuruluşunuzun kaynaklarına erişimi güvenli hale getirmek için erişim ilkeleri izlemeniz gerekir. Ancak, bazı durumlarda özel durumları yapmanızı gerektiren iş durumlar vardır. BT yöneticisi olarak, bu görevi yönetmek, İlkesi özel durumları sözleşmeli önlemek ve bu özel durumlar düzenli olarak gözden kavram ile denetçiler sağlayın.
-- **Grup sahipleri kendi gruplarındaki Konukları çağrılmasına halen ihtiyaçları onaylamanız istenir:** Çalışan erişimi, şirket içi IAM, konuklar davet edilen değil ancak bazı otomatik. Bir grubu Konukları iş hassas içerik ve ardından onun Konukları onaylamak için Grup sahibinin sorumluluk çözümlenmedi erişim için bir işletme ihtiyaçlarına erişmenizi durumunda.
-- **Düzenli aralıklarla yinelenen incelemeleri vardır:** Kümesi frekansları kullanıcıların erişim gözden geçirmeleri yinelenen gibi haftalık, aylık, üç aylık veya yıllık olarak ayarlayabilirsiniz ve gözden geçirenler her İnceleme başlangıcında bildirilir. Gözden geçirenler onaylayabilir veya Yardımı akıllı öneriler ve kullanıcı dostu bir arabirim ile erişimi engelle.
+- **Ayrıcalıklı rollerde çok fazla sayıda Kullanıcı:** Kaç kullanıcının yönetim erişimi olduğunu, bunların kaç tane genel yönetici olduğunu ve bir yönetim görevi için atandıktan sonra kaldırılmayan davet konukları veya iş ortakları olduğunu kontrol etmek iyi bir fikirdir. Genel Yöneticiler gibi [Azure AD rollerinde](../privileged-identity-management/pim-how-to-perform-security-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) rol atama kullanıcılarını veya [Azure AD Privileged Identity Management (PIM)](../privileged-identity-management/pim-configure.md) deneyiminde Kullanıcı erişimi Yöneticisi gibi [Azure kaynakları rollerini](../privileged-identity-management/pim-resource-roles-perform-access-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) yeniden ayarlayabilirsiniz.
+- **Otomasyon uygulanabilir olmadığında:** Güvenlik gruplarında veya Office 365 gruplarında dinamik üyelik için kurallar oluşturabilirsiniz, ancak HR verileri Azure AD 'de değilse veya kullanıcıların değiştirme işlerini eğitmek üzere gruptan ayrıldıktan sonra hala erişime ihtiyacı varsa ne olur? Daha sonra, hala erişime ihtiyacı olan kişilerin erişmeye devam ettiğinden emin olmak için bu grupta bir gözden geçirme oluşturabilirsiniz.
+- **Yeni bir amaç için bir grup kullanıldığında:** Azure AD ile eşitlenecek bir grubunuz varsa veya satış ekibi grubundaki herkes için uygulama Salesforce 'ı etkinleştirmeyi planlıyorsanız, Grup sahibinden farklı bir risk Co 'da kullanılan gruptan önce grup üyeliğini gözden geçirmesini istemek yararlı olacaktır. Erik.
+- **İş açısından kritik veri erişimi:** belirli kaynaklar IÇIN, BT dışındaki kişilerin düzenli olarak oturumu açmasını ve denetim amacıyla erişmesi gereken nedenleri hakkında bir gerekçe vermesini istemek gerekebilir.
+- **Bir ilkenin özel durum listesini korumak için:** İdeal bir dünyada, tüm kullanıcılar kuruluşunuzun kaynaklarına erişimi güvenli hale getirmek için erişim ilkelerini takip edecektir. Ancak bazen özel durumlar oluşturmanız gereken iş durumları vardır. BT Yöneticisi olarak, bu görevi yönetebilir, ilke özel durumlarının fazla ilerlemesinin önüne kaçabilir ve bu özel durumların düzenli olarak inceleneceğini prova ile Denetçiler sağlayabilirsiniz.
+- **Grup sahiplerini, gruplarında hala Konuk olmaları gerektiğini onaylamasını isteyin:** Çalışan erişimi, bazı şirket içi ıAM ile otomatikleştirilebilir, ancak davet konukları konuklarıyla otomatik olabilir. Bir grup, iş açısından gizli içeriğe Konuklar erişimi veriyorsa, konukların hala erişim için meşru bir iş ihtiyacı olduğunu onaylamak için Grup sahibinin sorumluluğundadır.
+- **Gözden geçirmeler düzenli aralıklarla Yinele:** Kullanıcılara haftalık, aylık, üç aylık veya yıllık olarak ayarlanan sıklıklara yönelik yinelenen erişim İncelemeleri ayarlayabilirsiniz ve her İnceleme başlangıcında gözden geçirenler bilgilendirilir. Gözden geçirenler kolay bir arabirimle ve akıllı önerilerin yardımıyla erişimi onaylayabilir veya reddedebilir.
 
-## <a name="where-do-you-create-reviews"></a>Gözden geçirmeler oluşturduğunuz?
+## <a name="where-do-you-create-reviews"></a>İncelemeleri nerede oluşturursunuz?
 
-Gözden geçirme istediğinize bağlı olarak, erişim gözden geçirme oluşturacak Azure AD'de incelemeleri, Azure AD Kurumsal uygulamaları (önizlemede) veya Azure AD PIM erişimi.
+Gözden geçirmek istediğinize bağlı olarak, Azure AD erişim gözden geçirmeleriyle, Azure AD kurumsal uygulamalarında (önizlemede) veya Azure AD PıM 'de erişim incelemenizi oluşturacaksınız.
 
-| Kullanıcı erişim hakları | Gözden geçirenler olabilir | Oluşturulan gözden geçirme | Gözden Geçiren deneyimi |
+| Kullanıcıların erişim hakları | Gözden geçirenler şu şekilde olabilir | İnceleme oluşturma tarihi | Gözden geçiren deneyim |
 | --- | --- | --- | --- |
-| Güvenlik grubu üyeleri</br>Office grubu üyeleri | Belirtilen gözden geçirenler</br>Grup sahipleri</br>Kendi kendini gözden geçirin | Azure AD erişim gözden geçirmeleri</br>Azure AD grupları | Erişim paneli |
-| Bağlı bir uygulamaya atanan | Belirtilen gözden geçirenler</br>Kendi kendini gözden geçirin | Azure AD erişim gözden geçirmeleri</br>Azure AD Kurumsal uygulamaları (önizlemede) | Erişim paneli |
-| Azure AD rolü | Belirtilen gözden geçirenler</br>Kendi kendini gözden geçirin | [Azure AD PIM](../privileged-identity-management/pim-how-to-start-security-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) | Azure portal |
-| Azure Kaynak rolü | Belirtilen gözden geçirenler</br>Kendi kendini gözden geçirin | [Azure AD PIM](../privileged-identity-management/pim-resource-roles-start-access-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) | Azure portal |
+| Güvenlik grubu üyeleri</br>Office grubu üyeleri | Belirtilen gözden geçirenler</br>Grup sahipleri</br>Kendi kendini gözden geçirme | Azure AD erişim gözden geçirmeleri</br>Azure AD grupları | Erişim paneli |
+| Bağlı bir uygulamaya atandı | Belirtilen gözden geçirenler</br>Kendi kendini gözden geçirme | Azure AD erişim gözden geçirmeleri</br>Azure AD kurumsal uygulamaları (önizlemede) | Erişim paneli |
+| Azure AD rolü | Belirtilen gözden geçirenler</br>Kendi kendini gözden geçirme | [Azure AD PıM](../privileged-identity-management/pim-how-to-start-security-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) | Azure portalı |
+| Azure Kaynak rolü | Belirtilen gözden geçirenler</br>Kendi kendini gözden geçirme | [Azure AD PıM](../privileged-identity-management/pim-resource-roles-start-access-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json) | Azure portalı |
 
-## <a name="which-users-must-have-licenses"></a>Hangi kullanıcıların lisansına sahip olması gerekir?
 
-Erişim gözden geçirmeleri ile etkileşime giren her kullanıcının Ücretli bir Azure AD Premium P2 Lisansı olmalıdır. Örneklere şunlar dahildir:
+## <a name="onboard-access-reviews"></a>Erişim gözden geçirmeleri ekleme
 
-- Erişim gözden geçirmesi Oluştur yöneticileri
-- Bir erişim gerçekleştiren Grup sahiplerinin gözden geçirin
-- Gözden geçirenler olarak atanan kullanıcılar
-- Kendi kendini gözden gerçekleştiren kullanıcı
+Erişim gözden geçirmeleri eklemek için aşağıdaki adımları izleyin.
 
-Ayrıca kendi erişimini gözden geçirmek için konuk kullanıcıları sorabilir. Kendi kuruluşunuzun kullanıcılardan birinin atadığınız her Ücretli Azure AD Premium P2 lisansı için dış kullanıcı indirimi altında en fazla beş Konuk kullanıcıları davet etmek için Azure AD--işletmeler arası (B2B) kullanabilirsiniz. Bu konuk kullanıcılara Azure AD Premium P2 özellikleri de kullanabilirsiniz. Daha fazla bilgi için [Azure AD B2B işbirliği lisanslama Kılavuzu](../b2b/licensing-guidance.md).
+1. Genel yönetici veya Kullanıcı Yöneticisi olarak, erişim gözden geçirmeleri kullanmak istediğiniz [Azure Portal](https://portal.azure.com) oturum açın.
 
-Olmalıdır lisans sayısını belirlemenize yardımcı olması için bazı örnek senaryolar aşağıda verilmiştir.
+1. Sol gezinti bölmesinde **Azure Active Directory**' ye tıklayın.
 
-| Senaryo | Hesaplama | Gerekli lisans sayısı |
-| --- | --- | --- |
-| Bir yönetici ile 500 kullanıcıya bir erişim gözden geçirmesi gruba oluşturur.<br/>3 Grup sahiplerinin gözden geçirenler olarak atar. | 1 yönetici + 3 Grup sahipleri | 4 |
-| Bir yönetici ile 500 kullanıcıya bir erişim gözden geçirmesi gruba oluşturur.<br/>Kendi kendini gözden kolaylaştırır. | 1 yönetici + 500 kullanıcıya kendini Gözden Geçiren olarak | 501 |
-| Yönetici 5 kullanıcı ve 25 konuk kullanıcıların erişim gözden geçirmesi gruba oluşturur.<br/>Kendi kendini gözden kolaylaştırır. | 1 yönetici + kendini Gözden Geçiren olarak 5 kullanıcı<br/>(konuk kullanıcılar gerekli 1:5 oranı ele alınmıştır) | 6 |
-| Yönetici, 5 kullanıcı ve 28 konuk kullanıcıların erişim gözden geçirmesi gruba oluşturur.<br/>Kendi kendini gözden kolaylaştırır. | 1 yönetici + 5 kullanıcı kendini Gözden Geçiren olarak + 1 kullanıcı gerekli 1:5 oranı Konuk kullanıcıları kapsayacak şekilde | 7 |
+1. Sol taraftaki menüden **kimlik**Yönetimi ' ne tıklayın.
 
-İçin kullanılan lisansları atama hakkında daha fazla bilgi için bkz: [atamayı veya kaldırmayı lisanslarını kullanarak Azure Active Directory portalında](../fundamentals/license-users-groups.md).
+1. **Erişim İncelemeleri**' ne tıklayın.
+ 
+    ![Erişim İncelemeleri başlangıç sayfası](./media/access-reviews-overview/access-reviews-overview-onboard.png)
 
-## <a name="learn-about-access-reviews"></a>Erişim gözden geçirmeleri hakkında bilgi edinin
+1. Sayfasında, **Şimdi** Ekle düğmesine tıklayın.
+    
+      ![Bulunan erişim İncelemeleri](./media/access-reviews-overview/access-reviews-overview-select-onboard.png)
 
-Oluşturma ve erişim gözden geçirmesi gerçekleştirme hakkında daha fazla bilgi için bu kısa bir tanıtım izleyin:
+
+## <a name="learn-about-access-reviews"></a>Erişim incelemeleri hakkında bilgi edinin
+
+Erişim gözden geçirmeleri oluşturma ve gerçekleştirme hakkında daha fazla bilgi edinmek için şu kısa tanıtımı izleyin:
 
 >[!VIDEO https://www.youtube.com/embed/6KB3TZ8Wi40]
 
-Erişim gözden geçirmeleri, kuruluşunuzda dağıtmak hazırsanız, videonun ekleme, yöneticilerinize eğitmek için aşağıdaki adımları izleyin ve ilk erişim gözden geçirmesi oluşturma!
+Kuruluşunuzda erişim gözden geçirmeleri dağıtmaya hazırsanız, bu adımları izleyerek, yöneticilerinizi eğitin, eğitmeniz ve ilk erişim incelemenizi oluşturmanız gerekir!
 
 >[!VIDEO https://www.youtube.com/embed/X1SL2uubx9M]
 
@@ -97,9 +95,31 @@ Erişim gözden geçirmeleri, kuruluşunuzda dağıtmak hazırsanız, videonun e
 
 [!INCLUDE [Azure AD Premium P2 license](../../../includes/active-directory-p2-license.md)]
 
+### <a name="which-users-must-have-licenses"></a>Hangi kullanıcıların Lisansı olmalıdır?
+
+Erişim incelemeleriyle etkileşim kuran her kullanıcının ücretli Azure AD Premium P2 lisansı olması gerekir. Örneğin:
+
+- Erişim gözden geçirmesi oluşturan Yöneticiler
+- Erişim gözden geçirmesi gerçekleştiren Grup sahipleri
+- Gözden geçirenler olarak atanan kullanıcılar
+- Kendi kendine İnceleme gerçekleştiren kullanıcılar
+
+Ayrıca, Konuk kullanıcılardan kendi erişimini gözden geçirmesini isteyebilirsiniz. Kendi kuruluşunuzun kullanıcılarından birine atadığınız her ücretli Azure AD Premium P2 lisansı için, dış Kullanıcı tahsisatından beş adede kadar Konuk kullanıcıya davet etmek için Azure AD işletmeden işletmeye (B2B) kullanabilirsiniz. Bu Konuk kullanıcılar Azure AD Premium P2 özelliklerini de kullanabilir. Daha fazla bilgi için bkz. [Azure AD B2B işbirliği Lisanslama Kılavuzu](../b2b/licensing-guidance.md).
+
+Sahip olmanız gereken lisansların sayısını belirlemenize yardımcı olacak bazı örnek senaryolar aşağıda verilmiştir.
+
+| Senaryo | Hesaplama | Gerekli sayıda lisans |
+| --- | --- | --- |
+| Yönetici, 500 Kullanıcıyla Grup A 'nın erişim incelemesini oluşturur. 3 Grup sahibini gözden geçirenler olarak atar. | Her grup sahibine ait yönetici + 3 Lisansı için gözden geçirenler olarak 1 lisans. | 4 |
+| Yönetici, 500 Kullanıcıyla Grup A 'nın erişim incelemesini oluşturur. Kendi kendine İnceleme yapar. | 1 her kullanıcı için yönetici + 500 lisansı için kendi kendini gözden geçirenler olarak lisanslayın. | 501 |
+| Yönetici, 5 Kullanıcı ve 25 Konuk kullanıcıyla Grup B 'ye yönelik bir erişim incelemesi oluşturur. Kendi kendine İnceleme yapar. | 1 her kullanıcı için yönetici + 5 Lisansı için kendi kendini gözden geçirenler olarak lisanslayın.<br/>(Konuk kullanıcılar gereken 1:5 oranına göre ele alınmıştır) | 6 |
+| Yönetici, 5 Kullanıcı ve 108 Konuk kullanıcıyla Grup C 'nin erişim incelemesini oluşturur. Kendi kendine İnceleme yapar. | 1 her kullanıcıya yönelik yönetici + 5 Lisansı, gerekli 1:5 oranında tüm 108 Konuk kullanıcıları kapsayacak şekilde, her bir kullanıcı için kendi kendine gözden geçirenler ve 16 ek lisans olarak lisanslayın.<br/>1 + 5 = 6 lisans, 5 @ no__t-06 = 30 Konuk kullanıcıyı kapsar. Kalan (108-5 @ no__t-06) = 78 Konuk kullanıcılar için 78/5 = 16 ek lisans gerekir. Bu nedenle Total, 6 + 16 = 22 lisans gerekir. | 22 |
+
+Kullanım için lisansları atama hakkında daha fazla bilgi için, bkz. [Azure Active Directory portalını kullanarak lisans atama veya kaldırma](../fundamentals/license-users-groups.md).
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Grupları ve uygulamaları, erişim gözden geçirmesi oluştur](create-access-review.md)
+- [Gruplar veya uygulamalar için erişim gözden geçirmesi oluşturma](create-access-review.md)
 - [Bir Azure AD yönetici rolündeki kullanıcılar için erişim gözden geçirmesi oluşturma](../privileged-identity-management/pim-how-to-start-security-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json)
-- [Gruplar veya uygulamalar için erişim gözden geçirin](perform-access-review.md)
-- [Grupları ve uygulamaları, erişim değerlendirmesi tamamlama](complete-access-review.md)
+- [Gruplara veya uygulamalara erişimi gözden geçirme](perform-access-review.md)
+- [Grupların veya uygulamaların erişim incelemesini tamamlar](complete-access-review.md)

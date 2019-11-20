@@ -1,39 +1,95 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Data Box belgeleri - çevrimiçi aktarım
+### YamlMime:Landing
+title: Azure Stack Edge ve Azure Data Box Gateway belgeleri - Çevrimiçi aktarım
+summary: Ağ üzerinden yüksek performanslı veri aktarımları için Azure Data Box Gateway ve Azure Stack Edge cihazlarını kullanın. Bulutta arşivleme, olağanüstü durum kurtarma veya bulut ölçeğinde işleme için verilerinizi buluta göndermek üzere Data Box Gateway hizmetini seçin. Azure'a taşınmadan önce verilerinizi filtrelemek, analiz etmek ve dönüştürmek için Azure Stack Edge hizmetini kullanın. Azure Data Box Edge markası kısa süre önce Azure Stack Edge olarak değiştirildi.
 metadata:
-  title: 'Azure’a ağ üzerinden veri aktarımı için Data Box Gateway, Data Box Edge Belgeleri'
-  description: 'Azure’a hızlı, ucuz ve güvenilir bir şekilde ağ üzerinden yüksek performanslı veri aktarımı gerçekleştirmek için Data Box Edge ve Data Box Gateway kullanın.'
+  title: Azure Stack Edge ve Azure Data Box Gateway belgeleri - Çevrimiçi aktarım
+  description: Azure’a ağ üzerinden yüksek performanslı veri aktarımı için Data Box Gateway, Azure Stack Edge (eski marka adı Data Box Edge) Belgeleri.
   services: databox
-  author: alkohli
-  manager: twooley
   ms.service: databox
   ms.subservice: edge
   ms.topic: landing-page
-  ms.date: 03/25/2019
+  ms.collection: collection
+  author: alkohli
   ms.author: alkohli
-abstract:
-  description: 'Azure Data Box ailesi hızlı, ucuz ve güvenilir bir yolla yüzlerce terabayt boyutundaki veriyi Azure''a aktarmanıza olanak tanır. Ağ üzerinden yüksek performanslı veri aktarımı için Data Box Edge ve Data Box Gateway cihazlarını kullanın.<p>Bulutta arşivleme, olağanüstü durum kurtarma veya bulut ölçeğinde işleme için verilerinizi buluta göndermek üzere Data Box Gateway hizmetini seçin.  Azure’a taşınan verilerinizi filtrelemek, analiz etmek ve dönüştürmek için Data Box Edge hizmetini kullanın.</p><p>Data Box Gateway ve Data Box Edge ile ağ tabanlı aktarım gerçekleştirmek için öğreticilerimizi inceleyin.</p>'
-sections:
-  - title: Öğreticiler
-    items:
-      - type: paragraph
-        text: <b>Data Box Gateway için</b>
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="data-box-gateway-deploy-prep">Azure Data Box Gateway'i dağıtmaya hazırlanma</a>
-          - html: <a href="data-box-gateway-deploy-provision-hyperv">Azure Data Box Gateway'i Hyper-V'de sağlama</a>
-          - html: <a href="data-box-gateway-deploy-provision-vmware">Azure Data Box Gateway'i VMware'de sağlama</a>
-          - html: '<a href="data-box-gateway-deploy-connect-setup-activate">Azure Data Box Gateway''i bağlama, kurma ve etkinleştirme</a>'
-          - html: <a href="data-box-gateway-deploy-add-shares">Azure Data Box Gateway ile veri aktarma</a>
-      - type: paragraph
-        text: <b>Data Box Edge için</b>
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="data-box-edge-deploy-prep">Azure Data Box Edge’i dağıtmaya hazırlanma</a>
-          - html: <a href="data-box-edge-deploy-install">Azure Data Box Edge’i yükleme</a>
-          - html: '<a href="data-box-edge-deploy-connect-setup-activate">Azure Data Box Edge’i bağlama, kurma ve etkinleştirme</a>'
-          - html: <a href="data-box-edge-deploy-add-shares">Azure Data Box Edge ile veri aktarma</a>
-          - html: <a href="data-box-edge-deploy-configure-compute">Azure Data Box Edge ile veri dönüştürme</a>
+  ms.date: 11/04/2019
+  ms.openlocfilehash: 61cda4ccab69396c13581598f399104b0a4fb181
+  ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73570110"
+landingContent:
+- title: Azure Stack Edge ve Data Box Gateway hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Data Box Gateway nedir?
+      url: data-box-gateway-overview.md
+    - text: Azure Stack Edge nedir?
+      url: data-box-edge-overview.md
+  - linkListType: architecture
+    links:
+    - text: Azure veri aktarımı seçeneklerini belirleme
+      url: /azure/storage/common/storage-choose-data-transfer-solution
+    - text: Ağ aktarımını veya çevrimdışı aktarımı kullanma
+      url: /azure/storage/common/storage-solution-large-dataset-low-network#offline-transfer-or-network-transfer
+  - linkListType: whats-new
+    links:
+    - text: 1905 sürüm notları
+      url: data-box-gateway-1905-release-notes.md
+- title: Gereksinimler ve sınırlar
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Data Box Gateway gereksinimleri
+      url: data-box-gateway-system-requirements.md
+    - text: Azure Stack Edge gereksinimleri
+      url: data-box-edge-system-requirements.md
+    - text: Data Box Gateway sınırları
+      url: data-box-gateway-limits.md
+    - text: Azure Stack Edge sınırları
+      url: data-box-edge-limits.md
+- title: Dağıtma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Data Box Gateway
+      url: data-box-gateway-deploy-prep.md
+    - text: Azure Stack Edge
+      url: data-box-edge-deploy-prep.md
+- title: Geliştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: C# Uç işlemi modülü
+      url: data-box-edge-create-iot-edge-module.md
+  - linkListType: download
+    links:
+    - text: Örnekler - Azure Stack Edge için C#
+      url: https://docs.microsoft.com/samples/azure-samples/data-box-edge-csharp-modules/data-box-edge-csharp-modules/
+- title: Yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Data Box Gateway paylaşımları
+      url: data-box-gateway-manage-shares.md
+    - text: Azure Stack Edge paylaşımları
+      url: data-box-edge-manage-shares.md
+    - text: Uç işlemi
+      url: data-box-edge-manage-compute.md
+    - text: Uç işlemi ağı
+      url: data-box-edge-extend-compute-access-modules.md
+- title: Sorun giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Data Box Gateway
+      url: data-box-gateway-troubleshoot.md
+    - text: Azure Stack Edge
+      url: data-box-edge-troubleshoot.md
+    - text: Uç işlemi modülleri
+      url: data-box-edge-connect-powershell-interface.md#monitor-and-troubleshoot-compute-modules
+    - text: Azure Stack Edge'i döndürme veya değiştirme
+      url: data-box-edge-return-device.md
+    - text: Destek bileti açma
+      url: data-box-edge-contact-microsoft-support.md

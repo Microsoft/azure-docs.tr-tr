@@ -1,176 +1,175 @@
 ---
-title: -Azure App Service uygulamasını yedekleme
-description: Azure App Service'te uygulamalarınızı yedeklerini oluşturmayı öğrenin.
+title: Uygulama yedekleme-Azure App Service
+description: Azure App Service ' de uygulamalarınızın yedeklerini oluşturmayı öğrenin.
 services: app-service
 documentationcenter: ''
 author: cephalin
-manager: erikre
-editor: jimbe
+manager: gwallace
 ms.assetid: 6223b6bd-84ec-48df-943f-461d84605694
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 07/06/2016
+ms.date: 10/16/2019
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: 7e697329e83b530157e490b04f5155d28d243bb6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a56abbcb72afc1f45683259d3bd3bf13309cda07
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61271798"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73886060"
 ---
 # <a name="back-up-your-app-in-azure"></a>Uygulamanızı Azure’a yedekleme
-Yedekleme ve geri yükleme özelliği [Azure App Service](overview.md) uygulama yedeklerini el ile veya bir zamanlamaya göre kolayca oluşturmanıza olanak sağlar. Uygulama mevcut uygulamanın üzerine yazarak veya başka bir uygulamaya geri önceki bir durumun anlık görüntüye geri yükleyebilirsiniz. 
+[Azure App Service](overview.md) yedekleme ve geri yükleme özelliği, uygulama yedeklemelerini el ile veya bir zamanlamaya göre kolayca oluşturmanızı sağlar. Yedeklemeleri sınırsız bir zaman miktarına kadar tutulacak şekilde yapılandırabilirsiniz. Mevcut uygulamanın üzerine yazarak veya başka bir uygulamaya geri yükleyerek uygulamayı önceki bir anlık görüntüye geri yükleyebilirsiniz.
 
-Bir uygulama yedekten geri yükleme hakkında daha fazla bilgi için bkz: [uygulamanızı Azure'a geri](web-sites-restore.md).
+Bir uygulamayı yedekten geri yükleme hakkında bilgi için bkz. [Azure 'da bir uygulamayı geri yükleme](web-sites-restore.md).
 
 <a name="whatsbackedup"></a>
 
-## <a name="what-gets-backed-up"></a>Ne yedeklenir
-App Service aşağıdaki bilgileri, bir Azure depolama hesabı ve kullanmak için uygulamanızı yapılandırdığınız kapsayıcı yedekleyebilirsiniz. 
+## <a name="what-gets-backed-up"></a>Yedeklenecek
+App Service, uygulamanızı kullanacak şekilde yapılandırdığınız bir Azure depolama hesabına ve kapsayıcısına aşağıdaki bilgileri yedekleyebilir. 
 
 * Uygulama yapılandırması
 * Dosya içeriği
 * Uygulamanıza bağlı veritabanı
 
-Aşağıdaki veritabanı çözümleri ile yedekleme özelliği desteklenir: 
-   - [SQL Veritabanı](https://azure.microsoft.com/services/sql-database/)
-   - [MySQL için Azure Veritabanı](https://azure.microsoft.com/services/mysql)
-   - [PostgreSQL için Azure Veritabanı](https://azure.microsoft.com/services/postgresql)
-   - [Uygulama içi MySQL](https://blogs.msdn.microsoft.com/appserviceteam/2017/03/06/announcing-general-availability-for-mysql-in-app)
+Aşağıdaki veritabanı çözümleri yedekleme özelliği ile desteklenir: 
+
+- [SQL Veritabanı](https://azure.microsoft.com/services/sql-database/)
+- [MySQL için Azure Veritabanı](https://azure.microsoft.com/services/mysql)
+- [PostgreSQL için Azure Veritabanı](https://azure.microsoft.com/services/postgresql)
+- [uygulama içi MySQL](https://azure.microsoft.com/blog/mysql-in-app-preview-app-service/)
  
 
 > [!NOTE]
->  Her bir uygulama, bir Artımlı güncelleştirme çevrimdışı tam kopyasıdır.
->  
+> Her yedekleme, artımlı güncelleştirme değil, uygulamanızın tamamen çevrimdışı bir kopyasıdır.
+>
 
 <a name="requirements"></a>
 
 ## <a name="requirements-and-restrictions"></a>Gereksinimler ve kısıtlamalar
-* Yedekleme ve geri yükleme özelliği olduğu App Service planı gerektirir **standart** katmanı veya **Premium** katmanı. App Service planınızı daha yüksek bir katmana kullanmak üzere ölçeklendirme hakkında daha fazla bilgi için bkz. [azure'da uygulamanın ölçeğini](web-sites-scale.md).  
-  **Premium** katmanı sağlayan daha fazla sayıda günlük yedekleme değerinden çıkarır **standart** katmanı.
-* Bir Azure depolama hesabı ve kapsayıcı yedeklemek istediğiniz uygulama ile aynı abonelikte ihtiyacınız var. Azure depolama hesapları hakkında daha fazla bilgi için bkz. [Azure depolama hesabına genel bakış](https://docs.microsoft.com/azure/storage/common/storage-account-overview).
-* Yedekleme, uygulama ve veritabanı içeriğinin 10 GB'a kadar olabilir. Yedekleme boyutu bu sınırı aşarsa, bir hata alırsınız.
-* MySQL desteklenmiyor için Azure veritabanı yedeklerini SSL etkin. Bir yedekleme yapılandırılmışsa, başarısız olmuş yedeklemeler alırsınız.
-* PostgreSQL desteklenmiyor için Azure veritabanı yedeklerini SSL etkin. Bir yedekleme yapılandırılmışsa, başarısız olmuş yedeklemeler alırsınız.
-* Uygulama içi MySQL veritabanları herhangi bir yapılandırma otomatik olarak yedeklenir. Uygulama içi MySQL veritabanları için bağlantı dizelerini ekleme gibi ayarları el ile yaptığınız yedeklemeleri düzgün çalışmayabilir.
-* Hedef yedeklemeleriniz için desteklenmediğinden, bir Güvenlik Duvarı'nı kullanarak depolama hesabı etkin. Bir yedekleme yapılandırılmışsa, başarısız olmuş yedeklemeler alırsınız.
+* Yedekleme ve geri yükleme özelliği, App Service planının **Standart** katmanda veya **Premium** katmanda olmasını gerektirir. App Service planınızı daha yüksek bir katman kullanmak üzere ölçeklendirme hakkında daha fazla bilgi için bkz. [Azure 'da bir uygulamayı ölçeklendirme](manage-scale-up.md). **Premium** katman, **Standart** katmandan daha fazla sayıda günlük arka UPS sağlar.
+* Yedeklemek istediğiniz uygulamayla aynı abonelikte bir Azure depolama hesabına ve kapsayıcısına ihtiyacınız vardır. Azure depolama hesapları hakkında daha fazla bilgi için bkz. [Azure depolama hesabına genel bakış](https://docs.microsoft.com/azure/storage/common/storage-account-overview).
+* Yedeklemeler 10 GB 'a kadar uygulama ve veritabanı içeriği olabilir. Yedekleme boyutu bu sınırı aşarsa bir hata alırsınız.
+* SSL için MySQL için Azure veritabanı yedeklemeleri desteklenmez. Bir yedekleme yapılandırılmışsa, başarısız yedeklemeler alırsınız.
+* PostgreSQL için SSL etkin Azure veritabanı yedeklemeleri desteklenmez. Bir yedekleme yapılandırılmışsa, başarısız yedeklemeler alırsınız.
+* Uygulama içi MySQL veritabanları, herhangi bir yapılandırma olmadan otomatik olarak yedeklenir. Uygulama içi MySQL veritabanları için bağlantı dizeleri ekleme gibi el ile ayarları yaparsanız yedeklemeler düzgün çalışmayabilir.
+* Yedeklemeleriniz için hedef olarak Güvenlik Duvarı etkin bir depolama hesabı kullanılması desteklenmez. Bir yedekleme yapılandırılmışsa, başarısız yedeklemeler alırsınız.
 
 
 <a name="manualbackup"></a>
 
 ## <a name="create-a-manual-backup"></a>El ile yedekleme oluşturun
-1. İçinde [Azure portalında](https://portal.azure.com), uygulamanızın sayfasına gidin, seçin **yedeklemeleri**. **Yedeklemeleri** sayfası görüntülenir.
-   
-    ![Yedeklemeleri sayfası][ChooseBackupsPage]
-   
-   > [!NOTE]
-   > Aşağıdaki iletiyi görürseniz, yedeklemeleri ile devam etmeden önce App Service planınızı yükseltmek için tıklayın.
-   > Daha fazla bilgi için [azure'da uygulamanın ölçeğini](web-sites-scale.md).  
-   > ![Depolama hesabı seçin](./media/web-sites-backup/01UpgradePlan1.png)
-   > 
-   > 
+1. [Azure Portal](https://portal.azure.com)uygulamanızın sayfasına gidin, **yedeklemeler**' i seçin. **Yedeklemeler** sayfası görüntülenir.
 
-2. İçinde **yedekleme** sayfası, tıklayın **yapılandırma**
-![Yapılandır'a tıklayın](./media/web-sites-backup/ClickConfigure1.png)
-3. İçinde **yedekleme yapılandırması** sayfasında **Depolama: Yapılandırılmamış** bir depolama hesabı yapılandırmak için.
-   
-    ![Depolama hesabı seçin][ChooseStorageAccount]
-4. Yedekleme Hedefinizi seçerek bir **depolama hesabı** ve **kapsayıcı**. Depolama hesabının, yedeklemek istediğiniz uygulama ile aynı aboneliğe ait olmalıdır. İsterseniz ilgili sayfaları'nda yeni bir depolama hesabı veya yeni bir kapsayıcı oluşturabilirsiniz. İşiniz bittiğinde tıklayın **seçin**.
-   
-    ![Depolama hesabı seçin](./media/web-sites-backup/02ChooseStorageAccount1-1.png)
-5. İçinde **yedekleme yapılandırması** hala açık bırakılan sayfasında yapılandırabilir **Backup Database**, ardından (SQL veritabanı veya MySQL) yedeklemeler, eklemek istediğiniz veritabanlarını seçin ve ardından tıklayın**Tamam**.  
-   
-    ![Depolama hesabı seçin](./media/web-sites-backup/03ConfigureDatabase1.png)
-   
-   > [!NOTE]
-   > Bu listede görünmesi için bir veritabanı için bağlantı dizesini içinde bulunmalıdır **bağlantı dizeleri** bölümünü **uygulama ayarları** uygulamanız için sayfa. 
-   >
-   > Uygulama içi MySQL veritabanları herhangi bir yapılandırma otomatik olarak yedeklenir. Uygulama içi MySQL veritabanları için bağlantı dizelerini ekleme gibi ayarları el ile yaptığınız yedeklemeleri düzgün çalışmayabilir.
-   > 
-   > 
-6. İçinde **yedekleme yapılandırması** sayfasında **Kaydet**.    
-7. İçinde **yedeklemeleri** sayfasında **yedekleme**.
-   
-    ![BackUpNow düğmesi][BackUpNow]
-   
-    Yedekleme işlemi sırasında bir ilerleme iletisi görürsünüz.
+    ![Yedeklemeler sayfası](./media/manage-backup/access-backup-page.png)
 
-Depolama hesabı ve kapsayıcı yapılandırıldıktan sonra istediğiniz zaman el ile yedekleme başlatabilir.  
+    > [!NOTE]
+    > Aşağıdaki iletiyi görürseniz, yedeklemelere devam edebilmeniz için App Service planınızı yükseltmek üzere tıklayın.
+    > Daha fazla bilgi için bkz. [Azure 'da bir uygulamayı ölçeklendirme](manage-scale-up.md).
+    > ![depolama hesabı seçin](./media/manage-backup/upgrade-plan.png)
+    > 
+    > 
+
+2. **Yedekleme** sayfasında, yedekleme Yapılandırılmadı ' yi seçin **. Uygulamanıza yönelik yedeklemeyi yapılandırmak için buraya tıklayın**.
+
+    ![Yapılandır ' a tıklayın](./media/manage-backup/configure-start.png)
+
+3. **Yedekleme yapılandırması** sayfasında depolama hesabı yapılandırmak için **yapılandırılmamış** ' a tıklayın.
+
+    ![Depolama hesabı seçin](./media/manage-backup/configure-storage.png)
+
+4. Bir **depolama hesabı** ve **kapsayıcı**seçerek yedekleme hedefini seçin. Depolama hesabı, yedeklemek istediğiniz uygulamayla aynı aboneliğe ait olmalıdır. İsterseniz, ilgili sayfalarda yeni bir depolama hesabı veya yeni bir kapsayıcı oluşturabilirsiniz. İşiniz bittiğinde **Seç**' e tıklayın.
+
+5. Hala açık olan **yedekleme yapılandırması** sayfasında, **yedekleme veritabanını**yapılandırabilir ve ardından yedeklemelere eklemek istediğiniz veritabanlarını (SQL veritabanı veya MySQL) seçip **Tamam**' a tıklayın.
+
+    ![Depolama hesabı seçin](./media/manage-backup/configure-database.png)
+
+    > [!NOTE]
+    > Bu listede bir veritabanının görünmesi için, uygulamanızın **uygulama ayarları** sayfasının **bağlantı dizeleri** bölümünde bağlantı dizesinin bulunması gerekir. 
+    >
+    > Uygulama içi MySQL veritabanları, herhangi bir yapılandırma olmadan otomatik olarak yedeklenir. Uygulama içi MySQL veritabanları için bağlantı dizeleri ekleme gibi el ile ayarları yaparsanız yedeklemeler düzgün çalışmayabilir.
+    > 
+    > 
+
+6. **Yedekleme yapılandırması** sayfasında **Kaydet**' e tıklayın.
+7. **Yedeklemeler** sayfasında, **Yedekle**' ye tıklayın.
+
+    ![Şimdi Backupbutton](./media/manage-backup/manual-backup.png)
+
+    Yedekleme işlemi sırasında bir ilerleme durumu iletisi görürsünüz.
+
+Depolama hesabı ve kapsayıcısı yapılandırıldıktan sonra dilediğiniz zaman el ile yedekleme başlatabilirsiniz.
 
 <a name="automatedbackups"></a>
 
 ## <a name="configure-automated-backups"></a>Otomatik yedeklemeleri yapılandırma
-1. İçinde **yedekleme yapılandırması** sayfasında **zamanlanmış yedekleme** için **üzerinde**. 
-   
-    ![Depolama hesabı seçin](./media/web-sites-backup/05ScheduleBackup1.png)
-2. Yedekleme zamanlama seçeneklerini gösterir, **zamanlanmış yedekleme** için **üzerinde**, ardından yedekleme zamanlaması istediğiniz gibi yapılandırın ve tıklayın **Tamam**.
-   
-    ![Otomatik yedeklemeleri etkinleştirin][SetAutomatedBackupOn]
+1. **Yedekleme yapılandırması** sayfasında, **Zamanlanmış yedeklemeyi** **Açık**olarak ayarlayın. 
+
+    ![Otomatik yedeklemeleri etkinleştir](./media/manage-backup/scheduled-backup.png)
+
+2. Yedekleme zamanlamasını istediğiniz gibi yapılandırın ve **Tamam**' ı seçin.
 
 <a name="partialbackups"></a>
 
 ## <a name="configure-partial-backups"></a>Kısmi yedeklemeleri yapılandırma
-Bazen her şeyi uygulamanızı yedekle istemezsiniz. İşte birkaç örnek:
+Bazen uygulamanızdaki her şeyi yedeklemek istemezsiniz. İşte birkaç örnek:
 
-* [Haftalık yedeklemeler ayarlayabilir](#configure-automated-backups) uygulamanızın statik içeriği olan hiçbir zaman, eski blog gönderilerini veya görüntüleri gibi değiştirir.
-* Uygulamanızın üzerinde 10 GB'a kadar (yani aynı anda yedekleyebilirsiniz maksimum tutar) vardır.
-* Günlük dosyalarını yedeklemek istemediğiniz.
+* Uygulamanızda, eski blog gönderileri veya görüntüleri gibi hiçbir değişiklik olmayan statik içerik içeren [haftalık yedeklemeler ayarlarsınız](#configure-automated-backups) .
+* Uygulamanız 10 GB 'lık içeriğe sahiptir (bir seferde yedekleyebileceğiniz maksimum miktar).
+* Günlük dosyalarını yedeklemek istemezsiniz.
 
-Kısmi yedeklerin tam olarak yedeklemek istediğiniz dosyaları seçin izin verir.
+Kısmi yedeklemeler, tam olarak yedeklemek istediğiniz dosyaları seçmenize olanak sağlar.
 
 > [!NOTE]
-> En fazla 4 GB yedekleme bulunan tek veritabanlarını olabilir ancak yedekleme toplam en büyük boyutu 10 GB'tır
+> Yedekteki ayrı veritabanları 4GB'A fazla olabilir, ancak yedeklemenin toplam en büyük boyutu 10 GB 'dir
 
-### <a name="exclude-files-from-your-backup"></a>Yedekleme dosyaları dışarıda bırak
-Günlük dosyaları ve bir kez yedekleme atanmış olması ve değiştirmek için yapmayacağınız statik görüntüler içeren bir uygulama olduğunu varsayalım. Böyle durumlarda, gelecekteki yedeklemeler içinde depolanan bu klasörleri ve dosyaları dışlayabilirsiniz. Yedeklemelerinizi dosya ve klasörleri dışlamak için oluşturma bir `_backup.filter` dosyası `D:\home\site\wwwroot` uygulamanızın klasör. Dosya ve klasörleri bu dosyayı çıkarmak istediğiniz listesini belirtin. 
+### <a name="exclude-files-from-your-backup"></a>Dosyaları yedeklemeinizden hariç tut
+Bir kez yedekleme ve değişiklik yapamamayan günlük dosyalarını ve statik görüntüleri içeren bir uygulamanız olduğunu varsayalım. Böyle durumlarda, bu klasörleri ve dosyaları gelecekteki yedeklemelerde depolanmak üzere dışlayabilirsiniz. Yedeklemelerinizden dosya ve klasörleri dışlamak için, uygulamanızın `D:\home\site\wwwroot` klasöründe bir `_backup.filter` dosyası oluşturun. Bu dosyada dışlamak istediğiniz dosya ve klasörlerin listesini belirtin. 
 
-Dosyalarınıza erişmek için kolay bir yol, Kudu kullanmaktır. Tıklayın **Gelişmiş Araçlar -> Git** Kudu erişmek web uygulamanız için ayarlama.
+`https://<app-name>.scm.azurewebsites.net/DebugConsole`giderek dosyalarınıza erişebilirsiniz. İstenirse, Azure hesabınızda oturum açın.
 
-![Portalı kullanarak kudu][kudu-portal]
+Yedeklemelerinizden dışlamak istediğiniz klasörleri belirler. Örneğin, vurgulanan klasör ve dosyaları filtrelemek istiyorsunuz.
 
-Yedeklemelerinizi dışlamak istediğiniz klasörleri belirleyin.  Örneğin, vurgulanan klasör ve dosyaları filtrelemek istersiniz.
+![Görüntüler klasörü](./media/manage-backup/kudu-images.png)
 
-![Resimler klasöründeki][ImagesFolder]
+`_backup.filter` adlı bir dosya oluşturun ve önceki listeyi dosyaya yerleştirin, ancak `D:\home`kaldırın. Satır başına bir dizin veya dosya listeleyin. Bu nedenle, dosyanın içeriği şu olmalıdır:
 
-Adlı bir dosya oluşturun `_backup.filter` ve yukarıdaki listede dosyasına yerleştirir, ancak kaldırma `D:\home`. Bir dizin veya dosya her satırda listeleyin. Bu nedenle dosyanın içeriği olmalıdır:
- ```bash
-    \site\wwwroot\Images\brand.png
-    \site\wwwroot\Images\2014
-    \site\wwwroot\Images\2013
+ ```
+\site\wwwroot\Images\brand.png
+\site\wwwroot\Images\2014
+\site\wwwroot\Images\2013
 ```
 
-Karşıya yükleme `_backup.filter` dosyasını `D:\home\site\wwwroot\` kullanarak site dizininde [ftp](deploy-ftp.md) veya başka bir yöntem. İsterseniz, doğrudan Kudu kullanarak bu dosyayı oluşturabilirsiniz `DebugConsole` ve orada içeriği ekleyin.
+[FTP](deploy-ftp.md) 'yi veya başka bir yöntemi kullanarak sitenizin `D:\home\site\wwwroot\` dizinine `_backup.filter` dosyasını yükleyin. İsterseniz, doğrudan kudu `DebugConsole` kullanarak dosyayı oluşturabilir ve içeriği buraya ekleyebilirsiniz.
 
-Aynı şekilde, normalde yaptığınız, yedeklemeleri çalıştırma [el ile](#create-a-manual-backup) veya [otomatik olarak](#configure-automated-backups). Şimdi, dosya ve klasörleri belirtilen `_backup.filter` zamanlanmış veya el ile başlatma gelecekteki yedeklemelerin çıkarılır. 
+Yedeklemeleri, normalde [el ile](#create-a-manual-backup) veya [otomatik olarak](#configure-automated-backups)yaptığınız gibi çalıştırın. Artık `_backup.filter` belirtilen tüm dosyalar ve klasörler, zamanlanan veya el ile başlatılan yedeklemelerin dışında tutulur. 
 
 > [!NOTE]
-> Yaptığınız şekilde sitenizin kısmi yedekleri geri [normal bir yedeklemeyi geri](web-sites-restore.md). Geri yükleme işleminin doğru şeyi yapar.
+> Sitenizin kısmi yedeklerini [düzenli bir yedeklemeyi geri](web-sites-restore.md)yüklediğiniz şekilde geri yükleyebilirsiniz. Geri yükleme işlemi doğru şeyi yapar.
 > 
-> Bir yedekten geri yüklendiğinde, tüm site içeriğini yedeklemeye ne olursa olsun ile değiştirilir. Bir sitede, ancak yedekleme dosyasıysa silinir. Ancak, kısmi yedekleme geri yüklendiğinde kara listeye alınan dizinlerden biri veya herhangi bir kara listeye alınan dosya bulunan herhangi bir içerik olduğu gibi bırakılır.
+> Tam yedekleme geri yüklendiğinde, sitedeki tüm içerikler, yedeklemedeki herhangi bir şey ile değiştirilmiştir. Bir dosya sitede yer alıyorsa, ancak yedeklemede silinir. Ancak kısmi bir yedekleme geri yüklendiğinde, kara listelenen dizinlerden birinde bulunan içerik ya da kara listelenen herhangi bir dosya olduğu gibi kalır.
 > 
 
 
 <a name="aboutbackups"></a>
 
 ## <a name="how-backups-are-stored"></a>Yedeklemeler nasıl depolanır
-Uygulamanız için bir veya daha fazla yedekleme yaptıktan sonra yedeklemeleri görünür **kapsayıcıları** sayfasında, depolama hesabınızı ve uygulamanızı. Her yedekleme oluşur depolama hesabında bir`.zip` yedekleme verilerini içeren dosyanın ve `.xml` içeren bir bildirimi dosyası `.zip` dosya içeriği. Sıkıştırmasını açın ve bir uygulamayı geri yükleme işlemi yapmadan yedeklemeleriniz erişmek istiyorsanız, bu dosyalara göz atın.
+Uygulamanız için bir veya daha fazla yedekleme yaptıktan sonra yedeklemeler, depolama hesabınızın **kapsayıcılar** sayfasında ve uygulamanızda görünür. Depolama hesabında her yedekleme, yedekleme verilerini içeren bir`.zip` dosyasından ve `.zip` dosya içeriğinin bir bildirimini içeren bir `.xml` dosyası oluşur. Uygulama geri yükleme işlemi yapmadan yedeklemelerinize erişmek istiyorsanız bu dosyaları açabilir ve bunlara gözatamazsınız.
 
-Uygulama için bir veritabanı yedeği .zip dosyasının kök dizininde depolanır. Bir SQL veritabanı için bir BACPAC dosyası (dosya uzantısı) ve bu içeri aktarılabilir. Bir SQL veritabanının BACPAC dışarı aktarma üzerinde oluşturmak için bkz [yeni bir kullanıcı veritabanı oluşturmak için bir BACPAC dosyasını içeri](https://technet.microsoft.com/library/hh710052.aspx).
+Uygulamanın veritabanı yedeklemesi,. zip dosyasının kökünde saklanır. Bir SQL veritabanı için bu bir BACPAC dosyasıdır (dosya uzantısı yoktur) ve içeri aktarılabilir. BACPAC dışarı aktarmaya dayalı bir SQL veritabanı oluşturmak için, bkz. [Yeni bir kullanıcı veritabanı oluşturmak IÇIN bacpac dosyasını Içeri aktarma](https://technet.microsoft.com/library/hh710052.aspx).
 
 > [!WARNING]
-> Tüm dosyaların değiştirilmesi, **websitebackups** kapsayıcı geçersiz ve bu nedenle olmayan-geri yüklenebilen olmak yedekleme neden olabilir.
+> **Websitebackups** kabınızda herhangi bir dosyanın değiştirilmesi yedeklemenin geçersiz olmasına ve bu nedenle geri yüklenebilir olmasına neden olabilir.
 > 
 > 
 
 ## <a name="automate-with-scripts"></a>Betiklerle otomatikleştirme
 
-Yedekleme Yönetimi betiklerle kullanarak otomatikleştirebilirsiniz [Azure CLI](/cli/azure/install-azure-cli) veya [Azure PowerShell](/powershell/azure/overview).
+[Azure CLI](/cli/azure/install-azure-cli) veya [Azure PowerShell](/powershell/azure/overview)kullanarak yedekleme yönetimini betiklerle otomatik hale getirebilirsiniz.
 
-Örnekleri için bkz:
+Örnekler için bkz.:
 
 - [Azure CLI örnekleri](samples-cli.md)
 - [Azure PowerShell örnekleri](samples-powershell.md)
@@ -178,17 +177,4 @@ Yedekleme Yönetimi betiklerle kullanarak otomatikleştirebilirsiniz [Azure CLI]
 <a name="nextsteps"></a>
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-Bir uygulama bir yedekten geri yükleme hakkında daha fazla bilgi için bkz: [uygulamanızı Azure'a geri](web-sites-restore.md). 
-
-
-<!-- IMAGES -->
-[ChooseBackupsPage]: ./media/web-sites-backup/01ChooseBackupsPage1.png
-[ChooseStorageAccount]: ./media/web-sites-backup/02ChooseStorageAccount-1.png
-[BackUpNow]: ./media/web-sites-backup/04BackUpNow1.png
-[SetAutomatedBackupOn]: ./media/web-sites-backup/06SetAutomatedBackupOn1.png
-[SaveIcon]: ./media/web-sites-backup/10SaveIcon.png
-[ImagesFolder]: ./media/web-sites-backup/11Images.png
-[LogsFolder]: ./media/web-sites-backup/12Logs.png
-[GhostUpgradeWarning]: ./media/web-sites-backup/13GhostUpgradeWarning.png
-[kudu-portal]:./media/web-sites-backup/kudu-portal.PNG
-
+Bir uygulamayı yedekten geri yükleme hakkında bilgi için bkz. [Azure 'da bir uygulamayı geri yükleme](web-sites-restore.md). 

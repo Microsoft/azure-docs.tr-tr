@@ -1,52 +1,53 @@
 ---
 title: Go için Azure HDInsight SDK
-description: Go için Azure HDInsight SDK başvurusu
+description: Go ve Apache Hadoop kümeleri için Azure HDInsight SDK 'Yı kullanmaya yönelik başvuru malzemeleri
 author: tylerfox
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 05/8/2019
 ms.author: tyfox
+ms.reviewer: jasonh
 ms.custom: seodec18
-ms.openlocfilehash: 113948d77d87a34822f81f020b03f6628b9c5e84
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 60ac0509aed1fc83bc7f660783d4bdbd6cb7d976
+ms.sourcegitcommit: 8ef0a2ddaece5e7b2ac678a73b605b2073b76e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65466216"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71077129"
 ---
-# <a name="hdinsight-sdk-for-go-preview"></a>HDInsight SDK'sı için Git (Önizleme)
+# <a name="hdinsight-sdk-for-go-preview"></a>Go için HDInsight SDK (Önizleme)
 
 ## <a name="overview"></a>Genel Bakış
-Go için HDInsight SDK sınıfları ve işlevleri, HDInsight kümelerinizi yönetmenizi sağlar. Bu, oluşturma, silme, güncelleştirme, listesinde, yeniden boyutlandırma, betik eylemleri yürütmek, izlemek, HDInsight kümelerine ve daha özelliklerini alma işlemlerini içerir.
+Go için HDInsight SDK 'Sı, HDInsight kümelerinizi yönetmenize imkan tanıyan sınıflar ve işlevler sağlar. Oluşturma, silme, güncelleştirme, listeleme, yeniden boyutlandırma, betik eylemlerini yürütme, izleme, HDInsight kümelerinin özelliklerini al ve daha fazlasını içeren işlemleri içerir.
 
 > [!NOTE]  
->Bu SDK için GoDoc başvuru malzemesi olduğunu da [buradan kullanılabilir](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight).
+>Bu SDK için GoDoc başvuru malzemesine de [buradan ulaşabilirsiniz](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Bir Azure hesabı. Biri yoksa [ücretsiz bir deneme sürümü edinin](https://azure.microsoft.com/free/).
+* Bir Azure hesabı. Hiç kimse yoksa [ücretsiz deneme sürümü alın](https://azure.microsoft.com/free/).
 * [Git](https://golang.org/dl/).
 
-## <a name="sdk-installation"></a>SDK'sını yükleme
+## <a name="sdk-installation"></a>SDK yüklemesi
 
-GOPATH konumunuzdan çalıştırın `go get github.com/Azure/azure-sdk-for-go/tree/master/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight`
+GOPATH konumundan şunu çalıştırın`go get github.com/Azure/azure-sdk-for-go/tree/master/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight`
 
-## <a name="authentication"></a>Kimlik Doğrulaması
+## <a name="authentication"></a>Authentication
 
-SDK'sı, ilk Azure aboneliğinizle kimliğinin doğrulanması gerekiyor.  Hizmet sorumlusu oluşturma ve kimlik doğrulaması için kullanmak için aşağıdaki örneği takip edin. Bunu yaptıktan sonra bir örneğine sahip bir `ClustersClient`, yönetim işlemlerini gerçekleştirmek için kullanılan birçok işlev (aşağıdaki bölümde anlatılan) içerir.
+Önce SDK 'nın Azure aboneliğinizle doğrulanması gerekir.  Hizmet sorumlusu oluşturmak için aşağıdaki örneği izleyin ve kimlik doğrulaması için kullanın. Bu yapıldıktan sonra, yönetim işlemleri gerçekleştirmek için kullanılabilecek çok sayıda işlev `ClustersClient`(aşağıdaki bölümlerde özetlenen) içeren bir örneğine sahip olursunuz.
 
 > [!NOTE]  
-> Başka bir yöntemle yanı sıra kimliğini doğrulamak için aşağıdaki örnekteki, büyük olasılıkla daha gereksinimleriniz için uygun olması. Tüm İşlevler burada özetlenmektedir: [Go için Azure SDK'da kimlik doğrulama işlevleri](https://docs.microsoft.com/go/azure/azure-sdk-go-authorization)
+> Aşağıdaki örnekte, gereksinimlerinize daha uygun olabilecek büyük olasılıkla kimlik doğrulamanın başka yolları vardır. Tüm işlevler burada özetlenmiştir: [Go için Azure SDK kimlik doğrulama işlevleri](https://docs.microsoft.com/azure/go/azure-sdk-go-authorization)
 
-### <a name="authentication-example-using-a-service-principal"></a>Bir hizmet sorumlusunu kullanarak kimlik doğrulaması örneği
+### <a name="authentication-example-using-a-service-principal"></a>Hizmet sorumlusu kullanarak kimlik doğrulama örneği
 
-İlk oturum açma [Azure Cloud Shell](https://shell.azure.com/bash). Oluşturulan hizmet sorumlusu istediğiniz abonelik şu anda kullanmakta olduğunuz doğrulayın. 
+İlk olarak [Azure Cloud Shell](https://shell.azure.com/bash)oturum açın. Şu anda hizmet sorumlusu 'nın oluşturulmasını istediğiniz aboneliği kullandığınızı doğrulayın. 
 
 ```azurecli-interactive
 az account show
 ```
 
-Abonelik bilgilerinizi JSON olarak görüntülenir.
+Abonelik bilgileriniz JSON olarak görüntülenir.
 
 ```json
 {
@@ -64,24 +65,24 @@ Abonelik bilgilerinizi JSON olarak görüntülenir.
 }
 ```
 
-Doğru aboneliğe oturum değil, çalıştırarak doğru olanı seçin: 
+Doğru abonelikte oturum açmadıysanız, şunu çalıştırarak doğru olanı seçin: 
 ```azurecli-interactive
 az account set -s <name or ID of subscription>
 ```
 
 > [!IMPORTANT]  
-> Zaten HDInsight kaynak sağlayıcısı tarafından başka bir işleve kaydettiğiniz değil durumunda (gibi Azure Portalı aracılığıyla bir HDInsight kümesi oluşturarak), önce kimliklerini yapmanız gerekir. Bu, gelen yapılabilir [Azure Cloud Shell](https://shell.azure.com/bash) aşağıdaki komutu çalıştırarak:
+> HDInsight kaynak sağlayıcısını başka bir işlev (örneğin, Azure portal aracılığıyla HDInsight kümesi oluşturma) ile henüz kaydolmadıysanız, kimlik doğrulamasından geçmeden önce bunu yapmanız gerekir. Bu, aşağıdaki komut çalıştırılarak [Azure Cloud Shell](https://shell.azure.com/bash) yapılabilir:
 >```azurecli-interactive
 >az provider register --namespace Microsoft.HDInsight
 >```
 
-Ardından, hizmet sorumlunuzu için bir ad seçin ve aşağıdaki komutla oluşturun:
+Sonra, hizmet sorumlusu için bir ad seçin ve aşağıdaki komutla oluşturun:
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name <Service Principal Name> --sdk-auth
 ```
 
-Hizmet sorumlusu bilgilerini JSON olarak görüntülenir.
+Hizmet sorumlusu bilgileri JSON olarak görüntülenir.
 
 ```json
 {
@@ -97,7 +98,7 @@ Hizmet sorumlusu bilgilerini JSON olarak görüntülenir.
   "managementEndpointUrl": "https://management.core.windows.net/"
 }
 ```
-Aşağıdaki kod parçacığı ve doldurma kopyalama `TENANT_ID`, `CLIENT_ID`, `CLIENT_SECRET`, ve `SUBSCRIPTION_ID` ile hizmet sorumlusu oluşturmak için komutu çalıştırdıktan sonra döndürülen JSON dizeleri.
+Aşağıdaki kod parçacığını kopyalayın ve hizmet sorumlusu `TENANT_ID`oluşturmak için `CLIENT_SECRET`komutunu çalıştırdıktan `SUBSCRIPTION_ID` sonra döndürülen JSON 'daki `CLIENT_ID`dizeleri kullanarak,, ve öğesini girin.
 
 ```golang
 package main
@@ -133,37 +134,37 @@ func main() {
 ## <a name="cluster-management"></a>Küme yönetimi
 
 > [!NOTE]  
-> Bu bölümde, zaten kimlik doğrulaması ve oluşturulan varsayılır bir `ClusterClient` adlı bir değişkende depolayın ve örnek `client`. Kimlik doğrulaması ve elde etmek için yönergeler bir `ClusterClient` yukarıdaki kimlik doğrulaması bölümünde bulunabilir.
+> Bu bölümde, önceden kimlik doğrulamasından geçen ve bir `ClusterClient` örnek oluşturmuş olduğunuz ve adlı `client`bir değişkende depoladığınız varsayılmaktadır. Kimlik doğrulaması ve alma `ClusterClient` yönergeleri yukarıdaki kimlik doğrulama bölümünde bulunabilir.
 
 ### <a name="create-a-cluster"></a>Küme oluşturma
 
-Yeni bir küme çağırarak oluşturulabilir `client.Create()`. 
+Çağırarak `client.Create()`yeni bir küme oluşturulabilir. 
 
 #### <a name="example"></a>Örnek
 
-Bu örnek nasıl oluşturulacağını gösterir. bir [Apache Spark](https://spark.apache.org/) kümeye 2 baş düğümü ve 1 çalışan düğümü ile.
+Bu örnekte, 2 baş düğüm ve 1 çalışan düğümü ile bir [Apache Spark](https://spark.apache.org/) kümesinin nasıl oluşturulacağı gösterilmektedir.
 
 > [!NOTE]  
-> Önce bir kaynak grubu ve depolama hesabı oluşturmak için aşağıda açıklandığı gibi ihtiyacınız. Zaten bu oluşturduysanız, bu adımları atlayabilirsiniz.
+> İlk olarak, aşağıda açıklandığı gibi bir kaynak grubu ve depolama hesabı oluşturmanız gerekir. Bunları zaten oluşturduysanız, bu adımları atlayabilirsiniz.
 
-##### <a name="creating-a-resource-group"></a>Bir kaynak grubu oluşturma
+##### <a name="creating-a-resource-group"></a>Kaynak grubu oluşturma
 
-Kullanarak bir kaynak grubu oluşturmanız [Azure Cloud Shell](https://shell.azure.com/bash) çalıştırarak
+Çalıştıran [Azure Cloud Shell](https://shell.azure.com/bash) kullanarak bir kaynak grubu oluşturabilirsiniz
 ```azurecli-interactive
 az group create -l <Region Name (i.e. eastus)> --n <Resource Group Name>
 ```
 ##### <a name="creating-a-storage-account"></a>Depolama hesabı oluşturma
 
-Bir depolama hesabı kullanarak oluşturabileceğiniz [Azure Cloud Shell](https://shell.azure.com/bash) çalıştırarak:
+Aşağıdakileri çalıştırarak [Azure Cloud Shell](https://shell.azure.com/bash) kullanarak bir depolama hesabı oluşturabilirsiniz:
 ```azurecli-interactive
 az storage account create -n <Storage Account Name> -g <Existing Resource Group Name> -l <Region Name (i.e. eastus)> --sku <SKU i.e. Standard_LRS>
 ```
-Şimdi (Bu bir küme oluşturmak için gerekir), depolama hesabı anahtarı almak için aşağıdaki komutu çalıştırın:
+Şimdi depolama hesabınızın anahtarını almak için aşağıdaki komutu çalıştırın (bir küme oluşturmak için buna ihtiyacınız olacaktır):
 ```azurecli-interactive
 az storage account keys list -n <Storage Account Name>
 ```
 ---
-2 baş düğüm ve 1 çalışan düğümü ile Git kod parçacığı bir Spark kümesi oluşturur. Yorumlar bölümünde açıklandığı gibi boş değişkenleri doldurun ve belirli gereksinimlerinize uyacak şekilde diğer parametreleri değiştirmek çekinmeyin.
+Aşağıdaki go kod parçacığı, 2 baş düğüm ve 1 çalışan düğümü olan bir Spark kümesi oluşturur. Açıklamalarda açıklandığı şekilde boş değişkenleri girin ve diğer parametreleri özel gereksinimlerinize uyacak şekilde değiştirin.
 
 ```golang
 // The name for the cluster you are creating
@@ -244,9 +245,9 @@ var parameters = hdi.ClusterCreateParametersExtended {
 client.Create(context.Background(), resourceGroupName, clusterName, parameters)
 ```
 
-### <a name="get-cluster-details"></a>Küme ayrıntıları
+### <a name="get-cluster-details"></a>Küme ayrıntılarını al
 
-Belirli bir küme için özellikleri almak için:
+Belirli bir kümenin özelliklerini almak için:
 
 ```golang
 client.Get(context.Background(), "<Resource Group Name>", "<Cluster Name>")
@@ -254,7 +255,7 @@ client.Get(context.Background(), "<Resource Group Name>", "<Cluster Name>")
 
 #### <a name="example"></a>Örnek
 
-Kullanabileceğiniz `get` kümeniz başarıyla oluşturdunuz onaylamak için.
+Kümenizi başarıyla oluşturdunuz `get` olduğunu doğrulamak için ' i kullanabilirsiniz.
 
 ```golang
 cluster, err := client.Get(context.Background(), resourceGroupName, clusterName)
@@ -265,29 +266,29 @@ fmt.Println(*cluster.Name)
 fmt.Println(*cluster.ID
 ```
 
-Çıktı gibi görünmelidir:
+Çıktının şöyle görünmesi gerekir:
 
 ```
 <Cluster Name>
 /subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/<Resource Group Name>/providers/Microsoft.HDInsight/clusters/<Cluster Name>
 ```
 
-### <a name="list-clusters"></a>Kümeleri listeleme
+### <a name="list-clusters"></a>Kümeleri Listele
 
-#### <a name="list-clusters-under-the-subscription"></a>Abonelik altındaki kümeleri listeleme
+#### <a name="list-clusters-under-the-subscription"></a>Abonelik altındaki kümeleri listeleyin
 ```golang
 client.List()
 ```
-#### <a name="list-clusters-by-resource-group"></a>Kaynak grubu tarafından kümeleri listeleme
+#### <a name="list-clusters-by-resource-group"></a>Grupları kaynak grubuna göre Listele
 ```golang
 client.ListByResourceGroup("<Resource Group Name>")
 ```
 
 > [!NOTE]  
-> Her ikisi de `List()` ve `ListByResourceGroup()` dönüş bir `ClusterListResultPage` yapısı. Sonraki sayfayı almak için çağırabilirsiniz `Next()`. Bu kadar yinelenebilir `ClusterListResultPage.NotDone()` döndürür `false`, aşağıdaki örnekte gösterildiği gibi.
+> Hem hem de `List()` bir `ClusterListResultPage` struct döndürün.`ListByResourceGroup()` Sonraki sayfayı almak için çağırabilirsiniz `Next()`. Bu, aşağıdaki örnekte gösterildiği `ClusterListResultPage.NotDone()` gibi `false`dönüşene kadar tekrarlanabilir.
 
 #### <a name="example"></a>Örnek
-Aşağıdaki örnek, geçerli abonelik için tüm küme özelliklerini yazdırır:
+Aşağıdaki örnek, geçerli abonelik için tüm kümelerin özelliklerini yazdırır:
 
 ```golang
 page, err := client.List(context.Background())
@@ -313,9 +314,9 @@ Bir kümeyi silmek için:
 client.Delete(context.Background(), "<Resource Group Name>", "<Cluster Name>")
 ```
 
-### <a name="update-cluster-tags"></a>Güncelleştirme kümesi etiketleri
+### <a name="update-cluster-tags"></a>Küme etiketlerini güncelleştirme
 
-Belirli bir küme etiketlerini güncelleştirebilirsiniz şu şekilde:
+Belirli bir kümenin etiketlerini şu şekilde güncelleştirebilirsiniz:
 
 ```golang
 client.Update(context.Background(), "<Resource Group Name>", "<Cluster Name>", hdi.ClusterPatchParameters{<map[string]*string} of Tags>)
@@ -326,9 +327,9 @@ client.Update(context.Background(), "<Resource Group Name>", "<Cluster Name>", h
 client.Update(context.Background(), "SDKTestRG", "SDKTest", hdi.ClusterPatchParameters{map[string]*string{"tag1Name" : to.StringPtr("tag1Value"), "tag2Name" : to.StringPtr("tag2Value")}})
 ```
 
-### <a name="resize-cluster"></a>Küme yeniden boyutlandırma
+### <a name="resize-cluster"></a>Kümeyi yeniden boyutlandır
 
-Yeni boyutunu belirterek belirli bir kümenin çalışan düğümlerinin sayısını yeniden boyutlandırabilirsiniz şu şekilde:
+Aşağıdakine benzer yeni bir boyut belirterek, belirli bir kümenin çalışan düğümü sayısını yeniden boyutlandırabilirsiniz:
 
 ```golang
 client.Resize(context.Background(), "<Resource Group Name>", "<Cluster Name>", hdi.ClusterResizeParameters{<Num of Worker Nodes (int)>})
@@ -336,9 +337,9 @@ client.Resize(context.Background(), "<Resource Group Name>", "<Cluster Name>", h
 
 ## <a name="cluster-monitoring"></a>Küme izleme
 
-HDInsight Yönetimi SDK'sı, izleme kümelerinizdeki Operations Management Suite (OMS) aracılığıyla yönetmek için de kullanılabilir.
+HDInsight Yönetim SDK 'Sı, Operations Management Suite (OMS) aracılığıyla kümelerinizde izlemeyi yönetmek için de kullanılabilir.
 
-Nasıl oluşturduğunuz benzer şekilde `ClusterClient` yönetim işlemleri için kullanılacak oluşturmak gereken bir `ExtensionClient` işlemleri izleme için kullanılacak. Yukarıdaki kimlik doğrulaması bölümü tamamladıktan sonra oluşturabileceğiniz bir `ExtensionClient` şu şekilde:
+Yönetim işlemleri için kullanmak üzere `ClusterClient` oluşturduğunuz şekilde, izleme işlemleri için kullanmak üzere bir `ExtensionClient` oluşturmanız gerekir. Yukarıdaki kimlik doğrulama bölümünü tamamladıktan sonra, şöyle bir `ExtensionClient` şekilde oluşturabilirsiniz:
 
 ```golang
 extClient := hdi.NewExtensionsClient(SUBSCRIPTION_ID)
@@ -346,30 +347,30 @@ extClient.Authorizer, _ = credentials.Authorizer()
 ```
 
 > [!NOTE]  
-> Aşağıda örnekler izleme zaten başlatılmış varsayar bir `ExtensionClient` adlı `extClient` ve kendi `Authorizer` yukarıda da gösterildiği gibi.
+> Aşağıdaki izleme örnekleri, zaten çağrılan bir `ExtensionClient` adı `extClient` başlattığını ve yukarıda gösterildiği `Authorizer` gibi ayarlamış olduğunu varsayar.
 
 ### <a name="enable-oms-monitoring"></a>OMS izlemeyi etkinleştir
 
 > [!NOTE]  
-> OMS izlemeyi etkinleştirmek için mevcut bir Log Analytics çalışma alanı olması gerekir. Zaten bir oluşturmadıysanız, burada bunu nasıl edinebilirsiniz: [Azure portalında Log Analytics çalışma alanı oluşturma](https://docs.microsoft.com/azure/log-analytics/log-analytics-quick-create-workspace).
+> OMS Izlemesini etkinleştirmek için, mevcut bir Log Analytics çalışma alanına sahip olmanız gerekir. Henüz bir tane oluşturmadıysanız, bunu nasıl yapacağınızı öğrenebilirsiniz: [Azure Portal bir Log Analytics çalışma alanı oluşturun](https://docs.microsoft.com/azure/log-analytics/log-analytics-quick-create-workspace).
 
-Kümenizde OMS izlemeyi etkinleştirmek için:
+Kümenizde OMS Izlemesini etkinleştirmek için:
 
 ```golang
 extClient.EnableMonitoring(context.Background(), "<Resource Group Name", "Cluster Name", hdi.ClusterMonitoringRequest {WorkspaceID: to.StringPtr("<Workspace Id>")})
 ```
 
-### <a name="view-status-of-oms-monitoring"></a>OMS izleme durumunu görüntüle
+### <a name="view-status-of-oms-monitoring"></a>OMS izlemenin durumunu görüntüleme
 
-Kümenizde OMS durumunu almak için:
+Kümenizdeki OMS durumunu almak için:
 
 ```golang
 extClient.GetMonitoringStatus(context.Background(), "<Resource Group Name", "Cluster Name")
 ```
 
-### <a name="disable-oms-monitoring"></a>OMS izlemeyi devre dışı bırak
+### <a name="disable-oms-monitoring"></a>OMS izlemesini devre dışı bırak
 
-Kümenizde OMS devre dışı bırakmak için:
+Kümenizde OMS 'yi devre dışı bırakmak için:
 
 ```golang
 extClient.DisableMonitoring(context.Background(), "<Resource Group Name", "Cluster Name")
@@ -377,21 +378,21 @@ extClient.DisableMonitoring(context.Background(), "<Resource Group Name", "Clust
 
 ## <a name="script-actions"></a>Betik eylemleri
 
-HDInsight küme özelleştirmek için özel betikler çağıran betik eylemleri adlı bir yapılandırma işlevi sağlar.
+HDInsight, kümeyi özelleştirmek için özel betikler çağıran betik eylemleri adlı bir yapılandırma işlevi sağlar.
 
 > [!NOTE]  
-> Betik eylemleri kullanma hakkında daha fazla bilgi burada bulunabilir: [Betik eylemlerini kullanarak Linux tabanlı HDInsight kümeleri özelleştirme](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux)
+> Betik eylemlerinin nasıl kullanılacağı hakkında daha fazla bilgi burada bulunabilir: [Betik eylemlerini kullanarak Linux tabanlı HDInsight kümelerini özelleştirme](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux)
 
-### <a name="execute-script-actions"></a>Betik eylemleri yürütme
+### <a name="execute-script-actions"></a>Betik eylemlerini yürütme
 
-Belirtilen bir kümede betik eylemleri yürütebilir şu şekilde:
+Belirli bir kümede betik eylemlerini şu şekilde yürütebilirsiniz:
 
 ```golang
 var scriptAction1 = hdi.RuntimeScriptAction{Name: to.StringPtr("<Script Name>"), URI: to.StringPtr("<URL To Script>"), Roles: <&[]string of roles>} //valid roles are "headnode", "workernode", "zookeepernode", and "edgenode"
 client.ExecuteScriptActions(context.Background(), "<Resource Group Name>", "<Cluster Name>", hdi.ExecuteScriptActionParameters{PersistOnSuccess: to.BoolPtr(true), ScriptActions: &[]hdi.RuntimeScriptAction{scriptAction1}}) //add more RuntimeScriptActions to the list to execute multiple scripts
 ```
 
-'Betik eylemi Sil' ve 'Kalıcı betik eylemleri liste' işlemlerinde, oluşturmanız gerekir. bir `ScriptActionsClient`, nasıl oluşturduğunuz benzer şekilde `ClusterClient` yönetim işlemleri için kullanılacak. Yukarıdaki kimlik doğrulaması bölümü tamamladıktan sonra oluşturabileceğiniz bir `ScriptActionsClient` şu şekilde:
+' Betik eylemini Sil ' ve ' kalıcı betik eylemlerini Listele ' işlemleri için, yönetim işlemleri için kullanmak üzere nasıl `ScriptActionsClient`oluşturduğunuza `ClusterClient` benzer şekilde bir oluşturmanız gerekir. Yukarıdaki kimlik doğrulama bölümünü tamamladıktan sonra şöyle bir `ScriptActionsClient` şekilde oluşturabilirsiniz:
 
 ```golang
 scriptActionsClient := hdi.NewScriptActionsClient(SUBSCRIPTION_ID)
@@ -399,22 +400,22 @@ scriptActionsClient.Authorizer, _ = credentials.Authorizer()
 ```
 
 > [!NOTE]  
-> Betik eylemleri örneklerde, zaten başlatılmış varsayılmaktadır bir `ScriptActionsClient` adlı `scriptActionsClient` ve kendi `Authorizer` yukarıda da gösterildiği gibi.
+> Aşağıdaki betik eylemleri örnekleri, zaten bir `ScriptActionsClient` çağrılmış `scriptActionsClient` olduğunu varsayar ve yukarıda gösterildiği `Authorizer` gibi ayarlayın.
 
-### <a name="delete-script-action"></a>Betik eylemi Sil
+### <a name="delete-script-action"></a>Betik eylemini Sil
 
-Belirtilen kümede belirtilen kalıcı betik eylemi silmek için:
+Belirli bir kümede belirtilen kalıcı betik eylemini silmek için:
 
 ```golang
 scriptActionsClient.Delete(context.Background(), "<Resource Group Name>", "<Cluster Name>", "<Script Name>")
 ```
 
-### <a name="list-persisted-script-actions"></a>Kalıcı betik eylemleri listeleyin
+### <a name="list-persisted-script-actions"></a>Kalıcı betik eylemlerini listeleme
 
 > [!NOTE]  
-> Her ikisi de `ListByCluster()` döndürür bir `ScriptActionsListPage` yapısı. Sonraki sayfayı almak için çağırabilirsiniz `Next()`. Bu kadar yinelenebilir `ClusterListResultPage.NotDone()` döndürür `false`, aşağıdaki örnekte gösterildiği gibi.
+> Her `ListByCluster()` ikisi de `ScriptActionsListPage` bir struct döndürür. Sonraki sayfayı almak için çağırabilirsiniz `Next()`. Bu, aşağıdaki örnekte gösterildiği `ClusterListResultPage.NotDone()` gibi `false`dönüşene kadar tekrarlanabilir.
 
-Belirtilen kümenin tüm kalıcı betik eylemleri listelemek için:
+Belirtilen küme için tüm kalıcı betik eylemlerini listelemek için:
 ```golang
 scriptActionsClient.ListByCluster(context.Background(), "<Resource Group Name>", "<Cluster Name>")
 ```
@@ -437,9 +438,9 @@ for (page.NotDone()) {
 }
 ```
 
-### <a name="list-all-scripts-execution-history"></a>Tüm betikleri yürütme geçmişini listesi
+### <a name="list-all-scripts-execution-history"></a>Tüm betiklerin yürütme geçmişini Listele
 
-Bu işlem için oluşturmanız gerekir. bir `ScriptExecutionHistoryClient`, nasıl oluşturduğunuz benzer şekilde `ClusterClient` yönetim işlemleri için kullanılacak. Yukarıdaki kimlik doğrulaması bölümü tamamladıktan sonra oluşturabileceğiniz bir `ScriptActionsClient` şu şekilde:
+Bu işlem için, yönetim işlemleri için kullanmak üzere `ScriptExecutionHistoryClient`nasıl oluşturduğunuza `ClusterClient` benzer şekilde, oluşturmanız gerekir. Yukarıdaki kimlik doğrulama bölümünü tamamladıktan sonra şöyle bir `ScriptActionsClient` şekilde oluşturabilirsiniz:
 
 ```golang
 scriptExecutionHistoryClient := hdi.NewScriptExecutionHistoryClient(SUBSCRIPTION_ID)
@@ -447,9 +448,9 @@ scriptExecutionHistoryClient.Authorizer, _ = credentials.Authorizer()
 ```
 
 > [!NOTE]  
-> Zaten başlatılmış aşağıda varsayar bir `ScriptExecutionHistoryClient` adlı `scriptExecutionHistoryClient` ve kendi `Authorizer` yukarıda da gösterildiği gibi.
+> Aşağıda, zaten bir `ScriptExecutionHistoryClient` çağrılan `scriptExecutionHistoryClient` ve ' ın yukarıda gösterildiği `Authorizer` gibi ayarlamış olduğunuz varsayılmaktadır.
 
-Belirtilen kümenin tüm betikleri yürütme geçmişini listelemek için:
+Belirtilen küme için tüm betiklerin yürütme geçmişini listelemek için:
 
 ```golang
 scriptExecutionHistoryClient.ListByCluster(context.Background(), "<Resource Group Name>", "<Cluster Name>")
@@ -457,7 +458,7 @@ scriptExecutionHistoryClient.ListByCluster(context.Background(), "<Resource Grou
 
 #### <a name="example"></a>Örnek
 
-Bu örnek, tüm geçmiş betik yürütme için tüm ayrıntılarını yazdırır.
+Bu örnek, tüm geçmiş betik yürütmelerinin tüm ayrıntılarını yazdırır.
 
 ```golang
 page, err := scriptExecutionHistoryClient.ListByCluster(context.Background(), resourceGroupName, clusterName)
@@ -477,4 +478,4 @@ for (page.NotDone()) {
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Keşfedin [GoDoc başvuru malzemesi](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight). SDK'sı uygulamasında tüm işlevleri için başvuru belgeleri GoDocs sağlar.
+* [Godoc başvuru malzemesini](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight)bulun. GoDocs, SDK 'daki tüm işlevler için başvuru belgeleri sağlar.

@@ -1,107 +1,100 @@
 ---
-title: Azure Application Insights ile kullanım analizi | Microsoft docs
-description: Kullanıcılarınız ve uygulamanızla neler yaptığını anlayın.
-services: application-insights
-documentationcenter: ''
-author: NumberByColors
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Kullanım Analizi | Microsoft docs
+description: Kullanıcılarınıza ve uygulamalarınızla neler olduğunu anlayın.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 10/10/2017
-ms.pm_owner: daviste;NumberByColors
-ms.reviewer: mbullwin
-ms.author: daviste
-ms.openlocfilehash: f2539d5250ff436a720fe10f748f40db29b0ee25
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+author: mrbullwinkle
+ms.author: mbullwin
+ms.date: 09/19/2019
+ms.openlocfilehash: aa37717c5037294c2b5ec61f7815b007cbf74992
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60783442"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73884819"
 ---
 # <a name="usage-analysis-with-application-insights"></a>Application Insights ile kullanım analizi
 
-Web veya mobil uygulamanızı hangi özelliklerinin en popüler misiniz? Kullanıcılarınız uygulamanızla hedeflerine ulaşması? Belirli noktalarda bıraktıklarını ve daha sonra iade etmeden?  [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) , insanların uygulamanızı nasıl kullandığını içine güçlü Öngörüler elde etmeye yardımcı olur. Uygulamanızı her güncelleştirdiğinizde, kullanıcılar için ne kadar iyi çalıştığı değerlendirebilirsiniz. Bu bilgiyle, veri odaklı kararlar sonraki geliştirme döngülerinizi yapabilirsiniz.
+Web veya mobil uygulamanızın hangi özellikleri en popüler? Kullanıcılarınız uygulamanızla hedeflerine ulaşsın mı? Belirli noktalarda kullanıma hazır olurlar ve daha sonra geri dönesin mi?  [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) kişilerin uygulamanızı nasıl kullandıkları hakkında güçlü Öngörüler elde etmenize yardımcı olur. Uygulamanızı her güncelleştirdiğinizde, kullanıcılar için ne kadar iyi çalışma olduğunu değerlendirebilirsiniz. Bu bilgi ile, sonraki geliştirme döngüleriniz hakkında veri odaklı kararlar verebilirsiniz.
 
 ## <a name="send-telemetry-from-your-app"></a>Uygulamanızdan telemetri gönderin
 
-Application Insights hem uygulama sunucu kodunuzda ve web sayfalarınızda yükleyerek en iyi deneyimi elde edilir. Uygulamanızın istemci ve sunucu bileşenleri telemetri analizi için Azure portalı için geri gönderin.
+En iyi deneyim, hem App Server kodunuzda hem de Web sayfalarınızda Application Insights yüklenerek elde edilir. Uygulamanızın istemci ve sunucu bileşenleri, analiz için telemetri Azure portal geri gönderir.
 
-1. **Sunucu kodu:** İçin uygun modülünü yüklemek, [ASP.NET](../../azure-monitor/app/asp-net.md), [Azure](../../azure-monitor/app/app-insights-overview.md), [Java](../../azure-monitor/app/java-get-started.md), [Node.js](../../azure-monitor/app/nodejs.md), veya [diğer](../../azure-monitor/app/platforms.md) uygulama.
+1. **Sunucu kodu:** [ASP.net](../../azure-monitor/app/asp-net.md), [Azure](../../azure-monitor/app/app-insights-overview.md), [Java](../../azure-monitor/app/java-get-started.md), [Node. js](../../azure-monitor/app/nodejs.md)veya [diğer](../../azure-monitor/app/platforms.md) uygulamalar için uygun modülü yükler.
 
-    * *Sunucu kodu yüklemek istemiyor musunuz? Yalnızca [Azure Application Insights kaynağı oluşturma](../../azure-monitor/app/create-new-resource.md ).*
+    * *Sunucu kodunu yüklemek istemiyor musunuz? Yalnızca [bir Azure Application Insights kaynağı oluşturun](../../azure-monitor/app/create-new-resource.md ).*
 
-2. **Web sayfası koduna:** Kapatmadan önce web sayfası için aşağıdaki betiği ekleyin ``</head>``. Uygun değere Application Insights kaynağınızın izleme anahtarını değiştirin:
-
-   ```javascript
-      <script type="text/javascript">
-        var appInsights=window.appInsights||function(a){
-            function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c
-        }({
-            instrumentationKey: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
-        });
-        
-        window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+2. **Web sayfası kodu:** Kapatma ``</head>``önce Web sayfanıza aşağıdaki betiği ekleyin. İzleme anahtarını Application Insights kaynağınız için uygun değerle değiştirin:
+    
+    ```html
+    <script type="text/javascript">
+    var sdkInstance="appInsightsSDK";window[sdkInstance]="appInsights";var aiName=window[sdkInstance],aisdk=window[aiName]||function(e){function n(e){t[e]=function(){var n=arguments;t.queue.push(function(){t[e].apply(t,n)})}}var t={config:e};t.initialize=!0;var i=document,a=window;setTimeout(function(){var n=i.createElement("script");n.src=e.url||"https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js",i.getElementsByTagName("script")[0].parentNode.appendChild(n)});try{t.cookie=i.cookie}catch(e){}t.queue=[],t.version=2;for(var r=["Event","PageView","Exception","Trace","DependencyData","Metric","PageViewPerformance"];r.length;)n("track"+r.pop());n("startTrackPage"),n("stopTrackPage");var s="Track"+r[0];if(n("start"+s),n("stop"+s),n("setAuthenticatedUserContext"),n("clearAuthenticatedUserContext"),n("flush"),!(!0===e.disableExceptionTracking||e.extensionConfig&&e.extensionConfig.ApplicationInsightsAnalytics&&!0===e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)){n("_"+(r="onerror"));var o=a[r];a[r]=function(e,n,i,a,s){var c=o&&o(e,n,i,a,s);return!0!==c&&t["_"+r]({message:e,url:n,lineNumber:i,columnNumber:a,error:s}),c},e.autoExceptionInstrumented=!0}return t}(
+    {
+      instrumentationKey:"INSTRUMENTATION_KEY"
+    }
+    );window[aiName]=aisdk,aisdk.queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
     </script>
     ```
-    Web sitelerini izlemek için kullanabileceğiniz daha gelişmiş yapılandırmalar hakkında bilgi edinmek için [JavaScript SDK API başvurusunu](https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md) inceleyin.
 
-3. **Mobil uygulama kodu:** Uygulamanızdan olayları toplayabilir ve bu olayların kopyalarını göre Analiz için Application Insights'a gönderme için App Center SDK'sını kullanın [bu kılavuzu izleyerek](../../azure-monitor/learn/mobile-center-quickstart.md).
+    Web sitelerini izlemeye yönelik daha gelişmiş yapılandırma hakkında daha fazla bilgi edinmek için [JAVASCRIPT SDK başvuru makalesine](https://docs.microsoft.com/azure/azure-monitor/app/javascript)göz atın.
 
-4. **Telemetri alın:** Projeniz için bir kaç dakika hata ayıklama modunda çalıştırabilir ve sonuçları Application ınsights'ta genel bakış dikey penceresinde bulun.
+3. **Mobil uygulama kodu:** Uygulamanızdaki olayları toplamak için App Center SDK 'sını kullanın, ardından [Bu kılavuzu izleyerek](../../azure-monitor/learn/mobile-center-quickstart.md)bu olayların kopyalarını analiz için Application Insights gönderin.
 
-    Uygulamanızın performansını izleyin ve uygulamanızla kullanıcıların ne yaptıklarını bulmak için uygulamanızı yayımlayın.
+4. **Telemetri al:** Projenizi birkaç dakika boyunca hata ayıklama modunda çalıştırın ve ardından Application Insights genel bakış dikey penceresinde sonuçları arayın.
 
-## <a name="include-user-and-session-id-in-your-telemetry"></a>Kullanıcı ve oturum kimliği telemetrinizi içerir
-Zaman içinde kullanıcıları izlemek için Application Insights bunları belirlemenin bir yolu gerektirir. Bir kullanıcı kimliği veya bir oturum kimliği gerektirmeyen yalnızca kullanımı aracı olayları araçtır
+    Uygulamanızın performansını izlemek için uygulamanızı yayımlayın ve kullanıcılarınızın uygulamanızda ne yaptığını öğrenin.
 
-Kullanıcı ve oturum kimliklerini kullanarak göndermeye başlayın [bu işlem](https://docs.microsoft.com/azure/application-insights/app-insights-usage-send-user-context).
+## <a name="include-user-and-session-id-in-your-telemetry"></a>Telemetrinize Kullanıcı ve oturum KIMLIĞINI dahil etme
+Kullanıcılara zaman içinde izlemek için Application Insights bunları tanımlamak için bir yol gerekir. Olaylar Aracı, bir kullanıcı KIMLIĞI veya oturum KIMLIĞI gerektirmeyen tek kullanım aracıdır.
 
-## <a name="explore-usage-demographics-and-statistics"></a>Kullanım demografik bilgileri ve istatistikleri keşfedin
-İnsanların uygulamanızı kullandığınızda, bunlar en, kullanıcılarınızın bulunduğu yere ilginizi çeken hangi sayfaların, hangi tarayıcılar ve işletim sistemleri, kullandığını keşfedin. 
+[Bu işlemi](https://docs.microsoft.com/azure/application-insights/app-insights-usage-send-user-context)kullanarak Kullanıcı ve oturum kimlikleri göndermeye başlayın.
 
-Kullanıcı ve oturum raporları sayfaları veya özel olaylar verilerinizi filtrelemek ve bunları konumu ve ortam sayfa gibi özelliklere göre segmentlere ayırın. Kendi filtrelerinizi de ekleyebilirsiniz.
+## <a name="explore-usage-demographics-and-statistics"></a>Kullanım demografgrafiklerini ve istatistiklerini keşfet
+Kullanıcılarınızın uygulamanızı ne zaman kullandığı, ne kadar ilgilendiğiniz ve hangi tarayıcıların kullandıkları, hangi tarayıcıların ve işletim sistemlerinin bulunduğu hakkında bilgi edinin. 
+
+Kullanıcılar ve oturumlar, verilerinizi sayfalara veya özel olaylara göre filtreleyip konum, ortam ve sayfa gibi özelliklere göre segmentlere ayırabilir. Kendi filtrelerinizi de ekleyebilirsiniz.
 
 ![Kullanıcılar](./media/usage-overview/users.png)  
 
-Çıkış veri kümesinde ilginç kalıpları ınsights sağdaki gelin.  
+Veri kümesindeki ilginç desenler hakkında bilgi edinin.  
 
-* **Kullanıcılar** rapor sayfalarınızın erişimi, seçilen süreler içinde benzersiz kullanıcı sayısı sayar. Web apps için tanımlama bilgilerini kullanan kullanıcılar sayılır. Birisi farklı tarayıcılar veya istemci makineleri sitenizle erişen veya kendi tanımlama bilgilerini temizler, ardından bunların birden çok kez sayılır.
-* **Oturumları** rapor sitenize erişen kullanıcı oturumlarının sayısını sayar. Etkinlik birden fazla yarım saat, belirli bir süre tarafından sonlandırıldı, bir kullanıcı tarafından bir süre oturumdur.
+* **Kullanıcılar** raporu, seçtiğiniz zaman dönemlerinizde sayfalarınıza erişen benzersiz kullanıcıların sayısını sayar. Web Apps için kullanıcılar tanımlama bilgileri kullanılarak sayılır. Siteniz farklı tarayıcılarla veya istemci makinelerle erişiyorsa veya kendi tanımlama bilgilerini temizlerse, birden çok kez sayılır.
+* **Oturumlar** raporu, sitenize erişen kullanıcı oturumlarının sayısını sayar. Oturum, bir kullanıcı tarafından, bir saatten daha uzun bir süredir işlem yapılmadan daha fazla süre sonunda sonlandırılmış bir etkinlik sürecinde.
 
 [Kullanıcılar, oturumlar ve olaylar araçları hakkında daha fazla bilgi](usage-segmentation.md)  
 
-## <a name="retention---how-many-users-come-back"></a>Bekletme - kaç kullanıcının döndürülmesini?
+## <a name="retention---how-many-users-come-back"></a>Bekletme-kaç Kullanıcı geri geliyor?
 
-Bekletme ne sıklıkta belirli bir zaman aralığı sırasında bazı iş eylemi gerçekleştiren kullanıcı kohortlar göre uygulamasını kullanmak için kullanıcılarınızın dönüş anlamanıza yardımcı olur. 
+Saklama, kullanıcılarınızın, belirli bir zaman aralığı boyunca bazı iş eylemlerini gerçekleştiren kullanıcıların, uygulamalarını kullanmak için ne sıklıkta geri dönebileceğini anlamanıza yardımcı olur. 
 
-- Hangi belirli özellikleri diğerlerinden geri daha fazla gelen kullanıcıların neden anlama 
-- Gerçek kullanıcı verilerine dayalı form varsayımlar 
-- Bekletme ürününüzün bir sorun olup olmadığını belirleme 
+- Kullanıcıların diğerlerinden daha fazla geri dönmesine neden olan belirli özellikleri anlayın 
+- Gerçek kullanıcı verilerine göre hipotezleri formu 
+- Üretim, ürününüzün bir sorun olup olmadığını belirleme 
 
 ![Bekletme](./media/usage-overview/retention.png) 
 
-Üstte Tutma denetimler belirli olayları ve bekletme hesaplamak için zaman aralığını tanımlamanızı sağlar. Orta grafikte belirtilen zaman aralığına göre toplam bekletme yüzdesinin görsel bir temsili sağlar. Alt grafik saklama belirli bir süre içinde temsil eder. Bu düzeyde ayrıntı, kullanıcılarınızın neler yaptığını ve hangi daha ayrıntılı ayrıntı döndüren kullanıcıları etkileyebilecek anlamanıza olanak tanır.  
+En üstteki bekletme denetimleri, saklama süresini hesaplamak için belirli olayları ve zaman aralığını tanımlamanızı sağlar. Ortadaki grafik, belirtilen zaman aralığına göre genel bekletme yüzdesinin görsel bir gösterimini sağlar. Alt kısımdaki grafik belirli bir dönemde tek tek bekletme 'yi temsil eder. Bu ayrıntı düzeyi, kullanıcılarınızın ne yaptığını ve daha ayrıntılı bir ayrıntı düzeyi üzerinde Kullanıcı döndürmeyi neyin etkileyebileceğini anlamanıza olanak tanır.  
 
-[Bekletme aracıyla ilgili daha fazla bilgi](usage-retention.md)
+[Bekletme aracı hakkında daha fazla bilgi](usage-retention.md)
 
 ## <a name="custom-business-events"></a>Özel iş olayları
 
-Kullanıcıların uygulamanızla neler Temizle anlamak için özel olaylarını günlüğe kaydedecek şekilde kod satırlarını eklemek yararlıdır. Bu olaylar herhangi bir şey satın almadan ya da bir oyun kazanma gibi daha önemli iş olaylarına belirli düğmelere tıklamak gibi ayrıntılı kullanıcı eylemlerine izleyebilirsiniz. 
+Uygulamanızdaki kullanıcıların neler yaptığını net bir şekilde anlamak için, özel olayları günlüğe kaydetmek üzere kod satırları eklemek yararlıdır. Bu olaylar, belirli düğmeleri tıklatmak gibi ayrıntılı Kullanıcı eylemlerinden herhangi bir şeyi izleyerek satın alma veya oyun kazanma gibi daha önemli iş olaylarına sahip olabilir. 
 
-Bazı durumlarda, sayfa görüntülemeleri yararlı olaylar gösterebilir ancak genel olarak geçerli değildir. Bir kullanıcı, ürün satın alma olmadan bir ürün sayfasını açabilirsiniz. 
+Bazı durumlarda, sayfa görünümleri faydalı olayları temsil edebilir, ancak genel olarak doğru değildir. Bir Kullanıcı ürünü satın almadan bir ürün sayfasını açabilir. 
 
-Belirli iş olayları ile kullanıcılarınızın siteniz aracılığıyla kullanıcılarınızın ilerleme grafik. Çıkış için farklı seçenekleri tercihlerini bulabilir ve ayrıldıklarını out veya güçlük. Bu bilgiyle, geliştirme kapsamınızda öncelikleri hakkında bilinçli kararlar yapabilirsiniz.
+Belirli iş olayları sayesinde kullanıcılarınızın ilerlemesini sitenizde grafik olarak ekleyebilirsiniz. Farklı seçeneklere yönelik tercihlerini bulabilir ve nerede yaşanıyorsa veya zorluklara sahip olabilirler. Bu bilgi ile, geliştirme kapsamınızdaki öncelikler hakkında bilinçli kararlar verebilirsiniz.
 
-Uygulama istemci tarafında olayları kaydedilebilir:
+Olaylar, uygulamanın istemci tarafından günlüğe kaydedilebilir:
 
 ```JavaScript
 
     appInsights.trackEvent("ExpandDetailTab", {DetailTab: tabName});
 ```
 
-Veya sunucu tarafı:
+Ya da sunucu tarafında:
 
 ```csharp
     var tc = new Microsoft.ApplicationInsights.TelemetryClient();
@@ -112,31 +105,31 @@ Veya sunucu tarafı:
     tc.TrackEvent("CompletedPurchase");
 ```
 
-Böylece filtrelemek veya olayları portalda incelediğinizde bölme bu olayları, özellik değerlerini ekleyebilirsiniz. Ayrıca, standart bir özellikler kümesini bir dizi bireysel bir kullanıcı etkinliklerini izlemenizi sağlayan anonim kullanıcı kimliği gibi her bir olay eklenir.
+Bu olaylara özellik değerleri iliştirebilirsiniz, böylece olayları portalda incelemenize sonra filtreleyebileceğiniz veya bölünebilmenizi sağlayabilirsiniz. Ayrıca, tek bir kullanıcının etkinliklerini izlemenize olanak sağlayan anonim kullanıcı KIMLIĞI gibi her bir olaya standart bir özellikler kümesi iliştirilir.
 
-Daha fazla bilgi edinin [özel olaylar](../../azure-monitor/app/api-custom-events-metrics.md#trackevent) ve [özellikleri](../../azure-monitor/app/api-custom-events-metrics.md#properties).
+[Özel olaylar](../../azure-monitor/app/api-custom-events-metrics.md#trackevent) ve [Özellikler](../../azure-monitor/app/api-custom-events-metrics.md#properties)hakkında daha fazla bilgi edinin.
 
-### <a name="slice-and-dice-events"></a>Dilimlediği olayları
+### <a name="slice-and-dice-events"></a>Dilim ve zar olayları
 
-Kullanıcılar, oturumlar ve olaylar araçları dilim ve özel olaylar kullanıcı, olay adı ve özellikleri ayrıntılı olarak inceleyin.
+Kullanıcılar, oturumlar ve olaylar araçlarında, özel olayları Kullanıcı, olay adı ve özelliklere göre dilimleyerek ve zar aktarabilirsiniz.
 ![Kullanıcılar](./media/usage-overview/users.png)  
   
-## <a name="design-the-telemetry-with-the-app"></a>Tasarım uygulaması ile telemetri
+## <a name="design-the-telemetry-with-the-app"></a>Uygulamayla telemetri tasarlama
 
-Uygulamanızın her bir özelliği tasarlarken, Kullanıcılarınızla başarısını ölçmek için nasıl yükleyeceksiniz göz önünde bulundurun. Hangi iş olaylarını kaydetmek için gereken ve izleme olayları için uygulamanıza başından çağıran kod karar verin.
+Uygulamanızın her bir özelliğini tasarlarken, kullanıcılarınızın başarısını nasıl ölçmenize dikkat edin. Kayıt yapmanız gereken iş olaylarını belirleyin ve bu olaylar için izleme çağrılarını, başlangıçtan itibaren uygulamanıza kodlayın.
 
 ## <a name="a--b-testing"></a>A | B testi
-Bir özelliğin hangi çeşidin daha başarılı olacaktır bilmiyorsanız, her ikisi de her farklı erişilebilir kullanıcıların serbest bırakın. Her başarısını ölçmek ve birleşik bir sürüme taşıyın.
+Bir özelliğin hangi çeşidinin daha başarılı olacağını bilmiyorsanız, her ikisini de serbest bırakın, her ikisini birden farklı kullanıcı için erişilebilir hale getirir. Her birinin başarısını ölçün ve ardından birleştirilmiş bir sürüme taşıyın.
 
-Bu yöntem için ayrı özellik değerlerini uygulamanızın her sürüm tarafından gönderilen tüm telemetri ekleyin. İçinde active TelemetryContext özellikleri tanımlayarak bunu yapabilirsiniz. Bu varsayılan özellikleri uygulama gönderen - her telemetri iletiye özel iletilerinizi değil, ancak standart telemetri de eklenir.
+Bu teknik için, uygulamanızın her bir sürümü tarafından gönderilen tüm telemetrisine ayrı özellik değerleri iliştirebilirsiniz. Bunu, etkin TelemetryContext özellikleri tanımlayarak yapabilirsiniz. Bu varsayılan özellikler, uygulamanın gönderdiği her telemetri iletisine (yalnızca özel mesajlarınızı değil, standart Telemetriyi) eklenir.
 
-Application Insights portalında, filtreleme ve farklı sürümleri karşılaştırmak için özellik değerleri, verilerinizde bölebilirsiniz.
+Application Insights portalında, farklı sürümleri karşılaştırmak için, bu verileri özellik değerlerine göre filtreleyin ve ayırın.
 
-Bunu yapmak için [bir telemetri Başlatıcısı kümesi](../../azure-monitor/app/api-filtering-sampling.md##add-properties-itelemetryinitializer):
+Bunu yapmak için [bir telemetri başlatıcısı ayarlayın](../../azure-monitor/app/api-filtering-sampling.md#addmodify-properties-itelemetryinitializer):
+
+**ASP.NET uygulamaları**
 
 ```csharp
-
-
     // Telemetry initializer class
     public class MyTelemetryInitializer : ITelemetryInitializer
     {
@@ -147,7 +140,7 @@ Bunu yapmak için [bir telemetri Başlatıcısı kümesi](../../azure-monitor/ap
     }
 ```
 
-Web uygulama başlatıcısında Global.asax.cs gibi:
+Global.asax.cs gibi Web uygulaması başlatıcısında:
 
 ```csharp
 
@@ -155,11 +148,27 @@ Web uygulama başlatıcısında Global.asax.cs gibi:
     {
         // ...
         TelemetryConfiguration.Active.TelemetryInitializers
-        .Add(new MyTelemetryInitializer());
+         .Add(new MyTelemetryInitializer());
     }
 ```
 
-Tüm yeni TelemetryClients belirttiğiniz özellik değeri otomatik olarak ekleyin. Telemetri olaylarını tek tek varsayılan değerleri geçersiz kılabilir.
+**ASP.NET Core uygulamalar**
+
+> [!NOTE]
+> `ApplicationInsights.config` veya `TelemetryConfiguration.Active` kullanarak Başlatıcı ekleme ASP.NET Core uygulamaları için geçerli değildir. 
+
+[ASP.NET Core](asp-net-core.md#adding-telemetryinitializers) uygulamalar için, aşağıda gösterildiği gibi, yeni bir `TelemetryInitializer` eklemek, bağımlılık ekleme kapsayıcısına eklenerek yapılır. Bu, `Startup.cs` sınıfınızın `ConfigureServices` yönteminde yapılır.
+
+```csharp
+ using Microsoft.ApplicationInsights.Extensibility;
+ using CustomInitializer.Telemetry;
+ public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSingleton<ITelemetryInitializer, MyTelemetryInitializer>();
+}
+```
+
+Tüm yeni TelemetryClients, belirttiğiniz özellik değerini otomatik olarak ekler. Tek tek telemetri olayları varsayılan değerleri geçersiz kılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
    - [Kullanıcılar, Oturumlar, Etkinlikler](usage-segmentation.md)

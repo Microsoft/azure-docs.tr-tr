@@ -1,6 +1,6 @@
 ---
-title: Çağrı yapma veya logic apps ile Azure işlevleri ve Azure Service Bus tetikleyicisi
-description: Çağrı yapma veya logic apps, Azure Service Bus'ı kullanarak tetikleme Azure işlevleri oluşturun
+title: Azure Işlevleri ile mantıksal uygulamaları çağırma-Azure Logic Apps
+description: Azure Service Bus dinleyerek Logic Apps 'i çağıran veya tetikleyen Azure işlevleri oluşturun
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -8,56 +8,55 @@ author: ecfan
 ms.author: estfan
 ms.reviewer: jehollan, klam, LADocs
 ms.topic: article
-ms.assetid: 19cbd921-7071-4221-ab86-b44d0fc0ecef
-ms.date: 06/04/2019
-ms.openlocfilehash: 3d4f642ae25a179ea2c3241240996da774cd8c23
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/08/2019
+ms.openlocfilehash: c65a0464bbad6dbaca51dbc5bbc0d84adbd605d7
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66494944"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73904637"
 ---
-# <a name="call-or-trigger-logic-apps-by-using-azure-functions-and-azure-service-bus"></a>Çağrı yapma veya logic apps, Azure işlevleri ve Azure Service Bus'ı kullanarak tetikleme
+# <a name="call-or-trigger-logic-apps-by-using-azure-functions-and-azure-service-bus"></a>Azure Işlevleri 'ni ve Azure Service Bus kullanarak mantıksal uygulamaları çağırın veya tetikleyin
 
-Kullanabileceğiniz [Azure işlevleri](../azure-functions/functions-overview.md) bir uzun süre çalışan dinleyici veya görev dağıtmak istediğinizde bir mantıksal uygulama tetiklemek için. Örneğin, üzerinde dinleyen bir Azure işlevi oluşturabilir bir [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) sıraya almak ve hemen bir anında iletme tetikleyici olarak mantıksal uygulama başlatılır.
+Uzun süre çalışan bir dinleyici veya görev dağıtmanız gerektiğinde, bir mantıksal uygulamayı tetiklemek için [Azure işlevleri](../azure-functions/functions-overview.md) 'ni kullanabilirsiniz. Örneğin, bir [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) kuyruğu üzerinde dinleme yapan bir Azure işlevi oluşturabilir ve bir mantıksal uygulamayı anında iletme tetikleyicisi olarak tetikleyebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 * Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-* Bir Azure Service Bus ad alanı. Bir ad alanı yoksa, [önce ad alanınızı oluşturmanız](../service-bus-messaging/service-bus-create-namespace-portal.md).
+* Bir Azure Service Bus ad alanı. Bir ad alanınız yoksa, [önce ad alanınızı oluşturun](../service-bus-messaging/service-bus-create-namespace-portal.md).
 
-* Azure işlevleri için bir kapsayıcı bir Azure işlev uygulaması. Bir işlev uygulaması yoksa [ilk işlev uygulamanızı oluşturmak](../azure-functions/functions-create-first-azure-function.md)ve çalışma zamanı yığını olarak .NET seçtiğinizden emin olun.
+* Azure işlevleri için kapsayıcı olan bir Azure işlev uygulaması. Bir işlev uygulamanız yoksa, [önce işlev uygulamanızı oluşturun](../azure-functions/functions-create-first-azure-function.md)ve çalışma zamanı yığını olarak .net ' i seçtiğinizden emin olun.
 
-* Hakkında temel bilgilere [mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+* [Mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md) hakkında temel bilgi
 
 ## <a name="create-logic-app"></a>Mantıksal uygulama oluşturma
 
-Bu senaryo için tetiklemek istediğiniz her mantıksal uygulama çalışan bir işleviniz oldu. İlk olarak bir HTTP isteği tetikleyicisi ile başlayan bir mantıksal uygulama oluşturun. Bir kuyruk iletisi alındığında Bu uç nokta işlevini çağırır.  
+Bu senaryo için, tetiklemek istediğiniz her mantıksal uygulamayı çalıştıran bir işleviniz vardır. İlk olarak, bir HTTP istek tetikleyicisi ile başlayan bir mantıksal uygulama oluşturun. İşlevi, her bir kuyruk iletisi alındığında bu uç noktayı çağırır.
 
-1. Oturum [Azure portalında](https://portal.azure.com)ve boş mantıksal uygulama oluşturun.
+1. [Azure Portal](https://portal.azure.com)oturum açın ve boş mantıksal uygulama oluşturun.
 
-   Logic apps kullanmaya yeni başladıysanız gözden [hızlı başlangıç: İlk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
+   Logic Apps 'e yeni başladıysanız [hızlı başlangıç: ilk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)konusunu inceleyin.
 
-1. Arama kutusuna "http isteği" girin. Tetikleyiciler listesinden şu tetikleyiciyi seçin: **Bir HTTP isteği alındığında**
+1. Arama kutusuna `http request` yazın. Tetikleyiciler listesinden **BIR http isteği alındığında** tetikleyiciyi seçin.
 
-   ![Tetikleyici seçin](./media/logic-apps-scenario-function-sb-trigger/when-http-request-received-trigger.png)
+   ![Tetikleyiciyi seçin](./media/logic-apps-scenario-function-sb-trigger/when-http-request-received-trigger.png)
 
-   İstek tetikleyicisinde ile isteğe bağlı olarak bir kuyruk iletisi ile kullanmak üzere bir JSON şema girebilirsiniz. JSON şemalarının anlamak için giriş veri yapısı ve çıkışlar, iş akışında kullanabilmeniz için kolaylaştırmak mantıksal Uygulama Tasarımcısı yardımcı olur.
+   Istek tetikleyicisi ile isteğe bağlı olarak, kuyruk iletisiyle birlikte kullanılacak bir JSON şeması girebilirsiniz. JSON şemaları, Logic App Designer 'ın giriş verilerinin yapısını anlamasına yardımcı olur ve iş akışınızda, çıktıları sizin için daha kolay hale getirir.
 
-1. Bir şema belirtmek için şemada girin **istek gövdesi JSON şeması** kutusunda, örneğin:
+1. Bir şema belirtmek için, şemayı **Istek GÖVDESI JSON şemasına** girin, örneğin:
 
-   ![JSON şemasını belirtin](./media/logic-apps-scenario-function-sb-trigger/when-http-request-received-trigger-schema.png)
+   ![JSON şeması belirt](./media/logic-apps-scenario-function-sb-trigger/when-http-request-received-trigger-schema.png)
 
-   Bir şema yok, ancak bir örnek yük JSON biçiminde varsa, bir şema bu yükü oluşturabilir.
+   Bir şemanız yoksa ancak JSON biçiminde bir örnek yüküyle karşılaşırsanız, bu yükün bir şemasını oluşturabilirsiniz.
 
-   1. İstek tetikleyicisinde seçin **şema oluşturmak için örnek yük kullanma**.
+   1. Istek tetikleyicisinde, **şema oluşturmak için örnek yük kullan**' ı seçin.
 
-   1. Altında **girin veya yapıştırın örnek JSON yükü**, örnek yükünüzü girin ve ardından **Bitti**.
+   1. **Örnek BIR JSON yükü girin veya yapıştırın**bölümüne örnek yükünüzü girip **bitti**' yi seçin.
 
       ![Örnek yük girin](./media/logic-apps-scenario-function-sb-trigger/enter-sample-payload.png)
 
-   Bu örnek yük tetikleyici görünen bu şema oluşturur:
+   Bu örnek yük, tetikleyicide görüntülenen bu şemayı oluşturur:
 
    ```json
    {
@@ -87,39 +86,47 @@ Bu senaryo için tetiklemek istediğiniz her mantıksal uygulama çalışan bir 
    }
    ```
 
-1. Kuyruk iletisini aldıktan sonra çalıştırmak istediğiniz diğer tüm eylemler ekleyin.
+1. Sıra iletisini aldıktan sonra çalıştırmak istediğiniz diğer eylemleri ekleyin.
 
-   Örneğin, Office 365 Outlook Bağlayıcısı'nı içeren bir e-posta gönderebilirsiniz.
+   Örneğin, Office 365 Outlook Bağlayıcısı ile bir e-posta gönderebilirsiniz.
 
-1. Tetikleyici için geri çağırma URL'si bu mantıksal uygulama oluşturur. mantıksal uygulamanızı kaydedin. Daha sonra bu geri çağırma URL'si için Azure Service Bus kuyruğu tetikleyicisi kodu kullanın.
+1. Bu mantıksal uygulamadaki tetikleyici için geri çağırma URL 'sini üreten mantıksal uygulamanızı kaydedin. Daha sonra, Azure Service Bus kuyruğu tetikleyicisinin kodunda bu geri çağırma URL 'sini kullanırsınız.
 
-   Geri çağırma URL'si görünür **HTTP POST URL'si** özelliği.
+   Geri çağırma URL 'si **http post URL 'si** özelliğinde görüntülenir.
 
-   ![Tetikleyici için oluşturulan geri çağırma URL'si](./media/logic-apps-scenario-function-sb-trigger/callback-URL-for-trigger.png)
+   ![Tetikleyici için geri çağırma URL 'SI oluşturuldu](./media/logic-apps-scenario-function-sb-trigger/callback-URL-for-trigger.png)
 
 ## <a name="create-azure-function"></a>Azure işlevi oluşturma
 
-Ardından, tetikleyici olarak davranır ve kuyruğa dinleyen bir işlev oluşturun.
+Sonra tetikleyici olarak davranan ve kuyruğu dinleyen işlevi oluşturun.
 
-1. Azure portalında açın ve işlev uygulamanızı genişletin, açık değilse. 
+1. Azure portal, zaten açık değilse, işlev uygulamanızı açın ve genişletin. 
 
-1. İşlev uygulaması adınızın altındaki genişletin **işlevleri**. Üzerinde **işlevleri** bölmesinde seçin **yeni işlev**.
+1. İşlev uygulamanızın adı altında **işlevler**' i genişletin. **İşlevler** bölmesinde **yeni işlev**' ı seçin.
 
-   !["İşlevleri" genişletin ve "İşlev" seçin](./media/logic-apps-scenario-function-sb-trigger/create-new-function.png)
+   !["Işlevler" i genişletin ve "yeni işlev" ı seçin](./media/logic-apps-scenario-function-sb-trigger/add-new-function-to-function-app.png)
 
-1. Bu şablon, yeni bir işlev uygulaması, çalışma zamanı yığını olarak .NET burada seçtiğiniz oluşturduğunuz üzerinde göre seçin veya var olan bir işlev uygulaması kullanıyorsanız.
+1. Çalışma zamanı yığını olarak .NET seçtiğiniz yeni bir işlev uygulaması oluşturup oluşturamayacağını veya var olan bir işlev uygulamasını kullandığınızı temel alarak bu şablonu seçin.
 
-   * Yeni işlev uygulamaları için bu şablonu seçin: **Service Bus kuyruğu tetikleyicisi**
+   * Yeni işlev uygulamaları için şu şablonu seçin: **Service Bus kuyruğu tetikleyicisi**
 
-     ![Yeni işlev uygulaması için bir şablon seçin](./media/logic-apps-scenario-function-sb-trigger/current-add-queue-trigger-template.png)
+     ![Yeni işlev uygulaması için şablon seçin](./media/logic-apps-scenario-function-sb-trigger/current-add-queue-trigger-template.png)
 
-   * Var olan bir işlev uygulaması için bu şablonu seçin: **Service Bus kuyruğu tetikleyicisi-C#**
+   * Mevcut bir işlev uygulaması için şu şablonu seçin: **Service Bus kuyruğu tetikleyicisi- C#**
 
-     ![İşlev uygulamanız için şablon seçin](./media/logic-apps-scenario-function-sb-trigger/legacy-add-queue-trigger-template.png)
+     ![Mevcut işlev uygulaması için şablon seçin](./media/logic-apps-scenario-function-sb-trigger/legacy-add-queue-trigger-template.png)
 
-1. Üzerinde **Azure Service Bus kuyruğu tetikleyicisi** bölmesinde tetikleyicinizin bir ad verin ve ayarlayın **Service Bus bağlantısı** kuyruğu için Azure Service Bus SDK'sı kullanan `OnMessageReceive()` dinleyici ve seçin **Oluşturma**.
+1. **Azure Service Bus kuyruğu tetikleyicisi** bölmesinde, Tetikleyiciniz için bir ad girin ve Azure Service Bus SDK `OnMessageReceive()` dinleyicisini kullanan ve sıra için **Service Bus bağlantısını** ayarlayın ve **Oluştur**' u seçin.
 
-1. Tetikleyici olarak kuyruk iletisini kullanarak önceden oluşturulmuş mantıksal uygulama uç noktasını çağırmak için temel bir işlev yazın. Bu örnekte `application/json` ileti içerik türü, ancak bu tür gerektiği şekilde değiştirebilirsiniz. Mümkünse, HTTP istemcilerini örneğini yeniden kullanın. Daha fazla bilgi için [Azure işlevleri'nde bağlantıları yönetme](../azure-functions/manage-connections.md).
+1. Kuyruk iletisini tetikleyici olarak kullanarak, önceden oluşturulmuş mantıksal uygulama uç noktasını çağırmak için temel bir işlev yazın. İşlevinizi yazmadan önce şu hususları gözden geçirin:
+
+   * Bu örnek `application/json` ileti içerik türünü kullanır, ancak bu türü gerektiği gibi değiştirebilirsiniz.
+   
+   * Eşzamanlı çalışan işlevlerin, yüksek birimlerin veya ağır yükün olması nedeniyle, `using` ifadesiyle [HttpClient sınıfını](https://docs.microsoft.com/dotnet/api/system.net.http.httpclient) örneklemeyi ve Istek başına HttpClient örnekleri oluşturmayı önleyin. Daha fazla bilgi için bkz. [Esnek http isteklerini uygulamak Için HttpClientFactory kullanma](https://docs.microsoft.com/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net-core).
+   
+   * Mümkünse, HTTP istemcilerinin örneğini yeniden kullanın. Daha fazla bilgi için bkz. [Azure işlevlerinde bağlantıları yönetme](../azure-functions/manage-connections.md).
+
+   Bu örnekte [`Task.Run` yöntemi](https://docs.microsoft.com/dotnet/api/system.threading.tasks.task.run) [zaman uyumsuz](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/async) modda kullanılmaktadır. Daha fazla bilgi için bkz. [Async ve await Ile zaman uyumsuz programlama](https://docs.microsoft.com/dotnet/csharp/programming-guide/concepts/async/).
 
    ```CSharp
    using System;
@@ -127,24 +134,23 @@ Ardından, tetikleyici olarak davranır ve kuyruğa dinleyen bir işlev oluştur
    using System.Net.Http;
    using System.Text;
 
-   // Callback URL for previously created Request trigger
+   // Can also fetch from App Settings or environment variable
    private static string logicAppUri = @"https://prod-05.westus.logic.azure.com:443/workflows/<remaining-callback-URL>";
 
-   // Reuse the instance of HTTP clients if possible
+   // Reuse the instance of HTTP clients if possible: https://docs.microsoft.com/azure/azure-functions/manage-connections
    private static HttpClient httpClient = new HttpClient();
 
-   public static void Run(string myQueueItem, ILogger log)
+   public static async Task Run(string myQueueItem, TraceWriter log) 
    {
-       log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
-
-       var response = httpClient.PostAsync(logicAppUri, new StringContent(myQueueItem, Encoding.UTF8, "application/json")).Result;
+      log.Info($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
+      var response = await httpClient.PostAsync(logicAppUri, new StringContent(myQueueItem, Encoding.UTF8, "application/json")); 
    }
    ```
 
-1. İşlevi test etmek için bir aracı gibi kullanarak bir kuyruğa ileti eklemek [hizmet veri yolu Gezgini](https://github.com/paolosalvatori/ServiceBusExplorer).
+1. İşlevi test etmek için, [Service Bus Gezgini](https://github.com/paolosalvatori/ServiceBusExplorer)gibi bir araç kullanarak bir kuyruk iletisi ekleyin.
 
-   Hemen işlevi iletiyi aldıktan sonra mantıksal uygulama Tetikleyicileri.
+   Mantıksal uygulama, işlev iletiyi aldıktan hemen sonra tetiklenir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Çağrı, tetikleyici veya iş akışı HTTP uç noktaları kullanarak iç içe](../logic-apps/logic-apps-http-endpoint.md)
+* [HTTP uç noktalarını kullanarak iş akışlarını çağırma, tetikleme veya iç içe geçme](../logic-apps/logic-apps-http-endpoint.md)

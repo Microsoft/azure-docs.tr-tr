@@ -1,68 +1,67 @@
 ---
-title: Azure'da Linux VM'ler için sık sorulan sorular | Microsoft Docs
-description: Resource Manager modeli kullanılarak oluşturulmuş bir Linux sanal makineleri hakkında genel soruların yanıtlarını sağlar.
+title: Azure 'da Linux VM 'Ler için sık sorulan sorular
+description: Kaynak Yöneticisi modeliyle oluşturulan Linux sanal makineleri hakkında bazı yaygın soruların yanıtlarını sağlar.
 services: virtual-machines-linux
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-management
 ms.assetid: 3648e09c-1115-4818-93c6-688d7a54a353
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
 ms.date: 05/08/2019
 ms.author: cynthn
-ms.openlocfilehash: 4c184b3c38db53caed31b9fc463ad68f11c73479
-ms.sourcegitcommit: 978e1b8cac3da254f9d6309e0195c45b38c24eb5
+ms.openlocfilehash: 107f2376df7eb767953b32b3447937e24869894c
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67550327"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036162"
 ---
-# <a name="frequently-asked-question-about-linux-virtual-machines"></a>Linux sanal makineleri hakkında sık sorulan sorular
-Bu makalede Azure Resource Manager dağıtım modeli kullanılarak oluşturulan Linux sanal makineleri hakkında bazı yaygın sorular ele alınmıştır. Bu konuda Windows sürümü için bkz: [Windows sanal makineleri hakkında sık sorulan soruya](../windows/faq.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+# <a name="frequently-asked-question-about-linux-virtual-machines"></a>Linux Sanal Makineleri hakkında sık sorulan sorular
+Bu makalede, Azure 'da Kaynak Yöneticisi dağıtım modeli kullanılarak oluşturulan Linux sanal makineleri hakkında bazı yaygın soruların ele alınmaktadır. Bu konunun Windows sürümü için bkz. [hakkında sık sorulan sorular Windows sanal makineleri](../windows/faq.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 
 ## <a name="what-can-i-run-on-an-azure-vm"></a>Azure sanal makinesinde ne çalıştırabilirim?
-Tüm aboneler bir Azure sanal makinesinde sunucu yazılımı çalıştırabilir. Daha fazla bilgi için [Azure-Endorsed dağıtımlarda Linux](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+Tüm aboneler bir Azure sanal makinesinde sunucu yazılımı çalıştırabilir. Daha fazla bilgi için bkz. [Azure onaylı dağıtımlara Linux](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
 ## <a name="how-much-storage-can-i-use-with-a-virtual-machine"></a>Bir sanal makineyle birlikte ne kadar depolama alanı kullanabilirim?
-Her veri diski 32.767 GiB kadar olabilir. Kullanabileceğiniz veri diski sayısı, sanal makinenin boyutuna bağlıdır. Ayrıntılar için bkz. [Virtual Machines boyutları](sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Her veri diski 32.767 GiB 'a kadar olabilir. Kullanabileceğiniz veri diski sayısı, sanal makinenin boyutuna bağlıdır. Ayrıntılar için bkz. [Virtual Machines boyutları](sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
-Azure yönetilen diskler önerilen disk depolama kullanmak için Azure sanal makineler ile veri kalıcı depolama için tekliflerdir. Her bir Sanal Makine ile birden fazla Yönetilen Disk kullanabilirsiniz. Yönetilen diskler teklif iki tür dayanıklı depolama seçeneği Premium ve standart yönetilen diskler. Fiyatlandırma bilgileri için bkz: [yönetilen diskler fiyatlandırma](https://azure.microsoft.com/pricing/details/managed-disks).
+Azure yönetilen diskler, verilerin kalıcı olarak depolanması için Azure sanal makineler ile kullanılmak üzere önerilen disk depolama tekliflerdir. Her bir Sanal Makine ile birden fazla Yönetilen Disk kullanabilirsiniz. Yönetilen Diskler iki tür dayanıklı depolama seçeneği sunar: Premium ve Standart Yönetilen Diskler. Fiyatlandırma bilgileri için bkz. [yönetilen diskler fiyatlandırması](https://azure.microsoft.com/pricing/details/managed-disks).
 
-Azure depolama hesapları, aynı zamanda işletim sistemi diski ve varsa veri diskleri için depolama sağlayabilir. Her disk bir sayfa blobu olarak depolanan bir .vhd dosyasıdır. Fiyatlandırma ayrıntıları için bkz. [Depolama Fiyatlandırma Ayrıntıları](https://azure.microsoft.com/pricing/details/storage/).
+Azure depolama hesapları, işletim sistemi diski ve tüm veri diskleri için depolama alanı da sağlayabilir. Her disk bir sayfa blobu olarak depolanan bir .vhd dosyasıdır. Fiyatlandırma ayrıntıları için bkz. [Depolama Fiyatlandırma Ayrıntıları](https://azure.microsoft.com/pricing/details/storage/).
 
-## <a name="how-can-i-access-my-virtual-machine"></a>Sanal Makinem nasıl erişebilirim?
-Güvenli Kabuk (SSH) kullanarak sanal makineye, oturum açmak için bir uzak bağlantı kurun. Bağlanma konusunda yönergelere bakın [Windows gelen](ssh-from-windows.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) veya [Linux ve Mac](mac-create-ssh-keys.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). Varsayılan olarak, SSH en fazla 10 eş zamanlı bağlantıya izin verir. Yapılandırma dosyasını düzenleyerek bu sayıyı artırabilirsiniz.
+## <a name="how-can-i-access-my-virtual-machine"></a>Sanal makinime nasıl erişebilirim?
+Secure Shell (SSH) kullanarak sanal makinede oturum açmak için bir uzak bağlantı kurun. [Windows 'dan](ssh-from-windows.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) veya [Linux ve Mac 'ten](mac-create-ssh-keys.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)nasıl bağlanacağınız hakkında yönergeler için bkz. Varsayılan olarak, SSH en fazla 10 eş zamanlı bağlantıya izin verir. Yapılandırma dosyasını düzenleyerek bu sayıyı artırabilirsiniz.
 
-Sorun yaşıyorsanız, kullanıma [sorun giderme güvenli Kabuk (SSH) bağlantılarında](troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Sorun yaşıyorsanız [Secure Shell (SSH) bağlantılarında sorun giderme](troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)' yi inceleyin.
 
-## <a name="can-i-use-the-temporary-disk-devsdb1-to-store-data"></a>Verileri depolamak için geçici diski (/ dev/sdb1) kullanabilir miyim?
-Verileri depolamak için geçici diski (/ dev/sdb1) kullanmayın. Bunu yalnızca geçici depolama için yoktur. Kurtarılamaz veri kaybedebilirsiniz.
+## <a name="can-i-use-the-temporary-disk-devsdb1-to-store-data"></a>Verileri depolamak için geçici diski (/dev/sdb1) kullanabilir miyim?
+Verileri depolamak için geçici diski (/dev/sdb1) kullanmayın. Yalnızca geçici depolama alanı için geçerlidir. Kurtarılamamış verileri kaybetme riskini alırsınız.
 
-## <a name="can-i-copy-or-clone-an-existing-azure-vm"></a>Ben kopyalayabilir veya mevcut bir Azure VM'yi kopyalama?
-Evet. Yönergeler için [Resource Manager dağıtım modelinde bir Linux sanal makinesinin kopyasını oluşturma](copy-vm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+## <a name="can-i-copy-or-clone-an-existing-azure-vm"></a>Mevcut bir Azure VM 'yi kopyalayabilir veya kopyalayabilir miyim?
+Evet. Yönergeler için, bkz. [Kaynak Yöneticisi dağıtım modelinde Linux sanal makinesinin kopyasını oluşturma](copy-vm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
-## <a name="why-am-i-not-seeing-canada-central-and-canada-east-regions-through-azure-resource-manager"></a>Neden Kanada Orta ve Kanada Doğu bölgelerinde Azure Resource Manager aracılığıyla görüyorum değil mi?
-Kanada Orta ve Kanada Doğu, iki yeni bölgede otomatik olarak mevcut bir Azure aboneliği için sanal makine oluşturmak için kayıtlı değil. Azure Resource Manager kullanarak başka bir bölgeye Azure portalı üzerinden bir sanal makine dağıtıldığında bu kayıt otomatik olarak gerçekleştirilir. Diğer Azure bölgesi için bir sanal makine dağıtıldıktan sonra yeni bölgelere sonraki sanal makineler için kullanılabilir olması gerekir.
+## <a name="why-am-i-not-seeing-canada-central-and-canada-east-regions-through-azure-resource-manager"></a>Neden Kanada Orta ve Kanada Doğu bölgelerini Azure Resource Manager göremiyorum?
+Kanada Orta ve Kanada Doğu iki yeni bölgesi, mevcut Azure abonelikleri için sanal makine oluşturma için otomatik olarak kaydedilmemiş. Bu kayıt, bir sanal makine Azure Resource Manager kullanılarak başka bir bölgeye Azure portal aracılığıyla dağıtıldığında otomatik olarak yapılır. Bir sanal makine başka bir Azure bölgesine dağıtıldıktan sonra, yeni bölgeler sonraki sanal makineler için kullanılabilir olmalıdır.
 
-## <a name="can-i-add-a-nic-to-my-vm-after-its-created"></a>Oluşturulduktan sonra sanal Makinem için bir NIC ekleyebilirim?
-Evet, bu artık mümkündür. VM'nin ilk durdurulup serbest gerekir. Ardından ekleyebilir veya bir NIC (son NIC VM üzerinde olmadığı sürece) kaldırın. 
+## <a name="can-i-add-a-nic-to-my-vm-after-its-created"></a>Oluşturulduktan sonra VM 'ye bir NIC ekleyebilir miyim?
+Evet, bu artık mümkündür. Önce VM 'nin serbest bırakılmasının durdurulması gerekir. Ardından, bir NIC ekleyebilir veya kaldırabilirsiniz (VM 'deki son NIC olmadığı müddetçe). 
 
-## <a name="are-there-any-computer-name-requirements"></a>Herhangi bir bilgisayar adı gereksinimleri var mı?
-Evet. Bilgisayar adı en fazla 64 karakter uzunluğunda olabilir. Bkz: [adlandırma kuralları kuralları ve kısıtlamalar](/azure/architecture/best-practices/naming-conventions) kaynaklarınızı adlandırma etrafında daha fazla bilgi için.
+## <a name="are-there-any-computer-name-requirements"></a>Herhangi bir bilgisayar adı gereksinimi var mı?
+Evet. Bilgisayar adı en fazla 64 karakter uzunluğunda olabilir. Kaynaklarınızı adlandırma hakkında daha fazla bilgi için bkz. [adlandırma kuralları kuralları ve kısıtlamaları](/azure/architecture/best-practices/resource-naming) .
 
-## <a name="are-there-any-resource-group-name-requirements"></a>Herhangi bir kaynak grubu adı gereksinimleri vardır?
-Evet. Kaynak grubu adı en fazla 90 karakter uzunluğunda olabilir. Bkz: [adlandırma kuralları kuralları ve kısıtlamalar](/azure/architecture/best-practices/naming-conventions) kaynak grupları hakkında daha fazla bilgi için.
+## <a name="are-there-any-resource-group-name-requirements"></a>Herhangi bir kaynak grubu adı gereksinimi var mı?
+Evet. Kaynak grubu adı en fazla 90 karakter uzunluğunda olabilir. Kaynak grupları hakkında daha fazla bilgi için bkz. [adlandırma kuralları kuralları ve kısıtlamaları](/azure/architecture/best-practices/resource-naming) .
 
-## <a name="what-are-the-username-requirements-when-creating-a-vm"></a>Bir VM oluştururken, kullanıcı adı gereksinimleri nelerdir?
+## <a name="what-are-the-username-requirements-when-creating-a-vm"></a>VM oluştururken Kullanıcı adı gereksinimleri nelerdir?
 
-Kullanıcı adlarını, 1-32 karakter uzunluğunda olmalıdır.
+Kullanıcı adları 1-32 karakter uzunluğunda olmalıdır.
 
-Aşağıdaki kullanıcı adlarını izin verilmez:
+Şu kullanıcı adlarıyla izin verilmiyor:
 
 | | | | |
 |-----------------|-----------|--------------------|----------|
@@ -76,22 +75,22 @@ Aşağıdaki kullanıcı adlarını izin verilmez:
 | `test2`         | `test3`   | `user4`            | `user5`  |
 | `video`         |
 
-## <a name="what-are-the-password-requirements-when-creating-a-vm"></a>Bir VM oluşturulurken parola gereksinimleri nelerdir?
+## <a name="what-are-the-password-requirements-when-creating-a-vm"></a>VM oluştururken parola gereksinimleri nelerdir?
 
-Uzunluk gereksinimlerini, kullanmakta olduğunuz aracı bağlı olarak değişen parola vardır:
- - Portalı - 12-72 karakter
- - PowerShell - 8-123 karakter arasında
- - 12-123 arasında - CLI
+Kullanmakta olduğunuz araca bağlı olarak, farklı parola uzunluğu gereksinimleri vardır:
+ - Portal-12-72 karakter arası
+ - PowerShell-8-123 karakter arası
+ - CLı-12-123 arasında
  
 
-Parolaları da 3 şu 4 karmaşıklık gereksinimini karşılamalıdır:
+Parolaların Ayrıca aşağıdaki 4 karmaşıklık gereksinimlerinden 3 ' ü karşılaması gerekir:
 
-* Daha düşük karakter içerebilir
-* Üst karakter içerebilir
-* Bir rakam olması
-* Sahip bir özel karakter (Regex eşleşmesi [\W_])
+* Küçük karakterler var
+* Büyük karakterlere sahip
+* Bir rakam
+* Özel bir karakter (Regex Match [\ W_])
 
-Aşağıdaki parolalara izin verilmez:
+Aşağıdaki parolalara izin verilmiyor:
 
 <table>
     <tr>
@@ -103,9 +102,9 @@ Aşağıdaki parolalara izin verilmez:
     </tr>
     <tr>
         <td style="text-align:center">pass@word1</td>
-        <td style="text-align:center">Parola!</td>
-        <td style="text-align:center">Password1</td>
+        <td style="text-align:center">Parolayı!</td>
+        <td style="text-align:center">Parola1</td>
         <td style="text-align:center">Password22</td>
-        <td style="text-align:center">ILOVEYOU veya!</td>
+        <td style="text-align:center">o kadar!</td>
     </tr>
 </table>

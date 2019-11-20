@@ -1,109 +1,109 @@
 ---
-title: Azure Cosmos DB için sorgular SQL katılın
-description: Azure Cosmos DB için birleştirme SQL söz dizimi hakkında öğrenin.
+title: Azure Cosmos DB için SQL JOIN sorguları
+description: Azure Cosmos DB için SQL sözdizimi ekleme hakkında bilgi edinin.
 author: markjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/17/2019
 ms.author: mjbrown
-ms.openlocfilehash: 408ee11b318143b3128833a741e04dd68f3816ed
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: d78904fde53da0e800a69d2148a9c4e3acf57307
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342644"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494402"
 ---
-# <a name="joins-in-azure-cosmos-db"></a>Azure Cosmos DB birleştirir
+# <a name="joins-in-azure-cosmos-db"></a>Azure Cosmos DB birleşimler
 
-İlişkisel bir veritabanında tabloları arasında birleştirmeler normalleştirilmiş şemaları tasarlamaya mantıksal corollary ' dir. Buna karşılık, SQL API'si mantıksal şemasız öğeleri normalleştirilmişlikten çıkarılmış veri modelini kullanan, eşdeğer bir *kendi kendine birleşme*.
+İlişkisel bir veritabanında, tablolar arasında birleşimler, Normalleştirilmemiş şemalar tasarlamanın mantıksal bir ilişkmalarıdır. Buna karşılık, SQL API 'SI, *kendinden JOIN*'in mantıksal eşdeğeri olan, şema içermeyen öğelerin Normalleştirilmemiş veri modelini kullanır.
 
-İç birleştirmeler birleştirme işleminde katılan kümeleri, eksiksiz bir çapraz ürün sonuçlanır. Çok yönlü birleştirme sonucunu, burada her bir tanımlama grubu değeri katılan birleştirme işleminde ayarlamak diğer adlı ile ilişkilendirilir ve bu diğer ad diğer yan tümceleri içinde başvurarak erişilebilir N-öğe dizilerini kümesidir.
+İç birleşimler, birleşime katılan kümelerden oluşan tüm çapraz ürünlere yol açabilir. N-Way JOIN 'in sonucu, kayıt kümesindeki her bir değerin birleşime katılan diğer ad kümesiyle ilişkilendirildiği ve diğer yan tümcelerde bu diğer ada başvuruda bulunarak erişilebilen N-element tanımlama gruplarının bir kümesidir.
 
 ## <a name="syntax"></a>Sözdizimi
 
-Sözdizimi dili destekleyen `<from_source1> JOIN <from_source2> JOIN ... JOIN <from_sourceN>`. Bu sorgu içeren başlık kümesi döndürür `N` değerleri. Her bir tanımlama grubunu tüm kapsayıcı diğer adları kendi ilgili ayarlar yineleme tarafından üretilen değerler içeriyor. 
+Dil `<from_source1> JOIN <from_source2> JOIN ... JOIN <from_sourceN>`sözdizimini destekler. Bu sorgu, `N` değerleri olan bir dizi tanımlama grubu döndürür. Her tanımlama grubu, tüm kapsayıcı diğer adlarını ilgili kümeleri üzerinde yineleerek oluşturulan değerlere sahiptir. 
 
-Aşağıdaki FROM yan tümcesi göz atalım: `<from_source1> JOIN <from_source2> JOIN ... JOIN <from_sourceN>`  
+Aşağıdaki FROM yan tümcesine göz atalım: `<from_source1> JOIN <from_source2> JOIN ... JOIN <from_sourceN>`  
   
- Her kaynak tanımlamak olanak `input_alias1, input_alias2, …, input_aliasN`. Bu FROM yan tümcesi, N-tanımlama grubu (N değeri ile tanımlama grubu) kümesini döndürür. Her bir tanımlama grubunu tüm kapsayıcı diğer adları kendi ilgili ayarlar yineleme tarafından üretilen değerler içeriyor.  
+ Her bir kaynağın `input_alias1, input_alias2, …, input_aliasN`tanımlamasına izin verin. Bu FROM yan tümcesi bir N-tanımlama grubu kümesi döndürür (N değeri olan tanımlama grubu). Her tanımlama grubu, tüm kapsayıcı diğer adlarını ilgili kümeleri üzerinde yineleerek oluşturulan değerlere sahiptir.  
   
-**Örnek 1** -2 kaynakları  
+**Örnek 1** -2 kaynak  
   
-- İzin `<from_source1>` kapsayıcı kapsamına- ve set {A, B, C} temsil eder.  
+- `<from_source1>` kapsayıcı kapsamlı olmasına izin verir ve {A, B, C} kümesini temsil eder.  
   
-- İzin `<from_source2>` input_alias1 başvuran belge kapsamlı ve kümeleri temsil eder:  
+- `<from_source2>` belge kapsamlı başvuru input_alias1 ve kümeleri temsil edelim:  
   
-    {1, 2} için `input_alias1 = A,`  
+    `input_alias1 = A,` için {1, 2}  
   
-    {3} için `input_alias1 = B,`  
+    `input_alias1 = B,` için {3}  
   
-    {4, 5} için `input_alias1 = C,`  
+    `input_alias1 = C,` için {4, 5}  
   
-- FROM yan tümcesi `<from_source1> JOIN <from_source2>` de aşağıdaki tanımlama gruplarına neden olur:  
+- FROM yan tümcesi `<from_source1> JOIN <from_source2>` aşağıdaki başlıkların oluşmasına neden olur:  
   
     (`input_alias1, input_alias2`):  
   
     `(A, 1), (A, 2), (B, 3), (C, 4), (C, 5)`  
   
-**Örnek 2** -3 kaynakları  
+**Örnek 2** -3 kaynak  
   
-- İzin `<from_source1>` kapsayıcı kapsamına- ve set {A, B, C} temsil eder.  
+- `<from_source1>` kapsayıcı kapsamlı olmasına izin verir ve {A, B, C} kümesini temsil eder.  
   
-- İzin `<from_source2>` belge kapsamlı başvuran olması `input_alias1` ve kümeleri temsil eder:  
+- `<from_source2>` belge kapsamlı başvuru `input_alias1` ve kümeleri temsil edelim:  
   
-    {1, 2} için `input_alias1 = A,`  
+    `input_alias1 = A,` için {1, 2}  
   
-    {3} için `input_alias1 = B,`  
+    `input_alias1 = B,` için {3}  
   
-    {4, 5} için `input_alias1 = C,`  
+    `input_alias1 = C,` için {4, 5}  
   
-- İzin `<from_source3>` belge kapsamlı başvuran olması `input_alias2` ve kümeleri temsil eder:  
+- `<from_source3>` belge kapsamlı başvuru `input_alias2` ve kümeleri temsil edelim:  
   
-    {100, 200} için `input_alias2 = 1,`  
+    `input_alias2 = 1,` için {100, 200}  
   
-    {300} için `input_alias2 = 3,`  
+    `input_alias2 = 3,` için {300}  
   
-- FROM yan tümcesi `<from_source1> JOIN <from_source2> JOIN <from_source3>` de aşağıdaki tanımlama gruplarına neden olur:  
+- FROM yan tümcesi `<from_source1> JOIN <from_source2> JOIN <from_source3>` aşağıdaki başlıkların oluşmasına neden olur:  
   
     (input_alias1, input_alias2, input_alias3):  
   
-    (BİR, 1, 100), (A, 1, 200), (B, 3, 300)  
+    (A, 1, 100), (A, 1, 200), (B, 3, 300)  
   
   > [!NOTE]
-  > Diğer değerler için demetleri eksikliği `input_alias1`, `input_alias2`, kendisi için `<from_source3>` herhangi bir değer döndürmedi.  
+  > `<from_source3>` herhangi bir değer döndürmeyen, `input_alias2``input_alias1`diğer değerleri için tanımlama gruplarının bulunmaması.  
   
-**Örnek 3** -3 kaynakları  
+**Örnek 3** -3 kaynak  
   
-- < {A, B, C} kümesini temsil eder ve kapsayıcı kapsamlı from_source1 > sağlar.  
+- < From_source1 > kapsayıcı kapsamlı olmasına izin verir ve {A, B, C} kümesini temsil eder.  
   
-- İzin `<from_source1>` kapsayıcı kapsamına- ve set {A, B, C} temsil eder.  
+- `<from_source1>` kapsayıcı kapsamlı olmasına izin verir ve {A, B, C} kümesini temsil eder.  
   
-- < Belge kapsamlı başvuru input_alias1 olması ve kümelerini göstermek from_source2 > sağlar:  
+- < From_source2 > Belge kapsamlı başvuru input_alias1 ve kümeleri temsil etmesini sağlar:  
   
-    {1, 2} için `input_alias1 = A,`  
+    `input_alias1 = A,` için {1, 2}  
   
-    {3} için `input_alias1 = B,`  
+    `input_alias1 = B,` için {3}  
   
-    {4, 5} için `input_alias1 = C,`  
+    `input_alias1 = C,` için {4, 5}  
   
-- İzin `<from_source3>` kapsamı `input_alias1` ve kümeleri temsil eder:  
+- `<from_source3>` `input_alias1` kapsamına almasına izin verir ve kümeleri temsil edin:  
   
-    {100, 200} için `input_alias2 = A,`  
+    `input_alias2 = A,` için {100, 200}  
   
-    {300} için `input_alias2 = C,`  
+    `input_alias2 = C,` için {300}  
   
-- FROM yan tümcesi `<from_source1> JOIN <from_source2> JOIN <from_source3>` de aşağıdaki tanımlama gruplarına neden olur:  
+- FROM yan tümcesi `<from_source1> JOIN <from_source2> JOIN <from_source3>` aşağıdaki başlıkların oluşmasına neden olur:  
   
     (`input_alias1, input_alias2, input_alias3`):  
   
-    (BİR, 1, 100), (A, 1, 200), (A, 2, 100), (A, 2, 200), (C, 4, 300), (C, 5, 300)  
+    (A, 1, 100), (A, 1, 200), (A, 2, 100), (A, 2, 200), (C, 4, 300), (C, 5, 300)  
   
   > [!NOTE]
-  > Bu arasında çapraz ürün içinde sonuçlanan `<from_source2>` ve `<from_source3>` her ikisi de aynı belirlenir çünkü `<from_source1>`.  (2 x 2) 4'te bu durum diziler değerini 0 tanımlama grubu B (1 x 0) değerine sahip olan ve 2 (2 x 1) değeri c diziler  
+  > Her ikisi de aynı `<from_source1>`kapsamında olduğundan, bu, `<from_source2>` ve `<from_source3>` arasında çapraz ürüne neden oldu.  Bu, 1 değerine sahip olan 4 (2x2) tanımlama grubu ile sonuçlanır. değer B (1x0) ve 2 (2x1) tanımlama gruplarına sahip, C değeri olan 0 tanımlama grubu.  
   
 ## <a name="examples"></a>Örnekler
 
-Aşağıdaki örnekler, JOIN yan tümcesi nasıl çalıştığını gösterir. Aşağıdaki örnekte, her bir kaynaktan gelen öğenin çapraz ürün beri sonucu boş olduğundan ve boş boştur:
+Aşağıdaki örneklerde JOIN yan tümcesinin nasıl çalıştığı gösterilmektedir. Bu örnekleri çalıştırmadan önce örnek [Aile verilerini](sql-query-getting-started.md#upload-sample-data)karşıya yükleyin. Aşağıdaki örnekte, kaynak ve boş bir kümeden her öğenin çapraz çarpımı boş olduğundan sonuç boştur:
 
 ```sql
     SELECT f.id
@@ -111,14 +111,14 @@ Aşağıdaki örnekler, JOIN yan tümcesi nasıl çalıştığını gösterir. A
     JOIN f.NonExistent
 ```
 
-Sonuç olur:
+Sonuç:
 
 ```json
     [{
     }]
 ```
 
-Aşağıdaki örnekte, iki JSON nesnesi, öğe kök arasında çapraz ürün birleşimi olan `id` ve `children` subroot. Olgu, `children` olan tek bir kök ile ilgilenen çünkü bir dizi birleşimde, etkin olmayan olduğu `children` dizisi. Her bir öğeyle diziye çapraz çarpımını tam olarak yalnızca bir öğe sağladığından sonucu yalnızca iki sonuçlarını içerir.
+Aşağıdaki örnekte, JOIN iki JSON nesnesi, öğe kökü `id` ve `children` alt kökü arasındaki bir çapraz üründür. `children` bir dizi, `children` dizi olan tek bir kökle uğradığı için, birleşimde geçerli değildir. Sonuç yalnızca iki sonuç içerir, çünkü dizi ile her öğenin çapraz çarpımı yalnızca tek bir öğe oluşturur.
 
 ```sql
     SELECT f.id
@@ -126,7 +126,7 @@ Aşağıdaki örnekte, iki JSON nesnesi, öğe kök arasında çapraz ürün bir
     JOIN f.children
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -139,7 +139,7 @@ Sonuçlar şu şekildedir:
     ]
 ```
 
-Aşağıdaki örnek, daha geleneksel bir birleştirme gösterir:
+Aşağıdaki örnekte daha geleneksel bir JOIN gösterilmektedir:
 
 ```sql
     SELECT f.id
@@ -147,7 +147,7 @@ Aşağıdaki örnek, daha geleneksel bir birleştirme gösterir:
     JOIN c IN f.children
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -163,15 +163,15 @@ Sonuçlar şu şekildedir:
     ]
 ```
 
-FROM JOIN yan tümcesi bir yineleyici kaynağıdır. Bu nedenle, önceki örnekte akışı şöyledir:  
+JOIN yan tümcesinin KIMDEN kaynağı bir yineleyici. Bu nedenle, önceki örnekteki akış:  
 
-1. Her alt öğeyi Genişlet `c` dizi.
-2. Kök öğesi ile bir çapraz ürün `f` her alt öğe `c` , ilk adım düzleştirilmiş.
-3. Son olarak, kök nesnenin proje `f` `id` tek başına bir özellik.
+1. Dizideki her bir alt öğe `c` genişletin.
+2. Öğe `f` köküne sahip bir çapraz ürün uygulama, her bir alt öğe ile düzleştirilmiş `c`.
+3. Son olarak, kök nesne `f` `id` özelliğini tek başına proje.
 
-İlk öğeyi `AndersenFamily`, yalnızca bir tane var. `children` sonuç kümesi tek bir nesne içerecek şekilde öğesi. İkinci öğe `WakefieldFamily`, iki tane `children`çapraz her iki nesne oluşturur. Bu nedenle `children` öğesi. Bir çapraz ürün beklediğiniz gibi bu her iki öğe kök alanları aynıdır.
+İlk öğe `AndersenFamily`, yalnızca bir `children` öğesi içerir, bu nedenle sonuç kümesi yalnızca tek bir nesne içerir. İkinci öğe olan `WakefieldFamily`iki `children`içerir, bu nedenle, iki nesne de her `children` öğesi için bir tane olmak üzere iki nesne üretir. Bu öğelerin her ikisinde de, bir çapraz üründe bekledikleri gibi, kök alanları aynıdır.
 
-Gerçek JOIN yan tümcesinin form diziler için Aksi takdirde projeye zor olan Şekil arası ürünün programıdır. Kullanıcının sağlayan bir tanımlama grubu birleşimi filtreleri aşağıdaki örnekte genel diziler memnun bir koşul seçin.
+JOIN yan tümcesinin gerçek yardımcı programı, başka bir şekilde proje için zor olan bir şekildeki çapraz üründen tanımlama grupları oluşturmak için kullanılır. Aşağıdaki örnek, kullanıcının tanımlama grupları tarafından karşılanan bir koşul seçmesini sağlayan bir tanımlama grubu birleşimine filtre uygular.
 
 ```sql
     SELECT 
@@ -184,7 +184,7 @@ Gerçek JOIN yan tümcesinin form diziler için Aksi takdirde projeye zor olan �
     JOIN p IN c.pets
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -206,7 +206,7 @@ Sonuçlar şu şekildedir:
     ]
 ```
 
-Önceki örnekte bulunan aşağıdaki uzantı double JOIN gerçekleştirir. Çapraz aşağıdaki sözde kod görüntüleyebilir:
+Önceki örneğin aşağıdaki uzantısı bir Double JOIN gerçekleştirir. Geçici ürünü aşağıdaki sözde kod olarak görüntüleyebilirsiniz:
 
 ```
     for-each(Family f in Families)
@@ -224,9 +224,9 @@ Sonuçlar şu şekildedir:
     }
 ```
 
-`AndersenFamily` Çapraz bir satır üretir. Bu nedenle bir evcil hayvan olan bir alt öğesi var (1\*1\*1) bu aile öğesinden. `WakefieldFamily` iki alt öğe, yalnızca bunlardan birinin Evcil Hayvanlar sahiptir, ancak bu alt iki Evcil Hayvanlar içeriyor. Çapraz ürün bu aile için 1 verir\*1\*2 = 2 satır.
+`AndersenFamily`, tek bir evcil hayvan içeren bir alt öğeye sahiptir, bu nedenle çapraz ürün bu aileden bir satır (1\*1\*1) verir. `WakefieldFamily` iki çocuğu vardır, ancak bu alt öğe iki Evcil hayvan 'a sahiptir. Bu aileye yönelik çapraz ürün 1\*1\*2 = 2 satır verir.
 
-Sonraki örnekte olduğundan bir ek filtre `pet`, evcil hayvan adı olduğu tüm diziler dışlar `Shadow`. Diziler dizilerden tanımlama grubu öğelerinin herhangi bir filtre oluşturun ve proje öğeleri herhangi bir birleşimini kullanabilirsiniz.
+Sonraki örnekte, `pet`üzerinde ek bir filtre vardır ve bu, Evcil hayvan adının `Shadow`olmadığı tüm başlıkları dışlar. Dizilerden tanımlama grupları oluşturabilir, kayıt düzeni öğelerinin herhangi birine filtre uygulayabilir ve öğelerin herhangi bir birleşimini proje aracılığıyla yapabilirsiniz.
 
 ```sql
     SELECT 
@@ -240,7 +240,7 @@ Sonraki örnekte olduğundan bir ek filtre `pet`, evcil hayvan adı olduğu tüm
     WHERE p.givenName = "Shadow"
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -254,6 +254,6 @@ Sonuçlar şu şekildedir:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Başlarken](sql-query-getting-started.md)
+- [Başlangıç](sql-query-getting-started.md)
 - [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmosdb-dotnet)
-- [Alt sorgular](sql-query-subquery.md)
+- [Alt](sql-query-subquery.md)

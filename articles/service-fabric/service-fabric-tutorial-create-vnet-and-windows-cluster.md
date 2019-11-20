@@ -1,9 +1,9 @@
 ---
-title: Windows Azure'da çalışan bir Service Fabric kümesi oluşturma | Microsoft Docs
-description: Bu öğreticide, PowerShell kullanarak bir Azure sanal ağı ve ağ güvenlik grubu içinde bir Windows Service Fabric kümesi dağıtmayı öğrenirsiniz.
+title: Azure 'da Windows çalıştıran bir Service Fabric kümesi oluşturma | Microsoft Docs
+description: Bu öğreticide, PowerShell kullanarak bir Azure sanal ağı ve ağ güvenlik grubuna Windows Service Fabric kümesi dağıtmayı öğreneceksiniz.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: ''
 ms.assetid: ''
@@ -12,31 +12,31 @@ ms.devlang: dotNet
 ms.topic: tutorial
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 03/13/2019
-ms.author: aljo
+ms.date: 07/22/2019
+ms.author: atsenthi
 ms.custom: mvc
-ms.openlocfilehash: dabbefa8ca2073e30948f1c70782f730bceae030
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 28571584fbd82b245e85e2ebe5b1d282ab5ae979
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66158103"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73177977"
 ---
-# <a name="tutorial-deploy-a-service-fabric-cluster-running-windows-into-an-azure-virtual-network"></a>Öğretici: Windows çalıştıran bir Azure sanal ağına Service Fabric kümesine dağıtma
+# <a name="tutorial-deploy-a-service-fabric-cluster-running-windows-into-an-azure-virtual-network"></a>Öğretici: Windows çalıştıran bir Service Fabric kümesini Azure sanal ağına dağıtma
 
-Bu öğretici, bir dizinin birinci bölümüdür. Uygulamasına Windows çalıştıran bir Azure Service Fabric kümesi dağıtmayı öğrenirsiniz bir [Azure sanal ağı](../virtual-network/virtual-networks-overview.md) ve [ağ güvenlik grubu](../virtual-network/virtual-networks-nsg.md) PowerShell ile bir şablon kullanarak. İşlemi tamamladığınızda, uygulamaları dağıtabileceğiniz bulutta çalışan bir kümeniz varsa. Azure CLI'yı kullanan bir Linux kümesi oluşturmak için bkz [Azure'da güvenli bir Linux kümesi oluşturma](service-fabric-tutorial-create-vnet-and-linux-cluster.md).
+Bu öğretici, bir dizinin birinci bölümüdür. Windows çalıştıran bir Azure Service Fabric kümesini PowerShell ve şablon kullanarak bir [Azure sanal ağına](../virtual-network/virtual-networks-overview.md) ve [ağ güvenlik grubuna](../virtual-network/virtual-networks-nsg.md) dağıtmayı öğrenirsiniz. İşiniz bittiğinde, bulutta çalışan ve uygulama dağıtabileceğiniz bir kümeniz vardır. Azure CLı kullanan bir Linux kümesi oluşturmak için bkz. [Azure 'da güvenli bir Linux kümesi oluşturma](service-fabric-tutorial-create-vnet-and-linux-cluster.md).
 
-Bu öğreticide bir üretim senaryosu açıklanır. Sınama amacıyla daha küçük bir küme oluşturmak istiyorsanız bkz [test kümesi oluşturma](./scripts/service-fabric-powershell-create-secure-cluster-cert.md).
+Bu öğreticide bir üretim senaryosu açıklanır. Sınama amacıyla daha küçük bir küme oluşturmak istiyorsanız, bkz. [test kümesi oluşturma](./scripts/service-fabric-powershell-create-secure-cluster-cert.md).
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * PowerShell kullanarak Azure’da VNet oluşturma
 > * Anahtar kasası oluşturma ve karşıya sertifika yükleme
-> * Azure Active Directory kimlik doğrulaması kurulumu
-> * Tanı koleksiyonu yapılandırma
-> * Eventstore'a hizmetini ayarlama
-> * Azure İzleyici günlüklerini ayarlayın
+> * Azure Active Directory kimlik doğrulamasını ayarla
+> * Tanılama toplamayı yapılandır
+> * EventStore hizmetini ayarlama
+> * Azure Izleyici günlüklerini ayarlama
 > * Azure PowerShell’de güvenli bir Service Fabric kümesi oluşturma
 > * X.509 sertifikasıyla kümenin güvenliğini sağlama
 > * PowerShell kullanarak kümeye bağlanma
@@ -45,7 +45,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 Bu öğretici dizisinde şunların nasıl yapıldığını öğrenirsiniz:
 > [!div class="checklist"]
 > * Azure’da güvenli bir küme oluşturma
-> * [Bir kümesini izleme](service-fabric-tutorial-monitor-cluster.md)
+> * [Bir kümeyi izleme](service-fabric-tutorial-monitor-cluster.md)
 > * [Bir kümenin ölçeğini daraltma veya genişletme](service-fabric-tutorial-scale-cluster.md)
 > * [Bir kümenin çalışma zamanını yükseltme](service-fabric-tutorial-upgrade-cluster.md)
 > * [Küme silme](service-fabric-tutorial-delete-cluster.md)
@@ -58,71 +58,70 @@ Bu öğretici dizisinde şunların nasıl yapıldığını öğrenirsiniz:
 Bu öğreticiye başlamadan önce:
 
 * Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
-* Yükleme [Service Fabric SDK'sını ve PowerShell Modülü](service-fabric-get-started.md).
-* Yükleme [Azure Powershell](https://docs.microsoft.com/powershell/azure/install-Az-ps).
-* Temel kavramlarını gözden [Azure kümeleri](service-fabric-azure-clusters-overview.md).
-* [Plan ve hazırlık](service-fabric-cluster-azure-deployment-preparation.md) bir küme dağıtımları için.
+* [SERVICE fabrıc SDK ve PowerShell modülünü](service-fabric-get-started.md)yükler.
+* [Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps)'i yükler.
+* [Azure kümelerinin](service-fabric-azure-clusters-overview.md)temel kavramlarını gözden geçirin.
+* Üretim kümesi dağıtımını [planlayın ve hazırlayın](service-fabric-cluster-azure-deployment-preparation.md) .
 
-Aşağıdaki yordamlar yedi düğümlü bir Service Fabric küme oluşturun. Kullanım [Azure fiyatlandırma hesaplayıcısı](https://azure.microsoft.com/pricing/calculator/) Azure'da bir Service Fabric kümesi çalıştırmaktan kaynaklanan maliyetleri hesaplamak için.
+Aşağıdaki yordamlar yedi düğümlü Service Fabric kümesi oluşturur. Azure 'da bir Service Fabric kümesi çalıştırarak oluşan maliyeti hesaplamak için [Azure Fiyatlandırma hesaplayıcısı](https://azure.microsoft.com/pricing/calculator/) ' nı kullanın.
 
 ## <a name="download-and-explore-the-template"></a>Şablonu indirin ve keşfedin
 
-Aşağıdaki Azure Resource Manager şablonu dosyalarını indirin:
+Aşağıdaki Azure Resource Manager şablon dosyalarını indirin:
 
-* [azuredeploy.json][template]
-* [azuredeploy.parameters.json][parameters]
+* [azuredeploy. JSON][template]
+* [azuredeploy. Parameters. JSON][parameters]
 
-Bu şablon, bir sanal ağ ve ağ güvenlik grubu yedi sanal makinelerin ve üç düğüm türleri güvenli bir küme dağıtır.  Diğer örnek şablonlar [GitHub](https://github.com/Azure-Samples/service-fabric-cluster-templates)'da bulunabilir. [Azuredeploy.json] [ template] kaynakları, aşağıdakiler dahil birçok dağıtır.
+Bu şablon, bir sanal ağa ve bir ağ güvenlik grubuna yedi sanal makine ve üç düğümlü tür güvenli bir küme dağıtır.  Diğer örnek şablonlar [GitHub](https://github.com/Azure-Samples/service-fabric-cluster-templates)'da bulunabilir. [Azuredeploy. JSON][template] , aşağıdakiler dahil olmak üzere bir dizi kaynak dağıtır.
 
 ### <a name="service-fabric-cluster"></a>Service Fabric kümesi
 
 **Microsoft.ServiceFabric/clusters** kaynağında şu özelliklere sahip bir Windows kümesi yapılandırılır:
 
-* Üç düğüm türleri.
-* (Şablon parametrelerinde yapılandırılabilir) birincil düğüm türündeki beş düğüme ve diğer iki düğüm türlerinin her bir düğümü.
-* İşletim Sistemi: Kapsayıcılar (şablon parametrelerinde yapılandırılabilir) ile Windows Server 2016 Datacenter.
-* Sertifika (şablon parametrelerinde yapılandırılabilir) güvenli.
-* [Ters proxy](service-fabric-reverseproxy.md) etkinleştirilir.
-* [DNS hizmeti](service-fabric-dnsservice.md) etkinleştirilir.
-* [Dayanıklılık düzeyi](service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster) Bronz (şablon parametrelerinde yapılandırılabilir).
-* [Güvenilirlik düzeyi](service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster) Gümüş (şablon parametrelerinde yapılandırılabilir).
-* istemci bağlantısı uç noktası: 19000 (şablon parametrelerinde yapılandırılabilir).
+* Üç düğüm türü.
+* Birincil düğüm türünde (şablon parametrelerinde yapılandırılabilir) beş düğüm ve diğer iki düğüm türünün her birindeki bir düğüm.
+* İşletim sistemi: kapsayıcılar içeren Windows Server 2016 Datacenter (şablon parametrelerinde yapılandırılabilir).
+* Sertifika güvenli (şablon parametrelerinde yapılandırılabilir).
+* [Ters ara sunucu](service-fabric-reverseproxy.md) etkin.
+* [DNS hizmeti](service-fabric-dnsservice.md) etkinleştirildi.
+* Bronz [dayanıklılık düzeyi](service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster) (şablon parametrelerinde yapılandırılabilir).
+* Gümüş [güvenilirlik düzeyi](service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster) (şablon parametrelerinde yapılandırılabilir).
+* İstemci bağlantı uç noktası: 19000 (şablon parametrelerinde yapılandırılabilir).
 * HTTP ağ geçidi uç noktası: 19080 (şablon parametrelerinde yapılandırılabilir).
 
 ### <a name="azure-load-balancer"></a>Azure Load Balancer
 
-İçinde **Microsoft.Network/loadBalancers** kaynak, bir yük dengeleyici yapılandırılır. Aşağıdaki bağlantı noktaları için araştırmalarla kurallar ayarlanır:
+**Microsoft. Network/loadBalancers** kaynağında, bir yük dengeleyici yapılandırılır. Yoklamalar ve kurallar aşağıdaki bağlantı noktaları için ayarlanır:
 
-* istemci bağlantısı uç noktası: 19000
+* İstemci bağlantı uç noktası: 19000
 * HTTP ağ geçidi uç noktası: 19080
 * Uygulama bağlantı noktası: 80
 * Uygulama bağlantı noktası: 443
-* Service Fabric ters proxy'si: 19081
+* Service Fabric ters proxy’si: 19081
 
-Diğer uygulama bağlantı noktası gerekiyorsa, ayarlamak gerekir **Microsoft.Network/loadBalancers** kaynak ve **Microsoft.Network/networkSecurityGroups** içinde trafiğine izin verecek şekilde kaynak.
+Diğer uygulama bağlantı noktaları gerekliyse, içindeki trafiğe izin vermek için **Microsoft. Network/loadBalancers** kaynağını ve **Microsoft. Network/networksecuritygroups** kaynağını ayarlamanız gerekir.
 
 ### <a name="virtual-network-subnet-and-network-security-group"></a>Sanal ağ, alt ağ ve ağ güvenlik grubu
 
 Sanal ağ, alt ağ ve ağ güvenlik grubunun adları şablon parametrelerinde bildirilir. Sanal ağın ve alt ağın adres alanları da şablon parametrelerinde bildirilir ve **Microsoft.Network/virtualNetworks** kaynağında yapılandırılır:
 
-* sanal ağ adres alanı: 172.16.0.0/20
+* Sanal ağ adres alanı: 172.16.0.0/20
 * Service Fabric alt ağ adres alanı: 172.16.2.0/23
 
 **Microsoft.Network/networkSecurityGroups** kaynağında aşağıdaki gelen trafik kuralları etkinleştirilir. Şablon değişkenlerini değiştirerek bağlantı noktası değerlerini değiştirebilirsiniz.
 
 * ClientConnectionEndpoint (TCP): 19000
 * HttpGatewayEndpoint (HTTP/TCP): 19080
-* SMB: 445
 * Internodecommunication: 1025, 1026, 1027
-* Kısa ömürlü bağlantı noktası aralığı: 49152 için (en az 256 bağlantı noktası gerekir) 65534.
+* Kısa ömürlü bağlantı noktası aralığı: 49152-65534 (en az 256 bağlantı noktası gerekir).
 * Uygulamanın kullanımına yönelik bağlantı noktaları: 80 ve 443
-* Uygulama bağlantı noktası aralığı: 49152 için (hizmet iletişimi için kullanılır. 65534 Diğer bağlantı noktaları için yük dengeleyicide açık değildir).
+* Uygulama bağlantı noktası aralığı: 49152-65534 (hizmetten hizmete iletişim için kullanılır. Diğer bağlantı noktaları yük dengeleyicide açılmaz).
 * Diğer tüm bağlantı noktalarını engelleyin
 
-Diğer uygulama bağlantı noktası gerekiyorsa, ayarlamak gerekir **Microsoft.Network/loadBalancers** kaynak ve **Microsoft.Network/networkSecurityGroups** içinde trafiğine izin verecek şekilde kaynak.
+Diğer uygulama bağlantı noktaları gerekliyse, içindeki trafiğe izin vermek için **Microsoft. Network/loadBalancers** kaynağını ve **Microsoft. Network/networksecuritygroups** kaynağını ayarlamanız gerekir.
 
 ### <a name="windows-defender"></a>Windows Defender
-Varsayılan olarak, [Windows Defender virüsten koruma programı](/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-on-windows-server-2016) yüklü ve Windows Server 2016 işlev. Kullanıcı arabirimi bazı sku'larda varsayılan olarak yüklenir, ancak gerekli değildir. Şablonda bildirilen her düğüm türü/sanal makine ölçek kümesi için [Azure VM kötü amaçlı yazılımdan koruma uzantısını](/azure/virtual-machines/extensions/iaas-antimalware-windows) işlemleri ve Service Fabric dizinleri hariç tutmak için kullanılır:
+Varsayılan olarak, [Windows Defender virüsten koruma programı](/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-on-windows-server-2016) windows Server 2016 ' de yüklü ve çalışır. Kullanıcı arabirimi bazı SKU 'Larda varsayılan olarak yüklenir, ancak gerekli değildir. Şablonda belirtilen her düğüm türü/VM Ölçek kümesi için [Azure VM kötü amaçlı yazılımdan koruma uzantısı](/azure/virtual-machines/extensions/iaas-antimalware-windows) , Service Fabric dizinlerini ve süreçlerini dışlamak için kullanılır:
 
 ```json
 {
@@ -152,38 +151,38 @@ Varsayılan olarak, [Windows Defender virüsten koruma programı](/windows/secur
 
 ## <a name="set-template-parameters"></a>Şablon parametrelerini ayarlama
 
-[azuredeploy.parameters.json][parameters] parametre dosyası, kümenin ve ilişkili kaynakların dağıtılması için kullanılan birçok değeri bildirir. Dağıtımınız için değiştirmek için Parametreler şunlardır:
+[Azuredeploy. Parameters. JSON][parameters] parametre dosyası, kümeyi ve ilişkili kaynakları dağıtmak için kullanılan birçok değeri bildirir. Dağıtımınız için değiştirme parametreleri aşağıda verilmiştir:
 
-**Parametre** | **Örnek değer** | **Notlar** 
+**Parametresinin** | **Örnek değer** | **Notlar** 
 |---|---|---|
-|adminUserName|vmadmin| Küme VM’leri için yönetici kullanıcı adı. [VM kullanıcı adı gereksinimleri](https://docs.microsoft.com/azure/virtual-machines/windows/faq#what-are-the-username-requirements-when-creating-a-vm). |
-|adminPassword|Password#1234| Küme VM’leri için yönetici parolası. [VM için parola gereksinimlerini](https://docs.microsoft.com/azure/virtual-machines/windows/faq#what-are-the-password-requirements-when-creating-a-vm).|
+|adminUserName|vmadmin| Küme VM’leri için yönetici kullanıcı adı. [VM Için Kullanıcı adı gereksinimleri](https://docs.microsoft.com/azure/virtual-machines/windows/faq#what-are-the-username-requirements-when-creating-a-vm). |
+|adminPassword|Password#1234| Küme VM’leri için yönetici parolası. [VM Için parola gereksinimleri](https://docs.microsoft.com/azure/virtual-machines/windows/faq#what-are-the-password-requirements-when-creating-a-vm).|
 |clusterName|mysfcluster123| Kümenin adı. Yalnızca harf ve sayı içerebilir. Uzunluğu 3 ile 23 karakter arasında olmalıdır.|
-|konum|southcentralus| Kümenin konumu. |
+|location|southcentralus| Kümenin konumu. |
 |certificateThumbprint|| <p>Otomatik olarak imzalanan bir sertifika oluşturuluyor veya sertifika dosyası sağlanıyorsa değer boş olmalıdır.</p><p>Daha önce bir anahtar kasasına yüklenmiş mevcut bir sertifikayı kullanmak için sertifika SHA1 parmak izi değerini girin. Örneğin: "6190390162C988701DB5676EB81083EA608DCCF3".</p> |
 |certificateUrlValue|| <p>Otomatik olarak imzalanan bir sertifika oluşturuluyor veya sertifika dosyası sağlanıyorsa değer boş olmalıdır. </p><p>Daha önce bir anahtar kasasına yüklenmiş mevcut bir sertifikayı kullanmak için sertifika URL’sini girin. Örneğin, "https:\//mykeyvault.vault.azure.net:443/secrets/mycertificate/02bea722c9ef4009a76c5052bcbf8346".</p>|
 |sourceVaultValue||<p>Otomatik olarak imzalanan bir sertifika oluşturuluyor veya sertifika dosyası sağlanıyorsa değer boş olmalıdır.</p><p>Daha önce bir anahtar kasasına yüklenmiş mevcut bir sertifikayı kullanmak için kaynak kasa değerini girin. Örneğin: "/subscriptions/333cc2c84-12fa-5778-bd71-c71c07bf873f/resourceGroups/MyTestRG/providers/Microsoft.KeyVault/vaults/MYKEYVAULT".</p>|
 
 ## <a name="set-up-azure-active-directory-client-authentication"></a>Azure Active Directory istemci kimlik doğrulamasını ayarlama
-Azure üzerinde barındırılan ortak bir ağda dağıtılmış Service Fabric kümeleri için istemci düğümü karşılıklı kimlik doğrulaması için önerilir:
-* Azure Active Directory istemci kimliği için kullanın.
-* Sunucu kimliği ve HTTP iletişim SSL şifrelemesi için bir sertifika kullanın.
+Azure 'da barındırılan ortak bir ağda dağıtılan Service Fabric kümeleri için istemciden düğüme karşılıklı kimlik doğrulaması önerisi:
+* İstemci kimliği için Azure Active Directory kullanın.
+* HTTP iletişiminin sunucu kimliği ve SSL şifrelemesi için bir sertifika kullanın.
 
-Önce bir Service Fabric kümesi için istemcilerin kimliğini doğrulamak için Azure Active Directory (Azure AD) ayarı yapılmalıdır [kümeyi oluştururken](#createvaultandcert). Azure AD (kiracılar bilinir), kuruluşların uygulamalara kullanıcı erişimini yönetmenizi sağlar. 
+[Küme oluşturulmadan](#createvaultandcert)önce bir Service Fabric kümesi için istemcilerin kimliğini doğrulamak üzere Azure Active Directory (Azure AD) ayarlama işlemi yapılmalıdır. Azure AD, kuruluşların (kiracılar olarak bilinir) uygulamalara Kullanıcı erişimini yönetmesine olanak sağlar. 
 
-Service Fabric kümesi birden çok giriş noktası için web tabanlı dahil olmak üzere Yönetim işlevselliğini sunar [Service Fabric Explorer](service-fabric-visualizing-your-cluster.md) ve [Visual Studio](service-fabric-manage-application-in-visual-studio.md). Sonuç olarak, kümeye erişimi denetlemek için iki Azure AD uygulamaları oluşturduğunuz: bir web uygulaması ve bir yerel uygulama.  Uygulama oluşturulduktan sonra kullanıcıları salt okunur olarak atadığınız ve yönetici rolleri.
+Service Fabric kümesi, Web tabanlı [Service Fabric Explorer](service-fabric-visualizing-your-cluster.md) ve [Visual Studio](service-fabric-manage-application-in-visual-studio.md)da dahil olmak üzere yönetim işlevlerine birkaç giriş noktası sunar. Sonuç olarak, kümeye erişimi denetlemek için iki Azure AD uygulaması oluşturursunuz: bir Web uygulaması ve bir yerel uygulama.  Uygulamalar oluşturulduktan sonra kullanıcıları salt okuma ve yönetici rollerine atarsınız.
 
 > [!NOTE]
-> Kümeyi oluşturmadan önce aşağıdaki adımları tamamlamanız gerekir. Küme adları ve uç noktaları betikleri beklediğiniz çünkü değerleri planlanmalıdır ve, zaten oluşturduğunuz değerleri değil.
+> Kümeyi oluşturmadan önce aşağıdaki adımları gerçekleştirmeniz gerekir. Betikler küme adlarını ve uç noktalarını beklediği için, değerler önceden oluşturmuş olduğunuz değerler için planlanmış olmalıdır.
 
-Bu makalede, bir kiracı zaten oluşturduğunuzu varsayar. Siz yapmadıysanız okuyarak başlamanız [bir Azure Active Directory kiracısı edinme](../active-directory/develop/quickstart-create-new-tenant.md).
+Bu makalede, zaten bir kiracı oluşturmuş olduğunuz varsayılmaktadır. Yapmadıysanız, [Azure Active Directory kiracının nasıl alınacağını](../active-directory/develop/quickstart-create-new-tenant.md)okuyarak başlayın.
 
-Yapılandırma Azure AD'de bir Service Fabric kümesi ile yer alan adımların basitleştirmek için Windows PowerShell komutları kümesi oluşturduk. [Betiklerini indirme](https://github.com/robotechredmond/Azure-PowerShell-Snippets/tree/master/MicrosoftAzureServiceFabric-AADHelpers/AADTool) bilgisayarınıza.
+Azure AD 'yi Service Fabric bir kümeyle yapılandırma ile ilgili adımları basitleştirmek için bir Windows PowerShell komut dosyası kümesi oluşturduk. [Betikleri bilgisayarınıza indirin](https://github.com/robotechredmond/Azure-PowerShell-Snippets/tree/master/MicrosoftAzureServiceFabric-AADHelpers/AADTool) .
 
-### <a name="create-azure-ad-applications-and-assign-users-to-roles"></a>Azure AD uygulamaları oluşturmak ve kullanıcıları rollere atama
-Küme erişimi denetlemek için iki Azure AD uygulaması oluştur: bir web uygulaması ve bir yerel uygulama. Kümenizi temsil etmek için uygulamaları oluşturduktan sonra kullanıcılarınıza atama [Service Fabric tarafından desteklenen roller](service-fabric-cluster-security-roles.md): salt okunur ve yönetici
+### <a name="create-azure-ad-applications-and-assign-users-to-roles"></a>Azure AD uygulamaları oluşturma ve rollere kullanıcı atama
+Kümeye erişimi denetlemek için iki Azure AD uygulaması oluşturun: bir Web uygulaması ve bir yerel uygulama. Kümenizi temsil etmek üzere uygulamalar oluşturduktan sonra, kullanıcılarınızı [Service Fabric tarafından desteklenen rollere](service-fabric-cluster-security-roles.md)atayın: salt okunurdur ve yönetici.
 
-Çalıştırma `SetupApplications.ps1`ve parametrelere Kiracı kimliği, küme adı ve web uygulamasının yanıt URL'si girin. Kullanıcı adları ve kullanıcılar için parola belirtin. Örneğin:
+`SetupApplications.ps1`çalıştırın ve kiracı KIMLIĞI, küme adı ve Web uygulaması yanıt URL 'sini parametre olarak sağlayın. Kullanıcılar için Kullanıcı adlarını ve parolaları belirtin. Örnek:
 
 ```powershell
 $Configobj = .\SetupApplications.ps1 -TenantId '<MyTenantID>' -ClusterName 'mysfcluster123' -WebApplicationReplyUrl 'https://mysfcluster123.eastus.cloudapp.azure.com:19080/Explorer/index.html' -AddResourceAccess
@@ -192,22 +191,22 @@ $Configobj = .\SetupApplications.ps1 -TenantId '<MyTenantID>' -ClusterName 'mysf
 ```
 
 > [!NOTE]
-> Belirtin (örneğin Azure devlet kurumları, Azure Çin'de, Azure Almanya) Ulusal Bulutlar için `-Location` parametresi.
+> Ulusal bulutlar için (örneğin, Azure Kamu, Azure Çin, Azure Almanya) `-Location` parametresini belirtin.
 
-Bulabilirsiniz, *Tenantıd*, ya da dizin kimliği, içinde [Azure portalında](https://portal.azure.com). Seçin **Azure Active Directory** > **özellikleri** ve kopyalama **dizin kimliği** değeri.
+[Azure Portal](https://portal.azure.com) *tenantıd*veya dizin kimliğinizi bulabilirsiniz. **Azure Active Directory** > **özellikleri** ' nı seçin ve **dizin kimliği** değerini kopyalayın.
 
-*ClusterName* betiği tarafından oluşturulan Azure AD uygulamaları önek olarak eklemek için kullanılır. Gerçek bir küme adı tam olarak eşleşmesi gerekmez. Yalnızca, Azure AD yapıtlar kullanımda Service Fabric kümesine eşlemek kolaylaştırır.
+*Clustername* , komut dosyası tarafından oluşturulan Azure AD uygulamalarının ön ekini almak için kullanılır. Gerçek küme adıyla tam olarak eşleşmesi gerekmez. Yalnızca Azure AD yapıtları kullanımda olan Service Fabric kümesine eşlemeyi kolaylaştırır.
 
-*WebApplicationReplyUrl* varsayılan uç nokta oturum açma işlemini tamamladıktan sonra kullanıcılarınız için Azure AD'ye verir. Bu uç nokta olan varsayılan olarak, kümenizin Service Fabric Explorer uç nokta olarak ayarlayın:
+*Webapplicationreplyurl 'si* , oturum açmayı tamamladıktan sonra Azure AD 'nin kullanıcılarınıza döndürdüğü varsayılan uç noktadır. Bu uç noktayı kümeniz için Service Fabric Explorer uç noktası olarak ayarlayın, varsayılan olarak şu şekilde olur:
 
 https://&lt;cluster_domain&gt;: 19080/Explorer
 
-Azure AD kiracısı için yönetici ayrıcalıklarına sahip bir hesap için oturum açmanız istenir. Oturum açtıktan sonra Service Fabric kümenizi temsil etmek için yerel uygulamalar ve web betik oluşturur. Kiracının uygulamalarda [Azure portalında](https://portal.azure.com), iki yeni giriş görmeniz gerekir:
+Azure AD kiracısı için yönetici ayrıcalıklarına sahip bir hesapta oturum açmanız istenir. Oturum açtıktan sonra betik, Service Fabric kümenizi temsil etmek üzere Web ve yerel uygulamalar oluşturur. [Azure Portal](https://portal.azure.com)Kiracıdaki uygulamalarda, iki yeni giriş görmeniz gerekir:
 
-   * *ClusterName*\_küme
-   * *ClusterName*\_istemci
+   * *ClusterName*\_kümesi
+   * *ClusterName*\_istemcisi
 
-PowerShell penceresini açık tutmak için iyi bir fikirdir, bu nedenle, kümeyi oluşturduğunuzda Resource Manager şablon tarafından gereken JSON betiği yazdırır.
+Betik, kümeyi oluştururken Kaynak Yöneticisi şablonu için gereken JSON 'ı yazdırır, bu nedenle PowerShell penceresini açık tutmak iyi bir fikirdir.
 
 ```json
 "azureActiveDirectory": {
@@ -217,8 +216,8 @@ PowerShell penceresini açık tutmak için iyi bir fikirdir, bu nedenle, kümeyi
 },
 ```
 
-### <a name="add-azure-ad-configuration-to-use-azure-ad-for-client-access"></a>Azure AD istemci erişimi için kullanılacak Azure AD Yapılandırması Ekle
-İçinde [azuredeploy.json][template], Azure AD'de yapılandırırken **Microsoft.ServiceFabric/clusters** bölümü. Kiracı kimliği, küme uygulama kimliği ve istemci uygulama kimliği parametreleri ekleme  
+### <a name="add-azure-ad-configuration-to-use-azure-ad-for-client-access"></a>İstemci erişimi için Azure AD 'yi kullanmak üzere Azure AD yapılandırması ekleme
+[Azuredeploy. JSON][template]dosyasında, **Microsoft. servicefabric/kümeler** bölümünde Azure AD 'yi yapılandırın. Kiracı KIMLIĞI, küme uygulama KIMLIĞI ve istemci uygulama KIMLIĞI için parametreler ekleyin.  
 
 ```json
 {
@@ -260,7 +259,7 @@ PowerShell penceresini açık tutmak için iyi bir fikirdir, bu nedenle, kümeyi
 }
 ```
 
-Parametre değerlerini eklemek [azuredeploy.parameters.json] [ parameters] parametre dosyası. Örneğin:
+Parametre değerlerini [azuredeploy. Parameters. JSON][parameters] parametreleri dosyasına ekleyin. Örnek:
 
 ```json
 "aadTenantId": {
@@ -275,16 +274,16 @@ Parametre değerlerini eklemek [azuredeploy.parameters.json] [ parameters] param
 ```
 <a id="configurediagnostics" name="configurediagnostics_anchor"></a>
 
-## <a name="configure-diagnostics-collection-on-the-cluster"></a>Kümede tanılama koleksiyonunu yapılandırma
-Service Fabric kümesi çalıştırırken, merkezi bir konumda tüm düğümlerden günlükleri toplamak için iyi bir fikirdir. Günlükleri sahip merkezi bir konumda, kümenizdeki sorunları veya uygulamalar ve hizmetler, kümede çalışan sorunları gidermek ve çözümlemenize yardımcı olur.
+## <a name="configure-diagnostics-collection-on-the-cluster"></a>Küme üzerinde tanılama toplamayı yapılandırma
+Bir Service Fabric kümesi çalıştırırken, günlükleri merkezi konumdaki tüm düğümlerden toplamak iyi bir fikirdir. Günlüklerin merkezi bir konumda olması, kümenizdeki sorunları veya bu kümede çalışan uygulama ve hizmetlerde sorunları analiz etmenize ve gidermenize yardımcı olur.
 
-Karşıya yükleme ve günlükleri toplamak için bir yolu, günlükleri, Azure Depolama'ya yükler ve ayrıca Azure Application Insights veya olay hub'larına günlükleri gönderme seçeneği olan Azure tanılama (WAD) uzantısı kullanmaktır. Bir dış işlem, olayları depolamadan okuyun ve bunları Azure İzleyici günlükleri gibi bir analiz platformu ürün veya başka bir günlük ayrıştırma çözümde yerleştirmek için de kullanabilirsiniz.
+Günlükleri karşıya yükleme ve toplamanın bir yolu, Azure depolama 'ya günlük yükleyen Azure Tanılama (WAD) uzantısını kullanmaktır ve ayrıca Azure Application Insights veya Event Hubs günlük gönderme seçeneğine sahiptir. Ayrıca, olayları depolama alanından okumak ve Azure Izleyici günlükleri ya da başka bir günlük ayrıştırma çözümü gibi bir çözümleme platformu ürününe yerleştirmek için bir dış işlem de kullanabilirsiniz.
 
-Bu öğreticide izliyorsanız, tanılama koleksiyonu zaten yapılandırılan [şablon][template].
+Bu öğreticiyi takip ediyorsanız, [şablonda][template]tanılama koleksiyonu zaten yapılandırılmış.
 
-Dağıtılan tanılama sahip olmayan var olan bir kümeniz varsa ekleyin veya küme şablonu güncelleştirebilir. Portaldan şablonunu indirin veya var olan kümeyi oluşturmak için kullanılan Resource Manager şablonunu değiştirin. Aşağıdaki görevleri gerçekleştirerek template.json dosyasını değiştirin:
+Tanılamayı dağıtmayan mevcut bir kümeniz varsa, küme şablonu aracılığıyla ekleyebilir veya güncelleştirebilirsiniz. Mevcut kümeyi oluşturmak için kullanılan Kaynak Yöneticisi şablonunu değiştirin veya şablonu portaldan indirin. Aşağıdaki görevleri gerçekleştirerek Template. json dosyasını değiştirin:
 
-Yeni bir depolama kaynağı, şablonu kaynaklar bölümüne ekleyin:
+Şablondaki kaynaklar bölümüne yeni bir depolama kaynağı ekleyin:
 ```json
 "resources": [
 ...
@@ -305,7 +304,7 @@ Yeni bir depolama kaynağı, şablonu kaynaklar bölümüne ekleyin:
 ]
 ```
 
-Ardından, depolama hesabı adı ve tür parametrelerini şablon parametreleri bölümünü ekleyin. Burada depolama ile hesap adı, yer tutucu metin depolama hesabı adı geçer Değiştir istersiniz.
+Ardından, depolama hesabı adı için parametreler ekleyin ve şablonun parametreler bölümüne yazın. Yer tutucu metin depolama hesabı adının yerine buraya, istediğiniz depolama hesabının adını girin.
 
 ```json
 "parameters": {
@@ -332,7 +331,7 @@ Ardından, depolama hesabı adı ve tür parametrelerini şablon parametreleri b
 }
 ```
 
-Ardından, ekleme **IaaSDiagnostics** uzantılar dizisi uzantısı **VirtualMachineProfile** her özellik **Microsoft.Compute/virtualMachineScaleSets** Kümedeki kaynak.  Kullanıyorsanız [örnek şablonu][template], üç sanal makine ölçek kümeleri (kümedeki her düğüm türü için bir tane) vardır.
+Sonra, kümedeki her bir **Microsoft. COMPUTE/virtualMachineScaleSets** kaynağının **virtualmachineprofile** özelliğinin uzantılar dizisine **ıaasdiagnostics** uzantısını ekleyin.  [Örnek şablonu][template]kullanıyorsanız, üç sanal makine ölçek kümesi vardır (kümedeki her düğüm türü için bir tane).
 
 ```json
 "apiVersion": "2018-10-01",
@@ -403,16 +402,16 @@ Ardından, ekleme **IaaSDiagnostics** uzantılar dizisi uzantısı **VirtualMach
 ```
 <a id="configureeventstore" name="configureeventstore_anchor"></a>
 
-## <a name="configure-the-eventstore-service"></a>Eventstore'a hizmetini yapılandırma
-Eventstore'a service, Service fabric'te izleme bir seçenektir. Eventstore'a zaman küme veya iş yüklerini belirli bir noktada durumunu anlamak için bir yol sağlar. Eventstore'a kümeden olayları tutar durum bilgisi olan bir Service Fabric hizmeti ' dir. Olayı Service Fabric Explorer, REST ve API'ler aracılığıyla sunulur. Eventstore'a doğrudan herhangi bir varlık, kümenizdeki ilgili tanılama verilerini almak için küme sorgular ve yardımcı olmak için kullanılmalıdır:
+## <a name="configure-the-eventstore-service"></a>EventStore hizmetini yapılandırma
+EventStore hizmeti Service Fabric ' de bir izleme seçeneğidir. EventStore, belirli bir noktadaki kümenizin veya iş yüklerinizin durumunu anlamak için bir yol sağlar. EventStore, kümeden olayları tutan, durum bilgisi olan bir Service Fabric hizmetidir. Olay Service Fabric Explorer, REST ve API 'Ler aracılığıyla sunulur. EventStore, kümenizdeki herhangi bir varlıkta Tanılama verileri almak için kümeyi doğrudan sorgular ve yardımcı olması için kullanılmalıdır:
 
-* Geliştirme veya test sorunları tanılayın ve burada izleme bir işlem hattı kullanıyor olabilir
-* Yönetim eylemleri kümenizde sürüp işlenen doğru onaylayın
-* "Service Fabric belirli bir varlık ile nasıl etkileşim kurmanın anlık" Al
+* Geliştirme veya test ederken sorunları tanılayın veya bir izleme işlem hattı kullanıyor olabilirsiniz
+* Kümenizde yaptığınız yönetim eylemlerinin doğru şekilde işleneceğini onaylayın
+* Service Fabric belirli bir varlıkla nasıl etkileşim kurduğuna ilişkin bir "Snapshot" alın
 
 
 
-Kümenizde Eventstore'a hizmetini etkinleştirmek için aşağıdaki ekleyin **fabricSettings** özelliği **Microsoft.ServiceFabric/clusters** kaynak:
+Kümenizde EventStore hizmetini etkinleştirmek için **Microsoft. ServiceFabric/kümeler** kaynağının **fabricsettings** özelliğine aşağıdakileri ekleyin:
 
 ```json
 "apiVersion": "2018-02-01",
@@ -440,13 +439,13 @@ Kümenizde Eventstore'a hizmetini etkinleştirmek için aşağıdaki ekleyin **f
 ```
 <a id="configureloganalytics" name="configureloganalytics_anchor"></a>
 
-## <a name="set-up-azure-monitor-logs-for-the-cluster"></a>Azure İzleyici günlüklerine kümesi için ayarlayın
+## <a name="set-up-azure-monitor-logs-for-the-cluster"></a>Küme için Azure Izleyici günlüklerini ayarlama
 
-Azure İzleyici günlüklerine küme düzeyi olayları izlemek için Bizim önerimiz olur. Kümenizi izlemek için Azure İzleyici günlüklerini ayarlamak için ihtiyacınız [küme düzeyi olayları görüntülemek için tanılamayı](#configure-diagnostics-collection-on-the-cluster).  
+Azure Izleyici günlükleri, küme düzeyindeki olayları izlemek için önerimiz. Kümenizi izlemek üzere Azure Izleyici günlüklerini ayarlamak için, [Küme düzeyindeki olayları görüntülemek için tanılamayı etkinleştirmeniz](#configure-diagnostics-collection-on-the-cluster)gerekir.  
 
-Çalışma alanı kümenizden gelen Tanılama verileri bağlanması gerekir.  Bu günlük veriler *applicationDiagnosticsStorageAccountName* depolama hesabında WADServiceFabric * EventTable WADWindowsEventLogsTable ve WADETWEventTable tablolar.
+Çalışma alanının, kümeinizden gelen tanılama verilerine bağlanması gerekir.  Bu günlük verileri, WADServiceFabric * EventTable, WADWindowsEventLogsTable ve Wadeviltable tablolarında *Applicationdiagnosticsstorageaccountname* depolama hesabında depolanır.
 
-Azure Log Analytics çalışma alanı ve çözüm çalışma alanına ekleyin:
+Azure Log Analytics çalışma alanını ekleyin ve çalışma alanına çözümü ekleyin:
 
 ```json
 "resources": [
@@ -536,7 +535,7 @@ Azure Log Analytics çalışma alanı ve çözüm çalışma alanına ekleyin:
 ]
 ```
 
-Ardından, parametre ekleme
+Sonra, parametreleri Ekle
 ```json
 "parameters": {
     ...
@@ -562,7 +561,7 @@ Ardından, parametre ekleme
 }
 ```
 
-Ardından, değişkenleri ekleyin:
+Sonra, değişken Ekle:
 ```json
 "variables": {
     ...
@@ -571,7 +570,7 @@ Ardından, değişkenleri ekleyin:
 }
 ```
 
-Log Analytics Aracısı uzantısı her sanal makine ölçek kümesinde ve aracının Log Analytics çalışma alanına bağlamak ekleyin. Bu kapsayıcı, uygulamaları ve performans izleme hakkında tanılama veri toplama sağlar. Bu uzantı olarak sanal makine ölçek kümesi kaynağına ekleyerek, Azure Resource Manager her düğümde yükleneceğini bile kümenin ne zaman ölçeklendirme sağlar.
+Kümedeki her bir sanal makine ölçek kümesine Log Analytics Agent uzantısını ekleyin ve aracıyı Log Analytics çalışma alanına bağlayın. Bu, kapsayıcılar, uygulamalar ve performans izleme hakkında tanılama verileri toplamaya izin vermez. Bunu sanal makine ölçek kümesi kaynağına bir uzantı olarak ekleyerek Azure Resource Manager, kümeyi ölçeklendirirken bile her düğümde yüklü olmasını sağlar.
 
 ```json
 "apiVersion": "2018-10-01",
@@ -608,13 +607,13 @@ Log Analytics Aracısı uzantısı her sanal makine ölçek kümesinde ve aracı
 
 ## <a name="deploy-the-virtual-network-and-cluster"></a>Sanal ağı ve kümeyi dağıtma
 
-Ardından, ağ topolojisini ayarlayın ve Service Fabric kümesini dağıtın. [Azuredeploy.json] [ template] Resource Manager şablonu, Service Fabric için bir sanal ağ, alt ağ ve ağ güvenlik grubu oluşturur. Şablon tarafından sertifika güvenliği etkin bir küme de dağıtılır. Üretim kümeleri için küme sertifikası olarak bir sertifika yetkilisinden bir sertifika kullanın. Test kümelerinin güvenliğinin sağlanması için otomatik olarak imzalanan bir sertifika kullanılabilir.
+Ardından, ağ topolojisini ayarlayın ve Service Fabric kümesini dağıtın. [Azuredeploy. json][template] Kaynak Yöneticisi şablonu Service Fabric için bir sanal ağ, alt ağ ve ağ güvenlik grubu oluşturur. Şablon tarafından sertifika güvenliği etkin bir küme de dağıtılır. Üretim kümeleri için, bir sertifika yetkilisinden küme sertifikası olarak bir sertifika kullanın. Test kümelerinin güvenliğinin sağlanması için otomatik olarak imzalanan bir sertifika kullanılabilir.
 
-Bu makalede şablonda küme sertifikayı belirlemek için sertifika parmak izini kullanan bir küme dağıtır. İki sertifika, sertifika yönetimi zorlaştırır aynı parmak olabilir. Sertifika ortak adları için sertifika parmak izleri dağıtılan bir kümeden geçiş sertifika yönetimini kolaylaştırır. Sertifika Yönetim sertifikası ortak adlarının kullanmak için küme güncelleştirme hakkında bilgi edinmek için okumaya devam [sertifika ortak adına yönetim değişiklik kümesine](service-fabric-cluster-change-cert-thumbprint-to-cn.md).
+Bu makaledeki şablon, küme sertifikasını tanımlamak için sertifika parmak izini kullanan bir küme dağıtır. İki sertifika aynı parmak izine sahip olamaz, bu da sertifika yönetimini daha zor hale getirir. Dağıtılan bir kümeyi sertifika parmak izlerinden sertifika ortak adlarına geçirme, sertifika yönetimini basitleştirir. Sertifikayı sertifika yönetimi için sertifika ortak adlarını kullanacak şekilde güncelleştirme hakkında bilgi edinmek için, [değişiklik kümesini sertifika ortak ad yönetimine](service-fabric-cluster-change-cert-thumbprint-to-cn.md)okuyun.
 
-### <a name="create-a-cluster-by-using-an-existing-certificate"></a>Mevcut bir sertifikayı kullanarak küme oluşturma
+### <a name="create-a-cluster-by-using-an-existing-certificate"></a>Mevcut bir sertifikayı kullanarak bir küme oluşturma
 
-Aşağıdaki betik [yeni AzServiceFabricCluster](/powershell/module/az.servicefabric/New-azServiceFabricCluster) cmdlet'i ve azure'da yeni bir kümeye dağıtmak için bir şablon. Cmdlet tarafından Azure'da yeni bir anahtar kasası oluşturulur ve sertifikanız karşıya yüklenir.
+Aşağıdaki betik [New-AzServiceFabricCluster](/powershell/module/az.servicefabric/New-azServiceFabricCluster) cmdlet 'ini ve yeni bir kümeyi Azure 'da dağıtmak için bir şablon kullanır. Cmdlet 'i Azure 'da yeni bir Anahtar Kasası oluşturur ve sertifikanızı karşıya yükler.
 
 ```powershell
 # Variables.
@@ -642,9 +641,9 @@ New-AzServiceFabricCluster  -ResourceGroupName $groupname -TemplateFile "$templa
 -KeyVaultName $vaultname -KeyVaultResourceGroupName $vaultgroupname -CertificateFile $certpath
 ```
 
-### <a name="create-a-cluster-by-using-a-new-self-signed-certificate"></a>Yeni, otomatik olarak imzalanan bir sertifika kullanarak küme oluşturma
+### <a name="create-a-cluster-by-using-a-new-self-signed-certificate"></a>Yeni, otomatik olarak imzalanan bir sertifika kullanarak bir küme oluşturma
 
-Aşağıdaki betik [yeni AzServiceFabricCluster](/powershell/module/az.servicefabric/New-azServiceFabricCluster) cmdlet'i ve azure'da yeni bir kümeye dağıtmak için bir şablon. Cmdlet tarafından Azure'da yeni bir anahtar kasası oluşturulur, yeni bir otomatik olarak imzalanan sertifika anahtar Kasası'na ekler ve yerel olarak sertifika dosyasını indirir.
+Aşağıdaki betik [New-AzServiceFabricCluster](/powershell/module/az.servicefabric/New-azServiceFabricCluster) cmdlet 'ini ve yeni bir kümeyi Azure 'da dağıtmak için bir şablon kullanır. Cmdlet Azure 'da yeni bir Anahtar Kasası oluşturur, anahtar kasasına yeni bir kendinden imzalı sertifika ekler ve sertifika dosyasını yerel olarak indirir.
 
 ```powershell
 # Variables.
@@ -676,7 +675,7 @@ New-AzServiceFabricCluster  -ResourceGroupName $groupname -TemplateFile "$templa
 
 ## <a name="connect-to-the-secure-cluster"></a>Güvenli kümeye bağlanma
 
-Service Fabric SDK'sıyla yüklü Service Fabric PowerShell modülünü kullanarak kümeye bağlanın.  İlk olarak sertifikayı bilgisayarınızda geçerli kullanıcının Kişisel (My) deposuna yükleyin. Aşağıdaki PowerShell komutunu çalıştırın:
+Service Fabric SDK ile yüklenen Service Fabric PowerShell modülünü kullanarak kümeye bağlanın.  İlk olarak sertifikayı bilgisayarınızda geçerli kullanıcının Kişisel (My) deposuna yükleyin. Aşağıdaki PowerShell komutunu çalıştırın:
 
 ```powershell
 $certpwd="q6D7nN%6ck@6" | ConvertTo-SecureString -AsPlainText -Force
@@ -685,11 +684,11 @@ Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My `
         -Password $certpwd
 ```
 
-Şimdi güvenli kümenize bağlanmaya hazırsınız.
+Artık güvenli kümenize bağlanmaya hazırsınız.
 
 **Service Fabric** PowerShell modülü, Service Fabric kümelerini, uygulamalarını ve hizmetlerini yönetmek için birçok cmdlet sağlar. Güvenli kümeye bağlanmak için [Connect-ServiceFabricCluster](/powershell/module/servicefabric/connect-servicefabriccluster) cmdlet'ini kullanın. Sertifika SHA1 parmak izi ve bağlantı uç noktası ayrıntıları önceki adımda elde edilen çıktıdan bulunabilir.
 
-Daha önce Azure AD istemci kimlik doğrulaması ayarlarsanız, aşağıdaki komutu çalıştırın: 
+Daha önce Azure AD istemci kimlik doğrulamasını ayarlarsanız, aşağıdaki komutu çalıştırın: 
 ```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint mysfcluster123.southcentralus.cloudapp.azure.com:19000 `
         -KeepAliveIntervalInSec 10 `
@@ -697,7 +696,7 @@ Connect-ServiceFabricCluster -ConnectionEndpoint mysfcluster123.southcentralus.c
         -ServerCertThumbprint C4C1E541AD512B8065280292A8BA6079C3F26F10
 ```
 
-Azure AD istemci kimlik doğrulaması ayarlamadınız ise aşağıdaki komutu çalıştırın:
+Azure AD istemci kimlik doğrulamasını ayarlamadıysanız, aşağıdaki komutu çalıştırın:
 ```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint mysfcluster123.southcentralus.cloudapp.azure.com:19000 `
           -KeepAliveIntervalInSec 10 `
@@ -706,7 +705,7 @@ Connect-ServiceFabricCluster -ConnectionEndpoint mysfcluster123.southcentralus.c
           -StoreLocation CurrentUser -StoreName My
 ```
 
-Sizin bağlı olduğunuzu ve kullanarak, kümenin iyi durumda olduğunu denetleyin [Get-ServiceFabricClusterHealth](/powershell/module/servicefabric/get-servicefabricclusterhealth) cmdlet'i.
+[Get-ServiceFabricClusterHealth](/powershell/module/servicefabric/get-servicefabricclusterhealth) cmdlet 'ini kullanarak bağlı olup olmadığınızı ve kümenin sağlıklı olup olmadığını kontrol edin.
 
 ```powershell
 Get-ServiceFabricClusterHealth
@@ -714,27 +713,27 @@ Get-ServiceFabricClusterHealth
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu öğretici serisindeki diğer makalelerde, oluşturduğunuz küme kullanılır. Hemen bir sonraki makaleye geçmeyecekseniz ücret alınmaması için [kümeyi silmeniz](service-fabric-cluster-delete.md) iyi olur.
+Bu öğretici serisindeki diğer makaleler, oluşturduğunuz kümeyi kullanır. Hemen bir sonraki makaleye geçmeyecekseniz ücretlendirmeden kaçınmak için [kümeyi silmeniz](service-fabric-cluster-delete.md) iyi olur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kümenizi ölçeklendirme konusunda bilgi almak için aşağıdaki öğreticiye geçin.
+Kümenizi ölçeklendirmeyi öğrenmek için aşağıdaki öğreticiye ilerleyin.
 
 > [!div class="checklist"]
 > * PowerShell kullanarak Azure’da VNet oluşturma
 > * Anahtar kasası oluşturma ve karşıya sertifika yükleme
-> * Azure Active Directory kimlik doğrulaması kurulumu
-> * Tanı koleksiyonu yapılandırma
-> * Eventstore'a hizmetini ayarlama
-> * Azure İzleyici günlüklerini ayarlayın
+> * Azure Active Directory kimlik doğrulamasını ayarla
+> * Tanılama toplamayı yapılandır
+> * EventStore hizmetini ayarlama
+> * Azure Izleyici günlüklerini ayarlama
 > * Azure PowerShell’de güvenli bir Service Fabric kümesi oluşturma
 > * X.509 sertifikasıyla kümenin güvenliğini sağlama
 > * PowerShell kullanarak kümeye bağlanma
 > * Bir kümeyi kaldırma
 
-Ardından, kümenizi izlemek hakkında bilgi edinmek için aşağıdaki öğreticiye geçin.
+Daha sonra, kümenizi nasıl izleyeceğinizi öğrenmek için aşağıdaki öğreticiye ilerleyin.
 > [!div class="nextstepaction"]
-> [Bir kümesini izleme](service-fabric-tutorial-monitor-cluster.md)
+> [Bir kümeyi izleme](service-fabric-tutorial-monitor-cluster.md)
 
 [template]:https://github.com/Azure-Samples/service-fabric-cluster-templates/blob/master/7-VM-Windows-3-NodeTypes-Secure-NSG/AzureDeploy.json
 [parameters]:https://github.com/Azure-Samples/service-fabric-cluster-templates/blob/master/7-VM-Windows-3-NodeTypes-Secure-NSG/AzureDeploy.Parameters.json

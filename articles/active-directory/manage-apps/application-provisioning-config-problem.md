@@ -1,6 +1,6 @@
 ---
-title: Azure AD galeri uygulaması için kullanıcı sağlama yapılandırma sorunu | Microsoft Docs
-description: Azure AD uygulama galerisinde bulunan yapılandırma kullanıcı uygulamaya zaten sağlama listelenen genişlettiklerinde karşılaştığı yaygın sorunları giderme
+title: Azure AD Galeri uygulamasına kullanıcı sağlamayı yapılandırma sorunu | Microsoft Docs
+description: Azure AD uygulama galerisinde zaten listelenen bir uygulamaya Kullanıcı sağlamayı yapılandırırken karşılaştığı yaygın sorunları giderme
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -12,63 +12,63 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 07/11/2017
+ms.date: 09/03/2019
 ms.author: mimart
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 42bffdc1960a87c931e914896e8e36de45991bd4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9a8eaa46b46551f9b6075ec10b38de80f84c22a0
+ms.sourcegitcommit: 0fab4c4f2940e4c7b2ac5a93fcc52d2d5f7ff367
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65784124"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71034164"
 ---
-# <a name="problem-configuring-user-provisioning-to-an-azure-ad-gallery-application"></a>Azure AD galeri uygulaması için kullanıcı sağlama yapılandırma sorunu
+# <a name="problem-configuring-user-provisioning-to-an-azure-ad-gallery-application"></a>Azure AD Galeri uygulamasına kullanıcı sağlamayı yapılandırma sorunu
 
-Yapılandırma [otomatik kullanıcı hazırlama](https://docs.microsoft.com/azure/active-directory/active-directory-saas-app-provisioning) bir uygulama için (destekleniyorsa), belirli yönergeler otomatik sağlama için uygulama hazırlama için izlenmesi gerekir. Ardından uygulamaya kullanıcı hesaplarını eşitlemek için sağlama hizmeti yapılandırmak için Azure portalını kullanabilirsiniz.
+Bir uygulama için [Otomatik Kullanıcı sağlamayı](https://docs.microsoft.com/azure/active-directory/active-directory-saas-app-provisioning) yapılandırma (desteklenir), uygulamayı otomatik sağlama için hazırlamak üzere belirli yönergelerin izlenmesini gerektirir. Daha sonra, Kullanıcı hesaplarını uygulamayla eşitlemeye yönelik sağlama hizmetini yapılandırmak için Azure portal kullanabilirsiniz.
 
-Her zaman, uygulamanız için sağlamayı ayarlama ayarlamak için özel kurulum öğretici bularak başlamanız gerekir. Ardından hem uygulama hem de sağlama bağlantısı oluşturmak için Azure AD'de yapılandırmak için bu adımları izleyin. Uygulama öğreticilerin bir listesi şu yolda bulunabilir: [nasıl Azure Active Directory ile SaaS uygulamalarını tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list).
+Uygulamanız için sağlamayı ayarlamaya özgü kurulum öğreticisini bularak her zaman başlamanız gerekir. Ardından, sağlama bağlantısı oluşturmak için hem uygulamayı hem de Azure AD 'yi yapılandırmak için bu adımları izleyin. [SaaS uygulamalarını Azure Active Directory Ile tümleştirme hakkında öğreticiler listesinde](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)uygulama öğreticilerinin listesi bulunabilir.
 
-## <a name="how-to-see-if-provisioning-is-working"></a>Sağlama çalışıp çalışmadığını nasıl 
+## <a name="how-to-see-if-provisioning-is-working"></a>Sağlamanın çalışıp çalışmadığını nasıl görebileceğinizi belirleme 
 
-Hizmet yapılandırıldıktan sonra hizmetin işlemi çoğu Öngörüler iki yerden kurulabilir:
+Hizmet yapılandırıldıktan sonra, hizmetin çalışması ile ilgili birçok öngörü iki konumdan çizilebilirler:
 
--   **Denetim günlükleri** – sağlama denetim kaydı atanan sağlama kapsamında olan kullanıcılar Azure AD için sorgulama dahil olmak üzere sağlama hizmeti tarafından gerçekleştirilen tüm işlemleri günlüğe kaydeder. Hedef uygulama için kullanıcı nesneleri arasında sistem karşılaştırma kullanıcılarla varlığını sorgulayın. Ardından ekleme, güncelleştirme veya hedef sistem üzerinde karşılaştırma tabanlı kullanıcı hesabı devre dışı bırak. Sağlama denetim günlüklerinin Azure portalında erişilebilen **Azure Active Directory &gt; Kurumsal uygulamaları &gt; \[uygulama adı\] &gt; denetim günlükleri** sekmesi. Günlükleri filtreleyin **hesap sağlama** yalnızca bu uygulama için sağlama olayları görmek için kategori.
+-   **Sağlama günlükleri (Önizleme)** – sağlama [günlüğü](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context) , sağlama kapsamında olan ATANMıŞ kullanıcılar için Azure AD sorgulama da dahil olmak üzere, sağlama hizmeti tarafından gerçekleştirilen tüm işlemleri kaydeder. Bu kullanıcıların varlığı için hedef uygulamayı sorgulayın ve sistem arasındaki kullanıcı nesnelerini karşılaştırır. Ardından, karşılaştırma temelinde hedef sistemde Kullanıcı hesabını ekleyin, güncelleştirin veya devre dışı bırakın. &gt; **Etkinlik** bölümünde **Kurumsal uygulamalar** &gt; **sağlama günlükleri (Önizleme)** **Azure Active Directory** ' ni seçerek Azure Portal sağlama günlüklerine erişebilirsiniz.
 
--   **Sağlama durumu –** son sağlama özeti çalıştırmak için belirli bir uygulamanın görülebilir **Azure Active Directory &gt; Kurumsal uygulamaları &gt; \[uygulama adı\] &gt;Sağlama** kısmına ekranın altında hizmet ayarları. Bu bölümde, kaç kullanıcılara (ve/veya gruplar) şu anda iki sistem arasında eşitlendiğini özetler ve herhangi bir hata varsa. Hata ayrıntıları denetim günlüklerinde olabilir. Azure AD arasında bir tam ilk eşitleme tamamlanana kadar sağlama durumu doldurulmuyor gerektiğini unutmayın ve uygulama.
+-   **Geçerli durum –** Belirli bir uygulama için en son sağlama çalıştırmasının Özeti, ' nin en altındaki **Azure Active Directory &gt; kurumsal uygulamalar\] &gt; \[ &gt;uygulama adı sağlama** bölümünde görülebilir. Hizmet ayarları altındaki ekran. Geçerli durum bölümü, bir sağlama döngüsünün Kullanıcı hesapları sağlamaya başlayıp başlamadığına ilişkin gösterir. Döngüsünün ilerlemesini izleyebilir, kaç Kullanıcı ve grup sağlandığını görebilir ve kaç rolün oluşturulduğunu görebilirsiniz. Herhangi bir hata oluşursa, Ayrıntılar [sağlama günlüklerinde (Önizleme)](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context)bulunabilir.
 
-## <a name="general-problem-areas-with-provisioning-to-consider"></a>Dikkate alınması gereken sağlama ile genel sorunlu alanlar
+## <a name="general-problem-areas-with-provisioning-to-consider"></a>Dikkate alınması gereken genel sorun alanı
 
-Nereden başlayacağınızı hakkında bir fikir varsa, ayrıntılarına ulaşabilirsiniz genel sorunlu alanları listesi aşağıda verilmiştir.
+Aşağıda, nereden başlayabileceğiniz hakkında bir fikriniz varsa, detaya gidebileceğiniz genel sorun alanlarının bir listesi verilmiştir.
 
-* [Sağlama hizmeti başlatmak için görünmüyor.](#provisioning-service-does-not-appear-to-start)
-* Yapılandırma çalışmıyor uygulama kimlik bilgileri nedeniyle kaydedilemiyor.
-* [Atanmış oldukları olsa bile kullanıcılar "atlandı" ve sağlanmadı, Denetim günlükleri söyleyin](#audit-logs-say-users-are-skipped-and-not-provisioned-even-though-they-are-assigned)
+* [Sağlama hizmeti başlatma olarak görünmüyor](#provisioning-service-does-not-appear-to-start)
+* Uygulama kimlik bilgileri çalışmaması nedeniyle yapılandırma kaydedilemiyor
+* [Sağlama günlükleri, atanmış olsalar dahi, kullanıcıların "atlandı" ve sağlanmamış olduğunu söylüyor](#provisioning-logs-say-users-are-skipped-and-not-provisioned-even-though-they-are-assigned)
 
-## <a name="provisioning-service-does-not-appear-to-start"></a>Sağlama hizmeti başlatmak için görünmüyor.
+## <a name="provisioning-service-does-not-appear-to-start"></a>Sağlama hizmeti başlatma olarak görünmüyor
 
-Ayarlarsanız **sağlama durumu** olmasını **üzerinde** içinde **Azure Active Directory &gt; Kurumsal uygulamaları &gt; \[uygulama adı\] &gt;Sağlama** Azure portal'ın bölümü. Ancak sonraki yeniden yükler sonra diğer bir durum ayrıntıları bu sayfada gösterilir. Hizmet çalışıyor ancak bir ilk eşitleme henüz tamamlanmadı olma olasılığı yüksektir. Denetleme **denetim günlükleri** şu hizmet gerçekleştiriyor, hangi işlemleri belirlemek için yukarıda açıklanan ve herhangi bir hata varsa.
+**Sağlama durumunu** , Azure Portal **Azure Active Directory &gt; Enterprise Apps &gt;uygulamaadı \[\] sağlama&gt;** **bölümünde olacak şekilde** ayarlarsanız . Ancak, sonraki yeniden yüklemeden sonra bu sayfada başka bir durum ayrıntısı gösterilmez. Hizmetin çalışıyor olması, ancak henüz bir başlangıç döngüsünü tamamlamamasından kaynaklanıyor olabilir. Hizmetin hangi işlemleri yaptığını ve herhangi bir hata olup olmadığını belirlemek için yukarıda açıklanan **sağlama günlüklerini** denetleyin.
 
 >[!NOTE]
->Bir ilk eşitleme 20 dakika veya herhangi bir Azure AD dizinindeki kullanıcıların sağlama kapsamında sayısı ve boyutuna bağlı olarak birkaç saat sürebilir. İlk eşitleme sonrasında sonraki eşitlemeler sağlama hizmeti sonraki eşitlemeler performansını iyileştirme ilk eşitlemeden sonra her iki sistem durumunu temsil eden filigranlar depolar daha hızlı olması.
+>Bir başlangıç döngüsünün, Azure AD dizininin boyutuna ve sağlama kapsamındaki kullanıcı sayısına bağlı olarak 20 dakikadan birkaç saate kadar herhangi bir zaman geçmesi gerekir. İlk döngüden sonra sonraki eşitlemeler daha hızlı olur, çünkü sağlama hizmeti başlangıç döngüsünden sonra her iki sistemin durumunu temsil eden filigranları depolar, sonraki eşitlemeler performansını geliştirir.
 >
 >
 
-## <a name="cant-save-configuration-due-to-app-credentials-not-working"></a>Yapılandırma çalışmıyor uygulama kimlik bilgileri nedeniyle kaydedilemiyor.
+## <a name="cant-save-configuration-due-to-app-credentials-not-working"></a>Uygulama kimlik bilgileri çalışmaması nedeniyle yapılandırma kaydedilemiyor
 
-Çalışmak için sağlama sırada Azure AD'ye bağlanmak için kullanıcı yönetimi, uygulama tarafından sağlanan API izin geçerli kimlik bilgilerini gerektirir. Bu kimlik bilgileri çalışmıyor veya bunların ne olduğunu bilmiyorsanız, daha önce açıklanan bu uygulamayı hazırlama için öğreticiyi gözden geçirin.
+Sağlamanın çalışması için Azure AD, uygulamanın bu uygulama tarafından verilen bir kullanıcı yönetimi API 'sine bağlanmasına izin veren geçerli kimlik bilgileri gerektirir. Bu kimlik bilgileri işe yaradığını veya ne olduğunu bilmiyorsanız, daha önce açıklanan bu uygulamayı ayarlama öğreticisini gözden geçirin.
 
-## <a name="audit-logs-say-users-are-skipped-and-not-provisioned-even-though-they-are-assigned"></a>Denetim günlükleri kullanıcılar atlandı ve atanmış oldukları olsa bile sağlanmadı varsayalım.
+## <a name="provisioning-logs-say-users-are-skipped-and-not-provisioned-even-though-they-are-assigned"></a>Kaynak sağlama, kullanıcıların atlandığını ve bunlara atanmış olsalar da sağlanmadığını söyleyin
 
-Kullanıcı "Denetim günlüklerinde atlandı gibi" gösterilir, günlük iletisinde nedenini belirlemek için genişletilmiş ayrıntılarını okumak çok önemlidir. Sık karşılaşılan nedenleri ve çözümleri aşağıda verilmiştir:
+Bir Kullanıcı sağlama günlüklerinde "atlandı" olarak görünüyorsa, nedenini öğrenmek için günlük iletisindeki genişletilmiş ayrıntıları okumak çok önemlidir. Aşağıda yaygın nedenler ve çözümler verilmiştir:
 
-- **Kapsam belirleme filtresi yapılandırılmış** **, filtre uygulayarak kullanıcının bir öznitelik değerine göre**. Kapsam filtreleri ile ilgili daha fazla bilgi için bkz: <https://docs.microsoft.com/azure/active-directory/active-directory-saas-scoping-filters>.
+- **Kapsam filtresi yapılandırıldı** **Bu, kullanıcıyı bir öznitelik değerine göre filtreleyerek**. Filtrelerin kapsamını belirleme hakkında daha fazla bilgi için <https://docs.microsoft.com/azure/active-directory/active-directory-saas-scoping-filters>bkz.
 
-- **Kullanıcı, "etkili bir şekilde yetkili".** Bu belirli hata iletisini görürseniz, Azure AD'de depolanan kullanıcı atama kaydı ile ilgili bir sorun olduğundan olur. Bu sorun, powerbı.com'u kullanıcı (veya grup) uygulamadan düzeltin ve yeniden yeniden atamak için. Atama hakkında daha fazla bilgi için bkz. <https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal>.
+- **Kullanıcı "etkin değil" olarak belirlenir.** Bu özel hata iletisini görürseniz, bunun nedeni Azure AD 'de depolanan kullanıcı atama kaydında bir sorun olması olabilir. Bu sorunu onarmak için, Kullanıcı (veya grubu) uygulamadan atamayı kaldırın ve yeniden atayın. Atama hakkında daha fazla bilgi için bkz <https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal>.
 
-- **Gerekli bir özniteliği eksik veya doldurulmuş bir kullanıcı değil.** Gözden geçirin ve hangi kullanıcı (veya grup) özellikleri akış Azure ad uygulama tanımlayan iş akışları ve öznitelik eşlemelerini yapılandırma sağlamayı ayarlama ayarlanırken dikkate alınması gereken önemli bir şey olabilir. Bu içerir "eşleştirme özelliği" ayarı benzersiz biçimde tanımlayan ve kullanıcılar/gruplar iki sistem arasındaki eşleştirmek için kullanılır. Bu önemli işlem hakkında daha fazla bilgi için bkz. <https://docs.microsoft.com/azure/active-directory/active-directory-saas-customizing-attribute-mappings>.
+- **Gerekli bir öznitelik eksik veya Kullanıcı için doldurulmamış.** Sağlama yaparken göz önünde bulundurmanız gereken önemli bir şey, Azure AD 'den uygulamaya hangi kullanıcı (veya grup) özelliklerinin akmasını tanımlayan öznitelik eşlemelerini ve iş akışlarını gözden geçirmek ve yapılandırmak için gereken bir şeydir. Bu, iki sistem arasında kullanıcıları/grupları benzersiz şekilde tanımlamak ve eşleştirmek için kullanılan "eşleşen özelliği" ayarlamayı içerir. Bu önemli süreç hakkında daha fazla bilgi için bkz <https://docs.microsoft.com/azure/active-directory/active-directory-saas-customizing-attribute-mappings>.
 
-  * **Öznitelik eşlemeleri için grupları:** Grup adını ve üyelerinin yanı sıra grubu ayrıntıları bazı uygulamalar için destekleniyorsa sağlama. Etkinleştirme veya etkinleştirme veya devre dışı bırakarak bu işlevi devre dışı **eşleme** gösterilen grubu nesnelerinin **sağlama** sekmesi. Grupları sağlama etkinse, "Eşleşen kimliği" için uygun bir alanı kullanıldığından emin olmak için öznitelik eşlemelerini gözden geçirmeyi unutmayın. Bu olabilir görünen ad veya e-posta diğer adı), eşleşen özellik boş ya da doldurulmuş bir grup için Azure AD'de ise grup ve üyelerini sağlanacak değil olarak.
+  * **Gruplar için öznitelik eşlemeleri:** Bazı uygulamalarda destekleniyorsa, üyelere ek olarak grup adı ve grup ayrıntılarının sağlanması. **Sağlama** sekmesinde gösterilen Grup nesneleri **eşlemesini** etkinleştirerek veya devre dışı bırakarak bu işlevselliği etkinleştirebilir veya devre dışı bırakabilirsiniz. Sağlama grupları etkinleştirilmişse, "eşleşen KIMLIK" için uygun bir alanın kullanıldığından emin olmak üzere öznitelik eşlemelerini gözden geçirdiğinizden emin olun. Bu, görünen ad veya e-posta diğer adı olabilir), eşleşen özellik boşsa veya Azure AD 'de bir grup için doldurulmamışsa grup ve üyeleri sağlanmamıştır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 [Azure Active Directory ile SaaS Uygulamalarına Kullanıcı Hazırlama ve Sağlamayı Kaldırma İşlemlerini Otomatik Hale Getirme](user-provisioning.md)

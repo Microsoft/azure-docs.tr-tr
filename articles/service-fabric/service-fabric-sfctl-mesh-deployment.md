@@ -1,9 +1,9 @@
 ---
-title: Azure Service Fabric CLI - sfctl kafes dağıtım | Microsoft Docs
-description: Service Fabric CLI'sını sfctl kafes dağıtım komutlarını açıklamaktadır.
+title: Azure Service Fabric CLı-sfctl kafes dağıtımı | Microsoft Docs
+description: CLı sfctl ağ dağıtım komutlarını Service Fabric açıklar.
 services: service-fabric
 documentationcenter: na
-author: Christina-Kang
+author: jeffj6123
 manager: chackdan
 editor: ''
 ms.assetid: ''
@@ -12,67 +12,64 @@ ms.devlang: cli
 ms.topic: reference
 ms.tgt_pltfrm: na
 ms.workload: multiple
-ms.date: 12/06/2018
-ms.author: bikang
-ms.openlocfilehash: e6b484dabd77a142961db2d97242896790fa3d8b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 9/17/2019
+ms.author: jejarry
+ms.openlocfilehash: dbecf8e96c6cb5d0d6d873309d848304fe33eaaa
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60836969"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72901245"
 ---
 # <a name="sfctl-mesh-deployment"></a>sfctl mesh deployment
-Service Fabric Mesh kaynaklar oluşturun.
+Service Fabric kafes kaynakları oluşturun.
 
 ## <a name="commands"></a>Komutlar
 
 |Komut|Açıklama|
 | --- | --- |
-| create | Service Fabric Mesh kaynakları dağıtımı oluşturur. |
+| oluşturmaya | Service Fabric kafes kaynakları dağıtımı oluşturur. |
 
 ## <a name="sfctl-mesh-deployment-create"></a>sfctl kafes dağıtımı oluşturma
-Service Fabric Mesh kaynakları dağıtımı oluşturur.
+Service Fabric kafes kaynakları dağıtımı oluşturur.
 
 ### <a name="arguments"></a>Bağımsız Değişkenler
 
 |Bağımsız Değişken|Açıklama|
 | --- | --- |
-| --Giriş-yaml-dosyaları [gerekli] | Yaml dosyaları içeren virgülle ayrılmış göreli/mutlak dosya yolları tüm yaml dosyası ya da (yinelemeli) dizininin göreli/mutlak yolu. |
-| --Parametreler | Yaml dosyası ya da geçersiz kılınacak gereken parametreler içeren bir json nesnesi bir göreli/mutlak yolu. |
+| --Input-YAML-Files [gerekli] | Tüm YAML dosyalarının virgülle ayrılmış göreli/mutlak dosya yolları veya YAML dosyaları içeren dizinin (özyinelemeli) göreli/mutlak yolu. |
+| --Parametreler | YAML dosyasına yönelik göreli/mutlak yol veya geçersiz kılınabilmesi gereken parametreleri içeren bir JSON nesnesi. |
 
-### <a name="global-arguments"></a>Genel bağımsız değişkenleri
+### <a name="global-arguments"></a>Genel bağımsız değişkenler
 
 |Bağımsız Değişken|Açıklama|
 | --- | --- |
-| --hata ayıklama | Tüm hata ayıklama günlüklerini göster için günlüğün ayrıntı düzeyini artırır. |
-| ---h Yardım | Bu yardım iletisini ve çıkış gösterir. |
-| --Çıktı -o | Çıkış biçimi.  İzin verilen değerler\: json, jsonc, tablo, tsv.  Varsayılan\: json. |
-| --Sorgu | JMESPath sorgu dizesi. HTTP bkz\://jmespath.org/ daha fazla bilgi ve örnekler. |
-| --verbose | Günlüğün ayrıntı düzeyini artırır. Kullanımı--tam hata ayıklama günlükleri için hata ayıklama. |
+| --Hata Ayıkla | Tüm hata ayıklama günlüklerini göstermek için günlük ayrıntı düzeyini artırın. |
+| --Yardım-h | Bu yardım iletisini gösterin ve çıkın. |
+| --çıkış-o | Çıkış biçimi.  İzin verilen değerler JSON, jsonc, tablo, TSV\:.  JSON\: varsayılan. |
+| --sorgu | JMESPath sorgu dizesi. Daha fazla bilgi ve örnek için bkz. http\://jmespath.org/. |
+| --ayrıntılı | Günlük ayrıntı düzeyini artırın. Tam hata ayıklama günlükleri için--Debug kullanın. |
 
 ### <a name="examples"></a>Örnekler
 
-Birleştirir ve yaml dosyası içinde belirtilen parametreler geçersiz kılarak küme için tüm kaynaklarını dağıtır
-
+YAML dosyasında bahsedilen parametreleri geçersiz kılarak kümeleyerek tüm kaynakları birleştirir ve dağıtır
+``` 
+sfctl mesh deployment create --input-yaml-files ./app.yaml,./network.yaml --parameters  
+./param.yaml    
 ```
-sfctl mesh deployment create --input-yaml-files ./app.yaml,./network.yaml --parameters
-./param.yaml
-```
 
-Birleştirir ve bir dizindeki tüm kaynakları yaml dosyası içinde belirtilen parametreler geçersiz kılarak kümeye dağıtır.
+YAML dosyasında bahsedilen parametreleri geçersiz kılarak kümeleyerek bir dizindeki tüm kaynakları birleştirir ve dağıtır
 
-```
+``` 
 sfctl mesh deployment create --input-yaml-files ./resources --parameters ./param.yaml
 ```
 
-Birleştirir ve bir dizindeki tüm kaynaklar json nesnesi olarak doğrudan geçirilen parametreler geçersiz kılarak kümeye dağıtır.
-
+Doğrudan JSON nesnesi olarak geçirilen parametreleri geçersiz kılarak kümelemek için bir dizindeki tüm kaynakları birleştirir ve dağıtır
+``` 
+sfctl mesh deployment create --input-yaml-files ./resources --parameters "{ 'my_param' :    
+{'value' : 'my_value'} }"   
 ```
-sfctl mesh deployment create --input-yaml-files ./resources --parameters "{ 'my_param' :
-{'value' : 'my_value'} }"
-```
-
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Ayarlanan](service-fabric-cli.md) Service Fabric CLI.
-- Service Fabric CLI kullanarak kullanmayı öğrenin [örnek betikleri](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Service Fabric CLı 'yi [ayarlayın](service-fabric-cli.md) .
+- [Örnek betikleri](/azure/service-fabric/scripts/sfctl-upgrade-application)kullanarak Service Fabric CLI 'nın nasıl kullanılacağını öğrenin.

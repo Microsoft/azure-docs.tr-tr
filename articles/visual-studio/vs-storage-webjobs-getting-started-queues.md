@@ -1,9 +1,9 @@
 ---
-title: Bağlı hizmetler (WebJob Proje) kuyruk depolama ve Visual Studio ile çalışmaya başlama | Microsoft Docs
-description: Visual Studio kullanarak bir depolama hesabına bağlandıktan sonra bir Web işi projesi içinde Azure kuyruk depolama ile çalışmaya başlamak nasıl bağlı hizmetler.
+title: Visual Studio (WebJob projeleri) kullanarak kuyruk depolamayı kullanmaya başlama
+description: Visual Studio bağlı hizmetler 'i kullanarak bir depolama hesabına bağlandıktan sonra bir WebJob projesinde Azure kuyruk depolamayı kullanmaya başlama.
 services: storage
 author: ghogen
-manager: douge
+manager: jillfra
 ms.assetid: 5c3ef267-2a67-44e9-ab4a-1edd7015034f
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
@@ -12,28 +12,29 @@ ms.workload: azure-vs
 ms.topic: article
 ms.date: 12/02/2016
 ms.author: ghogen
-ms.openlocfilehash: f6f1a3a7f0a406e1dbb40f4bfc6a358da7ac68fa
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ROBOTS: NOINDEX,NOFOLLOW
+ms.openlocfilehash: ffba203bafaf3837cd2d7fc1a6fd962a6926b186
+ms.sourcegitcommit: 8b44498b922f7d7d34e4de7189b3ad5a9ba1488b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60391232"
+ms.lasthandoff: 10/13/2019
+ms.locfileid: "72298757"
 ---
-# <a name="getting-started-with-azure-queue-storage-and-visual-studio-connected-services-webjob-projects"></a>Bağlı hizmetler (WebJob Proje) Azure kuyruk depolama ve Visual Studio ile çalışmaya başlama
+# <a name="getting-started-with-azure-queue-storage-and-visual-studio-connected-services-webjob-projects"></a>Azure kuyruk depolama ve Visual Studio bağlı hizmetleri (WebJob projeleri) ile çalışmaya başlama
 [!INCLUDE [storage-try-azure-tools-queues](../../includes/storage-try-azure-tools-queues.md)]
 
 ## <a name="overview"></a>Genel Bakış
-Bu makalede nasıl oluşturduğunuz veya Visual Studio kullanarak bir Azure depolama hesabına başvurulan sonra bir Visual Studio Azure WebJob proje Azure kuyruk depolama kullanmaya başlama **bağlı hizmet Ekle** iletişim kutusu. Eklediğinizde, bir depolama hesabı bir WebJob projesi için Visual Studio kullanarak **bağlı hizmet Ekle** iletişim kutusunda, uygun Azure depolama NuGet paketleri yüklendi, uygun .NET başvuruları projeye eklenir ve Depolama hesabı için bağlantı dizelerini App.config dosyasında güncelleştirilir.  
+Bu makalede, Visual Studio **bağlı hizmetler Ekle** iletişim kutusunu kullanarak bir Azure depolama hesabı oluşturduktan veya başvurduktan sonra bir Visual Studio Azure WebJob projesinde Azure kuyruk depolama hizmetini kullanmaya başlama işlemi açıklanır. Visual Studio **bağlı hizmetler Ekle** iletişim kutusunu kullanarak bir Web işi projesine bir depolama hesabı eklediğinizde, uygun Azure depolama NuGet paketleri yüklenir, projeye uygun .NET başvuruları eklenir ve için bağlantı dizeleri depolama hesabı App. config dosyasında güncelleştirilir.  
 
-Bu makalede, Azure Web işleri SDK'sı sürümünü kullanmayı gösteren C# kod örneği sağlanmıştır 1.x ile Azure kuyruk depolama hizmeti.
+Bu makalede, C# Azure kuyruk depolama hizmeti Ile Azure WEBJOBS SDK sürüm 1. x ' in nasıl kullanılacağını gösteren kod örnekleri sağlanmaktadır.
 
-Azure Kuyruk depolama, HTTP veya HTTPS kullanan kimlik doğrulaması yapılmış çağrılar aracılığıyla dünyanın her yerinden erişilebilen çok sayıda iletinin depolanması için bir hizmettir. Tek bir kuyruk iletisinin boyutu 64 KB’ye kadar olabilir ve bir kuyrukta, depolama hesabının toplam kapasite sınırına kadar milyonlarca ileti bulunabilir. Bkz: [.NET kullanarak Azure kuyruk depolama ile çalışmaya başlama](../storage/queues/storage-dotnet-how-to-use-queues.md) daha fazla bilgi için. ASP.NET hakkında daha fazla bilgi için bkz: [ASP.NET](https://www.asp.net).
+Azure Kuyruk depolama, HTTP veya HTTPS kullanan kimlik doğrulaması yapılmış çağrılar aracılığıyla dünyanın her yerinden erişilebilen çok sayıda iletinin depolanması için bir hizmettir. Tek bir kuyruk iletisinin boyutu 64 KB’ye kadar olabilir ve bir kuyrukta, depolama hesabının toplam kapasite sınırına kadar milyonlarca ileti bulunabilir. Daha fazla bilgi için bkz. [.NET kullanarak Azure kuyruk depolama ile çalışmaya başlama](../storage/queues/storage-dotnet-how-to-use-queues.md) . ASP.NET hakkında daha fazla bilgi için bkz. [ASP.net](https://www.asp.net).
 
-## <a name="how-to-trigger-a-function-when-a-queue-message-is-received"></a>Bir kuyruk iletisi alındığında bir işlev tetiklemek nasıl
-Bir kuyruk iletisi alındığında Web işleri SDK'sı çağıran bir işlev yazmak için kullanın **QueueTrigger** özniteliği. Öznitelik oluşturucusunda yoklamak için kuyruk adını belirten bir dize parametresi alır. Kuyruk adı dinamik olarak ayarlama görmek için kullanıma [yapılandırma seçeneklerini ayarlama](#how-to-set-configuration-options).
+## <a name="how-to-trigger-a-function-when-a-queue-message-is-received"></a>Bir kuyruk iletisi alındığında bir işlevi tetikleme
+Web Işleri SDK 'sının bir kuyruk iletisi alındığında çağırdığı bir işlev yazmak için **Queuetrigger** özniteliğini kullanın. Öznitelik Oluşturucusu, yoklamak için kuyruğun adını belirten bir String parametresi alır. Sıra adını dinamik olarak ayarlamayı öğrenmek için [yapılandırma seçeneklerini ayarlamayı](#how-to-set-configuration-options)inceleyin.
 
-### <a name="string-queue-messages"></a>Dize kuyruk iletileri
-Bir dize iletisi sırası aşağıdaki örnekte, bu nedenle içerir **QueueTrigger** adlı bir dize parametresine uygulanan **logMessage** kuyruk iletisinin içeriği içerir. İşlev [Panoya bir günlük iletisi Yazar](#how-to-write-logs).
+### <a name="string-queue-messages"></a>Dize sırası iletileri
+Aşağıdaki örnekte, kuyruk bir dize iletisi içerir, bu nedenle **Queuetrigger** , kuyruk iletisinin Içeriğini Içeren **LogMessage** adlı bir dize parametresine uygulanır. İşlevi [panoya bir günlük iletisi yazar](#how-to-write-logs).
 
 ```csharp
 public static void ProcessQueueMessage([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
@@ -42,10 +43,10 @@ public static void ProcessQueueMessage([QueueTrigger("logqueue")] string logMess
 }
 ```
 
-Yanında **dize**, parametre bir bayt dizisi olabilir bir **CloudQueueMessage** nesne ya da tanımladığınız bir POCO.
+**Dizenin**yanı sıra, parametresi bir bayt dizisi, **cloudqueuemessage** nesnesi veya tanımladığınız bir poco olabilir.
 
-### <a name="poco-plain-old-clr-objecthttpsenwikipediaorgwikiplainoldclrobject-queue-messages"></a>POCO [(düz eski CLR nesne](https://en.wikipedia.org/wiki/Plain_Old_CLR_Object)) kuyruk iletileri
-Aşağıdaki örnekte, kuyruk iletisi için JSON içeriyor. bir **BlobInformation** içeren bir nesne bir **BlobName** özelliği. SDK otomatik olarak nesne seri durumdan çıkarır.
+### <a name="poco-plain-old-clr-objecthttpsenwikipediaorgwikiplain_old_clr_object-queue-messages"></a>POCO [(düz eskı CLR nesnesi](https://en.wikipedia.org/wiki/Plain_Old_CLR_Object)) sıra iletileri
+Aşağıdaki örnekte, kuyruk iletisi **Blobname** özelliği Içeren bir **BlobInformation** nesnesi için JSON içeriyor. SDK, nesneyi otomatik olarak seri hale getirir.
 
 ```csharp
 public static void WriteLogPOCO([QueueTrigger("logqueue")] BlobInformation blobInfo, TextWriter logger)
@@ -54,7 +55,7 @@ public static void WriteLogPOCO([QueueTrigger("logqueue")] BlobInformation blobI
 }
 ```
 
-SDK'sı kullanır [Newtonsoft.Json NuGet paketini](https://www.nuget.org/packages/Newtonsoft.Json) seri hale getirmek ve seri durumdan iletileri. WebJobs SDK kullanmayan bir programda kuyruk iletileri oluşturursanız, SDK'sı ayrıştırabilen POCO kuyruk iletisi oluşturmak için aşağıdaki örnekte olduğu gibi kod yazabilirsiniz.
+SDK, iletileri seri hale getirmek ve seri durumdan çıkarmak için [Newtonsoft. JSON NuGet paketini](https://www.nuget.org/packages/Newtonsoft.Json) kullanır. Web Işleri SDK 'sını kullanmayan bir programda kuyruk iletileri oluşturursanız, SDK 'nın ayrıştırabileceği bir POCO kuyruğu iletisi oluşturmak için aşağıdaki örneğe benzer bir kod yazabilirsiniz.
 
 ```csharp
 BlobInformation blobInfo = new BlobInformation() { BlobName = "log.txt" };
@@ -62,8 +63,8 @@ var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
 logQueue.AddMessage(queueMessage);
 ```
 
-### <a name="async-functions"></a>Zaman uyumsuz işlevleri
-Aşağıdaki zaman uyumsuz işlev [günlüğü panoya Yazar](#how-to-write-logs).
+### <a name="async-functions"></a>Zaman uyumsuz işlevler
+Aşağıdaki zaman uyumsuz işlevi [panoya bir günlük yazar](#how-to-write-logs).
 
 ```csharp
 public async static Task ProcessQueueMessageAsync([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
@@ -72,7 +73,7 @@ public async static Task ProcessQueueMessageAsync([QueueTrigger("logqueue")] str
 }
 ```
 
-Zaman uyumsuz işlevleri uzun bir [iptal belirteci](https://www.asp.net/mvc/overview/performance/using-asynchronous-methods-in-aspnet-mvc-4#CancelToken)bir blobu kopyalar aşağıdaki örnekte gösterildiği gibi. (Bir açıklaması için **queueTrigger** yer tutucu bkz [Blobları](#how-to-read-and-write-blobs-and-tables-while-processing-a-queue-message) bölümüne.)
+Zaman uyumsuz işlevler, bir blobu kopyalayan aşağıdaki örnekte gösterildiği gibi bir [iptal belirteci](https://www.asp.net/mvc/overview/performance/using-asynchronous-methods-in-aspnet-mvc-4#CancelToken)alabilir. ( **Queuetrigger** yer tutucusu hakkında bir açıklama Için, [Bloblar](#how-to-read-and-write-blobs-and-tables-while-processing-a-queue-message) bölümüne bakın.)
 
 ```csharp
 public async static Task ProcessQueueMessageAsyncCancellationToken(
@@ -85,39 +86,39 @@ public async static Task ProcessQueueMessageAsyncCancellationToken(
 }
 ```
 
-## <a name="types-the-queuetrigger-attribute-works-with"></a>Türleri QueueTrigger özniteliği ile çalışır.
-Kullanabileceğiniz **QueueTrigger** şu türden:
+## <a name="types-the-queuetrigger-attribute-works-with"></a>QueueTrigger özniteliği ile birlikte çalışarak türler
+Aşağıdaki türlerle **Queuetrigger** kullanabilirsiniz:
 
-* **dize**
-* JSON olarak serileştirilen bir POCO türü
-* **bayt]**
+* **dizisinde**
+* JSON olarak seri hale getirilmiş bir POCO türü
+* **Byte []**
 * **CloudQueueMessage**
 
 ## <a name="polling-algorithm"></a>Yoklama algoritması
-SDK'sı boş kuyruk üzerinde depolama işlem maliyetleri yoklama etkisini azaltmak için bir rastgele üstel geri alma algoritması uygular.  Bir ileti bulunduğunda, SDK'sı iki saniye bekler ve ardından başka bir ileti için denetler; ileti bulunduğu zaman yeniden denemeden önce yaklaşık dört saniye bekler. Bir kuyruk iletisi almak için sonraki başarısız girişimden sonra bekleme süresini bir dakika için varsayılan olarak en fazla bekleme zamanı ulaşıncaya kadar artmaya devam eder. [En fazla bekleme zamanı yapılandırılabilirdir](#how-to-set-configuration-options).
+SDK, depolama işlem maliyetlerinde boşta sıra yoklamanın etkisini azaltmak için rastgele bir üstel geri alma algoritması uygular.  Bir ileti bulunduğunda, SDK iki saniye bekler ve sonra başka bir ileti olup olmadığını denetler; hiçbir ileti bulunamadığında, yeniden denemeden önce dört saniye bekler. Sonraki başarısız bir kuyruk iletisi almaya çalıştıktan sonra, bekleme süresi, varsayılan olarak bir dakika olacak şekilde en fazla bekleme süresine ulaşana kadar artmaya devam eder. [En uzun bekleme süresi yapılandırılabilir](#how-to-set-configuration-options).
 
 ## <a name="multiple-instances"></a>Birden çok örnek
-Web uygulamanız birden çok örnek üzerinde çalışıyorsa, sürekli WebJobs her makinede çalışır ve her makine için Tetikleyiciler bekleyin ve işlevleri çalıştırmayı deneyin. Bazı senaryolarda bu bazı işlevler aynı verileri iki kez işlemesine yol açabilir, bu nedenle işlevleri (böylece yinelenen sonuçlar bunları tekrar tekrar aynı girdi verileriyle çağırma üretemez yazılmış) bir kez etkili olmalıdır.  
+Web uygulamanız birden çok örnek üzerinde çalışıyorsa, her makinede sürekli bir Web Işi çalışır ve her makine Tetikleyicileri bekler ve işlevleri çalıştırmaya çalışır. Bazı senaryolarda bu, bazı işlevlerin aynı verileri iki kez işlemesine neden olabilir, bu nedenle işlevler ıdempotent olmalıdır (aynı giriş verileriyle tekrar tekrar çağırmak yinelenen sonuçlar üretmez).  
 
 ## <a name="parallel-execution"></a>Paralel yürütme
-Farklı kuyrukları dinleyen birden çok işlevi varsa, iletileri eşzamanlı olarak alındığında SDK bunları paralel olarak çağırır.
+Farklı kuyruklarda dinleme yapan birden çok işlevleriniz varsa, iletiler aynı anda alındığında SDK bu uygulamaları paralel olarak çağırır.
 
-Tek bir kuyruk için birden çok ileti aldığında, aynı durum geçerlidir. Varsayılan olarak, SDK 16 kuyruk iletileri toplu bir zaman alır ve bunları paralel olarak işleyen işlevi yürütür. [Toplu iş boyutu yapılandırılabilir](#how-to-set-configuration-options). İşlenen numarası toplu iş boyutu yarısını aldığında, SDK başka bir toplu iş alır ve bu iletileri işlemeye başlıyor. Bu nedenle en fazla eş zamanlı iletileri işlev işlenen bir ve yarı kez bir toplu iş boyutu sayısıdır. Bu sınır olan her işlev için ayrı ayrı uygulanır. bir **QueueTrigger** özniteliği. Paralel yürütme bir kuyruğa alınan iletileri istemiyorsanız, toplu iş boyutu 1 olarak ayarlayın.
+Tek bir sıra için birden fazla ileti alındığında aynı değer geçerlidir. Varsayılan olarak SDK, bir seferde 16 kuyruk iletisi toplu işi alır ve bunları paralel olarak işleyen işlevi yürütür. [Toplu iş boyutu yapılandırılabilir](#how-to-set-configuration-options). İşlenen sayı, toplu iş boyutunun yarısını altına iniyorsa, SDK başka bir Batch alır ve bu iletileri işlemeye başlar. Bu nedenle, işlev başına işlenen en fazla eşzamanlı ileti sayısı bir ve toplu iş boyutunun yarı bir katına biridir. Bu sınır, bir **Queuetrigger** özniteliği olan her bir işleve ayrı olarak uygulanır. Bir kuyrukta alınan iletiler için paralel yürütmeyi istemiyorsanız, toplu iş boyutunu 1 olarak ayarlayın.
 
-## <a name="get-queue-or-queue-message-metadata"></a>Kuyruğu veya kuyruk iletisi meta verilerini al
-Yöntem imzası için parametreleri ekleyerek, aşağıdaki ileti özellikleri alabilirsiniz:
+## <a name="get-queue-or-queue-message-metadata"></a>Kuyruğu veya kuyruk iletisi meta verilerini alma
+Yöntem imzasına parametreler ekleyerek aşağıdaki ileti özelliklerini alabilirsiniz:
 
-* **DateTimeOffset** expirationTime
-* **DateTimeOffset** insertionTime
-* **DateTimeOffset** nextVisibleTime
-* **dize** queueTrigger (ileti metni içerir)
+* **DateTimeOffset** ExpirationTime
+* **DateTimeOffset** ınsertiontime
+* **DateTimeOffset** nextvisibletime
+* **dize** queuetrigger (ileti metnini içerir)
 * **dize** kimliği
-* **dize** popReceipt
-* **int** dequeueCount
+* **dize** PopReceipt
+* **int** dequeuecount
 
-De ekleyebilirsiniz Azure depolama ile doğrudan API çalışmak istiyorsanız, bir **CloudStorageAccount** parametresi.
+Doğrudan Azure Storage API 'SI ile çalışmak istiyorsanız, **Cloudstorageaccount** parametresi de ekleyebilirsiniz.
 
-Aşağıdaki örnek, tüm bu meta veri bilgileri uygulama günlüğüne yazar. Bu örnekte, kuyruk iletisinin içeriği logMessage hem queueTrigger içerir.
+Aşağıdaki örnek, tüm bu meta verileri bir BILGI uygulama günlüğüne yazar. Örnekte, hem logMessage hem de queueTrigger kuyruk iletisinin içeriğini içerir.
 
 ```csharp
 public static void WriteLog([QueueTrigger("logqueue")] string logMessage,
@@ -146,7 +147,7 @@ public static void WriteLog([QueueTrigger("logqueue")] string logMessage,
 }
 ```
 
-Örnek kodu ile yazılmış bir örnek günlük şu şekildedir:
+Örnek kod tarafından yazılan örnek bir günlük aşağıda verilmiştir:
 
         logMessage=Hello world!
         expirationTime=10/14/2014 10:31:04 PM +00:00
@@ -158,10 +159,10 @@ public static void WriteLog([QueueTrigger("logqueue")] string logMessage,
         queue endpoint=https://contosoads.queue.core.windows.net/
         queueTrigger=Hello world!
 
-## <a name="graceful-shutdown"></a>Normal şekilde kapatılmasını
-Sürekli bir WebJob içinde çalışan bir işlev kabul edebilen bir **CancellationToken** WebJob sona erdirilecek olduğunda işlevi bildirmek işletim sistemi sağlayan parametresi. Bu bildirim, işlev beklenmedik bir şekilde verileri tutarsız bir durumda bırakır şekilde sonlandırmaz emin olmak için kullanabilirsiniz.
+## <a name="graceful-shutdown"></a>Düzgün kapanma
+Sürekli bir WebJob 'ta **çalışan bir işlev, WebJob parametresini kabul** edebilir. Bu, Işletim sisteminin Web işi sonlandırıldıktan sonra işleve bildirmesini sağlar. Bu bildirimi, işlevin verileri tutarsız bir durumda bırakmak için beklenmedik bir şekilde sonlandığından emin olmak için kullanabilirsiniz.
 
-Aşağıdaki örnek, bir işlevde yaklaşan WebJob sonlandırma olup olmadığını denetlemek gösterilmektedir.
+Aşağıdaki örnek, bir işlevde yaklaşan WebJob sonlandırmasının nasıl kontrol alınacağını gösterir.
 
 ```csharp
 public static void GracefulShutdownDemo(
@@ -182,15 +183,15 @@ public static void GracefulShutdownDemo(
 }
 ```
 
-**Not:** Pano, durumunu ve kapatıldığından işlevler çıkışını doğru şekilde göstermeyebilir.
+**Note:** Pano, kapatılmış işlevlerin durumunu ve çıkışını doğru şekilde gösteremeyebilir.
 
-Daha fazla bilgi için [WebJobs kapatılmasını](http://blog.amitapple.com/post/2014/05/webjobs-graceful-shutdown/#.VCt1GXl0wpR).   
+Daha fazla bilgi için bkz. [WebJobs düzgün kapanma](http://blog.amitapple.com/post/2014/05/webjobs-graceful-shutdown/#.VCt1GXl0wpR).   
 
-## <a name="how-to-create-a-queue-message-while-processing-a-queue-message"></a>Nasıl bir kuyruk iletisi işlenirken bir kuyruk iletisi oluşturmak için
-Yeni bir kuyruk iletisi oluşturan bir işlev yazmak için kullanın **kuyruk** özniteliği. Gibi **QueueTrigger**, kuyruk adı bir dize olarak geçirin veya yapabilecekleriniz [kuyruk adı dinamik olarak ayarlama](#how-to-set-configuration-options).
+## <a name="how-to-create-a-queue-message-while-processing-a-queue-message"></a>Kuyruk iletisi işlenirken kuyruk iletisi oluşturma
+Yeni bir kuyruk iletisi oluşturan bir işlev yazmak için **Queue** özniteliğini kullanın. **Queuetrigger**gibi, kuyruk adını bir dize olarak geçitirsiniz veya [kuyruk adını dinamik olarak ayarlayabilirsiniz](#how-to-set-configuration-options).
 
-### <a name="string-queue-messages"></a>Dize kuyruk iletileri
-Aşağıdaki zaman uyumsuz olmayan kod örneği, sırasındaki "inputqueue" adlı sıraya alınan kuyruk iletisi olarak aynı içeriğe sahip "outputqueue" adlı yeni bir kuyruk iletisi oluşturur. (İçin zaman uyumsuz işlevleri kullanmak **IAsyncCollector<T>**  daha sonra bu bölümde gösterilen.)
+### <a name="string-queue-messages"></a>Dize sırası iletileri
+Aşağıdaki zaman uyumsuz olmayan kod örneği, "InputQueue" adlı kuyrukta alınan sıra iletisiyle aynı içeriğe sahip "outputqueue" adlı sırada yeni bir kuyruk iletisi oluşturur. (Zaman uyumsuz işlevler için bu bölümün ilerleyen kısımlarında gösterildiği gibi **ıasynccollector @ no__t-1T >** kullanın.)
 
 ```csharp
 public static void CreateQueueMessage(
@@ -201,8 +202,8 @@ public static void CreateQueueMessage(
 }
 ```
 
-### <a name="poco-plain-old-clr-objecthttpsenwikipediaorgwikiplainoldclrobject-queue-messages"></a>POCO [(düz eski CLR nesne](https://en.wikipedia.org/wiki/Plain_Old_CLR_Object)) kuyruk iletileri
-Bir dize yerine bir POCO içeren bir kuyruk iletisi oluşturmak için bir çıktı parametresi olarak POCO türü geçirin **kuyruk** öznitelik Oluşturucusu.
+### <a name="poco-plain-old-clr-objecthttpsenwikipediaorgwikiplain_old_clr_object-queue-messages"></a>POCO [(düz eskı CLR nesnesi](https://en.wikipedia.org/wiki/Plain_Old_CLR_Object)) sıra iletileri
+Bir dize yerine POCO içeren bir kuyruk iletisi oluşturmak için, POCO türünü **Queue** özniteliği oluşturucusuna bir output parametresi olarak geçirin.
 
 ```csharp
 public static void CreateQueueMessage(
@@ -213,10 +214,10 @@ public static void CreateQueueMessage(
 }
 ```
 
-SDK otomatik olarak JSON nesnesini serileştirir. Nesne null olsa bile bir kuyruk iletisi her zaman oluşturulur.
+SDK, nesneyi otomatik olarak JSON 'a serileştirir. Nesne null olsa bile kuyruk iletisi her zaman oluşturulur.
 
-### <a name="create-multiple-messages-or-in-async-functions"></a>Birden çok ileti oluşturmak veya zaman uyumsuz işlevleri
-Birden çok ileti oluşturmak için çıkış kuyruğuna için parametre türü olun **ICollector<T>**  veya **IAsyncCollector<T>** aşağıdaki örnekte gösterildiği gibi.
+### <a name="create-multiple-messages-or-in-async-functions"></a>Birden çok ileti veya zaman uyumsuz işlevlerde oluşturma
+Birden çok ileti oluşturmak için, aşağıdaki örnekte gösterildiği gibi, **ICollector @ no__t-1T >** veya **ıasynccollector @ No__t-3T >** çıkış sırasının parametre türünü yapın.
 
 ```csharp
 public static void CreateQueueMessages(
@@ -230,23 +231,23 @@ public static void CreateQueueMessages(
 }
 ```
 
-Her kuyruk iletisi hemen oluşturulur, **Ekle** yöntemi çağrılır.
+Her kuyruk iletisi, **Add** yöntemi çağrıldığında hemen oluşturulur.
 
-### <a name="types-that-the-queue-attribute-works-with"></a>Kuyruk öznitelik çalışır türleri
-Kullanabileceğiniz **kuyruk** özniteliği aşağıdaki parametre türleri:
+### <a name="types-that-the-queue-attribute-works-with"></a>Kuyruk özniteliğinin birlikte çalışması için gereken türler
+Aşağıdaki parametre türlerinde **Queue** özniteliğini kullanabilirsiniz:
 
-* **Çıkış dizesi** (parametre değeri null olmayan ise işlev sona erdiğinde kuyruk iletisi oluşturur)
-* **bayt [] kullanıma** (gibi çalışır **dize**)
-* **CloudQueueMessage kullanıma** (gibi çalışır **dize**)
-* **POCO kullanıma** (serializable bir tür oluşturduğu bir ileti ile bir null Nesne işlev sona erdiğinde parametre null ise)
+* **Out dizesi** (işlev sonlandığında parametre değeri null değilse kuyruk iletisi oluşturur)
+* **Out baytı []** ( **dize**gibi)
+* **Out CloudQueueMessage** ( **dize**gibi)
+* **Out POCO** (seri hale getirilebilir bir tür, işlev sona erdiğinde parametre null ise null nesnesiyle bir ileti oluşturur)
 * **ICollector**
-* **IAsyncCollector**
-* **CloudQueue** (için el ile Azure depolama API kullanarak doğrudan ileti oluşturma)
+* **Iasynccollector**
+* **Cloudqueue** (Azure Storage API 'sini doğrudan kullanarak el ile ileti oluşturmak için)
 
-### <a name="use-webjobs-sdk-attributes-in-the-body-of-a-function"></a>WebJobs SDK öznitelikleri bir işlevin gövdesinde kullanın
-WebJobs SDK öznitelik gibi kullanmadan önce bazı çalışma işlevinizde yapmanız gerekiyorsa **kuyruk**, **Blob**, veya **tablo**, kullanabileceğiniz **IBinder**arabirimi.
+### <a name="use-webjobs-sdk-attributes-in-the-body-of-a-function"></a>Bir işlevin gövdesinde WebJobs SDK özniteliklerini kullanma
+**Queue**, **BLOB**veya **Table**gibi bir WebJobs SDK özniteliği kullanmadan önce Işlevinizde bazı çalışmalar yapmanız gerekiyorsa, **ıciltçi** arabirimini kullanabilirsiniz.
 
-Aşağıdaki örnek, bir giriş sırası iletiyi alır ve bir çıkış sırasına aynı içeriğe sahip yeni bir ileti oluşturur. Çıkış kuyruğu adı işlevinin gövdesindeki kod tarafından ayarlanır.
+Aşağıdaki örnek bir giriş kuyruğu iletisi alır ve bir çıkış kuyruğunda aynı içeriğe sahip yeni bir ileti oluşturur. Çıkış sırası adı, işlevin gövdesinde kodla ayarlanır.
 
 ```csharp
 public static void CreateQueueMessage(
@@ -260,16 +261,16 @@ public static void CreateQueueMessage(
 }
 ```
 
-**IBinder** arabirimi de kullanılabilir olan **tablo** ve **Blob** öznitelikleri.
+**Iciltçi** arabirimi **tablo** ve **BLOB** öznitelikleriyle de kullanılabilir.
 
-## <a name="how-to-read-and-write-blobs-and-tables-while-processing-a-queue-message"></a>Okuma ve yazma BLOB ve kuyruk iletisi işlenirken tablolara
-**Blob** ve **tablo** öznitelikleri BLOB'lar ve tablolar okumasına ve yazmasına olanak tanır. Bu bölümdeki örnekler, BLOB'ları için geçerlidir. BLOB'ları oluşturulduğunda veya güncelleştirildiğinde, işlemleri tetiklemek nasıl gösteren kod örnekleri için bkz. [WebJobs SDK ile Azure blob depolama kullanma](https://github.com/Azure/azure-webjobs-sdk/wiki).
+## <a name="how-to-read-and-write-blobs-and-tables-while-processing-a-queue-message"></a>Kuyruk iletisini işlerken blob 'ları ve tabloları okuma ve yazma
+**BLOB** ve **tablo** öznitelikleri, Blobları ve tabloları okuyup yazmanızı sağlar. Bu bölümdeki örnekler Bloblar için geçerlidir. Blobların oluşturulduğu veya güncelleştirildiği sırada işlemlerin nasıl tetikleneceğini gösteren kod örnekleri için bkz. [Azure Blob depolamayı Web İşleri SDK 'sı ile kullanma](https://github.com/Azure/azure-webjobs-sdk/wiki).
 <!-- , and for code samples that read and write tables, see [How to use Azure table storage with the WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk-storage-tables-how-to.md). -->
 
-### <a name="string-queue-messages-triggering-blob-operations"></a>Dize kuyruk iletileri BLOB işlemleri tetikleme
-Bir dize içeren bir kuyruk iletisi için **queueTrigger** kullanabileceğiniz bir yer tutucudur **Blob** özniteliğin **blobPath** içeriğini içeren bir parametre İleti.
+### <a name="string-queue-messages-triggering-blob-operations"></a>Blob işlemlerini tetikleyen dize sırası iletileri
+Bir dize içeren bir kuyruk iletisi için **Queuetrigger** , ileti Içeriğini içeren **BLOB** özniteliğinin **blobpath** parametresinde kullanabileceğiniz bir yer tutucudur.
 
-Aşağıdaki örnekte **Stream** okuma ve yazma blobları nesneleri. Kuyruk iletisi textblobs kapsayıcıda bulunan blobların addır. Blob kopyası "-Yeni" eklenecek ad aynı kapsayıcıda oluşturulur.
+Aşağıdaki örnek, blob 'ları okumak ve yazmak için **Stream** nesnelerini kullanır. Kuyruk iletisi, textblobları kapsayıcısında bulunan bir Blobun adıdır. "-New" adlı Blobun bir kopyası ada eklenerek aynı kapsayıcıda oluşturulur.
 
 ```csharp
 public static void ProcessQueueMessage(
@@ -281,11 +282,11 @@ public static void ProcessQueueMessage(
 }
 ```
 
-**Blob** özniteliği Oluşturucu alır bir **blobPath** parametresi kapsayıcı ve blob adını belirtir. Bu yer tutucu hakkında daha fazla bilgi için bkz: [WebJobs SDK ile Azure blob depolama kullanma](https://github.com/Azure/azure-webjobs-sdk/wiki).
+**BLOB** öznitelik Oluşturucusu, kapsayıcıyı ve BLOB adını belirten bir **blobpath** parametresi alır. Bu yer tutucu hakkında daha fazla bilgi için bkz. [WebJobs SDK Ile Azure Blob depolamayı kullanma](https://github.com/Azure/azure-webjobs-sdk/wiki).
 
-Ne zaman öznitelik düzenler bir **Stream** nesnesinin, başka bir oluşturucu parametresi belirtir **FileAccess** modu okuma, yazma veya okuma/yazma olarak.
+Öznitelik bir **Stream** nesnesini tasarlaştırır, başka bir oluşturucu parametresi **FileAccess** modunu okuma, yazma veya okuma/yazma olarak belirtir.
 
-Aşağıdaki örnekte bir **CloudBlockBlob** bir blobun silinmesi için nesne. Kuyruk iletisi blob adıdır.
+Aşağıdaki örnek bir blobu silmek için bir **Cloudblockblob** nesnesi kullanır. Kuyruk iletisi, Blobun adıdır.
 
 ```csharp
 public static void DeleteBlob(
@@ -296,10 +297,10 @@ public static void DeleteBlob(
 }
 ```
 
-### <a name="poco-plain-old-clr-objecthttpsenwikipediaorgwikiplainoldclrobject-queue-messages"></a>POCO [(düz eski CLR nesne](https://en.wikipedia.org/wiki/Plain_Old_CLR_Object)) kuyruk iletileri
-Kuyruk iletisinde JSON olarak depolanır ve bir POCO için özellikleri nesnesinin adı yer tutucuları kullanabilirsiniz **kuyruk** özniteliğin **blobPath** parametresi. Kuyruk meta veri özellik adlarının yer tutucu olarak kullanabilirsiniz. Bkz: [kuyruğu veya kuyruk iletisi meta verileri alma](#get-queue-or-queue-message-metadata).
+### <a name="poco-plain-old-clr-objecthttpsenwikipediaorgwikiplain_old_clr_object-queue-messages"></a>POCO [(düz eskı CLR nesnesi](https://en.wikipedia.org/wiki/Plain_Old_CLR_Object)) sıra iletileri
+Kuyruk iletisinde JSON olarak depolanan bir POCO için, **Queue** özniteliğinin **blobpath** parametresindeki nesnenin özelliklerini adlandırmak için yer tutucuları kullanabilirsiniz. Sıra meta veri özellik adlarını yer tutucular olarak da kullanabilirsiniz. Bkz. [kuyruk veya kuyruk iletisi meta verilerini alma](#get-queue-or-queue-message-metadata).
 
-Aşağıdaki örnek, farklı bir uzantıya sahip yeni bir blob için bir blobu kopyalar. Kuyruk iletisi bir **BlobInformation** içeren nesne **BlobName** ve **BlobNameWithoutExtension** özellikleri. Blob yolu için yer tutucu olarak kullanılan özellik adları **Blob** öznitelikleri.
+Aşağıdaki örnek, bir blobu farklı bir uzantıya sahip yeni bir bloba kopyalar. Kuyruk iletisi **Blobname** ve **BlobNameWithoutExtension** özelliklerini içeren bir **BlobInformation** nesnesidir. Özellik adları, **BLOB** öznitelikleri için blob yolunda yer tutucu olarak kullanılır.
 
 ```csharp
 public static void CopyBlobPOCO(
@@ -311,7 +312,7 @@ public static void CopyBlobPOCO(
 }
 ```
 
-SDK'sı kullanır [Newtonsoft.Json NuGet paketini](https://www.nuget.org/packages/Newtonsoft.Json) seri hale getirmek ve seri durumdan iletileri. WebJobs SDK kullanmayan bir programda kuyruk iletileri oluşturursanız, SDK'sı ayrıştırabilen POCO kuyruk iletisi oluşturmak için aşağıdaki örnekte olduğu gibi kod yazabilirsiniz.
+SDK, iletileri seri hale getirmek ve seri durumdan çıkarmak için [Newtonsoft. JSON NuGet paketini](https://www.nuget.org/packages/Newtonsoft.Json) kullanır. Web Işleri SDK 'sını kullanmayan bir programda kuyruk iletileri oluşturursanız, SDK 'nın ayrıştırabileceği bir POCO kuyruğu iletisi oluşturmak için aşağıdaki örneğe benzer bir kod yazabilirsiniz.
 
 ```csharp
 BlobInformation blobInfo = new BlobInformation() { BlobName = "boot.log", BlobNameWithoutExtension = "boot" };
@@ -319,32 +320,32 @@ var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
 logQueue.AddMessage(queueMessage);
 ```
 
-Bir blob için bir nesne bağlama önce bazı çalışma işlevinizde yapmanız gerekiyorsa, gösterildiği gibi işlev gövdesinde özniteliği kullanabilirsiniz [kullanan Web işleri SDK'sı öznitelikleri bir işlevin gövdesinde](#use-webjobs-sdk-attributes-in-the-body-of-a-function).
+Bir blobu bir nesneye bağlamadan önce işlevinizde bazı çalışmalar yapmanız gerekiyorsa, [bir işlevin gövdesinde WebJobs SDK özniteliklerini kullanma](#use-webjobs-sdk-attributes-in-the-body-of-a-function)bölümünde gösterildiği gibi, işlev gövdesinde özniteliğini kullanabilirsiniz.
 
-### <a name="types-you-can-use-the-blob-attribute-with"></a>Blob özniteliği ile kullanabileceğiniz türleri
-**Blob** özniteliği aşağıdaki türleriyle kullanılabilir:
+### <a name="types-you-can-use-the-blob-attribute-with"></a>Blob özniteliği ile birlikte kullanabileceğiniz türler
+**BLOB** özniteliği aşağıdaki türlerle kullanılabilir:
 
-* **Stream** (okuma veya yazma FileAccess Oluşturucu parametresi kullanılarak belirtilen)
-* **TextReader**
+* **Stream** (FileAccess Oluşturucu parametresi kullanılarak belirtilen okuma veya yazma)
+* **Değerine**
 * **TextWriter**
 * **dize** (okuma)
-* **Çıkış dizesi** (yazma; yalnızca dize parametresi null olmayan ise işlevi döndüğünde, bir blob oluşturur)
+* **Out dizesi** (Write; yalnızca işlev döndürüldüğünde dize parametresi null değilse bir blob oluşturur)
 * POCO (okuma)
-* POCO out (yazma; her zaman bir blob oluşturur, işlevi döndüğünde POCO parametre null ise null Nesne olarak oluşturur.)
-* **CloudBlobStream** (yazma)
-* **ICloudBlob** (okuma veya yazma)
-* **CloudBlockBlob** (okuma veya yazma)
-* **CloudPageBlob** (okuma veya yazma)
+* Out POCO (Write; her zaman bir blob oluşturur, işlev döndürüldüğünde POCO parametresi null ise null nesne olarak oluşturulur)
+* **Cloudblobstream** (yazma)
+* **Ihoparlör blobu** (okuma veya yazma)
+* **Cloudblockblob** (okuma veya yazma)
+* **Cloudpageblob** (okuma veya yazma)
 
-## <a name="how-to-handle-poison-messages"></a>Zehirli iletilerin nasıl ele alınacağını
-İçeriğe sahip bir işlev başarısız olmasına neden olan iletileri çağrılır *zehirli iletiler*. İşlev başarısız olursa, kuyruk iletisi silinmez ve sonunda yeniden yinelenmesi için döngüyü neden seçilir. SDK otomatik olarak sınırlı sayıda yinelemeden sonra döngü engelleyebilecek veya el ile yapabilirsiniz.
+## <a name="how-to-handle-poison-messages"></a>Zarar iletilerini işleme
+İçeriği bir işleve başarısız olmasına neden olan iletiler, *zarar iletileri*olarak adlandırılır. İşlev başarısız olursa, kuyruk iletisi silinmez ve sonuç olarak yeniden oluşturulur ve bu da döngüyü tekrarlanabilir. SDK, sınırlı sayıda yinelemeden sonra döngüyü otomatik olarak kesebilir veya el ile yapabilirsiniz.
 
 ### <a name="automatic-poison-message-handling"></a>Otomatik zehirli ileti işleme
-SDK'sı bir kuyruk iletisi işlemek için 5 kata kadar bir işlevi çağırır. Beşinci deneme başarısız olursa, zehirli bir kuyruğa ileti taşınır. En fazla yeniden deneme sayısı yapılandırma gördüğünüz [yapılandırma seçeneklerini ayarlama](#how-to-set-configuration-options).
+SDK, bir kuyruk iletisini işlemek için 5 kata kadar bir işlev çağırır. Beşinci deneme başarısız olursa, ileti bir Poison kuyruğuna taşınır. [Yapılandırma seçeneklerini ayarlama](#how-to-set-configuration-options)bölümünde en fazla yeniden deneme sayısını nasıl yapılandıracağınızı görebilirsiniz.
 
-Zehirli sıranın adlı *{originalqueuename}* -zehirli. İşlem iletileri bir işleve zehirli kuyruktan günlüğe yazma ya da bir bildirim göndererek el ile ilgili dikkat edilmesi gereken yazabilirsiniz.
+Zarar sırası *{originalsıraadı}* -zarar olarak adlandırılmıştır. Onları günlüğe kaydederek veya el ile ilgilenilmesi gereken bir bildirim göndererek, zarar kuyruğundan iletileri işlemek için bir işlev yazabilirsiniz.
 
-Aşağıdaki örnekte **CopyBlob** bir kuyruk iletisi mevcut olmayan bir blobun adını içerdiğinde işlevi başarısız olur. Bu durum oluştuğunda yapılacak copyblobqueue poison kuyruğa copyblobqueue kuyruktan taşınır. **ProcessPoisonMessage** ardından zehirli ileti günlüğe kaydeder.
+Aşağıdaki örnekte, bir kuyruk iletisi mevcut olmayan bir Blobun adını içerdiğinde **Copyblob** işlevi başarısız olur. Bu durumda, ileti copyblobqueue sırasından copyblobqueue-Poison kuyruğuna taşınır. **Processzemessage** , daha sonra zarar iletisini günlüğe kaydeder.
 
 ```csharp
 public static void CopyBlob(
@@ -362,12 +363,12 @@ public static void ProcessPoisonMessage(
 }
 ```
 
-Zehirli ileti işlendikten sonra aşağıdaki resimde bu işlevler konsol çıktısı gösterir.
+Aşağıdaki çizimde, bir zarar iletisi işlendiğinde bu işlevlerden konsol çıktısı gösterilmektedir.
 
-![Zehirli ileti işleme için konsol çıktısı](./media/vs-storage-webjobs-getting-started-queues/poison.png)
+![Zarar iletisi işleme için konsol çıkışı](./media/vs-storage-webjobs-getting-started-queues/poison.png)
 
-### <a name="manual-poison-message-handling"></a>El ile zehirli ileti işleme
-Bir ileti toplanmış kaç kez işlenmek ekleyerek alabilirsiniz bir **int** adlı parametre **dequeueCount** işlevinize. Ardından, işlev kodunu sıradan çıkarma sayısı denetleyin ve sayısı bir eşiği aştığında, kendi zehirli ileti aşağıdaki örnekte gösterildiği gibi işleme gerçekleştirin.
+### <a name="manual-poison-message-handling"></a>El ile zarar iletisi işleme
+İşlevinizin **Dequeuecount** adlı bir **int** parametre ekleyerek işlenmek üzere bir ileti alma işleminin kaç kez çekileceğini görebilirsiniz. Daha sonra, işlev kodundaki sıradan çıkarma sayısını denetleyebilir ve aşağıdaki örnekte gösterildiği gibi, sayı bir eşiği aştığında kendi zararlı ileti işlemeyi gerçekleştirebilirsiniz.
 
 ```csharp
 public static void CopyBlob(
@@ -388,14 +389,14 @@ public static void CopyBlob(
 ```
 
 ## <a name="how-to-set-configuration-options"></a>Yapılandırma seçeneklerini ayarlama
-Kullanabileceğiniz **JobHostConfiguration** türü aşağıdaki yapılandırma seçeneklerini ayarlamak için:
+Aşağıdaki yapılandırma seçeneklerini ayarlamak için **Jobhostconfiguration** türünü kullanabilirsiniz:
 
-* SDK bağlantı dizeleri kod içinde ayarlayabilirsiniz.
-* Yapılandırma **QueueTrigger** maksimum gibi ayarları sıradan çıkarma sayısı.
-* Kuyruk adları yapılandırmasından edinin.
+* Koddaki SDK bağlantı dizelerini ayarlayın.
+* Maksimum sıradan çıkarma sayısı gibi **Queuetrigger** ayarlarını yapılandırın.
+* Yapılandırmadan sıra adlarını alın.
 
-### <a name="set-sdk-connection-strings-in-code"></a>Kodda SDK bağlantı dizelerini ayarlama
-Kodda SDK bağlantı dizelerini ayarlama, yapılandırma dosyalarının veya ortam değişkenlerini kendi bağlantı dizesi adları kullanmak aşağıdaki örnekte gösterildiği gibi sağlar.
+### <a name="set-sdk-connection-strings-in-code"></a>Koddaki SDK bağlantı dizelerini ayarla
+Kodda SDK bağlantı dizelerini ayarlamak, aşağıdaki örnekte gösterildiği gibi yapılandırma dosyalarında veya ortam değişkenlerinde kendi bağlantı dizesi adlarınızı kullanmanıza olanak sağlar.
 
 ```csharp
 static void Main(string[] args)
@@ -419,13 +420,13 @@ static void Main(string[] args)
 ```
 
 ### <a name="configure-queuetrigger--settings"></a>QueueTrigger ayarlarını yapılandırma
-Kuyruk ileti işleme için geçerli olan aşağıdaki ayarları yapılandırabilirsiniz:
+Kuyruk iletisi işleme için uygulanan aşağıdaki ayarları yapılandırabilirsiniz:
 
-* Aynı anda paralel olarak yürütülecek alınacağı kuyruk iletileri sayısı (varsayılan değer 16).
-* Bir kuyruk iletisi zehirli kuyruğa gönderilmeden önce yeniden deneme sayısı (varsayılan değer 5).
-* Maksimum bekleme süresi bir kuyruğu boş olduğunda tekrar yoklama önce (varsayılan değer 1 dakika).
+* Paralel olarak yürütülmesi gereken en fazla sıra iletisi sayısı (varsayılan değer 16 ' dır).
+* Bir kuyruk iletisi bir Zemi kuyruğuna gönderilmeden önce en fazla yeniden deneme sayısı (varsayılan 5 ' tir).
+* Bir kuyruk boş olduğunda tekrar yoklamadan önce beklenecek en uzun süre (varsayılan 1 dakikadır).
 
-Aşağıdaki örnek, bu ayarların nasıl yapılandırılacağı gösterilmektedir:
+Aşağıdaki örnek, bu ayarların nasıl yapılandırılacağını göstermektedir:
 
 ```csharp
 static void Main(string[] args)
@@ -439,12 +440,12 @@ static void Main(string[] args)
 }
 ```
 
-### <a name="set-values-for-webjobs-sdk-constructor-parameters-in-code"></a>Değerleri Oluşturucu parametresi için Web işleri SDK'sı, kod içinde ayarlayabilirsiniz.
-Bazı durumlarda bir kuyruk adı, bir blob adı veya kapsayıcı belirtmek istediğiniz veya bir tablo adı: sabit kodlamak yerine kod bu. Örneğin, kuyruk adı belirtmek isteyebilirsiniz **QueueTrigger** bir yapılandırma dosyası veya ortam değişkeni içinde.
+### <a name="set-values-for-webjobs-sdk-constructor-parameters-in-code"></a>Koddaki WebJobs SDK Oluşturucu parametreleri için değerleri ayarla
+Bazen bir kuyruk adı, bir blob adı veya kapsayıcısı ya da kod içinde sabit kod yerine bir tablo adı belirtmek isteyebilirsiniz. Örneğin, bir yapılandırma dosyasında veya ortam değişkeninde **Queuetrigger** için sıra adını belirtmek isteyebilirsiniz.
 
-Geçirerek bunu yapabilirsiniz bir **NameResolver** nesnesini **JobHostConfiguration** türü. Yüzde (%) tarafından çevrilmiş özel yer tutucu karakterleri içeren WebJobs SDK özniteliği Oluşturucu parametrelerinde imzalar ve **NameResolver** kodu, bu yer tutucular yerine kullanılacak gerçek değerleri belirtir.
+Bunu, **Jobhostconfiguration** türüne bir **Nameresolver** nesnesi geçirerek yapabilirsiniz. Yüzde (%) ile çevrelenen özel yer tutucuları dahil edebilirsiniz WebJobs SDK öznitelik Oluşturucu parametrelerinde oturum açar ve **Nameresolver** kodunuz, bu yer tutucuların yerine kullanılacak gerçek değerleri belirtir.
 
-Örneğin, test ortamında logqueuetest ve üretimde bir adlandırılmış logqueueprod adlı bir sıra kullanmak istediğiniz varsayalım. Bir giriş adını belirtmek istediğiniz bir sabit kodlanmış kuyruk adı yerine **appSettings** gerçek kuyruk adı olması gereken bir koleksiyon. Varsa **appSettings** anahtar logqueue, işlevinizi aşağıdaki örnekteki gibi görünebilir.
+Örneğin, test ortamında logqueuetest adlı bir kuyruk kullanmak istediğinizi ve bir tane de üretimde logqueueprod adlı bir sıra kullanacağınızı varsayalım. Sabit kodlanmış bir sıra adı yerine, **appSettings** koleksiyonunda gerçek sıra adına sahip bir girdinin adını belirtmek istersiniz. **AppSettings** anahtarı logqueue ise, işleviniz aşağıdaki örneğe benzeyebilir.
 
 ```csharp
 public static void WriteLog([QueueTrigger("%logqueue%")] string logMessage)
@@ -453,7 +454,7 @@ public static void WriteLog([QueueTrigger("%logqueue%")] string logMessage)
 }
 ```
 
-**NameResolver** sınıfı kuyruk adından sonra alabilir **appSettings** aşağıdaki örnekte gösterildiği gibi:
+Aşağıdaki örnekte gösterildiği gibi, **Nameresolver** sınıfınız daha sonra **appSettings** 'ten sıra adını alabilir:
 
 ```csharp
 public class QueueNameResolver : INameResolver
@@ -465,7 +466,7 @@ public class QueueNameResolver : INameResolver
 }
 ```
 
-Geçirdiğiniz **NameResolver** için sınıfını **JobHost** nesne aşağıdaki örnekte gösterildiği gibi.
+Aşağıdaki örnekte gösterildiği gibi, **Nameresolver** sınıfını ' de **jobhost** nesnesine geçirirsiniz.
 
 ```csharp
 static void Main(string[] args)
@@ -477,10 +478,10 @@ static void Main(string[] args)
 }
 ```
 
-**Not:** Kuyruk, tablo ve blob adları, her bir işlev çağrılır, ancak yalnızca uygulama başladığında blob kapsayıcı adları çözümlenir çözümlenir. İş çalışırken blob kapsayıcı adı değiştirilemiyor.
+**Note:** Bir işlev her çağrıldığında kuyruk, tablo ve BLOB adları çözümlenir, ancak blob kapsayıcı adları yalnızca uygulama başlatıldığında çözümlenir. İş çalışırken blob kapsayıcısı adını değiştiremezsiniz.
 
-## <a name="how-to-trigger-a-function-manually"></a>Bir işlev el ile tetikleme
-Bir işlev el ile tetiklemek için kullanmak **çağrı** veya **CallAsync** metodunda **JobHost** nesne ve **NoAutomaticTrigger** Aşağıdaki örnekte gösterildiği gibi işlev özniteliği.
+## <a name="how-to-trigger-a-function-manually"></a>Bir işlevi el ile tetikleme
+Bir işlevi el ile tetiklemek için, aşağıdaki örnekte gösterildiği gibi, **Jobhost** nesnesi üzerinde **Call** veya **Callasync** yöntemini ve işlevindeki **noautomatictrigger** özniteliğini kullanın.
 
 ```csharp
 public class Program
@@ -504,23 +505,23 @@ public class Program
 ```
 
 ## <a name="how-to-write-logs"></a>Günlükleri yazma
-Günlükleri iki yerde gösteren panoyu: sayfa WebJob için ve belirli bir WebJob çağrısına sayfası.
+Panoda Günlükler iki yerde gösterilir: WebJob için sayfa ve belirli bir WebJob çağrısı için sayfa.
 
-![WebJob sayfasında günlükleri](./media/vs-storage-webjobs-getting-started-queues/dashboardapplogs.png)
+![WebJob 'daki Günlükler sayfası](./media/vs-storage-webjobs-getting-started-queues/dashboardapplogs.png)
 
-![İşlev çağırma sayfasında günlükleri](./media/vs-storage-webjobs-getting-started-queues/dashboardlogs.png)
+![İşlev çağırma sayfasındaki Günlükler](./media/vs-storage-webjobs-getting-started-queues/dashboardlogs.png)
 
-Konsol yöntemleri, bir işlev çağrısında veya buna çıktısını **Main()** yöntemi, WebJob için Pano sayfası, sayfayı belirli yöntem çağırma için değil, görünür. Çıkış bir parametresi, Yöntem imzasında alma TextWriter nesnedeki bir yöntem çağırma için Pano sayfası görüntülenir.
+Bir işlevde veya **Main ()** yönteminde çağırdığınız konsol yöntemlerinden çıkış, belirli bir yöntem çağrısı için sayfada değil, WebJob için Pano sayfasında görünür. Yöntem imzanızın bir parametresinden aldığınız TextWriter nesnesinden alınan çıkış, bir yöntem çağırma için Pano sayfasında görüntülenir.
 
-Aynı anda birçok iş işlevlerini çalışabilir ancak tek iş parçacıklı, konsolu olduğu için konsol çıktısı bir belirli yöntem çağırma için bağlanamaz. İşte bu nedenle kendi benzersiz günlük yazıcı nesnesi ile her bir işlevi çağırmayı SDK sağlar.
+Konsol çıktısı tek iş parçacıklı olduğundan, çok sayıda iş işlevi aynı anda çalışıyor olabileceğinden konsol çıkışı belirli bir yöntem çağrısına bağlanamaz. Bu nedenle, SDK 'nın her bir işlev çağrısını kendi benzersiz günlük yazıcı nesnesiyle sağladığını unutmayın.
 
-Yazılacak [uygulama izleme günlükleri](../app-service/troubleshoot-dotnet-visual-studio.md#logsoverview), kullanın **Console.Out** (bilgisi olarak işaretlenmiş günlükleri oluşturur) ve **Console.Error dosyası** (hata olarak işaretlenmiş günlükleri oluşturur). Kullanmaya alternatiftir [izleme veya TraceSource](https://blogs.msdn.com/b/mcsuksoldev/archive/2014/09/04/adding-trace-to-azure-web-sites-and-web-jobs.aspx), uyarı, ayrıntı, sağlar ve kritik bilgileri ve hata yanı sıra düzeyleri. Uygulama izleme günlükleri web uygulaması günlük dosyalarında, Azure tabloları, görünür veya Azure web uygulamanıza nasıl yapılandırdığınıza bağlı olarak Azure blobları. Tüm konsol çıkışını true olduğu gibi en son 100 uygulama günlüklerini sayfa işlevi çağırma için değil WebJob için Pano sayfasında da görünür.
+[Uygulama izleme günlüklerini](../app-service/troubleshoot-dotnet-visual-studio.md#logsoverview)yazmak için **Console. out** (bilgi olarak işaretlenen Günlükler oluşturur) ve **Console. Error** (hata olarak işaretlenen Günlükler oluşturur) kullanın. Alternatif olarak, bilgi ve hatanın yanı sıra ayrıntılı, uyarı ve kritik düzeyler sağlayan [Trace veya TraceSource](https://blogs.msdn.com/b/mcsuksoldev/archive/2014/09/04/adding-trace-to-azure-web-sites-and-web-jobs.aspx)kullanılır. Azure Web uygulamanızı nasıl yapılandırdığınıza bağlı olarak, uygulama izleme günlükleri Web uygulaması günlük dosyalarında, Azure tablolarında veya Azure Bloblarında görüntülenir. Tüm konsol çıktılarına doğru olduğu gibi, en son 100 uygulama günlükleri de bir işlev çağırma sayfası için değil, WebJob için Pano sayfasında de görüntülenir.
 
-Konsol çıktısı, programın yerel olarak çalışmıyorsa yalnızca program bir Azure WebJob içinde çalışıyorsa bu Panoda veya başka bir ortama görünür.
+Konsol çıktısı, panoda, program yerel olarak veya başka bir ortamda çalışıyorsa değil, yalnızca bir Azure WebJob 'ta çalışıyorsa görüntülenir.
 
-Pano bağlantı dizesi null olarak ayarlayarak günlüğü devre dışı bırakabilirsiniz. Daha fazla bilgi için [yapılandırma seçeneklerini ayarlama](#how-to-set-configuration-options).
+Pano bağlantı dizesini null olarak ayarlayarak günlüğe kaydetmeyi devre dışı bırakabilirsiniz. Daha fazla bilgi için bkz. [yapılandırma seçeneklerini ayarlama](#how-to-set-configuration-options).
 
-Aşağıdaki örnek, günlükleri yazmak için birçok yol gösterir:
+Aşağıdaki örnek, günlükleri yazmanın çeşitli yollarını göstermektedir:
 
 ```csharp
 public static void WriteLog(
@@ -534,30 +535,30 @@ public static void WriteLog(
 }
 ```
 
-WebJobs SDK panosunda çıktısı **TextWriter** ne zaman, belirli bir sayfaya gidin yukarı gösterir işlev çağırma ve seçin nesnesi **çıkışı Aç/Kapat**:
+WebJobs SDK panosunda, belirli bir işlev çağrısı için sayfaya gittiğinizde ve **çıkışı geç**' i seçtiğinizde **TextWriter** nesnesinden alınan çıkış görüntülenir.
 
 ![Çağırma bağlantısı](./media/vs-storage-webjobs-getting-started-queues/dashboardinvocations.png)
 
-![İşlev çağırma sayfasında günlükleri](./media/vs-storage-webjobs-getting-started-queues/dashboardlogs.png)
+![İşlev çağırma sayfasındaki Günlükler](./media/vs-storage-webjobs-getting-started-queues/dashboardlogs.png)
 
-(İçin işlev çağrısını) WebJob için sayfasına gidin ve seçin Web işleri SDK'sı panosunda Konsolu en son 100 satırlarını göster yukarı çıkış **çıkışı Aç/Kapat**.
+WebJobs SDK panosunda, WebJob 'un en son 100 satırı, Web Işi sayfasına gittiğinizde (işlev çağrısı için değil), **çıkışı geç**' i seçtiğinizde görüntülenir.
 
-![Çıkışı Aç/Kapat](./media/vs-storage-webjobs-getting-started-queues/dashboardapplogs.png)
+![Çıkışı geç](./media/vs-storage-webjobs-getting-started-queues/dashboardapplogs.png)
 
-Sürekli bir WebJob uygulama günlükleri/data/iş/sürekli/içinde gösterilmesi *{webjobname}* web uygulaması dosya sistemindeki /job_log.txt.
+Sürekli bir WebJob 'ta uygulama günlükleri, Web uygulaması dosya sisteminde/Data/Jobs/Continuous/ *{webjobname}* /job_log.txt içinde görünür.
 
         [09/26/2014 21:01:13 > 491e54: INFO] Console.Write - Hello world!
         [09/26/2014 21:01:13 > 491e54: ERR ] Console.Error - Hello world!
         [09/26/2014 21:01:13 > 491e54: INFO] Console.Out - Hello world!
 
-Uygulama günlükleri görünümü şunun gibi bir Azure blob: 2014-09-26T21:01:13,Information,contosoadsnew,491e54,635473620738373502,0,17404,17,Console.Write - Hello world!, 2014-09-26T21:01:13,Error,contosoadsnew,491e54,635473620738373502,0,17404,19,Console.Error - Merhaba Dünya!, 2014-09-26T21 : 01:13,Information,contosoadsnew,491e54,635473620738529920,0,17404,17,Console.Out - Merhaba Dünya!,
+Azure Blob 'da uygulama günlükleri şu şekilde görünür: 2014-09-26T21:01:13, Information, contosoadsnew, 491e54, 635473620738373502, 0, 17404, 17, Console. Write-Hello World!, 2014-09-26T21:01:13, hata, contosoadsnew, 491e54, 635473620738373502, 0, 17404, 19, konsol. hata-Merhaba Dünya!, 2014-09-26T21:01:13, bilgi, contosoadsnew, 491e54, 635473620738529920, 0, 17404, 17, Console. out-Merhaba Dünya!,
 
-Bir Azure tablosu ve **Console.Out** ve **Console.Error dosyası** günlükleri şuna benzeyebilir:
+Ve bir Azure tablosunda **konsol. out** ve **Console. hata** günlükleri şöyle görünür:
 
-![Tablo bilgisi günlüğünde](./media/vs-storage-webjobs-getting-started-queues/tableinfo.png)
+![Tablodaki bilgi günlüğü](./media/vs-storage-webjobs-getting-started-queues/tableinfo.png)
 
-![Tabloda hata günlüğü](./media/vs-storage-webjobs-getting-started-queues/tableerror.png)
+![Tablodaki hata günlüğü](./media/vs-storage-webjobs-getting-started-queues/tableerror.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, Azure kuyrukları ile çalışmaya yönelik yaygın senaryolar nasıl ele alınacağını gösteren kod örnekleri sağlamıştır. Azure WebJobs ve WebJobs SDK'sı kullanma hakkında daha fazla bilgi için bkz. [Azure WebJobs belgeleri kaynakları](https://go.microsoft.com/fwlink/?linkid=390226).
+Bu makalede, Azure kuyrukları ile çalışmaya yönelik yaygın senaryoları nasıl işleyebileceğini gösteren kod örnekleri verilmiştir. Azure WebJobs ve WebJobs SDK 'sını kullanma hakkında daha fazla bilgi için bkz. [Azure WebJobs belge kaynakları](https://go.microsoft.com/fwlink/?linkid=390226).
 

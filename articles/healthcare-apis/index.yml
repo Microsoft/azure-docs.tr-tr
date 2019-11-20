@@ -1,0 +1,48 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: FHIR için Azure API Önizleme Belgeleri
+metadata:
+  title: FHIR için Azure API Önizleme Belgeleri
+  meta.description: Learn how Azure API for FHIR can power healthcare iteroperability in Azure.
+  services: healthcare-apis
+  author: hansenms
+  manager: dougseven
+  ms.author: mihansen
+  ms.service: healthcare-apis
+  ms.subservice: fhir
+  ms.topic: landing-page
+  ms.date: 02/07/2019
+abstract:
+  description: 'Azure API for FHIR® Önizleme tamamen yönetilen, standartlara uygun, uyumlu bir API’dir. Klinik sağlık verilerine yönelik olarak sunulan bu API sağlık verilerinizle analiz, makine öğrenmesi ve eyleme dönüştürülebilir makine zekası için yeni sistemler oluşturabilmenize olanak tanır.'
+sections:
+  - title: null
+    items:
+      - type: paragraph
+        text: 'FHIR&reg;, HL7’nin kayıtlı ticari markasıdır ve HL7’nin izniyle kullanılır.'
+  - title: 5 Dakikalık Hızlı Başlangıçlar
+    items:
+      - type: paragraph
+        text: Ok bağlantısını seçerek FHIR için Azure API Önizlemesinin Azure’da sağlık hizmetlerinin birlikte çalışma olanaklarına nasıl katkıda bulunabileceğini öğrenin <img src="media/index/link.jpg" height="15" width="15"></img>arasında yetersiz alanla karşılaştı.
+      - type: table
+        style: dataMatrix
+        columns:
+          - image:
+              src: media/index/portal.svg
+            title: Azure portal
+          - image:
+              src: media/index/powershell.svg
+            title: Azure PowerShell
+          - image:
+              src: media/index/cli.svg
+            title: Azure CLI
+        rows:
+          - title: FHIR için Azure API'sini dağıtma
+            values:
+              - href: fhir-paas-portal-quickstart.md
+              - href: fhir-paas-powershell-quickstart.md
+              - href: fhir-paas-cli-quickstart.md
+          - title: Açık Kaynak FHIR Sunucusunu dağıtma
+            values:
+              - href: fhir-oss-portal-quickstart.md
+              - href: fhir-oss-powershell-quickstart.md
+              - href: fhir-oss-cli-quickstart.md

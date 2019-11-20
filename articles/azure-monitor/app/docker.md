@@ -1,105 +1,100 @@
 ---
-title: Azure Application ınsights'ta Docker uygulamalarını izleme | Microsoft Docs
-description: Docker performans sayaçları, olayları ve özel durumlar üzerinde Application Insights, kapsayıcılı uygulamaları alınan telemetri birlikte görüntülenebilir.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 27a3083d-d67f-4a07-8f3c-4edb65a0a685
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Docker uygulamalarını izleme | Microsoft Docs
+description: Docker performans sayaçları, olaylar ve özel durumlar, Kapsayıcılı uygulamalardaki telemetri ile birlikte Application Insights ' de görüntülenebilir.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 03/14/2019
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 115e2d6b041ecc3f38a2a6438d90777da9660221
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 03/14/2019
+ms.openlocfilehash: 66a2481d25c863bbdbf4d72c4683a309918776db
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62098040"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72677929"
 ---
-# <a name="monitor-docker-applications-in-application-insights-deprecated"></a>(Kullanım dışı) Application ınsights'ta Docker uygulamalarını izleme
+# <a name="monitor-docker-applications-in-application-insights-deprecated"></a>Application Insights (kullanım dışı) Docker uygulamalarını izleme
 
 > [!NOTE]
-> Bu çözümü kullanım dışıdır. Kapsayıcı izleme geçerli yaptığımız yatırımlardan hakkında daha fazla bilgi edinmek için kullanıma almasını öneririz [kapsayıcılar için Azure İzleyici](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview).
+> Bu çözüm kullanım dışı bırakıldı. Kapsayıcı izlemeyle ilgili mevcut yatırımlarımız hakkında daha fazla bilgi edinmek için [Azure izleyici 'yi kapsayıcılar için](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview)kullanıma sunmamız önerilir.
 
-Yaşam döngüsü olayları ve performans sayaçları gelen [Docker](https://www.docker.com/) kapsayıcıları Application Insights grafiğinin. Yükleme [Application Insights](https://hub.docker.com/r/microsoft/applicationinsights/) görüntü bir kapsayıcıda, konak ve diğer görüntüleri yanı sıra, ana bilgisayar için performans sayaçlarını görüntüler.
+[Docker](https://www.docker.com/) kapsayıcılarından gelen yaşam döngüsü olayları ve performans sayaçları Application Insights üzerinde grafiklenebilir. [Application Insights](https://hub.docker.com/r/microsoft/applicationinsights/) görüntüsünü konaktaki bir kapsayıcıya yüklediğinizde, diğer görüntüler için de, ana bilgisayar için performans sayaçlarını görüntüler.
 
-Docker ile uygulamalarınızı basit kapsayıcıların tüm bağımlılıklarla birlikte eksiksiz olarak dağıtın. Bunlar bir Docker altyapısını çalıştıran herhangi bir ana makinede çalıştırın.
+Docker sayesinde uygulamalarınızı basit kapsayıcılarda tüm bağımlılıklarla birlikte dağıtabilirsiniz. Bunlar, Docker altyapısını çalıştıran tüm ana makineler üzerinde çalışır.
 
-Çalıştırdığınızda [Application Insights görüntü](https://hub.docker.com/r/microsoft/applicationinsights/) Docker konak üzerinde bu avantajlar alın:
+Docker ana bilgisayarınızda [Application Insights görüntüsünü](https://hub.docker.com/r/microsoft/applicationinsights/) çalıştırdığınızda bu avantajları elde edersiniz:
 
-* Yaşam döngüsü telemetri çalıştıran tüm kapsayıcıları hakkında konakta - başlatmak, durdurmak ve benzeri.
+* Konakta çalışan tüm kapsayıcılar hakkında yaşam döngüsü telemetrisi-başlatma, durdurma vb.
 * Tüm kapsayıcılar için performans sayaçları. CPU, bellek, ağ kullanımı ve daha fazlası.
-* Varsa, [Java için Application Insights SDK'sı yüklü](../../azure-monitor/app/java-get-started.md) kapsayıcılarda çalıştırılan uygulamalar, bu uygulamaların tüm telemetri kapsayıcı ve ana makine tanımlayan ek özelliklere sahip. Örneğin, birden fazla ana çalışan bir uygulamanın bir örneği varsa, uygulama telemetrinizi ana bilgisayarı tarafından kolayca filtre uygulayabilirsiniz.
+* Kapsayıcıda çalışan uygulamalarda [Java için APPLICATION INSIGHTS SDK 'yı yüklediyseniz](../../azure-monitor/app/java-get-started.md) , bu uygulamaların tüm telemetrisi, kapsayıcıyı ve ana makineyi tanımlayan ek özelliklere sahip olur. Örneğin, birden fazla konakta çalışan bir uygulamanın örneklerine sahipseniz, uygulama telemetrinizi ana bilgisayara göre kolayca filtreleyebilirsiniz.
 
-## <a name="set-up-your-application-insights-resource"></a>Kendi Application Insights kaynağını ayarlama
+## <a name="set-up-your-application-insights-resource"></a>Application Insights kaynağınızı ayarlama
 
-1. Oturum [Microsoft Azure Portal'da](https://azure.com) ; uygulamanız için Application Insights kaynağını açın veya [yeni bir tane oluşturun](../../azure-monitor/app/create-new-resource.md ). 
+1. [Microsoft Azure Portal](https://azure.com) oturum açın ve uygulamanız için Application Insights kaynağını açın; veya [Yeni bir tane oluşturun](../../azure-monitor/app/create-new-resource.md ). 
    
-    *Hangi kaynak kullanmalıyım?* Konağınız üzerinde çalışan uygulamalar başkası tarafından geliştirilen sonra yapmanız [yeni bir Application Insights kaynağı oluşturun](../../azure-monitor/app/create-new-resource.md ). Burada görüntüleyebilir ve telemetriyi analiz budur. (Uygulama türü için ' genel' seçin.)
+    *Hangi kaynağı kullanmalıyım?* Ana bilgisayarınızda çalıştırdığınız uygulamalar başkası tarafından geliştirilmişse, [Yeni bir Application Insights kaynağı oluşturmanız](../../azure-monitor/app/create-new-resource.md )gerekir. Telemetriyi görüntülediğiniz ve analiz ettiğiniz yerdir. (Uygulama türü için ' genel ' seçeneğini belirleyin.)
    
-    Ancak uygulamalardan geliştiriciyseniz sonra umuyoruz [Application Insights SDK'sı eklenen](../../azure-monitor/app/java-get-started.md) bunların her biri için. Tüm gerçekten bileşenleri tek bir iş uygulamasının iseler, tüm bir kaynağa telemetri gönderecek şekilde yapılandırmanız ve Docker yaşam döngüsü ve performans verilerini görüntülemek için aynı kaynak kullanacaksınız. 
+    Ancak uygulamaların geliştiricisiyseniz, her birine [Application Insights SDK 'sı eklemiş](../../azure-monitor/app/java-get-started.md) olduğunuzu umuyoruz. Tek bir iş uygulamasının tüm gerçekten bileşenleri varsa, bunların tümünü tek bir kaynağa telemetri gönderecek şekilde yapılandırabilir ve aynı kaynağı kullanarak Docker yaşam döngüsünü ve performans verilerini görüntüleyebilirsiniz. 
    
-    Uygulamaların çoğu geliştirilen, ancak bunların telemetri görüntülemek için ayrı kaynaklar kullanıyorsanız, üçüncü bir senaryodur. Bu durumda, Docker verileri için ayrı bir kaynak oluşturmak için büyük olasılıkla de istersiniz.
+    Üçüncü senaryo birçok uygulamayı geliştirdik, ancak Telemetriyi göstermek için ayrı kaynaklar kullanıyorsunuz. Bu durumda muhtemelen Docker verileri için ayrı bir kaynak oluşturmak da isteyebilirsiniz.
 
-2. Tıklayın **Essentials** açılır ve izleme anahtarını kopyalayın. Bu SDK, telemetri gönderileceği bildirmek için kullanın.
+2. **Temel** bileşenler açılan düğmesine tıklayın ve izleme anahtarını kopyalayın. Bunu SDK 'nın Telemetriyi nereye gönderileceğini söylemek için kullanırsınız.
 
-Bu tarayıcı penceresini elinizde bulundurun telemetrinizi kısa süre içinde görünmesini için geri dönen.
+Telemetrinize bakmak için yakında geri döneceksiniz, tarayıcı penceresini kullanışlı tutun.
 
-## <a name="run-the-application-insights-monitor-on-your-host"></a>Konağınız üzerinde Application Insights izlemeyi Çalıştır
+## <a name="run-the-application-insights-monitor-on-your-host"></a>Application Insights izleyicisini konakta çalıştırın
 
-Telemetri görüntülemek için bir yere kendinizi, toplar ve bunları gönderir kapsayıcılı uygulamayı ayarlayabilirsiniz.
+Telemetriyi görüntülemenin bir yere sahip olduğunuza göre, onu toplayıp gönderecek Kapsayıcılı uygulamayı ayarlayabilirsiniz.
 
-1. Docker ana bilgisayarına bağlayın.
-2. Bu komutta, izleme anahtarını düzenleyin ve ardından çalıştırın:
+1. Docker konağına bağlanın.
+2. İzleme anahtarınızı bu komutla düzenleyin ve sonra çalıştırın:
    
    ```
    
    docker run -v /var/run/docker.sock:/docker.sock -d microsoft/applicationinsights ikey=000000-1111-2222-3333-444444444
    ```
 
-Docker ana bilgisayar başına yalnızca bir Application Insights görüntü gereklidir. Ardından, uygulamanızın birden çok Docker ana bilgisayarda dağıtılmışsa, her konakta komutu yineleyin.
+Docker Konağı başına yalnızca bir Application Insights görüntüsü gerekir. Uygulamanız birden çok Docker konağında dağıtılmışsa, komutu her konakta yineleyin.
 
-## <a name="update-your-app"></a>Uygulamanızı güncelleştirin
-Uygulamanız ile işaretlenmiş ise [Java için Application Insights SDK'sı](../../azure-monitor/app/java-get-started.md), altında aşağıdaki satırı, projenizdeki Applicationınsights.XML dosyasının içine ekleyin `<TelemetryInitializers>` öğesi:
+## <a name="update-your-app"></a>Uygulamanızı güncelleştirme
+Uygulamanız [Java için Application Insights SDK 'sı](../../azure-monitor/app/java-get-started.md)ile birlikte işaretlenmiş ise, `<TelemetryInitializers>` öğesi altında, projenizdeki ApplicationInsights. xml dosyasına aşağıdaki satırı ekleyin:
 
 ```xml
 
     <Add type="com.microsoft.applicationinsights.extensibility.initializer.docker.DockerContextInitializer"/> 
 ```
 
-Bu, kapsayıcı ve konak kimliği gibi Docker bilgileri uygulamanızdan gönderilen her telemetri öğesine ekler.
+Bu, uygulamanızdan gönderilen her telemetri öğesine kapsayıcı ve ana bilgisayar kimliği gibi Docker bilgilerini ekler.
 
 ## <a name="view-your-telemetry"></a>Telemetrinizi görüntüleme
-Azure portalında Application Insights kaynağınıza dönün.
+Azure portal Application Insights kaynağına geri dönün.
 
-Docker kutucuğa tıklayın.
+Docker kutucuğuna tıklayın.
 
-Özellikle, Docker altyapısı üzerinde çalışan diğer kapsayıcılar varsa, kısa süre içinde Docker uygulamadan gelen verileri görürsünüz.
+Özellikle de Docker altyapınız üzerinde çalışan başka kapsayıcılarınız varsa Docker uygulamasından gelen verileri görürsünüz.
 
 ### <a name="docker-container-events"></a>Docker kapsayıcı olayları
-![Örnek](./media/docker/13.png)
+![Örneğinde](./media/docker/13.png)
 
-Tek tek olayları araştırmak için tıklayın [arama](../../azure-monitor/app/diagnostic-search.md). Arama ve istediğiniz olayları bulmak için filtre uygulayın. Daha fazla ayrıntı almak için herhangi bir etkinliğe tıklayın.
+Ayrı olayları araştırmak için [Ara](../../azure-monitor/app/diagnostic-search.md)' ya tıklayın. İstediğiniz olayları bulmak için arama yapın ve filtre uygulayın. Daha ayrıntılı bilgi almak için herhangi bir olaya tıklayın.
 
-### <a name="exceptions-by-container-name"></a>Özel durumların kapsayıcı adı
-![Örnek](./media/docker/14.png)
+### <a name="exceptions-by-container-name"></a>Kapsayıcı adına göre özel durumlar
+![Örneğinde](./media/docker/14.png)
 
-### <a name="docker-context-added-to-app-telemetry"></a>Docker bağlamı uygulama telemetri eklendi
-AI SDK'sı ile izleme eklenmiş uygulama gönderilen istek telemetrisi ile Docker bağlam bilgilerini zenginleştirilmiş.
+### <a name="docker-context-added-to-app-telemetry"></a>Uygulama telemetrisine Docker bağlamı eklendi
+AI SDK ile işaretlenmiş uygulamadan gönderilen istek telemetrisi, Docker bağlam bilgileriyle uyumlu.
 
-## <a name="q--a"></a>Soru - Yanıt
-*Application Insights Docker elde edilemiyor bana hangi mülklere?*
+## <a name="q--a"></a>Soru-Cevap
+*Application Insights, Docker 'dan alınamayan bana ne sunar?*
 
-* Performans sayaçları kapsayıcı ve görüntü ayrıntılı dökümü.
-* Kapsayıcı ve uygulama verilerini tek bir Panoda tümleştirin.
-* [Telemetriyi dışarı aktarma](export-telemetry.md) daha detaylı analiz bir veritabanı, Power BI veya diğer Pano.
+* Kapsayıcıya ve görüntüye göre performans sayaçlarının ayrıntılı dökümü.
+* Kapsayıcıyı ve uygulama verilerini tek bir panoda tümleştirin.
+* Bir veritabanına, Power BI veya başka bir panoya daha fazla analiz için [telemetri dışarı aktarın](export-telemetry.md) .
 
-*Uygulamadan telemetri nasıl alabilirim?*
+*Nasıl yaparım? uygulamadan telemetri almak mı istiyorsunuz?*
 
-* Uygulama içinde Application Insights SDK'sını yükleyin. Bilgi edinmek için nasıl: [Java web uygulamalarını](../../azure-monitor/app/java-get-started.md), [Windows web uygulamaları](../../azure-monitor/app/asp-net.md).
+* Application Insights SDK 'sını uygulamaya yükler. Şunları öğrenin: [Java Web Apps](../../azure-monitor/app/java-get-started.md), [Windows Web Apps](../../azure-monitor/app/asp-net.md).
 
 ## <a name="video"></a>Video
 
@@ -108,5 +103,5 @@ AI SDK'sı ile izleme eklenmiş uygulama gönderilen istek telemetrisi ile Docke
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Java için Application Insights](../../azure-monitor/app/java-get-started.md)
-* [Node.js için Application Insights](../../azure-monitor/app/nodejs.md)
+* [Node. js için Application Insights](../../azure-monitor/app/nodejs.md)
 * [ASP.NET için Application Insights](../../azure-monitor/app/asp-net.md)

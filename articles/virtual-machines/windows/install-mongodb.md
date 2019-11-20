@@ -1,107 +1,106 @@
 ---
-title: Bir Windows azure'da sanal makinesi üzerinde MongoDB yükleme | Microsoft Docs
-description: Azure Resource Manager dağıtım modeli kullanılarak oluşturulmuş Windows Server 2012 R2 çalıştıran bir VM'de MongoDB yüklemeyi öğrenin.
+title: Azure 'da Windows VM 'ye MongoDB 'yi yüklemeyin
+description: Kaynak Yöneticisi dağıtım modeliyle oluşturulan Windows Server 2012 R2 çalıştıran bir Azure VM 'sine MongoDB yüklemeyi öğrenin.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: 53faf630-8da5-4955-8d0b-6e829bf30cba
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 12/15/2017
 ms.author: cynthn
-ms.openlocfilehash: afd8e6b47fb86985acde062af1fb38ec3af4e902
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 37c1b58d364e7eadb33803ce7eac1f2b956ec1b6
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60711445"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74038545"
 ---
-# <a name="install-and-configure-mongodb-on-a-windows-vm-in-azure"></a>Yükleme ve azure'da Windows sanal makinesi üzerinde MongoDB yapılandırma
-[MongoDB](https://www.mongodb.org) popüler açık kaynaklı, yüksek performanslı NoSQL veritabanıdır. Bu makalede yükleme ve azure'da bir Windows Server 2016 sanal makine (VM) üzerinde MongoDB yapılandırma sırasında size kılavuzluk eder. Ayrıca [azure'da bir Linux sanal makinesi üzerinde MongoDB yükleme](../linux/install-mongodb.md).
+# <a name="install-and-configure-mongodb-on-a-windows-vm-in-azure"></a>Azure 'da Windows VM 'ye MongoDB 'yi yükleyip yapılandırma
+[MongoDB](https://www.mongodb.org) , popüler bir açık kaynaklı ve yüksek performanslı bir NoSQL veritabanıdır. Bu makale, Azure 'daki bir Windows Server 2016 sanal makinesine (VM) MongoDB Yükleme ve yapılandırma konusunda size rehberlik eder. Ayrıca, [Azure 'daki bir LINUX sanal makinesine MongoDB yükleyebilirsiniz](../linux/install-mongodb.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
-Yükleyip MongoDB yapılandırmadan önce bir VM oluşturun ve ideal olarak, bir veri diski eklemek için gerekir. VM oluşturma ve bir veri diski eklemek için aşağıdaki makalelere bakın:
+MongoDB yüklemeden ve yapılandırmadan önce, bir VM oluşturmanız ve buna ideal olarak bir veri diski eklemeniz gerekir. Bir VM oluşturmak ve bir veri diski eklemek için aşağıdaki makalelere bakın:
 
-* Kullanarak bir Windows Server VM oluşturma [Azure portalında](quick-create-portal.md) veya [Azure PowerShell](quick-create-powershell.md).
-* Kullanarak bir Windows Server VM veri diski ekleme [Azure portalında](attach-managed-disk-portal.md) veya [Azure PowerShell](attach-disk-ps.md).
+* [Azure Portal](quick-create-portal.md) veya [Azure PowerShell](quick-create-powershell.md)kullanarak bir Windows Server sanal makinesi oluşturun.
+* [Azure Portal](attach-managed-disk-portal.md) veya [Azure PowerShell](attach-disk-ps.md)kullanarak bir Windows Server VM 'sine veri diski ekleyin.
 
-MongoDB yükleme ve yapılandırma, başlamak için [, Windows Server VM'de oturum](connect-logon.md) Uzak Masaüstü kullanarak.
+MongoDB 'yi yüklemeye ve yapılandırmaya başlamak için, Uzak Masaüstü kullanarak [Windows Server sanal makinenizde oturum açın](connect-logon.md) .
 
 ## <a name="install-mongodb"></a>MongoDB'yi yükleme
 > [!IMPORTANT]
-> Kimlik doğrulaması ve IP adresi bağlama gibi MongoDB güvenlik özellikleri varsayılan olarak etkin değildir. Güvenlik özellikleri, MongoDB, bir üretim ortamına dağıtmadan önce etkinleştirilmesi gerekir. Daha fazla bilgi için [MongoDB güvenlik ve kimlik doğrulama](https://www.mongodb.org/display/DOCS/Security+and+Authentication).
+> Kimlik doğrulaması ve IP adresi bağlama gibi MongoDB güvenlik özellikleri varsayılan olarak etkinleştirilmemiştir. MongoDB bir üretim ortamına dağıtılmadan önce güvenlik özellikleri etkinleştirilmelidir. Daha fazla bilgi için bkz. [MongoDB güvenliği ve kimlik doğrulaması](https://www.mongodb.org/display/DOCS/Security+and+Authentication).
 
 
-1. Uzak Masaüstü kullanarak VM'nize bağlandıktan sonra görev çubuğundan Internet Explorer açın.
-2. Seçin **önerilen güvenlik, gizlilik ve uyumluluk ayarlarını kullan** zaman Internet Explorer ilk açılır ve tıklayın **Tamam**.
-3. Internet Explorer Artırılmış Güvenlik Yapılandırması, varsayılan olarak etkindir. MongoDB Web sitesi, izin verilen siteler listesine ekleyin:
+1. Sanal makinenize Uzak Masaüstü kullanarak bağlandıktan sonra, görev çubuğundan Internet Explorer 'ı açın.
+2. Internet Explorer ilk açıldığında **Önerilen güvenlik, gizlilik ve uyumluluk ayarlarını kullan** ' ı seçin ve **Tamam**' a tıklayın.
+3. Internet Explorer Artırılmış güvenlik yapılandırması varsayılan olarak etkinleştirilmiştir. MongoDB Web sitesini izin verilen siteler listesine ekleyin:
    
-   * Seçin **Araçları** simgesine dokunun.
-   * İçinde **Internet Seçenekleri**seçin **güvenlik** sekmesine tıklayın ve ardından **Güvenilen siteler** simgesi.
-   * Tıklayın **siteleri** düğmesi. Ekleme *https://\*. mongodb.com* listesine Güvenilen siteler ve ardından iletişim kutusunu kapatın.
+   * Sağ üst köşedeki **Araçlar** simgesini seçin.
+   * **Internet seçenekleri**' nde **güvenlik** sekmesini seçin ve ardından **Güvenilen siteler** simgesini seçin.
+   * **Siteler** düğmesine tıklayın. Güvenilen siteler listesine *https://\*. MongoDB.com* ekleyin ve iletişim kutusunu kapatın.
      
-     ![Internet Explorer güvenlik ayarlarını yapılandırın](./media/install-mongodb/configure-internet-explorer-security.png)
-4. Gözat [MongoDB - indirir](https://www.mongodb.com/downloads) sayfa (https://www.mongodb.com/downloads).
-5. Gerekirse, seçin **Community Server** edition'ı ve ardından geçerli en son kararlı sürüm için*Windows Server 2008 R2 64 bit ve üzeri*. Yükleyiciyi indirmek için tıklayın **İNDİRME (MSI)** .
+     ![Internet Explorer güvenlik ayarlarını yapılandırma](./media/install-mongodb/configure-internet-explorer-security.png)
+4. [MongoDB-downloads](https://www.mongodb.com/downloads) sayfasına gidin (https://www.mongodb.com/downloads).
+5. Gerekirse, **Community Server** sürümünü seçin ve ardından*Windows Server 2008 R2 64-bit ve üzeri*için en son geçerli kararlı yayını seçin. Yükleyiciyi indirmek için **İndir (MSI)** seçeneğine tıklayın.
    
-    ![MongoDB yükleyicisini indirin](./media/install-mongodb/download-mongodb.png)
+    ![MongoDB yükleyicisini indir](./media/install-mongodb/download-mongodb.png)
    
-    İndirme tamamlandıktan sonra yükleyiciyi çalıştırın.
-6. Okuyun ve lisans sözleşmesini kabul edin. İstendiğinde, seçin **tam** yükleyin.
-7. İsterseniz, Compass, MongoDB için bir grafik arabirim de yüklemeyi seçebilirsiniz.
-8. Son ekrana tıklayın **yükleme**.
+    İndirme işlemi tamamlandıktan sonra yükleyiciyi çalıştırın.
+6. Lisans sözleşmesini okuyun ve kabul edin. İstendiğinde, yüklemeyi **Tamam** ' ı seçin.
+7. İsterseniz, MongoDB için bir grafik arabirim olan pusula 'i de yüklemeyi seçebilirsiniz.
+8. Son ekranda, **yükler**' e tıklayın.
 
-## <a name="configure-the-vm-and-mongodb"></a>MongoDB ve VM yapılandırma
-1. Yol değişkenleri MongoDB yükleyicisi tarafından güncelleştirilir. MongoDB olmadan `bin` yol değişkeninize konumunda, tam yolu MongoDB yürütülebilir her kullanışınızda belirtmeniz gerekir. Konumun yol değişkeninize eklemek için:
+## <a name="configure-the-vm-and-mongodb"></a>VM ve MongoDB 'yi yapılandırma
+1. Yol değişkenleri MongoDB yükleyicisi tarafından güncellenmez. Yol değişkeninizdeki MongoDB `bin` konumu olmadan, her MongoDB yürütülebilirini her kullandığınızda tam yolu belirtmeniz gerekir. Yol değişkeninizin konumunu eklemek için:
    
-   * Sağ **Başlat** seçin ve menü **sistem**.
-   * Tıklayın **Gelişmiş Sistem ayarları**ve ardından **ortam değişkenlerini**.
-   * Altında **sistem değişkenlerini**seçin **yolu**ve ardından **Düzenle**.
+   * **Başlat** menüsüne sağ tıklayıp **sistem**' i seçin.
+   * **Gelişmiş sistem ayarları**' na tıklayın ve ardından **ortam değişkenleri**' ne tıklayın.
+   * **Sistem değişkenleri**altında **yol**' ı seçin ve ardından **Düzenle**' ye tıklayın.
      
-     ![Yol değişkenleri yapılandırın](./media/install-mongodb/configure-path-variables.png)
+     ![YOL değişkenlerini yapılandırma](./media/install-mongodb/configure-path-variables.png)
      
-     Yolu, Mongodb'ye eklemek `bin` klasör. MongoDB yüklenmiş genellikle *C:\Program Files\MongoDB*. Vm'nizde yükleme yolunu doğrulayın. Aşağıdaki örnek, MongoDB yükleme konumuna varsayılan ekler `PATH` değişkeni:
+     Yolu MongoDB `bin` klasörünüze ekleyin. MongoDB genellikle *C:\Program Files\MongoDB*'ye yüklenir. VM 'nizin yükleme yolunu doğrulayın. Aşağıdaki örnek, varsayılan MongoDB yüklemesi konumunu `PATH` değişkenine ekler:
      
      ```
      ;C:\Program Files\MongoDB\Server\3.6\bin
      ```
      
      > [!NOTE]
-     > Başında noktalı virgül eklediğinizden emin olun (`;`) bir yere eklediğiniz belirtmek için `PATH` değişkeni.
+     > `PATH` değişkenine bir konum eklediğinizden emin olmak için öndeki noktalı virgül (`;`) eklediğinizden emin olun.
 
-2. MongoDB veri ve günlük dizinleri, verileri disk üzerinde oluşturun. Gelen **Başlat** menüsünde **komut istemi**. Aşağıdaki örnekler, F: sürücüde dizinleri oluşturma
+2. Veri diskinizde MongoDB veri ve günlük dizinleri oluşturun. **Başlat** menüsünden **komut istemi**' ni seçin. Aşağıdaki örneklerde, F sürücüsündeki dizinler oluşturulur:
    
     ```
     mkdir F:\MongoData
     mkdir F:\MongoLogs
     ```
-3. Verilerinizin yolunu değiştirerek aşağıdaki komutu, bir MongoDB örneğine başlayın ve dizinleri buna uygun olarak oturum açın:
+3. Aşağıdaki komutla bir MongoDB örneği başlatın ve veri ve günlük dizinlerinizin yolunu uygun şekilde ayarlayın:
    
     ```
     mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log
     ```
    
-    Bu günlük dosyaları ayırmak ve bağlantıları dinlemeyi başlatmak MongoDB için birkaç dakika sürebilir. Tüm günlük iletilerini yönlendirilmiş *F:\MongoLogs\mongolog.log* Dosyala `mongod.exe` sunucusu başlatır ve günlük dosyaları ayırır.
+    MongoDB 'nin günlük dosyalarını ayırması ve bağlantıları dinlemeye başlaması birkaç dakika sürebilir. Tüm günlük iletileri *F:\mongologs\mongolog.log* dosyasına yönlendirilir çünkü `mongod.exe` sunucusu başlar ve günlük dosyalarını ayırır.
    
    > [!NOTE]
-   > MongoDB örneğinizin çalışırken komut isteminde bu görevde odaklanmış kalır. Komut İstemi penceresini MongoDB çalıştırmaya devam etmek için açık bırakın. Veya sonraki adımda açıklandığı bir hizmet olarak MongoDB yükleme.
+   > MongoDB örneğiniz çalışırken komut istemi bu göreve odaklanmaya devam eder. MongoDB çalıştırmaya devam etmek için komut istemi penceresini açık bırakın. Veya, bir sonraki adımda açıklandığı gibi MongoDB hizmetini de Service olarak yükler.
 
-4. Daha güçlü bir MongoDB deneyimi için yükleme `mongod.exe` hizmet olarak. Bir hizmet oluşturma, MongoDB kullanmak istediğiniz her saat çalışan bir komut istemi bırakın gerekmez anlamına gelir. Hizmet, veri ve günlük dizinlerinizi yolunu uygun şekilde ayarlama şu şekilde oluşturun:
+4. Daha sağlam bir MongoDB deneyimi için `mongod.exe` hizmet olarak yükler. Hizmet oluşturmak, MongoDB 'yi her kullandığınızda bir komut istemi çalıştırmak zorunda olmadığınız anlamına gelir. Aşağıdaki gibi, veri ve günlük dizinlerinizin yolunu düzenleyerek hizmeti oluşturun:
    
     ```
     mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log --logappend  --install
     ```
    
-    Yukarıdaki komut, "Mongo DB" açıklaması ile MongoDB, adlandırılmış bir hizmet oluşturur. Aşağıdaki parametreleri de belirtilir:
+    Yukarıdaki komut, "Mongo DB" açıklamasıyla MongoDB adlı bir hizmet oluşturur. Aşağıdaki parametreler de belirtilmiştir:
    
-   * `--dbpath` Seçeneği veri dizininin konumunu belirtir.
-   * `--logpath` Seçeneği kullanılmalıdır bir günlük dosyası belirtmek için bir komut penceresi çıkışını görüntülemek için çalışan hizmetin sahip olmadığından.
-   * `--logappend` Seçeneği, hizmetin yeniden başlatılması mevcut günlük dosyasına eklenecek çıkış neden olduğunu belirtir.
+   * `--dbpath` seçeneği, veri dizininin konumunu belirtir.
+   * Çalışan hizmetin çıktıyı göstermek için bir komut penceresi olmadığından, bir günlük dosyası belirtmek için `--logpath` seçeneği kullanılmalıdır.
+   * `--logappend` seçeneği, hizmetin yeniden başlatılmasının çıktının var olan günlük dosyasına eklenmesine neden olduğunu belirtir.
    
    MongoDB hizmetini başlatmak için aşağıdaki komutu çalıştırın:
    
@@ -109,22 +108,22 @@ MongoDB yükleme ve yapılandırma, başlamak için [, Windows Server VM'de otur
     net start MongoDB
     ```
    
-    Hizmet MongoDB oluşturma hakkında daha fazla bilgi için bkz. [MongoDB için bir Windows hizmetini yapılandırma](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#mongodb-as-a-windows-service).
+    MongoDB hizmetini oluşturma hakkında daha fazla bilgi için bkz. [MongoDB Için Windows hizmeti yapılandırma](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#mongodb-as-a-windows-service).
 
-## <a name="test-the-mongodb-instance"></a>MongoDB örneğine test
-Tek bir örnek olarak çalışan veya yüklü bir hizmet olarak MongoDB ile oluşturma ve veritabanlarınızı kullanma şimdi başlayabilirsiniz. MongoDB Yönetim Kabuğu'nu başlatmak için başka bir komut istemi penceresinden açın **Başlat** menüsünde ve aşağıdaki komutu girin:
+## <a name="test-the-mongodb-instance"></a>MongoDB örneğini test etme
+MongoDB 'nin tek bir örnek olarak çalıştığı veya hizmet olarak yüklendiği ile, artık veritabanlarınızı oluşturmaya ve kullanmaya başlayabilirsiniz. MongoDB Yönetim Kabuğu 'nu başlatmak için, **Başlat** menüsünden başka bir komut istemi penceresi açın ve aşağıdaki komutu girin:
 
 ```
 mongo  
 ```
 
-Veritabanlarıyla listeleyebilirsiniz `db` komutu. Bazı verileri aşağıdaki şekilde ekleyin:
+Veritabanlarını `db` komutuyla listeleyebilirsiniz. Bazı verileri aşağıdaki gibi ekleyin:
 
 ```
 db.foo.insert( { a : 1 } )
 ```
 
-Şu şekilde verileri için arama:
+Verileri aşağıdaki gibi arayın:
 
 ```
 db.foo.find()
@@ -136,14 +135,14 @@ db.foo.find()
 { "_id" : "ObjectId("57f6a86cee873a6232d74842"), "a" : 1 }
 ```
 
-Çıkış `mongo` gibi konsolu:
+`mongo` konsolundan aşağıdaki gibi çıkın:
 
 ```
 exit
 ```
 
 ## <a name="configure-firewall-and-network-security-group-rules"></a>Güvenlik Duvarı ve ağ güvenlik grubu kurallarını yapılandırma
-MongoDB yüklü ve çalışır durumda, MongoDB için uzaktan bağlanabilmesi için bir bağlantı noktası Windows Güvenlik Duvarı'nı açın. TCP bağlantı noktası 27017 izin vermek için yeni bir gelen kuralı oluşturmak için bir yönetici bir PowerShell istemi açın ve aşağıdaki komutu girin:
+MongoDB artık yüklü ve çalışıyor olduğuna göre, MongoDB 'ye uzaktan bağlanabilmeniz için Windows Güvenlik Duvarı 'nda bir bağlantı noktası açın. TCP bağlantı noktası 27017 ' e izin veren yeni bir gelen kuralı oluşturmak için bir yönetim PowerShell istemi açın ve aşağıdaki komutu girin:
 
 ```powerahell
 New-NetFirewallRule `
@@ -154,14 +153,14 @@ New-NetFirewallRule `
     -Action Allow
 ```
 
-Kullanarak kural oluşturabilirsiniz **Gelişmiş Güvenlik Özellikli Windows Güvenlik Duvarı** grafik yönetim aracıdır. TCP bağlantı noktası 27017 izin vermek için yeni bir gelen kuralı oluşturun.
+Ayrıca, **Gelişmiş Güvenlik Özellikli Windows Güvenlik Duvarı** grafik yönetim aracı 'nı kullanarak kuralı oluşturabilirsiniz. TCP bağlantı noktası 27017 ' e izin vermek için yeni bir gelen kuralı oluşturun.
 
-Gerekirse, mevcut Azure sanal ağ alt ağı dışında adresinden erişime izin vermek için bir ağ güvenlik grubu kuralı oluşturun. Ağ güvenlik grubu kurallarını kullanarak oluşturabileceğiniz [Azure portalında](nsg-quickstart-portal.md) veya [Azure PowerShell](nsg-quickstart-powershell.md). Windows Güvenlik duvarı kurallarıyla olduğu gibi TCP bağlantı noktası 27017 MongoDB sanal makinenizin sanal ağ arabirimine izin verin.
+Gerekirse, mevcut Azure sanal ağ alt ağının dışından MongoDB erişimine izin vermek için bir ağ güvenlik grubu kuralı oluşturun. [Azure Portal](nsg-quickstart-portal.md) veya [Azure PowerShell](nsg-quickstart-powershell.md)kullanarak ağ güvenlik grubu kurallarını oluşturabilirsiniz. Windows güvenlik duvarı kurallarında olduğu gibi, MongoDB VM 'nizin sanal ağ arabirimine 27017 numaralı TCP bağlantı noktasına izin verin.
 
 > [!NOTE]
-> TCP bağlantı noktası 27017 MongoDB tarafından kullanılan varsayılan bağlantı noktasıdır. Bu bağlantı noktasını kullanarak değiştirebileceğiniz `--port` başlatma sırasında parametre `mongod.exe` el ile veya bir hizmet. Bağlantı noktasını değiştirirseniz, önceki adımda Windows Güvenlik Duvarı ve ağ güvenlik grubu kuralları güncelleştirdiğinizden emin olun.
+> TCP bağlantı noktası 27017, MongoDB tarafından kullanılan varsayılan bağlantı noktasıdır. `mongod.exe` el ile veya bir hizmetten başlatırken `--port` parametresini kullanarak bu bağlantı noktasını değiştirebilirsiniz. Bağlantı noktasını değiştirirseniz, yukarıdaki adımlarda Windows Güvenlik Duvarı ve ağ güvenlik grubu kurallarını güncelleştirdiğinizden emin olun.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu öğreticide, yükleme ve Windows sanal makinenizde MongoDB yapılandırma öğrendiniz. Gelişmiş konular, izleyerek MongoDB Windows sanal makinenizde, artık erişebilirsiniz [MongoDB belgelerine](https://docs.mongodb.com/manual/).
+Bu öğreticide, Windows sanal makinenizde MongoDB 'yi yüklemeyi ve yapılandırmayı öğrendiniz. Artık [MongoDB belgelerindeki](https://docs.mongodb.com/manual/)gelişmiş konuları IZLEYEREK Windows sanal makinenizde MongoDB 'ye erişebilirsiniz.
 

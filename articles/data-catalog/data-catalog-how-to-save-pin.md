@@ -1,80 +1,78 @@
 ---
-title: Azure veri Kataloğu'nda arama ve PIN veri varlıklarını kaydetme
-description: Nasıl yapılır makalesi veri kaynakları ve daha sonra kullanmak için veri varlıklarını kaydetme, Azure veri Kataloğu'teki vurgulama.
-services: data-catalog
+title: Azure Veri Kataloğu 'nda aramaları kaydetme ve veri varlıklarını sabitleme
+description: Azure Veri Kataloğu 'nda, daha sonra kullanılmak üzere veri kaynaklarını ve veri varlıklarını kaydetmek için nasıl yapılır makalesi.
 author: JasonWHowell
 ms.author: jasonh
-ms.assetid: 6bd00a81-820d-4b7c-91fa-ab09e575474c
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 01/18/2018
-ms.openlocfilehash: df3220ddb80ebc329ed6b0024ca4eefd2bdfb321
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/01/2019
+ms.openlocfilehash: a8545939fd027989519e0f7a161f750ec676749a
+ms.sourcegitcommit: 62bd5acd62418518d5991b73a16dca61d7430634
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61002096"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68976813"
 ---
-# <a name="save-searches-and-pin-data-assets-in-azure-data-catalog"></a>Azure veri Kataloğu'nda arama ve PIN veri varlıklarını kaydetme
+# <a name="save-searches-and-pin-data-assets-in-azure-data-catalog"></a>Azure Veri Kataloğu 'nda aramaları kaydetme ve veri varlıklarını sabitleme
 ## <a name="introduction"></a>Giriş
-Azure veri Kataloğu, veri kaynağı bulma için özellikleri sağlar. Hızlı bir şekilde, aramak ve eldeki iş için doğru verileri bulmayı kolaylaştıran Kataloğu veri kaynakları bulmak ve kullanım amaçları anlamak için filtreleyin.
+Azure Veri Kataloğu, veri kaynağı bulma için yetenekler sağlar. Veri kaynaklarını bulmak ve amaçlanan amacını anlamak için kataloğu hızla arayıp filtreleyerek işle ilgili doğru verileri daha kolay bir şekilde bulmanızı sağlayabilirsiniz.
 
-Ancak, düzenli olarak aynı verilerle çalışmak ihtiyacım olursa ne? Ve ne sizin ve diğer kullanıcıların düzenli olarak, aynı veri kaynaklarına kataloğunda katkıda? Bu durumda, aynı aramaları tekrar tekrar vermek zorunda kalmadan verimsiz olabilir. Bu, burada kayıtlı arama ve sabitlenmiş veri varlıklarını yardımcı olur.
+Ancak aynı verilerle düzenli olarak çalışmanız gerekiyorsa ne olacak? Ve siz ve diğer kullanıcılarınız, bilgilerinizi katalogdaki aynı veri kaynaklarına düzenli olarak katkıda bulunursa ne olacak? Bu durumlarda, aynı aramaları sürekli olarak vermek, verimsiz olabilir. Bu, kayıtlı aramanın ve sabitlenmiş veri varlıklarının yardımcı olduğu yerdir.
 
 ## <a name="saved-searches"></a>Kayıtlı aramalar
-Veri Kataloğu'nda kayıtlı bir aramayı bir yeniden kullanılabilir, kullanıcı başına arama tanımıdır. Arama terimleri, etiketler ve diğer filtreler dahil olmak üzere, bir arama tanımlayabilir ve kaydedin. Daha sonra kendi arama ölçütleriyle eşleşen herhangi bir veri varlıklarını döndürmek için kayıtlı arama tanımı yeniden çalıştırabilirsiniz.
+Veri kataloğunda kaydedilmiş bir arama, yeniden kullanılabilir, Kullanıcı başına arama tanımıdır. Arama terimleri, Etiketler ve diğer filtreler dahil olmak üzere bir arama tanımlayabilir ve ardından kaydedebilirsiniz. Daha sonra, arama ölçütleriyle eşleşen herhangi bir veri varlığı döndürmek için kaydedilmiş arama tanımını yeniden çalıştırabilirsiniz.
 
-### <a name="create-a-saved-search"></a>Kaydedilmiş arama oluştur
-Kayıtlı bir aramayı oluşturmak için aşağıdakileri yapın:
-1. Azure veri Kataloğu portalında içinde **geçerli aramayı** penceresinde tıklayın **Kaydet**. 
+### <a name="create-a-saved-search"></a>Kayıtlı bir arama oluşturun
+Kayıtlı bir arama oluşturmak için aşağıdakileri yapın:
+1. Azure Veri Kataloğu portalında, **geçerli arama** penceresinde **Kaydet**' e tıklayın. 
 
     ![Geçerli arama ayarları kaydetme bağlantısı](./media/data-catalog-how-to-save-pin/01-save-option.png) 
 
-2. Yeniden kullanmak ve ardından istediğiniz arama ölçütlerini girin **Kaydet**.
+2. Yeniden kullanmak istediğiniz arama ölçütünü girin ve **Kaydet**' e tıklayın.
 
-    ![Kayıtlı arama adı geçerli arama ayarları](./media/data-catalog-how-to-save-pin/02-name.png)
+    ![Geçerli arama ayarları kayıtlı arama adı](./media/data-catalog-how-to-save-pin/02-name.png)
 
-3. İstendiğinde, kayıtlı arama için bir ad girin. Anlamlı bir ad seçin ve bu arama sonucunda döndürülen veri varlıkları açıklar.
+3. İstendiğinde, kayıtlı arama için bir ad girin. Anlamlı olan ve arama tarafından döndürülecek veri varlıklarını açıklayan bir ad seçin.
 
-### <a name="manage-saved-searches"></a>Kaydedilmiş aramaları Yönet
-Bir veya daha fazla arama kaydettikten sonra bir **kayıtlı aramalar** seçenek altında görüntülenen **geçerli aramayı** kutusu. Tüm kayıtlı aramalar, listenin genişletildiğinde görüntülenir.
+### <a name="manage-saved-searches"></a>Kayıtlı aramaları yönetme
+Bir veya daha fazla aramayı kaydettikten sonra, **geçerli arama** kutusunun altında **kaydedilmiş aramalar** seçeneği görüntülenir. Liste genişletildiğinde, tüm kayıtlı aramalar görüntülenir.
 
- ![Kayıtlı aramalar listesi](./media/data-catalog-how-to-save-pin/03-list.png)
+ ![Veri Kataloğu-kayıtlı aramaların listesi](./media/data-catalog-how-to-save-pin/03-list.png)
 
 Aşağıdakilerden birini yapın:
 
-* Bir arama yürütmek için kayıtlı bir aramayı listeden seçin.
+* Bir arama yürütmek için listede bir kayıtlı arama seçin.
 
-* Yönetim seçenekleri için kayıtlı bir aramayı bir listesini görüntülemek için arama adının yanındaki aşağı oka tıklayın.
+* Kayıtlı bir arama için yönetim seçeneklerinin bir listesini görüntülemek için arama adının yanındaki aşağı oka tıklayın.
 
-    ![Kayıtlı aramalar yönetimi seçenekleri](./media/data-catalog-how-to-save-pin/04-managing.png)
+    ![Kayıtlı aramaları yönetme seçenekleri](./media/data-catalog-how-to-save-pin/04-managing.png)
 
-* Kayıtlı arama için yeni bir ad girmeyi seçin **Yeniden Adlandır**. Arama tanımı değiştirilmez.
+* Kayıtlı arama için yeni bir ad girmek üzere **Yeniden Adlandır**' ı seçin. Arama tanımı değiştirilmez.
 
-* Kayıtlı arama listenizden kaldırmak için seçin **Sil**ve ardından silme işlemini onaylayın.
+* Kayıtlı aramayı listenizden kaldırmak için **Sil**' i seçin ve sonra silmeyi onaylayın.
 
-* Kayıtlı arama varsayılan arama olarak işaretlemek için seçin **varsayılan olarak Kaydet**. Azure veri Kataloğu giriş sayfasından bir "boş" araması yaptığınızda, varsayılan arama yürütülür. Ayrıca, varsayılan arama işaretlenmiş arama üst kısmında görüntülenir **kayıtlı aramalar** listesi.
+* Kayıtlı aramayı varsayılan arama olarak işaretlemek için **Varsayılan olarak kaydet**' i seçin. Azure Veri Kataloğu giriş sayfasından "boş" arama gerçekleştirirseniz, varsayılan aramanız yürütülür. Ayrıca, varsayılan arama olarak işaretlenen arama, **kayıtlı aramalar** listesinin en üstünde görüntülenir.
 
-### <a name="organizational-saved-searches"></a>Kuruluş kayıtlı aramalar
-Kuruluşunuzdaki tüm kullanıcı aramaları, kendi kullanmak için kaydedebilirsiniz. Veri Kataloğu yöneticilerinin kuruluştaki tüm kullanıcılar için aramaları da kaydedebilirsiniz. Yöneticiler, bir arama kaydettiğinizde, bunlar eklemediğiniz bir **şirket içinde paylaşımı** seçeneği. Bu seçeneğin belirlenmesi, kuruluştaki tüm kullanıcılar için kayıtlı arama paylaşır.
+### <a name="organizational-saved-searches"></a>Kurumsal kayıtlı aramalar
+Kuruluşunuzdaki tüm kullanıcılar, kendi kullanımları için aramaları kaydedebilir. Veri Kataloğu yöneticileri Ayrıca, kuruluştaki tüm kullanıcılar için aramaları kaydedebilir. Yöneticiler bir arama kaydederken, **Şirket seçeneği içinde bir paylaşımda** sunulur. Bu seçeneğin belirlenmesi, kuruluştaki tüm kullanıcılar için kayıtlı aramayı paylaşır.
 
- ![Kuruluş kayıtlı aramalar](./media/data-catalog-how-to-save-pin/08-organizational-saved-search.png)
+ ![Veri Kataloğu-kurumsal kayıtlı aramalar](./media/data-catalog-how-to-save-pin/08-organizational-saved-search.png)
 
 ## <a name="pinned-data-assets"></a>Sabitlenmiş veri varlıkları
-Kayıtlı aramalar ile kaydedin ve yeniden arama tanımları. Arama tarafından döndürülen veri varlıklarını Kataloğu değişiklik içeriğini zaman içinde değişebilir. Veri varlıklarını sabitleme, bir arama kullanmak zorunda kalmadan erişim daha kolay yapmak için belirli veri varlıklarını açıkça ayırt edebilirsiniz.
+Kayıtlı aramalarla arama tanımlarını kaydedebilir ve yeniden kullanabilirsiniz. Arama tarafından döndürülen veri varlıkları, kataloğun içeriği değiştikçe zaman içinde değişebilir. Veri varlıklarını sabitlemeyi yaparken, bir arama kullanmaya gerek kalmadan kolayca erişim sağlamak için belirli veri varlıklarını açıkça tanımlayabilirsiniz.
 
-Bir veri varlığına sabitleme oldukça basittir. Veri varlığı sabitlenmiş listenize eklemek için tıklamanız yeterlidir **PIN** simgesi. Simge varlık kutucuk, kutucuk görünümü ve Azure veri Kataloğu portalında liste görünümünde en soldaki sütunda köşesinde görüntülenir.
+Veri varlığını sabitleme basittir. Veri varlığını sabitlenmiş listenize eklemek için **sabitle** simgesine tıklamanız yeterlidir. Simge, kutucuk görünümündeki varlık kutucuğunun köşesinde ve Azure Veri Kataloğu portalındaki liste görünümünde bulunan en soldaki sütunda görüntülenir.
 
-![Veri varlığı Raptiye simgesi](./media/data-catalog-how-to-save-pin/05-pinning.png)
+![Veri Kataloğu-veri-varlık PIN simgesi](./media/data-catalog-how-to-save-pin/05-pinning.png)
 
-Bir veri varlığına unpinning eşit oldukça basittir. Tıklamanız yeterlidir **sabitleme** simgesi seçili varlık için ayarı değiştirmek için.
+Veri varlığının sabitlenmesi eşit ölçüde basittir. Seçili varlık için ayarı değiştirmek üzere **Ayır** simgesine tıklamanız yeterlidir.
 
-![Veri varlığı Kaldır simgesi](./media/data-catalog-how-to-save-pin/06-unpinning.png)
+![Veri Kataloğu-veri varlık sabitleme simgesi](./media/data-catalog-how-to-save-pin/06-unpinning.png)
 
-## <a name="the-my-assets-section"></a>My varlıklar bölüm
-Veri Kataloğu portalı giriş sayfasına içeren bir **My varlıklar** geçerli kullanıcıya ilgi varlıklarını görüntüler bölümü. Bu bölümde, her iki Sabitlenen varlıklar içerir ve aramalar.
+## <a name="the-my-assets-section"></a>Varlıklarım bölümü
+Veri Kataloğu Portalı giriş sayfası, geçerli kullanıcıya ilgilendiğiniz varlıkları görüntüleyen **varlıklarım** bölümünü içerir. Bu bölüm hem sabitlenmiş varlıkları hem de kaydedilmiş aramaları içerir.
 
-![Giriş sayfasında My varlıklar bölüm](./media/data-catalog-how-to-save-pin/07-my-assets.png)
+![Giriş sayfasındaki varlıklarım bölümü](./media/data-catalog-how-to-save-pin/07-my-assets.png)
 
 ## <a name="summary"></a>Özet
-Azure veri Kataloğu, siz ve diğer kuruluş üyeleri için verileri ve bununla çalışmaya daha fazla zaman aramaya zaman ayırmasına ihtiyacınız veri kaynaklarını bulmak daha kolay hale getirmek özellikleri sağlar. Kayıtlı aramalar ve kullanıcılar ile sürekli çalıştıkları veri kaynaklarını kolayca belirleyebilmeniz varlıklar bu temel özelliğe derleme verilerinin sabitlenebilir.
+Azure Veri Kataloğu, ihtiyacınız olan veri kaynaklarını bulmayı kolaylaştıran yetenekler sağlar. böylece siz ve diğer kuruluş üyeleri, veri ararken daha az zaman harcayabilir ve bunlarla daha fazla süre çalışabilir. Kayıtlı aramalar ve sabitlenmiş veri varlıkları, kullanıcıların sürekli olarak çalıştıkları veri kaynaklarını kolayca belirleyebilmeleri için bu temel yeteneklere sahiptir.

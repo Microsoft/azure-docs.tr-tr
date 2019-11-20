@@ -1,57 +1,56 @@
 ---
-title: Oluşturma ve Azure üzerinde Jupyter Notebook kopyalayın
-description: Azure not defterleri projeler not defterlerini ve yeni oluştur veya başka bir kaynaktan kopyalama ilişkili dosyaları koleksiyonu yönetin.
+title: Azure 'da Jupyıter not defterlerini oluşturma ve kopyalama
+description: Azure Notebooks projeler, başka bir kaynaktan yeni veya kopya oluşturabileceğiniz bir not defteri ve ilgili dosya koleksiyonunu yönetir.
 services: app-service
 documentationcenter: ''
 author: kraigb
-manager: douge
+manager: barbkess
 ms.assetid: 9b6a49e2-1d71-4c0b-9e5d-16e059427e38
 ms.service: azure-notebooks
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 02/25/2019
 ms.author: kraigb
-ms.openlocfilehash: 0ee0c7162e26b875c74796b6d5379b414981e2d5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3e0c49d1141d976558ece325baaa99fc9981275e
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60237491"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73496707"
 ---
 # <a name="create-and-clone-projects"></a>Projeleri oluşturma ve kopyalama
 
-Azure not defterleri ilgili dosyaları ve Jupyter Notebook olarak adlandırılan mantıksal gruplar halinde düzenler *projeleri*. Bir kapsayıcı olarak ilk proje oluşturma sonra oluşturduğunuzda veya diğer proje dosyalarının yanı sıra bir klasördeki bir veya daha fazla not defterlerini kopyalayın. (Bu işlem gösterilmiştir [öğretici](tutorial-create-run-jupyter-notebook.md).)
+Azure Notebooks Jupyıter not defterlerinizi ve ilgili dosyaları *Projeler*adlı mantıksal gruplar halinde düzenler. Önce bir kapsayıcı olarak bir proje oluşturun, ardından diğer proje dosyalarının yanı sıra bir klasör içinde bir veya daha fazla not defteri oluşturun veya kopyalayın. (Bu işlem [öğreticide](tutorial-create-run-jupyter-notebook.md)gösterilmiştir.)
 
-Bir proje, meta verileri ve özel kurulum adımları ve paket yükleme dahil olmak üzere çalıştırmak, hangi Not sunucuyu etkileyen diğer yapılandırma ayarlarını da korur. Daha fazla bilgi için [yönetme ve projeleri yapılandırma](configure-manage-azure-notebooks-projects.md).
+Proje ayrıca, özel kurulum adımları ve paket yüklemesi dahil olmak üzere dizüstü bilgisayarların çalıştığı sunucuyu etkileyen meta verileri ve diğer yapılandırma ayarlarını da korur. Daha fazla bilgi için bkz. [projeleri yönetme ve yapılandırma](configure-manage-azure-notebooks-projects.md).
 
 ## <a name="use-the-my-projects-dashboard"></a>Projelerim panosunu kullanma
 
-**Projelerim** Panosu'nda `https://notebooks.azure.com/<userID>/projects` burada görüntüleyin, yönetin ve projeleri oluşturma:
+`https://notebooks.azure.com/<userID>/projects` konumundaki **Projelerim** panonuz, projeleri görüntülediğiniz, yönettiğiniz ve oluşturduğunuz yerdir:
 
-[![Azure not defterlerinde projeleri Panom](media/my-projects-dashboard.png)](media/my-projects-dashboard.png#lightbox)
+[Azure Notebooks içindeki projelerim panosunu ![](media/my-projects-dashboard.png)](media/my-projects-dashboard.png#lightbox)
 
-Panoda yapabilecekleriniz kullanıcı kimliği sahip bir hesapla oturum mi oturum açmadıysanız bağlıdır:
+Panoda yapabilecekleriniz, Kullanıcı KIMLIĞININ sahibi olan hesapla oturum açmış olmanıza bağlı olarak değişir:
 
 | Komut | Kimler kullanabilir? | Açıklama |
 | --- | --- | --- |
-| **Çalıştırma** | Sahip | Project server başlar ve Jupyter'de proje klasörünü açar. (Daha yaygın olarak, ilk olarak bir proje klasörüne gidin ve sonra bir not defteri oradan başlatın.) |
-| **İndir** | Herkes | Seçili projenin bir kopyasını ZIP dosyası olarak indirir. |
-| **Paylaş** | Herkes | Paylaşım açılan menüsü üzerinden Seçili projeye bir URL alabilir, sosyal medyada paylaşın, URL içeren bir e-posta gönderin ve almak için hem HTML veya Markdown kodu ile bir "başlatma Not" rozet görüntüler (bkz [başlatma rozet elde](#obtain-a-launch-badge)) URL ile. |
-| **Silme** | Sahip | Seçili proje siler. Bu işlem geri alınamaz. |
-| **Terminal** | Sahip | Project server başlar ve ardından bu sunucu için terminal bash ile yeni bir tarayıcı penceresi açılır. |
-| **+ Yeni Proje** | Sahip | Yeni bir proje oluşturur. Bkz: [yeni bir proje oluşturma](#create-a-new-project). |
-| **GitHub deposunu karşıya yükleme** | Sahip | Bir projeyi Github'dan içeri aktarır. [Bir projeyi Github'dan alma](#import-a-project-from-github). |
-| **Kopya** | Herkes | Seçilen proje kendi hesabına kopyalar. Oturum imzalamanızı ister. Bkz: [bir projesini kopyalama](#clone-a-project). |
+| **Çalışmaz** | Sahip | Proje sunucusunu başlatır ve proje klasörünü Jupyıter içinde açar. (Daha yaygın olarak, önce bir proje klasörüne giderek sonra buradan bir not defteri başlatabilirsiniz.) |
+| **İndir** | Kişiyle | Seçili projenin bir kopyasını ZIP dosyası olarak indirir. |
+| **Paylaş** | Kişiyle | Seçilen bir projenin URL 'sini elde edebilir, sosyal medya paylaşabilir, URL ile bir e-posta gönderebilir ve bir "başlatma Not defteri" rozeti (bkz. [bir başlatma rozet alma](#obtain-a-launch-badge)) ile birlikte IÇIN hem HTML hem de markı kodu elde edebilirsiniz. |
+| **Silme** | Sahip | Seçilen projeyi siler. Bu işlem geri alınamaz. |
+| **Den** | Sahip | Proje sunucusunu başlatır ve ardından bu sunucu için bash terminaliyle yeni bir tarayıcı penceresi açar. |
+| **+ Yeni proje** | Sahip | Yeni bir proje oluşturur. Bkz. [Yeni proje oluşturma](#create-a-new-project). |
+| **GitHub deposunu karşıya yükle** | Sahip | GitHub 'dan bir projeyi içeri aktarır. [GitHub 'dan bir projeyi Içeri aktarın](#import-a-project-from-github). |
+| **Oluşturulacak** | Kişiyle | Seçili bir projeyi kendi hesabınıza kopyalar. Henüz yoksa oturum açmanızı ister. Bkz. [projeyi kopyalama](#clone-a-project). |
 
-### <a name="obtain-a-launch-badge"></a>Başlatma rozet alın
+### <a name="obtain-a-launch-badge"></a>Başlatma rozetini edinin
 
-Kullanırken **paylaşımı** seçin ve komut **ekleme** sekmesi, HTML kod veya "dizüstü başlatma" rozet oluşturan Markdown kopyalayabilir:
+**Share** komutunu kullandığınızda ve **ekleme** sekmesini seçtiğinizde, "Not defteri başlatma" rozetini oluşturan HTML kodunu veya Marku 'yi kopyalayabilirsiniz:
 
-![Not Defteri rozet başlatın](https://notebooks.azure.com/launch.png)
+![Not defteri rozetini Başlat](https://notebooks.azure.com/launch.png)
 
-Bir Azure not defterleri projesi yoksa, uygun kullanıcı adı ve depo adları değiştirerek aşağıdaki şablonlarını kullanarak doğrudan Github'dan klonlar bir bağlantı oluşturabilirsiniz:
+Azure Notebooks projeniz yoksa, aşağıdaki şablonları kullanarak doğrudan GitHub 'dan klonların bulunduğu bir bağlantı oluşturabilirsiniz, uygun Kullanıcı adı ve depo adlarını değiştirebilirsiniz:
 
 ```html
 <a href="https://notebooks.azure.com/import/gh/<GitHub_username>/<repository_name>"><img src="https://notebooks.azure.com/launch.png" /></a>
@@ -63,67 +62,67 @@ Bir Azure not defterleri projesi yoksa, uygun kullanıcı adı ve depo adları d
 
 ## <a name="create-a-new-project"></a>Yeni bir proje oluşturma
 
-Kullanırken **+ yeni proje** komutu, Azure not defterleri görüntüler bir **yeni proje oluştur** açılır. Bu açılan penceresinde, aşağıdaki bilgileri girin ve ardından **Oluştur**:
+**+ Yeni proje** komutunu kullandığınızda Azure Notebooks **Yeni bir proje oluştur** açılır penceresi görüntüler. Bu açılan pencerede, aşağıdaki bilgileri girin ve ardından **Oluştur**' u seçin:
 
 | Alan | Açıklama |
 | --- | --- |
-| Proje adı | Azure not defterlerini görüntüleme amacıyla kullanır. projeniz için bir kolay ad. Örneğin, "Not Defteri Projem". |
-| Proje Kimliği | Bir proje paylaşmak için kullandığınız URL'nin bir parçası haline gelir özel bir tanımlayıcı (form `https://notebooks.azure.com/<user_id>/projects/<project_id>`). Bu kimlik yalnızca harf, rakam ve kısa çizgiler kullanabilirsiniz, 30 karakterle sınırlıdır ve olamaz bir [proje kimliği ayrılmış](#reserved-project-ids). Ne kullanılacağını emin değilseniz, genel bir kural projenizin adına bir küçük harfli sürümünü burada "my-Not-(gerekirse, uzunluk sınırını uyacak şekilde kesildi) proje" gibi kısa çizgi içine boşluk açık kullanmaktır. |
-| Genel | Varsa ayarlama, proje erişmek için bağlantıya kimseyle sağlar. Özel bir proje oluştururken, bu seçeneği temizleyin. |
-| Bu Benioku projeyle Başlat | Varsa ayarlayın, bir varsayılan oluşturur *README.md* proje dosyasında. A *README.md* dosyasıdır projeniz için belgeleri sağlarsınız isterseniz. |
+| Proje adı | Projeniz için Azure Notebooks görüntüleme amacıyla kullanılan kolay bir ad. Örneğin, "Not Defterim projem". |
+| Proje Kimliği | Bir projeyi paylaşmak için kullandığınız URL 'nin bir parçası haline gelen özel bir tanımlayıcı (form `https://notebooks.azure.com/<user_id>/projects/<project_id>`). Bu KIMLIK yalnızca harf, rakam ve kısa çizgi kullanabilir, 30 karakterle sınırlıdır ve [ayrılmış bir proje kimliği](#reserved-project-ids)olamaz. Ne kullanacağınızdan emin değilseniz, yaygın olarak kullanılan bir kural, "My-Not-Project" (uzunluk sınırına uyması gerekirse kesildi) gibi boşlukların tire içine açık olduğu, proje adınızın küçük harfli bir sürümünü kullanmaktır. |
+| Genel | Ayarlanırsa, bağlantıya sahip olan kişilerin projeye erişmesine izin verir. Özel bir proje oluştururken, bu seçeneği temizleyin. |
+| Bu projeyi bir BENIOKU ile Başlat | Ayarlanırsa, projede varsayılan bir *README.MD* dosyası oluşturur. İsterseniz, projeniz için belgeler sağladığınız bir *README.MD* dosyası. |
 
 ### <a name="reserved-project-ids"></a>Ayrılmış proje kimlikleri
 
-Aşağıdaki ayrılmış sözcükler başlarına proje kimlikleri kullanılamaz. Bu ayrılmış sözcükler ancak olabilir daha uzun proje kimlikleri bir parçası olarak kullanılır.
+Aşağıdaki ayrılmış sözcükler kendileri proje kimliği olarak kullanılamaz. Bununla birlikte, bu ayrılmış sözcükler, daha uzun proje kimliklerinin bir parçası olarak kullanılabilir.
 
 | | | | | | |
 | --- | --- | --- | --- | --- | --- |
-| hakkında | account | Yönetim | api | blogu | sınıf |
-| content | pano | Keşfedin | SSS | Yardım | html |
-| Giriş | içeri aktarma | Kitaplık | yönetim | yeni | Not Defteri |
-| Not Defterleri | PDF | önizleme | Fiyatlandırma | Profili | search |
-| status | Destek | test | | | |
+| bilgi | account | yönetimine | API | lenemeyen | ders |
+| content | pano | Explorer | SSS | Yardım | html |
+| sayfa | Aktarmaya | Kitaplığı | yönetim | yeni | Mini |
+| bilgisayarların | belgesini | önizleme | Fiyat | Profilinizi | aramanız |
+| status | Support | test | | | |
 
-Bu sözcükler birini bir proje kimliği kullanmayı denerseniz **yeni proje oluştur** ve **proje ayarları** açılan pencereler gösterir, "kitaplık kimliği ayrılmış bir tanımlayıcı değil."
+Bu sözcüklerden birini proje KIMLIĞI olarak kullanmaya çalışırsanız, **Yeni proje oluştur** ve **proje ayarları** açılır pencere sayısı "kitaplık kimliği ayrılmış bir tanımlayıcıdır."
 
-Bir proje kimliği de bir projenin URL'SİNİN bir parçası olduğundan, ad engelleyici yazılım "Duyurusu." gibi bazı anahtar sözcükler kullanımını engelleyebilir Bu gibi durumlarda, farklı bir sözcük proje kimliği kullanın.
+Proje KIMLIĞI aynı zamanda bir projenin URL 'sinin parçası olduğundan, ad engelleyici yazılım "duyurusu" gibi belirli anahtar sözcüklerin kullanımını engelleyebilir. Böyle durumlarda, proje KIMLIĞINDE farklı bir kelime kullanın.
 
-## <a name="import-a-project-from-github"></a>Bir projeyi Github'dan alma
+## <a name="import-a-project-from-github"></a>GitHub 'dan proje içeri aktarma
 
-Tüm genel bir GitHub deposuna tüm veriler dahil olmak üzere bir proje olarak kolayca içeri aktarabilirsiniz ve *README.md* dosyaları. Kullanım **karşıya GitHub deposunu** komutu, açılan aşağıdaki ayrıntıları sağlayın ve ardından seçin **alma**:
+Tüm genel GitHub deposunu, herhangi bir veri ve *README.MD* dosyası dahil olmak üzere proje olarak kolayca içeri aktarabilirsiniz. **GitHub depoyu karşıya yükle** komutunu kullanın, açılan pencerede aşağıdaki ayrıntıları sağlayın ve **içeri aktar**' ı seçin:
 
 | Alan | Açıklama |
 | --- | --- |
-| GitHub deposu | Github.com kaynak depoda adı. Örneğin, Azure Bilişsel hizmetler için Jupyter not defterlerini kopyalamak için [ https://github.com/Microsoft/cognitive-services-notebooks ](https://github.com/Microsoft/cognitive-services-notebooks), "Microsoft/bilişsel-services-dizüstü bilgisayarlar" girin.  |
-| Yinelemeli olarak kopyalama | GitHub depoları, birden çok alt deposu içerebilir. Üst deponun ve tüm alt öğelerini kopyalamak istiyorsanız bu seçeneği ayarlayın. Çok sayıda alt öğeleri bir depo için mümkün olduğu için bu seçeneği temizleyin ihtiyaç duymadıkça bırakın. |
-| Proje adı | Azure not defterlerini görüntüleme amacıyla kullanır. projeniz için bir kolay ad. |
-| Proje Kimliği | Bir proje paylaşmak için kullandığınız URL'nin bir parçası haline gelir özel bir tanımlayıcı (form `https://notebooks.azure.com/<user_id>/projects/<project_id>`). Bu kimlik yalnızca harf, rakam ve kısa çizgiler kullanabilirsiniz, 30 karakterle sınırlıdır ve olamaz bir [proje kimliği ayrılmış](#reserved-project-ids). Ne kullanılacağını emin değilseniz, genel bir kural projenizin adına bir küçük harfli sürümünü burada "my-Not-(gerekirse, uzunluk sınırını uyacak şekilde kesildi) proje" gibi kısa çizgi içine boşluk açık kullanmaktır. |
-| Genel | Varsa ayarlama, proje erişmek için bağlantıya kimseyle sağlar. Özel bir proje oluştururken, bu seçeneği temizleyin. |
+| GitHub deposu | Github.com üzerindeki kaynak deponun adı. Örneğin, Azure bilişsel hizmetler için Jupyıter not defterlerini [https://github.com/Microsoft/cognitive-services-notebooks](https://github.com/Microsoft/cognitive-services-notebooks)kopyalamak için, "Microsoft/bilişsel hizmetler-not defterleri" yazın.  |
+| Yinelemeli olarak Kopyala | GitHub depoları birden çok alt depo içerebilir. Üst depoyu ve tüm alt öğelerini kopyalamak istiyorsanız bu seçeneği ayarlayın. Bir deponun çok sayıda alt öğesi olması mümkün olduğundan, ihtiyacınız olduğunu bilmiyorsanız bu seçeneği açık bırakın. |
+| Proje adı | Projeniz için Azure Notebooks görüntüleme amacıyla kullanılan kolay bir ad. |
+| Proje Kimliği | Bir projeyi paylaşmak için kullandığınız URL 'nin bir parçası haline gelen özel bir tanımlayıcı (form `https://notebooks.azure.com/<user_id>/projects/<project_id>`). Bu KIMLIK yalnızca harf, rakam ve kısa çizgi kullanabilir, 30 karakterle sınırlıdır ve [ayrılmış bir proje kimliği](#reserved-project-ids)olamaz. Ne kullanacağınızdan emin değilseniz, yaygın olarak kullanılan bir kural, "My-Not-Project" (uzunluk sınırına uyması gerekirse kesildi) gibi boşlukların tire içine açık olduğu, proje adınızın küçük harfli bir sürümünü kullanmaktır. |
+| Genel | Ayarlanırsa, bağlantıya sahip olan kişilerin projeye erişmesine izin verir. Özel bir proje oluştururken, bu seçeneği temizleyin. |
 
-Bir depo Github'dan alma geçmişini alır. Yeni değişiklikleri, Github'dan değişiklikleri çekme ve benzeri terminalden standart Git komutlarını kullanabilirsiniz.
+Bir depoyu GitHub 'dan içeri aktarmak Ayrıca geçmişini içeri aktarır. Yeni değişiklikleri yürütmek, GitHub 'dan değişiklikleri çekmek vb. için terminaldeki standart git komutlarını kullanabilirsiniz.
 
-## <a name="clone-a-project"></a>Bir projesini kopyalama
+## <a name="clone-a-project"></a>Proje kopyalama
 
-Kopyalama, ardından çalıştırın ve herhangi bir not defteri veya diğer proje dosyasında değişiklik kendi hesabınız mevcut bir projeyi bir kopyasını oluşturur. Hangi deneyleri veya diğer iş özgün proje bozmadan bunu kendi projeleriniz kopyalarını için kopyalama de kullanabilirsiniz.
+Kopyalama, var olan bir projenin bir kopyasını kendi hesabınızda oluşturur. buradan, bu durumda herhangi bir not defteri veya projedeki diğer bir dosyayı çalıştırabilir ve değiştirebilirsiniz. Ayrıca, orijinal projeyi rahatsız etmeden denemeleri veya başka bir iş yaptığınız projelerin kopyalarını oluşturmak için kopyalamayı da kullanabilirsiniz.
 
-Bir proje kopyalamak için:
+Bir projeyi kopyalamak için:
 
-1. Üzerinde **Projelerim** Pano, istenen proje sağ tıklayıp **kopya** (klavye kısayolu: c).
+1. **Projelerim** panosunda, istenen projeye sağ tıklayın ve **Kopyala** ' yı (klavye kısayolu: c) seçin.
 
     ![Proje bağlam menüsünde kopyalama komutu](media/clone-command.png)
 
-1. İçinde **kopya proje** açılan, bir kopya için adı ve kimliği girin ve kopya genel olup olmadığını belirtin. Bu ayarları aynı olan bir [yeni proje](#create-a-new-project).
+1. **Projeyi Kopyala** açılır penceresinde, kopya için bir ad ve kimlik girin ve kopyanın genel olup olmadığını belirtin. Bu ayarlar, [Yeni bir proje](#create-a-new-project)için ile aynıdır.
 
-    ![Kopya proje açılan menüsü](media/clone-project.png)
+    ![Projeyi Kopyala açılan penceresi](media/clone-project.png)
 
-1. Seçtikten sonra **kopya** Kopyala düğmesini Azure not defterleri gider.
+1. **Kopyala düğmesini seçtikten** sonra Azure Notebooks doğrudan kopyaya gider.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Örnek Not Defterleri keşfedin](azure-notebooks-samples.md)
-- [Nasıl yapılır: Yapılandırma ve projeleri yönetme](configure-manage-azure-notebooks-projects.md)
-- [Nasıl yapılır: İçinde bir not defteri paketleri yükleme](install-packages-jupyter-notebook.md)
-- [Nasıl yapılır: Mevcut bir slayt gösterisi](present-jupyter-notebooks-slideshow.md)
-- [Nasıl yapılır: Veri dosyaları ile çalışma](work-with-project-data-files.md)
-- [Nasıl yapılır: Veri kaynaklarına erişim](access-data-resources-jupyter-notebooks.md)
-- [Nasıl yapılır: Azure Machine Learning Hizmetleri kullanma](use-machine-learning-services-jupyter-notebooks.md)
+- [Örnek not defterlerini keşfet](azure-notebooks-samples.md)
+- [Nasıl yapılır: projeleri yapılandırma ve yönetme](configure-manage-azure-notebooks-projects.md)
+- [Nasıl yapılır: bir not defteri içinden paket yüklemesi](install-packages-jupyter-notebook.md)
+- [Nasıl yapılır: bir slayt gösterisi sunma](present-jupyter-notebooks-slideshow.md)
+- [Nasıl yapılır: veri dosyalarıyla çalışma](work-with-project-data-files.md)
+- [Nasıl yapılır: veri kaynaklarına erişme](access-data-resources-jupyter-notebooks.md)
+- [Nasıl yapılır: Azure Machine Learning kullanma](use-machine-learning-services-jupyter-notebooks.md)

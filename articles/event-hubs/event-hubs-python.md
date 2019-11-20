@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/26/2018
 ms.author: shvija
-ms.openlocfilehash: 88fdaec9e19c082a6fe981dc4d9a0e015335f1e2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0960862da9e65cff4d957e97a7488dc7a245651a
+ms.sourcegitcommit: d060947aae93728169b035fd54beef044dbe9480
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60202982"
+ms.lasthandoff: 08/02/2019
+ms.locfileid: "68742117"
 ---
 # <a name="how-to-use-azure-event-hubs-from-a-python-application"></a>Bir Python uygulamasından Azure Event Hubs'ı kullanma
 Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Daha fazla bilgi için [Event hubs'a giriş](event-hubs-what-is-event-hubs.md). 
@@ -29,10 +29,10 @@ Bu makalede aşağıdaki görevlerin dilinde yazılmış bir uygulamadan nasıl 
 
 - [Olay hub'ına olayları gönderme](#send-events-to-event-hubs)
 - [Bir olay hub'ından olayları alma](#receive-events-from-event-hubs)
-- Olay verileri bir Azure depolama biriminden okuma yakalanır. 
+- Azure depolama 'dan yakalanan olay verilerini okuyun. 
 
 ## <a name="prerequisites"></a>Önkoşullar
-- Bu hızlı başlangıçlara birini izleyerek bir olay hub'ı oluşturun: [Azure portalında](event-hubs-create.md), [Azure CLI](event-hubs-quickstart-cli.md), [Azure PowerShell](event-hubs-quickstart-powershell.md), [Azure Resource Manager şablonu](event-hubs-resource-manager-namespace-event-hub.md). 
+- Şu hızlı başlangıçlardan birini izleyerek bir olay hub 'ı oluşturun: [Azure Portal](event-hubs-create.md), [Azure CLI](event-hubs-quickstart-cli.md), [Azure PowerShell](event-hubs-quickstart-powershell.md), [Azure Resource Manager şablonu](event-hubs-resource-manager-namespace-event-hub.md). 
 - Python 3.4 veya üzerinin yüklü makinenizde.
 
 ## <a name="install-python-package"></a>Python paketini yükle
@@ -94,7 +94,8 @@ Aşağıdaki kod, bir Python uygulamasındaki bir olay hub'ından olay alma işl
 client = EventHubClient(ADDRESS, debug=False, username=USER, password=KEY)
 
 # Add a receiver to the client
-receiver = client.add_receiver(CONSUMER_GROUP, PARTITION, prefetch=5000, offset=OFFSET)
+receiver = client.add_receiver(
+    CONSUMER_GROUP, PARTITION, prefetch=5000, offset=OFFSET)
 
 # Run the Event Hubs client
 client.run()
@@ -112,7 +113,7 @@ client.stop()
 Python'da yazılmış bir uygulamadan bir olay hub'ından olay alma konusunda tam öğretici için bkz: [bu makalede](event-hubs-python-get-started-receive.md)
 
 ## <a name="read-capture-event-data-from-azure-storage"></a>Azure Depolama'dan yakalama olay veri okuma
-Aşağıdaki kod içinde depolanan yakalanan olay verilerini okumak gösterilmiştir bir **Azure blob depolama** bir Python uygulamasında: Etkinleştirme **yakalama** özelliği olay hub'ı yönergeleri izleyerek: [Azure portalını kullanarak Event Hubs yakalama özelliğini etkinleştirme](event-hubs-capture-enable-through-portal.md). Ardından, bazı olayları, kodu test etmeden önce olay hub'ına gönderin. 
+Aşağıdaki kod, bir Python uygulamasından **Azure Blob depolama** alanında depolanan yakalanan olay verilerinin nasıl okunacağını gösterir: Aşağıdaki yönergeleri izleyerek Olay Hub 'ı için **yakalama** özelliğini etkinleştirin: [Azure Portal kullanarak Event Hubs yakalamayı etkinleştirin](event-hubs-capture-enable-through-portal.md). Ardından, bazı olayları, kodu test etmeden önce olay hub'ına gönderin. 
 
 ```python
 import os
@@ -156,13 +157,12 @@ def startProcessing(accountName, key, container):
             os.remove(cleanName)
         block_blob_service.delete_blob(container, blob.name)
 startProcessing('YOUR STORAGE ACCOUNT NAME', 'YOUR KEY', 'capture')
-
 ```
 
 Python'da yazılmış bir uygulamadan Azure blob depolama alanındaki yakalanan Event Hubs verilerini okumak hakkında eksiksiz bir öğretici için bkz: [bu makalede](event-hubs-capture-python.md)
 
 ## <a name="github-samples"></a>GitHub örnekleri
-Daha fazla Python örnekleri bulabilirsiniz [azure-event-hubs-python Git deposu](https://github.com/Azure/azure-event-hubs-python/).
+Daha fazla Python örnekleri bulabilirsiniz [azure-event-hubs-python Git deposu](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/eventhub/azure-eventhubs).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Başlangıç kavramları bölümdeki makaleleri inceleyin [Event Hubs özelliklerine genel bakış](event-hubs-features.md).

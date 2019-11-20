@@ -1,47 +1,58 @@
 ---
-title: Yapılandırma ve Azure Cosmos DB'de yaşam süresi yönetme hakkında bilgi edinin
-description: Yapılandırma ve Azure Cosmos DB'de yaşam süresi yönetme hakkında bilgi edinin
+title: Azure Cosmos DB içinde yaşam süresi yapılandırma ve yönetme hakkında bilgi edinin
+description: Azure Cosmos DB içinde yaşam süresi yapılandırma ve yönetme hakkında bilgi edinin
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: sample
-ms.date: 05/23/2019
+ms.topic: conceptual
+ms.date: 09/28/2019
 ms.author: mjbrown
-ms.openlocfilehash: b5eb57562dac498c0e5bf2960007f52ad1117ac2
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: e36b894ec9c7433bc114145e0de5f519f73486f1
+ms.sourcegitcommit: 80da36d4df7991628fd5a3df4b3aa92d55cc5ade
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "66244761"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71815906"
 ---
-# <a name="configure-time-to-live-in-azure-cosmos-db"></a>Azure Cosmos DB'de yaşam süresi yapılandırma
+# <a name="configure-time-to-live-in-azure-cosmos-db"></a>Azure Cosmos DB yaşam süresi yapılandırma
 
-Azure Cosmos DB, yaşam süresi (TTL) kapsayıcı düzeyinde yapılandırmayı seçtiğinize veya kapsayıcının ayarlanmasından sonra bir öğe düzeyinde kılabilirsiniz. Azure portalı veya dile özgü SDK'larını kullanarak bir kapsayıcı için TTL yapılandırabilirsiniz. Öğe düzeyinde TTL geçersiz kılmalar, SDK'ları kullanılarak yapılandırılabilir.
+Azure Cosmos DB, kapsayıcı düzeyinde yaşam süresi (TTL) yapılandırmayı seçebilir veya kapsayıcının ayarından sonra öğeyi bir öğe düzeyinde geçersiz kılabilirsiniz. Bir kapsayıcı için Azure portal veya dile özgü SDK 'Ları kullanarak TTL yapılandırabilirsiniz. Öğe düzeyi TTL geçersiz kılmaları SDK 'lar kullanılarak yapılandırılabilir.
 
-## <a name="enable-time-to-live-on-a-container-using-azure-portal"></a>Azure portalını kullanarak bir kapsayıcı yaşam süresi etkinleştir
+## <a name="enable-time-to-live-on-a-container-using-azure-portal"></a>Azure portal kullanarak bir kapsayıcıda yaşam süresi etkinleştirme
 
-Süre sonu olmayan bir kapsayıcıda yaşam süresi'ni etkinleştirmek için aşağıdaki adımları kullanın. Öğe düzeyinde geçersiz kılınacak TTL izin vermek için bunu etkinleştirin. TTL saniye için sıfır olmayan bir değer girerek de ayarlayabilirsiniz.
+Zaman aşımı olmadan bir kapsayıcıda canlı kalma süresini etkinleştirmek için aşağıdaki adımları kullanın. TTL 'nin öğe düzeyinde geçersiz kılınmasına izin vermek için bunu etkinleştirin. TTL 'yi saniye için sıfır olmayan bir değer girerek de ayarlayabilirsiniz.
 
-1. [Azure Portal](https://portal.azure.com/) oturum açın.
+1. [Azure Portal](https://portal.azure.com/)’ında oturum açın.
 
-2. Yeni bir Azure Cosmos hesabı oluşturun veya mevcut bir hesabı seçin.
+2. Yeni bir Azure Cosmos hesabı oluşturun veya var olan bir hesabı seçin.
 
-3. Açık **Veri Gezgini** bölmesi.
+3. **Veri Gezgini** bölmesini açın.
 
-4. Var olan bir kapsayıcı seçin, genişletin ve aşağıdaki değerleri değiştirin:
+4. Var olan bir kapsayıcıyı seçin, genişletin ve aşağıdaki değerleri değiştirin:
 
-   * Açık **ölçek ve ayarlar** penceresi.
-   * Altında **ayarı** Bul **yaşam süresi**.
-   * Seçin **(varsayılan) üzerinde** veya **üzerinde** ve TTL değerini ayarlayın
+   * **Ölçek & ayarları** penceresini açın.
+   * Bulma **ayarı** altında, **yaşam süresi**' nin altında.
+   * **Açık (varsayılan)** **seçeneğini belirleyin veya SEÇIN ve bir** TTL değeri ayarlayın
    * Değişiklikleri kaydetmek için **Kaydet**’e tıklayın.
 
-   ![Azure portalında yaşam süresi yapılandırma](./media/how-to-time-to-live/how-to-time-to-live-portal.png)
+   ![Azure portal yaşam süresi yapılandırma](./media/how-to-time-to-live/how-to-time-to-live-portal.png)
 
-## <a name="enable-time-to-live-on-a-container-using-sdk"></a>SDK'sını kullanarak bir kapsayıcı yaşam süresi etkinleştir
+* DefaultTimeToLive null olduğunda canlı kalma süresi kapalıdır
+* DefaultTimeToLive-1 olduğunda yaşam süresi ayarı açık olur (varsayılan değildir)
+* DefaultTimeToLive, başka bir Int değeri (0 dışında) olduğunda, canlı ayarınız ayarı açık olur
 
-### <a id="dotnet-enable-noexpiry"></a>.NET SDK
+## <a name="enable-time-to-live-on-a-container-using-azure-cli-or-powershell"></a>Azure CLı veya PowerShell kullanarak bir kapsayıcıda yaşam süresi sağlama
+
+Bir kapsayıcıda TTL oluşturmak veya etkinleştirmek için bkz.,
+
+* [Azure CLı kullanarak TTL ile kapsayıcı oluşturma](manage-with-cli.md#create-a-container-with-ttl)
+* [PowerShell kullanarak TTL ile kapsayıcı oluşturma](manage-with-powershell.md#create-container-unique-key-ttl)
+
+## <a name="enable-time-to-live-on-a-container-using-sdk"></a>SDK kullanarak bir kapsayıcıda yaşam süresi sağlama
+
+### <a id="dotnet-enable-noexpiry"></a>.NET SDK v2 (Microsoft. Azure. DocumentDB)
 
 ```csharp
-// Create a new collection with TTL enabled and without any expiration value
+// Create a new container with TTL enabled and without any expiration value
 DocumentCollection collectionDefinition = new DocumentCollection();
 collectionDefinition.Id = "myContainer";
 collectionDefinition.PartitionKey.Paths.Add("/myPartitionKey");
@@ -49,18 +60,29 @@ collectionDefinition.DefaultTimeToLive = -1; //(never expire by default)
 
 DocumentCollection ttlEnabledCollection = await client.CreateDocumentCollectionAsync(
     UriFactory.CreateDatabaseUri("myDatabaseName"),
-    collectionDefinition,
-    new RequestOptions { OfferThroughput = 20000 });
+    collectionDefinition);
 ```
 
-## <a name="set-time-to-live-on-a-container-using-sdk"></a>SDK'sını kullanarak bir kapsayıcı yaşam süresi ayarlayın
-
-### <a id="dotnet-enable-withexpiry"></a>.NET SDK
-
-Bir kapsayıcı yaşam süresini ayarlamak için süre saniye cinsinden belirten sıfır olmayan pozitif bir sayı vermeniz gerekir. Yapılandırılmış TTL değeri temel alınarak, tüm öğeleri kapsayıcıda son öğenin zaman damgasını değiştirildikten sonra `_ts` silinir.
+### <a id="dotnet-enable-noexpiry"></a>.NET SDK v3 (Microsoft. Azure. Cosmos)
 
 ```csharp
-// Create a new collection with TTL enabled and a 90 day expiration
+// Create a new container with TTL enabled and without any expiration value
+await client.GetDatabase("database").CreateContainerAsync(new ContainerProperties
+{
+    Id = "container",
+    PartitionKeyPath = "/myPartitionKey",
+    DefaultTimeToLive = -1 //(never expire by default)
+});
+```
+
+## <a name="set-time-to-live-on-a-container-using-sdk"></a>SDK kullanarak bir kapsayıcıda yaşam süresi belirleme
+
+Bir kapsayıcıda yaşam süresi ayarlamak için saniye cinsinden zaman aralığını belirten sıfır olmayan bir pozitif sayı sağlamalısınız. Yapılandırılmış TTL değerine bağlı olarak, `_ts` öğesinin son değiştirilme zaman damgasından sonra kapsayıcıdaki tüm öğeler silinir.
+
+### <a id="dotnet-enable-withexpiry"></a>.NET SDK v2 (Microsoft. Azure. DocumentDB)
+
+```csharp
+// Create a new container with TTL enabled and a 90 day expiration
 DocumentCollection collectionDefinition = new DocumentCollection();
 collectionDefinition.Id = "myContainer";
 collectionDefinition.PartitionKey.Paths.Add("/myPartitionKey");
@@ -68,11 +90,22 @@ collectionDefinition.DefaultTimeToLive = 90 * 60 * 60 * 24; // expire all docume
 
 DocumentCollection ttlEnabledCollection = await client.CreateDocumentCollectionAsync(
     UriFactory.CreateDatabaseUri("myDatabaseName"),
-    collectionDefinition,
-    new RequestOptions { OfferThroughput = 20000 });
+    collectionDefinition;
 ```
 
-### <a id="nodejs-enable-withexpiry"></a>NodeJS SDK'sı
+### <a id="dotnet-enable-withexpiry"></a>.NET SDK v3 (Microsoft. Azure. Cosmos)
+
+```csharp
+// Create a new container with TTL enabled and a 90 day expiration
+await client.GetDatabase("database").CreateContainerAsync(new ContainerProperties
+{
+    Id = "container",
+    PartitionKeyPath = "/myPartitionKey",
+    DefaultTimeToLive = 90 * 60 * 60 * 24; // expire all documents after 90 days
+});
+```
+
+### <a id="nodejs-enable-withexpiry"></a>NodeJS SDK 'Sı
 
 ```javascript
 const containerDefinition = {
@@ -86,34 +119,34 @@ async function createcontainerWithTTL(db: Database, containerDefinition: Contain
 }
 ```
 
-## <a name="set-time-to-live-on-an-item"></a>Bir öğe yaşam süresini ayarlama
+## <a name="set-time-to-live-on-an-item"></a>Bir öğe üzerinde yaşam süresi ayarlama
 
-Bir varsayılan bir kapsayıcı yaşam süresi ayarlamanın yanı sıra, bir öğe için bir süresi ayarlayabilirsiniz. Öğe düzeyinde yaşam süresi ayarı varsayılan TTL kapsayıcıdaki öğesi geçersiz kılar.
+Bir kapsayıcıda yaşam için varsayılan bir zaman ayarlamaya ek olarak, bir öğe için bir süre için canlı olarak ayarlayabilirsiniz. Öğe düzeyinde yaşam süresi ayarı, o kapsayıcıdaki öğenin varsayılan TTL değerini geçersiz kılar.
 
-* TTL öge üzerinde ayarlamak için öğenin son öğenin zaman damgasını değiştirildikten sonra süresi dolacak şekilde saniye cinsinden süre belirten sıfır olmayan pozitif bir sayı, sağlamanız gerekir `_ts`.
+* Bir öğe üzerindeki TTL 'yi ayarlamak için, öğenin son değiştirilme @no__t zaman damgasından sonra öğenin süresinin dolacağını belirten sıfır olmayan pozitif bir sayı sağlamanız gerekir.-0.
 
-* TTL alan öğe yoksa, varsayılan olarak, kapsayıcıya ayarlamak TTL öğesine uygulanır.
+* Öğenin bir TTL alanı yoksa, varsayılan olarak kapsayıcıya ayarlanan TTL öğe için geçerlidir.
 
-* TTL kapsayıcı düzeyinde devre dışı bırakılırsa, TTL kapsayıcıdaki yeniden etkinleştirilene kadar TTL alan öğe üzerinde yoksayılır.
+* TTL kapsayıcı düzeyinde devre dışıysa, kapsayıcıda TTL yeniden etkinleştirilene kadar öğedeki TTL alanı yok sayılır.
 
 ### <a id="portal-set-ttl-item"></a>Azure portal
 
-Bir öğe üzerinde yaşam süresi'ni etkinleştirmek için aşağıdaki adımları kullanın:
+Bir öğe üzerinde yaşam süresini etkinleştirmek için aşağıdaki adımları kullanın:
 
-1. [Azure Portal](https://portal.azure.com/) oturum açın.
+1. [Azure Portal](https://portal.azure.com/)’ında oturum açın.
 
-2. Yeni bir Azure Cosmos hesabı oluşturun veya mevcut bir hesabı seçin.
+2. Yeni bir Azure Cosmos hesabı oluşturun veya var olan bir hesabı seçin.
 
-3. Açık **Veri Gezgini** bölmesi.
+3. **Veri Gezgini** bölmesini açın.
 
-4. Var olan bir kapsayıcı seçin, genişletin ve aşağıdaki değerleri değiştirin:
+4. Var olan bir kapsayıcıyı seçin, genişletin ve aşağıdaki değerleri değiştirin:
 
-   * Açık **ölçek ve ayarlar** penceresi.
-   * Altında **ayarı** Bul **yaşam süresi**.
-   * Seçin **(varsayılan) üzerinde** veya **üzerinde** ve TTL değerini ayarlayın. 
+   * **Ölçek & ayarları** penceresini açın.
+   * Bulma **ayarı** altında, **yaşam süresi**' nin altında.
+   * **Açık (varsayılan)** seçeneğini belirleyin veya Select seçeneğini **BELIRLEYIN ve bir** TTL değeri ayarlayın. 
    * Değişiklikleri kaydetmek için **Kaydet**’e tıklayın.
 
-5. Sonraki zaman canlı, eklemek için ayarlamak istediğiniz öğeye Git `ttl` özelliğini tıklatın ve **güncelleştirme**. 
+5. Daha sonra, yaşam süresi ayarlamak istediğiniz öğeye gidin, `ttl` özelliğini ekleyin ve **Güncelleştir**' i seçin. 
 
    ```json
    {
@@ -127,7 +160,7 @@ Bir öğe üzerinde yaşam süresi'ni etkinleştirmek için aşağıdaki adımla
    }
    ```
 
-### <a id="dotnet-set-ttl-item"></a>.NET SDK
+### <a id="dotnet-set-ttl-item"></a>.NET SDK (any)
 
 ```csharp
 // Include a property that serializes to "ttl" in JSON
@@ -152,23 +185,22 @@ SalesOrder salesOrder = new SalesOrder
 };
 ```
 
-### <a id="nodejs-set-ttl-item"></a>NodeJS SDK'sı
+### <a id="nodejs-set-ttl-item"></a>NodeJS SDK 'Sı
 
 ```javascript
 const itemDefinition = {
           id: "doc",
           name: "sample Item",
-          key: "value", 
+          key: "value",
           ttl: 2
         };
 ```
 
+## <a name="reset-time-to-live"></a>Zamanı canlı olarak Sıfırla
 
-## <a name="reset-time-to-live"></a>Yaşam süresi Sıfırla
+Öğe üzerinde bir yazma veya güncelleştirme işlemi gerçekleştirerek bir öğe üzerinde canlı kalma süresini sıfırlayabilirsiniz. Yazma veya güncelleştirme işlemi, `_ts` ' ı geçerli saate ayarlar ve öğe için TTL 'nin süresinin dolacağı şekilde yeniden başlaması gerekir. Bir öğenin TTL 'sini değiştirmek isterseniz, alanı başka bir alanı güncelleştirdiğinizde de güncelleştirebilirsiniz.
 
-Bir öğe üzerinde bir yazma gerçekleştirerek live veya güncelleştirme işlemi ' maddesinde zaman sıfırlayabilirsiniz. Yazma veya güncelleştirme işlemi ayarlayacak `_ts` geçerli saat ve TTL süresi dolacak şekilde öğe için yeniden başlar. Bir öğenin TTL değiştirmek istiyorsanız, herhangi bir alan güncelleştirirken, alanın güncelleştirebilirsiniz.
-
-### <a id="dotnet-extend-ttl-item"></a>.NET SDK
+### <a id="dotnet-extend-ttl-item"></a>.NET SDK v2 (Microsoft. Azure. DocumentDB)
 
 ```csharp
 // This examples leverages the Sales Order class above.
@@ -182,11 +214,22 @@ readDocument.ttl = 60 * 30 * 30; // update time to live
 response = await client.ReplaceDocumentAsync(readDocument);
 ```
 
-## <a name="turn-off-time-to-live"></a>Yaşam süresi Kapat
+### <a id="dotnet-extend-ttl-item"></a>.NET SDK v3 (Microsoft. Azure. Cosmos)
 
-Yaşam süresi bir öğe üzerinde ayarlanmış ve süresi dolacak şekilde bu öğe artık istemiyorsanız, ardından öğesi alın, TTL alanı kaldırabileceğiniz ve öğe sunucuda değiştirin. TTL alan öğe kaldırıldığında, kapsayıcıya atanmış varsayılan TTL değeri öğesine uygulanır. Bir öğenin süresinin dolmasını engellemek için ve TTL değeri kapsayıcıdan devralmayı-1 TTL değerini ayarlayın.
+```csharp
+// This examples leverages the Sales Order class above.
+// Read a document, update its TTL, save it.
+ItemResponse<SalesOrder> itemResponse = await client.GetContainer("database", "container").ReadItemAsync<SalesOrder>("SO05", new PartitionKey("CO18009186470"));
 
-### <a id="dotnet-turn-off-ttl-item"></a>.NET SDK
+itemResponse.Resource.ttl = 60 * 30 * 30; // update time to live
+await client.GetContainer("database", "container").ReplaceItemAsync(itemResponse.Resource, "SO05");
+```
+
+## <a name="turn-off-time-to-live"></a>Canlı kalma süresini kapat
+
+Bir öğe üzerinde yaşam süresi ayarlandıysa ve artık bu öğenin süresinin dolmasını istemiyorsanız, öğeyi alabilir, TTL alanını kaldırabilir ve sunucudaki öğeyi değiştirebilirsiniz. TTL alanı öğeden kaldırıldığında, kapsayıcıya atanan varsayılan TTL değeri öğeye uygulanır. Bir öğenin süresinin dolmasını ve kapsayıcıdan TTL değerini devralmasını engellemek için TTL değerini-1 olarak ayarlayın.
+
+### <a id="dotnet-turn-off-ttl-item"></a>.NET SDK v2 (Microsoft. Azure. DocumentDB)
 
 ```csharp
 // This examples leverages the Sales Order class above.
@@ -196,27 +239,48 @@ response = await client.ReadDocumentAsync(
     new RequestOptions { PartitionKey = new PartitionKey("CO18009186470") });
 
 Document readDocument = response.Resource;
-readDocument.ttl = null; // inherit the default TTL of the collection
+readDocument.ttl = null; // inherit the default TTL of the container
 
 response = await client.ReplaceDocumentAsync(readDocument);
 ```
 
-## <a name="disable-time-to-live"></a>Yaşam süresi devre dışı bırak
-
-Bir kapsayıcı canlı ve süresi geçmiş öğeler için denetlemesini arka plan işlemini durdurmak için zaman devre dışı bırakmak için `DefaultTimeToLive` özelliği kapsayıcı üzerindeki silinmelidir. Bu özelliği silme -1 olarak ayarlama özelliğinden farklıdır. -1 olarak ayarlarsanız, kapsayıcıya eklenen yeni öğeleri kapsayıcıdaki belirli öğeleri bu değeri geçersiz kılabilirsiniz ancak sonsuza kadar yaşayacaksa. TTL özelliğine kapsayıcıdan kaldırdığınızda olsa bile önceki varsayılan TTL değeri açıkça geçersiz öğeleri hiçbir zaman, sona erecek.
-
-### <a id="dotnet-disable-ttl"></a>.NET SDK
+### <a id="dotnet-turn-off-ttl-item"></a>.NET SDK v3 (Microsoft. Azure. Cosmos)
 
 ```csharp
-// Get the collection, update DefaultTimeToLive to null
+// This examples leverages the Sales Order class above.
+// Read a document, turn off its override TTL, save it.
+ItemResponse<SalesOrder> itemResponse = await client.GetContainer("database", "container").ReadItemAsync<SalesOrder>("SO05", new PartitionKey("CO18009186470"));
+
+itemResponse.Resource.ttl = null; // inherit the default TTL of the container
+await client.GetContainer("database", "container").ReplaceItemAsync(itemResponse.Resource, "SO05");
+```
+
+## <a name="disable-time-to-live"></a>Yaşam süresini devre dışı bırak
+
+Bir kapsayıcıda yaşam süresini devre dışı bırakmak ve arka plan işleminin süresi geçmiş öğeleri denetlemesini durdurmak için, kapsayıcıdaki `DefaultTimeToLive` özelliği silinmelidir. Bu özelliğin silinmesi,-1 ' e ayarlamalarından farklıdır. -1 olarak ayarladığınızda, kapsayıcıya eklenen yeni öğeler sonsuza kadar canlı olur, ancak bu değeri kapsayıcıdaki belirli öğelerde geçersiz kılabilirsiniz. TTL özelliğini kapsayıcıdan kaldırdığınızda, önceki varsayılan TTL değerini açıkça geçersiz kılmamış olsa bile öğelerin süresi dolmayacaktır.
+
+### <a id="dotnet-disable-ttl"></a>.NET SDK v2 (Microsoft. Azure. DocumentDB)
+
+```csharp
+// Get the container, update DefaultTimeToLive to null
 DocumentCollection collection = await client.ReadDocumentCollectionAsync("/dbs/salesdb/colls/orders");
 // Disable TTL
 collection.DefaultTimeToLive = null;
 await client.ReplaceDocumentCollectionAsync(collection);
 ```
 
+### <a id="dotnet-disable-ttl"></a>.NET SDK v3 (Microsoft. Azure. Cosmos)
+
+```csharp
+// Get the container, update DefaultTimeToLive to null
+ContainerResponse containerResponse = await client.GetContainer("database", "container").ReadContainerAsync();
+// Disable TTL
+containerResponse.Resource.DefaultTimeToLive = null;
+await client.GetContainer("database", "container").ReplaceContainerAsync(containerResponse.Resource);
+```
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Şu makalede yaşam süresi hakkında daha fazla bilgi edinin:
+Aşağıdaki makalede yaşam süresi hakkında daha fazla bilgi edinin:
 
-* [yaşam süresi](time-to-live.md)
+* [Yaşam süresi](time-to-live.md)

@@ -1,6 +1,6 @@
 ---
-title: Azure Media Services tanılama günlükleri şemaları - Azure
-description: Bu makalede, Azure Media Services tanılama günlükleri şemaları gösterilmektedir.
+title: Tanılama günlükleri şemaları Azure Media Services-Azure
+description: Bu makalede Azure Media Services tanılama günlüğü şemaları gösterilmektedir.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -13,42 +13,42 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/20/2019
 ms.author: juliako
-ms.openlocfilehash: 394370738bc7996a221300540e68404986d91310
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f95258368664aabeb89426afb83854378c0e4429
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60322259"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71261092"
 ---
 # <a name="diagnostic-logs-schemas"></a>Tanılama günlükleri şemaları
 
-[Azure İzleyici](../../azure-monitor/overview.md) ölçümlerini izleme ve yardımcı olacak tanılama günlüklerini anlama, uygulamalarınızın performansını sağlar. Media Services tanılama günlüklerini izleyin ve uyarılar ve bildirimler için toplanan bir ölçüm ve günlükleri oluşturun. Günlükleri size gönderebilir [Azure depolama](https://azure.microsoft.com/services/storage/), kendisine akış [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/)ve bunları dışarı aktarma [Log Analytics](https://azure.microsoft.com/services/log-analytics/), veya 3. taraf hizmetleri kullanın.
+[Azure izleyici](../../azure-monitor/overview.md) , uygulamalarınızın nasıl çalıştığını anlamanıza yardımcı olan ölçümleri ve tanılama günlüklerini izlemenize olanak sağlar. Media Services tanılama günlüklerini izleyebilir, toplanan ölçümler ve Günlükler için uyarılar ve bildirimler oluşturabilirsiniz. [Azure depolama](https://azure.microsoft.com/services/storage/)'ya Günlükler gönderebilir, bunları [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/)akışa alabilir ve [Log Analytics](https://azure.microsoft.com/services/log-analytics/)ya da üçüncü taraf hizmetleri kullanabilirsiniz.
 
-Ayrıntılı bilgi için bkz. [Azure İzleyici ölçümleri](../../azure-monitor/platform/data-platform.md) ve [Azure İzleyici tanılama günlükleri](../../azure-monitor/platform/diagnostic-logs-overview.md).
+Ayrıntılı bilgi için bkz. [Azure Izleyici ölçümleri](../../azure-monitor/platform/data-platform.md) ve [Azure izleyici tanılama günlükleri](../../azure-monitor/platform/resource-logs-overview.md).
 
-Bu makalede, Media Services tanılama günlükleri şemaları açıklanır.
+Bu makalede tanılama günlükleri şemaları Media Services açıklanmaktadır.
 
-## <a name="top-level-diagnostic-logs-schema"></a>Şema en üst düzey tanılama günlükleri
+## <a name="top-level-diagnostic-logs-schema"></a>Üst düzey tanılama günlükleri şeması
 
-Üst düzey tanılama günlükleri şema ayrıntılı açıklaması için bkz: [desteklenen hizmetler, şemalar ve kategoriler için Azure tanılama günlükleri](../../azure-monitor/platform/tutorial-dashboards.md).
+Üst düzey tanılama günlükleri şemasının ayrıntılı açıklaması için bkz. [Azure tanılama günlükleri Için desteklenen hizmetler, şemalar ve Kategoriler](../../azure-monitor/platform/tutorial-dashboards.md).
 
 ## <a name="key-delivery-log-schema"></a>Anahtar teslim günlüğü şeması
 
-### <a name="properties"></a>Özellikler
+### <a name="properties"></a>properties
 
-Bu özellikler, anahtar teslim günlük şemaya özeldir.
+Bu özellikler, anahtar teslim günlüğü şemasına özeldir.
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|Keyıd|İstenen anahtarı kimliği.|
-|KeyType|Aşağıdaki değerlerden biri olabilir: "Clear" (şifreleme), "FairPlay", "PlayReady" veya "Widevine".|
-|PolicyName|Azure Resource Manager ilkesi adı.|
-|TokenType|Belirteç türü.|
+|keyId|İstenen anahtarın KIMLIĞI.|
+|Anahtar|Aşağıdaki değerlerden biri olabilir: "Clear" (şifreleme yok), "FairPlay", "PlayReady" veya "Widevine".|
+|PolicyName|İlkenin Azure Resource Manager adı.|
+|Belirteç|Belirteç türü.|
 |statusMessage|Durum iletisi.|
 
 ### <a name="examples"></a>Örnekler
 
-Anahtar teslim istekleri şema özellikleri.
+Anahtar teslim istekleri şemasının özellikleri.
 
 ```json
 {
@@ -110,4 +110,4 @@ Anahtar teslim istekleri şema özellikleri.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Media Services ölçümleri ve tanılama günlüklerini izleyin](media-services-metrics-diagnostic-logs.md)
+[Media Services ölçümleri ve tanılama günlüklerini izleme](media-services-metrics-diagnostic-logs.md)

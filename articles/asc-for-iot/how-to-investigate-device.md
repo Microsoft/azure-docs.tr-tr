@@ -1,81 +1,78 @@
 ---
-title: IOT cihaz araştırma Kılavuzu Önizleme için Azure Güvenlik Merkezi | Microsoft Docs
-description: Bu kılavuz nasıl Log Analytics kullanarak şüpheli bir IOT cihazı araştırmak için IOT için Azure Güvenlik Merkezi kullanımı açıklanmaktadır.
+title: IoT cihaz araştırma Kılavuzu için Azure Güvenlik Merkezi | Microsoft Docs
+description: Bu kılavuzda, Log Analytics kullanarak kuşkulu bir IoT cihazını araştırmak için IoT için Azure Güvenlik Merkezi 'nin nasıl kullanılacağı açıklanmaktadır.
 services: asc-for-iot
-ms.service: ascforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: b18b48ae-b445-48f8-9ac0-365d6e065b64
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/18/2019
+ms.date: 07/23/2019
 ms.author: mlottner
-ms.openlocfilehash: 15e65c155a98ae12c156587735d34a16ed2c9109
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8d2fe8d63c7ece6f3b3426d8fc5a3454a61826f8
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65192650"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68596242"
 ---
-# <a name="investigate-a-suspicious-iot-device"></a>Şüpheli bir IOT cihaz araştırın
+# <a name="investigate-a-suspicious-iot-device"></a>Şüpheli bir IoT cihazını araştırın
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+IoT Hizmetleri uyarıları için Azure Güvenlik Merkezi, IoT cihazlarının şüpheli etkinliklerdeki katılımın veya bir cihazın tehlikede olduğu göstergeler olduğu durumlarda açık göstergeler sağlar. 
 
-IOT hizmet uyarılarını ve kanıt için Azure Güvenlik Merkezi (ASC) IOT cihazlarının şüpheli etkinlikler veya ne zaman bir cihaz tehlikeye girmemesini göstergelerden mevcut olacağıyla şüphelenilen olduğunda Temizle göstergelerden sağlar. 
-
-Bu kılavuzda, kuruluşunuz için olası riskleri belirlemek için düzeltmek ve gelecekte benzer saldırıları önlemek için en iyi yollarını keşfetmek nasıl karar vermenize yardımcı olmak için sağlanan araştırma önerileri kullanın.  
+Bu kılavuzda, kuruluşunuza yönelik olası riskleri belirlemek için sağlanan araştırma önerilerini kullanın, daha sonra benzer saldırıları önlemenin en iyi yollarını bulun.  
 
 > [!div class="checklist"]
-> * Cihazınızın verileri bulma
-> * Kql sorguları kullanarak araştırma
+> * Cihaz verilerinizi bulun
+> * KQL sorgularını kullanarak araştır
 
 
-## <a name="how-can-i-access-my-data"></a>Verilerimi nasıl erişebilirim?
+## <a name="how-can-i-access-my-data"></a>Verilerinize nasıl erişebilirim?
 
-Varsayılan olarak, IOT için ASC Log Analytics çalışma alanınızda, güvenlik uyarıları ve öneriler depolar. Ham güvenlik verilerinizi depolamak seçebilirsiniz.
+Varsayılan olarak, IoT için Azure Güvenlik Merkezi, Log Analytics çalışma alanınızdaki güvenlik uyarılarınızı ve önerilerinizi depolar. Ham güvenlik verilerinizi depolamayı da tercih edebilirsiniz.
 
-Bulmak için veri depolama için Log Analytics çalışma alanınızda:
+Veri depolamaya yönelik Log Analytics çalışma alanınızı bulmak için:
 
-1. IOT hub'ınızı açın. 
-1. Altında **güvenlik**, tıklayın **genel bakış**ve ardından **ayarları**.
+1. IoT Hub 'ınızı açın, 
+1. **Güvenlik**altında **genel bakış**' a tıklayın ve ardından **Ayarlar**' ı seçin.
 1. Log Analytics çalışma alanı yapılandırma ayrıntılarınızı değiştirin. 
 1. **Kaydet**’e tıklayın. 
 
-Yapılandırma, Log Analytics çalışma alanınızda depolanan verilere erişmek için aşağıdakileri yapın:
+Aşağıdaki yapılandırma, Log Analytics çalışma alanınızda depolanan verilere erişmek için aşağıdakileri yapın:
 
-1. Seçin ve bir ASC için IOT Hub'ınızın IOT uyarıya tıklayın. 
-1. Tıklayın **daha fazla araştırma**. 
-1. Seçin **buraya tıklayın ve cihaz kimliği sütunu görüntüleyin, bu uyarıyı hangi cihazların görmek için**.
+1. IoT Hub IoT uyarısı için bir Azure Güvenlik Merkezi ' ni seçin ve tıklayın. 
+1. **Daha fazla araştırma**öğesine tıklayın. 
+1. **Bu uyarıya hangi cihazların olduğunu görmek için seçin öğesini seçin ve DeviceID sütununu görüntüleyin**.
 
-## <a name="investigation-steps-for-suspicious-iot-devices"></a>Şüpheli IOT cihazları için araştırma adımları
+## <a name="investigation-steps-for-suspicious-iot-devices"></a>Şüpheli IoT cihazları için araştırma adımları
 
-Insights ve IOT cihazlarınızı hakkında ham verilere erişim için Log Analytics çalışma alanınıza gidin [verilerinize erişmek için](#how-can-i-access-my-data).
+IoT cihazlarınızla ilgili öngörüleri ve ham verileri görüntülemek için [verilerinize erişmek üzere](#how-can-i-access-my-data)Log Analytics çalışma alanınıza gidin.
 
-Denetleyin ve aşağıdaki ayrıntıları ve etkinliklerin aşağıdaki kql sorguları kullanarak cihaz verileri araştırın.
+Cihazınızdaki uyarıları ve etkinlikleri araştırmaya başlamak için aşağıdaki örnek KQL sorgularını inceleyin.
 
-### <a name="related-alerts"></a>İlgili uyarıları
+### <a name="related-alerts"></a>İlgili uyarılar
 
-Başka uyarılar olup olmadığını öğrenmek için aşağıdaki kql sorguyu aynı zaman kullanımı geçici olarak tetikleyen:
+Aynı anda başka uyarıların tetiklendiği hakkında bilgi edinmek için aşağıdaki KQL sorgusunu kullanın:
 
-  ~~~
+  ```
   let device = "YOUR_DEVICE_ID";
   let hub = "YOUR_HUB_NAME";
   SecurityAlert
   | where ExtendedProperties contains device and ResourceId contains tolower(hub)
   | project TimeGenerated, AlertName, AlertSeverity, Description, ExtendedProperties
-  ~~~
+  ```
 
 ### <a name="users-with-access"></a>Erişimi olan kullanıcılar
 
-Öğrenmek için hangi kullanıcıların bu cihazı kullanmak aşağıdaki kql sorgu erişebilirsiniz: 
+Bu cihaza hangi kullanıcıların erişimi olduğunu öğrenmek için aşağıdaki KQL sorgusunu kullanın: 
 
-  ~~~
+ ```
   let device = "YOUR_DEVICE_ID";
   let hub = "YOUR_HUB_NAME";
   SecurityIoTRawEvent
@@ -87,16 +84,16 @@ Başka uyarılar olup olmadığını öğrenmek için aşağıdaki kql sorguyu a
      GroupNames=extractjson("$.GroupNames", EventDetails, typeof(string)),
      UserName=extractjson("$.UserName", EventDetails, typeof(string))
   | summarize FirstObserved=min(TimestampLocal) by GroupNames, UserName
-  ~~~
-Bu verileri bulmak için kullanın: 
-  1. Hangi kullanıcıların cihaz erişimi?
-  2. Erişimi olan kullanıcılar beklendiği gibi izin düzeylerini var mı? 
+ ```
+Bu verileri kullanarak şunları bulun: 
+- Cihaza hangi kullanıcıların erişimi var?
+- Erişim izni olan kullanıcılar beklenen izin düzeylerine sahip mi?
 
-### <a name="open-ports"></a>Bağlantı noktalarını açma
+### <a name="open-ports"></a>Bağlantı noktalarını aç
 
-Hangi bağlantı noktalarını aygıtın şu anda kullanımda veya kullanılan out bulmak için aşağıdaki kql sorguyu kullanın: 
+Cihazdaki hangi bağlantı noktalarının kullanılmakta olduğunu veya kullanıldığını öğrenmek için aşağıdaki KQL sorgusunu kullanın: 
 
-  ~~~
+ ```
   let device = "YOUR_DEVICE_ID";
   let hub = "YOUR_HUB_NAME";
   SecurityIoTRawEvent
@@ -112,18 +109,18 @@ Hangi bağlantı noktalarını aygıtın şu anda kullanımda veya kullanılan o
      RemoteAddress=extractjson("$.RemoteAddress", EventDetails, typeof(string)),
      RemotePort=extractjson("$.RemotePort", EventDetails, typeof(string))
   | summarize MinObservedTime=min(TimestampLocal), MaxObservedTime=max(TimestampLocal), AllowedRemoteIPAddress=makeset(RemoteAddress), AllowedRemotePort=makeset(RemotePort) by Protocol, LocalPort
-  ~~~
+ ```
 
-    Use this data to discover:
-  1. Hangi dinleme yuva cihazda şu anda etkin mi?
-  2. Şu anda etkin olan dinleme yuva izin verilsin mi?
-  3. Cihaza bağlı tüm şüpheli uzak adresleri var mı?
+Bu verileri kullanarak şunları bulun:
+- Şu anda cihazda hangi dinleme yuvaları etkin?
+- Şu anda etkin olan dinleme yuvaları izin verilmelidir mi?
+- Cihaza bağlı şüpheli uzak adresler var mı?
 
 ### <a name="user-logins"></a>Kullanıcı oturumu açma
 
-Öğrenmek için aşağıdaki kql sorguyu cihazında oturum açmış kullanıcıların kullanın: 
+Cihazda oturum açan kullanıcıları bulmak için aşağıdaki KQL sorgusunu kullanın: 
  
-  ~~~
+ ```
   let device = "YOUR_DEVICE_ID";
   let hub = "YOUR_HUB_NAME";
   SecurityIoTRawEvent
@@ -143,18 +140,18 @@ Hangi bağlantı noktalarını aygıtın şu anda kullanımda veya kullanılan o
      RemoteAddress=extractjson("$.RemoteAddress", EventDetails, typeof(string)),
      Result=extractjson("$.Result", EventDetails, typeof(string))
   | summarize CntLoginAttempts=count(), MinObservedTime=min(TimestampLocal), MaxObservedTime=max(TimestampLocal), CntIPAddress=dcount(RemoteAddress), IPAddress=makeset(RemoteAddress) by UserName, Result, LoginHandler
-  ~~~
+ ```
 
-    Use the query results to discover:
-  1. Cihaza hangi kullanıcıların oturum?
-  2. İçinde oturum açmış kullanıcılar oturum açmak gerekiyor?
-  3. Oturum açmış kullanıcıların, beklenen ya da beklenmeyen IP adreslerinden bağlanabilir?
+Keşif yapmak için sorgu sonuçlarını kullanın:
+- Cihazda hangi kullanıcılar oturum açtı?
+- Oturum açan kullanıcılardır, oturum açmamı gerekir?
+- Oturum açan kullanıcılar beklenen veya beklenmeyen IP adreslerinden bağlandık mi?
   
 ### <a name="process-list"></a>İşlem listesi
 
-İşlem listesinin beklendiği gibi olup olmadığını öğrenmek için aşağıdaki kql sorguyu kullanın: 
+İşlem listesinin beklenildiği hakkında bilgi edinmek için aşağıdaki KQL sorgusunu kullanın: 
 
-  ~~~
+ ```
   let device = "YOUR_DEVICE_ID";
   let hub = "YOUR_HUB_NAME";
   SecurityIoTRawEvent
@@ -179,14 +176,14 @@ Hangi bağlantı noktalarını aygıtın şu anda kullanımda veya kullanılan o
   ) on UserId
   | extend UserIdName = strcat("Id:", UserId, ", Name:", UserName)
   | summarize CntExecutions=count(), MinObservedTime=min(TimestampLocal), MaxObservedTime=max(TimestampLocal), ExecutingUsers=makeset(UserIdName), ExecutionCommandLines=makeset(CommandLine) by Executable
-  ~~~
+```
 
-    Use the query results to discover:
+Keşif yapmak için sorgu sonuçlarını kullanın:
 
-  1. Cihaz üzerinde çalışan herhangi bir şüpheli işlem vardı?
-  2. İşlemler uygun kullanıcılar tarafından yürütülmüştür?
-  3. Herhangi bir komut satırı yürütme doğru ve beklenen bağımsız değişken içeren?
+- Cihazda çalışan şüpheli işlem var mı?
+- İşlem uygun kullanıcılar tarafından yürütüldü mi?
+- Herhangi bir komut satırı yürütmeleri doğru ve beklenen bağımsız değişkenleri içeriyor mu?
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bir aygıt araştırma ve daha iyi anlamak riskleri kazandıktan sonra düşünmek isteyebilirsiniz [özel uyarılar yapılandırma](quickstart-create-custom-alerts.md) IOT çözüm güvenliğini artırmak için. Bir cihaz Aracısı zaten yoksa, göz önünde bulundurun [güvenlik aracısı dağıtma](how-to-deploy-agent.md) veya [var olan bir cihaz Aracısı yapılandırmasını değiştirme](how-to-agent-configuration.md) sonuçlarınızı geliştirmek için. 
+Bir cihazı araştırdıktan ve risklerinizi daha iyi anlamak için, IoT çözümü güvenlik duruşunuzu geliştirmek üzere [özel uyarılar yapılandırmayı](quickstart-create-custom-alerts.md) düşünmek isteyebilirsiniz. Zaten bir cihaz aracınız yoksa, sonuçlarınızı geliştirmek için [bir güvenlik Aracısı dağıtımı](how-to-deploy-agent.md) veya [mevcut bir cihaz aracısının yapılandırmasını değiştirmeyi](how-to-agent-configuration.md) düşünün. 

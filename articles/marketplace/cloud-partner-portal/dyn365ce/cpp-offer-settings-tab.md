@@ -1,42 +1,22 @@
 ---
-title: Dynamics 365 müşteri katılımı teklif ayarları sekmesi için | Azure Market
-description: AppSource Market'te bir Dynamics 365 müşteri katılımı uygulama teklif için teklif ayarlarını yapılandırın.
+title: Müşteri için Dynamics 365 katılım teklif ayarları sekmesi | Azure Marketi
+description: Kullanım dışı olan CPP makalesi, bılgısayar makalesine bağlı; "AppSource Market 'te müşteri için Dynamics 365 için bir Dynamics için teklif ayarlarını yapılandırın."
 services: Dynamics 365 for Customer Engagement Offer, Azure, Marketplace, Cloud Partner Portal, AppSource
-author: v-miclar
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 04/24/2019
-ms.author: pabutler
-ms.openlocfilehash: 219a69632fe29b1d756702d97804613021b57006
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.author: v-chjen
+ms.openlocfilehash: 34d4886b8913da24177b939d88eb90dd8650542f
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942417"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824745"
 ---
-# <a name="dynamics-365-for-customer-engagement-offer-settings-tab"></a>Dynamics 365 müşteri katılımı teklif ayarları sekmesi
+# <a name="dynamics-365-for-customer-engagement-offer-settings-tab"></a>Müşteri için Dynamics 365 katılım teklif ayarları sekmesi
 
-Bu makalede, bir Dynamics 365 Customer Engagement uygulaması için teklif ayarlarının nasıl yapılandırılacağı açıklanır.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık Dynamics 365 müşteri katılımı tekliflerinin oluşturulmasını ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Customer Engagement for the PowerApps teklifi &](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer).
 
-**Dynamics 365 müşteri katılımı için** > **yeni teklif** sayfası üzerinde ile odağı açılır **teklif ayarları** sekmesi.  Gerekli alan adına eklenmiş bir yıldız işareti (*) gösterir.
-
-![Ayarlar sekmesinde için Dynamics 365 müşteri katılımı için sunar.](./media/dyn365ce-offer-settings-tab.png)
-
-
-## <a name="offer-settings-fields"></a>Teklif ayarları alanları
-
-Aşağıdaki tabloda, bu sekmede alanlar açıklanır. Gerekli alanlar yıldız (*) indicted.
-
-|    Alan         |       Açıklama                                                            |
-|  ---------       |     ---------------                                                          |
-| **Teklif kimliği\***   | Teklif için benzersiz bir tanımlayıcı (profilinde yayımcı). Bu tanımlayıcı, ürün URL'leri ve ınsights raporlarında görünür durumda olacaktır. En fazla 50 karakter uzunluğunda ve küçük harf alfasayısal karakterler ve tire (-) kullanabilirsiniz. (Kimlik, kısa çizgi ile bitemez.) **Not:** Bu alan, teklif teklife ilişkin Market temel URL'sine bağlı olmadığından Canlı geçtikten sonra değiştirilemez.  |
-| **Yayımcı kimliği\***  | Kuruluşunuzun Azure Marketi'nde benzersiz tanımlayıcısı. Tüm teklifleri, yayımcı kimliği ile ilişkili olmalıdır Teklif kaydedildikten sonra bu değer değiştirilemez. |
-| **Ad\***       | Teklifiniz için görünen adı. Bu ad, AppSource Market'te görüntülenir. En fazla 50 karakter olabilir. Ürün için tanınan bir marka adı kullanmanızı öneririz. Bu ürünü nasıl pazarlanmadığından olmadığı sürece, kuruluşunuzun adı dahil değildir. Diğer Web siteleri ve yayınlar bu teklifte pazarlama, adın tam olarak aynı tüm yayınları arasında olduğundan emin olun. |
-|  |  |
-
-Seçin **Kaydet** teklif ayarlarınızı kaydetmek için.
-
-
-## <a name="next-steps"></a>Sonraki adımlar
-
-Kullanım [teknik bilgileri sekmesi](./cpp-technical-info-tab.md) teklifiniz için uygulama ve paket bilgilerini yapılandırın.
+Müşteri için yeni bir Dynamics 365 teklif teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Customer Engagement & PowerApps teklifini](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer) oluşturma bölümündeki yönergeleri izleyin.

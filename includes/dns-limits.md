@@ -4,26 +4,27 @@ ms.service: billing
 ms.topic: include
 ms.date: 6/15/2019
 ms.author: victorh
-ms.openlocfilehash: 520a403fcfed3bb96278f4a82fcfeb41abb2ee42
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: e8e65c0c1302523af5aefab297ffbafe2a90d2b4
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67277501"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "68590017"
 ---
 **Genel DNS bölgeleri**
 
 | Resource | Varsayılan limit |
 | --- | --- |
-| Abonelik başına Genel DNS bölgeleri |250 <sup>1</sup> |
-| Genel DNS bölgelerinin başına kayıt kümeleri |10,000 <sup>1</sup> |
-| Kayıt kümesi içinde genel DNS bölgelerinin başına kayıt |20 |
-| Abonelik başına özel DNS bölgeleri |1000|
-| Özel DNS bölge başına kayıt kümeleri |25000|
-| Kayıt kümesi için özel DNS bölgelerini başına kayıt |20|
-| Özel DNS bölge başına sanal ağ bağlantıları |1000|
-| Otomatik kaydı ile özel DNS bölgelerini başına sanal ağlara bağlantılar etkin |100|
-| Bir sanal ağ otomatik etkin kayıt ile bağlantılı özel DNS bölgelerini sayısı |1|
-| Özel DNS bölgelerini, bir sanal ağa bağlı sayısı |1000|
+| Abonelik başına genel DNS Bölgeleri |250 <sup>1</sup> |
+| Genel DNS bölgesi başına kayıt kümeleri |10.000 <sup>1</sup> |
+| Genel DNS bölgesinde kayıt kümesi başına kayıt sayısı |20 |
+| Tek bir Azure kaynağı için diğer ad kaydı sayısı |20|
+| Abonelik başına Özel DNS bölgeleri |1000|
+| Özel DNS bölgesi başına kayıt kümeleri |25000|
+| Özel DNS bölgeleri için kayıt kümesi başına kayıt sayısı |20|
+| Özel DNS bölgesi başına sanal ağ bağlantıları |1000|
+| Otomatik kayıt özellikli özel DNS bölgeleri başına sanal ağ bağlantıları |100|
+| Bir sanal ağın otomatik kayıt etkin ile bağlantılandırılan özel DNS bölgesi sayısı |1\.|
+| Bir sanal ağın bağlı olduğu özel DNS bölgesi sayısı |1000|
 
-<sup>1</sup>bu sınırı artırmanız gerekiyorsa, Azure desteği'ne başvurun.
+<sup>1</sup> Bu sınırları artırmanız gerekiyorsa, Azure desteği 'ne başvurun.

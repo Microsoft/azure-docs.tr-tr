@@ -15,12 +15,12 @@ ms.date: 11/08/2018
 ms.author: mimart
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cf665362e2d20f26c17e8a4ae9da29fc30cb47ce
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: 71c342ede77349b3f6c22093e5877ad5f5ce6549
+ms.sourcegitcommit: 47ce9ac1eb1561810b8e4242c45127f7b4a4aa1a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67481284"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67807677"
 ---
 # <a name="how-to-deploy-the-access-panel-extension-for-internet-explorer-using-group-policy"></a>Nasıl yapılır: Grup İlkesi'ni kullanarak Internet Explorer için erişim paneli uzantısını dağıtma
 
@@ -43,9 +43,11 @@ Erişim paneli uzantısı için de kullanılabilir olan [Chrome](https://go.micr
 1. İçinde **Sunucu Yöneticisi'ni** penceresinde, Git **dosya ve depolama hizmetleri**.
 
     ![Açık dosyalar ve depolama hizmetleri](./media/deploy-access-panel-browser-extension/files-services.png)
+
 1. Git **paylaşımları** sekmesi. Ardından **görevleri** > **yeni paylaşım...**
 
-    ![Açık dosyalar ve depolama hizmetleri](./media/deploy-access-panel-browser-extension/shares.png)
+    ![Ekran görüntüsü, görevleri ekrandan yeni paylaşım yeri gösterir.](./media/deploy-access-panel-browser-extension/shares.png)
+
 1. Tamamlamak **yeni paylaşım Sihirbazı** ve kullanıcılarınızın makinelerden erişilebildiğinden emin olmak için izinleri ayarlayın. [Paylaşımları hakkında daha fazla bilgi edinin.](https://technet.microsoft.com/library/cc753175.aspx)
 1. Aşağıdaki Microsoft Windows Installer paketi (.msi dosyası) indirin: [Erişim paneli Extension.msi](https://account.activedirectory.windowsazure.com/Applications/Installers/x64/Access%20Panel%20Extension.msi)
 1. Yükleyici paket paylaşımında istenen bir konuma kopyalayın.
@@ -80,13 +82,14 @@ Erişim paneli uzantısı için de kullanılabilir olan [Chrome](https://go.micr
 
    * `Computer Configuration/Policies/Software Settings/`
    * `User Configuration/Policies/Software Settings/`
+
 1. Sağ **yazılım yüklemesi**, ardından **yeni** > **paket...**
 1. Yükleyici paketi içeren paylaşılan klasöre gidin [1. adım: Dağıtım noktası oluştur](#step-1-create-the-distribution-point).msi dosyasını seçin ve tıklayın **açık**.
 
    > [!IMPORTANT]
    > Paylaşım bu aynı sunucuda bulunuyorsa, yerel dosya yolu yerine bir ağ dosya yolu .msi eriştiğiniz doğrulayın.
 
-    ![Paylaşılan klasörden yükleme paketini seçin.](./media/deploy-access-panel-browser-extension/select-package.png)
+    ![Paylaşılan klasörden yükleme paketini seçin](./media/deploy-access-panel-browser-extension/select-package.png)
 
 1. İçinde **yazılım dağıtma** anında, select **atanan** dağıtım yönteminize için. Daha sonra, **Tamam**'a tıklayın.
 
@@ -100,6 +103,7 @@ Kullanmadan önce yükleyici çalıştırmanın yanı sıra, her uzantısını I
 
    * `Computer Configuration/Policies/Administrative Templates/Windows Components/Internet Explorer/Security Features/Add-on Management`
    * `User Configuration/Policies/Administrative Templates/Windows Components/Internet Explorer/Security Features/Add-on Management`
+
 1. Sağ **eklenti listesi**seçip **Düzenle**.
 
     !["Eklenti Listesi" sağ tıklayın ve "Düzenle" yi seçin](./media/deploy-access-panel-browser-extension/edit-add-on-list.png)
@@ -111,8 +115,8 @@ Kullanmadan önce yükleyici çalıştırmanın yanı sıra, her uzantısını I
 1. İçinde **içeriğini göster** penceresinde aşağıdaki adımları gerçekleştirin:
 
    1. İlk sütun için ( **değer adı** alan), kopyalama ve aşağıdaki sınıf kimliği: `{030E9A3F-7B18-4122-9A60-B87235E4F59E}`
-   2. İkinci sütun için ( **değer** alan), aşağıdaki değer: `1`
-   3. Tıklayın **Tamam** kapatmak için **içeriğini göster** penceresi.
+   1. İkinci sütun için ( **değer** alan), aşağıdaki değer: `1`
+   1. Tıklayın **Tamam** kapatmak için **içeriğini göster** penceresi.
 
       ![Önceki adımda belirtilen değerleri doldurun](./media/deploy-access-panel-browser-extension/show-contents.png)
 
@@ -160,7 +164,7 @@ Uzantı dağıtımı başarılı olup olmadığını doğrulamak için aşağıd
 1. Yeniden başlattıktan sonra açın **Internet Explorer**. Pencerenin sağ üst köşesindeki üzerinde tıklayın **Araçları** (dişli simgesi) seçip **eklentileri yönetme**.
 1. İçinde **Eklentileri Yönet** penceresinde doğrulayın **erişim paneli uzantısını** yüklü olduğundan ve kendi **durumu** ayarlanmış **etkin**.
 
-   ![Erişim paneli uzantısı yüklü ve etkin olduğunu doğrulayın.](./media/deploy-access-panel-browser-extension/verify-install.png)
+   ![Erişim paneli uzantısı yüklü ve etkin olduğunu doğrulayın](./media/deploy-access-panel-browser-extension/verify-install.png)
 
 ## <a name="learn-more"></a>Daha fazla bilgi edinin
 

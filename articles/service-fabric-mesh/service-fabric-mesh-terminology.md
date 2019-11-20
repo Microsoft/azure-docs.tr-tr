@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric kafes terminolojisi | Microsoft Docs
-description: Azure Service Fabric Mesh için sık kullanılan terimler hakkında öğrenin.
+title: Azure Service Fabric ağı terminolojisi | Microsoft Docs
+description: Bu makalede, belgelerde kullanılan koşulları daha iyi anlamanıza yardımcı olmak üzere Azure Service Fabric ağı tarafından kullanılan terminoloji ayrıntılı olarak açıklanır.
 services: service-fabric-mesh
 keywords: ''
 author: dkkapur
@@ -9,78 +9,78 @@ ms.date: 11/28/2018
 ms.topic: conceptual
 ms.service: service-fabric-mesh
 manager: timlt
-ms.openlocfilehash: 2d2661593ba3d9be2755d81803c8e248a2f7d0e1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cacf3a7419982e8c0e8d55700c903e3414cfcbb4
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60810594"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73663018"
 ---
-# <a name="service-fabric-mesh-terminology"></a>Service Fabric Mesh terminolojisi
+# <a name="service-fabric-mesh-terminology"></a>Service Fabric kafes terminolojisi
 
-Azure Service Fabric Mesh, geliştiricilerin sanal makineleri, depolama alanını veya ağ bileşenlerini yönetmeden mikro hizmet uygulamaları dağıtmasını sağlayan tam olarak yönetilen bir hizmettir. Bu makalede belgelerinde kullanılan terimler anlamak için Azure Service Fabric Mesh tarafından kullanılan terimler açıklanmaktadır.
+Azure Service Fabric Mesh, geliştiricilerin sanal makineleri, depolama alanını veya ağ bileşenlerini yönetmeden mikro hizmet uygulamaları dağıtmasını sağlayan tam olarak yönetilen bir hizmettir. Bu makalede, belgelerde kullanılan koşulları daha iyi anlamanıza yardımcı olmak üzere Azure Service Fabric ağı tarafından kullanılan terminoloji ayrıntılı olarak açıklanır.
 
 ## <a name="service-fabric"></a>Service Fabric
 
-[Service Fabric](/azure/service-fabric/) , ölçeklenebilir ve güvenilir mikro Hizmetleri paketlemeyi, dağıtma ve kolay bir açık kaynak dağıtılmış sistemler platformudur. Service Fabric Service Fabric Mesh güç katan düzenleyicisidir. Service Fabric, nasıl yapı ve mikro hizmetler uygulamalarınızı çalıştırmak için seçenekler sağlar. Kendi hizmetlerinizi yazmanızı ve birden çok ortam seçenekleri uygulamayı çalıştırmak hedef konumu seçin, herhangi bir çerçeveyi kullanabilirsiniz.
+[Service Fabric](/azure/service-fabric/) ölçeklenebilir ve güvenilir mikro hizmetleri paketlemeyi, dağıtmayı ve yönetmeyi kolaylaştıran açık kaynaklı bir dağıtılmış sistemler platformudur. Service Fabric, Service Fabric ağı destekleyen Orchestrator. Service Fabric, mikro hizmet uygulamalarınızı nasıl oluşturup çalıştıracağınızı gösteren seçenekler sağlar. Hizmetlerinizi yazmak için herhangi bir çerçeveyi kullanabilir ve uygulamayı birden çok ortam seçiminizden nerede çalıştıracağınızı seçebilirsiniz.
 
-## <a name="application-and-service-concepts"></a>Uygulama ve hizmeti kavramları
+## <a name="application-and-service-concepts"></a>Uygulama ve hizmet kavramları
 
-**Service Fabric Mesh uygulaması**: Service Fabric uygulamaları Mesh açıklanır [kaynak modeli](/azure/service-fabric-mesh/service-fabric-mesh-service-fabric-resources) (YAML ve JSON kaynak dosyaları) ve Service Fabric çalıştırıldığı herhangi bir ortama dağıtılabilir.
+**Service Fabric kafes uygulaması**: Service Fabric ağ uygulamaları, [kaynak modeli](/azure/service-fabric-mesh/service-fabric-mesh-service-fabric-resources) (YAML ve JSON kaynak dosyaları) tarafından tanımlanır ve Service Fabric çalıştığı herhangi bir ortama dağıtılabilir.
 
-**Service Fabric yerel uygulaması**: Service Fabric yerel uygulamaları, tarafından açıklanmıştır [yerel uygulama modeli](/azure/service-fabric/service-fabric-application-model) (XML tabanlı bir uygulama ve hizmet bildirimleri).  Service Fabric yerel uygulamaları, Service Fabric Mesh içinde çalıştırılamaz.
+Yerel **uygulama Service Fabric**: Service Fabric yerel uygulamalar, [yerel uygulama modeliyle](/azure/service-fabric/service-fabric-application-model) (XML tabanlı uygulama ve hizmet bildirimleri) açıklanır.  Service Fabric yerel uygulamalar Service Fabric ağ içinde çalıştırılamaz.
 
-**Uygulama**: Bir Service Fabric Mesh uygulaması dağıtım, sürüm ve Mesh uygulaması ömrünü birimidir. Her uygulama örneği yaşam döngüsü bağımsız olarak yönetilebilir.  Uygulamalar, bir veya daha fazla hizmet kod paketleri ve ayarları oluşur. Azure kaynak modeli (RM) şemayı kullanarak bir uygulama ile tanımlanır.  Hizmetleri özellikleri RM şablonunda Uygulama kaynağı olarak açıklanmıştır.  Ağ ve uygulama tarafından kullanılan birimleri uygulama tarafından başvurulur.  Bir uygulama oluştururken, uygulama, hizmetler, ağ ve birimlerin Service Fabric kaynak modelini kullanarak modellenir.
+**Uygulama**: bir Service Fabric kafes uygulaması, bir kafes uygulamasının dağıtım, sürüm oluşturma ve yaşam süresinin birimidir. Her uygulama örneğinin yaşam döngüsü bağımsız olarak yönetilebilir.  Uygulamalar bir veya daha fazla hizmet kodu paketi ve ayarlarından oluşur. Bir uygulama, Azure kaynak modeli (RM) şeması kullanılarak tanımlanır.  Hizmetler, bir RM şablonundaki uygulama kaynağının özellikleri olarak açıklanır.  Uygulama tarafından kullanılan ağlara ve birimlere uygulama tarafından başvurulur.  Bir uygulama oluştururken, uygulama, hizmet ve birimler Service Fabric kaynak modeli kullanılarak modellenir.
 
-**Hizmet**: Bir uygulamada bir hizmeti temsil eden bir mikro hizmet ve eksiksiz ve tek başına bir işlevi gerçekleştirir. Her hizmet kodu paket ile ilişkili kapsayıcı görüntüsünü çalıştırmak için gereken her şeyi açıklayan bir veya daha fazla, kod paketleri oluşur.  Bir uygulama hizmeti çoğaltma sayısını giriş ve çıkış ölçeklendirilebilir.
+**Hizmet**: bir uygulamadaki bir hizmet mikro hizmeti temsil eder ve bir tamamen ve tek başına işlevi gerçekleştirir. Her hizmet, kod paketiyle ilişkili kapsayıcı görüntüsünü çalıştırmak için gereken her şeyi tanımlayan bir veya daha fazla kod paketinden oluşur.  Bir uygulamadaki hizmet çoğaltmalarının sayısı, dışarı ve dışarı ölçeklenebilirler.
 
-**Kod paketi**: Kod paketleri aşağıdakiler dahil olmak üzere kod paket ile ilişkili kapsayıcı görüntüsünü çalıştırmak için gereken her şeyi açıklanmaktadır:
+**Kod paketi**: kod paketleri aşağıdakiler de dahil olmak üzere kod paketiyle ilişkili kapsayıcı görüntüsünü çalıştırmak için gereken her şeyi anlatmaktadır:
 
 * Kapsayıcı adı, sürümü ve kayıt defteri
-* Her kapsayıcı için gerekli CPU ve bellek kaynakları
+* Her kapsayıcı için gereken CPU ve bellek kaynakları
 * Ağ uç noktaları
-* Ayrı birim kaynağına başvuran kapsayıcısında bağlamak için birimler.
+* Kapsayıcıda takılacak ve ayrı bir birim kaynağına başvuran birimler.
 
 ## <a name="deployment-and-application-models"></a>Dağıtım ve uygulama modelleri 
 
-Hizmetlerinizi dağıtmak için nasıl çalıştırılacağını tanımlamak gerekir. Service Fabric, üç farklı dağıtım modelleri destekler:
+Hizmetlerinizi dağıtmak için, bunların nasıl çalıştırılacağını açıklamanız gerekir. Service Fabric üç farklı dağıtım modelini destekler:
 
 ### <a name="resource-model"></a>Kaynak modeli
-Service Fabric kaynakları, Service Fabric için ayrı ayrı dağıtılabilen herhangi bir şey olduğunu; uygulamalar, hizmetler, ağlar ve birimler dahil olmak üzere. Kaynakları bir küme uç noktasına dağıtılabilir bir JSON dosyası kullanılarak tanımlanır.  Service Fabric Mesh için Azure kaynak Model şeması kullanılır. Bir YAML dosyası şeması, daha kolay tanım dosyalarını yazmak için de kullanılabilir. Kaynakları, Service Fabric çalıştıran herhangi bir dağıtılabilir. Kaynak modeli, Service Fabric uygulamalarınızı açıklamak için basit bir yoldur. Kendi ana basit dağıtım ve kapsayıcılı hizmetlerin yönetimini sağlamaktır. Daha fazla bilgi edinmek için [Service Fabric kaynak modeli giriş](/azure/service-fabric-mesh/service-fabric-mesh-service-fabric-resources).
+Service Fabric kaynaklar Service Fabric için tek tek dağıtılabilecek her şeydir; uygulamalar, hizmetler, ağlar ve birimler dahil. Kaynaklar bir küme uç noktasına dağıtılabilecek bir JSON dosyası kullanılarak tanımlanır.  Service Fabric ağ için, Azure kaynak modeli şeması kullanılır. Bir YAML dosya şeması, tanım dosyalarını daha kolay yazmak için de kullanılabilir. Kaynaklar Service Fabric her yerde dağıtılabilir. Kaynak modeli, Service Fabric uygulamalarınızı tanımlamanın en kolay yoludur. Ana odağı Kapsayıcılı hizmetlerin basit dağıtım ve yönetimine dayanır. Daha fazla bilgi edinmek için [Service Fabric kaynak modeline giriş](/azure/service-fabric-mesh/service-fabric-mesh-service-fabric-resources)makalesini okuyun.
 
-### <a name="native-model"></a>Yerel modeli
-Yerel uygulama modeli için Service Fabric uygulamalarınızı tam alt düzey erişim sağlar. Uygulamalar ve hizmetler, XML bildirim dosyalarında kayıtlı türleri olarak tanımlanır.
+### <a name="native-model"></a>Yerel model
+Yerel uygulama modeli, uygulamalarınızı Service Fabric için tam alt düzey erişim sağlar. Uygulamalar ve hizmetler, XML bildirim dosyalarında kayıtlı türler olarak tanımlanır.
 
-Yerel modeli ve küme yönetimi API'leri C# ve Java Service Fabric çalışma zamanı API erişimi sağlayan Reliable Services framework destekler. Yerel modeli rastgele kapsayıcıları ve yürütülebilir dosyalar da destekler.
+Yerel model, ve Java 'daki C# Service Fabric çalışma zamanı API 'lerine ve küme yönetim API 'lerine erişim sağlayan Reliable Services çerçevesini destekler. Yerel model ayrıca rastgele kapsayıcıları ve yürütülebilir dosyaları destekler.
 
-Yerel modeli, Service Fabric Mesh ortamda desteklenmiyor.  Daha fazla bilgi için [programlama modeline genel bakış](/azure/service-fabric/service-fabric-choose-framework).
+Yerel model Service Fabric kafes ortamında desteklenmez.  Daha fazla bilgi için bkz. [programlama modeline genel bakış](/azure/service-fabric/service-fabric-choose-framework).
 
 ### <a name="docker-compose"></a>Docker Compose 
-[Docker Compose](https://docs.docker.com/compose/) Docker projesindeki bir parçasıdır. Service Fabric, Docker Compose modelini kullanarak uygulama dağıtmak için sınırlı destek sağlar.
+[Docker Compose](https://docs.docker.com/compose/) Docker projesinin bir parçasıdır. Service Fabric, Docker Compose modelini kullanarak uygulama dağıtmaya yönelik sınırlı destek sağlar.
 
 ## <a name="environments"></a>Ortamlar
 
-Service Fabric birkaç farklı hizmet ve ürünleri temel alan bir açık kaynak platformu teknolojisidir. Microsoft aşağıdaki seçenekleri sağlar:
+Service Fabric, birçok farklı hizmet ve ürünün temel aldığı açık kaynaklı bir platform teknolojisidir. Microsoft aşağıdaki seçenekleri sağlar:
 
- - **Service Fabric kafes**: Microsoft Azure'da Service Fabric uygulamaları çalıştırmak için tam olarak yönetilen bir hizmet.
- - **Azure Service Fabric'e**: Azure Service Fabric kümesi teklifi barındırılan. Bu, Service Fabric ile birlikte Service Fabric Küme yükseltme ve yapılandırma yönetimi, Azure altyapı arasında tümleştirme sağlar.
- - **Service Fabric tek başına**: Yükleme ve yapılandırma araçları kümesi [herhangi bir Service Fabric kümelerini dağıtmayı](/azure/service-fabric/service-fabric-deploy-anywhere) (şirket içinde veya diğer bulut sağlayıcılarına). Azure tarafından yönetilen değil.
- - **Service Fabric geliştirme kümesi**: Bir yerel geliştirme deneyimi, Windows, Linux veya Mac için Service Fabric uygulamaları geliştirilmesini sağlar.
+ - **Service Fabric ağ**: Microsoft Azure Service Fabric uygulamaları çalıştırmak için tam olarak yönetilen bir hizmet.
+ - **Azure Service Fabric**: Azure 'da barındırılan Service Fabric kümesi sunumu. Service Fabric kümelerinin yükseltme ve yapılandırma yönetimiyle birlikte Service Fabric ve Azure altyapısı arasında tümleştirme sağlar.
+ - **Tek başına Service Fabric**: [Service Fabric kümelerini her yerde](/azure/service-fabric/service-fabric-deploy-anywhere) (Şirket içinde veya herhangi bir bulut sağlayıcısında) dağıtmak için bir yükleme ve yapılandırma araçları kümesi. Azure tarafından yönetilmiyor.
+ - **Service Fabric geliştirme kümesi**: Service Fabric uygulamaların geliştirilmesi için Windows, Linux veya Mac 'te yerel bir geliştirme deneyimi sağlar.
 
-## <a name="environment-framework-and-deployment-model-support-matrix"></a>Ortam, framework ve dağıtım modeline destek matrisi
-Farklı ortamlar, farklı çerçeveler ve dağıtım modelleri için destek düzeyine sahip. Aşağıdaki tabloda, desteklenen çerçevesi ve dağıtım modeli birleşimlerini açıklar.
+## <a name="environment-framework-and-deployment-model-support-matrix"></a>Ortam, çerçeve ve dağıtım modeli destek matrisi
+Farklı ortamların çerçeveler ve dağıtım modelleri için farklı destek düzeyi vardır. Aşağıdaki tabloda desteklenen Framework ve dağıtım modeli birleşimleri açıklanmaktadır.
 
-| Uygulama türü | Tarafından açıklanan | Azure Service Fabric Mesh | Azure Service Fabric kümeleri (herhangi bir işletim sistemi)| Yerel küme | Tek başına küme |
+| Uygulama türü | Açıklanan | Azure Service Fabric ağı | Azure Service Fabric kümeleri (herhangi bir işletim sistemi)| Yerel küme | Tek başına küme |
 |---|---|---|---|---|---|
-| Service Fabric kafes uygulamaları | Kaynak Modeli (YAML & JSON) | Desteklenen |Desteklenmiyor | Windows - desteklenir, Linux ve Mac desteklenmeyen | Desteklenen Windows değil |
-|Service Fabric yerel uygulamaları | Yerel uygulama modelini (XML) | Desteklenmiyor| Desteklenen|Desteklenen|Windows-desteklenir|
+| Service Fabric kafes uygulamaları | Kaynak modeli (YAML & JSON) | Destekleniyor |Desteklenmiyor | Windows-desteklenen, Linux ve Mac-desteklenmez | Windows-desteklenmiyor |
+|Yerel uygulamalar Service Fabric | Yerel uygulama modeli (XML) | Desteklenmiyor| Destekleniyor|Destekleniyor|Windows-destekleniyor|
 
-Aşağıdaki tabloda, farklı uygulama modelleri ve bunlar için Service Fabric karşı var olan araçlar açıklanmaktadır.
+Aşağıdaki tabloda, Service Fabric karşı farklı uygulama modelleri ve araçları açıklanmaktadır.
 
-| Uygulama türü | Tarafından açıklanan | Visual Studio | Eclipse | SFCTL | AZ CLI | PowerShell|
+| Uygulama türü | Açıklanan | Visual Studio | Eclipse | SFCTL | AZ CLı | PowerShell|
 |---|---|---|---|---|---|---|
-| Service Fabric kafes uygulamaları | Kaynak Modeli (YAML & JSON) | VS 2017 |Desteklenmiyor |Desteklenmiyor | Destekleniyor - yalnızca ağ ortamı | Desteklenmiyor|
-|Service Fabric yerel uygulamaları | Yerel uygulama modelini (XML) | VS 2017 ve VS 2015| Desteklenen|Desteklenen|Desteklenen|Desteklenen|
+| Service Fabric kafes uygulamaları | Kaynak modeli (YAML & JSON) | VS 2017 |Desteklenmiyor |Desteklenmiyor | Yalnızca desteklenen ağ ortamı | Desteklenmiyor|
+|Yerel uygulamalar Service Fabric | Yerel uygulama modeli (XML) | VS 2017 ve VS 2015| Destekleniyor|Destekleniyor|Destekleniyor|Destekleniyor|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

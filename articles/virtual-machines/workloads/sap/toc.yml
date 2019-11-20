@@ -102,6 +102,8 @@
           href: sap-hana-high-availability-rhel.md
         - name: SLES üzerinde SAP HANA ölçek genişletme ve Pacemaker sorunlarını giderme
           href: hana-vm-troubleshoot-scale-out-ha-on-sles.md
+        - name: SLES üzerinde Azure NetApp Files ile bekleme düğümüyle SAP HANA ölçeğini genişletme
+          href: sap-hana-scale-out-standby-netapp-files-suse.md
     - name: SAP HANA yedeklemesine genel bakış
       href: sap-hana-backup-guide.md
     - name: SAP HANA dosya düzeyi yedeklemesi
@@ -128,6 +130,8 @@
           href: dbms_guide_ibm.md
         - name: SUSE Linux Enterprise Server üzerinde Azure VM’lerindeki IBM Db2 LUW’a yönelik yüksek kullanılabilirlik
           href: dbms-guide-ha-ibm.md
+        - name: Red Hat Enterprise Linux Server üzerinde Azure VM’lerindeki IBM Db2 LUW’a yönelik yüksek kullanılabilirlik
+          href: high-availability-guide-rhel-ibm-db2-luw.md
         - name: SAP iş yükü için SAP ASE Azure Sanal Makineler DBMS dağıtımı
           href: dbms_guide_sapase.md
         - name: 'Azure''da SAP MaxDB, liveCache ve İçerik Sunucusu dağıtımı'
@@ -162,6 +166,8 @@
               href: sap-high-availability-guide-wsfc-shared-disk.md
             - name: (A)SCS Örneği için OFS Dosya Paylaşımıyla Windows üzerinde HA
               href: sap-high-availability-guide-wsfc-file-share.md
+            - name: Azure NetApp Files (SMB) ile Windows üzerinde SAP NetWeaver için HA
+              href: high-availability-guide-windows-netapp-files-smb.md
             - name: (A)SCS Örneği için SUSE Linux üzerinde HA
               href: high-availability-guide-suse.md
             - name: Azure NetApp Files ile (A)SCS Örneği için SUSE Linux üzerinde HA
@@ -184,6 +190,8 @@
               href: high-availability-guide-suse-pacemaker.md
             - name: RHEL üzerinde Pacemaker
               href: high-availability-guide-rhel-pacemaker.md
+            - name: SAP yüksek oranda kullanılabilirlik senaryolarında Azure Standart Load Balancer kullanan VM’ler için ortak uç nokta bağlantısı
+              href: high-availability-guide-standard-load-balancer-outbound-connections.md
         - name: SAP Yüklemesi
           items:
             - name: (A)SCS Örneği için Paylaşılan Diskle Windows
@@ -206,6 +214,8 @@
               href: sap-ascs-ha-multi-sid-wsfc-file-share.md
     - name: SAP Olağanüstü Durum Kurtarma için Azure Site Recovery
       href: '../../../site-recovery/site-recovery-workload.md#protect-sap'
+    - name: SAP uygulamalarıyla en iyi ağ gecikme süresi için Azure Yakınlık Yerleştirme Grupları
+      href: sap-proximity-placement-scenarios.md
 - name: AAD SAP Kimlik Tümleştirmesi ve Çoklu Oturum Açma
   items:
     - name: SAP Cloud ile Tümleştirme

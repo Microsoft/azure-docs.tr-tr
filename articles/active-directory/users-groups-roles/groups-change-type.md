@@ -1,66 +1,65 @@
 ---
-title: Statik grup üyelik türü değiştirme dinamik - Azure Active Directory | Microsoft Docs
-description: Gruplar ve bir kural başvuru otomatik olarak doldurmak için üyelik kuralları oluşturmak nasıl.
+title: Statik grup üyeliğini dinamik olarak değiştirme-Azure AD | Microsoft Docs
+description: Grupları otomatik olarak doldurmak için üyelik kuralları ve bir kural başvurusu oluşturma.
 services: active-directory
 documentationcenter: ''
 author: curtand
-manager: mtillman
-editor: ''
+manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: users-groups-roles
 ms.topic: article
-ms.date: 03/18/2019
+ms.date: 11/08/2019
 ms.author: curtand
 ms.reviewer: krbain
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dd753ca4994975302a0bc6fede61964f80196d7c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 34451fcc4597f77464e5e9566613e21e9fecdbc6
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60472080"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74027308"
 ---
-# <a name="change-static-group-membership-to-dynamic-in-azure-active-directory"></a>Azure Active Directory'de dinamik statik grup üyeliğini değiştirme
+# <a name="change-static-group-membership-to-dynamic-in-azure-active-directory"></a>Azure Active Directory statik grup üyeliğini dinamik olarak değiştirme
 
-Bir grubun üyeliğini statik olan dinamik (veya tersi) değiştirebileceğiniz, Azure Active Directory (Azure AD). Grup için tüm mevcut başvuruların hala geçerli olduğundan bu nedenle azure AD sistemdeki aynı grubu adını ve Kimliğini tutar. Bunun yerine yeni bir grubu oluşturursanız, bu başvuruları güncelleştirin gerekecektir. Dinamik grup üyeliği, yönetim ek yükü ekleme ve kullanıcıların kaldırılmasını ortadan kaldırır. Bu makale, mevcut gruplar için dinamik üyelik Azure AD yönetim merkezini ya da PowerShell cmdlet'lerini kullanarak statik dönüştürme bildirir.
+Azure Active Directory (Azure AD) Içinde, bir grubun üyeliğini statik (veya tam tersi) olarak değiştirebilirsiniz. Azure AD, sistemde aynı grup adını ve KIMLIĞINI tutar, böylece gruba yapılan tüm başvurular hala geçerlidir. Bunun yerine yeni bir grup oluşturursanız, bu başvuruları güncelleştirmeniz gerekir. Dinamik grup üyeliği, Kullanıcı ekleme ve kaldırma yönetim yükünü ortadan kaldırır. Bu makalede, Azure AD Yönetim Merkezi veya PowerShell cmdlet 'lerini kullanarak var olan grupları statik veya dinamik üyeliğe nasıl dönüştürebileceğiniz açıklanır.
 
 > [!WARNING]
-> Varolan bir statik grup için dinamik bir grup değiştirilirken, tüm mevcut üyelerin grubundan kaldırılır ve yeni üyeler eklemek için üyelik kuralını sonra işlenir. Grubu, uygulamaları veya kaynaklarına erişimi denetlemek için kullanılıyorsa, üyelik kuralı tam olarak işlendiği kadar özgün üye erişimi kaybedebilir dikkat edin.
+> Mevcut bir statik grubu dinamik bir grup olarak değiştirirken, var olan tüm üyeler gruptan kaldırılır ve sonra üyelik kuralı yeni üye eklemek üzere işlenir. Grup, uygulama veya kaynaklara erişimi denetlemek için kullanılıyorsa, üyelik kuralı tam olarak işlenene kadar özgün üyelerin erişimi kaybedebileceğini unutmayın.
 >
-> Yeni grup üyeliği beklenildiği gibi gittiğinden emin olmak için önceden yeni üyelik kuralını test etmenizi öneririz.
+> Gruptaki yeni üyeliğin beklendiğinden emin olmak için yeni üyelik kuralını önceden sınamanızı öneririz.
 
-## <a name="change-the-membership-type-for-a-group"></a>Bir grubu için üyelik türünü değiştirme
+## <a name="change-the-membership-type-for-a-group"></a>Grubun üyelik türünü değiştirme
 
-1. Oturum [Azure AD yönetim merkezini](https://aad.portal.azure.com) genel yönetici veya kiracınızdaki Kullanıcı Yöneticisi olan bir hesapla.
-2. Seçin **grupları**.
-3. Gelen **tüm grupları** listesinde, değiştirmek istediğiniz grubu açın.
-4. Seçin **özellikleri**.
-5. Üzerinde **özellikleri** grubu seç sayfasını bir **üyelik türü** atanan (statik), dinamik kullanıcı ya da, istediği üyelik türüne bağlı olarak dinamik cihaz. Dinamik üyelik için basit bir kuralı seçeneklerini belirleyin veya kendiniz bir üyelik kuralı yazma kuralı Oluşturucusu'nu kullanabilirsiniz. 
+1. [Azure AD Yönetim merkezinde](https://aad.portal.azure.com) , kiracınızda genel yönetici veya Kullanıcı Yöneticisi olan bir hesapla oturum açın.
+2. **Grupları**seçin.
+3. **Tüm gruplar** listesinden, değiştirmek istediğiniz grubu açın.
+4. **Özellikler**’i seçin.
+5. Grubun **Özellikler** sayfasında, istediğiniz üyelik türüne bağlı olarak atanan (statik), dinamik Kullanıcı veya dinamik cihazın **üyelik türünü** seçin. Dinamik üyelik için kural Oluşturucu 'yu kullanarak basit bir kural için seçenekleri seçebilir veya bir üyelik kuralı yazabilirsiniz. 
 
-Bir kullanıcı grubu için dinamik üyeliği statik olan bir grubu değiştirme örneği adımlardır.
+Aşağıdaki adımlar, bir grup Kullanıcı grubu için statik ve dinamik üyeliğe değiştirme örneğidir.
 
-1. Üzerinde **özellikleri** seçili grubunuzun seçin sayfasında bir **üyelik türü** , **dinamik kullanıcı**, gruba değişiklikleri açıklayan iletişim Evet'i seçin devam etmek için üyelik. 
+1. Seçtiğiniz grubun **Özellikler** sayfasında, **dinamik kullanıcının** **üyelik türünü** seçin ve ardından devam etmek için grup üyeliğinde yapılan değişiklikleri açıklayan iletişim kutusunda Evet ' i seçin. 
   
-   ![dinamik kullanıcı üyelik türünü seçin](./media/groups-change-type/select-group-to-convert.png)
+   ![Dinamik kullanıcının üyelik türünü seçin](./media/groups-change-type/select-group-to-convert.png)
   
-2. Seçin **dinamik sorgu Ekle**ve sonra kural sağlayın.
+2. **Dinamik sorgu Ekle**' yi seçin ve kuralı sağlayın.
   
    ![dinamik grup için kural girin](./media/groups-change-type/enter-rule.png)
   
-3. Bir kural oluşturduktan sonra seçin **Sorgu Ekle** sayfanın alt kısmındaki.
-4. Seçin **Kaydet** üzerinde **özellikleri** yaptığınız değişiklikleri kaydetmek grup için sayfa. **Üyelik türü** grubunu Grup listesinde hemen güncelleştirilir.
+3. Kuralı oluşturduktan sonra sayfanın alt kısmındaki **Sorgu Ekle** ' yi seçin.
+4. Değişikliklerinizi kaydetmek için grubun **Özellikler** sayfasında **Kaydet** ' i seçin. Grubun **üyelik türü** , Grup listesinde hemen güncelleştirilir.
 
 > [!TIP]
-> Girdiğiniz üyelik kuralı yanlışsa grubu dönüştürme başarısız olabilir. Kural sistem tarafından neden kabul edilemez bir açıklama içeren portalının sağ üst köşede bir bildirim görüntülenir. Bunu nasıl geçerli hale getirmek için bir kural ayarlayabilirsiniz dikkatli bir şekilde anlamak için okuyun. Kuralın söz dizimi örneklerini ve desteklenen özellikleri, işleçler ve değerleri bir üyelik kuralı için tam bir listesi için bkz: [Azure Active Directory'de gruplar için dinamik Üyelik kuralları](groups-dynamic-membership.md).
+> Girdiğiniz üyelik kuralı yanlış ise grup dönüştürme başarısız olabilir. Portalın sağ üst köşesinde, kuralın neden sistem tarafından kabul edilmediğini belirten bir açıklama içeren bir bildirim görüntülenir. Kuralı geçerli hale getirmek üzere nasıl ayarlayabileceğinizi anlamak için dikkatle okuyun. Kural sözdizimi örnekleri ve bir üyelik kuralı için desteklenen özelliklerin, işleçlerin ve değerlerin tamamen listesi için, bkz. [Azure Active Directory gruplar Için dinamik üyelik kuralları](groups-dynamic-membership.md).
 
-## <a name="change-membership-type-for-a-group-powershell"></a>(PowerShell) grubu için üyelik türünü değiştir
+## <a name="change-membership-type-for-a-group-powershell"></a>Grubun üyelik türünü değiştirme (PowerShell)
 
 > [!NOTE]
-> Cmdlet'leri kullanmak için gerekir, dinamik Grup özelliklerini değiştirmek için **önizleme sürümünü** [Azure AD PowerShell sürüm 2](https://docs.microsoft.com/powershell/azure/active-directory/install-adv2?view=azureadps-2.0). Önizlemeyi yükleyebilirsiniz [PowerShell Galerisi](https://www.powershellgallery.com/packages/AzureADPreview).
+> Dinamik Grup özelliklerini değiştirmek için, [Azure AD PowerShell sürüm 2](https://docs.microsoft.com/powershell/azure/active-directory/install-adv2?view=azureadps-2.0)' **nin önizleme sürümündeki** cmdlet 'leri kullanmanız gerekir. Önizlemeyi [PowerShell Galerisi](https://www.powershellgallery.com/packages/AzureADPreview)yükleyebilirsiniz.
 
-Var olan bir grubuna üyelik Yönetimi geçiş işlevleri örneği aşağıda verilmiştir. Bu örnekte, bakım doğru GroupTypes özelliği yönetmek ve korumak için dinamik üyelik ilgisiz herhangi bir değeri getirilir.
+Mevcut bir grupta üyelik yönetimini değiştirme işlevlerine bir örnek aşağıda verilmiştir. Bu örnekte, GroupTypes özelliğini doğru şekilde işlemek ve dinamik üyelikle ilgisi olmayan değerleri korumak için dikkatli olunmalıdır.
 
 ```powershell
 #The moniker for dynamic groups as used in the GroupTypes property of a group object
@@ -104,13 +103,13 @@ function ConvertStaticGroupToDynamic
     Set-AzureAdMsGroup -Id $groupId -GroupTypes $groupTypes.ToArray() -MembershipRuleProcessingState "On" -MembershipRule $dynamicMembershipRule
 }
 ```
-Statik bir grup yapmak için:
+Bir grubu statik hale getirmek için:
 
 ```powershell
 ConvertDynamicGroupToStatic "a58913b2-eee4-44f9-beb2-e381c375058f"
 ```
 
-Dinamik bir grup yapmak için:
+Bir grubu dinamik hale getirmek için:
 
 ```powershell
 ConvertStaticGroupToDynamic "a58913b2-eee4-44f9-beb2-e381c375058f" "user.displayName -startsWith ""Peter"""
@@ -118,7 +117,7 @@ ConvertStaticGroupToDynamic "a58913b2-eee4-44f9-beb2-e381c375058f" "user.display
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makaleler, Azure Active Directory içinde grupları hakkında ek bilgi sağlar.
+Bu makaleler Azure Active Directory gruplar hakkında ek bilgiler sağlar.
 
 * [Var olan grupları görme](../fundamentals/active-directory-groups-view-azure-portal.md)
 * [Yeni grup oluşturma ve üye ekleme](../fundamentals/active-directory-groups-create-azure-portal.md)

@@ -1,10 +1,10 @@
 ---
-title: Azure'da sanal makineler üzerinde iş yüklerini çalıştırmak | Microsoft Docs
+title: Azure 'da VM 'lerde iş yüklerini çalıştırma | Microsoft Docs
 description: Azure sanal makinelerinde iş yüklerini çalıştırmayı öğrenin.
 services: virtual-machines
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.service: virtual-machines
@@ -12,26 +12,26 @@ ms.topic: article
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
-ms.date: 06/06/2019
+ms.date: 09/20/2019
 ms.author: cynthn
-ms.openlocfilehash: 167370a4eebded3dba898ed47dede7a36900d976
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 11d503e7dd15f148208da65d551f9c6ae71a7e7f
+ms.sourcegitcommit: 3f22ae300425fb30be47992c7e46f0abc2e68478
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66808223"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71265580"
 ---
 # <a name="workloads-on-azure-virtual-machines"></a>Azure sanal makinelerinde iş yükleri
 
-Azure'da sanal makineler, çok sayıda iş yükü destekleyebilir. Her iş yükü dağıtımları azure'da sanal makineler için en iyi tasarım Rehber özelleştirilmiş. Özel iş yükleri için sunuyoruz Kılavuzu bazıları aşağıda verilmiştir.
+Azure 'daki sanal makineler birçok iş yükünü destekleyebilir. Her iş yükü, Azure 'daki VM 'lerde bulunan dağıtımlar için en iyi tasarımın yanında özelleştirilmiş rehberlik içerebilir. Özel iş yükleri için sunduğumuz kılavuzlardan bazıları aşağıda verilmiştir.
 
-- [Yüksek performanslı bilgi işlem](https://docs.microsoft.com/azure/architecture/topics/high-performance-computing/) CPU veya GPU için iyileştirilmiş sanal makineler'ı karmaşık, yoğun işlem gücü kullanımlı sorunları çözmek için Azure kullanır. 
-- [SAP](./sap/get-started.md) Azure'da ölçeklenebilir, uyumlu ve kurumsal düzeyde kendini kanıtlamış bir platformda senaryoları ve görev açısından kritik SAP iş yükleri çalıştırabilirsiniz.
-- [Oracle](./oracle/oracle-considerations.md) tabanlı Oracle Linux'ta Oracle VT 12,1 Standard ve Enterprise sürümleri Azure'da sanal makine görüntülerinde çalıştırmayı destekler. 
+- Azure 'da [yüksek performanslı bilgi işlem](./hpc/overview.md) , karmaşık, yoğun işlem yoğunluklu sorunları çözümlemek için CPU veya GPU iyileştirmeli sanal makineleri kullanır.
+- Azure 'da [SAP](./sap/get-started.md) , iş AÇıSıNDAN kritik sap iş yüklerinizi ve senaryolarını ölçeklenebilir, uyumlu ve kurumsal olarak kanıtlanmış bir platformda çalıştırabilir.
+- [Oracle](./oracle/oracle-considerations.md) , Oracle Linux tabanlı sanal makine görüntüleri üzerinde Azure 'da Oracle DB 12,1 Standard ve Enterprise Edition 'ın çalıştırılmasını destekler. 
 - [Ana bilgisayar yeniden barındırma](./mainframe-rehosting/overview.md) 
 
 
 
 **Sonraki adımlar**
 
-Azure VM'ler için Azure VM hızlı başlangıç kılavuzları ile tanıyalım [Linux](../linux/quick-create-cli-nodejs.md) ve [Windows](../windows/quick-create-powershell.md).
+[Linux](../linux/quick-create-cli.md) ve [WINDOWS](../windows/quick-create-powershell.md)için Azure VM hızlı başlangıç kılavuzlarıyla Azure sanal makinelerini öğrenin.

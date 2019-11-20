@@ -7,22 +7,26 @@
 - name: Hızlı Başlangıçlar
   expaned: true
   items:
-    - name: Özel model eğitme ve verileri ayıklama
+    - name: REST API’sini kullanma
       items:
-        - name: REST API’sini kullanma
+        - name: Özel model eğitme ve verileri ayıklama
           items:
             - name: cURL
               href: quickstarts/curl-train-extract.md
             - name: Python
               href: quickstarts/python-train-extract.md
-    - name: Önceden oluşturulmuş girişler modelini kullanma
-      items:
-        - name: REST API’sini kullanma
+        - name: Önceden oluşturulmuş makbuz modelini kullanma
           items:
             - name: cURL
               href: quickstarts/curl-receipts.md
             - name: Python
               href: quickstarts/python-receipts.md
+    - name: .NET SDK’sini kullanma
+      href: quickstarts/dotnet-sdk.md
+- name: Öğreticiler
+  items:
+    - name: Logic Apps ile Form Tanıma'yı kullanma
+      href: tutorial-form-recognizer-with-logic-apps.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Eğitim verileri kümesi oluşturma
@@ -35,10 +39,16 @@
         - name: Kapsayıcıları yapılandırma
           href: form-recognizer-container-configuration.md
           displayName: 'docker, container, run, billing, apikey, logging'
+        - name: Kapsayıcı örnekleri kullanma
+          href: deploy-form-recognizer-on-container-instances.md
 - name: Başvuru
   items:
     - name: Form Tanıma API’si
       href: 'https://aka.ms/form-recognizer/api'
+    - name: SDK’lar
+      items:
+        - name: .NET
+          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/formrecognizer?view=azure-dotnet-preview'
 - name: Kaynaklar
   items:
     - name: Fiyatlandırma ve limitler

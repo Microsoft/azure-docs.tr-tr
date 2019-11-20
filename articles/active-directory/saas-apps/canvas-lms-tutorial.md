@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Tuval ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve tuval arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: tuvalle Azure Active Directory tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve tuval arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: daveba
 ms.reviewer: barbkess
 ms.assetid: bfed291c-a33e-410d-b919-5b965a631d45
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,252 +16,252 @@ ms.topic: tutorial
 ms.date: 01/02/2018
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d96d1addf1028c2651ed837f3dab66f12d5d5fcc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ab998b6d9aec663123f0bd2428e4c6f1767f1846
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67105858"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73158745"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-canvas"></a>Öğretici: Tuval ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-canvas"></a>Öğretici: tuvalle Azure Active Directory tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile tuval tümleştirme konusunda bilgi edinin.
-Tuval Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Azure Active Directory (Azure AD) ile tuvali tümleştirmeyi öğreneceksiniz.
+Tuvali Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Tuval erişimi, Azure AD'de kontrol edebilirsiniz.
-* Kullanıcılarınızın otomatik olarak tuvale (çoklu oturum açma) ile Azure AD hesaplarına açan olmasını etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Tuvale erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla tuvalde (çoklu oturum açma) otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Tuval ile Azure AD tümleştirmesini yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini tuvalle yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Tuval çoklu oturum açma abonelik etkin.
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Tuval çoklu oturum açma etkin abonelik
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Tuval destekler **SP** tarafından başlatılan
+* Tuval **SP** tarafından başlatılan SSO 'yu destekler
 
 ## <a name="adding-canvas-from-the-gallery"></a>Galeriden tuval ekleme
 
-Azure AD'de tuvalinin tümleştirmesini yapılandırmak için tuval Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Tuvalin tümleştirmesini Azure AD 'ye göre yapılandırmak için galerideki tuvalden yönetilen SaaS uygulamaları listenize tuval eklemeniz gerekir.
 
-**Galeriden tuval eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden tuval eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **tuval**seçin **tuval** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **tuval**yazın, sonuç panelinden **tuval** ' i seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde tuvali](common/search-new-app.png)
+     ![Sonuçlar listesinde tuval](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma tuval adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ile ilgili kullanıcının tuval arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına göre tuvalle yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve tuvaldeki ilgili Kullanıcı arasındaki bağlantı ilişkisinin oluşturulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma tuval ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı tuvalle yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Tuval çoklu oturum açmayı yapılandırma](#configure-canvas-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Tuval test kullanıcısı oluşturma](#create-canvas-test-user)**  - kullanıcı Azure AD gösterimini bağlı tuvalinde Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. **[Tuval çoklu oturum açmayı yapılandırma](#configure-canvas-single-sign-on)** -uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Kullanıcının Azure AD gösterimine bağlı olan tuvalde Britta Simon 'un bir karşılığı olacak **[tuval testi kullanıcısı oluşturun](#create-canvas-test-user)** .
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma tuval ile yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı tuvalle yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **tuval** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **tuval** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![Tuval etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier.png)
+    ![Tuval etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/sp-identifier.png)
 
-    a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<tenant-name>.instructure.com`
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<tenant-name>.instructure.com`
 
-    b. İçinde **tanımlayıcı (varlık kimliği)** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<tenant-name>.instructure.com/saml2`
+    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<tenant-name>.instructure.com/saml2`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL ve tanımlayıcıdır ile güncelleştirin. İlgili kişi [tuval istemci Destek ekibine](https://community.canvaslms.com/community/help) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için [tuval istemci desteği ekibine](https://community.canvaslms.com/community/help) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-5. İçinde **SAML imzalama sertifikası** bölümünde **Düzenle** açmak için düğmeyi **SAML imzalama sertifikası** iletişim.
+5. **SAML Imzalama sertifikası** bölümünde, **SAML imzalama sertifikası** Iletişim kutusunu açmak için **Düzenle** düğmesine tıklayın.
 
-    ![SAML imzalama sertifikası Düzenle](common/edit-certificate.png)
+    ![SAML Imzalama sertifikasını Düzenle](common/edit-certificate.png)
 
-6. İçinde **SAML imzalama sertifikası** bölümünde, kopya **parmak İZİ** ve bilgisayarınıza kaydedin.
+6. **SAML Imzalama sertifikası** bölümünde, **parmak izini** kopyalayın ve bilgisayarınıza kaydedin.
 
-    ![Parmak izi değerini kopyalayın](common/copy-thumbprint.png)
+    ![Parmak Izi değerini Kopyala](common/copy-thumbprint.png)
 
-7. Üzerinde **tuval kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+7. **Tuvali ayarla** bölümünde, uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-canvas-single-sign-on"></a>Tuval çoklu oturum açmayı yapılandırın
+### <a name="configure-canvas-single-sign-on"></a>Tuval çoklu oturum açmayı yapılandırma
 
-1. Farklı bir web tarayıcı penceresinde bir tuval şirketinizin sitesi için bir yönetici olarak oturum açın.
+1. Farklı bir Web tarayıcısı penceresinde, tuval şirket sitenizde yönetici olarak oturum açın.
 
-2. Git **kursları \> yönetilen hesapları \> Microsoft**.
+2. **Microsoft \> yönetilen hesaplara \> kurslara**gidin.
 
-    ![Tuval](./media/canvas-lms-tutorial/ic775990.png "tuvali")
+    ![Tuvalinin](./media/canvas-lms-tutorial/ic775990.png "Tuvalinin")
 
-3. Sol taraftaki gezinti bölmesinde seçin **kimlik doğrulaması**ve ardından **yeni SAML yapılandırma Ekle**.
+3. Sol taraftaki Gezinti bölmesinde **kimlik doğrulaması**' nı seçin ve ardından **Yeni SAML Yapılandırması Ekle**' ye tıklayın.
 
-    ![Kimlik doğrulaması](./media/canvas-lms-tutorial/ic775991.png "kimlik doğrulaması")
+    ![Kimlik doğrulaması](./media/canvas-lms-tutorial/ic775991.png "Kimlik Doğrulaması")
 
 4. Geçerli tümleştirme sayfasında, aşağıdaki adımları gerçekleştirin:
 
-    ![Geçerli tümleştirme](./media/canvas-lms-tutorial/ic775992.png "geçerli tümleştirme")
+    ![Güncel tümleştirme](./media/canvas-lms-tutorial/ic775992.png "Güncel tümleştirme")
 
-    a. İçinde **IDP varlık kimliği** metin değerini yapıştırın **Azure Ad tanımlayıcısı** , Azure Portalı'ndan kopyaladığınız.
+    a. **IDP VARLıK kimliği** metin kutusunda, Azure Portal kopyaladığınız **Azure AD tanımlayıcısının** değerini yapıştırın.
 
-    b. İçinde **oturum üzerinde URL'sini** metin değerini yapıştırın **oturum açma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    b. **URL 'de oturum** Aç metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
 
-    c. İçinde **oturum kapatma URL'sini** metin değerini yapıştırın **oturum kapatma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    c. **Oturumu Kapat URL** metin kutusunda, Azure Portal kopyaladığınız **Logout URL 'si** değerini yapıştırın.
 
-    d. İçinde **Değiştir parola bağlantısını** metin değerini yapıştırın **parola URL'yi Değiştir** , Azure Portalı'ndan kopyaladığınız.
+    d. **Parola Değiştir bağlantı** metin kutusunda, Azure Portal kopyaladığınız **parola URL 'si Değiştir** değerini yapıştırın.
 
-    e. İçinde **sertifika parmak izi** metin kutusu, yapıştırma **parmak izi** Azure Portalı'ndan kopyaladığınız sertifika değeri.
+    e. **Sertifika parmak izi** metin kutusunda, Azure Portal kopyaladığınız sertifikanın **parmak izi** değerini yapıştırın.
 
-    f. Gelen **oturum açma özniteliği** listesinden **Nameıd**.
+    f. **Oturum açma özniteliği** listesinden **NameID**' yi seçin.
 
-    g. Gelen **tanımlayıcı biçimi** listesinden **emailAddress**.
+    g. **Tanımlayıcı biçimi** listesinden **emapostaadresi**' ni seçin.
 
-    h. Tıklayın **kimlik doğrulama ayarlarını kaydetme**.
+    h. **Kimlik doğrulama ayarlarını kaydet**' e tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma tuvale erişim vererek kullanmak Britta Simon etkinleştirin.
+Bu bölümde, tuvalde erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon özelliğini etkinleştirirsiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **tuval**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve **tuval**' i seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **tuval**.
+2. Uygulamalar listesinde **tuval**' i seçin.
 
-    ![Uygulamalar listesini tuval bağlantıdaki](common/all-applications.png)
+    ![Uygulamalar listesindeki tuval bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-canvas-test-user"></a>Tuval test kullanıcısı oluşturma
+### <a name="create-canvas-test-user"></a>Tuval testi kullanıcısı oluştur
 
-Tuvale oturum açmak Azure AD kullanıcılarının etkinleştirmek için bunlar tuvale sağlanması gerekir. Söz konusu olduğunda, kullanıcı sağlamayı elle bir görevin tuvaldir.
+Azure AD kullanıcılarının tuvalde oturum açmasını sağlamak için, tuvalde sağlanması gerekir. Tuval durumunda, Kullanıcı hazırlama el ile gerçekleştirilen bir görevdir.
 
 **Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:**
 
-1. Oturum açın, **tuval** Kiracı.
+1. **Tuval** kiracınızda oturum açın.
 
-2. Git **kursları \> yönetilen hesapları \> Microsoft**.
+2. **Microsoft \> yönetilen hesaplara \> kurslara**gidin.
 
-   ![Tuval](./media/canvas-lms-tutorial/ic775990.png "tuvali")
+   ![Tuvalinin](./media/canvas-lms-tutorial/ic775990.png "Tuvalinin")
 
 3. **Kullanıcılar**’a tıklayın.
 
-   ![Kullanıcılar](./media/canvas-lms-tutorial/ic775995.png "kullanıcılar")
+   ![Kullanıcılar](./media/canvas-lms-tutorial/ic775995.png "Kullanıcılar")
 
-4. Tıklayın **yeni kullanıcı ekleme**.
+4. **Yeni Kullanıcı Ekle**' ye tıklayın.
 
-   ![Kullanıcılar](./media/canvas-lms-tutorial/ic775996.png "kullanıcılar")
+   ![Kullanıcılar](./media/canvas-lms-tutorial/ic775996.png "Kullanıcılar")
 
-5. Yeni kullanıcı iletişim Sayfa Ekle üzerinde aşağıdaki adımları gerçekleştirin:
+5. Yeni Kullanıcı Ekle iletişim sayfasında, aşağıdaki adımları uygulayın:
 
-   ![Kullanıcı ekleme](./media/canvas-lms-tutorial/ic775997.png "kullanıcı ekleme")
+   ![Kullanıcı Ekle](./media/canvas-lms-tutorial/ic775997.png "Kullanıcı Ekleme")
 
-   a. İçinde **tam adı** metin gibi kullanıcı adını girin **BrittaSimon**.
+   a. **Tam ad** metin kutusuna, **Brittasıon**gibi kullanıcının adını girin.
 
-   b. İçinde **e-posta** metin gibi kullanıcının e-posta girin **brittasimon\@contoso.com**.
+   b. **E-posta** metin kutusuna, **brittasıon\@contoso.com**gibi kullanıcının e-postasını girin.
 
-   c. İçinde **oturum açma** metin kutusu, kullanıcının Azure AD e-posta adresi gibi girin **brittasimon\@contoso.com**.
+   c. **Oturum açma** metin kutusunda, kullanıcının Azure ad e-posta adresini **brittasıon\@contoso.com**gibi girin.
 
-   d. Seçin **bu hesap oluşturma hakkında kullanıcıya e-posta**.
+   d. **Kullanıcıya bu hesap oluşturma hakkında e-posta gönder**' i seçin.
 
-   e. Tıklayın **kullanıcı ekleme**.
+   e. **Kullanıcı Ekle**' ye tıklayın.
 
 > [!NOTE]
-> Herhangi diğer tuval kullanıcı hesabı oluşturma araçları kullanabilir veya API'leri için AAD kullanıcı hesapları sağlamak tuval tarafından sağlanan.
+> AAD Kullanıcı hesaplarını sağlamak için tuval tarafından sunulan diğer tuval Kullanıcı hesabı oluşturma araçlarını veya API 'Leri kullanabilirsiniz.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim paneli tuval kutucuğa tıkladığınızda, size otomatik olarak tuvale SSO'yu ayarlama oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde tuval kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız tuvalde otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

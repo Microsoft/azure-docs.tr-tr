@@ -1,51 +1,45 @@
 ---
-title: Linux için Azure Disk şifrelemesi | Microsoft Docs
-description: Azure Disk şifrelemesi için Linux sanal makine uzantısı kullanarak bir sanal makineye dağıtır.
+title: Linux için Azure disk şifrelemesi
+description: Linux için Azure disk şifrelemesini, sanal makine uzantısı kullanarak bir sanal makineye dağıtır.
 services: virtual-machines-linux
 documentationcenter: ''
 author: ejarvi
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 06/10/2019
 ms.author: ejarvi
-ms.openlocfilehash: 05d20e75cf8f0c84936ff4e5dfa42d60678f6ffc
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.openlocfilehash: 4fa7f7d1419a8cd1006a632ba67587ab3434bf5a
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67295341"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073802"
 ---
-# <a name="azure-disk-encryption-for-linux-microsoftazuresecurityazurediskencryptionforlinux"></a>Linux (Microsoft.Azure.Security.AzureDiskEncryptionForLinux) için Azure Disk şifrelemesi
+# <a name="azure-disk-encryption-for-linux-microsoftazuresecurityazurediskencryptionforlinux"></a>Linux için Azure disk şifrelemesi (Microsoft. Azure. Security. AzureDiskEncryptionForLinux)
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure Disk şifrelemesi yararlanır dm-crypt alt tam disk şifreleme sağlamak için Linux sisteminde [seçin Azure Linux dağıtımları](https://aka.ms/adelinux).  Bu çözüm, disk şifreleme anahtarlarını ve gizli anahtarları yönetmek için Azure anahtar kasası ile tümleştirilmiştir.
+Azure disk şifrelemesi, [Select Azure Linux dağıtımları](https://aka.ms/adelinux)üzerinde tam disk şifrelemesi sağlamak için Linux 'daki dm-crypt alt sisteminden yararlanır.  Bu çözüm, disk şifreleme anahtarlarını ve gizli dizileri yönetmek için Azure Key Vault ile tümleşiktir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Önkoşullar tam bir listesi için bkz. [Azure Disk şifrelemesi önkoşulları](
-../../security/azure-security-disk-encryption-prerequisites.md).
+Önkoşulların tam listesi için bkz. [Linux VM 'leri Için Azure disk şifrelemesi](../linux/disk-encryption-overview.md), özellikle aşağıdaki bölümler:
 
-### <a name="operating-system"></a>İşletim sistemi
+- [Linux sanal makineleri için Azure disk şifrelemesi](../linux/disk-encryption-overview.md#supported-vms-and-operating-systems)
+- [Ek VM gereksinimleri](../linux/disk-encryption-overview.md#additional-vm-requirements)
+- [Ağ gereksinimleri](../linux/disk-encryption-overview.md#networking-requirements)
 
-Azure Disk şifrelemesi, şu anda select dağıtımları ve sürümlerinde desteklenir.  Bkz: [Azure Disk şifrelemesi desteklenen işletim sistemleri: Linux](../../security/azure-security-disk-encryption-prerequisites.md#linux) desteklenen Linux dağıtımları listesi.
+## <a name="extension-schemata"></a>Uzantı şemaların serileştirilmesi
 
-### <a name="internet-connectivity"></a>İnternet bağlantısı
+Azure disk şifrelemesi için iki şemaların serileştirilmesi vardır: v 1.1, daha yeni ve Azure Active Directory (AAD) özellikleri kullanmayan, önerilen bir şema ve AAD özellikleri gerektiren eski bir şema. Kullanmakta olduğunuz uzantıya karşılık gelen şema sürümünü kullanmanız gerekir: AzureDiskEncryptionForLinux uzantısı sürüm 1,1 için şema v 1.1, AzureDiskEncryptionForLinux uzantısı sürümü 0,1 için şema v 0,1.
+### <a name="schema-v11-no-aad-recommended"></a>Şema v 1.1: AAD yok (önerilir)
 
-Linux için Azure Disk şifrelemesi, erişim için Active Directory, Key Vault, depolama ve paket yönetim uç noktalarını Internet bağlantısı gerektirir.  Daha fazla bilgi için [Azure Disk şifrelemesi önkoşulları](../../security/azure-security-disk-encryption-prerequisites.md).
-
-## <a name="extension-schemata"></a>Uzantı şemaların
-
-Azure Disk şifrelemesi için iki şemaların vardır: v1.1, Azure Active Directory (AAD) özellikleri ve v0.1 kullanmaz daha yeni ve önerilen şema, AAD özellikleri gerektiren daha eski bir şema. Kullanmakta olduğunuz uzantısı için karşılık gelen şema sürümü kullanmanız gerekir: şema v1.1 uzantısı sürüm 1.1, uzantı sürümü 0,1 AzureDiskEncryptionForLinux için şema v0.1 AzureDiskEncryptionForLinux için.
-### <a name="schema-v11-no-aad-recommended"></a>Şema v1.1: Hiçbir AAD (önerilir)
-
-V1.1 şeması önerilir ve Azure Active Directory özelliklerini gerektirmez.
+V 1.1 şeması önerilir ve Azure Active Directory özellik gerektirmez.
 
 ```json
 {
@@ -71,11 +65,11 @@ V1.1 şeması önerilir ve Azure Active Directory özelliklerini gerektirmez.
 ```
 
 
-### <a name="schema-v01-with-aad"></a>Şema v0.1: AAD ile 
+### <a name="schema-v01-with-aad"></a>Şema v 0.1: AAD ile 
 
-0,1 şema gerektirir `aadClientID` ve her iki `aadClientSecret` veya `AADClientCertificate`.
+0,1 şeması `aadClientID` ve `aadClientSecret` ya da `AADClientCertificate`gerektirir.
 
-Kullanarak `aadClientSecret`:
+`aadClientSecret`kullanma:
 
 ```json
 {
@@ -105,7 +99,7 @@ Kullanarak `aadClientSecret`:
 }
 ```
 
-Kullanarak `AADClientCertificate`:
+`AADClientCertificate`kullanma:
 
 ```json
 {
@@ -142,33 +136,33 @@ Kullanarak `AADClientCertificate`:
 | ---- | ---- | ---- |
 | apiVersion | 2015-06-15 | date |
 | publisher | Microsoft.Azure.Security | string |
-| türü | AzureDiskEncryptionForLinux | string |
+| type | AzureDiskEncryptionForLinux | string |
 | typeHandlerVersion | 0.1, 1.1 | int |
-| (0,1 Şeması) AADClientID | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | GUID | 
-| (0,1 Şeması) AADClientSecret | password | string |
-| (0,1 Şeması) AADClientCertificate | thumbprint | string |
-| DiskFormatQuery | {"dev_path": "", "name": "","file_system": ""} | JSON sözlüğü |
+| (0.1 Şeması) AADClientID | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | guid | 
+| (0,1 şeması) AADClientSecret | password | string |
+| (0,1 şeması) AADClientCertificate | thumbprint | string |
+| DiskFormatQuery | {"dev_path": "", "ad": "", "file_system": ""} | JSON sözlüğü |
 | EncryptionOperation | EnableEncryption, EnableEncryptionFormatAll | string | 
-| KeyEncryptionAlgorithm | 'OAEP RSA', 'RSA-OAEP-256', 'RSA1_5' | string |
-| KeyEncryptionKeyURL | url | string |
-| (optional) KeyVaultURL | url | string |
+| KeyEncryptionAlgorithm | ' RSA-OAEP ', ' RSA-OAEP-256 ', ' RSA1_5 ' | string |
+| KeyEncryptionKeyURL 'Si | url | string |
+| seçim KeyVaultURL | url | string |
 | Passphrase | password | string | 
 | SequenceVersion | uniqueidentifier | string |
-| VolumeType | İşletim sistemi, veri, tüm | string |
+| Birimtürü | İşletim sistemi, veri, tümü | string |
 
 ## <a name="template-deployment"></a>Şablon dağıtımı
 
-Şablonu dağıtım örneği için bkz: [çalışan bir Linux VM üzerinde şifrelemeyi etkinleştir](https://github.com/Azure/azure-quickstart-templates/tree/master/201-encrypt-running-linux-vm).
+Şablon dağıtımı örneği için bkz. [çalışan bir LINUX VM 'de şifrelemeyi etkinleştirme](https://github.com/Azure/azure-quickstart-templates/tree/master/201-encrypt-running-linux-vm).
 
 ## <a name="azure-cli-deployment"></a>Azure CLI dağıtım
 
-Yönergeler için en [Azure CLI belgeleri](/cli/azure/vm/encryption?view=azure-cli-latest). 
+Yönergeleri en son [Azure CLI belgelerinde](/cli/azure/vm/encryption?view=azure-cli-latest)bulabilirsiniz. 
 
 ## <a name="troubleshoot-and-support"></a>Sorun giderme ve Destek
 
 ### <a name="troubleshoot"></a>Sorun giderme
 
-Sorun giderme için başvurmak [Azure Disk şifrelemesi sorun giderme kılavuzu](../../security/azure-security-disk-encryption-tsg.md).
+Sorun giderme için, [Azure disk şifrelemesi sorun giderme kılavuzu](../../security/azure-security-disk-encryption-tsg.md)'na bakın.
 
 ### <a name="support"></a>Destek
 
@@ -176,4 +170,4 @@ Bu makalede herhangi bir noktada daha fazla yardıma ihtiyacınız olursa, üzer
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-VM uzantıları hakkında daha fazla bilgi için bkz: [Linux yönelik sanal makine uzantılarına ve özelliklerine](features-linux.md).
+VM uzantıları hakkında daha fazla bilgi için bkz. [Linux Için sanal makine uzantıları ve özellikleri](features-linux.md).

@@ -1,219 +1,220 @@
 ---
-title: Microsoft Developer hesabı oluşturma | Azure Market
-description: Gereksinimleri ve Microsoft Developer hesabı oluşturma adımları.
+title: Microsoft Geliştirici hesabı oluşturun | Azure Marketi
+description: Microsoft Geliştirici hesabı oluşturmaya yönelik gereksinimler ve adımlar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 4fde5d81fb97bec23fdb46ff53b05874c88d9d67
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 522caa53123ad5ccb8076839d2dfa7dc1236b022
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935856"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818418"
 ---
-<a name="create-a-microsoft-developer-account"></a>Microsoft Developer hesabı oluşturma
+<a name="create-a-microsoft-developer-account"></a>Microsoft Geliştirici hesabı oluşturma
 ====================================
 
-Bu makalede, Azure Market'te yayımlamak için onaylanmış bir Microsoft Developer haline açıklar.
+Bu makalede, Azure Market yayımlaması için onaylanan Microsoft geliştiricisi nasıl yapılacağı açıklanır.
 
-## <a name="create-a-microsoft-account"></a>Microsoft hesabı oluşturun
+## <a name="create-a-microsoft-account"></a>Microsoft hesabı oluşturma
 
-Yayımlama işlemini başlatmak için tamamlanması gerekir **Microsoft Developer Center** kayıt. Kayıtlı hesap kullanacağınız **[bulut iş ortağı portalı](https://cloudpartner.azure.com/)** yayımlama işlemini başlatmak için.
+Yayımlama işlemini başlatmak için, **Microsoft Geliştirici Merkezi** kaydı ' nı doldurmanız gerekir. Yayımlama işlemini başlatmak için **[bulut iş ortağı portalı](https://cloudpartner.azure.com/)** kayıtlı hesabı kullanacaksınız.
 
-### <a name="general-account-guidelines"></a>Genel hesabı yönergeleri
+### <a name="general-account-guidelines"></a>Genel hesap yönergeleri
 
-Azure Marketi Teklifleriniz için bir Microsoft hesabı yalnızca sahip olmasını öneririz. Bu hesap, hizmetleri veya teklifler özgü olmamalıdır.
+Azure Market teklifleriniz için yalnızca bir Microsoft hesabı olması önerilir. Bu hesabın hizmet veya tekliflere özgü olmaması gerekir.
 
-Kullanıcı adını oluşturan adres, etki alanınız üzerinde olmalı ve BT ekibiniz tarafından denetlenir. Tüm yayımlama ilgili etkinlikleri bu hesap aracılığıyla yapılmalıdır.
+Kullanıcı adını oluşturan adres, etki alanında olmalı ve BT ekibiniz tarafından denetlenmelidir. Yayımlamayla ilgili tüm etkinliklerin bu hesap üzerinden yapılması gerekir.
 
 >[!WARNING]
->"Azure" ve "Microsoft" gibi sözcükleri Microsoft hesap kaydı için desteklenmez. Hesap oluşturma ve kayıt işlemini tamamlamak için bu sözcükler kullanmaktan kaçının.
+>"Azure" ve "Microsoft" gibi sözcükler Microsoft hesabı kayıt için desteklenmez. Hesap oluşturma ve kayıt işlemini gerçekleştirmek için bu kelimeleri kullanmaktan kaçının.
 
 ### <a name="company-account-guidelines"></a>Şirket hesabı yönergeleri
 
-Hesap açılan Microsoft hesabıyla oturum açarak hesabınıza erişmek birden fazla kişi gerekiyorsa aşağıdaki yönergeleri izleyin.
+Hesabı açan Microsoft hesabı oturum açarak hesaba erişmek için birden fazla kişi gerekiyorsa, bu yönergeleri izleyin.
 
 >[!IMPORTANT]
->Birden çok kullanıcı Geliştirme Merkezi hesabınıza erişmesine izin vermek için Azure Active Directory rolleri ayrı kullanıcılara atamak için kullanmanızı öneririz. Bireysel oturum açarak hesaba erişebilir Azure AD kimlik. Daha fazla bilgi için [hesabı kullanıcılarını yönetmek](https://docs.microsoft.com/windows/uwp/publish/manage-account-users).
+>Birden çok kullanıcının geliştirme merkezi hesabınıza erişmesine izin vermek için, bireysel kullanıcılara roller atamak üzere Azure Active Directory kullanmanızı öneririz. Bireysel Azure AD kimlik bilgileriyle oturum açarak hesaba erişebilirler. Daha fazla bilgi için bkz. [Hesap kullanıcılarını yönetme](https://docs.microsoft.com/windows/uwp/publish/manage-account-users).
 
--   Şirketinize ait bir e-posta adresi kullanarak Microsoft hesabınızı oluşturma\'s etki alanı, ancak tek. Örneğin, windowsapps\@fabrikam.com.
--   Geliştiricilerin olası en küçük sayı bu Microsoft hesabına erişimi sınırlayın.
--   Geliştirici hesabına erişmesi için gereken herkes içeren bir şirket e-posta dağıtım listesini ayarlamak ve bu e-posta adresi güvenlik bilgilerinizi ekleyin. Bu tüm çalışanları, listede gerektiğinde güvenlik kodlarını ve Microsoft hesabınızın güvenlik bilgilerini yönetmenize olanak sağlar. Bir dağıtım listesi oluşturarak uygun değilse, tek bir e-posta hesabının sahibi erişim ve güvenlik kodunu (örneğin, yeni güvenlik bilgileri hesabınıza eklendiğinde veya ne zaman yeni bir cihaz üzerinden erişilmelidir.) istendiğinde paylaşmak kullanılabilir olması gerekir
--   Bir uzantı gerektirmez ve anahtar takım üyeleri için erişilebilir olan bir şirket telefon numarası ekleyin.
--   Genel olarak, şirketinizin Geliştirici hesabınıza oturum açmak için güvenilen cihazları kullanan geliştiricileri sahiptir. Tüm anahtar ekip üyeleri, bu güvenilen cihazlara erişimi olmalıdır. Bu hesap erişirken gönderilecek güvenlik kodlarını gereksinimini azaltır.
--   Güvenilir olmayan bir Bilgisayardan hesabına erişime ihtiyacınız varsa, en fazla beş geliştiriciden erişimi sınırlayın. İdeal olarak, bu geliştiricilerin hesabı, aynı coğrafi paylaşın ve ağ konumu makinelerden erişmelidir.
--   Sık gözden geçirin, [şirketin güvenlik bilgisi](https://account.live.com/proofs/Manage) geçerli olduğundan emin olmak için.
+-   Şirketinizin\'s etki alanına ait olan, tek bir kişiye ait olmayan bir e-posta adresi kullanarak Microsoft hesabı oluşturun. Örneğin, WindowsApps\@fabrikam.com.
+-   Bu Microsoft hesabı erişimi, mümkün olan en az sayıda geliştiriciyle sınırlayın.
+-   Geliştirici hesabına erişmesi gereken herkesi içeren bir kurumsal e-posta dağıtım listesi ayarlayın ve bu e-posta adresini güvenlik bilgilerinize ekleyin. Bu, listedeki tüm çalışanların gerektiğinde güvenlik kodları almasına ve Microsoft hesabı güvenlik bilgilerini yönetmesine olanak tanır. Dağıtım listesi ayarlamak uygun değilse, her bir e-posta hesabının sahibi, istendiğinde güvenlik koduna erişmek ve bu kodun paylaşılması için kullanılabilir olması gerekir (hesaba yeni güvenlik bilgileri eklendiğinde veya yeni bir cihazdan erişilmesi gerektiğinde).
+-   Uzantı gerektirmeyen ve anahtar takım üyeleri tarafından erişilebilen bir şirket telefonu numarası ekleyin.
+-   Genel olarak, geliştiricilerin şirketinizin Geliştirici hesabında oturum açmak için Güvenilen cihazları kullanmasını sağlayabilirsiniz. Tüm anahtar takım üyelerinin bu güvenilir cihazlara erişimi olmalıdır. Bu, hesaba erişirken güvenlik kodlarının gönderilmesi gereksinimini azaltır.
+-   Hesaba güvenilmeyen bir BILGISAYARDAN erişime izin vermeniz gerekiyorsa, erişimi en fazla beş geliştiriciyle sınırlayın. İdeal olarak, bu geliştiricilerin hesaba aynı coğrafi ve ağ konumunu paylaşan makinelerden erişmesi gerekir.
+-   Güncel olduğundan emin olmak için [şirketinizin güvenlik bilgilerini](https://account.live.com/proofs/Manage) sık sık gözden geçirin.
 
 >[!IMPORTANT]
->Geliştirici hesabınızın birincil güvenilen bilgisayarlarından erişilmelidir. Hesap, haftası başına oluşturulan kodları sayısına bir sınır olduğundan bu önemlidir. Ayrıca, en kolay oturum açma deneyimi sağlar.
+>Geliştirici hesabınıza öncelikle güvenilen bilgisayarlardan erişilmelidir. Her gün hesap başına oluşturulan kodların sayısına bir sınır olduğundan bu kritik öneme sahiptir. Ayrıca en sorunsuz oturum açma deneyimini de mümkün kılar.
 >
->Daha fazla bilgi için [ek Geliştirici hesabı kuralları ve güvenlik](https://msdn.microsoft.com/windows/uwp/publish/opening-a-developer-account#additional-guidelines-for-company-accounts).
+>Daha fazla bilgi için bkz. [ek geliştirici hesabı yönergeleri ve güvenliği](https://msdn.microsoft.com/windows/uwp/publish/opening-a-developer-account#additional-guidelines-for-company-accounts).
 
-### <a name="to-create-a-microsoft-account"></a>Bir Microsoft hesabı oluşturmak için
+### <a name="to-create-a-microsoft-account"></a>Microsoft hesabı oluşturmak için
 
-1.  Yeni bir gizli Chrome veya Internet Explorer gözatma oturumunda InPrivate, mevcut bir hesaba oturum açmadıysanız emin olmak için açın.
-2.  Bunu kullanarak bir Microsoft hesabı olarak (önceki yönergeleri kullanarak) e-posta kaydetme [bağlantı](https://signup.live.com/signup.aspx). Aşağıdaki kaydolma yönergeleri izleyin:
+1.  Mevcut bir hesapta oturum açmadığınızdan emin olmak için yeni bir Chrome ınbilito veya Internet Explorer InPrivate gözatma oturumu açın.
+2.  Bu [bağlantıyı](https://signup.live.com/signup.aspx)kullanarak e-postayı (önceki yönergeleri kullanarak) Microsoft hesabı olarak kaydedin. Aşağıdaki kaydolma talimatlarını doldurun:
 
-    - Hesabınızı bir Microsoft hesabı olarak kaydolurken size kısa mesajla veya otomatik çağrı bir hesap doğrulama kodu göndermek için geçerli bir telefon numarası sistemi vermeniz gerekir.
-    - Hesabınızı bir Microsoft hesabı olarak kaydolurken hesap doğrulaması için otomatik bir e-posta almak için geçerli bir e-posta kimliği sağlamanız gerekir.
-    - DL'ye gönderilen e-posta adresini doğrulayın.
+    - Hesabınızı Microsoft hesabı olarak kaydederken, sistemin size bir ileti veya otomatik çağrı olarak hesap doğrulama kodu gönderebilmesi için geçerli bir telefon numarası sağlamanız gerekir.
+    - Hesabınızı Microsoft hesabı olarak kaydederken, hesap doğrulama için otomatik e-posta almak üzere geçerli bir e-posta kimliği sağlamanız gerekir.
+    - DL 'ye gönderilen e-posta adresini doğrulayın.
 
-    Artık Microsoft Developer Center'da yeni bir Microsoft hesabı kullanmaya hazırsınız.
+    Artık Microsoft Geliştirici Merkezi 'nde yeni Microsoft hesabı kullanmaya hazırsınız.
 
-## <a name="register-your-account-in-microsoft-developer-center"></a>Microsoft Developer Center'da hesabınızı kaydedin
+## <a name="register-your-account-in-microsoft-developer-center"></a>Hesabınızı Microsoft Geliştirici Merkezi 'ne kaydetme
 
-Microsoft Developer Center şirket bilgilerinin bir kere kaydetmek için kullanılır. Kayıt yetkilisi geçerli bir şirket temsilcisi olmalıdır ve kullanıcıların kimliğini doğrulamak için bir yol olarak kendi kişisel bilgilerini sağlamanız gerekir. Kaydetme kişi, şirket için paylaşılan bir Microsoft hesabı kullanmanız gerekir **ve bulut iş ortağı Portalı'nda aynı hesabı kullanılmalıdır.** Oluşturmak çalışmadan önce şirketinizin zaten bir Microsoft Developer Center hesabına sahip olmayan yapmak için denetleme yapmalıdır. İşlemi sırasında biz şirketin adres bilgilerini, banka hesabı bilgilerini toplayın ve vergi bilgilerini. Bu bilgiler genellikle finans bölümüyle veya işletmeyle ilgili kişilerden alınabilir.
+Microsoft Geliştirici Merkezi, şirket bilgilerini bir kez kaydetmek için kullanılır. Sahibi, şirketin geçerli bir temsilcisi olmalıdır ve kendi kişisel bilgilerini kimliklerini doğrulamak için bir yol olarak sağlamalıdır. Kaydolma, şirket için paylaşılan bir Microsoft hesabı kullanmalıdır **ve bulut iş ortağı portalı aynı hesap kullanılmalıdır.** Hesap oluşturmayı denemeden önce şirketinizin zaten bir Microsoft Geliştirici Merkezi hesabına sahip olmadığından emin olun. İşlem sırasında şirket adres bilgilerini, banka hesabı bilgilerini ve vergi bilgilerini toplayacağız. Bu bilgiler genellikle finans bölümüyle veya işletmeyle ilgili kişilerden alınabilir.
 
 >[!IMPORTANT]
->Teklif oluşturulmasını ve dağıtımını çeşitli aşamaları ilerleme için aşağıdaki Geliştirici profili bileşenleri tamamlamanız gerekir.
+>Teklif oluşturma ve dağıtım aşamalarını çeşitli aşamalarda ilerlemeniz için aşağıdaki geliştirici profili bileşenlerini doldurmanız gerekir.
 
-| Geliştirici profili     | Draft'ı başlatmak için    | Staging       | Ücretsiz yayımlama ve çözüm şablonu   | Ticari yayımlama   |
+| Geliştirici profili     | Taslağı başlatmak için    | Staging       | Ücretsiz yayımlama ve çözüm şablonu   | Ticari Yayımla   |
 |---------------------- |----------------   |-----------    |-------------------------------------  |---------------------  |
-| Kayıt şirketi  | Sahip olmalıdır         | Sahip olmalıdır     | Sahip olmalıdır                             | Sahip olmalıdır             |
-| Vergi profili kimliği        | İsteğe bağlı          | İsteğe bağlı      | İsteğe bağlı                              | Sahip olmalıdır             |
-| Banka hesabı          | İsteğe bağlı          | İsteğe bağlı      | İsteğe bağlı                              | Sahip olmalıdır             |
+| Şirket kaydı  | Olmalıdır         | Olmalıdır     | Olmalıdır                             | Olmalıdır             |
+| Vergi profili KIMLIĞI        | İsteğe bağlı          | İsteğe bağlı      | İsteğe bağlı                              | Olmalıdır             |
+| Banka hesabı          | İsteğe bağlı          | İsteğe bağlı      | İsteğe bağlı                              | Olmalıdır             |
 
 >[!NOTE]
->Getir kendi lisansını (KLG) yalnızca sanal makineler için desteklenir ve ücretsiz bir teklif olarak kabul edilir.
+>Kendi lisansınızı getirin (KLG) yalnızca sanal makinelerde desteklenir ve ücretsiz bir teklif olarak kabul edilir.
 
-### <a name="register-your-company-account"></a>Şirket hesabınızı kaydedin
+### <a name="register-your-company-account"></a>Şirket hesabınızı kaydetme
 
-1. Yeni bir InPrivate Internet Explorer veya Chrome gizli gözatma oturumunda, kişisel bir hesapla oturum açmadıysanız emin olmak için açın.
+1. Bir kişisel hesapta oturum açmadığınızdan emin olmak için, yeni bir Internet Explorer InPrivate veya Chrome 'da gezinerek gezgin oturumunu açın.
 
-2. Git [Windows Dev Center](https://dev.windows.com/registration?accountprogram=azure) kendiniz bir satıcı kaydedilecek. Devam etmeden önce lütfen aşağıdaki önemli nota okuyun.
+2. Kendiniz bir satıcı olarak kaydetmek için [Windows Geliştirme Merkezi](https://dev.windows.com/registration?accountprogram=azure) ' ne gidin. Devam etmeden önce lütfen aşağıdaki önemli notuna göz okuyun.
 
-   ![Microsoft hesabı doğrulama](./media/cloud-partner-portal-create-dev-center-registration/seller-dashboard-verify.jpg)
+   ![Microsoft hesabı doğrulaması](./media/cloud-partner-portal-create-dev-center-registration/seller-dashboard-verify.jpg)
 
     >[!IMPORTANT]
-    >İlk kez bir Microsoft hesabı olarak kayıtlı geliştirme Merkezi'nde kaydetmek için kullanan (bir dağıtım listesi kişilerden gelen bağımlılığı kaldırmak için önerilir) e-posta kimliği veya dağıtım listesinin konumunda olduğundan emin olun. Aksi durumda, bu bağlantıyı kullanarak Lütfen kaydedin. Ayrıca, Microsoft şirket etki alanı altında herhangi bir e-posta kimliği Geliştirme Merkezi kaydı için kullanılamaz.'
+    >Geliştirme Merkezi 'nde kayıt için kullanacağınız e-posta kimliği veya dağıtım listesinin (bir dağıtım listesinin, kişilerden bağımlılığı kaldırmak için önerilir), ilk olarak bir Microsoft hesabı olarak kayıtlı olduğundan emin olun. Aksi takdirde, lütfen bu bağlantıyı kullanarak kaydolun. Ayrıca, Microsoft şirket etki alanı altındaki herhangi bir e-posta kimliği geliştirme merkezi kaydı için kullanılamaz. '
 
-   ![Dev center oturum açma](./media/cloud-partner-portal-create-dev-center-registration/seller-dashboard-login.jpg)
+   ![Geliştirme Merkezi oturum açma](./media/cloud-partner-portal-create-dev-center-registration/seller-dashboard-login.jpg)
 
-3. Bir telefon numarası veya e-posta adresi kullanarak kimliğinizi doğrulamak için "hesabınızı korumamıza yardımcı olun" sihirbazını çalıştırın.
+3. Kimliğinizi bir telefon numarası veya e-posta adresi kullanarak doğrulamak için "hesabınızı korumamıza yardımcı olma" sihirbazını çalıştırın.
 
-4. Kayıt hesabı bilgilerini seçin, **hesap ülke/bölge** seçin ve açılır listeden **sonraki**.
+4. Kayıt hesabı bilgileri ' nde, açılır listeden **Hesap ülkenizi/bölgenizi** seçin ve ardından **İleri**' yi seçin.
 
    ![Ülke/bölge seçin](./media/cloud-partner-portal-create-dev-center-registration/imgRegisterCo_04.png)
 
     >[!WARNING]
-    >"Satış yapan" ülkeler/bölgeler: Hizmetlerinizi Azure Marketi'nde satmak için kayıtlı varlık onaylı "satış yapan" açılan listesinde gösterilen ülkeleri birinden olması gerekir. Bu kısıtlama ödeme ve vergi amaçlıdır. Market katılım ilkeleri daha fazla bilgi için bkz.
+    >"Satış öncesi" ülkeler/bölgeler: hizmetlerinizi Azure Marketi 'nde satmanız için, kayıtlı varlığınızın, açılan listede gösterilen onaylanan "satış öncesi" ülkelerinden/bölgelerinden biri olması gerekir. Bu kısıtlama, ödeme ve vergilendirme nedenleridir. Daha fazla bilgi için Market katılım ilkelerine bakın.
 
-5. Seçin **şirket** seçin ve "Hesap türü" olarak **sonraki**.
+5. "Hesap türü" olarak **Şirket** ' i seçin ve ardından **İleri**' yi seçin.
 
     >[!IMPORTANT]
-    >Daha iyi hesap türlerini anlamanıza ve hangi tür sizin için en iyi olduğuna karar vermek için sayfa hesap türlerini, konumları ve ücretler bir sonraki ekran görüntüsünde gösterilen görüntüleyin.
+    >Hesap türlerini daha iyi anlamak ve hangi türün sizin için en uygun olduğuna karar vermek için, sayfa hesap türlerini, konumları ve bir sonraki ekran yakalamada gösterilen ücretleri görüntüleyin.
 
-    ![Hesap türleri satıcılar için](./media/cloud-partner-portal-create-dev-center-registration/imgRegisterCo_05.png)
+    ![Satıcılar için hesap türleri](./media/cloud-partner-portal-create-dev-center-registration/imgRegisterCo_05.png)
 
-6. Girin **yayımcı görünen adı**. Bu genelde şirketinizin adıdır.
+6. **Yayımcının görünen adını**girin. Bu genellikle şirketinizin adıdır.
 
     >[!NOTE]
-    >Teklifinizi listelenen sonra geliştirme Merkezi'nde girilen yayımcı görünen adı Azure Market'te görüntülenmiyor. Ancak bu bilgiler, kayıt işlemini tamamlamak için gereklidir.
+    >Geliştirme merkezine girilen yayımcı görünen adı, teklifiniz listelendikten sonra Azure Marketi 'nde görüntülenmez. Ancak kayıt işlemini tamamlaması için bu bilgiler gereklidir.
 
-7. Girin **kişi bilgisi** Hesap doğrulama.
+7. Hesap doğrulama için **iletişim bilgilerini** girin.
 
     >[!IMPORTANT]
-    >Bu bizim şirketiniz doğrulama işleminde Geliştirici Merkezi'nde onaylanması için kullanılacağından doğru iletişim bilgileri sağlamanız gerekir.'
+    >Şirketinizin Geliştirici merkezinde onaylanabilmesi için doğrulama sürecimizde kullanılacağı için doğru iletişim bilgilerini sağlamalısınız. '
 
-8. Kişi bilgilerini girin **şirket onaylayanı**. Şirket onaylayanı, kuruluşunuz adına geliştirme Merkezi'nde hesap oluşturmak için yetkilendirilmiş olduğunuzu doğrulayın kişidir. Bu bilgileri verdikten sonra seçin **sonraki** taşımak için **ödeme bölüm**.
+8. **Şirket onaylayanı**için iletişim bilgilerini girin. Şirket onaylayanı, kuruluşunuz adına Geliştirici merkezinde bir hesap oluşturma yetkinizin olduğunu doğrulayabilen kişidir. Bu bilgileri girdikten sonra, **İleri** ' yi seçerek **ödeme bölümüne**geçin.
 
-    ![Şirket onaylayanı tanımlayın](./media/cloud-partner-portal-create-dev-center-registration/imgRegisterCo_08.png)
+    ![Şirket onaylayanı tanımla](./media/cloud-partner-portal-create-dev-center-registration/imgRegisterCo_08.png)
 
-9. Hesabınızın ödeme bilgilerini girin. Kayıt maliyetini kapsar bir promosyon kodu varsa, burada da girebilirsiniz. Aksi takdirde, kredi kartı bilgileri (veya desteklenen pazarda PayPal) sağlayın. Seçin **sonraki** için en son taşımak **gözden geçirme**.
+9. Hesabınız için ödeme bilgilerini girin. Kayıt maliyetini karşılayan bir promosyon kodunuz varsa, buradan buraya girebilirsiniz. Aksi takdirde, kredi kartı bilgilerinizi (veya desteklenen pazarlarda PayPal) sağlayın. Son **gözden geçirmeyi**Ilerlemek için **İleri ' yi** seçin.
 
-   ![Ödeme kayıt](./media/cloud-partner-portal-create-dev-center-registration/imgRegisterCo_09.png)
+   ![Ödeme kaydı](./media/cloud-partner-portal-create-dev-center-registration/imgRegisterCo_09.png)
 
-10. Hesap bilgilerinizi gözden geçirin ve her şeyin doğru olduğundan emin olun. Okuyup hüküm ve koşulları kabul [Microsoft Azure Marketi yayımcı anlaşması](https://go.microsoft.com/fwlink/?LinkID=699560). Okuma ve bu koşulları kabul belirtmek için kutuyu işaretleyin.
+10. Hesap bilgilerinizi gözden geçirin ve her şeyin doğru olduğunu onaylayın. [Microsoft Azure Market yayımcı sözleşmesinin](https://go.microsoft.com/fwlink/?LinkID=699560)hüküm ve koşullarını okuyun ve kabul edin. Bu koşulları okuduğunuzu ve kabul ettiğinizi belirtmek için kutuyu işaretleyin.
 
-11. Seçin **son** kaydınızı doğrulamak için. Bir onay iletisi e-posta adresinize gönderilir.
+11. Kaydınızı onaylamak için **son** ' u seçin. E-posta adresinize bir onay iletisi gönderilir.
 
-12. Yalnızca ücretsiz teklifleri yayımlama planlıyorsanız seçin [bulut iş ortağı Portalı'na gitmek](https://cloudpartner.azure.com/) "Bu makalede bulut iş ortağı portalı hesabınızdaki kaydetmek için" atlayın.
+12. Yalnızca ücretsiz teklifleri yayımlamayı planlıyorsanız, [bulut iş ortağı portalı git](https://cloudpartner.azure.com/) ' i seçin ve bu makaledeki "hesabınızı bulut iş ortağı portalına kaydedin" bölümüne atlayın.
 
-### <a name="commercial-offers"></a>Ticari teklifler
+### <a name="commercial-offers"></a>Ticari Teklifler
 
-Bir saatlik faturalandırma modeli kullanarak bir sanal makine teklifi gibi ticari teklifleri yayımlama planlıyorsanız, vergi ve bankaya ilişkin bilgileri sağlamanız gerekir. Bu, Geliştirici Merkezi hesabınızda oturum açın ve seçin **hesap bilgilerinizi güncelleştirmeniz**. Sonraki bölümde yönergeleri "Bankacılık ve vergi bilgileri ekleme".
+Saatlik faturalandırma modeli kullanan bir sanal makine teklifi gibi ticari teklifleri yayımlamayı planlıyorsanız, vergi ve bankacılık bilgilerini sağlamanız gerekir. Bunun için, Geliştirici Merkezi hesabınızda oturum açın ve **Hesap bilgilerinizi Güncelleştir**' i seçin. "Bankacılık ve vergi bilgilerini ekle" başlıklı sonraki bölümdeki yönergeleri izleyin.
 
 >[!IMPORTANT]
->Ticari bir teklif banka hesabı ve vergi bilgilerini sağlamadan üretime gönderme mümkün olmayacaktır.
+>Ticari teklifinizi, banka hesabı ve vergi bilgileri sağlamadan üretime gönderemeyeceksiniz.
 
-Bankanız güncelleştirin ve vergi bilgilerini daha sonra isterseniz, "Bu makalede bulut iş ortağı portalı hesabınızdaki kaydetmek için" atlayabilirsiniz.
+Daha sonra bankanızla ve vergi bilgilerinizin güncelleştirilmesini tercih ediyorsanız, bu makaledeki "hesabınızı bulut iş ortağı portalına kaydetme" bölümüne atlayabilirsiniz.
 
 >[!NOTE]
->Vergi bilgileri doğrulamak için zaman alacağından banka hesabı ve vergi bilgilerini olabildiğince çabuk sağlama öneririz.
+>Vergi bilgilerini doğrulamak için zaman alacağından, banka hesabı ve vergi bilgilerinin en kısa sürede sağlanması önerilir.
 
-### <a name="add-banking-and-tax-information"></a>Ve vergi bilgilerini eklemek bankacılık
+### <a name="add-banking-and-tax-information"></a>Bankacılık ve vergi bilgilerini ekleyin
 
-Ticari teklifleri satın alma için yayımlamak için ödeme ve vergi bilgilerini ve eklemek Geliştirici Merkezi'nde doğrulama için gönderme gerekir.
+Satın alma için ticari teklifler yayımlamak üzere, ödeme ve vergi bilgilerini eklemeniz ve Geliştirici Merkezi 'nde doğrulama için göndermeniz gerekir.
 
-**Banka bilgi sağlamak için**
+**Banka bilgilerini sağlamak için**
 
-1.  Oturum [Microsoft Developer Center](https://dev.windows.com/registration?accountprogram=azure) Microsoft hesabınızla.
-2.  Seçin **ödeme hesap** soldaki menüde altında **ödeme yöntemi seçin**seçin **banka hesabı** veya **PayPal**.
+1.  Microsoft hesabı [Microsoft Geliştirici Merkezi](https://dev.windows.com/registration?accountprogram=azure) ' nde oturum açın.
+2.  Sol taraftaki menüden **ödeme hesabı** ' nı seçin, **ödeme yöntemi seç**' in altında **Banka hesabı** veya **PayPal**' i seçin.
 
     >[!NOTE]
-    >Müşterilerin Market'te satın alması ticari teklifler varsa, bu bu satın alma işlemleri için ödeme almanıza hesabıdır.
-3.  Ödeme bilgilerini girin ve ardından **Kaydet**.
+    >Müşterilerin Market 'te satın aldığı ticari teklifseniz varsa, bu satın alma işlemleri için ödeme alacağınız hesaptır.
+3.  Ödeme bilgilerini girin ve ardından **Kaydet**' i seçin.
 
     >[!IMPORTANT]
-    >Güncelleştirme veya ödeme hesabınızı değiştirmeniz gerekiyorsa yeni bilgilerle geçerli bilgilerini değiştirmek için önceki adımları izleyin.
+    >Ödeme hesabınızı güncelleştirmeniz veya değiştirmeniz gerekiyorsa, geçerli bilgileri yeni bilgilerle değiştirmek için yukarıdaki adımları izleyin.
     >
-    >Ödeme hesabınızı değiştirme, ödemeler tarafından en çok bir ödeme dönemi gecikmeye yol açabilir. Bu gecikme, ödeme hesabınızı ayarlarken yaptığımız gibi hesap değişikliğini doğrulamak ihtiyacımız oluşur. Hesabınızı doğrulandıktan sonra hala tam miktar için ücretli; son ödeme için geçerli ödeme döngüsü sonraki teste eklenir.
+    >Ödeme hesabınızı değiştirmek, ödemenizi tek bir ödeme döngüsüne erteleyebilir. Bu gecikme, hesap değişikliğini doğrulamanız gerektiğinden, yalnızca ödeme hesabını ilk ayarlarken yaptığımız için oluşur. Hesabınız doğrulandıktan sonra da tam miktar için ücret ödeirsiniz; geçerli ödeme döngüsünün süresi dolan tüm ödemeler bir sonrakine eklenecektir.
 
 4.  **İleri**’yi seçin.
 
-**Vergi bilgileri sağlamak için**
+**Vergi bilgilerini sağlamak için**
 
-1.  Oturum [Microsoft Developer Center](https://dev.windows.com/registration?accountprogram=azure) Microsoft hesabınıza (gerekirse).
-2.  Sol menüden **vergi profili**.
-3.  Üzerinde **, vergi formunu'kurmak** sayfası:
-    - Ülke veya kalıcı yerleşimi bulunduğu bölgeyi seçin.
-    - Ülke veya bölge birincil Vatandaşlık tutun yeri seçin.
+1.  Microsoft hesabı (gerekirse) ile [Microsoft Geliştirici Merkezi](https://dev.windows.com/registration?accountprogram=azure) ' nde oturum açın.
+2.  Sol taraftaki menüden **Vergi profili**' ni seçin.
+3.  **Vergi formunuzu ayarlama** sayfasında:
+    - Kalıcı olarak bulunduğunuz ülkeyi veya bölgeyi seçin.
+    - Birincil vatandaşlık ' ı tuttuğunuz ülkeyi veya bölgeyi seçin.
     - **İleri**’yi seçin.
-4.  Vergi ayrıntılarınızı girin ve ardından **sonraki**.
+4.  Vergi ayrıntılarınızı girip **İleri**' yi seçin.
 
 >[!WARNING]
->Banka hesabı ve vergi bilgilerini Microsoft Developer Center hesabınızdaki sağlamadan ticari tekliflerinizi üretime gönderme mümkün olmayacaktır.
+>Microsoft Geliştirici Merkezi hesabınızda banka hesabı ve vergi bilgileri sağlamadan ticari tekliflerinizi üretime gönderemeyeceksiniz.
 
 ### <a name="developer-center-registration-issues"></a>Geliştirici Merkezi kayıt sorunları
 
-Geliştirici Merkezi kayıt ile ilgili sorunlar varsa, bir destek bileti açmak için aşağıdaki adımları kullanın.
+Geliştirici Merkezi kaydıyla ilgili sorunlarınız varsa, bir destek bileti açmak için aşağıdaki adımları kullanın.
 
-1.  Git [destek bağlantısı](https://developer.microsoft.com/windows/support).
-2.  Altında **bize**seçin **bir olay göndermek**.
-    ![Bir bilet açın](./media/cloud-partner-portal-create-dev-center-registration/imgAddTax_02.png)
-3.  İçin **sorun türü**, "Yardım ile Geliştirme Merkezi" seçin ve **kategori**seçin "Yayımla ve uygulamaları yönetme". Seçin **Başlat e-posta**.
+1.  [Destek bağlantısına](https://developer.microsoft.com/windows/support)gidin.
+2.  **Bize başvurun**bölümünde **olay Gönder**' i seçin.
+    ![bir bilet açın](./media/cloud-partner-portal-create-dev-center-registration/imgAddTax_02.png)
+3.  **Sorun türü**Için "geliştirme merkezi Ile ilgili yardım" ı seçin ve **Kategori**için "uygulamaları Yayımla ve Yönet" i seçin. **E-postayı Başlat**seçeneğini belirleyin.
 
-    ![sorun türünü tanımlayın](./media/cloud-partner-portal-create-dev-center-registration/imgAddTax_03.png)
+    ![sorun türünü tanımla](./media/cloud-partner-portal-create-dev-center-registration/imgAddTax_03.png)
 
-4.  Bir oturum açma sayfasında verilir. Oturum açmak için herhangi bir Microsoft hesabı kullanın. Ardından bir Microsoft hesabınız yoksa [oluşturmak](https://signup.live.com/signup?uaid=0089f09ccae94043a0f07c2aaf928831&lic=1). \
+4.  Size bir oturum açma sayfası verilir. Oturum açmak için herhangi bir Microsoft hesabı kullanın. Microsoft hesabı yoksa bir [tane oluşturun](https://signup.live.com/signup?uaid=0089f09ccae94043a0f07c2aaf928831&lic=1). \
 
-5.  Seçin ve sorun hakkında ayrıntılı bilgi sağlar **Gönder** bilet göndermek için.
+5.  Sorunla ilgili ayrıntılı bilgi sağlayın ve bileti göndermek için **Gönder** ' i seçin.
 
-    ![bilet gönderin](./media/cloud-partner-portal-create-dev-center-registration/imgAddTax_05.png)
+    ![Bilet Gönder](./media/cloud-partner-portal-create-dev-center-registration/imgAddTax_05.png)
 
-## <a name="register-your-account-in-the-cloud-partner-portal"></a>Bulut iş ortağı Portalı'nda hesabınızı kaydedin
+## <a name="register-your-account-in-the-cloud-partner-portal"></a>Hesabınızı bulut iş ortağı portalına kaydetme
 
-Kullandığınız [bulut iş ortağı portalı](https://cloudpartner.azure.com/) tekliflerinizi yönetmek ve yayımlamak için.
+Tekliflerinizi yayımlamak ve yönetmek için [bulut iş ortağı portalı](https://cloudpartner.azure.com/) kullanırsınız.
 
-1.  Yeni bir gizli Chrome veya Internet Explorer gözatma oturumunda InPrivate, kişisel bir hesapla oturum açmadıysanız emin olmak için açın.
-2.  Git [bulut iş ortağı portalı](https://cloudpartner.azure.com/).
-3.  Yeni bir kullanıcı ve oturum açma kullanıyorsanız [bulut iş ortağı portalı](https://cloudpartner.azure.com/) ilk kez, ardından, Geliştirme Merkezi hesabınızla kayıtlı aynı e-posta kimliği kullanarak oturum açmanız gerekir. Bu, Geliştirici Merkezi hesabınızda ve bulut iş ortağı portalı hesabı birbirine bağlanır sağlar.
+1.  Bir kişisel hesapta oturum açmadığınızdan emin olmak için yeni bir Chrome ınbilito veya Internet Explorer InPrivate gözatma oturumu açın.
+2.  [Bulut iş ortağı portalı](https://cloudpartner.azure.com/)gidin.
+3.  Yeni bir Kullanıcı ve [bulut iş ortağı portalı](https://cloudpartner.azure.com/) ilk kez oturum açıyorsanız, Dev Center hesabınızla kayıtlı olan e-posta kimliğini kullanarak oturum açmanız gerekir. Bu, geliştirme merkezi hesabınızın ve bulut iş ortağı portalı hesabının birbirleriyle bağlantılı olmasını sağlar.
 
-Daha sonra uygulama üzerinde çalışan diğer üyelerinin şirket ekleyebilirsiniz. Bunları katkıda bulunanlar veya Bulut iş ortağı Portalı'nda sahipleri olarak sonraki bölümde yer alan adımları izleyerek yapabilirsiniz.
+Daha sonra, uygulama üzerinde çalışan şirketin diğer üyelerini ekleyebilirsiniz. Sonraki bölümde yer alarak bulunan adımları izleyerek bulut iş ortağı portalında katkıda bulunanlar veya sahipler olarak kullanabilirsiniz.
 
-Ardından bulut iş ortağı portalı portalı katkıda bulunan/sahibi olarak eklediyseniz, kendi hesabınızla oturum açın.
+Bulut iş ortağı portalı portalına katkıda bulunan/sahip olarak eklediyseniz, kendi hesabınızla oturum açabilirsiniz.
 
 >[!TIP]
->Katılım ilkeleri Azure Web sitesinde açıklanmıştır.
+>Katılım İlkeleri Azure Web sitesinde açıklanmaktadır.
 
-## <a name="manage-users-as-owners-or-contributors-in-the-cloud-partner-portal"></a>Sahipleri veya Bulut iş ortağı Portalı'nda katkıda bulunanlar olarak kullanıcıları yönetme
+## <a name="manage-users-as-owners-or-contributors-in-the-cloud-partner-portal"></a>Kullanıcıları bulut iş ortağı portalında sahip veya katkıda bulunanlar olarak yönetme
 
-[Bulut iş ortağı portalı kullanıcıları yönetme adımları](./cloud-partner-portal-manage-users.md)
+[Bulut iş ortağı portalı 'nda kullanıcıları yönetme adımları](./cloud-partner-portal-manage-users.md)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hesabınızı oluşturduğunuz ve kayıtlı göre Azure Marketi'nde yayımlama işlemi başlatabilirsiniz.
+Hesabınız oluşturulup kaydoldığına göre, Azure Marketi Yayımlama sürecini başlatabilirsiniz.

@@ -1,72 +1,71 @@
 ---
-title: SAP hana (büyük örnekler) azure'da işlem modeli | Microsoft Docs
-description: SAP HANA (büyük örnekler) azure'da işlem modeli.
+title: Azure 'da SAP HANA işlem modeli (büyük örnekler) | Microsoft Docs
+description: Azure 'da SAP HANA işlem modeli (büyük örnekler).
 services: virtual-machines-linux
 documentationcenter: ''
 author: RicksterCDN
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/04/2018
 ms.author: saghorpa
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 36a648e2d46cce96a8ff663f45ccf45326898a84
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 9a8ea845dd53048766abc337a1351a408ea7f1bb
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60477886"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70099702"
 ---
 # <a name="operations-model-and-responsibilities"></a>İşlem modeli ve sorumluluklar
 
-SAP HANA (büyük örnekler) azure'da ile sağlanan hizmeti, Azure Iaas Hizmetleri ile hizalanır. SAP HANA için en iyi duruma getirilmiş yüklü bir işletim sistemi bir HANA büyük örneği örneğini sahip olursunuz. Azure Iaas Vm'lerle, işletim sistemini sağlamlaştırma, ek yazılım yüklemeniz, HANA yükleme, işletim sistemi ve HANA işletim ve işletim sistemi ve HANA güncelleştirme görevlerin çoğunu gibidir sizin sorumluluğunuzdadır. Microsoft işletim sistemi güncelleştirmeleri veya HANA güncelleştirmeleri size zorlamaz.
+Azure 'da SAP HANA (büyük örnekler) ile birlikte sunulan hizmet, Azure IaaS Hizmetleri ile hizalanır. SAP HANA için en iyi duruma getirilmiş yüklü bir işletim sistemine sahip bir HANA büyük örnek örneği alırsınız. Azure IaaS VM 'lerinde olduğu gibi, işletim sistemini sağlamlaştırma, ek yazılım yükleme, HANA yükleme, işletim SISTEMI ve HANA 'yi çalıştırma ve işletim SISTEMI ve HANA 'yı güncelleştirme sorumluluğu sizin sorumluluğunuzdadır. Microsoft, işletim sistemi güncelleştirmelerini veya HANA güncelleştirmelerini sizin için zorlamaz.
 
-![SAP hana (büyük örnekler) azure'da sorumlulukları](./media/hana-overview-architecture/image2-responsibilities.png)
+![Azure 'da SAP HANA sorumlulukları (büyük örnekler)](./media/hana-overview-architecture/image2-responsibilities.png)
 
-Diyagramda gösterildiği gibi SAP HANA (büyük örnekler) azure'da Iaas sunan çok kiracılı ' dir. Çoğunlukla, sorumluluk bölümünün OS altyapısı sınırında ' dir. Microsoft, hizmet işletim sisteminin çizginin altındaki tüm yönlerini sorumludur. Bu satırın yukarısında hizmetin tüm boyutlarından sorumlu olursunuz. İşletim sistemi sizin sorumluluğunuzdur. Uyumluluk, güvenlik, uygulama yönetimi, temel ve işletim sistemi yönetim için en güncel şirket içi yöntemler uyguluyor kullanmaya devam edebilirsiniz. Sistemleri, ağınızdaki tüm ilgili oldukları gibi görünür.
+Diyagramda gösterildiği gibi, Azure 'daki SAP HANA (büyük örnekler) çok kiracılı bir IaaS teklifidir. Çoğu bölüm için sorumluluk bölümü işletim sistemi altyapı sınırında olur. Microsoft, işletim sistemi satırının altındaki hizmetin tüm yönlerini sorumludur. Satırın üstündeki hizmetin tüm yönleri sizin sorumluluğunuzdadır. İşletim sistemi sorumluluğundadır. Uyumluluk, güvenlik, uygulama yönetimi, temel ve işletim sistemi yönetimi için kullanabileceğiniz en güncel şirket içi yöntemleri kullanmaya devam edebilirsiniz. Sistemler, ağınızda olduğu gibi görünür.
 
-Bu hizmet, alanları, en iyi sonuçlar için temel alınan altyapı özellikleri kullanmak için Microsoft ile çalışmak için gereken şekilde SAP HANA için optimize edilmiştir.
+Bu hizmet SAP HANA için iyileştirilmiştir, bu nedenle en iyi sonuçlar için temel altyapı yeteneklerini kullanmak üzere Microsoft ile çalışmanız gereken bölgeler vardır.
 
-Aşağıdaki listede her katmanları ve sizin Sorumluluklarınız daha fazla ayrıntı sağlar:
+Aşağıdaki listede katmanların ve sorumluluklarınızın her biri hakkında daha fazla ayrıntı verilmiştir:
 
-**Ağ**: Tüm iç ağlar için çalışan SAP HANA büyük örneği damgasında. Sizin sorumluluğunuzdadır, VM'ler depolama, örnekleri (için ölçek genişletme ve diğer işlevler), yatay bağlantısı ve SAP uygulama katmanı barındırıldığı Azure bağlantısı arasında bağlantı erişimi içerir. Ayrıca, olağanüstü durum kurtarma amacıyla çoğaltma için Azure veri merkezleri arasında WAN bağlantısı içerir. Tüm ağlar, Kiracı tarafından bölümlenir ve uygulanan hizmet kalitesi sahip.
+**Ağ iletişimi**: SAP HANA çalıştıran büyük örnek damgasına yönelik tüm iç ağlar. Sorumluluğunda depolama erişimi, örnekler arasındaki bağlantı (genişleme ve diğer işlevler için), yatağa bağlantı ve SAP uygulama katmanının VM 'lerde barındırıldığı Azure bağlantısı dahildir. Ayrıca olağanüstü durum kurtarma amaçları için Azure veri merkezleri arasında WAN bağlantısı içerir. Tüm ağlar kiracıya göre bölümlenmiştir ve hizmet kalitesi uygulanmış olmalıdır.
 
-**Depolama**: Sanallaştırılmış depolama anlık görüntüleri yanı sıra, SAP HANA sunucuları tarafından gerekli olan tüm birimler için bölümlenmiş. 
+**Depolama alanı**: SAP HANA sunucularının yanı sıra anlık görüntüler için gereken tüm birimler için sanallaştırılmış bölümlenmiş depolama. 
 
-**Sunucuları**: SAP HANA veritabanlarını çalıştırmak için ayrılmış fiziksel sunuculara kiracılara atanmış. Sunucuları türü miyim sınıfı soyutlanır donanım SKU'lar. Bu sunucu türleri ile sunucu yapılandırmasını toplanır ve başka bir fiziksel donanıma taşınabilir bir fiziksel donanım profilleri, saklanır. Böyle bir (el ile) taşıma profili işlem tarafından Azure hizmet onarımı için biraz karşılaştırılabilir. Type II sınıfı SKU'ları sunucularında, böyle bir özellik sunmamaktadır.
+**Sunucular**: Kiracılara atanan SAP HANA veritabanlarını çalıştırmak için adanmış fiziksel sunucular. Bir SKU 'nun tür ı sınıfı sunucular, donanım soyutlandır. Bu tür sunucularla sunucu yapılandırması, bir fiziksel donanımdan başka bir fiziksel donanıma taşınabilecek profillerde toplanır ve saklanır. Bir profilin işlemlere göre bu tür bir (el ile) taşınması, bir bit ile Azure hizmet düzeltme ile karşılaştırılabilir. Tür II sınıf SKU 'Larının sunucuları böyle bir yetenek sunmaz.
 
-**SDDC**: Verileri yönetmek için kullanılan yönetim yazılımı, yazılım tanımlı varlıklar olarak merkezlendirir. Microsoft, Ölçek, kullanılabilirlik ve performansı artırmak için kaynakları havuza sağlar.
+**SDDC**: Veri merkezlerini yazılım tanımlı varlıklar olarak yönetmek için kullanılan yönetim yazılımı. Microsoft 'un kaynakları ölçek, kullanılabilirlik ve performans nedenleriyle havuzalmasına olanak tanır.
 
-**İŞLETİM SİSTEMİ**: İşletim sistemi (SUSE Linux veya Red Hat Linux) seçtiğiniz sunucular üzerinde çalışıyor. İle sağlanan işletim sistemi görüntüleri, SAP HANA çalıştırmak için tek tek Linux satıcı tarafından Microsoft'a sağlanmadı. SAP HANA için iyileştirilmiş görüntü için Linux satıcıyla aboneliğiniz olmalıdır. Görüntüleri işletim sistemi satıcıyla birlikte kaydetmek için sorumlu olursunuz. 
+**O/SN**: Sunucularda çalışan seçtiğiniz işletim sistemi (SUSE Linux veya Red Hat Linux). İle sağladığınız işletim sistemi görüntüleri, SAP HANA çalıştırmak için tek bir Linux satıcısı tarafından Microsoft 'a sunulmaktadır. Belirli SAP HANA iyileştirilmiş görüntü için Linux satıcısına sahip bir aboneliğiniz olması gerekir. Görüntüleri işletim sistemi satıcısına kaydetmekten siz sorumlusunuz. 
 
-Microsoft tarafından devreden MultiPath noktasından herhangi ek Linux işletim sistemi düzeltme eki uygulama için sorumlu olursunuz. Bu düzeltme eki uygulama olabilecek başarılı bir SAP HANA yüklemesi için gerekli ve belirli kullanıcıların SAP HANA Linux satıcı tarafından dahil olmayan ek paketleri içeren işletim sistemi görüntüleri en iyi duruma getirilmiş. (Daha fazla bilgi için SAP'nin SAP notları ve HANA yükleme belgelerine bakın.) 
+Microsoft 'un devreden Multipath noktasından, Linux işletim sisteminin daha fazla düzeltme ekiyle sorumlu olursunuz. Bu düzeltme eki, başarılı bir SAP HANA yüklemesi için gerekli olabilecek ve SAP HANA en iyi duruma getirilmiş işletim sistemi görüntülerine belirli Linux satıcılarına dahil edilmemiş ek paketler içerir. (Daha fazla bilgi için bkz. SAP 'nin HANA yükleme belgeleri ve SAP notları.) 
 
-Arızasını veya işletim sistemi iyileştirme ve belirli sunucu donanımı göre sürücülerini owing to işletim sistemi yaması için sorumlu olursunuz. Ayrıca güvenlik veya işlev işletim sistemi düzeltme eki için sizin sorumluluğunuzdadır. 
+İşletim SISTEMI düzeltme eki uygulama, işletim sistemini ve sürücülerini belirli sunucu donanımına göre hatalı duruma getirmek veya en iyi duruma getirmek sizin sorumluluğunuzdadır. Ayrıca, işletim sisteminin güvenlik veya işlevsel düzeltme ekiyle de sorumlu olursunuz. 
 
-Sizin sorumluluğunuzdadır, izleme ve kapasite planlama de içerir:
+Sorumluluğu, izleme ve Kapasite planlamasını de içerir:
 
-- CPU kaynak kullanımı.
+- CPU kaynak tüketimi.
 - Bellek tüketimi.
-- Disk birimleri boş alan, IOPS ve gecikme süresi için ilgili.
-- HANA büyük örneği ile SAP uygulama katmanı arasında ağ birim trafiği.
+- Boş alan, ıOPS ve gecikmeyle ilgili disk birimleri.
+- HANA büyük örnek ile SAP uygulama katmanı arasındaki ağ birimi trafiği.
 
-HANA büyük örneği temel altyapısını yedekleme ve geri yükleme, işletim sistemi birimi için işlevsellik sağlar. Bu işlevleri kullanarak da sizin sorumluluğunuzdur.
+HANA büyük örneğinin temel altyapısı, işletim sistemi biriminin yedeklenmesi ve geri yüklenmesi için işlevsellik sağlar. Bu işlevselliğin kullanılması da sizin sorumluluğunuzdadır.
 
-**Ara yazılım**: SAP HANA örneği, öncelikli olarak. Yönetim, işlemler ve izleme sizin sorumluluğunuzdadır. Sağlanan işlevselliği, yedekleme ve geri yükleme, olağanüstü durum kurtarma amacıyla depolama anlık görüntüleri kullanmak için kullanabilirsiniz. Bu özellikler altyapısı tarafından sağlanır. Sizin Sorumluluklarınız de yüksek kullanılabilirlik veya depolama anlık görüntüleri başarıyla gerçekleştirilip gerçekleştirilmediğini belirlemek için izleme ve bunları yararlanarak bu özelliklere sahip, olağanüstü durum kurtarma tasarımı içerir.
+**Ara yazılım**: SAP HANA örneği öncelikle. Yönetim, işlemler ve izleme sorumluluğu sizin sorumluluğunuzdadır. Yedekleme ve geri yükleme ve olağanüstü durum kurtarma amacıyla depolama anlık görüntülerini kullanmak için, sunulan işlevleri kullanabilirsiniz. Bu yetenekler altyapı tarafından sağlanır. Sorumluluklarınız Ayrıca, bu yetenekler ile yüksek kullanılabilirlik veya olağanüstü durum kurtarma tasarlamayı, bunlardan yararlanarak ve depolama anlık görüntülerinin başarıyla yürütülüp yürütülmediğini tespit etmek için izleme içerir.
 
-**Veri**: SAP HANA tarafından yönetilen veri ve yedeklemeler gibi diğer veri birimlerinde bulunan dosya veya dosya paylaşımları. Sizin Sorumluluklarınız birimlerde içeriği yönetme ve boş disk alanı izleme içerir. Ayrıca yedeklemeler, birimlerin ve depolama anlık görüntüleri başarıyla yürütüldü izlemekten sorumlu olursunuz. Olağanüstü durum kurtarma sitelerinde veri çoğaltmasının başarılı yürütme Microsoft sorumluluğundadır.
+**Veri**: SAP HANA tarafından yönetilen verileriniz ve birimlerde veya dosya paylaşımlarında bulunan yedeklemeler dosyaları gibi diğer veriler. Sorumluluklarınız, disk boş alanı izlemeyi ve birimlerdeki içeriği yönetmeyi içerir. Ayrıca, disk birimlerinin ve depolama anlık görüntülerinin yedeklerinin başarılı bir şekilde yürütülmesinin izlenmesinden de sorumlu olursunuz. Veri çoğaltmanın olağanüstü durum kurtarma sitelerine başarıyla yürütülmesi Microsoft 'un sorumluluğundadır.
 
-**Uygulamalar:** SAP uygulama örnekleri veya SAP olmayan uygulamalarınızı, söz konusu uygulamaların uygulama katmanı söz konusu olduğunda. Sizin Sorumluluklarınız dağıtım, yönetim, işlemler ve bu uygulamaların izlenmesi içerir. CPU kaynak tüketimi, bellek tüketimi, Azure depolama tüketimi ve sanal ağ içinde ağ bant genişliği tüketimi, kapasite planlaması için sorumlu olursunuz. Siz de Kapasite (büyük örnekler) Azure üzerinde SAP HANA için kaynak tüketimi sanal ağlardan planlama sorumlu olursunuz.
+**Uygulamaları** SAP uygulama örnekleri veya SAP olmayan uygulamalar söz konusu uygulamaların uygulama katmanı. Sorumluluklarınız, bu uygulamaların dağıtım, yönetim, işlemler ve izlenmesini içerir. CPU kaynak tüketimine, bellek tüketimine, Azure depolama tüketimine ve sanal ağlarda ağ bant genişliği tüketimine yönelik kapasite planlaması sizin sorumluluğunuzdadır. Ayrıca, sanal ağlardan gelen kaynak tüketimine yönelik kapasite planlamasının Azure 'da SAP HANA (büyük örnekler) için de sorumlu olursunuz.
 
-**WAN**: , Şirket içinden Azure'a dağıtımlar iş yükleri için bağlantı. HANA büyük örneği olan tüm müşterileri, Azure ExpressRoute için bağlantı kullanın. Bu bağlantının SAP HANA (büyük örnekler) Azure çözüm üzerinde bir parçası değil. Bu bağlantının kurulumu için sorumlu olursunuz.
+**WAN 'lar**: Şirket içinden iş yükleri için Azure dağıtımlarından oluşturduğunuz bağlantılar. HANA büyük örneği olan tüm müşteriler bağlantı için Azure ExpressRoute kullanır. Bu bağlantı Azure (büyük örnekler) çözümünde SAP HANA bir parçası değildir. Bu bağlantının kurulumundan siz sorumlusunuz.
 
-**Arşiv**: Depolama hesaplarında kendi yöntemlerini kullanarak verilerin kopyaları arşivlemek tercih edebilirsiniz. Arşivleme, yönetim, uyumluluk, maliyetleri ve işlemleri gerektirir. Arşiv kopyalarını oluşturma ve yedekleri Azure ve bunları uyumlu bir şekilde depolamak için sorumlu olursunuz.
+**Arşiv**: Depolama hesaplarında kendi yöntemlerinizi kullanarak veri kopyalarını arşivlemeyi tercih edebilirsiniz. Arşivleme için yönetim, uyumluluk, maliyetler ve işlemler gerekir. Azure 'da arşiv kopyaları ve yedeklemeler oluşturmaktan ve bunları uyumlu bir şekilde depolamadan sorumlusunuz.
 
-Bkz: [(büyük örnekler) Azure üzerinde SAP HANA için SLA](https://azure.microsoft.com/support/legal/sla/sap-hana-large/).
+Bkz. [Azure 'da SAP HANA SLA (büyük örnekler)](https://azure.microsoft.com/support/legal/sla/sap-hana-large/).
 
 **Sonraki adımlar**
-- Başvuru [azure'da SAP HANA (büyük örnekler) mimarisi](hana-architecture.md)
+- [Azure 'da SAP HANA (büyük örnekler) mimarisine](hana-architecture.md) başvurun

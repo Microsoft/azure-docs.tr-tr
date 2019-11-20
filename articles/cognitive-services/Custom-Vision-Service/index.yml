@@ -1,95 +1,138 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Özel Görüntü İşleme API'si Belgeleri
+### YamlMime:Landing
+title: Özel Görüntü İşleme belgeleri
+summary: Özel Görüntü İşleme kendi resim sınıflandırıcılarınızı oluşturmanıza, dağıtmanıza ve geliştirmenize olanak sağlar. Resim sınıflandırıcısı resimlere görsel özellikleri temelinde etiketler (sınıfları temsil eder) uygulayan bir AI hizmetidir.
 metadata:
-  title: 'Özel Görüntü İşleme API''si Belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs'
-  description: 'Özel Görüntü İşleme''yi kullanarak özel görüntü sınıflandırmalarını oluşturmayı, dağıtmayı ve geliştirmeyi öğrenin. Öğreticilerde API kullanan uygulamaların nasıl derleneceği gösterilmektedir.'
+  title: Özel Görüntü İşleme belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs
+  description: Özel Görüntü İşleme kendi resim sınıflandırıcılarınızı oluşturmanıza, dağıtmanıza ve geliştirmenize olanak sağlar. Resim sınıflandırıcısı resimlere görsel özellikleri temelinde etiketler (sınıfları temsil eder) uygulayan bir AI hizmetidir.
   services: cognitive-services
-  author: nitinme
-  manager: cgronlun
   ms.service: cognitive-services
   ms.subservice: custom-vision
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 12/20/2018
-  ms.author: nitinme
-abstract:
-  description: 'Bulut tabanlı Özel Görüntü İşleme API''si geliştiricilere özel görüntü sınıflandırıcılarını oluşturma, dağıtma ve geliştirme olanağı sağlar. Görüntü sınıflandırıcısı, görüntüleri belirli özelliklerine göre etiketlere ayıran bir yapay zeka hizmetidir.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: ../media/index/custom-vision-landing-page-video.png
-      width: 250
-    title: 'Eğitme ve benzersiz görüntüleri tanımlama (26:10)'
-    href: 'https://channel9.msdn.com/Shows/AI-Show/Azure-Custom-Vision-How-to-Train-and-Identify-Unique-Designs-or-Image-Content'
-    width: 250
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/Custom-Vision-Service/home
-            html: <p>Özel Görüntü İşleme API’si hakkında bilgi edinin.</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Özel Görüntü İşleme nedir?
-          - href: /azure/cognitive-services/Custom-Vision-Service/getting-started-build-a-classifier
-            html: <p>Sınıflandırıcı oluşturmayı öğrenin.</p>
-            image:
-              src: ../media/index/i_tasks.svg
-            title: Sınıflandırıcı oluşturma
-          - href: /azure/cognitive-services/Custom-Vision-Service/export-your-model
-            html: <p>Modeli mobil cihaza aktarmayı öğrenin.</p>
-            image:
-              src: ../media/index/i_tasks.svg
-            title: Modeli mobil cihazlara aktarma
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Bir ok bağlantısını seçerek Özel Görüntü İşleme ile çalışmaya başlamayı öğrenin <img src="media/index/link.jpg" height="15" width="15"></img>
-      - type: table
-        style: dataMatrix
-        columns:
-          - image:
-              src: media/index/logo_csharp.svg
-          - image:
-              src: media/index/logo_python.svg
-          - image:
-              src: media/index/logo_java.svg
-        rows:
-          - title: Resimleri sınıflandırma
-            values:
-              - href: csharp-tutorial
-              - href: python-tutorial
-              - href: java-tutorial
-          - title: Nesne algılama
-            values:
-              - href: csharp-tutorial-od
-              - href: python-tutorial-od
-              - href: java-tutorial-od
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: 'Özel Görüntü İşleme API''siyle ilgili örnekler bulun:'
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://azure.microsoft.com/resources/samples/?sort=Relevance&service=cognitive-services&term=Custom+Vision">Kod örnekleri</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: API'ler
-            html: '<p><a href="https://go.microsoft.com/fwlink/?linkid=865446">Eğitim</a></p> <p><a href="https://go.microsoft.com/fwlink/?linkid=865445">Tahmin</a></p>'
-          - title: SDK
-            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/customvision?view=azure-dotnet">.NET</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customvision?view=azure-java-stable">Java</a></p> <p><a href="https://docs.microsoft.com/python/api/azure-cognitiveservices-vision-customvision/?view=azure-python">Python</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/customvision/training">Go - Eğitim</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.1/customvision/prediction">Go - Tahmin</a></p>'
-          - title: PowerShell
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest">Azure CLI</a></p>'
+  author: PatrickFarley
+  ms.author: pafarley
+  ms.date: 09/05/2019
+  ms.openlocfilehash: 2ef22176b64638dc43a4a45096cf072a7c79931e
+  ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/06/2019
+  ms.locfileid: "73647589"
+landingContent:
+- title: Özel Görüntü İşleme hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Özel Görüntü İşleme nedir?
+      url: home.md
+  - linkListType: video
+    links:
+    - text: Benzersiz resimleri eğitme ve tanımlama
+      url: https://channel9.msdn.com/Shows/AI-Show/Azure-Custom-Vision-How-to-Train-and-Identify-Unique-Designs-or-Image-Content
+- title: Görüntü sınıflandırıcı derleme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Web portalını kullanma
+      url: getting-started-build-a-classifier.md
+    - text: .NET SDK’sini kullanma
+      url: csharp-tutorial.md
+    - text: Python SDK'yı kullanma
+      url: python-tutorial.md
+    - text: Java SDK'yı kullanma
+      url: java-tutorial.md
+    - text: Node.js SDK'yı kullanma
+      url: node-tutorial.md
+    - text: Go SDK'yı kullanma
+      url: go-tutorial.md
+  - linkListType: how-to-guide
+    links:
+    - text: Tahmin API’sini kullanma
+      url: use-prediction-api.md
+- title: Nesne algılayıcısı oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Web portalını kullanma
+      url: get-started-build-detector.md
+    - text: .NET SDK’sini kullanma
+      url: csharp-tutorial-od.md
+    - text: Python SDK'yı kullanma
+      url: python-tutorial-od.md
+    - text: Java SDK'yı kullanma
+      url: java-tutorial-od.md
+    - text: Node.js SDK'yı kullanma
+      url: node-tutorial-object-detection.md
+    - text: Go SDK'yı kullanma
+      url: go-tutorial-object-detection.md
+  - linkListType: tutorial
+    links:
+    - text: Mobil cihazlar için logo algılayıcısı
+      url: logo-detector-mobile.md
+  - linkListType: how-to-guide
+    links:
+    - text: Tahmin API’sini kullanma
+      url: use-prediction-api.md
+- title: Modelleri test etme ve geliştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Modelinizi test etme
+      url: test-your-model.md
+    - text: Modelinizi geliştirme
+      url: getting-started-improving-your-classifier.md
+    - text: Akıllı Etiketçiyi kullanma
+      url: suggested-tags.md
+- title: Modelleri dışarı aktarma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Modeli mobil ortama aktarma
+      url: export-your-model.md
+    - text: ONNX modelini Windows ML ile kullanma
+      url: custom-vision-onnx-windows-ml.md
+    - text: Python’da TensorFlow modelini çalıştırma
+      url: export-model-python.md
+  - linkListType: tutorial
+    links:
+    - text: IoT Görsel Uyarılar uygulaması
+      url: iot-visual-alerts-tutorial.md
+    - text: Mobil cihazlar için logo algılayıcısı
+      url: logo-detector-mobile.md
+- title: Projenizin güncelliğini koruma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Sınırlı Deneme projenizi Azure’a taşıma
+      url: move-your-project-to-azure.md
+    - text: Uygulamanızı 3.0 API’sine güncelleştirin
+      url: update-application-to-3.0-sdk.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Eğitim API'si
+      url: https://go.microsoft.com/fwlink/?linkid=865446
+    - text: Tahmin API'si
+      url: https://go.microsoft.com/fwlink/?linkid=865445
+    - text: .NET SDK
+      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/customvision?view=azure-dotnet
+    - text: Python SDK'sı
+      url: https://docs.microsoft.com/python/api/azure-cognitiveservices-vision-customvision/?view=azure-python
+    - text: Java SDK
+      url: https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customvision?view=azure-java-stable
+    - text: Go SDK (eğitim)
+      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/customvision/training
+    - text: Go SDK (tahmin)
+      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.1/customvision/prediction
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+    - text: Azure Komut Satırı Arabirimi (CLI)
+      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest
+- title: Yardım ve geri bildirim
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: UserVoice
+      url: https://cognitive.uservoice.com/forums/598141-custom-vision-service
+    - text: Stack Overflow
+      url: https://stackoverflow.com/questions/tagged/microsoft-cognitive

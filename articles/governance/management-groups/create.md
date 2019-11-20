@@ -1,93 +1,88 @@
 ---
-title: Azure kaynakları - Azure idare düzenlemek için Yönetim grupları oluşturma
-description: Portal, Azure PowerShell ve Azure CLI kullanarak birden çok kaynağı yönetmek için Azure yönetim gruplarının nasıl oluşturulacağını öğrenin.
-author: rthorn17
-manager: rithorn
-ms.service: governance
-ms.devlang: na
-ms.tgt_pltfrm: na
-ms.workload: na
+title: Kaynakları düzenlemek için yönetim grupları oluşturma-Azure Idare
+description: Portal, Azure PowerShell ve Azure CLı kullanarak birden çok kaynağı yönetmek için Azure Yönetim grupları oluşturmayı öğrenin.
 ms.date: 04/05/2019
-ms.author: rithorn
 ms.topic: conceptual
-ms.openlocfilehash: 9e0a864019c2940ba7b5188ea43e9bbae484178d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 335dd8f7f3a9ec20c2b7740e4ec97454489027f6
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66241973"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73960210"
 ---
-# <a name="create-management-groups-for-resource-organization-and-management"></a>Kaynak kuruluşta ve Yönetim için Yönetim grupları oluşturma
+# <a name="create-management-groups-for-resource-organization-and-management"></a>Kaynak organizasyonu ve yönetimi için yönetim grupları oluşturma
 
-Yönetim grupları Aboneliklerdeki erişim, ilke ve uyumluluk yardımcı kapsayıcıları yönetmek olan. İle kullanılabilen bir etkili ve verimli bir hiyerarşi oluşturmak için bu kapsayıcıları [Azure İlkesi](../policy/overview.md) ve [Azure rol tabanlı erişim denetimlerini](../../role-based-access-control/overview.md). Yönetim grupları hakkında daha fazla bilgi için bkz. [kaynaklarınızı Azure yönetim gruplarıyla düzenleme](overview.md).
+Yönetim grupları, birden çok abonelik üzerinde erişimi, ilkeyi ve uyumluluğu yönetmenize yardımcı olan kapsayıcılardır. [Azure ilkesi](../policy/overview.md) ve [Azure rol tabanlı erişim denetimleriyle](../../role-based-access-control/overview.md)kullanılabilecek etkili ve verimli bir hiyerarşi oluşturmak için bu kapsayıcıları oluşturun. Yönetim grupları hakkında daha fazla bilgi için bkz. [Azure Yönetim gruplarıyla kaynaklarınızı düzenleme](overview.md).
 
-Dizinde oluşturulan ilk yönetim grubu tamamlanması 15 dakika sürebilir. Dizininiz için Azure Yönetim grupları hizmeti ayarlamak için ilk kez çalışan işlemler vardır. İşlem tamamlandığında, bir bildirim alırsınız.
-
-[!INCLUDE [az-powershell-update](../../../includes/updated-for-az.md)]
+Dizinde oluşturulan ilk yönetim grubunun tamamlanması 15 dakika sürebilir. Dizininiz için Azure 'da yönetim grupları hizmetini ayarlamak için ilk kez çalışan süreçler vardır. İşlem tamamlandığında bir bildirim alırsınız.
 
 ## <a name="create-a-management-group"></a>Yönetim grubu oluşturma
 
-Portal, PowerShell veya Azure CLI kullanarak, yönetim grubu oluşturabilirsiniz. Şu anda, Resource Manager şablonları, Yönetim grupları oluşturmak için kullanamazsınız.
+Portal, PowerShell veya Azure CLı kullanarak yönetim grubu oluşturabilirsiniz. Şu anda yönetim grupları oluşturmak için Kaynak Yöneticisi şablonları kullanamazsınız.
 
-### <a name="create-in-portal"></a>Portalda oluşturma
+### <a name="create-in-portal"></a>Portalda oluştur
 
 1. [Azure portalında](https://portal.azure.com) oturum açın.
 
-1. Seçin **tüm hizmetleri** > **Yönetim grupları**.
+1. **Tüm hizmetler** > **Yönetim + idare**' ı seçin.
 
-1. Ana sayfasında göze seçin **yeni yönetim grubu**.
+1. **Maliyet yönetimi + faturalandırma** seçin
+
+1. Maliyet yönetimi + faturalandırma-yönetim grupları sayfasında **Yönetim grupları** ' yi seçin.
+
+1. **+ Yönetim grubu Ekle**' yi seçin.
 
    ![Yönetim gruplarıyla çalışma sayfası](./media/main.png)
 
-1. Yönetim grubu kimliği alanını doldurun.
+1. Yönetim grubu KIMLIĞI alanını girin.
 
-   - **Yönetim grubu Tanıtıcısı** bu yönetim grubunda komutları göndermek için kullanılan dizini benzersiz tanımlayıcısı. Bu tanımlayıcı, Azure sistem genelinde bu grubu tanımlamak için kullanılan oluşturulduktan sonra düzenlenebilir değildir. [Kök yönetim grubu](index.md#root-management-group-for-each-directory) Azure Active Directory kimliği olan bir kimliği ile otomatik olarak oluşturulur Diğer tüm Yönetim grupları için benzersiz bir kimliği atayın
-   - Görünen ad alanı, Azure portalında görüntülenen addır. Yönetim oluştururken ayrı görünen ad isteğe bağlı bir alan olan Grup ve herhangi bir zamanda değiştirilebilir.  
+   - **Yönetim grubu kimliği** , bu yönetim grubundaki komutları göndermek için kullanılan dizin benzersiz tanımlayıcısıdır. Bu tanımlayıcı, bu grubu tanımlamak için Azure sistem genelinde kullanıldığından oluşturulduktan sonra düzenlenebilir değildir. [Kök yönetim grubu](overview.md#root-management-group-for-each-directory) , Azure Active Directory kimliği olan bir kimlikle otomatik olarak oluşturulur. Diğer tüm yönetim grupları için benzersiz bir KIMLIK atayın.
+   - Görünen ad alanı Azure portal içinde görüntülenen addır. Ayrı bir görünen ad, yönetim grubu oluşturulurken isteğe bağlı bir alandır ve herhangi bir zamanda değiştirilebilir.  
 
-   ![Yeni bir yönetim grubu oluşturmak için seçenekler bölmesi](./media/create_context_menu.png)  
+   ![Yeni yönetim grubu oluşturmak için seçenekler bölmesi](./media/create_context_menu.png)  
 
 1. **Kaydet**’i seçin.
 
-### <a name="create-in-powershell"></a>PowerShell'de oluşturma
+### <a name="create-in-powershell"></a>PowerShell 'de oluştur
 
-PowerShell için şunu kullanın [yeni AzManagementGroup](/powershell/module/az.resources/new-azmanagementgroup) cmdlet'i yeni bir yönetim grubu oluşturun.
+PowerShell için, New [-AzManagementGroup](/powershell/module/az.resources/new-azmanagementgroup) cmdlet 'ini kullanarak yeni bir yönetim grubu oluşturun.
 
 ```azurepowershell-interactive
 New-AzManagementGroup -GroupName 'Contoso'
 ```
 
-**GroupName** oluşturulan bir benzersiz tanımlayıcısı. Bu kimliği, başka komutlarla bu Grup başvurmak için kullanılır ve daha sonra değiştirilemez.
+**GroupName** , oluşturulmakta olan benzersiz bir tanımlayıcıdır. Bu KIMLIK, bu gruba başvurmak için diğer komutlar tarafından kullanılır ve daha sonra değiştirilemez.
 
-Azure Portal'ın farklı bir ad göstermek için yönetim grubu istiyorsanız ekleyin **DisplayName** parametresi. Örneğin, "Contoso grubunun" görünen ad, GroupName Contoso ile bir yönetim grubu oluşturmak için aşağıdaki cmdlet'i kullanın:
+Yönetim grubunun Azure portal içinde farklı bir ad göstermesini istiyorsanız **DisplayName** parametresini ekleyin. Örneğin, contoso GroupName ve "contoso Group" görünen adı ile bir yönetim grubu oluşturmak için aşağıdaki cmdlet 'i kullanın:
 
 ```azurepowershell-interactive
 New-AzManagementGroup -GroupName 'Contoso' -DisplayName 'Contoso Group'
 ```
 
-Yukarıdaki örneklerde, yeni yönetim grubunun kök yönetim grubu altında oluşturulur. Üst öğe olarak farklı bir yönetim grubu belirtmek için kullanın **parentId** parametresi.
+Yukarıdaki örneklerde, yeni yönetim grubu kök yönetim grubu altında oluşturulur. Üst öğe olarak farklı bir yönetim grubu belirtmek için **parentID** parametresini kullanın.
 
 ```azurepowershell-interactive
 $parentGroup = Get-AzManagementGroup -GroupName Contoso
 New-AzManagementGroup -GroupName 'ContosoSubGroup' -ParentId $parentGroup.id
 ```
 
-### <a name="create-in-azure-cli"></a>Azure CLI ile oluşturma
+### <a name="create-in-azure-cli"></a>Azure CLı 'de oluşturma
 
-Azure CLI için şunu kullanın [az hesap yönetim grubu](/cli/azure/account/management-group?view=azure-cli-latest#az-account-management-group-create) yeni bir yönetim grubu oluşturmak için komutu.
+Azure CLı için, yeni bir yönetim grubu oluşturmak için [az Account Management-Group Create](/cli/azure/account/management-group?view=azure-cli-latest#az-account-management-group-create) komutunu kullanın.
 
 ```azurecli-interactive
 az account management-group create --name Contoso
 ```
 
-**Adı** oluşturulan bir benzersiz tanımlayıcısı. Bu kimliği, başka komutlarla bu Grup başvurmak için kullanılır ve daha sonra değiştirilemez.
+**Ad** , oluşturulmakta olan benzersiz bir tanımlayıcıdır. Bu KIMLIK, bu gruba başvurmak için diğer komutlar tarafından kullanılır ve daha sonra değiştirilemez.
 
-Azure Portal'ın farklı bir ad göstermek için yönetim grubu istiyorsanız ekleyin **görünen ad** parametresi. Örneğin, "Contoso grubunun" görünen ad, GroupName Contoso ile bir yönetim grubu oluşturmak için aşağıdaki komutu kullanın:
+Yönetim grubunun Azure portal içinde farklı bir ad göstermesini istiyorsanız, **görünen ad** parametresini ekleyin. Örneğin, contoso GroupName ve "contoso Group" görünen adı ile bir yönetim grubu oluşturmak için aşağıdaki komutu kullanın:
 
 ```azurecli-interactive
 az account management-group create --name Contoso --display-name 'Contoso Group'
 ```
 
-Yukarıdaki örneklerde, yeni yönetim grubunun kök yönetim grubu altında oluşturulur. Üst öğe olarak farklı bir yönetim grubu belirtmek için kullanın **üst** parametre ve bir üst grubun adını belirtin.
+Yukarıdaki örneklerde, yeni yönetim grubu kök yönetim grubu altında oluşturulur. Üst öğe olarak farklı bir yönetim grubu belirtmek için **üst** parametreyi kullanın ve üst grubun adını sağlayın.
 
 ```azurecli-interactive
 az account management-group create --name ContosoSubGroup --parent Contoso

@@ -1,10 +1,10 @@
 ---
-title: Birden çok NIC - Klasik Azure CLI ile VM (Klasik) oluşturma | Microsoft Docs
-description: Azure Klasik komut satırı arabirimi (CLI) kullanarak birden çok NIC ile VM (Klasik) oluşturmayı öğrenin.
+title: Birden çok NIC ile VM (klasik) oluşturma-Azure klasik CLı | Microsoft Docs
+description: Klasik Azure komut satırı arabirimi (CLı) kullanarak birden çok NIC ile VM (klasik) oluşturmayı öğrenin.
 services: virtual-network
 documentationcenter: na
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 tags: azure-service-management
 ms.assetid: b436e41e-866c-439f-a7c7-7b4b041725ef
@@ -16,49 +16,49 @@ ms.workload: infrastructure-services
 ms.date: 02/02/2016
 ms.author: genli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 1e47b1e548516960c6aab3c48d64255370c94a77
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2dc437b15f73866f76361da529690eac7a10af1a
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60743317"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71058754"
 ---
-# <a name="create-a-vm-classic-with-multiple-nics-using-the-azure-classic-cli"></a>Klasik Azure CLI kullanarak birden çok NIC ile VM (Klasik) oluşturma
+# <a name="create-a-vm-classic-with-multiple-nics-using-the-azure-classic-cli"></a>Azure klasik CLı kullanarak birden çok NIC ile VM (klasik) oluşturma
 
 [!INCLUDE [virtual-network-deploy-multinic-classic-selectors-include.md](../../includes/virtual-network-deploy-multinic-classic-selectors-include.md)]
 
-Azure'da sanal makineler (VM) oluşturma ve birden çok ağ arabirimine (NIC) sanal makinelerinizin her birine ekleyin. Birden çok NIC NIC'ler arasında trafik türlerinin ayrımı sağlar. Örneğin, yalnızca iç kaynaklara Internet'e bağlı olmayan başka bir iletişim kurar, ancak bir NIC Internet ile iletişim kuran. Birden çok NIC arasında ağ trafiğini ayırmak olanağı, uygulama teslimi ve WAN iyileştirme çözümleri gibi birçok ağ sanal Gereçleri için gereklidir.
+Azure 'da sanal makineler (VM) oluşturabilir ve VM 'lerinizden her birine birden çok ağ arabirimi (NIC) ekleyebilirsiniz. Birden çok NIC, NIC 'lerde trafik türlerinin ayrılmasını sağlar. Örneğin, bir NIC Internet ile iletişim kurabiliyorsa, diğeri yalnızca Internet 'e bağlı olmayan iç kaynaklarla iletişim kurar. Uygulama teslimi ve WAN iyileştirme çözümleri gibi birçok ağ sanal aygıtı için ağ trafiğini birden çok NIC arasında ayırma özelliği gereklidir.
 
 > [!IMPORTANT]
-> Azure'da oluşturmaya ve kaynaklarla çalışmaya yönelik iki farklı dağıtım modeli vardır:  [Resource Manager ve klasik](../resource-manager-deployment-model.md). Bu makale klasik dağıtım modelini incelemektedir. Microsoft, yeni dağıtımların çoğunun Resource Manager modelini kullanmasını önerir. Bu adımları kullanarak gerçekleştirmeyi öğrenin [Resource Manager dağıtım modeli](../virtual-machines/linux/multiple-nics.md).
+> Azure 'da kaynak oluşturmak ve bunlarla çalışmak için iki farklı dağıtım modeli vardır:  [Kaynak Yöneticisi ve klasik](../resource-manager-deployment-model.md). Bu makale klasik dağıtım modelini incelemektedir. Microsoft, yeni dağıtımların çoğunun Resource Manager modelini kullanmasını önerir. [Kaynak Yöneticisi dağıtım modelini](../virtual-machines/linux/multiple-nics.md)kullanarak bu adımları nasıl gerçekleştireceğinizi öğrenin.
 
 [!INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
 
-Adlı bir kaynak grubu aşağıdaki adımları kullanın *IaaSStory* WEB sunucuları ve bir kaynak grubu için adlı *IaaSStory arka uç* DB sunucuları için.
+Aşağıdaki adımlarda, WEB sunucuları için *ıaasöykü* adlı bir kaynak grubu ve db sunucuları Için *ıaasöykü arka ucu* adlı bir kaynak grubu kullanılır.
 
 ## <a name="prerequisites"></a>Önkoşullar
-DB sunucuları oluşturabilmeniz için önce oluşturmanız gerekir *IaaSStory* bu senaryo için gerekli tüm kaynakları kaynak grubu. Bu kaynakları oluşturmak için aşağıdaki adımları tamamlayın. İçindeki adımları izleyerek bir sanal ağ oluşturma [sanal ağ oluşturma](virtual-networks-create-vnet-classic-cli.md) makalesi.
+DB sunucularını oluşturmadan önce, bu senaryo için gerekli tüm kaynaklarla *ıaasöykü* kaynak grubunu oluşturmanız gerekir. Bu kaynakları oluşturmak için, aşağıdaki adımları tamamlayın. [Sanal ağ oluşturma](virtual-networks-create-vnet-classic-cli.md) makalesindeki adımları izleyerek bir sanal ağ oluşturun.
 
 [!INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
 
-## <a name="deploy-the-back-end-vms"></a>Arka uç sanal makine dağıtma
-Arka uç sanal makinelerin oluşturulmasını aşağıdaki kaynaklar üzerinde bağlıdır:
+## <a name="deploy-the-back-end-vms"></a>Arka uç VM 'Leri dağıtma
+Arka uç VM 'Leri aşağıdaki kaynakların oluşturulmasına bağlıdır:
 
-* **Veri diskleri için depolama hesabı**. Daha iyi performans için veritabanı sunucularında veri diskleri gerektiren bir premium depolama hesabı, katı hal sürücüsü (SSD) teknolojisi kullanır. Premium depolamayı destekler dağıttığınız Azure konumu emin olun.
-* **NIC**. Her VM veritabanı erişimi için iki NIC gerekir ve Yönetim için bir tane.
-* **Kullanılabilirlik kümesi**. Tüm veritabanı sunucuları, sanal makinelerin en az biri çalışır durumda emin olmak için ayarlayabilir ve bakım sırasında çalışan tek bir kullanılabilirlik eklenir.
+* **Veri diskleri Için depolama hesabı**. Daha iyi performans için, veritabanı sunucularındaki veri diskleri, Premium depolama hesabı gerektiren katı hal sürücüsü (SSD) teknolojisini kullanacaktır. Premium depolamayı desteklemek için dağıttığınız Azure konumunun bulunduğundan emin olun.
+* **NIC**. Her VM 'nin, biri veritabanı erişimi ve diğeri yönetim için olmak üzere iki NIC 'e sahip olması gerekir.
+* **Kullanılabilirlik kümesi**. Tüm veritabanı sunucuları tek bir kullanılabilirlik kümesine eklenecek ve bu VM 'lerden en az birinin bakım sırasında çalıştığından emin olmanız gerekir.
 
-### <a name="step-1---start-your-script"></a>1\. adım - betiğinizi Başlat
-Kullanılan tam bash betiğini indirebilirsiniz [burada](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/classic/virtual-network-deploy-multinic-classic-cli.sh). Ortamınızda çalışması için komut dosyasını değiştirmek için aşağıdaki adımları tamamlayın:
+### <a name="step-1---start-your-script"></a>1\. adım-betiğinizi başlatın
+[Burada](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/classic/virtual-network-deploy-multinic-classic-cli.sh)kullanılan tüm Bash betiğini indirebilirsiniz. Komut dosyasını ortamınızda çalışacak şekilde değiştirmek için aşağıdaki adımları izleyin:
 
-1. Yukarıda dağıtılmış mevcut kaynak grubunuzun göre aşağıdaki değişkenlerin değerlerini değiştirmek [önkoşulları](#prerequisites).
+1. [Ön](#prerequisites)koşullarda yukarıda dağıtılan mevcut kaynak grubunuza göre aşağıdaki değişkenlerin değerlerini değiştirin.
 
     ```azurecli
     location="useast2"
     vnetName="WTestVNet"
     backendSubnetName="BackEnd"
     ```
-2. Arka uç dağıtımınız için kullanmak istediğiniz değerleri temel alarak aşağıdaki değişkenlerin değerlerini değiştirin.
+2. Aşağıdaki değişkenlerin değerlerini, arka uç dağıtımınız için kullanmak istediğiniz değerlere göre değiştirin.
 
     ```azurecli
     backendCSName="IaaSStory-Backend"
@@ -77,15 +77,15 @@ Kullanılan tam bash betiğini indirebilirsiniz [burada](https://raw.githubuserc
     numberOfVMs=2
     ```
 
-### <a name="step-2---create-necessary-resources-for-your-vms"></a>2\. adım - sanal makineleriniz için gerekli kaynakları oluşturma
-1. Tüm arka uç sanal makineler için yeni bir bulut hizmeti oluşturun. Kullanımına dikkat edin `$backendCSName` kaynak grubu adı için değişken ve `$location` Azure bölgesi.
+### <a name="step-2---create-necessary-resources-for-your-vms"></a>2\. adım-sanal makinelerinize gereken kaynakları oluşturma
+1. Tüm arka uç VM 'Ler için yeni bir bulut hizmeti oluşturun. Kaynak grubu adı ve `$backendCSName` `$location` Azure bölgesi için değişken kullanımına dikkat edin.
 
     ```azurecli
     azure service create --serviceName $backendCSName \
         --location $location
     ```
 
-2. Sizinki tarafından Vm'leri kullanılacak işletim sistemi ve veri diskleri için bir premium depolama hesabı oluşturun.
+2. Kendi VM 'Leri tarafından kullanılacak işletim sistemi ve veri diskleri için bir Premium depolama hesabı oluşturun.
 
     ```azurecli
     azure storage account create $prmStorageAccountName \
@@ -93,15 +93,15 @@ Kullanılan tam bash betiğini indirebilirsiniz [burada](https://raw.githubuserc
         --type PLRS
     ```
 
-### <a name="step-3---create-vms-with-multiple-nics"></a>3\. adım - birden çok NIC ile VM oluşturma
-1. Bir döngü göre birden fazla VM oluşturmak için başlangıç `numberOfVMs` değişkenleri.
+### <a name="step-3---create-vms-with-multiple-nics"></a>3\. adım-birden çok NIC ile VM oluşturma
+1. `numberOfVMs` Değişkenlere göre birden çok VM oluşturmak için bir döngü başlatın.
 
     ```azurecli
     for ((suffixNumber=1;suffixNumber<=numberOfVMs;suffixNumber++));
     do
     ```
 
-2. Her VM için her iki NIC IP adresi ve adını belirtin.
+2. Her VM için, her iki NIC 'in adını ve IP adresini belirtin.
 
     ```azurecli
     nic1Name=$vmNamePrefix$suffixNumber-DA
@@ -113,7 +113,7 @@ Kullanılan tam bash betiğini indirebilirsiniz [burada](https://raw.githubuserc
     ipAddress2=$ipAddressPrefix$x
     ```
 
-3. Bir VM oluşturun. Kullanımı ve fark `--nic-config` adı, alt ağ ve IP adresi ile tüm NIC'ler listesini içeren bir parametre.
+3. VM 'yi oluşturun. Ad, alt ağ ve `--nic-config` IP adresi ile tüm NIC 'lerin bir listesini içeren parametresinin kullanımına dikkat edin.
 
     ```azurecli
     azure vm create $backendCSName $image $username $password \
@@ -140,10 +140,10 @@ Kullanılan tam bash betiğini indirebilirsiniz [burada](https://raw.githubuserc
     done
     ```
 
-### <a name="step-4---run-the-script"></a>Adım 4 - betiği çalıştırın
-İndirilen ve gereksinimlerinize göre komut dosyası değiştirildi, arka uç veritabanı VM'lerin birden çok NIC ile oluşturmak için betiği çalıştırın.
+### <a name="step-4---run-the-script"></a>4\. adım-betiği çalıştırma
+Artık gereksinimlerinize göre betiği indirip değiştirdiğinize göre, arka uç veritabanı VM 'lerini birden çok NIC ile oluşturmak için betiği çalıştırın.
 
-1. Kodunuzu kaydedin ve çalıştırın, **Bash** terminal. İlk çıkış, aşağıda gösterildiği gibi göreceksiniz.
+1. Komut dosyanızı kaydedin ve **Bash** terminalinizden çalıştırın. İlk çıktıyı aşağıda gösterildiği gibi göreceksiniz.
 
         info:    Executing command service create
         info:    Creating cloud service
@@ -160,7 +160,7 @@ Kullanılan tam bash betiğini indirebilirsiniz [burada](https://raw.githubuserc
         info:    Looking up deployment
         info:    Creating VM
 
-2. Birkaç dakika sonra yürütme sona erecek ve çıkış geri kalanını aşağıda gösterildiği gibi göreceksiniz.
+2. Birkaç dakika sonra yürütme sona bırakılır ve çıktının geri kalanını aşağıda gösterildiği gibi görürsünüz.
 
         info:    OK
         info:    vm create command OK
@@ -190,6 +190,6 @@ Kullanılan tam bash betiğini indirebilirsiniz [burada](https://raw.githubuserc
         info:    Adding Data-Disk
         info:    vm disk attach-new command OK
 
-### <a name="step-5---configure-routing-within-the-vms-operating-system"></a>5\. adım - sanal makinenin işletim sistemi içinde yönlendirmeyi yapılandırma
+### <a name="step-5---configure-routing-within-the-vms-operating-system"></a>5\. adım-VM 'nin işletim sistemi içinde yönlendirmeyi yapılandırma
 
-Azure DHCP, varsayılan bir ağ geçidi sanal makinesine bağlı ilk (birincil) ağ arabirimine atar. Azure, bir sanal makineye bağlı ek (ikincil) ağ arabirimlerine varsayılan ağ geçidi atamaz. Bu nedenle varsayılan olarak, alt ağın dışında kalan ve ikincil bir ağ arabirimi içeren kaynaklarla iletişim kurulamaz. Ancak, ikincil ağ arabirimleri kendi alt ağlarının dışında kalan kaynaklarla iletişim kurabilir. İkincil ağ arabirimleri için yönlendirmeyi yapılandırmak için bkz: [birden çok ağ arabirimine sahip bir sanal makine işletim sistemi içinde yönlendirme](virtual-network-network-interface-vm.md).
+Azure DHCP, sanal makineye bağlı ilk (birincil) ağ arabirimine bir varsayılan ağ geçidi atar. Azure, bir sanal makineye bağlı ek (ikincil) ağ arabirimlerine varsayılan ağ geçidi atamaz. Bu nedenle varsayılan olarak, alt ağın dışında kalan ve ikincil bir ağ arabirimi içeren kaynaklarla iletişim kurulamaz. Ancak, ikincil ağ arabirimleri kendi alt ağlarının dışında kalan kaynaklarla iletişim kurabilir. İkincil ağ arabirimleri için yönlendirmeyi yapılandırmak için, bkz. [birden çok ağ arabirimi ile bir sanal makine işletim sistemi Içinde Yönlendirme](virtual-network-network-interface-vm.md).

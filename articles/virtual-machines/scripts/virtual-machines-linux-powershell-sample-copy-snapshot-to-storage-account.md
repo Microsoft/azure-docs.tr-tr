@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell betik örneği - farklı bölgedeki bir depolama hesabına VHD olarak anlık görüntü dışarı aktarma/kopyalama | Microsoft Docs
-description: Azure PowerShell betik örneği - aynı farklı bölgedeki bir depolama hesabına VHD olarak anlık görüntü dışarı aktarma/kopyalama
+title: Azure PowerShell betiği örneği-farklı bölgedeki bir depolama hesabına VHD olarak anlık görüntü gönderme/kopyalama
+description: Azure PowerShell betik örneği-aynı farklı bölgedeki bir depolama hesabına VHD olarak anlık görüntü gönderme/kopyalama
 services: virtual-machines-windows
 documentationcenter: storage
 author: ramankumarlive
@@ -9,20 +9,19 @@ editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 06/05/2017
 ms.author: ramankum
-ms.openlocfilehash: 4eb7afda644f8019183e8e3d2aa822764b24b42d
-ms.sourcegitcommit: ad019f9b57c7f99652ee665b25b8fef5cd54054d
+ms.openlocfilehash: c1ad520aadf8b2bafa9fdd03333e50b47612fa49
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/02/2019
-ms.locfileid: "57248745"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74040195"
 ---
-# <a name="exportcopy-managed-snapshots-as-vhd-to-a-storage-account-in-different-region-with-powershell"></a>Dışarı aktarma/yönetilen anlık görüntüler VHD PowerShell ile farklı bölgedeki bir depolama hesabına Kopyala
+# <a name="exportcopy-managed-snapshots-as-vhd-to-a-storage-account-in-different-region-with-powershell"></a>Yönetilen anlık görüntüleri, PowerShell ile farklı bölgedeki bir depolama hesabına VHD olarak verme/kopyalama
 
 Bu betik farklı bölgedeki bir depolama hesabına yönetilen bir anlık görüntü gönderir. İlk olarak anlık görüntünün SAS URI'sini oluşturur ve sonra onu farklı bölgede bulunan bir depolama hesabına kopyalamak için kullanır. Olağanüstü durum kurtarma amacıyla farklı bölgede bulunan yönetilen disklerinizin yedeğini tutmak için bu betiği kullanın.  
 
@@ -30,7 +29,7 @@ Bu betik farklı bölgedeki bir depolama hesabına yönetilen bir anlık görün
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [updated-for-az-vm.md](../../../includes/updated-for-az-vm.md)]
+ 
 
 ## <a name="sample-script"></a>Örnek betik
 
@@ -43,7 +42,7 @@ Bu betik bir yönetilen anlık görüntünün SAS URI'sini oluşturmak için aş
 
 | Komut | Notlar |
 |---|---|
-| [GRANT-AzSnapshotAccess](https://docs.microsoft.com/powershell/module/az.compute/New-AzDisk) | Bir depolama hesabına kopyalamak için kullanılan bir anlık görüntünün SAS URI'sini oluşturur. |
+| [Grant-AzSnapshotAccess](https://docs.microsoft.com/powershell/module/az.compute/New-AzDisk) | Bir depolama hesabına kopyalamak için kullanılan bir anlık görüntü için SAS URI 'SI oluşturur. |
 | [New-AzureStorageContext](https://docs.microsoft.com/powershell/module/azure.storage/New-AzureStorageContext) | Hesap adını ve anahtarını kullanarak depolama hesabı bağlamı oluşturur. Bu bağlam depolama hesabında okuma/yazma işlemi gerçekleştirmek için kullanılabilir. |
 | [Start-AzureStorageBlobCopy](https://docs.microsoft.com/powershell/module/azure.storage/Start-AzureStorageBlobCopy) | Bir anlık görüntüde kullanılan VHD dosyasını bir depolama hesabına kopyalar |
 

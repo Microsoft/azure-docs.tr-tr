@@ -1,22 +1,23 @@
 ---
-title: Azure Application Gateway oturum benzeşimi sorunlarını giderme
-description: Bu makale, Azure Application Gateway oturum benzeşimi sorunları gidermeye ilişkin bilgi sağlar.
+title: Oturum benzeşimi sorunlarını giderme
+titleSuffix: Azure Application Gateway
+description: Bu makale, Azure Application Gateway oturum benzeşimi sorunlarını giderme hakkında bilgi sağlar.
 services: application-gateway
 author: abshamsft
 ms.service: application-gateway
 ms.topic: article
-ms.date: 02/22/2019
+ms.date: 11/14/2019
 ms.author: absha
-ms.openlocfilehash: 66f61b5d6fcb86ed93e4dbae802ae7a80613c83d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9f14521c15c3497bed4ffbeba44cb5d78ee4df7b
+ms.sourcegitcommit: b1a8f3ab79c605684336c6e9a45ef2334200844b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66397846"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74047978"
 ---
 # <a name="troubleshoot-azure-application-gateway-session-affinity-issues"></a>Azure Application Gateway oturum benzeşimi sorunlarını giderme
 
-Azure Application Gateway ile oturum benzeşimi sorunları tanılamak ve gidermek öğrenin.
+Azure Application Gateway ile oturum benzeşimi sorunlarını tanılamayı ve çözümlemeyi öğrenin.
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
@@ -25,186 +26,186 @@ Azure Application Gateway ile oturum benzeşimi sorunları tanılamak ve giderme
 
 Tanımlama bilgilerine dayalı oturum benzeşimi özelliği, bir kullanıcı oturumunu aynı sunucuda tutmak istediğinizde kullanışlıdır. Ağ geçidi ile yönetilen tanımlama bilgilerini kullanan Application Gateway, sonraki trafiği işleme amacıyla bir kullanıcı oturumundan aynı sunucuya yönlendirebilir. Bu, oturum durumunun bir kullanıcı oturumuna ait sunucuya yerel olarak kaydedildiği durumlarda önemlidir.
 
-## <a name="possible-problem-causes"></a>Olası bir sorunu neden olur
+## <a name="possible-problem-causes"></a>Olası sorun nedenleri
 
-Tanımlama bilgisi tabanlı oturum benzeşimini sürdürmekten sorun, aşağıdaki ana nedenlerden ötürü oluşabilir:
+Tanımlama bilgisi tabanlı oturum benzeşiminin korunmasında sorun aşağıdaki başlıca nedenlerden dolayı oluşabilir:
 
-- "Tanımlama bilgisi temelli benzeşimi" ayarı etkin değil
-- Uygulamanızı tanımlama bilgisi temelli benzeşimi işleyemiyor
-- Uygulama, ancak yine de arka uç sunucuları arasında geçirmek istekleri tanımlama bilgisi temelli benzeşimi kullanma
+- "Tanımlama bilgisi tabanlı benzeşim" ayarı etkin değil
+- Uygulamanız tanımlama bilgisi tabanlı benzeşimi işleyemez
+- Uygulama, tanımlama bilgisi tabanlı benzeşim kullanıyor, ancak yine de arka uç sunucuları arasında sıçramaların isteği
 
-### <a name="check-whether-the-cookie-based-affinity-setting-is-enabled"></a>"Tanımlama bilgisi temelli benzeşimi" ayarı etkin olup olmadığını denetleyin
+### <a name="check-whether-the-cookie-based-affinity-setting-is-enabled"></a>"Tanımlama bilgisi tabanlı benzeşim" ayarının etkinleştirilip etkinleştirilmediğini denetleyin
 
-Bazen "Tanımlama bilgisi benzeşimi tabanlı" ayarı etkinleştirmek unuttuklarında oturum benzeşimi sorunlarını ortaya çıkabilir. Azure portalında HTTP ayarları sekmesinde "Tanımlama bilgisi benzeşimi tabanlı" ayarı etkin olup olmadığını belirlemek için yönergeleri izleyin:
+Bazen "tanımlama bilgisi tabanlı benzeşim" ayarını etkinleştirmeyi unuttuğunuzda oturum benzeşimi sorunları ortaya çıkabilir. Azure portal HTTP ayarları sekmesinde "tanımlama bilgisi tabanlı benzeşim" ayarını etkinleştirmiş olup olmadığınızı öğrenmek için yönergeleri izleyin:
 
 1. [Azure Portal](https://portal.azure.com/) oturum açın.
 
-2. İçinde **sol gezinti** bölmesinde tıklayın **tüm kaynakları**. Tüm kaynaklar dikey penceresinde Uygulama ağ geçidi adına tıklayın. Zaten seçili aboneliği çeşitli kaynaklar varsa, uygulama ağ geçidi adı girebilirsiniz **ada göre Filtrele...** girebilirsiniz.
+2. **Sol gezinti** bölmesinde, **tüm kaynaklar**' a tıklayın. Tüm kaynaklar dikey penceresinde uygulama ağ geçidi adına tıklayın. Seçtiğiniz abonelikte zaten çeşitli kaynaklar varsa, uygulama ağ geçidi adını **ada göre filtrele...** olarak girebilirsiniz. girebilirsiniz.
 
-3. Seçin **HTTP ayarları** sekmesinde altında **ayarları**.
+3. **Ayarlar**altında **http ayarları** sekmesini seçin.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-1](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-1.png)
+   ![sorun giderme-oturum benzeşimi-sorunlar-1](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-1.png)
 
-4. Tıklayın **appGatewayBackendHttpSettings** seçmiş olduğunuz olup olmadığını denetlemek için sağ taraftaki **etkin** tanımlama bilgisi tabanlı benzeşim için.
+4. Tanımlama bilgisi tabanlı benzeşim için **etkin** ' i seçmiş olup olmadığınızı kontrol etmek için sağ taraftaki **Appgatewaybackendhttpsettings** ' e tıklayın.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-2](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-2.jpg)
+   ![sorun giderme-oturum-benzeşim-sorunlar-2](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-2.jpg)
 
 
 
-Değerini de göz atabilirsiniz "**CookieBasedAffinity**" ayarlanmış *etkin*altında "**backendHttpSettingsCollection**" aşağıdaki yöntemlerden birini kullanarak:
+Ayrıca, aşağıdaki yöntemlerden birini kullanarak "Using**ıebasedadinity**" değerinin "**BackendHttpSettingsCollection**" altında *etkin*olarak ayarlandığını denetleyebilirsiniz:
 
-- Çalıştırma [Get-AzApplicationGatewayBackendHttpSetting](https://docs.microsoft.com/powershell/module/az.network/get-azapplicationgatewaybackendhttpsetting) PowerShell
-- Azure Resource Manager şablonu kullanarak bir JSON dosyası aracılığıyla arayın
+- PowerShell 'de [Get-AzApplicationGatewayBackendHttpSetting](https://docs.microsoft.com/powershell/module/az.network/get-azapplicationgatewaybackendhttpsetting) komutunu çalıştırın
+- Azure Resource Manager şablonunu kullanarak JSON dosyasına bakın
 
 ```
 "cookieBasedAffinity": "Enabled", 
 ```
 
-### <a name="the-application-cannot-handle-cookie-based-affinity"></a>Uygulamanın, tanımlama bilgisi temelli benzeşimi işleyemiyor
+### <a name="the-application-cannot-handle-cookie-based-affinity"></a>Uygulama, tanımlama bilgisi tabanlı benzeşimi işleyemez
 
 #### <a name="cause"></a>Nedeni
 
-Uygulama ağ geçidi, yalnızca bir tanımlama bilgisi kullanarak oturum tabanlı benzeşim gerçekleştirebilirsiniz.
+Uygulama ağ geçidi, bir tanımlama bilgisi kullanarak yalnızca oturum tabanlı benzeşim gerçekleştirebilir.
 
-#### <a name="workaround"></a>Geçici Çözüm
+#### <a name="workaround"></a>Geçici çözüm
 
-Uygulamanın, tanımlama bilgisi temelli benzeşimi yapamıyorsa, bir dış veya iç azure yük dengeleyici veya başka bir üçüncü taraf çözümü kullanmanız gerekir.
+Uygulama, tanımlama bilgisi tabanlı benzeşimi işleyemez, dış veya iç Azure yük dengeleyici ya da başka bir üçüncü taraf çözümü kullanmanız gerekir.
 
-### <a name="application-is-using-cookie-based-affinity-but-requests-still-bouncing-between-back-end-servers"></a>Uygulama, ancak yine de arka uç sunucuları arasında geçirmek istekleri tanımlama bilgisi temelli benzeşimi kullanma
+### <a name="application-is-using-cookie-based-affinity-but-requests-still-bouncing-between-back-end-servers"></a>Uygulama, tanımlama bilgisi tabanlı benzeşim kullanıyor, ancak yine de arka uç sunucuları arasında sıçramaların isteği
 
 #### <a name="symptom"></a>Belirti
 
-Internet Explorer'da, örneğin bir kısa ad URL'yi kullanarak uygulama ağ geçidi eriştiğinizde, tanımlama bilgisi tabanlı benzeşim ayarı etkinleştirmiş olmanız gerekir: [ http://website ](http://website/) , istek yine de arka uç sunucuları arasında geçirmek.
+Internet Explorer 'da bir kısa ad URL 'SI kullanarak Application Gateway eriştiğinizde, tanımlama bilgisi tabanlı benzeşim ayarını etkinleştirdiniz, örneğin: [http://website](http://website/) , istek hala arka uç sunucuları arasında sıçraılır.
 
-Bu sorunu tanımlamak için yönergeleri izleyin:
+Bu sorunu belirlemek için yönergeleri izleyin:
 
-1. "Uygulama Gateway(We are using Fiddler in this example) arkasında uygulamaya bağlanma istemcide" bir web hata ayıklayıcı izleme yararlanın.
-    **İpucu** fiddler'ı kullanmayı bilmiyorsanız seçeneği işaretleyin "**ağ trafiğini toplama ve web hata ayıklayıcıyı kullanarak incelemek istiyorum**" altındaki.
+1. Application Gateway arkasındaki uygulamaya bağlanan "Istemci" üzerinde bir Web hata ayıklayıcısı izlemesi gerçekleştirin (Bu örnekte Fiddler kullanıyoruz).
+    **İpucu** Fiddler 'in nasıl kullanılacağını bilmiyorsanız, alt kısımdaki "**ağ trafiğini toplamak ve Web hata ayıklayıcısını kullanarak çözümlemek**istiyorum" seçeneğini işaretleyin.
 
-2. Denetleyin ve istemci tarafından sağlanan tanımlama bilgilerini ARRAffinity ayrıntılarını sahip olup olmadığını belirlemek için oturumu günlüklerini analiz edin. ARRAffinity ayrıntıları gibi bulamadığınız, "**ARRAffinity =** *ARRAffinityValue*" düzenleme tanımlama bilgisi ile istemci yanıtlama değil tarafından sağlanan anlamına gelen tanımlama bilgisi kümesi içinde Uygulama ağ geçidi.
+2. İstemci tarafından sunulan tanımlama bilgilerinin ARRAffinity ayrıntılarına sahip olup olmadığını öğrenmek için oturum günlüklerini denetleyin ve çözümleyin. Tanımlama bilgisi kümesi içinde "**ARRAffinity =** *ARRAffinityValue*" gibi ARRAffinity ayrıntılarını bulamazsanız, istemcinin Application Gateway tarafından belirtilen ARRA tanımlama bilgisine yanıt verme anlamına gelir.
     Örneğin:
 
-    ![sorun giderme-oturum-benzeşim-sorunları-3](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-3.png)
+    ![sorun giderme-oturum-benzeşim-sorunlar-3](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-3.png)
 
-    ![sorun giderme-oturum-benzeşim-sorunları-4](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-4.png)
+    ![sorun giderme-oturum-benzeşim-sorunlar-4](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-4.png)
 
-Uygulama yanıtı alır kadar her istekte tanımlama bilgisi ayarlamak denemeye devam eder.
+Uygulama, yanıt alınana kadar her istekte tanımlama bilgisini ayarlamaya çalışır.
 
 #### <a name="cause"></a>Nedeni
 
-Internet Explorer ve diğer tarayıcılar değil depolayabilen veya tanımlama bilgisinin bir kısa ad URL ile kullanmak için bu sorun oluşur.
+Bu sorun, Internet Explorer ve diğer tarayıcıların tanımlama bilgisini kısa ad URL 'SI ile depolayabileceği veya kullanamadığı için oluşur.
 
 #### <a name="resolution"></a>Çözüm
 
-Bu sorunu gidermek için Application Gateway'e FQDN kullanarak erişmeniz gerekir. Örneğin, [ http://website.com ](https://website.com/) veya [ http://appgw.website.com ](http://appgw.website.com/) .
+Bu sorunu gidermek için Application Gateway'e FQDN kullanarak erişmeniz gerekir. Örneğin, [http://website.com](https://website.com/) veya [http://appgw.website.com](http://appgw.website.com/) kullanın.
 
-## <a name="additional-logs-to-troubleshoot"></a>Sorun giderme için ek Günlükler
+## <a name="additional-logs-to-troubleshoot"></a>Sorun gidermek için ek Günlükler
 
-Ek günlükleri toplayıp bunları sorunları ilgili tanımlama bilgilerine dayalı oturum benzeşimi sorunlarını gidermek için analiz
+Ek Günlükler toplayabilir ve ilgili tanımlama bilgisi tabanlı oturum benzeşimi sorunlarını gidermek için bunları çözümleyebilirsiniz
 
-### <a name="analyze-application-gateway-logs"></a>Application Gateway günlüklerini çözümleme
+### <a name="analyze-application-gateway-logs"></a>Application Gateway günlüklerini çözümle
 
 Application Gateway günlüklerini toplamak için yönergeleri izleyin:
 
 Azure portaldan günlüğe kaydetmeyi etkinleştirme
 
-1. İçinde [Azure portalında](https://portal.azure.com/), kaynağınızı bulun ve ardından **tanılama günlükleri**.
+1. [Azure Portal](https://portal.azure.com/), kaynağınız bulun ve ardından **tanılama günlükleri**' ne tıklayın.
 
-   Application Gateway için üç günlükleri kullanılabilir: Erişim günlüğü, performans günlüğü, güvenlik duvarı günlüğü
+   Application Gateway için üç günlük mevcuttur: erişim günlüğü, performans günlüğü, güvenlik duvarı günlüğü
 
-2. Veri toplamaya başlamak için tıklayın **tanılamayı Aç**.
+2. Veri toplamaya başlamak için **tanılamayı aç**' a tıklayın.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-5](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-5.png)
+   ![sorun giderme-oturum benzeşimi-sorunlar-5](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-5.png)
 
-3. **Tanılama ayarları** dikey penceresinde tanılama günlükleri için ayarları sağlar. Bu örnekte, Log Analytics, günlükleri depolar. Tıklayın **yapılandırma** altında **Log Analytics** çalışma alanınızı ayarlamak için. Tanılama günlüklerini kaydetmek için Event Hubs'ı veya depolama hesabını da kullanabilirsiniz.
+3. Tanılama **ayarları** dikey penceresi tanılama günlükleri için ayarları sağlar. Bu örnekte, günlükleri Log Analytics depolar. Çalışma alanınızı ayarlamak için **Log Analytics** altında **Yapılandır** ' a tıklayın. Tanılama günlüklerini kaydetmek için Event Hubs'ı veya depolama hesabını da kullanabilirsiniz.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-6](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-6.png)
+   ![sorun giderme-oturum-benzeşim-sorunlar-6](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-6.png)
 
-4. Ayarları onaylayın ve ardından **Kaydet**.
+4. Ayarları onaylayın ve **Kaydet**' e tıklayın.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-7](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-7.png)
+   ![sorun giderme-oturum benzeşimi-sorunlar-7](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-7.png)
 
-#### <a name="view-and-analyze-the-application-gateway-access-logs"></a>Görüntüleme ve uygulama ağ geçidi erişim günlüklerini çözümleme
+#### <a name="view-and-analyze-the-application-gateway-access-logs"></a>Application Gateway erişim günlüklerini görüntüleyin ve çözümleyin
 
-1. Uygulama ağ geçidi kaynak görünümü altında Azure portalında **tanılama günlükleri** içinde **izleme** bölümü.
+1. Application Gateway kaynak görünümü altındaki Azure portal **izleme** bölümünde **tanılama günlükleri** ' ni seçin.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-8](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-8.png)
+   ![sorun giderme-oturum-benzeşim-sorunlar-8](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-8.png)
 
-2. Sağ tarafta seçin "**ApplicationGatewayAccessLog**" altındaki aşağı açılan listede **günlük kategorileri.**  
+2. Sağ tarafta, **günlük kategorileri** altındaki aşağı açılan listeden "**Applicationgatewayaccesslog**" öğesini seçin.  
 
-   ![sorun giderme-oturum-benzeşim-sorunları-9](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-9.png)
+   ![sorun giderme-oturum benzeşimi-sorunlar-9](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-9.png)
 
-3. Uygulama ağ geçidi erişim günlüğü listesinde analiz ve dışarı aktarmak istediğiniz günlüğe tıklayın ve ardından JSON dosyasını dışarı aktarın.
+3. Application Gateway erişim günlüğü listesinde, analiz etmek ve dışarı aktarmak istediğiniz günlüğe tıklayın ve sonra JSON dosyasını dışarı aktarın.
 
-4. CSV dosyası için 3. adımda dışarı aktardığınız bir JSON dosyası dönüştürün ve Excel, Power BI veya diğer herhangi bir veri görselleştirme aracını görüntüleyin.
+4. Adım 3 ' te dışarıya verdiğiniz JSON dosyasını CSV dosyasına dönüştürüp Excel, Power BI veya başka bir veri görselleştirme aracında görüntüleyin.
 
-5. Aşağıdaki veriler denetleyin:
+5. Aşağıdaki verileri denetleyin:
 
-- **Clientıp**– istemci IP adresinden bağlanan istemcinin budur.
-- **ClientPort** -kaynak bağlantı noktasından bağlanan istemcinin istek için budur.
-- **RequestQuery** – Bu, hedef sunucunun isteği aldığı gösterir.
-- **Sunucu yönlendirilen**: Arka uç havuzu örneği isteği aldığı.
-- **X-AzureApplicationGateway-günlük-ID**: İstek için kullanılan bağıntı kimliği. Arka uç sunucularda trafiği sorunları gidermek için kullanılabilir. Örneğin: AzureApplicationGateway ÖNBELLEK İSABET X 0 = & SERVER YÖNLENDİRİLEN 10.0.2.4 =.
+- **Clienentip**: bağlantı istemcisinden ALıNAN istemci IP adresidir.
+- **ClientPort** -bu, istek için bağlanan istemciden gelen kaynak bağlantı noktasıdır.
+- **Requestquery** – bu, isteğin alındığı hedef sunucuyu belirtir.
+- **Sunucu-yönlendirildi**: isteğin alındığı arka uç havuzu örneği.
+- **X-AzureApplicationGateway-log-ID**: istek için kullanılan bağıntı kimliği. Arka uç sunucularındaki trafik sorunlarını gidermek için kullanılabilir. Örneğin: X-AzureApplicationGateway-CACHE-HIT = 0 & SERVER-YÖNLENDIRILDI = 10.0.2.4.
 
-  - **SUNUCU DURUMU**: Application Gateway, arka uçtan alınan HTTP yanıt kodu.
+  - **Sunucu-durumu**: arka uçtan alınan Application Gateway http yanıt kodu.
 
-  ![sorun giderme-oturum benzeşimi-sorunları-11](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-11.png)
+  ![sorun giderme-oturum benzeşimi-sorunlar-11](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-11.png)
 
-İki öğe geliyor ve aynı Clientıp ve istemci bağlantı noktası ve aynı arka uç sunucusuna gönderilen görürseniz, bu uygulama ağ geçidi doğru yapılandırılmış anlamına gelir.
+Aynı Clienentip ve Istemci bağlantı noktasından iki öğe geliyorsa ve bunlar aynı arka uç sunucusuna gönderiliyorsa, Application Gateway doğru şekilde yapılandırılır.
 
-İki öğe aynı Clientıp ve istemci bağlantı noktası geliyor ve farklı arka uç sunucularına gönderilmeden görürseniz anlamına isteği arka uç sunucuları arasında seçim geçirmek "**uygulama tanımlama bilgisi temelli benzeşim isteklerini ancak kullanma yine de arka uç sunucuları arasında geçirmek**"altındaki giderileceği.
+Aynı Clienentip ve Istemci bağlantı noktasından iki öğe geliyorsa ve bunlar farklı arka uç sunucularına gönderiliyorsa, isteğin arka uç sunucuları arasında sıçramakta olduğu anlamına gelir. "**uygulama, tanımlama bilgisi tabanlı benzeşim kullanıyor, ancak yine de arka uç sunucuları arasında sıçramaları**, sorun giderme için en altta yer alan" ' ı seçin.
 
-### <a name="use-web-debugger-to-capture-and-analyze-the-http-or-https-traffics"></a>Web hata ayıklayıcısı yakalamak ve HTTP veya HTTPS traffics çözümlemek için kullanın
+### <a name="use-web-debugger-to-capture-and-analyze-the-http-or-https-traffics"></a>HTTP veya HTTPS traffics yakalamak ve çözümlemek için Web hata ayıklayıcısını kullanma
 
-Web Fiddler gibi hata ayıklama araçları, Internet ve test bilgisayarlar arasındaki ağ trafiğini yakalayarak web uygulamalarında hata ayıklama yardımcı olabilir. Bu araçlar, tarayıcı alır/bunları gönderir gibi gelen ve giden verileri incelemek etkinleştirin. Fiddler, bu örnekte, özellikle bir sorun kimlik doğrulaması türü için web uygulamaları ile istemci tarafı sorunlarını gidermenize yardımcı olabilecek HTTP yeniden yürütme seçeneği vardır.
+Fiddler gibi Web hata ayıklama araçları, Internet ve test bilgisayarları arasındaki ağ trafiğini yakalayarak Web uygulamalarında hata ayıklamanıza yardımcı olabilir. Bu araçlar, tarayıcı tarafından alındığında/gönderirken gelen ve giden verileri incelemenizi sağlar. Fiddler, bu örnekte, özellikle kimlik doğrulama türü için Web uygulamalarıyla istemci tarafı sorunlarını gidermenize yardımcı olabilecek HTTP yeniden yürütme seçeneğine sahiptir.
 
-Tercih ettiğiniz web hata ayıklayıcıyı kullanın. Bu örnekte fiddler'ı kullanacağız yakalama ve http veya https traffics çözümlemek için yönergeleri izleyin:
+Seçtiğiniz Web hata ayıklayıcıyı kullanın. Bu örnekte, Fiddler 'ı kullanarak http veya https traffics yakalayın ve analiz edeceğiz, yönergeleri izleyin:
 
-1. Fiddler aracı, indirmek <https://www.telerik.com/download/fiddler>.
+1. <https://www.telerik.com/download/fiddler>konumundaki Fiddler aracını indirin.
 
     > [!NOTE]
-    > Yakalama bilgisayarda .NET 4'ün yüklü olduğunda Fiddler4 seçin. Aksi takdirde, Fiddler2 seçin.
+    > Yakalama bilgisayarında .NET 4 yüklüyse Fiddler4 öğesini seçin. Aksi takdirde Fiddler2 öğesini seçin.
 
-2. Kurulum yürütülebilir dosyasına sağ tıklayın ve yüklemek için yönetici olarak çalıştırın.
+2. Kurulum yürütülebilirini sağ tıklatın ve yüklemek için yönetici olarak çalıştırın.
 
-    ![sorun giderme-oturum-benzeşim-sorunları-12](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-12.png)
+    ![sorun giderme-oturum benzeşimi-sorunlar-12](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-12.png)
 
-3. Fiddler'ı açtığınızda, otomatik olarak (yakalama sol alt köşesinde bir bildirim) trafiğini yakalamaktan başlamalıdır. Başlatma veya durdurma trafik yakalama için F12 tuşuna basın.
+3. Fiddler 'i açtığınızda bu, trafiği otomatik olarak yakalamaya başlar (sol alt köşedeki yakalamaya dikkat edin). Trafik yakalamayı başlatmak veya durdurmak için F12 tuşuna basın.
 
-    ![sorun giderme-oturum-benzeşim-sorunları-13](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-13.png)
+    ![sorun giderme-oturum benzeşimi-sorunlar-13](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-13.png)
 
-4. Büyük olasılıkla, şifresi çözülmüş HTTPS trafiği ilgilenecek ve HTTPS şifre çözme seçerek etkinleştirebilirsiniz **Araçları** > **Fiddler seçenekleri**ve onay kutusunu " **şifresini çözme HTTPS trafiğini**".
+4. Büyük olasılıkla, şifresi çözülmüş HTTPS trafiğiyle ilgilenirsiniz ve **araçlar** > **Fiddler seçeneklerini**belirleyerek https şifre ÇÖZMEYI etkinleştirebilir ve " **https trafiğinin şifresini çöz**" kutusunu işaretleyin.
 
-    ![sorun giderme-oturum-benzeşim-sorunları-14](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-14.png)
+    ![sorun giderme-oturum benzeşimi-sorunlar-14](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-14.png)
 
-5. Sorunu yeniden oluştururken tıklayarak önce önceki ilgisiz oturumları kaldırabilirsiniz **X** (simge) > **Tümünü Kaldır** ekran izleyin: 
+5. **X** (Icon >) ' i tıklayarak ve ardından **Tümünü Kaldır** ekran görüntüsü ' nü seçerek sorunu tekrar denemeden önce önceki ilgisiz oturumları kaldırabilirsiniz: 
 
-    ![sorun giderme-oturum-benzeşim-sorunları-15](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-15.png)
+    ![sorun giderme-oturum benzeşimi-sorunlar-15](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-15.png)
 
-6. Sorunu yeniden oluşturduktan sonra dosyayı gözden geçirme seçerek kaydedin **dosya** > **Kaydet** > **tüm oturumlar...** . 
+6. Sorunu yeniden oluşturduktan sonra **dosya** > seçerek dosyayı gözden geçirme için kaydedin > **tüm oturumları Kaydet..** . 
 
-    ![sorun giderme-oturum-benzeşim-sorunları-16](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-16.png)
+    ![sorun giderme-oturum benzeşimi-sorunlar-16](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-16.png)
 
-7. Denetleyin ve sorunun ne olduğunu belirlemek için oturumu günlüklerini analiz edin.
+7. Sorunun ne olduğunu belirlemek için oturum günlüklerini denetleyin ve çözümleyin.
 
     Örnekler için:
 
-- **Örnek c:** İstek istemci tarafından gönderilen ve uygulama ağ geçidinin genel IP adresine geçer bir oturum bulunamadı, ayrıntıları görüntülemek için bu günlüğü'nü tıklatın.  Sağ tarafta alt kutusundaki ne uygulama ağ geçidi istemciye döndürüyor verilerdir. "Ham" sekmesini seçin ve istemci alıp almadığını belirlemek bir "**Set-Cookie: ARRAffinity =** *ARRAffinityValue*. " Tanımlama bilgisi varsa, oturum benzeşimi ayarlanmamış veya Application Gateway, istemciye tanımlama bilgisi uygulamıyor.
+- **Örnek A:** İsteğin istemciden gönderildiği bir oturum günlüğü bulur ve Application Gateway genel IP adresine gider, ayrıntıları görüntülemek için bu günlüğe tıklayın.  Sağ tarafta, alttaki kutuda yer alan veriler Application Gateway istemciye geri dönşeydir. "RAW" sekmesini seçin ve istemcinin bir "**set-Cookie: ARRAffinity =** *ARRAffinityValue*" alıp almadıklarını belirleyin. Tanımlama bilgisi yoksa, oturum benzeşimi ayarlı değildir veya Application Gateway tanımlama bilgisini istemciye geri uygulamamakta değildir.
 
    > [!NOTE]
-   > Application Gateway istemcinin belirli bir arka uç sunucusuna gönderilmesi ayarlar tanımlama bilgisi-id ARRAffinity değerdir.
+   > Bu ARRAffinity değeri tanımlama bilgisi-id ' dır, Application Gateway istemcinin belirli bir arka uç sunucusuna gönderilmesi için ayarlanır.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-17](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-17.png)
+   ![sorun giderme-oturum-benzeşim-sorunlar-17](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-17.png)
 
-- **Örnek B:** Sonraki oturum önceki geri uygulama ARRAAFFINITY ayarladı ağ geçidi için yanıt istemci biridir ardından. ARRAffinity tanımlama bilgisi kimliği eşleşiyorsa paket daha önce kullanılan aynı arka uç sunucusuna gönderilmelidir. Http iletişimi için istemcinin ARRAffinity tanımlama bilgisini değiştiriyor olup olmadığını görmek için sonraki birkaç satırlık denetleyin.
+- **Örnek B:** Sonraki oturum günlüğü, daha önce gelen Application Gateway, istemci, ARRAAFFINITY olarak ayarlanmış olan geri yanıt verir. ARRAffinity tanımlama bilgisi kimliği eşleşiyorsa, paketin daha önce kullanılan arka uç sunucusuna gönderilmesi gerekir. İstemcinin ARRAffinity tanımlama bilgisinin değiştirilip değiştirilmediğini görmek için, sonraki birkaç http iletişim satırını kontrol edin.
 
-   ![sorun giderme-oturum-benzeşim-sorunları-18](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-18.png)
+   ![sorun giderme-oturum benzeşimi-sorunlar-18](./media/how-to-troubleshoot-application-gateway-session-affinity-issues/troubleshoot-session-affinity-issues-18.png)
 
 > [!NOTE]
-> Aynı iletişim oturum tanımlama bilgisinin değiştirme olmalıdır. Sağ taraftaki ilk kutuyu işaretleyin, istemciye tanımlama bilgisini kullanarak ve geri uygulama ağ geçidine gönderilmeden görmek için "Tanımlama bilgileri" sekmesini seçin. Aksi durumda, istemci tarayıcısı tutulması ve tanımlama bilgisi konuşmaları kullanarak değil. Bazı durumlarda, istemci kaynaklanıyor olabilir.
+> Aynı iletişim oturumu için tanımlama bilgisi değişmemelidir. Sağ taraftaki en üstteki kutuyu işaretleyin, istemcinin tanımlama bilgisini kullanıp kullanmadığını ve Application Gateway geri gönderip göndermediğini görmek için "tanımlama bilgileri" sekmesini seçin. Aksi halde istemci tarayıcısı, konuşmalar için tanımlama bilgisi kullanmıyor ve kullanmaz. Bazen, istemci olabilir.
 
  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yukarıdaki adımlar sorunu çözmezse, açık bir [destek bileti](https://azure.microsoft.com/support/options/).
+Yukarıdaki adımlar sorunu çözmezse, bir [destek bileti](https://azure.microsoft.com/support/options/)açın.

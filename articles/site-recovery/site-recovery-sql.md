@@ -1,153 +1,167 @@
 ---
-title: SQL Server ve Azure Site Recovery ile SQL Server için olağanüstü durum kurtarma ayarlama | Microsoft Docs
-description: Bu makalede, SQL Server ve Azure Site Recovery kullanarak SQL Server için olağanüstü durum kurtarma ayarlama açıklanır.
+title: Azure Site Recovery SQL Server için olağanüstü durum kurtarma ayarlama
+description: Bu makalede SQL Server ve Azure Site Recovery kullanarak SQL Server için olağanüstü durum kurtarma ayarlama açıklanmaktadır.
 services: site-recovery
 author: sujayt
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 06/30/2019
+ms.date: 08/02/2019
 ms.author: sutalasi
-ms.openlocfilehash: 1c44b10b54a5f58dff1aecf36c3633cc8ffbd8f0
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
+ms.openlocfilehash: 429f46156da728bbc24108090eac8c04f68da71c
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67491785"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084751"
 ---
-# <a name="set-up-disaster-recovery-for-sql-server"></a>SQL Server için olağanüstü durum kurtarmayı ayarlayın
+# <a name="set-up-disaster-recovery-for-sql-server"></a>SQL Server için olağanüstü durum kurtarmayı ayarlama
 
-Bu makalede, SQL Server iş sürekliliği ve olağanüstü durum kurtarma (BCDR) teknolojilerini bir birleşimini kullanarak bir uygulama SQL Server arka ucunu korumak açıklanır ve [Azure Site Recovery](site-recovery-overview.md).
+Bu makalede, bir uygulamanın SQL Server arka ucunun korunmasına nasıl yardımcı olduğu açıklanır. Bunu, SQL Server iş sürekliliği ve olağanüstü durum kurtarma (BCDR) teknolojilerinin ve [Azure Site Recovery](site-recovery-overview.md)bir birleşimini kullanarak yapabilirsiniz.
 
-Başlamadan önce nakliye ve etkin coğrafi çoğaltma otomatik yük devretme grupları Yük Devretme Kümelemesi, Always On kullanılabilirlik grupları, veritabanı yansıtma, dahil olmak üzere, SQL Server olağanüstü durum kurtarma olanaklarını oturum anladığınızdan emin olun.
+Başlamadan önce SQL Server olağanüstü durum kurtarma özelliklerini anladığınızdan emin olun. Bu yetenekler şunlardır:
 
-## <a name="dr-recommendation-for-integration-of-sql-server-bcdr-technologies-with-site-recovery"></a>SQL Server BCDR teknolojileriyle Site Recovery ile tümleştirilmesi için DR öneri
+* Yük Devretme Kümelemesi
+* Always on kullanılabilirlik grupları
+* Veritabanı yansıtma
+* Günlük aktarma
+* Etkin coğrafi çoğaltma
+* Otomatik yük devretme grupları
 
-Kurtarma SQL sunucuları için bir BCDR teknoloji seçimini dayalı olmalıdır RTO ve RPO ihtiyaçlarınıza göre tablo aşağıda. Bu seçimi yaptıktan sonra Site Recovery ile yük devretme işlemi tüm uygulamanızın kurtarılmasını düzenlemek için bu teknolojinin tümleştirilebilir.
+## <a name="combining-bcdr-technologies-with-site-recovery"></a>BCDR teknolojilerini Site Recovery birleştirme
 
-**Dağıtım türü** | **BCDR teknolojisi** | **SQL için beklenen RTO** | **SQL için beklenen RPO** |
+SQL Server örnekleri kurtarmak için BCDR teknolojisini tercih ettiğiniz, aşağıdaki tabloda açıklandığı gibi kurtarma zamanı hedefi (RTO) ve kurtarma noktası hedefi (RPO) gereksinimlerine göre olması gerekir. Tüm uygulamanızı yönetmek için Site Recovery seçtiğiniz teknolojinin yük devretme işlemiyle birleştirin.
+
+Dağıtım türü | BCDR teknolojisi | SQL Server için RTO bekleniyor | SQL Server için RPO bekleniyor |
 --- | --- | --- | ---
-Azure Iaas VM üzerindeki veya şirket içi SQL Server| **[Her zaman üzerinde kullanılabilirlik grubu](https://docs.microsoft.com/sql/database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server?view=sql-server-2017)** | İkincil çoğaltma birincil olarak yapmak için geçen süre ile eşdeğerdir | İkincil bir çoğaltmaya zaman uyumsuz çoğaltma, bu nedenle bazı verilerin kaybolması yoktur.
-Azure Iaas VM üzerindeki veya şirket içi SQL Server| **[Yük Devretme Kümelemesi (her zaman şirket FCI)](https://docs.microsoft.com/sql/sql-server/failover-clusters/windows/windows-server-failover-clustering-wsfc-with-sql-server?view=sql-server-2017)** | Düğümler arasında yük devretme için geçen süre ile eşdeğerdir | Paylaşılan depolama alanı kullanır, bu nedenle yük devretme sırasında depolama örneğinin aynı görünümde kullanılabilir.
-Azure Iaas VM üzerindeki veya şirket içi SQL Server| **[Veritabanı yansıtma (yüksek performanslı mod)](https://docs.microsoft.com/sql/database-engine/database-mirroring/database-mirroring-sql-server?view=sql-server-2017)** | Yansıtma sunucusu normal bir bekleme sunucusunun kullandığı hizmet zorlamak için geçen süre ile eşdeğerdir. | Çoğaltma zaman uyumsuzdur. Yansıtma veritabanının asıl veritabanı arkasında biraz lag. Boşluk genelde küçüktür howvever, asıl veya yansıtma sunucunun sistem ağır bir yük altında ise önemli hale gelebilir.<br></br>Günlük aktarma veritabanı yansıtma için ek olabilir ve zaman uyumsuz veritabanı yansıtma için iyi bir alternatiftir
-Azure PaaS olarak SQL<br></br>(Elastik havuzlar, SQL veritabanı sunucuları) | **Etkin coğrafi çoğaltma** | 30 saniyelik bir kez tetiklendi<br></br>Yük devretme ikincil veritabanlarından biri etkinleştirildiğinde, diğer tüm ikincil veritabanı otomatik olarak yeni birincil siteye bağlanır. | 5 saniye RPO<br></br>Etkin coğrafi çoğaltma, zaman uyumsuz olarak kaydedilen işlem sayısı birincil veritabanında anlık görüntü yalıtımı kullanarak ikincil bir veritabanı çoğaltma için SQL Server Always On teknoloji yararlanır. <br></br>İkincil veri kısmi hareket hiçbir zaman olması garanti edilir.
-Azure üzerinde etkin coğrafi çoğaltma ile yapılandırılmış PaaS olarak SQL<br></br>(SQL veritabanı yönetilen örneği, elastik havuzlar, SQL veritabanı sunucuları) | **Otomatik yük devretme grupları** | RTO 1 saat | 5 saniye RPO<br></br>Otomatik Yük devretme grupları üzerinde etkin coğrafi çoğaltma grubu semantiği sağlar ancak aynı zaman uyumsuz çoğaltma mekanizması kullanılır.
-Azure Iaas VM üzerindeki veya şirket içi SQL Server| **Azure Site Recovery ile çoğaltmayı** | Genellikle 15 dakikadan kısa sürer. [Daha fazla bilgi edinin](https://azure.microsoft.com/support/legal/sla/site-recovery/v1_2/) RTO Azure Site Recovery tarafından sağlanan SLA'sı hakkında bilgi edinmek için. | 1 saat uygulama tutarlılığı ve kilitlenme tutarlılığı için 5 dakika. 
+Bir Azure hizmet olarak altyapı (IaaS) sanal makinesi (VM) veya şirket içinde SQL Server.| [AlwaysOn kullanılabilirlik grubu](https://docs.microsoft.com/sql/database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server?view=sql-server-2017) | İkincil çoğaltmayı birincil olarak yapmak için geçen süre. | İkincil çoğaltmaya çoğaltma zaman uyumsuz olduğundan, bazı veri kaybı vardır.
+Azure IaaS sanal makinesinde veya şirket içinde SQL Server.| [Yük Devretme Kümelemesi (Always on FCı)](https://docs.microsoft.com/sql/sql-server/failover-clusters/windows/windows-server-failover-clustering-wsfc-with-sql-server?view=sql-server-2017) | Düğümler arasında yük devretmek için geçen süre. | Her zaman FCı üzerinde paylaşılan depolama kullandığından, yük devretme sırasında depolama örneğinin aynı görünümü kullanılabilir.
+Azure IaaS sanal makinesinde veya şirket içinde SQL Server.| [Veritabanı yansıtma (yüksek performanslı mod)](https://docs.microsoft.com/sql/database-engine/database-mirroring/database-mirroring-sql-server?view=sql-server-2017) | Bir yarı bekleyen sunucu olarak yansıtma sunucusunu kullanan hizmeti zorlamak için geçen süre. | Çoğaltma zaman uyumsuzdur. Yansıtma veritabanı, asıl veritabanının arkasında biraz gecikme alabilir. Gecikme genellikle küçüktür. Ancak asıl veya yansıtma sunucusunun sistemi ağır bir yükün altındaysa büyük hale gelebilir.<br/><br/>Günlük aktarma, veritabanı yansıtma için bir ek olabilir. Zaman uyumsuz veritabanı yansıtma için iyi bir alternatiftir.
+Azure 'da hizmet olarak platform (PaaS) olarak SQL.<br/><br/>Bu dağıtım türü, elastik havuzlar ve Azure SQL veritabanı sunucularını içerir. | Etkin coğrafi çoğaltma | Yük devretme işlemi tetiklendiğinde 30 saniye.<br/><br/>İkincil veritabanlarından biri için yük devretme etkinleştirildiğinde, diğer tüm ikincil öğeler yeni birincil ile otomatik olarak bağlanır. | Beş saniyelik RPO 'SU.<br/><br/>Etkin coğrafi çoğaltma SQL Server her zaman açık teknolojisini kullanır. Anlık görüntü yalıtımı kullanarak birincil veritabanında yürütülen işlemleri ikincil veritabanına zaman uyumsuz olarak çoğaltır.<br/><br/>İkincil verilere hiçbir şekilde kısmi işlem olmadığı garanti edilir.
+Azure 'da etkin coğrafi çoğaltma ile SQL as PaaS yapılandırıldı.<br/><br/>Bu dağıtım türü bir SQL veritabanı yönetilen örneği, elastik havuzlar ve SQL veritabanı sunucuları içerir. | Otomatik yük devretme grupları | RTO bir saat. | Beş saniyelik RPO 'SU.<br/><br/>Otomatik yük devretme grupları, etkin coğrafi çoğaltmanın en üstünde grup semantiğini sağlar. Ancak aynı zaman uyumsuz çoğaltma mekanizması kullanılır.
+Azure IaaS sanal makinesinde veya şirket içinde SQL Server.| Azure Site Recovery ile çoğaltma | RTO, genellikle 15 dakikadan azdır. Daha fazla bilgi edinmek için [Site Recovery tarafından sunulan RTO SLA](https://azure.microsoft.com/support/legal/sla/site-recovery/v1_2/)makalesini okuyun. | Uygulama tutarlılığı için bir saat ve kilitlenme tutarlılığı için beş dakika. Daha düşük bir RPO arıyorsanız, diğer BCDR teknolojilerini kullanın.
 
 > [!NOTE]
-> Azure Site Recovery ile SQL iş yüklerini koruyorsanız bazı önemli noktalar:
-> * Azure Site Recovery uygulamadan bağımsız olduğu ve bu nedenle, Azure Site Recovery tarafından desteklenen bir işletim sisteminde dağıtılan SQL server'ın herhangi bir sürümünü korunabilir. [Daha fazla bilgi edinin](vmware-physical-azure-support-matrix.md#replicated-machines).
-> * Azure, Hyper-V, VMware veya fiziksel altyapı bir dağıtım için Site Recovery kullanmayı da tercih edebilirsiniz. Lütfen izleyin [Kılavuzu](site-recovery-sql.md#how-to-protect-a-sql-server-cluster-standard-editionsql-server-2008-r2) sonunda, SQL Server kümesi Azure Site Recovery ile koruma hakkında belge.
-> * Olun göstermediği verileri makinede gözlemlenen oranı (Yazma Bayt / sn) değiştirmek [Site Recovery limitlerine](vmware-physical-azure-support-matrix.md#churn-limits). Windows makineleri için bu Görev Yöneticisi Performans sekmesindeki görüntüleyebilirsiniz. Yazma gözlemleyin her disk için hız.
-> * Azure Site Recovery çoğaltma yük devretme kümesi örnekleri, depolama alanları doğrudan'ı destekler. [Daha fazla bilgi edinin](azure-to-azure-how-to-enable-replication-s2d-vms.md).
- 
+> Site Recovery ile SQL iş yüklerini korumaya yardımcı olduğunuzda dikkat etmeniz gereken birkaç önemli nokta:
+> * Site Recovery uygulamanın belirsiz olması. Site Recovery, desteklenen bir işletim sisteminde dağıtılan SQL Server herhangi bir sürümünü korumaya yardımcı olabilir. Daha fazla bilgi edinmek için bkz. çoğaltılan makinelerin [kurtarılması için destek matrisi](vmware-physical-azure-support-matrix.md#replicated-machines) .
+> * Azure, Hyper-V, VMware veya fiziksel altyapıda herhangi bir dağıtım için Site Recovery kullanmayı tercih edebilirsiniz. Lütfen [bir SQL Server kümesini Site Recovery ile korumanıza yardımcı olmak için](#how-to-help-protect-a-sql-server-cluster) Bu makalenin sonundaki yönergeleri izleyin.
+> * Makinede gözlenen veri değişim hızının [Site Recovery limitlerin](vmware-physical-azure-support-matrix.md#churn-limits)içinde olduğundan emin olun. Değişiklik hızı, saniye başına yazılan bayt cinsinden ölçülür. Windows çalıştıran makineler için, Görev Yöneticisi 'nde **performans** sekmesini seçerek bu değişiklik oranını görüntüleyebilirsiniz. Her disk için yazma hızını gözlemleyin.
+> * Site Recovery, Depolama Alanları Doğrudan yük devretme kümesi örneklerinin çoğaltılmasını destekler. Daha fazla bilgi için bkz. [depolama alanları doğrudan çoğaltmayı etkinleştirme](azure-to-azure-how-to-enable-replication-s2d-vms.md).
 
-## <a name="disaster-recovery-of-application"></a>Olağanüstü durum kurtarma uygulama
+## <a name="disaster-recovery-of-an-application"></a>Uygulamanın olağanüstü durum kurtarması
 
-**Azure Site Recovery kurtarma planları Yardım tüm uygulamanızın yük devretme ve yük devretme testi yönetir.** 
+Site Recovery, kurtarma planlarının yardımıyla tüm uygulamanızın yük devretmesini ve yük devretmesini düzenler.
 
-Kurtarma planı tam gereksinimlerinize göre özelleştirilmiş emin olmak için bazı Önkoşullar vardır. Herhangi bir SQL Server dağıtımı, genellikle bir Active Directory gerekir. Ayrıca uygulama katmanınızı bağlantısı gerekir.
+Kurtarma planınızın gereksinimlerinize göre tamamen özelleştirildiğinden emin olmak için bazı Önkoşullar vardır. Herhangi bir SQL Server dağıtımı genellikle bir Active Directory dağıtımına ihtiyaç duyuyor. Ayrıca uygulama katmanınız için bağlantı gerekir.
 
-### <a name="step-1-set-up-active-directory"></a>1\. adım: Active Directory'yi ayarlama
+### <a name="step-1-set-up-active-directory"></a>1\. Adım: Active Directory ayarlama
 
-Kurtarma ikincil sitedeki SQL Server'ın düzgün çalışması için Active Directory'yi otomasyon'dan ayarlayın.
+SQL Server düzgün çalışması için ikincil kurtarma sitesinde Active Directory ayarlayın.
 
-* **Küçük kuruluş**— tüm site için başarısız istiyorsanız uygulamalara ve şirket içi site için tek bir etki alanı denetleyicisine küçük bir sayı ile ikincil etki alanı denetleyicisi çoğaltmak için Site Recovery çoğaltma kullanmanızı öneririz veri merkezi veya azure'a.
-* **Orta veya büyük kuruluş**— çok sayıda uygulama, bir Active Directory ormanı varsa ve uygulama veya iş yükü tarafından devralınırsa çalışmak isterseniz, Azure veya ikincil veri merkezinde bir ek etki alanı denetleyicisini ayarlama ayarlamanızı öneririz. İçin uzak bir siteyi kurtarmak için Always On kullanılabilirlik grupları kullanıyorsanız, kurtarılan bir SQL Server örneği için kullanılacak başka bir ek etki alanı denetleyicisi, azure'da veya ikincil sitede'kurmak ayarlamanızı öneririz.
+* **Küçük kurumsal**: şirket içi site için az sayıda uygulama ve tek bir etki alanı denetleyiciniz vardır. Tüm sitenin yükünü devretmek istiyorsanız Site Recovery çoğaltma kullanın. Bu hizmet, etki alanı denetleyicisini ikincil veri merkezine veya Azure 'a çoğaltır.
+* **Orta ila büyük kurumsal**: ek etki alanı denetleyicileri ayarlamanız gerekebilir.
+  - Çok sayıda uygulamanız varsa, bir Active Directory ormanına sahipseniz ve uygulamanın veya iş yükünün yükünü devretmek istiyorsanız, ikincil veri merkezinde veya Azure 'da başka bir etki alanı denetleyicisi ayarlayın.
+  -  Uzak bir siteye kurtarmak için Always on kullanılabilirlik grupları kullanıyorsanız, ikincil sitede veya Azure 'da başka bir etki alanı denetleyicisi ayarlayın. Bu etki alanı denetleyicisi kurtarılmış SQL Server örneği için kullanılır.
 
-Bu makaledeki yönergeler, bir etki alanı denetleyicisi ikincil konumdaki kullanılabilir olduğunu varsayın. [Daha fazla bilgi edinin](site-recovery-active-directory.md) Active Directory Site Recovery ile koruma hakkında.
+Bu makaledeki yönergeler, bir etki alanı denetleyicisinin ikincil konumda kullanılabilir olduğunu varsayar. Daha fazla bilgi edinmek için [Site Recovery Active Directory korumaya yardımcı olma](site-recovery-active-directory.md)yordamlarına bakın.
 
-### <a name="step-2-ensure-connectivity-with-other-application-tiers-and-web-tier"></a>2\. adım: Diğer uygulama katmanları ve web katmanı ile bağlantı emin olun
+### <a name="step-2-ensure-connectivity-with-other-tiers"></a>2\. Adım: diğer katmanlardan bağlantı sağlayın
 
-Veritabanı katmanı hedef Azure bölgesi içinde çalışır duruma geldikten sonra uygulama ve web katmanı ile bağlantı olduğundan emin olun. Yük devretme testi ile bağlantıyı doğrulamak için gerekli adımları önceden dikkat edilmelidir.
+Hedef Azure bölgesinde veritabanı katmanı çalıştıktan sonra uygulama ve Web katmanlarıyla bağlantınız olduğundan emin olun. Sınama yük devretmesi ile bağlantıyı doğrulamak için gerekli adımları önceden yapın.
 
-Birkaç örnek ile bağlantı konular için uygulamaları nasıl tasarlayacağınızı anlayın:
-* [Bulutta olağanüstü durum kurtarma için uygulama tasarlama](../sql-database/sql-database-designing-cloud-solutions-for-disaster-recovery.md)
+Bağlantı hususları için uygulamaları nasıl tasarlayabileceğinizi anlamak için aşağıdaki örneklere bakın:
+
+* [Bulut olağanüstü durum kurtarma için uygulama tasarlama](../sql-database/sql-database-designing-cloud-solutions-for-disaster-recovery.md)
 * [Elastik havuz olağanüstü durum kurtarma stratejileri](../sql-database/sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool.md)
 
-### <a name="step-3-integrate-with-always-on-active-geo-replication-or-auto-failover-groups-for-application-failover"></a>3\. adım: Always On, etkin coğrafi çoğaltma veya uygulama yük devretme için otomatik yük devretme grupları ile tümleştirme
+### <a name="step-3-interoperate-with-always-on-active-geo-replication-and-auto-failover-groups"></a>3\. Adım: her zaman açık, etkin coğrafi çoğaltma ve otomatik yük devretme gruplarıyla birlikte çalışma
 
-BCDR teknolojileriyle Always On etkin coğrafi çoğaltma ve otomatik yük devretme grupları, hedef Azure bölgeniz çalışan SQL server'ın ikincil çoğaltmaları sahip. Bu nedenle, ilk adım, uygulamanın yük devretme için bu çoğaltma (ikincil bir etki alanı denetleyicisi zaten sahip olduğu varsayılarak) birincil olarak olmasını sağlamaktır. Bu adım, otomatik yük devretme bir yapmayı tercih ederseniz gerekli olmayabilir. Yalnızca veritabanı yük devretme tamamlandıktan sonra web veya uygulama katmanları yük devretme gerekir.
+BCDR teknolojileri her zaman açık, etkin coğrafi çoğaltma ve otomatik yük devretme gruplarında, hedef Azure bölgesinde çalışan SQL Server ikincil çoğaltmaları vardır. Uygulamanızın yük devretmesinin ilk adımı, bu çoğaltmayı birincil olarak belirtmektir. Bu adım, ikincil üzerinde zaten bir etki alanı denetleyiciniz olduğunu varsayar. Otomatik yük devretmeyi tercih ederseniz adım gerekli olmayabilir. Web ve uygulama katmanlarınızın yükünü yalnızca veritabanı yük devretme işlemi tamamlandıktan sonra devreder.
 
-> [!NOTE] 
-> Azure Site Recovery ile SQL makineleri koruduysanız, bu makineleri bir kurtarma grubu oluşturun ve bunların yük devretme kurtarma planında eklemek yeterlidir.
+> [!NOTE]
+> SQL makinelerini Site Recovery korumayla ilgili yardım ediyorsanız, bu makinelerin bir kurtarma grubunu oluşturmanız ve yük devretmesini kurtarma planına eklemeniz yeterlidir.
 
-[Bir kurtarma planı oluşturma](site-recovery-create-recovery-plans.md) uygulama ve web katmanı sanal makineleri ile. İzleyin veritabanı katmanı yük devretmesi eklemek için aşağıdaki adımları:
+Uygulama ve Web katmanı sanal makineleriyle [bir kurtarma planı oluşturun](site-recovery-create-recovery-plans.md) . Aşağıdaki adımlar veritabanı katmanının yük devretmesini nasıl ekleneceğini göstermektedir:
 
-1. Betikleri Azure Otomasyon hesabınızda içeri aktarın. Bu betikleri SQL kullanılabilirlik grubu yük devretme içeren içinde bir [Resource Manager sanal makinesi](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/asr-automation-recovery/scripts/ASR-SQL-FailoverAG.ps1) ve [Klasik sanal makine](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/asr-automation-recovery/scripts/ASR-SQL-FailoverAGClassic.ps1).
+1. Hem [Kaynak Yöneticisi sanal makinede](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/asr-automation-recovery/scripts/ASR-SQL-FailoverAG.ps1) hem de [klasık sanal makinede](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/asr-automation-recovery/scripts/ASR-SQL-FailoverAGClassic.ps1)SQL kullanılabilirlik grubu 'nun yükünü devretmek için betikleri içeri aktarın. Betikleri Azure Otomasyonu hesabınıza aktarın.
 
-    [![Azure’a dağıtma](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)](https://aka.ms/asr-automationrunbooks-deploy)
+    ["Azure 'a dağıt" logosunun ![görüntüsü](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)](https://aka.ms/asr-automationrunbooks-deploy)
 
+1. ASR-SQL-FailoverAG betiğini kurtarma planının ilk grubunun ön eylemi olarak ekleyin.
 
-1. ASR SQL FailoverAG kurtarma planının ilk grup bir ön eylem ekleyin.
+1. Otomasyon değişkeni oluşturmak için betikte bulunan yönergeleri izleyin. Bu değişken, kullanılabilirlik gruplarının adını sağlar.
 
-1. Kullanılabilirlik grupları adını sağlamak için bir Otomasyon değişkeni oluşturma komut dosyasında mevcut yönergeleri izleyin.
+### <a name="step-4-conduct-a-test-failover"></a>4\. Adım: yük devretme testi yürütme
 
-### <a name="step-4-conduct-a-test-failover"></a>4\. Adım: Bir sınama yük devretmesi
+SQL her zaman açık gibi bazı BCDR teknolojileri, yük devretme testini yerel olarak desteklemez. *Yalnızca bu tür teknolojiler kullanılırken*aşağıdaki yaklaşımı öneririz.
 
-SQL Always On gibi bazı BCDR teknolojileri, yük devretme testini yerel olarak desteklemez. Bu nedenle, aşağıdaki yaklaşımı önerilir **gibi teknolojiler ile tümleştirdiğinizde**:
+1. Azure 'da kullanılabilirlik grubu çoğaltmasını barındıran VM 'de [Azure Backup](../backup/backup-azure-arm-vms.md) ayarlayın.
 
-1. Ayarlanan [Azure Backup](../backup/backup-azure-arm-vms.md) azure'da kullanılabilirlik grubu çoğaltması barındıran sanal makine üzerinde.
+1. Kurtarma planının yük devretmesini test tetiklemeden önce, önceki adımda alınan yedekten VM 'yi kurtarın.
 
-1. Kurtarma planı test yük devretmesi tetiklemeden önce sanal makine önceki adımda alınan yedekleme kurtarma.
+    ![Azure Backup bir yapılandırmayı geri yükleme penceresini gösteren ekran görüntüsü](./media/site-recovery-sql/restore-from-backup.png)
 
-    ![Azure yedeklemeden geri yükleme](./media/site-recovery-sql/restore-from-backup.png)
+1. Yedekten geri yüklenen VM 'de [bir çekirdeğe zorlayın](https://docs.microsoft.com/sql/sql-server/failover-clusters/windows/force-a-wsfc-cluster-to-start-without-a-quorum#PowerShellProcedure) .
 
-1. [Bir çekirdeği zorlama](https://docs.microsoft.com/sql/sql-server/failover-clusters/windows/force-a-wsfc-cluster-to-start-without-a-quorum#PowerShellProcedure) yedeklemeden geri sanal makinede.
+1. Dinleyicinin IP adresini, test yük devretmesi ağında kullanılabilir bir adres olacak şekilde güncelleştirin.
 
-1. Test yük devretme ağı bir IP dinleyici IP güncelleştirin.
+    ![Kural penceresi ve IP adresi özellikleri iletişim kutusunun ekran görüntüsü](./media/site-recovery-sql/update-listener-ip.png)
 
-    ![Dinleyici güncelleştirme IP](./media/site-recovery-sql/update-listener-ip.png)
+1. Dinleyiciyi çevrimiçi duruma getirin.
 
-1. Dinleyici çevrimiçi duruma getirin.
+    ![Sunucu adlarını ve durumlarını gösteren Content_AG etiketli pencerenin ekran görüntüsü](./media/site-recovery-sql/bring-listener-online.png)
 
-    ![Dinleyici çevrimiçi duruma getirme](./media/site-recovery-sql/bring-listener-online.png)
+1. Yük devretme ağındaki yük dengeleyicinin bir IP adresine, her bir kullanılabilirlik grubu dinleyicisine karşılık gelen ön uç IP adresi havuzundan ve arka uç havuzundaki SQL Server VM sahip olduğundan emin olun.
 
-1. Bir yük dengeleyici IP her kullanılabilirlik grubu dinleyicisi için karşılık gelen ön uç IP havuzu altında oluşturulan ve arka uç havuzuna eklenmiş SQL sanal makinesi oluşturun.
+     !["SQL-AlwaysOn-LB-ön uç IP havuzu" başlıklı pencerenin ekran görüntüsü](./media/site-recovery-sql/create-load-balancer1.png)
 
-     ![Yük Dengeleyici - ön uç IP havuzu oluşturma](./media/site-recovery-sql/create-load-balancer1.png)
+    !["SQL-AlwaysOn-LB-arka uç IP havuzu" başlıklı pencerenin ekran görüntüsü](./media/site-recovery-sql/create-load-balancer2.png)
 
-    ![Yük Dengeleyici - arka uç havuzu oluşturma](./media/site-recovery-sql/create-load-balancer2.png)
+1. Daha sonraki kurtarma gruplarında, uygulama katmanınızın yük devretmesini ve ardından bu kurtarma planına ait web katmanınızı ekleyin.
 
-1. Bu kurtarma planında sonraki kurtarma gruplardaki web katmanı tarafından izlenen uygulama katmanınızı yük devretmesi ekleyin. 
-1. Uygulamanın uçtan uca yük devretme testi için kurtarma planının bir yük devretme testi yaparsınız.
+1. Uygulamanızın uçtan uca yük devretmesini test etmek için kurtarma planının yük devretmesini test edin.
 
-## <a name="steps-to-do-a-failover"></a>Bir yük devretme yapma adımları
+## <a name="steps-to-do-a-failover"></a>Yük devretme işlemi oluşturma adımları
 
-Adım 3'te Kurtarma planındaki betik eklediniz ve bunu adım 4'te özel bir yaklaşım ile bir yük devretme testi yaparak doğruladıktan sonra 3. adımda oluşturulan kurtarma planı yük devretme yapabilirsiniz.
+Adım 3 ' te betiği ekledikten ve adım 4 ' te doğruladıktan sonra, adım 3 ' te oluşturulan kurtarma planının yük devretmesini gerçekleştirebilirsiniz.
 
-Geçiş adımlarını uygulama ve web katmanları için yük devretme testi ve yük devretme kurtarma planları aynı olması gerektiğini unutmayın.
+Uygulama ve Web katmanları için yük devretme adımları, hem test yük devretmesi hem de yük devretme kurtarma planlarında aynı olmalıdır.
 
-## <a name="how-to-protect-a-sql-server-cluster-standard-editionsql-server-2008-r2"></a>Bir SQL Server kümesi (standard edition/SQL Server 2008 R2) koruma
+## <a name="how-to-help-protect-a-sql-server-cluster"></a>SQL Server kümesini korumaya nasıl yardımcı olabilirsiniz
 
-SQL Server Standard edition veya SQL Server 2008 R2 çalıştıran bir küme için SQL Server'ı korumak için Site Recovery çoğaltma kullanmanızı öneririz.
+SQL Server Standard Edition veya SQL Server 2008 R2 çalıştıran bir küme için, SQL Server korumaya yardımcı olmak üzere Site Recovery çoğaltmasını kullanmanızı öneririz.
 
-### <a name="azure-to-azure-and-on-premises-to-azure"></a>Azure ve şirket içi Azure için azure'a
+### <a name="azure-to-azure-and-on-premises-to-azure"></a>Azure 'dan Azure 'a ve Şirket içinden Azure 'a
 
-Site Recovery, Konuk sunmaz bir Azure bölgesine çoğaltmak, küme desteği. SQL Server, Standard edition için düşük maliyetli olağanüstü durum kurtarma çözümü de sağlamaz. Bu senaryoda, bir tek başına birincil konumda SQL Server için SQL Server kümesini koruma ve ikincil kurtarma öneririz.
+Site Recovery, bir Azure bölgesine çoğaltma yaparken Konuk küme desteği sağlamaz. SQL Server Standard sürüm, düşük maliyetli bir olağanüstü durum kurtarma çözümü de sağlamaz. Bu senaryoda, SQL Server kümesini birincil konumdaki tek başına SQL Server örneğine korumanızı ve ikincil konuma kurtarmayı öneririz.
 
-1. Birincil Azure bölgesi veya şirket içi sitede ek tek başına SQL Server örneğini yapılandırın.
-1. Korumak istediğiniz veritabanları için bir yansıtma olarak hizmet verecek bir örneğini yapılandırın. Yüksek güvenilirlik modunda yansıtmasını yapılandırın.
-1. Birincil sitede Site Recovery yapılandırma ([Azure](azure-to-azure-tutorial-enable-replication.md), [Hyper-V](site-recovery-hyper-v-site-to-azure.md) veya [VMware Vm'lerini/fiziksel sunucuları)](site-recovery-vmware-to-azure-classic.md).
-1. Yeni SQL Server örneğinin ikincil bir siteye çoğaltmak için Site Recovery çoğaltma kullanın. Yüksek güvenilirlik yansıtma kopyası olduğundan, birincil küme ile senkronize edilir, ancak Site Recovery çoğaltması kullanılarak çoğaltılır.
+1. Birincil Azure bölgesinde veya şirket içi sitede ek bir tek başına SQL Server örneği yapılandırın.
 
+1. Koruma sağlamak istediğiniz veritabanları için bir yansıtma olarak kullanılacak örneği yapılandırın. İzlemeyi yüksek güvenlik modunda yapılandırın.
 
-![Standart küme](./media/site-recovery-sql/standalone-cluster-local.png)
+1. [Azure](azure-to-azure-tutorial-enable-replication.md), [Hyper-V](site-recovery-hyper-v-site-to-azure.md)veya [VMware VM 'leri ve fiziksel sunucular](site-recovery-vmware-to-azure-classic.md)için birincil sitede Site Recovery yapılandırın.
 
-### <a name="failback-considerations"></a>Yeniden çalışma hakkında önemli noktalar
+1. Yeni SQL Server örneğini ikincil siteye çoğaltmak için Site Recovery çoğaltma kullanın. Yüksek güvenlik yansıtma kopyası olduğundan, birincil kümeyle eşitlenir, ancak Site Recovery çoğaltma kullanılarak çoğaltılır.
 
-SQL Server Standard kümeler için SQL server yedekleme ve geri yükleme, özgün kümeyle reestablishment yansıtma yansıtma örneğine geri dönme planlanmamış bir yük devretme sonrasında gerektirir.
+   ![Birincil site, Site Recovery ve Azure arasındaki ilişkiyi ve akışı gösteren standart bir kümenin görüntüsü](./media/site-recovery-sql/standalone-cluster-local.png)
 
-## <a name="frequently-asked-questions"></a>Sıkça Sorulan Sorular
+### <a name="failback-considerations"></a>Yeniden çalışma konuları
 
-### <a name="how-does-sql-get-licensed-when-protected-with-azure-site-recovery"></a>Nasıl SQL Azure Site Recovery ile korunan, lisanslı?
-Tüm Azure Site Recovery senaryoları (şirket içinden Azure’a olağanüstü durum kurtarma veya bölgeler arası Azure IaaS olağanüstü durum kurtarma) için SQL Server’a yönelik Azure Site Recovery çoğaltma işlemi Yazılım Güvencesi – Olağanüstü Durum Kurtarma avantajı kapsamındadır. [Daha fazla bilgi edinin](https://azure.microsoft.com/pricing/details/site-recovery/)
+SQL Server Standard kümeler için, planlanmamış bir yük devretmeden sonra yeniden çalışma için SQL Server Yedekleme ve geri yükleme gerekir. Bu işlem yansıtma örneğinden orijinal kümeye, yansıtmanın yeniden kurulmasıyla yapılır.
 
-### <a name="will-azure-site-recovery-support-my-sql-version"></a>Azure Site Recovery, SQL sürümüm desteklenecek?
-Azure Site Recovery, uygulamadan bağımsız olur. Bu nedenle, desteklenen bir işletim sisteminde dağıtılan SQL server'ın herhangi bir sürümünü Azure Site Recovery tarafından korunabilir. [Daha fazla bilgi edinin](vmware-physical-azure-support-matrix.md#replicated-machines)
+## <a name="frequently-asked-questions"></a>Sık sorulan sorular
+
+### <a name="how-does-sql-server-get-licensed-when-used-with-site-recovery"></a>SQL Server Site Recovery kullanıldığında nasıl lisanslanır?
+
+SQL Server için Site Recovery çoğaltma, yazılım güvencesi olağanüstü durum kurtarma avantajı kapsamında ele alınmıştır. Bu kapsam tüm Site Recovery senaryolar için geçerlidir: Şirket içinden Azure 'a olağanüstü durum kurtarma ve bölgeler arası Azure IaaS olağanüstü durum kurtarma. Daha fazla bilgi için bkz. [Azure Site Recovery fiyatlandırması](https://azure.microsoft.com/pricing/details/site-recovery/) .
+
+### <a name="will-site-recovery-support-my-sql-server-version"></a>SQL Server sürümm Site Recovery destekleyecektir.
+
+Site Recovery uygulamanın belirsiz olması. Site Recovery, desteklenen bir işletim sisteminde dağıtılan SQL Server herhangi bir sürümünü korumaya yardımcı olabilir. Daha fazla bilgi için bkz. çoğaltılan makinelerin [kurtarılması için destek matrisi](vmware-physical-azure-support-matrix.md#replicated-machines) .
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Daha fazla bilgi edinin](site-recovery-components.md) Site Recovery mimarisi hakkında.
-* Azure SQL sunucuları için daha fazla bilgi edinin [yüksek kullanılabilirlik çözümleri](../virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr.md#azure-only-high-availability-solutions) için ikincil Azure bölgesine kurtarma.
-* Azure SQL veritabanı için daha fazla bilgi edinin [iş sürekliliği](../sql-database/sql-database-business-continuity.md) ve [yüksek kullanılabilirlik](../sql-database/sql-database-high-availability.md) ikincil bir Azure bölgesinde kurtarma seçenekleri.
-* Şirket içi SQL server makine için [daha fazla bilgi edinin](../virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr.md#hybrid-it-disaster-recovery-solutions) kurtarma Azure sanal Makineler'de yüksek kullanılabilirlik seçenekleri hakkında.
+
+* [Site Recovery mimari](site-recovery-components.md)hakkında daha fazla bilgi edinin.
+* Azure 'da SQL Server için, ikincil bir Azure bölgesinde kurtarmaya yönelik [yüksek kullanılabilirlik çözümleri](../virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr.md#azure-only-high-availability-solutions) hakkında daha fazla bilgi edinin.
+* SQL veritabanı için, ikincil bir Azure bölgesinde kurtarmaya yönelik [iş sürekliliği](../sql-database/sql-database-business-continuity.md) ve [yüksek kullanılabilirlik](../sql-database/sql-database-high-availability.md) seçenekleri hakkında daha fazla bilgi edinin.
+* Şirket içi SQL Server makineler için, Azure sanal makinelerinde kurtarmaya yönelik [yüksek kullanılabilirlik seçenekleri](../virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr.md#hybrid-it-disaster-recovery-solutions) hakkında daha fazla bilgi edinin.

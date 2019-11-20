@@ -1,7 +1,7 @@
 ---
-title: Bing haber arama API'si Visual Studio'da bağlı hizmetler ile bağlanın veC#
+title: Visual Studio 'da bağlı hizmetlerle Bing Haber Arama API'si bağlanın veC#
 titleSuffix: Azure Cognitive Services
-description: Bir ASP.NET Core web uygulamasından Bing Haber Arama hizmetine bağlanın.
+description: Bing Haber Arama hizmetini kullanarak uygulamaların ve hizmetlerin web ölçeğindeki reklamsız bir arama motorunun gücünden faydalanmasını sağlayabilirsiniz.
 services: cognitive-services
 author: ghogen
 manager: nitinme
@@ -10,14 +10,14 @@ ms.subservice: bing-news-search
 ms.topic: tutorial
 ms.date: 06/18/2019
 ms.author: ghogen
-ms.openlocfilehash: 85afae087b1b1e572759943142412743744ee806
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 0a8a4f69c94f217cb40146b022adf2b2d56c8d42
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67203415"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111503"
 ---
-# <a name="tutorial-connect-to-bing-news-search-api-with-connected-services-in-visual-studio-and-c"></a>Öğretici: Bing haber arama API'si Visual Studio'da bağlı hizmetler ile bağlanın veC#
+# <a name="tutorial-connect-to-bing-news-search-api-with-connected-services-in-visual-studio-and-c"></a>Öğretici: Visual Studio 'da bağlı hizmetlerle Bing Haber Arama API'si bağlanın veC#
 
 Bing Haber Arama hizmetini kullanarak uygulamaların ve hizmetlerin web ölçeğindeki reklamsız bir arama motorunun gücünden faydalanmasını sağlayabilirsiniz. Bing Haber Arama, Bilişsel Hizmetler kapsamında sunulan arama hizmetlerinden biridir.
 
@@ -26,7 +26,7 @@ Bu makalede Bing Haber Arama hizmeti için Visual Studio Bağlı Hizmet özelli�
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Azure aboneliği. Bir aboneliğiniz yoksa [ücretsiz hesap](https://azure.microsoft.com/pricing/free-trial/) için kaydolabilirsiniz.
-- Web geliştirme iş yükü yüklenmiş olan Visual Studio 2019. [Şimdi indir](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs).
+- Web geliştirme iş yükü yüklü olan Visual Studio 2019. [Şimdi indir](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs).
 
 [!INCLUDE [vs-install-cognitive-services-vsix](../../../includes/vs-install-cognitive-services-vsix.md)]
 

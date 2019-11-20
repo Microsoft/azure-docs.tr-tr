@@ -1,67 +1,63 @@
 ---
-title: Mevcut Azure AD Domain Services yönetilen etki alanı için eşleşmeyen dizin hataları gidermek | Microsoft Docs
-description: Mevcut Azure AD Domain Services yönetilen etki alanı için eşleşmeyen dizin hatalarını anlama ve çözme
+title: Azure AD Domain Services eşleşmeyen Dizin hatalarını giderme | Microsoft Docs
+description: Eşleşmeyen bir dizin hatasının ne anlama geldiğini ve Azure AD Domain Services nasıl çözümleneceğini öğrenin
 services: active-directory-ds
-documentationcenter: ''
 author: iainfoulds
 manager: daveba
-editor: curtand
 ms.assetid: 40eb75b7-827e-4d30-af6c-ca3c2af915c7
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: conceptual
-ms.date: 05/22/2019
+ms.date: 09/27/2019
 ms.author: iainfou
-ms.openlocfilehash: 1ab6a535c9ffebcb423e7a5cb7f158224c004bd1
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 8b1c3184ada743fddb78e1a3d0ce8d67f1f1a94f
+ms.sourcegitcommit: 8bae7afb0011a98e82cbd76c50bc9f08be9ebe06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67472906"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71693340"
 ---
-# <a name="resolve-mismatched-directory-errors-for-existing-azure-ad-domain-services-managed-domains"></a>Mevcut Azure AD Domain Services yönetilen etki alanı için eşleşmeyen dizin hataları çözün
-Mevcut bir Azure AD Domain Services yönetilen etki alanına sahip olduğunuz. Azure portalına gidin ve yönetilen etki alanında görüntülemek, aşağıdaki hata iletisini görürsünüz:
+# <a name="resolve-mismatched-directory-errors-for-existing-azure-ad-domain-services-managed-domains"></a>Mevcut Azure AD Domain Services yönetilen etki alanları için eşleşmeyen Dizin hatalarını çözümle
 
-![Eşleşmeyen dizin hatası](./media/getting-started/mismatched-tenant-error.png)
+Azure Active Directory Domain Services (Azure AD DS) yönetilen etki alanında eşleşmeyen bir kiracı hatası görünüyorsa, yönetilen etki alanını çözümlenene kadar yönetemezsiniz. Temel alınan Azure sanal ağı farklı bir Azure AD dizinine taşınırsa bu hata oluşur.
 
-Hata çözümlenene kadar bu yönetilen etki alanını yönetemezsiniz.
+Bu makalede hatanın neden oluştuğu ve nasıl çözümleneceği açıklanmaktadır.
 
+## <a name="what-causes-this-error"></a>Bu hataya neden olur?
 
-## <a name="whats-causing-this-error"></a>Ne bu hataya neden olan?
-Yönetilen etki alanınızı ve sanal ağı etkin olarak iki farklı ait olduğunda bu hataya neden Azure AD kiracılarıyla. Örneğin, "contoso.com" adlı bir yönetilen etki alanınız ve Contoso Azure AD kiracınız için etkinleştirildi. Ancak, yönetilen etki alanı etkinleştirildiğini Azure sanal ağı için Fabrikam - farklı bir ait Azure AD kiracısı.
+Azure AD DS yönetilen etki alanı ve sanal ağ iki farklı Azure AD kiracılarına ait olduğunda, eşleşmeyen bir dizin hatası oluşur. Örneğin, contoso Azure AD kiracısında çalışan *contoso.com* adlı bir Azure AD DS yönetilen etki alanınız olabilir. Ancak, yönetilen etki alanı için Azure sanal ağı fabrikam Azure AD kiracısının bir parçasıdır.
 
-Yeni Azure portalına (ve özel Azure AD Domain Services uzantısı) Azure Resource Manager üzerinde oluşturulmuştur. Modern Azure Resource Manager ortamında, daha yüksek güvenlik sağlamak için rol tabanlı erişim (RBAC) kaynaklarına erişimi denetlemek için bazı kısıtlamalar uygulanır. Yönetilen etki alanı için eşitlenmesi gereken kimlik bilgisi karmalarını neden bu yana Azure AD kiracısı için Azure AD Etki Alanı Hizmetleri'ni etkinleştirme hassas bir işlemdir. Bu işlem, bir dizin için Kiracı yönetici olmanızı gerektirir. Ayrıca, yönetilen etki alanı etkinleştirdiğiniz sanal ağ üzerinden yönetici ayrıcalıkları olmalıdır. RBAC denetimleri tutarlı bir şekilde çalışması yönetilen etki alanı ve sanal ağ aynı Azure AD kiracısına ait olmalıdır.
+Azure, kaynaklarla erişimi sınırlandırmak için rol tabanlı erişim denetimi (RBAC) kullanır. Azure AD kiracısında Azure AD DS etkinleştirdiğinizde, kimlik bilgisi karmaları yönetilen etki alanıyla eşitlenir. Bu işlem, Azure AD dizini için bir kiracı yöneticisi olmanızı ve kimlik bilgilerine erişimin denetlenmelidir. Azure sanal ağına kaynak dağıtmak ve trafiği denetlemek için, Azure AD DS dağıttığınız sanal ağ üzerinde yönetici ayrıcalıklarına sahip olmanız gerekir.
 
-Kısacası, başka bir Azure AD kiracısı 'fabrikam.com' tarafından sahip olunan bir Azure aboneliğine ait olan bir sanal ağda Azure AD kiracısı için 'contoso.com' yönetilen bir etki alanı etkinleştirilemiyor. 
+RBAC 'in, Azure AD DS 'nin kullandığı tüm kaynaklara tutarlı ve güvenli şekilde çalışması için, yönetilen etki alanı ve sanal ağ aynı Azure AD kiracısına ait olmalıdır.
 
-**Geçerli yapılandırma**: Bu dağıtım senaryosunda, Contoso yönetilen etki alanı Contoso Azure AD kiracısı için etkinleştirilir. Yönetilen etki alanı, Contoso Azure AD kiracısı tarafından sahip olunan bir Azure aboneliğine ait olan bir sanal ağda kullanıma sunulur. Bu nedenle, hem yönetilen etki alanı, hem de sanal ağ aynı Azure AD kiracısına ait. Bu yapılandırma, geçerli ve tam olarak desteklenir.
+Kaynak Yöneticisi ortamında aşağıdaki kurallar geçerlidir:
 
-![Geçerli Kiracı yapılandırma](./media/getting-started/valid-tenant-config.png)
+- Azure AD dizininde birden çok Azure aboneliği olabilir.
+- Bir Azure aboneliğinde, sanal ağlar gibi birden fazla kaynak olabilir.
+- Azure AD dizini için tek bir Azure AD Domain Services yönetilen etki alanı etkinleştirilir.
+- Azure AD Domain Services yönetilen bir etki alanı, aynı Azure AD kiracısındaki Azure aboneliklerinden herhangi birine ait olan bir sanal ağ üzerinde etkinleştirilebilir.
 
-**Eşleşmeyen Kiracı yapılandırmasına**: Bu dağıtım senaryosunda, Contoso yönetilen etki alanı Contoso Azure AD kiracısı için etkinleştirilir. Ancak, yönetilen etki alanı, Fabrikam Azure AD kiracısı tarafından sahip olunan bir Azure aboneliğine ait olan bir sanal ağda kullanıma sunulur. İki farklı bu nedenle, yönetilen etki alanı ve sanal ağa ait Azure AD kiracılarıyla. Bu yapılandırma, eşleşmeyen Kiracı yapılandırması ve desteklenmiyor. Sanal ağ aynı Azure AD kiracısı (Contoso), yönetilen etki alanı taşınmalıdır. Bkz: [çözümleme](#resolution) ayrıntıları bölümü.
+### <a name="valid-configuration"></a>Geçerli yapılandırma
 
-![Eşleşmeyen Kiracı yapılandırma](./media/getting-started/mismatched-tenant-config.png)
+Aşağıdaki örnek dağıtım senaryosunda contoso Azure AD DS yönetilen etki alanı contoso Azure AD kiracısında etkinleştirilmiştir. Yönetilen etki alanı, contoso Azure AD kiracının sahip olduğu bir Azure aboneliğine ait olan bir sanal ağda dağıtılır. Hem yönetilen etki alanı hem de sanal ağ aynı Azure AD kiracısına aittir. Bu örnek yapılandırma geçerli ve tam olarak desteklenmektedir.
 
-Bu nedenle, yönetilen etki alanı ve etkin olarak sanal ağ ait iki farklı Azure AD kiracıları bu hataya bakın.
+![Aynı Azure AD kiracısının yönetilen etki alanı ve sanal ağ bölümüyle geçerli Azure AD DS kiracı yapılandırması](./media/getting-started/valid-tenant-config.png)
 
-Resource Manager ortamında aşağıdaki kurallar geçerlidir:
-- Azure AD dizini, birden çok Azure aboneliğiniz olabilir.
-- Bir Azure aboneliği, sanal ağlar gibi birden fazla kaynak olabilir.
-- Tek bir Azure AD Domain Services yönetilen etki alanı, bir Azure AD dizini için etkinleştirildi.
-- Azure AD Domain Services yönetilen etki alanı aynı Azure AD kiracısı içinde Azure aboneliklerden herhangi birine ait bir sanal ağ üzerindeki etkinleştirilebilir.
+### <a name="mismatched-tenant-configuration"></a>Eşleşmeyen kiracı yapılandırması
 
+Bu örnek dağıtım senaryosunda contoso Azure AD DS yönetilen etki alanı, contoso Azure AD kiracısında etkinleştirilmiştir. Ancak, yönetilen etki alanı fabrikam Azure AD kiracının sahip olduğu bir Azure aboneliğine ait olan bir sanal ağda dağıtılır. Yönetilen etki alanı ve sanal ağ iki farklı Azure AD kiracılarına aittir. Bu örnek yapılandırma eşleşmeyen bir kiracıya sahip ve desteklenmiyor. Sanal ağ, yönetilen etki alanı ile aynı Azure AD kiracısına taşınmalıdır.
 
-## <a name="resolution"></a>Çözüm
-Eşleşmeyen dizin hatayı gidermek için iki seçeneğiniz vardır. Şunları yapabilirsiniz:
+![Eşleşmeyen kiracı yapılandırması](./media/getting-started/mismatched-tenant-config.png)
 
-- Tıklayın **Sil** varolan silmek için düğmeyi yönetilen etki alanı. Kullanarak yeniden oluşturun [Azure portalında](https://portal.azure.com), böylece yönetilen etki alanı ve kullanılabilir olduğu sanal ağ Azure AD dizinine ait. Daha önce yeni oluşturulan yönetilen etki alanında silinen etki alanına katılmış tüm makinelerde katılın.
+## <a name="resolve-mismatched-tenant-error"></a>Eşleşmeyen kiracı hatasını çözümle
 
-- Sanal ağa ait olduğu yönetilen etki alanınızı Azure AD dizinini içeren Azure aboneliğinin taşıyın. Bağlantısındaki [bir Azure aboneliğinin sahipliğini başka bir hesaba](../billing/billing-subscription-transfer.md) makalesi.
+Aşağıdaki iki seçenek eşleşmeyen Dizin hatasını çözer:
 
+* [Azure AD DS yönetilen etki alanını](delete-aadds.md) mevcut Azure AD dizininden silin. Kullanmak istediğiniz sanal ağ ile aynı Azure AD dizininde [azure AD DS yönetilen bir etki alanı oluşturun](tutorial-create-instance.md) . Hazırlandığınızda, daha önce silinmiş etki alanına katılmış tüm makinelere yeniden oluşturulmuş yönetilen etki alanına katın.
+* Sanal ağı içeren [Azure aboneliğini](../billing/billing-subscription-transfer.md) Azure AD DS yönetilen etki alanı Ile aynı Azure AD dizinine taşıyın.
 
-## <a name="related-content"></a>İlgili içerik
-* [Azure AD etki alanı Hizmetleri - başlangıç kılavuzu](create-instance.md)
-* [Sorun giderme kılavuzu - Azure AD etki alanı Hizmetleri](troubleshoot.md)
+## <a name="next-steps"></a>Sonraki adımlar
+
+Azure AD DS sorunlarını giderme hakkında daha fazla bilgi için bkz. [sorun giderme kılavuzu](troubleshoot.md).

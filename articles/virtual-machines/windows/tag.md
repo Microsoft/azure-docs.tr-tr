@@ -1,42 +1,41 @@
 ---
-title: Azure'da Windows VM kaynak etiketleme | Microsoft Docs
-description: Azure Resource Manager dağıtım modeli kullanılarak oluşturulan bir Windows sanal makinenin etiketleme hakkında bilgi edinin
+title: Azure 'da bir Windows VM kaynağını etiketleme
+description: Kaynak Yöneticisi dağıtım modelini kullanarak Azure 'da oluşturulan bir Windows sanal makinesini etiketleme hakkında bilgi edinin
 services: virtual-machines-windows
 documentationcenter: ''
 author: mmccrory
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: 56d17f45-e4a7-4d84-8022-b40334ae49d2
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 07/05/2016
 ms.author: memccror
-ms.openlocfilehash: eef4681626c5e0aa0c5d8a67dbd0d19bcfd7121e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 52f8dbfc8665fce832eaa60e204273368ae7485d
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64694678"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74068194"
 ---
-# <a name="how-to-tag-a-windows-virtual-machine-in-azure"></a>Azure'da Windows sanal makine etiketleme
-Bu makalede Resource Manager dağıtım modeliyle Azure'da Windows sanal makine etiketleme için farklı yollar açıklanmaktadır. Etiketler doğrudan bir kaynak veya kaynak grubu üzerinde yerleştirilen kullanıcı tanımlı anahtar/değer çiftleridir. Azure, şu anda kaynak ve kaynak grubu başına en fazla 15 etiket destekler. Etiket oluşturma sırasında bir kaynakta yerleştirilen veya var olan bir kaynağı eklendi. Etiketleri yalnızca Resource Manager dağıtım modeliyle oluşturulan kaynakları için desteklendiğini unutmayın. Linux sanal makinesi etiketlemek istiyorsanız, bkz. [Azure'da bir Linux sanal makinesi etiketleme](../linux/tag.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+# <a name="how-to-tag-a-windows-virtual-machine-in-azure"></a>Azure 'da bir Windows sanal makinesini etiketleme
+Bu makalede, Azure 'daki bir Windows sanal makinesini Kaynak Yöneticisi dağıtım modeliyle etiketlemek için farklı yollar açıklanmaktadır. Etiketler, doğrudan bir kaynağa veya bir kaynak grubuna yerleştirilebilecek Kullanıcı tanımlı anahtar/değer çiftleridir. Azure Şu anda kaynak ve kaynak grubu başına en fazla 15 etiket desteklemektedir. Etiketler, oluşturma sırasında veya var olan bir kaynağa eklenen bir kaynağa yerleştirilebilir. Lütfen etiketlerin yalnızca Kaynak Yöneticisi dağıtım modeli aracılığıyla oluşturulan kaynaklar için desteklendiğini unutmayın. Bir Linux sanal makinesini etiketlemek istiyorsanız bkz. [Azure 'Da Linux sanal makinesini etiketleme](../linux/tag.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
 [!INCLUDE [virtual-machines-common-tag](../../../includes/virtual-machines-common-tag.md)]
 
 ## <a name="tagging-with-powershell"></a>PowerShell ile etiketleme
-Oluşturulacak, ekleyin ve ayarlamak için gerekir, PowerShell aracılığıyla etiketleri silme, [PowerShell ortamında Azure Resource Manager ile][PowerShell environment with Azure Resource Manager]. Kurulumu tamamladıktan sonra işlem, ağ ve depolama kaynakları oluşturma veya PowerShell kaynak oluşturulduktan sonra etiketleri yerleştirebilirsiniz. Bu makalede, sanal makineler üzerinde yerleştirilen görüntüleme veya düzenleme etiketleri hakkında odaklanacaktır.
+PowerShell aracılığıyla etiket oluşturmak, eklemek ve silmek için önce [PowerShell ortamınızı Azure Resource Manager][PowerShell environment with Azure Resource Manager]ayarlamanız gerekir. Kurulumu tamamladıktan sonra, oluşturma sırasında veya kaynak PowerShell aracılığıyla oluşturulduktan sonra Işlem, ağ ve depolama kaynaklarına Etiketler yerleştirebilirsiniz. Bu makale, sanal makinelere yerleştirilmiş etiketleri görüntüleme/düzenlemeyle ilgili olarak yoğunlaşacaktır.
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-İlk olarak, sanal makinesine gidin `Get-AzVM` cmdlet'i.
+İlk olarak, `Get-AzVM` cmdlet 'i aracılığıyla bir sanal makineye gidin.
 
         PS C:\> Get-AzVM -ResourceGroupName "MyResourceGroup" -Name "MyTestVM"
 
-Sanal makinenizi etiketleri içeriyorsa, ardından tüm etiketleri kaynağınızda görürsünüz:
+Sanal makineniz zaten etiketler içeriyorsa, kaynağınızın tüm etiketlerini görürsünüz:
 
         Tags : {
                 "Application": "MyApp1",
@@ -45,13 +44,13 @@ Sanal makinenizi etiketleri içeriyorsa, ardından tüm etiketleri kaynağınız
                 "Environment": "Production"
                }
 
-PowerShell üzerinden etiket eklemek istiyorsanız, kullanabileceğiniz `Set-AzResource` komutu. PowerShell aracılığıyla etiketler güncelleştirilirken bir bütün olarak etiketler güncelleştirilir unutmayın. Bu nedenle etiketler zaten olan bir kaynak için bir etiket ekliyorsanız, kaynakta yerleştirilmesini istediğiniz tüm etiketleri dahil etmek gerekir. Bir kaynağa PowerShell cmdlet'leri aracılığıyla ek etiketler ekleme örneği aşağıdadır.
+PowerShell aracılığıyla Etiketler eklemek istiyorsanız, `Set-AzResource` komutunu kullanabilirsiniz. Bkz. Etiketler PowerShell aracılığıyla güncelleştirilirken, Etiketler bir bütün olarak güncelleştirilir. Bu nedenle, zaten etiketlere sahip olan bir kaynağa bir etiket ekliyorsanız, kaynağa yerleştirilmesini istediğiniz tüm etiketleri dahil etmeniz gerekir. Aşağıda, PowerShell cmdlet 'Leri aracılığıyla bir kaynağa ek etiketlerin nasıl ekleneceği gösterilmektedir.
 
-Bu ilk cmdlet'i tüm yerleştirildiği etiketleri ayarlar *MyTestVM* için *$tags* değişken kullanarak `Get-AzResource` ve `Tags` özelliği.
+Bu ilk cmdlet, *Mytestvm* üzerinde yer alan tüm etiketleri `Get-AzResource` ve `Tags` özelliğini kullanarak *$Tags* değişkenine ayarlar.
 
         PS C:\> $tags = (Get-AzResource -ResourceGroupName MyResourceGroup -Name MyTestVM).Tags
 
-İkinci komut, belirtilen değişkeni için etiketleri görüntüler.
+İkinci komut, verilen değişkenin etiketlerini görüntüler.
 
 ```
     PS C:\> $tags
@@ -64,15 +63,15 @@ Bu ilk cmdlet'i tüm yerleştirildiği etiketleri ayarlar *MyTestVM* için *$tag
     Environment   Production
 ```
 
-Üçüncü komut ek bir etikete ekler *$tags* değişkeni. Kullanımına dikkat edin **+=** yeni bir anahtar/değer çifti için eklenecek *$tags* listesi.
+Üçüncü komut *$Tags* değişkenine ek bir etiket ekler. Yeni anahtar/değer çiftini *$Tags* listesine eklemek için **+=** kullanımını dikkate alın.
 
         PS C:\> $tags += @{Location="MyLocation"}
 
-Dördüncü komut içinde tanımlanan tüm ayarlar *$tags* belirtilen kaynak için değişken. Bu durumda, MyTestVM olur.
+Dördüncü komut *$Tags* değişkeninde tanımlanan tüm etiketleri verilen kaynağa ayarlar. Bu durumda, test sanal makinedir.
 
         PS C:\> Set-AzResource -ResourceGroupName MyResourceGroup -Name MyTestVM -ResourceType "Microsoft.Compute/VirtualMachines" -Tag $tags
 
-Beşinci komut tüm etiketleri kaynakta görüntüler. Gördüğünüz gibi *konumu* artık içeren bir etiketi olarak tanımlanan *double* değeri.
+Beşinci komut kaynaktaki tüm etiketleri görüntüler. Gördüğünüz gibi, *konum* artık değer olarak *MyLocation* içeren bir etiket olarak tanımlanmıştır.
 
 ```
     PS C:\> (Get-AzResource -ResourceGroupName MyResourceGroup -Name MyTestVM).Tags
@@ -86,13 +85,13 @@ Beşinci komut tüm etiketleri kaynakta görüntüler. Gördüğünüz gibi *kon
     Location      MyLocation
 ```
 
-PowerShell ile etiketleme hakkında daha fazla bilgi edinmek için kullanıma [Azure kaynak cmdlet'leri][Azure Resource Cmdlets].
+PowerShell aracılığıyla etiketleme hakkında daha fazla bilgi edinmek için [Azure Kaynak cmdlet 'lerine][Azure Resource Cmdlets]göz atın.
 
 [!INCLUDE [virtual-machines-common-tag-usage](../../../includes/virtual-machines-common-tag-usage.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Azure kaynaklarınızı etiketleme hakkında daha fazla bilgi için bkz: [Azure Resource Manager'a genel bakış] [ Azure Resource Manager Overview] ve [kullanarak Azure kaynaklarınızı düzenlemek için etiketleri] [ Using Tags to organize your Azure Resources].
-* Etiketler, Azure kaynaklarının kullanımını yönetmenize nasıl yardımcı olabileceğini görmek için bkz. [Azure faturanızı anlama] [ Understanding your Azure Bill] ve [Microsoft Azure kaynak tüketiminize öngörü] [Gain insights into your Microsoft Azure resource consumption].
+* Azure kaynaklarınızın etiketlenmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Resource Manager genel bakış][Azure Resource Manager Overview] ve [etiketleri kullanarak Azure kaynaklarınızı düzenleme][Using Tags to organize your Azure Resources].
+* Etiketlerin Azure kaynaklarını kullanımınızı yönetmenize nasıl yardımcı olduğunu görmek için bkz. [Azure Faturanızı Anlama][Understanding your Azure Bill] ve [Microsoft Azure Kaynak tüketiminiz hakkında öngörüler elde][Gain insights into your Microsoft Azure resource consumption]etme.
 
 [PowerShell environment with Azure Resource Manager]: ../../azure-resource-manager/manage-resources-powershell.md
 [Azure Resource Cmdlets]: https://docs.microsoft.com/powershell/module/az.resources/

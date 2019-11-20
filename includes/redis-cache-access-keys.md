@@ -5,27 +5,25 @@ services: redis-cache
 author: wesmc7777
 ms.service: cache
 ms.topic: include
-ms.date: 03/28/2018
+ms.date: 11/05/2019
 ms.author: wesmc
 ms.custom: include file
-ms.openlocfilehash: 50264dfba401f623c4ad14a6310303f2787fc85f
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: a737e130d616a67bab28c7c96c0372216a6707af
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188176"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73720398"
 ---
-### <a name="retrieve-host-name-ports-and-access-keys-by-using-the-azure-portal"></a>Azure portalı kullanarak ana bilgisayar adı, bağlantı noktaları ve erişim anahtarlarını alma
+### <a name="retrieve-host-name-ports-and-access-keys-from-the-azure-portal"></a>Azure portal ana bilgisayar adı, bağlantı noktaları ve erişim anahtarlarını alın
 
-Bir Azure önbelleği için Redis örneği bağlanırken, önbellek istemcileri için önbellek ana bilgisayar adı, bağlantı noktaları ve bir anahtar gerekir. Bazı istemciler bu öğelere biraz daha farklı adlarla başvurabilir. Bu bilgileri Azure portalında bulabilirsiniz.
+Redsıs örneği için bir Azure önbelleğine bağlanmak üzere önbellek istemcilerinin, önbellek için ana bilgisayar adı, bağlantı noktaları ve bir anahtar olması gerekir. Bazı istemciler bu öğelere biraz daha farklı adlarla başvurabilir. Ana bilgisayar adı, bağlantı noktaları ve anahtarları [Azure Portal](https://portal.azure.com)edinebilirsiniz.
 
-#### <a name="to-retrieve-the-access-keys-and-host-name"></a>Erişim tuşlarını ve ana bilgisayar adını alma
+- Önbellek sol gezininizden erişim anahtarlarını almak için **erişim tuşları**' nı seçin. 
+  
+  ![Redsıs anahtarları için Azure önbelleği](media/redis-cache-access-keys/redis-cache-keys.png)
 
-1. [Azure portalı](https://portal.azure.com) kullanarak erişim anahtarlarını almak için önbelleğinize göz atın ve **Erişim anahtarları** seçeneğini belirleyin. 
+- Ana bilgisayar adını ve bağlantı noktalarını, önbellek sol gezininizden almak için **Özellikler**' i seçin. Ana bilgisayar adı *\<DNS adı >. redsıs. cache. Windows. net*' dir.
 
-    ![Azure önbelleği için Redis anahtarları](media/redis-cache-access-keys/redis-cache-keys.png)
-
-2. Ana bilgisayar adını ve bağlantı noktalarını almak için **Özellikler** seçeneğini belirleyin.
-
-    ![Azure önbelleği için Redis özellikleri](media/redis-cache-access-keys/redis-cache-hostname-ports.png)
+  ![Redsıs özellikleri için Azure önbelleği](media/redis-cache-access-keys/redis-cache-hostname-ports.png)
 

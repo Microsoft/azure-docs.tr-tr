@@ -1,10 +1,10 @@
 ---
-title: Bir sanal ağ yapılandırma dosyasında DNS ayarlarını belirtme | Microsoft Docs
+title: Sanal ağ yapılandırma dosyasında DNS ayarlarını belirtme | Microsoft Docs
 description: Klasik dağıtım modelinde bir sanal ağ yapılandırma dosyası kullanarak bir sanal ağdaki DNS sunucusu ayarlarını değiştirme
 services: virtual-network
 documentationcenter: na
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: tysonn
 tags: azure-service-management
 ms.assetid: a8905927-92ac-42b5-8c33-8e42c000692c
@@ -15,24 +15,24 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/23/2016
 ms.author: genli
-ms.openlocfilehash: 36f7ed9b02b66718327c1a05a6cf29eedf39e7a5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c15d73673c19383deabe15ef30026990dfd138b9
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60232850"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71059087"
 ---
 # <a name="specifying-dns-settings-in-a-virtual-network-configuration-file"></a>Bir sanal ağ yapılandırma dosyasında DNS ayarlarını belirtme
-Bir ağ yapılandırma dosyası, etki alanı adı sistemi (DNS) ayarlarını belirlemek için kullanabileceğiniz iki öğe vardır: **DnsServers** ve **DnsServerRef**. DNS sunucularının bir listesini, IP adreslerini belirterek ekleyin ve başvuru adlarına **DnsServers** öğesi. Daha sonra kullanabileceğiniz bir **DnsServerRef** hangi DNS sunucusu girdileri DnsServers öğeden sanal ağınız içinde farklı ağ siteleri için kullanılan belirtmek için öğesi.
+Bir ağ yapılandırma dosyası, etki alanı adı sistemi (DNS) ayarlarını belirtmek için kullanabileceğiniz iki öğeye sahiptir: **Dnsservers** ve **dnsserverref**. **Dnservers** öğesine IP adreslerini ve başvuru ADLARıNı belirterek DNS sunucularının bir listesini ekleyebilirsiniz. Daha sonra, DnsServers öğesinden hangi DNS sunucusu girişlerinin sanal ağınızdaki farklı ağ siteleri için kullanıldığını belirtmek için bir **Dnsserverref** öğesi kullanabilirsiniz.
 
 [!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
 
 Bu makale, klasik dağıtım modelini kapsamaktadır.
 
-Ağ yapılandırma dosyasını aşağıdaki öğeleri içerebilir. Her öğenin title öğesi değer ayarları hakkında ek bilgi sağlayan bir sayfa bağlantılıdır.
+Ağ yapılandırma dosyası aşağıdaki öğeleri içerebilir. Her bir öğenin başlığı, öğe değeri ayarları hakkında ek bilgi sağlayan bir sayfayla bağlantılıdır.
 
 > [!IMPORTANT]
-> Ağ yapılandırma dosyasını yapılandırma hakkında daha fazla bilgi için bkz: [bir ağ yapılandırma dosyası kullanarak bir sanal ağ yapılandırma](virtual-networks-using-network-configuration-file.md). Ağ yapılandırma dosyasında yer alan her öğeyle ilgili daha fazla bilgi için bkz. [Azure sanal ağ yapılandırma şeması](https://msdn.microsoft.com/library/azure/jj157100.aspx).
+> Ağ yapılandırma dosyasının nasıl yapılandırılacağı hakkında bilgi için bkz. [ağ yapılandırma dosyası kullanarak sanal ağ](virtual-networks-using-network-configuration-file.md)yapılandırma. Ağ yapılandırma dosyasında bulunan her öğe hakkında daha fazla bilgi için bkz. [Azure sanal ağ yapılandırma şeması](https://msdn.microsoft.com/library/azure/jj157100.aspx).
 > 
 > 
 
@@ -47,7 +47,7 @@ Ağ yapılandırma dosyasını aşağıdaki öğeleri içerebilir. Her öğenin 
     </Dns>
 
 > [!WARNING]
-> **Adı** özniteliğini **DnsServer** öğesi, yalnızca başvuru olarak kullanılır **DnsServerRef** öğesi. DNS sunucusu ana bilgisayar adını temsil etmiyor. Her **DnsServer** öznitelik değeri benzersiz olmalıdır tüm Microsoft Azure aboneliği
+> **DNSServer** öğesindeki **Name** özniteliği yalnızca **dnsserverref** öğesi için bir başvuru olarak kullanılır. DNS sunucusunun ana bilgisayar adını temsil etmez. Her **DNSServer** öznitelik değeri tüm Microsoft Azure aboneliği genelinde benzersiz olmalıdır
 > 
 > 
 
@@ -60,12 +60,12 @@ Ağ yapılandırma dosyasını aşağıdaki öğeleri içerebilir. Her öğenin 
     </DnsServersRef>
 
 > [!NOTE]
-> Sanal ağ siteleri öğesi için bu ayarı belirtmek için daha önce DNS öğesinde tanımlanmış olması gerekir. DnsServerRef *adı* sanal ağ sitelerinde öğesi DnsServer için DNS öğesinde belirtilen bir adı değerine başvurmalıdır *adı*.
+> Bu ayarı, sanal ağ siteleri öğesi için belirtmek üzere, daha önce DNS öğesinde tanımlanmış olmalıdır. Sanal ağ siteleri öğesindeki DnsServerRef *adı* , DNSServer *adı*için DNS öğesinde belirtilen bir ad değerine başvurmalıdır.
 > 
 > 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Anlamak [Azure Virtual Network yapılandırma şeması](https://go.microsoft.com/fwlink/?LinkId=248093).
-* Anlamak [Azure hizmet yapılandırma şeması](https://msdn.microsoft.com/library/windowsazure/ee758710).
-* [Ağ yapılandırma dosyalarını kullanarak sanal ağ yapılandırma](virtual-networks-using-network-configuration-file.md).
+* [Azure sanal ağ yapılandırma şemasını](https://go.microsoft.com/fwlink/?LinkId=248093)anlayın.
+* [Azure hizmet yapılandırma şemasını](https://msdn.microsoft.com/library/windowsazure/ee758710)anlayın.
+* [Ağ yapılandırma dosyalarını kullanarak bir sanal ağ yapılandırın](virtual-networks-using-network-configuration-file.md).
 

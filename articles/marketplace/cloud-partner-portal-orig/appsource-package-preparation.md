@@ -1,42 +1,43 @@
 ---
-title: AppSource paket Hazırlık | Azure Market
-description: Hazırlama ve AppSource paketleri oluşturmak nasıl Explanaion.
+title: AppSource paket hazırlığı | Azure Marketi
+description: AppSource paketlerini hazırlama ve oluşturma bölümünde Explanaion.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: pbutlerm
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: ff822e87bfec5daa161172c0d47975eb06cc2808
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2c6b78e62afb43562910c872d31e2c9f564040da
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935639"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73806091"
 ---
-# <a name="appsource-package-preparation"></a>AppSource paketini hazırlama
+# <a name="appsource-package-preparation"></a>AppSource paket hazırlığı
 
-Solution.zip dosyasına ek olarak, ihtiyacınız olacak bir **AppSource paket**. Bu, çözümünüzün müşterilerin CRM ortamına dağıtma işlemini otomatik hale getirmek için gerekli tüm varlıkları içeren bir .zip dosyasıdır. **AppSource paket** aşağıdaki bileşenlere sahiptir
+Bir çözüm. zip dosyasına ek olarak bir **Appsource paketi**gerekir. Bu, çözümünüzü müşterilerin CRM ortamına dağıtma işlemini otomatik hale getirmek için gereken tüm varlıkları içeren bir. zip dosyasıdır. **Appsource paketi** aşağıdaki bileşenlere sahiptir
 
-* Paket dağıtıcısı için paket
-* **Content_Types.xml** kullandığınız varlıklar dosyayla
+* Paket Dağıtıcı paketi
+* Kullandığınız varlıklarla birlikte **Content_Types. xml** dosyası
 * Uygulamaya özgü verileri olan XML dosyası
-* Yönetim merkezinde, dökümle görüntüler 32 x 32 logosu
-* Lisans koşullarını, gizlilik ilkesi
+* Yönetim merkezinde listeleyle birlikte görüntülenecek 32x32 logo
+* Lisans koşulları, Gizlilik ilkesi
 
 Aşağıdaki adımlar, AppSource paketinizi oluşturmanıza yardımcı olur.
 
-## <a name="a-create-a-package-for-the-package-deployer"></a>a. Paket dağıtıcısı için paket oluşturma
+## <a name="a-create-a-package-for-the-package-deployer"></a>a. Paket Dağıtıcı için bir paket oluşturma
 
-Paket dağıtıcısı için paket Appsource'ta paketin bir parçasıdır.
+Paket Dağıtıcı paketi, AppSource paketinin bir parçasıdır.
 
-Paket dağıtıcısı için paket oluşturmak için aşağıdaki yönergeleri kullanın: [ https://msdn.microsoft.com/library/dn688182.aspx ](https://msdn.microsoft.com/library/dn688182.aspx). Tamamlandığında, varlıklar paketiniz oluşur:
+Paket Dağıtıcı için bir paket oluşturmak üzere aşağıdaki yönergeleri kullanın: [https://msdn.microsoft.com/library/dn688182.aspx](https://msdn.microsoft.com/library/dn688182.aspx). İşlem tamamlandığında, paketiniz aşağıdaki varlıklardan oluşur:
 
-1. Paket klasörüne: tüm çözümleri, yapılandırma verilerini, düz dosyalar ve içerik paketiniz için içerir. _Not: Aşağıdaki örnekte "PkgFolder" adlı paket klasörde varsayacağız_
-2. DLL: Derleme, paket için özel kod içerir. _Not: Aşağıdaki örnekte bu dosya, "MicrosoftSample.dll." adlı varsayacağız_
+1. Paket klasörü: tüm çözümleri, yapılandırma verilerini, düz dosyaları ve paketinizin içeriğini içerir. _Note: aşağıdaki örnekte, paket klasörü "PkgFolder" olarak adlandırıldığını varsayacağız_
+2. DLL: derleme, paketinizin özel kodunu içerir. _Note: aşağıdaki örnekte, bu dosyanın "MicrosoftSample. dll" olarak adlandırıldığını varsayacağız._
 
-Şimdi, adlı bir dosya oluşturmanız gerekir "**Content_Types.xml**" Bu dosya tüm paketinizin bir parçası olan varlıklar uzantıları listelenir. Dosya için kod örneği aşağıda verilmiştir.
+Şimdi, "**Content_Types. xml**" adlı bir dosya oluşturmanız gerekir. bu dosya, paketinizin bir parçası olan tüm varlık genişletmelerini listelenecek. Dosya için örnek kod aşağıda verilmiştir.
 
     <?xml version="1.0" encoding="utf-8"?>
         <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
@@ -53,36 +54,36 @@ Paket dağıtıcısı için paket oluşturmak için aşağıdaki yönergeleri ku
         <Default Extension="css" ContentType="application/octet-stream" />
     </Types>
 
-Son adım, aşağıdaki tek bir dosyada zip sağlamaktır. Bu çağrı **package.zip**. Yer alır
+Son adım, aşağıdakilerden biri olarak bir dosyada yer alan bir dosyadır. It **Package. zip**' i çağırın. Şunu içerir
 
-1. PkgFolder (klasörü içindeki her şey dahil)
-2. dll
-3. **Content_Types.xml**
+1. PkgFolder (klasörün içindeki her şey dahil)
+2. dosyasını
+3. **Content_Types. xml**
 
-Package.zip oluşturma adımları:
+Package. zip oluşturma adımları:
 
-1. Paket klasörünüze **Content_Types.xml** dosyası ve bir dizine PackageName.dll.
+1. Paket klasörünüzü, **Content_Types. xml** dosyanızı ve PackageName. dll dosyasını tek bir dizine yerleştirin.
 
 ![CRMScreenShot2](media/CRMScreenShot2.png)
 
-1. Tüm öğeleri klasörü seçin, sağ tıklayın ve göndermek için sıkıştırılmış (ZIP) klasörü seçin
+1. Klasördeki tüm öğeleri seçin, sağ tıklayın ve sıkıştırılmış (zip) klasöre Gönder ' i seçin.
 
 ![CRMScreenShot3](media/CRMScreenShot3.png)
 
-1. Package.zip için adı değiştirin
+1. Adı Package. zip olarak değiştirin
 
 ![CRMScreenShot4](media/CRMScreenShot4.png)
 
 ## <a name="b-create-an-appsource-package"></a>b. AppSource paketi oluşturma
 
-AppSource paket birkaç ek dosyalar gerektirir.
+AppSource paketi için birkaç ek dosya gereklidir.
 
-1. jpg (32 x 32 çözümleme)
+1. jpg (32x32 çözünürlük)
 2. HTML (HTML biçimli dosya)
-3. **Content_Types.xml** (yukarıda aynı)
+3. **Content_Types. xml** (yukarıdaki gibi)
 4. xml
 
-İnput.xml yönelik örnek kod aşağıda verilmiştir. Tanımlarında bkz tablonun altındaki.
+Input. xml için örnek kod aşağıda verilmiştir. Aşağıdaki tabloda bulunan tanımlara bakın.
 
     <PvsPackageData>
         <ProviderName>Microsoft</ProviderName>
@@ -102,35 +103,35 @@ AppSource paket birkaç ek dosyalar gerektirir.
         </Locales>
     </PvsPackageData>
  
-**Burada:**
+**Olmadığı**
 
 |Alan|Ayrıntılar|
 |---|---|
-|ProviderName|Kimin geldiğini çözümüdür. Microsoft ekibi, bu Microsoft olmalıdır.|
-|PackageFile |Paket dağıtıcısı varlıklar ile birlikte bir içerik daraltılmış\_types.xml dosya. Bu ZIP dosyasını, paket dağıtıcısı derleme ve paket dağıtıcısı varlıklar ile klasörü içermelidir. Diğer bir deyişle, package.zip|
-|SolutionAnchorName |Görünen ad ve açıklama çözüm varlıkları için kullanılan paket dağıtıcısı çözüm zip dosyasının adı.|
-| startDate| Bu çözüm paketine kullanılabilir olacak tarihtir. AA/GG/YYYY biçiminde olan|
-|endDate|Bu çözüm paketine kullanılabilir olmasını durduracak tarihtir. AA/GG/YYYY biçiminde olan |
-|SupportedCountries |Bu paketi görürsünüz ülkeler/bölgeler, virgülle ayrılmış listesini budur. Tüm geçerli Ülke Kodları listesi için Çevrimiçi Hizmetleri ile görüşün. Zaman bu yazılmasını listenin şöyleydi: AE, AL, AM, SANİYE BAŞINA AO, AR, AT, AU, AZ, BA, BB, BD, OLMASI, BG, BH, BM, BN, BO, BR TARAFINDAN CA, CH, CI, CL, CM, ORTAK, CR, CV, FA, CY, CZ, DE, DK,, DZ, AB, EE, ÖRN, ES, FI, FR, GB, GE, GH, GR, GT, HK , HN, İK, HU, KİMLİĞİ, IE, IL, IN, IQ, OLDUĞU GİBİ BU, JM, JO, JP, L, KG, KN, KR, KW, KY, KZ, LB, LK, LT, LU, LV, LY, MA, MC, MD, BANA, MK, MN, AY, MT, MU, MX, MY, NG, NI, NL, HAYIR, NZ, OM, PA, PE, PH , PK, PL, ÇEKME İSTEĞİ, PS, PT, KOPYALA, QA, RO, RS, RU, RW, SA, SE, SG, SI, SK, SN, SV, TH, TM, TN, TR, TT, TW, UA, ABD, UY, UZ, KALDIR, VI, VN, ZA, ZW |
-|LearnMoreLink | Bu paket için daha fazla bilgi sayfası URL'si. |
-|Yerel ayarlar|Bu düğüm tercih edilen çözümde UX'i desteklemek istediğiniz her bir UX dilin bir örneği Bu düğüm, yerel ayar, logo ve her bir dilin koşullarını tanımlayan alt öğeleri içerir|
-|Yerel ayarlar: PackageLocale.Code|Bu düğüm için dilin LCID. Örnek: İngilizce (ABD) 1033'tür|
-|Yerel ayarlar: PackageLocale.IsDefault|Bu varsayılan dili olduğunu gösterir. Bu sonbaharda kullanılan müşteri tarafından seçmiş UX dil kullanılabilir değilse, dil yedekleyin.|
-|Yerel ayarlar: Logo|Bu logo, bu paket için kullanmak istiyorsanız. Simge boyutu 32 x 32'dir. PNG ve JPG izin verilen biçimler:|
-|Yerel ayarlar: koşulları: PackageTerm.File|Bu lisans koşullarına içeren HTML belge dosya adıdır.|
+|Adı|Çözüm kimin geldiği. Bir Microsoft ekibi ise Microsoft 'un olması gerekir.|
+|PackageFile |Paket Dağıtıcı varlıkları bir içerik\_Types. xml dosyası ile birlikte sıkıştırıldı. Bu ZIP dosyası paket dağıtıcı derlemesini ve paket dağıtıcı varlıklarını içeren klasörü içermelidir. Diğer bir deyişle, Package. zip|
+|SolutionAnchorName |Çözüm varlıklarının görünen adı ve açıklaması için kullanılan paket dağıtıcı içindeki çözüm ZIP dosyasının adı.|
+| Başlangıç| Bu, çözüm paketinin kullanılabilir olacağı tarihtir. Biçim AA/GG/YYYY şeklindedir|
+|EndDate|Bu, çözüm paketinin kullanılabilir olacağını durdurulacağı tarihtir. Biçim AA/GG/YYYY şeklindedir |
+|Supportedülkeleriyle |Bu, bu paketi görmeniz gereken ülkelerin/bölgelerin virgülle ayrılmış listesidir. Geçerli tüm ülke kodlarının listesi için çevrimiçi hizmetler başvurun. Bu yazma sırasında liste şu şekilde yapılır: AE, AL, har, AO, AR, AT, AU, az, BA, BB, BD, BE, BG, BH, BM, mılyar TL, BO, BR, BY, CA, CH, CI, CL, CM, CO, CR, CV, CW, Per,, , ES, FI, FR, GB, GE, GH, GR, GT, HK, HN, HR, HU, ID, ıE, ıL, IN, ıQ,,, ıT, JM, JO,, KE, KG, KN, KR,, KW, KY, KZ, LB, LK, LT, LU, IK, LY, MA, MC, MD, ME, MK, MN, MO, MT, MU, MX, BEN , NG, Nı, NL, HAYıR, NZ, OM, PA, PE, PH, PK, PL, PR, PS, PT, RU, QA, RO, RS, RU, RW, SA, ZA, SG, Sı, SK, SN, ZF, TH, TM, TN, TR, TT, TW, UA, US, UY, UZ, VE, VI, VN, ZA, ZW |
+|LearnMoreLink | Bu paketin daha fazla bilgi sayfasının URL 'SI. |
+|Yerel ayarlar|Tercih edilen çözüm UX ' de desteklemek istediğiniz her UX dili için bu düğümün bir örneği. Bu düğüm, her dil için yerel ayarı, logoyu ve koşulları tanımlayan alt öğeleri içerir|
+|Yerel Ayarlar: PackageLocale. Code|Bu düğüm için dilin LCıD 'SI. Örnek: ABD Ingilizcesi 1033|
+|Yerel Ayarlar: PackageLocale. IsDefault|Varsayılan dil olduğunu gösterir. Bu, müşteri tarafından seçilen UX dili kullanılamıyorsa geri dönüş dili olarak kullanılır.|
+|Yerel Ayarlar: logo|Bu paket için kullanmak istediğiniz logo varsa bunu yapın. Simgenin boyutu 32x32 ' dir. PNG ve JPG olarak izin verilen biçimler|
+|Yerel Ayarlar: terimler: PackageTerm. File|Bu, lisans koşullarınızı içeren HTML belgesi dosya adıdır.|
 
-İşte burada görüntülenir:
+Logonun görüntüleneceği yer şöyledir:
 
 ![CRMScreenShot5](media/CRMScreenShot5.png)
 
-Son adım, aşağıdaki tek bir dosyada zip sağlamaktır.
+Son adım, aşağıdakilerden biri olarak bir dosyada yer alan bir dosyadır.
 
-1. zip (daha önce oluşturduğunuz)
-2. **Content_Types.xml**
+1. zip (daha önce oluşturulmuş)
+2. **Content_Types. xml**
 3. xml
-4. PNG
+4. kitaplığını
 5. html
 
 ![CRMScreenShot6](media/CRMScreenShot6.png)
 
-Uygulamanız için uygun dosyayı yeniden adlandırın. Şirketinizin adını ve uygulama adı dahil tercih ederiz. Örneğin: **_Microsoft_SamplePackage.zip**.
+Dosyayı uygulamanız için uygun bir adla yeniden adlandırın. Şirket adınızı ve Uygulama adınızı dahil etmeniz önerilir. Örneğin: **_Microsoft_SamplePackage. zip**.

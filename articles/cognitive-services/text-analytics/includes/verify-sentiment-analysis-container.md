@@ -1,31 +1,31 @@
 ---
-title: Kapsayıcı desteği
+title: Yaklaşım Analizi kapsayıcı örneğini doğrulama
 titleSuffix: Azure Cognitive Services
-description: Yaklaşım analizi kapsayıcı örneği doğrulamak öğrenin.
+description: Yaklaşım Analizi kapsayıcı örneğini doğrulamayı öğrenin.
 services: cognitive-services
 author: IEvangelist
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 06/26/2019
+ms.date: 09/12/2019
 ms.author: dapine
-ms.openlocfilehash: f68d9c7098f2b1ca782e2522c632c2e267b35336
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 2e201b4ec0d1364ea99b376171efabad65af0a50
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67455101"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70968625"
 ---
-## <a name="verify-the-sentiment-analysis-container-instance"></a>Yaklaşım analizi kapsayıcı örneği doğrulayın
+### <a name="verify-the-sentiment-analysis-container-instance"></a>Yaklaşım Analizi kapsayıcı örneğini doğrulama
 
-1. Seçin **genel bakış** sekmesini ve IP adresini kopyalayın.
-1. Örneğin, IP adresi kullanın ve yeni bir tarayıcı sekmesi açın `http://<IP-address>:5000 (http://55.55.55.55:5000`). Kapsayıcının giriş sayfası olarak sunulur, kapsayıcı tamamlanamayacağını çalışıyor.
+1. **Genel bakış** sekmesini SEÇIN ve IP adresini kopyalayın.
+1. Yeni bir tarayıcı sekmesi açın ve IP adresini girin. Örneğin, girin `http://<IP-address>:5000 (http://55.55.55.55:5000`). Kapsayıcının ana sayfası görüntülenir ve bu da kapsayıcının çalıştığını bilmenizi sağlar.
 
-    ![Çalıştığını doğrulamak için kapsayıcı giriş sayfasını görüntüle](../media/how-tos/container-instance/swagger-docs-on-container.png)
+    ![Çalıştığını doğrulamak için kapsayıcı giriş sayfasını görüntüleme](../media/how-tos/container-instance/swagger-docs-on-container.png)
 
-1. Seçin **hizmet API açıklaması** bağlantı kapsayıcıları swagger sayfasına gidin.
+1. Kapsayıcının Swagger sayfasına gitmek için **hizmet API 'Si açıklaması** bağlantısını seçin.
 
-1. Birini **POST** API'ler ve select **deneyin**.  Örnek giriş dahil olmak üzere parametreler görüntülenir:
+1. **Post** API 'lerinden birini seçin ve **dene**' yi seçin. Parametreler, bu örnek girişi içeren görüntülenir:
 
     ```json
     {
@@ -49,7 +49,7 @@ ms.locfileid: "67455101"
     }
     ```
 
-1. Giriş, aşağıdaki JSON ile değiştirin:
+1. Girişi aşağıdaki JSON içeriğiyle değiştirin:
 
     ```json
     {
@@ -63,13 +63,13 @@ ms.locfileid: "67455101"
     }
     ```
 
-1. Ayarlama **showStats** true.
+1. **Showstats** öğesini olarak `true`ayarlayın.
 
-1. Seçin **yürütme** metinlerdeki belirlemek için.
+1. Metnin yaklaşımını belirlemek için **Yürüt** ' ü seçin.
 
-    Burada negatif 0 ve 1 pozitif 1, 0-arasında bir puan kapsayıcıda paketlenmiş modeli oluşturur.
+    Kapsayıcıda paketlenmiş model, 0 ile 1 arasında değişen bir puan üretir; burada 0 negatif yaklaşım ve 1 pozitif yaklaşım olur.
 
-    Döndürülen JSON yanıtı güncelleştirilmiş metin için yaklaşım içerir:
+    Döndürülen JSON yanıtı, güncelleştirilmiş metin girişi için yaklaşım içerir:
 
     ```json
     {
@@ -93,4 +93,4 @@ ms.locfileid: "67455101"
     }
     ```
 
-Biz belge artık ilişkilendirebilmek `id` özgün istek yükü belgeye JSON yanıt yükleri, `id`ve puanı tamamlandığını üzerinden `.98` çok olumlu bir yaklaşım belirten.
+Artık yanıt yükünün JSON verilerinin belgesini `id` özgün istek yükü belgesiyle `id`ilişkilendirebiliriz. Daha büyük bir yaklaşım, `0.98` çok fazla pozitif bir yaklaşım olduğunu gösterir.

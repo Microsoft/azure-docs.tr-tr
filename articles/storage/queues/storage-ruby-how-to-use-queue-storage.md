@@ -1,21 +1,19 @@
 ---
-title: Kuyruk Depolama'yı Ruby - Azure depolama kullanma
-description: Oluşturmak ve Kuyruklar, silmek için Azure Queue hizmetini kullanmayı öğrenin ve Ekle, Al ve iletilerini silin. Ruby'de yazılan örnekleri.
-services: storage
+title: Ruby-Azure depolama 'dan kuyruk depolama kullanma
+description: Kuyrukları oluşturmak ve silmek için Azure Kuyruk hizmeti kullanmayı ve iletileri ekleme, alma ve silme hakkında bilgi edinin. Ruby dilinde yazılan örnekler.
 author: mhopkins-msft
-ms.service: storage
-ms.devlang: ruby
-ms.topic: article
-ms.date: 12/08/2016
 ms.author: mhopkins
-ms.reviewer: cbrooks
+ms.date: 12/08/2016
+ms.service: storage
 ms.subservice: queues
-ms.openlocfilehash: 30a090aeb2d66c732e70a9acce67d5f3374c32fa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: conceptual
+ms.reviewer: cbrooks
+ms.openlocfilehash: c7211bc805f4ed1d026faedbfdc9d53d3c1dfd93
+ms.sourcegitcommit: 85b3973b104111f536dc5eccf8026749084d8789
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65153159"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68721274"
 ---
 # <a name="how-to-use-queue-storage-from-ruby"></a>Ruby’den Kuyruk depolama kullanma
 [!INCLUDE [storage-selector-queue-include](../../../includes/storage-selector-queue-include.md)]
@@ -23,32 +21,32 @@ ms.locfileid: "65153159"
 [!INCLUDE [storage-try-azure-tools-queues](../../../includes/storage-try-azure-tools-queues.md)]
 
 ## <a name="overview"></a>Genel Bakış
-Bu kılavuz Microsoft Azure kuyruk depolama hizmetini kullanarak, yaygın senaryoları gerçekleştirmek nasıl gösterir. Örnek Ruby Azure API'sini kullanarak yazılır.
-Senaryoları ele alınmaktadır **ekleme**, **gözatma**, **alma**, ve **silme** kuyruk iletileri yanı  **oluşturma ve kuyrukları silme**.
+Bu kılavuzda, Microsoft Azure kuyruğu depolama hizmetini kullanarak yaygın senaryoların nasıl gerçekleştirileceği gösterilmektedir. Örnekler, Ruby Azure API 'SI kullanılarak yazılır.
+Kapsanan senaryolar sıra iletilerini **ekleme**, göz **atma**, **alma**ve **silme** , Ayrıca kuyruk **oluşturma ve silme**içerir.
 
 [!INCLUDE [storage-queue-concepts-include](../../../includes/storage-queue-concepts-include.md)]
 
 [!INCLUDE [storage-create-account-include](../../../includes/storage-create-account-include.md)]
 
 ## <a name="create-a-ruby-application"></a>Ruby uygulaması oluşturma
-Ruby uygulaması oluşturun. Yönergeler için [Linux üzerinde App Service'te Ruby uygulaması oluşturma](https://docs.microsoft.com/azure/app-service/containers/quickstart-ruby).
+Ruby uygulaması oluşturun. Yönergeler için bkz. [Linux üzerinde App Service Ruby uygulaması oluşturma](https://docs.microsoft.com/azure/app-service/containers/quickstart-ruby).
 
-## <a name="configure-your-application-to-access-storage"></a>Depolama erişim için uygulamanızı yapılandırma
-Azure depolama kullanmak için depolama REST Hizmetleri ile iletişim kuran bir dizi kolaylık içeren Ruby azure paketi indirip gerekir.
+## <a name="configure-your-application-to-access-storage"></a>Uygulamanızı depolamaya erişecek şekilde yapılandırma
+Azure Storage 'ı kullanmak için, depolama REST hizmetleriyle iletişim kuran bir dizi kullanışlı kitaplık içeren Ruby Azure paketini indirmeniz ve kullanmanız gerekir.
 
 ### <a name="use-rubygems-to-obtain-the-package"></a>Paketi edinmek için RubyGems kullanma
 1. **PowerShell** (Windows), **Terminal** (Mac) veya **Bash** (Unix) gibi bir komut satırı arabirimi kullanın.
-2. Gem ve bağımlılıklarını yüklemek için komut penceresinde "gem yükleme azure" yazın.
+2. GED ve bağımlılıklarını yüklemek için komut penceresine "GEA Install Azure" yazın.
 
 ### <a name="import-the-package"></a>Paketi içeri aktarma
-Metin düzenleyiciyi kullanın, burada depolama kullanmak için istediğinize Ruby dosyasının en üstüne aşağıdakileri ekleyin:
+En sevdiğiniz metin düzenleyiciyi kullanarak, depolamayı kullanmayı düşündüğünüz Ruby dosyasının en üstüne aşağıdakileri ekleyin:
 
 ```ruby
 require "azure"
 ```
 
-## <a name="setup-an-azure-storage-connection"></a>Bir Azure depolama bağlantısı kurma
-Azure modülünü ortam değişkenlerini okur **AZURE\_depolama\_hesabı** ve **AZURE\_depolama\_ACCESS_KEY** bilgi Azure depolama hesabınıza bağlanmak için gereklidir. Bu ortam değişkenleri ayarlanmamışsa, hesap bilgilerini kullanmadan önce belirtmelisiniz **Azure::QueueService** aşağıdaki kod ile:
+## <a name="setup-an-azure-storage-connection"></a>Azure depolama bağlantısı kurma
+Azure modülü, Azure depolama hesabına bağlanmak için gereken bilgiler için Azure **\_depolama\_hesabı** ve **\_Azure\_Storage ACCESS_KEY** ortam değişkenlerini okur. Bu ortam değişkenleri ayarlanmamışsa, aşağıdaki kodla **Azure:: QueueService** ' i kullanmadan önce hesap bilgilerini belirtmeniz gerekir:
 
 ```ruby
 Azure.config.storage_account_name = "<your azure storage account>"
@@ -63,14 +61,14 @@ Bu değerleri Azure portalında bir klasik veya Kaynak Yöneticisi depolama hesa
 4. Açılan Erişim anahtarları dikey penceresinde, 1. ve 2. erişim anahtarını göreceksiniz. Bunlardan birini kullanabilirsiniz. 
 5. Anahtarı panoya kopyalamak için Kopyala simgesine tıklayın. 
 
-## <a name="how-to-create-a-queue"></a>Nasıl Yapılır: Kuyruk oluşturma
-Aşağıdaki kod oluşturur bir **Azure::QueueService** kuyrukları ile çalışmanıza olanak sağlayan nesne.
+## <a name="how-to-create-a-queue"></a>Nasıl Yapılır: Sıra oluşturma
+Aşağıdaki kod, kuyruklarla çalışmanıza olanak sağlayan bir **Azure:: QueueService** nesnesi oluşturur.
 
 ```ruby
 azure_queue_service = Azure::QueueService.new
 ```
 
-Kullanım **create_queue()** belirtilen ada sahip bir kuyruk oluşturmak için yöntemi.
+Belirtilen ada sahip bir sıra oluşturmak için **create_queue ()** metodunu kullanın.
 
 ```ruby
 begin
@@ -80,28 +78,28 @@ rescue
 end
 ```
 
-## <a name="how-to-insert-a-message-into-a-queue"></a>Nasıl Yapılır: Kuyruğa bir ileti Ekle
-Bir kuyruğa ileti eklemek için kullanın **create_message()** yöntemi yeni bir ileti oluşturun ve kuyruğa ekleyin.
+## <a name="how-to-insert-a-message-into-a-queue"></a>Nasıl Yapılır: Bir kuyruğa Ileti ekleme
+Bir kuyruğa ileti eklemek için, **CREATE_MESSAGE ()** yöntemini kullanarak yeni bir ileti oluşturun ve kuyruğa ekleyin.
 
 ```ruby
 azure_queue_service.create_message("test-queue", "test message")
 ```
 
-## <a name="how-to-peek-at-the-next-message"></a>Nasıl Yapılır: Sonraki iletiye gözatın
-Kuyruğun iletiyi kuyruktan kaldırmadan çağırarak peek **gözlem\_messages()** yöntemi. Varsayılan olarak, **gözlem\_messages()** peeks tek bir iletiye. Özet istediğiniz ileti sayısını da belirtebilirsiniz.
+## <a name="how-to-peek-at-the-next-message"></a>Nasıl Yapılır: Sonraki Iletiye göz atın
+**İletileri göz at\_()** yöntemini çağırarak sıradan kaldırmadan bir kuyruğun önündeki iletiye göz atmayı sağlayabilirsiniz. Varsayılan olarak, **iletilere\_göz atın ()** tek bir iletiye göz atar. Ayrıca, kaç tane ileti göz atmayı istediğinizi de belirtebilirsiniz.
 
 ```ruby
 result = azure_queue_service.peek_messages("test-queue",
   {:number_of_messages => 10})
 ```
 
-## <a name="how-to-dequeue-the-next-message"></a>Nasıl Yapılır: Sonraki iletiyi sıradan çıkar
-Bir iletiyi bir kuyruktan iki adımda kaldırabilirsiniz.
+## <a name="how-to-dequeue-the-next-message"></a>Nasıl Yapılır: Sonraki Iletiyi sıradan çıkarma
+İki adımda kuyruktan bir ileti kaldırabilirsiniz.
 
-1. Çağırdığınızda **listesi\_messages()** , varsayılan olarak sonraki iletiyi kuyruğa alın. Almak istediğiniz ileti sayısını da belirtebilirsiniz. Döndürülen iletilerin **listesi\_messages()** bu kuyruktan iletileri okuyan herhangi bir kod için görünmez hale gelir. Görünebilirlik zaman aşımı saniye parametresi olarak geçirin.
-2. İletiyi kuyruktan kaldırmayı tamamlamak için de çağırmanız gerekir **delete_message()** .
+1. **Liste\_iletilerini ()** çağırdığınızda, bir sıradaki bir sonraki iletiyi varsayılan olarak alırsınız. Ayrıca, kaç tane ileti almak istediğinizi de belirtebilirsiniz. **Liste\_iletilerinden ()** döndürülen iletiler, bu kuyruktan gelen diğer kod okuma iletileri için görünmez hale gelir. Görünürlük zaman aşımını bir parametre olarak Saniyeler içinde geçitirsiniz.
+2. İletiyi kuyruktan kaldırma işleminin tamamlanabilmesi için, **delete_message ()** öğesini de çağırmanız gerekir.
 
-Kodunuzun bir iletiyi donanım veya yazılım hatası nedeniyle başarısız olduğunda, kodunuzun başka bir örneği aynı iletiyi alıp yeniden deneyin, bu iki adımlı işlem, bir iletinin sağlar. Kod çağrılarınızı **Sil\_message()** ileti işlendikten sonra sağ.
+Bir iletiyi kaldırmanın bu iki adımlı işlemi, kodunuz, donanım veya yazılım arızasından kaynaklanan bir iletiyi işleyemediğinde, kodunuzun başka bir örneğinin aynı mesajı almasını ve yeniden denemesini sağlar. Kodunuz, ileti işlendikten hemen sonra **silme\_iletisini ()** çağırır.
 
 ```ruby
 messages = azure_queue_service.list_messages("test-queue", 30)
@@ -109,8 +107,8 @@ azure_queue_service.delete_message("test-queue",
   messages[0].id, messages[0].pop_receipt)
 ```
 
-## <a name="how-to-change-the-contents-of-a-queued-message"></a>Nasıl Yapılır: Kuyruğa Alınan iletinin içeriğini değiştirme
-Kuyrukta yer alan bir iletinin içeriğini değiştirebilirsiniz. Aşağıdaki kod kullanır **update_message()** bir ileti güncelleştirmek için yöntemi. Yöntem üstten alma girişi kuyruk iletisi ve ileti sırasına görünür olduğunda temsil eden bir UTC tarih saat değeri içeren bir tanımlama grubu döndürür.
+## <a name="how-to-change-the-contents-of-a-queued-message"></a>Nasıl Yapılır: Sıraya alınan Iletinin Içeriğini değiştirme
+Kuyrukta yer alan bir iletinin içeriğini değiştirebilirsiniz. Aşağıdaki kod, bir iletiyi güncelleştirmek için **update_message ()** yöntemini kullanır. Yöntemi, kuyruk iletisinin pop alındığını ve iletinin kuyrukta görünür olacağını temsil eden UTC Tarih saat değerini içeren bir tanımlama grubu döndürür.
 
 ```ruby
 message = azure_queue_service.list_messages("test-queue", 30)
@@ -119,13 +117,13 @@ pop_receipt, time_next_visible = azure_queue_service.update_message(
   30)
 ```
 
-## <a name="how-to-additional-options-for-dequeuing-messages"></a>Nasıl Yapılır: İletileri sıradan çıkarmak için ek seçenekler
+## <a name="how-to-additional-options-for-dequeuing-messages"></a>Nasıl Yapılır: Dequeuing Iletileri için ek seçenekler
 İletilerin bir kuyruktan alınma şeklini iki yöntemle özelleştirebilirsiniz.
 
-1. Toplu ileti alabilirsiniz.
-2. Uzun veya daha kısa bir görünmezlik zaman aşımı, kodunuzu daha fazla veya daha az zaman her iletiyi tamamen işlemesi için izin verebilirsiniz.
+1. Toplu bir ileti alabilirsiniz.
+2. Daha uzun veya daha kısa görünürlük zaman aşımı ayarlayabilir, böylece her iletiyi tamamen işlemek için kodunuzun daha fazla veya daha az zaman aşımına uğramamasını sağlayabilirsiniz.
 
-Aşağıdaki kod örneğinde **listesi\_messages()** tek çağrıda 15 iletileri almak için yöntemi. Ardından yazdırır ve her iletiyi siler. Ayrıca her ileti için görünmezlik zaman aşımı beş dakika olarak ayarlanır.
+Aşağıdaki kod örneği, bir çağrıda 15 ileti almak için **List\_Messages ()** yöntemini kullanır. Ardından her iletiyi yazdırır ve siler. Ayrıca her ileti için görünmezlik zaman aşımı beş dakika olarak ayarlanır.
 
 ```ruby
 azure_queue_service.list_messages("test-queue", 300
@@ -135,25 +133,25 @@ azure_queue_service.list_messages("test-queue", 300
 end
 ```
 
-## <a name="how-to-get-the-queue-length"></a>Nasıl Yapılır: Kuyruk uzunluğu alma
-Kuyrukta ileti sayısını tahmini elde edebilirsiniz. **Alma\_kuyruk\_metadata()** yöntemi yaklaşık ileti sayısı ve kuyruk hakkındaki meta verileri döndürmek için kuyruk hizmeti sorar.
+## <a name="how-to-get-the-queue-length"></a>Nasıl Yapılır: Sıra uzunluğunu al
+Kuyruktaki ileti sayısını tahmin edebilirsiniz. **Alma\_kuyruğu\_meta verileri ()** yöntemi, kuyruk hizmetinden sıraya ilişkin yaklaşık ileti sayısını ve meta verileri döndürmesini ister.
 
 ```ruby
 message_count, metadata = azure_queue_service.get_queue_metadata(
   "test-queue")
 ```
 
-## <a name="how-to-delete-a-queue"></a>Nasıl Yapılır: Bir kuyruk silme
-Bir kuyruk ve içerdiği tüm iletileri silmek için çağrı **Sil\_queue()** kuyruk nesnesi üzerinde yöntemi.
+## <a name="how-to-delete-a-queue"></a>Nasıl Yapılır: Kuyruğu silme
+Bir kuyruğu ve içerdiği tüm iletileri silmek için, kuyruk nesnesi üzerindeki **Delete\_Queue ()** yöntemini çağırın.
 
 ```ruby
 azure_queue_service.delete_queue("test-queue")
 ```
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-Kuyruk depolamanın temellerini öğrendiğinize göre daha karmaşık depolama görevleri hakkında bilgi edinmek için bu bağlantıları izleyin.
+Sıra depolamanın temellerini öğrendiğinize göre, daha karmaşık depolama görevleri hakkında bilgi edinmek için bu bağlantıları izleyin.
 
-* Ziyaret [Azure depolama ekibi blogu](https://blogs.msdn.com/b/windowsazurestorage/)
-* Ziyaret [Ruby için Azure SDK'sı](https://github.com/WindowsAzure/azure-sdk-for-ruby) GitHub deposunu
+* [Azure depolama ekibi blogu](https://blogs.msdn.com/b/windowsazurestorage/) ' nu ziyaret edin
+* GitHub 'da [Ruby deposu Için Azure SDK 'sını](https://github.com/WindowsAzure/azure-sdk-for-ruby) ziyaret edin
 
-Azure Service Bus kuyrukları açıklandığı ve bu makalede ele alınan Azure kuyruk hizmeti arasında bir karşılaştırma için [nasıl Service Bus kuyruklarını kullanma](https://azure.microsoft.com/develop/ruby/how-to-guides/service-bus-queues/) makale için bkz: [Azure kuyrukları ve Service Bus kuyrukları - karşılaştırıldığında ve Karşıtlıklar](../../service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted.md)
+Bu makalede ele alınan Azure kuyruğu hizmeti ve [Service Bus kuyrukları kullanma](https://azure.microsoft.com/develop/ruby/how-to-guides/service-bus-queues/) makalesinde açıklanan kuyruklar Azure Service Bus bir karşılaştırma için bkz. [azure kuyrukları ve Service Bus kuyrukları-karşılaştırılan ve](../../service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted.md) benzerlikler

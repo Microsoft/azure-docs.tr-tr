@@ -1,101 +1,101 @@
 ---
-title: Microsoft Azure'da ve Azure İzleyici Klasik uyarılar genel bakış
-description: Klasik uyarılar kullanımdan kalkacaktır. Uyarıları, Azure kaynak ölçümleri, olayları ve günlükleri izlemek ve belirttiğiniz koşulu karşılandığında size bildirilmesini sağlar.
-author: rboucher
-services: azure-monitor
+title: Microsoft Azure ve Azure Izleyici 'de klasik uyarılara genel bakış
+description: Klasik uyarılar kullanım dışı bırakılıyor. Uyarılar, Azure Kaynak ölçümlerini, olaylarını veya günlüklerini izlemenize ve belirttiğiniz bir koşula uyulduğunda bildirimde bulunulmasını sağlar.
 ms.service: azure-monitor
+ms.subservice: ''
 ms.topic: conceptual
-ms.date: 05/19/2018
+author: rboucher
 ms.author: robb
-ms.openlocfilehash: 96183e22f0aeafc681a782e7d3d8bd29a6ec9617
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 05/19/2018
+ms.openlocfilehash: 3ad0bdc2ec5db2f34a3bb6a1b8fda54cf9037483
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65914711"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555688"
 ---
-# <a name="what-are-classic-alerts-in-microsoft-azure"></a>Microsoft azure'da Klasik uyarılar nedir?
+# <a name="what-are-classic-alerts-in-microsoft-azure"></a>Microsoft Azure 'da klasik uyarılar nelerdir?
 
 > [!NOTE]
-> Bu makalede, eski Klasik ölçüm uyarısı oluşturmayı açıklar. Azure İzleyicisi'ni destekler [yeni neredeyse gerçek zamanlı ölçüm uyarıları ve yeni bir uyarı deneyimi](../../azure-monitor/platform/alerts-overview.md). Klasik uyarılar [kullanımdan kaldırılması planlanan](https://docs.microsoft.com/azure/azure-monitor/platform/monitoring-classic-retirement).  
+> Bu makalede, klasik eski ölçüm uyarılarının nasıl oluşturulacağı açıklanır. Azure Izleyici artık [daha yeni bir neredeyse gerçek zamanlı ölçüm uyarılarını ve yeni bir uyarı deneyimini](../../azure-monitor/platform/alerts-overview.md)desteklemektedir. Klasik uyarılar [kullanımdan kaldırılacak şekilde zamanlanır](https://docs.microsoft.com/azure/azure-monitor/platform/monitoring-classic-retirement).  
 >
 
-Uyarılar, veriler üzerinde koşulları yapılandırın ve son izleme verilerini koşulları eşleştiğinde bildirilmesi olanak tanır.
+Uyarılar, veriler üzerinde koşullar yapılandırmanıza ve koşullar en son izleme verileriyle eşleşiyorsa bildirimde bulunulmasına olanak tanır.
 
-## <a name="old-and-new-alerting-capabilities"></a>Eski ve yeni uyarı verme özellikleri
+## <a name="old-and-new-alerting-capabilities"></a>Eski ve yeni uyarı özellikleri
 
-Azure İzleyici, Application Insights, Log Analytics ve hizmetin sistem durumunu ayrı olan geçmişte uyarı verme özellikleri. Zaman içinde Azure geliştirdik ve kullanıcı arabirimi ve uyarı farklı yöntemleri. Birleştirme işlemi hala devam ediyor.
+Geçmiş Azure Izleyicisinde, Application Insights, Log Analytics ve hizmet durumu ayrı uyarı yeteneklerine sahipti. Fazla mesai, Azure tarafından geliştirildi ve hem Kullanıcı arabirimini hem de farklı uyarı yöntemlerini birleştirildi. Birleştirme işlemi hala devam ediyor.
 
-Azure portalında Klasik uyarıları kullanıcı ekran, yalnızca klasik uyarıları görüntüleyebilirsiniz. Bu ekrandan alma **Klasik uyarıları görüntüleyip** uyarılar ekranında düğmesi. 
+Klasik uyarıları yalnızca Azure portalındaki klasik uyarılar Kullanıcı ekranında görüntüleyebilirsiniz. Bu ekranı, uyarılar ekranındaki **Klasik Uyarıları görüntüle** düğmesinden alırsınız. 
 
- ![Azure portalında uyarı seçenekleri](media/alerts-classic.overview/monitor-alert-screen2.png)
+ ![Azure portal uyarı seçimleri](media/alerts-classic.overview/monitor-alert-screen2.png)
 
-Yeni uyarılar kullanıcı deneyimi üzerinde Klasik uyarılar deneyiminin aşağıdaki faydaları vardır:
--   **Daha iyi bir bildirim sistemi** -tüm yeni uyarıları, bildirimleri ve Uyarıları birden çok yeniden kullanılabilir eylemler grupları adlı eylem grupları kullanın. Klasik ölçüm uyarısı ve eski Log Analytics uyarılarını Eylem grupları kullanmayın.
--   **Bir birleşik yazma deneyiminde** - tüm uyarı oluşturma için ölçümleri, günlükleri ve Etkinlik günlüğünü Log Analytics, Azure İzleyici arasında ve Application Insights, tek bir yerde.
--   **Görünüm, Azure portalında Log Analytics uyarılarını harekete** -Ayrıca bkz: aboneliğinizdeki bir Log Analytics uyarılarını harekete artık. Daha önce bunları ayrı bir portalda bulunuyordu.
--   **Tetiklenen uyarılar ve uyarı kuralları ayrımı** - uyarı kuralları (uyarı tetikleyen koşulu tanımı) ve tetiklenen uyarılar (uyarı kuralı Açmadığınızda örneği) Ayrıştırılan, işletimsel ve yapılandırma görünümleri ayrılmış şekilde.
--   **Daha iyi iş akışı** - yeni uyarılar hakkında uyarı için doğru öğelere bulmak daha basit hale getiren bir uyarı kuralı yapılandırma işlemi boyunca kullanıcı deneyimi kılavuzları yazma.
--   **Uyarı birleştirme akıllı** ve **uyarı durumu ayarlama** -yeni uyarılar, otomatik gruplandırma işlevi birlikte aşırı yükleme kullanıcı arabiriminde azaltmak için benzer uyarıların gösteren içerir. 
+Yeni uyarılar kullanıcı deneyimi, klasik uyarılar deneyimine göre aşağıdaki avantajlara sahiptir:
+-   **Daha iyi bildirim sistemi** -tüm yeni uyarılar, birden fazla uyarı içinde yeniden kullanılabilen bildirimler ve eylemler grupları adlı eylem gruplarını kullanır. Klasik ölçüm uyarıları ve daha eski Log Analytics Uyarıları eylem gruplarını kullanmaz.
+-   **Birleştirilmiş bir yazma deneyimi** -Azure izleyici, Log Analytics ve Application Insights ölçümler, Günlükler ve etkinlik günlüğü için tüm uyarı oluşturma işlemi tek bir yerdir.
+-   **Azure portal Log Analytics uyarı** tetiklenme, artık aboneliğinizde tetiklenen Log Analytics uyarıları da görebilirsiniz. Bunlar, daha önce ayrı bir portalda vardı.
+-   **Tetiklenen uyarıların ve uyarı kurallarının ayrımı** -uyarı kuralları (bir uyarıyı tetikleyen koşulun tanımı) ve başlatılan uyarılar (uyarı kuralı tetiklemesini bir örnek) farklılaştırdığında işlemsel ve yapılandırma görünümleri ayrılır.
+-   **Daha iyi iş akışı** -yeni uyarı yazma deneyimi, kullanıcıyı bir uyarı kuralı yapılandırma sürecinde rehberlik eder ve bu da uyarı almak için doğru şeyleri bulmayı kolaylaştırır.
+-   **Akıllı uyarılar birleştirme** ve **uyarı durumunu ayarlama** -daha yeni uyarılar, Kullanıcı arabirimindeki aşırı yüklemeyi azaltmak için benzer uyarıları gösteren otomatik gruplandırma işlevlerini içerir. 
 
-Yeni ölçüm uyarılarının Klasik ölçüm uyarılarını aşağıdaki avantajlara sahiptir:
--   **Geliştirilmiş gecikme**: Yeni ölçüm uyarılarının kadar sık dakikada bir çalıştırabilirsiniz. Eski ölçüm uyarıları olan 5 dakikada bir sıklığında her zaman çalışır. Yeni uyarıların daha küçük gecikme sorunu oluşum bildirim veya (3-5 dakika) eylemi için artan vardır. 5-15 dakika türüne bağlı olarak eski uyarılardır.  Günlük uyarıları genellikle 10 için 15 dakikalık gecikme nedeniyle günlükleri alma süresine sahip, ancak o zaman yeni işleme yöntemler azaltıyoruz. 
--   **Çok boyutlu ölçümler için destek**: Ölçüm ilgi çekici bir segmentini izlemenize olanak sağlayan boyutlu ölçümler üzerinde uyarı.
--   **Ölçüm koşullar hakkında daha fazla denetime**: Daha zengin bir uyarı kuralları tanımlayabilirsiniz. Yeni uyarılar ölçüm maksimum, minimum, ortalama ve toplam değer izleme desteği sunar.
--   **Birden çok ölçümlerini izleme birleştirilmiş**: (Şu anda en fazla iki ölçüm) birden çok ölçümleri tek bir kural ile izleyebilirsiniz. Her iki ölçüm, belirtilen zaman aralığı için ilgili kendi eşiklerini ihlal etmeniz durumunda bir uyarı tetiklenir.
--   **Daha iyi bir bildirim sistemi**: Tüm yeni uyarılar kullanmak [Eylem grupları](../../azure-monitor/platform/action-groups.md), bildirimleri ve Uyarıları birden çok yeniden kullanılabilir eylemler grupları adlandırılır.  Klasik ölçüm uyarısı ve eski Log Analytics uyarılarını Eylem grupları kullanmayın. 
--   **Ölçümleri günlüklerinden** (genel Önizleme): Günlük verileri log Analytics'e gidip artık olabilir ayıklanır ve Azure İzleyici ölçümleri dönüştürülür ve ardından diğer ölçümler gibi uyarı. Bkz: [uyarılar (Klasik)](alerts-classic.overview.md) Klasik uyarılar için belirli terminolojisi. 
+Daha yeni ölçüm uyarıları klasik ölçüm uyarıları üzerinde aşağıdaki avantajlara sahiptir:
+-   **İyileştirilmiş gecikme**: daha yeni ölçüm uyarıları, her dakika daha sık çalıştırılabilir. Daha eski ölçüm uyarıları her zaman 5 dakikalık bir sıklıkta çalışır. Daha yeni uyarılar, sorun oluşma süresinden bildirim veya eyleme (3 ila 5 dakika) karşı daha küçük gecikmeyi artırır. Daha eski uyarılar, türe bağlı olarak 5 ila 15 dakika sürer.  Günlük uyarıları genellikle günlüklerin alınması için gereken süre nedeniyle 10 ila 15 dakikalık gecikme olur, ancak daha yeni işleme yöntemleri bu süreyi azaltmaktadır. 
+-   **Çok boyutlu ölçümler Için destek**: ölçüm hakkında ilgi çekici bir segmenti izlemenize olanak tanıyan boyut ölçümlerini uyarabilir.
+-   **Ölçüm koşulları üzerinde daha fazla denetim: daha**zengin uyarı kuralları tanımlayabilirsiniz. Yeni uyarılar, ölçümlerin maksimum, minimum, ortalama ve toplam değerlerini izlemeyi destekler.
+-   **Birden çok ölçüm Için Birleşik izleme**: birden çok ölçümü (Şu anda en fazla iki ölçüm) tek bir kuralla izleyebilirsiniz. Her iki ölçüm de belirli bir süre boyunca ilgili eşiklerini ihlal ederseniz bir uyarı tetiklenir.
+-   **Daha iyi bildirim sistemi**: tüm yeni uyarılar, birden fazla uyarı içinde yeniden kullanılabilen bildirimler ve eylemler grupları adlı [eylem gruplarını](../../azure-monitor/platform/action-groups.md)kullanır.  Klasik ölçüm uyarıları ve daha eski Log Analytics Uyarıları eylem gruplarını kullanmaz. 
+-   **Günlüklerden alınan ölçümler** (Genel Önizleme): Log Analytics olan günlük verileri artık ayıklanıp Azure izleyici ölçümlerine dönüştürülüp diğer ölçümler gibi uyarı verebilir. Klasik uyarılara özgü terminoloji için bkz. [Uyarılar (klasik)](alerts-classic.overview.md) . 
 
 
-## <a name="classic-alerts-on-azure-monitor-data"></a>Azure İzleyici veri çubuğunda Klasik uyarılar
-Klasik uyarılar kullanılabilir - ölçüm uyarıları ve etkinlik günlüğü uyarıları iki tür vardır.
+## <a name="classic-alerts-on-azure-monitor-data"></a>Azure Izleyici verilerinde klasik uyarılar
+İki tür klasik uyarı mevcuttur-ölçüm uyarıları ve etkinlik günlüğü uyarıları.
 
-* **Klasik ölçüm uyarıları** -belirtilen bir ölçüm değerini atadığınız eşiği aştığında bu uyarı tetikler. Bu eşik aşıldığında ve uyarı koşulu karşılandığında bir uyarı bir bildirim oluşturur. Bu noktada, uyarının "Etkinleştirildi" olarak kabul edilir. "- Diğer bir deyişle, eşiği yeniden çapraz ve koşulu artık karşılanmıyor çözüldüğünde" başka bir bildirim oluşturur.
+* **Klasik ölçüm uyarıları** -bu uyarı, belirtilen bir ölçümün değeri atadığınız bir eşiği aştığında tetiklenir. Uyarı, bu eşik geçildiğinde uyarı koşulu karşılandığında bir bildirim oluşturur. Bu noktada, uyarı "etkinleştirildi" olarak değerlendirilir. "Çözümlenirse" diğer bir bildirim oluşturur. Bu, eşiğin yeniden geçildiğinde ve koşulun artık karşılanmadığını belirten başka bir bildirim oluşturur.
 
-* **Klasik etkinlik günlüğü uyarıları** -filtre ölçütlerinizle eşleşen etkinlik günlüğü olay girişe tetikleyen akış günlük uyarısı. Bu uyarılar sahip yalnızca bir durum "Etkinleştirildi". Uyarı altyapısı yalnızca yeni olaya filtre ölçütlerini de geçerlidir. Eski girişler bulmak için aramaz. Yeni bir hizmet durumu olay meydana geldiğinde veya bir kullanıcı veya uygulama aboneliğinizde Örneğin, "Delete sanal makine". bir işlem gerçekleştirdiğinde, bu uyarılar size bildirebilir
+* **Klasik etkinlik günlüğü uyarıları** -filtre ölçütlerinizle eşleşen bir etkinlik günlüğü olay girişi üzerinde tetiklenen bir akış günlüğü uyarısı. Bu uyarıların yalnızca bir durumu vardır, "etkinleştirildi". Uyarı altyapısı, filtre ölçütlerini yalnızca yeni bir olaya uygular. Eski girdileri bulmak için arama yapmaz. Bu uyarılar, yeni bir hizmet durumu olayı gerçekleştiğinde veya bir Kullanıcı ya da uygulamanın aboneliğinizde bir işlem gerçekleştirdiğinde (örneğin, "sanal makineyi Sil") size bildirimde bulunabilir.
 
-Tanılama günlük verilerini Azure İzleyici kullanılabilir, verileri Log Analytics'e (OMS önceden) yönlendirmek ve Log Analytics sorgu uyarısını kullanın. Analizi şimdi kullandığı oturum [yöntemi yeni uyarı](../../azure-monitor/platform/alerts-overview.md) 
+Azure Izleyici aracılığıyla kullanılabilen tanılama günlük verileri için verileri Log Analytics (eski adıyla OMS) ile yönlendirin ve Log Analytics bir sorgu uyarısı kullanın. Log Analytics artık [Yeni uyarı yöntemini](../../azure-monitor/platform/alerts-overview.md) kullanmaktadır 
 
-Aşağıdaki diyagramda, Azure İzleyici ve, kavramsal olarak, bu verileri nasıl uyarabilir veri kaynakları özetlenmektedir.
+Aşağıdaki diyagramda, Azure Izleyici 'deki verilerin kaynakları özetlenmektedir ve kavramsal olarak bu verilerin nasıl uyarabilir.
 
-![Uyarılar açıklaması](media/alerts-classic.overview/Alerts_Overview_Resource_v5.png)
+![Açıklanan uyarılar](media/alerts-classic.overview/Alerts_Overview_Resource_v5.png)
 
-## <a name="taxonomy-of-alerts-classic"></a>Uyarılar (Klasik)'in Taksonomisi
-Azure Klasik uyarılar ve işlevlerini açıklamak için aşağıdaki terimler kullanılmaktadır:
-* **Uyarı** -tanımıma ölçüt (bir veya daha fazla kural ya da koşulları) sağlandığında etkin hale gelir.
-* **Etkin** -klasik bir uyarı tarafından tanımlanan ölçütler karşılandığında durumu.
-* **Çözümlenen** -klasik bir uyarı tarafından tanımlanan ölçütler artık karşılandığında daha önce karşılanıp karşılanmadığını sonra durumu.
-* **Bildirim** - etkin hale gelmesini klasik bir uyarı dışına göre gerçekleştirilecek eylem.
-* **Eylem** -bir alıcı bir uyarı (örneğin, bir adresi gönderme veya bir Web kancası URL'si için posta) gönderilen belirli bir çağrı. Bildirimler, genellikle birden fazla eylem tetikleyebilirsiniz.
+## <a name="taxonomy-of-alerts-classic"></a>Uyarı sınıflandırması (klasik)
+Azure, klasik uyarıları ve bunların işlevlerini anlatmak için aşağıdaki terimleri kullanır:
+* **Uyarı** -karşılandığında etkinleştirilen bir ölçüt (bir veya daha fazla kural veya koşul) tanımı.
+* **Etkin** -klasik bir uyarı tarafından tanımlanan ölçüt karşılandığında durum.
+* **Çözüldü** -klasik uyarı tarafından tanımlanan kriterler daha önce karşılandıktan sonra karşılanmadığında durum.
+* **Bildirim** -klasik bir uyarının etkin hale gelmesine yönelik eylem.
+* **Eylem** -bir bildirimin alıcısına gönderilen belirli bir çağrı (örneğin, bir adresi veya bir Web kancası URL 'sine gönderme). Bildirimler genellikle birden çok eylemi tetikleyebilir.
 
-## <a name="how-do-i-receive-a-notification-from-an-azure-monitor-classic-alert"></a>Azure İzleyici Klasik uyarıdan bir bildirim nasıl alabilirim?
-Tarihsel olarak, farklı hizmetler Azure uyarılarından kendi yerleşik bildirim yöntemleri kullanılır. 
+## <a name="how-do-i-receive-a-notification-from-an-azure-monitor-classic-alert"></a>Nasıl yaparım? Azure Monitor klasik uyarısından bildirim almak mı istiyorsunuz?
+Geçmişte, farklı hizmetlerden gelen Azure uyarıları kendi yerleşik bildirim yöntemlerini kullandı. 
 
-Azure İzleyicisi'nde gruplandırma yeniden kullanılabilir bir bildirim çağrılan oluşturulan *Eylem grupları*. Eylem grupları, bir dizi için bir bildirim alıcıları belirtin. Eylem grubu başvuran bir uyarı etkinleştirildi dilediğiniz zaman tüm alıcılar bu bildirim alırsınız. Eylem grupları arasında çok sayıda uyarı nesne yeniden alıcılar (örneğin, nöbet mühendisi listenize) gruplandırmasını sağlar. Eylem grupları bildirim e-posta adresleri, SMS sayıları ve diğer eylemler bir dizi ek olarak bir Web kancası URL'sine yayımlayarak destekler.  Daha fazla bilgi için [Eylem grupları](../../azure-monitor/platform/action-groups.md). 
+Azure Izleyici, *eylem grupları*adlı yeniden kullanılabilir bir bildirim gruplandırması oluşturdu. Eylem grupları bir bildirim için bir alıcı kümesi belirtir. Eylem grubuna başvuran bir uyarının etkinleştirildiği her zaman, tüm alıcılar bu bildirimi alır. Eylem grupları birçok uyarı nesnesi arasında alıcı gruplandırmasını (örneğin, çağrı mühendisi listeniz) yeniden kullanmanıza olanak tanır. Eylem grupları, e-posta adreslerine, SMS numaralarına ve bir dizi diğer eyleme ek olarak bir Web kancası URL 'sine göndererek bildirimi destekler.  Daha fazla bilgi için bkz. [eylem grupları](../../azure-monitor/platform/action-groups.md). 
 
-Eski Klasik etkinlik günlüğü uyarıları, Eylem grupları kullanın.
+Eski klasik etkinlik günlüğü uyarıları eylem gruplarını kullanır.
 
-Ancak, eski ölçüm uyarıları Eylem grupları kullanmayın. Bunun yerine, aşağıdaki eylemleri de yapılandırabilirsiniz: 
-- Hizmet Yöneticisi, diğer Yöneticiler veya belirttiğiniz ek e-posta adreslerine e-posta bildirimleri gönderin.
-- Bu sayede ek Otomasyon eylemleri başlatmak bir Web kancası çağırın.
+Ancak, eski ölçüm uyarıları eylem gruplarını kullanmaz. Bunun yerine, aşağıdaki eylemleri yapılandırabilirsiniz: 
+- Hizmet yöneticisine, ortak yöneticilere veya belirttiğiniz ek e-posta adreslerine e-posta bildirimleri gönderin.
+- Ek otomasyon eylemleri başlatmanıza olanak sağlayan bir Web kancası çağırın.
 
-Web kancaları otomasyon ve düzeltme, örneğin, kullanarak sağlar:
+Web kancaları Otomasyon ve düzeltme imkanı sunar, örneğin:
 - Azure Otomasyonu Runbook
-- Azure işlevi
+- Azure Işlevi
 - Azure mantıksal uygulaması
-- Bir üçüncü taraf hizmeti
+- üçüncü taraf bir hizmet
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Uyarı kuralları ve bunları kullanarak yapılandırma hakkında bilgi alın:
 
-* Daha fazla bilgi edinin [ölçümleri](data-platform.md)
-* Yapılandırma [Azure portalında Klasik ölçüm uyarıları](alerts-classic-portal.md)
-* Yapılandırma [Klasik ölçüm uyarılarını PowerShell](alerts-classic-portal.md)
-* Yapılandırma [Klasik ölçüm uyarılarını komut satırı arabirimi (CLI)](alerts-classic-portal.md)
-* Yapılandırma [Klasik ölçüm uyarılarını Azure İzleyici REST API'si](https://msdn.microsoft.com/library/azure/dn931945.aspx)
-* Daha fazla bilgi edinin [etkinlik günlüğü](activity-logs-overview.md)
-* Yapılandırma [Azure portal aracılığıyla etkinlik günlüğü uyarıları](activity-log-alerts.md)
-* Yapılandırma [etkinlik günlüğü uyarıları Resource Manager aracılığıyla](alerts-activity-log.md)
-* Gözden geçirme [etkinlik günlüğü uyarısı Web kancası şeması](activity-log-alerts-webhook.md)
-* Daha fazla bilgi edinin [Eylem grupları](action-groups.md)
-* Yapılandırma [yeni uyarılar](alerts-metric.md)
+* [Ölçümler](data-platform.md) hakkında daha fazla bilgi edinin
+* [Azure Portal aracılığıyla klasik ölçüm uyarılarını](alerts-classic-portal.md) yapılandırma
+* [Klasik ölçüm uyarılarını yapılandırma PowerShell](alerts-classic-portal.md)
+* [Klasik ölçüm uyarılarını yapılandırma komut satırı arabirimi (CLI)](alerts-classic-portal.md)
+* [Klasik ölçüm uyarılarını Yapılandırma Azure izleyici REST API](https://msdn.microsoft.com/library/azure/dn931945.aspx)
+* [Etkinlik günlüğü](activity-logs-overview.md) hakkında daha fazla bilgi edinin
+* [Etkinlik günlüğü uyarılarını Azure Portal aracılığıyla](activity-log-alerts.md) yapılandırma
+* [Etkinlik günlüğü uyarılarını Kaynak Yöneticisi aracılığıyla](alerts-activity-log.md) yapılandırma
+* [Etkinlik günlüğü uyarısı Web kancası şemasını](activity-log-alerts-webhook.md) gözden geçirme
+* [Eylem grupları](action-groups.md) hakkında daha fazla bilgi edinin
+* [Daha yeni uyarıları](alerts-metric.md) Yapılandır

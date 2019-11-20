@@ -1,6 +1,6 @@
 ---
-title: Microsoft Müşteri sözleşmesi - Azure için fatura yönetici rollerini anlama
-description: Hesapları Azure için Microsoft Müşteri anlaşmalarını fatura için fatura rolleri hakkında bilgi edinin.
+title: Microsoft Müşteri Sözleşmeleri için faturalama yönetimi rollerini anlama - Azure
+description: Azure'da Microsoft Müşteri Sözleşmeleri için ödeme hesaplarının faturalama rollerini öğrenin.
 author: amberbhargava
 manager: amberbhargava
 ms.service: billing
@@ -8,207 +8,207 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/01/2019
+ms.date: 10/01/2019
 ms.author: banders
-ms.openlocfilehash: 12e492fee95192d0af49ff7b6a5be3144398fef8
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: 8b4aeaa885b18f433c366788af350a7fe9c064e4
+ms.sourcegitcommit: d4c9821b31f5a12ab4cc60036fde00e7d8dc4421
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67490436"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71709476"
 ---
-# <a name="understand-microsoft-customer-agreement-administrative-roles-in-azure"></a>Azure'da Microsoft Müşteri sözleşmesi yönetici rollerini anlama
+# <a name="understand-microsoft-customer-agreement-administrative-roles-in-azure"></a>Azure’daki Microsoft Müşteri Sözleşmesi yönetici rollerini anlama
 
-Microsoft Müşteri sözleşmesi için fatura hesabınıza yönetmek için aşağıdaki bölümlerde açıklanan rolleri kullanın. Azure kaynaklarına erişimi denetlemek için sahip yerleşik roller yanı sıra bu rolleridir. Daha fazla bilgi için [Azure kaynakları için yerleşik roller](../role-based-access-control/built-in-roles.md).
+Microsoft Müşteri Sözleşmesi ödeme hesabını yönetmek için aşağıdaki bölümlerde açıklanan rolleri kullanın. Bu roller kaynaklara erişimi denetlemek için Azure'daki yerleşik rollere eklenmiştir. Daha fazla bilgi için bkz. [Azure kaynakları için yerleşik roller](../role-based-access-control/built-in-roles.md).
 
-Bu makale, bir faturalama hesabı için bir Microsoft Müşteri sözleşmesi için geçerlidir. Microsoft Müşteri sözleşmesi erişimi olup olmadığını denetleyin.
+Bu makale, Microsoft Müşteri Sözleşmesi’ne ilişkin ödeme hesabı için geçerlidir. Microsoft Müşteri Sözleşmesi’ne erişiminiz olup olmadığını denetleyin.
 
-## <a name="billing-role-definitions"></a>Faturalandırma rol tanımları
+## <a name="billing-role-definitions"></a>Faturalama rolü tanımları
 
-Aşağıdaki tablo profiller faturalama fatura hesabınıza yönetmek için kullanın ve bölümleri Fatura Fatura roller açıklanmıştır.
+Aşağıdaki tabloda ödeme hesabınızı, faturalama profillerinizi ve fatura bölümlerinizi yönetirken kullandığınız faturalama rolleri açıklanır.
 
-|Role|Açıklama|
+|Rol|Açıklama|
 |---|---|
-|Fatura hesap sahibi|Fatura hesabı için her şeyi yönetme|
-|Faturalama hesabı Katılımcısı|Fatura hesap izinlerini dışında her şeyi yönetme|
-|Faturalama hesabı okuyucusu|Fatura hesabı üzerinde salt okunur görünümü her şeyin|
-|Faturalandırma Profil sahibi|Profil fatura için her şeyi yönetme|
-|Faturalandırma profili katkıda bulunanı|Faturalandırma profili izinlerini dışında her şeyi yönetme|
-|Faturalandırma profil okuyucusu|Profil faturalandırma üzerinde salt okunur görünümü her şeyin|
-|Fatura Yöneticisi|Görüntüleme ve faturalar profili faturalandırma için ödeme yaparsınız.|
-|Fatura bölüm sahibi|Fatura bölümündeki her şeyi yönetme|
-|Fatura bölümüne katkıda bulunan|Fatura bölüm izinlerini dışında her şeyi yönetme|
-|Fatura bölüm okuyucusu|Fatura bölümündeki her şeyin salt okunur görünümü|
-|Azure aboneliği Oluşturucusu|Azure abonelikleri oluşturma|
+|Faturalama hesabı sahibi|Ödeme hesabı için her şeyi yönetme|
+|Faturalama hesabı katkıda bulunanı|Faturalandırma hesabındaki izinler dışında her şeyi yönetme|
+|Faturalama hesabı okuyucusu|Faturalandırma hesabındaki her şeyin salt okunur görünümü|
+|Faturalama profili sahibi|Faturalama profili için her şeyi yönetme|
+|Faturalama profili katkıda bulunanı|Faturalandırma profilindeki izinler dışında her şeyi yönetme|
+|Faturalama profili okuyucusu|Faturalandırma profilindeki her şeyin salt okunur görünümü|
+|Fatura yöneticisi|Faturalandırma profili için faturaları görüntüleme ve ödeme|
+|Fatura bölümü sahibi|Fatura bölümündeki her şeyi yönetme|
+|Fatura bölümü katkıda bulunanı|Fatura bölümündeki izinler dışında her şeyi yönetme|
+|Fatura bölümü okuyucusu|Fatura bölümündeki her şeyin salt okunur görünümü|
+|Azure aboneliği oluşturucusu|Azure abonelikleri oluşturma|
 
-## <a name="billing-account-roles-and-tasks"></a>Faturalama hesabı roller ve görevler
+## <a name="billing-account-roles-and-tasks"></a>Ödeme hesabı rolleri ve görevleri
 
-Bir faturalama hesabı, kuruluşunuz için fatura bilgilerini yönetmenizi sağlar. Maliyetleri, İzleyici ücretleri ve faturalarını düzenleyin ve kuruluşunuz için fatura erişimi denetlemek için Faturalama hesabı kullanın. Daha fazla bilgi için [Faturalama hesabı anlamak](billing-mca-overview.md#your-billing-account).
+Ödeme hesabı kuruluşunuz için faturalamayı yönetmenize olanak tanır. Ödeme hesabını kullanarak maliyetleri düzenleyebilir, ücretleri ve faturaları izleyebilir, kuruluşunuzda faturalama erişimini denetleyebilirsiniz. Daha fazla bilgi için bkz. [Ödeme hesabını anlama](billing-mca-overview.md#your-billing-account).
 
-Aşağıdaki tablolarda, Faturalama hesabı bağlamında görevlerini yapmanız hangi rolü gösterilmektedir.
+Aşağıdaki tablolarda ödeme hesabı bağlamında görevleri tamamlamak için ihtiyacınız olan roller gösterilir.
 
-### <a name="manage-billing-account-permissions-and-properties"></a>Fatura hesap izinlerini ve özellikleri yönetme
+### <a name="manage-billing-account-permissions-and-properties"></a>Ödeme hesabı izinlerini ve özelliklerini yönetme
 
-|Görev|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu|
+|Görev|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu|
 |---|---|---|---|
-|Fatura hesap için mevcut izinlerini görüntüleme|✔|✔|✔|
-|Başkalarının görüntülemek ve Faturalama hesabı yönetmek için izinleri verme|✔|✘|✘|
-|Şirket adı, adresi ve daha fazla Faturalama hesabı özelliklerini görüntüleme gibi|✔|✔|✔|
+|Ödeme hesabı için mevcut izinleri görüntüleme|✔|✔|✔|
+|Diğer kullanıcılara ödeme hesabını görüntüleme ve yönetme izinleri verme|✔|✘|✘|
+|Şirket adı ve adresi gibi ödeme hesabı özelliklerini görüntüleme|✔|✔|✔|
 
-### <a name="manage-billing-profiles-for-billing-account"></a>Fatura hesabı için fatura profillerini yönetme
+### <a name="manage-billing-profiles-for-billing-account"></a>Ödeme hesabı için faturalama profillerini yönetme
 
-|Görev|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu|
+|Görev|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu|
 |---|---|---|---|
-|Hesaptaki tüm faturalandırma profillerini görüntüleyin|✔|✔|✔|
+|Hesaptaki tüm faturalama profillerini görüntüleme|✔|✔|✔|
 
-### <a name="manage-invoices-for-billing-account"></a>Faturalar, Faturalama hesabı yönetme
+### <a name="manage-invoices-for-billing-account"></a>Ödeme hesabı için faturaları yönetme
 
-|Görev|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu|
+|Görev|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu|
 |---|---|---|---|
-|Hesaptaki tüm faturaları görüntülemek|✔|✔|✔|
-|Fatura, Azure kullanımı ve ücretleri dosyaları, fiyat listeleri indirin ve hesap belgelerde vergi|✔|✔|✔|
+|Hesaptaki tüm faturaları görüntüleme|✔|✔|✔|
+|Hesaptaki faturaları, Azure kullanımı ve ücretleri dosyalarını, fiyat listelerini ve vergi belgelerini indirme|✔|✔|✔|
 
-### <a name="manage-invoice-sections-for-billing-account"></a>Faturalandırma hesabınız için fatura bölümlere yönetme
+### <a name="manage-invoice-sections-for-billing-account"></a>Ödeme hesabı için fatura bölümlerini yönetme
 
-|Görev|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu|
+|Görev|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu|
 |---|---|---|---|
-|Tüm hesap bölümlerde fatura görüntüle|✔|✔|✔|
+|Hesaptaki tüm fatura bölümlerini görüntüleme|✔|✔|✔|
 
-### <a name="manage-transactions-for-billing-account"></a>Fatura hesabı için işlemleri yönetme
+### <a name="manage-transactions-for-billing-account"></a>Ödeme hesabı için işlemleri yönetme
 
-|Görev|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu|
+|Görev|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu|
 |---|---|---|---|
-|Hesap için tüm faturalandırma işlemleri görüntüle|✔|✔|✔|
-|Hesap için satın aldığınız tüm ürünleri görüntülemek|✔|✔|✔|
+|Hesap için tüm faturalama işlemlerini görüntüleme|✔|✔|✔|
+|Hesap için satın alınan tüm ürünleri görüntüleme|✔|✔|✔|
 
-### <a name="manage-subscriptions-for-billing-account"></a>Fatura hesabı için abonelikleri yönetme
+### <a name="manage-subscriptions-for-billing-account"></a>Ödeme hesabı için abonelikleri yönetme
 
-|Görev|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu|
+|Görev|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu|
 |---|---|---|---|
-|Tüm Azure abonelikleri fatura hesabında görüntüleyin|✔|✔|✔|
+|Ödeme hesabındaki tüm Azure aboneliklerini görüntüleme|✔|✔|✔|
 
-## <a name="billing-profile-roles-and-tasks"></a>Faturalandırma profili rolleri ve görevleri
+## <a name="billing-profile-roles-and-tasks"></a>Faturalama profili rolleri ve görevleri
 
-Faturalandırma profili faturaları ve ödeme yöntemlerini yönetmenizi sağlar. Bir aylık fatura Azure abonelik ve faturalandırma profili kullanılarak satın alınan diğer ürünler için oluşturulur. Fatura ödemek için ödeme yöntemleri kullanın. Daha fazla bilgi için [fatura profillerini anlayabilir](billing-mca-overview.md#billing-profiles).
+Faturalama profili faturalarınızı ve ödeme yöntemlerinizi yönetmenize olanak tanır. Azure abonelikleri ve faturalama profili kullanılarak satın alınan diğer ürünler için aylık bir fatura oluşturulur. Faturayı ödemek için ödeme yöntemlerini kullanırsınız. Daha fazla bilgi için bkz. [Faturalama profillerini anlama](billing-mca-overview.md#billing-profiles).
 
-Aşağıdaki tablolarda, hangi rolü bağlamında faturalandırma profili, görevleri tamamlama gerek gösterilmektedir.
+Aşağıdaki tablolarda faturalama profili bağlamında görevleri tamamlamak için ihtiyacınız olan roller gösterilir.
 
-### <a name="manage-billing-profile-permissions-properties-and-policies"></a>Faturalandırma profili izinleri, özellikleri ve ilkelerini yönetme
+### <a name="manage-billing-profile-permissions-properties-and-policies"></a>Faturalama profili izinlerini, özelliklerini ve ilkelerini yönetme
 
-|Görev|Faturalandırma Profil sahibi|Faturalandırma profili katkıda bulunanı|Faturalandırma profil okuyucusu|Fatura Yöneticisi|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görev|Faturalama profili sahibi|Faturalama profili katkıda bulunanı|Faturalama profili okuyucusu|Fatura Yöneticisi|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Mevcut faturalandırma profili izinlerini görüntüleme|✔|✔|✔|✔|✔|✔|✔|
-|Başkalarının görüntülemek ve faturalandırma profili yönetmek için izinleri verme|✔|✘|✘|✘|✘|✘|✘|
-|SAS numarası, e-posta fatura tercih ve daha fazla fatura profil özelliklerini görüntüleme gibi|✔|✔|✔|✔|✔|✔|✔|
-|Fatura profil özelliklerini güncelleştirme |✔|✔|✘|✘|✘|✘|✘|
-|Faturalandırma profili gibi uygulanan ilkeleri görüntüle Azure rezervasyon satın alma işlemleri etkinleştirmek için Azure Marketi satın alma işlemleri ve daha fazlasını etkinleştirme|✔|✔|✔|✔|✔|✔|✔|
-|Fatura profilinde ilkelerini uygula |✔|✔|✘|✘|✘|✘|✘|
+|Faturalama profili için mevcut izinleri görüntüleme|✔|✔|✔|✔|✔|✔|✔|
+|Diğer kullanıcılara faturalama profilini görüntüleme ve yönetme izinleri verme|✔|✘|✘|✘|✘|✘|✘|
+|PO numarası ve e-postayla fatura tercihi gibi faturalama profili özelliklerini görüntüleme|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profili özelliklerini güncelleştirme |✔|✔|✘|✘|✘|✘|✘|
+|Azure rezervasyon satın almalarını etkinleştir ve Azure market satın almalarını etkinleştir gibi faturalama profiline uygulanan ilkeleri görüntüleme|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profiline ilkeleri uygulama |✔|✔|✘|✘|✘|✘|✘|
 
-### <a name="manage-invoices-for-billing-profile"></a>Profil faturalama faturalar yönetme
+### <a name="manage-invoices-for-billing-profile"></a>Faturalama profili için faturaları yönetme
 
-|Görev|Faturalandırma Profil sahibi|Faturalandırma profili katkıda bulunanı|Faturalandırma profil okuyucusu|Fatura Yöneticisi|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görev|Faturalama profili sahibi|Faturalama profili katkıda bulunanı|Faturalama profili okuyucusu|Fatura Yöneticisi|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Tüm faturalar için fatura profili görüntüle|✔|✔|✔|✔|✔|✔|✔|
-|Fatura, Azure kullanımı ve ücretleri dosyaları, fiyat listeleri indirin ve belgeler için faturalandırma profili vergi|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profilinin tüm faturalarını görüntüleme|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profili için faturaları, Azure kullanımı ve ücretleri dosyalarını, fiyat listelerini ve vergi belgelerini indirme|✔|✔|✔|✔|✔|✔|✔|
 
-### <a name="manage-invoice-sections-for-billing-profile"></a>Faturalandırma profili için fatura bölümlere yönetme
+### <a name="manage-invoice-sections-for-billing-profile"></a>Faturalama profili için fatura bölümlerini yönetme
 
-|Görev|Faturalandırma Profil sahibi|Faturalandırma profili katkıda bulunanı|Faturalandırma profil okuyucusu|Fatura Yöneticisi|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görev|Faturalama profili sahibi|Faturalama profili katkıda bulunanı|Faturalama profili okuyucusu|Fatura Yöneticisi|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Faturalandırma profili için tüm fatura bölümleri görüntüle|✔|✔|✔|✔|✔|✔|✔|
-|Faturalandırma profili için yeni bir fatura bölüm oluşturun|✔|✔|✘|✘|✘|✘|✘|
+|Faturalama profili için tüm fatura bölümlerini görüntüleme|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profili için yeni fatura bölümü oluşturma|✔|✔|✘|✘|✘|✘|✘|
 
-### <a name="manage-transactions-for-billing-profile"></a>Profil faturalama işlemleri yönetme
+### <a name="manage-transactions-for-billing-profile"></a>Faturalama profili için işlemleri yönetme
 
-|Görev|Faturalandırma Profil sahibi|Faturalandırma profili katkıda bulunanı|Faturalandırma profil okuyucusu|Fatura Yöneticisi|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görev|Faturalama profili sahibi|Faturalama profili katkıda bulunanı|Faturalama profili okuyucusu|Fatura Yöneticisi|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Tüm faturalandırma işlemleri için faturalandırma profili görüntüle|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profili için tüm faturalama işlemlerini görüntüleme|✔|✔|✔|✔|✔|✔|✔|
 
-### <a name="manage-payment-methods-for-billing-profile"></a>Profil fatura için ödeme yöntemlerini Yönet
+### <a name="manage-payment-methods-for-billing-profile"></a>Faturalama profili için ödeme yöntemlerini yönetme
 
-|Görev|Faturalandırma Profil sahibi|Faturalandırma profili katkıda bulunanı|Faturalandırma profil okuyucusu|Fatura Yöneticisi|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görev|Faturalama profili sahibi|Faturalama profili katkıda bulunanı|Faturalama profili okuyucusu|Fatura Yöneticisi|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Görünüm ödeme yöntemleri için faturalandırma profili|✔|✔|✔|✔|✔|✔|✔|
-|Azure kredisi bakiyesi faturalandırma profili için izleme|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profili için ödeme yöntemlerini görüntüleme|✔|✔|✔|✔|✔|✔|✔|
+|Faturalandırma profili için Azure kredi bakiyesini izleme|✔|✔|✔|✔|✔|✔|✔|
 
-### <a name="manage-subscriptions-for-billing-profile"></a>Profil fatura için abonelikleri yönetme
+### <a name="manage-subscriptions-for-billing-profile"></a>Faturalama profili için abonelikleri yönetme
 
-|Görev|Faturalandırma Profil sahibi|Faturalandırma profili katkıda bulunanı|Faturalandırma profil okuyucusu|Fatura Yöneticisi|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görev|Faturalama profili sahibi|Faturalama profili katkıda bulunanı|Faturalama profili okuyucusu|Fatura Yöneticisi|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Tüm Azure abonelikleri için fatura profili görüntüle|✔|✔|✔|✔|✔|✔|✔|
+|Faturalama profili için tüm Azure aboneliklerini görüntüleme|✔|✔|✔|✔|✔|✔|✔|
 
-## <a name="invoice-section-roles-and-tasks"></a>Fatura bölüm rolleri ve görevleri
+## <a name="invoice-section-roles-and-tasks"></a>Fatura bölümü rolleri ve görevleri
 
-Bir fatura bölümü faturanızla ilgili maliyetleri düzenlemenize olanak sağlar. Kuruluşunuzun ihtiyaçlarına göre veya maliyetlerinizi geliştirme ortamını departmana göre düzenlemek için bir bölüm oluşturabilirsiniz. Diğer bölüm için Azure abonelikleri oluşturabilmesi için izin verin. Tüm kullanım ücretleri ve satın alma işlemleri için abonelikler sonra Fatura bölümündeki göster. Daha fazla bilgi için [anlayın fatura bölüm](billing-mca-overview.md#invoice-sections).
+Fatura bölümü faturanızdaki maliyetleri düzenlemenize olanak tanır. Maliyetlerinizi bölüme, geliştirme ortamına göre veya kuruluşunuzun ihtiyaçları temelinde düzenlemek için bölümler oluşturabilirsiniz. Diğer kullanıcılara Azure abonelikleri oluşturma izni verebilirsiniz. Bundan sonra aboneliklere yönelik tüm kullanım ücretleri ve satın alma işlemleri faturanın bölümünde gösterilir. Daha fazla bilgi için bkz. [Fatura bölümünü anlama](billing-mca-overview.md#invoice-sections).
 
-Aşağıdaki tablolarda, hangi rolü bağlamında fatura bölümler, görevleri tamamlama için ihtiyacınız gösterilmektedir.
+Aşağıdaki tablolarda fatura bölümleri bağlamında görevleri tamamlamak için ihtiyacınız olan roller gösterilir.
 
-### <a name="manage-invoice-section-permissions-and-properties"></a>Fatura bölüm izinleri ve özellikleri yönetme
+### <a name="manage-invoice-section-permissions-and-properties"></a>Fatura bölümü izinlerini ve özelliklerini yönetme
 
-|Görevler|Fatura bölüm sahibi|Fatura bölümüne katkıda bulunan|Fatura bölüm okuyucusu|Azure aboneliği Oluşturucusu|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu | |
+|Görevler|Fatura bölümü sahibi|Fatura bölümü katkıda bulunanı|Fatura bölümü okuyucusu|Azure aboneliği oluşturucusu|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu | |
 |---|---|---|---|---|---|---|---|---|
-|Fatura bölümünde tüm izinleri görüntüleyin|✔|✔|✔|✔|✔|✔|✔| |
-|Başkalarının görüntülemek ve fatura bölüm yönetmek için izinleri verme|✔|✘|✘|✘|✘|✘|✘| |
+|Fatura bölümü üzerindeki tüm izinleri görüntüleme|✔|✔|✔|✔|✔|✔|✔| |
+|Diğer kullanıcılara fatura bölümünü görüntüleme ve yönetme izinleri verme|✔|✘|✘|✘|✘|✘|✘| |
 |Fatura bölümü özelliklerini görüntüleme|✔|✔|✔|✔|✔|✔|✔| |
-|Fatura bölümü özelliklerini güncelleştir|✔|✔|✘|✘|✘|✘|✘|✘|
+|Fatura bölümü özelliklerini güncelleştirme|✔|✔|✘|✘|✘|✘|✘|✘|
 
-### <a name="manage-products-for-invoice-section"></a>Ürünleri fatura bölümü için yönetme
+### <a name="manage-products-for-invoice-section"></a>Fatura bölümü için ürünleri yönetme
 
-|Görevler|Fatura bölüm sahibi|Fatura bölümüne katkıda bulunan|Fatura bölüm okuyucusu|Azure aboneliği Oluşturucusu|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görevler|Fatura bölümü sahibi|Fatura bölümü katkıda bulunanı|Fatura bölümü okuyucusu|Azure aboneliği oluşturucusu|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Tüm ürünler fatura bölümünde satın görüntüleme|✔|✔|✔|✘|✔|✔|✔|
-|Fatura bölümün iptal gibi ürünler için faturalandırmayı yönetmek, otomatik yenileme ve daha fazla kapatma|✔|✔|✘|✘|✘|✘|✘|
-|Ürünler için fatura bölümü Değiştir|✔|✔|✘|✘|✘|✘|✘|
+|Fatura bölümünde satın alınan tüm ürünleri görüntüleme|✔|✔|✔|✘|✔|✔|✔|
+|Fatura bölümü için ürünlerin faturalanmasını yönetme; örneğin iptal ve otomatik yenilemeyi kapatma gibi işlemler yapma|✔|✔|✘|✘|✘|✘|✘|
+|Ürünler için fatura bölümünü değiştirme|✔|✔|✘|✘|✘|✘|✘|
 
 ### <a name="manage-subscriptions-for-invoice-section"></a>Fatura bölümü için abonelikleri yönetme
 
-|Görevler|Fatura bölüm sahibi|Fatura bölümüne katkıda bulunan|Fatura bölüm okuyucusu|Azure aboneliği Oluşturucusu|Fatura hesap sahibi|Faturalama hesabı Katılımcısı|Faturalama hesabı okuyucusu
+|Görevler|Fatura bölümü sahibi|Fatura bölümü katkıda bulunanı|Fatura bölümü okuyucusu|Azure aboneliği oluşturucusu|Faturalama hesabı sahibi|Faturalama hesabı katkıda bulunanı|Faturalama hesabı okuyucusu
 |---|---|---|---|---|---|---|---|
-|Tüm Azure abonelikleri için fatura bölümü görüntüleme|✔|✔|✔|✘|✔|✔|✔|
-|Abonelikler için fatura bölüm değiştirme|✔|✔|✘|✘|✘|✘|✘|
-|Diğer faturalandırma hesaplarında kullanıcılardan abonelik faturalandırma sahipliğini iste|✔|✔|✘|✘|✘|✘|✘|
+|Fatura bölümü için tüm Azure aboneliklerini görüntüleme|✔|✔|✔|✘|✔|✔|✔|
+|Abonelikler için fatura bölümünü değiştirme|✔|✔|✘|✘|✘|✘|✘|
+|Diğer ödeme hesaplarındaki kullanıcılardan aboneliklerin fatura sahipliğini isteme|✔|✔|✘|✘|✘|✘|✘|
 
-## <a name="subscription-billing-roles-and-tasks"></a>Abonelik faturalama roller ve görevler
+## <a name="subscription-billing-roles-and-tasks"></a>Abonelik faturalama rolleri ve görevleri
 
-Aşağıdaki tablo, hangi rol için bir abonelik bağlamında görevleri tamamlama ihtiyacınız gösterir.
+Aşağıdaki tabloda abonelik bağlamında görevleri tamamlamak için ihtiyacınız olan roller gösterilir.
 
-|Görevler|Fatura bölüm sahibi|Fatura bölümüne katkıda bulunan|Fatura bölüm okuyucusu|Azure aboneliği Oluşturucusu|
+|Görevler|Fatura bölümü sahibi|Fatura bölümü katkıda bulunanı|Fatura bölümü okuyucusu|Azure aboneliği oluşturucusu|
 |---|---|---|---|---|
 |Azure abonelikleri oluşturma|✔|✔|✘|✔|
-|Abonelik için güncelleştirme maliyet merkezi|✔|✔|✘|✘|
-|Abonelik için fatura bölümü Değiştir|✔|✔|✘|✘|
+|Abonelik için maliyet merkezini güncelleştirme|✔|✔|✘|✘|
+|Abonelik için fatura bölümünü değiştirme|✔|✔|✘|✘|
 
-## <a name="manage-billing-roles-in-the-azure-portal"></a>Azure portalındaki faturalandırma rollerini yönetme
+## <a name="manage-billing-roles-in-the-azure-portal"></a>Azure portalında yerleşik rolleri yönetme
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 
-2. Arama **maliyet Yönetimi + faturalandırma**.
+2. **Maliyet Yönetimi + Faturalama** araması yapın.
 
-   ![Azure portalı arama gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-search-cost-management-billing.png)
+   ![Azure portalı aramasını gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-search-cost-management-billing.png)
 
-3. Seçin **erişim denetimi (IAM)** Faturalama hesabı, faturalandırma profili ya da fatura bölümünde, erişim vermek istediğiniz gibi bir kapsamda.
+3. Erişim vermek istediğiniz ödeme hesabı, faturalama profili veya fatura bölümü gibi bir kapsamda **Erişim denetimi (IAM)** öğesini seçin.
 
-4. Erişim denetimi (IAM) sayfası, kullanıcıları ve her rol için bu kapsama atanmış olan grupları listeler.
+4. Erişim denetimi (IAM) sayfasında söz konusu kapsam için her role atanan kullanıcılar ve gruplar listelenir.
 
-   ![Yöneticiler için fatura hesap listesini gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-list-admins.png)
+   ![Ödeme hesabı için yöneticilerin listesini gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-list-admins.png)
 
-5. Bir kullanıcı için erişim vermek istiyorsanız, **Ekle** sayfanın üst. Rol aşağı açılan listeden bir rol seçin. Erişim vermek istediğiniz kullanıcının e-posta adresi girin. Seçin **Kaydet** rol atamak için.
+5. Kullanıcıya erişim vermek için sayfanın en üstündeki **Ekle**'yi seçin. Rol açılan listesinde rolü seçin. Erişim izni vermek istediğiniz kullanıcının e-posta adresini girin. Rolü atamak için **Kaydet**’i seçin.
 
-   ![Bir faturalama hesabı için bir yönetici ekleme gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-add-admin.png)
+   ![Ödeme hesabına yönetici ekleme işlemini gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-add-admin.png)
 
-6. Bir kullanıcı erişimi kaldırmak için kaldırmak istediğiniz rol atamasına sahip kullanıcı seçin. Kaldır'ı seçin.
+6. Kullanıcının erişimini kaldırmak için, kaldırmak istediğiniz rol atamasına sahip kullanıcıyı seçin. Kaldır’ı seçin.
 
-   ![Bir faturalama hesabı yönetici kaldırma gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-remove-admin.png)
+   ![Ödeme hesabından yönetici kaldırma işlemini gösteren ekran görüntüsü](./media/billing-understand-mca-roles/billing-remove-admin.png)
 
-## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri sözleşmesi için erişim denetimi
+## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri Sözleşmesi’ne erişimi denetleme
 [!INCLUDE [billing-check-mca](../../includes/billing-check-mca.md)]
 
-## <a name="need-help-contact-support"></a>Yardım mı gerekiyor? Desteğe başvurun
-Yardıma ihtiyacınız varsa [desteğe](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için.
+## <a name="need-help-contact-support"></a>Yardıma mı ihtiyacınız var? Desteğe başvurun
+Yardıma ihtiyacınız varsa sorununuzun hızla çözülmesini sağlamak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Fatura hesabınıza hakkında bilgi edinmek için aşağıdaki makalelere bakın:
+Ödeme hesabınız hakkında bilgi edinmek için aşağıdaki makalelere bakın:
 
-- [Microsoft Müşteri sözleşmesi için fatura hesabınıza belirtilen](billing-mca-overview.md)
-- [Azure aboneliğinin faturalandırma hesabınız için Microsoft Müşteri sözleşmesi oluşturma](billing-mca-create-subscription.md)
+- [Microsoft Müşteri Sözleşmesi için ödeme hesabınızı kullanmaya başlama](billing-mca-overview.md)
+- [Microsoft Müşteri Sözleşmesi için ödeme hesabınıza yönelik bir Azure aboneliği oluşturma](billing-mca-create-subscription.md)

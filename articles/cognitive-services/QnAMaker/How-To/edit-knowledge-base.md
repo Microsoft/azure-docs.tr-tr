@@ -7,16 +7,16 @@ author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/10/2019
 ms.author: diberry
 ms.custom: seodec18
-ms.openlocfilehash: 006170b2030b6511ba732a1b12aa5b5b811d8900
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 1450d6b41d9a193f8069509aacd3343ae646c6ac
+ms.sourcegitcommit: f176e5bb926476ec8f9e2a2829bda48d510fbed7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447487"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70307013"
 ---
 # <a name="edit-a-knowledge-base-in-qna-maker"></a>Soru-cevap Oluşturucu, Bilgi Bankası Düzenle
 
@@ -54,7 +54,7 @@ Soru-cevap Oluşturucu, kullanımı kolay bir düzenleme deneyimi sunarak bilgi 
 
 ## <a name="add-a-qna-pair"></a>Soru-Cevap çifti ekleme
 
-Üzerinde **ayarları** sayfasında **ekleme soru-cevap çifti** Bilgi Bankası tabloya yeni satır eklemek için.
+Bilgi Bankası tablosuna yeni bir satır eklemek için **Düzenle** sayfasında **QNA Pair Ekle** ' yi seçin.
 
 ![Soru-cevap çifti Ekle](../media/qnamaker-how-to-edit-kb/add-qnapair.png)
 
@@ -72,7 +72,7 @@ Bir kullanıcı sorgu için bir eşleşme olasılığını artırmak için var o
 
 ## <a name="add-metadata"></a>meta veri ekleme
 
-İlk seçerek meta veri çiftlerini eklemek **görüntüleme seçenekleri**, ardından seçerek **Göster meta verileri**. Bu meta veri sütunu görüntüler. Ardından, **+** meta verileri çifte eklemek oturum açın. Bir anahtarı ve tek bir değer bu çifti oluşur.
+Önce **Görünüm seçeneklerini**belirleyip **meta verileri göster**' i seçerek meta veri çiftleri ekleyin. Bu, meta veri sütununu görüntüler. Sonra, bir meta **+** veri çifti eklemek için imzala ' yı seçin. Bu çift bir anahtar ve bir değer içerir.
 
 ![Meta veri ekleme](../media/qnamaker-how-to-edit-kb/add-metadata.png)
 
@@ -81,17 +81,17 @@ Bir kullanıcı sorgu için bir eşleşme olasılığını artırmak için var o
 
 ## <a name="manage-large-knowledge-bases"></a>Büyük bilgi bankalarından yönetme
 
-* **Veri kaynağı grupları**: Bankalarıyla içinden ayıklandıkları veri kaynağı tarafından gruplandırılır. Genişlet veya daralt veri kaynağı.
+* **Veri kaynağı grupları**: QnAs, ayıklandıkları veri kaynağına göre gruplandırılır. Genişlet veya daralt veri kaynağı.
 
-    ![Daralt ve veri kaynağı sorularını ve yanıtlarını genişletmek için soru-cevap Oluşturucu veri kaynağını çubuğundaki kullanın](../media/qnamaker-how-to-edit-kb/data-source-grouping.png)
+    ![Veri kaynağı sorularını ve yanıtlarını daraltmak ve genişletmek için Soru-Cevap Oluşturma veri kaynağı çubuğunu kullanın](../media/qnamaker-how-to-edit-kb/data-source-grouping.png)
 
-* **Bilgi Bankası arama**: Metin kutusuna Bilgi Bankası Tablo üst bilgi bankasında arama yapabilirsiniz. Soru, yanıt veya meta veri içeriğini aramak için ENTER'a tıklayın. Arama filtresi kaldırmak için X simgesine tıklayın.
+* **Bilgi Bankası ara**: Bilgi Bankası tablosunun en üstündeki metin kutusuna yazarak bilgi bankasında arama yapabilirsiniz. Soru, yanıt veya meta veri içeriğini aramak için ENTER'a tıklayın. Arama filtresi kaldırmak için X simgesine tıklayın.
 
-    ![Görünüm yalnızca filtreyle eşleşen öğeler azaltmak için yukarıdaki soruları ve yanıtları soru-cevap Oluşturucu arama kutusunu kullanın](../media/qnamaker-how-to-edit-kb/search-paginate-group.png)
+    ![Görünümü yalnızca filtre eşleme öğelerine düşürmek için soruların ve yanıtların üzerindeki Soru-Cevap Oluşturma arama kutusunu kullanın](../media/qnamaker-how-to-edit-kb/search-paginate-group.png)
 
-* **Sayfalandırma**: Hızlı bir şekilde büyük bilgi bankalarından yönetmek için veri kaynakları arasında taşıma
+* **Sayfalandırma**: Büyük bilgi bankaslarını yönetmek için veri kaynakları arasında hızlıca geçiş yapın
 
-    ![Sorular ve cevaplar sayfaları aracılığıyla taşımak için yukarıdaki soruları ve yanıtları soru-cevap Oluşturucu sayfalandırma özelliklere kullanın](../media/qnamaker-how-to-edit-kb/pagination.png)
+    ![Soruların ve yanıtların sayfalarında gezinmek için soruların ve yanıtların üzerinde Soru-Cevap Oluşturma sayfalandırma özelliklerini kullanın](../media/qnamaker-how-to-edit-kb/pagination.png)
 
 ## <a name="delete-knowledge-bases"></a>Bilgi bankaları Sil
 

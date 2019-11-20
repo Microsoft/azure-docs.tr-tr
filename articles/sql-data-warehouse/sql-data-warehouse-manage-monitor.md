@@ -1,51 +1,51 @@
 ---
-title: Dmv'leri kullanarak iş yükünüzü izleme | Microsoft Docs
-description: Dmv'leri kullanarak iş yükünüzü izleme hakkında bilgi edinin.
+title: DMV’leri kullanarak iş yükünüzü izleme
+description: DMV 'leri kullanarak iş yükünüzü izlemeyi öğrenin.
 services: sql-data-warehouse
 author: ronortloff
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
 ms.subservice: manage
-ms.date: 04/12/2019
+ms.date: 08/23/2019
 ms.author: rortloff
 ms.reviewer: igorstan
-ms.openlocfilehash: ff1f613dfdfb5c43b727bcc9c7f7a1f0afca0975
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 629ba904d055977fe70f749a46fbbec71be71b79
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60748797"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083642"
 ---
 # <a name="monitor-your-workload-using-dmvs"></a>DMV’leri kullanarak iş yükünüzü izleme
-Bu makalede, dinamik yönetim görünümlerini (Dmv'ler) iş yükünüzü izleme için kullanmayı açıklar. Bu, Azure SQL veri ambarı, sorgu yürütme araştırma içerir.
+Bu makalede, iş yükünüzü izlemek için dinamik yönetim görünümlerinin (DMVs) nasıl kullanılacağı açıklanır. Bu, Azure SQL veri ambarı 'nda sorgu yürütmeyi araştırmanın de içerir.
 
 ## <a name="permissions"></a>İzinler
-Bu makalede Dmv'leri sorgulamak için VIEW DATABASE STATE ya da Denetim izni gerekir. Genellikle ekibi tarafından verilmesinin VIEW DATABASE STATE daha kısıtlayıcı olarak tercih edilen izindir.
+Bu makaledeki DMV 'leri sorgulamak için, VERITABANı durumunu veya DENETIM iznini görüntüleme izninizin olması gerekir. Genellikle görünüm VERITABANı durumunu verme, tercih edilen izindir ve çok daha kısıtlayıcıdır.
 
 ```sql
 GRANT VIEW DATABASE STATE TO myuser;
 ```
 
-## <a name="monitor-connections"></a>Bağlantılarını izleme
-Tüm oturum açma bilgileri SQL veri ambarı'nda oturum açtığınız [sys.dm_pdw_exec_sessions][sys.dm_pdw_exec_sessions].  Bu DMV son 10.000 giriş bilgilerini içerir.  Session_ıd, birincil anahtar ve sıralı olarak her yeni oturum açma için atanır.
+## <a name="monitor-connections"></a>Bağlantıları izleme
+SQL veri ambarı 'na yapılan tüm oturumlar [sys. dm_pdw_exec_sessions][sys.dm_pdw_exec_sessions]'ye kaydedilir.  Bu DMV, son 10.000 oturum açma bilgilerini içerir.  Session_id birincil anahtardır ve her yeni oturum açma işlemi için ardışık olarak atanır.
 
 ```sql
 -- Other Active Connections
 SELECT * FROM sys.dm_pdw_exec_sessions where status <> 'Closed' and session_id <> session_id();
 ```
 
-## <a name="monitor-query-execution"></a>İzleyici sorgu yürütme
-SQL veri ambarı üzerinde yürütülen tüm sorguları oturum [sys.dm_pdw_exec_requests][sys.dm_pdw_exec_requests].  Bu DMV yürütülen son 10.000 sorgular içerir.  Request_id benzersiz biçimde her bir sorgu tanımlar ve bu DMV için birincil anahtarı.  Request_id her yeni bir sorgu için sırayla atanır ve sorgu kimliği için temsil eden QID önüne  Belirli bir session_ıd için bu DMV sorgulama tüm sorgular için belirli bir oturum açma gösterir.
+## <a name="monitor-query-execution"></a>Sorgu yürütmeyi izleme
+SQL veri ambarı üzerinde yürütülen tüm sorgular [sys. dm_pdw_exec_requests][sys.dm_pdw_exec_requests]'ye kaydedilir.  Bu DMV, yürütülen son 10.000 sorguyu içerir.  Request_id her sorguyu benzersiz bir şekilde tanımlar ve bu DMV için birincil anahtardır.  Request_id her yeni sorgu için ardışık olarak atanır ve sorgu KIMLIĞINI temsil eden QıD öneki vardır.  Belirli bir session_id için bu DMV sorgulaması, belirli bir oturum açma için tüm sorguları gösterir.
 
 > [!NOTE]
-> Saklı yordamları birden çok istek kimliklerini kullanın.  İstek kimliklerinin sırayla atanır. 
+> Saklı yordamlar birden çok Istek kimliği kullanır.  İstek kimlikleri sıralı sırayla atanır. 
 > 
 > 
 
-Sorgu yürütme planları ve belirli bir sorgu saatleri araştırmak için izlemeniz gereken adımlar aşağıda verilmiştir.
+Belirli bir sorgu için sorgu yürütme planlarını ve saatlerini araştırmak üzere izlenecek adımlar aşağıda verilmiştir.
 
-### <a name="step-1-identify-the-query-you-wish-to-investigate"></a>1\. ADIM: Araştırmak istediğiniz sorgu tanımlama
+### <a name="step-1-identify-the-query-you-wish-to-investigate"></a>1\. Adım: araştırmak istediğiniz sorguyu tanımla
 ```sql
 -- Monitor active queries
 SELECT * 
@@ -59,18 +59,13 @@ SELECT TOP 10 *
 FROM sys.dm_pdw_exec_requests 
 ORDER BY total_elapsed_time DESC;
 
--- Find a query with the Label 'My Query'
--- Use brackets when querying the label column, as it it a key word
-SELECT  *
-FROM    sys.dm_pdw_exec_requests
-WHERE   [label] = 'My Query';
 ```
 
-Önceki sorgu sonuçlarından **istek kimliği Not** araştırmak istediğiniz sorgu.
+Yukarıdaki sorgu sonuçlarından, araştırmak istediğiniz sorgunun **Istek kimliğini unutmayın** .
 
-Sorgulara **askıya alındı** durumu nedeniyle etkin çalışan sorgu çok fazla sayıda kuyruğa. Bu sorguları da görünür [sys.dm_pdw_waits](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-waits-transact-sql) bekler sorgu UserConcurrencyResourceType türüne sahip. Eşzamanlılık sınırları hakkında daha fazla bilgi için bkz: [performans katmanları](performance-tiers.md) veya [iş yükü yönetimi için kaynak sınıfları](resource-classes-for-workload-management.md). Sorgular gibi diğer nedenler nesne kilitleri için de bekleyebilirsiniz.  Sorgunuz, bir kaynağı bekleyen olup [kaynaklar için bekleyen sorguların araştırma] [ Investigating queries waiting for resources] bu makalede daha ilerisine.
+**Askıya alınmış** durumdaki sorgular, çok sayıda etkin çalışan sorgu nedeniyle sıraya alınabilir. Bu sorgular sys içinde de görünür [. dm_pdw_waits](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-waits-transact-sql) bir UserConcurrencyResourceType türü ile bekler. Eşzamanlılık limitleri hakkında bilgi için bkz. [iş yükü yönetimi Için](resource-classes-for-workload-management.md) [performans katmanları](/azure/sql-data-warehouse/what-is-a-data-warehouse-unit-dwu-cdwu#performance-tiers-and-data-warehouse-units) veya kaynak sınıfları. Sorgular, nesne kilitleri gibi diğer nedenleri de bekleyebilir.  Sorgunuz bir kaynağı bekliyorsa, bu makalede daha fazla kaynak [için bekleyen sorguları araştırma][Investigating queries waiting for resources] bölümüne bakın.
 
-Bir sorgunun arama basitleştirmek için [sys.dm_pdw_exec_requests](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql) tablo, kullanın [etiket] [ LABEL] bir yorum içinde sys.dm_pdw_exec_ aranabilir sorgunuzu atamak için isteklerini görüntüleyin.
+[Sys. dm_pdw_exec_requests](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql) tablosunda bir sorgunun aramasını basitleştirmek için, sorgunuza, sys. dm_pdw_exec_requests görünümünde Aranan bir açıklama atamak için [etiketini][LABEL] kullanın.
 
 ```sql
 -- Query with Label
@@ -78,10 +73,16 @@ SELECT *
 FROM sys.tables
 OPTION (LABEL = 'My Query')
 ;
+
+-- Find a query with the Label 'My Query'
+-- Use brackets when querying the label column, as it it a key word
+SELECT  *
+FROM    sys.dm_pdw_exec_requests
+WHERE   [label] = 'My Query';
 ```
 
-### <a name="step-2-investigate-the-query-plan"></a>2\. ADIM: Sorgu planı araştırın
-İstek Kimliği sorgu dağıtılmış SQL (DSQL) plandan almanızı [sys.dm_pdw_request_steps][sys.dm_pdw_request_steps].
+### <a name="step-2-investigate-the-query-plan"></a>2\. Adım: sorgu planını araştırın
+Sorgunun dağıtılmış SQL (DSQL) planını [sys. dm_pdw_request_steps][sys.dm_pdw_request_steps]' den almak IÇIN istek kimliğini kullanın.
 
 ```sql
 -- Find the distributed query plan steps for a specific query.
@@ -92,15 +93,15 @@ WHERE request_id = 'QID####'
 ORDER BY step_index;
 ```
 
-DSQL planı beklenenden uzun sürüyor, karmaşık bir plan veya birçok DSQL adımları uzun sürüyor. yalnızca bir adım ile neden olabilir.  Plan çeşitli taşıma işlemlerini çok adımlı ise, veri taşıma azaltmak için tablo dağıtımlarını en iyi duruma getirme göz önünde bulundurun. [Tablo dağıtımı] [ Table distribution] makalede açıklanmaktadır neden veri sorgu çözmek için taşınmalıdır ve veri taşıma en aza indirmek için bazı dağıtım stratejilerini açıklar.
+Bir DSQL planı beklenenden uzun sürüyorsa, nedeni çok sayıda DSQL adımı olan karmaşık bir plan veya uzun süren bir adım olabilir.  Plan birkaç taşıma işlemiyle ilgili birçok adım ise, veri hareketini azaltmak için tablo dağıtımlarınızı en iyi duruma getirme işlemini göz önünde bulundurun. [Tablo dağıtım][Table distribution] makalesinde, bir sorguyu çözümlemek için verilerin neden taşınması gerektiği açıklanmakta ve veri hareketini en aza indirmek için bazı dağıtım stratejileri açıklanmaktadır.
 
-Tek bir adım hakkında ayrıntılar daha ayrıntılı araştırmaya *operation_type* uzun süre çalışan bir sorgu adımına ve Not sütun **adımı indisine**:
+Tek bir adım hakkında daha fazla ayrıntı araştırmak için, uzun süreli sorgu adımının *operation_type* sütunu ve **adım dizini**' ni aklınızda koyun:
 
-* Adım 3a için devam **SQL işlemleri**: OnOperation, RemoteOperation, ReturnOperation.
-* Adım 3b için devam **veri taşıma işlemleri**: ShuffleMoveOperation, BroadcastMoveOperation, TrimMoveOperation, PartitionMoveOperation, MoveOperation, CopyOperation.
+* **SQL Işlemlerinde**adım 3A ile devam edin: Onoperation, Remoteoperation, ReturnOperation.
+* **Veri taşıma işlemleri**için adım 3bile devam edin: karıştırılmış Limoveoperation, Yayınmoveoperation, Kırmoveoperation, Partitionmoveoperation, Moveoperation, CopyOperation.
 
-### <a name="step-3a-investigate-sql-on-the-distributed-databases"></a>Adım 3a: Dağıtılmış veritabanlarının SQL araştırın
-İstek Kimliği ve adım dizini ayrıntılarını almak için kullanmak [sys.dm_pdw_sql_requests][sys.dm_pdw_sql_requests], bir sorgu adımına yürütme bilgilerinin tüm veritabanlarını içerir.
+### <a name="step-3a-investigate-sql-on-the-distributed-databases"></a>Adım 3a: dağıtılmış veritabanlarında SQL 'i araştırın
+Dağıtılan tüm veritabanlarında Sorgu adımının yürütme bilgilerini içeren [sys. dm_pdw_sql_requests][sys.dm_pdw_sql_requests]'den ayrıntıları almak IÇIN istek kimliği ve adım dizinini kullanın.
 
 ```sql
 -- Find the distribution run times for a SQL step.
@@ -110,7 +111,7 @@ SELECT * FROM sys.dm_pdw_sql_requests
 WHERE request_id = 'QID####' AND step_index = 2;
 ```
 
-Sorgu adımı çalıştırırken [DBCC pdw_showexecutıonplan] [ DBCC PDW_SHOWEXECUTIONPLAN] çalıştıran belirli bir dağıtım adımı için SQL Server plan önbelleğinden SQL Server tahmini planı almak için kullanılabilir.
+Sorgu adımı çalışırken, belirli bir dağıtım üzerinde çalışan adımın SQL Server plan önbelleğinden tahmini SQL Server planı almak için [DBCC PDW_SHOWEXECUTIONPLAN][DBCC PDW_SHOWEXECUTIONPLAN] kullanılabilir.
 
 ```sql
 -- Find the SQL Server execution plan for a query running on a specific SQL Data Warehouse Compute or Control node.
@@ -119,8 +120,8 @@ Sorgu adımı çalıştırırken [DBCC pdw_showexecutıonplan] [ DBCC PDW_SHOWEX
 DBCC PDW_SHOWEXECUTIONPLAN(1, 78);
 ```
 
-### <a name="step-3b-investigate-data-movement-on-the-distributed-databases"></a>Adım 3b: Dağıtılmış veritabanları üzerinde veri taşıma araştırın
-Her dağıtım noktasından çalışan bir veri taşıma adım hakkında bilgi almak için istek kimliği ve adım dizini kullanın [sys.dm_pdw_dms_workers][sys.dm_pdw_dms_workers].
+### <a name="step-3b-investigate-data-movement-on-the-distributed-databases"></a>Adım 3B: dağıtılmış veritabanlarında veri hareketini araştırın
+[Sys. dm_pdw_dms_workers][sys.dm_pdw_dms_workers]' den her dağıtım üzerinde çalışan bir veri taşıma adımı hakkındaki bilgileri almak IÇIN istek kimliği ve adım dizini ' ni kullanın.
 
 ```sql
 -- Find the information about all the workers completing a Data Movement Step.
@@ -130,10 +131,10 @@ SELECT * FROM sys.dm_pdw_dms_workers
 WHERE request_id = 'QID####' AND step_index = 2;
 ```
 
-* Denetleme *total_elapsed_time* belirli bir dağıtım önemli ölçüde uzun veri taşıma için diğerlerinden almadığını görmek için sütun.
-* Uzun süre çalışan dağıtım için denetleme *rows_processed* bu dağıtım noktasından taşınan satır sayısını diğerlerinden daha önemli ölçüde daha büyük olup olmadığını görmek için sütun. Bu durumda, bu bulma, temel alınan veri dengesizliği gösteriyor olabilir.
+* Belirli bir dağıtımın, veri taşıma için diğerlerinden önemli ölçüde uzun sürdüğünü görmek için *total_elapsed_time* sütununa bakın.
+* Uzun süre çalışan dağıtım için, bu dağılıktan taşınan satır sayısının diğerlerinden önemli ölçüde daha büyük olup olmadığını görmek için *rows_processed* sütununu kontrol edin. Bu durumda, bu bulma, temel alınan verilerin eğriliğini gösterebilir.
 
-Sorgu çalışıyorsa [DBCC pdw_showexecutıonplan] [ DBCC PDW_SHOWEXECUTIONPLAN] SQL Server tahmini planı şu anda çalışan SQL adım içinde belirli bir SQL Server plan önbelleğinden almak için kullanılabilir Dağıtım.
+Sorgu çalışıyorsa, belirli bir dağıtım içinde çalışmakta olan SQL adımının SQL Server plan önbelleğinden tahmini SQL Server planı almak için [DBCC PDW_SHOWEXECUTIONPLAN][DBCC PDW_SHOWEXECUTIONPLAN] kullanılabilir.
 
 ```sql
 -- Find the SQL Server estimated plan for a query running on a specific SQL Data Warehouse Compute or Control node.
@@ -144,8 +145,8 @@ DBCC PDW_SHOWEXECUTIONPLAN(55, 238);
 
 <a name="waiting"></a>
 
-## <a name="monitor-waiting-queries"></a>Bekleyen sorguları izleme
-Bir kaynak için beklediği sorgunuzu ilerleme yaptığını değil bulursanız, bir sorgu için bekleyen tüm kaynakları gösteren bir sorgu aşağıda verilmiştir.
+## <a name="monitor-waiting-queries"></a>Bekleyen sorguları izle
+Sorgunuzun bir kaynak beklediği için ilerleme göstermediği fark ederseniz, bir sorgunun beklediği tüm kaynakları gösteren bir sorgu aşağıda verilmiştir.
 
 ```sql
 -- Find queries 
@@ -167,13 +168,13 @@ WHERE waits.request_id = 'QID####'
 ORDER BY waits.object_name, waits.object_type, waits.state;
 ```
 
-Sorgu etkin olarak başka bir sorgu kaynaklardan Bekleniyor durumunda durumları **AcquireResources**.  Sorgu tüm gerekli kaynaklara sahip sonra durumları **izin verildi**.
+Sorgu başka bir sorgudan kaynak üzerinde etkin bir şekilde bekliyorsa, durum **AcquireResources**olur.  Sorgunun tüm gerekli kaynakları varsa, durum **verilecektir**.
 
-## <a name="monitor-tempdb"></a>İzleyici tempdb
-Tempdb, sorgu yürütme işlemi sırasında Ara sonuçlarını tutmak için kullanılır. Tempdb veritabanının yüksek miktarda sorgu performansı yavaş neden olabilir. Azure SQL veri ambarı'nda her düğümü, yaklaşık 1 TB ham tempdb alanı vardır. Aşağıda, tempdb kullanımını izlemek için ve sorgularınızı tempdb kullanımını azaltmak için ipuçları verilmiştir. 
+## <a name="monitor-tempdb"></a>Tempdb 'yi izleme
+Tempdb sorgu yürütülürken ara sonuçları tutmak için kullanılır. Tempdb veritabanının yüksek kullanımı yavaş sorgu performansına yol açabilir. Azure SQL veri ambarı 'ndaki her düğüm, tempdb için yaklaşık 1 TB ham alana sahiptir. Aşağıda, tempdb kullanımını izlemeye ve sorgularınızdaki tempdb kullanımını düşürmeye yönelik ipuçları verilmiştir. 
 
-### <a name="monitoring-tempdb-with-views"></a>Tempdb görünümleri ile izleme
-Tempdb kullanımını izlemek için ilk yükleme [microsoft.vw_sql_requests](https://github.com/Microsoft/sql-data-warehouse-samples/blob/master/solutions/monitoring/scripts/views/microsoft.vw_sql_requests.sql) görünümüne [SQL veri ambarı için Microsoft Toolkit](https://github.com/Microsoft/sql-data-warehouse-samples/tree/master/solutions/monitoring). Ardından, tüm yürütülen sorgular için düğüm başına tempdb kullanımını görmek için aşağıdaki sorguyu yürütebilirsiniz:
+### <a name="monitoring-tempdb-with-views"></a>Tempdb 'yi görünümlerle izleme
+Tempdb kullanımını izlemek için, önce [SQL veri ambarı Için Microsoft araç seti](https://github.com/Microsoft/sql-data-warehouse-samples/tree/master/solutions/monitoring)'nden [Microsoft. vw_sql_requests](https://github.com/Microsoft/sql-data-warehouse-samples/blob/master/solutions/monitoring/scripts/views/microsoft.vw_sql_requests.sql) görünümünü yüklemeniz gerekir. Ardından, yürütülen tüm sorgular için düğüm başına tempdb kullanımını görmek üzere aşağıdaki sorguyu yürütebilirsiniz:
 
 ```sql
 -- Monitor tempdb
@@ -205,13 +206,15 @@ WHERE DB_NAME(ssu.database_id) = 'tempdb'
 ORDER BY sr.request_id;
 ```
 
-Büyük miktarda bellek tüketiyor veya tempdb ayırma için ilgili bir hata iletisini aldığınız bir sorgu varsa, genellikle nedeniyle çok büyük olduğundan [CREATE TABLE AS SELECT (CTAS)](https://docs.microsoft.com/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse) veya [INSERT SELECT](https://docs.microsoft.com/sql/t-sql/statements/insert-transact-sql) çalıştıran deyimi içinde son veri taşıma işlemi başarısız oluyor. Bu genellikle ShuffleMove işlem olarak son INSERT SELECT hemen önce dağıtılmış sorgu planını tanımlanabilir.
+Büyük miktarda bellek kullanan bir sorgunuz varsa veya tempdb ayırla ilgili bir hata iletisi aldıysanız, [Select (CTAS) olarak](https://docs.microsoft.com/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse) çok büyük bir create table veya çalışan [Select](https://docs.microsoft.com/sql/t-sql/statements/insert-transact-sql) ifadesinin son veri taşıma işlemi. Bu, genellikle son ekleme seçmeden önce dağıtılmış sorgu planında bir karıştırılmış Lemove işlemi olarak tanımlanabilir.  Karışık taşıma işlemlerini izlemek için [sys. dm_pdw_request_steps](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-request-steps-transact-sql) kullanın. 
 
-En yaygın azaltma, veri hacmi 1 TB başına düğüm tempdb sınırını aşmayacak şekilde birden çok yük açıklamaalarını break, CTAS veya INSERT SELECT deyimi sağlamaktır. Kümenize tempdb boyutunu azaltma tempdb her bir düğümün üzerinde daha fazla düğüm arasında yayılır, daha büyük bir boyutu da ölçekleyebilirsiniz. 
+En yaygın risk azaltma, CTAS 'larınızı bölmek veya SELECT deyimini birden çok yük ifadesine eklemek için veri hacmi, düğüm başına 1 TB 'lık sınırı aşmayacak. Ayrıca, her bir düğümdeki tempdb 'yi azaltan daha fazla düğüm üzerinde tempdb boyutunu yayabilecek daha büyük bir boyuta ölçeklendirebilirsiniz.
 
-## <a name="monitor-memory"></a>Bellek izleme
+CTAS ve INSERT SELECT deyimlerinin yanı sıra, yetersiz bellekle çalışan karmaşık sorgular tempdb içine taşıtabilecek ve sorguların başarısız olmasına neden olabilir.  Tempdb 'ye taşmamak için daha büyük bir [kaynak sınıfıyla](https://docs.microsoft.com/azure/sql-data-warehouse/resource-classes-for-workload-management) çalışmayı düşünün.
 
-Bellek, kök nedeni yavaş performans ve bellek sorunlarını dışında olabilir. SQL Server bellek kullanımı sınırlarını ulaşma sorgu yürütme işlemi sırasında fark ederseniz veri Ambarınızı genişletmeyi düşünün.
+## <a name="monitor-memory"></a>Belleği izleme
+
+Bellek, yavaş performans ve yetersiz bellek sorunları için kök neden olabilir. Sorgu yürütme sırasında sınırlarına ulaşarak SQL Server bellek kullanımı bulursanız veri Ambarınızı ölçeklendirin.
 
 Aşağıdaki sorgu, düğüm başına SQL Server bellek kullanımı ve bellek baskısı döndürür:   
 ```sql
@@ -235,8 +238,8 @@ WHERE
 pc1.counter_name = 'Total Server Memory (KB)'
 AND pc2.counter_name = 'Target Server Memory (KB)'
 ```
-## <a name="monitor-transaction-log-size"></a>İşlem günlüğü boyutu izleyin
-Aşağıdaki sorgu, her dağıtım noktasında işlem günlüğü boyutu döndürür. Bir günlük dosyalarının 160 GB ulaşmasını varsa, örneği oluşturan ölçeklendirme veya işlem boyutunuz sınırlama düşünmelisiniz. 
+## <a name="monitor-transaction-log-size"></a>İşlem günlüğü boyutunu izle
+Aşağıdaki sorgu her bir dağıtımında işlem günlüğü boyutunu döndürür. Günlük dosyalarından biri 160 GB 'a ulaşıldığında, örneğinizi ölçeklendirmenizi veya işlem boyutunuzu sınırlandırmanız gerekir. 
 ```sql
 -- Transaction log size
 SELECT
@@ -248,8 +251,8 @@ WHERE
 instance_name like 'Distribution_%' 
 AND counter_name = 'Log File(s) Used Size (KB)'
 ```
-## <a name="monitor-transaction-log-rollback"></a>İşlem günlüğü geri izleme
-Sorgularınızın başarısız veya devam etmek için uzun sürüyor, denetleyin ve geri alma işlemler varsa izleyin.
+## <a name="monitor-transaction-log-rollback"></a>İzleme işlem günlüğü geri alma
+Sorgularınız başarısız olursa veya devam etmek uzun sürerse, geri alma işlemleri varsa denetleyebilir ve izleyebilirsiniz.
 ```sql
 -- Monitor rollback
 SELECT 
@@ -261,8 +264,33 @@ JOIN sys.dm_pdw_nodes nod ON t.pdw_node_id = nod.pdw_node_id
 GROUP BY t.pdw_node_id, nod.[type]
 ```
 
+## <a name="monitor-polybase-load"></a>PolyBase yükünü izle
+Aşağıdaki sorgu, yüklerinizin ilerleme durumunun tahmini tahminini sağlar. Sorgu yalnızca işlenmekte olan dosyaları gösterir. 
+
+```sql
+
+-- To track bytes and files
+SELECT
+    r.command,
+    s.request_id,
+    r.status,
+    count(distinct input_name) as nbr_files, 
+    sum(s.bytes_processed)/1024/1024/1024 as gb_processed
+FROM
+    sys.dm_pdw_exec_requests r
+    inner join sys.dm_pdw_dms_external_work s
+        on r.request_id = s.request_id
+GROUP BY
+    r.command,
+    s.request_id,
+    r.status
+ORDER BY
+    nbr_files desc,
+    gb_processed desc;
+```
+
 ## <a name="next-steps"></a>Sonraki adımlar
-Dmv'leri hakkında daha fazla bilgi için bkz: [sistem görünümleri][System views].
+DMVs hakkında daha fazla bilgi için bkz. [Sistem görünümleri][System views].
 
 
 <!--Image references-->

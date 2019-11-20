@@ -1,102 +1,103 @@
 ---
-title: Mevcut bir Azure IOT Edge modülü teklifi güncelleştirme | Azure Market
-description: Mevcut bir IOT Edge modülü teklifi Azure Marketi'nde güncelleştirme yapma.
+title: Mevcut bir Azure IoT Edge modülü teklifini güncelleştirme | Azure Marketi
+description: Azure Marketi 'nde mevcut bir IoT Edge modülü teklifini güncelleştirme.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 10/18/2018
 ms.author: pabutler
-ms.openlocfilehash: 1dc6832fe09a610634ad934e3b173be6cc3331e6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cd0167e1af5bf8ef667df88237d83e9f33ed41f9
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942169"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73813386"
 ---
-# <a name="update-an-existing-iot-edge-module-offer"></a>Mevcut bir IOT Edge modülü teklifi güncelleştirme
+# <a name="update-an-existing-iot-edge-module-offer"></a>Mevcut bir IoT Edge modülü teklifini güncelleştirme
 
-Bu makalede adımları IOT Edge modülü teklifinizi güncelleştirme farklı yönlerini aracılığıyla [bulut iş ortağı portalı](https://cloudpartner.azure.com/) ve sonra teklifin yeniden yayımlanması.
+Bu makalede, [Bulut İş Ortağı Portalı](https://cloudpartner.azure.com/) IoT Edge modülünüzü güncelleştirme ve ardından teklifi yeniden yayınlama adımları adım adım anlatılmaktadır.
 
-Neden, teklifinizi gibi güncelleştirmek için isteyebileceğiniz birkaç neden vardır:
+Teklifinizi güncelleştirmek isteyebileceğiniz bazı nedenler vardır; örneğin:
 
--  Yeni bir IOT Edge modülü görüntü sürümü mevcut SKU'lara ekleniyor.
--  Yeni SKU'lara ekleniyor.
--  Market meta verileri tek bir SKU'ları ve teklif güncelleştiriliyor.
+-  Mevcut SKU 'Lara yeni bir IoT Edge modülü görüntü sürümü ekleniyor.
+-  Yeni SKU 'Lar ekleniyor.
+-  Teklif veya bağımsız SKU 'Lar için Market meta verilerini güncelleştirme.
 
-Bu değişiklikler yardımcı olmak için portal sunar **karşılaştırma** ve **geçmişi** özellikleri.  
+Bu değişiklikler konusunda size yardımcı olmak için Portal **karşılaştırma** ve **geçmiş** özelliklerini sunmaktadır.  
 
 
-## <a name="unpermitted-changes-to-iot-edge-module-offer-or-sku"></a>IOT Edge modülü teklif veya SKU unpermitted değişiklikler
+## <a name="unpermitted-changes-to-iot-edge-module-offer-or-sku"></a>IoT Edge modül teklifinde veya SKU 'suna izin verilmeyen değişiklikler
 
-Bir IOT Edge modülü teklif ya da Azure Marketi'nde teklif Canlı olduktan sonra değiştirilemeyen SKU öznitelikleri vardır. Aşağıdaki ayarları değiştiremezsiniz:
+Teklif Azure Marketi 'nde canlı olduktan sonra değiştirilemeyen bir IoT Edge modülü teklifinin veya SKU 'sunun öznitelikleri vardır. Aşağıdaki ayarları değiştiremezsiniz:
 
--  **Teklif kimliği** ve **yayımcı kimliği** teklifi
--  **SKU kimliği** mevcut SKU'lar
--  Sürüm, örneğin etiketler: `1.0.1`
--  Mevcut SKU'lara faturalandırma/lisans modeli değiştirir
+-  Teklifin **TEKLIF kimliği** ve **Yayımcı kimliği**
+-  Mevcut SKU 'ların **SKU kimliği**
+-  Sürüm etiketleri, örneğin: `1.0.1`
+-  Faturalandırma/lisans modeli, mevcut SKU 'Larda değişir
 
-## <a name="common-update-operations"></a>Genel güncelleştirme işlemleri
+## <a name="common-update-operations"></a>Ortak güncelleştirme işlemleri
 
 Aşağıdaki güncelleştirme işlemleri yaygındır.
 
-### <a name="update-the-iot-edge-module-image-version-for-a-sku"></a>IOT Edge modülü görüntü sürümü için SKU güncelleştirme
+### <a name="update-the-iot-edge-module-image-version-for-a-sku"></a>SKU için IoT Edge modülü görüntü sürümünü güncelleştirme
 
-Güvenlik düzeltme ekleri, ek özellikler ve benzeri düzenli olarak güncelleştirilmesi bir IOT Edge modülü görüntüsü yaygındır. Bu senaryoda, aşağıdaki adımları kullanarak, SKU'nuzu başvuran IOT Edge modülü görüntüsü güncelleştirmek istediğiniz:
+IoT Edge modül görüntüsünün, güvenlik düzeltme ekleri, ek özellikler ve benzeri düzenli olarak güncelleştirilmesini sağlamak yaygındır. Bu senaryoda, aşağıdaki adımları kullanarak SKU 'nuzun IoT Edge modül görüntüsünü güncelleştirmek istersiniz:
 
-1.  Oturum [bulut iş ortağı portalı](https://cloudpartner.azure.com/).
+1.  [Bulut iş ortağı portalı](https://cloudpartner.azure.com/)oturum açın.
 
-2.  Altında **tüm teklifleri**, güncelleştirmek istediğiniz teklif bulun.
+2.  **Tüm teklifler**altında, güncelleştirmek istediğiniz teklifi bulun.
 
-3.  İçinde **SKU'ları** sekmesinde, güncelleştirilecek IOT Edge modülü görüntüyle ilişkilendirilen SKU seçin.
+3.  **SKU 'lar** sekmesinde, güncelleştirmek için IoT Edge modülü görüntüsüyle ilişkili SKU 'yu seçin.
 
-4.  Altında **Edge modülü görüntüsü**seçin **+ yeni görüntü sürümü** yeni bir IOT Edge modülü görüntüsü eklemek için.
+4.  Yeni bir IoT Edge modül görüntüsü eklemek için **Edge modülü görüntüsü**' nün altında **+ yeni görüntü sürümü** ' nü seçin.
 
-5.  Yeni IOT Edge modülü sağlayan **görüntü sürümleri**. Görüntü sürümü, önceki sürümler olarak aynı etiketleri yönergeleri izlemeniz gerekir. Sürüm etiketleri X.Y.Z, burada X, Y ve Z tamsayılardır biçiminde olmalıdır. Sağladığınız yeni sürümü önceki sürümlerin tümü büyük olduğundan emin olun.
+5.  Yeni IoT Edge modülü **görüntü sürümlerini**sağlayın. Görüntü sürümünün önceki sürümlerle aynı etiket yönergeleriyle izlenmesi gerekir. Sürüm etiketleri X. Y. Z biçiminde olmalıdır; burada X, Y ve Z tamsayılardır. Sağladığınız yeni sürümün önceki sürümlerden daha büyük olduğunu doğrulayın.
 
-6.  Seçin **Yayımla** yeni IOT Edge modülü sürümü, Azure Marketi'nde içerik yayımlamak için iş akışını başlatmak için.
+6.  Yeni IoT Edge modülü sürümünüzü Azure Marketi 'Nde yayımlamak için iş akışını başlatmak üzere **Yayımla** ' yı seçin.
 
-### <a name="add-a-new-sku"></a>Yeni bir SKU ekleyin
+### <a name="add-a-new-sku"></a>Yeni bir SKU Ekle
 
-Yeni bir SKU'ya teklifiniz için kullanılabilir hale getirmek için aşağıdaki adımları kullanın: 
+Teklifinizin yeni bir SKU 'SU için kullanılabilir olmasını sağlamak için aşağıdaki adımları kullanın: 
 
-1.  Oturum [bulut iş ortağı portalı](https://cloudpartner.azure.com/).
+1.  [Bulut iş ortağı portalı](https://cloudpartner.azure.com/)oturum açın.
 
-2.  Altında **tüm teklifleri**, güncelleştirmek istediğiniz teklif bulun.
+2.  **Tüm teklifler**altında, güncelleştirmek istediğiniz teklifi bulun.
 
-3.  Altında **SKU'ları** sekmesinde **yeni bir SKU ekleyin** ve sağlayan bir **SKU kimliği** açılır pencerede.
+3.  **SKU 'lar** sekmesinde, **Yeni SKU Ekle** ' yi seçin ve açılır pencerede bir **SKU kimliği** sağlayın.
 
-4.  İçinde açıklanan adımları kullanarak IOT Edge modülü yeniden yayımlamanız [bir IOT Edge modülü, Azure Marketi'nde yayımlayabileceğiniz](./cpp-publish-offer.md).
+4.  IoT Edge modülünü [Azure Marketi 'nde IoT Edge modülü yayımlama](./cpp-publish-offer.md)bölümünde açıklanan adımları kullanarak yeniden yayımlayın.
 
-5.  Seçin **Yayımla** yeni SKU'nuz yayımlamak için iş akışını başlatmak için.
-
-
-### <a name="update-offer-marketplace-metadata"></a>Teklif Market meta verilerini güncelleştir
-
-Teklifinizle ilişkili Market meta verilerini güncelleştirmek için aşağıdaki adımları kullanın. (Örneğin: şirket adı, logolar, vs.)
-
-1.  Oturum [bulut iş ortağı portalı](https://cloudpartner.azure.com/).
-
-2.  Altında **tüm teklifleri**, güncelleştirmek istediğiniz teklif bulun.
-
-3.  Git **Market** sekmesi. Yönergeleri kullanın [bir IOT Edge modülü, Azure Marketi'nde yayımlayabileceğiniz](./cpp-publish-offer.md) makale meta verileri değişiklik yapma.
-
-4.  Seçin **Yayımla** yaptığınız değişiklikleri yayımlamak için iş akışını başlatmak için.
-
-## <a name="compare-feature"></a>Özellik karşılaştırması
-
-Yayımlanan bir teklifi üzerinde değişiklik yaptığınızda kullanabilirsiniz **karşılaştırma** yapmış olduğunuz değişiklikleri denetleme özelliği. 
-
-**Compare özelliği kullanmak için:**
-
-1.  Düzenleme işlemi içinde herhangi bir noktada seçin **karşılaştırma** teklifiniz için.
-
-    ![Özellik düğmesi karşılaştırın](./media/iot-edge-module-compare.png)
+5.  Yeni SKU 'nuzu yayımlamak üzere iş akışını başlatmak için **Yayımla** ' yı seçin.
 
 
-2.  Pazarlama varlıkları ve meta verileri yan yana sürümlerin arayın.
+### <a name="update-offer-marketplace-metadata"></a>Teklif marketi meta verilerini Güncelleştir
+
+Teklifinizle ilişkili Market meta verilerini güncelleştirmek için aşağıdaki adımları kullanın. (Örneğin: şirket adı, logolar, vb.)
+
+1.  [Bulut iş ortağı portalı](https://cloudpartner.azure.com/)oturum açın.
+
+2.  **Tüm teklifler**altında, güncelleştirmek istediğiniz teklifi bulun.
+
+3.  **Market** sekmesine gidin. meta verileri değişiklikleri yapmak Için [Azure Market 'Te IoT Edge modülü yayımlama](./cpp-publish-offer.md) makalesindeki yönergeleri kullanın.
+
+4.  Değişikliklerinizi yayımlamak için iş akışını başlatmak üzere **Yayımla** ' yı seçin.
+
+## <a name="compare-feature"></a>Karşılaştırma özelliği
+
+Yayımlanmış bir teklifte değişiklik yaptığınızda, yaptığınız değişiklikleri denetlemek için **Karşılaştır** özelliğini kullanabilirsiniz. 
+
+**Karşılaştırma özelliğini kullanmak için:**
+
+1.  Herhangi bir noktada, sizin teklifiniz için **karşılaştırma** ' yı seçin.
+
+    ![Özellik düğmesini Karşılaştır](./media/iot-edge-module-compare.png)
 
 
-## <a name="history-of-publishing-actions"></a>Eylemleri yayımlama geçmişi
+2.  Pazarlama varlıklarının ve meta verilerin yan yana sürümlerine bakın.
 
-Geçmiş yayımlama etkinlikleri görmek için seçin **geçmişi** sekmesi üzerinde sol gezinti menüsünde çubuğu, bulut iş ortağı portalı. Azure Marketi Teklifleriniz ömrü boyunca gerçekleştirilen zaman damgalı eylemleri görebilirsiniz.  <!-- Need to find correct link here:  legal time windowsFor more information, see [History page](cpp-history-page.md) -->
+
+## <a name="history-of-publishing-actions"></a>Yayımlama eylemlerinin geçmişi
+
+Geçmiş yayımlama etkinliğini görmek için Bulut İş Ortağı Portalı sol gezinti menü çubuğunda **Geçmiş** sekmesini seçin. Azure Market tekliflerinizin kullanım ömrü boyunca alınan zaman damgamış eylemleri görebilirsiniz.  <!-- Need to find correct link here:  legal time windowsFor more information, see [History page](cpp-history-page.md) -->

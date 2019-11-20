@@ -17,12 +17,12 @@ ms.author: ryanwi
 ms.reviewer: agirling, saeeda, benv
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 58136aba278097e9778cc1361ed77a4512e3d51b
-ms.sourcegitcommit: 45e4466eac6cfd6a30da9facd8fe6afba64f6f50
+ms.openlocfilehash: 0dc4c29d3a12902b3ce01f9505cba5ac02e921eb
+ms.sourcegitcommit: c0419208061b2b5579f6e16f78d9d45513bb7bbc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/07/2019
-ms.locfileid: "66751906"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67625356"
 ---
 # <a name="evolution-of-microsoft-identity-platform"></a>Microsoft Identity Platform'un gelişimi
 
@@ -50,7 +50,7 @@ Aşağıdaki diyagramda, uygulama kaydı deneyimi, SDK'lar, uç noktalar ve dest
 
 ### <a name="app-registration-experience"></a>Uygulama kayıt deneyimi
 
-Azure portalında **[uygulama kayıtları](https://go.microsoft.com/fwlink/?linkid=2083908)** Microsoft kimlik platformu ile tümleşik olan tüm uygulamaları yönetmek için bir portal deneyimi deneyimidir. Uygulama kayıt portalı kullandıysanız, Azure Portalı Uygulama kaydı deneyimini kullanmayı başlatılıyor.
+Azure portalında **[uygulama kayıtları](https://go.microsoft.com/fwlink/?linkid=2083908)** Microsoft kimlik platformu ile tümleşik olan tüm uygulamaları yönetmek için bir portal deneyimi deneyimidir. Uygulama kayıt portalı kullandıysanız, Azure Portalı Uygulama kaydı deneyimini kullanmayı başlatın.
 
 (Sosyal ya da yerel kimlik doğrularken) Azure AD B2C ile tümleştirme için bir B2C kiracısında uygulamanızı kaydetmeniz gerekir. Bu deneyim ayrıca Azure portalında bir parçasıdır.
 

@@ -9,6 +9,8 @@
   items:
     - name: Başlarken
       href: video-indexer-get-started.md
+    - name: Kullanıcıları davet etme
+      href: invite-users.md
 - name: Öğreticiler
   items:
     - name: Video Indexer API'sini kullanma
@@ -21,10 +23,16 @@
       href: compare-video-indexer-with-media-services-presets.md
     - name: Birden çok kiracıyı yönetme
       href: manage-multiple-tenants.md
+    - name: Dil tanımlama modeli
+      href: language-identification-model.md
+    - name: Canlı akış analizi
+      href: live-stream-analysis.md
     - name: İçerik modellerini özelleştirme
       items:
         - name: Genel Bakış
           href: customize-content-models-overview.md
+        - name: Animasyonlu karakterler
+          href: animated-characters-recognition.md
         - name: Markalar
           href: customize-brands-model-overview.md
         - name: Dil
@@ -43,16 +51,22 @@
       href: video-indexer-output-json-v2.md
     - name: Videoların içinde belirli anları bulma
       href: video-indexer-search.md
-    - name: 'Sahneler, çekimler, ana kareler'
+    - name: 'Sahneleri, çekimleri, ana kareleri algılama'
       href: scenes-shots-keyframes.md
+    - name: Çok dilli içeriği belirleme ve dökümünü oluşturma
+      href: multi-language-identification-transcription.md
     - name: Video Indexer içgörülerini görüntüleme ve düzenleme
       href: video-indexer-view-edit.md
     - name: Proje oluşturmak için düzenleyici kullanma
       href: use-editor-create-project.md
     - name: Uygulamanıza pencere öğeleri ekleme
       href: video-indexer-embed-widgets.md
+    - name: Olağanüstü durum kurtarma
+      href: video-indexer-disaster-recovery.md
     - name: İçerik modellerini özelleştirme
       items:
+        - name: Animasyonlu karakterler
+          href: animated-characters-recognition.md
         - name: Kişi
           items:
             - name: Video Indexer web sitesini kullanma

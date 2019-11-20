@@ -1,33 +1,29 @@
 ---
-title: Azure İzleyici - Azure Application ınsights'ı geçersiz varsayılan SDK uç noktaları | Microsoft Docs
-description: Varsayılan Azure Application Insights SDK'sı uç noktaları gibi Azure kamu bölgeleri için değiştirin.
-services: application-insights
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 3b722e47-38bd-4667-9ba4-65b7006c074c
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Izleyici-Azure Application Insights geçersiz kılma varsayılan SDK uç noktaları | Microsoft Docs
+description: Azure Kamu gibi bölgeler için varsayılan Azure Application Insights SDK uç noktalarını değiştirin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 06/25/2019
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: d086815373b84c0f2a70144a505108875fc04981
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 07/26/2019
+ms.openlocfilehash: e1db9782fe923f7a5759f4e001cd0db970606fed
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67443314"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72677489"
 ---
- # <a name="application-insights-overriding-default-endpoints"></a>Application Insights varsayılan uç noktalar geçersiz kılma
+# <a name="application-insights-overriding-default-endpoints"></a>Varsayılan uç noktaları geçersiz kılmak Application Insights
 
-Belirli bölgelerde için uygulama anlayışları'ndan veri göndermek için varsayılan uç nokta adresleri geçersiz kılmak gerekir. Her SDK, tüm bu makalede açıklanan biraz daha farklı değişiklikler gerektirir. Örnek kodu ayarlama ve yer tutucu değerlerini değiştirerek bu değişiklikler gerektirir `QuickPulse_Endpoint_Address`, `TelemetryChannel_Endpoint_Address`, ve `Profile_Query_Endpoint_address` belirli bölgeniz için gerçek bir uç nokta adresleri. Bu makalenin sonundaki yapılandırmanın gerekli olduğu bölge için uç nokta adresleri bağlantılar içerir.
+Application Insights verileri belirli bölgelere göndermek için varsayılan uç nokta adreslerini geçersiz kılmanız gerekir. Her SDK, hepsi bu makalede açıklanan biraz farklı değişiklik gerektirir. Bu değişiklikler, örnek kodu ayarlamayı ve `QuickPulse_Endpoint_Address`, `TelemetryChannel_Endpoint_Address` ve `Profile_Query_Endpoint_address` için yer tutucu değerlerini belirli bölgenizin gerçek uç nokta adresleriyle değiştirmeyi gerektirir. Bu makalenin sonunda, bu yapılandırmanın gerekli olduğu bölgelere yönelik uç nokta adreslerinin bağlantıları bulunur.
 
-## <a name="sdk-code-changes"></a>SDK kod değişiklikleri
+## <a name="sdk-code-changes"></a>SDK kodu değişiklikleri
 
-### <a name="net-with-applicationinsightsconfig"></a>Applicationınsights.config ile .NET
+### <a name="net-with-applicationinsightsconfig"></a>ApplicationInsights. config ile .NET
 
 > [!NOTE]
-> SDK'sını yükseltme gerçekleştirilmeden zaman applicationınsights.config dosyası otomatik olarak üzerine yazılır. SDK'sı yükseltmesini gerçekleştirdikten sonra bölgeye özgü uç nokta değerleri yeniden girin emin olun.
+> Her bir SDK yükseltmesi gerçekleştirildiğinde ApplicationInsights. config dosyası otomatik olarak üzerine yazılır. SDK yükseltmesini gerçekleştirdikten sonra bölgeye özgü uç nokta değerlerini yeniden girdiğinizden emin olun.
 
 ```xml
 <ApplicationInsights>
@@ -49,9 +45,9 @@ Belirli bölgelerde için uygulama anlayışları'ndan veri göndermek için var
 </ApplicationInsights>
 ```
 
-### <a name="net-core"></a>.NET Core
+### <a name="aspnet-core"></a>ASP.NET Core
 
-Appsettings.json dosyasını aşağıdaki gibi ana uç ayarlamak için projenizdeki değiştirin:
+Ana uç noktayı ayarlamak için projenizdeki appSettings. json dosyasını aşağıdaki şekilde değiştirin:
 
 ```json
 "ApplicationInsights": {
@@ -62,24 +58,75 @@ Appsettings.json dosyasını aşağıdaki gibi ana uç ayarlamak için projenizd
   }
 ```
 
-Canlı Ölçümler ve profili sorgu uç noktası için değerleri, yalnızca kod ayarlanabilir. Kod aracılığıyla tüm uç nokta değerleri için varsayılan değerleri geçersiz kılmak için aşağıdaki değişiklikleri yapın `ConfigureServices` yöntemi `Startup.cs` dosyası:
+Canlı ölçümler ve profil sorgu uç noktası değerleri yalnızca kod aracılığıyla ayarlanabilir. Tüm uç nokta değerlerinin varsayılan değerlerini kod aracılığıyla geçersiz kılmak için, `Startup.cs` dosyasının `ConfigureServices` yönteminde aşağıdaki değişiklikleri yapın:
 
 ```csharp
 using Microsoft.ApplicationInsights.Extensibility.Implementation.ApplicationId;
-using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse; //place at top of Startup.cs file
+using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse; //Place at top of Startup.cs file
 
    services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o) => module.QuickPulseServiceEndpoint="QuickPulse_Endpoint_Address");
 
-   services.AddSingleton(new ApplicationInsightsApplicationIdProvider() { ProfileQueryEndpoint = "Profile_Query_Endpoint_address" });
+   services.AddSingleton<IApplicationIdProvider, ApplicationInsightsApplicationIdProvider>(_ => new ApplicationInsightsApplicationIdProvider() { ProfileQueryEndpoint = "Profile_Query_Endpoint_address" });
 
-   services.AddSingleton<ITelemetryChannel>(new ServerTelemetryChannel() { EndpointAddress = "TelemetryChannel_Endpoint_Address" });
+   services.AddSingleton<ITelemetryChannel>(_ => new ServerTelemetryChannel() { EndpointAddress = "TelemetryChannel_Endpoint_Address" });
 
-    //place in ConfigureServices method. If present, place this prior to   services.AddApplicationInsightsTelemetry("instrumentation key");
+    //Place in the ConfigureServices method. Place this before services.AddApplicationInsightsTelemetry("instrumentation key"); if it's present
+```
+
+### <a name="azure-functions-v2x"></a>Azure Işlevleri v2. x
+
+Aşağıdaki paketleri işlev projenize yükler:
+
+- Microsoft. ApplicationInsights sürümü 2.10.0
+- Microsoft. ApplicationInsights. PerfCounterCollector sürüm 2.10.0
+- Microsoft. ApplicationInsights. WindowsServer. TelemetryChannel sürüm 2.10.0
+
+Ardından, işlev uygulamanız için başlangıç kodunu ekleyin (veya değiştirin):
+
+```csharp
+[assembly: WebJobsStartup(typeof(Example.Startup))]
+namespace Example
+{
+  class Startup : FunctionsStartup
+  {
+      public override void Configure(IWebJobsBuilder builder)
+      {
+          var quickPulseFactory = builder.Services.FirstOrDefault(sd => sd.ServiceType == typeof(ITelemetryModule) && 
+                                               sd.ImplementationType == typeof(QuickPulseTelemetryModule));
+          if (quickPulseFactory != null)
+          {
+              builder.Services.Remove(quickPulseFactory);
+          }
+
+          var appIdFactory = builder.Services.FirstOrDefault(sd => sd.ServiceType == typeof(IApplicationIdProvider));
+          if (appIdFactory != null)
+          {
+              builder.Services.Remove(appIdFactory);
+          }
+
+          var channelFactory = builder.Services.FirstOrDefault(sd => sd.ServiceType == typeof(ITelemetryChannel));
+          if (channelFactory != null)
+          {
+              builder.Services.Remove(channelFactory);
+          }
+
+          builder.Services.AddSingleton<ITelemetryModule, QuickPulseTelemetryModule>(_ =>
+              new QuickPulseTelemetryModule
+              {
+                  QuickPulseServiceEndpoint = "QuickPulse_Endpoint_Address"
+              });
+
+          builder.Services.AddSingleton<IApplicationIdProvider, ApplicationInsightsApplicationIdProvider>(_ => new ApplicationInsightsApplicationIdProvider() { ProfileQueryEndpoint = "Profile_Query_Endpoint_address" });
+
+          builder.Services.AddSingleton<ITelemetryChannel>(_ => new ServerTelemetryChannel() { EndpointAddress = "TelemetryChannel_Endpoint_Address" });
+      }
+  }
+}
 ```
 
 ### <a name="java"></a>Java
 
-Varsayılan uç nokta adresini değiştirmek için applicationınsights.xml dosyasını değiştirin.
+ApplicationInsights. xml dosyasını değiştirerek varsayılan uç nokta adresini değiştirin.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -106,7 +153,7 @@ Varsayılan uç nokta adresini değiştirmek için applicationınsights.xml dosy
 
 ### <a name="spring-boot"></a>Spring Boot
 
-Değiştirme `application.properties` dosya ve ekleyin:
+@No__t_0 dosyasını değiştirin ve şunu ekleyin:
 
 ```yaml
 azure.application-insights.channel.in-process.endpoint-address= TelemetryChannel_Endpoint_Address
@@ -123,7 +170,7 @@ appInsights.defaultClient.config.quickPulseHost = "QuickPulse_Endpoint_Address";
 appInsights.Configuration.start();
 ```
 
-Uç noktaları ortam değişkenlerini de yapılandırılabilir:
+Uç noktalar, ortam değişkenleri aracılığıyla da yapılandırılabilir:
 
 ```
 Instrumentation Key: "APPINSIGHTS_INSTRUMENTATIONKEY"
@@ -135,34 +182,40 @@ Live Metrics Endpoint: "QuickPulse_Endpoint_Address"
 
 ```javascript
 <script type="text/javascript">
-   var sdkInstance="appInsightsSDK";window[sdkInstance]="appInsights";var aiName=window[sdkInstance],aisdk=window[aiName]||function(e){
-      function n(e){t[e]=function(){var n=arguments;t.queue.push(function(){t[e].apply(t,n)})}}var t={config:e};t.initialize=!0;var i=document,a=window;setTimeout(function(){var n=i.createElement("script");n.src=e.url||"https://az416426.vo.msecnd.net/next/ai.2.min.js",i.getElementsByTagName("script")[0].parentNode.appendChild(n)});try{t.cookie=i.cookie}catch(e){}t.queue=[],t.version=2;for(var r=["Event","PageView","Exception","Trace","DependencyData","Metric","PageViewPerformance"];r.length;)n("track"+r.pop());n("startTrackPage"),n("stopTrackPage");var s="Track"+r[0];if(n("start"+s),n("stop"+s),n("setAuthenticatedUserContext"),n("clearAuthenticatedUserContext"),n("flush"),!(!0===e.disableExceptionTracking||e.extensionConfig&&e.extensionConfig.ApplicationInsightsAnalytics&&!0===e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)){n("_"+(r="onerror"));var o=a[r];a[r]=function(e,n,i,a,s){var c=o&&o(e,n,i,a,s);return!0!==c&&t["_"+r]({message:e,url:n,lineNumber:i,columnNumber:a,error:s}),c},e.autoExceptionInstrumented=!0}return t
-   }({
-      instrumentationKey:"INSTRUMENTATION_KEY"
+    var sdkInstance="appInsightsSDK";window[sdkInstance]="appInsights";var aiName=window[sdkInstance],aisdk=window[aiName]||function(e){function n(e){t[e]=function(){var n=arguments;t.queue.push(function(){t[e].apply(t,n)})}}var t={config:e};t.initialize=!0;var i=document,a=window;setTimeout(function(){var n=i.createElement("script");n.src=e.url||"https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js",i.getElementsByTagName("script")[0].parentNode.appendChild(n)});try{t.cookie=i.cookie}catch(e){}t.queue=[],t.version=2;for(var r=["Event","PageView","Exception","Trace","DependencyData","Metric","PageViewPerformance"];r.length;)n("track"+r.pop());n("startTrackPage"),n("stopTrackPage");var s="Track"+r[0];if(n("start"+s),n("stop"+s),n("setAuthenticatedUserContext"),n("clearAuthenticatedUserContext"),n("flush"),!(!0===e.disableExceptionTracking||e.extensionConfig&&e.extensionConfig.ApplicationInsightsAnalytics&&!0===e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)){n("_"+(r="onerror"));var o=a[r];a[r]=function(e,n,i,a,s){var c=o&&o(e,n,i,a,s);return!0!==c&&t["_"+r]({message:e,url:n,lineNumber:i,columnNumber:a,error:s}),c},e.autoExceptionInstrumented=!0}return t}(
+    {
+      instrumentationKey:"INSTRUMENTATION_KEY",
       endpointUrl: "TelemetryChannel_Endpoint_Address"
-   });
-
-   window[aiName]=aisdk,aisdk.queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
+    }
+    );window[aiName]=aisdk,aisdk.queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
 </script>
 ```
 
 ## <a name="regions-that-require-endpoint-modification"></a>Uç nokta değişikliği gerektiren bölgeler
 
-Şu anda uç noktası değişiklikleri gerektiren tek bölge olduğunu [Azure kamu](https://docs.microsoft.com/azure/azure-government/documentation-government-services-monitoringandmanagement#application-insights) ve [Azure Çin](https://docs.microsoft.com/azure/china/resources-developer-guide).
+Şu anda yalnızca uç nokta değişiklikleri gerektiren bölgeler [Azure Kamu](https://docs.microsoft.com/azure/azure-government/documentation-government-services-monitoringandmanagement#application-insights) ve [Azure Çin](https://docs.microsoft.com/azure/china/resources-developer-guide)' dir.
 
 |Bölge |  Uç nokta adı | Değer |
 |-----------------|:------------|:-------------|
-| Azure Çin | Telemetri kanal | `https://dc.applicationinsights.azure.cn/v2/track` |
-| Azure Çin | QuickPulse (Canlı ölçümleri) |`https://quickpulse.applicationinsights.azure.cn/QuickPulseService.svc` |
-| Azure Çin | Profil sorgu |`https://dc.applicationinsights.azure.cn/api/profiles/{0}/appId`  |
-| Azure Kamu | Telemetri kanal |`https://dc.applicationinsights.us/v2/track` |
-| Azure Kamu | QuickPulse (Canlı ölçümleri) |`https://quickpulse.applicationinsights.us/QuickPulseService.svc` |
-| Azure Kamu | Profil sorgu |`https://dc.applicationinsights.us/api/profiles/{0}/appId` |
+| Azure Çin | Telemetri kanalı | `https://dc.applicationinsights.azure.cn/v2/track` |
+| Azure Çin | QuickPulse (canlı ölçümler) |`https://live.applicationinsights.azure.cn/QuickPulseService.svc` |
+| Azure Çin | Profil sorgusu |`https://dc.applicationinsights.azure.cn/api/profiles/{0}/appId`  |
+| Azure Devlet Kurumları | Telemetri kanalı |`https://dc.applicationinsights.us/v2/track` |
+| Azure Devlet Kurumları | QuickPulse (canlı ölçümler) |`https://quickpulse.applicationinsights.us/QuickPulseService.svc` |
+| Azure Devlet Kurumları | Profil sorgusu |`https://dc.applicationinsights.us/api/profiles/{0}/appId` |
+
+Şu anda ' api.applicationinsights.io ' aracılığıyla erişilen [Application Insights REST API](https://dev.applicationinsights.io/
+) kullanıyorsanız, bölgeniz için yerel bir uç nokta kullanmanız gerekir:
+
+|Bölge |  Uç nokta adı | Değer |
+|-----------------|:------------|:-------------|
+| Azure Çin | REST API | `api.applicationinsights.azure.cn` |
+| Azure Devlet Kurumları | REST API | `api.applicationinsights.us`|
 
 > [!NOTE]
-> Kodsuz Aracı Uzantısı tabanlı Azure uygulama hizmetleri için izleme **şu anda desteklenmeyen** bu bölgelerde. Bu işlevselliği kullanılabilir duruma geldiğinde bu makale güncelleştirilecektir.
+> Azure Uygulama Hizmetleri için codeless Aracısı/uzantısı tabanlı izleme şu **anda** bu bölgelerde desteklenmiyor. Bu işlevsellik kullanılabilir hale geldiğinde, bu makale güncelleştirilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure devlet kurumları için özel değişiklikler hakkında daha fazla bilgi için ayrıntılı yönergeler için başvurun [Azure izleme ve Yönetim](https://docs.microsoft.com/azure/azure-government/documentation-government-services-monitoringandmanagement#application-insights).
-- Azure Çin hakkında daha fazla bilgi için bakın [Azure Çin Playbook](https://docs.microsoft.com/azure/china/).
+- Azure Kamu ile ilgili özel değişiklikler hakkında daha fazla bilgi edinmek için [Azure izleme ve yönetimine](https://docs.microsoft.com/azure/azure-government/documentation-government-services-monitoringandmanagement#application-insights)yönelik ayrıntılı kılavuza başvurun.
+- Azure Çin hakkında daha fazla bilgi edinmek için [Azure Çin PlayBook](https://docs.microsoft.com/azure/china/)' a bakın.

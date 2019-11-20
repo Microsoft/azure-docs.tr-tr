@@ -2,30 +2,30 @@
 title: Grup sahipleri - Azure Active Directory Ekle Kaldır | Microsoft Docs
 description: Azure Active Directory'yi kullanarak sahipleri ekleme veya kaldırma hakkında yönergeler grubu.
 services: active-directory
-author: eross-msft
+author: msaburnley
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: fundamentals
 ms.topic: conceptual
 ms.date: 09/11/2018
-ms.author: lizross
+ms.author: ajburnle
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cd684e1bd48f877a74280b33b4df65d7baaa0fe7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d259be0c04af0fcf3628a9f296730749404610cb
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65507182"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68562084"
 ---
 # <a name="add-or-remove-group-owners-in-azure-active-directory"></a>Ekleme veya Azure Active Directory'de Grup sahipleri kaldırma
-Azure Active Directory (Azure AD) gruplarına ait ve Grup sahipleri tarafından yönetilir. Grup sahipleri, kullanıcı veya hizmet sorumluları olabilir ve grubun üyeliği de dahil olmak üzere yönetebilir. Yalnızca var olan Grup sahipleri veya grup yöneten yöneticiler grubu onwers atayabilirsiniz. Grup sahipleri güvenlik grubunun üyesi olması gerekmez.
+Azure Active Directory (Azure AD) gruplarına ait ve Grup sahipleri tarafından yönetilir. Grup sahipleri Kullanıcı veya hizmet sorumluları olabilir ve üyeliği dahil olmak üzere grubu yönetebilir. Yalnızca var olan Grup sahipleri veya grupları-Yöneticiler Grup onwers atayabilir. Grup sahipleri güvenlik grubunun üyesi olması gerekmez.
 
-Bir grup sahibi yok, Grup Yönetimi grubunu yönetmek hala mümkün yöneticilerdir.
+Bir grubun sahibi olmadığında, Grup Yönetimi Yöneticiler grubu yine de yönetebilecektir.
 
 ## <a name="add-an-owner-to-a-group"></a>Gruba sahip ekleme
-Aşağıda bir gruba sahip olarak kullanıcı ekleme yönergeleri, Azure AD portalı kullanıyorsunuz. Bir grubun sahibi bir hizmet sorumlusu ekleme için kullanarak bunu yapmak için yönergeleri izleyin [PowerShell](https://docs.microsoft.com/powershell/module/Azuread/Add-AzureADGroupOwner?view=azureadps-2.0).
+Aşağıda, bir kullanıcıyı Azure AD portalını kullanarak bir gruba sahip olarak ekleme yönergeleri verilmiştir. Bir hizmet sorumlusunu bir grubun sahibi olarak eklemek için, [PowerShell](https://docs.microsoft.com/powershell/module/Azuread/Add-AzureADGroupOwner?view=azureadps-2.0)'i kullanarak bunu yapmak için yönergeleri izleyin.
 
 ### <a name="to-add-a-group-owner"></a>Bir grup sahibi eklemek için
 1. Dizin için bir Genel yönetici hesabı kullanarak [Azure portalda](https://portal.azure.com) oturum açın.

@@ -1,274 +1,211 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile Kanbanize | Microsoft Docs'
-description: Azure Active Directory ve Kanbanize arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Kanbanize ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve Kanbanize arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
-ms.reviewer: joflore
+manager: mtillman
+ms.reviewer: barbkess
 ms.assetid: b436d2f6-bfa5-43fd-a8f9-d2144dc25669
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 07/12/2018
+ms.topic: tutorial
+ms.date: 10/09/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 22c136225e5a8526afd482e5ef8400198947422f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7c5a3a096c5a44f681d23587837ae31fd1af33b2
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60263637"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72373220"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-kanbanize"></a>Öğretici: Kanbanize ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-kanbanize"></a>Öğretici: Kanbanize ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Kanbanize tümleştirme konusunda bilgi edinin.
+Bu öğreticide, Kanbanize Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. Kanbanize Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-Azure AD ile Kanbanize tümleştirme ile aşağıdaki avantajları sağlar:
+* Azure AD 'de Kanbanize erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla Kanbanize etmek için otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-- Kanbanize erişimi, Azure AD'de kontrol edebilirsiniz.
-- Otomatik olarak imzalanan için Kanbanize (çoklu oturum açma) ile Azure AD hesaplarına açma, kullanıcılarınızın etkinleştirebilirsiniz.
-- Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
-
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](../manage-apps/what-is-single-sign-on.md).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile Kanbanize yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-- Azure AD aboneliği
-- Abonelik Kanbanize çoklu oturum açma etkin
-
-> [!NOTE]
-> Bu öğreticideki adımları test etmek için üretim ortamı kullanarak önermiyoruz.
-
-Bu öğreticideki adımları test etmek için bu önerileri izlemelidir:
-
-- Gerekli olmadıkça, üretim ortamında kullanmayın.
-- Azure AD deneme ortamı yoksa, şunları yapabilirsiniz [bir aylık deneme sürümü edinin](https://azure.microsoft.com/pricing/free-trial/).
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Kanbanize çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
-Bu öğreticide, Azure AD çoklu oturum açma bir test ortamında test edin. Bu öğreticide özetlenen senaryo iki temel yapı taşları oluşur:
 
-1. Galeriden Kanbanize ekleme
-2. Yapılandırma ve test Azure AD çoklu oturum açma
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
+
+* Kanbanize **SP ve ıDP** tarafından başlatılan SSO destekleniyor
+* Kanbanize **, tam zamanında** Kullanıcı sağlamayı destekliyor
 
 ## <a name="adding-kanbanize-from-the-gallery"></a>Galeriden Kanbanize ekleme
-Azure AD'de Kanbanize tümleştirmesini yapılandırmak için Kanbanize Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Galeriden Kanbanize eklemek için aşağıdaki adımları gerçekleştirin:**
+Kanbanize tümleştirmesini Azure AD ile yapılandırmak için, galerinizden yönetilen SaaS uygulamaları listenize Kanbanize eklemeniz gerekir.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi. 
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **kanbanize** yazın.
+1. Sonuçlar panelinden **Kanbanize** ' yı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-    ![Azure Active Directory düğmesi][1]
+## <a name="configure-and-test-azure-ad-single-sign-on-for-kanbanize"></a>Kanbanize için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-2. Gidin **kurumsal uygulamalar**. Ardından **tüm uygulamaları**.
+**B. Simon**adlı bir test kullanıcısı kullanarak Kanbanize Ile Azure AD SSO 'yu yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ve Kanbanize içindeki ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-    ![Kurumsal uygulamalar dikey penceresi][2]
-    
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+Azure AD SSO 'yu Kanbanize ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-    ![Yeni Uygulama düğmesi][3]
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    1. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Kanbanize SSO 'Yu yapılandırın](#configure-kanbanize-sso)** .
+    1. Kullanıcı Azure AD gösterimine bağlı olan Kanbanize 'da B. Simon 'a sahip olmak için **[kanbanize test kullanıcısı oluşturun](#create-kanbanize-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-4. Arama kutusuna **Kanbanize**seçin **Kanbanize** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-    ![Sonuç listesinde Kanbanize](./media/kanbanize-tutorial/tutorial_kanbanize_addfromgallery.png)
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+1. [Azure Portal](https://portal.azure.com/), **kanbanize** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-Bu bölümde, yapılandırın ve Azure AD çoklu oturum açma "Britta Simon" adlı bir test kullanıcı tabanlı Kanbanize sınayın.
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-Tek iş için oturum açma için Azure AD ne Kanbanize karşılığı kullanıcı için bir kullanıcı Azure AD'de olduğunu bilmeniz gerekir. Diğer bir deyişle, bir Azure AD kullanıcısının Kanbanize ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+1. **Temel SAML yapılandırması** bölümünde, **IDP** tarafından başlatılan modda uygulamayı yapılandırmak istiyorsanız aşağıdaki alanlar için değerleri girin:
 
-Yapılandırma ve Azure AD çoklu oturum açma Kanbanize ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+     a. **Tanımlayıcı** metin kutusuna şu kalıbı kullanarak bir URL yazın: `https://<subdomain>.kanbanize.com/`
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-3. **[Kanbanize test kullanıcısı oluşturma](#create-a-kanbanize-test-user)**  - kullanıcı Azure AD gösterimini bağlı Kanbanize Britta simon'un bir karşılığı vardır.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+    b. **Yanıt URL 'si** metin kutusuna şu kalıbı kullanarak bir URL yazın: `https://<subdomain>.kanbanize.com/saml/acs`
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+    c. **Ek URL 'Ler ayarla**' ya tıklayın.
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin ve Kanbanize uygulamanızda çoklu oturum açmayı yapılandırın.
+    d. **Geçiş durumu** metin kutusuna bir URL yazın: `/ctrl_login/saml_login`
 
-**Azure AD çoklu oturum açma ile Kanbanize yapılandırmak için aşağıdaki adımları gerçekleştirin:**
+1. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-1. Azure portalında, üzerinde **Kanbanize** uygulama tümleştirme sayfasını tıklatın **çoklu oturum açma**.
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<subdomain>.kanbanize.com`
 
-    ![Çoklu oturum açma bağlantısı yapılandırma][4]
+    > [!NOTE]
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı, yanıt URL 'SI ve oturum açma URL 'SI ile güncelleştirin. Bu değerleri almak için [Kanbanize istemci destek ekibine](mailto:support@ms.kanbanize.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-2. Üzerinde **çoklu oturum açma** iletişim kutusunda **modu** olarak **SAML tabanlı oturum açma** çoklu oturum açmayı etkinleştirmek için.
- 
-    ![Çoklu oturum açma iletişim kutusu](./media/kanbanize-tutorial/tutorial_kanbanize_samlbase.png)
+1. Kanbanize uygulaması, SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde SAML onayları bekliyor. Aşağıdaki ekran görüntüsünde, NameIdentifier 'ın **User. UserPrincipalName**ile eşlendiği varsayılan özniteliklerin listesi gösterilmektedir. Kanbanize uygulaması NameIdentifier 'ın **User. Mail**ile eşlenmesini bekliyor, bu nedenle, Düzenle simgesine tıklayarak ve öznitelik eşlemesini değiştirerek öznitelik eşlemesini düzenlemeniz gerekir.
 
-3. Üzerinde **Kanbanize etki alanı ve URL'ler** bölümünde, uygulamada yapılandırmak istiyorsanız aşağıdaki adımları gerçekleştirin **IDP** başlatılan modu:
+    ![image](common/edit-attribute.png)
 
-    ![Kanbanize etki alanı ve URL'ler tek oturum açma bilgileri](./media/kanbanize-tutorial/tutorial_kanbanize_url.png)
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama sertifikası** bölümünde **sertifika bulun (base64)** ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-    a. İçinde **tanımlayıcı** metin kutusuna bir URL şu biçimi kullanarak: `https://<subdomain>.kanbanize.com/`
+    ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-    b. İçinde **yanıt URL'si** metin kutusuna bir URL şu biçimi kullanarak: `https://<subdomain>.kanbanize.com/saml/acs`
+1. Bir **Kanbanize ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    c. Denetleme **Gelişmiş URL ayarlarını göster**.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    d.  İçinde **geçiş durumu** metin kutusuna bir URL: `/ctrl_login/saml_login`
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-    e. Uygulamada yapılandırmak istiyorsanız **SP** modunda başlatılan **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<subdomain>.kanbanize.com`
-     
-    > [!NOTE] 
-    > Bu değerler gerçek değildir. Bu değerler gerçek tanımlayıcısı, yanıt URL'si ve oturum açma URL'si ile güncelleştirin. İlgili kişi [Kanbanize istemci Destek ekibine](mailto:support@ms.kanbanize.com) bu değerleri almak için. 
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-5. Kanbanize uygulama, özel öznitelik eşlemelerini SAML belirteci öznitelikleri yapılandırmanıza ekleyin gerektiren belirli bir biçimde SAML onaylamalarını bekler. Aşağıdaki ekran görüntüsü bunun bir örneği gösterilmektedir. Varsayılan değer olan **kullanıcı tanımlayıcısı** olduğu **user.userprincipalname** ancak Kanbanize bu kullanıcının e-posta adresi ile eşlenmesini bekliyor. Bunun için kullanabileceğiniz **user.mail** listeden öznitelik veya kuruluş yapılandırmanıza göre uygun öznitelik değeri kullanın
-    
-    ![Çoklu oturum açmayı yapılandırın](./media/kanbanize-tutorial/tutorial_Kanbanize_attribute.png)
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extension girin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**’a tıklayın.
 
-6. Üzerinde **SAML imzalama sertifikası** bölümünde **sertifika (Base64)** ve bilgisayarınızdaki sertifika dosyasını kaydedin.
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-    ![Sertifika indirme bağlantısı](./media/kanbanize-tutorial/tutorial_kanbanize_certificate.png) 
+Bu bölümde, Kanbanize erişimi vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-7. Tıklayın **Kaydet** düğmesi.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde **Kanbanize**' yı seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-    ![Çoklu oturum açma Kaydet düğmesi yapılandırın](./media/kanbanize-tutorial/tutorial_general_400.png)
-    
-8. Üzerinde **Kanbanize yapılandırma** bölümünde **yapılandırma Kanbanize** açmak için **yapılandırma oturum açma** penceresi. Kopyalama **oturum kapatma URL'si, SAML varlık kimliği ve SAML çoklu oturum açma hizmeti URL'si** gelen **hızlı başvuru bölümü.**
+   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-    ![Kanbanize yapılandırma](./media/kanbanize-tutorial/tutorial_kanbanize_configure.png)
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-9. Bir başka web tarayıcı penceresinde Kanbanize bir güvenlik yöneticisi olarak oturum açın. 
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-10. Sayfanın sağ üst, tıklayarak Git **ayarları** logosu.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    ![Kanbanize ayarları](./media/kanbanize-tutorial/tutorial_kanbanize_set.png)
+## <a name="configure-kanbanize-sso"></a>Kanbanize SSO 'yu yapılandırma
 
-11. Menü sol tarafındaki yönetim paneli sayfasına tıklayın **tümleştirmeler** ve etkinleştirin **çoklu oturum açma**. 
+1. Kanbanize içindeki yapılandırmayı otomatikleştirmek için, **uzantıyı yüklemek**üzere **uygulamalarımı güvenli oturum açma tarayıcı uzantısı** ' nı yüklemeniz gerekir.
 
-    ![Kanbanize tümleştirmeleri](./media/kanbanize-tutorial/tutorial_kanbanize_admin.png)
+    ![Uygulamalarım uzantısı](common/install-myappssecure-extension.png)
 
-12. Tümleştirmeler bölümü altında tıklayarak **yapılandırma** açmak için **tek oturum açma tümleştirmesi** sayfası.
+2. Tarayıcıya uzantı ekledikten sonra, bunu ayarla ' ya tıklayarak **Kanbanize** 'ya tıklayın, sizi kanbanize uygulamasına yönlendirir. Buradan, Kanbanize oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı, uygulamayı sizin için otomatik olarak yapılandırır ve 3-7 adımlarını otomatikleştirecektir.
 
-    ![Kanbanize yapılandırma](./media/kanbanize-tutorial/tutorial_kanbanize_config.png)
+    ![Kurulum yapılandırması](common/setup-sso.png)
 
-13. Üzerinde **tek oturum açma tümleştirmesi** altındaki **yapılandırmaları**, aşağıdaki adımları gerçekleştirin:
+3. Kanbanize el ile ayarlamak istiyorsanız yeni bir Web tarayıcı penceresi açın ve bir yönetici olarak Kanbanize şirket sitenizde oturum açın ve aşağıdaki adımları gerçekleştirin:
 
-    ![Kanbanize tümleştirmeleri](./media/kanbanize-tutorial/tutorial_kanbanize_save.png)
+4. Sayfanın sağ üst kısmına gidin, **Ayarlar** logosu ' na tıklayın.
 
-    a. İçinde **IDP varlık kimliği** metin değerini yapıştırın **SAML varlık kimliği**, hangi Azure portaldan kopyaladığınız.
+    ![Kanbanize ayarları](./media/kanbanize-tutorial/tutorial-kanbanize-set.png)
 
-    b. İçinde **Idp'nin oturum açma uç noktası** metin değerini yapıştırın **SAML çoklu oturum açma hizmeti URL'si**, hangi Azure portaldan kopyaladığınız.
+5. Menünün sol tarafındaki yönetim paneli sayfasında, **tümleştirmeler** ' e tıklayın ve **Çoklu oturum açmayı**etkinleştirin.
 
-    c. İçinde **IDP oturum kapatma uç noktasına** metin değerini yapıştırın **oturum kapatma URL'si**, hangi Azure portaldan kopyaladığınız.
+    ![Kanbanize tümleştirmeler](./media/kanbanize-tutorial/tutorial-kanbanize-admin.png)
 
-    d. İçinde **e-posta için öznitelik adı** metin kutusuna şu değeri girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
+6. Tümleştirmeler bölümünde, **tek oturum açma tümleştirmesi** sayfasını açmak için **Yapılandır** ' a tıklayın.
 
-    e. İçinde **ad özniteliği adı** metin kutusuna şu değeri girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`
+    ![Kanbanize yapılandırması](./media/kanbanize-tutorial/tutorial-kanbanize-config.png)
 
-    f. İçinde **öznitelik adı soyadı** metin kutusuna şu değeri girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname` 
+7. **Yapılandırma**altındaki **Çoklu oturum açma tümleştirmesi** sayfasında, aşağıdaki adımları uygulayın:
+
+    ![Kanbanize tümleştirmeler](./media/kanbanize-tutorial/tutorial-kanbanize-save.png)
+
+    a. **IDP VARLıK kimliği** metin kutusunda, Azure Portal KOPYALADıĞıNıZ **Azure AD tanımlayıcısının**değerini yapıştırın.
+
+    b. **IDP oturum açma uç noktası** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si**değerini yapıştırın.
+
+    c. **IDP oturum kapatma uç noktası** metin kutusunda, Azure Portal kopyaladığınız **Logout URL 'si**değerini yapıştırın.
+
+    d. **E-posta metin kutusu Için öznitelik adı** ' nda, bu değeri girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
+
+    e. **Ilk ad metin kutusu Için öznitelik adı** kutusuna bu değeri girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`
+
+    f. **Son ad metin kutusu Için öznitelik adı** kutusuna bu değeri girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname`
+
     > [!Note]
-    > Azure portalındaki kullanıcı öznitelikleri bölümünden ilgili öznitelik ad alanı ve ad değerlerini bir araya getirerek, bu değerleri alabilirsiniz.
+    > Bu değerleri, ilgili özniteliğin ad alanı ve ad değerlerini Azure portal içindeki Kullanıcı öznitelikleri bölümünden birleştirerek alabilirsiniz.
 
-    g. Not Defteri'nde, Azure portalından indirdiğiniz base-64 kodlanmış sertifika açın, içeriğini (olmadan, başlangıç ve bitiş işaretleri) kopyalayın ve ardından yapıştırın **IDP X.509 sertifikası** kutusu.
+    g. Not defteri 'nde, Azure portal indirdiğiniz temel 64 kodlu sertifikayı açın, içeriğini kopyalayın (başlangıç ve bitiş işaretçileri olmadan) ve ardından onu **IDP X. 509.440 sertifika** kutusuna yapıştırın.
 
-    h. Denetleme **etkinleştir oturum açma SSO hem Kanbanize**.
-    
-    i. Tıklayın **ayarlarını kaydetmek**.
+    h. **SSO ve Kanbanize ile oturum açmayı etkinleştir ' i**işaretleyin.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+    i. **Ayarları Kaydet**' e tıklayın.
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+### <a name="create-kanbanize-test-user"></a>Kanbanize test kullanıcısı oluştur
 
-   ![Bir Azure AD test kullanıcısı oluşturma][100]
+Bu bölümde, Kanbanize içinde B. Simon adlı bir Kullanıcı oluşturulur. Kanbanize, varsayılan olarak etkinleştirilen tam zamanında Kullanıcı sağlamayı destekler. Bu bölümde sizin için herhangi bir eylem öğesi yok. Bir Kullanıcı Kanbanize 'de zaten mevcut değilse, kimlik doğrulamasından sonra yeni bir tane oluşturulur. El ile bir kullanıcı oluşturmanız gerekiyorsa, [istemci desteği ekibine](mailto:support@ms.kanbanize.com)başvurun.
 
-**Azure AD'de bir test kullanıcısı oluşturmak için aşağıdaki adımları gerçekleştirin:**
+## <a name="test-sso"></a>Test SSO 'SU 
 
-1. Azure portalında, sol bölmede, tıklayın **Azure Active Directory** düğmesi.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-    ![Azure Active Directory düğmesi](./media/kanbanize-tutorial/create_aaduser_01.png)
-
-2. Kullanıcıların listesini görüntülemek için Git **kullanıcılar ve gruplar**ve ardından **tüm kullanıcılar**.
-
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](./media/kanbanize-tutorial/create_aaduser_02.png)
-
-3. Açmak için **kullanıcı** iletişim kutusu, tıklayın **Ekle** en üstündeki **tüm kullanıcılar** iletişim kutusu.
-
-    ![Ekle düğmesi](./media/kanbanize-tutorial/create_aaduser_03.png)
-
-4. İçinde **kullanıcı** iletişim kutusunda, aşağıdaki adımları gerçekleştirin:
-
-    ![Kullanıcı iletişim kutusu](./media/kanbanize-tutorial/create_aaduser_04.png)
-
-    a. İçinde **adı** kutusuna **BrittaSimon**.
-
-    b. İçinde **kullanıcı adı** Britta Simon kullanıcı e-posta adresini yazın.
-
-    c. Seçin **Göster parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
-
-    d. **Oluştur**’a tıklayın.
- 
-### <a name="create-a-kanbanize-test-user"></a>Kanbanize test kullanıcısı oluşturma
-
-Bu bölümün amacı Kanbanize Britta Simon adlı bir kullanıcı oluşturmaktır. Kanbanize tam zamanında sağlama, varsayılan olarak etkin olan destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Yeni bir kullanıcı, henüz yoksa Kanbanize erişme denemesi sırasında oluşturulur.
-
->[!Note]
->Bir kullanıcı el ile oluşturmanız gerekiyorsa, kişi [Kanbanize istemci Destek ekibine](mailto:support@ms.kanbanize.com).
-
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
-
-Bu bölümde, Azure çoklu oturum açma kullanmak için Kanbanize erişim vererek Britta Simon etkinleştirin.
-
-![Kullanıcı rolü atayın][200] 
-
-**Britta Simon Kanbanize için atamak için aşağıdaki adımları gerçekleştirin:**
-
-1. Azure portalında uygulama görünümü açtığınız dizin görünümüne gidin ve Git **kurumsal uygulamalar** ardından **tüm uygulamaları**.
-
-    ![Kullanıcı Ata][201] 
-
-2. Uygulamalar listesinde **Kanbanize**.
-
-    ![Uygulamalar listesinde Kanbanize bağlantı](./media/kanbanize-tutorial/tutorial_kanbanize_app.png)  
-
-3. Soldaki menüde **kullanıcılar ve gruplar**.
-
-    !["Kullanıcılar ve Gruplar" bağlantısı][202]
-
-4. Tıklayın **Ekle** düğmesi. Ardından **kullanıcılar ve gruplar** üzerinde **atama Ekle** iletişim.
-
-    ![Atama Ekle bölmesi][203]
-
-5. Üzerinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** kullanıcıları listesinde.
-
-6. Tıklayın **seçin** düğmesini **kullanıcılar ve gruplar** iletişim.
-
-7. Tıklayın **atama** düğmesini **atama Ekle** iletişim.
-    
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
-
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
-
-Erişim panelinde Kanbanize kutucuğa tıkladığınızda, otomatik olarak Kanbanize uygulamanıza açan.
-Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](../active-directory-saas-access-panel-introduction.md). 
+Erişim panelinde Kanbanize kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Kanbanize otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](tutorial-list.md)
-* [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 
-<!--Image references-->
-
-[1]: ./media/kanbanize-tutorial/tutorial_general_01.png
-[2]: ./media/kanbanize-tutorial/tutorial_general_02.png
-[3]: ./media/kanbanize-tutorial/tutorial_general_03.png
-[4]: ./media/kanbanize-tutorial/tutorial_general_04.png
-
-[100]: ./media/kanbanize-tutorial/tutorial_general_100.png
-
-[200]: ./media/kanbanize-tutorial/tutorial_general_200.png
-[201]: ./media/kanbanize-tutorial/tutorial_general_201.png
-[202]: ./media/kanbanize-tutorial/tutorial_general_202.png
-[203]: ./media/kanbanize-tutorial/tutorial_general_203.png
+- [Azure AD ile Kanbanize 'yi deneyin](https://aad.portal.azure.com/)
 

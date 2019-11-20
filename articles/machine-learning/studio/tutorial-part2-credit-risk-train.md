@@ -1,7 +1,7 @@
 ---
-title: '2. Öğretici: Kredi riski modellerini eğitin'
-titleSuffix: Azure Machine Learning Studio
-description: Azure Machine Learning Studio'da bir kredi riski değerlendirmesi için Tahmine dayalı analiz çözümü oluşturmayı gösteren ayrıntılı bir öğretici. Bu öğreticide iki üç bölümlü öğretici serisinin bir parçasıdır. Bu eğitme ve değerlendirme modelleri nasıl gösterir.
+title: 'Öğretici 2: Kredi risk modellerini eğitme'
+titleSuffix: ML Studio (classic) - Azure
+description: Azure Machine Learning Studio klasik sürümünde kredi riski değerlendirmesi için tahmine dayalı bir analiz çözümü oluşturmayı gösteren ayrıntılı bir öğretici. Bu öğretici, üç bölümden oluşan bir öğretici serisinin ikinci bölümüdür. Modellerin nasıl eğiteleceğini ve değerlendirileceğini gösterir.
 keywords: kredi riski, tahmine dayalı analiz çözümü, risk değerlendirmesi
 author: sdgilley
 ms.author: sgilley
@@ -10,198 +10,195 @@ ms.service: machine-learning
 ms.subservice: studio
 ms.topic: tutorial
 ms.date: 02/11/2019
-ms.openlocfilehash: 45407e183c70fe67e6bd59e3fd86a50a31844c47
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: b3f0ebe2cad68759e7feeb7a7cc3dadbbd03ee7e
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60735700"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838650"
 ---
-# <a name="tutorial-2-train-credit-risk-models---azure-machine-learning-studio"></a>2. Öğretici: Kredi riski modelleri - Azure Machine Learning Studio'da eğitim
+# <a name="tutorial-2-train-credit-risk-models---azure-machine-learning-studio-classic"></a>Öğretici 2: Kredi risk modellerini eğitme-Azure Machine Learning Studio (klasik)
 
-Bu öğreticide, bir Tahmine dayalı analiz çözümü geliştirme işleminin genişletilmiş bir göz atın. Machine Learning Studio'da basit bir model geliştirmektir.  Ardından bir Azure Machine Learning web hizmeti olarak modeli dağıtacağız.  Bu dağıtılmış modelin yeni verileri kullanarak tahmin yapabileceği. Bu öğretici **üç bölümlü öğretici serisinin İkinci bölüm**.
+Bu öğreticide, tahmine dayalı bir analiz çözümü geliştirme sürecinde genişletilmiş bir görünüm elde edersiniz. Machine Learning Studio klasik sürümünde basit bir model geliştirirsiniz.  Daha sonra modeli bir Azure Machine Learning Web hizmeti olarak dağıtabilirsiniz.  Bu dağıtılan model yeni verileri kullanarak tahminleri yapabilir. Bu öğretici, **üç bölümden oluşan bir öğretici serisinin ikinci bölümüdür**.
 
 Bir kişinin kredi başvurusunda verdiği bilgilere dayanarak kredi riskini tahmin etmeniz gerektiğini varsayalım.  
 
-Kredi riski değerlendirmesi karmaşık bir sorundur ancak bu öğreticide, bir bit basitleştirir. Microsoft Azure Machine Learning Studio'yu kullanarak Tahmine dayalı analiz çözümü nasıl oluşturabileceğinize dair bir örnek olarak kullanacaksınız. Azure Machine Learning Studio ve Machine Learning web hizmeti bu çözüm için kullanacaksınız.  
+Kredi risk değerlendirmesi karmaşık bir sorundur, ancak bu öğreticide bir bit basitleştirilmesi sağlanır. Bunu, Microsoft Azure Machine Learning Studio (klasik) kullanarak tahmine dayalı analiz çözümü oluşturma hakkında bir örnek olarak kullanacaksınız. Bu çözüm için Azure Machine Learning Studio klasik sürümünü ve bir Machine Learning Web hizmetini kullanacaksınız.  
 
-Üç bölümü olan Bu öğreticide, genel kullanıma açık kredi risk verileriyle başlayın.  Ardından geliştirin ve Tahmine dayalı bir model eğitip.  Son olarak modeli bir web hizmeti olarak dağıtalım.
+Bu üç bölümden oluşan öğreticide, genel kullanıma açık kredi riski verileriyle karşılaşırsınız.  Daha sonra tahmine dayalı bir model geliştirip eğirsiniz.  Son olarak, modeli bir Web hizmeti olarak dağıtırsınız.
 
-İçinde [öğreticinin birinci kısmında](tutorial-part1-credit-risk.md), bir Machine Learning Studio çalışma alanı oluşturulduğunda, veri karşıya yüklendi ve bir deneme oluşturulur.
+[Öğreticinin bir parçası](tutorial-part1-credit-risk.md)olarak bir Machine Learning Studio (klasik) çalışma alanı oluşturdunuz, verileri karşıya yükledi ve bir deneme oluşturdunuz.
 
-Öğreticinin bu bölümünde:
+Öğreticinin bu bölümünde şunları yapabilirsiniz:
  
 > [!div class="checklist"]
 > * Birden çok modeli eğitme
-> * Puanlama modelleri ve değerlendirme
+> * Modelleri Puanlama ve değerlendirme
 
 
-İçinde [öğreticinin üçüncü bölüm](tutorial-part3-credit-risk-deploy.md), bir web hizmeti olarak modeli dağıtacaksınız.
-
-[!INCLUDE [machine-learning-free-trial](../../../includes/machine-learning-free-trial.md)]
-
+[Öğreticinin üçüncü kısmında](tutorial-part3-credit-risk-deploy.md), modeli bir Web hizmeti olarak dağıtacaksınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Tam [öğreticinin birinci kısmında](tutorial-part1-credit-risk.md).
+[Öğreticiden birinin bir kısmını](tutorial-part1-credit-risk.md)doldurun.
 
 ## <a name="train"></a>Birden çok modeli eğitme
 
-Makine öğrenimi modelleri oluşturmak için Azure Machine Learning Studio kullanmanın avantajlarından biri, bir zaman tek bir denemede birden fazla tür modelinin deneyin ve sonuçları karşılaştırmak için olanağıdır. Bu tür bir deneme sorununuz için en iyi çözüm bulmanıza yardımcı olur.
+Makine öğrenimi modelleri oluşturmak için Azure Machine Learning Studio klasik sürümünü kullanmanın avantajlarından biri, tek bir deneyde aynı anda birden fazla model türü deneyebilme ve sonuçları karşılaştırmaktır. Bu tür bir deneme, sorununuz için en iyi çözümü bulmanıza yardımcı olur.
 
-Biz bu öğreticide, geliştirmekte olduğunuz deneme iki farklı türde modeller oluşturun ve sonra son bizim deneme kullanmak istediğiniz algoritmayı karar vermek için Puanlama sonuçlarını karşılaştırın.  
+Bu öğreticide geliştirdiğimiz deneymde, iki farklı model türü oluşturacak ve sonra Puanlama sonuçlarını karşılaştırarak son denememiz için hangi algoritmayı kullanmak istediğinize karar verirsiniz.  
 
-Tercih edebilirsiniz çeşitli modeli vardır. Kullanılabilir modelleri görmek için genişletin **Machine Learning** modül paletindeki düğümünü ve ardından **modeli Başlat** ve altındaki düğümleri. Bu deneyin amacı doğrultusunda, seçersiniz [iki sınıflı destekli vektör makinesi] [ two-class-support-vector-machine] (SVM) ve [iki sınıflı artırılmış karar ağacı] [ two-class-boosted-decision-tree] modüller.
+Aralarından seçim yapabileceğiniz çeşitli modeller vardır. Kullanılabilir modelleri görmek için, modül paletindeki **Machine Learning** düğümünü genişletin ve ardından modeli ve altındaki düğümleri **Başlat** ' ı genişletin. Bu denemenin amaçları doğrultusunda, [Iki sınıf destek vektör makinesi][two-class-support-vector-machine] (SVM) ve [Iki sınıf önceden artırılmış karar ağacı][two-class-boosted-decision-tree] modüllerini seçersiniz.
 
 > [!TIP]
-> Çözmeye çalıştığınız belirli sorun hangi Machine Learning algoritmasını en iyi uyan karar vermeyle ilgili Yardım almak için bkz. [Microsoft Azure Machine Learning Studio için algoritma seçme](algorithm-choice.md).
+> Çözmeye çalıştığınız belirli bir sorunu en iyi şekilde karşılayacak Machine Learning algoritmasının karar vermeyle ilgili yardım almak için bkz. [Microsoft Azure Machine Learning Studio algoritmaları seçme (klasik)](algorithm-choice.md).
 > 
 > 
 
-Her ikisi de ekleyeceksiniz [iki sınıflı artırılmış karar ağacı] [ two-class-boosted-decision-tree] modülü ve [iki sınıflı destekli vektör makinesi] [ two-class-support-vector-machine] bu denemede Modülü .
+Bu denemenize hem [Iki sınıf önceden desteklenen karar ağacı][two-class-boosted-decision-tree] modülünü hem de [Iki sınıf desteği vektör makinesi][two-class-support-vector-machine] modülünü ekleyeceksiniz.
 
-### <a name="two-class-boosted-decision-tree"></a>İki sınıflı Artırmalı karar ağacı
+### <a name="two-class-boosted-decision-tree"></a>İki sınıf önceden artırılmış karar ağacı
 
-İlk olarak, artırmalı karar ağacı modelini ayarlayın.
+İlk olarak, artırılmış karar ağacı modelini ayarlayın.
 
-1. Bulma [iki sınıflı artırılmış karar ağacı] [ two-class-boosted-decision-tree] modül paletindeki modülünü tuvale sürükleyin.
+1. Modül paletinde [Iki sınıf önceden artırılmış karar ağacı][two-class-boosted-decision-tree] modülünü bulun ve tuvale sürükleyin.
 
-1. Bulma [modeli eğitme] [ train-model] modülünü tuvale sürükleyin ve ardından çıktısını bağlanın [iki sınıflı artırılmış karar ağacı] [ two-class-boosted-decision-tree] modülünün sol giriş bağlantı noktasına [modeli eğitme] [ train-model] modülü.
+1. [Model eğitme][train-model] modülünü bulun, tuvale sürükleyin ve sonra [Iki sınıf yeniden maliyetli karar ağacı][two-class-boosted-decision-tree] modülünün çıkışını [eğitme modeli][train-model] modülünün sol giriş bağlantı noktasına bağlayın.
    
-   [İki sınıflı artırılmış karar ağacı] [ two-class-boosted-decision-tree] modülü genel model başlatır ve [modeli eğitme] [ train-model] geliştirmek için eğitim verilerini kullanır. Model. 
+   [Iki sınıf önceden artırılmış karar ağacı][two-class-boosted-decision-tree] modülü genel modeli başlatır ve [modeli eğitme][train-model] modeli eğitimi için eğitim verilerini kullanır. 
 
-1. Sol sol çıkışını [R betiği yürütme] [ execute-r-script] modülünün sağ giriş bağlantı noktasına [modeli eğitme] [ train-model] modülde (Bu öğretici [sol tarafındaki gelen verileri kullanılan](#train) verileri bölme modülünün eğitim için).
+1. Sol tarafta bulunan [R betiği][execute-r-script] modülünün sol çıkışını, [model eğitimi][train-model] modülünün sağ giriş bağlantı noktasına bağlayın (Bu öğreticide, eğitim için veri ayırma modülünün [sol tarafından gelen verileri kullandınız](#train) ).
    
    > [!TIP]
-   > iki giriş ve çıkışları gerekmeyen [R betiği yürütme] [ execute-r-script] bunları eklenmemiş bırakabilirsiniz şekilde bu deneme için modülü. 
+   > Bu deneme için iki girişin ve [yürütme R betiği][execute-r-script] modülünün çıktılarından birine ihtiyacınız yoktur, bu nedenle eklenmeleri geri alabilirsiniz. 
    > 
    > 
 
-Bu bölümü deneme şimdi aşağıdakine benzer:  
+Denemenin bu bölümü artık şuna benzer:  
 
-![Modeli](./media/tutorial-part2-credit-risk-train/experiment-with-train-model.png)
+![Model eğitimi](./media/tutorial-part2-credit-risk-train/experiment-with-train-model.png)
 
-Artık bildirmek gerekiyor [modeli eğitme] [ train-model] model değeri kredi riskini tahmin etmek istediğiniz modülü.
+Şimdi, modelin kredi riski değerini tahmin etmek istediğiniz modeli [eğitme][train-model] modülüne bildirmeniz gerekir.
 
-1. Seçin [modeli eğitme] [ train-model] modülü. İçinde **özellikleri** bölmesinde tıklayın **Sütun seçiciyi Başlat**.
+1. [Model eğitme][train-model] modülünü seçin. **Özellikler** bölmesinde, **sütun seçiciyi Başlat**' ı tıklatın.
 
-1. İçinde **tek bir sütun** iletişim kutusunda, türü altında arama alanına "Kredi riski" **kullanılabilir sütunlar**, aşağıdaki "Kredi riski"'ı seçin ve sağ ok düğmesine tıklayın (**>**) "Kredi riski" taşımak için **seçili sütun**. 
+1. **Tek bir sütun seçin** iletişim kutusunda, **kullanılabilir sütunlar**altındaki ara alanına "kredi riski" yazın, aşağıdaki "kredi riski" nı seçin ve sağ ok düğmesine ( **>** ) tıklayarak "kredi riski" nu **Seçili sütunlara**taşıyın. 
 
-    ![Train Model modülü için kredi riskini sütununu seçin](./media/tutorial-part2-credit-risk-train/train-model-select-column.png)
+    ![Model eğitme modülü için kredi risk sütununu seçin](./media/tutorial-part2-credit-risk-train/train-model-select-column.png)
 
-1. Tıklayın **Tamam** işaretleyin.
+1. **Tamam** onay işaretine tıklayın.
 
-### <a name="two-class-support-vector-machine"></a>Çift Sınıflı Destek Vektör Makinesi
+### <a name="two-class-support-vector-machine"></a>İki Sınıflı Destek Vektör Makinesi
 
-Ardından, SVM modelini ayarlayın.  
+Ardından, SVM modelini ayarlarsınız.  
 
-İlk olarak, SVM hakkında biraz açıklama. Artırmalı karar ağaçları de özelliklerle herhangi bir türde çalışır. Ancak doğrusal bir sınıflandırıcı SVM modülü oluşturur olduğundan, tüm sayısal özellikleri aynı ölçek olduğunda ürettiği model en iyi test hatası vardır. Tüm sayısal özellikleri aynı ölçek dönüştürmek için bir "Tanh" dönüşümü kullanın (ile [Normalleştir veri] [ normalize-data] Modülü). Bu bizim numaraları [0,1] aralığa dönüştürür. Dize özellikleri el ile dönüştürme yapmak zorunda kalmazsınız SVM modülü kategorik özellikleri ve ardından ikili 0/1 özellikleri, dize özellikleri dönüştürür. Ayrıca, kredi riski sütun (sütun 21) dönüştürmek istemediğiniz - sayısal ancak bırakır, böylece, tahmin etmek için modeli eğitmek değerdir.  
+Birincisi, SVM hakkında kısa bir açıklama. Daha fazla sayıda karar ağaçları, herhangi bir türdeki özelliklerle iyi çalışır. Ancak, SVM modülü doğrusal bir sınıflandırıcı oluşturduğundan, oluşturduğu modelin tüm sayısal özellikler aynı ölçekte olduğunda en iyi test hatası vardır. Tüm sayısal özellikleri aynı ölçeğe dönüştürmek için bir "tanh" dönüşümü ( [Normalleştir veri][normalize-data] modülüyle birlikte) kullanırsınız. Bu, numaralarımızı [0, 1] aralığına dönüştürür. SVM modülü, dize özelliklerini kategorik özelliklerine ve sonra ikili 0/1 özelliklerine dönüştürür, bu nedenle dize özelliklerini el ile dönüştürmeniz gerekmez. Ayrıca, kredi risk sütununu (sütun 21) dönüştürmek istemezsiniz; bu sayı sayısal olur, ancak modeli tahmin etmek için eğitidiğimiz değer bu şekilde tek tek ayrılmaları gerekir.  
 
-SVM modeli'kurmak için aşağıdakileri yapın:
+SVM modelini ayarlamak için şunları yapın:
 
-1. Bulma [iki sınıflı destekli vektör makinesi] [ two-class-support-vector-machine] modül paletindeki modülünü tuvale sürükleyin.
+1. Modül paletinde [Iki sınıf destek vektör makinesi][two-class-support-vector-machine] modülünü bulun ve tuvale sürükleyin.
 
-1. Sağ [modeli eğitme] [ train-model] modülü seçin **kopyalama**ve ardından seçin ve tuvalin sağ tıklayarak **Yapıştır**. Kopyasını [modeli eğitme] [ train-model] modülü orijinalle aynı sütun seçimi içeriyor.
+1. [Modeli eğitme][train-model] modülüne sağ tıklayın, **Kopyala**' yı seçin ve ardından tuvale sağ tıklayıp **Yapıştır**' ı seçin. [Tren modeli][train-model] modülünün kopyası, orijinalle aynı sütun seçimine sahiptir.
 
-1. Çıkışını [iki sınıflı destekli vektör makinesi] [ two-class-support-vector-machine] modülünün sol giriş bağlantı noktasına ikinci [modeli eğitme] [ train-model] modülü.
+1. [Iki sınıf destek vektör makinesi][two-class-support-vector-machine] modülünün çıkışını Ikinci [eğitim modeli][train-model] modülünün sol giriş bağlantı noktasına bağlayın.
 
-1. Bulma [Normalleştir veri] [ normalize-data] modülünü tuvale sürükleyin.
+1. [Verileri Normalleştir][normalize-data] modülünü bulun ve tuvale sürükleyin.
 
-1. Sol sol çıkışını [R betiği yürütme] [ execute-r-script] modülü, bu modülün (bildirim için birden fazla modülü bir modülün çıkış bağlantı noktasına bağlı olduğunu) giriş.
+1. Sol [Execute R betik][execute-r-script] modülünün sol çıkışını Bu modülün girdisine bağlayın (bir modülün çıkış bağlantı noktasının birden fazla modüle bağlı olabileceğini unutmayın).
 
-1. Sol çıkış bağlantı noktasına bağlanmak [Normalleştir veri] [ normalize-data] modülünün sağ giriş bağlantı noktasına ikinci [modeli eğitme] [ train-model] modülü.
+1. [Normalleştirme verileri][normalize-data] modülünün sol çıkış bağlantı noktasını Ikinci [eğitim modeli][train-model] modülünün doğru giriş bağlantı noktasına bağlayın.
 
-Bu bölümü, deneme aşağıdakine benzer görünmelidir:  
+Denemenizin bu bölümü şu şekilde görünmelidir:  
 
-![İkinci modeli eğitimi](./media/tutorial-part2-credit-risk-train/svm-model-added.png)
+![İkinci modeli eğitme](./media/tutorial-part2-credit-risk-train/svm-model-added.png)
 
-Şimdi Yapılandır [Normalleştir veri] [ normalize-data] Modülü:
+Şimdi [normalize veri][normalize-data] modülünü yapılandırın:
 
-1. Seçmek için tıklatın [Normalleştir veri] [ normalize-data] modülü. İçinde **özellikleri** bölmesinde **Tanh** için **dönüştürme yöntemi** parametresi.
+1. [Verileri Normalleştir][normalize-data] modülünü seçmek için tıklayın. **Özellikler** bölmesinde, **dönüşüm yöntemi** parametresi için **tanh** ' yi seçin.
 
-1. Tıklayın **Sütun seçiciyi Başlat**, "Hiç sütun" seçin **şununla Başla**seçin **INCLUDE** ilk açılan menüyü seçin **sütun türü** ikinci açılır ve select **sayısal** üçüncü açılır. Bu, tüm sayısal sütunları (ve yalnızca sayısal) dönüştürülür belirtir.
+1. **Sütun seçiciyi Başlat**' a tıklayın, **Başlangıç**için "sütun yok" u seçin, ilk açılan menüde **Ekle** ' yi seçin, ikinci açılan menüde **sütun türü** ' nü seçin ve üçüncü açılan menüde **sayısal** ' i seçin. Bu, tüm sayısal sütunların (ve yalnızca sayısal) dönüştürüldüğünü belirtir.
 
-1. Bu satır için artı işaretini (+) tıklayın; bunu açılan bir satır oluşturur. Seçin **hariç** ilk açılan menüyü seçin **sütun adları** ikinci açılır ve "risk metin alanına kredi" girin. Bu kredi riski sütun yoksayılıp yoksayılmaması gerektiğini belirtir (Bu sütunu sayısal olduğundan ve hariç yaramadı tutarsanız dönüştürülmesi böylece bunu gerekir).
+1. Bu satırın sağ tarafındaki artı işaretine (+) tıklayın. Bu, açılan bir satır oluşturur. İlk açılan menüde **hariç tut** ' u seçin, ikinci açılan menüde **sütun adları** ' nı seçin ve metin alanına "kredi riski" yazın. Bu, kredi riski sütununun yoksayılıp sayılmayacağını belirtir (Bu sütun sayısal olduğu için bunu yapmanız gerekir, aksi takdirde onu dışmadıysanız dönüştürüleirdi).
 
-1. Tıklayın **Tamam** işaretleyin.  
+1. **Tamam** onay işaretine tıklayın.  
 
     ![Normalize veri modülü için sütunları seçin](./media/tutorial-part2-credit-risk-train/normalize-data-select-column.png)
 
 
-[Normalleştir veri] [ normalize-data] modülü kredi riski sütun dışındaki tüm sayısal sütunlarda Tanh dönüştürme gerçekleştirmek için şimdi ayarlanır.  
+[Verileri Normalleştir][normalize-data] modülü, kredi riski sütunu hariç tüm sayısal sütunlarda bir tanh dönüştürmesi gerçekleştirecek şekilde ayarlanmıştır.  
 
-## <a name="score-and-evaluate-the-models"></a>Puanlama modelleri ve değerlendirme
+## <a name="score-and-evaluate-the-models"></a>Modelleri Puanlama ve değerlendirme
 
-tarafından ayrıldı kullanıma test verileri kullanarak [verileri bölme] [ split] bizim eğitilen modellerini puanlamanıza olanak modülü. sonra sonuçlarını daha iyi sonuçlar oluşturulduğu görmek için iki modeli de karşılaştırabilirsiniz.  
+eğitimli modellerimizi öğrenmek için [bölünmüş veri][split] modülü tarafından ayrılmış test verilerini kullanın. daha sonra hangi oluşturulan daha fazla sonuç olduğunu görmek için iki modelin sonucunu karşılaştırabilirsiniz.  
 
-### <a name="add-the-score-model-modules"></a>Score Model Modül Ekle
+### <a name="add-the-score-model-modules"></a>Puan modeli modüllerini ekleme
 
-1. Bulma [Score Model] [ score-model] modülünü tuvale sürükleyin.
+1. [Puan modeli][score-model] modülünü bulun ve tuvale sürükleyin.
 
-1. Connect [modeli eğitme] [ train-model] bağlı Modülü [iki sınıflı artırılmış karar ağacı] [ two-class-boosted-decision-tree] modülünün sol giriş bağlantı noktasına [Score Model] [ score-model] modülü.
+1. [Iki sınıflı bir karar ağacı][two-class-boosted-decision-tree] modülüne bağlanan [eğitim modeli][train-model] modülünü, [puan modeli][score-model] modülünün sol giriş bağlantı noktasına bağlayın.
 
-1. Sağa bağlanma [R betiği yürütme] [ execute-r-script] Modülü (test verilerimizi) sağ giriş bağlantı noktasına [Score Model] [ score-model] modülü.
+1. Sağ [Execute R betik][execute-r-script] modülünü (test verileri), [puan modeli][score-model] modülünün sağ giriş bağlantı noktasına bağlayın.
 
-    ![Score Model modülü bağlı](./media/tutorial-part2-credit-risk-train/score-model-connected.png)
+    ![Puan modeli modülü bağlandı](./media/tutorial-part2-credit-risk-train/score-model-connected.png)
 
    
-   [Score Model] [ score-model] modülü artık test verileri kredi bilgiler alın, modeliyle çalıştırın ve modeli oluşturur gerçek kredi riski sütununda ile tahminleri karşılaştırın verileri test etme.
+   [Puan modeli][score-model] modülü artık test verilerinden kredi bilgilerini alabilir, bunu model aracılığıyla çalıştırabilir ve modelin test verilerinde gerçek kredi riski sütunuyla oluşturduğu tahminleri karşılaştırabilir.
 
-1. Kopyalama ve yapıştırma [Score Model] [ score-model] ikinci bir kopya oluşturmak için modül.
+1. İkinci bir kopya oluşturmak için [puan modeli][score-model] modülünü kopyalayıp yapıştırın.
 
-1. SVM modeli çıkışına bağlayın (diğer bir deyişle, çıkış bağlantı [modeli eğitme] [ train-model] bağlı Modülü [iki sınıflı destekli vektör makinesi] [ two-class-support-vector-machine] Modülü) ikinci giriş bağlantı noktasına [Score Model] [ score-model] modülü.
+1. SVM modelinin çıkışını (yani, [Iki sınıf destek vektör makinesi][two-class-support-vector-machine] modülüne bağlı olan [tren modeli][train-model] modülünün çıkış bağlantı noktası) ikinci [puan modeli][score-model] modülünün giriş bağlantı noktasına bağlayın.
 
-1. SVM modeli için eğitim verileri için yaptığınız gibi test verilerini aynı dönüşümü yapmamız gerekir. Bu nedenle kopyalama ve yapıştırma [Normalleştir veri] [ normalize-data] ikinci bir kopyasını oluşturun ve sağa bağlamak için modül [R betiği yürütme] [ execute-r-script] modülü.
+1. SVM modeli için, eğitim verilerinde yaptığınız gibi test verilerinde aynı dönüşümü yapmanız gerekir. Bu nedenle, ikinci bir kopya oluşturmak ve sağ [Execute R betik][execute-r-script] modülüne bağlamak Için [normalize veri][normalize-data] modülünü kopyalayıp yapıştırın.
 
-1. İkinci sol çıkışını [Normalleştir veri] [ normalize-data] modülünün sağ giriş bağlantı noktasına ikinci [Score Model] [ score-model] modülü.
+1. İkinci [normalize veri][normalize-data] modülünün sol çıkışını Ikinci [puan modeli][score-model] modülünün sağ giriş bağlantı noktasına bağlayın.
 
-    ![Bağlı her iki Model Puanlama Modülü](./media/tutorial-part2-credit-risk-train/both-score-models-added.png)
-
-
-### <a name="add-the-evaluate-model-module"></a>Model değerlendirme Modül Ekle
-
-İki Puanlama sonuçları değerlendirin ve bunları karşılaştırmak için kullandığınız bir [Evaluate Model] [ evaluate-model] modülü.  
-
-1. Bulma [Evaluate Model] [ evaluate-model] modülünü tuvale sürükleyin.
-
-1. Çıkış bağlantı noktasına bağlanmak [Score Model] [ score-model] modülünün sol giriş bağlantı noktasına artırmalı karar ağacı modeli ile ilişkili [Evaluate Model] [ evaluate-model] modülü.
-
-1. Diğer connect [Score Model] [ score-model] modülünün sağ giriş bağlantı noktasına.  
-
-    ![Modeli değerlendirme bağlı Modülü](./media/tutorial-part2-credit-risk-train/evaluate-model-added.png)
+    ![Her iki puan modeli modülü bağlı](./media/tutorial-part2-credit-risk-train/both-score-models-added.png)
 
 
-### <a name="run-the-experiment-and-check-the-results"></a>Denemeyi çalıştırma ve sonuçları denetleyin
+### <a name="add-the-evaluate-model-module"></a>Modeli değerlendir modülünü ekleme
 
-Denemeyi çalıştırmak için tıklayın **ÇALIŞTIRMA** tuvalin altındaki düğme. Bu işlem birkaç dakika sürebilir. Çalıştığını ve daha sonra yeşil bir onay işareti modülü tamamladığını gösterir. her modül bir dönen göstergesi gösterir. Tüm modüllerin bir onay işareti varsa, denemeyi çalışması sona erdi.
+İki Puanlama sonucunu değerlendirmek ve karşılaştırmak için [model değerlendir][evaluate-model] modülünü kullanırsınız.  
 
-Deneme şimdi aşağıdakine benzer görünmelidir:  
+1. [Modeli değerlendir][evaluate-model] modülünü bulun ve tuvale sürükleyin.
+
+1. Artırılmış karar ağacı modeliyle ilişkili [puan modeli][score-model] modülünün çıkış bağlantı noktasını, [modeli değerlendir][evaluate-model] modülünün sol giriş bağlantı noktasına bağlayın.
+
+1. Diğer [puan modeli][score-model] modülünü doğru giriş bağlantı noktasına bağlayın.  
+
+    ![Bağlı model modülünü değerlendir](./media/tutorial-part2-credit-risk-train/evaluate-model-added.png)
+
+
+### <a name="run-the-experiment-and-check-the-results"></a>Denemeyi çalıştırın ve sonuçları denetleyin
+
+Denemeyi çalıştırmak için, tuvalin altındaki **Çalıştır** düğmesine tıklayın. Bu işlem birkaç dakika sürebilir. Her modülde dönen bir gösterge çalıştığını gösterir ve ardından, modülün ne zaman bittiğini gösteren yeşil bir onay işareti görünür. Tüm modüllerin onay işareti varsa, deneme çalışmayı bitirdi.
+
+Deneme şimdi şuna benzer görünmelidir:  
 
 ![Her iki modeli değerlendirme](./media/tutorial-part2-credit-risk-train/final-experiment.png)
 
 
-Sonuçları denetlemek için çıkış bağlantı noktasına tıklayın [Evaluate Model] [ evaluate-model] modülü ve select **Görselleştir**.  
+Sonuçları denetlemek için [modeli değerlendir][evaluate-model] modülünün çıkış bağlantı noktasına tıklayın ve **Görselleştir**' i seçin.  
 
-[Evaluate Model] [ evaluate-model] modül, eğriler ve iki puanlanmış modeli sonucunu karşılaştırmaya izin veren ölçümler bir çift oluşturur. Alıcı işleci özellikleri (ROC) eğrileri, duyarlık/geri çağırma eğriler ve Lift eğrileri olarak sonuçlarını görüntüleyebilirsiniz. Ek veri görüntülendiğini, bir karışıklık matrisi eğrinin (AUC) ve diğer ölçümleri alanında toplu değerlerini içerir. Kaydırıcıyı sola veya sağa hareket ettirerek eşik değerini değiştirebilir ve bu ölçüm kümesini nasıl etkilediğini görebilir.  
+[Modeli değerlendir][evaluate-model] modülü, iki puanlanmış modelin sonuçlarını karşılaştırmanıza imkan tanıyan bir çift eğri ve ölçüm oluşturur. Sonuçları alıcı Işleci özelliği (ROC) eğrileri, duyarlık/geri çağırma eğrileri veya eğrileri Yükselt olarak görüntüleyebilirsiniz. Görünen ek veriler, bir karışıklık matrisi, eğri (AUC) ve diğer ölçümler altında bulunan alanın birikmeli değerlerini içerir. Kaydırıcıyı sola veya sağa taşıyarak eşik değerini değiştirebilir ve ölçüm kümesini nasıl etkileyeceğini görebilirsiniz.  
 
-Graf sağında tıklayın **veri kümesi Puanlanmış** veya **karşılaştırmak için veri kümesi Puanlanmış** ilişkili eğri vurgulayın ve aşağıdaki ilişkili ölçümleri görüntülemek için. Eğri için göstergede "Puanlanmış veri kümesi" sol giriş bağlantı noktasına karşılık gelen [Evaluate Model] [ evaluate-model] modülü - örneğimizde artırmalı karar ağacı modeli budur. Sağ giriş bağlantı noktasına - SVM modeli bizim durumumuzda, "karşılaştırmak için veri kümesi puanlanmış" karşılık gelir. Bu etiketler birine tıkladığınızda, bu model için eğri vurgulanır ve aşağıdaki grafikte gösterildiği gibi ilgili ölçümleri görüntülenir.  
+Grafiğin sağında, ilişkili eğriyi vurgulamak ve aşağıdaki ilişkili ölçümleri göstermek üzere karşılaştırmak için **puanlanmış veri kümesi** veya **Puansal veri kümesi** ' ne tıklayın. Eğrilerin göstergesinde, "puanlanmış veri kümesi" [modeli değerlendir][evaluate-model] modülünün sol giriş bağlantı noktasına karşılık gelir. Bu durumda, bu, önceden maliyetli karar ağacı modelidir. "Karşılaştırılacak puanlanmış veri kümesi", bizim örneğimizde bulunan SVM modeli doğru giriş bağlantı noktasına karşılık gelir. Bu etiketlerden birine tıkladığınızda, bu modelin eğrisi vurgulanır ve aşağıdaki grafikte gösterildiği gibi ilgili ölçümler görüntülenir.  
 
-![Modelleri için ROC Eğriler](./media/tutorial-part2-credit-risk-train/roc-curves.png)
+![Modeller için ROC eğrileri](./media/tutorial-part2-credit-risk-train/roc-curves.png)
 
-Bu değerleri inceleyerek hangi Aradığınız sonuçları vermiş, en yakın modeldir karar verebilirsiniz. Geri dönün ve farklı modelleri değerlerde parametresi değiştirerek üzerinde denemenizi yineleme. 
+Bu değerleri inceleyerek, aradığınız sonuçları vermek için hangi modelin en yakın olduğuna karar verebilirsiniz. Farklı modellerdeki parametre değerlerini değiştirerek denemeniz için geri dönüp yineleyebilirsiniz. 
 
-Bilim ve son teknoloji ürünü bu sonuçları yorumlayarak destek sağlama ve model performansını ayarlama, bu öğreticinin kapsamı dışında olan. Ek Yardım için bu makaleleri okuyun:
-- [Azure Machine Learning Studio'da model performansını değerlendirme](evaluate-model-performance.md)
-- [Azure Machine Learning Studio'da algoritmalarınızı iyileştirmek için parametreleri seçin](algorithm-parameters-optimize.md)
-- [Azure Machine Learning Studio'da model sonuçlarını yorumlama](interpret-model-results.md)
+Bu sonuçları yorumlarken ve model performansını ayarlamaya yönelik bilim ve sanat Bu öğreticinin kapsamı dışındadır. Ek Yardım için aşağıdaki makaleleri okuyabilirsiniz:
+- [Azure Machine Learning Studio 'de model performansını değerlendirme (klasik)](evaluate-model-performance.md)
+- [Azure Machine Learning Studio algoritmalarınızı iyileştirmek için parametreler seçin (klasik)](algorithm-parameters-optimize.md)
+- [Azure Machine Learning Studio model sonuçlarını yorumlama (klasik)](interpret-model-results.md)
 
 > [!TIP]
-> Denemeyi bu yineleme kaydını her çalıştırdığınızda, çalıştırma geçmişi tutulur. Bu yinelemeler görüntülemek ve herhangi biri, tıklayarak dönüş **ÇALIŞTIRMA GEÇMİŞİNİ GÖRÜNTÜLE** tuval aşağıda. Ayrıca **önceki çalıştırma** içinde **özellikleri** , hemen bir önceki yinelemeye döndürülecek bölmesi açık olması.
+> Denemeyi her çalıştırdığınızda, bu yinelemenin bir kaydı çalıştırma geçmişinde tutulur. Bu yinelemeleri görüntüleyebilir ve tuvalin altındaki **çalıştırma geçmişini görüntüle** ' ye tıklayarak bunlardan birine dönebilirsiniz. Ayrıca, açtığınız bir yinelemeden hemen önce yinelemeye geri dönmek için **Özellikler** bölmesinde **önceki çalıştırmaya** de tıklayabilirsiniz.
 > 
-> Tıklayarak, denemenizi herhangi bir yinelemesini kopyasını yapabilirsiniz **SAVE AS** tuval aşağıda. 
-> Deneme kullanın **özeti** ve **açıklama** , deneme yinelemelerini denediyseniz, kaydını tutmak için özellikleri.
+> Herhangi bir yinelemenizin kopyasını, tuvalin altında olacak **şekilde kaydet** ' i tıklatarak yapabilirsiniz. 
+> Deneme yinelemeleriniz içinde çalıştıklerinizin kaydını tutmak için deneme 'nin **Özet** ve **Açıklama** özelliklerini kullanın.
 > 
-> Daha fazla bilgi için [Azure Machine Learning Studio'da deneme yinelemelerini yönetme](manage-experiment-iterations.md).  
+> Daha fazla bilgi için bkz. [Azure Machine Learning Studio (klasik) deneme yinelemelerini yönetme](manage-experiment-iterations.md).  
 > 
 > 
 
@@ -211,14 +208,14 @@ Bilim ve son teknoloji ürünü bu sonuçları yorumlayarak destek sağlama ve m
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, bu adımlar tamamlandı: 
+Bu öğreticide, şu adımları tamamladınız: 
  
 > [!div class="checklist"]
 > * Deneme oluşturma
 > * Birden çok modeli eğitme
-> * Puanlama modelleri ve değerlendirme
+> * Modelleri Puanlama ve değerlendirme
 
-Artık bu veri modelleri dağıtmaya hazırsınız.
+Artık bu veriler için modeller dağıtmaya hazırsınız demektir.
 
 > [!div class="nextstepaction"]
 > [Öğretici 3 - Modelleri dağıtma](tutorial-part3-credit-risk-deploy.md)

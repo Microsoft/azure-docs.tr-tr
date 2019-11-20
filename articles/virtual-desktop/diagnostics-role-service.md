@@ -1,169 +1,181 @@
 ---
-title: Windows sanal masaüstü Önizleme tanılama özelliği ile - Azure sorunlarını belirleyin
-description: Windows sanal masaüstü Önizleme Tanılama özelliğini ve nasıl kullanılacağını açıklar.
+title: Windows sanal masaüstü Tanılama sorunları-Azure
+description: Sorunları tanılamak için Windows sanal masaüstü Tanılama özelliğini kullanma.
 services: virtual-desktop
 author: Heidilohr
 ms.service: virtual-desktop
 ms.topic: conceptual
-ms.date: 03/21/2019
+ms.date: 08/29/2019
 ms.author: helohr
-ms.openlocfilehash: 747e177b0fbbfb9049959c3194ee39c3234bba50
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0e04b075259ed1d003df4a03686d46b1adf694d3
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65234021"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606852"
 ---
-# <a name="identify-issues-with-the-diagnostics-feature"></a>Tanılama özelliğiyle sorunları belirleme
+# <a name="identify-and-diagnose-issues"></a>Sorunları belirleme ve tanılama
 
-Windows sanal masaüstü Önizleme yöneticinin tek bir arabirim üzerinden sorunlarını belirlemek bir tanılama özelliği sunar. Bir kullanıcı sistemi ile etkileşime giren her Windows sanal masaüstü rolleri tanılama etkinlik oturum açın. Her günlük işlem, hata iletileri, Kiracı bilgileri ve kullanıcı bilgilerini katılan Windows sanal masaüstü rolleri gibi ilgili bilgileri içerir. Tanılama etkinlikleri, son kullanıcı ve yönetici eylemleri tarafından oluşturulur ve üç ana demetlerin içine kategorilere ayrılabilir:
+Windows sanal masaüstü, yöneticinin sorunları tek bir arabirim üzerinden belirlemesine izin veren bir tanılama özelliği sunar. Windows sanal masaüstü rolleri, bir Kullanıcı sistemle her etkileşime geçtiğinde bir tanılama etkinliğini günlüğe kaydeder. Her günlük, işlem, hata iletileri, kiracı bilgileri ve Kullanıcı bilgilerine dahil olan Windows sanal masaüstü rolleri gibi ilgili bilgileri içerir. Tanılama etkinlikleri hem son kullanıcı hem de yönetim eylemleri tarafından oluşturulur ve üç ana demet halinde kategorilere ayrılabilir:
 
-* Abonelik etkinlikleri akış: kendi akış uygulamaları Microsoft Uzak Masaüstü aracılığıyla bağlanmak istediğinizde, son kullanıcı bu etkinlikler tetikler.
-* Bağlantı etkinlikleri: Masaüstü veya RemoteApp için Microsoft Uzak Masaüstü uygulamalar aracılığıyla bağlanmaya çalıştıklarında her son kullanıcı bu etkinlikleri tetikler.
-* Yönetim etkinlikleri: sistemdeki rol atamaları oluşturmadan konak havuzları oluşturma ve kullanıcıları gruplara uygulama atama gibi yönetim işlemlerini gerçekleştirdikleri her yönetici bu etkinlikleri tetikler.
+* Akış aboneliği etkinlikleri: Son Kullanıcı bu etkinlikleri, Microsoft Uzak Masaüstü uygulamaları aracılığıyla akışına bağlanmayı denediğinde tetikler.
+* Bağlantı etkinlikleri: Son Kullanıcı, Microsoft Uzak Masaüstü uygulamalar aracılığıyla bir masaüstüne veya RemoteApp 'e bağlanmayı her denediğinde bu etkinlikleri tetikler.
+* Yönetim etkinlikleri: yönetici, sistem üzerinde, konak havuzları oluşturma, kullanıcıları uygulama gruplarına atama ve rol atamaları oluşturma gibi yönetim işlemlerini gerçekleştirirken bu etkinlikleri tetikler.
   
-Windows sanal masaüstü ulaşan olmayan bağlantıları tanılama rol hizmeti kendisi Windows sanal masaüstü bir parçası olduğundan tanılama sonuçlarında görünmez. Son kullanıcı ağ bağlantısı sorunları yaşıyor Windows Sanal Masaüstü bağlantı sorunları oluşabilir.
+Tanılama rolü hizmeti Windows sanal masaüstü 'nün bir parçası olduğundan, Windows sanal masaüstüne ulaşmayacak bağlantılar tanılama sonuçlarında gösterilmez. Son Kullanıcı ağ bağlantısı sorunlarıyla karşılaşıyorsa Windows sanal masaüstü bağlantısı sorunları ortaya çıkabilir.
 
-Başlamak için [indirin ve Windows sanal masaüstü PowerShell modülünü içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview) henüz yapmadıysanız, PowerShell oturumunuzda kullanılacak.
+Başlamak için, henüz yapmadıysanız PowerShell oturumunuzda kullanmak üzere [Windows sanal masaüstü PowerShell modülünü indirip içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview) . Bundan sonra hesabınızda oturum açmak için aşağıdaki cmdlet 'i çalıştırın:
 
-## <a name="diagnose-issues-with-powershell"></a>PowerShell ile ilgili sorunları tanılayın
+```powershell
+Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
+```
 
-Windows sanal masaüstü tanılama yalnızca bir PowerShell cmdlet'ini kullanır ancak daraltın Yardım ve sorunları yalıtmak için birçok isteğe bağlı parametreler içeriyor. Aşağıdaki bölümlerde, sorunların tanılanması için faydalanılan çalıştırabileceğiniz cmdlet'leri listelenmektedir. Filtrelerin çoğu birlikte uygulanabilir. Değerleri gibi köşeli ayraç içinde listelenen `<tenantName>`, sizin durumunuz için değerleri ile değiştirilmelidir.
+## <a name="diagnose-issues-with-powershell"></a>PowerShell ile ilgili sorunları tanılama
 
-### <a name="retrieve-diagnostic-activities-in-your-tenant"></a>Kiracınızdaki tanılama etkinlikleri alın
+Windows sanal masaüstü tanılaması yalnızca bir PowerShell cmdlet 'i kullanır, ancak sorunları daraltmak ve yalıtmak için birçok isteğe bağlı parametre içerir. Aşağıdaki bölümlerde, sorunları tanılamak için çalıştırabileceğiniz cmdlet 'ler listelenmektedir. Çoğu filtre birlikte uygulanabilir. Parantez içinde listelenen değerler `<tenantName>`gibi, durumunuza uygulanan değerlerle değiştirilmelidir.
 
-Tanılama etkinlikleri girerek alabilirsiniz **Get-RdsDiagnosticActivities** cmdlet'i. Aşağıdaki örnek cmdlet için en fazla sıralanmış tanılama etkinliklerin listesini en eski döndürür.
+### <a name="retrieve-diagnostic-activities-in-your-tenant"></a>Kiracınızdaki tanılama etkinliklerini alın
+
+**Get-RdsDiagnosticActivities** cmdlet 'ini girerek tanılama etkinliklerini alabilirsiniz. Aşağıdaki örnek cmdlet 'i, en az son kullanılan bir tanılama etkinlikleri listesi döndürür.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName>
 ```
 
-Diğer Windows sanal masaüstü PowerShell cmdlet'leri gibi kullanmalısınız **- Kiracıadı** sorgunuz için kullanmak istediğiniz Kiracı adını belirtmek için parametre. Kiracı adı, neredeyse tüm tanılama etkinlik sorgular için geçerlidir.
+Diğer Windows sanal masaüstü PowerShell cmdlet 'leri gibi, sorgunuz için kullanmak istediğiniz kiracının adını belirtmek üzere **-TenantName** parametresini kullanmanız gerekir. Kiracı adı, neredeyse tüm tanılama etkinlik sorguları için geçerlidir.
 
-### <a name="retrieve-detailed-diagnostic-activities"></a>Ayrıntılı tanılama etkinlikleri alın
+### <a name="retrieve-detailed-diagnostic-activities"></a>Ayrıntılı tanılama etkinliklerini alın
 
-**-Ayrıntılı** parametresi, döndürülen her tanılama etkinlik için ek ayrıntılar sağlar. Biçimi her etkinlik için etkinlik türünü bağlı olarak değişir. **-Ayrıntılı** herhangi parametresi eklenebilir **Get-RdsDiagnosticActivities** aşağıdaki örnekte gösterildiği gibi sorgu.
+**-Detailed** parametresi döndürülen her bir tanılama etkinliği için ek ayrıntılar sağlar. Her etkinliğin biçimi, etkinlik türüne göre farklılık gösterir. **-Detailed** parametresi, aşağıdaki örnekte gösterildiği gibi herhangi bir **Get-RdsDiagnosticActivities** sorgusuna eklenebilir.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -Detailed
 ```
 
-### <a name="retrieve-a-specific-diagnostic-activity-by-activity-id"></a>Belirli bir tanılama etkinlik tarafından etkinlik kimliği alınamıyor
+### <a name="retrieve-a-specific-diagnostic-activity-by-activity-id"></a>Etkinlik KIMLIĞINE göre belirli bir tanılama etkinliğini al
 
-**- ActivityID** parametresi, belirli bir döndürür, aşağıdaki örnek cmdlet'te gösterildiği varsa tanılama etkinlik.
+**-ActivityId** parametresi, aşağıdaki örnek cmdlet 'inde gösterildiği gibi, varsa, belirli bir tanılama etkinliğini döndürür.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -ActivityId <ActivityIdGuid>
 ```
 
-### <a name="filter-diagnostic-activities-by-user"></a>Kullanıcı tarafından filtre tanılama etkinlikleri
+### <a name="view-error-messages-for-a-failed-activity-by-activity-id"></a>Etkinlik KIMLIĞINE göre başarısız bir etkinliğin hata iletilerini görüntüle
 
-**- UserName** parametresi, aşağıdaki örnek cmdlet'te gösterildiği gibi belirtilen kullanıcı tarafından başlatılan tanılama etkinliklerin listesini döndürür.
+Başarısız bir etkinliğin hata iletilerini görüntülemek için cmdlet 'ini **-detailed** parametresiyle çalıştırmanız gerekir. **Select-Object** cmdlet 'ini çalıştırarak hata listesini görebilirsiniz.
+
+```powershell
+Get-RdsDiagnosticActivities -TenantName <tenantname> -ActivityId <ActivityGuid> -Detailed | Select-Object -ExpandProperty Errors
+```
+
+### <a name="filter-diagnostic-activities-by-user"></a>Tanılama etkinliklerini kullanıcıya göre filtrele
+
+**-UserName** parametresi, aşağıdaki örnek cmdlet 'inde gösterildiği gibi, belirtilen kullanıcı tarafından başlatılan tanılama etkinliklerinin listesini döndürür.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -UserName <UserUPN>
 ```
 
-**- UserName** parametresi isteğe bağlı diğer filtre parametreleriyle da birleştirilebilir.
+**-UserName** parametresi, diğer isteğe bağlı filtreleme parametreleriyle de birleştirilebilir.
 
-### <a name="filter-diagnostic-activities-by-time"></a>Tanılama etkinlikleri saate göre filtreleme
+### <a name="filter-diagnostic-activities-by-time"></a>Tanılama etkinliklerini zamana göre filtrele
 
-Döndürülen tanılama etkinlik listeyi filtreleyebilirsiniz **- StartTime** ve **- EndTime** parametreleri. **- StartTime** parametresi aşağıdaki örnekte gösterildiği gibi belirli bir tarihten itibaren tanılama etkinlik listesini döndürür.
+Döndürülen tanılama etkinlik listesini **-StartTime** ve **-bitişsaati** parametreleriyle filtreleyebilirsiniz. **-StartTime** parametresi, aşağıdaki örnekte gösterildiği gibi belirli bir tarihten başlayarak bir tanılama etkinlik listesi döndürür.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -StartTime "08/01/2018"
 ```
 
-**- EndTime** parametresi, bir cmdlet ile eklenebilir **- StartTime** parametre sonuçları almak için istediğiniz zaman belirli bir süre belirtin. Aşağıdaki örnek cmdlet 1 Ağustos ve 10 Ağustos arasındaki tanılama etkinliklerin listesini döndürür.
+**-Bitişsaati** parametresi, için sonuçları almak istediğiniz belirli bir süreyi belirtmek için **-StartTime** parametresi ile bir cmdlet 'ine eklenebilir. Aşağıdaki örnek cmdlet 'i 1 Ağustos ve 10 Ağustos arasında bir tanılama etkinlikleri listesi döndürür.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -StartTime "08/01/2018" -EndTime "08/10/2018"
 ```
 
-**- StartTime** ve **- EndTime** parametreleri isteğe bağlı diğer filtre parametreleriyle da birleştirilebilir.
+**-StartTime** ve **-bitişsaati** parametreleri, diğer isteğe bağlı filtreleme parametreleriyle de birleştirilebilir.
 
-### <a name="filter-diagnostic-activities-by-activity-type"></a>Tanılama etkinlikleri etkinlik türüne göre filtrele
+### <a name="filter-diagnostic-activities-by-activity-type"></a>Tanılama etkinliklerini etkinlik türüne göre filtrele
 
-Tanılama etkinlikleri ile etkinlik türüne göre de filtreleyebilirsiniz **- ActivityType** parametresi. Aşağıdaki cmdlet, son kullanıcı bağlantılarının bir listesini döndürür:
+Ayrıca, **-ActivityType** parametresiyle etkinlik türüne göre tanılama etkinliklerini filtreleyebilirsiniz. Aşağıdaki cmdlet Son Kullanıcı bağlantılarının bir listesini döndürür:
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -ActivityType Connection
 ```
 
-Aşağıdaki cmdlet'i yönetici yönetim görevlerinin listesini döndürür:
+Aşağıdaki cmdlet yönetici yönetim görevlerinin bir listesini döndürür:
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -ActivityType Management
 ```
 
-**Get-RdsDiagnosticActivities** cmdlet'i, akış ActivityType belirten şu anda desteklemiyor.
+**Get-RdsDiagnosticActivities** cmdlet 'i Şu anda ActivityType öğesinin akışını belirtmeyi desteklemiyor.
 
-### <a name="filter-diagnostic-activities-by-outcome"></a>Tanılama etkinlikleri sonucuna göre filtrele
+### <a name="filter-diagnostic-activities-by-outcome"></a>Tanılama etkinliklerini sonuca göre filtrele
 
-Sonucu ile tarafından döndürülen tanılama etkinlik listeyi filtreleyebilirsiniz **-sonucu** parametresi. Aşağıdaki örnek cmdlet başarılı tanılama etkinliklerin listesini döndürür.
+Döndürülen tanılama etkinlik listesini, **-Outcome** parametresiyle Outcome ile filtreleyebilirsiniz. Aşağıdaki örnek cmdlet, başarılı tanılama etkinliklerinin bir listesini döndürür.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -Outcome Success
 ```
 
-Aşağıdaki örnek cmdlet başarısız tanılama etkinliklerin listesini döndürür.
+Aşağıdaki örnek cmdlet, başarısız tanılama etkinliklerinin bir listesini döndürür.
 
 ```powershell
 Get-RdsDiagnosticActivities -TenantName <tenantName> -Outcome Failure
 ```
 
-**-Sonucu** parametresi isteğe bağlı diğer filtre parametreleriyle da birleştirilebilir.
+**-Outcome** parametresi, diğer isteğe bağlı filtreleme parametreleriyle de birleştirilebilir.
 
 ## <a name="common-error-scenarios"></a>Yaygın hata senaryoları
 
-Hata senaryolarını hizmete iç ve dış sanal Windows Masaüstü için ayrılır.
+Hata senaryoları, hizmete ve dışarıdan Windows sanal masaüstüne göre kategorize edilir.
 
-* İç sorun: bir destek sorunu çözülmesi gerekir ve Kiracı Yöneticisi tarafından edilemeyecek senaryolar belirtir. Geri bildirim sağlanırken [Windows sanal masaüstü teknoloji topluluğuna](https://techcommunity.microsoft.com/t5/Windows-Virtual-Desktop/bd-p/WindowsVirtualDesktop), etkinlik kimliği içerir ve yaklaşık, sorunun gerçekleştiği zaman çerçevesi.
-* Dış sorun: Sistem Yöneticisi tarafından azaltılabilir senaryolarda ilgilidir. Windows sanal masaüstüne dış şunlardır.
+* İç sorun: Kiracı Yöneticisi tarafından hafiflemeyecek ve bir destek sorunu olarak çözülmesi gereken senaryoları belirtir. [Windows sanal masaüstü teknik topluluğu](https://techcommunity.microsoft.com/t5/Windows-Virtual-Desktop/bd-p/WindowsVirtualDesktop)aracılığıyla geri bildirim sağlarken, etkinliğin kimliği ve yaklaşık zaman çerçevesini sorun oluştuğunda ekleyin.
+* Dış sorun: Sistem Yöneticisi tarafından hafiflebilen senaryolarla ilgilidir. Bunlar Windows sanal masaüstü dışında.
 
-Aşağıdaki tabloda, yöneticilerinize karşılaşabileceğiniz genel hatalar listelenmektedir.
+Aşağıdaki tabloda, yöneticilerinizin çalıştırabilecek yaygın hatalar listelenmektedir.
 
 >[!NOTE]
->Bu önizleme sürümü, bir tam hataların kategorilere ayrılması içermez ve düzenli olarak güncelleştirilir. En güncel bilgilere sahip olmak için bu makaleye geri aylık en az bir kez kontrol edin. emin olun.
+>Bu liste, en yaygın hataları içerir ve sıradan bir temposunda güncellenir. En güncel bilgilere sahip olduğunuzdan emin olmak için, bu makaleye ayda en az bir kez tekrar kontrol ettiğinizden emin olun.
 
 ### <a name="external-management-error-codes"></a>Dış yönetim hata kodları
 
-|Sayısal kodu|Hata kodu|Önerilen çözüm|
+|Sayısal kod|Hata kodu|Önerilen çözüm|
 |---|---|---|
-|3|UnauthorizedAccess|Yönetici PowerShell cmdlet'ini çalıştırmaya çalıştığı kullanıcı bunu yapmak için izinlere sahip değil ya da kullanıcı adı yanlış yazılmış.|
-|1000|TenantNotFound|Girdiğiniz Kiracı adı, var olan tüm kiracılar eşleşmiyor. Kiracı adı yazım hataları gözden geçirip yeniden deneyin.|
-|1006|TenantCannotBeRemovedHasSessionHostPools|Bir kiracı, uzun nesneler içerdiğinden silinemiyor. Oturum ana bilgisayarı havuzları silin ve yeniden deneyin.|
-|2000|HostPoolNotFound|Girdiğiniz ana makine havuzu adı herhangi bir mevcut konak havuzları eşleşmiyor. Yazım hatası konak havuzu adını gözden geçirin ve yeniden deneyin.|
-|2005|HostPoolCannotBeRemovedHasApplicationGroups|Nesneleri içerdiği sürece bir ana bilgisayar havuzunu silemezsiniz. Tüm uygulama grupları, konak havuzda ilk kaldırın.|
-|2004|HostPoolCannotBeRemovedHasSessionHosts|İlk önce oturum ana havuzuna silinmesi tüm oturumları konakları kaldırın.|
-|5001|SessionHostNotFound|Sorgulanan oturumu ana bilgisayarı çevrimdışı olabilir. Konak havuzun durumunu kontrol edin.|
-|5008|SessionHostUserSessionsExist |Hedeflenen yönetim etkinliklerinizi yürütülmeden önce tüm kullanıcıların oturumu ana bilgisayarı üzerinde kullanıma imzalamanız gerekir.|
-|6000|AppGroupNotFound|Girdiğiniz uygulama grubu adı, mevcut tüm uygulama grupları eşleşmiyor. Uygulama grubu adı için yazım hataları gözden geçirip yeniden deneyin.|
-|6022|RemoteAppNotFound|Girdiğiniz RemoteApp adı tüm RemoteApps eşleşmiyor. RemoteApp adı için yazım hataları gözden geçirip yeniden deneyin.|
-|6010|PublishedItemsExist|Yayımlama çalıştığınız kaynak adı zaten var olan bir kaynak ile aynıdır. Kaynak adı değiştirin ve yeniden deneyin.|
-|7002|NameNotValidWhiteSpace|Ad boşluk kullanmayın.|
-|8000|InvalidAuthorizationRoleScope|Girilen rol adı, tüm mevcut rol adları eşleşmiyor. Rol adı için yazım hataları gözden geçirip yeniden deneyin. |
-|8001|UserNotFound |Girdiğiniz kullanıcı adı, var olan tüm kullanıcı adları eşleşmiyor. Yazım hatası adını gözden geçirin ve yeniden deneyin.|
-|8005|UserNotFoundInAAD |Girdiğiniz kullanıcı adı, var olan tüm kullanıcı adları eşleşmiyor. Yazım hatası adını gözden geçirin ve yeniden deneyin.|
-|8008|TenantConsentRequired|Yönergeleri izleyerek [burada](tenant-setup-azure-active-directory.md#grant-azure-active-directory-permissions-to-the-windows-virtual-desktop-preview-service) kiracınız için rıza sağlamanın.|
+|3|UnauthorizedAccess|Yönetim PowerShell cmdlet 'ini çalıştırmaya çalışan kullanıcının Kullanıcı adını bu şekilde veya yanlış yazmış.|
+|1000|TenantNotFound|Girdiğiniz kiracı adı var olan kiracılar ile eşleşmiyor. Yazım hataları için kiracı adını gözden geçirin ve yeniden deneyin.|
+|1006|TenantCannotBeRemovedHasSessionHostPools|Bir kiracıyı nesneler içerdiği sürece silemezsiniz. Önce oturum ana bilgisayar havuzlarını silip yeniden deneyin.|
+|2000|HostPoolNotFound|Girdiğiniz ana bilgisayar havuzu adı mevcut konak havuzlarıyla eşleşmiyor. Yazım hataları için konak havuzu adını gözden geçirin ve yeniden deneyin.|
+|2005|HostPoolCannotBeRemovedHasApplicationGroups|Bir konak havuzunu nesneler içerdiği sürece silemezsiniz. Önce konak havuzundaki tüm uygulama gruplarını kaldırın.|
+|2004|HostPoolCannotBeRemovedHasSessionHosts|Oturum Ana bilgisayar havuzunu silmeden önce tüm oturum Konakları kaldırın.|
+|5001|SessionHostNotFound|Sorguladığınız oturum ana bilgisayarı çevrimdışı olabilir. Konak havuzunun durumunu kontrol edin.|
+|5008|SessionHostUserSessionsExist |Amaçlanan yönetim etkinliğinizi yürütmeden önce oturum ana bilgisayarındaki tüm kullanıcıları imzalamanız gerekir.|
+|6000|AppGroupNotFound|Girdiğiniz uygulama grubu adı var olan herhangi bir uygulama grubuyla eşleşmiyor. Yazım hataları için uygulama grubu adını gözden geçirin ve yeniden deneyin.|
+|6022|RemoteAppNotFound|Girdiğiniz RemoteApp adı herhangi bir RemoteApps ile eşleşmiyor. Yazım hataları için RemoteApp adını gözden geçirin ve yeniden deneyin.|
+|6010|PublishedItemsExist|Yayımlamaya çalıştığınız kaynağın adı zaten var olan bir kaynakla aynı. Kaynak adını değiştirip yeniden deneyin.|
+|7002|Süs Otvalidwhitespace|Adda boşluk kullanmayın.|
+|8000|Invalidauthorizationrolescope|Girdiğiniz rol adı, var olan herhangi bir rol adıyla eşleşmiyor. Yazım hataları için rol adını gözden geçirin ve yeniden deneyin. |
+|8001|UserNotFound |Girdiğiniz Kullanıcı adı varolan kullanıcı adlarıyla eşleşmiyor. Yazım hatalarını gözden geçirin ve yeniden deneyin.|
+|8005|UserNotFoundInAAD |Girdiğiniz Kullanıcı adı varolan kullanıcı adlarıyla eşleşmiyor. Yazım hatalarını gözden geçirin ve yeniden deneyin.|
+|8008|TenantConsentRequired|Kiracınıza onay sağlamak için [buradaki](tenant-setup-azure-active-directory.md#grant-permissions-to-windows-virtual-desktop) yönergeleri izleyin.|
 
 ### <a name="external-connection-error-codes"></a>Dış bağlantı hata kodları
 
-|Sayısal kodu|Hata kodu|Önerilen çözüm|
+|Sayısal kod|Hata kodu|Önerilen çözüm|
 |---|---|---|
-|-2147467259|ConnectionFailedAdTrustedRelationshipFailure|Oturumu ana bilgisayarı doğru Active Directory'ye katılmamış.|
-|-2146233088|ConnectionFailedUserHasValidSessionButRdshIsUnhealthy|Bağlantı oturumu ana bilgisayarı kullanılamadığından başarısız oldu. Oturum ana bilgisayarın sistem durumunu denetleyin.|
-|-2146233088|ConnectionFailedClientDisconnect|Bu hata sık bakın, kullanıcının bilgisayarının ağa bağlı olduğundan emin olun.|
-|-2146233088|ConnectionFailedNoHealthyRdshAvailable|Konak kullanıcı bağlanmaya çalıştı oturumu iyi durumda değil. Sanal makine hata ayıklayın.|
-|-2146233088|ConnectionFailedUserNotAuthorized|Kullanıcı yayımlanan uygulama veya Masaüstü erişim iznine sahip değil. Yönetici yayımlanan kaynaklar kaldırıldıktan sonra hata görüntülenebilir. Uzak Masaüstü uygulama akışındaki yenilemek için kullanıcıya sor.|
-|2|FileNotFound|Kullanıcının erişmeye uygulama hatalı yüklenen veya hatalı bir yola ayarlayın.|
-|3|InvalidCredentials|Kullanıcı adı veya parola girilen kullanıcı mevcut kullanıcı adlarını veya parolaları eşleşmiyor. Kimlik bilgilerini yazım hataları gözden geçirip yeniden deneyin.|
-|8|ConnectionBroken|İstemci ve ağ geçidi veya sunucu arasında bağlantı kesildi. Beklenmedik bir şekilde gerçekleşir sürece gereken herhangi bir işlem.|
-|14|UnexpectedNetworkDisconnect|Ağ bağlantı kesildi. Yeniden bağlanmak için kullanıcıya sor.|
-|24|ReverseConnectFailed|Konak sanal makine, hiçbir doğrudan görebilmesi için RD Ağ Geçidi sahiptir. Ağ geçidi IP adresini çözülebilir emin olun.|
+|-2147467259|ConnectionFailedAdTrustedRelationshipFailure|Oturum Ana bilgisayarı Active Directory doğru şekilde katılmadı.|
+|-2146233088|Connectionfaileduserhasvalidsessionbutrdshıssağlıksız|Oturum Konağı kullanılamadığından bağlantı başarısız oldu. Oturum konağının sistem durumunu kontrol edin.|
+|-2146233088|ConnectionFailedClientDisconnect|Bu hatayla sık karşılaşırsanız, kullanıcının bilgisayarının ağa bağlı olduğundan emin olun.|
+|-2146233088|Connectionfailednohealthyırdshavailable|Ana bilgisayar kullanıcısının bağlanmaya çalıştığı oturum sağlıklı değil. Sanal makinede hata ayıklayın.|
+|-2146233088|ConnectionFailedUserNotAuthorized|Kullanıcının yayımlanan uygulamaya veya masaüstüne erişim izni yok. Hata, yönetici yayımlanmış kaynakları kaldırdıktan sonra görünebilir. Kullanıcıdan uzak masaüstü uygulamasında akışı yenilemesini isteyin.|
+|2|FileNotFound|Kullanıcının erişmeye çalıştığı uygulama yanlış yüklenmiş veya hatalı bir yola ayarlı.|
+|3|Invalidcredentials|Kullanıcının girdiği Kullanıcı adı veya parola, mevcut kullanıcı adları veya parolalarla eşleşmiyor. Yazım hataları bilgilerini gözden geçirin ve yeniden deneyin.|
+|8|Connectionkopuk|Istemci ve ağ geçidi veya sunucu bağlantısı kesilen bağlantı. Beklenmedik bir şekilde gerçekleşmediği takdirde eyleme gerek yoktur.|
+|14|UnexpectedNetworkDisconnect|Ağ bağlantısı bırakıldı. Kullanıcıdan tekrar bağlanmasını isteyin.|
+|24|Smarconnectfailed|Konak sanal makinesinde RD Ağ Geçidi doğrudan bir görüş satırı yoktur. Ağ geçidi IP adresinin çözümlenebildiğinden emin olun.|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Windows sanal masaüstü içinde rolleri hakkında daha fazla bilgi için bkz: [Windows sanal masaüstü Önizleme ortamı](environment-setup.md).
+Windows sanal masaüstü içindeki roller hakkında daha fazla bilgi için bkz. [Windows sanal masaüstü ortamı](environment-setup.md).
 
-Windows sanal masaüstü için kullanılabilen PowerShell cmdlet'lerin bir listesi görmek için bkz [PowerShell başvurusu](/powershell/windows-virtual-desktop/overview).
+Windows sanal masaüstü için kullanılabilir PowerShell cmdlet 'lerinin listesini görmek için [PowerShell başvurusuna](/powershell/windows-virtual-desktop/overview)bakın.

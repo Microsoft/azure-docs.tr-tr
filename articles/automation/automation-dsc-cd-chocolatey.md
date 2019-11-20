@@ -1,6 +1,6 @@
 ---
-title: Azure Otomasyonu durumu yapılandırma Chocolatey ile sürekli dağıtım
-description: Paket Yöneticisi Azure Otomasyon durum yapılandırması, DSC ve Chocolatey kullanarak sürekli dağıtım DevOps.  Örnek tam JSON Resource Manager şablonu ve PowerShell kaynağı.
+title: Chocolatey ile Azure Otomasyonu durum yapılandırması sürekli dağıtımı
+description: Azure Otomasyonu durum yapılandırması, DSC ve Chocolatey Paket Yöneticisi kullanarak DevOps sürekli dağıtımı.  Tam JSON Kaynak Yöneticisi şablonu ve PowerShell kaynağı içeren örnek.
 services: automation
 ms.service: automation
 ms.subservice: dsc
@@ -9,93 +9,93 @@ ms.author: robreed
 ms.date: 08/08/2018
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: b53cb65ec99637dadb16ed9d97c495571be956d7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f4512b79873d7f770b32a452a02c53bc5575bdac
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61073921"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72243595"
 ---
-# <a name="usage-example-continuous-deployment-to-virtual-machines-using-automation-state-configuration-and-chocolatey"></a>Kullanım örneği: Sanal makinelere Otomasyon durum yapılandırması ve Chocolatey kullanarak sürekli dağıtım
+# <a name="usage-example-continuous-deployment-to-virtual-machines-using-automation-state-configuration-and-chocolatey"></a>Kullanım örneği: Automation durum yapılandırması ve Chocolatey kullanarak sanal makinelere sürekli dağıtım
 
-DevOps dünyada çeşitli noktaları ile sürekli tümleştirme işlem hattında yardımcı olmak üzere birçok araç vardır. Azure Otomasyonu durumu, DevOps takımları dağıtabileceklerinizle seçenekleri Hoş Geldiniz yeni eklenen yapılandırmadır. Bu makalede, bir Windows bilgisayar için yedekleme sürekli dağıtım (CD) ayarı gösterilmektedir. (Bir web sitesi, örneğin gibi) rolü ve ek roller için buradan gerektiği kadar Windows bilgisayarları dahil etmesini teknik kolayca genişletebilirsiniz.
+DevOps dünyasında, sürekli tümleştirme ardışık düzeninde çeşitli noktalarda yardımcı olacak birçok araç vardır. Azure Otomasyonu durum yapılandırması, DevOps takımlarının kullanabildiği seçeneklere yeni bir hoş geldiniz. Bu makalede bir Windows bilgisayarı için sürekli dağıtımı (CD) ayarlama gösterilmektedir. Yöntemi, rol (bir Web sitesi gibi) ve ek roller de dahil olmak üzere gerektiği kadar çok sayıda Windows bilgisayarı içerecek şekilde kolayca genişletebilirsiniz.
 
-![Iaas Vm'leri için sürekli dağıtım](./media/automation-dsc-cd-chocolatey/cdforiaasvm.png)
+![IaaS VM 'Leri için sürekli dağıtım](./media/automation-dsc-cd-chocolatey/cdforiaasvm.png)
 
 ## <a name="at-a-high-level"></a>Yüksek düzeyde
 
-Buraya giderek oldukça bit vardır, ancak iki ana süreçlerine Neyse bölünebilir:
+Burada oldukça bir bit vardır ancak iki ana işleme ayrılabilir:
 
-- Kod yazma, test, oluşturma ve yükleme paketleri için birincil ve ikincil sürüme sisteminin yayımlama.
-- Oluşturma ve yükleyecek ve paketleri kod yürütmesine Vm'leri yönetme.  
+- Kod yazma ve test etme, sonra sistemin birincil ve ikincil sürümleri için yükleme paketleri oluşturma ve yayımlama.
+- Paketlerdeki kodu yükleyecek ve yürüteceği VM 'Leri oluşturma ve yönetme.  
 
-Her iki çekirdek işlem yerinde olduktan sonra otomatik olarak yeni sürümlerle oluşturulan ve dağıtılan herhangi belirli VM'de çalışan paketi güncelleştirmeye kısa bir adımdır.
+Bu temel işlemlerin her ikisi de gerçekleştikten sonra, yeni sürümler oluşturulup dağıtıldığı sürece belirli bir VM 'de çalışan paketi otomatik olarak güncellemek için kısa bir adımdır.
 
-## <a name="component-overview"></a>Bileşenine genel bakış
+## <a name="component-overview"></a>Bileşene genel bakış
 
-Yöneticileri gibi paket [apt-get](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) Linux dünya, ancak vermeyecek kadar Windows dünyanın oldukça iyi bilinen sorunlardır.
-[Chocolatey](https://chocolatey.org/) böyle bir şey ve Scott Hanselman'ın [blog](https://www.hanselman.com/blog/IsTheWindowsUserReadyForAptget.aspx) konuda harika bir giriş olduğundan. Buna koysalar Chocolatey paketleri paketleri merkezi bir depodan komut satırını kullanarak bir Windows sistemine yüklemek sağlar. Oluşturabilir ve kendi deponuzda yönetmek ve Chocolatey belirlediğiniz depoları arasında herhangi bir sayı paketlerini yükleyebilirsiniz.
+[Apt-get](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) gibi paket yöneticileri, Linux dünyasında oldukça iyi bilinir, ancak Windows dünyasında çok daha fazla değildir.
+[Chocolatey](https://chocolatey.org/) böyle bir şeydir ve konu başlığı üzerinde Scott Hanselman 'ın [blogu](https://www.hanselman.com/blog/IsTheWindowsUserReadyForAptget.aspx) harika bir giriş. Bir Nutshell 'de, Chocolatey bir paket deposundaki paketleri komut satırını kullanarak bir Windows sistemine yüklemenize izin verir. Kendi deponuzu oluşturabilir ve yönetebilirsiniz ve Chocolatey, belirlediğiniz sayıda depodaki paketleri yükleyebilir.
 
-Desired State Configuration ' nı (DSC) ([genel bakış](/powershell/dsc/overview)) bir makine için istediğiniz yapılandırmayı bildirmek izin veren bir PowerShell aracıdır. Örneğin, söylediğiniz, "yüklü Chocolatey istiyorum, yüklü IIS istiyorum, bağlantı noktası 80 açık istiyorum, yüklü sürüm 1.0.0 sitemde istiyorum." DSC yerel Configuration Manager (LCM) yapılandırma uygular. Bir DSC çekme sunucusuna bir depo makineleriniz için yapılandırmaları içerir. Her bir makinede LCM düzenli aralıklarla yapılandırmasıyla depolanan yapılandırma eşleşip eşleşmediğini teslim eder. Bu durum raporu veya makine depolanan yapılandırma ile aynı doğrultuda içine geri getirmek çalışır. Bir makine ya da değiştirilmiş yapılandırma ile aynı doğrultuda gelmesini makineler kümesi neden çekme sunucusunda depolanan yapılandırmasını düzenleyebilirsiniz.
+İstenen Durum Yapılandırması (DSC) ([genel bakış](/powershell/scripting/dsc/overview/overview)) bir makine için istediğiniz yapılandırmayı bildirmenize olanak sağlayan bir PowerShell aracıdır. Örneğin, "Chocolatey yüklenmesini istiyorum, IIS 'nin yüklenmesini istiyorum, bağlantı noktası 80 ' ün açılmasını istiyorum, Web sitemin sürüm 1.0.0 'ın yüklü olmasını istiyorum" deyin. DSC yerel Configuration Manager (LCM) bu yapılandırmayı uygular. DSC çekme sunucusu, makineleriniz için bir yapılandırma deposu tutar. Her makinedeki LCM, yapılandırmasının depolanan yapılandırmayla eşleşip eşleşmediğini görmek için düzenli aralıklarla kontrol eder. Bu durum, durumu bildirebilir veya depolanan yapılandırma ile makineyi yeniden hizalı hale getirmeyi deneyebilir. Bir makine veya makine kümesinin değiştirilen yapılandırmayla hizalı olmasına neden olmak için, istek sunucusunda depolanan yapılandırmayı düzenleyebilirsiniz.
 
-Azure Otomasyonu, runbook'ları, düğümler, kimlik bilgileri, kaynaklar ve zamanlamaları ve genel değişkenler gibi varlıklar'ı kullanarak çeşitli görevleri otomatik hale getirmenizi sağlayan Microsoft Azure yönetilen bir hizmettir.
-Azure Otomasyonu durum yapılandırması bu Otomasyon PowerShell DSC araçları dahil etme yeteneği genişletir. Harika bir işte [genel bakış](automation-dsc-overview.md).
+Azure Otomasyonu, runbook 'ları, düğümleri, kimlik bilgilerini, kaynakları ve zamanlamalar ve genel değişkenler gibi varlıkları kullanarak çeşitli görevleri otomatikleştirmenizi sağlayan Microsoft Azure yönetilen bir hizmettir.
+Azure Otomasyonu durum yapılandırması, bu Otomasyon özelliğini PowerShell DSC araçları içerecek şekilde genişletir. Harika bir [genel bakış](automation-dsc-overview.md).
 
-DSC kaynağı, ağ, Active Directory ya da SQL Server'ı yönetme gibi belirli özellikleri olan kod için kullanılan bir modüldür. Chocolatey DSC kaynak erişim (diğerlerinin arasında) bir NuGet sunucusu, paketleri indirin, paketleri yüklemek ve benzeri nasıl bilir. Diğer birçok DSC kaynaklarında vardır [PowerShell Galerisi](https://www.powershellgallery.com/packages?q=dsc+resources&prerelease=&sortOrder=package-title).
-Bu modüller (sizin tarafınızdan) çekme Azure Otomasyonu durumu yapılandırma sunucusu yüklü yapılandırmalarınızı tarafından kullanılabilmesi için.
+DSC kaynağı, ağ, Active Directory veya SQL Server yönetimi gibi belirli özellikleri olan bir kod modüldür. Chocolatey DSC kaynağı bir NuGet sunucusuna erişmeyi (diğerleri arasında), paketleri indirmeyi, paketleri yüklemeyi vb. bilir. [PowerShell Galerisi](https://www.powershellgallery.com/packages?q=dsc+resources&prerelease=&sortOrder=package-title)DIĞER birçok DSC kaynağı vardır.
+Bu modüller, Azure Otomasyonu durum yapılandırması çekme sunucunuza (sizin tarafınızdan) yüklenir ve bu sayede yapılandırmalar tarafından kullanılabilirler.
 
-Resource Manager şablonları, altyapınızı - ağlar, alt ağlar, ağ güvenliği gibi şeyleri oluşturmanın bildirim temelli bir yöntemini sağlar ve yönlendirme, yük Dengeleyiciler, NIC'ler, VM'ler ve benzeri. İşte bir [makale](../azure-resource-manager/resource-manager-deployment-model.md) , Resource Manager dağıtım modelini (bildirim) (zorunlu) Azure Hizmet Yönetimi (ASM veya Klasik) dağıtım modeli ile karşılaştırır ve çekirdek kaynak sağlayıcıları açıklar, bilgi işlem, depolama ve ağ.
+Kaynak Yöneticisi şablonlar; ağlar, alt ağlar, ağ güvenliği ve yönlendirme, yük dengeleyiciler, NIC 'Ler, VM 'Ler vb. gibi altyapınızı oluşturmak için bildirim temelli bir yol sağlar. Azure hizmet yönetimi (ASM veya klasik) dağıtım modeli (zorunlu) ile Kaynak Yöneticisi dağıtım modelini (beyan) karşılaştıran ve çekirdek kaynak sağlayıcıları, işlem, depolama ve ağ ile ilgili bir [Makale](../azure-resource-manager/resource-manager-deployment-model.md) aşağıda açıklanmaktadır.
 
-Temel özelliklerinden biri Resource Manager şablonu olarak sağlandığından, VM'de oturum VM uzantısı yükleme yeteneğidir. VM uzantısı, özel bir betik çalıştırarak, virüsten koruma yazılımı veya bir DSC yapılandırma betiği çalıştırma gibi belirli özelliklere sahiptir. VM uzantıları diğer birçok tür vardır.
+Kaynak Yöneticisi şablonun bir anahtar özelliği, sağlanan VM 'ye bir VM Uzantısı yükleyebilmesidir. Bir VM uzantısının özel bir komut dosyası çalıştırma, virüsten koruma yazılımı yükleme veya bir DSC yapılandırma betiği çalıştırma gibi belirli yetenekleri vardır. Birçok farklı VM uzantısı türü vardır.
 
 ## <a name="quick-trip-around-the-diagram"></a>Diyagram etrafında hızlı seyahat
 
-Üstten başlayarak, kodunuzu yazma derleme ve test edin, ardından bir yükleme paketi oluşturun.
-Chocolatey yükleme paketleri, MSI, MSU, ZIP gibi çeşitli türlerde başa çıkabilir. Ve Chocolateys yerel özellikleri oldukça, en fazla değilseniz, gerçek yükleme yapmak için PowerShell tam gücünü sahipsiniz. Paket bazı yere erişilebilir – bir paket deposu yerleştirin. Bu kullanım örneği, bir Azure blob depolama hesabındaki ortak klasör kullanır, ancak herhangi bir yerde olabilir. Chocolatey NuGet sunucularını ve birkaç başka Yönetim Paketi meta verileri için yerel olarak çalışır. [Bu makalede](https://github.com/chocolatey/choco/wiki/How-To-Host-Feed) seçenekler açıklanmaktadır. Bu kullanım örneği NuGet kullanır. Bir Nuspec, takımınızın paketleriniz hakkındaki meta verilerdir. Nuspec'ın "NuPkg ait derlenmiş" ve bir NuGet sunucusunda depolanan. Yapılandırmanıza bir paket adına göre istekleri ve NuGet sunucusuna başvuran, Chocolatey DSC kaynağı (artık VM) paket Dallarınızla ve sizin için yükler. Ayrıca, belirli bir paket sürümü isteyebilir.
+En üstten başlayarak kodunuzu yazar, oluşturup test edin ve ardından bir yükleme paketi oluşturun.
+Chocolatey, MSI, MSU, ZIP gibi çeşitli yükleme paketi türlerini işleyebilir. Ayrıca, Chocolateys Native özellikleri tam olarak BT değilse gerçek yüklemeyi yapmak için PowerShell 'in tam gücünden yararlanabilirsiniz. Paketi bir paket deposu erişilebilir bir yere yerleştirin. Bu kullanım örneği, bir Azure Blob depolama hesabında ortak bir klasör kullanır, ancak herhangi bir yerde olabilir. Chocolatey, NuGet sunucularıyla yerel olarak, diğer bir deyişle paket meta verisinin yönetimi için de kullanılır. [Bu makalede](https://github.com/chocolatey/choco/wiki/How-To-Host-Feed) seçenekler açıklanmaktadır. Bu kullanım örneği NuGet kullanır. Bir Nuspec, paketleriniz hakkındaki meta verilerlerdir. Nuspec 'ler, NuPkg 'da "derlenir" ve bir NuGet sunucusunda depolanır. Yapılandırmanız adına göre bir paket istediğinde ve bir NuGet sunucusuna başvurduğunda, Chocolatey DSC kaynağı (Şu anda VM 'de) paketi ve sizin için yüklerse. Ayrıca, bir paketin belirli bir sürümünü isteyebilirsiniz.
 
-Resmin sol alt kısmında bir Azure Resource Manager şablonu yoktur. Bu kullanım örneğinde, VM uzantısı, VM'nin Azure Otomasyonu durumu yapılandırma çekme sunucusuna (diğer bir deyişle, bir çekme sunucusu) bir düğüm olarak kaydeder. Yapılandırma çekme sunucusunda depolanır.
-Aslında, iki kez depolandığını: düz metin olarak ve (için olanlar gibi şeyler hakkında bilmeniz.) bir MOF dosyası olarak derlenmiş sonra bir kez Portalda, MOF bir "düğüm" (aksine sadece "yapılandırma") bir yapılandırmadır. Düğüm yapılandırması bilir, böylece bir düğümle ilişkili yapıdır. Düğüm yapılandırması düğüme atamak nasıl ayrıntılarını aşağıda göstermek.
+Resmin sol alt kısmında bir Azure Resource Manager şablonu vardır. Bu kullanım örneğinde, VM Uzantısı VM 'yi Azure Otomasyonu durum yapılandırması çekme sunucusuna (yani bir çekme sunucusu) düğüm olarak kaydeder. Yapılandırma, çekme sunucusunda depolanır.
+Aslında, iki kez depolanır: bir kez düz metin, ve bir MOF dosyası olarak derlendikten sonra (böyle şeyler hakkında bilgi sahibi olanlar için). Portalda MOF bir "düğüm yapılandırması" (yalnızca "yapılandırma" ın aksine) olur. Bu, düğümün yapılandırmasını bilmesi için bir düğümle ilişkili yapıtı. Aşağıdaki ayrıntılar, düğüm yapılandırmasını düğüme atamayı gösterir.
 
-Büyük olasılıkla zaten en üst veya en fazla bit yaptığınızı. Nuspec oluşturmak, derlemek ve bir NuGet Server'da depolamak küçük bir şeydir. Ve VM'ler zaten yönettiğiniz. Sonraki adım için sürekli dağıtım Sürüyor (kez) çekme sunucusu ayarlama, düğümlerinizi kendisiyle (sonra), kaydetme ve oluşturma ve yapılandırma vardır (başlangıçta) depolama gerektirir. Ardından paketleri yükseltilmiş ve depoya dağıtılan düğüm yapılandırması ve yapılandırma (gerektiği şekilde yineleyin) çekme sunucusu yenileyin.
+Zaten en üstte veya en çok bir bit daha gelişiyoruz. Nuspec 'in oluşturulması, derlenmesi ve bir NuGet sunucusunda depolanması küçük bir şeydir. VM 'Leri zaten yönetiyorsunuz. Sonraki adımı sürekli dağıtım için almak, çekme sunucusunu ayarlamayı (bir kez), düğümlerinizi (bir kez) kaydederek (başlangıçta) yapılandırmayı oluşturup depolamayı gerektirir. Paketler yükseltilene ve depoya dağıtıldıktan sonra, çekme sunucusunda yapılandırma ve düğüm yapılandırmasını yenileyin (gerektiğinde yineleyin).
 
-Bir Resource Manager şablonu ile başlatıyorsanız değil, bu da normaldir. Çekme sunucusu ve tüm rest ile Vm'leri kaydetme yardımcı olmak için tasarlanan bir PowerShell cmdlet'leri vardır. Daha fazla ayrıntı için bu makaleye bakın: [Makineleri Azure Otomasyon durum yapılandırması tarafından Yönetim için hazırlama](automation-dsc-onboarding.md).
+Kaynak Yöneticisi şablonuyla başlıyorsanız de bu da Tamam ' a tıklayın. VM 'lerinizi çekme sunucusu ve tüm rest ile kaydetmenize yardımcı olmak üzere tasarlanan PowerShell cmdlet 'leri vardır. Daha fazla ayrıntı için bkz. [Azure Otomasyonu durum yapılandırmasına göre yönetim için makineleri ekleme](automation-dsc-onboarding.md).
 
-## <a name="step-1-setting-up-the-pull-server-and-automation-account"></a>1\. adım: Çekme sunucusu ve Otomasyon hesabı ayarlama
+## <a name="step-1-setting-up-the-pull-server-and-automation-account"></a>1\. Adım: çekme sunucusunu ve otomasyon hesabını ayarlama
 
-Kimliği doğrulanmış bir konumunda (`Connect-AzureRmAccount`) PowerShell komut satırı: (çekme sunucusu ayarlama sırada birkaç dakika sürebilir)
+Kimliği doğrulanmış (`Connect-AzureRmAccount`) PowerShell komut satırı: (çekme sunucusu ayarlandığında birkaç dakika sürebilir)
 
 ```azurepowershell-interactive
 New-AzureRmResourceGroup –Name MY-AUTOMATION-RG –Location MY-RG-LOCATION-IN-QUOTES
 New-AzureRmAutomationAccount –ResourceGroupName MY-AUTOMATION-RG –Location MY-RG-LOCATION-IN-QUOTES –Name MY-AUTOMATION-ACCOUNT
 ```
 
-Otomasyon hesabınızı (konum olarak da bilinir) aşağıdaki bölgelerden birini koyabilirsiniz: Doğu ABD 2, Orta Güney ABD, ABD Devleti Virginia, Batı Avrupa, Güneydoğu Asya, Japonya Doğu, Orta Hindistan ve Avustralya Güneydoğu, Kanada Orta, Kuzey Avrupa.
+Otomasyon hesabınızı şu bölgelerden birine (diğer adıyla) koyabilirsiniz: Doğu ABD 2, Orta Güney ABD, US Gov Virginia, Batı Avrupa, Güneydoğu Asya, Japonya Doğu, Orta Hindistan ve Avustralya Güneydoğu, Kanada Orta Kuzey Avrupa.
 
-## <a name="step-2-vm-extension-tweaks-to-the-resource-manager-template"></a>2\. adım: VM uzantısı tweaks için Resource Manager şablonu
+## <a name="step-2-vm-extension-tweaks-to-the-resource-manager-template"></a>2\. Adım: Kaynak Yöneticisi şablonuna yönelik VM Uzantısı tnak 'leri
 
-Bu konuda sağlanan Ayrıntılar (PowerShell DSC VM uzantısı kullanarak) VM kayıt için [Azure Hızlı Başlangıç şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/dsc-extension-azure-automation-pullserver).
-Bu adım, yeni VM durumu yapılandırması düğümleri listesinden çekme sunucusu ile kaydeder. Düğüm yapılandırması düğüme uygulanacak belirten bu kaydı bir parçası. Bu düğüm yapılandırması burada bu ilk kez gerçekleştirilir 4. adım olan Tamam, bu nedenle çekme Sunucusu'nda henüz mevcut gerekmez. Ancak burada 2. adımda düğümün adını ve yapılandırmanın adını verdiniz gerekir. Bu kullanım örneğinde düğümüdür 'isvbox' ve 'ISVBoxConfig' yapılandırmadır. Düğüm yapılandırması adı (DeploymentTemplate.json belirtilmesi için) 'ISVBoxConfig.isvbox' olması.
+Bu [Azure hızlı başlangıç şablonunda](https://github.com/Azure/azure-quickstart-templates/tree/master/dsc-extension-azure-automation-pullserver)belirtilen VM kaydı (POWERSHELL DSC VM uzantısı kullanılarak) için ayrıntılar.
+Bu adım, yeni VM 'nizi durum yapılandırması düğümleri listesindeki çekme sunucusuna kaydeder. Bu kaydın bir parçası, düğüme uygulanacak düğüm yapılandırmasını belirtmektir. Bu düğüm yapılandırmasının çekme sunucusunda mevcut olması gerekmez, bu nedenle adım 4 ' ün ilk kez yapıldığı yerde olması gerekir. Ancak adım 2 ' de, düğüm adına ve yapılandırmanın adına karar vermiş olmanız gerekir. Bu kullanım örneğinde, düğüm ' isvbox ' ve yapılandırma ' ISVBoxConfig '. Bu nedenle, düğüm yapılandırma adı (DeploymentTemplate. JSON içinde belirtilmelidir) ' ISVBoxConfig. isvbox '.
 
-## <a name="step-3-adding-required-dsc-resources-to-the-pull-server"></a>3\. adım: Çekme sunucusu gerekli DSC kaynakları ekleme
+## <a name="step-3-adding-required-dsc-resources-to-the-pull-server"></a>3\. Adım: gerekli DSC kaynaklarını çekme sunucusuna ekleme
 
-PowerShell Galerisi, Azure Otomasyonu hesabınızı DSC kaynaklarını yüklemek için işaretlenmiş.
-"Dağıtmak için Azure Otomasyonu" düğmesine tıklayın ve istediğiniz kaynağa gidin.
+PowerShell Galerisi, DSC kaynaklarını Azure Otomasyonu hesabınıza yüklemek için işaretlenir.
+İstediğiniz kaynağa gidin ve "Azure Otomasyonu 'na dağıt" düğmesine tıklayın.
 
 ![PowerShell Galerisi örneği](./media/automation-dsc-cd-chocolatey/xNetworking.PNG)
 
-Başka bir yöntem yeni Azure Portalı'na eklenen yeni modülleri çekme veya mevcut modüllerini sağlar. Otomasyon hesabı kaynak varlıklar kutucuğa tıklayın ve son olarak modülleri kutucuk. Galeriye Gözat simgesi, galerideki modüllerin listesini görmek için aşağı detaylarına ve sonuç olarak, Otomasyon hesabına aktarın sağlar. Bu, modüllerinizi zaman zaman güncel tutmak için harika bir yoludur. Ayrıca, hiçbir şey eşitlenmemiş alır emin olmak için diğer modüllerle bağımlılıkları içeri aktarma özelliğini denetler.
+Azure portalına yakın zamanda eklenen başka bir teknik, yeni modüller almanıza veya mevcut modülleri güncelleştirmenize olanak tanır. Otomasyon hesabı kaynağına, varlıklar kutucuğuna ve son olarak modüller kutucuğuna tıklayın. Galeriye göz at simgesi, galerideki modüllerin listesini görmenizi, Ayrıntılar halinde detaya gitmeyi ve sonuç olarak otomasyon hesabınıza aktarmayı sağlar. Bu, modüllerinizi zaman zaman güncel tutmanın harika bir yoludur. Ve içeri aktarma özelliği, hiçbir şeyin eşitlenmemiş olmamasını sağlamak için diğer modüllerle bağımlılıkları denetler.
 
-Veya el ile bir yaklaşım yoktur. Bir Windows bilgisayar için bir PowerShell tümleştirme modülü klasör yapısını, Azure Otomasyonu tarafından beklenen klasör yapısı biraz farklıdır.
-Bu, bulunmanıza biraz ince ayarlar yapma gerektirir. Ancak sabit değil ve (gelecek yükseltmek istemediğiniz sürece.), kaynak başına yalnızca bir kez gerçekleştirilir Bu makalede PowerShell tümleştirme modülleri yazma ile ilgili daha fazla bilgi için bkz: [İçin Azure Automation tümleştirme modülleri yazma](https://azure.microsoft.com/blog/authoring-integration-modules-for-azure-automation/)
+Ya da el ile yaklaşım vardır. Bir Windows bilgisayarı için PowerShell tümleştirme modülünün klasör yapısı, Azure Otomasyonu tarafından beklenen klasör yapısından biraz farklıdır.
+Bu, bölümlük için biraz daha fazla alan gerektirir. Ancak bu zor değildir ve kaynak başına yalnızca bir kez yapılır (gelecekte yükseltmek istemediğiniz durumlar dışında). PowerShell tümleştirme modüllerini yazma hakkında daha fazla bilgi için şu makaleye bakın: [Azure Otomasyonu Için tümleştirme modülleri yazma](https://azure.microsoft.com/blog/authoring-integration-modules-for-azure-automation/)
 
-- İş istasyonunuzda aşağıdaki gibi ihtiyacınız modülünü yükleyin:
-  - Yükleme [Windows Management Framework v5](https://aka.ms/wmf5latest) (Windows 10 için gerekli değildir)
-  - `Install-Module –Name MODULE-NAME`    < — modülü PowerShell Galerisi'ndeki Dallarınızla
-- Modül klasörüne kopyalayın `c:\Program Files\WindowsPowerShell\Modules\MODULE-NAME` geçici bir klasöre
-- Örnekler ve belgeler ana klasöründen silin.
-- ZIP dosyasını aynı klasöre adlandırma ana klasör zip 
-- ZIP dosyası, bir Azure depolama hesabındaki blob depolama gibi erişilebilir bir HTTP konuma yerleştirin.
-- Bu PowerShell çalıştırın:
+- İş istasyonunuzda gereken modülü aşağıdaki şekilde yükleyebilirsiniz:
+  - [Windows Management Framework](https://aka.ms/wmf5latest) 'Ü (Windows 10 için gerekli değildir) yükler
+  - `Install-Module –Name MODULE-NAME` < — modülü PowerShell Galerisi dönüştürür
+- Modül klasörünü `c:\Program Files\WindowsPowerShell\Modules\MODULE-NAME` ' dan geçici bir klasöre kopyalayın
+- Ana klasörden örnek ve belge silme
+- Ana klasör olarak, ZIP dosyasını tamamen klasörle aynı olarak adlandırarak 
+- ZIP dosyasını, bir Azure depolama hesabındaki BLOB depolama gibi erişilebilir bir HTTP konumuna koyun.
+- Bu PowerShell 'i Çalıştır:
 
   ```powershell
   New-AzureRmAutomationModule `
@@ -103,13 +103,13 @@ Bu, bulunmanıza biraz ince ayarlar yapma gerektirir. Ancak sabit değil ve (gel
     -Name MODULE-NAME –ContentLink 'https://STORAGE-URI/CONTAINERNAME/MODULE-NAME.zip'
   ```
 
-Dahil edilen örnek cChoco ve xNetworking için aşağıdaki adımları gerçekleştirir. Bkz: [notları](#notes) cChoco için özel işleme için.
+Dahil edilen örnek, cChoco ve xNetworking için bu adımları gerçekleştirir. CChoco için özel işleme için [notlara](#notes) bakın.
 
-## <a name="step-4-adding-the-node-configuration-to-the-pull-server"></a>4\. Adım: Düğüm yapılandırması çekme sunucusu ekleme
+## <a name="step-4-adding-the-node-configuration-to-the-pull-server"></a>4\. Adım: düğüm yapılandırmasını çekme sunucusuna ekleme
 
-Özel derleme ve çekme sunucusu yapılandırmanızı alma ilk kez hakkında bir şey yoktur. Tüm sonraki içeri aktarma/derler aynı yapılandırmaya sahip tam olarak aynı görünür. Paketiniz güncelleştirin ve üretime dışına gerek her zaman bu adım bunu yapılandırma dosyasında doğru olduğundan olduktan sonra – paketinizi yeni sürümü dahil olmak üzere. PowerShell ve yapılandırma dosyası aşağıda verilmiştir:
+Yapılandırmanızı çekme sunucusuna ilk kez aktardığınızda ve derlemenizde özel bir şey yoktur. Aynı yapılandırmanın sonraki tüm içeri aktarma/derleme işlemi tamamen aynı şekilde görünür. Paketinizi her güncelleştirdiğinizde ve üretime göndermeniz gerektiğinde, paketinizin yeni sürümü de dahil olmak üzere, yapılandırma dosyasının doğru olduğundan emin olduktan sonra bu adımı gerçekleştirebilirsiniz. Yapılandırma dosyası ve PowerShell şu şekildedir:
 
-ISVBoxConfig.ps1:
+ISVBoxConfig. ps1:
 
 ```powershell
 Configuration ISVBoxConfig
@@ -154,7 +154,7 @@ Configuration ISVBoxConfig
 }
 ```
 
-Yeni-ConfigurationScript.ps1:
+New-ConfigurationScript. ps1:
 
 ```powershell
 Import-AzureRmAutomationDscConfiguration `
@@ -173,39 +173,39 @@ Get-AzureRmAutomationDscCompilationJob `
     -Id $compilationJobId
 ```
 
-Bu adımların sonucu yeni bir düğüm yapılandırması "çekme sunucusunda yerleştirilen ISVBoxConfig.isvbox" adlı. Düğüm yapılandırması adı "configurationName.nodeName" oluşturulmuştur.
+Bu adımlar, çekme sunucusuna yerleştirilmiş "ISVBoxConfig. isvbox" adlı yeni bir düğüm yapılandırmasının oluşmasına neden olacak. Düğüm yapılandırma adı "configurationName. Düğadı" olarak oluşturulur.
 
-## <a name="step-5-creating-and-maintaining-package-metadata"></a>5\. Adım: Oluşturma ve paket meta verileri koruma
+## <a name="step-5-creating-and-maintaining-package-metadata"></a>5\. Adım: paket meta verilerini oluşturma ve sürdürme
 
-Paket Deposu yerleştirdiğiniz her paket için tanımladığı bir nuspec gerekir.
-Bu nuspec derlenmiş ve NuGet sunucunuzun depolanır. Bu işlem açıklanan [burada](https://docs.nuget.org/create/creating-and-publishing-a-package). Bir NuGet sunucusu olarak MyGet.org kullanabilirsiniz. Bu hizmet satmak, ancak ücretsiz SKU Başlatıcı sahip. NuGet.org kendi NuGet sunucusu, özel paketler için yükleme yönergeleri bulabilirsiniz.
+Paket deposuna yerleştirdiğiniz her bir paket için, onu açıklayan bir nuspec gerekir.
+Bu nuspec 'in NuGet sunucunuzda derlenmesi ve depolanması gerekir. Bu işlem [burada](https://docs.nuget.org/create/creating-and-publishing-a-package)açıklanmıştır. MyGet.org 'i bir NuGet sunucusu olarak kullanabilirsiniz. Bu hizmeti satmakla kalmaz, ücretsiz bir başlatıcı SKU 'SU vardır. NuGet.org adresinde, özel paketleriniz için kendi NuGet sunucunuzu yükleme yönergelerini bulacaksınız.
 
-## <a name="step-6-tying-it-all-together"></a>6\. Adım: Tümünü bir araya bağlanma
+## <a name="step-6-tying-it-all-together"></a>6\. Adım: tümünü bir araya bağlama
 
-Sürüm QA geçirir ve onaylanır her zaman dağıtım için paketin oluşturulduğu, nuspec ve güncelleştirilen ve NuGet sunucuya dağıtılan nupkg. Ayrıca, yeni sürüm numarasıyla kabul etmek için ' % s'yapılandırması (yukarıdaki adım 4) güncelleştirilmesi gerekir. Çekme sunucusuna gönderilen ve derlenmiş gerekir.
-Bu noktadan itibaren güncelleştirme çekme ve yüklemek için bu yapılandırmasına göre değişir Vm'leri aittir. Bu güncelleştirmelerin her biri basit - yalnızca bir çizgi veya iki PowerShell. Azure DevOps söz konusu olduğunda, bunlardan bazıları bir yapı içinde birbirine zincirlenebilir derleme görevleri kapsüllenir. Bu [makale](https://www.visualstudio.com/docs/alm-devops-feature-index#continuous-delivery) daha fazla ayrıntı sağlar. Bu [GitHub deposunu](https://github.com/Microsoft/vso-agent-tasks) çeşitli kullanılabilir yapı görevleri ayrıntıları.
+Bir sürüm QA 'i her geçtiğinde ve dağıtım için onaylandığında, paket oluşturulur, nuspec ve nupkg güncelleştirilir ve NuGet sunucusuna dağıtılır. Ayrıca, yapılandırmanın (yukarıdaki 4. adım) yeni sürüm numarasını kabul etmek için güncelleştirilmeleri gerekir. Çekme sunucusuna gönderilmesi ve derlenmesi gerekir.
+Bu noktadan itibaren, güncelleştirmeyi çekmek ve yüklemek için bu yapılandırmaya bağlı olan sanal makinelere bağımlıdır. Bu güncelleştirmelerin her biri basit-yalnızca bir çizgi veya PowerShell 'in ikisi vardır. Azure DevOps söz konusu olduğunda, bazıları bir derlemede birlikte zincirlenebilir derleme görevlerinde kapsüllenir. Bu [makalede](https://www.visualstudio.com/docs/alm-devops-feature-index#continuous-delivery) daha fazla ayrıntı sağlanmaktadır. Bu [GitHub deposu](https://github.com/Microsoft/vso-agent-tasks) , kullanılabilir çeşitli yapı görevlerinin ayrıntılarını oluşturur.
 
 ## <a name="notes"></a>Notlar
 
-Bu kullanım örneği, Azure Galerisi'nden genel bir Windows Server 2012 R2 görüntüden bir VM ile başlar. Depolanmış bir görüntüden başlatabilir ve DSC yapılandırması ile buradan ince ayar.
-Ancak, görüntüye hazır yapılandırma değiştirme DSC kullanarak yapılandırmasını dinamik olarak güncelleştirilmesi daha çok daha zordur.
+Bu kullanım örneği, Azure galerisinden genel bir Windows Server 2012 R2 görüntüsünden VM ile başlar. Depolanan herhangi bir görüntüden başlayabilir ve ardından DSC yapılandırması ile ince ayar.
+Ancak, bir görüntüye bakan yapılandırmanın değiştirilmesi, DSC kullanılarak yapılandırmanın dinamik olarak güncelleştirilmekten çok daha zordur.
 
-Bu tekniği Vm'leriniz ile kullanmak için Resource Manager şablonu ve sanal makine uzantısını kullanmak zorunda değilsiniz. Ve Vm'lerinizi CD Yönetimi altında olması için Azure üzerinde olması gerekmez. Gerekli olan tek şey Chocolatey yüklenmesi ve çekme sunucusu olduğu bilmesi LCM VM'de yapılandırılır.
+Bu tekniği sanal makinelerinize kullanabilmek için Kaynak Yöneticisi şablonu ve VM uzantısını kullanmanız gerekmez. Ve sanal makinelerinizin, CD yönetimi altında olması için Azure 'da olması gerekmez. Bu, Chocolatey ' nin yüklenmesi ve sanal makine üzerinde, istek sunucusunun nerede olduğunu bilmesi için yapılandırılmış LCM ' dir.
 
-Elbette, üretimde olan bir VM üzerindeki bir paket güncelleştirmesi, güncelleştirme yüklenirken bu VM'ye rotasyon dışında olması gerekir. Bunu nasıl yapacağınız büyük farklılık gösterir. Örneğin, bir Azure yük dengeleyici arkasındaki bir VM ile bir özel araştırma ekleyebilirsiniz. Sanal makine güncelleştirilirken bir 400 dönüş araştırma uç noktası vardır. İnce bu değişikliğe neden gerekli Güncelleştirme tamamlandıktan sonra geri 200 döndürmek için geçiş yapmak için ince gibi içinde bir yapılandırma olabilir.
+Kuşkusuz, üretimde bir sanal makinede bulunan bir paketi güncelleştirdiğinizde, güncelleştirme yüklenirken o VM 'yi döndürme dışında getirmeniz gerekir. Bunu nasıl yapabileceğiniz çok farklılık vardır. Örneğin, bir Azure Load Balancer arkasındaki bir VM ile özel bir araştırma ekleyebilirsiniz. VM güncelleştirilirken, araştırma uç noktasının bir 400 döndürmesini sağlayabilirsiniz. Bu değişikliğe neden olması için gerekli olan ince ayar, güncelleştirme tamamlandıktan sonra, ince ayar geri dönmek üzere bir 200 döndürmek için, bu değişikliğin içinde olabilir.
 
-Bu kullanım örneği için tam kaynak konusu [bu Visual Studio projesi](https://github.com/sebastus/ARM/tree/master/CDIaaSVM) GitHub üzerinde.
+Bu kullanım örneği için tam kaynak, GitHub 'daki [Bu Visual Studio projem](https://github.com/sebastus/ARM/tree/master/CDIaaSVM) .
 
 ## <a name="related-articles"></a>İlgili makaleler
 * [Azure Automation DSC genel bakış](automation-dsc-overview.md)
-* [Azure Otomasyonu DSC cmdlet'leri](https://docs.microsoft.com/powershell/module/azurerm.automation#automation)
-* [Makineleri Azure Automation DSC tarafından Yönetim için hazırlama](automation-dsc-onboarding.md)
+* [Azure Automation DSC cmdlet 'leri](https://docs.microsoft.com/powershell/module/azurerm.automation#automation)
+* [Azure Automation DSC göre yönetim için makineleri ekleme](automation-dsc-onboarding.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Genel bakış için bkz. [Azure Otomasyon durum yapılandırması](automation-dsc-overview.md)
-- Başlamak için bkz: [Azure Otomasyon durum yapılandırması ile çalışmaya başlama](automation-dsc-getting-started.md)
-- Hedef düğümleri atayabilirsiniz böylece, DSC yapılandırmaları derleme hakkında bilgi edinmek için [yapılandırmaları Azure Automation durumu yapılandırma derleme](automation-dsc-compile.md)
-- PowerShell cmdlet başvurusu için bkz. [Azure Otomasyonu durumu yapılandırma cmdlet'leri](/powershell/module/azurerm.automation/#automation)
-- Fiyatlandırma bilgileri için bkz: [Azure Otomasyon durum yapılandırması için fiyatlandırma](https://azure.microsoft.com/pricing/details/automation/)
-- Bir sürekli dağıtım işlem hattı, Azure Otomasyonu durum yapılandırmasını kullanarak bir örnek görmek için bkz: [sürekli dağıtımı kullanarak Azure Otomasyon durum yapılandırması ve Chocolatey](automation-dsc-cd-chocolatey.md)
+- Genel bakış için bkz. [Azure Otomasyonu durum yapılandırması](automation-dsc-overview.md)
+- Başlamak için bkz. [Azure Otomasyonu durum yapılandırması ile çalışmaya](automation-dsc-getting-started.md) başlama
+- Hedef düğümlere atayabilmeniz için DSC yapılandırmalarını derleme hakkında bilgi edinmek için bkz. [Azure Otomasyonu durum yapılandırmasında yapılandırmaları derleme](automation-dsc-compile.md)
+- PowerShell cmdlet başvurusu için bkz. [Azure Otomasyonu durum yapılandırması cmdlet 'leri](/powershell/module/azurerm.automation/#automation)
+- Fiyatlandırma bilgileri için bkz. [Azure Otomasyonu durum yapılandırması fiyatlandırması](https://azure.microsoft.com/pricing/details/automation/)
+- Azure Otomasyonu durum yapılandırması 'nı sürekli bir dağıtım ardışık düzeninde kullanmaya ilişkin bir örnek görmek için bkz. [Azure Otomasyonu durum yapılandırması ve Chocolatey kullanarak sürekli dağıtım](automation-dsc-cd-chocolatey.md)

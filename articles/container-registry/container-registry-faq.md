@@ -1,71 +1,71 @@
 ---
-title: Azure Container Registry - sık sorulan sorular
-description: Azure Container Registry hizmeti ile ilgili sık sorulan soruların yanıtları
+title: Azure Container Registry-sık sorulan sorular
+description: Azure Container Registry hizmetiyle ilgili sık sorulan soruların yanıtları
 services: container-registry
 author: sajayantony
-manager: jeconnoc
+manager: gwallace
 ms.service: container-registry
 ms.topic: article
 ms.date: 07/02/2019
 ms.author: sajaya
-ms.openlocfilehash: c32d7342aaf1c4cce52ce14abe48ea1bc347fdb3
-ms.sourcegitcommit: 978e1b8cac3da254f9d6309e0195c45b38c24eb5
+ms.openlocfilehash: 88c4b2065576bd5bdcb29a266bd564c60b0e537c
+ms.sourcegitcommit: 6c2c97445f5d44c5b5974a5beb51a8733b0c2be7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67551582"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73622699"
 ---
 # <a name="frequently-asked-questions-about-azure-container-registry"></a>Azure Container Registry hakkında sık sorulan sorular
 
-Bu makalede, sık sorulan sorular ve Azure Container Registry hakkında bilinen sorunları giderir.
+Bu makalede, Azure Container Registry hakkında sık sorulan sorular ve bilinen sorunlar ele alınmaktadır.
 
 ## <a name="resource-management"></a>Kaynak yönetimi
 
-- [Resource Manager şablonu kullanarak bir Azure container registry oluşturabilir miyim?](#can-i-create-an-azure-container-registry-using-a-resource-manager-template)
-- [ACR görüntü tarama güvenlik açığı var mı?](#is-there-security-vulnerability-scanning-for-images-in-acr)
-- [Kubernetes ile Azure Container Registry nasıl yapılandırabilirim?](#how-do-i-configure-kubernetes-with-azure-container-registry)
-- [Bir kapsayıcı kayıt defteri için yönetici kimlik bilgileri nasıl alabilirim?](#how-do-i-get-admin-credentials-for-a-container-registry)
-- [Yönetici kimlik bilgileri bir Resource Manager şablonunun nasıl alabilirim?](#how-do-i-get-admin-credentials-in-a-resource-manager-template)
-- [Azure CLI veya Azure PowerShell kullanarak çoğaltma silindiğinde olsa da, Yasak durumu ile çoğaltma silme başarısız](#delete-of-replication-fails-with-forbidden-status-although-the-replication-gets-deleted-using-the-azure-cli-or-azure-powershell)
-- [Güvenlik duvarı kuralları başarıyla güncelleştirildi ancak geçerlilik kazanmaz](#firewall-rules-are-updated-successfully-but-they-do-not-take-effect)
+- [Kaynak Yöneticisi şablonu kullanarak Azure Container Registry oluşturabilir miyim?](#can-i-create-an-azure-container-registry-using-a-resource-manager-template)
+- [ACR 'deki görüntüleri taramak için güvenlik güvenlik açığı var mı?](#is-there-security-vulnerability-scanning-for-images-in-acr)
+- [Kubernetes Azure Container Registry yapılandırma Nasıl yaparım??](#how-do-i-configure-kubernetes-with-azure-container-registry)
+- [Bir kapsayıcı kayıt defteri için yönetici kimlik bilgilerini almak Nasıl yaparım??](#how-do-i-get-admin-credentials-for-a-container-registry)
+- [Yönetici kimlik bilgilerini bir Kaynak Yöneticisi şablonunda Nasıl yaparım? mi?](#how-do-i-get-admin-credentials-in-a-resource-manager-template)
+- [Çoğaltma, Azure CLı veya Azure PowerShell kullanılarak silinmese de, çoğaltmanın silinmesi yasak durumuyla başarısız oluyor](#delete-of-replication-fails-with-forbidden-status-although-the-replication-gets-deleted-using-the-azure-cli-or-azure-powershell)
+- [Güvenlik duvarı kuralları başarıyla güncelleştirildi, ancak bunlar etkili olmayacak](#firewall-rules-are-updated-successfully-but-they-do-not-take-effect)
 
-### <a name="can-i-create-an-azure-container-registry-using-a-resource-manager-template"></a>Resource Manager şablonu kullanarak bir Azure Container Registry oluşturabilir miyim?
+### <a name="can-i-create-an-azure-container-registry-using-a-resource-manager-template"></a>Kaynak Yöneticisi şablonu kullanarak bir Azure Container Registry oluşturabilir miyim?
 
-Evet. İşte [şablon](https://github.com/Azure/azure-cli/blob/master/src/command_modules/azure-cli-acr/azure/cli/command_modules/acr/template.json) bir kayıt defteri oluşturmak için kullanabilirsiniz.
+Evet. Kayıt defteri oluşturmak için kullanabileceğiniz [bir şablon](https://github.com/Azure/azure-quickstart-templates/tree/master/101-container-registry) aşağıda verilmiştir.
 
-### <a name="is-there-security-vulnerability-scanning-for-images-in-acr"></a>ACR görüntü tarama güvenlik açığı var mı?
+### <a name="is-there-security-vulnerability-scanning-for-images-in-acr"></a>ACR 'deki görüntüleri taramak için güvenlik güvenlik açığı var mı?
 
-Evet. Belgelerden bkz [Twistlock](https://www.twistlock.com/2016/11/07/twistlock-supports-azure-container-registry/) ve [Açık Deniz Mavisi](https://blog.aquasec.com/image-vulnerability-scanning-in-azure-container-registry).
+Evet. [Twistlock](https://www.twistlock.com/2016/11/07/twistlock-supports-azure-container-registry/) ve [deniz mavisi](https://blog.aquasec.com/image-vulnerability-scanning-in-azure-container-registry)belgelerine bakın.
 
-### <a name="how-do-i-configure-kubernetes-with-azure-container-registry"></a>Kubernetes ile Azure Container Registry nasıl yapılandırabilirim?
+### <a name="how-do-i-configure-kubernetes-with-azure-container-registry"></a>Kubernetes Azure Container Registry yapılandırma Nasıl yaparım??
 
-Belgelerine bakın [Kubernetes](https://kubernetes.io/docs/user-guide/images/#using-azure-container-registry-acr) ve için adımları [Azure Kubernetes hizmeti](container-registry-auth-aks.md).
+[Azure Kubernetes hizmeti](../aks/cluster-container-registry-integration.md)Için [Kubernetes](https://kubernetes.io/docs/user-guide/images/#using-azure-container-registry-acr) ve adımlar belgelerine bakın.
 
-### <a name="how-do-i-get-admin-credentials-for-a-container-registry"></a>Bir kapsayıcı kayıt defteri için yönetici kimlik bilgileri nasıl alabilirim?
+### <a name="how-do-i-get-admin-credentials-for-a-container-registry"></a>Bir kapsayıcı kayıt defteri için yönetici kimlik bilgilerini almak Nasıl yaparım??
 
 > [!IMPORTANT]
-> Yönetici kullanıcı hesabının, test etmek için çoğunlukla kayıt defterine erişmek tek bir kullanıcı için tasarlanmıştır. Yönetici hesabı kimlik bilgileri ile birden çok kullanıcı paylaşımı önermiyoruz. Bireysel kimlik, kullanıcı ve hizmet sorumluları gözetimsiz senaryoları için önerilir. Bkz: [kimlik doğrulamasına genel bakış](container-registry-authentication.md).
+> Yönetici Kullanıcı hesabı, tek bir kullanıcı için genellikle test amacıyla kayıt defterine erişmek üzere tasarlanmıştır. Yönetici hesabı kimlik bilgilerini birden çok kullanıcıyla paylaşmayı önermiyoruz. Gözetimsiz senaryolara yönelik kullanıcılar ve hizmet sorumluları için bireysel kimlik önerilir. Bkz. [kimlik doğrulamasına genel bakış](container-registry-authentication.md).
 
-Yönetici kimlik bilgileri almadan önce kayıt defterinin yönetici kullanıcı etkin olduğundan emin olun.
+Yönetici kimlik bilgilerini almadan önce, kayıt defterinin yönetici kullanıcısının etkinleştirildiğinden emin olun.
 
-Azure CLI kullanarak kimlik bilgilerini almak için:
+Azure CLı kullanarak kimlik bilgilerini almak için:
 
 ```azurecli
 az acr credential show -n myRegistry
 ```
 
-Azure Powershell kullanarak:
+Azure PowerShell 'i kullanma:
 
 ```powershell
 Invoke-AzureRmResourceAction -Action listCredentials -ResourceType Microsoft.ContainerRegistry/registries -ResourceGroupName myResourceGroup -ResourceName myRegistry
 ```
 
-### <a name="how-do-i-get-admin-credentials-in-a-resource-manager-template"></a>Yönetici kimlik bilgileri bir Resource Manager şablonunun nasıl alabilirim?
+### <a name="how-do-i-get-admin-credentials-in-a-resource-manager-template"></a>Yönetici kimlik bilgilerini bir Kaynak Yöneticisi şablonunda Nasıl yaparım? mi?
 
 > [!IMPORTANT]
-> Yönetici kullanıcı hesabının, test etmek için çoğunlukla kayıt defterine erişmek tek bir kullanıcı için tasarlanmıştır. Yönetici hesabı kimlik bilgileri ile birden çok kullanıcı paylaşımı önermiyoruz. Bireysel kimlik, kullanıcı ve hizmet sorumluları gözetimsiz senaryoları için önerilir. Bkz: [kimlik doğrulamasına genel bakış](container-registry-authentication.md).
+> Yönetici Kullanıcı hesabı, tek bir kullanıcı için genellikle test amacıyla kayıt defterine erişmek üzere tasarlanmıştır. Yönetici hesabı kimlik bilgilerini birden çok kullanıcıyla paylaşmayı önermiyoruz. Gözetimsiz senaryolara yönelik kullanıcılar ve hizmet sorumluları için bireysel kimlik önerilir. Bkz. [kimlik doğrulamasına genel bakış](container-registry-authentication.md).
 
-Yönetici kimlik bilgileri almadan önce kayıt defterinin yönetici kullanıcı etkin olduğundan emin olun.
+Yönetici kimlik bilgilerini almadan önce, kayıt defterinin yönetici kullanıcısının etkinleştirildiğinden emin olun.
 
 İlk parolayı almak için:
 
@@ -75,7 +75,7 @@ Yönetici kimlik bilgileri almadan önce kayıt defterinin yönetici kullanıcı
 }
 ```
 
-İkinci parolasını almak için:
+İkinci parolayı almak için:
 
 ```json
 {
@@ -83,39 +83,39 @@ Yönetici kimlik bilgileri almadan önce kayıt defterinin yönetici kullanıcı
 }
 ```
 
-### <a name="delete-of-replication-fails-with-forbidden-status-although-the-replication-gets-deleted-using-the-azure-cli-or-azure-powershell"></a>Azure CLI veya Azure PowerShell kullanarak çoğaltma silindiğinde olsa da, Yasak durumu ile çoğaltma silme başarısız
+### <a name="delete-of-replication-fails-with-forbidden-status-although-the-replication-gets-deleted-using-the-azure-cli-or-azure-powershell"></a>Çoğaltma, Azure CLı veya Azure PowerShell kullanılarak silinmese de, çoğaltmanın silinmesi yasak durumuyla başarısız oluyor
 
-Kullanıcı bir kayıt defterini izinlere sahip ancak abonelikte okuyucu düzeyinde izinlere sahip değil, hata görülür. Bu sorunu çözmek için abonelik okuyucusu izinleriyle kullanıcıya atayın:
+Kullanıcı bir kayıt defteri üzerinde izinlere sahip olduğunda ancak abonelik üzerinde okuyucu düzeyi izinlere sahip olmadığında hata görülür. Bu sorunu çözmek için, kullanıcıya abonelik üzerinde okuyucu izinleri atayın:
 
 
 ```azurecli  
 az role assignment create --role "Reader" --assignee user@contoso.com --scope /subscriptions/<subscription_id> 
 ```
 
-### <a name="firewall-rules-are-updated-successfully-but-they-do-not-take-effect"></a>Güvenlik duvarı kuralları başarıyla güncelleştirildi ancak geçerlilik kazanmaz
+### <a name="firewall-rules-are-updated-successfully-but-they-do-not-take-effect"></a>Güvenlik duvarı kuralları başarıyla güncelleştirildi, ancak bunlar etkili olmayacak
 
-Güvenlik duvarı kuralı değişikliklerinin yayılması biraz zaman alabilir. Güvenlik Duvarı ayarlarını değiştirdikten sonra lütfen bu değişikliğini doğrulayan önce birkaç dakika bekleyin.
+Güvenlik duvarı kuralı değişikliklerinin yayılması biraz zaman alır. Güvenlik Duvarı ayarlarını değiştirdikten sonra bu değişikliği doğrulamadan önce lütfen birkaç dakika bekleyin.
 
 
 ## <a name="registry-operations"></a>Kayıt defteri işlemleri
 
-- [Docker kayıt defteri HTTP API V2 nasıl erişim sağlanır?](#how-do-i-access-docker-registry-http-api-v2)
-- [Bir depodaki herhangi bir etiket tarafından başvurulmuyor tüm bildirimleri nasıl silebilirim?](#how-do-i-delete-all-manifests-that-are-not-referenced-by-any-tag-in-a-repository)
-- [Neden kayıt defteri kota kullanımını görüntüleri sildikten sonra azaltmaz?](#why-does-the-registry-quota-usage-not-reduce-after-deleting-images)
-- [Depolama kota değişiklikleri nasıl doğrulamak?](#how-do-i-validate-storage-quota-changes)
-- [My kayıt defteriyle nasıl CLI bir kapsayıcıda çalıştırırken kimliğini?](#how-do-i-authenticate-with-my-registry-when-running-the-cli-in-a-container)
-- [Azure Container Registry TLS 1.2 sürümü yalnızca yapılandırması ve TLS 1.2 etkinleştirmek nasıl sunar?](#does-azure-container-registry-offer-tls-v12-only-configuration-and-how-to-enable-tls-v12)
-- [Azure Container Registry, içerik güven destekliyor mu?](#does-azure-container-registry-support-content-trust)
-- [Nasıl kayıt defteri kaynak yönetme izni olmadan çekme veya anında iletme görüntülerine erişim verilsin mi?](#how-do-i-grant-access-to-pull-or-push-images-without-permission-to-manage-the-registry-resource)
-- [Otomatik görüntü karantina için bir kayıt defteri hizmetini nasıl etkinleştirebilirim](#how-do-i-enable-automatic-image-quarantine-for-a-registry)
+- [Docker kayıt defteri HTTP API v2 'ye Nasıl yaparım? erişin?](#how-do-i-access-docker-registry-http-api-v2)
+- [Bir depodaki herhangi bir etiket tarafından başvurulmayan tüm bildirimler silinsin mi Nasıl yaparım??](#how-do-i-delete-all-manifests-that-are-not-referenced-by-any-tag-in-a-repository)
+- [Görüntüleri sildikten sonra kayıt defteri kotası kullanımı neden Azaltılmıyor?](#why-does-the-registry-quota-usage-not-reduce-after-deleting-images)
+- [Depolama kotası değişikliklerini doğrulamak Nasıl yaparım? mı?](#how-do-i-validate-storage-quota-changes)
+- [Nasıl yaparım? bir kapsayıcıda CLı çalıştırırken kayıt defterimde kimlik doğrulaması yapılsın mı?](#how-do-i-authenticate-with-my-registry-when-running-the-cli-in-a-container)
+- [Azure Container Registry yalnızca TLS v 1.2 yapılandırmasını ve TLS v 1.2 'yi etkinleştirmeyi sağlar mi?](#does-azure-container-registry-offer-tls-v12-only-configuration-and-how-to-enable-tls-v12)
+- [Azure Container Registry Içerik güvenini destekliyor mu?](#does-azure-container-registry-support-content-trust)
+- [Kayıt defteri kaynağını yönetme izni olmadan çekme veya gönderme görüntülerine erişim izni Nasıl yaparım? mı?](#how-do-i-grant-access-to-pull-or-push-images-without-permission-to-manage-the-registry-resource)
+- [Kayıt defteri için otomatik görüntü karantinasını etkinleştirmek Nasıl yaparım?](#how-do-i-enable-automatic-image-quarantine-for-a-registry)
 
-### <a name="how-do-i-access-docker-registry-http-api-v2"></a>Docker kayıt defteri HTTP API V2 nasıl erişim sağlanır?
+### <a name="how-do-i-access-docker-registry-http-api-v2"></a>Docker kayıt defteri HTTP API v2 'ye Nasıl yaparım? erişin?
 
-ACR Docker kayıt defteri HTTP API V2 destekler. API'leri adresinden erişilebilen `https://<your registry login server>/v2/`. Örnek: `https://mycontainerregistry.azurecr.io/v2/`
+ACR, Docker kayıt defteri HTTP API v2 'YI destekler. API 'Lerine `https://<your registry login server>/v2/`adresinden erişilebilir. Örnek: `https://mycontainerregistry.azurecr.io/v2/`
 
-### <a name="how-do-i-delete-all-manifests-that-are-not-referenced-by-any-tag-in-a-repository"></a>Bir depodaki herhangi bir etiket tarafından başvurulmuyor tüm bildirimleri nasıl silebilirim?
+### <a name="how-do-i-delete-all-manifests-that-are-not-referenced-by-any-tag-in-a-repository"></a>Bir depodaki herhangi bir etiket tarafından başvurulmayan tüm bildirimler silinsin mi Nasıl yaparım??
 
-Üzerinde bash kullanıyorsanız:
+Bash kullanıyorsanız:
 
 ```bash
 az acr repository show-manifests -n myRegistry --repository myRepository --query "[?tags[0]==null].digest" -o tsv  | xargs -I% az acr repository delete -n myRegistry -t myRepository@%
@@ -127,17 +127,17 @@ PowerShell için:
 az acr repository show-manifests -n myRegistry --repository myRepository --query "[?tags[0]==null].digest" -o tsv | %{ az acr repository delete -n myRegistry -t myRepository@$_ }
 ```
 
-Not: Ekleyebileceğiniz `-y` onayı atlamak için delete komutu.
+Note: onayı atlamak için Sil komutuna `-y` ekleyebilirsiniz.
 
-Daha fazla bilgi için [Sil kapsayıcı görüntülerini Azure Container Registry'de](container-registry-delete.md).
+Daha fazla bilgi için bkz. [Azure Container Registry kapsayıcı görüntülerini silme](container-registry-delete.md).
 
-### <a name="why-does-the-registry-quota-usage-not-reduce-after-deleting-images"></a>Neden kayıt defteri kota kullanımını görüntüleri sildikten sonra azaltmaz?
+### <a name="why-does-the-registry-quota-usage-not-reduce-after-deleting-images"></a>Görüntüleri sildikten sonra kayıt defteri kotası kullanımı neden Azaltılmıyor?
 
-Katmanlarda hala diğer kapsayıcı görüntülerini tarafından başvurulmayan bu durum oluşabilir. Başvuru içeren bir görüntüyü silmeniz halinde, kayıt defteri kullanım birkaç dakika içinde güncelleştirir.
+Bu durum, temeldeki katmanlara başka kapsayıcı görüntüleri tarafından hala başvuruluyorsa meydana gelebilir. Başvuruları olmayan bir görüntüyü silerseniz, kayıt defteri kullanımı birkaç dakika içinde güncelleştirilir.
 
-### <a name="how-do-i-validate-storage-quota-changes"></a>Depolama kota değişiklikleri nasıl doğrulamak?
+### <a name="how-do-i-validate-storage-quota-changes"></a>Depolama kotası değişikliklerini doğrulamak Nasıl yaparım? mı?
 
-Aşağıdaki docker dosyası kullanarak bir 1 GB katman ile bir görüntü oluşturun. Bu, görüntünün kayıt defterinde herhangi bir görüntü tarafından paylaşılmayan bir katman sahip olmasını sağlar.
+Aşağıdaki Docker dosyasını kullanarak 1GB bir katman içeren bir görüntü oluşturun. Bu, görüntüde kayıt defterindeki başka bir görüntü tarafından paylaşılmayan bir katman olmasını sağlar.
 
 ```dockerfile
 FROM alpine
@@ -145,159 +145,160 @@ RUN dd if=/dev/urandom of=1GB.bin  bs=32M  count=32
 RUN ls -lh 1GB.bin
 ```
 
-Oluşturun ve görüntüyü docker CLI kullanarak kayıt defterine gönderin.
+Docker CLı kullanarak görüntüyü derleyin ve Kayıt defterinize gönderin.
 
 ```bash
 docker build -t myregistry.azurecr.io/1gb:latest .
 docker push myregistry.azurecr.io/1gb:latest
 ```
 
-Azure portalında depolama kullanım arttı veya CLI kullanarak kullanım sorgulayabilirsiniz görüyor olması gerekir.
+Depolama kullanımının Azure portal arttığını veya CLı kullanarak kullanımı sorgulama yapabilmesini sağlayabilirsiniz.
 
 ```bash
 az acr show-usage -n myregistry
 ```
 
-Azure CLI veya portalı kullanarak görüntüyü silin ve birkaç dakika sonra güncelleştirilmiş'ın kullanımını denetleyin.
+Azure CLı veya portalını kullanarak görüntüyü silin ve güncelleştirilmiş kullanımı birkaç dakika içinde denetleyin.
 
 ```bash
 az acr repository delete -n myregistry --image 1gb
 ```
 
-### <a name="how-do-i-authenticate-with-my-registry-when-running-the-cli-in-a-container"></a>My kayıt defteriyle nasıl CLI bir kapsayıcıda çalıştırırken kimliğini?
+### <a name="how-do-i-authenticate-with-my-registry-when-running-the-cli-in-a-container"></a>Nasıl yaparım? bir kapsayıcıda CLı çalıştırırken kayıt defterimde kimlik doğrulaması yapılsın mı?
 
-Azure CLI kapsayıcı Docker yuva bağlayarak çalıştırmanız gerekir:
+Docker yuvasını bağlayarak Azure CLı kapsayıcısını çalıştırmanız gerekir:
 
 ```bash
 docker run -it -v /var/run/docker.sock:/var/run/docker.sock azuresdk/azure-cli-python:dev
 ```
 
-Kapsayıcıda yükleme `docker`:
+Kapsayıcıda `docker`' yi:
 
 ```bash
 apk --update add docker
 ```
 
-Ardından, kayıt defteri ile kimlik doğrulaması:
+Ardından kayıt defterinizde kimlik doğrulaması yapın:
 
 ```azurecli
 az acr login -n MyRegistry
 ```
 
-### <a name="does-azure-container-registry-offer-tls-v12-only-configuration-and-how-to-enable-tls-v12"></a>Azure Container Registry TLS 1.2 sürümü yalnızca yapılandırması ve TLS 1.2 etkinleştirmek nasıl sunar?
+### <a name="does-azure-container-registry-offer-tls-v12-only-configuration-and-how-to-enable-tls-v12"></a>Azure Container Registry yalnızca TLS v 1.2 yapılandırmasını ve TLS v 1.2 'yi etkinleştirmeyi sağlar mi?
 
-Evet. TLS herhangi yeni bir docker İstemcisi'ni kullanarak etkinleştirin (18.03.0 sürümü ve üzeri). 
+Evet. Herhangi bir son Docker istemcisini (sürüm 18.03.0 ve üzeri) kullanarak TLS 'yi etkinleştirin. 
 
-### <a name="does-azure-container-registry-support-content-trust"></a>Azure Container Registry, içerik güven destekliyor mu?
+### <a name="does-azure-container-registry-support-content-trust"></a>Azure Container Registry, İçerik Güveni'ni destekler mi?
 
-Evet, Azure Container Registry'de güvenilen görüntüleri beri kullanabilirsiniz [Docker Notary](https://docs.docker.com/notary/getting_started/) tümleştirilmiştir ve etkin hale getirilebilir. Ayrıntılar için bkz [Azure Container Registry içerik güven](container-registry-content-trust.md).
+Evet, [Docker noçi](https://docs.docker.com/notary/getting_started/) tümleşik olduğundan ve etkinleştirilemediğinden Azure Container Registry içindeki güvenilir görüntüleri kullanabilirsiniz. Ayrıntılar için bkz. [Azure Container Registry Içerik güveni](container-registry-content-trust.md).
 
 
-####  <a name="where-is-the-file-for-the-thumbprint-located"></a>Parmak izi bulunan dosyayı nerede?
+####  <a name="where-is-the-file-for-the-thumbprint-located"></a>Parmak izi dosyası nerede bulunur?
 
-Altında `~/.docker/trust/tuf/myregistry.azurecr.io/myrepository/metadata`:
+`~/.docker/trust/tuf/myregistry.azurecr.io/myrepository/metadata`altında:
 
-* Ortak anahtarlar ve sertifikalar (temsilcisi rolleri) hariç tüm rollerin depolanır `root.json`.
-* Ortak anahtarlar ve sertifikalar temsilcisi rolünün üst rolüne JSON dosyasında depolanır (örneğin `targets.json` için `targets/releases` rol).
+* Tüm rollerin ortak anahtarları ve sertifikaları (temsili roller hariç) `root.json`depolanır.
+* Ortak anahtarlar ve temsili rolünün sertifikaları, üst rolünün JSON dosyasında depolanır (örneğin, `targets/releases` rolü için `targets.json`).
 
-Bu ortak anahtar ve sertifikalar, Docker ve Notary istemci tarafından yapılan genel TUF doğrulama sonra doğrulamak için önerilir.
+Bu ortak anahtarların ve sertifikaların, Docker ve Nodown istemcisi tarafından gerçekleştirilen genel olarak doğrulanması sonrasında doğrulanması önerilir.
 
-### <a name="how-do-i-grant-access-to-pull-or-push-images-without-permission-to-manage-the-registry-resource"></a>Nasıl kayıt defteri kaynak yönetme izni olmadan çekme veya anında iletme görüntülerine erişim verilsin mi?
+### <a name="how-do-i-grant-access-to-pull-or-push-images-without-permission-to-manage-the-registry-resource"></a>Kayıt defteri kaynağını yönetme izni olmadan çekme veya gönderme görüntülerine erişim izni Nasıl yaparım? mı?
 
-ACR destekler [özel roller](container-registry-roles.md) farklı izin düzeyleri sağlar. Özellikle, `AcrPull` ve `AcrPush` rollerinin izin verdiği Azure kayıt defteri kaynak yönetme izni olmadan herhangi bir çekme ve/veya anında iletme görüntülere kullanıcılar.
+ACR, farklı izin düzeyleri sağlayan [özel rolleri](container-registry-roles.md) destekler. Özellikle, `AcrPull` ve `AcrPush` rolleri, kullanıcıların Azure 'daki kayıt defteri kaynağını yönetme izni olmadan resimleri çekmesini ve/veya gönderemelerine olanak tanır.
 
-* Azure portalı: Kayıt defterinizin erişim denetimi (IAM) -> Ekle -> (seçin `AcrPull` veya `AcrPush` rolü için).
-* Azure CLI: Aşağıdaki komutu çalıştırarak kayıt defteri kaynak Kimliğini bulun:
+* Azure portal: kayıt defteriniz > Access Control (ıAM)-> Add (rol için `AcrPull` veya `AcrPush` seçin).
+* Azure CLı: aşağıdaki komutu çalıştırarak kayıt defterinin kaynak KIMLIĞINI bulun:
 
   ```azurecli
   az acr show -n myRegistry
   ```
   
-  Ardından, atayabilirsiniz `AcrPull` veya `AcrPush` bir kullanıcı rolüne (aşağıdaki örnekte `AcrPull`):
+  Daha sonra, `AcrPull` veya `AcrPush` rolünü bir kullanıcıya atayabilirsiniz (Aşağıdaki örnek `AcrPull`kullanır):
 
   ```azurecli
     az role assignment create --scope resource_id --role AcrPull --assignee user@example.com
     ```
 
-  Veya uygulama Kimliğine göre tanımlanan bir hizmet ilkesi rol atayın:
+  Ya da rolü, uygulama KIMLIĞI tarafından tanımlanan bir hizmet ilkesine atayın:
 
   ```
   az role assignment create --scope resource_id --role AcrPull --assignee 00000000-0000-0000-0000-000000000000
   ```
 
-Atanan kimlik doğrulaması ve erişim kayıt defterindeki görüntüleri ise.
+Atanan e-, daha sonra kayıt defterindeki görüntülere kimlik doğrulaması yapabilir ve bu görüntüleri erişebilir.
 
-* Bir kayıt defterine kimliğini doğrulamak için:
+* Kayıt defterine kimlik doğrulaması yapmak için:
     
   ```azurecli
   az acr login -n myRegistry 
   ```
 
-* Depoları listeleme için:
+* Depoları listelemek için:
 
   ```azurecli
   az acr repository list -n myRegistry
   ```
 
- Görüntü çekmek için:
+ Bir görüntü çekmek için:
     
   ```azurecli
   docker pull myregistry.azurecr.io/hello-world
   ```
 
-Yalnızca kullanarak `AcrPull` veya `AcrPush` rolü, atanan Azure kayıt defteri kaynak yönetme izni yok. Örneğin, `az acr list` veya `az acr show -n myRegistry` kayıt gösterilmez.
+Yalnızca `AcrPull` veya `AcrPush` rolü kullanımıyla, atanan oturum, Azure 'da kayıt defteri kaynağını yönetme iznine sahip değildir. Örneğin, `az acr list` veya `az acr show -n myRegistry` kayıt defterini göstermez.
 
-### <a name="how-do-i-enable-automatic-image-quarantine-for-a-registry"></a>Otomatik görüntü karantina için bir kayıt defteri hizmetini nasıl etkinleştirebilirim?
+### <a name="how-do-i-enable-automatic-image-quarantine-for-a-registry"></a>Kayıt defteri için otomatik görüntü karantinasını etkinleştirmek Nasıl yaparım? mı?
 
-Görüntü karantina şu anda Önizleme ACR özelliğidir. Güvenlik taraması başarıyla geçirilen görüntüleri normal kullanıcılara görünür olacak şekilde bir kayıt defteri karantina modunu etkinleştirebilirsiniz. Ayrıntılar için bkz [ACR GitHub deposunu](https://github.com/Azure/acr/tree/master/docs/preview/quarantine).
+Görüntü karantina Şu anda ACR 'nin önizleme özelliğidir. Yalnızca güvenlik taramasını başarıyla geçen görüntülerin normal kullanıcılara görünür olması için bir kayıt defterinin karantina modunu etkinleştirebilirsiniz. Ayrıntılar için bkz. [ACR GitHub deposu](https://github.com/Azure/acr/tree/master/docs/preview/quarantine).
 
-## <a name="diagnostics-and-health-checks"></a>Tanılama ve sistem durumu denetimleri
+## <a name="diagnostics-and-health-checks"></a>Tanılama ve durum denetimleri
 
-- [Sistem durumu ile işaretleyin `az acr check-health`](#check-health-with-az-acr-check-health)
-- [docker isteği hatası ile başarısız oluyor: net/http: istek iptal bağlantı (Client.Timeout üstbilgileri beklerken aşıldı) beklenirken](#docker-pull-fails-with-error-nethttp-request-canceled-while-waiting-for-connection-clienttimeout-exceeded-while-awaiting-headers)
-- [docker push başarılı olur, ancak docker isteği başarısız olursa, hata: Yetkisiz: kimlik doğrulaması gerekli](#docker-push-succeeds-but-docker-pull-fails-with-error-unauthorized-authentication-required)
-- [Etkinleştirme ve docker Daemon programını, hata ayıklama günlükleri alın](#enable-and-get-the-debug-logs-of-the-docker-daemon) 
-- [Yeni kullanıcı izinleri güncelleştirdikten sonra hemen etkili olmayabilir](#new-user-permissions-may-not-be-effective-immediately-after-updating)
-- [Kimlik doğrulama bilgilerini doğrudan REST API çağrıları üzerinde doğru biçimde verilmez](#authentication-information-is-not-given-in-the-correct-format-on-direct-rest-api-calls)
-- [Neden Azure portalında tüm depoları veya etiketleri listelemez?](#why-does-the-azure-portal-not-list-all-my-repositories-or-tags)
-- [Windows üzerinde nasıl http izlemeleri toplamak?](#how-do-i-collect-http-traces-on-windows)
+- [`az acr check-health` ile sistem durumunu denetleme](#check-health-with-az-acr-check-health)
+- [docker pull hata vererek başarısız oldu: net/http: bağlantı beklenirken istek iptal edildi (üst bilgiler beklenirken Istemci. zaman aşımı aşıldı)](#docker-pull-fails-with-error-nethttp-request-canceled-while-waiting-for-connection-clienttimeout-exceeded-while-awaiting-headers)
+- [Docker Push başarılı oldu, ancak docker pull hata vererek başarısız oluyor: kimlik doğrulaması gerekli](#docker-push-succeeds-but-docker-pull-fails-with-error-unauthorized-authentication-required)
+- [Docker Daemon 'un hata ayıklama günlüklerini etkinleştirin ve alın](#enable-and-get-the-debug-logs-of-the-docker-daemon) 
+- [Yeni Kullanıcı izinleri güncelleştirmeden hemen sonra etkili olmayabilir](#new-user-permissions-may-not-be-effective-immediately-after-updating)
+- [Kimlik doğrulama bilgileri doğrudan REST API çağrılarında doğru biçimde verilmez](#authentication-information-is-not-given-in-the-correct-format-on-direct-rest-api-calls)
+- [Azure portal neden tüm depolarımı veya etiketlerimi listelemez?](#why-does-the-azure-portal-not-list-all-my-repositories-or-tags)
+- [Azure portal depo veya etiket getirme neden başarısız oluyor?](#why-does-the-azure-portal-fail-to-fetch-repositories-or-tags)
+- [Windows 'da http izlemeleri Nasıl yaparım? mi toplıyorsunuz?](#how-do-i-collect-http-traces-on-windows)
 
-### <a name="check-health-with-az-acr-check-health"></a>Sistem durumu ile işaretleyin `az acr check-health`
+### <a name="check-health-with-az-acr-check-health"></a>`az acr check-health` ile sistem durumunu denetleme
 
-Ortak ortam ve kayıt sorunları gidermek için bkz: [Azure container registry durumunu denetleme](container-registry-check-health.md).
+Ortak ortam ve kayıt defteri sorunlarını gidermek için bkz. [Azure Container Registry 'nin sistem durumunu denetleme](container-registry-check-health.md).
 
-### <a name="docker-pull-fails-with-error-nethttp-request-canceled-while-waiting-for-connection-clienttimeout-exceeded-while-awaiting-headers"></a>docker isteği hatası ile başarısız oluyor: net/http: istek iptal bağlantı (Client.Timeout üstbilgileri beklerken aşıldı) beklenirken
+### <a name="docker-pull-fails-with-error-nethttp-request-canceled-while-waiting-for-connection-clienttimeout-exceeded-while-awaiting-headers"></a>docker pull hata vererek başarısız oldu: net/http: bağlantı beklenirken istek iptal edildi (üst bilgiler beklenirken Istemci. zaman aşımı aşıldı)
 
- - Bu hata geçici bir sorun varsa, yeniden deneme başarılı olur.
- - Varsa `docker pull` Docker daemon ile ilgili bir sorun olabilir sonra sürekli olarak başarısız olur. Sorun genellikle Docker Daemon programını yeniden başlatarak azaltılabilir. 
- - Ardından Docker Daemon programını yeniden başlattıktan sonra bu sorunla karşılaşmaya devam ederseniz sorun makinenin bazı ağ bağlantı sorunları olabilir. Genel ağdaki makinenin iyi durumda olup olmadığını denetlemek için uç noktası bağlantısını test etmek için aşağıdaki komutu çalıştırın. En düşük `az acr` Bu bağlantı onay komut içeren sürümüdür 2.2.9. Eski bir sürümü kullanıyorsanız, Azure CLI'yı yükseltin.
+ - Bu hata geçici bir sorun ise, yeniden deneme başarılı olur.
+ - `docker pull` sürekli olarak başarısız olursa Docker daemon ile ilgili bir sorun olabilir. Bu sorun genellikle Docker Daemon yeniden başlatılarak azaltılabilir. 
+ - Docker Daemon 'ı yeniden başlattıktan sonra bu sorunu görmeye devam ederseniz, sorun makinede bazı ağ bağlantısı sorunları olabilir. Makinedeki genel ağın sağlıklı olup olmadığını denetlemek için uç nokta bağlantısını test etmek üzere aşağıdaki komutu çalıştırın. Bu bağlantı denetimi komutunu içeren en düşük `az acr` sürümü 2.2.9 ' dir. Daha eski bir sürüm kullanıyorsanız Azure CLı 'nizi yükseltin.
  
    ```azurecli
     az acr check-health -n myRegistry
     ```
- - Bu gibi durumlarda, bir yeniden deneme mekanizması her zaman tüm Docker istemci işlemleri olmalıdır.
+ - Tüm Docker istemci işlemlerinde her zaman bir yeniden deneme mekanizması olmalıdır.
 
-### <a name="docker-pull-is-slow"></a>Docker isteği yavaş
-Kullanım [bu](http://www.azurespeed.com/Azure/Download) makine ağ yükleme hızınızı Test etmek için aracı. Makine ağı yavaşsa, kayıt defterinizin aynı bölgede Azure VM kullanarak göz önünde bulundurun. Bu genellikle, daha hızlı ağ hızı sağlar.
+### <a name="docker-pull-is-slow"></a>Docker çekme yavaş
+Makine ağ indirme hızınızı sınamak için [Bu](http://www.azurespeed.com/Azure/Download) aracı kullanın. Makine ağı yavaşsa, kayıt defterinizdeki aynı bölgedeki Azure VM 'yi kullanmayı göz önünde bulundurun. Bu genellikle daha hızlı ağ hızına sahip olmanızı sağlar.
 
-### <a name="docker-push-is-slow"></a>Docker push yavaş
-Kullanım [bu](http://www.azurespeed.com/Azure/Upload) makine ağ karşıya yükleme hızınızı Test etmek için aracı. Makine ağı yavaşsa, kayıt defterinizin aynı bölgede Azure VM kullanarak göz önünde bulundurun. Bu genellikle, daha hızlı ağ hızı sağlar.
+### <a name="docker-push-is-slow"></a>Docker Push yavaş
+Makine ağ yükleme hızınızı sınamak için [Bu](http://www.azurespeed.com/Azure/Upload) aracı kullanın. Makine ağı yavaşsa, kayıt defterinizdeki aynı bölgedeki Azure VM 'yi kullanmayı göz önünde bulundurun. Bu genellikle daha hızlı ağ hızına sahip olmanızı sağlar.
 
-### <a name="docker-push-succeeds-but-docker-pull-fails-with-error-unauthorized-authentication-required"></a>docker push başarılı olur, ancak docker isteği başarısız olursa, hata: Yetkisiz: kimlik doğrulaması gerekli
+### <a name="docker-push-succeeds-but-docker-pull-fails-with-error-unauthorized-authentication-required"></a>Docker Push başarılı oldu, ancak docker pull hata vererek başarısız oluyor: kimlik doğrulaması gerekli
 
-Red Hat Docker programını sürümü ile bu hata oluşabilir burada `--signature-verification` varsayılan olarak etkindir. Aşağıdaki komutu çalıştırarak, Red Hat Enterprise Linux (RHEL) veya Fedora Docker daemon seçeneklerini denetleyebilirsiniz:
+Bu hata, `--signature-verification` varsayılan olarak etkin olan Docker Daemon 'ın Red Hat sürümünde ortaya çıkabilir. Aşağıdaki komutu çalıştırarak Red Hat Enterprise Linux (RHEL) veya Fedora için Docker Daemon seçeneklerini kontrol edebilirsiniz:
 
 ```bash
 grep OPTIONS /etc/sysconfig/docker
 ```
 
-Örneğin, Fedora 28 sunucusu aşağıdaki docker daemon seçenekleri vardır:
+Örneğin, Fedora 28 sunucusu aşağıdaki Docker Daemon seçeneklerine sahiptir:
 
 ```
 OPTIONS='--selinux-enabled --log-driver=journald --live-restore'
 ```
 
-İle `--signature-verification=false` eksik `docker pull` benzeri bir hata ile başarısız oluyor:
+`--signature-verification=false` eksik olan `docker pull` şuna benzer bir hata ile başarısız olur:
 
 ```bash
 Trying to pull repository myregistry.azurecr.io/myimage ...
@@ -305,22 +306,22 @@ unauthorized: authentication required
 ```
 
 Hatayı gidermek için:
-1. Seçeneğini ekleyin `--signature-verification=false` Docker daemon yapılandırma dosyasına `/etc/sysconfig/docker`. Örneğin:
+1. `--signature-verification=false` seçeneğini Docker Daemon yapılandırma dosyasına `/etc/sysconfig/docker`ekleyin. Örneğin:
 
   ```
   OPTIONS='--selinux-enabled --log-driver=journald --live-restore --signature-verification=false'
   ```
-2. Docker daemon hizmeti, aşağıdaki komutu çalıştırarak yeniden başlatın:
+2. Aşağıdaki komutu çalıştırarak Docker Daemon hizmetini yeniden başlatın:
 
   ```bash
   sudo systemctl restart docker.service
   ```
 
-Ayrıntılarını `--signature-verification` çalıştırarak bulunabilir `man dockerd`.
+`--signature-verification` ayrıntıları, `man dockerd`çalıştırılarak bulunabilir.
 
-### <a name="enable-and-get-the-debug-logs-of-the-docker-daemon"></a>Etkinleştirme ve Docker Daemon programını, hata ayıklama günlükleri alın  
+### <a name="enable-and-get-the-debug-logs-of-the-docker-daemon"></a>Docker Daemon 'un hata ayıklama günlüklerini etkinleştirin ve alın  
 
-Başlangıç `dockerd` ile `debug` seçeneği. İlk olarak, Docker daemon yapılandırma dosyası oluşturun (`/etc/docker/daemon.json`), varsa ekleyin ve değil `debug` seçeneği:
+`debug` seçeneğiyle `dockerd` başlatın. İlk olarak, mevcut değilse Docker Daemon yapılandırma dosyasını (`/etc/docker/daemon.json`) oluşturun ve `debug` seçeneğini ekleyin:
 
 ```json
 {   
@@ -328,20 +329,20 @@ Başlangıç `dockerd` ile `debug` seçeneği. İlk olarak, Docker daemon yapıl
 }
 ```
 
-Ardından, arka plan programını yeniden başlatın. Örneğin, Ubuntu 14.04 ile:
+Sonra, arka plan programını yeniden başlatın. Örneğin, Ubuntu 14,04:
 
 ```bash
 sudo service docker restart
 ```
 
-Ayrıntıları bulunabilir [Docker belgeleri](https://docs.docker.com/engine/admin/#enable-debugging). 
+Ayrıntılar [Docker belgelerinde](https://docs.docker.com/engine/admin/#enable-debugging)bulunabilir. 
 
- * Günlükler, sisteminize bağlı olarak farklı konumlarda oluşturulabilir. Örneğin, Ubuntu 14.04 sahip `/var/log/upstart/docker.log`.   
-Bkz: [Docker belgeleri](https://docs.docker.com/engine/admin/#read-the-logs) Ayrıntılar için.    
+ * Günlükler, sisteminize bağlı olarak farklı konumlarda oluşturulabilir. Örneğin, Ubuntu 14,04 için `/var/log/upstart/docker.log`.   
+Ayrıntılar için bkz. [Docker belgeleri](https://docs.docker.com/engine/admin/#read-the-logs) .    
 
- * Docker Windows'ın için % LOCALAPPDATA%/docker/ altında günlükleri üretilir. Ancak tüm hata ayıklama bilgileri henüz içeremez.   
+ * Docker for Windows için Günlükler% LOCALAPPDATA%/Docker/altında oluşturulur. Ancak, henüz tüm hata ayıklama bilgilerini içermeyebilir.   
 
-   Tam arka plan programı günlüğe erişmek için bazı ek adımlar gerekebilir:
+   Tüm Daemon günlüğüne erişmek için bazı ek adımlara ihtiyacınız olabilir:
 
     ```console
     docker run --privileged -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/local/bin/docker:/usr/local/bin/docker alpine sh
@@ -349,21 +350,21 @@ Bkz: [Docker belgeleri](https://docs.docker.com/engine/admin/#read-the-logs) Ayr
     docker run --net=host --ipc=host --uts=host --pid=host -it --security-opt=seccomp=unconfined --privileged --rm -v /:/host alpine /bin/sh
     chroot /host
     ```
-    VM çalışan tüm dosyalara erişimi şimdi `dockerd`. Günlük altındadır `/var/log/docker.log`.
+    Artık `dockerd`çalıştıran VM 'nin tüm dosyalarına erişiminiz var. Günlük `/var/log/docker.log`.
 
-### <a name="new-user-permissions-may-not-be-effective-immediately-after-updating"></a>Yeni kullanıcı izinleri güncelleştirdikten sonra hemen etkili olmayabilir
+### <a name="new-user-permissions-may-not-be-effective-immediately-after-updating"></a>Yeni Kullanıcı izinleri güncelleştirmeden hemen sonra etkili olmayabilir
 
-Yeni izin verdiğinizde izinleri (yeni rolleri) için hizmet sorumlusu, değişikliği hemen etkili. İki olası nedeni vardır:
+Bir hizmet sorumlusuna yeni izinler (yeni roller) verdiğinizde, değişiklik hemen etkili olmayabilir. Olası iki neden vardır:
 
-* Azure Active Directory rol atama gecikmesi. Normalde hızlıdır, ancak yayma gecikme nedeniyle dakika sürebilir.
-* ACR belirteci sunucusu üzerinde izni gecikmesi. Bu, 10 dakika kadar sürebilir. Azaltmak için `docker logout` ve aynı kullanıcı 1 dakika sonra tekrar kimliğini:
+* Rol atama gecikmesi Azure Active Directory. Normalde hızlıdır, ancak yayma gecikmesi nedeniyle birkaç dakika sürebilir.
+* ACR belirteç sunucusu 'nda izin gecikmesi. Bu işlem 10 dakikaya kadar sürebilir. Azaltmak için, 1 dakika sonra aynı kullanıcıyla `docker logout` ve sonra yeniden kimlik doğrulaması yapabilirsiniz:
 
   ```bash
   docker logout myregistry.azurecr.io
   docker login myregistry.azurecr.io
   ```
 
-ACR, kullanıcılar tarafından giriş çoğaltma silme işlemi şu anda desteklemiyor. Geçici çözüm giriş çoğaltma eklemektir şablon oluşturur, ancak ekleyerek oluşturulduktan atla `"condition": false` aşağıda gösterildiği gibi:
+Şu anda ACR, kullanıcılar tarafından giriş çoğaltmasını silmeyi desteklemez. Geçici çözüm, ana çoğaltma oluşturma işlemini şablona eklemek, ancak aşağıda gösterildiği gibi `"condition": false` ekleyerek oluşturmayı atlar:
 
 ```json
 {
@@ -379,10 +380,10 @@ ACR, kullanıcılar tarafından giriş çoğaltma silme işlemi şu anda destekl
 },
 ```
 
-### <a name="authentication-information-is-not-given-in-the-correct-format-on-direct-rest-api-calls"></a>Kimlik doğrulama bilgilerini doğrudan REST API çağrıları üzerinde doğru biçimde verilmez
+### <a name="authentication-information-is-not-given-in-the-correct-format-on-direct-rest-api-calls"></a>Kimlik doğrulama bilgileri doğrudan REST API çağrılarında doğru biçimde verilmez
 
-Karşılaşabileceğiniz bir `InvalidAuthenticationInfo` hata, özellikle kullanımı `curl` aracı seçeneği ile `-L`, `--location` (yeniden yönlendirmeleri izlemek için).
-Örneğin, blob kullanarak getirilirken `curl` ile `-L` seçeneği ve temel kimlik doğrulaması:
+Özellikle `curl` aracı `-L`, `--location` (yeniden yönlendirmeleri izlemek için) ile birlikte `InvalidAuthenticationInfo` bir hatayla karşılaşabilirsiniz.
+Örneğin, `-L` seçeneği ve temel kimlik doğrulaması ile `curl` kullanarak blobu getirme:
 
 ```bash
 curl -L -H "Authorization: basic $credential" https://$registry.azurecr.io/v2/$repository/blobs/$digest
@@ -397,70 +398,102 @@ RequestId:00000000-0000-0000-0000-000000000000
 Time:2019-01-01T00:00:00.0000000Z</Message></Error>
 ```
 
-Kök neden olan bazı `curl` uygulamaları özgün istekteki üstbilgi yeniden yönlendirmeleri izleyin.
+Kök nedeni, bazı `curl` uygulamalarının özgün istekteki üst bilgilerle yeniden yönlendirmeleri takip eden bir nedendir.
 
-Sorunu gidermek için üst bilgiler olmadan el ile yeniden yönlendirmeleri İzle gerekir. Yanıt üstbilgileri ile yazdırma `-D -` seçeneği `curl` ve ardından ayıklayın: `Location` üst bilgi:
+Sorunu çözmek için, başlıkları olmadan yeniden yönlendirmeleri el ile izlemeniz gerekir. Yanıt üst bilgilerini `curl` `-D -` seçeneğiyle yazdırın ve sonra ayıklayın: `Location` üst bilgisi:
 
 ```bash
 redirect_url=$(curl -s -D - -H "Authorization: basic $credential" https://$registry.azurecr.io/v2/$repository/blobs/$digest | grep "^Location: " | cut -d " " -f2 | tr -d '\r')
 curl $redirect_url
 ```
 
-### <a name="why-does-the-azure-portal-not-list-all-my-repositories-or-tags"></a>Neden Azure portalında tüm depoları veya etiketleri listelemez? 
+### <a name="why-does-the-azure-portal-not-list-all-my-repositories-or-tags"></a>Azure portal neden tüm depolarımı veya etiketlerimi listelemez? 
 
-Microsoft Edge/IE tarayıcı kullanıyorsanız, en fazla 100 depoları veya etiketleri görebilirsiniz. Kayıt defterinizin 100'den fazla depolar ve etiketleri varsa, Firefox veya Chrome'un tarayıcı tamamı Listelenemeyecek kadar kullanmanızı öneririz.
+Microsoft Edge/IE tarayıcısı kullanıyorsanız, en fazla 100 depo veya etiket görebilirsiniz. Kayıt defterinizde 100 ' den fazla depo veya etiket varsa, bunları listelemek için Firefox veya Chrome tarayıcısı kullanmanızı öneririz.
 
-### <a name="how-do-i-collect-http-traces-on-windows"></a>Windows üzerinde nasıl http izlemeleri toplamak?
+### <a name="why-does-the-azure-portal-fail-to-fetch-repositories-or-tags"></a>Azure portal depo veya etiket getirme neden başarısız oluyor?
 
-#### <a name="prerequisites"></a>Önkoşullar
+Tarayıcı, sunucuya depo veya etiket getirme isteğini gönderemeyebilir. Şöyle çeşitli nedenlerle şunlar olabilir:
 
-- Fiddler https şifresini çözmeyi etkinleştirin:  <https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS>
-- Docker kullanıcı arabirimi aracılığıyla bir ara sunucu kullanmak Docker'ı etkinleştirin: <https://docs.docker.com/docker-for-windows/#proxies>
-- İşlem tamamlandığında geri emin olun.  Docker etkinleştirildiğinde çalışmaz ve fiddler çalışmıyor.
+* Ağ bağlantısı olmaması
+* Güvenlik duvarı
+* Ad engelleyiciler
+* DNS hataları
+
+Lütfen ağ yöneticinize başvurun veya ağ yapılandırmanızı ve bağlantınızı kontrol edin. Ortamınızın Container Registry bağlanabiliyor olup olmadığını denetlemek için Azure CLı 'nizi kullanarak `az acr check-health -n yourRegistry` çalıştırmayı deneyin. Ayrıca, eski tarayıcı önbelleğinizi veya tanımlama bilgilerini önlemek için tarayıcınızda bir veya özel oturum da deneyebilirsiniz.
+
+### <a name="how-do-i-collect-http-traces-on-windows"></a>Windows 'da http izlemeleri Nasıl yaparım? mi toplıyorsunuz?
+
+#### <a name="prerequisites"></a>Ön koşullar
+
+- Fiddler 'da https şifresini çözmeyi etkinleştir: <https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS>
+- Docker Kullanıcı arabirimi aracılığıyla bir proxy kullanmak için Docker 'ı etkinleştirin: <https://docs.docker.com/docker-for-windows/#proxies>
+- Tamamlandığında ' i döndürtığınızdan emin olun.  Docker bu etkin ve Fiddler çalışmadığı için çalışmaz.
 
 #### <a name="windows-containers"></a>Windows kapsayıcıları
 
-127.0.0.1:8888 Docker proxy yapılandırma
+Docker proxy 'yi 127.0.0.1:8888 olarak yapılandırma
 
 #### <a name="linux-containers"></a>Linux kapsayıcıları
 
-Docker'ın IP vm sanal anahtarını bulun:
+Docker VM sanal anahtarının IP 'sini bul:
 
 ```powershell
 (Get-NetIPAddress -InterfaceAlias "*Docker*" -AddressFamily IPv4).IPAddress
 ```
 
-(Örneğin 10.0.75.1:8888) 8888 bağlantı noktası ve önceki komut ve çıktı için Docker proxy ayarlarını yapılandırma
+Docker proxy 'yi önceki komutun ve 8888 bağlantı noktasının (örneğin, 10.0.75.1:8888) çıktısını almak için yapılandırın
 
 ## <a name="tasks"></a>Görevler
 
-- [Çalıştırmaları iptal nasıl toplu?](#how-do-i-batch-cancel-runs)
-- [Az acr oluşturma komutu içinde nasıl .git klasörü dahil edilsin mi?](#how-do-i-include-the-git-folder-in-az-acr-build-command)
+- [Batch iptal Nasıl yaparım? çalıştırmaları mı?](#how-do-i-batch-cancel-runs)
+- [Az ACR Build komutuna. git klasörünü dahil Nasıl yaparım?.](#how-do-i-include-the-git-folder-in-az-acr-build-command)
+- [Görevler kaynak Tetikleyicileri için GitLab destekliyor mu?](#does-tasks-support-gitlab-for-source-triggers)
+- [Görevler hangi git depo yönetimi hizmetini destekler?](#what-git-repository-management-service-does-tasks-support)
 
-### <a name="how-do-i-batch-cancel-runs"></a>Çalıştırmaları iptal nasıl toplu?
+### <a name="how-do-i-batch-cancel-runs"></a>Batch iptal Nasıl yaparım? çalıştırmaları mı?
 
-Aşağıdaki komutları belirtilen kayıt defteri çalışan tüm görevler iptal edin.
+Aşağıdaki komutlar, belirtilen kayıt defterindeki tüm çalışan görevleri iptal eder.
 
 ```azurecli
 az acr task list-runs -r $myregistry --run-status Running --query '[].runId' -o tsv \
 | xargs -I% az acr task cancel-run -r $myregistry --run-id %
 ```
 
-### <a name="how-do-i-include-the-git-folder-in-az-acr-build-command"></a>Az acr oluşturma komutu içinde nasıl .git klasörü dahil edilsin mi?
+### <a name="how-do-i-include-the-git-folder-in-az-acr-build-command"></a>Az ACR Build komutuna. git klasörünü dahil Nasıl yaparım?.
 
-Yerel kaynak klasörüne geçirirseniz `az acr build` komutu `.git` klasörü varsayılan olarak karşıya yüklenen paketinden çıkarılır. Oluşturabileceğiniz bir `.dockerignore` aşağıdaki ayar dosyası. Altındaki tüm dosyaları geri yükleme komutunu belirten `.git` karşıya yüklenen paketteki. 
+`az acr build` komutuna yerel bir kaynak klasör geçirirseniz, `.git` klasörü varsayılan olarak karşıya yüklenen paketten çıkarılır. Aşağıdaki ayarla bir `.dockerignore` dosyası oluşturabilirsiniz. Komuta karşıya yüklenen pakette `.git` altındaki tüm dosyaları geri yüklemesini söyler. 
 
-```
+```sh
 !.git/**
 ```
 
-Bu ayar için de geçerlidir. `az acr run` komutu.
+Bu ayar `az acr run` komutu için de geçerlidir.
+
+### <a name="does-tasks-support-gitlab-for-source-triggers"></a>Görevler kaynak Tetikleyicileri için GitLab destekliyor mu?
+
+Şu anda kaynak Tetikleyicileri için GitLab 'yi desteklemiyoruz.
+
+### <a name="what-git-repository-management-service-does-tasks-support"></a>Görevler hangi git depo yönetimi hizmetini destekler?
+
+| Git hizmeti | Kaynak bağlamı | El ile derleme | Tamamlama tetikleyicisi aracılığıyla otomatik derleme |
+|---|---|---|---|
+| GitHub | https://github.com/user/myapp-repo.git#mybranch:myfolder | Evet | Evet |
+| Azure Repos | https://dev.azure.com/user/myproject/_git/myapp-repo#mybranch:myfolder | Evet | Evet |
+| GitLab | https://gitlab.com/user/myapp-repo.git#mybranch:myfolder | Evet | Hayır |
+| BitBucket | https://user@bitbucket.org/user/mayapp-repo.git#mybranch:myfolder | Evet | Hayır |
+
+## <a name="run-error-message-troubleshooting"></a>Çalıştırma hata Iletisi sorun giderme
+
+| Hata iletisi | Sorun giderme kılavuzu |
+|---|---|
+|VM için erişim yapılandırılmadı, bu nedenle abonelik bulunamadı|ACR görevinde `az login --identity` kullanıyorsanız bu durum oluşabilir. Bu geçici bir hatadır ve yönetilen kimliğinizin rol ataması yayılmamışsa oluşur. Yeniden denemeden önce birkaç saniye bekleniyor.|
 
 ## <a name="cicd-integration"></a>CI/CD tümleştirmesi
 
-- [CircleCI](https://github.com/Azure/acr/blob/master/docs/integration/CircleCI.md)
+- [Circlecı](https://github.com/Azure/acr/blob/master/docs/integration/CircleCI.md)
 - [GitHub eylemleri](https://github.com/Azure/acr/blob/master/docs/integration/github-actions/github-actions.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Daha fazla bilgi edinin](container-registry-intro.md) Azure Container Registry hakkında.
+* Azure Container Registry hakkında [daha fazla bilgi edinin](container-registry-intro.md) .

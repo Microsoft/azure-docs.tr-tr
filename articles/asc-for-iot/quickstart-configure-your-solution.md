@@ -1,64 +1,61 @@
 ---
-title: Azure Güvenlik Merkezi'ne IOT çözümü Önizleme için yapılandırma | Microsoft Docs
-description: IOT için Azure Güvenlik Merkezi'ni kullanarak uçtan uca IOT çözümünüzü yapılandırmayı öğrenin.
+title: "Hızlı başlangıç: IoT çözümü için Azure Güvenlik Merkezi 'Ni yapılandırma"
+description: Bu hızlı başlangıçta IoT için Azure Güvenlik Merkezi 'ni kullanarak uçtan uca IoT çözümünüzü nasıl yapılandıracağınızı öğrenin.
 services: asc-for-iot
-ms.service: ascforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: ae2207e8-ac5b-4793-8efc-0517f4661222
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/26/2019
+ms.date: 11/08/2019
 ms.author: mlottner
-ms.openlocfilehash: c60b421e9b60c6a2191fe2be189d1abd1c328f24
-ms.sourcegitcommit: 0568c7aefd67185fd8e1400aed84c5af4f1597f9
+ms.openlocfilehash: e670df359cc33c9eaca089d0ed8f9614ef8c0468
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65200790"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73904145"
 ---
-# <a name="quickstart-configure-your-iot-solution"></a>Hızlı Başlangıç: IOT çözümünüzü yapılandırın
+# <a name="quickstart-configure-your-iot-solution"></a>Hızlı başlangıç: IoT çözümünüzü yapılandırma
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Bu makalede IoT için Azure Güvenlik Merkezi 'ni kullanarak IoT güvenlik çözümünüzün ilk yapılandırmasını gerçekleştirme hakkında bir açıklama sunulmaktadır. 
 
-Bu makalede, IOT için ASC kullanarak IOT güvenlik çözümünüzü ilk yapılandırmasını gerçekleştirmek bir açıklama sağlar. 
+## <a name="azure-security-center-for-iot"></a>IoT için Azure Güvenlik Merkezi
 
-## <a name="azure-security-center-asc-for-iot"></a>IOT için Azure Güvenlik Merkezi (ASC)
+IoT için Azure Güvenlik Merkezi, Azure tabanlı IoT çözümleri için kapsamlı uçtan uca güvenlik sağlar.
 
-ASC IOT için Azure tabanlı IOT çözümleri için kapsamlı uçtan uca güvenlik sağlar.
+IoT için Azure Güvenlik Merkezi ile, Azure 'daki tüm IoT cihazlarınızı, IoT platformlarını ve arka uç kaynaklarını tek bir panoda izleyebilirsiniz.
 
-IOT için ASC ile tek bir Panoda tüm IOT çözümünüzü IOT cihazlarınızı, IOT platformları ve Azure arka uç kaynaklarına tümünün görünmesini izleyebilirsiniz.
+IoT Hub etkinleştirildikten sonra IoT için Azure Güvenlik Merkezi, IoT Hub ve IoT çözümünüz ile ilişkili diğer Azure hizmetlerini otomatik olarak tanımlar.
 
-IOT Hub'ınızda etkinleştirildikten sonra IOT için ASC da IOT hub'ınıza bağlanan ve IOT çözümünüzü ilişkili diğer Azure hizmetleri otomatik olarak tanımlar.
+Otomatik ilişki algılamayı buna ek olarak, IoT çözümünüzün bir parçası olarak hangi diğer Azure kaynak gruplarının etiketleyebileceği de seçim yapabilirsiniz. 
 
-Otomatik ilişki algılamayı yanı sıra, aynı zamanda çekme ve etiket için hangi diğer Azure kaynakları, IOT çözümünüzün bir parçası olarak seçebilirsiniz.
-Seçimlerinizi tüm abonelikler, kaynak grubu veya tek kaynaklar eklemenize izin verir.
+Seçimleriniz, tüm abonelikleri, kaynak grupları veya tek kaynakları eklemenize olanak tanır. 
 
-Tüm kaynak ilişkiler tanımladıktan sonra ASC IOT için Azure Güvenlik Merkezi, bu kaynak için güvenlik önerileri ve uyarılar sağlamak üzere yararlanır.
+Tüm kaynak ilişkilerini tanımladıktan sonra IoT için Azure Güvenlik Merkezi, bu kaynaklara yönelik güvenlik önerileri ve uyarılar sağlamak için Azure Güvenlik Merkezi 'Nden yararlanır.
 
-## <a name="add-azure-resources-to-your-iot-solution"></a>IOT çözümünüzü Azure kaynakları ekleyin
+## <a name="add-azure-resources-to-your-iot-solution"></a>IoT çözümünüze Azure kaynakları ekleme
 
-IOT çözümünüzü yeni bir kaynak eklemek için aşağıdakileri yapın: 
+IoT çözümünüze yeni kaynak eklemek için aşağıdakileri yapın: 
 
-1. Açık, **IOT hub'ı** Azure portalında. 
-2. Seçin ve açın **kaynakları** altında **güvenlik** sol menüden. 
-3. Seçin **kaynak Ekle**.
-4. IOT çözümünüze ait kaynakları seçin.
-5. **Ekle**'ye tıklayın. 
+1. **IoT Hub** Azure Portal açın. 
+1. Sol taraftaki menüden **güvenlik** altında **kaynakları** seçin ve açın. 
+1. **Düzenle** ' yi seçin ve IoT çözümünüze ait kaynak gruplarını seçin.
+1. **Ekle**'ye tıklayın. 
 
-Tebrikler! IOT çözümünüzü yeni bir kaynak ekledik.
+Tebrikler! IoT çözümünüze yeni bir kaynak grubu eklediniz.
 
-ASC izleyiciler yeni olduğunuz kaynakları ve yüzeyleri ilgili güvenlik önerilerini ve Uyarıları, IOT çözümünüzün bir parçası olarak eklenen artık IOT için.
+IoT için Azure Güvenlik Merkezi artık yeni eklenen kaynak gruplarınızı izler ve IoT çözümünüzün bir parçası olarak ilgili güvenlik önerilerini ve uyarılarını gösterir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Güvenlik modülleri oluşturma hakkında bilgi edinmek için sonraki makaleye ilerleyin...
+Güvenlik modülleri oluşturmayı öğrenmek için bir sonraki makaleye ilerleyin...
 
 > [!div class="nextstepaction"]
-> [Güvenlik modülleri oluşturma](quickstart-create-security-twin.md)
+> [Güvenlik modülleri oluştur](quickstart-create-security-twin.md)

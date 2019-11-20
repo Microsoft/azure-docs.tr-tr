@@ -3,7 +3,7 @@ title: Azure'da Service Fabric üzerinde bir .NET uygulaması oluşturma | Micro
 description: Bu öğreticide, ASP.NET Core ön ucuyla ve durum bilgisi olan bir güvenilir hizmet arka ucuyla uygulama oluşturmayı ve uygulamayı kümeye dağıtmayı öğrenirsiniz.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: ''
 ms.assetid: ''
@@ -12,21 +12,21 @@ ms.devlang: dotNet
 ms.topic: tutorial
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 01/14/2019
-ms.author: aljo
+ms.date: 07/10/2019
+ms.author: atsenthi
 ms.custom: mvc
-ms.openlocfilehash: 998d33730586316fe3bf423663ffae5148843ed0
-ms.sourcegitcommit: adb6c981eba06f3b258b697251d7f87489a5da33
+ms.openlocfilehash: b5acee47a13e0faa538c5d8464835297088d03e8
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66515862"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68598922"
 ---
 # <a name="tutorial-create-and-deploy-an-application-with-an-aspnet-core-web-api-front-end-service-and-a-stateful-back-end-service"></a>Öğretici: ASP.NET Core Web API'si ön uç hizmeti ve durum bilgisi olan bir arka uç hizmetiyle uygulama oluşturma ve dağıtma
 
 Bu öğretici, bir dizinin birinci bölümüdür.  Verileri depolamak için ASP.NET Core Web API'si ön ucu ve durum bilgisi olan bir arka uç hizmetiyle Azure Service Fabric uygulaması oluşturmayı öğreneceksiniz. Bitirdiğinizde, oylama sonuçlarını kümedeki durum bilgisi içeren arka uç hizmetine kaydeden bir ASP.NET Core web ön ucuna sahip oylama uygulaması sağlanır. Oylama uygulamasını el ile oluşturmak istemiyorsanız, tamamlanmış uygulamanın [kaynak kodunu indirebilir](https://github.com/Azure-Samples/service-fabric-dotnet-quickstart/) ve [Oylama örnek uygulamasında izlenecek yol](#walkthrough_anchor) bölümüne atlayabilirsiniz.  İsterseniz, bu öğreticiye ait bir [video kılavuzu](https://channel9.msdn.com/Events/Connect/2017/E100) da izleyebilirsiniz.
 
-![AngularJS+ASP.NET API ön bir Service Fabric durum bilgisi olan arka uç hizmetine bağlanma End](./media/service-fabric-tutorial-create-dotnet-app/application-diagram.png)
+![AngularJS + ASP. NET API ön ucu, Service Fabric üzerinde durum bilgisi olan bir arka uç hizmetine bağlanma](./media/service-fabric-tutorial-create-dotnet-app/application-diagram.png)
 
 Serinin birinci bölümünde şunları öğrenirsiniz:
 
@@ -47,7 +47,7 @@ Bu öğretici dizisinde şunların nasıl yapıldığını öğrenirsiniz:
 
 Bu öğreticiye başlamadan önce:
 * Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun
-* [Azure geliştirme](https://www.visualstudio.com/) ve **ASP.NET ve Web geliştirme** iş yükleriyle **Visual Studio 2017** sürüm 15.5 veya üstünü yükleyin.
+* **Azure geliştirme** ve **ASP.net ve Web geliştirme** Iş yükleriyle [Visual Studio 2019](https://www.visualstudio.com/) sürüm 15,5 veya üstünü yükledikten sonra.
 * [Service Fabric SDK'yı yükleyin](service-fabric-get-started.md)
 
 ## <a name="create-an-aspnet-web-api-service-as-a-reliable-service"></a>ASP.NET Web API'si hizmetini güvenilir bir hizmet olarak oluşturma
@@ -452,7 +452,7 @@ Bu sonraki adımda, iki hizmeti bağlayın ve ön uç Web uygulamasının arka u
 
 Service Fabric, güvenilir hizmetlerle iletişiminize eksiksiz bir esneklik getirir. Tek bir uygulamanın içinde, TCP üzerinden erişilebilen hizmetleriniz olabilir. Diğer hizmetlere HTTP REST API üzerinden erişilebilir ve yine web yuvaları üzerinden erişilebilen başka hizmetler olabilir. Sağlanan seçeneklerin arka planı ve mevcut alışverişler için, bkz. [Hizmetlerle iletişim kurma](service-fabric-connect-and-communicate-with-services.md).
 
-Bu öğreticide, VotingWeb ön uç web hizmetinin arka uç VotingData hizmetiyle iletişim kurabilmesi için [ASP.NET Core Web API](service-fabric-reliable-services-communication-aspnetcore.md) ve [Service Fabric ters proxy’sini](service-fabric-reverseproxy.md) kullanın. Ters proxy varsayılan olarak 19081 numaralı bağlantı noktasını kullanacak şekilde yapılandırılmıştır ve bu öğreticide düzgün çalışacaktır. Ters proxy bağlantı noktası, kümeyi oluşturmak için kullanılan Azure Resource Manager şablonu olarak ayarlanır. Hangi bağlantı noktasının kullanıldığını bulmak için **Microsoft.ServiceFabric/clusters** kaynağındaki küme şablonuna bakın: 
+Bu öğreticide, VotingWeb ön uç web hizmetinin arka uç VotingData hizmetiyle iletişim kurabilmesi için [ASP.NET Core Web API](service-fabric-reliable-services-communication-aspnetcore.md) ve [Service Fabric ters proxy’sini](service-fabric-reverseproxy.md) kullanın. Ters proxy varsayılan olarak 19081 numaralı bağlantı noktasını kullanacak şekilde yapılandırılmıştır ve bu öğreticide düzgün çalışacaktır. Ters proxy bağlantı noktası, kümeyi kurmak için kullanılan Azure Resource Manager şablonunda ayarlanır. Hangi bağlantı noktasının kullanıldığını bulmak için **Microsoft.ServiceFabric/clusters** kaynağındaki küme şablonuna bakın: 
 
 ```json
 "nodeTypes": [
@@ -465,9 +465,9 @@ Bu öğreticide, VotingWeb ön uç web hizmetinin arka uç VotingData hizmetiyle
           }
         ],
 ```
-Yerel geliştirme kümenizde kullanılan ters proxy bağlantı noktası bulmak için görüntüleme **HttpApplicationGatewayEndpoint** yerel Service Fabric küme bildiriminde öğesi:
-1. Bir tarayıcı penceresi açın ve http gidin:\//localhost:19080 Service Fabric Explorer aracını açın.
-2. Seçin **küme bildirimi ->** .
+Yerel geliştirme Kümenizde kullanılan ters proxy bağlantı noktasını bulmak için yerel Service Fabric kümesi bildiriminde **HttpApplicationGatewayEndpoint** öğesini görüntüleyin:
+1. Bir tarayıcı penceresi açın ve Service Fabric Explorer aracını açmak için\/http:/localhost: 19080 adresine gidin.
+2. **Cluster-> bildirimi**' ni seçin.
 3. HttpApplicationGatewayEndpoint öğesinin bağlantı noktasını not edin. Varsayılan olarak 19081 olmalıdır. 19081 değilse VotesController.cs dosyasındaki kodun aşağıdaki bölümünde GetProxyAddress metodunun bağlantı noktasını değiştirmeniz gerekir.
 
 <a id="updatevotecontroller" name="updatevotecontroller_anchor"></a>
@@ -612,9 +612,9 @@ Visual Studio'da uygulamada hata ayıklaması yaparken yerel bir Service Fabric 
 
 Kodda neler olduğuna bakmak için aşağıdaki adımları tamamlayın:
 
-1. Açık **VotingWeb\VotesController.cs** dosya ve web API'SİNİN bir kesme noktası ayarlamak **Put** yöntemi (72. satır).
+1. **Votingweb\votescontroller.cs** dosyasını açın ve Web API 'sinin **PUT** yönteminde (satır 72) bir kesme noktası ayarlayın.
 
-2. Açık **VotingData\VoteDataController.cs** dosya ve bu web API'SİNİN bir kesme noktası ayarlamak **Put** yöntemi (54. satır).
+2. **Votingdata\votedatacontroller.cs** dosyasını açın ve bu Web API 'sinin **PUT** yönteminde (satır 54) bir kesme noktası ayarlayın.
 
 3. Uygulamayı hata ayıklama modunda çalıştırmak için **F5** tuşuna basın.
 

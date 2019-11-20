@@ -1,6 +1,6 @@
 ---
-title: Limitler, kotalar ve Azure scheduler'da eşikleri
-description: Limitler, kotalar, varsayılan değerleri hakkında bilgi edinin ve Azure Zamanlayıcı için eşikler azaltma
+title: Azure Scheduler 'da sınırlamalar, Kotalar ve eşikler
+description: Azure Scheduler için sınırlar, kotalar, varsayılan değerler ve kısıtlama eşikleri hakkında bilgi edinin
 services: scheduler
 ms.service: scheduler
 author: derek1ee
@@ -9,30 +9,30 @@ ms.reviewer: klam
 ms.assetid: 88f4a3e9-6dbd-4943-8543-f0649d423061
 ms.topic: article
 ms.date: 08/18/2016
-ms.openlocfilehash: 478afb20f3dabec74d66d00bec325408ce6604fc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 293cd956f8270a4863fcc657f58c970096cec1e3
+ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64713746"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71300916"
 ---
-# <a name="limits-quotas-and-throttle-thresholds-in-azure-scheduler"></a>Limitler, kotalar ve azaltma eşikleri Azure scheduler'da
+# <a name="limits-quotas-and-throttle-thresholds-in-azure-scheduler"></a>Azure Scheduler 'da sınırlamalar, Kotalar ve kısıtlama eşikleri
 
 > [!IMPORTANT]
-> Kullanımdan kaldırılan Azure Scheduler uygulamasının yerini [Azure Logic Apps](../logic-apps/logic-apps-overview.md) alacaktır. İş zamanlamak için [Azure Logic Apps'ı deneyebilirsiniz](../scheduler/migrate-from-scheduler-to-logic-apps.md). 
+> [Azure Logic Apps](../logic-apps/logic-apps-overview.md) , [devre dışı bırakılmakta](../scheduler/migrate-from-scheduler-to-logic-apps.md#retire-date)olan Azure Scheduler 'ı değiştiriyor. Zamanlayıcı 'da ayarladığınız işlerle çalışmaya devam etmek için lütfen en kısa sürede [Azure Logic Apps geçirin](../scheduler/migrate-from-scheduler-to-logic-apps.md) .
 
-## <a name="limits-quotas-and-thresholds"></a>Limitler, kotalar ve eşikleri
+## <a name="limits-quotas-and-thresholds"></a>Sınırlar, Kotalar ve eşikler
 
 [!INCLUDE [scheduler-limits-table](../../includes/scheduler-limits-table.md)]
 
-## <a name="x-ms-request-id-header"></a>x-ms-request-id üst bilgisi
+## <a name="x-ms-request-id-header"></a>x-MS-istek kimliği üst bilgisi
 
-Zamanlayıcı hizmetine karşı yapılan her isteği adlı bir yanıt üstbilgisi döndürür **x-ms-request-id**. Bu üst bilgi isteği benzersiz olarak tanımlayan genel olmayan bir değer içerir. Bu nedenle, bir istek tutarlı olarak başarısız olur ve istek düzgün şekilde biçimlendirilmiş Onaylandı, hata Microsoft'a sağlayarak bildirebilir **x-ms-request-id** yanıt üst bilgisi değeri ve bu ayrıntılar dahil olmak üzere: 
+Zamanlayıcı hizmetine yapılan her istek, **x-MS-Request-ID**adlı bir yanıt üst bilgisi döndürür. Bu üstbilgi, isteği benzersiz bir şekilde tanımlayan donuk bir değer içerir. Bu nedenle, bir istek sürekli olarak başarısız olursa ve isteğin düzgün şekilde biçimlendirildiğini onayladıysanız, **x-MS-Request-id** yanıt üst bilgisi değerini sağlayarak ve bu ayrıntıları dahil ederek hatayı Microsoft 'a bildirebilirsiniz: 
 
-* **X-ms-request-id** değeri
-* İsteğin ne zaman yapıldığını gereken yaklaşık süreyi 
-* Azure aboneliği, iş koleksiyonu ve iş tanımlayıcıları 
-* İstek Denenen işlem türü
+* **X-MS-Request-ID** değeri
+* İsteğin yapıldığı yaklaşık süre 
+* Azure aboneliği, iş koleksiyonu ve iş için tanımlayıcılar 
+* İsteğin denendiği işlem türü
 
 ## <a name="see-also"></a>Ayrıca bkz.
 

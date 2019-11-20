@@ -1,34 +1,31 @@
 ---
-title: Azure portalından ilk işlevinizi oluşturma | Microsoft Docs
+title: Azure portal ilk sunucusuz işlevinizi oluşturun
 description: Azure portalını kullanarak sunucusuz yürütme için ilk Azure İşlevinizi oluşturma hakkında bilgi edinin.
-services: functions
-documentationcenter: na
 author: ggailey777
-manager: jeconnoc
+manager: gwallace
 ms.assetid: 96cf87b9-8db6-41a8-863a-abb828e3d06d
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: quickstart
 ms.date: 03/28/2018
 ms.author: glenga
 ms.custom: mvc, devcenter, cc996988-fb4f-47
-ms.openlocfilehash: 4a49cb3de2dc36dcd933a0b31b6a55b838eb1336
-ms.sourcegitcommit: 4c2b9bc9cc704652cc77f33a870c4ec2d0579451
+ms.openlocfilehash: eb3df5ace97e5a09b2869c0857d49926f354f2b0
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2019
-ms.locfileid: "65864687"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72329663"
 ---
-# <a name="create-your-first-function-in-the-azure-portal"></a>Azure portalında ilk işlevinizi oluşturma
+# <a name="create-your-first-function-in-the-azure-portal"></a>Azure portalında ilk işlevinizi oluşturun
 
-Azure İşlevleri, öncelikle bir VM oluşturmak veya bir web uygulaması yayımlamak zorunda kalmadan kodunuzu [sunucusuz](https://azure.microsoft.com/solutions/serverless/) bir ortamda yürütmenize olanak tanır. Bu makalede, Azure portalında bir "Merhaba Dünya" işlevi oluşturmak için işlevleri kullanmayı öğrenin.
+Azure İşlevleri, öncelikle bir VM oluşturmak veya bir web uygulaması yayımlamak zorunda kalmadan kodunuzu [sunucusuz](https://azure.microsoft.com/solutions/serverless/) bir ortamda yürütmenize olanak tanır. Bu makalede, Azure portal bir "Merhaba Dünya" işlevi oluşturmak için Işlevleri nasıl kullanacağınızı öğrenin.
 
 ![Azure portalında işlev uygulaması oluşturma](./media/functions-create-first-azure-function/function-app-in-portal-editor.png)
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 > [!NOTE]
-> C#Geliştiriciler göz önünde bulundurmalıdır [Visual Studio 2019 içinde ilk işlevinizi oluşturma](functions-create-your-first-function-visual-studio.md) yerine portalında. 
+> C#geliştiriciler Portal yerine [Visual Studio 2019 ' de ilk işlevinizi oluşturmayı](functions-create-your-first-function-visual-studio.md) düşünmelidir. 
 
 ## <a name="log-in-to-azure"></a>Azure'da oturum açma
 
@@ -46,7 +43,7 @@ Ardından, yeni işlev uygulamasında bir işlev oluşturun.
 
 1. Yeni işlev uygulamanızı genişletin ve **İşlevler**'in yanındaki **+** düğmesini, **Portalda**'yı ve **Devam**'ı seçin.
 
-    ![Bir platform seçme işlevleri hızlı.](./media/functions-create-first-azure-function/function-app-quickstart-choose-portal.png)
+    ![Platform seçme için hızlı başlangıç işlevleri.](./media/functions-create-first-azure-function/function-app-quickstart-choose-portal.png)
 
 1. **Web Kancası + API**'yi ve ardından **Oluştur**'u seçin.
 
@@ -80,7 +77,7 @@ Artık bir HTTP isteği göndererek yeni işlevi çalıştırabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Basit bir HTTP ile tetiklenen işlevi bir işlev uygulaması oluşturdunuz.  
+Basit bir HTTP ile tetiklenen işlevi olan bir işlev uygulaması oluşturdunuz.  
 
 [!INCLUDE [Next steps note](../../includes/functions-quickstart-next-steps.md)]
 

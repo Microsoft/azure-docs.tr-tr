@@ -1,6 +1,6 @@
 ---
-title: Azure'da Microsoft Müşteri sözleşmesi faturanızı anlama
-description: Okuma ve azure'da Microsoft Müşteri sözleşmesi faturanızı anlama hakkında bilgi edinin
+title: Azure’da Microsoft Müşteri Sözleşmesi faturanızı anlama
+description: Azure’da Microsoft Müşteri Sözleşmesi faturanızı okuma ve anlama hakkında bilgi edinin
 author: bandersmsft
 manager: jureid
 tags: billing
@@ -9,103 +9,103 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/01/2019
+ms.date: 10/01/2019
 ms.author: banders
-ms.openlocfilehash: fed658d3f672d6116d7c2b0f3e2e9ad989dd67c6
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: d514afdc4d9b571346768d283320f9e605e57f57
+ms.sourcegitcommit: a19f4b35a0123256e76f2789cd5083921ac73daf
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67490649"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71719726"
 ---
-# <a name="terms-in-your-microsoft-customer-agreement-invoice"></a>Microsoft, müşteri sözleşmesinin koşullarını fatura
+# <a name="terms-in-your-microsoft-customer-agreement-invoice"></a>Microsoft Müşteri Sözleşmesi faturanızdaki koşullar
 
-Bu makale, Azure faturalandırma hesabınız için bir Microsoft Müşteri sözleşmesi için geçerlidir. [Microsoft Müşteri sözleşmesi erişimi olup olmadığını denetlemek](#check-access-to-a-microsoft-customer-agreement).
+Bu makale, Microsoft Müşteri Sözleşmesi’ne ilişkin Azure ödeme hesabı için geçerlidir. [Microsoft Müşteri Sözleşmesi’ne erişiminiz olup olmadığını denetleyin](#check-access-to-a-microsoft-customer-agreement).
 
-Faturanızı ücretleri ve ödeme yönergeleri bir özetini sağlar. Taşınabilir Belge Biçimi (.pdf) indirme için kullanılabilir [Azure portalında](https://portal.azure.com/) veya e-posta ile gönderilebilir. Daha fazla bilgi için [görüntüleyin ve indirme, Microsoft Azure fatura](billing-download-azure-invoice.md).
+Faturanızda ücretlerinizin özeti ve ödeme yönergeleri yer alır. [Azure portalından](https://portal.azure.com/) Taşınabilir Belge Biçiminde (.pdf) indirilebilir veya e-postayla gönderilebilir. Daha fazla bilgi için bkz. [Microsoft Azure faturanızı görüntüleme ve indirme](billing-download-azure-invoice.md).
 
-## <a name="billing-period"></a>Fatura dönemi
+## <a name="billing-period"></a>Faturalama dönemi
 
-Aylık olarak faturalandırılır. Hangi denetleyerek faturalar alıyorsunuz ayın gününü bulabilirsiniz *fatura tarihi* profili özelliklerini faturalama altında [Azure portalında](https://portal.azure.com/). Sonraki fatura döneminde olduğundan, fatura döneminin sonuna ve fatura tarihleri arasında oluşan ücretler sonraki ayın faturasında dahil edilir. Fatura dönemi başlangıç ve bitiş tarihlerini her fatura yukarıdaki PDF faturayı listelenen **fatura özeti**.
+Aylık olarak faturalandırılırsınız. [Azure portalında](https://portal.azure.com/) faturalama profili özellikleri bölümünde *fatura tarihi* bilgisini kontrol ederek faturaları ayın hangi günü alacağınızı öğrenebilirsiniz. Faturalama döneminin sonu ile fatura tarihi arasında gerçekleşen ücretler, sonraki faturalama döneminde yer aldığından sonraki ayın faturasına dahil edilir. Her bir fatura için faturalama dönemi başlangıç ve bitiş tarihleri, faturanın PDF dosyasında **Faturalama Özeti** bölümünün yukarısında listelenir.
 
-## <a name="invoice-terms-and-descriptions"></a>Fatura hüküm ve açıklamaları
+## <a name="invoice-terms-and-descriptions"></a>Fatura terimleri ve açıklamaları
 
-Aşağıdaki liste önemli terimler olarak bölümlerde, faturada bakın ve her dönem için açıklamalar sağlar.
+Aşağıdaki bölümlerde, faturanızda gördüğünüz önemli terimler ve her bir terimin açıklaması listelenmektedir.
 
 ### <a name="invoice-summary"></a>Fatura özeti
 
-**Fatura özeti** ilk sayfasının üst kısmındaki ve fatura profilinizi ve ödeme yöntemini hakkındaki bilgileri gösterir.
+**Fatura Özeti**, birinci sayfanın en üstünde yer alır ve faturalama profiliniz ve ödeme şekliniz ile ilgili bilgileri gösterir.
 
-![Fatura Özeti bölümü](./media/billing-understand-your-invoice-mca/invoicesummary.png)
+![Fatura özeti bölümü](./media/billing-understand-your-invoice-mca/invoicesummary.png)
 
-| Terim | Açıklama |
+| Sözleşme Dönemi | Açıklama |
 | --- | --- |
-| Kime Satıldı |Faturalama hesabı özellikleri bulunan varlığınız yasal adresi|
-| Fatura adresi |Faturayı almadan fatura profilinin adresi faturalandırma, profil özelliklerini faturalama bulunamadı|
-| Faturalama Profili |Faturayı almadan fatura profilinin adı |
-| P.O. number |İzleme için size atanan bir isteğe bağlı satınalma siparişi numarası |
-| Fatura numarası |İzleme amacıyla kullanılan benzersiz, Microsoft tarafından oluşturulan fatura sayı |
-| Fatura tarihi |Fatura, genellikle 5-12 gün faturalama döngüsü sonuna sonra oluşturulan tarih. Fatura profil özelliklerini, fatura tarihi kontrol edebilirsiniz.|
-| Ödeme koşulları |Nasıl Microsoft faturanız için ödeme yaparsınız. *30 gün içinde net* Fatura tarihinden itibaren 30 gün içinde ödeme yapacağınız anlamına gelir. |
+| Kime Satıldı |Ödeme hesabı özelliklerinde bulunan tüzel kişiliğinizin adresi|
+| Fatura adresi |Faturalama profili özelliklerinde bulunan, faturayı alan faturalama profilinin fatura adresi|
+| Faturalama Profili |Faturayı alan faturalama profilinin adı |
+| P.O. number |İzleme için atadığınız isteğe bağlı bir satınalma siparişi numarası |
+| Fatura numarası |İzleme amacıyla kullanılan, Microsoft tarafından oluşturulan benzersiz bir fatura numarası |
+| Fatura tarihi |Faturanın oluşturulduğu tarih, genellikle Faturalama döneminin sona erdiği günden beş ila 12 gün sonrasıdır. Faturalama profili özelliklerinden fatura tarihinizi kontrol edebilirsiniz.|
+| Ödeme koşulları |Microsoft faturanız için ödeme şekliniz. *Net 30 gün*, fatura tarihinden sonra 30 gün içinde ödeme yapacağınız anlamına gelir. |
 
-### <a name="billing-summary"></a>Fatura özeti
+### <a name="billing-summary"></a>Faturalama özeti
 
-**Fatura özeti** önceki fatura döneminde, uygulanan tüm krediler, vergi ve toplam tutarı beri faturalandırma profili karşı ücretleri son gösterir.
+**Faturalama Özeti**, önceki faturalama döneminden bu yana faturalama dönemine karşı oluşan ücretleri, uygulanan kredileri, vergiyi ve ödenmesi gereken toplam tutarı gösterir.
 
-![Fatura Özeti bölümü](./media/billing-understand-your-invoice-mca/billingsummary.png)
+![Faturalama özeti bölümü](./media/billing-understand-your-invoice-mca/billingsummary.png)
 
-| Terim | Açıklama |
+| Sözleşme Dönemi | Açıklama |
 | --- | --- |
-| Ücretleri|Bu faturalandırma profili son fatura döneminden itibaren Microsoft ücretlendirir toplam sayısı |
-| Jenerik |İadelerini aldığınız KREDİLERİ |
-| Uygulanan azure kredisine sahip olun | Azure ücretlerine her fatura döneminde otomatik olarak uygulanan azure kredisine sahip olun |
-| Ara toplam |Vergi öncesi tutarın |
-| Vergi |Profilinizi faturalandırma ülke/bölge bağlı olarak ödeme vergi tutarı ve türü. Ardından Vergi ödenecek yoksa faturası vergisi görmezsiniz. |
-| Tahmini Toplam tasarruf |Etkili indirimlere kaydettiğiniz tahmini toplam tutar. Varsa, geçerli İndirim oranları ayrıntılarında satın alma satır öğeleri altında fatura bölümünde listelenir. |
+| Ücretler|Son faturalama döneminden bu yana bu faturalama profili için oluşan toplam Microsoft ücreti sayısı |
+| Krediler |İadelerden aldığınız krediler |
+| Uygulanan Azure kredileri | Her faturalama döneminde Azure ücretlerine otomatik olarak uygulanan Azure kredileri |
+| Ara toplam |Ödenmesi gereken vergi öncesi tutar |
+| Vergi |Faturalama profilinizin ülke/bölgesine bağlı olarak, ödediğiniz verginin türü ve tutarı. Vergi ödemeniz gerekmiyorsa faturanızda vergiyi görmezsiniz. |
+| Tahmini toplam tasarruf |Geçerli indirimlerden kazandığınız tahmini toplam tutar. Varsa, geçerli indirimli fiyatlar, Faturaya Göre Ayrıntılar Bölümünde satın alma kalemleri bölümünün altında listelenir. |
 
 ### <a name="invoice-sections"></a>Fatura bölümleri
 
-Her fatura bölümü için fatura profilinizi altında ücretleri, uygulanan Azure kredisi miktarı, vergi ve toplam tutarın görürsünüz.
+Faturalama profilinizin altındaki her bir fatura bölümü için, ücretleri, uygulanan Azure kredisi tutarını, vergiyi ve ödenmesi gereken toplam tutarı görürsünüz.
 
 `Total = Charges - Azure Credit + Tax`
 
-### <a name="details-by-invoice-section"></a>Fatura bölümünde ayrıntıları
+### <a name="details-by-invoice-section"></a>Faturaya göre ayrıntılar bölümü
 
-Ürün siparişi ayrılmış her fatura bölüm için maliyet ayrıntılarını gösterir. Her ürün siparişi içinde maliyet hizmet türü tarafından ayrılmıştır. Azure portalı ve Azure kullanım ve Ücret CSV, ürün ve hizmetleriniz için günlük bulabilirsiniz. Daha fazla bilgi edinmek için [faturanızla ilgili ücretleri anlamak için bir Microsoft Müşteri sözleşmesi](billing-mca-understand-your-bill.md).
+Ayrıntılar, her bir fatura bölümü için, ürün siparişine göre dökümü alınmış maliyeti gösterir. Her ürün siparişi içinde, hizmet türüne göre maliyetin dökümü gösterilir. Azure portalında ve Azure kullanım bilgilerini ve ücretlerini içeren CSV dosyasında ürünleriniz ve hizmetleriniz için günlük ücretleri bulabilirsiniz. Daha fazla bilgi edinmek için bkz. [Microsoft Müşteri Sözleşmesi faturanızdaki ücretleri anlama](billing-mca-understand-your-bill.md).
 
-Kalan ödenmemiş toplam tutar her hizmet ailesi çıkarılmasıyla hesaplanır *Azure KREDİLERİ* gelen *KREDİLERİ/ücretleri* ve ekleme *vergi*:
+Her bir hizmet için ödenmesi gereken toplam tutar, *Krediler/ücretler* tutarından *Azure kredileri* düşülüp *Vergi* eklenerek hesaplanır:
 
 
-![Fatura bölümünde ayrıntıları](./media/billing-understand-your-invoice-mca/invoicesectiondetails.png)
+![Faturaya göre ayrıntılar bölümü](./media/billing-understand-your-invoice-mca/invoicesectiondetails.png)
 
-| Terim |Açıklama |
+| Sözleşme Dönemi |Açıklama |
 | --- | --- |
-| Birim fiyatı | Geçerli birim fiyatı olan (para birimi fiyatlandırma) hizmeti kullanım oranı için kullanılır. Bu ürün, hizmet ailesi, ölçüm ve teklif için benzersizdir. |
-| Miktar | Satın alınan ya da fatura dönemi boyunca Tüketilen Miktar |
-| Ücret/KREDİLERİ | Krediler/para iadesi uygulandıktan sonra ücretleri net tutar |
-| Azure Kredisi | Ücret/KREDİLERİ uygulanan Azure kredisi miktarı|
-| Vergi oranı | Ülke/bölge bağlı olarak Vergi oranı |
-| Vergi tutarı | Satın almak için uygulanan vergi tutarı Vergi hızınıza göre |
-| Toplam | Kalan ödenmemiş toplam tutar için satın alma |
+| Birim fiyat | Kullanımı fiyatlandırmak için kullanılan hizmetin geçerli birim fiyatı (fiyatlandırma para birimi cinsinden). Ürün, hizmet ailesi, ölçüm ve teklif için bu benzersizdir. |
+| Miktar | Faturalama döneminde satın alınan veya kullanılan miktar |
+| Ücretler/Krediler | Krediler/para iadeleri uygulandıktan sonraki net ücret tutarı |
+| Azure Kredisi | Ücretlere/Kredilere uygulanan Azure kredileri tutarı|
+| Vergi oranı | Ülke/bölgeye göre vergi oranları |
+| Vergi tutarı | Vergi oranına göre satın alma işlemine uygulanan vergi tutarı |
+| Toplam | Satın alma için ödenmesi gereken toplam tutar |
 
-### <a name="how-to-pay"></a>Ödeme yapma
+### <a name="how-to-pay"></a>Ödeme şekli
 
-Fatura sayfanın en faturanızın ödeme yapmak için yönergeler de vardır. Onay, kablo, ödeme yapabilir veya çevrimiçi. Çevrimiçi ödeme yaparsanız varsa kredi/banka kartı veya Azure kredisi kullanabilirsiniz.
+Faturanın alt kısmında, faturanızı ödeme yönergeleri yer alır. Çekle, havale yoluyla veya çevrimiçi ödeme yapabilirsiniz. Çevrimiçi ödeme yaparsanız, varsa kredi kartı veya Azure kredilerini kullanabilirsiniz.
 
-### <a name="publisher-information"></a>Yayımcı bilgisi
+### <a name="publisher-information"></a>Yayımcı bilgileri
 
-Üçüncü taraf hizmetleri faturanızda varsa, adını ve her Yayımcı adresini faturanızı alt kısmında listelenir.
+Faturanızda üçüncü taraf hizmetleriniz varsa, her yayımcının adı ve adresi faturanızın en altında listelenir.
 
-## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri sözleşmesi için erişim denetimi
+## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri Sözleşmesi’ne erişimi denetleme
 [!INCLUDE [billing-check-mca](../../includes/billing-check-mca.md)]
 
-## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun.
+## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bize ulaşın.
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://go.microsoft.com/fwlink/?linkid=2083458).
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Faturadaki fatura profil ücretlerini anlama](billing-mca-understand-your-bill.md)
+- [Faturalama profilinizin faturasındaki ücretleri anlama](billing-mca-understand-your-bill.md)
 - [Azure faturanızı ve günlük kullanım verilerinizi edinme](billing-download-azure-invoice-daily-usage-date.md)
-- [Kuruluşunuzun Azure fiyatlandırmayı görüntüleyin](billing-ea-pricing.md)
-- [Fatura profiliniz için vergi belgeleri görüntüleme](billing-mca-download-tax-document.md)
+- [Kuruluşunuzun Azure fiyatlandırmasını görüntüleme](billing-ea-pricing.md)
+- [Faturalama profiliniz için vergi belgelerini görüntüleme](billing-mca-download-tax-document.md)

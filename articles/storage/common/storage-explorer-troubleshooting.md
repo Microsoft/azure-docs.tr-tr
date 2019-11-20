@@ -1,282 +1,366 @@
 ---
 title: Azure Depolama Gezgini sorun giderme kılavuzu | Microsoft Docs
 description: Azure Depolama Gezgini için hata ayıklama tekniklerine genel bakış
-services: virtual-machines
+services: storage
 author: Deland-Han
-ms.service: virtual-machines
+manager: dcscontentpm
+ms.service: storage
 ms.topic: troubleshooting
 ms.date: 06/15/2018
 ms.author: delhan
-ms.openlocfilehash: 03cb3f2339dda1bf1dbb510b686882e924a98d74
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4aa9e93831b902ff9f0a0659c650cd2ca123b1a3
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67118693"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74124013"
 ---
 # <a name="azure-storage-explorer-troubleshooting-guide"></a>Azure Depolama Gezgini sorun giderme kılavuzu
 
-Microsoft Azure Depolama Gezgini Windows, macOS ve Linux'ta Azure depolama verileriyle kolayca çalışmanızı sağlayan bir tek başına bir uygulamadır. Uygulama, Azure, Ulusal Bulutlar ve Azure Stack üzerinde barındırılan depolama hesaplarına bağlanabilir.
+Microsoft Azure Depolama Gezgini, Windows, macOS ve Linux 'ta Azure Depolama verileriyle çalışmayı kolaylaştıran tek başına bir uygulamadır. Uygulama, Azure, Ulusal bulutlar ve Azure Stack barındırılan depolama hesaplarına bağlanabilir.
 
-Bu kılavuz depolama Gezgini'nde görülen yaygın sorunların çözümleri özetlenmektedir.
+Bu kılavuzda, Depolama Gezgini yaygın olarak görülen sorunlara yönelik çözümler özetlenmektedir.
 
-## <a name="role-based-access-control-permission-issues"></a>Rol tabanlı erişim denetimi izin sorunları
+## <a name="rbac-permissions-issues"></a>RBAC izinleri sorunları
 
-[Rol tabanlı erişim denetimi (RBAC)](https://docs.microsoft.com/azure/role-based-access-control/overview) izin kümelerini birleştirerek Azure kaynaklarının ayrıntılı erişim yönetimi sağlar _rolleri_. Depolama Gezgini'nde çalışırken RBAC almak için izlemeniz gereken bazı öneriler şunlardır.
+Rol tabanlı erişim denetimi [RBAC](https://docs.microsoft.com/azure/role-based-access-control/overview) , _Roller_Için izin kümelerini birleştirerek Azure kaynakları için yüksek düzeyde ayrıntılı erişim yönetimine izin vermez. İşte Depolama Gezgini ortamında RBAC çalışma en iyi şekilde yararlanmak için bazı stratejiler aşağıda verilmiştir.
 
-### <a name="what-do-i-need-to-see-my-resources-in-storage-explorer"></a>Depolama Gezgini'nde Kaynaklarım görmek ne gerekiyor?
+### <a name="how-do-i-access-my-resources-in-storage-explorer"></a>Nasıl yaparım? Depolama Gezgini kaynaklarıma eriş mi?
 
-RBAC kullanarak depolama kaynaklarına erişirken sorun yaşıyorsanız, uygun roller atanmadığı için olabilir. Aşağıdaki bölümlerde, Depolama Gezgini depolama kaynaklarınıza erişmek için şu anda gerektirir. izinler açıklanmaktadır.
+RBAC aracılığıyla depolama kaynaklarına erişirken sorun yaşıyorsanız uygun rollere atanmamıştır. Aşağıdaki bölümlerde, şu anda depolama kaynaklarınıza erişim için gereken Depolama Gezgini izinleri açıklanır. Uygun rollere veya izinlere sahip olduğunuzdan emin değilseniz Azure hesap yöneticinize başvurun.
 
-Uygun roller veya izinlere sahip değilseniz Azure hesap yöneticinize başvurun.
+#### <a name="read-listget-storage-accounts-permissions-issue"></a>"Okuma: depolama hesaplarını Listele/al" izinleri sorunu
 
-#### <a name="read-listget-storage-accounts"></a>Okuma: Depolama hesapları listesinde/Al
-
-Depolama hesapları Listeleme izni olmalıdır. Bu izin, "Okuyucu" rolü tarafından atanan alabilirsiniz.
+Depolama hesaplarını listelemek için izninizin olması gerekir. Bu izni almak için _okuyucu_ rolüne atanmalısınız.
 
 #### <a name="list-storage-account-keys"></a>Depolama hesabı anahtarlarını Listele
 
-Depolama Gezgini isteklerinin kimliğini doğrulamak için hesap anahtarları da kullanabilirsiniz. "Katılımcı" rolü gibi daha güçlü rolleriyle anahtarlarına erişim elde edebilirsiniz.
+Depolama Gezgini, isteklerin kimliğini doğrulamak için hesap anahtarlarını da kullanabilir. _Katkıda bulunan_ rolü gibi daha güçlü roller aracılığıyla hesap anahtarlarına erişim sağlayabilirsiniz.
 
 > [!NOTE]
-> Erişim anahtarlarını bunları tutan herkese sınırsız izinleri verin. Bu nedenle, bu genellikle bunlar. Bu sayede hesap kullanıcıları için önerilmez. Erişim anahtarlarını iptali gerekiyorsa, bunları yeniden oluşturabilirsiniz [Azure portalı](https://portal.azure.com/).
+> Erişim tuşları, bunları tutan herkese Kısıtlanmamış izinler verir. Bu nedenle, kullanıcılara hesap atamak için bu anahtarları izlemenizi önermiyoruz. Erişim anahtarlarını iptal etmeniz gerekirse, [Azure Portal](https://portal.azure.com/)yeniden oluşturabilirsiniz.
 
 #### <a name="data-roles"></a>Veri rolleri
 
-Veri kaynaklarına okuma erişimi verir en az bir rol atanması gerekir. Örneğin, liste veya blobları indirmek gerekiyorsa, en az "Depolama Blob verileri okuyucu" rolünü gerekir.
+Kaynaklardan veri okuma erişimi veren en az bir rol atanması gerekir. Örneğin, Blobları listelemek veya indirmek isterseniz, en azından _Depolama Blobu veri okuyucusu_ rolüne sahip olmanız gerekir.
 
-### <a name="why-do-i-need-a-management-layer-role-to-see-my-resources-in-storage-explorer"></a>Depolama Gezgini'nde Kaynaklarım görmek için bir yönetim katmanı rolü neden gerekiyor?
+### <a name="why-do-i-need-a-management-layer-role-to-see-my-resources-in-storage-explorer"></a>Kaynaklarımı Depolama Gezgini görmek için neden bir yönetim katmanı rolüne ihtiyacım var?
 
-Azure depolama alanına sahip iki erişim katmanı: _Yönetim_ ve _veri_. Abonelikleri ve depolama hesaplarını yönetim katmanı erişilir. Kapsayıcıları, blobları ve diğer veri kaynakları, veri katmanı erişilir. Örneğin, Azure depolama hesaplarınızı listesini almak istiyorsanız, yönetim uç noktasına bir istek gönderin. Bir hesapta blob kapsayıcıları listesi istiyorsanız, uygun bir hizmet uç noktaya bir istek gönderin.
+Azure Storage iki erişim katmanına sahiptir: _Yönetim_ ve _veri_. Abonelikler ve depolama hesaplarına yönetim katmanı üzerinden erişilir. Kapsayıcılar, Bloblar ve diğer veri kaynaklarına veri katmanı üzerinden erişilir. Örneğin, Azure 'daki depolama hesaplarınızın bir listesini almak istiyorsanız Yönetim uç noktasına bir istek gönderirsiniz. Bir hesapta blob kapsayıcıları listesini isterseniz, uygun hizmet uç noktasına bir istek gönderirsiniz.
 
-RBAC rollerini yönetim veya veri katmanı erişim izinlerini içerebilir. "Okuyucu" rolünü, örneğin, yönetim katmanı kaynakları salt okunur erişim verir.
+RBAC rolleri, yönetim veya veri katmanı erişimi için izinleri içerebilir. Örneğin, okuyucu rolü, yönetim katmanı kaynaklarına salt okuma erişimi verir.
 
-NET olarak söylemek gerekirse, "Okuyucu" rolünü hiçbir veri katmanı izinleri sağlar ve veri katmanı erişmek için gerekli değildir.
+Tamamen konuşuyor, okuyucu rolü veri katmanı izinleri sağlamaz ve veri katmanına erişmek için gerekli değildir.
 
-Depolama Gezgini, Azure kaynaklarınıza bağlanmak için gereken bilgileri toplamak yoluyla kaynaklarınıza erişmek kolaylaştırır. Örneğin, blob kapsayıcıları görüntülemek için blob Hizmeti uç noktası için bir liste kapsayıcıları isteği Depolama Gezgini gönderir. Bu uç noktayı almak üzere aboneliklerin listesi, Depolama Gezgini arar ve depolama hesapları erişebilirsiniz. Ancak, abonelikleri ve depolama hesaplarını bulmak için Depolama Gezgini'ni de yönetim katmanı erişmesi.
+Depolama Gezgini, Azure kaynaklarınıza bağlanmak için gerekli bilgileri toplayıp kaynaklarınıza erişmeyi kolaylaştırır. Örneğin, blob Kapsayıcılarınızı göstermek için Depolama Gezgini blob hizmeti uç noktasına bir "liste kapsayıcıları" isteği gönderir. Bu uç noktayı almak için Depolama Gezgini, erişiminiz olan aboneliklerin ve depolama hesaplarının listesini arar. Aboneliklerinizi ve depolama hesaplarınızı bulmak için Depolama Gezgini yönetim katmanına erişime de ihtiyaç duyuyor.
 
-Herhangi bir yönetim katmanı izinleri verme rol yoksa, Depolama Gezgini, verileri katmana bağlanmak için gereken bilgileri alınamıyor.
+Herhangi bir yönetim katmanı izni veren bir rolünüz yoksa Depolama Gezgini veri katmanına bağlanması için gereken bilgileri alamaz.
 
-### <a name="what-if-i-cant-get-the-management-layer-permissions-i-need-from-my-administrator"></a>Yönetim katmanı izinleri ne alamıyorum my yöneticisinden gerekiyor?
+### <a name="what-if-i-cant-get-the-management-layer-permissions-i-need-from-my-administrator"></a>Yöneticimde ihtiyacım olan yönetim katmanı izinlerini alamazsanız ne yapmalıyım?
 
-RBAC ile ilgili bir çözüm henüz şu anda yok. Geçici bir çözüm olarak bir SAS URI'si istek [kaynağınıza ekleme](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer?tabs=linux#attach-a-service-by-using-a-shared-access-signature-sas).
+Şu anda bu sorun için RBAC ile ilgili bir çözümünüz yok. Geçici bir çözüm olarak, [kaynağına eklemek](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer?tabs=linux#use-a-shared-access-signature-uri)IÇIN BIR SAS URI 'si isteyebilirsiniz.
 
-## <a name="error-self-signed-certificate-in-certificate-chain-and-similar-errors"></a>Hata: Sertifika zinciri (ve benzer hatalar) otomatik olarak imzalanan sertifika
+## <a name="error-self-signed-certificate-in-certificate-chain-and-similar-errors"></a>Hata: sertifika zincirinde otomatik olarak imzalanan sertifika (ve benzer hatalar)
 
-Sertifika hataları aşağıdaki durumlardan biri nedeniyle:
+Sertifika hataları genellikle aşağıdaki durumlardan birinde oluşur:
 
-1. Uygulamayı "bir sunucuya (örneğin, şirket sunucunuzun) HTTPS trafiğini kesintiye, şifresini ve otomatik olarak imzalanan bir sertifika kullanarak şifreleme saydam proxy" bağlandı.
-2. Aldığınız HTTPS iletilerine otomatik olarak imzalanan bir SSL sertifikası çalıştırıyorsunuzdur bir uygulaması çalıştırıyorsunuz. Sertifikalar ekleme uygulamalara örnek olarak, virüsten koruma ve ağ trafiğini incelemesi yazılım içerir.
+- Uygulama, bir saydam proxy üzerinden bağlanır, yani bir sunucu (örneğin, şirket sunucunuz) HTTPS trafiğini kesintiye _uğratır_, şifresini çözerek otomatik olarak imzalanan bir sertifika kullanarak bunu şifreler.
+- Aldığınız HTTPS iletilerine otomatik olarak imzalanan bir SSL sertifikası ekleme bir uygulama çalıştırıyorsunuz. Sertifika ekleme uygulamaları, virüsten koruma ve ağ trafiği İnceleme yazılımlarını içerir.
 
-Depolama Gezgini otomatik olarak imzalanan veya güvenilmeyen bir sertifika gördüğünde artık alınan aldığı HTTPS iletisinin değiştirilmiş olup olmadığını bilebilirsiniz. Otomatik olarak imzalanan sertifikanın bir kopyasını varsa, Depolama Gezgini bildirebilirsiniz aşağıdaki adımları uygulayarak güven:
+Depolama Gezgini kendinden imzalı veya güvenilmeyen bir sertifikayı gördüğünde, alınan HTTPS iletisinin değiştirilip değiştirilmediğini artık bilmez. Otomatik olarak imzalanan sertifikanın bir kopyasına sahipseniz, aşağıdaki adımları izleyerek Depolama Gezgini güveneceği konusunda talimat verebilirsiniz:
 
-1. Elde Base-64 kodlanmış X.509 (.cer) sertifikanın kopyasını
-2. Tıklayın **Düzenle** > **SSL sertifikaları** > **sertifikaları içeri aktar**ve ardından bulmak, seçmek ve .cer dosyasını açmak için dosya seçiciyi kullanın
+1. Sertifikanın Base-64 kodlamalı bir X. 509.440 (. cer) kopyasını edinin.
+2.  > **SSL sertifikalarını** **Düzenle** > **sertifikaları içeri aktar**' a gidin ve ardından dosya seçiciyi kullanarak. cer dosyasını bulun, seçin ve açın.
 
-Bu sorun ayrıca birden çok sertifika (kök ve Ara) sonucu olabilir. Hatayı gidermek için her iki sertifikanın yeniden eklenmesi gerekir.
+Bu sorun, birden fazla sertifika (kök ve ara) varsa da oluşabilir. Bu hatayı onarmak için her iki sertifikanın de eklenmesi gerekir.
 
-Nereden sertifika geldiğini emin değilseniz bulmak için aşağıdaki adımları deneyebilirsiniz:
+Sertifikanın nereden geldiği konusunda emin değilseniz, bulmak için aşağıdaki adımları izleyin:
 
-1. Açık SSL yükleme
-    * [Windows](https://slproweb.com/products/Win32OpenSSL.html) (Basit sürümlerden birini yeterli olmalıdır)
-    * Mac ve Linux: işletim sisteminize eklenmelidir
-2. Açık SSL çalıştırma
-    * Windows: yükleme dizinini açın, **/bin/** ve çift tıklatarak **openssl.exe**.
-    * Mac ve Linux: çalıştırma **openssl** bir terminalden.
-3. `s_client -showcerts -connect microsoft.com:443` yürütme
-4. Otomatik olarak imzalanan sertifikaları bulun. Hangi sertifikaların otomatik olarak imzalanan emin değilseniz, herhangi bir konuyu aramak `("s:")` ve veren `("i:")` aynıdır.
-5. Herhangi bir otomatik olarak imzalanan sertifika bulduğunuzda, her biri için kopyalayıp her şeyi ilk ve son dahil olmak üzere **---BEGIN CERTIFICATE---** için **---END CERTIFICATE---** için yeni bir .cer dosyası.
-6. Depolama Gezgini'ni açın, **Düzenle** > **SSL sertifikaları** > **sertifikaları içeri aktar**ve ardından dosya seçiciyi kullanın bulun, seçin ve oluşturduğunuz .cer dosyalarını açın.
+1. OpenSSL 'yi yükler.
+    * [Windows](https://slproweb.com/products/Win32OpenSSL.html): tüm hafif sürümler yeterli olmalıdır.
+    * Mac ve Linux: işletim sisteminize eklenmelidir.
+2. OpenSSL 'yi çalıştırın.
+    * Windows: yükleme dizinini açın, **/bin/** seçin ve **OpenSSL. exe**' ye çift tıklayın.
+    * Mac ve Linux: terminalden `openssl` çalıştırın.
+3. `s_client -showcerts -connect microsoft.com:443` öğesini çalıştırın.
+4. Otomatik olarak imzalanan sertifikaları bulun. Hangi sertifikaların kendinden imzalandığından emin değilseniz, konu `("s:")` ve veren `("i:")` aynı olan her yerde dikkat edin.
+5. Her biri için otomatik olarak imzalanan sertifikalar bulduğunuzda, (ve dahil) `-----BEGIN CERTIFICATE-----` her şeyi `-----END CERTIFICATE-----` yeni bir. cer dosyasına kopyalayıp yapıştırın.
+6. Depolama Gezgini açın ve **sertifikaları Içeri aktar** > **SSL sertifikalarını** > **Düzenle** ' ye gidin. Ardından, oluşturduğunuz. cer dosyalarını bulmak, seçmek ve açmak için dosya seçiciyi kullanın.
 
-Yukarıdaki adımları kullanarak herhangi bir otomatik olarak imzalanan sertifika bulamazsanız daha fazla yardım için geri bildirim aracı üzerinden bize ulaşın. Depolama Gezgini ile komut satırından başlatmak de seçebilirsiniz `--ignore-certificate-errors` bayrağı. Depolama Gezgini ile bu bayrağı başlatıldığında, sertifika hataları göz ardı eder.
+Bu adımları izleyerek kendinden imzalı bir sertifika bulamıyorsanız, geri bildirim aracı aracılığıyla bizimle iletişim kurun. Ayrıca, `--ignore-certificate-errors` bayrağını kullanarak komut satırından Depolama Gezgini açabilirsiniz. Bu bayrağıyla açıldığında, Depolama Gezgini sertifika hatalarını yoksayar.
 
 ## <a name="sign-in-issues"></a>Oturum açma sorunları
 
-### <a name="blank-sign-in-dialog"></a>Boş oturum açma iletişim kutusu
+### <a name="blank-sign-in-dialog-box"></a>Boş oturum açma iletişim kutusu
 
-Boş oturum açma iletişim kutuları genellikle AD FS tarafından Depolama Gezgini isteyen Elektron tarafından desteklenmeyen bir yeniden yönlendirme gerçekleştirmek için neden olur. Bu sorunu çözmek için oturum açmak için cihaz kod akış kullanma girişimi. Bunu yapmak için aşağıdaki adımları tamamlayın:
+Active Directory Federasyon Hizmetleri (AD FS) (AD FS), elektron tarafından desteklenmeyen bir yeniden yönlendirme gerçekleştirmeyi Depolama Gezgini istem yaparken, boş oturum açma iletişim kutuları çoğu zaman oluşur. Bu sorunu geçici olarak çözmek için, oturum açma için cihaz kod akışını kullanmayı deneyebilirsiniz. Bunu yapmak için aşağıdaki adımları izleyin:
 
-1. Menü: Önizleme -> "Cihaz kodunu oturum açma kullan".
-2. Bağlan iletişim kutusu (ya da sol dikey çubuk Tak simgesine ya da hesabı panosunda "hesabı ekle" aracılığıyla) açın.
-3. Oturum açmak için istediğiniz hangi ortamı seçin.
-4. "Oturum Aç" düğmesine tıklayın.
-5. Sonraki panelinde yönergeleri izleyin.
+1. Menüde **Önizleme** ' ye gidin > **cihaz kodu oturumu kullanın**.
+2. **Bağlan** iletişim kutusunu açın (sol taraftaki dikey çubukta bulunan tak simgesi veya hesap panelinde **Hesap Ekle** ' yi seçerek).
+3. Oturum açmak istediğiniz ortamı seçin.
+4. **Oturum aç '** ı seçin.
+5. Sonraki bölmede yer alan yönergeleri izleyin.
 
-Kendiniz varsayılan tarayıcınızı farklı bir hesap zaten imzalı olduğu için kullanmak istediğiniz hesaba imzalama sorun bulursanız, şunları da yapabilirsiniz:
+Varsayılan tarayıcınız zaten farklı bir hesapta oturum açmış olduğu için kullanmak istediğiniz hesapta oturum açamazsınız, aşağıdakilerden birini yapın:
 
-1. El ile özel bir oturuma tarayıcınızın bağlantıyı ve kodu kopyalayın.
-2. El ile bağlantıyı ve kodu farklı bir tarayıcıya kopyalayın.
+- Bağlantıyı ve kodu tarayıcınızın özel oturumuna el ile kopyalayın.
+- Bağlantıyı ve kodu farklı bir tarayıcıya el ile kopyalayın.
 
-### <a name="reauthentication-loop-or-upn-change"></a>Yeniden kimlik doğrulaması döngü veya UPN değiştirme
+### <a name="reauthentication-loop-or-upn-change"></a>Yeniden kimlik doğrulama döngüsü veya UPN değişikliği
 
-Yeniden kimlik doğrulamanın bir döngüde olduğunuz veya hesaplarınızı birinin UPN'sini değiştirilmiştir, aşağıdaki adımları deneyin:
+Bir yeniden kimlik doğrulaması döngüsünde veya hesaplarınızdan birinin UPN 'sini değiştirdiyseniz, şu adımları izleyin:
 
-1. Tüm hesapları kaldırın ve sonra Depolama Gezgini'ni kapatın.
-2. Silin. Makinenizden IdentityService klasör. Windows üzerinde klasör konumundaki `C:\users\<username>\AppData\Local`. Mac ve Linux için klasör, kullanıcı dizininizin kökünde bulabilirsiniz.
-3. Mac veya Linux üzerinde yöneticisiyseniz, Microsoft.Developer.IdentityService giriş, işletim sistemi keystore silmek gerekir. Mac bilgisayarlarda, anahtar deposu "Gnome Anahtarlık" uygulamasıdır. Linux için uygulama genellikle "Kimlik Anahtarlığı" olarak adlandırılır, ancak ad dağıtımınıza bağlı olarak farklı olabilir.
+1. Tüm hesapları kaldırın ve ardından Depolama Gezgini kapatın.
+2. Öğesini silin. Makinenizden IdentityService klasörü. Windows 'da, klasör `C:\users\<username>\AppData\Local`konumunda bulunur. Mac ve Linux için, klasörü Kullanıcı dizininizin kökünde bulabilirsiniz.
+3. Mac veya Linux çalıştırıyorsanız, işletim sisteminizin keystore ' dan Microsoft. Developer. IdentityService girişini de silmeniz gerekir. Mac üzerinde, anahtar deposu *GNOME Anahtarlık* uygulamasıdır. Linux 'ta, uygulama genellikle _kimlik anahtarlığı_olarak adlandırılır ancak ad, dağıtıma bağlı olarak farklılık gösterebilir.
 
 ### <a name="conditional-access"></a>Koşullu Erişim
 
-Depolama Gezgini Windows 10, Linux veya Macos'ta kullanıldığında, koşullu erişim desteklenmez. Depolama Gezgini tarafından kullanılan AAD Kitaplığı'nda bir sınırlama nedeniyle budur.
+Depolama Gezgini tarafından kullanılan Azure AD kitaplığındaki bir sınırlama nedeniyle, Windows 10, Linux veya macOS 'ta Depolama Gezgini kullanılırken koşullu erişim desteklenmez.
 
-## <a name="mac-keychain-errors"></a>Mac Keychain hataları
+## <a name="mac-keychain-errors"></a>Mac Anahtarlık hataları
 
-MacOS Anahtarlık bir duruma neden olan sorunları Storage Explorer'ın kimlik doğrulama kitaplığı için bazen alabilirsiniz. Bu durum dışında Anahtarlık almak için aşağıdaki adımları deneyin:
+MacOS anahtarlığı bazen Depolama Gezgini kimlik doğrulama kitaplığı için soruna neden olan bir durum girebilir. Anahtarlığı bu durumdan dışarı almak için aşağıdaki adımları izleyin:
 
-1. Depolama Gezgini'ni kapatın.
-2. Açık Anahtarlık (**cmd + Ara çubuğu**yazın Anahtarlıkta, isabet girin).
-3. "Login" anahtar zinciri seçin.
-4. Asma kilit simgesini (asma kilide kilitli bir konuma tamamlandıktan sonra hangi uygulamaları elinizde açın bağlı olarak birkaç saniye sürebilir animasyon uygular) Anahtarlık kilitlemek için tıklayın.
+1. Depolama Gezgini kapatın.
+2. Anahtarlık açın (komut + ara çubuğuna basın, **Anahtarlık**yazın ve ENTER tuşuna basın).
+3. "Oturum açma" Anahtarışını seçin.
+4. Anahtarlık kilidini kilitlemek için asma kilit simgesini seçin. (İşlem tamamlandığında, asma kilidi kilitli olarak görünür. Bu işlem, açtığınız uygulamalara bağlı olarak birkaç saniye sürebilir).
 
-    ![image](./media/storage-explorer-troubleshooting/unlockingkeychain.png)
+    ![Asma kilit simgesi](./media/storage-explorer-troubleshooting/unlockingkeychain.png)
 
-5. Depolama Gezgini'ni başlatın.
-6. Bir şey "hizmet hub'ı Anahtarlık erişim istediği gibi" ifadesini içeren bir açılır pencere görünmelidir. Ne zaman, Mac yönetici parolasını girin ve tıklatın **her zaman izin ver** (veya **izin** varsa **her zaman izin ver** kullanılamaz).
+5. Depolama Gezgini'ni açın.
+6. "Hizmet hub 'ı anahtarlığa erişmek istiyor." gibi bir iletiyle karşılaşıyoruz. Mac yönetici hesabı parolanızı girip **her zaman Izin ver** ' i seçin (veya **her zaman izin** ver ' **i seçerseniz)** .
 7. Oturum açmayı deneyin.
 
-### <a name="general-sign-in-troubleshooting-steps"></a>Genel oturum açma sorun giderme adımları
+### <a name="general-sign-in-troubleshooting-steps"></a>Genel oturum açma sorunlarını giderme adımları
 
-* MacOS üzerinde olduğunuzu ve "kimlik doğrulaması için bekleyen üzerinden..." hiçbir oturum açma penceresi görünür iletişim kutusunda, daha sonra deneyin [adımları](#mac-keychain-errors)
-* Depolama Gezgini'ni yeniden başlatın
-* Kimlik doğrulama penceresi boş ise, kimlik doğrulaması iletişim kutusunu kapatmadan önce en az bir dakika bekleyin.
-* Proxy ve sertifika ayarları, makine ve Depolama Gezgini için düzgün şekilde yapılandırıldığından emin olun.
-* Windows üzerinde olduğunuz ve oturum açma ve aynı makineye Visual Studio 2019 erişimi varsa, Visual Studio 2019'için oturum açarken deneyin. Bir başarılı oturum açma işleminden sonra Visual Studio 2019 için Depolama Gezgini'ni açın ve hesabınız hesap panelinde bakın.
+* MacOS kullanıyorsanız ve oturum açma penceresi **kimlik doğrulaması Için bekleniyor** iletişim kutusunda hiçbir şekilde yoksa, [aşağıdaki adımları](#mac-keychain-errors)deneyin.
+* Depolama Gezgini yeniden başlatın.
+* Kimlik doğrulama penceresi boşsa, kimlik doğrulama iletişim kutusunu kapatmadan önce en az bir dakika bekleyin.
+* Proxy ve sertifika ayarlarınızın hem makineniz hem de Depolama Gezgini için düzgün yapılandırıldığından emin olun.
+* Windows çalıştırıyorsanız ve aynı makinede ve oturum açma kimlik bilgilerinde Visual Studio 2019 ' e erişiminiz varsa, Visual Studio 2019 ' de oturum açmayı deneyin. Visual Studio 2019 ' de başarılı bir oturum açma işleminden sonra, Depolama Gezgini açıp hesabınızı hesap panelinde görebilirsiniz.
 
-Bu yöntemlerin hiçbiri çalışıyorsanız [github'da bir sorun açın](https://github.com/Microsoft/AzureStorageExplorer/issues).
+Bu yöntemlerin hiçbiri işe çalışmadıysanız, [GitHub 'da bir sorun açın](https://github.com/Microsoft/AzureStorageExplorer/issues).
 
 ### <a name="missing-subscriptions-and-broken-tenants"></a>Eksik abonelikler ve bozuk kiracılar
 
-Başarıyla oturum açtıktan sonra aboneliklerinizi alınamıyor, aşağıdaki sorun giderme yöntemleri deneyin:
+Başarıyla oturum açtıktan sonra aboneliklerinizi alamadıysanız aşağıdaki sorun giderme yöntemlerini deneyin:
 
-* Hesabınızı beklediğiniz aboneliklerinize erişiminin olduğunu doğrulayın. Kullanmaya çalıştığınız Azure ortamı için portalda oturum açarak erişiminizi doğrulayabilirsiniz.
-* Doğru Azure kullanarak oturum açmış emin olun (Azure, Azure Çin 21Vianet, Azure Almanya, Azure ABD kamu veya özel ortam) ortamı.
-* Bir ara sunucunun ardından değilseniz, Depolama Gezgini Ara sunucusunu düzgün şekilde yapılandırdığınızdan emin olun.
-* Deneyin ve hesabı yeniden eklemeyi.
-* "Daha fazla bilgi" bağlantısını varsa, arayın ve başarısız olan kiracılar için hangi hata iletileri bildirilen bakın. Varsa you'ren't emin hatasıyla yapmanız gerekenler bakın, sonra kullanım için ücretsiz iletiniz [github'da bir sorun açın](https://github.com/Microsoft/AzureStorageExplorer/issues).
+* Hesabınızın, bekleyen aboneliklere erişimi olduğunu doğrulayın. Kullanmaya çalıştığınız Azure ortamı için portalda oturum açarak erişiminizi doğrulayabilirsiniz.
+* Doğru Azure ortamında (Azure, Azure Çin 21Vianet, Azure Almanya, Azure ABD kamu veya özel ortam) oturum açtığınızdan emin olun.
+* Bir ara sunucunun arkasındaysanız, Depolama Gezgini proxy 'yi doğru yapılandırdığınızdan emin olun.
+* Hesabı kaldırıp yeniden eklemeyi deneyin.
+* "Daha fazla bilgi" bağlantısı varsa, başarısız olan kiracılar için hangi hata iletilerinin raporlanmakta olduğunu kontrol edin. Hata iletilerine yanıt verme konusunda emin değilseniz, [GitHub 'da bir sorun açmayı](https://github.com/Microsoft/AzureStorageExplorer/issues)ücretsiz olarak kullanabilirsiniz.
 
-## <a name="cant-remove-attached-account-or-storage-resource"></a>Ekli hesabı ya da depolama kaynak kaldırılamıyor
+## <a name="cant-remove-an-attached-account-or-storage-resource"></a>Eklenmiş bir hesap veya depolama kaynağı kaldırılamıyor
 
-Bir ekli hesabı veya kullanıcı Arabirimi aracılığıyla depolama kaynağı kaldırmak zamanınız yoksa aşağıdaki klasörleri silerek tüm ekli kaynakları el ile silebilirsiniz:
+Kullanıcı arabirimi aracılığıyla ekli bir hesabı veya depolama kaynağını kaldıramıyorum, aşağıdaki klasörleri silerek tüm bağlı kaynakları el ile silebilirsiniz:
 
 * Windows: `%AppData%/StorageExplorer`
 * macOS: `/Users/<your_name>/Library/Application Support/StorageExplorer`
 * Linux: `~/.config/StorageExplorer`
 
 > [!NOTE]
-> Depolama Gezgini, yukarıdaki klasörleri silmeden önce kapatın.
+> Bu klasörleri silmeden önce Depolama Gezgini kapatın.
 
 > [!NOTE]
-> Şimdiye kadar tüm SSL sertifikaları içe aktardıktan sonra içeriğini yedekleme `certs` dizin. Daha sonra yedekleme, SSL sertifikalarınızı XML'den için kullanabilirsiniz.
+> Herhangi bir SSL sertifikası aldıysanız, `certs` dizininin içeriğini yedekleyin. Daha sonra, SSL sertifikalarınızı yeniden içeri aktarmak için yedekleme 'yi kullanabilirsiniz.
 
 ## <a name="proxy-issues"></a>Proxy sorunları
 
 İlk olarak, girdiğiniz aşağıdaki bilgilerin doğru olduğundan emin olun:
 
-* Proxy URL'si ve bağlantı noktası numarası
-* Kullanıcı adı ve parola tarafından proxy gerekliyse
+* Proxy URL 'SI ve bağlantı noktası numarası
+* Ara sunucu için gerekliyse Kullanıcı adı ve parola
 
 > [!NOTE]
-> Depolama Gezgini Ara sunucu ayarlarını yapılandırmak için proxy otomatik yapılandırma dosyalarını desteklemez.
+> Depolama Gezgini, proxy ayarlarını yapılandırmak için proxy otomatik yapılandırma dosyalarını desteklemez.
 
-### <a name="common-solutions"></a>Yaygın çözümleri
+### <a name="common-solutions"></a>Ortak çözümler
 
-Hala sorun yaşıyorsanız, aşağıdaki sorun giderme yöntemleri deneyin:
+Sorun yaşamaya devam ediyorsanız, aşağıdaki sorun giderme yöntemlerini deneyin:
 
-* Ara sunucunuz kullanmadan Internet'e bağlanabilir, depolama Gezgini'yle etkin proxy ayarları çalışır doğrulayın. Bu durumda, proxy ayarlarınız ile ilgili bir sorun olabilir. Sorunları belirlemek için proxy yöneticinizle birlikte çalışın.
-* Proxy sunucusu kullanarak diğer uygulamaları beklendiği gibi çalıştığını doğrulayın.
-* Kullanmaya çalıştığınız Azure ortamı için portala bağlanabildiğini doğrulayın
-* Hizmet uç noktalarınıza yanıtlar alabilir doğrulayın. Uç nokta URL'nizde tarayıcınıza girin. Bağlantı kurabiliyorsanız, InvalidQueryParameterValue ya da benzer XML yanıtı almanız gerekir.
-* Başka biri de Depolama Gezgini proxy sunucunuz ile kullanıyorsa, bunlar bağlanabildiğini doğrulayın. Bağlantı kurabiliyorsanız, proxy sunucu yöneticinize başvurmanız gerekebilir
+* Proxy 'nizi kullanmadan internet 'e bağlanabildiğinizi, Depolama Gezgini proxy ayarları etkin olmadan çalıştığını doğrulayın. Bu durumda, ara sunucu ayarlarınızda bir sorun olabilir. Sorunları belirlemek için yöneticinizle birlikte çalışın.
+* Proxy sunucusunu kullanan diğer uygulamaların beklendiği gibi çalıştığını doğrulayın.
+* Kullanmaya çalıştığınız Azure ortamı için portala bağlanabildiğinizi doğrulayın.
+* Hizmet uç noktaınızdan yanıt alabildiğinizi doğrulayın. Tarayıcınızın uç nokta URL 'Lerinden birini girin. Bağlantı kurmak için InvalidQueryParameterValue veya benzer bir XML yanıtı almalısınız.
+* Başka biri de ara sunucu ile Depolama Gezgini kullanıyorsa, bağlanabildiğini doğrulayın. Mümkünse, proxy sunucu yöneticinize başvurmanız gerekebilir.
 
-### <a name="tools-for-diagnosing-issues"></a>Sorunları tanılama araçları
+### <a name="tools-for-diagnosing-issues"></a>Sorunları tanılamaya yönelik araçlar
 
-Ağ araçları için fiddler'ı Windows gibi varsa, aşağıdaki gibi sorunları tanılayabilirsiniz:
+Windows için Fiddler gibi ağ araçlarınız varsa, sorunları aşağıdaki gibi tanılayabilirsiniz:
 
-* Ara sunucunuz çalışmanız gerekiyorsa, proxy sunucusu üzerinden bağlanmak için ağ aracınızı yapılandırmak zorunda kalabilirsiniz.
-* Ağ, aracı tarafından kullanılan bağlantı noktası numarasını kontrol edin.
-* Depolama Gezgini'nde proxy ayarları olarak yerel ana bilgisayar URL'si ve ağ aracın bağlantı noktası numarası girin. Doğru yapıldığında, yönetim ve hizmet uç noktaları için Depolama Gezgini tarafından yapılan ağ istekleri günlüğe kaydetme ağ aracınızın başlatır. Örneğin, https://cawablobgrs.blob.core.windows.net/ bir tarayıcı ve blob uç noktanız alırsınız için bir yanıt erişim olsa da, kaynağın mevcut, önerir aşağıdaki benzer.
+* Proxy 'niz üzerinden çalışmanız gerekiyorsa, ağ iletişimi aracınızı proxy üzerinden bağlanacak şekilde yapılandırmanız gerekebilir.
+* Ağ aracınız tarafından kullanılan bağlantı noktası numarasını kontrol edin.
+* Depolama Gezgini ' deki proxy ayarları olarak yerel ana bilgisayar URL 'sini ve ağ aracının bağlantı noktası numarasını girin. Bunu doğru yaptığınızda, ağ aracınız, yönetim ve hizmet uç noktalarına Depolama Gezgini tarafından yapılan ağ isteklerini günlüğe kaydetmeye başlar. Örneğin, bir tarayıcıda blob uç noktanız için `https://cawablobgrs.blob.core.windows.net/` girin ve aşağıdakine benzer bir yanıt alırsınız:
 
-![Kod örneği](./media/storage-explorer-troubleshooting/4022502_en_2.png)
+  ![Kod örneği](./media/storage-explorer-troubleshooting/4022502_en_2.png)
 
-### <a name="contact-proxy-server-admin"></a>Proxy Sunucu Yöneticisi ile iletişime geçin
+  Bu yanıt, erişemeseniz de kaynağın mevcut olduğunu önerir.
 
-Proxy ayarlarınız doğru ise proxy sunucu yöneticinize başvurmanız gerekebilir ve
+### <a name="contact-proxy-server-admin"></a>Proxy Sunucu Yöneticisi ile iletişim kurun
 
-* Proxy yönetim veya kaynak uç noktaları Azure trafiği engellemez emin olun.
-* Proxy sunucunuz tarafından kullanılan kimlik doğrulama protokolü doğrulayın. Depolama Gezgini şu anda NTLM proxy'leri desteklemez.
+Proxy ayarlarınız doğruysa, proxy sunucu yöneticinizle iletişime geçerek şunları yapabilirsiniz:
 
-## <a name="unable-to-retrieve-children-error-message"></a>"Alma alt oluşturulamıyor" hata iletisi
+* Proxy 'nizin Azure yönetimine veya kaynak uç noktalarına giden trafiği engellemediğinden emin olun.
+* Proxy sunucunuz tarafından kullanılan kimlik doğrulama protokolünü doğrulayın. Depolama Gezgini Şu anda NTLM proxy 'leri desteklemiyor.
 
-Azure'a bir ara sunucu bağlı değilseniz, proxy ayarlarının doğru olduğunu doğrulayın. Bir kaynağa erişim abonelik veya hesap sahibinden izni okuma veya bu kaynak için izinler listesinde doğrulayın.
+## <a name="unable-to-retrieve-children-error-message"></a>"Alt öğeler alınamıyor" hata iletisi
 
-## <a name="connection-string-doesnt-have-complete-configuration-settings"></a>Bağlantı dizesi değil tam yapılandırma ayarları
+Azure 'a bir proxy üzerinden bağlıysanız, proxy ayarlarınızın doğru olduğundan emin olun. Aboneliğin veya hesabın sahibinden bir kaynağa erişim izni verildiyse, bu kaynak için okuma veya listeleme izinlerine sahip olduğunuzu doğrulayın.
 
-Bu hata iletisini alırsanız, depolama hesabı anahtarlarını almak için gerekli izinlere sahip değilsiniz mümkündür. Durumun bu olup olmadığını onaylamak için portala gidin ve depolama hesabınızı bulun. Hızlı depolama hesabınız için düğümde sağ tıklayıp "Portalını açın,"'i tıklatarak bunu yapabilirsiniz. Bunu yaptığınızda, "Erişim anahtarlar" dikey penceresine gidin. Ardından anahtarları görüntüleme izinlerine sahip değilseniz, "Erişiminiz yoksa" iletisini içeren bir sayfa görürsünüz. Bu sorunu geçici olarak çözmek için başka bir kişinin hesap anahtarını edinmeniz ve adı ve anahtarı ile ekleme veya SAS depolama hesabı için birisinden ve depolama hesabı eklemek için kullanın.
+## <a name="connection-string-doesnt-have-complete-configuration-settings"></a>Bağlantı dizesinin yapılandırma ayarları Tamam
 
-Hesap anahtarlarını görürseniz, biz sorunu gidermenize yardımcı olabilmemiz için Github'da bir sorun kaydedebilir.
+Bu hata iletisini alırsanız, depolama hesabınız için anahtarları almak için gerekli izinlere sahip olmanız mümkün değildir. Bu durumun bu olduğunu onaylamak için portala gidin ve depolama hesabınızı bulun. Bunu, depolama hesabınız için düğüme sağ tıklayıp **portalda aç '** ı seçerek yapabilirsiniz. Ardından, **erişim tuşları** dikey penceresine gidin. Anahtarları görüntüleme izniniz yoksa, "erişiminiz yok" iletisini görürsünüz. Bu sorunu geçici olarak çözmek için, hesap anahtarını başka bir kişiden edinebilir ve ad ve anahtar aracılığıyla iliştirebilir ya da bir kullanıcıdan depolama hesabı için bir SAS isteyebilir ve depolama hesabını eklemek için onu kullanabilirsiniz.
 
-## <a name="issues-with-sas-url"></a>SAS URL ile ilgili sorunlar
+Hesap anahtarlarını görürseniz, sorunu çözmenize yardımcı olması için GitHub 'da bir sorun çözün.
 
-Bir SAS URL'sini kullanarak ve bu hatanın bir hizmeti bağlanıyorsanız:
+## <a name="error-occurred-while-adding-new-connection-typeerror-cannot-read-property-version-of-undefined"></a>Yeni bağlantı eklenirken hata oluştu: TypeError: tanımsız olan ' version ' özelliği okunamıyor
 
-* URL okuma veya kaynakları listelemek için gerekli izinleri sağladığından emin olun.
-* URL sona ermediğinden emin olun.
-* SAS URL'sini bir erişim ilkesi alıyorsa, erişim ilkesi edilmediğini doğrulayın.
+Özel bir bağlantı eklemeye çalıştığınızda bu hata iletisini alırsanız, yerel kimlik bilgileri Yöneticisi 'nde depolanan bağlantı verileri bozulmuş olabilir. Bu sorunu geçici olarak çözmek için bozuk yerel bağlantılarınızı silmeyi ve sonra yeniden eklemeyi deneyin:
 
-Yanlışlıkla geçersiz bir SAS URL'si kullanarak bağlı ve ayırma belirleyemiyoruz, şu adımları izleyin:
+1. Depolama Gezgini başlatın. Menüden **yardım** > **Geliştirici Araçları değiştirme**' ye gidin.
+2. Açılan pencerede, **uygulama** sekmesinde, **File://** > **yerel depolama** (sol taraf) seçeneğine gidin.
+3. Sorun yaşadığınız bağlantı türüne bağlı olarak, anahtarını bulun ve sonra değerini bir metin düzenleyicisine kopyalayın. Değer, aşağıdaki gibi özel bağlantı adlarınızın bir dizisidir:
+    * Depolama hesapları
+        * `StorageExplorer_CustomConnections_Accounts_v1`
+    * Blob kapsayıcıları
+        * `StorageExplorer_CustomConnections_Blobs_v1`
+        * `StorageExplorer_CustomConnections_Blobs_v2`
+    * Dosya paylaşımları
+        * `StorageExplorer_CustomConnections_Files_v1`
+    * Kuyruklar
+        * `StorageExplorer_CustomConnections_Queues_v1`
+    * Tablolar
+        * `StorageExplorer_CustomConnections_Tables_v1`
+4. Geçerli bağlantı adlarınızı kaydettikten sonra, Geliştirici Araçları değerini `[]`olarak ayarlayın.
 
-1. Depolama Gezgini çalıştırırken, geliştirici araçları penceresini açmak için F12 tuşuna basın.
-2. Uygulama sekmesini tıklatın ve ardından yerel depolama tıklayın > file:// soldaki ağaç.
-3. Sorunlu SAS URI'sini hizmet türü ile ilişkili anahtar bulun. Bozuk bir blob kapsayıcısı için SAS URI'si ise, örneğin, adlı anahtar için konum `StorageExplorer_AddStorageServiceSAS_v1_blob`.
-4. Anahtar değerini bir JSON dizisi olmalıdır. Bozuk URI'sı ile ilişkili nesneyi bulmak ve kaldırın.
-5. Depolama Gezgini'ni yeniden yüklemek için CTRL + R tuşuna basın.
+Bozulan bağlantıları korumak istiyorsanız, bozuk bağlantıları bulmak için aşağıdaki adımları kullanabilirsiniz. Var olan tüm bağlantıları kaybetmezseniz, bu adımları atlayabilir ve bağlantı verilerinizi temizlemek için platforma özgü yönergeleri izleyebilirsiniz.
+
+1. Bir metin düzenleyicisinden her bağlantı adını Geliştirici Araçları yeniden ekleyin ve sonra bağlantının çalışıp çalışmadığını denetleyin.
+2. Bir bağlantı doğru çalışıyorsa, bu bozuk değildir ve güvenli bir şekilde bırakabilirsiniz. Bir bağlantı çalışmıyorsa, Geliştirici Araçları değerini kaldırın ve daha sonra tekrar ekleyebilmek için kaydedin.
+3. Tüm bağlantılarınızı incelene kadar tekrarlayın.
+
+Tüm bağlantılarınız bittikten sonra, geri eklenmemiş tüm bağlantı adları için, bozulmuş verileri (varsa) temizlemeniz ve Depolama Gezgini içindeki standart adımları kullanarak geri eklemeniz gerekir:
+
+# <a name="windowstabwindows"></a>[Windows](#tab/Windows)
+
+1. **Başlat** menüsünde **kimlik bilgileri Yöneticisi** ' ni arayın ve açın.
+2. **Windows kimlik bilgileri**' ne gidin.
+3. **Genel kimlik bilgileri**altında, `<connection_type_key>/<corrupted_connection_name>` anahtarına sahip girdileri arayın (örneğin, `StorageExplorer_CustomConnections_Accounts_v1/account1`).
+4. Bu girişleri silip bağlantıları yeniden ekleyin.
+
+# <a name="macostabmacos"></a>[macOS](#tab/macOS)
+
+1. Spotlight (komut + ara çubuğu) öğesini açın ve **Anahtarlık erişimi**arayın.
+2. `<connection_type_key>/<corrupted_connection_name>` anahtara sahip girdileri arayın (örneğin, `StorageExplorer_CustomConnections_Accounts_v1/account1`).
+3. Bu girişleri silip bağlantıları yeniden ekleyin.
+
+# <a name="linuxtablinux"></a>[Linux](#tab/Linux)
+
+Yerel kimlik bilgisi yönetimi, Linux dağıtımına bağlı olarak farklılık gösterir. Linux yönetiyoruz yerel kimlik bilgileri yönetimi için yerleşik bir GUI aracı sağlamıyorsa, yerel kimlik bilgilerinizi yönetmek için bir üçüncü taraf araç yükleyebilirsiniz. Örneğin, Linux yerel kimlik bilgilerini yönetmek için açık kaynaklı bir GUI aracı olan [Mevsimat](https://wiki.gnome.org/Apps/Seahorse/)'ı kullanabilirsiniz.
+
+1. Yerel kimlik bilgileri yönetim aracınızı açın ve kaydettiğiniz kimlik bilgilerinizi bulun.
+2. `<connection_type_key>/<corrupted_connection_name>` anahtara sahip girdileri arayın (örneğin, `StorageExplorer_CustomConnections_Accounts_v1/account1`).
+3. Bu girişleri silip bağlantıları yeniden ekleyin.
+---
+
+Bu adımları çalıştırdıktan sonra yine de bu hatayla karşılaşırsanız veya ne olursa şüphelendiğiniz bağlantıları paylaşmak istiyorsanız GitHub sayfamızda [bir sorun açın](https://github.com/microsoft/AzureStorageExplorer/issues) .
+
+## <a name="issues-with-sas-url"></a>SAS URL 'SI ile ilgili sorunlar
+
+Bir güvenlik alanına bir SAS URL 'SI aracılığıyla bağlanıyorsanız ve bir hata yaşıyorsanız:
+
+* URL 'nin kaynakları okumak veya listelemek için gerekli izinleri sağladığını doğrulayın.
+* URL 'nin süresi dolmadığından emin olun.
+* SAS URL 'SI bir erişim ilkesini temel alıyorsa, erişim ilkesinin iptal edilmediğini doğrulayın.
+
+Yanlışlıkla geçersiz bir SAS URL 'SI kullanarak eklediyseniz ve bundan sonra ayrılamaz, şu adımları izleyin:
+
+1. Depolama Gezgini çalıştırırken, Geliştirici Araçları penceresini açmak için F12 tuşuna basın.
+2. **Uygulama** sekmesinde, sol taraftaki ağaçta **yerel depolama** > **File://** ' u seçin.
+3. Sorunlu SAS URI 'sinin hizmet türüyle ilişkili anahtarı bulun. Örneğin, hatalı SAS URI 'SI bir blob kapsayıcısı için ise, `StorageExplorer_AddStorageServiceSAS_v1_blob`adlı anahtarı bulun.
+4. Anahtarın değeri bir JSON dizisi olmalıdır. Hatalı URI ile ilişkili nesneyi bulun ve silin.
+5. Depolama Gezgini yeniden yüklemek için CTRL + R tuşlarına basın.
 
 ## <a name="linux-dependencies"></a>Linux bağımlılıkları
 
-Genel olarak, Depolama Gezgini, Linux üzerinde çalıştırmak için aşağıdaki paketler gereklidir:
+Depolama Gezgini 1.10.0 ve üzeri, Snap mağazasından bir snap olarak sunulmaktadır. Depolama Gezgini Snap, tüm bağımlılıklarını otomatik olarak yüklüyor ve bir ek bileşenin yeni bir sürümü kullanılabilir olduğunda güncellenir. Depolama Gezgini Snap 'in yüklenmesi önerilen yükleme yöntemidir.
 
-* [.NET core 2.0 çalışma zamanı](https://docs.microsoft.com/dotnet/core/linux-prerequisites?tabs=netcore2x) Not: Depolama Gezgini sürüm 1.7.0 ve daha önce .NET Core 2.0 gerektirir. Yüklü .NET Core daha yeni bir sürümü varsa, düzeltme eki Depolama Gezgini (aşağıya bakın) gerekir. Depolama Gezgini 1.8.0 veya büyük ardından çalıştırıyorsanız, .NET Core 2.2 için kullanılacak mümkün olması gerekir. 2\.2'den sonraki sürümlerde, şu anda çalışması için doğrulanmadı.
-* `libgnome-keyring-common` ve `libgnome-keyring-dev`
+Depolama Gezgini, Depolama Gezgini doğru çalışmadan önce el ile bağlanmanız gerekebilecek bir parola yöneticisinin kullanılmasını gerektirir. Aşağıdaki komutu çalıştırarak, Depolama Gezgini sisteminizin parola yöneticisine bağlayabilirsiniz:
+
+```bash
+snap connect storage-explorer:password-manager-service :password-manager-service
+```
+
+Uygulamayı. tar. gz dosyası olarak da indirebilirsiniz, ancak bağımlılıkları el ile yüklemelisiniz.
+
+> [!IMPORTANT]
+> . Tar. gz indirmesi içinde sağlandığı gibi Depolama Gezgini yalnızca Ubuntu dağıtımları için desteklenir. Diğer dağıtımlar doğrulanmadı ve alternatif veya ek paketler gerektirebilir.
+
+Bu paketler, Linux üzerinde Depolama Gezgini için en yaygın gereksinimlerdir:
+
+* [.NET Core 2,0 çalışma zamanı](https://docs.microsoft.com/dotnet/core/linux-prerequisites?tabs=netcore2x)
 * `libgconf-2-4`
+* `libgnome-keyring0` veya `libgnome-keyring-dev`
+* `libgnome-keyring-common`
 
-Dağıtımınızda bağlı olarak, olabilir farklı veya daha fazla paketleri yüklemeniz gerekir.
+> [!NOTE]
+> Depolama Gezgini Version 1.7.0 ve önceki sürümleri .NET Core 2,0 gerektirir. .NET Core 'un daha yeni bir sürümü yüklüyse, [Depolama Gezgini yama](#patching-storage-explorer-for-newer-versions-of-net-core)yapmanız gerekir. Depolama Gezgini 1.8.0 veya sonraki bir sürümü çalıştırıyorsanız, .NET Core 2,2 ' e kadar kullanabilmeniz gerekir. 2,2 ' den fazla sürüm şu anda çalışacak şekilde doğrulanmadı.
 
-Depolama Gezgini, 16.04 ve 14.04 gibi Ubuntu 18.04 üzerinde resmi olarak desteklenmektedir. Yükleme adımlarını temiz makineler için aşağıdaki gibidir:
+# <a name="ubuntu-1904tab1904"></a>[Ubuntu 19,04](#tab/1904)
 
-# <a name="ubuntu-1804tab1804"></a>[Ubuntu 18.04](#tab/1804)
+1. Depolama Gezgini indirin.
+2. [.NET Core çalışma zamanını](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu19-04/runtime-current)yükler.
+3. Şu komutu çalıştırın:
+   ```bash
+   sudo apt-get install libgconf-2-4 libgnome-keyring0
+   ```
 
-1. Depolama Gezgini'ni indirin
-2. .NET Core çalışma zamanı yükleme, en son doğrulanmış sürüme: [2.0.8](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/runtime-2.0.8) (yeni bir sürümü zaten yüklü değilse, gerekebilir Depolama Gezgini düzeltme eki aşağıya bakın)
-3. `sudo apt-get install libgconf-2-4` öğesini çalıştırın
-4. `sudo apt install libgnome-keyring-common libgnome-keyring-dev` öğesini çalıştırın
+# <a name="ubuntu-1804tab1804"></a>[Ubuntu 18,04](#tab/1804)
 
-# <a name="ubuntu-1604tab1604"></a>[Ubuntu 16.04](#tab/1604)
+1. Depolama Gezgini indirin.
+2. [.NET Core çalışma zamanını](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/runtime-current)yükler.
+3. Şu komutu çalıştırın:
+   ```bash
+   sudo apt-get install libgconf-2-4 libgnome-keyring-common libgnome-keyring0
+   ```
 
-1. Depolama Gezgini'ni indirin
-2. .NET Core çalışma zamanı yükleme, en son doğrulanmış sürüme: [2.0.8](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu16-04/runtime-2.0.8) (yeni bir sürümü zaten yüklü değilse, gerekebilir Depolama Gezgini düzeltme eki aşağıya bakın)
-3. `sudo apt install libgnome-keyring-dev` öğesini çalıştırın
+# <a name="ubuntu-1604tab1604"></a>[Ubuntu 16,04](#tab/1604)
 
-# <a name="ubuntu-1404tab1404"></a>[Ubuntu 14.04](#tab/1404)
+1. Depolama Gezgini indirin.
+2. [.NET Core çalışma zamanını](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu16-04/runtime-current)yükler.
+3. Şu komutu çalıştırın:
+   ```bash
+   sudo apt install libgnome-keyring-dev
+   ```
 
-1. Depolama Gezgini'ni indirin
-2. .NET Core çalışma zamanı yükleme, en son doğrulanmış sürüme: [2.0.8](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu14-04/runtime-2.0.8) (yeni bir sürümü zaten yüklü değilse, gerekebilir Depolama Gezgini düzeltme eki aşağıya bakın)
-3. `sudo apt install libgnome-keyring-dev` öğesini çalıştırın
+# <a name="ubuntu-1404tab1404"></a>[Ubuntu 14,04](#tab/1404)
 
+1. Depolama Gezgini indirin.
+2. [.NET Core çalışma zamanını](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu14-04/runtime-current)yükler.
+3. Şu komutu çalıştırın:
+   ```bash
+   sudo apt install libgnome-keyring-dev
+   ```
 ---
 
-### <a name="patching-storage-explorer-for-newer-versions-of-net-core"></a>Depolama Gezgini'ni daha yeni sürümleri .NET Core için düzeltme eki uygulama 
-.NET Core 2.0 yüklü ve Depolama Gezgini sürüm 1.7.0 çalışan daha büyük veya daha eski bir sürümü varsa, büyük olasılıkla Depolama Gezgini aşağıdaki adımları izleyerek düzeltme eki gerekir:
-1. StreamJsonRpc 1.5.43 sürümünü indirin [nuget'ten](https://www.nuget.org/packages/StreamJsonRpc/1.5.43). Sayfanın sağ tarafındaki "paketini indirme" bağlantısına bakın.
-2. Paket'ı indirdikten sonra dosya uzantısını değiştirme `.nupkg` için `.zip`
-3. Paketin sıkıştırmasını açın
-4. Şuraya gidin: `streamjsonrpc.1.5.43/lib/netstandard1.1/`
-5. Kopyalama `StreamJsonRpc.dll` aşağıdaki konumlara Depolama Gezgini klasör içinde:
-    1. `StorageExplorer/resources/app/ServiceHub/Services/Microsoft.Developer.IdentityService/`
-    2. `StorageExplorer/resources/app/ServiceHub/Hosts/ServiceHub.Host.Core.CLR.x64/`
+### <a name="patching-storage-explorer-for-newer-versions-of-net-core"></a>.NET Core 'un daha yeni sürümleri için Depolama Gezgini düzeltme eki uygulama
 
-## <a name="open-in-explorer-from-azure-portal-doesnt-work"></a>Açık olarak Gezgini Azure portalı çalışmıyor
+Depolama Gezgini 1.7.0 veya daha önceki bir sürümü için Depolama Gezgini tarafından kullanılan .NET Core sürümüne yama yapmanız gerekebilir:
 
-Azure portalında "Gezgini'ni açın," düğmesini sizin için işe yaramazsa, uyumlu bir tarayıcıda kullandığınızdan emin olun. Aşağıdaki tarayıcılardan uyumluluk için test edilmiştir.
+1. [NuGet 'Den](https://www.nuget.org/packages/StreamJsonRpc/1.5.43)StreamJsonRpc 'nin 1.5.43 sürümünü indirin. Sayfanın sağ tarafındaki "paketi Indir" bağlantısını bulun.
+2. Paketi indirdikten sonra, `.nupkg` dosya uzantısını `.zip`olarak değiştirin.
+3. Paketi sıkıştırmayı açın.
+4. Açık `streamjsonrpc.1.5.43/lib/netstandard1.1/` klasör.
+5. `StreamJsonRpc.dll` Depolama Gezgini klasöründeki aşağıdaki konumlara kopyalayın:
+   * `StorageExplorer/resources/app/ServiceHub/Services/Microsoft.Developer.IdentityService/`
+   * `StorageExplorer/resources/app/ServiceHub/Hosts/ServiceHub.Host.Core.CLR.x64/`
+
+## <a name="open-in-explorer-from-the-azure-portal-doesnt-work"></a>Azure portal işe yaramazsa "Gezgin 'de aç"
+
+Azure portal **Explorer 'Da aç** düğmesi işe yaramazsa, uyumlu bir tarayıcı kullandığınızdan emin olun. Aşağıdaki tarayıcılar uyumluluk için sınanmıştır:
 * Microsoft Edge
 * Mozilla Firefox
 * Google Chrome
@@ -284,6 +368,6 @@ Azure portalında "Gezgini'ni açın," düğmesini sizin için işe yaramazsa, u
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hiçbir çözüm, ardından çalışıyorsanız [github'da bir sorun açın](https://github.com/Microsoft/AzureStorageExplorer/issues). GitHub için sol alt köşedeki "Github'a rapor Issue" düğmesini kullanarak da hızlıca elde edebilirsiniz.
+Bu çözümlerin hiçbiri sizin için işe çalışmadıysanız, [GitHub 'da bir sorun açın](https://github.com/Microsoft/AzureStorageExplorer/issues). Bunu, sol alt köşedeki **GitHub 'a sorun raporla** düğmesine seçerek de yapabilirsiniz.
 
 ![Geri Bildirim](./media/storage-explorer-troubleshooting/feedback-button.PNG)

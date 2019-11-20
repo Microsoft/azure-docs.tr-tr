@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory kullanarak Web tablodan veri taşıma | Microsoft Docs
-description: Azure Data Factory kullanarak bir Web sayfasındaki bir tablodan veri taşıma hakkında bilgi edinin.
+title: Azure Data Factory kullanarak Web tablosundan veri taşıma
+description: Azure Data Factory kullanarak bir Web sayfasındaki tablodaki verileri taşıma hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -13,31 +13,31 @@ ms.topic: conceptual
 ms.date: 01/05/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 81b7bf7c230c66087bf286ebd9369d992e93be90
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 957b47244744f161ad9cc8019a411e2e59c29418
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61250626"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73682316"
 ---
-# <a name="move-data-from-a-web-table-source-using-azure-data-factory"></a>Azure Data Factory kullanarak bir Web tablo kaynaktan veri taşıma
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="move-data-from-a-web-table-source-using-azure-data-factory"></a>Azure Data Factory kullanarak bir Web tablosu kaynağından veri taşıma
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](data-factory-web-table-connector.md)
 > * [Sürüm 2 (geçerli sürüm)](../connector-web-table.md)
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [V2'de Web tablo Bağlayıcısı](../connector-web-table.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [v2 'de Web tablosu Bağlayıcısı](../connector-web-table.md).
 
-Bu makalede, kopyalama etkinliği Azure Data Factory'de bir desteklenen havuz veri deposuna bir Web sayfasındaki bir tablodaki verileri taşımak için nasıl kullanılacağını özetlenmektedir. Bu makalede yapılar [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) kopyalama etkinliği ve kaynakları/havuz desteklenen veri depolarının listesi ile veri taşıma genel bir bakış sunan makalesi.
+Bu makalede, bir Web sayfasındaki tablodaki verileri desteklenen bir havuz veri deposuna taşımak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı özetlenmektedir. Bu makalede, kopyalama etkinliğine sahip veri hareketine ve kaynak/havuz olarak desteklenen veri depolarının listesine genel bir bakış sunan [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesi oluşturulur.
 
-Data factory şu anda yalnızca hareketli bir Web tablosundaki verileri diğer veri depolarına destekler, ancak diğer veriler veri taşıma değil bir Web tablosu hedef depolar.
+Data Factory Şu anda yalnızca bir Web tablosundan diğer veri depolarına veri taşımayı destekliyor, ancak diğer veri depolarından verileri bir Web tablosu hedefine taşımıyor.
 
 > [!IMPORTANT]
-> Bu Web Bağlayıcısı şu anda yalnızca ayıklanan tablo içeriğini bir HTML sayfasından destekler. Bir HTTP/s uç noktasından veri almak için kullanın [HTTP Bağlayıcısı](data-factory-http-connector.md) yerine.
+> Bu Web Bağlayıcısı Şu anda yalnızca bir HTML sayfasından tablo içeriğini ayıklamayı desteklemektedir. HTTP/s uç noktasından veri almak için bunun yerine [http bağlayıcısını](data-factory-http-connector.md) kullanın.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Bu Web tablo bağlayıcıyı kullanmak için bir şirket içinde barındırılan Integration Runtime ' (diğer adıyla veri yönetimi ağ geçidi) ayarlamak ve yapılandırmak gereken `gatewayName` havuz özelliğinde bağlı hizmeti. Örneğin, Web tablodan Azure Blob depolama alanına kopyalamak için Azure depolama bağlı hizmetinin aşağıdaki gibi yapılandırın:
+Bu Web tablosu bağlayıcısını kullanmak için, şirket içinde barındırılan bir Integration Runtime (aka Veri Yönetimi Gateway) ayarlamanız ve havuz bağlantılı hizmetindeki `gatewayName` özelliğini yapılandırmanız gerekir. Örneğin, Web tablosundan Azure Blob depolamaya kopyalamak için, Azure Storage bağlı hizmetini aşağıdaki gibi yapılandırın:
 
 ```json
 {
@@ -53,31 +53,31 @@ Bu Web tablo bağlayıcıyı kullanmak için bir şirket içinde barındırılan
 ```
 
 ## <a name="getting-started"></a>Başlarken
-Farklı araçlar/API'lerini kullanarak bir şirket içi Cassandra veri deposundan veri taşıyan kopyalama etkinliği ile işlem hattı oluşturabilirsiniz. 
+Farklı araçlar/API 'Ler kullanarak şirket içi Cassandra veri deposundan veri taşıyan kopyalama etkinliği ile bir işlem hattı oluşturabilirsiniz. 
 
-- Bir işlem hattı oluşturmanın en kolay yolu kullanmaktır **Kopyalama Sihirbazı'nı**. Bkz: [Öğreticisi: Kopyalama Sihirbazı'nı kullanarak bir işlem hattı oluşturma](data-factory-copy-data-wizard-tutorial.md) veri kopyalama Sihirbazı'nı kullanarak bir işlem hattı oluşturma hızlı bir kılavuz. 
-- Ayrıca, bir işlem hattı oluşturmak için aşağıdaki araçları kullanabilirsiniz: **Azure portalında**, **Visual Studio**, **Azure PowerShell**, **Azure Resource Manager şablonu**, **.NET API**ve  **REST API**. Bkz: [kopyalama etkinliği Öğreticisi](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) kopyalama etkinliği ile işlem hattı oluşturmak adım adım yönergeler için. 
+- İşlem hattı oluşturmanın en kolay yolu **Kopyalama Sihirbazı**' nı kullanmaktır. Veri kopyalama Sihirbazı 'nı kullanarak işlem hattı oluşturma hakkında hızlı bir yol için bkz. [öğretici: kopyalama Sihirbazı 'nı kullanarak işlem hattı oluşturma](data-factory-copy-data-wizard-tutorial.md) . 
+- İşlem hattı oluşturmak için aşağıdaki araçları da kullanabilirsiniz: **Visual Studio**, **Azure PowerShell**, **Azure Resource Manager şablonu**, **.NET API**ve **REST API**. Kopyalama etkinliğine sahip bir işlem hattı oluşturmak için adım adım yönergeler için bkz. [kopyalama etkinliği öğreticisi](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) . 
 
-API'ler ve Araçlar kullanmanıza bakılmaksızın, bir havuz veri deposu için bir kaynak veri deposundan veri taşıyan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirin:
+Araçları veya API 'Leri kullanıp kullanmayacağınızı bir kaynak veri deposundan havuz veri deposuna veri taşınan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirirsiniz:
 
-1. Oluşturma **bağlı hizmetler** girdi ve çıktı verilerini bağlamak için veri fabrikanıza depolar.
-2. Oluşturma **veri kümeleri** kopyalama işleminin girdi ve çıktı verilerini göstermek için. 
-3. Oluşturma bir **işlem hattı** bir veri kümesini girdi ve çıktı olarak bir veri kümesini alan kopyalama etkinliği ile. 
+1. Giriş ve çıkış veri depolarını veri fabrikanıza bağlamak için **bağlı hizmetler** oluşturun.
+2. Kopyalama işlemi için girdi ve çıktı verilerini temsil edecek **veri kümeleri** oluşturun. 
+3. Bir veri kümesini girdi olarak ve bir veri kümesini çıkış olarak alan kopyalama etkinliği ile bir işlem **hattı** oluşturun. 
 
-Sihirbazı'nı kullandığınızda, bu Data Factory varlıklarını (bağlı hizmetler, veri kümeleri ve işlem hattı) için JSON tanımları sizin için otomatik olarak oluşturulur. Araçlar/API'leri (dışında .NET API'si) kullandığınızda, bu Data Factory varlıkları JSON biçimini kullanarak tanımlayın.  Web tablodan veri kopyalamak için kullanılan Data Factory varlıkları için JSON tanımları ile bir örnek için bkz. [JSON örneği: Veri Web tablodan Azure Blob kopyalama](#json-example-copy-data-from-web-table-to-azure-blob) bu makalenin. 
+Sihirbazı kullandığınızda, bu Data Factory varlıkların JSON tanımları (bağlı hizmetler, veri kümeleri ve işlem hattı) sizin için otomatik olarak oluşturulur. Araçlar/API 'Leri (.NET API hariç) kullandığınızda, bu Data Factory varlıkları JSON biçimini kullanarak tanımlarsınız.  Bir Web tablosundan veri kopyalamak için kullanılan Data Factory varlıkları için JSON tanımlarına sahip bir örnek için, bu makalenin [JSON örneği: Web tablosundan verileri Azure Blob 'A kopyalama](#json-example-copy-data-from-web-table-to-azure-blob) bölümüne bakın. 
 
-Aşağıdaki bölümler, Data Factory varlıklarını belirli bir Web tabloya tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılı bilgi sağlar:
+Aşağıdaki bölümler, bir Web tablosuna özgü Data Factory varlıkları tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılı bilgi sağlar:
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
-Aşağıdaki tabloda, Web bağlı hizmeti için özel JSON öğeleri için bir açıklama sağlar.
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
+Aşağıdaki tabloda, web bağlantılı hizmetine özgü JSON öğeleri için açıklama verilmiştir.
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| type |Type özelliği ayarlanmalıdır: **Web** |Evet |
-| Url |Web kaynağına URL'si |Evet |
-| authenticationType |Anonim. |Evet |
+| type |Type özelliği: **Web** olarak ayarlanmalıdır |Evet |
+| Url |Web kaynağının URL 'SI |Evet |
+| authenticationType |Deðeri. |Evet |
 
-### <a name="using-anonymous-authentication"></a>Anonim kimlik doğrulaması
+### <a name="using-anonymous-authentication"></a>Anonim kimlik doğrulaması kullanma
 
 ```json
 {
@@ -95,15 +95,15 @@ Aşağıdaki tabloda, Web bağlı hizmeti için özel JSON öğeleri için bir a
 ```
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
-Bölümleri ve veri kümeleri tanımlamak için kullanılabilir özellikleri tam listesi için bkz [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Bölümler bir veri kümesi JSON İlkesi yapısı ve kullanılabilirlik gibi tüm veri kümesi türleri (Azure SQL, Azure blob, Azure tablo, vs.) için benzer.
+Veri kümelerini tanımlamaya yönelik özellikler & bölümlerin tam listesi için bkz. [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Bir veri kümesinin yapısı, kullanılabilirliği ve İlkesi gibi bölümler, tüm veri kümesi türleri (Azure SQL, Azure blob, Azure tablosu vb.) için benzerdir.
 
-**TypeProperties** bölümünde her veri kümesi türü için farklıdır ve verilerin veri deposundaki konumu hakkında bilgi sağlar. TypeProperties bölümü için veri kümesi türü **WebTable** aşağıdaki özelliklere sahiptir
+**Typeproperties** bölümü her bir veri kümesi türü için farklıdır ve veri deposundaki verilerin konumu hakkında bilgi sağlar. **Webtable** türündeki veri kümesinin typeproperties bölümü aşağıdaki özelliklere sahiptir
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type |Veri kümesi türü. ayarlanmalıdır **WebTable** |Evet |
-| path |Tablo içeren bir kaynak için göreli bir URL. |Hayır. Yalnızca bağlı hizmet tanımında belirtilen URL yolu belirtilmemiş olduğunda kullanılır. |
-| index |Kaynak tablodaki dizini. Bkz [Get dizini bir HTML sayfasında bir tablonun](#get-index-of-a-table-in-an-html-page) bölüm için bir HTML sayfasında bir tablo dizininin başlangıç adımları. |Evet |
+| type |Veri kümesinin türü. **Webtable** olarak ayarlanmalıdır |Evet |
+| Yolun |Tabloyu içeren kaynağın göreli URL 'SI. |Hayır. Yol belirtilmediğinde, yalnızca bağlı hizmet tanımında belirtilen URL kullanılır. |
+| indeks |Kaynaktaki tablonun dizini. HTML sayfasındaki bir tablonun dizinini alma adımları için bkz. [HTML sayfasındaki tablonun dizinini alma](#get-index-of-a-table-in-an-html-page) bölümü. |Evet |
 
 **Örnek:**
 
@@ -127,27 +127,27 @@ Bölümleri ve veri kümeleri tanımlamak için kullanılabilir özellikleri tam
 ```
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
-Bölümleri & etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları oluşturma](data-factory-create-pipelines.md) makalesi. İlke adı ve açıklaması, girdi ve çıktı tabloları gibi özellikler, tüm etkinlik türleri için kullanılabilir.
+Etkinlikleri tanımlamaya yönelik bölüm & özelliklerinin tam listesi için, işlem [hatları oluşturma](data-factory-create-pipelines.md) makalesine bakın. Ad, açıklama, giriş ve çıkış tabloları ve ilke gibi özellikler, tüm etkinlik türleri için kullanılabilir.
 
-Oysa etkinliğin typeProperties bölümündeki özellikler her etkinlik türü ile farklılık gösterir. Kopyalama etkinliği için kaynaklar ve havuzlar türlerine bağlı olarak farklılık gösterir.
+Ancak, etkinliğin typeProperties bölümünde kullanılabilen özellikler her etkinlik türüyle farklılık gösterir. Kopyalama etkinliği için, kaynak ve havuz türlerine göre farklılık gösterir.
 
-Şu anda, kopyalama etkinliği kaynak olduğunda tür **WebSource**, hiçbir ek özellikler desteklenir.
+Şu anda, Copy etkinliğinin kaynağı **Websource**türünde olduğunda ek özellikler desteklenmez.
 
 
-## <a name="json-example-copy-data-from-web-table-to-azure-blob"></a>JSON örneği: Azure Blob için veri Web tablodan kopyalama
-Aşağıdaki örnek, gösterir:
+## <a name="json-example-copy-data-from-web-table-to-azure-blob"></a>JSON örneği: Web tablosundan Azure Blob 'a veri kopyalama
+Aşağıdaki örnek şunu gösterir:
 
-1. Bağlı hizmet türü [Web](#linked-service-properties).
-2. Bağlı hizmet türü [AzureStorage](data-factory-azure-blob-connector.md#linked-service-properties).
-3. Girdi [veri kümesi](data-factory-create-datasets.md) türü [WebTable](#dataset-properties).
-4. Bir çıkış [veri kümesi](data-factory-create-datasets.md) türü [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties).
-5. A [işlem hattı](data-factory-create-pipelines.md) kullanan bir kopyalama etkinliği ile [WebSource](#copy-activity-properties) ve [BlobSink](data-factory-azure-blob-connector.md#copy-activity-properties).
+1. [Web](#linked-service-properties)türünde bağlı bir hizmet.
+2. [Azurestorage](data-factory-azure-blob-connector.md#linked-service-properties)türünde bağlı bir hizmet.
+3. [Webtable](#dataset-properties)türünde bir giriş [veri kümesi](data-factory-create-datasets.md) .
+4. [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties)türünde bir çıkış [veri kümesi](data-factory-create-datasets.md) .
+5. [Websource](#copy-activity-properties) ve [Blobsink](data-factory-azure-blob-connector.md#copy-activity-properties)kullanan kopyalama etkinliğine sahip bir işlem [hattı](data-factory-create-pipelines.md) .
 
-Örnek her saat için bir Azure blob Web tablodan veri kopyalar. Bu örneklerde kullanılan JSON özellikleri örnekleri aşağıdaki bölümlerde açıklanmıştır.
+Örnek, verileri bir Web tablosundan her saat bir Azure blobuna kopyalar. Bu örneklerde kullanılan JSON özellikleri, örnekleri takip eden bölümlerde açıklanmıştır.
 
-Aşağıdaki örnek, bir Azure blobuna Web tablodan veri kopyalama işlemi gösterilmektedir. Ancak, verileri doğrudan belirtilen havuzlarını hiçbirini kopyalanabilir [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makale, Azure veri fabrikasında kopyalama etkinliği kullanarak.
+Aşağıdaki örnek, bir Web tablosundan Azure blobuna nasıl veri kopyalanacağını gösterir. Ancak, veriler Azure Data Factory içindeki kopyalama etkinliği kullanılarak [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde belirtilen herhangi bir havuza doğrudan kopyalanabilir.
 
-**Web hizmeti bağlı** Bu örnek anonim kimlik doğrulaması ile bağlantılı Web hizmetini kullanır. Bkz: [Web bağlı hizmet](#linked-service-properties) bölüm için farklı türde kimlik doğrulaması kullanabilirsiniz.
+**Web bağlantılı hizmet** Bu örnek, anonim kimlik doğrulamasıyla web bağlantılı hizmetini kullanır. Kullanabileceğiniz farklı kimlik doğrulama türleri için [Web bağlantılı hizmet](#linked-service-properties) bölümüne bakın.
 
 ```json
 {
@@ -179,10 +179,10 @@ Aşağıdaki örnek, bir Azure blobuna Web tablodan veri kopyalama işlemi göst
 }
 ```
 
-**WebTable girdi veri kümesi** ayarı **dış** için **true** Data Factory hizmetinin veri kümesi dış veri fabrikasına ve veri fabrikasında bir etkinliği tarafından üretilen değil bildirir.
+**Webtable giriş veri kümesi** **External** to **true** olarak ayarlamak, Data Factory hizmetine veri kümesinin veri fabrikasının dışında olduğunu ve veri fabrikasındaki bir etkinlik tarafından üretilmediğini bildirir.
 
 > [!NOTE]
-> Bkz [Get dizini bir HTML sayfasında bir tablonun](#get-index-of-a-table-in-an-html-page) bölüm için bir HTML sayfasında bir tablo dizininin başlangıç adımları.  
+> HTML sayfasındaki bir tablonun dizinini alma adımları için bkz. [HTML sayfasındaki tablonun dizinini alma](#get-index-of-a-table-in-an-html-page) bölümü.  
 >
 >
 
@@ -208,7 +208,7 @@ Aşağıdaki örnek, bir Azure blobuna Web tablodan veri kopyalama işlemi göst
 
 **Azure Blob çıktı veri kümesi**
 
-Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1).
+Veriler her saat yeni bir bloba yazılır (sıklık: saat, Aralık: 1).
 
 ```json
 {
@@ -232,11 +232,11 @@ Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1).
 
 
 
-**Kopyalama etkinliği ile işlem hattı**
+**Kopyalama etkinliği içeren işlem hattı**
 
-İşlem hattının giriş ve çıkış veri kümelerini kullanmak için yapılandırıldığı ve saatte bir çalışacak şekilde zamanlanmış bir kopyalama etkinliği içeriyor. JSON tanımı, işlem hattındaki **kaynak** türü ayarlandığında **WebSource** ve **havuz** türü ayarlandığında **BlobSink**.
+İşlem hattı, giriş ve çıkış veri kümelerini kullanmak üzere yapılandırılmış bir kopyalama etkinliği içerir ve her saat çalışacak şekilde zamanlanır. İşlem hattı JSON tanımında, **kaynak** türü **websource** olarak ayarlanır ve **Havuz** türü **blobsink**olarak ayarlanır.
 
-WebSource türü özellikleri WebSource tarafından desteklenen özelliklerin listesi için bkz.
+WebSource tarafından desteklenen özelliklerin listesi için bkz. WebSource türü özellikleri.
 
 ```json
 {  
@@ -284,33 +284,33 @@ WebSource türü özellikleri WebSource tarafından desteklenen özelliklerin li
 }
 ```
 
-## <a name="get-index-of-a-table-in-an-html-page"></a>Bir HTML sayfasında bir tablo dizinini Al
-1. Başlatma **Excel 2016** geçin **veri** sekmesi.  
-2. Tıklayın **yeni sorgu** araç çubuğunda işaret **diğer kaynaklardan** tıklatıp **Web'den**.
+## <a name="get-index-of-a-table-in-an-html-page"></a>HTML sayfasındaki bir tablonun dizinini al
+1. **Excel 2016** ' i başlatın ve **veri** sekmesine geçin.  
+2. Araç çubuğunda **Yeni sorgu** ' ya tıklayın, **diğer kaynaklardan** üzerine gelin ve **Web 'den**' ye tıklayın.
 
     ![Power Query menüsü](./media/data-factory-web-table-connector/PowerQuery-Menu.png)
-3. İçinde **Web'den** iletişim kutusuna **URL** bağlı hizmet JSON içinde kullanırsınız (örneğin: https://en.wikipedia.org/wiki/) yolu belirtmek için veri kümesi ile birlikte (örneğin: AFI % 27s_100_Years... 100_Movies) tıklayıp **Tamam**.
+3. **Web 'den** , bağlantılı hizmet JSON 'Da kullanacağınız **URL 'yi** girin (örneğin, veri kümesi için belirttiğiniz yol ile birlikte https://en.wikipedia.org/wiki/) (örneğin: AFI% 27S_100_yıllar... 100 _Filmler) ve ardından **Tamam**' a tıklayın.
 
     ![Web iletişim kutusundan](./media/data-factory-web-table-connector/FromWeb-DialogBox.png)
 
-    Bu örnekte kullanılan URL'si: https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Movies
-4. Görürseniz **erişim Web içeriği** iletişim kutusunda, sağdaki seçin **URL**, **kimlik doğrulaması**, tıklatıp **Connect**.
+    Bu örnekte kullanılan URL: https://en.wikipedia.org/wiki/AFI%27s_100_Years...100_Movies
+4. **Web Içeriği erişimi** iletişim kutusu ' nu görürseniz, doğru **URL**'yi, **kimlik doğrulamasını**seçin ve **Bağlan**' a tıklayın.
 
-   ![Web içerik iletişim kutusuna erişin](./media/data-factory-web-table-connector/AccessWebContentDialog.png)
-5. ' A tıklayın bir **tablo** öğesi içeriği tablosundan görebilirsiniz ve ardından ağaç görünümünde **Düzenle** altındaki düğmesini.  
+   ![Web içeriğine eriş iletişim kutusu](./media/data-factory-web-table-connector/AccessWebContentDialog.png)
+5. Tablodaki içeriği görmek için ağaç görünümündeki bir **tablo** öğesine tıklayın ve ardından alt kısımdaki **Düzenle** düğmesine tıklayın.  
 
    ![Gezgin iletişim kutusu](./media/data-factory-web-table-connector/Navigator-DialogBox.png)
-6. İçinde **sorgu Düzenleyicisi** penceresinde tıklayın **Gelişmiş Düzenleyici** araç çubuğunda.
+6. **Sorgu Düzenleyicisi** penceresinde, araç çubuğunda **Gelişmiş Düzenleyici** düğme ' ye tıklayın.
 
     ![Gelişmiş Düzenleyici düğmesi](./media/data-factory-web-table-connector/QueryEditor-AdvancedEditorButton.png)
-7. Gelişmiş Düzenleyici iletişim kutusuna dizin "Kaynak" yanındaki sayıdır.
+7. Gelişmiş Düzenleyici iletişim kutusunda, "kaynak" nın yanındaki sayı dizindir.
 
-    ![Gelişmiş Düzenleyici - dizin](./media/data-factory-web-table-connector/AdvancedEditor-Index.png)
+    ![Gelişmiş Düzenleyici-Dizin](./media/data-factory-web-table-connector/AdvancedEditor-Index.png)
 
-Excel 2013 kullanıyorsanız, [Excel için Microsoft Power Query](https://www.microsoft.com/download/details.aspx?id=39379) dizin alınamıyor. Bkz: [bir web sayfasına bağlanma](https://support.office.com/article/Connect-to-a-web-page-Power-Query-b2725d67-c9e8-43e6-a590-c0a175bd64d8) makale Ayrıntılar için. Kullanıyorsanız benzer adımlarla [Microsoft Power BI Desktop için](https://powerbi.microsoft.com/desktop/).
+Excel 2013 kullanıyorsanız, dizini almak için [Excel için Microsoft Power Query](https://www.microsoft.com/download/details.aspx?id=39379) kullanın. Ayrıntılar için bkz. [Web sayfasına bağlanma](https://support.office.com/article/Connect-to-a-web-page-Power-Query-b2725d67-c9e8-43e6-a590-c0a175bd64d8) makalesi. [Masaüstü Için Microsoft Power BI](https://powerbi.microsoft.com/desktop/)kullanıyorsanız, bu adımlar benzerdir.
 
 > [!NOTE]
-> Kaynak veri kümesindeki sütunları havuz veri kümesi sütunlara eşlemek için bkz: [Azure Data factory'de veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
+> Kaynak veri kümesindeki sütunları havuz veri kümesinden sütunlara eşlemek için, bkz. [Azure Data Factory veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
 
 ## <a name="performance-and-tuning"></a>Performans ve ayarlama
-Bkz: [kopyalama etkinliği performansı ve ayarlama Kılavuzu](data-factory-copy-activity-performance.md) veri taşıma (kopyalama etkinliği) Azure Data Factory ve bunu en iyi duruma getirmek için çeşitli yollar, performansı etkileyebilir anahtar Etkenler hakkında bilgi edinmek için.
+Veri taşıma (kopyalama etkinliği) performansını Azure Data Factory ve en iyileştirmek için çeşitli yollarla etkileyen temel faktörlerle ilgili bilgi edinmek için bkz. [etkinlik performansını kopyalama & ayarlama Kılavuzu](data-factory-copy-activity-performance.md) .

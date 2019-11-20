@@ -1,71 +1,25 @@
 ---
-title: Örnek - denetim tanılama ayarı
-description: Bu örnek ilke tanımı, kaynak türleri için etkinleştirilmemiş tanılama ayarları belirtilmiş olup olmadığını denetler.
-services: azure-policy
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
+title: Örnek-denetim tanılama ayarı
+description: Bu örnek ilke tanımı, tanılama ayarlarının belirtilen kaynak türleri için etkin olup olmadığını denetler.
+ms.date: 01/23/2019
 ms.topic: sample
-origin.date: 04/27/2018
-ms.date: 03/11/2019
-ms.author: v-biyu
-ms.openlocfilehash: 66c9c1c21cad7fb4058a91be826a50059691877c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 5940fcc86221d4089609ac2d0828b0c710de7fbc
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545648"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076416"
 ---
-# <a name="sample---audit-diagnostic-setting"></a>Örnek - denetim tanılama ayarı
+# <a name="sample---audit-diagnostic-setting"></a>Örnek-denetim tanılama ayarı
 
-Bu yerleşik ilke, tanılama ayarları belirli kaynak türleri için etkinleştirilmediyse denetler. Tanılama ayarlarının etkin olup olmadığını denetlemek için bir kaynak türü dizisi belirtirsiniz.
+Bu yerleşik ilke, tanılama ayarları belirli kaynak türleri için etkinleştirilmediyse denetler. Tanılama ayarlarının etki olup olmadığını denetlemek için bir kaynak türü dizisi belirtirsiniz.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="sample-template"></a>Örnek şablon
-```json
-{
-    "name": "audit-diagnostic-setting",
-    "properties": {
-        "displayName": "Audit diagnostic setting",
-        "description": "Audit diagnostic setting for selected resource types",
-        "mode": "all",
-        "parameters": {
-            "listOfResourceTypes": {
-                "type": "Array",
-                "metadata": {
-                    "displayName": "Resource Types",
-                    "strongType": "resourceTypes"
-                }
-            }
-        },
-        "policyRule": {
-            "if": {
-                "field": "type",
-                "in": "[parameters('listOfResourceTypes')]"
-            },
-            "then": {
-                "effect": "auditIfNotExists",
-                "details": {
-                    "type": "Microsoft.Insights/diagnosticSettings",
-                    "existenceCondition": {
-                        "allOf": [
-                            {
-                                "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
-                                "equals": "true"
-                            },
-                            {
-                                "field": "Microsoft.Insights/diagnosticSettings/metrics.enabled",
-                                "equals": "true"
-                            }
-                        ]
-                    }
-                }
-            }
-        }
-    }
-}
-```
+
+[!code-json[main](../../../../policy-templates/samples/Monitoring/audit-diagnostic-setting/azurepolicy.json "Audit diagnostic setting")]
+
 [Azure portalı](#deploy-with-the-portal) kullanarak, [PowerShell](#deploy-with-powershell) ile veya [Azure CLI](#deploy-with-azure-cli) ile bu şablonu dağıtabilirsiniz. Yerleşik ilkeyi almak için, `7f89b1eb-583c-429a-8828-af049802c1d9` kimliğini kullanın.
 
 ## <a name="parameters"></a>Parametreler
@@ -84,7 +38,7 @@ Bir ilke atarken, kullanılabilir yerleşik tanımlardan **Tanılama ayarını d
 
 [!INCLUDE [sample-powershell-install](../../../../includes/sample-powershell-install-no-ssh-az.md)]
 
-```powershell
+```azurepowershell-interactive
 $definition = Get-AzPolicyDefinition -Id /providers/Microsoft.Authorization/policyDefinitions/7f89b1eb-583c-429a-8828-af049802c1d9
 
 New-AzPolicyAssignment -name "Audit diagnostics" -PolicyDefinition $definition -PolicyParameter '{"listOfResourceTypes":{"value":["Microsoft.Cache/Redis","Microsoft.Compute/virtualmachines"]}}' -Scope <scope>
@@ -94,7 +48,7 @@ New-AzPolicyAssignment -name "Audit diagnostics" -PolicyDefinition $definition -
 
 Kaynak grubunu, VM’yi ve ilgili tüm kaynakları kaldırmak için aşağıdaki komutu çalıştırın.
 
-```powershell
+```azurepowershell-interactive
 Remove-AzPolicyAssignment -Name "Audit diagnostics" -Scope <scope>
 ```
 
@@ -102,7 +56,7 @@ Remove-AzPolicyAssignment -Name "Audit diagnostics" -Scope <scope>
 
 [!INCLUDE [sample-cli-install](../../../../includes/sample-cli-install.md)]
 
-```cli
+```azurecli-interactive
 az policy assignment create --scope <scope> --name "Audit diagnostics" --policy 7f89b1eb-583c-429a-8828-af049802c1d9 --params '{"listOfResourceTypes":{"value":["Microsoft.Cache/Redis","Microsoft.Compute/virtualmachines"]}}'
 ```
 
@@ -110,7 +64,7 @@ az policy assignment create --scope <scope> --name "Audit diagnostics" --policy 
 
 Kaynak grubunu, VM’yi ve ilgili tüm kaynakları kaldırmak için aşağıdaki komutu çalıştırın.
 
-```cli
+```azurecli-interactive
 az policy assignment delete --name "Audit diagnostics" --resource-group myResourceGroup
 ```
 

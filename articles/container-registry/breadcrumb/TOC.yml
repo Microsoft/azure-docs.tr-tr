@@ -1,0 +1,13 @@
+- name: Azure
+  tocHref: /azure/
+  topicHref: /azure/index
+  items:
+    - name: Container Kayıt Defteri
+      tocHref: /azure/security-center/
+      topicHref: /azure/container-registry/index
+    - name: Container Kayıt Defteri
+      tocHref: /azure/aks/
+      topicHref: /azure/container-registry/index
+    - name: Container Kayıt Defteri
+      tocHref: /azure/event-grid/
+      topicHref: /azure/container-registry/index

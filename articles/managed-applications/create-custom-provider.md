@@ -7,20 +7,20 @@ ms.service: managed-applications
 ms.topic: tutorial
 ms.date: 05/01/2019
 ms.author: evanhi
-ms.openlocfilehash: e4196cf59537be5194ceb510a1b7b066c97de19a
-ms.sourcegitcommit: 6f043a4da4454d5cb673377bb6c4ddd0ed30672d
+ms.openlocfilehash: 41200139ef55fa1ae441192e2d81b5228cf29bad
+ms.sourcegitcommit: 66237bcd9b08359a6cce8d671f846b0c93ee6a82
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65410213"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67795310"
 ---
-# <a name="tutorial-create-custom-provider-and-deploy-custom-resources"></a>Öğretici: Özel bir sağlayıcı oluşturmak ve özel kaynakları dağıtma
+# <a name="quickstart-create-custom-provider-and-deploy-custom-resources"></a>Hızlı Başlangıç: Özel bir sağlayıcı oluşturmak ve özel kaynakları dağıtma
 
-Bu öğreticide, kendi kaynak sağlayıcısı oluşturur ve özel kaynak türleri için bu kaynak sağlayıcısı dağıtma. Özel sağlayıcıları hakkında daha fazla bilgi için bkz. [Azure özel sağlayıcıları Önizlemesi'ne genel bakış](custom-providers-overview.md).
+Bu hızlı başlangıçta, kendi kaynak sağlayıcısı oluşturur ve özel kaynak türleri için bu kaynak sağlayıcısı dağıtma. Özel sağlayıcıları hakkında daha fazla bilgi için bkz. [Azure özel sağlayıcıları Önizlemesi'ne genel bakış](custom-providers-overview.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticideki adımları tamamlamak için REST işlemlerini çağırmak gerekir. Vardır [REST istekleri göndermek için farklı yollar](/rest/api/azure/). REST işlemleri için bir araç zaten yoksa, yükleme [ARMClient](https://github.com/projectkudu/ARMClient). Buna, Azure Resource Manager API'si çağırma basitleştiren bir açık kaynak komut satırı aracı var.
+Bu hızlı başlangıçtaki adımları tamamlamak için REST işlemlerini çağırmak gerekir. Vardır [REST istekleri göndermek için farklı yollar](/rest/api/azure/). REST işlemleri için bir araç zaten yoksa, yükleme [ARMClient](https://github.com/projectkudu/ARMClient). Buna, Azure Resource Manager API'si çağırma basitleştiren bir açık kaynak komut satırı aracı var.
 
 ## <a name="deploy-custom-provider"></a>Özel sağlayıcısı dağıtma
 
@@ -122,7 +122,7 @@ Yanıtı alırsınız:
 
 ## <a name="create-resource-type"></a>Kaynak türü oluştur
 
-Özel kaynak türü oluşturmak için bir şablon kaynağında dağıtabilirsiniz. Bu öğreticide dağıttığınız şablonunda bu yaklaşım gösterilmektedir. Ayrıca, kaynak türü için bir PUT isteği gönderebilirsiniz.
+Özel kaynak türü oluşturmak için bir şablon kaynağında dağıtabilirsiniz. Bu hızlı başlangıçta dağıtılan şablonunda bu yaklaşım gösterilmektedir. Ayrıca, kaynak türü için bir PUT isteği gönderebilirsiniz.
 
 ```
 PUT https://management.azure.com/subscriptions/<sub-id>/resourceGroups/<rg-name>/providers/Microsoft.CustomProviders/resourceProviders/<provider-name>/users/<resource-name>?api-version=2018-09-01-preview

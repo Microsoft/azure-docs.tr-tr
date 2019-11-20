@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric kod paketi hataları tanılamak | Microsoft Docs
-description: Azure Service Fabric ile ortak kod paketi hatalarında sorun giderme hakkında bilgi edinin
+title: Service Fabric kullanarak yaygın kod paketi hatalarını tanılama Microsoft Docs
+description: Azure Service Fabric ortak kod paketi hatalarını nasıl giderebileceğinizi öğrenin
 services: service-fabric
 documentationcenter: .net
 author: grzuber
@@ -14,56 +14,58 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 05/09/2019
 ms.author: grzuber
-ms.openlocfilehash: 235952388d2c044cc141b3020c67944c4250ea3d
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 320a55e8b14648b1d7e256855582ab31846a63cf
+ms.sourcegitcommit: a6873b710ca07eb956d45596d4ec2c1d5dc57353
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67276957"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68249214"
 ---
-# <a name="diagnose-common-code-package-errors-with-service-fabric"></a>Service Fabric ile ortak kod paketi hataları tanılama
+# <a name="diagnose-common-code-package-errors-by-using-service-fabric"></a>Service Fabric kullanarak ortak kod paketi hatalarını tanılayın
 
-Bu makalede, bir kod paketi beklenmedik şekilde sonlandırılması ne anlama geldiğini gösterir ve olası nedeni büyük olasılıkla sorunu hafifletmeye sorun giderme adımlarını yanı sıra sık karşılaşılan hata kodları hakkında Öngörüler sağlar.
+Bu makalede, bir kod paketinin beklenmedik bir şekilde sonlandırılması için ne anlama geldiğini açıklanmaktadır. Sorun giderme adımlarıyla birlikte yaygın hata kodlarının olası nedenleriyle ilgili öngörüler sağlar.
 
-## <a name="when-does-a-process-or-container-terminate-unexpectedly"></a>Ne zaman bir işleme veya kapsayıcıya beklenmedik şekilde sonlandırılması?
+## <a name="when-does-a-process-or-container-terminate-unexpectedly"></a>Bir işlem veya kapsayıcı beklenmedik bir şekilde sona erdiğinde
 
-Service Fabric kod paketi başlatmak için bir istek aldığında, uygulama ve hizmet bildirimleri yapılandırma seçeneklerini temel yerel sistemde ortamını hazırlama başlar. Bu hazırlıkları ağ uç noktaları veya kaynak ayırma, güvenlik duvarı kuralları yapılandırma veya kaynak İdaresi kısıtlamaları ayarı içerebilir. Ortam düzgün şekilde yapılandırıldıktan sonra Service Fabric kod paketi getirmek çalışır. Bu adım işletim sistemi ya da kapsayıcı çalışma zamanı işleme veya kapsayıcıya başarıyla etkinleştirilmiş olduğunu bildirirse başarılı olarak kabul edilir. Etkinleştirme başarısız olursa, bir sistem durumu ileti yazan SFX görmeniz gerekir
+Azure Service Fabric bir kod paketini başlatma isteği aldığında, uygulama ve hizmet bildirimlerinde ayarlanan seçeneklere göre ortamı yerel sistemde hazırlamaya başlar. Bu hazırlıklar, ağ uç noktalarını veya kaynaklarını ayırma, güvenlik duvarı kurallarını yapılandırma veya kaynak idare kısıtlamalarını ayarlama içerebilir. 
+
+Ortam düzgün yapılandırıldıktan sonra, Service Fabric kod paketini getirmeye çalışır. İşletim sistemi veya kapsayıcı çalışma zamanı, işlemin veya kapsayıcının başarıyla etkinleştirildiğini bildirirse, bu adım başarılı olarak kabul edilir. Etkinleştirme başarısız olursa, SFX ' de aşağıdakine benzer bir sistem durumu iletisi görmeniz gerekir:
 
 ```
 There was an error during CodePackage activation. Service host failed to activate. Error: 0xXXXXXXXX
 ```
 
-Kod paketi başarıyla olana sonra Service Fabric ömrü izlemeye başlar. Bu noktada, bir işlem veya kapsayıcı için bir dizi nedenden herhangi bir zamanda sonlandırabilir. Bu bir DLL başlatmak başarısız bir işletim sistemi çalıştıran vb. Masaüstü yığın alanı yetersiz. Kod paketinizi sonlandırıldıysa bildiren SFX durum iletisinde görmeniz gerekir
+Kod paketi başarıyla etkinleştirildikten sonra, Service Fabric ömrünü izlemeye başlar. Bu noktada, bir işlem veya kapsayıcı bir dizi nedenden dolayı dilediğiniz zaman sonlandırılabilir. Örneğin, bir DLL 'yi başlamayabilir veya işletim sisteminde Masaüstü yığın alanı tükeniyor olabilir. Kod paketiniz sonlandırılırsa, SFX ' de aşağıdaki sistem durumu iletisini görmeniz gerekir:
 
 ```
 The process/container terminated with exit code: XXXXXXXX. Please look at your application logs/dump or debug your code package for more details. For information about common termination errors, please visit https://aka.ms/service-fabric-termination-errors
 ```
 
-Çıkış kodu, ileti, neden sonlandırıldı için farklı işlem/kapsayıcı tarafından sağlanan tek ipucudur ve herhangi bir yığın düzeyi tarafından oluşturulmuş bu sistem durumu sağlanır. Bu çıkış kodu, örneğin, bir .NET sorun, bir işletim sistemi hatasıyla ilgili veya kodunuz tarafından tetiklendiği anlamak zordur. Sonuç olarak, bu makalede sonlandırma çıkış kodları kaynağını tanımak için bir başlangıç noktası olarak kullanılabilir ve olası çözümleri, bu yaygın senaryolar için genel çözümler ve hata, geçerli olmayabilir aklınızda görüyorsunuz.
+Bu sistem durumu iletisindeki çıkış kodu, işlemin veya kapsayıcının neden sonlandırıldığına ilişkin sağladığı tek Clue 'dir. Yığın herhangi bir düzeyi tarafından oluşturulabilir. Örneğin, bu çıkış kodu bir işletim sistemi hatası veya .NET sorunuyla ilişkili olabilir veya kodunuz tarafından oluşturulmuş olabilir. Sonlandırma çıkış kodlarının ve olası çözümlerin kaynağını tanılamak için bir başlangıç noktası olarak bu makaleyi kullanın. Ancak bunların yaygın senaryolar için genel çözümler olduğunu ve gördüğünüz hata için uygulanmayabileceğini aklınızda bulundurun.
 
-## <a name="how-can-i-tell-if-service-fabric-terminated-my-code-package"></a>Service Fabric kodu paketimle sonlandırıldı olmadığını nasıl anlayabilirim?
+## <a name="how-can-i-tell-if-service-fabric-terminated-my-code-package"></a>Service Fabric kod paketmi sonlandırdığını nasıl anlayabilirim?
 
-Service Fabric, kod paketi için çeşitli nedenlerle sonlandırılması için sorumlu olabilir. Örneğin, kod paketi başka bir düğüme Yük Dengeleme için yerleştirmek karar verebilir amaçlar. Aşağıdaki tabloda çıkış kodlarından birini görürseniz, kod paketi Service Fabric tarafından sona erdirildi olmadığını söyleyebilir:
+Service Fabric, kod paketinizi pek çok nedenden dolayı sonlandırmaktan sorumlu olabilir. Örneğin, Yük Dengeleme amaçları için kod paketini başka bir düğüme yerleştirmeyi kararı verebilir. Aşağıdaki tabloda yer alan çıkış kodlarından herhangi birini görürseniz Service Fabric, kod paketinizi sonlandırdığını doğrulayabilirsiniz.
 
 >[!NOTE]
-> Aşağıdaki tabloda olanlar dışındaki bir çıkış kodu ile işlem/kapsayıcı sona ererse, Service Fabric sonlandırılması için sorumlu değildir.
+> İşlem veya Kapsayıcınız aşağıdaki tablodaki kodlardan farklı bir çıkış koduyla sonlandığında Service Fabric sonlandırmaktan sorumlu değildir.
 
 Çıkış kodu | Açıklama
 --------- | -----------
-7147 | Bu hata kodları, Service Fabric düzgün bir şekilde işlem/kapsayıcı Ctrl + C sinyali göndererek kapatıldığını gösterir.
-7148 | Bu hata kodları, Service Fabric işlem/kapsayıcı sonlandırıldı gösterir. Bazı durumlarda, bu hata kodu sonlandırılan gerekiyordu, dolayısıyla bir Ctrl + C sinyali gönderdikten sonra zamanında işlem/kapsayıcı yanıt vermesini yaramadı belirtebilirsiniz.
+7147 | Service Fabric, bir CTRL + C sinyali göndererek işlemi veya kapsayıcıyı düzgün şekilde kapatmadığını gösterir.
+7148 | Service Fabric işlemi veya kapsayıcıyı sonlandırdığını gösterir. Bazen, bu hata kodu, bir CTRL + C sinyali gönderdikten sonra işlemin veya kapsayıcının zamanında yanıt vermediğini ve sonlandırılması gerekiyordu.
 
 
-## <a name="other-common-error-codes-and-their-potential-fixes"></a>Ortak diğer hata kodları ve bunların olası düzeltmeleri
+## <a name="other-common-error-codes-and-their-potential-fixes"></a>Diğer yaygın hata kodları ve olası düzeltmeleri
 
-Çıkış kodu | Onaltılık değer | Kısa açıklama | Kök Neden | Olası düzeltme
+Çıkış kodu | Onaltılık değer | Kısa açıklama | Kök neden | Olası çözüm
 --------- | --------- | ----------------- | ---------- | -------------
-3221225794 | 0xc0000142 | STATUS_DLL_INIT_FAILED | Bu hata büyük olasılıkla makinenin Masaüstü yığın alanı kalmadı çalıştırıldı gelebilir. Bu neden çok sayıda düğüm üzerinde çalışan uygulamanıza ait işlemler varsa özellikle yüksektir. | Programınız için Ctrl + C sinyali yanıt oluşturulmadıysa, küme bildirimi "EnableActivateNoWindow" ayarını etkinleştirebilirsiniz. Bu ayarın etkinleştirilmesi, kod paketi bir GUI penceresi çalışır ve Ctrl + C sinyali almaz, ancak her işlemin kullandığı Masaüstü yığın alanı miktarını azaltır anlamına gelir. Ardından Ctrl + C sinyali almak, kod paketi erişmesi gerekiyorsa, düğümün Masaüstü yığın boyutunu artırabilir.
-3762504530 | 0xe0434352 | Yok | Bu değer, yönetilen koddan (.NET) işlenmeyen bir özel durum için hata kodudur. | Bu çıkış kodu görüyorsanız, uygulamanızı işlenmemiş kalan ve işlem sonlandırıldı, bir özel durum harekete geçirilen anlamına gelir. Uygulamanızın günlükleri ve dökümlerinde hata ayıklama, hatanın nedenini belirlemek için ilk adım olmalıdır.
+3221225794 | 0xc0000142 | STATUS_DLL_INIT_FAILED | Bu hata bazen makinede Masaüstü yığın alanı tükenmekte olduğu anlamına gelir. Bu neden özellikle, düğümde çalışan uygulamanıza ait çok sayıda işlem varsa olabilir. | Programınız CTRL + C sinyallerine yanıt vermek üzere derlenmediyse, küme bildiriminde **EnableActivateNoWindow** ayarını etkinleştirebilirsiniz. Bu ayarı etkinleştirmek, kod paketinizin GUI penceresi olmadan çalışacağı ve CTRL + C sinyalleri almamayacak anlamına gelir. Bu eylem Ayrıca her bir işlemin kullandığı Masaüstü yığın alanı miktarını azaltır. Kod paketinizin CTRL + C sinyalleri alması gerekiyorsa, düğümünüz masaüstü yığınının boyutunu artırabilirsiniz.
+3762504530 | 0xe0434352 | Yok | Bu değer, yönetilen koddan (.NET) işlenmeyen bir özel durum için hata kodunu temsil eder. | Bu çıkış kodu, uygulamanızın işlenmemiş kalan ve işlemi sonlandıran bir özel durum yaptığını gösterir. Bu hatayı neyin tetiklediğini belirleyen ilk adım olarak uygulamanızın günlüklerinde ve döküm dosyalarında hata ayıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Daha fazla bilgi edinin [diğer yaygın senaryoları tanılama](service-fabric-diagnostics-common-scenarios.md)
-* Azure İzleyici günlüklerine ve hangi okuyarak sunduğu daha ayrıntılı bir bakış elde [Azure İzleyici günlüklerine nedir?](../operations-management-suite/operations-management-suite-overview.md)
-* Azure İzleyici günlüklerine hakkında daha fazla bilgi [uyarı](../log-analytics/log-analytics-alerts.md) algılama ve tanılama konusunda yardımcı olacak.
-* Analytics'in [günlük arama ve sorgulama](../log-analytics/log-analytics-log-searches.md) özellikleri, Azure İzleyici günlüklerine bir parçası olarak sunulan
+* [Diğer yaygın senaryoları tanılama](service-fabric-diagnostics-common-scenarios.md)hakkında daha fazla bilgi edinin.
+* Azure izleyici günlüklerine yönelik daha ayrıntılı bir genel bakış ve [Azure izleyicisine genel bakış](../operations-management-suite/operations-management-suite-overview.md)' ı okuyarak neler sundukları.
+* Algılama ve tanılama konusunda yardım için Azure Izleyici günlükleri [uyarısı](../log-analytics/log-analytics-alerts.md) hakkında daha fazla bilgi edinin.
+* [Günlük araması ve](../log-analytics/log-analytics-log-searches.md) Azure izleyici günlüklerinin bir parçası olarak sunulan özellikleri sorgulama hakkında bilgi edinin.

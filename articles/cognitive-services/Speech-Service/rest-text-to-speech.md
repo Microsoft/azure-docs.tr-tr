@@ -1,59 +1,58 @@
 ---
-title: Metin okuma API Başvurusu (REST) - konuşma Hizmetleri
+title: Metinden konuşmaya API başvurusu (REST)-konuşma hizmeti
 titleSuffix: Azure Cognitive Services
-description: Metin okuma REST API'sini kullanmayı öğrenin. Bu makalede, sorgu seçenekleri, yetkilendirme seçenekleri hakkında bilgi edineceksiniz yapısı bir istek ve yanıt.
+description: Metin okuma REST API nasıl kullanacağınızı öğrenin. Bu makalede yetkilendirme seçenekleri, sorgu seçenekleri, bir isteği nasıl yapılandıracağınızı ve yanıt alabileceğinizi öğreneceksiniz.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 03/26/2019
+ms.date: 07/05/2019
 ms.author: erhopf
-ms.custom: seodec18
-ms.openlocfilehash: 08bf1363f3c6c9b68243cc10ffb2785f53e02107
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: 9fa0157bd458d2de028cab8ff9c836761e99562f
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342185"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73481205"
 ---
 # <a name="text-to-speech-rest-api"></a>Metin okuma REST API
 
-Konuşma Hizmetleri izin [Sentezlenen Konuşmayı metne dönüştürme](#convert-text-to-speech) ve [desteklenen sesleri listesini alma](#get-a-list-of-voices) bir dizi REST API'si kullanarak bir bölge için. Her kullanılabilir uç nokta bir bölge ile ilişkilidir. Kullanmayı planlıyorsanız uç nokta/bölge için bir abonelik anahtarı gereklidir.
+Konuşma Hizmetleri, [metin birleştirilmiş konuşmaya dönüştürmenize](#convert-text-to-speech) ve bir alan IÇIN bir REST API kümesi kullanarak bir bölge için [desteklenen seslerin bir listesini almanızı](#get-a-list-of-voices) sağlar. Kullanılabilir her uç nokta bir bölgeyle ilişkilendirilir. Kullanmayı planladığınız uç nokta/bölge için bir abonelik anahtarı gereklidir.
 
-Her biri belirli bir dil ve yerel ayar tarafından tanımlanan diyalekti, destekleyen sinir ve standart metinden konuşmaya seslerle metin okuma REST API'sini destekler.
+Metin okuma REST API, her biri yerel ayar ile tanımlanan belirli bir dili ve diyalekt destekleyen sinir ve standart metin okuma seslerini destekler.
 
-* Sesler tam bir listesi için bkz. [dil desteği](language-support.md#text-to-speech).
-* Bölgesel kullanılabilirlik hakkında daha fazla bilgi için bkz. [bölgeleri](regions.md#text-to-speech).
+* Tüm seslerin listesi için bkz. [dil desteği](language-support.md#text-to-speech).
+* Bölgesel kullanılabilirlik hakkında daha fazla bilgi için bkz. [bölgeler](regions.md#text-to-speech).
 
 > [!IMPORTANT]
-> Maliyetleri için standart, özel ve sinir sesleri farklılık gösterir. Daha fazla bilgi için [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/).
+> Maliyetler standart, özel ve sinir seslerine göre farklılık gösterir. Daha fazla bilgi için bkz. [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/).
 
-Bu API kullanmadan önce anlayın:
+Bu API 'yi kullanmadan önce şunları anlayın:
 
-* Metin okuma REST API, bir yetkilendirme üst bilgisi gerektirir. Bu, hizmete erişmek için bir belirteç değişimi tamamlanması gerektiği anlamına gelir. Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication).
+* Metin okuma REST API bir yetkilendirme üst bilgisi gerektirir. Bu, hizmete erişmek için bir belirteç değişimini doldurmanız gerektiği anlamına gelir. Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication).
 
 [!INCLUDE [](../../../includes/cognitive-services-speech-service-rest-auth.md)]
 
-## <a name="get-a-list-of-voices"></a>Sesler listesini alma
+## <a name="get-a-list-of-voices"></a>Seslerin listesini alın
 
-`voices/list` Uç noktası için belirli bir bölge/uç sesleri tam listesini almak sağlar.
+`voices/list` uç noktası, belirli bir bölgeye/uç noktaya ait seslerin tam listesini almanızı sağlar.
 
-### <a name="regions-and-endpoints"></a>Bölgeler ve uç noktaları
+### <a name="regions-and-endpoints"></a>Bölgeler ve uç noktalar
 
 | Bölge | Uç Nokta |
 |--------|----------|
 | Avustralya Doğu | `https://australiaeast.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Güney Brezilya | `https://brazilsouth.tts.speech.microsoft.com/cognitiveservices/voices/list` |
-| Orta Kanada | `https://canadacentral.tts.speech.microsoft.com/cognitiveservices/voices/list` |
+| Kanada Orta | `https://canadacentral.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Orta ABD | `https://centralus.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Doğu Asya | `https://eastasia.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Doğu ABD | `https://eastus.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Doğu ABD 2 | `https://eastus2.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Fransa Orta | `https://francecentral.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Hindistan Orta | `https://centralindia.tts.speech.microsoft.com/cognitiveservices/voices/list` |
-| Japonya Doğu | `https://japaneast.tts.speech.microsoft.com/cognitiveservices/voices/list` |
+| Doğu Japonya | `https://japaneast.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Kore Orta | `https://koreacentral.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Orta Kuzey ABD | `https://northcentralus.tts.speech.microsoft.com/cognitiveservices/voices/list` |
 | Kuzey Avrupa | `https://northeurope.tts.speech.microsoft.com/cognitiveservices/voices/list` |
@@ -66,19 +65,19 @@ Bu API kullanmadan önce anlayın:
 
 ### <a name="request-headers"></a>İstek üst bilgileri
 
-Bu tablo, metin okuma istekleri için gerekli ve isteğe bağlı üst bilgileri listeler.
+Bu tabloda, metinden konuşmaya istekleri için gerekli ve isteğe bağlı üstbilgiler listelenmektedir.
 
-| Üstbilgi | Açıklama | Gerekli / isteğe bağlı |
+| Üst bilgi | Açıklama | Gerekli/Isteğe bağlı |
 |--------|-------------|---------------------|
-| `Authorization` | Bir yetkilendirme belirteci word tarafından öncesinde `Bearer`. Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication). | Gerekli |
+| `Authorization` | Öncesinde `Bearer`bir yetkilendirme belirteci. Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication). | Gerekli |
 
 ### <a name="request-body"></a>İstek gövdesi
 
-Bir gövdesi için gerekli değildir `GET` Bu uç noktaya yönelik istekler.
+Bu uç noktaya yönelik `GET` istekleri için bir gövde gerekli değildir.
 
 ### <a name="sample-request"></a>Örnek istek
 
-Bu isteği yalnızca bir yetkilendirme üst bilgisi gerektirir.
+Bu istek yalnızca bir yetkilendirme üst bilgisi gerektirir.
 
 ```http
 GET /cognitiveservices/voices/list HTTP/1.1
@@ -89,10 +88,10 @@ Authorization: Bearer [Base64 access_token]
 
 ### <a name="sample-response"></a>Örnek yanıt
 
-Bu yanıt, yanıt yapısını göstermek için kısaltıldı.
+Bu yanıt, bir yanıtın yapısını göstermek için kesildi.
 
 > [!NOTE]
-> Ses kullanılabilirlik bölgesi/uç noktası tarafından değişir.
+> Ses kullanılabilirliği bölgeye/uç noktaya göre değişir.
 
 ```json
 [
@@ -134,41 +133,41 @@ Bu yanıt, yanıt yapısını göstermek için kısaltıldı.
 
 ### <a name="http-status-codes"></a>HTTP durum kodları
 
-Her yanıt için HTTP durum kodu, başarı veya sık karşılaşılan hataları gösterir.
+Her yanıt için HTTP durum kodu başarı veya genel hataları gösterir.
 
 | HTTP durum kodu | Açıklama | Olası neden |
 |------------------|-------------|-----------------|
 | 200 | Tamam | İstek başarılı oldu. |
-| 400 | Bozuk İstek | Gerekli parametre eksik, boş veya null. Veya, gerekli veya isteğe bağlı parametresi için geçirilen değer geçersiz. Çok uzun üstbilgi buna yaygın bir sorundur. |
-| 401 | Yetkilendirilmemiş | İstek yetkili değil. Abonelik anahtarı veya belirteç geçerli ve doğru bölgesinde olduğundan emin olmak için kontrol edin. |
-| 429 | Çok Fazla İstek | Kota veya aboneliğiniz için izin isteği sayısını aştınız. |
-| 502 | Hatalı Ağ Geçidi | Ağ veya sunucu tarafı sorun. Geçersiz üst bilgileri de gösterebilir. |
+| 400 | Hatalı İstek | Gerekli bir parametre eksik, boş veya null. Ya da gerekli veya isteğe bağlı bir parametreye geçirilen değer geçersiz. Yaygın bir sorun çok uzun bir üst bilgi. |
+| 401 | Yetkisiz | İstek yetkili değil. Abonelik anahtarınızın veya belirtecinizin geçerli olduğundan ve doğru bölgede bulunduğundan emin olun. |
+| 429 | Çok fazla Istek | Aboneliğiniz için izin verilen kotayı veya isteklerin oranını aştınız. |
+| 502 | Hatalı ağ geçidi | Ağ veya sunucu tarafı sorunu. Geçersiz üst bilgileri de gösterebilir. |
 
 
 ## <a name="convert-text-to-speech"></a>Metin okumayı dönüştürme
 
-`v1` Uç nokta kullanarak metin okuma dönüştürmenize olanak [konuşma sentezi işaretleme dili (SSML'yi)](speech-synthesis-markup.md).
+`v1` uç noktası, [konuşma birleştirme biçimlendirme dili (SSML)](speech-synthesis-markup.md)kullanarak metin okumayı dönüştürmenizi sağlar.
 
-### <a name="regions-and-endpoints"></a>Bölgeler ve uç noktaları
+### <a name="regions-and-endpoints"></a>Bölgeler ve uç noktalar
 
-Bu bölgeler, REST API kullanarak metin okuma için desteklenir. Eşleşen abonelik bölgenizi uç nokta seçtiğinizden emin olun.
+Bu bölgeler REST API kullanarak metinden konuşmaya için desteklenir. Abonelik bölgeızla eşleşen uç noktayı seçtiğinizden emin olun.
 
 [!INCLUDE [](../../../includes/cognitive-services-speech-service-endpoints-text-to-speech.md)]
 
 ### <a name="request-headers"></a>İstek üst bilgileri
 
-Bu tablo, metin okuma istekleri için gerekli ve isteğe bağlı üst bilgileri listeler.
+Bu tabloda, metinden konuşmaya istekleri için gerekli ve isteğe bağlı üstbilgiler listelenmektedir.
 
-| Üstbilgi | Açıklama | Gerekli / isteğe bağlı |
+| Üst bilgi | Açıklama | Gerekli/Isteğe bağlı |
 |--------|-------------|---------------------|
-| `Authorization` | Bir yetkilendirme belirteci word tarafından öncesinde `Bearer`. Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication). | Gerekli |
-| `Content-Type` | Sağlanan metin için içerik türünü belirtir. Kabul değeri: `application/ssml+xml`. | Gerekli |
-| `X-Microsoft-OutputFormat` | Ses çıkış biçimini belirtir. Kabul edilen değerlerin tam listesi için bkz. [ses çıkış](#audio-outputs). | Gerekli |
-| `User-Agent` | Uygulama adı. Sağlanan değer 255 karakterden kısa olmalıdır. | Gerekli |
+| `Authorization` | Öncesinde `Bearer`bir yetkilendirme belirteci. Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication). | Gerekli |
+| `Content-Type` | Belirtilen metin için içerik türünü belirtir. Kabul edilen değer: `application/ssml+xml`. | Gerekli |
+| `X-Microsoft-OutputFormat` | Ses çıkış biçimini belirtir. Kabul edilen değerlerin tüm listesi için bkz. [Ses çıkışları](#audio-outputs). | Gerekli |
+| `User-Agent` | Uygulama adı. Belirtilen değer 255 karakterden az olmalıdır. | Gerekli |
 
-### <a name="audio-outputs"></a>Ses çıkarır
+### <a name="audio-outputs"></a>Ses çıkışları
 
-Bu, her isteği olarak gönderilir ve ses desteklenen biçimler listesini `X-Microsoft-OutputFormat` başlığı. Her bir bit hızı ve kodlama türünü içerir. 24 kHz, 16 kHz konuşma Hizmetleri destekler ve 8 kHz ses çıkarır.
+Bu, her istekte `X-Microsoft-OutputFormat` üst bilgisi olarak gönderilen desteklenen ses biçimlerinin bir listesidir. Her biri bit hızı ve kodlama türü içerir. Konuşma Hizmetleri, 24 kHz, 16 kHz ve 8 kHz ses çıkışını destekler.
 
 |||
 |-|-|
@@ -181,18 +180,18 @@ Bu, her isteği olarak gönderilir ve ses desteklenen biçimler listesini `X-Mic
 | `audio-24khz-48kbitrate-mono-mp3` | |
 
 > [!NOTE]
-> Seçilen ses ve çıkış biçimi farklı bit hızlarında varsa, ses, gerektiği şekilde örneklenmiş. Ancak, 24 kHz sesleri desteklemeyen `audio-16khz-16kbps-mono-siren` ve `riff-16khz-16kbps-mono-siren` Çıkış biçimleri.
+> Seçtiğiniz ses ve çıkış biçiminizin farklı bit ücretleri varsa, ses gerektiği şekilde yeniden örneklenir. Ancak, 24 kHz ses `audio-16khz-16kbps-mono-siren` ve `riff-16khz-16kbps-mono-siren` çıktı biçimlerini desteklemez.
 
 ### <a name="request-body"></a>İstek gövdesi
 
-Her gövdesi `POST` isteği olarak gönderilecek [konuşma sentezi işaretleme dili (SSML'yi)](speech-synthesis-markup.md). SSML'yi sesi ve Sentezlenen konuşma metin okuma hizmet tarafından döndürülen dili seçmenize olanak sağlar. Desteklenen sesleri tam bir listesi için bkz. [dil desteği](language-support.md#text-to-speech).
+Her bir `POST` isteğinin gövdesi, [konuşma birleştirme biçimlendirme dili (SSML)](speech-synthesis-markup.md)olarak gönderilir. SSML, metin okuma hizmeti tarafından döndürülen sentezleştirilmiş konuşmanın ses ve dilini seçmenizi sağlar. Desteklenen seslerin tüm listesi için bkz. [dil desteği](language-support.md#text-to-speech).
 
 > [!NOTE]
-> Özel ses kullanıyorsanız, bir istek gövdesi (ASCII veya UTF-8) düz metin olarak gönderilebilir.
+> Özel bir ses kullanılıyorsa, bir isteğin gövdesi düz metin (ASCII veya UTF-8) olarak gönderilebilir.
 
 ### <a name="sample-request"></a>Örnek istek
 
-Bu HTTP isteğinin SSML ses ve dil belirtmek için kullanır. Gövde 1.000 karakterden uzun olamaz.
+Bu HTTP isteği, sesi ve dili belirtmek için SSML 'yi kullanır. Gövde 1.000 karakterden uzun olamaz.
 
 ```http
 POST /cognitiveservices/v1 HTTP/1.1
@@ -209,27 +208,27 @@ Authorization: Bearer [Base64 access_token]
 </voice></speak>
 ```
 
-Hızlı başlangıçtan dile özel örnekler için bkz:
+Dile özgü örnekler için hızlı başlangıçlarımıza bakın:
 
-* [.NET Core, C#](quickstart-dotnet-text-to-speech.md)
-* [Python](quickstart-python-text-to-speech.md)
+* [.NET Core,C#](~/articles/cognitive-services/Speech-Service/quickstarts/text-to-speech.md?pivots=programming-language-csharp&tabs=dotnetcore)
+* [Python](~/articles/cognitive-services/Speech-Service/quickstarts/text-to-speech.md?pivots=programming-language-python)
 * [Node.js](quickstart-nodejs-text-to-speech.md)
 
 ### <a name="http-status-codes"></a>HTTP durum kodları
 
-Her yanıt için HTTP durum kodu, başarı veya sık karşılaşılan hataları gösterir.
+Her yanıt için HTTP durum kodu başarı veya genel hataları gösterir.
 
 | HTTP durum kodu | Açıklama | Olası neden |
 |------------------|-------------|-----------------|
-| 200 | Tamam | İstek başarılı oldu; ses dosyası yanıt gövdesidir. |
-| 400 | Bozuk İstek | Gerekli parametre eksik, boş veya null. Veya, gerekli veya isteğe bağlı parametresi için geçirilen değer geçersiz. Çok uzun üstbilgi buna yaygın bir sorundur. |
-| 401 | Yetkilendirilmemiş | İstek yetkili değil. Abonelik anahtarı veya belirteç geçerli ve doğru bölgesinde olduğundan emin olmak için kontrol edin. |
-| 413 | İstek varlığı çok büyük | SSML'yi giriş metni, 1024 karakterden uzun. |
-| 415 | Desteklenmeyen medya türü | Mümkünse, yanlış `Content-Type` sağlandı. `Content-Type` ayarlanmalıdır `application/ssml+xml`. | 
-| 429 | Çok Fazla İstek | Kota veya aboneliğiniz için izin isteği sayısını aştınız. |
-| 502 | Hatalı Ağ Geçidi | Ağ veya sunucu tarafı sorun. Geçersiz üst bilgileri de gösterebilir. |
+| 200 | Tamam | İstek başarılı oldu; yanıt gövdesi bir ses dosyasıdır. |
+| 400 | Hatalı İstek | Gerekli bir parametre eksik, boş veya null. Ya da gerekli veya isteğe bağlı bir parametreye geçirilen değer geçersiz. Yaygın bir sorun çok uzun bir üst bilgi. |
+| 401 | Yetkisiz | İstek yetkili değil. Abonelik anahtarınızın veya belirtecinizin geçerli olduğundan ve doğru bölgede bulunduğundan emin olun. |
+| 413 | İstek varlığı çok büyük | SSML girişi 1024 karakterden daha uzun. |
+| 415 | Desteklenmeyen medya türü | Yanlış `Content-Type` sağlanması mümkündür. `Content-Type` `application/ssml+xml`olarak ayarlanmalıdır. |
+| 429 | Çok fazla Istek | Aboneliğiniz için izin verilen kotayı veya isteklerin oranını aştınız. |
+| 502 | Hatalı ağ geçidi | Ağ veya sunucu tarafı sorunu. Geçersiz üst bilgileri de gösterebilir. |
 
-HTTP durum ise `200 OK`, yanıt gövdesi istenen biçiminde bir ses dosyası içerir. Bu dosya, aktarılan, arabellek için kaydedildi veya bir dosyaya kaydedilebilir olarak yürütülebilir.
+HTTP durumu `200 OK`ise, yanıt gövdesi istenen biçimde bir ses dosyası içerir. Bu dosya aktarıldığından, bir arabelleğe kaydedildiğinden veya bir dosyaya kaydedildiğinden çalıştırılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

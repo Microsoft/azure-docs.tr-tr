@@ -2,49 +2,52 @@
 author: rothja
 ms.service: billing
 ms.topic: include
-ms.date: 11/09/2018
+ms.date: 08/09/2019
 ms.author: jroth
-ms.openlocfilehash: ce64047fd7490106790ea8bb1ad7963d82a87c24
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 1f08067768f2d4a0a0c2ab31b3db1c9f2c9e1521
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188748"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73476957"
 ---
-| Resource | Boş | Paylaşılan | Temel | Standart | Premium (v2) | Yalıtılmış </th> |
+| Kaynak | Ücretsiz | Paylaşımlı | Temel | Standart | Premium (v2) | Yalıtılmış </th> |
 | --- | --- | --- | --- | --- | --- | --- |
-| [Web, mobil veya API uygulamaları](https://azure.microsoft.com/services/app-service/) başına [Azure App Service planı](../articles/app-service/overview-hosting-plans.md)<sup>1</sup> |10 |100 |Sınırsız<sup>2</sup> |Sınırsız<sup>2</sup> |Sınırsız<sup>2</sup> |Sınırsız<sup>2</sup>|
+| [Azure App Service plan](../articles/app-service/overview-hosting-plans.md)<sup>1</sup> başına [Web, mobil veya API Apps](https://azure.microsoft.com/services/app-service/) |10 |100 |Sınırsız<sup>2</sup> |Sınırsız<sup>2</sup> |Sınırsız<sup>2</sup> |Sınırsız<sup>2</sup>|
 | [App Service planı](../articles/app-service/overview-hosting-plans.md) |Bölge başına 10 |kaynak grubu başına 10 |kaynak grubu başına 100 |kaynak grubu başına 100 |kaynak grubu başına 100 |kaynak grubu başına 100|
-| İşlem örneği türü |Paylaşılan |Paylaşılan |Ayrılmış<sup>3</sup> |Ayrılmış<sup>3</sup> |Ayrılmış<sup>3</sup></p> |Ayrılmış<sup>3</sup>|
-| [Ölçeği genişletme](../articles/app-service/web-sites-scale.md) (en fazla örnek) |Paylaşılan 1 |Paylaşılan 1 |3 adanmış<sup>3</sup> |ayrılmış 10<sup>3</sup> |ayrılmış 20<sup>3</sup>|ayrılmış 100<sup>4</sup>|
+| İşlem örneği türü |Paylaşımlı |Paylaşımlı |Adanmış<sup>3</sup> |Adanmış<sup>3</sup> |Adanmış<sup>3</sup></p> |Adanmış<sup>3</sup>|
+| [Ölçeği](../articles/app-service/manage-scale-up.md) genişletme (en fazla örnek) |1 paylaşılan |1 paylaşılan |3 ayrılmış<sup>3</sup> |10 adanmış<sup>3</sup> |20 ayrılmış<sup>3</sup>|100 adanmış<sup>4</sup>|
 | Depolama<sup>5</sup> |1 GB<sup>5</sup> |1 GB<sup>5</sup> |10 GB<sup>5</sup> |50 GB<sup>5</sup> |250 GB<sup>5</sup></p> |1 TB<sup>5</sup>|
-| CPU süresi (5 dakika)<sup>6</sup> |3 dakika |3 dakika |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a> |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a> |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a> |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a>|
-| CPU süresi (gün)<sup>6</sup> |60 dakika |240 dakika |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a> |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a> |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a> |Sınırsız, standart, ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/)</a> |
-| Bellek (1 saat) |App Service planı başına 1024 MB |Uygulama başına 1024 MB |Yok |Yok |Yok |Yok |
-| Bant genişliği |165 MB |Sınırsız [veri aktarımı ücretleriyle](https://azure.microsoft.com/pricing/details/data-transfers/) Uygula |Sınırsız [veri aktarımı ücretleriyle](https://azure.microsoft.com/pricing/details/data-transfers/) Uygula |Sınırsız [veri aktarımı ücretleriyle](https://azure.microsoft.com/pricing/details/data-transfers/) Uygula |Sınırsız [veri aktarımı ücretleriyle](https://azure.microsoft.com/pricing/details/data-transfers/) Uygula |Sınırsız [veri aktarımı ücretleriyle](https://azure.microsoft.com/pricing/details/data-transfers/) Uygula |
-| Uygulama mimarisi |32 bit |32 bit |32-bit/64-bit |32-bit/64-bit |32-bit/64-bit |32-bit/64-bit |
-| Web yuvaları örnek başına<sup>7</sup> |5 |35 |350 |Sınırsız |Sınırsız |Sınırsız |
-| Eş zamanlı [hata ayıklayıcı bağlantıları](../articles/app-service/troubleshoot-dotnet-visual-studio.md) uygulama başına |1 |1\. |1 |5 |5 |5 |
-| App Service sertifikaları, abonelik başına<sup>10</sup>| Desteklenmiyor | Desteklenmiyor |10 |10 |10 |10 |
-| Uygulama başına özel etki alanları</a> |0 (azurewebsites.net alt etki alanı yalnızca)|500 |500 |500 |500 |500 |
-| Özel etki alanı [SSL desteği](../articles/app-service/app-service-web-tutorial-custom-ssl.md) |Desteklenen değil için joker karakter sertifikası *. azurewebsites.net varsayılan olarak kullanılabilir|Desteklenen değil için joker karakter sertifikası *. azurewebsites.net varsayılan olarak kullanılabilir|Sınırsız SNI SSL bağlantıları |Sınırsız SNI SSL ve 1 IP SSL bağlantıları dahildir |Sınırsız SNI SSL ve 1 IP SSL bağlantıları dahildir | Sınırsız SNI SSL ve 1 IP SSL bağlantıları dahildir|
-| Tümleşik yük dengeleyici | |X |X |X |X |X<sup>9</sup> |
+| CPU süresi (5 dakika)<sup>6</sup> |3 dakika |3 dakika |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a> |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a> |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a> |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a>|
+| CPU süresi (gün)<sup>6</sup> |60 dakika |240 dakika |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a> |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a> |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a> |Sınırsız, standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/) öde</a> |
+| Bellek (1 saat) |App Service plan başına 1.024 MB |Uygulama başına 1.024 MB |Yok |Yok |Yok |Yok |
+| Bant Genişliği |165 MB |Sınırsız, [veri aktarımı ücretleri](https://azure.microsoft.com/pricing/details/data-transfers/) uygulanır |Sınırsız, [veri aktarımı ücretleri](https://azure.microsoft.com/pricing/details/data-transfers/) uygulanır |Sınırsız, [veri aktarımı ücretleri](https://azure.microsoft.com/pricing/details/data-transfers/) uygulanır |Sınırsız, [veri aktarımı ücretleri](https://azure.microsoft.com/pricing/details/data-transfers/) uygulanır |Sınırsız, [veri aktarımı ücretleri](https://azure.microsoft.com/pricing/details/data-transfers/) uygulanır |
+| Uygulama mimarisi |32 bit |32 bit |32 bit/64 bit |32 bit/64 bit |32 bit/64 bit |32 bit/64 bit |
+| Örnek başına Web Yuvaları<sup>7</sup> |5 |35 |350 |Sınırsız |Sınırsız |Sınırsız |
+| IP bağlantıları | 600 | 600 | Örnek boyutuna bağlıdır<sup>8</sup> | Örnek boyutuna bağlıdır<sup>8</sup> | Örnek boyutuna bağlıdır<sup>8</sup> | 64.000 |
+| Uygulama başına eşzamanlı [hata ayıklayıcı bağlantıları](../articles/app-service/troubleshoot-dotnet-visual-studio.md) |1 |1 |1 |5 |5 |5 |
+| Abonelik başına App Service sertifikaları<sup>9</sup>| Desteklenmiyor | Desteklenmiyor |10 |10 |10 |10 |
+| Uygulama başına özel etki alanları</a> |0 (yalnızca azurewebsites.net alt etki alanı)|500 |500 |500 |500 |500 |
+| Özel etki alanı [SSL desteği](../articles/app-service/configure-ssl-certificate.md) |Desteklenmiyor, *. azurewebsites.net için joker karakter sertifikası varsayılan olarak kullanılabilir|Desteklenmiyor, *. azurewebsites.net için joker karakter sertifikası varsayılan olarak kullanılabilir|Sınırsız SNI SSL bağlantı |Sınırsız SNI SSL ve 1 IP SSL bağlantı dahil değildir |Sınırsız SNI SSL ve 1 IP SSL bağlantı dahil değildir | Sınırsız SNI SSL ve 1 IP SSL bağlantı dahil değildir|
+| Plan başına karma bağlantı | | | 5 | 25 | 200 | 200 |
+| Tümleşik yük dengeleyici | |X |X |X |X |X<sup>10</sup> |
 | [Her zaman açık](../articles/app-service/configure-common.md) | | |X |X |X |X |
-| [Zamanlanmış yedeklemeler](../articles/app-service/manage-backup.md) | | | | Zamanlanmış yedeklemeleri her 2 saatte bir, en fazla 12 yedek her gün (el ile + zamanlanmış) | Zamanlanmış yedeklemeleri saatlik, en fazla 50 yedek her gün (el ile + zamanlanmış) | Zamanlanmış yedeklemeleri saatlik, en fazla 50 yedek her gün (el ile + zamanlanmış) |
-| [Otomatik Ölçeklendirme](../articles/app-service/web-sites-scale.md) | | | |X |X |X |
-| [WebJobs](../articles/app-service/webjobs-create.md)<sup>8</sup> |X |X |X |X |X |X |
+| [Zamanlanan yedeklemeler](../articles/app-service/manage-backup.md) | | | | Her 2 saatte bir zamanlanan yedeklemeler, günde en fazla 12 yedekleme (el ile + zamanlanmış) | Her saat zamanlanan yedeklemeler, günde en fazla 50 yedekleme (el ile + zamanlanmış) | Her saat zamanlanan yedeklemeler, günde en fazla 50 yedekleme (el ile + zamanlanmış) |
+| [Otomatik Ölçeklendirme](../articles/app-service/manage-scale-up.md) | | | |X |X |X |
+| [Web işleri](../articles/app-service/webjobs-create.md)<sup>11</sup> |X |X |X |X |X |X |
 | [Azure Zamanlayıcı](https://azure.microsoft.com/services/scheduler/) desteği | |X |X |X |X |X |
 | [Uç Nokta izleme](../articles/app-service/web-sites-monitor.md) | | |X |X |X |X |
-| [Hazırlama yuvası](../articles/app-service/deploy-staging-slots.md) | | | |5 |20 |20 |
-| SLA | |  |%99,9 |%99,95|%99,95|%99,95|  
+| [Hazırlama Yuvaları](../articles/app-service/deploy-staging-slots.md) | | | |5 |20 |20 |
+| SLA | |  |%99,95|%99,95|%99,95|%99,95|  
 
-<sup>1</sup>uygulamaları ve depolama kotalarını aksi belirtilmediği sürece App Service planı markalarıdır.  
-<sup>2</sup>etkinlik uygulamaları, makine örnekleri ve ilgili kaynak kullanımını boyutu, bu makinelere barındırabilirsiniz uygulamaları gerçek sayısına bağlıdır.  
-<sup>3</sup>ayrılmış örnekler, farklı boyutlarda olabilir. Daha fazla bilgi için [App Service fiyatlandırması](https://azure.microsoft.com/pricing/details/app-service/).  
-<sup>4</sup>istek üzerine daha fazla izin verilir.  
-<sup>5</sup>depolama toplam içerik boyutu tüm uygulamalar arasında aynı App Service planında sınırlıdır.  
-<sup>6</sup>bu kaynakları ayrılmış örneklerin (örnek boyutu ve örnek sayısını) üzerinde fiziksel kaynaklar tarafından kısıtlanmıştır.  
-<sup>7</sup>iki örneği için temel katmanda bir uygulamayı ölçeklendirme, 350 eşzamanlı bağlantı her iki örneği vardır.  
-<sup>8</sup>çalıştırma özel yürütülebilir uygulamalar ve/veya betikler isteğe bağlı, bir programa göre veya sürekli bir App Service arka plan görevi olarak örnek. WebJob'ların sürekli yürütülebilmesi için Her Zaman Açık özelliği gereklidir. Zamanlanan WebJob'lar için Azure Zamanlayıcı Ücretsiz veya Standart gereklidir. App Service örneği çalıştırmak WebJobs sayısı önceden tanımlanmış bir sınır yoktur. Hangi uygulama kodunun yapmaya çalıştığını bağımlı pratik sınırı yoktur.  
-<sup>9</sup>app Service yalıtılmış SKU'ları sahip olması, dahili olarak yük dengeli (ILB) Azure Load Balancer ile internet'ten genel bağlantı olmasını olanağı. Bunun sonucunda, ILB Yalıtılmış App Service’in bazı özelliklerin, ILB ağ uç noktasına doğrudan erişimi olan makinelerden kullanılması gerekir.  
-<sup>10</sup>App Service sertifikası kota sınırı abonelik başına 200 bir üst sınır bir destek isteği ile artırılabilir.  
+<sup>1</sup> Uygulamalar ve depolama kotaları, aksi belirtilmediği takdirde App Service plan başına yapılır.  
+<sup>2</sup> Bu makinelerde barındırabilmeniz gereken uygulamaların gerçek sayısı, uygulamaların etkinliğine, makine örneklerinin boyutuna ve karşılık gelen kaynak kullanımına göre değişir.  
+<sup>3</sup> Ayrılmış örnekler farklı boyutlarda olabilir. Daha fazla bilgi için bkz. [App Service fiyatlandırması](https://azure.microsoft.com/pricing/details/app-service/).  
+<sup>4</sup> İstek üzerine daha fazlasına izin verilir.  
+<sup>5</sup> Depolama sınırı, aynı App Service planındaki tüm uygulamalarda bulunan toplam içerik boyutudur. Tek bir kaynak grubundaki ve bölgedeki tüm App Service planları genelinde tüm uygulamaların toplam içerik boyutu 500GB ' i aşamaz.  
+<sup>6</sup> Bu kaynaklar, adanmış örneklerde (örnek boyutu ve örnek sayısı) fiziksel kaynaklar tarafından sınırlandırılır.  
+<sup>7</sup> Temel katmandaki bir uygulamayı iki örneğe ölçeklendirirseniz, iki örnek için 350 eş zamanlı bağlantınız vardır. Standart katman ve yukarıdaki sürümler için Web soketlerine teorik sınır yoktur, ancak diğer faktörler Web Yuvaları sayısını sınırlayabilir. Örneğin, izin verilen en fazla eşzamanlı istek (`maxConcurrentRequestsPerCpu`tarafından tanımlanır), her bir küçük VM başına 7.500, orta sanal makine başına 15.000 (7.500 x 2 çekirdek) ve büyük VM başına 75.000 (18.750 x 4 çekirdek).  
+<sup>8</sup> En fazla IP bağlantısı, örnek başına yapılır ve örnek boyutuna bağlıdır: B1/S1/P1V2 örneği başına 1.920, B2/S2/P2V2 örneği başına 3.968, B3/S3/P3V2 örneği başına 8.064.  
+<sup>9</sup> Abonelik başına App Service Sertifikası kota sınırı, en fazla 200 sınırına yönelik destek isteği aracılığıyla artırılabilir.  
+<sup>10</sup> App Service Yalıtılmış SKU 'Lar Azure Load Balancer ile dahili olarak yük dengeli (ıLB) olabilir, bu nedenle internet 'ten genel bağlantı yoktur. Bunun sonucunda, ILB Yalıtılmış App Service’in bazı özelliklerin, ILB ağ uç noktasına doğrudan erişimi olan makinelerden kullanılması gerekir.  
+<sup>11</sup> App Service örneğiniz içinde isteğe bağlı, zamanlamaya göre veya sürekli bir arka plan görevi olarak özel yürütülebilir dosyalar ve/veya betikler çalıştırın. WebJob'ların sürekli yürütülebilmesi için Her Zaman Açık özelliği gereklidir. Zamanlanan WebJob'lar için Azure Zamanlayıcı Ücretsiz veya Standart gereklidir. App Service örneğinde çalışabilecek WebJobs sayısında önceden tanımlanmış bir sınır yoktur. Uygulama kodunun ne işe çalışmadığına bağlı olarak pratik sınırlar vardır.  

@@ -1,6 +1,6 @@
 ---
-title: Azure ön kapı hizmeti - URL yeniden yazma | Microsoft Docs
-description: Bu makale, nasıl Azure ön kapısı Service URL yeniden yazma yollarınızı için yapılandırılmışsa yaptığını anlamanıza yardımcı olur.
+title: Azure ön kapı hizmeti-URL yeniden yazma | Microsoft Docs
+description: Bu makale, yapılandırılmışsa Azure ön kapı hizmeti 'nin yollarınız için URL yeniden yazma şeklini anlamanıza yardımcı olur.
 services: front-door
 documentationcenter: ''
 author: sharad4u
@@ -12,48 +12,48 @@ ms.workload: infrastructure-services
 ms.date: 09/10/2018
 ms.author: sharadag
 ms.openlocfilehash: dc2126276e3e8e0d35ce8ed1f835544386659eff
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.sourcegitcommit: 0f54f1b067f588d50f787fbfac50854a3a64fff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
+ms.lasthandoff: 08/12/2019
 ms.locfileid: "60736199"
 ---
-# <a name="url-rewrite-custom-forwarding-path"></a>URL yeniden yazma (özel Yönlendirme yolu)
-Azure ön kapısı hizmeti, isteğe bağlı yapılandırmanıza olanak sağlayarak URL yeniden yazma destekler **özel yönlendirme yolunu** arka ucuna iletmek için istek oluşturulurken kullanılacak. Özel yönlendirme yolu sağlanmazsa Front Door varsayılan olarak yönlendirilen istekte kullanılan URL alanına gelen URL yolunu kopyalar. Yönlendirilen istekte kullanılan Konak üst bilgisi seçilen arka uç için yapılandırılmış olan değerdir. Okuma [arka uç ana bilgisayar üstbilgisi](front-door-backend-pool.md#hostheader) ne işe yarar ve nasıl yapılandıracağınızı öğrenin.
+# <a name="url-rewrite-custom-forwarding-path"></a>URL yeniden yazma (özel iletme yolu)
+Azure ön kapı hizmeti, arka uca iletme isteği oluştururken kullanılacak isteğe bağlı bir **özel Iletme yolu** yapılandırmanıza ızın vererek URL yeniden yazmayı destekler. Özel yönlendirme yolu sağlanmazsa Front Door varsayılan olarak yönlendirilen istekte kullanılan URL alanına gelen URL yolunu kopyalar. Yönlendirilen istekte kullanılan Konak üst bilgisi seçilen arka uç için yapılandırılmış olan değerdir. Ne yaptığını ve nasıl yapılandırabileceğinizi öğrenmek için [arka uç ana bilgisayar üst bilgisini](front-door-backend-pool.md#hostheader) okuyun.
 
-Eşleşen bir joker karakter yolu iletilen yolu için gelen yolunun herhangi bir bölümü kopyalayın URL yeniden yazma özel yönlendirme yolunu kullanarak güçlü bir parçasıdır (Bu yol segmentler **yeşil** aşağıdaki örnekte parçaları):
+URL yeniden yazma işleminin özel iletme yolunu kullanarak güçlü bir bölümü, gelen yolun, iletilen yola bir joker karakterle eşleşen herhangi bir bölümünü kopyalayacaktır (Bu yol kesimleri aşağıdaki örnekteki **yeşil** kesimlerdir):
 </br>
-![Azure ön kapısı URL yeniden yazma][1]
+![Azure ön kapı URL 'SI yeniden yazma][1]
 
 ## <a name="url-rewrite-example"></a>URL yeniden yazma örneği
-Yönlendirme kuralı aşağıdaki ön uç ana bilgisayarları ve yapılandırılmış yolları ile göz önünde bulundurun:
+Aşağıdaki ön uç konakları ve yapılandırılmış yolların bulunduğu bir yönlendirme kuralı düşünün:
 
-| Ana bilgisayarlar      | Yolları       |
+| Konaklar      | Yollar       |
 |------------|-------------|
 | www\.contoso.com | /\*         |
 |            | /foo        |
-|            | /foo/\*     |
-|            | /foo/çubuğu /\* |
+|            | foo\*     |
+|            | /ç/Bar/\* |
 
-Aşağıdaki tabloda, ilk sütun gelen istekleri örneklerini gösterir ve ikinci sütun, "en-specific" eşleşen yol 'Path' ne olacağını gösterir.  Tablonun ilk satırını üçüncü ve sonraki sütunlarının örnekler yapılandırılmış **özel ileten yollarını**, iletilen istek yolunun eşleşmesi durumunda olacaktır örnekleri temsil eden bu sütunların satır rest ile söz konusu satırdaki isteği.
+Aşağıdaki tablonun ilk sütununda gelen istek örnekleri gösterilmektedir ve ikinci sütun "en özel" eşleşen yol ' Path ' olarak gösterilir.  Tablonun ilk satırının üçüncü ve sonraki sütunları, yapılandırılmış **özel Iletme yolları**örneğidir ve bu sütunlarda, iletilen istek yolunun, bu durumda gelen istekle eşleştirildiği durum örnekleri temsil eder. sırada.
 
-Biz ikinci satırda okuma, örneğin, gelen istek için diyor `www.contoso.com/sub`, özel yönlendirme yolunu olduysa `/`, yönlendirilmiş yol sonra `/sub`. Özel iletme yolu ise `/fwd/`, yönlendirilmiş yol sonra `/fwd/sub`. Ve kalan sütunların benzeri. **Vurgulanmış** aşağıdaki yollardan bölümlerini joker karakter eşleştirmeyi parçası olan bölümleri temsil eder.
+Örneğin, ikinci satırda okuduk, gelen istek `www.contoso.com/sub`için özel iletme `/`yolu ise, iletilen yolun `/sub`ne olduğunu söyledi. Özel iletme yolu `/fwd/` `/fwd/sub`olsaydı, iletilen yol olur. Daha sonra, kalan sütunlar için. Aşağıdaki yolların **vurgulanmış** kısımları, joker karakter eşleşmesi kapsamında olan bölümleri temsil eder.
 
 
-| Gelen istek       | Çoğu özel eşleşme yolu | /          | /FWD/          | /foo/          | /foo/çubuğu /          |
+| Gelen istek       | En özel eşleşme yolu | /          | /FWD/          | foo          | /ç/Bar/          |
 |------------------------|--------------------------|------------|----------------|----------------|--------------------|
-| www\.contoso.com/            | /\*                      | /          | /FWD/          | /foo/          | /foo/çubuğu /          |
-| www\.contoso.com/**alt**     | /\*                      | /**alt**   | /FWD/**alt**   | /foo/**alt**   | /foo/çubuğu/**alt**   |
-| www\.contoso.com/**a/b/c**   | /\*                      | /**a/b/c** | /fwd/**a/b/c** | /foo/**a/b/c** | /foo/çubuğu/**a/b/c** |
-| www\.contoso.com/foo         | /foo                     | /          | /FWD/          | /foo/          | /foo/çubuğu /          |
-| www\.contoso.com/foo/        | /foo/\*                  | /          | /FWD/          | /foo/          | /foo/çubuğu /          |
-| www\.contoso.com/foo/**çubuğu** | /foo/\*                  | /**Çubuk**   | /FWD/**çubuğu**   | /foo/**çubuğu**   | /foo/çubuğu/**çubuğu**   |
+| www\.contoso.com/            | /\*                      | /          | /FWD/          | foo          | /ç/Bar/          |
+| www\.contoso.com/**Sub**     | /\*                      | /**alt**   | /FWD/**Sub**   | /alt/**alt**   | /alt/bar/**alt**   |
+| www\.contoso.com/**a/b/c**   | /\*                      | /**a/b/c** | /FWD/**a/b/c** | /k/**a/b/c** | /ç/Bar/**a/b/c** |
+| www\.contoso.com/foo         | /foo                     | /          | /FWD/          | foo          | /ç/Bar/          |
+| www\.contoso.com/foo/        | foo\*                  | /          | /FWD/          | foo          | /ç/Bar/          |
+| www\.contoso.com/foo/**çubuğu** | foo\*                  | /**çubuktaki**   | /FWD/**Bar**   | /Altbilgi/**çubuk**   | /ç/Bar/**çubuk**   |
 
 
 ## <a name="optional-settings"></a>İsteğe bağlı ayarlar
-Verilen yönlendirme kuralı ayarlarını belirtebilirsiniz ek isteğe bağlı ayar vardır:
+Belirli bir yönlendirme kuralı ayarları için de belirtebileceğiniz ek isteğe bağlı ayarlar vardır:
 
-* **Yapılandırma önbelleğe** - devre dışı ya da bu yönlendirme kuralı ile eşleşen istekleri önbelleğe alınmış içeriği kullanmak çalışmaz ve bunun yerine her zaman arka ucundan getirir, belirtilmemiş. Daha fazla bilgi edinin [ön kapısı ile önbelleğe alma](front-door-caching.md).
+* **Önbellek yapılandırması** -devre dışı bırakılırsa veya belirtilmemişse, bu yönlendirme kuralıyla eşleşen istekler önbelleğe alınmış içeriği kullanmaya çalışmaz ve bunun yerine her zaman arka uca alınır. [Ön kapılı önbelleğe alma](front-door-caching.md)hakkında daha fazla bilgi edinin.
 
 
 

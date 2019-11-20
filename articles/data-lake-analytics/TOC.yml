@@ -1,10 +1,10 @@
 - name: Data Lake Analytics Belgeleri
-  href: index.md
+  href: index.yml
 - name: Genel Bakış
   items:
     - name: Data Lake Analytics nedir?
       href: data-lake-analytics-overview.md
-- name: başlarken
+- name: Başlarken
   items:
     - name: Azure portal
       href: data-lake-analytics-get-started-portal.md
@@ -40,8 +40,8 @@
               href: data-lake-analytics-manage-use-nodejs.md
         - name: Kullanıcı ekle
           href: data-lake-analytics-add-users.md
-        - name: İlkeler
-          href: data-lake-analytics-policies.md
+        - name: Hesap ilkeleri
+          href: data-lake-analytics-account-policies.md
         - name: İş klasörlerini koruma
           href: data-lake-analytics-secure.md
         - name: Tanılama günlüklerine erişim
@@ -118,6 +118,20 @@
           href: data-lake-analytics-cicd-test.md
         - name: U-SQL SDK’sı
           href: data-lake-analytics-u-sql-sdk.md
+    - name: U-SQL geliştiricileri için Apache Spark'ı anlama
+      items:
+        - name: U-SQL geliştiricileri için Apache Spark'ı anlama
+          href: understand-spark-for-usql-developers.md
+        - name: Apache Spark veri biçimlerini anlama
+          href: understand-spark-data-formats.md
+        - name: Apache Spark kod kavramlarını anlama
+          href: understand-spark-code-concepts.md
+    - name: U-SQL işlerinin sorunlarını giderme
+      items:
+        - name: U-SQL çalışma zamanı hatalarını giderme
+          href: runtime-troubleshoot.md
+        - name: .NET yükseltmesi sorunlarını giderme
+          href: dotnet-upgrade-troubleshoot.md
 - name: Başvuru
   items:
     - name: Azure PowerShell

@@ -1,40 +1,41 @@
 ---
-title: Test etmek iyi pazarlama | Azure Market
-description: Test Sürüşü en iyi yayımcıları için pazarlama
+title: Test sürüşü Pazarlama En Iyi uygulamaları | Azure Marketi
+description: Yayımcılar için test sürücüsü pazarlama en iyi uygulamaları
 services: Azure, Marketplace, Cloud Partner Portal,
 author: pbutlerm
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 02b2715c813f7814cf8bf5d23414bc14d5ff5a30
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 177b4bd804ad878c8f983eefcd54399d1a72ba19
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64939972"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824538"
 ---
-<a name="test-drive-marketing-and-best-practices"></a>Test Sürüşü pazarlama ve en iyi yöntemler
+<a name="test-drive-marketing-and-best-practices"></a>Test sürücüsü pazarlama ve En Iyi uygulamalar
 =======================================
 
-Azure Marketi'nde Test Sürüşü harika bir araç Pazarlamacılar ve biz önermek için dahil go-to-market çalışmalarınızı, başlattığınızda ' dir. Hemen büyük ölçüde destek daha oluşturma müşteri adayları, Test sürücüsünden yayımladığınızda sizin yapmanız önerilir birkaç en iyi uygulamalar sahibiz:
+Azure Market test sürücüsü pazarlamalara yönelik harika bir araçtır ve başlatıldığında pazara sunma çabalarınıza dahil edilmesini öneririz. Birkaç en iyi yöntem sunuyoruz ve bu, test sürücüsünden daha fazla müşteri adayı oluşturmayı büyük ölçüde destekler.
 
-- **Başvuru sayfası**: Bir sayfanın tüm, Azure'u Test Sürüşü hakkında konuşuyor ve kendisinden Web'deki Varlığınızı gönderin ve test sürüşünüz trafiği yönlendiren birden fazla başvuru bağlantı gönder
-- **Sosyal medya**: Sosyal medya kanalları hakkında düzenli olarak test sürüşünüz sonrası burada bir zamanlama oluşturun
-- **Bloglar**: Azure test sürüşünüz hakkında bir blog gönderisi yazın. Kullanıcı olarak ve çok az sürede ücretsiz denemeye alırsınız özellikleri ve avantajları vurgulayın. Azure test sürücü sayfanızda birden fazla yerde blog kopya bağlantı emin olun. Azure test sürüşü hakkında bir örnek blog gönderisinin bağlantısını aşağıda verilmiştir. Hatta daha iyi? Bağlantılar, blog gönderisinin, sosyal medya kanalları gönderin.
-- **E-posta ziyaretten**: Diğer kanallar aracılığıyla markanızla teşvik edin ve bunları test sürüşü hakkında bilgilendirmek için e-posta ücretsiz denemek için bağlı müşteri adayları bildirin.
-- **Satış eğitim ve Araçlar**: Test sürücü deneyimini gösteri ve birkaç yolu, müşteri adaylarını ve bunu müşterilerle görüşebilirsiniz gelen satış ekibinizle birlikte bir eğitim oturumu ayarlayın. Satış olmadığının, bir şirkette birden çok kişi birlikte bir tanıtım ayarlama sonra bunların her birini daha sonra kendilerini almak için test sürüşü bağlantıyı gönderin.
-- **Ticari gösterir ve konferanslarda**: Bir standına adaylarınızla katılan bir endüstri etkinlikte var mı? Bazı dizüstü bilgisayarlar standına en ayarlayabilir ve böylece müşterilerin test sürüşü, standında gerçekleştirdikten sonra bunları sırasında ve sonrasında deneyimlerini ürün hakkında konuşmak çalışan, test sürüşleri sahip!
+- **Başvuru sayfası**: Web varlığınızı Azure test sürücünüz hakkında bir sayfa gönderin ve trafiği test sürücünüze yönlendiren birden çok başvuru bağlantısı gönderin
+- **Sosyal medya**: test sürücünüz hakkındaki sosyal medya kanallarınıza düzenli olarak gönderi oluşturduğunuz bir zamanlama oluşturun
+- **Bloglar**: Azure test sürücünüz hakkında bir blog gönderisi yazın. Kullanıcının ücretsiz ve çok kısa sürede karşılaşacağı özellikleri ve avantajları vurgulayın. Blog kopyasında birden çok yerde Azure Test Drive sayfanıza bağlantı yaptığınızdan emin olun. Azure test sürücüsü hakkında örnek blog gönderisine bir bağlantı aşağıda verilmiştir. Daha da iyi? Sosyal medya kanallarınızda blog Gönderinizde bağlantı gönderin.
+- **E-posta nur:** test sürücüsü hakkında bilgilendirmek ve bunları ücretsiz olarak denemeye teşvik etmek için, e-posta üzerinden diğer kanallar aracılığıyla markanızla ilgili müşteri adaylarını bilgilendirir.
+- **Satış eğitimi ve araçları**: test sürücüsü deneyimini sunmak için satış ekiplerinizi kullanarak bir eğitim oturumu kurun ve müşteri adaylarına ve müşterilerinin BT ile müşterileri üzerinde ilerbilecekleri birkaç yolla iletişim kurun. Satış katmaları, bir şirketteki birden fazla kişi ile tanıtım oluşturabilir ve ardından bu her birini test sürücüsüne, her birinin bağlantısını daha sonra alacak şekilde gönderir.
+- **Ticari gösteriler ve konferanslar**: olası müşterilere katılmayacak sektör olayında bir stand mu var? En az bir dizüstü bilgisayar kurun ve test sürücülerinizi çalışır durumda olduktan sonra, müşterilerin test sürücüsünü stand sırasında alıp bu deneyimden sonra ürünle ilgili olarak onlarla iletişim kurabilirsiniz!
 
-<a name="lead-management"></a>Tedarik Yönetimi
+<a name="lead-management"></a>Müşteri adayı yönetimi
 ---------------
 
-Test sürüşü ' yüksek oranda nitelikli potansiyel müşteriler edinin oluşturma, bu müşteri adayları, satış ve pazarlama kanallarına ekledik ve müşteriler ödeme oturum açmak için aday ile etkileşim sağlamak istersiniz. Müşteri adayları, satış döngüsü boyunca yönlendiren bakımından önerilen yöntemlerden bazıları şunlardır:
+Test sürücüsünden yüksek düzeyde nitelikli müşteri adayları oluşturduğunuza göre, bu müşteri adaylarını satış ve pazarlama kanallarınıza dahil aldığınızdan ve müşteriler için ödeme yapmak üzere adaylarla birlikte çalışmak isteyeceksiniz. Müşteri adaylarını satış döngüsüyle yönlendirmekle ilgili bazı önerilen uygulamalar aşağıda verilmiştir:
 
-- Olun, bunları test sürüşü alma 24 saat içindeki müşteri adayıyla ilgili kişi. Erişmenizi sağlayacak CRM'İNİZE hemen ettiğiniz müşteri adayı müşteri tarafından test sürüşü--dağıtıldıktan sonra hala etkin durumdayken ilk 24 saat içinde e-posta göndermek emin olun. Bir telefon çağrısı ile bunları çözmek ve ürününüzü yardım edip edemeyeceğini görmek için çalıştığınız hangi sorunları daha iyi anlamak için zamanlama isteyin.
-- Birkaç kez izleyin, ancak bunları bombard yok. Bunları kapatabilirsiniz, ancak sonra yapılan ilk girişim vermeyin önce birkaç kez bu müşteri adayı eposta öneririz. Unutmayın--bu müşteriler doğrudan ürününüzün ile bağlı ve harcanan süre bir ücretsiz deneme.
-- Mükemmel adaylar oldukları!
-- Yakın bir test sürücü sağlama ile iş ortağı satışları kaydetmek emin olun, bağlanın. Ayrıca--burada test sürüşü bir rol oynadı müşteri WINS hakkında görüşlerinizi almak isteriz!
+- Sınama sürücüsünü alırken, 24 saat içinde müşteri adayıyla iletişim kurun. Müşteri, test sürücüsünü dağıtduktan hemen sonra tercih ettiğiniz şekilde CRM 'niz için bir e-posta almaya devam edersiniz. Çözmeye çalıştıkları sorunları daha iyi anlamak ve ürününüzün Yardım edebilir olup olmadığını görmek için bu kişilerle bir telefon araması zamanlamayı isteyin.
+- Birkaç kez izleyin, ancak bunları bombetmeyin. Bu müşteri adayını kapatmadan önce birkaç kez e-posta ile gönderin, ancak ilk girişimden sonra bunu vermemeniz önerilir. Unutmayın--bu müşteriler, ürününüzle doğrudan sahip olan ve ücretsiz bir denemeye harcanan zaman için bu müşteriler.
+- Harika adaylardır!
+- Bir test sürücüsüyle bir anlaşmayı kapatırsanız, Iş ortağı Sales Connect 'e kaydolduğunuzdan emin olun. Ayrıca--test sürücüsünün bir rol oynadığı müşteri WINS 'niz hakkında bilgi almak için sevdiğimiz bir duyuyoruz!
 
-Test sürücü SSS şuradan ulaşabilirsiniz: <https://github.com/Azure/AzureTestDrive/wiki/Test-Drive-Best-Practices>
+Test sürücüsü SSS şurada bulunur: <https://github.com/Azure/AzureTestDrive/wiki/Test-Drive-Best-Practices>

@@ -1,24 +1,24 @@
 ---
-title: Öğretici - Perakende stok sınıflamasını, Azure CLI ile yayımlama/abone olma kanalları ve konu başlığı filtreleri kullanarak güncelleştirme | Microsoft Belgeleri
-description: Bu öğreticide bir konu başlığı ve abonelikten ileti gönderip almayı ve Azure CLI ile filtre kuralları ekleyip kullanmayı öğreneceksiniz
+title: "Öğretici: Azure CLı ile yayımlama/abone olma kanalları ve konu filtrelerini kullanarak perakende envanter sınıflama 'nı güncelleştirme"
+description: 'Öğretici: Bu öğreticide, bir konudan ve abonelikten ileti gönderme ve alma ile Azure CLı kullanarak filtre kuralları ekleme ve kullanma hakkında bilgi edineceksiniz.'
 services: service-bus-messaging
 author: spelluru
 manager: timlt
 ms.author: spelluru
-ms.date: 09/22/2018
+ms.date: 11/05/2019
 ms.topic: tutorial
 ms.service: service-bus-messaging
 ms.custom: mvc
-ms.openlocfilehash: e55c8c6a579489c8ed5a13ccb93f0e72c286ab13
-ms.sourcegitcommit: cfbc8db6a3e3744062a533803e664ccee19f6d63
+ms.openlocfilehash: 0bd0d8eb8abe6f320f73e35b1e3b08e1d8dc1de3
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65991953"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718917"
 ---
-# <a name="tutorial-update-inventory-using-cli-and-topicssubscriptions"></a>Öğretici: CLI ile konular/abonelikler Envanter güncelleştirme
+# <a name="tutorial-update-inventory-using-cli-and-topicssubscriptions"></a>Öğretici: CLI'yi ve konuları/abonelikleri kullanarak envanter güncelleştirme
 
-Microsoft Azure Service Bus, uygulamalar ve hizmetler arasında bilgi gönderen çok kiracılı bir bulut mesajlaşma hizmetidir. Zaman uyumsuz işlemler esnek ve aracılı mesajlaşmanın yanı sıra ilk giren ilk çıkar (FIFO) yöntemiyle yapılandırılmış mesajlaşma ve yayımlama/abonelik olanakları da sunar. Bu öğretici, bir perakende stok senaryosunda, Azure CLI ve Java kullanan yayımlama/abone olma kanallarıyla Service Bus konu başlıklarını ve abonelikleri kullanmayı göstermektedir.
+Microsoft Azure Service Bus, uygulamalar ve hizmetler arasında bilgi gönderen çok kiracılı bir bulut mesajlaşma hizmetidir. Zaman uyumsuz işlemler, esnek, aracılı mesajlaşmanın yanı sıra, ilk giren ilk çıkar (FIFO) yöntemiyle yapılandırılmış mesajlaşma ve yayımlama/abonelik olanakları da sunar. Bu öğretici, bir perakende stok senaryosunda, Azure CLI ve Java kullanan yayımlama/abone olma kanallarıyla Service Bus konu başlıklarını ve abonelikleri kullanmayı göstermektedir.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > [!div class="checklist"]
@@ -28,13 +28,13 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > * İletileri gönderme ve bunların beklenen aboneliklere vardığını doğrulama
 > * Aboneliklerden ileti alma
 
-Bu senaryonun bir örneği, birden çok perakende mağazası için stok sınıflama güncelleştirmesidir. Bu senaryoda, her mağaza veya mağaza grubu, sınıflamalarını güncelleştirmeye yönelik iletiler alır. Bu öğretici, bu senaryonun abonelikler ve filtreler kullanılarak uygulanmasını göstermektedir. Öncelikle 3 aboneliği olan bir konu başlığı oluşturacaksınız, bazı kurallar ve filtreler ekleyeceksiniz ve ardından konu başlıkları ve aboneliklerden iletiler gönderip alacaksınız.
+Bu senaryonun bir örneği, birden çok perakende mağazası için stok sınıflama güncelleştirmesidir. Bu senaryoda, her mağaza veya mağaza grubu, sınıflamalarını güncelleştirmeye yönelik iletiler alır. Bu öğretici, bu senaryonun abonelikler ve filtreler kullanılarak uygulanmasını göstermektedir. İlk olarak önce 3 aboneliği olan bir konu başlığı oluşturun, bazı kurallar ve filtreler ekleyin ve ardından konu başlıkları ve aboneliklerden iletiler gönderip alın.
 
 ![konu başlığı](./media/service-bus-tutorial-topics-subscriptions-cli/about-service-bus-topic.png)
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap][] oluşturabilirsiniz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Java ile bir Service Bus uygulaması geliştirebilmeniz için şunlar yüklü olmalıdır:
 
@@ -50,7 +50,7 @@ CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu öğretici için A
 
 Her [konu başlığı aboneliği](service-bus-messaging-overview.md#topics) her iletinin bir kopyasını alabilir. Konular, protokol ve anlam açılarından Service Bus kuyrukları ile tam olarak uyumludur. Service Bus konu başlıkları, filtreleme koşullarını ve ileti özelliklerini belirleyen veya değiştiren isteğe bağlı eylemleri olan geniş bir seçim kuralı yelpazesini destekler. Bir kural eşleştiğinde bir ileti oluşturulur. Kurallar, filtreler ve eylemler hakkında daha fazla bilgi edinmek için bu [bağlantıyı](topic-filters.md) izleyin.
 
-## <a name="sign-in-to-azure"></a>Oturum açın: Azure
+## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
 CLI yüklendikten sonra bir komut istemi açın ve Azure'da oturum açmak için aşağıdaki komutları çalıştırın. Cloud Shell kullanıyorsanız, bu adımlar gerekli değildir:
 
@@ -122,7 +122,7 @@ connectionString=$(az servicebus namespace authorization-rule keys list \
    --query primaryConnectionString --output tsv)
 ```
 
-Son komut çalıştıktan sonra, bağlantı dizesini ve seçtiğiniz kuyruk adını kopyalayıp Not Defteri gibi geçici bir yere yapıştırın. Bunlar sonraki adımda gerekecektir.
+Son komut çalıştıktan sonra, bağlantı dizesini ve seçtiğiniz kuyruk adını kopyalayıp Not Defteri gibi geçici bir yere yapıştırın. Bu sonraki adımda gerekecektir.
 
 ## <a name="create-filter-rules-on-subscriptions"></a>Aboneliklerde filtre kuralları oluşturma
 
@@ -153,7 +153,7 @@ Ad alanı ve konu başlıkları/abonelikler sağlandıktan ve gerekli kimlik bil
 
    Konu başlığına 10 ileti gönderildiğini ve ardından bunların ayrı aboneliklerden alındığını gözlemleyin:
 
-   ![program çıktısı](./media/service-bus-tutorial-topics-subscriptions-cli/service-bus-tutorial-topics-subscriptions-cli.png)
+   ![program çıkışı](./media/service-bus-tutorial-topics-subscriptions-cli/service-bus-tutorial-topics-subscriptions-cli.png)
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
@@ -165,7 +165,7 @@ az group delete --resource-group my-resourcegroup
 
 ## <a name="understand-the-sample-code"></a>Örnek kodu anlama
 
-Bu bölümde örnek kodun işlevleri hakkında daha fazla ayrıntı bulunmaktadır.
+Bu bölümde, örnek kodun yaptıkları hakkında daha fazla ayrıntı bulunmaktadır.
 
 ### <a name="get-connection-string-and-queue"></a>Bağlantı dizesini ve kuyruğu alma
 
@@ -326,7 +326,7 @@ public CompletableFuture<Void> receiveAllMessageFromSubscription(String subscrip
 ```
 
 > [!NOTE]
-> Service Bus kaynakları ile yönetebileceğiniz [hizmet veri yolu Gezgini](https://github.com/paolosalvatori/ServiceBusExplorer/). Hizmet veri yolu Gezgini, bir Service Bus ad alanınıza bağlanın ve mesajlaşma varlıkları kolay bir şekilde yönetmek kullanıcıların sağlar. Araç, içeri/dışarı aktarma işlevleri veya konu, kuyruklar, abonelikler, geçiş hizmetleri, bildirim hub'ları ve olay hub'ları test etme olanağı gibi gelişmiş özellikler sağlar. 
+> Service Bus kaynaklarını [Service Bus Explorer](https://github.com/paolosalvatori/ServiceBusExplorer/)ile yönetebilirsiniz. Service Bus gezgin, kullanıcıların bir Service Bus ad alanına bağlanmasına ve mesajlaşma varlıklarını kolay bir şekilde yönetmesine olanak tanır. Araç içeri/dışarı aktarma işlevselliği gibi gelişmiş özellikler ya da konu, kuyruk, abonelik, geçiş Hizmetleri, Bildirim Hub 'ları ve Olay Hub 'larını test etme yeteneği sağlar. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

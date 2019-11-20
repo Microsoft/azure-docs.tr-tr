@@ -1,56 +1,69 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure AD Identity Governance belgeleri
+### YamlMime:Landing
+title: Azure Active Directory Identity Governance belgeleri
+summary: Azure Active Directory (Azure AD) Identity Governance, bir yandan çalışanların üretken olmasını sağlarken diğer yandan kritik varlıkları korumanıza, izlemenize ve bunlara erişimi denetlemenize yardımcı olur.
 metadata:
-  document_id: null
-  title: Azure Active Directory Identity Governance belgeleri | Microsoft Docs
-  description: 'Çalışanlar ve iş ortakları arasında kimlik yaşam döngüsü idaresi, erişim yaşam döngüsü idaresi ve güvenli yönetim hakkında bilgi edinin.'
-  services: active-directory
-  author: rolyon
-  manager: mtillman
+  author: msaburnley
+  description: Bir yandan çalışanların üretken olmasını sağlarken diğer yandan kritik varlıkları korumayı, izlemeyi ve bunlara erişimi denetlemeyi öğrenin.
+  manager: daveba
+  ms.author: ajburnle
+  ms.collection: na
+  ms.date: 09/14/2019
   ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: na
   ms.topic: landing-page
-  ms.date: 04/18/2019
-  ms.author: rolyon
-abstract:
-  description: 'Azure Active Directory (Azure AD) Identity Governance, kuruluşlara çalışanlar ve iş ortakları arasında kimlik yaşam döngüsünü ve erişim yaşam döngüsünü idare etmenin yanı sıra yönetimin güvenliğini sağlama becerisi kazandırır.'
-  aside:
-    image:
-      alt: null
-      height: 112
-      src: media/index/video-thumb-identity-governance.png
-      width: 200
-    title: 'Kaynaklarınıza erişimi idare etme (1:17:24)'
-    href: 'https://www.youtube.com/embed/aY7A0Br8u5M'
-    width: 200
-sections:
-  - title: Identity Governance
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/governance/identity-governance-overview">Identity Governance nedir?</a>
-  - title: Yetkilendirme yönetimi (Önizleme)
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/governance/entitlement-management-overview">Azure AD yetkilendirme yönetimi nedir?</a>
-          - html: <a href="/azure/active-directory/governance/entitlement-management-access-package-first">Öğretici - İlk erişim paketinizi oluşturma</a>
-          - html: <a href="/azure/active-directory/governance/entitlement-management-access-package-edit">Var olan bir erişim paketini düzenleme ve yönetme</a>
-  - title: Erişim gözden geçirmeleri
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/governance/access-reviews-overview">Azure AD erişim gözden geçirmesi nedir?</a>
-          - html: <a href="/azure/active-directory/governance/create-access-review">Grup veya uygulamaların erişim gözden geçirmesini oluşturma</a>
-          - html: <a href="/azure/active-directory/governance/perform-access-review">Grup veya uygulamalara erişimi gözden geçirme</a>
-  - title: Kullanım koşulları
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/conditional-access/terms-of-use">Kullanım koşulları gerekli kılınsın mı?</a>
+  services: active-directory
+  ms.openlocfilehash: 98b634b7aba20fc79e2bae15a5786aae4d1a0bd1
+  ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/30/2019
+  ms.locfileid: "73173048"
+landingContent:
+- title: Identity Governance hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD Identity Governance nedir?
+      url: identity-governance-overview.md
+  - linkListType: video
+    links:
+    - text: Kaynaklarınıza erişimi idare etme
+      url: https://www.youtube.com/watch?v=bFfowdpApu4&list=PLQXpv_NQsPIBg3op2xONM9KgwlayFDue6
+- title: Gruplara, uygulamalara ve sitelere erişimin yaşam döngüsünü idare etme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD yetkilendirme yönetimi nedir?
+      url: entitlement-management-overview.md
+  - linkListType: tutorial
+    links:
+    - text: Kullanıcıların ihtiyaç duydukları erişimi istemesine yardımcı olacak ilk erişim paketinizi oluşturma
+      url: entitlement-management-access-package-first.md
+  - linkListType: concept
+    links:
+    - text: Temsil ve roller
+      url: entitlement-management-delegate.md
+- title: Gruplara, uygulamalara ve ayrıcalıklı rollere erişimi yeniden onaylama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD erişim gözden geçirmesi nedir?
+      url: access-reviews-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Kullanıcıların gerekenden fazlasına erişim elde etmediğinden emin olmak için bir erişim gözden geçirmesi oluşturma
+      url: create-access-review.md
+    - text: Grup veya uygulamalara erişimi gözden geçirme
+      url: perform-access-review.md
+- title: Kullanıcıları ayrıcalıklı roller için uygun hale getirme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD Privileged Identity Management nedir?
+      url: ../privileged-identity-management/pim-configure.md
+- title: Kullanıcıların bildirimleri görmesini sağlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Kullanıcıların bir uygulama kullanırken kullanım koşullarını kabul etmesini gerekli kılma
+      url: ../conditional-access/terms-of-use.md

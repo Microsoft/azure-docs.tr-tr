@@ -1,71 +1,64 @@
 ---
-title: Yeni bir Azure Kubernetes Service (AKS) kümesini izleme | Microsoft Docs
-description: Yeni bir Azure Kubernetes Service (AKS) kümesi için Azure İzleyici ile kapsayıcıları abonelik için izlemeyi etkinleştirme hakkında bilgi edinin.
-services: azure-monitor
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
+title: Yeni bir Azure Kubernetes hizmeti (AKS) kümesini izleme | Microsoft Docs
+description: Kapsayıcılar için Azure Izleyici aboneliğine sahip yeni bir Azure Kubernetes hizmeti (AKS) kümesi için izlemeyi nasıl etkinleştireceğinizi öğrenin.
 ms.service: azure-monitor
+ms.subservice: ''
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 04/25/2019
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: d73ab2d5cca4f20f954a0b0e972111d3f395c3c8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 04/25/2019
+ms.openlocfilehash: 01553eb020c1493488e941705d9df8c8c946340a
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65077538"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73478705"
 ---
-# <a name="enable-monitoring-of-a-new-azure-kubernetes-service-aks-cluster"></a>Yeni bir Azure Kubernetes Service (AKS) kümesini izlemeyi etkinleştir
+# <a name="enable-monitoring-of-a-new-azure-kubernetes-service-aks-cluster"></a>Yeni bir Azure Kubernetes hizmeti (AKS) kümesini izlemeyi etkinleştir
 
-Bu makalede, kapsayıcılar için Azure üzerinde barındırılan yönetilen Kubernetes kümesini izlemek için İzleyici ayarlanacağı açıklanır [Azure Kubernetes hizmeti](https://docs.microsoft.com/azure/aks/) , aboneliğinizde dağıtmak hazırlanıyor.
+Bu makalede, aboneliğinizden dağıtmaya hazırlanmakta olduğunuz [Azure Kubernetes hizmetinde](https://docs.microsoft.com/azure/aks/) barındırılan yönetilen Kubernetes kümesini izlemek için kapsayıcılar Için Azure izleyici 'nin nasıl ayarlanacağı açıklanır.
 
-Desteklenen yöntemlerden birini kullanarak bir AKS kümesi izleme etkinleştirebilirsiniz:
+Desteklenen yöntemlerden birini kullanarak bir AKS kümesinin izlenmesini etkinleştirebilirsiniz:
 
 * Azure CLI
 * Terraform
 
-## <a name="enable-using-azure-cli"></a>Azure CLI kullanarak etkinleştirin
+## <a name="enable-using-azure-cli"></a>Azure CLı kullanarak etkinleştirme
 
-Azure CLI ile oluşturulan yeni bir AKS kümesi izlemeyi etkinleştirmek için hızlı başlangıç makalesinde bölümünde adım izleyin [oluşturma AKS kümesi](../../aks/kubernetes-walkthrough.md#create-aks-cluster).  
-
->[!NOTE]
->Azure CLI'yı kullanmayı seçerseniz, ilk CLI'yi yerel olarak yükleyip kullanmayı gerekir. Azure CLI Sürüm 2.0.59 çalıştırıyor olmanız gerekir veya üzeri. Sürümünüzü belirlemek için çalıştırma `az --version`. Gerekirse yükleyin veya Azure CLI'yı yükseltmek için bkz: [Azure CLI'yı yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli). 
->
-
-## <a name="enable-using-terraform"></a>Terraform kullanarak etkinleştirin
-
-Eğer [Terraform kullanan yeni bir AKS kümesi dağıtma](../../terraform/terraform-create-k8s-cluster-with-tf-and-aks.md), profilinde gerekli bağımsız değişkenleri belirtmeniz [Log Analytics çalışma alanı oluşturmak için](https://www.terraform.io/docs/providers/azurerm/r/log_analytics_workspace.html) değil seçerseniz, mevcut bir belirtmek. 
+Azure CLı ile oluşturulan yeni bir AKS kümesinin izlenmesini etkinleştirmek için, [aks kümesi oluşturma](../../aks/kubernetes-walkthrough.md#create-aks-cluster)bölümünde yer alarak hızlı başlangıç makalesindeki adımları izleyin.  
 
 >[!NOTE]
->Terraform kullanmayı seçerseniz, Terraform'u Azure RM sağlayıcısı sürümü 1.17.0 çalıştırmalıdır veya üzeri.
+>Azure CLı 'yı kullanmayı seçerseniz, önce CLı 'yi yerel olarak yüklemeniz ve kullanmanız gerekir. Azure CLı sürüm 2.0.74 veya üstünü çalıştırıyor olmanız gerekir. Sürümünüzü belirlemek için `az --version`çalıştırın. Azure CLı 'yi yüklemeniz veya yükseltmeniz gerekiyorsa bkz. [Azure CLI 'Yı yüklemek](https://docs.microsoft.com/cli/azure/install-azure-cli). Aks-Preview CLı uzantısı sürümü 0.4.12 veya üstünü yüklediyseniz, AKS Önizleme özellikleri Azure US Governmnet bulutu 'nda kullanılamadığından, önizleme uzantısını etkinleştirmek için yaptığınız tüm değişiklikleri kaldırın.
 
-Azure İzleyici kapsayıcılar için çalışma alanına eklemek için bkz [azurerm_log_analytics_solution](https://www.terraform.io/docs/providers/azurerm/r/log_analytics_solution.html) ve dahil ederek profilini tamamlayın [ **addon_profile** ](https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#addon_profile) belirtin **oms_agent**. 
+## <a name="enable-using-terraform"></a>Terrayform kullanarak etkinleştir
 
-İzleme etkin ve tüm yapılandırma görevleri başarıyla tamamlandıktan sonra iki yöntemden biriyle kümenizin performansı izleyebilirsiniz:
+[Teresform kullanarak yeni bir AKS kümesi dağıtıyorsanız](../../terraform/terraform-create-k8s-cluster-with-tf-and-aks.md), mevcut bir tane belirtmeyi seçmediyseniz [Log Analytics bir çalışma alanı oluşturmak için](https://www.terraform.io/docs/providers/azurerm/r/log_analytics_workspace.html) profilde gereken bağımsız değişkenleri belirtirsiniz. 
 
-* Seçerek doğrudan AKS kümesinde **sistem durumu** sol bölmesinde.
-* Seçerek **İzleyici kapsayıcı öngörüleri** AKS kümesi sayfasında seçilen küme için bir kutucuk. Azure İzleyicisi'nde sol bölmede seçin **sistem durumu**. 
+>[!NOTE]
+>Terrayform kullanmayı seçerseniz, Teraform Azure RM Provider sürüm 1.17.0 veya üstünü çalıştırıyor olmanız gerekir.
 
-  ![AKS, kapsayıcılar için Azure İzleyici seçmek için seçenekleri](./media/container-insights-onboard/kubernetes-select-monitoring-01.png)
+Çalışma alanına kapsayıcılar için Azure Izleyici eklemek için bkz. [azurerm_log_analytics_solution](https://www.terraform.io/docs/providers/azurerm/r/log_analytics_solution.html) ve [**addon_profile**](https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#addon_profile) 'i ekleyerek profili doldurun ve **oms_agent**belirtin. 
 
-İzleme etkinleştirdikten sonra küme için sistem durumu ölçümleri görmeden önce yaklaşık 15 dakika sürebilir. 
+İzlemeyi etkinleştirdikten ve tüm yapılandırma görevleri başarıyla tamamlandıktan sonra, kümenizin performansını iki şekilde izleyebilirsiniz:
 
-## <a name="verify-agent-and-solution-deployment"></a>Aracı ve çözüm dağıtımı doğrulama
-Aracı sürümü ile *06072018* veya daha sonra hem aracıyı hem de çözüm başarıyla dağıtıldı doğrulayabilirsiniz. Aracıyı önceki sürümleriyle birlikte, yalnızca aracı dağıtımı doğrulayabilirsiniz.
+* Sol bölmedeki **sistem durumu** ' nu seçerek doğrudan aks kümesinde.
+* Seçili küme için AKS kümesi sayfasında bulunan **kapsayıcı öngörülerini izle** kutucuğunu seçin. Azure Izleyici 'de, sol bölmede **sistem durumu**' nu seçin. 
 
-### <a name="agent-version-06072018-or-later"></a>Aracı 06072018 veya sonraki bir sürümü
-Aracı başarıyla dağıtıldığını doğrulamak için aşağıdaki komutu çalıştırın. 
+  ![AKS 'teki kapsayıcılar için Azure Izleyicisini seçme seçenekleri](./media/container-insights-onboard/kubernetes-select-monitoring-01.png)
+
+İzlemeyi etkinleştirdikten sonra, küme için sistem durumu ölçümlerini görüntüleyebilmeniz yaklaşık 15 dakika sürebilir. 
+
+## <a name="verify-agent-and-solution-deployment"></a>Aracıyı ve çözüm dağıtımını doğrulama
+Aracı sürümü *06072018* veya sonraki sürümlerde, hem aracının hem de çözümün başarıyla dağıtıldığını doğrulayabilirsiniz. Aracının önceki sürümleriyle, yalnızca aracı dağıtımını doğrulayabilirsiniz.
+
+### <a name="agent-version-06072018-or-later"></a>Aracı sürüm 06072018 veya üzeri
+Aracının başarıyla dağıtıldığını doğrulamak için aşağıdaki komutu çalıştırın. 
 
 ```
 kubectl get ds omsagent --namespace=kube-system
 ```
 
-Doğru şekilde dağıtıldığını gösteren aşağıdaki çıktıya benzemelidir:
+Çıktının düzgün şekilde dağıtıldığını belirten aşağıdakine benzer olması gerekir:
 
 ```
 User@aksuser:~$ kubectl get ds omsagent --namespace=kube-system 
@@ -73,13 +66,13 @@ NAME       DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR 
 omsagent   2         2         2         2            2           beta.kubernetes.io/os=linux   1d
 ```  
 
-Çözümün dağıtımı doğrulamak için aşağıdaki komutu çalıştırın:
+Çözümün dağıtımını doğrulamak için şu komutu çalıştırın:
 
 ```
 kubectl get deployment omsagent-rs -n=kube-system
 ```
 
-Doğru şekilde dağıtıldığını gösteren aşağıdaki çıktıya benzemelidir:
+Çıktının düzgün şekilde dağıtıldığını belirten aşağıdakine benzer olması gerekir:
 
 ```
 User@aksuser:~$ kubectl get deployment omsagent-rs -n=kube-system 
@@ -87,15 +80,15 @@ NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE    AGE
 omsagent   1         1         1            1            3h
 ```
 
-### <a name="agent-version-earlier-than-06072018"></a>Aracı sürümü 06072018 öncesi
+### <a name="agent-version-earlier-than-06072018"></a>06072018 'den önceki aracı sürümü
 
-Log Analytics aracı sürümü önce kullanıma sunduğunu doğrulamak için *06072018* düzgün bir şekilde aşağıdaki komutu çalıştırarak dağıtılır:  
+*06072018* ' den önce yayınlanan Log Analytics Agent sürümünün düzgün şekilde dağıtılmadığını doğrulamak için şu komutu çalıştırın:  
 
 ```
 kubectl get ds omsagent --namespace=kube-system
 ```
 
-Doğru şekilde dağıtıldığını gösteren aşağıdaki çıktıya benzemelidir:  
+Çıktının düzgün şekilde dağıtıldığını belirten aşağıdakine benzer olması gerekir:  
 
 ```
 User@aksuser:~$ kubectl get ds omsagent --namespace=kube-system 
@@ -103,14 +96,14 @@ NAME       DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR 
 omsagent   2         2         2         2            2           beta.kubernetes.io/os=linux   1d
 ```  
 
-## <a name="view-configuration-with-cli"></a>CLI ile yapılandırmayı görüntüle
-Kullanım `aks show` etkin çözüm olduğu gibi ayrıntılarını almak için komut, Log Analytics çalışma alanı ResourceId nedir ve küme hakkında özet ayrıntıları.  
+## <a name="view-configuration-with-cli"></a>CLı ile yapılandırmayı görüntüleme
+Çözüm etkin değil veya Not, Log Analytics çalışma alanı RESOURCEID nedir ve kümeyle ilgili Özet ayrıntılar gibi ayrıntıları almak için `aks show` komutunu kullanın.  
 
 ```azurecli
 az aks show -g <resourceGroupofAKSCluster> -n <nameofAksCluster>
 ```
 
-Birkaç dakika sonra komut tamamlanır ve JSON biçimli çözümü hakkında bilgi döndürür.  Komutun sonuçlarını izleme eklenti profilini göstermesi gerekir ve aşağıdaki örnek çıktıya benzer:
+Birkaç dakika sonra komut tamamlanır ve çözüm hakkında JSON biçimli bilgileri döndürür.  Komutun sonuçları izleme eklentisi profilini göstermelidir ve aşağıdaki örnek çıktıya benzer:
 
 ```
 "addonProfiles": {
@@ -125,6 +118,6 @@ Birkaç dakika sonra komut tamamlanır ve JSON biçimli çözümü hakkında bil
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Çözüm ekleme girişimi sırasında sorunlarla karşılaşırsanız, gözden [sorun giderme kılavuzu](container-insights-troubleshoot.md)
+* Çözümü oluşturmaya çalışırken sorunlarla karşılaşırsanız, [sorun giderme kılavuzunu](container-insights-troubleshoot.md) gözden geçirin
 
-* AKS kümesi düğümlerin ve pod'ları için sistem durumu ölçümleri yakalamak için etkinleştirilmiş izleme ile bu sistem durumu ölçümleri Azure portalında kullanılabilir. Kapsayıcılar için Azure İzleyicisi'ni kullanma konusunda bilgi almak için bkz: [görünümü Azure Kubernetes hizmeti sistem durumu](container-insights-analyze.md).
+* İzleme etkinken, AKS kümeniz ve üzerinde çalışan iş yüklerinizin sistem durumunu ve kaynak kullanımını toplayıp, kapsayıcılar için Azure Izleyicisini [nasıl kullanacağınızı](container-insights-analyze.md) öğrenin.

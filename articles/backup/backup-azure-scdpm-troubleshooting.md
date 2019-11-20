@@ -1,92 +1,93 @@
 ---
-title: System Center Data Protection Manager'Azure yedekleme ile ilgili sorunları giderme
-description: System Center Data Protection Manager sorunlarını giderme.
-services: backup
-author: kasinh
-manager: vvithal
-ms.service: backup
+title: System Center Data Protection Manager sorunlarını giderme
+description: Bu makalede, System Center Data Protection Manager kullanırken karşılaşabileceğiniz sorunlara yönelik çözümler bulun.
 ms.topic: conceptual
 ms.date: 01/30/2019
-ms.author: kasinh
-ms.openlocfilehash: 4108616e3ae41e2c88b74bb08d5f846c0035101f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 8ecd2f469c8fcaea9761a1a3033fa0c44a255ae7
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60236204"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172708"
 ---
 # <a name="troubleshoot-system-center-data-protection-manager"></a>System Center Data Protection Manager sorunlarını giderme
 
-Bu makalede Data Protection Manager'ı kullanırken karşılaşabileceğiniz sorunların çözümleri açıklanmaktadır.
+Bu makalede Data Protection Manager kullanırken karşılaşabileceğiniz sorunlara yönelik çözümler açıklanmaktadır.
 
-En son sürüm notları için System Center Data Protection Manager [System Center belgeleri](https://docs.microsoft.com/system-center/dpm/dpm-release-notes?view=sc-dpm-2016). ' De Data Protection Manager için destek hakkında daha fazla bilgi [bu Matris](https://docs.microsoft.com/system-center/dpm/dpm-protection-matrix?view=sc-dpm-2016).
+System Center Data Protection Manager için en son sürüm notları için bkz. [System Center belgeleri](https://docs.microsoft.com/system-center/dpm/dpm-release-notes?view=sc-dpm-2016). [Bu matristeki](https://docs.microsoft.com/system-center/dpm/dpm-protection-matrix?view=sc-dpm-2016)Data Protection Manager için destek hakkında daha fazla bilgi edinebilirsiniz.
 
+## <a name="error-replica-is-inconsistent"></a>Hata: çoğaltma tutarsız
 
-## <a name="error-replica-is-inconsistent"></a>Hata: Çoğaltma tutarsız
+Çoğaltma, aşağıdaki nedenlerden dolayı tutarsız olabilir:
 
-Aşağıdaki nedenlerden dolayı bir çoğaltma tutarsız olabilir:
 - Çoğaltma oluşturma işi başarısız olur.
-- Değişiklik günlüğü sorunlar vardır.
-- Ses düzeyi filtresi bit eşlem hatalar içeriyor.
-- Kaynak makine beklenmedik bir şekilde kapatılır.
-- Eşitleme günlüğüne taşıyor.
-- Çoğaltmayı gerçekten tutarlı değil.
+- Değişiklik günlüğünde sorunlar var.
+- Birim düzeyi filtresi bit eşlem hata içeriyor.
+- Kaynak makine beklenmedik şekilde kapanıyor.
+- Eşitleme günlüğü taşıyor.
+- Çoğaltma gerçekten tutarsız.
 
 Bu sorunu çözmek için aşağıdaki eylemleri gerçekleştirin:
-- Tutarsız durum kaldırmak için el ile tutarlılık denetimi çalıştırın veya günlük tutarlılık denetimi zamanlayabilir.
-- Microsoft Azure Backup sunucusu ve Data Protection Manager'ın en son sürümünü kullandığınızdan emin olun.
-- Emin **otomatik tutarlılık** seçeneği etkinleştirilmiştir.
-- Komut isteminden hizmetleri yeniden başlatmayı deneyin. Kullanım `net stop dpmra` komutunu `net start dpmra`.
-- Ağ bağlantısı ve bant genişliği gereksinimlerini karşıladığı emin olun.
-- Kaynak makine beklenmedik biçimde kapatıldı olmadığını kontrol edin.
-- Disk sağlıklı olduğunu ve çoğaltma için yeterli alanı olduğundan emin olun.
-- Eşzamanlı olarak çalışan hiçbir yinelenen yedekleme işleri olduğundan emin olun.
 
-## <a name="error-online-recovery-point-creation-failed"></a>Hata: Çevrimiçi kurtarma noktası oluşturma başarısız oldu
+- Tutarsız durumu kaldırmak için tutarlılık denetimini el ile çalıştırın veya günlük tutarlılık denetimi zamanlayın.
+- Microsoft Azure Backup Server ve Data Protection Manager 'ın en son sürümünü kullandığınızdan emin olun.
+- **Otomatik tutarlılık** ayarının etkinleştirildiğinden emin olun.
+- Hizmetleri komut isteminden yeniden başlatmayı deneyin. `net stop dpmra` komutunu ve ardından `net start dpmra`' i kullanın.
+- Ağ bağlantısı ve bant genişliği gereksinimlerini karşıladığınızı doğrulayın.
+- Kaynak makinenin beklenmedik şekilde kapandığından emin olun.
+- Diskin sağlıklı olduğundan ve çoğaltma için yeterli alan olduğundan emin olun.
+- Aynı anda çalışan yinelenen yedekleme işlerinin bulunmadığından emin olun.
 
-Bu sorunu çözmek için aşağıdaki eylemleri gerçekleştirin:
-- Azure yedekleme aracısının en son sürümünü kullandığınızdan emin olun.
-- El ile koruma görev alanında kurtarma noktası oluşturmayı deneyin.
-- Veri kaynağı üzerinde tutarlılık denetimi çalıştırdığınızdan emin olun.
-- Ağ bağlantısı ve bant genişliği gereksinimlerini karşıladığı emin olun.
-- Çoğaltma verileri tutarsız bir durumda olduğunda, bu veri kaynağı bir disk kurtarma noktası oluşturun.
-- Çoğaltmayı var ve aktarmasının eksik olduğundan emin olun.
-- Çoğaltma güncelleştirme sıra numarası (USN) günlük oluşturmak için yeterli alanı olduğundan emin olun.
-
-## <a name="error-unable-to-configure-protection"></a>Hata: Koruma yapılandırılamıyor
-
-Data Protection Manager sunucusunun korunan sunucu iletişim kuramıyorsa bu hata oluşur. 
+## <a name="error-online-recovery-point-creation-failed"></a>Hata: çevrimiçi kurtarma noktası oluşturma başarısız oldu
 
 Bu sorunu çözmek için aşağıdaki eylemleri gerçekleştirin:
-- Azure yedekleme aracısının en son sürümünü kullandığınızdan emin olun.
-- Data Protection Manager sunucunuza ve korunan sunucu arasında bağlantı (ağ/güvenlik duvarı/proxy) olduğundan emin olun.
-- Bir SQL server koruyorsanız emin **oturum açma özellikleri** > **NT AUTHORITY\SYSTEM** özelliği gösterir **sysadmin** ayarı etkin.
 
-## <a name="error-server-not-registered-as-specified-in-vault-credential-file"></a>Hata: Sunucu belirtildiği gibi kasa kimlik bilgilerini kayıtlı değil
+- Azure Backup aracısının en son sürümünü kullandığınızdan emin olun.
+- Koruma görev alanında el ile bir kurtarma noktası oluşturmayı deneyin.
+- Veri kaynağında tutarlılık denetimi çalıştırtığınızdan emin olun.
+- Ağ bağlantısı ve bant genişliği gereksinimlerini karşıladığınızı doğrulayın.
+- Çoğaltma verileri tutarsız bir durumda olduğunda, bu veri kaynağının bir disk kurtarma noktası oluşturun.
+- Çoğaltmanın mevcut olduğundan ve eksik olmadığından emin olun.
+- Çoğaltmanın, güncelleştirme sıra numarası (USN) günlüğü oluşturmak için yeterli alana sahip olduğundan emin olun.
 
-Data Protection Manager/Azure Backup sunucusu verileri için kurtarma işlemi sırasında bu hata oluşur. Kurtarma işleminde kullanılan kasa kimlik bilgilerini, Data Protection Manager/Azure Backup sunucusu için kurtarma Hizmetleri kasasına ait değil.
+## <a name="error-unable-to-configure-protection"></a>Hata: koruma yapılandırılamıyor
 
-Bu sorunu çözmek için aşağıdaki adımları gerçekleştirin:
-1. Kasa kimlik bilgilerini, Data Protection Manager/Azure Backup sunucusu kayıtlı kurtarma Hizmetleri kasasından indirin.
-2. En son indirilen kasa kimlik bilgilerini kullanarak sunucuyu kasaya kaydetmek bu seçeneği deneyin.
+Data Protection Manager sunucusu korunan sunucuyla iletişim kuramadığından bu hata oluşur.
 
-## <a name="error-no-recoverable-data-or-selected-server-not-a-data-protection-manager-server"></a>Hata: Kurtarılabilir veriler veya seçili sunucu Data Protection Manager sunucu yok
+Bu sorunu çözmek için aşağıdaki eylemleri gerçekleştirin:
 
-Aşağıdaki nedenlerle bu hata oluşur:
-- Hiçbir veri koruma Yöneticisi'ni / Azure Backup sunucusu kurtarma Hizmetleri kasasına kayıtlı.
-- Sunucuları, meta veriler henüz yüklemediyseniz.
-- Seçili sunucu bir veri koruma Yöneticisi/Azure Backup sunucusu değil.
+- Azure Backup aracısının en son sürümünü kullandığınızdan emin olun.
+- Data Protection Manager sunucunuz ve korumalı sunucu arasında bağlantı (ağ/güvenlik duvarı/proxy) olduğundan emin olun.
+- SQL Server 'ı koruyorsanız, > **NT AUTHORITY\SYSTEM** özelliğinin **oturum açma özellikleri** 'nin etkinleştirilmiş **sysadmin** ayarını belirttiğinden emin olun.
 
-Data Protection Manager/Azure Backup sunuculara kurtarma Hizmetleri kasasına kayıtlı olduğunda, sorunu çözmek için aşağıdaki adımları gerçekleştirin:
+## <a name="error-server-not-registered-as-specified-in-vault-credential-file"></a>Hata: sunucu, kasa kimlik bilgisi dosyasında belirtildiği şekilde kaydedilmedi
+
+Bu hata, Data Protection Manager/Azure Backup sunucu verileri için kurtarma işlemi sırasında oluşur. Kurtarma işleminde kullanılan kasa kimlik bilgileri dosyası Data Protection Manager/Azure Backup sunucusu için kurtarma hizmetleri kasasına ait değil.
+
+Bu sorunu çözmek için şu adımları uygulayın:
+
+1. Data Protection Manager/Azure Backup sunucusunun kaydedildiği kurtarma hizmetleri kasasından kasa kimlik bilgileri dosyasını indirin.
+2. En son indirilen kasa kimlik bilgileri dosyasını kullanarak sunucuyu kasayla kaydetmeyi deneyin.
+
+## <a name="error-no-recoverable-data-or-selected-server-not-a-data-protection-manager-server"></a>Hata: kurtarılabilir veri yok veya seçili sunucu Data Protection Manager sunucusu değil
+
+Bu hata aşağıdaki nedenlerden dolayı oluşur:
+
+- Kurtarma Hizmetleri kasasına kayıtlı başka Data Protection Manager/Azure Backup sunucusu yok.
+- Sunucular henüz meta verileri karşıya yüklemedi.
+- Seçili sunucu bir Data Protection Manager/Azure Backup sunucusu değil.
+
+Diğer Data Protection Manager/Azure Backup sunucuları kurtarma hizmetleri kasasına kaydedildiğinde, sorunu çözmek için aşağıdaki adımları gerçekleştirin:
+
 1. En son Azure Backup aracısının yüklü olduğundan emin olun.
-2. En son aracıyı yüklendiğinden emin olduktan sonra kurtarma işlemini başlatmadan önce bir gün bekleyin. Gecelik yedekleme işi için tüm korumalı yedekleme meta verileri buluta yükler. Yedekleme verileri, ardından Kurtarma için kullanılabilir.
+2. En son aracının yüklendiğinden emin olduktan sonra, kurtarma işlemine başlamadan önce bir gün bekleyin. Gecelik yedekleme işi tüm korumalı yedeklemelerin meta verilerini buluta yükler. Yedekleme verileri daha sonra kurtarma için kullanılabilir.
 
-## <a name="error-provided-encryption-passphrase-doesnt-match-passphrase-for-server"></a>Hata: Sağlanan şifreleme parolası sunucusu için parola eşleşmiyor
+## <a name="error-provided-encryption-passphrase-doesnt-match-passphrase-for-server"></a>Hata: belirtilen şifreleme parolası sunucu parolası ile eşleşmiyor
 
-Bu hata, Data Protection Manager/Azure Backup server verilerini kurtarırken şifreleme işlemi sırasında oluşur. Sunucunun şifreleme parolası kurtarma işleminde kullanılan şifreleme parolası eşleşmiyor. Sonuç olarak, aracı verilerin şifresini çözemez ve kurtarma başarısız olur.
+Bu hata, Data Protection Manager/Azure Backup sunucu verilerini kurtarırken şifreleme işlemi sırasında oluşur. Kurtarma işleminde kullanılan şifreleme parolası, sunucunun şifreleme parolası ile eşleşmiyor. Sonuç olarak, aracı verilerin şifresini çözemez ve kurtarma başarısız olur.
 
 > [!IMPORTANT]
-> Şifreleme parolası kaybeder veya unutursanız, verileri kurtarmak için diğer yöntemler vardır. Tek seçenek, parolayı yeniden sağlamaktır. Gelecekteki yedekleme verilerini şifrelemek için kullanılacak yeni parolayı kullanın.
+> Şifreleme parolasını unutur veya kaybederseniz, verileri kurtarmaya yönelik başka bir yöntem yoktur. Tek seçenek, parolayı yeniden oluşturmak içindir. Gelecekteki yedekleme verilerini şifrelemek için yeni parolayı kullanın.
 >
-> Her zaman veri kurtarma gerçekleştiriyorsanız Data Protection Manager/Azure Backup sunucusu ile ilişkili şifreleme parolayı belirtin. 
+> Verileri kurtarırken, her zaman Data Protection Manager/Azure Backup sunucusuyla ilişkili şifreleme parolasını sağlayın.
 >

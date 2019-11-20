@@ -1,31 +1,28 @@
 ---
-title: Web kancaları/Logic Apps/Azure işlevleri/Automation runbook'ları için ortak uyarı şema tanımları
-description: Ortak uyarı şema tanımları için Web kancaları/Logic Apps/Azure işlevleri/Automation runbook'ları anlama
-author: anantr
-services: azure-monitor
+title: Azure Izleyici için ortak uyarı şeması tanımları
+description: Azure Izleyici için ortak uyarı şeması tanımlarını anlama
 ms.service: azure-monitor
+ms.subservice: alerts
 ms.topic: conceptual
+author: anantr
+ms.author: robb
 ms.date: 03/14/2019
-ms.author: anantr
-ms.component: alerts
-ms.openlocfilehash: 5f351dd7fddb4c15b28954eccf8ada3bfc14dbca
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: d1d822a5e7dadffd6be841e51ac407995adba2ea
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447646"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72552564"
 ---
 # <a name="common-alert-schema-definitions"></a>Ortak uyarı şeması tanımları
 
-Bu makalede [ortak uyarı şema tanımları](https://aka.ms/commonAlertSchemaDocs) Web kancaları/Logic Apps/Azure işlevleri/Automation runbook'ları için. 
+Bu makalede, Web kancaları, Azure Logic Apps, Azure Işlevleri ve Azure Otomasyonu runbook 'ları gibi Azure Izleyici için [genel uyarı şeması tanımları](https://aka.ms/commonAlertSchemaDocs) açıklanmaktadır. 
 
-## <a name="overview"></a>Genel Bakış
+Herhangi bir uyarı örneği, etkilenen kaynağı ve uyarının nedenini açıklar. Bu örnekler, aşağıdaki bölümlerde ortak şemada açıklanmıştır:
+* **Essentials**: uyarının hangi kaynakla ilgili olduğunu açıklayan tüm uyarı türlerinde ortak olan standartlaştırılmış alanlar kümesi (örneğin, önem derecesi veya açıklama). 
+* **Uyarı bağlamı**: uyarı türüne göre değişen alanlarla, uyarının nedenini açıklayan bir alan kümesi. Örneğin, bir ölçüm uyarısı, uyarı bağlamındaki ölçüm adı ve ölçüm değeri gibi alanları içerir, ancak bir etkinlik günlüğü uyarısıyla uyarıyı oluşturan olay hakkında bilgi bulunur. 
 
-Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nedenini**, ve bu örnekler, ortak şema aşağıdaki bölümlerde açıklanmıştır:
-* **Essentials**: Bir dizi **standart alanlar**açıklayan tüm uyarı türleri arasında ortak **hangi kaynak** uyarı ek ortak uyarı meta verileri birlikte (örneğin, önem derecesi veya açıklama) belirtir. 
-* **Uyarı bağlamı**: Bir dizi tanımlayan alanları **uyarının neden**, farklı alanlara sahip **uyarı türüne göre**. Örneğin, bir etkinlik günlüğü uyarısı uyarının olayla ilgili bilgileri yoktur ancak bir ölçüm uyarısı uyarı bağlamındaki ölçüm değeri ve ölçüm adı gibi alanlarını gerekir. 
-
-##### <a name="sample-alert-payload"></a>Örnek uyarı yükü
+**Örnek uyarı yükü**
 ```json
 {
   "schemaId": "azureMonitorCommonAlertSchema",
@@ -74,25 +71,25 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
 }
 ```
 
-## <a name="essentials-fields"></a>'Temel' alanları
+## <a name="essentials"></a>Essentials
 
 | Alan | Açıklama|
 |:---|:---|
-| Alertıd | Uyarı örneği benzersiz olarak tanımlayan GUID. |
-| alertRule | Uyarı örneği oluşturulan bir uyarı kuralı adı. |
-| Severity | Uyarının önem derecesi. Olası değerler: Sev0, Sev1, Sev2, Sev3, Sev4 |
-| signalType | Uyarı kuralı tanımlı sinyali tanımlar. Olası değerler: Ölçüm, günlük, etkinlik günlüğü |
-| monitorCondition | Bir uyarı tetiklendiğinde uyarı izleme koşulu 'Fired' için ayarlanmış. Uyarıya ateşlenmesine neden altta yatan durumun temizlediğinde, izleme koşulu 'Çözümlendi' olarak ayarlanır.   |
-| monitoringService | İzleme hizmeti veya uyarıyı oluşturan bir çözüm. Uyarı bağlamı alanlarını izleme hizmeti tarafından belirlenir. |
-| alertTargetIds | Bir uyarının ARM etkilenen kimlikleri tüm hedeflerin listesi. Bir Log Analytics çalışma alanı veya Application Insights örneği üzerinde tanımlanan günlük uyarısı için bunu ilgili çalışma/uygulama olacak. |
-| originAlertId | Uyarı örneği olarak, oluşturma izleme hizmeti tarafından oluşturulan kimliği. |
-| firedDateTime | Uyarı örneği UTC zaman harekete geçirildi, tarih saat |
-| resolvedDateTime | Uyarı örneği için izleme koşulu 'Çözümlenmiş' UTC ayarlandığında, tarih saat. Şu anda yalnızca ölçüm uyarıları için geçerlidir.|
-| description | Uyarı kuralda tanımlanan açıklaması |
-|essentialsVersion| Temel Parçalar bölümünde ilişkin sürüm numarasıdır.|
-|alertContextVersion | AlertContext bölümü için sürüm numarası |
+| AlertId | GUID, uyarı örneğini benzersiz bir şekilde tanımlıyor. |
+| alertRule | Uyarı örneğini oluşturan uyarı kuralının adı. |
+| Önem Derecesi | Uyarının önem derecesi. Olası değerler: Sev0, Sev1, Sev2, Sev3 veya Sev4. |
+| signalType | Uyarı kuralının tanımlandığı sinyali tanımlar. Olası değerler: ölçüm, günlük veya etkinlik günlüğü. |
+| monitorCondition | Bir uyarı tetiklendiğinde, uyarının izleyici koşulu **tetiklenir**olarak ayarlanır. Uyarının tetiklenmesine neden olan temeldeki durum temizlediğinde, izleme koşulu **çözüldü**olarak ayarlanır.   |
+| monitoringService | Uyarıyı oluşturan izleme hizmeti veya çözümü. Uyarı bağlamı alanları izleme hizmeti tarafından dikte edilir. |
+| Alerttargetıds | Bir uyarının etkilenen hedeflerini Azure Resource Manager kimliklerinin listesi. Log Analytics çalışma alanında veya Application Insights örneğinde tanımlanan bir günlük uyarısı için, ilgili çalışma alanı veya uygulamadır. |
+| Originalertıd | Uyarı örneğinin, onu oluşturan izleme hizmeti tarafından oluşturulan KIMLIĞI. |
+| firedDateTime | Uyarı örneğinin Eşgüdümlü Evrensel Saat (UTC) olarak tetiklenme tarihi ve saati. |
+| resolvedDateTime | Uyarı örneği için izleyici koşulunun UTC olarak **çözümlendi** olarak ayarlandığı tarih ve saat. Şu anda yalnızca ölçüm uyarıları için geçerlidir.|
+| açıklama | Uyarı kuralında tanımlandığı şekilde açıklama. |
+|essentialsVersion| Essentials bölümünün sürüm numarası.|
+|alertContextVersion | @No__t_0 bölümü için sürüm numarası. |
 
-##### <a name="sample-values"></a>Örnek değerler
+**Örnek değerler**
 ```json
 {
   "essentials": {
@@ -114,13 +111,13 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
 }
 ```
 
-## <a name="alert-context-fields"></a>'Uyarı bağlamı' alanları
+## <a name="alert-context"></a>Uyarı bağlamı
 
-### <a name="metric-alerts"></a>Ölçüm Uyarıları
+### <a name="metric-alerts"></a>Ölçüm uyarıları
 
-#### <a name="monitoringservice--platform"></a>monitoringService 'Platform' =
+#### <a name="monitoringservice--platform"></a>`monitoringService` = `Platform`
 
-##### <a name="sample-values"></a>Örnek değerler
+**Örnek değerler**
 ```json
 {
   "alertContext": {
@@ -154,12 +151,11 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
 ### <a name="log-alerts"></a>Günlük uyarıları
 
 > [!NOTE]
-> + Bir özel JSON yükü tanımlandığı günlük uyarıları için ortak Şeması'nı etkinleştirme, aşağıda açıklanan yükü şemaya döner.
-> + Uyarıları etkin ortak şemaya sahip 256 KB uyarı başına bir boyut üst sınırı vardır. **Bunlar Bu eşik geçilecek uyarı boyutu neden oluyorsa arama sonuçları günlük uyarıları yükünde katıştırılmış değil.** Bu, ' % s'bayrağı 'IncludedSearchResults' denetleyerek belirlenebilir. Burada arama sonuçları dahil değildir senaryolarda, birlikte arama sorgusunu kullanmak için önerilir [Log Analytics API](https://docs.microsoft.com/rest/api/loganalytics/query/get). 
+> Özel bir JSON yükü tanımlanmış olan günlük uyarıları için ortak şemanın etkinleştirilmesi, yük şemasını aşağıdaki gibi açıklanan birine geri döndürür. Ortak şema etkin olan uyarıların uyarı başına 256 KB üst boyut sınırı vardır. Arama sonuçları, uyarı boyutunun bu eşiğin çapraz olmasına neden olursa, günlük uyarıları yüküne Katıştırılamaz. Bunu, bayrağını `IncludedSearchResults` denetleyerek belirleyebilirsiniz. Arama sonuçları dahil edilmemişse, arama sorgusunu [log ANALYTICS API](https://docs.microsoft.com/rest/api/loganalytics/query/get)'siyle birlikte kullanmanız gerekir. 
 
-#### <a name="monitoringservice--log-analytics"></a>monitoringService 'Log Analytics' =
+#### <a name="monitoringservice--log-analytics"></a>`monitoringService` = `Log Analytics`
 
-##### <a name="sample-values"></a>Örnek değerler
+**Örnek değerler**
 ```json
 {
   "alertContext": {
@@ -224,9 +220,9 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
 }
 ```
 
-#### <a name="monitoringservice--application-insights"></a>monitoringService 'Application Insights' =
+#### <a name="monitoringservice--application-insights"></a>`monitoringService` = `Application Insights`
 
-##### <a name="sample-values"></a>Örnek değerler
+**Örnek değerler**
 ```json
 {
   "alertContext": {
@@ -287,11 +283,11 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
 }
 ```
 
-### <a name="activity-log-alerts"></a>Etkinlik Günlüğü Uyarıları
+### <a name="activity-log-alerts"></a>Etkinlik günlüğü uyarıları
 
-#### <a name="monitoringservice--activity-log---administrative"></a>monitoringService 'Etkinlik günlüğü - Yönetici' =
+#### <a name="monitoringservice--activity-log---administrative"></a>`monitoringService` = `Activity Log - Administrative`
 
-##### <a name="sample-values"></a>Örnek değerler
+**Örnek değerler**
 ```json
 {
   "alertContext": {
@@ -316,22 +312,118 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
 }
 ```
 
-#### <a name="monitoringservice--servicehealth"></a>monitoringService 'ServiceHealth' =
+#### <a name="monitoringservice--activity-log---policy"></a>`monitoringService` = `Activity Log - Policy`
 
-##### <a name="sample-values"></a>Örnek değerler
+**Örnek değerler**
+```json
+{
+  "alertContext": {
+    "authorization": {
+      "action": "Microsoft.Resources/checkPolicyCompliance/read",
+      "scope": "/subscriptions/<GUID>"
+    },
+    "channels": "Operation",
+    "claims": "{\"aud\":\"https://management.azure.com/\",\"iss\":\"https://sts.windows.net/<GUID>/\",\"iat\":\"1566711059\",\"nbf\":\"1566711059\",\"exp\":\"1566740159\",\"aio\":\"42FgYOhynHNw0scy3T/bL71+xLyqEwA=\",\"appid\":\"<GUID>\",\"appidacr\":\"2\",\"http://schemas.microsoft.com/identity/claims/identityprovider\":\"https://sts.windows.net/<GUID>/\",\"http://schemas.microsoft.com/identity/claims/objectidentifier\":\"<GUID>\",\"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier\":\"<GUID>\",\"http://schemas.microsoft.com/identity/claims/tenantid\":\"<GUID>\",\"uti\":\"Miy1GzoAG0Scu_l3m1aIAA\",\"ver\":\"1.0\"}",
+    "caller": "<GUID>",
+    "correlationId": "<GUID>",
+    "eventSource": "Policy",
+    "eventTimestamp": "2019-08-25T11:11:34.2269098+00:00",
+    "eventDataId": "<GUID>",
+    "level": "Warning",
+    "operationName": "Microsoft.Authorization/policies/audit/action",
+    "operationId": "<GUID>",
+    "properties": {
+      "isComplianceCheck": "True",
+      "resourceLocation": "eastus2",
+      "ancestors": "<GUID>",
+      "policies": "[{\"policyDefinitionId\":\"/providers/Microsoft.Authorization/policyDefinitions/<GUID>/\",\"policySetDefinitionId\":\"/providers/Microsoft.Authorization/policySetDefinitions/<GUID>/\",\"policyDefinitionReferenceId\":\"vulnerabilityAssessmentMonitoring\",\"policySetDefinitionName\":\"<GUID>\",\"policyDefinitionName\":\"<GUID>\",\"policyDefinitionEffect\":\"AuditIfNotExists\",\"policyAssignmentId\":\"/subscriptions/<GUID>/providers/Microsoft.Authorization/policyAssignments/SecurityCenterBuiltIn/\",\"policyAssignmentName\":\"SecurityCenterBuiltIn\",\"policyAssignmentScope\":\"/subscriptions/<GUID>\",\"policyAssignmentSku\":{\"name\":\"A1\",\"tier\":\"Standard\"},\"policyAssignmentParameters\":{}}]"
+    },
+    "status": "Succeeded",
+    "subStatus": "",
+    "submissionTimestamp": "2019-08-25T11:12:46.1557298+00:00"
+  }
+}
+```
+
+#### <a name="monitoringservice--activity-log---autoscale"></a>`monitoringService` = `Activity Log - Autoscale`
+
+**Örnek değerler**
+```json
+{
+  "alertContext": {
+    "channels": "Admin, Operation",
+    "claims": "{\"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/spn\":\"Microsoft.Insights/autoscaleSettings\"}",
+    "caller": "Microsoft.Insights/autoscaleSettings",
+    "correlationId": "<GUID>",
+    "eventSource": "Autoscale",
+    "eventTimestamp": "2019-08-21T16:17:47.1551167+00:00",
+    "eventDataId": "<GUID>",
+    "level": "Informational",
+    "operationName": "Microsoft.Insights/AutoscaleSettings/Scaleup/Action",
+    "operationId": "<GUID>",
+    "properties": {
+      "description": "The autoscale engine attempting to scale resource '/subscriptions/d<GUID>/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachineScaleSets/testVMSS' from 9 instances count to 10 instances count.",
+      "resourceName": "/subscriptions/<GUID>/resourceGroups/voiceassistancedemo/providers/Microsoft.Compute/virtualMachineScaleSets/alexademo",
+      "oldInstancesCount": "9",
+      "newInstancesCount": "10",
+      "activeAutoscaleProfile": "{\r\n  \"Name\": \"Auto created scale condition\",\r\n  \"Capacity\": {\r\n    \"Minimum\": \"1\",\r\n    \"Maximum\": \"10\",\r\n    \"Default\": \"1\"\r\n  },\r\n  \"Rules\": [\r\n    {\r\n      \"MetricTrigger\": {\r\n        \"Name\": \"Percentage CPU\",\r\n        \"Namespace\": \"microsoft.compute/virtualmachinescalesets\",\r\n        \"Resource\": \"/subscriptions/<GUID>/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachineScaleSets/testVMSS\",\r\n        \"ResourceLocation\": \"eastus\",\r\n        \"TimeGrain\": \"PT1M\",\r\n        \"Statistic\": \"Average\",\r\n        \"TimeWindow\": \"PT5M\",\r\n        \"TimeAggregation\": \"Average\",\r\n        \"Operator\": \"GreaterThan\",\r\n        \"Threshold\": 0.0,\r\n        \"Source\": \"/subscriptions/<GUID>/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachineScaleSets/testVMSS\",\r\n        \"MetricType\": \"MDM\",\r\n        \"Dimensions\": [],\r\n        \"DividePerInstance\": false\r\n      },\r\n      \"ScaleAction\": {\r\n        \"Direction\": \"Increase\",\r\n        \"Type\": \"ChangeCount\",\r\n        \"Value\": \"1\",\r\n        \"Cooldown\": \"PT1M\"\r\n      }\r\n    }\r\n  ]\r\n}",
+      "lastScaleActionTime": "Wed, 21 Aug 2019 16:17:47 GMT"
+    },
+    "status": "Succeeded",
+    "submissionTimestamp": "2019-08-21T16:17:47.2410185+00:00"
+  }
+}
+```
+
+#### <a name="monitoringservice--activity-log---security"></a>`monitoringService` = `Activity Log - Security`
+
+**Örnek değerler**
+```json
+{
+  "alertContext": {
+    "channels": "Operation",
+    "correlationId": "<GUID>",
+    "eventSource": "Security",
+    "eventTimestamp": "2019-08-26T08:34:14+00:00",
+    "eventDataId": "<GUID>",
+    "level": "Informational",
+    "operationName": "Microsoft.Security/locations/alerts/activate/action",
+    "operationId": "<GUID>",
+    "properties": {
+      "threatStatus": "Quarantined",
+      "category": "Virus",
+      "threatID": "2147519003",
+      "filePath": "C:\\AlertGeneration\\test.eicar",
+      "protectionType": "Windows Defender",
+      "actionTaken": "Blocked",
+      "resourceType": "Virtual Machine",
+      "severity": "Low",
+      "compromisedEntity": "testVM",
+      "remediationSteps": "[\"No user action is necessary\"]",
+      "attackedResourceType": "Virtual Machine"
+    },
+    "status": "Active",
+    "submissionTimestamp": "2019-08-26T09:28:58.3019107+00:00"
+  }
+}
+```
+
+#### <a name="monitoringservice--servicehealth"></a>`monitoringService` = `ServiceHealth`
+
+**Örnek değerler**
 ```json
 {
   "alertContext": {
     "authorization": null,
-    "channels": "Admin",
+    "channels": 1,
     "claims": null,
     "caller": null,
     "correlationId": "f3cf2430-1ee3-4158-8e35-7a1d615acfc7",
-    "eventSource": "ServiceHealth",
+    "eventSource": 2,
     "eventTimestamp": "2019-06-24T11:31:19.0312699+00:00",
     "httpRequest": null,
     "eventDataId": "<GUID>",
-    "level": "Informational",
+    "level": 3,
     "operationName": "Microsoft.ServiceHealth/maintenance/action",
     "operationId": "<GUID>",
     "properties": {
@@ -355,13 +447,14 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
     },
     "status": "Active",
     "subStatus": null,
-    "submissionTimestamp": "2019-06-24T11:31:31.7147357+00:00"
+    "submissionTimestamp": "2019-06-24T11:31:31.7147357+00:00",
+    "ResourceType": null
   }
 }
 ```
-#### <a name="monitoringservice--resource-health"></a>monitoringService 'Kaynak durumu' =
+#### <a name="monitoringservice--resource-health"></a>`monitoringService` = `Resource Health`
 
-##### <a name="sample-values"></a>Örnek değerler
+**Örnek değerler**
 ```json
 {
   "alertContext": {
@@ -390,6 +483,6 @@ Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nede
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Ortak uyarı şeması hakkında daha fazla bilgi edinin](https://aka.ms/commonAlertSchemaDocs)
-- [Tüm uyarılarınız işlemek için ortak uyarı şema yararlanan bir mantıksal uygulama oluşturmayı öğrenin.](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-integrations) 
+- [Ortak uyarı şeması](https://aka.ms/commonAlertSchemaDocs)hakkında daha fazla bilgi edinin.
+- [Tüm uyarılarınızı işlemek için ortak uyarı şemasını kullanan bir mantıksal uygulama oluşturmayı](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-integrations)öğrenin. 
 

@@ -1,70 +1,71 @@
 ---
-title: Test Sürüşü nedir? | Azure Market
-description: Market Test Sürüşü özelliği açıklaması
+title: Test Sürüşü nedir? | Azure Marketi
+description: Market test sürücüsü özelliğinin açıklaması
 services: Azure, Marketplace, Cloud Partner Portal,
 author: pbutlerm
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 5b23a5e93dcbb9c13243240bda760a16d108d731
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a6826657a4af74276e363acd585e80d101cc1459
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938469"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73828151"
 ---
 <a name="what-is-test-drive"></a>Test Sürüşü nedir?
 ===================
 
-Test Sürüşü seçeneği vererek olası müşterilere, teklifiniz göstermek için harika bir yol olan \'satın almadan önce deneyin\', artan dönüştürme ve yüksek oranda nitelikli potansiyel müşteriler edinin nesil sonuç.
+Test sürüşü,\'satın almadan önce \'denemeye, daha fazla dönüştürmeye ve yüksek oranda nitelikli müşteri adaylarının oluşturulmasına yol açarak olası müşterilere teklifinizi sergilemenin harika bir yoludur.
 
-Kişi bilgileri girdikten sonra müşteriler önceden oluşturulmuş Test Sürüşü deneyiminizi erişebilirsiniz: uygulamalı, kendi kendine destekli deneme sürümü ürününüzü\'s temel özellikler ve bir gerçek dünya uygulama senaryosunda gösterilen avantajları.
+Müşteriler, iletişim bilgilerini sağladıktan sonra, önceden oluşturulmuş test sürücü deneyiminize erişebilir: ürün\'s ana özelliklerinin uygulamalı, kendinden destekli bir denemesi ve gerçek bir dünya uygulaması senaryosunda gösterilen avantajlar.
 
-Test Sürüşü ürününüzü hayata ve yüksek oranda nitelikli potansiyel müşteriler edinin işlemde oluşturmasını sağlar.
+Test sürüşü, ürününüzü hayata geçiren ve süreçte yüksek düzeyde nitelikli müşteri adayları oluşturmanıza olanak sağlar.
 
-<a name="how-does-a-test-drive-work"></a>Bir Test sürüşüne nasıl çalışır?
+<a name="how-does-a-test-drive-work"></a>Bir test sürücüsü nasıl çalışır?
 ---------------------------
 
-Potansiyel Müşteri uygulamanızı Marketi'nde bulur açar ve kullanım koşullarını kabul eder. Bu noktada, müşteri ile takip etmek için yüksek oranda tam bir müşteri adayı alırken saat için sabit sayıda denemek için önceden yapılandırılmış ortamınıza alır.
+Potansiyel bir müşteri, uygulamanızı Market 'te bulur, oturum açar ve kullanım koşullarını kabul eder. Bu noktada, müşteri, son derece uygun bir müşteri adayı elde etmek için, önceden yapılandırılmış ortamınızı sabit sayıda saat boyunca denemek üzere alır.
 
-![Adım biri. Görüntülenen Market teklifi](./media/what-is-test-drive/step1.png)
+![Birinci adım. Market teklifi görüntülendi](./media/what-is-test-drive/step1.png)
 
-![Adım iki. Market teklifi oturum açma ekranı](./media/what-is-test-drive/step1andahalf.png)
+![İkinci adım. Market teklifi oturum açma ekranı](./media/what-is-test-drive/step1andahalf.png)
 
-![Adım üç. Market teklifi yayımcısı sözleşmesi ekranı](./media/what-is-test-drive/step2.png)
+![Üçüncü adım. Market teklifi Yayımcı Anlaşması ekranı](./media/what-is-test-drive/step2.png)
 
-![Dördüncü adım. Test sürücü Kurulum Ekranı](./media/what-is-test-drive/step3.png)
+![Dördüncü adım. Test sürücüsü kurulum ekranı](./media/what-is-test-drive/step3.png)
 
-Ve aşağıda dağıtım zamanı gerektiğinde, teklif nasıl görüneceğini gösteren bir örnek aşağıda verilmiştir:
+Aşağıda, bir teklifin dağıtılması zaman ihtiyacı olduğunda nasıl göründüğünü gösteren bir örnek verilmiştir:
 
-![Market teklifi dağıtılıyor](./media/what-is-test-drive/step4.png)
+![Dağıtılan Market teklifi](./media/what-is-test-drive/step4.png)
 
-![Market Test Sürüşü hazır ekranı](./media/what-is-test-drive/step5.png)
+![Market test sürücüsüne hazırlık ekranı](./media/what-is-test-drive/step5.png)
 
-![Market Test Sürüşü tamamlandı ekranı](./media/what-is-test-drive/step6.png)
+![Market sınama sürücüsü tamamlanma ekranı](./media/what-is-test-drive/step6.png)
 
-Nasıl karmaşık olursa olsun, uygulamanızın Microsoft Test Sürüşünüz müşteri için ürününüzün hayata yardımcı olur. Günümüzde üç farklı türde ürün, senaryo ve Market olan türüne göre Test Sürüşleri sunuyoruz.
+Uygulamanızı ne kadar karmaşıklarsa olsun, Microsoft Test sürücünüz, ürününüzü müşteri için hayata getirmenize yardımcı olur. Bugün, kullandığınız ürün, senaryo ve Market türüne göre üç farklı türde test sürücüsü sunuyoruz.
 
-- **[Azure Resource Manager](./azure-resource-manager-test-drive.md)** : Bir Azure Resource Manager Test Sürüşü yayımcı tarafından oluşturulan bir çözümünü oluşturan tüm Azure kaynaklarını içeren bir dağıtım şablonudur. Bu senaryo uygun ürünler, yalnızca Azure kaynakları şunlardır.
-- **[Mantıksal uygulama](./logic-app-test-drive.md)** : Mantıksal uygulamayı Test Sürüşü tüm karmaşık çözüm mimarileri kapsayacak şekilde tasarlanmıştır dağıtım şablonudur. Tüm Dynamics uygulamaları ve özel ürünler bu tür bir Test Sürüşü kullanmanız gerekir.
-- **Power BI**: Power BI Test Sürüşü yalnızca bir katıştırılmış bir özel oluşturulan Pano bağlantısıdır. Yalnızca bir etkileşimli Power BI görsel, bu tür bir Test Sürüşü kullanması gereken göstermek istediği herhangi bir ürünü.
-    Burada karşıya yüklemek için ihtiyacınız olan, katıştırılmış Power BI URL'si.
+- **[Azure Resource Manager](./azure-resource-manager-test-drive.md)** : Azure Resource Manager test sürücüsü, yayımcı tarafından oluşturulan bir çözümü oluşturan tüm Azure kaynaklarını içeren bir dağıtım şablonudur. Bu senaryoya uyan ürünler yalnızca Azure kaynaklarını kullanan ürünlerdir.
+- **[Mantıksal uygulama](./logic-app-test-drive.md)** : mantıksal uygulama test sürücüsü, tüm karmaşık çözüm mimarilerini kapsayacak bir dağıtım şablonudur. Tüm Dynamics uygulamalarının veya özel ürünlerin bu tür test sürücüsü kullanması gerekir.
+- **Power BI**: bir Power BI test sürücüsü yalnızca özel bir yerleşik panoya eklenmiş bir bağlantıdır. Yalnızca etkileşimli bir Power BI görseli göstermek isteyen herhangi bir ürün, bu tür test sürücüsünü kullanmalıdır.
+    Buraya yüklemeniz gereken, katıştırılmış Power BI URL 'sidir.
 
-<a name="what-goes-on-in-the-background"></a>Arka planda ne bir rpo'ya?
+<a name="what-goes-on-in-the-background"></a>Arka planda ne olacak?
 -------------------------------
 
-Test Sürüşü hizmet sizden herhangi bir el ile çalışma gerek kalmadan müşterileriniz hizmet ve sürekli olarak desteklemek için yerleşik olarak bulunur. Bir yayımcı olarak işinizi yönetmek ve iş ortağı portalı theCloud Test Sürüşü ayarlarını yapılandırmak için ve ardından söz konusu ayarın doğrudan müşterileriniz için kullanılabilir.
+Test sürücüsü hizmeti, sizin için el ile herhangi bir çaba gerektirmeden müşterilerinize sürekli olarak destek ve hizmet sunma için oluşturulmuştur. Bir yayımcı olarak, işiniz, ana iş ortağı portalından test sürücüsü ayarlarını yönetip yapılandırmak ve ardından bu ayarı müşterileriniz için doğrudan kullanıma sunulacaktır.
 
-Test Sürüşünüz için yapılandırmaları ayarladıktan sonra her Test Sürüşü istediği müşteri için isteğe bağlı olarak dağıtılan bir yönetilen örnek olur olmasıdır. Bir Test Sürüşü örneği atandıktan sonra Test Sürüşü süreyi kümesi için kullanılabilir ve ardından başka bir müşteri için odası oluşturamadı silinir.
+Bunun nedeni, test sürücünüz için yapılandırmalarınızı ayarlamadan sonra, her bir test sürücüsü isteği isteyen müşteri için isteğe bağlı olarak dağıtılacak bir yönetilen örnek haline gelir. Test sürücüsü örneği atandıktan sonra, test sürücüsü, belirlenen süre boyunca kullanılabilir ve daha sonra başka bir müşterinin odasını oluşturmak için silinir.
 
 <a name="next-steps"></a>Sonraki adımlar
 ----------
 
-Bir Test sürüşüne öğrendiğinize göre tüm gerekli alanları hakkında bilgi edinmek için yayımlama gitmek istediğiniz belirli Test Sürüşü türü gerekli tüm fazla gidin ziyaret hakkında ediyorsunuz.
+Artık bir test sürücüsünün ne olduğunu öğrenmiş olduğunuza göre, gereken gerekli alanlarla ilgili tüm bilgileri öğrenmek için yayımlamak istediğiniz belirli test sürücü türünü ziyaret edin.
 
 - **[Azure Resource Manager](./azure-resource-manager-test-drive.md)**
 - **[Mantıksal uygulama](./logic-app-test-drive.md)**
 
-Lütfen Git başka sorularım varsa, sorun giderme önerilerine aradığınız veya Test Sürüşünüz daha da başarılı hale getirmek istediğiniz [SSS, sorun giderme ve en iyi](./marketing-and-best-practices.md).
+Daha fazla sorunuz varsa, sorun giderme önerisi aranıyor veya test sürücünüzü daha başarılı hale getirmek istiyorsanız lütfen [SSS, sorun giderme & En Iyi Yöntemler](./marketing-and-best-practices.md)bölümüne gidin.

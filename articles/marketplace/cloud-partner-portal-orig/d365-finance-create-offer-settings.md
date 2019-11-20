@@ -1,45 +1,24 @@
 ---
-title: Teklif ayarları formu doldurun nasıl | Azure Market
-description: Yeni bir Dynamics 365 Business Central uygulaması için ayarları teklifi formdaki değerler gerektiren çeşitli alanları açıklar.
-services: Azure, Marketplace, Cloud Partner Portal,
-author: v-miclar
+title: Teklif ayarları formunu doldurun | Azure Marketi
+description: BILGISAYAR makalelerinin bağlantılarıyla kullanım dışı bırakılmış Makale; "yeni bir Dynamics 365 Iş Merkezi uygulaması için teklif ayarları formunda değer gerektiren çeşitli alanları açıklar."
+services: Azure, Marketplace, Cloud Partner Portal
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 09/17/2018
+ms.date: 09/18/2019
 ms.author: pabutler
-ms.openlocfilehash: d29b17e1a109b37a51a0e6bd2af2a7bb02b977a9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e52be51fd9c945f67044e8d807ce0a97beaf4487
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64934918"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820050"
 ---
-<a name="how-to-fill-out-the-offer-settings-form"></a>Teklif ayarları formu doldurun nasıl
-=======================================
+# <a name="how-to-fill-out-the-offer-settings-form"></a>Teklif ayarları formunu doldurun
 
-Teklif ayarları formu teklif ayarlarını belirtmek için temel bir biçimidir.
-Gerekli alanları aşağıda açıklanmıştır.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık Dynamics 365 İş Merkezi tekliflerinin oluşturulmasını ve yönetilmesini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 Iş Merkezi teklifi oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-business-central-offer).
 
-### <a name="offer-id"></a>Teklif kimliği
+## <a name="next-steps"></a>Sonraki adımlar
 
-`OfferId` bir yayımcı profilinde teklif için benzersiz bir tanımlayıcıdır.
-Bu kimliği, ürün URL'lerinde görünür olur. Yalnızca küçük harfli alfasayısal karakterler veya tirelerden (-) oluşabilir. Kimliği tire bitemez ve en çok 50 karakter olabilir. Bu alan, teklif etkin hale gelir sonra kilitli.
-
-Örneğin, "Contoso" iş ortağı "örnek-Web App" adlı bir teklif kimliği oluşturur, bunu appsource'ta gösterilir:
-
-&emsp;`https://appsource.microsoft.com/marketplace/apps/contoso.sample-Web App?tab=Overview`
-
-
-### <a name="publisher-id"></a>Yayımcı kimliği
-
-Bu açılan listeyi, bu teklif altında yayımlamak istediğiniz yayımcı profilinizle seçmenize olanak sağlar. Bu alan, teklif etkin hale gelir sonra kilitli.
-
-
-### <a name="name"></a>Ad
-
-Bu teklif için görünen ad, uygulama/Microsoft görüntülenecek, [AppSource](https://appsource.microsoft.com/). En fazla 50 karakter olabilir.
-
-> [!NOTE]
-> Kısa ad, uygulama bildiriminde belirtilen yayımcı adıyla aynı olmalıdır.
-
-Tıklayarak **Kaydet** ilerlemenizi kaydetmek için. Teklifiniz için teknik bilgi eklemek için sonraki adım olacaktır.
+Yeni bir Dynamics 365 Iş Merkezi teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 Iş Merkezi teklifi oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-business-central-offer) bölümündeki yönergeleri izleyin.

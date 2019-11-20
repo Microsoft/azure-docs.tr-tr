@@ -1,6 +1,6 @@
 ---
-title: Azure Stream analytics'te kontrol noktası ve yeniden yürütme işi kurtarma kavramları
-description: Bu makalede, Azure Stream analytics'te kontrol noktası ve yeniden yürütme işi kurtarma kavramlarını açıklar.
+title: Azure Stream Analytics denetim noktası ve yeniden yürütme kavramları
+description: Bu makalede Azure Stream Analytics içindeki denetim noktası ve yeniden yürütme işi kurtarma kavramları açıklanmaktadır.
 services: stream-analytics
 author: mamccrea
 ms.author: mamccrea
@@ -9,67 +9,67 @@ ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 12/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 9dcfbd4b5fcc8462c88b16f585424166ecd3d499
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 26d8d8248c9dcc57edaaa4a90f87071ee61a70ce
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61361904"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72935040"
 ---
-# <a name="checkpoint-and-replay-concepts-in-azure-stream-analytics-jobs"></a>Azure Stream Analytics işlerini kontrol noktası ve yeniden yürütme kavramları
-Bu makalede, bu kurtarma işi sahip iç denetim noktası ve yeniden yürütme kavramları Azure Stream Analytics ve etkisi açıklanır. Her zaman bir Stream Analytics işi çalıştırır, durum bilgilerini dahili olarak korunur. Bu durum bilgilerini bir denetim noktasında düzenli olarak kaydedilir. Bir iş hatası veya yükseltme oluşması durumunda bazı senaryolarda, iş kurtarma için denetim noktası bilgileri kullanılır. Diğer durumlarda, kontrol noktasını kurtarma için kullanılamaz ve bir yeniden yürütme gereklidir.
+# <a name="checkpoint-and-replay-concepts-in-azure-stream-analytics-jobs"></a>Azure Stream Analytics işlerinde denetim noktası ve yeniden yürütme kavramları
+Bu makalede, Azure Stream Analytics ' deki iç denetim noktası ve yeniden yürütme kavramları ve bunların iş kurtarmasında etkileri açıklanmaktadır. Stream Analytics iş her çalıştığında durum bilgileri dahili olarak tutulur. Bu durum bilgileri düzenli aralıklarla bir denetim noktasına kaydedilir. Bazı senaryolarda, iş hatası veya yükseltme gerçekleşirse, iş kurtarma için denetim noktası bilgileri kullanılır. Başka bir durumda, denetim noktası kurtarma için kullanılamaz ve yeniden yürütme gereklidir.
 
-## <a name="stateful-query-logicin-temporal-elements"></a>Durum bilgisi olan sorgu mantığının zamana bağlı öğeleri
-Azure Stream Analytics işi benzersiz yeteneğinin, pencereli toplamlar, zamana bağlı birleştirmeler ve geçici analiz işlevleri gibi durum bilgisi olan işlem gerçekleştirmektir. İş çalıştırıldığında bu işleçlerden her biri durum bilgilerini tutar. Bu sorgu öğeleri için maksimum pencere boyutunu yedi gündür. 
+## <a name="stateful-query-logicin-temporal-elements"></a>Zamana bağlı öğelerde durum bilgisi olan sorgu mantığı
+Azure Stream Analytics işin benzersiz özelliğinden biri, pencereli toplamalar, zamana bağlı birleşimler ve zamana bağlı analitik işlevler gibi durum bilgisi olmayan bir işlem gerçekleştirmesinin bir özelliğidir. Bu işleçlerin her biri, iş çalıştırıldığında durum bilgilerini tutar. Bu sorgu öğeleri için en büyük pencere boyutu yedi gündür. 
 
-Geçici pencere kavramı çeşitli Stream Analytics sorgu öğelerin görünür:
-1. Pencereli toplamlar (grup tarafından atlaması ve windows kayan atlayan)
+Zamana bağlı pencere kavramı çeşitli Stream Analytics sorgu öğelerinde görünür:
+1. Pencereli toplamalar (Tdönerek gruplama, atlamalı ve kayan pencereler)
 
-2. Zamana bağlı birleşimler (birleştirme DATEDIFF ile)
+2. Zamana bağlı birleşimler (DATEDIFF ile BIRLEŞTIRME)
 
-3. Zamana bağlı analitik işlevler (ISFİRST, LAST ve GECİKME süresi sınırı)
+3. Zamana bağlı analitik işlevler (ıSFIRST, LAST ve LIMIT SÜRESI ile GECIKME)
 
 
-## <a name="job-recovery-from-node-failure-including-os-upgrade"></a>İşletim sistemi yükseltme de dahil olmak üzere, düğüm hatasından kurtarma işi
-Bir Stream Analytics işi her çalıştırıldığında, dahili olarak onu kullanıma birden çok çalışan düğümü üzerinde çalışacak şekilde ölçeklendirilir. Her alt düğümün durumu yardımcı olan bir hata oluşması durumunda kurtarma sistem, birkaç dakikada denetim noktası oluşturuldu.
+## <a name="job-recovery-from-node-failure-including-os-upgrade"></a>İşletim sistemi yükseltmesi dahil olmak üzere düğüm hatasından iş kurtarma
+Bir Stream Analytics işi her çalıştığında, dahili olarak birden çok çalışan düğümünde çalışacak şekilde ölçeklendirilir. Her çalışan düğümün durumu her birkaç dakikada bir denetim noktası olarak belirlenir ve bu da bir hata oluşursa sistemin kurtarılmasına yardımcı olur.
 
-Bazen, verilen çalışan düğümü başarısız olabilir veya işletim sistemi yükseltmesi için çalışan düğümüne ortaya çıkabilir. Stream Analytics otomatik olarak kurtarmak için yeni bir iyi durumdaki düğüme alır ve en son kullanılabilir denetim noktasından önceki alt düğümün durumunun geri yüklendiği. Çalışmayı sürdürmek için az miktarda bir yeniden yürütme süresi ne zaman denetim noktası alındığını durumunu geri yüklemek gereklidir. Genellikle, geri yükleme boşluk yalnızca birkaç dakikadır. İş için yeterli sayıda akış birimi seçildiğinde yeniden yürütme hızla tamamlanmalıdır. 
+Her zaman, belirli bir çalışan düğümü başarısız olabilir veya çalışan düğümü için bir Işletim sistemi yükseltmesi meydana gelebilir. Otomatik olarak kurtarmak için, Stream Analytics yeni bir sağlıklı düğüm elde edin ve önceki çalışan düğümün durumu kullanılabilir en son denetim noktasından geri yüklenir. Çalışmayı sürdürdüğünüzde, durumu kontrol noktasının alındığı zamandan geri yüklemek için az miktarda yeniden yürütme gerekir. Genellikle geri yükleme boşluğu yalnızca birkaç dakikadır. İş için yeterli sayıda akış birimi seçildiğinde, yeniden yürütme işlemi hızlı tamamlanmalıdır. 
 
-Tam olarak paralel sorguda bir alt düğümde hata oluştuktan sonra Kaçırdığınız süresini orantılıdır:
+Tam paralel bir sorguda, bir çalışan düğümü hatasından sonra yakalamak için gereken süre şu şekilde orantılıdır:
 
-[Giriş olayı oranı] x [aralık uzunluğu] / [bölümleri işleme sayı]
+[giriş olayı oranı] x [boşluk uzunluğu]/[işleme bölümlerinin sayısı]
 
-Düğüm hatası nedeniyle hiç olmadığı kadar önemli bir işleme gecikmesi inceleyin ve işletim sistemi yükseltme, sorgu tam olarak yapmayı düşünün paralel ve daha fazla akış birimi ayırmak için işi ölçeklendirin. Daha fazla bilgi için [verimliliğini artırmak için Azure Stream Analytics işi ölçeklendirme](stream-analytics-scale-jobs.md).
+Düğüm arızası ve işletim sistemi yükseltmesi nedeniyle önemli işlem gecikmesi gözlemlerseniz, sorguyu tamamen paralel hale getirmeyi düşünün ve işi daha fazla akış birimi ayırmaya göre ölçeklendirin. Daha fazla bilgi için bkz. [işlem hızını artırmak için Azure Stream Analytics bir Işi ölçeklendirme](stream-analytics-scale-jobs.md).
 
-Bu tür bir kurtarma işlemi gerçekleşen zaman geçerli Stream Analytics bir rapor göstermez.
+Geçerli Stream Analytics, bu tür bir kurtarma işlemi gerçekleşirken rapor göstermez.
 
-## <a name="job-recovery-from-a-service-upgrade"></a>Hizmet yükseltme işi kurtarma 
-Microsoft Stream Analytics işleri Azure hizmetinde çalışan ikili dosyaları bazen yükseltir. Bu saatler, kullanıcıların çalışan işleri daha yeni sürüme yükseltilir ve iş otomatik olarak yeniden başlatır. 
+## <a name="job-recovery-from-a-service-upgrade"></a>Hizmet yükseltmesinden iş kurtarma 
+Microsoft, Azure hizmetindeki Stream Analytics işleri çalıştıran ikilileri zaman zaman yükseltir. Bu saatlerde, kullanıcıların çalışan işleri daha yeni bir sürüme yükseltilir ve iş otomatik olarak yeniden başlatılır. 
 
-Şu anda kurtarma kontrol noktası biçimi yükseltmeleri arasında korunmaz. Sonuç olarak, akış sorgu durumu tamamen yeniden yürütme teknik kullanılarak geri yüklenmelidir. Stream Analytics işlerinin tam yeniden sağlamak için sorgu penceresinde aynı kaynak verilere yönelik bekletme ilkesi en az ayarlamak önemlidir önce girişe boyutlandırır. Kaynak verilerin yeteri kadar geri tam pencere boyutunu içerecek şekilde tutulabileceği değil olduğundan Bunu yapmazsanız, hizmet yükseltme sırasında yanlış ya da kısmi sonuçları neden olabilir.
+Şu anda, kurtarma denetim noktası biçimi yükseltmeler arasında korunmaz. Sonuç olarak, akış sorgusunun durumu tamamen yeniden yürütme tekniği kullanılarak geri yüklenmelidir. Stream Analytics işlerin daha önce aynı girişi yeniden çalıştırmasına izin vermek için, kaynak veriler için bekletme ilkesinin en azından Sorgunuzdaki pencere boyutlarına ayarlanması önemlidir. Bunun başarısız olması, hizmet yükseltmesi sırasında yanlış veya kısmi sonuçlara neden olabilir. bu nedenle, kaynak veriler tam pencere boyutunu içerecek kadar geri saklanmayabilir.
 
-Genel olarak, gerekli yeniden yürütme miktarını göre ortalama olay oranı çarpılan penceresinin boyutunu orantılıdır. Örneğin, bir iş ile bir giriş oran, saniyede 1000 olay için bir saatten daha büyük bir pencere boyutu büyük yeniden yürütme boyutuna sahip kabul edilir. Verilerin bir saat kadar bazı uzun bir süre için durum tam oluşturabilir ve çıkış (çıktı) neden olabilecek doğru sonuçlar Gecikmeli başlatmak için yeniden işlenen olması gerekebilir. Hiçbir windows veya diğer geçici işleçler sorgularla ister `JOIN` veya `LAG`, sıfır yeniden yürütme olması gerekir.
+Genel olarak, gereken yeniden yürütme miktarı, ortalama olay oranı ile çarpılan pencere boyutuyla orantılıdır. Örnek olarak, saniye başına 1000 etkinlikten oluşan bir iş için, bir saatten büyük bir pencere boyutu büyük bir yeniden yürütme boyutuna sahip olacak şekilde değerlendirilir. Bir saatlik verilerin tam ve doğru sonuçlar üretebilmesi için, bu durum, bazı genişletilmiş bir süre için geciken çıkış (çıkış yok) oluşmasına neden olabilecek şekilde yeniden işlenmesi gerekebilir. `JOIN` veya `LAG`gibi, Windows veya diğer zamana bağlı işleçlere sahip sorgular sıfır yeniden yürütmeye sahip olur.
 
-## <a name="estimate-replay-catch-up-time"></a>Oldukça yeniden yürütme süresi, tahmin
-Bir hizmeti yükseltmesi nedeniyle gecikme uzunluğunu tahmin etmek için bu tekniği izleyebilirsiniz:
+## <a name="estimate-replay-catch-up-time"></a>Tahmin yeniden yürütme yakalama süresi
+Bir hizmet yükseltmesi nedeniyle gecikme süresini tahmin etmek için bu tekniği izleyebilirsiniz:
 
-1. Giriş olayı beklenen olay hızı anda sorgunuzda büyük pencere boyutunu kapsayacak şekilde Hub'la yeterli veri yükleyin. Olayları zaman damgası olmalıdır bu süre boyunca duvar saati süresi yakın olarak bir canlı girdi akışı olup olmadığını. Örneğin, 3 günlük penceresini sorgunuzda varsa, üç gün için olay Hub'ına olayları gönderme ve olayları göndermeye devam eder. 
+1. Sorgunuzun beklenen olay hızında en büyük pencere boyutunu kapsamak için, giriş olayı hub 'ını yeterli verilerle yükleyin. Etkinlik zaman damgası, canlı bir giriş akışımız gibi, bu süre boyunca o zaman içindeki duvar saati zamanına yakın olmalıdır. Örneğin, sorgunuzda 3 günlük bir pencere varsa olayları üç gün boyunca olay hub 'ına gönderin ve olayları gönderilmeye devam edin. 
 
-2. İş kullanmaya başlamak **artık** başlangıç saati olarak. 
+2. İşi **Şimdi** başlangıç saati olarak kullanmaya başlayın. 
 
-3. Başlangıç saati ve ilk çıkış oluşturulduğunda arasındaki süreyi ölçer. İş hizmeti yükseltmesi sırasında ödemesi gerekir ne kadar gecikme kaba zamandır.
+3. Başlangıç saati ile ilk çıktının oluşturulduğu zaman arasındaki süreyi ölçün. Bu süre, bir hizmet yükseltmesi sırasında işin ne kadar ertelendirileceğini kabaca doğurur.
 
-4. İşinizi bölümlemek ve daha fazla düğüm yük dağıldığında şekilde SUs sayısını artırmak gecikme çok uzunsa deneyin. Alternatif olarak, sorgunuzu pencere boyutlarını azaltmayı göz önünde bulundurun ve daha fazla toplama veya diğer durum bilgisi olan (örneğin, Azure SQL veritabanı'nı kullanarak) bir aşağı akış havuzunda Stream Analytics işi tarafından üretilen çıkış işleme gerçekleştirin.
+4. Gecikme çok uzunsa, işinizi bölümleyip SUs sayısını artırarak yük daha fazla düğüme yayılmaya çalışın. Alternatif olarak, Sorgunuzdaki pencere boyutlarını azaltmayı göz önünde bulundurun ve aşağı akış havuzunda (örneğin, Azure SQL veritabanı kullanılarak) Stream Analytics işi tarafından oluşturulan çıktıda daha fazla toplama veya diğer durum bilgisi içeren işlem gerçekleştirin.
 
-Genel Hizmet kararlılık kaygısı görev açısından kritik iş yükseltme sırasında yinelenen işleri eşleştirilmiş Azure bölgelerinde çalıştırılan göz önünde bulundurun. Daha fazla bilgi için [garantisi Stream Analytics iş güvenilirliği hizmet güncelleştirmeleri sırasında](stream-analytics-job-reliability.md).
+Görev açısından kritik işlerin yükseltilmesi sırasında genel hizmet kararlılığı sorunu için, eşlenmiş Azure bölgelerinde yinelenen işleri çalıştırmayı göz önünde bulundurun. Daha fazla bilgi için bkz. [hizmet güncelleştirmeleri sırasında iş güvenilirliğini garanti Stream Analytics](stream-analytics-job-reliability.md).
 
-## <a name="job-recovery-from-a-user-initiated-stop-and-start"></a>Bir kullanıcı tarafından başlatılan durdurma ve başlatma işi kurtarma
-Sorgu sözdizimi akış işi, düzenlemek veya giriş ve çıkışları ayarlamak için işin değişiklikleri yapın ve iş tasarım yükseltmek için durdurulması gerekir. Böyle senaryolarda kurtarma senaryosunda bir kullanıcı Akış işini durdurur ve yeniden başlatır, hizmet yükseltme benzerdir. 
+## <a name="job-recovery-from-a-user-initiated-stop-and-start"></a>Kullanıcı tarafından başlatılan durdurma ve başlatmadan iş kurtarma
+Bir akış işinde sorgu söz dizimini düzenlemek veya girişleri ve çıkışları ayarlamak için, değişiklikleri yapmak ve iş tasarımını yükseltmek için işin durdurulması gerekir. Bu tür senaryolarda, bir Kullanıcı akış işini durdurduğu ve yeniden başlattığı zaman, Kurtarma senaryosu hizmet yükseltmesine benzerdir. 
 
-Bir kullanıcı tarafından başlatılan iş yeniden başlatma denetim noktası verileri kullanılamaz. Çıkış gecikmesi böyle bir yeniden başlatma sırasında tahmin etmek için önceki bölümde açıklandığı gibi aynı yordamı kullanın ve gecikme çok uzunsa benzer risk azaltma uygulayın.
+Denetim noktası verileri Kullanıcı tarafından başlatılan bir iş yeniden başlatması için kullanılamaz. Bu tür bir yeniden başlatma sırasında çıktının gecikmesini tahmin etmek için, önceki bölümde açıklanan yordamın aynısını kullanın ve gecikme çok uzunsa, benzer risk azaltma uygulayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Güvenilirlik ve ölçeklenebilirlik ile ilgili daha fazla bilgi için şu makalelere bakın:
+Güvenilirlik ve ölçeklenebilirlik hakkında daha fazla bilgi için şu makalelere bakın:
 - [Öğretici: Azure Stream Analytics işleri için uyarıları ayarlama](stream-analytics-set-up-alerts.md)
-- [Azure Stream Analytics işi verimliliğini artırmak için ölçeklendirme](stream-analytics-scale-jobs.md)
-- [Stream Analytics işi güvenilirlik garanti sırasında hizmet güncelleştirmeleri](stream-analytics-job-reliability.md)
+- [Azure Stream Analytics işini, aktarım hızını artırmak için ölçeklendirin](stream-analytics-scale-jobs.md)
+- [Hizmet güncelleştirmeleri sırasında iş güvenilirliğini Stream Analytics garanti edin](stream-analytics-job-reliability.md)

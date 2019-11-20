@@ -1,76 +1,77 @@
 ---
-title: Azure uygulama İnceleme geri işleme | Azure Market
-description: Azure DevOps için Azure Marketi teklifleri için Azure uygulama İnceleme geri işlemek için nasıl kullanılacağını açıklar.
+title: Azure Uygulama incelemesi geri bildirimi işleme | Azure Marketi
+description: Azure Market için Azure Uygulama tekliflerine yönelik gözden geçirme geri bildirimini işlemek üzere Azure DevOps 'ın nasıl kullanılacağını açıklar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 02/05/2019
 ms.author: pabutler
-ms.openlocfilehash: 1a45af2cb5eed8daa4b50bb6f0b504f9653c827a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ef4aff57948034fb369bd74564306b7b8674b377
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67068947"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827595"
 ---
 # <a name="handling-review-feedback"></a>Gözden geçirme geri bildirimini işleme
 
-Bu makalede, Microsoft Azure Marketi gözden geçirme ekibi tarafından kullanılan Azure DevOps ortamına erişmek açıklanmaktadır.  Azure uygulama teklifinizi sırasında kritik sorunlar bulunuyorsa **Microsoft gözden geçirme** adım (İnceleme görüşüne) Bu sorunlar hakkında ayrıntılı bilgi görüntülemek için bu sisteme imzalayabilirsiniz.  Bu sorunları giderdikten sonra teklifinizin Azure Market'te yayımlamak devam etmek için yeniden göndermeniz gerekir.  Aşağıdaki diyagram, bu geri bildirim süreci için yayımlama işlemi ilişkisini gösterir.
+Bu makalede, Microsoft Azure Market gözden geçirme ekibi tarafından kullanılan Azure DevOps ortamına nasıl erişebileceğiniz açıklanır.  **Microsoft gözden geçirme** adımı sırasında Azure Uygulama teklifinizdeki kritik sorunlar bulunursa, bu sorunlarla ilgili ayrıntılı bilgileri görüntülemek için bu sistemde oturum açabilirsiniz (geri bildirim gözden geçirin).  Tüm bu sorunları düzelttikten sonra, Azure Marketi 'nde yayımlamaya devam etmek için teklifinizi yeniden göndermeniz gerekir.  Aşağıdaki diyagramda, bu geri bildirim işleminin yayımlama işlemiyle nasıl ilişkili olduğu gösterilmektedir.
 
-![Azure DevOps görüş yayımlama adımları](./media/pub-flow-vsts-access.png)
+![Azure DevOps geri bildirimi ile adımları yayımlama](./media/pub-flow-vsts-access.png)
 
-Genellikle, gözden geçirme sorunlar, çekme isteği (PR) başvurulur.  Her çekme isteği için bir çevrimiçi bağlı [Azure DevOps](https://azure.microsoft.com/services/devops/) (daha önce Visual Studio Team Services (VSTS) olarak adlandırılır) sorun hakkında ayrıntılar içeren öğe.  Aşağıdaki resimde PR gözden geçirme başvuru örneği görüntüler.  Karmaşık durumlarda, gözden geçirme ve destek ekipleri ayrıca size e-posta. 
+Genellikle, gözden geçirme sorunları çekme isteği (PR) olarak başvurulur.  Her bir çekme isteği, sorunla ilgili ayrıntıları içeren çevrimiçi bir [Azure DevOps](https://azure.microsoft.com/services/devops/) (daha önce adlandırılmış VISUAL STUDIO Team SERVICES (VSTS)) öğesine bağlıdır.  Aşağıdaki görüntüde bir gözden geçirme çekme isteği başvurusunun bir örneği görüntülenmektedir.  Karmaşık durumlarda, gözden geçirme ve destek takımları da size e-posta verebilir. 
 
-![Durum sekmesinde görüntüleme gözden geçirme geri bildirim](./media/status-tab-ms-review.png)
+![İnceleme geri bildirimini görüntüleyen durum sekmesi](./media/status-tab-ms-review.png)
 
 
 ## <a name="azure-devops-access"></a>Azure DevOps erişimi
 
-Gözden geçirme geri bildirim başvurulan çekme isteği öğeleri görüntülemek için yayımcılar öncelikle uygun yetkilendirme verilmelidir.  Aksi takdirde, yeni yayımcılar almak bir `401 - Not Authorized` Pr'ler görüntülemeye çalışırken yanıt sayfası.  Bu Azure DevOps deposuna erişim istemek için aşağıdaki adımları gerçekleştirin:
+Gözden geçirme geri bildirimde başvurulan PR öğelerini görüntülemek için, yayımcıların öncelikle uygun yetkilendirme verilmelidir.  Aksi halde, yeni yayımcılar PR 'ler görüntülemeye çalışırken bir `401 - Not Authorized` yanıt sayfası alır.  Bu Azure DevOps deposuna erişim istemek için aşağıdaki adımları gerçekleştirin:
 
 1. Aşağıdaki bilgileri toplayın:
-    - Yayımcı adı ve kimliği
-    - Teklif türü (Azure uygulamasına), adı ve SKU kimliği
-    - Çekme isteği bağlantı, örneğin: `https://solutiontemplates.visualstudio.com/marketplacesolutions/_git/contoso/pullrequest/<number>`  Bu URL, bildirim iletisini veya 401 yanıt sayfasının adresini alınabilir.
-    - Yayımlama kuruluşunuzdan için erişim izni istediğiniz kişilerin e-posta adresi.  Bu liste, bulut iş ortağı Portalı'nda bir yayımcı olarak kaydolurken sağladığınız sahibi adresleri içermelidir.
-2. Bir destek olayı oluşturun.  Bulut iş ortağı portalı başlık çubuğunda **yardımcı** düğmesine ve ardından **Destek** menüsünde.  Web varsayılan tarayıcıyı başlatın ve Microsoft yeni destek olay sayfasına gidin.  (Oturum açmanız gerekebilir.)
-3. Belirtin **sorun türü** olarak **Market ekleme** ve **kategori** olarak **erişim sorunu**, ardından **Başlat İstek**.
+    - Yayımcı adınız ve KIMLIĞINIZ
+    - Teklif türü (Azure uygulaması), teklif adı ve SKU KIMLIĞI
+    - Çekme isteği bağlantısı, örneğin: `https://solutiontemplates.visualstudio.com/marketplacesolutions/_git/contoso/pullrequest/<number>` bu URL 'nin bildirim iletisinden veya 401 yanıt sayfasının adresinden elde edilebilir.
+    - Yayımlama kuruluşunuzdaki erişim izni verilmesini istediğiniz kişilerin e-posta adresleri.  Bu liste, Bulut İş Ortağı Portalı yayımcı olarak kaydederken verdiğiniz sahip adreslerini (es) içermelidir.
+2. Destek olayı oluşturun.  Bulut İş Ortağı Portalı başlık çubuğunda, **Yardım** düğmesini seçin ve menüden **destek** ' i seçin.  Varsayılan Web tarayıcısının başlatılması ve Microsoft yeni destek olay sayfasına gitmeniz gerekir.  (Önce oturum açmanız gerekebilir.)
+3. **Sorun türünü** **Market ekleme** ve **Kategori** olarak **erişim sorunu**olarak belirtip **isteği Başlat**' ı seçin.
 
     ![Destek bileti kategorisi](./media/support-incident1.png)
 
-4. İçinde **adım 1 / 2** sayfasında, iletişim bilgilerinizi girin ve seçin **devam**.
-5. İçinde **adım 2 / 2** sayfasında, bir olay başlığı belirtin (örneğin `Request Azure DevOps access`) ve (yukarıda) İlk adımda toplanan bilgileri sağlayın.  Okuma ve sözleşmesini kabul edin ve ardından **Gönder**.
+4. **Adım 1/2** sayfasında, iletişim bilgilerinizi girip **devam**' ı seçin.
+5. 2\. **adım** sayfasında bir olay başlığı belirtin (örneğin `Request Azure DevOps access`) ve ilk adımda topladığınız bilgileri (yukarıdaki) sağlayın.  Sözleşmeyi okuyup kabul edin ve ardından **Gönder**' i seçin.
 
-Olay oluşturma başarılı olduysa, bir onay sayfası görüntülenir.  Başvuru amacıyla bu sayfadaki onay bilgileri kaydedin.  Microsoft Destek ekibine erişim isteğiniz birkaç iş günü içinde yanıt.
+Olay oluşturma başarılı olduysa, bir onay sayfası görüntülenir.  Bu sayfadaki onay bilgilerini başvurunuz için kaydedin.  Microsoft Desteği takım, erişim isteğinize birkaç iş günü içinde yanıt vermesi gerekir.
 
 
-## <a name="reviewing-the-pull-request"></a>Çekme isteği gözden geçirme 
+## <a name="reviewing-the-pull-request"></a>Çekme isteğini gözden geçirme 
 
 Çekme isteğinde belgelenen sorunları gözden geçirmek için aşağıdaki yordamı kullanın.
 
-1. İçinde **Microsoft gözden geçirme** bölümünü **adımları yayımlama** formunda, tarayıcıyı başlatın ve gitmek için bir çekme isteği bağlantısına tıklayın **genel bakış** bu çekme isteğini (ana) sayfası  Aşağıdaki görüntüde bir örnek kritik bir sorunu ana sayfası Contoso örnek uygulama teklifini gösterilmektedir.  Bu sayfa, Azure uygulamasında bulunan gözden geçirme sorunları hakkında yararlı Özet bilgiler içerir.  
+1. **Yayımlama adımları** formunun **Microsoft gözden geçirme** bölümünde, bir PR bağlantısına tıklayarak tarayıcınızı başlatın ve bu çekme isteği için **genel bakış** (giriş) sayfasına gidin.  Aşağıdaki görüntüde, contoso örnek uygulama teklifi için örnek bir kritik sorun giriş sayfası gösterilmektedir.  Bu sayfa, Azure uygulamasında bulunan gözden geçirme sorunlarıyla ilgili yararlı Özet bilgiler içerir.  
 
-    [![Çekme isteği giriş sayfası](./media/pr-home-page-thumb.png)](./media/pr-home-page.png)
-    <br/> *Görüntüyü genişletmek için tıklatın.*
+    [çekme isteği giriş sayfası
+   ![](./media/pr-home-page-thumb.png)](./media/pr-home-page.png)  <br/> *Genişletilecek resme tıklayın.*
     
-2. (İsteğe bağlı) Bölümünde penceresinin sağ tarafındaki **ilkeleri**, sorunu iletide tıklayın (Bu örnekte: **İlke doğrulanamadı**) ilişkili günlük dosyaları da dahil olmak üzere sorunu, alt düzey ayrıntılarını araştırmak için.  Hatalar, genellikle günlük dosyalarının en altında görüntülenir.
+2. Seçim Pencerenin sağ tarafında, bölüm **ilkeleri**' nde, sorunun alt düzey ayrıntılarını araştırmak için, ilgili günlük dosyaları da dahil olmak üzere, sorun iletisi ' ne (Bu örnekte, **ilke doğrulaması başarısız oldu**) tıklayın.  Hatalar genellikle günlük dosyalarının altında görüntülenir.
 
-3. Giriş sayfasının sol taraftaki menüde **dosyaları** kapsayan bu teklif için teknik varlıkları listesi dosyaları görüntülemek için.  Microsoft inceleyenler eklenen açıklamalar bulunan kritik sorunları açıklayan.  Aşağıdaki örnekte, iki sorun bulundu. 
+3. Ana sayfanın sol tarafındaki menüde, bu teklif için teknik varlıkları oluşturan liste dosyalarını göstermek için **dosyalar** ' ı seçin.  Microsoft gözden geçirenler, bulunan kritik sorunları açıklayan açıklamalar eklemiş olmalıdır.  Aşağıdaki örnekte, iki sorun keşfedilmiştir. 
 
-    [![Çekme isteği giriş sayfası](./media/pr-files-page-thumb.png)](./media/pr-files-page.png)
-    <br/> *Görüntüyü genişletmek için tıklatın.*
+    [çekme isteği giriş sayfası
+   ![](./media/pr-files-page-thumb.png)](./media/pr-files-page.png)  <br/> *Genişletilecek resme tıklayın.*
 
-4. Her bir açıklama düğümü açıklamaya çevreleyen kod bağlamı içinde gezinmek için sol ağaçta tıklayın.  Takımınızın projesinde açıklamaya göre açıklanan sorunu gidermek için kaynak kodunuzu düzeltin.
+4. Çevredeki kodun bağlamında açıklamaya gitmek için sol ağaçtaki her bir açıklama düğümüne tıklayın.  Açıklama tarafından açıklanan sorunu gidermek için takımınızın projesindeki kaynak kodunuzu düzeltin.
 
 > [!Note]
-> Gözden geçirme takımın Azure DevOps ortamında teknik varlıkları ürününüzün düzenleyemezsiniz.  Yayımcılar için bağımsız kaynak kodu için salt okunur bir ortamı budur.  Ancak, yanıtları, okuyan kişinin yararına olması Microsoft gözden geçirme ekibi yorum bırakabilir.
+> Teklifinizin teknik varlıklarını gözden geçirme ekibinin Azure DevOps ortamında düzenleyemezsiniz.  Yayımcılar için, bu, içerilen kaynak kodu için salt okunurdur.  Ancak, Microsoft gözden geçirme ekibinin avantajı için açıklamalara yanıt verebilirsiniz.
 
-   Aşağıdaki örnekte, yayımcı gözden düzeltildi ve ilk sorunla cevap verdi.
+   Aşağıdaki örnekte, yayımcı ilk sorunu inceetti, düzeltti ve yanıtladı.
 
-   ![İlk düzeltme ve yorumu Yanıtla](./media/first-comment-reply.png)
+   ![İlk düzelme ve açıklama yanıtı](./media/first-comment-reply.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Gözden geçirme PR(s) içinde belgelediğiniz kritik sorunları düzelttikten sonra yapmanız gerekenler [Azure uygulaması teklifinizi yeniden yayımlayın](./cpp-publish-offer.md).
+Gözden geçirme çekme isteği 'nde belgelenen kritik sorunları düzelttikten sonra [Azure uygulama teklifinizi yeniden yayımlamanız](./cpp-publish-offer.md)gerekir.

@@ -1,5 +1,5 @@
 ---
-title: "Azure portalı: Sorgu Düzenleyicisi'ni kullanarak Azure SQL veritabanı sorgulama | Microsoft Docs"
+title: 'Azure portal: sorgu düzenleyicisini kullanarak sorgulama'
 description: SQL Sorgu Düzenleyicisi'ni kullanarak Azure portalında SQL Veritabanına bağlanmayı öğrenin. Ardından, verileri sorgulamak ve düzenlemek için Transact-SQL (T-SQL) deyimleri çalıştırın.
 keywords: sql veritabanına bağlanma,azure portalı, portal, sorgu düzenleyicisi
 services: sql-database
@@ -11,81 +11,86 @@ ms.topic: quickstart
 author: Ninarn
 ms.author: ninarn
 ms.reviewer: carlrab
-manager: craigg
-ms.date: 06/28/2019
-ms.openlocfilehash: 52041ba3c057e871b60f283f293dd79a18f3b21e
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.date: 10/24/2019
+ms.openlocfilehash: 3990d7ec63c312d38168fe76269e1a920f1a6817
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508765"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827105"
 ---
-# <a name="quickstart-use-the-azure-portals-sql-query-editor-to-connect-and-query-data"></a>Hızlı Başlangıç: Bağlanmak ve veri sorgulamak için Azure portalında SQL sorgu Düzenleyicisi'ni kullanın
+# <a name="quickstart-use-the-azure-portals-sql-query-editor-to-connect-and-query-data"></a>Hızlı başlangıç: Azure portal SQL sorgu düzenleyicisini kullanarak bağlanma ve veri sorgulama
 
-SQL sorgu Düzenleyicisi, Azure SQL veritabanı veya Azure SQL veri ambarı üzerinde SQL sorguları yürütmek için kolay bir yol sağlayarak, Azure portal tarayıcı bir araçtır. Bu hızlı başlangıçta, bir SQL veritabanına bağlanan ve ardından sorgulama, ekleme, güncelleştirme için Transact-SQL deyimleri çalıştırın ve verileri silmek için sorgu Düzenleyicisi'ni kullanacaksınız.
+SQL sorgu Düzenleyicisi, Azure SQL veritabanı veya Azure SQL veri ambarı 'nda SQL sorguları yürütmek için kolay bir yol sağlayan bir Azure portal tarayıcı aracıdır. Bu hızlı başlangıçta, sorgu düzenleyicisini kullanarak bir SQL veritabanına bağlanın ve ardından Transact-SQL deyimlerini çalıştırarak verileri sorgulama, ekleme, güncelleştirme ve silme.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
 
-- Bir Azure SQL veritabanı. Şu hızlı başlangıçlardan biriyle oluşturmak ve ardından bir veritabanını Azure SQL veritabanı'nda yapılandırmak için kullanabilirsiniz:
+- Bir Azure SQL veritabanı. Azure SQL veritabanı 'nda bir veritabanı oluşturmak ve yapılandırmak için bu hızlı başlangıçlardan birini kullanabilirsiniz:
 
   || Tek veritabanı |
   |:--- |:--- |
-  | Create| [Portal](sql-database-single-database-get-started.md) |
+  | Oluşturma| [Portal](sql-database-single-database-get-started.md) |
   || [CLI](scripts/sql-database-create-and-configure-database-cli.md) |
   || [PowerShell](scripts/sql-database-create-and-configure-database-powershell.md) |
-  | Yapılandırma | [sunucu düzeyinde IP güvenlik duvarı kuralı](sql-database-server-level-firewall-rule.md)|
+  | Yapılandırma | [Sunucu düzeyi IP güvenlik duvarı kuralı](sql-database-server-level-firewall-rule.md)|
   |||
 
 > [!NOTE]
-> Sorgu Düzenleyicisi, bağlantı noktası 443 ve 1443 iletişim kurmak için kullanır.  Bu bağlantı noktalarında giden HTTPS trafiğini etkin olun. Giden IP adresiniz veritabanlarınıza ve veri ambarlarınıza erişmesini server'ın izin verilen güvenlik duvarı kuralları eklemeniz gerekir.
+> Sorgu Düzenleyicisi, iletişim kurmak için 443 ve 1443 bağlantı noktalarını kullanır.  Lütfen bu bağlantı noktalarında giden HTTPS trafiğini etkinleştirmiş olduğunuzdan emin olun. Ayrıca, veritabanlarına ve veri ambarlarınıza erişmek için giden IP adresinizi sunucunun izin verilen güvenlik duvarı kurallarına eklemeniz gerekir.
 
-## <a name="sign-in-the-azure-portal"></a>Azure portalında oturum açın
+## <a name="sign-in-the-azure-portal"></a>Azure portal oturum açın
 
-[Azure Portal](https://portal.azure.com/) oturum açın.
+[Azure portalında](https://portal.azure.com/) oturum açın.
 
-## <a name="connect-using-sql-authentication"></a>SQL kimlik doğrulamasını kullanarak bağlanma
+## <a name="connect-using-sql-authentication"></a>SQL kimlik doğrulaması kullanarak bağlanma
 
-1. Seçin **SQL veritabanları** seçin ve sol taraftaki menüden **mySampleDatabase**.
+1. Bir SQL veritabanına bağlanmak için Azure portal gidin. **SQL veritabanlarını**arayın ve seçin.
 
-2. Sol taraftaki menüde bulmak ve seçmek **sorgu Düzenleyicisi (Önizleme)** . **Oturum açma** sayfası görüntülenir.
+    ![SQL veritabanı listesi ' ne gidin Azure portal](./media/sql-database-connect-query-portal/search-for-sql-databases.png)
+
+2. SQL veritabanınızı seçin.
+
+    ![Bir SQL veritabanı seçin Azure portal](./media/sql-database-connect-query-portal/select-a-sql-database.png)
+
+3. **SQL veritabanı** menüsünde **sorgu Düzenleyicisi 'ni (Önizleme)** seçin.
 
     ![sorgu düzenleyicisini bulma](./media/sql-database-connect-query-portal/find-query-editor.PNG)
 
-3. Gelen **Yetkilendirme türü** açılan menüsünde, select **SQL Server kimlik doğrulamasını** ve kullanıcı kimliği ve veritabanı oluşturmak için kullanılan sunucu yönetici hesabı parolasını girin.
+4. **Oturum açma** sayfasında, **SQL Server kimlik doğrulama** etiketi altında, veritabanını oluşturmak için kullanılan sunucu yöneticisi hesabının **oturum açma** kimliğini ve **parolasını** girin. Sonra **Tamam**’ı seçin.
 
     ![oturum aç](./media/sql-database-connect-query-portal/login-menu.png)
 
-4. **Tamam**’ı seçin.
+## <a name="connect-using-azure-active-directory"></a>Azure Active Directory kullanarak bağlanma
 
-
-## <a name="connect-using-azure-active-directory"></a>Azure Active Directory kullanarak bağlan
-
-Bir Active Directory (AD) yöneticisinin yapılandırılması, Azure portalı ve SQL veritabanınızda oturum açmak için tek bir kimlik kullanmanıza olanak sağlar. SQL server için bir AD Yöneticisi yapılandırmak için aşağıdaki adımları izleyin.
+Azure Active Directory (Azure AD) Yöneticisi yapılandırmak, Azure portal ve SQL veritabanınızda oturum açmak için tek bir kimlik kullanmanıza olanak sağlar. SQL sunucunuz için bir Azure AD yöneticisi yapılandırmak üzere aşağıdaki adımları izleyin.
 
 > [!NOTE]
-> * E-posta hesapları (örneğin, outlook.com, gmail.com, yahoo.com vb.) AD yöneticileri olarak henüz desteklenmemektedir. Bir kullanıcı ya da yerel olarak Azure AD'de oluşturulmuş veya Azure AD ile Federasyon seçtiğinizden emin olun.
-> * Azure AD Yöneticisi'ni açın 2 faktörlü kimlik doğrulaması etkin olan hesapları ile çalışmaz.
+> * E-posta hesapları (örneğin, outlook.com, gmail.com, yahoo.com, vb.) henüz Azure AD yöneticileri olarak desteklenmez. Azure AD 'de yerel olarak oluşturulmuş bir kullanıcı veya Azure AD 'de Federasyon seçeneklerinden birini seçtiğinizden emin olun.
+> * Azure AD yönetici oturum açma özelliği, 2 öğeli kimlik doğrulaması etkinleştirilmiş hesaplarla çalışmaz.
 
-1. Seçin **tüm kaynakları** sol taraftaki menüden ve ardından SQL server'ınızı seçin.
+1. Azure portal menüsünde veya **giriş** sayfasından **tüm kaynaklar**' ı seçin.
 
-2. SQL server'ın gelen **ayarları** menüsünde **Active Directory Yöneticisi**.
+2. SQL Server 'nizi seçin.
 
-3. AD Yönetim sayfası araç çubuğundan seçin **yönetici Ayarla** ve kullanıcı veya grup, AD Yöneticisi olarak seçin
+3. **SQL Server** menüsünde, **Ayarlar**' ın altında, **yönetici Active Directory**' yi seçin.
+
+4. SQL Server **Active Directory yönetici** sayfası araç çubuğundan **yönetici ayarla** ' yı seçin ve Azure AD yöneticinizle Kullanıcı veya grup ' u seçin.
 
     ![active directory seçme](./media/sql-database-connect-query-portal/select-active-directory.png)
 
-4. AD Yönetim sayfası araç çubuğundan seçin **Kaydet**.
+5. **Yönetici Ekle** sayfasında, ara kutusuna bulunacak Kullanıcı veya grubu girin, yönetici olarak seçin ve ardından **Seç** düğmesini seçin.
 
-5. Gidin **mySampleDatabase** veritabanı ve sol taraftaki menüden **sorgu Düzenleyicisi (Önizleme)** . **Oturum açma** sayfası görüntülenir. Bir AD, daha sonra sağ tarafta altında yöneticisiyseniz **Active Directory çoklu oturum açma**, açtığınızdan bildiren bir ileti görüntülenir.
+6. SQL Server **Active Directory yönetici** sayfası araç çubuğuna geri dönerek **Kaydet**' i seçin.
 
-6. **Tamam**’ı seçin.
+7. **SQL Server** menüsünde **SQL veritabanları**' nı seçin ve ardından SQL veritabanınızı seçin.
 
+8. **SQL veritabanı** menüsünde **sorgu Düzenleyicisi 'ni (Önizleme)** seçin. **Oturum açma** sayfasında, **Active Directory kimlik doğrulama** etiketi altında, bir Azure AD yöneticisiyseniz oturum açmış olduğunuzu bildiren bir ileti görüntülenir. Sonra, *Kullanıcı veya grup kimliği > düğmesini\<* **olarak devam et** ' i seçin.
 
 ## <a name="view-data"></a>Verileri görüntüleme
 
-1. Doğrulandıktan sonra ilk 20 ürünü kategoriye göre almak için sorgu Düzenleyicisi'nde aşağıdaki SQL yapıştırın.
+1. Kimlik doğrulamasından geçtikten sonra, kategoriye göre ilk 20 ürünü almak için aşağıdaki SQL 'i sorgu düzenleyicisine yapıştırın.
 
    ```sql
     SELECT TOP 20 pc.Name as CategoryName, p.name as ProductName
@@ -94,18 +99,18 @@ Bir Active Directory (AD) yöneticisinin yapılandırılması, Azure portalı ve
     ON pc.productcategoryid = p.productcategoryid;
    ```
 
-2. Araç çubuğunda **çalıştırma** ve ardından çıktıyı inceleyin **sonuçları** bölmesi.
+2. Araç çubuğunda **Çalıştır** ' ı seçin ve ardından **sonuçlar** bölmesinde çıktıyı gözden geçirin.
 
-![sorgu düzenleyicisi sonuçları](./media/sql-database-connect-query-portal/query-editor-results.png)
+   ![sorgu düzenleyicisi sonuçları](./media/sql-database-connect-query-portal/query-editor-results.png)
 
 ## <a name="insert-data"></a>Veri ekleme
 
-Aşağıdaki komutu çalıştırın [Ekle](https://msdn.microsoft.com/library/ms174335.aspx) yeni bir ürün eklemek için Transact-SQL deyimini `SalesLT.Product` tablo.
+`SalesLT.Product` tablosuna yeni bir ürün eklemek için aşağıdaki [Insert](https://msdn.microsoft.com/library/ms174335.aspx) Transact-SQL ifadesini çalıştırın.
 
-1. Önceki sorguyu Bununla değiştirin.
+1. Önceki sorguyu bununla değiştirin.
 
-   ```sql
-   INSERT INTO [SalesLT].[Product]
+    ```sql
+    INSERT INTO [SalesLT].[Product]
            ( [Name]
            , [ProductNumber]
            , [Color]
@@ -114,7 +119,7 @@ Aşağıdaki komutu çalıştırın [Ekle](https://msdn.microsoft.com/library/ms
            , [ListPrice]
            , [SellStartDate]
            )
-     VALUES
+    VALUES
            ('myNewProduct'
            ,123456789
            ,'NewColor'
@@ -125,14 +130,14 @@ Aşağıdaki komutu çalıştırın [Ekle](https://msdn.microsoft.com/library/ms
    ```
 
 
-2. Seçin **çalıştırma** yeni bir satır eklemek için `Product` tablo. **İletileri** bölmesini görüntüler **sorgu başarılı oldu: Etkilenen Satırlar: 1**.
+2. `Product` tablosuna yeni bir satır eklemek için **Çalıştır** ' ı seçin. **İletiler** bölmesi **sorgu başarılı: etkilenen satırlar: 1 ' i**görüntüler.
 
 
 ## <a name="update-data"></a>Verileri güncelleştirme
 
-Aşağıdaki komutu çalıştırın [güncelleştirme](https://msdn.microsoft.com/library/ms177523.aspx) yeni ürün değiştirmek için Transact-SQL deyimi.
+Yeni ürününüzü değiştirmek için aşağıdaki [Update](https://msdn.microsoft.com/library/ms177523.aspx) Transact-SQL ifadesini çalıştırın.
 
-1. Önceki sorguyu Bununla değiştirin.
+1. Önceki sorguyu bununla değiştirin.
 
    ```sql
    UPDATE [SalesLT].[Product]
@@ -140,39 +145,39 @@ Aşağıdaki komutu çalıştırın [güncelleştirme](https://msdn.microsoft.co
    WHERE Name = 'myNewProduct';
    ```
 
-2. Seçin **çalıştırma** belirtilen satırı güncelleştirmek için `Product` tablo. **İletileri** bölmesini görüntüler **sorgu başarılı oldu: Etkilenen Satırlar: 1**.
+2. `Product` tablosundaki belirtilen satırı güncelleştirmek için **Çalıştır** ' ı seçin. **İletiler** bölmesi **sorgu başarılı: etkilenen satırlar: 1 ' i**görüntüler.
 
 ## <a name="delete-data"></a>Verileri silme
 
-Aşağıdaki komutu çalıştırın [Sil](https://msdn.microsoft.com/library/ms189835.aspx) Transact-SQL deyimini kullanarak yeni ürünü kaldırmak için.
+Yeni ürününüzü kaldırmak için aşağıdaki [Delete](https://msdn.microsoft.com/library/ms189835.aspx) Transact-SQL ifadesini çalıştırın.
 
-1. Önceki sorguyu Bununla değiştirin:
+1. Önceki sorguyu bununla değiştirin:
 
    ```sql
    DELETE FROM [SalesLT].[Product]
    WHERE Name = 'myNewProduct';
    ```
 
-2. Seçin **çalıştırma** belirtilen satırı silmek için `Product` tablo. **İletileri** bölmesini görüntüler **sorgu başarılı oldu: Etkilenen Satırlar: 1**.
+2. `Product` tablosundaki belirtilen satırı silmek için **Çalıştır** ' ı seçin. **İletiler** bölmesi **sorgu başarılı: etkilenen satırlar: 1 ' i**görüntüler.
 
 
 ## <a name="query-editor-considerations"></a>Sorgu Düzenleyicisi konuları
 
-Sorgu Düzenleyicisi ile çalışırken bilmeniz gereken birkaç nokta vardır.
+Sorgu Düzenleyicisi ile çalışırken bilmemiz gereken birkaç nokta vardır.
 
-* Sorgu Düzenleyicisi, bağlantı noktası 443 ve 1443 iletişim kurmak için kullanır.  Bu bağlantı noktalarında giden HTTPS trafiğini etkin olun. Giden IP adresiniz veritabanlarınıza ve veri ambarlarınıza erişmesini server'ın izin verilen güvenlik duvarı kuralları eklemeniz gerekir.
+* Sorgu Düzenleyicisi, iletişim kurmak için 443 ve 1443 bağlantı noktalarını kullanır.  Lütfen bu bağlantı noktalarında giden HTTPS trafiğini etkinleştirmiş olduğunuzdan emin olun. Ayrıca, veritabanlarına ve veri ambarlarınıza erişmek için giden IP adresinizi sunucunun izin verilen güvenlik duvarı kurallarına eklemeniz gerekir.
 
-* F5 tuşuna basarak sorgu Düzenleyicisi sayfası yenilenir ve üzerinde çalışılmakta olan herhangi bir sorgu kaybolur.
+* F5 tuşuna basıldığında sorgu Düzenleyicisi sayfası yenilenir ve üzerinde çalışılan sorgular kaybolur.
 
-* Sorgu Düzenleyicisi, bağlanmayı desteklemez `master` veritabanı.
+* Sorgu Düzenleyicisi `master` veritabanına bağlanmayı desteklemiyor.
 
-* Sorgu yürütme için 5 dakikalık zaman aşımı yoktur.
+* Sorgu yürütmesi için 5 dakikalık bir zaman aşımı vardır.
 
-* Sorgu Düzenleyicisi, yalnızca coğrafi veri türleri için Silindirik izdüşümü destekler.
+* Sorgu Düzenleyicisi, Coğrafya veri türleri için yalnızca silindir projeksiyonu destekler.
 
-* Veritabanı tabloları ve görünümleri için IntelliSense desteği yoktur. Ancak, düzenleyici zaten girilmiş adları otomatik tamamlama desteklemiyor.
+* Veritabanı tabloları ve görünümleri için IntelliSense desteği yoktur. Ancak, düzenleyici zaten girilmiş olan adlarla otomatik tamamlamayı destekler.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure SQL veritabanlarında desteklenen Transact-SQL hakkında daha fazla bilgi için bkz: [Transact-SQL farklılıklarını çözümleme SQL veritabanına geçiş sırasında](sql-database-transact-sql-information.md).
+Azure SQL veritabanlarında desteklenen Transact-SQL hakkında daha fazla bilgi edinmek için bkz. [SQL veritabanına geçiş sırasında Transact-SQL farklılıklarını çözümleme](sql-database-transact-sql-information.md).

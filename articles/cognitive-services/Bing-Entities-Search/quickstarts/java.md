@@ -1,31 +1,31 @@
 ---
-title: "Hızlı Başlangıç: Java kullanarak Bing varlık arama REST API'si için bir arama isteği gönder"
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, Java kullanarak Bing varlık arama REST API'si için bir istek göndermek için kullanın ve bir JSON yanıtı alırsınız.
+title: 'Hızlı Başlangıç: Java kullanarak Bing Varlık Arama REST API bir arama isteği gönderme'
+titleSuffix: Azure Cognitive Services
+description: Java kullanarak Bing Varlık Arama REST API isteği göndermek ve bir JSON yanıtı almak için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-entity-search
 ms.topic: quickstart
-ms.date: 02/01/2019
+ms.date: 07/24/2019
 ms.author: aahi
-ms.openlocfilehash: a8b25252e861d707568876f75aadd6f436441f8f
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 1f7d9620198042adc7f96e7c4aaa269f73870df0
+ms.sourcegitcommit: 75a56915dce1c538dc7a921beb4a5305e79d3c7a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66389429"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68478988"
 ---
-# <a name="quickstart-send-a-search-request-to-the-bing-entity-search-rest-api-using-java"></a>Hızlı Başlangıç: Java kullanarak Bing varlık arama REST API'si için bir arama isteği gönder
+# <a name="quickstart-send-a-search-request-to-the-bing-entity-search-rest-api-using-java"></a>Hızlı Başlangıç: Java kullanarak Bing Varlık Arama REST API bir arama isteği gönderme
 
-Bu hızlı başlangıçta, Bing varlık arama API'si, ilk çağrı yapmak ve JSON yanıtı görüntülemek için kullanın. Bu basit bir Java uygulaması API için bir haber arama sorgu gönderir ve yanıtını görüntüler.
+Bing Varlık Arama API'si ilk çağrısını yapmak ve JSON yanıtını görüntülemek için bu hızlı başlangıcı kullanın. Bu basit Java uygulaması, API 'ye bir haber arama sorgusu gönderir ve yanıtı görüntüler.
 
 Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Java geliştirme Kit(JDK)](https://www.oracle.com/technetwork/java/javase/downloads/)
+* [Java Development Kit (JDK)](https://www.oracle.com/technetwork/java/javase/downloads/)
 * [Gson kitaplığı](https://github.com/google/gson)
 
 
@@ -50,7 +50,7 @@ Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyl
    import com.google.gson.JsonParser;
    ```
 
-2. Yeni bir sınıf içinde API uç noktası, abonelik anahtarınız ve bir arama sorgusu için değişkenleri oluşturun.
+2. Yeni bir sınıfta, API uç noktası, abonelik anahtarınız ve bir arama sorgusu için değişkenler oluşturun.
 
    ```java
    public class EntitySearch {
@@ -66,11 +66,11 @@ Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyl
     
    ```
 
-## <a name="construct-a-search-request-string"></a>Bir arama isteği dizesi oluşturun
+## <a name="construct-a-search-request-string"></a>Arama isteği dizesi oluşturun
 
-1. Çağrılan bir işlev oluşturma `search()` bir JSON döndüren `String`. URL-arama sorgunuz kodlamak ve parametreleri dizesiyle eklemek `&q=`. Dizenin pazarınızın eklemek `?mkt=`.
+1. `search()` JSON`String`döndüren adlı bir işlev oluşturun. URL-arama sorgunuzu kodlayın ve ile `&q=`bir parametre dizesine ekleyin. Pazarını ile `?mkt=`dizeye ekleyin.
  
-2. Konak ve yol parametreleri dizelerinizle bir URL oluşturur.
+2. Ana bilgisayarınız, yollarınız ve parametre Dizeleriniz ile bir URL nesnesi oluşturun.
     
     ```java
     //...
@@ -81,9 +81,9 @@ Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyl
     //...
     ```
       
-## <a name="send-a-search-request-and-receive-a-response"></a>Arama isteği gönderme ve yanıt
+## <a name="send-a-search-request-and-receive-a-response"></a>Arama isteği gönderme ve yanıt alma
 
-1. İçinde `search()` yukarıda işlevi oluşturdunuz, yeni bir `HttpsURLConnection` nesnesi ile `url.openCOnnection()`. İstek yöntemini ayarla `GET`, abonelik anahtarınızı ekleyin `Ocp-Apim-Subscription-Key` başlığı.
+1. Yukarıda oluşturulan `HttpsURLConnection` işlevde, ile `url.openCOnnection()`yeni bir nesne oluşturun. `search()` İstek yöntemini olarak `GET`ayarlayın ve abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin.
 
     ```java
     //...
@@ -94,7 +94,7 @@ Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyl
     //...
     ```
 
-2. Yeni bir `StringBuilder`. Yeni bir `InputStreamReader` örneği oluşturulurken bir parametre olarak `BufferedReader` API yanıtı okumak için.  
+2. Yeni `StringBuilder`bir oluştur. API yanıtını okumak `InputStreamReader` için örneği `BufferedReader` oluşturulurken yeni bir parametre olarak kullanın.  
     
     ```java
     //...
@@ -104,7 +104,7 @@ Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyl
     //...
     ```
 
-3. Oluşturma bir `String` yanıttan depolamak için nesne `BufferedReader`. Üzerinden yinelemek ve dizeyi her bir satır ekleyin. Ardından okuyucu kapatın ve yanıtı döndürür. 
+3. Kaynağından yanıtı `String` depolamak için bir nesne oluşturun. `BufferedReader` Üzerinde yineleme yapın ve her satırı dizeye ekleyin. Sonra okuyucuyu kapatıp yanıtı döndürün. 
     
     ```java
     String line;
@@ -117,11 +117,11 @@ Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyl
     return response.toString();
     ```
 
-## <a name="format-the-json-response"></a>JSON yanıtı biçimlendirme
+## <a name="format-the-json-response"></a>JSON yanıtını biçimlendirme
 
-1. Adlı yeni bir işlev oluşturma `prettify` JSON yanıtı biçimlendirmek için. Yeni bir `JsonParser`ve çağrı `parse()` json metni ve bir JSON nesnesi olarak depolar. 
+1. JSON yanıtını biçimlendirmek için çağrılan `prettify` yeni bir işlev oluşturun. Yeni `JsonParser`bir oluşturun ve JSON metninde `parse()` bir çağrı yapın ve bunu JSON nesnesi olarak depolayın. 
 
-2. Yeni bir Gson kitaplığını kullanma `GsonBuilder()`ve `setPrettyPrinting().create()` json biçimine. Ardından onu döndürür.    
+2. Yeni `GsonBuilder()`bir oluşturmak `setPrettyPrinting().create()` ve JSON biçimlendirmek için gson kitaplığı kullanın. Ardından döndürün.    
   
    ```java
    //...
@@ -134,9 +134,9 @@ Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyl
    //...
    ```
 
-## <a name="call-the-search-function"></a>Arama işlevini çağırın
+## <a name="call-the-search-function"></a>Search işlevini çağırın
 
-1. Projenizin ana yönteminden çağrı `search()`ve `prettify()` metni biçimlendirmek için.
+1. Projenizin Main yönteminden, çağırın `search()`ve metni biçimlendirmek için kullanın. `prettify()`
     
     ```java
         public static void main(String[] args) {
@@ -218,7 +218,7 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Tek sayfa uygulaması oluşturma](../tutorial-bing-entities-search-single-page-app.md)
+> [Tek sayfalı Web uygulaması oluşturma](../tutorial-bing-entities-search-single-page-app.md)
 
-* [Bing varlık arama API'si nedir?](../overview.md )
-* [Bing varlık arama API'si başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference)
+* [Bing Varlık Arama API'si nedir?](../overview.md )
+* [Bing Varlık Arama API'si Başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference)

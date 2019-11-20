@@ -1,20 +1,21 @@
 ---
-title: Öğretici - Traffic Manager ile etki alanı tepe adlarını desteklemek için Azure DNS diğer ad kaydı oluşturma
+title: 'Öğretici: etki alanı tepesinde adlarını desteklemek için bir diğer ad kaydı oluşturma-Traffic Manager'
+titleSuffix: Azure DNS
 description: Bu öğreticide Traffic Manager ile etki alanı tepe adının kullanılmasını desteklemek için Azure DNS diğer ad kaydı yapılandırma adımları gösterilmektedir.
 services: dns
-author: vhorne
+author: asudbring
 ms.service: dns
 ms.topic: tutorial
 ms.date: 9/25/2018
-ms.author: victorh
-ms.openlocfilehash: 6bb3506e60894db525efaf2985dd92f9eaaf9e0a
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: allensu
+ms.openlocfilehash: 3834b782be054611de67b782b7fcd0c46cbf3a19
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60921432"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74082262"
 ---
-# <a name="tutorial-configure-an-alias-record-to-support-apex-domain-names-with-traffic-manager"></a>Öğretici: Bir diğer ad kaydı Apex etki alanı adları ile Traffic Manager'ı destekleyecek şekilde yapılandırma 
+# <a name="tutorial-configure-an-alias-record-to-support-apex-domain-names-with-traffic-manager"></a>Öğretici: Traffic Manager ile tepe etki alanı adlarını desteklemek için diğer ad kaydı yapılandırma 
 
 Bir Azure Traffic Manager profiline başvurmak üzere etki alanı tepe adı için diğer ad kaydı oluşturabilirsiniz. Örneğin: contoso.com. Yönlendirme hizmeti kullanmak yerine Azure DNS yapılandırması ile Traffic Manager profiline doğrudan bölgenizden başvurabilirsiniz. 
 
@@ -33,13 +34,13 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 ## <a name="prerequisites"></a>Önkoşullar
 Birlikte test edilecek Azure DNS içinde barındırabileceğiniz bir etki alanı adınızın olması gerekir. Bu etki alanı üzerinde tam denetime sahip olmanız gerekir. Tam denetim, etki alanı için ad sunucusu (NS) kayıtlarını ayarlama olanağını kapsar.
 
-Etki alanınızı Azure DNS'de barındırmak yönergeler için bkz: [Öğreticisi: Etki alanınızı Azure DNS'de konak](dns-delegate-domain-azure-dns.md).
+Azure DNS’te etki alanınızı barındırma yönergeleri için bkz. [Öğretici: Azure DNS’te etki alanınızı barındırma](dns-delegate-domain-azure-dns.md).
 
 Bu öğreticide örnek olarak contoso.com etki alanı kullanılmaktadır ancak sizin kendi etki alanı adınızı kullanmanız gerekir.
 
 ## <a name="create-the-network-infrastructure"></a>Ağ altyapısını oluşturma
 İlk olarak, web sunucularınızı içine yerleştirmek için bir sanal ağ ve alt ağ oluşturun.
-1. [https://portal.azure.com](https://portal.azure.com ) adresinden Azure portalında oturum açın.
+1. https://portal.azure.com adresinden Azure portalında oturum açın.
 2. Portalda sol üst köşeden **Kaynak oluştur**'u seçin. Arama kutusuna *kaynak grubu* yazın ve **RG-DNS-Alias-TM** adlı bir kaynak grubu oluşturun.
 3. **Kaynak oluştur** > **Ağ** > **Sanal Ağ**'ı seçin.
 4. **VNet-Servers** adlı bir sanal ağ oluşturun. Bunu **RG-DNS-Alias-TM** kaynak grubunun içine yerleştirin ve alt ağı **SN-Web** olarak adlandırın.
@@ -84,7 +85,7 @@ Bu işlemleri tekrarlayarak **Web-02** üzerine de IIS yükleyin.
 1. **RG-DNS-Alias-TM** kaynak grubunu açın ve **Web-01-ip** Genel IP adresini seçin. Daha sonra kullanmak için IP adresini not edin. Bu adımı **Web-02-ip** genel IP adresi için tekrarlayın.
 1. **Kaynak oluştur** > **Ağ** > **Traffic Manager profili**'ni seçin.
 2. Ad olarak **TM-alias-test** girin. Bunu **RG-DNS-Alias-TM** kaynak grubunun içine yerleştirin.
-3. **Oluştur**’u seçin.
+3. **Oluştur**'u seçin.
 4. Dağıtım tamamlandıktan sonra **Kaynağa git**'i seçin.
 5. Traffic Manager profili sayfasının **Ayarlar** bölümünde **Uç noktalar**'ı seçin.
 6. **Add (Ekle)** seçeneğini belirleyin.

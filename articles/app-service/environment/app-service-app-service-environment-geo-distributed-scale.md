@@ -1,6 +1,6 @@
 ---
-title: Coğrafi olarak dağıtılmış ölçek App Service ortamları - Azure ile
-description: Traffic Manager ve App Service ortamları ile coğrafi dağıtım kullanarak uygulamaları yatay olarak ölçeklendirmeyi öğrenin.
+title: App Service ortamları ile coğrafi olarak dağıtılmış ölçek-Azure
+description: Traffic Manager ve App Service ortamları ile coğrafi dağıtım kullanarak uygulamaları yatay olarak ölçeklendirirsiniz.
 services: app-service
 documentationcenter: ''
 author: stefsch
@@ -10,66 +10,65 @@ ms.assetid: c1b05ca8-3703-4d87-a9ae-819d741787fb
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 09/07/2016
 ms.author: stefsch
 ms.custom: seodec18
-ms.openlocfilehash: 769e6b9936ad6d3cb963e208cec4c49813f2b6d3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: eaefebc569f5bf5461ff7c4407fa77a0c62d4fe8
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62130730"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70070212"
 ---
 # <a name="geo-distributed-scale-with-app-service-environments"></a>App Service Ortamları ile Coğrafi Olarak Dağıtılmış Ölçek
 ## <a name="overview"></a>Genel Bakış
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Gerektiren çok büyük ölçekli uygulama senaryoları, tek bir uygulama dağıtımı için kullanılabilir işlem kaynak kapasitesini aşamaz.  Uygulamaları oylama, spor ve eğlence televised olayları tüm son derece büyük ölçekli gerektiren senaryolar örnekleridir. Yüksek ölçek gereksinimlerine uygulamalarına göz aşırı yük gereksinimlerini karşılamak için tek bir bölgede yanı sıra bölgeler genelinde yapılan birden çok uygulama dağıtımları ile yatay ölçeklendirme tarafından karşılanabilir.
+Çok yüksek ölçek gerektiren uygulama senaryoları, bir uygulamanın tek bir dağıtımına sunulan işlem kaynağı kapasitesini aşabilir.  Oylama uygulamaları, spor olayları ve teledenetlenen eğlence olayları, son derece yüksek ölçek gerektiren senaryolara örnek olarak verilebilir. Yüksek ölçekli gereksinimler, tek bir bölgede birden fazla uygulama dağıtımı ve bölgeler arasında, çok fazla yük gereksinimini işlemek üzere, uygulamalar arasında yatay olarak ölçeklendirerek karşılanacak.
 
-App Service ortamları yatay ölçek genişletme için ideal bir platform olan.  Bir kez bir App Service yapılandırma seçili, bilinen istek hızı destekleyebilir ortamı, geliştiricilerin ek App Service istenen yoğun yük kapasitesi elde etmek için ortamları "Tanımlama Bilgisi kesici" bir şekilde dağıtabilirsiniz.
+App Service ortamlar yatay ölçek genişletme için ideal bir platformdur.  Bilinen bir istek oranını destekleyebilen bir App Service Ortamı yapılandırması seçildikten sonra, geliştiriciler istenen en yüksek yük kapasitesini karşılamak için "tanımlama bilgisi kesici" olarak ek App Service ortamları dağıtabilir.
 
-Örneğin, bir App Service ortamı yapılandırması üzerinde çalışan bir uygulamanın (RP'ler) saniye başına 20 bin isteklerini işlemek üzere test edilmiştir varsayalım.  100 bin RPS istenen yoğun yük kapasite ise daha sonra beş (5) App Service ortamları oluşturulabilir ve uygulamanın en fazla öngörülen yük işleyebilir emin olmak için yapılandırılmış.
+Örneğin, bir App Service Ortamı yapılandırması üzerinde çalışan bir uygulamanın saniyede 20 KB istek (RPS) işlemek için test edildiğini varsayalım.  İstenen en yüksek yük kapasitesi 100K RPS ise, beş (5) App Service ortamlar oluşturulup uygulamanın en yüksek tahmini yükü işleyebileceğinden emin olmak için yapılandırılabilir.
 
-Müşteriler genellikle bir özel (veya gösterim) etki alanı'nı kullanarak uygulamalara erişmesine, geliştiricilerin uygulama istekleri tüm App Service ortamı örnekleri arasında dağıtmak için bir yol gerekir.  Özel etki alanı kullanarak çözümlemek için bunu gerçekleştirmek için harika bir yoludur bir [Azure Traffic Manager profilini][AzureTrafficManagerProfile].  Traffic Manager profili, ayrı App Service ortamları tümünün işaret edecek şekilde yapılandırılabilir.  Traffic Manager otomatik olarak dağıtılmasını müşteriler tüm App Service ortamları Traffic Manager profili ayarları yük dengelemeyi göre işler.  Bu yaklaşım olup tüm App Service ortamları tek bir Azure bölgesinde dağıtılmış veya Azure bölgelerinde dünya çapında dağıtılan bağımsız olarak çalışır.
+Müşteriler genellikle özel bir (veya Vanity) etki alanı kullanarak uygulamalara erişdiklerinden, geliştiricilerin tüm App Service Ortamı örneklerine uygulama istekleri dağıtması için bir yol gerekir.  Bunu gerçekleştirmenin harika bir yolu da, [Azure Traffic Manager profilini][AzureTrafficManagerProfile]kullanarak özel etki alanını çözümlemelidir.  Traffic Manager profili, bireysel App Service ortamlarının tümünü gösterecek şekilde yapılandırılabilir.  Traffic Manager, Traffic Manager profilindeki Yük Dengeleme ayarlarına bağlı olarak, App Service ortamlarının tamamında müşteri dağıtmayı otomatik olarak işleyecek.  Bu yaklaşım, App Service ortamlarının tümünün tek bir Azure bölgesinde dağıtılıp dağıtılmadığına veya birden çok Azure bölgesinde dünya genelinde dağıtılıp dağıtılmasından bağımsız olarak çalışmaktadır.
 
-Ayrıca, müşteriler uygulamalarının gösterim etki alanı erişip olduğundan, müşteriler çalışan bir uygulamayı App Service ortamları sayısı farkında değildir.  Sonuç olarak geliştiriciler hızlı ve kolay bir şekilde, ekleyip kaldırabilirsiniz, App Service ortamlarında gözlemlenen trafiği yüküne göre.
+Ayrıca, müşteriler uygulamalara gösterim etki alanı üzerinden erişdiklerinden, müşteriler bir uygulamayı çalıştıran App Service ortamların sayısını farkında değildir.  Sonuç olarak, geliştiriciler, gözlemlenen trafik yüküne göre ortamları hızlı ve kolay bir şekilde ekleyebilir ve kaldırabilir App Service.
 
-Aşağıdaki kavramsal diyagram yatay olarak tek bir bölgede üç App Service ortamları arasında ölçeği bir uygulama gösterilmektedir.
+Aşağıdaki kavramsal diyagramda, tek bir bölgedeki üç App Service ortamda yatay olarak ölçeklendirilmiş bir uygulama gösterilmektedir.
 
 ![Kavramsal mimari][ConceptualArchitecture] 
 
-Bu konunun geri kalanı için örnek uygulamayı birden fazla App Service ortamları kullanarak dağıtılmış bir tipoloji ayarlama ile ilgili adım adım anlatılmaktadır.
+Bu konunun geri kalanında, birden çok App Service ortamı kullanarak örnek uygulama için dağıtılmış bir topoloji ayarlama ile ilgili adımlar adım adım gösterilmektedir.
 
-## <a name="planning-the-topology"></a>Topoloji planlama
-Bir dağıtılmış uygulama Ayak izi kullanıma yapılandırmadan önce önceden birkaç parça bilgi sağlamak için yardımcı olur.
+## <a name="planning-the-topology"></a>Topolojiyi planlama
+Dağıtılmış bir uygulama ayak izi oluşturmadan önce, daha önce bazı parça bilgilerine sahip olmaya yardımcı olur.
 
-* **Uygulama için özel etki alanı:**  Müşteriler, uygulamaya erişmek için kullanacağı özel etki alanı adı nedir?  Örnek uygulama için özel etki alanı adıdır `www.scalableasedemo.com`
-* **Traffic Manager etki alanı:**  Bir etki alanı adı oluşturulurken seçilmesi gerekir bir [Azure Traffic Manager profilini][AzureTrafficManagerProfile].  Bu ad ile birlikte *trafficmanager.net* soneki Traffic Manager tarafından yönetilen bir etki alanı girişi kaydetmek için kullanılır.  Örnek uygulama için adı seçilen olduğu *ase tanıtım ölçeklenebilir*.  Sonuç olarak, Traffic Manager tarafından yönetilen tam etki alanı adıdır *ase demo.trafficmanager.net ölçeklenebilir*.
-* **Uygulama Ayak izi ölçeklendirme stratejisi:**  Uygulama Ayak izi, tek bir bölgede birden fazla App Service ortamları arasında dağıtılır?  Birden çok bölgede?  Bir karışımı ve eşleştirme her iki yaklaşımın?  Karar ne kadar iyi bir uygulamanın arka uç altyapısı destekleme rest ölçeklendirebilirsiniz yanı sıra burada müşteri trafiğinden kaynaklanan beklentilerini bağlı olmalıdır.  Örneğin, durum bilgisi olmayan bir % 100 uygulama ile birlikte uygulama yüksek düzeyde Azure bölgelerinde dağıtılan App Service ortamları ile çarpılır Azure bölgesi başına birden fazla App Service ortamları oluşan birleşimlerin kullanıldığı ölçeklendirilebilir.  15 + ortak olan Azure bölgeleri seçim yapabileceğiniz, müşterilerin gerçek anlamda bir dünya çapında hiper ölçekli uygulama Ayak izi oluşturabilirsiniz.  Bu makalede kullanılan örnek uygulama için bir tek bir Azure bölgesinde (Güney Orta ABD) üç App Service ortamları oluşturuldu.
-* **App Service ortamları için adlandırma kuralı:**  Her App Service ortamı, benzersiz bir ad gerektirir.  Bir veya iki App Service ortamları, her bir App Service ortamı belirlemenize yardımcı olması için bir adlandırma kuralınızın bulunduğundan yardımcı olur.  Örnek uygulama için basit bir adlandırma kuralı kullanıldı.  Üç App Service ortamları adlarıdır *fe1ase*, *fe2ase*, ve *fe3ase*.
-* **Uygulamalar için adlandırma kuralı:**  Uygulama birden çok örneğini dağıtılacak olduğundan, dağıtılan uygulamanın her örneği için bir ad gereklidir.  Bir bilinen küçük ama çok kullanışlı App Service ortamları aynı uygulama adı birden fazla App Service ortamları kullanılabilir özelliğidir.  Her App Service ortamı benzersiz etki alanı soneki olduğundan, geliştiricilerin tam aynı uygulama adı her ortamda yeniden kullanmayı da seçebilirsiniz.  Örneğin, bir geliştirici uygulamaları gibi adlı sahip olabilirsiniz: *myapp.foo1.p.azurewebsites.net*, *myapp.foo2.p.azurewebsites.net*, *myapp.foo3.p.azurewebsites.net*vb.  Örnek uygulama için yine de her uygulama örneği de benzersiz bir adı vardır.  Kullanılan uygulama örneği adları *webfrontend1*, *webfrontend2*, ve *webfrontend3*.
+* **Uygulama için özel etki alanı:**  Müşterilerin uygulamaya erişmek için kullanacağı özel etki alanı adı nedir?  Örnek uygulama için özel etki alanı adı`www.scalableasedemo.com`
+* **Traffic Manager etki alanı:**  Bir [Azure Traffic Manager profili][AzureTrafficManagerProfile]oluştururken bir etki alanı adının seçilmesi gerekir.  Bu ad, Traffic Manager tarafından yönetilen bir etki alanı girdisini kaydetmek için *trafficmanager.net* sonekiyle birleştirilir.  Örnek uygulama için, seçilen ad *ölçeklenebilir-Ao-demo*' dir.  Sonuç olarak, Traffic Manager tarafından yönetilen tam etki alanı adı *Scalable-ASE-demo.trafficmanager.net*' dir.
+* **Uygulama parmak izini ölçeklendirmeye yönelik strateji:**  Uygulama parmak izi tek bir bölgedeki birden çok App Service ortamına dağıtılır mi?  Birden çok bölge mi?  Her iki yaklaşımdan de karıştırma ve eşleme yapılsın mı?  Karar, müşteri trafiğinin nereden kaynaklanmayacak beklentileri temel almalıdır, bunun yanı sıra bir uygulamanın destekleme arka uç altyapısının ne kadar iyi ölçekleyebileceğini de bilmelidir.  Örneğin,% 100 durum bilgisiz olmayan bir uygulamayla, Azure bölgesi başına birden çok App Service ortamının bir birleşimi kullanılarak, birden fazla Azure bölgesinde dağıtılan App Service ortamları ile çarpılarak bir uygulama daha büyük bir şekilde ölçeklendirilebilir.  ' Den seçim yapabileceğiniz 15 + ortak Azure bölgesi sayesinde müşteriler gerçek anlamda dünya genelinde bir hiper ölçekli uygulama parmak izi oluşturabilir.  Bu makalede kullanılan örnek uygulama için, tek bir Azure bölgesinde üç App Service ortamı oluşturulmuştur (Orta Güney ABD).
+* **App Service ortamları için adlandırma kuralı:**  Her App Service Ortamı benzersiz bir ad gerektirir.  Bir veya iki App Service ortamının ötesinde, her bir App Service Ortamı tanımlamanızı sağlayacak bir adlandırma kuralına sahip olmak yararlıdır.  Örnek uygulama için basit bir adlandırma kuralı kullanılmıştır.  Üç App Service ortamının adları *fe1ase*, *fe2ase*ve *fe3ase*.
+* **Uygulamalar için adlandırma kuralı:**  Uygulamanın birden çok örneği dağıtılırsa, dağıtılan uygulamanın her örneği için bir ad gereklidir.  App Service ortamların en az bilinen, çok kullanışlı bir özelliği, aynı uygulama adının birden çok App Service ortamında kullanılabilir olması olabilir.  Her App Service Ortamı benzersiz bir etki alanı sonekine sahip olduğundan, geliştiriciler her ortamda aynı uygulama adının aynısını yeniden kullanmayı seçebilir.  Örneğin, bir geliştirici şu şekilde adlandırılan uygulamalar olabilir: *MyApp.foo1.p.azurewebsites.net*, *MyApp.Foo2.p.azurewebsites.net*, *MyApp.Foo3.p.azurewebsites.net*, vb.  Örnek uygulama için, her bir uygulama örneğinin de benzersiz bir adı vardır.  Kullanılan uygulama örneği adları *webfrontend1*, *webfrontend2*ve *webfrontend3*.
 
-## <a name="setting-up-the-traffic-manager-profile"></a>Traffic Manager profili ayarlama
-Bir uygulama birden çok örneğini birden fazla App Service ortamlarında uygulama dağıtıldıktan sonra Traffic Manager ile tek tek uygulama örnekleri kaydedilebilir.  Örnek uygulama için bir Traffic Manager profili için gerekli *ase demo.trafficmanager.net ölçeklenebilir* , yönlendirebilir müşteriler herhangi şu dağıtılan uygulama örnekleri:
+## <a name="setting-up-the-traffic-manager-profile"></a>Traffic Manager profili ayarlanıyor
+Birden çok App Service ortamında bir uygulamanın birden fazla örneği dağıtıldığında, bireysel uygulama örnekleri Traffic Manager kaydedilebilir.  Örnek uygulama için, müşterileri aşağıdaki dağıtılan uygulama örneklerinden birine yönlendirebileceği *Scalable-ASE-demo.trafficmanager.net* için bir Traffic Manager profili gerekir:
 
-* **webfrontend1.fe1ase.p.azurewebsites.NET:**  İlk App Service ortamında dağıtılan örnek uygulama örneği.
-* **webfrontend2.fe2ase.p.azurewebsites.NET:**  İkinci App Service ortamında dağıtılan örnek uygulama örneği.
-* **webfrontend3.fe3ase.p.azurewebsites.NET:**  Üçüncü App Service ortamında dağıtılan örnek uygulama örneği.
+* **webfrontend1.fe1ase.p.azurewebsites.net:**  İlk App Service Ortamı dağıtılan örnek uygulamanın bir örneği.
+* **webfrontend2.fe2ase.p.azurewebsites.net:**  İkinci App Service Ortamı dağıtılan örnek uygulamanın bir örneği.
+* **webfrontend3.fe3ase.p.azurewebsites.net:**  Üçüncü App Service Ortamı dağıtılan örnek uygulamanın bir örneği.
 
-Birden fazla Azure App Service uç noktası, tüm çalışan kaydetmek için en kolay yolu **aynı** Powershell ile Azure bölgesi olan [Azure Resource Manager Traffic Manager desteği] [ ARMTrafficManager].  
+**Aynı** Azure bölgesinde çalışan birden çok Azure App Service uç noktasını kaydetmek için en kolay yol Powershell [Azure Resource Manager Traffic Manager desteğine][ARMTrafficManager]sahiptir.  
 
-İlk adım, bir Azure Traffic Manager profilini oluşturmaktır.  Aşağıdaki kod, profil için örnek uygulamayı nasıl oluşturulduğu gösterilmektedir:
+İlk adım bir Azure Traffic Manager profili oluşturmaktır.  Aşağıdaki kod, profilin örnek uygulama için nasıl oluşturulduğunu gösterir:
 
     $profile = New-AzureTrafficManagerProfile –Name scalableasedemo -ResourceGroupName yourRGNameHere -TrafficRoutingMethod Weighted -RelativeDnsName scalable-ase-demo -Ttl 30 -MonitorProtocol HTTP -MonitorPort 80 -MonitorPath "/"
 
-Bildirim nasıl *RelativeDnsName* parametresi ayarlanmıştır *ase tanıtım ölçeklenebilir*.  Bu, nasıl etki alanı adı *ase demo.trafficmanager.net ölçeklenebilir* oluşturulur ve Traffic Manager profili ile ilişkilendirilmiş.
+*Relativednsname* parametresinin *ölçeklenebilir-Ao-demo*olarak nasıl ayarlandığına dikkat edin.  Bu, etki alanı adı *Scalable-ASE-demo.trafficmanager.net* oluşturma ve bir Traffic Manager profiliyle ilişkilendirilmesi.
 
-*TrafficRoutingMethod* parametre Yük Dengeleme İlkesi Traffic Manager, müşteri yükü tüm kullanılabilir uç noktalar arasında dağıtmak nasıl belirlemek için kullanacağı tanımlar.  Bu örnekte *ağırlıklı* yöntemi seçildi.  Bu, müşteri isteklerinde tüm her uç noktasıyla ilişkili göreli ağırlıklara göre kayıtlı uygulama uç noktaları yayılmasını neden olur. 
+*TrafficRoutingMethod* parametresi, tüm kullanılabilir uç noktalarda müşteri yükünün nasıl yayılacağı belirleme Traffic Manager yük dengeleme ilkesini tanımlar.  Bu örnekte *ağırlıklı* Yöntem seçilmiştir.  Bu, müşteri isteklerinin her bir uç nokta ile ilişkili görece ağırlıklarla ilgili tüm kayıtlı uygulama uç noktaları arasında yayılmasını sağlayacaktır. 
 
-Profili oluşturulan, her uygulama örneği, bir yerel Azure uç noktası olarak profiline eklenir.  Aşağıdaki kod her ön uç web uygulaması başvuru getirir ve ardından bir Traffic Manager uç noktası sunar olarak her bir uygulama ekler *Targetresourceıd* parametresi.
+Profil oluşturulduğunda, her bir uygulama örneği profile yerel bir Azure uç noktası olarak eklenir.  Aşağıdaki kod her bir ön uç Web uygulamasına bir başvuru getirir ve sonra her uygulamayı *Targetresourceıd* parametresi aracılığıyla Traffic Manager uç noktası olarak ekler.
 
     $webapp1 = Get-AzWebApp -Name webfrontend1
     Add-AzureTrafficManagerEndpointConfig –EndpointName webfrontend1 –TrafficManagerProfile $profile –Type AzureEndpoints -TargetResourceId $webapp1.Id –EndpointStatus Enabled –Weight 10
@@ -82,42 +81,42 @@ Profili oluşturulan, her uygulama örneği, bir yerel Azure uç noktası olarak
 
     Set-AzureTrafficManagerProfile –TrafficManagerProfile $profile
 
-Nasıl bir çağrı fark *Ekle AzureTrafficManagerEndpointConfig* her tek tek uygulama örneği.  *Targetresourceıd* her Powershell komutunu parametresinde üç dağıtılan uygulama örneklerinden birine başvuruyor.  Traffic Manager profilini yük profili kayıtlı tüm üç uç noktalar arasında yayılır.
+Her bir uygulama örneği için *Add-AzureTrafficManagerEndpointConfig* ' e bir çağrı nasıl olduğunu fark edin.  Her PowerShell komutunda *Targetresourceıd* parametresi, dağıtılan üç uygulama örneklerinden birine başvurur.  Traffic Manager profili, profilde kayıtlı olan üç uç noktanın yükünü yayacaktır.
 
-Üç bitiş noktalarının tümü için aynı değeri (10) kullanması *ağırlık* parametresi.  Bu Traffic Manager arasına yayarak müşteri isteklerindeki tüm üç uygulama örnekleri arasında oldukça eşit bir şekilde sonuçlanır. 
+Üç uç noktanın hepsi, *Ağırlık* parametresi için aynı değeri (10) kullanır.  Bu, müşteri isteklerinin tüm üç uygulama örneğine görece eşit olarak yayılmasına Traffic Manager neden olur. 
 
-## <a name="pointing-the-apps-custom-domain-at-the-traffic-manager-domain"></a>Traffic Manager etki alanına özel etki alanında uygulamanın işaret eden
-Özel etki alanını Traffic Manager etki alanındaki uygulamanın işaret edecek şekilde son adım gerekli olduğu.  Örnek uygulama için işaret eden başka bir deyişle `www.scalableasedemo.com` adresindeki `scalable-ase-demo.trafficmanager.net`.  Bu adım, özel etki alanını yöneten etki alanı kayıt şirketinde şunların tamamlanmış gerekir.  
+## <a name="pointing-the-apps-custom-domain-at-the-traffic-manager-domain"></a>Uygulamanın özel etki alanını Traffic Manager etki alanında gösterme
+Gerekli son adım, uygulamanın özel etki alanını Traffic Manager etki alanında göstermelidir.  Örnek uygulama için bu işaret üzerine gelin `www.scalableasedemo.com`. `scalable-ase-demo.trafficmanager.net`  Bu adımın, özel etki alanını yöneten etki alanı kaydedicisi ile tamamlanması gerekir.  
 
-Kayıt şirketinizin etki alanı yönetim araçlarını kullanarak, özel etki alanını Traffic Manager etki alanına işaret ettiği oluşturulması gereken bir CNAME kaydeder.  Aşağıdaki resimde bu CNAME yapılandırma benzer bir örnek gösterilmektedir:
+Kaydedicinizin etki alanı yönetim araçlarını kullanarak, Traffic Manager etki alanında özel etki alanını işaret eden bir CNAME kayıtlarının oluşturulması gerekir.  Aşağıdaki resimde bu CNAME yapılandırmasının nasıl göründüğü hakkında bir örnek gösterilmektedir:
 
 ![Özel etki alanı için CNAME][CNAMEforCustomDomain] 
 
-Bu konu başlığında ele alınmamaktadır olsa da, her bir tek tek uygulama örneği ile de kayıtlı özel etki alanınız olması gerektiğini unutmayın.  Aksi takdirde uygulama örneğine bir istek kolaylaştırır ve uygulama ile uygulamanın kayıtlı özel etki alanı yok ise isteği başarısız olur.  
+Bu konuda ele alınmasa da, her bir uygulama örneğinin özel etki alanının da kayıtlı olması gerektiğini unutmayın.  Aksi takdirde, bir istek bir uygulama örneğine bunu yapıyorsa ve uygulamanın uygulamayla birlikte kayıtlı özel etki alanı yoksa, istek başarısız olur.  
 
-Bu örnekte özel etki alanı olan `www.scalableasedemo.com`, ve her uygulama örneği ile ilişkili özel etki alanı vardır.
+Bu örnekte, özel etki alanı olur `www.scalableasedemo.com`ve her uygulama örneğine ilişkili özel etki alanı vardır.
 
 ![Özel Etki Alanı][CustomDomain] 
 
-Özel bir etki alanı ile Azure App Service uygulamaları kaydetme bir özeti için aşağıdaki makaleye bakın [özel etki alanlarını kaydetme][RegisterCustomDomain].
+Azure App Service uygulamalarla özel bir etki alanı kaydetmenin bir üst sınırı için, [özel etki alanlarını kaydettirme][RegisterCustomDomain]konusunda aşağıdaki makaleye bakın.
 
-## <a name="trying-out-the-distributed-topology"></a>Dağıtılmış topoloji çalışıyor
-İstekleri için Traffic Manager ve DNS yapılandırmasını nihai sonucu olan `www.scalableasedemo.com` aşağıdakiler akar:
+## <a name="trying-out-the-distributed-topology"></a>Dağıtılmış topoloji deneniyor
+Traffic Manager ve DNS yapılandırmasının nihai sonucu, için `www.scalableasedemo.com` istekleri aşağıdaki sırayla akacaktır:
 
-1. DNS arama yapmak tarayıcı veya cihaz `www.scalableasedemo.com`
-2. Etki alanı kayıt şirketinde CNAME girişi DNS araması için Azure Traffic Manager yönlendirilmesi neden olur.
-3. DNS arama yaptığınız *ase demo.trafficmanager.net ölçeklenebilir* karşı Azure Traffic Manager DNS sunucularından biri.
-4. Yük Dengeleme İlkesi tabanlı ( *TrafficRoutingMethod* Traffic Manager profili oluştururken daha önce kullanılan parametre), Traffic Manager yapılandırılmış uç noktalardan biri seçin ve döndürmek için bu endpoint FQDN'si Tarayıcı veya cihaz.
-5. Uç nokta FQDN'sini URL'si bir App Service ortamında çalışan bir uygulama örneğinin olduğundan, tarayıcı veya cihaz için bir IP adresi FQDN'yi çözümlemek için bir Microsoft Azure DNS sunucusu sorar. 
-6. Tarayıcı veya cihaz, HTTP/S isteği IP adresine gönderir.  
-7. İstek, App Service ortamları biri üzerinde çalışan uygulama örnekleri birinde ulaşırsınız.
+1. Tarayıcı veya cihaz, için DNS araması yapar`www.scalableasedemo.com`
+2. Etki alanı kaydedicisinde CNAME girişi DNS aramasının Azure Traffic Manager yeniden yönlendirilmesine neden olur.
+3. Azure Traffic Manager DNS sunucularından birine karşı *Scalable-ASE-demo.trafficmanager.net* IÇIN bir DNS araması yapılır.
+4. Yük Dengeleme ilkesine (Traffic Manager profili oluştururken daha önce kullanılan *TrafficRoutingMethod* parametresi) bağlı olarak, Traffic Manager yapılandırılmış uç noktalardan birini seçer ve bu uç noktanın FQDN 'sini tarayıcıya veya cihaza döndürür.
+5. Uç noktanın FQDN 'Si App Service Ortamı çalışan bir uygulama örneğinin URL 'Si olduğundan, tarayıcı veya cihaz, bir Microsoft Azure DNS sunucusunun FQDN 'yi bir IP adresine çözümmesini isteyecektir. 
+6. Tarayıcı veya cihaz HTTP/S isteğini IP adresine gönderir.  
+7. İstek, App Service ortamlarından birinde çalışan uygulama örneklerinden birine gönderilir.
 
-Konsol resimde, üç örnek App Service ortamları (Bu durumda ikinci üç App Service ortamları) biri üzerinde çalışan bir uygulama örneği için başarılı bir şekilde çözme örnek uygulamanın özel etki alanı için DNS araması gösterilmektedir:
+Aşağıdaki konsol resmi, örnek uygulamanın özel etki alanı için bir DNS aramasını, üç örnek App Service ortamlarından birinde çalışan bir uygulama örneğine başarıyla çözümlemenizi sağlar (Bu örnekte üç App Service ortamının ikinci adı):
 
-![DNS araması][DNSLookup] 
+![DNS arama][DNSLookup] 
 
-## <a name="additional-links-and-information"></a>Ek bağlantıları ve bilgileri
-PowerShell belgeleri [Azure Resource Manager Traffic Manager desteği][ARMTrafficManager].  
+## <a name="additional-links-and-information"></a>Ek bağlantılar ve bilgiler
+PowerShell [Azure Resource Manager Traffic Manager Destek][ARMTrafficManager]' i okuyun.  
 
 [!INCLUDE [app-service-web-try-app-service](../../../includes/app-service-web-try-app-service.md)]
 

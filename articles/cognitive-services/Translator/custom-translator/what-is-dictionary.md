@@ -1,47 +1,47 @@
 ---
-title: Bir sözlük nedir? -Özel Translator
+title: Sözlük nedir? -Özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Bir sözlük listesini tümcecikleri veya cümlelerden (ve çevirileri) her zaman aynı şekilde çevirmek için Microsoft Translator istediğiniz belirten hizalanmış bir belgedir. Sözlükler terim sözlüklerine ya da terim tabanları bazen de çağrılır.
+description: Sözlük, Microsoft Translator 'ın aynı şekilde çevirisini her zaman çevirebilmeniz için bir tümcecik veya tümce (ve bunların çevirileri) listesini belirten hizalanmış bir belgedir. Sözlüklerde aynı zamanda ışlar veya terim esaları da denir.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: c837399778723b0b084c26422b7bea762f0e7709
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 36b449c4c4ca30eb658c9519ce8e870a4f1fab32
+ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447354"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71970736"
 ---
-# <a name="what-is-a-dictionary"></a>Bir sözlük nedir?
+# <a name="what-is-a-dictionary"></a>Sözlük nedir?
 
-Bir sözlük tümcecikleri veya cümleler ve karşılık gelen çevirileri listesini belirten bir hizalanmış belgelerin çiftidir. Sözlükte sağladığınız çeviri kullanarak her zaman kaynak ifade veya cümle, tüm örneklerini çevirmek için Microsoft Translator istediğinizde bir sözlük, eğitim kullanın. Sözlükler bazen terim sözlüklerine ya da terim tabanları çağrılır. Yanılma olarak "Kopyala ve Değiştir" olan tüm koşulları, liste sözlüğü düşünebilirsiniz.
+Sözlük, deyimlerin veya Tümcelerin bir listesini ve bunlara karşılık gelen çevirileri belirten, hizalanmış bir belge çiftidir. Microsoft Translator 'ın, sözlükte sağladığınız çeviriyi kullanarak her zaman kaynak tümceciği veya cümle örneklerini çevirmesini istediğinizde, öğreticinizdeki bir sözlüğü kullanın. Sözlüklerde bazen ışlar veya terim tabanı denir. Sözlüğü, listenizin tüm terimleri için "Kopyala ve Değiştir" zorlaması olarak düşünebilirsiniz. Ayrıca, Microsoft özel çevirmen hizmeti, çevirisi kalitesini artırmak için kendi genel amaçlı sözlüklerini oluşturur ve kullanır. Bununla birlikte, bir müşteri tarafından sağlanmış sözlük bu şekilde görünür ve öncelikle kelimeleri veya cümleleri aramak için aranır.
 
-Sözlükler yalnızca tam olarak desteklenen bir Microsoft sinirsel makine çevirisi (NMT) sistemi arkasına dil çiftleri projelerinde çalışır. [Dillerin tam listesini görüntüleyin](https://docs.microsoft.com/azure/cognitive-services/translator/language-support#customization).
+Sözlükler yalnızca kendi arkasındaki tam olarak desteklenen bir Microsoft genel sinir Network modeline sahip olan dil çiftlerindeki projeler için geçerlidir. [Dillerin tüm listesini görüntüleyin](https://docs.microsoft.com/azure/cognitive-services/translator/language-support#customization).
 
-## <a name="phrase-dictionary"></a>İfade sözlüğü
-Modelinizi eğitim içinde bir ifade sözlüğü eklediğinizde, herhangi bir sözcük veya tümcecik listelenen belirttiğiniz yolla çevrilir. Rest cümlenin zamanki çevrilir. Bir ifade sözlüğü sözlüğü dosyasında kaynak ve hedef aynı çevrilmemiş ifade sağlayarak çevrilmiş olmamalıdır tümcecikleri belirtmek için kullanabilirsiniz.
+## <a name="phrase-dictionary"></a>Tümcecik sözlüğü
+Modelinize eğitim altına bir tümcecik sözlüğü eklediğinizde, listelenen herhangi bir sözcük veya tümcecik, belirttiğiniz şekilde çevrilir. Cümlenin geri kalanı her zamanki gibi çevrilir. Sözlükteki kaynak ve hedef dosyada aynı çevrilmemiş tümceciği sağlayarak çevrilmemesi gereken tümcecikleri belirtmek için bir tümcecik sözlüğü kullanabilirsiniz.
 
 ## <a name="sentence-dictionary"></a>Tümce sözlüğü
-Tümce sözlük kaynak cümle için bir tam hedef çeviri belirtmenizi sağlar. Tümce sözlük eşleşmenin gerçekleşmesi için gönderilen tümcenin kaynak sözlük girişinin eşleşmesi gerekir.  Yalnızca bir kısmını cümlenin eşleşen girişi eşleşmiyor.  Eşleşme algılandığında, cümle sözlük hedef girişi döndürülür.
+Tümce sözlüğü, kaynak tümce için tam bir hedef çevirisi belirtmenize olanak tanır. Bir cümle sözlüğü eşleşmesi gerçekleşmesi için, gönderilen tümcenin tamamının kaynak sözlük girdisiyle eşleşmesi gerekir.  Cümlenin yalnızca bir kısmı eşleşiyorsa giriş eşleşmez.  Bir eşleşme algılandığında, tümce sözlüğünün hedef girdisi döndürülür.
 
-## <a name="dictionary-only-trainings"></a>Yalnızca sözlük eğitimleri
-Sözlük verileri kullanarak bir model eğitebilirsiniz. Bunu yapmak için yalnızca sözlük belge (veya birden çok sözlük belge) seçin, model Oluştur'a dokunun ve dahil etmek istediğiniz. Bu yalnızca sözlük eğitim olduğundan, hiçbir en düşük gerekli eğitim cümleler sayısı yoktur. Model, genellikle eğitim standart bir eğitim daha çok daha hızlı tamamlanır.  Elde edilen modelleri, ek olarak, eklediğiniz sözlükleri çeviri için Microsoft temel modelleri kullanır.  Bir test raporu almazsınız.
+## <a name="dictionary-only-trainings"></a>Sözlük-yalnızca insanlar
+Yalnızca Sözlük verilerini kullanarak bir modeli eğitebilirsiniz. Bunu yapmak için, dahil etmek istediğiniz Sözlük belgesi (veya birden fazla Sözlük belgesi) seçin ve model oluştur ' a dokunun. Bu yalnızca bir sözlük eğitimi olduğundan, en az sayıda eğitim cümleleri gerekli değildir. Modelinize, genellikle standart bir eğitimin daha hızlı bir şekilde eğitim tamamlanmıştır.  Elde edilen modeller, eklediğiniz sözlüklerin eklenmesiyle çeviri için Microsoft taban çizgisi modellerini kullanacaktır.  Test raporu alacaksınız.
 
 >[!Note]
->Özel Translator cümle değil sözlük dosyaları, kaynak ve hedef tümcecikleri eşit sayıda olduğunu önemlidir Hizala / cümleler, sözlüğünüzü belgeler ve bunların tam olarak hizalanır.
+>Özel çevirici, sözlük dosyalarını tümce halinde hizalamaz, bu nedenle sözlük belgelerinizde eşit sayıda kaynak ve hedef tümcecik/cümle olması ve tam olarak hizalanmaları önemlidir.
 
 ## <a name="recommendations"></a>Öneriler
 
-- Sözlükleri bir eğitim verileriyle eğitilen bir modelin yerini alamayacak.  Sözlük, temelde bulun ve sözcükleri veya tümceleri değiştirin.  İzin vererek, eğitim malzemesi tam cümle içinde uzmanlardan sistemin genel bir sözlük kullanmaktan daha iyi bir seçimdir.
-- İfade sözlüğü kullanılmamalıdır. Bir ifade bir tümce içinde değiştirildiğinde, bağlamı Bu cümle içinde kaybolur veya rest cümlenin çevirmek için sınırlı. İfadesinin sonucu olan veya cümlenin Word'de göre ifade sözlüğü İngilizceye, cümle genel çeviri kalitesini genellikle düşer.
-- İfade sözlüğü ürün adları ("Microsoft SQL Server"), tam adlar ("City, Hamburg") veya ("pivot tablo") ürününün özellikleri gibi bileşik isimleri için iyi çalışır. İşe yaramazsa eşit çünkü bunlar genellikle yüksek oranda kaynak veya hedef dilde bükümlü fiiller veya sıfat yanı sıra. Bileşik isimleri dışında hiçbir şeyde tümcecik dictionary girişlerinin kaçının.
-- Bir sözlük kullanırken, büyük/küçük harf ve noktalama işaretleri çevirilerinizi içinde büyük/küçük harf ve hedef dosyanızda sağlanan noktalama yansıtır. Büyük/küçük harf ve noktalama işaretleri giriş cümle ve sözlük dosyanızı kaynak cümleleri eşleştiğinden tanımlamak çalışırken göz ardı edilir. Örneğin, bu belirtilen "City, Hamburg" kaynak dosyasında ve "Ciudad de hamburg" hedef dosyasında bir İngilizce sözlüğü kullanılan İspanyolca sisteme eğitilmiş varsayalım. Çeviri "Hamburg city" ifadesini dahil bir tümceyi istediğim, ardından "Hamburg city" "Hamburg City" girişi için Sözlük dosyamı eşleşir ve "Ciudad de hamburg" Benim son çevirisini eşlemek.
-- Bir sözcük sözlüğü dosyasında birden çok kez görünürse, sistem her zaman sağlanan en son giriş kullanın. Sözlüğünüz aynı kelimenin birden çok çevirisinde içermemelidir.
+- Sözlükler eğitim verilerini kullanarak bir modeli eğitmek için bir alternatif değildir. Bunların oluşmaması ve sistemin eğitim verilerinden öğrenmelerine izin vermek önerilir. Ancak, cümleler veya bileşik isimler olduğu gibi işlenmelidir, bir sözlük kullanın.
+- Tümcecik sözlüğü gelişigüzel kullanılmalıdır. Bu nedenle, tümce içindeki bir ifade değiştirildiğinde, tümcenin geri kalanını çevirmek için bu tümce içindeki bağlamın kaybedilmesi veya sınırlı olduğunu unutmayın. Sonuç olarak, tümce içindeki ifade veya sözcük sağlanan sözlüğe göre çevirirken, tümcenin genel çeviri kalitesi genellikle zarar görür.
+- Tümcecik sözlüğü ürün adları ("Microsoft SQL Server"), uygun adlar ("şehir Hamburg") veya ürünün özellikleri ("Pivot tablosu") gibi bileşik adlarla iyi bir şekilde çalışacaktır. Bunlar genellikle kaynakta veya hedef dilde oldukça büyük olduklarından, fiiller veya sıfatlar için eşit bir şekilde çalışmaz. En iyi uygulamalar, tümcecik sözlüğü girişlerinin her şeyi, ancak bileşik isimleri önlemeyi önler.
+- Tümcecik sözlüğü kullanılırken, büyük harfler ve noktalama önemli. Sözlük girişleri yalnızca kaynak sözlük dosyasında belirtilen büyük/küçük harfleri ve noktalama işaretlerini kullanan giriş cümlesinde sözcüklerle ve tümceciklerden eşleşir. Ayrıca Çeviriler, hedef sözlük dosyasında belirtilen büyük/küçük harfleri ve noktalama işaretlerini yansıtır. Örneğin, kaynak dosyada "US" ve "EE" belirten bir tümcecik sözlüğü kullanan, Ingilizce bir Ispanyolca sisteme eğitim yaptıysanız. UU. " hedef dosyada. "ABD" (büyük değil) sözcüğünü içeren bir tümcenin çevirisini istediğinizde, bu sözlük eşleşmez. Ancak "ABD" (büyük harfli) sözcüğünü içeren bir tümcenin çevirisini istemeniz durumunda sözlük eşleşir ve çeviri "EE" içerir. UU. " Çevirinin büyük küçük harf ve noktalama işaretlerinin, sözlük hedef dosyasında belirtilenden farklı olabileceğini ve kaynaktaki büyük harfle ve noktalama işaretlerinden farklı olabileceğini unutmayın. Hedef dilin kurallarını izler.
+- Bir sözcük, sözlük dosyasında birden çok kez görünürse, sistem her zaman belirtilen son girişi kullanır. Bu nedenle, sözlüğünüz aynı kelimenin birden fazla çevirisi içermemelidir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Hakkında bilgi edinin [biçimlerden yönergeleri](document-formats-naming-convention.md).
+- [Belge biçimlerinde yönergeler](document-formats-naming-convention.md)hakkında bilgi edinin.

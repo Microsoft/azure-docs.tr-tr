@@ -1,6 +1,6 @@
 ---
-title: Derin Dalış - Analytics - Azure HDInsight Gelişmiş
-description: Gelişmiş analizin nasıl bilgi büyük verileri işleme algoritmalarını kullanır.
+title: Derin ve gelişmiş analiz-Azure HDInsight
+description: Gelişmiş analizler 'in Azure HDInsight 'ta büyük verileri işlemek için algoritmaları nasıl kullandığını öğrenin.
 author: ashishthaps
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,52 +8,52 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 11/14/2017
 ms.author: ashishth
-ms.openlocfilehash: ac0edf2de4337154b665b8f3898134a7c2fd1f4c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 436825c6e5df2be524dc06ccdaf82f0156714679
+ms.sourcegitcommit: 3486e2d4eb02d06475f26fbdc321e8f5090a7fac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64712402"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73241661"
 ---
-# <a name="deep-dive---advanced-analytics"></a>Derin Dalış - Gelişmiş analiz
+# <a name="deep-dive---advanced-analytics"></a>Derin ve gelişmiş analiz
 
-## <a name="what-is-advanced-analytics-for-hdinsight"></a>Ne analizi için HDInsight Gelişmiş?
+## <a name="what-is-advanced-analytics-for-hdinsight"></a>HDInsight için gelişmiş analiz nedir?
 
-HDInsight, yapılandırılmış, yapılandırılmamış büyük miktarlardaki değerli Öngörüler ve hızlı ilerleyen veri alma olanağı sağlar. Gelişmiş analiz kullanımı yüksek oranda ölçeklenebilir mimarileri, istatistiksel ve makine öğrenimi modelleri ve akıllı Panolar ile anlamlı bilgiler sağlamak için ' dir. Machine learning, veya *Tahmine dayalı analiz*, tanımlamak ve tahminlerde bulunabilir ve kararlarınızı kılavuzu için veri ilişkileri öğrenmek algoritmaları kullanır.
+HDInsight, büyük miktarlarda yapılandırılmış, yapılandırılmamış ve hızlı hareketli verilerden değerli Öngörüler elde etme olanağı sunar. Gelişmiş analiz, yüksek düzeyde ölçeklenebilir mimariler, istatistiksel ve makine öğrenimi modelleri ve akıllı panolar sayesinde size anlamlı öngörüler sağlar. Makine öğrenimi veya tahmine *dayalı analiz*, tahminlere yol göstermek ve kararlarınıza kılavuzluk etmek için verilerinize ait ilişkilerden oluşan ve öğrenerek kullanılan algoritmaları kullanır.
 
-## <a name="advanced-analytics-process"></a>Gelişmiş analiz işlem
+## <a name="advanced-analytics-process"></a>Gelişmiş analiz işlemi
 
-![Process](./media/apache-hadoop-deep-dive-advanced-analytics/process.png)
+![Gelişmiş analiz işlem akışı](./media/apache-hadoop-deep-dive-advanced-analytics/hdinsight-analytic-process.png)
 
-İşinizdeki sorunu tespit ettik ve toplama başlatıldı, veri işleme, soru temsil eden bir model oluşturmak ihtiyacınız ve sonra tahmin etmek istiyor. Modelinizi, iş gereksinimlerinize en uygun tahmin türünü yapmak için bir veya daha fazla makine öğrenimi algoritmaları kullanır.  Verilerinizi çoğu, test etmek veya onu değerlendirmek için kullanılan rest ile modeli eğitmek için kullanılmalıdır. 
+İş sorununu tanımladıktan ve verilerinizi toplamayı ve işlemeyi başlattıktan sonra, tahmin etmek istediğiniz soruyu temsil eden bir model oluşturmanız gerekir. Modelinizde, iş gereksinimlerinize en uygun tahmin türünü sağlamak için bir veya daha fazla makine öğrenimi algoritması kullanılır.  Verilerinizin büyük bölümü modelinize eğmekte veya bunu test etmek ya da değerlendirmek için kullanılır.
 
-Oluşturma, yükleme, test ve modelinizi değerlendirmek sonra sonraki adım, sorularınıza yanıt sağlamaya başlar, modelinizi sağlamaktır. Son adım, modelinizin performansını izlemek ve gerektiği gibi ince oluşturmaktır. 
+Modelinizi oluşturduktan, yükledikten, test ettikten ve değerlendirdikten sonra, bir sonraki adım modelinize yanıt sağlamaya başlayacak şekilde modelinizi dağıtmaktır. Son adım, modelinizin performansını izlemek ve gerektiği şekilde ayarlayabilmelidir.
 
-## <a name="common-types-of-algorithms"></a>Genel türleri algoritmaları
+## <a name="common-types-of-algorithms"></a>Ortak algoritma türleri
 
-Gelişmiş analiz çözümleri, makine öğrenimi algoritmaları kümesi sağlar. Kategorilerini algoritmaları ve ilişkili ortak iş kullanımı örnekleri bir özeti aşağıda verilmiştir.
+Gelişmiş analiz çözümleri, makine öğrenimi algoritmaları kümesi sağlar. Algoritma kategorilerinin ve ilişkili ortak iş kullanım durumlarının özeti aşağıda verilmiştir.
 
-![Machine Learning kullanım örnekleri](./media/apache-hadoop-deep-dive-advanced-analytics/ml-use-cases.png)
+![Machine Learning kategori özetleri](./media/apache-hadoop-deep-dive-advanced-analytics/machine-learning-use-cases.png)
 
-En sığdırma algoritmalarından seçerek yanı sıra eğitim için veri sağlamanıza gerek olup olmadığını göz önünde bulundurmanız gerekir. Makine öğrenimi algoritmaları gibi kategorilere ayrılır:
+En iyi sığdırma algoritmasını seçerken birlikte, eğitim için veri sağlamanız gerekip gerekmediğini göz önünde bulundurmanız gerekir. Makine öğrenimi algoritmaları aşağıdaki şekilde kategorize edilir:
 
-* Denetimli - algoritması sonuçları sağlamadan önce etiketli veri kümesini temel düşünürler gerektiriyor
-* Denetimli yarı - algoritması Genişletilebilir eğitim ilk aşaması sırasında kullanılamayan ek hedefler etkileşimli sorgu bir eğitmen tarafından aracılığıyla tarafından
-* Denetimsiz - algoritması eğitim verileri gerektirmez 
-* (Genellikle robotlara ilişkin kullanılır) belirli bir bağlam içinde ideal davranışını belirlemek için yazılımları aracıları pekiştirmeye - algoritması kullanır
+* Denetimli-algoritmanın, sonuçlar sağlayabilmesi için bir etiketli veri kümesi üzerinde eğitililmesi gerekir
+* Yarı denetimli-algoritma, eğitimin ilk aşamasında kullanılamayan bir gözye göre etkileşimli sorgu aracılığıyla ek hedefler tarafından Genişletilebilir
+* Denetimli olmayan algoritma eğitim verileri gerektirmez 
+* Pekiştirmeye dayalı algoritması, belirli bir bağlam içinde ideal davranışları (genellikle Robotics 'de kullanılır) belirlemede yazılım aracılarını kullanır
 
 
 | Algoritma kategorisi| Kullanım | Öğrenme türü | Algoritmalar |
 | --- | --- | --- | -- |
-| Sınıflandırma | Kişi veya öğeleri gruplar halinde sınıflandırma | Denetimli | Karar ağaçları, lojistik regresyon, karmaşık sinir ağları |
-| Kümeleme | Örnekleri bir dizi homojen gruplar halinde bölme | Denetimsiz | K-ortalamaları kümeleme |
-| Desen algılama | Verilerde sık ilişkileri tanımlama | Denetimsiz | İlişkilendirme kuralları |
-| Regresyon | Sayısal sonuçlarını tahmin edin | Denetimli | Doğrusal regresyon, karmaşık sinir ağları |
-| Pekiştirmeye | Robotlar için en iyi davranışı belirle | Pekiştirmeye | Monte Carlo Simülasyonları, DeepMind |
+| Sınıflandırma | Kişileri veya şeyleri gruplar halinde sınıflandırın | Denetimli | Karar ağaçları, lojistik regresyon, sinir ağları |
+| Lenmesi | Örnek kümesini hogenou gruplarına bölme | Denetimsiz | K-kümelemenin anlamı |
+| Model algılama | Verilerdeki sık kullanılan ilişkilendirmeleri tanımla | Denetimsiz | İlişkilendirme kuralları |
+| Regresyon | Sayısal sonuçları tahmin etme | Denetimli | Doğrusal regresyon, sinir Networks |
+| Pekiştirmeye dayalı | Robots için en iyi davranışı belirleme | Pekiştirmeye dayalı | Monte Carlo benzetimleri, ayrıntılı fikir |
 
-## <a name="machine-learning-on-hdinsight"></a>Machine learning üzerinde HDInsight
+## <a name="machine-learning-on-hdinsight"></a>HDInsight 'ta makine öğrenimi
 
-HDInsight öğrenme seçenekleri bir Gelişmiş analiz iş akışı için birden fazla makine vardır:
+HDInsight, gelişmiş analiz iş akışı için çeşitli makine öğrenimi seçeneklerine sahiptir:
 
 * Machine Learning ve Apache Spark
 * R ve ML Hizmetleri
@@ -63,74 +63,74 @@ HDInsight öğrenme seçenekleri bir Gelişmiş analiz iş akışı için birden
 ### <a name="machine-learning-and-apache-spark"></a>Machine Learning ve Apache Spark
 
 
-[HDInsight Spark](../spark/apache-spark-overview.md) , Azure'da barındırılan bir teklifi [Apache Spark](https://spark.apache.org/), birleşik, açık kaynaklı, büyük veri analizi artırmak üzere bellek içi işleme kullanan bir paralel veri işleme çerçevesinden. Spark işleme altyapısı hız, kullanım kolaylığı ve Gelişmiş analiz için oluşturulmuştur. Spark'ın dağıtılmış bellek içi hesaplama özellikleri onu kullanılan makine öğrenimi ve grafik hesaplamalarında yinelemeli algoritmalar için iyi bir seçim haline getirir. 
+[HDInsight Spark](../spark/apache-spark-overview.md) , büyük veri analizlerini artırmak için bellek içi işleme kullanan Birleşik, açık kaynaklı ve paralel veri Işleme çerçevesinin Azure tarafından barındırılan [Apache Spark](https://spark.apache.org/)bir sunumudur. Spark işleme altyapısı hız, kullanım kolaylığı ve gelişmiş analiz için oluşturulmuştur. Spark 'ın bellek içi dağıtılmış hesaplama özellikleri, makine öğrenimi ve grafik hesaplamaları 'nda kullanılan yinelemeli algoritmalar için iyi bir seçenek yapar. 
 
 
-Bu dağıtılmış ortamı algoritmik modelleme özellikleri getirin üç ölçeklenebilir makine öğrenimi kitaplıkları vardır:
+Bu dağıtılmış ortama algoritmik modelleme özellikleri getiren üç ölçeklenebilir makine öğrenimi kitaplığı vardır:
 
-* [**MLlib** ](https://spark.apache.org/docs/latest/ml-guide.html) -MLlib üzerinde Spark Rdd yerleşik özgün API içerir.
-* [**SparkML** ](https://spark.apache.org/docs/1.2.2/ml-guide.html) -SparkML olan ML işlem hatları oluşturmak için Spark veri çerçevelerini üzerinde oluşturulan üst düzey bir API sağlayan yeni bir paket.
-* [**MMLSpark** ](https://github.com/Azure/mmlspark) - Microsoft Machine Learning kitaplığı için Apache Spark (MMLSpark), veri bilimcileri deneme oranını artırmak için ve son teknoloji ürünü makine öğrenimi yararlanmak için Spark üzerinde daha üretken hale getirmek için tasarlanmıştır teknikleri, çok büyük veri kümeleri üzerinde derin öğrenme dahil. MMLSpark kitaplığı, PySpark modelleri oluşturmaya yönelik yaygın modelleme görevlerinizi basitleştirir. 
+* [**Mllib**](https://spark.apache.org/docs/latest/ml-guide.html) -Mllib Spark rdds üzerinde oluşturulmuş özgün API 'yi içerir.
+* [**Parlak ml**](https://spark.apache.org/docs/1.2.2/ml-guide.html) -parlak ML, ml işlem hatları oluşturmak Için Spark veri çerçevelerinin üzerine inşa edilen daha yüksek düzeyde bir API sağlayan daha yeni bir pakettir.
+* [**Mmlspark**](https://github.com/Azure/mmlspark) -Apache Spark (mmlspark) için Microsoft Machine Learning kitaplığı, veri bilimcilerinin Spark üzerinde daha üretken olması, deneme oranını artırması ve son teknoloji makine öğrenimi tekniklerinden yararlanmak için tasarlanmıştır. çok büyük veri kümelerinde derin öğrenme. MMLSpark kitaplığı, PySpark 'da model oluşturmaya yönelik ortak modelleme görevlerini basitleştirir. 
 
 ### <a name="r-and-ml-services"></a>R ve ML Hizmetleri
 
-HDInsight'ın bir parçası olarak bir HDInsight kümesi ile oluşturabileceğiniz [ML Hizmetleri](../r-server/r-server-overview.md) modelleri ve yüksek hacimli veri kümeleri ile kullanılmaya hazır. Veri bilimcileri ve tanıdık bir R arabirimiyle ölçeklendirilebilir istatistikçiler bu yeni özellik sağlar. isteğe bağlı HDInsight, aracılığıyla küme kurulum ve Bakım yükü olmadan.
+HDInsight 'ın bir parçası olarak, [ml Hizmetleri](../r-server/r-server-overview.md) ile çok büyük veri kümeleri ve modellerle birlikte kullanılmak üzere kullanılabilecek bir HDInsight kümesi oluşturabilirsiniz. Bu yeni özellik, veri bilimcileri ve İstatistikçilerin ' yi, isteğe bağlı olarak HDInsight üzerinden ölçeklenebilen, küme kurulumu ve bakım yükü olmadan, tanıdık bir R arabirimi sağlar.
 
 ### <a name="azure-machine-learning-and-apache-hive"></a>Azure Machine Learning ve Apache Hive
 
-[Azure Machine Learning Studio](https://studio.azureml.net/) Tahmine dayalı analiz modeli yanı sıra, Tahmine dayalı Modellerinizi-hazır web Hizmetleri olarak dağıtmada kullanabileceğiniz tam olarak yönetilen bir hizmet için araçlar sağlar. Azure Machine Learning, hızlı bir şekilde oluşturun, test, kullanıma hazır hale getirme ve Tahmine dayalı modelleri yönetmek için bulutta kapsamlı Tahmine dayalı analiz çözümleri oluşturmak için araçlar sağlar. Büyük bir algoritma kitaplığından tercih modelleri oluşturmak için bir web tabanlı studio kullanın ve modelinizi bir web hizmeti olarak kolayca dağıtın.
+[Azure Machine Learning Studio (klasik)](https://studio.azureml.net/) , tahmine dayalı analiz modellerini modelleyen araçlar sağlar ve tahmine dayalı modellerinizi kullanıma hazırlama Web Hizmetleri olarak dağıtmak için kullanabileceğiniz tam olarak yönetilen bir hizmettir. Azure Machine Learning, tahmine dayalı modelleri hızlı bir şekilde oluşturmak, test etmek, tekrarlaştır ve yönetmek için bulutta tüm tahmine dayalı analiz çözümleri oluşturmaya yönelik araçlar sağlar. Büyük bir algoritma kitaplığından seçim yapın, model oluşturmak için Web tabanlı bir Studio kullanın ve modelinizi bir Web hizmeti olarak kolayca dağıtın.
 
 ### <a name="apache-spark-and-deep-learning"></a>Apache Spark ve derin öğrenme
 
-[Derin öğrenme](https://www.microsoft.com/research/group/dltc/) kullanan makine öğrenimi bir dalı *derin sinir ağı* (üst), İnsan beyninin Biyolojik işlemler tarafından ilham. Birçok Araştırmacıları, derin öğrenme yapay zeka için olası bir yaklaşım olarak bakın. Bazı derin öğrenme konuşulan dili çevirmenler ve görüntü tanıma sistemlerini makine mantık örnekleridir. Derin öğrenme kendi işlerinde ilerletmek için ücretsiz, kullanımı kolay, açık kaynak geliştirmiştir [Microsoft Bilişsel Araç Seti](https://www.microsoft.com/en-us/cognitive-toolkit/). Araç Seti, çok çeşitli Microsoft ürünlerinin, derin öğrenme uygun ölçekte dağıtma gereksinimi ile dünya çapında ve en son algoritmalar ve teknikler isteyen Öğrenciler tarafından yaygın olarak kullanılıyor. 
+[Derin öğrenme](https://www.microsoft.com/research/group/dltc/) , insan Beyininin biik süreçleriyle ilham olan *derin sinir ağlarını* (dnNs 'ler) kullanan Machine Learning 'in bir daldır. Birçok araştırmacıcılar yapay zeka için taahhüt yaklaşımı olarak ayrıntılı öğrenme konusuna sahiptir. Derin öğrenime örnek olarak, dil çevirmenleri, görüntü tanıma sistemleri ve makine nedenleridir. Microsoft, derin öğreniminde kendi çalışmasını kolaylaştırmaya yardımcı olmak için ücretsiz, kullanımı kolay ve açık kaynaklı [Microsoft Cognitive Toolkit](https://www.microsoft.com/en-us/cognitive-toolkit/)geliştirmiştir. Araç seti, dünyanın dört bir yanındaki çok sayıda Microsoft ürünü tarafından, büyük ölçekli bir öğrenme dağıtımı ve en son algoritmalarda ve tekniklerle ilgilenen öğrenciler tarafından kapsamlı olarak kullanılmaktadır. 
 
-## <a name="scenario---score-images-to-identify-patterns-in-urban-development"></a>Senaryo - puanı görüntüleri Urban geliştirme desenleri tanımlamak için
+## <a name="scenario---score-images-to-identify-patterns-in-urban-development"></a>Senaryo-kentsel geliştirmede desenleri belirlemek için görüntüleri puan edin
 
-HDInsight'ı kullanarak işlem hattı öğrenme bir Gelişmiş analiz makine örneği gözden geçirelim.
+HDInsight kullanarak gelişmiş analiz makinesi öğrenimi işlem hattı örneğini gözden geçirelim.
 
-Bu senaryoda, derin öğrenme Framework'teki Dnn'leri üretme görürsünüz Microsoft Cognitive Toolkit (CNTK) kullanıcının, PySpark bir HDInsight Spark kümelerinde kullanarak bir Azure Blob Depolama hesabında depolanan büyük görüntü koleksiyonları Puanlama için kullanıma hazır hale getirdiniz. Bu yaklaşım, bir ortak DNN kullanım örneğine havadan görünüm sınıflandırması, uygulanır ve son urban geliştirme desenleri tanımlamak için kullanılabilir.  Önceden eğitilen bir görüntü sınıflandırma modeli kullanır. Model üzerinde önceden eğitilen [CIFAR 10 veri kümesi](https://www.cs.toronto.edu/~kriz/cifar.html) ve 10.000 tutulan görüntülere uygulanır.
+Bu senaryoda, Microsoft 'un Cognitive Toolkit (CNTK) adlı derin bir öğrenme çerçevesinde oluşturulan DNNs 'nin, bir HDInsight Spark kümesinde PySpark kullanılarak bir Azure Blob depolama hesabında depolanan Puanlama büyük görüntü koleksiyonları için nasıl işlem görülemediği gösterilmektedir. Bu yaklaşım ortak DNN kullanım örneğine, havadan görüntü sınıflandırmasına uygulanır ve kentsel geliştirmede en son desenleri belirlemek için kullanılabilir.  Önceden eğitilen bir görüntü sınıflandırma modeli kullanacaksınız. Model, [Cifar-10 veri kümesinde](https://www.cs.toronto.edu/~kriz/cifar.html) önceden eğitilmiş ve 10.000 ile tutulan görüntülere uygulandı.
 
-Bu gelişmiş analiz senaryoda üç önemli görevler şunlardır:
+Bu gelişmiş analiz senaryosunda üç temel görev vardır:
 
-1. Bir Apache Spark 2.1.0 dağıtımı olan Azure HDInsight Hadoop kümesi oluşturun. 
-2. Microsoft Bilişsel araç seti, bir Azure HDInsight Spark kümesinin tüm düğümlerine yüklemek için özel bir betik çalıştırın. 
-3. Önceden oluşturulmuş bir Jupyter Not Defteri, HDInsight Spark kümenize bir eğitilen Microsoft Bilişsel Araç Seti derin öğrenme modeli Spark Python API'si (PySpark) kullanarak bir Azure Blob Depolama hesabı içindeki dosyalara uygulamak için karşıya yükleyin. 
+1. Apache Spark 2.1.0 dağıtımına sahip bir Azure HDInsight Hadoop kümesi oluşturun. 
+2. Bir Azure HDInsight Spark kümesinin tüm düğümlerine Microsoft Cognitive Toolkit yüklemek için özel bir komut dosyası çalıştırın. 
+3. Spark Python API 'sini (PySpark) kullanarak bir Azure Blob depolama hesabındaki dosyalara eğitilen Microsoft Cognitive Toolkit derin bir öğrenme modeli uygulamak için önceden oluşturulmuş bir Jupyter Not defterini HDInsight Spark kümenize yükleyin. 
 
-Bu örnek, derlenmiş ve dağıtılmış Alex Krizhevsky Vinod Nair ve Geoffrey Hinton tarafından ayarlanan CIFAR 10 görüntünün kullanır. 60\.000 32 x 32 CIFAR 10 veri kümesini içeren 10 birbirini dışlayan sınıflarına ait görüntüleri rengi:
+Bu örnek, Alex Kronizhevsky, Vinod nair ve Geoffey Hinton tarafından derlenen ve dağıtılan CIFAR-10 görüntü kümesini kullanır. CIFAR-10 veri kümesi, birbirini dışlayan 10 sınıfa ait 60.000 32 × 32 renk görüntüsünü içerir:
 
-![Görüntüler](./media/apache-hadoop-deep-dive-advanced-analytics/ml-images.png)
+![Örnek görüntüleri Machine Learning](./media/apache-hadoop-deep-dive-advanced-analytics/machine-learning-images.png)
 
-Alex Krizhevsky'nın veri kümesi hakkında daha fazla bilgi için bkz. [öğrenme birden çok katman özellik çok küçük görüntülerinden](https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf).
+Veri kümesi hakkında daha fazla bilgi için, bkz. Alex Kronizhevsky 'ın [çok sayıda özellik katmanını küçük resimlerden öğreniyor](https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf).
 
-Veri kümesi 50.000 görüntü Eğitim kümesi ve 10.000 görüntü test kümesi olarak bölümlenmiş olabilir. İlk kümenin izleyerek Microsoft Bilişsel Araç Seti kullanarak bir yirmi katman derin öğrenme kalan ağ (ResNet) modeli eğitmek için kullanılan [Bu öğreticide](https://github.com/Microsoft/CNTK/tree/master/Examples/Image/Classification/ResNet) Bilişsel Araç Seti GitHub deposundan. Kalan 10.000 görüntüleri modelin doğruluğunu test etmek için kullanıldı. Bu burada dağıtılmış bilgi işlem devreye giriyor: ön işleme ve görüntüleri Puanlama yüksek oranda paralelleştirilebilir görevdir. El ile olarak kaydedilmiş eğitilen modeli ile kullandık:
+Veri kümesi, 50.000 görüntü eğitimi kümesine ve bir 10.000 görüntü test kümesine bölümlenmiştir. İlk küme, Cognitive Toolkit GitHub deposundan [Bu öğreticiyi](https://github.com/Microsoft/CNTK/tree/master/Examples/Image/Classification/ResNet) izleyerek Microsoft Cognitive Toolkit kullanarak yirmi katmanlı derin bir evnetme ağı (ResNet) modelini eğitmek için kullanılmıştır. Kalan 10.000 görüntüleri, modelin doğruluğunu test etmek için kullanıldı. Bu, dağıtılmış bilgi işlemin yürütmeye geldiği yerdir: görüntülerin ön işleme ve Puanlama görevi oldukça paralelleştirilebilir. Kaydedilen eğitilen modelle birlikte şunu kullandık:
 
-* Görüntüleri ve eğitilen model kümenin çalışan düğümlerine dağıtmak için PySpark.
-* HDInsight Spark kümesinin tüm düğümlerine görüntülerinde önceden işlenecek Python'ı tıklatın.
-* Model ve puanlama her düğümde önceden işlenmiş görüntü yüklemek için bilişsel Araç Seti'ı seçin.
-* PySpark betiğini çalıştırmak için Jupyter not defterleri sonuçları toplama ve kullanma [Matplotlib](https://matplotlib.org/) model performansını görselleştirmek için.
+* , Görüntüleri ve eğitilen modeli kümenin çalışan düğümlerine dağıtmak için PySpark.
+* HDInsight Spark kümesinin her bir düğümündeki görüntülerin ön işlemesini sağlamak için Python.
+* Modeli yüklemek için Cognitive Toolkit ve her düğümdeki önceden işlenmiş görüntüleri puan edin.
+* Jupyıter Not defterleri, PySpark betiğini çalıştırmak, sonuçları toplamak ve model performansını görselleştirmek için [Matplotlib](https://matplotlib.org/) kullanın.
 
-Tüm ön işleme/Puanlama 10.000 görüntülerin 4 çalışan düğümleri ile bir kümede bir dakikadan az sürer. Model ~ 9,100 (%91) etiketlerin doğru tahmin görüntüler. Karışıklık matrisi, en yaygın sınıflandırma hataları gösterir. Örneğin, matris köpekler kediler olarak ve mislabeling oluştuğunu gösterir. birden çok sık diğer etiket çiftleri için.
+10.000 görüntünün tüm ön işleme/Puanlama, 4 çalışan düğümü olan bir kümede bir dakikadan kısa sürer. Model ~ 9.100 etiketlerini doğru bir şekilde tahmin eder (%91) yansımasını. Bir karışıklık matrisi en yaygın sınıflandırma hatalarını gösterir. Örneğin, matris yanlış etiketleme ve diğer etiket çiftlerine göre çok daha sık gerçekleşmektedir.
 
-![Sonuçlar](./media/apache-hadoop-deep-dive-advanced-analytics/ml-results.png)
+![Machine Learning sonuçları grafiği](./media/apache-hadoop-deep-dive-advanced-analytics/machine-learning-results.png)
 
 ### <a name="try-it-out"></a>Deneyin!
 
-İzleyin [Bu öğreticide](../spark/apache-spark-microsoft-cognitive-toolkit.md) Bu çözüm için uçtan uca uygulamak için: bir HDInsight Spark kümesi kurulumu, Bilişsel Araç Seti yükleyin ve 10.000 CIFAR görüntüleri puanlar Jupyter not defteri çalıştırma.
+Bu çözümü uçtan uca uygulamak için [Bu öğreticiyi](../spark/apache-spark-microsoft-cognitive-toolkit.md) izleyin: bir HDInsight Spark kümesi kurma, Cognitive Toolkit yükleme ve 10.000 cifar görüntülerini puan veren Jupyter Notebook çalıştırma.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Apache Hive ve Azure Machine Learning
 
-* [Apache Hive ve Azure Machine Learning için uçtan uca](../../machine-learning/team-data-science-process/hive-walkthrough.md)
-* [1 TB veri kümesinde bir Azure HDInsight Hadoop kümesi kullanarak](../../machine-learning/team-data-science-process/hive-criteo-walkthrough.md)
+* [Uçtan uca Apache Hive ve Azure Machine Learning](../../machine-learning/team-data-science-process/hive-walkthrough.md)
+* [1 TB veri kümesinde Azure HDInsight Hadoop kümesi kullanma](../../machine-learning/team-data-science-process/hive-criteo-walkthrough.md)
 
 Apache Spark ve MLLib
 
-* [Machine learning ile HDInsight üzerinde Apache Spark](../../machine-learning/team-data-science-process/spark-overview.md)
-* [Apache Spark Machine Learning ile: HVAC verilerini kullanarak bina sıcaklığını çözümlemek için HDInsight Apache Spark kullanma](../spark/apache-spark-ipython-notebook-machine-learning.md)
-* [Apache Spark Machine Learning ile: Gıda denetimi sonuçlarını tahmin etmek için HDInsight, Apache Spark kullanma](../spark/apache-spark-machine-learning-mllib-ipython.md)
+* [HDInsight üzerinde Apache Spark makine öğrenimi](../../machine-learning/team-data-science-process/spark-overview.md)
+* [Machine Learning ile Apache Spark: HVAC verilerini kullanarak oluşturma sıcaklığını çözümlemek için HDInsight 'ta Apache Spark kullanın](../spark/apache-spark-ipython-notebook-machine-learning.md)
+* [Machine Learning ile Apache Spark: yemek İnceleme sonuçlarını tahmin etmek için HDInsight 'ta Apache Spark kullanın](../spark/apache-spark-machine-learning-mllib-ipython.md)
 
-Derin öğrenme, Bilişsel Araç Seti ve diğerleri
+Derin öğrenme, Cognitive Toolkit ve diğerleri
 
 * [Veri bilimi Azure sanal makinesi](../../machine-learning/data-science-virtual-machine/overview.md)
-* [Azure HDInsight üzerinde H2O.ai ile tanışın](https://azure.microsoft.com/blog/introducing-h2o-ai-with-on-azure-hdinsight-to-bring-the-most-robust-ai-platform-for-enterprises/)
+* [Azure HDInsight üzerinde H2O.ai tanıtımı](https://azure.microsoft.com/blog/introducing-h2o-ai-with-on-azure-hdinsight-to-bring-the-most-robust-ai-platform-for-enterprises/)

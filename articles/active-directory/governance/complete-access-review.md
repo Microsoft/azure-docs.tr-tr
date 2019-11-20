@@ -1,10 +1,10 @@
 ---
-title: Gruplar veya uygulamalar - Azure Active Directory erişim gözden geçirmesi tamamlama | Microsoft Docs
-description: Grup üyelerini Azure Active Directory erişim gözden geçirmeleri uygulama erişimi ve erişim değerlendirmesi tamamlama hakkında bilgi edinin.
+title: Gruplar veya uygulamalar için bir erişim incelemesi yapın-Azure Active Directory | Microsoft Docs
+description: Azure Active Directory erişim gözden geçirmeleriyle grup üyelerinin veya uygulama erişiminin erişim incelemesini tamamlamayı öğrenin.
 services: active-directory
 documentationcenter: ''
-author: rolyon
-manager: mtillman
+author: msaburnley
+manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
@@ -12,77 +12,77 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: compliance
-ms.date: 05/22/2019
-ms.author: rolyon
+ms.date: 07/23/2019
+ms.author: ajburnle
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ec3909ffbb624284f999360140b7454098643062
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 97c405032368ffd06f5808bc4518302d2f6d66b9
+ms.sourcegitcommit: bafb70af41ad1326adf3b7f8db50493e20a64926
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66473357"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68489157"
 ---
-# <a name="complete-an-access-review-of-groups-or-applications-in-azure-ad-access-reviews"></a>Erişim gözden geçirmesi gruplarının tamamlamak ya da uygulamaları Azure ad erişim gözden geçirmeleri
+# <a name="complete-an-access-review-of-groups-or-applications-in-azure-ad-access-reviews"></a>Azure AD erişim gözden geçirmeleriyle grupların veya uygulamaların erişim incelemesini tamamlar
 
-Bir yönetici olarak, [grupları ve uygulamaları, erişim gözden geçirmesi Oluştur](create-access-review.md) ve gözden geçirenler [erişim gözden geçirmesi gerçekleştirme](perform-access-review.md). Bu makalede, erişim gözden geçirmesi sonuçlarını görmek ve sonuçları uygulama açıklar.
+Yönetici olarak, [gruplar veya uygulamalar için erişim gözden geçirmesi oluşturursunuz](create-access-review.md) ve gözden geçirenler [erişim incelemesini gerçekleştirir](perform-access-review.md). Bu makalede, erişim incelemesi sonuçlarının nasıl görüntüleneceği ve sonuçların nasıl uygulanacağı açıklanır.
 
 [!INCLUDE [GDPR-related guidance](../../../includes/gdpr-intro-sentence.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Azure AD Premium P2
-- Genel yönetici, yönetici kullanıcı, güvenlik yöneticisi veya güvenlik okuyucusu
+- Genel yönetici, Kullanıcı Yöneticisi, güvenlik yöneticisi veya güvenlik okuyucusu
 
-Daha fazla bilgi için [hangi kullanıcıların lisansına sahip olması gerekir?](access-reviews-overview.md#which-users-must-have-licenses).
+Daha fazla bilgi için [hangi kullanıcıların lisanslarına sahip olması gerektiğini](access-reviews-overview.md#which-users-must-have-licenses)görün.
 
-## <a name="view-an-access-review"></a>Erişim gözden geçirmesi görüntüleyin
+## <a name="view-an-access-review"></a>Erişim gözden geçirmesini görüntüleme
 
-Gözden geçirenler, incelemeler tamamlandı olarak ilerleme durumunu izleyebilirsiniz.
+Gözden geçirenler incelemelerini tamamlamalarını gözlemlediği için ilerlemeyi izleyebilirsiniz.
 
-1. Azure portal ve açık oturum [Kimlik Yönetimi sayfası](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/).
+1. Azure portal oturum açın ve [Identity idare sayfasını](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/)açın.
 
-1. Sol menüde **erişim gözden geçirmeleriyle**.
+1. Sol menüde, **erişim gözden geçirmeleri**' na tıklayın.
 
-1. Listede, erişim gözden geçirmesi tıklayın.
+1. Listede, bir erişim gözden geçirmesi ' na tıklayın.
 
-    Bir dizi erişim görüntülemek için gözden geçirmeleri, erişim gözden geçirmesi için gidin ve zamanlanmış incelemelerde yaklaşan örnekleri bulabilirsiniz.
+    Bir dizi erişim incelemesi görüntülemek için, erişim gözden geçirmelerine gidin ve yaklaşan örnekleri zamanlanan incelemelerde bulabilirsiniz.
 
-    Üzerinde **genel bakış** sayfasında, ilerleme durumunu görebilirsiniz. Gözden geçirmeyi tamamlanana kadar erişim hakları dizin olarak değiştirilir.
+    **Genel bakış** sayfasında ilerlemeyi görebilirsiniz. İnceleme tamamlanana kadar dizinde erişim hakkı değiştirilmez.
 
     ![Erişim gözden geçirmeleri ilerleme durumu](./media/complete-access-review/overview-progress.png)
 
-1. Erişim gözden geçirmesi durdurmak istiyorsanız, önce ulaşıldı zamanlanmış bitiş tarihi, tıklayın **Durdur** düğmesi.
+1. Zamanlanan bitiş tarihine ulaşılmadan önce bir erişim incelemesini durdurmak istiyorsanız **Durdur** düğmesine tıklayın.
 
-    Ne zaman bir gözden geçirmeyi durdurmak, gözden geçirenler artık yanıt vermek mümkün olacaktır. Bunu durdurulduktan sonra bir gözden geçirme yeniden başlatılamıyor.
+    Bir gözden geçirmeyi durdurduğunuzda, gözden geçirenler artık yanıt veremeyecektir. Bir gözden geçirmeyi durdurduktan sonra yeniden çalıştıramazsınız.
 
-1. Artık erişim gözden geçirmesine ilginizi çeken, tıklayarak silebilirsiniz **Sil** düğmesi.
+1. Artık erişim incelemesinin ilgilenmiyorsanız **Sil** düğmesine tıklayarak bunu silebilirsiniz.
 
 ## <a name="apply-the-changes"></a>Değişiklikleri Uygula
 
-Varsa **otomatik uygulama sonuçları kaynağa** etkin ve yaptığınız seçimlere dayanarak **tamamlama ayarlarını bağlı**, otomatik-uygulamak incelemesinin bitiş tarihi veya el ile ne zaman gözden geçirmeyi durdurmak sonra yürütülür.
+**Sonuçları kaynağa otomatik olarak Uygula** özelliği etkinleştirildiyse ve **tamamlanma ayarlarına**bağlı olarak seçimlerinizi temel alıyorsa otomatik uygulama, gözden geçirme işleminin bitiş tarihinden sonra veya gözden geçirmeyi el ile durdurduğunuzda yürütülür.
 
-Varsa **otomatik uygulama sonuçları kaynağa** değildi gözden geçirmeniz için etkin, tıklayın **Uygula** el ile değişiklikleri uygulamak için. ' A tıkladığınızda incelemede, bir kullanıcının erişim reddedildi, **Uygula**, Azure AD, üyeliği veya uygulama ataması kaldırır.
+Gözden geçirme için **sonuçların otomatik olarak uygulanması** etkinleştirilmemişse, değişiklikleri el ile uygulamak için **Uygula** ' ya tıklayın. Gözden geçirme sırasında bir kullanıcının erişimi reddedildiyse, **Uygula**' ya TıKLADıĞıNıZDA Azure AD, üyeliklerini veya uygulama atamasını kaldırır.
 
-![Erişim incelemesi Değişiklikleri Uygula](./media/complete-access-review/apply-changes.png)
+![Erişim gözden geçirme değişikliklerini Uygula](./media/complete-access-review/apply-changes.png)
 
-Gözden geçirme durumu değiştirilecek **tamamlandı** gibi ara durumları arasında **uygulama** ve son durumuna **sonuç uygulandı**. Reddedilen kullanıcılar varsa, Grup üyeliğini veya uygulama ataması birkaç dakika içinde kaldırılmakta olan görmeyi beklemelisiniz.
+İnceleme durumu, **uygulama** ve son olarak durum **sonucu uygulanan**gibi ara durumlar aracılığıyla **tamamlandı** olarak değişir. Grup üyeliğinden veya uygulama atamasından birkaç dakika içinde kaldırılan reddedilen kullanıcıları görmeyi beklemelisiniz.
 
-Gözden geçirme uygulamak veya seçerek yapılandırılmış otomatik **Uygula** bir şirket içi dizininde kaynaklanan bir grup veya dinamik bir grup üzerinde bir etkisi yoktur. Şirket içi kaynaklanan bir grubu değiştirmek istiyorsanız, sonuçları indir ve bu değişiklikleri bu dizine grubunda gösterimini uygulanır.
+Yapılandırılmış bir otomatik uygulama incelemesi veya **Uygula** seçeneğinin belirlenmesi, şirket içi dizinde veya dinamik grupta bulunan bir grup üzerinde bir etkiye sahip değildir. Şirket içinde kaynak olan bir grubu değiştirmek istiyorsanız, sonuçları indirin ve bu değişiklikleri bu dizindeki grubun gösterimine uygulayın.
 
 ## <a name="retrieve-the-results"></a>Sonuçları alma
 
-Bir kerelik erişim gözden geçirmesi sonuçlarını görüntülemek için tıklayın **sonuçları** sayfası. Arama kutusuna yalnızca kullanıcının erişim görüntülemek için erişim gözden geçirildi bir kullanıcının kullanıcı asıl adını ve görünen ad yazın.
+Bir kerelik erişim incelemesinin sonuçlarını görüntülemek için **sonuçlar** sayfasına tıklayın. Yalnızca bir kullanıcının erişimini görüntülemek için, arama kutusuna, erişimi gözden geçirilmiş bir kullanıcının görünen adını veya Kullanıcı asıl adını yazın.
 
-![Erişim gözden geçirmesi sonuçlarını Al](./media/complete-access-review/retrieve-results.png)
+![Erişim gözden geçirmesi için sonuçları alma](./media/complete-access-review/retrieve-results.png)
 
-Etkin erişim gözden geçirmesi yinelenendir ilerlemesini görüntülemek için tıklayın **sonuçları** sayfası.
+Yinelenen etkin bir erişim incelemesinin ilerlemesini görüntülemek için **sonuçlar** sayfasına tıklayın.
 
-Erişim gözden geçirmesi yinelenendir tamamlanmış bir örneğini sonuçlarını görüntülemek için tıklayın **geçmişi gözden**seçin tamamlanmış erişim gözden geçirme örneği, belirli örneğini listeden tabanlı örneğinin başlangıç ve bitiş tarihi. Bu örnek sonuçları örneğinden alınabilen **sonuçları** sayfası.
+Yinelenen bir erişim incelemesinin tamamlanan bir örneğinin sonuçlarını görüntülemek için, **Gözden geçirme geçmişi**' ne tıklayın ve ardından örnek başlangıç ve bitiş tarihine göre tamamlanmış erişim gözden geçirme örnekleri listesinden belirli örneği seçin. Bu örneğin sonuçları, **sonuçlar** sayfasından elde edilebilir.
 
-Erişim gözden geçirmesi sonuçlarını almak için tıklayın **indirme** düğmesi. Sonuçta elde edilen CSV dosyasını Excel'de veya UTF-8 açın. diğer programları görüntülenebilir kodlanmış CSV dosyaları.
+Bir erişim incelemesinin tüm sonuçlarını almak için **İndir** düğmesine tıklayın. Elde edilen CSV dosyası Excel 'de veya UTF-8 ile kodlanmış CSV dosyalarını açan diğer programlarda görüntülenebilir.
 
-## <a name="remove-users-from-an-access-review"></a>Erişim gözden geçirmesi Kullanıcıları Kaldır
+## <a name="remove-users-from-an-access-review"></a>Erişim gözden geçirden Kullanıcı kaldırma
 
  Varsayılan olarak, silinmiş bir kullanıcı Azure AD’de 30 gün boyunca silinmiş olarak kalır ve bu süre boyunca gerekirse bir yönetici tarafından geri alınabilir.  30 gün sonra bu kullanıcı kalıcı olarak silinir.  Ayrıca, bir Genel Yönetici bu süreye ulaşılmadan önce Azure Active Directory portalını kullanarak [kısa süre önce silinmiş bir kullanıcıyı kalıcı olarak silebilir](../fundamentals/active-directory-users-restore.md).  Bir kullanıcı kalıcı olarak silindikten sonra, bu kullanıcıya ilişkin sonraki veriler etkin erişim gözden geçirmelerinden kaldırılır.  Silinmiş kullanıcılara ilişkin denetim bilgileri, denetim günlüğünde kalır.
 
@@ -90,5 +90,5 @@ Erişim gözden geçirmesi sonuçlarını almak için tıklayın **indirme** dü
 
 - [Azure AD erişim gözden geçirmeleriyle kullanıcı erişimini yönetme](manage-user-access-with-access-reviews.md)
 - [Azure AD erişim gözden geçirmeleriyle konuk erişimini yönetme](manage-guest-access-with-access-reviews.md)
-- [Grupları ve uygulamaları, erişim gözden geçirmesi oluştur](create-access-review.md)
+- [Gruplar veya uygulamalar için erişim gözden geçirmesi oluşturma](create-access-review.md)
 - [Bir Azure AD yönetici rolündeki kullanıcılar için erişim gözden geçirmesi oluşturma](../privileged-identity-management/pim-how-to-start-security-review.md)

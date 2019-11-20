@@ -1,46 +1,46 @@
 ---
 title: Bing Yazım Denetimi API’si nedir?
-titlesuffix: Azure Cognitive Services
-description: Bing yazım denetimi bağlamsal yazım denetimi için makine öğrenimi ve istatistiksel makine çevirisi kullanan API'si hakkında bilgi edinin.
+titleSuffix: Azure Cognitive Services
+description: Bağlama yazım denetimi için makine öğrenimi ve istatistiksel makine çevirisi kullanan Bing Yazım Denetimi API'si hakkında bilgi edinin.
 services: cognitive-services
 author: aahill
-manager: cgronlun
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-spell-check
 ms.topic: overview
 ms.date: 02/20/2019
 ms.author: aahi
-ms.openlocfilehash: 22f75efb3cb4baa645030e7ad64072674de662ed
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: 996db9690d19cc40c3963922d4edb3b59469752b
+ms.sourcegitcommit: f5cc71cbb9969c681a991aa4a39f1120571a6c2e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "60593200"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68514807"
 ---
 # <a name="what-is-the-bing-spell-check-api"></a>Bing Yazım Denetimi API’si nedir?
 
-Bing yazım denetimi API'si, bağlamsal gramer ve yazım metin denetimi gerçekleştirmenizi sağlar. Sözlüğe dayalı kural kümeleri üzerinde yazım denetleyicileri kullanır, ancak makine öğrenimi ve istatistiksel makine çevirisi doğru ve bağlamsal düzeltmeleri sağlamak için Bing yazım denetleyicisi yararlanır. 
+Bing Yazım Denetimi API'si, metin üzerinde bağlamsal dilbilgisi ve yazım denetimi gerçekleştirmenize olanak sağlar. Çoğu yazım denetimcisi sözlük tabanlı kural kümelerine güvenirken, Bing yazım denetleyicisi doğru ve bağlamsal düzeltmeler sağlamak için makine öğrenimi ve istatistiksel makine çevirisi kullanır. 
 
 ## <a name="features"></a>Özellikler
 
 
 |  |  |
 |---------|---------|
-|Birden çok yazım denetimi modları     | Yazım denetimi modları birden çok dil bilgisi ve/veya yazım odaklanmış düzeltmeleri yararlanmanıza olanak tanıyacak. |
-|Argo ve resmi olmayan dil tanıma     | Yaygın ifadeler ve metinde kullanılan resmi olmayan terimler tanır.         |
-|Benzer kelimeler arasındaki ayırt     | Sözcükler arasındaki doğru kullanım ilgili ses benzer Bul ancak anlamını (örneğin, "see" ve "sea") içinde farklı        |
-|Marka, başlık ve popüler kullanım desteği     | Yeni markalar, başlıklar ve diğer popüler ifadeler çıkan tanıması |
+|Birden çok yazım denetimi modu     | Birden çok yazım denetimi modu, dilbilgisi ve/veya yazım denetimine odaklanan düzeltmeler almanızı sağlar. |
+|Slang ve resmi olmayan dil tanıma     | Metinde kullanılan ortak ifadeleri ve resmi olmayan terimleri TANIIN.         |
+|Benzer sözcükler arasında ayrım yapın     | Sese benzer ancak anlamı farklıdır (örneğin, "bkz." ve "Sea") sözcükler arasında doğru kullanımı bulur        |
+|Marka, başlık ve popüler kullanım desteği     | Yeni markalar, başlıkları ve diğer popüler ifadeleri ortaya çıktı olarak tanır |
 
-## <a name="workflow"></a>İş Akışı
+## <a name="workflow"></a>İş akışı
 
-Bing yazım denetimi API'si, HTTP istekleri ve JSON yanıtlarını ayrıştırabilen herhangi programlama dilinden çağırmak kolay bir işlemdir. Hizmet REST API'si veya Bing yazım denetleme SDK'lar kullanarak erişilebilir. 
+Bing Yazım Denetimi API'si, HTTP istekleri yapan ve JSON yanıtlarını ayrıştırabilen herhangi bir programlama dilinden kolayca çağrılabilir. Hizmete REST API veya Bing Yazım Denetimi SDK 'Ları kullanılarak erişilebilir. 
 
-1. Bing Arama API'lerine erişimi olan bir [Bilişsel Hizmetler API'si hesabı](../cognitive-services-apis-create-account.md) oluşturun. Azure aboneliğiniz yoksa, ücretsiz bir hesap oluşturabilirsiniz. 
-2. Bing Web araması API'si için bir istek gönderin.
-3. JSON yanıtı ayrıştırılamadı
+1. Bing Arama API'lerine erişimi olan bir [Bilişsel Hizmetler API'si hesabı](../cognitive-services-apis-create-account.md) oluşturun. Azure aboneliğiniz yoksa ücretsiz bir hesap oluşturabilirsiniz. 
+2. Bing Web Araması API'si bir istek gönderin.
+3. JSON yanıtını Ayrıştır
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-İlk olarak, Bing yazım denetimi arama API'sini deneyin [etkileşimli tanıtım](https://azure.microsoft.com/services/cognitive-services/spell-check/) metinleri çeşitli nasıl hızlı bir şekilde denetleyebilirsiniz görmek için.
+İlk olarak, çeşitli metinleri hızlı bir şekilde nasıl kontrol etbileceğinizi görmek için Bing Yazım Denetimi Search API [etkileşimli tanıtımı](https://azure.microsoft.com/services/cognitive-services/spell-check/) ' nı deneyin.
 
 API'yi çağırmaya hazır olduğunuzda, bir [Bilişsel hizmetler API hesabı](../../cognitive-services/cognitive-services-apis-create-account.md) oluşturun. Azure aboneliğiniz yoksa ücretsiz olarak [hesap oluşturabilirsiniz](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api).

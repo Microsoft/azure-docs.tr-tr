@@ -1,101 +1,86 @@
 ---
-title: Azure özel DNS SSS
-description: Azure özel DNS hakkında sık sorulan sorular
+title: Azure Özel DNS SSS
+description: Azure Özel DNS hakkında sık sorulan sorular
 services: dns
 author: vhorne
 ms.service: dns
 ms.topic: article
-ms.date: 6/12/2019
+ms.date: 10/05/2019
 ms.author: victorh
-ms.openlocfilehash: 480cf22491dbbfcb9fe1961b5c9a7aa6fe12a0cb
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: cb0cc5e99cc07728d475a9f9e54c7eb6a8c7554e
+ms.sourcegitcommit: 4d177e6d273bba8af03a00e8bb9fe51a447196d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67274044"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71959927"
 ---
-# <a name="azure-private-dns-faq"></a>Azure özel DNS SSS
+# <a name="azure-private-dns-faq"></a>Azure Özel DNS SSS
 
-> [!IMPORTANT]
-> Azure özel DNS şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Azure özel DNS hakkında sık sorulan sorular aşağıda verilmiştir.
 
-## <a name="does-azure-dns-support-private-domains"></a>Azure DNS özel etki alanları destekliyor mu?
+## <a name="does-azure-dns-support-private-domains"></a>Özel etki alanlarını desteklemek Azure DNS mı?
 
-Özel etki alanı için destek, Azure özel DNS bölgeleri özelliğini kullanarak desteklenir. Özel DNS bölgeleri, aynı araçları kullanarak internet'e yönelik Azure DNS bölgelerini yönetilir. Bunlar, belirtilen sanal ağ dns'sinden yalnızca. Daha fazla bilgi için [genel bakış](private-dns-overview.md).
+Özel etki alanları Azure Özel DNS bölgeleri özelliği kullanılarak desteklenir. Özel DNS bölgeler yalnızca belirtilen sanal ağların içinden çözülebilir. Daha fazla bilgi için bkz. [genel bakış](private-dns-overview.md).
 
-Azure'da diğer iç DNS seçenekleri hakkında daha fazla bilgi için bkz: [VM'ler ve rol örnekleri için ad çözümlemesi](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md).
+Azure 'daki diğer iç DNS seçenekleri hakkında daha fazla bilgi için bkz. [VM 'ler ve rol örnekleri Için ad çözümlemesi](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md).
 
-## <a name="will-azure-dns-private-zones-work-across-azure-regions"></a>Azure bölgeleri arasında Azure DNS özel bölgeleri çalışacak mı?
+## <a name="will-azure-private-dns-zones-work-across-azure-regions"></a>Azure Özel DNS bölgeleri, Azure bölgelerinde çalışır mi?
 
-Evet. Özel bölgeler için DNS çözümlemesi Azure bölgelerindeki sanal ağları arasında desteklenir. Özel bölgeler bile açıkça sanal ağları eşleme olmadan çalışır. Tüm sanal ağları, çözümleme sanal ağları özel bölge olarak belirtilmelidir. Müşteriler, bir bölgeden diğerine Akış TCP/HTTP trafiği için eşlenmiş sanal ağlar gerekebilir.
+Evet. Özel bölgeler, Azure bölgelerindeki sanal ağlar arasındaki DNS çözümlemesi için desteklenir. Özel bölgeler, sanal ağları açıkça eşlemeye gerek kalmadan bile çalışmaktadır. Tüm sanal ağların özel DNS bölgesine bağlı olması gerekir.
 
-## <a name="is-connectivity-to-the-internet-from-virtual-networks-required-for-private-zones"></a>Bağlantı, özel bölgeler için gereken sanal ağlardan Internet'e mi?
+## <a name="is-connectivity-to-the-internet-from-virtual-networks-required-for-private-zones"></a>Özel bölgeler için gereken sanal ağlardan Internet bağlantısı var mı?
 
-Hayır. Özel bölgeler, sanal ağlar ile birlikte çalışır. Müşteriler, bunları sanal makineleri veya diğer kaynaklar içinde hem de sanal ağlar arasında etki alanlarını yönetmek için kullanın. Internet bağlantısı ad çözümlemesi için gerekli değildir.
+Hayır. Özel bölgeler, sanal ağlarla birlikte çalışır. Sanal makineler veya sanal ağlar içindeki ve içindeki diğer kaynaklar için etki alanlarını yönetmek üzere bunları kullanabilirsiniz. Ad çözümlemesi için Internet bağlantısı gerekli değildir.
 
-## <a name="can-the-same-private-zone-be-used-for-several-virtual-networks-for-resolution"></a>Aynı özel bölge çözümlemesi için birkaç sanal ağlar için kullanılabilir mi?
+## <a name="can-the-same-private-zone-be-used-for-several-virtual-networks-for-resolution"></a>Aynı özel bölge, çözümlenmek üzere birkaç sanal ağ için de kullanılabilir mi?
 
-Evet. En fazla 1000 sanal ağlar tek bir özel bölge ile ilişkilendirebilirsiniz.
+Evet. Bir özel DNS bölgesini binlerce sanal ağla bağlayabilirsiniz. Daha fazla bilgi için bkz. [Azure DNS sınırları](https://docs.microsoft.com/azure/azure-subscription-service-limits#azure-dns-limits)
 
-## <a name="can-a-virtual-network-that-belongs-to-a-different-subscription-be-added-as-a-linked-virtual-network-to-a-private-zone"></a>Farklı bir aboneliğe ait bir sanal ağ özel bir bölgeye bağlı bir sanal ağ eklenebilir?
+## <a name="can-a-virtual-network-that-belongs-to-a-different-subscription-be-linked-to-a-private-zone"></a>Farklı bir aboneliğe ait olan bir sanal ağ, özel bir bölgeye bağlanabilir mi?
 
-Evet. Sanal ağlar ve özel DNS bölgesi yazma işlemi izni olmalıdır. Birkaç RBAC rolleri için yazma izni verilebilir. Örneğin, Klasik ağ Katılımcısı RBAC rolü sanal ağlar için yazma izinlerine sahiptir. RBAC rolleri hakkında daha fazla bilgi için bkz. [rol tabanlı erişim denetimi](../role-based-access-control/overview.md).
+Evet. Sanal ağlarda ve özel DNS bölgesinde yazma işlemi izninizin olması gerekir. Yazma izni birkaç RBAC rolüne verilebilir. Örneğin, klasik ağ katılımcısı RBAC rolü sanal ağlara yazma izinlerine sahiptir ve Özel DNS bölgeleri katkıda bulunan rolü, özel DNS bölgelerinde yazma izinlerine sahiptir. RBAC rolleri hakkında daha fazla bilgi için bkz. [rol tabanlı erişim denetimi](../role-based-access-control/overview.md).
 
-## <a name="will-the-automatically-registered-virtual-machine-dns-records-in-a-private-zone-be-automatically-deleted-when-you-delete-the-virtual-machine"></a>Sanal makine sildiğinizde, özel bir bölge içinde otomatik olarak kayıtlı sanal makinenin DNS kayıtlarını otomatik olarak silinir?
+## <a name="will-the-automatically-registered-virtual-machine-dns-records-in-a-private-zone-be-automatically-deleted-when-you-delete-the-virtual-machine"></a>Sanal makineyi sildiğinizde özel bir bölgedeki otomatik olarak kaydettirilen sanal makine DNS kayıtları otomatik olarak silinir mi?
 
-Evet. Otomatik kayıt etkin ile bağlı bir sanal ağ içindeki sanal makineyi silme kayıtlı kayıtları otomatik olarak silinir.
+Evet. Otomatik kayıt etkin olan bağlı bir sanal ağ içindeki bir sanal makineyi silerseniz, kayıtlı kayıtlar otomatik olarak silinir.
 
-## <a name="can-an-automatically-registered-virtual-machine-record-in-a-private-zone-from-a-linked-virtual-network-be-deleted-manually"></a>Bağlı sanal ağ özel bir bölgedeki bir sanal makine otomatik olarak kayıtlı kaydı el ile silinebilir?
+## <a name="can-an-automatically-registered-virtual-machine-record-in-a-private-zone-from-a-linked-virtual-network-be-deleted-manually"></a>Bağlı bir sanal ağdan özel bir bölgede otomatik olarak kaydedilmiş bir sanal makine kaydı el ile silinebilir mi?
 
-Evet. Bölgesinde el ile oluşturulan DNS kaydını otomatik olarak kayıtlı DNS kayıtlarını üzerine yazabilirsiniz. Bu konuda aşağıdaki soru ve yanıt adresi.
+Evet. Otomatik olarak kayıtlı DNS kayıtlarının, bölgede el ile oluşturulan bir DNS kaydıyla üzerine yazabilirsiniz. Aşağıdaki soru ve yanıt bu konuyu ele almaktadır.
 
-## <a name="what-happens-when-i-try-to-manually-create-a-new-dns-record-into-a-private-zone-that-has-the-same-hostname-as-an-automatically-registered-existing-virtual-machine-in-a-linked-virtual-network"></a>El ile bağlı bir sanal ağda aynı ana bilgisayar adı olarak var olan bir sanal makine otomatik olarak kayıtlı olan bir özel bölge içine yeni bir DNS kaydı oluşturmak çalıştığınızda ne olur?
+## <a name="what-happens-when-i-try-to-manually-create-a-new-dns-record-into-a-private-zone-that-has-the-same-hostname-as-an-automatically-registered-existing-virtual-machine-in-a-linked-virtual-network"></a>Bağlı bir sanal ağda otomatik olarak kaydedilmiş var olan bir sanal makine ile aynı ana bilgisayar adına sahip özel bir bölgede yeni bir DNS kaydını el ile oluşturmayı denediğimde ne olur?
 
-El ile bağlı bir sanal ağda var olan ve otomatik olarak kayıtlı bir sanal makine olarak aynı ana bilgisayar adı olan bir özel bölge içine yeni bir DNS kaydı oluşturma deneyin. Bunu yaptığınızda yeni DNS kaydını otomatik olarak kayıtlı sanal makine kaydı üzerine yazar. El ile oluşturulan bu DNS kaydını yeniden bölgeden silmeye çalışırsanız, silme başarılı olur. Otomatik kayıt, sanal makine hala mevcut olduğundan ve özel bir IP, kendisine eklenmiş sürece yeniden gerçekleşir. DNS kaydını otomatik olarak bölgede yeniden oluşturulur.
+Bağlı bir sanal ağda, mevcut, otomatik olarak kaydedilmiş bir sanal makineyle aynı ana bilgisayar adına sahip özel bir bölgede el ile yeni bir DNS kaydı oluşturmaya çalışırsınız. Bunu yaptığınızda, yeni DNS kaydı otomatik olarak kaydedilen sanal makine kaydının üzerine yazar. Bu elle oluşturulan DNS kaydını bölgeden yeniden silmeye çalışırsanız, silme işlemi başarılı olur. Otomatik kayıt, sanal makine hala varolduğu ve kendisine bağlı özel bir IP 'si olduğu sürece yeniden gerçekleşir. DNS kaydı, bölgede otomatik olarak yeniden oluşturulur.
 
-## <a name="what-happens-when-we-unlink-a-linked-virtual-network-from-a-private-zone-will-the-automatically-registered-virtual-machine-records-from-the-virtual-network-be-removed-from-the-zone-too"></a>Size özel bir bölgeden bağlı bir sanal ağ bağlantısını ne olur? Sanal ağdan sanal makine otomatik olarak kayıtlı kayıtları bölgeden çok kaldırılacak?
+## <a name="what-happens-when-we-unlink-a-linked-virtual-network-from-a-private-zone-will-the-automatically-registered-virtual-machine-records-from-the-virtual-network-be-removed-from-the-zone-too"></a>Bağlı bir sanal ağın özel bir bölgeden bağlantısını kaldırdığınızda ne olur? Sanal ağdan otomatik olarak kaydedilen sanal makine kayıtları bölgeden da kaldırılacak mı?
 
-Evet. Özel bir bölgeden bağlı bir sanal ağ bağlantısını kaldırmak için ilişkili sanal ağ bağlantısını kaldırmak için DNS bölgesini güncelleştirme. Bu işlemde otomatik olarak kaydedilmiş bir sanal makine kayıtları bölgesinden kaldırıldı.
+Evet. Bağlı bir sanal ağın özel bir bölgeden bağlantısını kaldırmak için, DNS bölgesini, ilişkili sanal ağ bağlantısını kaldıracak şekilde güncelleştirin. Bu işlemde, otomatik olarak kaydedilen sanal makine kayıtları bölgeden kaldırılır.
 
-## <a name="what-happens-when-we-delete-a-linked-virtual-network-thats-linked-to-a-private-zone-do-we-have-to-manually-update-the-private-zone-to-unlink-the-virtual-network-as-a-linked-virtual-network-from-the-zone"></a>Bir özel bölgesiyle bağlantılı bağlı bir sanal ağ silmemiz ne olur? Bir bölge sanal ağdan bağlı olarak sanal ağ bağlantısını için özel bölge el ile güncelleştirmek zorunda mıyım?
+## <a name="what-happens-when-we-delete-a-linked-virtual-network-thats-linked-to-a-private-zone-do-we-have-to-manually-update-the-private-zone-to-unlink-the-virtual-network-as-a-linked-virtual-network-from-the-zone"></a>Özel bir bölgeyle bağlantılı bağlı bir sanal ağı silediğimiz zaman ne olur? Sanal ağın bölge üzerinden bağlı bir sanal ağ olarak bağlantısını kaldırmak için özel bölgeyi el ile güncelleştirmemiz gerekir mi?
 
-Evet. Bağlı sanal ağ özel bölgesinden ilk bağlantısını olmadan sildiğinizde, silme işlemi başarılı olur. Ancak sanal ağ özel bölgeden varsa otomatik olarak bağlantısız değildir. El ile özel bölge sanal ağdan bağlantısını kaldırmanız gerekir. Bu nedenle, silmeden önce sanal ağınızdan özel bölgenizi bağlantısını Kaldır.
+Hayır. Önce özel bir bölgeden bağlantısını kaldırmadan bağlı bir sanal ağı sildiğinizde, silme işlemi başarılı olur ve DNS bölgesinin bağlantıları otomatik olarak temizlenir.
 
-## <a name="will-dns-resolution-by-using-the-default-fqdn-internalcloudappnet-still-work-even-when-a-private-zone-for-example-privatecontosocom-is-linked-to-a-virtual-network"></a>Hatta özel bir bölgesi (örneğin, private.contoso.com) bir sanal ağa bağlandığında kullanarak FQDN (internal.cloudapp.net) varsayılan DNS çözümlemesi çalışmaya devam eder mi?
+## <a name="will-dns-resolution-by-using-the-default-fqdn-internalcloudappnet-still-work-even-when-a-private-zone-for-example-privatecontosocom-is-linked-to-a-virtual-network"></a>Özel bir bölge (örneğin, private.contoso.com) bir sanal ağla bağlantılı olduğunda bile varsayılan FQDN (internal.cloudapp.net) kullanılarak DNS çözümlemesi devam eder mi?
 
-Evet. Özel bölgeler için varsayılan DNS çözümleri, Azure tarafından sağlanan internal.cloudapp.net bölge kullanarak yerini almaz. Bir ek özellik veya geliştirme olarak sunulur. Azure tarafından sağlanan internal.cloudapp.net veya kendi özel bölge kullanan, karşı çözümlemek istediğiniz bölgeyi FQDN'sini kullanın.
+Evet. Özel bölgeler, varsayılan Azure tarafından sağlanmış internal.cloudapp.net bölgesinin yerini alır. Azure tarafından sağlanmış internal.cloudapp.net veya kendi özel bölgeniz olsun, çözümlemek istediğiniz bölgenin FQDN 'sini kullanın.
 
-## <a name="will-the-dns-suffix-on-virtual-machines-within-a-linked-virtual-network-be-changed-to-that-of-the-private-zone"></a>Bağlı sanal ağ içindeki sanal makinelerde DNS soneki, özel bölge değiştirilecek?
+## <a name="will-the-dns-suffix-on-virtual-machines-within-a-linked-virtual-network-be-changed-to-that-of-the-private-zone"></a>Bağlı bir sanal ağ içindeki sanal makinelerdeki DNS son eki özel bölgeye göre değiştirilsin mi?
 
-Hayır. Sanal makinelere bağlı sanal ağınızdaki DNS soneki, varsayılan Azure tarafından sağlanan sonek olarak kalır ("*. internal.cloudapp.net"). El ile bu DNS soneki üzerindeki sanal makinelerinize, özel bölge değiştirebilirsiniz.
+Hayır. Bağlı sanal ağınızdaki sanal makinelerdeki DNS son eki, varsayılan olarak Azure tarafından belirtilen sonek ("*. internal.cloudapp.net") olarak kalır. Sanal makinelerinizdeki bu DNS sonekini özel bölgeye el ile değiştirebilirsiniz.
+Bu sonekin nasıl değiştirileceği hakkında yönergeler için [, DNS sunucunuza ana bilgisayar adlarını kaydetmek üzere dınamık DNS kullanma](https://docs.microsoft.com/azure/virtual-network/virtual-networks-name-resolution-ddns#windows-clients) konusuna bakın
 
-## <a name="what-are-the-usage-limits-for-azure-private-dns"></a>Azure özel DNS kullanım sınırları nelerdir?
+## <a name="what-are-the-usage-limits-for-azure-dns-private-zones"></a>Azure DNS özel bölgelerin kullanım sınırları nelerdir?
 
-Azure özel DNS kullandığınızda aşağıdaki varsayılan sınırlar geçerlidir.
+Azure DNS özel bölgelerin kullanım limitleriyle ilgili ayrıntılar için [Azure DNS sınırlara](https://docs.microsoft.com/azure/azure-subscription-service-limits#azure-dns-limits) bakın.
 
-| Resource | Varsayılan limit |
-| --- | --- |
-|Abonelik başına özel DNS bölgeleri|1000|
-|Özel DNS bölge başına kayıt kümeleri|25,000|
-|Kayıt kümesi başına kayıt|20|
-|Özel DNS bölge başına sanal ağ bağlantıları|1000|
-|Otomatik kaydı ile özel DNS bölgelerini başına sanal ağlara bağlantılar etkin|100|
-|Bir sanal ağ otomatik etkin kayıt ile bağlantılı özel DNS bölgelerini sayısı|1|
-|Özel DNS bölgelerini, bir sanal ağa bağlı sayısı|1000|
+## <a name="why-dont-my-existing-private-dns-zones-show-up-in-new-portal-experience"></a>Var olan özel DNS bölgelerimin yeni Portal deneyiminde neden gösterilmeliyim?
 
-## <a name="is-there-portal-support-for-private-zones"></a>Özel bölgeler için portal destek var mı?
+Varolan özel DNS bölgeniz önizleme API 'SI kullanılarak oluşturulduysa, bu bölgeleri yeni kaynak modeline geçirmeniz gerekir. Preview API kullanılarak oluşturulan Özel DNS bölgeler, yeni Portal deneyiminde gösterilmez. Yeni kaynak modeline geçiş hakkında yönergeler için aşağıya bakın.
 
-Evet ve API'ler, PowerShell, CLI ve SDK'lar önceden oluşturulmuş özel bölgeler Azure portalında görünür.
+## <a name="how-do-i-migrate-my-existing-private-dns-zones-to-the-new-model"></a>Var olan özel DNS bölgelerinizi yeni modele geçirmek Nasıl yaparım? mi?
 
-## <a name="why-dont-my-existing-private-dns-zones-show-up-in-new-portal-experience"></a>Neden benim mevcut özel DNS bölgelerini yeni portal deneyiminde görünmüyor?
-
-Önizlemeyi Yenile yayının bir parçası size özel DNS bölgeleri için yeni bir kaynak modeli birlikte gelir. Mevcut özel DNS bölgelerini bunlar yeni portal deneyiminde görünmesi önce yeni kaynak modeline geçirilmesi gerekir. Yeni kaynak modeline geçirme hakkında yönergeler için aşağıya bakın.
-
-## <a name="how-do-i-migrate-my-existing-private-dns-zones-to-the-new-model"></a>My mevcut özel DNS bölgelerini yeni modeline nasıl geçirebilirim?
-Mümkün olan en kısa sürede yeni kaynak modeline geçirme kesinlikle öneririz. Eski kaynak modeli desteklenir, ancak başka özellikleri bu bir model temelinde geliştirileceğini değil. Gelecekte sorundan yerine yeni kaynak modelini kullanımdan sunmayı planlıyoruz. Mevcut özel DNS geçirme hakkında yönergeler için bkz: yeni kaynak modeli bölgeleri[Azure DNS özel bölgeleri için Geçiş Kılavuzu](private-dns-migration-guide.md).
+Yeni kaynak modeline mümkün olan en kısa sürede geçiş yapmanızı önemle tavsiye ederiz. Ancak, eski kaynak modeli desteklenecektir, ancak daha fazla özellik bu modelin üzerine geliştirilecektir. Daha sonra, yeni kaynak modeli yerine kullanımdan kaldırmayı amaçlıyoruz. Mevcut özel DNS bölgelerinizi yeni kaynak modeline geçirme hakkında yönergeler için bkz.[Azure DNS özel bölgeler için geçiş kılavuzu](private-dns-migration-guide.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure özel DNS hakkında daha fazla bilgi edinin](private-dns-overview.md)
+- [Azure Özel DNS hakkında daha fazla bilgi](private-dns-overview.md)

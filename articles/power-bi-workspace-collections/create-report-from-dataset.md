@@ -2,18 +2,18 @@
 title: Power BI çalışma alanı koleksiyonları'nda bir veri kümesinden yeni rapor oluşturma | Microsoft Docs
 description: Power BI çalışma alanı koleksiyonu raporları artık kendi uygulamanızda bir veri kümesinden oluşturulabilir.
 services: power-bi-workspace-collections
-ms.service: power-bi-workspace-collections
+ms.service: power-bi-embedded
 author: rkarlin
 ms.author: rkarlin
 ms.topic: article
 ms.workload: powerbi
 ms.date: 09/20/2017
-ms.openlocfilehash: e7499345f03e3deedb8972b0d51e8e676cb6c982
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2034c62a17b71b92b43a7afd794c2c172288d58c
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64683447"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67672458"
 ---
 # <a name="create-a-new-report-from-a-dataset-in-power-bi-workspace-collections"></a>Power BI çalışma alanı koleksiyonları'nda bir veri kümesinden yeni rapor oluşturma
 

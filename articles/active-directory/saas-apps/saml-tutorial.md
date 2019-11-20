@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: SAML 1.1 belirteci ile Azure Active Directory Tümleştirmesi etkinleştirilmiş LOB uygulaması | Microsoft Docs'
-description: Azure Active Directory arasında çoklu oturum açmayı yapılandırma hakkında bilgi edinin ve SAML 1.1 belirteci etkin bir LOB uygulaması.
+title: 'Öğretici: SAML 1,1 belirteci etkin LOB uygulamasıyla Azure Active Directory tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve SAML 1,1 belirteci etkinleştirilmiş LOB uygulaması arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: daveba
 ms.reviewer: barbkess
 ms.assetid: ced1d88d-0e48-40d5-9aea-ef991cd9d270
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,187 +16,187 @@ ms.topic: tutorial
 ms.date: 12/24/2018
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2cc3f8389eb0b98da5c172adf65ff4dae38ca29d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6de8906f15b170511c5548eeaf13173bd39a2734
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67092002"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73160067"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-saml-11-token-enabled-lob-app"></a>Öğretici: SAML 1.1 belirteci ile Azure Active Directory Tümleştirmesi etkin bir LOB uygulaması
+# <a name="tutorial-azure-active-directory-integration-with-saml-11-token-enabled-lob-app"></a>Öğretici: SAML 1,1 belirteci etkin LOB uygulamasıyla Azure Active Directory tümleştirme
 
-Bu öğreticide, şunların nasıl tümleştireceğinizi SAML 1.1 belirteci LOB uygulaması Azure Active Directory (Azure AD) ile etkin.
-SAML 1.1 belirteci tümleştirme etkin LOB uygulamanızı Azure AD ile aşağıdaki faydaları sağlar:
+Bu öğreticide, SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasını Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasını Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Azure'da denetleyebilirsiniz SAML 1.1 belirteç erişimi olan AD etkin LOB uygulaması.
-* Kullanıcılarınızın otomatik olarak oturum açma için etkinleştirebilirsiniz. SAML 1.1 belirteci özellikli LOB (çoklu oturum açma) ile kendi Azure AD hesapları.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasına erişimi olan bir denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla SAML 1,1 belirteci etkinleştirilmiş LOB uygulaması (çoklu oturum açma) ile otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure'u yapılandırmak için SAML 1.1 belirteci AD tümleştirmesiyle etkin LOB uygulaması, aşağıdaki öğeler gerekir:
+SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasıyla Azure AD tümleştirmesini yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* SAML 1.1 belirteci LOB uygulaması tek oturum açma etkin abonelik etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* SAML 1,1 belirteci etkin LOB uygulaması çoklu oturum açma özellikli abonelik
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* SAML 1.1 belirteci etkin LOB uygulamanın desteklediği **SP** tarafından başlatılan
+* SAML 1,1 belirteci etkin LOB uygulaması **SP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-saml-11-token-enabled-lob-app-from-the-gallery"></a>Etkin LOB uygulaması Galerisi SAML 1.1 belirteci ekleme
+## <a name="adding-saml-11-token-enabled-lob-app-from-the-gallery"></a>Galeriden SAML 1,1 belirteci etkin LOB uygulaması ekleniyor
 
-SAML 1.1 belirteci tümleştirmesini yapılandırmak için Azure AD ile LOB uygulaması etkin, SAML 1.1 belirteci etkin LOB uygulaması Galerisi yönetilen SaaS listenizden eklemeniz gerekir.
+SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasının tümleştirmesini Azure AD 'ye göre yapılandırmak için, Galeriden SAML 1,1 belirteci etkin LOB uygulaması 'nı galerisinden yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**SAML 1.1 belirteci etkin galerisinden LOB uygulaması eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden SAML 1,1 belirteci etkin LOB uygulaması eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **SAML 1.1 belirteci etkin LOB uygulaması**seçin **SAML 1.1 belirteci etkin LOB uygulaması** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **saml 1,1 belirteci ETKIN lob uygulaması**yazın, sonuç panelinden **SAML 1,1 belirteci etkin lob uygulaması** ' nı seçin, sonra da uygulamayı eklemek için düğme **Ekle** ' ye tıklayın.
 
-     ![Sonuçlar listesinde etkin LOB uygulaması SAML 1.1 belirteci](common/search-new-app.png)
+     ![SAML 1,1 belirteci sonuç listesinde LOB uygulaması etkinleştirildi](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırmanız ve SAML 1.1 belirteci ile Azure AD çoklu oturum açmayı test etkin adlı bir test kullanıcı tabanlı uygulama LOB **Britta Simon**.
-Tek iş için oturum açma için LOB uygulaması kurulması gerekiyorsa bir Azure AD kullanıcısı ile ilgili kullanıcı SAML 1.1 belirteç arasında bir bağlantı ilişki etkin.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test KULLANıCıSıNA göre SAML 1,1 BELIRTECI etkinleştirilmiş lob uygulamasıyla yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve SAML 1,1 belirteci etkinleştirilmiş LOB uygulaması içindeki ilgili Kullanıcı arasındaki bağlantı ilişkisi kurulmalıdır.
 
-Yapılandırmanıza ve sınamanıza Azure AD çoklu oturum açma SAML 1.1 belirteci ile etkin LOB uygulaması, aşağıdaki yapı taşlarını tamamlanması gerekir:
+SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasıyla Azure AD çoklu oturum açmayı yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Yapılandırma LOB uygulamasını Çoklu oturum açma SAML 1.1 belirteci etkin](#configure-saml-11-token-enabled-lob-app-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[SAML 1.1 etkin belirteci oluşturma LOB uygulamanızı test kullanıcısı](#create-saml-11-token-enabled-lob-app-test-user)**  - olmasını Britta simon'un SAML 1.1 belirteç içinde bir karşılığı etkin kullanıcı Azure AD gösterimini bağlı LOB uygulaması.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[SAML 1,1 belirteci ETKINLEŞTIRILMIŞ lob uygulaması çoklu oturum açmayı yapılandırın](#configure-saml-11-token-enabled-lob-app-single-sign-on)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. SAML **[1,1 belirteci ETKIN lob uygulaması test kullanıcısı oluşturma](#create-saml-11-token-enabled-lob-app-test-user)** -kullanıcının Azure AD gösterimine bağlı olan SAML 1,1 BELIRTECI etkinleştirilmiş lob uygulamasında Britta Simon 'un bir karşılığı olacak şekilde.
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure'u yapılandırmak için AD çoklu oturum açma SAML 1.1 belirteci ile LOB uygulaması etkin, aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasıyla yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **SAML 1.1 belirteci etkin LOB uygulaması** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **SAML 1,1 belirteci etkinleştirilmiş lob** uygulaması uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![SAML 1.1 belirteci LOB uygulama etki alanı ve URL'ler tek oturum açma bilgisi etkin](common/sp-identifier.png)
+    ![SAML 1,1 belirteci etkin LOB uygulaması etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/sp-identifier.png)
 
-    a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://your-app-url`
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://your-app-url`
 
-    b. İçinde **tanımlayıcı (varlık kimliği)** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://your-app-url`
+    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://your-app-url`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL ve tanımlayıcıdır ile güncelleştirin. Bu değerleri almak LOB uygulaması istemci Destek ekibiyle iletişim SAML 1.1 belirteci etkin. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için SAML 1,1 belirteci etkinleştirilmiş LOB uygulama Istemci desteği ekibine başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-4. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+4. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. Üzerinde **etkin LOB uygulamanızı kurma SAML 1.1 belirteci** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. **SAML 1,1 belirteci ETKINLEŞTIRILMIŞ lob uygulamasını ayarlama** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-saml-11-token-enabled-lob-app-single-sign-on"></a>Yapılandırma SAML 1.1 belirteci etkin LOB uygulamasını Çoklu oturum açma
+### <a name="configure-saml-11-token-enabled-lob-app-single-sign-on"></a>SAML 1,1 belirteci etkin LOB uygulaması çoklu oturum açmayı yapılandırma
 
-Çoklu oturum açmayı yapılandırma **SAML 1.1 belirteci etkin LOB uygulaması** tarafı, indirilen göndermek için ihtiyacınız **sertifika (Base64)** ve Azure Portalı'ndan uygun kopyalanan URL'leri SAML 1.1 belirteç etkin LOB uygulaması Takım destekler. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
+**Saml 1,1 belirteci ETKINLEŞTIRILMIŞ lob uygulaması** tarafında çoklu oturum açmayı yapılandırmak için, indirilen **sertifikayı (Base64)** ve Azure Portal ' den uygun kopyalanmış URL 'leri SAML 1,1 belirteci etkinleştirilmiş LOB uygulama desteği ekibine göndermeniz gerekir. Bu ayar, SAML SSO bağlantısının her iki tarafında da düzgün bir şekilde ayarlanmasını sağlamak üzere ayarlanmıştır.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure'ı kullanmak Britta Simon etkinleştirme çoklu erişim SAML 1.1 belirteç verme ile oturum etkin LOB uygulaması.
+Bu bölümde, SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasına erişim izni vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon özelliğini etkinleştirirsiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **SAML 1.1 belirteci etkin LOB uygulaması**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin, sonra **SAML 1,1 belirteci etkin lob uygulaması**' nı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde yazın ve **SAML 1.1 belirteci etkin LOB uygulaması**.
+2. Uygulamalar listesinde, yazın ve **SAML 1,1 belirteci ETKIN lob uygulaması**' nı seçin.
 
-    ![SAML 1.1 belirteci uygulamalar listesinde LOB uygulaması bağlantı etkin](common/all-applications.png)
+    ![Uygulamalar listesinde SAML 1,1 belirteci etkin LOB uygulaması bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-saml-11-token-enabled-lob-app-test-user"></a>SAML 1.1 etkin belirteci oluşturma LOB uygulamanızı test kullanıcısı
+### <a name="create-saml-11-token-enabled-lob-app-test-user"></a>SAML 1,1 belirteci etkin LOB uygulaması test kullanıcısı oluşturma
 
-Bu bölümde, Britta Simon adlı bir kullanıcı oluşturma SAML 1.1 belirteci etkin LOB uygulaması. İş SAML 1.1 belirteci ile LOB uygulaması Destek ekibine SAML 1.1 belirteci kullanıcılar LOB uygulaması platformu etkin eklemek etkin. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
+Bu bölümde SAML 1,1 belirteci etkinleştirilmiş LOB uygulaması bölümünde Britta Simon adlı bir Kullanıcı oluşturacaksınız. SAML 1,1 belirteci etkinleştirilmiş LOB uygulama platformunda kullanıcıları eklemek için SAML 1,1 belirteci etkinleştirilmiş LOB uygulama destek ekibi ile çalışın. Çoklu oturum açma kullanılmadan önce kullanıcıların oluşturulması ve etkinleştirilmesi gerekir.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-' A tıkladığınızda SAML 1.1 belirteci etkin erişim panelinde LOB uygulama kutucuğunda, otomatik olarak oturum açmış olmanıza SAML 1.1 belirteci LOB uygulamanızı SSO'yu ayarladığınız etkin. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde SAML 1,1 belirteci etkin LOB uygulaması kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız SAML 1,1 belirteci etkinleştirilmiş LOB uygulamasında otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

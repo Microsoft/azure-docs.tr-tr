@@ -9,19 +9,31 @@
   items:
     - name: 'C# kullanma'
       href: Quickstart.md
+    - name: Swift kullanma (iOS)
+      href: ios-quickstart.md
 - name: Öğreticiler
   items:
     - name: Tam Ekran Okuyucu’yu Başlatma (Node.js)
-      href: tutorial.md
+      href: tutorial-nodejs.md
+    - name: Tam Ekran Okuyucu’yu Başlatma (Python)
+      href: tutorial-python.md
+    - name: Tam Ekran Okuyucu’ya görüntü aktarma (Swift)
+      href: tutorial-ios-picture-immersive-reader.md
+- name: Nasıl Yapılır
+  items:
+    - name: Azure Active Directory kimlik doğrulaması
+      href: azure-active-directory-authentication.md
 - name: Başvuru
   items:
     - name: SDK Başvurusu
       href: reference.md
+    - name: iOS SDK Başvurusu
+      href: ios-reference.md
 - name: Kaynaklar
   items:
     - name: Azure yol haritası
-      href: 'https://azure.microsoft.com/en-us/updates/?product=cognitive-services'
+      href: 'https://azure.microsoft.com/updates/?product=cognitive-services'
     - name: Dil desteği
       href: 'https://aka.ms/ltlangsupport'
     - name: Bölgesel kullanılabilirlik
-      href: 'https://azure.microsoft.com/en-us/global-infrastructure/services/?products=cognitive-services'
+      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'

@@ -1,43 +1,42 @@
 ---
-title: Portal - Azure Search RBAC rolleri için Azure yönetim erişimi ayarlayın
-description: Rol tabanlı yönetim denetimi (RBAC) ve Azure arama yönetimi için yönetim görevleri için temsilci seçme denetlemek için Azure portalında.
+title: Azure yönetim erişimi için RBAC rollerini ayarlama
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama Yönetimi için yönetim görevlerini denetleme ve bunların yetkisini aktarmaya yönelik Azure portal rol tabanlı yönetim denetimi (RBAC).
+manager: nitinme
 author: HeidiSteen
-manager: cgronlun
-services: search
-ms.service: search
-ms.topic: conceptual
-ms.date: 04/05/2019
 ms.author: heidist
-ms.custom: seodec2018
-ms.openlocfilehash: 34def35eba1e5c1645e6e1f9a505704d153ac716
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: 9262d01e35bd03a9116a30b070b023f578f0b15a
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61282404"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74112565"
 ---
-# <a name="set-rbac-roles-for-administrative-access"></a>Yönetici erişimi için RBAC rollerini ayarlama
+# <a name="set-rbac-roles-for-administrative-access-to-azure-cognitive-search"></a>Azure Bilişsel Arama yönetim erişimi için RBAC rolleri ayarlama
 
-Azure sağlayan bir [genel rol tabanlı yetkilendirme modeli](../role-based-access-control/role-assignments-portal.md) tüm hizmetler için portal veya Resource Manager API'leri aracılığıyla yönetilen. Sahip, katkıda bulunan ve okuyucu rolleri düzeyini belirlemek *Hizmet Yönetim* Active Directory Kullanıcıları, grupları ve her role atanmış güvenlik sorumluları için. 
+Azure, portal veya Kaynak Yöneticisi API 'Leri aracılığıyla yönetilen tüm hizmetler için [Genel rol tabanlı bir yetkilendirme modeli](../role-based-access-control/role-assignments-portal.md) sağlar. Sahip, katkıda bulunan ve okuyucu rolleri, her role atanan Active Directory Kullanıcılar, gruplar ve güvenlik sorumluları için *hizmet yönetiminin* düzeyini belirlemektir. 
 
 > [!Note]
-> Dizin bölümlerini veya bir alt belgelerin güvenliğini sağlamak için rol tabanlı erişim denetim yoktur. Kimlik tabanlı arama sonuçları üzerinden erişim için istek sahibine erişim olmamalıdır belgelerin kaldırılması kimlik tarafından sonuçları kırpmak için güvenlik filtreler oluşturabilirsiniz. Daha fazla bilgi için [güvenlik filtreleri](search-security-trimming-for-azure-search.md) ve [Active Directory ile güvenli](search-security-trimming-for-azure-search-with-aad.md).
+> Bir dizinin veya bir belge alt kümesinin bölümlerinin güvenliğini sağlamak için rol tabanlı erişim denetimi yoktur. Arama sonuçları üzerinden kimlik tabanlı erişim için, sonuçları kimliğe göre kırpmak, istek sahibinin erişimi olmaması gereken belgeleri kaldırmak için güvenlik filtreleri oluşturabilirsiniz. Daha fazla bilgi için bkz. [Güvenlik filtreleri](search-security-trimming-for-azure-search.md) ve [Active Directory Ile güvenli hale getirme](search-security-trimming-for-azure-search-with-aad.md).
 
-## <a name="management-tasks-by-role"></a>Rol yönetim görevleri
+## <a name="management-tasks-by-role"></a>Role göre yönetim görevleri
 
-Azure arama için rolleri aşağıdaki yönetim görevlerini desteklemek izin düzeyleri ile ilişkilidir:
+Azure Bilişsel Arama için roller, aşağıdaki yönetim görevlerini destekleyen izin düzeyleriyle ilişkilendirilir:
 
 | Rol | Görev |
 | --- | --- |
-| Sahip |Oluşturma veya hizmet veya API anahtarları, dizin, dizin oluşturucular, Dizin Oluşturucu veri kaynakları ve dizin oluşturucu zamanlamaları ekleme gibi herhangi bir nesne silme.<p>Boyut sayısı ve depolama da dahil olmak üzere, hizmet durumunu görüntüleyin.<p>Ekleyin veya rol üyeliğini (yalnızca bir sahip rolü üyeliği yönetebilirsiniz) silin.<p>Abonelik yöneticileri ve hizmet sahipleri otomatik üyelik sahipleri rolüne sahiptir. |
-| Katılımcı |Aynı düzeyde erişime sahip RBAC rolü yönetim eksi. Örneğin, bir katkıda bulunan oluşturma veya silme nesneleri görüntülemek veya yeniden [api anahtarlarını](search-security-api-keys.md), rol üyeliklerini değiştiremezsiniz ancak. |
-| [Arama hizmeti Katılımcısı yerleşik rolü](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#search-service-contributor) | Katkıda bulunan rolü ile eşdeğerdir. |
-| Okuyucu |Görünüm hizmet temel bileşenleri ve ölçümleri. Bu rolün üyeleri, dizin, dizin oluşturucu, veri kaynağı veya anahtar bilgileri görüntüleyemezsiniz.  |
+| Sahip |API anahtarları, dizinler, Dizin oluşturucular, Dizin Oluşturucu veri kaynakları ve Dizin Oluşturucu zamanlamaları dahil hizmet veya hizmette herhangi bir nesne oluşturun veya silin.<p>Sayılar ve depolama boyutu dahil olmak üzere hizmet durumunu görüntüleyin.<p>Rol üyeliği ekleme veya silme (yalnızca sahip, rol üyeliğini yönetebilir).<p>Abonelik yöneticileri ve hizmet sahipleri, sahipler rolünde otomatik üyeliğe sahiptir. |
+| Katılımcı |Sahibe göre aynı erişim düzeyi, eksi RBAC rol yönetimi. Örneğin, katkıda bulunan, nesne oluşturabilir veya silebilir ya da [API anahtarlarını](search-security-api-keys.md)görüntüleyebilir ve yeniden oluşturabilir, ancak rol üyeliklerini değiştiremezler. |
+| [Arama Hizmeti katkıda bulunan yerleşik rolü](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#search-service-contributor) | Katkıda bulunan rolüne eşdeğerdir. |
+| Okuyucu |Hizmet temellerini ve ölçümlerini görüntüleyin. Bu rolün üyeleri dizin, Dizin Oluşturucu, veri kaynağı veya anahtar bilgilerini görüntüleyemez.  |
 
-Rolleri, hizmet uç noktasına erişim hakları vermeyin. Arama hizmeti, dizin yönetimi ve dizin oluşturma işlemi sorgular gibi veriler üzerinde işlem arama, api anahtarlarını, olmayan roller denetlenir. Daha fazla bilgi için [API anahtarları Yönet](search-security-api-keys.md).
+Roller, hizmet uç noktasına erişim hakkı vermez. Dizin Yönetimi, dizin oluşturma ve arama verilerinde sorgular gibi arama hizmeti işlemleri, rol değil API anahtarları aracılığıyla denetlenir. Daha fazla bilgi için bkz. [API anahtarlarını yönetme](search-security-api-keys.md).
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
 + [PowerShell’i kullanarak yönetme](search-manage-powershell.md) 
-+ [Performans ve iyileştirme Azure Search'te](search-performance-optimization.md)
-+ [Azure portalında rol tabanlı erişim denetimi ile çalışmaya başlama](../role-based-access-control/overview.md).
++ [Azure Bilişsel Arama performans ve iyileştirme](search-performance-optimization.md)
++ [Azure Portal rol tabanlı Access Control kullanmaya](../role-based-access-control/overview.md)başlayın.

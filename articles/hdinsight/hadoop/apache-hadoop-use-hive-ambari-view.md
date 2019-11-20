@@ -1,46 +1,46 @@
 ---
-title: Hive (Apache Hadoop) - Azure HDInsight üzerinde çalışmak için Apache Ambari görünümlerini kullanma
-description: Hive sorguları göndermek için web tarayıcınızdan Hive görünümü kullanmayı öğrenin. Hive görünümü Ambari Web kullanıcı Arabirimi ile Linux tabanlı HDInsight kümenizi sağlanan bir parçasıdır.
+title: Azure HDInsight 'ta Apache Hadoop Apache ambarı Hive görünümünü kullanma
+description: Hive sorguları göndermek için Web tarayıcınızdan Hive görünümünü nasıl kullanacağınızı öğrenin. Hive görünümü, Linux tabanlı HDInsight kümemenizle birlikte sunulan ambarı Web Kullanıcı arabiriminin bir parçasıdır.
 author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
-ms.date: 03/21/2019
-ms.author: hrasheed
-ms.openlocfilehash: 55f8f453faf35d52c5c292e6b309194443980466
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/24/2019
+ms.openlocfilehash: 6c199a0dd75b89d9c9368e799c97a28b73758d06
+ms.sourcegitcommit: b45ee7acf4f26ef2c09300ff2dba2eaa90e09bc7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64719572"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73097113"
 ---
-# <a name="use-apache-ambari-hive-view-with-apache-hadoop-in-hdinsight"></a>HDInsight, Apache Hadoop ile Apache Ambari Hive görünümünü kullanırsınız.
+# <a name="use-apache-ambari-hive-view-with-apache-hadoop-in-hdinsight"></a>HDInsight 'ta Apache Hadoop Apache ambarı Hive görünümünü kullanma
 
 [!INCLUDE [hive-selector](../../../includes/hdinsight-selector-use-hive.md)]
 
-Apache Ambari Hive görünümünü kullanarak Hive sorguları çalıştırmayı öğrenin. Hive görünümü yazmak için en iyi duruma getirmek ve web tarayıcınızdan Hive sorguları çalıştırmak sağlar.
+Apache ambarı Hive görünümünü kullanarak Hive sorgularını çalıştırmayı öğrenin. Hive görünümü, Web tarayıcınızdan Hive sorgularını yazmanıza, iyileştirmenize ve çalıştırmanıza olanak tanır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* HDInsight Hadoop kümesinde. Bkz: [Linux'ta HDInsight kullanmaya başlama](./apache-hadoop-linux-tutorial-get-started.md).
-* Bir web tarayıcısı
+* HDInsight üzerinde bir Hadoop kümesi. Bkz. [Linux 'Ta HDInsight kullanmaya başlama](./apache-hadoop-linux-tutorial-get-started.md).
+* Bir Web tarayıcısı
 
 ## <a name="run-a-hive-query"></a>Hive sorgusu çalıştırma
 
-1. Gelen [Azure portalında](https://portal.azure.com/), kümenizi seçin.  Bkz: [kümeleri Listele ve Göster](../hdinsight-administer-use-portal-linux.md#showClusters) yönergeler için. Kümeye yeni bir portal dikey penceresinde açılır.
+1. [Azure Portal](https://portal.azure.com/), kümenizi seçin.  Yönergeler için bkz. [liste ve kümeleri gösterme](../hdinsight-administer-use-portal-linux.md#showClusters) . Küme, yeni bir portal dikey penceresinde açılır.
 
-2. Gelen **küme panoları**seçin **Ambari görünümlerini**. Kimlik doğrulaması için istendiğinde, küme oturum açma bilgilerini kullanacak (varsayılan `admin`) hesap adı ve kümeyi oluştururken belirttiğiniz parola.
+1. **Küme panolarında**, **ambarı görünümleri**' ni seçin. Kimlik doğrulaması sorulduğunda, kümeyi oluştururken belirttiğiniz küme oturum açma (varsayılan `admin`) hesap adını ve parolasını kullanın. Alternatif olarak, `CLUSTERNAME` Kümenizin adı olan tarayıcınızda `https://CLUSTERNAME.azurehdinsight.net/#/main/views` gidin.
 
-3. Görünümler listesinden seçin __Hive görünümü__.
+1. Görünümler listesinden __Hive görünümü__' nü seçin.
 
-    ![Seçilen Hive görünümü](./media/apache-hadoop-use-hive-ambari-view/select-hive-view.png)
+    ![Apache ambarı Apache Hive görünüm seç](./media/apache-hadoop-use-hive-ambari-view/select-apache-hive-view.png)
 
-    Yığın Görünümü sayfasında, aşağıdaki görüntüye benzer:
+    Hive görünümü sayfası aşağıdaki görüntüye benzer:
 
-    ![Hive görünümü sorgu çalışma sayfasının görüntüsü](./media/apache-hadoop-use-hive-ambari-view/ambari-hive-view.png)
+    ![Hive görünümü için sorgu çalışma sayfasının görüntüsü](./media/apache-hadoop-use-hive-ambari-view/ambari-worksheet-view.png)
 
-4. Gelen __sorgu__ sekmesinde, aşağıdaki HiveQL ifadelerini çalışma sayfasına yapıştırın:
+1. __Sorgu__ sekmesinden aşağıdaki HiveQL deyimlerini çalışma sayfasına yapıştırın:
 
     ```hiveql
     DROP TABLE log4jLogs;
@@ -54,120 +54,120 @@ Apache Ambari Hive görünümünü kullanarak Hive sorguları çalıştırmayı 
         t7 string)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
     STORED AS TEXTFILE LOCATION '/example/data/';
-    SELECT t4 AS loglevel, COUNT(*) AS count FROM log4jLogs 
-        WHERE t4 = '[ERROR]' 
+    SELECT t4 AS loglevel, COUNT(*) AS count FROM log4jLogs
+        WHERE t4 = '[ERROR]'
         GROUP BY t4;
     ```
 
-    Bu deyimler, aşağıdaki eylemleri gerçekleştirin:
+    Bu deyimler aşağıdaki eylemleri gerçekleştirir:
 
-   * `DROP TABLE`: Tablo zaten mevcut durumda tablo ve veri dosyalarını siler.
+   * `DROP TABLE`: tablonun zaten mevcut olması durumunda tabloyu ve veri dosyasını siler.
 
-   * `CREATE EXTERNAL TABLE`: Yeni bir "dış" Tablo kovanında oluşturur.
-     Dış tablolar yalnızca tablo tanımı kovanında depolayın. Verileri özgün konumunda bırakılır.
+   * `CREATE EXTERNAL TABLE`: Hive içinde yeni bir "External" tablosu oluşturur.
+     Dış tablolar yalnızca Hive içindeki tablo tanımını depolar. Veriler özgün konumda bırakılır.
 
-   * `ROW FORMAT`: Verilerin nasıl biçimlendirildiğini gösterir. Bu durumda, her günlük alanlar boşlukla ayrılır.
+   * `ROW FORMAT`: verilerin nasıl biçimlendirileceğini gösterir. Bu durumda, her günlükteki alanlar boşlukla ayrılır.
 
-   * `STORED AS TEXTFILE LOCATION`: Verilerin depolandığı ve metin olarak depolandığını gösterir.
+   * `STORED AS TEXTFILE LOCATION`: verilerin nerede depolandığını ve metin olarak depolandığını gösterir.
 
-   * `SELECT`: Burada ' % s'değeri [Hata] sütunu t4 içeren tüm satırların sayımını seçer.
+   * `SELECT`: T4 sütununun [ERROR] değerini içerdiği tüm satırların sayısını seçer.
 
    > [!IMPORTANT]  
-   > Bırakın __veritabanı__ seçimde __varsayılan__. Bu belgedeki örneklerde, HDInsight ile dahil varsayılan veritabanı kullanın.
+   > __Veritabanı__ seçimini __varsayılan__olarak bırakın. Bu belgedeki örnekler, HDInsight 'ta bulunan varsayılan veritabanını kullanır.
 
-5. Sorgu başlatmak için **yürütme** çalışma aşağıda. Düğme turuncu olur ve metin değişikliklerini **Durdur**.
+1. Sorguyu başlatmak için çalışma sayfasının altında **Yürüt** ' ü seçin. Düğme turuncu döner ve metin **durur**.
 
-6. Sorgu tamamlandıktan sonra **sonuçları** sekmesinde işlemin sonuçları görüntülenir. Sorgu sonucu aşağıda gösterilmiştir:
+1. Sorgu bittikten sonra **sonuçlar** sekmesi işlemin sonuçlarını görüntüler. Aşağıdaki metin sorgunun sonucudur:
 
         loglevel       count
         [ERROR]        3
 
-    Kullanabileceğiniz **günlük** iş oluşturulan günlük bilgilerini görüntülemek için sekmesinde.
+    İşin oluşturduğu günlük bilgilerini görüntülemek için **günlük** sekmesini kullanabilirsiniz.
 
    > [!TIP]  
-   > İndirme veya sonuçlarını kaydetmek **eylemleri** altındaki aşağı açılan iletişim kutusunda **sonuçları** sekmesi.
+   > **Sonuçlar sekmesinin altındaki** **Eylemler** açılan iletişim kutusundan sonuçları indirin veya kaydedin.
 
-### <a name="visual-explain"></a>Visual açıklayın
+### <a name="visual-explain"></a>Görsel açıklama
 
-Bir sorgu planı görselleştirmesini görüntülemek için seçin **Visual açıklayan** sekmesi altında çalışma sayfası.
+Sorgu planının bir görselleştirmesini göstermek için, çalışma sayfasının altındaki **görsel açıklama** sekmesini seçin.
 
-**Visual açıklayan** sorgu görünümü karmaşık sorgular akışını anlamak yararlı olabilir.
+Sorgunun **görsel açıklama** görünümü karmaşık sorguların akışını anlamak için yararlı olabilir.
 
-### <a name="tez-ui"></a>Tez UI
+### <a name="tez-ui"></a>Tez Kullanıcı arabirimi
 
-Tez kullanıcı Arabirimi için sorguyu görüntülemek için seçin **Tez kullanıcı Arabirimi** sekmesi altında çalışma sayfası.
+Sorgu için tez Kullanıcı arabirimini göstermek için, çalışma sayfasının altındaki **tez Kullanıcı arabirimi** sekmesini seçin.
 
 > [!IMPORTANT]  
-> Tez tüm sorguları çözümlemek için kullanılmaz. Çok sayıda sorgu Tez kullanmadan çözebilirsiniz. 
+> Tez tüm sorguları çözümlemek için kullanılmaz. Tez kullanmadan birçok sorguyu çözebilirsiniz.
 
 ## <a name="view-job-history"></a>İş geçmişini görüntüleme
 
-__İşleri__ sekmesi, Hive sorguları geçmişini görüntüler.
+__İşler__ sekmesi Hive sorgularının geçmişini görüntüler.
 
-![İş geçmişini görüntüsü](./media/apache-hadoop-use-hive-ambari-view/job-history.png)
+![Apache Hive işleri sekme geçmişini görüntüleme](./media/apache-hadoop-use-hive-ambari-view/apache-hive-job-history.png)
 
 ## <a name="database-tables"></a>Veritabanı tabloları
 
-Kullanabileceğiniz __tabloları__ Hive veritabanı tabloları ile çalışmak için sekmesinde.
+Hive veritabanı içindeki tablolarla çalışmak için __Tablolar__ sekmesini kullanabilirsiniz.
 
-![Tabloları sekmesinin resmi](./media/apache-hadoop-use-hive-ambari-view/tables.png)
+![Apache Hive tabloları sekmesinin görüntüsü](./media/apache-hadoop-use-hive-ambari-view/hdinsight-tables-tab.png)
 
-## <a name="saved-queries"></a>Kaydedilmiş Sorgular
+## <a name="saved-queries"></a>Kaydedilen sorgular
 
-Gelen **sorgu** sekmesinde sorguları isteğe bağlı olarak kaydedebilir. Bir sorgu kaydettikten sonra ondan kullanabilirsiniz __kaydedilmiş sorgular__ sekmesi.
+**Sorgu** sekmesinden, isteğe bağlı olarak sorguları kaydedebilirsiniz. Bir sorguyu kaydettikten sonra, __kaydedilmiş sorgular__ sekmesinden onu yeniden kullanabilirsiniz.
 
-![Kaydedilmiş Sorgular sekmesinin resmi](./media/apache-hadoop-use-hive-ambari-view/saved-queries.png)
+![Apache Hive kaydedilmiş sorgular sekmesini görüntüleme](./media/apache-hadoop-use-hive-ambari-view/ambari-saved-queries.png)
 
 > [!TIP]  
-> Kaydedilmiş Sorgular varsayılan küme depolama alanında depolanır. Kaydedilmiş Sorgular yolunda bulabilirsiniz `/user/<username>/hive/scripts`. Bunlar düz metin depolanır `.hql` dosyaları.
+> Kayıtlı sorgular varsayılan küme depolama alanında depolanır. Kaydedilen sorguları `/user/<username>/hive/scripts`yolu altında bulabilirsiniz. Bunlar düz metin `.hql` dosyaları olarak depolanır.
 >
-> Kümeyi silmek, ancak depolama tutmak gibi bir yardımcı program kullanabilirsiniz [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) veya Data Lake Depolama Gezgini (gelen [Azure portalı](https://portal.azure.com)) sorguları alınamıyor.
+> Kümeyi siler, ancak depolamayı tutarsanız, sorguları almak için [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) veya Data Lake Storage Explorer ( [Azure portalından](https://portal.azure.com)) gibi bir yardımcı programı kullanabilirsiniz.
 
 ## <a name="user-defined-functions"></a>Kullanıcı tanımlı işlevler
 
-Kullanıcı tanımlı işlevler (UDF) Hive genişletebilirsiniz. Bir UDF HiveQL işlevselliği veya kolayca modellenmiş değil mantığı uygulamak için kullanın.
+Kullanıcı tanımlı işlevler (UDF) aracılığıyla Hive 'yi genişletebilirsiniz. HiveQL içinde kolayca Modellenmemiş işlevselliği veya mantığı uygulamak için UDF kullanın.
 
-Bildirme ve UDF'ler kümesini kullanarak kaydetme **UDF** Hive görünümü üst kısmındaki sekme. Bu UDF'ler kullanılabilir **sorgu Düzenleyicisi**.
+Hive görünümünün en üstündeki **udf** sekmesini kullanarak bir UDF kümesi bildirin ve kaydedin. Bu UDF 'ler **sorgu Düzenleyicisi**ile kullanılabilir.
 
-![UDF sekmesinin resmi](./media/apache-hadoop-use-hive-ambari-view/user-defined-functions.png)
+![Apache Hive görünüm UDF sekmesi görüntüleme](./media/apache-hadoop-use-hive-ambari-view/user-defined-functions.png)
 
-Hive görünümü için bir UDF ekledikten sonra bir **Ekle UDF'ler** düğmesinin alt kısmında **sorgu Düzenleyicisi**. Bu girişi seçerek Hive Görünümü'nde tanımlanan UDF'ler açılan listesini görüntüler. Bir UDF seçerek sorgunuza UDF etkinleştirmek için HiveQL ifadelerini ekler.
+Hive görünümüne bir UDF ekledikten sonra **sorgu Düzenleyicisi**'nin altında bir UDF **Ekle** düğmesi görünür. Bu girdiyi seçtiğinizde, Hive görünümünde tanımlanan UDF 'ler açılır listesi görüntülenir. UDF 'nin seçilmesi, UDF 'yi etkinleştirmek için sorgulamanızı HiveQL deyimleri ekler.
 
-Örneğin, aşağıdaki özelliklere sahip bir UDF tanımladıysanız:
+Örneğin, aşağıdaki özelliklerle bir UDF tanımladıysanız:
 
 * Kaynak adı: myudfs
 
-* Resource path: /myudfs.jar
+* Kaynak yolu:/MyUDF.exe
 
 * UDF adı: myawesomeudf
 
-* UDF sınıf adı: com.myudfs.Awesome
+* UDF sınıf adı: com. myudfs. başar
 
-Kullanarak **Ekle UDF'ler** düğmesi adlı bir giriş görüntüler **myudfs**, bu kaynak için tanımlanan her UDF için başka bir açılan liste. Bu durumda **myawesomeudf**. Bu girişi seçerek aşağıdaki sorgu başına ekler:
+**Udf 'Leri Ekle** düğmesinin kullanılması, söz konusu kaynak için tanımlanan her UDF için başka bir açılan liste ile **myudfs**adlı bir giriş görüntüler. Bu durumda, **myawesomeudf**. Bu girdiyi seçtiğinizde sorgunun başına aşağıdakiler eklenir:
 
 ```hiveql
 add jar /myudfs.jar;
 create temporary function myawesomeudf as 'com.myudfs.Awesome';
 ```
 
-Bu gibi durumlarda, UDF ardından sorgunuza kullanabilirsiniz. Örneğin, `SELECT myawesomeudf(name) FROM people;`.
+Daha sonra sorginizdeki UDF 'i kullanabilirsiniz. Örneğin, `SELECT myawesomeudf(name) FROM people;`.
 
-HDInsight üzerindeki Hive'a UDF'ler kullanarak daha fazla bilgi için aşağıdaki makalelere bakın:
+HDInsight 'ta Hive ile UDF 'Leri kullanma hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
 
-* [Apache Hive ve HDInsight, Apache Pig ile Python kullanma](python-udf-hdinsight.md)
-* [HDInsight için özel bir Apache Hive UDF ekleme](https://blogs.msdn.com/b/bigdatasupport/archive/2014/01/14/how-to-add-custom-hive-udfs-to-hdinsight.aspx)
+* [HDInsight 'ta Apache Hive ve Apache Pig ile Python kullanma](python-udf-hdinsight.md)
+* [HDInsight 'a özel Apache Hive UDF ekleme](https://blogs.msdn.com/b/bigdatasupport/archive/2014/01/14/how-to-add-custom-hive-udfs-to-hdinsight.aspx)
 
 ## <a name="hive-settings"></a>Hive ayarları
 
-Yürütme altyapısı (varsayılan) Tez kovana MapReduce değiştirme gibi çeşitli Hive ayarları değiştirebilirsiniz.
+Hive için yürütme altyapısını tez 'den (varsayılan) MapReduce 'ye değiştirme gibi çeşitli Hive ayarlarını değiştirebilirsiniz.
 
 ## <a id="nextsteps"></a>Sonraki adımlar
 
-HDInsight üzerindeki Hive'a hakkında genel bilgi için:
+HDInsight 'ta Hive hakkında genel bilgi için:
 
-* [HDInsight üzerinde Apache Hadoop ile Apache Hive'ı kullanma](hdinsight-use-hive.md)
+* [HDInsight üzerinde Apache Hadoop ile Apache Hive kullanma](hdinsight-use-hive.md)
 
-Diğer yollar hakkında daha fazla bilgi için HDInsight üzerinde Hadoop ile çalışabilirsiniz:
+HDInsight 'ta Hadoop ile birlikte çalışmak için kullanabileceğiniz diğer yollar hakkında daha fazla bilgi için:
 
-* [HDInsight üzerinde Apache Hadoop ile Apache Pig kullanma](hdinsight-use-pig.md)
-* [HDInsight üzerinde Apache Hadoop ile MapReduce kullanma](hdinsight-use-mapreduce.md)
+* [HDInsight üzerinde Apache Hadoop Apache Pig kullanma](hdinsight-use-pig.md)
+* [HDInsight üzerinde Apache Hadoop MapReduce kullanma](hdinsight-use-mapreduce.md)

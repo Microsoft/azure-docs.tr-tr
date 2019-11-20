@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Görüntü geçişi ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve görüntü geçiş arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: görüntü geçişine Azure Active Directory tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve görüntü geçişi arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 65bb5990-07ef-4244-9f41-cd28fc2cb5a2
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,250 +16,250 @@ ms.topic: tutorial
 ms.date: 02/20/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 37b7fe05f306f08d83de0832c5b1dd814f5560ed
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4fd0637a632b277eae019ac4aebfbc7cdb87e8e2
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67100558"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73158979"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-image-relay"></a>Öğretici: Görüntü geçişi ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-image-relay"></a>Öğretici: görüntü geçişiyle Azure Active Directory tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile görüntü geçiş tümleştirme konusunda bilgi edinin.
-Görüntü geçişi, Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, görüntü geçişini Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Resim geçişini Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Görüntü geçişi erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) görüntü geçiş için oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Görüntü geçişine erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla görüntü geçişine (çoklu oturum açma) otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile görüntü geçişi yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini görüntü geçişi ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Görüntü geçiş çoklu oturum açmayı abonelik etkin.
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Görüntü Geçişi çoklu oturum açma etkin abonelik
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Geçişi destekler görüntü **SP** tarafından başlatılan
+* Görüntü Geçişi **SP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-image-relay-from-the-gallery"></a>Galeriden görüntü geçiş ekleniyor
+## <a name="adding-image-relay-from-the-gallery"></a>Galeriden görüntü geçişi ekleme
 
-Azure AD'de görüntü geçiş tümleştirmesini yapılandırmak için yönetilen SaaS uygulamalar listesine Galeriden görüntü geçiş eklemeniz gerekir.
+Görüntü geçişinin Azure AD ile tümleştirilmesini yapılandırmak için galerideki görüntü geçişini yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**Galeriden görüntü geçiş eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden görüntü geçişi eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **görüntü geçiş**seçin **görüntü geçiş** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **görüntü geçişi**yazın, sonuç panelinden **görüntü geçişi** ' ni seçin, sonra da uygulamayı eklemek için düğme **Ekle** ' ye tıklayın.
 
-    ![Sonuç listesinde görüntü geçiş](common/search-new-app.png)
+    ![Sonuçlar listesinde görüntü geçişi](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma görüntü adlı bir test kullanıcı tabanlı geçişi test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve görüntü geçiş ilgili kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına göre görüntü geçişi ile yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve görüntü geçişi 'ndeki ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma görüntü geçişi ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı görüntü geçişi ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurmanız gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Görüntü geçiş çoklu oturum açmayı yapılandırma](#configure-image-relay-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Görüntü geçiş test kullanıcısı oluşturma](#create-image-relay-test-user)**  - kullanıcı Azure AD gösterimini bağlantılı görüntü geçiş Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. **[Görüntü geçişi çoklu oturum açmayı yapılandırma](#configure-image-relay-single-sign-on)** -uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Görüntü **[geçişi test kullanıcısı oluşturma](#create-image-relay-test-user)** -kullanıcının Azure AD gösterimine bağlı olan görüntü geçişi 'Nde Britta Simon 'a sahip olmak için.
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile görüntü geçişi yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı görüntü geçişi ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **görüntü geçiş** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **görüntü geçişi** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![Görüntü geçiş etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier.png)
+    ![Görüntü Geçişi etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/sp-identifier.png)
 
-    a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<companyname>.imagerelay.com/`
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<companyname>.imagerelay.com/`
 
-    b. İçinde **tanımlayıcı (varlık kimliği)** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<companyname>.imagerelay.com/sso/metadata`
+    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<companyname>.imagerelay.com/sso/metadata`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL ve tanımlayıcıdır ile güncelleştirin. İlgili kişi [görüntü geçiş istemci Destek ekibine](http://support.imagerelay.com/) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için [görüntü geçişi istemci desteği ekibine](http://support.imagerelay.com/) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-4. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+4. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. Üzerinde **Set görüntü Relay** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. **Görüntü geçişini ayarla** bölümünde, uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-image-relay-single-sign-on"></a>Görüntü geçiş çoklu oturum açmayı yapılandırın
+### <a name="configure-image-relay-single-sign-on"></a>Görüntü Geçişi çoklu oturum açmayı yapılandırma
 
-1. Başka bir tarayıcı penceresinde görüntü geçiş şirketinizin sitesi için bir yönetici olarak oturum açın.
+1. Başka bir tarayıcı penceresinde, görüntü geçişi şirket sitenizde yönetici olarak oturum açın.
 
-2. Üst araç çubuğunda tıklatın **kullanıcıları ve izinleri** iş yükü.
+2. Üstteki araç çubuğunda, **kullanıcılar & izinleri** iş yüküne tıklayın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_06.png) 
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_06.png) 
 
-3. Tıklayın **yeni bir izin oluşturmak**.
+3. **Yeni Izin oluştur**' a tıklayın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_08.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_08.png)
 
-4. İçinde **tek oturum açma ayarları** iş yükü, select **bu grubu için yalnızca oturum açma aracılığıyla çoklu oturum açma** onay kutusunu işaretleyin ve ardından **Kaydet**.
+4. **Çoklu oturum açma ayarları** iş yükünde, **Bu grup yalnızca çoklu oturum açma aracılığıyla oturum açabilir** onay kutusunu seçin ve ardından **Kaydet**' e tıklayın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_09.png) 
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_09.png) 
 
-5. Git **hesap ayarları**.
+5. **Hesap ayarları**' na gidin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_10.png) 
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_10.png) 
 
-6. Git **tek oturum açma ayarları** iş yükü.
+6. **Çoklu oturum açma ayarları** iş yüküne gidin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_11.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_11.png)
 
-7. Üzerinde **SAML ayarlarını** iletişim kutusunda, aşağıdaki adımları gerçekleştirin:
+7. **SAML ayarları** iletişim kutusunda, aşağıdaki adımları uygulayın:
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_12.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_12.png)
 
-    a. İçinde **oturum açma URL'si** metin değerini yapıştırın **oturum açma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    a. **Oturum açma URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
 
-    b. İçinde **oturum kapatma URL'si** metin değerini yapıştırın **oturum kapatma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    b. **Logout URL** metin kutusuna, Azure Portal kopyaladığınız **Logout URL 'si** değerini yapıştırın.
 
-    c. Olarak **ad kimliği biçimi**seçin **urn: OASIS: adları: tc: SAML:1.1:nameid-biçimi: emailAddress**.
+    c. **Ad kimliği biçimi**olarak **urn: oasu: adlar: TC: SAML: 1.1: NameID-Format: emapostaadı**' nı seçin.
 
-    d. Olarak **hizmet sağlayıcısı (görüntü geçiş) gelen istekleri için bağlama seçeneklerini**seçin **POST bağlama**.
+    d. **Hizmet sağlayıcısından (görüntü geçişi) gelen istekler Için bağlama seçenekleri**olarak, **bağlamayı gönder**' i seçin.
 
-    e. Altında **x.509 sertifikası**, tıklayın **güncelleştirme sertifika**.
+    e. **X. 509.440 sertifikası**altında **sertifikayı Güncelleştir**' e tıklayın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_17.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_17.png)
 
-    f. İndirilen sertifikanın Not Defteri'nde açın, içeriği kopyalayın ve ardından yapıştırın **x.509 sertifikası** metin.
+    f. İndirilen sertifikayı not defteri 'nde açın, içeriği kopyalayın ve **x. 509.952 Certificate** metin kutusuna yapıştırın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_18.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_18.png)
 
-    g. İçinde **kullanıcı tam zamanında sağlama** bölümünden **tam zamanında kullanıcı sağlamayı etkinleştirin**.
+    g. Anında **Kullanıcı sağlama** bölümünde, **tam zamanında Kullanıcı sağlamayı etkinleştir**' i seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_19.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_19.png)
 
-    h. İzin grubu seçin (örneğin, **SSO temel**) yalnızca çoklu oturum açma oturum açmak için izin.
+    h. Yalnızca çoklu oturum açma ile oturum açmasına izin verilen izin grubunu (örneğin, **SSO temel**) seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_20.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_20.png)
 
-    i. **Kaydet**’e tıklayın.
+    i. **Kaydet** düğmesine tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, görüntü geçiş için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Bu bölümde, görüntü geçişine erişim izni vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **görüntü geçiş**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **görüntü geçişi**' ni seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **görüntü geçiş**.
+2. Uygulamalar listesinde **görüntü geçişi**' ni seçin.
 
-    ![Uygulamalar listesinde görüntü geçiş bağlantısı](common/all-applications.png)
+    ![Uygulamalar listesindeki görüntü geçişi bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-image-relay-test-user"></a>Görüntü geçiş test kullanıcısı oluşturma
+### <a name="create-image-relay-test-user"></a>Görüntü Geçişi test kullanıcısı oluştur
 
-Bu bölümün amacı, görüntü geçiş Britta Simon adlı bir kullanıcı oluşturmaktır.
+Bu bölümün amacı, görüntü geçişi 'nde Britta Simon adlı bir Kullanıcı oluşturmaktır.
 
-**Britta Simon görüntü geçiş adlı bir kullanıcı oluşturmak için aşağıdaki adımları gerçekleştirin:**
+**Görüntü Geçişi 'nde Britta Simon adlı bir kullanıcı oluşturmak için aşağıdaki adımları uygulayın:**
 
-1. Görüntü geçiş şirketinizin sitesi için bir yönetici olarak oturum.
+1. Görüntü Geçişi şirket sitenizde yönetici olarak oturum açın.
 
-2. Git **kullanıcıları ve izinleri** seçip **SSO kullanıcı oluştur**.
+2. **Kullanıcılar & izinleri** ' ne gıdın ve **SSO kullanıcısı oluştur**' u seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_21.png) 
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_21.png) 
 
-3. Girin **e-posta**, **ad**, **Soyadı**, ve **şirket** sağlama ve (için izin grubu seçmek istediğiniz kullanıcının Örneğin, temel SSO) yalnızca çoklu oturum açma oturum grup olduğu.
+3. Sağlamak istediğiniz kullanıcının **e-postasını**, **adını**, **soyadını**ve **Şirket** adını girin ve yalnızca çoklu oturum açma ile oturum açmak için BIR grup olan izin grubunu (örneğin, SSO temel) seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/imagerelay-tutorial/tutorial_imagerelay_22.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/imagerelay-tutorial/tutorial_imagerelay_22.png)
 
 4. **Oluştur**’a tıklayın.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim panelinde görüntü geçiş kutucuğa tıkladığınızda, otomatik olarak görüntü SSO'yu ayarlama geçiş için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde görüntü geçişi kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız görüntü geçişine otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

@@ -1,6 +1,6 @@
 ---
-title: Bir kuruluşun ağındaki - Azure Active Directory kişisel cihazlarını kaydetme | Microsoft Docs
-description: Kuruluşunuzun korumalı kaynaklara erişebilmesi için kuruluşunuzun ağ üzerindeki kişisel cihazını kaydetmek öğrenin.
+title: Kişisel cihazları bir kuruluşun ağına kaydetme-Azure AD
+description: Kuruluşunuzun korunan kaynaklarına erişebilmek için kişisel cihazınızı kuruluşunuzun ağına nasıl kaydedeceğinizi öğrenin.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -14,63 +14,63 @@ ms.author: lizross
 ms.reviewer: jairoc
 ms.custom: user-help, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 041c8bb6b4de2bbe2cbeb4c1a89e452239ae57bd
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 879fa55df422e6039c6830e25e43637fc31b8037
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60473695"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74028481"
 ---
-# <a name="register-your-personal-device-on-your-organizations-network"></a>Kuruluşunuzun ağındaki kullanarak kişisel Cihazınızı kaydetme
-Kişisel Cihazınızı (genellikle bir telefon veya tablet) kuruluşunuzun ağındaki kaydedin. Cihazınız kaydedildikten sonra kuruluşunuzun kısıtlanmış kaynaklara erişebilir olacaktır.
+# <a name="register-your-personal-device-on-your-organizations-network"></a>Kişisel cihazınızı kuruluşunuzun ağına kaydetme
+Kuruluşunuzun ağına kişisel cihazınızı (genellikle telefon veya tablet) kaydedin. Cihazınız kaydolduktan sonra kuruluşunuzun kısıtlanmış kaynaklarına erişebilir.
 
 >[!Note]
->Bu makalede Windows cihaz gösterim amaçlı kullanılmıştır, ancak iOS, Android ve macOS çalıştıran cihazlar da kaydedebilirsiniz.
+>Bu makalede tanıtım amacıyla bir Windows cihazı kullanılmaktadır, ancak iOS, Android veya macOS çalıştıran cihazları da kaydedebilirsiniz.
 
-## <a name="what-happens-when-you-register-your-device"></a>Cihazınızı kaydettiğinizde ne olur
-Cihazınızın, kuruluşunuzun ağ kaydettirmekte, ancak aşağıdaki eylemler gerçekleşir:
+## <a name="what-happens-when-you-register-your-device"></a>Cihazınızı kaydettiğinizde ne olur?
+Cihazınızı kuruluşunuzun ağına kaydederken aşağıdaki eylemler gerçekleşecektir:
 
-- Windows cihazınızın, kuruluşunuzun ağ kaydeder.
+- Windows cihazınızı kuruluşunuzun ağına kaydeder.
 
-- İsteğe bağlı olarak, kuruluşunuzun seçimlerine bağlı olarak, iki aşamalı doğrulama ya da aracılığıyla ayarlamak için istenebilir [multi-Factor Authentication](multi-factor-authentication-end-user-first-time.md) veya [güvenlik bilgisi](user-help-security-info-overview.md).
+- İsteğe bağlı olarak, kuruluşunuzun seçeneklerine bağlı olarak, [Multi-Factor Authentication](multi-factor-authentication-end-user-first-time.md) veya [güvenlik bilgileri](user-help-security-info-overview.md)aracılığıyla iki adımlı doğrulama ayarlamanız istenebilir.
 
-- İsteğe bağlı olarak, kuruluşunuzun seçimlerine bağlı olarak, otomatik olarak Microsoft Intune gibi mobil cihaz Yönetimi'nde kayıtlı olması. Intune kaydetme hakkında daha fazla bilgi için bkz. [Cihazınızı ıntune'a kaydetme](https://docs.microsoft.com/intune-user-help/enroll-your-device-in-intune-all).
+- İsteğe bağlı olarak, kuruluşunuzun seçeneklerine bağlı olarak, Microsoft Intune gibi mobil cihaz yönetimine otomatik olarak kaydolmuş olabilirsiniz. Microsoft Intune kaydolma hakkında daha fazla bilgi için bkz. [cihazınızı Intune 'A kaydetme](https://docs.microsoft.com/intune-user-help/enroll-your-device-in-intune-all).
 
-- Kullanıcı adı ve parola için iş veya Okul hesabınızı kullanarak oturum açma işlemi verilecektir.
+- İş veya okul hesabınızın Kullanıcı adı ve parolasını kullanarak oturum açma işlemine geçebilirsiniz.
 
-## <a name="to-register-your-windows-device"></a>Windows Cihazınızı kaydetmek için
+## <a name="to-register-your-windows-device"></a>Windows cihazınızı kaydetmek için
 
-Ağınızdaki kişisel cihazını kaydetmek için aşağıdaki adımları izleyin.
+Kişisel cihazınızı ağınıza kaydetmek için aşağıdaki adımları izleyin.
 
-1. Açık **ayarları**ve ardından **hesapları**.
+1. **Ayarları**açın ve ardından **hesaplar**' ı seçin.
 
-    ![Ayarları ekranında hesapları](./media/user-help-register-device-on-network/register-device-settings-accounts.png)
+    ![Ayarlar ekranındaki hesaplar](./media/user-help-register-device-on-network/register-device-settings-accounts.png)
 
-2. Seçin **işe veya okula erişim**ve ardından **Connect** gelen **işe veya okula erişim** ekran.
+2. **İşe veya okula erişim**' i seçin ve ardından **erişim iş veya okul** ekranından **Bağlan** ' ı seçin.
 
-    ![Bağlan seçeneği vurgulanmış iş veya Okul ekranına erişim](./media/user-help-register-device-on-network/register-device-access-work-school-connect.png)
+    ![Bağlan seçeneği vurgulanmış şekilde iş veya okul ekranına erişin](./media/user-help-register-device-on-network/register-device-access-work-school-connect.png)
 
-3. Üzerinde **bir iş veya Okul hesabı Ekle** ekranında, iş veya Okul hesabınızın e-posta adresinizi yazın ve ardından **sonraki**. Örneğin, alain@contoso.com.
+3. **İş veya okul hesabı ekle** ekranında, iş veya okul hesabınız için e-posta adresinizi yazın ve ardından **İleri**' yi seçin. Örneğin, alain@contoso.com.
 
-4. İş veya Okul hesabınızda oturum açın ve ardından **oturum**.
+4. İş veya okul hesabınızda oturum açın ve **oturum aç**' ı seçin.
 
-5. (İki aşamalı doğrulama kullanıyorsanız), kimlik doğrulama isteğini onaylama ve Windows Hello'yu (gerekirse) ayarlama dahil olmak üzere kayıt işlemini tamamlayın.
+5. Kimlik doğrulama isteğinizi onaylama (iki adımlı doğrulama kullanıyorsanız) ve Windows Hello 'Yu ayarlama (gerekliyse) dahil olmak üzere kayıt işleminin geri kalanını tamamlayın.
 
-## <a name="to-verify-that-youre-registered"></a>Kayıtlı doğrulamak için
-Ayarlarınızı bakarak kayıtlı emin olabilirsiniz.
+## <a name="to-verify-that-youre-registered"></a>Kaydoldığınızı doğrulamak için
+Ayarlarınıza bakarak kaydolduğunuzdan emin olabilirsiniz.
 
-1. Açık **ayarları**ve ardından **hesapları**.
+1. **Ayarları**açın ve ardından **hesaplar**' ı seçin.
 
-    ![Ayarları ekranında hesapları](./media/user-help-register-device-on-network/register-device-settings-accounts.png)
+    ![Ayarlar ekranındaki hesaplar](./media/user-help-register-device-on-network/register-device-settings-accounts.png)
 
-2. Seçin **işe veya okula erişim**ve iş veya Okul hesabınızı gördüğünüzden emin olun.
+2. **İşe veya okula erişim**' i seçin ve iş veya okul hesabınızı görtığınızdan emin olun.
 
-    ![Bağlı contoso hesabı ile iş veya Okul ekranına erişim](./media/user-help-register-device-on-network/register-device-setup-verify.png)
+    ![Bağlı contoso hesabıyla iş veya okul ekranına erişin](./media/user-help-register-device-on-network/register-device-setup-verify.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Kuruluşunuzun ağına kullanarak kişisel Cihazınızı kaydettikten sonra kaynakların çoğunu erişebilir olmalıdır.
+Kişisel cihazınızı kuruluşunuzun ağına kaydettikten sonra, kaynaklarınızın çoğuna erişebilmelisiniz.
 
-- Kuruluşunuzun iş Cihazınızı ekleme isterse, bkz. [iş cihazınızın, kuruluşunuzun ağına katılın](user-help-join-device-on-network.md).
+- Kuruluşunuz iş cihazınıza katılmayı istiyorsa, bkz. [iş cihazınızı kuruluşunuzun ağına ekleme](user-help-join-device-on-network.md).
 
 
 

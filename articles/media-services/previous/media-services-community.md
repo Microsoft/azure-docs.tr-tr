@@ -1,6 +1,6 @@
 ---
-title: Azure Media Services topluluğu genel bakış | Microsoft Docs
-description: 'Bu Azure Media Services (AMS) topluluğu sayfası AMS hakkında güncelleştirmeler almak, yeni videolar ve pod yayınları görebilir, soru sormak ve geri bildirimde bulunun farklı yolları açıklanmaktadır. '
+title: Azure Media Services topluluğa genel bakış | Microsoft Docs
+description: 'Bu Azure Media Services (AMS) topluluk sayfasında, AMS güncelleştirmelerini alabileceğiniz farklı yollar, yeni videolar ve pod yayınları görebilir, sorular sorabilir ve geri bildirimde bulunun. '
 services: media-services
 documentationcenter: ''
 author: juliako
@@ -14,58 +14,50 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 1347e28fe36ffe9595516252aea102d817a705a7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c4798fa9140f277d5383d2830eefb9bcc8d7c984
+ms.sourcegitcommit: b4f201a633775fee96c7e13e176946f6e0e5dd85
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61245131"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72598322"
 ---
 # <a name="azure-media-services-community"></a>Azure Media Services Topluluğu  
 
-Bu Azure Media Services (AMS) topluluğu sayfası AMS hakkındaki güncelleştirmeleri alabileceğiniz farklı yolları açıklanmaktadır. Ayrıca yeni videolar ve pod yayınları görüntüleyebilir, da soru sormak ve geri bildirimde bulunun.   
+Bu Azure Media Services (AMS) topluluk sayfasında, AMS güncelleştirmelerini alabileceğiniz farklı yollar açıklanmaktadır. Ayrıca yeni videoları ve pod yayınlarını görüntüleyebilir, soru sorabilir ve geri bildirimde bulunun.   
 
 ## <a name="videos-and-podcasts"></a>Videolar ve pod yayınları
 
-- [Medya içeriğinizi DRM ile koruma](https://azure.microsoft.com/documentation/videos/azurefridayprotectingyourmediacontentdrm/) 
-- [Medya içeriğinizi AES şifreleme ile koruma](https://azure.microsoft.com/documentation/videos/azure-media-services-protecting-your-media-content-with-aes-encryption/) 
-- [Azure Media Services'ı Geliştirici derinlemesine bakış](https://azure.microsoft.com/documentation/videos/build-2015-azure-media-services-developer-deep-dive/) 
-- [Azure Media Indexer'ın dökümleri, ortam için otomatik olarak oluşturur.](https://azure.microsoft.com/documentation/videos/azure-media-indexer-autoatically-creates-transcripts-for-your-media-with-adarsh-solanki/)  
+- [Medya Içeriğinizi DRM ile koruma](https://azure.microsoft.com/documentation/videos/azurefridayprotectingyourmediacontentdrm/) 
+- [Medya Içeriğinizi AES şifrelemesi ile koruma](https://azure.microsoft.com/documentation/videos/azure-media-services-protecting-your-media-content-with-aes-encryption/) 
+- [Azure Media Services Geliştirici derinlemesine bakış](https://azure.microsoft.com/documentation/videos/build-2015-azure-media-services-developer-deep-dive/) 
+- [Azure Media Indexer, medyanıza yönelik betikleri otomatik olarak oluşturur](https://azure.microsoft.com/documentation/videos/azure-media-indexer-autoatically-creates-transcripts-for-your-media-with-adarsh-solanki/)  
 
 
-## <a name="provide-feedback-and-make-suggestions"></a>Önerilerde bulunmak ve geri bildirim sağlayın
+## <a name="provide-feedback-and-make-suggestions"></a>Geri bildirim sağlayın ve öneri yapın
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
 
 ## <a name="discussion"></a>Tartışma
 
 ### <a name="twitter"></a>Twitter
 
-Kullanım [ @MSFTAzureMedia ](https://twitter.com/MSFTAzureMedia) twitter tanıtıcısı bizimle iletişim kurun veya güncelleştirmeleri Twitter'da takip edin. Kullanabileceğiniz [ @AzureSupport ](https://twitter.com/azuresupport) Twitter'da destek istemek için twitter tanıtıcısı.  
+Bizimle iletişim kurmak veya Twitter 'daki güncelleştirmeleri izlemek için [@MSFTAzureMedia](https://twitter.com/MSFTAzureMedia) Twitter tanıtıcısını kullanın. Twitter 'da destek istemek için [@AzureSupport](https://twitter.com/azuresupport) Twitter tanıtıcısını kullanabilirsiniz.  
 
 ### <a name="online-forums"></a>Çevrimiçi forumlar
 
-Aşağıdaki forumları geçerli ürünleri ve özellikleri hakkında sorular sormak için kullanılabilir.
+Aşağıdaki Forumlar, geçerli ürünler ve özellikler hakkında sorular sormak için kullanılabilir.
 
-Şu anda, MSDN, Media Services takımın birincil Topluluk Forumu aşamasındadır.
+Şu anda, MSDN Media Services ekibin birincil topluluk Forumu ' dur.
 
 [![MSDN](./media/media-services-community/msdn.png)](https://social.msdn.microsoft.com/forums/azure/home?forum=MediaServices) 
 
-Takım, Stack Overflow sitesinde 'azure-media-services ile' etiketli sorular da izler.
+Ekip, ' Azure-Media-Services ' ile Stack Overflow etiketli soruları de izler.
 
 [![StackOverflow](./media/media-services-community/stack-overflow.png)](https://stackoverflow.com/questions/tagged/azure-media-services) 
 
-## <a name="contact-the-team"></a>Ekibe ulaşın
+## <a name="need-help"></a>Yardım mı gerekiyor?
 
-Azure Media Services birincil destek e-posta: **amshelp\@microsoft.com**.
+[Yeni destek isteğine](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest) giderek bir destek bileti açabilirsiniz
 
-Aşağıdaki tabloda, e-posta özelliği alt takımlar listelenmektedir:
+## <a name="next-steps"></a>Sonraki adımlar
 
-| Özellik | Email |
-| --- | --- |
-| Azure medya analizi |amsanalytics@microsoft.com |
-| Azure Media Player |ampinfo@microsoft.com |
-| Azure Medya Gezgini |amse@microsoft.com |
-| İş Akışı Tasarımcısı |mepd@microsoft.com |
-| Dosya akışı ve paketleme |amsstreaming@microsoft.com |
-| Canlı akış ve paketleme |amslived@microsoft.com |
-
+[Genel Bakış](media-services-overview.md)

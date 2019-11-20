@@ -1,10 +1,10 @@
 ---
-title: Konuk işletim sistemi güvenlik duvarı Azure VM'de devre dışı bırakma | Microsoft Docs
+title: Azure VM 'de Konuk işletim sistemi güvenlik duvarını devre dışı bırakma | Microsoft Docs
 description: ''
 services: virtual-machines-windows
 documentationcenter: ''
 author: Deland-Han
-manager: willchen
+manager: dcscontentpm
 editor: ''
 tags: ''
 ms.service: virtual-machines
@@ -14,49 +14,49 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: azurecli
 ms.date: 11/22/2018
 ms.author: delhan
-ms.openlocfilehash: a8856bd46f516aa3c64965648d4f23b9ba665b1b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 6883d046078b5dccd2f1e83e87b41ca83edc92e3
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60505470"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72030592"
 ---
 # <a name="disable-the-guest-os-firewall-in-azure-vm"></a>Azure VM'de konuk işletim sistemi Güvenlik Duvarını devre dışı bırakma
 
-Bu makalede, konuk işletim sistemi güvenlik duvarı kısmi veya tam bir sanal makine (VM) trafiği filtreleme olduğunu düşündüğünüz durumlar için bir başvuru sağlar. RDP bağlantıları başarısız olmasına neden olan bir güvenlik duvarı için kasıtlı olarak değişiklik yapıldıysa bu durum oluşabilir.
+Bu makalede, Konuk işletim sistemi güvenlik duvarının bir sanal makineye (VM) kısmi veya tamamlanmış trafiği filtrelemesine şüphelendiğiniz durumlara yönelik bir başvuru sağlanmaktadır. Güvenlik duvarında RDP bağlantılarının başarısız olmasına neden olan değişiklikler kasıtlı olarak yapılmışsa bu durum oluşabilir.
 
 ## <a name="solution"></a>Çözüm
 
-Bu makalede açıklanan işlem, doğru güvenlik duvarı kurallarını ayarlama, gerçek sorunu düzeltmeye odaklanabilmeniz için geçici bir çözüm olarak kullanılmak üzere tasarlanmıştır. It\rquote s etkin Windows Güvenlik Duvarı bileşen için Microsoft en iyi uygulama. Gerekli VM that\rquote s erişim düzeyi güvenlik duvarı kuralları \cf3 nasıl yapılandırdığınıza bağlıdır.
+Bu makalede açıklanan işlem, bir geçici çözüm olarak kullanılmak üzere tasarlanmıştır. böylece, güvenlik duvarı kurallarını doğru bir şekilde ayarlama işlemi, gerçek sorununuzu gidermeye odaklanabilmenizi sağlar. I\rquote, Windows Güvenlik Duvarı bileşeninin etkin olması için En Iyi Microsoft uygulamasıdır. Güvenlik duvarı kurallarını yapılandırma \ CF3, \rquote 'un gerektirdiği sanal makineye erişim düzeyine bağlıdır.
 
 ### <a name="online-solutions"></a>Çevrimiçi çözümler 
 
-Sanal makine çevrimiçi olduğundan ve aynı sanal ağdaki başka bir sanal Makineye erişilebildiğinden ve diğer sanal makine kullanarak bu risk azaltma işlemleri yapabilirsiniz.
+VM çevrimiçiyse ve aynı sanal ağdaki başka bir VM üzerinden erişilebiliyorsa, diğer VM 'yi kullanarak bu azaltmaları yapabilirsiniz.
 
-#### <a name="mitigation-1-custom-script-extension-or-run-command-feature"></a>1\. azaltma: Özel betik uzantısı veya Çalıştır komutu özelliği
+#### <a name="mitigation-1-custom-script-extension-or-run-command-feature"></a>Hafifletme 1: özel Betik uzantısı veya komut özelliği Çalıştır
 
-Çalışan bir Azure aracısı varsa, kullanabileceğiniz [özel betik uzantısı](../extensions/custom-script-windows.md) veya [komutlarını Çalıştır](../windows/run-command.md) uzaktan aşağıdaki betikler çalıştırmak için (yalnızca Resource Manager Vm'lerinde) özelliği.
+Çalışan bir Azure aracınız varsa, aşağıdaki komut dosyalarını uzaktan çalıştırmak için [Özel Betik uzantısı](../extensions/custom-script-windows.md) veya [Komut Çalıştır](../windows/run-command.md) özelliğini (yalnızca Kaynak Yöneticisi VM 'ler) kullanabilirsiniz.
 
 > [!Note]
-> * Güvenlik Duvarı'nı yerel olarak ayarlarsanız, aşağıdaki betiği çalıştırın:
+> * Güvenlik Duvarı yerel olarak ayarlandıysa, aşağıdaki betiği çalıştırın:
 >   ```
 >   Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\DomainProfile' -name "EnableFirewall" -Value 0
 >   Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\PublicProfile' -name "EnableFirewall" -Value 0
 >   Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\Standardprofile' -name "EnableFirewall" -Value 0 
 >   Restart-Service -Name mpssvc
 >   ```
-> * Güvenlik Duvarı bir Active Directory ilkesi ayarlarsanız, kullanabileceğiniz geçici erişim için aşağıdaki betiği çalıştırın. 
+> * Güvenlik Duvarı bir Active Directory ilkesi aracılığıyla ayarlandıysa, geçici erişim için aşağıdaki betiği Çalıştır ' ı kullanabilirsiniz. 
 >   ```
 >   Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile' -name "EnableFirewall" -Value 0
 >   Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile' -name "EnableFirewall" -Value 0
 >   Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile' name "EnableFirewall" -Value 0
 >   Restart-Service -Name mpssvc
 >   ```
->   İlkeyi yeniden uygulandığı hemen sonra ancak, uzak oturumu dışında devreye girdi. Bu sorun için kalıcı bir düzeltme bu bilgisayara uygulandığında ilkesinin değiştirilmesidir.
+>   Ancak, ilke yeniden uygulandıktan hemen sonra uzak oturumdan vazgeçmeniz gerekir. Bu soruna yönelik kalıcı düzelme, bu bilgisayarda uygulanan ilkeyi değiştirmektir.
 
-#### <a name="mitigation-2-remote-powershell"></a>Azaltma 2: Uzak PowerShell
+#### <a name="mitigation-2-remote-powershell"></a>Risk azaltma 2: uzak PowerShell
 
-1.  RDP bağlantısını kullanarak ulaşamıyor VM ile aynı sanal ağda bulunan bir VM'ye bağlanın.
+1.  RDP bağlantısı kullanarak ulaşamamanıza izin veren VM ile aynı sanal ağda bulunan bir VM 'ye bağlanın.
 
 2.  Bir PowerShell konsol penceresi açın.
 
@@ -70,13 +70,13 @@ Sanal makine çevrimiçi olduğundan ve aynı sanal ağdaki başka bir sanal Mak
     ```
 
 > [!Note]
-> Güvenlik Duvarı bir Grup İlkesi nesnesi olarak ayarlanırsa, bu komut yalnızca yerel kayıt defteri girişlerini değiştiğinden bu yöntemin çalışmayabilir. Bir ilke yerinde olduğundan bu değişikliği geçersiz kılar. 
+> Güvenlik Duvarı bir grup ilkesi nesnesi aracılığıyla ayarlandıysa, bu komut yalnızca yerel kayıt defteri girdilerini değiştirdiği için bu yöntem çalışmayabilir. Bir ilke mevcutsa, bu değişiklik geçersiz kılınır. 
 
-#### <a name="mitigation-3-pstools-commands"></a>3\. azaltma: PSTools komutları
+#### <a name="mitigation-3-pstools-commands"></a>Hafifletme 3: Padstools komutları
 
-1.  Sorun giderme sanal makinede indirme [PSTools](https://docs.microsoft.com/sysinternals/downloads/pstools).
+1.  Sorun giderme sanal makinesinde [PsTools](https://docs.microsoft.com/sysinternals/downloads/pstools)'u indirin.
 
-2.  CMD örneği açın ve sanal Makinenin kendi DIP erişin.
+2.  Bir CMD örneği açın ve ardından sanal makinesine DIP aracılığıyla erişin.
 
 3.  Aşağıdaki komutları çalıştırın:
 
@@ -86,13 +86,13 @@ Sanal makine çevrimiçi olduğundan ve aynı sanal ağdaki başka bir sanal Mak
     psservice restart mpssvc
     ```
 
-#### <a name="mitigation-4-remote-registry"></a>Azaltma 4: Uzak Kayıt defteri 
+#### <a name="mitigation-4-remote-registry"></a>Hafifletme 4: uzak kayıt defteri 
 
-Bu adımları izleyin [uzak kayıt defteri](https://support.microsoft.com/help/314837/how-to-manage-remote-access-to-the-registry).
+[Uzak kayıt defteri](https://support.microsoft.com/help/314837/how-to-manage-remote-access-to-the-registry)kullanmak için bu adımları izleyin.
 
-1.  Sorun giderme sanal kayıt defteri düzenleyicisini başlatın ve ardından Git **dosya** > **bağlanmak ağ kayıt defteri**.
+1.  Sorun giderme sanal makinesinde, kayıt defteri Düzenleyicisi 'ni başlatın ve ardından **dosya** > **ağ kayıt defteri**'ne gidin.
 
-2.  Açık yukarı *hedef makine*\SYSTEM dallandırma ve aşağıdaki değerleri belirtin:
+2.  *Hedef makine*\System dalını açın ve aşağıdaki değerleri belirtin:
 
     ```
     <TARGET MACHINE>\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\DomainProfile\EnableFirewall           -->        0 
@@ -100,41 +100,41 @@ Bu adımları izleyin [uzak kayıt defteri](https://support.microsoft.com/help/3
     <TARGET MACHINE>\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\StandardProfile\EnableFirewall         -->        0
     ```
 
-3.  Hizmeti yeniden başlatın. Uzak Kayıt defterini kullanarak bunu yapamazsınız çünkü kaldırma Hizmeti konsolunu kullanmanız gerekir.
+3.  Hizmeti yeniden başlatın. Uzak kayıt defteri 'ni kullanarak bunu yapamadığından, hizmet konsolunu Kaldır ' ı kullanmanız gerekir.
 
-4.  Bir örneği açın **Services.msc**.
+4.  **Services. msc**örneğini açın.
 
-5.  Tıklayın **hizmetler (yerel)** .
+5.  **Hizmetler (yerel)** seçeneğine tıklayın.
 
-6.  Seçin **başka bir bilgisayara bağlan**.
+6.  **Başka bir bilgisayara bağlan**' ı seçin.
 
-7.  Girin **özel IP adresi (DIP)**  sorunun VM.
+7.  Sorun sanal makinesinin **özel IP adresini (DIP)** girin.
 
-8.  Yerel Güvenlik Duvarı ilkesini yeniden başlatın.
+8.  Yerel güvenlik duvarı ilkesini yeniden başlatın.
 
-9.  Yeniden kullanarak yerel bilgisayarınızdan VM'ye RDP aracılığıyla bağlanmak bu seçeneği deneyin.
+9.  Yerel bilgisayarınızdan RDP aracılığıyla sanal makineye bağlanmayı deneyin.
 
-### <a name="offline-solutions"></a>Çevrimdışı çözümleri 
+### <a name="offline-solutions"></a>Çevrimdışı çözümler 
 
-İçinde sanal makine herhangi bir yöntemle ulaşamıyor bir durum varsa, özel betik uzantısı başarısız olur ve sistem diski aracılığıyla doğrudan çevrimdışı modda çalışmak gerekir. Bunu yapmak için şu adımları uygulayın:
+Herhangi bir yöntemle sanal makineye ulaşamamanıza yönelik bir durumunuz varsa, Özel Betik uzantısı başarısız olur ve doğrudan sistem diski aracılığıyla çalışarak ÇEVRIMDıŞı modda çalışmanız gerekir. Bunu yapmak için şu adımları uygulayın:
 
-1.  [Bir kurtarma VM'si sistem diski](troubleshoot-recovery-disks-portal-windows.md).
+1.  [Sistem diskini bir kurtarma VM 'Sine bağlayın](troubleshoot-recovery-disks-portal-windows.md).
 
-2.  Kurtarma VM'sini bir Uzak Masaüstü Bağlantısı'nı başlatın.
+2.  Kurtarma VM 'sine bir Uzak Masaüstü bağlantısı başlatın.
 
-3.  Disk Disk Yönetimi konsolunda çevrimiçi işaretlenmiş olduğundan emin olun. Bağlı sistem diskine atanmış sürücü harfini unutmayın.
+3.  Diskin Disk Yönetimi konsolunda çevrimiçi olarak işaretlendiğinden emin olun. Eklenmiş sistem diskine atanan sürücü harfini unutmayın.
 
-4.  Herhangi bir değişiklik yapmadan önce tüm değişiklikleri geri alma gerekli olması durumunda \windows\system32\config klasörüne bir kopyasını oluşturun.
+4.  Değişiklik yapmadan önce, değişikliklerin geri alınması gerekli olduğunda \Windows\System32\Config klasörünün bir kopyasını oluşturun.
 
-5.  Kayıt Defteri Düzenleyicisi (regedit.exe) sorun giderme sanal makinede başlatın. 
+5.  Sorun giderme VM 'sinde, kayıt defteri Düzenleyicisi 'ni (Regedit. exe) başlatın. 
 
-6.  Bu sorun giderme yordamını için biz BROKENSYSTEM ve BROKENSOFTWARE yığınlarını bağlama.
+6.  Bu sorun giderme yordamı için, kovanları BROKENSYSTEM ve BROKENSOFTWARE olarak takıyoruz.
 
-7.  HKEY_LOCAL_MACHINE anahtarı vurgulayın ve sonra dosyayı seçin > yığını menüsünde.
+7.  HKEY_LOCAL_MACHINE anahtarını vurgulayın ve menüden > dosya Hive Yükle ' yi seçin.
 
-8.  Bağlı sistem diskinde \windows\system32\config\SYSTEM dosyasını bulun.
+8.  Eklenmiş sistem diskinde \windows\system32\config\SYSTEM dosyasını bulun.
 
-9.  Yükseltilmiş bir PowerShell örneği açın ve ardından aşağıdaki komutları çalıştırın:
+9.  Yükseltilmiş bir PowerShell örneği açın ve aşağıdaki komutları çalıştırın:
 
     ```cmd
     # Load the hives - If your attached disk is not F, replace the letter assignment here
@@ -160,6 +160,6 @@ Bu adımları izleyin [uzak kayıt defteri](https://support.microsoft.com/help/3
     reg unload HKLM\BROKENSOFTWARE
     ```
 
-10. [VM yeniden oluşturma ve sistem diskini](troubleshoot-recovery-disks-portal-windows.md).
+10. [Sistem diskini ayırın ve VM 'yi yeniden oluşturun](troubleshoot-recovery-disks-portal-windows.md).
 
-11. Sorunun çözülüp çözülmediğini denetleyin.
+11. Sorunun çözümlenip çözümlenmediğini denetleyin.

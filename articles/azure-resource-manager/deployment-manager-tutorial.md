@@ -1,31 +1,28 @@
 ---
 title: Azure Deployment Manager’ı Resource Manager şablonlarıyla kullanma | Microsoft Docs
 description: Azure kaynaklarını dağıtmak için Azure Deployment Manager ile Resource Manager şablonlarını kullanın.
-services: azure-resource-manager
-documentationcenter: ''
 author: mumian
-ms.service: azure-resource-manager
-ms.date: 05/23/2019
+ms.date: 10/10/2019
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: a42ccb1c0e60f5bf1568ccea13392186577f2875
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 6a05e45c5dc60cf26b2fb4f50cb4699c0fde142a
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67205716"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74147408"
 ---
-# <a name="tutorial-use-azure-deployment-manager-with-resource-manager-templates-public-preview"></a>Öğretici: Resource Manager şablonları (genel Önizleme) ile Azure Deployment Manager'ı kullanın
+# <a name="tutorial-use-azure-deployment-manager-with-resource-manager-templates-public-preview"></a>Öğretici: Azure Deployment Manager’ı Resource Manager şablonlarıyla kullanma (Genel önizleme)
 
-[Azure Deployment Manager](./deployment-manager-overview.md)’ı kullanarak uygulamalarınızı birden çok bölgede nasıl dağıtacağınızı öğrenin. Daha hızlı bir yaklaşımı tercih ederseniz [Azure Deployment Manager Hızlı Başlangıç](https://github.com/Azure-Samples/adm-quickstart) aboneliğinizde gerekli yapılandırmaları oluşturur ve birden çok bölgede bir uygulamayı dağıtmak için yapıtlar özelleştirir. Bu öğreticide yaptığı gibi hızlı başlangıç görevleri gerçekleştirir.
+[Azure Deployment Manager](./deployment-manager-overview.md)’ı kullanarak uygulamalarınızı birden çok bölgede nasıl dağıtacağınızı öğrenin. Daha hızlı bir yaklaşım tercih ediyorsanız, [Azure dağıtım Yöneticisi hızlı başlangıç](https://github.com/Azure-Samples/adm-quickstart) aboneliğinizde gerekli konfigürasyonları oluşturur ve bir uygulamayı birden çok bölgede dağıtmak için yapıtları özelleştirir. Hızlı başlangıç, bu öğreticide olduğu gibi aynı görevleri gerçekleştirir.
 
-Deployment Manager'ı kullanmak için iki şablonu oluşturmak gerekir:
+Dağıtım Yöneticisi kullanmak için iki şablon oluşturmanız gerekir:
 
 * **Topoloji şablonu**: Uygulamalarınızı Azure kaynaklarını ve bunların dağıtılacağı yeri açıklar.
 * **Dağıtım şablonu**: Uygulamalarınızı dağıtırken uygulanacak adımları açıklar.
 
 > [!IMPORTANT]
-> Kanarya yeni Azure özellikleri test etmek için aboneliğinizi işaretlenmişse Kanarya bölgeye dağıtma yalnızca Azure Dağıtım Yöneticisi'ni kullanabilirsiniz. 
+> Aboneliğiniz yeni Azure özelliklerini test etmek üzere işaretlenmişse, Azure Dağıtım Yöneticisi 'yi yalnızca Canary bölgelerine dağıtmak için kullanabilirsiniz. 
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
@@ -43,8 +40,8 @@ Bu öğretici aşağıdaki görevleri kapsar:
 
 Ek kaynaklar:
 
-* [Azure Deployment Manager REST API'si başvurusunda](https://docs.microsoft.com/rest/api/deploymentmanager/).
-* [Öğretici: Azure Dağıtım Yöneticisi'nde sistem durumu denetimi kullanın](./deployment-manager-tutorial-health-check.md).
+* [Azure Dağıtım Yöneticisi REST API başvurusu](https://docs.microsoft.com/rest/api/deploymentmanager/).
+* [Öğretici: Azure dağıtım Yöneticisi 'da sistem durumu denetimi kullanın](./deployment-manager-tutorial-health-check.md).
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
@@ -56,13 +53,11 @@ Bu makaleyi tamamlamak için gerekenler:
 
 * [Azure Resource Manager şablonlarını](./resource-group-overview.md) geliştirme konusunda deneyim.
 * Azure PowerShell. Daha fazla bilgi için bkz. [Azure PowerShell kullanmaya başlayın](https://docs.microsoft.com/powershell/azure/get-started-azureps).
-* Deployment Manager cmdlet'leri. Bu yayın öncesi cmdlet’leri yüklemek için PowerShellGet’in en son sürümü gereklidir. En son sürümü edinmek için bkz. [PowerShellGet’i Yükleme](/powershell/gallery/installing-psget). PowerShellGet’i yükledikten sonra PowerShell penceresini kapatın. Yeni yükseltilmiş bir PowerShell penceresi açın ve aşağıdaki komutu kullanın:
+* Deployment Manager cmdlet'leri. Bu yayın öncesi cmdlet’leri yüklemek için PowerShellGet’in en son sürümü gereklidir. En son sürümü edinmek için bkz. [PowerShellGet’i Yükleme](/powershell/gallery/installing-psget). PowerShellGet’i yükledikten sonra PowerShell penceresini kapatın. Yeni bir yükseltilmiş PowerShell penceresi açın ve aşağıdaki komutu kullanın:
 
     ```powershell
     Install-Module -Name Az.DeploymentManager
     ```
-
-* [Microsoft Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/). Azure Depolama Gezgini gerekli değildir, ancak işinizi kolaylaştırır.
 
 ## <a name="understand-the-scenario"></a>Senaryoyu anlama
 
@@ -80,7 +75,7 @@ Batı ABD ve doğu ABD konumlarında ayrılmış iki hizmet vardır.  Her hizmet
 
 ## <a name="download-the-tutorial-files"></a>Öğretici dosyalarını indirme
 
-1. Bu öğreticide kullanılan [şablonları ve yapıtları](https://armtutorials.blob.core.windows.net/admtutorial/ADMTutorial.zip) indirin.
+1. Bu öğreticide kullanılan [şablonları ve yapıtları](https://github.com/Azure/azure-docs-json-samples/raw/master/tutorial-adm/ADMTutorial.zip) indirin.
 2. Dosyaları bilgisayarınızdaki konuma ayıklayın.
 
 Kök klasörde iki klasör vardır:
@@ -110,7 +105,7 @@ Kök klasörde iki klasör vardır:
 
     ![Azure Deployment Manager öğreticisi web uygulaması şablonu oluşturma](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-create-web-application-packageuri.png)
 
-    Şablon, web uygulamasının dosyalarını içeren bir dağıtım paketi çağırır. Bu öğreticide, sıkıştırılmış paket, yalnızca bir index.html dosyası içerir.
+    Şablon, web uygulamasının dosyalarını içeren bir dağıtım paketi çağırır. Bu öğreticide, sıkıştırılmış paket yalnızca bir index. html dosyası içerir.
 3. **\ArtifactStore\templates\1.0.0.0\ServiceWUS\CreateWebApplicationParameters.json** dosyasını açın.
 
     ![Azure Deployment Manager öğreticisi web uygulaması şablonu parametreleri containerRoot](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-create-web-application-parameters-deploypackageuri.png)
@@ -135,16 +130,55 @@ Kök klasörde iki klasör vardır:
 
 Şablon yapıtları hizmet topolojisi şablonu tarafından kullanılır ve ikili dosya yapıtları piyasaya çıkarma şablonu tarafından kullanılır. Topoloji şablonu ve piyasaya çıkarma şablonu bir yapıt kaynağı Azure kaynağı tanımlar. Bu kaynak, Resource Manager’ı dağıtımda kullanılan şablona ve ikili dosya yapıtlarına yönlendirmek için kullanılır. Öğreticiyi basitleştirmek amacıyla, hem şablon yapıtları hem de ikili dosya yapıtlarını depolamak için bir depolama hesabı kullanılmıştır. Her iki yapıt kaynağı aynı depolama hesabını işaret eder.
 
-1. Bir Azure Storage hesabı oluşturun. Yönergeler için bkz. [hızlı başlangıç: Karşıya yükleme, indirme ve Azure portalını kullanarak blobları listeleme](../storage/blobs/storage-quickstart-blobs-portal.md).
-2. Depolama hesabında bir blob kapsayıcısı oluşturun.
-3. İki klasör (ikili dosyalar ve şablonlar) ile iki klasörün içeriğini blob kapsayıcısına kopyalayın. [Microsoft Azure Depolama Gezgini](https://go.microsoft.com/fwlink/?LinkId=708343&clcid=0x409) sürükleyip bırakma özelliğini destekler.
-4. Aşağıdaki yönergeleri kullanarak kapsayıcının SAS konumunu alın:
+Bir kaynak grubu oluşturmak, bir depolama kapsayıcısı oluşturmak, bir blob kapsayıcısı oluşturmak, indirilen dosyaları karşıya yüklemek ve ardından bir SAS belirteci oluşturmak için aşağıdaki PowerShell betiğini çalıştırın.
 
-    1. Azure Depolama Gezgini'nden blob kapsayıcısına gidin.
-    2. Sol bölmede blob kapsayıcısına sağ tıklayın ve **Paylaşılan Erişim İmzasını Al** öğesini seçin.
-    3. **Başlangıç zamanını** ve **Geçerlilik sonu zamanı** yapılandırın.
-    4. **Oluştur**’u seçin.
-    5. URL’nin kopyasını oluşturun. Bu URL, iki parametre dosyasındaki ([topoloji parametre dosyası](#topology-parameters-file) ve [piyasaya çıkarma parametre dosyası](#rollout-parameters-file)) bir alanı doldurmak için gereklidir.
+> [!IMPORTANT]
+> PowerShell betiğinin **ProjectName** , bu öğreticide dağıtılan Azure hizmetlerinin adlarını oluşturmak için kullanılır. Farklı Azure Hizmetleri, adlar üzerinde farklı gereksinimlere sahiptir. Dağıtımın başarılı olduğundan emin olmak için, yalnızca küçük harf ve rakam içeren 12 karakterden daha az bir ad seçin.
+> Proje adının bir kopyasını kaydedin. Öğreticide aynı projectName 'yi kullanırsınız.
+
+```azurepowershell
+$projectName = Read-Host -Prompt "Enter a project name that is used to generate Azure resource names"
+$location = Read-Host -Prompt "Enter the location (i.e. centralus)"
+$filePath = Read-Host -Prompt "Enter the folder that contains the downloaded files"
+
+
+$resourceGroupName = "${projectName}rg"
+$storageAccountName = "${projectName}store"
+$containerName = "admfiles"
+$filePathArtifacts = "${filePath}\ArtifactStore"
+
+New-AzResourceGroup -Name $resourceGroupName -Location $location
+
+$storageAccount = New-AzStorageAccount -ResourceGroupName $resourceGroupName `
+  -Name $storageAccountName `
+  -Location $location `
+  -SkuName Standard_RAGRS `
+  -Kind StorageV2
+
+$storageContext = $storageAccount.Context
+
+$storageContainer = New-AzStorageContainer -Name $containerName -Context $storageContext -Permission Off
+
+
+$filesToUpload = Get-ChildItem $filePathArtifacts -Recurse -File
+
+foreach ($x in $filesToUpload) {
+    $targetPath = ($x.fullname.Substring($filePathArtifacts.Length + 1)).Replace("\", "/")
+
+    Write-Verbose "Uploading $("\" + $x.fullname.Substring($filePathArtifacts.Length + 1)) to $($storageContainer.CloudBlobContainer.Uri.AbsoluteUri + "/" + $targetPath)"
+    Set-AzStorageBlobContent -File $x.fullname -Container $storageContainer.Name -Blob $targetPath -Context $storageContext | Out-Null
+}
+
+$token = New-AzStorageContainerSASToken -name $containerName -Context $storageContext -Permission rl -ExpiryTime (Get-date).AddMonths(1)  -Protocol HttpsOrHttp
+
+$url = $storageAccount.PrimaryEndpoints.Blob + $containerName + $token
+
+Write-Host $url
+```
+
+SAS belirteciyle URL 'nin bir kopyasını oluşturun. İki parametre dosyasındaki bir alanı, topoloji parametreleri dosyasını ve dağıtım parametreleri dosyasını doldurmak için bu URL gereklidir.
+
+Kapsayıcıyı Azure portal açın ve **ikili** dosyaların ve **şablonların** klasörlerinin ve dosyaların yüklendiğini doğrulayın.
 
 ## <a name="create-the-user-assigned-managed-identity"></a>Kullanıcı tarafından atanmış yönetilen kimliği oluşturma
 
@@ -153,12 +187,12 @@ Kök klasörde iki klasör vardır:
 Kullanıcı tarafından atanmış yönetilen bir kimlik oluşturmanız ve aboneliğiniz için erişim denetimini yapılandırmanız gerekir.
 
 > [!IMPORTANT]
-> Kullanıcı tarafından atanmış yönetilen kimlik, [piyasaya çıkarma](#create-the-rollout-template) ile aynı konumda olmalıdır. Şu anda piyasaya çıkarma gibi Deployment Manager kaynakları yalnızca Orta ABD veya Doğu ABD 2’de oluşturulabilir. Ancak, bu yalnızca Deployment Manager Kaynakları (örneğin, service topolojisi, hizmetleri, hizmet birimi, dağıtım ve adımları) için geçerlidir. Hedef kaynaklarınız için desteklenen tüm Azure bölgelerine dağıtılabilir. Bu öğreticide, örneğin, Orta ABD için dağıtılan Deployment Manager kaynakları, ancak Hizmetleri, Doğu ABD ve Batı ABD için dağıtılır. Bu kısıtlama, gelecekte yükseltilmiş.
+> Kullanıcı tarafından atanmış yönetilen kimlik, [piyasaya çıkarma](#create-the-rollout-template) ile aynı konumda olmalıdır. Şu anda piyasaya çıkarma gibi Deployment Manager kaynakları yalnızca Orta ABD veya Doğu ABD 2’de oluşturulabilir. Ancak, bu yalnızca Dağıtım Yöneticisi kaynaklar (hizmet topolojisi, hizmetler, hizmet birimleri, dağıtım ve adımlar gibi) için geçerlidir. Hedef kaynaklarınız, desteklenen herhangi bir Azure bölgesine dağıtılabilir. Bu öğreticide, örneğin Dağıtım Yöneticisi Kaynakları Orta ABD dağıtılır, ancak hizmetler Doğu ABD ve Batı ABD dağıtılır. Bu kısıtlama gelecekte yükseltilmemiş olacaktır.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
 2. [Kullanıcı tarafından atanmış bir yönetilen kimlik](../active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-portal.md) oluşturun.
 3. Portalda sol menüden **Abonelikler**’i ve ardından aboneliğinizi seçin.
-4. Seçin **erişim denetimi (IAM)** ve ardından **rol ataması Ekle**.
+4. **Erişim denetimi (IAM)** öğesini seçin ve ardından **rol ataması Ekle**' yi seçin.
 5. Aşağıdaki değerleri yazın veya seçin:
 
     ![Azure Deployment Manager öğreticisi kullanıcı tarafından atanmış yönetilen kimlik erişim denetimi](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-access-control.png)
@@ -176,17 +210,15 @@ Kullanıcı tarafından atanmış yönetilen bir kimlik oluşturmanız ve abonel
 
 Şablon aşağıdaki parametreleri içerir:
 
-![Azure Deployment Manager öğreticisi topoloji şablonu parametreleri](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-topology-template-parameters.png)
-
-* **namePrefix**: Bu ön ek, Deployment Manager kaynakların adlarını oluşturmak için kullanılır. Örneğin, "jdoe" ön eki kullanıldığında hizmet topolojisi adı **jdoe**ServiceTopology olur.  Kaynak adları bu şablonun değişkenler bölümünde tanımlanır.
-* **azureResourcelocation**: Öğreticiyi basitleştirmek için aksi belirtilmediği sürece bu konuma tüm kaynakları paylaşır. Şu anda Azure Deployment Manager kaynakları yalnızca **Orta ABD** veya **Doğu ABD 2**’de oluşturulabilir.
-* **artifactSourceSASLocation**: Dağıtım için hizmeti birim şablon ve parametreleri dosyalarının depolandığı Blob kapsayıcısı SAS URI'si.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
-* **templateArtifactRoot**: Şablon ve parametre depolandığı Blob kapsayıcısından uzaklık yolu. Varsayılan değer: **templates/1.0.0.0**. [Yapıtları hazırlama](#prepare-the-artifacts) bölümünde açıklanan klasör yapısını değiştirmek istemiyorsanız bu değeri değiştirmeyin. Bu öğreticide göreli yollar kullanılır.  Tam yol **artifactSourceSASLocation**, **templateArtifactRoot** ve **templateArtifactSourceRelativePath** (veya **parametersArtifactSourceRelativePath**) birleştirilerek oluşturulur.
-* **Targetsubscriptionıd**: Deployment Manager kaynakları dağıtılır ve faturalandırılır için önerilere şu abonelik kimliği. Bu öğreticide abonelik kimliğinizi kullanın.
+* **ProjectName**: bu ad Dağıtım Yöneticisi kaynaklarının adlarını oluşturmak için kullanılır. Örneğin, "jtikan" kullanarak hizmet topolojisi adı **jtikan**servicetopology ' dir.  Kaynak adları bu şablonun değişkenler bölümünde tanımlanır.
+* **azureResourcelocation**: Öğreticiyi basitleştirmek için, aksi belirtilmedikçe tüm kaynaklar bu konumu paylaşır. Şu anda Azure Deployment Manager kaynakları yalnızca **Orta ABD** veya **Doğu ABD 2**’de oluşturulabilir.
+* **artifactSourceSASLocation**: Hizmet birimi şablonu ve parametre dosyalarının dağıtım için depolandığı Blob kapsayıcısının SAS URI’si.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
+* **templateArtifactRoot**: Şablonların ve parametrelerin depolandığı Blob kapsayıcısına olan yol uzaklığı. Varsayılan değer: **templates/1.0.0.0**. [Yapıtları hazırlama](#prepare-the-artifacts) bölümünde açıklanan klasör yapısını değiştirmek istemiyorsanız bu değeri değiştirmeyin. Bu öğreticide göreli yollar kullanılır.  Tam yol **artifactSourceSASLocation**, **templateArtifactRoot** ve **templateArtifactSourceRelativePath** (veya **parametersArtifactSourceRelativePath**) birleştirilerek oluşturulur.
+* **targetSubscriptionID**: Deployment Manager kaynaklarının dağıtılıp faturalandırılacağı abonelik kimliği. Bu öğreticide abonelik kimliğinizi kullanın.
 
 ### <a name="the-variables"></a>Değişkenler
 
-Değişkenler bölümünde kaynakların Azure konumları iki hizmeti için adları tanımlar: **Hizmet WUS** ve **hizmet EUS**ve yapıt yolları:
+Değişkenler bölümü kaynakların adlarını, iki hizmete yönelik Azure konumlarını: **Hizmet WUS** ve **Hizmet EUS**, ayrıca yapıt yollarını tanımlar:
 
 ![Azure Deployment Manager öğreticisi topoloji şablonu değişkenleri](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-topology-template-variables.png)
 
@@ -205,7 +237,7 @@ Aşağıdaki ekran görüntüsünde hizmet topolojisinin, hizmetlerin ve hizmet 
 ![Azure Deployment Manager öğreticisi topoloji şablonu kaynakları hizmet topolojisi](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-topology-template-resources-service-topology.png)
 
 * **artifactSourceId**, yapıt kaynağını hizmet topolojisi kaynağıyla ilişkilendirmek için kullanılır.
-* **dependsOn**: Tüm service topolojisi kaynakları yapıt kaynağı kaynağına bağımlı.
+* **dependsOn**: Tüm hizmet topolojisi kaynakları yapıt kaynağına bağlıdır.
 * **artifacts** şablon yapıtlarını işaret eder.  Burada göreli yollar kullanılır. Tam yol artifactSourceSASLocation (yapıt kaynağında tanımlıdır), artifactRoot (yapıt kaynağında tanımlıdır) ve templateArtifactSourceRelativePath (veya parametersArtifactSourceRelativePath) birleştirilerek oluşturulur.
 
 ### <a name="topology-parameters-file"></a>Topoloji parametre dosyası
@@ -215,14 +247,13 @@ Topoloji şablonuyla kullanılan bir parametre dosyası oluşturursunuz.
 1. **\ADMTemplates\CreateADMServiceTopology.Parameters** öğesini Visual Studio Code’da veya herhangi bir metin düzenleyicisinde açın.
 2. Parametre değerlerini doldurun:
 
-    * **namePrefix**: 4-5 karakter içeren bir dize girin. Bu ön ek, benzersiz Azure kaynağı adları oluşturmak için kullanılır.
-    * **azureResourceLocation**: Azure konumları ile ilgili bilgi sahibi değilseniz kullanın **centralus** bu öğreticideki.
-    * **artifactSourceSASLocation**: SAS URI'sini kök dizinine (Blob kapsayıcısı), dağıtım için hizmeti birim şablon ve parametreleri dosyalarının depolandığı yeri girin.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
-    * **templateArtifactRoot**: Yapıtlar klasör yapısını değiştirmediğiniz sürece, kullanın **templates/1.0.0.0** bu öğreticideki.
-    * **targetScriptionID**: Azure abonelik kimliğinizi girin
+    * **ProjectName**: 4-5 karakter içeren bir dize girin. Bu ad, benzersiz Azure Kaynak adları oluşturmak için kullanılır.
+    * **azureResourceLocation**: Azure konumlarını kullanmaya alışık değilseniz, bu öğreticideki **centralus**’u kullanın.
+    * **artifactSourceSASLocation**: Hizmet birimi şablonu ve parametreler dosyalarının dağıtım için depolandığı kök dizine (Blob kapsayıcısı) SAS URI’sini girin.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
+    * **templateArtifactRoot**: Yapıtların klasör yapısını değiştirmediğiniz sürece bu öğreticideki **templates/1.0.0.0** klasörünü kullanın.
 
 > [!IMPORTANT]
-> Topoloji şablonu ve piyasaya çıkarma şablonu bazı ortak parametreleri paylaşır. Bu parametreler aynı değerlere sahip olmalıdır. Bu parametreler: **namePrefix**, **azureResourceLocation**, ve **artifactSourceSASLocation** (her iki yapıt kaynağı da bu öğreticide aynı depolama hesabını kullanır).
+> Topoloji şablonu ve piyasaya çıkarma şablonu bazı ortak parametreleri paylaşır. Bu parametreler aynı değerlere sahip olmalıdır. Bu parametreler şunlardır: **ProjectName**, **AzureResourceLocation**ve **artifactsourcesaslocation** (her iki yapıt kaynağı da bu öğreticide aynı depolama hesabını paylaşır).
 
 ## <a name="create-the-rollout-template"></a>Piyasaya çıkarma şablonunu oluşturma
 
@@ -234,11 +265,11 @@ Topoloji şablonuyla kullanılan bir parametre dosyası oluşturursunuz.
 
 ![Azure Deployment Manager öğreticisi piyasaya çıkarma şablonu parametreleri](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-rollout-template-parameters.png)
 
-* **namePrefix**: Bu ön ek, Deployment Manager kaynakların adlarını oluşturmak için kullanılır. Örneğin, "jdoe" ön eki kullanıldığında piyasaya çıkarma adı **jdoe**Rollout olur.  Adlar şablonun değişkenler bölümünde tanımlanır.
-* **azureResourcelocation**: Öğreticiyi basitleştirmek için aksi belirtilmediği sürece bu konuma tüm Deployment Manager kaynakları paylaşır. Şu anda Azure Deployment Manager kaynakları yalnızca **Orta ABD** veya **Doğu ABD 2**’de oluşturulabilir.
-* **artifactSourceSASLocation**: SAS URI'sini dağıtım için hizmeti birim şablon ve parametreleri dosyalarının depolandığı kök dizinine (Blob kapsayıcısı).  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
-* **binaryArtifactRoot**:  Varsayılan değer **binaries/1.0.0.0**. [Yapıtları hazırlama](#prepare-the-artifacts) bölümünde açıklanan klasör yapısını değiştirmek istemiyorsanız bu değeri değiştirmeyin. Bu öğreticide göreli yollar kullanılır.  Tam yol, CreateWebApplicationParameters.json dosyasında belirtilen **artifactSourceSASLocation**, **binaryArtifactRoot** ve **deployPackageUri** birleştirilerek oluşturulur.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
-* **managedIdentityID**: Kullanıcı tarafından atanan yönetilen dağıtım eylemleri gerçekleştiren kimliği. Bkz. [Kullanıcı tarafından atanmış yönetilen kimlik oluşturma](#create-the-user-assigned-managed-identity).
+* **ProjectName**: bu ad Dağıtım Yöneticisi kaynaklarının adlarını oluşturmak için kullanılır. Örneğin, "jtikan" ile dağıtım adı, **jtikan**dağıtımı olur.  Adlar şablonun değişkenler bölümünde tanımlanır.
+* **azureResourcelocation**: Öğreticiyi basitleştirmek için tüm Deployment Manager kaynakları aksi belirtilmedikçe bu konumu paylaşır. Şu anda Azure Deployment Manager kaynakları yalnızca **Orta ABD** veya **Doğu ABD 2**’de oluşturulabilir.
+* **artifactSourceSASLocation**: Hizmet birimi şablonu ve parametreler dosyalarının dağıtım için depolandığı kök dizin (Blob kapsayıcısı) SAS URI’si.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
+* **binaryArtifactRoot**:  Varsayılan değer: **binaries/1.0.0.0**. [Yapıtları hazırlama](#prepare-the-artifacts) bölümünde açıklanan klasör yapısını değiştirmek istemiyorsanız bu değeri değiştirmeyin. Bu öğreticide göreli yollar kullanılır.  Tam yol, CreateWebApplicationParameters.json dosyasında belirtilen **artifactSourceSASLocation**, **binaryArtifactRoot** ve **deployPackageUri** birleştirilerek oluşturulur.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
+* **managedIdentityID**: Dağıtım işlemlerini gerçekleştiren, kullanıcı tarafından atanmış yönetilen kimlik. Bkz. [Kullanıcı tarafından atanmış yönetilen kimlik oluşturma](#create-the-user-assigned-managed-identity).
 
 ### <a name="the-variables"></a>Değişkenler
 
@@ -262,10 +293,10 @@ Aşağıdaki ekran görüntüsünde piyasaya çıkarma tanımının yalnızca ba
 
 ![Azure Deployment Manager öğreticisi piyasaya çıkarma şablonu kaynakları piyasaya çıkarma](./media/deployment-manager-tutorial/azure-deployment-manager-tutorial-rollout-template-resources-rollout.png)
 
-* **dependsOn**: Dağıtım kaynağı yapıt kaynağı kaynak ve tanımlanan adımların hiçbirini bağlıdır.
+* **dependsOn**: Piyasaya çıkarma kaynağı yapıt kaynağına ve tanımlanan adımlara bağlıdır.
 * **artifactSourceId**: yapıt kaynağını piyasaya çıkarma kaynağıyla ilişkilendirmek için kullanılır.
 * **targetServiceTopologyId**: hizmet topolojisi kaynağını piyasaya çıkarma kaynağıyla ilişkilendirmek için kullanılır.
-* **deploymentTargetId**: Bu hizmet birimi kaynak service topolojisi kaynak kimliğidir.
+* **deploymentTargetId**: Hizmet topolojisi kaynağının hizmet birimi kaynağı kimliğidir.
 * **preDeploymentSteps** ve **postDeploymentSteps**: tüm piyasaya çıkarma kaynaklarını içerir. Şablonda bir bekleme adımı çağrılır.
 * **dependsOnStepGroups**: adım grupları arasındaki bağımlılıkları yapılandırır.
 
@@ -276,18 +307,18 @@ Piyasaya çıkarma şablonuyla kullanılan bir parametre dosyası oluşturursunu
 1. **\ADMTemplates\CreateADMRollout.Parameters** öğesini Visual Studio Code’da veya herhangi bir metin düzenleyicisinde açın.
 2. Parametre değerlerini doldurun:
 
-    * **namePrefix**: 4-5 karakter içeren bir dize girin. Bu ön ek, benzersiz Azure kaynağı adları oluşturmak için kullanılır.
+    * **ProjectName**: 4-5 karakter içeren bir dize girin. Bu ad, benzersiz Azure Kaynak adları oluşturmak için kullanılır.
     * **azureResourceLocation**: Şu anda Azure Deployment Manager kaynakları yalnızca **Orta ABD** veya **Doğu ABD 2**’de oluşturulabilir.
-    * **artifactSourceSASLocation**: SAS URI'sini kök dizinine (Blob kapsayıcısı), dağıtım için hizmeti birim şablon ve parametreleri dosyalarının depolandığı yeri girin.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
-    * **binaryArtifactRoot**: Yapıtlar klasör yapısını değiştirmediğiniz sürece, kullanın **binaries/1.0.0.0** bu öğreticideki.
-    * **managedIdentityID**: Kullanıcı tarafından atanan bir yönetilen kimlik girin. Bkz. [Kullanıcı tarafından atanmış yönetilen kimlik oluşturma](#create-the-user-assigned-managed-identity). Sözdizimi şöyledir:
+    * **artifactSourceSASLocation**: Hizmet birimi şablonu ve parametreler dosyalarının dağıtım için depolandığı kök dizine (Blob kapsayıcısı) SAS URI’sini girin.  [Yapıtları hazırlama](#prepare-the-artifacts) bölümüne bakın.
+    * **binaryArtifactRoot**: Yapıtların klasör yapısını değiştirmediğiniz sürece bu öğreticideki **binaries/1.0.0.0** klasörünü kullanın.
+    * **managedIdentityID**: Kullanıcı tarafından atanmış yönetilen kimliği girin. Bkz. [Kullanıcı tarafından atanmış yönetilen kimlik oluşturma](#create-the-user-assigned-managed-identity). Sözdizimi şöyledir:
 
         ```
         "/subscriptions/<SubscriptionID>/resourcegroups/<ResourceGroupName>/providers/Microsoft.ManagedIdentity/userassignedidentities/<ManagedIdentityName>"
         ```
 
 > [!IMPORTANT]
-> Topoloji şablonu ve piyasaya çıkarma şablonu bazı ortak parametreleri paylaşır. Bu parametreler aynı değerlere sahip olmalıdır. Bu parametreler: **namePrefix**, **azureResourceLocation**, ve **artifactSourceSASLocation** (her iki yapıt kaynağı da bu öğreticide aynı depolama hesabını kullanır).
+> Topoloji şablonu ve piyasaya çıkarma şablonu bazı ortak parametreleri paylaşır. Bu parametreler aynı değerlere sahip olmalıdır. Bu parametreler şunlardır: **ProjectName**, **AzureResourceLocation**ve **artifactsourcesaslocation** (her iki yapıt kaynağı da bu öğreticide aynı depolama hesabını paylaşır).
 
 ## <a name="deploy-the-templates"></a>Şablonları dağıtma
 
@@ -296,13 +327,6 @@ Azure PowerShell şablonları dağıtmak için kullanılabilir.
 1. Hizmet topolojisini dağıtmak için betiği çalıştırın.
 
     ```azurepowershell
-    $resourceGroupName = "<Enter a Resource Group Name>"
-    $location = "Central US"
-    $filePath = "<Enter the File Path to the Downloaded Tutorial Files>"
-
-    # Create a resource group
-    New-AzResourceGroup -Name $resourceGroupName -Location "$location"
-
     # Create the service topology
     New-AzResourceGroupDeployment `
         -ResourceGroupName $resourceGroupName `
@@ -310,8 +334,10 @@ Azure PowerShell şablonları dağıtmak için kullanılabilir.
         -TemplateParameterFile "$filePath\ADMTemplates\CreateADMServiceTopology.Parameters.json"
     ```
 
+    Bu betiği, [yapıtları hazırlama](#prepare-the-artifacts) betiğini çalıştırmanızdan farklı bir PowerShell oturumundan çalıştırırsanız, **$resourceGroupName** ve **$FilePath**dahil olmak üzere ilk olarak değişkenleri yeniden doldurmanız gerekir.
+
     > [!NOTE]
-    > `New-AzResourceGroupDeployment` zaman uyumsuz bir çağrıdır. Başarı iletisi yalnızca dağıtım başarıyla başladı anlamına gelir. Dağıtımı doğrulamak için adım 2 ve 4. adım, bu yordamın bakın.
+    > `New-AzResourceGroupDeployment` zaman uyumsuz bir çağrıdır. Başarı iletisi yalnızca dağıtımın başarıyla başladığını gösterir. Dağıtımı doğrulamak için, bu yordamın adım 2 ve adım 4 ' e bakın.
 
 2. Azure portalı kullanarak hizmet topolojisinin ve temel kaynakların başarıyla oluşturulduğunu doğrulayın:
 
@@ -319,7 +345,7 @@ Azure PowerShell şablonları dağıtmak için kullanılabilir.
 
     Kaynakları görmek için **Gizli türleri göster** seçeneği belirlenmelidir.
 
-3. <a id="deploy-the-rollout-template"></a>Dağıtım şablonu dağıtın:
+3. <a id="deploy-the-rollout-template"></a>Dağıtım şablonunu dağıtma:
 
     ```azurepowershell
     # Create the rollout
@@ -333,14 +359,14 @@ Azure PowerShell şablonları dağıtmak için kullanılabilir.
 
     ```azurepowershell
     # Get the rollout status
-    $rolloutname = "<Enter the Rollout Name>" # "adm0925Rollout" is the rollout name used in this tutorial
+    $rolloutname = "${projectName}Rollout" # "adm0925Rollout" is the rollout name used in this tutorial
     Get-AzDeploymentManagerRollout `
         -ResourceGroupName $resourceGroupName `
         -Name $rolloutName `
         -Verbose
     ```
 
-    Bu cmdlet'in çalıştırılabilmesi için Deployment Manager PowerShell cmdlet'lerinin yüklü olması gerekir. Önkoşullara bakın. Verbose anahtar tamamını görebilmek için kullanılabilir çıktı.
+    Bu cmdlet'in çalıştırılabilmesi için Deployment Manager PowerShell cmdlet'lerinin yüklü olması gerekir. Önkoşulları inceleyin. Tüm çıktıyı görmek için-verbose anahtarı kullanılabilir.
 
     Aşağıdaki örnekte çalışma durumu gösterilmektedir:
 
@@ -424,9 +450,9 @@ Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığı
 1. Azure portalda, sol menüden **Kaynak grubu**’nu seçin.
 2. Bu öğreticide oluşturulan kaynak gruplarını daraltmak için **Ada göre filtrele** alanını kullanın. 3-4 adet olacaktır:
 
-    * **&lt;namePrefix>rg**: Deployment Manager kaynaklarını içerir.
-    * **&lt;namePrefix>ServiceWUSrg**: ServiceWUS tarafından tanımlanan kaynakları içerir.
-    * **&lt;namePrefix>ServiceEUSrg**: ServiceEUS tarafından tanımlanan kaynakları içerir.
+    * **&lt;projectName > RG**: Dağıtım Yöneticisi kaynaklarını içerir.
+    * **&lt;projectName > ServiceWUSrg**: ServiceWUS tarafından tanımlanan kaynakları içerir.
+    * **&lt;projectName > ServiceEUSrg**: ServiceEUS tarafından tanımlanan kaynakları içerir.
     * Kullanıcı tanımlı yönetilen kimlik için kaynak grubu.
 3. Kaynak grubu adını seçin.
 4. Üstteki menüden **Kaynak grubunu sil**’i seçin.
@@ -434,4 +460,4 @@ Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığı
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Azure Deployment Manager'ı kullanmayı öğrendiniz. Azure Dağıtım Yöneticisi'nde sistem durumu izleme tümleştirmek için bkz: [Öğreticisi: Azure Dağıtım Yöneticisi'nde sistem durumu denetimi kullanın](./deployment-manager-tutorial-health-check.md).
+Bu öğreticide, Azure Deployment Manager'ı kullanmayı öğrendiniz. Azure Dağıtım Yöneticisi sistem durumu izlemeyi tümleştirmek için bkz. [öğretici: Azure 'da sistem durumu denetimi kullanma dağıtım Yöneticisi](./deployment-manager-tutorial-health-check.md).

@@ -1,63 +1,64 @@
 ---
-title: Azure Containers görüntüsünü teknik varlıklarınızı oluşturun | Azure Market
-description: Azure kapsayıcısı için teknik varlıkları oluşturun.
+title: Azure kapsayıcıları görüntüsü teknik varlıkları oluşturma | Azure Marketi
+description: Azure kapsayıcısı için teknik varlıklar oluşturun.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 11/01/2018
 ms.author: pabutler
-ms.openlocfilehash: c639389fdd0d4624152fcdfa4432be09a18a97bc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6aae1957a3dcc58339eb4f3c9e250513843ceb18
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65794336"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819058"
 ---
-# <a name="prepare-your-container-technical-assets"></a>Teknik varlıkları kapsayıcınızı hazırlama
+# <a name="prepare-your-container-technical-assets"></a>Kapsayıcı teknik varlıklarınızı hazırlayın
 
-Bu makalede, adımları ve kapsayıcı teklifi Azure Marketi yapılandırma gereksinimlerini açıklar.
+Bu makalede, Azure Marketi 'ni sunan bir kapsayıcıyı yapılandırmaya yönelik adımlar ve gereksinimler açıklanmaktadır.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Gözden geçirme [Azure Container Instances](https://docs.microsoft.com/azure/container-instances) belgeleri, hızlı başlangıç kılavuzlarımız, Öğreticilerimiz ve Örneklerimizle sağlar.
+Hızlı başlangıç, öğreticiler ve örnekler sağlayan [Azure Container Instances](https://docs.microsoft.com/azure/container-instances) belgelerini gözden geçirin.
 
-## <a name="fundamental-technical-knowledge"></a>Temel teknik bilgiler
+## <a name="fundamental-technical-knowledge"></a>Temel teknik bilgi
 
-Tasarım, geliştirme ve test bu varlıkları zaman ayırın ve Azure platformu ve teklif oluşturmak için kullanılan teknolojileri teknik bilgi gerektirir.
+Bu varlıkları tasarlama, oluşturma ve test etme zaman alır ve hem Azure platformu hem de teklifi oluşturmak için kullanılan teknolojiler hakkında teknik bilgi gerektirir.
  
-Çözüm etki alanınız ek olarak, mühendislik ekibiniz aşağıdaki Microsoft teknolojileri hakkında bilgilere sahip olmanız gerekir:
+Çözüm etki alanınız ' ne ek olarak, mühendislik ekibiniz aşağıdaki Microsoft teknolojileri hakkında bilgi sahibi olmalıdır:
 
--   Temel düzeyde bilinmesini [Azure Hizmetleri](https://azure.microsoft.com/services/) 
--   Nasıl yapılır [tasarlayabilir ve Azure uygulamaları tasarlama](https://azure.microsoft.com/solutions/architecture/)
--   Bilgisine [Azure sanal makineler](https://azure.microsoft.com/services/virtual-machines/), [Azure depolama](https://azure.microsoft.com/services/?filter=storage) ve [Azure ağ iletişimi](https://azure.microsoft.com/services/?filter=networking)
--   Bilgisine [Azure Resource Manager](https://azure.microsoft.com/features/resource-manager/)
--   Bilgisine [JSON](https://www.json.org/)
+-   [Azure hizmetlerini](https://azure.microsoft.com/services/) temel olarak anlama 
+-   [Azure uygulamalarını tasarlama ve mimarın](https://azure.microsoft.com/solutions/architecture/)
+-   [Azure sanal makineler](https://azure.microsoft.com/services/virtual-machines/), [Azure depolama](https://azure.microsoft.com/services/?filter=storage) ve [Azure ağı](https://azure.microsoft.com/services/?filter=networking) ile çalışma hakkında bilgi
+-   [Azure Resource Manager](https://azure.microsoft.com/features/resource-manager/) çalışma bilgileri
+-   [JSON](https://www.json.org/) hakkında çalışma bilgisi
 
-## <a name="suggested-tools"></a>Önerilen Araçlar
+## <a name="suggested-tools"></a>Önerilen araçlar
 
-Birini veya ikisini de kapsayıcı görüntünüzü yönetmenize yardımcı olması için aşağıdaki komut dosyası ortamları seçin:
+Kapsayıcı görüntünüzü yönetmeye yardımcı olması için aşağıdaki komut dosyası ortamlarının birini veya her ikisini birden seçin:
 
 -   [Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview)
 -   [Azure CLI](https://docs.microsoft.com/cli/azure)
 
-Ayrıca, aşağıdaki araçları, geliştirme ortamınızı eklemenizi öneririz:
+Ayrıca, aşağıdaki araçların geliştirme ortamınıza eklenmesini öneririz:
 
 -   [Azure Depolama Gezgini](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer)
 -   [Visual Studio Code](https://code.visualstudio.com/)
     *   Uzantı: [Azure Resource Manager araçları](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools)
     *   Uzantı: [Beautify](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify)
-    *   Uzantı: [JSON prettify](https://marketplace.visualstudio.com/items?itemName=mohsen1.prettify-json)
+    *   Uzantı: [prettify JSON](https://marketplace.visualstudio.com/items?itemName=mohsen1.prettify-json)
 
-Ayrıca araçlar da gözden geçirme öneririz [Azure Geliştirici Araçları](https://azure.microsoft.com/tools/) sayfası ve Visual Studio kullanıyorsanız [Visual Studio Market](https://marketplace.visualstudio.com/).
+Ayrıca, [Azure Geliştirici Araçları](https://azure.microsoft.com/tools/) sayfasındaki kullanılabilir araçların incelenmesi önerilir ve Visual Studio kullanıyorsanız, [Visual Studio Market](https://marketplace.visualstudio.com/).
 
-## <a name="create-the-container-image"></a>Kapsayıcı görüntüsü oluşturma
+## <a name="create-the-container-image"></a>Kapsayıcı görüntüsünü oluşturma
 
 Daha fazla bilgi için aşağıdakilere bakın:
 
-* [Öğretici: Azure Container Instances'a dağıtılacak için kapsayıcı görüntüsü oluşturma](https://docs.microsoft.com/azure/container-instances/container-instances-tutorial-prepare-app)
-* [Öğretici: Oluşturun ve kapsayıcı görüntülerini Azure Container kayıt defteri görevler ile bulutta dağıtın](https://docs.microsoft.com/azure/container-registry/container-registry-tutorial-quick-task)
+* [Öğretici: Azure Container Instances dağıtım için bir kapsayıcı görüntüsü oluşturma](https://docs.microsoft.com/azure/container-instances/container-instances-tutorial-prepare-app)
+* [Öğretici: Azure Container Registry görevlerle bulutta kapsayıcı görüntüleri oluşturun ve dağıtın](https://docs.microsoft.com/azure/container-registry/container-registry-tutorial-quick-task)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Kapsayıcı teklifinizi oluşturun](./cpp-create-offer.md)
+[Kapsayıcı Teklifinizi oluşturma](./cpp-create-offer.md)

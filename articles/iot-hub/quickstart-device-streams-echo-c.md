@@ -1,38 +1,40 @@
 ---
-title: C cihaz uygulamasında Azure IOT Hub cihaz akışları (Önizleme) aracılığıyla kullanıcılara | Microsoft Docs
-description: Bu hızlı başlangıçta, iletişim kuran bir C cihaz tarafında uygulama bir cihaza akış bir IOT cihazı ile çalıştırın.
+title: Azure IoT Hub cihaz akışları ile C 'de cihaz uygulamasıyla iletişim kurma
+description: Bu hızlı başlangıçta, bir cihaz akışı aracılığıyla IoT cihazıyla iletişim kuran bir C cihaz tarafı uygulaması çalıştırırsınız.
 author: robinsh
 ms.service: iot-hub
 services: iot-hub
 ms.devlang: c
 ms.topic: quickstart
 ms.custom: mvc
-ms.date: 03/14/2019
+ms.date: 08/20/2019
 ms.author: robinsh
-ms.openlocfilehash: 4b6f987c68f9fe3ef95c82017b7d8be1d83083ea
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: d53b36beeca2c5e0456965cf5af19e5324b31ad9
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67446123"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084206"
 ---
-# <a name="quickstart-communicate-to-a-device-application-in-c-via-iot-hub-device-streams-preview"></a>Hızlı Başlangıç: C cihaz uygulama IOT Hub cihaz akışları (Önizleme) ile iletişim
+# <a name="quickstart-communicate-to-a-device-application-in-c-via-iot-hub-device-streams-preview"></a>Hızlı başlangıç: IoT Hub cihaz akışları aracılığıyla C 'deki bir cihaz uygulamasıyla Iletişim kurma (Önizleme)
 
 [!INCLUDE [iot-hub-quickstarts-3-selector](../../includes/iot-hub-quickstarts-3-selector.md)]
 
-Azure IOT Hub cihaz akışları olarak şu anda destekleyen bir [önizleme özelliği](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Azure IoT Hub Şu anda cihaz akışlarını [Önizleme özelliği](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)olarak desteklemektedir.
 
-[IOT Hub cihaz akışları](iot-hub-device-streams-overview.md) güvenli ve güvenlik duvarı uyumlu bir şekilde iletişim kurmak hizmet ve cihaz uygulamalarınıza izin verin. Genel Önizleme süresince C SDK'sı cihaz tarafında yalnızca cihaz akışlarını destekler. Sonuç olarak, bu hızlı başlangıçta yalnızca cihaz tarafı uygulamayı çalıştırmak için yönergeler içerir. Eşlik eden bir hizmet tarafı uygulamayı çalıştırmak için bkz:
- 
-   * [Cihaz uygulamaları kullanıcılara C# aracılığıyla IOT Hub cihaz akışları](./quickstart-device-streams-echo-csharp.md)
-   * [Node.js uygulamalarında cihaz IOT Hub cihaz akışları aracılığıyla iletişim kurar](./quickstart-device-streams-echo-nodejs.md)
+[Cihaz akışları IoT Hub](iot-hub-device-streams-overview.md) hizmet ve cihaz uygulamalarının güvenli ve güvenlik duvarı kolay bir şekilde iletişim kurmasına olanak tanır. Genel Önizleme sırasında, C SDK 'Sı cihaz akışlarını yalnızca cihaz tarafında destekler. Sonuç olarak, bu hızlı başlangıçta yalnızca cihaz tarafı uygulamasını çalıştırmaya yönelik yönergeler ele alınmaktadır. Karşılık gelen bir hizmet tarafı uygulamasını çalıştırmak için şu makalelere bakın:
 
-Bu hızlı başlangıçta cihaz tarafı C uygulamada aşağıdaki işlevlere sahiptir:
+* [IoT Hub cihaz akışları C# aracılığıyla cihaz uygulamalarıyla iletişim kurma](./quickstart-device-streams-echo-csharp.md)
 
-* Bir cihaz akışını bir IOT cihazına kurun.
-* Hizmet tarafı uygulama ve yankı geri gönderilen verileri alır.
+* [IoT Hub cihaz akışları aracılığıyla Node. js ' de cihaz uygulamalarıyla iletişim kurma](./quickstart-device-streams-echo-nodejs.md)
 
-Kod başlatma işlemi cihaz akışını yanı sıra, veri göndermek ve almak için nasıl kullanılacağını gösterir.
+Bu hızlı başlangıçta cihaz tarafı C uygulaması aşağıdaki işlevlere sahiptir:
+
+* IoT cihazında bir cihaz akışı oluşturun.
+
+* Hizmet tarafı uygulamasından gönderilen verileri alır ve geri yankılanır.
+
+Kod, bir cihaz akışının başlatma sürecini ve veri göndermek ve almak için nasıl kullanılacağını gösterir.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
@@ -40,55 +42,60 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Cihaz akışları önizlemesi, şu anda şu bölgelerde oluşturulan yalnızca IOT hub'ları için desteklenir:
+Aşağıdaki önkoşulların olması gerekir:
 
-  * Orta ABD
-  * Orta ABD EUAP
-
-* Yükleme [Visual Studio 2017](https://www.visualstudio.com/vs/) ile [ile masaüstü geliştirme C++ ](https://www.visualstudio.com/vs/support/selecting-workloads-visual-studio-2017/) iş yükünün etkinleştirilmiş.
+* [Visual Studio 2019](https://www.visualstudio.com/vs/) ' i, iş yükünün etkin  **C++ olduğu masaüstü geliştirmeyle** birlikte yükler.
 
 * En son [Git](https://git-scm.com/download/) sürümünü yükleyin.
 
-* Azure IOT uzantısı için Azure CLI Cloud Shell Örneğinize eklemek için aşağıdaki komutu çalıştırın. IOT Hub, IOT Edge ve IOT cihaz sağlama hizmeti (DPS) IOT uzantısını ekler-Azure CLI için özel komutları.
+* Azure CLı için Azure IoT uzantısını Cloud Shell örneğinize eklemek için aşağıdaki komutu çalıştırın. IOT uzantısı, Azure CLı için IoT Hub, IoT Edge ve IoT cihazı sağlama hizmeti 'ne (DPS) özgü komutlar ekler.
 
    ```azurecli-interactive
    az extension add --name azure-cli-iot-ext
    ```
 
+Cihaz akışlarının önizlemesi Şu anda yalnızca şu bölgelerde oluşturulan IoT Hub 'lar için desteklenmektedir:
+
+  * Orta ABD
+  * EUAP Orta ABD
+  * Kuzey Avrupa
+  * Güneydoğu Asya
+
 ## <a name="prepare-the-development-environment"></a>Geliştirme ortamını hazırlama
 
-Bu Hızlı Başlangıç için kullandığınız [C için Azure IOT cihaz SDK'sını](iot-hub-device-sdk-c-intro.md). Kopyalama ve oluşturmak için kullanılan bir geliştirme ortamı hazırlama [Azure IOT C SDK'sı](https://github.com/Azure/azure-iot-sdk-c) github'dan. GitHub üzerinde SDK'sı, bu hızlı başlangıçta kullanılan örnek kodu içerir.
+Bu hızlı başlangıç için, [C Için Azure IoT cihaz SDK 'sını](iot-hub-device-sdk-c-intro.md)kullanırsınız. GitHub 'dan [Azure IoT C SDK 'sını](https://github.com/Azure/azure-iot-sdk-c) klonlamak ve derlemek için kullanılan bir geliştirme ortamı hazırlarsınız. GitHub 'daki SDK, bu hızlı başlangıçta kullanılan örnek kodu içerir.
 
-1. İndirme [CMake derleme sistemini](https://cmake.org/download/).
+   > [!NOTE]
+   > Bu yordama başlamadan önce, Visual Studio 'nun iş yükü  **C++ ile masaüstü geliştirmeyle** birlikte yüklü olduğundan emin olun.
 
-    CMake yüklemesi başlamadan önce önemli olduğu, Visual Studio önkoşulları (Visual Studio ve *ile masaüstü geliştirme C++*  iş yükü), makinenizde yüklü. Önkoşulların yerinde olduğundan ve yüklemeyi doğruladıktan sonra CMake derleme sistemini yükleyebilirsiniz.
+1. Yükleme sayfasında açıklandığı gibi [CMake derleme sistemini](https://cmake.org/download/) yükleyin.
 
-2. Komut istemini veya Git Bash kabuğunu açın. Aşağıdaki komutu yürüterek [Azure IoT C SDK'sı](https://github.com/Azure/azure-iot-sdk-c) GitHub deposunu kopyalayın:
+1. Komut istemini veya Git Bash kabuğunu açın. [Azure IoT C SDK](https://github.com/Azure/azure-iot-sdk-c) GitHub deposunu kopyalamak için aşağıdaki komutu çalıştırın:
 
-    ```
+    ```cmd
     git clone https://github.com/Azure/azure-iot-sdk-c.git --recursive -b public-preview
     ```
 
     Bu işlem birkaç dakika sürer.
 
-3. Oluşturma bir *cmake* aşağıdaki komutta gösterildiği ve bu klasöre gidin, Git deposunun kök dizininde alt.
+1. Git deposunun kök dizininde aşağıdaki komutta gösterildiği gibi bir *CMake* dizini oluşturun ve ardından bu klasöre gidin.
 
-    ```
+    ```cmd
     cd azure-iot-sdk-c
     mkdir cmake
     cd cmake
     ```
 
-4. Aşağıdaki komutları çalıştırın *cmake* geliştirme istemci Platformunuza özgü SDK'sı sürümünü oluşturmak için dizin.
+1. Geliştirme istemci platformunuza özgü bir SDK sürümü oluşturmak için *CMake* dizininden aşağıdaki komutları çalıştırın.
 
-   * Linux'ta:
+   * Linux 'ta:
 
       ```bash
       cmake ..
       make -j
       ```
 
-   * Windows Visual Studio 2015 veya 2017 için geliştirici Komut İstemi'nde aşağıdaki komutları çalıştırın. Sanal cihaz için bir Visual Studio çözümü içinde oluşturulacağı *cmake* dizin.
+   * Windows 'ta, [Visual Studio için bir geliştirici komut istemi](/dotnet/framework/tools/developer-command-prompt-for-vs)açın. Visual Studio sürümünüz için komutunu çalıştırın. Bu hızlı başlangıçta Visual Studio 2019 kullanılır. Bu komutlar, *CMake* dizinindeki sanal cihaz Için bir Visual Studio çözümü oluşturur.
 
       ```cmd
       rem For VS2015
@@ -96,6 +103,9 @@ Bu Hızlı Başlangıç için kullandığınız [C için Azure IOT cihaz SDK'sı
 
       rem Or for VS2017
       cmake .. -G "Visual Studio 15 2017"
+
+      rem Or for VS2019
+      cmake .. -G "Visual Studio 16 2019"
 
       rem Then build the project
       cmake --build . -- /m /p:Configuration=Release
@@ -107,47 +117,47 @@ Bu Hızlı Başlangıç için kullandığınız [C için Azure IOT cihaz SDK'sı
 
 ## <a name="register-a-device"></a>Cihaz kaydetme
 
-Bağlanabilmesi için önce bir cihaz IOT hub'ınıza kaydetmeniz gerekir. Bu bölümde, Azure Cloud Shell ile kullandığınız [IOT uzantısı](https://docs.microsoft.com/cli/azure/ext/azure-cli-iot-ext/iot?view=azure-cli-latest) bir simülasyon cihazı kaydedeceksiniz.
+Bağlanabilmesi için IoT Hub 'ınız ile bir cihaz kaydetmeniz gerekir. Bu bölümde, sanal bir cihazı kaydetmek için [IoT uzantısıyla](https://docs.microsoft.com/cli/azure/ext/azure-cli-iot-ext/iot?view=azure-cli-latest) birlikte Azure Cloud Shell kullanırsınız.
 
-1. Cihaz kimliği oluşturma için Cloud Shell'de aşağıdaki komutu çalıştırın:
-
-   > [!NOTE]
-   > * Değiştirin *YourIoTHubName* yer tutucu IOT hub'ınız için seçtiğiniz ada sahip.
-   > * Kullanım *Cihazım*gösterildiği gibi. Kayıtlı cihaz için verilen addır. Cihazınız için farklı bir ad seçerseniz, bu makalenin tamamında bu adı kullanın ve bunları çalıştırmadan önce örnek uygulamalar, cihaz adını güncelleştirin.
-
-    ```azurecli-interactive
-    az iot hub device-identity create --hub-name YourIoTHubName --device-id MyDevice
-    ```
-
-2. Alınacak *cihaz bağlantı dizesini* yalnızca kayıtlı bir cihaz için Cloud Shell'de aşağıdaki komutları çalıştırın:
+1. Cihaz kimliğini oluşturmak için Cloud Shell ' de aşağıdaki komutu çalıştırın:
 
    > [!NOTE]
-   > Değiştirin *YourIoTHubName* yer tutucu IOT hub'ınız için seçtiğiniz ada sahip.
+   > * *Youriothubname* yer tutucusunu, IoT Hub 'ınız için seçtiğiniz adla değiştirin.
+   > * Kaydolduğunuz aygıtın adı için *mydevice* ' ın gösterildiği gibi kullanılması önerilir. Cihazınız için farklı bir ad seçerseniz bu adı bu makale boyunca kullanın ve uygulamayı çalıştırmadan önce örnek uygulamalarda cihaz adını güncelleştirin.
 
     ```azurecli-interactive
-    az iot hub device-identity show-connection-string --hub-name YourIoTHubName --device-id MyDevice --output table
+    az iot hub device-identity create --hub-name {YourIoTHubName} --device-id MyDevice
     ```
 
-    Bu hızlı başlangıçta daha sonra kullanmak için cihaz bağlantı dizesini not edin. Aşağıdaki örneğe benzer şekilde görünür:
+1. Yeni kaydettiğiniz cihazın *Cihaz bağlantı dizesini* almak için Cloud Shell ' de aşağıdaki komutu çalıştırın:
+
+   > [!NOTE]
+   > *Youriothubname* yer tutucusunu, IoT Hub 'ınız için seçtiğiniz adla değiştirin.
+
+    ```azurecli-interactive
+    az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyDevice --output table
+    ```
+
+    Bu hızlı başlangıçta kullanılmak üzere döndürülen cihaz bağlantı dizesini aklınızda edin. Aşağıdaki örneğe benzer şekilde görünür:
 
    `HostName={YourIoTHubName}.azure-devices.net;DeviceId=MyDevice;SharedAccessKey={YourSharedAccessKey}`
 
-## <a name="communicate-between-the-device-and-the-service-via-device-streams"></a>Cihaz ve cihaz akışları aracılığıyla hizmeti arasında iletişim
+## <a name="communicate-between-the-device-and-the-service-via-device-streams"></a>Cihaz akışları aracılığıyla cihaz ve hizmet arasında iletişim kurma
 
-Bu bölümde, hem cihaz tarafında uygulama hem de hizmet tarafı uygulamayı çalıştırın ve ikisi arasındaki iletişim.
+Bu bölümde hem cihaz tarafı uygulamasını hem de hizmet tarafı uygulamasını çalıştırırsınız ve iki arasında iletişim kurabilirsiniz.
 
-### <a name="run-the-device-side-application"></a>Aygıt tarafı uygulamayı çalıştırın
+### <a name="run-the-device-side-application"></a>Cihaz tarafı uygulamayı çalıştırma
 
-Aygıt tarafı uygulamayı çalıştırmak için aşağıdakileri yapın:
+Cihaz tarafı uygulamasını çalıştırmak için aşağıdaki adımları izleyin:
 
-1. Düzenleyerek cihaz kimlik bilgilerinizi sağlayın *iothub_client_c2d_streaming_sample.c* kaynak dosyada *iothub_client/samples/iothub_client_c2d_streaming_sample* klasörünü ve ardından sağlama cihaz bağlantı dizesi.
+1. `iothub_client/samples/iothub_client_c2d_streaming_sample` klasöründeki **iothub_client_c2d_streaming_sample. c** kaynak dosyasını düzenleyerek ve cihaz Bağlantı dizenizi ekleyerek cihaz kimlik bilgilerinizi sağlayın.
 
    ```C
    /* Paste in your iothub connection string  */
-   static const char* connectionString = "[device connection string]";
+   static const char* connectionString = "{DeviceConnectionString}";
    ```
 
-2. Kod şu şekilde derleyin:
+1. Aşağıdaki komutlarla kodu derleyin:
 
    ```bash
    # In Linux
@@ -161,7 +171,7 @@ Aygıt tarafı uygulamayı çalıştırmak için aşağıdakileri yapın:
    cmake --build . -- /m /p:Configuration=Release
    ```
 
-3. Derlenmiş bir program çalıştırın:
+1. Derlenen programı çalıştırın:
 
    ```bash
    # In Linux
@@ -175,12 +185,13 @@ Aygıt tarafı uygulamayı çalıştırmak için aşağıdakileri yapın:
    iothub_client_c2d_streaming_sample.exe
    ```
 
-### <a name="run-the-service-side-application"></a>Hizmet tarafı uygulamayı çalıştırın
+### <a name="run-the-service-side-application"></a>Hizmet tarafı uygulamasını çalıştırma
 
-Daha önce belirtildiği gibi IOT Hub C SDK'sı cihaz tarafında yalnızca cihaz akışlarını destekler. Hizmet tarafı uygulaması derleme ve çalıştırma için şu hızlı başlangıçlarda birindeki yönergeleri izleyin:
+Daha önce belirtildiği gibi, IoT Hub C SDK 'Sı yalnızca cihaz tarafında cihaz akışlarını destekler. Eşlik eden hizmet tarafı uygulamasını derlemek ve çalıştırmak için aşağıdaki hızlı başlangıçlardan birindeki yönergeleri izleyin:
 
-* [Bir cihaz uygulaması için iletişim C# aracılığıyla IOT Hub cihaz akışları](./quickstart-device-streams-echo-csharp.md)
-* [Node.js IOT Hub cihaz akışları aracılığıyla bir cihaz uygulaması için iletişim](./quickstart-device-streams-echo-nodejs.md)
+* [IoT Hub cihaz akışları C# aracılığıyla bir cihaz uygulamasıyla iletişim kurma](./quickstart-device-streams-echo-csharp.md)
+
+* [IoT Hub cihaz akışları aracılığıyla Node. js ' de bir cihaz uygulamasıyla iletişim kurma](./quickstart-device-streams-echo-nodejs.md)
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
@@ -188,9 +199,9 @@ Daha önce belirtildiği gibi IOT Hub C SDK'sı cihaz tarafında yalnızca cihaz
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, bir IOT hub'ı ayarladınız, kayıtlı bir cihaz, bir cihaz akışını cihaz üzerinde bir C uygulaması ve hizmet tarafında başka bir uygulama arasında kurulan ve akış uygulamaları arasında sürekli veri göndermek için kullanılan.
+Bu hızlı başlangıçta, bir IoT Hub 'ı ayarlarsınız, bir cihaz kaydettiniz, cihazdaki bir C uygulaması ve hizmet tarafındaki başka bir uygulama arasında bir cihaz akışı kurdu ve bu akışı, verileri uygulamalar arasında ileri ve geri göndermek için kullandınız.
 
-Cihaz akışları hakkında daha fazla bilgi için bkz:
+Cihaz akışları hakkında daha fazla bilgi edinmek için bkz.:
 
 > [!div class="nextstepaction"]
-> [Cihaz akışları genel bakış](./iot-hub-device-streams-overview.md)
+> [Cihaz akışlarına genel bakış](./iot-hub-device-streams-overview.md)

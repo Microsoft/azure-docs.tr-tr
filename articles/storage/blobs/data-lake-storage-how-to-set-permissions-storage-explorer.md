@@ -1,69 +1,68 @@
 ---
-title: Azure Depolama Gezgini ile Data Lake depolama Gen2 izinlerini ayarlama
-description: Bu nasıl için Azure Depolama Gezgini ile dosya ve dizinleri, Azure Data Lake depolama Gen2 özellikli depolama hesabı içinde izinler öğrenin.
-services: storage
+title: Azure Depolama Gezgini Data Lake Storage 2. için izinleri ayarlama
+description: Bu şekilde, Azure Data Lake Storage 2. özellikli depolama hesabınızın içindeki dosyalar ve dizinler üzerinde Azure Depolama Gezgini izinleri ayarlamayı öğreneceksiniz.
 author: normesta
-ms.custom: mvc
 ms.subservice: data-lake-storage-gen2
 ms.service: storage
 ms.topic: quickstart
 ms.date: 12/11/2018
 ms.author: normesta
-ms.openlocfilehash: 5f0211765c96cad668abaad7d42da87ec88298c3
-ms.sourcegitcommit: c53a800d6c2e5baad800c1247dce94bdbf2ad324
+ms.reviewer: stewu
+ms.openlocfilehash: 2cc93ad9ae1d9d6d21064a2a80c3d62bf661dabc
+ms.sourcegitcommit: 007ee4ac1c64810632754d9db2277663a138f9c4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/30/2019
-ms.locfileid: "64939320"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "69992289"
 ---
-# <a name="set-file-and-directory-level-permissions-using-azure-storage-explorer-with-azure-data-lake-storage-gen2"></a>Azure Data Lake depolama 2. nesil ile Azure Depolama Gezgini'ni kullanarak dosya ve dizin düzeyi izinleri ayarlayın
+# <a name="set-file-and-directory-level-permissions-using-azure-storage-explorer-with-azure-data-lake-storage-gen2"></a>Azure Data Lake Storage 2. ile Azure Depolama Gezgini kullanarak dosya ve Dizin düzeyi izinleri ayarlama
 
-Azure Data Lake depolama Gen2'içinde depolanan dosyaların hassas izinlere desteklemek ve erişim denetimi listesi (ACL) yönetimi. Birlikte ayrıntılı izinler ve ACL yönetimi, çok ayrıntılı bir düzeyde verilerinize erişimini yönetmenizi sağlar.
+Azure Data Lake Storage 2. depolanan dosyalar ayrıntılı izinleri ve erişim denetimi listesi (ACL) yönetimini destekler. Ayrıntılı izinler ve ACL Yönetimi birlikte, verilerinize erişimi çok ayrıntılı bir düzeyde yönetmenizi sağlar.
 
-Bu makalede, Azure Depolama Gezgini'ni kullanarak öğreneceksiniz:
+Bu makalede Azure Depolama Gezgini için kullanmayı öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Dosya düzeyinde izinler ayarlayın
-> * Dizin düzeyi izinlerini ayarlayın
-> * Kullanıcıları veya grupları bir erişim denetim listesine ekleyin.
+> * Dosya düzeyi izinlerini ayarla
+> * Dizin düzeyindeki izinleri ayarla
+> * Erişim denetim listesine kullanıcı veya grup ekleme
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-İşlemi en iyi tarif için tamamlamanız gerekiyor bizim [Azure Depolama Gezgini hızlı](data-lake-storage-Explorer.md). Bu, depolama hesabınız (dosya sistemi oluşturulan ve için karşıya veri) en uygun durumda olacak sağlar.
+İşlemin en iyi şekilde belirtilmesini sağlamak için [Azure Depolama Gezgini hızlı](data-lake-storage-Explorer.md)başlangıçmızı tamamlamanızı istiyoruz. Bu, depolama hesabınızın en uygun durumda (kapsayıcı oluşturulmuş ve karşıya yüklenen veriler) yer almasını sağlar.
 
 ## <a name="managing-access"></a>Erişimi yönetme
 
-Dosya sisteminizi kökünde izinleri ayarlayabilirsiniz. Bunu yapmak için Azure depolama Gezgini'ne (ile bir bağlantı dizesi olarak) bunu haklarıyla bireysel hesabınızla oturum açmış olmanız gerekir. Dosya sisteminizi sağ tıklayıp **yönetme izinleri**, yedekleme yapmak **Manage Permission** iletişim kutusu.
+Kapsayıcının kökündeki izinleri ayarlayabilirsiniz. Bunu yapmak için, tek yapmanız gereken haklara sahip Azure Depolama Gezgini oturum açmanız gerekir (bağlantı dizesi ile aksine). Kapsayıcıya sağ tıklayın ve Izinleri Yönet iletişim kutusunu getirerek **Izinleri Yönet**' i seçin.
 
-![Microsoft Azure Depolama Gezgini - dizin erişimi yönetme](media/storage-quickstart-blobs-storage-Explorer/manageperms.png)
+![Microsoft Azure Depolama Gezgini-dizin erişimini yönetme](media/storage-quickstart-blobs-storage-Explorer/manageperms.png)
 
-**Manage Permission** iletişim kutusu sahibi ve sahipleri grup için izinleri yönetmenize olanak tanır. Ayrıca yeni kullanıcılar ve gruplar için daha sonra izinleri yönetebilirsiniz erişim denetim listesine eklemenize olanak sağlar.
+**Izni Yönet** iletişim kutusu, sahip ve sahipler grubu için izinleri yönetmenizi sağlar. Ayrıca, izinleri yönetebilmeniz için erişim denetim listesine yeni kullanıcılar ve gruplar eklemenize olanak tanır.
 
-Erişim denetim listesine yeni bir kullanıcı veya grup eklemek için seçin **kullanıcı veya Grup Ekle** alan.
+Erişim denetim listesine yeni bir kullanıcı veya grup eklemek için **Kullanıcı veya Grup Ekle** alanını seçin.
 
-Listeye ekleyin ve ardından istediğiniz ilgili Azure Active Directory (AAD) girişi girin **Ekle**.
+Listeye eklemek istediğiniz karşılık gelen Azure Active Directory (AAD) girişini girin ve **Ekle**' yi seçin.
 
-Kullanıcı veya grup artık görünür **kullanıcılar ve gruplar:** alanı izinlerini yönetmeye başlamak etmenize imkan sağlar.
+Kullanıcı veya grup artık **Kullanıcılar ve gruplar:** alanında görünür ve bu da izinlerini yönetmeye başlamanızı sağlar.
 
 > [!NOTE]
-> En iyi bir uygulamadır ve AAD içinde bir güvenlik grubu oluşturun ve bireysel kullanıcılar yerine grup izinleri korumak için önerilir. Bu öneri yanı sıra, diğer en iyi yöntemler hakkında daha fazla bilgi için bkz: [en iyi uygulamalar için Data Lake depolama Gen2](data-lake-storage-best-practices.md).
+> AAD 'de bir güvenlik grubu oluşturmak ve tek kullanıcılar yerine grupta izinleri sürdürmek için en iyi uygulamadır ve önerilir. Bu öneriye ilişkin ayrıntılar ve diğer en iyi uygulamalar için bkz. [Data Lake Storage 2. için en iyi uygulamalar](data-lake-storage-best-practices.md).
 
-İzinleri atayabilirsiniz iki kategorisi vardır: erişim ACL'leri ve varsayılan ACL.
+Atayabileceğiniz iki izin kategorisi vardır: erişim ACL 'Leri ve varsayılan ACL 'Ler.
 
-* **Erişim**: Erişim ACL'leri bir nesneye erişimi denetler. Dosyalar ve dizinler erişim ACL'leri vardır.
+* **Erişim**: ACL denetim erişimi bir nesneye erişin. Dosya ve dizinlerin her ikisi de erişim ACL 'Lerine sahiptir.
 
-* **Varsayılan**: Bu dizin altında oluşturulan tüm alt öğelere ilişkin erişim ACL'lerini belirleyen bir dizin ile ilişkili ACL'leri şablonu. Dosyaları varsayılan ACL'ye sahip değildir.
+* **Varsayılan**: Bu dizin altında oluşturulan tüm alt öğelere ilişkin erişim ACL 'Lerini belirleyen bir dizinle ilişkili ACL 'lerin bir şablonu. Dosyaların varsayılan ACL 'Leri yok.
 
-İçinde her ikisi de bu kategorilerin dosyaları veya dizinleri ardından atayabilirsiniz üç izinleri vardır: **Okuma**, **yazma**, ve **yürütme**.
+Bu kategorilerin her ikisinde de, dosyalara veya dizinlere atayabileceğiniz üç izin vardır: **Okuma**, **yazma**ve **yürütme**.
 
 >[!NOTE]
-> Burada seçim yapmayı izinleri dizini içinde şu anda var olan herhangi bir öğeyi ayarlamaz. Tek tek her öğesine gidin ve bir dosya zaten mevcutsa izinleri el ile ayarlamanız gerekir.
+> Burada seçimler yapıldığında, dizin içindeki mevcut olan herhangi bir öğe için izinler ayarlanmamaktadır. Dosya zaten varsa, her bir öğeye gitmeniz ve izinleri el ile ayarlamanız gerekir.
 
-Ayrıntılı erişim denetimi sağlar tek tek dosyaların yanı sıra bireysel dizin izinlerini yönetebilir. Hem dizinler ve dosyalar için izinleri yönetme işlemi yukarıda açıklanan ile aynıdır. Aynı süreci izleyin ve üzerinde izinleri yönetmek istediğiniz dosya veya dizin sağ tıklayın.
+Tek tek dizinlerde ve tek tek dosyalar üzerinde izinleri yönetebilir, bu da size daha iyi erişim denetimi sağlar. Her iki dizin ve dosya için izinleri yönetme işlemi yukarıda açıklanan şekilde aynıdır. İzinlerini yönetmek istediğiniz dosya veya dizine sağ tıklayın ve aynı süreci izleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu nasıl yapılır makalesinde izinler dosyaları ve dizinleri kullanma işleminin nasıl yapılacağını öğrendiniz **Azure Depolama Gezgini**. Varsayılan ACL'ler dahil olmak üzere, ACL'ler hakkında daha fazla bilgi edinmek, ACL'ler, davranışları ve karşılık gelen izinlerini erişim, konu hakkında kavramsal makalemize devam için.
+Bu nasıl yapılır, **Azure Depolama Gezgini**kullanarak dosya ve dizinlerde izinlerin nasıl ayarlanacağını öğrendiniz. Varsayılan ACL 'ler, erişim ACL 'Leri, davranışları ve bunlara karşılık gelen izinler dahil olmak üzere ACL 'Ler hakkında daha fazla bilgi edinmek için konu üzerinde kavramsal makalemize devam edin.
 
 > [!div class="nextstepaction"]
 > [Azure Data Lake Storage 2. Nesil'de Erişim Denetimi](data-lake-storage-access-control.md)

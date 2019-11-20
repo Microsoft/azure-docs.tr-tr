@@ -1,21 +1,16 @@
 ---
-title: Uyumlu olmayan kaynaklar için bir ilke oluşturun
+title: Portal ile kaynakları denetlemek için ilke oluşturma
 description: Bu makalede, uyumlu olmayan kaynakları belirlemek üzere bir ilke tanımı oluşturma adımlarında size yol gösterilir.
-author: DCtheGeek
-ms.author: dacoulte
 ms.date: 12/06/2018
 ms.topic: quickstart
-ms.service: azure-policy
-manager: carmonm
-ms.custom: seodec18
-ms.openlocfilehash: 291152b46f97c9b6dd10b67c7ce812fcc791ce09
-ms.sourcegitcommit: 59fd8dc19fab17e846db5b9e262a25e1530e96f3
+ms.openlocfilehash: ef89ea43ff3179877c0ac636083ed68946b6cc91
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65979600"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74128921"
 ---
-# <a name="quickstart-create-a-policy-assignment-to-identify-non-compliant-resources"></a>Hızlı Başlangıç: Uyumlu olmayan kaynakları belirlemek üzere bir ilke ataması oluşturma
+# <a name="quickstart-create-a-policy-assignment-to-identify-non-compliant-resources"></a>Hızlı başlangıç: uyumlu olmayan kaynakları belirlemek için bir ilke ataması oluşturma
 
 Azure’da uyumluluğu anlamanın ilk adımı, kaynaklarınızın durumunu belirlemektir.
 Bu hızlı başlangıç, yönetilen disk kullanmayan sanal makineleri belirlemek üzere ilke ataması oluşturma işleminde size yol gösterir.
@@ -30,11 +25,11 @@ Bu hızlı başlangıçta, bir ilke ataması oluşturma ve atama *denetim yönet
 
 1. Azure portalında **Tüm hizmetler**’e tıkladıktan sonra **İlke**'yi arayıp seçerek Azure İlkesi hizmetini başlatın.
 
-   ![Tüm hizmetler ilkesinde arayın](./media/assign-policy-portal/search-policy.png)
+   ![Tüm hizmetlerde Ilke ara](./media/assign-policy-portal/search-policy.png)
 
 1. Azure İlkesi sayfasının sol tarafından **Atamalar**'ı seçin. Atama, belirli bir kapsamda gerçekleşmesi için atanmış olan bir ilkedir.
 
-   ![İlkeye genel bakış sayfasından atamaları sayfa seçin](./media/assign-policy-portal/select-assignments.png)
+   ![Ilkeye genel bakış sayfasından atamaları seçin sayfası](./media/assign-policy-portal/select-assignments.png)
 
 1. **İlke - Atamalar** sayfasının üst kısmından **İlke Ata**'yı seçin.
 
@@ -52,7 +47,7 @@ Bu hızlı başlangıçta, bir ilke ataması oluşturma ve atama *denetim yönet
    - Etiketi ve değerini uygula
    - SQL Server sürüm 12.0 gerektir
 
-   Kullanılabilir yerleşik ilkeler kısmi bir listesi için bkz. [Azure ilkesi örnekleri](./samples/index.md).
+   Kullanılabilir yerleşik ilkelerin kısmi listesi için bkz. [Azure ilke örnekleri](./samples/index.md).
 
 1. İlke tanımları listenizde *Yönetilen disk kullanmayan VM'leri denetle* tanımını arayın. Bu ilkeye tıklayın ve **Seç**'e tıklayın.
 
@@ -65,17 +60,17 @@ Bu hızlı başlangıçta, bir ilke ataması oluşturma ve atama *denetim yönet
 
 1. **Ata**'ya tıklayın.
 
-Artık ortamınızın uyumluluk durumunu anlamak için uyumlu olmayan kaynakları belirlemeye hazırsınız.
+Artık ortamınızın uyumluluk durumunu anlamak için uyumlu olmayan kaynakları belirlemek için hazırsınız demektir.
 
 ## <a name="identify-non-compliant-resources"></a>Uyumlu olmayan kaynakları belirleme
 
 Seçin **Uyumluluk** sayfanın sol tarafındaki. Ardından bulun **denetim yönetilen diskleri kullanmayan Vm'leri** oluşturduğunuz ilke ataması.
 
-![İlke uyumluluğunu sayfasında uyumluluk ayrıntıları](./media/assign-policy-portal/policy-compliance.png)
+![Ilke uyumluluk sayfasındaki uyumluluk ayrıntıları](./media/assign-policy-portal/policy-compliance.png)
 
 Bu yeni atamayla uyumlu olmayan mevcut kaynaklar varsa, altında görünür **uyumlu olmayan kaynaklar**.
 
-Bir koşul mevcut kaynaklarınıza göre değerlendirilip true sonucunu verdiğinde, bu kaynaklar ilkeyle uyumlu değil olarak işaretlenir. Aşağıdaki tabloda, elde edilen uyumluluk durumu için farklı ilke etkilerinin koşul değerlendirmesi ile nasıl çalıştığı gösterilmektedir. Azure portalında değerlendirme mantığı görünmese de, uyumluluk durumu sonuçları gösterilir. Uyumluluk durumu sonucu uyumlu veya uyumsuz şeklindedir.
+Bir koşul mevcut kaynaklarınıza göre değerlendirilip true sonucunu verdiğinde, bu kaynaklar ilkeyle uyumlu değil olarak işaretlenir. Aşağıdaki tabloda, elde edilen uyumluluk durumu için farklı ilke etkilerinin koşul değerlendirmesi ile nasıl çalıştığı gösterilmektedir. Azure portal değerlendirme mantığını görmeseniz de, uyumluluk durumu sonuçları gösterilir. Uyumluluk durumu sonucu uyumlu veya uyumsuz şeklindedir.
 
 | **Kaynak Durumu** | **Etki** | **İlke Değerlendirmesi** | **Uyumluluk Durumu** |
 | --- | --- | --- | --- |
@@ -95,7 +90,7 @@ Oluşturduğunuz atamayı kaldırmak için aşağıdaki adımları izleyin:
 
 1. **Yönetilen disk kullanmayan VM'leri denetle** ilke atamasına sağ tıklayıp **Atamayı sil**’i seçin
 
-   ![Atama uyumluluk sayfasından Sil](./media/assign-policy-portal/delete-assignment.png)
+   ![Uyumluluk sayfasından bir atamayı silme](./media/assign-policy-portal/delete-assignment.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,6 +1,6 @@
 ---
-title: Sınırlamalar ve bilinen sorunların Azure API Management API içeri aktarma | Microsoft Docs
-description: Bilinen sorunlar ve kısıtlamalar açık API, WSDL veya WADL biçimleri kullanarak Azure API Management içe ayrıntıları.
+title: Azure API Management API içeri aktarma 'da kısıtlamalar ve bilinen sorunlar | Microsoft Docs
+description: Open API, WSDL veya WADL biçimlerini kullanarak Azure API Management içeri aktarma ile ilgili bilinen sorunların ve kısıtlamaların ayrıntıları.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -10,61 +10,61 @@ ms.assetid: 7a5a63f0-3e72-49d3-a28c-1bb23ab495e2
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 06/26/2019
-ms.author: apipm
-ms.openlocfilehash: 7f7c37843ccaf78c7b7e6ec7a959106df45053d6
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.date: 11/06/2019
+ms.author: apimpm
+ms.openlocfilehash: 88ef235d47a548ce426eaa2e8a8a56fb9dcb01d2
+ms.sourcegitcommit: 018e3b40e212915ed7a77258ac2a8e3a660aaef8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67461619"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73796028"
 ---
 # <a name="api-import-restrictions-and-known-issues"></a>API içeri aktarma kısıtlamaları ve bilinen sorunlar
 
 ## <a name="about-this-list"></a>Bu liste hakkında
 
-API içeri aktarılırken arasında bazı kısıtlamalar gelen veya başarıyla içeri aktarmadan önce düzeltilmesi gereken sorunları belirlemek. Bu makalede belgeleri bunlar düzenlenmiş tarafından API içeri aktarma biçimi.
+Bir API 'yi içeri aktarırken, bazı kısıtlamalardan gelebilir veya başarıyla içeri aktarabilmek için düzeltilmesi gereken sorunları belirleyebilirsiniz. Bu makale, API 'nin içe aktarma biçimine göre düzenlenmiş şekilde bunları belgeler.
 
 ## <a name="open-api"> </a>Openapı/Swagger
 
-Openapı belgenizi alma hataları almaya önceden doğruladınız emin olun. Her iki Tasarımcı (Tasarım - ön uç - Openapı belirtimi Düzenleyicisi) Azure portalında veya üçüncü taraf aracı gibi kullanarak bunu yapabilirsiniz <a href="https://editor.swagger.io">Swagger Editor</a>.
+Openapı belgenizi içeri aktarırken hata alıyorsanız, önceden doğruladığınızdan emin olun. Tasarımcı 'yı Azure portal (Design-Front End-Openapı belirtim Editor) veya <a href="https://editor.swagger.io">Swagger Düzenleyicisi</a>gibi bir üçüncü taraf aracıyla kullanabilirsiniz.
 
 ### <a name="open-api-general"> </a>Genel
 
--   Gerekli parametreleri yolu hem de sorgu genelinde benzersiz adlara sahip olmalıdır. (Openapı bir parametre adı yalnızca içinde örneğin yol, sorgu, üst bilgisi bir konumu benzersiz olması gerekir. Ancak, API Yönetimi'nde (Bu, Openapı desteklemeyen) yolu hem de sorgu parametreleri tarafından ayrılmış işlemleri izin veriyoruz. That's neden parametre adları tüm URL şablonu içinde benzersiz olması zorunlu kılarız.)
--   **\$Ref** işaretçileri, harici dosyalara başvuruda bulunamaz.
--   **x-ms-yolları** ve **x sunucuları** uzantıları yalnızca desteklenir.
--   Özel uzantılar içeri aktarma işlemi sırasında yok sayılır ve olmayan kaydedilmiş veya de dışarı aktarma için korunur.
--   **Özyineleme** -API Management, tanımlanan tanımları yinelemeli olarak (örneğin, kendilerini kaynağa başvuran şemaları) desteklemez.
--   Kaynak dosya URL'si (varsa) için göreli sunucu URL'leri uygulanır.
+-   Hem yol hem de sorgu üzerinde gerekli parametreler benzersiz adlara sahip olmalıdır. (Openapı 'de bir parametre adının yalnızca bir konum içinde benzersiz olması gerekir, örneğin yol, sorgu, üstbilgi. Ancak API Management ' de, işlemlerin hem yol hem de sorgu parametrelerine göre ayırt edilebilir (Openapı 'Yi desteklemez). Bu nedenle, tüm URL şablonu içinde parametre adlarının benzersiz olması gerekir.)
+-   **\$başvuru** işaretçileri dış dosyalara başvuramaz.
+-   **x-MS-Paths** ve **x-Servers** desteklenen tek uzantılardır.
+-   Özel uzantılar İçeri aktarmada yok sayılır ve dışarı aktarma için kaydedilmez veya korunmaz.
+-   **Özyineleme** -API Management özyinelemeli olarak tanımlanan tanımları desteklemez (örneğin, kendilerine başvuran şemalar).
+-   Kaynak dosya URL 'SI (varsa) göreli sunucu URL 'Lerine uygulanır.
+-   Güvenlik tanımları yok sayılır.
+-   API işlemleri için satır içi şema tanımları desteklenmez. Şema tanımları API kapsamında tanımlanır ve API işlemleri isteği veya Yanıt kapsamları içinde başvurulabilir.
+-   Tanımlı URL parametresinin URL şablonunun bir parçası olması gerekir.
+-   Bir API tarafından döndürülen MIME türlerini **açıklayan anahtar sözcük** , desteklenmez. 
 
 ### <a name="open-api-v2"> </a>Openapı sürüm 2
 
--   Yalnızca JSON biçimi desteklenmiyor.
+-   Yalnızca JSON biçimi destekleniyor.
 
 ### <a name="open-api-v3"> </a>Openapı sürüm 3
 
--   Çok sayıda varsa **sunucuları** belirtilirse, API Management, ilk HTTPs URL'sini seçmek çalışır. -İlk HTTP URL'si HTTPs URL'leri değilseniz. HTTP URL'leri - değilse sunucu URL'si boş olur.
--   **Örnekler** desteklenmez, ancak **örnek** olduğu.
--   **Multipart/form-data** desteklenmiyor.
-
-> [!IMPORTANT]
-> OpenAPI içeri aktarma ile ilgili önemli bilgiler ve ipuçları için bu [belgeye](https://blogs.msdn.microsoft.com/apimanagement/2018/04/11/important-changes-to-openapi-import-and-export/) bakın.
+-   Çok sayıda **sunucu** belirtilmişse, API Management ilk https URL 'sini seçmeyi deneyecek. Herhangi bir HTTPs URL 'si yoksa, ilk HTTP URL 'si. HTTP URL 'Leri yoksa, sunucu URL 'SI boş olur.
+-   **Örnekler** desteklenmez, ancak **örnek** .
+-   **Multipart/form verileri** desteklenmez.
 
 ## <a name="wsdl"> </a>WSDL
 
-WSDL dosyaları SOAP geçişi ve SOAP ve REST API'leri oluşturmak için kullanılır.
+WSDL dosyaları SOAP geçişli ve SOAP--REST API 'Leri oluşturmak için kullanılır.
 
--   **SOAP bağlamaları** -style "belgesi" ve "değişmez" kodlama yalnızca SOAP bağlamaları desteklenir. "Rpc" stil veya SOAP kodlamasına için desteği yoktur.
--   **WSDL: import** -bu özniteliği desteklenmiyor. Müşteriler, bir belgeye Imports birleştirmeniz gerekir.
--   **Birden çok bölümü olan iletiler** -bu tür iletileri desteklenmez.
--   **WCF wsHttpBinding** -Windows Communication Foundation ile oluşturulan SOAP Hizmetleri basicHttpBinding kullanması gereken - wsHttpBinding desteklenmez.
--   **MTOM** - MTOM kullanan hizmetler <em>olabilir</em> çalışır. Resmi destek şu anda sunulan değil.
--   **Özyineleme** -türlere yinelemeli olarak tanımlanan (örneğin, bir dizi kendileri için bakın) APIM tarafından desteklenmez.
--   **Birden çok ad** - birden çok ad şemada kullanılabilir, ancak yalnızca hedef ad alanı, ileti bölümlerini tanımlamak için kullanılabilir. Giriş veya çıkış diğer öğeleri tanımlamak için kullanılan ad alanları hedefinden korunmaz. Böyle bir WSDL belgesi aktarılabilen olsa da, dışarı aktarma üzerinde tüm ileti bölümleri WSDL hedef ad alanı olacaktır.
--   **Diziler** - SOAP ve REST örnekte gösterilen dizileri yalnızca sarmalanmış destekler dönüştürme:
+-   **SOAP bağlamaları** -yalnızca "Document" ve "literal" kodlamasının SOAP bağlamaları desteklenir. "RPC" stili veya SOAP kodlaması desteği yoktur.
+-   **Wsdl: Import** -bu öznitelik desteklenmiyor. Müşteriler içeri aktarmaları tek bir belgede birleştirmelidir.
+-   **Birden çok parçaya sahip iletiler** -bu tür iletiler desteklenmez.
+-   **WCF WSHttpBinding** -Windows Communication Foundation ile oluşturulan soap hizmetleri, BasicHttpBinding-WSHttpBinding kullanmalıdır.
+-   **MTOM** -MTOM kullanan hizmetler işe <em>başlayabilir</em> . Resmi destek şu anda sunulmamaktadır.
+-   Yinelemeli olarak tanımlanan **özyineleme** türleri (örneğin, kendi dizisine başvuru) APIM tarafından desteklenmez.
+-   **Birden çok ad** alanı-bir şemada birden fazla ad alanı kullanılabilir, ancak ileti parçalarını tanımlamak için yalnızca hedef ad alanı kullanılabilir. Diğer giriş veya çıkış öğelerini tanımlamak için kullanılan hedeften farklı ad alanları korunmaz. Bu tür bir WSDL belgesi içeri aktarılabilse de, tüm ileti bölümlerinin dışarı aktarılması için WSDL 'nin hedef ad alanı olacaktır.
+-   **Diziler** -SOAP-Rest dönüşümü, yalnızca aşağıdaki örnekte gösterilen sarmalanmış dizileri destekler:
 
 ```xml
     <complexType name="arrayTypeName">
@@ -81,6 +81,6 @@ WSDL dosyaları SOAP geçişi ve SOAP ve REST API'leri oluşturmak için kullan�
     </complexType>
 ```
 
-## <a name="wadl"> </a>WADL
+## <a name="wadl"> </a>Wadl
 
-Şu anda bilinen WADL alma herhangi bir sorun vardır.
+Şu anda bilinen bir WADL içeri aktarma sorunu yok.

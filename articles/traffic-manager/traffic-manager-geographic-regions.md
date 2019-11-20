@@ -1,6 +1,6 @@
 ---
-title: Azure Traffic Manager coğrafi yönlendirme türü tarafından kullanılan ülke/bölge hiyerarşisi | Microsoft Docs
-description: Bu makalede, Azure Traffic Manager coğrafi yönlendirme türü tarafından kullanılan ülke/bölge hiyerarşisi listelenir.
+title: Coğrafi yönlendirme-Azure Traffic Manager tarafından kullanılan ülke/bölge hiyerarşisi
+description: Bu makalede Azure Traffic Manager coğrafi yönlendirme türü tarafından kullanılan ülke/bölge hiyerarşisi listelenmiştir
 services: traffic-manager
 documentationcenter: ''
 author: asudbring
@@ -12,233 +12,233 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/22/2017
 ms.author: allensu
-ms.openlocfilehash: d16529e966fb2e16d1012f4aa0aafcff204a3093
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 13f4101c17d78a59e8cde724863d237ba888e6a4
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67071177"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037199"
 ---
-# <a name="countryregion-hierarchy-used-by-azure-traffic-manager-for-geographic-traffic-routing-method"></a>Coğrafi trafik yönlendirme yöntemi için Azure Traffic Manager tarafından kullanılan ülke/bölge hiyerarşisi
+# <a name="countryregion-hierarchy-used-by-azure-traffic-manager-for-geographic-traffic-routing-method"></a>Azure Traffic Manager coğrafi trafik yönlendirme yöntemi için kullanılan ülke/bölge hiyerarşisi
 
-Bu makalede, ülke ve bölge tarafından kullanılan listeler **Geographic** trafiği yönlendirme yöntemini Azure Traffic Manager. Siz de bu bilgileri programlı olarak çağırarak elde edebileceğiniz [Azure Traffic Manager'ın REST API](https://docs.microsoft.com/rest/api/trafficmanager/). 
+Bu makalede, Azure Traffic Manager **coğrafi** trafik yönlendirme yöntemi tarafından kullanılan ülkeler ve bölgeler listelenmektedir. Ayrıca, bu bilgileri [Azure Traffic Manager REST API](https://docs.microsoft.com/rest/api/trafficmanager/)çağırarak programlı bir şekilde edinebilirsiniz. 
 
-- WORLD(World)
+- Dünya (Dünya)
 
-    - GEO-EU(Europe)
+    - COĞRAFI-AB (Avrupa)
 
-        - AD(Andorra)
+        - AD (Andora)
 
-        - Al(Albania)
+        - AL (Arnavutluk)
 
-        - AT(Austria)
+        - AT (Avusturya)
 
-        - AX (Aland Adaları)
+        - AX (KS Adaları)
 
         - BA (Bosna-Hersek)
 
-        - BE(Belgium)
+        - (Belçika)
 
-        - BG(Bulgaria)
+        - BG (Bulgaristan)
 
-        - BY(Belarus)
+        - (Belarus)
 
-        - CH(Switzerland)
+        - CH (Isviçre)
 
-        - CY(Cyprus)
+        - CY (Kıbrıs)
 
         - CZ (Çek Cumhuriyeti)
 
-        - DE(Germany)
+        - DE (Almanya)
 
-        - DK(Denmark)
+        - DK (Danimarka)
 
-        - EE(Estonia)
+        - EE (Estonya)
 
-        - ES(Spain)
+        - ES (Ispanya)
 
-        - FI(Finland)
+        - FI (Finlandiya)
 
         - FO (Faroe Adaları)
 
-        - FR(France)
+        - FR (Fransa)
 
         - GB (Birleşik Krallık)
 
-        - GG(Guernsey)
+        - GG (Guernsey)
 
-        - GI(Gibraltar)
+        - GI (Gibraltar)
 
-        - Gr(Greece)
+        - GR (Yunanistan)
 
-        - HR(Croatia)
+        - HR (Hırvatistan)
 
-        - HU(Hungary)
+        - HU (Macaristan)
 
-        - IE(Ireland)
+        - IE (Irlanda)
 
-        - Anlık ileti (Man Adası)
+        - Im (Man Adası)
 
-        - Is(Iceland)
+        - (Izlanda)
 
-        - IT(Italy)
+        - BT (Italya)
 
-        - JE(Jersey)
+        - JE (Jersey)
 
-        - LI(Liechtenstein)
+        - LI (Liechtenstein)
 
-        - LT(Lithuania)
+        - LT (Litvanya)
 
-        - LU(Luxembourg)
+        - LU (Lüksemburg)
 
-        - LV(Latvia)
+        - LV (Letonya)
 
-        - MC(Monaco)
+        - MC (Monako)
 
-        - MD(Moldova)
+        - MD (Moldova)
 
-        - ME(Montenegro)
+        - Ben (Karadağ)
 
         - MK (Kuzey Makedonya)
 
-        - MT(Malta)
+        - MT (Malta)
 
-        - NL(Netherlands)
+        - NL (Hollanda)
 
-        - No(Norway)
+        - Hayır (Norveç)
 
-        - PL(Poland)
+        - PL (Polonya)
 
-        - PT(Portugal)
+        - PT (Portekiz)
 
-        - Ro(Romania)
+        - RO (Romanya)
 
-        - RS(Serbia)
+        - RS (Sırbistan)
 
-        - RU(Russia)
+        - RU (Rusya)
 
-        - SE(Sweden)
+        - S (Isveç)
 
-        - SI(Slovenia)
+        - SI (Slovenya)
 
-        - SJ(Svalbard)
+        - SJ (Svalbard)
 
-        - SK(Slovakia)
+        - SK (Slovakya)
 
         - SM (San Marino)
 
-        - UA(Ukraine)
+        - UA (Ukrayna)
             - Crimea bölgesi
 
         - VA (Vatikan)
 
         - XJ (Jan Mayen)
 
-        - XK(Kosovo)
+        - XK (Kosova)
 
-    - Coğrafi ME(Middle East)
+    - COĞRAFI-ME (Orta Doğu)
 
         - AE (Birleşik Arap Emirlikleri)
 
-        - BH(Bahrain)
+        - BH (Bahreyn)
 
-        - IL(Israel)
+        - Il (Israil)
 
-        - IQ(Iraq)
+        - IQ (Irak)
 
-        - IR(Iran)
+        - IR (Iran)
 
-        - Jo(Jordan)
+        - JO (Ürdün)
 
-        - KW(Kuwait)
+        - KW (Kuveyt)
 
-        - LB(Lebanon)
+        - LB (Lübnan)
 
-        - OM(Oman)
+        - OM (Umman)
 
-        - PS (Filistin)
+        - PS (Filistin Devleti)
 
-        - QA(Qatar)
+        - QA (Qtor)
 
-        - SY(Syria)
+        - SY (Suriye)
 
         - SA (Suudi Arabistan)
 
-        - TR(Turkey)
+        - TR (Türkiye)
 
-        - YE(Yemen)
+        - YE (Yemen)
 
-    - Coğrafi NA(North America / Central America / Caribbean)
+    - Coğrafi bölge (Kuzey Amerika/Orta Amerika/Karayipler)
 
         - AG (Antigua ve Barbuda)
 
-        - AI(Anguilla)
+        - AI (Anguilla)
 
-        - AW(Aruba)
+        - AW (Aruba)
 
-        - BB(Barbados)
+        - BB (Barbados)
 
-        - BL (Saint Barthélemy)
+        - BL (Saint Barthétamy)
 
-        - BM(Bermuda)
+        - BM (Bermuda)
 
-        - BQ(Bonaire)
+        - BQ (Bonaire)
 
-        - BS(Bahamas)
+        - BS (Bahamalar)
 
-        - BZ(Belize)
+        - BZ (Belize)
 
-        - CA(Canada)
+        - CA (Kanada)
 
-            - CA-AB(Alberta)
+            - CA-AB (Alberta)
 
-            - CA BC(British Columbia)
+            - CA-BC (Ingiliz Kolumbiyası)
 
-            - CA-MB(Manitoba)
+            - CA-MB (Manitoba)
 
-            - CA NB(New Brunswick)
+            - CA-NB (Yeni Brunswick)
 
-            - CA NL(Newfoundland and Labrador)
+            - CA-NL (Newfoundland ve Labrador)
 
-            - CA-NS(Nova Scotia)
+            - CA-NS (numan)
 
-            - CA NT(Northwest Territories)
+            - CA-NT (Kuzeybatı Toprakları)
 
-            - CA-nu(Nunavut)
+            - CA-NU (Nunavut)
 
-            - CA-on(Ontario)
+            - CA-açık (Ontario)
 
-            - CA-PE(Prince Edward Island)
+            - CA-PE (Prince Edward Adası)
 
-            - CA-QC(Québec)
+            - CA-QC (Québec)
 
-            - CA-SK(Saskatchewan)
+            - CA-SK (Saskatchewan)
 
-            - CA YT(Yukon Territory)
+            - CA-YT (Yukon toprakları)
 
         - CR (Kosta Rika)
 
-        - Cu(Cuba)
+        - CU (Küa)
 
-        - CW(CuraÃ§ao)
+        - FA (CuraÃ § Ao)
 
-        - DM(Dominica)
+        - DM (Dominika)
 
-        - (Dominik Cumhuriyeti)
+        - DO (Dominik Cumhuriyeti)
 
-        - GD(Grenada)
+        - GD (Grenada)
 
-        - GL(Greenland)
+        - GL (Grönland)
 
-        - GP(Guadeloupe)
+        - GP (Guadeloupe)
 
-        - GT(Guatemala)
+        - GT (Guatemala)
 
-        - HN(Honduras)
+        - HN (Honduras)
 
-        - HT(Haiti)
+        - HT (Haiti)
 
-        - JM(Jamaica)
+        - JM (Jamaika)
 
         - KN (Saint Kitts ve Nevis)
 
@@ -246,23 +246,23 @@ Bu makalede, ülke ve bölge tarafından kullanılan listeler **Geographic** tra
 
         - LC(Saint Lucia)
 
-        - MF (Saint Martin)
+        - MF (Saint MARTIN)
 
-        - MQ(Martinique)
+        - MQ (Martinik)
 
-        - MS(Montserrat)
+        - MS (Montserrat)
 
-        - MX(Mexico)
+        - MX (Meksika)
 
-        - NI(Nicaragua)
+        - Nı dili (Nikaragua)
 
-        - PA(Panama)
+        - PA (Panama)
 
         - PM (Saint Pierre ve Miquelon)
 
-        - Çekme isteği (Porto Riko)
+        - PR (Porto Riko)
 
-        - SV (El Salvador)
+        - ZF (El Salvador)
 
         - SX (Sint Maarten)
 
@@ -270,387 +270,387 @@ Bu makalede, ülke ve bölge tarafından kullanılan listeler **Geographic** tra
 
         - TT (Trinidad ve Tobago)
 
-        - ÜMMÜL (ABD Harici Adaları)
+        - UM (ABD harici Adaları)
 
-        - US(United States)
+        - ABD (Birleşik Devletler)
 
-            - US-ak(Alaska)
+            - ABD-AK (Alaska)
 
-            - US-Al(Alabama)
+            - ABD-AL (Alabama)
 
-            - US-ar(Arkansas)
+            - ABD-AR (Arkansas)
 
-            - US-az(Arizona)
+            - US-AZ (Arizona)
 
-            - US-CA(California)
+            - ABD-CA (California)
 
-            - US-co(Colorado)
+            - ABD-CO (Colorado)
 
-            - US-CT(Connecticut)
+            - ABD-CT (Connecticut)
 
-            - ABD DC(District of Columbia)
+            - US-DC (Kolumbiyası bölgesi)
 
-            - US-de(Delaware)
+            - ABD-DE (Delaware)
 
-            - US-fl(Florida)
+            - ABD-FL (Florida)
 
-            - US-GA(Georgia)
+            - ABD-GA (Gürcistan)
 
-            - US-HI(Hawaii)
+            - ABD-HI (Hawaii)
 
-            - US-IA(Iowa)
+            - ABD-IA (Iowa)
 
-            - US-ID(Idaho)
+            - ABD-KIMLIĞI (Idaho)
 
-            - US-IL(Illinois)
+            - US-Il (Illinois)
 
-            - US-ın(Indiana)
+            - ABD-ın (Indiana)
 
-            - US-Ks(Kansas)
+            - ABD-KS (Kansas)
 
-            - US-KY(Kentucky)
+            - ABD-KY (Kentucky)
 
-            - US-la(Louisiana)
+            - ABD-LA (Louisiana)
 
-            - US-ma(Massachusetts)
+            - ABD-MA (Massachusetts)
 
-            - US-MD(Maryland)
+            - US-MD (Maryıland)
 
-            - US-Me(Maine)
+            - ABD-ME (Maine)
 
-            - US-mı(Michigan)
+            - US-mı (Michigan)
 
-            - US-MN(Minnesota)
+            - US-MN (Minnesota)
 
-            - US-MO(Missouri)
+            - ABD-MO (Missouri)
 
-            - US-MS(Mississippi)
+            - ABD-MS (Missıya ppi)
 
-            - US-MT(Montana)
+            - ABD-MT (Montana)
 
-            - ABD NC(North Carolina)
+            - US-NC (Kuzey Carolina)
 
-            - ABD ND(North Dakota)
+            - ABD-ND (Kuzey Davkota)
 
-            - US-NE(Nebraska)
+            - US-NE (Nebraska)
 
-            - ABD NH(New Hampshire)
+            - US-NH (New Hampshire)
 
-            - ABD NJ(New Jersey)
+            - US-NJ (New Jersey)
 
-            - ABD NM(New Mexico)
+            - ABD-NM (yeni Meksika)
 
-            - US-NV(Nevada)
+            - US-NV (Nevada)
 
-            - ABD NY(New York)
+            - ABD-NY (New York)
 
-            - US-OH(Ohio)
+            - US-OH (Ohio)
 
-            - US-ok(Oklahoma)
+            - ABD-Tamam (Oklahoma)
 
-            - US-OR(oregon)
+            - ABD-OR (Oregon)
 
-            - US-Pa(Pennsylvania)
+            - US-PA (Pennsylvania)
 
-            - ABD RI(Rhode Island)
+            - US-RI (Rhode Adası)
 
-            - ABD SC(South Carolina)
+            - US-SC (Güney Carolina)
 
-            - ABD SD(South Dakota)
+            - US-SD (Güney Davkota)
 
-            - US-tn(Tennessee)
+            - US-TN (Tennessee)
 
-            - US-TX(Texas)
+            - ABD-TX (Texas)
 
-            - US-UT(Utah)
+            - ABD-UT (Utah)
 
-            - US-VA(Virginia)
+            - ABD-VA (Virginia)
 
-            - US-VT(Vermont)
+            - US-VT (Vermont)
 
-            - US-WA(Washington)
+            - ABD-WA (Washington)
 
-            - US-WI(Wisconsin)
+            - US-WI (Wıconsin)
 
-            - ABD WV(West Virginia)
+            - ABD-WV (Batı Virginia)
 
-            - US-WY(Wyoming)
+            - ABD-WY (Wyoya)
 
         - VC (Saint Vincent ve Grenadinler)
 
-        - VG (İngiliz Virgin Adaları)
+        - VG (Ingiliz Virgin Adaları)
 
         - VI (ABD Virgin Adaları)
 
         - XE (Sint Eustatius)
 
-        - XS(Saba)
+        - XS (Saba)
 
-    - GEO-AS(Asia)
+    - COĞRAFI (Asya)
 
-        - AF(Afghanistan)
+        - AF (Afganistan)
 
-        - AM(Armenia)
+        - HAR (Ermenistan)
 
-        - AZ(Azerbaijan)
+        - AZ (Azerbaycan)
 
-        - BD(Bangladesh)
+        - BD (Bangladeş)
 
-        - Bn(Brunei)
+        - MILYAR TL (Brunei)
 
-        - BT(Bhutan)
+        - BT (Bhutan)
 
-        - CC (Cocos (Keeling) Adaları)
+        - BILGI (Cocos (Keeling) Adaları)
 
-        - CN(China)
+        - CN (Çin)
 
         - CX (Christmas Adası)
 
-        - Ge(Georgia)
+        - GE (Gürcistan)
 
-        - HK (Hong Kong ÖİB)
+        - HK (Hong Kong ÖIB)
 
-        - ID(Indonesia)
+        - KIMLIK (Endonezya)
 
-        - IN(India)
+        - IÇINDE (Hindistan)
 
-        - G/ç (İngiliz Hint Okyanusu Toprakları)
+        - GÇ (Ingiliz Hint Okyanusu Toprakları)
 
-        - JP(Japan)
+        - JP (Japonya)
 
-        - KG(Kyrgyzstan)
+        - KG (Kırgızistan)
 
-        - KH(Cambodia)
+        - KÇA (Kamboçya)
 
         - KP (Kuzey Kore)
 
-        - KR(Korea)
+        - KR (Kore)
 
-        - KZ(Kazakhstan)
+        - KZ (Kazakistan)
 
-        - LA(Laos)
+        - LA (Laos)
 
-        - LK(Sri Lanka)
+        - LK (Sri Lanka)
 
-        - MM(Myanmar)
+        - MM (Myanmar)
 
-        - MN(Mongolia)
+        - MN (Moğolistan)
 
-        - Ay (Makao ÖİB)
+        - MO (Makao ÖIB)
 
-        - MV(Maldives)
+        - MV (Maldivler)
 
-        - My(Malaysia)
+        - MY (Malezya)
 
-        - NP(Nepal)
+        - NP (Nepal)
 
-        - PH(Philippines)
+        - PH (Filipinler)
 
-        - PK(Pakistan)
+        - PK (Pakistan)
 
-        - SG(Singapore)
+        - SG (Singapur)
 
-        - TH(Thailand)
+        - TH (Tayland)
 
-        - TJ(Tajikistan)
+        - TJ (Tacikistan)
 
-        - TL(Timor_Leste)
+        - TL (Timor_Leste)
 
-        - TM(Turkmenistan)
+        - TM (Türkmenistan)
 
-        - Tw(Taiwan)
+        - TW (Tayvan)
 
-        - UZ(Uzbekistan)
+        - UZ (Özbekistan)
 
-        - VN(Vietnam)
+        - VN (Vietnam)
 
-    - GEO-AF(Africa)
+    - COĞRAFI-AF (Afrika)
 
-        - AO(Angola)
+        - AO (Angola)
 
         - BF (Burkina Faso)
 
-        - BI(Burundi)
+        - Bı (Burundi)
 
-        - BJ(Benin)
+        - BJ (Benin)
 
         - BV (Bouvet Adası)
 
-        - BW(Botswana)
+        - Siyah beyaz (Botsvana)
 
-        - CD (Kongo Cumhuriyeti (KC))
+        - CD (Kongo (KDC))
 
         - CF (Orta Afrika Cumhuriyeti)
 
-        - CI (Fildişi Sahili)
+        - CI (Fildişi Sahili (Côte d’Ivoire))
 
-        - CM(Cameroon)
+        - CM (Kamerun)
 
         - CV (Cabo Verde)
 
-        - DJ(Djibouti)
+        - DJ (Cibuti)
 
-        - Dz(Algeria)
+        - DZ (Cezayir)
 
-        - EG(Egypt)
+        - ÖRN. (Mısır)
 
-        - ER(Eritrea)
+        - ER (Eritre)
 
-        - ET(Ethiopia)
+        - ET (Etiyopya)
 
-        - GA(Gabon)
+        - GA (Gabon)
 
-        - GH(Ghana)
+        - GH (Ghana)
 
-        - GM(Gambia)
+        - GM (Gambiya)
 
-        - GN(Guinea)
+        - GN (Gine)
 
         - GQ (Ekvator Ginesi)
 
-        - GW(Guinea_Bissau)
+        - GW (Guinea_Bissau)
 
-        - KE(Kenya)
+        - KE (Kenya)
 
-        - KM(Comoros)
+        - KM (Komorolar)
 
-        - LR(Liberia)
+        - LR (Liberya)
 
-        - LS(Lesotho)
+        - LS (Lisotho)
 
-        - LY(Libya)
+        - LY (Libya)
 
-        - Ma(Morocco)
+        - MA (Fas)
 
-        - MG(Madagascar)
+        - MG (Madagaskar)
 
-        - ML(Mali)
+        - ML (mali)
 
-        - MR(Mauritania)
+        - MR (Moritanya)
 
-        - MU(Mauritius)
+        - MU (Mauritius)
 
-        - MW(Malawi)
+        - MW (Malavi)
 
-        - MZ(Mozambique)
+        - MZ (Mozambik)
 
-        - NA(Namibia)
+        - NA (Namibia)
 
-        - NE(Niger)
+        - NE (Nijer)
 
-        - NG(Nigeria)
+        - NG (Nijerya)
 
-        - RE(Réunion)
+        - RE (Reunion)
 
-        - RW(Rwanda)
+        - RW (Ruanda)
 
-        - SC(Seychelles)
+        - SC (Seyşeller)
 
-        - SD(Sudan)
+        - SD (sudan)
 
-        - SH (St. Helena, Ascension, Tristan da Cunha)
+        - SH (Saint Helena, Ascension ve Tristan da Cunha)
 
-        - SL (Sierra Leone)
+        - SL (Sierra Taone)
 
-        - SN(Senegal)
+        - SN (Senegal)
 
-        - SO(Somalia)
+        - YANI (Somalia)
 
         - SS (Güney Sudan)
 
         - ST (Sao Tome ve Principe)
 
-        - SZ(Swaziland)
+        - SZ (Swaziland)
 
-        - TD(CHAD)
+        - TD (Çad)
 
-        - TF (Fransız Güney Toprakları)
+        - TF (Fransız Güney toprakları)
 
-        - TG(Togo)
+        - TG (Togo)
 
-        - TN(Tunisia)
+        - TN (Tunus)
 
-        - TZ(Tanzania)
+        - TZ (Tanzanya)
 
-        - UG(Uganda)
+        - UG (Uganda)
 
-        - YT(Mayotte)
+        - YT (Mayotte)
 
         - ZA (Güney Afrika)
 
-        - ZM(Zambia)
+        - ZM (Zambiya)
 
-        - ZW(Zimbabwe)
+        - ZW (Zimbabve)
 
-    - GEO-an(Antarctica)
+    - Coğrafi bölge (Antarktika)
 
-        - AQ(Antarctica)
+        - AQ (Antarktika)
 
-    - Coğrafi SA(South America)
+    - COĞRAFI-SA (Güney Amerika)
 
-        - AR(Argentina)
+        - AR (Arjantin)
 
-        - BO(Bolivia)
+        - BO (Bolivya)
 
-        - BR(Brazil)
+        - BR (Brezilya)
 
-        - CL(Chile)
+        - CL (Şili)
 
-        - CO(Colombia)
+        - ORTAK (Kolombiya)
 
-        - EC(Ecuador)
+        - EC (Ekvador)
 
         - FK (Falkland Adaları)
 
-        - GF (Fransız Guyanası)
+        - GF (Fransız Ginesi)
 
         - GS (Güney Georgia ve Güney Sandwich Adaları)
 
-        - GY(Guyana)
+        - GY (Guyana)
 
-        - PE(Peru)
+        - PE (Peru)
 
-        - PY(Paraguay)
+        - Kopyala (Paraguay)
 
-        - SR(Suriname)
+        - SR (Surinam)
 
-        - UY(Uruguay)
+        - UY (Uruguay)
 
-        - VE(Venezuela)
+        - VE (Venezuela)
 
-    - Coğrafi AP(Australia / Pacific)
+    - COĞRAFI-AP (Avustralya/Pasifik)
 
-        - AS(American Samoa)
+        - AS (Amerikan Samoası)
 
-        - AU(Australia)
+        - AU (Avustralya)
 
-            - AU ACT(Australian Capital Territory)
+            - AU-YASASı (Avustralya büyük bölgesi)
 
-            - AU NSW(New South Wales)
+            - AU-NSW (Yeni Güney Galler)
 
-            - AU NT(Northern Territory)
+            - AU-NT (Kuzey Bölgesi)
 
-            - AU-QLD(Queensland)
+            - AU-QLD (Queensland)
 
-            - AU SA(South Australia)
+            - AU-SA (Güney Avustralya)
 
-            - AU-TAS(Tasmania)
+            - AU-TAS (Tazmanya)
 
-            - AU-VIC(Victoria)
+            - AU-VIC (Victoria)
 
-            - AU WA(Western Australia)
+            - AU-WA (Batı Avustralya)
 
-        - Çekme (Cook Adaları)
+        - CK (Cook Adaları)
 
-        - FJ(Fiji)
+        - FJ (Fiji)
 
-        - FM(Micronesia)
+        - FM (Mikronezya)
 
-        - GU(Guam)
+        - GU (Guhar)
 
         - HM (Heard Adası ve McDonald Adaları)
 
-        - Kı(Kiribati)
+        - KI (Kiribati)
 
         - MH (Marshall Adaları)
 
@@ -660,9 +660,9 @@ Bu makalede, ülke ve bölge tarafından kullanılan listeler **Geographic** tra
 
         - NF (Norfolk Adası)
 
-        - NR(Nauru)
+        - NR (Nauru)
 
-        - NU(Niue)
+        - NU (Niue)
 
         - NZ (Yeni Zelanda)
 
@@ -672,22 +672,22 @@ Bu makalede, ülke ve bölge tarafından kullanılan listeler **Geographic** tra
 
         - PN (Pitcairn Adaları)
 
-        - PW(Palau)
+        - PW (Damau)
 
         - SB (Solomon Adaları)
 
-        - TK(Tokelau)
+        - TK (Tokelau)
 
-        - TO(Tonga)
+        - (Tonga)
 
-        - TV(Tuvalu)
+        - TV (Tuvalu)
 
-        - VU(Vanuatu)
+        - Vu & lt (Vanuatu)
 
         - WF (Wallis ve Futuna)
 
-        - WS(Samoa)
+        - WS (Samoası)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [coğrafi trafik yönlendirme yöntemini Azure Traffic Manager](traffic-manager-routing-methods.md#geographic).
+- [Azure Traffic Manager coğrafi trafik yönlendirme yöntemi](traffic-manager-routing-methods.md#geographic)hakkında daha fazla bilgi edinin.

@@ -1,21 +1,16 @@
 ---
-title: Azure CLI ile uyumlu olmayan kaynakları için bir ilke oluşturma
-description: Uyumlu olmayan kaynakları belirlemek üzere bir Azure İlkesi ataması oluşturmak için Azure CLI'yi kullanın.
-author: DCtheGeek
-ms.author: dacoulte
+title: Azure CLı ile kaynakları denetlemek için ilke oluşturma
+description: Uyumlu olmayan kaynakları belirlemek üzere bir Azure Ilkesi ataması oluşturmak için Azure CLı 'yi kullanın.
 ms.date: 01/23/2019
 ms.topic: quickstart
-ms.service: azure-policy
-manager: carmonm
-ms.custom: seodec18
-ms.openlocfilehash: 76f457b7d577fb2a08bbcc386328ce4d8e59f902
-ms.sourcegitcommit: 59fd8dc19fab17e846db5b9e262a25e1530e96f3
+ms.openlocfilehash: 589038bb2b5e96c252e19fc0552d4f9ac19dc83a
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65979609"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73960221"
 ---
-# <a name="quickstart-create-a-policy-assignment-to-identify-non-compliant-resources-with-azure-cli"></a>Hızlı Başlangıç: Azure CLI ile uyumlu olmayan kaynakları belirlemek üzere bir ilke ataması oluşturma
+# <a name="quickstart-create-a-policy-assignment-to-identify-non-compliant-resources-with-azure-cli"></a>Hızlı başlangıç: Azure CLı ile uyumlu olmayan kaynakları belirlemek için bir ilke ataması oluşturma
 
 Azure’da uyumluluğu anlamanın ilk adımı, kaynaklarınızın durumunu belirlemektir.
 Bu hızlı başlangıç, yönetilen disk kullanmayan sanal makineleri belirlemek üzere ilke ataması oluşturma işleminde size yol gösterir.
@@ -32,7 +27,7 @@ CLI'yi yerel olarak yükleyip kullanmak için, bu hızlı başlangıç için Azu
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure CLI kullanarak Azure ilke görüşleri kaynak sağlayıcısını kaydedin. Kaynak sağlayıcısı kaydedildiğinde, aboneliğinizin bununla çalıştığından emin olunur. Bir kaynak sağlayıcısını kaydetmek için kayıt kaynak sağlayıcısı işlemi izni olmalıdır. Bu işlem, Katkıda Bulunan ve Sahip rolleriyle birlikte sunulur. Aşağıdaki komutu çalıştırarak kaynak sağlayıcısını kaydedin:
+Azure CLı kullanarak Azure Policy Insights kaynak sağlayıcısını kaydedin. Kaynak sağlayıcısı kaydedildiğinde, aboneliğinizin bununla çalıştığından emin olunur. Bir kaynak sağlayıcısını kaydetmek için kayıt kaynak sağlayıcısı işlemi izni olmalıdır. Bu işlem, Katkıda Bulunan ve Sahip rolleriyle birlikte sunulur. Aşağıdaki komutu çalıştırarak kaynak sağlayıcısını kaydedin:
 
 ```azurecli-interactive
 az provider register --namespace 'Microsoft.PolicyInsights'
@@ -68,7 +63,7 @@ $policyAssignment = Get-AzPolicyAssignment | Where-Object { $_.Properties.Displa
 $policyAssignment.PolicyAssignmentId
 ```
 
-İlke ataması kimlikleri hakkında daha fazla bilgi için bkz. [Get-AzPolicyAssignment](/powershell/module/az.resources/get-azpolicyassignment).
+İlke atama kimlikleri hakkında daha fazla bilgi için bkz. [Get-AzPolicyAssignment](/powershell/module/az.resources/get-azpolicyassignment).
 
 Daha sonra, JSON dosyasına çıkarılan uyumlu olmayan kaynakların kaynak kimliklerini almak için aşağıdaki komutu çalıştırın:
 

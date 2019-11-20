@@ -1,0 +1,66 @@
+### YamlMime:Landing
+title: Azure Analysis Services belgeleri
+summary: Bulutta Analysis Services ile veri modellemesi ayarlamayı öğrenin. Belgelerde, tablosal veri modelleri kullanarak kurumsal BI çözümü oluşturmaya ilişkin bilgiler sunulur.
+metadata:
+  title: Azure Analysis Services belgeleri | Microsoft Docs
+  description: Azure Analysis Services, bulutta kurumsal düzeyde veri modelleri sağlayan, tam yönetilen bir hizmet olarak platformdur (PaaS).
+  ms.service: analysis-services
+  ms.topic: landing-page
+  ms.collection: 
+  author: minewiskan
+  ms.author: owend
+  manager: mtillman
+  ms.date: 10/30/2019
+  ms.openlocfilehash: db43da63ab9382d71c812c97dcef6048b89a9626
+  ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73572198"
+landingContent:
+- title: Azure Analysis Services hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Analysis Services nedir?
+      url: analysis-services-overview.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Sunucu oluşturma - Portal
+      url: analysis-services-create-server.md
+    - text: Sunucu oluşturma - PowerShell
+      url: analysis-services-create-powershell.md
+    - text: Sunucu güvenlik duvarını yapılandırma - Portal
+      url: analysis-services-qs-firewall.md
+- title: Anlama
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Kimlik doğrulaması ve kullanıcı izinleri
+      url: analysis-services-manage-users.md
+    - text: Hizmet sorumlularıyla otomasyon
+      url: analysis-services-service-principal.md
+    - text: Şirket içi veri kaynaklarına bağlanma
+      url: analysis-services-gateway.md
+- title: Yönetme ve bağlanma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Sunucu yönetici ve kullanıcı rollerini yapılandırma
+      url: tutorials/analysis-services-tutorial-roles.md
+    - text: Portaldan örnek model ekleme
+      url: analysis-services-create-sample-model.md
+    - text: Power BI Desktop’a bağlanma
+      url: tutorials/analysis-services-tutorial-pbid.md
+- title: Komut dosyası oluşturma ve API’ler
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: PowerShell
+      url: /azure/analysis-services/analysis-services-powershell
+    - text: REST API
+      url: /rest/api/analysisservices/
+    - text: Tablolu Model Betik Dili (TMSL)
+      url: /bi-reference/tmsl/tabular-model-scripting-language-tmsl-reference

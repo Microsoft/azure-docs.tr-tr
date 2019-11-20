@@ -1,29 +1,29 @@
 ---
-title: Azure Blockchain Workbench veritabanı ayrıntılarını alma
-description: Azure Blockchain Workbench veritabanı ve veritabanı sunucusu bilgilerini almayı öğrenin.
+title: Azure blok zincirini al çalışma ekranı önizleme veritabanı ayrıntıları
+description: Azure blok zinciri çalışma ekranı önizleme veritabanı ve veritabanı sunucusu bilgilerini nasıl alabileceğinizi öğrenin.
 services: azure-blockchain
 keywords: ''
 author: PatAltimore
 ms.author: patricka
-ms.date: 05/09/2019
+ms.date: 09/05/2019
 ms.topic: article
 ms.service: azure-blockchain
 ms.reviewer: mmercuri
 manager: femila
-ms.openlocfilehash: 42d119acd8880458eadc1760a7cb9713f91e3f6f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f4a4eaab9a03aeed27e29eb645b6e22a028b243b
+ms.sourcegitcommit: adc1072b3858b84b2d6e4b639ee803b1dda5336a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65509973"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70845067"
 ---
-# <a name="get-information-about-your-azure-blockchain-workbench-database"></a>Azure Blockchain Workbench veritabanınızla ilgili bilgi edinin
+# <a name="get-information-about-your-azure-blockchain-workbench-preview-database"></a>Azure blok zincirim çalışma ekranı önizleme veritabanınız hakkında bilgi alın
 
-Bu makalede Azure Blockchain Workbench veritabanınız hakkında nasıl ayrıntılı bilgi edinebileceğiniz gösterilir.
+Bu makalede, Azure blok zinciri çalışma ekranı önizleme veritabanınız hakkında ayrıntılı bilgilerin nasıl alınacağı gösterilmektedir.
 
 ## <a name="overview"></a>Genel Bakış
 
-Uygulamalar, iş akışları ve akıllı sözleşme yürütme ile ilgili bilgiler Blockchain Workbench SQL DB’deki veritabanı görünümleri kullanılarak sağlanır. Geliştiriciler, Microsoft Excel, Power BI, Visual Studio ve SQL Server Management Studio gibi araçlar kullanarak bu bilgileri kullanabilirsiniz.
+Uygulamalar, iş akışları ve akıllı sözleşme yürütme ile ilgili bilgiler Blockchain Workbench SQL DB’deki veritabanı görünümleri kullanılarak sağlanır. Geliştiriciler Microsoft Excel, Power BI, Visual Studio ve SQL Server Management Studio gibi araçları kullanırken bu bilgileri kullanabilir.
 
 Bir geliştiricinin veritabanına bağlanabilmesi için önce şunlar gerekir:
 
@@ -34,7 +34,7 @@ Bir geliştiricinin veritabanına bağlanabilmesi için önce şunlar gerekir:
 
 Veritabanına bağlanmak için:
 
-1. Azure portalında olan bir hesapla oturum açın **sahibi** Azure Blockchain Workbench kaynaklar için izinleri.
+1. Azure blok zinciri çalışma ekranı kaynakları için **sahip** izinlerine sahip bir hesapla Azure Portal oturum açın.
 2. Sol gezinti bölmesinden **Kaynak Grupları**'nı seçin.
 3. Blockchain Workbench dağıtımınıza yönelik kaynak grubunun adını seçin.
 4. Kaynak listesini sıralamak için **Tür**’ü, sonra da **SQL sunucunuzu** seçin. Bir sonraki ekran görüntüsünde yer alan sıralı listede "master" adlı bir veritabanının yanı sıra **Kaynak ön eki** olarak "lhgn" kullanan bir veritabanı şeklinde iki SQL veritabanı gösterilir.

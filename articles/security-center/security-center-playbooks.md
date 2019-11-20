@@ -3,9 +3,8 @@ title: Azure Güvenlik Merkezi'ndeki Güvenlik Playbook'u | Microsoft Docs
 description: Bu belge, Azure Güvenlik Merkezi'ndeki güvenlik playbook'larını kullanarak güvenlik olaylarına verilen yanıtları otomatik hale getirmenize yardımcı olur.
 services: security-center
 documentationcenter: na
-author: rkarlin
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: a8c45ddf-5c4c-4393-b6e9-46ed1f91bf5f
 ms.service: security-center
 ms.devlang: na
@@ -13,13 +12,13 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/28/2018
-ms.author: rkarlin
-ms.openlocfilehash: ec16e6daec099adbede625c5ec6fe6909059143b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: memildin
+ms.openlocfilehash: faf297ef4b07b76f98bb7773c636cd8f6228bbc0
+ms.sourcegitcommit: 8a717170b04df64bd1ddd521e899ac7749627350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60907096"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71201732"
 ---
 # <a name="security-playbook-in-azure-security-center-preview"></a>Azure Güvenlik Merkezi'ndeki Güvenlik Playbook'u (Önizleme)
 Bu belge, Azure Güvenlik Merkezi'ndeki güvenlik playbook'larını kullanarak güvenlikle ilgili sorunlara yanıt vermenize yardımcı olur.
@@ -36,7 +35,7 @@ Güvenlik Merkezi'nden güvenlik playbook'u oluşturmak için bu adımları izle
 1.  **Güvenlik Merkezi** panosunu açın.
 2.  Sol bölmedeki **Otomasyon ve Düzenleme** bölümünde **Playbook'lar (Önizleme)** öğesine tıklayın.
 
-    ![Logic App](./media/security-center-playbooks/security-center-playbooks-fig17.png)
+    ![Mantıksal Uygulama](./media/security-center-playbooks/security-center-playbooks-fig17.png)
 
 3. **Güvenlik Merkezi - Playbook'lar (Önizleme)** sayfasında **Ekle** düğmesine tıklayın.
 

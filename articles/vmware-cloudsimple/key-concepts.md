@@ -1,64 +1,63 @@
 ---
-title: Azure VMware CloudSimple çözümüyle yönetmek için kullanılan temel kavramları
-description: Azure VMware CloudSimple çözümüyle yönetmek için kullanılan temel kavramları açıklar
+title: CloudSimple tarafından Azure VMware çözümünü yönetmeye yönelik temel kavramlar
+description: CloudSimple ile Azure VMware çözümünü yönetmeye yönelik temel kavramları açıklar
 author: sharaths-cs
 ms.author: b-shsury
-ms.date: 4/24/19
+ms.date: 04/24/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 3eff61408cb190396987ace6dee21182cff4f25c
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 120ab94ce62010acf4e742bd5220405961dad6db
+ms.sourcegitcommit: 47b00a15ef112c8b513046c668a33e20fd3b3119
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67165181"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69972718"
 ---
-# <a name="key-concepts-for-administration-of-azure-vmware-solution-by-cloudsimple"></a>Azure VMware CloudSimple çözümüyle yönetimi için temel kavramları
+# <a name="key-concepts-for-administration-of-azure-vmware-solution-by-cloudsimple"></a>CloudSimple tarafından Azure VMware çözümünün yönetimine yönelik temel kavramlar
 
-Azure VMware CloudSimple çözümüyle yönetmek, aşağıdaki kavramları bilinmesini gerektirir:
+CloudSimple tarafından Azure VMware çözümünü yönetmek için aşağıdaki kavramların anlaşılmasına gerek vardır:
 
-* Azure VMware çözümü CloudSimple - hizmet tarafından görüntülenen CloudSimple hizmeti
-* Azure VMware çözümü CloudSimple - düğümünde görüntülenen CloudSimple düğümü
-* CloudSimple özel bulut
-* Ağ hizmeti
-* Azure VMware çözümü CloudSimple - sanal makine tarafından görüntülenen CloudSimple sanal makine
+* CloudSimple hizmeti tarafından Azure VMware çözümü olarak görünen CloudSimple hizmeti
+* CloudSimple düğümü tarafından Azure VMware çözümü olarak görünen CloudSimple düğümü
+* CloudSimple özel bulutu
+* Hizmet ağı
+* CloudSimple sanal makinesi tarafından Azure VMware çözümü olarak görünen CloudSimple sanal makinesi
 
 ## <a name="cloudsimple-service"></a>CloudSimple hizmeti
 
-CloudSimple hizmetiyle oluşturabilir ve VMware çözümleriyle CloudSimple tarafından Azure portalından ilişkili tüm kaynakları yönetin. Bir hizmet kaynağı nerede hizmetini kullanmayı düşündüğünüz her bölgede oluşturun.
+CloudSimple hizmeti sayesinde, Azure portal CloudSimple ile VMware çözümleriyle ilişkili tüm kaynakları oluşturabilir ve yönetebilirsiniz. Hizmeti kullanmayı düşündüğünüz her bölgede bir hizmet kaynağı oluşturun.
 
-Daha fazla bilgi edinin [CloudSimple hizmet](cloudsimple-service.md).
+[Cloudsimple hizmeti](cloudsimple-service.md)hakkında daha fazla bilgi edinin.
 
 ## <a name="cloudsimple-node"></a>CloudSimple düğümü
 
-VMware ESXi hiper yönetici dağıtıldığı bir ayrılmış, çıplak, Hiper yakınsanmış işlem ve depolama konak CloudSimple düğümüdür. Bu düğüm, ardından VMware vSphere, vCenter, Vsan'a ve NSX platformları eklenmiştir. CloudSimple ağ hizmetleri ve uç ağ hizmetlerinin de etkinleştirilir. Her düğüm oluşturmak için sağlayabileceğiniz işlem ve depolama kapasitesi, bir birim olarak hizmet veren [CloudSimple özel Bulutlar](cloudsimple-private-cloud.md). Sağlar veya CloudSimple hizmetin kullanılabildiği bir bölge içinde düğümler ayırmak.
+CloudSimple düğümü, VMware ESXi hiper yöneticinin dağıtıldığı adanmış, çıplak ve hiper yakınsanmış bir işlem ve depolama konağından bağımsız bir işlemdir. Daha sonra bu düğüm VMware vSphere, vCenter, vSAN ve NSX platformlarına birleştirilir. CloudSimple ağ hizmetleri ve Edge ağ hizmetleri de etkinleştirilir. Her düğüm, [Cloudsimple özel bulutları](cloudsimple-private-cloud.md)oluşturmak için sağlayabileceğiniz bir işlem ve depolama kapasitesi birimi görevi görür. CloudSimple hizmetinin kullanılabildiği bir bölgede düğüm temin edersiniz veya ayırtın.
 
+[Cloudsimple düğümleri](cloudsimple-node.md)hakkında daha fazla bilgi edinin.
 
-Daha fazla bilgi edinin [CloudSimple düğümleri](cloudsimple-node.md).
+## <a name="cloudsimple-private-cloud"></a>CloudSimple özel bulutu
 
-## <a name="cloudsimple-private-cloud"></a>CloudSimple özel bulut
+CloudSimple özel bulutu, kendi yönetim etki alanında bir vCenter sunucusu tarafından yönetilen yalıtılmış bir VMware Stack ortamıdır. VMware yığını ESXi Konakları, vSphere, vCenter, vSAN ve NSX içerir. Yığın adanmış düğümlerde çalışır (ayrılmış ve yalıtılmış çıplak donanım) ve Kullanıcı tarafından vCenter ve NSX Yöneticisi içeren yerel VMware araçları aracılığıyla kullanılır. Adanmış düğümler Azure konumlarında dağıtılır ve Azure tarafından yönetilir. Her özel bulut, VLAN 'Lar ve alt ağlar ve güvenlik duvarı tabloları gibi ağ hizmetleri kullanılarak kesimlere ve güvenli hale getirilir. Şirket içi ortamınıza ve Azure ağına bağlantılar, güvenli, özel VPN ve Azure ExpressRoute bağlantıları kullanılarak oluşturulur.
 
-CloudSimple özel bulut kendi Yönetim etki alanındaki bir vCenter sunucusu tarafından yönetilen bir yalıtılmış VMware yığın ortamıdır. VMware yığınınızın ESXi konakları, vSphere, vCenter, Vsan'a ve NSX içerir. Yığın çalışır, adanmış düğümleri (ayrılmış ve yalıtılmış çıplak bilgisayar donanım) ve vCenter ve NSX Yöneticisi'ni içeren yerel VMware araçları aracılığıyla kullanıcılar tarafından kullanılan. Adanmış düğümler Azure konumlarında dağıtılır ve Azure tarafından yönetilir. Her özel bulut, bölümlenmiş ve VLAN'ların ve alt ağları ve güvenlik duvarı tablolar gibi ağ hizmetlerini kullanarak güvenli hale getirilmiş. Şirket içi ortamınız ile Azure ağ bağlantılarını bağlantıları güvenli kullanarak özel VPN ve Azure ExpressRoute tarafından oluşturulur.
+[Cloudsimple özel bulutu](cloudsimple-private-cloud.md)hakkında daha fazla bilgi edinin.
 
-Daha fazla bilgi edinin [CloudSimple özel bulut](cloudsimple-private-cloud.md).
+## <a name="service-networking"></a>Hizmet ağı
 
-## <a name="service-networking"></a>Ağ hizmeti
+CloudSimple hizmeti, CloudSimple hizmetinizin dağıtıldığı bölge başına bir ağ sağlar. Ağ, yönlendirme özelliği varsayılan olarak etkin olan tek bir TCP katman 3 adres alanıdır. Bu bölgede oluşturulan tüm özel bulutlar ve alt ağlar, ek bir yapılandırma olmadan birbirleriyle iletişim kurar. VLAN 'Ları kullanarak, vCenter üzerinde dağıtılmış bağlantı noktası grupları oluşturursunuz. Özel bulutunuzda iş yükü kaynaklarınızı yapılandırmak ve güvenli hale getirmek için aşağıdaki ağ özelliklerini kullanabilirsiniz:
 
-CloudSimple CloudSimple hizmetinizin dağıtıldığı bölge başına bir ağ hizmetidir. Varsayılan olarak etkin yönlendirme ile tek bir TCP Katman 3 adres alanı ağdır. Tüm özel Bulutlar ve alt ağlar bu bölgede oluşturulan herhangi bir ek yapılandırma birbirleri ile iletişim kurar. VCenter VLAN'ları kullanarak dağıtılmış bağlantı noktası grupları oluşturun. Aşağıdaki ağ özelliklerini yapılandırmak ve özel bulut iş yükü kaynaklarınızın güvenliğini sağlamak için kullanabilirsiniz:
-
-* [VLAN ve alt ağları](cloudsimple-vlans-subnets.md)
+* [VLAN 'Lar ve alt ağlar](cloudsimple-vlans-subnets.md)
 * [Güvenlik Duvarı tabloları](cloudsimple-firewall-tables.md)
 * [VPN ağ geçitleri](cloudsimple-vpn-gateways.md)
 * [Genel IP](cloudsimple-public-ip-address.md)
 * [Azure ağ bağlantısı](cloudsimple-azure-network-connection.md)
 
-## <a name="cloudsimple-virtual-machine"></a>CloudSimple sanal makine
+## <a name="cloudsimple-virtual-machine"></a>CloudSimple sanal makinesi
 
-CloudSimple hizmet ile birlikte VMware sanal makinelerini, Azure portalından yönetebilirsiniz. Hizmet oluşturulduğu abonelik için bir veya daha fazla küme veya vSphere ortamınızdan kaynak havuzları eşlenebilir.
+CloudSimple hizmeti ile VMware sanal makinelerini Azure portal yönetebilirsiniz. VSphere ortamınızdan bir veya daha fazla küme veya kaynak havuzu, hizmetin oluşturulduğu abonelikle eşleştirilebilir.
 
 Daha fazla bilgi:
 
-* [CloudSimple sanal makineler](cloudsimple-virtual-machines.md)
-* [Azure aboneliği eşleme](https://docs.azure.cloudsimple.com/azure-subscription-mapping/)
+* [CloudSimple sanal makineleri](cloudsimple-virtual-machines.md)
+* [Azure abonelik eşleme](https://docs.azure.cloudsimple.com/azure-subscription-mapping/)

@@ -1,36 +1,37 @@
 ---
-title: Azure ve Dynamics 365 danışmanlık hizmeti sunan yayımlama | Azure Market
-description: Bir Azure veya Dynamics 365 danışmanlık hizmet teklifi, Azure Market veya Appsource'ta için bulut iş ortağı Portalı'nda yayımlayın.
+title: Azure ve Dynamics 365 danışmanlık hizmeti teklifi yayımlama | Azure Marketi
+description: Azure Market veya AppSource için Bulut İş Ortağı Portalı Azure veya Dynamics 365 danışmanlık hizmeti teklifi yayımlayın.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: qianw211
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 11/30/2018
 ms.author: pabutler
-ms.openlocfilehash: 44fe7f11d365761c351e488d834a63392ea9cac1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3d2daf68bae5e24dd8ec3501befd186a50c2cb16
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942800"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818100"
 ---
-# <a name="publish-a-consulting-service-offer"></a>Danışmanlık bir hizmet teklifi yayımlama
+# <a name="publish-a-consulting-service-offer"></a>Danışmanlık hizmeti teklifi yayımlama
 
-Bitirdikten sonra **teklif ayarları**, **mağaza ayrıntıları**, ve **kişiler**seçin **Yayımla** ve bir e-posta adresi sağlayın. Microsoft, teklifinizi yayımlamaya hazır olduğunda, Canlı geçmeden önce önizlemesini görüntülemek için bir e-posta alırsınız. Teklifinizi istediğiniz zaman durumunu denetlemek için portalına geri dönebilirsiniz.
+**Teklif ayarlarını**, **storefront ayrıntılarını**ve **kişileri**tamamladıktan sonra **Yayımla** ' yı seçin ve bir e-posta adresi sağlayın. Microsoft teklifinizi yayımlamaya hazırsa, bir e-posta alacaksınız. İstediğiniz zaman teklifinizin durumunu denetlemek için portala geri dönebilirsiniz.
 
-Teklifleri yayımlama işlemi sırasında bir "Yayımlama iptal edildi" veya "Yayımlama başarısız oldu" durumu görüntülenir. Bu gösterimleri işlem normal bir parçasıdır ve Microsoft'un teklifinizin düzenlemeler izin verin. Teklifinizi "olarak Yayımla iptal edildi" görünüyorsa, bu durum bırakın.
+Fırsatlar, yayımlama işlemi sırasında "Yayımlama iptal edildi" veya "yayımlama başarısız oldu" durumunda görünebilir. Bu göstergeler işlemin normal bir parçasıdır ve Microsoft 'un teklifiniz üzerinde düzenleme yapmasına izin verir. Teklifiniz "Yayımlama iptal edildi" olarak görünürse, bu durum gibi bırakın.
 
-## <a name="lead-destination"></a>Hedef yol
+## <a name="lead-destination"></a>Müşteri adayı hedefi
 
-Müşteri adayı depolandığı bir CRM sistemine seçebilirsiniz. Burada seçtiğiniz CRM biz uygulamanızı appsource'ta deneyen kullanıcılar hakkında bilgileri nerede yazma sistemidir.
+Müşteri adayı bilgilerinizin depolandığı bir CRM sistemi seçebilirsiniz. Burada seçtiğiniz CRM sistemi, uygulamanızı AppSource 'ta deneyen kullanıcılar hakkında bilgi yazdığımız yerdir.
 
-Seçtiğiniz CRM sistemine bağlı olarak, karşılık gelen URL'yi sonraki alanları kümesini doldurmak hakkında bilgi için aşağıdaki listeden seçin.
+Seçtiğiniz CRM sistemine bağlı olarak, sonraki alan kümesini nasıl dolduracağı hakkında bilgi için aşağıdaki listeden karşılık gelen URL 'yi seçin.
 
-Seçin [Azure tablo](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-lead-management-instructions-azure-table) aşağıdaki CRM sistemleri birine sahipseniz:  
+Aşağıdaki CRM sistemlerinden birine sahipseniz [Azure tablosu](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-lead-management-instructions-azure-table) ' nu seçin:  
 * [Marketo](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-lead-management-instructions-marketo)
 * [Microsoft Dynamics CRM](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-lead-management-instructions-dynamics)
 * [Salesforce](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-lead-management-instructions-salesforce)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Teklifinizi yayımlayın öğrenmek devam.
+Teklifinizi nasıl yayımlayacağınızı öğrenmek için devam edin.

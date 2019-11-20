@@ -1,35 +1,51 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Bastion Belgeleri
+### YamlMime:Landing
+title: Azure Bastion belgeleri
+summary: Bir sanal makineye bağlanmak için Azure Bastion kullanmayı öğrenin. Doğrudan Azure portalda SSL üzerinden sanal makinelere güvenli ve sorunsuz bir şekilde RDP/SSH bağlantısı yapılandırın. Azure Bastion aracılığıyla bağlandığınızda, sanal makinelerinizin bir genel IP adresi olması gerekmez.
 metadata:
-  document_id: null
-  title: Bastion
-  meta.description: Learn how to use Azure Bastion
-  author: cherylmc
-  ms.service: Bastion
+  title: Azure Bastion belgeleri
+  description: Bir sanal makineye bağlanmak için Azure Bastion kullanmayı öğrenin. Doğrudan Azure portalda SSL üzerinden sanal makinelere güvenli ve sorunsuz bir şekilde RDP/SSH bağlantısı yapılandırın.
+  services: bastion
+  ms.service: bastion
   ms.topic: landing-page
-  ms.date: 07/02/2019
+  author: cherylmc
   ms.author: cherylmc
-abstract:
-  description: 'Bir sanal makineye bağlanmak için Azure Bastion kullanmayı öğrenin. Doğrudan Azure portalda SSL üzerinden sanal makinelere güvenli ve sorunsuz bir şekilde RDP/SSH bağlantısı yapılandırın. Azure Bastion aracılığıyla bağlandığınızda, sanal makinelerinizin bir genel IP adresi olması gerekmez.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: 'https://go.microsoft.com/fwlink/?linkid=2095604'
-      width: 250
-    title: 'Azure Bastion ile çalışma (1:03)'
-    href: 'https://go.microsoft.com/fwlink/?linkid=2095517'
-    width: 250
-sections:
-  - title: Azure Bastion oluşturma ve yönetme (Önizleme)
-    items:
-      - type: paragraph
-        text: Bir Azure Bastion konağı yapılandırmayı öğrenin ve ardından bir sanal makineye bağlanın.
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/bastion/bastion-create-host-portal">Azure Bastion konağı oluşturma ve değiştirme</a>
-          - html: <a href="/azure/bastion/bastion-connect-vm-ssh">Bir Windows sanal makinesine bağlanma</a>
-          - html: <a href="/azure/bastion/bastion-connect-vm-rdp">Bir Linux sanal makinesine bağlanma</a>
-          - html: <a href="/azure/bastion/bastion-faq">Azure Bastion hakkında SSS’yi okuyun</a>
+  ms.date: 08/29/2019
+  ms.openlocfilehash: a60f7d2026bbfae2d52cffa3f3d4229d834631ae
+  ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73498858"
+landingContent:
+- title: Azure Bastion hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Bastion nedir?
+      url: bastion-overview.md
+  - linkListType: concept
+    links:
+    - text: Azure Bastion SSS
+      url: bastion-faq.md
+- title: Başlarken
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Güçlendirilmiş erişim konağı oluşturma
+      url: bastion-create-host-portal.md
+    - text: Sanal makineye bağlanma (Linux)
+      url: bastion-connect-vm-ssh.md
+    - text: Sanal makineye bağlanma (Windows)
+      url: bastion-connect-vm-rdp.md
+  - linkListType: video
+    links:
+    - text: Azure Bastion ile çalışma
+      url: https://go.microsoft.com/fwlink/?linkid=2095517
+- title: Sanal makine oturumlarıyla çalışma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Kopyala ve yapıştır
+      url: bastion-vm-copy-paste.md
+    - text: Tam ekran görünümü
+      url: bastion-vm-full-screen.md

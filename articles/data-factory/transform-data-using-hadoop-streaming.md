@@ -1,6 +1,6 @@
 ---
-title: Hadoop akış etkinliğinde, Azure Data Factory kullanarak verileri dönüştürme | Microsoft Docs
-description: Hadoop akış etkinliğinde Azure Data Factory'de bir Hadoop kümesinde Hadoop akış programları çalıştırarak verileri dönüştürme için nasıl kullanılacağını açıklar.
+title: Azure Data Factory 'de Hadoop akışı etkinliğini kullanarak verileri dönüştürme
+description: Hadoop akış programlarını bir Hadoop kümesinde çalıştırarak verileri dönüştürmek için Azure Data Factory 'de Hadoop akışı etkinliğinin nasıl kullanılacağını açıklar.
 services: data-factory
 documentationcenter: ''
 ms.service: data-factory
@@ -11,21 +11,21 @@ ms.date: 01/16/2018
 author: nabhishek
 ms.author: abnarain
 manager: craigg
-ms.openlocfilehash: 0d8267f1cd65f78d5e98ae9d288d5fa5c4214420
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6977f7a6ad7fd79a51083bf2ef71c539e04837e5
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60848257"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73683791"
 ---
-# <a name="transform-data-using-hadoop-streaming-activity-in-azure-data-factory"></a>Hadoop akış etkinliğinde, Azure Data Factory kullanarak verileri dönüştürme
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="transform-data-using-hadoop-streaming-activity-in-azure-data-factory"></a>Azure Data Factory 'de Hadoop akışı etkinliğini kullanarak verileri dönüştürme
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](v1/data-factory-hadoop-streaming-activity.md)
 > * [Geçerli sürüm](transform-data-using-hadoop-streaming.md)
 
-HDInsight akış etkinliği bir Data factory'de [işlem hattı](concepts-pipelines-activities.md) üzerinde Hadoop akış programları çalıştırır [kendi](compute-linked-services.md#azure-hdinsight-linked-service) veya [üzerine](compute-linked-services.md#azure-hdinsight-on-demand-linked-service) HDInsight kümesi. Bu makalede yapılar [veri dönüştürme etkinlikleri](transform-data.md) makalesi, veri dönüştürme ve desteklenen dönüştürme etkinliklerinin genel bir bakış sunar.
+Bir [Data Factory işlem](concepts-pipelines-activities.md) hattındaki HDInsight akış etkinliği, [kendi kendinize](compute-linked-services.md#azure-hdinsight-linked-service) veya [Isteğe](compute-linked-services.md#azure-hdinsight-on-demand-linked-service) bağlı HDInsight kümenizde Hadoop akış programlarını yürütür. Bu makale, veri dönüştürme ve desteklenen dönüştürme etkinliklerine genel bir bakış sunan [veri dönüştürme etkinlikleri](transform-data.md) makalesinde oluşturulur.
 
-Azure Data Factory kullanmaya yeni başladıysanız, okumak [Azure Data Factory'ye giriş](introduction.md) yapıp [öğretici: verileri dönüştürme](tutorial-transform-data-spark-powershell.md) bu makaleyi okuduktan önce. 
+Azure Data Factory yeni bir deyişle, [Azure Data Factory 'ye giriş](introduction.md) ile okuyun ve [öğreticiyi yapın:](tutorial-transform-data-spark-powershell.md) bu makaleyi okumadan önce verileri dönüştürün. 
 
 ## <a name="json-sample"></a>JSON örneği
 ```json
@@ -70,23 +70,23 @@ Azure Data Factory kullanmaya yeni başladıysanız, okumak [Azure Data Factory'
 
 | Özellik          | Açıklama                              | Gerekli |
 | ----------------- | ---------------------------------------- | -------- |
-| name              | Etkinliğin adı                     | Evet      |
-| description       | Etkinliğin ne için kullanıldığını açıklayan metin | Hayır       |
-| türü              | Hadoop akış etkinliğinde'için Hdınsightstreaming etkinlik türüdür | Evet      |
-| linkedServiceName | Data Factory öğesinde bağlantılı hizmet olarak HDInsight kümesine başvuru kayıtlı. Bu bağlı hizmeti hakkında bilgi edinmek için [işlem bağlı Hizmetleri](compute-linked-services.md) makalesi. | Evet      |
-| Eşleyici            | Yürütülebilir Eşleyici adını belirtir | Evet      |
-| Azaltıcı           | Yürütülebilir Azaltıcı adını belirtir | Evet      |
-| birleştirici          | Birleştirici yürütülebilir adını belirtir | Hayır       |
-| fileLinkedService | Bir Azure depolama bağlı hizmeti başvuru Eşleyici birleştirici ve azaltıcı programların depolamak için kullanılır. Bu bağlı hizmeti belirtmezseniz, Azure depolama bağlı HDInsight bağlı hizmette tanımlanan hizmeti kullanılır. | Hayır       |
-| dosya yolu          | Yol dizisi Eşleştiricisi için Birleştirici, sağlamak ve Azure Depolama'da depolanan Azaltıcı programlar fileLinkedService tarafından başvurulan. Bu yol büyük/küçük harfe duyarlıdır. | Evet      |
-| giriş             | Giriş dosyası WASB yolu Eşleştiricisi belirtir. | Evet      |
-| çıkış            | Çıkış dosyası WASB yolu için Azaltıcı belirtir. | Evet      |
-| getDebugInfo      | Günlük dosyaları Azure depolama için ne zaman kopyalanır belirtir HDInsight küme tarafından kullanılan (veya) scriptLinkedService tarafından belirtilen. İzin verilen değerler: None, her zaman veya hata. Varsayılan değer: Yok. | Hayır       |
-| arguments         | Hadoop işi için bağımsız değişkenleri dizisini belirtir. Bağımsız değişkenleri, her görev için komut satırı bağımsız değişkenleri geçirilir. | Hayır       |
-| defines           | Parametreler içinde Hive betiğine başvurmak için anahtar/değer çiftleri belirtin. | Hayır       | 
+| ad              | Etkinliğin adı                     | Evet      |
+| açıklama       | Etkinliğin ne için kullanıldığını açıklayan metin | Hayır       |
+| type              | Hadoop akışı etkinliği için etkinlik türü Hdınsightstreaming olur | Evet      |
+| linkedServiceName | Data Factory bağlı hizmet olarak kaydedilen HDInsight kümesine başvuru. Bu bağlı hizmet hakkında bilgi edinmek için bkz. [işlem bağlı hizmetleri](compute-linked-services.md) makalesi. | Evet      |
+| Eşleyici            | Eşleyici yürütülebilir dosyasının adını belirtir | Evet      |
+| reducer           | Reducer yürütülebilir dosyasının adını belirtir | Evet      |
+| Birleştirici          | Birleştirici yürütülebilir dosyasının adını belirtir | Hayır       |
+| Dosya Linkedservice | Yürütülecek Eşleyici, birleştirici ve Reducer programlarını depolamak için kullanılan bir Azure depolama bağlı hizmetine başvuru. Bu bağlı hizmeti belirtmezseniz, HDInsight bağlı hizmetinde tanımlanan Azure depolama bağlı hizmeti kullanılır. | Hayır       |
+| filePath          | FileLinkedService tarafından başvurulan Azure depolama alanında depolanan Mapper, birleştirici ve Reducer programlarının yolunu dizisini belirtin. Bu yol büyük/küçük harfe duyarlıdır. | Evet      |
+| giriş             | Eşleyici için giriş dosyasının yer aldığı yolu belirtir. | Evet      |
+| çıkış            | Reducer için çıkış dosyasının yer aldığı yolu belirtir. | Evet      |
+| GetDebugInfo      | Günlük dosyalarının, HDInsight kümesi tarafından kullanılan (veya) scriptLinkedService tarafından belirtilen Azure depolama 'ya ne zaman kopyalanacağını belirtir. İzin verilen değerler: None, Always veya Failure. Varsayılan değer: yok. | Hayır       |
+| Değişkenlerinden         | Bir Hadoop işi için bir bağımsız değişken dizisi belirtir. Bağımsız değişkenler her göreve komut satırı bağımsız değişkeni olarak geçirilir. | Hayır       |
+| tanımlar           | Hive betiği içinde başvurmak için parametreleri anahtar/değer çiftleri olarak belirtin. | Hayır       | 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Anlatan farklı yollarla verileri dönüştürmek aşağıdaki makalelere bakın: 
+Verileri başka yollarla nasıl dönüştürebileceğinizi açıklayan aşağıdaki makalelere bakın: 
 
 * [U-SQL etkinliği](transform-data-using-data-lake-analytics.md)
 * [Hive etkinliği](transform-data-using-hadoop-hive.md)

@@ -1,6 +1,6 @@
 ---
-title: Mevcut oynatıcılarda oynatma için içeriğinizi - Azure kullanın | Microsoft Docs
-description: Bu konu, mevcut oynatıcılarda listeler içeriğinizi kayıttan yürütmek üzere kullanabilirsiniz.
+title: İçeriğinizi kayıttan yürütmek için mevcut oyuncuları kullanın-Azure | Microsoft Docs
+description: Bu konu, içeriğinizi kayıttan yürütmek için kullanabileceğiniz mevcut oyuncuları listeler.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -14,57 +14,60 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: c96710d6dcca9f5ef99b3a02a0bc875d433f814d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0da8ce396ce07b7c9859fcfccb5cb524c0ce21c1
+ms.sourcegitcommit: 470041c681719df2d4ee9b81c9be6104befffcea
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61463419"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "69015285"
 ---
-# <a name="playing-your-content-with-existing-players"></a>İçeriğinizi mevcut oynatıcılarda oynatma
-Azure Media Services, kesintisiz akış, HTTP canlı akış ve MPEG-Dash gibi birçok popüler akış biçimlerinde destekler. Bu konuda, akışlarınız test etmek için kullanabileceğiniz mevcut oynatıcılarda işaret eder.
+# <a name="playing-your-content-with-existing-players"></a>Mevcut oyuncularla içeriğinizi oynama
+Azure Media Services, Kesintisiz Akış, HTTP Canlı Akışı ve MPEG-Dash gibi birçok popüler akış biçimini destekler. Bu konu, akışlarınızı test etmek için kullanabileceğiniz mevcut oyunculara işaret eder.
 
-### <a name="the-azure-portal-media-services-content-player"></a>Azure portal medya Hizmetleri içerik Oynatıcısı
-**Azure** portal, videonuzu test etmek için kullanabileceğiniz bir içerik oynatıcı sağlar.
+### <a name="the-azure-portal-media-services-content-player"></a>Azure portal Media Services içerik yürütücüsü
+**Azure** Portal, videonuzu test etmek için kullanabileceğiniz bir içerik oynatıcı sağlar.
 
-İstediğiniz videoya tıklayın (, olduğundan emin olun [yayımlanan](media-services-portal-publish.md)) tıklayıp **Play** portalın alt kısmındaki düğmesi.
+İstediğiniz videoya tıklayın ( [yayımlanmış](media-services-portal-publish.md)olduğundan emin olun) ve portalın altındaki **oynat** düğmesine tıklayın.
 
 Bazı dikkate alınması gereken noktalar vardır:
 
-* **MEDYA HİZMETLERİ İÇERİK OYNATICISI** varsayılan akış uç noktasından oynatır. Varsayılan dışı bir akış uç noktasından oynatmak istiyorsanız başka bir oynatıcı kullanın. Örneğin, [Azure Media Player](https://amsplayer.azurewebsites.net/azuremediaplayer.html).
+* **MEDYA HİZMETLERİ İÇERİK OYNATICISI** varsayılan akış uç noktasından oynatır. Varsayılan dışı bir akış uç noktasından oynatmak istiyorsanız başka bir oynatıcı kullanın. Örneğin, [Azure Media Player](https://aka.ms/azuremediaplayer).
 
 ![AMSPlayer][AMSPlayer]
 
 ### <a name="azure-media-player"></a>Azure Media Player
-Kullanım [Azure Media Player](https://amsplayer.azurewebsites.net/azuremediaplayer.html) kayıttan yürütme için aşağıdaki biçimlerden birinde içerik (açık ya da korumalı):
+
+İçeriğinizi (şifresiz veya korumalı) aşağıdaki biçimlerden birinde kayıttan yürütmek için [Azure Media Player](https://aka.ms/azuremediaplayer) kullanın:
 
 * Kesintisiz Akış
 * MPEG DASH
 * HLS
-* Aşamalı MP4
+* İlerleyen MP4
 
-### <a name="flash-player"></a>Flash Player
-#### <a name="aes-encrypted-with-token"></a>AES şifreli belirteciyle
+### <a name="flash-player"></a>Flash oynatıcı
+
+#### <a name="aes-encrypted-with-token"></a>AES-belirteç ile şifrelendi
+
 [https://aestoken.azurewebsites.net](https://aestoken.azurewebsites.net)
 
-### <a name="silverlight-players"></a>Silverlight oynatıcıları
+#### <a name="playready-with-token"></a>Belirteç ile PlayReady
 
-#### <a name="playready-with-token"></a>Belirteci ile PlayReady
 [https://sltoken.azurewebsites.net](https://sltoken.azurewebsites.net)
 
-### <a name="dash-players"></a>DASH oynatıcılar
+### <a name="dash-players"></a>DASH çalarlar
+
 [https://dashplayer.azurewebsites.net](https://dashplayer.azurewebsites.net)
 
 [https://dashif.org](https://dashif.org)
 
 ### <a name="other"></a>Diğer
-HLS ayrıca URL'leri test etmek için:
+HLS URL 'Leri test etmek için aşağıdakileri de kullanabilirsiniz:
 
-* **Safari** bir iOS cihazında veya
-* **3ivx HLS Player** Windows üzerinde.
+* İOS cihazında **Safari** veya
+* Windows üzerinde **3ivx HLS oynatıcı** .
 
-## <a name="developing-video-players"></a>Video oynatıcı geliştirme
-Oyuncuların kendi geliştirme hakkında daha fazla bilgi için bkz: [video oynatıcılar geliştirme](media-services-develop-video-players.md)
+## <a name="developing-video-players"></a>Video oyuncuları geliştirme
+Kendi oyuncularınızı geliştirme hakkında daha fazla bilgi için bkz. [video yürütücüleri geliştirme](media-services-develop-video-players.md)
 
 ## <a name="media-services-learning-paths"></a>Media Services’i öğrenme yolları
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]

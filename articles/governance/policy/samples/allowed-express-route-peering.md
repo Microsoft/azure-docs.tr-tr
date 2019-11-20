@@ -1,20 +1,16 @@
 ---
-title: Örnek - ExpressRoute eşleme konumlarına izin
-description: Bu örnek ilke tanımını kullanım ExpressRoute eşleme konumlarına belirtilen gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-Izin verilen ExpressRoute eşleme konumları
+description: Bu örnek ilke tanımı, ExpressRoute 'un belirtilen eşleme konumlarını kullanmasını gerektirir.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: a6e7d8ac470d41d37919c468a41014d0d1c0c49f
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 8b991c5b83f5d4ca23963aef089795acd5b96bd6
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61333444"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076467"
 ---
-# <a name="sample---allowed-peering-location-for-expressroute"></a>ExpressRoute için eşleme konumu izin örneği-
+# <a name="sample---allowed-peering-location-for-expressroute"></a>ExpressRoute için örnek Izin verilen eşleme konumu
 
 Bu ilke ExpressRoute’un belirtilen eşleme konumlarını kullanmasını gerektirir. İzin verilen bir eşleme konumu dizisi belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke ExpressRoute’un belirtilen eşleme konumlarını kullanmasını gerekt
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fexpress-route-peeringLocation%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fexpress-route-peeringLocation%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

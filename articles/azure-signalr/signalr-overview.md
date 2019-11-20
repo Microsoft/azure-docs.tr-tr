@@ -1,17 +1,17 @@
 ---
 title: Azure SignalR hizmeti nedir?
-description: Azure SignalR hizmeti genel bakış.
+description: Azure SignalR kullanmaya yönelik tipik kullanım örneği senaryolarını daha iyi anlayın ve Azure SignalR 'nin önemli avantajlarını öğrenin.
 author: sffamily
 ms.service: signalr
 ms.topic: overview
-ms.date: 06/20/2019
+ms.date: 11/13/2019
 ms.author: zhshang
-ms.openlocfilehash: dc7ba3585ec49921c0a0e66185fc5550d3d4a006
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: 31cb4570dd0952f60fbff2fa1131b3af36c278cb
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67303608"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74157584"
 ---
 # <a name="what-is-azure-signalr-service"></a>Azure SignalR hizmeti nedir?
 
@@ -22,24 +22,24 @@ Bu makalede Azure SignalR Hizmetine genel bir bakış sunulmaktadır.
 
 ## <a name="what-is-azure-signalr-service-used-for"></a>Azure SignalR Hizmeti ne için kullanılır?
 
-Azure SignalR hizmeti gerçek zamanlı olarak istemciye sunucusundan veri gönderme gerektiren herhangi bir senaryoya kullanabilirsiniz.
+Verilerin sunucudan istemciye gerçek zamanlı olarak gönderilmesi gereken herhangi bir senaryo, Azure SignalR hizmetini kullanabilir.
 
-Genellikle gerektiren geleneksel gerçek zamanlı özelliklerle sunucusundan yoklama Azure SignalR hizmeti de kullanabilirsiniz.
+Genellikle sunucudan yoklama gerektiren geleneksel gerçek zamanlı özellikler de Azure SignalR hizmetini kullanabilir.
 
-Azure SignalR hizmeti çok çeşitli sektörlerde, gerçek zamanlı içerik güncelleştirmeleri gerektiren herhangi bir uygulama türü için kullanıldı. Biz, Azure SignalR hizmeti kullanmanız yararlı olan bazı örnekler listelenmektedir:
+Azure SignalR hizmeti, gerçek zamanlı içerik güncelleştirmeleri gerektiren tüm uygulama türleri için çok çeşitli sektörlerde kullanılmıştır. Azure SignalR hizmetini kullanmak için iyi bazı örnekler listeliyoruz:
 
-* **Yüksek sıklık düzeyi veri güncelleştirmelerini:** oyun, oylama, yoklama, açık eksiltme.
-* **Panolar ve izleme:** şirket Pano, finansal verilerini, anında satış güncelleştirme, çok oyunculu oyun puan tablosu ve IOT izleme.
-* **Sohbet:** canlı sohbet odası, sohbet Robotu, çevrimiçi müşteri desteği, gerçek zamanlı alışveriş Yardımcısı, messenger, oyun içi sohbet ve benzeri.
-* **Gerçek zamanlı bir konumu haritada:** Lojistik izleme, teslim durumu izleme, nakliye durum güncelleştirmeleri, GPS uygulamalar.
-* **Gerçek zamanlı hedeflenen reklamlar:** kişiselleştirilmiş okuma süresi anında iletme reklam ve teklifler, etkileşimli reklamlar.
-* **İşbirliğine dayalı uygulamalar:** birlikte yazmayı, Beyaz Tahta uygulamaları ve yazılım toplantı takım.
+* **Yüksek frekanslı veri güncelleştirmeleri:** oyun, oylama, yoklama, açık artırma.
+* **Panolar ve izleme:** şirket panosu, finansal pazar verileri, Instant Sales Update, çok oyunculu oyun lideri panosu ve IoT izleme.
+* **Sohbet:** canlı sohbet odası, sohbet bot, çevrimiçi müşteri desteği, gerçek zamanlı alışveriş yardımcısı, Messenger, oyun oyunu vb.
+* **Haritadaki gerçek zamanlı konum:** lojistik Tracking, teslim durumu izleme, ulaşım durum GÜNCELLEŞTIRMELERI, GPS Apps.
+* **Gerçek zamanlı hedeflenen reklamlar:** kişiselleştirilmiş gerçek zamanlı anında iletme reklamları ve teklifleri, etkileşimli reklamlar.
+* **Işbirliğine dayalı uygulamalar:** coauthoring, beyaz tahta uygulamaları ve takım toplantısı yazılımı.
 * **Anında iletme bildirimleri:** sosyal ağ, e-posta, oyun, seyahat uyarısı.
-* **Gerçek zamanlı yayın:** ses/video yayın canlı, açıklamalı alt yazı, çevirme, olaylar/haber yayınlama Canlı.
-* **IOT ve bağlı cihazlar:** gerçek zamanlı IOT ölçümleri, uzaktan denetim, gerçek zamanlı durum ve izleme konumu.
-* **Otomasyon:** Yukarı Akış olaylardan gerçek zamanlı tetikleyici.
+* **Gerçek zamanlı yayınlar:** canlı ses/video yayını, canlı açıklamalı altyazı, çeviri, olaylar/haber yayınlama.
+* **IoT ve bağlı cihazlar:** gerçek zamanlı IoT ölçümleri, uzaktan denetim, gerçek zamanlı durum ve konum izleme.
+* **Otomasyon:** yukarı akış olaylarından gerçek zamanlı tetikleyici.
 
-## <a name="what-are-the-benefits-using-azure-signalr-service"></a>Avantajları nelerdir Azure SignalR hizmeti kullanarak?
+## <a name="what-are-the-benefits-using-azure-signalr-service"></a>Azure SignalR hizmeti 'ni kullanmanın avantajları nelerdir?
 
 **Standart tabanlı:**
 
@@ -47,30 +47,30 @@ SignalR, gerçek zamanlı web uygulamaları derlemek için kullanılan birkaç t
 
 **Yerel ASP.NET Core desteği:**
 
-SignalR hizmeti, ASP.NET Core ve ASP.NET ile yerel bir programlama deneyimi sağlar. SignalR Service yeni SignalR uygulama geliştirme veya mevcut SignalR öğesinden geçiş için SignalR hizmet tabanlı uygulama en az çaba gerektirir.
-SignalR hizmeti, ASP.NET Core'nın yeni özelliği, sunucu tarafı Blazor de destekler.
+SignalR hizmeti, ASP.NET Core ve ASP.NET ile yerel programlama deneyimi sağlar. SignalR hizmeti ile yeni bir SignalR uygulaması geliştirme veya mevcut bir SignalR tabanlı uygulamadan SignalR hizmetine geçiş için en az çaba olması gerekir.
+SignalR hizmeti Ayrıca ASP.NET Core 'ın yeni özelliğini, sunucu tarafı Blazor destekler.
 
 **Geniş istemci desteği:**
 
-İstemciler, web ve mobil tarayıcılar, Masaüstü uygulamaları, mobil uygulamalar, sunucu işlemi, IOT cihazları ve oyun konsolları gibi çok geniş bir yelpazede ile SignalR hizmeti çalışır. SignalR hizmet SDK'ları farklı dillerde sunar. Yerel ASP.NET Core veya ASP.NET yanı sıra C# SDK'ları, SignalR Service Ayrıca JavaScript istemci web istemcileri ve birçok yeni JavaScript çerçevesi etkinleştirmek için SDK'sı sağlar. Java istemci SDK'sı, Android yerel uygulamaları dahil olmak üzere Java uygulamaları için de desteklenir. SignalR hizmeti REST API'sini destekler ve sunucusuz Azure işlevleri ve Event Grid ile tümleştirmeler aracılığıyla.
+SignalR hizmeti, Web ve mobil tarayıcılar, masaüstü uygulamaları, mobil uygulamalar, sunucu işlemi, IoT cihazları ve oyun konsolları gibi çok çeşitli istemcilerle çalışmaktadır. SignalR hizmeti, SDK 'Ları farklı dillerde sunmaktadır. SignalR hizmeti, yerel ASP.NET Core veya C# ASP.NET SDK 'lara ek olarak JavaScript istemci SDK 'sını, Web istemcilerini etkinleştirmek ve birçok JavaScript çerçevesini de sağlar. Java istemci SDK 'Sı, Android yerel uygulamaları dahil olmak üzere Java uygulamaları için de desteklenir. SignalR hizmeti, Azure Işlevleri ve Event Grid tümleştirmeler aracılığıyla REST API ve sunucusuz destekler.
 
-**Büyük ölçekli istemci bağlantılarını işleyeceğini:**
+**Büyük ölçekli istemci bağlantılarını işle:**
 
-SignalR hizmetini gerçek zamanlı büyük ölçekli uygulamalar için tasarlanmıştır. SignalR hizmeti sağlayan Ölçekle birlikte çalışmak üzere birden çok örneği istemci bağlantıları milyonlarca. Hizmet birden fazla küresel bölgeye parçalama, yüksek kullanılabilirlik ve olağanüstü durum kurtarma amacıyla için de destekler.
+SignalR hizmeti büyük ölçekli gerçek zamanlı uygulamalar için tasarlanmıştır. SignalR hizmeti birden fazla örneğinin birlikte çalışarak milyonlarca istemci bağlantısına ölçeklenebilmesini sağlar. Hizmet aynı zamanda parçalama, yüksek kullanılabilirlik veya olağanüstü durum kurtarma amacıyla birden çok genel bölgeyi destekler.
 
-**Şirket içinde SignalR barındırma iş yükünü kaldırın:**
+**Self-Host SignalR 'nin yükünü kaldırın:**
 
-Şirket içinde barındırılan SignalR uygulamaları karşılaştırıldığında, SignalR hizmete geçme istemci bağlantıları ve ölçekler işleyen arka planlarını yönetme ihtiyacını ortadan kaldırır. Tam olarak yönetilen hizmet ayrıca web uygulamaları basitleştirir ve maliyet barındırma kaydeder. SignalR hizmet bağlantıları, milyonlarca için tüm Azure standart, güvenlik ve uyumluluk sağlamasının yanı sıra SLA'sı garanti ölçeklenen, global erişim ve birinci sınıf veri merkezi ve ağ'ı sunar.
+Kendi kendine barındırılan SignalR uygulamalarıyla karşılaştırıldığında, SignalR hizmetine geçiş yapmak, ölçek ve istemci bağlantılarını işleyen arka düzlemleri yönetme ihtiyacını ortadan kaldırır. Tam olarak yönetilen hizmet ayrıca Web uygulamalarını basitleştirir ve barındırma maliyetini kaydeder. SignalR hizmeti küresel erişim ve birinci sınıf veri merkezi ve ağ sunar, milyonlarca bağlantıya ölçeklenirken, Azure Standard 'da tüm uyumluluk ve güvenliği sağlarken SLA garantisi verir.
 
 ![Yönetilen SignalR hizmeti](./media/signalr-overview/managed-signalr-service.png)
 
-**Farklı Mesajlaşma desenleri için zengin bir API sunar:**
+**Farklı mesajlaşma desenleri için zengin API 'Ler sunun:**
 
-SignalR hizmeti belirli bir bağlantı, tüm bağlantılar ya da belirli bir kullanıcıya ait ya da bir rastgele grubuna yerleştirildiği bağlantıların bir alt ileti göndermeyi olanak sağlar.
+SignalR hizmeti, sunucunun belirli bir bağlantıya, tüm bağlantılara veya belirli bir kullanıcıya ait olan ya da rastgele bir gruba yerleştirilmiş bir bağlantı alt kümesine ileti göndermesini sağlar.
 
 ## <a name="how-to-use-azure-signalr-service"></a>Azure SignalR Service Nasıl Kullanılır
 
-Azure SignalR hizmeti ile bir program olarak burada listelenen örneklerden bazıları için birçok farklı yolu vardır:
+Burada listelenen bazı örnekler için Azure SignalR hizmeti ile programlama için birçok farklı yol vardır:
 
 - **[Bir ASP.NET Core SignalR Uygulamasını Ölçeklendirme](signalr-concept-scale-aspnet-core.md)** - Yüzbinlerce bağlantıya ölçeklendirmek için Azure SignalR Hizmetini bir ASP.NET Core SignalR uygulaması ile tümleştirin.
 - **[Sunucusuz, gerçek zamanlı uygulamalar oluşturma](signalr-concept-azure-functions.md)** JavaScript, C# ve Java gibi dillerde sunucusuz, gerçek zamanlı uygulamalar oluşturmak için Azure İşlevleri tümleştirmesini Azure SignalR Hizmeti ile kullanın.

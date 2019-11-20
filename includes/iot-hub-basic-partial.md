@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 04/01/2018
 ms.author: kgremban
 ms.custom: include file
-ms.openlocfilehash: 0b4d3455748e775aaf07b2853b8a7ccee335b71d
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: b0b3825e5afe31f16553a5c7cacbe8cb1fb40295
+ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188465"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70050227"
 ---
 >[!NOTE]
->Bazı özellikler gibi bulut-cihaz Mesajlaşma, bu makalede, cihaz ikizleri ve cihaz yönetimi, yalnızca IOT hub'ın standart katmanında kullanılabilir bahsedilen. Temel ve standart IoT Hub katmanları hakkında daha fazla bilgi için bkz. [Doğru IoT Hub katmanını seçme](../articles/iot-hub/iot-hub-scaling.md).
+>Bu makalede bahsedilen, buluttan cihaza mesajlaşma, cihaz iksi ve cihaz yönetimi gibi özelliklerden bazıları yalnızca standart IoT Hub standart katmanında kullanılabilir. Temel ve standart IoT Hub katmanları hakkında daha fazla bilgi için bkz. [Doğru IoT Hub katmanını seçme](../articles/iot-hub/iot-hub-scaling.md).

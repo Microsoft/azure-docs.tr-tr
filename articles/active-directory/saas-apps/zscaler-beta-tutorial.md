@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Zscaler Beta ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve Zscaler Beta arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Zscaler Beta ile Azure Active Directory tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve Zscaler Beta arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -16,296 +16,296 @@ ms.topic: tutorial
 ms.date: 04/24/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 07341c1ad30f1242bdff430826fdc82c45e09dac
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 07b0f8112f724c857ffb46378f7aa7ef605b9bbb
+ms.sourcegitcommit: e0e6663a2d6672a9d916d64d14d63633934d2952
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67086062"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "68943282"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-zscaler-beta"></a>Öğretici: Zscaler Beta ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-zscaler-beta"></a>Öğretici: Zscaler Beta ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Zscaler Beta tümleştirme konusunda bilgi edinin.
-Zscaler Beta Azure AD ile tümleştirdiğinizde, şunları yapabilirsiniz:
+Bu öğreticide, Zscaler Beta Azure Active Directory (Azure AD) ile nasıl tümleştirileceğini öğreneceksiniz.
+Zscaler Beta 'yı Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Zscaler Beta erişimi, Azure AD'de denetler.
-* Zscaler Beta için Azure AD hesaplarına otomatik olarak oturum açmasına imkan tanıyın. Bu erişim denetimi, çoklu oturum açma (SSO) denir.
-* Azure portalını kullanarak tek bir merkezi konumda hesaplarınızı yönetin.
+* Azure AD 'de Zscaler Beta 'ya erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla Zscaler Beta sürümünde otomatik olarak oturum açmaya izin verin. Bu erişim denetimine çoklu oturum açma (SSO) adı verilir.
+* Azure portal kullanarak hesaplarınızı tek bir merkezi konumda yönetin.
 
-Azure AD ile bir hizmet (SaaS) uygulamasını tümleştirme olarak yazılım hakkında daha fazla bilgi için bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile hizmet olarak yazılım (SaaS) uygulama tümleştirmesi hakkında daha fazla bilgi için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile Zscaler Beta yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini Zscaler Beta ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa alabileceğiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/free/).
-* Çoklu oturum açma kullanan Zscaler Beta abonelik.
+* Bir Azure AD aboneliği. Azure AD ortamınız yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Çoklu oturum açma kullanan bir Zscaler Beta aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Zscaler Beta SP tarafından başlatılan SSO'yu destekler.
-* Zscaler Beta, just-ın-time kullanıcı sağlamayı destekler.
+* Zscaler Beta, SP tarafından başlatılan SSO 'yu destekler.
+* Zscaler Beta tam zamanında Kullanıcı sağlamayı destekler.
 
-## <a name="add-zscaler-beta-from-the-azure-marketplace"></a>Azure Market'ten Zscaler Beta Ekle
+## <a name="add-zscaler-beta-from-the-azure-marketplace"></a>Azure Marketi 'nden Zscaler Beta ekleme
 
-Azure AD'ye Zscaler Beta tümleştirmesini yapılandırmak için Zscaler Beta Azure Market'te yönetilen SaaS uygulamaları listenize ekleyin.
+Zscaler Beta tümleştirmesini Azure AD 'ye yapılandırmak için, Azure Marketi 'nden, yönetilen SaaS uygulamaları listenize Zscaler Beta ekleyin.
 
-Azure Market'ten Zscaler Beta eklemek için aşağıdaki adımları izleyin.
+Azure Marketi 'nden Zscaler Beta eklemek için aşağıdaki adımları izleyin.
 
-1. İçinde [Azure portalında](https://portal.azure.com), sol gezinti bölmesinde seçin **Azure Active Directory**.
+1. [Azure Portal](https://portal.azure.com), sol gezinti bölmesinde **Azure Active Directory**' i seçin.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Git **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
+2. **Kurumsal uygulamalar**' a gidin ve **tüm uygulamalar**' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni bir uygulama eklemek için seçin **yeni uygulama** iletişim kutusunun üst.
+3. Yeni bir uygulama eklemek için iletişim kutusunun üst kısmındaki **Yeni uygulama** ' yı seçin.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **Zscaler Beta**. Seçin **Zscaler Beta** sonuç paneli ve ardından **Ekle**.
+4. Arama kutusuna **Zscaler Beta**yazın. Sonuç panelinden **Zscaler Beta** ' yı seçin ve ardından **Ekle**' yi seçin.
 
-     ![Sonuç listesinde Zscaler Beta](common/search-new-app.png)
+     ![Sonuçlar listesinde Zscaler Beta](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırmanız ve Azure AD çoklu oturum açmayı test Zscaler Beta ile test kullanıcıya Britta Simon bağlı.
-Tek iş, bir Azure AD kullanıcısı ile ilgili kullanıcı arasında bir bağlantı ilişki Zscaler Beta kurmak için oturum açma için.
+Bu bölümde, Azure AD çoklu oturum açma 'yı, Zscaler Beta ile birlikte kullanarak, Britta Simon test kullanıcısına göre yapılandırır ve test edersiniz.
+Çoklu oturum açma için, Zscaler Beta sürümünde bir Azure AD kullanıcısı ve ilgili Kullanıcı arasında bağlantı ilişkisi oluşturun.
 
-Yapılandırma ve Azure AD çoklu oturum açma ile Zscaler Beta test etmek için aşağıdaki yapı taşlarını tamamlayın:
+Azure AD çoklu oturum açma 'yı Zscaler Beta ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-- [Azure AD çoklu oturum açmayı yapılandırma](#configure-azure-ad-single-sign-on) kullanıcılarınız bu özelliği kullanmak etkinleştirmek için.
-- [Zscaler Beta çoklu oturum açmayı yapılandırma](#configure-zscaler-beta-single-sign-on) üzerinde uygulama tarafından çoklu oturum açma ayarları yapılandırmak için.
-- [Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user) Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-- [Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user) Britta Simon, Azure AD çoklu oturum açma kullanmak üzere etkinleştirmek için.
-- [Zscaler Beta test kullanıcısı oluşturma](#create-a-zscaler-beta-test-user) Zscaler Beta, kullanıcının Azure AD gösterimini bağlı bir karşılığı Britta simon'un sağlamak için.
-- [Çoklu oturum açmayı test](#test-single-sign-on) yapılandırma çalışıp çalışmadığını doğrulayın.
+- Kullanıcılarınızın bu özelliği kullanmasını sağlamak için [Azure AD çoklu oturum açmayı yapılandırın](#configure-azure-ad-single-sign-on) .
+- Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için [Zscaler Beta çoklu oturum açmayı yapılandırın](#configure-zscaler-beta-single-sign-on) .
+- Britta Simon ile Azure AD çoklu oturum açma sınamasını test etmek için [bir Azure AD test kullanıcısı oluşturun](#create-an-azure-ad-test-user) .
+- Azure AD 'de çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirmek için [Azure AD test kullanıcısını atayın](#assign-the-azure-ad-test-user) .
+- [Bir Zscaler Beta test kullanıcısı oluşturun](#create-a-zscaler-beta-test-user) Zscaler Beta sürümünde kullanıcının Azure AD gösterimine bağlanmış Britta Simon 'un bir karşılığı.
+- Yapılandırmanın çalışıp çalışmadığını doğrulamak için [Çoklu oturum açmayı test](#test-single-sign-on) edin.
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile Zscaler Beta yapılandırmak için aşağıdaki adımları izleyin.
+Azure AD çoklu oturum açma 'yı Zscaler Beta ile yapılandırmak için aşağıdaki adımları izleyin.
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **Zscaler Beta** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **Zscaler Beta** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. İçinde **tek bir oturum açma yönteminizi seçmeniz** Seç iletişim kutusunda **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. **Çoklu oturum açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için **temel SAML yapılandırma** iletişim kutusu.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** ' yi seçin.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. İçinde **temel SAML yapılandırma** bölümünde, bu adımı izleyin:
+4. **Temel SAML yapılandırması** bölümünde bu adımı izleyin:
 
-    ![Oturum açma bilgileri çoklu Zscaler Beta etki alanı ve URL'ler](common/sp-intiated.png)
+    ![Zscaler Beta etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/sp-intiated.png)
 
-    - İçinde **oturum açma URL'si** kutusunda, Zscaler Beta uygulamanıza oturum açmak için kullanıcılarınız tarafından kullanılan URL'yi girin.
+    - **Oturum açma URL 'si** kutusuna kullanıcılarınız tarafından Zscaler Beta uygulamanızda oturum açmak için kullanılan URL 'yi girin.
 
     > [!NOTE]
-    > Gerçek bir değer değil. Değeri, gerçek oturum açma URL değeri ile güncelleştirin. Değer almak için iletişime geçin [Zscaler Beta istemci Destek ekibine](https://www.zscaler.com/company/contact).
+    > Değer gerçek değildir. Değeri, gerçek oturum açma URL 'SI değeriyle güncelleştirin. Değeri almak için [Zscaler Beta istemci destek ekibine](https://www.zscaler.com/company/contact)başvurun.
 
-5. Zscaler Beta uygulama belirli bir biçimde SAML onaylamalarını bekliyor. Özel öznitelik eşlemelerini SAML belirteci öznitelikleri yapılandırmanıza eklemelisiniz. Aşağıdaki ekran görüntüsünde, varsayılan öznitelikler listesinde gösterilmiştir. Seçin **Düzenle** açmak için **kullanıcı öznitelikleri** iletişim kutusu.
+5. Zscaler Beta uygulaması, SAML onaylamalarını belirli bir biçimde bekliyor. SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemeniz gerekir. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir. **Kullanıcı öznitelikleri** iletişim kutusunu açmak için **Düzenle** ' yi seçin.
 
     ![Kullanıcı öznitelikleri iletişim kutusu](common/edit-attribute.png)
 
-6. Zscaler Beta uygulama SAML yanıtta geçirilecek birkaç daha fazla öznitelik bekliyor. İçinde **kullanıcı taleplerini** konusundaki **kullanıcı öznitelikleri** iletişim kutusu, şu adımları SAML belirteci öznitelik eklemek için aşağıdaki tabloda gösterildiği gibi izleyin.
+6. Zscaler Beta uygulaması, daha az sayıda özniteliğin SAML yanıtına geri geçirilmesini bekliyor. **Kullanıcı öznitelikleri** Iletişim kutusundaki **Kullanıcı talepleri** bölümünde, AŞAĞıDAKI tabloda gösterildiği gibi SAML belirteci özniteliğini eklemek için bu adımları izleyin.
     
-    | Ad | Kaynak özniteliği | 
+    | Adı | Kaynak özniteliği | 
     | ---------------| --------------- |
-    | İz  | User.assignedroles |
+    | Üyesi  | Kullanıcı. atandroles |
 
-    a. Seçin **Ekle yeni talep** açmak için **yönetmek, kullanıcı talepleri** iletişim kutusu.
+    a. **Kullanıcı taleplerini Yönet** iletişim kutusunu açmak için **yeni talep Ekle** ' yi seçin.
 
     ![Kullanıcı talepleri iletişim kutusu](common/new-save-attribute.png)
 
-    ![Kullanıcı talepleri iletişim kutusu yönetme](common/new-attribute-details.png)
+    ![Kullanıcı taleplerini Yönet iletişim kutusu](common/new-attribute-details.png)
 
-    b. İçinde **adı** kutusunda, ilgili satır için gösterilen öznitelik adını girin.
+    b. **Ad** kutusuna, bu satır için gösterilen öznitelik adını girin.
 
-    c. Bırakın **Namespace** kutusunu boş.
+    c. **Ad alanı** kutusunu boş bırakın.
 
-    d. İçin **kaynak**seçin **özniteliği**.
+    d. **Kaynak**için **öznitelik**' i seçin.
 
-    e. Gelen **kaynak özniteliği** listesinde, ilgili satır için gösterilen öznitelik değeri girin.
+    e. **Kaynak özniteliği** listesinde, bu satır için gösterilen öznitelik değerini girin.
 
     f. **Tamam**’ı seçin.
 
     g. **Kaydet**’i seçin.
 
     > [!NOTE]
-    > Azure AD'de rolleri yapılandırma konusunda bilgi için bkz: [rol talep yapılandırma](https://docs.microsoft.com/azure/active-directory/active-directory-enterprise-app-role-management).
+    > Azure AD 'de rolleri yapılandırma hakkında bilgi edinmek için bkz. [rol talebini yapılandırma](https://docs.microsoft.com/azure/active-directory/active-directory-enterprise-app-role-management).
 
-7. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünden **indirme** indirmek için **sertifika (Base64)** . Dosyayı bilgisayarınıza kaydedin.
+7. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, sertifikayı indirmek için **Indir** ' i seçin **(base64)** . Bu dosyayı bilgisayarınıza kaydedin.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-8. İçinde **Zscaler Beta ' ayarlamak** bölümünde, gereksinimleriniz için gereksinim duyduğunuz URL'leri kopyalayın:
+8. **Zscaler Beta 'Yı ayarla** bölümünde, gereksinimleriniz Için gereken URL 'leri kopyalayın:
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    - Oturum Açma URL'si:
-    - Azure AD Tanımlayıcısı
-    - Oturum Kapatma URL'si
+    - Oturum açma URL 'SI
+    - Azure AD tanımlayıcısı
+    - Oturum kapatma URL 'SI
 
-### <a name="configure-zscaler-beta-single-sign-on"></a>Zscaler Beta çoklu oturum açmayı yapılandırın
+### <a name="configure-zscaler-beta-single-sign-on"></a>Zscaler Beta çoklu oturum açmayı yapılandırma
 
-1. Zscaler Beta içinde yapılandırmasını otomatik hale getirmenizi yükleme **My Apps güvenli oturum açma tarayıcı uzantısı** seçerek **uzantıyı yükleme**.
+1. Zscaler Beta sürümünde yapılandırmayı otomatikleştirmek için, **uzantıyı yükler**' i seçerek **uygulamalarım güvenli oturum açma tarayıcı uzantısını** yükler.
 
-    ![Uygulamaları uzantım](common/install-myappssecure-extension.png)
+    ![Uygulamalarım uzantısı](common/install-myappssecure-extension.png)
 
-2. Uzantı tarayıcıya ekledikten sonra seçerek **Zscaler Beta ' ayarlamak** Zscaler Beta uygulamaya yönlendirir. Burada, Zscaler Beta oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı otomatik olarak sizin için bir uygulamayı yapılandırır ve 3-6 adımlarını otomatik hale getirir.
+2. Uzantıyı tarayıcıya ekledikten sonra, **set up Zscaler Beta** ' yı seçtiğinizde sizi Zscaler Beta uygulamasına yönlendirir. Buradan, Zscaler Beta sürümünde oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı uygulamayı sizin için otomatik olarak yapılandırır ve 3 ile 6 arasındaki adımları otomatikleştirir.
 
     ![Kurulum yapılandırması](common/setup-sso.png)
 
-3. Zscaler Beta ' el ile ayarlamak için yeni bir web tarayıcı penceresi açın. Zscaler Beta şirketinizin sitesi yönetici olarak oturum açın ve aşağıdaki adımları izleyin.
+3. Zscaler Beta 'yı el ile ayarlamak için yeni bir Web tarayıcısı penceresi açın. Zscaler Beta şirket sitenizde yönetici olarak oturum açın ve aşağıdaki adımları izleyin.
 
-4. Git **Yönetim** > **kimlik doğrulaması** > **kimlik doğrulama ayarları**ve aşağıdaki adımları izleyin.
+4. **Yönetim**  > **kimlik doğrulaması**  > **kimlik doğrulama ayarları**' na gidin ve aşağıdaki adımları izleyin.
    
-    ![Yönetim](./media/zscaler-beta-tutorial/ic800206.png "Yönetim")
+    ![Yönetimine](./media/zscaler-beta-tutorial/ic800206.png "Yönetim")
 
-    a. Altında **kimlik doğrulama türü**seçin **SAML**.
+    a. **Kimlik doğrulama türü**altında **SAML**' yi seçin.
 
-    b. Seçin **SAML'yi yapılandırmak**.
+    b. **SAML Yapılandır**' ı seçin.
 
-5. İçinde **Düzenle SAML** penceresinde aşağıdaki adımları izleyin: 
+5. **SAML Düzenle** penceresinde aşağıdaki adımları izleyin: 
             
-    ![Kullanıcı ve kimlik doğrulaması yönetmek](./media/zscaler-beta-tutorial/ic800208.png "kullanıcı ve kimlik doğrulaması'nı yönetme")
+    ![Kullanıcı & kimlik doğrulaması yönetme](./media/zscaler-beta-tutorial/ic800208.png "Kullanıcı & kimlik doğrulaması yönetme")
     
-    a. İçinde **SAML portalı URL'si** kutusunda, yapıştırın **oturum açma URL'si** Azure portaldan kopyaladığınız.
+    a. **SAML portalı URL 'si** kutusunda, Azure Portal kopyaladığınız **oturum açma URL** 'sini yapıştırın.
 
-    b. İçinde **oturum açma adı özniteliği** kutusuna **Nameıd**.
+    b. **Oturum açma adı öznitelik** kutusuna **NameID**girin.
 
-    c. İçinde **ortak SSL sertifikası** kutusunda **karşıya** Azure portalından indirdiğiniz Azure SAML imzalama sertifikasını karşıya yüklemek için.
+    c. **Ortak SSL sertifikası** kutusunda, Azure Portal INDIRDIĞINIZ Azure SAML imzalama sertifikasını karşıya yüklemek Için **karşıya yükle** ' yi seçin.
 
-    d. İki durumlu **SAML otomatik sağlamayı etkinleştirme**.
+    d. **SAML otomatik sağlamayı etkinleştir**' i açın.
 
-    e. İçinde **kullanıcı görünen adı özniteliği** kutusuna **displayName** SAML autoprovisioning displayName öznitelikler için etkinleştirmek istiyorsanız.
+    e. **Kullanıcı görünen adı öznitelik** kutusunda, DisplayName ÖZNITELIKLERI için SAML oto sağlamayı etkinleştirmek istiyorsanız **DisplayName** yazın.
 
-    f. İçinde **grubu adı özniteliği** kutusuna **memberOf** SAML autoprovisioning memberOf öznitelikler için etkinleştirmek istiyorsanız.
+    f. **Grup adı öznitelik** kutusunda, memberOf ÖZNITELIKLERI için SAML oto sağlamayı etkinleştirmek Istiyorsanız, **memberOf** yazın.
 
-    g. İçinde **departmanı Name özniteliği** kutusuna **departmanı** SAML autoprovisioning bölüm öznitelikleri için etkinleştirmek istiyorsanız.
+    g. Bölüm **adı öznitelik** kutusuna departman ÖZNITELIKLERI için SAML oto sağlamayı etkinleştirmek istiyorsanız **bölüm** girin.
 
     h. **Kaydet**’i seçin.
 
-6. Üzerinde **kullanıcı kimlik doğrulamasını yapılandırma** iletişim sayfasında, aşağıdaki adımları izleyin:
+6. **Kullanıcı kimlik doğrulamasını Yapılandır** iletişim sayfasında, aşağıdaki adımları izleyin:
 
-    ![Etkinleştirme menü ve etkinleştir düğmesine](./media/zscaler-beta-tutorial/ic800207.png)
+    ![Etkinleştirme menüsü ve Etkinleştir düğmesi](./media/zscaler-beta-tutorial/ic800207.png)
 
-    a. Üzerine **etkinleştirme** sol altta menüsü.
+    a. Sol alt taraftaki **etkinleştirme** menüsünün üzerine gelin.
 
-    b. Seçin **etkinleştirme**.
+    b. **Etkinleştir**' i seçin.
 
-## <a name="configure-proxy-settings"></a>Proxy ayarlarını yapılandırma
-Internet Explorer'ın proxy ayarlarını yapılandırmak için aşağıdaki adımları izleyin.
+## <a name="configure-proxy-settings"></a>Ara sunucu ayarlarını yapılandırma
+Internet Explorer 'da proxy ayarlarını yapılandırmak için aşağıdaki adımları izleyin.
 
-1. Başlangıç **Internet Explorer**.
+1. **Internet Explorer 'ı**başlatın.
 
-2. Seçin **Internet Seçenekleri** gelen **Araçları** açmak için menü **Internet Seçenekleri** iletişim kutusu. 
+2. **Internet seçenekleri** iletişim kutusunu açmak için **Araçlar** menüsünde **Internet seçenekleri** ' ni seçin. 
     
-     ![Internet Seçenekleri iletişim kutusu](./media/zscaler-beta-tutorial/ic769492.png "Internet Seçenekleri")
+     ![Internet Seçenekleri iletişim kutusu](./media/zscaler-beta-tutorial/ic769492.png "Internet seçenekleri")
 
-3. Seçin **bağlantıları** sekmesi. 
+3. **Bağlantılar** sekmesini seçin. 
   
-     ![Bağlantılar sekmesini](./media/zscaler-beta-tutorial/ic769493.png "bağlantıları")
+     ![Bağlantılar sekmesi](./media/zscaler-beta-tutorial/ic769493.png "Bağlantılar")
 
-4. Seçin **LAN Ayarları** açmak için **yerel alan ağı (LAN) ayarları** iletişim kutusu.
+4. **Yerel alan ağı (LAN) ayarları** iletişim kutusunu açmak için **LAN ayarları** ' nı seçin.
 
-5. İçinde **Proxy sunucusu** bölümünde, aşağıdaki adımları izleyin: 
+5. **Proxy sunucusu** bölümünde, şu adımları izleyin: 
    
-    ![Proxy sunucu bölümüne](./media/zscaler-beta-tutorial/ic769494.png "Proxy sunucusu")
+    ![Proxy sunucusu bölümü](./media/zscaler-beta-tutorial/ic769494.png "Proxy sunucusu")
 
-    a. Seçin **AĞINIZ için bir proxy sunucusu kullan** onay kutusu.
+    a. **LAN için bir proxy sunucusu kullan** onay kutusunu seçin.
 
-    b. İçinde **adresi** kutusuna **ağ geçidi. Zscaler Beta.net**.
+    b. **Adres** kutusuna **ağ geçidi girin. Zscaler Beta.net**.
 
-    c. İçinde **bağlantı noktası** kutusuna **80**.
+    c. **Bağlantı noktası** kutusuna **80**girin.
 
-    d. Seçin **yerel adresler için proxy sunucuyu atla** onay kutusu.
+    d. **Yerel adresler için proxy sunucusunu atla** onay kutusunu seçin.
 
-    e. Seçin **Tamam** kapatmak için **yerel alan ağı (LAN) ayarları** iletişim kutusu.
+    e. **Yerel alan ağı (LAN) ayarları** iletişim kutusunu kapatmak için **Tamam ' ı** seçin.
 
-6. Seçin **Tamam** kapatmak için **Internet Seçenekleri** iletişim kutusu.
+6. **Internet seçenekleri** iletişim kutusunu kapatmak için **Tamam ' ı** seçin.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Britta Simon adlı Azure portalında bir test kullanıcısı oluşturun.
+Azure portal Britta Simon adlı bir test kullanıcısı oluşturun.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory** > **kullanıcılar** > **tüm kullanıcılar**.
+1. Azure portal sol bölmedeki  > **kullanıcılar**  > **tüm kullanıcılar**' ı **Azure Active Directory** seçin.
 
-    ![Kullanıcılar ve tüm kullanıcıların bağlantılar](common/users.png)
+    ![Kullanıcılar ve tüm kullanıcılar bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. İçinde **kullanıcı** iletişim kutusunda, aşağıdaki adımları izleyin:
+3. **Kullanıcı** iletişim kutusunda aşağıdaki adımları izleyin:
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** kutusuna **BrittaSimon**.
+    a. **Ad** kutusuna **Brittasıon**yazın.
   
-    b. İçinde **kullanıcı adı** kutusuna `brittasimon@yourcompanydomain.extension`. BrittaSimon@contoso.com bunun bir örneğidir.
+    b. **Kullanıcı adı** kutusuna `brittasimon@yourcompanydomain.extension` girin. BrittaSimon@contoso.com bunun bir örneğidir.
 
-    c. Seçin **Show parola** onay kutusu. Görüntülenen değer azaltma **parola** kutusu.
+    c. **Parolayı göster** onay kutusunu seçin. **Parola** kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’u seçin.
+    d. **Oluştur**'u seçin.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Zscaler Beta için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Zscaler Beta sürümüne erişim izni vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar** > **tüm uygulamaları** > **Zscaler Beta**.
+1. Azure portal,**tüm uygulamalar**  > **Zscaler Beta**'  >  **Kurumsal uygulamalar** ' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesini girin ve seçin **Zscaler Beta**.
+2. Uygulamalar listesinde, **Zscaler Beta**' yı girin ve seçin.
 
-    ![Uygulamalar listesinde Zscaler Beta bağlantı](common/all-applications.png)
+    ![Uygulamalar listesinde Zscaler Beta bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    ![Kullanıcılar ve gruplar bağlantı](common/users-groups-blade.png)
+    ![Kullanıcılar ve gruplar bağlantısı](common/users-groups-blade.png)
 
-4. Seçin **Kullanıcı Ekle**. İçinde **atama Ekle** iletişim kutusunda **kullanıcılar ve gruplar**.
+4. **Kullanıcı Ekle**' yi seçin. **Atama Ekle** Iletişim kutusunda **Kullanıcılar ve gruplar**' ı seçin.
 
     ![Kullanıcı Ekle düğmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusu, kullanıcının seçin **Britta Simon** listeden. Ardından **seçin** ekranın alt kısmındaki.
+5. **Kullanıcılar ve gruplar** iletişim kutusunda listeden **Britta Simon** gibi bir kullanıcı seçin. Ardından ekranın alt kısmında **Seç** ' i seçin.
 
     ![Kullanıcılar ve gruplar iletişim kutusu](./media/zscaler-beta-tutorial/tutorial_zscalerbeta_users.png)
 
-6. İçinde **rolü Seç** iletişim kutusunda, listeden uygun kullanıcı rolünü seçin. Ardından **seçin** ekranın alt kısmındaki.
+6. **Rol Seç** iletişim kutusunda, listeden uygun Kullanıcı rolünü seçin. Ardından ekranın alt kısmında **Seç** ' i seçin.
 
-    ![Rol Seç](./media/zscaler-beta-tutorial/tutorial_zscalerbeta_roles.png)
+    ![Rol Seç iletişim kutusu](./media/zscaler-beta-tutorial/tutorial_zscalerbeta_roles.png)
 
-7. İçinde **atama Ekle** iletişim kutusunda **atama**.
+7. **Atama Ekle** Iletişim kutusunda **ata**' yı seçin.
 
-    ![Atama iletişim kutusu Ekle](./media/zscaler-beta-tutorial/tutorial_zscalerbeta_assign.png)
+    ![Atama Ekle iletişim kutusu](./media/zscaler-beta-tutorial/tutorial_zscalerbeta_assign.png)
 
 ### <a name="create-a-zscaler-beta-test-user"></a>Zscaler Beta test kullanıcısı oluşturma
 
-Bu bölümde, kullanıcının Britta Simon Zscaler Beta sürümünde oluşturuldu. Zscaler Beta destekler **just-ın-time kullanıcı sağlamayı**, varsayılan olarak etkindir. Bu bölümde yapmanız için hiçbir şey yoktur. Zscaler Beta sürümünde bir kullanıcı zaten mevcut değilse yeni bir kimlik doğrulamasından sonra oluşturulur.
+Bu bölümde, Cetta Simon kullanıcısı Zscaler Beta sürümünde oluşturulur. Zscaler Beta, varsayılan olarak etkinleştirilen **tam zamanında Kullanıcı sağlamayı**destekler. Bu bölümde yapmanız için bir şey yoktur. Zscaler Beta sürümünde bir kullanıcı zaten mevcut değilse, kimlik doğrulamasından sonra yeni bir tane oluşturulur.
 
 >[!Note]
->Bir kullanıcı el ile oluşturmak için kişi [Zscaler Beta Destek ekibine](https://www.zscaler.com/company/contact).
+>Bir kullanıcıyı el ile oluşturmak için [Zscaler Beta destek ekibine](https://www.zscaler.com/company/contact)başvurun.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
-Azure AD çoklu oturum açma yapılandırmanızı erişim panelini kullanarak test edin.
+Erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim Paneli'nde Zscaler Beta kutucuğu seçtiğinizde, otomatik olarak SSO'yu ayarlama Zscaler Beta için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde Zscaler Beta kutucuğunu seçtiğinizde, SSO 'yu ayarladığınız Zscaler Beta sürümünde otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

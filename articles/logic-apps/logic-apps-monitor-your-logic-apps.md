@@ -1,6 +1,6 @@
 ---
-title: Durumu denetleme, günlük kaydını ayarlama ve Uyarıları - Azure Logic Apps alın | Microsoft Docs
-description: Durum İzleme, tanılama verilerini günlüğe kaydetmek ve Azure Logic Apps için uyarılar ayarlayın
+title: Durumu denetleme, günlüğü ayarlama ve uyarıları alma-Azure Logic Apps
+description: Durumu izleyin, tanılama verilerini günlüğe kaydedin ve Azure Logic Apps uyarılarını ayarlayın
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -8,210 +8,209 @@ author: divyaswarnkar
 ms.author: divswa
 ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
-ms.assetid: 5c1b1e15-3b6c-49dc-98a6-bdbe7cb75339
 ms.date: 07/21/2017
-ms.openlocfilehash: 80776f9284752e8554486cb458096ccc9319949e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 336e2ac93a954c35b7afc8dbb98dd1fca1838985
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61325291"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72680291"
 ---
-# <a name="monitor-status-set-up-diagnostics-logging-and-turn-on-alerts-for-azure-logic-apps"></a>Azure Logic Apps için uyarılarını Aç durumunu izleme ve tanılama günlük kaydını ayarlama
+# <a name="monitor-status-set-up-diagnostics-logging-and-turn-on-alerts-for-azure-logic-apps"></a>Durumu izleyin, tanılama günlüğünü ayarlayın ve Azure Logic Apps uyarılarını açın
 
-Çalıştırdıktan sonra [oluşturma ve bir mantıksal uygulama çalıştırma](../logic-apps/quickstart-create-first-logic-app-workflow.md), çalıştırma geçmişi, tetikleyici geçmişi, durumunu ve performansını denetleyebilirsiniz. Gerçek zamanlı Olay izleme ve daha zengin hata ayıklama için ayarlanmış [tanılama günlüğünü](#azure-diagnostics) mantıksal uygulamanız için. Bu şekilde, aşağıdakileri yapabilirsiniz [bulma ve görüntüleme olayları](#find-events)olayları tetiklemeyi, çalışma olayları ve eylem olayları gibi. Bu da kullanabilirsiniz [diğer hizmetlerle veri tanılama](#extend-diagnostic-data), Azure depolama ve Azure Event Hubs gibi. 
+[Mantıksal uygulama oluşturup çalıştırdıktan](../logic-apps/quickstart-create-first-logic-app-workflow.md) sonra çalıştırma geçmişini, tetikleyici geçmişini, durumunu ve performansını denetleyebilirsiniz. Gerçek zamanlı olay izleme ve daha zengin hata ayıklama için mantıksal uygulamanız için [tanılama günlüğü](#azure-diagnostics) ayarlayın. Bu şekilde tetikleyici olayları, çalıştırma olayları ve eylem olayarı gibi [olayları bulabilir ve görüntüleyebilirsiniz](#find-events). Ayrıca bu [tanılama verilerini diğer hizmetlerle](#extend-diagnostic-data), örneği Azure Depolama ve Azure Event Hubs ile de kullanabilirsiniz. 
 
-Hataları veya diğer olası sorunlar hakkında bildirim almak için ayarlama [uyarılar](#add-azure-alerts). Örneğin, "bir saat içinde beşten fazla çalıştırma başarısız olduğunda." algılarsa bir uyarı oluşturabilirsiniz. İzleme, izleme ve program aracılığıyla kullanarak günlüğe kaydetme ayarlayabilirsiniz [Azure Tanılama Olay ayarları ve özellikleri](#diagnostic-event-properties).
+Hataları veya olası diğer sorunlar hakkında bildirim almak için [uyarıları](#add-azure-alerts)ayarlayın. Örneğin, "Beş ' dan fazla çalıştırma başarısız olduğunda" bir uyarı oluşturabilirsiniz. Ayrıca, [Azure Tanılama olay ayarlarını ve özelliklerini](#diagnostic-event-properties)kullanarak, izleme, izleme ve günlüğü programlı bir şekilde ayarlayabilirsiniz.
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-## <a name="view-runs-and-trigger-history-for-your-logic-app"></a>Çalıştırmalarını görüntüle ve mantıksal uygulamanızın tetikleyici geçmişi
+## <a name="view-runs-and-trigger-history-for-your-logic-app"></a>Mantıksal uygulamanız için çalıştırma ve tetikleme geçmişini görüntüleme
 
-1. Mantıksal uygulamanızda bulmak için [Azure portalında](https://portal.azure.com), ana Azure menüsünde **tüm hizmetleri**. Arama kutusuna "logic apps" ve seçin **Logic apps**.
+1. [Azure Portal](https://portal.azure.com)mantıksal uygulamanızı bulmak için, ana Azure menüsünde **tüm hizmetler**' i seçin. Arama kutusuna "Logic Apps" yazın ve **Logic Apps**' i seçin.
 
    ![Mantıksal uygulamanızı bulun](./media/logic-apps-monitor-your-logic-apps/find-your-logic-app.png)
 
-   Azure portal, Azure aboneliğinizle ilişkili olan tüm mantıksal uygulamalar gösterir. 
+   Azure portal, Azure aboneliğinizle ilişkili tüm mantıksal uygulamaları gösterir. 
 
-2. Mantıksal uygulamanızı seçin ve ardından **genel bakış**.
+2. Mantıksal uygulamanızı seçip **genel bakış**' ı seçin.
 
-   Azure portal, çalıştırma geçmişi ve tetikleyici geçmişi mantıksal uygulamanızın gösterir. Örneğin:
+   Azure portal, mantıksal uygulamanız için çalıştırma geçmişi ve tetikleme geçmişini gösterir. Örnek:
 
-   ![Mantıksal uygulama çalıştırma geçmişi ve tetikleyici geçmişi](media/logic-apps-monitor-your-logic-apps/overview.png)
+   ![Mantıksal uygulama geçmişi ve tetikleme geçmişini çalıştırır](media/logic-apps-monitor-your-logic-apps/overview.png)
 
-   * **Çalıştırma geçmişi** mantıksal uygulamanız için tüm çalıştırmalar gösterir. 
-   * **Tetikleme geçmişi** mantıksal uygulamanız için tüm tetikleyici etkinliğini gösterir.
+   * **Çalıştırma geçmişi** , mantıksal uygulamanız için tüm çalıştırmaları gösterir. 
+   * **Tetikleyici geçmişi** , mantıksal uygulamanız için tüm tetikleyici etkinliklerini gösterir.
 
-   Durum açıklamaları için bkz. [mantıksal uygulamanızla ilgili sorun giderme](../logic-apps/logic-apps-diagnosing-failures.md).
+   Durum açıklamaları için bkz. [mantıksal uygulamanızda sorun giderme](../logic-apps/logic-apps-diagnosing-failures.md).
 
    > [!TIP]
-   > Araç çubuğunda beklediğiniz verileri bulamazsanız seçin **Yenile**.
+   > Beklenen verileri bulamazsanız, araç çubuğunda **Yenile**' yi seçin.
 
-3. Belirli bir çalıştırma adımları altında görüntülemek için **çalıştırma geçmişi**, çalıştırılan seçin. 
+3. Belirli bir çalışmadan ilgili adımları görüntülemek için, çalışma **geçmişi**altında o çalıştırmayı seçin. 
 
-   İzleme görünümü her adım, çalışan gösterir. Örneğin:
+   İzleyici görünümü, çalıştırılan her adımı gösterir. Örnek:
 
    ![Belirli bir çalıştırma için Eylemler](media/logic-apps-monitor-your-logic-apps/monitor-view-updated.png)
 
-4. Çalıştırma hakkında daha fazla ayrıntı almak için seçtiğiniz **çalıştırma ayrıntıları**. Adımlar, durumu, giriş ve çıkışları çalıştırma için bu bilgileri özetler. 
+4. Çalıştırma hakkında daha fazla bilgi edinmek için, **çalıştırma ayrıntıları**' nı seçin. Bu bilgiler, çalıştırma için adımları, durumu, girişleri ve çıkışları özetler. 
 
-   ![Seçin "Çalıştırma Ayrıntıları"](media/logic-apps-monitor-your-logic-apps/run-details.png)
+   !["Ayrıntıları Çalıştır" ı seçin](media/logic-apps-monitor-your-logic-apps/run-details.png)
 
-   Örneğin, çalıştırmanın alabilirsiniz **bağıntı kimliği**, kullandığınızda, ihtiyacınız olabilecek [Logic Apps için REST API](https://docs.microsoft.com/rest/api/logic).
+   Örneğin, [Logic Apps için REST API](https://docs.microsoft.com/rest/api/logic)kullandığınızda ihtiyacınız olabilecek ÇALıŞTıRMANıN **bağıntı kimliğini**alabilirsiniz.
 
-5. Belirli bir adım hakkında daha fazla bilgi edinmek için bu adımı seçin. Artık girişler, çıkışlar ve bu adım için gerçekleşen hataları gibi ayrıntılarını da gözden geçirebilirsiniz. Örneğin:
+5. Belirli bir adımla ilgili ayrıntıları almak için bu adımı seçin. Artık girişler, çıktılar ve bu adımla ilgili tüm hatalar gibi ayrıntıları gözden geçirebilirsiniz. Örnek:
 
-   ![Adımı ayrıntıları](media/logic-apps-monitor-your-logic-apps/monitor-view-details.png)
+   ![Adım ayrıntıları](media/logic-apps-monitor-your-logic-apps/monitor-view-details.png)
    
    > [!NOTE]
-   > Tüm çalışma zamanı ayrıntılarını ve olayları, Logic Apps hizmetinde şifrelenir. Yalnızca bir kullanıcı verileri görüntülemek için istediğinde şifresi çözülür. Ayrıca bu olaylar ile erişimi denetleyebilirsiniz [Azure rol tabanlı Access Control (RBAC)](../role-based-access-control/overview.md).
+   > Tüm çalışma zamanı ayrıntıları ve olayları Logic Apps hizmeti içinde şifrelenir. Yalnızca bir Kullanıcı bu verileri görüntülemek istediğinde şifresi çözülür. [Azure rol tabanlı Access Control (RBAC)](../role-based-access-control/overview.md)ile bu olaylara erişimi de denetleyebilirsiniz.
 
-6. Belirli bir olayın hakkında bilgi almak için geri gidin **genel bakış** bölmesi. Altında **tetikleyicisi geçmişi**, tetikleyici olayı seçin. Ayrıntılar gibi girişler ve çıkışlar, örneğin inceleyebilirsiniz:
+6. Belirli bir tetikleyici olayı hakkındaki ayrıntıları almak için **genel bakış** bölmesine dönün. **Tetikleyici geçmişi**altında tetikleyici olayını seçin. Artık giriş ve çıkış gibi ayrıntıları gözden geçirebilirsiniz, örneğin:
 
-   ![Tetikleyici olay çıkış ayrıntıları](media/logic-apps-monitor-your-logic-apps/trigger-details.png)
+   ![Olay çıkış ayrıntılarını tetikleme](media/logic-apps-monitor-your-logic-apps/trigger-details.png)
 
 <a name="azure-diagnostics"></a>
 
-## <a name="turn-on-diagnostics-logging-for-your-logic-app"></a>Tanılama mantıksal uygulamanız için oturum açın
+## <a name="turn-on-diagnostics-logging-for-your-logic-app"></a>Mantıksal uygulamanız için tanılama günlüğünü açma
 
-Daha zengin çalışma zamanı ayrıntılarını ve olayları ile hata ayıklama için ile günlüğe kaydetme tanılama ayarlayabilirsiniz [Azure İzleyicisi](../log-analytics/log-analytics-overview.md). Azure İzleyici, bulut izler ve şirket içi Ortamlarınızdaki kullanılabilirliği ve performansı sürdürmek amacıyla bir Azure hizmetidir. 
+Çalışma zamanı ayrıntıları ve olayları ile daha zengin hata ayıklama için, [Azure izleyici günlükleri](../log-analytics/log-analytics-overview.md)ile tanılama günlüğü ayarlayabilirsiniz. Azure Izleyici, Azure 'da bulut ve şirket içi ortamlarınızı izleyen ve kullanılabilirlik ve performanslarını korumanıza yardımcı olan bir hizmettir. 
 
-Başlamadan önce Log Analytics çalışma alanına sahip olmanız gerekir. Bilgi [bir Log Analytics çalışma alanı oluşturma](../azure-monitor/learn/quick-create-workspace.md).
+Başlamadan önce bir Log Analytics çalışma alanına sahip olmanız gerekir. [Log Analytics çalışma alanı oluşturmayı](../azure-monitor/learn/quick-create-workspace.md)öğrenin.
 
-1. İçinde [Azure portalında](https://portal.azure.com)bulup mantıksal uygulamanızı seçin. 
+1. [Azure Portal](https://portal.azure.com)mantıksal uygulamanızı bulun ve seçin. 
 
-2. Mantıksal uygulama dikey penceresinde menüsünde altında **izleme**, seçin **tanılama** > **tanılama ayarları**.
+2. Mantıksal uygulama dikey penceresi menüsünde, **izleme**altında **Tanılama >** **Tanılama ayarları**' nı seçin.
 
-   ![İzleme, yönetim tanı, tanılama ayarları için Git](media/logic-apps-monitor-your-logic-apps/logic-app-diagnostics.png)
+   ![Izleme, tanılama ve tanılama ayarlarına git](media/logic-apps-monitor-your-logic-apps/logic-app-diagnostics.png)
 
-3. Altında **tanılama ayarları**, seçin **üzerinde**.
+3. **Tanılama ayarları**altında **Açık**' ı seçin.
 
-   ![Tanılama günlüklerini açın](media/logic-apps-monitor-your-logic-apps/turn-on-diagnostics-logic-app.png)
+   ![tanılama günlüklerini aç](media/logic-apps-monitor-your-logic-apps/turn-on-diagnostics-logic-app.png)
 
-4. Artık gösterildiği günlüğe kaydetme için Log Analytics çalışma alanı ve olay kategorisi seçin:
+4. Şimdi Log Analytics çalışma alanını ve günlüğe kaydetme için olay kategorisini gösterildiği gibi seçin:
 
-   1. Seçin **Log Analytics'e gönderme**. 
-   2. Altında **Log Analytics**, seçin **yapılandırma**. 
-   3. Altında **OMS çalışma alanları**, günlüğe kaydetme için kullanılacak çalışma alanını seçin.
+   1. **Log Analytics gönder**' i seçin. 
+   2. **Log Analytics**altında **Yapılandır**' ı seçin. 
+   3. **OMS çalışma alanları**altında, günlüğe kaydetme için kullanılacak çalışma alanını seçin.
       > [!NOTE]
       > OMS çalışma alanları artık Log Analytics çalışma alanları olarak adlandırılır.
-   4. Altında **günlük**seçin **WorkflowRuntime** kategorisi.
+   4. **Günlük**altında **WorkflowRuntime** kategorisini seçin.
    5. Ölçüm aralığını seçin.
    6. İşiniz bittiğinde **Kaydet**’i seçin.
 
-   ![Log Analytics çalışma alanı ve veri günlüğü için seçin](media/logic-apps-monitor-your-logic-apps/send-diagnostics-data-log-analytics-workspace.png)
+   ![Log Analytics çalışma alanı ve verileri günlüğe kaydetme için seçin](media/logic-apps-monitor-your-logic-apps/send-diagnostics-data-log-analytics-workspace.png)
 
-Artık, olayları ve eylem olayları çalıştırma tetikleyicisi olaylar için olayları ve diğer verileri bulabilirsiniz.
+Şimdi, tetikleyici olayları, çalıştırma olayları ve eylem olayları için olayları ve diğer verileri bulabilirsiniz.
 
 <a name="find-events"></a>
 
-## <a name="find-events-and-data-for-your-logic-app"></a>Mantıksal uygulamanız için olayları ve verileri bulma
+## <a name="find-events-and-data-for-your-logic-app"></a>Mantıksal uygulamanıza yönelik olayları ve verileri bulun
 
-Bulma ve mantıksal uygulamanızda olayları görüntüleme gibi olaylar, olaylar, çalıştırmak ve eylem olaylar tetikleyin, aşağıdaki adımları izleyin.
+Mantıksal uygulamanızdaki olayları, tetikleyici olayları, çalıştırma olayları ve eylem olayları gibi bulmak ve görüntülemek için aşağıdaki adımları izleyin.
 
-1. İçinde [Azure portalında](https://portal.azure.com), seçin **tüm hizmetleri**. "Log analytics için" için arama yapın ve ardından **Log Analytics** burada gösterildiği gibi:
+1. [Azure Portal](https://portal.azure.com), **tüm hizmetler**' i seçin. "Log Analytics" araması yapın ve ardından **Log Analytics** aşağıda gösterildiği gibi seçin:
 
-   !["Log Analytics" seçin](media/logic-apps-monitor-your-logic-apps/browseloganalytics.png)
+   !["Log Analytics" öğesini seçin](media/logic-apps-monitor-your-logic-apps/browseloganalytics.png)
 
-2. Altında **Log Analytics**bulup Log Analytics çalışma alanınızı seçin. 
+2. **Log Analytics**altında Log Analytics çalışma alanınızı bulun ve seçin. 
 
    ![Log Analytics çalışma alanınızı seçin](media/logic-apps-monitor-your-logic-apps/selectla.png)
 
-3. Altında **Yönetim**, seçin **günlük araması**.
+3. **Yönetim**altında **günlük araması**' nı seçin.
 
-   !["Ara" öğesini seçin](media/logic-apps-monitor-your-logic-apps/log-search.png)
+   !["Günlük aramasını" seçin](media/logic-apps-monitor-your-logic-apps/log-search.png)
 
-4. Arama kutusuna bulmak ve basın istediğiniz bir alanı belirtmek **Enter**. Yazmaya başladığınızda, olası eşleşmeler ve kullanabileceğiniz işlemleri görürsünüz. 
+4. Arama kutusunda, bulmak istediğiniz bir alan belirtin ve **ENTER**tuşuna basın. Yazmaya başladığınızda, kullanabileceğiniz olası eşleşmeleri ve işlemleri görürsünüz. 
 
-   Örneğin, gerçekleşen ilk 10 olayları bulmak için girin ve bu arama sorgusu seçin: **kategori arama "WorkflowRuntime" == | 10 sınırla**
+   Örneğin, gerçekleşen ilk 10 olayı bulmak için bu arama sorgusunu girin ve seçin: **arama kategorisi = = "WorkflowRuntime" | sınır 10**
 
-   ![Arama dizesi girin](media/logic-apps-monitor-your-logic-apps/oms-start-query.png)
+   ![Arama dizesini girin](media/logic-apps-monitor-your-logic-apps/oms-start-query.png)
 
-   Daha fazla bilgi edinin [Azure İzleyici günlüklerine veri bulma](../log-analytics/log-analytics-log-searches.md).
+   [Azure izleyici günlüklerinde veri bulma](../log-analytics/log-analytics-log-searches.md)hakkında daha fazla bilgi edinin.
 
-5. Sonuçları sayfasında sol çubuğunda, görüntülemek istediğiniz zaman çerçevesini seçin.
-Bir filtre ekleyerek sorgunuzu iyileştirmek için seçin **+ Ekle**.
+5. Sonuçlar sayfasında, sol çubukta, görüntülemek istediğiniz zaman dilimini seçin.
+Filtre ekleyerek sorgunuzu iyileştirmek için **+ Ekle**' yi seçin.
 
-   ![Sorgu sonuçları için zaman çerçevesini seçin](media/logic-apps-monitor-your-logic-apps/query-results.png)
+   ![Sorgu sonuçları için zaman dilimini seçin](media/logic-apps-monitor-your-logic-apps/query-results.png)
 
-6. Altında **ekleme filtreleri**, istediğiniz filtreyi bulabilmesi için filtre adı girin. Filtre seçin ve **+ Ekle**.
+6. Filtre **Ekle**' nin altında, istediğiniz filtreyi bulmak için filtre adını girin. Filtreyi seçin ve **+ Ekle**' yi seçin.
 
-   Bu örnek "Durum" sözcüğü altında başarısız olayları bulmak için kullanır. **AzureDiagnostics**.
-   Burada filtresi için **status_s** zaten seçildi.
+   Bu örnek, **AzureDiagnostics**altındaki başarısız olayları bulmak için "Status" sözcüğünü kullanır.
+   Burada **status_s** filtresi zaten seçilidir.
 
-   ![Filtre seçin](media/logic-apps-monitor-your-logic-apps/log-search-add-filter.png)
+   ![Filtre Seç](media/logic-apps-monitor-your-logic-apps/log-search-add-filter.png)
 
-7. Sol çubuğunda, seçin ve istediğiniz filtre değeri **Uygula**.
+7. Sol çubukta, kullanmak istediğiniz filtre değerini seçin ve **Uygula**' yı seçin.
 
-   ![Filtre değeri'ı seçin, "Uygula"](media/logic-apps-monitor-your-logic-apps/log-search-apply-filter.png)
+   ![Filtre değeri seçin, "Uygula" yı seçin](media/logic-apps-monitor-your-logic-apps/log-search-apply-filter.png)
 
-8. Artık oluşturduğunuz sorgu için döndürür. Sorgunuz, seçilen filtre ve değer güncelleştirilir. Önceki sonuçlarınızı şimdi çok filtrelenir.
+8. Şimdi oluşturmakta olduğunuz sorguya geri dönün. Sorgunuz, seçtiğiniz filtre ve değer ile güncelleştirilir. Önceki sonuçlarınız artık çok filtrelenmiştir.
 
-   ![Sorgunuzu filtrelenmiş sonuçları ile geri dönün](media/logic-apps-monitor-your-logic-apps/log-search-query-filtered-results.png)
+   ![Filtrelenmiş sonuçlarla sorgunuza geri dönme](media/logic-apps-monitor-your-logic-apps/log-search-query-filtered-results.png)
 
-9. Sorgunuz gelecekte kullanım için kaydetmeyi seçebilirsiniz **Kaydet**. Bilgi [sorgunuzu kaydetme](../logic-apps/logic-apps-track-b2b-messages-omsportal-query-filter-control-number.md#save-oms-query).
+9. Sorgunuzu daha sonra kullanmak üzere kaydetmek için **Kaydet**' i seçin. [Sorgunuzu kaydetmeyi](../logic-apps/logic-apps-track-b2b-messages-omsportal-query-filter-control-number.md#save-oms-query)öğrenin.
 
 <a name="extend-diagnostic-data"></a>
 
-## <a name="extend-how-and-where-you-use-diagnostic-data-with-other-services"></a>Nasıl ve tanılama verilerini diğer hizmetleri ile kullandığınız genişletin
+## <a name="extend-how-and-where-you-use-diagnostic-data-with-other-services"></a>Tanılama verilerini diğer hizmetlerle nasıl ve nerede kullanacağınızı genişletin
 
-Azure İzleyici günlüklerine yanı sıra, mantıksal uygulamanızın tanılama verilerini diğer Azure hizmetleriyle örneğin kullanma genişletebilirsiniz: 
+Azure Izleyici günlükleriyle birlikte, mantıksal uygulamanızın tanılama verilerini diğer Azure hizmetleriyle nasıl kullanacağınızı genişletebilirsiniz, örneğin: 
 
-* [Azure depolama alanında Azure tanılama günlüklerini arşivleme](../azure-monitor/platform/archive-diagnostic-logs.md)
-* [Azure Event hubs'a Stream Azure tanılama günlükleri](../azure-monitor/platform/diagnostic-logs-stream-event-hubs.md) 
+* [Azure depolama 'da Azure Tanılama günlüklerini arşivleme](../azure-monitor/platform/archive-diagnostic-logs.md)
+* [Azure Event Hubs akış Azure Tanılama günlükleri](../azure-monitor/platform/resource-logs-stream-event-hubs.md) 
 
-İzleme telemetri ve diğer hizmetlerden analytics kullanarak gerçek zamanlı Get ister sonra yapabilecekleriniz [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) ve [Power BI](../azure-monitor/platform/powerbi.md). Örneğin:
+Daha sonra [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) ve [Power BI](../azure-monitor/platform/powerbi.md)gibi diğer hizmetlerden telemetri ve analiz kullanarak gerçek zamanlı izleme sağlayabilirsiniz. Örnek:
 
-* [Event Hubs verilerini Stream Stream analytics'e](../stream-analytics/stream-analytics-define-inputs.md)
-* [Stream Analytics ile akış verilerini analiz etme ve Power BI'da gerçek zamanlı analiz Pano oluşturma](../stream-analytics/stream-analytics-power-bi-dashboard.md)
+* [Event Hubs veri akışı Stream Analytics](../stream-analytics/stream-analytics-define-inputs.md)
+* [Stream Analytics ile akış verilerini çözümleme ve Power BI bir gerçek zamanlı analiz panosu oluşturma](../stream-analytics/stream-analytics-power-bi-dashboard.md)
 
-Ayarlamak istediğiniz seçenekleri bağlı olarak, emin olun, ilk [bir Azure depolama hesabı oluşturma](../storage/common/storage-create-storage-account.md) veya [bir Azure olay hub'ı oluşturma](../event-hubs/event-hubs-create.md). Ardından, Tanılama verileri göndermek istediğiniz seçenekleri seçin:
+Ayarlamak istediğiniz seçeneklere bağlı olarak, önce [bir Azure depolama hesabı oluşturun](../storage/common/storage-create-storage-account.md) veya [bir Azure Olay Hub 'ı oluşturun](../event-hubs/event-hubs-create.md). Ardından tanılama verilerini göndermek istediğiniz seçenekleri belirleyin:
 
-![Azure depolama hesabına veya olay hub'ına veri Gönder](./media/logic-apps-monitor-your-logic-apps/storage-account-event-hubs.png)
+![Verileri Azure depolama hesabına veya Olay Hub 'ına gönder](./media/logic-apps-monitor-your-logic-apps/storage-account-event-hubs.png)
 
 > [!NOTE]
-> Yalnızca bir depolama hesabı kullanmayı seçtiğinizde bekletme dönemleri uygulamak.
+> Saklama süreleri yalnızca bir depolama hesabı kullanmayı seçtiğinizde geçerlidir.
 
 <a name="add-azure-alerts"></a>
 
 ## <a name="set-up-alerts-for-your-logic-app"></a>Mantıksal uygulamanız için uyarıları ayarlama
 
-Belirli ölçümleri veya mantıksal uygulamanızın aşıldı eşikleri izlemek üzere ayarlanan sahte [azure'daki uyarıları](../azure-monitor/platform/alerts-overview.md). Hakkında bilgi edinin [ölçümleri azure'da](../monitoring-and-diagnostics/monitoring-overview-metrics.md). 
+Mantıksal uygulamanıza yönelik belirli ölçümleri izlemek veya eşikleri aşmış olması için, [Azure 'da uyarıları](../azure-monitor/platform/alerts-overview.md)ayarlayın. [Azure 'da ölçümler](../monitoring-and-diagnostics/monitoring-overview-metrics.md)hakkında bilgi edinin. 
 
-Uyarılar olmadan ayarlamak için [Azure İzleyici günlükleri](../log-analytics/log-analytics-overview.md), şu adımları izleyin. Daha gelişmiş uyarı ölçütleri ve eylemleri için [Azure İzleyici günlüklerini ayarlamak](#azure-diagnostics) çok.
+Uyarıları [Azure izleyici günlükleri](../log-analytics/log-analytics-overview.md)olmadan ayarlamak için aşağıdaki adımları izleyin. Daha gelişmiş uyarılar ölçütü ve eylemleri için [Azure izleyici günlüklerini de ayarlayın](#azure-diagnostics) .
 
-1. Mantıksal uygulama dikey penceresinde menüsünde altında **izleme**, seçin **tanılama** > **uyarı kuralları** > **uyarısı Ekle**burada gösterildiği gibi:
+1. Mantıksal uygulama dikey penceresi menüsünde, **izleme**altında **tanılama**  > **Uyarı  >  kuralları** ' nı seçin ve burada gösterildiği gibi**uyarı ekleyin** :
 
-   ![Mantıksal uygulamanız için bir uyarı Ekle](media/logic-apps-monitor-your-logic-apps/set-up-alerts.png)
+   ![Mantıksal uygulamanız için bir uyarı ekleyin](media/logic-apps-monitor-your-logic-apps/set-up-alerts.png)
 
-2. Üzerinde **bir uyarı kuralı Ekle** dikey Uyarınız gösterildiği gibi oluşturun:
+2. **Uyarı kuralı ekle** dikey penceresinde, uyarıyı gösterildiği gibi oluşturun:
 
-   1. Altında **kaynak**, mantıksal uygulamanızı seçin, seçili değilse. 
-   2. Bir ad ve açıklama için uyarı verir.
-   3. Seçin bir **ölçüm** veya izlemek istediğiniz olay.
-   4. Seçin bir **koşul**, belirtin bir **eşiği** kabuş edin ve seçin için **süresi** Bu ölçüm izleme.
-   5. Uyarı için posta göndermek bu seçeneği seçin. 
-   6. Diğer tüm e-posta adresleri uyarı göndermek için belirtin. 
-   Uyarı göndermek istediğiniz bir Web kancası URL'si de belirtebilirsiniz.
+   1. **Kaynak**altında, henüz seçili değilse mantıksal uygulamanızı seçin. 
+   2. Uyarınız için bir ad ve açıklama sağlayın.
+   3. İzlemek istediğiniz bir **ölçüm** veya olay seçin.
+   4. Bir **koşul**seçin, ölçüm Için bir **eşik** belirtin ve bu ölçümü izlemek için **dönemi** seçin.
+   5. Uyarı için posta gönderilmesini isteyip istemediğinizi seçin. 
+   6. Uyarının gönderilmesi için herhangi bir e-posta adresi belirtin. 
+   Ayrıca, uyarıyı göndermek istediğiniz yere bir Web kancası URL 'SI de belirtebilirsiniz.
 
-   Örneğin, bu kural beş olduğunda bir uyarı gönderir veya bir saat içinde çalıştırma daha başarısız:
+   Örneğin, bu kural bir saatte beş veya daha fazla çalıştırma başarısız olduğunda bir uyarı gönderir:
 
-   ![Ölçüm uyarı kuralı oluşturma](media/logic-apps-monitor-your-logic-apps/create-alert-rule.png)
+   ![Ölçüm uyarı kuralı oluştur](media/logic-apps-monitor-your-logic-apps/create-alert-rule.png)
 
 > [!TIP]
-> Bir uyarıdan bir mantık uygulaması çalıştırmak için dahil edebileceğiniz [istek tetikleyicisi](../connectors/connectors-native-reqres.md) iş akışınızda olanak sağlayan görevleri gibi bu örnekler:
+> Bir uyarıdan mantıksal uygulama çalıştırmak için, bu örnekler gibi görevler gerçekleştirmenize olanak sağlayan [istek tetikleyicisini](../connectors/connectors-native-reqres.md) iş akışınıza dahil edebilirsiniz:
 > 
-> * [POST Slack için](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-slack-with-logic-app)
-> * [Bir metin iletisi gönderin](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-text-message-with-logic-app)
-> * [Kuyruğa bir ileti ekleyin](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-queue-with-logic-app)
+> * [Bolluk 'e gönder](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-slack-with-logic-app)
+> * [Metin gönder](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-text-message-with-logic-app)
+> * [Kuyruğa ileti ekleme](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-queue-with-logic-app)
 
 <a name="diagnostic-event-properties"></a>
 
-## <a name="azure-diagnostics-event-settings-and-details"></a>Azure Tanılama Olay ayarları ve ayrıntıları
+## <a name="azure-diagnostics-event-settings-and-details"></a>Olay ayarları ve Ayrıntılar Azure Tanılama
 
-Her mantıksal uygulamanızı ve bu olay, örneğin durumu hakkında ayrıntılı tanılama olayında, başlangıç saati, bitiş saati ve benzeri. İzleme, izleme ve günlüğe kaydetme program aracılığıyla ayarlamak için bu ayrıntılarla kullanabilirsiniz [Azure Logic Apps için REST API](https://docs.microsoft.com/rest/api/logic) ve [REST API'si için Azure tanılama](../azure-monitor/platform/metrics-supported.md#microsoftlogicworkflows).
+Her tanılama olayının, mantıksal uygulamanız ve bu olay hakkında, örneğin, durum, başlangıç saati, bitiş saati vb. ayrıntıları vardır. Program aracılığıyla izlemeyi, izlemeyi ve günlüğe kaydetmeyi ayarlamak için bu ayrıntıları [Azure Logic Apps REST API](https://docs.microsoft.com/rest/api/logic) ve [Azure tanılama REST API](../azure-monitor/platform/metrics-supported.md#microsoftlogicworkflows)için kullanabilirsiniz.
 
-Örneğin, `ActionCompleted` olayının `clientTrackingId` ve `trackedProperties` izleme ve izleme için kullanabileceğiniz özellikler:
+Örneğin `ActionCompleted` olayı, izleme ve izleme için kullanabileceğiniz `clientTrackingId` ve `trackedProperties` özelliklerine sahiptir:
 
 ``` json
 {
@@ -247,11 +246,11 @@ Her mantıksal uygulamanızı ve bu olay, örneğin durumu hakkında ayrıntıl�
 }
 ```
 
-* `clientTrackingId`: Aksi durumda tüm iç içe geçmiş iş akışları dahil olmak üzere, Azure otomatik olarak bu kimliği oluşturur ve olayları karşılık gelen bir mantıksal uygulama çalıştırması, sağlanan mantıksal uygulamadan denir. Bu kimliği bir tetikleyici geçirerek el ile belirtebilirsiniz bir `x-ms-client-tracking-id` üstbilgi tetikleyici isteğinde, özel kimlik değerine sahip. Bir istek tetikleyicisi, HTTP tetikleyicisi veya Web kancasını tetikleyici olarak kullanabilirsiniz.
+* `clientTrackingId`: sağlanmazsa, Azure bu KIMLIĞI otomatik olarak oluşturur ve mantıksal uygulama tarafından çağrılan iç içe geçmiş iş akışları dahil olmak üzere bir mantıksal uygulama çalıştırması genelinde olayları otomatik olarak oluşturur. Bu KIMLIĞI, tetikleyici isteğindeki özel KIMLIK değeri ile bir `x-ms-client-tracking-id` üst bilgisi geçirerek bir tetikleyiciden el ile belirtebilirsiniz. İstek tetikleyicisi, HTTP tetikleyicisi veya Web kancası tetikleyicisi kullanabilirsiniz.
 
-* `trackedProperties`: Giriş veya çıkış tanılama veri izlemek için mantıksal uygulamanızın JSON tanımında eylemler için izlenen özellikler ekleyebilirsiniz. İzlenen özellikler yalnızca tek bir eylemin girişler ve çıkışlar izleyebilirsiniz, ancak kullanabileceğiniz `correlation` çalıştırmada eylemler arasında ilişkilendirmek için olay özellikleri.
+* `trackedProperties`: Tanılama verilerinde girişleri veya çıkışları izlemek Için mantıksal uygulamanızın JSON tanımında izlenen özellikleri eylemlere ekleyebilirsiniz. İzlenen özellikler yalnızca tek bir eylemin girişlerini ve çıkışlarını izleyebilir, ancak bir çalıştırmada eylemler arasında ilişki kurmak için olayların `correlation` özelliklerini de kullanabilirsiniz.
 
-  Bir veya daha fazla özellik izlemek için Ekle `trackedProperties` bölümü ve eylem tanımına istediğiniz özellikleri. Örneğin, bir "sipariş kimliği" telemetrinizi gibi verileri izlemek istediğinizi varsayalım:
+  Bir veya daha fazla özelliği izlemek için `trackedProperties` bölümünü ve eylem tanımına istediğiniz özellikleri ekleyin. Örneğin, telemetrinizde "Order ID" gibi verileri izlemek istediğinizi varsayalım:
 
   ``` json
   "myAction": {
@@ -270,9 +269,29 @@ Her mantıksal uygulamanızı ve bu olay, örneğin durumu hakkında ayrıntıl�
     }
   }
   ```
+  **Değişken Initialize** eylemini kullanan başka bir örnek aşağıda verilmiştir. Örnek, eylemin girişinin bir kayıt değil, bir dizi olması durumunda, izlenen özellikleri eyleme ekler.  
+
+  ``` json
+  "actions": { 
+   "Initialize_variable": { 
+      "inputs": { 
+         "variables": [{ 
+            "name": "ConnectorName", 
+            "type": "String", 
+            "value": "SFTP-SSH" 
+         }]
+      },
+      "runAfter": {},
+      "trackedProperties": { 
+         "Track1": "@action().inputs.variables[0].value"
+      },
+      "type": "InitializeVariable"
+   } 
+  }
+  ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Mantıksal uygulama dağıtımı için şablonlar oluşturma ve release management](../logic-apps/logic-apps-create-deploy-template.md)
+* [Mantıksal uygulama dağıtımını otomatikleştirme](../logic-apps/logic-apps-azure-resource-manager-templates-overview.md)
 * [Enterprise Integration Pack ile B2B senaryoları](../logic-apps/logic-apps-enterprise-integration-overview.md)
 * [B2B iletilerini izleme](../logic-apps/logic-apps-monitor-b2b-message.md)

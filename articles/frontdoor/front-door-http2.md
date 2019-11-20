@@ -1,6 +1,6 @@
 ---
-title: Azure ön kapısı hizmeti - HTTP2 desteği | Microsoft Docs
-description: Bu makale Azure ön kapısı hizmetinde HTTP/2 desteği hakkında daha fazla bilgi edinmenize yardımcı olur.
+title: Azure ön kapı hizmeti-HTTP2 desteği | Microsoft Docs
+description: Bu makale Azure ön kapı hizmeti 'nde HTTP/2 desteği hakkında bilgi edinmenize yardımcı olur
 services: frontdoor
 documentationcenter: ''
 author: sharad4u
@@ -11,38 +11,41 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/10/2018
 ms.author: sharadag
-ms.openlocfilehash: 33e738f31be493d5890fc972ec71e7c6cd733bf4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c3c1721454c0b3c96071c685a764f34d4fa540b9
+ms.sourcegitcommit: 4b5dcdcd80860764e291f18de081a41753946ec9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60736460"
+ms.lasthandoff: 08/03/2019
+ms.locfileid: "68775262"
 ---
-# <a name="http2-support-in-azure-front-door-service"></a>Azure ön kapısı hizmetinde HTTP/2 desteği
-HTTP/2 HTTP/1.1 büyük bir düzeltme'dir. Daha hızlı, web performansı, daha az yanıt süresi ve gelişmiş bir kullanıcı, bilinen HTTP yöntemleri, durum kodları ve semantiği korurken deneyimi sağlar. HTTP/2 HTTP ve HTTPS ile çalışmak için tasarlanmış olsa da, çok sayıda istemci web tarayıcıları yalnızca Aktarım Katmanı Güvenliği (TLS) üzerinden HTTP/2 desteği.
+# <a name="http2-support-in-azure-front-door-service"></a>Azure ön kapı hizmetinde HTTP/2 desteği
+
+Şu anda, HTTP/2 desteği tüm ön kapı yapılandırmalarında etkindir. Müşterilerden başka bir eylem yapılması gerekmez.
+
+Http/2, HTTP/1.1 için önemli bir düzeltme. Daha hızlı Web performansı, daha az yanıt süresi ve geliştirilmiş Kullanıcı deneyimi sağlar, ancak tanıdık HTTP yöntemlerini, durum kodlarını ve semantiğini koruyun. Http/2, HTTP ve HTTPS ile çalışmak üzere tasarlanmış olsa da, çoğu istemci Web tarayıcısı yalnızca Aktarım Katmanı Güvenliği (TLS) üzerinden HTTP/2 ' yi destekler.
 
 ### <a name="http2-benefits"></a>HTTP/2 avantajları
 
-HTTP/2'in avantajları şunlardır:
+HTTP/2 avantajları şunları içerir:
 
 *   **Çoğullama ve eşzamanlılık**
 
-    HTTP 1.1 kullanarak, birden çok kaynak isteği gerçekleştiren birden çok TCP bağlantı gerektirir ve her bağlantı ilişkili performansa sahiptir. HTTP/2 tek bir TCP bağlantı üzerinde istenmesi birden fazla kaynak sağlar.
+    HTTP 1,1 kullanarak birden çok kaynak isteğinin birden çok TCP bağlantısı olması ve her bağlantının onunla ilişkili performans yükü vardır. HTTP/2, tek bir TCP bağlantısında birden fazla kaynağın istenme izin verir.
 
-*   **Üst bilgi sıkıştırma**
+*   **Üstbilgi sıkıştırması**
 
-    Hizmet kaynakları için HTTP üstbilgilerini sıkıştırarak kablo süresi önemli ölçüde azaltılır.
+    Sunulan kaynakların HTTP üst bilgilerini sıkıştırarak, iletişimdeki zaman önemli ölçüde azaltılır.
 
-*   **Stream bağımlılıkları**
+*   **Akış bağımlılıkları**
 
-    Stream bağımlılıklar, hangi kaynakların önceliğe sahip sunucuya göstermek için istemcide izin verin.
+    Akış bağımlılıkları, istemcinin önceliğe sahip olduğu sunucuya işaret ediyor olmasını sağlar.
 
 
 ## <a name="http2-browser-support"></a>HTTP/2 tarayıcı desteği
 
-Tüm bilinen tarayıcılar HTTP/2 desteği, geçerli sürümlerinde uyguladınız. Tarayıcılar HTTP/1.1 otomatik olarak geri dönüş, desteklenmeyen.
+Tüm ana tarayıcılar geçerli sürümlerinde HTTP/2 desteği uyguladık. Desteklenmeyen tarayıcılar, otomatik olarak HTTP/1.1 'e geri dönüş.
 
-|Tarayıcı|Minimum Version|
+|Browser|En düşük sürüm|
 |-------------|------------|
 |Microsoft Edge| 12|
 |Google Chrome| 43|
@@ -50,15 +53,11 @@ Tüm bilinen tarayıcılar HTTP/2 desteği, geçerli sürümlerinde uyguladını
 |Opera| 32|
 |Safari| 9|
 
-## <a name="enabling-http2-support-in-azure-front-door-service"></a>Azure ön kapısı hizmetinde HTTP/2 desteği etkinleştirme
-
-Şu anda, HTTP/2 desteği için tüm ön kapısı yapılandırmaları etkin değil. Müşterilerden daha fazla eylem gerekmiyor.
-
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-HTTP/2 hakkında daha fazla bilgi için aşağıdaki kaynakları ziyaret edin:
+HTTP/2 hakkında daha fazla bilgi edinmek için aşağıdaki kaynakları ziyaret edin:
 
-- [HTTP/2 belirtimi giriş sayfası](https://http2.github.io/)
+- [HTTP/2 belirtim giriş sayfası](https://http2.github.io/)
 - [Resmi HTTP/2 SSS](https://http2.github.io/faq/)
 - [Front Door oluşturmayı](quickstart-create-front-door.md) öğrenin.
 - [Front Door’un nasıl çalıştığını](front-door-routing-architecture.md) öğrenin.

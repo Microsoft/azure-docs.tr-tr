@@ -1,10 +1,11 @@
 ---
-title: Özel IP adresleri için VM'ler (Klasik) - Azure Klasik CLI yapılandırma
+title: VM 'Ler için özel IP adresleri yapılandırma (klasik)-Azure klasik CLı
 titlesuffix: Azure Virtual Network
 description: Klasik Azure komut satırı arabirimi (CLI) kullanarak sanal makineler (Klasik) için özel IP adresleri yapılandırmayı öğrenin.
 services: virtual-network
 documentationcenter: na
 author: genlin
+manager: dcscontentpm
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
@@ -12,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/15/2016
 ms.author: genli
-ms.openlocfilehash: 2f71dc2bcd5463f81ae286bbe3099124eb3fa539
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 64342c6dcf4c9a052442a6f4b0afb7a56994f496
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62107989"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71059230"
 ---
 # <a name="configure-private-ip-addresses-for-a-virtual-machine-classic-using-the-azure-classic-cli"></a>Klasik Azure CLI kullanarak sanal makine (Klasik) için özel IP adreslerini yapılandırın
 
@@ -99,7 +100,7 @@ Beklenen çıktı:
     info:    vm static-ip remove command OK
 
 ## <a name="how-to-add-a-static-private-ip-to-an-existing-vm"></a>Mevcut bir VM'ye statik özel IP ekleme
-Yukarıdaki komut dosyası kullanılarak oluşturulan VM'ye statik özel IP adresi eklemek için aşağıdaki komutu çalıştırın:
+Yukarıdaki betiği kullanarak oluşturulan VM 'ye statik bir özel IP adresi eklemek için aşağıdaki komutu çalıştırın:
 
     azure vm static-ip set DNS01 192.168.1.101
 
@@ -114,7 +115,7 @@ Beklenen çıktı:
 
 ## <a name="set-ip-addresses-within-the-operating-system"></a>İşletim sistemi içinde IP adreslerini ayarlayın
 
-Statik olarak bir sanal makinenin işletim sistemi içinde Azure sanal makinesine atanmış özel IP sürece atamayın, önerilen gerekli. İşletim sistemi içinde özel IP adresini el ile ayarlamanız durumunda Azure VM'sine atanan özel IP adresiyle aynı adresi olduğundan emin olun veya sanal makineye bağlantı kaybedebilir. Bir Azure sanal makinesi sanal makinenin işletim sistemi içinde atanan genel IP adresini el ile atamayın.
+Statik olarak bir sanal makinenin işletim sistemi içinde Azure sanal makinesine atanmış özel IP sürece atamayın, önerilen gerekli. İşletim sistemi içinde özel IP adresini el ile ayarlamanız durumunda Azure VM'sine atanan özel IP adresiyle aynı adresi olduğundan emin olun veya sanal makineye bağlantı kaybedebilir. Sanal makinenin işletim sistemi içindeki bir Azure sanal makinesine atanan genel IP adresini el ile atamayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * Hakkında bilgi edinin [ayrılmış genel IP](virtual-networks-reserved-public-ip.md) adresleri.

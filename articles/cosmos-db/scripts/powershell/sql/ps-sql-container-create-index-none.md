@@ -1,19 +1,20 @@
 ---
-title: Azure PowerShell Betiği - Azure Cosmos hesap devre dışı dizin bir kapsayıcı oluşturma
-description: Azure PowerShell betik örneği - Azure Cosmos hesap devre dışı dizin bir kapsayıcı oluşturma
+title: Azure PowerShell betiği-Azure Cosmos hesabında kapsayıcı dizin oluşturma kapalı
+description: Azure PowerShell betik örneği-Azure Cosmos hesabında kapsayıcı dizini oluşturma kapalı
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: samples
+ms.subservice: cosmosdb-sql
+ms.topic: sample
 ms.date: 05/06/2019
 ms.author: mjbrown
-ms.openlocfilehash: 4fc75eadd0f3ad87d313d10a9005997d46103666
-ms.sourcegitcommit: d2785f020e134c3680ca1c8500aa2c0211aa1e24
+ms.openlocfilehash: d216aa7eaa25ee18c7b5e962309e2a08f11df284
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67566823"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71178828"
 ---
-# <a name="create-a-container-indexing-turned-off-in-an-azure-cosmos-account-using-powershell"></a>Bir Azure Cosmos hesabının PowerShell kullanılarak devre dışı dizin bir kapsayıcı oluşturma
+# <a name="create-a-container-indexing-turned-off-in-an-azure-cosmos-account-using-powershell"></a>PowerShell kullanarak bir Azure Cosmos hesabında kapsayıcı dizin oluşturma kapalı
 
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
@@ -38,8 +39,8 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 |**Azure kaynakları**| |
-| [Yeni AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
-|**Azure kaynak grupları**| |
+| [New-AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
+|**Azure Kaynak grupları**| |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 |||
 

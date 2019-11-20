@@ -1,20 +1,19 @@
 ---
-title: Blob depolamaya giriş - Azure’da nesne depolama
-description: Azure Blob depolama, metin veya ikili veri gibi çok miktarda yapılandırılmamış nesne verilerini depolar. BLOB Depolama ayrıca büyük veri analizi için Azure Data Lake depolama Gen2'ye de destekler.
+title: Blob (nesne) depolama alanı-Azure depolama hakkında
+description: Azure Blob depolama, metin veya ikili veri gibi çok miktarda yapılandırılmamış nesne verilerini depolar. BLOB depolama Ayrıca büyük veri analizi için Azure Data Lake Storage 2. destekler.
 services: storage
-author: WenJason
+author: tamram
 ms.service: storage
 ms.topic: overview
-origin.date: 11/19/2018
-ms.date: 04/22/2019
-ms.author: v-jay
+ms.date: 11/04/2019
+ms.author: tamram
 ms.subservice: blobs
-ms.openlocfilehash: 35a428c2ae706d7838778c7590e5378ab5df40f9
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 8f9c1b1762c4e6028d935e03a630dfc0ca4ee4b9
+ms.sourcegitcommit: b2fb32ae73b12cf2d180e6e4ffffa13a31aa4c6f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60708516"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73615754"
 ---
 # <a name="what-is-azure-blob-storage"></a>Azure Blob depolama nedir? 
 
@@ -23,4 +22,4 @@ ms.locfileid: "60708516"
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure Blob depolamaya giriş](storage-blobs-introduction.md)
-- [Azure Data Lake depolama Gen2'ye Giriş](../blobs/data-lake-storage-introduction.md)
+- [Azure Data Lake Storage 2. giriş](../blobs/data-lake-storage-introduction.md)

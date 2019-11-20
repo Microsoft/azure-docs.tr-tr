@@ -1,29 +1,30 @@
 ---
-title: Azure uygulamaları yönetilen uygulama teklifi yayımlama Kılavuzu
-description: Bu makalede Market'te bir yönetilen uygulama yayımlama için gereksinimleri anlatılmaktadır.
+title: Azure uygulamaları yönetilen uygulama teklifi Yayımlama Kılavuzu
+description: Bu makalede, Market 'te yönetilen bir uygulama yayımlama gereksinimleri açıklanır
 services: Azure, Marketplace, Compute, Storage, Networking, Blockchain, Security
 author: qianw211
 manager: evansma
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 06/14/2018
 ms.author: v-qiwe
-ms.openlocfilehash: 29546b0969751a43959a55860fc22e9f3c3e225b
-ms.sourcegitcommit: 1289f956f897786090166982a8b66f708c9deea1
+ms.openlocfilehash: bdb2a54748c734d7b44dfa0b1f106d37e817f80e
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67154948"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73822928"
 ---
-# <a name="azure-applications-managed-application-offer-publishing-guide"></a>Azure uygulamaları için: Yönetilen uygulama teklifi yayımlama Kılavuzu
+# <a name="azure-applications-managed-application-offer-publishing-guide"></a>Azure uygulamaları: yönetilen uygulama teklifi Yayımlama Kılavuzu
 
-Yönetilen bir uygulamaya bir çözüm Market'te yayımlamak için temel yollarından biridir. Bu teklif gereksinimlerini anlamak için bu kılavuzu kullanın. 
+Yönetilen bir uygulama, Market 'te çözüm yayımlamanın ana yöntemlerinden biridir. Bu teklifin gereksinimlerini anlamak için bu kılavuzu kullanın. 
 
-Hangi dağıtılır ve faturalandırılır Market aracılığıyla işlem teklifler şunlardır. Bir kullanıcının gördüğü eylem çağrısı "Şimdi edinin." olan
+Bunlar Market aracılığıyla dağıtılan ve faturalandırılan işlem teklifleridir. Kullanıcının gördüğü eyleme yapılan çağrı "Şimdi al" dır.
 
-Azure uygulama kullanma: yönetilen uygulama Teklif türü aşağıdaki koşullar gerekli olduğunda:
-- Her bir abonelik tabanlı çözüm müşteriniz için bir VM veya Iaas tabanlı tüm bir çözümü kullanarak dağıtırsınız.
-- Siz veya müşteriniz gerektiren çözüm iş ortağı tarafından yönetiliyor.
+Aşağıdaki koşullar gerektiğinde Azure uygulaması: yönetilen uygulama teklifi türünü kullanın:
+- Bir VM veya tüm IaaS tabanlı bir çözümü kullanarak müşteriniz için abonelik tabanlı bir çözüm dağıtırsınız.
+- Siz veya müşteriniz, çözümün bir iş ortağı tarafından yönetilmesini gerektirir.
 
 >[!NOTE]
 >Örneğin, bir iş ortağı bir sı veya yönetilen hizmet sağlayıcısı (MSP) olabilir.  
@@ -32,21 +33,21 @@ Azure uygulama kullanma: yönetilen uygulama Teklif türü aşağıdaki koşulla
 
 |Gereksinimler |Ayrıntılar  |
 |---------|---------|
-|Bir müşterinin Azure aboneliğinize dağıtılır | Yönetilen uygulamaları müşteri aboneliğinde dağıtılmış olması gereken ve bir üçüncü taraf tarafından yönetilebilir. | 
-|Faturalama ve ölçüm    |  Müşterinin Azure aboneliğinde kaynakları sağlanır. Microsoft, Müşteri'nin Azure aboneliği (DÖNÜŞTÜREBİLMEMİZ) faturalandırılır aracılığıyla müşteri ile Kullandıkça Öde (DÖNÜŞTÜREBİLMEMİZ) sanal makineler işlem temelli. <br> Microsoft, müşteri aboneliğinde altyapı maliyetleri faturalandırır sırada getirin-kendi lisansını söz konusu olduğunda, müşteri masrafları doğrudan lisans transact.        |
-|Azure ile uyumlu sanal sabit disk (VHD)    |   Windows veya Linux Vm'leri oluşturulmalıdır.<ul> <ul> <li>Linux VHD'si oluşturma hakkında daha fazla bilgi için bkz. [Azure'da desteklenen Linux dağıtımı](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).</li> <li>Bir Windows VHD oluşturma hakkında daha fazla bilgi için bkz. [Azure ile uyumlu bir VHD oluşturma](./cloud-partner-portal/virtual-machine/cpp-create-vhd.md).</li> </ul> |
+|Müşterinin Azure aboneliğine dağıtılır | Yönetilen uygulamalar müşterinin aboneliğine dağıtılmalıdır ve üçüncü bir taraf tarafından yönetilebilir. | 
+|Faturalandırma ve ölçüm    |  Kaynaklar, müşterinin Azure aboneliğinden temin edilir. Kullandıkça Öde (PAYGO) sanal makineleri, müşterinin Azure aboneliği (PAYGO) aracılığıyla faturalandırılır. <br> Kendi lisansını getir durumunda, Microsoft, müşteri aboneliğinde oluşan altyapı maliyetlerini faturalandırtıracağız, ancak yazılım lisans ücretlerinizi müşteriye doğrudan kullanacaksınız.        |
+|Azure ile uyumlu sanal sabit disk (VHD)    |   VM 'Ler Windows veya Linux üzerinde oluşturulmalıdır.<ul> <ul> <li>Linux VHD oluşturma hakkında daha fazla bilgi için bkz. [Azure 'da desteklenen Linux dağıtımları](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).</li> <li>Windows VHD oluşturma hakkında daha fazla bilgi için bkz. [Azure ile uyumlu bır VHD oluşturma](./cloud-partner-portal/virtual-machine/cpp-create-vhd.md).</li> </ul> |
 
 >[!NOTE]
-> Yönetilen uygulamalar Market aracılığıyla dağıtılabilir olmalıdır. Müşteri iletişimi önemliyse, müşteri paylaşımı etkinleştirdikten sonra sonra isteyen müşterilere ulaşmanızı.  
+> Yönetilen uygulamalar Market üzerinden dağıtılabilir olmalıdır. Müşteri iletişimi sorun oluşturacaksa, müşteri adayı paylaşımını etkinleştirdikten sonra ilgilenen müşterilere ulaşmalısınız.  
 
 >[!Note]
->Bulut çözümü sağlayıcıları (CSP) iş ortağı kanalı katılımı kullanıma sunuldu.  Lütfen [bulut çözüm sağlayıcıları](./cloud-solution-providers.md) teklifinizi Microsoft CSP aracılığıyla pazarlama hakkında daha fazla bilgi için iş ortağı kanalı.
+>Bulut çözümü sağlayıcıları (CSP) iş ortağı kanalı kabul etme artık kullanılabilir.  Teklifinizi Microsoft CSP iş ortağı kanalları aracılığıyla pazarlama hakkında daha fazla bilgi için lütfen bkz. [bulut çözümü sağlayıcıları](./cloud-solution-providers.md) .
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Zaten yapmadıysanız, 
+Daha önce yapmadıysanız, 
 
-- [Kayıt](https://azuremarketplace.microsoft.com/sell) Market'te.
+- Market 'e [kaydolun](https://azuremarketplace.microsoft.com/sell) .
 
-Kayıtlı ve yeni bir teklif oluşturur veya mevcut bir proje üzerinde çalışmaya,
+Kaydolduysanız ve yeni bir teklif oluşturuyor ya da mevcut bir teklif üzerinde çalışıyorsanız,
 
-- [Bulut iş ortağı portalında oturum açın](https://cloudpartner.azure.com) oluşturmak veya teklifiniz tamamlayın.
+- Teklifinizin oluşturulması veya tamamlanabilmesi için [bulut iş ortağı portalı oturum açın](https://cloudpartner.azure.com) .

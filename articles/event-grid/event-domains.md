@@ -1,71 +1,71 @@
 ---
-title: Azure Event Grid olay etki alanları
-description: Olay etki alanlarını Azure Event Grid konuları yönetmek için nasıl kullanıldığını açıklar.
+title: Azure Event Grid içindeki olay etki alanları
+description: Azure Event Grid 'daki konuları yönetmek için olay etki alanlarının nasıl kullanıldığını açıklar.
 services: event-grid
 author: banisadr
 ms.service: event-grid
 ms.author: babanisa
 ms.topic: conceptual
 ms.date: 01/08/2019
-ms.openlocfilehash: 61821caa2450096bdbdde3461316ad21a82f6f18
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ef0a9213d095d0b7ae4343e2af145236a7e005a1
+ms.sourcegitcommit: 770b060438122f090ab90d81e3ff2f023455213b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66304292"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68305417"
 ---
-# <a name="understand-event-domains-for-managing-event-grid-topics"></a>Event Grid konuları yönetmek için olay etki alanlarını anlama
+# <a name="understand-event-domains-for-managing-event-grid-topics"></a>Event Grid yönetmek için olay etki alanlarını anlama
 
-Bu makalede, çeşitli iş kuruluşlar, müşteriler veya uygulamalar için özel olaylar akışını yönetmek için olay etki alanı kullanmayı açıklar. Olay etki alanları için kullanın:
+Bu makalede, çeşitli iş kuruluşlarınız, müşterileriniz veya uygulamalarınız için özel olayların akışını yönetmek üzere olay etki alanlarının nasıl kullanılacağı açıklanır. Olay etki alanlarını kullanarak şunları yapın:
 
-* Çok kiracılı olay mimarileri uygun ölçekte yönetin.
-* Yetkilendirme ve kimlik doğrulama yönetin.
-* Her ayrı ayrı yönetmenize gerek kalmadan, konuları bölümleme.
-* Tek tek her konuda uç noktalarınızı yayımlamaktan kaçının.
+* Çok kiracılı olay mimarilerini ölçeklendirerek yönetin.
+* Yetkilendirmeyi ve kimlik doğrulamayı yönetin.
+* Her birini ayrı ayrı yönetmeden konuları bölümleyin.
+* Konu uç noktalarınızın her birinde tek tek yayımlamayı önleyin.
 
-## <a name="event-domain-overview"></a>Olay etki alanı genel bakış
+## <a name="event-domain-overview"></a>Olay etki alanına genel bakış
 
-Bir olay etki alanı bir Event Grid konuları aynı uygulamayla ilgili çok sayıda yönetim aracıdır. Bunu bir meta-tek tek ilgili konulara binlerce olan konu düşünebilirsiniz.
+Olay etki alanı, aynı uygulamayla ilgili çok sayıda Event Grid konu başlığı için bir yönetim aracıdır. Bunu, binlerce bireysel konuya sahip bir meta konu olarak düşünebilirsiniz.
 
-Olay etki alanı olayları yayımlamak için Azure Hizmetleri (gibi depolama ve IOT hub'ı) tarafından kullanılan aynı mimariye kullanılabilir hale. Konuları binlerce için olayları yayımlama olanak sağlar. Böylece kiracılarınız bölümleyebilirsiniz etki alanları, ayrıca her konu yetkilendirme ve kimlik doğrulama denetiminin kendilerinde.
+Olay etki alanları, olaylarını yayımlamak için Azure Hizmetleri (depolama ve IoT Hub gibi) tarafından kullanılan mimaride kullanılabilir hale getirir. Bunlar binlerce konuya etkinlik yayımlamanıza izin verir. Etki alanları, Kiracılarınızı bölümleyerek her konu için yetkilendirme ve kimlik doğrulama denetimi de sağlar.
 
-### <a name="example-use-case"></a>Örnek Kullanım örneği
+### <a name="example-use-case"></a>Örnek kullanım örneği
 
-Olay etki alanları, en kolay bir örnek kullanarak açıklanmıştır. Burada ekipmanları ve ağır diğer makineler bakıldığında tractors, üretim Contoso Construction makineler çalıştırdığınız varsayalım. İş çalıştıran bir parçası olarak, müşteriler ekipmanı bakımına, sistemi durumunun ve sözleşme güncelleştirmeleri hakkında gerçek zamanlı bilgi gönderin. Tüm bu bilgileri gider uygulamanıza dahil olmak üzere çeşitli uç noktaları, müşteri uç noktaları ve müşterilerin ayarlamış olduğunuz diğer altyapı.
+Olay etki alanları bir örnek kullanılarak kolayca açıklanmıştır. Tractors, dijitalde ekipman ve diğer ağır makineleri ürettiğiniz contoso oluşturma makinemizin olduğunu varsayalım. İşletmeyi çalıştırmanın bir parçası olarak, donanım bakımı, sistem durumu ve sözleşme güncelleştirmeleri hakkındaki müşterilere gerçek zamanlı bilgiler gönderirsiniz. Bu bilgilerin tümü, uygulamanız, müşteri uç noktaları ve müşterilerin ayarladığı diğer altyapıda dahil olmak üzere çeşitli uç noktalara gider.
 
-Olay etki alanı modeline Contoso Construction makineler tek olay varlık olarak sağlar. Müşterilerinizin her biri, etki alanı içindeki bir konuya olarak temsil edilir. Azure Active Directory'yi kullanarak kimlik doğrulaması ve yetkilendirme işlenir. Müşterilerinizin her biri kendi konuya abone olur ve teslim olayları kendilerine atanan. Bunlar, yalnızca kendi konuya erişebilirsiniz olay etki alanı aracılığıyla yönetilen erişimden sağlar.
+Olay etki alanları, contoso oluşturma makineleri tek bir olay varlığı olarak modelleyebilir. Müşterilerinizin her biri etki alanı içinde bir konu olarak temsil edilir. Kimlik doğrulama ve yetkilendirme Azure Active Directory kullanılarak işlenir. Müşterilerinizin her biri konuya abone olabilir ve olaylarını kendilerine teslim edebilir. Olay etki alanı üzerinden yönetilen erişim, yalnızca kendi konularına erişebilmelerini sağlar.
 
-Ayrıca, tüm müşteri olaylarınızı yayımlayabilirsiniz tek uç tanır. Olay Kılavuzu her konuda yalnızca olaylar için kendi Kiracı kapsamlı farkında olduğundan emin olma ilgileniriz.
+Ayrıca, size tüm müşteri olaylarınızı yayımlayabilmeniz için tek bir uç nokta sağlar. Event Grid her konunun yalnızca kiracının kapsamına alınmış olayların farkında olduğundan emin olunacaktır.
 
-![Contoso Construction örneği](./media/event-domains/contoso-construction-example.png)
+![Contoso yapımı örneği](./media/event-domains/contoso-construction-example.png)
 
-## <a name="access-management"></a>Erişim Yönetimi
+## <a name="access-management"></a>Erişim yönetimi
 
-Bir etki alanı ile hedeflemediğinizden yetkilendirme ve kimlik doğrulama denetimini aracılığıyla Azure'nın rol tabanlı erişim denetimi (RBAC) her bir konuda ele alın. Bu roller, uygulamanızda yalnızca erişim vermek istediğiniz konulara her Kiracı kısıtlamak için kullanabilirsiniz.
+Bir etki alanı ile, Azure 'un rol tabanlı erişim denetimi (RBAC) aracılığıyla her konu üzerinde ince bir yetkilendirme ve kimlik doğrulama denetimi edinirsiniz. Uygulamanızdaki her bir kiracıyı yalnızca erişim vermek istediğiniz konularda kısıtlamak için bu rolleri kullanabilirsiniz.
 
-RBAC olay etki alanlarında aynı şekilde çalışır [yönetilen erişim denetimi](security-authentication.md#management-access-control) Event Grid ve Azure rest içinde çalışır. RBAC, oluşturmak ve özel rol tanımları olay alanlarındaki zorlamak için kullanın.
+Olay etki alanlarında RBAC, Event Grid ve Azure 'un geri kalanında aynı şekilde [yönetilen erişim denetimi](security-authentication.md#management-access-control) ile çalışmaktadır. Olay etki alanlarında özel rol tanımları oluşturmak ve zorlamak için RBAC kullanın.
 
 ### <a name="built-in-roles"></a>Yerleşik roller
 
-Event Grid olay etki alanı ile çalışmak için RBAC kolaylaştırmak için iki yerleşik rol tanımları vardır. Bu roller **EventGrid EventSubscription katkıda bulunan (Önizleme)** ve **EventGrid EventSubscription Okuyucu (Önizleme)** . Bu roller, konular, olay etki alanı, abone olmak için ihtiyaç duyan kullanıcılar atayın. Kullanıcıların abone olmak için gereken konuya rol ataması kapsam.
+Event Grid, RBAC 'nin olay etki alanlarıyla çalışmaya daha kolay hale getirmek için iki yerleşik rol tanımına sahiptir. Bu roller **Eventgrid Olayaboneliğine katkıda bulunan (Önizleme)** ve **Eventgrid eventsubscription Reader (Önizleme)** . Bu rolleri, olay etki alanındaki konulara abone olmaları gereken kullanıcılara atarsınız. Rol atamasını yalnızca kullanıcıların abone olmaları gereken konuya göre kapsamınız.
 
-Bu roller hakkında daha fazla bilgi için bkz. [Event Grid için yerleşik roller](security-authentication.md#built-in-roles).
+Bu roller hakkında daha fazla bilgi için bkz. [Event Grid Için yerleşik roller](security-authentication.md#built-in-roles).
 
-## <a name="subscribing-to-topics"></a>Başlıklarına abone
+## <a name="subscribing-to-topics"></a>Konulara abone olma
 
-Olayları bir olay etki alanı içindeki bir konuya abone olma aynıdır [bir olay aboneliği bir özel konu oluşturma](./custom-event-quickstart.md) veya bir Azure hizmetinden bir olaya abone olma.
+Bir olay etki alanı içindeki bir konudaki olaylara abone olmak, [özel bir konu üzerinde olay aboneliği oluşturma](./custom-event-quickstart.md) veya bir Azure hizmetinden bir olaya abone olma ile aynıdır.
 
-### <a name="domain-scope-subscriptions"></a>Etki alanı kapsamı abonelikler
+### <a name="domain-scope-subscriptions"></a>Etki alanı kapsamı abonelikleri
 
-Olay etki alanı için etki alanı kapsamına abonelikler de sağlar. Bir olay aboneliği olay etki alanı üzerinde etki alanına olayları gönderilen konu bağımsız olarak gönderilen tüm olaylarını alacaksınız. Etki alanı kapsamı abonelikler için yönetim ve denetim amacıyla yararlı olabilir.
+Olay etki alanları da etki alanı kapsamı aboneliklerine izin verir. Olay etki alanındaki bir olay aboneliği, olayların gönderildiği konuya bakılmaksızın etki alanına gönderilen tüm olayları alır. Etki alanı kapsamı abonelikleri, yönetim ve denetim amacıyla yararlı olabilir.
 
-## <a name="publishing-to-an-event-domain"></a>Bir olay etki alanı yayımlama
+## <a name="publishing-to-an-event-domain"></a>Bir olay etki alanına yayımlama
 
-Bir olay etki alanı oluşturduğunuzda, Event grid'de bir konu oluşturduysanız, benzer bir yayımlama uç verilir. 
+Bir olay etki alanı oluşturduğunuzda, Event Grid ' de bir konu oluşturduysanız, şuna benzer bir yayımlama uç noktası vermiş olursunuz. 
 
-Bir olay etki alanındaki herhangi bir konunun olayları yayımlamak için etki alanının uç noktasına olayları gönderme [bir özel konu için yaptığınız şekilde](./post-to-custom-topic.md). Tek fark, teslim edilmek üzere Olay istediğiniz konu belirtmeniz gerekir.
+Olayları bir olay etki alanında herhangi bir konuya yayımlamak için olayları, [özel konu için yaptığınız gibi](./post-to-custom-topic.md), etki alanının uç noktasına gönderin. Tek fark, etkinliğin teslim edilmesini istediğiniz konuyu belirtmektir.
 
-Örneğin, aşağıdaki olaylar dizisi yayımlama olayı gönderir gibi `"id": "1111"` konuya `foo` while olayla `"id": "2222"` konu başlığına gönderilen `bar`:
+Örneğin, aşağıdaki olay dizisinin yayımlanması `"id": "1111"` , ile `"id": "2222"` olayı konuya `bar`gönderilecek şekilde olayı konusuna `foo` gönderir:
 
 ```json
 [{
@@ -94,24 +94,24 @@ Bir olay etki alanındaki herhangi bir konunun olayları yayımlamak için etki 
 }]
 ```
 
-Olay etki alanı konuları için bir yayımlama sizin için işler. Tek tek yönettiğiniz her bir konuda yayımlama olaylarına yerine tüm olaylarınızı etki alanının uç noktasına yayımlayabilirsiniz. Olay Kılavuzu her olay doğru konuya gönderilen emin olur.
+Olay etki alanları, sizin için konularda yayımlamayı işler. Tek tek yönettiğiniz her konuya olay yayımlamak yerine, tüm olaylarınızı etki alanının uç noktasına yayımlayabilirsiniz. Event Grid her olayın doğru konuya gönderildiğinden emin olur.
 
 ## <a name="limits-and-quotas"></a>Limitler ve kotalar
-Limitler ve kotalar olay etki alanlarıyla ilgili şunlardır:
+Olay etki alanlarıyla ilgili sınırlamalar ve Kotalar aşağıda verilmiştir:
 
-- Olay etki alanı başına 100.000 konuları 
+- olay etki alanı başına 100.000 konu 
 - Azure aboneliği başına 100 olay etki alanı 
 - Bir olay etki alanında konu başına 500 olay aboneliği
-- 50 etki alanı kapsamı abonelikler 
-- İkinci alımı oranı (içine, bir etki alanı) başına 5.000 olayları
+- 50 etki alanı kapsamı abonelikleri 
+- saniye başına 5.000 olay alma oranı (bir etki alanına)
 
-Bu sınırlar, uymuyorsa ürün ekibi bir destek bileti açarak veya bir e-posta göndererek ulaşmak [ askgrid@microsoft.com ](mailto:askgrid.microsoft.com). 
+Bu limitlere uygun değilse, bir destek bileti açarak veya uygulamasına [askgrid@microsoft.com](mailto:askgrid@microsoft.com)bir e-posta göndererek ürün ekibine ulaşın. 
 
 ## <a name="pricing"></a>Fiyatlandırma
-Olay etki alanları kullanır aynı [fiyatlandırma operations](https://azure.microsoft.com/pricing/details/event-grid/) , Event Grid diğer tüm özelliklerini kullanın.
+Olay etki alanları, Event Grid ' deki diğer tüm özelliklerin kullandığı aynı [işlem fiyatlandırmasını](https://azure.microsoft.com/pricing/details/event-grid/) kullanır.
 
-Özel konulardaki yaptıkları gibi işlemleri aynı olay alanlarındaki çalışır. Her bir olay etki alanı için bir olay girişi bir işlemdir ve her bir olay için teslim denemesi bir işlemdir.
+İşlemler, olay etki alanlarında özel konularda olduğu gibi çalışır. Bir olayın olay etki alanına her giriş işlemi bir işlemdir ve bir olaya yönelik her bir teslim girişimi bir işlemdir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Oluşturma konuları, olay abonelikleri oluşturma ve olayları, olay etki alanları hakkında bilgi edinmek için bkz [olay etki alanlarını yönet](./how-to-event-domains.md).
+* Olay etki alanlarını ayarlama, konu oluşturma, olay abonelikleri oluşturma ve olayları yayımlama hakkında bilgi edinmek için bkz. [olay etki alanlarını yönetme](./how-to-event-domains.md).

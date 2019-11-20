@@ -9,16 +9,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 06/28/2019
 ms.author: apimpm
-ms.openlocfilehash: f9e5c531e387ba8d2c61c6d46b1e8935bc7d42cf
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 0c4a95669eea1b98baea5f9a866598e000c0923c
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67429053"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74107854"
 ---
 # <a name="import-an-azure-function-app-as-an-api-in-azure-api-management"></a>Azure İşlev Uygulamalarını Azure API Management'a API olarak aktarma
 
@@ -75,7 +74,7 @@ Bir Azure İşlev Uygulamasından yeni API oluşturmak için aşağıdaki adıml
 
     ![İşlev Uygulamasından ekleme](./media/import-function-app-as-api/add-06.png)
 
-8. **Oluştur**’a tıklayın.
+8. **Oluştur**'a tıklayın.
 
 ## <a name="append-azure-function-app-to-api"></a> Azure İşlev Uygulamalarını var olan API'lere ekleme
 
@@ -111,14 +110,14 @@ Azure İşlev Uygulamasını var olan bir API'ye eklemek için aşağıdaki adı
 
     ![İşlev Uygulamasından ekleme](./media/import-function-app-as-api/append-04.png)
 
-## <a name="authorization"></a> Yetkilendirme
+## <a name="authorization"></a>Yetkisi
 
 Bir Azure İşlev Uygulaması içeri aktarıldığında aşağıdakiler otomatik olarak oluşturulur:
 
-* İşlev uygulaması ile apim - ad içinde ana bilgisayar anahtarı {*Azure API Management hizmet örneği adınızı*},
-* Azure API Management örneği içindeki değeri adı olan { *, Azure işlev uygulaması örneği adı*}-oluşturulan ana bilgisayar anahtarı içeren anahtar.
+* İşlev Uygulaması içindeki ana bilgisayar anahtarı apim-{*Azure API Management hizmet örneğiniz*adı},
+* Oluşturulan ana bilgisayar anahtarını içeren, Azure API Management örneği içindeki adlandırılmış değer {*azure işlev uygulaması örneğiniz*adı}-anahtar.
 
-4 Nisan 2019'den sonra oluşturulan API için ana bilgisayar anahtarı HTTP isteklerini API Yönetimi'nden bir üst işlev uygulamasına geçirilir. Daha eski API'lar ana bilgisayar anahtarı olarak geçirmek [bir sorgu parametresi](../azure-functions/functions-bindings-http-webhook.md#api-key-authorization). Bu davranış aracılığıyla değiştirilebilir `PATCH Backend` [REST API çağrısı](https://docs.microsoft.com/rest/api/apimanagement/2019-01-01/backend/update#backendcredentialscontract) üzerinde *arka uç* işlev uygulaması ile ilişkili varlık.
+4 Nisan 2019 ' den sonra oluşturulan API 'Ler için, ana bilgisayar anahtarı API Management olan HTTP isteklerinde bir başlıktaki İşlev Uygulaması geçirilir. Eski API 'Ler, ana bilgisayar anahtarını [bir sorgu parametresi](../azure-functions/functions-bindings-http-webhook.md#api-key-authorization)olarak iletir. Bu davranış, İşlev Uygulaması ilişkili *arka uç* varlığındaki `PATCH Backend` [REST API çağrısıyla](https://docs.microsoft.com/rest/api/apimanagement/2019-01-01/backend/update#backendcredentialscontract) değiştirilebilir.
 
 > [!WARNING]
 > Azure İşlev Uygulaması ana bilgisayar anahtarının veya Azure API Management adlandırılmış değerinin kaldırılması veya değiştirilmesi, hizmetler arasındaki iletişimin kopmasına neden olur. Değerler otomatik olarak eşitlenmez.
@@ -143,7 +142,7 @@ Azure API Management örneğinize gidin ve soldaki menüden **Adlandırılmış 
 
 ![İşlev Uygulamasından ekleme](./media/import-function-app-as-api/keys-01.png)
 
-## <a name="test-in-azure-portal"></a> Yeni API Management API'sini Azure portal'da test etme
+## <a name="test-in-azure-portal"></a>Azure portal yeni API 'YI test etme
 
 İşlemleri doğrudan Azure portaldan çağırabilirsiniz. Azure portalı kullanarak bir API'nin işlemlerini kolayca görüntüleyebilir ve test edebilirsiniz.  
 
@@ -158,26 +157,6 @@ Azure API Management örneğinize gidin ve soldaki menüden **Adlandırılmış 
 4. **Gönder**’i seçin.
 
     Arka uç **200 OK** şeklinde ve bazı verilerle yanıt verir.
-
-## <a name="test-in-developer-portal"></a> Geliştirici portalından işlem çağırma
-
-API’leri test etmek için geliştirici portalından da işlem çağırabilirsiniz. 
-
-1. Alma oluşturduğunuz API'yi seçin ve bir arka uç API yayımlayın.
-
-2. **Geliştirici portalı**'nı seçin.
-
-    Geliştirici portalı sitesi açılır.
-
-3. Oluşturduğunuz **API**’yi seçin.
-
-4. Test etmek istediğiniz işlemi seçin.
-
-5. **Deneyin**'i seçin.
-
-6. **Gönder**’i seçin.
-    
-    Bir işlem çağrıldıktan sonra, geliştirici portalı **Yanıt durumu**, **Yanıt üst ilgileri** ve tüm **Yanıt içeriğini** gösterir.
 
 [!INCLUDE [api-management-define-api-topics.md](../../includes/api-management-define-api-topics.md)]
 

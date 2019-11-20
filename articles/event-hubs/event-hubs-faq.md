@@ -10,12 +10,12 @@ ms.topic: article
 ms.custom: seodec18
 ms.date: 05/15/2019
 ms.author: shvija
-ms.openlocfilehash: c5e58f7bc89fbe2d93f6610465abf4a92fd31406
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 66b11ef8e746222074eadab2348f8a2cf9dab39f
+ms.sourcegitcommit: 75a56915dce1c538dc7a921beb4a5305e79d3c7a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66476125"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68479142"
 ---
 # <a name="event-hubs-frequently-asked-questions"></a>Olay hub'ları hakkında sık sorulan sorular
 
@@ -24,14 +24,14 @@ ms.locfileid: "66476125"
 ### <a name="what-is-an-event-hubs-namespace"></a>Bir Event Hubs ad alanı nedir?
 Bir ad alanı için olay hub'ı / Kafka konularını kapsayan bir kapsayıcıdır. Bu, benzersiz bir veren [FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name). Bir ad alanı, birden çok olay hub'ı / Kafka konularını barındırmak bir uygulama kapsayıcısı görev yapar. 
 
-### <a name="when-do-i-create-a-new-namespace-vs-use-an-existing-namespace"></a>Mevcut bir ad alanı, yeni bir ad kullanın ve oluşturulsun mu?
-Kapasite ayırma ([aktarım hızı birimlerini (işleme birimi)](#throughput-units)) ad alanı düzeyinde faturalandırılır. Bir ad alanı da bir bölge ile ilişkilidir.
+### <a name="when-do-i-create-a-new-namespace-vs-use-an-existing-namespace"></a>Ne zaman yeni bir ad alanı oluşturabilirim? var olan bir ad alanını kullan?
+Kapasite ayırmaları ([işleme birimleri (DTU 'lar)](#throughput-units)) ad alanı düzeyinde faturalandırılır. Bir ad alanı aynı zamanda bir bölgeyle ilişkilendirilir.
 
-Mevcut bir içinde bir aşağıdaki senaryolardan kullanmak yerine yeni bir ad alanı oluşturmak isteyebilirsiniz: 
+Aşağıdaki senaryolardan birinde var olan birini kullanmak yerine yeni bir ad alanı oluşturmak isteyebilirsiniz: 
 
-- Yeni bir bölgeyle ilişkili bir olay hub'ı ihtiyacınız vardır.
-- Farklı bir abonelikle ilişkili bir olay Hub'ı gerekir.
-- Bir olay hub'ı ayrı kapasite ayırma ile gerekir (diğer bir deyişle, kapasiteye ihtiyaç eklenen olay hub'ı ad 40 işleme birimi eşiği aşabilir ve ayrılmış bir küme için Git istemediğiniz için)  
+- Yeni bir bölgeyle ilişkili bir olay hub 'ı gerekir.
+- Farklı bir abonelikle ilişkili bir olay hub 'ı gerekir.
+- Ayrı kapasite ayırması olan bir olay hub 'ınız olması gerekir (yani, eklenen Olay Hub 'ına sahip ad alanı için kapasite gereksinimi 40 TU eşiğini aşacağından ve adanmış kümeye gitmek istemezsiniz)  
 
 ### <a name="what-is-the-difference-between-event-hubs-basic-and-standard-tiers"></a>Event Hubs temel ve standart katmanları arasındaki fark nedir?
 
@@ -60,46 +60,46 @@ Event Hubs standart katmanı şu anda yedi günde bir en yüksek bekletme süres
 ### <a name="how-do-i-monitor-my-event-hubs"></a>My Event Hubs'ı nasıl izleyebilirim?
 Olay hub'ları için kaynaklarınızın durumunu sağlayan ayrıntılı ölçümler yayan [Azure İzleyici](../azure-monitor/overview.md). Ayrıca, yalnızca ad alanı düzeyinde aynı zamanda varlık düzeyinde Event Hubs hizmeti genel durumunu değerlendirmek sağlarlar. Hangi izleme hakkında için sunulan bilgi [Azure Event Hubs](event-hubs-metrics-azure-monitor.md).
 
-### <a name="what-ports-do-i-need-to-open-on-the-firewall"></a>Güvenlik Duvarı'nı açmak hangi bağlantı noktalarını gerekiyor? 
-Azure Service Bus ile aşağıdaki protokolleri, ileti göndermek ve almak için kullanabilirsiniz:
+### <a name="what-ports-do-i-need-to-open-on-the-firewall"></a>Güvenlik duvarında hangi bağlantı noktalarını açmalıyım? 
+Aşağıdaki protokolleri, ileti göndermek ve almak için Azure Service Bus ile birlikte kullanabilirsiniz:
 
-- Gelişmiş ileti sıraya alma Protokolü (AMQP)
+- Gelişmiş İleti Sıraya Alma Protokolü (AMQP)
 - HTTP
 - Apache Kafka
 
-Azure Event Hubs ile iletişim kurmak için bu protokolleri kullanmak için açmanız giden bağlantı noktaları için aşağıdaki tabloya bakın. 
+Azure Event Hubs ile iletişim kurmak için bu protokolleri kullanmak üzere açmanız gereken giden bağlantı noktaları için aşağıdaki tabloya bakın. 
 
 | Protocol | Bağlantı Noktaları | Ayrıntılar | 
 | -------- | ----- | ------- | 
-| AMQP | 5671 ve 5672 | Bkz: [AMQP protokol Kılavuzu](../service-bus-messaging/service-bus-amqp-protocol-guide.md) | 
+| AMQP | 5671 ve 5672 | Bkz. [AMQP protokol Kılavuzu](../service-bus-messaging/service-bus-amqp-protocol-guide.md) | 
 | HTTP, HTTPS | 80, 443 |  |
-| Kafka | 9093 | Bkz: [Kafka uygulamaları Event Hubs'dan kullanın](event-hubs-for-kafka-ecosystem-overview.md)
+| Kafka | 9093 | Bkz. [Kafka uygulamalardan Event Hubs kullanma](event-hubs-for-kafka-ecosystem-overview.md)
 
-### <a name="what-ip-addresses-do-i-need-to-whitelist"></a>Hangi IP adreslerini beyaz listeye gerekiyor mu?
-Bağlantılarınız için doğru IP adreslerini beyaz listeye bulmak için aşağıdaki adımları izleyin:
+### <a name="what-ip-addresses-do-i-need-to-whitelist"></a>Beyaz listeye hangi IP adreslerine ihtiyacım var?
+Bağlantılarınız için beyaz listeye doğru IP adreslerini bulmak için şu adımları izleyin:
 
-1. Bir komut isteminden aşağıdaki komutu çalıştırın: 
+1. Komut isteminden aşağıdaki komutu çalıştırın: 
 
     ```
     nslookup <YourNamespaceName>.servicebus.windows.net
     ```
-2. Not alın, döndürülen IP adresine `Non-authoritative answer`. Bu IP adresi statiktir. Değiştirmeniz gerekir yalnızca zaman içinde ad farklı bir kümeye açın geri noktasıdır.
+2. ' De `Non-authoritative answer`döndürülen IP adresini aklınızda edin. Ad alanını farklı bir kümeye geri yükledikten sonra değişikliğin değiştirileceği tek zaman nokta.
 
-Ad alanınız için bölge artıklığı kullanırsanız birkaç ek adımları gerçekleştirmeniz gerekir: 
+Ad alanınız için bölge yedekliliği kullanırsanız, birkaç ek adım yapmanız gerekir: 
 
-1. İlk olarak, nslookup ad alanı üzerinde çalıştırın.
+1. İlk olarak, ad alanında Nslookup ' ı çalıştırırsınız.
 
     ```
     nslookup <yournamespace>.servicebus.windows.net
     ```
-2. Not alın adında **yetkili olmayan yanıt** bölümünde, aşağıdaki biçimlerden biri: 
+2. **Yetkili olmayan yanıt** bölümündeki adı aşağıdaki biçimlerden birinde olan bir yere göz önünde edin: 
 
     ```
     <name>-s1.servicebus.windows.net
     <name>-s2.servicebus.windows.net
     <name>-s3.servicebus.windows.net
     ```
-3. Her biri ile sonekleri s1, s2 ve s3 üç kullanılabilirlik alanında çalışan tüm üç örnek IP adreslerini almak için nslookup Çalıştır 
+3. Her biri için S1, S2 ve S3 sonekleri ile her biri için Nslookup ' ı çalıştırarak üç kullanılabilirlik alanında çalışan üç örnek için IP adreslerini alın. 
 
 ## <a name="apache-kafka-integration"></a>Apache Kafka tümleştirme
 
@@ -115,7 +115,7 @@ Bootstrap.Servers={Your. EVENTHUBS. FQDN}: 9093 request.timeout.ms=60000 securit
 
 Bootstrap.Servers=dummynamespace.servicebus.Windows.NET:9093 request.timeout.ms=60000 security.protocol=SASL_SSL sasl.mechanism=PLAIN sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule gereken kullanıcı adı = "$ ConnectionString"password="Endpoint=sb://dummynamespace.servicebus.windows.net/; SharedAccessKeyName DummyAccessKeyName; = SharedAccessKey = 5dOntTRytoC24opYThisAsit3is2B + OGY1US/fuL3ly = ";
 
-Not: SASL.jaas.config Çerçevenizi desteklenen bir yapılandırmada değil ise, SASL kullanıcı adı ve parola ayarlayın ve bunlar yerine kullanmak için kullanılan yapılandırmalar bulun. Kullanıcı adı $ConnectionString ve Event hubs'ı bağlantı dizenizi parolasını ayarlayın.
+Not: SASL. jaas. config, ortamınızda desteklenen bir yapılandırma değilse, SASL Kullanıcı adı ve parolasını ayarlamak için kullanılan yapılandırmaları bulun ve bunun yerine bunları kullanın. Kullanıcı adı $ConnectionString ve Event hubs'ı bağlantı dizenizi parolasını ayarlayın.
 
 ### <a name="what-is-the-messageevent-size-for-kafka-enabled-event-hubs"></a>Event hubs, Kafka etkin ileti/olay boyutu nedir?
 Kafka özellikli Event Hubs için izin verilen en büyük ileti boyutu 1 MB'dir.
@@ -185,8 +185,9 @@ Event Hubs adanmış küme göndererek oluşturmak bir [kota artışı destek is
 ## <a name="best-practices"></a>En iyi uygulamalar
 
 ### <a name="how-many-partitions-do-i-need"></a>Kaç tane bölümler ihtiyacım var?
+Bölüm sayısı, oluşturma sırasında belirtilir ve 2 ile 32 arasında olmalıdır. Bölüm sayısı değiştirilemez; bu nedenle, bölüm sayısını ayarlarken uzun vadeli ölçeği dikkate almanız gerekir. Bölümler, tüketen uygulamalarda gerekli aşağı akış paralelliğiyle ilişkili bir veri düzenleme mekanizmasıdır. Bir olay hub'ındaki bölüm sayısı, sahip olmayı beklediğiniz eşzamanlı okuyucu sayısıyla doğrudan ilgilidir. Bölümler hakkında daha fazla bilgi için bkz. [bölümler](event-hubs-features.md#partitions).
 
-Kurulum sonrasında bir olay hub'ındaki bölüm sayısı değiştirilemez. Aklınızda başlamadan önce kaç bölümleriyle ilgili ihtiyaçları önemlidir. 
+Oluşturma sırasında 32 olan mümkün olan en yüksek değer olarak ayarlamak isteyebilirsiniz. Göndericilerin, geri kalan 31 bölümden oluşan 32 ' dan yalnızca tek bir bölüme gönderilmesi için yapılandırmadığınız müddetçe, birden fazla bölüme sahip olmanın sırayı korumadan birden çok bölüme gönderilmesine neden olacağını unutmayın. Önceki durumda, tüm 32 bölümlerdeki olayları okumanız gerekir. İkinci durumda, olay Işlemcisi ana bilgisayarında yapmanız gerekek yapılandırmadan farklı bir ek maliyet yoktur.
 
 Event Hubs, bir tüketici grubu başına tek bölüm okuyucusu izin vermek için tasarlanmıştır. Çoğu durumda, varsayılan ayarı olan dört bölüm yeterli kullanın. Olay işleme ölçeğini arıyorsanız, ek bölümler eklemeyi düşünün isteyebilirsiniz. Belirli bir aktarım hızı sınırı yoktur bir bölüme, ancak ad alanınızdaki toplam üretilen iş tarafından üretilen iş birimlerinin sayısı sınırlıdır. Ad alanınız içinde üretilen iş birimlerinin sayısı arttıkça, ek bölümler kendi en fazla aktarım hızı elde etmek eşzamanlı okuyucu izin vermek isteyebilirsiniz.
 
@@ -232,8 +233,8 @@ Tüm Event Hubs kotaları listesi için bkz. [kotalar](event-hubs-quotas.md).
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-### <a name="why-am-i-not-able-to-create-a-namespace-after-deleting-it-from-another-subscription"></a>Neden başka abonelikten sildikten sonra bir ad alanı oluşturmak gönderemiyorum? 
-Bir abonelikten bir ad alanı sildiğinizde, başka bir Abonelikteki aynı adla yeniden önce 4 saat bekleyin. Aksi takdirde, aşağıdaki hata iletisini alabilirsiniz: `Namespace already exists`. 
+### <a name="why-am-i-not-able-to-create-a-namespace-after-deleting-it-from-another-subscription"></a>Neden bir ad alanını başka bir abonelikten sildikten sonra oluşturamadım? 
+Bir aboneliğden bir ad alanını sildiğinizde, başka bir abonelikte aynı adla yeniden oluşturmadan önce 4 saat bekleyin. Aksi takdirde, aşağıdaki hata iletisini alabilirsiniz: `Namespace already exists`. 
 
 ### <a name="what-are-some-of-the-exceptions-generated-by-event-hubs-and-their-suggested-actions"></a>Event Hubs ve önerilen eylemlerinin tarafından oluşturulan özel durumları bazıları nelerdir?
 

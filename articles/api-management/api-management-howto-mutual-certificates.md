@@ -1,6 +1,6 @@
 ---
-title: Sertifika kimlik doğrulaması - Azure API Management istemcisini kullanarak arka uç hizmetlerini güvenli hale getirme | Microsoft Docs
-description: Azure API Yönetimi'nde istemci sertifikası kimlik doğrulaması kullanarak arka uç hizmetlerini güvenli hale getirmeyi öğrenin.
+title: İstemci sertifikası kimlik doğrulaması kullanarak arka uç hizmetlerini güvenli hale getirme-Azure API Management | Microsoft Docs
+description: Azure API Management 'de istemci sertifikası kimlik doğrulaması kullanarak arka uç hizmetlerini güvenli hale getirme hakkında bilgi edinin.
 services: api-management
 documentationcenter: ''
 author: mikebudzynski
@@ -9,81 +9,80 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 06/20/2018
 ms.author: apimpm
-ms.openlocfilehash: 13a2eb080c6822a8a6786be1952bc588fa8afd80
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: be6441b1fea81f5b947e8deacd8de7b17814aab5
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66141532"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70073493"
 ---
-# <a name="how-to-secure-back-end-services-using-client-certificate-authentication-in-azure-api-management"></a>Sertifika kimlik doğrulaması Azure API Management istemcisini kullanarak arka uç hizmetlerine güvenliğini sağlama
+# <a name="how-to-secure-back-end-services-using-client-certificate-authentication-in-azure-api-management"></a>Azure API Management istemci sertifikası kimlik doğrulaması kullanarak arka uç hizmetlerini güvenli hale getirme
 
-İstemci sertifikaları kullanarak güvenli erişim bir API için arka uç hizmeti için API yönetimi sağlar. Bu kılavuzda, Azure portalında Azure API Management hizmet örneği sertifikaları yönetme işlemi gösterilmektedir. Ayrıca, bir arka uç hizmetine erişmek için bir sertifika kullanmak üzere bir API yapılandırma açıklanmaktadır.
+API Management, istemci sertifikalarını kullanarak bir API 'nin arka uç hizmetine erişimi güvenli hale bırakmanıza olanak tanır. Bu kılavuzda, Azure portal Azure API Management hizmet örneğindeki sertifikaların nasıl yönetileceği gösterilmektedir. Ayrıca, bir API 'yi arka uç hizmetine erişmek için bir sertifika kullanmak üzere yapılandırmayı açıklar.
 
-API Management REST API'sini kullanarak sertifikaların yönetilmesi hakkında daha fazla bilgi için bkz: <a href="https://docs.microsoft.com/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-certificate-entity">Azure API Management REST API sertifikası varlık</a>.
+API Management REST API kullanarak sertifikaları yönetme hakkında daha fazla bilgi için bkz. <a href="https://docs.microsoft.com/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-certificate-entity">Azure API Management REST API sertifika varlığı</a>.
 
-## <a name="prerequisites"> </a>Önkoşulları
+## <a name="prerequisites"> </a>Önkoşullar
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Bu kılavuzda bir API için arka uç hizmetine erişmek için istemci sertifikası kimlik doğrulaması kullanmak için API Management hizmet örneğinizin yapılandırma gösterilmektedir. Bu makaledeki adımları izlemeden önce arka uç hizmetiniz, istemci sertifikası kimlik doğrulaması için yapılandırılmış olması gerekir ([Azure Web Siteleri'nde sertifika kimlik doğrulaması yapılandırmak için bu makaleye başvurun] [ to configure certificate authentication in Azure WebSites refer to this article]). API Management hizmeti için yüklemek için sertifika ve parola erişmeniz gerekir.
+Bu kılavuzda, bir API için arka uç hizmetine erişmek üzere API Management hizmeti örneğinizi istemci sertifikası kimlik doğrulamasını kullanmak üzere nasıl yapılandırabileceğiniz gösterilmektedir. Bu makaledeki adımları uygulamadan önce, arka uç hizmetinizin istemci sertifikası kimlik doğrulaması için yapılandırılmış olması gerekir ([Azure Web sitelerinde sertifika kimlik doğrulamasını yapılandırmak için bu makaleye bakın][to configure certificate authentication in Azure WebSites refer to this article]). API Management hizmetine yüklemek için sertifikaya ve parolaya erişmeniz gerekir.
 
-## <a name="step1"> </a>Bir istemci sertifikasını karşıya yükle
+## <a name="step1"> </a>İstemci sertifikasını karşıya yükleme
 
-![İstemci sertifikaları Ekle](media/api-management-howto-mutual-certificates/apim-client-cert.png)
+![İstemci sertifikası Ekle](media/api-management-howto-mutual-certificates/apim-client-cert.png)
 
-Yeni bir istemci sertifikası yüklemek için aşağıdaki adımları izleyin. Henüz bir API Management hizmet örneği oluşturmadıysanız, bkz [bir API Management hizmet örneği oluşturma][Create an API Management service instance].
+Yeni bir istemci sertifikasını karşıya yüklemek için aşağıdaki adımları izleyin. Henüz bir API Management hizmet örneği oluşturmadıysanız, [API Management hizmet örneği oluşturma][Create an API Management service instance]öğreticisine bakın.
 
-1. Azure API Management hizmet örneğinizin Azure portalındaki gidin.
-2. Seçin **istemci sertifikaları** menüsünde.
-3. Tıklayın **+ Ekle** düğmesi.  
-    ![İstemci sertifikaları Ekle](media/api-management-howto-mutual-certificates/apim-client-cert-add.png)  
-4. Sertifika için göz atın, kendi Kimliğini ve parolasını belirtin.  
-5. **Oluştur**’a tıklayın.
-
-> [!NOTE]
-> Sertifika olmalıdır **.pfx** biçimi. Otomatik olarak imzalanan sertifikalar izin verilir.
-
-Sertifika karşıya yüklendikten sonra gösterir **istemci sertifikaları**.  Birden çok sertifika varsa için istenen sertifikanın parmak izini not alın [bir API Ağ Geçidi kimlik doğrulaması için bir istemci sertifikası kullanacak şekilde yapılandırma][Configure an API to use a client certificate for gateway authentication].
+1. Azure portal Azure API Management hizmet örneğinize gidin.
+2. Menüden **istemci sertifikaları** ' nı seçin.
+3. **+ Ekle** düğmesine tıklayın.  
+    ![İstemci sertifikası Ekle](media/api-management-howto-mutual-certificates/apim-client-cert-add.png)  
+4. Sertifikaya gözatıp KIMLIĞINI ve parolasını belirtin.  
+5. **Oluştur**'a tıklayın.
 
 > [!NOTE]
-> Otomatik olarak imzalanan bir sertifika kullanırken, örneğin, sertifika zinciri doğrulamasını devre dışı bırakmak için bu SSS'de açıklanan adımları izleyin. [öğesi](api-management-faq.md#can-i-use-a-self-signed-ssl-certificate-for-a-back-end).
+> Sertifika **. pfx** biçiminde olmalıdır. Otomatik olarak imzalanan sertifikalara izin verilir.
 
-## <a name="step1a"> </a>Bir istemci sertifikasını Sil
+Sertifika karşıya yüklendikten sonra **istemci sertifikalarında**gösterilir.  Birçok sertifikanız varsa, bir [API 'yi Ağ Geçidi kimlik doğrulaması için bir istemci sertifikası kullanacak şekilde yapılandırmak][Configure an API to use a client certificate for gateway authentication]üzere, istenen sertifikanın parmak izini bir yere getirin.
 
-Bir sertifikayı silmek için bağlam menüsünü tıklatın **...**  seçip **Sil** sertifikanın yanındaki.
+> [!NOTE]
+> Örneğin, otomatik olarak imzalanan bir sertifika kullanırken sertifika zinciri doğrulamasını devre dışı bırakmak için, bu SSS [öğesinde](api-management-faq.md#can-i-use-a-self-signed-ssl-certificate-for-a-back-end)açıklanan adımları izleyin.
 
-![İstemci sertifikaları sil](media/api-management-howto-mutual-certificates/apim-client-cert-delete.png)
+## <a name="step1a"> </a>İstemci sertifikasını silme
 
-Ardından bir API tarafından sertifika ise, bir uyarı ekranı görüntülenir. Sertifikayı silmek için sertifikayı kullanmak üzere yapılandırılan tüm API'lerinden kaldırmanız gerekir.
+Bir sertifikayı silmek için bağlam menüsü **...** öğesine tıklayın ve sertifikanın yanındaki **Sil** ' i seçin.
 
-![İstemci sertifikaları hatası Sil](media/api-management-howto-mutual-certificates/apim-client-cert-delete-failure.png)
+![İstemci sertifikalarını Sil](media/api-management-howto-mutual-certificates/apim-client-cert-delete.png)
 
-## <a name="step2"> </a>Bir API Ağ Geçidi kimlik doğrulaması için bir istemci sertifikası kullanacak şekilde yapılandırma
+Sertifika bir API tarafından kullanılıyorsa, bir uyarı ekranı görüntülenir. Sertifikayı silmek için önce sertifikayı kullanmak üzere yapılandırılmış API 'lerden kaldırmanız gerekir.
 
-1. Tıklayın **API'leri** gelen **API Management** sol taraftaki menüden ve API'ye gidin.  
-    ![İstemci sertifikaları etkinleştir](media/api-management-howto-mutual-certificates/apim-client-cert-enable.png)
+![İstemci sertifikalarını silme hatası](media/api-management-howto-mutual-certificates/apim-client-cert-delete-failure.png)
 
-2. İçinde **tasarım** sekmesinde, üzerinde bir kalem simgesine tıklayın **arka uç** bölümü. 
-3. Değişiklik **Ağ Geçidi kimlik** için **istemci sertifikası** ve açılan listeden, sertifika seçin.  
-    ![İstemci sertifikaları etkinleştir](media/api-management-howto-mutual-certificates/apim-client-cert-enable-select.png)
+## <a name="step2"> </a>Bir API 'yi Ağ Geçidi kimlik doğrulaması için bir istemci sertifikası kullanacak şekilde yapılandırma
+
+1. Soldaki **API Management** menüsünde **API 'ler** ' e tıklayın ve API 'ye gidin.  
+    ![İstemci sertifikalarını etkinleştir](media/api-management-howto-mutual-certificates/apim-client-cert-enable.png)
+
+2. **Tasarım** sekmesinde, **arka uç** bölümünün kalem simgesine tıklayın. 
+3. **Ağ Geçidi kimlik bilgilerini** **istemci sertifikası** olarak değiştirin ve açılan listeden sertifikanızı seçin.  
+    ![İstemci sertifikalarını etkinleştir](media/api-management-howto-mutual-certificates/apim-client-cert-enable-select.png)
 
 4. **Kaydet**’e tıklayın. 
 
 > [!WARNING]
-> Bu değişiklik hemen etkili olur ve bu API'nin işlemlerini çağrıları arka uç sunucusunda kimlik doğrulaması için sertifika kullanır.
+> Bu değişiklik hemen etkili olur ve bu API işlemlerine yapılan çağrılar, arka uç sunucusunda kimlik doğrulaması yapmak için sertifikayı kullanır.
 
 
 > [!TIP]
-> Ağ Geçidi kimlik doğrulaması bir API için arka uç hizmeti için bir sertifika belirtildiğinde, bu API için ilkesinin bir parçası haline gelir ve ilke düzenleyicisinde görüntülenebilir.
+> Bir API 'nin arka uç hizmeti için Ağ Geçidi kimlik doğrulaması için bir sertifika belirtildiğinde, bu API ilkesinin bir parçası haline gelir ve ilke düzenleyicisinde görüntülenebilir.
 
 ## <a name="self-signed-certificates"></a>Otomatik olarak imzalanan sertifikalar
 
-Otomatik olarak imzalanan sertifikalar kullanıyorsanız, API Management'ı arka uç sistemi ile iletişim kurmak için sırayla sertifika zinciri doğrulamasını devre dışı bırakmak gerekir. Aksi takdirde, 500 hata kodu döndürür. Bunu yapılandırmak için kullanabileceğiniz [ `New-AzApiManagementBackend` ](https://docs.microsoft.com/powershell/module/az.apimanagement/new-azapimanagementbackend) (için yeni arka uç) veya [ `Set-AzApiManagementBackend` ](https://docs.microsoft.com/powershell/module/az.apimanagement/set-azapimanagementbackend) (mevcut arka uç için) PowerShell cmdlet'leri ve `-SkipCertificateChainValidation` parametresi `True`.
+Otomatik olarak imzalanan sertifikalar kullanıyorsanız, API Management arka uç sistemiyle iletişim kurması için sertifika zinciri doğrulamasını devre dışı bırakmanız gerekir. Aksi takdirde, 500 hata kodu döndürür. Bunu yapılandırmak için [`New-AzApiManagementBackend`](https://docs.microsoft.com/powershell/module/az.apimanagement/new-azapimanagementbackend) (yeni arka uç için) veya [`Set-AzApiManagementBackend`](https://docs.microsoft.com/powershell/module/az.apimanagement/set-azapimanagementbackend) (mevcut arka uç için) `-SkipCertificateChainValidation` PowerShell cmdlet 'lerini kullanabilir ve parametresini olarak `True`ayarlayabilirsiniz.
 
 ```powershell
 $context = New-AzApiManagementContext -resourcegroup 'ContosoResourceGroup' -servicename 'ContosoAPIMService'

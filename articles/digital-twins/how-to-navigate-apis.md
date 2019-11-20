@@ -1,116 +1,119 @@
 ---
-title: Azure dijital İkizlerini API'leri gidin | Microsoft Docs
-description: Bilgi Azure dijital İkizlerini yönetim API'leri sorgulama ortak desenler nasıl.
-author: kingdomofends
-manager: philmea
+title: API 'Lerde gezinme-Azure dijital TWINS | Microsoft Docs
+description: Azure dijital TWINS yönetim API 'Lerini sorgulama hakkında sık kullanılan desenleri öğrenin.
+ms.author: alinast
+author: alinamstanciu
+manager: bertvanhoof
 ms.service: digital-twins
 services: digital-twins
 ms.topic: conceptual
-ms.date: 1/7/2019
-ms.author: v-adgera
-ms.openlocfilehash: 1c5549b903e9a4768d81d601c42e621864522781
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.date: 10/27/2019
+ms.openlocfilehash: 135c760919f094f7b2d242ad37cc1cadb614e36e
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67462015"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74010002"
 ---
-# <a name="how-to-use-azure-digital-twins-management-apis"></a>Azure dijital İkizlerini yönetim API'leri kullanma
+# <a name="how-to-use-azure-digital-twins-management-apis"></a>Azure Digital TWINS yönetim API 'Lerini kullanma
 
-Azure dijital İkizlerini yönetim API'leri IOT uygulamalarınız için güçlü işlevleri sağlar. Bu makalede API yapısında gezinmeniz gösterilmektedir.  
+Azure Digital TWINS yönetim API 'Leri, IoT uygulamalarınız için güçlü işlevler sağlar. Bu makalede, API yapısına nasıl gidebileceğiniz gösterilmektedir.  
 
 ## <a name="api-summary"></a>API özeti
 
-Aşağıdaki liste, dijital İkizlerini API'leri bileşenlerini gösterir.
+Aşağıdaki listede, dijital TWINS API 'Lerinin bileşenleri gösterilmektedir.
 
-* [/ boşluk](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Spaces): Bu API'ler, kurulumunuzu fiziksel konumlarda ile etkileşim kurun. Bunlar, oluşturma, silme ve fiziksel konumlarınıza biçiminde dijital eşlemeleri yönetmek yardımcı bir [uzamsal graf](concepts-objectmodel-spatialgraph.md#spatial-intelligence-graph).
+* [/SPACES](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Spaces): Bu API 'ler, kuruluminizdeki fiziksel konumlarla etkileşim kurar. Bu, fiziksel konumlarınızın dijital eşlemelerini [uzamsal bir grafik](concepts-objectmodel-spatialgraph.md#spatial-intelligence-graph)biçiminde oluşturmanıza, silmesine ve yönetmenize yardımcı olur.
 
-* [/Devices](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Devices): Bu API'ler kurulumunuzu aygıtları ile etkileşim kurun. Bu cihazlar, algılayıcılar, bir veya daha fazla yönetebilirsiniz. Örneğin, bir cihaz, telefonunuz veya bir Raspberry Pi algılayıcı pod ya da bir Lora ağ geçidi vb.
+* [/Devices](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Devices): Bu API 'ler, kurulumlarınızdaki cihazlarla etkileşime geçin. Bu cihazlar, bir veya daha fazla sensöri yönetebilir. Örneğin, bir cihaz telefonunuz veya bir Raspberry PI algılayıcısı Pod veya bir Lora ağ geçidi olabilir.
 
-* [/Sensors](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Sensors): Bu API'ler, cihazlarınızı ve fiziksel konumlarınıza ilişkili sensörlerden ile iletişim kurmanıza yardımcı olur. Algılayıcılar, kaydedin ve uzamsal ortamınızı yönetmek için kullanılabilen ortam değerleri gönderebilirsiniz.  
+* [/Algılayıcılar](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Sensors): Bu API 'ler, cihazlarınızla ve fiziksel konumlarınızla ilişkili sensörlerle iletişim kurmanıza yardımcı olur. Algılayıcı, daha sonra uzamsal ortamınızı işlemek için kullanılabilecek ortam değerlerini kaydeder ve gönderir.  
 
-* [/Resources](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Resources): Bu API'ler dijital İkizlerini Örneğiniz için bir IOT hub gibi kaynakları ayarlamanıza yardımcı olur.
+* [/Resources](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Resources): Bu API 'Ler, dijital TWINS örneğiniz Için bir IoT Hub gibi kaynakları ayarlamanıza yardımcı olur.
 
-* [/ türleri](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Types): Bu API'ler, genişletilmiş türleri bu nesnelere belirli özellikleri eklemek için dijital İkizlerini nesnelerinizi ilişkilendirmek izin verir. Bu tür kolay filtreleme ve kullanıcı Arabirimi ve telemetri verilerinizi işleyen özel işlevler nesnelerin gruplama sağlar. Genişletilmiş tür örnekleri *DeviceType*, *sınıfın*, *SensorDataType*, *SpaceType*, *SpaceSubType* , *SpaceBlobType*, *SpaceResourceType*ve benzeri.
+* [/Types](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Types): Bu API 'ler, bu nesnelere belirli özellikler eklemek için genişletilmiş türleri dijital TWINS nesnelerinizle ilişkilendirmenize olanak tanır. Bu türler Kullanıcı arabirimindeki nesnelerin ve telemetri verilerinizi işleyen özel işlevlerin kolayca filtrelenmesini ve gruplanmasına olanak tanır. Genişletilmiş türlerin örnekleri *DeviceType*, *sensortype*, *sensordatatype*, *spacetype*, *spacesubtype*, *spaceblobtype*, *SpaceResourceType*ve benzeri bir örnektir.
 
-* [/ontologies](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/Ontologies): Bu API'ler topluluklarıdır genişletilmiş türlerinin ontolojileri, yönetmenize yardımcı olur. Ontolojileri, bu gruplar fiziksel alan temsil ettikleri göre nesne türleri için adlar sağlayın. Örneğin, *BACnet* ontology belirli adları sağlar *algılayıcı türleri*, *veri türleri*, *datasubtypes*ve *dataunittypes*. Ontolojileri yönetilebilir ve hizmet tarafından oluşturulur. Kullanıcılar, yükleme ve ontolojileri kaldırın. Bir ontology yüklendiğinde, ilişkili tür adları tüm etkin ve uzamsal graftaki sağlanması hazırdır. 
+* [/ontolobir](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/Ontologies): Bu API 'ler, genişletilmiş türdeki koleksiyonlar olan ontolo, yönetmenize yardımcı olur. Ontololarca, temsil ettikleri fiziksel alana göre nesne türleri için adlar sağlar. Örneğin, *BACnet* ontology, *algılayıcı türleri*, *veri türleri* *, veri alt türleri ve* *dataunittypes*için özel adlar sağlar. Ontolo, hizmet tarafından yönetilir ve oluşturulur. Kullanıcılar ontoloda yükleyip kaldırabilirler. Bir ontology yüklendiğinde, tüm ilişkili tür adları etkinleştirilir ve uzamsal grafiğinizde sağlanmaya hazır olur. 
 
-* [/propertyKeys](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/PropertyKeys): Bu API'ler için özel özellikler oluşturmak için kullanabileceğiniz, *alanları*, *cihazları*, *kullanıcılar*, ve *algılayıcılar*. Bu özellikler, anahtar/değer çiftleri oluşturulur. Bu özellikler veri türünü ayarlayarak tanımlayabileceğiniz kendi *PrimitiveDataType*. Örneğin, adında bir özellik tanımlayabilirsiniz *BasicTemperatureDeltaProcessingRefreshTime* türü *uint* sensörlerden ve her biri, algılayıcılar için sonra Ata bu özellik için bir değer. Özellik oluşturulurken bu değerleri kısıtlamaları ekleyebilirsiniz *Min* ve *en fazla* izin verilen değerler'hem de aralık *ValidationData*.
+* [/PropertyKeys](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/PropertyKeys): Bu API 'leri, *boşluklarınız*, *cihazlarınız*, *kullanıcılarınız*ve *sensörleriniz*için özel özellikler oluşturmak üzere kullanabilirsiniz. Bu özellikler anahtar/değer çiftleri olarak oluşturulur. Bu özellikler için veri türünü, *Primitivedatatype*ayarlayarak tanımlayabilirsiniz. Örneğin, sensörlerinizin *BasicTemperatureDeltaProcessingRefreshTime* adlı bir özelliği tanımlayabilir ve sonra sensörlerinizin her *biri için bu* özellik için bir değer atayabilirsiniz. Ayrıca, özelliği oluştururken, *Min* ve *Max* aralıklarının yanı sıra *validationdata*olarak izin verilen değerleri de ekleyerek bu değerler için kısıtlamalar da ekleyebilirsiniz.
 
-* [/matchers](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/Matchers): Bu API'ler, gelen cihaz verilerinizden değerlendirmek istediğiniz koşulları belirtmenizi sağlar. Bkz: [bu makalede](concepts-user-defined-functions.md#matchers) daha fazla bilgi için. 
+* [/Matchers](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/Matchers): Bu API 'ler, gelen cihaz verilerinize değerlendirmek istediğiniz koşulları belirtmenize olanak tanır. Daha fazla bilgi için [Bu makaleye](concepts-user-defined-functions.md#matchers) bakın. 
 
-* [/userDefinedFunctions](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/UserDefinedFunctions): Bu API'ler, oluşturmanıza izin verir, delete veya update ne zaman yürütecek bir özel işlev koşulları tarafından tanımlanan *matchers* , kurulumundan gelen verileri işlemek için oluşur. Bkz: [bu makalede](concepts-user-defined-functions.md#user-defined-functions) olarak da adlandırılan bu özel işlevler hakkında daha fazla bilgi için *kullanıcı tanımlı işlevleri*. 
+* [/UserDefinedFunctions](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/UserDefinedFunctions): Bu API 'ler, kurulumdan gelen verileri işlemek için, *eşleştiriciler* tarafından tanımlanan koşullar gerçekleştiğinde yürütülecek özel bir işlev oluşturmanıza, silmesine veya güncelleştirmenize olanak tanır. *Kullanıcı tanımlı işlevler*olarak da adlandırılan bu özel işlevler hakkında daha fazla bilgi için [Bu makaleye](concepts-user-defined-functions.md#user-defined-functions) bakın. 
 
-* [/endpoints](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/Endpoints): Bu API'ler, dijital İkizlerini çözümünüzün veri depolama ve analiz için diğer Azure hizmetleriyle iletişim kurabilmesi uç noktaları oluşturmanıza imkan tanır. Okuma [bu makalede](concepts-events-routing.md) daha fazla bilgi için. 
+* [/endpoints](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/Endpoints): Bu API 'Ler, dijital TWINS çözümünüzün veri depolama ve analiz Için diğer Azure hizmetleriyle iletişim kurabilmesi için uç noktalar oluşturmanızı sağlar. Daha fazla bilgi için [Bu makaleyi](concepts-events-routing.md) okuyun. 
 
-* [/keyStores](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/KeyStores): Bu API'ler, alanları için güvenlik anahtar depoları yönetmenizi sağlar. Bu depolar güvenlik anahtarların bir koleksiyonu tutmak ve kolayca son geçerli anahtarlarını almak sağlar.
+* [/Keymağazaların](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#/KeyStores): Bu API 'ler, boşluklarınız için güvenlik anahtarı depolarını yönetmenizi sağlar. Bu mağazalar bir güvenlik anahtarları koleksiyonu tutabilir ve en son geçerli anahtarları kolayca almanızı sağlar.
 
-* [/ Kullanıcılar](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Users): Bu API'ler, kullanıcıları gerektiğinde bu kişiler bulmak için boşluk ile ilişkilendirmek izin verir. 
+* [/Users](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Users): Bu API 'ler, gerektiğinde bu bireyleri bulmak için kullanıcıları sizin boşluklarınızla ilişkilendirmenize olanak tanır. 
 
-* [/ Sistem](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/System): Bu API'ler varsayılan türleri, alanları ve algılayıcılar gibi Sistem genelindeki ayarları yönetmenizi sağlar. 
+* [/sistem](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/System): Bu API 'ler, varsayılan boşluk ve algılayıcı türleri gibi sistem genelindeki ayarları yönetmenizi sağlar. 
 
-* [/roleAssignments](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/RoleAssignments): Bu API'ler, kullanıcı kimliği, kullanıcı tanımlı işlev kodu vb. gibi varlıkları rollerini ilişkilendirmek izin verir. Her rol ataması ilişkilendirmek için varlık türü, ilişkilendirilecek rolü kimliği, Kiracı kimliği ve varlık ile bu ilişkiyi erişip kaynak sayısı üst sınırı tanımlayan yol varlık Kimliğini içerir. Okuma [bu makalede](security-role-based-access-control.md) daha fazla bilgi için.
+* [/Roleatamalar](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/RoleAssignments): Bu API 'ler, ROLLERI Kullanıcı kimliği, Kullanıcı TANıMLı işlev kimliği vb. gibi varlıklarla ilişkilendirmenize olanak tanır. Her rol ataması, ilişkilendirilecek varlığın KIMLIĞINI, varlık türünü, ilişkilendirilecek rolün KIMLIĞINI, kiracı KIMLIĞINI ve varlığın bu ilişkiyle erişebileceği kaynağın üst sınırını tanımlayan bir yolu içerir. Daha fazla bilgi için [Bu makaleyi](security-role-based-access-control.md) okuyun.
 
 
-## <a name="api-navigation"></a>API Gezinti
+## <a name="api-navigation"></a>API gezintisi
 
-Dijital İkizlerini API'leri, filtreleme ve aşağıdaki parametreleri kullanarak grafiğinize uzamsal gezinme destekler:
+Dijital TWINS API 'Leri, aşağıdaki parametreleri kullanarak uzamsal grafikleriniz boyunca filtreleme ve gezinmeyi destekler:
 
-- **spaceId**: API verilen alanı kimliğe göre sonuçları filtreleyen Ayrıca, bir Boole bayrağı **useParentSpace** geçerlidir [/boşluk](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Spaces) verilen yer kimliği geçerli alanı yerine üst alanına başvuruyor gösteren API'leri. 
+- **spaceıd**: API, sonuçları VERILEN alan kimliğine göre filtreleyecek. Ayrıca, **Useparentspace** Boole bayrağı [/Spaces](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Spaces) API 'leri için geçerlidir. Bu, verilen alan kimliğinin geçerli alan yerine üst alana başvurduğunu gösterir. 
 
-- **minLevel** ve **maxLevel**: Kök alanları düzeyinde 1 olarak değerlendirilir. Boşluk üst düzeyde boşluk *n* düzeyindedir *n + 1*. Bu değerler ayarlandığında, belirli düzeylerde sonuçlarını filtreleyebilirsiniz. Bu kapsamlı değerler ayarlandığında. Cihazlar, algılayıcılar ve diğer nesneler, bunların en yakın alan aynı seviyede olacak şekilde değerlendirilir. Tüm nesneleri belirli bir düzeyde almak için hem ayarlamak **minLevel** ve **maxLevel** aynı değere.
+- **MinLevel** ve **maxlevel**: kök alanları 1 düzeyinde olduğu kabul edilir. *N* düzeyinde üst boşluk olan boşluklar *n + 1*düzeyindedir. Bu değerler ayarlandığında, sonuçları belirli düzeylerde filtreleyebilirsiniz. Bunlar, ayarlandığında dahil değerlerdir. Cihazlar, algılayıcılar ve diğer nesneler, en yakın alanla aynı düzeyde kabul edilir. Tüm nesneleri belirli bir düzeyde almak için, hem **MinLevel** hem de **maxlevel** değerlerini aynı değere ayarlayın.
 
-- **minRelative** ve **maxRelative**: Bu filtreler verildiğinde, karşılık gelen belirli yer kimliği düzeyine göre düzeyidir:
-   - Göreli düzeyi *0* belirli alan kimliği ile aynı düzeyde gibidir
-   - Göreli düzeyi *1* verilen alanı kimliğinin alt olarak aynı düzeyde alanları temsil eder Göreli düzeyi *n* alanları tarafından belirtilen alandan daha düşük temsil *n* düzeyleri.
-   - Göreli düzeyi *-1* üst alanı belirtilen alan ile aynı düzeyde alanları temsil eder.
+- **mingöreli** ve **maxgöreli**: Bu filtreler verildiğinde, karşılık gelen düzey verilen alan kimliği düzeyine göre belirlenir:
+   - Göreli düzey *0* , VERILEN alan kimliğiyle aynı düzeydir.
+   - Göreli düzey *1* , BELIRTILEN alan kimliği alt öğeleri ile aynı düzeydeki boşlukları temsil eder. Göreli düzey *n* , belirtilen alandan *n* düzeyle daha düşük olan boşlukları temsil eder.
+   - Göreli düzey *-1* , belirtilen alanın üst alanı ile aynı düzeydeki boşlukları temsil eder.
 
-- **Çapraz**: Aşağıdaki değerleri belirtildiği gibi belirtilen alan kimliğinden iki yönde çapraz sağlar.
-   - **Hiçbiri**: Bu varsayılan değeri belirli bir alanı kimliği için filtreler
-   - **Aşağı**: Bu, belirli bir alanı kimliği ve alt öğeleri filtreler. 
-   - **Yukarı**: Bu, verilen alanı kimliği ve alt öğelerinden göre filtreler. 
-   - **Yayılma**: Belirtilen alan kimliği ile aynı düzeyde uzamsal grafiğin yatay bir kısmı bu filtreler Bu ya da gereken **minRelative** veya **maxRelative** true olarak ayarlanmalıdır. 
+- **çapraz geçiş**: aşağıdaki değerler tarafından belirtilen şekilde, belirli BIR alan kimliğinden her iki yönde de çapraz geçiş yapmanıza olanak sağlar.
+   - **Hiçbiri**: Bu varsayılan değer VERILEN alan kimliğine filtre uygular.
+   - **Aşağı**: Bu, VERILEN alan kimliği ve alt öğeleri tarafından filtreliyor. 
+   - Yukarı: Bu, belirtilen alan KIMLIĞI ve üst öğelerinden göre **filtreliyor**. 
+   - **Span**: Bu, uzamsal grafiğin yatay bir kısmına, BELIRTILEN alan kimliğiyle aynı düzeyde filtre uygular. Bu, **mingöreli** veya **maxgöreli** 'nin true olarak ayarlanması gerekir. 
 
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki listede gezinmeyi bazı örnekler gösterilmektedir [/devices](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Devices) API'leri. Unutmayın yer tutucu `YOUR_MANAGEMENT_API_URL` URI biçiminde dijital İkizlerini API'leri başvurduğu `https://YOUR_INSTANCE_NAME.YOUR_LOCATION.azuresmartspaces.net/management/api/v1.0/`burada `YOUR_INSTANCE_NAME` Azure dijital İkizlerini örneğinizin adı ve `YOUR_LOCATION` örneğinizin barındırıldığı bölgedir.
+Aşağıdaki listede [/Devices](https://docs.westcentralus.azuresmartspaces.net/management/swagger/ui/index#!/Devices) API 'leri aracılığıyla bazı gezintinin örnekleri gösterilmektedir. Yer tutucunun `YOUR_MANAGEMENT_API_URL`, `YOUR_INSTANCE_NAME` Azure dijital TWINS örneğinizin adı olduğu ve `YOUR_LOCATION` örneğinizin barındırıldığı bölge olan `https://YOUR_INSTANCE_NAME.YOUR_LOCATION.azuresmartspaces.net/management/api/v1.0/`biçimindeki dijital TWINS API 'Lerinin URI 'sine başvurduğunu unutmayın.
 
-- `YOUR_MANAGEMENT_API_URL/devices?maxLevel=1` kök alanları için eklenen tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?minLevel=2&maxLevel=4` Düzey 2, 3 veya 4 alanları için bağlı olan tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId` doğrudan mySpaceId için eklenen tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down` mySpaceId veya alt öğelerinden birine bağlı tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down&minLevel=1&minRelative=true` bağlı alt öğeleri, mySpaceId, mySpaceId hariç tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down&minLevel=1&minRelative=true&maxLevel=1&maxRelative=true` mySpaceId yakınındaki alt öğeleri için eklenen tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Up&maxLevel=-1&maxRelative=true` mySpaceId üst öğelerinden birine bağlı tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down&maxLevel=5` düzeyinde değerinden küçük veya 5'e eşit olan alt öğeleri mySpaceId bağlı tüm cihazları döndürür.
-- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Span&minLevel=0&minRelative=true&maxLevel=0&maxRelative=true` mySpaceId ile aynı düzeyde olan alanlarına eklenen tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?maxLevel=1`, kök alanlara bağlı tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?minLevel=2&maxLevel=4`, 2, 3 veya 4. düzey alanlara eklenmiş tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId`, Myspaceıd 'ye doğrudan bağlı tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down` Myspaceıd veya alt öğelerinden birine bağlı tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down&minLevel=1&minRelative=true` myspaceıd hariç, Myspaceıd 'nin alt öğelerinin ekli tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down&minLevel=1&minRelative=true&maxLevel=1&maxRelative=true` Myspaceıd 'nin hemen alt öğelerine ekli tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Up&maxLevel=-1&maxRelative=true`, Myspaceıd 'nin üst öğelerinden birine bağlı tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Down&maxLevel=5`, en az 5 ' e eşit veya daha küçük olan Myspaceıd 'nin alt öğeleri eklenmiş tüm cihazları döndürür.
+- `YOUR_MANAGEMENT_API_URL/devices?spaceId=mySpaceId&traverse=Span&minLevel=0&minRelative=true&maxLevel=0&maxRelative=true`, Myspaceıd ile aynı düzeydeki boşluklara ekli tüm cihazları döndürür.
 
 
 ## <a name="odata-support"></a>OData desteği
-Çoğu /spaces üzerinde bir GET çağrısı gibi koleksiyonları döndüren API desteği genel aşağıdaki alt [OData](https://www.odata.org/getting-started/basic-tutorial/#queryData) sistem sorgu seçenekleri:  
+
+/Spaces üzerinde GET çağrısı gibi koleksiyonları döndüren API 'lerin çoğu, genel [OData](https://www.odata.org/getting-started/basic-tutorial/#queryData) sistem sorgu seçeneklerinin aşağıdaki alt kümesini destekler:  
 
 * **$filter**
 * **$orderby** 
 * **$top**
-* **$skip** -koleksiyonunun tamamını görüntülemek istiyorsanız, size tüm küme tek bir çağrı olarak istek ve ardından disk belleği uygulamanızda gerçekleştirin. 
+* **$Skip** -tüm koleksiyonu görüntülemeyi düşünüyorsanız, tek bir çağrıda onu bir bütün olarak bir küme olarak istemeniz ve sonra uygulamanızda sayfalama yapmanız gerekir. 
 
-$Count, $ gibi diğer sorgu seçeneklerini genişletin, $search, desteklenmeyen dikkat edin.
+> [!NOTE]
+> Bazı OData seçenekleri (örneğin, sorgu seçenekleri **$Count**, **$Expand**ve **$Search**) Şu anda desteklenmemektedir.
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki listede, OData'nın sistem sorgu seçenekleri kullanarak sorguları bazı örnekler gösterilmektedir:
+Aşağıdaki listede geçerli OData sözdizimi olan birkaç sorgu gösterilmektedir:
 
 - `YOUR_MANAGEMENT_API_URL/devices?$top=3&$orderby=Name desc`
-- `YOUR_MANAGEMENT_API_URL/keystores?$filter=endswith(Description,’space’)`
-- `YOUR_MANAGEMENT_API_URL/propertykeys?$filter=Scope ne ‘Spaces’`
-- `YOUR_MANAGEMENT_API_URL/resources?$filter=Size gt ‘M’`
-- `YOUR_MANAGEMENT_API_URL/users?$top=4&$filter=endswith(LastName,’k’)&$orderby=LastName`
-- `YOUR_MANAGEMENT_API_URL/spaces?$orderby=Name desc&$top=3&$filter=substringof('Floor’,Name)`
+- `YOUR_MANAGEMENT_API_URL/keystores?$filter=endswith(Description,'space')`
+- `YOUR_MANAGEMENT_API_URL/devices?$filter=TypeId eq 2`
+- `YOUR_MANAGEMENT_API_URL/resources?$filter=StatusId ne 1`
+- `YOUR_MANAGEMENT_API_URL/users?$top=4&$filter=endswith(LastName,'k')&$orderby=LastName`
+- `YOUR_MANAGEMENT_API_URL/spaces?$orderby=Name desc&$top=3&$filter=substringof('Floor',Name)`
  
-
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bazı ortak API sorgu desenleri öğrenmek için [ortak görevler için sorgu Azure dijital İkizlerini API'leri nasıl](how-to-query-common-apis.md).
+Bazı ortak API sorgu desenleri hakkında daha fazla bilgi edinmek için [Azure dijital TWINS API 'lerini ortak görevler için sorgulama](./how-to-query-common-apis.md)konusunu okuyun.
 
+API uç noktalarınız hakkında daha fazla bilgi edinmek için [dijital TWINS Swagger nasıl kullanacağınızı](./how-to-use-swagger.md)okuyun.
 
+OData söz dizimini ve kullanılabilir karşılaştırma işleçlerini gözden geçirmek için [Azure bilişsel arama 'Da OData karşılaştırma işleçlerini](../search/search-query-odata-comparison-operators.md)okuyun.

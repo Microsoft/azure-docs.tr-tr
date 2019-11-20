@@ -1,6 +1,6 @@
 ---
 title: Azure AD Federasyon meta verileri | Microsoft Docs
-description: Bu makalede, Azure Active Directory belirteçleri kabul Hizmetleri için Azure Active Directory yayımladığı Federasyon meta veri belgesi açıklanır.
+description: Bu makalede, Azure Active Directory belirteçleri kabul eden hizmetler için Azure Active Directory yayımladığı Federasyon meta verileri belgesi açıklanmaktadır.
 services: active-directory
 documentationcenter: .net
 author: rwike77
@@ -12,48 +12,48 @@ ms.subservice: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 01/07/2017
 ms.author: ryanwi
 ms.reviewer: hirsin, dastrock
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 32f105c0d4f8807b53d400a1c198edd504c0aef3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fefaf618ff29cc2186dc555eb6f452223f4cd097
+ms.sourcegitcommit: bc3a153d79b7e398581d3bcfadbb7403551aa536
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65544496"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68835138"
 ---
 # <a name="federation-metadata"></a>Federasyon meta verileri
-Azure Active Directory (Azure AD), hizmetler için Azure AD sorunlarını güvenlik belirteçleri kabul edecek şekilde yapılandırılmış bir Federasyon meta veri belgesi yayımlar. Federasyon meta veri belge biçimi açıklanan [Web Hizmetleri Federasyon dili (WS-Federation) sürüm 1.2](https://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation-1.2-spec-os.html), genişleten [OASISgüvenlikonaylamaişlemibiçimlendirmedili(SAML)v2.0içinmetaverileri](https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf).
+Azure Active Directory (Azure AD), Azure AD sorunlarının güvenlik belirteçlerini kabul edecek şekilde yapılandırılmış hizmetler için bir Federasyon meta veri belgesi yayımlar. Federasyon meta veri belgesi biçimi, [OASSıS Security assertion Markup Language (SAML) v 2.0 Için meta verileri](https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf)genişleten [Web HIZMETLERI Federasyonu Language (WS-federation) sürüm 1,2](https://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation-1.2-spec-os.html)' de açıklanmaktadır.
 
-## <a name="tenant-specific-and-tenant-independent-metadata-endpoints"></a>Kiracıya özgü ve Kiracı bağımsız meta veri uç noktaları
-Azure AD Kiracı özgü ve Kiracı bağımsız uç noktaları yayımlar.
+## <a name="tenant-specific-and-tenant-independent-metadata-endpoints"></a>Kiracıya özgü ve kiracıdan bağımsız meta veri uç noktaları
+Azure AD, kiracıya özgü ve kiracıdan bağımsız uç noktaları yayımlar.
 
-Kiracıya özel uç noktaları, belirli bir kiracı için tasarlanmıştır. Kiracıya özgü Federasyon meta verileri kiracıya özgü veren ve uç nokta bilgileri de dahil olmak üzere, Kiracı hakkındaki bilgileri içerir. Erişimi kısıtlamak için tek bir kiracının uygulamaları kiracıya özel uç noktaları kullanın.
+Kiracıya özgü uç noktalar belirli bir kiracı için tasarlanmıştır. Kiracıya özgü Federasyon meta verileri, kiracıya özgü veren ve uç nokta bilgileri de dahil olmak üzere kiracı hakkında bilgiler içerir. Tek bir kiracıya erişimi kısıtlayan uygulamalar kiracıya özgü uç noktalar kullanır.
 
-Kiracı bağımsız uç noktaları tüm Azure AD kiracıları için ortak olan bilgiler sağlar. Bu bilgiler, barındırılan kiracılara geçerlidir *login.microsoftonline.com* ve kiracılar arasında paylaşılır. Belirli bir kiracı ile ilişkili olmadığından çok kiracılı uygulamalar için Kiracı bağımsız uç noktaları önerilir.
+Kiracıdan bağımsız uç noktalar, tüm Azure AD kiracılarında ortak olan bilgileri sağlar. Bu bilgiler, *login.microsoftonline.com* adresinde barındırılan kiracılar için geçerlidir ve kiracılar arasında paylaşılır. Kiracıdan bağımsız uç noktalar, çok kiracılı uygulamalar için önerilir, çünkü belirli bir kiracı ile ilişkilendirilmez.
 
-## <a name="federation-metadata-endpoints"></a>Federasyon meta veri uç noktaları
-Azure AD Federasyon meta verileri en yayımlar `https://login.microsoftonline.com/<TenantDomainName>/FederationMetadata/2007-06/FederationMetadata.xml`.
+## <a name="federation-metadata-endpoints"></a>Federasyon meta verileri uç noktaları
+Azure AD, Federasyon meta verilerini `https://login.microsoftonline.com/<TenantDomainName>/FederationMetadata/2007-06/FederationMetadata.xml`konumunda yayımlar.
 
-İçin **kiracıya özel uç noktaları**, `TenantDomainName` şu türlerden biri olabilir:
+**Kiracıya özgü uç noktalar** `TenantDomainName` için aşağıdaki türlerden biri olabilir:
 
-* Gibi bir kaydedilmiş bir etki alanı adını bir Azure AD Kiracı: `contoso.onmicrosoft.com`.
-* Sabit gibi tenant ID etki alanının `72f988bf-86f1-41af-91ab-2d7cd011db45`.
+* Azure AD kiracısının kayıtlı bir etki alanı adı, örneğin: `contoso.onmicrosoft.com`.
+* Etki alanının `72f988bf-86f1-41af-91ab-2d7cd011db45`sabit Kiracı kimliği (gibi).
 
-İçin **Kiracı bağımsız uç noktaları**, `TenantDomainName` olduğu `common`. Bu belge, login.microsoftonline.com bulunan tüm Azure AD kiracıları için ortak olan Federasyon meta veri öğeleri listeler.
+**Kiracıdan bağımsız uç noktalar** `TenantDomainName` `common`için,. Bu belgede yalnızca login.microsoftonline.com adresinde barındırılan tüm Azure AD kiracılarında ortak olan Federasyon meta veri öğeleri listelenir.
 
-Örneğin, bir kiracıya özgü uç nokta olabilir `https://login.microsoftonline.com/contoso.onmicrosoft.com/FederationMetadata/2007-06/FederationMetadata.xml`. Kiracı bağımsız uç nokta [ https://login.microsoftonline.com/common/FederationMetadata/2007-06/FederationMetadata.xml ](https://login.microsoftonline.com/common/FederationMetadata/2007-06/FederationMetadata.xml). Bir tarayıcıda bu URL'yi yazarak, Federasyon meta veri belgesi görüntüleyebilirsiniz.
+Örneğin, kiracıya özgü bir uç nokta `https://login.microsoftonline.com/contoso.onmicrosoft.com/FederationMetadata/2007-06/FederationMetadata.xml`olabilir. Kiracıdan bağımsız uç nokta [https://login.microsoftonline.com/common/FederationMetadata/2007-06/FederationMetadata.xml](https://login.microsoftonline.com/common/FederationMetadata/2007-06/FederationMetadata.xml). Bu URL 'YI bir tarayıcıya yazarak, Federasyon meta veri belgesini görüntüleyebilirsiniz.
 
-## <a name="contents-of-federation-metadata"></a>Federasyon meta verileri içeriği
-Aşağıdaki bölümde, Azure AD tarafından yayınlanan belirteçleri tüketen hizmetler tarafından ihtiyaç duyulan bilgileri sağlar.
+## <a name="contents-of-federation-metadata"></a>Federasyon meta verilerinin içeriği
+Aşağıdaki bölümde, Azure AD tarafından verilen belirteçleri kullanan hizmetler için gereken bilgiler sağlanmaktadır.
 
 ### <a name="entity-id"></a>Varlık Kimliği
-`EntityDescriptor` Öğesi içeren bir `EntityID` özniteliği. Değerini `EntityID` öznitelik veren, belirteci veren diğer bir deyişle, güvenlik belirteci hizmeti (STS) temsil eder. Bir belirteci aldığınızda sağlayıcısını doğrulamak önemlidir.
+`EntityDescriptor` Öğesi bir`EntityID` özniteliği içerir. `EntityID` Özniteliğin değeri veren, diğer bir deyişle, belirteci veren güvenlik belirteci hizmeti (STS) öğesini temsil eder. Bir belirteç aldığınızda veren 'nin doğrulanması önemlidir.
 
-Aşağıdaki meta verileri kiracıya özgü bir örneği gösterilmektedir. `EntityDescriptor` öğesi ile bir `EntityID` öğesi.
+Aşağıdaki meta veriler, bir `EntityDescriptor` `EntityID` öğeye sahip örnek bir kiracıya özgü öğe gösterir.
 
 ```
 <EntityDescriptor
@@ -61,9 +61,9 @@ xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
 ID="_b827a749-cfcb-46b3-ab8b-9f6d14a1294b"
 entityID="https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db45/">
 ```
-Kiracı kimliği Kiracı bağımsız uç noktasını bir kiracıya özgü oluşturmak için Kiracı Kimliğinizle değiştirin `EntityID` değeri. Sonuç değerini belirteci veren aynı olacaktır. Belirli bir kiracının sağlayıcısını doğrulamak çok kiracılı bir uygulama stratejisi sağlar.
+Kiracıya özgü `EntityID` bir değer oluşturmak için kiracının bağımsız uç noktasındaki Kiracı kimliğini kiracı Kimliğiniz ile değiştirebilirsiniz. Sonuç değeri, belirteç verenle aynı olacaktır. Strateji, çok kiracılı bir uygulamanın belirli bir kiracı için sertifikayı doğrulamasını sağlar.
 
-Aşağıdaki meta verileri, Kiracı bağımsız bir örneği gösterilmektedir. `EntityID` öğesi. Lütfen aşağıdakilere dikkat edin, `{tenant}` yer tutucu bir değişmez değerdir.
+Aşağıdaki meta veriler, kiracıdan bağımsız `EntityID` örnek bir öğe gösterir. Lütfen bir yer tutucu değil `{tenant}` değişmez değer olduğunu unutmayın.
 
 ```
 <EntityDescriptor
@@ -73,11 +73,11 @@ entityID="https://sts.windows.net/{tenant}/">
 ```
 
 ### <a name="token-signing-certificates"></a>Belirteç imzalama sertifikaları
-Bir hizmeti bir Azure AD kiracısı tarafından verilen bir belirteç aldığında Federasyon meta veri belgesi yayımlanan bir imzalama anahtarı ile belirtecinin imzası doğrulanması gerekir. Ortak kısmını kiracılar belirteç imzalama için kullanan sertifikaları Federasyon meta verileri içerir. Sertifika ham bayt görünür `KeyDescriptor` öğesi. Belirteç imzalama sertifikasının yalnızca geçerli değerini `use` özniteliği `signing`.
+Hizmet bir Azure AD kiracısı tarafından verilen bir belirteç aldığında, belirtecin imzası, Federasyon meta veri belgesinde yayınlanan bir imzalama anahtarıyla doğrulanıp doğrulanması gerekir. Federasyon meta verileri, kiracılar tarafından belirteç imzalama için kullanılan sertifikaların genel bölümünü içerir. Sertifika ham baytları `KeyDescriptor` öğesinde görüntülenir. Belirteç imzalama sertifikası yalnızca `use` `signing`özniteliğin değeri olduğunda imzalama için geçerlidir.
 
-Azure AD tarafından yayımlanmış Federasyon meta veri belgesi imzalama sertifikasını güncelleştirmek Azure AD, hazırlama gibi birden çok imza anahtarlarının olabilir. Federasyon meta veri belgesi birden fazla sertifika içerdiğinde, belirteçleri doğrulama hizmet belgedeki tüm sertifikaları desteklemelidir.
+Azure AD tarafından yayımlanan bir Federasyon meta veri belgesi, imzalama sertifikasını güncelleştirmek için Azure AD hazırlanırken olduğu gibi birden çok imzalama anahtarına sahip olabilir. Federasyon meta veri belgesi birden fazla sertifika içerdiğinde, belirteçleri doğrulayan bir hizmet belgedeki tüm sertifikaları desteklemelidir.
 
-Aşağıdaki meta verileri, bir örneği gösterilmektedir. `KeyDescriptor` bir imzalama anahtarı ile öğesi.
+Aşağıdaki meta veriler, imzalama anahtarı `KeyDescriptor` ile örnek bir öğe gösterir.
 
 ```
 <KeyDescriptor use="signing">
@@ -91,29 +91,29 @@ MIIDPjCCAiqgAwIBAgIQVWmXY/+9RqFA/OG9kFulHDAJBgUrDgMCHQUAMC0xKzApBgNVBAMTImFjY291
 </KeyDescriptor>
   ```
 
-`KeyDescriptor` İki yerde Federasyon meta veri belgesi; WS-Federasyon özgü ve SAML özgü bölümleri öğe görüntülenir. Her iki bölümde yayımlanan sertifikalar aynı olacaktır.
+`KeyDescriptor` Öğesi, Federasyon meta veri belgesinde iki yerde, WS-Federation 'e özgü bölümünde ve SAML 'ye özgü bölümünde görüntülenir. Her iki bölümde de yayımlanan sertifikalar aynı olacaktır.
 
-WS-Federasyon özgü bölümünde, WS-Federasyon meta veri okuyucusu sertifikalardan okuduğunuz bir `RoleDescriptor` öğeyle `SecurityTokenServiceType` türü.
+WS-Federation 'a özgü bölümünde, bir WS-Federasyon meta veri okuyucusu, `RoleDescriptor` `SecurityTokenServiceType` türü olan bir öğeden sertifikaları okur.
 
-Aşağıdaki meta verileri, bir örneği gösterilmektedir. `RoleDescriptor` öğesi.
+Aşağıdaki meta veriler örnek `RoleDescriptor` bir öğe gösterir.
 
 ```
 <RoleDescriptor xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xmlns:fed="https://docs.oasis-open.org/wsfed/federation/200706" xsi:type="fed:SecurityTokenServiceType"protocolSupportEnumeration="https://docs.oasis-open.org/wsfed/federation/200706">
 ```
 
-SAML özel bölümde, WS-Federasyon meta veri okuyucusu sertifikalardan okuduğunuz bir `IDPSSODescriptor` öğesi.
+SAML 'ye özgü bölümünde, bir WS-Federasyon meta veri okuyucusu bir `IDPSSODescriptor` öğeden sertifikaları okur.
 
-Aşağıdaki meta verileri, bir örneği gösterilmektedir. `IDPSSODescriptor` öğesi.
+Aşağıdaki meta veriler örnek `IDPSSODescriptor` bir öğe gösterir.
 
 ```
 <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
 ```
-Kiracıya özgü ve Kiracı bağımsız sertifikaları biçimi hiçbir fark yoktur.
+Kiracıya özgü ve kiracıdan bağımsız sertifikaların biçiminde farklılık yoktur.
 
-### <a name="ws-federation-endpoint-url"></a>WS-Federasyon uç nokta URL'si
-Federasyon meta verileri Azure AD kullanımları çoklu oturum açma ve WS-Federation Protokolü oturum kapatma tek URL içerir. Bu uç nokta görünür `PassiveRequestorEndpoint` öğesi.
+### <a name="ws-federation-endpoint-url"></a>WS-Federation Endpoint URL 'SI
+Federasyon meta verileri, Azure AD 'nin, WS-Federation protokolünde çoklu oturum açma ve çoklu oturum kapatma için kullandığı URL 'YI içerir. Bu uç nokta `PassiveRequestorEndpoint` öğesinde görüntülenir.
 
-Aşağıdaki meta verileri, bir örneği gösterilmektedir. `PassiveRequestorEndpoint` bir kiracıya özgü uç nokta için öğesi.
+Aşağıdaki meta veriler, kiracıya `PassiveRequestorEndpoint` özgü uç nokta için örnek bir öğe gösterir.
 
 ```
 <fed:PassiveRequestorEndpoint>
@@ -124,7 +124,7 @@ https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db45/wsfed
 </EndpointReference>
 </fed:PassiveRequestorEndpoint>
 ```
-Kiracı bağımsız uç noktası için WS-Federasyon URL'sini WS-Federasyon uç noktası aşağıdaki örnekte gösterildiği gibi görünür.
+Kiracıdan bağımsız uç nokta için, aşağıdaki örnekte gösterildiği gibi WS-Federation URL 'SI WS-Federation uç noktasında görüntülenir.
 
 ```
 <fed:PassiveRequestorEndpoint>
@@ -136,12 +136,12 @@ https://login.microsoftonline.com/common/wsfed
 </fed:PassiveRequestorEndpoint>
 ```
 
-### <a name="saml-protocol-endpoint-url"></a>SAML protokol uç nokta URL'si
-Federasyon meta verileri, Azure AD çoklu oturum açma ve kapatma SAML 2.0 protokolü tek kullanan bir URL içerir. Bu uç noktaları görünür `IDPSSODescriptor` öğesi.
+### <a name="saml-protocol-endpoint-url"></a>SAML protokol uç noktası URL 'SI
+Federasyon meta verileri, Azure AD 'nin SAML 2,0 protokolünde çoklu oturum açma ve çoklu oturum kapatma için kullandığı URL 'YI içerir. Bu uç noktalar `IDPSSODescriptor` öğesinde görüntülenir.
 
-Oturum açma ve oturum kapatma URL'leri görünür `SingleSignOnService` ve `SingleLogoutService` öğeleri.
+Oturum açma ve oturum kapatma URL 'leri `SingleSignOnService` ve `SingleLogoutService` öğelerinde görüntülenir.
 
-Aşağıdaki meta verileri, bir örneği gösterilmektedir. `PassiveResistorEndpoint` bir kiracıya özgü uç nokta için.
+Aşağıdaki meta veriler, kiracıya `PassiveResistorEndpoint` özgü uç nokta için bir örnek gösterir.
 
 ```
 <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
@@ -151,7 +151,7 @@ Aşağıdaki meta verileri, bir örneği gösterilmektedir. `PassiveResistorEndp
   </IDPSSODescriptor>
 ```
 
-Benzer şekilde ortak SAML 2.0 protokolü bitiş noktası uç noktaları aşağıdaki örnekte gösterildiği gibi Kiracı bağımsız Federasyon meta verilerinde yayımlanır.
+Benzer şekilde, ortak SAML 2,0 protokol uç noktaları, aşağıdaki örnekte gösterildiği gibi kiracıya bağımsız Federasyon meta verilerinde yayımlanır.
 
 ```
 <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">

@@ -1,6 +1,6 @@
 ---
-title: "Öğretici: IQNavigator VM'ler ile Azure Active Directory Tümleştirme | Microsoft Docs"
-description: Azure Active Directory ve IQNavigator VM'ler arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: "Öğretici: IQNavigator VM 'leriyle Azure Active Directory tümleştirme | Microsoft Docs"
+description: Azure Active Directory ve IQNavigator VM 'leri arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -15,49 +15,49 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/19/2019
 ms.author: jeedes
-ms.openlocfilehash: 579b35a06b74ffcef47ca0b41ff60bfdc4e0eb2b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dba50c984984363682efce1f09ef462b3c0c5def
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67099792"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70078494"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-iqnavigator-vms"></a>Öğretici: IQNavigator VM'ler ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-iqnavigator-vms"></a>Öğretici: IQNavigator VM 'leriyle Azure Active Directory tümleştirme
 
-Bu öğreticide, IQNavigator VM'leri Azure Active Directory (Azure AD) ile tümleştirme konusunda bilgi edinin.
-IQNavigator VM'leri Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, IQNavigator sanal makinelerini Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+IQNavigator VM 'lerini Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* IQNavigator VM erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak IQNavigator VM'lere (çoklu oturum açma) oturum açmış, kullanıcıların etkinleştirebilirsiniz.
+* IQNavigator VM 'lerine erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla IQNavigator VM 'lerine (çoklu oturum açma) otomatik olarak oturum açmasını sağlayabilirsiniz.
 * Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile IQNavigator VM'leri yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini IQNavigator VM 'leriyle yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik IQNavigator VM'leri çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* IQNavigator VM 'leri çoklu oturum açma etkin aboneliği
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* IQNavigator VM'leri destekler **IDP** tarafından başlatılan
+* IQNavigator VM 'leri **IDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-iqnavigator-vms-from-the-gallery"></a>Galeriden IQNavigator VM'leri ekleme
+## <a name="adding-iqnavigator-vms-from-the-gallery"></a>Galeriden IQNavigator VM 'leri ekleme
 
-Azure AD'de IQNavigator VM'leri tümleştirmesini yapılandırmak için IQNavigator VM'leri Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+IQNavigator VM 'lerinin Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden IQNavigator VM 'lerini yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**Galeriden IQNavigator VM'leri eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden IQNavigator VM 'leri eklemek için aşağıdaki adımları uygulayın:**
 
 1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
@@ -65,68 +65,68 @@ Azure AD'de IQNavigator VM'leri tümleştirmesini yapılandırmak için IQNaviga
 
     ![Yeni Uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **IQNavigator VM'leri**seçin **IQNavigator VM'leri** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **IQNavigator VM 'leri**yazın, sonuç panelinden **IQNavigator VM 'leri** seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde IQNavigator VM'ler](common/search-new-app.png)
+     ![Sonuçlar listesindeki IQNavigator VM 'leri](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırmanız ve IQNavigator VM'ler ile Azure AD çoklu oturum açmayı test adlı bir test kullanıcı tabanlı **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve ilgili kullanıcı IQNavigator vm'lerde arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, **Britta Simon**adlı bir test kullanıcısına bağlı olarak IQNavigator VM 'LERIYLE Azure AD çoklu oturum açmayı yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve IQNavigator VM 'lerinde ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma IQNavigator vm'lerle sınamak için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı IQNavigator VM 'leriyle yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
 1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[IQNavigator VM'leri çoklu oturum açmayı yapılandırma](#configure-iqnavigator-vms-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[IQNavigator VM 'Leri çoklu oturum açmayı yapılandırın](#configure-iqnavigator-vms-single-sign-on)** .
 3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
 4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[IQNavigator VM'leri test kullanıcısı oluşturma](#create-iqnavigator-vms-test-user)**  - kullanıcı Azure AD gösterimini bağlı IQNavigator vm'lerde Britta simon'un bir karşılığı vardır.
+5. Kullanıcının Azure AD gösterimine bağlı IQNavigator VM 'lerinde Britta Simon 'un bir karşılığı olacak şekilde **[IQNavigator VM 'leri test kullanıcısı oluşturun](#create-iqnavigator-vms-test-user)** .
 6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile IQNavigator VM'leri yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açma 'yı IQNavigator VM 'leriyle yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **IQNavigator VM'leri** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **IQNAVIGATOR VM 'leri** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
     ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
 3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![IQNavigator VM'leri etki alanı ve URL'ler tek oturum açma bilgileri](common/idp-relay.png)
+    ![IQNavigator VM 'leri etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-relay.png)
 
-    a. İçinde **tanımlayıcı** metin kutusuna bir URL yazın: `iqn.com`
+    a. **Tanımlayıcı** metin kutusuna bir URL yazın:`iqn.com`
 
-    b. İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<subdomain>.iqnavigator.com/security/login?client_name=https://sts.window.net/<instance name>`
+    b. **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.iqnavigator.com/security/login?client_name=https://sts.window.net/<instance name>`
 
-    c. Tıklayın **ek URL'lerini ayarlayın**.
+    c. **Ek URL 'Ler ayarla**' ya tıklayın.
 
-    d. İçinde **geçiş durumu** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<subdomain>.iqnavigator.com`
+    d. **Geçiş durumu** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.iqnavigator.com`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek yanıt URL'si ve geçiş durumunu güncelleştirin. İlgili kişi [IQNavigator VM'leri istemci Destek ekibine](https://www.beeline.com/iqn-product-support/) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri gerçek yanıt URL 'SI ve geçiş durumuyla güncelleştirin. Bu değerleri almak için [IQNavigator VM 'Leri istemci destek ekibine](https://www.beeline.com/support-iqn/) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-5. IQNavigator uygulama adı tanımlayıcısı talebi benzersiz kullanıcı tanıtıcı değeri bekler. Müşteri adı tanımlayıcısı talebi için doğru değeri eşleyebilirsiniz. Bu durumda biz kullanıcı eşlenmiş. UserPrincipalName için Tanıtım amaçlı. Ancak kuruluş ayarlarınıza göre doğru değeri için eşlemeniz.
+5. IQNavigator uygulaması ad tanımlayıcı talebinde benzersiz kullanıcı tanımlayıcı değeri bekliyor. Müşteri, ad tanımlayıcı talebi için doğru değeri eşleyebilir. Bu durumda, kullanıcıyı eşliyoruz. Demo amacı için UserPrincipalName. Ancak kuruluşunuzun ayarlarına göre doğru değeri eşleştirmelisiniz.
 
     ![image](common/edit-attribute.png)
 
-6. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında **SAML imzalama sertifikası** bölümünde, kopyalamak için Kopyala düğmesine **uygulama Federasyon meta verileri URL'sini** ve üzerinde kaydedin, bilgisayar.
+6. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **uygulama Federasyon meta verileri URL 'sini** kopyalamak ve bilgisayarınıza kaydetmek için Kopyala düğmesine tıklayın.
 
     ![Sertifika indirme bağlantısı](common/copy-metadataurl.png)
 
-### <a name="configure-iqnavigator-vms-single-sign-on"></a>IQNavigator VM'leri çoklu oturum açmayı yapılandırın
+### <a name="configure-iqnavigator-vms-single-sign-on"></a>IQNavigator VM 'leri çoklu oturum açmayı yapılandırma
 
-Çoklu oturum açmayı yapılandırma **IQNavigator VM'leri** tarafını göndermek için ihtiyacınız **uygulama Federasyon meta verileri URL'sini** için [IQNavigator VM'leri Destek ekibine](https://www.beeline.com/iqn-product-support/). Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
+**IQNavigator VM 'leri** tarafında çoklu oturum açmayı yapılandırmak Için, [IQNavigator VM 'Leri destek ekibine](https://www.beeline.com/support-iqn/) **uygulama Federasyon meta verileri URL 'sini** göndermeniz gerekir. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
@@ -138,56 +138,56 @@ Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcıs
 
 2. Seçin **yeni kullanıcı** ekranın üstünde.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
 3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alan türü **brittasimon@yourcompanydomain.extension**  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’a tıklayın.
+    d. **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma IQNavigator VM'lere erişim vererek kullanmak Britta Simon etkinleştirin.
+Bu bölümde, IQNavigator VM 'lerine erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **IQNavigator VM'leri**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **iqnavigator VM 'leri**' ni seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **IQNavigator VM'leri**.
+2. Uygulamalar listesinde, **IQNavigator VM 'leri**' ni seçin.
 
-    ![Uygulamalar listesinde IQNavigator VM bağlantısı](common/all-applications.png)
+    ![Uygulamalar listesindeki IQNavigator VM 'leri bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
     !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
 5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-iqnavigator-vms-test-user"></a>IQNavigator VM'leri test kullanıcısı oluşturma
+### <a name="create-iqnavigator-vms-test-user"></a>IQNavigator VM 'leri test kullanıcısı oluştur
 
-Bu bölümde, Britta Simon IQNavigator VM'LERDE adlı bir kullanıcı oluşturun. Çalışmak [IQNavigator VM'leri Destek ekibine](https://www.beeline.com/iqn-product-support/) IQNavigator VM'leri platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
+Bu bölümde, IQNavigator VM 'lerinde Britta Simon adlı bir Kullanıcı oluşturacaksınız. IQNavigator VM 'leri platformunda kullanıcıları eklemek için [IQNavigator VM 'leri destek ekibi](https://www.beeline.com/support-iqn/) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli IQNavigator VM'leri kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama IQNavigator vm'lere oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde IQNavigator VM 'leri kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız IQNavigator VM 'lerinde otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
@@ -195,4 +195,4 @@ Erişim paneli IQNavigator VM'leri kutucuğa tıkladığınızda, size otomatik 
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

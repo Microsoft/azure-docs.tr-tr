@@ -1,31 +1,29 @@
 ---
-title: Azure İşlevleri'ni kullanarak sunucusuz bir API oluşturma | Microsoft Docs
-description: Azure İşlevleri'ni kullanarak sunucusuz bir API oluşturma adımları
-services: functions
+title: Azure Işlevlerinde bir HTTP uç noktasını özelleştirme
+description: Azure Işlevlerinde bir HTTP tetikleyici uç noktasını özelleştirmeyi öğrenin
 author: mattchenderson
-manager: jeconnoc
+manager: gwallace
 ms.service: azure-functions
-ms.devlang: multiple
-ms.topic: tutorial
+ms.topic: conceptual
 ms.date: 05/04/2017
 ms.author: mahender
 ms.custom: mvc
-ms.openlocfilehash: f6a678e03818f1e1f2182b3b0dfab221d415dc72
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: f7729f5acb8b7b95004265f6802ba2feb1bc3cd7
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62107288"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70096751"
 ---
-# <a name="create-a-serverless-api-using-azure-functions"></a>Azure İşlevleri'ni kullanarak sunucusuz bir API oluşturma
+# <a name="customize-an-http-endpoint-in-azure-functions"></a>Azure Işlevlerinde bir HTTP uç noktasını özelleştirme
 
-Bu öğreticide Azure İşlevleri'ni kullanarak yüksek oranda ölçeklenebilir API'ler derlemeyi öğreneceksiniz. Azure İşlevleri Node.JS, C# ve daha birçok dilde uç nokta yazmayı kolaylaştıran yerleşik HTTP tetikleyicisi ve bağlama koleksiyonuna sahiptir. Bu öğreticide bir HTTP tetikleyicisini API tasarımınızdaki belirli eylemleri işlemek üzere özelleştireceksiniz. Ayrıca Azure İşlev Proxy'leri tümleştirmesi yapıp sahte API'ler oluşturarak API'nizi ölçeklendirmeye hazır hale getireceksiniz. Tüm bu işlemler Azure İşlevleri'nin sunucusuz işlem ortamında gerçekleştirildiğinden kaynak ölçeklendirme konusunda endişelenmenize gerek yoktur. Tek yapmanız gereken API'nizin mantığına yoğunlaşmaktır.
+Bu makalede, Azure Işlevlerinin yüksek düzeyde ölçeklenebilir API 'Ler oluşturmanıza nasıl izin verdiğini öğrenirsiniz. Azure İşlevleri Node.JS, C# ve daha birçok dilde uç nokta yazmayı kolaylaştıran yerleşik HTTP tetikleyicisi ve bağlama koleksiyonuna sahiptir. Bu makalede, API tasarımınızda belirli eylemleri işlemek üzere bir HTTP tetikleyicisi özelleştirecek. Ayrıca Azure İşlev Proxy'leri tümleştirmesi yapıp sahte API'ler oluşturarak API'nizi ölçeklendirmeye hazır hale getireceksiniz. Tüm bu işlemler Azure İşlevleri'nin sunucusuz işlem ortamında gerçekleştirildiğinden kaynak ölçeklendirme konusunda endişelenmenize gerek yoktur. Tek yapmanız gereken API'nizin mantığına yoğunlaşmaktır.
 
 ## <a name="prerequisites"></a>Önkoşullar 
 
 [!INCLUDE [Previous quickstart note](../../includes/functions-quickstart-previous-topics.md)]
 
-Oluşturulacak işlev, bu öğreticinin geri kalan bölümünde kullanılacaktır.
+Sonuçta elde edilen işlev bu makalenin geri kalanında kullanılacaktır.
 
 ### <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
@@ -43,10 +41,10 @@ HTTP ile tetiklenen işleviniz varsayılan olarak tüm HTTP yöntemlerini kabul 
 
     | Alan | Örnek değer | Açıklama |
     |---|---|---|
-    | İzin verilen HTTP yöntemleri | Seçilen yöntemler | Bu işlevi çağırmak için kullanılabilecek HTTP yöntemlerini belirler |
+    | İzin verilen HTTP metotları | Seçilen yöntemler | Bu işlevi çağırmak için kullanılabilecek HTTP yöntemlerini belirler |
     | Seçili HTTP metotları | GET | Yalnızca seçilen HTTP yöntemlerinin bu işlevi çağırmak için kullanılmasını sağlar |
     | Yol şablonu | /hello | Bu işlevi çağırmak için kullanılacak yolu belirler |
-    | Yetkilendirme Düzeyi | Anonim | İsteğe bağlı: İşlevinizi bir API anahtarı olmadan erişilebilir hale getirir |
+    | Yetkilendirme Düzeyi | Adsız | İsteğe bağlı: Bir API anahtarı olmadan işlevinizin erişilebilir olmasını sağlar |
 
     > [!NOTE] 
     > Genel ayar tarafından işlendiği için `/api` temel yol ön ekini yol şablonuna dahil etmediniz.
@@ -103,13 +101,13 @@ Proxy'nizi oluşturacağınız yeni bir işlev uygulaması oluşturmak için [İ
 
     | Alan | Örnek değer | Açıklama |
     |---|---|---|
-    | Ad | HelloProxy | Yalnızca yönetim için kullanılan kolay ad |
-    | Yol şablonu | / api/remotehello | Bu proxy'yi çağırmak için kullanılacak yolu belirler |
+    | Name | HelloProxy | Yalnızca yönetim için kullanılan kolay ad |
+    | Yol şablonu | /api/remotemerhaba | Bu proxy'yi çağırmak için kullanılacak yolu belirler |
     | Arka uç URL'si | https://%HELLO_HOST%/api/hello | İsteğe proxy uygulanacak uç noktayı belirtir |
     
 1. Proxy'ler `/api` temel yol ön ekini sağlamaz ve bu ekin yol şablonuna dahil edilmesi gerekir.
 1. `%HELLO_HOST%` söz dizimi önceden oluşturduğunuz uygulama ayarına başvuracaktır. Çözümlenen URL, özgün işlevinize işaret edecektir.
-1. **Oluştur**’a tıklayın.
+1. **Oluştur**'a tıklayın.
 1. Yeni proxy'yi denemek için Proxy URL'sini kopyalayıp tarayıcıda veya sık kullandığınız HTTP istemcisinde test edebilirsiniz.
     1. Anonim işlev için şunu kullanın:
         1. `https://YOURPROXYAPP.azurewebsites.net/api/remotehello?name="Proxies"`
@@ -182,7 +180,7 @@ Sahte API'nizi test etmek için bir tarayıcı veya sık kullandığınız REST 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide Azure İşlevleri ile bir API oluşturmayı ve özelleştirmeyi öğrendiniz. Ayrıca sahteler dahil olmak üzere birden fazla API'yi bir araya getirerek birleştirilmiş bir API yüzeyi oluşturmayı da öğrendiniz. Bu teknikleri kullanarak istediğiniz karmaşıklık düzeyinde API'ler derleyebilir ve tümünü Azure İşlevleri tarafından sunulan sunucusuz işlem modeli üzerinde çalıştırabilirsiniz.
+Bu makalede, Azure Işlevlerinde bir API oluşturmayı ve özelleştirmeyi öğrendiniz. Ayrıca sahteler dahil olmak üzere birden fazla API'yi bir araya getirerek birleştirilmiş bir API yüzeyi oluşturmayı da öğrendiniz. Bu teknikleri kullanarak istediğiniz karmaşıklık düzeyinde API'ler derleyebilir ve tümünü Azure İşlevleri tarafından sunulan sunucusuz işlem modeli üzerinde çalıştırabilirsiniz.
 
 API'nizi geliştirirken aşağıdaki konulara da başvurabilirsiniz:
 

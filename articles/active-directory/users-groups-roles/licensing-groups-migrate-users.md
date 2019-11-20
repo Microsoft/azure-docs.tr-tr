@@ -1,93 +1,89 @@
 ---
-title: Tek tek lisanslı kullanıcıları grup tabanlı lisanslama için - ekleme Azure Active Directory | Microsoft Docs
-description: Tek tek kullanıcı lisanslarını grup tabanlı Azure Active Directory'yi kullanarak lisanslamaya geçirme
+title: Grup lisanslama 'ye doğrudan lisanslı kullanıcılar ekleme-Azure AD | Microsoft Docs
+description: Azure Active Directory kullanarak bireysel kullanıcı lisanlarından grup tabanlı lisansa geçiş yapma
 services: active-directory
 keywords: Azure AD lisanslama
 documentationcenter: ''
 author: curtand
-manager: mtillman
+manager: daveba
 editor: ''
 ms.service: active-directory
 ms.topic: article
 ms.workload: identity
 ms.subservice: users-groups-roles
-ms.date: 03/18/2019
+ms.date: 11/08/2019
 ms.author: curtand
 ms.reviewer: sumitp
 ms.custom: seohack1;it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 333f0ae0153073b57740446ecf47e36a1f9ce590
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6c06d81f2f3f6cee781889d05ae08a1fd125df52
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65192447"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74025674"
 ---
-# <a name="how-to-migrate-users-with-individual-licenses-to-groups-for-licensing"></a>Tek bir lisansa sahip kullanıcılar için lisans gruplarına geçirme
+# <a name="how-to-migrate-users-with-individual-licenses-to-groups-for-licensing"></a>Lisanslama için kullanıcıları bireysel lisanslarla geçirme
 
-"Doğrudan atama"; aracılığıyla kuruluşlardaki kullanıcılara dağıtılan var olan lisansları olabilir diğer bir deyişle, tek tek kullanıcı lisansı atamak için PowerShell betikleri veya diğer araçları kullanarak. Kuruluşunuzdaki lisansları yönetmek için Grup tabanlı lisanslama kullanmaya başlamadan önce mevcut çözümleri'nın Grup tabanlı lisanslama ile sorunsuz bir şekilde değiştirmek için bu geçiş planı kullanabilirsiniz.
+Kuruluşlardaki kullanıcılara doğrudan atama aracılığıyla dağıtılmış mevcut lisanslarınız olabilir; diğer bir deyişle, bireysel kullanıcı lisansları atamak için PowerShell betikleri veya diğer araçları kullanma. Kuruluşunuzdaki lisansları yönetmek için grup tabanlı lisanslama kullanmaya başlamadan önce, bu geçiş planını kullanarak var olan çözümlerin grup tabanlı lisanslamayla sorunsuz bir şekilde değiştirilmesini sağlayabilirsiniz.
 
-Burada, Grup tabanlı lisanslamaya geçirme kullanıcılara geçici olarak atanmış lisanslarını kaybetme neden olacak bir durum kaçınmalısınız göz önünde bulundurmanız gereken en önemli şey var. Lisansları kaldırılmasına neden herhangi bir işlem, kullanıcıların hizmetler ve verilerine erişimi kaybetme riskini kaldırmak için kaçınılmalıdır.
+Göz önünde bulundurmanız gereken en önemli şey, grup tabanlı lisanslama 'e geçiş yapmak için kullanıcılara Şu anda atanmış lisansların geçici olarak kaybolmasına neden olacak bir durum yapmaktan kaçınmaktır. Lisansların kaldırılmasına neden olabilecek herhangi bir işlem, kullanıcıların hizmetlere ve verilerine erişimi kaybetme riskini ortadan kaldırmaya kaçınılmalıdır.
 
 ## <a name="recommended-migration-process"></a>Önerilen geçiş işlemi
 
-1. Var olan Otomasyon lisans ataması ve kullanıcılar için temizleme yönetme (örneğin, PowerShell) var. Olduğu gibi çalışmasını bırakın.
+1. Mevcut Otomasyon (örneğin, PowerShell), kullanıcılar için lisans atamasını ve kaldırmayı yönetme. Çalışır durumda bırakın.
 
-2. Yeni bir lisans grubu oluşturun (veya gruplar kullanmak için hangi varolan karar) ve gerekli tüm kullanıcıların üye olarak ekleneceği emin olun.
+1. Yeni bir lisans grubu oluşturun (veya hangi mevcut grupların kullanılacağını belirleyin) ve gerekli tüm kullanıcıların üye olarak eklendiğinden emin olun.
 
-3. Gerekli lisansları bu gruplara; Amacınız, var olan Otomasyon (örneğin, PowerShell), bu kullanıcılara uygulama aynı lisanslama durumunu yansıtacak şekilde olmalıdır.
+1. Gerekli lisansları bu gruplara atayın; Amacınız, mevcut Otomasyonunuzu (örneğin, PowerShell) bu kullanıcılara uygulamak için aynı lisanslama durumunu yansıtmaktır.
 
-4. Lisansları grupların tüm kullanıcılara uygulandığından emin olun. Bu uygulama, her grup işleme durumunu denetleyerek ve denetim günlüklerini denetleyerek yapılabilir.
+1. Lisansların bu gruplardaki tüm kullanıcılara uygulandığını doğrulayın. Bu uygulama, her grup üzerinde işleme durumu denetlenerek ve denetim günlükleri kontrol edilirken yapılabilir.
 
-   - Lisans ayrıntılarının bakarak Noktasal bireysel kullanıcılar kullanabilirsiniz. Bunlar aynı lisansları atanmış "doğrudan" ve "devralınan" gruplarından olduğunu görürsünüz.
+   - Bireysel kullanıcılara lisans ayrıntılarına bakarak göz atın. Aynı lisanslara "doğrudan" ve "Devralınanlar" gruplarından atandığını görürsünüz.
 
-   - Bir PowerShell komut dosyasını çalıştırarak [kullanıcılara lisansların nasıl atandığını doğrulayın](licensing-group-advanced.md#use-powershell-to-see-who-has-inherited-and-direct-licenses).
+   - [Lisansların kullanıcılara nasıl atandığını doğrulamak](licensing-group-advanced.md#use-powershell-to-see-who-has-inherited-and-direct-licenses)Için bir PowerShell betiği çalıştırabilirsiniz.
 
-   - Aynı ürün lisansının kullanıcıya hem doğrudan ve Grup atandığında, kullanıcı tarafından yalnızca bir lisans kullanılır. Bu nedenle geçiş işlemini gerçekleştirmek için ek bir lisans gerekir.
+   - Aynı ürün lisansı kullanıcıya hem doğrudan hem de bir grup aracılığıyla atandığında, Kullanıcı tarafından yalnızca bir lisans tüketilecektir. Bu nedenle, geçiş yapmak için ek lisans gerekmez.
 
-5. Her grup için hata durumundaki kullanıcıların denetleyerek lisans ataması başarısız olduğunu doğrulayın. Daha fazla bilgi için [tanımlama ve bir grup için lisans sorunlarını çözme](licensing-groups-resolve-problems.md).
+1. Hata durumundaki kullanıcılar için her grubu denetleyerek hiçbir lisans atamasının başarısız olmadığını doğrulayın. Daha fazla bilgi için bkz. [bir grup için lisans sorunlarını tanımlama ve çözme](licensing-groups-resolve-problems.md).
 
-6. Özgün doğrudan atamaları kaldırmayı düşünün; "sonucu kullanıcıların bir alt kümesi üzerinde ilk izlemek için Dalgalar içinde", yavaş yavaş yapmak isteyebilirsiniz.
+Özgün doğrudan atamaları kaldırmayı düşünün. Bunu kademeli olarak yapmanızı ve önce kullanıcıların bir alt kümesinde oluşan sonuçları izlemenizi öneririz. Kullanıcılara doğrudan özgün atamaları bırakıyorsanız, ancak kullanıcılar kendi lisanslı gruplarını bırakırlar, bu, istediğiniz gibi olmayabilir.
 
-   Kullanıcıların özgün doğrudan atamaları bırakabilir, ancak kullanıcılar kendi lisanslı gruplar ayrıldığında, büyük olasılıkla istemezsiniz olan özgün lisans yine de korur.
+## <a name="an-example"></a>Örnek
 
-## <a name="an-example"></a>Bir örnek
+Kuruluşun 1.000 kullanıcısı vardır. Tüm kullanıcılar Office 365 Enterprise E3 lisansları gerektirir. Şu anda kuruluşun şirket içinde çalışan bir PowerShell betiğinin olması, kullanıcılar tarafından geldiği ve gittiğinden lisansları ekleme ve kaldırma. Bununla birlikte, kuruluşun Azure AD tarafından otomatik olarak yönetilebilmesi için, bu betiği grup tabanlı lisanslama ile değiştirmek ister.
 
-Bir kuruluşun 1.000 kullanıcı vardır. Tüm kullanıcılar, Enterprise Mobility + Security (EMS) lisansı gerektirir. 200 kullanıcılar Finans departmanında ve Office 365 Kurumsal E3 lisansı gerektirir. Şu anda kuruluşun ekleme ve gelir ve Git kullanıcılardan lisansları kaldırma şirket içinde çalışan bir PowerShell komut dosyası yok. Ancak, kuruluş lisansları otomatik olarak Azure AD tarafından yönetilebilmesi grup tabanlı lisanslama ile betik değiştirin ister.
+Geçiş işleminin şu şekilde görünebilecekleri aşağıda verilmiştir:
 
-İşte geçiş işlemi aşağıdaki gibi görünebilir:
+1. Azure portal kullanarak, Office 365 E3 lisansını Azure AD 'deki **tüm kullanıcılar** grubuna atayın.
 
-1. Azure portalını kullanarak EMS lisansı atayın **tüm kullanıcılar** Azure AD'de grup. E3 lisansı atamak **Finans departmanı** gerekli olan tüm kullanıcıları içeren grup.
+1. Lisans atamasının tüm kullanıcılar için tamamlandığını onaylayın. Grubun genel bakış sayfasına gidin, **lisanslar**' ı seçin ve **lisanslar** dikey penceresinin en üstündeki işleme durumunu denetleyin.
 
-2. Her bir grup için tüm kullanıcılar için lisans atama tamamlandığını doğrulayın. Her grubu seçin dikey gidin **lisansları**ve en üstündeki işleme durumunu denetlemek **lisansları** dikey.
+   - İşlemin tamamlandığını onaylamak için "tüm kullanıcılara en son lisans değişiklikleri uygulandı" öğesini arayın.
 
-   - "En son lisans değişiklikleri tüm kullanıcılara uygulanmadığını" arayın işleme tamamlandığını onaylamak için.
+   - Lisansları başarıyla atanmamış olabilecek tüm kullanıcılar hakkında bir bildirim bulun. Bazı kullanıcılar için lisanslardan çalıştırıldık mi? Bazı kullanıcılar, Grup lisanslarını devralmasını önleyen çakışan lisans planlarına sahip mi?
 
-   - Üstteki kendisi için lisans değil başarıyla atandı herhangi bir kullanıcı hakkında bir bildirim arayın. Bazı kullanıcılar için lisans dışında karşılaştınız mı? Bazı kullanıcılar çakışan lisans SKU'ları Grup lisansları devralmasını engellemek var mı?
+1. Tüm kullanıcılara hem doğrudan hem de grup lisanslarının uygulandığını doğrulamak için göz atın. Bir kullanıcının profil sayfasına gidin, **lisanslar**' ı seçin ve lisansların durumunu inceleyin.
 
-3. Nokta uygulanan hem doğrudan hem de Grup lisansları yüklü olduğunu doğrulamak için bazı kullanıcılar denetleyin. Bir kullanıcı seçin dikey penceresine gidin **lisansları**ve lisans durumunu inceleyin.
+   - Bu, geçiş sırasında beklenen Kullanıcı durumudur:
 
-   - Geçiş sırasında beklenen kullanıcı durumunu budur:
+      ![geçiş sırasında beklenen Kullanıcı durumu](./media/licensing-groups-migrate-users/expected-user-state.png)
 
-      ![geçiş sırasında beklenen kullanıcı durumu](./media/licensing-groups-migrate-users/expected-user-state.png)
+     Bu, kullanıcının hem doğrudan hem de devralınan lisanslarına sahip olduğunu onaylar. Office 365 E3 atandığını görüyoruz.
 
-   Bu, kullanıcının hem doğrudan hem de devralınmış lisansları sahip olduğunu doğrular. Olduğunu görebiliriz hem **EMS** ve **E3** atanır.
+   - Hangi hizmetlerin etkin olduğunu görmek için her bir lisansı seçin. Doğrudan ve grup lisanslarının Kullanıcı için tam olarak aynı hizmetleri etkinleştirdiğini doğrulamak için **atamalar**' ı seçin.
 
-   - Etkin hizmetler hakkındaki ayrıntıları göstermek için her bir lisans seçin. Bu doğrudan ve Grup lisansları tam olarak aynı hizmet planları kullanıcı için etkinleştirirseniz denetlemek için kullanılabilir.
+1. Hem doğrudan hem de grup lisanslarının eşdeğer olduğunu doğruladıktan sonra, doğrudan lisansları kullanıcılardan kaldırmaya başlayabilirsiniz. Bunu portalda bireysel kullanıcılar için kaldırarak test edebilir ve sonra toplu olarak kaldırılmaları için Otomasyon betikleri çalıştırabilirsiniz. Portalda doğrudan lisanslarla kaldırılan aynı kullanıcıya bir örnek aşağıda verilmiştir. Lisans durumunun değişmeden kaldığı, ancak artık doğrudan atamaları görmediğine dikkat edin.
 
-      ![kullanıcı için hizmet planları denetleyin](./media/licensing-groups-migrate-users/check-service-plans.png)
-
-4. Hem doğrudan hem de Grup lisansları eşdeğer olduğunu onayladıktan sonra kullanıcıları doğrudan lisanslarını kaldırma başlayabilirsiniz. Bu Portalı'nda bireysel kullanıcılar için kaldırarak test edin ve ardından toplu olarak kaldırılması için Otomasyon betikleri çalıştırın. Kaldırılan portalınızda doğrudan lisans ile aynı kullanıcı örneği aşağıda verilmiştir. Lisans durumu değişmeden kalır, ancak artık doğrudan atamaları görüyoruz dikkat edin.
-
-   ![doğrudan lisans kaldırılmasını onaylayın](./media/licensing-groups-migrate-users/direct-licenses-removed.png)
+   ![doğrudan lisansların kaldırıldığını onaylayın](./media/licensing-groups-migrate-users/direct-licenses-removed.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Grupları aracılığıyla lisans yönetimi için diğer senaryolar hakkında daha fazla bilgi edinmek için
+Grup lisans yönetimi için diğer senaryolar hakkında daha fazla bilgi edinin:
 
-* [Grup tabanlı Azure Active Directory lisansı nedir?](../fundamentals/active-directory-licensing-whatis-azure-portal.md)
-* [Azure Active Directory'de gruba lisans atama](licensing-groups-assign.md)
-* [Azure Active Directory'de grubun lisans sorunlarını tanımlama ve çözme](licensing-groups-resolve-problems.md)
-* [Kullanıcılar Azure Active Directory'de Grup tabanlı lisanslama kullanarak ürün lisansları arasında geçirme](licensing-groups-change-licenses.md)
-* [Azure Active Directory grup tabanlı lisanslamayla ilgili ek senaryolar](licensing-group-advanced.md)
-* [Azure Active Directory'de Grup tabanlı lisanslama için PowerShell örnekleri](licensing-ps-examples.md)
+- [Azure Active Directory 'de grup tabanlı lisanslama nedir?](../fundamentals/active-directory-licensing-whatis-azure-portal.md)
+- [Azure Active Directory'de gruba lisans atama](licensing-groups-assign.md)
+- [Azure Active Directory'de grubun lisans sorunlarını tanımlama ve çözme](licensing-groups-resolve-problems.md)
+- [Kullanıcılar Azure Active Directory'de Grup tabanlı lisanslama kullanarak ürün lisansları arasında geçirme](licensing-groups-change-licenses.md)
+- [Azure Active Directory grup tabanlı lisanslamayla ilgili ek senaryolar](licensing-group-advanced.md)
+- [Azure Active Directory'de Grup tabanlı lisanslama için PowerShell örnekleri](licensing-ps-examples.md)

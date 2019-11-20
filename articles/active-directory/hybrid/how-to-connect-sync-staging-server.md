@@ -1,6 +1,6 @@
 ---
 title: 'Azure AD Connect eşitleme: İşletimsel görevler ve önemli noktalar | Microsoft Docs'
-description: Bu konuda, Azure AD Connect eşitleme ve bu bileşen çalışma için hazırlama için işletimsel görevler açıklanmaktadır.
+description: Bu konuda Azure AD Connect eşitleme ve bu bileşeni çalıştırmaya hazırlanma işlemleri açıklanmaktadır.
 services: active-directory
 documentationcenter: ''
 author: billmath
@@ -16,117 +16,117 @@ ms.date: 02/27/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 176b8509892ef16b631697a686471e7fa52bb380
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: bc88640cdff4f716902a80bb149913b961d40ae3
+ms.sourcegitcommit: d3dced0ff3ba8e78d003060d9dafb56763184d69
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60381595"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69900051"
 ---
 # <a name="azure-ad-connect-staging-server-and-disaster-recovery"></a>Azure AD Connect: Hazırlama sunucusu ve olağanüstü durum kurtarma
-Hazırlama modunda bir sunucuyla yapılandırmada değişiklik yapmak ve sunucunun etkin hale getirmeden önce değişiklikleri Önizleme. Ayrıca tam içeri aktarma ve üretim ortamınıza bu değişiklikleri yapmadan önce tüm değişiklikleri beklendiğini doğrulamak için tam eşitleme çalıştırmanızı sağlar.
+Hazırlama modundaki bir sunucu ile, yapılandırma üzerinde değişiklik yapabilir ve sunucuyu etkin hale gelmeden önce değişiklikleri önizleyebilirsiniz. Ayrıca, bu değişiklikleri üretim ortamınızda yapmadan önce tüm değişikliklerin beklendiğini doğrulamak üzere tam içeri aktarma ve tam eşitleme çalıştırmanızı sağlar.
 
 ## <a name="staging-mode"></a>Hazırlama modu
-Hazırlama modu gibi çeşitli senaryolar için kullanılabilir:
+Hazırlama modu aşağıdakiler dahil olmak üzere çeşitli senaryolar için kullanılabilir:
 
 * Yüksek kullanılabilirlik.
-* Test ve yeni yapılandırma değişiklikleri dağıtın.
-* Yeni bir sunucu tanıtır ve eski yetkisini alma.
+* Yeni yapılandırma değişikliklerini test edin ve dağıtın.
+* Yeni bir sunucu tanıtın ve eskileri yetkisini alın.
 
-Yükleme sırasında sunucunun olması seçebileceğiniz **hazırlama modunda**. Bu işlem sunucunun içeri aktarma ve eşitleme için etkin hale getirir, ancak hiçbir dışarı aktarma işlemini çalıştırmaz. Yükleme sırasında bu özellikleri seçmiş olsanız parola eşitleme veya parola geri yazma, bir sunucu hazırlama modunda çalışmıyor. Hazırlama modunu devre dışı bıraktığınızda, sunucunun verme başlar, parola eşitleme sağlar ve parola geri yazma özelliğini etkinleştirir.
+Yükleme sırasında, **hazırlama modunda**olacak sunucuyu seçebilirsiniz. Bu eylem, sunucuyu içeri aktarma ve eşitleme için etkin hale getirir, ancak herhangi bir dışarı aktarma işlemi çalıştırmaz. Hazırlama modundaki bir sunucu, yükleme sırasında bu özellikleri seçmiş olsanız bile parola eşitleme veya parola geri yazma 'yı çalıştırmıyor. Hazırlama modunu devre dışı bıraktığınızda sunucu dışarı aktarmayı başlatır, parola eşitlemesini etkinleştirilir ve parola geri yazma özelliğini sunar.
 
 > [!NOTE]
-> Bir Azure AD Connect parola karması eşitleme özelliği etkin olduğunu varsayalım. Hazırlama modunu, eşitleme parola değişiklikleri sunucusu vermiyor etkinleştirdiğinizde şirket içi AD. Hazırlama modunu devre dışı bıraktığınızda, sunucunun son kaldığı gelen parola değişikliklerinin eşitlemeyi sürdürür. Sunucu, uzun bir süre için hazırlama modunda bırakılırsa, zaman diliminde oluşmadı tüm parola değişiklikleri eşitlemek için sunucuya biraz sürebilir.
+> Parola karması eşitleme özelliğinin etkin olduğu bir Azure AD Connect olduğunu varsayalım. Hazırlama modunu etkinleştirdiğinizde sunucu, şirket içi AD 'den parola değişikliklerini eşitlemeyi sonlandırır. Hazırlama modunu devre dışı bıraktığınızda sunucu, son kaldığınız yerden parola değişikliklerini eşitlemeyi sürdürür. Sunucu, uzun bir süre için hazırlama modunda bırakılırsa, sunucunun zaman diliminde oluşan tüm parola değişikliklerini eşitlemesi biraz zaman alabilir.
 >
 >
 
-Eşitleme Hizmeti Yöneticisi'ni kullanarak, bir dışarı aktarma hala zorlayabilirsiniz.
+Eşitleme Hizmeti Yöneticisi 'ni kullanarak yine de dışarı aktarmayı zorlayabilirsiniz.
 
-Hazırlama modundaki bir sunucu, Active Directory ve Azure AD değişiklikleri almaya devam eder. Her zaman en son değişiklikleri ve çok hızlı can take bir kopyasını başka bir sunucuya sorumluluklarını sahiptir. Birincil sunucunuza yapılandırma değişiklikleri yaparsanız, bu sunucuyu hazırlama modunda aynı değişiklik yapmak için sizin sorumluluğunuzdur.
+Hazırlama modundaki bir sunucu Active Directory ve Azure AD 'den değişiklikleri almaya devam eder ve hata durumunda başka bir sunucunun sorumluluklarını hızlıca alabilir. Birincil sunucunuzda yapılandırma değişikliği yaparsanız, sunucuda hazırlama modunda aynı değişiklikleri yapmak sizin sorumluluğunuzdadır.
 
-Kendi SQL veritabanı sunucusu olduğundan bu, eski eşitleme teknolojilerinin bilen hazırlama modunu farklılık gösterir. Bu mimari, farklı bir veri merkezinde yer alması hazırlık modu sunucusu sağlar.
+Daha eski eşitleme teknolojileri hakkında bilgi sahibi olduğunuz için, sunucunun kendi SQL veritabanı olduğundan hazırlama modu farklıdır. Bu mimari, hazırlama modu sunucusunun farklı bir veri merkezinde yer almasına izin verir.
 
-### <a name="verify-the-configuration-of-a-server"></a>Bir sunucunun yapılandırmasını doğrulama
-Bu yöntem uygulamak için aşağıdaki adımları izleyin:
+### <a name="verify-the-configuration-of-a-server"></a>Sunucu yapılandırmasını doğrulama
+Bu yöntemi uygulamak için aşağıdaki adımları izleyin:
 
-1. [Hazırlama](#prepare)
+1. [Hazırlanır](#prepare)
 2. [Yapılandırma](#configuration)
-3. [İçeri aktarma ve eşitleme](#import-and-synchronize)
-4. [Doğrulayın](#verify)
-5. [Etkin sunucu anahtarı](#switch-active-server)
+3. [İçeri ve dışarı aktarma](#import-and-synchronize)
+4. [Doğru](#verify)
+5. [Etkin sunucuyu Değiştir](#switch-active-server)
 
 #### <a name="prepare"></a>Hazırlama
-1. Azure AD Connect'i yüklemek, seçin **hazırlama modunda**, seçimini temizleyin **eşitleme başlatma** Yükleme Sihirbazı'nda son sayfasında. Bu mod, el ile eşitleme altyapısı çalıştırmanıza olanak sağlar.
+1. Azure AD Connect yükleme, **hazırlama modu**' nu seçin ve yükleme sihirbazındaki son sayfada **Eşitlemeyi Başlat** seçimini kaldırın. Bu mod, eşitleme altyapısını el ile çalıştırmanızı sağlar.
    ![ReadyToConfigure](./media/how-to-connect-sync-staging-server/readytoconfigure.png)
-2. Oturum kapatma/oturum içinde ve başlangıç menüsünde seçin **eşitleme hizmeti**.
+2. Oturumu kapatın/oturum açın ve Başlat menüsünde **eşitleme hizmeti**' ni seçin.
 
 #### <a name="configuration"></a>Yapılandırma
-Birincil sunucuya özel değişiklikler yaptınız ve hazırlık sunucusu yapılandırmasıyla karşılaştırmak istediğinizde, ardından kullanmak [Azure AD Connect yapılandırma Belgeleyici'yi](https://github.com/Microsoft/AADConnectConfigDocumenter).
+Birincil sunucuda özel değişiklikler yaptıysanız ve yapılandırmayı hazırlama sunucusuyla karşılaştırmak istiyorsanız, [Azure AD Connect Configuration belgegir](https://github.com/Microsoft/AADConnectConfigDocumenter)' i kullanın.
 
-#### <a name="import-and-synchronize"></a>İçeri aktarma ve eşitleme
-1. Seçin **Bağlayıcılar**ve ilk bağlayıcı türü olan seçin **Active Directory Domain Services**. Tıklayın **çalıştırma**seçin **tam içeri aktarma**, ve **Tamam**. Bu türün tüm bağlayıcıları için bu adımları uygulayın.
-2. Bağlayıcı türü olan seçin **Azure Active Directory (Microsoft)** . Tıklayın **çalıştırma**seçin **tam içeri aktarma**, ve **Tamam**.
-3. Bağlayıcılar sekmesi seçili olduğundan emin olun. Her bağlayıcı türü olan **Active Directory Domain Services**, tıklayın **çalıştırmak**seçin **Delta eşitlemesi**, ve **Tamam**.
-4. Bağlayıcı türü olan seçin **Azure Active Directory (Microsoft)** . Tıklayın **çalıştırma**seçin **Delta eşitlemesi**, ve **Tamam**.
+#### <a name="import-and-synchronize"></a>İçeri ve dışarı aktarma
+1. **Bağlayıcılar**' ı seçin ve **Active Directory Domain Services**türüne sahip ilk bağlayıcıyı seçin. **Çalıştır**' a tıklayın, **tam içeri aktar**' ı seçin ve **Tamam**. Bu adımları bu türden tüm bağlayıcılar için yapın.
+2. **Azure Active Directory türü (Microsoft)** olan bağlayıcıyı seçin. **Çalıştır**' a tıklayın, **tam içeri aktar**' ı seçin ve **Tamam**.
+3. Sekme bağlayıcılarının hala seçili olduğundan emin olun. Tür **Active Directory Domain Services**olan her bağlayıcı için **Çalıştır**' a tıklayın, **Delta eşitleme**' yi seçin ve **Tamam**' ı tıklatın
+4. **Azure Active Directory türü (Microsoft)** olan bağlayıcıyı seçin. **Çalıştır**' a tıklayın, **Delta eşitlemesi**ve **Tamam**' ı seçin.
 
-Artık aşamalı dışa aktarma değişiklikler Azure AD'ye ve AD (Exchange karma dağıtımı kullanıyorsanız) şirket. Sonraki adımlar ne gerçekten dizinleri ver başlamadan önce değişmek üzere olduğunu denetlemek sağlar.
+Artık Azure AD 'ye ve şirket içi AD 'ye dışarı aktarma değişiklikleri hazırladınız (Exchange karma dağıtımı kullanıyorsanız). Sonraki adımlar, dizinlere dışa aktarma işlemine başlamadan önce nelerin değişmekte olduğunu incelemenizi sağlar.
 
-#### <a name="verify"></a>Doğrulama
-1. Bir komut istemi açın ve gidin `%ProgramFiles%\Microsoft Azure AD Sync\bin`
-2. Çalıştırın: `csexport "Name of Connector" %temp%\export.xml /f:x` Bağlayıcısının eşitleme hizmetinde bulunamadı. "Contoso.com – AAD" benzer bir adı varsa Azure AD için.
-3. Çalıştırın: `CSExportAnalyzer %temp%\export.xml > %temp%\export.csv` Microsoft Excel'de incelenebilir export.csv adlı % temp % içinde bir dosya var. Bu dosya, dışarı aktarılacak olan tüm değişiklikleri içerir.
-4. Veriler veya yapılandırma için gerekli değişiklikleri yapın ve şu adımları yeniden (içeri aktarma ve eşitleme ve doğrulama) çalıştırın, dışarı aktarılacak olan değişiklikleri beklendiği kadar.
+#### <a name="verify"></a>Doğrula
+1. Bir komut istemi başlatın ve şuraya gidin`%ProgramFiles%\Microsoft Azure AD Sync\bin`
+2. Çalıştırın: `csexport "Name of Connector" %temp%\export.xml /f:x`Bağlayıcının adı, eşitleme hizmeti ' nde bulunabilir. Azure AD için "contoso.com – AAD" benzeri bir ada sahiptir.
+3. Çalıştırın: `CSExportAnalyzer %temp%\export.xml > %temp%\export.csv`% TEMP% adlı, Export. csv adlı, Microsoft Excel 'de incelenebilir bir dosyanız var. Bu dosya, verilmek üzere olan tüm değişiklikleri içerir.
+4. Veri veya yapılandırmada gerekli değişiklikleri yapın ve dışarı aktarılacak değişiklikler beklenene kadar bu adımları yeniden çalıştırın (Içeri ve dışarı ve Doğrula).
 
-**C:\Export.csv anlama** dosya çoğu açıklayıcıdır. İçerik anlamak için bazı kısaltmalar:
-* OMODT – nesne değişiklik türü. Bir ekleme, güncelleştirme veya silme işlemi bir nesne düzeyinde olup olmadığını gösterir.
-* AMODT – öznitelik değişiklik türü. Bir ekleme, güncelleştirme veya silme işlemi düzeyinde bir öznitelik olup olmadığını gösterir.
+**Export. csv dosyasını anlama** Dosyanın çoğu kendi kendine açıklayıcıdır. İçeriği anlamak için bazı kısaltmalar:
+* OMODT – nesne değiştirme türü. Nesne düzeyindeki işlemin bir Add, Update veya delete olup olmadığını gösterir.
+* AMODT – öznitelik değiştirme türü. Öznitelik düzeyindeki işlemin bir Add, Update veya delete olup olmadığını gösterir.
 
-**Ortak tanımlayıcıları almak** c:\Export.csv dışarı aktarılacak olan tüm değişiklikleri içerir. Her satır bağlayıcı alanında bir nesne için bir değişiklik karşılık gelir ve nesne DN özniteliği tarafından tanımlanır. DN öznitelik bağlayıcı alanında bir nesneye atanmış benzersiz bir tanımlayıcıdır. Analiz etmek için export.csv birçok satır/değişiklik olduğunda, kullanıma nesneleri DN özniteliği tek başına göre değişiklikler tahmin etmek zor olabilir. Değişiklikleri çözümleme sürecini basitleştirmek için csanalyzer.ps1 PowerShell betiğini kullanın. Komut nesneleri ortak tanımlayıcıları (örneğin, displayName, userPrincipalName) alır. Betiği kullanmak için:
-1. PowerShell Betiği bölümünden kopyalayın [CSAnalyzer](#appendix-csanalyzer) adlı bir dosyaya `csanalyzer.ps1`.
-2. Bir PowerShell penceresi açın ve PowerShell komut dosyasını oluşturduğunuz klasöre göz atın.
-3. Çalıştır: `.\csanalyzer.ps1 -xmltoimport %temp%\export.xml`.
-4. Adlı bir dosya artık sahip **processedusers1.csv** Microsoft Excel'de incelenebilir. Dosyanın ortak tanımlayıcıları (örneğin, displayName ve userPrincipalName seçeneği) DN özniteliği bir eşleme sağladığını unutmayın. Şu anda dışarı aktarılacak olan gerçek öznitelik değişiklikleri içermez.
+**Ortak tanımlayıcıları al** Export. csv dosyası dışarı aktarılmek üzere olan tüm değişiklikleri içerir. Her satır, bağlayıcı alanındaki bir nesnenin değişikliğine karşılık gelir ve nesne DN özniteliğiyle tanımlanır. DN özniteliği, bağlayıcı alanındaki bir nesneye atanan benzersiz bir tanıtıcıdır. Export. csv dosyasında analiz edilecek çok sayıda satır/değişiklik olduğunda, değişikliklerin yalnızca DN özniteliğine göre hangi nesneleri olduğunu anlamak zor olabilir. Değişiklikleri çözümleme işlemini basitleştirmek için csanalyzer. ps1 PowerShell betiğini kullanın. Betik, nesnelerin ortak tanımlayıcılarını (örneğin displayName, userPrincipalName) alır. Betiği kullanmak için:
+1. PowerShell betiğini [CSAnalyzer](#appendix-csanalyzer) bölümünden adlı `csanalyzer.ps1`bir dosyaya kopyalayın.
+2. Bir PowerShell penceresi açın ve PowerShell betiğini oluşturduğunuz klasöre gidin.
+3. Şunu çalıştırın `.\csanalyzer.ps1 -xmltoimport %temp%\export.xml`:.
+4. Artık, Microsoft Excel 'de incelenebilir **processedusers1. csv** adlı bir dosyanız vardır. Dosyanın DN özniteliğinden ortak tanımlayıcılara (örneğin, displayName ve userPrincipalName) bir eşleme sağladığını unutmayın. Şu anda, verilmek üzere olan gerçek öznitelik değişikliklerini içermez.
 
-#### <a name="switch-active-server"></a>Etkin sunucu anahtarı
-1. Şu anda etkin sunucu üzerinde değil verme için sunucudan (FIM/DirSync/Azure AD eşitleme) Azure AD'ye açma veya hazırlama modu (Azure AD Connect) olarak ayarlayın.
-2. Sunucuda yükleme sihirbazını çalıştırın **hazırlama modunda** ve devre dışı bırakma **hazırlama modunda**.
+#### <a name="switch-active-server"></a>Etkin sunucuyu Değiştir
+1. Şu anda etkin olan sunucuda, sunucuyu devre dışı bırakın (DirSync/FIM/Azure AD Eşitleme), Azure AD 'ye aktarılmaması veya hazırlama modunda (Azure AD Connect) ayarlanmaması gerekir.
+2. Yükleme sihirbazını sunucusunda **hazırlama modunda** çalıştırın ve **hazırlama modunu**devre dışı bırakın.
    ![ReadyToConfigure](./media/how-to-connect-sync-staging-server/additionaltasks.png)
 
 ## <a name="disaster-recovery"></a>Olağanüstü durum kurtarma
-Uygulama tasarımının parçasını ne durumunda olağanüstü bir durum eşitleme sunucusu kaybetmek nerede yapılacağını planlamaktır. Ve hangisinin kullanılacağını dahil olmak üzere çeşitli etkenlere bağlıdır farklı modeli vardır:
+Uygulama tasarımının bir parçası, eşitleme sunucusunu kaybedeceğinizi bir olağanüstü durum olması durumunda ne yapılacağını planlıyor. Kullanılacak farklı modeller vardır ve bunlardan biri, aşağıdakiler dahil olmak üzere çeşitli etkenlere bağlıdır:
 
-* Nesneler değişiklik yapabilir yapma kapalı kalma süresinde Azure AD'de olmaması, dayanıklılık nedir?
-* Parola Eşitleme kullanırsanız, kullanıcılar şirket içi değiştirdiğinden durumunda Azure AD'de eski parolayı kullanmak sahip oldukları kabul ediyor musunuz?
-* Parola geri yazma gibi gerçek zamanlı işlemleri üzerinde bir bağımlılık gerekiyor?
+* Kapalı kalma süresi boyunca Azure AD 'de nesnelerde değişiklik yapamayan tolerans nedir?
+* Parola eşitleme kullanıyorsanız, kullanıcılar şirket içinde değişmeleri için Azure AD 'de eski parolayı kullanmak zorunda olduklarını kabul eder mi?
+* Parola geri yazma gibi gerçek zamanlı işlemlere yönelik bir bağımlılığa sahip misiniz?
 
-Bu soruları ve kuruluşunuzun ilkesini yanıtlarını bağlı olarak, aşağıdaki stratejilerden birini uygulanabilir:
+Bu soruların ve kuruluşunuzun ilkesinin yanıtlarına bağlı olarak, aşağıdaki stratejilerden biri uygulanabilir:
 
-* Gerektiğinde yeniden oluşturun.
-* Sahip olarak bilinen bir yedek bir bekleme sunucusunun **hazırlama modunda**.
-* Sanal makineler kullanır.
+* Gerektiğinde yeniden derleyin.
+* **Hazırlama modu**olarak bilinen, yedek bir bekleme sunucusuna sahip olmak.
+* Sanal makineleri kullanın.
 
-Yerleşik SQL Express veritabanı kullanmayın sonra da gözden geçirmelisiniz [SQL yüksek kullanılabilirlik](#sql-high-availability) bölümü.
+Yerleşik SQL Express veritabanını kullanmıyorsanız, [SQL yüksek kullanılabilirlik](#sql-high-availability) bölümünü de gözden geçirmeniz gerekir.
 
-### <a name="rebuild-when-needed"></a>Gerektiğinde yeniden oluşturun
-Gerektiğinde bir sunucusu yeniden oluşturma için uygun bir strateji planlamaktır. Genellikle, ilk içeri aktarma ve eşitleme birkaç saat içinde tamamlanabilir yapın ve eşitleme altyapısını yükleme. Kullanılabilir yedek bir sunucu değilse geçici olarak eşitleme altyapısı barındırmak için bir etki alanı denetleyicisi kullanmak da mümkündür.
+### <a name="rebuild-when-needed"></a>Gerektiğinde yeniden derle
+Uygun bir strateji gerektiğinde sunucu yeniden oluşturmayı planlıyor. Genellikle, eşitleme altyapısını yükleme ve ilk içeri aktarma ve eşitleme birkaç saat içinde tamamlanabilir. Kullanılabilir bir yedek sunucu yoksa, eşitleme altyapısını barındırmak için geçici olarak bir etki alanı denetleyicisi kullanmak mümkündür.
 
-Veritabanı verileri Active Directory ve Azure AD kullanarak yeniden bu nedenle eşitleme altyapısı sunucusuna nesneler hakkında herhangi bir durumu depolamaz. **SourceAnchor** özniteliği, şirket içi ve bulut nesneleri birleştirmek için kullanılır. Var olan nesneleri şirket içi ve bulut sunucuyla yeniden oluşturursanız, ardından eşitleme altyapısı nesnelerle birlikte yeniden üzerinde yeniden eşleşir. Belge ve kaydetmek için ihtiyaç duyduğunuz filtreleme ve eşitleme kuralları gibi sunucusunda yapılan yapılandırma değişiklikleri noktalardır. Eşitlemeye başlamadan önce bu özel yapılandırmaları yeniden gerekir.
+Eşitleme altyapısı sunucusu nesneler hakkında herhangi bir durum depolamaz, böylece veritabanı Active Directory ve Azure AD 'deki verilerden yeniden oluşturulabilir. **Sourcetutturucu** özniteliği, şirket içi ve buluttan nesneleri birleştirmek için kullanılır. Sunucuyu şirket içinde ve bulutta var olan nesnelerle yeniden yapılandırırsanız, eşitleme altyapısı yeniden yükleme sırasında bu nesnelerle birlikte eşleşir. Belge ve kaydetmeniz gereken işlemler, sunucuda yapılan, filtreleme ve eşitleme kuralları gibi yapılandırma değişiklerdir. Eşitlemeye başlamadan önce bu özel yapılandırmaların yeniden oluşturulması gerekir.
 
-### <a name="have-a-spare-standby-server---staging-mode"></a>Hazırlama modu yedek bir bekleme sunucusunun - yüklü
-Daha karmaşık bir ortam varsa, ardından bir veya daha fazla yedek sunucular olması önerilir. Yükleme sırasında bir sunucu olması etkinleştirebilirsiniz **hazırlama modunda**.
+### <a name="have-a-spare-standby-server---staging-mode"></a>Yedek bekleme sunucu hazırlama moduna sahip
+Daha karmaşık bir ortamınız varsa, bir veya daha fazla bekleme sunucusuna sahip olmanız önerilir. Yükleme sırasında, bir sunucunun **hazırlama modunda**olmasını sağlayabilirsiniz.
 
-Daha fazla bilgi için [hazırlama modunda](#staging-mode).
+Daha fazla bilgi için bkz. [hazırlama modu](#staging-mode).
 
-### <a name="use-virtual-machines"></a>Sanal makineler kullanın
-Bir ortak ve desteklenen yöntem, bir sanal makinede eşitleme altyapısı çalıştırmaktır. Konak bir sorun olması durumunda, eşitleme altyapısı sunucusuna sahip bir görüntü başka bir sunucuya geçirilebilir.
+### <a name="use-virtual-machines"></a>Sanal makineleri kullanma
+Ortak ve desteklenen bir yöntem, eşitleme altyapısını bir sanal makinede çalıştırmaya yönelik bir yöntemdir. Konakta bir sorun olması durumunda, eşitleme altyapısı sunucusuyla görüntü başka bir sunucuya geçirilebilir.
 
 ### <a name="sql-high-availability"></a>SQL yüksek kullanılabilirlik
-Azure AD Connect ile birlikte sunulan SQL Server Express kullanmıyorsanız, yüksek kullanılabilirlik için SQL Server ayrıca düşünülmelidir. Desteklenen yüksek kullanılabilirlik çözümleri SQL Kümeleme ve AOA (Always On kullanılabilirlik grupları) içerir. Yansıtma desteklenmeyen çözümleri içerir.
+Azure AD Connect ile birlikte gelen SQL Server Express kullanmıyorsanız, SQL Server için yüksek kullanılabilirlik de dikkate alınmalıdır. Desteklenen yüksek kullanılabilirlik çözümleri SQL kümeleme ve AOA (Always on kullanılabilirlik grupları) içerir. Desteklenmeyen çözümler yansıtma içerir.
 
-Azure AD Connect sürüm 1.1.524.0 SQL AOA için destek eklendi. Azure AD Connect'i yüklemeden önce SQL AOA etkinleştirmeniz gerekir. Yükleme sırasında Azure AD Connect veya sağlanan SQL örneğinin SQL AOA için etkin olup olmadığını algılar. SQL AOA etkinleştirilirse, daha fazla Azure AD Connect SQL AOA zaman uyumlu veya zaman uyumsuz çoğaltma kullanacak şekilde yapılandırıldı, rakamları. Kullanılabilirlik grubu dinleyicisi Kur ayarlarken RegisterAllProvidersIP özelliğini 0 olarak ayarlayın, önerilir. Bu Azure AD Connect, SQL Native Client SQL'e bağlanmak için şu anda kullanır ve SQL Native Client MultiSubNetFailover özelliğinin kullanılmasını desteklemiyor olmasıdır.
+Sürüm 1.1.524.0 ' deki Azure AD Connect SQL AOA desteği eklenmiştir. Azure AD Connect yüklemeden önce SQL AOA 'i etkinleştirmeniz gerekir. Yükleme sırasında, sağlanan SQL örneğinin SQL AOA için etkinleştirilip etkinleştirilmediğini algılar Azure AD Connect. SQL AOA etkinleştirilmişse, SQL AOA zaman uyumlu çoğaltma veya zaman uyumsuz çoğaltma kullanacak şekilde yapılandırıldıysa Azure AD Connect daha fazla şekil bulabilirsiniz. Kullanılabilirlik grubu dinleyicisini ayarlarken RegisterAllProvidersIP özelliğini 0 olarak ayarlamanız önerilir. Bunun nedeni, Azure AD Connect Şu anda SQL 'e bağlanmak için SQL Native Client kullandığından SQL Native Client MultiSubNetFailover özelliğinin kullanımını desteklemez.
 
 ## <a name="appendix-csanalyzer"></a>Ek CSAnalyzer
-Bölümüne bakın [doğrulayın](#verify) nasıl bu betiği kullanın.
+Bu betiği nasıl [](#verify) kullanacağınızı öğrenmek için bölümüne bakın.
 
 ```
 Param(
@@ -268,7 +268,7 @@ $objOutputUsers | Export-Csv -path processedusers${outputfilecount}.csv -NoTypeI
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-**Genel bakış konuları**  
+**Genel Bakış konuları**  
 
-* [Azure AD Connect eşitlemesi: Anlama ve eşitleme özelleştirme](how-to-connect-sync-whatis.md)  
+* [Azure AD Connect eşitlemesi: Eşitlemeyi anlama ve özelleştirme](how-to-connect-sync-whatis.md)  
 * [Şirket içi kimliklerinizi Azure Active Directory ile tümleştirme](whatis-hybrid-identity.md)  

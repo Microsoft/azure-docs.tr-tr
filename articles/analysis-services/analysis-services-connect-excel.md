@@ -1,44 +1,43 @@
 ---
-title: Azure Analysis Services Excel ile bağlanma | Microsoft Docs
-description: Excel kullanarak bir Azure Analysis Services sunucusuna bağlanmayı öğreneceksiniz.
+title: Excel ile Azure Analysis Services bağlanma | Microsoft Docs
+description: Excel kullanarak bir Azure Analysis Services sunucusuna nasıl bağlanacağınızı öğrenin. Bağlandıktan sonra kullanıcılar verileri araştırmak için PivotTable 'Lar oluşturabilir.
 author: minewiskan
-manager: kfile
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 01/09/2019
+ms.date: 10/30/2019
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 5c46d4e4d23744cf07ccf7857a33990bf405a6a1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bb76accfef94327386d0ff58d003782a9fe3b0d2
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61023281"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73573147"
 ---
 # <a name="connect-with-excel"></a>Excel ile bağlanma
 
-Bir sunucu oluşturduğunuz ve tablosal bir model dağıttıktan sonra istemcileri bağlanabilir ve verileri araştırmaya başladıktan. 
+Bir sunucu oluşturup bu sunucuya tablolu model dağıttıktan sonra, istemcileri bağlanabilir ve verileri keşfetmeye başlayabilir. 
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Hesabı ile bir model veritabanı rolüyle en azından okuma izinlerinin ait olmalıdır. Daha fazla bilgi edinmek için bkz. [Kimlik doğrulaması ve kullanıcı izinleri](analysis-services-manage-users.md). 
+Oturum açarken kullandığınız hesap, en azından okuma izinlerine sahip bir model veritabanı rolüne ait olmalıdır. Daha fazla bilgi edinmek için bkz. [Kimlik doğrulaması ve kullanıcı izinleri](analysis-services-manage-users.md). 
 
-## <a name="connect-in-excel"></a>Excel'de bağlanma
+## <a name="connect-in-excel"></a>Excel 'de Bağlan
 
-Excel'de bir sunucuya bağlanma, Excel 2016 ve daha sonra Veri Al'ı kullanarak desteklenir. Power Pivot'ta Tablo Alma Sihirbazı'nı kullanarak bağlanma desteklenmiyor. 
+Excel 'deki bir sunucuya bağlanmak, Excel 2016 ve sonraki sürümlerde veri al kullanılarak desteklenir. Power Pivot içindeki tablo Içeri aktarma Sihirbazı 'Nı kullanarak bağlanma desteklenmez. 
 
-1. Excel'de üzerinde **veri** Şerit, tıklayın **dış veri al** > **diğer kaynaklardan** > **gelen Analysis Services**.
+1. Excel 'de, **veri** şeridinde **Analysis Services ' den** > **diğer kaynaklardan** **dış veri > al** ' a tıklayın.
 
-2. Veri Bağlantı Sihirbazı ' nda, **sunucu adı**, protokolü ve URI gibi sunucu adını girin. Örneğin, asazure://westcentralus.asazure.windows.net/advworks. Ardından **oturum açma kimlik bilgilerini**seçin **aşağıdaki kullanıcı adını ve parolayı kullanın**ve ardından kuruluş kullanıcısına ad yazın örneğin nancy@adventureworks.comve parola.
+2. Veri Bağlantısı Sihirbazı ' nın **sunucu adı**' nda protokol ve URI dahil sunucu adını girin. Örneğin, asazure://westcentralus.asazure.windows.net/advworks. Ardından, **oturum açma kimlik bilgileri**' nde, **aşağıdaki kullanıcı adını ve parolayı kullan**' ı seçin ve ardından kuruluş kullanıcı adını (örneğin nancy@adventureworks.comve parola) yazın.
 
     > [!IMPORTANT]
-    > Bir Microsoft Account, Live ID, Yahoo, Gmail, vb. oturum oturum veya çok faktörlü kimlik doğrulaması ile oturum açmanız gereklidir, parola alanını boş bırakın. İleri'ye tıklama sonra bir parola istenir. 
+    > Bir Microsoft hesabı, Live ID, Yahoo, Gmail, vb. ile oturum açarsanız veya Multi-Factor Authentication ile oturum açmanız gerekiyorsa, parola alanını boş bırakın. Ileri ' ye tıkladıktan sonra parola girmeniz istenir. 
 
-    ![Excel oturum açma konumundan bağlanma](./media/analysis-services-connect-excel/aas-connect-excel-logon.png)
+    ![Excel oturum açmadan Bağlan](./media/analysis-services-connect-excel/aas-connect-excel-logon.png)
 
-3. İçinde **veritabanı ve Tablo Seç**, veritabanı ve modeli veya perspektif seçin ve ardından **son**.
+3. **Veritabanı ve tablo Seç**bölümünde, veritabanı ve model ya da perspektif ' i seçin ve ardından **son**' a tıklayın.
    
-    ![Excel select modelden bağlanma](./media/analysis-services-connect-excel/aas-connect-excel-select.png)
+    ![Excel 'den Bağlan Model Seç](./media/analysis-services-connect-excel/aas-connect-excel-select.png)
 
 
 ## <a name="see-also"></a>Ayrıca bkz.

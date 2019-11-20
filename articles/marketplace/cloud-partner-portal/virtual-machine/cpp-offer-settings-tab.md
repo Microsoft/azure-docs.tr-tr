@@ -1,40 +1,41 @@
 ---
-title: Sanal makine teklif Ayarlar sekmesinde, Azure Market'te bulut iş ortağı portalı
-description: Bir Azure Market VM teklifi oluşturmak için kullanılan teklif Ayarlar sekmesinde açıklar.
+title: Azure Marketi için Bulut İş Ortağı Portalı sanal makine teklifi ayarları sekmesi
+description: Azure Marketi VM teklifi oluşturma konusunda kullanılan teklif ayarları sekmesini açıklar.
 services: Azure, Marketplace, Cloud Partner Portal, virtual machine
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 04/25/2019
 ms.author: pabutler
-ms.openlocfilehash: d361b6b8b08f9556cd57215ebdf82c1bf69d372d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6f7b90f6b02999869026db24836091233692143c
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938164"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824434"
 ---
-# <a name="virtual-machine-offer-settings-tab"></a>Sanal makine teklifi Ayarlar sekmesi
+# <a name="virtual-machine-offer-settings-tab"></a>Sanal Makine teklifi ayarları sekmesi
 
-**Yeni teklif** sayfası sanal makineler için adlı birinci sekmede açılır **teklif ayarları**.  
+Sanal makineler için **yeni teklif** sayfası, **teklif ayarları**adlı ilk sekmede açılır.  
 
 ![Sanal makineler için yeni teklif sayfası](./media/publishvm_004.png)
 
 
 ## <a name="offer-settings-fields"></a>Teklif ayarları alanları
 
-İçinde **teklif ayarları** sekmesinde, aşağıdaki alanları sağlamanız gerekir.  Alan adı eklenmiş bir yıldız (*) gerekli olduğunu gösterir. 
+**Teklif ayarları** sekmesinde, aşağıdaki alanları sağlamanız gerekir.  Alan adı üzerinde eklenen bir yıldız işareti (*) gerekli olduğunu gösterir. 
 
 |  **Alan**       |     **Açıklama**                                                          |
 |  ---------       |     ---------------                                                          |
-| **Teklif kimliği\***   | Teklif için benzersiz bir tanımlayıcı (profilinde yayımcı). Bu tanımlayıcı ürün URL'leri, Azure Resource Manager şablonları, görünür ve faturalandırma raporlar. En fazla 50 karakter uzunluğunda, yalnızca küçük harf alfasayısal karakterler ve tire (-) oluşturulmuş olabilir ancak tire bitemez. Bu alan, teklif Canlı geçtikten sonra değiştirilemez. <br> Bir teklif olan contoso yayımlar, örneğin, Teklif kimliği **örnek vm**, Azure Market URL atanır `https://azuremarketplace.microsoft.com/marketplace/apps/contoso.sample-vm?tab=Overview` . |
-| **Yayımcı\***  | Kuruluşunuzun Azure Marketi'nde benzersiz tanımlayıcısı. Tüm teklifleri, yayımcı kimliği ile ilişkili olmalıdır Teklif kaydedildikten sonra bu değer değiştirilemez. |
-| **Ad\***       | Teklifiniz için görünen ad. Bu ad, Azure Marketi'nde ve bulut iş ortağı Portalı'nda görüntülenir. En fazla 50 karakter olabilir. Bir kılavuz ürününüzün tanınabilir bir marka adı eklemektir. Nasıl pazarlanmadığından olmadığı sürece, kuruluşunuzun adını buraya dahil değildir. Diğer Web siteleri ve yayınlar bu teklifte pazarlama, adın tam olarak aynı tüm yayınları arasında olduğundan emin olun. |
+| **Teklif KIMLIĞI\***   | Teklif için benzersiz bir tanımlayıcı (yayımcı profili içinde). Bu tanımlayıcı, ürün URL 'Lerinde, Azure Resource Manager şablonlarında ve faturalandırma raporlarında görünür olacaktır. En fazla 50 karakter uzunluğunda olabilir, yalnızca küçük harf alfasayısal karakterler ve kısa çizgilerden (-) oluşabilir, ancak kısa çizgi ile bitemez. Bu alan, bir teklif canlı olduktan sonra değiştirilemez. <br> Örneğin, contoso teklif KIMLIĞI **örneği-VM**ile bir teklif yayımladığında, Azure Market URL 'si `https://azuremarketplace.microsoft.com/marketplace/apps/contoso.sample-vm?tab=Overview` atanır. |
+| **Yayımcı\***  | Kuruluşunuzun Azure Marketi 'nde benzersiz tanımlayıcısı. Tüm tekliflerinizin yayımcı KIMLIĞINIZLE ilişkilendirilmesi gerekir. Teklif kaydedildikten sonra bu değer değiştirilemez. |
+| **Ad\***       | Teklifiniz için görünen ad. Bu ad, Azure Marketi 'nde ve Bulut İş Ortağı Portalı görüntülenecektir. En fazla 50 karakter olabilir. Buradaki kılavuz, ürününüz için tanınabilir bir marka adı içermektedir. Pazarlanmadığı müddetçe kuruluşunuzun adını buraya eklemeyin. Bu teklifi diğer web siteleri ve yayımlarda pazartadıysanız, adın tüm yayınlarda tam olarak aynı olduğundan emin olun. |
 |   |   |
  
-Tıklayın **Kaydet** sonra tüm alanları sağladınız. 
+Tüm alanları sağladıktan sonra **Kaydet** ' e tıklayın. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sonraki sekmede ekleyeceksiniz [SKU'ları](./cpp-skus-tab.md) kullanıcınıza teklifiniz için.
+Bir sonraki sekmede, teklifiniz için [SKU 'ları](./cpp-skus-tab.md) ekleyeceksiniz.

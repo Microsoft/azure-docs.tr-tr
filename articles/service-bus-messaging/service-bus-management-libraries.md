@@ -1,6 +1,6 @@
 ---
-title: Azure Service Bus yönetim kitaplıkları | Microsoft Docs
-description: Service Bus ad alanı ve mesajlaşma varlıkları net'ten yönetin.
+title: Yönetim kitaplıklarını Azure Service Bus | Microsoft Docs
+description: .NET ' ten Service Bus ad alanlarını ve mesajlaşma varlıklarını yönetin.
 services: service-bus-messaging
 documentationcenter: na
 author: axisc
@@ -14,45 +14,45 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 06/05/2019
 ms.author: aschhab
-ms.openlocfilehash: bd2a594bfd7fbac53deacc767ace3cd44484798e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: faf0a5893b7de276b9a411745500daef4d39da6b
+ms.sourcegitcommit: c8a102b9f76f355556b03b62f3c79dc5e3bae305
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67058112"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68816085"
 ---
 # <a name="service-bus-management-libraries"></a>Service Bus yönetim kitaplıkları
 
-Azure Service Bus yönetim kitaplıkları, Service Bus ad alanlarını ve varlıkları dinamik olarak sağlayabilirsiniz. Bu karmaşık dağıtımları ve mesajlaşma senaryoları etkinleştirir ve hangi varlıkları sağlamak için programlı olarak belirlemek mümkün kılar. Bu kitaplıklar, şu anda .NET için kullanılabilir.
+Azure Service Bus yönetim kitaplıkları, Service Bus ad alanlarını ve varlıklarını dinamik olarak sağlayabilir. Bu, karmaşık dağıtımlar ve mesajlaşma senaryolarına olanak tanır ve hangi varlıkların sağlanacağı ile programlı bir şekilde belirlenmesini olanaklı kılar. Bu kitaplıklar, şu anda .NET için kullanılabilir.
 
 ## <a name="supported-functionality"></a>Desteklenen işlevi
 
 * Namespace oluşturma, güncelleştirme, silme
-* Sıra oluşturma, güncelleştirme, silme
+* Kuyruk oluşturma, güncelleştirme, silme
 * Konu oluşturma, güncelleştirme, silme
 * Abonelik oluşturma, güncelleştirme, silme
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Service Bus yönetim kitaplıklarını kullanmaya başlamak için Azure Active Directory (Azure AD) hizmeti ile kimlik doğrulaması gerekir. Azure AD, Azure kaynaklarınıza erişim sağlayan bir hizmet sorumlusu olarak kimlik doğrulaması gerektirir. Hizmet sorumlusu oluşturma hakkında daha fazla bilgi için şu makalelerden birine bakın:  
+Service Bus yönetim kitaplıklarını kullanmaya başlamak için Azure Active Directory (Azure AD) hizmeti ile kimlik doğrulaması yapmanız gerekir. Azure AD, Azure kaynaklarınıza erişim sağlayan bir hizmet sorumlusu olarak kimlik doğrulaması yapmanızı gerektirir. Hizmet sorumlusu oluşturma hakkında daha fazla bilgi için şu makalelerden birine bakın:  
 
 * [Active Directory uygulaması ve kaynaklara erişebilen hizmet sorumlusu oluşturmak için Azure portalını kullanma](/azure/azure-resource-manager/resource-group-create-service-principal-portal)
 * [Kaynaklara erişmek üzere hizmet sorumlusu oluşturmak için Azure PowerShell kullanma](/azure/azure-resource-manager/resource-group-authenticate-service-principal)
 * [Kaynaklara erişmek üzere hizmet sorumlusu oluşturmak için Azure CLI kullanma](/azure/azure-resource-manager/resource-group-authenticate-service-principal-cli)
 
-Bu öğreticiler sunmak bir `AppId` (istemci kimliği) `TenantId`, ve `ClientSecret` (kimlik doğrulama anahtarı), tüm yönetim kitaplıkları ile kimlik doğrulama için kullanılır. Olmalıdır **sahibi** üzerinde istediğiniz çalıştırmak kaynak grubu için izinleri.
+Bu öğreticiler sunmak bir `AppId` (istemci kimliği) `TenantId`, ve `ClientSecret` (kimlik doğrulama anahtarı), tüm yönetim kitaplıkları ile kimlik doğrulama için kullanılır. Çalıştırmak istediğiniz kaynak grubu için **sahip** izinleriniz olmalıdır.
 
 ## <a name="programming-pattern"></a>Programlama düzeni
 
-Tüm Service Bus kaynakları yönetmek için ortak bir protokolle yapıdadır:
+Herhangi bir Service Bus kaynağını işlemek için kullanılan desenler ortak bir protokol izler:
 
-1. Azure AD kullanarak bir belirteç elde **Microsoft.IdentityModel.Clients.activedirectory** kitaplığı:
+1. **Microsoft. IdentityModel. clients. ActiveDirectory** kitaplığını kullanarak Azure AD 'den bir belirteç edinin:
    ```csharp
    var context = new AuthenticationContext($"https://login.microsoftonline.com/{tenantId}");
 
-   var result = await context.AcquireTokenAsync("https://management.core.windows.net/", new ClientCredential(clientId, clientSecret));
+   var result = await context.AcquireTokenAsync("https://management.azure.com/", new ClientCredential(clientId, clientSecret));
    ```
-2. Oluşturma `ServiceBusManagementClient` nesnesi:
+2. `ServiceBusManagementClient` Nesneyi oluşturun:
 
    ```csharp
    var creds = new TokenCredentials(token);
@@ -61,7 +61,7 @@ Tüm Service Bus kaynakları yönetmek için ortak bir protokolle yapıdadır:
        SubscriptionId = SettingsCache["SubscriptionId"]
    };
    ```
-3. Ayarlama `CreateOrUpdate` belirttiğiniz değerlerin parametreleri:
+3. `CreateOrUpdate` Parametreleri belirtilen değerlerinizle ayarlayın:
 
    ```csharp
    var queueParams = new QueueCreateOrUpdateParameters()
@@ -70,14 +70,14 @@ Tüm Service Bus kaynakları yönetmek için ortak bir protokolle yapıdadır:
        EnablePartitioning = true
    };
    ```
-4. Çağrı yürütün:
+4. Çağrıyı yürütün:
 
    ```csharp
    await sbClient.Queues.CreateOrUpdateAsync(resourceGroupName, namespaceName, QueueName, queueParams);
    ```
 
-## <a name="complete-code-to-create-a-queue"></a>Bir kuyruk oluşturmak için tam kod
-Service Bus kuyruğuna oluşturmak için tam kod aşağıdaki gibidir: 
+## <a name="complete-code-to-create-a-queue"></a>Kuyruk oluşturmak için kodu doldurun
+Service Bus kuyruğu oluşturmak için kodun tamamı aşağıda verilmiştir: 
 
 ```csharp
 using System;
@@ -139,7 +139,7 @@ namespace SBusADApp
                 var context = new AuthenticationContext($"https://login.microsoftonline.com/{tenantId}");
 
                 var result = await context.AcquireTokenAsync(
-                    "https://management.core.windows.net/",
+                    "https://management.azure.com/",
                     new ClientCredential(clientId, clientSecret)
                 );
 
@@ -164,7 +164,7 @@ namespace SBusADApp
 ```
 
 > [!IMPORTANT]
-> Tam bir örnek için bkz. [.NET Yönetim örneği github'daki](https://github.com/Azure-Samples/service-bus-dotnet-management/). 
+> Tüm örnek için [GitHub 'daki .NET Yönetim örneğine](https://github.com/Azure-Samples/service-bus-dotnet-management/)bakın. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Microsoft.Azure.Management.ServiceBus API Başvurusu](/dotnet/api/Microsoft.Azure.Management.ServiceBus)
+[Microsoft. Azure. Management. ServiceBus API başvurusu](/dotnet/api/Microsoft.Azure.Management.ServiceBus)

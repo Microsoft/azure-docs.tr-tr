@@ -4,23 +4,22 @@ description: Azure Batch hizmet kaynaklarını yönetmek üzere Azure CLI’daki
 services: batch
 documentationcenter: ''
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: fcd76587-1827-4bc8-a84d-bba1cd980d85
 ms.service: batch
-ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: multiple
 ms.workload: big-compute
 ms.date: 07/24/2018
 ms.author: lahugh
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: e2bd67ebb977a37c75631f16fbbf4c7dbd6bf250
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dd4a93b9829d69d9d0262428d23d2156d732c006
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60782566"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70095415"
 ---
 # <a name="manage-batch-resources-with-azure-cli"></a>Batch kaynaklarını Azure CLI ile yönetme
 
@@ -76,7 +75,7 @@ az login
 
 ![Azure'da oturum açma](./media/batch-cli-get-started/az-login.png)
 
-Örnek Kabuk betikleri bölümünde listelenen örnekler de Azure'da etkileşimli olarak oturum açarak Azure CLI oturumunuzu başlatma gösterir. Oturum açtıktan sonra Batch hesapları, anahtarları, uygulama paketleri ve kotaları dahil olmak üzere Batch Management kaynaklarıyla çalışmak için komutları çağırabilirsiniz.  
+Örnek kabuk betikleri bölümünde listelenen örneklerde Ayrıca Azure 'da etkileşimli olarak oturum açarak Azure CLı oturumunuzun nasıl başlatılacağı gösterilmektedir. Oturum açtıktan sonra Batch hesapları, anahtarları, uygulama paketleri ve kotaları dahil olmak üzere Batch Management kaynaklarıyla çalışmak için komutları çağırabilirsiniz.  
 
 ### <a name="log-in-to-your-batch-account"></a>Batch hesabınızda oturum açma
 
@@ -110,7 +109,7 @@ Batch hesabınızla kimlik doğrulamasından geçmek için kullanabileceğiniz i
     az batch account login -g myresourcegroup -n mybatchaccount --shared-key-auth
     ```
 
-Örnek Kabuk betikleri bölümünde listelenen örnekler Azure CLI ile Batch hesabınızda oturum açarken her ikisini de kullanarak göstermektedir Azure AD ve paylaşılan anahtar.
+Örnek kabuk betikleri bölümünde listelenen örneklerde Azure CLı ile Azure AD ve paylaşılan anahtar kullanılarak Batch hesabınızda oturum açma Işlemi gösterilmektedir.
 
 ## <a name="use-azure-batch-cli-extension-commands"></a>Azure Batch CLI uzantısı komutlarını kullanma
 
@@ -130,7 +129,7 @@ az batch pool create my_batch_pool.json
 
 Yalnızca komut satırı seçeneklerini kullanarak çoğu Batch kaynağını oluşturabilirsiniz ancak bazı özellikler, kaynak ayrıntılarını içeren JSON biçimli bir dosya belirtmenizi gerektirir. Örneğin, bir başlatma görevi için kaynak belirtmek istiyorsanız bir JSON dosyası kullanmanız gerekir.
 
-Kaynak oluşturmak için gereken JSON söz dizimi dosyasını bulmak üzere [Batch REST API başvurusu][rest_api] belgelerine bakın. REST API başvurusundaki her bir "Ekle *kaynak türü*" konusu ilgili kaynağı oluşturmak için örnek JSON betikleri içerir. Bu örnek JSON betiklerini Azure CLI ile kullanabileceğiniz JSON dosyası şablonu olarak değerlendirebilirsiniz. Örneğin havuz oluşturmak için JSON söz dizimini görmek istiyorsanız bkz. [Bir hesaba havuz ekleme][rest_add_pool].
+Kaynak oluşturmak için gereken JSON sözdizimini görmek için [Batch REST API başvuru][rest_api] belgelerine bakın. REST API başvurusundaki her bir "Ekle *kaynak türü*" konusu ilgili kaynağı oluşturmak için örnek JSON betikleri içerir. Bu örnek JSON betiklerini Azure CLI ile kullanabileceğiniz JSON dosyası şablonu olarak değerlendirebilirsiniz. Örneğin, havuz oluşturma için JSON sözdizimini görmek için, bir [hesaba havuz ekleme][rest_add_pool]bölümüne bakın.
 
 Bir JSON dosyasını belirten örnek bir betik için bkz. [Batch ile bir iş ve görevlerini çalıştırma](./scripts/batch-cli-sample-run-job.md).
 
@@ -168,7 +167,7 @@ Azure CLI sorunlarını giderirken aşağıdaki ipuçları yardımcı olabilir:
 
 * Herhangi bir CLI komutu için **yardım metni** almak üzere `-h` kullanın
 * **Ayrıntılı** komut çıktısını görüntülemek için `-v` ve `-vv` kullanın. `-vv` bayrağı eklendiğinde Azure CLI gerçek REST isteklerini ve yanıtlarını görüntüler. Bu anahtarlar tam hata çıktısını görüntülemek için kullanışlıdır.
-* `--json` seçeneği ile **komut çıktısını JSON olarak** görüntüleyebilirsiniz. Örneğin, `az batch pool show pool001 --json` seçeneği pool001'in özelliklerini JSON biçiminde gösterir. Daha sonra kopyalayın ve kullanmak için bu çıkış değiştirme bir `--json-file` (Bu makalenin önceki kısımlarında JSON dosyaları bakın).
+* `--json` seçeneği ile **komut çıktısını JSON olarak** görüntüleyebilirsiniz. Örneğin, `az batch pool show pool001 --json` seçeneği pool001'in özelliklerini JSON biçiminde gösterir. Daha sonra bu çıktıyı kopyalayabilir ve içinde `--json-file` kullanmak üzere değiştirebilirsiniz (Bu makalenin önceki kısımlarında bulunan JSON dosyalarına bakın).
 <!---Loc Comment: Please, check link [JSON files] since it's not redirecting to any location.--->
 
 ## <a name="next-steps"></a>Sonraki adımlar

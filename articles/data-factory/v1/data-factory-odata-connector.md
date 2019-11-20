@@ -1,6 +1,6 @@
 ---
-title: OData kaynaklardan veri taşıma | Microsoft Docs
-description: Azure Data Factory kullanarak OData kaynaklardan veri taşıma hakkında bilgi edinin.
+title: OData kaynaklarından veri taşıma
+description: Azure Data Factory kullanarak OData kaynaklarından veri taşıma hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -13,63 +13,63 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: b2c665de94750c4c6f41bda47960fdb9ba17e819
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ea751a18f8a5e5423b3199919ccf440c41595091
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60824046"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73666661"
 ---
-# <a name="move-data-from-an-odata-source-using-azure-data-factory"></a>Gelen bir OData kaynak Azure Data Factory ile verileri taşıma
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="move-data-from-an-odata-source-using-azure-data-factory"></a>Azure Data Factory kullanarak OData kaynağından veri taşıma
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](data-factory-odata-connector.md)
 > * [Sürüm 2 (geçerli sürüm)](../connector-odata.md)
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [V2'de OData Bağlayıcısı](../connector-odata.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [v2 'de OData Bağlayıcısı](../connector-odata.md).
 
 
-Bu makalede, bir OData kaynaktan verileri taşımak için Azure Data Factory kopyalama etkinliği kullanmayı açıklar. Yapılar [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesi, kopyalama etkinliği ile verileri taşıma genel bir bakış sunar.
+Bu makalede, bir OData kaynağından verileri taşımak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı açıklanmaktadır. Kopyalama etkinliğiyle veri hareketine genel bir bakış sunan [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde oluşturulur.
 
-Bir OData kaynağından tüm desteklenen havuz veri deposuna veri kopyalayabilirsiniz. Havuz kopyalama etkinliği tarafından desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](data-factory-data-movement-activities.md#supported-data-stores-and-formats) tablo. Data factory şu anda yalnızca veri taşımayı OData kaynaktan gelen verileri diğer veri depolarına bir OData kaynağına taşımak için değil ancak diğer veri depolarına destekler.
+OData kaynağından desteklenen herhangi bir havuz veri deposuna veri kopyalayabilirsiniz. Kopyalama etkinliği tarafından havuz olarak desteklenen veri depolarının listesi için [desteklenen veri depoları](data-factory-data-movement-activities.md#supported-data-stores-and-formats) tablosuna bakın. Data Factory Şu anda yalnızca bir OData kaynağından diğer veri depolarına veri taşımayı destekler, ancak verileri diğer veri depolarından OData kaynağına taşımak için kullanmaz.
 
 ## <a name="supported-versions-and-authentication-types"></a>Desteklenen sürümler ve kimlik doğrulama türleri
-Bu OData bağlayıcı destekleyen OData sürüm 3.0 ve 4.0 ve veri OData hem buluttan ve şirket içi OData kaynakları kopyalayabilirsiniz. İkincisi için veri yönetimi ağ geçidi yüklemeniz gerekir. Bkz: [şirket içi ile bulut arasında veri taşıma](data-factory-move-data-between-onprem-and-cloud.md) veri yönetimi ağ geçidi hakkında bilgi için makalenin.
+Bu OData Bağlayıcısı, OData sürüm 3,0 ve 4,0 ' i destekler ve hem bulut OData hem de şirket içi OData kaynaklarından veri kopyalayabilirsiniz. İkincisi için Veri Yönetimi ağ geçidini yüklemeniz gerekir. Veri Yönetimi ağ geçidi hakkındaki ayrıntılar için bkz. Şirket [içi ve bulut hakkındaki verileri taşıma](data-factory-move-data-between-onprem-and-cloud.md) .
 
-Kimlik doğrulaması türleri desteklenir:
+Aşağıdaki kimlik doğrulama türleri desteklenir:
 
-* Erişim için **bulut** OData akışındaki, kullanabileceğiniz anonim, temel (kullanıcı adı ve parola) veya Azure Active Directory tabanlı OAuth kimlik doğrulaması.
-* Erişim için **şirket içi** OData akışındaki, kullanabileceğiniz anonim, temel (kullanıcı adı ve parola) veya Windows kimlik doğrulaması.
+* **Cloud** OData akışına erişmek için anonim, temel (Kullanıcı adı ve parola) veya Azure Active Directory tabanlı OAuth kimlik doğrulaması kullanabilirsiniz.
+* **Şirket içi** OData akışına erişmek için anonim, temel (Kullanıcı adı ve parola) veya Windows kimlik doğrulaması kullanabilirsiniz.
 
 ## <a name="getting-started"></a>Başlarken
-Farklı araçlar/API'lerini kullanarak bir OData kaynaktan veri taşıyan kopyalama etkinliği ile işlem hattı oluşturabilirsiniz.
+Farklı araçlar/API 'Ler kullanarak bir OData kaynağından veri taşıyan kopyalama etkinliği ile bir işlem hattı oluşturabilirsiniz.
 
-Bir işlem hattı oluşturmanın en kolay yolu kullanmaktır **Kopyalama Sihirbazı'nı**. Bkz: [Öğreticisi: Kopyalama Sihirbazı'nı kullanarak bir işlem hattı oluşturma](data-factory-copy-data-wizard-tutorial.md) veri kopyalama Sihirbazı'nı kullanarak bir işlem hattı oluşturma hızlı bir kılavuz.
+İşlem hattı oluşturmanın en kolay yolu **Kopyalama Sihirbazı**' nı kullanmaktır. Veri kopyalama Sihirbazı 'nı kullanarak işlem hattı oluşturma hakkında hızlı bir yol için bkz. [öğretici: kopyalama Sihirbazı 'nı kullanarak işlem hattı oluşturma](data-factory-copy-data-wizard-tutorial.md) .
 
-Ayrıca, bir işlem hattı oluşturmak için aşağıdaki araçları kullanabilirsiniz: **Azure portalında**, **Visual Studio**, **Azure PowerShell**, **Azure Resource Manager şablonu**, **.NET API**ve  **REST API**. Bkz: [kopyalama etkinliği Öğreticisi](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) kopyalama etkinliği ile işlem hattı oluşturmak adım adım yönergeler için.
+İşlem hattı oluşturmak için aşağıdaki araçları da kullanabilirsiniz: **Visual Studio**, **Azure PowerShell**, **Azure Resource Manager şablonu**, **.NET API**ve **REST API**. Kopyalama etkinliğine sahip bir işlem hattı oluşturmak için adım adım yönergeler için bkz. [kopyalama etkinliği öğreticisi](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) .
 
-API'ler ve Araçlar kullanmanıza bakılmaksızın, bir havuz veri deposu için bir kaynak veri deposundan veri taşıyan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirin:
+Araçları veya API 'Leri kullanıp kullanmayacağınızı bir kaynak veri deposundan havuz veri deposuna veri taşınan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirirsiniz:
 
-1. Oluşturma **bağlı hizmetler** girdi ve çıktı verilerini bağlamak için veri fabrikanıza depolar.
-2. Oluşturma **veri kümeleri** kopyalama işleminin girdi ve çıktı verilerini göstermek için.
-3. Oluşturma bir **işlem hattı** bir veri kümesini girdi ve çıktı olarak bir veri kümesini alan kopyalama etkinliği ile.
+1. Giriş ve çıkış veri depolarını veri fabrikanıza bağlamak için **bağlı hizmetler** oluşturun.
+2. Kopyalama işlemi için girdi ve çıktı verilerini temsil edecek **veri kümeleri** oluşturun.
+3. Bir veri kümesini girdi olarak ve bir veri kümesini çıkış olarak alan kopyalama etkinliği ile bir işlem **hattı** oluşturun.
 
-Sihirbazı'nı kullandığınızda, bu Data Factory varlıklarını (bağlı hizmetler, veri kümeleri ve işlem hattı) için JSON tanımları sizin için otomatik olarak oluşturulur. Araçlar/API'leri (dışında .NET API'si) kullandığınızda, bu Data Factory varlıkları JSON biçimini kullanarak tanımlayın.  Bir OData kaynaktan veri kopyalamak için kullanılan Data Factory varlıkları için JSON tanımları ile bir örnek için bkz. [JSON örneği: Verileri Azure Blob OData kaynaktan kopyalama](#json-example-copy-data-from-odata-source-to-azure-blob) bu makalenin.
+Sihirbazı kullandığınızda, bu Data Factory varlıkların JSON tanımları (bağlı hizmetler, veri kümeleri ve işlem hattı) sizin için otomatik olarak oluşturulur. Araçlar/API 'Leri (.NET API hariç) kullandığınızda, bu Data Factory varlıkları JSON biçimini kullanarak tanımlarsınız.  Bir OData kaynağından veri kopyalamak için kullanılan Data Factory varlıkların JSON tanımlarına sahip bir örnek için, bkz. [JSON örneği: OData kaynağından Azure Blob 'a veri kopyalama](#json-example-copy-data-from-odata-source-to-azure-blob) .
 
-Aşağıdaki bölümler, Data Factory varlıklarını belirli OData kaynağı tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılı bilgi sağlar:
+Aşağıdaki bölümler, OData kaynağına özgü Data Factory varlıkları tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılı bilgi sağlar:
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
-Aşağıdaki tabloda, bağlı bir OData hizmetine özel JSON öğeleri için bir açıklama sağlar.
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
+Aşağıdaki tabloda, OData bağlantılı hizmetine özgü JSON öğeleri için açıklama verilmiştir.
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| type |Type özelliği ayarlanmalıdır: **OData** |Evet |
-| url |OData hizmeti URL'si. |Evet |
-| authenticationType |OData kaynağına bağlanmak için kullanılan kimlik doğrulaması türü. <br/><br/> Bulut OData anonim, temel ve OAuth (Not Azure Active Directory tabanlı OAuth Azure Data Factory şu anda yalnızca destek) olası değerler şunlardır. <br/><br/> Anonim, temel ve Windows, şirket içi OData için olası değerler şunlardır. |Evet |
-| username |Temel kimlik doğrulamasını kullanıyorsanız kullanıcı adı belirtin. |Evet (yalnızca temel kimlik doğrulaması kullanıyorsanız) |
-| password |Kullanıcı adı için belirtilen kullanıcı hesabı için parola belirtin. |Evet (yalnızca temel kimlik doğrulaması kullanıyorsanız) |
-| authorizedCredential |OAuth kullanıyorsanız **Authorize** Data Factory Kopyalama Sihirbazı'nı veya düzenleyicide düğmesine tıklayın ve sonra da bu özelliğin değeri otomatik olarak oluşturulan kimlik bilgilerinizi girin. |Evet (yalnızca OAuth kimlik doğrulaması kullanıyorsanız) |
-| gatewayName |Data Factory hizmetinin şirket içi OData hizmetine bağlanmak için kullanması gereken ağ geçidi adı. Yalnızca şirket içi OData kaynağı üzerindeki veri kopyalama, belirtin. |Hayır |
+| type |Type özelliği: **OData** olarak ayarlanmalıdır |Evet |
+| url |OData hizmetinin URL 'si. |Evet |
+| authenticationType |OData kaynağına bağlanmak için kullanılan kimlik doğrulaması türü. <br/><br/> Bulut OData için, olası değerler anonim, temel ve OAuth ' dir (Azure Data Factory Şu anda yalnızca Azure Active Directory tabanlı OAuth 'ı destekler). <br/><br/> Şirket içi OData için, olası değerler anonim, temel ve Windows ' dir. |Evet |
+| kullanıcı adı |Temel kimlik doğrulaması kullanıyorsanız Kullanıcı adını belirtin. |Evet (yalnızca temel kimlik doğrulaması kullanıyorsanız) |
+| password |Kullanıcı adı için belirttiğiniz kullanıcı hesabı için parola belirtin. |Evet (yalnızca temel kimlik doğrulaması kullanıyorsanız) |
+| authorizedCredential |OAuth kullanıyorsanız, Data Factory kopyalama Sihirbazı veya düzenleyicide **Yetkilendir** düğmesine tıklayın ve kimlik bilgilerinizi girin, ardından bu özelliğin değeri otomatik olarak oluşturulur. |Evet (yalnızca OAuth kimlik doğrulaması kullanıyorsanız) |
+| gatewayName |Data Factory hizmetinin şirket içi OData hizmetine bağlanmak için kullanması gereken ağ geçidinin adı. Yalnızca şirket içi OData kaynağından veri kopyalıyorsanız belirtin. |Hayır |
 
 ### <a name="using-basic-authentication"></a>Temel kimlik doğrulaması kullanma
 ```json
@@ -89,7 +89,7 @@ Aşağıdaki tabloda, bağlı bir OData hizmetine özel JSON öğeleri için bir
 }
 ```
 
-### <a name="using-anonymous-authentication"></a>Anonim kimlik doğrulaması
+### <a name="using-anonymous-authentication"></a>Anonim kimlik doğrulaması kullanma
 ```json
 {
     "name": "ODataLinkedService",
@@ -105,7 +105,7 @@ Aşağıdaki tabloda, bağlı bir OData hizmetine özel JSON öğeleri için bir
 }
 ```
 
-### <a name="using-windows-authentication-accessing-on-premises-odata-source"></a>Şirket içi OData kaynağına erişme Windows kimlik doğrulaması kullanma
+### <a name="using-windows-authentication-accessing-on-premises-odata-source"></a>Windows kimlik doğrulamasını kullanarak şirket içi OData kaynağına erişme
 ```json
 {
     "name": "inputLinkedService",
@@ -124,7 +124,7 @@ Aşağıdaki tabloda, bağlı bir OData hizmetine özel JSON öğeleri için bir
 }
 ```
 
-### <a name="using-oauth-authentication-accessing-cloud-odata-source"></a>OAuth kimlik doğrulaması erişen bulut OData kaynağı kullanma
+### <a name="using-oauth-authentication-accessing-cloud-odata-source"></a>Cloud OData kaynağına erişme OAuth kimlik doğrulaması kullanma
 ```json
 {
     "name": "inputLinkedService",
@@ -142,66 +142,66 @@ Aşağıdaki tabloda, bağlı bir OData hizmetine özel JSON öğeleri için bir
 ```
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
-Bölümleri ve veri kümeleri tanımlamak için kullanılabilir özellikleri tam listesi için bkz [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Bölümler bir veri kümesi JSON İlkesi yapısı ve kullanılabilirlik gibi tüm veri kümesi türleri (Azure SQL, Azure blob, Azure tablo, vs.) için benzer.
+Veri kümelerini tanımlamaya yönelik özellikler & bölümlerin tam listesi için bkz. [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Bir veri kümesinin yapısı, kullanılabilirliği ve İlkesi gibi bölümler, tüm veri kümesi türleri (Azure SQL, Azure blob, Azure tablosu vb.) için benzerdir.
 
-**TypeProperties** bölümünde her veri kümesi türü için farklıdır ve verilerin veri deposundaki konumu hakkında bilgi sağlar. TypeProperties bölümü için veri kümesi türü **ODataResource** (OData veri kümesini içeren) aşağıdaki özelliklere sahip
+**Typeproperties** bölümü her bir veri kümesi türü için farklıdır ve veri deposundaki verilerin konumu hakkında bilgi sağlar. **ODataResource** türünde veri kümesi Için typeproperties bölümü (OData veri kümesini içerir) aşağıdaki özelliklere sahiptir
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| path |OData kaynağı yolu |Hayır |
+| Yolun |OData kaynağının yolu |Hayır |
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
-Bölümleri & etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları oluşturma](data-factory-create-pipelines.md) makalesi. İlke adı ve açıklaması, girdi ve çıktı tabloları gibi özellikler, tüm etkinlik türleri için kullanılabilir.
+Etkinlikleri tanımlamaya yönelik bölüm & özelliklerinin tam listesi için, işlem [hatları oluşturma](data-factory-create-pipelines.md) makalesine bakın. Ad, açıklama, giriş ve çıkış tabloları ve ilke gibi özellikler, tüm etkinlik türleri için kullanılabilir.
 
-Etkinliğin typeProperties bölümündeki özellikler, diğer yandan her etkinlik türü ile değişir. Kopyalama etkinliği için kaynaklar ve havuzlar türlerine bağlı olarak farklılık gösterir.
+Diğer yandan etkinliğin typeProperties bölümünde bulunan özellikler her etkinlik türüyle farklılık gösterir. Kopyalama etkinliği için, kaynak ve havuz türlerine göre farklılık gösterir.
 
-Kaynak türü olduğunda **RelationalSource** (OData içeren) typeProperties bölümünde aşağıdaki özellikler kullanılabilir:
+Kaynak, **Relationalsource** türünde olduğunda (OData içeren), typeproperties bölümünde aşağıdaki özellikler mevcuttur:
 
 | Özellik | Açıklama | Örnek | Gerekli |
 | --- | --- | --- | --- |
-| query |Verileri okumak için özel sorgu kullanın. |"? $select adı, açıklama ve $top = 5 =" |Hayır |
+| sorgu |Verileri okumak için özel sorguyu kullanın. |"? $select = ad, açıklama & $top = 5" |Hayır |
 
-## <a name="type-mapping-for-odata"></a>OData için tür eşlemesi
-Belirtildiği gibi [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesi, kopyalama etkinliği, aşağıdaki iki adımlı yaklaşım türleriyle havuz için kaynak türünden otomatik tür dönüştürmeleri gerçekleştirir.
+## <a name="type-mapping-for-odata"></a>OData için tür eşleme
+[Veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde belirtildiği gibi, kopyalama etkinliği, kaynak türlerindeki otomatik tür dönüştürmeleri aşağıdaki iki adımlı yaklaşımla birlikte havuz türlerine uygular.
 
-1. Yerel kaynak türlerinden .NET türüne dönüştürün
-2. .NET türünden yerel havuz türüne dönüştürün
+1. Yerel kaynak türlerinden .NET türüne Dönüştür
+2. .NET türünden yerel havuz türüne Dönüştür
 
-OData veri taşıma, aşağıdaki eşlemeler OData türlerinden .NET türü kullanılır.
+OData 'ten verileri taşırken, OData türlerinden .NET türüne aşağıdaki eşlemeler kullanılır.
 
 | OData veri türü | .NET türü |
 | --- | --- |
-| Edm.Binary |Byte[] |
+| EDM.Binary |Byte [] |
 | Edm.Boolean |Bool |
-| Edm.Byte |Byte[] |
-| Edm.DateTime |DateTime |
-| Edm.Decimal |Decimal |
-| Edm.Double |Double |
-| Edm.Single |Single |
-| Edm.Guid |Guid |
-| Edm.Int16 |Int16 |
+| EDM.Byte |Byte [] |
+| EDM. DateTime |DateTime |
+| EDM.Decimal |Kategori |
+| Edm.Double |Çift |
+| EDM.Single |Tek |
+| EDM.Guid |Guid |
+| EDM.Int16 |Int16 |
 | Edm.Int32 |Int32 |
 | Edm.Int64 |Int64 |
 | Edm.SByte |Int16 |
-| Edm.String |String |
-| Edm.Time |TimeSpan |
-| Edm.DateTimeOffset |DateTimeOffset |
+| Edm.String |Dize |
+| EDM.Time |TimeSpan |
+| Edm.DateTimeOffset |Türünde |
 
 > [!Note]
-> OData karmaşık veri türlerini örn nesnesi desteklenmez.
+> OData karmaşık veri türleri gibi nesneler desteklenmez.
 
-## <a name="json-example-copy-data-from-odata-source-to-azure-blob"></a>JSON örneği: Azure Blob OData kaynaktan veri kopyalayın
-Bu örnekte kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz örnek JSON tanımları sağlar, [Azure portalında](data-factory-copy-activity-tutorial-using-azure-portal.md) veya [Visual Studio](data-factory-copy-activity-tutorial-using-visual-studio.md) veya [Azure PowerShell](data-factory-copy-activity-tutorial-using-powershell.md). Bunlar, bir Azure Blob depolama alanına bir OData kaynaktan veri kopyalama işlemini göstermektedir. Ancak, veriler belirtilen havuzlarını birine kopyalanabilir [burada](data-factory-data-movement-activities.md#supported-data-stores-and-formats) kopyalama etkinliğini kullanarak Azure Data Factory'de. Örnek, aşağıdaki Data Factory varlıklarını sahiptir:
+## <a name="json-example-copy-data-from-odata-source-to-azure-blob"></a>JSON örneği: OData kaynağından Azure Blob 'a veri kopyalama
+Bu örnek, [Visual Studio](data-factory-copy-activity-tutorial-using-visual-studio.md) veya [Azure PowerShell](data-factory-copy-activity-tutorial-using-powershell.md)kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz örnek JSON tanımlarını sağlar. OData kaynağından Azure Blob depolama alanına nasıl veri kopyalanacağını gösterir. Ancak, veriler burada belirtilen Azure Data Factory kopyalama etkinliği kullanılarak [burada](data-factory-data-movement-activities.md#supported-data-stores-and-formats) belirtilen herhangi bir havuza kopyalanabilir. Örnek aşağıdaki Data Factory varlıklara sahiptir:
 
-1. Bağlı hizmet türü [OData](#linked-service-properties).
-2. Bağlı hizmet türü [AzureStorage](data-factory-azure-blob-connector.md#linked-service-properties).
-3. Girdi [veri kümesi](data-factory-create-datasets.md) türü [ODataResource](#dataset-properties).
-4. Bir çıkış [veri kümesi](data-factory-create-datasets.md) türü [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties).
-5. A [işlem hattı](data-factory-create-pipelines.md) kullanan bir kopyalama etkinliği ile [RelationalSource](#copy-activity-properties) ve [BlobSink](data-factory-azure-blob-connector.md#copy-activity-properties).
+1. [OData](#linked-service-properties)türünde bağlı bir hizmet.
+2. [Azurestorage](data-factory-azure-blob-connector.md#linked-service-properties)türünde bağlı bir hizmet.
+3. [ODataResource](#dataset-properties)türünde bir giriş [veri kümesi](data-factory-create-datasets.md) .
+4. [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties)türünde bir çıkış [veri kümesi](data-factory-create-datasets.md) .
+5. [Relationalsource](#copy-activity-properties) ve [Blobsink](data-factory-azure-blob-connector.md#copy-activity-properties)kullanan kopyalama etkinliğine sahip bir işlem [hattı](data-factory-create-pipelines.md) .
 
-Örnek, bir Azure blob'a OData kaynağına karşı saatte sorgulamasını veri kopyalar. Bu örneklerde kullanılan JSON özellikleri örnekleri aşağıdaki bölümlerde açıklanmıştır.
+Örnek, verileri bir OData kaynağına göre sorgulanarak saatte bir Azure blobuna kopyalar. Bu örneklerde kullanılan JSON özellikleri, örnekleri takip eden bölümlerde açıklanmıştır.
 
-**Bağlı bir OData hizmeti:** Bu örnek anonim kimlik doğrulamasını kullanır. Bkz: [OData bağlı hizmet](#linked-service-properties) bölüm için farklı türde kimlik doğrulaması kullanabilirsiniz.
+**OData bağlı hizmeti:** Bu örnek, anonim kimlik doğrulamasını kullanır. Kullanabileceğiniz farklı kimlik doğrulama türleri için [OData bağlı hizmeti](#linked-service-properties) bölümüne bakın.
 
 ```json
 {
@@ -234,7 +234,7 @@ Bu örnekte kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz �
 
 **OData giriş veri kümesi:**
 
-"Dış" ayarını: "true" bildirir Data Factory hizmetinin veri kümesi dış veri fabrikasına ve veri fabrikasında bir etkinliği tarafından üretilen değil.
+"External": "true" ayarı, veri kümesinin veri fabrikasında dış olduğunu ve veri fabrikasındaki bir etkinlik tarafından üretilmediğini Data Factory hizmetine bildirir.
 
 ```json
 {
@@ -262,11 +262,11 @@ Bu örnekte kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz �
 }
 ```
 
-Belirtme **yolu** kümesinde tanımı isteğe bağlıdır.
+Veri kümesi tanımında **yolun** belirtilmesi isteğe bağlıdır.
 
 **Azure Blob çıktı veri kümesi:**
 
-Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1). Blob için klasör yolu işlenmekte olan dilimin başlangıç zamanı temel alınarak dinamik olarak değerlendirilir. Yıl, ay, gün ve saat bölümlerini başlangıç zamanı klasör yolu kullanır.
+Veriler her saat yeni bir bloba yazılır (sıklık: saat, Aralık: 1). Blob 'un klasör yolu, işlenmekte olan dilimin başlangıç zamanına göre dinamik olarak değerlendirilir. Klasör yolu başlangıç zamanının yıl, ay, gün ve saat kısımlarını kullanır.
 
 ```json
 {
@@ -324,9 +324,9 @@ Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1). Blob i�
 }
 ```
 
-**OData kaynak ve havuz Blob ile bir işlem hattındaki kopyalama etkinliği:**
+**OData kaynağını ve BLOB havuzunu içeren bir işlem hattındaki etkinliği kopyalama:**
 
-İşlem hattının giriş ve çıkış veri kümelerini kullanmak için yapılandırıldığı ve saatte bir çalışacak şekilde zamanlanmış bir kopyalama etkinliği içeriyor. JSON tanımı, işlem hattındaki **kaynak** türü ayarlandığında **RelationalSource** ve **havuz** türü ayarlandığında **BlobSink**. SQL sorgusu için belirtilen **sorgu** özelliği OData kaynak sunucudan en son (en yeni) verileri seçer.
+İşlem hattı, giriş ve çıkış veri kümelerini kullanmak üzere yapılandırılmış bir kopyalama etkinliği içerir ve her saat çalışacak şekilde zamanlanır. Ardışık düzen JSON tanımında **kaynak** türü, **relationalsource** olarak ayarlanır ve **Havuz** türü **blobsink**olarak ayarlanır. **Sorgu** özelliği IÇIN belirtilen SQL sorgusu, OData kaynağından en son (en yeni) verileri seçer.
 
 ```json
 {
@@ -374,21 +374,21 @@ Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1). Blob i�
 }
 ```
 
-Belirtme **sorgu** işlem hattında tanımı isteğe bağlıdır. **URL** Data Factory hizmetinin veri almak için kullanır: + Veri kümesi (isteğe bağlı) + (isteğe bağlı) işlem hattı sorguda belirtilen yolu (gerekli) bağlı hizmette belirtilen URL.
+İşlem hattı tanımında **sorgu** belirtme isteğe bağlıdır. Data Factory hizmetinin verileri almak için kullandığı **URL** : işlem hattının (isteğe bağlı) + sorgusunda belirtilen bağlı hizmet (gerekli) + yolunda belirtilen URL (isteğe bağlı).
 
-### <a name="type-mapping-for-odata"></a>OData için tür eşlemesi
-Belirtildiği gibi [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesi, kopyalama etkinliği, aşağıdaki 2 adımlı yaklaşım türleriyle havuz için kaynak türünden otomatik tür dönüştürmeleri gerçekleştirir:
+### <a name="type-mapping-for-odata"></a>OData için tür eşleme
+[Veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde belirtildiği gibi kopyalama etkinliği, aşağıdaki 2 adımlı yaklaşımla kaynak türlerindeki otomatik tür dönüştürmeleri, havuz türlerine uygular:
 
-1. Yerel kaynak türlerinden .NET türüne dönüştürün
-2. .NET türünden yerel havuz türüne dönüştürün
+1. Yerel kaynak türlerinden .NET türüne Dönüştür
+2. .NET türünden yerel havuz türüne Dönüştür
 
-OData veri türleri, OData veri verileri depoladığında, .NET türlerine eşlenir.
+OData veri depolarından verileri taşırken, OData veri türleri .NET türlerine eşlenir.
 
-## <a name="map-source-to-sink-columns"></a>Sütunları havuz için kaynak eşlemesi
-Kaynak veri kümesindeki sütunları havuz veri kümesi için eşleme sütunları hakkında bilgi edinmek için bkz. [Azure Data factory'de veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
+## <a name="map-source-to-sink-columns"></a>Kaynağı havuz sütunlarına eşleyin
+Kaynak veri kümesindeki sütunları havuz veri kümesindeki sütunlara eşleme hakkında bilgi edinmek için bkz. [Azure Data Factory veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
 
-## <a name="repeatable-read-from-relational-sources"></a>İlişkisel kaynaklardan tekrarlanabilir okuma
-İlişkisel veri kopyalama verileri depoladığında yinelenebilirliği istenmeyen sonuçlar önlemek için göz önünde bulundurun. Azure Data Factory'de bir dilim el ile çalıştırabilirsiniz. Bir hata oluştuğunda bir dilimi yeniden çalıştırmak için bir veri kümesi için yeniden deneme ilkesi de yapılandırabilirsiniz. Bir dilim her iki yolla yeniden çalıştırıldığında, aynı veri dilimi çalıştırılan kaç kez olursa olsun okuma emin olmanız gerekir. Bkz: [ilişkisel kaynaktan okumak Repeatable](data-factory-repeatable-copy.md#repeatable-read-from-relational-sources).
+## <a name="repeatable-read-from-relational-sources"></a>İlişkisel kaynaklardan yinelenebilir okuma
+İlişkisel veri depolarından veri kopyalarken, istenmeyen sonuçları önlemek için yinelenebilirlik aklınızda bulundurun. Azure Data Factory, bir dilimi el ile yeniden çalıştırabilirsiniz. Bir hata oluştuğunda dilimin yeniden çalıştırılması için bir veri kümesi için yeniden deneme ilkesi de yapılandırabilirsiniz. Bir dilim her iki şekilde yeniden çalıştırıldığında, bir dilimin kaç kez çalıştırıldıklarından bağımsız olarak aynı verilerin okunmasını sağlayın. Bkz. [ilişkisel kaynaklardan tekrarlanabilir okuma](data-factory-repeatable-copy.md#repeatable-read-from-relational-sources).
 
 ## <a name="performance-and-tuning"></a>Performans ve ayarlama
-Bkz: [kopyalama etkinliği performansı ve ayarlama Kılavuzu](data-factory-copy-activity-performance.md) veri taşıma (kopyalama etkinliği) Azure Data Factory ve bunu en iyi duruma getirmek için çeşitli yollar, performansı etkileyebilir anahtar Etkenler hakkında bilgi edinmek için.
+Veri taşıma (kopyalama etkinliği) performansını Azure Data Factory ve en iyileştirmek için çeşitli yollarla etkileyen temel faktörlerle ilgili bilgi edinmek için bkz. [etkinlik performansını kopyalama & ayarlama Kılavuzu](data-factory-copy-activity-performance.md) .

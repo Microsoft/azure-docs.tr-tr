@@ -1,57 +1,285 @@
 ---
-title: Azure konuk işletim sistemine uygulanan güncelleştirmelerin listesi | Microsoft Docs
-description: Konuk işletim sistemi sürümleri için uygulanan güncelleştirmelerin listesi
+title: Azure Konuk işletim sistemine uygulanan güncelleştirmelerin listesi | Microsoft Docs
+description: Konuk işletim sistemi yayınlarına uygulanan güncelleştirmelerin listesi
 services: cloud-services
 documentationcenter: na
 author: raiye
 editor: ''
 ms.assetid: d0a272a9-ed01-4f4c-a0b3-bd5e841bdd77
 ms.service: cloud-services
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 6/14/2019
+ms.date: 11/15/2019
 ms.author: raiye
-ms.openlocfilehash: f10290024f9bd46a1de4bdfa6e12f841ddd1c4ed
-ms.sourcegitcommit: 6e6813f8e5fa1f6f4661a640a49dc4c864f8a6cb
+ms.openlocfilehash: fd4936357035d8163130064bd6f0600c9d2b08bb
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67150993"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150003"
 ---
-# <a name="azure-guest-os"></a>Azure konuk işletim sistemi
-Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirmelerin Microsoft Güvenlik Yanıt Merkezi (MSRC) gösterilmektedir. Belirli bir güncelleştirmenin Konuk kullanmakta olduğunuz işletim sistemi için geçerli olup olmadığını belirlemek için bu makaleyi arayın. Güncelleştirmeler her zaman taşıyan İleri için belirli [ailesi] [ family-explain] sürümünde yapılan.
+# <a name="azure-guest-os"></a>Azure Konuk işletim sistemi
+Aşağıdaki tablolarda, Azure Konuk işletim sistemine uygulanan Microsoft Güvenlik Yanıt Merkezi (MSRC) güncelleştirmeleri gösterilmektedir. Belirli bir güncelleştirmenin kullanmakta olduğunuz Konuk işletim sistemi için geçerli olup olmadığını öğrenmek için bu makaleye arama yapın. Güncelleştirmeler her zaman üzerinde tanıtılan belirli bir [Aile][family-explain] için ileri doğru şekilde devam ederler.
 
-## <a name="june-2019-guest-os"></a>Haziran 2019 konuk işletim sistemi
+## <a name="november-2019-guest-os"></a>Kasım 2019 Konuk işletim sistemi
 
 >[!NOTE]
->Haziran konuk işletim sistemi, şu anda, otomatik güncelleştirmeler için yapılandırılmış olan bir bulut hizmeti vm'lerine da sunulacaktır. Piyasaya çıkış tamamlandığında, bu sürümü ile Azure portal ve yapılandırma dosyalarını el ile güncelleştirmeleri kullanılabilir hale getirilir. Aşağıdaki düzeltme ekleri, Haziran konuk işletim sisteminde dahil edilir. Bu liste değiştirilebilir ' dir.
+>Kasım Konuk işletim sistemi şu anda otomatik güncelleştirmeler için yapılandırılmış bulut hizmeti VM 'lerine devredilir. Dağıtım tamamlandığında, bu sürüm Azure portal ve yapılandırma dosyaları aracılığıyla el ile güncelleştirmeler için kullanılabilir hale getirilir. Aşağıdaki düzeltme ekleri Kasım Konuk işletim sistemine dahildir. Bu liste değişikliğe tabidir.
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-|  Rel 19-06   |  [4503327]  |  Windows 10 Güvenlik   |  6.8  |  11 Haziran 2019  |
-|  Rel 19-06   |  [4503267]  |  Windows 10 Güvenlik   |  5.32  |  11 Haziran 2019  |
-|  Rel 19-06   |  [4503290]  |  Windows Güvenlik   |  4.67  |  11 Haziran 2019  |
-|  Rel 19-06   |  [4503263]  |  Windows Güvenlik   |  3.74  |  11 Haziran 2019  |
-|  Rel 19-06   |  [4503269]  |  Windows Güvenlik   |  2.87  |  11 Haziran 2019  |
-|  Rel 19-06   |  [4494174]  |  Mikro kod güncelleştirme   |  6.8  |  11 Haziran 2019  |
-|  Rel 19-06   |  [4494175]  |  Mikro kod güncelleştirme   |  5.32  |  3 Haziran 2019  |
-|  Rel 19-06   |  [4503308]  |  Flash   |  3.74, 4.67, 5.32, 6.8  |  11 Haziran 2019  |
-|  Rel 19-06   |  [4503259]  |  Internet Explorer   |  2.87, 3.74, 4.67  |  13 Haziran 2019  |
-|  Yok  |  [4499164]  |  Mayıs ' 19 güvenlikle ilgili olmayan  |  2.87  |  14 Mayıs 2019  |
-|  Yok  |  [4495606]  |  Mayıs ' 19 .NET 3.5 güvenlik düzeyi  |  2.87  |  14 Mayıs 2019  |
-|  Yok  |  [4495596]  |  Mayıs ' 19 .NET 4.5 güvenlik düzeyi  |  2.87  |  20 Mayıs 2019  |
-|  Yok  |  [4499171]  |  Mayıs ' 19 güvenlikle ilgili olmayan  |  3.74  |  14 Mayıs 2019  |
-|  Yok  |  [4495602]  |  Mayıs ' 19 .NET 3.5 güvenlik düzeyi  |  3.74  |  14 Mayıs 2019  |
-|  Yok  |  [4495594]  |  Mayıs ' 19 .NET 4.x güvenlikle ilgili olmayan  |  4.67  |  14 Mayıs 2019  |
-|  Yok  |  [4499151]  |  Mayıs ' 19 güvenlikle ilgili olmayan  |  4.67  |  14 Mayıs 2019  |
-|  Yok  |  [4495608]  |  Mayıs ' 19 .NET 3.5 güvenlik düzeyi  |  4.67  |  14 Mayıs 2019  |
-|  Yok  |  [4495592]  |  Mayıs ' 19 .NET 4.5.2'nin güvenlik düzeyi  |  4.67  |  14 Mayıs 2019  |
-|  Yok  |  [4495610]  |  Mayıs ' 19 .NET 4.8 toplu  |  6.8  |  14 Mayıs 2019  |
-|  Yok  |  [4495618]  |  Mayıs ' 19 .NET 4.8 toplu  |  6.8  |  14 Mayıs 2019  |
-|  Yok  |  [4501226]  |  Fas ve Filistin hedef saat dilimi güncelleştirmeleri  |  2.87, 3.74, 4.67  |  23 Mayıs 2019  |
-|  Yok  |  [4490128]  |  Sao Tome ve Principe ve Qyzylorda hedef saat dilimi güncelleştirmeleri  |  2.87, 3.74, 4.67  |  17 Nisan 2019  |
+|  Rel 19-11   |  [4525106]  |  Internet Explorer   |  2,92  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4525233]  |  Windows güvenliği   |  2,92  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4525106]  |  Internet Explorer   |  3,79  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4525253]  |  Windows güvenliği   |  3,79  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4525106]  |  Internet Explorer   |  4,72  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4525250]  |  Windows güvenliği   |  4,72  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4525236]  |  En son birikimli güncelleştirme   |  5,37  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4523205]  |  En son birikimli güncelleştirme   |  6,13  |  12 Kasım 2019  |
+|  Rel 19-11   |  [4519976]  |  Güvenlik dışı   |  2,92  |  8 Ekim 2019  |
+|  Rel 19-11   |  [4520007]  |  Güvenlik dışı   |  3,79  |  8 Ekim 2019  |
+|  Rel 19-11   |  [4521857]  |  ServicingStackUpdate   |  3,79  |  8 Ekim 2019  |
+|  Rel 19-11   |  [4520005]  |  Güvenlik dışı   |  4,72  |  8 Ekim 2019  |
+|  Rel 19-11   |  [4521864]  |  ServicingStackUpdate   |  4,72  |  8 Ekim 2019  |
+|  Rel 19-11   |  [4521858]  |  ServicingStackUpdate   |  5,37  |  8 Ekim 2019  |
+|  Rel 19-11   |  [4521862]  |  ServicingStackUpdate   |  6,13  |  8 Ekim 2019  |
+
+[4525106]: https://support.microsoft.com/kb/4525106
+[4525233]: https://support.microsoft.com/kb/4525233
+[4525106]: https://support.microsoft.com/kb/4525106
+[4525253]: https://support.microsoft.com/kb/4525253
+[4525106]: https://support.microsoft.com/kb/4525106
+[4525250]: https://support.microsoft.com/kb/4525250
+[4525236]: https://support.microsoft.com/kb/4525236
+[4523205]: https://support.microsoft.com/kb/4523205
+[4519976]: https://support.microsoft.com/kb/4519976
+[4520007]: https://support.microsoft.com/kb/4520007
+[4521857]: https://support.microsoft.com/kb/4521857
+[4520005]: https://support.microsoft.com/kb/4520005
+[4521864]: https://support.microsoft.com/kb/4521864
+[4521858]: https://support.microsoft.com/kb/4521858
+[4521862]: https://support.microsoft.com/kb/4521862
+
+
+## <a name="october-2019-guest-os"></a>Ekim 2019 Konuk işletim sistemi
+
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
+| --- | --- | --- | --- | --- |
+|  Rel 19-10   |  [4520003]  |  Windows güvenliği   |  [2,91]  |  8 Ekim 2019  |
+|  Rel 19-10   |  [4519985]  |  Windows güvenliği   |  [3,78]  |  8 Ekim 2019  |
+|  Rel 19-10   |  [4519990]  |  Windows güvenliği   |  [4,71]  |  8 Ekim 2019  |
+|  Rel 19-10   |  [4519998]  |  En son birikimli güncelleştirme   |  [5,36]  |  8 Ekim 2019  |
+|  Rel 19-10   |  [4519338]  |  En son birikimli güncelleştirme   |  [6,12]  |  8 Ekim 2019  |
+|  Rel 19-10   |  [4519974]  |  Internet Explorer   |  [2,91], [3,78], [4,71]  |  8 Ekim 2019  |
+|  Rel 19-10   |  [4516065]  |  Güvenlik dışı   |  [2,91]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4516655]  |  SSU   |  [2,91]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4516055]  |  Güvenlik dışı   |  [3,78]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4512939]  |  SSU   |  [3,78]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4514370]  |  .NET Framework 3,5   |  [3,78]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4514368]  |  .NET Framework 4.5.2   |  [3,78]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4516067]  |  Güvenlik dışı   |  [4,71]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4512938]  |  SSU   |  [4,71]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4514371]  |  .NET Framework 3,5   |  [4,71]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4514367]  |  .NET Framework 4.5.2   |  [4,71]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4512574]  |  SSU   |  [5,36]  |  10 Eylül 2019  |
+|  Rel 19-10   |  [4512577]  |  SSU   |  [6,12]  |  10 Eylül 2019  |
+
+[4520003]: https://support.microsoft.com/kb/4520003
+[4519985]: https://support.microsoft.com/kb/4519985
+[4519990]: https://support.microsoft.com/kb/4519990
+[4519998]: https://support.microsoft.com/kb/4519998
+[4519338]: https://support.microsoft.com/kb/4519338
+[4519974]: https://support.microsoft.com/kb/4519974
+[4516065]: https://support.microsoft.com/kb/4516065
+[4516655]: https://support.microsoft.com/kb/4516655
+[4516055]: https://support.microsoft.com/kb/4516055
+[4512939]: https://support.microsoft.com/kb/4512939
+[4514370]: https://support.microsoft.com/kb/4514370
+[4514368]: https://support.microsoft.com/kb/4514368
+[4516067]: https://support.microsoft.com/kb/4516067
+[4512938]: https://support.microsoft.com/kb/4512938
+[4514371]: https://support.microsoft.com/kb/4514371
+[4514367]: https://support.microsoft.com/kb/4514367
+[4512574]: https://support.microsoft.com/kb/4512574
+[4512577]: https://support.microsoft.com/kb/4512577
+
+[6,12]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-6-releases
+[5,36]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-5-releases
+[4,71]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-4-releases
+[3,78]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-3-releases
+[2,91]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-2-releases
+
+
+## <a name="september-2019-guest-os"></a>Eylül 2019 Konuk işletim sistemi
+
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
+| --- | --- | --- | --- | --- |
+|  Rel 19-09   |  [4516046]  |  Internet Explorer   |  [2,90], [3,77], [4,70]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4516115]  |  Flash   |  [2,90], [3,77], [4,70], [5,35], [6,11]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4512578]  |  En son birikimli güncelleştirme   |  [6,11]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4514366]  |  .NET Framework 3,5 ve 4.7.2   |  [6,11]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4516044]  |  En son birikimli güncelleştirme   |  [5,35]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4516064]  |  Windows güvenliği   |  [4,70]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4514350]  |  .NET Framework 3.5   |  [4,70]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4514341]  |  .NET Framework 4.5.2   |  [4,70]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4516062]  |  Windows güvenliği   |  [3,77]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4514349]  |  .NET Framework 3.5   |  [3,77]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4514342]  |  .NET Framework 4.5.2   |  [3,77]  |  10 Eylül 2019  |
+|  Rel 19-09   |  [4516033]  |  Windows güvenliği   |  [2,90]  |  12 Eylül 2019  |
+|  Rel 19-09   |  [4512488]  |  Güvenlik dışı   |  [4,70]  |  13 Ağu, 2019  |
+|  Rel 19-09   |  [4512518]  |  Güvenlik dışı   |  [3,77]  |  13 Ağu, 2019  |
+|  Rel 19-09   |  [4512506]  |  Güvenlik dışı   |  [2,90]  |  13 Ağu, 2019  |
+
+[4516046]: https://support.microsoft.com/kb/4516046
+[4516115]: https://support.microsoft.com/kb/4516115
+[4512578]: https://support.microsoft.com/kb/4512578
+[4514366]: https://support.microsoft.com/kb/4514366
+[4516044]: https://support.microsoft.com/kb/4516044
+[4516064]: https://support.microsoft.com/kb/4516064
+[4514350]: https://support.microsoft.com/kb/4514350
+[4514341]: https://support.microsoft.com/kb/4514341
+[4516062]: https://support.microsoft.com/kb/4516062
+[4514349]: https://support.microsoft.com/kb/4514349
+[4514342]: https://support.microsoft.com/kb/4514342
+[4516033]: https://support.microsoft.com/kb/4516033
+[4512488]: https://support.microsoft.com/kb/4512488
+[4512518]: https://support.microsoft.com/kb/4512518
+[4512506]: https://support.microsoft.com/kb/4512506
+[6,11]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-6-releases
+[5,35]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-5-releases
+[4,70]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-4-releases
+[3,77]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-3-releases
+[2,90]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-2-releases
+
+
+## <a name="august-2019-guest-os"></a>Ağustos 2019 Konuk işletim sistemi
+
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
+| --- | --- | --- | --- | --- |
+|  Rel 19-08   |  [4512482]  |  Windows güvenliği   |  [3,76]  |  13 Ağu, 2019  |
+|  Rel 19-08   |  [4494175]  |  Mikro kod güncelleştirmesi   |  [5,34]  |  18 Haz 2019  |
+|  Rel 19-08   |  [4512517]  |  En son birikimli güncelleştirme   |  [5,34]  |  13 Ağu, 2019  |
+|  Rel 19-08   |  [4494174]  |  Mikro kod güncelleştirmesi   |  [6,1]  |  18 Haz 2019  |
+|  Rel 19-08   |  [4511553]  |  En son birikimli güncelleştirme   |  [6,1]  |  13 Ağu, 2019  |
+|  Rel 19-08   |  [4512486]  |  Windows güvenliği   |  [2,89]  |  13 Ağu, 2019  |
+|  Rel 19-08   |  [4512489]  |  Windows güvenliği   |  [4,69]  |  13 Ağu, 2019  |
+|  Rel 19-08   |  [4511872]  |  Internet Explorer    |  [2,89], [3,76], [4,69]  |  15 Ağu, 2019  |
+|  Rel 19-08   |  [4507449]  |  Güvenlik dışı   |  [2,89]  |  9 Temmuz 2019  |
+|  Rel 19-08   |  [4507000]  |  .NET 4.5.2 güvenlik dışı   |  [3,76]  |  12 Ağu, 2019  |
+|  Rel 19-08   |  [4507002]  |  .NET 3,5 güvenlik dışı   |  [3,76]  |  12 Ağu, 2019  |
+|  Rel 19-08   |  [4507462]  |  Güvenlik dışı   |  [3,76]  |  9 Temmuz 2019  |
+|  Rel 19-08   |  [4506999]  |  .NET 4.5.2 güvenlik dışı    |  [4,69]  |  12 Ağu, 2019  |
+|  Rel 19-08   |  [4507005]  |  .NET 3,5 güvenlik dışı    |  [4,69]  |  12 Ağu, 2019  |
+|  Rel 19-08   |  [4507448]  |  Güvenlik dışı   |  [4,69]  |  9 Temmuz 2019  |
+|  Rel 19-08   |  [4509091]  |  Hizmet yığını güncelleştirmesi   |  [5,34]  |  9 Temmuz 2019  |
+|  Rel 19-08   |  [4509095]  |  Hizmet yığını güncelleştirmesi   |  [6,1]  |  9 Temmuz 2019  |
+|  Rel 19-08   |  [4512937]  |  Hizmet yığını güncelleştirmesi   |  [6,1]  |  29 Temmuz 2019  |
+|  Rel 19-08   |  [4507004]  |  .NET 3.5.1 güvenlik dışı    |  [2,89]  |  12 Ağu, 2019  |
+|  Rel 19-08   |  [4504418]  |  Hizmet yığını güncelleştirmesi   |  [3,76], [4,69]  |  11 Temmuz 2019  |
+|  Rel 19-08   |  [4507001]  |  .NET 4.5.2 güvenlik dışı   |  [2,89]  |  12 Ağu, 2019  |
+|  Rel 19-08   |  [4507704]  |  Brezilya ve Fas için Windows 'ta DST ayarı   |  [2,89], [3,76], [4,69], [5,34]  |  13 Ağu, 2019  |
+
+[4512482]: https://support.microsoft.com/kb/4512482
+[4494175]: https://support.microsoft.com/kb/4494175
+[4512517]: https://support.microsoft.com/kb/4512517
+[4494174]: https://support.microsoft.com/kb/4494174
+[4511553]: https://support.microsoft.com/kb/4511553
+[4512486]: https://support.microsoft.com/kb/4512486
+[4512489]: https://support.microsoft.com/kb/4512489
+[4511872]: https://support.microsoft.com/kb/4511872
+[4507449]: https://support.microsoft.com/kb/4507449
+[4507000]: https://support.microsoft.com/kb/4507000
+[4507002]: https://support.microsoft.com/kb/4507002
+[4507462]: https://support.microsoft.com/kb/4507462
+[4506999]: https://support.microsoft.com/kb/4506999
+[4507005]: https://support.microsoft.com/kb/4507005
+[4507448]: https://support.microsoft.com/kb/4507448
+[4509091]: https://support.microsoft.com/kb/4509091
+[4509095]: https://support.microsoft.com/kb/4509095
+[4512937]: https://support.microsoft.com/kb/4512937
+[4507004]: https://support.microsoft.com/kb/4507004
+[4504418]: https://support.microsoft.com/kb/4504418
+[4507001]: https://support.microsoft.com/kb/4507001
+[4507704]: https://support.microsoft.com/kb/4507704
+
+[6,1]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-6-releases
+[5,34]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-5-releases
+[4,69]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-4-releases
+[3,76]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-3-releases
+[2,89]: https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-2-releases
+
+
+## <a name="july-2019-guest-os"></a>Temmuz 2019 Konuk işletim sistemi
+
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
+| --- | --- | --- | --- | --- |
+|  Rel 19-07   |  [4507434]  |  Internet Explorer   |  2,88, 3,75, 4,68  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4506966]  |  .NET 4.5.2 güvenliği   |  2,88  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4506976]  |  .NET 3.5.1 güvenliği   |  2,88  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4507456]  |  Windows güvenliği   |  2,88  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4506965]  |  .NET 4.5.2 güvenliği   |  3.75  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4506974]  |  .NET 3,5 güvenliği   |  3.75  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4507464]  |  Windows güvenliği   |  3.75  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4506964]  |  .NET 4.5.2 güvenliği   |  4,68  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4506977]  |  .NET 3,5 güvenliği   |  4,68  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4507457]  |  Windows güvenliği   |  4,68  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4507460]  |  Windows güvenliği   |  5.33  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4506998]  |  .NET 3,5 & 4.7.2 güvenliği   |  6.9  |  9 Temmuz 2019  |
+|  Rel 19-07   |  [4507469]  |  Windows güvenliği   |  6.9  |  9 Temmuz 2019  |
+|  Yok  |  [4503537]  |  Haziran ' 19 hizmet yığını güncelleştirmesi (sunucu 2016)   |  5.33  |  14 Mayıs 2019  |
+|  Yok  |  [4504369]  |  Haziran ' 19 hizmet yığını güncelleştirmesi (sunucu 2019)   |  6.9  |  14 Mayıs 2019  |
+|  Yok  |  [4503292]  |  Haziran ' 19 güvenlik dışı (sunucu 2008 R2)   |  2,88  |  20 Mayıs 2019  |
+|  Yok  |  [4503285]  |  Haziran ' 19 güvenlik dışı (sunucu 2012)   |  3.75  |  14 Mayıs 2019  |
+|  Yok  |  [4503276]  |  Haziran ' 19 güvenlik dışı (sunucu 2012 R2)   |  4,68  |  14 Mayıs 2019  |
+
+[4507434]: https://support.microsoft.com/kb/4507434
+[4506621]: https://support.microsoft.com/kb/4506621
+[4506966]: https://support.microsoft.com/kb/4506966
+[4506976]: https://support.microsoft.com/kb/4506976
+[4507456]: https://support.microsoft.com/kb/4507456
+[4506965]: https://support.microsoft.com/kb/4506965
+[4506974]: https://support.microsoft.com/kb/4506974
+[4507464]: https://support.microsoft.com/kb/4507464
+[4506964]: https://support.microsoft.com/kb/4506964
+[4506977]: https://support.microsoft.com/kb/4506977
+[4507457]: https://support.microsoft.com/kb/4507457
+[4507460]: https://support.microsoft.com/kb/4507460
+[4506998]: https://support.microsoft.com/kb/4506998
+[4507469]: https://support.microsoft.com/kb/4507469
+[4503537]: https://support.microsoft.com/kb/4503537
+[4504369]: https://support.microsoft.com/kb/4504369
+[4503292]: https://support.microsoft.com/kb/4503292
+[4503285]: https://support.microsoft.com/kb/4503285
+[4503276]: https://support.microsoft.com/kb/4503276
+
+
+## <a name="june-2019-guest-os"></a>Haziran 2019 Konuk işletim sistemi
+
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
+| --- | --- | --- | --- | --- |
+|  Rel 19-06   |  [4503327]  |  Windows 10 güvenliği   |  6.8  |  11 Haziran 2019  |
+|  Rel 19-06   |  [4503267]  |  Windows 10 güvenliği   |  5,32  |  11 Haziran 2019  |
+|  Rel 19-06   |  [4503290]  |  Windows güvenliği   |  4,67  |  11 Haziran 2019  |
+|  Rel 19-06   |  [4503263]  |  Windows güvenliği   |  3,74  |  11 Haziran 2019  |
+|  Rel 19-06   |  [4503269]  |  Windows güvenliği   |  2,87  |  11 Haziran 2019  |
+|  Rel 19-06   |  [4494174]  |  Mikro kod güncelleştirmesi   |  6.8  |  11 Haziran 2019  |
+|  Rel 19-06   |  [4494175]  |  Mikro kod güncelleştirmesi   |  5,32  |  3 Haziran 2019  |
+|  Rel 19-06   |  [4503308]  |  Flash   |  3,74, 4,67, 5,32, 6,8  |  11 Haziran 2019  |
+|  Rel 19-06   |  [4503259]  |  Internet Explorer   |  2,87, 3,74, 4,67  |  13 Haziran 2019  |
+|  Yok  |  [4499164]  |  Mayıs ' 19 güvenlik dışı  |  2,87  |  14 Mayıs 2019  |
+|  Yok  |  [4495606]  |  Mayıs ' 19 .NET 3,5 güvenlik dışı  |  2,87  |  14 Mayıs 2019  |
+|  Yok  |  [4495596]  |  Mayıs ' 19 .NET 4,5 güvenlik dışı  |  2,87  |  20 Mayıs 2019  |
+|  Yok  |  [4499171]  |  Mayıs ' 19 güvenlik dışı  |  3,74  |  14 Mayıs 2019  |
+|  Yok  |  [4495602]  |  Mayıs ' 19 .NET 3,5 güvenlik dışı  |  3,74  |  14 Mayıs 2019  |
+|  Yok  |  [4495594]  |  Mayıs ' 19 .NET 4. x güvenlik dışı  |  4,67  |  14 Mayıs 2019  |
+|  Yok  |  [4499151]  |  Mayıs ' 19 güvenlik dışı  |  4,67  |  14 Mayıs 2019  |
+|  Yok  |  [4495608]  |  Mayıs ' 19 .NET 3,5 güvenlik dışı  |  4,67  |  14 Mayıs 2019  |
+|  Yok  |  [4495592]  |  Mayıs ' 19 .NET 4.5.2 güvenlik dışı  |  4,67  |  14 Mayıs 2019  |
+|  Yok  |  [4495610]  |  Mayıs ' 19 .NET 4,8 birikimli  |  6.8  |  14 Mayıs 2019  |
+|  Yok  |  [4495618]  |  Mayıs ' 19 .NET 4,8 birikimli  |  6.8  |  14 Mayıs 2019  |
+|  Yok  |  [4501226]  |  Fas ve Filistin Yönetimi için DST saat dilimi güncelleştirmeleri  |  2,87, 3,74, 4,67  |  23 Mayıs 2019  |
+|  Yok  |  [4490128]  |  Sao Tome ve Principe ve Qyızylorda için DST saat dilimi güncelleştirmeleri  |  2,87, 3,74, 4,67  |  17 Nisan 2019  |
 
 [4503327]: https://support.microsoft.com/kb/4503327
 [4503267]: https://support.microsoft.com/kb/4503267
@@ -76,30 +304,30 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4501226]: https://support.microsoft.com/kb/KB4501226
 [4490128]: https://support.microsoft.com/kb/KB4490128
 
-## <a name="may-2019-guest-os"></a>Mayıs 2019 konuk işletim sistemi
+## <a name="may-2019-guest-os"></a>Mayıs 2019 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-|  Rel 19-05   |  [4498206]  |  IE toplaması olabilir   |  2.86, 3.73, 4.66  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4505050]  |  IE toplaması olabilir   |  2.86, 3.73, 4.66  |  18 Mayıs 2019  |
-|  Rel 19-05   |  [4497932]  |  Güncelleştirme Flash   |  3.73, 4.66, 5.31  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4499175]  |  Güvenlik dökümü olabilir   |  2.86  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4495612]  |  Güvenlik dökümü .NET 3.5 olabilir   |  2.86  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4495593]  |  Güvenlik dökümü .NET 4.5.2'nin olabilir   |  2.86  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4499158]  |  Güvenlik dökümü olabilir   |  3.73  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4495607]  |  Güvenlik dökümü .NET 3.5 olabilir   |  3.73  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4495591]  |  Güvenlik dökümü .NET 4.5.2'nin olabilir   |  3.73  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4492872]  |  IE dökümü   |  3.73  |  16 Nisan 2019  |
-|  Rel 19-05   |  [4499165]  |  Mart güvenlik dökümü   |  4.66  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4495615]  |  Güvenlik dökümü .NET 3.5 olabilir   |  4.66  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4495589]  |  Güvenlik dökümü .NET 4.5.2'nin olabilir   |  4.66  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4498947]  |  SSU olabilir   |  5.31  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4494175]  |  Mikro kod güncelleştirme olabilir   |  5.31  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4505052]  |  Güvenlik dökümü olabilir   |  5.31  |  19 Mayıs 2019  |
-|  Rel 19-05   |  [4499728]  |  SSU olabilir   |  6.7  |  19 Mayıs 2019  |
-|  Rel 19-05   |  [4505056]  |  Güvenlik dökümü olabilir   |  6.7  |  19 Mayıs 2019  |
-|  Rel 19-05   |  [4494174]  |  Mikro kod güncelleştirme olabilir   |  6.7  |  14 Mayıs 2019  |
-|  Rel 19-05   |  [4495590]  |  Güvenlik dökümü .NET olabilir   |  6.7  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4498206]  |  IE toplu Mayıs   |  2,86, 3,73, 4,66  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4505050]  |  IE toplu Mayıs   |  2,86, 3,73, 4,66  |  18 Mayıs 2019  |
+|  Rel 19-05   |  [4497932]  |  Flash Güncelleştirmesi Mayıs   |  3,73, 4,66, 5,31  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4499175]  |  Güvenlik Toplaması Mayıs   |  2,86  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4495612]  |  Güvenlik Toplaması .NET 3,5 Mayıs   |  2,86  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4495593]  |  Güvenlik Toplaması .NET 4.5.2 Mayıs   |  2,86  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4499158]  |  Güvenlik Toplaması Mayıs   |  3.73  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4495607]  |  Güvenlik Toplaması .NET 3,5 Mayıs   |  3.73  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4495591]  |  Güvenlik Toplaması .NET 4.5.2 Mayıs   |  3.73  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4492872]  |  IE paketi   |  3.73  |  16 Nisan 2019  |
+|  Rel 19-05   |  [4499165]  |  Mart Güvenlik Toplaması   |  4,66  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4495615]  |  Güvenlik Toplaması .NET 3,5 Mayıs   |  4,66  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4495589]  |  Güvenlik Toplaması .NET 4.5.2 Mayıs   |  4,66  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4498947]  |  SSU Mayıs   |  5,31  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4494175]  |  Mikro kod güncelleştirmesi Mayıs   |  5,31  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4505052]  |  Güvenlik Toplaması Mayıs   |  5,31  |  19 Mayıs 2019  |
+|  Rel 19-05   |  [4499728]  |  SSU Mayıs   |  6.7  |  19 Mayıs 2019  |
+|  Rel 19-05   |  [4505056]  |  Güvenlik Toplaması Mayıs   |  6.7  |  19 Mayıs 2019  |
+|  Rel 19-05   |  [4494174]  |  Mikro kod güncelleştirmesi Mayıs   |  6.7  |  14 Mayıs 2019  |
+|  Rel 19-05   |  [4495590]  |  Güvenlik Toplaması .NET Mayıs   |  6.7  |  14 Mayıs 2019  |
 
 [4498206]: https://support.microsoft.com/kb/4498206
 [4505050]: https://support.microsoft.com/kb/4505050
@@ -123,22 +351,22 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4495590]: https://support.microsoft.com/kb/4495590
 
 
-## <a name="april-2019-guest-os"></a>Nisan 2019 konuk işletim sistemi
+## <a name="april-2019-guest-os"></a>Nisan 2019 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 19-04 | [4493509] | Windows 10 Güvenlik | 6.6 | 9 Nisan 2019 |
-| Rel 19-04 | [4493470] | Windows 10 Güvenlik | 5.30 | 9 Nisan 2019 |
-| Rel 19-04 | [4493467] | Windows Güvenlik | 4.65 | 9 Nisan 2019 |
-| Rel 19-04 | [4493450] | Windows Güvenlik | 3.72 | 9 Nisan 2019 |
-| Rel 19-04 | [4493448] | Windows Güvenlik | 2.85 | 9 Nisan 2019 |
-| Rel 19-04 | [4493478] | Flash | 3.72, 4.65, 5.30, 6.6 | 9 Nisan 2019 |
-| Rel 19-04 | [4493435] | Internet Explorer | 2.85, 3.72, 4.65 | 9 Nisan 2019 |
-| Rel 19-04 | [4490628] | Hizmet yığını güncelleştirmesi | 2.85 | 12 Mart 2019 |
-| Rel 19-04 | [4474419] | SHA2 desteği | 2.85 | 12 Mart 2019 |
-| Rel 19-04 | [4489878] | Mart güvenlikle ilgili olmayan toplaması | 2.85 | 12 Mart 2019 |
-| Rel 19-04 | [4489891] | Mart güvenlikle ilgili olmayan toplaması | 3.72 | 12 Mart 2019 |
-| Rel 19-04 | [4489881] | Mart güvenlikle ilgili olmayan toplaması | 4.65 | 12 Mart 2019 |
+| Rel 19-04 | [4493509] | Windows 10 güvenliği | 6.6 | 9 Nisan 2019 |
+| Rel 19-04 | [4493470] | Windows 10 güvenliği | 5,30 | 9 Nisan 2019 |
+| Rel 19-04 | [4493467] | Windows güvenliği | 4,65 | 9 Nisan 2019 |
+| Rel 19-04 | [4493450] | Windows güvenliği | 3,72 | 9 Nisan 2019 |
+| Rel 19-04 | [4493448] | Windows güvenliği | 2,85 | 9 Nisan 2019 |
+| Rel 19-04 | [4493478] | Flash | 3,72, 4,65, 5,30, 6,6 | 9 Nisan 2019 |
+| Rel 19-04 | [4493435] | Internet Explorer | 2,85, 3,72, 4,65 | 9 Nisan 2019 |
+| Rel 19-04 | [4490628] | Hizmet yığını güncelleştirmesi | 2,85 | 12 Mart 2019 |
+| Rel 19-04 | [4474419] | SHA2 desteği | 2,85 | 12 Mart 2019 |
+| Rel 19-04 | [4489878] | Mart güvenlik dışı toplaması | 2,85 | 12 Mart 2019 |
+| Rel 19-04 | [4489891] | Mart güvenlik dışı toplaması | 3,72 | 12 Mart 2019 |
+| Rel 19-04 | [4489881] | Mart güvenlik dışı toplaması | 4,65 | 12 Mart 2019 |
 
 [4493509]: https://support.microsoft.com/kb/4493509
 [4493470]: https://support.microsoft.com/kb/4493470
@@ -153,28 +381,28 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4489891]: https://support.microsoft.com/kb/KB4489891
 [4489881]: https://support.microsoft.com/kb/KB4489881
 
-## <a name="march-2019-guest-os"></a>Mart 2019 konuk işletim sistemi
+## <a name="march-2019-guest-os"></a>Mart 2019 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 19-03 | [4489873] | Internet Explorer | 2.84, 3.71, 4.64 | 12 Mart 2019 |
-| Rel 19-03 | [4489907] | Flash | 3.71, 4.64, 5.29, 6.5 | 12 Mart 2019 |
-| Rel 19-03 | [4489885] | Windows Güvenlik | 2.84 | 12 Mart 2019 |
-| Rel 19-03 | [4489884] | Windows Güvenlik | 3.71 | 12 Mart 2019 |
-| Rel 19-03 | [4489883] | Windows Güvenlik | 4.64 | 12 Mart 2019 |
-| Rel 19-03 | [4489882] | Windows 10 Güvenlik | 5.29 | 12 Mart 2019 |
-| Rel 19-03 | [4489899] | Windows 10 Güvenlik | 6.5 | 12 Mart 2019 |
-| Rel 19-03 | [4486563] | Şubat güvenlikle dökümü | 2.84 | 12 Şubat 2019 |
-| Rel 19-03 | [4483458] | Şubat güvenlikle paketi .NET 3.x | 2.84 | 12 Şubat 2019 |
-| Rel 19-03 | [4483455] | Şubat güvenlikle paketi .NET 4.x | 2.84 | 12 Şubat 2019 |
-| Rel 19-03 | [4487025] | Şubat güvenlikle dökümü | 3.71 | 12 Şubat 2019 |
-| Rel 19-03 | [4483456] | Şubat güvenlikle paketi .NET 3.x | 3.71 | 12 Şubat 2019 |
-| Rel 19-03 | [4483454] | Şubat güvenlikle paketi .NET 4.x | 3.71 | 12 Şubat 2019 |
-| Rel 19-03 | [4487000] | Şubat güvenlikle dökümü | 4.64 | 12 Şubat 2019 |
-| Rel 19-03 | [4483459] | Şubat güvenlikle paketi .NET 3.x | 4.64 | 12 Şubat 2019 |
-| Rel 19-03 | [4483453] | Şubat güvenlikle paketi .NET 4.x | 4.64 | 12 Şubat 2019 |
-| Rel 19-03 | [4485447] | Şubat hizmet yığını güncelleştirmesi | 5.29 | 12 Şubat 2019 |
-| Rel 19-03 | [4486459] | Saat dilimi güncelleştirme | 2.84, 3.71, 4.64 | 12 Şubat 2019 |
+| Rel 19-03 | [4489873] | Internet Explorer | 2,84, 3,71, 4,64 | 12 Mart 2019 |
+| Rel 19-03 | [4489907] | Flash | 3,71, 4,64, 5,29, 6,5 | 12 Mart 2019 |
+| Rel 19-03 | [4489885] | Windows güvenliği | 2,84 | 12 Mart 2019 |
+| Rel 19-03 | [4489884] | Windows güvenliği | 3,71 | 12 Mart 2019 |
+| Rel 19-03 | [4489883] | Windows güvenliği | 4,64 | 12 Mart 2019 |
+| Rel 19-03 | [4489882] | Windows 10 güvenliği | 5,29 | 12 Mart 2019 |
+| Rel 19-03 | [4489899] | Windows 10 güvenliği | 6.5 | 12 Mart 2019 |
+| Rel 19-03 | [4486563] | Şubat güvenlik dışı toplu | 2,84 | 12 Şubat 2019 |
+| Rel 19-03 | [4483458] | Şubat güvenlik dışı toplu .NET 3. x | 2,84 | 12 Şubat 2019 |
+| Rel 19-03 | [4483455] | Şubat güvenlik dışı toplu .NET 4. x | 2,84 | 12 Şubat 2019 |
+| Rel 19-03 | [4487025] | Şubat güvenlik dışı toplu | 3,71 | 12 Şubat 2019 |
+| Rel 19-03 | [4483456] | Şubat güvenlik dışı toplu .NET 3. x | 3,71 | 12 Şubat 2019 |
+| Rel 19-03 | [4483454] | Şubat güvenlik dışı toplu .NET 4. x | 3,71 | 12 Şubat 2019 |
+| Rel 19-03 | [4487000] | Şubat güvenlik dışı toplu | 4,64 | 12 Şubat 2019 |
+| Rel 19-03 | [4483459] | Şubat güvenlik dışı toplu .NET 3. x | 4,64 | 12 Şubat 2019 |
+| Rel 19-03 | [4483453] | Şubat güvenlik dışı toplu .NET 4. x | 4,64 | 12 Şubat 2019 |
+| Rel 19-03 | [4485447] | Şubat hizmet yığını güncelleştirmesi | 5,29 | 12 Şubat 2019 |
+| Rel 19-03 | [4486459] | Saat dilimi güncelleştirmesi | 2,84, 3,71, 4,64 | 12 Şubat 2019 |
 
 [4489873]: https://support.microsoft.com/kb/4489873
 [4489907]: https://support.microsoft.com/kb/4489907
@@ -195,33 +423,33 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4485447]: https://support.microsoft.com/kb/4485447
 [4486459]: https://support.microsoft.com/kb/4486459
 
-## <a name="february-2019-guest-os"></a>Şubat 2019 konuk işletim sistemi
+## <a name="february-2019-guest-os"></a>Şubat 2019 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 19-02 | [4486474] | Internet Explorer | 2.83, 3.70, 4.63 | 12 Şubat 2019 |
-| Rel 19-02 | [4487038] | Flash | 3.70, 4.63, 5.28, 6.4 | 12 Şubat 2019 |
-| Rel 19-02 | [4486564] | Windows Güvenlik | 2.83 | 12 Şubat 2019 |
-| Rel 19-02 | [4483483] | .NET 3.5.1 güvenlik | 2.83 | 12 Şubat 2019 |
-| Rel 19-02 | [4483474] | .NET 4.5.2'nin güvenlik | 2.83 | 12 Şubat 2019 |
-| Rel 19-02 | [4486993] | Windows Güvenlik | 3.70 | 12 Şubat 2019 |
-| Rel 19-02 | [4483481] | .NET 3.5 güvenlik | 3.70 | 12 Şubat 2019 |
-| Rel 19-02 | [4483473] | .NET 4.5.2'nin güvenlik | 3.70 | 12 Şubat 2019 |
-| Rel 19-02 | [4487028] | Windows Güvenlik | 4.63 | 12 Şubat 2019 |
-| Rel 19-02 | [4483484] | .NET 3.5 güvenlik | 4.63 | 12 Şubat 2019 |
-| Rel 19-02 | [4483472] | .NET 4.5.2'nin güvenlik | 4.63 | 12 Şubat 2019 |
-| Rel 19-02 | [4487026] | Windows Güvenlik | 5,28 | 12 Şubat 2019 |
-| Rel 19-02 | [4487044] | Windows Güvenlik | 6.4 | 12 Şubat 2019 |
-| Rel 19-02 | [4483452] | .NET 3.5, 4.7.2 güvenlik | 6.4 | 12 Şubat 2019 |
-| Yok | [4480970] | Ocak güvenlikle dökümü | 2.83 | 8 Ocak 2019 |
-| Yok | [4483483] | Ocak güvenlikle paketi .NET 3.5.1  | 2.83 | 8 Ocak 2019 |
-| Yok | [4480059] | Ocak güvenlikle paketi .NET 4.5.2'nin  | 2.83 | 8 Ocak 2019 |
-| Yok | [4480975] | Ocak güvenlikle dökümü | 3.70 | 8 Ocak 2019 |
-| Yok | [4480061] | Ocak güvenlikle paketi .NET 3.5 | 3.70 | 8 Ocak 2019 |
-| Yok | [4480058] | Ocak güvenlikle paketi .NET 4.5.2'nin | 3.70 | 8 Ocak 2019 |
-| Yok | [4480963] | Ocak güvenlikle dökümü | 4.63 | 8 Ocak 2019 |
-| Yok | [4480064] | Ocak güvenlikle paketi .NET 3.5 | 4.63 | 8 Ocak 2019 |
-| Yok | [4480057] | Ocak güvenlikle paketi .NET 4.5.2'nin | 4.63 | 8 Ocak 2019 |
+| Rel 19-02 | [4486474] | Internet Explorer | 2,83, 3,70, 4,63 | 12 Şubat 2019 |
+| Rel 19-02 | [4487038] | Flash | 3,70, 4,63, 5,28, 6,4 | 12 Şubat 2019 |
+| Rel 19-02 | [4486564] | Windows güvenliği | 2,83 | 12 Şubat 2019 |
+| Rel 19-02 | [4483483] | .NET 3.5.1 güvenliği | 2,83 | 12 Şubat 2019 |
+| Rel 19-02 | [4483474] | .NET 4.5.2 güvenliği | 2,83 | 12 Şubat 2019 |
+| Rel 19-02 | [4486993] | Windows güvenliği | 3,70 | 12 Şubat 2019 |
+| Rel 19-02 | [4483481] | .NET 3,5 güvenliği | 3,70 | 12 Şubat 2019 |
+| Rel 19-02 | [4483473] | .NET 4.5.2 güvenliği | 3,70 | 12 Şubat 2019 |
+| Rel 19-02 | [4487028] | Windows güvenliği | 4,63 | 12 Şubat 2019 |
+| Rel 19-02 | [4483484] | .NET 3,5 güvenliği | 4,63 | 12 Şubat 2019 |
+| Rel 19-02 | [4483472] | .NET 4.5.2 güvenliği | 4,63 | 12 Şubat 2019 |
+| Rel 19-02 | [4487026] | Windows güvenliği | 5,28 | 12 Şubat 2019 |
+| Rel 19-02 | [4487044] | Windows güvenliği | 6.4 | 12 Şubat 2019 |
+| Rel 19-02 | [4483452] | .NET 3,5, 4.7.2 güvenliği | 6.4 | 12 Şubat 2019 |
+| Yok | [4480970] | Ocak güvenlik dışı toplu | 2,83 | 8 Ocak 2019 |
+| Yok | [4483483] | Ocak güvenlik dışı toplu .NET 3.5.1  | 2,83 | 8 Ocak 2019 |
+| Yok | [4480059] | Ocak güvenlik dışı toplu .NET 4.5.2  | 2,83 | 8 Ocak 2019 |
+| Yok | [4480975] | Ocak güvenlik dışı toplu | 3,70 | 8 Ocak 2019 |
+| Yok | [4480061] | Ocak güvenlik dışı toplu .NET 3,5 | 3,70 | 8 Ocak 2019 |
+| Yok | [4480058] | Ocak güvenlik dışı toplu .NET 4.5.2 | 3,70 | 8 Ocak 2019 |
+| Yok | [4480963] | Ocak güvenlik dışı toplu | 4,63 | 8 Ocak 2019 |
+| Yok | [4480064] | Ocak güvenlik dışı toplu .NET 3,5 | 4,63 | 8 Ocak 2019 |
+| Yok | [4480057] | Ocak güvenlik dışı toplu .NET 4.5.2 | 4,63 | 8 Ocak 2019 |
 
 [4486474]: https://support.microsoft.com/kb/4486474
 [4487038]: https://support.microsoft.com/kb/4487038
@@ -247,33 +475,33 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4480064]: https://support.microsoft.com/kb/4480064
 [4480057]: https://support.microsoft.com/kb/4480057
 
-## <a name="january-2019-guest-os"></a>Ocak 2019 konuk işletim sistemi
+## <a name="january-2019-guest-os"></a>Ocak 2019 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 19-01 | [4480116] | Windows 10 Güvenlik | 6.3 | 8 Ocak 2019 |
-| Rel 19-01 | [4480961] | Windows 10 Güvenlik | 5.27 | 8 Ocak 2019 |
-| Rel 19-01 | [4480964] | Windows Güvenlik | 4.62 | 8 Ocak 2019 |
-| Rel 19-01 | [4480972] | Windows Güvenlik | 3.69 | 8 Ocak 2019 |
-| Rel 19-01 | [4480960] | Windows Güvenlik | 2.82 | 8 Ocak 2019 |
-| Rel 19-01 | [4480056] | .NET güvenlik | 6.3 | 8 Ocak 2019 |
-| Rel 19-01 | [4480074] | .NET 4.x güvenliği | 4.62 | 8 Ocak 2019 |
-| Rel 19-01 | [4480075] | .NET 4.x güvenliği | 3.69 | 8 Ocak 2019 |
-| Rel 19-01 | [4480076] | .NET 4.x güvenliği | 2.82 | 8 Ocak 2019 |
-| Rel 19-01 | [4480086] | .NET 3.x güvenliği | 4.62 | 8 Ocak 2019 |
-| Rel 19-01 | [4480083] | .NET 3.x güvenliği | 3.69 | 8 Ocak 2019 |
-| Rel 19-01 | [4480085] | .NET 3.x güvenliği | 2.82 | 8 Ocak 2019 |
-| Rel 19-01 | [4480979] | Flash | 3.69, 4.62, 5.27, 6.3 | 8 Ocak 2019 |
-| Rel 19-01 | [4480965] | Internet Explorer | 2.82, 3.69, 4.62 | 8 Ocak 2019 |
-| Yok | [4471318] | Aralık güvenlikle dökümü | 2.82 | 11 Aralık 2018'e |
-| Yok | [4470641] | Aralık olmayan ve güvenlikle ilgili paketi .NET 3.x | 2.82 | 11 Aralık 2018'e |
-| Yok | [4470637] | Aralık olmayan ve güvenlikle ilgili paketi .NET 4.x | 2.82 | 11 Aralık 2018'e |
-| Yok | [4471330] | Aralık güvenlikle dökümü | 3.69 | 11 Aralık 2018'e |
-| Yok | [4470629] | Aralık olmayan ve güvenlikle ilgili paketi .NET 3.x | 3.69 | 11 Aralık 2018'e |
-| Yok | [4470623] | Aralık olmayan ve güvenlikle ilgili paketi .NET 4.x | 3.69 | 11 Aralık 2018'e |
-| Yok | [4471320] | Aralık güvenlikle dökümü | 4.62 | 11 Aralık 2018'e |
-| Yok | [4470630] | Aralık olmayan ve güvenlikle ilgili paketi .NET 3.x | 4.62 | 11 Aralık 2018'e |
-| Yok | [4470622] | Aralık olmayan ve güvenlikle ilgili paketi .NET 4.x | 4.62 | 11 Aralık 2018'e |
+| Rel 19-01 | [4480116] | Windows 10 güvenliği | 6.3 | 8 Ocak 2019 |
+| Rel 19-01 | [4480961] | Windows 10 güvenliği | 5,27 | 8 Ocak 2019 |
+| Rel 19-01 | [4480964] | Windows güvenliği | 4,62 | 8 Ocak 2019 |
+| Rel 19-01 | [4480972] | Windows güvenliği | 3,69 | 8 Ocak 2019 |
+| Rel 19-01 | [4480960] | Windows güvenliği | 2,82 | 8 Ocak 2019 |
+| Rel 19-01 | [4480056] | .NET güvenliği | 6.3 | 8 Ocak 2019 |
+| Rel 19-01 | [4480074] | .NET 4. x güvenliği | 4,62 | 8 Ocak 2019 |
+| Rel 19-01 | [4480075] | .NET 4. x güvenliği | 3,69 | 8 Ocak 2019 |
+| Rel 19-01 | [4480076] | .NET 4. x güvenliği | 2,82 | 8 Ocak 2019 |
+| Rel 19-01 | [4480086] | .NET 3. x güvenliği | 4,62 | 8 Ocak 2019 |
+| Rel 19-01 | [4480083] | .NET 3. x güvenliği | 3,69 | 8 Ocak 2019 |
+| Rel 19-01 | [4480085] | .NET 3. x güvenliği | 2,82 | 8 Ocak 2019 |
+| Rel 19-01 | [4480979] | Flash | 3,69, 4,62, 5,27, 6,3 | 8 Ocak 2019 |
+| Rel 19-01 | [4480965] | Internet Explorer | 2,82, 3,69, 4,62 | 8 Ocak 2019 |
+| Yok | [4471318] | Aralık güvenlik dışı paketi | 2,82 | 11 Aralık 2018 |
+| Yok | [4470641] | Aralık güvenlik dışı toplu .NET 3. x | 2,82 | 11 Aralık 2018 |
+| Yok | [4470637] | Aralık güvenlik dışı toplu .NET 4. x | 2,82 | 11 Aralık 2018 |
+| Yok | [4471330] | Aralık güvenlik dışı paketi | 3,69 | 11 Aralık 2018 |
+| Yok | [4470629] | Aralık güvenlik dışı toplu .NET 3. x | 3,69 | 11 Aralık 2018 |
+| Yok | [4470623] | Aralık güvenlik dışı toplu .NET 4. x | 3,69 | 11 Aralık 2018 |
+| Yok | [4471320] | Aralık güvenlik dışı paketi | 4,62 | 11 Aralık 2018 |
+| Yok | [4470630] | Aralık güvenlik dışı toplu .NET 3. x | 4,62 | 11 Aralık 2018 |
+| Yok | [4470622] | Aralık güvenlik dışı toplu .NET 4. x | 4,62 | 11 Aralık 2018 |
 
 [4480116]: https://support.microsoft.com/kb/4480116
 [4480961]: https://support.microsoft.com/kb/4480961
@@ -299,26 +527,26 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4470630]: https://support.microsoft.com/kb/4470630
 [4470622]: https://support.microsoft.com/kb/4470622
 
-## <a name="december-2018-guest-os"></a>Aralık 2018'e konuk işletim sistemi
+## <a name="december-2018-guest-os"></a>Aralık 2018 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-12 | [4471321] | Windows 10 Güvenlik | 5.26 | 11 Aralık 2018'e |
-| Rel 18-12 | [4471328] | Windows Güvenlik   | 2.81 | 11 Aralık 2018'e |
-| Rel 18-12 | [4471326] | Windows Güvenlik   | 3.68 | 11 Aralık 2018'e |
-| Rel 18-12 | [4471322] | Windows Güvenlik   | 4.61 | 11 Aralık 2018'e |
-| Rel 18-12 | [4470600] | .NET 3.x güvenliği  | 2.81 | 11 Aralık 2018'e |
-| Rel 18-12 | [4470601] | .NET 3.x güvenliği  | 3.68 | 11 Aralık 2018'e|
-| Rel 18-12 | [4470602] | .NET 3.x güvenliği  | 4.61 | 11 Aralık 2018'e |
-| Rel 18-12 | [4470493] | .NET 4.x güvenliği  | 2.81 | 11 Aralık 2018'e |
-| Rel 18-12 | [4470492] | .NET 4.x güvenliği  | 3.68 | 11 Aralık 2018'e |
-| Rel 18-12 | [4470491] | .NET 4.x güvenliği  | 4.61| 11 Aralık 2018'e |
-| Rel 18-12 | [4471331] | Flash  | 3.68, 4.61, 5.26 | 5 Aralık 2018'e  |
-| Rel 18-12 | [4470199] | Internet Explorer  | 2.81, 3.68, 4.61 | 11 Aralık 2018'e |
-| Yok | [4468323] | Saat dilimi güncelleştirme    | 2.81, 3.68, 4.61 | 13 Aralık 2018'e |
-| Yok | [4467107] | Kasım güvenlikle dökümü   | 2.81 | 13 Kasım 2018 |
-| Yok | [4467701] | Kasım güvenlikle dökümü     | 3.68 | 13 Kasım 2018 |
-| Yok | [4467697] | Kasım güvenlikle dökümü     | 4.61 | 13 Kasım 2018 |
+| Rel 18-12 | [4471321] | Windows 10 güvenliği | 5,26 | 11 Aralık 2018 |
+| Rel 18-12 | [4471328] | Windows güvenliği   | 2,81 | 11 Aralık 2018 |
+| Rel 18-12 | [4471326] | Windows güvenliği   | 3,68 | 11 Aralık 2018 |
+| Rel 18-12 | [4471322] | Windows güvenliği   | 4,61 | 11 Aralık 2018 |
+| Rel 18-12 | [4470600] | .NET 3. x güvenliği  | 2,81 | 11 Aralık 2018 |
+| Rel 18-12 | [4470601] | .NET 3. x güvenliği  | 3,68 | 11 Aralık 2018|
+| Rel 18-12 | [4470602] | .NET 3. x güvenliği  | 4,61 | 11 Aralık 2018 |
+| Rel 18-12 | [4470493] | .NET 4. x güvenliği  | 2,81 | 11 Aralık 2018 |
+| Rel 18-12 | [4470492] | .NET 4. x güvenliği  | 3,68 | 11 Aralık 2018 |
+| Rel 18-12 | [4470491] | .NET 4. x güvenliği  | 4,61| 11 Aralık 2018 |
+| Rel 18-12 | [4471331] | Flash  | 3,68, 4,61, 5,26 | 5 Aralık 2018  |
+| Rel 18-12 | [4470199] | Internet Explorer  | 2,81, 3,68, 4,61 | 11 Aralık 2018 |
+| Yok | [4468323] | Saat dilimi güncelleştirmesi    | 2,81, 3,68, 4,61 | 13 Aralık 2018 |
+| Yok | [4467107] | Kasım güvenlik dışı toplu   | 2,81 | 13 Kasım 2018 |
+| Yok | [4467701] | Kasım güvenlik dışı toplu     | 3,68 | 13 Kasım 2018 |
+| Yok | [4467697] | Kasım güvenlik dışı toplu     | 4,61 | 13 Kasım 2018 |
 
 [4471321]: https://support.microsoft.com/kb/4471321
 [4471328]: https://support.microsoft.com/kb/4471328
@@ -337,23 +565,23 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4467701]: https://support.microsoft.com/kb/4467701
 [4467697]: https://support.microsoft.com/kb/4467697
 
-## <a name="november-2018-guest-os"></a>Kasım 2018'den konuk işletim sistemi
+## <a name="november-2018-guest-os"></a>Kasım 2018 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-11 | [4466536] | Internet Explorer | 2.80, 3.67, 4.60 | 13 Kasım 2018 |
-| Rel 18-11 | [4467694] | Flash | 3.67, 4.60, 5.25 | 13 Kasım 2018 |
-| Rel 18-11 | [4467106] | Windows Güvenlik | 2.80 | 13 Kasım 2018 |
-| Rel 18-11 | [4467678] | Windows Güvenlik | 3.67 | 13 Kasım 2018 |
-| Rel 18-11 | [4467703] | Windows Güvenlik | 4.60 | 13 Kasım 2018 |
-| Rel 18-11 | [4467691] | Windows 10 Güvenlik | 5.25 | 13 Kasım 2018 |
-| Yok | [3173426] | Hizmet yığını güncelleştirmesi | 3.67 | 12 Temmuz 2016 |
+| Rel 18-11 | [4466536] | Internet Explorer | 2,80, 3,67, 4,60 | 13 Kasım 2018 |
+| Rel 18-11 | [4467694] | Flash | 3,67, 4,60, 5,25 | 13 Kasım 2018 |
+| Rel 18-11 | [4467106] | Windows güvenliği | 2,80 | 13 Kasım 2018 |
+| Rel 18-11 | [4467678] | Windows güvenliği | 3,67 | 13 Kasım 2018 |
+| Rel 18-11 | [4467703] | Windows güvenliği | 4,60 | 13 Kasım 2018 |
+| Rel 18-11 | [4467691] | Windows 10 güvenliği | 5.25 | 13 Kasım 2018 |
+| Yok | [3173426] | Hizmet yığını güncelleştirmesi | 3,67 | 12 Temmuz 2016 |
 | Yok | [4465659] | Hizmet yığını güncelleştirmesi | 5.25 | 13 Kasım 2018 |
-| Yok | [4462923] | Ekim güvenlikle dökümü | 2.80 | 9 Ekim 2018 |
-| Yok | [4462929] | Ekim güvenlikle dökümü | 3.67 | 9 Ekim 2018 |
-| Yok | [4462926] | Ekim güvenlikle dökümü | 4.60 | 9 Ekim 2018 |
-| Yok | [3109976] | Uygulama uyumluluğu dolgular | 4.60 | 12 Nisan 2016 |
-| Yok | [4457037] | Uygulama uyumluluğu dolgular | 4.60| 12 Haziran 2018 |
+| Yok | [4462923] | Ekim güvenlik dışı toplaması | 2,80 | 9 Ekim 2018 |
+| Yok | [4462929] | Ekim güvenlik dışı toplaması | 3,67 | 9 Ekim 2018 |
+| Yok | [4462926] | Ekim güvenlik dışı toplaması | 4,60 | 9 Ekim 2018 |
+| Yok | [3109976] | Uygulama uyumluluğu parçalamayı | 4,60 | 12 Nisan 2016 |
+| Yok | [4457037] | Uygulama uyumluluğu parçalamayı | 4,60| 12 Haziran 2018 |
 
 [4466536]: https://support.microsoft.com/kb/4466536
 [4467694]: https://support.microsoft.com/kb/4467694
@@ -369,26 +597,26 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [3109976]: https://support.microsoft.com/kb/3109976
 [4457037]: https://support.microsoft.com/kb/4457037
 
-## <a name="october-2018-guest-os"></a>Ekim 2018 konuk işletim sistemi
+## <a name="october-2018-guest-os"></a>Ekim 2018 Konuk işletim sistemi
 
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-10 | [4462917] | Windows 10 Güvenlik | 5.24 | 9 Ekim 2018 |
-| Rel 18-10 | [4462915] | Windows Güvenlik | 2.79 | 9 Ekim 2018 |
-| Rel 18-10 | [4462931] | Windows Güvenlik | 3.66 | 9 Ekim 2018 |
-| Rel 18-10 | [4462941] | Windows Güvenlik | 4.59 | 9 Ekim 2018 |
-| Rel 18-10 | [4462930] | Flash | 3.66, 4.59, 5.24 | 9 Ekim 2018 |
-| Rel 18-10 | [4462949] | Internet Explorer | 2.79, 3.66, 4.59 | 9 Ekim 2018 |
-| Yok | [4339284] | Saat dilimi güncelleştirme | 2.79, 3.66, 4.59 | 24 Temmuz 2018 |
-| Yok | [4457144] | Eylül güvenlikle dökümü | 2.79 | 11 Eylül 2018'den |
-| Yok | [4457044] | Eylül güvenlikle .NET 3.5 dökümü | 2.79 | 11 Eylül 2018'den |
-| Yok | [4457038] | Eylül güvenlikle .NET 4.5.2'nin dökümü | 2.79 | 11 Eylül 2018'den |
-| Yok | [4457135] | Eylül güvenlikle dökümü | 3.66 | 11 Eylül 2018'den |
-| Yok | [4457042] | Eylül güvenlikle .NET 3.5 dökümü | 3.66 | 11 Eylül 2018'den |
-| Yok | [4457037] | Eylül güvenlikle .NET 4.5.2'nin dökümü | 3.66 | 11 Eylül 2018'den |
-| Yok | [4457129] | Eylül güvenlikle dökümü | 4.59 | 11 Eylül 2018'den |
-| Yok | [4457045] | Eylül güvenlikle .NET 3.5 dökümü | 4.59 | 11 Eylül 2018'den |
-| Yok | [4457036] | Eylül güvenlikle .NET 4.5.2'nin dökümü | 4.59 | 11 Eylül 2018'den |
+| Rel 18-10 | [4462917] | Windows 10 güvenliği | 5,24 | 9 Ekim 2018 |
+| Rel 18-10 | [4462915] | Windows güvenliği | 2,79 | 9 Ekim 2018 |
+| Rel 18-10 | [4462931] | Windows güvenliği | 3,66 | 9 Ekim 2018 |
+| Rel 18-10 | [4462941] | Windows güvenliği | 4,59 | 9 Ekim 2018 |
+| Rel 18-10 | [4462930] | Flash | 3,66, 4,59, 5,24 | 9 Ekim 2018 |
+| Rel 18-10 | [4462949] | Internet Explorer | 2,79, 3,66, 4,59 | 9 Ekim 2018 |
+| Yok | [4339284] | Saat dilimi güncelleştirmesi | 2,79, 3,66, 4,59 | 24 Temmuz 2018 |
+| Yok | [4457144] | Eylül güvenlik dışı toplaması | 2,79 | 11 Eylül 2018'den |
+| Yok | [4457044] | Eylül güvenlik dışı .NET 3,5 toplaması | 2,79 | 11 Eylül 2018'den |
+| Yok | [4457038] | Eylül güvenlik dışı .NET 4.5.2 toplaması | 2,79 | 11 Eylül 2018'den |
+| Yok | [4457135] | Eylül güvenlik dışı toplaması | 3,66 | 11 Eylül 2018'den |
+| Yok | [4457042] | Eylül güvenlik dışı .NET 3,5 toplaması | 3,66 | 11 Eylül 2018'den |
+| Yok | [4457037] | Eylül güvenlik dışı .NET 4.5.2 toplaması | 3,66 | 11 Eylül 2018'den |
+| Yok | [4457129] | Eylül güvenlik dışı toplaması | 4,59 | 11 Eylül 2018'den |
+| Yok | [4457045] | Eylül güvenlik dışı .NET 3,5 toplaması | 4,59 | 11 Eylül 2018'den |
+| Yok | [4457036] | Eylül güvenlik dışı .NET 4.5.2 toplaması | 4,59 | 11 Eylül 2018'den |
 
 [4462917]: https://support.microsoft.com/kb/4462917
 [4462915]: https://support.microsoft.com/kb/4462915
@@ -407,720 +635,720 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [4457045]: https://support.microsoft.com/kb/4457045
 [4457036]: https://support.microsoft.com/kb/4457036
 
-## <a name="september-2018-guest-os"></a>Eylül 2018'den konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="september-2018-guest-os"></a>Eylül 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-09 | [4457131] | Windows 10 Güvenlik | 5.23 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457145] | Yalnızca Windows Güvenlik | 2.78 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457140] | Yalnızca Windows Güvenlik | 3.65 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457143] | Yalnızca Windows Güvenlik | 4.58 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457055], [4457030] | 3\.5, .NET 4.5 güvenlik | 2.78 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457053], [4457029] | .NET 3.5, 4.x güvenlik | 3.65 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457056], [4457028] | .NET 3.5, 4.x güvenlik | 4.58 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457146] | Flash | 3.65, 4.58, 5.23 | 11 Eylül 2018'den |
-| Rel 18-09 | [4457426] | Internet Explorer | 2.78, 3.65, 4.58 | 11 Eylül 2018'den |
-| Yok | [4343900] | Ağustos güvenlikle dökümü | 2.78 | 14 Ağustos 2018 |
-| Yok | [4344152] | Ağustos güvenlikle .NET 3.5 dökümü | 2.78 | 14 Ağustos 2018 |
-| Yok | [4344149] | Ağustos güvenlikle .NET 4 x rollup | 2.78 | 14 Ağustos 2018 |
-| Yok | [4343901] | Ağustos güvenlikle dökümü | 3.65 | 14 Ağustos 2018 |
-| Yok | [4344150] | Ağustos güvenlikle .NET 3.5 dökümü | 3.65 | 14 Ağustos 2018 |
-| Yok | [4344148] | Ağustos güvenlikle .NET 4 x rollup | 3.65 | 14 Ağustos 2018 |
-| Yok | [4343898] | Ağustos güvenlikle dökümü | 4.58 | 14 Ağustos 2018 |
-| Yok | [4344153] | Ağustos güvenlikle .NET 3.5 dökümü | 4.58 | 14 Ağustos 2018 |
-| Yok | [4344147] | Ağustos güvenlikle .NET 4 x rollup | 4.58 | 14 Ağustos 2018 |
+| Rel 18-09 | [4457131] | Windows 10 güvenliği | 5,23 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457145] | Yalnızca Windows güvenliği | 2,78 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457140] | Yalnızca Windows güvenliği | 3,65 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457143] | Yalnızca Windows güvenliği | 4.58 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457055], [4457030] | .NET 3,5, 4,5 güvenlik | 2,78 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457053], [4457029] | .NET 3,5, 4. x güvenliği | 3,65 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457056], [4457028] | .NET 3,5, 4. x güvenliği | 4.58 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457146] | Flash | 3,65, 4,58, 5,23 | 11 Eylül 2018'den |
+| Rel 18-09 | [4457426] | Internet Explorer | 2,78, 3,65, 4,58 | 11 Eylül 2018'den |
+| Yok | [4343900] | Ağustos güvenlik dışı toplu | 2,78 | 14 Ağustos 2018 |
+| Yok | [4344152] | Güvenlikle uyumlu olmayan .NET 3,5 toplaması | 2,78 | 14 Ağustos 2018 |
+| Yok | [4344149] | Ağustos-güvenlikle uyumlu olmayan .NET 4X toplaması | 2,78 | 14 Ağustos 2018 |
+| Yok | [4343901] | Ağustos güvenlik dışı toplu | 3,65 | 14 Ağustos 2018 |
+| Yok | [4344150] | Güvenlikle uyumlu olmayan .NET 3,5 toplaması | 3,65 | 14 Ağustos 2018 |
+| Yok | [4344148] | Ağustos-güvenlikle uyumlu olmayan .NET 4X toplaması | 3,65 | 14 Ağustos 2018 |
+| Yok | [4343898] | Ağustos güvenlik dışı toplu | 4.58 | 14 Ağustos 2018 |
+| Yok | [4344153] | Güvenlikle uyumlu olmayan .NET 3,5 toplaması | 4.58 | 14 Ağustos 2018 |
+| Yok | [4344147] | Ağustos-güvenlikle uyumlu olmayan .NET 4X toplaması | 4.58 | 14 Ağustos 2018 |
 
-## <a name="august-2018-guest-os"></a>Ağustos 2018 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="august-2018-guest-os"></a>Ağustos 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-08 | [4343887] | Windows 10 Güvenlik | 5.22 | 14 Ağustos 2018 |
-| Rel 18-08 | [4343899] | Yalnızca Windows Güvenlik | 2.77 | 14 Ağustos 2018 |
-| Rel 18-08 | [4343896] | Yalnızca Windows Güvenlik | 3.64 | 14 Ağustos 2018 |
-| Rel 18-08 | [4343888] | Yalnızca Windows Güvenlik | 4.57 | 14 Ağustos 2018 |
-| Rel 18-08 | [4344177], [4344173] | 3\.5, .NET 4.5 güvenlik | 2.77 | 14 Ağustos 2018 |
-| Rel 18-08 | [4344175], [4344172] | .NET 3.5, 4.x güvenlik | 3.64 | 14 Ağustos 2018 |
-| Rel 18-08 | [4344178], [4344171] | .NET 3.5, 4.x güvenlik | 4.57 | 14 Ağustos 2018 |
-| Rel 18-08 | [4346742], [4346739] | .NET 3.5 4.x OOB yayın | 3.64 | 30 Temmuz 2018 |
-| Rel 18-08 | [4346745], [4346408] | .NET 3.5 4.x OOB yayın | 4.57 | 30 Temmuz 2018 |
-| Rel 18-08 | [4343902] | Flash | 3.64, 4.57, 5.22 | 14 Ağustos 2018 |
-| Rel 18-08 | [4343205] | Internet Explorer | 2.77, 3.64, 4.57 | 14 Ağustos 2018 |
-| Yok | [4338818] |Temmuz güvenlikle dökümü |2.77 | 10 Temmuz 2018 |
-| Yok | [4019990] |.NET için D3D derleyicisi güncelleştirme |2.77 | 10 Temmuz 2018 |
-| Yok | [4338830] |Temmuz güvenlikle dökümü |3.64 | 10 Temmuz 2018 |
-| Yok | [4338421] |Temmuz güvenlikle .NET 3.5 dökümü |3.64 | 10 Temmuz 2018 |
-| Yok | [4338416] |Temmuz güvenlikle .NET 4 x rollup |3.64 | 10 Temmuz 2018 |
-| Yok | [4338815] |Temmuz güvenlikle dökümü |4.57 | 10 Temmuz 2018 |
-| Yok | [4338424] |Temmuz güvenlikle .NET 3.5 dökümü |3.64 | 10 Temmuz 2018 |
-| Yok | [4338415] |Temmuz güvenlikle .NET 4 x rollup |3.64 | 10 Temmuz 2018 |
+| Rel 18-08 | [4343887] | Windows 10 güvenliği | 5,22 | 14 Ağustos 2018 |
+| Rel 18-08 | [4343899] | Yalnızca Windows güvenliği | 2.77 | 14 Ağustos 2018 |
+| Rel 18-08 | [4343896] | Yalnızca Windows güvenliği | 3,64 | 14 Ağustos 2018 |
+| Rel 18-08 | [4343888] | Yalnızca Windows güvenliği | 4,57 | 14 Ağustos 2018 |
+| Rel 18-08 | [4344177], [4344173] | .NET 3,5, 4,5 güvenlik | 2.77 | 14 Ağustos 2018 |
+| Rel 18-08 | [4344175], [4344172] | .NET 3,5, 4. x güvenliği | 3,64 | 14 Ağustos 2018 |
+| Rel 18-08 | [4344178], [4344171] | .NET 3,5, 4. x güvenliği | 4,57 | 14 Ağustos 2018 |
+| Rel 18-08 | [4346742], [4346739] | .NET 3,5, 4. x OOB sürümü | 3,64 | 30 Temmuz 2018 |
+| Rel 18-08 | [4346745], [4346408] | .NET 3,5, 4. x OOB sürümü | 4,57 | 30 Temmuz 2018 |
+| Rel 18-08 | [4343902] | Flash | 3,64, 4,57, 5,22 | 14 Ağustos 2018 |
+| Rel 18-08 | [4343205] | Internet Explorer | 2,77, 3,64, 4,57 | 14 Ağustos 2018 |
+| Yok | [4338818] |Güvenlik dışı toplaması Temmuz |2.77 | 10 Temmuz 2018 |
+| Yok | [4019990] |.NET için D3D derleyicisi güncelleştirmesi |2.77 | 10 Temmuz 2018 |
+| Yok | [4338830] |Güvenlik dışı toplaması Temmuz |3,64 | 10 Temmuz 2018 |
+| Yok | [4338421] |Güvenlikle uyumlu olmayan .NET 3,5 toplaması |3,64 | 10 Temmuz 2018 |
+| Yok | [4338416] |Güvenlikle uyumlu olmayan .NET 4X toplaması |3,64 | 10 Temmuz 2018 |
+| Yok | [4338815] |Güvenlik dışı toplaması Temmuz |4,57 | 10 Temmuz 2018 |
+| Yok | [4338424] |Güvenlikle uyumlu olmayan .NET 3,5 toplaması |3,64 | 10 Temmuz 2018 |
+| Yok | [4338415] |Güvenlikle uyumlu olmayan .NET 4X toplaması |3,64 | 10 Temmuz 2018 |
 
-## <a name="july-2018-guest-os"></a>Temmuz 2018 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="july-2018-guest-os"></a>Temmuz 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-07 | [4338814] |Windows 10 Güvenlik |5.21 |10 Temmuz 2018 |
-| Rel 18-07 | [4338823] |Yalnızca Windows Güvenlik |2.76 |10 Temmuz 2018 |
-| Rel 18-07 | [4338820] |Yalnızca Windows Güvenlik |3.63 |10 Temmuz 2018 |
-| Rel 18-07 | [4338824] |Yalnızca Windows Güvenlik |4.56 |10 Temmuz 2018 |
-| Rel 18-07 | [4345459] |Güvenlik paketi Yenile |2.76 |10 Temmuz 2018 |
-| Rel 18-07 | [4345425] |Güvenlik paketi Yenile |3.63 |10 Temmuz 2018 |
-| Rel 18-07 | [4345424] |Güvenlik paketi Yenile |4.56 |10 Temmuz 2018 |
-| Rel 18-07 | [4345418] |Güvenlik paketi Yenile |5.21 |10 Temmuz 2018 |
-| Rel 18-07 | [4338612], [4338602] |.NET 3.5, 4.x güvenlik |2.76 |10 Temmuz 2018 |
-| Rel 18-07 | [4338601], [4338604] |.NET 3.5, 4.x, 4.5 x güvenlik |3.63 |10 Temmuz 2018 |
-| Rel 18-07 | [4338613], [4338600], [4338605] |.NET 3.5, 4.x, 4.5 x güvenlik |4.56|10 Temmuz 2018 |
-| Rel 18-07 | [4338832] |Flash |3.63, 4.76, 5.21 |10 Temmuz 2018 |
-| Rel 18-07 | [4339093] |Internet Explorer |2.76, 3.63, 4.76 |10 Temmuz 2018 |
-| Yok | [4284826] |Haziran olmayan güvenlik dökümü |2.76 |12 Haziran 2018 |
-| Yok | [4284855] |Haziran olmayan güvenlik dökümü |3.63 |12 Haziran 2018 |
-| Yok | [4284815] |Haziran olmayan güvenlik dökümü |4.56 |12 Haziran 2018 |
+| Rel 18-07 | [4338814] |Windows 10 güvenliği |5,21 |10 Temmuz 2018 |
+| Rel 18-07 | [4338823] |Yalnızca Windows güvenliği |2,76 |10 Temmuz 2018 |
+| Rel 18-07 | [4338820] |Yalnızca Windows güvenliği |3,63 |10 Temmuz 2018 |
+| Rel 18-07 | [4338824] |Yalnızca Windows güvenliği |4,56 |10 Temmuz 2018 |
+| Rel 18-07 | [4345459] |Güvenlik Toplu yenileme |2,76 |10 Temmuz 2018 |
+| Rel 18-07 | [4345425] |Güvenlik Toplu yenileme |3,63 |10 Temmuz 2018 |
+| Rel 18-07 | [4345424] |Güvenlik Toplu yenileme |4,56 |10 Temmuz 2018 |
+| Rel 18-07 | [4345418] |Güvenlik Toplu yenileme |5,21 |10 Temmuz 2018 |
+| Rel 18-07 | [4338612], [4338602] |.NET 3,5, 4. x güvenliği |2,76 |10 Temmuz 2018 |
+| Rel 18-07 | [4338601], [4338604] |.NET 3,5, 4. x, 4.5 x güvenliği |3,63 |10 Temmuz 2018 |
+| Rel 18-07 | [4338613], [4338600], [4338605] |.NET 3,5, 4. x, 4.5 x güvenliği |4,56|10 Temmuz 2018 |
+| Rel 18-07 | [4338832] |Flash |3,63, 4,76, 5,21 |10 Temmuz 2018 |
+| Rel 18-07 | [4339093] |Internet Explorer |2,76, 3,63, 4,76 |10 Temmuz 2018 |
+| Yok | [4284826] |Haziran güvenlik dışı toplu |2,76 |12 Haziran 2018 |
+| Yok | [4284855] |Haziran güvenlik dışı toplu |3,63 |12 Haziran 2018 |
+| Yok | [4284815] |Haziran güvenlik dışı toplu |4,56 |12 Haziran 2018 |
 
-## <a name="june-2018-guest-os"></a>Haziran 2018'den konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="june-2018-guest-os"></a>Haziran 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-06 | [4284880] |Windows 10 Güvenlik |5.20 |12 Haziran 2018 |
-| Rel 18-06 | [4284867] |Yalnızca Windows Güvenlik |2.75 |12 Haziran 2018 |
-| Rel 18-06 | [4284846] |Yalnızca Windows Güvenlik |3.62 |12 Haziran 2018 |
-| Rel 18-06 | [4284878] |Yalnızca Windows Güvenlik |4.55 |12 Haziran 2018 |
-| Rel 18-06 | [4230450] |Internet Explorer |2.75, 3.62, 4.75 |12 Haziran 2018 |
-| Rel 18-06 | [4287903] |Flash |3.62, 4.75, 5.20 |12 Haziran 2018 |
-| Yok | [4103718] |Güvenlikle ilgili olmayan döküm olabilir |2.75 |8 Mayıs 2018 |
-| Yok | [4103730] |Güvenlikle ilgili olmayan döküm olabilir |3.62 |8 Mayıs 2018 |
-| Yok | [4103725] |Güvenlikle ilgili olmayan döküm olabilir |4.55 |8 Mayıs 2018 |
-| Yok | [4040980], [4040977] |Eylül ' 17 .NET olmayan güvenlik dökümü |2.75 |14 Kasım 2017 |
-| Yok | [4095874] |.NET 3.5 olmayan ve güvenlikle ilgili sürüm |2.75 |8 Mayıs 2018 |
-| Yok | [4096495] |.NET 4.x güvenlikle yayımlayabilir |2.75 |8 Mayıs 2018 |
-| Yok | [4040975] |Eylül ' 17 .NET olmayan güvenlik dökümü |3.62 |14 Kasım 2017 |
-| Yok | [4095872] |.NET 3.5 olmayan ve güvenlikle ilgili sürüm |3.62 |8 Mayıs 2018 |
-| Yok | [4096494] |.NET 4.x güvenlikle yayımlayabilir |3.62 |8 Mayıs 2018 |
-| Yok | [4096416] |.NET 4.5 x güvenlikle yayımlayabilir |3.62 |8 Mayıs 2018 |
-| Yok | [4040974], [4040972] |Eylül ' 17 .NET olmayan güvenlik dökümü |4.55 |14 Kasım 2017 |
-| Yok | [4043763] |Eki ' 17 .NET olmayan güvenlik dökümü |4.55 |12 Eylül 2017 |
-| Yok | [4095876] |.NET 4.x güvenlikle yayımlayabilir |4.55 |8 Mayıs 2018 |
-| Yok | [4096417] |.NET 4.5 x güvenlikle yayımlayabilir |4.55 |8 Mayıs 2018 |
-| Yok | [4132216] |SSU olabilir |5.20 |8 Mayıs 2018 |
+| Rel 18-06 | [4284880] |Windows 10 güvenliği |5,20 |12 Haziran 2018 |
+| Rel 18-06 | [4284867] |Yalnızca Windows güvenliği |2,75 |12 Haziran 2018 |
+| Rel 18-06 | [4284846] |Yalnızca Windows güvenliği |3,62 |12 Haziran 2018 |
+| Rel 18-06 | [4284878] |Yalnızca Windows güvenliği |4.55 |12 Haziran 2018 |
+| Rel 18-06 | [4230450] |Internet Explorer |2,75, 3,62, 4,75 |12 Haziran 2018 |
+| Rel 18-06 | [4287903] |Flash |3,62, 4,75, 5,20 |12 Haziran 2018 |
+| Yok | [4103718] |Güvenlik dışı bir toplu işlem |2,75 |8 Mayıs 2018 |
+| Yok | [4103730] |Güvenlik dışı bir toplu işlem |3,62 |8 Mayıs 2018 |
+| Yok | [4103725] |Güvenlik dışı bir toplu işlem |4.55 |8 Mayıs 2018 |
+| Yok | [4040980], [4040977] |' 17 .NET güvenlik dışı paketi |2,75 |14 Kasım 2017 |
+| Yok | [4095874] |.NET 3,5 güvenlik dışı sürüm sürümü |2,75 |8 Mayıs 2018 |
+| Yok | [4096495] |Mayıs .NET 4. x güvenlik dışı sürüm |2,75 |8 Mayıs 2018 |
+| Yok | [4040975] |' 17 .NET güvenlik dışı paketi |3,62 |14 Kasım 2017 |
+| Yok | [4095872] |.NET 3,5 güvenlik dışı sürüm sürümü |3,62 |8 Mayıs 2018 |
+| Yok | [4096494] |Mayıs .NET 4. x güvenlik dışı sürüm |3,62 |8 Mayıs 2018 |
+| Yok | [4096416] |Mayıs .NET 4.5 x güvenlik dışı sürüm |3,62 |8 Mayıs 2018 |
+| Yok | [4040974], [4040972] |' 17 .NET güvenlik dışı paketi |4.55 |14 Kasım 2017 |
+| Yok | [4043763] |Eki ' 17 .NET güvenlik dışı toplaması |4.55 |12 Eylül 2017 |
+| Yok | [4095876] |Mayıs .NET 4. x güvenlik dışı sürüm |4.55 |8 Mayıs 2018 |
+| Yok | [4096417] |Mayıs .NET 4.5 x güvenlik dışı sürüm |4.55 |8 Mayıs 2018 |
+| Yok | [4132216] |SSU Mayıs |5,20 |8 Mayıs 2018 |
 
-## <a name="may-2018-guest-os"></a>Mayıs 2018 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="may-2018-guest-os"></a>Mayıs 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-05 | [4103721], [4103727], [4103723] |Windows 10 Güvenlik |5.19 |8 Mayıs 2018 |
-| Rel 18-05 | [4103712] |Yalnızca Windows Güvenlik |2.74 |8 Mayıs 2018 |
-| Rel 18-05 | [4103726] |Yalnızca Windows Güvenlik |3.61 |8 Mayıs 2018 |
-| Rel 18-05 | [4103715] |Yalnızca Windows Güvenlik |4.54 |8 Mayıs 2018 |
-| Rel 18-05 | [4095514], [4095519] |.NET 3.5, 4.x güvenlik |2.74 |8 Mayıs 2018 |
-| Rel 18-05 | [4095512], [4095518], [4096235] |.NET 3.5, 4.x, 4.5 x güvenlik |3.61 |8 Mayıs 2018 |
-| Rel 18-05 | [4095515], [4095517], [4096236] |.NET 3.5, 4.x, 4.5 x güvenlik |4.74|8 Mayıs 2018 |
-| Rel 18-05 | [4054856] |.NET 4.7 x güvenliği |5.19 |8 Mayıs 2018 |
-| Rel 18-05 | [4103768] |Internet Explorer |2.74, 3.61, 4.74 |8 Mayıs 2018 |
-| Rel 18-05 | [4103729] |Flash |3.61, 4.74, 5.19 |8 Mayıs 2018 |
-| Yok | [4093118] |Nisan olmayan güvenlik dökümü |2.73 |10 Nisan 2018 |
-| Yok | [4093123] |Nisan olmayan güvenlik dökümü |3.61 |10 Nisan 2018 |
-| Yok | [4093114] |Nisan olmayan güvenlik dökümü |4.74 |10 Nisan 2018 |
-| Yok | [4093137] |Nisan SSU |5.19 |10 Nisan 2018 |
-| Yok | [4093753] |Saat dilimi güncelleştirme |2.74, 3.61, 4.74 |10 Nisan 2018 |
+| Rel 18-05 | [4103721], [4103727], [4103723] |Windows 10 güvenliği |5,19 |8 Mayıs 2018 |
+| Rel 18-05 | [4103712] |Yalnızca Windows güvenliği |2,74 |8 Mayıs 2018 |
+| Rel 18-05 | [4103726] |Yalnızca Windows güvenliği |3,61 |8 Mayıs 2018 |
+| Rel 18-05 | [4103715] |Yalnızca Windows güvenliği |4,54 |8 Mayıs 2018 |
+| Rel 18-05 | [4095514], [4095519] |.NET 3,5, 4. x güvenliği |2,74 |8 Mayıs 2018 |
+| Rel 18-05 | [4095512], [4095518], [4096235] |.NET 3,5, 4. x, 4.5 x güvenliği |3,61 |8 Mayıs 2018 |
+| Rel 18-05 | [4095515], [4095517], [4096236] |.NET 3,5, 4. x, 4.5 x güvenliği |4,74|8 Mayıs 2018 |
+| Rel 18-05 | [4054856] |.NET 4.7 x güvenliği |5,19 |8 Mayıs 2018 |
+| Rel 18-05 | [4103768] |Internet Explorer |2,74, 3,61, 4,74 |8 Mayıs 2018 |
+| Rel 18-05 | [4103729] |Flash |3,61, 4,74, 5,19 |8 Mayıs 2018 |
+| Yok | [4093118] |Nisan güvenlik dışı toplaması |2,73 |10 Nisan 2018 |
+| Yok | [4093123] |Nisan güvenlik dışı toplaması |3,61 |10 Nisan 2018 |
+| Yok | [4093114] |Nisan güvenlik dışı toplaması |4,74 |10 Nisan 2018 |
+| Yok | [4093137] |SSU Nisan |5,19 |10 Nisan 2018 |
+| Yok | [4093753] |Saat dilimi güncelleştirmesi |2,74, 3,61, 4,74 |10 Nisan 2018 |
 
 
-## <a name="april-2018-guest-os"></a>Nisan 2018 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="april-2018-guest-os"></a>Nisan 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-04 | [4093119] |Windows 10 Güvenlik |5.18 |10 Nisan 2018 |
-| Rel 18-04 | [4093108] |Yalnızca Windows Güvenlik |2.73 |10 Nisan 2018 |
-| Rel 18-04 | [4093122] |Yalnızca Windows Güvenlik |3.60 |10 Nisan 2018 |
-| Rel 18-04 | [4093115] |Yalnızca Windows Güvenlik |4.53 |10 Nisan 2018 |
-| Rel 18-04 | [4092946] |Internet Explorer |2.73, 3.60, 4.53 |10 Nisan 2018 |
-| Rel 18-04 | [4093110] |Flash |3.60, 4.53, 5.18 |10 Nisan 2018 |
-| Yok | [4088875] |Mart güvenlikle ilgili olmayan toplaması |2.73 |13 Mart 2018 |
-| Yok | [4099950] |Mart güvenlikle ilgili olmayan döküm önkoşul|2.73 |13 Mart 2018 |
-| Yok | [4088877] |Mart güvenlikle ilgili olmayan toplaması |3.60 |13 Mart 2018 |
-| Yok | [4088876] |Mart güvenlikle ilgili olmayan toplaması |4.53 |13 Mart 2018 |
+| Rel 18-04 | [4093119] |Windows 10 güvenliği |5,18 |10 Nisan 2018 |
+| Rel 18-04 | [4093108] |Yalnızca Windows güvenliği |2,73 |10 Nisan 2018 |
+| Rel 18-04 | [4093122] |Yalnızca Windows güvenliği |3,60 |10 Nisan 2018 |
+| Rel 18-04 | [4093115] |Yalnızca Windows güvenliği |4,53 |10 Nisan 2018 |
+| Rel 18-04 | [4092946] |Internet Explorer |2,73, 3,60, 4,53 |10 Nisan 2018 |
+| Rel 18-04 | [4093110] |Flash |3,60, 4,53, 5,18 |10 Nisan 2018 |
+| Yok | [4088875] |Mart güvenlik dışı toplaması |2,73 |13 Mart 2018 |
+| Yok | [4099950] |Mart güvenlik dışı toplu ön önkoşul|2,73 |13 Mart 2018 |
+| Yok | [4088877] |Mart güvenlik dışı toplaması |3,60 |13 Mart 2018 |
+| Yok | [4088876] |Mart güvenlik dışı toplaması |4,53 |13 Mart 2018 |
 
-## <a name="march-2018-guest-os"></a>Mart 2018'den konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="march-2018-guest-os"></a>Mart 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-03 | [4088787], [4088776] |Windows 10 Güvenlik |5.17 |13 Mart 2018 |
-| Rel 18-03 | [4088878], [4088880], [4088879] |Yalnızca Windows Güvenlik |2.72, 3.59, 4.52 |13 Mart 2018 |
-| Rel 18-03 | [4089187] |Internet Explorer |2.72, 3.59, 4.52 |13 Mart 2018 |
-| Rel 18-03 | [4074595] |Flash |3.59, 4.52, 5.17 |13 Mart 2018 |
-| Yok | [4074598] |Şubat olmayan güvenlik dökümü |2.72 |13 Şubat 2018 |
-| Yok | [4074593] |Şubat olmayan güvenlik dökümü |3.59 |13 Şubat 2018 |
-| Yok | [4074594] |Şubat olmayan güvenlik dökümü |4.52 |13 Şubat 2018 |
-| Yok | [4074837] |Saat dilimi güncelleştirme |2.72, 3.59, 4.52 |13 Şubat 2018 |
+| Rel 18-03 | [4088787], [4088776] |Windows 10 güvenliği |5,17 |13 Mart 2018 |
+| Rel 18-03 | [4088878], [4088880], [4088879] |Yalnızca Windows güvenliği |2,72, 3,59, 4,52 |13 Mart 2018 |
+| Rel 18-03 | [4089187] |Internet Explorer |2,72, 3,59, 4,52 |13 Mart 2018 |
+| Rel 18-03 | [4074595] |Flash |3,59, 4,52, 5,17 |13 Mart 2018 |
+| Yok | [4074598] |Şubat güvenlik dışı toplu |2,72 |13 Şubat 2018 |
+| Yok | [4074593] |Şubat güvenlik dışı toplu |3,59 |13 Şubat 2018 |
+| Yok | [4074594] |Şubat güvenlik dışı toplu |4,52 |13 Şubat 2018 |
+| Yok | [4074837] |Saat dilimi güncelleştirmesi |2,72, 3,59, 4,52 |13 Şubat 2018 |
 
 
-## <a name="february-2018-guest-os"></a>Şubat 2018'den konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="february-2018-guest-os"></a>Şubat 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-02 | [4074590], [4074588] |Windows 10 Güvenlik |5.16 |13 Şubat 2018 |
-| Rel 18-02 | [4074587], [4074589], [4074597] |Yalnızca Windows Güvenlik |2.71, 3.58, 4.51 |13 Şubat 2018 |
-| Rel 18-02 | [4074736] |Internet Explorer |2.71, 3.58, 4.51 |13 Şubat 2018 |
-| Rel 18-02 | [4074595] |Flash |3.58, 4.51, 5.16 |13 Şubat 2018 |
-| Yok | [4056894] |Ocak olmayan güvenlik dökümü |2.71 |4 Ocak 2018 |
-| Yok | [4056896] |Ocak olmayan güvenlik dökümü |3.58 |4 Ocak 2018 |
-| Yok | [4056895] |Ocak olmayan güvenlik dökümü |4.51 |4 Ocak 2018 |
-| Yok | [4054176], [4054172] |Ocak .NET dökümü |2.71 |4 Ocak 2018 |
-| Yok | [4054175], [4054171] |Ocak .NET dökümü |3.58 |4 Ocak 2018 |
-| Yok | [4054177], [4054170] |Ocak .NET dökümü |4.51 |4 Ocak 2018 |
+| Rel 18-02 | [4074590], [4074588] |Windows 10 güvenliği |5,16 |13 Şubat 2018 |
+| Rel 18-02 | [4074587], [4074589], [4074597] |Yalnızca Windows güvenliği |2,71, 3,58, 4,51 |13 Şubat 2018 |
+| Rel 18-02 | [4074736] |Internet Explorer |2,71, 3,58, 4,51 |13 Şubat 2018 |
+| Rel 18-02 | [4074595] |Flash |3,58, 4,51, 5,16 |13 Şubat 2018 |
+| Yok | [4056894] |Ocak güvenlik dışı toplu |2,71 |4 Ocak 2018 |
+| Yok | [4056896] |Ocak güvenlik dışı toplu |3,58 |4 Ocak 2018 |
+| Yok | [4056895] |Ocak güvenlik dışı toplu |4,51 |4 Ocak 2018 |
+| Yok | [4054176], [4054172] |Ocak .NET toplu |2,71 |4 Ocak 2018 |
+| Yok | [4054175], [4054171] |Ocak .NET toplu |3,58 |4 Ocak 2018 |
+| Yok | [4054177], [4054170] |Ocak .NET toplu |4,51 |4 Ocak 2018 |
 
-## <a name="january-2018-guest-os"></a>Ocak 2018'den konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="january-2018-guest-os"></a>Ocak 2018 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 18-01 | [4056898], [4056897], [4056899] |Yalnızca Windows Güvenlik |2.70, 3.57, 4.50 |3 Ocak 2018 |
-| Rel 18-01 | [4056890], [4056892] |Yalnızca Windows Güvenlik |5.15 |3 Ocak 2018 |
-| Yok | [4054518] |Aralık dışı güvenlik dökümü |2.70 |12 Aralık 2017 |
-| Yok | [4054520] |Aralık dışı güvenlik dökümü |3.57 |12 Aralık 2017 |
-| Yok | [4054519] |Aralık dışı güvenlik dökümü |4.50 |12 Aralık 2017 |
-| Yok | [4051956] |Ocak saat dilimi güncelleştirme |2.70, 3.57, 4.50 |12 Aralık 2017 |
+| Rel 18-01 | [4056898], [4056897], [4056899] |Yalnızca Windows güvenliği |2,70, 3,57, 4,50 |3 Ocak 2018 |
+| Rel 18-01 | [4056890], [4056892] |Yalnızca Windows güvenliği |5.15 |3 Ocak 2018 |
+| Yok | [4054518] |Aralık güvenlik dışı paketi |2,70 |12 Aralık 2017 |
+| Yok | [4054520] |Aralık güvenlik dışı paketi |3,57 |12 Aralık 2017 |
+| Yok | [4054519] |Aralık güvenlik dışı paketi |4.50 |12 Aralık 2017 |
+| Yok | [4051956] |Ocak saat dilimi güncelleştirmesi |2,70, 3,57, 4,50 |12 Aralık 2017 |
 
 
 
-## <a name="december-2017-guest-os"></a>Aralık 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="december-2017-guest-os"></a>Aralık 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | Rel 17-12 | [4053579], [4054517] |Windows 10 güvenlik güncelleştirmeleri |4.49, 5.14 |12 Aralık 2017 |
-| Rel 17-12 | [4054521], [4054522], [4054523] |Yalnızca Windows Güvenlik |2.69, 3.56, 4.49 |12 Aralık 2017 |
+| Rel 17-12 | [4054521], [4054522], [4054523] |Yalnızca Windows güvenliği |2.69, 3.56, 4.49 |12 Aralık 2017 |
 | Rel 17-12 | [4052978] |Internet Explorer |2.69, 3.56, 4.49 |12 Aralık 2017 |
 | Rel 17-12 | [4052978] |Flash |3.56, 4.49, 5.14 |12 Aralık 2017 |
-| Yok | [4048957] |Kasım olmayan güvenlik dökümü |2.69 |14 Kasım 2017 |
-| Yok | [4048959] |Kasım olmayan güvenlik dökümü |3.56 |14 Kasım 2017 |
-| Yok | [4048958] |Kasım olmayan güvenlik dökümü |4.49 |14 Kasım 2017 |
-| Yok | [4049068] |Aralık saat dilimi güncelleştirme |2.69, 3.56, 4.49 |12 Aralık 2017 |
+| Yok | [4048957] |Kasım güvenlik dışı toplu |2,69 |14 Kasım 2017 |
+| Yok | [4048959] |Kasım güvenlik dışı toplu |3.56 |14 Kasım 2017 |
+| Yok | [4048958] |Kasım güvenlik dışı toplu |4.49 |14 Kasım 2017 |
+| Yok | [4049068] |Aralık saat dilimi güncelleştirmesi |2.69, 3.56, 4.49 |12 Aralık 2017 |
 
-## <a name="november-2017-guest-os"></a>Kasım 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="november-2017-guest-os"></a>Kasım 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | Rel 17-11 | [4048953] |Windows 10 güncelleştirmeleri |5.13 |14 Kasım 2017 |
-| Rel 17-11 | [4048960], [4048962], [4048961] |Yalnızca Windows Güvenlik |2.68, 3.55, 4.48 |14 Kasım 2017 |
+| Rel 17-11 | [4048960], [4048962], [4048961] |Yalnızca Windows güvenliği |2.68, 3.55, 4.48 |14 Kasım 2017 |
 | Rel 17-11 | [4047206] |Internet Explorer |2.68, 3.55, 4.48 |14 Kasım 2017 |
 | Rel 17-11 | [4048951] |Flash |3.55, 4.48, 5.13 |14 Kasım 2017 |
-| Yok | [4041681] |Ekim olmayan güvenlik dökümü |2.68 |10 Ekim 2017 |
-| Yok | [4041690] |Ekim olmayan güvenlik dökümü |3.55 |10 Ekim 2017 |
-| Yok | [4041693] |Ekim olmayan güvenlik dökümü |4.48 |10 Ekim 2017 |
-| Yok | [3191566] |Windows Management Framework'ün 5.1 güncelleştirmesi  |2.68 |14 Kasım 2017 |
-| Yok | [3191565] |Windows Management Framework'ün 5.1 güncelleştirmesi  |3.55 |14 Kasım 2017 |
-| Yok | [3191564] |Windows Management Framework'ün 5.1 güncelleştirmesi  |4.48 |14 Kasım 2017 |
+| Yok | [4041681] |Ekim güvenlik dışı toplaması |2.68 |10 Ekim 2017 |
+| Yok | [4041690] |Ekim güvenlik dışı toplaması |3.55 |10 Ekim 2017 |
+| Yok | [4041693] |Ekim güvenlik dışı toplaması |4.48 |10 Ekim 2017 |
+| Yok | [3191566] |Windows Management Framework 5,1 güncelleştirmesi  |2.68 |14 Kasım 2017 |
+| Yok | [3191565] |Windows Management Framework 5,1 güncelleştirmesi  |3.55 |14 Kasım 2017 |
+| Yok | [3191564] |Windows Management Framework 5,1 güncelleştirmesi  |4.48 |14 Kasım 2017 |
 
-## <a name="october-2017-guest-os"></a>Ekim 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="october-2017-guest-os"></a>Ekim 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | Rel 17-10 | [4041691] |Windows 10 güncelleştirmeleri |5.12 |10 Ekim 2017 |
-| Rel 17-10 | [4041678], [4041679], [4041687] |Yalnızca Windows Güvenlik |2.67, 3.54, 4.47 |10 Ekim 2017 |
+| Rel 17-10 | [4041678], [4041679], [4041687] |Yalnızca Windows güvenliği |2.67, 3.54, 4.47 |10 Ekim 2017 |
 | Rel 17-10 | [4040685], |Internet Explorer |2.67, 3.54, 4.47 |10 Ekim 2017 |
 | Rel 17-10 | [4041681], [4041690], [4041693] |Windows aylık toplamaları |2.67, 3.54, 4.47 |10 Ekim 2017 |
-| Yok | [4038777] |Eylül olmayan güvenlik dökümü |2.67 |12 Eylül 2017 |
-| Yok | [4038799] |Eylül olmayan güvenlik dökümü |3.54 |12 Eylül 2017 |
-| Yok | [4038792] |Eylül olmayan güvenlik dökümü |4.47 |12 Eylül 2017 |
-| Yok | [4040980] |Eylül .NET olmayan güvenlik dökümü |2.67 |12 Eylül 2017 |
-| Yok | [4040979] |Eylül .NET olmayan güvenlik dökümü |3.54 |12 Eylül 2017 |
-| Yok | [4040981] |Eylül .NET olmayan güvenlik dökümü |4.47 |12 Eylül 2017 |
+| Yok | [4038777] |Eylül güvenlik dışı toplaması |2.67 |12 Eylül 2017 |
+| Yok | [4038799] |Eylül güvenlik dışı toplaması |3.54 |12 Eylül 2017 |
+| Yok | [4038792] |Eylül güvenlik dışı toplaması |4.47 |12 Eylül 2017 |
+| Yok | [4040980] |Eylül .NET güvenlik dışı paketi |2.67 |12 Eylül 2017 |
+| Yok | [4040979] |Eylül .NET güvenlik dışı paketi |3.54 |12 Eylül 2017 |
+| Yok | [4040981] |Eylül .NET güvenlik dışı paketi |4.47 |12 Eylül 2017 |
 
-## <a name="september-2017-guest-os"></a>Eylül 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="september-2017-guest-os"></a>Eylül 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | Rel 17-09 | [4038782] |Windows 10 güncelleştirmeleri |5.11 |12 Eylül 2017 |
-| Rel 17-09 | [4038779], [4038786], [4038793] |Yalnızca Windows Güvenlik |2.66, 3.53, 4.46 |12 Eylül 2017 |
-| Rel 17-09 | [4040966], [4040960], [4040965], [4040959], [4033988], [4040955], [4040967], [4040958]|.NET Eylül güncelleştirmesi |2.66, 3.53, 4.46 |12 Eylül 2017 |
-| Rel 17-09 | [4036586] |Internet explorer |2.66, 3.53, 4.46 |12 Eylül 2017 |
+| Rel 17-09 | [4038779], [4038786], [4038793] |Yalnızca Windows güvenliği |2.66, 3.53, 4.46 |12 Eylül 2017 |
+| Rel 17-09 | [4040966], [4040960], [4040965], [4040959], [4033988], [4040955], [4040967], [4040958]|Eylül .NET güncelleştirmesi |2.66, 3.53, 4.46 |12 Eylül 2017 |
+| Rel 17-09 | [4036586] |Internet Explorer |2.66, 3.53, 4.46 |12 Eylül 2017 |
 | CVE-2017-8704 | [4038782] |Hizmet Reddi |5.11 |12 Eylül 2017 |
-| Yok | [4034664] |Ağustos olmayan güvenlik dökümü  |2.66 |8 Ağustos 2017 |
-| Yok | [4034665] |Ağustos olmayan güvenlik dökümü |5.11 |8 Ağustos 2017 |
-| Yok | [4034681] |Ağustos olmayan güvenlik dökümü |4.46 |8 Ağustos 2017 |
+| Yok | [4034664] |Ağustos güvenlik dışı toplu  |2.66 |8 Ağustos 2017 |
+| Yok | [4034665] |Ağustos güvenlik dışı toplu |5.11 |8 Ağustos 2017 |
+| Yok | [4034681] |Ağustos güvenlik dışı toplu |4.46 |8 Ağustos 2017 |
 
-## <a name="august-2017-guest-os"></a>Ağustos 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="august-2017-guest-os"></a>Ağustos 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | Rel 17-07 | [4034658] |Windows 10 güncelleştirmeleri |5.10 |8 Ağustos 2017 |
-| Rel 17-07 | [4034679] |Yalnızca Windows Güvenlik |2.65 |8 Ağustos 2017 |
-| Rel 17-07 | [4034672] |Yalnızca Windows Güvenlik |4.45 |8 Ağustos 2017 |
-| Rel 17-07 | [4034666] |Yalnızca Windows Güvenlik |3.52 |8 Ağustos 2017 |
+| Rel 17-07 | [4034679] |Yalnızca Windows güvenliği |2.65 |8 Ağustos 2017 |
+| Rel 17-07 | [4034672] |Yalnızca Windows güvenliği |4.45 |8 Ağustos 2017 |
+| Rel 17-07 | [4034666] |Yalnızca Windows güvenliği |3.52 |8 Ağustos 2017 |
 | Rel 17-07 | [4034733] |Internet Explorer |2.65, 3.52, 4.45, 5.10 |8 Ağustos 2017 |
 | Rel 17-07 | [4034664], [4034665], [4034681] |Windows aylık toplamaları |2.65, 3.52, 4.45 |8 Ağustos 2017 |
-| Rel 17-07 | [4034668], [4034660], [4034658], [4034674] |CVE-2017-0071, CVE 2017 0228 sürümü sürümü |5.10 |8 Ağustos 2017 |
-| Rel 17-07 | [4025341] |Temmuz olmayan güvenlik dökümü |2.65 |11 Temmuz 2017 |
-| Rel 17-07 | [4025331] |Temmuz olmayan güvenlik dökümü |3.52 |11 Temmuz 2017 |
-| Rel 17-07 | [4025336] |Temmuz olmayan güvenlik dökümü |4.45 |11 Temmuz 2017 |
+| Rel 17-07 | [4034668], [4034660], [4034658], [4034674] |CVE-2017-0071 ' ı yeniden yayınlama, CVE-2017-0228 yeniden yayımlandı |5.10 |8 Ağustos 2017 |
+| Rel 17-07 | [4025341] |Güvenlik dışı toplaması Temmuz |2.65 |11 Temmuz 2017 |
+| Rel 17-07 | [4025331] |Güvenlik dışı toplaması Temmuz |3.52 |11 Temmuz 2017 |
+| Rel 17-07 | [4025336] |Güvenlik dışı toplaması Temmuz |4.45 |11 Temmuz 2017 |
 
-## <a name="july-2017-guest-os"></a>Temmuz 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="july-2017-guest-os"></a>Temmuz 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | Rel 17-07 | [4025339] |Windows 10 güncelleştirmeleri |5.9 |11 Temmuz 2017 |
-| Rel 17-07 | [4025337] |Yalnızca Windows Güvenlik |2.64 |11 Temmuz 2017 |
-| Rel 17-07 | [4025333] |Yalnızca Windows Güvenlik |4.44 |11 Temmuz 2017 |
-| Rel 17-07 | [4025343] |Yalnızca Windows Güvenlik |3.51 |11 Temmuz 2017 |
+| Rel 17-07 | [4025337] |Yalnızca Windows güvenliği |2.64 |11 Temmuz 2017 |
+| Rel 17-07 | [4025333] |Yalnızca Windows güvenliği |4.44 |11 Temmuz 2017 |
+| Rel 17-07 | [4025343] |Yalnızca Windows güvenliği |3.51 |11 Temmuz 2017 |
 | Rel 17-07 | [4025376] |Flash |3.51, 4.44, 5.9 |11 Temmuz 2017 |
 | Rel 17-07 | [4025252] |Internet Explorer |2.64, 3.51, 4.44 |11 Temmuz 2017 |
-| Yok | [4020322] |Saat dilimi güncelleştirme |2.64, 3.51, 4.44 |11 Temmuz 2017 |
-| Yok | [4022719] |Haziran olmayan güvenlik dökümü |2.64 |13 Haziran 2017 |
-| Yok | [4022724] |Haziran olmayan güvenlik dökümü |3.51 |13 Haziran 2017 |
-| Yok | [4022726] |Haziran olmayan güvenlik dökümü |4.44 |13 Haziran 2017 |
+| Yok | [4020322] |Saat dilimi güncelleştirmesi |2.64, 3.51, 4.44 |11 Temmuz 2017 |
+| Yok | [4022719] |Haziran güvenlik dışı toplu |2.64 |13 Haziran 2017 |
+| Yok | [4022724] |Haziran güvenlik dışı toplu |3.51 |13 Haziran 2017 |
+| Yok | [4022726] |Haziran güvenlik dışı toplu |4.44 |13 Haziran 2017 |
 
-## <a name="june-2017-guest-os"></a>Haziran 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="june-2017-guest-os"></a>Haziran 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 17-06 | [4019472] |WS 2016 işletim sistemi kalitesi geliştirmeleri |5.8 |9 Mayıs 2017 |
-| Rel 17-06 | [4022722] |Yalnızca Windows Güvenlik |2.63 |13 Haziran 2017 |
-| Rel 17-06 | [4022717] |Yalnızca Windows Güvenlik |4.43 |13 Haziran 2017 |
-| Rel 17-06 | [4022718] |Yalnızca Windows Güvenlik |3.50 |13 Haziran 2017 |
+| Rel 17-06 | [4019472] |WS 2016 OS kalite Iyileştirmeleri |5.8 |9 Mayıs 2017 |
+| Rel 17-06 | [4022722] |Yalnızca Windows güvenliği |2.63 |13 Haziran 2017 |
+| Rel 17-06 | [4022717] |Yalnızca Windows güvenliği |4.43 |13 Haziran 2017 |
+| Rel 17-06 | [4022718] |Yalnızca Windows güvenliği |3.50 |13 Haziran 2017 |
 | Rel 17-06 | [4021558] |Internet Explorer|2.63, 3.50, 4.43 |13 Haziran 2017 |
 | Rel 17-06 | [4022719], [4022724], [4022726] |Windows aylık toplamaları |2.63, 3.50, 4.43 |13 Haziran 2017 |
-| Rel 17-06 | [4022730] |Adobe Flash Player güvenlik güncelleştirmesi |3.50, 4.43, 5.8 |13 Haziran 2017 |
-| Rel 17-06 | [4015217], [4015221], [4015583], [4015550], [4015219] |CVE-2017-0167 sürümü |4.43, 5.8 |11 Nisan 2017 |
-| Yok | [4023136] |Saat dilimi güncelleştirme  |2.63, 3.50, 4.43 |13 Haziran 2017 |
-| Yok | [4019264] |Güvenlikle ilgili olmayan döküm olabilir |2.63 |13 Haziran 2017 |
-| Yok | [4014545] |.NET olmayan ve güvenlikle ilgili toplama olabilir |2.63 |11 Nisan 2017 |
-| Yok | [4014508] |.NET olmayan ve güvenlikle ilgili toplama olabilir |2.63 |9 Mayıs 2017 |
-| Yok | [4014511] |.NET olmayan ve güvenlikle ilgili toplama olabilir |2.63 |9 Mayıs 2017 |
-| Yok | [4014514] |.NET olmayan ve güvenlikle ilgili toplama olabilir |2.63 |9 Mayıs 2017 |
-| Yok | [4019216] |Güvenlikle ilgili olmayan döküm olabilir |3.50 |9 Mayıs 2017 |
-| Yok | [4014503] |.NET olmayan ve güvenlikle ilgili toplama olabilir |3.50 |9 Mayıs 2017 |
-| Yok | [4014506] |.NET olmayan ve güvenlikle ilgili toplama olabilir |3.50 |9 Mayıs 2017 |
-| Yok | [4014509] |.NET olmayan ve güvenlikle ilgili toplama olabilir |3.50 |9 Mayıs 2017 |
-| Yok | [4014513] |.NET olmayan ve güvenlikle ilgili toplama olabilir |3.50 |9 Mayıs 2017 |
-| Yok | [4019215] |Güvenlikle ilgili olmayan döküm olabilir |4.43 |9 Mayıs 2017 |
-| Yok | [4014505] |.NET olmayan ve güvenlikle ilgili toplama olabilir |4.43 |9 Mayıs 2017 |
-| Yok | [4014507] |.NET olmayan ve güvenlikle ilgili toplama olabilir |4.43 |9 Mayıs 2017 |
-| Yok | [4014510] |.NET olmayan ve güvenlikle ilgili toplama olabilir |4.43 |9 Mayıs 2017 |
-| Yok | [4014512] |.NET olmayan ve güvenlikle ilgili toplama olabilir |4.43 |9 Mayıs 2017 |
+| Rel 17-06 | [4022730] |Adobe Flash Player için güvenlik güncelleştirmesi |3.50, 4.43, 5.8 |13 Haziran 2017 |
+| Rel 17-06 | [4015217], [4015221], [4015583], [4015550], [4015219] |CVE-2017-0167 yeniden yayımlandı |4.43, 5.8 |11 Nisan 2017 |
+| Yok | [4023136] |Saat dilimi güncelleştirmesi  |2.63, 3.50, 4.43 |13 Haziran 2017 |
+| Yok | [4019264] |Güvenlik dışı bir toplu işlem |2.63 |13 Haziran 2017 |
+| Yok | [4014545] |.NET güvenlik dışı bir toplu işlem |2.63 |11 Nisan 2017 |
+| Yok | [4014508] |.NET güvenlik dışı bir toplu işlem |2.63 |9 Mayıs 2017 |
+| Yok | [4014511] |.NET güvenlik dışı bir toplu işlem |2.63 |9 Mayıs 2017 |
+| Yok | [4014514] |.NET güvenlik dışı bir toplu işlem |2.63 |9 Mayıs 2017 |
+| Yok | [4019216] |Güvenlik dışı bir toplu işlem |3.50 |9 Mayıs 2017 |
+| Yok | [4014503] |.NET güvenlik dışı bir toplu işlem |3.50 |9 Mayıs 2017 |
+| Yok | [4014506] |.NET güvenlik dışı bir toplu işlem |3.50 |9 Mayıs 2017 |
+| Yok | [4014509] |.NET güvenlik dışı bir toplu işlem |3.50 |9 Mayıs 2017 |
+| Yok | [4014513] |.NET güvenlik dışı bir toplu işlem |3.50 |9 Mayıs 2017 |
+| Yok | [4019215] |Güvenlik dışı bir toplu işlem |4.43 |9 Mayıs 2017 |
+| Yok | [4014505] |.NET güvenlik dışı bir toplu işlem |4.43 |9 Mayıs 2017 |
+| Yok | [4014507] |.NET güvenlik dışı bir toplu işlem |4.43 |9 Mayıs 2017 |
+| Yok | [4014510] |.NET güvenlik dışı bir toplu işlem |4.43 |9 Mayıs 2017 |
+| Yok | [4014512] |.NET güvenlik dışı bir toplu işlem |4.43 |9 Mayıs 2017 |
 
-## <a name="may-2017-guest-os"></a>Mayıs 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="may-2017-guest-os"></a>Mayıs 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 17-05 | [4019472] |WS 2016 işletim sistemi kalitesi geliştirmeleri |5.7 | 9 Mayıs 2017 |
-| Rel 17-05 | [4019263] |Yalnızca Windows Güvenlik |2.62 | 9 Mayıs 2017 |
-| Rel 17-05 | [4019213] |Yalnızca Windows Güvenlik |4.42 | 9 Mayıs 2017 |
-| Rel 17-05 | [4019214] |Yalnızca Windows Güvenlik |3.49 | 9 Mayıs 2017 |
+| Rel 17-05 | [4019472] |WS 2016 OS kalite Iyileştirmeleri |5.7 | 9 Mayıs 2017 |
+| Rel 17-05 | [4019263] |Yalnızca Windows güvenliği |2.62 | 9 Mayıs 2017 |
+| Rel 17-05 | [4019213] |Yalnızca Windows güvenliği |4.42 | 9 Mayıs 2017 |
+| Rel 17-05 | [4019214] |Yalnızca Windows güvenliği |3.49 | 9 Mayıs 2017 |
 | Rel 17-05 | [4018271] |Internet Explorer için toplu güvenlik güncelleştirmesi |3.49 | 9 Mayıs 2017 |
-| Rel 17-05 | [4010323] |SHA1 danışmanlığı |2.62, 4.42, 5.7 | 9 Mayıs 2017 |
-| Rel 17-05 | [4022344] |Microsoft Güvenlik danışma belgesi |5.7 | 9 Mayıs 2017 |
-| Rel 17-05 | [4022345] |Microsoft Güvenlik danışma belgesi |5.7 | 9 Mayıs 2017 |
-| Rel 17-05 | [4021279] |.NET /ASP.NET çekirdek danışmanlığı |2.62, 3.49, 4.42, 5.7 | 9 Mayıs 2017 |
-| Yok | [4012864] |Saat dilimi güncelleştirme |2.62, 3.49, 4.42 | 9 Mayıs 2017 |
-| Yok | [4014565] |Nisan .NET olmayan güvenlik dökümü |2.62 | 11 Nisan 2017 |
-| Yok | [4014559] |Nisan .NET olmayan güvenlik dökümü |2.62 | 11 Nisan 2017 |
-| Yok | [4015549] |Nisan olmayan - güvenlik dökümü |2.62 | 11 Nisan 2017 |
-| Yok | [4019990] |D3DCompiler güncelleştirmesi - .NET 4.7 gereksinimi |3.49 | 9 Mayıs 2017 |
-| Yok | [4014563] |Nisan .NET olmayan güvenlik dökümü |3.49 | 11 Nisan 2017 |
-| Yok | [4014557] |Nisan .NET olmayan güvenlik dökümü |3.49 | 11 Nisan 2017 |
-| Yok | [4014545] |Nisan .NET olmayan güvenlik dökümü |3.49 | 11 Nisan 2017 |
-| Yok | [4014548] |Nisan .NET olmayan güvenlik dökümü |3.49 | 11 Nisan 2017 |
-| Yok | [4015551] |Nisan olmayan güvenlik dökümü |3.49 | 11 Nisan 2017 |
+| Rel 17-05 | [4010323] |SHA1 danışmanlık |2.62, 4.42, 5.7 | 9 Mayıs 2017 |
+| Rel 17-05 | [4022344] |Microsoft Güvenlik Danışmanlığı |5.7 | 9 Mayıs 2017 |
+| Rel 17-05 | [4022345] |Microsoft Güvenlik Danışmanlığı |5.7 | 9 Mayıs 2017 |
+| Rel 17-05 | [4021279] |.NET/ASP.NET Core danışmanlık |2.62, 3.49, 4.42, 5.7 | 9 Mayıs 2017 |
+| Yok | [4012864] |Saat dilimi güncelleştirmesi |2.62, 3.49, 4.42 | 9 Mayıs 2017 |
+| Yok | [4014565] |Nisan .NET güvenlik dışı paketi |2.62 | 11 Nisan 2017 |
+| Yok | [4014559] |Nisan .NET güvenlik dışı paketi |2.62 | 11 Nisan 2017 |
+| Yok | [4015549] |Nisan güvenlik dışı toplaması |2.62 | 11 Nisan 2017 |
+| Yok | [4019990] |D3DCompiler Update-.NET 4,7 için gereksinim |3.49 | 9 Mayıs 2017 |
+| Yok | [4014563] |Nisan .NET güvenlik dışı paketi |3.49 | 11 Nisan 2017 |
+| Yok | [4014557] |Nisan .NET güvenlik dışı paketi |3.49 | 11 Nisan 2017 |
+| Yok | [4014545] |Nisan .NET güvenlik dışı paketi |3.49 | 11 Nisan 2017 |
+| Yok | [4014548] |Nisan .NET güvenlik dışı paketi |3.49 | 11 Nisan 2017 |
+| Yok | [4015551] |Nisan güvenlik dışı toplaması |3.49 | 11 Nisan 2017 |
 | Yok | [3173424] |Hizmet yığını güncelleştirmesi  |4.42 | 12 Temmuz 2016 |
-| Yok | [4014555] |Nisan .NET olmayan güvenlik dökümü  |4.42 | 11 Nisan 2017 |
-| Yok | [4014567] |Nisan .NET olmayan güvenlik dökümü |4.42 | 11 Nisan 2017 |
-| Yok | [4015550] |Nisan olmayan güvenlik dökümü |4.42 | 11 Nisan 2017 |
+| Yok | [4014555] |Nisan .NET güvenlik dışı paketi  |4.42 | 11 Nisan 2017 |
+| Yok | [4014567] |Nisan .NET güvenlik dışı paketi |4.42 | 11 Nisan 2017 |
+| Yok | [4015550] |Nisan güvenlik dışı toplaması |4.42 | 11 Nisan 2017 |
 | Yok | [4013418] |Hizmet yığını güncelleştirmesi |5.7 | 14 Mart 2017 |
 
-## <a name="april-2017-guest-os"></a>Nisan 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="april-2017-guest-os"></a>Nisan 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 17-04 |  [4015217]  |WS 2016 işletim sistemi kalitesi geliştirmeleri | 5.6 | 11 Nisan 2017 |
-| Rel 17-04 |  [4015546]  |Yalnızca Windows Güvenlik |2.61 | 11 Nisan 2017 |
-| Rel 17-04 |  [4015547]  |Yalnızca Windows Güvenlik |4.41 | 11 Nisan 2017 |
-| Rel 17-04 |  [4015548]  |Yalnızca Windows Güvenlik |3.48 | 11 Nisan 2017 |
-| Rel 17-04 |  [4014661]  |Internet explorer |2.61, 3.48, 4.41 | 11 Nisan 2017 |
-| Rel 17-04 |  [4014550]; [4014560]; [4014562]; [4014556]; [4014574] |.NET güvenlik |4.41 | 11 Nisan 2017 |
-| Rel 17-04 |  [4014564]; [4014572]; [4014549] |.NET güvenlik |3.48 | 11 Nisan 2017 |
-| Rel 17-04 |  [4014566]; [4014552]; [4014573]; [4014558]  |.NET güvenlik |2.61 | 11 Nisan 2017 |
+| Rel 17-04 |  [4015217]  |WS 2016 OS kalite Iyileştirmeleri | 5.6 | 11 Nisan 2017 |
+| Rel 17-04 |  [4015546]  |Yalnızca Windows güvenliği |2.61 | 11 Nisan 2017 |
+| Rel 17-04 |  [4015547]  |Yalnızca Windows güvenliği |4.41 | 11 Nisan 2017 |
+| Rel 17-04 |  [4015548]  |Yalnızca Windows güvenliği |3.48 | 11 Nisan 2017 |
+| Rel 17-04 |  [4014661]  |Internet Explorer |2.61, 3.48, 4.41 | 11 Nisan 2017 |
+| Rel 17-04 |  [4014550]; [4014560]; [4014562]; [4014556]; [4014574] |.NET güvenliği |4.41 | 11 Nisan 2017 |
+| Rel 17-04 |  [4014564]; [4014572]; [4014549] |.NET güvenliği |3.48 | 11 Nisan 2017 |
+| Rel 17-04 |  [4014566]; [4014552]; [4014573]; [4014558]  |.NET güvenliği |2.61 | 11 Nisan 2017 |
 | Rel 17-04 |  [4015546]; [4015547]; [4015548]; [4015217]  |CVE-2017-0181 |5.6 | 11 Nisan 2017 |
 | Rel 17-04 |  [4015546]; [4015547]; [4015548]; [4015217]  |CVE-2017-0163; CVE-2017-0183; CVE-2017-0184; CVE-2017-0184; CVE-2017-0185; CVE-2017-0168 |2.61, 3.48, 4.41 | 11 Nisan 2017 |
 | Rel 17-04 |  [4015546]; [4015547]; [4015548]; [4015217]  |CVE-2017-0178; CVE-2017-0179; CVE-2017-0162; CVE-2017-0169 |4.41 | 11 Nisan 2017 |
 | Rel 17-04 |  [4015546]; [4015547]; [4015548]; [4015217]  |CVE-2017-0182; CVE-2017-0186; CVE-2017-0191 |2.61, 3.48, 4.41, 5.6 | 11 Nisan 2017 |
-| Rel 17-04 |  [4015193]  |Magallanes (Şili) için Windows DST değişiklikleri |2.61, 3.48, 4.41 | 11 Nisan 2017 |
-| Rel 17-04 |  [4012215]  |Windows 7 SP1 ve Windows Server 2008 R2 SP1'in Mart 2017 güvenlik aylık kalite dökümü |2.61 | 11 Nisan 2017 |
-| Rel 17-04 |  [4012217]  |Mart 2017 güvenlik Windows Server 2012 için aylık kalite dökümü |3.48 | 11 Nisan 2017 |
-| Rel 17-04 |  [4012216]  |Mart 2017 güvenlik aylık kalite toplaması için Windows 8.1 ve Windows Server 2012 R2 |4.41 | 11 Nisan 2017 |
+| Rel 17-04 |  [4015193]  |Magalkulvarlar için Windows 'ta DST değişiklikleri (Şili) |2.61, 3.48, 4.41 | 11 Nisan 2017 |
+| Rel 17-04 |  [4012215]  |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Mart 2017 güvenlik aylık kalite toplaması |2.61 | 11 Nisan 2017 |
+| Rel 17-04 |  [4012217]  |Windows Server 2012 için Mart 2017 güvenlik aylık kalite toplaması |3.48 | 11 Nisan 2017 |
+| Rel 17-04 |  [4012216]  |Windows 8.1 ve Windows Server 2012 R2 için Mart 2017 güvenlik aylık kalite toplaması |4.41 | 11 Nisan 2017 |
 
-## <a name="march-2017-guest-os"></a>Mart 2017 konuk işletim sistemi
-| Ürün Kategorisi | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="march-2017-guest-os"></a>Mart 2017 Konuk işletim sistemi
+| Ürün Kategorisi | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Rel 17-03 |  [4013429] |İyileştirmeler ve düzeltmeler | 5.5 | 14 Mart 2017 |
-| Rel 17-03 |  [4012212] |Mart 2017 güvenlik yalnızca kalite güncelleştirme için Windows 7 SP1 ve Windows Server 2008 R2 SP1 |2.60 |14 Mart 2017 |
-| Rel 17-03 |  [4012213] |Mart 2017 güvenlik yalnızca kalite güncelleştirme için Windows 8.1 ve Windows Server 2012 R2 |4.40 |14 Mart 2017 |
-| Rel 17-03 |  [4012214] |Mart 2017 güvenlik yalnızca kalite güncelleştirme için Windows Server 2012|3.47 |14 Mart 2017 |
+| Rel 17-03 |  [4013429] |Geliştirmeler ve düzeltmeler | 5.5 | 14 Mart 2017 |
+| Rel 17-03 |  [4012212] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Mart 2017 güvenlik yalnızca kalite güncelleştirmesi |2.60 |14 Mart 2017 |
+| Rel 17-03 |  [4012213] |Windows 8.1 ve Windows Server 2012 R2 için Mart 2017 güvenlik yalnızca kalite güncelleştirmesi |4.40 |14 Mart 2017 |
+| Rel 17-03 |  [4012214] |Mart 2017 güvenlik yalnızca Windows Server 2012 için kalite güncelleştirmesi|3.47 |14 Mart 2017 |
 | Rel 17-03 |  [4012204] |Internet Explorer için güvenlik güncelleştirmesi |2.60, 3.47, 4.40, 5.5 |14 Mart 2017 |
-| Yok |  [4012864] |DST değişiklikler Windows Kuzey Cypress, Moğolistan, ve Rusça saratov yönetim bölgesi |2.60, 3.47, 4.40 |14 Mart 2017 |
-| Yok |  [3212646] |Windows 7 SP1 ve Windows Server 2008 R2 SP1'i Ocak 2017 güvenlik aylık kalite dökümü |2.60 |14 Mart 2017 |
-| Yok |  [3205409] |Aralık 2016 güvenlik Windows Server 2012 için aylık kalite dökümü |3.47 |14 Mart 2017 |
-| Yok |  [3205401] |Aralık 2016 güvenlik aylık kalite toplaması için Windows 8.1 ve Windows Server 2012 R2 |4.40 |14 Mart 2017 |
-| Yok |  [3211320] |Windows 10 sürüm 1607'ye ve Windows Server 2016 için hizmet yığını güncelleştirmesi: 24 Ocak 2017 |5.5 |14 Mart 2017 |
+| Yok |  [4012864] |Kuzey Cypress, Moğolistan ve Rusça Saratov bölgesi için Windows 'daki DST değişiklikleri |2.60, 3.47, 4.40 |14 Mart 2017 |
+| Yok |  [3212646] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Ocak 2017 güvenlik aylık kalite toplaması |2.60 |14 Mart 2017 |
+| Yok |  [3205409] |Windows Server 2012 için Aralık 2016 güvenlik aylık kalite toplaması |3.47 |14 Mart 2017 |
+| Yok |  [3205401] |Windows 8.1 ve Windows Server 2012 R2 için Aralık 2016 güvenlik aylık kalite toplaması |4.40 |14 Mart 2017 |
+| Yok |  [3211320] |Windows 10 sürüm 1607 ve Windows Server 2016 için yığın güncelleştirmesi Bakımı: 24 Ocak 2017 |5.5 |14 Mart 2017 |
 
-## <a name="january-2017-guest-os"></a>Ocak 2017 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="january-2017-guest-os"></a>Ocak 2017 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| MS17-004 | [3216771] |Yerel Güvenlik Yetkilisi alt sistem hizmeti için güvenlik güncelleştirmesi |2.59 |10 Ocak 2017 |
+| MS17-004 | [3216771] |Yerel Güvenlik Yetkilisi Alt Sistem Hizmeti için güvenlik güncelleştirmesi |2.59 |10 Ocak 2017 |
 
-## <a name="december-2016-guest-os"></a>Aralık 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="december-2016-guest-os"></a>Aralık 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| MS16-144 |[3204059] |Internet Explorer için toplu güvenlik güncelleştirmesi |2.58, 3.46, 4.39 |13 Aralık 2016 |
-| MS16-145 |[3204062] |Microsoft Edge için toplu güvenlik güncelleştirmesi |5,4 |13 Aralık 2016 |
-| MS16-146 |[3204066]   |Microsoft grafik bileşeni için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13 Aralık 2016 |
-| MS16-147 |[3204063]   |Microsoft Uniscribe güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13 Aralık 2016 |
-| MS16-149 |[3205655]   |Microsoft Windows Güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13 Aralık 2016 |
-| MS16-150 |[3205642]   |Güvenlik güncelleştirmesi güvenli çekirdek modu |5,4 |13 Aralık 2016 |
-| MS16-151 |[3205651]   |Çekirdek modu sürücüleri için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13 Aralık 2016 |
-| MS16-152 |[3199709]   |Windows çekirdek güvenlik güncelleştirmesi |5,4 |13 Aralık 2016 |
-| MS16-153 |[3207328] |Ortak günlük dosya sistemi sürücüsü için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13 Aralık 2016 |
-| MS16-155 |[3205640]   |.NET Framework güvenlik güncelleştirmesi |5,4 |13 Aralık 2016 |
-| Yok |[3197868] |Windows 7 SP1 ve Windows Server 2008 R2 SP1'i Kasım 2016 güvenlik aylık kalite dökümü |2.58 |13 Aralık 2016 |
-| Yok |[3197877] |Kasım 2016 güvenlik Windows Server 2012 için aylık kalite dökümü |3.46 |13 Aralık 2016 |
-| Yok |[3197874] |Kasım 2016 güvenlik aylık kalite toplaması için Windows 8.1 ve Windows Server 2012 R2 |4.39 |13 Aralık 2016 |
+| MS16-144 |[3204059] |Internet Explorer için toplu güvenlik güncelleştirmesi |2.58, 3.46, 4.39 |13. ara, 2016 |
+| MS16-145 |[3204062] |Microsoft Edge için toplu güvenlik güncelleştirmesi |5.4 |13. ara, 2016 |
+| MS16-146 |[3204066]   |Microsoft grafik bileşeni için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13. ara, 2016 |
+| MS16-147 |[3204063]   |Microsoft Uniscribe için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13. ara, 2016 |
+| MS16-149 |[3205655]   |Microsoft Windows için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13. ara, 2016 |
+| MS16-150 |[3205642]   |Güvenli çekirdek modu için güvenlik güncelleştirmesi |5.4 |13. ara, 2016 |
+| MS16-151 |[3205651]   |Çekirdek modu sürücüleri için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13. ara, 2016 |
+| MS16-152 |[3199709]   |Windows çekirdeği için güvenlik güncelleştirmesi |5.4 |13. ara, 2016 |
+| MS16-153 |[3207328] |Ortak Günlük Dosya Sistemi sürücü için güvenlik güncelleştirmesi|2.58, 3.46, 4.39, 5.4 |13. ara, 2016 |
+| MS16-155 |[3205640]   |.NET Framework için güvenlik güncelleştirmesi |5.4 |13. ara, 2016 |
+| Yok |[3197868] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Kasım 2016 güvenlik aylık kalite toplaması |2.58 |13. ara, 2016 |
+| Yok |[3197877] |Windows Server 2012 için Kasım 2016 güvenlik aylık kalite toplaması |3.46 |13. ara, 2016 |
+| Yok |[3197874] |Windows 8.1 ve Windows Server 2012 R2 için Kasım 2016 güvenlik aylık kalite toplaması |4.39 |13. ara, 2016 |
 
-## <a name="november-2016-guest-os"></a>Kasım 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="november-2016-guest-os"></a>Kasım 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-129 |[3199057] |Microsoft Edge için toplu güvenlik güncelleştirmesi |5.3 |8 Kasım 2016 |
-| MS16-130 |[3199172] |Microsoft Windows Güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
-| MS16-131 |[3199151]   |Microsoft Video denetimi güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
+| MS16-130 |[3199172] |Microsoft Windows için güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
+| MS16-131 |[3199151]   |Microsoft video denetimi için güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
 | MS16-132 |[3199120] |Microsoft bileşeni için güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
-| MS16-134 |[3193706] |Ortak günlük dosya sistemi sürücüsü için güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
+| MS16-134 |[3193706] |Ortak Günlük Dosya Sistemi sürücü için güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
 | MS16-135 |[3199135] |Çekirdek modu sürücüleri için güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
 | MS16-137 |[3199173]   |Windows kimlik doğrulama yöntemleri için güvenlik güncelleştirmesi |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
-| MS16-138 |[3199647] |Microsoft sanal sabit sürücünün güvenlik güncelleştirmesi |5.3, 4.38, 3.45 |8 Kasım 2016 |
-| MS16-139 |[3199720] |Windows çekirdek güvenlik güncelleştirmesi |2.57 |Kasım 8.2016 |
-| MS16-140 |[3193479] |Güvenlik güncelleştirmesi için Önyükleme Yöneticisi |5.3, 4.38, 3.45 |8 Kasım 2016 |
+| MS16-138 |[3199647] |Microsoft sanal sabit sürücüsüne yönelik güvenlik güncelleştirmesi |5.3, 4.38, 3.45 |8 Kasım 2016 |
+| MS16-139 |[3199720] |Windows çekirdeği için güvenlik güncelleştirmesi |2.57 |Kas 8,2016 |
+| MS16-140 |[3193479] |Önyükleme Yöneticisi Için güvenlik güncelleştirmesi |5.3, 4.38, 3.45 |8 Kasım 2016 |
 | MS16-142 |[3198467] |Internet Explorer için toplu güvenlik güncelleştirmesi |2.57, 4.38, 5.3 |8 Kasım 2016 |
-| Yok |[3192321] |Türkiye DST observance sona erer. |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
-| Yok |[3185330] |Ekim 2016 güvenlik Windows 7 SP1 ve Windows Server 2008 R2 SP1 için aylık kalite dökümü |2.57 |8 Kasım 2016 |
-| Yok |[3192403] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için aylık kalite toplaması Ekim 2016'dan önizlemesi |2.57 |8 Kasım 2016 |
-| Yok |[3177467] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 hizmet yığını güncelleştirmesi: 20 Eylül 2016 |2.57 |8 Kasım 2016 |
-| Yok |[3185332] |Windows Server 2012 Ekim 2016 güvenlik aylık kalite dökümü |3.45 |8 Kasım 2016 |
-| Yok |[3192406] |Ekim 2016'dan Windows Server 2012 için aylık kalite toplaması önizlemesi |3.45 |8 Kasım 2016 |
-| Yok |[3185331] |Ekim 2016 güvenlik Windows 8.1 ve Windows Server 2012 R2 için aylık kalite dökümü |4.38 |8 Kasım 2016 |
-| Yok |[3192404] |Windows 8.1 ve Windows Server 2012 R2 için aylık kalite toplaması Ekim 2016'dan önizlemesi |4.38 |8 Kasım 2016 |
-| Yok |[3199986] |Windows 10 sürüm 1607 için hizmet yığını güncelleştirmesi: 27 Ekim 2016 |5.3 |8 Kasım 2016 |
-| Yok |[3197954] |Windows 10 sürüm 1607'ye ve Windows Server 2016 için toplu güncelleştirme: 27 Ekim 2016 |5.3 |8 Kasım 2016 |
+| Yok |[3192321] |Türkiye, DST observance sonlandırır |5.3, 4.38, 3.45, 2.57 |8 Kasım 2016 |
+| Yok |[3185330] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Ekim 2016 güvenlik aylık kalite toplaması |2.57 |8 Kasım 2016 |
+| Yok |[3192403] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için aylık kalite toplamasının 2016 Ekim önizlemesi |2.57 |8 Kasım 2016 |
+| Yok |[3177467] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için hizmet yığını güncelleştirmesi: 20 Eylül 2016 |2.57 |8 Kasım 2016 |
+| Yok |[3185332] |Windows Server 2012 için Ekim 2016 güvenlik aylık kalite toplaması |3.45 |8 Kasım 2016 |
+| Yok |[3192406] |Windows Server 2012 için aylık kalite toplamasının 2016 Ekim önizlemesi |3.45 |8 Kasım 2016 |
+| Yok |[3185331] |Windows 8.1 ve Windows Server 2012 R2 için Ekim 2016 güvenlik aylık kalite toplaması |4.38 |8 Kasım 2016 |
+| Yok |[3192404] |Windows 8.1 ve Windows Server 2012 R2 için aylık kalite toplamasının 2016 Ekim önizlemesi |4.38 |8 Kasım 2016 |
+| Yok |[3199986] |Windows 10 sürüm 1607 için yığın güncelleştirmesi Bakımı: 27 Ekim 2016 |5.3 |8 Kasım 2016 |
+| Yok |[3197954] |Windows 10 sürüm 1607 ve Windows Server 2016 için toplu güncelleştirme: 27 Ekim 2016 |5.3 |8 Kasım 2016 |
 
-## <a name="october-2016-guest-os"></a>Ekim 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="october-2016-guest-os"></a>Ekim 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-118 |[3192887] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.37, 3.44, 2.56 |11 Ekim 2016 |
 | MS16-120 |[3192884] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.37, 3.44, 2.56 |11 Ekim 2016 |
 | MS16-123 |[3192892] |Çekirdek modu sürücüleri için güvenlik güncelleştirmesi |4.37, 3.44, 2.56 |11 Ekim 2016 |
 | MS16-124 |[3193227] |Windows kayıt defteri için güvenlik güncelleştirmesi |4.37, 3.44, 2.56 |11 Ekim 2016 |
-| MS16-126 |[3196067] |Mesajlaşma API'si Microsoft Internet için güvenlik güncelleştirmesi |2.56 |11 Ekim 2016 |
+| MS16-126 |[3196067] |Microsoft Internet mesajlaşma API 'SI için güvenlik güncelleştirmesi |2.56 |11 Ekim 2016 |
 | MS16-101 |[3178465] |Windows kimlik doğrulama yöntemleri için güvenlik güncelleştirmesi |4.37, 3.44, 2.56 |11 Ekim 2016 |
-| Yok |[3182203] |Novosibirsk için Eylül 2016 saat dilimini değiştirme |4.37, 3.44, 2.56 |11 Ekim 2016 |
-| Yok |[3185278] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için güncelleştirme paketi Eylül 2016 |2.56 |11 Ekim 2016 |
-| Yok |[3185280] |Eylül 2016 için Windows Server 2012 güncelleştirme paketi |3.44 |11 Ekim 2016 |
-| Yok |[3185279] |Windows 8.1 ve Windows Server 2012 R2 için güncelleştirme paketi Eylül 2016 |4.37 |11 Ekim 2016 |
-| Yok |[3194798] |Windows 10 sürüm 1607'ye ve Windows Server 2016 için toplu güncelleştirme |5.2 |11 Ekim 2016 |
+| Yok |[3182203] |Novosibirsk için Eylül 2016 saat dilimi değişikliği |4.37, 3.44, 2.56 |11 Ekim 2016 |
+| Yok |[3185278] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Eylül 2016 güncelleştirme paketi |2.56 |11 Ekim 2016 |
+| Yok |[3185280] |Windows Server 2012 için Eylül 2016 güncelleştirme paketi |3.44 |11 Ekim 2016 |
+| Yok |[3185279] |Windows 8.1 ve Windows Server 2012 R2 için Eylül 2016 güncelleştirme paketi |4.37 |11 Ekim 2016 |
+| Yok |[3194798] |Windows 10 sürüm 1607 ve Windows Server 2016 için toplu güncelleştirme |5.2 |11 Ekim 2016 |
 
-## <a name="september-2016-guest-os"></a>Eylül 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="september-2016-guest-os"></a>Eylül 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| MS16-104 |[3183038] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| MS16-106 |[3185848] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| MS16-110 |[3178467] |Windows Güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| MS16-111 |[3186973] |Windows çekirdek güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| MS16-112 |[3178469] |Güvenlik güncelleştirmesi Windows kilit ekranı |4.36 |13 Eylül 2016 |
-| MS16-114 |[3185879] |SMB sunucusunda Windows Güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| MS16-115 |[3188733] |PDF güvenlik güncelleştirmesi |4.35, 3.43 |13 Eylül 2016 |
-| MS16-116 |[3188724] |OLE Otomasyonu nesnesi etkin komut dosyası altyapısı VBScript için güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| Yok |[3174644] |Diffie-Hellman anahtar değişimi için güncelleştirilmiş destek |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| Yok |[3177723] |Saat dilimi güncelleştirmesi - Mısır DST iptal eder. |4.36, 3.43, 2.55 |13 Eylül 2016 |
-| Yok |[3179573] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için güncelleştirme paketi Ağustos 2016 |2.55 |13 Eylül 2016 |
-| Yok |[3179575] |Ağustos 2016 için Windows Server 2012 güncelleştirme paketi |3.43 |13 Eylül 2016 |
-| Yok |[3179574] |Windows RT 8.1, Windows 8.1 ve Windows Server 2012 R2 için güncelleştirme paketi Ağustos 2016 |4.36 |13 Eylül 2016 |
+| MS16-104 |[3183038] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| MS16-106 |[3185848] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| MS16-110 |[3178467] |Windows için güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| MS16-111 |[3186973] |Windows çekirdeği için güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| MS16-112 |[3178469] |Windows kilit ekranı için güvenlik güncelleştirmesi |4.36 |13 Eyl, 2016 |
+| MS16-114 |[3185879] |Windows SMB sunucusu için güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| MS16-115 |[3188733] |PDF için güvenlik güncelleştirmesi |4.35, 3.43 |13 Eyl, 2016 |
+| MS16-116 |[3188724] |VBScript betik altyapısı için OLE Otomasyonunda güvenlik güncelleştirmesi |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| Yok |[3174644] |Diffie-Hellman anahtar değişimi için güncelleştirilmiş destek |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| Yok |[3177723] |Saat dilimi güncelleştirmesi-Mısır DST iptal eder |4.36, 3.43, 2.55 |13 Eyl, 2016 |
+| Yok |[3179573] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Ağustos 2016 güncelleştirme paketi |2.55 |13 Eyl, 2016 |
+| Yok |[3179575] |Windows Server 2012 için Ağustos 2016 güncelleştirme paketi |3.43 |13 Eyl, 2016 |
+| Yok |[3179574] |Windows RT 8,1, Windows 8.1 ve Windows Server 2012 R2 için Ağustos 2016 güncelleştirme paketi |4.36 |13 Eyl, 2016 |
 
-## <a name="august-2016-guest-os"></a>Ağustos 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="august-2016-guest-os"></a>Ağustos 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| MS16-095 |[3177356] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu 2016 |
-| MS16-097 |[3177393] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu 2016 |
-| MS16-098 |[3178466] |Windows çekirdek modu sürücüleri için güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu 2016 |
-| MS16-100 |[3179577] |Güvenli Önyükleme güvenlik güncelleştirmesi |4.35, 3.42 |9 Ağu 2016 |
-| MS16-101 |[3178465] |Windows kimlik doğrulama yöntemleri için güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu 2016 |
-| MS16-102 |[3182248] |Microsoft Windows PDF Kitaplığı Güvenlik güncelleştirmesi |4.35, 3.42 |9 Ağu 2016 |
-| MS16-077 yeniden yayımlama |[3165191] |Web Proxy Otomatik Bulma (WPAD) için güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu 2016 |
-| Yok |[3172605] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 Temmuz 2016 güncelleştirme paketi |2.54 |9 Ağu 2016 |
-| Yok |[3172615] |Windows Server 2012 için Temmuz 2016 güncelleştirme paketi |3.42 |9 Ağu 2016 |
-| Yok |[3172614] |Windows RT 8.1, Windows 8.1 ve Windows Server 2012 R2 için Temmuz 2016 güncelleştirme paketi |4.35 |9 Ağu 2016 |
+| MS16-095 |[3177356] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu, 2016 |
+| MS16-097 |[3177393] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu, 2016 |
+| MS16-098 |[3178466] |Windows çekirdek modu sürücüleri için güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu, 2016 |
+| MS16-100 |[3179577] |Güvenli önyükleme için güvenlik güncelleştirmesi |4.35, 3.42 |9 Ağu, 2016 |
+| MS16-101 |[3178465] |Windows kimlik doğrulama yöntemleri için güvenlik güncelleştirmesi |4.35, 3.42, 2.54 |9 Ağu, 2016 |
+| MS16-102 |[3182248] |Microsoft Windows PDF kitaplığı için güvenlik güncelleştirmesi |4.35, 3.42 |9 Ağu, 2016 |
+| MS16-077 yeniden yayınlama |[3165191] |Web proxy için güvenlik güncelleştirmesi otomatik bul (WPAD) |4.35, 3.42, 2.54 |9 Ağu, 2016 |
+| Yok |[3172605] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Temmuz 2016 güncelleştirme paketi |2.54 |9 Ağu, 2016 |
+| Yok |[3172615] |Windows Server 2012 için Temmuz 2016 güncelleştirme paketi |3.42 |9 Ağu, 2016 |
+| Yok |[3172614] |Windows RT 8,1, Windows 8.1 ve Windows Server 2012 R2 için Temmuz 2016 güncelleştirme paketi |4.35 |9 Ağu, 2016 |
 
-## <a name="july-2016-guest-os"></a>Temmuz 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="july-2016-guest-os"></a>Temmuz 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-084 |[3169991] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
-| MS16-087 |[3170005] |Microsoft Yazdırma Biriktiricisi Güvenlik güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
-| MS16-090 |[3171481] |Çekirdek modu sürücüler için güvenlik güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
-| MS16-091 |[3170048] |.NET Framework güvenlik güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
-| MS16-092 |[3171910] |Windows çekirdek güvenlik güncelleştirmesi |4.34, 3.41 |12 Temmuz 2016 |
-| MS16-094 |[3177404] |Güvenli Önyükleme güvenlik güncelleştirmesi |4.34, 3.41 |12 Temmuz 2016 |
-| Yok |[3162835] |Haziran 2016 DST ve Windows için saat dilimi güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
-| Yok |[3156417] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Mayıs 2016 güncelleştirme paketi |2.53 |12 Temmuz 2016 |
-| Yok |[3161608] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için güncelleştirme paketi Haziran 2016 |2.53 |12 Temmuz 2016 |
-| Yok |[3161609] |Haziran 2016 için Windows Server 2012 güncelleştirme paketi |3.41 |12 Temmuz 2016 |
-| Yok |[3161606] |Windows RT 8.1, Windows 8.1 ve Windows Server 2012 R2 için güncelleştirme paketi Haziran 2016 |4.34 |12 Temmuz 2016 |
-| Yok |[3139923] |Bir HTTP MSI paketi yüklendiğinde, Windows Installer (MSI) onarım işe yaramazsa Windows içinde paylaşın |4.34 |12 Temmuz 2016 |
+| MS16-087 |[3170005] |Microsoft yazdırma biriktiricisi için güvenlik güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
+| MS16-090 |[3171481] |Çekirdek modu sürücüleri için güvenlik güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
+| MS16-091 |[3170048] |.NET Framework için güvenlik güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
+| MS16-092 |[3171910] |Windows çekirdeği için güvenlik güncelleştirmesi |4.34, 3.41 |12 Temmuz 2016 |
+| MS16-094 |[3177404] |Güvenli önyükleme için güvenlik güncelleştirmesi |4.34, 3.41 |12 Temmuz 2016 |
+| Yok |[3162835] |Windows için Haziran 2016 DST ve saat dilimi güncelleştirmesi |4.34, 3.41, 2.53 |12 Temmuz 2016 |
+| Yok |[3156417] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için 2016 Mayıs güncelleştirme paketi |2.53 |12 Temmuz 2016 |
+| Yok |[3161608] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için Haziran 2016 güncelleştirme paketi |2.53 |12 Temmuz 2016 |
+| Yok |[3161609] |Windows Server 2012 için Haziran 2016 güncelleştirme paketi |3.41 |12 Temmuz 2016 |
+| Yok |[3161606] |Windows RT 8,1, Windows 8.1 ve Windows Server 2012 R2 için Haziran 2016 güncelleştirme paketi |4.34 |12 Temmuz 2016 |
+| Yok |[3139923] |MSI paketi Windows 'daki bir HTTP paylaşımında yüklendiğinde Windows Installer (MSI) onarımı çalışmıyor |4.34 |12 Temmuz 2016 |
 
-## <a name="june-2016-guest-os"></a>Haziran 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="june-2016-guest-os"></a>Haziran 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| MS16-035 |[3141780] |Güvenlik özelliği atlama adresi .NET Framework güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
-| Öneri |[3155527] |Güncelleştirme paketleri FalseStart için şifre. |4.33, 3.40 |14 Haziran 2016 |
+| MS16-035 |[3141780] |.NET Framework güvenlik özelliği atlaması için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
+| Öneri |[3155527] |Yanlışdan başlamak için şifre paketlerine Güncelleştir |4.33, 3.40 |14 Haziran 2016 |
 | MS16-063 |[3163649] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
 | MS16-069 |[3163640] |JScript ve VBScript için toplu güvenlik güncelleştirmesi |2.52 |14 Haziran 2016 |
-| MS16-071 |[3164065] |Microsoft Windows DNS sunucusu için güvenlik güncelleştirmesi |4.33, 3.40 |14 Haziran 2016 |
-| MS16-072 |[3163622] |Grup İlkesi için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
-| MS16-073 |[3164028] |Çekirdek modu sürücüler için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
+| MS16-071 |[3164065] |Microsoft Windows DNS Server için güvenlik güncelleştirmesi |4.33, 3.40 |14 Haziran 2016 |
+| MS16-072 |[3163622] |grup ilkesi için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
+| MS16-073 |[3164028] |Çekirdek modu sürücüleri için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
 | MS16-074 |[3164036] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
-| MS16-075 |[3164038] |SMB sunucusunda Windows Güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
-| MS16-076 |[3167691] |Netlogon güvenlik güncelleştirmesi |4.33 |14 Haziran 2016 |
-| MS16-077 |[3165191] |WPAD güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
-| MS16-080 |[3164302] |Microsoft Windows PDF güvenlik güncelleştirmesi |4.33, 3.40 |14 Haziran 2016 |
-| MS16-081 |[3160352] |Active Directory güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
-| Yok |[2922223] |RealTimeIsUniversal kayıt defteri girdisini Windows etkinleştirilirse sistem saati değiştiremezsiniz. |2.52 |14 Haziran 2016 |
-| Yok |[3121255] |"0x00000024" durdurma hatası FsRtlNotifyFilterReportChange ve kopyalama dosyasında Windows başarısız olabilir |2.52 |14 Haziran 2016 |
-| Yok |[3125424] |Windows Server 2012 R2 veya Windows Server 2012 yanıt vermiyor LSASS kilitlenmeleri neden |4.33, 3.40 |14 Haziran 2016 |
-| Yok |[3125574] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için kolaylık güncelleştirme |2.52 |14 Haziran 2016 |
-| Yok |[3140245] |TLS 1.1 ve TLS 1.2 bir varsayılan güvenli protokollerin Windows WinHTTP olarak etkinleştirmek için güncelleştirin |3.40, 2.52 |14 Haziran 2016 |
-| Yok |[3146604] |WMI hizmeti Windows Server 2012 R2 veya Windows Server 2012 rastgele çöküyor |4.33, 3.40 |14 Haziran 2016 |
-| Yok |[3149157] |Windows Server 2012 R2 ve Windows 8.1 için TCP/IP'yi güvenilirlik ve ölçeklendirilebilirlik geliştirmeleri |4.33 |14 Haziran 2016 |
+| MS16-075 |[3164038] |Windows SMB sunucusu için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
+| MS16-076 |[3167691] |Netlogon için güvenlik güncelleştirmesi |4.33 |14 Haziran 2016 |
+| MS16-077 |[3165191] |WPAD için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
+| MS16-080 |[3164302] |Microsoft Windows PDF için güvenlik güncelleştirmesi |4.33, 3.40 |14 Haziran 2016 |
+| MS16-081 |[3160352] |Active Directory için güvenlik güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
+| Yok |[2922223] |Windows 'da RealTimeIsUniversal kayıt defteri girdisi etkinse sistem saatini değiştiremezsiniz |2.52 |14 Haziran 2016 |
+| Yok |[3121255] |FsRtlNotifyFilterReportChange içindeki "0x00000024" durdurma hatası ve kopyalama dosyası Windows 'da başarısız olabilir |2.52 |14 Haziran 2016 |
+| Yok |[3125424] |LSASS kilitlenmeleri Windows Server 2012 R2 veya Windows Server 2012 ' nin yanıt vermemesine neden olur |4.33, 3.40 |14 Haziran 2016 |
+| Yok |[3125574] |Windows 7 SP1 ve Windows Server 2008 R2 SP1 için kolaylık sağlaması güncelleştirmesi |2.52 |14 Haziran 2016 |
+| Yok |[3140245] |Windows 'da WinHTTP 'de varsayılan güvenli protokoller olarak TLS 1,1 ve TLS 1,2 ' i etkinleştirmek için güncelleştirme |3.40, 2.52 |14 Haziran 2016 |
+| Yok |[3146604] |Windows Server 2012 R2 veya Windows Server 2012 ' de WMI hizmeti rastgele kilitleniyor |4.33, 3.40 |14 Haziran 2016 |
+| Yok |[3149157] |Windows 8.1 ve Windows Server 2012 R2 için TCP/IP 'de güvenilirlik ve ölçeklenebilirlik iyileştirmeleri |4.33 |14 Haziran 2016 |
 | Yok |[3156416] |Windows Server 2012 için Mayıs 2016 güncelleştirme paketi |3.40 |14 Haziran 2016 |
-| Yok |[3156418] |Windows RT 8.1, Windows 8.1 ve Windows Server 2012 R2 için Mayıs 2016 güncelleştirme paketi |4.33 |14 Haziran 2016 |
-| Yok |[3153731] |Azerbaycan, Şili, Haiti ve Windows, Fas DST Mayıs 2016 güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
+| Yok |[3156418] |Windows RT 8,1, Windows 8.1 ve Windows Server 2012 R2 için 2016 Mayıs güncelleştirme paketi |4.33 |14 Haziran 2016 |
+| Yok |[3153731] |Windows 'da Azerbaycan, Şili, Haiti ve Fas için Mayıs 2016 DST güncelleştirmesi |4.33, 3.40, 2.52 |14 Haziran 2016 |
 
-## <a name="may-2016-guest-os"></a>Mayıs 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="may-2016-guest-os"></a>Mayıs 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-051 |[3155533] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
 | MS16-053 |[3156764] |JScript ve VBScript için toplu güvenlik güncelleştirmesi |2.51 |10 Mayıs 2016 |
 | MS16-055 |[3156754] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
-| MS16-057 |[3156987] |Güvenlik güncelleştirmesi Windows Kabuğu |4.32 |10 Mayıs 2016 |
-| MS16-060 |[3154846] |Windows çekirdek güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
-| MS16-061 |[3155520] |RPC güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
-| MS16-062 |[3158222] |Çekirdek modu sürücüler için güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
-| MS16-065 |[3156757] |.NET Framework güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
-| MS16-067 |[3155784] |Birim Yöneticisi sürücü güvenlik güncelleştirmesi |4.32, 3.39 |10 Mayıs 2016 |
-| Yok |[3148851] |Saat dilimi değişikliklerini Windows Rusya'da  |4.32, 3.39, 2.51 |10 Mayıs 2016 |
-| Yok |[3133977] |BitLocker Sürücü svchost.exe işleminde Windows 7 veya Windows Server 2008 R2 hizmet kilitlenmesi nedeniyle şifrelenemiyor  |2.51 |10 Mayıs 2016 |
-| Yok |[3133681] |İşlemi Windows Server 2012 R2'de SCVMM'de sanal makineler yanıt yok  |4.32 |10 Mayıs 2016 |
-| Yok |[3123245] |Güncelleştirme, Windows Server 2012 R2'de bağlantı noktası tükenmesi kimliği geliştirir.  |4.32 |10 Mayıs 2016 |
-| Yok |[Disable RC4] | Microsoft Güvenlik Danışma Belgesi: RC4'ü devre dışı bırakmak için güncelleştirme  |4.32, 3.39, 2.51 |10 Mayıs 2016 |
+| MS16-057 |[3156987] |Windows kabuğu için güvenlik güncelleştirmesi |4.32 |10 Mayıs 2016 |
+| MS16-060 |[3154846] |Windows çekirdeği için güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
+| MS16-061 |[3155520] |RPC için güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
+| MS16-062 |[3158222] |Çekirdek modu sürücüleri için güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
+| MS16-065 |[3156757] |.NET Framework için güvenlik güncelleştirmesi |4.32, 3.39, 2.51 |10 Mayıs 2016 |
+| MS16-067 |[3155784] |Volume Manager sürücüsü için güvenlik güncelleştirmesi |4.32, 3.39 |10 Mayıs 2016 |
+| Yok |[3148851] |Windows 'da Rusya için saat dilimi değişiklikleri  |4.32, 3.39, 2.51 |10 Mayıs 2016 |
+| Yok |[3133977] |Windows 7 veya Windows Server 2008 R2 'de Svchost. exe işleminde hizmet Kilitlenmelerinde BitLocker sürücüleri şifreleyemez  |2.51 |10 Mayıs 2016 |
+| Yok |[3133681] |Sanal makineler, Windows Server 2012 R2 'de SCVMM 'deki işleme yanıt vermez  |4.32 |10 Mayıs 2016 |
+| Yok |[3123245] |Güncelleştirme, Windows Server 2012 R2 'de bağlantı noktası Tükenme kimliğini geliştirir  |4.32 |10 Mayıs 2016 |
+| Yok |[RC4 devre dışı bırak] | Microsoft Güvenlik Danışma belgesi: RC4 devre dışı bırakmak için güncelleştirme  |4.32, 3.39, 2.51 |10 Mayıs 2016 |
 
-## <a name="april-2016-guest-os"></a>Nisan 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="april-2016-guest-os"></a>Nisan 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-037 |[3148531] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.31, 3.38, 2.50 |12 Nisan 2016 |
 | MS16-039 |[3148522] |Microsoft grafik bileşeni için güvenlik güncelleştirmesi |4.31, 3.38, 2.50 |12 Nisan 2016 |
-| MS16-040 |[3148541] |Microsoft XML Çekirdek hizmet için güvenlik güncelleştirmesi |4.31, 3.38, 2.50 |12 Nisan 2016 |
-| MS16-044 |[3146706] |OLE Windows Güvenlik güncelleştirmesi |4.31, 3.38, 2.50 |12 Nisan 2016 |
-| MS16-045 |[3143118] |Windows Hyper-V güvenlik güncelleştirmesi |4.31, 3.38 |12 Nisan 2016 |
+| MS16-040 |[3148541] |Microsoft XML Çekirdek hizmeti için güvenlik güncelleştirmesi |4.31, 3.38, 2.50 |12 Nisan 2016 |
+| MS16-044 |[3146706] |Windows OLE için güvenlik güncelleştirmesi |4.31, 3.38, 2.50 |12 Nisan 2016 |
+| MS16-045 |[3143118] |Windows Hyper-V için güvenlik güncelleştirmesi |4.31, 3.38 |12 Nisan 2016 |
 | MS16-047 |[3148527] |Güvenlik hesabı Yöneticisi uzak protokolü için güvenlik güncelleştirmesi |4.31, 3.38, 2.50 |12 Nisan 2016 |
-| MS16-048 |[3148528] |CSRSS Güvenlik güncelleştirmesi |4.31, 3.38 |12 Nisan 2016 |
+| MS16-048 |[3148528] |CSRSS için güvenlik güncelleştirmesi |4.31, 3.38 |12 Nisan 2016 |
 
-## <a name="march-2016-guest-os"></a>Mart 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="march-2016-guest-os"></a>Mart 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-023 |[3142015] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
-| MS16-026 |[3143148] |Uzaktan kod yürütülmesine yönelik grafik yazı tipleri için güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
-| MS16-027 |[3143146] |Güvenlik güncelleştirmeleri için Windows Media Player adresine uzaktan kod yürütme |4.30, 3.37, 2.49 |8 Mart 2016 |
-| MS16-028 |[3143081] |Uzaktan kod yürütülmesine yönelik olarak Microsoft Windows PDF Kitaplığı Güvenlik güncelleştirmesi |4.30, 3.37 |8 Mart 2016 |
-| MS16-030 |[3143136] |OLE uzaktan kod yürütülmesine yönelik olarak Windows Güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
-| MS16-031 |[3140410] |Microsoft ayrıcalık yükseltme ele almak Windows Güvenlik güncelleştirmesi |2.49 |8 Mart 2016 |
-| MS16-032 |[3143141] |Güvenlik güncelleştirmesi ayrıcalıkların yükseltilmesine yönelik ikincil oturum açma |4.30, 3.37, 2.49 |8 Mart 2016 |
-| MS16-033 |[3143142] |USB yığın depolama sınıfı sürücüsü, ayrıcalıkların yükseltilmesine yönelik güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
-| MS16-034 |[3143145] |Çekirdek modu sürücüsü adresine ayrıcalığın için güvenlik güncelleştirmeleri |4.30, 3.37, 2.49 |8 Mart 2016 |
+| MS16-026 |[3143148] |Uzaktan kod yürütmeye yönelik grafik yazı tiplerine güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
+| MS16-027 |[3143146] |Uzaktan kod yürütmeye yönelik olarak Windows Media Player için güvenlik güncelleştirmeleri |4.30, 3.37, 2.49 |8 Mart 2016 |
+| MS16-028 |[3143081] |Uzaktan kod yürütmeye yönelik olarak Microsoft Windows PDF kitaplığı için güvenlik güncelleştirmesi |4.30, 3.37 |8 Mart 2016 |
+| MS16-030 |[3143136] |Uzaktan kod yürütmeyi gidermek için Windows OLE güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
+| MS16-031 |[3140410] |Ayrıcalık yükselmesine yönelik Microsoft Windows için güvenlik güncelleştirmesi |2.49 |8 Mart 2016 |
+| MS16-032 |[3143141] |Ayrıcalık yükselmesine yönelik Ikincil oturum açma güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
+| MS16-033 |[3143142] |Ayrıcalık yükselmesine yönelik olarak USB yığın depolama sınıfı sürücüsüne güvenlik güncelleştirmesi |4.30, 3.37, 2.49 |8 Mart 2016 |
+| MS16-034 |[3143145] |Ayrıcalık yükselmesine yönelik çekirdek modu sürücüsü için güvenlik güncelleştirmeleri |4.30, 3.37, 2.49 |8 Mart 2016 |
 
-## <a name="february-2016-guest-os"></a>Şubat 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="february-2016-guest-os"></a>Şubat 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-009 |[3134220] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| MS16-013 |[3134811] |Uzaktan kod yürütülmesine yönelik olarak Windows Günlük güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| MS16-014 |[3134228] |Microsoft Windows adresi uzaktan kod yürütme için güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| MS16-016 |[3136041] |WebDAV ayrıcalıkların yükseltilmesine yönelik güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| MS16-018 |[3136082] |Windows çekirdek modu sürücüsü ayrıcalıkların yükseltilmesine yönelik güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| MS16-019 |[3137893] |Uzaktan kod yürütme ele almak .NET Framework güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| MS16-021 |[3133043] |Hizmet reddi adresi RADIUS sunucusu NPS güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| Microsoft Güvenlik danışma belgesi |[3109853] |TLS birlikte çalışabilirlik geliştirmek için güncelleştirme |4.29, 3.36 |9 Şubat 2016 |
-| -MS15-101 yeniden yayımlama |[3089662] |.NET Framework güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| -MS15-118 yeniden yayımlama |[3104507] |Ayrıcalık yükseltme ele almak .NET Framework için güvenlik güncelleştirmeleri |4.29, 3.36, 2.48 |9 Şubat 2016 |
-| -MS15-128 yeniden yayımlama |[3104503] |Uzaktan kod yürütülmesine yönelik olarak Microsoft grafik bileşeni için güvenlik güncelleştirmeleri |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| MS16-013 |[3134811] |Uzaktan kod yürütmeye yönelik olarak Windows Journal 'a güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| MS16-014 |[3134228] |Uzaktan kod yürütmeye yönelik olarak Microsoft Windows Güvenlik Güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| MS16-016 |[3136041] |Ayrıcalık yükselmesine yönelik olarak WebDAV güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| MS16-018 |[3136082] |Ayrıcalık yükselmesine yönelik Windows çekirdek modu sürücüsü için güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| MS16-019 |[3137893] |Uzaktan kod yürütmeye yönelik .NET Framework için güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| MS16-021 |[3133043] |NPS RADIUS sunucusu için hizmet reddinin ele aldığı güvenlik güncelleştirmesi |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| Microsoft Güvenlik Danışmanlığı |[3109853] |TLS birlikte çalışabilirliğini artırmak için güncelleştirme |4.29, 3.36 |9 Şubat 2016 |
+| Yeniden Yayınla-MS15-101 |[3089662] |.NET Framework güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| Yeniden Yayınla-MS15-118 |[3104507] |Ayrıcalık yükselmesine yönelik .NET Framework için güvenlik güncelleştirmeleri |4.29, 3.36, 2.48 |9 Şubat 2016 |
+| Yeniden Yayınla-MS15-128 |[3104503] |Uzaktan kod yürütmeye yönelik olarak Microsoft grafik bileşeni için güvenlik güncelleştirmeleri |4.29, 3.36, 2.48 |9 Şubat 2016 |
 
-## <a name="january-2016-guest-os"></a>Ocak 2016 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="january-2016-guest-os"></a>Ocak 2016 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS16-001 |[3124903] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.28, 3.35, 2.47 |12 Ocak 2016 |
 | MS16-003 |[3125540] |JScript ve VBScript için toplu güvenlik güncelleştirmesi |2.47 |12 Ocak 2016 |
-| MS16-005 |[3124584] |Windows çekirdek modu sürücüleri uzaktan kod yürütülmesine yönelik güvenlik güncelleştirmesi |4.28, 3.35, 2.47 |12 Ocak 2016 |
-| MS16-007 |[3124901] |Microsoft uzaktan kod yürütülmesine yönelik olarak Windows Güvenlik güncelleştirmesi |4.28, 3.35, 2.47 |12 Ocak 2016 |
-| MS16-008 |[3124605] |Ayrıcalıkların yükseltilmesine yönelik çekirdek güvenlik güncelleştirmesi |4.28, 3.35, 2.47 |12 Ocak 2016 |
-| Microsoft Security Advisory düzeltme |[2755801] |Internet Explorer'da Adobe Flash Player güvenlik açıkları için güncelleştirme (KB paketi: Henüz Belirlenmedi) - danışmanlık yer tutucu |4.28, 3.35 |12 Ocak 2016 |
-| Microsoft Güvenlik danışma belgesi |[3109853] |TLS birlikte çalışabilirlik geliştirmek için güncelleştirme |4.28, 3.35 |12 Ocak 2016 |
-| Microsoft Güvenlik danışma belgesi |[3123479] |Microsoft kök sertifika programı için SHA-1 karma algoritması kullanımdan kaldırma |4.28, 3.35, 2.47 |12 Ocak 2016 |
-| Microsoft Güvenlik danışma belgesi |[2736233] |ActiveX, KILL bitleri için güncelleştirmeleri |4.28, 3.35, 2.47 |12 Ocak 2016 |
+| MS16-005 |[3124584] |Uzaktan kod yürütmeye yönelik olarak Windows çekirdek modu sürücülerine yönelik güvenlik güncelleştirmesi |4.28, 3.35, 2.47 |12 Ocak 2016 |
+| MS16-007 |[3124901] |Uzak kod yürütmeye yönelik olarak Microsoft Windows için güvenlik güncelleştirmesi |4.28, 3.35, 2.47 |12 Ocak 2016 |
+| MS16-008 |[3124605] |Ayrıcalık yükselmesine yönelik çekirdek için güvenlik güncelleştirmesi |4.28, 3.35, 2.47 |12 Ocak 2016 |
+| Microsoft Güvenlik Danışmanlığı düzeltmesi |[2755801] |Internet Explorer 'da Adobe Flash Player 'da güvenlik açıkları Güncelleştirmesi (paket KB: TBD)-danışmanlık yer tutucusu |4.28, 3.35 |12 Ocak 2016 |
+| Microsoft Güvenlik Danışmanlığı |[3109853] |TLS birlikte çalışabilirliğini artırmak için güncelleştirme |4.28, 3.35 |12 Ocak 2016 |
+| Microsoft Güvenlik Danışmanlığı |[3123479] |Microsoft kök sertifika programı için SHA-1 karma algoritmasının kullanımdan kaldırılması |4.28, 3.35, 2.47 |12 Ocak 2016 |
+| Microsoft Güvenlik Danışmanlığı |[2736233] |ActiveX Kill bitleri için güncelleştirmeler |4.28, 3.35, 2.47 |12 Ocak 2016 |
 
-## <a name="december-2015-guest-os"></a>Aralık 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="december-2015-guest-os"></a>Aralık 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| MS15-124 |[3116180] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 aralık 2015 |
-| MS15-126 |[3116178] |Uzaktan kod yürütme Microsoft VBScript ve JScript için güvenlik güncelleştirmesi |2.46 |8 aralık 2015 |
-| MS15-127 |[3100465] |Microsoft Windows uzaktan kod yürütülmesine yönelik DNS güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 aralık 2015 |
-| MS15-128 |[3104503] |Uzaktan kod yürütülmesine yönelik olarak Microsoft grafik bileşeni için güvenlik güncelleştirmeleri |4.27, 3.34, 2.46 |8 aralık 2015 |
-| MS15-132 |[3116162] |Uzaktan kod yürütülmesine yönelik olarak Windows Güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 aralık 2015 |
-| MS15-133 |[3116130] |PGM ayrıcalıkların yükseltilmesine yönelik olarak Windows Güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 aralık 2015 |
-| MS15-134 |[3108669] |Uzaktan kod yürütülmesine yönelik olarak Windows Media Center güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 aralık 2015 |
-| MS15-135 |[3119075] |Windows çekirdek modu sürücüler, ayrıcalıkların yükseltilmesine yönelik güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 aralık 2015 |
+| MS15-124 |[3116180] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 Aralık 2015 |
+| MS15-126 |[3116178] |Uzaktan kod yürütmeye yönelik olarak Microsoft VBScript ve JScript için güvenlik güncelleştirmesi |2.46 |8 Aralık 2015 |
+| MS15-127 |[3100465] |Microsoft Windows DNS için uzaktan kod yürütmeye yönelik güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 Aralık 2015 |
+| MS15-128 |[3104503] |Uzaktan kod yürütmeye yönelik olarak Microsoft grafik bileşeni için güvenlik güncelleştirmeleri |4.27, 3.34, 2.46 |8 Aralık 2015 |
+| MS15-132 |[3116162] |Windows için güvenlik güncelleştirmesi uzaktan kod yürütmeye yöneliktir |4.27, 3.34, 2.46 |8 Aralık 2015 |
+| MS15-133 |[3116130] |Ayrıcalık yükselmesine yönelik Windows PGM için güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 Aralık 2015 |
+| MS15-134 |[3108669] |Uzaktan kod yürütmeye yönelik olarak Windows Media Center için güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 Aralık 2015 |
+| MS15-135 |[3119075] |Ayrıcalık yükselmesine yönelik Windows çekirdek modu sürücüleri için güvenlik güncelleştirmesi |4.27, 3.34, 2.46 |8 Aralık 2015 |
 
-## <a name="november-2015-guest-os"></a>Kasım 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="november-2015-guest-os"></a>Kasım 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-112 |[3104517] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
-| MS15-114 |[3100213] |Uzaktan kod yürütülmesine yönelik olarak Windows Günlük güvenlik güncelleştirmesi |2.45 |10 Kasım 2015 |
-| MS15-115 |[3105864] |Microsoft uzaktan kod yürütülmesine yönelik olarak Windows Güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
-| MS15-117 |[3101722] |NDIS ayrıcalıkların yükseltilmesine yönelik güvenlik güncelleştirmesi |2.45 |10 Kasım 2015 |
-| MS15-118 |[3104507] |Ayrıcalık yükseltme ele almak .NET Framework için güvenlik güncelleştirmeleri |4.26, 3.33, 2.45 |10 Kasım 2015 |
-| MS15-119 |[3104521] |Winsock ayrıcalıkların yükseltilmesine yönelik güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
-| MS15-120 |[3102939] |Hizmet reddi yönelik IPSec güvenlik güncelleştirmesi |4.26, 3.33 |10 Kasım 2015 |
-| MS15-121 |[3081320] |Adresi Yanıltması için Schannel güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
-| MS15-122 |[3105256] |Güvenlik özelliği atlama adresi Kerberos güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
-| Microsoft Güvenlik danışma belgesi |[3097966] |Dijital sertifikalar izin verebilir yanlışlıkla duyurulan kimlik sahtekarlığı |4.26, 3.33, 2.45 |10 Kasım 2015 |
+| MS15-114 |[3100213] |Uzaktan kod yürütmeye yönelik olarak Windows Journal için güvenlik güncelleştirmesi |2.45 |10 Kasım 2015 |
+| MS15-115 |[3105864] |Uzak kod yürütmeye yönelik olarak Microsoft Windows için güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
+| MS15-117 |[3101722] |Ayrıcalık yükselmesine yönelik olarak NDIS için güvenlik güncelleştirmesi |2.45 |10 Kasım 2015 |
+| MS15-118 |[3104507] |Ayrıcalık yükselmesine yönelik .NET Framework için güvenlik güncelleştirmeleri |4.26, 3.33, 2.45 |10 Kasım 2015 |
+| MS15-119 |[3104521] |Ayrıcalık yükselmesine yönelik Winsock için güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
+| MS15-120 |[3102939] |Hizmet reddi için IPSec güvenlik güncelleştirmesi |4.26, 3.33 |10 Kasım 2015 |
+| MS15-121 |[3081320] |Bilgi sızdırma için Schannel 'a güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
+| MS15-122 |[3105256] |Güvenlik özelliği atlaması için Kerberos güvenlik güncelleştirmesi |4.26, 3.33, 2.45 |10 Kasım 2015 |
+| Microsoft Güvenlik Danışmanlığı |[3097966] |Yanlışlıkla duyurulan dijital sertifikalar sızdırmaya Izin verebilir |4.26, 3.33, 2.45 |10 Kasım 2015 |
 
-## <a name="october-2015-guest-os"></a>Ekim 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="october-2015-guest-os"></a>Ekim 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-106 |[3096441] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.25, 3.32, 2.44 |13 Ekim 2015 |
-| MS15-108 |[3089659] |JScript ve VBScript olası uzaktan kod yürütülmesine yönelik güvenlik güncelleştirmesi |2.44 |13 Ekim 2015 |
-| MS15-109 |[3096443] |Uzaktan kod yürütülmesine yönelik olarak Windows Kabuğu için güvenlik güncelleştirmesi |4.25, 3.32, 2.44 |13 Ekim 2015 |
-| MS15-111 |[3096447] |Windows çekirdek ayrıcalıkların yükseltilmesine yönelik güvenlik güncelleştirmesi |4.25, 3.32, 2.44 |13 Ekim 2015 |
-| Microsoft Güvenlik danışma belgesi |[3092627] |Windows düzeltmek için Eylül 2015 güncelleştirmesi veya güvenlik güncelleştirmesi 3076895 yüklendikten sonra uygulama donuyor |4.25, 3.32, 2.44 |13 Ekim 2015 |
+| MS15-108 |[3089659] |JScript ve VBScript için güvenlik güncelleştirmesi olası uzaktan kod yürütmeyi ele almak için |2.44 |13 Ekim 2015 |
+| MS15-109 |[3096443] |Uzaktan kod yürütmeye yönelik olarak Windows kabuğu için güvenlik güncelleştirmesi |4.25, 3.32, 2.44 |13 Ekim 2015 |
+| MS15-111 |[3096447] |Ayrıcalık yükselmesine yönelik Windows çekirdeği için güvenlik güncelleştirmesi |4.25, 3.32, 2.44 |13 Ekim 2015 |
+| Microsoft Güvenlik Danışmanlığı |[3092627] |Windows veya uygulamaları onarmak için Eylül 2015 güncelleştirmesi, güvenlik güncelleştirmesi 3076895 ' i yükledikten sonra donuyor |4.25, 3.32, 2.44 |13 Ekim 2015 |
 
-## <a name="september-2015-guest-os"></a>Eylül 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="september-2015-guest-os"></a>Eylül 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-093 |[3088903] |Internet Explorer için güvenlik güncelleştirmesi |4.24, 3.31, 2.43 |8 Eylül 2015 |
 | MS15-094 |[3089548] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.24, 3.31, 2.43 |8 Eylül 2015 |
-| MS15-096 |[3072595] |Hizmet reddi güvenlik açığı Active Directory hizmetinde izin ver |4.24, 3.31, 2.43 |8 Eylül 2015 |
-| MS15-097 |[3089656] |Microsoft grafik bileşeni güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
-| MS15-098 |[3089669] |Windows Günlük güvenlik açıkları uzaktan kod yürütülmesine izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
-| MS15-101 |[3089662] |.NET Framework güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
-| MS15-102 |[3089657] |Windows görev Management güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
-| MS15-105 |[3091287] |Windows Hyper-V güvenlik açığı güvenlik özelliği atlama izin verebilir |4.24 |8 Eylül 2015 |
+| MS15-096 |[3072595] |Active Directory hizmetindeki güvenlik açığı hizmet reddine Izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
+| MS15-097 |[3089656] |Microsoft grafik bileşenindeki güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
+| MS15-098 |[3089669] |Windows Journal 'daki güvenlik açıkları uzaktan kod yürütmeye Izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
+| MS15-101 |[3089662] |.NET Framework güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
+| MS15-102 |[3089657] |Windows görev yönetiminde güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.24, 3.31, 2.43 |8 Eylül 2015 |
+| MS15-105 |[3091287] |Windows Hyper-V güvenlik açığı güvenlik özelliği geçişine Izin verebilir |4.24 |8 Eylül 2015 |
 
-## <a name="august-2015-guest-os"></a>Ağustos 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="august-2015-guest-os"></a>Ağustos 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-079 |[3082442] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.23, 3.30, 2.42 |11 Ağustos 2015 |
-| MS15-080 |[3078662] |Microsoft grafik bileşeni güvenlik açıkları uzaktan kod yürütülmesine izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
-| MS15-082 |[3080348] |RDP güvenlik açıkları uzaktan kod yürütülmesine izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
-| MS15-084 |[3080129] |XML Çekirdek Hizmetleri güvenlik açıkları bilgileri açığa çıkmasına neden olabilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
-| MS15-085 |[3082487] |Ayrıcalık yükseltme güvenlik açığı Bağlama Yöneticisi'nde izin ver |4.23, 3.30, 2.42 |11 Ağustos 2015 |
-| MS15-088 |[3082458] |Güvenli olmayan komut satırı parametre geçirme bilgileri açığa çıkmasına neden olabilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
-| MS15-089 |[3060716] |Microsoft Windows güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
-| MS15-090 |[3076949] |WebDAV açığı bilgileri açığa çıkmasına neden olabilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
+| MS15-080 |[3078662] |Microsoft grafik bileşenindeki güvenlik açıkları uzaktan kod yürütmeye Izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
+| MS15-082 |[3080348] |RDP 'deki güvenlik açıkları uzaktan kod yürütmeye izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
+| MS15-084 |[3080129] |XML Çekirdek hizmetlerindeki güvenlik açıkları bilgi açığa çıkmasına neden olabilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
+| MS15-085 |[3082487] |Mount Manager 'daki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
+| MS15-088 |[3082458] |Güvenli olmayan komut satırı parametresi geçirme bilginin açığa çıkmasına Izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
+| MS15-089 |[3060716] |Microsoft Windows 'daki güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
+| MS15-090 |[3076949] |WebDAV güvenlik açığı bilgilerin açığa çıkmasına neden olabilir |4.23, 3.30, 2.42 |11 Ağustos 2015 |
 
-## <a name="july-2015-guest-os"></a>Temmuz 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="july-2015-guest-os"></a>Temmuz 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-065 |[3076321] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-066 |[3072604] |Güvenlik Açığı VBScript içinde uzaktan kod yürütülmesine izin verebilir |2.41 |14 Temmuz 2015 |
-| MS15-067 |[3073094] |RDP güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-068 |[3072000] |Windows Hyper-V güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-069 |[3072631] |Windows güvenlik açıkları uzaktan kod yürütülmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-071 |[3068457] |NETLOGON doğrulamasındaki kimlik sahtekarlığına neden olabilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-072 |[3069392] |Grafik sürücüsü güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-073 |[3070102] |Çekirdek modu sürücüsü yüklenemedi. güvenlik açıkları ayrıcalıkların yükseltilmesine izin ver |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-074 |[3072630] |Windows Installer hizmeti güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-075 |[3072633] |OLE güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-076 |[3067505] |Windows Uzak yordam çağrısı güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| MS15-077 |[3077657] |Ayrıcalık yükseltme güvenlik açığı ATM yazı tipi sürücüsündeki izin ver |4.22, 3.29, 2.41 |14 Temmuz 2015 |
-| NA |[3057154] |DES şifrelemesi kullanımını kısıtlamak için güncelleştirme |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-066 |[3072604] |VBScript 'teki güvenlik açığı uzaktan kod yürütmeye izin verebilir |2.41 |14 Temmuz 2015 |
+| MS15-067 |[3073094] |RDP 'deki güvenlik açığı uzaktan kod yürütmeye izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-068 |[3072000] |Windows Hyper-V güvenlik açığı uzaktan kod yürütmeye Izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-069 |[3072631] |Windows 'daki güvenlik açıkları uzaktan kod yürütmeye Izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-071 |[3068457] |NETLOGON güvenlik açığı sızdırmaya Izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-072 |[3069392] |Grafik sürücüsündeki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-073 |[3070102] |Çekirdek modu sürücüsündeki güvenlik açıkları ayrıcalık yükselmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-074 |[3072630] |Windows Installer hizmetindeki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-075 |[3072633] |OLE 'deki güvenlik açıkları ayrıcalık yükselmesine izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-076 |[3067505] |Windows Uzaktan yordam çağrısındaki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| MS15-077 |[3077657] |ATM yazı tipi sürücüsündeki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.22, 3.29, 2.41 |14 Temmuz 2015 |
+| Yok |[3057154] |DES şifrelemesi kullanımını kısıtlamak için güncelleştirme |4.22, 3.29, 2.41 |14 Temmuz 2015 |
 
-## <a name="june-2015-guest-os"></a>Haziran 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="june-2015-guest-os"></a>Haziran 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-056 |[3058515] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.21, 3.28, 2.40 |9 Haziran 2015 |
-| MS15-057 |[3033890] |Windows Media Player güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
-| MS15-060 |[3059317] |Microsoft ortak denetimleri güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
-| MS15-061 |[3057839] |Windows çekirdek modu sürücüleri güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
-| MS15-062 |[3062577] |Active Directory Federasyon Hizmetleri Güvenlik Açığı ayrıcalıkların yükseltilmesine izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
-| MS15-063 |[3063858] |Windows çekirdek güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
+| MS15-057 |[3033890] |Windows Media Player güvenlik açığı uzaktan kod yürütmeye Izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
+| MS15-060 |[3059317] |Microsoft ortak denetimlerindeki güvenlik açığı uzaktan kod yürütmeye Izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
+| MS15-061 |[3057839] |Windows Çekirdek Modu Sürücülerindeki Güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
+| MS15-062 |[3062577] |Active Directory Federasyon Hizmetleri (AD FS) güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
+| MS15-063 |[3063858] |Windows çekirdeğindeki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.21, 3.28, 2.40 |9 Haziran 2015 |
 
-## <a name="may-2015-guest-os"></a>Mayıs 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="may-2015-guest-os"></a>Mayıs 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-043 |[3049563] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-044 |[3057110] |Microsoft yazı tipi sürücüleri güvenlik açıkları uzaktan kod yürütülmesine izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-045 |[3046002] |Güvenlik açığı Windows günlüğünde uzaktan kod yürütülmesine izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-048 |[3057134] |.NET Framework güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-050 |[3055642] |Ayrıcalık yükseltme Güvenlik Açığı Hizmet Denetim Yöneticisi'nde izin ver |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-051 |[3057191] |Windows çekirdek modu sürücüleri güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-052 |[3050514] |Windows çekirdek güvenlik açığı güvenlik özelliği atlama izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-053 |[3057263] |Güvenlik özelliği atlama JScript ve VBScript komut dosyası altyapısı güvenlik açıklarını izin ver |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-054 |[3051768] |Hizmet reddi güvenlik açığı Microsoft Yönetim Konsolu dosyası biçiminde izin ver |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-055 |[3061518] |Schannel güvenlik açığı güvenlik özelliği atlama önemli bilgilerin açığa çıkmasına neden olabilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
-| MS15-032 |[3038314] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.20, 3.27, 2.39 |17 Apr 2015 |
-| MS15-035 |[3046306] |Microsoft grafik bileşeni güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.20, 3.27, 2.39 |17 Apr 2015 |
-| MS15-037 |[3046269] |Ayrıcalık yükseltme güvenlik açığı Windows Görev Zamanlayıcısı'nda izin ver |4.20, 3.27, 2.39 |17 Apr 2015 |
-| MS15-038 |[3049576] |Microsoft Windows Güvenlik Açıkları ayrıcalıkların önemli izin verebilir |4.20, 3.27, 2.39 |17 Apr 2015 |
-| MS15-039 |[3046482] |Güvenlik özelliği atlama XML Çekirdek Hizmetleri Güvenlik Açığı izin ver |4.20, 3.27, 2.39 |17 Apr 2015 |
-| MS15-040 |[3045711] |ADFS'de güvenlik açığı bilgileri açığa çıkmasına neden olabilir |4.20, 3.27, 2.39 |17 Apr 2015 |
-| MS15-041 |[3048010] |.NET Framework içindeki güvenlik açığı bilgileri açığa çıkmasına neden olabilir |4.20, 3.27, 2.39 |17 Apr 2015 |
-| MS15-042 |[3047234] |Hizmet reddi güvenlik açığı Windows Hyper-v izin ver |4.20, 3.27, 2.39 |17 Apr 2015 |
-| NA |[3045755] |PKU2U kimlik doğrulama geliştirmek için güncelleştirme |4.20, 3.27, 2.39 |17 Apr 2015 |
+| MS15-044 |[3057110] |Microsoft yazı tipi sürücülerindeki güvenlik açıkları uzaktan kod yürütmeye Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-045 |[3046002] |Windows Journal 'daki güvenlik açığı uzaktan kod yürütmeye Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-048 |[3057134] |.NET Framework güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-050 |[3055642] |Hizmet denetimi Yöneticisi 'ndeki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-051 |[3057191] |Windows Çekirdek Modu Sürücülerindeki Güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-052 |[3050514] |Windows çekirdeğindeki güvenlik açığı güvenlik özelliği geçişine Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-053 |[3057263] |JScript ve VBScript komut dosyası altyapısındaki güvenlik açıkları güvenlik özelliği geçişine Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-054 |[3051768] |Microsoft Yönetim Konsolu dosya biçimindeki güvenlik açığı hizmet reddine Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-055 |[3061518] |Schannel 'daki güvenlik açığı güvenlik özelliği atlama önemli bilgilerin açığa çıkmasına Izin verebilir |4.20, 3.27, 2.39 |12 Mayıs 2015 |
+| MS15-032 |[3038314] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| MS15-035 |[3046306] |Microsoft grafik bileşenindeki güvenlik açığı uzaktan kod yürütmeye Izin verebilir |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| MS15-037 |[3046269] |Windows Görev Zamanlayıcı güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| MS15-038 |[3049576] |Microsoft Windows 'daki güvenlik açıkları, ayrıcalık yükselmesine Izin verebilir |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| MS15-039 |[3046482] |XML Çekirdek hizmetlerindeki güvenlik açığı güvenlik özelliği geçişine Izin verebilir |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| MS15-040 |[3045711] |ADFS 'deki güvenlik açığı bilgilerin açığa çıkmasına neden olabilir |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| MS15-041 |[3048010] |.NET Framework güvenlik açığı bilgilerin açığa çıkmasına neden olabilir |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| MS15-042 |[3047234] |Windows Hyper-V ' d i güvenlik açığı hizmet reddine Izin verebilir |4.20, 3.27, 2.39 |17 Nisan 2015 |
+| Yok |[3045755] |PKU2U kimlik doğrulamasını geliştirmek için Güncelleştir |4.20, 3.27, 2.39 |17 Nisan 2015 |
 
-## <a name="april-2015-guest-os"></a>Nisan 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="april-2015-guest-os"></a>Nisan 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| [MS15-034] |[3042553] |HTTP.sys güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.19, 3.26, 2.38 |17 Apr 2015 |
+| [MS15-034] |[3042553] |HTTP. sys dosyasındaki güvenlik açığı uzaktan kod yürütmeye izin verebilir |4.19, 3.26, 2.38 |17 Nisan 2015 |
 
-## <a name="march-2015-guest-os"></a>Mart 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="march-2015-guest-os"></a>Mart 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-018 |[3032359] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.18, 3.25, 2.37 |Yok |
-| MS15-019 |[3040297] |VBScript komut dosyası altyapısı güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.18, 3.25, 2.37 |Yok |
-| MS15-020 |[3041836] |Windows güvenlik açıkları uzaktan kod yürütülmesine izin verebilir |4.18, 3.25, 2.37 |Yok |
-| MS15-021 |[3032323] |Güvenlik açıklarını Adobe yazı tipi sürücü uzaktan kod yürütülmesine neden olabilir |4.18, 3.25, 2.37 |Yok |
-| MS15-023 |[3034344] |Çekirdek modu sürücüsü güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.18, 3.25, 2.37 |Yok |
-| MS15-024 |[3035132] |Güvenlik Açığı PNG İşleme bilgileri açığa çıkmasına neden olabilir |4.18, 3.25, 2.37 |Yok |
-| MS15-025 |[3038680] |Windows çekirdek güvenlik açıkları, ayrıcalıkların yükseltilmesine izin verebilir |4.18, 3.25, 2.37 |Yok |
-| MS15-027 |[3002657] |NETLOGON doğrulamasındaki kimlik sahtekarlığına neden olabilir |4.18, 3.25, 2.37 |Yok |
-| MS15-028 |[3030377] |Güvenlik özelliği atlama Windows Görev Zamanlayıcısı'nda güvenlik açığı izin ver |4.18, 3.25, 2.37 |Yok |
-| MS15-029 |[3035126] |Windows Fotoğraf kod çözücü bileşeni açığı bilgileri açığa çıkmasına neden olabilir |4.18, 3.25, 2.37 |Yok |
-| MS15-030 |[3039976] |Hizmet reddi güvenlik açığı Uzak Masaüstü Protokolü izin ver |4.18, 3.25, 2.37 |Yok |
+| MS15-019 |[3040297] |VBScript betik altyapısındaki güvenlik açığı uzaktan kod yürütmeye Izin verebilir |4.18, 3.25, 2.37 |Yok |
+| MS15-020 |[3041836] |Windows 'daki güvenlik açıkları uzaktan kod yürütmeye izin verebilir |4.18, 3.25, 2.37 |Yok |
+| MS15-021 |[3032323] |Güvenlik açıkları Adobe yazı tipi sürücüsü uzaktan kod yürütmeye Izin verebilir |4.18, 3.25, 2.37 |Yok |
+| MS15-023 |[3034344] |Çekirdek modu sürücüsündeki güvenlik açıkları ayrıcalık yükselmesine Izin verebilir |4.18, 3.25, 2.37 |Yok |
+| MS15-024 |[3035132] |PNG Işlemedeki güvenlik açığı bilgi açığa çıkmasına neden olabilir |4.18, 3.25, 2.37 |Yok |
+| MS15-025 |[3038680] |Windows çekirdeğindeki güvenlik açıkları ayrıcalık yükselmesine izin verebilir |4.18, 3.25, 2.37 |Yok |
+| MS15-027 |[3002657] |NETLOGON güvenlik açığı sızdırmaya Izin verebilir |4.18, 3.25, 2.37 |Yok |
+| MS15-028 |[3030377] |Windows Görev Zamanlayıcı güvenlik açığı güvenlik özelliği geçişine Izin verebilir |4.18, 3.25, 2.37 |Yok |
+| MS15-029 |[3035126] |Windows Fotoğraf kod çözücü bileşenindeki güvenlik açığı bilgilerin açığa çıkmasına neden olabilir |4.18, 3.25, 2.37 |Yok |
+| MS15-030 |[3039976] |Uzak Masaüstü Protokolü güvenlik açığı hizmet reddine Izin verebilir |4.18, 3.25, 2.37 |Yok |
 
 > [!NOTE]
-> Bülten MS15-031 kaldırılması gibi görünebilir. Ancak, bu konuk işletim sistemi sürümüne uygulanmaz.
+> Bulletin MS15-031 kaldırılmış olarak görünebilir. Ancak, bu konuk işletim sistemi sürümü için de geçerlidir.
 >
 >
 
-## <a name="february-2015-guest-os"></a>Şubat 2015'te konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="february-2015-guest-os"></a>Şubat 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
 | MS15-009 |[3034682] |Internet Explorer için güvenlik güncelleştirmesi |4.17, 3.24, 2.36 |Yok |
-| MS15-010 |[3036220] |Windows çekirdek modu sürücüler güvenlik açıkları uzaktan kod yürütülmesine izin verebilir |4.17, 3.24, 2.36 |Yok |
-| MS15-011 |[3000483] |Grup İlkesi'nde güvenlik açığı uzaktan kod yürütülmesine izin verebilir |4.17, 3.24, 2.36 |Yok |
-| MS15-014 |[3004361] |Güvenlik özelliği atlama SMB doğrulamasındaki izin ver |4.17, 3.24, 2.36 |Yok |
-| MS15-015 |[3031432] |Microsoft Windows Güvenlik Açığı ayrıcalıkların yükseltilmesine izin verebilir |4.17, 3.24, 2.36 |Yok |
-| MS15-016 |[3029944] |Microsoft grafik bileşeni açığı bilgileri açığa çıkmasına neden olabilir |4.17, 3.24, 2.36 |Yok |
-| Yok |[3004375] |Güncelleştirmeyi Windows geliştirmek için komut satırı denetimi<p/>**Not**: Bu yüklenir ancak bunu etkinleştirmek için kayıt defteri anahtarı kapalı |4.17, 3.24, 2.36 |Yok |
+| MS15-010 |[3036220] |Windows Çekirdek Modu Sürücülerindeki Güvenlik açıkları uzaktan kod yürütmeye Izin verebilir |4.17, 3.24, 2.36 |Yok |
+| MS15-011 |[3000483] |grup ilkesi güvenlik açığı uzaktan kod yürütmeye Izin verebilir |4.17, 3.24, 2.36 |Yok |
+| MS15-014 |[3004361] |SMB güvenlik açığı güvenlik özelliği geçişine Izin verebilir |4.17, 3.24, 2.36 |Yok |
+| MS15-015 |[3031432] |Microsoft Windows 'daki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.17, 3.24, 2.36 |Yok |
+| MS15-016 |[3029944] |Microsoft grafik bileşenindeki güvenlik açığı bilgilerin açığa çıkmasına Izin verebilir |4.17, 3.24, 2.36 |Yok |
+| Yok |[3004375] |Windows komut satırı denetimini artıracak güncelleştirme<p/>**Note**: Bu yüklendi, ancak etkinleştirmek için kayıt defteri anahtarı kapalı |4.17, 3.24, 2.36 |Yok |
 
-## <a name="january-2015-guest-os"></a>Ocak 2015 konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="january-2015-guest-os"></a>Ocak 2015 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| MS15-001 |[3023266] |Windows AppCompatCache güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-002 |[3020393] |Windows Telnet hizmetindeki güvenlik açığı uzaktan kod yürütülmesine neden olabilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-003 |[3021674] |Windows kullanıcı profili hizmeti güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-004 |[3019978] |Windows Bileşenleri güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-005 |[3022777] |Güvenlik özelliği atlama NLA doğrulamasındaki izin ver |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-006 |[3004365] |Windows hata bildirimi doğrulamasındaki güvenlik özelliği atlama izin verebilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-007 |[3014029] |Ağ ilkesi sunucusu RADIUS doğrulamasındaki hizmet reddine neden olabilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-008 |[3019215] |Windows çekirdek modu sürücüsü güvenlik açığı ayrıcalıkların yükseltilmesine izin verebilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS14-080 |[3008923] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-002 |[3020393] |Windows Telnet hizmetindeki güvenlik açığı uzaktan kod yürütülmesine neden olabilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
-| MS15-002 |[3020393] |Windows Telnet hizmetindeki güvenlik açığı uzaktan kod yürütülmesine neden olabilir |4.16, 3.23, 2.35 |19 Ocak 2015 |
+| MS15-001 |[3023266] |Windows AppCompatCache 'teki güvenlik açığı ayrıcalık yükselmesine izin verebilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-002 |[3020393] |Windows Telnet hizmetindeki güvenlik açığı uzaktan kod yürütülmesine neden olabilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-003 |[3021674] |Windows Kullanıcı profili hizmetindeki güvenlik açığı ayrıcalık yükselmesine izin verebilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-004 |[3019978] |Windows bileşenlerindeki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-005 |[3022777] |NLA 'daki güvenlik açığı güvenlik özelliği geçişine Izin verebilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-006 |[3004365] |Windows Hata Bildirimi güvenlik açığı güvenlik özelliği geçişine Izin verebilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-007 |[3014029] |Ağ Ilkesi sunucusu YARıÇAPDAKI güvenlik açığı hizmet reddine neden olabilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-008 |[3019215] |Windows çekirdek modu sürücüsündeki güvenlik açığı ayrıcalık yükselmesine Izin verebilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS14-080 |[3008923] |Internet Explorer için toplu güvenlik güncelleştirmesi |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-002 |[3020393] |Windows Telnet hizmetindeki güvenlik açığı uzaktan kod yürütülmesine neden olabilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
+| MS15-002 |[3020393] |Windows Telnet hizmetindeki güvenlik açığı uzaktan kod yürütülmesine neden olabilir |4.16, 3.23, 2.35 |Ocak 19 2015 |
 
 
-## <a name="december-2014-guest-os"></a>Aralık 2014'ten konuk işletim sistemi
-| Bülten No | Üst KB makalesi | Güvenlik Açığı açıklaması | Konuk işletim sistemi | İlk tarih |
+## <a name="december-2014-guest-os"></a>Aralık 2014 Konuk işletim sistemi
+| Bülten No | Üst KB makalesi | Güvenlik açığı açıklaması | Konuk işletim sistemi | Ilk tanıtılan Tarih |
 | --- | --- | --- | --- | --- |
-| Yok |[3013776] |Bir uygulamayı başlatmak için bir etki alanı hesabı kullandığınızda, sistem donuyor |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[3013043] |Birden fazla NUMA düğümü olan Windows tabanlı bir bilgisayarda dosya sistemi verisi bozuk |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[3012712] |Fark VHD genişletildiğinde yeni veri bloklarını yanlış Başlat |4.15, 3.22, 2.34 |13 Ocak 201 |
-| Yok |[3004905] |Windows Hyper-V geliştirme dosya sistemleri, 2 TB'tan büyük olan bir Linux sanal makineleri için |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[3004394] |Windows kök sertifika programı Windows için aralık 2014 güncelleştirme |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[2999323] |Olay Kimliği 17 için metin değiştirildi |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[3013488] |WSUS sunucusu Windows Server 2012 R2 veya Windows Server 2012 CSA dosyalarından içeri aktardığınızda sıfırlamak için uzun bekleme |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[3012325] |DIGI, Vodafone ve Telekom mobil işleçleri Windows 8.1 ve Windows 8 için Windows APN veritabanı girişlerini güncelleştirme |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[3007054] |PIN korumalı yazdırma seçeneği her zaman bir belge Windows, Windows Store uygulaması içinde yazdırırken gösterir. |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[2999802] |Noktalı satırlar yerine düz çizgiler içinde Windows yazdırılır. |4.15, 3.22, 2.34 |13 Ocak 2015 |
-| Yok |[2896881] |Uzun Windows oturum açma işlemi sırasında kullanıcılar için yazıcıları eşlemek için AddPrinterConnection VBScript komutunu kullandığınızda oturum açma zamanı |4.15, 3.22, 2.34 |13 Ocak 2015 |
+| Yok |[3013776] |Bir uygulamayı başlatmak için bir etki alanı hesabı kullandığınızda sistem donuyor |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[3013043] |Birden fazla NUMA düğümüne sahip Windows tabanlı bir bilgisayarda dosya sistemi verileri bozuk |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[3012712] |Yeni veri blokları, bir fark kayıt VHD 'SI genişletildiğinde yanlış başlatılıyor |4.15, 3.22, 2.34 |Ocak 13 201 |
+| Yok |[3004905] |2 TB 'den büyük dosya sistemlerine sahip Linux sanal makineleri için Windows Hyper-V geliştirme |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[3004394] |Windows 'da Windows kök sertifika programı için Aralık 2014 güncelleştirmesi |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[2999323] |17 olay KIMLIĞI için metin değiştirildi |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[3013488] |Windows Server 2012 R2 veya Windows Server 2012 ' de CSA dosyalarını içeri aktardığınızda WSUS sunucusunu sıfırlama uzun bekleme |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[3012325] |Windows 8.1 ve Windows 8 ' de DIGI, Vodavfone ve Telekod mobil işleçleri için Windows APN veritabanı girişleri güncelleştirmesi |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[3007054] |PIN korumalı yazdırma seçeneği, bir belgeyi Windows Mağazası uygulaması içinde her zaman Windows 'da yazdırdığınızda gösterir |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[2999802] |Noktalı çizgiler yerine düz çizgiler Windows 'da yazdırılır |4.15, 3.22, 2.34 |Ocak 13 2015 |
+| Yok |[2896881] |Windows 'da oturum açma işlemi sırasında kullanıcılar için yazıcı eşlemek üzere AddPrinterConnection VBScript komutunu kullandığınızda uzun oturum açma süresi |4.15, 3.22, 2.34 |Ocak 13 2015 |
 
 [4457131]: https://support.microsoft.com/kb/4457131
 [4457145]: https://support.microsoft.com/kb/4457145
@@ -1618,7 +1846,7 @@ Aşağıdaki tablolarda Azure konuk işletim sistemine uygulanan güncelleştirm
 [3133977]: https://support.microsoft.com/kb/3133977
 [3133681]: https://support.microsoft.com/kb/3133681
 [3123245]: https://support.microsoft.com/kb/3123245
-[Disable RC4]: https://blogs.msdn.microsoft.com/azuresecurity/2016/04/12/azure-cipher-suite-change-removes-rc4-support/
+[RC4 devre dışı bırak]: https://blogs.msdn.microsoft.com/azuresecurity/2016/04/12/azure-cipher-suite-change-removes-rc4-support/
 
 
 [3148531]: https://support.microsoft.com/kb/3148531

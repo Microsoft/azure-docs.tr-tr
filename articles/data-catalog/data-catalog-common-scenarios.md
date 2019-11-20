@@ -1,63 +1,61 @@
 ---
 title: Azure Veri Kataloğu genel senaryoları
-description: Yaygın Azure veri kataloğu için senaryo kayıt ve yüksek değerli veri kaynağı bulma gibi Self Servis iş zekası etkinleştirme ve mevcut veri kaynakları ve işlemleri hakkında bilgi alın yakalama, genel bakış.
-services: data-catalog
+description: Yüksek değerli veri kaynaklarını kaydetme ve bulma, self servis iş zekası sağlama ve veri kaynakları ve süreçleriyle ilgili mevcut bilgileri yakalama dahil olmak üzere Azure Veri Kataloğu için genel senaryolara genel bakış.
 author: JasonWHowell
 ms.author: jasonh
-ms.assetid: 60930d78-d2d4-4d5d-9651-bdda50b0da0e
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 01/18/2018
-ms.openlocfilehash: e95cc64b9086a6fb4c5e2d42521a5fd3f44244ba
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/01/2019
+ms.openlocfilehash: aeae505b510f563a6640726c384ea358983eb24f
+ms.sourcegitcommit: c662440cf854139b72c998f854a0b9adcd7158bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61003965"
+ms.lasthandoff: 08/02/2019
+ms.locfileid: "68736454"
 ---
 # <a name="azure-data-catalog-common-scenarios"></a>Azure Veri Kataloğu genel senaryoları
-Bu makalede Azure veri Kataloğu kuruluşunuz var olan veri kaynaklarından daha fazla değer elde burada yardımcı olabilecek yaygın senaryolar sunulmakta.
+Bu makalede, Azure Veri Kataloğu 'nun, kuruluşunuzun mevcut veri kaynaklarından daha fazla değer almasını sağlayan yaygın senaryolar sunulmaktadır.
 
-## <a name="scenario-1-registration-of-central-data-sources"></a>Senaryo 1: Merkezi bir veri kaynağı kaydı
-Kuruluşlar genellikle birçok yüksek değerli veri kaynağına sahiptir. Bu veri kaynakları, iş kolu satır, çevrimiçi işlem (gerçekleştirme OLTP) sistemleri, veri ambarları ve iş zekası/analiz veritabanlarını işleme içerir. Sistemleri ve bunlar arasındaki çakışma sayısı, genellikle iş gereksinimleriniz ve örneğin, birleşmeler ve satın almalar, iş geliştikçe zamanla artar.
+## <a name="scenario-1-registration-of-central-data-sources"></a>Senaryo 1: Merkezi veri kaynaklarını kaydetme
+Kuruluşların genellikle çok fazla yüksek değerli veri kaynağı vardır. Bu veri kaynakları, iş kolu, çevrimiçi işlem işleme (OLTP) sistemleri, veri ambarları ve iş zekası/analiz veritabanlarını içerir. Sistem sayısı ve bunlar arasındaki örtüşme, genellikle iş ihtiyaçları geliştikçe ve işletmenin kendisi gibi, birleşmeler ve alımlar aracılığıyla geliştikçe zaman içinde artar.
 
-Kuruluş üyelerinin bu veri kaynaklarının içinde verileri bulmak nereden başlayacağınızı bilemiyor zor olabilir. Aşağıdaki gibi sorulara tüm çok ortaktır:
+Kuruluş üyelerinin bu veri kaynaklarında verileri nerede bulabileceklerini bilmeleri zor olabilir. Aşağıdakiler gibi sorular çok yaygın olarak verilmiştir:
 
-* Şirket içinde kullanılan üç ik sistemleri, hangi türde rapor oluşturmak için kullanmalıyım?
-* Sertifikalı satış rakamlarının yalnızca sona erdi mali yıl için almak için nereye Git?
-* Kimin miyim istemelisiniz veya veri ambarı erişmek için kullanmanız gerekir işlemi nedir?
-* Bu sayı doğru olup olmadığını bilmiyorum. Kimin hakkındaki bilgiler için nasıl bu verileri takımımla birlikte oluşturduğum bu panoya paylaşabilir önce kullanılan geç üzerinde nüfusuna?
+* Şirket içinde kullanılan üç HR sisteminin bu tür bir rapor oluşturmak için kullanmalıyım?
+* Yalnızca sona ermiş mali yıl için sertifikalı satış numaralarını almak için nereye gitmem gerekir?
+* Ne yapmam gerekir, ne yapmalıyım? veya veri ambarına erişim sağlamak için kullanmam gereken işlem nedir?
+* Bu sayıların doğru olup olmadığını bilmiyorum. Bu panoyu ekibimde paylaşmadan önce bu verilerin nasıl kullanılması gerektiğini öğrenmek için kim olabilir?
 
-Bu ve diğer sorular için Azure veri Kataloğu yanıtlar sağlayabilir. Kuruluş genelinde kullanılan merkezi yüksek değerli, BT tarafından yönetilen veri kaynaklarını genellikle Kataloğu doldurmak için mantıksal başlangıç noktasıdır. Herhangi bir kullanıcı bir veri kaynağına kaydedebilirsiniz olsa da, en fazla sayıda kullanıcı için değer sağlayın olasılığı en yüksek veri kaynaklarıyla kick-started Kataloğu sahip benimsenmesini ve sistem kullanımını yardımcı olur. 
+Azure Veri Kataloğu, bu ve diğer sorulara yanıt verebilir. Kuruluşlar genelinde kullanılan Merkezi, yüksek değerli, BT tarafından yönetilen veri kaynakları genellikle kataloğun doldurulmasının mantıksal başlangıç noktasıdır. Herhangi bir Kullanıcı bir veri kaynağını kaydedebilse de, kataloğun en büyük Kullanıcı sayısı için değer sağlama olasılığı en yüksek olan veri kaynaklarıyla başlatılacak şekilde, sistemin benimseme ve kullanımına yardımcı olur. 
 
-Azure veri Kataloğu ile başlıyorsanız tanımlayarak ve kaydederek veri tüketicileri, birçok farklı ekip tarafından kullanılan önemli veri kaynakları, ilk adımınız başarılı olabilir.
+Azure Veri Kataloğu ile çalışmaya başladıysanız, birçok farklı veri tüketicisini tarafından kullanılan önemli veri kaynaklarını tanımlamak ve kaydetmek, başarılı bir şekilde ilk adımınıza sahip olabilir.
 
-Bu senaryo ayrıca anlamak ve erişimi daha kolay hale getirmek için yüksek değerli veri kaynaklarına açıklama eklemek için bir fırsat sunar. Bu anahtar yönlerinden biri, kullanıcılar veri kaynağına erişimi nasıl isteyebilir bilgi eklemektir. Azure veri Kataloğu ile e-posta adresini kullanıcı veya mevcut araçları ya da belgeler için veri kaynağı erişimi denetleme, bağlantılar için sorumlu bir ekip veya erişim isteği işlemini açıklar serbest metin sağlayabilir. Bu bilgiler kim kayıtlı veri kaynaklarını bulma ancak kimin henüz kolayca tanımlanan ve veri kaynağı sahipleri tarafından denetlenen işlemleri kullanarak erişim istemek için veri erişim izni olmayan üyeleri yardımcı olur.
+Bu senaryo Ayrıca, anlaşılması ve erişimi kolaylaştırmak için yüksek değerli veri kaynaklarına açıklama ekleme olanağı sunar. Bu çabanın bir en önemli yönü, kullanıcıların veri kaynağına erişim isteme hakkında bilgi içerelidir. Azure Veri Kataloğu ile veri kaynağı erişimini denetmaktan sorumlu kullanıcı veya takımın e-posta adresini, mevcut araçlara veya belgelere bağlantıları ya da erişim-istek işlemini açıklayan serbest metinleri sağlayabilirsiniz. Bu bilgiler, kayıtlı veri kaynaklarını keşfettiğiniz ancak veri kaynağı sahipleri tarafından tanımlanan ve denetlenen süreçler kullanılarak kolayca erişim istemek için verilere erişim izni olmayan üyelere yardımcı olur.
 
-## <a name="scenario-2-self-service-business-intelligence"></a>Senaryo 2: Self Servis iş zekası
-Birçok kuruluş veri ortamlarını her bir parçası olarak, geleneksel kurumsal iş zekası çözümleri devam etse de, adım iş kolu değiştirme Self Servis BI ve daha önemli yaptı. Self Servis BI'ı kullanarak, bilgi çalışanları ve analistleri kendi raporlar, çalışma kitapları ve panolar merkezi bir BT ekip veya BT takımın zamanlama ve kullanılabilirlik tarafından kısıtlanmasını bağlı kalmadan oluşturabilirsiniz.
+## <a name="scenario-2-self-service-business-intelligence"></a>Senaryo 2: Self servis iş zekası
+Geleneksel kurumsal iş zekası çözümleri pek çok kuruluşun veri lanlarının önemli bir parçası olmaya devam etse de, iş için değişen destek, self servis BI 'ı daha fazla ve daha önemli hale getirmiştir. Self servis BI 'ı kullanarak bilgi çalışanları ve analistleri, merkezi bir BT ekibine bağlı olmadan veya BT ekibinin zamanlaması ve kullanılabilirliği tarafından sınırlandırılmadan kendi raporlarını, çalışma kitaplarını ve panoları oluşturabilir.
 
-Self Servis BI senaryolarda kullanıcıların çoğu daha önce BI ve analiz için kullanılmış değil, birden çok kaynaktan veri yaygın olarak birleştirin. Bu veri kaynaklarının bazıları zaten biliniyor olabilir ancak bunu bulmak ve değerlendirmek için belirli bir görevin olası veri kaynakları için yapmanız gerekenler bulmak zor olabilir.
+Self servis BI senaryolarında kullanıcılar genellikle birden çok kaynaktan veri birleştirir, çoğu daha önceden bı ve analiz için kullanılmamış olabilir. Bu veri kaynaklarından bazıları zaten biliniyor olsa da, belirli bir görev için olası veri kaynaklarını bulmak ve değerlendirmek için ne yapılacağını saptamak zor olabilir.
 
-Geleneksel olarak, bu bulma işlemi el ile bir paroladır: analistleri, diğer kişilerin Aranan verileri ile çalışma belirlemek için kendi eş ağ bağlantılarını kullanın. Bir veri kaynağı bulunabilir ve kullanılabilir sonra işlem tekrar her sonraki Self Servis BI çabayla, birden çok kullanıcı bulma yedekli manuel bir işlem gerçekleştiriliyor yinelenir.
+Geleneksel olarak, bu bulma işlemi el ile bir işlemdir: analistleri, aranan verilerle çalışan diğerlerini belirlemek için eşler arası ağ bağlantılarını kullanır. Bir veri kaynağı bulduktan ve kullanıldıktan sonra, işlem, birden fazla kullanıcı el ile bulma işlemi gerçekleştirmeyle birlikte her iki Self-Service bı çabasında yeniden yinelenir.
 
-Azure veri Kataloğu ile kuruluşunuz bu döngü çaba bozabilir. Geleneksel araçlarla veri kaynağı bulma sonra bir analist daha kolay bulunabilir diğer kullanıcılar tarafından gelecekte hale kaydedebilirsiniz. Analist, kayıtlı veri varlıklarına daha fazla değer ekleyebilirsiniz, ancak bu ek açıklama aynı zamanda kayıt gerçekleşmesi gerekmez. Kullanıcılar kendi zamanlamaları izin, zaman içinde aşamalı olarak değer kataloğa veri kaynaklarını ekleme katkıda bulunabilir.
+Azure Veri Kataloğu ile kuruluşunuz bu çaba döngüsünü bozabilir. Bir veri kaynağını geleneksel yollarla bulduktan sonra analist, daha sonra diğer kullanıcılar tarafından daha kolay bulunabilir olması için bu kaydı kaydedebilir. Analist, kayıtlı veri varlıklarına açıklama ekleyerek daha fazla değer ekleyebilse de, bu ek açıklamanın kayıt ile aynı anda gerçekleşmesi gerekmez. Kullanıcılar zaman içinde katkıda bulunabilir, bu da zamanlamalarda bulunan veri kaynaklarına giderek kademeli olarak değer ekler.
 
-Bu organik büyüme katalog içeriğinin ön kayıt merkezi veri kaynakları için doğal bir tamamlayıcı ' dir. Birçok kullanıcıların veri Kataloğu'na önceden doldurmak için ilk kullanım ve bulma bir motivator olabilir. Kullanıcılara kaydolmayı ve kaynaklarına ek açıklama etkinleştirme, bunları ve diğer kuruluş üyelerinin bağlı tutmak için bir yol olabilir.
+Katalog içeriğinin bu organik büyümesi, merkezi veri kaynaklarının ön ön kaydına yönelik doğal bir tamamdır. Katalogdan çok sayıda kullanıcının ihtiyacı olan verilerle önceden doldurulmaları, ilk kullanım ve bulma işlemi için bir motive olabilir. Kullanıcıların ek kaynaklara kaydolmasını ve ek olarak Not eklemesini sağlamak, bunları ve diğer kuruluş üyelerini bağlı tutmanın bir yoludur.
 
-Bu, aynı desenleri ve zorlukları bu senaryo, özellikle Self Servis BI odaklanıyor olsa da, büyük ölçekli Kurumsal BI projeleri için de uygulama hatalarının ayıklanabileceğini belirtmekte yarar. Kuruluşunuz, veri kataloğu kullanarak el ile bir veri kaynağı bulma işlemini içeren herhangi bir çaba artırabilir.
+Bu senaryo özellikle self servis BI 'a odaklansa da büyük ölçekli kurumsal bı projelerine yönelik aynı desenler ve güçlükler için de geçerlidir. Kuruluşunuz, veri kataloğu 'Nu kullanarak el ile gerçekleştirilen bir veri kaynağı bulma işlemini içeren herhangi bir çabayı geliştirebilirler.
 
-## <a name="scenario-3-capturing-tribal-knowledge"></a>Senaryo 3: Yakalama açılıyor
-İşiniz ve bu verileri nerede bulacağını yapmanız gereken hangi verilerin nasıl bilebilirsiniz?
+## <a name="scenario-3-capturing-tribal-knowledge"></a>Senaryo 3: Üç aylık bilgi yakalama
+İşinizi ne yapmak için ihtiyacınız olan verileri ve verileri nerede bulabileceğinizi nasıl anlarsınız?
 
-Bir süredir işinizi kılavuzluğa odaklanmamı varsa, büyük olasılıkla yalnızca bilirsiniz. Öğrenme sürecinde bir gradual incelediğinize ve zaman içinde anahtar günlük işlerinizde çalışmak için veri kaynakları hakkında öğrendiniz.
+İşte bir süredir işiniz yaşıyorsanız, büyük olasılıkla çok fazla bilgi alabilirsiniz. Aşamalı bir öğrenme işleminden geçtiniz ve zaman içinde günlük çalışmalarınız için önemli olan veri kaynakları hakkında bilgi edindiniz.
 
-Nasıl yeni bir çalışan takımınız katıldığında, bu kişiye hangi verileri iş için gereklidir ve nerede bulacağını bilir?
+Yeni bir çalışan ekibinize katıldığında, bu kişi iş için hangi verilerin gerekli olduğunu ve nerede bulunacağını nasıl öğrenebilirim?
 
-Büyük olasılıkla olan yeni bir kişi size bu sorularla birlikte gelir.
+ODDS, yeni kişi size bu soruları girer.
 
-Devam eden bu aktarım açılıyor, küçük ve büyük ölçekli kuruluşlarda veri kaynağı bulma işleminin bir parçasıdır. Daha üst düzey ve deneyimli takım üyelerinin Bilgi Bankası ' yıllar içinde yerleşik ve yeni takım üyeleri, bunlar sorularınız varsa bunların yanıtlarını öğrendiniz. En önemli bilgileri genellikle yalnızca birkaç anahtar kişinin heads içinde var ve bu kişilere tatilde olduğu veya ekipten ayrıldığında, kuruluş alternatife.
+Bu sürekli bilgi aktarımı, büyük ve küçük kuruluşlarda veri kaynağı bulma sürecinin bir parçasıdır. Daha fazla kıdemli ve deneyimli ekip üyeleri, yıl boyunca bilgi edinmiş ve daha yeni takım üyeleri, soruları olduğunda bu kişilere sormasını öğrenmiş. En önemli bilgiler genellikle yalnızca birkaç önemli kişinin kafalarında bulunur ve bu kişilerin tatile açık olması veya kuruluştan ayrılmasından kaynaklanır.
 
-Veri uzmanlarının normalde e-posta yoluyla veya bir takım SharePoint sitesindeki Word belgelerinde paylaşımını bilgilerini, belge için çaba hale getirin. Bu yaklaşım değerli olsa da, bunu yeni bir bulma sorun oluşturmaktadır: nasıl kişilere bildirin hangi belge var ve nerede bulacağını?
+Veri uzmanları genellikle kendi bilgilerini belgeleyip bir ekip SharePoint sitesindeki Word belgelerinden veya e-posta yoluyla paylaşarak bir çaba harcamasını sağlar. Bu yaklaşım değerli olsa da, yeni bir keşif sorunu ortaya çıkarır: kişiler hangi belgelerin olduğunu ve nerede bulabileceğinizi nasıl bilir?
 
-Azure veri Kataloğu ile tek, merkezi konuma depolamak ve bu açılıyor paylaşımı ve kolayca bulunabilmesini yapmak için kuruluşunuzun sahiptir. Veri Kataloğu'nda, veri uzmanlarından doğrudan veri varlıklarına açıklama ve mevcut olan belgelere bağlantılar sağlar. Kuruluşun üyeleri, bir veri kaynağı için katalog kullandığınızda, bunlar yalnızca kaynak kendisi, aynı zamanda önceden var olan bir Bilgi Bankası yalnızca kuruluşunuzun uzmanlarına kulak vermek içinde bulabilirsiniz.
+Azure Veri Kataloğu sayesinde, kuruluşunuzun bu üç katlı bilgileri depolamak ve paylaşmak ve kolayca bulunabilir hale getirmek için tek bir merkezi konuma sahip olması gerekir. Veri kataloğunda veri uzmanlarınız doğrudan veri varlıklarına ek açıklama ekleyebilir ve mevcut belgelerin bağlantılarını sağlayabilir. Kuruluş üyeleri bir veri kaynağını bulmak için kataloğunu kullandıklarında yalnızca kaynağın kendisini değil, daha önce yalnızca kuruluşunuzun uzmanlarının fikirlerini de var olan bilgileri bulur.

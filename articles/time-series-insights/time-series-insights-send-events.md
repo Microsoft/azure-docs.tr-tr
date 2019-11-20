@@ -1,62 +1,61 @@
 ---
-title: Bir Azure zaman serisi görüşleri ortamına olayları gönderme | Microsoft Docs
-description: Bir olay hub'ı yapılandırmak ve bir Azure zaman serisi Öngörülerinde görüntüleyebileceğiniz olayları göndermek için örnek uygulamayı çalıştırma hakkında bilgi edinin.
+title: Bir ortama olay gönderme-Azure Time Series Insights | Microsoft Docs
+description: Bir olay hub 'ını yapılandırmayı, örnek bir uygulamayı çalıştırmayı ve Azure Time Series Insights ortamınıza olay göndermenizi öğrenin.
 ms.service: time-series-insights
 services: time-series-insights
-author: ashannon7
+author: deepakpalled
 ms.author: dpalled
 manager: cshankar
-ms.reviewer: v-mamcge, jasonh, kfile
 ms.devlang: csharp
 ms.workload: big-data
 ms.topic: conceptual
-ms.date: 05/06/2019
+ms.date: 10/10/2019
 ms.custom: seodec18
-ms.openlocfilehash: ae59e8115ca2d1ba69c8a3a099216eb3d98e2658
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cdcd64b5281ce16002720072db3b5f29f1978cac
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66237704"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014826"
 ---
 # <a name="send-events-to-a-time-series-insights-environment-by-using-an-event-hub"></a>Bir olay hub'ı kullanarak zaman serisi görüşleri ortamına olayları gönderme
 
-Bu makalede, oluşturma ve Azure olay hub'ları, bir olay hub'ı yapılandırma açıklanmaktadır. Ayrıca, Event Hubs'dan olayları göndermek için örnek bir uygulama için Azure Time Series Insights çalışmasına nasıl açıklar. JSON biçiminde olaylar içeren mevcut bir olay hub'iniz varsa, bu öğreticiyi atlayabilir ve ortamınızı görüntüleyebilirsiniz [Azure Time Series Insights](./time-series-insights-update-create-environment.md).
+Bu makalede, Azure Event Hubs 'da bir olay hub 'ı oluşturma ve yapılandırma açıklanmaktadır. Ayrıca, olayları Event Hubs Azure Time Series Insights göndermek için örnek bir uygulamanın nasıl çalıştırılacağını açıklar. JSON biçiminde olaylar içeren bir olay hub 'ınız varsa, bu öğreticiyi atlayıp [Azure Time Series Insights](./time-series-insights-update-create-environment.md)ortamınızı görüntüleyin.
 
 ## <a name="configure-an-event-hub"></a>Olay hub’ını yapılandırma
 
 1. Bir olay hub'ı oluşturmayı öğrenmek için bkz: [Event Hubs belgeleri](https://docs.microsoft.com/azure/event-hubs/).
 1. Arama kutusuna arama **Event Hubs**. Döndürülen listeden seçin **Event Hubs**.
 1. Olay hub'ınızı seçin.
-1. Bir olay hub'ı oluşturduğunuzda, bir olay hub'ı ad alanını oluşturuyorsunuz. Henüz bir olay hub'ı ad alanı içinde menüde altında oluşturmadıysanız **varlıkları**, bir olay hub'ı oluşturun.  
+1. Bir olay hub 'ı oluşturduğunuzda, bir olay hub 'ı ad alanı oluşturuyorsunuz. Ad alanı içinde henüz bir olay hub 'ı oluşturmadıysanız, menüde, **varlıklar**altında bir olay hub 'ı oluşturun.  
 
-    [![Olay hub'ları listesi](media/send-events/updated.png)](media/send-events/updated.png#lightbox)
+    [Olay Hub 'ları ![listesi](media/send-events/1-event-hub-namespace.png)](media/send-events/1-event-hub-namespace.png#lightbox)
 
 1. Bir olay hub'ı oluşturduğunuzda, olay hub'ları listesinde seçin.
-1. Menüsünde altında **varlıkları**seçin **Event Hubs**.
+1. Menüsünde, **varlıklar**altında **Event Hubs**' yi seçin.
 1. Olay hub'ı yapılandırmak için adını seçin.
-1. Altında **varlıkları**seçin **tüketici grupları**ve ardından **tüketici grubu**.
+1. **Genel bakış**altında **tüketici grupları**' nı ve ardından **Tüketici grubu**' nu seçin.
 
-    [![Bir tüketici grubu oluşturun](media/send-events/consumer-group.png)](media/send-events/consumer-group.png#lightbox)
+    [![Tüketici grubu oluşturma](media/send-events/2-consumer-group.png)](media/send-events/2-consumer-group.png#lightbox)
 
-1. Özel zaman serisi görüşleri olay kaynağınız tarafından kullanılan bir tüketici grubu oluşturduğunuzdan emin olun.
+1. Yalnızca Time Series Insights olay kaynağınız tarafından kullanılan bir tüketici grubu oluşturduğunuzdan emin olun.
 
     > [!IMPORTANT]
-    > Bu tüketici grubunun, Azure Stream Analytics işi veya başka bir zaman serisi görüşleri ortamına gibi diğer tüm hizmet tarafından kullanılmadığından emin olun. Tüketici grubu tarafından kullanılıyorsa, bu ortam için ve diğer hizmetler için Hizmetleri, okuma işlemleri olumsuz etkilenir. Kullanırsanız **$Default** tüketici grubu diğer okuyucular potansiyel olarak, bir tüketici grubu yeniden kullanabilir.
+    > Bu tüketici grubunun Azure Stream Analytics iş veya başka bir Time Series Insights ortamı gibi başka bir hizmet tarafından kullanılmadığından emin olun. Tüketici grubu tarafından kullanılıyorsa, bu ortam için ve diğer hizmetler için Hizmetleri, okuma işlemleri olumsuz etkilenir. Kullanırsanız **$Default** tüketici grubu diğer okuyucular potansiyel olarak, bir tüketici grubu yeniden kullanabilir.
 
-1. Menüsünde altında **ayarları**seçin **paylaşılan erişim ilkeleri**ve ardından **Ekle**.
+1. Menüde, **Ayarlar**' ın altında, **paylaşılan erişim ilkeleri**' ni seçin ve ardından **Ekle**' yi seçin.
 
-    [![Paylaşılan erişim ilkeleri'ni seçin ve ardından Ekle düğmesini seçin.](media/send-events/shared-access-policy.png)](media/send-events/shared-access-policy.png#lightbox)
+    [![paylaşılan erişim ilkeleri ' ni seçin ve ardından Ekle düğmesini seçin.](media/send-events/3-shared-access-policy.png)](media/send-events/3-shared-access-policy.png#lightbox)
 
-1. İçinde **yeni paylaşılan erişim ilkesi ekleme** bölmesinde adlı bir paylaşılan erişim oluşturma **MySendPolicy**. Bu paylaşılan erişim ilkesi olayları göndermek için kullandığınız C# bu makaledeki örnekler.
+1. İçinde **yeni paylaşılan erişim ilkesi ekleme** bölmesinde adlı bir paylaşılan erişim oluşturma **MySendPolicy**. Bu paylaşılan erişim ilkesini, C# Bu makalenin ilerleyen kısımlarında bulunan örneklere olay göndermek için kullanırsınız.
 
-    [![İlke adı kutusuna MySendPolicy girin](media/send-events/shared-access-policy-2.png)](media/send-events/shared-access-policy-2.png#lightbox)
+    [Ilke adı kutusuna ![MySendPolicy yazın.](media/send-events/4-shared-access-policy-confirm.png)](media/send-events/4-shared-access-policy-confirm.png#lightbox)
 
-1. Altında **talep**seçin **Gönder** onay kutusu.
+1. **Talep**altında **Gönder** onay kutusunu seçin.
 
 ## <a name="add-a-time-series-insights-instance"></a>Time Series Insights örneği ekleme
 
-Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen telemetri verilerini eklemek için kullanır. Verileri kullanarak sorgu zamanında birleştirilmiş bir **zaman serisi kimliği**. **Zaman serisi kimliği** örnek windmills için bu makalenin sonraki bölümlerinde kullandığımız projedir `id`. Zaman serisi görüşleri örnekleri hakkında daha fazla bilgi edinmek ve **zaman serisi kimliği**, bkz: [zaman serisi modelleri](./time-series-insights-update-tsm.md).
+Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen telemetri verilerini eklemek için kullanır. Verileri kullanarak sorgu zamanında birleştirilmiş bir **zaman serisi kimliği**. Bu makalede daha sonra kullandığımız örnek wınıdmills projesi için **zaman SERISI kimliği** `id`. Zaman serisi görüşleri örnekleri hakkında daha fazla bilgi edinmek ve **zaman serisi kimliği**, bkz: [zaman serisi modelleri](./time-series-insights-update-tsm.md).
 
 ### <a name="create-a-time-series-insights-event-source"></a>Zaman serisi görüşleri olay kaynağı oluşturma
 
@@ -64,32 +63,32 @@ Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen 
 
 1. İçin bir değer ayarlamanız `timeSeriesId`. Hakkında daha fazla bilgi edinmek için **zaman serisi kimliği**, bkz: [zaman serisi modelleri](./time-series-insights-update-tsm.md).
 
-### <a name="push-events"></a>Olayları göndermek (windmills örneği)
+### <a name="push-events-to-windmills-sample"></a>Olayları, wınte milfrels örneğine gönder
 
 1. Arama çubuğunda arama **Event Hubs**. Döndürülen listeden seçin **Event Hubs**.
 
-1. Olay hub'ınızı seçin.
+1. Olay Hub örneğinizi seçin.
 
-1. Git **paylaşılan erişim ilkeleri** > **RootManageSharedAccessKey**. Değeri kopyalamak **bağlantı dizesi-birincil anahtar**.
+1. **Mysendpolicy** > **paylaşılan erişim ilkelerine** gidin. Değeri kopyalamak **bağlantı dizesi-birincil anahtar**.
 
-    [![Birincil anahtar bağlantı dizesi değerini kopyalayın](media/send-events/sample-code-connection-string.png)](media/send-events/sample-code-connection-string.png#lightbox)
+    [![birincil anahtar bağlantı dizesinin değerini kopyalayın](media/send-events/5-sample-code-connection-string.png)](media/send-events/5-sample-code-connection-string.png#lightbox)
 
 1. https://tsiclientsample.azurewebsites.net/windFarmGen.html kısmına gidin. URL sanal Yeldeğirmeni cihazları çalıştırır.
-1. İçinde **olay hub'ı bağlantı dizesi** kutusuna Web sayfası, içinde kopyaladığınız bağlantı dizesini yapıştırın [olayları gönderme](#push-events).
+1. Web sayfasındaki **Olay Hub 'ı bağlantı dizesi** kutusunda, [wındmill giriş alanına](#push-events-to-windmills-sample)kopyaladığınız bağlantı dizesini yapıştırın.
   
-    [![Olay hub'ı bağlantı dizesi kutusunda birincil anahtar bağlantı dizesini yapıştırın](media/send-events/updated_two.png)](media/send-events/updated_two.png#lightbox)
+    [![birincil anahtar bağlantı dizesini Olay Hub 'ı bağlantı dizesi kutusuna yapıştırın](media/send-events/6-wind-mill-sim.png)](media/send-events/6-wind-mill-sim.png#lightbox)
 
 1. Seçin **başlatmak için tıklatın**. Simülatör doğrudan kullanabileceğiniz JSON örneği oluşturur.
 
-1. Azure portalında event hub'ınıza geri dönün. Üzerinde **genel bakış** sayfa, olay hub'ı tarafından alınan yeni olayları görürsünüz.
+1. Azure portalında event hub'ınıza geri dönün. **Genel bakış** sayfasında, Olay Hub 'ı tarafından alınan yeni olayları görürsünüz.
 
-    [![Ölçümleri olay hub'ı gösteren bir olay hub'ı genel bakış sayfası](media/send-events/telemetry.png)](media/send-events/telemetry.png#lightbox)
+    [Olay Hub 'ı için ölçümleri gösteren bir olay hub 'ı genel bakış sayfası ![](media/send-events/7-telemetry.png)](media/send-events/7-telemetry.png#lightbox)
 
-## <a name="json"></a>Desteklenen JSON şekilleri
+## <a name="supported-json-shapes"></a>Desteklenen JSON şekilleri
 
-### <a name="example-one"></a>Bir örnek
+### <a name="example-one"></a>Örnek bir
 
-* **Giriş**: Basit bir JSON nesnesi.
+* **Giriş**: basıt bir JSON nesnesi.
 
     ```JSON
     {
@@ -98,15 +97,15 @@ Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen 
     }
     ```
 
-* **Çıkış**: Bir olay.
+* **Çıkış**: bir olay.
 
     |id|timestamp|
     |--------|---------------|
     |cihaz1|2016-01-08T01:08:00Z|
 
-### <a name="example-two"></a>İki örnek
+### <a name="example-two"></a>Örnek iki
 
-* **Giriş**: İki JSON nesnesi içeren JSON dizisi. Her bir JSON nesnesi bir olaya dönüştürülür.
+* **Giriş**: iki JSON nesnesi olan bir JSON dizisi. Her bir JSON nesnesi bir olaya dönüştürülür.
 
     ```JSON
     [
@@ -121,7 +120,7 @@ Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen 
     ]
     ```
 
-* **Çıkış**: İki olay.
+* **Çıkış**: iki olay.
 
     |id|timestamp|
     |--------|---------------|
@@ -130,7 +129,7 @@ Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen 
 
 ### <a name="example-three"></a>Örnek üç
 
-* **Giriş**: İki JSON nesnesi içeren iç içe bir JSON dizisi ile JSON nesnesi.
+* **Giriş**: iki JSON nesnesi içeren Iç içe JSON dizisine sahıp bir JSON nesnesi.
 
     ```JSON
     {
@@ -148,16 +147,16 @@ Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen 
     }
     ```
 
-* **Çıkış**: İki olay. Özellik **konumu** üzerinden her olay için kopyalanır.
+* **Çıkış**: iki olay. Özellik **konumu** üzerinden her olay için kopyalanır.
 
     |location|events.id|events.timestamp|
     |--------|---------------|----------------------|
     |WestUs|cihaz1|2016-01-08T01:08:00Z|
     |WestUs|cihaz2|2016-01-08T01:17:00Z|
 
-### <a name="example-four"></a>Dört örnek
+### <a name="example-four"></a>Örnek dört
 
-* **Giriş**: İki JSON nesnesi içeren iç içe bir JSON dizisi ile JSON nesnesi. Bu giriş, genel özellikleri karmaşık bir JSON nesnesi tarafından temsil edilebilir olduğunu gösterir.
+* **Giriş**: iki JSON nesnesi içeren Iç içe JSON dizisine sahıp bir JSON nesnesi. Bu giriş, genel özellikleri karmaşık bir JSON nesnesi tarafından temsil edilebilir olduğunu gösterir.
 
     ```JSON
     {
@@ -189,7 +188,7 @@ Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen 
     }
     ```
 
-* **Çıkış**: İki olay.
+* **Çıkış**: iki olay.
 
     |location|manufacturer.name|manufacturer.location|events.id|events.timestamp|events.data.type|events.data.units|events.data.value|
     |---|---|---|---|---|---|---|---|
@@ -198,4 +197,6 @@ Time Series Insights güncelleştirme örnekleri bağlamsal veriler için gelen 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Ortamınızı görüntülemek](https://insights.timeseries.azure.com) Time Series Insights Gezgininde.
+- Time Series Insights Gezgini ' nde [ortamınızı görüntüleyin](https://insights.timeseries.azure.com) .
+
+- [IoT Hub cihaz iletileri](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-construct) hakkında daha fazla bilgi edinin

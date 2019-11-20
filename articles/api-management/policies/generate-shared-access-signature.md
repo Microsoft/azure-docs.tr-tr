@@ -1,6 +1,6 @@
 ---
-title: Azure API management ilke örneği - paylaşılan erişim imzası oluştur | Microsoft Docs
-description: Azure API management ilke örneği - paylaşılan erişim imzası ifadeleri kullanarak oluşturma ve isteği yeniden yazma-URI İlkesi ile Azure depolama gösterir...
+title: Azure API yönetim ilkesi örneği-paylaşılan erişim Imzası oluştur | Microsoft Docs
+description: Azure API Management ilkesi örneği-ifadeleri kullanarak paylaşılan erişim Imzasının nasıl oluşturulacağını ve isteği yeniden yazma-URI ilkesiyle Azure depolama 'ya iletmeyi gösterir.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,30 +9,29 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 10/13/2017
 ms.author: apimpm
-ms.openlocfilehash: 2c3adaa6f4e113f09e676583c2c35b5f1fbdb622
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 45e29673e264f64c976cce664eaf749636400c7f
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61062199"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70067745"
 ---
-# <a name="generate-shared-access-signature"></a>Paylaşılan erişim imzası oluşturma
+# <a name="generate-shared-access-signature"></a>Paylaşılan erişim Imzası oluştur
 
-Bu makale oluşturmayı gösterir bir Azure API management ilke örneği [paylaşılan erişim imzası](https://docs.microsoft.com/azure/storage/storage-dotnet-shared-access-signature-part-1) ifadeleri kullanarak ve isteği yeniden yazma-URI İlkesi ile Azure depolama iletir. Ayarlama veya ilke kodu düzenleme için açıklanan adımları izleyin [ayarlama veya düzenleme ilke](../set-edit-policies.md). Diğer örnekler için bkz [ilkesi örnekleri](../policy-samples.md).
+Bu makalede, ifadeleri kullanarak [paylaşılan erişim imzasının](https://docs.microsoft.com/azure/storage/storage-dotnet-shared-access-signature-part-1) nasıl oluşturulacağı ve isteğin yeniden yazma-URI Ilkesi ile Azure depolama 'ya nasıl iletebileceği gösterilir. Bir ilke kodu ayarlamak veya düzenlemek için, [Ilke ayarlama veya düzenleme](../set-edit-policies.md)bölümünde açıklanan adımları izleyin. Diğer örnekleri görmek için bkz. [ilke örnekleri](../policy-samples.md).
 
 ## <a name="policy"></a>İlke
 
-Kodun içine yapıştırın **gelen** blok.
+Kodu **gelen** bloğa yapıştırın.
 
 [!code-xml[Main](../../../api-management-policy-samples/examples/Generate Shared Access Signature and forward request to Azure storage.policy.xml)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-APIM ilkeleri hakkında daha fazla bilgi edinin:
+APıM ilkeleri hakkında daha fazla bilgi edinin:
 
 + [Dönüştürme ilkeleri](../api-management-transformation-policies.md)
 + [İlke örnekleri](../policy-samples.md)

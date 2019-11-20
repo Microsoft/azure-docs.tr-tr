@@ -1,94 +1,94 @@
 ---
-title: Döküm ve - tek bir sunucu PostgreSQL için Azure veritabanı'nda geri yükleme
-description: Bir PostgreSQL veritabanı dökümü dosyasına ayıklama ve - tek bir sunucu PostgreSQL için Azure veritabanı'nda pg_dump oluşturan bir dosya geri yükleme işlemini açıklar.
+title: PostgreSQL için Azure veritabanı 'nda dökümünü alma ve geri yükleme-tek sunucu
+description: Bir PostgreSQL veritabanının bir döküm dosyasına nasıl ayıklanacağını ve PostgreSQL için Azure veritabanı 'nda pg_dump tarafından oluşturulan bir dosyadan geri yükleme işlemini açıklar-tek sunucu.
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
 ms.topic: conceptual
-ms.date: 5/6/2019
-ms.openlocfilehash: aa9485ec8fcabdc0276e0598bd3e19f04d70dfa1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/24/2019
+ms.openlocfilehash: 4291db0bb1edbc366c42febed992a7c27d46eb15
+ms.sourcegitcommit: 018e3b40e212915ed7a77258ac2a8e3a660aaef8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65066978"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73796744"
 ---
 # <a name="migrate-your-postgresql-database-using-dump-and-restore"></a>Döküm ve geri yükleme kullanarak PostgreSQL veritabanınızı geçirme
-Kullanabileceğiniz [pg_dump](https://www.postgresql.org/docs/9.3/static/app-pgdump.html) bir döküm dosyası bir PostgreSQL veritabanı ayıklanacak ve [pg_restore](https://www.postgresql.org/docs/9.3/static/app-pgrestore.html) PostgreSQL veritabanı pg_dump tarafından oluşturulan bir arşiv dosyasını geri.
+Bir PostgreSQL veritabanını bir döküm dosyasına ayıklamak ve pg_dump tarafından oluşturulan bir arşiv dosyasından PostgreSQL veritabanını geri yüklemek için [pg_restore](https://www.postgresql.org/docs/current/static/app-pgrestore.html) [pg_dump](https://www.postgresql.org/docs/current/static/app-pgdump.html) kullanabilirsiniz.
 
-## <a name="prerequisites"></a>Önkoşullar
-Bu nasıl yapılır kılavuzunda adımlamak için ihtiyacınız vardır:
-- Bir [PostgreSQL sunucusu için Azure veritabanı](quickstart-create-server-database-portal.md) erişimi ve veritabanı altındaki izin vermek için güvenlik duvarı kuralları ile.
-- [pg_dump](https://www.postgresql.org/docs/9.6/static/app-pgdump.html) ve [pg_restore](https://www.postgresql.org/docs/9.6/static/app-pgrestore.html) yüklü komut satırı yardımcı programları
+## <a name="prerequisites"></a>Ön koşullar
+Bu nasıl yapılır kılavuzunda ilerlemek için şunlar gerekir:
+- Üzerinde erişime ve veritabanına izin vermek için güvenlik duvarı kuralları içeren bir [PostgreSQL sunucusu Için Azure veritabanı](quickstart-create-server-database-portal.md) .
+- [pg_dump](https://www.postgresql.org/docs/current/static/app-pgdump.html) ve [pg_restore](https://www.postgresql.org/docs/current/static/app-pgrestore.html) komut satırı yardımcı programları yüklendi
 
-Döküm ve PostgreSQL veritabanınızın geri yüklemek için aşağıdaki adımları izleyin:
+PostgreSQL veritabanınızı dökümünü almak ve geri yüklemek için şu adımları izleyin:
 
-## <a name="create-a-dump-file-using-pgdump-that-contains-the-data-to-be-loaded"></a>Yüklenen verileri içeren pg_dump kullanarak bir döküm dosyası oluşturma
-Bir mevcut PostgreSQL veritabanı şirket içinde veya bir sanal makine yedeklemek için aşağıdaki komutu çalıştırın:
+## <a name="create-a-dump-file-using-pg_dump-that-contains-the-data-to-be-loaded"></a>Yüklenecek verileri içeren pg_dump kullanarak döküm dosyası oluşturma
+Mevcut bir PostgreSQL veritabanını şirket içinde veya bir VM 'de yedeklemek için şu komutu çalıştırın:
 ```bash
-pg_dump -Fc -v --host=<host> --username=<name> --dbname=<database name> > <database>.dump
+pg_dump -Fc -v --host=<host> --username=<name> --dbname=<database name> -f <database>.dump
 ```
-Örneğin, yerel bir sunucuya ve adlı bir veritabanı varsa **testdb** da
+Örneğin, yerel bir sunucunuz ve içinde **TestDB** adlı bir veritabanınız varsa
 ```bash
-pg_dump -Fc -v --host=localhost --username=masterlogin --dbname=testdb > testdb.dump
+pg_dump -Fc -v --host=localhost --username=masterlogin --dbname=testdb -f testdb.dump
 ```
 
 
-## <a name="restore-the-data-into-the-target-azure-database-for-postrgesql-using-pgrestore"></a>Verileri pg_restore kullanarak PostrgeSQL için hedef Azure veritabanını geri yükleyin
-Hedef veritabanı oluşturduktan sonra döküm dosyasını hedef veritabanına veri geri yüklemek için pg_restore komut -d,--dbname parametresini kullanabilirsiniz.
+## <a name="restore-the-data-into-the-target-azure-database-for-postgresql-using-pg_restore"></a>Pg_restore kullanarak verileri PostgreSQL için Azure veritabanı 'na geri yükleme
+Hedef veritabanını oluşturduktan sonra, verileri döküm dosyasından hedef veritabanına geri yüklemek için pg_restore komutunu ve-d,--dbname parametresini kullanabilirsiniz.
 ```bash
-pg_restore -v --no-owner –-host=<server name> --port=<port> --username=<user@servername> --dbname=<target database name> <database>.dump
+pg_restore -v --no-owner --host=<server name> --port=<port> --username=<user@servername> --dbname=<target database name> <database>.dump
 ```
-Dahil olmak üzere tüm nesneleri oluşturulan--username belirtilen kullanıcı tarafından ait olduğu geri yükleme işlemi sırasında no-owner parametresi neden olur. Daha fazla bilgi için üzerinde resmi PostgreSQL belgelerine bakın. [pg_restore](https://www.postgresql.org/docs/9.6/static/app-pgrestore.html).
+--No-Owner parametresini eklemek, geri yükleme sırasında oluşturulan tüm nesnelerin,--username ile belirtilen kullanıcıya ait olmasını sağlar. Daha fazla bilgi için bkz. [pg_restore](https://www.postgresql.org/docs/9.6/static/app-pgrestore.html)resmi PostgreSQL belgeleri.
 
 > [!NOTE]
-> PostgreSQL sunucunuz, SSL bağlantıları gerektiriyorsa (üzerinde PostgreSQL sunucuları için Azure veritabanı'nda varsayılan olarak), bir ortam değişkenini ayarlamak `PGSSLMODE=require` böylece pg_restore aracı SSL ile bağlanır. SSL okuma hatası  `FATAL:  SSL connection is required. Please specify SSL options and retry.`
+> PostgreSQL sunucunuz SSL bağlantıları gerektiriyorsa (PostgreSQL için Azure veritabanı sunucuları için varsayılan olarak açık), pg_restore aracının SSL ile bağlanacağı bir ortam değişkeni `PGSSLMODE=require` ayarlayın. SSL olmadan hata okuyabilir `FATAL:  SSL connection is required. Please specify SSL options and retry.`
 >
-> Komutu Windows komut satırında çalıştırın `SET PGSSLMODE=require` pg_restore komutu çalıştırmadan önce. Linux veya Bash komut çalıştırma `export PGSSLMODE=require` pg_restore komutu çalıştırmadan önce.
+> Windows komut satırında, pg_restore komutunu çalıştırmadan önce `SET PGSSLMODE=require` komutunu çalıştırın. Linux veya bash içinde pg_restore komutunu çalıştırmadan önce `export PGSSLMODE=require` komutunu çalıştırın.
 >
 
-Bu örnekte, döküm dosyadan verileri geri **testdb.dump** veritabanına **mypgsqldb** hedef sunucuda **demosunucum.postgres.Database.Azure.com**. 
+Bu örnekte, **TestDB. dump** döküm dosyasındaki verileri, **mydemoserver.Postgres.Database.Azure.com**hedef sunucusundaki **mypgsqldb** veritabanına geri yükleyin. 
 ```bash
 pg_restore -v --no-owner --host=mydemoserver.postgres.database.azure.com --port=5432 --username=mylogin@mydemoserver --dbname=mypgsqldb testdb.dump
 ```
 
-## <a name="optimizing-the-migration-process"></a>Geçiş işlemi en iyi duruma getirme
+## <a name="optimizing-the-migration-process"></a>Geçiş işlemini iyileştirme
 
-Var olan PostgreSQL veritabanınızın PostgreSQL hizmeti için Azure veritabanı'na geçirmek için bir kaynak üzerinde veritabanını yedekleme ve Azure'da geri yoludur. Geçişi tamamlamak için gereken süreyi en aza indirmek için aşağıdaki parametreleri kullanarak yedeklemeyi göz önünde bulundurun ve komutları geri yükleyin.
+Mevcut PostgreSQL veritabanınızı PostgreSQL için Azure veritabanı 'na geçirmenin bir yolu, kaynağı kaynak üzerinde yedeklemeli ve Azure 'da geri yüklemektir. Geçişi gerçekleştirmek için gereken süreyi en aza indirmek için yedekleme ve geri yükleme komutlarıyla aşağıdaki parametreleri kullanmayı göz önünde bulundurun.
 
 > [!NOTE]
-> Ayrıntılı sözdizimi için makale bilgi [pg_dump](https://www.postgresql.org/docs/9.6/static/app-pgdump.html) ve [pg_restore](https://www.postgresql.org/docs/9.6/static/app-pgrestore.html).
+> Ayrıntılı sözdizimi bilgileri için [pg_dump](https://www.postgresql.org/docs/current/static/app-pgdump.html) ve [pg_restore](https://www.postgresql.org/docs/current/static/app-pgrestore.html)makalelerine bakın.
 >
 
 ### <a name="for-the-backup"></a>Yedekleme için
-- Geri yüklemeyi hızlandırmak için paralel gerçekleştirebilmeniz -Fc anahtarıyla yedekleyin. Örneğin:
+- Geri yüklemeyi hızlandırmak üzere paralel olarak gerçekleştirebilmek için-FC anahtarıyla yedeklemeyi gerçekleştirin. Örneğin:
 
     ```
-    pg_dump -h MySourceServerName -U MySourceUserName -Fc -d MySourceDatabaseName > Z:\Data\Backups\MyDatabaseBackup.dump
+    pg_dump -h MySourceServerName -U MySourceUserName -Fc -d MySourceDatabaseName -f Z:\Data\Backups\MyDatabaseBackup.dump
     ```
 
-### <a name="for-the-restore"></a>Geri yüklemek için
-- PostgreSQL sunucusu için geçiş yaptığınız ve ağ gecikme süresini azaltmak için o VM'den pg_restore yapmak için Azure veritabanı ile aynı bölgede bir Azure VM yedekleme dosyasını gitme öneririz. Ayrıca VM yaratılırken öneririz [accelerated networking](../virtual-network/create-vm-accelerated-networking-powershell.md) etkin.
+### <a name="for-the-restore"></a>Geri yükleme için
+- Yedekleme dosyasını, geçiş yaptığınız PostgreSQL için Azure veritabanı sunucusu ile aynı bölgedeki bir Azure VM 'ye taşımanızı ve ağ gecikmesini azaltmak için bu sanal makineden pg_restore almanızı öneririz. Ayrıca, sanal makinenin [hızlandırılmış ağ](../virtual-network/create-vm-accelerated-networking-powershell.md) etkinleştirilmiş olarak oluşturulmasını öneririz.
 
-- Varsayılan olarak yapılması gerekir, ancak veri ekleme sonra create INDEX deyimi doğrulamak için döküm dosyasını açın. Böyle değilse, veri eklendikten sonra create INDEX deyimi taşıyın.
+- Varsayılan olarak zaten yapılmalıdır, ancak create INDEX deyimlerinin veri ekleme deyimlerinden sonra olduğunu doğrulamak için döküm dosyasını açın. Böyle değilse, veri eklendikten sonra CREATE INDEX deyimlerini taşıyın.
 
-- Anahtarlar geri yükleme -Fc ve -j *#* geri paralel hale getirmek için. *#* hedef sunucuda çekirdek sayısıdır. İle deneyebilirsiniz *#* yönelik etkisini öğrenmek için iki kez hedef sunucu çekirdek sayısı için ayarlayın. Örneğin:
+- Restore paralel hale getirmek için-FC ve-j *#* anahtarlarıyla geri yükleyin. *#* , hedef sunucudaki çekirdekler sayısıdır. Etkiyi görmek için, hedef sunucunun çekirdekleri sayısını iki katına *#* de deneyebilirsiniz. Örneğin:
 
     ```
     pg_restore -h MyTargetServer.postgres.database.azure.com -U MyAzurePostgreSQLUserName -Fc -j 4 -d MyTargetDatabase Z:\Data\Backups\MyDatabaseBackup.dump
     ```
 
-- Komut ekleyerek döküm dosyasını düzenleyebilirsiniz *synchronous_commıt ayarlayın; =* başında ve komut *synchronous_commıt ayarlayın; =* sonunda. Uygulamaları verileri değiştirmeden önce sonunda, açma değil, sonraki veri kaybına neden olabilir.
+- Ayrıca, sonda ve komut *kümesi synchronous_commit = on '* a *synchronous_commit = off;* komut kümesini ekleyerek döküm dosyasını düzenleyebilirsiniz. Son olarak, uygulamalar verileri değiştirmeden önce verilerin daha sonra kaybedilmesine neden olabilir.
 
-- Hedefte veritabanı Azure PostgreSQL sunucusu için geri yüklemeden önce aşağıdakileri göz önünde bulundurun:
-    - Geçiş sırasında bu İstatistikler gerekmediğinden sorgu performansı, izlemeyi devre dışı. Pg_stat_statements.track pg_qs.query_capture_mode ve pgms_wait_sampling.query_capture_mode NONE olarak ayarlayarak bunu yapabilirsiniz.
+- PostgreSQL için Azure veritabanı sunucusunda, geri yüklemeden önce aşağıdakileri yapmayı deneyin:
+    - Geçiş sırasında bu istatistiklere gerek duyulmadığından, sorgu performansını izlemeyi devre dışı bırakın. Bunu, pg_stat_statements. Track, pg_qs. query_capture_mode ve pgms_wait_sampling. query_capture_mode 'yi NONE olarak ayarlayarak yapabilirsiniz.
 
-    - Yüksek işlem ve gibi 32 sanal çekirdek bellek için iyileştirilmiş, yüksek bellek sku geçişi hızlandırmak için kullanın. Geri yükleme tamamlandıktan sonra tercih edilen sku'nuz aşağı kolayca ölçeklendirebilirsiniz. Daha yüksek sku, daha fazla paralellik karşılık gelen artırarak elde edebileceğiniz `-j` pg_restore komut parametresi. 
+    - Geçişi hızlandırmak için 32 sanal çekirdek bellek için Iyileştirilmiş gibi yüksek bir işlem ve yüksek bellek SKU 'su kullanın. Geri yükleme tamamlandıktan sonra tercih ettiğiniz SKU 'nuzu kolayca azaltabilirsiniz. SKU 'nun daha yüksek olması, pg_restore komutunda karşılık gelen `-j` parametresini artırarak elde edebilirsiniz. 
 
-    - Hedef sunucuda daha yüksek IOPS geri yükleme performansını geliştirebilirsiniz. Sunucunun depolama boyutunu artırarak daha yüksek IOPS sağlayabilirsiniz. Bu ayar, ters çevrilebilir değildir, ancak daha yüksek IOPS gerçek iş yükünüzü gelecekte yararlı olup olmadığını göz önünde bulundurun.
+    - Hedef sunucuda daha fazla ıOPS, geri yükleme performansını iyileştirebilir. Sunucunun depolama boyutunu artırarak daha fazla ıOPS sağlayabilirsiniz. Bu ayar geri alınamaz, ancak daha yüksek bir ıOPS 'nin gelecekte gerçek iş yükünüzün avantajına sahip olup olmadığını düşünün.
 
-Test ve üretim ortamında kullanmadan önce bu komutları bir sınama ortamında doğrulamak unutmayın.
+Bu komutları üretimde kullanmadan önce test ortamında sınamayı ve doğrulamayı unutmayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Dışarı ve içeri aktarma kullanarak bir PostgreSQL veritabanına geçirmek için bkz [dışarı aktarma hizmetini kullanarak PostgreSQL veritabanınızı geçirme ve içeri aktarma](howto-migrate-using-export-and-import.md).
-- Geçiş hakkında daha fazla bilgi için bkz, PostgreSQL için Azure veritabanı veritabanına [veritabanı Geçiş Kılavuzu](https://aka.ms/datamigration).
+- Dışarı aktarma ve içeri aktarma kullanarak bir PostgreSQL veritabanını geçirmek için, bkz. [dışarı aktarma ve içeri aktarma kullanarak PostgreSQL veritabanınızı geçirme](howto-migrate-using-export-and-import.md).
+- Veritabanını PostgreSQL için Azure veritabanı 'na geçirme hakkında daha fazla bilgi için bkz. [veritabanı geçiş kılavuzu](https://aka.ms/datamigration).

@@ -6,14 +6,14 @@ author: jimzim
 ms.author: jzim
 manager: jeconnoc
 ms.topic: tutorial
-ms.service: openshift
+ms.service: container-service
 ms.date: 05/06/2019
-ms.openlocfilehash: b25e17e7064006a1421142dfcd32997cb4426e8e
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: deb136a70c24cb7bd1b6c60505cc6ab0376a7b02
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66305976"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67672431"
 ---
 # <a name="tutorial-scale-an-azure-red-hat-openshift-cluster"></a>Öğretici: Azure Red Hat OpenShift kümesini ölçeklendirme
 
@@ -36,7 +36,7 @@ Bu öğreticiye başlamadan önce:
 
 * Bir küme oluşturma [Azure Red Hat OpenShift küme oluşturma](tutorial-create-cluster.md) öğretici.
 
-## <a name="step-1-sign-in-to-azure"></a>1. Adım: Oturum açın: Azure
+## <a name="step-1-sign-in-to-azure"></a>1\. adım: Azure'da oturum açma
 
 Azure CLI'yi yerel olarak çalıştırıyorsanız, çalıştırma `az login` için Azure'da oturum açın.
 
@@ -46,7 +46,7 @@ az login
 
 Birden çok aboneliğe erişiminiz çalıştırırsanız `az account set -s {subscription ID}` değiştirerek `{subscription ID}` kullanmak istediğiniz aboneliği ile.
 
-## <a name="step-2-scale-the-cluster-with-additional-nodes"></a>2. Adım: Ek düğümler ile küme ölçeklendirme
+## <a name="step-2-scale-the-cluster-with-additional-nodes"></a>2\. adım: Ek düğümler ile küme ölçeklendirme
 
 Terminal bir Bash değişken küme_adı kümenizin adını ayarlayın:
 

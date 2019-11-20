@@ -1,23 +1,24 @@
 ---
-title: Alma API sunar | Azure Market
-description: API teklifleri yayımcı ad alanı altında bir Özet listesini alır.
+title: Teklif API 'sini alma | Azure Marketi
+description: API, bir yayımcı ad alanı altında tekliflerin özetlenmiş bir listesini alır.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 67109c3605ea96123ff41cb88d5ac328a09991e6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5c94c03a63936be2b086085a1e52064dedf214b0
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935342"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819609"
 ---
 <a name="retrieve-offers"></a>Teklifleri alma
 ===============
 
-Teklifler yayımcı ad alanı altında bir Özet listesini alır.
+Bir yayımcı ad alanı altındaki tekliflerin özetlenen listesini alır.
 
  `GET https://cloudpartner.azure.com/api/publishers/<publisherId>/offers?api-version=2017-10-31`
 
@@ -27,12 +28,12 @@ Teklifler yayımcı ad alanı altında bir Özet listesini alır.
 
 | **Ad**         |  **Açıklama**                         |  **Veri türü** |
 | -------------    |  ------------------------------------    |  -----------   |
-|  publisherId     | Örneğin, yayımcı tanımlayıcısı `contoso` |   String    |
-|  API sürümü     | API'sının en son sürümü                    |    Tarih        |
+|  PublisherId     | Yayımcı tanımlayıcı, örneğin `contoso` |   Dize    |
+|  api sürümü     | En son API sürümü                    |    Tarih        |
 |  |  |
 
 
-<a name="header"></a>Üstbilgi
+<a name="header"></a>Üst bilgi
 ------
 
 |  **Ad**        |         **Değer**       |
@@ -68,24 +69,24 @@ Teklifler yayımcı ad alanı altında bir Özet listesini alır.
 
 |  **Ad**       |       **Açıklama**                                                                                                  |
 |  -------------  |      --------------------------------------------------------------------------------------------------------------    |
-|  offerTypeId    | Teklif türünü tanımlar                                                                                           |
-|  publisherId    | Yayımcı benzersiz olarak tanımlayan tanımlayıcısı                                                                      |
-|  status         | Teklif durumu. Olası değerler listesi için bkz: [teklif durumu](#offer-status) aşağıda.                         |
-|  id             | Teklif yayımcı ad alanında benzersiz olarak tanımlayan GUID.                                                    |
-|  version        | Teklifin geçerli sürümü. İstemci tarafından version özelliği değiştirilemez. Bu, her yayımladıktan sonra artırılır. |
-|  Tanımı     | Gerçek iş yükü tanımını bir Özet görünümünü içerir. Ayrıntılı bir tanımı almak için kullanın [alma belirli teklif](./cloud-partner-portal-api-retrieve-specific-offer.md) API. |
-|  changedTime    | Teklif en son değiştirildiği UTC saati                                                                              |
+|  Offertypeıd    | Teklifin türünü tanımlar                                                                                           |
+|  PublisherId    | Yayımcıyı benzersiz bir şekilde tanımlayan tanımlayıcı                                                                      |
+|  status         | Teklifin durumu. Olası değerler listesi için bkz. [teklif durumu](#offer-status) aşağıdaki.                         |
+|  id             | Yayımcıyı yayımcı ad alanında benzersiz şekilde tanımlayan GUID.                                                    |
+|  version        | Teklifin geçerli sürümü. Sürüm özelliği istemci tarafından değiştirilemiyor. Her yayımladıktan sonra artırılır. |
+|  Tanımı     | İş yükünün gerçek tanımının özetlenen görünümünü içerir. Ayrıntılı bir tanım almak için, belirli bir [teklifi al](./cloud-partner-portal-api-retrieve-specific-offer.md) API 'sini kullanın. |
+|  changedTime    | Teklifin en son değiştirildiği UTC saati                                                                              |
 |  |  |
 
 
 ### <a name="response-status-codes"></a>Yanıt durum kodları
 
-| **Kod**  |  **Açıklama**                                                                                                   |
+| **Kodudur**  |  **Açıklama**                                                                                                   |
 | -------   |  ----------------------------------------------------------------------------------------------------------------- |
-|  200      | `OK` -İstek başarıyla işlendi ve yayımcı altındaki tüm teklifleri istemciye döndürülmedi.  |
-|  400      | `Bad/Malformed request` -Hata yanıt gövdesi, daha fazla bilgi içeriyor olabilir.                                    |
-|  403      | `Forbidden` -İstemcisi belirtilen ad alanı için erişime sahip değil.                                          |
-|  404      | `Not found` -Belirtilen varlık yok.                                                                 |
+|  200      | `OK`-istek başarıyla işlendi ve yayımcının altındaki tüm teklifler istemciye geri döndü.  |
+|  400      | `Bad/Malformed request`-hata yanıtı gövdesinde daha fazla bilgi bulunabilir.                                    |
+|  403      | `Forbidden`-istemcinin belirtilen ad alanına erişimi yok.                                          |
+|  404      | `Not found`-belirtilen varlık yok.                                                                 |
 |  |  |
 
 
@@ -93,11 +94,11 @@ Teklifler yayımcı ad alanı altında bir Özet listesini alır.
 
 |  **Ad**                    | **Açıklama**                                  |
 |  ------------------------    | -----------------------------------------------  |
-|  NeverPublished              | Teklif, hiç yayımlanmadı.                  |
-|  NotStarted                  | Teklif, yeni ancak başlatılmadı.                 |
-|  WaitingForPublisherReview   | Teklif, yayımcı onay bekliyor.         |
+|  Neveryayınlandı              | Teklif hiç yayımlanmadı.                  |
+|  NotStarted                  | Teklif yenidir ancak başlatılmamış.                 |
+|  WaitingForPublisherReview   | Teklif, yayımcı onayını bekliyor.         |
 |  Çalışıyor                     | Teklif gönderimi işleniyor.             |
-|  Başarılı oldu                   | Teklif gönderme işlemi tamamlandı.       |
-|  İptal edildi                    | Teklif gönderim iptal edildi.                   |
-|  Başarısız                      | Teklif gönderme başarısız oldu.                         |
+|  Başarılı oldu                   | Teklif gönderimi işlemeyi tamamladı.       |
+|  İptal edildi                    | Teklif Gönderimi iptal edildi.                   |
+|  Başarısız                      | Teklif gönderimi başarısız oldu.                         |
 |  |  |

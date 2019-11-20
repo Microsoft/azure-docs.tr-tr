@@ -1,42 +1,22 @@
 ---
-title: Finans ve operasyon için Dynamics 365 Azure Market sunar.
-description: Bir teklif, Finans ve operasyon için Dynamics 365 bulut iş ortağı Portalı'nda oluşturma açıklanır.
+title: Azure Marketi için Finans ve Işlemler teklifi için Dynamics 365
+description: Kullanım dışı CPP makalesi ve bılgısayar makalesine bağlı; "Bulut İş Ortağı Portalı 'de Finans ve Işlemler teklifi için Dynamics 365 nasıl oluşturulacağı açıklanmaktadır."
 services: Azure Marketplace, Cloud Partner Portal,
-author: v-miclar
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 11/01/2018
-ms.author: pabutler
-ms.openlocfilehash: bd7a78730186e4ea3d34449fd7977f7575bb8180
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.author: v-chjen
+ms.openlocfilehash: 2b6308a29a2feb112dbd67060c6fc7d31ce162e3
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935239"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819248"
 ---
-# <a name="dynamics-365-for-finance-and-operations-offer"></a>Finans ve operasyon için Dynamics 365 sunar
+# <a name="dynamics-365-for-finance-and-operations-offer"></a>Finans ve operasyon teklifi için Dynamics 365
 
-<table> <tr> <td>Bu bölümde, Microsoft Dynamics 365 Finans ve operasyon Çözümü yayımlamak açıklanmaktadır <a href="https://appsource.microsoft.com">AppSource Market</a>. Microsoft <a href="https://dynamics.microsoft.com/finance-and-operations">Finans ve operasyon için Dynamics 365</a> bir kurumsal kaynak planlama (ERP) destekleyen hizmet, Finans, işlemler, üretim ve tedarik zinciri yönetimi gelişmiştir. </td> <td><img src="./media/publish_d365_new_offer/dynfinance-icon1.png"  alt="Dynamics 365 for Finance and Operations icon" /></td> </tr> </table>
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık finans ve operasyon teklifleri için Dynamics 365 oluşturma ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer).
 
-
-## <a name="publishing-process"></a>Yayımlama işlemi
-
-Dynamics 365 for Finance and Operations'tan uygulamasını geliştirin ve Appsource'ta yayımlamak için aşağıdaki adımları kullanın:
-
-1. Bir önkoşul olarak hale gelmelidir [Dev Center sertifikalı](https://dev.windows.com/en-us/registration?accountProgram=Azure).
-2. Kodunuzu yükseltin.
-3. Derleme, paket ve verileri kullanarak dağıtma [yaşam döngüsü Hizmetleri](https://docs.microsoft.com/dynamics365/unified-operations/dev-itpro/lifecycle-services/lcs) (LCS).
-4. Bir uygulama yöntemi LCS oluşturun.
-5. İş süreçlerinizi LCS içinde tanımlayın.
-6. Bulut iş ortağı Portalı'nda pazarlama içeriğinizi oluşturun.
-7.  Uygulamanızı ekibimiz tarafından doğrulanmış alın. Yönergeler için bkz. [Finans ve operasyon için uygulamaları doğrula](https://docs.microsoft.com/dynamics365/operations/dev-itpro/lcs-solutions/app-validation-lcs-solutions).
-8. Test ve bulut iş ortağı Portalı'nda teklifinizi onaylamış olursunuz.
-9.  Appsource'ta yayımlama ve yayınlayın.
-
-Bu bölümde sonraki makalelerinde daha ayrıntılı adımları açıklanmaktadır.
-
-
-## <a name="next-steps"></a>Sonraki adımlar
-
-İş ve teknik karşıladığınızı doğrulayın gerekir [gereksinimleri](./pre-requisites.md) bu Teklif türü.
-
+Yeni bir Dynamics 365 for Operations teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer) bölümündeki yönergeleri izleyin.

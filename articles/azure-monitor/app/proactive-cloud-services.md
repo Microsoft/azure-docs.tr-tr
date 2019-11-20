@@ -1,38 +1,33 @@
 ---
-title: Azure Application Insights ile Azure Tanılama'yı tümleştirme kullanarak Azure bulut hizmetlerinde uyar | Microsoft Docs
-description: Başlatma hataları, çökme ve rol döngüleri Azure Application Insights ile Azure bulut hizmetlerinde geri dönüşüm gibi sorunlar için İzleyici
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: ea2a28ed-4cd9-4006-bd5a-d4c76f4ec20b
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure 'da Azure Tanılama tümleştirmesini kullanarak Azure Cloud Services sorunları hakkında uyarı Application Insights | Microsoft Docs
+description: Azure Cloud Services Azure Application Insights başlatma hataları, Kilitlenmeler ve rol geri dönüşüm döngüleri gibi sorunları izleyin
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: mrbullwinkle
+ms.author: mbullwin
 ms.date: 06/07/2018
 ms.reviewer: harelbr
-ms.author: mbullwin
-ms.openlocfilehash: 219ba632d7688f1a428378309828b689698d2fe5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b4404f033f5bdf221590e155640e4c0442601e18
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60409549"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820642"
 ---
-# <a name="alert-on-issues-in-azure-cloud-services-using-the-azure-diagnostics-integration-with-azure-application-insights"></a>Azure Application Insights ile Azure Tanılama'yı tümleştirme kullanarak Azure bulut hizmetlerinde olduğunda uyar
+# <a name="alert-on-issues-in-azure-cloud-services-using-the-azure-diagnostics-integration-with-azure-application-insights"></a>Azure 'da Azure tanılama tümleştirmesini kullanarak Azure Cloud Services sorunları hakkında uyarı edin Application Insights
 
-Bu makalede, biz nasıl başlatma hataları, çökme ve rol döngüleri Azure bulut hizmetlerinde (web ve çalışan rolleri) geri dönüşüm gibi sorunlar için izleme uyarı kuralları ayarlanacağı açıklanmıştır.
+Bu makalede, Azure Cloud Services (Web ve çalışan rolleri) başlatma hataları, Kilitlenmeler ve rol geri dönüşüm döngüleri gibi sorunları izleyen uyarı kurallarını nasıl ayarlayacağız.
 
-Bu makalede açıklanan yöntemi dayanır [Application Insights ile Azure Tanılama'yı tümleştirme](https://azure.microsoft.com/blog/azure-diagnostics-integration-with-application-insights/)ve kısa süre önce yayımlanan [günlük uyarıları için Application Insights](https://azure.microsoft.com/blog/log-alerts-for-application-insights-preview/) yeteneği.
+Bu makalede açıklanan yöntem, [Application Insights tümleştirme Azure tanılama](https://azure.microsoft.com/blog/azure-diagnostics-integration-with-application-insights/)ve Application Insights özelliği için en son yayınlanan [günlük uyarılarını](https://azure.microsoft.com/blog/log-alerts-for-application-insights-preview/) temel alır.
 
 ## <a name="define-a-base-query"></a>Temel sorgu tanımlama
 
-Başlamak için Windows Azure kanaldan Windows olay günlüğü olaylarını alır temel bir sorgu, Application Insights izleme kayıtları olarak yakalanan tanımlarız.
-Bu kayıtlar, Azure bulut Hizmetleri'nde başlatma hataları, çalışma zamanı hataları gibi çeşitli sorunlar algılamak için kullanılabilir ve döngüler geri dönüşüm.
+Başlamak için, Windows olay günlüğü olaylarını, izleme kayıtları olarak Application Insights yakalanan Microsoft Azure kanalından alan bir temel sorgu tanımlayacağız.
+Bu kayıtlar, Azure Cloud Services 'daki başlatma hataları, çalışma zamanı hataları ve geri dönüşüm döngüleri gibi çeşitli sorunları algılamak için kullanılabilir.
 
 > [!NOTE]
-> Aşağıdaki temel sorguyu 30 dakikalık bir zaman penceresinde sorunları olup olmadığını denetler ve telemetri kayıtları almak, bir 10 dakikalık gecikme varsayar. Bu varsayılan gördüğünüz şekilde yapılandırılabilir.
+> Aşağıdaki temel sorgu, 30 dakikalık bir zaman penceresinde sorunlar olup olmadığını denetler ve telemetri kayıtlarını kabul etmek için 10 dakikalık bir gecikme süresi varsayar. Bu varsayılanlar, uygun gördüğünüz şekilde yapılandırılabilir.
 
 ```
 let window = 30m;
@@ -45,13 +40,13 @@ let EventLogs = traces
 | project timestamp, channel, eventId, message, cloud_RoleInstance, cloud_RoleName, itemCount;
 ```
 
-## <a name="check-for-specific-event-ids"></a>Özel olay kimlikleri denetle
+## <a name="check-for-specific-event-ids"></a>Belirli olay kimliklerini denetle
 
-Windows olay günlüğü olaylarını aldıktan sonra belirli sorunları (aşağıdaki örneklere bakın) kendi ilgili olay kimliği ve ileti özelliklerini denetleyerek algılanabilir.
-Yalnızca bir sorgu günlük uyarı kuralı tanımlarken birleştirilmiş sorguların aşağıdaki ve kullanılan temel sorgusunun üstüne birleştirin.
+Windows olay günlüğü olaylarını aldıktan sonra, ilgili olay KIMLIĞI ve ileti özellikleri denetlenerek belirli sorunlar tespit edilebilir (aşağıdaki örneklere bakın).
+Yukarıdaki sorgu sorgularını, yukarıdaki sorgulardan biriyle birleştirmeniz yeterlidir ve günlük uyarı kuralını tanımlarken bu Birleşik sorgu kullanılır.
 
 > [!NOTE]
-> Üçten fazla olayları analiz edilen zaman penceresi boyunca bulunursa, aşağıdaki örneklerde, bir sorun algıladık. Bu varsayılan uyarı kuralı duyarlılığına değiştirmek için yapılandırılabilir.
+> Aşağıdaki örneklerde, analiz edilen zaman penceresinde üçten fazla olay bulunursa bir sorun tespit edilir. Bu varsayılan, uyarı kuralının duyarlılığını değiştirecek şekilde yapılandırılabilir.
 
 ```
 // Detect failures in the OnStart method
@@ -89,38 +84,38 @@ EventLogs
 
 ## <a name="create-an-alert"></a>Uyarı oluşturma
 
-Gezinti menüsünde içinde Application Insights kaynağınıza gidin **uyarılar**ve ardından **yeni uyarı kuralı**.
+Application Insights kaynağınız içindeki gezinti menüsünde **Uyarılar**' a gidin ve ardından **Yeni uyarı kuralı**' nı seçin.
 
-![Kural Oluştur ekran görüntüsü](./media/proactive-cloud-services/001.png)
+![Kural oluştur ekran görüntüsü](./media/proactive-cloud-services/001.png)
 
-İçinde **oluşturma kuralı** penceresi altında **uyarı koşulunu tanımlama** bölümünde, tıklayarak **Ölçüt Ekle**ve ardından **özel günlük araması**.
+**Kural oluştur** penceresinde, **Uyarı koşulunu tanımla** bölümünde **Ölçüt Ekle**' ye tıklayın ve ardından **özel günlük araması**' nı seçin.
 
-![Uyarının koşulu ölçüt tanımla ekran görüntüsü](./media/proactive-cloud-services/002.png)
+![Uyarı için koşul ölçütü tanımlama ekran görüntüsü](./media/proactive-cloud-services/002.png)
 
-İçinde **arama sorgusu** kutusunda, önceki adımda hazırladığınız birleşik sorguyu yapıştırın.
+**Arama sorgusu** kutusunda, önceki adımda hazırladığınız Birleşik sorguyu yapıştırın.
 
-Daha sonra devam **eşiği** kutusuna ve değerini 0 olarak ayarlayın. İsteğe bağlı olarak ince **süresi** ve sıklığı **alanları**.
+Ardından, **eşik** kutusuna ilerleyin ve değerini 0 olarak ayarlayın. İsteğe bağlı olarak **period** ve Frequency **alanlarını**ince ayar edebilirsiniz.
 **Bitti**’ye tıklayın.
 
-![Ekran görüntüsü sinyal mantığını sorgu yapılandırma](./media/proactive-cloud-services/003.png)
+![Sinyal mantığını Yapılandır sorgusunun ekran görüntüsü](./media/proactive-cloud-services/003.png)
 
-Altında **uyarı ayrıntılarını tanımlama** bölümünde, sağlayan bir **adı** ve **açıklama** uyarı kuralı ve küme için kendi **önem derecesi**.
-Ayrıca, emin olun **oluşturulduktan sonra kuralı etkinleştir** düğmesi ayarlandığında **Evet**.
+**Uyarı ayrıntılarını tanımla** bölümünde, uyarı kuralına bir **ad** ve **Açıklama** girin ve **önem derecesini**ayarlayın.
+Ayrıca, **oluşturma sırasında kuralı etkinleştir** düğmesinin **Evet**olarak ayarlandığından emin olun.
 
-![Uyarı ayrıntıları ekran görüntüsü](./media/proactive-cloud-services/004.png)
+![Ekran görüntüsü Uyarı ayrıntıları](./media/proactive-cloud-services/004.png)
 
-Altında **tanımla eylem grubu** bölümünde, mevcut bir seçebileceğiniz **eylem grubu** veya yeni bir tane oluşturun.
-Çeşitli türlerde birden fazla eylem içeren eylem grubu seçebilirsiniz.
+**Eylem grubunu tanımla** bölümünde, var olan bir **Eylem grubunu** seçebilir veya yeni bir tane oluşturabilirsiniz.
+Eylem grubunun çeşitli türlerde birden çok eylem içermesini seçebilirsiniz.
 
-![Eylem grubu ekran görüntüsü](./media/proactive-cloud-services/005.png)
+![Ekran görüntüsü eylem grubu](./media/proactive-cloud-services/005.png)
 
-Eylem grubu tanımladınız sonra değişikliklerinizi onaylamak ve tıklayın **uyarı kuralı oluştur**.
+Eylem grubunu tanımladıktan sonra, değişikliklerinizi onaylayın ve **Uyarı kuralı oluştur**' a tıklayın.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-Otomatik olarak algılama hakkında daha fazla bilgi edinin:
+Otomatik algılama hakkında daha fazla bilgi edinin:
 
-[Hata anomalileri](../../azure-monitor/app/proactive-failure-diagnostics.md)
-[bellek sızıntılarını](../../azure-monitor/app/proactive-potential-memory-leak.md)
-[performans anomalileri](../../azure-monitor/app/proactive-performance-diagnostics.md)
+[Hata bozuklukları](../../azure-monitor/app/proactive-failure-diagnostics.md) , [bellek sızıntılarını](../../azure-monitor/app/proactive-potential-memory-leak.md)
+
+[performans bozuklulıkları](../../azure-monitor/app/proactive-performance-diagnostics.md)
 

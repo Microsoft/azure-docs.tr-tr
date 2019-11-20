@@ -1,21 +1,19 @@
 ---
 title: Azure Application Insights kullanarak çalışma zamanı özel durumlarını tanılama | Microsoft Docs
 description: Azure Application Insights kullanarak uygulamanızdaki çalışma zamanı özel durumlarını bulma ve tanılama hakkındaki öğretici.
-services: application-insights
-keywords: ''
+ms.service: azure-monitor
+ms.subservice: application-insights
+ms.topic: tutorial
 author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 09/19/2017
-ms.service: application-insights
 ms.custom: mvc
-ms.topic: tutorial
-manager: carmonm
-ms.openlocfilehash: 19455998ca13b9abf48bb1cb3856e38b5c47ef52
-ms.sourcegitcommit: 1fbc75b822d7fe8d766329f443506b830e101a5e
+ms.openlocfilehash: 70ecc5dc95aced3eb901f24910339eb059ba0c17
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65595601"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900463"
 ---
 # <a name="find-and-diagnose-run-time-exceptions-with-azure-application-insights"></a>Azure Application Insights ile çalışma zamanı özel durumlarını bulma ve tanılama
 
@@ -34,7 +32,7 @@ Azure Application Insights, uygulamanızdan çalışma zamanı özel durumların
 
 Bu öğreticiyi tamamlamak için:
 
-- Yükleme [Visual Studio 2019](https://www.visualstudio.com/downloads/) aşağıdaki iş yükleri ile:
+- Aşağıdaki iş yükleriyle [Visual Studio 2019](https://www.visualstudio.com/downloads/) ' i yükledikten sonra:
     - ASP.NET ve web geliştirme
     - Azure geliştirme
 - [Visual Studio Snapshot Debugger](https://aka.ms/snapshotdebugger)’ı indirin ve yükleyin.
@@ -75,7 +73,7 @@ Application Insights, uygulamanızdaki tüm hataları toplar ve bunların farkl�
     ![Özel durum ayrıntıları](media/tutorial-runtime-exceptions/failed-requests-exception.png)
 
 ## <a name="identify-failing-code"></a>Başarısız olan kodu belirleme
-Snapshot Debugger, uygulamanızda en sık karşılaşılan özel durumların anlık görüntülerini toplayarak üretimde sorunun kök nedenini tanılamanıza yardımcı olur.  Hata ayıklama anlık görüntülerini portalda görüntüleyerek çağrı yığınını görebilir ve her bir çağrı yığını çerçevesinde değişkenleri inceleyebilirsiniz. Daha sonra anlık görüntüyü indirip Visual Studio 2019 Enterprise'da açmadan kaynak kodunun hatalarını ayıklamak için seçeneğiniz vardır.
+Snapshot Debugger, uygulamanızda en sık karşılaşılan özel durumların anlık görüntülerini toplayarak üretimde sorunun kök nedenini tanılamanıza yardımcı olur.  Hata ayıklama anlık görüntülerini portalda görüntüleyerek çağrı yığınını görebilir ve her bir çağrı yığını çerçevesinde değişkenleri inceleyebilirsiniz. Daha sonra, anlık görüntüyü indirerek ve Visual Studio 2019 Enterprise 'ta açarak kaynak kodda hata ayıklama seçeneğiniz vardır.
 
 1. Özel durumun özelliklerinden **Hata ayıklama anlık görüntüsünü aç**’a tıklayın.
 2. İsteğe yönelik çağrı yığınıyla birlikte **Hata Ayıklama Anlık Görüntüsü** paneli açılır.  Tüm yerel değişkenlerin istek sırasında sahip olduğu değerleri görüntülemek için herhangi bir metoda tıklayın.  Başta bu örnekte en çok kullanılan metot olmak üzere değeri olmayan yerel değişkenleri görebiliriz.
@@ -86,9 +84,9 @@ Snapshot Debugger, uygulamanızda en sık karşılaşılan özel durumların anl
 
     ![Hata ayıklama anlık görüntüsü](media/tutorial-runtime-exceptions/debug-snapshot-02.png)
 
-4. Ardından, bu anlık görüntüyü düzeltilmesi gereken kodun kendisini bulabileceğimiz biz burada bulabilirsiniz Visual Studio'ya indirmek için seçeneğiniz de vardır. Bunu yapmak için tıklatın **anlık görüntüyü indir**.
+4. Daha sonra, düzeltilmesi gereken gerçek kodu bulabilmemiz için bu anlık görüntüyü Visual Studio 'ya indirme seçeneğiniz vardır. Bunu yapmak için **anlık görüntüyü indir**' e tıklayın.
 5. Anlık görüntü Visual Studio'ya yüklenir.
-6. Artık, özel duruma neden olan kod satırına hızlıca tanımlayan Visual Studio Enterprise hata ayıklama oturumu çalıştırabilirsiniz.
+6. Artık özel duruma neden olan kod satırını hızlıca tanımlayan Visual Studio Enterprise bir hata ayıklama oturumu çalıştırabilirsiniz.
 
     ![Kodda özel durum](media/tutorial-runtime-exceptions/exception-code.png)
 
@@ -98,7 +96,7 @@ Application Insights tarafından toplanan tüm veriler, bunları çeşitli yolla
 
 1. Application Insights tarafından sağlanan telemetri verilerini görüntülemek için kodun üzerindeki CodeLens bilgilerine tıklayın.
 
-    ![Kod](media/tutorial-runtime-exceptions/codelens.png)
+    ![Kodlayın](media/tutorial-runtime-exceptions/codelens.png)
 
 1. **Etkiyi çözümleyin**’e tıklayarak Application Insights Analytics’i açın.  Analytics, başarısız isteklerle ilgili olarak etkilenen kullanıcılar, tarayıcılar ve bölgeler gibi ayrıntıları sağlayan çeşitli sorgularla doldurulur.<br><br>![Analizler](media/tutorial-runtime-exceptions/analytics.png)<br>
 

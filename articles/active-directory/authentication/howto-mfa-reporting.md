@@ -1,6 +1,6 @@
 ---
-title: Azure mfa'yı - Azure Active Directory erişim ve kullanım raporları
-description: Bu, Azure multi-Factor Authentication özelliğinin - raporların nasıl kullanılacağı açıklanır.
+title: Azure MFA için erişim ve kullanım raporları-Azure Active Directory
+description: Bu, Azure Multi-Factor Authentication Feature-Reports 'un nasıl kullanılacağını açıklar.
 services: multi-factor-authentication
 ms.service: active-directory
 ms.subservice: authentication
@@ -11,38 +11,38 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dd4c6952aab1581a968fc671141792c0e16a7d46
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.openlocfilehash: bb90fafb48be1d3389597c6188b0200743f90c3e
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67536970"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74065970"
 ---
-# <a name="reports-in-azure-multi-factor-authentication"></a>Azure multi-Factor authentication'da raporları
+# <a name="reports-in-azure-multi-factor-authentication"></a>Azure Multi-Factor Authentication raporları
 
-Azure multi-Factor Authentication, Azure portalı üzerinden erişilebilir, kuruluşunuz tarafından kullanılan çeşitli raporlar sağlar. Aşağıdaki tablo, kullanılabilen raporları listeler:
+Azure Multi-Factor Authentication, sizin ve kuruluşunuzun Azure portal aracılığıyla erişilebilen çeşitli raporlar sağlar. Aşağıdaki tabloda, kullanılabilir raporlar listelenmektedir:
 
-| Rapor | Location | Açıklama |
+| Rapor | Konum | Açıklama |
 |:--- |:--- |:--- |
-| Engellenen kullanıcı geçmişi | Azure AD > MFA sunucusu > kullanıcıları engelle/engelini kaldır | Engelleme veya kullanıcıların engelini kaldırma isteklerinin geçmişini gösterir. |
-| Kullanım ve dolandırıcılık uyarıları | Azure AD > oturum açma işlemleri | Bilgi genel kullanımı, kullanıcı özeti ve kullanıcı ayrıntıları sağlar. yanı sıra belirtilen tarih aralığı içinde gönderilen sahtekarlık uyarısı geçmişini. |
-| Şirket içi bileşenleri için kullanım | Azure AD > MFA sunucusu > Etkinlik Raporu | Bilgi genel kullanım için MFA NPS uzantısı ile ADFS, sağlar ve MFA sunucusu. |
-| Atlanan kullanıcı geçmişi | Azure AD > MFA sunucusu > bir kerelik atlama | Bir kullanıcı için multi-Factor Authentication'ı atlama isteklerinin geçmişini sağlar. |
-| Sunucu durumu | Azure AD > MFA sunucusu > sunucu durumu | Multi-Factor Authentication sunucularının durumunu hesabınızla ilişkili görüntüler. |
+| Engellenen Kullanıcı Geçmişi | Azure AD > güvenliği > MFA > kullanıcıları engelle/engellemesini kaldır | Kullanıcıları engellemek veya engelini kaldırmak için isteklerin geçmişini gösterir. |
+| Kullanım ve sahtekarlık uyarıları | Azure AD > oturum açma işlemleri | Genel kullanım, Kullanıcı Özeti ve kullanıcı ayrıntıları hakkında bilgi sağlar; Ayrıca, belirtilen tarih aralığı boyunca gönderilen sahtekarlık uyarılarının geçmişi. |
+| Şirket içi bileşenler için kullanım | Azure AD > güvenliği > MFA > etkinlik raporu | NPS uzantısı, ADFS ve MFA sunucusu aracılığıyla MFA için genel kullanım hakkında bilgi sağlar. |
+| Atlanan Kullanıcı Geçmişi | Azure AD > güvenliği > MFA > bir kerelik atlama | Bir kullanıcı için Multi-Factor Authentication atlama isteklerinin geçmişini sağlar. |
+| Sunucu durumu | Azure AD > güvenliği > MFA > sunucu durumu | Hesabınızla ilişkili Multi-Factor Authentication sunucularının durumunu görüntüler. |
 
-## <a name="view-mfa-reports"></a>MFA raporları görüntüleme
+## <a name="view-mfa-reports"></a>MFA raporlarını görüntüleme
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol tarafta, seçin **Azure Active Directory** > **MFA sunucusu**.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol tarafta **Azure Active Directory** > **güvenlik** > **MFA**' yı seçin.
 3. Görüntülemek istediğiniz raporu seçin.
 
-   ![Azure portalında MFA sunucusu sunucu durum raporu](./media/howto-mfa-reporting/report.png)
+   ![Azure portal MFA sunucu sunucusu durum raporu](./media/howto-mfa-reporting/report.png)
 
 ## <a name="azure-ad-sign-ins-report"></a>Azure AD oturum açma işlemleri raporu
 
-İle **oturum açma işlemleri etkinlik raporuna** içinde [Azure portalında](https://portal.azure.com), ortamınızın nasıl çalıştığını belirlemek için gereken bilgileri alabilirsiniz.
+[Azure Portal](https://portal.azure.com) **oturum açma etkinliği raporuyla** , ortamınızın nasıl çalıştığını öğrenmek için gereken bilgileri alabilirsiniz.
 
-Oturum açma işlemleri raporu, çok faktörlü kimlik doğrulaması (MFA) kullanımı hakkında bilgi içeren kullanımı hakkında bilgi yönetilen uygulamalar ve kullanıcı oturum açma etkinlikleri sağlayabilirsiniz. MFA verileri MFA'nın kuruluşunuzdaki kullanımı hakkında öngörüler sunar. Aşağıdaki gibi sorulara yanıt bulmanızı sağlar:
+Oturum açma işlemleri raporu, çok faktörlü kimlik doğrulaması (MFA) kullanımı hakkında bilgi içeren, yönetilen uygulamaların kullanımı ve Kullanıcı oturum açma etkinlikleri hakkında bilgi sunabilir. MFA verileri MFA'nın kuruluşunuzdaki kullanımı hakkında öngörüler sunar. Aşağıdaki gibi sorulara yanıt bulmanızı sağlar:
 
 - Oturum açma sırasında MFA kullanıldı mı?
 - Kullanıcı MFA'yı nasıl tamamladı?
@@ -51,17 +51,17 @@ Oturum açma işlemleri raporu, çok faktörlü kimlik doğrulaması (MFA) kulla
 - Kaç kullanıcı MFA isteğini tamamlayamadı?
 - Son kullanıcıların karşılaştığı ortak MFA sorunları nelerdir?
 
-Bu veriler üzerinden kullanılabilir [Azure portalında](https://portal.azure.com) ve [raporlama API'sini](../reports-monitoring/concept-reporting-api.md).
+Bu veriler [Azure Portal](https://portal.azure.com) ve [Raporlama API 'si](../reports-monitoring/concept-reporting-api.md)ile kullanılabilir.
 
-![Azure portalında Azure AD oturum açma işlemleri raporu](./media/howto-mfa-reporting/sign-in-report.png)
+![Azure portal Azure AD oturum açma işlemleri raporu](./media/howto-mfa-reporting/sign-in-report.png)
 
-### <a name="sign-ins-report-structure"></a>Oturum açma işlemleri raporu yapısı
+### <a name="sign-ins-report-structure"></a>Oturum açma raporu yapısı
 
 MFA hakkındaki oturum açma etkinliği raporları aşağıdaki bilgilere erişmenizi sağlar:
 
-**MFA gerekli:** Mfa'yı veya oturum açma için gerekli olup olmadığı. MFA nedeniyle kullanıcı başına MFA, koşullu erişim veya diğer nedenlerle gerekli olabilir. Olası değerler **Evet** veya **Hayır**.
+**MFA gerekli:** Oturum açma işlemi için MFA'nın gerekli olup olmadığı. Kullanıcı başına MFA, koşullu erişim ya da başka nedenlerden dolayı MFA gerekli olabilir. Olası değerler **Evet** veya **Hayır**.
 
-**MFA sonucu:** MFA memnun veya reddedilen hakkında daha fazla bilgi:
+**MFA Sonucu:** MFA'nın tamamlanıp tamamlanmadığı hakkında daha fazla bilgi:
 
 - MFA tamamlandıysa bu sütunda MFA'nın tamamlanma şekli hakkında daha fazla bilgi yer alır.
    - Azure Multi-Factor Authentication
@@ -104,7 +104,7 @@ MFA hakkındaki oturum açma etkinliği raporları aşağıdaki bilgilere erişm
       - kullanıcı bulunamadı
       - doğrulama kodu zaten bir kez kullanıldı
 
-**MFA kimlik doğrulama yöntemi:** Mfa'yı tamamlamak için kullanılan kullanıcı kimlik doğrulama yöntemi. Olası değerler şunlardır:
+**MFA kimlik doğrulama yöntemi:** Kullanıcının MFA'yı tamamlaması için kullandığı kimlik doğrulama yöntemi. Olası değerler şunlardır:
 
 - Kısa mesaj
 - Mobil uygulama bildirimi
@@ -113,81 +113,81 @@ MFA hakkındaki oturum açma etkinliği raporları aşağıdaki bilgilere erişm
 - Telefon araması (Ofis telefonu)
 - Telefon araması (Alternatif kimlik doğrulama telefonu)
 
-**MFA kimlik doğrulama Ayrıntısı:** Örneğin telefon numarası sürümünü iptal etti: + X XXXXXXXX64.
+**MFA kimlik doğrulama ayrıntısı:** Telefon numarasının temizlenmiş sürümü. Örnek: +X XXXXXXXX64.
 
-**Koşullu erişim** etkilenen oturum açma denemesi de dahil olmak üzere bir koşullu erişim ilkeleri hakkında daha fazla bilgi:
+**Koşullu erişim** Aşağıdakiler dahil olmak üzere oturum açma girişimini etkileyen koşullu erişim ilkeleri hakkında bilgi edinin:
 
 - İlke adı
-- İzin verme denetimleri
+- Atama denetimleri
 - Oturum denetimleri
 - Sonuç
 
-## <a name="powershell-reporting-on-users-registered-for-mfa"></a>MFA için kaydolduğunu kullanıcıların raporlama PowerShell
+## <a name="powershell-reporting-on-users-registered-for-mfa"></a>MFA için kaydedilen kullanıcılarda PowerShell raporlaması
 
-İlk olarak, sahip olduğunuzdan emin olun. [MSOnline V1 PowerShell modülünü](https://docs.microsoft.com/powershell/azure/active-directory/overview?view=azureadps-1.0) yüklü.
+İlk olarak, [MSOnline v1 PowerShell modülünün](https://docs.microsoft.com/powershell/azure/active-directory/overview?view=azureadps-1.0) yüklü olduğundan emin olun.
 
-Aşağıdaki PowerShell kullanarak MFA için kaydolduğunu kullanıcıları belirleyin.
+Aşağıdaki PowerShell 'i kullanarak MFA için kaydolan kullanıcıları belirler.
 
-```Get-MsolUser -All | where {$_.StrongAuthenticationMethods -ne $null} | Select-Object -Property UserPrincipalName```
+```Get-MsolUser -All | Where-Object {$_.StrongAuthenticationMethods -ne $null} | Select-Object -Property UserPrincipalName```
 
-Aşağıdaki PowerShell kullanarak MFA için kayıtlı değil kullanıcıları belirleyin.
+Aşağıdaki PowerShell kullanılarak MFA için kaydolmayan kullanıcıları belirler.
 
-```Get-MsolUser -All | where {$_.StrongAuthenticationMethods.Count -eq 0} | Select-Object -Property UserPrincipalName```
+```Get-MsolUser -All | Where-Object {$_.StrongAuthenticationMethods.Count -eq 0} | Select-Object -Property UserPrincipalName```
 
-## <a name="possible-results-in-activity-reports"></a>Etkinlik raporlarını olası sonuçları
+## <a name="possible-results-in-activity-reports"></a>Etkinlik raporlarında olası sonuçlar
 
-Aşağıdaki tabloda, çok faktörlü kimlik doğrulaması Etkinlik Raporu indirilen sürümünü kullanarak çok faktörlü kimlik doğrulaması sorunlarını gidermek için kullanılabilir. Doğrudan Azure Portalı'nda görünmez.
+Multi-Factor Authentication etkinlik raporunun indirilen sürümünü kullanarak çok faktörlü kimlik doğrulaması sorunlarını gidermek için aşağıdaki tablo kullanılabilir. Bunlar doğrudan Azure portal görünmez.
 
-| Arama sonucu | Açıklama | Geniş açıklaması |
+| Çağrı sonucu | Açıklama | Geniş açıklama |
 | --- | --- | --- |
-| SUCCESS_WITH_PIN | PIN girildi | Kullanıcı bir PIN girildi.  Ardından kimlik doğrulaması başarılı olursa doğru PIN girilmelidir.  Authentication reddedilirse, yanlış bir PIN girildiğinde ardından veya kullanıcı standart moda ayarlanır. |
-| SUCCESS_NO_PIN | Girilen # | Kullanıcı PIN moduna ayarlanır ve kimlik doğrulaması reddedildi, bu kullanıcı PIN'ini girmeli değildir ve yalnızca, # girilen anlamına gelir.  Kullanıcı standart moda ayarlanır ve bunun anlamı doğrulama başarılı olursa kullanıcı yalnızca girilen yapmak için doğru olanı standart modunda olan #. |
-| SUCCESS_WITH_PIN_BUT_TIMEOUT | # Girişten sonra tuşuna basılmadı | # Değil girildiğinden kullanıcının tüm DTMF rakamlarıyla göndermedi.  # Girişinin tamamlama belirten belirtilmedikçe diğer rakamlar da girilen gönderilmez. |
-|SUCCESS_NO_PIN_BUT_TIMEOUT | Telefon girişi yok - zaman aşımına uğradı | Arama yanıtlandı, ancak yanıt yoktu.  Bu çağrı tarafından sesli mesaj çekilen bir gösterir. |
-| SUCCESS_PIN_EXPIRED | PIN süresi doldu ve değiştirilmedi | Kullanıcının PIN'inin süresi doldu ve değiştirmek için istenmiş ancak PIN değişikliği başarılı bir şekilde tamamlanmadı. |
-| SUCCESS_USED_CACHE | Kullanılan önbellek | Önceki başarılı bir kimlik aynı kullanıcı adı için yapılandırılmış önbellek zaman dilimi içinde gerçekleştikten kimlik doğrulaması bir multi-Factor Authentication araması başarılı. |
-| SUCCESS_BYPASSED_AUTH | Atlanan kimlik doğrulaması | Kimlik doğrulaması için kullanıcı tarafından başlatılan bir kerelik geçiş kullanarak başarılı oldu.  Atlama atlanacağı kullanıcı Geçmişi raporu daha fazla ayrıntı için bkz. |
-| SUCCESS_USED_IP_BASED_CACHE | IP tabanlı kullanılan önbellek | Aynı kullanıcı adı, kimlik doğrulama türü, uygulama adı için bir önceki başarılı kimlik doğrulaması bu yana kimlik doğrulaması bir multi-Factor Authentication araması başarılı oldu ve yapılandırılmış önbellek zaman dilimi içinde IP oluştu. |
-| SUCCESS_USED_APP_BASED_CACHE | Uygulama tabanlı kullanılan önbellek | Kimlik doğrulaması bir multi-Factor Authentication araması itibaren aynı kullanıcı adı, kimlik doğrulama türü ve yapılandırılmış önbellek zaman çerçevesi içinde uygulama adı için bir önceki başarılı kimlik doğrulaması başarılı. |
-| SUCCESS_INVALID_INPUT | Geçersiz telefon girişi | Telefonunuzdan gönderilen yanıt geçerli değil.  Bir faks makineden bunun veya modem veya kullanıcı girmiş * PIN'ini bir parçası olarak. |
-| SUCCESS_USER_BLOCKED | Kullanıcı engellendi | Kullanıcının telefon numarasını engellenir.  Engellenen bir sayı, bir kimlik doğrulama araması sırasında kullanıcı tarafından veya Azure portalını kullanarak bir yönetici tarafından başlatılabilir. <br> NOT:  Ayrıca olan bir byproduct bir sahtekarlık Uyarısı, engellenen bir sayıdır. |
-| SUCCESS_SMS_AUTHENTICATED | SMS mesajı kimliği doğrulandı | İçin iki yönlü sınama iletisi, kullanıcı bir kerelik geçiş kodunu (OTP) ile doğru şekilde yanıtlanan ya da OTP + PIN. |
-| SUCCESS_SMS_SENT | SMS mesajı gönderildi | Metin iletisi için bir kerelik geçiş kodu (OTP) içeren kısa mesaj başarıyla gönderildi.  Kullanıcı, OTP veya OTP + PIN kimlik doğrulamasını tamamlamak için uygulamada girer. |
-| SUCCESS_PHONE_APP_AUTHENTICATED | Mobil uygulama kimliği doğrulandı | Kullanıcı başarıyla mobil uygulama kimlik doğrulaması. |
-| SUCCESS_OATH_CODE_PENDING | OATH kodu beklemede | Kullanıcı OATH kodlarını için istendi ancak yanıt alamadık. |
-| SUCCESS_OATH_CODE_VERIFIED | OATH kodu doğrulandı | Kullanıcının geçerli bir OATH kodu istendiğinde girdi. |
-| SUCCESS_FALLBACK_OATH_CODE_VERIFIED | Geri dönüş OATH kodu doğrulandı | Kullanıcının birincil çok faktörlü kimlik doğrulaması yöntemi kullanılarak kimlik doğrulaması reddedildi ve sonra da geri dönüş için geçerli bir OATH kodu sağlanan. |
-| SUCCESS_FALLBACK_SECURITY_QUESTIONS_ANSWERED | Geri dönüş güvenlik soruları yanıtlandı | Kullanıcı birincil çok faktörlü kimlik doğrulaması yöntemi kullanılarak kimlik doğrulaması reddedildi ve ardından doğru geri dönüş için güvenlik sorularını yanıt verdi. |
-| FAILED_PHONE_BUSY | Kimlik doğrulaması zaten devam ediyor | Çok faktörlü kimlik doğrulaması, bu kullanıcı için bir kimlik doğrulaması zaten işleniyor.  Bu, genellikle aynı oturum açma sırasında birden çok kimlik doğrulama istekleri gönderen RADIUS istemcileri tarafından kaynaklanır. |
-| CONFIG_ISSUE | Telefona ulaşılamıyor | Arama denendi ancak ya da yüklenemedi yerleştirilme veya verilmemesi.  Bu, meşgul sinyali içerir (bağlı) hızlı meşgul sinyali üç-tonları (sayı) artık hizmetinde zaman aşımına uğradı telefonlarının, vb. |
-| FAILED_INVALID_PHONENUMBER | Geçersiz telefon numarası biçimi | Telefon numarası geçersiz biçime sahip.  Telefon numaraları, sayısal bir değer olmalıdır ve 10 rakam ülke kodu + 1 için (Amerika Birleşik Devletleri ve Kanada) olmalıdır. |
-| FAILED_USER_HUNGUP_ON_US | Kullanıcı telefonu kapattı | Kullanıcı telefonu yanıt verdi ancak düğmeleri tuşuna basmadan ardından Kapat. |
-| FAILED_INVALID_EXTENSION | Geçersiz Dahili hat | Uzantı geçersiz karakterler içeriyor.  Sadece rakamlar, virgüller, *, ve # kullanılabilir.  Bir @ öneki de kullanılabilir. |
-| FAILED_FRAUD_CODE_ENTERED | Sahtekarlık kodu girildi | Kullanıcı kimlik doğrulamasının reddedilmesiyle ve engellenen telefon numarası kaynaklanan çağrısı sırasında sahtekarlık bildirme etmediniz.| 
-| FAILED_SERVER_ERROR | Arama yapılamıyor | Aramak multi-Factor Authentication hizmetini bulamadı. |
-| FAILED_SMS_NOT_SENT | SMS mesajı gönderilemedi | SMS mesajı gönderilemedi.  Kimlik doğrulaması reddedildi. |
-| FAILED_SMS_OTP_INCORRECT | SMS mesajı OTP yanlış | Kullanıcı yanlış bir kerelik geçiş kodu (OTP) alınana programından metin iletisi girdi.  Kimlik doğrulaması reddedildi. |
-| FAILED_SMS_OTP_PIN_INCORRECT | SMS mesajı OTP + PIN yanlış | Kullanıcı yanlış bir kerelik geçiş kodu (OTP) ve/veya yanlış bir kullanıcı PIN girildi.  Kimlik doğrulaması reddedildi. |
-| FAILED_SMS_MAX_OTP_RETRY_REACHED | Maksimum SMS mesajı OTP deneme aşıldı | Kullanıcı bir kerelik geçiş kodu (OTP) deneme sayısını aştı. |
-| FAILED_PHONE_APP_DENIED | Mobil uygulama reddedildi | Kullanıcı, reddetme düğmesine basarak mobil uygulamasında kimlik doğrulaması reddedildi. |
-| FAILED_PHONE_APP_INVALID_PIN | Mobil uygulama geçersiz PIN | Kullanıcı, mobil uygulamada kimlik doğrulaması yapılırken geçersiz bir PIN girildi. |
-| FAILED_PHONE_APP_PIN_NOT_CHANGED | Mobil uygulama PIN değişmedi | Kullanıcı gerekli bir PIN değişikliği mobil uygulamaya başarıyla tamamlanmadı. |
-| FAILED_FRAUD_REPORTED | Sahtekarlık bildirildi | Kullanıcı mobil uygulamasında sahtekarlık bildirdi. |
+| SUCCESS_WITH_PIN | PIN girildi | Kullanıcı bir PIN girdi.  Kimlik doğrulaması başarılı olursa, doğru PIN 'ı girirler.  Kimlik doğrulaması reddedilirse, yanlış bir PIN girirler veya Kullanıcı standart moda ayarlanır. |
+| SUCCESS_NO_PIN | Yalnızca # girildi | Kullanıcı PIN moduna ayarlanmışsa ve kimlik doğrulaması reddedilirse, bu, kullanıcının PIN 'ini girmediği ve yalnızca # olarak girdiği anlamına gelir.  Kullanıcı standart moda ayarlanmışsa ve kimlik doğrulaması başarılı olursa, Kullanıcı yalnızca standart modda yapılacak doğru şey olan # değeri olarak girilen bu anlamına gelir. |
+| SUCCESS_WITH_PIN_BUT_TIMEOUT | Girişten sonra # tuşuna basılmadı | # Girilmediğinden Kullanıcı hiçbir DTMF almadı.  Girişin tamamlandığını belirten # girilmediği takdirde girilen diğer basamaklar gönderilmez. |
+|SUCCESS_NO_PIN_BUT_TIMEOUT | Telefon girişi yok-zaman aşımına uğradı | Çağrı Yanıtlandı, ancak yanıt yoktu.  Bu genellikle çağrının sesli posta tarafından çekildiğini gösterir. |
+| SUCCESS_PIN_EXPIRED | PIN 'in geçerliliği geçildi ve değiştirilmedi | Kullanıcının PIN 'inin kullanım zaman aşımına uğradı ve bunu değiştirmesi istenir, ancak PIN değişikliği başarıyla tamamlanamadı. |
+| SUCCESS_USED_CACHE | Kullanılan önbellek | Yapılandırılmış önbellek zaman diliminde aynı Kullanıcı adı için önceki başarılı bir kimlik doğrulama işlemi olduğundan, kimlik doğrulama Multi-Factor Authentication çağrısı olmadan başarılı oldu. |
+| SUCCESS_BYPASSED_AUTH | Atlanan kimlik doğrulaması | Kimlik doğrulaması, Kullanıcı için tek seferlik bir geçiş başlatıldı kullanılarak başarılı oldu.  Atlama hakkında daha fazla bilgi için Atlanan Kullanıcı Geçmişi raporuna bakın. |
+| SUCCESS_USED_IP_BASED_CACHE | Kullanılan IP tabanlı önbellek | Yapılandırılan önbellek zaman diliminde aynı Kullanıcı adı, kimlik doğrulama türü, uygulama adı ve IP için bir önceki başarılı kimlik doğrulama işlemi başarısız olduğundan kimlik doğrulaması Multi-Factor Authentication çağrısı olmadan başarılı oldu. |
+| SUCCESS_USED_APP_BASED_CACHE | Kullanılan uygulama tabanlı önbellek | Aynı Kullanıcı adı, kimlik doğrulama türü ve yapılandırılmış önbellek zaman çerçevesi içinde uygulama adı için önceki başarılı kimlik doğrulamasından bu yana kimlik doğrulaması Multi-Factor Authentication çağrısı olmadan başarılı oldu. |
+| SUCCESS_INVALID_INPUT | Geçersiz telefon girişi | Telefondan gönderilen yanıt geçerli değil.  Bu, bir faks makinesinden veya modemden olabilir veya Kullanıcı PIN 'inin bir parçası olarak * girmiş olabilir. |
+| SUCCESS_USER_BLOCKED | Kullanıcı engellendi | Kullanıcının telefon numarası engellendi.  Engellenen bir sayı, kimlik doğrulama araması sırasında veya Azure portal kullanan bir yönetici tarafından Kullanıcı tarafından başlatılabilir. <br> Note: Engellenen sayı ayrıca bir sahtekarlık uyarısında bir ürünüdür. |
+| SUCCESS_SMS_AUTHENTICATED | Kısa mesaj kimliği doğrulandı | İki yönlü test iletisi için Kullanıcı, bir kerelik geçiş kodu (OTP) veya OTP + PIN ile doğru şekilde yanıt verdi. |
+| SUCCESS_SMS_SENT | SMS mesajı gönderildi | Kısa mesaj için, tek seferlik geçiş kodu (OTP) içeren kısa mesaj başarıyla gönderildi.  Kullanıcı, kimlik doğrulamasını gerçekleştirmek için uygulamada OTP veya OTP + PIN 'ini girer. |
+| SUCCESS_PHONE_APP_AUTHENTICATED | Mobil uygulama kimliği doğrulandı | Kullanıcı, mobil uygulama aracılığıyla kimliği başarıyla doğrulandı. |
+| SUCCESS_OATH_CODE_PENDING | OATH kodu bekliyor | Kullanıcıdan OATH kodu istendi, ancak yanıt vermedi. |
+| SUCCESS_OATH_CODE_VERIFIED | OATH kodu doğrulandı | Kullanıcı istendiğinde geçerli bir OATH kodu girdiniz. |
+| SUCCESS_FALLBACK_OATH_CODE_VERIFIED | Geri dönüş OATH kodu doğrulandı | Kullanıcı, birincil Multi-Factor Authentication yöntemi kullanılarak kimlik doğrulamasını reddetti ve ardından geri dönüş için geçerli bir OATH kodu sağladı. |
+| SUCCESS_FALLBACK_SECURITY_QUESTIONS_ANSWERED | Geri dönüş güvenlik soruları yanıtlandı | Kullanıcı, birincil Multi-Factor Authentication yöntemi kullanılarak kimlik doğrulamasını reddetti ve sonra geri dönüş için güvenlik sorularını doğru bir şekilde yanıtladı. |
+| FAILED_PHONE_BUSY | Kimlik doğrulama zaten devam ediyor | Multi-Factor Authentication, bu kullanıcı için bir kimlik doğrulamasını zaten işliyor.  Bu, genellikle aynı oturum açma sırasında birden fazla kimlik doğrulama isteği gönderen RADIUS istemcilerinden kaynaklanır. |
+| CONFIG_ISSUE | Telefona ulaşılamıyor | Çağrı denendi, ancak yerleştirimedi ya da yanıtlanmadı.  Bu, meşgul sinyali, Hızlı meşgul sinyali (bağlantısı kesik), Üçlü tonlar (artık hizmette olmayan numara), çalan sırada zaman aşımına uğradığını içerir, vb. |
+| FAILED_INVALID_PHONENUMBER | Geçersiz telefon numarası biçimi | Telefon numarası geçersiz bir biçime sahip.  Telefon numaraları sayısal olmalıdır ve ülke kodu + 1 (Birleşik Devletler & Kanada) için 10 basamak olmalıdır. |
+| FAILED_USER_HUNGUP_ON_US | Kullanıcı telefonu kapattı | Kullanıcı telefonu yanıtladı, ancak herhangi bir düğmeye basmadan askıda kalmaz. |
+| FAILED_INVALID_EXTENSION | Geçersiz uzantı | Uzantı geçersiz karakterler içeriyor.  Yalnızca rakamlar, virgüller, * ve # kullanılabilir.  Bir @ öneki de kullanılabilir. |
+| FAILED_FRAUD_CODE_ENTERED | Sahtekarlık kodu girildi | Çağrı sırasında sahtekarlık raporlamak için tercih edilen Kullanıcı, reddedilen bir kimlik doğrulaması ve engellenen telefon numarası ile sonuçlanır.| 
+| FAILED_SERVER_ERROR | Çağrı yerleştirilemiyor | Multi-Factor Authentication hizmeti çağrıyı yerleştiremedi. |
+| FAILED_SMS_NOT_SENT | Kısa mesaj gönderilemedi | SMS mesajı gönderilemedi.  Kimlik doğrulaması reddedildi. |
+| FAILED_SMS_OTP_INCORRECT | Kısa mesaj OTP yanlış | Kullanıcı, aldığı SMS iletisinden yanlış bir kerelik geçiş kodu (OTP) girmiştir.  Kimlik doğrulaması reddedildi. |
+| FAILED_SMS_OTP_PIN_INCORRECT | Kısa mesaj OTP + PIN yanlış | Kullanıcı yanlış bir kerelik geçiş kodu (OTP) ve/veya yanlış Kullanıcı PIN kodu girdiniz.  Kimlik doğrulaması reddedildi. |
+| FAILED_SMS_MAX_OTP_RETRY_REACHED | Maksimum SMS Iletisi OTP denemesi aşıldı | Kullanıcı, en fazla bir kerelik geçiş kodu (OTP) denemesi sayısını aşmış. |
+| FAILED_PHONE_APP_DENIED | Mobil uygulama reddedildi | Kullanıcı, Reddet düğmesine basarak mobil uygulamadaki kimlik doğrulamasını reddetti. |
+| FAILED_PHONE_APP_INVALID_PIN | Mobil uygulama geçersiz PIN | Kullanıcı, mobil uygulamada kimlik doğrulanırken geçersiz bir PIN girdiniz. |
+| FAILED_PHONE_APP_PIN_NOT_CHANGED | Mobil uygulama PIN 'ı değiştirilmedi | Kullanıcı, mobil uygulamadaki gerekli PIN değişikliğini başarıyla tamamlayamadı. |
+| FAILED_FRAUD_REPORTED | Sahtekarlık bildirildi | Kullanıcı, mobil uygulamada sahtekarlık bildirdi. |
 | FAILED_PHONE_APP_NO_RESPONSE | Mobil uygulama yanıt yok | Kullanıcı mobil uygulama kimlik doğrulama isteğine yanıt vermedi. |
-| FAILED_PHONE_APP_ALL_DEVICES_BLOCKED | Mobil uygulama tüm cihazlar engellendi | Bu kullanıcı için mobil uygulama cihazları için bildirimler artık yanıt ve engellendi. |
-| FAILED_PHONE_APP_NOTIFICATION_FAILED | Mobil uygulama bildirimi başarısız oldu | Kullanıcının cihazın üzerindeki mobil uygulamadan bir bildirim göndermeye çalışırken bir hata oluştu. |
+| FAILED_PHONE_APP_ALL_DEVICES_BLOCKED | Mobil uygulama tüm cihazlar engellendi | Bu kullanıcıya yönelik mobil uygulama cihazları artık bildirimlere yanıt vermiyor ve engellendi. |
+| FAILED_PHONE_APP_NOTIFICATION_FAILED | Mobil uygulama bildirimi başarısız oldu | Kullanıcının cihazında mobil uygulamaya bildirim gönderilmeye çalışılırken bir hata oluştu. |
 | FAILED_PHONE_APP_INVALID_RESULT | Mobil uygulama geçersiz sonuç | Mobil uygulama geçersiz bir sonuç döndürdü. |
-| FAILED_OATH_CODE_INCORRECT | Yanlış OATH kodu | Kullanıcı yanlış bir OATH kodu girdi.  Kimlik doğrulaması reddedildi. |
-| FAILED_OATH_CODE_PIN_INCORRECT | OATH kodu + PIN yanlış | Kullanıcı doğru OATH kodunu ve/veya yanlış bir kullanıcı PIN girildi.  Kimlik doğrulaması reddedildi. |
-| FAILED_OATH_CODE_DUPLICATE | Yinelenen OATH kodu | Kullanıcı daha önce kullanılmış bir OATH kodu girdi.  Kimlik doğrulaması reddedildi. |
-| FAILED_OATH_CODE_OLD | OATH kodu eski | Kullanıcı daha önce kullanılmış bir OATH kodu önündeki bir OATH kodu girdi.  Kimlik doğrulaması reddedildi. |
-| FAILED_OATH_TOKEN_TIMEOUT | OATH kodu sonuç zaman aşımı | Kullanıcı OATH kodunu girmesi için çok uzun sürdü ve çok faktörlü kimlik doğrulama denemesi zaten zaman aşımına. |
-| FAILED_SECURITY_QUESTIONS_TIMEOUT | Güvenlik soruları sonuç zaman aşımı | Kullanıcının güvenlik sorularını Yanıtla girmek için çok uzun sürdü ve çok faktörlü kimlik doğrulama denemesi zaten zaman aşımına. |
-| FAILED_AUTH_RESULT_TIMEOUT | Kimlik doğrulama sonuç zaman aşımı | Kullanıcı çok faktörlü kimlik doğrulama girişimi tamamlanması çok uzun sürdü. |
-| FAILED_AUTHENTICATION_THROTTLED | Kısıtlanan kimlik doğrulaması | Çok faktörlü kimlik doğrulama girişimi, hizmet tarafından kısıtladı. |
+| FAILED_OATH_CODE_INCORRECT | OATH kodu yanlış | Kullanıcı yanlış bir OATH kodu girdiniz.  Kimlik doğrulaması reddedildi. |
+| FAILED_OATH_CODE_PIN_INCORRECT | OATH kodu + PIN yanlış | Kullanıcı yanlış bir OATH kodu ve/veya yanlış Kullanıcı PIN kodu girdiniz.  Kimlik doğrulaması reddedildi. |
+| FAILED_OATH_CODE_DUPLICATE | Yinelenen OATH kodu | Kullanıcı daha önce kullanılan bir OATH kodu girdiniz.  Kimlik doğrulaması reddedildi. |
+| FAILED_OATH_CODE_OLD | OATH kodu güncel değil | Kullanıcı daha önce kullanılan OATH kodundan önce gelen bir OATH kodu girdiniz.  Kimlik doğrulaması reddedildi. |
+| FAILED_OATH_TOKEN_TIMEOUT | OATH kodu sonuç zaman aşımı | Kullanıcının OATH kodunu girmesi çok uzun sürdü ve Multi-Factor Authentication denemesi zaten zaman aşımına uğradı. |
+| FAILED_SECURITY_QUESTIONS_TIMEOUT | Güvenlik soruları sonuç zaman aşımı | Kullanıcının güvenlik sorularına yanıt girmesi çok uzun sürdü ve Multi-Factor Authentication denemesi zaten zaman aşımına uğradı. |
+| FAILED_AUTH_RESULT_TIMEOUT | Kimlik doğrulama sonucu zaman aşımı | Kullanıcının Multi-Factor Authentication denemesini tamamlaması çok uzun sürdü. |
+| FAILED_AUTHENTICATION_THROTTLED | Kimlik doğrulaması kısıtlandı | Multi-Factor Authentication denemesi, hizmet tarafından kısıtlandı. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [SSPR ve MFA kullanımı ve raporlama öngörüleri](howto-authentication-methods-usage-insights.md)
+* [SSPR ve MFA kullanımı ve öngörüleri raporlama](howto-authentication-methods-usage-insights.md)
 * [Kullanıcılar için](../user-help/multi-factor-authentication-end-user.md)
-* [Dağıtılacağı yeri](concept-mfa-whichversion.md)
+* [Nereden dağıtılır](concept-mfa-whichversion.md)

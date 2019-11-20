@@ -1,177 +1,180 @@
 ---
-title: Video Indexer hesabınız, Azure portalında oluşturma
-titlesuffix: Azure Media Services
-description: Bu makalede, Azure portalında bir Video Indexer hesabına oluşturulacağını gösterir.
+title: Azure portal Video Indexer hesap oluşturma
+titleSuffix: Azure Media Services
+description: Bu makalede Azure portal Video Indexer hesabının nasıl oluşturulacağı gösterilmektedir.
 services: media-services
 author: Juliako
 manager: femila
 ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
-ms.date: 05/15/2019
+ms.date: 08/05/2019
 ms.author: juliako
-ms.openlocfilehash: 33493f1bdff6071737aad4bfb8c7d0e5e22896db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dc844392d64178cb9000db15af39f923521efc19
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65799839"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838392"
 ---
-# <a name="create-a-video-indexer-account-connected-to-azure"></a>Azure'a bağlı bir Video Indexer hesabı oluşturun
+# <a name="create-a-video-indexer-account-connected-to-azure"></a>Azure 'a bağlı bir Video Indexer hesabı oluşturun
 
-Video Indexer hesabınızı oluştururken ücretsiz bir deneme hesabı (belirli sayıda ücretsiz dizin oluşturma dakikası elde edersiniz) veya ücretli bir seçenek (kota sınırlaması olmaz) arasından seçim yapabilirsiniz. Ücretsiz deneme kullanıldığında Video Indexer, web sitesi kullanıcılarına 600 dakikaya kadar ve API kullanıcılarına ise 2400 dakikaya kadar ücretsiz dizin oluşturma olanağı sunar. Ücretli seçeneğiyle Azure aboneliğinize bağlı bir Video Indexer hesabınız ve Azure Media Services hesabı oluşturun. Dizin oluşturma faaliyeti yapılan dakika sayısının yanı sıra Medya Hesabı ile ilgili ücretler için ödeme yaparsınız. 
+Video Indexer hesabınızı oluştururken ücretsiz bir deneme hesabı (belirli sayıda ücretsiz dizin oluşturma dakikası elde edersiniz) veya ücretli bir seçenek (kota sınırlaması olmaz) arasından seçim yapabilirsiniz. Ücretsiz deneme kullanıldığında Video Indexer, web sitesi kullanıcılarına 600 dakikaya kadar ve API kullanıcılarına ise 2400 dakikaya kadar ücretsiz dizin oluşturma olanağı sunar. Ücretli seçenekle, Azure aboneliğinize ve bir Azure Media Services hesabına bağlı bir Video Indexer hesabı oluşturursunuz. Dizin oluşturma faaliyeti yapılan dakika sayısının yanı sıra Medya Hesabı ile ilgili ücretler için ödeme yaparsınız. 
 
-Bu makalede bir Azure aboneliğine bağlı bir Video Indexer hesabınız ve Azure Media Services hesabı oluşturma işlemini gösterir. Konu adımları Azure'a bağlanmak için otomatik (varsayılan) akışı kullanarak sağlar. Ayrıca el ile Azure'a bağlanmak nasıl gösterir (Gelişmiş).
+Bu makalede, bir Azure aboneliğine ve bir Azure Media Services hesabına bağlı Video Indexer hesabının nasıl oluşturulacağı gösterilmektedir. Bu konuda otomatik (varsayılan) Flow kullanılarak Azure 'a bağlanmak için gereken adımlar sağlanmaktadır. Ayrıca, Azure 'a el ile nasıl bağlanagösterdiğini gösterir (Gelişmiş).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Azure aboneliği.
 
-    Henüz Azure aboneliğiniz yoksa kaydolmak [Azure ücretsiz deneme sürümü](https://azure.microsoft.com/free/).
+    Henüz bir Azure aboneliğiniz yoksa [Azure Ücretsiz deneme sürümü](https://azure.microsoft.com/free/)için kaydolun.
 
-* Bir Azure Active Directory (AD) etki alanı.
+* Azure Active Directory (AD) etki alanı.
 
-    Azure AD etki alanı yoksa, bu etki alanı, Azure aboneliğiniz ile oluşturun. Daha fazla bilgi için [Azure Active Directory'de özel etki alanı adlarını yönetme](../../active-directory/users-groups-roles/domains-manage.md)
+    Azure AD etki alanınız yoksa, Azure aboneliğinizle bu etki alanını oluşturun. Daha fazla bilgi için bkz. [Azure Active Directory özel etki alanı adlarını yönetme](../../active-directory/users-groups-roles/domains-manage.md)
 
-* Kullanıcı ve Azure AD etki alanınızı üye. Bu üye, Video Indexer hesabınız Azure'a bağlanırken kullanacaksınız.
+* Azure AD etki alanındaki bir **Uygulama Yöneticisi** rolüyle bir kullanıcı. Video Indexer hesabınızı Azure 'a bağlarken bu üyeyi kullanacaksınız.
 
-    Bu kullanıcının iş veya Okul hesabı, kişisel hesabı değil, outlook.com, live.com veya hotmail.com gibi bir Azure AD kullanıcısı olması gerekir.
+    Bu Kullanıcı, outlook.com, live.com veya hotmail.com gibi kişisel bir hesap değil, iş veya okul hesabı olan bir Azure AD kullanıcısı olmalıdır.
 
     ![Tüm AAD kullanıcıları](./media/create-account/all-aad-users.png)
 
-### <a name="additional-prerequisites-for-automatic-flow"></a>Otomatik bir akış için ek Önkoşullar
+### <a name="additional-prerequisites-for-automatic-flow"></a>Otomatik akış için ek önkoşullar
 
-Kullanıcı ve Azure AD etki alanınızı üye. Bu üye, Video Indexer hesabınız Azure'a bağlanırken kullanacaksınız.
+Azure AD etki alanındaki bir Kullanıcı ve üye. Video Indexer hesabınızı Azure 'a bağlarken bu üyeyi kullanacaksınız.
 
-Bu kullanıcı Azure aboneliğinize ya da bir üyesi olmalıdır bir **sahibi** rolüne ya da her ikisini de **katkıda bulunan** ve **kullanıcı erişimi Yöneticisi** rolleri. Bir kullanıcının ile 2 rolü iki kez eklenebilir. Katkıda bulunan ve bir kez kullanıcı erişimi Yöneticisi ile bir kez.
+Bu Kullanıcı, bir **sahip** rolü ya da **katkıda** bulunan ve **Kullanıcı erişimi yönetici** rolleri ile Azure aboneliğinizde bir üye olmalıdır. Bir Kullanıcı 2 rol ile iki kez eklenebilir. Katkıda bulunan ve Kullanıcı erişimi yöneticisiyle bir kez.
 
 ![Erişim denetimi](./media/create-account/access-control-iam.png)
 
-### <a name="additional-prerequisites-for-manual-flow"></a>El ile akış için ek Önkoşullar
+### <a name="additional-prerequisites-for-manual-flow"></a>El ile akışa yönelik ek önkoşullar
 
-Azure portalını kullanarak EventGrid kaynak sağlayıcısını kaydedin.
+Azure portal kullanarak EventGrid kaynak sağlayıcısını kaydedin.
 
-İçinde [Azure portalında](https://portal.azure.com/)Git **abonelikleri**[. abonelik] -> ->**ResourceProviders**. 
+[Azure Portal](https://portal.azure.com/) **abonelikler**-> [abonelik]->**resourceproviders**' a gidin. 
 
-Arama **Microsoft.Media** ve **Microsoft.EventGrid**. Durumda değil "Kaydedildi" ise, tıklayın **kaydetme**. Bu işlem birkaç dakika kaydedilecek götürür.
+**Microsoft. Media** ve **Microsoft. eventgrid**için arama yapın. "Kayıtlı" durumunda değilse, **Kaydet**' e tıklayın. Kaydolmak birkaç dakika sürer.
 
 ![EventGrid](./media/create-account/event-grid.png)
 
 ## <a name="connect-to-azure"></a>Azure'a Bağlanma
 
+> [!NOTE]
+> Azure aboneliğiniz sertifika tabanlı Multi-Factor Authentication kullanıyorsa, gerekli sertifikaların yüklü olduğu bir cihazda aşağıdaki adımları gerçekleştirmeniz çok önemlidir.
+
 1. [Video Indexer](https://www.videoindexer.ai/) web sitesine gidip oturum açın.
 
-2. Tıklayarak **yeni hesap oluşturma** düğmesi:
+2. **Yeni hesap oluştur** düğmesine tıklayın:
 
-    ![Azure'a bağlanma](./media/create-account/connect-to-azure.png)
+    ![Azure 'a bağlanma](./media/create-account/connect-to-azure.png)
 
-3. Abonelik listesi göründüğünde, kullanmak istediğiniz aboneliği seçin.
+3. Abonelikler listesi göründüğünde, kullanmak istediğiniz aboneliği seçin.
 
-    ![Video Indexer'ı Azure'a bağlanma](./media/create-account/connect-vi-to-azure-subscription.png)
+    ![Video Indexer Azure 'a bağlama](./media/create-account/connect-vi-to-azure-subscription.png)
 
-4. Bir Azure bölgesi desteklenen konumlardan seçin: Batı ABD 2, Kuzey Avrupa veya Güneydoğu Asya.
-5. Altında **Azure Media Services hesabı**, aşağıdaki seçeneklerden birini seçin:
+4. Desteklenen konumlardan bir Azure bölgesi seçin: Batı ABD 2, Kuzey Avrupa veya Doğu Asya.
+5. **Azure Media Services hesabı**altında şu seçeneklerden birini seçin:
 
-    * Yeni bir Media Services hesabı oluşturmak için Seç **yeni kaynak grubu oluştur**. Kaynak grubunuz için bir ad sağlayın.
+    * Yeni bir Media Services hesabı oluşturmak için **Yeni kaynak grubu oluştur**' u seçin. Kaynak grubunuz için bir ad girin.
 
-        Azure, yeni bir Azure depolama hesabı dahil aboneliğinizde, yeni hesabı oluşturur. Varsayılan başlangıç yapılandırmasını akış uç noktası ve 10 S3 ayrılmış birim ile yeni Media Services hesabınız var.
-    * Mevcut bir Media Services hesabını kullanmayı tercih **var olan kaynağı kullanın**. Hesapları listesinden hesabınızı seçin.
+        Azure yeni bir Azure depolama hesabı da dahil olmak üzere aboneliğinizde yeni hesabınızı oluşturacak. Yeni Media Services hesabınızın bir akış uç noktası ve 10 S3 ayrılmış birimi olan varsayılan bir başlangıç yapılandırması vardır.
+    * Mevcut bir Media Services hesabını kullanmak için **mevcut kaynağı kullan**' ı seçin. Hesaplar listesinden hesabınızı seçin.
 
-        Media Services hesabınızı, Video Indexer hesabınız ile aynı bölgede olması gerekir. 
+        Media Services hesabınız Video Indexer hesabınızla aynı bölgeye sahip olmalıdır. 
 
         > [!NOTE]
-        > Dizin oluşturma süresi ve aktarım hızının düşük olmasını en aza indirmek için tür ve sayıda ayarlamak için önerilir [ayrılmış birim](../previous/media-services-scale-media-processing-overview.md ) için **10 S3 ayrılmış birim** Media Services hesabı. Bkz: [ayrılmış birimlerini değiştirmek için portalı kullanma](../previous/media-services-portal-scale-media-processing.md).
+        > Dizin oluşturma süresini ve düşük aktarım hızını en aza indirmek için, Media Services hesabınızda [ayrılan birimlerin](../previous/media-services-scale-media-processing-overview.md ) türü ve sayısını **10 S3 ayrılmış birimlerine** ayarlamanız önemle önerilir. Bkz. [ayrılmış birimleri değiştirmek için portalı kullanma](../previous/media-services-portal-scale-media-processing.md).
 
-    * Bağlantınız el ile yapılandırmak için tıklayın **el ile yapılandırmaya geçiş** bağlantı.
+    * Bağlantınızı el ile yapılandırmak için **el ile yapılandırmaya geç** bağlantısına tıklayın.
 
-        Ayrıntılı bilgi için bkz. [Azure'a el ile bağlanmanız](#connect-to-azure-manually-advanced-option) izler (Gelişmiş seçenek) bölümü.
-6. İşiniz bittiğinde seçin **Connect**. Bu işlem birkaç dakika sürebilir. 
+        Ayrıntılı bilgi için, aşağıda bulunan [Azure 'a El Ile bağlanma](#connect-to-azure-manually-advanced-option) (Gelişmiş seçenek) bölümüne bakın.
+6. İşiniz bittiğinde **Bağlan**' ı seçin. Bu işlem birkaç dakika sürebilir. 
 
-    Azure'a bağlandıktan sonra yeni Video Indexer hesabınız hesap listesinde görüntülenir:
+    Azure 'a bağlandıktan sonra yeni Video Indexer hesabınız hesap listesinde görüntülenir:
 
     ![Yeni hesap](./media/create-account/new-account.png)
 
 7. Yeni hesabınıza gidin
 
-## <a name="connect-to-azure-manually-advanced-option"></a>El ile Azure'a bağlanabilirsiniz (Gelişmiş Seçenekler)
+## <a name="connect-to-azure-manually-advanced-option"></a>Azure 'a el ile bağlanma (Gelişmiş seçenek)
 
-Bir Azure bağlantısı başarısız olursa, el ile bağlanarak sorunu gidermek deneyebilirsiniz.
+Azure bağlantısı başarısız olduysa, el ile bağlanarak sorunu gidermeyi deneyebilirsiniz.
 
 > [!NOTE]
-> Aşağıdaki üç hesapları aynı bölgede olması önemle tavsiye edilir: Media Services hesabı, yanı sıra Azure depolama hesabı bağlandığınız Video Indexer hesabınız aynı Media Services hesabına bağlı.
+> Aynı bölgede aşağıdaki üç hesabın olması kesinlikle önerilir: Media Services hesabıyla bağlanmakta olduğunuz Video Indexer hesap ve aynı Media Services hesabına bağlı Azure depolama hesabı.
 
-### <a name="create-and-configure-a-media-services-account"></a>Bir Media Services hesabını oluşturma ve yapılandırma
+### <a name="create-and-configure-a-media-services-account"></a>Media Services hesabı oluşturma ve yapılandırma
 
-1. Kullanım [Azure](https://portal.azure.com/) bölümünde anlatıldığı gibi bir Azure Media Services hesabı oluşturmak için portalı [hesap oluşturma](../previous/media-services-portal-create-account.md).
+1. [Hesap oluşturma](../previous/media-services-portal-create-account.md)bölümünde açıklandığı gibi bir Azure Media Services hesabı oluşturmak için [Azure](https://portal.azure.com/) portalını kullanın.
 
-    Media Services hesabınız için bir depolama hesabı oluştururken **StorageV2** hesap türü için ve **coğrafi olarak yedekli (GRS)** çoğaltma alanlar için.
+    Media Services hesabınız için bir depolama hesabı oluştururken, çoğaltma alanları için hesap türü ve coğrafi olarak **yedekli (GRS)** için **StorageV2** öğesini seçin.
 
-    ![Yeni AMS hesabının](./media/create-account/create-ams-account1.png)
+    ![Yeni AMS hesabı](./media/create-account/create-ams-account1.png)
 
     > [!NOTE]
-    > Media Services kaynağı ve hesap adlarını not aldığınızdan emin olun. Sonraki bölümde yer alan adımlar için gerekir.
+    > Media Services kaynak ve hesap adlarını yazdığınızdan emin olun. Sonraki bölümde bulunan adımlarda bu adıma ihtiyacınız olacak.
 
-2. Tür ve sayıda ayarlamak [ayrılmış birim](../previous/media-services-scale-media-processing-overview.md ) için **10 S3 ayrılmış birim** oluşturduğunuz Media Services hesabı. Bkz: [ayrılmış birimlerini değiştirmek için portalı kullanma](../previous/media-services-portal-scale-media-processing.md).
-3. Video Indexer web uygulamasında videolarınızı yürütebilirsiniz önce varsayılan başlangıç **akış uç noktası** yeni Media Services hesabı.
+2. Oluşturulan Media Services hesapta, [ayrılmış birimlerin](../previous/media-services-scale-media-processing-overview.md ) türünü ve sayısını **10 S3 ayrılmış birim** olarak ayarlayın. Bkz. [ayrılmış birimleri değiştirmek için portalı kullanma](../previous/media-services-portal-scale-media-processing.md).
+3. Video Indexer Web uygulamasında videolarınızı oynatabilmeniz için önce yeni Media Services hesabının varsayılan **akış uç noktasını** başlatmanız gerekir.
 
-    Yeni medya hizmetleri hesabı **akış uç noktaları**. Akış uç noktası ve ENTER tuşuna Başlat'ı seçin.
+    Yeni Media Services hesabında, **akış uç noktaları**' na tıklayın. Akış uç noktasını seçin ve Başlat ' a basın.
 
-    ![Yeni AMS hesabının](./media/create-account/create-ams-account2.png)
+    ![Yeni AMS hesabı](./media/create-account/create-ams-account2.png)
 
-4. Video Indexer'ın ile Media Services API'sine kimliğini doğrulamak bir AD uygulaması oluşturulması gerekir. Azure AD kimlik doğrulama işlemini açıklanan aşağıdaki adımları Kılavuzu [Azure portalını kullanarak Azure AD kimlik doğrulamasını kullanmaya başlama](../previous/media-services-portal-get-started-with-aad.md):
+4. Media Services API 'SI ile kimlik doğrulaması yapmak Video Indexer için, bir AD uygulamasının oluşturulması gerekir. Aşağıdaki adımlar, [Azure Portal kullanarak Azure AD kimlik doğrulaması ile çalışmaya başlama](../previous/media-services-portal-get-started-with-aad.md)bölümünde AÇıKLANAN Azure AD kimlik doğrulaması sürecinde size kılavuzluk ediyor:
 
-    1. Yeni Media Services hesabı seçin **API erişimi**.
-    2. Seçin [hizmet sorumlusu kimlik doğrulaması yöntemi](../previous/media-services-portal-get-started-with-aad.md#service-principal-authentication).
-    3. İstemci Kimliğini ve istemci gizli anahtarı açıklandığı alma [istemci Kimliğini ve istemci gizli anahtarını almak](../previous/media-services-portal-get-started-with-aad.md#get-the-client-id-and-client-secret) bölümü.
+    1. Yeni Media Services hesabında **API erişimi**' ni seçin.
+    2. [Hizmet sorumlusu kimlik doğrulama yöntemini](../previous/media-services-portal-get-started-with-aad.md#service-principal-authentication)seçin.
+    3. İstemci kimliğini ve [istemci gizli anahtarını al bölümünde açıklandığı](../previous/media-services-portal-get-started-with-aad.md#get-the-client-id-and-client-secret) gıbı istemci kimliğini ve gizli anahtarı alın.
 
-        Seçtikten sonra **ayarları**->**anahtarları**, ekleme **açıklama**, basın **Kaydet**, anahtar değeri ile doldurulur.
+        **Ayarlar**->**anahtarlar**' ı seçtikten sonra **Açıklama**ekleyin, **Kaydet**' e basın, anahtar değeri doldurulur.
 
-        Anahtarı süresi dolarsa Video Indexer desteğe anahtarını yenilemek için hesap sahibi gerekir.
+        Anahtarın süresi dolarsa, hesap sahibinin anahtarı yenilemek için Video Indexer destekle iletişim kurabilmesi gerekir.
 
         > [!NOTE]
-        > Anahtar değeri ve uygulama kimliği aşağı aldığınızdan emin olun Sonraki bölümde yer alan adımlar için gerekir.
+        > Anahtar değerini ve uygulama KIMLIĞINI yazdığınızdan emin olun. Sonraki bölümde bulunan adımlarda bu adıma ihtiyacınız olacak.
 
-### <a name="connect-manually"></a>El ile bağlanma
+### <a name="connect-manually"></a>El ile bağlan
 
-İçinde **bağlanın, Video Indexer bir Azure aboneliğine** iletişim, [Video Indexer](https://www.videoindexer.ai/) sayfasında **el ile yapılandırmaya geçiş** bağlantı.
+[Video Indexer](https://www.videoindexer.ai/) sayfanızın **bir Azure aboneliğine video Indexer Bağlan** iletişim kutusunda **el ile yapılandırma bağlantısına geç** bağlantısını seçin.
 
-İletişim kutusunda aşağıdaki bilgileri sağlayın:
+İletişim kutusunda, aşağıdaki bilgileri sağlayın:
 
 |Ayar|Açıklama|
 |---|---|
-|Video Indexer hesap bölgesi|Video Indexer hesap bölgesi adı. Daha iyi performans ve düşük maliyetlerden için Azure Media Services kaynağınız ve Azure depolama hesabının bulunduğu bölge adını belirtmek için önemle tavsiye edilir. |
-|Azure Active Directory (AAD) kiracısı|Azure AD kiracısı, örneğin "contoso.onmicrosoft.com" adı. Kiracı bilgileri, Azure portalından alınabilir. Sağ üst köşedeki oturum açan kullanıcı adının üzerine imleci yerleştirin. Sağındaki adını bulma **etki alanı**.|
-|Abonelik Kimliği|Azure aboneliği altında bu bağlantının oluşturulması. Abonelik kimliği, Azure portalından alınabilir. Tıklayarak **tüm hizmetleri** sol bölme ve "abonelikler" arayın. Seçin **abonelikleri** ve istenen kimliği aboneliklerinizi listesinden seçin.|
+|Video Indexer hesap bölgesi|Video Indexer hesap bölgesinin adı. Daha iyi performans ve düşük maliyetler için, Azure Media Services kaynağının ve Azure depolama hesabının bulunduğu bölgenin adını belirtmeniz kesinlikle önerilir. |
+|Azure Active Directory (AAD) kiracısı|Azure AD kiracının adı, örneğin "contoso.onmicrosoft.com". Kiracı bilgileri Azure portal elde edilebilir. İmlecinizi sağ üst köşedeki oturum açan kullanıcının adının üzerine getirin. **Etki alanının**sağındaki adı bulun.|
+|Abonelik Kimliği|Bu bağlantının oluşturulması gereken Azure aboneliği. Abonelik KIMLIĞI Azure portal elde edilebilir. Sol panelde **tüm hizmetler** ' e tıklayın ve "abonelikler" i arayın. **Abonelikler** ' i seçin ve aboneliklerinizin LISTESINDEN istediğiniz kimliği seçin.|
 |Azure Media Services kaynak grubu adı|Media Services hesabı oluşturduğunuz kaynak grubunun adı.|
-|Medya hizmeti kaynak adı|Önceki bölümde oluşturduğunuz Azure Media Services hesabı adı.|
-|Uygulama Kimliği|Önceki bölümde oluşturduğunuz Azure AD uygulama kimliği (ile belirtilen Media Services hesabı için izinler).|
+|Medya hizmeti kaynak adı|Önceki bölümde oluşturduğunuz Azure Media Services hesabının adı.|
+|Uygulama Kimliği|Önceki bölümde oluşturduğunuz Azure AD uygulama KIMLIĞI (belirtilen Media Services hesabı için izinlerle).|
 |Uygulama anahtarı|Önceki bölümde oluşturduğunuz Azure AD uygulama anahtarı. |
 
 ## <a name="considerations"></a>Dikkat edilmesi gerekenler
 
-Aşağıdaki Azure Media Services ilgili önemli noktalar geçerlidir:
+Aşağıdaki Azure Media Services ilgili konular geçerlidir:
 
-* Yeni bir kaynak grubu, Media Services hesabı ve depolama hesabı otomatik olarak bağlarsanız, Azure aboneliğinizde bakın.
-* Otomatik olarak bağlarsanız, Video Indexer medya ayarlar **ayrılmış birim** 10 S3 birimleri:
+* Otomatik olarak bağlanıyorsanız, Azure aboneliğinizde yeni bir kaynak grubu, Media Services hesabı ve bir depolama hesabı görürsünüz.
+* Otomatik olarak bağlanıyorsanız Video Indexer medya **ayrılmış birimlerini** 10 S3 birimine ayarlar:
 
-    ![Media Services için ayrılmış birimleri](./media/create-account/ams-reserved-units.png)
+    ![Ayrılmış birimler Media Services](./media/create-account/ams-reserved-units.png)
 
-* Video Indexer mevcut bir Media Services hesabına bağlanırsanız, var olan medya değiştirmez **ayrılmış birim** yapılandırma.
+* Mevcut bir Media Services hesabına bağlanırsanız, Video Indexer var olan medya **ayrılmış birimleri** yapılandırmasını değiştirmez.
 
-   Medya ayrılmış birimi sayısını ve türünü ayarlamak planlanan yük göre gerekebilir. Yük yüksektir ve yeterli birimleri veya hızı yoksa, video işleme zaman aşımı hataları neden göz önünde bulundurun.
+   Planlı yüklerinize göre medya ayrılmış birimlerinin türünü ve sayısını ayarlamanız gerekebilir. Yük yüksekse ve yeterli miktarda birim veya hız yoksa, video işleme zaman aşımı hatalarıyla sonuçlanabilir.
 
-* Yeni bir Media Services hesabına bağlanın, Video Indexer varsayılan otomatik olarak başlatılır. **akış uç noktası** da:
+* Yeni bir Media Services hesabına bağlanırsanız, Video Indexer varsayılan **akış uç noktasını** otomatik olarak başlatır:
 
     ![Media Services akış uç noktası](./media/create-account/ams-streaming-endpoint.png)
 
-    Akış uç noktalarını önemli başlangıç süresi vardır. Bu nedenle, videolarınızı akışa ve Video Indexer web uygulamasında izlenen kadar Azure'a hesabınıza bağlı saatten birkaç dakika sürebilir.
+    Akış uç noktalarında önemli bir başlangıç süresi vardır. Bu nedenle, hesabınızı Azure 'a bağladığınıza ve Video Indexer Web uygulamasında videolarınızın akışını yapana kadar birkaç dakika sürebilirsiniz.
 
-* Var olan bir Media Services hesabına bağlanın, Video Indexer varsayılan akış uç noktası yapılandırmasını değiştirmez. Hiçbir çalışan varsa **akış uç noktası**, bu Media Services hesabı veya Video Indexer videoları mümkün olmayacaktır.
+* Mevcut bir Media Services hesabına bağlanırsanız, Video Indexer varsayılan akış uç noktası yapılandırmasını değiştirmez. Çalışan bir **akış uç noktası**yoksa, bu Media Services hesabından veya video Indexer videoları izleyemeyeceksiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Program aracılığıyla, deneme hesabıyla ve/veya'ndaki yönergeleri takip ederek azure'a bağlı Video Indexer hesaplarınızı ile etkileşim kurabilirsiniz: [API'leri kullanan](video-indexer-use-apis.md).
+Deneme hesabınızla ve/veya Azure 'a bağlı Video Indexer hesaplarınız ile programlama yoluyla etkileşimli olarak etkileşimde bulunabilirsiniz: [API 'Leri kullanma](video-indexer-use-apis.md).
 
-Azure'a bağlanırken kullandığınız aynı Azure AD kullanıcı kullanmanız gerekir.
+Azure 'a bağlanırken kullandığınız Azure AD kullanıcısını kullanmanız gerekir.
 
 

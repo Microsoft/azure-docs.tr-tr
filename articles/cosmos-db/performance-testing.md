@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 05/23/2019
 ms.author: sngun
 ms.custom: seodec18
-ms.openlocfilehash: a5842d590a4597253bac39c0b7a6f62e6acad908
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0ac257d4eb9fb9e26739f1a63049751f9298efb5
+ms.sourcegitcommit: e42c778d38fd623f2ff8850bb6b1718cdb37309f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66243525"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69616776"
 ---
 # <a name="performance-and-scale-testing-with-azure-cosmos-db"></a>Performans ve ölçek testi ile Azure Cosmos DB
 
@@ -37,16 +37,16 @@ Azure Cosmos DB performansını artırmak, istemci tarafı yapılandırma seçen
 ## <a name="run-the-performance-testing-application"></a>Performans uygulama testi Çalıştır
 Başlamak için hızlı derlemek ve bir .NET örneği çalıştırmak için aşağıdaki adımlarda anlatıldığı gibi yoludur. Ayrıca, kaynak kodu gözden geçirin ve kendi istemci uygulamalar üzerinde benzer yapılandırmaları uygular.
 
-**1. adım:** İçinden projeyi karşıdan [Azure Cosmos DB performans örnek test](https://github.com/Azure/azure-documentdb-dotnet/tree/master/samples/documentdb-benchmark), veya GitHub depo çatalı oluşturma.
+**1. Adım:** Projeyi [Azure Cosmos DB performans testi örneğinden](https://github.com/Azure/azure-documentdb-dotnet/tree/master/samples/documentdb-benchmark)Indirin veya GitHub deposunu çatalla.
 
-**2. adım:** EndpointUrl ve AuthorizationKey, CollectionThroughput ve DocumentTemplate (App.config dosyasında isteğe bağlı) ayarlarını değiştirin.
+**2. Adım:** App. config dosyasında EndpointUrl, AuthorizationKey, Collectionüretilen Iş ve DocumentTemplate (isteğe bağlı) ayarlarını değiştirin.
 
 > [!NOTE]
-> Yüksek aktarım hızı koleksiyonlarla sağlamadan önce başvurmak [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/cosmos-db/) koleksiyon başına maliyetlerini tahmin etmek için. Azure Cosmos DB, depolama ve aktarım hızını bağımsız olarak bir saatlik olarak düzenler. Silerek veya test edildikten sonra Azure Cosmos DB koleksiyonları verimini azaltmayı maliyetlerinden tasarruf edebilirler.
+> Yüksek aktarım hızı koleksiyonlarla sağlamadan önce başvurmak [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/cosmos-db/) koleksiyon başına maliyetlerini tahmin etmek için. Azure Cosmos DB, depolama ve aktarım hızını bağımsız olarak bir saatlik olarak düzenler. Test ettikten sonra Azure Cosmos kapsayıcılarınızın verimini silerek veya azaltarak maliyetleri tasarruf edebilirsiniz.
 > 
 > 
 
-**3. adım:** Derleyin ve konsol uygulamasını komut satırından çalıştırın. Şuna benzer bir çıktı görmeniz gerekir:
+**Adım 3:** Konsol uygulamasını komut satırından derleyin ve çalıştırın. Şuna benzer bir çıktı görmeniz gerekir:
 
     C:\Users\cosmosdb\Desktop\Benchmark>DocumentDBBenchmark.exe
     Summary:
@@ -89,7 +89,7 @@ Başlamak için hızlı derlemek ve bir .NET örneği çalıştırmak için aşa
     Press any key to exit...
 
 
-**(Gerekirse) 4. adım:** Rapor işleme (RU/s) aracından aynı olmalıdır veya koleksiyon için sağlanan aktarım hızı veya koleksiyonları kümesi daha yüksek. Yüklü değilse, DegreeOfParallelism küçük artışlarla artırma sınırı ulaşmanıza yardımcı olabilir. İstemci uygulamanızı akışından plateaus, ek istemci makinelerinde birden fazla uygulamayı başlatın. Bu adımla ilgili yardıma ihtiyacınız varsa, e-posta askcosmosdb@microsoft.com veya bir destek bileti dosya [Azure portalında](https://portal.azure.com).
+**4. adım (gerekliyse):** Araçtan bildirilen aktarım hızı (RU/s), koleksiyonun veya bir koleksiyon kümesinin sağlanan aktarım hızına göre aynı veya daha yüksek olmalıdır. Yüklü değilse, DegreeOfParallelism küçük artışlarla artırma sınırı ulaşmanıza yardımcı olabilir. İstemci uygulamanızı akışından plateaus, ek istemci makinelerinde birden fazla uygulamayı başlatın. Bu adımla ilgili yardıma ihtiyacınız varsa, e-posta askcosmosdb@microsoft.com veya bir destek bileti dosya [Azure portalında](https://portal.azure.com).
 
 Uygulamayı oluşturduktan sonra farklı deneyebilirsiniz [dizinleme ilkeleri](index-policy.md) ve [tutarlılık düzeyleri](consistency-levels.md) aktarım hızı ve gecikme süresini üzerindeki etkilerini anlamak için. Ayrıca, kaynak kodu gözden geçirin ve kendi test paketleri veya üretim uygulamaları için benzer yapılandırmaları uygulayın.
 

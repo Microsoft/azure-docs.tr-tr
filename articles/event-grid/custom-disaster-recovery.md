@@ -1,39 +1,39 @@
 ---
-title: Kendi olağanüstü durum kurtarma için Azure Event Grid özel konulardaki yapı | Microsoft Docs
-description: Azure Event Grid bağlı tutmak için bölgesel kesintiler önceliklidir.
+title: Azure Event Grid özel konularda olağanüstü durum kurtarma
+description: Azure Event Grid bağlı tutmak için bölgesel kesintilerden nasıl devam leyeceğinizi öğrenin.
 services: event-grid
 author: banisadr
 ms.service: event-grid
 ms.topic: tutorial
-ms.date: 05/16/2019
+ms.date: 10/22/2019
 ms.author: babanisa
-ms.openlocfilehash: 4a069db7984a7b0b0bb4bb867dc510f73d8b1f75
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: 7020fb167539e8ad16cc6c386f58e38326dec43b
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66305071"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72790273"
 ---
-# <a name="build-your-own-disaster-recovery-for-custom-topics-in-event-grid"></a>Kendi olağanüstü durum kurtarma için Event Grid özel konulardaki oluşturun
-Olağanüstü durum kurtarma uygulama işlevselliği ciddi bir kaybından kurtarma üzerinde odaklanır. Bu öğreticide, Event Grid hizmeti bozulursa, belirli bir bölgede, kurtarılır olay Mimarinizi ayarlama konusunda size yol gösterir.
+# <a name="build-your-own-disaster-recovery-for-custom-topics-in-event-grid"></a>Event Grid özel konular için kendi olağanüstü durum kurtarmayı oluşturun
+Olağanüstü durum kurtarma, uygulama işlevselliğinin önemli bir kaybından kurtarılmasına odaklanır. Bu öğretici, Event Grid hizmeti belirli bir bölgede sağlıksız hale gelirse, olay mimarinizi kurtarmak üzere nasıl ayarlayabileceğinizi size yol gösterecektir.
 
-Bu öğreticide, Event Grid özel konu için bir Aktif-Pasif yük devretme mimarisi oluşturulacağını öğreneceksiniz. Konuları ve abonelikleri iki bölgede yansıtma ve bir konu sistem durumu kötü olduğunda bir yük devretme ardından yönetme yük devretme gerçekleştirilmesi. Bu öğreticide bir mimari üzerinden tüm yeni trafiğe başarısız olur. Bu kurulum ile uyumlu olması önemli olan, güvenliği aşılmış bölge yeniden sağlıklı duruma gelene kadar zaten uçuş olayları kurtarılması gerekmez.
+Bu öğreticide, Event Grid özel konular için etkin-Pasif yük devretme mimarisi oluşturmayı öğreneceksiniz. İki bölgede konu ve aboneliklerinizi yansıtarak ve ardından bir konu sağlıksız hale geldiğinde bir yük devretmeyi yöneterek yük devretmeyi gerçekleştirirsiniz. Bu öğreticideki mimari tüm yeni trafikle başarısız olur. Bu kurulumla farkında olmak önemlidir. daha önce uçuştaki olaylar, güvenliği aşılan bölge yeniden sağlıklı olana kadar kurtarılmaz.
 
 > [!NOTE]
-> Event Grid, otomatik coğrafi olağanüstü durum kurtarma (GeoDR) artık sunucu tarafında destekler. Yük devretme işlemi hakkında daha fazla denetlenebilmesine istiyorsanız hala istemci-tarafı olağanüstü durum kurtarma mantığı uygulayabilir. Otomatik GeoDR hakkında daha fazla ayrıntı için bkz: [Azure Event Grid, sunucu tarafı coğrafi olağanüstü durum kurtarma](geo-disaster-recovery.md).
+> Event Grid, şimdi sunucu tarafında otomatik coğrafi olağanüstü durum kurtarmayı (GeoDR) destekler. Yük devretme işlemi üzerinde daha fazla denetim istiyorsanız, hala istemci tarafı olağanüstü durum kurtarma mantığı uygulayabilirsiniz. Otomatik GeoDR hakkında daha fazla bilgi için, bkz. [Azure Event Grid sunucu tarafı coğrafi olağanüstü durum kurtarma](geo-disaster-recovery.md).
 
 ## <a name="create-a-message-endpoint"></a>İleti uç noktası oluşturma
 
-Yük devretme yapılandırmanızı test etme, olayları almak için bir uç nokta gerekir. Uç nokta yük devretme altyapınızın bir parçası değildir, ancak test daha kolay hale getirmek için sunduğumuz olay işleyicisi davranacak.
+Yük devretme yapılandırmanızı test etmek için, olaylarınızı almak üzere bir uç noktaya ihtiyacınız vardır. Uç nokta, yük devretme altyapınızın bir parçası değildir, ancak sınamayı kolaylaştırmak için olay işleyicimiz olarak görev yapar.
 
-Test etmeyi kolaylaştırmak için dağıtma bir [önceden oluşturulmuş bir web uygulaması](https://github.com/Azure-Samples/azure-event-grid-viewer) , olay iletileri görüntüler. Dağıtılan çözüm bir App Service planı, App Service web uygulaması ve GitHub'dan kaynak kod içerir.
+Sınamayı basitleştirmek için, olay iletilerini görüntüleyen [önceden oluşturulmuş bir Web uygulaması](https://github.com/Azure-Samples/azure-event-grid-viewer) dağıtın. Dağıtılan çözüm bir App Service planı, App Service web uygulaması ve GitHub'dan kaynak kod içerir.
 
 1. Çözümü aboneliğinize dağıtmak için **Azure'a Dağıt**'ı seçin. Azure portalında parametre değerlerini girin.
 
    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 
 1. Dağıtımın tamamlanması birkaç dakika sürebilir. Dağıtım başarıyla gerçekleştirildikten sonra, web uygulamanızı görüntüleyip çalıştığından emin olun. Web tarayıcısında şu adrese gidin: `https://<your-site-name>.azurewebsites.net`
-Daha sonra ihtiyacınız olacak şekilde bu URL'yi Not aldığınızdan emin olun.
+Daha sonra ihtiyacınız olacak şekilde bu URL 'YI aklınızda olduğunuzdan emin olun.
 
 1. Siteyi görürsünüz ancak henüz yayımlanmış olay yoktur.
 
@@ -42,58 +42,58 @@ Daha sonra ihtiyacınız olacak şekilde bu URL'yi Not aldığınızdan emin olu
 [!INCLUDE [event-grid-register-provider-portal.md](../../includes/event-grid-register-provider-portal.md)]
 
 
-## <a name="create-your-primary-and-secondary-topics"></a>Oluşturma, birincil ve ikincil konuları
+## <a name="create-your-primary-and-secondary-topics"></a>Birincil ve ikincil konularınızı oluşturun
 
-İlk olarak iki Event Grid konuları oluşturun. Bu konular, birincil ve ikincil görür. Varsayılan olarak, olaylarınızı birincil Konunuza akar. Birincil bölgede bir hizmet kesintisi durumunda, ikincil üstlenir.
+İlk olarak iki Event Grid konu başlığı oluşturun. Bu konular, birincil ve ikincil gibi davranır. Varsayılan olarak, olaylarınız birincil konusundan akacaktır. Birincil bölgede bir hizmet kesintisi varsa, ikincilinizi alır.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın. 
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın. 
 
-1. Ana Azure menüsünde sol üst köşesinden seçin **tüm hizmetleri** > arama **Event Grid** > seçin **olay ızgarası konu başlıkları**.
+1. Ana Azure menüsünün sol üst köşesinden **tüm hizmetler** > **Event Grid** ara ' yı seçin > **Event Grid konular**' ı seçin.
 
-   ![Olay ızgarası konu başlıkları menüsü](./media/custom-disaster-recovery/select-topics-menu.png)
+   ![Event Grid konuları menüsü](./media/custom-disaster-recovery/select-topics-menu.png)
 
-    Bunu daha kolay erişmek için kaynak menüsünde gelecekte eklemek için Event Grid konuları yanındaki yıldızı seçin.
+    İleride daha kolay erişim sağlamak için Event Grid konular ' ın yanındaki yıldızı seçerek kaynak menüsüne ekleyin.
 
-1. Olay Kılavuzu konuları menüde **+ Ekle** birincil konuyu oluşturmak için.
+1. Event Grid konuları menüsünde **+ Ekle** ' yi seçerek birincil konuyu oluşturun.
 
-   * Konu mantıksal bir ad verin ve Ekle "-birincil" olarak izlemek kolay hale getirmek için bir son eki.
-   * Bu konunun bölgede, birincil bölge olacaktır.
+   * Konuya mantıksal bir ad verin ve izlemeyi kolaylaştırmak için sonek olarak "-Primary" ekleyin.
+   * Bu konunun bölgesi, birincil bölgesidir.
 
-     ![Olay Kılavuzu konusu birincil iletişim kutusu oluşturma](./media/custom-disaster-recovery/create-primary-topic.png)
+     ![Event Grid konu birincil oluşturma iletişim kutusu](./media/custom-disaster-recovery/create-primary-topic.png)
 
-1. Konu oluşturulduktan sonra buna gitmek ve kopyalama **konu başlığı uç noktası**. URI daha sonra ihtiyacınız olacak.
+1. Konu oluşturulduktan sonra, bu sayfaya gidin ve **Konu uç noktasını**kopyalayın. URI 'ye daha sonra ihtiyacınız olacak.
 
-    ![Olay Kılavuzu konusu birincil](./media/custom-disaster-recovery/get-primary-topic-endpoint.png)
+    ![Event Grid birincil konu başlığı](./media/custom-disaster-recovery/get-primary-topic-endpoint.png)
 
-1. Ayrıca daha sonra ihtiyacınız olacak konu için erişim anahtarı alınamadı. Tıklayarak **erişim anahtarları** kaynak menüsünde ve anahtar 1 kopya.
+1. Daha sonra da ihtiyacınız olacak konunun erişim anahtarını alın. Kaynak menüsünde **erişim tuşları** ' na tıklayın ve anahtarı 1 ' i kopyalayın.
 
-    ![Birincil konu anahtarı alma](./media/custom-disaster-recovery/get-primary-access-key.png)
+    ![Birincil konu anahtarını al](./media/custom-disaster-recovery/get-primary-access-key.png)
 
-1. Konu dikey penceresinde **+ olay aboneliği** bağlanma öğreticisi için Önkoşullar içinde yaptığınız olay alıcısı Web sitesi abone olan bir abonelik oluşturmak için.
+1. Konu dikey penceresinde **+ olay aboneliği** ' ne tıklayarak, ön koşullar bölümünde yaptığınız olay alıcısı Web sitesinden abone olmayı bağlayan bir abonelik oluşturun.
 
-   * Olay aboneliği mantıksal bir ad verin ve Ekle "-birincil" olarak izlemek kolay hale getirmek için bir son eki.
-   * Uç nokta türü Web kancasını seçin.
-   * Görünmelidir olay alıcı olay URL'si için uç nokta ayarlamak ister: `https://<your-event-reciever>.azurewebsites.net/api/updates`
+   * Olay aboneliğine bir mantıksal ad verin ve izlemeyi kolaylaştırmak için sonek olarak "-Primary" ekleyin.
+   * Uç nokta türü Web kancası ' nu seçin.
+   * Uç noktasını olay alıcıınızın olay URL 'SI olarak ayarlayın, şöyle bir şey görünmelidir: `https://<your-event-reciever>.azurewebsites.net/api/updates`
 
-     ![Event Grid birincil olay aboneliği](./media/custom-disaster-recovery/create-primary-es.png)
+     ![Birincil olay aboneliğini Event Grid](./media/custom-disaster-recovery/create-primary-es.png)
 
-1. İkincil bir konu ve abonelik oluşturmak için aynı akışı yineleyin. Bu kez, Değiştir "-birincil" soneki ile "-ikincil" daha kolay izlemek için. Son olarak, farklı bir Azure bölgesinde koyduğunuzdan emin olun. Onu istediğiniz yere koyabilirsiniz ancak kullanmanız önerilir [Azure eşleştirilmiş bölgeleri](../best-practices-availability-paired-regions.md). İkincil konu ve abonelik farklı bir bölgede koyarak birincil bölgeye devre dışı kalsa bile yeni olaylarınızı akışı sağlar.
+1. İkinci konuyu ve aboneliğinizi oluşturmak için aynı akışı tekrarlayın. Bu kez, daha kolay izleme için "-PRIMARY" sonekini "-Secondary" ile değiştirin. Son olarak, farklı bir Azure bölgesine yerleştirdiğinizden emin olun. İstediğiniz yere koyabilmeniz mümkün olsa da, [Azure eşlenmiş bölgelerini](../best-practices-availability-paired-regions.md)kullanmanız önerilir. İkincil konu ve aboneliğin farklı bir bölgeye yerleştirilmesi, birincil bölge aşağı gitse bile yeni olaylarınızın akmasını sağlar.
 
-Artık sahip olmalıdır:
+Şimdi şunları yapmalısınız:
 
-   * Test etmek için bir olay alıcısı Web sitesi.
-   * Birincil bölgede, birincil bir konu.
-   * Birincil Konunuza olay alıcısı Web sitesine bağlanma birincil olay aboneliği.
-   * İkincil bir konu, ikincil bölgede.
-   * Birincil Konunuza olay alıcısı Web sitesine bağlanma ikincil olay aboneliği.
+   * Test için bir olay alıcısı Web sitesi.
+   * Birincil bölgenizdeki birincil konu.
+   * Birincil bir olay aboneliği, birincil konuyu olay alıcısı Web sitesine bağlayan.
+   * İkincil bölgenizdeki ikincil konu.
+   * Birincil konuyu olay alıcısı Web sitesine bağlayan ikincil bir olay aboneliği.
 
 ## <a name="implement-client-side-failover"></a>İstemci tarafı yük devretmeyi uygulama
 
-Konuları ve abonelikleri Kurulum bölgesel olarak yedekli bir çift olduğuna göre istemci tarafı yük devredilmesini hazırsınız. Bunu yapmanın birkaç yolu vardır, ancak tüm yük devretme uygulamalarında ortak bir özellik gerekir: bir konu artık sağlam değilse bir konu başlığına trafiği yönlendirir.
+Bölgesel olarak yedekli konu ve abonelik kurulumuna sahip olduğunuza göre, istemci tarafı yük devretmeyi uygulamaya hazırsınız demektir. Bunu yapmanın birkaç yolu vardır, ancak tüm yük devretme uygulamalarının ortak bir özelliği olacaktır: bir konu artık sağlıklı değilse, trafik diğer konuya yönlendirilir.
 
-### <a name="basic-client-side-implementation"></a>Temel istemci-tarafı uygulaması
+### <a name="basic-client-side-implementation"></a>Temel istemci tarafı uygulama
 
-Aşağıdaki örnek kod, her zaman öncelikle birincil Konunuza yayımlama girişiminde basit bir .NET yayımcısıdır. Başarısız olursa, sonra yük devretmesi yapar ikincil konu. Her iki durumda da, da sistem denetler API üzerinde bir alma yaparak diğer konu `https://<topic-name>.<topic-region>.eventgrid.azure.net/api/health`. Sağlıklı bir konu her zaman ile yanıt vermelidir **200 Tamam** ne zaman bir GET yapılan üzerinde **/api/sistem durumu** uç noktası.
+Aşağıdaki örnek kod, öncelikle birincil konu başlığında her zaman yayımlamayı deneyecek basit bir .NET yayımcısıdır. Başarılı olmazsa ikincil konunun yükünü devreder. Her iki durumda da, `https://<topic-name>.<topic-region>.eventgrid.azure.net/api/health`bir GET yaparak diğer konunun Sağlık API 'sini de denetler. **/Api/Health** uç NOKTASıNDA bir get yapıldığında sağlıklı bir konu, her zaman **200 Tamam** ile yanıt vermelidir.
 
 ```csharp
 using System;
@@ -188,27 +188,27 @@ namespace EventGridFailoverPublisher
 
 ### <a name="try-it-out"></a>Deneyin
 
-Bütün bileşenleriniz yerinde sahip olduğunuza göre yük devretme uygulamanızı test edebilirsiniz. Yukarıdaki örnek, Visual Studio Code'u veya sık kullandığınız ortamınızı çalıştırın. Aşağıdaki dört değerden uç noktaları ve anahtarları, konulardan değiştirin:
+Tüm bileşenlerinizin hazır olduğuna göre, yük devretme uygulamanızı test edebilirsiniz. Yukarıdaki örneği Visual Studio Code veya sık kullandığınız ortamda çalıştırın. Aşağıdaki dört değeri, başlıklarınızın uç noktaları ve anahtarlarıyla değiştirin:
 
-   * primaryTopic - birincil konu başlığınız için uç nokta.
-   * secondaryTopic - ikincil konu başlığınız için uç nokta.
-   * primaryTopicKey - birincil Konunuza ait anahtar.
-   * secondaryTopicKey - ikincil Konunuza ait anahtar.
+   * primaryTopic konusu-birincil konunun uç noktası.
+   * secondaryTopic-ikincil konu başlığı için uç nokta.
+   * primaryTopicKey-birincil konu başlığı için anahtar.
+   * secondaryTopicKey-ikincil konu başlığı için anahtar.
 
-Olay yayımcısı çalıştırmayı deneyin. Aşağıdaki gibi Event Grid Görüntüleyicisi'nde, test olaylarını land görmeniz gerekir.
+Olay yayımcısını çalıştırmayı deneyin. Test olaylarınızı aşağıdaki gibi Event Grid görüntüleyiciniz içinde görmeniz gerekir.
 
-![Event Grid birincil olay aboneliği](./media/custom-disaster-recovery/event-grid-viewer.png)
+![Birincil olay aboneliğini Event Grid](./media/custom-disaster-recovery/event-grid-viewer.png)
 
-Yük devretme çalıştığından emin olmak için birkaç karakter birincil konu anahtarınızı artık geçerli hale getirmek için değiştirebilirsiniz. Yayımcısı'nı yeniden çalıştırmayı deneyin. Konsolunuzda baktığınızda, bunlar artık ikincil konu yayımlanmakta olduğunu görürsünüz ancak yine de, Event Grid Görüntüleyicisi'nde, yeni olayları görüyor olmalısınız.
+Yük devretmenin çalıştığından emin olmak için, birincil konu anahtarınıza ait birkaç karakteri değiştirerek, bu anahtarı artık geçerli olmayacak hale getirebilirsiniz. Yayımcıyı yeniden çalıştırmayı deneyin. Event Grid görüntüleyicide yeni olayları görmeye devam etmelisiniz, ancak konsolunuza baktığınızda, artık ikincil konu aracılığıyla yayımlanmakta olduklarını görürsünüz.
 
 ### <a name="possible-extensions"></a>Olası uzantılar
 
-Gereksinimlerinize göre bu örnek genişletmek için birçok yolu vardır. Yüksek hacimli senaryolar için düzenli olarak konunun durumu denetlemek isteyebilirsiniz API bağımsız olarak. Bu şekilde, aşağı gitmek için bir konu varsa her tek yayımlama denetleyin gerekmez. Bir konuya iyi durumda olmayan öğrendikten sonra ikincil konuya yayımlamaya varsayılan.
+Bu örneği ihtiyaçlarınıza göre genişletmek için birçok yol vardır. Yüksek hacimli senaryolar için konunun sistem durumu API 'sini bağımsız olarak düzenli olarak denetlemek isteyebilirsiniz. Bu şekilde, bir konu daha aşağı gidiyor olması halinde, her bir tek yayımlama ile onu denetlemeniz gerekmez. Bir konunun sağlıklı olmadığını öğrendikten sonra, ikincil konuyu yayımlamak için varsayılan olarak ' yi kullanabilirsiniz.
 
-Benzer şekilde, belirli gereksinimlerinize göre yeniden çalışma mantığı kullanmak isteyebilirsiniz. En yakın veri merkezine yayımlama gecikme süresini azaltmak için kritik öneme sahipse, sistem durumu araştırma düzenli aralıklarla API bir konunun yük devretti. Tekrar iyi durumda olduğunda, yeniden çalışma yakın veri merkezine güvenlidir bilirsiniz.
+Benzer şekilde, özel gereksinimlerinize göre yeniden çalışma mantığı uygulamak isteyebilirsiniz. En yakın veri merkezine yayımlama işlemi, gecikme süresini azaltmanız açısından önemli olursa, yük devredilen bir konunun Sağlık API 'sini düzenli olarak araştırmanız gerekir. Yeniden sağlıklı olduktan sonra, daha yakın veri merkezine yeniden çalışmaya yönelik güvenli olduğunu bilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi edinmek için nasıl [bir http uç noktasında olayları alma](./receive-events.md)
-- Bulma nasıl [olayları yönlendirmek için karma bağlantılar](./custom-event-to-hybrid-connection.md)
-- Hakkında bilgi edinin [Traffic Manager ve Azure DNS kullanarak olağanüstü durum kurtarma](https://docs.microsoft.com/azure/networking/disaster-recovery-dns-traffic-manager)
+- [Http uç noktasında olay alma](./receive-events.md) hakkında bilgi edinin
+- [Olayların karma bağlantılar nasıl yönlendirileceğini](./custom-event-to-hybrid-connection.md) öğrenin
+- [Azure DNS ve Traffic Manager kullanarak olağanüstü durum kurtarma](https://docs.microsoft.com/azure/networking/disaster-recovery-dns-traffic-manager) hakkında bilgi edinin

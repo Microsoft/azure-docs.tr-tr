@@ -5,89 +5,108 @@ services: virtual-machines
 author: cynthn
 ms.service: virtual-machines
 ms.topic: include
-ms.date: 06/27/2019
+ms.date: 11/06/2019
 ms.author: cynthn
 ms.custom: include file
-ms.openlocfilehash: cae108a1d4226e8c0fe39f9cd1cedc1e6a024ffc
-ms.sourcegitcommit: c63e5031aed4992d5adf45639addcef07c166224
+ms.openlocfilehash: 729e757c69887bbdce324e2d8383c970995dc94a
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67465436"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73903662"
 ---
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma 
 
-[https://portal.azure.com](https://portal.azure.com ) adresinden Azure portalında oturum açın.
+https://portal.azure.com adresinden Azure portalında oturum açın.
 
 > [!NOTE]
-> Önizleme sırasında paylaşılan resim galerileri kullanmak için kayıtlı, yeniden kaydetmeniz gerekebilir `Microsoft.Compute` sağlayıcısı. Açık [Cloud Shell](https://shell.azure.com/bash) ve türü: `az provider register -n Microsoft.Compute`
+> Önizleme sırasında paylaşılan görüntü galerileri ' ni kullanmak için kaydolduysanız `Microsoft.Compute` sağlayıcıyı yeniden kaydetmeniz gerekebilir. [Cloud Shell](https://shell.azure.com/bash) açın ve şunu yazın: `az provider register -n Microsoft.Compute`
 
-## <a name="create-an-image-gallery"></a>Bir görüntü Galerisi oluşturma
+## <a name="create-an-image-gallery"></a>Görüntü galerisi oluşturma
 
-Bir görüntü Galerisine görüntü paylaşımına etkinleştirmek için kullanılan birincil kaynaktır. Galeri adı için izin verilen karakterler büyük veya küçük harf, rakam, nokta ve dönemleri olur. Galeri adı kısa çizgi içeremez.  Galeri adları, abonelik içinde benzersiz olmalıdır. 
+Görüntü Galerisi, görüntü paylaşımını etkinleştirmek için kullanılan birincil kaynaktır. Galeri adı için izin verilen karakterler büyük veya küçük harflerden, rakamlardan, noktalardan ve noktalardan oluşur. Galeri adı tire içeremez.  Galeri adları, aboneliğiniz dahilinde benzersiz olmalıdır. 
 
-Aşağıdaki örnekte adlı bir galeridir oluşturur *myGallery* içinde *myGalleryRG* kaynak grubu.
+Aşağıdaki örnek *Mygallerrg* kaynak grubunda *MyGallery* adlı bir galeri oluşturur.
 
 1. Azure portalının sol üst köşesinde bulunan **Kaynak oluştur** öğesini seçin.
-1. Türü kullanmak **paylaşılan görüntü Galerisi** seçip arama kutusuna **paylaşılan görüntü Galerisi** sonuçları.
-1. İçinde **paylaşılan görüntü Galerisi** sayfasında **Oluştur**.
+1. Arama kutusundaki **paylaşılan görüntü galerisini** yazın ve sonuçlarda **paylaşılan görüntü Galerisi** ' ni seçin.
+1. **Paylaşılan görüntü Galerisi** sayfasında, **Oluştur**' a tıklayın.
 1. Doğru aboneliği seçin.
-1. İçinde **kaynak grubu**seçin **Yeni Oluştur** ve türü *myGalleryRG* adı.
-1. İçinde **adı**, türü *myGallery* galeri adı.
-1. İçin varsayılan değeri bırakın **bölge**.
-1. Gibi galeri kısa bir açıklamasını yazın *görüntü Galerim test etmek için.* ve ardından **gözden geçir + Oluştur**.
-1. Doğrulama denetimini geçtikten seçin **Oluştur**.
-1. Dağıtım tamamlandığında seçin **kaynağa Git**.
+1. **Kaynak grubu**' nda **Yeni oluştur** ' u seçin ve ad için *mygallerrg* yazın.
+1. **Ad**alanına Galeri adı Için *MyGallery* yazın.
+1. **Bölge**için varsayılan ' i bırakın.
+1. *Test için görüntü galerim* gibi, galerinin kısa bir açıklamasını yazabilirsiniz. sonra **gözden geçir + oluştur**' a tıklayın.
+1. Doğrulama geçtikten sonra **Oluştur**' u seçin.
+1. Dağıtım bittiğinde **Kaynağa Git**' i seçin.
    
-## <a name="create-an-image-definition"></a>Bir görüntü tanımı oluşturun 
+## <a name="create-an-image-definition"></a>Görüntü tanımı oluşturma 
 
-Resimler için mantıksal bir gruplandırmasını görüntü tanımları oluşturun. Bunlar, bunların içinde oluşturulan görüntü sürümleri hakkında bilgi yönetmek için kullanılır. Görüntü tanımı adları büyük veya küçük harf, rakam, nokta, kısa çizgi ve dönemleri meydana gelebilir. Bir görüntü tanımı için belirtebileceğiniz değerler hakkında daha fazla bilgi için bkz. [görüntü tanımları](https://docs.microsoft.com/azure/virtual-machines/windows/shared-image-galleries#image-definitions).
+Görüntü tanımları görüntüler için bir mantıksal gruplama oluşturur. Bunlar içinde oluşturulan görüntü sürümleri hakkındaki bilgileri yönetmek için kullanılır. Görüntü tanımı adları büyük veya küçük harflerden, rakamlardan, noktalardan, çizgilerden ve noktalardan oluşabilir. Bir görüntü tanımı için belirtebileceğiniz değerler hakkında daha fazla bilgi için bkz. [görüntü tanımları](https://docs.microsoft.com/azure/virtual-machines/windows/shared-image-galleries#image-definitions).
 
-Galeriniz içinde galeri görüntüsü tanımı oluşturun. Bu örnekte, Galeri görüntüsü adlı *myImageDefinition*.
+Galerinizin içinde galeri görüntü tanımını oluşturun. Bu örnekte, Galeri görüntüsü *Myımagedefinition*olarak adlandırılmıştır.
 
-1. Seçin sayfasında, yeni bir görüntü Galerisi, **yeni bir görüntü tanımı eklemek** sayfanın üst. 
-1. İçin **görüntü tanımı adı**, türü *myImageDefinition*.
-1. İçin **işletim sistemi**, uygulamanızın kaynak görüntüyü temel alarak doğru seçeneğini belirleyin.
-1. İçin **yayımcı**, türü *myPublisher*. 
-1. İçin **teklif**, türü *myOffer*.
-1. İçin **SKU**, türü *mySKU*.
-1. İşiniz bittiğinde seçin **gözden geçir + Oluştur**.
-1. Görüntü tanımı doğrulama denetimini geçtikten seçin **Oluştur**.
-1. Dağıtım tamamlandığında seçin **kaynağa Git**.
+1. Yeni görüntü galerinizin sayfasında, sayfanın üst kısmından **Yeni bir görüntü tanımı Ekle** ' yi seçin. 
+1. **Görüntü tanımı adı**Için *myımagedefinition*yazın.
+1. **İşletim sistemi**için, kaynak sanal makinenize göre doğru seçeneği belirleyin.
+1. **VM oluşturma**IÇIN kaynak sanal makinenize göre seçeneğini belirleyin. Çoğu durumda bu, *Gen 1*olacaktır. Daha fazla bilgi için bkz. [2. nesil sanal makineler Için destek](https://docs.microsoft.com/azure/virtual-machines/windows/generation-2).
+1. **İşletim sistemi durumu**için, kaynak sanal makinenize göre seçeneğini belirleyin. Daha fazla bilgi için bkz. [Genelleştirilmiş ve özelleştirilmiş](../articles/virtual-machines/linux/shared-image-galleries.md#generalized-and-specialized-images).
+1. **Yayımcı**Için *MyPublisher*yazın. 
+1. **Teklif**Için *myteklifini*yazın.
+1. **SKU**Için *mysku*yazın.
+1. İşiniz bittiğinde, **gözden geçir + oluştur**' u seçin.
+1. Görüntü tanımı doğrulamayı geçtikten sonra **Oluştur**' u seçin.
+1. Dağıtım bittiğinde **Kaynağa Git**' i seçin.
 
 
 ## <a name="create-an-image-version"></a>Görüntü sürümü oluşturma
 
-Görüntü sürümü, yönetilen bir görüntüden oluşturun. Bu örnekte, görüntü sürümü olan *1.0.0* ve her ikisi de çoğaltılır *Batı Orta ABD* ve *Orta Güney ABD* veri merkezleri. Çoğaltma için hedef bölgeler seçerken, ayrıca eklemek zorunda olmadığını unutmayın *kaynak* çoğaltma için hedef bölgede.
+Yönetilen görüntüden bir görüntü sürümü oluşturun. Bu örnekte, görüntü sürümü *1.0.0* ve hem *Orta Batı ABD* hem de *Orta Güney ABD* veri merkezlerine çoğaltılır. Çoğaltma için hedef bölge seçerken, *kaynak* bölgeyi çoğaltma için hedef olarak da dahil etmeniz gerektiğini unutmayın.
 
-Görüntü sürümü için izin verilen karakter, sayı ve dönemleri ' dir. Sayı 32-bit tamsayı aralığında olmalıdır. Biçim: *MajorVersion*. *MinorVersion*. *Düzeltme Eki*.
+Görüntü sürümü için izin verilen karakterler rakamlardan ve dönemlerdir. Sayılar 32 bitlik bir tamsayı aralığında olmalıdır. Biçim: *MajorVersion*. *MinorVersion*. *Düzeltme Eki*.
 
-1. Görüntü tanımınız için sayfasında seçin **Ekle sürüm** sayfanın üst.
-1. İçinde **bölge**, yönetilen, görüntünün depolandığı bölgeyi seçin. Yansıma sürümü öğesinden oluşturulan aynı bölgede yönetilen bir görüntü olarak oluşturulması gerekir.
-1. İçin **adı**, türü *1.0.0*. Görüntü sürümü adı izlemelidir *ana*. *küçük*. *Düzeltme Eki* tam sayılar kullanılarak biçimlendirilecek. 
-1. İçinde **kaynak görüntüsü**, açılan listeden, kaynak yönetilen bir görüntü seçin.
-1. İçinde **son dışında tut**, varsayılan değerini bırakın *Hayır*.
-1. İçin **sonu yaşam tarihi**, birkaç ay sonra takvimden bir tarih seçin.
-1. İçinde **çoğaltma**, bırakın **varsayılan yineleme sayısı** 1 olarak. Kaynak bölgeye çoğaltmak, bu nedenle ilk çoğaltmayı varsayılan olarak bırakın ve sonra olacak şekilde ikinci bir çoğaltma bölge seçip için ihtiyaç duyduğunuz *Doğu ABD*.
-1. İşiniz bittiğinde **gözden geçir + Oluştur**. Azure yapılandırmasını doğrular.
-1. Görüntü sürümü doğrulama başarılı olduğunda seçin **Oluştur**.
-1. Dağıtım tamamlandığında seçin **kaynağa Git**.
+Bir görüntü sürümü oluşturma adımları, kaynağın genelleştirilmiş bir görüntü veya özelleştirilmiş bir VM 'nin anlık görüntüsü olmasına bağlı olarak biraz farklıdır. 
 
-Bu görüntünün hedef bölgeler tümüne biraz sürebilir.
+### <a name="option-generalized"></a>Seçenek: Genelleştirilmiş
 
-## <a name="share-the-gallery"></a>Galeri paylaşın
+1. Görüntü tanımınızın sayfasında, sayfanın üst kısmından **Sürüm Ekle** ' yi seçin.
+1. **Bölge**' de, yönetilen görüntünüzün depolandığı bölgeyi seçin. Görüntü sürümlerinin oluşturuldukları yönetilen görüntüyle aynı bölgede oluşturulması gerekir.
+1. **Ad**için *1.0.0*yazın. Görüntü sürümü adı *büyük*olmalıdır. *küçük*. tamsayılar kullanarak *yama* biçimi. 
+1. **Kaynak görüntüde**, açılan listeden kaynak yönetilen görüntünüzü seçin.
+1. **En son dışında tut**' da, varsayılan değerini *Hayır*olarak bırakın.
+1. **Yaşam tarihi sonu**için, takvimdeki birkaç ay sonra takvimden bir tarih seçin.
+1. **Çoğaltma**bölümünde **varsayılan çoğaltma sayısını** 1 olarak bırakın. Kaynak bölgeye çoğaltma yapmanız gerekir, bu nedenle ilk çoğaltmayı varsayılan olarak bırakın ve sonra *Doğu ABD*olacak ikinci bir çoğaltma bölgesi seçin.
+1. İşiniz bittiğinde, **gözden geçir + oluştur**' u seçin. Azure yapılandırmayı doğrulayacaktır.
+1. Görüntü sürümü doğrulamayı geçtiğinde **Oluştur**' u seçin.
+1. Dağıtım bittiğinde **Kaynağa Git**' i seçin.
 
-Görüntü Galerisi düzeyinde erişim paylaştığınız öneririz. Aşağıda, yeni oluşturduğunuz galeri Paylaşımı aracılığıyla açıklanmaktadır.
+Görüntünün tüm hedef bölgelere çoğaltılması biraz zaman alabilir.
 
-1. [Azure portalı](https://portal.azure.com) açın.
-1. Soldaki menüde **kaynak grupları**. 
-1. Kaynak grupları listesinde seçin **myGalleryRG**. Kaynak grubunuz için bir dikey pencere açılır.
-1. Sol tarafındaki menüde **myGalleryRG** sayfasında **erişim denetimi (IAM)** . 
-1. Altında **bir rol ataması Ekle**seçin **Ekle**. **Bir rol ataması Ekle** bölmesi açılır. 
-1. Altında **rol**seçin **okuyucu**.
-1. Altında **erişim Ata**, varsayılan değerini bırakın **Azure AD kullanıcı, Grup veya hizmet sorumlusu**.
-1. Altında **seçin**, davet etmek istediğiniz kişinin e-posta adresini yazın.
-1. Kullanıcı, kuruluşunuz dışında ise, bir ileti görürsünüz **bu kullanıcının Microsoft ile işbirliği yapmasına tanıyan bir e-posta gönderilir.** E-posta adresiyle kullanıcı seçin ve ardından **Kaydet**.
+### <a name="option-specialized"></a>Seçenek: özelleştirilmiş
 
-Kullanıcı kuruluşunuz dışında ise, bunlar kuruluşa katılma bir e-posta davetiyesi alırsınız. Kullanıcının daveti kabul etmesi gerekir ve ardından galeri ve tüm görüntü tanımları ve sürümler kaynakların listelerinde görmeye devam.
+1. Görüntü tanımınızın sayfasında, sayfanın üst kısmından **Sürüm Ekle** ' yi seçin.
+1. **Bölge**' de, anlık görüntünün depolandığı bölgeyi seçin. Görüntü sürümlerinin oluşturuldukları kaynakla aynı bölgede oluşturulması gerekir.
+1. **Ad**için *1.0.0*yazın. Görüntü sürümü adı *büyük*olmalıdır. *küçük*. tamsayılar kullanarak *yama* biçimi. 
+1. **Işletim sistemi diski anlık görüntüsü**' nde, açılan LISTEDEN kaynak VM 'nizden anlık görüntüyü seçin. Kaynak sanal makinenizin eklemek istediğiniz bir veri diski varsa, açılan listeden doğru **LUN** numarasını seçin ve ardından **veri diski anlık görüntüsü**için veri diskinin anlık görüntüsünü seçin. 
+1. **En son dışında tut**' da, varsayılan değerini *Hayır*olarak bırakın.
+1. **Yaşam tarihi sonu**için, takvimdeki birkaç ay sonra takvimden bir tarih seçin.
+1. **Çoğaltma**bölümünde **varsayılan çoğaltma sayısını** 1 olarak bırakın. Kaynak bölgeye çoğaltma yapmanız gerekir, bu nedenle ilk çoğaltmayı varsayılan olarak bırakın ve sonra *Doğu ABD*olacak ikinci bir çoğaltma bölgesi seçin.
+1. İşiniz bittiğinde, **gözden geçir + oluştur**' u seçin. Azure yapılandırmayı doğrulayacaktır.
+1. Görüntü sürümü doğrulamayı geçtiğinde **Oluştur**' u seçin.
+1. Dağıtım bittiğinde **Kaynağa Git**' i seçin.
+
+## <a name="share-the-gallery"></a>Galeriyi paylaşma
+
+Görüntü Galerisi düzeyinde erişimi paylaşmanızı öneririz. Aşağıda, az önce oluşturduğunuz galerinin paylaşılması adım adım gösterilmektedir.
+
+1. [Azure portalını](https://portal.azure.com) açın.
+1. Soldaki menüde **kaynak grupları**' nı seçin. 
+1. Kaynak grupları listesinde **Mygallerrg**öğesini seçin. Kaynak grubunuz için dikey pencere açılır.
+1. **Mygallerrg** sayfasının solundaki menüde **ERIŞIM denetimi (IAM)** seçeneğini belirleyin. 
+1. **Rol ataması Ekle**altında **Ekle**' yi seçin. **Rol Ekleme atama** bölmesi açılır. 
+1. **Rol**altında **okuyucu**' yı seçin.
+1. **Erişim ata**' nın altında, varsayılan **Azure AD Kullanıcı, Grup veya hizmet sorumlusu**' nı bırakın.
+1. **Seç**' in altında, davet etmek istediğiniz kişinin e-posta adresini yazın.
+1. Kullanıcı kuruluşunuzun dışındaysa, **Bu kullanıcıya Microsoft ile işbirliği yapmasına olanak tanıyan bir e-posta gönderileceğini belirten** iletiyi görürsünüz. E-posta adresine sahip kullanıcıyı seçin ve ardından **Kaydet**' e tıklayın.
+
+Kullanıcı kuruluşunuzun dışındaysa, kuruluşa katılması için bir e-posta daveti alırlar. Kullanıcının daveti kabul etmesi gerekir, bu durumda Galeri ve tüm görüntü tanımlarını ve sürümlerini kaynak listesinde görebilirler.
 

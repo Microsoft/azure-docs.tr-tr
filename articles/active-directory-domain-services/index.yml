@@ -1,96 +1,102 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure AD Etki Alanı Hizmetleri belgeleri
+summary: Uygulamalara Kerberos veya NTLM kimlik doğrulaması sağlamak ya da Azure VM’lerini yönetilen bir etki alanına eklemek için Azure Active Directory Domain Services kullanmayı öğrenin.
 metadata:
   title: Azure AD Etki Alanı Hizmetleri belgeleri
-  description: 'Azure sanal makinelerini etki alanı denetleyicileri kullanmak zorunda kalmadan bir etki alanına eklemek için Active Directory Domain Services’ı kullanmayı öğrenin. Öğreticiler ve diğer belgeler, grup ilkelerini kullanarak sanal makineleri nasıl yönetebileceğinizle ilgili bilgiler içerir.'
-  keywords: 'Azure AD, Azure, etki alanına katılma, grup ilkesi, LDAP, Kerberos, etki alanı denetleyicisi, DC, lift-and-shift'
+  description: Uygulamalara Kerberos veya NTLM kimlik doğrulaması sağlamak ya da Azure VM’lerini yönetilen bir etki alanına eklemek için Azure Active Directory Domain Services kullanmayı öğrenin.
+  services: service
+  ms.service: active-directory
+  ms.subservice: domain-services
+  ms.topic: landing-page
+  ms.collection: collection
   author: iainfoulds
   ms.author: iainfou
   manager: daveba
-  ms.date: 05/22/2019
-  ms.topic: landing-page
-  ms.devlang: na
-  ms.service: active-directory
-  ms.subservice: domain-services
-sections:
-  - items:
-      - type: markdown
-        text: 'Azure sanal makinelerini etki alanı denetleyicileri kullanmak zorunda kalmadan bir etki alanına eklemek için Active Directory Domain Services’ı kullanmayı öğrenin. Öğreticiler ve diğer belgeler, grup ilkelerini kullanarak sanal makineleri nasıl yönetebileceğinizle ilgili bilgiler içerir.'
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 2
-        items:
-          - href: overview.md
-            html: <p>Azure AD Domain Services'in sizin için neler yapabileceğini okuyun.</p>
-            image:
-              src: 'https://docs.microsoft.com/media/common/i_investigate.svg'
-            title: Azure AD Etki Alanı Hizmetleri nedir?
-          - href: create-instance.md
-            html: <p>Bu basit yönergelerle kendi yönetilen etki alanınızı oluşturun.</p>
-            image:
-              src: 'https://docs.microsoft.com/media/common/i_deploy.svg'
-            title: Başlarken
-          - href: contact-us.md
-            html: <p>İhtiyacınız olduğunda yardım alın.</p>
-            image:
-              src: 'https://docs.microsoft.com/media/common/i_support.svg'
-            title: Destek alın
-          - href: 'https://azure.microsoft.com/updates/?product=active-directory-ds'
-            html: <p>Azure AD Domain Services'teki yeni özelliklere bakın.</p>
-            image:
-              src: 'https://docs.microsoft.com/media/common/i_whats-new.svg'
-            title: Yenilikler
-  - title: Videolar
-    items:
-      - type: markdown
-        text: '>[!VIDEO https://www.youtube.com/embed/T1Nd9APNceQ]'
-  - title: Planlama makaleleri
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="comparison.md">Hizmetin sizin için doğru olup olmadığına karar verin?</a>
-          - html: <a href="active-directory-ds-features.md">Azure AD Domain Services özellikleri</a>
-          - html: <a href="scenarios.md">Hizmeti nasıl kullanabilirsiniz?</a>
-          - html: <a href="synchronization.md">Azure AD Domain Services'te eşitlemenin nasıl çalıştığını öğrenin</a>
-          - html: '<a href="https://azure.microsoft.com/pricing/details/active-directory-ds/">Azure AD Domain Services fiyatlandırması</a>'
-  - title: Uygulamalar ve Azure AD Domain Services
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="deploy-azure-app-proxy.md">Azure AD Uygulama Ara Sunucusu</a>
-          - html: <a href="deploy-sp-profile-sync.md">SharePoint Server için profil eşitleme</a>
-          - html: <a href="deploy-kcd.md">Kerberos Kısıtlanmış Temsilini Yapılandırma</a>
-  - title: Nasıl yapılır makaleleri
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="check-health.md">Yönetilen bir etki alanının sistem durumunu denetleme </a>
-          - html: <a href="csp.md">Azure CSP Abonelikleri ve Azure AD Domain Services</a>
-          - html: <a href="manage-dns.md">DNS'yi yönetme</a>
-          - html: <a href="network-considerations.md">Sanal ağ seçme</a>
-          - html: <a href="configure-ldaps.md">Güvenli LDAP'yi yapılandırma</a>
-          - html: <a href="create-ou.md">OU oluşturma</a>
-          - html: <a href="manage-group-policy.md">Grup İlkesi'ni yönetme</a>
-  - title: Sorun giderme makaleleri
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="troubleshoot.md">Sorun giderme kılavuzu</a>
-          - html: <a href="troubleshoot-alerts.md">Yönetilen etki alanınızdaki uyarılarla ilgili sorun giderme</a>
-          - html: <a href="faqs.md">Sık Sorulan Sorular</a>
-          - html: '<a href="https://azure.microsoft.com/support/options/">Destek alın</a>'
-  - title: Diğer kaynaklar
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://feedback.azure.com/forums/169401-azure-active-directory/">UserVoice''te Azure AD Domain Services için geri bildirim gönderme</a>'
-          - html: '<a href="https://azure.microsoft.com/roadmap/?category=security-identity">Azure Yol Haritası</a>'
-          - html: '<a href="https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-contact-us">Bize Ulaşın</a>'
+  ms.date: 08/01/2019
+  ms.openlocfilehash: f5fa27e19da6bb64b7e214ec32cbfbf0a417118e
+  ms.sourcegitcommit: dcf3e03ef228fcbdaf0c83ae1ec2ba996a4b1892
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/23/2019
+  ms.locfileid: "70010574"
+landingContent:
+- title: About Azure AD Domain Services
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD Etki Alanı Hizmetleri nedir?
+      url: overview.md
+    - text: Kimlik çözümlerini karşılaştırın
+      url: compare-identity-solutions.md
+  - linkListType: concept
+    links:
+    - text: Eşitleme süreci nasıl işler?
+      url: synchronization.md
+    - text: SSS
+      url: faqs.md
+- title: Başlarken
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: Yönetilen etki alanı oluşturma
+      url: tutorial-create-instance.md
+  - linkListType: tutorial
+    links:
+    - text: Windows Server VM’sini etki alanına ekleme
+      url: join-windows-vm.md
+    - text: Yönetim araçlarını yükleme
+      url: tutorial-create-management-vm.md
+- title: Yapılandırma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Güvenli LDAP'yi yapılandırma
+      url: tutorial-configure-ldaps.md
+  - linkListType: how-to-guide
+    links:
+    - text: Parola karması eşitlemeyi etkinleştirme
+      url: tutorial-configure-password-hash-sync.md
+    - text: Kuruluş birimi (OU) oluşturma
+      url: create-ou.md
+    - text: Kerberos Kısıtlanmış Temsilini Yapılandırma
+      url: deploy-kcd.md
+    - text: Yönetilen etki alanının güvenliğini sağlama
+      url: secure-your-domain.md
+- title: Yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Grup ilkesini yönetme
+      url: manage-group-policy.md
+    - text: DNS'yi yönetme
+      url: manage-dns.md
+    - text: Sistem durumunu denetleme
+      url: check-health.md
+    - text: E-posta bildirimlerini yapılandırma
+      url: notifications.md
+    - text: Güvenlik denetimlerini etkinleştirme (önizleme)
+      url: security-audit-events.md
+- title: VM’leri etki alanına ekleme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Windows Server
+      url: join-windows-vm.md
+  - linkListType: how-to-guide
+    links:
+    - text: Ubuntu Server
+      url: join-ubuntu-linux-vm.md
+    - text: Red Hat Enterprise Linux
+      url: join-rhel-linux-vm.md
+- title: Sorun giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Genel sorunlar
+      url: troubleshoot.md
+    - text: Ortak uyarı iletileri
+      url: troubleshoot-alerts.md
+    - text: Ağ güvenlik grubu sorunları
+      url: alert-nsg.md
+    - text: Güvenli LDAP hataları
+      url: alert-ldaps.md

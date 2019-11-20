@@ -1,6 +1,6 @@
 ---
-title: Sertifikalar ve Azure App Service ortamı-
-description: Bir ASE üzerinde sertifikalar ilgili çeşitli konularda açıklanır
+title: Sertifikalar ve App Service Ortamı-Azure
+description: Ao 'da sertifikalarla ilgili çok sayıda konuyu açıklayın
 services: app-service
 documentationcenter: na
 author: ccompy
@@ -9,44 +9,43 @@ ms.assetid: 9e21a7e4-2436-4e81-bb05-4a6ba70eeaf7
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 08/29/2018
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: ba34638bbdb838adc6f1e61b1f8b07a6915815c0
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: a8b8e7270851c71869b1a67f0f0f0ba2187f0e87
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67540771"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73470663"
 ---
-# <a name="certificates-and-the-app-service-environment"></a>Sertifikalar ve App Service ortamı 
+# <a name="certificates-and-the-app-service-environment"></a>Sertifikalar ve App Service Ortamı 
 
-App Service engelleniyorsa, Azure App Service, Azure sanal ağ içinde çalıştırılan bir dağıtımıdır. Bir Internet erişilebilir bir uygulama uç noktası veya ağınızda bir uygulama uç noktası ile dağıtılabilir. İnternet erişilebilir uç noktası ile ASE dağıtırsanız, bu dağıtımın dış ASE olarak adlandırılır. Ağınızda bir uç nokta ile ASE dağıtırsanız, bu dağıtım, ILB ASE olarak adlandırılır. ILB ASE'de hakkında daha fazla bilgi [oluşturma ve kullanma ILB ASE](https://docs.microsoft.com/azure/app-service/environment/create-ilb-ase) belge.
+App Service Ortamı (ASE), Azure sanal ağınız (VNet) içinde çalışan Azure App Service bir dağıtımdır. İnternet erişimli bir uygulama uç noktası veya VNet 'iniz içindeki bir uygulama uç noktası ile dağıtılabilir. Ao 'yu internet 'ten erişilebilen bir uç noktayla dağıtırsanız, bu dağıtıma dış Ao denir. ASE 'yi VNet 'iniz içindeki bir uç noktayla dağıtırsanız, bu dağıtıma ıLB ASE denir. ILB ATıCı hakkında daha fazla bilgiyi [oluşturma ve kullanma](https://docs.microsoft.com/azure/app-service/environment/create-ilb-ase) hakkında bilgi edinebilirsiniz.
 
-ASE tek kiracılı bir sistemdir. Tek kiracılı olduğu için bazı özellikler mevcuttur çok kiracılı App Service içinde kullanılabilir olmayan bir ASE ile kullanılabilir. 
+ATıCı, tek bir kiracı sistemidir. Tek bir kiracı olduğundan, yalnızca çok kiracılı App Service kullanılamayan bir AO ile kullanılabilen bazı özellikler vardır. 
 
-## <a name="ilb-ase-certificates"></a>ILB ASE sertifikaları 
+## <a name="ilb-ase-certificates"></a>ILB ATıCı sertifikaları 
 
-Ardından dış ASE kullanıyorsanız, uygulamalarınızı [appname] ulaşıldı. [asename]. p.azurewebsites.net. Varsayılan olarak tüm ase, ILB ase bile, bu biçime uygun sertifikalar ile oluşturuldu. ILB ASE sahip olduğunuzda, uygulamaları, ILB ASE oluştururken belirttiğiniz etki alanı adına göre ulaşıldı. SSL desteği uygulamaların sertifikalarını yüklemek gerekir. İç sertifika yetkililerini kullanarak harici bir verenden sertifika satın alma veya otomatik olarak imzalanan bir sertifika kullanarak geçerli bir SSL sertifikası alın. 
+Dış Ao kullanıyorsanız, uygulamalarınıza [AppName] adresinden ulaşılırsa. [asename]. p. azurewebsites. net. Varsayılan olarak, tüm ASE 'ler, hatta ıLB ASE, bu biçimi izleyen sertifikalarla oluşturulur. ILB Ao 'a sahip olduğunuzda, uygulamalar ıLB Ao oluştururken belirttiğiniz etki alanı adına göre yapılır. Uygulamaların SSL 'yi desteklemesi için sertifikaları karşıya yüklemeniz gerekir. İç sertifika yetkililerini kullanarak, bir dış verenden sertifika satın alarak veya otomatik olarak imzalanan bir sertifika kullanarak geçerli bir SSL sertifikası elde edin. 
 
-ILB ASE ile sertifikaları yapılandırma için iki seçenek vardır.  ILB ASE için varsayılan bir joker karakter sertifika ayarlayın veya ASE içindeki tek tek web apps'te sertifikaları ayarlayın.  Yaptığınız seçime bağımsız olarak, aşağıdaki sertifika özniteliklerinin doğru şekilde yapılandırılması gerekir:
+ILB Ao ile sertifikaları yapılandırmak için iki seçenek vardır.  ILB aşırı için bir joker karakter varsayılan sertifikası ayarlayabilir veya Ao 'daki ayrı Web uygulamalarında sertifikalar ayarlayabilirsiniz.  Yaptığınız seçim ne olursa olsun, aşağıdaki sertifika özniteliklerinin düzgün şekilde yapılandırılması gerekir:
 
-- **Konu:** Bu öznitelik ayarlanmalıdır *. [your-root-domain-here] joker nitelikli bir ILB ASE sertifikası için. Uygulamanız için sertifika oluşturuyorsanız, [appname] olmalıdır. [your-root-domain-here]
-- **Konu diğer adı:** Bu öznitelik her ikisini de içermelidir. *. [your-root-domain-here] ve *.scm. [your-kök-domain-here] joker ILB ASE sertifikası. Uygulamanız için sertifika oluşturuyorsanız, [appname] olmalıdır. [your-root-domain-here] ve [appname] .scm. [your-root-domain-here].
+- **Konu:** Bu öznitelik * olarak ayarlanmalıdır. [-root-Domain-Here] joker karakter ıLB AI sertifikası. Uygulamanız için sertifika oluşturuyorsanız, [AppName] olması gerekir. [root-Domain-buraya]
+- **Konu diğer adı:** Bu öznitelik, her ikisini de içermelidir. [-root-Domain-Here] ve *. scm. joker karakter ıLB Ao sertifikası için [-root-Domain-Here]. Uygulamanız için sertifika oluşturuyorsanız, [AppName] olması gerekir. [root-Domain-Here] ve [AppName]. scm. [root-Domain-Here].
 
-Üçüncü bir değişken bir joker karakter başvurusu kullanarak yerine sertifikanın SAN'daki tüm bilgilerinizi tek tek uygulama adları içeren bir ILB ASE sertifika oluşturabilirsiniz. Bu yöntem sorun Önden ASE'de faydalandığını uygulamaları adlarını bilmeniz gereken veya ILB ASE sertifikayı güncelleştirmek için ihtiyacınız olan.
+Üçüncü bir varyant olarak, bir joker karakter başvurusu kullanmak yerine, tek tek uygulama adlarınızın tamamını sertifikanın SAN 'ında içeren bir ıLB Ade sertifikası oluşturabilirsiniz. Bu yöntemde sorun, ASE 'ye yerleştirmekte olduğunuz uygulamaların adlarını bilmeniz veya ıLB ASE sertifikasını güncelleştirmeyi tutmanız gerekir.
 
-### <a name="upload-certificate-to-ilb-ase"></a>ILB ASE için sertifikayı karşıya yükleyin 
+### <a name="upload-certificate-to-ilb-ase"></a>Sertifikayı ıLB Ao 'ya yükle 
 
-Portalda bir ILB ASE oluşturulduktan sonra sertifika ILB ASE için ayarlamanız gerekir. Sertifika ayarlanana kadar ASE sertifika ayarlanmadı bir başlık gösterilir.  
+Portal 'da bir ıLB Ao oluşturulduktan sonra, ıLB Ao için sertifikanın ayarlanması gerekir. Sertifika ayarlanana kadar Ao, sertifikanın ayarlanmadığını belirten bir başlık gösterir.  
 
-Yüklediğiniz sertifikanın bir .pfx dosyası olmalıdır. Sertifika karşıya yüklendikten sonra ASE sertifika ayarlamak için bir ölçeklendirme işlemi gerçekleştirir. 
+Karşıya yüklediğiniz sertifika bir. pfx dosyası olmalıdır. Sertifika karşıya yüklendikten sonra ATıCı, sertifikayı ayarlamak için bir ölçeklendirme işlemi gerçekleştirir. 
 
-ASE oluşturma ve sertifika Portalı'nda veya hatta tek bir şablonda bir eylem olarak karşıya olamaz. Ayrı bir eylem açıklandığı gibi bir şablon kullanarak sertifikayı karşıya yükleyebilirsiniz [şablondan ASE oluşturma](./create-from-template.md) belge.  
+ASE 'yi oluşturamaz ve sertifikayı portalda tek bir eylem olarak veya bir şablonda karşıya yükleyemezsiniz. Ayrı bir eylem olarak, [bir](./create-from-template.md) şablon kullanarak bir şablonu kullanarak sertifikayı karşıya yükleyebilirsiniz.  
 
-Hızlı bir şekilde test etmek için bir kendinden imzalı bir sertifika oluşturmak istiyorsanız, aşağıdaki bit PowerShell kullanabilirsiniz:
+Test için otomatik olarak imzalanan bir sertifika oluşturmak istiyorsanız aşağıdaki PowerShell bitini kullanabilirsiniz:
 
     $certificate = New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "*.internal-contoso.com","*.scm.internal-contoso.com"
 
@@ -55,41 +54,41 @@ Hızlı bir şekilde test etmek için bir kendinden imzalı bir sertifika oluşt
 
     $fileName = "exportedcert.pfx"
     Export-PfxCertificate -cert $certThumbprint -FilePath $fileName -Password $password     
-Bir kendi kendini oluşturma cert imzalandığında CN biçiminde konu adına sahip olmak gerekir {ASE_NAME_HERE} _InternalLoadBalancingASE =.
+Kendinden imzalı bir sertifika oluştururken, konu adının CN = {ASE_NAME_HERE} _InternalLoadBalancingASE biçiminde olduğundan emin olmanız gerekir.
 
 ## <a name="application-certificates"></a>Uygulama sertifikaları 
 
-Bir ASE'de barındırılan uygulamalar, çok kiracılı App Service içinde kullanılabilir olan uygulama merkezli sertifika özelliklerini kullanabilirsiniz. Bu özellikler şunlardır:  
+ASA 'da barındırılan uygulamalar, çok kiracılı App Service bulunan uygulama merkezli sertifika özelliklerini kullanabilir. Bu özellikler şunları içerir:  
 
-- SNI sertifikaları 
-- Dış ASE ile yalnızca desteklenen IP tabanlı SSL.  ILB ASE, IP tabanlı SSL desteklemez.
-- Barındırılan KeyVault sertifikaları 
+- SNı sertifikaları 
+- Yalnızca bir dış Ao ile desteklenen IP tabanlı SSL.  ILB ATıCı, IP tabanlı SSL 'yi desteklemez.
+- Anahtar Kasası barındırılan sertifikaları 
 
-App Service SSL öğreticide karşıya yükleme ve bu sertifikaları yönetmek için yönergeleri kullanılabilir https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-ssl.  Web uygulamanıza atamış olduğunuz bir özel etki alanı adı ile eşleşmesi için sertifikaları yalnızca yapılandırıyorsanız, bu yönergeleri yeterli olacaktır. Bir ILB ASE web uygulamasının varsayılan etki alanı adıyla sertifika yüklüyorsanız, scm sitesine daha önce belirtildiği gibi sertifika SAN'da belirtin. 
+Bu sertifikaları yükleme ve yönetmeye yönelik yönergeler [Azure App Service ' de SSL sertifikası Ekle](../configure-ssl-certificate.md)' de kullanılabilir.  Sertifikaları Web uygulamanıza atadığınız özel bir etki alanı adıyla eşleşecek şekilde yapılandırıyorsanız, bu yönergeler de yeterli olur. Bir ıLB Ao Web uygulaması için sertifikayı varsayılan etki alanı adıyla karşıya yüklüyorsanız, daha önce belirtildiği gibi sertifikanın SAN 'ında SCM sitesini belirtin. 
 
 ## <a name="tls-settings"></a>TLS ayarları 
 
 Bir uygulama düzeyinde TLS ayarı yapılandırabilirsiniz.  
 
-## <a name="private-client-certificate"></a>Özel bir istemci sertifikası 
+## <a name="private-client-certificate"></a>Özel istemci sertifikası 
 
-Genel bir kullanım örneği, istemci bir istemci-sunucu modeli olarak uygulamanızı yapılandırmaktır. Sunucunuz özel bir CA sertifikası ile güvenli, uygulamanız için istemci sertifikasını karşıya yüklemek gerekir.  Aşağıdaki yönergeler, uygulamanızın üzerinde çalıştığı çalışan truststore sertifikaları yükler. Sertifika için bir uygulama yüklerseniz, bunu diğer uygulamalarla aynı App Service planında sertifikayı yeniden karşıya yüklemeye gerek kalmadan kullanabilirsiniz.
+Yaygın kullanım durumu, uygulamanızı istemci-sunucu modelinde istemci olarak yapılandırmaktır. Sunucunuzu özel bir CA sertifikasıyla güvenli hale getirmek istiyorsanız, istemci sertifikasını uygulamanıza yüklemeniz gerekecektir.  Aşağıdaki yönergeler, uygulamanızın üzerinde çalıştığı çalışanların truststore 'a sertifika yükler. Sertifikayı bir uygulamaya yüklerseniz, sertifikayı yeniden karşıya yüklemeden aynı App Service planındaki diğer uygulamalarınızla kullanabilirsiniz.
 
-Uygulamanıza ASE'nizi sertifikayı karşıya yüklemek için:
+Uygulamanızı kendi AŞIRINIZDEKI uygulamanıza yüklemek için:
 
-1. Oluşturmak bir *.cer* sertifikanız için dosya. 
-2. Azure portalındaki sertifikayla gereken uygulamaya gidin
-3. Uygulamasında SSL ayarlarına gidin. Sertifikayı Karşıya Yükle'ye tıklayın. Ortak seçin. Yerel makine seçin. Bir ad sağlayın. Gözat ve Seç, *.cer* dosya. Yükleme'yi seçin. 
+1. Sertifikanız için bir *. cer* dosyası oluşturun. 
+2. Azure portal sertifikaya ihtiyacı olan uygulamaya git
+3. Uygulamadaki SSL ayarları ' na gidin. Sertifikayı karşıya yükle ' ye tıklayın. Ortak seçeneğini belirleyin. Yerel makine ' yi seçin. Bir ad girin. *. Cer* dosyanıza gözatıp seçin. Karşıya yükle ' yi seçin. 
 4. Parmak izini kopyalayın.
-5. Uygulama Ayarları'na gidin. Bir uygulama ayarı WEBSITE_LOAD_ROOT_CERTIFICATES parmak iziyle değeri olarak oluşturun. Birden çok sertifikası varsa, bunları virgül ve gibi hiçbir boşluk tarafından ayrılmış ayarında koyabilirsiniz 
+5. Uygulama ayarları ' na gidin. Değer olarak parmak izine sahip WEBSITE_LOAD_ROOT_CERTIFICATES bir uygulama ayarı oluşturun. Birden çok sertifikanız varsa, bunları virgülle ayırarak aynı ayara ve şu şekilde boşluk olmaksızın koyabilirsiniz 
 
-    84EC242A4EC7957817B8E48913E50953552DAFA6,6A5C65DC9247F762FE17BF8D4906E04FE6B31819
+    84EC242A4EC7957817B8E48913E50953552DAFA6, 6A5C65DC9247F762FE17BF8D4906E04FE6B31819
 
-Sertifika aynı app service planında söz konusu ayarın yapılandırılmış uygulama olarak tüm uygulamalar tarafından kullanılabilir. Farklı bir App Service planındaki uygulamaları için kullanılabilir olması gerekiyorsa, bu App Service planında bir uygulamada uygulama ayarlama işlemini tekrarlamanız gerekir. Sertifika ayarlandığını denetlemek için Kudu konsoluna gidin ve hata ayıklama PowerShell konsolunda aşağıdaki komutu yürütün:
+Sertifika, bu ayarı yapılandıran uygulamayla aynı App Service planındaki tüm uygulamalar tarafından kullanılabilir. Farklı bir App Service planındaki uygulamalar için kullanılabilir olması gerekiyorsa, bu App Service planındaki bir uygulamada uygulama ayarı işlemini tekrarlamanız gerekir. Sertifikanın ayarlandığını denetlemek için, kudu konsoluna gidin ve PowerShell hata ayıklama konsolunda aşağıdaki komutu verin:
 
     dir cert:\localmachine\root
 
-Test gerçekleştirmek için kendinden imzalı bir sertifika oluşturabilir ve oluşturma bir *.cer* aşağıdaki PowerShell ile dosya: 
+Testi gerçekleştirmek için, otomatik olarak imzalanan bir sertifika oluşturabilir ve aşağıdaki PowerShell ile bir *. cer* dosyası oluşturabilirsiniz: 
 
     $certificate = New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "*.internal-contoso.com","*.scm.internal-contoso.com
 

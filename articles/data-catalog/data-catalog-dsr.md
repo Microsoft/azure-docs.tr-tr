@@ -1,22 +1,21 @@
 ---
-title: Azure veri Kataloğu desteklenen veri kaynakları
-description: Bu makale, şu anda desteklenen veri kaynakları özellikleri listeler.
-services: data-catalog
+title: Azure Veri Kataloğu 'nda desteklenen veri kaynakları
+description: Bu makalede, Azure Veri Kataloğu için şu anda desteklenen veri kaynaklarının belirtimleri listelenmektedir.
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 04/15/2019
-ms.openlocfilehash: 85753e788284396262053aad8cf567ad5cd71fee
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.date: 08/01/2019
+ms.openlocfilehash: 8f148bfe08d5f7933857eb46cf0d13d4582da108
+ms.sourcegitcommit: 78ebf29ee6be84b415c558f43d34cbe1bcc0b38a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67509290"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "68950272"
 ---
-# <a name="supported-data-sources-in-azure-data-catalog"></a>Azure veri Kataloğu desteklenen veri kaynakları
+# <a name="supported-data-sources-in-azure-data-catalog"></a>Azure Veri Kataloğu 'nda desteklenen veri kaynakları
 
-Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez kayıt aracı veya bilgileri el ile doğrudan Azure veri Kataloğu'na girerek web portalında. Aşağıdaki tabloda, bugün katalog ve yayımlama özellikleri tarafından her biri için desteklenen tüm veri kaynakları özetlenmektedir. Ayrıca, her veri kaynağı "birlikte açma" portal deneyimlerimizden başlatabilirsiniz dış veri Araçlar listelenmiştir. İkinci tablonun her veri kaynağı bağlantı özelliği daha teknik belirtimini içerir.
+Meta verileri ortak bir API veya bir tıklama-bir kayıt aracı kullanarak ya da doğrudan Azure Veri Kataloğu web portalına el ile girerek yayımlayabilirsiniz. Aşağıdaki tablo, bugün Katalog tarafından desteklenen tüm veri kaynaklarını ve her biri için yayımlama yeteneklerini özetler. Ayrıca, her bir veri kaynağının Portal "açık" deneyimimizden başlatabileceği dış veri araçları da listelenmiştir. İkinci tablo, her veri kaynağı bağlantısı özelliğinin daha teknik bir belirtimini içerir.
 
 ## <a name="list-of-supported-data-sources"></a>Desteklenen veri kaynaklarının listesi
 
@@ -24,13 +23,13 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
     <tr>
        <td><b>Veri kaynağı nesnesi</b></td>
        <td><b>API</b></td>
-       <td><b>Elle giriş</b></td>
+       <td><b>El ile giriş</b></td>
        <td><b>Kayıt Aracı</b></td>
-       <td><b>Yönetimde açma araçları</b></td>
+       <td><b>Açık Araçlar</b></td>
        <td><b>Notlar</b></td>
     </tr>
     <tr>
-      <td>(Yalnızca Gen 1) Azure Data Lake Store dizini</td>
+      <td>Azure Data Lake Store Directory (yalnızca Gen 1)</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -38,7 +37,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>Azure Data Lake Store dosya (yalnızca Gen 1)</td>
+      <td>Azure Data Lake Store dosyası (yalnızca Gen 1)</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -120,7 +119,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>Oracle veritabanı tablosu</td>
+      <td>Oracle Database tablosu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -128,7 +127,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>Oracle veritabanı görünümü</td>
+      <td>Oracle Database görünümü</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -148,7 +147,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
-      <td>Excel, Power BI Desktop, SQL Server veri araçları</td>
+      <td>Excel, Power BI Desktop SQL Server veri araçları</td>
       <td></td>
     </tr>
     <tr>
@@ -156,7 +155,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
-      <td>Excel, Power BI Desktop, SQL Server veri araçları</td>
+      <td>Excel, Power BI Desktop SQL Server veri araçları</td>
       <td></td>
     </tr>
     <tr>
@@ -176,7 +175,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>SQL Server 2008 ve sonraki sürümler.</td>
     </tr>
     <tr>
-      <td>SQL Server Analysis Services ölçüsü</td>
+      <td>SQL Server Analysis Services ölçümü</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -184,7 +183,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>SQL Server 2008 ve sonraki sürümler.</td>
     </tr>
     <tr>
-      <td>SQL Server Analysis Services tablo</td>
+      <td>SQL Server Analysis Services tablosu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -192,19 +191,19 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>SQL Server 2008 ve sonraki sürümler.</td>
     </tr>
     <tr>
-      <td>SQL Server Reporting Services rapor</td>
+      <td>SQL Server Reporting Services raporu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
       <td>Browser</td>
-      <td>Yalnızca yerel mod sunucuları. SharePoint modu desteklenmiyor. SQL Server 2008 ve sonraki sürümler yalnızca</td>
+      <td>Yalnızca yerel mod sunucuları. SharePoint modu desteklenmez. Yalnızca SQL Server 2008 ve sonraki sürümler</td>
     </tr>
     <tr>
       <td>SQL Server tablosu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
-      <td>Excel, Power BI Desktop, SQL Server veri araçları</td>
+      <td>Excel, Power BI Desktop SQL Server veri araçları</td>
       <td>SQL Server 2008 ve sonraki sürümler.</td>
     </tr>
     <tr>
@@ -212,11 +211,11 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
-      <td>Excel, Power BI Desktop, SQL Server veri araçları</td>
+      <td>Excel, Power BI Desktop SQL Server veri araçları</td>
       <td>SQL Server 2008 ve sonraki sürümler.</td>
     </tr>
     <tr>
-      <td>Teradata tablo</td>
+      <td>Teradata tablosu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -224,7 +223,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>Teradata görüntüle</td>
+      <td>Teradata görünümü</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -237,7 +236,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td></td>
-      <td>Yalnızca İngilizce olarak çalışır. Desteklenmeyen ölçüler var.</td>
+      <td>Yalnızca Ingilizce olarak kullanılabilir. Ölçüler desteklenmez.</td>
     </tr>
     <tr>
       <td>SAP HANA görünümü</td>
@@ -248,7 +247,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>DB2 tablo</td>
+      <td>DB2 tablosu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -256,7 +255,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>DB2 görüntüle</td>
+      <td>DB2 görünümü</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -264,7 +263,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>Sistem dosyası</td>
+      <td>Dosya sistemi dosyası</td>
       <td>✓</td>
       <td></td>
       <td></td>
@@ -272,7 +271,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>FTP dizin</td>
+      <td>FTP dizini</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -280,7 +279,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>FTP dosya</td>
+      <td>FTP dosyası</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -304,7 +303,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>HTTP dosya</td>
+      <td>HTTP dosyası</td>
       <td>✓</td>
       <td></td>
       <td></td>
@@ -328,7 +327,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>PostgreSQL tablo</td>
+      <td>PostgreSQL tablosu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -336,7 +335,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>PostgreSQL görüntüle</td>
+      <td>PostgreSQL görünümü</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -373,10 +372,10 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td></td>
-      <td>Yalnızca eski koleksiyonları Azure DocumentDB ve Azure Cosmos DB SQL API koleksiyonlarında uyumludur. Yeni Cosmos DB API henüz desteklenmiyor. Azure DocumentDB veri kaynağı listesinden seçin.</td>
+      <td>Yalnızca Azure DocumentDB ve Azure Cosmos DB 'deki SQL API koleksiyonlarından eski koleksiyonlar uyumludur. Daha yeni Cosmos DB API 'Leri henüz desteklenmiyor. Veri kaynağı listesinde Azure DocumentDB ' yi seçin.</td>
     </tr>
     <tr>
-      <td>Genel ODBC tablo</td>
+      <td>Genel ODBC tablosu</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -384,7 +383,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td></td>
     </tr>
     <tr>
-      <td>Genel ODBC görüntüle</td>
+      <td>Genel ODBC görünümü</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -397,7 +396,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td></td>
-      <td>Genel bir ODBC varlığı yayımlayın</td>
+      <td>Genel bir ODBC varlığı olarak yayımlama</td>
     </tr>
     <tr>
       <td>Cassandra görünümü</td>
@@ -405,7 +404,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td></td>
-      <td>Genel bir ODBC varlığı yayımlayın</td>
+      <td>Genel bir ODBC varlığı olarak yayımlama</td>
     </tr>
     <tr>
       <td>Sybase tablosu</td>
@@ -429,7 +428,7 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td></td>
-      <td>Genel bir ODBC varlığı yayımlayın</td>
+      <td>Genel bir ODBC varlığı olarak yayımlama</td>
     </tr>
     <tr>
       <td>MongoDB görünümü</td>
@@ -437,16 +436,16 @@ Meta veri Genel API veya bir tıklama kullanarak yayımlayabilirsiniz-bir kez ka
       <td>✓</td>
       <td>✓</td>
       <td></td>
-      <td>Genel bir ODBC varlığı yayımlayın</td>
+      <td>Genel bir ODBC varlığı olarak yayımlama</td>
     </tr>
 </table>
 
-Desteklenen belirli bir veri kaynağına bakın, bunu önerir (veya zaten önerilen değilse, desteği ses) giderek isterseniz [Azure geri bildirim forumları veri Kataloğu](https://feedback.azure.com/forums/906052-data-catalog).
+Desteklenen belirli bir veri kaynağını görmek isterseniz, [Azure geri bildirim forumlarında veri kataloğuna](https://feedback.azure.com/forums/906052-data-catalog)giderek bunu önerin (veya zaten önerildiyse desteğiniz sesinizi).
 
 
-## <a name="data-source-reference-specification"></a>Veri kaynağı başvurusu belirtimi
+## <a name="data-source-reference-specification"></a>Veri kaynağı başvuru belirtimi
 > [!NOTE]
-> **DSL yapısı** sütunu aşağıdaki tabloda, Azure veri Kataloğu tarafından kullanılan bağlantı özellikleri "Adres" özellik paketi için listeler. Diğer bir deyişle, "address" özellik paketi veri kaynağı Azure veri Kataloğu devam ediyorsa, ancak kullanılmayan diğer bağlantı özelliklerini içerebilir.
+> Aşağıdaki tabloda yer alan **DSL yapısı** sütunu, yalnızca Azure Veri Kataloğu tarafından kullanılan "adres" özellik paketi için bağlantı özelliklerini listeler. Diğer bir deyişle, "adres" özellik paketi, Azure Veri Kataloğu 'nun devam ettiği, ancak kullanmayan veri kaynağının diğer bağlantı özelliklerini içerebilir.
 
 <table>
     <tr>

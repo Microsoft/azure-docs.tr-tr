@@ -1,6 +1,6 @@
 ---
-title: API HTTP yanıt kodları
-titleSuffix: Azure
+title: API HTTP yanıt kodları-LUSıS
+titleSuffix: Azure Cognitive Services
 description: Hangi HTTP yanıt kodları LUIS yazma ve uç nokta API'leri döndürülen anlama
 services: cognitive-services
 author: diberry
@@ -8,17 +8,17 @@ manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/04/2019
 ms.author: diberry
-ms.openlocfilehash: f6742bf64ce26e6cce93dfcdfd06756f3c340d9e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 43fbca732bbd281ad980ae86e4a89f446fdb69bc
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65522979"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68945852"
 ---
-# <a name="common-api-response-codes-and-their-meaning"></a>Yaygın API yanıt kodları ve anlamları
+# <a name="common-api-response-codes-and-their-meaning"></a>Ortak API yanıt kodları ve anlamları
 
 [Yazma](https://go.microsoft.com/fwlink/?linkid=2092087) ve [uç nokta](https://go.microsoft.com/fwlink/?linkid=2092356) API'leri döndürülen HTTP yanıt kodları. Yanıt iletilerini istek özgü bilgileri içerirken, HTTP yanıtı durum kodunun geneldir. 
 

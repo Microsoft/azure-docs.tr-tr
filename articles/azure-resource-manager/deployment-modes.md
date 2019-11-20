@@ -1,84 +1,85 @@
 ---
-title: Azure Resource Manager dağıtım modları | Microsoft Docs
-description: Azure Resource Manager ile tam veya artımlı dağıtım modu kullanıp kullanmayacağınızı açıklar.
-author: tfitzmac
-ms.service: azure-resource-manager
+title: Dağıtım modları
+description: Azure Resource Manager ile tamamlanmış veya artımlı dağıtım modunun kullanılıp kullanılmayacağını nasıl belirleyeceğiniz açıklanır.
 ms.topic: conceptual
-ms.date: 07/01/2019
-ms.author: tomfitz
-ms.openlocfilehash: 8a53ed1eea66c976c46a21378a9c48a1ad5ce902
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.date: 11/11/2019
+ms.openlocfilehash: 44111787736d4b80cbdd68263b137d67de2218ba
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508213"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149884"
 ---
-# <a name="azure-resource-manager-deployment-modes"></a>Azure Resource Manager dağıtım modları
+# <a name="azure-resource-manager-deployment-modes"></a>Azure Resource Manager Dağıtım modları
 
-Kaynaklarınızı dağıtırken dağıtım Artımlı güncelleştirme ya da tam güncelleştirme olduğunu belirtin.  Bu iki mod arasındaki başlıca fark, Resource Manager şablonunda olmayan mevcut kaynaklar kaynak grubunda nasıl işlediğini ' dir. Artımlı varsayılan moddur.
+Kaynaklarınızı dağıttığınızda, dağıtımın bir artımlı güncelleştirme ya da tamamen güncelleştirme olduğunu belirtirsiniz.  Bu iki mod arasındaki fark, Kaynak Yöneticisi şablonda olmayan kaynak grubunda var olan kaynakları nasıl işleyeceğinden yapılır. Varsayılan mod artımlı ' dır.
 
-Her iki mod için Resource Manager şablonunda belirtilen tüm kaynakları oluşturmaya çalışır. Kaynağın kaynak grubunda zaten mevcut ve ayarlarına aynıdır, işlem bu kaynak için alınır. Kaynak, bir kaynak için özellik değerlerini değiştirirseniz, bu yeni değerleri ile güncelleştirilir. Konum veya mevcut bir kaynak türünü güncelleştirmek çalışırsanız, dağıtım bir hata ile başarısız olur. Bunun yerine, yeni bir kaynak konumu ile dağıtın veya sizi gereken yazın.
+Her iki mod için Kaynak Yöneticisi şablonda belirtilen tüm kaynakları oluşturmaya çalışır. Kaynak, kaynak grubunda zaten varsa ve ayarları değişmezse, bu kaynak için hiçbir işlem yapılmaz. Bir kaynağın özellik değerlerini değiştirirseniz, kaynak bu yeni değerlerle güncelleştirilir. Mevcut bir kaynağın konumunu veya türünü güncelleştirmeye çalışırsanız, dağıtım bir hata ile başarısız olur. Bunun yerine, gereken konuma veya türe sahip yeni bir kaynak dağıtın.
 
-## <a name="complete-mode"></a>Tam modda
+## <a name="complete-mode"></a>Mod Tamam
 
-Tam modda, Resource Manager **siler** kaynak grubunda var, ancak şablonda belirtilmeyen kaynakları. Şablonda belirtilen olan ancak çünkü dağıtılan kaynakları bir [koşul](resource-group-authoring-templates.md#condition) yanlış olarak değerlendirilir, silinmez.
+Tüm modda Kaynak Yöneticisi kaynak grubunda var olan ancak şablonda belirtilmeyen kaynakları **siler** .
 
-Tam moduyla kullanırken dikkatli olun [kopyalama döngüler](resource-group-create-multiple.md). Kopyalama döngüsü çözdükten sonra şablonda belirtilmeyen tüm kaynaklar silinir.
+Şablonunuz, [koşul](conditional-resource-deployment.md) false olarak değerlendirildiği için dağıtılan bir kaynağı içeriyorsa, sonuç, şablonu dağıtmak için kullandığınız REST API sürümüne bağlıdır. 2019-05-10 'den önceki bir sürümü kullanıyorsanız, kaynak **silinmez**. 2019-05-10 veya sonraki bir sürümü kullanarak kaynak **silinir**. Azure PowerShell ve Azure CLı 'nın en son sürümleri, kaynağı siler.
 
-Kaynak türleri tam modda silme işlemlerinin nasıl işleneceğini bazı farklar vardır. Bir şablon değil, tam modunda dağıtıldığında üst kaynaklar otomatik olarak silinir. Bazı alt kaynakları değil, şablon, otomatik olarak silinmez. Üst kaynak silinirse, ancak bu alt kaynaklar silinir. 
+[Kopyalama döngülerine](resource-group-create-multiple.md)sahip tüm modu kullanırken dikkatli olun. Kopyalama döngüsü çözümlendikten sonra şablonda belirtilmeyen kaynaklar silinir.
 
-Kaynak grubunuz bir DNS bölgesi (Microsoft.Network/dnsZones kaynak türü) ve bir CNAME kaydı (Microsoft.Network/dnsZones/CNAME kaynak türü) içeriyorsa, örneğin, DNS bölgesini üst CNAME kaydını kaynaktır. Tam modda ile dağıtma ve DNS bölgesini, şablonunuzda içermez, DNS bölgesi ve CNAME kaydı, hem de silinir. CNAME DNS bölgesi, şablona dahil, ancak CNAME kaydı içermez silinmez. 
+[Bir şablonda birden fazla kaynak grubuna](resource-manager-cross-resource-group-deployment.md)dağıtırsanız, dağıtım işleminde belirtilen kaynak grubundaki kaynaklar silinebilir. İkincil kaynak gruplarındaki kaynaklar silinmez.
 
-Kaynak türleri silme nasıl gerçekleştirdiğine ilişkin bir listesi için bkz: [tam modda dağıtımlar için silme işlemi, Azure kaynaklarını](complete-mode-deletion.md).
+Kaynak türlerinin tamamlanma modu silme işlemlerinin nasıl ele aldığı bazı farklılıklar vardır. Üst kaynaklar, tamamlanmış modda dağıtılan bir şablonda olmadığında otomatik olarak silinir. Bazı alt kaynaklar şablonda olmadığında otomatik olarak silinmez. Ancak, üst kaynak silinirse bu alt kaynaklar silinir. 
 
-Kaynak grubu olup olmadığının [kilitli](resource-group-lock-resources.md), tam modda değil kaynakları silin.
+Örneğin, kaynak grubunuz bir DNS bölgesi (Microsoft. Network/dnsZones kaynak türü) ve CNAME kaydı (Microsoft. Network/dnsZones/CNAME kaynak türü) içeriyorsa DNS bölgesi CNAME kaydı için üst kaynaktır. ' İ tüm moduyla dağıtıp DNS bölgesini şablonunuza eklemezseniz, DNS bölgesinin ve CNAME kaydının ikisi de silinir. Şablonunuzda DNS bölgesini dahil ederseniz ancak CNAME kaydını eklemezseniz CNAME silinmez. 
+
+Kaynak türlerinin silinme işleminin nasıl yapıldığını gösteren bir liste için, bkz. [tüm mod dağıtımları Için Azure kaynaklarını silme](complete-mode-deletion.md).
+
+Kaynak grubu [kilitliyse](resource-group-lock-resources.md), tamamlanmış mod kaynakları silmez.
 
 > [!NOTE]
-> Yalnızca kök düzeyinde şablonu tam dağıtım modunu destekler. İçin [bağlı veya iç içe şablonlar](resource-group-linked-templates.md), artımlı modu kullanmanız gerekir. 
+> Yalnızca kök düzeyindeki şablonlar, tam Dağıtım modunu destekler. [Bağlantılı veya iç içe şablonlar](resource-group-linked-templates.md)için artımlı Mod kullanmanız gerekir. 
 >
-> [Abonelik düzeyi dağıtımları](deploy-to-subscription.md) tam modu desteklemez.
+> [Abonelik düzeyindeki dağıtımlar](deploy-to-subscription.md) , tamamlanma modunu desteklemez.
 >
-> Şu anda, portalda tam modunu desteklemiyor.
+> Şu anda portal, tamamlanmış modunu desteklemez.
 >
 
-## <a name="incremental-mode"></a>Artımlı modu
+## <a name="incremental-mode"></a>Artımlı mod
 
-Artımlı modda, Resource Manager **değişmeden kalır** kaynak grubunda var, ancak şablonda belirtilmeyen kaynakları.
+Artımlı modda Kaynak Yöneticisi, kaynak grubunda var olan ancak şablonda belirtilmeyen, **değiştirilmemiş kaynakları bırakır** .
 
-Bununla birlikte, mevcut bir kaynağı artımlı modda dağıtarak, sonucu bir farklıdır. Yalnızca güncelleştirmekte olanlara kaynak tüm özelliklerini belirtin. Yaygın bir yanlış anlama belirtilmeyen özellikleri olduğunu düşündüğünüz olmaktır değiştirilmez. Bazı özellikler belirtmezseniz, Resource Manager güncelleştirme bu değerlerin üzerine yazar olarak yorumlar.
+Ancak, var olan bir kaynağı artımlı modda yeniden dağıttığınızda, sonuç farklıdır. Yalnızca güncelleştirdikleriniz değil, kaynağın tüm özelliklerini belirtin. Yaygın bir yanıltıcı, belirtilmeyen özelliklerin değiştirilmemiş olduğunu düşündüğmeniz. Belirli özellikleri belirtmezseniz, Kaynak Yöneticisi güncelleştirmeyi bu değerlerin üzerine yazarak yorumlar.
 
-## <a name="example-result"></a>Örnek sonucu
+## <a name="example-result"></a>Örnek sonuç
 
-Artımlı ve tam modları arasındaki farkı anlamak için aşağıdaki senaryoyu göz önünde bulundurun.
+Artımlı ve tamamlanmış modlar arasındaki farkı göstermek için aşağıdaki senaryoyu göz önünde bulundurun.
 
-**Kaynak grubu** içerir:
+**Kaynak grubu** şunları içerir:
 
-* Kaynak
+* A kaynağı
 * Kaynak B
-* C kaynak
+* Kaynak C
 
-**Şablon** içerir:
+**Şablon** şunları içerir:
 
-* Kaynak
+* A kaynağı
 * Kaynak B
 * Kaynak D
 
-Dağıtılmış olduğunda **artımlı** modu, kaynak grubu vardır:
+**Artımlı** modda dağıtıldığında, kaynak grubu:
 
-* Kaynak
+* A kaynağı
 * Kaynak B
-* C kaynak
+* Kaynak C
 * Kaynak D
 
-Dağıtılmış olduğunda **tam** modu, kaynak C silinir. Kaynak grubu vardır:
+**Tüm** modda dağıtıldığında, kaynak C silinir. Kaynak grubu:
 
-* Kaynak
+* A kaynağı
 * Kaynak B
 * Kaynak D
 
-## <a name="set-deployment-mode"></a>Dağıtım modunu ayarlama
+## <a name="set-deployment-mode"></a>Dağıtım modunu ayarla
 
-PowerShell ile dağıtım yaparken, dağıtım modu ayarlamak için kullanın `Mode` parametresi.
+PowerShell ile dağıtma sırasında dağıtım modunu ayarlamak için `Mode` parametresini kullanın.
 
 ```azurepowershell-interactive
 New-AzResourceGroupDeployment `
@@ -88,7 +89,7 @@ New-AzResourceGroupDeployment `
   -TemplateFile c:\MyTemplates\storage.json
 ```
 
-Azure CLI ile dağıtım yaparken, dağıtım modu ayarlamak için kullanın `mode` parametresi.
+Azure CLı ile dağıtma sırasında dağıtım modunu ayarlamak için `mode` parametresini kullanın.
 
 ```azurecli-interactive
 az group deployment create \
@@ -99,7 +100,7 @@ az group deployment create \
   --parameters storageAccountType=Standard_GRS
 ```
 
-Aşağıdaki örnek, artımlı dağıtım moduna bağlı bir şablon gösterir:
+Aşağıdaki örnek, artımlı dağıtım moduna ayarlanmış bir bağlı şablonu gösterir:
 
 ```json
 "resources": [
@@ -117,6 +118,6 @@ Aşağıdaki örnek, artımlı dağıtım moduna bağlı bir şablon gösterir:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Resource Manager şablonları oluşturma hakkında bilgi edinmek için [Azure Resource Manager şablonları yazma](resource-group-authoring-templates.md).
-* Kaynakları dağıtma hakkında bilgi edinmek için [Azure Resource Manager şablonu ile uygulama dağıtma](resource-group-template-deploy.md).
-* Bir kaynak sağlayıcısı işlemleri görüntülemek için bkz: [Azure REST API'si](/rest/api/).
+* Kaynak Yöneticisi şablonları oluşturma hakkında bilgi edinmek için bkz. [yazma Azure Resource Manager şablonları](resource-group-authoring-templates.md).
+* Kaynakları dağıtma hakkında bilgi edinmek için bkz. [Azure Resource Manager şablonuyla uygulama dağıtma](resource-group-template-deploy.md).
+* Bir kaynak sağlayıcısına yönelik işlemleri görüntülemek için bkz. [Azure REST API](/rest/api/).

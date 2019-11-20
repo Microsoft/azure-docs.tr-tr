@@ -1,116 +1,116 @@
 ---
-title: PIM - Azure Active Directory Azure kaynak rolleri için etkinlik ve denetim geçmişini görüntüle | Microsoft Docs
-description: Etkinliğini görüntülemek ve denetim geçmişi Azure AD Privileged Identity Management (PIM) Azure kaynak rolleri için.
+title: PıM-Azure AD 'de Azure Kaynak rolleri için denetim raporunu görüntüleme | Microsoft Docs
+description: Azure AD Privileged Identity Management (PıM) içindeki Azure Kaynak rolleri için etkinlik ve denetim geçmişini görüntüleyin.
 services: active-directory
 documentationcenter: ''
-author: rolyon
-manager: mtillman
+author: curtand
+manager: daveba
 editor: ''
 ms.assetid: ''
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: pim
-ms.date: 04/09/2019
-ms.author: rolyon
+ms.date: 11/08/2019
+ms.author: curtand
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 84bd491d992ed15df288d9226b58bfe832e0692a
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 2585457d22b773407c41bb6ea82c30a25fbfb88e
+ms.sourcegitcommit: 16c5374d7bcb086e417802b72d9383f8e65b24a7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67476508"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73847163"
 ---
-# <a name="view-activity-and-audit-history-for-azure-resource-roles-in-pim"></a>PIM Azure kaynak rolleri için etkinlik ve denetim geçmişini görüntüle
+# <a name="view-activity-and-audit-history-for-azure-resource-roles-in-privileged-identity-management"></a>Privileged Identity Management Azure Kaynak rolleri için etkinlik ve denetim geçmişini görüntüleme
 
-Azure Active Directory (Azure AD) Privileged Identity Management (PIM) ile kuruluşunuz içinde etkinlik etkinleştirmeleri ve Azure kaynak rolleri için denetim geçmişini görüntüleyebilirsiniz. Bu abonelik, kaynak grupları ve bile sanal makineleri içerir. Azure rol tabanlı erişim denetimi (RBAC) işlevselliği yararlanan Azure portalındaki herhangi bir kaynağa güvenlik ve yaşam döngüsü yönetimi özellikleri PIM'de yararlanabilirsiniz.
+Azure Active Directory (Azure AD) Privileged Identity Management (PıM) ile kuruluşunuzdaki Azure kaynakları rollerinin etkinlik, etkinleştirmeler ve denetim geçmişini görüntüleyebilirsiniz. Buna abonelikler, kaynak grupları ve hatta sanal makineler dahildir. Azure rol tabanlı erişim denetimi (RBAC) işlevselliğiyle ilgili Azure portal içindeki herhangi bir kaynak, Privileged Identity Management güvenlik ve yaşam döngüsü yönetim özelliğinden yararlanabilir.
 
-## <a name="view-activity-and-activations"></a>Etkinlikleri görüntüle ve etkinleştirme
+## <a name="view-activity-and-activations"></a>Etkinlik ve etkinleştirmeleri görüntüleme
 
-Belirli bir kullanıcı çeşitli kaynakları sürdü hangi eylemleri görmek için verilen etkinleştirme nokta ile ilişkili Azure kaynak etkinliği görüntüleyebilirsiniz.
+Belirli bir kullanıcının çeşitli kaynaklarda hangi işlemleri yaptığını görmek için, belirli bir etkinleştirme süresiyle ilişkili Azure Kaynak etkinliğini görüntüleyebilirsiniz.
 
-1. Açık **Azure AD Privileged Identity Management**.
+1. **Azure AD Privileged Identity Management**açın.
 
-1. Tıklayın **Azure kaynaklarını**.
+1. **Azure kaynakları**' na tıklayın.
 
-1. Etkinlik ve etkinleştirmeleri için görüntülemek istediğiniz kaynağa tıklayın.
+1. Etkinlik ve etkinleştirmeleri görüntülemek istediğiniz kaynağa tıklayın.
 
-1. Tıklayın **rolleri** veya **üyeleri**.
+1. **Roller** veya **Üyeler**' e tıklayın.
 
-1. Bir kullanıcı tıklayın.
+1. Bir kullanıcıya tıklayın.
 
-    Tarihe göre Azure kaynaklarına kullanıcının eylemleri grafik bir görünümünü görürsünüz. Ayrıca, aynı süre boyunca yeni rol etkinleştirmeleri gösterir.
+    Azure kaynaklarında tarihe göre Kullanıcı eylemlerinin grafik görünümünü görürsünüz. Ayrıca, aynı dönemdeki son rol etkinleştirmeleri da gösterilmektedir.
 
-    ![Kaynak etkinliği özeti ve rol etkinleştirmeleri ile kullanıcı ayrıntıları](media/azure-pim-resource-rbac/rbac-user-details.png)
+    ![Kaynak etkinlik Özeti ve rol etkinleştirmeleri ile kullanıcı ayrıntıları](media/azure-pim-resource-rbac/rbac-user-details.png)
 
-1. Özel rol etkinleştirme ayrıntıları ve bu kullanıcı etkin olduğu sırada gerçekleşen karşılık gelen Azure kaynak etkinliği görmek için tıklayın.
+1. Ayrıntıları ve ilgili Kullanıcı etkinken gerçekleşen Azure Kaynak etkinliğini görmek için belirli bir rol etkinleştirmesine tıklayın.
 
-    ![Seçili rol etkinleştirme ve tarihe göre görüntülenen etkinlik ayrıntıları](media/azure-pim-resource-rbac/rbac-user-resource-activity.png)
+    ![Seçilen rol etkinleştirme ve etkinlik ayrıntıları tarihe göre görüntülendi](media/azure-pim-resource-rbac/rbac-user-resource-activity.png)
 
-## <a name="export-role-assignments-with-children"></a>Alt öğeleri olan rolü atamalarını dışarı aktarma
+## <a name="export-role-assignments-with-children"></a>Rol atamalarını alt öğeler ile dışarı aktarma
 
-Bir uyumluluk gereksinimini burada denetçilerine rol atamaları tam listesi sağlamalısınız olabilir. PIM için sorgu rol atamaları tüm alt kaynaklar için rol atamalarını içeren belirli bir kaynak olarak sağlar. Daha önce yöneticilerin bir abonelik için rol atamalarını tam bir listesini almak için zordu ve her belirli bir kaynak rolü atamalarını dışarı aktarma gerekiyordu. PIM kullanarak, bir Abonelikteki tüm kaynak grupları ve kaynaklar için rol atamalarını dahil olmak üzere tüm etkin ve uygun rol atamalarını sorgulayabilirsiniz.
+Denetçilerin rol atamalarının tamamen bir listesini sağlamanız gereken bir uyumluluk gereksinimine sahip olabilirsiniz. Privileged Identity Management, tüm alt kaynaklar için rol atamaları içeren belirli bir kaynaktaki rol atamalarını sorgulamanızı sağlar. Daha önce, yöneticilerin bir abonelik için rol atamalarının tamamen bir listesini alması ve her belirli kaynak için rol atamalarını dışarı aktarmaları gerekiyordu. Privileged Identity Management kullanarak, tüm kaynak grupları ve kaynakları için rol atamaları dahil olmak üzere bir abonelikte tüm etkin ve uygun rol atamalarını sorgulayabilirsiniz.
 
-1. Açık **Azure AD Privileged Identity Management**.
+1. **Azure AD Privileged Identity Management**açın.
 
-1. Tıklayın **Azure kaynaklarını**.
+1. **Azure kaynakları**' na tıklayın.
 
-1. Bir aboneliği gibi rol atamalarını dışarı aktarmak istediğiniz kaynağa tıklayın.
+1. Abonelik gibi rol atamalarını dışarı aktarmak istediğiniz kaynağa tıklayın.
 
-1. Tıklayın **üyeleri**.
+1. **Üyeler**' e tıklayın.
 
-1. Tıklayın **dışarı** dışarı aktarma üyelik bölmesini açmak için.
+1. Dışarı aktar üyelik bölmesini açmak için **dışarı aktar** ' a tıklayın.
 
-    ![Tüm üyeleri dışarı aktarmak için dışarı aktarma üyelik bölmesi](media/azure-pim-resource-rbac/export-membership.png)
+    ![Tüm üyeleri dışarı aktarmak için üyelik bölmesini dışarı aktar](media/azure-pim-resource-rbac/export-membership.png)
 
-1. Tıklayın **tüm üyeleri dışarı** bir CSV dosyasındaki tüm rolü atamalarını dışarı aktarma.
+1. Bir CSV dosyasındaki tüm rol atamalarını dışarı aktarmak için **tüm üyeleri dışarı aktar** ' a tıklayın.
 
-    ![Excel'de görüntüleme gibi CSV sya rolü atamalarını dışarı](media/azure-pim-resource-rbac/export-csv.png)
+    ![CSV dosyasındaki rol atamaları Excel 'de görüntüle olarak verildi](media/azure-pim-resource-rbac/export-csv.png)
 
-## <a name="view-resource-audit-history"></a>Kaynak denetim geçmişini görüntüleme
+## <a name="view-resource-audit-history"></a>Kaynak denetim geçmişini görüntüle
 
-Kaynak Denetim, bir kaynak için tüm rol etkinliği bir görünümünü sağlar.
+Kaynak denetimi size bir kaynak için tüm rol etkinliklerinin görünümünü sağlar.
 
-1. Açık **Azure AD Privileged Identity Management**.
+1. **Azure AD Privileged Identity Management**açın.
 
-1. Tıklayın **Azure kaynaklarını**.
-
-1. Denetim geçmişini görüntülemek istediğiniz kaynağa tıklayın.
-
-1. Tıklayın **kaynak denetim**.
-
-1. Önceden tanımlanmış tarih veya özel aralığı kullanarak geçmiş filtreleyin.
-
-    ![Kaynak denetim listesini filtreler](media/azure-pim-resource-rbac/rbac-resource-audit.png)
-
-1. İçin **denetim türü**seçin **etkinleştir (atanan + etkinleştirildi)** .
-
-    ![Etkinleştirme denetim türüne göre filtrelenmiştir kaynak denetim listesi](media/azure-pim-resource-rbac/rbac-audit-activity.png)
-
-1. Altında **eylem**, tıklayın **(etkinlik)** kullanıcının etkinlik ayrıntı Azure kaynakları bir kullanıcı için.
-
-    ![Belirli bir eylem için kullanıcı etkinliği ayrıntıları](media/azure-pim-resource-rbac/rbac-audit-activity-details.png)
-
-## <a name="view-my-audit"></a>Denetimim görüntüleyin
-
-Denetimim kişisel rol etkinlik görüntülemenizi sağlar.
-
-1. Açık **Azure AD Privileged Identity Management**.
-
-1. Tıklayın **Azure kaynaklarını**.
+1. **Azure kaynakları**' na tıklayın.
 
 1. Denetim geçmişini görüntülemek istediğiniz kaynağa tıklayın.
 
-1. Tıklayın **Denetimim**.
+1. **Kaynak denetimi**' ne tıklayın.
 
-1. Önceden tanımlanmış tarih veya özel aralığı kullanarak geçmiş filtreleyin.
+1. Geçmişi önceden tanımlanmış bir tarih veya özel Aralık kullanarak filtreleyin.
 
-    ![Geçerli kullanıcı için Denetim listesi](media/azure-pim-resource-rbac/my-audit-time.png)
+    ![Filtrelerle kaynak denetim listesi](media/azure-pim-resource-rbac/rbac-resource-audit.png)
+
+1. **Denetim türü**için Etkinleştir ' i **(atanan + etkin)** seçin.
+
+    ![Etkinleştirme denetim türüne göre filtrelenen kaynak denetim listesi](media/azure-pim-resource-rbac/rbac-audit-activity.png)
+
+1. **Eylem**' in altında, kullanıcının Azure kaynaklarında etkinlik ayrıntılarını görmek için **(etkinlik)** seçeneğine tıklayın.
+
+    ![Belirli bir eylem için Kullanıcı Etkinliği Ayrıntıları](media/azure-pim-resource-rbac/rbac-audit-activity-details.png)
+
+## <a name="view-my-audit"></a>Denetmi görüntüle
+
+My Audit, kişisel rol etkinliğinizi görüntülemenize olanak sağlar.
+
+1. **Azure AD Privileged Identity Management**açın.
+
+1. **Azure kaynakları**' na tıklayın.
+
+1. Denetim geçmişini görüntülemek istediğiniz kaynağa tıklayın.
+
+1. **Denetlememe**tıklayın.
+
+1. Geçmişi önceden tanımlanmış bir tarih veya özel Aralık kullanarak filtreleyin.
+
+    ![Geçerli Kullanıcı için denetim listesi](media/azure-pim-resource-rbac/my-audit-time.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [PIM Azure kaynak Rolleri Ata](pim-resource-roles-assign-roles.md)
-- [Onaylayın veya reddedin PIM Azure kaynak rolleri için istekleri](pim-resource-roles-approval-workflow.md)
-- [Azure AD PIM rolleri için denetim geçmişini görüntüleme](pim-how-to-use-audit-log.md)
+- [Privileged Identity Management Azure Kaynak rolleri atama](pim-resource-roles-assign-roles.md)
+- [Privileged Identity Management Azure Kaynak rolleri için istekleri onaylama veya reddetme](pim-resource-roles-approval-workflow.md)
+- [Privileged Identity Management Azure AD rolleri için denetim geçmişini görüntüleme](pim-how-to-use-audit-log.md)

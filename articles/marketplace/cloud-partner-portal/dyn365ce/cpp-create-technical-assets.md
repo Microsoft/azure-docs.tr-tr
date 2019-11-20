@@ -1,34 +1,22 @@
 ---
-title: Dynamics 365 müşteri katılımı için teknik varlıkları oluşturun | Azure Market
-description: Dynamics 365 müşteri katılımı uygulama teklif için teknik varlıkları oluşturun.
+title: Müşteri katılımı teknik varlıkları için Dynamics 365 oluşturun | Azure Marketi
+description: Bu CPP ve PC makalesine bağlı olan bu makalede kullanım dışı bırakıldı. "müşteri tarafından sunulan bir Dynamics 365 için teknik varlıkları oluşturma".
 services: Dynamics 365 for Customer Engagement, Azure, Marketplace, Cloud Partner Portal, AppSource
-author: v-miclar
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
-ms.date: 12/29/2018
-ms.author: pabutler
-ms.openlocfilehash: eff175264677d6b8ffb885229b5e68b306424335
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.author: v-chjen
+ms.openlocfilehash: 1b3552a8c6d97b526edb354e849e1b72dc0eb104
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943097"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73825640"
 ---
-# <a name="create-technical-assets-for-azure-application-offer"></a>Azure uygulama teklif için teknik varlıkları oluşturma
+# <a name="create-technical-assets-for-azure-application-offer"></a>Azure Uygulama teklifi için teknik varlıklar oluşturma
 
-Genellikle, kullanarak çözüm geliştirme [için Dynamics 365 müşteri katılımı uygulamaları için SDK'sı](https://docs.microsoft.com/dynamics365/customer-engagement/developer/get-started-sdk).  Açıklandığı formlar çeşitli çözümler ele [programlama modelleri için Dynamics 365 müşteri katılımı uygulamaları için](https://docs.microsoft.com/dynamics365/customer-engagement/developer/programming-models).  Seçtiğiniz çözüm gereksinimlerinizi en iyi uyduğunu formu.  Bir çözüm geliştirirken, bir dizi genişletilebilirlik seçimleri, çözüm bileşenlerini ve sürüm uyumluluğu gibi çözülmesi gereken sorunlar vardır.  Daha fazla bilgi için [çözümlere giriş](https://docs.microsoft.com/dynamics365/customer-engagement/developer/introduction-solutions).
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık Dynamics 365 müşteri katılımı tekliflerinin oluşturulmasını ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Customer Engagement for the PowerApps teklifi &](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer).
 
-Dynamics 365 çözümleri için AppSource yayımlanan paket dosyaları dağıtılmış yönetilen uygulamaların çoğu.
-
-
-## <a name="creating-and-storing-the-package"></a>Oluşturma ve paket depolama
-
-Dynamics 365 müşteri katılımı sunar için oluşturulurken paralel belgeleri bölümünde bulunan [uygulamanızı appsource'ta yayımlama](https://docs.microsoft.com/dynamics365/customer-engagement/developer/publish-app-appsource).  Aşağıdaki konular ayrıntılı çözüm paketi dosyası oluşturma ve Azure depolamaya yükleme yer:
-
-- [4. adım: Uygulamanız için bir AppSource paket oluşturma](https://docs.microsoft.com/dynamics365/customer-engagement/developer/create-package-app-appsource) -yönetilen uygulamanız temsil eder ve içeren bir sıkıştırılmış (ZIP) dosyasının nasıl oluşturulacağı açıklanmaktadır: Çözüm varlıklar klasörü, özel kod DLL, MIME türü bilgileri dosyası, AppSource paketi simgesi, lisans koşulları (HTML) dosyası ve içeriği dosyası (XML).
-- [5. adım: Azure depolama alanında AppSource paketinizi Store ve SAS anahtarıyla bir URL oluşturun](https://docs.microsoft.com/dynamics365/customer-engagement/developer/store-appsource-package-azure-storage) -bir AppSource paket dosyası bir Microsoft Azure Blob Depolama hesabında depolamak ve paket dosyası paylaşmak için bir paylaşılan erişim imzası (SAS) anahtarı kullanma açıklanmaktadır. Paket dosyası, Azure depolama konumunuz için sertifika ve AppSource denemeleri ve yayın için alınır.
-
-
-## <a name="next-steps"></a>Sonraki adımlar
-
-Zaten bunu yapmadıysanız [, Dynamics 365 müşteri katılımı teklif için oluşturma](./cpp-create-offer.md).  Hazır olmanız sonra [teklifinizi yayımlayın](./cpp-publish-offer.md).
+Müşteri için yeni bir Dynamics 365 teklif teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Customer Engagement & PowerApps teklifini](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer) oluşturma bölümündeki yönergeleri izleyin.

@@ -1,77 +1,78 @@
 ---
-title: Azure dijital İkizlerini genel Önizleme hizmet sınırları | Microsoft Docs
-description: Azure dijital İkizlerini genel Önizleme hizmet sınırları anlayın.
-author: dwalthermsft
-manager: deshner
+title: Genel Önizleme hizmeti limitleri-Azure dijital TWINS | Microsoft Docs
+description: Azure dijital TWINS için genel önizleme hizmeti sınırları hakkında bilgi edinin.
+ms.author: alinast
+author: alinamstanciu
+manager: bertvanhoof
 ms.service: digital-twins
 services: digital-twins
 ms.topic: conceptual
-ms.date: 01/03/2019
-ms.author: dwalthermsft
-ms.openlocfilehash: cc873ad441c93a7fce54c275e9f7d52f0b044319
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 3cea4fe65e49bfa2d49822d443103ae6cc6ce69f
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60927562"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014163"
 ---
 # <a name="public-preview-service-limits"></a>Genel önizleme hizmet sınırları
 
-Genel Önizleme sırasında Azure dijital İkizlerini şu geçici abonelik, örneği ve hız sınırları vardır.
+Genel Önizleme sırasında Azure dijital TWINS 'in aşağıdaki geçici abonelik, örnek ve hız sınırları vardır.
 
-Bu kısıtlamalar, yeni hizmet ve birçok özelliklerini öğrenmeye kolaylaştırmaya yardımcı olmak üzere mevcut.
+Bu kısıtlamalar, yeni hizmet ve birçok özelliği hakkında bilgi edinmeye yardımcı olmak için mevcuttur.
 
 > [!NOTE]
-> Bu sınırlar artırabilir veya genel kullanılabilirlik (GA) tarafından kaldırıldı.
+> Bu sınırlar, genel kullanıma (GA) göre artar veya kaldırılır.
 
-## <a name="per-subscription-limits"></a>Abonelik başına limitler
+## <a name="per-subscription-limits"></a>Abonelik başına sınırlar
 
-Genel Önizleme sırasında her bir Azure aboneliği oluşturun veya aynı anda yalnızca bir Azure dijital İkizlerini örneği çalıştırın.
+Genel Önizleme sırasında, her bir Azure aboneliği tek seferde yalnızca bir Azure dijital TWINS örneği oluşturabilir veya çalıştırabilir.
 
 > [!TIP]
-> Örneğiniz silerseniz, yeni bir tane oluşturabilirsiniz.
+> Örneğinizi silerseniz yeni bir tane oluşturabilirsiniz.
 
-## <a name="per-instance-limits"></a>Örnek başına limitler
+## <a name="per-instance-limits"></a>Örnek başına sınırlar
 
-Buna karşılık her Azure dijital İkizlerini örneğine sahip olabilir:
+Sırasıyla, her Azure dijital TWINS örneği şunları içerebilir:
 
-- Tek bir gömülü **IoTHub** hizmet sağlanması sırasında otomatik olarak oluşturulan kaynak.
-- Tam olarak bir **EventHub** olay türü için uç nokta **DeviceMessage**.
-- En fazla üç **EventHub**, **ServiceBus**, veya **EventGrid** olay türündeki uç noktalar **SensorChange**, **SpaceChange** , **TopologyOperation**, veya **UdfCustom**.
+- Hizmet sağlama sırasında otomatik olarak oluşturulan bir Embedded **ıothub** kaynağı.
+- Olay türü **Devicemessage**için tam olarak bir **EventHub** uç noktası.
+- **Sensorchange**, **spacechange**, **Topologyoperation**veya **udfcustom**olay türü için en fazla üç **EventHub**, **ServiceBus**veya **eventgrid** uç noktası.
 
 > [!NOTE]
-> Yukarıdaki Azure IOT varlıklarını oluşturma genellikle tanımlanan bazı parametreler genel Önizleme sırasında gerekli değildir.
-> - Başvurun [Swagger başvuru belgeleri](./how-to-use-swagger.md) en son API belirtimleri için.
+> Genellikle yukarıdaki Azure IoT varlıklarının oluşturulması sırasında tanımlanan bazı parametreler genel önizleme sırasında gerekli değildir.
+> - En son API belirtimleri için [Swagger başvuru belgelerine](./how-to-use-swagger.md) bakın.
 
-## <a name="azure-digital-twins-management-api-limits"></a>Azure dijital İkizlerini yönetim API sınırları
+## <a name="azure-digital-twins-management-api-limits"></a>Azure dijital TWINS yönetim API sınırları
 
-Azure dijital İkizlerini yönetim API isteği oran sınırlarını şunlardır:
+Azure dijital TWINS yönetim API 'niz için istek oranı sınırları şunlardır:
 
-- Azure dijital İkizlerini yönetim API'si saniyede 100 istek.
-- Tek bir Azure dijital İkizlerini yönetim API'si sorgu tarafından döndürülen en fazla 1.000 nesneleri.
+- Azure Digital TWINS yönetim API 'sine saniye başına 100 istek.
+- Tek bir Azure dijital TWINS yönetim API sorgusu tarafından döndürülen en fazla 1.000 nesne.
 
 > [!IMPORTANT]
-> 1000 nesne sınırı aşarsa, bir hatayla karşılaştıysanız ve sorgunuzu basitleştirmeniz gerekir.
+> 1\.000-nesne sınırını aşarsanız bir hata alırsınız ve sorgunuzu basitleştirmelidir.
 
-## <a name="user-defined-functions-rate-limits"></a>Kullanıcı tanımlı işlevleri oran sınırları
+## <a name="user-defined-functions-rate-limits"></a>Kullanıcı tanımlı işlevlerin hız sınırları
 
-Azure dijital İkizlerini Örneğinize yapılan tüm kullanıcı tanımlı işlev çağrılarının toplam sayısı aşağıdaki sınırları ayarlayın:
+Aşağıdaki sınırlar, Azure dijital TWINS örneğiniz için yapılan tüm Kullanıcı tanımlı işlev çağrılarının toplam sayısını ayarlar:
 
-- 400 kitaplık istemci çağrısı / saniye
-- 100 **SendNotification** saniye başına çağrı
+- saniye başına 400 istemci kitaplığı çağrısı
+- 100 **SendNotification** çağrısı/saniye
 
 > [!NOTE]
-> Aşağıdaki işlemleri geçici olarak uygulanacak ek oran sınırları neden olabilir:
-> - Topoloji nesne meta verilerde yapılan düzenlemeler
+> Aşağıdaki eylemler ek hız sınırlarının geçici olarak uygulanmasına neden olabilir:
+> - Topoloji nesnesi meta verilerinde yapılan düzenlemeler
 > - Kullanıcı tanımlı işlev tanımında yapılan güncelleştirmeler
-> - İlk kez telemetri gönderen cihazları
+> - İlk kez telemetri gönderen cihazlar
 
-## <a name="device-telemetry-limits"></a>Cihazın telemetri sınırları
+## <a name="device-telemetry-limits"></a>Cihaz telemetri limitleri
 
-Aşağıdaki sınırlar cihazlarınızı Azure dijital İkizlerini Örneğinize gönderebilirsiniz tüm iletileri toplam sayısı cap:
+Aşağıdaki sınırlar, cihazlarınızın Azure dijital TWINS örneğine gönderebileceği tüm iletilerin toplam sayısıdır:
 
-- saniye başına 100 iletileri
+- tüm cihazlarda saniye başına 100 ileti
+-   cihaz başına saniyede 25 ileti
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bir Azure dijital İkizlerini örnek denemek için Git [kullanılabilir odaları bulmak için Hızlı Başlangıç](./quickstart-view-occupancy-dotnet.md).
+- Bir Azure dijital TWINS örneği denemek için hızlı başlangıç bölümüne giderek [kullanılabilir odaları bulun](./quickstart-view-occupancy-dotnet.md).

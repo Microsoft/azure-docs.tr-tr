@@ -1,156 +1,156 @@
 ---
-title: Yükseltme Bing resim arama API'si v5 için v7
+title: Bing Resim Arama API'si v5 'ten v7 'ye yükseltme
 titleSuffix: Azure Cognitive Services
-description: Bu Yükseltme Kılavuzu, sürüm 5 ve Bing resim arama API'si 7 sürümü arasındaki değişiklikleri açıklar. Sürüm 7 kullanılacak güncelleştirmeye gerek duyduğunuz uygulamanızın parçalarını tanımlamanıza yardımcı olması için bu kılavuzu kullanın.
+description: Bu yükseltme kılavuzunda Bing Resim Arama API'si sürüm 5 ve sürüm 7 arasındaki değişiklikler açıklanmaktadır. Uygulamanızın 7 sürümünü kullanmak için güncelleştirmeniz gereken parçalarını belirlemenize yardımcı olması için bu kılavuzu kullanın.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
 ms.assetid: 7F78B91F-F13B-40A4-B8A7-770FDB793F0F
 ms.service: cognitive-services
 ms.subservice: bing-image-search
-ms.topic: article
+ms.topic: conceptual
 ms.date: 02/12/2019
 ms.author: scottwhi
-ms.openlocfilehash: e014910bc34d2c6aaf9904c5a3670e7d7b496e84
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c4c6b95996206cfb38ea3f77b89c3ebe3c2c0026
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66384389"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68883499"
 ---
-# <a name="bing-image-search-api-v7-upgrade-guide"></a>Bing resim arama API'si v7 sürümünü yükseltme Kılavuzu
+# <a name="bing-image-search-api-v7-upgrade-guide"></a>Bing Resim Arama API'si v7 Yükseltme Kılavuzu
 
-Bu Yükseltme Kılavuzu, sürüm 5 ve Bing resim arama API'si 7 sürümü arasındaki değişiklikleri tanımlar. Sürüm 7 kullanılacak güncelleştirmeye gerek duyduğunuz uygulamanızın parçalarını tanımlamanıza yardımcı olması için bu kılavuzu kullanın.
+Bu yükseltme Kılavuzu, sürüm 5 ve Bing Resim Arama API'si sürüm 7 arasındaki değişiklikleri tanımlar. Uygulamanızın 7 sürümünü kullanmak için güncelleştirmeniz gereken parçalarını belirlemenize yardımcı olması için bu kılavuzu kullanın.
 
 ## <a name="breaking-changes"></a>Yeni değişiklikler
 
 ### <a name="endpoints"></a>Uç Noktalar
 
-- Uç noktanın sürüm numarası için v7 v5 değiştirildi. Örneğin, https:\//api.cognitive.microsoft.com/bing/\*\*v7.0**/images/search.
+- Uç noktanın sürüm numarası, V5 'ten v7 'e değişti. Örneğin, https:\//api.Cognitive.Microsoft.com/Bing/\*\*v 7.0 * */images/Search.
 
 ### <a name="error-response-objects-and-error-codes"></a>Hata yanıtı nesneleri ve hata kodları
 
-- Tüm başarısız istekler şimdi içermelidir bir `ErrorResponse` yanıt gövdesinde bir nesne.
+- Tüm başarısız istekler yanıt gövdesine bir `ErrorResponse` nesne içermelidir.
 
-- Aşağıdaki alanları eklenen `Error` nesne.  
-  - `subCode`&mdash;Hata kodu ayrık demetlerin içine mümkünse bölümleri
-  - `moreDetails`&mdash;İçinde açıklanan hata hakkında ek bilgi `message` alan
+- `Error` Nesnesine aşağıdaki alanlar eklendi.  
+  - `subCode`&mdash;Mümkünse hata kodunu farklı demetlere göre bölümler
+  - `moreDetails`&mdash;`message` Alanda açıklanan hata hakkında ek bilgiler
 
 
-- V5 hata kodları ile aşağıdaki olası yerine `code` ve `subCode` değerleri.
+- V5 hata kodları aşağıdaki olası `code` ve `subCode` değerlerle değiştirilmiştir.
 
 |Kod|Alt|Açıklama
 |-|-|-
-|ServerError|UnexpectedError<br/>ResourceError<br/>NotImplemented|Alt kod koşullardan herhangi biri gerçekleştiğinde Bing ServerError döndürür. HTTP durum kodunu 500 ise yanıt bu hataları içeriyor.
-|InvalidRequest|ParameterMissing<br/>ParameterInvalidValue<br/>HttpNotAllowed<br/>Engellendi|Her isteğin herhangi bir bölümü geçerli değil Bing InvalidRequest döndürür. Örneğin, bir gerekli parametre eksik veya bir parametre değeri geçerli değil.<br/><br/>Hata ParameterMissing veya ParameterInvalidValue ise, HTTP durum kodu 400 ' dir.<br/><br/>Hata HttpNotAllowed ise, HTTP durumu 410 kod.
-|RateLimitExceeded||/ Saniye (QPS) sorguları veya sorgu başına aylık (QPM) kota aştığında Bing RateLimitExceeded döndürür.<br/><br/>Bing QPM aşılırsa QPS ve 403 aşıldı HTTP durum kodu 429 döndürür.
-|InvalidAuthorization|AuthorizationMissing<br/>AuthorizationRedundancy|Bing çağıran doğrulandığında Bing InvalidAuthorization döndürür. Örneğin, `Ocp-Apim-Subscription-Key` üstbilgisi eksik veya abonelik anahtarı geçerli değil.<br/><br/>Birden fazla kimlik doğrulama yöntemi belirtmek, yedeklilik meydana gelir.<br/><br/>Hata InvalidAuthorization ise, HTTP durum kodunu 401 ' dir.
-|InsufficientAuthorization|AuthorizationDisabled<br/>AuthorizationExpired|Çağıran kaynağa erişmek için izinlere sahip olmadığı durumlarda Bing InsufficientAuthorization döndürür. Bu abonelik anahtarını devre dışı bırakıldı veya süresi ortaya çıkabilir. <br/><br/>Hata InsufficientAuthorization, HTTP durum kodu 403 ise.
+|ServerError|UnexpectedError<br/>ResourceError<br/>Uygulanmadı|Bing, alt kod koşullarından herhangi biri gerçekleştiğinde ServerError döndürür. HTTP durum kodu 500 ise yanıt bu hataları içerir.
+|Invalidrequest|ParameterMissing<br/>Parameterınvalidvalue<br/>HttpNotAllowed<br/>Engellendi|İsteğin herhangi bir bölümü geçerli değilse Bing, ınvalidrequest döndürüyor. Örneğin, gerekli bir parametre eksik veya bir parametre değeri geçerli değil.<br/><br/>Hata ParameterMissing veya Parameterınvalidvalue ise, HTTP durum kodu 400 ' dir.<br/><br/>Hataya HttpNotAllowed varsa, HTTP durum kodu 410 ' dir.
+|Ratelimitexcebaşında||Bing, sorgu/saniye (QPS) veya aylık sorgu (QPM) kotası her aşışınızda Ratelimitexceden başına döndürür.<br/><br/>QPM 'yi aştıysanız Bing, QPS ve 403 değerini aştıysanız, 429 HTTP durum kodunu döndürür.
+|Invalidauthorleştirme|AuthorizationMissing<br/>Authorizationartıklık|Bing çağıranın kimliğini doğrulayamayan Bing, ınvalidauthortıcıyla geri döndürür. Örneğin, `Ocp-Apim-Subscription-Key` üst bilgi eksik veya abonelik anahtarı geçerli değil.<br/><br/>Birden fazla kimlik doğrulama yöntemi belirtirseniz artıklık oluşur.<br/><br/>Hata eksik ise, HTTP durum kodu 401 ' dir.
+|InsufficientAuthorization|AuthorizationDisabled<br/>Authorization, zaman aşımına uğradı|Çağıranın kaynağa erişim izni olmadığında Bing, InsufficientAuthorization döndürür. Abonelik anahtarı devre dışı bırakılmışsa veya süresi dolmuşsa bu durum oluşabilir. <br/><br/>Hata InsufficientAuthorization ise, HTTP durum kodu 403 ' dir.
 
-- Aşağıdaki yeni kodları için önceki hata kodlarını eşler. Bir bağımlılık v5 hata kodlarıyla ilgili zamandaki, kodunuzu buna göre güncelleştirin.
+- Aşağıda önceki hata kodları yeni kodlara eşlenir. V5 hata kodlarıyla bir bağımlılık yaptıysanız, kodunuzu uygun şekilde güncelleştirin.
 
-|Sürüm 5 kodu|Sürüm 7 code.subCode
+|Sürüm 5 kodu|Sürüm 7 Code. alt kod
 |-|-
-|RequestParameterMissing|InvalidRequest.ParameterMissing
-RequestParameterInvalidValue|InvalidRequest.ParameterInvalidValue
-ResourceAccessDenied|InsufficientAuthorization
-ExceededVolume|RateLimitExceeded
-ExceededQpsLimit|RateLimitExceeded
-Devre dışı|InsufficientAuthorization.AuthorizationDisabled
-UnexpectedError|ServerError.UnexpectedError
-DataSourceErrors|ServerError.ResourceError
-AuthorizationMissing|InvalidAuthorization.AuthorizationMissing
-HttpNotAllowed|InvalidRequest.HttpNotAllowed
-UserAgentMissing|InvalidRequest.ParameterMissing
-NotImplemented|ServerError.NotImplemented
-InvalidAuthorization|InvalidAuthorization
-InvalidAuthorizationMethod|InvalidAuthorization
-MultipleAuthorizationMethod|InvalidAuthorization.AuthorizationRedundancy
-ExpiredAuthorizationToken|InsufficientAuthorization.AuthorizationExpired
+|RequestParameterMissing yok|Invalidrequest. ParameterMissing yok
+Requestparameterınvalidvalue|Invalidrequest. Parameterınvalidvalue
+Resourceaccessreddedildi|InsufficientAuthorization
+ExceededVolume|Ratelimitexcebaşında
+ExceededQpsLimit|Ratelimitexcebaşında
+Devre dışı|InsufficientAuthorization. AuthorizationDisabled
+UnexpectedError|ServerError. UnexpectedError
+DataSourceErrors|Sunucuhatası. ResourceError
+AuthorizationMissing|Invalidauthorleştirme. AuthorizationMissing
+HttpNotAllowed|Invalidrequest. HttpNotAllowed
+UserAgentMissing|Invalidrequest. ParameterMissing yok
+Uygulanmadı|ServerError. NotImplemented
+Invalidauthorleştirme|Invalidauthorleştirme
+Invalidauthorizationmethod|Invalidauthorleştirme
+MultipleAuthorizationMethod|Invalidauthorasyon. Authorizationartıklık
+ExpiredAuthorizationToken|InsufficientAuthorization. Authorization, zaman aşımına uğradı
 InsufficientScope|InsufficientAuthorization
-Engellendi|InvalidRequest.Blocked
+Engellendi|Invalidrequest. engellendi
 
 
 
 ### <a name="query-parameters"></a>Sorgu parametreleri
 
-- Yeniden adlandırılan `modulesRequested` sorgu parametresi için [modülleri](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference).  
+- Sorgu parametresi modüller olarak yeniden adlandırıldı. [](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference) `modulesRequested`  
 
-- Ek açıklamalar, etiketler yeniden adlandırıldı. Bkz: [modülleri](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference) sorgu parametresi etiketi.  
+- Ek açıklamaları Etiketler olarak yeniden adlandırıldı. Bkz. Etiketler için [modüller](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference) sorgu parametresi.  
 
-- ShoppingSources filtre değeri'nın desteklenen pazarlar listesinde yalnızca en-US için değiştirildi. Bkz: [ImageType](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagetype).  
+- ShoppingSources filtre değerinin desteklenen pazarların listesi yalnızca en-US olarak değiştirildi. Bkz. [ImageType](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagetype).  
 
 
-### <a name="image-insights-changes"></a>Resim öngörüleri değişiklikleri
+### <a name="image-insights-changes"></a>Görüntü öngörüleri değişiklikleri
 
-- Yeniden adlandırılan `annotations` alanını [ImagesInsights](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsightsresponse) için `imageTags`.  
+- Imaiçgörüler [alanı olarak](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsightsresponse) `imageTags`yeniden adlandırıldı. `annotations`  
 
-- Yeniden adlandırılan `AnnotationModule` nesnesini [ImageTagsModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagetagsmodule).  
+- Nesnesi ımagetagsmodule olarak yeniden adlandırıldı. [](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagetagsmodule) `AnnotationModule`  
 
-- Yeniden adlandırılan `Annotation` nesnesini [etiketi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#tag)ve kaldırılan `confidence` alan.  
+- Nesneyi etiketlemek için yeniden [](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#tag)adlandırıldı ve `confidence` alan kaldırıldı. `Annotation`  
 
-- Yeniden adlandırılan `insightsSourcesSummary` alanını [görüntü](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#image) nesnesini `insightsMetadata`.  
+- `insightsMetadata` [Görüntü](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#image) nesnesinin alanı olarak yeniden adlandırıldı. `insightsSourcesSummary`  
 
-- Yeniden adlandırılan `InsightsSourcesSummary` nesnesini [InsightsMetadata](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#insightsmetadata).  
+- Nesnesi, `InsightsSourcesSummary` [ınsightsmetadata](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#insightsmetadata)olarak yeniden adlandırıldı.  
 
-- Eklenen `https://api.cognitive.microsoft.com/bing/v7.0/images/details` uç noktası. Bu uç noktaya istek resim öngörüleri / resimler/arama uç noktası yerine kullanın. Bkz: [görüntü Insights](./image-insights.md).
+- `https://api.cognitive.microsoft.com/bing/v7.0/images/details` Uç nokta eklendi. Bu uç noktayı,/images/Search uç noktası yerine görüntü öngörüleri istemek için kullanın. Bkz. [görüntü öngörüleri](./image-insights.md).
 
-- Aşağıdaki sorgu parametreleri yalnızca geçerli `/images/details` uç noktası.  
+- Aşağıdaki sorgu parametreleri artık yalnızca `/images/details` uç noktayla geçerlidir.  
 
-    -   [insightsToken](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#insightstoken)  
-    -   [Modüller](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference)  
+    -   [ınsi, Stoken](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#insightstoken)  
+    -   [Modüler](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference)  
     -   [imgUrl](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imgurl)  
-    -   [cab](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#cab)  
-    -   [CAL](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#cal)  
-    -   [araba](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#car)  
-    -   [Cat](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#cat)  
-    -   [CT](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#ct)  
+    -   [kabini](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#cab)  
+    -   [yükseltil](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#cal)  
+    -   [Araç](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#car)  
+    -   [kedi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#cat)  
+    -   [unu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#ct)  
 
-- Yeniden adlandırılan `ImageInsightsResponse` nesnesini [ImageInsights](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsights).  
+- Nesne ımageınsights olarak yeniden adlandırıldı. [](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsights) `ImageInsightsResponse`  
 
-- Aşağıdaki alanların veri türleri değiştirilen [ImageInsights](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsights) nesne.  
+- [Imageınsights](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsights) nesnesindeki aşağıdaki alanların veri türleri değiştirildi.  
 
-    -   Türü `relatedCollections` alanını `ImageGallery[]` için [RelatedCollectionsModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#relatedcollectionsmodule).  
+    -   `relatedCollections` Alanın türü, öğesinden `ImageGallery[]` [relatedcollectionsmodule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#relatedcollectionsmodule)olarak değiştirildi.  
 
-    -   Türü `pagesIncluding` alanını `Image[]` için [ImagesModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagesmodule).  
+    -   `pagesIncluding` Alanın türü, öğesinden `Image[]` [ımabir modül](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagesmodule)olarak değiştirildi.  
 
-    -   Türü `relatedSearches` alanını `Query[]` için [RelatedSearchesModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#relatedsearchesmodule).  
+    -   `relatedSearches` Alanın türü, öğesinden `Query[]` [relatedsearchesmodule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#relatedsearchesmodule)olarak değiştirildi.  
 
-    -   Türü `recipes` alanını `Recipe[]` için [RecipesModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#recipesmodule).  
+    -   Alantürü`recipes` [RecipesModule olarak değiştirildi.](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#recipesmodule) `Recipe[]`  
 
-    -   Türü `visuallySimilarImages` alanını `Image[]` için [ImagesModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagesmodule).  
+    -   `visuallySimilarImages` Alanın türü, öğesinden `Image[]` [ımabir modül](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagesmodule)olarak değiştirildi.  
 
-    -   Türü `visuallySimilarProducts` alanını `ProductSummaryImage[]` için [ImagesModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagesmodule).  
+    -   `visuallySimilarProducts` Alanın türü, öğesinden `ProductSummaryImage[]` [ımabir modül](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagesmodule)olarak değiştirildi.  
 
-    -   Kaldırılan `ProductSummaryImage` nesne ve ürünle ilgili alanlara taşınmasını [görüntü](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#image) nesne. `Image` Nesnesi görüntü bir görüntü Insight yanıt görsel olarak benzer ürünleri parçası olarak dahil olduğunda ürünle ilgili alanları içerir.  
+    -   Nesne kaldırıldı ve ürünle ilgili alanları Image nesnesine taşındı. [](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#image) `ProductSummaryImage` `Image` Nesne, yalnızca görüntü Insight yanıtında görsel açıdan benzer ürünlerin bir parçası olarak dahil edildiğinde ürünle ilgili alanları içerir.  
 
-    -   Türü `recognizedEntityGroups` alanını `RecognizedEntityGroup[]` için [RecognizedEntitiesModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#recognizedentitiesmodule).  
+    -   Alanın türü, yerine [recognizedentitıesmodule olarak değiştirildi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#recognizedentitiesmodule) `RecognizedEntityGroup[]`. `recognizedEntityGroups`  
 
--   Yeniden adlandırılan `categoryClassification` alanını [ImageInsights](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsightsresponse) için `annotations`ve onun türü olarak değiştirilir `AnnotationsModule`.  
+-   [Imageınsights](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imageinsightsresponse) `annotations`alanını olarak yeniden adlandırdı ve türünü olarak `AnnotationsModule`değiştirdi. `categoryClassification`  
 
-### <a name="images-answer"></a>Görüntüleri yanıt
+### <a name="images-answer"></a>Görüntü yanıtı
 
--   DisplayShoppingSourcesBadges ve displayRecipeSourcesBadges alanları kaldırıldı [görüntüleri](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images).  
+-   [Görüntülerden](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images)displayShoppingSourcesBadges ve displayRecipeSourcesBadges alanları kaldırıldı.  
 
--   Yeniden adlandırılan `nextOffsetAddCount` alanını [görüntüleri](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) için `nextOffset`. Uzaklık kullanma biçimini de değişti. Daha önce ayarladığınız [uzaklığı](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#offset) sorgu parametresi için `nextOffsetAddCount` değeri artı önceki uzaklık değeri artı görüntüleri sonuç sayısı. Şimdi, ayarladığınız `offset` için `nextOffset` değeri.  
+-   [Görüntülerin](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) alanı olarak`nextOffset`yenidenadlandırıldı. `nextOffsetAddCount` Sapmayı kullanma yönteminiz de değişmiştir. Daha önce, [fark](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#offset) sorgu parametresini `nextOffsetAddCount` değere ve önceki fark değerine ve sonuç içindeki görüntü sayısına göre ayarlarsınız. Şimdi `offset` `nextOffset` değere ayarlanır.  
 
 
-## <a name="non-breaking-changes"></a>Hataya neden olmayan değişiklikleri
+## <a name="non-breaking-changes"></a>Kırılamayan değişiklikler
 
 ### <a name="query-parameters"></a>Sorgu parametreleri
 
-- Saydam bir mümkün olduğunca eklenen [ImageType](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagetype) filtre değeri. Saydam filtre yalnızca saydam bir arka plan görüntüleri döndürür.
+- Olası bir [ImageType](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagetype) filtre değeri olarak saydam eklendi. Saydam filtre yalnızca saydam bir arka plana sahip görüntüler döndürüyor.
 
-- Eklenen tüm bir mümkün olduğunca [lisans](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#license) filtre değeri. Herhangi bir filtre lisansı altında olan görüntüleri döndürür.
+- Olası bir [Lisans](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#license) filtresi değeri olarak eklendi. Herhangi bir filtre yalnızca lisans altında olan görüntüleri döndürür.
 
-- Eklenen [maxFileSize](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#maxfilesize) ve [minFileSize](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#minfilesize) sorgu parametreleri. Birçok farklı boyutta yansımalar döndürmek için bu filtreleri kullanın.  
+- [MaxFileSize](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#maxfilesize) ve [minfilesize](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#minfilesize) sorgu parametreleri eklendi. Bu filtreleri kullanarak bir dosya boyutu aralığı içindeki görüntüleri döndürün.  
 
-- Eklenen [maxHeight](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#maxheight), [minHeight](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#minheight), [maxWidth](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#maxwidth), [minWidth](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#minwidth) sorgu parametreleri. Bir dizi yükseklik ve genişlik yansımalar döndürmek için bu filtreleri kullanın.  
+- [MaxHeight](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#maxheight), [MinHeight](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#minheight), [MaxWidth](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#maxwidth), [MinWidth](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#minwidth) sorgu parametreleri eklendi. Bu filtreleri, bir yükseklik ve genişlik aralığı içindeki görüntüleri döndürmek için kullanın.  
 
-### <a name="object-changes"></a>Nesnesi değişiklikleri
+### <a name="object-changes"></a>Nesne değişiklikleri
 
-- Eklenen `description` ve `lastUpdated` alanlarını [teklif](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#offer) nesne.  
+- `lastUpdated` [Teklif](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#offer) nesnesine ve alanları eklendi `description` .  
 
-- Eklenen `name` alanı [ImageGallery](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagegallery) nesne.  
+- Alanı ımagegallery nesnesine eklediniz. [](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#imagegallery) `name`  
 
-- Eklenen `similarTerms` için [görüntüleri](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) nesne. Bu alan kullanıcının sorgu dizesi anlam olarak benzerdir terimlerin listesini içerir.  
+- Images `similarTerms` nesnesine eklendi [](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) . Bu alan, kullanıcının sorgu dizesinde anlamı olan koşulların bir listesini içerir.  

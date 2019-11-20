@@ -4,7 +4,7 @@ titlesuffix: Azure Load Balancer
 description: Bu öğretici, Azure portalını kullanarak iç temel yük dengeleyici oluşturma işlemini göstermektedir.
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 manager: twooley
 Customer intent: As an IT administrator, I want to create a load balancer that load balances incoming internal traffic to virtual machines within a specific zone in a region.
 ms.service: load-balancer
@@ -13,14 +13,14 @@ ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/27/2019
-ms.author: kumud
+ms.author: allensu
 ms.custom: seodec18
-ms.openlocfilehash: 56568cfb8fc659308475e581955e5acbdfd32b44
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 09a73b5d97e46797dd880f64383fdf03fd591f3d
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61318499"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68273488"
 ---
 # <a name="tutorial-balance-internal-traffic-load-with-a-basic-load-balancer-in-the-azure-portal"></a>Öğretici: Azure portalında bir temel yük dengeleyici ile iç trafik Yük Dengeleme
 
@@ -91,11 +91,11 @@ Portalı kullanarak bir iç temel yük dengeleyici oluşturun. Oluşturduğunuz 
 
     | Ayar                 | Değer                                              |
     | ---                     | ---                                                |
-    | Abonelik               | Aboneliğinizi seçin.    |    
-    | Kaynak grubu         | Seçin **Yeni Oluştur** ve türü *MyResourceGroupLB* metin kutusuna.|
+    | Subscription               | Aboneliğinizi seçin.    |    
+    | Resource group         | Seçin **Yeni Oluştur** ve türü *MyResourceGroupLB* metin kutusuna.|
     | Ad                   | *myLoadBalancer*                                   |
     | Bölge         | **Batı Avrupa**'yı seçin.                                        |
-    | Tür          | Seçin **iç**.                                        |
+    | Type          | Seçin **iç**.                                        |
     | SKU           | **Temel**'i seçin.                          |
     | Sanal ağ           | Seçin *MyVNet*.                          |    
     | IP adresi ataması              | Seçin **statik**.   |

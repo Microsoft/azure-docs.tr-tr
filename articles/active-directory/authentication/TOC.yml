@@ -16,8 +16,6 @@
       href: tutorial-sspr-pilot.md
     - name: SSPR şirket içi tümleştirmeyi etkinleştirme
       href: tutorial-enable-writeback.md
-    - name: Windows 10 parola sıfırlamayı etkinleştirme
-      href: tutorial-sspr-windows.md
     - name: Azure Identity Protection’ı tümleştirme
       href: tutorial-risk-based-sspr-mfa.md
 - name: Kavramlar
@@ -25,7 +23,9 @@
   items:
     - name: Kimlik doğrulama yöntemleri
       href: concept-authentication-methods.md
-    - name: Birleşik kayıt
+    - name: Parolasız kimlik doğrulaması
+      href: concept-authentication-passwordless.md
+    - name: Güvenlik bilgileri kaydı
       href: concept-registration-mfa-sspr-combined.md
     - name: Parola sıfırlama
       items:
@@ -43,6 +43,8 @@
       items:
         - name: MFA nasıl çalışır?
           href: concept-mfa-howitworks.md
+        - name: MFA’yı etkinleştirme
+          href: concept-mfa-get-started.md
         - name: Kullanıcılarınıza lisans verme
           href: concept-mfa-licensing.md
         - name: Kimlik Doğrulama Sağlayıcısı yönetme
@@ -71,8 +73,8 @@
           href: howto-sspr-authenticationdata.md
         - name: Parola geri yazmayı etkinleştirme
           href: howto-sspr-writeback.md
-        - name: 'Windows 7, 8 ve 8.1 için SSPR'
-          href: howto-sspr-windows-7-8.md
+        - name: Windows istemcileri için SSPR
+          href: howto-sspr-windows.md
     - name: Bulut tabanlı MFA
       items:
         - name: Bulut tabanlı MFA dağıtma
@@ -98,12 +100,12 @@
             - name: NPS uzantısı için gelişmiş yapılandırma
               href: howto-mfa-nps-extension-advanced.md
             - name: Azure VPN ve Azure MFA
-              href: ../../vpn-gateway/vpn-gateway-radiuis-mfa-nsp.md
+              href: ../../vpn-gateway/vpn-gateway-radius-mfa-nsp.md
             - name: Uzak Masaüstü Ağ Geçidi
               href: howto-mfa-nps-extension-rdg.md
             - name: VPN
               href: howto-mfa-nps-extension-vpn.md
-    - name: Birleşik kayıt
+    - name: Güvenlik bilgileri kaydı
       items:
         - name: Birleşik kaydı etkinleştirme
           href: howto-registration-mfa-sspr-combined.md
@@ -129,10 +131,18 @@
               href: howto-password-ban-bad-on-premises-agent-versions.md
     - name: Azure AD akıllı kilitleme
       href: howto-password-smart-lockout.md
-    - name: İş İçin Windows Hello
-      href: 'https://docs.microsoft.com/windows/security/identity-protection/hello-for-business/hello-identity-verification'
-    - name: Parolasız telefonla oturum açma
-      href: howto-authentication-phone-sign-in.md
+    - name: Parolasız
+      items:
+        - name: Parolasız dağıtım
+          href: howto-authentication-passwordless-deployment.md
+        - name: Parolasız güvenlik anahtarları
+          href: howto-authentication-passwordless-security-key.md
+        - name: Parolasız Windows 10
+          href: howto-authentication-passwordless-security-key-windows.md
+        - name: Parolasız telefonla oturum açma
+          href: howto-authentication-passwordless-phone.md
+        - name: İş İçin Windows Hello
+          href: 'https://docs.microsoft.com/windows/security/identity-protection/hello-for-business/hello-identity-verification'
     - name: Sertifika tabanlı kimlik doğrulaması
       items:
         - name: Sertifika yetkilendirmesine başlarken

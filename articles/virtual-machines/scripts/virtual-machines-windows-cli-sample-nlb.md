@@ -1,26 +1,26 @@
 ---
-title: Azure CLI Betik Örneği - NLB ile Windows Server 2016 VM oluşturma | Microsoft Docs
+title: Azure CLI Betik Örneği - NLB ile Windows Server 2016 VM oluşturma
 description: Azure CLI Betik Örneği - NLB ile Windows Server 2016 VM oluşturma
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: ''
 ms.assetid: ''
-ms.service: virtual-machines-Windows
+ms.service: virtual-machines-windows
 ms.devlang: azurecli
 ms.topic: sample
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 02/23/2017
 ms.author: rclaus
-ms.openlocfilehash: 5f7f07fb51c39062466675d56f65c6bf2504c3e9
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: eab50ec5bbd6fa3942cf4845a556779da047b02f
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60505606"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039826"
 ---
 # <a name="load-balance-traffic-between-highly-available-virtual-machines"></a>Yüksek oranda kullanılabilir sanal makineler arasında yük dengeleme trafiği
 

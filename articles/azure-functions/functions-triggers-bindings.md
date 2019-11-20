@@ -1,61 +1,60 @@
 ---
-title: Tetikleyiciler ve bağlamalar Azure işlevleri'nde
-description: Azure işlevinizi çevrimiçi etkinliklerimizden ve bulut tabanlı hizmetlere bağlanmak için Tetikleyicileri ve bağlamaları kullanmayı öğrenin.
+title: Azure Işlevlerinde Tetikleyiciler ve bağlamalar
+description: Azure işlevinizi çevrimiçi olaylara ve bulut tabanlı hizmetlere bağlamak için Tetikleyicileri ve bağlamaları kullanmayı öğrenin.
 services: functions
 documentationcenter: na
 author: craigshoemaker
 manager: gwallace
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: reference
 ms.date: 02/18/2019
 ms.author: cshoe
-ms.openlocfilehash: 0896a829a24335f3e62581fa3b63e013478781bc
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: 914158ba7cfcc7530120d427c62e69036b3bb156
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67481005"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70085080"
 ---
-# <a name="azure-functions-triggers-and-bindings-concepts"></a>Azure işlevleri Tetikleyicileri ve bağlamaları kavramları
+# <a name="azure-functions-triggers-and-bindings-concepts"></a>Azure Işlevleri Tetikleyicileri ve bağlamaları kavramları
 
-Bu makalede işlevleri Tetikleyicileri ve bağlamaları çevreleyen üst düzey kavramlarını öğrenin.
+Bu makalede, işlev Tetikleyicileri ve bağlamaları çevreleyen üst düzey kavramlar öğrenirsiniz.
 
-Tetikleyiciler, çalıştırılacak bir işlev nedeni ne ' dir. Bir tetikleyici bir işlevin nasıl çağrılır tanımlar ve bir işlev tam olarak bir tetikleyici olmalıdır. Tetikleyiciler genellikle işlev yükü olarak sağlanan veri ilişkilendirdiniz. 
+Tetikleyiciler, bir işlevin çalışmasına neden olur. Bir tetikleyici, bir işlevin nasıl çağrılacağını ve bir işlevin tam olarak bir tetikleyicisine sahip olması gerektiğini tanımlar. Tetikleyiciler, genellikle işlevin yükü olarak belirtilen ilişkili verilere sahiptir. 
 
-Bir işlev bağlaması başka bir kaynak için işlev bildirimli olarak bağlanan bir yoludur; bağlamaları bağlanabilir olarak *giriş*, *çıktı bağlaması*, veya her ikisini de. Veri bağlamaları işlevi için parametre olarak sağlanır.
+İşleve bağlama, başka bir kaynağı işleve bildirimli olarak bağlama yöntemidir; bağlamalar, *Giriş bağlamaları*, *Çıkış bağlamaları*veya her ikisi için de bağlanabilir. Bağlamalardan alınan veriler işleve parametre olarak sağlanır.
 
-Karışık ve ihtiyaçlarınıza uyacak şekilde farklı bağlamaları eşleşmesi. Bağlamaları isteğe bağlıdır ve bir işlevi ve/veya bir veya birden çok girişi olan çıktı bağlaması.
+Farklı bağlamaları, gereksinimlerinize uyacak şekilde karıştırabilir ve eşleştirebilirsiniz. Bağlamalar isteğe bağlıdır ve bir işlevde bir veya daha fazla giriş ve/veya çıkış bağlaması olabilir.
 
-Tetikleyiciler ve bağlamalar runbook'a kod diğer hizmetlere erişimi engellemenize olanak tanır. İşlevinizi verileri (örneğin, bir kuyruk iletisinin içeriği) işlevi parametreleri alır. Verileri (örneğin, bir kuyruk iletisi oluşturmak için), işlev dönüş değeri kullanarak gönderin. 
+Tetikleyiciler ve bağlamalar, diğer hizmetlere erişimi bir şekilde kodlamadan kaçınmanızı sağlar. İşleviniz, işlev parametrelerinde verileri (örneğin, bir kuyruk iletisinin içeriği) alır. İşlevin dönüş değerini kullanarak verileri (örneğin, kuyruk iletisi oluşturmak için) gönderirsiniz. 
 
-Farklı işlevleri nasıl uygulayabileceğine ilişkin aşağıdaki örneklerde göz önünde bulundurun.
+Farklı işlevleri nasıl uygulayabileceğinizi gösteren aşağıdaki örnekleri göz önünde bulundurun.
 
-| Örnek senaryo | Tetikleyici | Giriş bağlama | Çıktı bağlaması |
+| Örnek senaryo | Tetikleyici | Giriş bağlama | Çıkış bağlama |
 |-------------|---------|---------------|----------------|
-| Yeni bir kuyruk iletisi, başka bir kuyruğa yazmak için bir işlev çalıştığı ulaşır. | Kuyruk<sup>*</sup> | *Yok.* | Kuyruk<sup>*</sup> |
-|Zamanlanmış bir iş, Blob Depolama içerikleri okur ve yeni bir Cosmos DB belgesini oluşturur. | Zamanlayıcı | Blob Depolama | Cosmos DB |
-|Event Grid, Blob Depolama ve Cosmos DB belge e-posta göndermek için bir görüntü okumak için kullanılır. | Event Grid | BLOB Depolama ve Cosmos DB | SendGrid |
-| Bir Excel sayfası güncelleştirmek için Microsoft Graph'ı kullanan bir Web kancası. | HTTP | *Yok.* | Microsoft Graph |
+| Başka bir kuyruğa yazmak için bir işlev çalıştıran yeni bir kuyruk iletisi ulaştı. | Sıradaki<sup>*</sup> | *Yok.* | Sıradaki<sup>*</sup> |
+|Zamanlanan bir iş BLOB depolama içeriğini okur ve yeni bir Cosmos DB belgesi oluşturur. | Zamanlayıcı | Blob Depolama Alanı | Cosmos DB |
+|Event Grid, blob depolamadan bir görüntüyü okumak için ve Cosmos DB bir e-posta göndermek için kullanılır. | Event Grid | BLOB depolama ve Cosmos DB | SendGrid |
+| Excel sayfasını güncelleştirmek için Microsoft Graph kullanan bir Web kancası. | HTTP | *Yok.* | Microsoft Graph |
 
-<sup>\*</sup> Farklı kuyruklara temsil eder
+<sup>\*</sup>Farklı kuyrukları temsil eder
 
-Bu örneklerin ayrıntılı olması beklenmez, ancak nasıl Tetikleyicileri ve bağlamaları birlikte kullanabileceğiniz göstermek için sağlanır.
+Bu örneklerin kapsamlı olması amaçlıyordu, ancak Tetikleyicileri ve bağlamaları birlikte nasıl kullanabileceğinizi göstermek için sağlanmıştır.
 
-###  <a name="trigger-and-binding-definitions"></a>Tetikleyici ve bağlama tanımları
+###  <a name="trigger-and-binding-definitions"></a>Tanımları tetikleme ve bağlama
 
-Tetikleyiciler ve bağlamalar geliştirme yaklaşımını bağlı olarak farklı şekilde tanımlanır.
+Tetikleyiciler ve bağlamalar, geliştirme yaklaşımına göre farklı şekilde tanımlanır.
 
-| Platform | Tetikleyiciler ve bağlamalar tarafından yapılandırılan... |
+| Platform | Tetikleyiciler ve bağlamalar tarafından yapılandırılır... |
 |-------------|--------------------------------------------|
-| C#sınıf kitaplığı | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yöntemleri ve parametrelerle dekorasyon C# öznitelikleri |
-| Diğerlerinin tümü (Azure portalı dahil) | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Güncelleştirme [function.json](./functions-reference.md) ([şema](http://json.schemastore.org/function)) |
+| C#sınıf kitaplığı | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;öznitelikleri ile C# yöntemleri ve parametreleri dekorasyon |
+| Diğerlerinin tümü (Azure portal dahil) | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[function. JSON](./functions-reference.md) güncelleştiriliyor ([şema](http://json.schemastore.org/function)) |
 
-Portal, bu yapılandırma için bir kullanıcı Arabirimi sağlar, ancak doğrudan açarak dosyayı düzenleyebilirsiniz **Gelişmiş Düzenleyici** aracılığıyla kullanılabilen **tümleştir** işlevinizin sekmesi.
+Portal bu yapılandırma için bir kullanıcı arabirimi sağlar, ancak işlevinizin **tümleştirin** sekmesi aracılığıyla bulunan **Gelişmiş düzenleyiciyi** açarak dosyayı doğrudan düzenleyebilirsiniz.
 
-. NET'te, parametre türü, giriş verileri için veri türünü tanımlar. Örneğin, kullanın `string` ikili ve bir nesneyi seri durumdan çıkarılamıyor için özel bir tür olarak okunacak bayt dizisi olarak bir kuyruk tetikleyicisi metnini bağlanacak.
+.NET ' te, parametre türü giriş verileri için veri türünü tanımlar. Örneğin, bir kuyruk `string` tetikleyicisinin metnini bağlamak için kullanın, ikili olarak okunacak bir bayt dizisi ve bir nesneye serbest bırakmak için özel bir tür.
 
-JavaScript gibi dinamik olarak yazılan diller için kullanmak `dataType` özelliğinde *function.json* dosya. Örneğin, ikili biçimde bir HTTP isteği içeriğini okumak için ayarlanmış `dataType` için `binary`:
+JavaScript gibi dinamik olarak yazılan diller için, *function. JSON* dosyasındaki `dataType` özelliğini kullanın. Örneğin, bir http isteğinin içeriğini ikili biçimde okumak için şu şekilde `dataType` `binary`ayarlayın:
 
 ```json
 {
@@ -66,33 +65,33 @@ JavaScript gibi dinamik olarak yazılan diller için kullanmak `dataType` özell
 }
 ```
 
-Diğer seçenekler için `dataType` olan `stream` ve `string`.
+İçin `dataType` diğer seçenekler ve `stream` ' `string`dir.
 
 ## <a name="binding-direction"></a>Bağlama yönü
 
-Tüm tetikleyiciler ve bağlamalar bir `direction` özelliğinde [function.json](./functions-reference.md) dosyası:
+Tüm tetikleyiciler ve bağlamalar `direction` [function. JSON](./functions-reference.md) dosyasında bir özelliğe sahiptir:
 
-- Tetikleyiciler için her zaman yönü olur `in`
-- Giriş ve çıkış bağlamaları kullanın `in` ve `out`
-- Bazı bağlamalar destekleyen özel bir yön `inout`. Kullanırsanız `inout`, yalnızca **Gelişmiş Düzenleyici** aracılığıyla kullanılabilir **tümleştir** portalında sekmesi.
+- Tetikleyiciler için, yön her zaman`in`
+- Giriş ve çıkış bağlamaları kullanımı `in` ve`out`
+- Bazı bağlamalar özel bir yönü `inout`destekler. Kullanıyorsanız, portalda tümleştir sekmesi aracılığıyla yalnızca **Gelişmiş Düzenleyici** kullanılabilir. `inout`
 
-Kullanırken [öznitelikleri bir sınıf kitaplığı'nda](functions-dotnet-class-library.md) Tetikleyicileri ve bağlamaları yapılandırmak için yön bir öznitelik oluşturucuda sağlanan veya parametre türünden çıkarsanan.
+Tetikleyicileri ve bağlamaları yapılandırmak için [bir sınıf kitaplığındaki öznitelikleri](functions-dotnet-class-library.md) kullandığınızda, yön bir öznitelik oluşturucusunda sağlanır veya parametre türünden çıkartılan olur.
 
-## <a name="supported-bindings"></a>Desteklenen bağlamaları
+## <a name="supported-bindings"></a>Desteklenen bağlamalar
 
 [!INCLUDE [Full bindings table](../../includes/functions-bindings.md)]
 
-Bağlamaları önizlemededir veya üretim kullanımı için onaylanmış olan hakkında bilgi için bkz: [desteklenen diller](supported-languages.md).
+Önizleme aşamasında olan veya üretim kullanımı için onaylanan bağlamalar hakkında daha fazla bilgi için bkz. [desteklenen diller](supported-languages.md).
 
 ## <a name="resources"></a>Kaynaklar
 - [Bağlama ifadeleri ve desenleri](./functions-bindings-expressions-patterns.md)
-- [Azure işlev dönüş değeri kullanma](./functions-bindings-return-value.md)
+- [Azure Işlevi dönüş değerini kullanma](./functions-bindings-return-value.md)
 - [Bağlama ifadesi kaydetme](./functions-bindings-register.md)
-- Test:
-  - [Kodunuzu Azure işlevleri'nde test stratejileri](functions-test-a-function.md)
-  - [El ile olmayan HTTP ile tetiklenen bir işlev çalıştırın](functions-manually-run-non-http.md)
-- [Bağlama hataları işleme](./functions-bindings-errors.md)
+- Edici
+  - [Azure Işlevlerinde kodunuzu test etme stratejileri](functions-test-a-function.md)
+  - [HTTP ile tetiklenen bir işlevi el ile çalıştırma](functions-manually-run-non-http.md)
+- [Bağlama hatalarını işleme](./functions-bindings-errors.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 > [!div class="nextstepaction"]
-> [Azure işlevleri bağlama uzantılarını kaydetme](./functions-bindings-register.md)
+> [Azure Işlevleri bağlama uzantılarını kaydetme](./functions-bindings-register.md)

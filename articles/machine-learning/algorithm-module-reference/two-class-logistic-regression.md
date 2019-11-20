@@ -1,91 +1,90 @@
 ---
-title: 'İki sınıflı Lojistik regresyon: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: İki (ve yalnızca iki) sonuçları tahmin etmek için kullanılan bir Lojistik regresyon modeli oluşturmak için Azure Machine Learning hizmetinde iki sınıflı Lojistik regresyon modülünü kullanmayı öğrenin.
+title: 'İki sınıf Lojistik gerileme: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: İki sınıf lojistik regresyon Azure Machine Learning modülünü, iki (ve yalnızca iki) sonucu tahmin etmek için kullanılabilecek bir lojistik regresyon modeli oluşturmak için nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: aacaf6c64ef77d0e694f97e3675060eca33794ed
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: f64352906da5d6e3a314b3af68e37f4dc5bb80bd
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65029258"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73485936"
 ---
-# <a name="two-class-logistic-regression-module"></a>İki sınıflı Lojistik regresyon Modülü
+# <a name="two-class-logistic-regression-module"></a>İki sınıf lojistik regresyon modülü
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-İki (ve yalnızca iki) sonuçları tahmin etmek için kullanılan bir Lojistik regresyon modeli oluşturmak için bu modülü kullanın. 
+İki (ve yalnızca iki) sonucu tahmin etmek için kullanılabilecek bir lojistik regresyon modeli oluşturmak için bu modülü kullanın. 
 
-Lojistik regresyon pek çok sorunları modellemek için kullanılan iyi bilinen bir istatistik tekniğidir. Bu algoritma bir *denetimli öğrenme* yöntemi  Bu nedenle modeli eğitmek için sonuçlarını zaten içeren bir veri kümesi sağlamanız gerekir.  
+Lojistik regresyon, birçok tür sorunu modellemeye yönelik kullanılan iyi bilinen istatistiksel bir tekniktir. Bu algoritma, *denetimli bir öğrenme* yöntemidir;  Bu nedenle, modeli eğitetmek için sonuçları zaten içeren bir veri kümesi sağlamanız gerekir.  
 
 ### <a name="about-logistic-regression"></a>Lojistik regresyon hakkında  
 
-Lojistik regresyon sonucu olasılığını tahmin etmek için kullanılır ve sınıflandırma görevleri için özellikle olarak popüler istatistikleri iyi bilinen bir yöntemidir. Algoritma, veri Lojistik işlevine sığdırma tarafından bir olayın oluşum olasılığını tahmin eder.
+Lojistik regresyon, bir sonucun olasılığını tahmin etmek için kullanılan istatistiklerde iyi bilinen bir yöntemdir ve özellikle sınıflandırma görevlerinde popüler olur. Algoritma bir lojistik işlevine veri ekleyerek bir olayın oluşma olasılığını tahmin eder.
   
-Bu modülde, sınıflandırma algoritmasıdır dichotomous veya ikili değişkenleri için optimize edilmiştir. birden çok sonuç sınıflandırmak ihtiyacınız varsa [veya çoklu sınıflar Lojistik regresyon](./multiclass-logistic-regression.md) modülü.
+Bu modülde sınıflandırma algoritması, dichotom veya ikili değişkenler için iyileştirilmiştir. birden çok sonucu sınıflandırmanız gerekiyorsa, çoklu [Lass lojistik regresyon](./multiclass-logistic-regression.md) modülünü kullanın.
 
 ##  <a name="how-to-configure"></a>Yapılandırma  
 
-Bu modeli eğitmek için bir etiket veya sınıf sütunu içeren bir veri kümesi sağlamanız gerekir. Bu modül iki sınıflı sorunlar için tasarlandığından, etiket veya sınıf sütun tam olarak iki değerler içermelidir. 
+Bu modeli eğitebilmeniz için etiket veya sınıf sütunu içeren bir veri kümesi sağlamanız gerekir. Bu modül iki sınıf sorunlara yönelik olduğu için, etiket veya sınıf sütunu tam olarak iki değer içermelidir. 
 
-[Oy] Örneğin, etiket sütunla olası değerler "Evet" veya "Hayır". Veya, "Yüksek" veya "Düşük" olası değerler [kredi riski] olabilir. 
+Örneğin, etiket sütunu, olası "Yes" veya "No" değerleriyle [Voted] olabilir. Ya da, olası "yüksek" veya "düşük" değerleriyle [kredi riski] olabilir. 
   
-1.  Ekleme **iki sınıflı Lojistik regresyon** denemenizi modülü.  
+1.  **Iki sınıf lojistik regresyon** modülünü işlem hattınıza ekleyin.  
   
-2.  Model, ayarlayarak düşünürler nasıl istediğinizi belirtmek **Oluştur trainer modu** seçeneği.  
+2.  Model **oluşturma modunu** ayarlayarak modelin eğitilme şeklini belirleyin.  
   
-    -   **Tek bir parametre**: Model yapılandırmak istediğiniz nasıl biliyorsanız, bağımsız değişken olarak belirli bir değerler kümesi sağlayabilirsiniz.  
+    -   **Tek parametre**: modeli nasıl yapılandırmak istediğinizi biliyorsanız bağımsız değişken olarak belirli bir değer kümesi sağlayabilirsiniz.  
   
-3.  İçin **iyileştirme dayanıklılık**, model iyileştirilmesi sırasında kullanmak için bir eşik değerini belirtin. Geliştirme yinelemeleri arasında belirtilen eşiğin altına düşerse, algoritma bir çözüm üzerinde yakınsanmış olarak kabul edilir ve eğitim durdurur.  
+3.  **İyileştirme toleransı**için modeli iyileştirirken kullanılacak bir eşik değeri belirtin. Yinelemeler arasındaki geliştirme belirtilen eşiğin altına düşerse, algoritma bir çözüme yakınsamış olarak kabul edilir ve eğitim duraklar.  
   
-4.  İçin **L1 Kurallaştırma ağırlık** ve **L2 Kurallaştırma ağırlık**, L1 ve L2 Kurallaştırma parametrelerini kullanmak için bir değer yazın. Sıfır olmayan bir değer, her ikisi için önerilir.  
+4.  **L1 düzenleme Weight** ve **L2 düzenleme ağırlığı**Için, L1 ve L2 düzenleme parametreleri için kullanılacak bir değer yazın. Her ikisi için sıfır olmayan bir değer önerilir.  
   
-     *Kurallaştırma* modelleri aşırı katsayısı değerlerle penalizing tarafından overfitting engelleyen bir yöntemdir. Kurallaştırma varsayım hata katsayısı değerlerle ilişkili cezası ekleyerek çalışır. Bu nedenle, daha doğru bir model aşırı katsayısı değerlerle ceza, ancak daha az doğru bir modeli daha pasif değerlerle daha az ceza.  
+     *Düzenleme* , çok büyük katsayı değerleriyle penalizing modellerle fazla sığdırmayı engellemek için bir yöntemdir. Düzenleme, katsayı değeri ile ilişkili ceza değerini, varsayım hatası ile ilişkilendirilen ceza ekleyerek işe yarar. Bu nedenle, çok büyük katsayı değerleri olan doğru bir model daha fazla sızlaştırılacağından, daha fazla koruyucu değere sahip daha az doğru bir model daha az olabilir.  
   
-     L1 ve L2 Kurallaştırma farklı etkileri ve kullanır.  
+     L1 ve L2 düzenleme farklı etkileri ve kullanımları vardır.  
   
-    -   Yüksek boyutlu verilerle çalışırken kullanışlı, L1 seyrek modelleri için uygulanabilir.  
+    -   L1, yüksek boyutlu verilerle çalışırken yararlı olabilecek seyrek modellere uygulanabilir.  
   
-    -   Buna karşılık, L2 Kurallaştırma seyrek olmayan veriler için tercih edilir.  
+    -   Buna karşılık L2 düzenleme, seyrek olmayan veriler için tercih edilir.  
   
-     Bu algoritma L1 ve L2 Kurallaştırma değerleri doğrusal birleşimi destekler: diğer bir deyişle, varsa <code>x = L1</code> ve <code>y = L2</code>, ardından <code>ax + by = c</code> doğrusal aralık düzenleme koşullarını tanımlar.  
+     Bu algoritma, L1 ve L2 düzenleme değerlerinin doğrusal bir birleşimini destekler: Yani, <code>x = L1</code> ve <code>y = L2</code>, <code>ax + by = c</code> düzenleme koşullarının doğrusal yayılımını tanımlar.  
   
     > [!NOTE]
-    >  L1 ve L2 düzenleme hakkında daha fazla öğrenmek ister misiniz? Aşağıdaki makalede L1 ve L2 Kurallaştırma nasıl farklıdır ve lojistik regresyon ve sinir ağı modelleri için kod örnekleri ile model sığdırma etkilemesi hakkında ayrıntılı bilgi sağlar:  [L1 ve Machine Learning için L2 düzenleme](https://msdn.microsoft.com/magazine/dn904675.aspx)  
+    >  L1 ve L2 düzenleme hakkında daha fazla bilgi edinmek istiyor musunuz? Aşağıdaki makalede, L1 ve L2 düzenleme 'in nasıl farklı olduğu ve model sığdırmayı nasıl etkilediği hakkında bir tartışma sunulmaktadır: lojistik regresyon ve sinir ağ modelleri için kod örnekleri, [Machine Learning Için L1 ve L2 düzenleme](https://msdn.microsoft.com/magazine/dn904675.aspx)  
     >
-    > L1 ve L2 koşulları farklı doğrusal bileşimleri, lojistik regresyon modellerini çıkabilecek: Örneğin, [esnek net Kurallaştırma](https://wikipedia.org/wiki/Elastic_net_regularization). Modelinizde maliyetli doğrusal birlikte tanımlamak için aşağıdaki bileşimler başvuru öneririz.
+    > L1 ve L2 koşullarına ait farklı doğrusal birleşimler lojistik regresyon modelleriyle kaldırılmıştır: Örneğin, [elastik net düzenleme](https://wikipedia.org/wiki/Elastic_net_regularization). Modelinizde etkin olan doğrusal bir bileşim tanımlamak için bu kombinasyonlara başvurulacağını öneririz.
       
-5.  İçin **L BFGS için bellek boyutu**, için kullanılacak bellek miktarını belirtin *L BFGS* iyileştirme.  
+5.  **L-** BFGS için bellek boyutu Için, *l-BFGS* iyileştirmesi için kullanılacak bellek miktarını belirtin.  
   
-     L-BFGS "sınırlı için bellek Fletcher Goldfarb Shanno Broyden" anlamına gelir. Bu parametre tahmini için popüler bir iyileştirme algoritması olur. Bu parametre, son konumları ve sonraki adıma hesaplama için depolamak için gradyan sayısını gösterir.  
+     L-BFGS, "sınırlı bellek Broyıdan-Fletu-Goldfarb-shanno" için temsil eder. Bu, parametre tahmini için popüler bir iyileştirme algoritmasıdır. Bu parametre, sonraki adım hesaplamasında depolanacak geçmiş konumların ve degradelerin sayısını belirtir.  
   
-     Bu iyileştirme parametresi sonraki adım ve yön hesaplamak için kullanılan bellek miktarını sınırlar. Daha az bellek belirttiğinizde, eğitim daha hızlı ancak daha az doğru.  
+     Bu iyileştirme parametresi, sonraki adımı ve yönü hesaplamak için kullanılan bellek miktarını sınırlandırır. Daha az bellek belirttiğinizde, eğitim daha hızlıdır ancak daha az doğru olur.  
   
-6.  İçin **rastgele sayı doldurma**, bir tamsayı girin. Sonuçları aynı denemede birden çok çalıştırılan yeniden üretilebilen olmasını istiyorsanız, bir çekirdek değeri tanımlamak önemlidir.  
+6.  **Rastgele numara kaynağı**için bir tamsayı değeri yazın. Sonuçların aynı işlem hattının birden fazla çalıştırması üzerinden tekrarlanabilir olmasını istiyorsanız çekirdek değeri tanımlama önemlidir.  
   
   
-8. Denemeye etiketli bir veri kümesi ekleyin ve birine bağlanabilmeleri [eğitim modülleri](module-reference.md).  
+8. Ardışık düzene etiketli bir veri kümesi ekleyin ve [eğitim modüllerden](module-reference.md)birini bağlayın.  
   
-    -   Ayarlarsanız **Oluştur trainer modu** için **tek parametre**, kullanın [modeli eğitme](./train-model.md) modülü.  
+    -   **Tek parametreye**oluşturma ve ayarlama **modunu** ayarlarsanız, [model eğitme](./train-model.md) modülünü kullanın.  
   
-9. Denemeyi çalıştırın.  
+9. İşlem hattını çalıştırma.  
   
 ## <a name="results"></a>Sonuçlar
 
-Alıştırma tamamlandıktan sonra:
+Eğitim tamamlandıktan sonra:
 
-+ Çıkışı modelin parametreler, eğitimleri, öğrenilen özellik ağırlıkları özetini görmek için sağ [modeli eğitme](./train-model.md) seçip **Görselleştir**.   
++ Modellerden öğrenilen Özellik ağırlıklarla birlikte modelin parametrelerinin özetini görmek için eğitim [modeli](./train-model.md) çıktısına sağ tıklayın ve **Görselleştir**' i seçin.   
   
-+ Yeni veri tahminlerde için eğitilen modeli ve yeni veriler giriş olarak kullanın [Score Model](./score-model.md) modülü. 
++ Yeni verileri tahmin etmek için eğitilen modeli ve yeni verileri [puan modeli](./score-model.md) modülüne giriş olarak kullanın. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

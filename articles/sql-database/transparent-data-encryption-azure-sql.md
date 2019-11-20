@@ -1,148 +1,155 @@
 ---
-title: Azure SQL veritabanı ve veri ambarı için saydam veri şifrelemesi | Microsoft Docs
-description: SQL veritabanı ve veri ambarı için saydam veri şifrelemesi genel bakış. Belge, aboneliğin avantajları ve hizmetle yönetilen şeffaf veri şifreleme ve kendi anahtarını Getir içeren yapılandırma seçeneklerini kapsar.
+title: Saydam veri şifrelemesi
+description: SQL veritabanı ve veri ambarı için saydam veri şifrelemeye genel bakış. Belge, hizmet tarafından yönetilen saydam veri şifrelemesini ve Kendi Anahtarını Getir dahil olmak üzere avantajlarının yanı sıra yapılandırma seçeneklerini de kapsar.
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
-ms.custom: ''
+titleSuffix: Azure SQL Database and SQL Data Warehouse
+ms.custom: seo-lt-2019
 ms.devlang: ''
 ms.topic: conceptual
 author: aliceku
 ms.author: aliceku
 ms.reviewer: vanto
-manager: craigg
-ms.date: 04/19/2019
-ms.openlocfilehash: 7066b600cf50df583fbf8e9e674ef17d77b86183
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/01/2019
+ms.openlocfilehash: b6af171eafbaf1f4d31bad649fcb0c69d8bdc24d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67061376"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821700"
 ---
 # <a name="transparent-data-encryption-for-sql-database-and-data-warehouse"></a>SQL veritabanı ve veri ambarı için saydam veri şifrelemesi
 
-Saydam veri şifrelemesi (TDE), Azure SQL veritabanı, Azure SQL yönetilen örneği ve Azure veri ambarı çevrimdışı kötü amaçlı etkinlik tehditlerine karşı bekleyen verileri şifreleyerek koruma yardımcı olur. Bu gerçek zamanlı şifreleme ve şifre çözme veritabanını, ilişkili yedeklemeler ve işlem günlük dosyaları bekleme sırasında uygulamada değişiklik gerektirmeden gerçekleştirir. Varsayılan olarak, tüm yeni dağıtılan Azure SQL veritabanları için TDE etkin. TDE, mantıksal şifrelemek için kullanılamaz **ana** SQL veritabanı.  **Ana** veritabanı kullanıcı veritabanlarında TDE işlemlerin gerçekleştirilmesi için gereken nesneleri içerir.
+Saydam veri şifrelemesi (TDE), bekleyen verileri şifreleyerek kötü niyetli çevrimdışı etkinlik tehditlerine karşı Azure SQL veritabanı, Azure SQL yönetilen örneği ve Azure veri ambarı ' nı korumanıza yardımcı olur. Uygulamada değişiklik gerektirmeden, bekleyen veritabanı, ilişkili yedeklemeler ve işlem günlüğü dosyaları için gerçek zamanlı şifreleme ve şifre çözme işlemleri gerçekleştirir. Varsayılan olarak, TDE, tüm yeni dağıtılan Azure SQL veritabanları için etkinleştirilmiştir. TDE, SQL veritabanında mantıksal **ana** veritabanını şifrelemek için kullanılamaz.  **Ana** veritabanı, Kullanıcı veritabanlarında TDE işlemleri gerçekleştirmek için gereken nesneleri içerir.
 
-TDE Azure SQL yönetilen örnek için Azure SQL veritabanı veya Azure SQL veri ambarı eski veritabanlarını el ile etkinleştirilmesi gerekir.  
+TDE 'nin Azure SQL veritabanı, Azure SQL yönetilen örneği veya Azure SQL veri ambarı 'nın eski veritabanları için el ile etkinleştirilmesi gerekiyor.
+Restore ile oluşturulan yönetilen örnek veritabanları kaynak veritabanından şifreleme durumunu devralma.
 
-Saydam veri şifrelemesi tüm veritabanı depolama, veritabanı şifreleme anahtarı olarak adlandırılan bir simetrik anahtarı'nı kullanarak şifreler. Bu veritabanı şifreleme anahtarı saydam veri şifrelemesi koruyucu tarafından korunur. Koruyucu ya da bir hizmet tarafından yönetiliyor sertifika (hizmetle yönetilen şeffaf veri şifreleme) veya Azure anahtar Kasası'nda (kendi anahtarını Getir) depolanan bir asimetrik anahtar. Azure SQL veritabanı ve veri ambarı için sunucu düzeyinde ve örnek düzeyinde Azure SQL yönetilen örneği için saydam veri şifrelemesi koruyucu ayarlayın. Terim *sunucu* hem sunucusu ve örneği bu belge boyunca farklı belirtilmedikçe ifade eder.
+Saydam veri şifrelemesi, veritabanı şifreleme anahtarı adlı bir simetrik anahtar kullanarak veritabanının tamamının depolanmasını şifreler. Bu veritabanı şifreleme anahtarı, saydam veri şifreleme koruyucusu tarafından korunuyor. Koruyucu, hizmet tarafından yönetilen bir sertifika (hizmet tarafından yönetilen saydam veri şifrelemesi) veya Azure Key Vault (Kendi Anahtarını Getir) içinde depolanan bir asimetrik anahtardır. Saydam veri şifreleme koruyucusunu Azure SQL veritabanı ve veri ambarı için sunucu düzeyinde ve Azure SQL yönetilen örneği için örnek düzeyinde ayarlarsınız. *Sunucu* terimi, farklı belirtilmedikçe, bu belge boyunca hem sunucu hem de örneğe başvurur.
 
-Veritabanı başlatma sırasında şifrelenmiş veritabanı şifreleme anahtarını şifresi çözülür ve şifre çözme ve SQL Server veritabanı altyapısı işlemdeki veritabanı dosyalarını yeniden şifrelenmesi için kullanılır. Saydam veri şifrelemesi, gerçek zamanlı g/ç şifreleme ve şifre çözme veri sayfa düzeyinde gerçekleştirir. Belleğe okuyun ve sonra da yazılmadan önce şifrelenir her sayfanın şifresi çözülür diske. Saydam veri şifrelemesi genel bir açıklaması için bkz. [saydam veri şifrelemesi](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption).
+Veritabanı başlangıcında, şifrelenmiş veritabanı şifreleme anahtarının şifresi çözülür ve veritabanı dosyalarının şifresinin çözülmesi ve SQL Server veritabanı altyapısı işleminde yeniden şifrelenmesi için kullanılır. Saydam veri şifrelemesi, verileri sayfa düzeyinde gerçek zamanlı g/ç şifrelemesi ve şifre çözme işlemleri gerçekleştirir. Her sayfa, belleğe okunmadan ve sonra diske yazılmadan önce şifrelendiğinde çözülür. Saydam veri şifrelemesi hakkında genel bir açıklama için bkz. [Saydam veri şifrelemesi](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption).
 
-Ayrıca bir Azure sanal makinesinde çalışan SQL Server Key vault'tan bir asimetrik anahtar kullanabilirsiniz. Yapılandırma adımları, SQL veritabanı ve SQL yönetilen örneği, asimetrik bir anahtar kullanarak farklıdır. Daha fazla bilgi için [Azure Key Vault (SQL Server) kullanılarak genişletilebilir anahtar yönetimi](https://docs.microsoft.com/sql/relational-databases/security/encryption/extensible-key-management-using-azure-key-vault-sql-server).
+Azure sanal makinesinde çalışan SQL Server, Key Vault bir asimetrik anahtar da kullanabilir. Yapılandırma adımları SQL veritabanı ve SQL yönetilen örneği 'nde asimetrik anahtar kullanmaktan farklıdır. Daha fazla bilgi için [Azure Key Vault (SQL Server) kullanarak Genişletilebilir anahtar yönetimi](https://docs.microsoft.com/sql/relational-databases/security/encryption/extensible-key-management-using-azure-key-vault-sql-server)bölümüne bakın.
 
-## <a name="service-managed-transparent-data-encryption"></a>Hizmetle yönetilen şeffaf veri şifreleme
+## <a name="service-managed-transparent-data-encryption"></a>Hizmet tarafından yönetilen saydam veri şifrelemesi
 
-Azure'da varsayılan saydam veri şifrelemesi için veritabanı şifreleme anahtarını bir yerleşik bir sunucu sertifikası tarafından korunduğunu ayardır. Yerleşik bir sunucu sertifikası her sunucu için benzersizdir. Coğrafi çoğaltma ilişkisinde bir veritabanı olduğundan, birincil ve ikincil coğrafi çoğaltmalı veritabanı birincil veritabanının ana sunucu anahtarı tarafından korunur. İki veritabanı aynı sunucuya bağlandıysanız ayrıca yerleşik aynı sertifikayı paylaşırlar. Microsoft otomatik olarak bu sertifikaları iç güvenlik ilkesi ayarlarıyla döndürür ve kök anahtarı Microsoft bir iç gizli dizi deposu tarafından korunur.  Müşteriler, SQL veritabanı uyumluluk bağımsız üçüncü taraf Denetim raporları kullanılabilir iç güvenlik ilkeleri ile kontrol edebilirsiniz [Microsoft Trust Center](https://servicetrust.microsoft.com/).
+Azure 'da, saydam veri şifrelemesi için varsayılan ayar, veritabanı şifreleme anahtarının yerleşik bir sunucu sertifikasıyla korunansıdır. Yerleşik sunucu sertifikası her bir sunucu için benzersizdir ve kullanılan şifreleme algoritması AES 256 ' dir. Bir veritabanı coğrafi çoğaltma ilişkisinde ise, birincil ve coğrafi ikincil veritabanı birincil veritabanının üst sunucu anahtarı tarafından korunur. İki veritabanı aynı sunucuya bağlıysa aynı zamanda aynı yerleşik sertifikayı paylaşır.  Microsoft bu sertifikaları iç güvenlik ilkesiyle uyumlu olarak otomatik olarak döndürür ve kök anahtar Microsoft iç gizli dizisi tarafından korunur.  Müşteriler, [Microsoft Güven Merkezi](https://servicetrust.microsoft.com/)'nde bulunan bağımsız üçüncü taraf denetim raporlarında iç GÜVENLIK Ilkeleriyle SQL veritabanı uyumluluğunu doğrulayabilirler.
 
-Microsoft ayrıca sorunsuz bir şekilde taşır ve coğrafi çoğaltma için gerektiği şekilde anahtarları yönetir ve geri yükler.
+Microsoft ayrıca, coğrafi çoğaltma ve geri yükleme için gerektiğinde anahtarları sorunsuzca taşımalı ve yönetir.
 
 > [!IMPORTANT]
-> Yeni oluşturulan tüm SQL veritabanları, varsayılan olarak hizmetle yönetilen şeffaf veri şifreleme kullanılarak şifrelenir. Varsayılan olarak Azure SQL yönetilen örnek veritabanları, Mayıs 2017'den önce oluşturulan mevcut SQL veritabanları ve SQL veritabanlarını geri yükleme, coğrafi çoğaltma ve veritabanı kopyalama oluşturulan şifrelenmez.
+> Yeni oluşturulan tüm SQL veritabanları ve yönetilen örnek veritabanları, hizmet tarafından yönetilen saydam veri şifrelemesi kullanılarak varsayılan olarak şifrelenir. 2017 Mayıs 'tan önce oluşturulan mevcut SQL veritabanları ve geri yükleme, coğrafi çoğaltma ve veritabanı kopyası kullanılarak oluşturulan SQL veritabanları varsayılan olarak şifrelenmez. 2019 Şubat 'tan önce oluşturulan mevcut yönetilen örnek veritabanları varsayılan olarak şifrelenmez. Restore ile oluşturulan yönetilen örnek veritabanları, kaynaktan şifreleme durumunu devralma.
 
-## <a name="customer-managed-transparent-data-encryption---bring-your-own-key"></a>Müşteri tarafından yönetilen saydam veri şifrelemesi - kendi anahtarını Getir
+## <a name="customer-managed-transparent-data-encryption---bring-your-own-key"></a>Müşteri tarafından yönetilen saydam veri şifrelemesi-Kendi Anahtarını Getir
 
-[Azure anahtar Kasası'nda müşteri tarafından yönetilen anahtarlarla TDE](transparent-data-encryption-byok-azure-sql.md) veritabanı şifreleme anahtarı (DEK) TDE koruyucusu olarak adlandırılan bir müşteri tarafından yönetilen asimetrik anahtar ile şifreleme sağlar.  Bu ayrıca genellikle için saydam veri şifrelemesi Getir bilgisayarınızı kendi anahtarını (BYOK olarak) destekleyecek şekilde adlandırılır. BYOK senaryoda TDE koruyucusuna bir müşteriye ait içinde depolanır ve yönetilen [Azure anahtar kasası](https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault), Azure'un bulut tabanlı dış anahtar yönetimi sistemi. TDE koruyucusuna olabilir [anahtar kasası tarafından oluşturulan veya kasaya aktarılan](https://docs.microsoft.com/azure/key-vault/about-keys-secrets-and-certificates#key-vault-keys) üzerinde bir şirket içi HSM CİHAZDAN. Bir veritabanının önyükleme sayfası üzerinde depolanan TDE DEK şifrelenir ve TDE Azure anahtar Kasası'nda depolanır ve hiçbir zaman anahtar kasası ayrılmaz koruyucusu ile şifresi çözülür.  SQL veritabanı DEK şifrelemek ve şifresini çözmek için müşteriye ait anahtar kasasındaki izinleri verilmiş olması gerekir. Mantıksal SQL sunucusu için anahtar kasası izinlerini iptal erişilemez bir veritabanı ve tüm veriler şifrelenir. Azure SQL veritabanı için TDE koruyucusu mantıksal SQL sunucusu düzeyinde ayarlanır ve bu sunucuyla ilişkili tüm veritabanları tarafından devralınır. İçin [Azure SQL yönetilen örneği](https://docs.microsoft.com/azure/sql-database/sql-database-howto-managed-instance) (BYOK özellik önizlemede), TDE koruyucusuna örnek düzeyinde ayarlanır ve tümü tarafından devralınır *şifrelenmiş* bu örneğindeki veritabanları. Terim *sunucu* hem sunucusu ve örneği bu belge boyunca farklı belirtilmedikçe ifade eder.
+[Azure Key Vault içindeki müşteri tarafından yönetilen anahtarlarla birlikte](transparent-data-encryption-byok-azure-sql.md) , veritabanı şifreleme anahtarını (dek) TDE koruyucusu adlı, müşteri tarafından yönetilen bir asimetrik anahtarla şifrelemeyi sağlar.  Bu Ayrıca, Saydam Veri Şifrelemesi için genellikle Kendi Anahtarını Getir (BYOK) desteği olarak adlandırılır. BYOK senaryosunda, TDE koruyucusu, Azure 'un bulut tabanlı dış anahtar yönetim sistemi olan, müşterinin sahip olduğu ve yönetilen [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault)depolanır. TDE koruyucusu, [Anahtar Kasası tarafından oluşturulabilir veya](https://docs.microsoft.com/azure/key-vault/about-keys-secrets-and-certificates#key-vault-keys) ŞIRKET içi HSM cihazından anahtar kasasına aktarılabilir. Bir veritabanının önyükleme sayfasında depolanan TDE, Azure Key Vault ' de depolanan ve anahtar kasasını hiçbir şekilde bırakmayan TDE koruyucusu tarafından şifrelenir ve şifresi çözülür.  SQL veritabanı 'nın, DEK şifre çözme ve şifreleme için müşterinin sahip olduğu Anahtar Kasası 'na izin verilmesi gerekir. Mantıksal SQL Server 'ın Anahtar Kasası için izinleri iptal edildiğinde, bir veritabanına erişilemez ve tüm veriler şifrelenir. Azure SQL veritabanı için, TDE koruyucusu mantıksal SQL Server düzeyinde ayarlanır ve bu sunucuyla ilişkili tüm veritabanları tarafından devralınır. [Azure SQL yönetilen örneği](https://docs.microsoft.com/azure/sql-database/sql-database-howto-managed-instance)IÇIN, TDE koruyucusu örnek düzeyinde ayarlanır ve bu örnekteki tüm *şifreli* veritabanları tarafından devralınır. *Sunucu* terimi, farklı belirtilmedikçe, bu belge boyunca hem sunucu hem de örneğe başvurur.
 
-Azure Key Vault tümleştirmesi sayesinde TDE ile kullanıcılar anahtar devirlerini, anahtar kasası izinlerini, anahtar yedeklemelerini de dahil olmak üzere önemli yönetim görevlerinin denetlemek ve Azure anahtar kasası işlevini kullanarak tüm TDE koruyucusu üzerinde denetim/raporlamayı etkinleştirmek. Key Vault anahtar Merkezi Yönetimi sağlayan, sıkı bir şekilde izlenen donanım güvenlik modülleri (HSM'ler) yararlanır ve güvenlik ilkeleriyle uyumluluğunu karşılamanıza yardımcı olmak üzere anahtar yönetimi ve veri arasında görev ayrımı sağlar.
-Azure SQL veritabanı, SQL yönetilen örneği (Önizleme özelliği BYOK) ve veri ambarı için Azure anahtar kasası tümleştirme (kendi anahtarını Getir desteği) saydam veri şifrelemesi hakkında daha fazla bilgi için bkz: [Azure anahtarı ile saydam veri şifrelemesi Kasa tümleştirme](transparent-data-encryption-byok-azure-sql.md).
+TDE Azure Key Vault tümleştirmeyle, kullanıcılar anahtar döndürmeler, Anahtar Kasası izinleri, anahtar yedeklemeleri dahil olmak üzere önemli yönetim görevlerini denetleyebilir ve Azure Key Vault işlevselliğini kullanarak tüm TDE koruyucuda denetim/raporlamayı etkinleştirebilir. Key Vault, merkezi anahtar yönetimi sağlar, sıkı izlenen donanım güvenlik modüllerini (HSM 'ler) kullanır ve güvenlik ilkeleriyle uyumluluğu karşılamak için anahtar ve veri yönetimi arasında görev ayrımı sağlar.
+Azure SQL veritabanı, SQL yönetilen örneği ve veri ambarı için Azure Key Vault Tümleştirme (Kendi Anahtarını Getir desteği) ile saydam veri şifrelemesi hakkında daha fazla bilgi edinmek için bkz. [Azure Key Vault tümleştirme Ile saydam veri şifrelemesi](transparent-data-encryption-byok-azure-sql.md).
 
-Saydam veri şifrelemesi ile Azure anahtar kasası tümleştirme (kendi anahtarını Getir desteği) kullanmaya başlamak için nasıl yapılır Kılavuzu [PowerShell kullanarak Key vault'tan kendi anahtarınızı saydam veri şifrelemesini açma](transparent-data-encryption-byok-azure-sql-configure.md).
+Azure Key Vault Tümleştirme (Kendi Anahtarını Getir desteği) ile saydam veri şifrelemeyi kullanmaya başlamak için, [PowerShell kullanarak Key Vault kendi anahtarınızı kullanarak saydam veri şifrelemesini etkinleştirme](transparent-data-encryption-byok-azure-sql-configure.md)bölümüne bakın.
 
-## <a name="move-a-transparent-data-encryption-protected-database"></a>Saydam veri şifrelemesi ile korunan bir veritabanını taşıma
+## <a name="move-a-transparent-data-encryption-protected-database"></a>Saydam veri şifrelemesi korumalı veritabanını taşıma
 
-Azure'da işlem veritabanları şifresini gerek yoktur. Kaynak veritabanında veya birincil veritabanında saydam veri şifrelemesini şeffaf bir şekilde hedef devralınır. Dahil edilen işlemi içerir:
+Azure 'daki işlemler için veritabanlarının şifresini çözmeniz gerekmez. Kaynak veritabanındaki veya birincil veritabanındaki saydam veri şifrelemesi ayarları, hedefte saydam olarak devralınır. Dahil edilen işlemler şunları içerir:
 
 - Coğrafi Geri Yükleme
-- Self Servis-belirli bir noktaya geri yükleme
-- Silinen bir veritabanını geri yükleme
+- Self servis zaman içinde geri yükleme
+- Silinen bir veritabanının geri yüklenmesi
 - Etkin coğrafi çoğaltma
-- Bir veritabanı kopyası oluşturma
+- Veritabanı kopyası oluşturma
 - Yedekleme dosyasını Azure SQL yönetilen örneğine geri yükleme
 
 > [!IMPORTANT]
-> Şifreleme için kullanılan sertifika erişilebilir olmadığından el ile yalnızca kopya yedekleme TDE yönetilen hizmeti tarafından şifrelenmiş bir veritabanının Azure SQL yönetilen örneği'nde, izin verilmiyor. Bu veritabanı türünde başka bir yönetilen örnek'e taşımak için noktası içinde belirli bir geri yükleme özelliği kullanın.
+> Şifreleme için kullanılan sertifikaya erişilemediğinden, Azure SQL yönetilen örneği 'nde yalnızca hizmet tarafından yönetilen TDE tarafından şifrelenen bir veritabanının yedeğinin alınmasına izin verilmez. Bu tür bir veritabanını başka bir yönetilen örneğe taşımak için zaman noktası geri yükleme özelliğini kullanın.
 
-Saydam veri şifrelemesi ile korunan veritabanını dışarı aktarma, dışa aktarılan veritabanının içeriğini şifreli değil. Dışarı aktarılan bu içerik, şifrelenmemiş BACPAC dosyalarında depolanır. BACPAC dosyalarını uygun şekilde koruyun ve yeni veritabanının içeri aktarma tamamlandıktan sonra saydam veri şifrelemesini etkinleştirme emin olun.
+Saydam bir veri şifreleme korumalı veritabanını dışarı aktardığınızda, veritabanının dışarı aktarılmış içeriği şifrelenmez. Bu içe aktarılmış içerik şifrelenmemiş BACPAC dosyalarında depolanır. BACPAC dosyalarını uygun şekilde koruduğunuzdan emin olun ve yeni veritabanını içeri aktarma işlemi tamamlandıktan sonra saydam veri şifrelemeyi etkinleştirin.
 
-Örneğin, bir şirket içi SQL Server örneğinden BACPAC dosyasına dışarı aktarılır, yeni veritabanının içeri aktarılan içeriği otomatik olarak şifrelenir değil. Şirket içi SQL Server örneğine BACPAC dosyasına dışarı aktarılır, benzer şekilde, yeni veritabanı da otomatik olarak şifrelenir değil.
+Örneğin, BACPAC dosyası şirket içi SQL Server örneğinden aktarılmışsa, yeni veritabanının içeri aktarılan içeriği otomatik olarak şifrelenmez. Benzer şekilde, BACPAC dosyası bir şirket içi SQL Server örneğine aktarılmışsa, yeni veritabanı da otomatik olarak şifrelenmez.
 
-Bunun tek istisnası, için ve bir SQL veritabanından dışarı andır. Yeni veritabanı saydam veri şifrelemesi etkin ancak BACPAC dosyasına şifreli değildir.
+Bir SQL veritabanına veya sunucudan dışarı aktardığınızda tek bir istisna olur. Saydam veri şifrelemesi yeni veritabanında etkinleştirilmiştir, ancak BACPAC dosyası yine de şifrelenmemiştir.
 
-## <a name="manage-transparent-data-encryption-in-the-azure-portal"></a>Azure portalında saydam veri şifrelemesini yönetin
 
-Azure portalı üzerinden saydam veri şifrelemesini yapılandırmak için Azure sahibi, katkıda bulunan veya SQL Güvenlik Yöneticisi bağlanması gerekir.
+## <a name="manage-transparent-data-encryption"></a>Saydam veri şifrelemesini yönetme
+# <a name="portaltabazure-portal"></a>[Portal](#tab/azure-portal)
+Azure portal saydam veri şifrelemesini yönetin.
 
-Veritabanı düzeyinde saydam veri şifrelemesi açıp kapatın. Bir veritabanı saydam veri şifrelemesini etkinleştirmek için Git [Azure portalında](https://portal.azure.com) ve Azure Yöneticisi veya Katılımcısı hesabınızla oturum açın. Saydam veri şifrelemesi ayarları kullanıcı veritabanınıza altında bulun. Varsayılan olarak hizmetle yönetilen şeffaf veri şifrelemesi kullanılır. Saydam veri şifreleme sertifikasını içeren bir veritabanı sunucusu için otomatik olarak oluşturulur. Azure SQL yönetilen örneği için bir veritabanında saydam veri şifrelemesi açıp kapatmak için T-SQL kullanın.
+Saydam veri şifrelemesini Azure portal aracılığıyla yapılandırmak için Azure sahibi, katkıda bulunan veya SQL güvenlik yöneticisi olarak bağlı olmanız gerekir.
 
-![Hizmetle yönetilen şeffaf veri şifreleme](./media/transparent-data-encryption-azure-sql/service-managed-tde.png)  
+Saydam veri şifrelemesini veritabanı düzeyinde açıp kapatabilirsiniz. Bir veritabanında saydam veri şifrelemeyi etkinleştirmek için [Azure Portal](https://portal.azure.com) gidin ve Azure yöneticinize veya katkıda bulunan hesabınızla oturum açın. Kullanıcı veritabanınız altında saydam veri şifreleme ayarlarını bulun. Varsayılan olarak, hizmet tarafından yönetilen saydam veri şifrelemesi kullanılır. Bir saydam veri şifreleme sertifikası, veritabanını içeren sunucu için otomatik olarak oluşturulur. Azure SQL yönetilen örneği için T-SQL kullanarak bir veritabanında saydam veri şifrelemeyi açın ve kapatın.
 
-Sunucu düzeyinde saydam veri şifrelemesi ana anahtarı olarak da bilinen saydam veri şifrelemesi koruyucu ayarladığınız. Kendi anahtarını Getir destekli saydam veri şifrelemesi kullanma ve veritabanlarınızı Key vault'tan bir anahtar ile koruma için saydam veri şifrelemesi ayarları sunucunuz altında açın.
+![Hizmet tarafından yönetilen saydam veri şifrelemesi](./media/transparent-data-encryption-azure-sql/service-managed-tde.png)  
 
-![Kendi anahtarınızı getirin desteği ile saydam veri şifrelemesi](./media/transparent-data-encryption-azure-sql/tde-byok-support.png)
+Saydam veri şifreleme koruyucusu olarak da bilinen saydam veri şifrelemesi ana anahtarını sunucu düzeyinde ayarlarsınız. Kendi Anahtarını Getir desteği ile saydam veri şifrelemeyi kullanmak ve veritabanlarınızı Key Vault bir anahtarla korumak için, sunucunuzun altındaki saydam veri şifreleme ayarlarını açın.
 
-## <a name="manage-transparent-data-encryption-by-using-powershell"></a>Saydam veri şifrelemesi, PowerShell kullanarak yönetme
+![Kendi Anahtarını Getir desteği ile saydam veri şifrelemesi](./media/transparent-data-encryption-azure-sql/tde-byok-support.png)
+
+# <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
+PowerShell kullanarak saydam veri şifrelemesini yönetin.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 > [!IMPORTANT]
-> Azure Resource Manager PowerShell modülü, Azure SQL veritabanı tarafından hala desteklenmektedir, ancak tüm gelecekteki geliştirme için Az.Sql modüldür. Bu cmdlet'ler için bkz. [Azurerm.SQL'e](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az modül ve AzureRm modülleri komutları için bağımsız değişkenler büyük ölçüde aynıdır.
+> PowerShell Azure Resource Manager modülü Azure SQL veritabanı tarafından hala desteklenmektedir, ancak gelecekteki tüm geliştirmeler az. SQL modülüne yöneliktir. Bu cmdlet 'ler için bkz. [Azurerd. SQL](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az Module ve Azurerd modüllerinde komutların bağımsız değişkenleri önemli ölçüde aynıdır.
 
-Saydam veri şifrelemesi PowerShell üzerinden yapılandırmak için Azure sahibi, katkıda bulunan veya SQL Güvenlik Yöneticisi bağlanması gerekir.
+Saydam veri şifrelemesini PowerShell aracılığıyla yapılandırmak için Azure sahibi, katkıda bulunan veya SQL güvenlik yöneticisi olarak bağlı olmanız gerekir.
 
-### <a name="cmdlets-for-azure-sql-database-and-data-warehouse"></a>Azure SQL veritabanı ve veri ambarı için cmdlet'leri
+### <a name="cmdlets-for-azure-sql-database-and-data-warehouse"></a>Azure SQL veritabanı ve veri ambarı için cmdlet 'ler
 
-Azure SQL veritabanı ve veri ambarı için aşağıdaki cmdlet'leri kullanın:
+Azure SQL veritabanı ve veri ambarı için aşağıdaki cmdlet 'leri kullanın:
 
 | Cmdlet | Açıklama |
 | --- | --- |
-| [Set-AzSqlDatabaseTransparentDataEncryption](https://docs.microsoft.com/powershell/module/az.sql/set-azsqldatabasetransparentdataencryption) |Etkinleştirir veya bir veritabanı için saydam veri şifrelemesi devre dışı bırakır|
+| [Set-AzSqlDatabaseTransparentDataEncryption](https://docs.microsoft.com/powershell/module/az.sql/set-azsqldatabasetransparentdataencryption) |Bir veritabanı için saydam veri şifrelemeyi etkinleştirilir veya devre dışı bırakır|
 | [Get-AzSqlDatabaseTransparentDataEncryption](https://docs.microsoft.com/powershell/module/az.sql/get-azsqldatabasetransparentdataencryption) |Bir veritabanı için saydam veri şifreleme durumunu alır |
-| [Get-AzSqlDatabaseTransparentDataEncryptionActivity](https://docs.microsoft.com/powershell/module/az.sql/get-azsqldatabasetransparentdataencryptionactivity) |Bir veritabanı şifreleme ilerleme durumunu denetler |
-| [Add-AzSqlServerKeyVaultKey](https://docs.microsoft.com/powershell/module/az.sql/add-azsqlserverkeyvaultkey) |Bir Key Vault anahtarı bir SQL Server örneğine ekler. |
-| [Get-AzSqlServerKeyVaultKey](https://docs.microsoft.com/powershell/module/az.sql/get-azsqlserverkeyvaultkey) |Azure SQL veritabanı sunucusu için anahtar kasası anahtarlarını alır  |
-| [Set-AzSqlServerTransparentDataEncryptionProtector](https://docs.microsoft.com/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) |Saydam veri şifrelemesi koruyucu bir SQL Server örneği için ayarlar |
-| [Get-AzSqlServerTransparentDataEncryptionProtector](https://docs.microsoft.com/powershell/module/az.sql/get-azsqlservertransparentdataencryptionprotector) |Saydam veri şifrelemesi koruyucu alır |
-| [Remove-AzSqlServerKeyVaultKey](https://docs.microsoft.com/powershell/module/az.sql/remove-azsqlserverkeyvaultkey) |Bir Key Vault anahtarı bir SQL Server örneğinden kaldırır. |
+| [Get-AzSqlDatabaseTransparentDataEncryptionActivity](https://docs.microsoft.com/powershell/module/az.sql/get-azsqldatabasetransparentdataencryptionactivity) |Bir veritabanı için şifreleme ilerlemesini denetler |
+| [Add-AzSqlServerKeyVaultKey](https://docs.microsoft.com/powershell/module/az.sql/add-azsqlserverkeyvaultkey) |Bir SQL Server örneğine Key Vault anahtarı ekler |
+| [Get-AzSqlServerKeyVaultKey](https://docs.microsoft.com/powershell/module/az.sql/get-azsqlserverkeyvaultkey) |Azure SQL veritabanı sunucusu için Key Vault anahtarlarını alır  |
+| [Set-AzSqlServerTransparentDataEncryptionProtector](https://docs.microsoft.com/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) |SQL Server örneği için saydam veri şifreleme koruyucusunu ayarlar |
+| [Get-AzSqlServerTransparentDataEncryptionProtector](https://docs.microsoft.com/powershell/module/az.sql/get-azsqlservertransparentdataencryptionprotector) |Saydam veri şifreleme koruyucusunu alır |
+| [Remove-AzSqlServerKeyVaultKey](https://docs.microsoft.com/powershell/module/az.sql/remove-azsqlserverkeyvaultkey) |Bir SQL Server örneğinden Key Vault anahtarı kaldırır |
 |  | |
 
 > [!IMPORTANT]
-> Azure SQL yönetilen örnek için T-SQL kullanma [ALTER DATABASE](https://docs.microsoft.com/sql/t-sql/statements/alter-database-azure-sql-database) saydam veri şifrelemesi açıp bir veritabanı düzeyinde etkinleştirmek ve denetlemek için komut [PowerShell betik örneği](transparent-data-encryption-byok-azure-sql-configure.md) saydam verileri yönetmek için Örnek düzeyinde şifreleme sağlar.
+> Azure SQL yönetilen örneği için, bir veritabanı düzeyinde saydam veri şifrelemeyi açmak ve kapatmak için T-SQL [alter database](https://docs.microsoft.com/sql/t-sql/statements/alter-database-azure-sql-database) komutunu kullanın ve örnek düzeyinde saydam veri şifrelemesini yönetmek Için [örnek PowerShell betiğini](transparent-data-encryption-byok-azure-sql-configure.md) kontrol edin.
 
-## <a name="manage-transparent-data-encryption-by-using-transact-sql"></a>Saydam veri şifrelemesi, Transact-SQL kullanarak yönetme
+# <a name="transact-sqltabazure-transactsql"></a>[Transact-SQL](#tab/azure-TransactSQL)
+Transact-SQL ' i kullanarak saydam veri şifrelemesini yönetin.
 
-Bir yönetici ya da üyesi olan bir oturum açma kullanarak veritabanına bağlanma **dbmanager** asıl veritabanı rolü.
+Ana veritabanında bir yönetici veya **DBManager** rolünün üyesi olan bir oturum kullanarak veritabanına bağlanın.
 
 | Komut | Açıklama |
 | --- | --- |
-| [ALTER DATABASE (Azure SQL veritabanı)](https://docs.microsoft.com/sql/t-sql/statements/alter-database-azure-sql-database) | Şifreleme Kapat AYARLAMAK şifreler veya bir veritabanı şifresini çözer. |
-| [sys.dm_database_encryption_keys](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-database-encryption-keys-transact-sql) |Şifreleme anahtarlarını bir veritabanı ve onun ilişkili veritabanı şifreleme durumu hakkında bilgi döndürür |
-| [sys.dm_pdw_nodes_database_encryption_keys](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-nodes-database-encryption-keys-transact-sql) |Her bir veri şifreleme durumunu hakkında bilgi verir ambarı düğümü ve onun ilişkili veritabanı şifreleme anahtarları |
+| [ALTER DATABASE (Azure SQL veritabanı)](https://docs.microsoft.com/sql/t-sql/statements/alter-database-azure-sql-database) | ŞIFRELEMEYI ayarlama/kapatma bir veritabanının şifresini şifreler veya şifresini çözer |
+| [sys. dm_database_encryption_keys](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-database-encryption-keys-transact-sql) |Bir veritabanının şifreleme durumu ve ilişkili veritabanı şifreleme anahtarları hakkında bilgi döndürür |
+| [sys. dm_pdw_nodes_database_encryption_keys](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-nodes-database-encryption-keys-transact-sql) |Her bir veri ambarı düğümünün ve ilişkili veritabanı şifreleme anahtarlarının şifreleme durumu hakkında bilgi döndürür |
 |  | |
 
-Transact-SQL kullanarak Key Vault'tan bir anahtar için saydam veri şifrelemesi koruyucu geçemezsiniz. PowerShell veya Azure portalını kullanın.
+Transact-SQL ' y i kullanarak, saydam veri şifreleme koruyucusunu Key Vault bir anahtara geçirebilirsiniz. PowerShell veya Azure portal kullanın.
 
-## <a name="manage-transparent-data-encryption-by-using-the-rest-api"></a>Saydam veri şifrelemesi, REST API kullanarak yönetme
+# <a name="rest-apitabazure-restapi"></a>[REST API](#tab/azure-RESTAPI)
+REST API kullanarak saydam veri şifrelemesini yönetin.
 
-REST API aracılığıyla saydam veri şifrelemesini yapılandırmak için Azure sahibi, katkıda bulunan veya SQL Güvenlik Yöneticisi bağlanması gerekir.
-Azure SQL veritabanı ve veri ambarı için aşağıdaki komutları kümesini kullanın:
+Saydam veri şifrelemesini REST API aracılığıyla yapılandırmak için Azure sahibi, katkıda bulunan veya SQL güvenlik yöneticisi olarak bağlı olmanız gerekir.
+Azure SQL veritabanı ve veri ambarı için aşağıdaki komut kümesini kullanın:
 
 | Komut | Açıklama |
 | --- | --- |
-|[Oluşturma veya güncelleştirme sunucusu](https://docs.microsoft.com/rest/api/sql/servers/createorupdate)|Azure Active Directory kimliği (anahtar Kasası'na erişim vermek için kullanılır) bir SQL Server örneğine ekler|
-|[Sunucu anahtarı oluşturma veya güncelleştirme](https://docs.microsoft.com/rest/api/sql/serverkeys/createorupdate)|Bir Key Vault anahtarı bir SQL Server örneğine ekler.|
-|[Sunucu anahtarını Sil](https://docs.microsoft.com/rest/api/sql/serverkeys/delete)|Bir Key Vault anahtarı bir SQL Server örneğinden kaldırır.|
-|[Sunucu anahtarları alma](https://docs.microsoft.com/rest/api/sql/serverkeys/get)|Bir SQL Server örneğinden belirli bir Key Vault anahtarı alır|
-|[Sunucu tarafından Server anahtarlarını Listele](https://docs.microsoft.com/rest/api/sql/serverkeys/listbyserver)|SQL Server örneği için anahtar kasası anahtarlarını alır |
-|[Şifreleme koruyucusu güncelle](https://docs.microsoft.com/rest/api/sql/encryptionprotectors/createorupdate)|Saydam veri şifrelemesi koruyucu bir SQL Server örneği için ayarlar|
-|[Şifreleme koruyucusunu alın](https://docs.microsoft.com/rest/api/sql/encryptionprotectors/get)|Saydam veri şifrelemesi koruyucu bir SQL Server örneğini alır.|
-|[Sunucu şifreleme Koruyucularıyla listesi](https://docs.microsoft.com/rest/api/sql/encryptionprotectors/listbyserver)|Saydam veri şifrelemesi koruyucu bir SQL Server örneğini alır. |
-|[Saydam veri şifreleme yapılandırması güncelle](https://docs.microsoft.com/rest/api/sql/transparentdataencryptions/createorupdate)|Etkinleştirir veya bir veritabanı için saydam veri şifrelemesi devre dışı bırakır|
-|[Saydam veri şifrelemesi yapılandırmasını alma](https://docs.microsoft.com/rest/api/sql/transparentdataencryptions/get)|Bir veritabanı için saydam veri şifreleme yapılandırması alır|
-|[Liste saydam veri şifreleme yapılandırma sonuçları](https://docs.microsoft.com/rest/api/sql/transparentdataencryptionactivities/listbyconfiguration)|Bir veritabanı için şifreleme sonucunu alır|
+|[Sunucu oluştur veya güncelleştir](https://docs.microsoft.com/rest/api/sql/servers/createorupdate)|Bir SQL Server örneğine Azure Active Directory kimliği ekler (Key Vault erişim vermek için kullanılır)|
+|[Sunucu anahtarı oluştur veya güncelleştir](https://docs.microsoft.com/rest/api/sql/serverkeys/createorupdate)|Bir SQL Server örneğine Key Vault anahtarı ekler|
+|[Sunucu anahtarını Sil](https://docs.microsoft.com/rest/api/sql/serverkeys/delete)|Bir SQL Server örneğinden Key Vault anahtarı kaldırır|
+|[Sunucu anahtarlarını al](https://docs.microsoft.com/rest/api/sql/serverkeys/get)|SQL Server örneğinden belirli bir Key Vault anahtarını alır|
+|[Sunucu anahtarlarını sunucuya göre Listele](https://docs.microsoft.com/rest/api/sql/serverkeys/listbyserver)|Bir SQL Server örneği için Key Vault anahtarlarını alır |
+|[Şifreleme koruyucusu oluştur veya güncelleştir](https://docs.microsoft.com/rest/api/sql/encryptionprotectors/createorupdate)|SQL Server örneği için saydam veri şifreleme koruyucusunu ayarlar|
+|[Şifreleme koruyucusunu al](https://docs.microsoft.com/rest/api/sql/encryptionprotectors/get)|SQL Server örneği için saydam veri şifreleme koruyucusunu alır|
+|[Şifreleme koruyucularını sunucuya göre Listele](https://docs.microsoft.com/rest/api/sql/encryptionprotectors/listbyserver)|SQL Server örneği için saydam veri şifreleme koruyucularını alır |
+|[Saydam Veri Şifrelemesi yapılandırma oluşturma veya güncelleştirme](https://docs.microsoft.com/rest/api/sql/transparentdataencryptions/createorupdate)|Bir veritabanı için saydam veri şifrelemeyi etkinleştirilir veya devre dışı bırakır|
+|[Saydam Veri Şifrelemesi yapılandırmasını al](https://docs.microsoft.com/rest/api/sql/transparentdataencryptions/get)|Bir veritabanı için saydam veri şifrelemesi yapılandırmasını alır|
+|[Saydam Veri Şifrelemesi yapılandırma sonuçlarını Listele](https://docs.microsoft.com/rest/api/sql/transparentdataencryptionactivities/listbyconfiguration)|Bir veritabanı için şifreleme sonucunu alır|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Saydam veri şifrelemesi genel bir açıklaması için bkz. [saydam veri şifrelemesi](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption).
-- Azure SQL veritabanı, Azure SQL yönetilen örneği ve veri ambarı için kendi anahtarını Getir desteği ile saydam veri şifrelemesi hakkında daha fazla bilgi için bkz: [kendi anahtarınızı getirin desteği ile saydam veri şifrelemesi](transparent-data-encryption-byok-azure-sql.md).
-- Kendi anahtarınızı getirin desteği ile saydam veri şifrelemesi'ni kullanmaya başlamak için nasıl yapılır Kılavuzu [PowerShell kullanarak Key vault'tan kendi anahtarınızı saydam veri şifrelemesini açma](transparent-data-encryption-byok-azure-sql-configure.md).
-- Key Vault hakkında daha fazla bilgi için bkz. [Key Vault belgeleri sayfasını](https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault).
+- Saydam veri şifrelemesi hakkında genel bir açıklama için bkz. [Saydam veri şifrelemesi](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption).
+- Azure SQL veritabanı, Azure SQL yönetilen örneği ve veri ambarı için Kendi Anahtarını Getir desteğiyle saydam veri şifrelemesi hakkında daha fazla bilgi için, bkz. [kendi anahtarını getir desteğiyle saydam veri şifrelemesi](transparent-data-encryption-byok-azure-sql.md).
+- Kendi Anahtarını Getir desteğiyle saydam veri şifrelemeyi kullanmaya başlamak için, [PowerShell kullanarak Key Vault kendi anahtarınızı kullanarak saydam veri şifrelemesini etkinleştirme](transparent-data-encryption-byok-azure-sql-configure.md)bölümüne bakın.
+- Key Vault hakkında daha fazla bilgi için [Key Vault belgeler sayfasına](https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault)bakın.

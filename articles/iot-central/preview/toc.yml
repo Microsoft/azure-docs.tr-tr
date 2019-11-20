@@ -1,0 +1,155 @@
+- name: Azure IoT Central belgeleri (önizleme özellikleri)
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure IoT Central nedir?
+      href: overview-iot-central.md
+    - name: IoT Çözümü seçenekleri
+      href: ../core/overview-iot-options.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+    - name: Kullanıcı arabirimi turu
+      href: overview-iot-central-tour.md
+    - name: Bağlanma
+      href: overview-iot-central-get-connected.md
+    - name: Bağlı kalma
+      href: overview-iot-central-stay-connected.md
+    - name: Dönüşüm
+      href: overview-iot-central-transform.md
+- name: Hızlı Başlangıçlar
+  expanded: true
+  items:
+    - name: 1. Yeni uygulama oluşturma
+      href: quick-deploy-iot-central.md
+    - name: 2. Sanal cihaz ekleme
+      href: quick-create-pnp-device.md
+    - name: 3. Kuralları ve eylemleri yapılandırma
+      href: quick-configure-rules.md
+    - name: 4. Cihazlarınızı izleme
+      href: quick-monitor-devices.md
+- name: Öğreticiler
+  items:
+    - name: Bağlanma
+      items:
+        - name: IoT cihazı şablonunu oluşturma ve yönetme
+          href: tutorial-define-iot-device-type.md
+        - name: Cihaz bağlama
+          href: tutorial-connect-pnp-device.md
+        - name: IoT Edge cihazı şablonunu oluşturma ve yönetme
+          href: tutorial-define-edge-device-type.md
+        - name: IoT Edge cihazına bağlanma
+          href: tutorial-add-edge-as-leaf-device.md
+    - name: Bağlı kalma
+      items:
+        - name: Cihaz grubu oluşturma
+          href: tutorial-use-device-groups.md
+    - name: Dönüşüm
+      items:
+        - name: Kural oluşturma
+          href: tutorial-create-telemetry-rules.md
+        - name: REST API kullanma
+          href: 'https://docs.microsoft.com/learn/modules/manage-iot-central-apps-with-rest-api/'
+- name: Kavramlar
+  items:
+    - name: Mimari
+      href: concepts-architecture.md
+    - name: Uygulama şablonları nedir?
+      href: ../core/concepts-app-templates.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Bağlanma
+      items:
+        - name: MXChip IoT DevKit’i hazırlama ve bağlama
+          href: howto-connect-devkit.md
+        - name: RuuviTag cihazını hazırlama ve bağlama
+          href: howto-connect-ruuvi.md
+        - name: Rigado Cascade 500'ü hazırlama ve bağlama
+          href: howto-connect-rigado-cascade-500.md
+    - name: Bağlı kalma
+      items:
+        - name: Azure CLI'yı kullanarak cihaz bağlantısını izleme
+          href: howto-monitor-devices-azure-cli.md
+        - name: Cihaz şablonu için sürüm oluşturma
+          href: howto-version-device-template.md
+        - name: Cihazlarınızı yönetme
+          href: howto-manage-devices.md
+        - name: Cihaz verilerinizi analiz etme
+          href: howto-create-analytics.md
+        - name: Panonuza kutucuklar ekleme
+          href: ../core/howto-add-tiles-to-your-dashboard.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+        - name: Azure IoT Central kişisel panolarını oluşturma
+          href: ../core/howto-create-personal-dashboards.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+        - name: İş çalıştırma
+          href: ../core/howto-run-a-job.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+        - name: Cihaz şablonu için sürüm oluşturma
+          href: howto-version-device-template.md
+    - name: Dönüşüm
+      items:
+        - name: Verileri sürekli dışarı aktarmayı yapılandırma
+          href: howto-export-data.md
+        - name: Kurallar üzerinde web kancaları oluşturma
+          href: howto-create-webhooks.md
+        - name: Kurallar üzerinde Azure İzleyici eylem gruplarını bağlama
+          href: howto-use-action-groups.md
+        - name: Özel kurallar oluşturma
+          href: howto-create-custom-rules.md
+        - name: Databricks ile özel analizler oluşturma
+          href: howto-create-custom-analytics.md
+    - name: Yönetim
+      items:
+        - name: Uygulamanızı yönetme
+          items:
+            - name: Uygulama ayarlarını değiştirme
+              href: howto-administer.md
+            - name: Kullanıcıları ve rolleri yönetme
+              href: howto-manage-users-roles.md
+            - name: Faturanızı yönetme
+              href: howto-view-bill.md
+            - name: Uygulama kullanıcı arabirimini özelleştirme
+              href: howto-customize-ui.md
+            - name: Uygulamanızı dışarı aktarma
+              href: howto-use-app-templates.md
+        - name: Başka yerlerden yönetme
+          items:
+            - name: Azure portalından yönetme
+              href: ../core/howto-manage-iot-central-from-portal.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+            - name: Azure CLI’den yönetme
+              href: ../core/howto-manage-iot-central-from-cli.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+            - name: Azure PowerShell’den yönetme
+              href: ../core/howto-manage-iot-central-from-powershell.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+            - name: CSP portalından yönetme
+              href: ../core/howto-create-and-manage-applications-csp.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+        - name: Uygulamayı kişiselleştirme
+          items:
+            - name: Kişisel tercihlerinizi yönetme
+              href: ../core/howto-manage-preferences.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+            - name: Canlı sohbeti açma/kapatma
+              href: ../core/howto-show-hide-chat.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+- name: İlgili
+  items:
+    - name: Platform hizmetleri
+      items:
+        - name: IoT Hub
+          href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
+        - name: IoT Hub Cihazı Sağlama Hizmeti
+          href: /azure/iot-dps
+        - name: Konum Tabanlı Hizmetler
+          href: /azure/location-based-services
+        - name: Hizmet SDK'ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+        - name: Time Series Insights
+          href: /azure/time-series-insights
+    - name: IoT Edge
+      items:
+        - name: Azure IoT Edge
+          href: /azure/iot-edge
+        - name: IoT Cihaz SDK'ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+- name: Kaynaklar
+  items:
+    - name: REST API
+      href: 'https://docs.microsoft.com/rest/api/iotcentral/'
+    - name: Müşteri verisi istekleri
+      href: ../core/iot-central-customer-data-requests.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+    - name: Desteklenen tarayıcılar
+      href: ../core/iot-central-supported-browsers.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json

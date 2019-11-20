@@ -1,7 +1,7 @@
 ---
-title: Toplu işe testi
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: Toplu test uygulama geliştirebilirsiniz ve kendi dil anlama geliştirmek için sürekli olarak çalışmak için kullanın.
+title: Batch testi-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Uygulamanızı iyileştirmek ve dilini anlamak için, uygulamanızda sürekli olarak çalışmak üzere toplu test kullanın.
 services: cognitive-services
 author: diberry
 manager: nitinme
@@ -9,48 +9,48 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 03/29/2019
+ms.date: 10/25/2019
 ms.author: diberry
-ms.openlocfilehash: acb561970b6a8576d1219fc15758e21a3032c9e5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e9ad7c52af20762633c710b39a64fbebf0cf6213
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60813314"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73487736"
 ---
-# <a name="batch-testing-with-1000-utterances-in-luis-portal"></a>Batch ile 1000 konuşma LUIS portalında test etme
+# <a name="batch-testing-with-1000-utterances-in-luis-portal"></a>LUSıS portalındaki 1000 ile Batch testleri
 
-Toplu test doğrular, [etkin](luis-concept-version.md#active-version) tahmin doğruluğunun ölçmek için eğitilen modeli. Toplu test geçerli eğitilen modelinizde grafikteki her bir hedefi ve varlık doğruluğunu görüntülemenize yardımcı olur. Uygulamanız için doğru amacını tanımlamak sık sık başarısız olursa bir amaç için daha fazla örnek Konuşma ekleme gibi doğruluğunu, artırmak için uygun eylemde toplu test sonuçlarını gözden geçirin.
+Toplu işlem testi, etkin eğitilen sürümünüzü tahmin doğruluğunu ölçecek şekilde doğrular. Batch testi, etkin sürümünüzde her bir amaç ve varlığın doğruluğunu görüntülemenize yardımcı olur ve sonuçları grafik ile görüntüler. Uygulamanızın bir amaca göre doğru amacı belirleyemediği veya etiketlenmesini sağlamak için bir amaca daha fazla örnek ekleme gibi bir amaca yönelik daha fazla örnek ekleme gibi işlem testi sonuçlarını gözden geçirin.
 
-## <a name="group-data-for-batch-test"></a>Toplu test grubu verileri
+## <a name="group-data-for-batch-test"></a>Batch testi için grup verileri
 
-Toplu test etmek için kullanılan konuşma LUIS için yeni önemlidir. Bir veri kümesi konuşma varsa, konuşma üç kümelerine ayırmak: bir amaç için eklenen konuşma, yayımlanan uç noktasından alınan konuşma ve onu eğitildi sonra LUIS toplu test için kullanılan konuşma. 
+Toplu test için kullanılan utterslar, LUIN için yeni bir öneme sahiptir. Bir dizi veri kümesi varsa, bu noktaları üç küme içine ayırın: bir amaca eklenen örnek, yayımlanan uç noktasından alınan utterler ve eğitilen işlem testi için kullanılan utterslar. 
 
-## <a name="a-dataset-of-utterances"></a>Konuşma bir veri kümesi
+## <a name="a-data-set-of-utterances"></a>Bir dizi veri kümesi
 
-Bir toplu iş dosyası olarak bilinen, konuşma, gönderme bir *veri kümesi*, batch test etmek için. Veri kümesi en fazla 1.000 etiketli içeren JSON biçimli bir dosya olan **yinelenmeyen** konuşma. 10 adede kadar veri kümeleri, bir uygulamada test edebilirsiniz. Daha fazla test etmek gerekiyorsa, bir veri kümesini silin ve ardından yeni bir tane ekleyin.
+Toplu işlem testi için *veri kümesi*olarak bilinen uttersünlerdeki toplu iş dosyasını gönder. Veri kümesi, **mükerrer olmayan** bir şekilde etiketlenmiş en fazla 1.000 içeren JSON biçimli bir dosyadır. Bir uygulamada en fazla 10 veri kümesi test edebilirsiniz. Daha fazla test etmeniz gerekiyorsa, bir veri kümesini silip yeni bir tane ekleyin.
 
-|**kuralları**|
+|**Kuralın**|
 |--|
-|\* Hiçbir yinelenen konuşma|
-|Konuşma 1000 veya daha az|
+|\* Yinelenen söylenme yok|
+|1000 utterya veya daha az|
 
-\* Çoğaltmaları tam dize eşleşmeleri, ilk simgeleştirilmiş eşleşme olarak kabul edilir. 
+\* Yinelemeler, ilk başta simgeleştirilmiş eşleştirmelere değil tam dize eşleşmeleri olarak değerlendirilir. 
 
 ## <a name="entities-allowed-in-batch-tests"></a>Batch testlerinde izin verilen varlıklar
 
-Toplu dosya verilerine karşılık gelen hiçbir varlık olsa modelinde tüm özel varlıklar toplu test varlıkları filtrede görünür.
+Toplu iş dosyası verilerinde karşılık gelen bir varlık olmasa bile, modeldeki tüm özel varlıklar, Batch test varlıkları filtresinde görüntülenir.
 
 <a name="json-file-with-no-duplicates"></a>
 <a name="example-batch-file"></a>
 
-## <a name="batch-file-format"></a>Toplu dosya biçimi
+## <a name="batch-file-format"></a>Toplu işlem dosyası biçimi
 
-Toplu iş dosyası konuşma oluşur. Her utterance yanı sıra herhangi bir beklenen hedefi tahmin olmalıdır [makine öğrenilen varlıklar](luis-concept-entity-types.md#types-of-entities) algılanamayacak kadar bekler. 
+Toplu iş dosyası, utbotlardan oluşur. Her bir söylemeye, algılanmak istediğiniz [makine tarafından öğrenilen varlıkların](luis-concept-entity-types.md#types-of-entities) yanında beklenen bir amaç tahmini olmalıdır. 
 
-## <a name="batch-syntax-template-for-intents-with-entities"></a>Varlıklarla hedefleri için toplu iş söz dizimini şablonu
+## <a name="batch-syntax-template-for-intents-with-entities"></a>Varlıklar içeren amaçlar için Batch sözdizimi şablonu
 
-Toplu iş dosyasında başlatmak için aşağıdaki şablonu kullanın:
+Batch dosyanızı başlatmak için aşağıdaki şablonu kullanın:
 
 ```JSON
 [
@@ -74,13 +74,13 @@ Toplu iş dosyasında başlatmak için aşağıdaki şablonu kullanın:
 ]
 ```
 
-Toplu iş dosyasını kullanan **startPos** ve **endPos** özellikleri başlangıcını ve bitişini bir varlığın unutmayın. Değerleri sıfır tabanlı olduklarını ve başlamamalı veya boşluk ile bitemez. Bu, startIndex ve endIndex özelliklerini kullanma sorgu günlüklerinden farklıdır. 
+Toplu iş dosyası, bir varlığın başlangıcını ve sonunu not etmek için **startPos** ve **endPos** özelliklerini kullanır. Değerler sıfır tabanlıdır ve bir boşluk üzerinde başlamamalı veya bitmemelidir. Bu, startIndex ve endIndex özelliklerini kullanan sorgu günlüklerinden farklıdır. 
 
 [!INCLUDE [Entity roles in batch testing - currently not supported](../../../includes/cognitive-services-luis-roles-not-supported-in-batch-testing.md)]
 
-## <a name="batch-syntax-template-for-intents-without-entities"></a>Varlıkları olmadan hedefleri için toplu iş söz dizimini şablonu
+## <a name="batch-syntax-template-for-intents-without-entities"></a>Varlıklar olmadan amaçlar için Batch sözdizimi şablonu
 
-Toplu işlem dosyanız varlıkları olmadan başlatmak için aşağıdaki şablonu kullanın:
+Toplu iş dosyanızı varlıklar olmadan başlatmak için aşağıdaki şablonu kullanın:
 
 ```JSON
 [
@@ -92,46 +92,46 @@ Toplu işlem dosyanız varlıkları olmadan başlatmak için aşağıdaki şablo
 ]
 ```
 
-Varlıkları test etmek istemiyorsanız dahil `entities` özellik ve değer olarak boş bir dizi kümesi `[]`.
+Varlıkları test etmek istemiyorsanız, `entities` özelliğini dahil edin ve değeri boş bir dizi olarak ayarlayın `[]`.
 
 
-## <a name="common-errors-importing-a-batch"></a>Sık karşılaşılan toplu içeri aktarma
+## <a name="common-errors-importing-a-batch"></a>Toplu iş içeri aktarma yaygın hataları
 
-Sık karşılaşılan hatalar şunlardır: 
+Yaygın hatalar şunlardır: 
 
-> * 1\. 000'den fazla konuşma
-> * Bir varlık özelliğine sahip olmayan bir utterance JSON nesnesi. Özelliği, boş bir dizi olabilir.
-> * İçinde birden çok varlık etiketli sözcükler
-> * Başlangıç ve bitiş boşluk varlık etiketi.
+> * 1\.000 'den fazla Aralık
+> * Bir varlık özelliği olmayan bir söylenişi JSON nesnesi. Özelliği boş bir dizi olabilir.
+> * Birden çok varlıkta etiketlenmiş sözcük (ler)
+> * Bir alanda başlangıç veya bitiş varlık etiketi.
 
-## <a name="batch-test-state"></a>Toplu test durumu
+## <a name="batch-test-state"></a>Batch test durumu
 
-LUIS, her veri kümesinin son test durumunu izler. Bu, son çalıştırma boyutu (konuşma toplu iş sayısı), tarih ve son sonucu (başarılı bir şekilde tahmin edilen konuşma sayısı) içerir.
+LUO, her bir veri kümesinin son testinin durumunu izler. Bu boyut (toplu iş içindeki deterlik sayısı), son çalıştırma tarihi ve en son sonuç (başarıyla tahmin edilen sayı) içerir.
 
 <a name="sections-of-the-results-chart"></a>
 
-## <a name="batch-test-results"></a>Toplu test sonuçları
+## <a name="batch-test-results"></a>Batch test sonuçları
 
-Toplu test sonucu bir hata matris bilinen bir dağılım grafiği olur. Toplu iş dosyası, geçerli modelin tahmin edilen amaç ve varlıkları konuşma 4 yönlü karşılaştırması grafiğidir. 
+Batch test sonucu, hata matrisi olarak bilinen bir dağılım grafiktir. Bu grafik, toplu iş dosyasındaki ve geçerli modelin öngörülen amacını ve varlıklarını, 4 yönlü bir karşılaştırmaktır. 
 
-Veri noktası üzerinde **yanlış pozitif** ve **False negatif** bölümleri araştırılmalıdır hataları gösterir. Tüm veri noktaları kullanıyorsanız **gerçek pozitif** ve **True negatif** bölümler sonra uygulamanızın doğruluğu, bu veri kümesinde mükemmeldir.
+Hatalı **pozitif** ve **yanlış negatif** bölümlerdeki veri noktaları Araştırılması gereken hataları gösterir. Tüm veri noktaları **doğru pozitif** ve **gerçek negatif** bölümlerdir, bu veri kümesinde uygulamanızın doğruluğu mükemmeldir.
 
-![Grafik dört bölüm](./media/luis-concept-batch-test/chart-sections.png)
+![Grafik dört bölümü](./media/luis-concept-batch-test/chart-sections.png)
 
-Bu grafik, geçerli eğitimle yanlış bağlı öngörür LUIS konuşma bulmanıza yardımcı olur. Sonuçlar, grafiğin bölge başına görüntülenir. Utterance bilgileri gözden geçirin veya bu bölgede utterance sonuçlarını gözden geçirmek için bölge adı seçmek için grafik üzerinde tek tek noktaları seçin.
+Bu grafik, lubunun geçerli eğitimi temelinde yanlış tahmin eden bir değer bulmanıza yardımcı olur. Sonuçlar, grafiğin her bir bölgesi için görüntülenir. Bu bölgedeki söylenişi sonuçlarını gözden geçirmek için, bu bilgileri gözden geçirmek üzere grafikteki ayrı noktaları seçin veya bölge adı ' nı seçin.
 
 ![Toplu işe testi](./media/luis-concept-batch-test/batch-testing.png)
 
-## <a name="errors-in-the-results"></a>Hata sonuçları
+## <a name="errors-in-the-results"></a>Sonuçlardaki hatalar
 
-Toplu test hataları, toplu iş dosyasında belirtildiği gibi tahmin değil hedefleri belirtin. Hataları, grafiğin kırmızı iki bölümde gösterilir. 
+Batch testinde hatalar, toplu iş dosyasında belirtildiği şekilde tahmin edilemeyen amaçları gösterir. Hatalar grafiğin iki kırmızı bölümünde belirtilmiştir. 
 
-Yanlış pozitif bölümüne sahip olmamalıdır, bir utterance bir amacı ya da varlık eşleştiğini gösterir. False negatif sahip olmalıdır, bir utterance bir amacı ya da varlık eşleşmedi gösterir. 
+False pozitif bölümü, bir utin sahip olmaması durumunda bir amaç veya varlıkla eşleştiğini gösterir. Yanlış negatif değeri, bir tanüance 'in olması gereken bir amaç veya varlıkla eşleşmedi olduğunu gösterir. 
 
-## <a name="fixing-batch-errors"></a>Toplu iş hataları düzeltme
+## <a name="fixing-batch-errors"></a>Toplu iş hatalarını düzeltme
 
-Hatalar varsa batch testinde, ya da bir amaç için daha fazla Konuşma ekleme ve/veya daha fazla konuşma varlıkla LUIS amaçları arasında Ayrımcılığı olun yardımcı olmak için etiket. Konuşma eklediniz ve onları ve hala get toplu test hataları tahmin etiketli olsa eklemeyi göz önünde bir [tümcecik listesi](luis-concept-feature.md) özelliğiyle daha hızlı bilgi LUIS yardımcı olmak için etki alanına özel sözlük. 
+Toplu iş testinde hatalar varsa, bir amaca daha fazla bilgi ekleyebilir ve/veya, LUTO 'lar arasında ayırt edici hale getirmenize yardımcı olmak için varlıkla birlikte daha fazla bilgi etiketi ekleyebilirsiniz. Uttersları eklediyseniz ve bunları etiketlendirmeye devam ediyorsa ve toplu iş testinde tahmin hataları almaya devam ediyorsanız, LUL 'nın daha hızlı öğrendiğine yardımcı olması için alana özgü sözlük içeren bir [ifade listesi](luis-concept-feature.md) özelliği eklemeyi göz önünde bulundurun. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bilgi edinmek için nasıl [toplu test](luis-how-to-batch-test.md)
+* [Toplu işi test](luis-how-to-batch-test.md) etme hakkında bilgi edinin

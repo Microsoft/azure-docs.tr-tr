@@ -1,6 +1,6 @@
 ---
-title: Azure Otomasyonu değişken varlıkları
-description: Değişken varlıkları, tüm runbook'ları ve Azure Automation DSC yapılandırmaları için kullanılabilir değerlerdir.  Bu makalede, değişkenlerin ve hem metin hem de grafik yazma ile çalışma konusunda ayrıntılar açıklanmaktadır.
+title: Azure Otomasyonu 'nda değişken varlıklar
+description: Değişken varlıklar, Azure Otomasyonu 'ndaki tüm runbook 'lar ve DSC yapılandırmalarının kullanabildiği değerlerdir.  Bu makalede, değişkenlerin ayrıntıları ve hem metin hem de grafik yazarken bunlarla nasıl çalışılacağı açıklanmaktadır.
 services: automation
 ms.service: automation
 ms.subservice: shared-capabilities
@@ -9,58 +9,58 @@ ms.author: robreed
 ms.date: 05/14/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 39282e816be875e598d7e0599eeb358a79941be7
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 3fe008d20ab43636b59861bcc5a7914ba0fca17e
+ms.sourcegitcommit: d70c74e11fa95f70077620b4613bb35d9bf78484
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67478059"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70910058"
 ---
-# <a name="variable-assets-in-azure-automation"></a>Azure Otomasyonu değişken varlıkları
+# <a name="variable-assets-in-azure-automation"></a>Azure Otomasyonu 'nda değişken varlıklar
 
-Değişken varlıkları, tüm runbook'ları ve Otomasyon hesabı DSC yapılandırmaları için kullanılabilir değerlerdir. Azure portalı, PowerShell runbook'tan veya DSC yapılandırmasından içinde yönetilebilir. Otomasyon değişkenleri aşağıdaki senaryolarda kullanışlıdır:
+Değişken varlıklar, Otomasyon hesabınızdaki tüm runbook 'lar ve DSC yapılandırmalarının kullanabildiği değerlerdir. Azure portal, PowerShell içinden veya DSC yapılandırmasından yönetilebilecek. Otomasyon değişkenleri aşağıdaki senaryolarda kullanışlıdır:
 
-- Birden çok runbook veya DSC yapılandırmaları arasında bir değer paylaşın.
+- Birden çok runbook veya DSC yapılandırması arasında bir değer paylaşma.
 
-- Bir değeri aynı runbook'tan veya DSC yapılandırmasından birden çok iş arasında paylaştırma.
+- Aynı runbook veya DSC yapılandırmasından birden çok iş arasında bir değer paylaşma.
 
-- Portaldan veya PowerShell komut satırından runbook'lar ya da bir dizi ortak yapılandırma öğeleri belirli listesi gibi bir sanal makine adı, belirli bir kaynak grubu, bir AD etki alanı adı ve daha fazlası gibi DSC yapılandırmaları tarafından kullanılan bir değeri yönetme.  
+- Portaldan veya IP adları, belirli bir kaynak grubu, AD etki alanı adı ve daha fazlası gibi yaygın yapılandırma öğelerinin bir kümesi gibi runbook 'lar ya da DSC yapılandırmaları tarafından kullanılan PowerShell komut satırından bir değeri yönetin.  
 
-Otomasyon değişkenleri kalıcı yaptığınızdan runbook'tan veya DSC yapılandırmasından başarısız olsa bile kullanılabilirler. Bu davranış, aynı runbook veya DSC yapılandırması çalıştırıldığında bir sonraki zamandan sonra bir başkası tarafından kullanılır ve kullanılan bir runbook tarafından ayarlamak için bir değer sağlar.
+Otomasyon değişkenleri kalıcı olduğundan, runbook veya DSC yapılandırması başarısız olsa bile bunlar kullanılabilir. Bu davranış, bir değerin daha sonra başka bir runbook tarafından kullanılmasına izin verir veya bir sonraki çalıştırılışında aynı runbook veya DSC yapılandırması tarafından kullanılır.
 
-Bir değişken oluşturulduğunda, depolanan olduğunu belirtebilirsiniz şifrelenmiş. Şifrelenmiş değişkenler Azure Automation'da güvenli bir şekilde depolanır ve değeri alınamaz [Get-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Get-AzureRmAutomationVariable) Azure PowerShell modülünün bir parçası olarak gönderilen cmdlet'i. Şifrelenmiş bir değeri almanın tek yolu **Get-AutomationVariable** runbook'tan veya DSC yapılandırmasından etkinlik. Şifrelenmiş bir değişkene şifrelenmemiş için değiştirmek istiyorsanız, size gereken silebilir ve şifrelenmemiş olarak değişkeni yeniden oluşturun.
+Bir değişken oluşturulduğunda, şifrelenmiş olarak depolanmasını belirtebilirsiniz. Şifrelenmiş değişkenler Azure Otomasyonu 'nda güvenli bir şekilde depolanır ve değeri Azure PowerShell modülünün bir parçası olarak gelen [Get-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Get-AzureRmAutomationVariable) cmdlet 'inden alınamaz. Şifrelenmiş bir değerin alınabileceği tek yolu bir runbook veya DSC yapılandırmasındaki **Get-AutomationVariable** etkinliğidir. Şifrelenmiş bir değişkeni şifrelenmeyen olarak değiştirmek istiyorsanız, değişkeni şifreli olarak silip yeniden oluşturmanız gerekir.
 
 >[!NOTE]
->Azure automation'da güvenli varlıkların kimlik bilgileri, sertifikalar, bağlantılar ve şifrelenmiş değişkenler içerir. Bu varlıklar şifrelenir ve her Otomasyon hesabı için oluşturulan benzersiz bir anahtar kullanarak Azure automation'da depolanır. Bu anahtar depolanan bir sistem anahtar kasası yönetilen. Güvenli bir varlık depolamadan önce anahtarı Key Vault'tan yüklenir ve sonra varlık şifrelemek için kullanılır. Bu işlem, Azure Otomasyonu tarafından yönetilir.
+>Azure Otomasyonu 'nda güvenli varlıklar, kimlik bilgileri, sertifikalar, bağlantılar ve şifrelenmiş değişkenler içerir. Bu varlıklar, her Otomasyon hesabı için oluşturulan benzersiz bir anahtar kullanılarak Azure Otomasyonu 'nda şifrelenir ve depolanır. Bu anahtar, sistem tarafından yönetilen bir Key Vault depolanır. Güvenli bir varlık depolamadan önce, anahtar Key Vault yüklenir ve ardından varlığı şifrelemek için kullanılır. Bu işlem Azure Otomasyonu tarafından yönetiliyor.
 
 ## <a name="variable-types"></a>Değişken türleri
 
-Azure portalı ile bir değişkeni oluşturduğunuzda, portal değişken değeri girmek için uygun denetimi görüntüleyebilmesi aşağı açılan listeden bir veri türü belirtmeniz gerekir. Değişkeni, bu veri türü için sınırlı değildir. Farklı türde bir değer belirtmek istiyorsanız Windows PowerShell kullanarak değişkenini ayarlamalıdır. Belirtirseniz **tanımlanmamış**, değişkenin değerini ayarlar **$null**, ve bir değerle ayarlamanız gerekir [Set-AzureRMAutomationVariable](/powershell/module/AzureRM.Automation/Set-AzureRmAutomationVariable) cmdlet'ini veya **Set-AutomationVariable** etkinlik. Oluşturma veya değiştirme Portalı'nda bir karmaşık değişken türü için değer, ancak Windows PowerShell kullanarak herhangi bir türde bir değer sağlayabilirsiniz. Karmaşık türler olarak döndürülür bir [PSCustomObject](/dotnet/api/system.management.automation.pscustomobject).
+Azure portal bir değişken oluşturduğunuzda, portalın değişken değerini girmeye uygun denetimi görüntülemesi için açılan listeden bir veri türü belirtmeniz gerekir. Değişken bu veri türüyle sınırlı değil. Farklı türde bir değer belirtmek istiyorsanız, değişkeni Windows PowerShell kullanarak ayarlamanız gerekir. **Tanımlı değil**' i belirtirseniz, değişkenin değeri **$null**olarak ayarlanır ve değeri [set-AzureRMAutomationVariable](/powershell/module/AzureRM.Automation/Set-AzureRmAutomationVariable) cmdlet 'i veya **set-AutomationVariable** etkinliği ile ayarlamanız gerekir. Portalda karmaşık bir değişken türü için değer oluşturamaz veya değiştiremezsiniz, ancak Windows PowerShell kullanarak herhangi bir türde bir değer sağlayabilirsiniz. Karmaşık türler bir [PSCustomObject](/dotnet/api/system.management.automation.pscustomobject)olarak döndürülür.
 
-Bir dizi ya da karma tablosu oluşturuluyor ve değişkenine kaydederek birden çok değeri tek bir değişkende depolayabilirsiniz.
+Bir dizi veya Hashtable oluşturup değişkenine kaydederek birden çok değeri tek bir değişkende saklayabilirsiniz.
 
-Otomasyon'da kullanılabilir değişken türlerinin bir listesi aşağıda verilmiştir:
+Otomasyon 'da kullanılabilen değişken türlerinin bir listesi aşağıda verilmiştir:
 
-* String
+* Dize
 * Integer
 * DateTime
-* Boolean
+* Boole değeri
 * Null
 
-## <a name="azurerm-powershell-cmdlets"></a>AzureRM PowerShell cmdlet'leri
+## <a name="azurerm-powershell-cmdlets"></a>Azurerd PowerShell cmdlet 'leri
 
-AzureRM için aşağıdaki tabloda yer alan cmdlet'ler Windows PowerShell ile Otomasyon kimlik bilgisi varlıkları oluşturmak ve yönetmek için kullanılır. Bunlar parçası olarak gönderilen [AzureRM.Automation Modülü](/powershell/azure/overview), olduğu Automation runbook'ları ve DSC yapılandırmaları için kullanılabilir.
+Azurerd için aşağıdaki tablodaki cmdlet 'ler Windows PowerShell ile otomasyon kimlik bilgisi varlıkları oluşturmak ve yönetmek için kullanılır. Bunlar, Automation runbook 'larda ve DSC yapılandırmalarında kullanıma sunulan [Azurerd. Automation modülünün](/powershell/azure/overview)bir parçası olarak gelir.
 
 | Cmdlet'ler | Açıklama |
 |:---|:---|
 |[Get-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Get-AzureRmAutomationVariable)|Mevcut bir değişkenin değerini alır.|
 |[New-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/New-AzureRmAutomationVariable)|Yeni bir değişken oluşturur ve değerini ayarlar.|
-|[Remove-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Remove-AzureRmAutomationVariable)|Mevcut bir değişken kaldırır.|
+|[Remove-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Remove-AzureRmAutomationVariable)|Varolan bir değişkeni kaldırır.|
 |[Set-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Set-AzureRmAutomationVariable)|Mevcut bir değişken için değeri ayarlar.|
 
 ## <a name="activities"></a>Etkinlikler
 
-Aşağıdaki tablodaki etkinlikler bir runbook ve DSC yapılandırmaları kimlik bilgilerini erişmek için kullanılır.
+Aşağıdaki tablodaki etkinlikler bir runbook ve DSC yapılandırmalarının değişkenlerine erişmek için kullanılır. Get-AzureRmAutomationVariable ve Get-AutomationVariable cmdlet 'leri arasındaki fark, bu belgenin başlangıcında yukarıda açıklanan şekilde belirlenir.
 
 | Etkinlikler | Açıklama |
 |:---|:---|
@@ -68,31 +68,31 @@ Aşağıdaki tablodaki etkinlikler bir runbook ve DSC yapılandırmaları kimlik
 |Set-AutomationVariable|Mevcut bir değişken için değeri ayarlar.|
 
 > [!NOTE]
-> Değişkenleri kullanmaktan kaçınmanız gerekir – Name parametresinde **Get-AutomationVariable** runbook veya runbook veya DSC yapılandırma ve Otomasyon arasındaki bağımlılıkları getirebileceğinden DSC yapılandırması Tasarım zamanında değişkenleri.
+> Runbook veya DSC yapılandırması arasındaki bağımlılıkları keşfetmenizi ve tasarım zamanında Otomasyon değişkenlerini karmaşık hale getirebileceğinden, bir runbook veya DSC yapılandırmasında **Get-AutomationVariable** öğesinin – name parametresinde değişken kullanmaktan kaçının.
 
-İşlevleri aşağıdaki tabloda, erişim ve Python2 runbook değişkenlerinde almak için kullanılır.
+Aşağıdaki tablodaki işlevler, bir Python2 runbook 'taki değişkenlere erişmek ve bunları almak için kullanılır.
 
-|Python2 işlevleri|Açıklama|
+|Python2 Işlevleri|Açıklama|
 |:---|:---|
 |automationassets.get_automation_variable|Mevcut bir değişkenin değerini alır. |
 |automationassets.set_automation_variable|Mevcut bir değişken için değeri ayarlar. |
 
 > [!NOTE]
-> Varlık işlevlerine erişmek için Python runbook'unuzu üst kısmında "automationassets" modülü içeri aktarmalısınız.
+> Varlık işlevlerine erişebilmek için Python runbook 'unun en üstündeki "automationvarlıklar" modülünü içeri aktarmanız gerekir.
 
-## <a name="creating-a-new-automation-variable"></a>Yeni Otomasyon değişkeni oluşturma
+## <a name="creating-a-new-automation-variable"></a>Yeni bir Otomasyon değişkeni oluşturma
 
-### <a name="to-create-a-new-variable-with-the-azure-portal"></a>Azure portalı ile yeni bir değişken oluşturmak için
+### <a name="to-create-a-new-variable-with-the-azure-portal"></a>Azure portal ile yeni bir değişken oluşturmak için
 
-1. Otomasyon hesabınızdan tıklayın **varlıklar** kutucuğuna ve ardından **varlıklar** dikey penceresinde **değişkenleri**.
-2. Üzerinde **değişkenleri** kutucuk seçin **değişken Ekle**.
-3. Seçenekleri doldurun **yeni değişken** dikey de **Oluştur** yeni değişkeni kaydetmek.
+1. Otomasyon hesabınızdan **varlıklar** kutucuğuna tıklayın ve ardından **varlıklar** dikey penceresinde **değişkenler**' i seçin.
+2. **Değişkenler** kutucuğunda **değişken Ekle**' yi seçin.
+3. **Yeni değişken** dikey penceresindeki seçenekleri doldurun ve **Oluştur** ' a tıklayarak yeni değişkeni Kaydet ' e tıklayın.
 
 ### <a name="to-create-a-new-variable-with-windows-powershell"></a>Windows PowerShell ile yeni bir değişken oluşturmak için
 
-[New-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/New-AzureRmAutomationVariable) cmdlet'i yeni bir değişken oluşturur ve bunun başlangıçtaki değerini ayarlar. Değerini kullanarak alabilirsiniz [Get-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Get-AzureRmAutomationVariable). Ardından bir basit tür değeri ise bu türdeki döndürülür. Karmaşık bir tür ise bir **PSCustomObject** döndürülür.
+[New-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/New-AzureRmAutomationVariable) cmdlet 'i yeni bir değişken oluşturur ve ilk değerini ayarlar. [Get-AzureRmAutomationVariable](/powershell/module/AzureRM.Automation/Get-AzureRmAutomationVariable)kullanarak değeri alabilirsiniz. Değer basit bir tür ise, aynı tür döndürülür. Karmaşık bir tür ise, bir **PSCustomObject** döndürülür.
 
-Aşağıdaki örnek komutlarda dize türünde bir değişken oluşturun ve ardından değerini döndürmek gösterilmektedir.
+Aşağıdaki örnek komutlarda dize türünde bir değişkenin nasıl oluşturulduğu ve sonra değerinin nasıl döndürdüğü gösterilmektedir.
 
 ```powershell
 New-AzureRmAutomationVariable -ResourceGroupName "ResourceGroup01" 
@@ -102,7 +102,7 @@ $string = (Get-AzureRmAutomationVariable -ResourceGroupName "ResourceGroup01" `
 –AutomationAccountName "MyAutomationAccount" –Name 'MyStringVariable').Value
 ```
 
-Aşağıdaki örnek komutlar bir karmaşık türü ile bir değişken oluşturun ve ardından özelliklerini döndürmek gösterilmektedir. Bu durumda, bir sanal makine nesne öğesinden **Get-AzureRmVm** kullanılır.
+Aşağıdaki örnek komutlarda, karmaşık bir türe sahip bir değişken oluşturma ve ardından özelliklerini döndürme gösterilmektedir. Bu durumda, **Get-AzureRmVm** ' den bir sanal makine nesnesi kullanılır.
 
 ```powershell
 $vm = Get-AzureRmVm -ResourceGroupName "ResourceGroup01" –Name "VM01"
@@ -114,15 +114,15 @@ $vmName = $vmValue.Name
 $vmIpAddress = $vmValue.IpAddress
 ```
 
-## <a name="using-a-variable-in-a-runbook-or-dsc-configuration"></a>Bir runbook'tan veya DSC yapılandırmasından bir değişkende kullanma
+## <a name="using-a-variable-in-a-runbook-or-dsc-configuration"></a>Runbook veya DSC yapılandırmasında değişken kullanma
 
-Kullanım **Set-AutomationVariable** bir PowerShell runbook veya DSC yapılandırması, bir Otomasyon değişkenin değerini ayarlamak için etkinlik ve **Get-AutomationVariable** onu almak. Kullanmamalısınız **Set-AzureRMAutomationVariable** veya **Get-AzureRMAutomationVariable** runbook'tan veya DSC yapılandırması iş akışı etkinlikleri az verimli olduğundan cmdlet'leri. Ayrıca güvenli değişkenlerle değeri alınamıyor **Get-AzureRMAutomationVariable**. Bir runbook'tan veya DSC yapılandırmasından içinde yeni bir değişken oluşturmak için tek yolu kullanmaktır [New-AzureRMAutomationVariable](/powershell/module/AzureRM.Automation/New-AzureRmAutomationVariable) cmdlet'i.
+Bir PowerShell runbook 'u veya DSC yapılandırmasındaki bir otomasyon değişkeninin değerini ve **Get-AutomationVariable** değerini almak için **set-AutomationVariable** etkinliğini kullanın. İş akışı etkinliklerinden daha az verimlidir olduğundan, **set-azurermautomationvariable** veya **Get-azurermautomationvariable** cmdlet 'LERINI bir runbook veya DSC yapılandırmasında kullanmamalısınız. **Get-AzureRMAutomationVariable**ile güvenli değişkenlerin değerini de alamazsınız. Bir runbook veya DSC yapılandırması içinden yeni bir değişken oluşturmanın tek yolu [New-AzureRMAutomationVariable](/powershell/module/AzureRM.Automation/New-AzureRmAutomationVariable) cmdlet 'ini kullanmaktır.
 
 ### <a name="textual-runbook-samples"></a>Metinsel runbook örnekleri
 
-#### <a name="setting-and-retrieving-a-simple-value-from-a-variable"></a>Bir değişkenden gelen basit bir değer alma ve ayarlama
+#### <a name="setting-and-retrieving-a-simple-value-from-a-variable"></a>Bir değişkenden basit bir değer ayarlama ve alma
 
-Aşağıdaki örnek komutlar, ayarlamak ve metinsel bir runbook'taki bir değişkeni almak gösterilmektedir. Bu örnek, Tamsayı türünde değişkenler adlandırdığınız görünür duruma varsayılır *Numberofıterations* ve *NumberOfRunnings* adlı dize türündeki değişkenlerin ve *SampleMessage* sahip oluşturulmuş.
+Aşağıdaki örnek komutlar, metinsel bir runbook 'ta nasıl değişken ayarlanacağını ve alınacağını göstermektedir. Bu örnekte, *Numberofyinelemelerini* ve *NumberOfRunnings* adlı tamsayı türündeki değişkenlerin ve *samplemessage* adlı dize türünde bir değişkenin oluşturulduğu varsayılır.
 
 ```powershell
 $NumberOfIterations = Get-AzureRmAutomationVariable -ResourceGroupName "ResourceGroup01" –AutomationAccountName "MyAutomationAccount" -Name 'NumberOfIterations'
@@ -137,9 +137,9 @@ for ($i = 1; $i -le $NumberOfIterations; $i++) {
 Set-AzureRmAutomationVariable -ResourceGroupName "ResourceGroup01" –AutomationAccountName "MyAutomationAccount" –Name NumberOfRunnings –Value ($NumberOfRunnings += 1)
 ```
 
-#### <a name="setting-and-retrieving-a-variable-in-python2"></a>Bir değişkende Python2 alma ve ayarlama
+#### <a name="setting-and-retrieving-a-variable-in-python2"></a>Python2 içinde değişken ayarlama ve alma
 
-Aşağıdaki örnek kod, bir değişken, bir değişken ayarlamak ve mevcut olmayan değişkende Python2 runbook için bir özel durum işleme gösterilmektedir.
+Aşağıdaki örnek kod, bir değişkeni nasıl kullanacağınızı, bir değişkenin nasıl ayarlanacağını ve bir Python2 runbook 'unda var olmayan bir değişken için özel durum nasıl işleneceğini gösterir.
 
 ```python
 import automationassets
@@ -163,17 +163,17 @@ except AutomationAssetNotFound:
 
 ### <a name="graphical-runbook-samples"></a>Grafik runbook örnekleri
 
-Bir grafik runbook eklediğiniz **Get-AutomationVariable** veya **Set-AutomationVariable** sağ tıklayarak grafik düzenleyicisini ve etkinlik seçerek Kitaplık bölmesinde değişkeni istersiniz.
+Grafik bir runbook 'ta, grafik düzenleyicinin Kitaplık bölmesinde değişkene sağ tıklayıp istediğiniz etkinliği seçerek **Get-AutomationVariable** veya **set-AutomationVariable** ' ı ekleyin.
 
-![Değişken tuvale Ekle](../media/variables/runbook-variable-add-canvas.png)
+![Tuvale değişken Ekle](../media/variables/runbook-variable-add-canvas.png)
 
-#### <a name="setting-values-in-a-variable"></a>Bir değişken değerlerini ayarlama
+#### <a name="setting-values-in-a-variable"></a>Bir değişkendeki değerleri ayarlama
 
-Aşağıdaki görüntüde basit bir grafik runbook değere sahip bir değişken güncelleştirilecek örnek etkinlikleri gösterir. Bu örnekte **Get-AzureRmVM** alır tek bir Azure sanal makine ve bilgisayar adı, dize türünde bir Otomasyon değişkenine kaydeder. Farketmez olup olmadığını [bağlantıdır bir ardışık düzen veya dizisi](../automation-graphical-authoring-intro.md#links-and-workflow) yalnızca tek bir nesne çıktısında beklediğiniz olduğundan.
+Aşağıdaki görüntüde, bir değişken grafik runbook 'unda basit bir değerle güncelleştirilecek örnek etkinlikler gösterilmektedir. Bu örnekte, **Get-AzureRmVM** tek bir Azure sanal makinesini alır ve bilgisayar adı, bir dize türüne sahip var olan bir Otomasyon değişkenine kaydedilir. Çıktıda yalnızca tek bir nesneyi beklediğinizden, [bağlantının bir işlem hattı veya sıra](../automation-graphical-authoring-intro.md#links-and-workflow) olmasından bağımsız değildir.
 
-![Basit değişken Ayarla](../media/variables/runbook-set-simple-variable.png)
+![Basit değişken ayarla](../media/variables/runbook-set-simple-variable.png)
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-- Grafik yazma etkinlikleri birbirine bağlama hakkında daha fazla bilgi için bkz: [grafik yazma içindeki bağlantılar](../automation-graphical-authoring-intro.md#links-and-workflow)
+- Grafik yazarken etkinlikleri birbirine bağlama hakkında daha fazla bilgi için bkz. [grafik yazarken bağlantılar](../automation-graphical-authoring-intro.md#links-and-workflow)
 - Grafik runbook'ları kullanmaya başlamak için bkz. [İlk grafik runbook uygulamam](../automation-first-runbook-graphical.md)

@@ -1,10 +1,10 @@
 ---
 title: Bir iç temel yük dengeleyici - Azure CLI'yı oluşturma
 titlesuffix: Azure Load Balancer
-description: Azure CLI kullanarak iç yük dengeleyiciyi nasıl oluşturabileceğinizi öğrenin
+description: Bu makalede, Azure CLı kullanarak iç yük dengeleyici oluşturmayı öğrenin
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
@@ -12,13 +12,13 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/27/2018
-ms.author: kumud
-ms.openlocfilehash: cb01aa84201c1e0727414215974a343e8cf3b724
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: allensu
+ms.openlocfilehash: 8492ce820a31183b0b3078b1fb366c25a39b7639
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66475892"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076074"
 ---
 # <a name="create-an-internal-load-balancer-to-load-balance-vms-using-azure-cli"></a>Azure CLI kullanarak sanal makinelerin yük dengelemesi için iç yük dengeleyici oluşturma
 
@@ -41,7 +41,7 @@ Aşağıdaki örnek *eastus* konumunda *myResourceGroupILB* adlı bir kaynak gru
 ```
 ## <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
-[az network vnet create](https://docs.microsoft.com/cli/azure/network/vnet) komutunu kullanarak *myResourceGroup* içinde *mySubnet* adlı bir alt ağ ile *myVnet* adlı bir sanal ağ oluşturun.
+*az network vnet create* komutunu kullanarak *myResourceGroup* içinde *mySubnet* adlı bir alt ağ ile [myVnet](https://docs.microsoft.com/cli/azure/network/vnet) adlı bir sanal ağ oluşturun.
 
 ```azurecli-interactive
   az network vnet create \
@@ -60,7 +60,7 @@ Bu bölümde yük dengeleyicinin aşağıdaki bileşenlerini nasıl oluşturabil
 
 ### <a name="create-the-load-balancer"></a>Yük dengeleyiciyi oluşturma
 
-Bir iç yük dengeleyici oluşturma [az ağ lb oluşturma](https://docs.microsoft.com/cli/azure/network/lb?view=azure-cli-latest) adlı **myLoadBalancer** adlı bir ön uç IP yapılandırması içeren **myFrontEnd**, adlı bir arka uç havuzu **myBackEndPool** özel bir IP adresi ile ilişkili ** 10.0.0.7 biçiminde.
+"* Kısmına 10.0.0.7" özel IP adresi ile ilişkili **Mybackendpool** adlı bir arka uç havuzu olan **myön uç**adlı ön uç IP **yapılandırmasını içeren,** [az Network lb Create](https://docs.microsoft.com/cli/azure/network/lb?view=azure-cli-latest) adlı bir iç Load Balancer oluşturun.
 
 ```azurecli-interactive
   az network lb create \
@@ -87,7 +87,7 @@ Durum araştırması tüm sanal makine örneklerini denetleyerek ağ trafiği al
 
 ### <a name="create-the-load-balancer-rule"></a>Yük dengeleyici kuralı oluşturma
 
-Yük dengeleyici kuralı, gerekli kaynak ve hedef bağlantı noktalarının yanı sıra gelen trafik için ön uç IP yapılandırmasını ve trafiği almak için arka uç IP havuzunu tanımlar. *myFrontEnd* ön uç havuzunda 80 numaralı bağlantı noktasını dinlemek ve yine 80 numaralı bağlantı noktasını kullanarak *myBackEndPool* arka uç adres havuzuna yük dengelemesi yapılmış ağ trafiğini göndermek için [az network lb rule create](https://docs.microsoft.com/cli/azure/network/lb/rule?view=azure-cli-latest) ile *myHTTPRule* yük dengeleyici kuralı oluşturun. 
+Yük dengeleyici kuralı, gerekli kaynak ve hedef bağlantı noktalarının yanı sıra gelen trafik için ön uç IP yapılandırmasını ve trafiği almak için arka uç IP havuzunu tanımlar. *myFrontEnd* ön uç havuzunda 80 numaralı bağlantı noktasını dinlemek ve yine 80 numaralı bağlantı noktasını kullanarak [myBackEndPool](https://docs.microsoft.com/cli/azure/network/lb/rule?view=azure-cli-latest) arka uç adres havuzuna yük dengelemesi yapılmış ağ trafiğini göndermek için *az network lb rule create* ile *myHTTPRule* yük dengeleyici kuralı oluşturun. 
 
 ```azurecli-interactive
   az network lb rule create \
@@ -222,7 +222,7 @@ Yük dengeleyicinin özel IP adresini almak için [az network lb show](/cli/azur
     --name myLoadBalancer \
     --resource-group myResourceGroupILB
 ``` 
-![Yük dengeleyiciyi test etme](./media/load-balancer-get-started-ilb-arm-cli/load-balancer-test.png)
+![Yük dengeleyiciyi sınama](./media/load-balancer-get-started-ilb-arm-cli/load-balancer-test.png)
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 

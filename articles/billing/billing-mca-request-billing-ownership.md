@@ -1,6 +1,6 @@
 ---
-title: Faturalandırma sahipliğini Azure aboneliği edinin
-description: Diğer kullanıcıların Azure abonelik faturalandırma sahipliğini istek öğrenin.
+title: Azure aboneliklerinin fatura sahipliğini alma
+description: Diğer kullanıcılardan Azure aboneliklerinin fatura sahipliğini istemeyi öğrenin.
 author: amberbhargava
 manager: amberb
 editor: banders
@@ -12,181 +12,181 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/01/2019
 ms.author: banders
-ms.openlocfilehash: 4c9a8c866a157757121e6a9dd07a0a8559937c5e
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: 110bd975de1d865c2aa3d3b088c98cdc8b9e45ad
+ms.sourcegitcommit: 3e7646d60e0f3d68e4eff246b3c17711fb41eeda
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67490890"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "69019568"
 ---
-# <a name="get-billing-ownership-of-azure-subscriptions-from-other-accounts"></a>Faturalandırma sahipliğini diğer hesaplardan gelen Azure aboneliği edinin
+# <a name="get-billing-ownership-of-azure-subscriptions-from-other-accounts"></a>Diğer hesaplardan Azure aboneliklerinin fatura sahipliğini alma
 
-Mevcut fatura sahibi kuruluşunuz ayrılıyor ya da fatura hesabınıza aboneliği için ödeme yapmak istediğiniz Azure aboneliği sahipliği devralmanız isteyebilirsiniz. Sahipliği alma aboneliğin faturalama sorumlulukları hesabınıza aktarır.
+Mevcut fatura sahibi kuruluşunuzdan ayrılıyorsa veya abonelikleri kendi ödeme hesabınızdan ödemek istiyorsanız Azure aboneliklerinin sahipliğini üstlenmek isteyebilirsiniz. Sahipliği aldığınızda aboneliklerin faturalama sorumlulukları sizin hesabınıza aktarılır.
 
-Bu makale, bir faturalama hesabı için bir Microsoft Müşteri sözleşmesi için geçerlidir. [Microsoft Müşteri sözleşmesi erişimi olup olmadığını denetlemek](#check-for-access).
+Bu makale, Microsoft Müşteri Sözleşmesi’ne ilişkin ödeme hesabı için geçerlidir. [Microsoft Müşteri Sözleşmesi’ne erişiminiz olup olmadığını denetleyin](#check-for-access).
 
-Faturalandırma sahipliğini istemek için olmanız bir **fatura bölümüne sahip** veya **fatura bölümüne katkıda bulunan**. Daha fazla bilgi için bkz. [fatura bölüm rolleri görevleri](billing-understand-mca-roles.md#invoice-section-roles-and-tasks).
+Fatura sahipliği istemek için **fatura bölümü sahibi** veya **fatura bölümü katkıda bulunanı** olmanız gerekir. Daha fazla bilgi için bkz. [Fatura bölümü rolleri görevleri](billing-understand-mca-roles.md#invoice-section-roles-and-tasks).
 
-## <a name="request-billing-ownership"></a>Faturalandırma sahipliğini iste
+## <a name="request-billing-ownership"></a>Fatura sahipliğini isteme
 
-1. Oturum [Azure portalında](http://portal.azure.com) bir fatura bölüm sahibi veya katkıda bulunan için Microsoft Müşteri sözleşmesi için bir faturalama hesabı olarak.
+1. Microsoft Müşteri Sözleşmesi’nin ödeme hesabı için fatura bölümü sahibi veya katkıda bulunanı olarak [Azure portalında](https://portal.azure.com) oturum açın.
 
-2. Arama **maliyet Yönetimi + faturalandırma**.
+2. **Maliyet Yönetimi + Faturalama** araması yapın.
 
-   ![Maliyet Yönetimi + faturalandırma için Azure portalı arama gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/billing-search-cost-management-billing.png)
+   ![Azure portalında maliyet yönetimi + faturalama aramasını gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/billing-search-cost-management-billing.png)
 
-3. Seçin **fatura bölümleri** sol taraftaki. Erişiminizi bağlı olarak, bir faturalama hesabı veya faturalandırma profili seçmeniz gerekebilir. Fatura hesabı veya profili makinesinden seçin **fatura bölümleri**.
+3. Sol taraftan **Fatura bölümleri**’ni seçin. Erişiminize bağlı olarak, bir faturalama hesabı veya faturalama profili seçmeniz gerekebilir. Ödeme hesabı veya faturalama profilinde **Fatura bölümleri**'ni seçin.
    
-   ![Seçme gösteren ekran görüntüsü fatura bölümleri](./media/billing-mca-request-billing-ownership/mca-select-invoice-sections.png)        
+   ![Fatura bölümlerinin seçilmesini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-select-invoice-sections.png)        
 
-4. Bir fatura bölümü listeden seçin. Aboneliğinin sahipliği devralmanız sonra bu fatura bölümüne faturalandırılır.
+4. Listeden bir fatura bölümü seçin. Aboneliklerin sahipliğini üstlendiğinizde bu fatura bölümüne faturalanır.
 
-5. Seçin **aktarım istekleri** seçin ve sol alt tarafında **Ekle**.
+5. Sol alt köşeden **Aktarım istekleri**’ni ve ardından **Ekle**’yi seçin.
  
-   ![Aktarım İsteği seçerek gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-select-transfer-requests.png)
+   ![Aktarım isteklerinin seçilmesini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-select-transfer-requests.png)
 
-6. Faturalandırma sahipliğini gelen istediği kullanıcının e-posta adresi girin. Kullanıcı hesabı yönetici bir Microsoft çevrimiçi hizmet programı Faturalama hesabı veya Kurumsal Anlaşma bir hesap sahibi olması gerekir. Daha fazla bilgi için [fatura hesaplarınızı Azure portalında görüntüleme](billing-view-all-accounts.md). Seçin **gönderme aktarım isteği**.
+6. Kendisinden fatura sahipliğini istediğiniz kullanıcının e-posta adresini girin. Kullanıcının bir Microsoft Çevrimiçi Hizmet Programı ödeme hesabında Hesap Yöneticisi veya Kurumsal Anlaşmada hesap sahibi olması gerekir. Daha fazla bilgi için bkz. [Ödeme hesaplarınızı Azure portalında görüntüleme](billing-view-all-accounts.md). **Aktarım isteği gönder**’i seçin.
 
-   ![Aktarım isteği gönderme gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-send-transfer-requests.png)
+   ![Aktarım isteği gönderme işlemini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-send-transfer-requests.png)
 
-7. Kullanıcı, aktarım isteğini gözden geçirmek için yönergeler içeren bir e-posta alır.
+7. Kullanıcı, aktarma isteğinizi gözden geçirme yönergelerini içeren bir e-posta alır.
 
-   ![Bu programları gözden geçirme aktarım isteği eposta ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-review-transfer-request-email.png)
+   ![Aktarım isteğini gözden geçirme e-postasını gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-review-transfer-request-email.png)
 
-8. Aktarım İsteği onaylamak için kullanıcı e-postada bağlantısını seçer ve yönergeleri izler.
+8. Kullanıcı, aktarma isteğini onaylamak için e-postadaki bağlantıyı seçer ve yönergeleri izler.
 
-    ![Bu programları gözden geçirme aktarım isteği eposta ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-review-transfer-request.png)
+    ![Aktarım isteğini gözden geçirme e-postasını gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-review-transfer-request.png)
 
-## <a name="check-the-transfer-request-status"></a>Aktarım İsteği durumunu denetle
+## <a name="check-the-transfer-request-status"></a>Aktarım isteğinin durumunu denetleme
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 
-2. Arama **maliyet Yönetimi + faturalandırma**.
+2. **Maliyet Yönetimi + Faturalama** araması yapın.
 
-   ![Maliyet Yönetimi + faturalandırma için Azure portalı arama gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/billing-search-cost-management-billing.png)
+   ![Azure portalında maliyet yönetimi + faturalama aramasını gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/billing-search-cost-management-billing.png)
 
 
-3. Seçin **fatura bölümleri** sol taraftaki. Erişiminizi bağlı olarak, bir faturalama hesabı veya faturalandırma profili seçmeniz gerekebilir. Fatura hesabı veya profili makinesinden seçin **fatura bölümleri**.
+3. Sol taraftan **Fatura bölümleri**’ni seçin. Erişiminize bağlı olarak, bir faturalama hesabı veya faturalama profili seçmeniz gerekebilir. Ödeme hesabı veya faturalama profilinde **Fatura bölümleri**'ni seçin.
    
-   ![Seçme gösteren ekran görüntüsü fatura bölümleri](./media/billing-mca-request-billing-ownership/mca-select-invoice-sections.png)        
+   ![Fatura bölümlerinin seçilmesini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-select-invoice-sections.png)        
 
-4. Fatura bölümü aktarım isteği gönderilen listeden seçin.
+4. Listeden aktarım isteğini gönderdiğiniz fatura bölümünü seçin.
 
-5. Seçin **aktarım istekleri** sol alt taraftaki. Aktarım İsteği sayfasında aşağıdaki bilgileri görüntüler:
+5. Sol alt taraftaki **Aktarım istekleri**'ni seçin. Aktarım istekleri sayfasında aşağıdaki bilgiler görüntülenir:
 
-    ![Aktarım İsteği listesini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-select-transfer-requests-for-status.png)
+    ![Aktarım isteklerinin listesini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-select-transfer-requests-for-status.png)
 
    |Sütun|Tanım|
    |---------|---------|
-   |İstek tarihi|Aktarım isteği zaman gönderildiği tarih|
-   |Alıcı|Faturalandırma sahipliğini aktarma isteği gönderildi kullanıcının e-posta adresi|
-   |Sona erme tarihi|İsteğin süresinin dolduğu tarih|
+   |İstek tarihi|Aktarım isteğinin gönderildiği tarih|
+   |Alıcı|Fatura sahipliğini aktarması için istek gönderdiğiniz kullanıcının e-posta adresi|
+   |Son kullanma tarihi|İsteğin süresinin dolacağı tarih|
    |Durum|Aktarım isteğinin durumu|
 
-    Aktarım isteği, aşağıdaki durumlardan biri olabilir:
+    Aktarım isteğinin durumu aşağıdakilerden biri olabilir:
 
    |Durum|Tanım|
    |---------|---------|
-   |Sürüyor|Kullanıcı, aktarım isteğini kabul edilmemiş|
-   |İşleniyor|Kullanıcı, aktarım isteğini onayladı. Kullanıcının seçili abonelikler için faturalama, fatura bölümüne aktarılır|
-   |Tamamlandı| Kullanıcının seçili abonelikler için faturalama, fatura bölümüne aktarılır.|
-   |Hatalarla tamamlandı|İsteği tamamlandı ancak kullanıcının seçtiği bazı abonelikler için faturalama aktarılan uygulanamadı|
-   |Süresi dolmuş|Kullanıcı isteği zamanında kabul etmedi ve ve süresi doldu|
-   |İptal edildi|Aktarım İsteği erişimi olan istek iptal edildi|
-   |Reddetti|Kullanıcı, aktarım isteğini reddetti.|
+   |Devam ediyor|Kullanıcı aktarım isteğini kabul etmedi|
+   |İşleniyor|Kullanıcı aktarım isteğini onayladı. Kullanıcının seçtiği aboneliklerin ödemesi sizin fatura bölümünüze aktarılıyor|
+   |Tamamlandı| Kullanıcının seçtiği aboneliklerin ödemesi sizin fatura bölümünüze aktarıldı|
+   |Hatalarla tamamlandı|İstek tamamlandı ama kullanıcının seçtiği aboneliklerden bazılarının ödemesi aktarılamadı|
+   |Süresi doldu|Kullanıcı belirtilen süre içinde isteği kabul etmediği için isteğin süresi doldu|
+   |İptal edildi|Aktarım isteğine erişimi olan birisi isteği iptal etti|
+   |Reddedildi|Kullanıcı aktarım isteğini reddetti|
 
-7. Ayrıntılarını görüntülemek için bir aktarım isteği seçin. Aktarım Ayrıntıları sayfasında aşağıdaki bilgileri görüntüler:
+7. Ayrıntılarını görüntülemek için bir aktarım isteği seçin. Aktarım ayrıntıları sayfasında aşağıdaki bilgiler görüntülenir:
    
-   ![Aktarılan Aboneliklerin listesini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-transfer-completed.png)
+   ![Aktarılan aboneliklerin listesini gösteren ekran görüntüsü](./media/billing-mca-request-billing-ownership/mca-transfer-completed.png)
     
    |Sütun  |Tanım|
    |---------|---------|
-   |Aktarım İsteği kimliği|Aktarım isteğinizin benzersiz kimliği. Bir destek isteği gönderirseniz kimliği destek talebinizi hızlandırmak için Azure destek ekibi ile paylaşabilirsiniz.|
-   |Aktarım istenme tarihi|Aktarım isteği zaman gönderildiği tarih|
-   |Tarafından istenen Aktarım|Aktarım İsteği gönderen kullanıcının e-posta adresi|
-   |Aktarım isteğinin son kullanma tarihi| Aktarım isteğinin süresinin dolduğu tarih|
-   |Alıcının e-posta adresi|Faturalandırma sahipliğini aktarma isteği gönderildi kullanıcının e-posta adresi|
-   |Alıcılara gönderilen Aktarım bağlantısı|Aktarım İsteği gözden geçirmek için kullanıcı için gönderilen URL'yi|
+   |Aktarım isteği kimliği|Aktarım isteğinizin benzersiz kimliği. Destek isteği gönderiyorsanız, destek isteğinizi hızlandırmak için Azure desteğiyle bu kimliği paylaşın|
+   |Aktarım istenme tarihi|Aktarım isteğinin gönderildiği tarih|
+   |Aktarım şu kişi tarafından istendi|Aktarım isteğini gönderen kullanıcının e-posta adresi|
+   |Aktarım İsteğinin son kullanma tarihi| Aktarım isteğinin süresinin dolacağı tarih|
+   |Alıcının e-posta adresi|Fatura sahipliğini aktarması için istek gönderdiğiniz kullanıcının e-posta adresi|
+   |Alıcıya gönderilen aktarım bağlantısı|Aktarım isteğini gözden geçirmesi için kullanıcıya gönderilen URL|
 
 ## <a name="supported-subscription-types"></a>Desteklenen abonelik türleri
 
-Fatura sahipliğini abonelik türleri aşağıda listelenen isteyebilir.
+Aşağıda listelenen abonelik türlerinin fatura sahipliğini isteyebilirsiniz.
 
 - [Eylem paketi](https://azure.microsoft.com/offers/ms-azr-0025p/)\* 
-- [Açık lisansta azure](https://azure.microsoft.com/offers/ms-azr-0111p/)\*
+- [Open Lisansı ile Azure](https://azure.microsoft.com/offers/ms-azr-0111p/)\*
 - [Azure Pass Sponsorluğu](https://azure.microsoft.com/offers/azure-pass/)\*
-- [Kurumsal geliştirme ve Test](https://azure.microsoft.com/offers/ms-azr-0148p/)
-- [Ücretsiz deneme](https://azure.microsoft.com/offers/ms-azr-0044p/)\*
+- [Kurumsal Geliştirme ve Test](https://azure.microsoft.com/offers/ms-azr-0148p/)
+- [Ücretsiz Deneme](https://azure.microsoft.com/offers/ms-azr-0044p/)\*
 - [Kullandıkça Öde](https://azure.microsoft.com/offers/ms-azr-0003p/) 
-- [Kullandıkça Öde geliştirme ve Test](https://azure.microsoft.com/offers/ms-azr-0023p/)
-- [Microsoft Azure-planı](https://azure.microsoft.com/offers/ms-azr-0017g/)\*\*
-- [Microsoft Azure sponsorluk teklifi](https://azure.microsoft.com/offers/ms-azr-0036p/)\*
+- [Kullandıkça Öde Geliştirme ve Test](https://azure.microsoft.com/offers/ms-azr-0023p/)
+- [Microsoft Azure Planı](https://azure.microsoft.com/offers/ms-azr-0017g/)\*\*
+- [Microsoft Azure Sponsorluk Teklifi](https://azure.microsoft.com/offers/ms-azr-0036p/)\*
 - [Microsoft Kurumsal Anlaşma](https://azure.microsoft.com/pricing/enterprise-agreement/)
-- [Microsoft iş ortağı ağı](https://azure.microsoft.com/offers/ms-azr-0025p/)\*
-- [MSDN platformları](https://azure.microsoft.com/offers/ms-azr-0062p/)\*
+- [Microsoft İş Ortağı Ağı](https://azure.microsoft.com/offers/ms-azr-0025p/)\*
+- [MSDN Platformları](https://azure.microsoft.com/offers/ms-azr-0062p/)\*
 - [Visual Studio Enterprise (BizSpark) aboneleri](https://azure.microsoft.com/offers/ms-azr-0064p/)\*
 - [Visual Studio Enterprise (MPN) aboneleri](https://azure.microsoft.com/offers/ms-azr-0029p/)\*
 - [Visual Studio Enterprise aboneleri](https://azure.microsoft.com/offers/ms-azr-0063p/)\*
 - [Visual Studio Professional](https://azure.microsoft.com/offers/ms-azr-0059p/)\*
 - [Visual Studio Test Professional aboneleri](https://azure.microsoft.com/offers/ms-azr-0060p/)\*
 
-\* Abonelikte mevcut olan herhangi bir kredi aktarma yeni hesap kullanılamaz.
+\* Abonelikte sağlanan kredilerin hiçbiri aktarım sonrasında yeni hesapta kullanılamaz.
 
-\*\* Yalnızca abonelikleri sırasında oluşturulan hesaplarında desteklenen Azure Web sitesinde kaydolun.
+\*\* Yalnızca Azure web sitesine kaydolurken oluşturulan hesaplardaki abonelikler için desteklenir.
 
 
 ## <a name="additional-information"></a>Ek bilgiler
 
-Aşağıdaki bölümde, abonelik aktarma hakkında ek bilgi sağlar.
+Aşağıdaki bölümde, abonelik aktarma hakkında ek bilgiler sağlanır.
 
-### <a name="no-service-downtime"></a>Hizmet kapalı kalma süresi olmadan
+### <a name="no-service-downtime"></a>Hizmet kapalı kalma süresi yoktur
 
-Abonelikte bulunan Azure Hizmetleri, herhangi bir kesinti olmadan çalışmaya devam. Biz yalnızca aktarmak için kullanıcının seçtiği Azure abonelikleri için fatura ilişkiyi geçiş.
+Abonelikteki Azure hizmetleri kesintisiz olarak çalışmaya devam eder. Yalnızca kullanıcının aktarmayı seçtiği Azure aboneliklerinin faturalama ilişkisini geçiririz.
 
 ### <a name="disabled-subscriptions"></a>Devre dışı bırakılan abonelikler
 
-Devre dışı bırakılmış abonelik aktarılamaz. Abonelik, fatura sahipliğini devretmek için etkin durumda olması gerekir.
+Devre dışı bırakılan abonelikler aktarılamaz. Fatura sahipliğini aktarmak için aboneliğin etkin durumda olması gerekir.
 
-### <a name="azure-resources-transfer"></a>Azure kaynaklarını aktarımı
+### <a name="azure-resources-transfer"></a>Azure kaynakları aktarımı
 
-Abonelikteki tüm kaynaklara, Web siteleri aktarımı, disk ve VM'lerin ister.
+VM’ler, diskler ve web siteleri aktarımı gibi aboneliklerden gelen tüm kaynaklar.
 
-### <a name="azure-marketplace-products-transfer"></a>Azure Market ürünleri Aktarım
+### <a name="azure-marketplace-products-transfer"></a>Azure Market ürünleri aktarımı
 
-Azure Market ürünleri birlikte kendi aboneliklerini aktarın.
+Azure Market ürünleri, ilgili abonelikleriyle birlikte aktarılır.
 
-### <a name="azure-reservations-transfer"></a>Azure rezervasyon aktarımı
+### <a name="azure-reservations-transfer"></a>Azure rezervasyonları aktarımı
 
-Azure ayırmaları abonelikleri ile otomatik olarak taşıma. [Azure Destek ekibiyle iletişime geçin](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) ayırmaları taşınır.
+Azure rezervasyonları abonelikle birlikte otomatik olarak taşınmaz. Rezervasyonları taşımak için [Azure desteğine başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
 
 ### <a name="access-to-azure-services"></a>Azure hizmetlerine erişim
 
-Mevcut kullanıcıları, grupları veya hizmet sorumluları için (Azure RBAC (rol tabanlı erişim denetimi)) kullanılarak atanmış erişim [… /Role-based-Access-Control/Overview.MD], geçiş sırasında etkilenmez.
+Mevcut kullanıcılar, gruplar veya hizmet sorumlularına Azure RBAC (rol tabanlı erişim denetimi))[../role-based-access-control/overview.md] kullanılarak atanan erişim, aktarım sırasında etkilenmez.
 
 ### <a name="azure-support-plan"></a>Azure destek planınızı
 
-Azure destek abonelikleri ile aktarmaz. Kullanıcı tüm Azure abonelikleri aktarırsa, kendi destek planı iptal isteyin.
+Azure desteği aboneliklerle birlikte aktarılmaz. Kullanıcı tüm Azure aboneliklerini aktarıyorsa, destek planlarını iptal etmelerini isteyin.
 
-### <a name="charges-for-transferred-subscription"></a>Aktarılan Abonelik ücretleri
+### <a name="charges-for-transferred-subscription"></a>Aktarılan aboneliğin ücretleri
 
-Abonelik faturalama özgün sahibinin, transfer tamamlandıktan noktaya kadar bildirilen herhangi bir ücreti sorumludur. Fatura bölümünüzü, aktarımı ve sonraki sürümlerde zamandan bildirilen ücretleri sorumludur. Aktarım önce gerçekleşen ancak daha sonra bildirilen bazı ücretlerini olabilir. Bu ücretler, fatura bölümünde gösterilir.
+Aboneliklerin başlangıçtaki fatura sahibi, aktarımın tamamlandığı noktaya kadar bildirilen tüm ücretlerden sorumludur. Aktarım yapıldıktan sonra bildirilen ücretler sizin fatura bölümünüzün sorumluluğundadır. Aktarımdan önce gerçekleşen ancak daha sonra bildirilen ücretler olabilir. Bu ücretler fatura bölümünüzde gösterilir.
 
-### <a name="cancel-a-transfer-request"></a>Aktarım isteğini iptal et
+### <a name="cancel-a-transfer-request"></a>Aktarım isteğini iptal etme
 
-İstek Onaylandı veya reddedildi kadar aktarım isteğini iptal edebilirsiniz. Aktarım İsteği iptal etmek için Git [aktarım Ayrıntıları sayfası](#check-the-transfer-request-status) ve iptal sayfanın altından seçin.
+Aktarım isteğini, istek onaylanana veya reddedilene kadar iptal edebilirsiniz. Aktarım isteğini iptal etmek için [aktarım ayrıntıları sayfasına](#check-the-transfer-request-status) gidin ve sayfanın altından iptal düğmesini seçin.
 
-### <a name="software-as-a-service-saas-transfer"></a>Yazılım olarak hizmet (SaaS) aktarım
+### <a name="software-as-a-service-saas-transfer"></a>Hizmet Olarak Yazılım (SaaS) aktarımı
 
-SaaS ürünlerinde aboneliklerle aktarılmıyor. Kullanıcıya sor [Azure desteğine başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) SaaS ürünlerinde faturalandırma sahipliğini aktarmak için. Faturalandırma sahipliğini yanı sıra kullanıcı ayrıca kaynak sahipliğini aktarabilir. Kaynak sahipliği ürün ayrıntılarını görüntüleme ve silme gibi yönetim işlemlerini gerçekleştirmenize olanak tanır. Kullanıcının kaynak sahipliğini devretmek için SaaS üründe bir kaynak sahibi olması gerekir.
+SaaS ürünleri aboneliklerle birlikte aktarılmaz. SaaS ürünlerinin fatura sahipliğini aktarmak için kullanıcının [Azure desteğine başvurmasını](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) isteyin. Kullanıcı, fatura sahipliğiyle birlikte kaynak sahipliğini de aktarabilir. Kaynak sahipliği, ürünü silme ve ayrıntılarını görüntüleme gibi yönetim işlemleri gerçekleştirmenizi sağlar. Kullanıcının kaynak sahipliğini aktarabilmesi için SaaS ürününde kaynak sahibi olması gerekir.
 
-## <a name="check-for-access"></a>Erişimi denetle
+## <a name="check-for-access"></a>Erişim denetimi
 [!INCLUDE [billing-check-mca](../../includes/billing-check-mca.md)]
 
-## <a name="need-help-contact-support"></a>Yardım mı gerekiyor? Desteğe başvurun
+## <a name="need-help-contact-support"></a>Yardıma mı ihtiyacınız var? Desteğe başvurun
 
-Yardıma ihtiyacınız varsa [desteğe](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için.
+Yardıma ihtiyacınız varsa sorununuzun hızla çözülmesini sağlamak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure abonelik faturalandırma sahipliğini, fatura bölümüne aktarılır. İçinde bu aboneliklerinin izlemek [Azure portalında](https://portal.azure.com).
-- Diğerleri, görüntüleme ve bu abonelikler için fatura bilgilerini yönetme izinleri verin. Daha fazla bilgi için [fatura bölüm rolleri ve görevleri](billing-understand-mca-roles.md#invoice-section-roles-and-tasks).
+- Azure aboneliklerinin fatura sahipliği fatura bölümünüze aktarıldı. Bu aboneliklerin ücretlerini [Azure portalından](https://portal.azure.com) takip edin.
+- Diğer kullanıcılara bu aboneliklere ait faturalamayı görüntüleme ve yönetme izni verin. Daha fazla bilgi için bkz. [Fatura bölümü rolleri ve görevleri](billing-understand-mca-roles.md#invoice-section-roles-and-tasks).

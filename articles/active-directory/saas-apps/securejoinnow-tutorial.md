@@ -1,224 +1,155 @@
 ---
-title: 'Öğretici: SecureW2 JoinNow Bağlayıcısı ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: SecureW2 JoinNow Bağlayıcısı ile Azure Active Directory arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: SecureW2 JoinNow Bağlayıcısı ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve SecureW2 JoinNow Bağlayıcısı arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
-ms.reviewer: joflore
+manager: mtillman
+ms.reviewer: barbkess
 ms.assetid: 2445b3af-f827-40de-9097-6f5c933d0f53
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 07/06/2018
+ms.topic: tutorial
+ms.date: 08/07/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5b367befb90ec28ece963d67b479749e1c8ad363
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3dbb21bcea978f566082e5edb8831ac044c95fd6
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60340018"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68880109"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-securew2-joinnow-connector"></a>Öğretici: SecureW2 JoinNow Bağlayıcısı ile Azure Active Directory Tümleştirme
+# <a name="tutorial-integrate-securew2-joinnow-connector-with-azure-active-directory"></a>Öğretici: SecureW2 JoinNow bağlayıcısını Azure Active Directory ile tümleştirin
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile SecureW2 JoinNow bağlayıcı tümleştirme konusunda bilgi edinin.
+Bu öğreticide, SecureW2 JoinNow bağlayıcısını Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. SecureW2 JoinNow bağlayıcısını Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-SecureW2 JoinNow Bağlayıcısı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+* Azure AD 'de SecureW2 JoinNow bağlayıcısına erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla SecureW2 JoinNow bağlayıcısıyla otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-- SecureW2 JoinNow bağlayıcı erişimi, Azure AD'de kontrol edebilirsiniz.
-- Azure AD hesaplarına otomatik olarak imzalanan SecureW2 JoinNow bağlayıcıya (çoklu oturum açma) açma, kullanıcılarınızın etkinleştirebilirsiniz.
-- Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
-
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](../manage-apps/what-is-single-sign-on.md).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesi SecureW2 JoinNow Bağlayıcısı ile yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-- Azure AD aboneliği
-- Abonelik SecureW2 JoinNow bağlayıcı çoklu oturum açma etkin
-
-> [!NOTE]
-> Bu öğreticideki adımları test etmek için üretim ortamı kullanarak önermiyoruz.
-
-Bu öğreticideki adımları test etmek için bu önerileri izlemelidir:
-
-- Gerekli olmadıkça, üretim ortamında kullanmayın.
-- Azure AD deneme ortamı yoksa, şunları yapabilirsiniz [bir aylık deneme sürümü edinin](https://azure.microsoft.com/pricing/free-trial/).
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* SecureW2 JoinNow Bağlayıcısı çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
-Bu öğreticide, Azure AD çoklu oturum açma bir test ortamında test edin. Bu öğreticide özetlenen senaryo iki temel yapı taşları oluşur:
 
-1. Galeriden SecureW2 JoinNow bağlayıcı ekleme
-2. Yapılandırma ve test Azure AD çoklu oturum açma
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-## <a name="adding-securew2-joinnow-connector-from-the-gallery"></a>Galeriden SecureW2 JoinNow bağlayıcı ekleme
-Azure AD'de SecureW2 JoinNow bağlayıcı tümleştirmesini yapılandırmak için SecureW2 JoinNow bağlayıcı Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+* SecureW2 JoinNow Bağlayıcısı **SP** tarafından başlatılan SSO 'yu destekliyor
 
-**Galeriden SecureW2 JoinNow bağlayıcı eklemek için aşağıdaki adımları gerçekleştirin:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi. 
 
-    ![Azure Active Directory düğmesi][1]
 
-2. Gidin **kurumsal uygulamalar**. Ardından **tüm uygulamaları**.
 
-    ![Kurumsal uygulamalar dikey penceresi][2]
-    
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+## <a name="adding-securew2-joinnow-connector-from-the-gallery"></a>Galeriden SecureW2 JoinNow Bağlayıcısı ekleniyor
 
-    ![Yeni Uygulama düğmesi][3]
+SecureW2 JoinNow bağlayıcısının tümleştirmesini Azure AD 'ye göre yapılandırmak için, Galeriden SecureW2 Joinconnector bağlayıcısını yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-4. Arama kutusuna **SecureW2 JoinNow bağlayıcı**seçin **SecureW2 JoinNow bağlayıcı** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **SecureW2 joinnow bağlayıcısını** yazın.
+1. Sonuçlar panelinden **SecureW2 JoinNow bağlayıcısını** seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-    ![Sonuç listesinde SecureW2 JoinNow Bağlayıcısı](./media/securejoinnow-tutorial/tutorial_securejoinnow_addfromgallery.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırın ve SecureW2 JoinNow "Britta Simon" adlı bir test kullanıcı tabanlı Bağlayıcısı ile Azure AD çoklu oturum açma testi.
+**B. Simon**adlı bir test kullanıcısı kullanarak Azure AD SSO 'Yu SecureW2 joinnow bağlayıcısıyla yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ve SecureW2 JoinNow Bağlayıcısı içindeki ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-Tek iş için oturum açma için Azure AD ne karşılık gelen kullanıcı SecureW2 JoinNow bağlayıcısında bir kullanıcının Azure AD'de olduğunu bilmeniz gerekir. Diğer bir deyişle, bir Azure AD kullanıcısı ve ilgili kullanıcı SecureW2 JoinNow bağlayıcısında arasında bir bağlantı ilişki kurulması gerekir.
+Azure AD SSO 'yu SecureW2 JoinNow Bağlayıcısı ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-Yapılandırma ve Azure AD çoklu oturum açma SecureW2 JoinNow Bağlayıcısı ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[SecureW2 JoinNow Bağlayıcısı SSO 'Su yapılandırın](#configure-securew2-joinnow-connector-sso)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+5. User 'ın Azure AD gösterimine bağlı olan SecureW2 JoinNow bağlayıcısında B. Simon 'a sahip olmak için **[SecureW2 joinnow Bağlayıcısı test kullanıcısı oluşturun](#create-securew2-joinnow-connector-test-user)** .
+6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-3. **[SecureW2 JoinNow bağlayıcı test kullanıcısı oluşturma](#create-a-securew2-joinnow-connector-test-user)**  - kullanıcı Azure AD gösterimini bağlı SecureW2 JoinNow bağlayıcısında Britta simon'un bir karşılığı vardır.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin ve SecureW2 JoinNow bağlayıcı uygulamanızda çoklu oturum açmayı yapılandırın.
+1. [Azure Portal](https://portal.azure.com/), **SecureW2 joinnow bağlayıcı** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-**Azure AD çoklu oturum açma SecureW2 JoinNow Bağlayıcısı ile yapılandırmak için aşağıdaki adımları gerçekleştirin:**
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-1. Azure portalında üzerinde **SecureW2 JoinNow bağlayıcı** uygulama tümleştirme sayfasını tıklatın **çoklu oturum açma**.
+1. **Temel SAML yapılandırması** bölümünde, aşağıdaki alanlar için değerleri girin:
 
-    ![Çoklu oturum açma bağlantısı yapılandırma][4]
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<organization-identifier>-auth.securew2.com/auth/saml/SSO`
 
-2. Üzerinde **çoklu oturum açma** iletişim kutusunda **modu** olarak **SAML tabanlı oturum açma** çoklu oturum açmayı etkinleştirmek için.
- 
-    ![Çoklu oturum açma iletişim kutusu](./media/securejoinnow-tutorial/tutorial_securejoinnow_samlbase.png)
+    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<organization-identifier>-auth.securew2.com/auth/saml`
 
-3. Üzerinde **SecureW2 JoinNow bağlayıcı etki alanı ve URL'ler** bölümünde, aşağıdaki adımları gerçekleştirin:
+    > [!NOTE]
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için [SecureW2 JoinNow bağlayıcı istemci destek ekibine](mailto:support@securew2.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-    ![SecureW2 JoinNow bağlayıcı etki alanı ve URL'ler tek oturum açma bilgileri](./media/securejoinnow-tutorial/tutorial_securejoinnow_url.png)
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama Sertifikası** bölümünde **meta veri XML** 'i bulun ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-    a. İçinde **oturum açma URL'si** metin kutusuna bir URL şu biçimi kullanarak: `https://<organization-identifier>-auth.securew2.com/auth/saml/SSO`
+    ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-    b. İçinde **tanımlayıcı** metin kutusuna bir URL şu biçimi kullanarak: `https://<organization-identifier>-auth.securew2.com/auth/saml`
+1. **SecureW2 JoinNow bağlayıcısını ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    > [!NOTE] 
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL'si ve tanımlayıcı ile güncelleştirin. İlgili kişi [SecureW2 JoinNow bağlayıcı istemci Destek ekibine](mailto:support@securew2.com) bu değerleri almak için. 
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-4. Üzerinde **SAML imzalama sertifikası** bölümünde **meta veri XML** ve bilgisayarınızda meta veri dosyasını kaydedin.
+### <a name="configure-securew2-joinnow-connector-sso"></a>SecureW2 JoinNow bağlayıcı SSO 'yu yapılandırma
 
-    ![Sertifika indirme bağlantısı](./media/securejoinnow-tutorial/tutorial_securejoinnow_certificate.png) 
-
-5. Tıklayın **Kaydet** düğmesi.
-
-    ![Çoklu oturum açma Kaydet düğmesi yapılandırın](./media/securejoinnow-tutorial/tutorial_general_400.png)
-
-6. Çoklu oturum açmayı yapılandırma **SecureW2 JoinNow bağlayıcı** tarafı, indirilen göndermek için ihtiyacınız **meta veri XML** için [SecureW2 JoinNow bağlayıcı Destek ekibine](mailto:support@securew2.com). Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
-
+**SecureW2 joinnow Bağlayıcısı** tarafında çoklu oturum açmayı yapılandırmak için, Indirilen **meta veri XML** 'sini ve Azure Portal ' den uygun kopyalanmış URL 'Leri [SecureW2 joinnow Bağlayıcısı destek ekibine](mailto:support@securew2.com)göndermeniz gerekir. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-   ![Bir Azure AD test kullanıcısı oluşturma][100]
-
-**Azure AD'de bir test kullanıcısı oluşturmak için aşağıdaki adımları gerçekleştirin:**
-
-1. Azure portalında, sol bölmede, tıklayın **Azure Active Directory** düğmesi.
-
-    ![Azure Active Directory düğmesi](./media/securejoinnow-tutorial/create_aaduser_01.png)
-
-2. Kullanıcıların listesini görüntülemek için Git **kullanıcılar ve gruplar**ve ardından **tüm kullanıcılar**.
-
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](./media/securejoinnow-tutorial/create_aaduser_02.png)
-
-3. Açmak için **kullanıcı** iletişim kutusu, tıklayın **Ekle** en üstündeki **tüm kullanıcılar** iletişim kutusu.
-
-    ![Ekle düğmesi](./media/securejoinnow-tutorial/create_aaduser_03.png)
-
-4. İçinde **kullanıcı** iletişim kutusunda, aşağıdaki adımları gerçekleştirin:
-
-    ![Kullanıcı iletişim kutusu](./media/securejoinnow-tutorial/create_aaduser_04.png)
-
-    a. İçinde **adı** kutusuna **BrittaSimon**.
-
-    b. İçinde **kullanıcı adı** Britta Simon kullanıcı e-posta adresini yazın.
-
-    c. Seçin **Göster parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
-
-    d. **Oluştur**’a tıklayın.
- 
-### <a name="create-a-securew2-joinnow-connector-test-user"></a>SecureW2 JoinNow bağlayıcı test kullanıcısı oluşturma
-
-Bu bölümde, Britta Simon SecureW2 JoinNow bağlayıcısında adlı bir kullanıcı oluşturun. Çalışmak [SecureW2 JoinNow bağlayıcı istemci Destek ekibine](mailto:support@securew2.com) SecureW2 JoinNow bağlayıcı platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Seçin **yeni kullanıcı** ekranın üstünde.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına, username@companydomain.extensiongirin. Örneğin: `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1.           **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, SecureW2 JoinNow bağlayıcısına erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Bu bölümde, SecureW2 JoinNow bağlayıcısının erişimine izin vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-![Kullanıcı rolü atayın][200] 
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde **SecureW2 JoinNow Bağlayıcısı**' nı seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-**Britta Simon SecureW2 JoinNow bağlayıcıya atamak için aşağıdaki adımları gerçekleştirin:**
+   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-1. Azure portalında uygulama görünümü açtığınız dizin görünümüne gidin ve Git **kurumsal uygulamalar** ardından **tüm uygulamaları**.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![Kullanıcı Ata][201] 
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-2. Uygulamalar listesinde **SecureW2 JoinNow bağlayıcı**.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    ![Uygulamalar listesini SecureW2 JoinNow Bağlayıcısı bağlantıyı](./media/securejoinnow-tutorial/tutorial_securejoinnow_app.png)  
+### <a name="create-securew2-joinnow-connector-test-user"></a>SecureW2 JoinNow Bağlayıcısı test kullanıcısı oluştur
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+Bu bölümde, SecureW2 JoinNow bağlayıcısında Britta Simon adlı bir Kullanıcı oluşturacaksınız. SecureW2 JoinNow bağlayıcı platformunda kullanıcıları eklemek için [SecureW2 joinnow Bağlayıcısı destek ekibi](mailto:support@securew2.com) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı][202]
+### <a name="test-sso"></a>Test SSO 'SU
 
-4. Tıklayın **Ekle** düğmesi. Ardından **kullanıcılar ve gruplar** üzerinde **atama Ekle** iletişim.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-    ![Atama Ekle bölmesi][203]
-
-5. Üzerinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** kullanıcıları listesinde.
-
-6. Tıklayın **seçin** düğmesini **kullanıcılar ve gruplar** iletişim.
-
-7. Tıklayın **atama** düğmesini **atama Ekle** iletişim.
-    
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
-
-**Uygulamayı test etmek için aşağıdaki adımları gerçekleştirin:** 
-
-a. SecureW2 JoinNow bağlayıcı İstemcisi'ni açmak için listeden uygun Cihazınızı seçin ve tıklayın **oturum** düğmesi.
-
-b. Varsayılan tarayıcıyı ve kimlik doğrulaması için Azure portalına yeniden yönlendirilmiş olmalıdır.
-
-c. Başarılı kimlik doğrulamasını SecureW2 JoinNow bağlayıcı ilk giriş sayfasına geri döndürmesi gerekir.
+Erişim panelinde SecureW2 JoinNow bağlayıcı kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız SecureW2 JoinNow bağlayıcısında otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](tutorial-list.md)
-* [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-
-<!--Image references-->
-
-[1]: ./media/securejoinnow-tutorial/tutorial_general_01.png
-[2]: ./media/securejoinnow-tutorial/tutorial_general_02.png
-[3]: ./media/securejoinnow-tutorial/tutorial_general_03.png
-[4]: ./media/securejoinnow-tutorial/tutorial_general_04.png
-
-[100]: ./media/securejoinnow-tutorial/tutorial_general_100.png
-
-[200]: ./media/securejoinnow-tutorial/tutorial_general_200.png
-[201]: ./media/securejoinnow-tutorial/tutorial_general_201.png
-[202]: ./media/securejoinnow-tutorial/tutorial_general_202.png
-[203]: ./media/securejoinnow-tutorial/tutorial_general_203.png
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

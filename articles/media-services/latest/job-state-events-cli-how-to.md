@@ -1,6 +1,6 @@
 ---
-title: CLI kullanarak Event Grid ile Azure Media Services olaylarını izleme | Microsoft Docs
-description: Bu makalede, Event Grid için Azure Media Services olaylarını izlemek için abone olunacağı gösterilmektedir.
+title: CLı kullanarak Event Grid Azure Media Services olaylarını izleme | Microsoft Docs
+description: Bu makalede, Azure Media Services olaylarını izlemek için Event Grid nasıl abone olunacağı gösterilmektedir.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -11,47 +11,47 @@ ms.workload: ''
 ms.topic: article
 ms.date: 11/09/2018
 ms.author: juliako
-ms.openlocfilehash: f6243bbc21466361aed7cbb7193f3a7b7c7e539f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 619d40ab56715b4444d8e5649c7fb3401b3f57ff
+ms.sourcegitcommit: f2d9d5133ec616857fb5adfb223df01ff0c96d0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60322694"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71937281"
 ---
-# <a name="create-and-monitor-media-services-events-with-event-grid-using-the-azure-cli"></a>Oluşturma ve Azure CLI kullanarak Event Grid ile Media Services olaylarını izleme
+# <a name="create-and-monitor-media-services-events-with-event-grid-using-the-azure-cli"></a>Azure CLı kullanarak Event Grid Media Services olaylar oluşturma ve izleme
 
-Azure Event Grid, bulut için bir olay oluşturma hizmetidir. Bu hizmetin kullandığı [olay abonelikleri](../../event-grid/concepts.md#event-subscriptions) abonelere olay iletileri yönlendirmek için. Media Services olaylarını verilerinizdeki değişiklikleri yanıtlamak için gereken tüm bilgileri içerir. EventType özelliği "Microsoft.Media" ile başladığından bir Media Services olayı belirleyebilirsiniz. Daha fazla bilgi için [Media Services olay şemaları](media-services-event-schemas.md).
+Azure Event Grid, bulut için bir olay hizmetidir. Bu hizmet, olay iletilerini abonelere yönlendirmek için [olay abonelikleri](../../event-grid/concepts.md#event-subscriptions) kullanır. Media Services olaylar, verilerdeki değişikliklere yanıt vermek için gereken tüm bilgileri içerir. EventType özelliği "Microsoft. Media." ile başladığı için bir Media Services olayı tanımlayabilirsiniz. Daha fazla bilgi için bkz. [Media Services olay şemaları](media-services-event-schemas.md).
 
-Bu makalede, Azure Media Services hesabınız için olaylara abone için Azure CLI'yı kullanın. Ardından, sonucu görüntülemek için olayları tetikleyin. Normalde olayları, olay verilerini işleyen ve eylemler gerçekleştiren bir uç noktaya gönderirsiniz. Bu makalede, toplar ve iletileri görüntüleyen bir web uygulaması için olayları gönderirsiniz.
+Bu makalede, Azure CLı kullanarak Azure Media Services hesabınıza yönelik olaylara abone olabilirsiniz. Ardından, sonucu görüntülemek için olayları tetiklersiniz. Genellikle olayları, olay verilerini işleyen ve eylemleri geçen bir uç noktaya gönderirsiniz. Bu makalede, olayları toplayıp görüntüleyen bir Web uygulamasına gönderirsiniz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Prerequisites
 
 - Etkin bir Azure aboneliği. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) oluşturun.
-- Yükleyin ve bu makalede Azure CLI 2.0 veya sonraki bir sürüm gerektirir, CLI'yı yerel olarak kullanın. Kullandığınız sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekirse bkz. [Azure CLI’yı yükleme](/cli/azure/install-azure-cli). 
+- CLı 'yi yerel olarak yükleyip kullanın, bu makale için Azure CLı 2,0 veya sonraki bir sürümü gerekir. Sahip olduğunuz sürümü bulmak için `az --version` ' yı çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse bkz. [Azure CLI 'Yı yüklemek](/cli/azure/install-azure-cli). 
 
-    Şu anda tüm [Media Services v3 CLI](https://aka.ms/ams-v3-cli-ref) komutlar Azure Cloud Shell içinde çalışır. CLI'yi yerel olarak kullanmak için önerilir.
+    Şu anda, tüm [Media Services v3 CLI](https://aka.ms/ams-v3-cli-ref) komutları Azure Cloud Shell çalışmaz. CLı 'nın yerel olarak kullanılması önerilir.
 
-- [Bir Media Services hesabı oluşturma](create-account-cli-how-to.md).
+- [Media Services hesabı oluşturun](create-account-cli-how-to.md).
 
-    Media Services hesap adını ve kaynak grubu adı için kullanılan değerleri unutmayın emin olun.
+    Kaynak grubu adı ve Media Services hesap adı için kullandığınız değerleri anımsadığınızdan emin olun.
 
 ## <a name="create-a-message-endpoint"></a>İleti uç noktası oluşturma
 
-Media Services hesabı için olaylara abone olmadan önce olay iletisi için uç noktayı oluşturalım. Normalde, olay verileri temelinde uç nokta eylemleri gerçekleştirir. Bu makalede, dağıttığınız bir [önceden oluşturulmuş bir web uygulaması](https://github.com/Azure-Samples/azure-event-grid-viewer) , olay iletileri görüntüler. Dağıtılan çözüm bir App Service planı, App Service web uygulaması ve GitHub'dan kaynak kod içerir.
+Media Services hesabı için olaylara abone olmadan önce olay iletisi için uç noktayı oluşturalım. Genellikle, uç nokta olay verilerine göre eylemler gerçekleştirir. Bu makalede, olay iletilerini görüntüleyen [önceden oluşturulmuş bir Web uygulaması](https://github.com/Azure-Samples/azure-event-grid-viewer) dağıtırsınız. Dağıtılan çözüm, GitHub 'dan bir App Service planı, bir App Service Web uygulaması ve kaynak kodu içerir.
 
-1. Çözümü aboneliğinize dağıtmak için **Azure'a Dağıt**'ı seçin. Azure portalında parametre değerlerini girin.
+1. Çözümü aboneliğinize dağıtmak için **Azure 'A dağıt** ' ı seçin. Azure portal parametreler için değerler sağlayın.
 
    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 
-1. Dağıtımın tamamlanması birkaç dakika sürebilir. Dağıtım başarıyla gerçekleştirildikten sonra, web uygulamanızı görüntüleyip çalıştığından emin olun. Web tarayıcısında şu adrese gidin: `https://<your-site-name>.azurewebsites.net`
+1. Dağıtımın tamamlanması birkaç dakika sürebilir. Dağıtım başarılı olduktan sonra, çalıştığından emin olmak için Web uygulamanızı görüntüleyin. Bir Web tarayıcısında şuraya gidin: `https://<your-site-name>.azurewebsites.net`
 
-"Azure Event Grid Görüntüleyicisi" sitesine geçerseniz, henüz hiçbir olay sahip bakın.
+"Azure Event Grid Görüntüleyici" sitesine geçerseniz, henüz hiç olayına sahip olduğunu görürsünüz.
    
 [!INCLUDE [event-grid-register-provider-portal.md](../../../includes/event-grid-register-provider-portal.md)]
 
 ## <a name="set-the-azure-subscription"></a>Azure aboneliğini ayarlama
 
-Aşağıdaki komutta, Media Services hesabı için kullanmak istediğiniz Azure abonelik kimliğini sağlayın. [Abonelikler](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade)’e giderek erişimine sahip olduğunuz aboneliklerin listesini görebilirsiniz.
+Aşağıdaki komutta, Media Services hesabı için kullanmak istediğiniz Azure abonelik KIMLIĞINI sağlayın. [Aboneliklerde](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade)gezinerek erişiminiz olan aboneliklerin bir listesini görebilirsiniz.
 
 ```azurecli
 az account set --subscription mySubscriptionId
@@ -59,11 +59,11 @@ az account set --subscription mySubscriptionId
 
 ## <a name="subscribe-to-media-services-events"></a>Media Services olaylarına abone olma
 
-Abone olduğunuz bir makalede Event Grid'e hangi olayları izlemek istediğinizi bildirmek için. Aşağıdaki örnek, oluşturduğunuz ve URL'sini olay bildirimi için uç nokta olarak oluşturduğunuz Web sitesinden geçirir Media Services hesabına abone olur. 
+İzlemek istediğiniz olayları Event Grid söylemek için bir makaleye abone olursunuz. Aşağıdaki örnek, oluşturduğunuz Media Services hesabına abone olur ve olay bildirimi için uç nokta olarak oluşturduğunuz Web sitesinden URL 'YI geçirir. 
 
-Değiştirin `<event_subscription_name>` olay aboneliğiniz için benzersiz bir ada sahip. İçin `<resource_group_name>` ve `<ams_account_name>`, Media Services hesabı oluştururken kullanılan değerleri kullanın. İçin `<endpoint_URL>`, web uygulamanızın URL'sini sağlayın ve ekleme `api/updates` giriş sayfası URL'si. Abone olurken bir uç noktası belirterek, Event Grid olayların Bu uç noktaya yönlendirilmesini sağlar. 
+@No__t-0 değerini olay aboneliğiniz için benzersiz bir adla değiştirin. @No__t-0 ve `<ams_account_name>` için Media Services hesabı oluştururken kullandığınız değerleri kullanın. @No__t-0 için, Web uygulamanızın URL 'sini sağlayın ve giriş sayfası URL 'sine `api/updates` ekleyin. Abone olurken bitiş noktasını belirterek, Event Grid olayların bu uç noktaya yönlendirilmesini işler. 
 
-1. Kaynak kimliğini alın
+1. Kaynak kimliğini al
 
     ```azurecli
     amsResourceId=$(az ams account show --name <ams_account_name> --resource-group <resource_group_name> --query id --output tsv)
@@ -79,7 +79,7 @@ Değiştirin `<event_subscription_name>` olay aboneliğiniz için benzersiz bir 
 
     ```azurecli
     az eventgrid event-subscription create \
-    --resource-id $amsResourceId \
+    --source-resource-id $amsResourceId \
     --name <event_subscription_name> \
     --endpoint <endpoint_URL>
     ```
@@ -87,26 +87,26 @@ Değiştirin `<event_subscription_name>` olay aboneliğiniz için benzersiz bir 
     Örneğin:
 
     ```
-    az eventgrid event-subscription create --resource-id $amsResourceId --name amsTestEventSubscription --endpoint https://amstesteventgrid.azurewebsites.net/api/updates/
+    az eventgrid event-subscription create --source-resource-id $amsResourceId --name amsTestEventSubscription --endpoint https://amstesteventgrid.azurewebsites.net/api/updates/
     ```    
 
     > [!TIP]
-    > Doğrulama el sıkışması uyarısı alabilirsiniz. Birkaç dakika bekleyin ve anlaşma doğrulamalıdır.
+    > Doğrulama el sıkışma uyarısı alabilirsiniz. Birkaç dakika bekleyin ve el sıkışma doğrulaması gerekir.
 
-Şimdi, Event Grid'in iletiyi uç noktanıza nasıl dağıttığını görmek için bir olay tetikleyelim.
+Şimdi, Event Grid iletiyi uç noktanıza nasıl dağıttığını görmek için olayları tetikleyelim.
 
 ## <a name="send-an-event-to-your-endpoint"></a>Uç noktanıza olay gönderme
 
-Media Services hesabı için olaylara bir kodlama işi tetikleyebilirsiniz. İzleyebileceğiniz [Bu hızlı başlangıçta](stream-files-dotnet-quickstart.md) dosya kodlamak ve olayları göndermeye başlayın. 
+Bir kodlama işi çalıştırarak Media Services hesabı için olayları tetikleyebilirsiniz. Bir dosya kodlamak ve olay göndermeye başlamak için [Bu hızlı](stream-files-dotnet-quickstart.md) başlangıcı izleyebilirsiniz. 
 
-Web uygulamanızı yeniden görüntüleyin ve buna bir abonelik doğrulama olayının gönderildiğine dikkat edin. Uç noktanın olay verilerini almak istediğini doğrulayabilmesi için Event Grid doğrulama olayını gönderir. Uç nokta ayarlamak zorunda `validationResponse` için `validationCode`. Daha fazla bilgi için [Event Grid güvenliğini ve kimlik doğrulaması](../../event-grid/security-authentication.md). Abonelik doğrulama biçimini görmek için web uygulaması kodunu görüntüleyebilirsiniz.
+Web uygulamanızı yeniden görüntüleyin ve kendisine bir abonelik doğrulama olayı gönderildiğini unutmayın. Event Grid, bitiş noktasının olay verilerini almak istediğini doğrulayabilmesi için doğrulama olayını gönderir. Uç noktanın `validationResponse` `validationCode` olarak ayarlanması gerekebilir. Daha fazla bilgi için bkz. [güvenlik ve kimlik doğrulaması Event Grid](../../event-grid/security-authentication.md). Aboneliği nasıl doğrulayacağını görmek için Web uygulaması kodunu görüntüleyebilirsiniz.
 
 > [!TIP]
-> Göz simgesini seçerek olay verilerini genişletin. Tüm olayları görüntülemek istiyorsanız, sayfa yenilenmez.
+> Olay verilerini genişletmek için göz simgesini seçin. Tüm olayları görüntülemek istiyorsanız, sayfayı yenilemeyin.
 
-![Abonelik olayını görüntüleme](./media/monitor-events-portal/view-subscription-event.png)
+![Abonelik olayını görüntüle](./media/monitor-events-portal/view-subscription-event.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Karşıya yükleme, kodlama ve akışını](stream-files-tutorial-with-api.md)
+[Karşıya yükleme, kodlama ve akış](stream-files-tutorial-with-api.md)
 

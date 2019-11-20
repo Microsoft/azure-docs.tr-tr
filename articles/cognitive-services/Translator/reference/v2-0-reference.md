@@ -1,7 +1,7 @@
 ---
-title: Translator metin çevirisi API'si V2.0
+title: Translator Metin Çevirisi API'si v 2.0
 titleSuffix: Azure Cognitive Services
-description: V2.0 Translator metin çevirisi API'si için başvuru belgeleri.
+description: Translator Metin Çevirisi API'si v 2.0 için başvuru belgeleri.
 services: cognitive-services
 author: swmachan
 manager: nitinme
@@ -10,108 +10,108 @@ ms.subservice: translator-text
 ms.topic: reference
 ms.date: 05/15/2018
 ms.author: swmachan
-ms.openlocfilehash: 88503c73e2ca9cf04e64ca3a47793e9b10ca325a
-ms.sourcegitcommit: a7ea412ca4411fc28431cbe7d2cc399900267585
+ms.openlocfilehash: f111169558118a80602bcb2136bc63ce54c9e0d9
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/25/2019
-ms.locfileid: "67357831"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72242494"
 ---
-# <a name="translator-text-api-v20"></a>Translator metin çevirisi API'si v2.0
+# <a name="translator-text-api-v20"></a>Translator Metin Çevirisi API'si v 2.0
 
 > [!IMPORTANT]
-> Translator metin çevirisi API'si bu sürümünde kullanım dışı bırakıldı. [Translator Text API v3 belgelerine görüntülemek](v3-0-reference.md).
+> Translator Metin Çevirisi API'si bu sürümü kullanımdan kaldırılmıştır. [Translator metin çevirisi API'si sürüm 3 ' ün belgelerini görüntüleyin](v3-0-reference.md).
 
-Translator Text API V2 uygulamalarınızı, Web sitelerini, araçları veya diğer çözümleri çok dilli kullanıcı deneyimleri sağlamak için sorunsuz bir şekilde tümleştirilebilir. Endüstri standartlarından yararlanarak, bunu herhangi bir platformda donanım ve işletim sistemiyle dil çevirisi ve dil algılama metin veya metin okuma gibi dil ilgili diğer işlemleri gerçekleştirmek için kullanılabilir. Microsoft Translator API'si hakkında daha fazla bilgi için buraya tıklayın.
+Translator Metin Çevirisi API'si sürüm 2, uygulamalar, Web siteleri, araçlarınızla veya çok dilli kullanıcı deneyimleri sağlamak için diğer çözümlerle sorunsuzca tümleştirilebilir. Endüstri standartlarına göre, dil çevirisini ve metin okuma ve metin okuma gibi diğer dille ilgili görevleri gerçekleştirmek için herhangi bir donanım platformunda ve herhangi bir işletim sistemiyle kullanabilirsiniz. Daha fazla bilgi için bkz. [Translator metin çevirisi API'si](../translator-info-overview.md).
 
 ## <a name="getting-started"></a>Başlarken
-Translator Text API gerekecek erişmeye [için Microsoft Azure'a kaydolun](../translator-text-how-to-signup.md).
+Translator Metin Çevirisi API'si erişmek için [Microsoft Azure kaydolmanız](../translator-text-how-to-signup.md)gerekir.
 
-## <a name="authorization"></a>Yetkilendirme
-Translator metin çevirisi API'si tüm çağrıların kimliğini doğrulamak için bir abonelik anahtarı gerektirir. API, üç kimlik doğrulaması modunu destekler:
+## <a name="authentication"></a>Kimlik doğrulaması 
+Translator Metin Çevirisi API'si yapılan tüm çağrılar, kimlik doğrulaması için bir abonelik anahtarı gerektirir. API üç kimlik doğrulama yöntemini destekler:
 
-- Bir erişim belirteci. Başvurulan abonelik anahtarını kullanın **adım** yetkilendirme hizmete bir POST isteği yaparak bir erişim belirteci oluşturmak için 9. Ayrıntılar için belirteç hizmeti belgelerine bakın. Erişim belirteci yetkilendirme üst bilgisi kullanarak Translator hizmete geçirmesi veya `access_token` sorgu parametresi. Erişim belirteci 10 dakika için geçerlidir. 10 dakikada bir yeni bir erişim belirteci edinmek ve bu 10 dakika içinde aynı erişimi kullanarak yönelik yinelenen isteklerden belirteci tutun.
-- Bir abonelik anahtarı doğrudan. Bir değer olarak abonelik anahtarınızı aktarmak `Ocp-Apim-Subscription-Key` isteğiniz, Translator API'sinde bulunan üst bilgi. Bu modda, bir erişim belirteci oluşturmak için kimlik doğrulama belirteci hizmeti çağırmak zorunda değilsiniz.
-- A [hizmetli Bilişsel hizmetler abonelik](https://azure.microsoft.com/pricing/details/cognitive-services/). Bu mod, birden çok hizmeti isteklerinde kimlik doğrulaması için tek bir gizli anahtar kullanmanıza olanak sağlar. <br/>
-Birden çok hizmet bir gizli anahtar kullandığınızda, isteğinize iki kimlik doğrulama üst bilgileri içermelidir. İlk üstbilgi gizli anahtar geçirir. İkinci başlık aboneliğinizle ilişkilendirilmiş bir bölgeye belirtir:
+- Erişim belirteci. Kimlik doğrulama hizmetine bir POST isteği yaparak bir erişim belirteci oluşturmak için abonelik anahtarını kullanın. Ayrıntılar için belirteç hizmeti belgelerine bakın. @No__t-0 üst bilgisini veya `access_token` sorgu parametresini kullanarak erişim belirtecini Translator hizmetine geçirin. Erişim belirteci 10 dakika için geçerlidir. 10 dakikada bir yeni bir erişim belirteci alın ve 10 dakika boyunca yinelenen istekler için aynı erişim belirtecini kullanmaya devam edin.
+- Doğrudan kullanılan bir abonelik anahtarı. Abonelik anahtarınızı, Translator Metin Çevirisi API'si isteğinize dahil `Ocp-Apim-Subscription-Key` üst bilgisinde bir değer olarak geçirin. Abonelik anahtarını doğrudan kullandığınızda, bir erişim belirteci oluşturmak için belirteç kimlik doğrulama hizmetini çağırmanız gerekmez.
+- Azure bilişsel [Hizmetler çoklu hizmet aboneliği](https://azure.microsoft.com/pricing/details/cognitive-services/). Bu yöntem, birden fazla hizmete yönelik isteklerin kimliğini doğrulamak için tek bir gizli anahtar kullanmanıza olanak sağlar.
+Çoklu hizmet gizli anahtarı kullandığınızda, isteğinize iki kimlik doğrulama üst bilgisi eklemeniz gerekir. İlk üstbilgi gizli anahtarı geçirir. İkinci üstbilgi, aboneliğinizle ilişkili bölgeyi belirtir:
    - `Ocp-Apim-Subscription-Key`
    - `Ocp-Apim-Subscription-Region`
 
-Bölge için birden çok hizmet Text API aboneliği gereklidir. Seçtiğiniz bölge kullanabileceğiniz metin çevirisi için çok hizmet bir abonelik anahtarı kullanılırken yalnızca bölgedir ve Azure portalı üzerinden çok hizmet aboneliğiniz için RMS'ye kaydolurken seçtiğiniz aynı bölgede olması gerekir.
+Çoklu hizmet metin API 'SI aboneliği için bölge gereklidir. Seçtiğiniz bölge, çok servis abonelik anahtarını kullandığınızda metin çevirisi için kullanabileceğiniz tek bölgedir. Azure portal, çoklu hizmet aboneliğiniz için kaydolduğunuzda seçtiğiniz bölge ile aynı olması gerekir.
 
-Kullanılabilen bölgeler `australiaeast`, `brazilsouth`, `canadacentral`, `centralindia`, `centraluseuap`, `eastasia`, `eastus`, `eastus2`, `japaneast`, `northeurope`, `southcentralus`, `southeastasia`, `uksouth`, `westcentralus`, `westeurope`, `westus`, ve `westus2`.
+Kullanılabilir bölgeler `australiaeast`, `brazilsouth`, `canadacentral`, `centralindia`, `centraluseuap`, `eastasia`, `eastus`, `eastus2`, `japaneast`, `northeurope`, 0, 1, 2, 3, 4, 5 ve 6 ' dır.
 
-Abonelik anahtarınız ve erişim belirteci görünümünden gizlenmelidir gizli diziler olarak göz önünde bulundurun.
+Abonelik anahtarınız ve erişim belirteciniz, görünümden gizlenmesi gereken gizli dizlardır.
 
 ## <a name="profanity-handling"></a>Küfür işleme
-Normalde Translator hizmeti, mevcut çeviri kaynağında küfür korur. Küfür derecesini ve sözcükler Küfürlü yapan bağlam kültürler arasında farklılık gösterir ve hedef dilde küfür derecesini sonucunda yükseltilmiş veya azalır.
+Normalde, çevirmen hizmeti kaynakta bulunan küfür 'ı korur. Küfür derecesi ve küfürlü sözcüklerini yapan bağlam, kültüre göre farklılık gösterir. Bu nedenle, hedef dildeki küfür derecesi artırılabilir veya azaltılabilir.
 
-Küfür kaynak metin küfür varlığını bakılmaksızın çevirisini almamak istiyorsanız, bunu destekleyen yöntemler için filtreleme küfür kullanabilirsiniz. Seçenek silinmiş ya da uygun etiketlerle işaretlenmiş küfür görmek isteyip istemediğinizi veya hiçbir eyleme girişilmedi seçmenize olanak tanır. Kabul edilen değerler, `ProfanityAction` olan `NoAction` (varsayılan), Marked ve `Deleted`.
+Kaynak metinde olsa bile küfür 'ın çeviride oluşmasını engellemek isterseniz, onu destekleyen yöntemler için küfür filtreleme seçeneğini kullanabilirsiniz. Seçeneği, uygunsuz küfür 'ın silinip silinmeyeceğini veya uygun etiketlere göre işaretlenip işaretlenmediğini veya hedefte küfür izin verip vermeyeceğinizi seçmenizi sağlar. @No__t-0 ' ın kabul edilen değerleri `NoAction` (varsayılan), `Marked` ve `Deleted` ' tir.
 
 
-|ProfanityAction    |Eylem |Örnek kaynak (Japonca)  |Örnek çeviri (İngilizce)  |
+|ProfanityAction    |Eylem |Örnek kaynak (Japonca)  |Örnek çeviri (Ingilizce)  |
 |:--|:--|:--|:--|
-|NoAction   |Varsayılan. Aynı seçenek ayarı bulunamadı. Küfür kaynaktan hedefe geçer.        |彼はジャッカスです。     |He bir jackass olur.   |
-|İşaretli     |Küfürlü sözcükleri tarafından XML etiketleri arasına \<küfür > ve \</profanity >.       |彼はジャッカスです。 |He's bir \<küfür > jackass\</profanity >.  |
-|Silme    |Küfürlü sözcükleri değiştirme yapmadan çıktı CİHAZDAN kaldırılır.     |彼はジャッカスです。 |He's bir.   |
+|NoAction   |Varsayılanını. Seçeneği ayarlamaya benzer. Küfür kaynaktan hedefe geçirilecek.        |彼はジャッカスです.     |Bu bir Jackass.   |
+|İm     |Küfürlü kelimeleri \<küfür > ve \</küfür > XML etiketleriyle çevrelecektir.       |彼はジャッカスです. |Bir \<küfür, Jackass @ no__t-1/küfür > >.  |
+|Silindi    |Küfürlü sözcükler, değişiklik yapılmadan çıkışta kaldırılacak.     |彼はジャッカスです. |Bir.   |
 
     
-## <a name="excluding-content-from-translation"></a>' Den içeriği hariç
-HTML gibi etiket ile içerik çevrilirken (`contentType=text/html`), belirli bir içeriğe çevrilmesi hariç tutmak bazen kullanışlıdır. Öznitelik kullanabilir `class=notranslate` özgün dilinde kalması gereken içeriği belirtmek için. Aşağıdaki örnekte, ilk içeriğini `div` öğesi değil çevrilir, ikinci içeriği çalışırken `div` öğesi çevrilir.
+## <a name="excluding-content-from-translation"></a>İçeriği çeviriye dışlama
+HTML (`contentType=text/html`) gibi etiketlerle içerik çevirdığınızda, bazı durumlarda belirli içerikleri çeviride dışlamak yararlı olur. Özgün dilinde kalması gereken içeriği belirtmek için `class=notranslate` özniteliğini kullanabilirsiniz. Aşağıdaki örnekte, ilk `div` öğesindeki İçerik çevrilmeyecek, ancak ikinci `div` öğesindeki İçerik çevrilecek.
 
 ```HTML
 <div class="notranslate">This will not be translated.</div>
 <div>This will be translated. </div>
 ```
 
-## <a name="get-translate"></a>GET / Çevir
+## <a name="get-translate"></a>/Translate al
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Bir metin dizesi bir dilden diğerine çevirir.
+### <a name="implementation-notes"></a>Uygulama notları
+Bir metin dizesini bir dilden diğerine çevirir.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/Translate`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/Translate` ' dır.
 
-**Dönüş değeri:** Çevrilen metni temsil eden bir dize.
+**Dönüş değeri:** Çevrilmiş metni temsil eden bir dize.
 
-Daha önce kullandıysanız `AddTranslation` veya `AddTranslationArray` derecelendirme ile 5 veya daha yüksek aynı kaynak cümle için çeviri girmek için `Translate` sisteminize kullanılabilir ilk seçimi döndürür. "Aynı kaynak cümle" tam aynı (% 100 eşleşen), büyük/küçük harf, boşluk, etiket değerlerini ve bir tümcenin sonuna noktalama dışında anlamına gelir. Ardından 5 veya üzeri bir derecelendirme derecelendirmesi depolanıyorsa döndürülen sonuç olarak Microsoft Translator otomatik çeviri olacaktır.
+Daha önce `AddTranslation` veya `AddTranslationArray` ' i daha önce aynı kaynak cümlesi için 5 veya daha yüksek bir dereceye sahip bir çeviri girmek üzere kullandıysanız, `Translate` yalnızca sisteminiz için kullanılabilir olan en üst seçimi döndürür. "Aynı kaynak cümlesi", bir tümcenin sonundaki büyük harfler, boşluk, etiket değerleri ve noktalama işaretleri dışında tam olarak aynı (% 100 eşleşme) anlamına gelir. Bir derecelendirme 5 veya üzeri bir derecelendirmeden depolanmıyorsa, döndürülen sonuç Microsoft Translator tarafından otomatik çeviri olacaktır.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
 
-string
+dize
 
-Yanıt içerik türü: application/xml 
+Yanıt içerik türü: Application/XML
 
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama    |Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama    |Parametre türü|veri türü|
 |:--|:--|:--|:--|:--|
-|appid  |(boş)    |Gereklidir. Yetkilendirme veya Ocp-Apim-Subscription-Key üstbilgi kullandıysanız, AppID alanı boş bırakın başka dahil "Bearer" içeren bir dize + "" + "access_token".|sorgu|string|
-|metin|(boş)   |Gereklidir. Çevrilecek metin temsil eden bir dize. Metin boyutu 10000 karakterden uzun olmamalıdır.|sorgu|string|
-|from|(boş)   |İsteğe bağlı. Çeviri metnin dil kodu temsil eden bir dize. Örneğin, biri İngilizce için.|sorgu|string|
-|-|(boş) |Gereklidir. Metni Çevir oluşturulacağı dilin kodu temsil eden bir dize.|sorgu|string|
-|contentType|(boş)    |İsteğe bağlı. Çevrildikten metin biçimi. Desteklenen biçimler şunlardır: text/plain (varsayılan) ve metin/html. Herhangi bir HTML doğru biçimlendirilmeli, tam bir öğe olması gerekir.|sorgu|string|
-|category|(boş)   |İsteğe bağlı. Çeviri kategorisi (etki alanı) içeren bir dize. Varsayılan olarak "Genel".|sorgu|string|
-|Yetkilendirme|(boş)  |AppID alanı veya Ocp-Apim-Subscription-Key üst bilgisi belirtilmemişse gereklidir. Yetkilendirme belirteci:  "Bearer" + "" + "access_token".|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)  |AppID alanı veya yetkilendirme üst bilgisi belirtilmemişse gereklidir.|üst bilgi|string|
+|AppID  |olmamalıdır    |Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|metin|olmamalıdır   |Gerekli. Çevrilecek metni temsil eden bir dize. Metin 10.000 karakterden fazlasını içeremez.|sorgu|dize|
+|Kaynak|olmamalıdır   |İsteğe bağlı. Çevrilen metnin dil kodunu temsil eden bir dize. Örneğin, Ingilizce için en.|sorgu|dize|
+|to|olmamalıdır |Gerekli. Metni çevirecek dilin kodunu temsil eden bir dize.|sorgu|dize|
+|contentType|olmamalıdır    |İsteğe bağlı. Çevrilen metnin biçimi. Desteklenen biçimler `text/plain` (varsayılan) ve `text/html` ' dir. Herhangi bir HTML öğesinin düzgün biçimlendirilmiş, tam öğeler olması gerekir.|sorgu|dize|
+|category|olmamalıdır   |İsteğe bağlı. Çevirinin kategorisini (etki alanı) içeren bir dize. Varsayılan, `general` değeridir.|sorgu|dize|
+|Yetkilendirme|olmamalıdır  |@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır  |@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgilerinde X-MS-işlem-Info yer istek kimliği ile birlikte belirtin.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="post-translatearray"></a>/TranslateArray gönderin
+## <a name="post-translatearray"></a>POST/TranslateArray
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Kullanım `TranslateArray` çevirileri için birden fazla kaynak metni almak için yöntemi.
+### <a name="implementation-notes"></a>Uygulama notları
+Birden çok kaynak metin için çevirileri alır.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/TranslateArray`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/TranslateArray` ' dır.
 
-İstek gövdesi biçimi şu şekilde olmalıdır:
+İstek gövdesinin biçimi şöyledir:
 
 ```
 <TranslateArrayRequest>
@@ -133,34 +133,34 @@ Kullanım `TranslateArray` çevirileri için birden fazla kaynak metni almak iç
 </TranslateArrayRequest>
 ```
 
-Öğeleri içinde `TranslateArrayRequest` şunlardır:
+Bu öğeler `TranslateArrayRequest` ' dır:
 
 
-* `appid`: Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.
-* `from`: İsteğe bağlı. Metni Çevir oluşturulacağı dilin kodu temsil eden bir dize. Boş bırakılırsa yanıt otomatik dil algılama sonucunu içerir.
-* `options`: İsteğe bağlı. Bir `Options` aşağıda listelenen değerler içeren bir nesne. Bunlar tümü isteğe bağlıdır ve varsayılan en sık kullanılan ayarları için. Belirtilen öğelerin alfabetik olarak listelenmiş olmalıdır.
-    - `Category`: Çeviri kategorisi (etki alanı) içeren bir dize. Varsayılan olarak `general`.
-    - `ContentType`: Çevrildikten metin biçimi. Desteklenen biçimler `text/plain` (varsayılan), `text/xml` ve `text/html`. Herhangi bir HTML doğru biçimlendirilmeli, tam bir öğe olması gerekir.
-    - `ProfanityAction`: Yukarıda açıklandığı gibi profanities nasıl işleneceğini belirtir. Kabul edilen değerler, `ProfanityAction` olan `NoAction` (varsayılan), `Marked` ve `Deleted`.
-    - `State`: Performanstaki istek ve yanıt yardımcı olmak için kullanıcı durumu. Aynı içeriğini yanıta döndürülür.
-    - `Uri`: Bu URI sonuçları filtreleyin. Varsayılan: `all`.
-    - `User`: Bu kullanıcı tarafından sonuçları filtreleyin. Varsayılan: `all`.
-* `texts`: Gereklidir. Metin çevirisi içeren bir dizi. Tüm dizeleri aynı dilde olması gerekir. Çevrilecek tüm metinler toplamı 10000 karakterden uzun olmamalıdır. Dizi öğelerinin sayısı 2000'dir.
-* `to`: Gereklidir. Metni Çevir oluşturulacağı dilin kodu temsil eden bir dize.
+* `AppId`: gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `AppId` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.
+* `From`: Isteğe bağlı. Çevrilen metnin dil kodunu temsil eden bir dize. Bu alan boş bırakılırsa, yanıt otomatik dil algılamanın sonucunu dahil eder.
+* `Options`: Isteğe bağlı. Aşağıdaki değerleri içeren `Options` nesnesi. Bunların tümü isteğe bağlıdır ve varsayılan olarak en sık kullanılan ayarlara sahiptir. Belirtilen öğelerin alfabetik sırada listelenmesi gerekir.
+    - `Category`: çevirinin kategorisini (etki alanı) içeren bir dize. Varsayılan, `general` değeridir.
+    - `ContentType`: çevrilmekte olan metnin biçimi. Desteklenen biçimler `text/plain` (varsayılan), `text/xml` ve `text/html` ' dir. Herhangi bir HTML öğesinin düzgün biçimlendirilmiş, tam öğeler olması gerekir.
+    - `ProfanityAction`: daha önce açıklandığı gibi profanities nasıl işleneceğini belirtir. Kabul edilen değerler `NoAction` (varsayılan), `Marked` ve `Deleted` ' dir.
+    - `State`: istek ve yanıtı ilişkilendirmenize yardımcı olmak için Kullanıcı durumu. Yanıtta aynı içerik döndürülecek.
+    - `Uri`: sonuçları bu URI 'ye göre filtreleyin. Varsayılan: `all`.
+    - `User`: sonuçları bu kullanıcıya göre filtreleyin. Varsayılan: `all`.
+* `Texts`: gerekli. Çeviri metnini içeren bir dizi. Tüm dizeler aynı dilde olmalıdır. Çevrilecek tüm metinlerin toplamı 10.000 karakteri aşamaz. Dizi öğesi sayısı üst sınırı 2.000 ' dir.
+* `To`: gerekli. Metni çevirecek dilin kodunu temsil eden bir dize.
 
-İsteğe bağlı öğeler atlanabilir. TranslateArrayRequest doğrudan alt öğeleri alfabetik olarak listelenmiş olmalıdır.
+İsteğe bağlı öğeleri atlayabilirsiniz. @No__t-0 ' ın doğrudan alt öğesi olan öğelerin alfabetik sırada listelenmesi gerekir.
 
-TranslateArray yöntemi kabul `application/xml` veya `text/xml` için `Content-Type`.
+@No__t-0 yöntemi `Content-Type` için `application/xml` veya `text/xml` kabul eder.
 
-**Dönüş değeri:** A `TranslateArrayResponse` dizisi. Her `TranslateArrayResponse` aşağıdaki öğelere sahiptir:
+**Dönüş değeri:** @No__t-1 dizisi. Her `TranslateArrayResponse` şu öğelere sahiptir:
 
-* `Error`: Biri oluştuğunda bir hata olduğunu gösterir. Aksi takdirde null olarak ayarlanır.
-* `OriginalSentenceLengths`: Özgün kaynak metindeki her cümle uzunluğunu belirten bir tamsayı dizisi. Dizinin uzunluğunu cümleler sayısını gösterir.
-* `TranslatedText`: Çevrilmiş metin.
-* `TranslatedSentenceLengths`: Her bir cümlede çevrilmiş metnin uzunluğunu belirten bir tamsayı dizisi. Dizinin uzunluğunu cümleler sayısını gösterir.
-* `State`: Performanstaki istek ve yanıt yardımcı olmak için kullanıcı durumu. İstek olduğu gibi aynı içeriği döndürür.
+* `Error`: bir hata oluşursa hatayı gösterir. Aksi takdirde null olarak ayarlayın.
+* `OriginalSentenceLengths`: kaynak metindeki her tümcenin uzunluğunu gösteren bir tamsayılar dizisi. Dizinin uzunluğu, Tümcelerin sayısını gösterir.
+* `TranslatedText`: çevrilmiş metin.
+* `TranslatedSentenceLengths`: çevrilmiş metindeki her tümcenin uzunluğunu gösteren tamsayılar dizisi. Dizinin uzunluğu, Tümcelerin sayısını gösterir.
+* `State`: istek ve yanıtı ilişkilendirmenize yardımcı olmak için Kullanıcı durumu. İstekle aynı içeriği döndürür.
 
-Yanıt gövdesi biçiminin aşağıdaki gibidir.
+İşte yanıt gövdesinin biçimi:
 
 ```
 <ArrayOfTranslateArrayResponse xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2"
@@ -179,37 +179,37 @@ Yanıt gövdesi biçiminin aşağıdaki gibidir.
 </ArrayOfTranslateArrayResponse>
 ```
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-Başarılı bir yanıt bir dizi içeren `TranslateArrayResponse` yukarıda açıklandığı biçimde.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+Başarılı bir yanıt, daha önce açıklanan biçimde `TranslateArrayResponse` dizileri dizisi içerir.
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
 
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|Yetkilendirme|(boş)) |AppID alanı veya Ocp-Apim-Subscription-Key üst bilgisi belirtilmemişse gereklidir. Yetkilendirme belirteci:  "Bearer" + "" + "access_token".|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)|AppID alanı veya yetkilendirme üst bilgisi belirtilmemişse gereklidir.|üst bilgi|string|
+|Yetkilendirme|olmamalıdır  |@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır|@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu   |Reason|
+|HTTP durum kodu   |Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin. Sık karşılaşılan hatalar şunlardır: <ul><li>Dizi öğesi boş olamaz</li><li>Geçersiz kategori</li><li>Dili geçersiz</li><li>Dil için geçersiz</li><li>İstek çok fazla öğe içeriyor</li><li>Kaynak dili desteklenmiyor</li><li>Kime dili desteklenmiyor</li><li>Çevirme istek çok fazla veri içeriyor</li><li>HTML doğru biçimde değil.</li><li>Çok fazla dizeleri Çevir istek gönderildi.</li></ul>|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgilerinde X-MS-işlem-Info yer istek kimliği ile birlikte belirtin.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin. Yaygın hatalar şunlardır: <ul><li>Dizi öğesi boş olamaz.</li><li>Geçersiz kategori.</li><li>Dil, geçersiz.</li><li>Dil geçersiz.</li><li>İstek çok fazla öğe içeriyor.</li><li>Kimden dili desteklenmiyor.</li><li>To dili desteklenmiyor.</li><li>Çeviri Isteğinde çok fazla veri yok.</li><li>HTML doğru biçimde değil.</li><li>Çeviri Isteğine çok fazla sayıda dize geçirildi.</li></ul>|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="post-getlanguagenames"></a>POST /GetLanguageNames
+## <a name="post-getlanguagenames"></a>POST/GetLanguageNames
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Alır kolay adları diller için geçirilen parametre olarak `languageCodes`ve geçirilen yerel ayar dili kullanılarak yerelleştirilmiş.
+### <a name="implementation-notes"></a>Uygulama notları
+Geçirilen `locale` diline yerelleştirilmiş `languageCodes` parametresi olarak geçirilen dillerin kolay adlarını alır.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/GetLanguageNames`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/GetLanguageNames` ' dır.
 
-İstek gövdesi için kolay adlar almak için ISO 639-1 dil kodlarını temsil eden bir dize dizisi içerir. Örneğin:
+İstek gövdesi, kolay adların alınacağı ISO 639-1 dil kodlarını temsil eden bir dize dizisi içerir. Örnek buradadır:
 
 ```
 <ArrayOfstring xmlns:i="https://www.w3.org/2001/XMLSchema-instance"  xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -218,177 +218,178 @@ Alır kolay adları diller için geçirilen parametre olarak `languageCodes`ve g
 </ArrayOfstring>
 ```
 
-**Dönüş değeri:** İstenen diline yerelleştirilmiş Translator hizmeti tarafından desteklenen diller adlarını içeren bir dize dizisi.
+**Dönüş değeri:** Çeviri hizmeti tarafından desteklenen dil adlarını içeren, istenen dile yerelleştirilmiş bir dize dizisi.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-İstenen diline yerelleştirilmiş Translator hizmeti tarafından desteklenen diller adlarını içeren bir dize dizisi.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+İstenen dile yerelleştirilmiş, çevirmen hizmeti tarafından desteklenen dil adlarını içeren bir dize dizisi.
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
  
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)|Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|Yerel ayar|(boş) |Gereklidir. Bir dil ve dil adlarının yerelleştirmek için ISO 3166 iki harfli büyük alt kodu ile ilişkili bir ISO 639 iki harfli küçük kültür kodu veya bir ISO 639 küçük kültür kodu birleşimi kendisi tarafından temsil eden bir dize.|sorgu|string|
-|Yetkilendirme|(boş)  |Gerekli if AppID alanın veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)  |Gerekli if AppID alanın veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|AppID|olmamalıdır|Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|locale|olmamalıdır |Gerekli. Dil adlarını yerelleştirmek için kullanılan aşağıdakilerden birini temsil eden bir dize: <ul><li>ISO 639 2-bir dille ilişkili küçük harfli bir kültür kodu ve ISO 3166 2-Letter büyük harf alt kültür kodu birleşimi. <li>Bir ISO 639 küçük harfli kültür kodu.|sorgu|dize|
+|Yetkilendirme|olmamalıdır  |@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır  |@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgilerinde X-MS-işlem-Info yer istek kimliği ile birlikte belirtin.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="get-getlanguagesfortranslate"></a>/GetLanguagesForTranslate Al
+## <a name="get-getlanguagesfortranslate"></a>/GetLanguagesForTranslate al
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Çeviri hizmeti tarafından desteklenen dilleri gösteren dil kodlarının listesini edinin.  `Translate` ve `TranslateArray` herhangi ikisi bu diller arasında çevirebilir.
+### <a name="implementation-notes"></a>Uygulama notları
+Çeviri hizmeti tarafından desteklenen dilleri temsil eden dil kodlarının bir listesini alır.  `Translate` ve `TranslateArray` bu dillerin ikisi arasında çeviri yapabilir.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/GetLanguagesForTranslate`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/GetLanguagesForTranslate` ' dır.
 
-**Dönüş değeri:** Translator Services tarafından desteklenen dil kodu içeren bir dize dizisi.
+**Dönüş değeri:** Translator hizmeti tarafından desteklenen dil kodlarını içeren bir dize dizisi.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-Translator Services tarafından desteklenen dil kodu içeren bir dize dizisi.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+Translator hizmeti tarafından desteklenen dil kodlarını içeren bir dize dizisi.
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
  
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)|Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|Yetkilendirme|(boş)  |Gerekli if `appid` alan veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)|Gerekli if `appid` alan veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|AppID|olmamalıdır|Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|Yetkilendirme|olmamalıdır  |@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır|@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgilerinde X-MS-işlem-Info yer istek kimliği ile birlikte belirtin.|
-|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="get-getlanguagesforspeak"></a>/GetLanguagesForSpeak Al
+## <a name="get-getlanguagesforspeak"></a>/GetLanguagesForSpeak al
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Konuşma sentezi için kullanılabilen dilleri alır.
+### <a name="implementation-notes"></a>Uygulama notları
+Konuşma birleştirme için kullanılabilen dilleri alır.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/GetLanguagesForSpeak`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/GetLanguagesForSpeak` ' dır.
 
-**Dönüş değeri:** Konuşma sentezi için Translator hizmeti tarafından desteklenen dil kodu içeren bir dize dizisi.
+**Dönüş değeri:** Konuşma sen, çeviri hizmeti tarafından desteklenen dil kodlarını içeren bir dize dizisi.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-Konuşma sentezi için Translator hizmeti tarafından desteklenen dil kodu içeren bir dize dizisi.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+Konuşma sen, çeviri hizmeti tarafından desteklenen dil kodlarını içeren bir dize dizisi.
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
 
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)|Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|Yetkilendirme|(boş)|Gerekli if `appid` alan veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)|Gerekli if `appid` alan veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|AppID|olmamalıdır|Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|Yetkilendirme|olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır|@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
  
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400|Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401|Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgisinde yer istek kimliği sağlamak `X-MS-Trans-Info`.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400|Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401|Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="get-speak"></a>GET / konuşun
+## <a name="get-speak"></a>/Konuş al
 
-### <a name="implementation-notes"></a>Uygulama Notları
-İstenen dilde konuşulan geçilen metni wave veya mp3 akışı döndürür.
+### <a name="implementation-notes"></a>Uygulama notları
+İstenen dilde konuşulan, geçirilen metnin bir WAV veya MP3 akışını döndürür.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/Speak`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/Speak` ' dır.
 
-**Dönüş değeri:** İstenen dilde konuşulan geçilen metni wave veya mp3 akışı.
+**Dönüş değeri:** İstenen dilde konuşulan, geçirilen metnin bir WAV veya MP3 akışı.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
 
-binary
+ikili
 
-Yanıt içerik türü: application/xml 
+Yanıt içerik türü: Application/XML
 
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)|Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|metin|(boş)   |Gereklidir. Bir cümle veya belirtilen dil için wave akış söylenir cümleler içeren bir dize. Metni konuşmaya boyutunu 2000 karakterden uzun olmamalıdır.|sorgu|string|
-|language|(boş)   |Gereklidir. Metni konuşmaya desteklenen dil kodunu temsil eden bir dize. Kod yönteminden döndürülen kodlarının listesi mevcut olmalıdır `GetLanguagesForSpeak`.|sorgu|string|
-|format|(boş)|İsteğe bağlı. İçerik türü kimliği belirten bir dize Şu anda `audio/wav` ve `audio/mp3` kullanılabilir. Varsayılan değer `audio/wav` şeklindedir.|sorgu|string|
-|options|(boş)    |<ul><li>İsteğe bağlı. Sentezlenen Konuşma özelliklerini belirten bir dize:<li>`MaxQuality` ve `MinSize` ses sinyaller kalitesini belirtmek kullanılabilir. İle `MaxQuality`, sesler en yüksek kalitede ve ile alabilirsiniz `MinSize`, en küçük boyutu olan kişilerden daha fazlasını elde edebilirsiniz. Varsayılan değer `MinSize`.</li><li>`female` ve `male` ses istenen dinleyicilerinin belirtmek kullanılabilir. `female` varsayılan değerdir. Dikey çubuk kullanın <code>\|</code> birden fazla seçeneği eklenecek. Örneğin `MaxQuality|Male`.</li></li></ul> |sorgu|string|
-|Yetkilendirme|(boş)|Gerekli if `appid` alan veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)  |Gerekli if `appid` alan veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|AppID|olmamalıdır|Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|metin|olmamalıdır   |Gerekli. Belirtilen dilde akış için söylenen bir veya daha fazla cümle içeren bir dize. Metnin 2.000 karakteri aşmaması gerekir.|sorgu|dize|
+|dil|olmamalıdır   |Gerekli. Metnin konuşmasını istediğiniz dilin desteklenen dil kodunu temsil eden bir dize. Kod, yöntem tarafından döndürülen kodlardan biri olmalıdır `GetLanguagesForSpeak`.|sorgu|dize|
+|biçim|olmamalıdır|İsteğe bağlı. Content-Type KIMLIĞINI belirten bir dize. Şu anda `audio/wav` ve `audio/mp3` kullanılabilir. Varsayılan değer `audio/wav` şeklindedir.|sorgu|dize|
+|seçenekler|olmamalıdır    |İsteğe bağlı. Sentezlenmiş konuşmanın özelliklerini belirten bir dize:<ul><li>`MaxQuality` ve `MinSize` ses sinyalinin kalitesini belirtin. `MaxQuality` en yüksek kaliteyi sağlar. `MinSize` en küçük dosya boyutunu sağlar. Varsayılan değer `MinSize` ' dır.</li><li>`female` ve `male`, istenen sesin cinsiyetini belirtir. Varsayılan, `female` değeridir. Birden çok seçenek dahil etmek için dikey çubuğu (<code>\|</code>) kullanın. Örneğin, `MaxQuality|Male`.</li></li></ul>  |sorgu|dize|
+|Yetkilendirme|olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır  |@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgisinde yer istek kimliği sağlamak `X-MS-Trans-Info`.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="get-detect"></a>GET / algılayın
+## <a name="get-detect"></a>/Detect al
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Kullanım `Detect` seçilen bir metin parçası dili tanımlamak için yöntemi.
+### <a name="implementation-notes"></a>Uygulama notları
+Metnin bir bölümünün dilini tanımlar.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/Detect`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/Detect` ' dır.
 
-**Dönüş değeri:** Verilen metni için iki karakterli dil kodu içeren bir dize. .
+**Dönüş değeri:** Metin için iki karakterli bir dil kodu içeren bir dize.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
 
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)  |Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|metin|(boş)|Gereklidir. Dilinden tanımlanması için olan metin içeren bir dize. Metin boyutu 10000 karakterden uzun olmamalıdır.|sorgu| string|
-|Yetkilendirme|(boş)|Gerekli if `appid` alan veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üst bilgi|string|
-|Ocp-Apim-Subscription-Key  |(boş)    |Gerekli if `appid` alan veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|AppID|olmamalıdır  |Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|metin|olmamalıdır|Gerekli. Dili tanımlanabilecek metni içeren bir dize. Metnin 10.000 karakteri aşmaması gerekir.|sorgu|  dize|
+|Yetkilendirme|olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key  |olmamalıdır    |@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400|Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgisinde yer istek kimliği sağlamak `X-MS-Trans-Info`.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400|Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
 
-## <a name="post-detectarray"></a>/DetectArray gönderin
+## <a name="post-detectarray"></a>POST/DetectArray
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Kullanım `DetectArray` tek seferde bir dize dizisi dili tanımlamak için yöntemi. Her bir dizi öğesine bağımsız olarak algılanmasını gerçekleştirir ve dizinin her satır için bir sonuç döndürür.
+### <a name="implementation-notes"></a>Uygulama notları
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/DetectArray`.
+Dizeler dizisindeki dilleri tanımlar. Bağımsız olarak her bir dizi öğesinin dilini algılar ve dizinin her satırı için bir sonuç döndürür.
 
-İstek gövdesi biçimi şu şekilde olmalıdır.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/DetectArray` ' dır.
+
+İstek gövdesinin biçimi şöyledir:
 
 ```
 <ArrayOfstring xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -397,11 +398,11 @@ Kullanım `DetectArray` tek seferde bir dize dizisi dili tanımlamak için yönt
 </ArrayOfstring>
 ```
 
-Metin boyutu 10000 karakterden uzun olmamalıdır.
+Metin 10.000 karakterden uzun olamaz.
 
-**Dönüş değeri:** Bir giriş dizisinin her satır için iki karakterli dil kodu içeren bir dize dizisi.
+**Dönüş değeri:** Giriş dizisindeki her satır için iki karakterli bir dil kodu içeren bir dize dizisi.
 
-Yanıt gövdesi biçiminin aşağıdaki gibidir.
+İşte yanıt gövdesinin biçimi:
 
 ```
 <ArrayOfstring xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:i="https://www.w3.org/2001/XMLSchema-instance">
@@ -410,86 +411,86 @@ Yanıt gövdesi biçiminin aşağıdaki gibidir.
 </ArrayOfstring>
 ```
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-DetectArray başarılı oldu. Bir giriş dizisinin her satır için iki karakterli dil kodu içeren bir dize dizisi döndürür.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+`DetectArray` başarılı oldu. Giriş dizisinin her satırı için iki karakterli bir dil kodu içeren bir dize dizisi döndürür.
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
  
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)|Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|Yetkilendirme|(boş)|Gerekli if `appid` alan veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)|Gerekli if `appid` alan veya yetkilendirme üst bilgisi belirtilmemiş.|üst bilgi|string|
+|AppID|olmamalıdır|Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|Yetkilendirme|olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir.  Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır|@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgilerinde X-MS-işlem-Info yer istek kimliği ile birlikte belirtin.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="get-addtranslation"></a>/AddTranslation Al
+## <a name="get-addtranslation"></a>/AddTranslation 'i al
 
-### <a name="implementation-notes"></a>Uygulama Notları
+### <a name="implementation-notes"></a>Uygulama notları
 
 > [!IMPORTANT]
-> **KULLANIMDAN KALDIRMA NOT:** 31 Ocak 2018'den sonra bu yöntem yeni bir cümle gönderimler kabul etmez ve bir hata iletisi alırsınız. Lütfen bu duyuru işbirliğine dayalı bir çeviri işlevlere değişiklikler hakkında bakın.
+> **Kullanımdan kaldırma notumu:** Bu yöntem 31 Ocak 2018 ' den sonra yeni tümce gönderilerini kabul etmez. Bir hata iletisi alırsınız. Lütfen Işbirliğine dayalı çeviri çerçevesindeki (CTF) değişiklikler hakkında duyurusuna bakın.
 
-Bir çeviri, çeviri bellek ekler.
+Çeviri belleğine bir çeviri ekler.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/AddTranslation`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/AddTranslation` ' dır.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
 
-string
+dize
 
-Yanıt içerik türü: uygulama: xml
+Yanıt içerik türü: uygulama: XML
  
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü   |
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü   |
 |:--|:--|:--|:--|:--|
-|appid|(boş)|Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|originalText|(boş)|Gereklidir. Gelen Çevrilecek metin içeren bir dize. Dize en fazla 1000 karakter oluşabilir.|sorgu|string|
-|translatedText|(boş) |Gereklidir. Çevrilmiş metni hedef dil içeren bir dize. Dize en fazla 2000 karakterden oluşabilir.|sorgu|string|
-|from|(boş)   |Gereklidir. Çeviri metnin dil kodu temsil eden bir dize. tr İngilizce = de Almanca vb. =...|sorgu|string|
-|-|(boş)|Gereklidir. Metni Çevir oluşturulacağı dilin kodu temsil eden bir dize.|sorgu|string|
-|rating|(boş) |İsteğe bağlı. Bu dize için kalite sıralaması temsil eden bir tamsayı. -10 ile 10 arasında değeri. Varsayılan olarak 1.|sorgu|integer|
-|contentType|(boş)    |İsteğe bağlı. Çevrildikten metin biçimi. Desteklenen biçimler şunlardır: "text/plain" ve "text/html". Herhangi bir HTML doğru biçimlendirilmeli, tam bir öğe olması gerekir.   |sorgu|string|
-|category|(boş)|İsteğe bağlı. Çeviri kategorisi (etki alanı) içeren bir dize. Varsayılan olarak "Genel".|sorgu|string|
-|kullanıcı|(boş)|Gereklidir. Gönderim gönderene izlemek için kullanılan bir dize.|sorgu|string|
-|URI|(boş)|İsteğe bağlı. Bu çeviri içerik konumunu içeren bir dize.|sorgu|string|
-|Yetkilendirme|(boş)|Gerekli if AppID alanın veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.    |üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)|Gerekli if `appid` alan veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|AppID|olmamalıdır|Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|originalText|olmamalıdır|Gerekli. Çevrilecek metni içeren bir dize. Dizenin uzunluk üst sınırı 1.000 karakterdir.|sorgu|dize|
+|translatedText|olmamalıdır |Gerekli. Hedef dile çevrilmiş metin içeren bir dize. Dizenin uzunluk üst sınırı 2.000 karakterdir.|sorgu|dize|
+|Kaynak|olmamalıdır   |Gerekli. Metnin özgün dilinin dil kodunu temsil eden bir dize. Örneğin, en Ingilizce ve Almanca için de.|sorgu|dize|
+|to|olmamalıdır|Gerekli. Metni çevirecek dilin dil kodunu temsil eden bir dize.|sorgu|dize|
+|Derecesiyle|olmamalıdır |İsteğe bağlı. Dize için kalite derecesini temsil eden bir tamsayı. Değer-10 ile 10 arasındadır. Varsayılan değer 1'dir.|sorgu|tamsayı|
+|contentType|olmamalıdır    |İsteğe bağlı. Çevrilen metnin biçimi. Desteklenen biçimler `text/plain` ve `text/html` ' dir. Herhangi bir HTML öğesinin düzgün biçimlendirilmiş, tam öğeler olması gerekir.    |sorgu|dize|
+|category|olmamalıdır|İsteğe bağlı. Çevirinin kategorisini (etki alanı) içeren bir dize. Varsayılan, `general` değeridir.|sorgu|dize|
+|kullanıcı|olmamalıdır|Gerekli. Gönderimi kaynağını izlemek için kullanılan bir dize.|sorgu|dize|
+|URI|olmamalıdır|İsteğe bağlı. Çevirinin içerik konumunu içeren bir dize.|sorgu|dize|
+|Yetkilendirme|olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir.  Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.  |üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır|@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|410|AddTranslation artık desteklenmiyor.|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgilerinde X-MS-işlem-Info yer istek kimliği ile birlikte belirtin.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|410|`AddTranslation` artık desteklenmiyor.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="post-addtranslationarray"></a>POST /AddTranslationArray
+## <a name="post-addtranslationarray"></a>/AddTranslationArray SONRASı
 
-### <a name="implementation-notes"></a>Uygulama Notları
+### <a name="implementation-notes"></a>Uygulama notları
 
 > [!IMPORTANT]
-> **KULLANIMDAN KALDIRMA NOT:** 31 Ocak 2018'den sonra bu yöntem yeni bir cümle gönderimler kabul etmez ve bir hata iletisi alırsınız. Lütfen bu duyuru işbirliğine dayalı bir çeviri işlevlere değişiklikler hakkında bakın.
+> **Kullanımdan kaldırma notumu:** Bu yöntem 31 Ocak 2018 ' den sonra yeni tümce gönderilerini kabul etmez. Bir hata iletisi alırsınız. Lütfen Işbirliğine dayalı çeviri çerçevesindeki (CTF) değişiklikler hakkında duyurusuna bakın.
 
-Çevirileri çeviri bellek eklemek için bir dizi ekler. Bu bir dizi sürümüdür `AddTranslation`.
+Çeviri belleğine bir çeviri dizisi ekler. Bu yöntem `AddTranslation` ' ın bir dizi sürümüdür.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/AddTranslationArray`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/AddTranslationArray` ' dır.
 
-İstek gövdesi biçimi aşağıdaki gibidir.
+İstek gövdesinin biçimi şöyledir:
 
 ```
 <AddtranslationsRequest>
@@ -513,81 +514,83 @@ Yanıt içerik türü: uygulama: xml
 </AddtranslationsRequest>
 ```
 
-AddtranslationsRequest öğe içindeki öğeler şunlardır:
+Bu öğeler `AddtranslationsRequest` ' dır:
 
-* `AppId`: Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.
-* `From`: Gereklidir. Kaynak dili dil kodu içeren bir dize. Tarafından döndürülen dillerden biri olmalıdır `GetLanguagesForTranslate` yöntemi.
-* `To`: Gereklidir. Hedef Dil dil kodu içeren bir dize. Tarafından döndürülen dillerden biri olmalıdır `GetLanguagesForTranslate` yöntemi.
-* `Translations`: Gereklidir. Çevirileri için çeviri bellek eklemek için bir dizi. Her çeviri içermelidir: originalText, translatedText ve derecelendirmesi. Her bir originalText ve translatedText boyutu için 1000 karakter sınırlıdır. Toplam originalText(s) ve translatedText(s) 10000 karakterden uzun olmamalıdır. Dizi öğelerinin sayısı 100'dür.
-* `Options`: Gereklidir. Kategori, ContentType, URI ve kullanıcı dahil seçenekleri kümesi. Kullanıcı gereklidir. Kategori, ContentType ve URI isteğe bağlıdır. Belirtilen öğelerin alfabetik olarak listelenmiş olmalıdır.
+* `AppId`: gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `AppId` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.
+* `From`: gerekli. Kaynak dilin dil kodunu içeren bir dize. @No__t-0 yöntemiyle döndürülen dillerden biri olmalıdır.
+* `To`: gerekli. Hedef dilin dil kodunu içeren bir dize. @No__t-0 yöntemiyle döndürülen dillerden biri olmalıdır.
+* `Translations`: gerekli. Çeviri belleğine eklenecek bir çeviri dizisi. Her çeviri `OriginalText`, `TranslatedText` ve `Rating` içermelidir. @No__t-0 ve `TranslatedText` en büyük boyutu 1.000 karakterdir. Tüm `OriginalText` ve `TranslatedText` öğelerinin toplamı 10.000 karakterden uzun olamaz. Dizi öğesi sayısı üst sınırı 100 ' dir.
+* `Options`: gerekli. @No__t-0, `ContentType`, `Uri` ve `User` gibi seçenekler kümesi. `User` gereklidir. `Category`, `ContentType` ve `Uri` isteğe bağlıdır. Belirtilen öğelerin alfabetik sırada listelenmesi gerekir.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-AddTranslationArray yöntemi başarılı oldu. 31 Ocak 2018'den sonra cümle gönderimler kabul edilmez. Hizmet 410 hata kodu ile yanıt verecektir.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+`AddTranslationArray` yöntemi başarılı oldu. 
 
-string
+31 Ocak 2018 ' den sonra cümle gönderimleri kabul edilmez. Hizmet 410 hata koduyla yanıt verir.
 
-Yanıt içerik türü: application/xml
+dize
+
+Yanıt içerik türü: Application/XML
  
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|Yetkilendirme|(boş)|AppID alanı veya Ocp-Apim-Subscription-Key üst bilgisi belirtilmemişse gereklidir. Yetkilendirme belirteci:  "Bearer" + "" + "access_token".|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)|AppID alanı veya yetkilendirme üst bilgisi belirtilmemişse gereklidir.|üst bilgi|string|
+|Yetkilendirme|olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir.  Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır|@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|410    |AddTranslation artık desteklenmiyor.|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgisinde yer istek kimliği sağlamak `X-MS-Trans-Info`.|
-|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|410    |`AddTranslation` artık desteklenmiyor.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="get-breaksentences"></a>/BreakSentences Al
+## <a name="get-breaksentences"></a>/Breakcümleler al
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Bir metin parçası cümleler böler ve her cümle içinde uzunluklarını içeren bir dizi döndürür.
+### <a name="implementation-notes"></a>Uygulama notları
+Metnin bir bölümünü cümlelere böler ve her tümcenin uzunluklarını içeren bir dizi döndürür.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/BreakSentences`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/BreakSentences` ' dır.
 
-**Dönüş değeri:** Cümleleri uzunluklarının temsil eden tamsayı dizisi. Dizinin uzunluğunu cümleler sayısıdır ve her cümle uzunluğunu değerlerdir.
+**Dönüş değeri:** Tümcelerin uzunluklarının temsil eden tamsayılar dizisi. Dizinin uzunluğu, Tümcelerin sayısını temsil eder. Değerler her tümcenin uzunluğunu temsil eder.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-Cümleleri uzunluklarının temsil eden tamsayı dizisi. Dizinin uzunluğunu cümleler sayısıdır ve her cümle uzunluğunu değerlerdir.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+Tümcelerin uzunluklarının temsil eden tamsayılar dizisi. Dizinin uzunluğu, Tümcelerin sayısını temsil eder. Değerler her tümcenin uzunluğunu temsil eder.
 
-integer
+tamsayı
 
-Yanıt içerik türü: application/xml 
+Yanıt içerik türü: Application/XML
 
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)  |Gereklidir. Yetkilendirme veya Ocp-Apim-Subscription-Key üstbilgi kullandıysanız, AppID alanı boş bırakın başka dahil "Bearer" içeren bir dize + "" + "access_token".|sorgu| string|
-|metin|(boş)   |Gereklidir. Cümleleri bölmek için metin temsil eden bir dize. Metin boyutu 10000 karakterden uzun olmamalıdır.|sorgu|string|
-|language   |(boş)    |Gereklidir. Giriş metni dil kodunu temsil eden bir dize.|sorgu|string|
-|Yetkilendirme|(boş)|AppID alanı veya Ocp-Apim-Subscription-Key üst bilgisi belirtilmemişse gereklidir. Yetkilendirme belirteci:  "Bearer" + "" + "access_token".    |üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)|AppID alanı veya yetkilendirme üst bilgisi belirtilmemişse gereklidir.|üst bilgi|string|
+|AppID|olmamalıdır  |Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu| dize|
+|metin|olmamalıdır   |Gerekli. Cümlelere bölünecek metni temsil eden bir dize. Metnin en büyük boyutu 10.000 karakterdir.|sorgu|dize|
+|dil   |olmamalıdır    |Gerekli. Giriş metninin dil kodunu temsil eden bir dize.|sorgu|dize|
+|Yetkilendirme|olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.   |üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır|@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400|Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401|Geçersiz kimlik bilgileri|
-|500|Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgilerinde X-MS-işlem-Info yer istek kimliği ile birlikte belirtin.|
-|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400|Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401|Geçersiz kimlik bilgileri.|
+|500|Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="post-gettranslations"></a>POST /GetTranslations
+## <a name="post-gettranslations"></a>POST/GetTranslations
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Çevirileri belirtilen dil çifti için bir dizi, deponun ve MT altyapısı alır. Tüm kullanılabilir çevirileri döndürür gibi GetTranslations çevirme farklıdır.
+### <a name="implementation-notes"></a>Uygulama notları
+Mağazadan ve MT altyapısından belirli bir dil çiftinin çeviri dizisini alır. `GetTranslations`, tüm kullanılabilir çevirileri döndüren `Translate` ' den farklıdır.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/GetTranslations`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/GetTranslations` ' dır.
 
-İstek gövdesi aşağıdaki biçime sahiptir isteğe bağlı TranslationOptions nesnesini içerir.
+İsteğin gövdesi, bu biçimi içeren isteğe bağlı `TranslationOptions` nesnesini içerir:
 
 ```
 <TranslateOptions xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2">
@@ -600,21 +603,24 @@ Yanıt içerik türü: application/xml
 </TranslateOptions>
 ```
 
-`TranslateOptions` Nesne aşağıda listelenen değerler içerir. Bunlar tümü isteğe bağlıdır ve varsayılan en sık kullanılan ayarları için. Belirtilen öğelerin alfabetik olarak listelenmiş olmalıdır.
+@No__t-0 nesnesi aşağıdaki listedeki değerleri içerir. Bunların tümü isteğe bağlıdır ve varsayılan olarak en sık kullanılan ayarlara sahiptir. Belirtilen öğelerin alfabetik sırada listelenmesi gerekir.
 
-* `Category`: Çeviri kategorisi (etki alanı) içeren bir dize. Varsayılan olarak "Genel".
-* `ContentType`: Desteklenen tek ve "text/plain" varsayılan seçenektir.
-* `IncludeMultipleMTAlternatives`: Boole bayrağı birden fazla alternatifleri MT altyapısından döndürülüp döndürülmeyeceğini belirler. Geçerli değerler true ve false (büyük-küçük harfe duyarlı). Varsayılan değer false'tur ve yalnızca 1 seçenek içerir. Bayrağı true olarak ayarlamak, çeviri, işbirliğine dayalı çevirileri framework (CTF) ile tamamen tümleşik yapay alternatifleri oluşturmak için sağlar. Kod Çözücü en iyi n listesinden yapay alternatifleri ekleyerek CTF içinde hiçbir alternatifleri sahip cümleleri alternatifleri döndürmek için bu özellik sağlar.
-    - Derecelendirmeleri derecelendirmeleri şu şekilde uygulanır: 1) 5 derecesi en iyi bir otomatik çeviri var. 2) CTF'den diğer yollar için -10 + 10'dan Gözden Geçiren yetkilisi yansıtır. 3) otomatik olarak oluşturulan (en iyi n) çeviri alternatifleri de derecesi 0 ve 100 eşleşme derecesi sahiptir.
-    - Döndürülen alternatifleri sayısı kadar maxTranslations olmakla birlikte daha az olabilir alternatifleri sayısı.
-    - Dil çiftleri bu işlevselliği çevirileri Basitleştirilmiş ve Geleneksel Çince, her iki yönde de arasında kullanılamaz. Diğer tüm Microsoft Translator desteklenen dil çiftleri için kullanılabilir.
-* `State`: Performanstaki istek ve yanıt yardımcı olmak için kullanıcı durumu. Aynı içeriğini yanıta döndürülür.
-* `Uri`: Bu URI sonuçları filtreleyin. Değer ayarlanmışsa varsayılan değer tümüdür.
-* `User`: Bu kullanıcı tarafından sonuçları filtreleyin. Değer ayarlanmışsa varsayılan değer tümüdür.
+* `Category`: çevirinin kategorisini (etki alanı) içeren bir dize. Varsayılan, `general` değeridir.
+* `ContentType`: desteklenen tek seçenek ve varsayılan, `text/plain` ' dir.
+* `IncludeMultipleMTAlternatives`: MT altyapısından birden fazla alternatif döndürülüp döndürülmeyeceğini belirten bir Boole bayrağı. Geçerli değerler `true` ve `false` (büyük/küçük harfe duyarlı). Varsayılan değer yalnızca bir alternatif döndüren `false` ' dır. Bayrağını `true` olarak ayarlamak, birlikte çalışan Çeviri Çerçevesi (CTF) ile tamamen tümleşik yapay alternatifler oluşturulmasına olanak sağlar. Özelliği, kod çözücünün *n*en iyi listesinden yapay alternatifler ekleyerek CTF 'de çevirisi olmayan cümleler için alternatifleri döndürmeyi mümkün.
+    - Lendir. Derecelendirmeler aşağıdaki gibi uygulanır: 
+         - En iyi otomatik çeviri, 5 derecesine sahiptir.
+       - CTF 'nin alternatifleri gözden geçirenin yetkilisini yansıtır. -10 ile + 10 arasında değişir.
+       - Otomatik olarak oluşturulan (*n*-en iyi) çeviri alternatifleri, 0 derecelendirmesine ve 100 eşleşme derecesine sahiptir.
+    - Alternatifin sayısı. Döndürülen alternatiflere ilişkin sayı `maxTranslations` ' da belirtilen değer kadar yüksek olabilir, ancak daha az olabilir.
+    - Dil çiftleri. Bu işlev, Basitleştirilmiş Çince ve geleneksel Çince arasında her iki yönde de çeviri için kullanılamaz. Microsoft Translator tarafından desteklenen tüm diğer dil çiftleri için kullanılabilir.
+* `State`: istek ve yanıtı ilişkilendirmenize yardımcı olmak için Kullanıcı durumu. Yanıtta aynı içerik döndürülecek.
+* `Uri`: sonuçları bu URI 'ye göre filtreleyin. Değer ayarlanmamışsa, varsayılan değer `all` ' dır.
+* `User`: sonuçları bu kullanıcıya göre filtreleyin. Değer ayarlanmamışsa, varsayılan değer `all` ' dır.
 
-İstek `Content-Type` olmalıdır `text/xml`.
+İstek `Content-Type` `text/xml` olmalıdır.
 
-**Dönüş değeri:** Yanıt biçimi aşağıdaki gibidir.
+**Dönüş değeri:** Yanıtın biçimi şöyledir:
 
 ```
 <GetTranslationsResponse xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2"
@@ -633,57 +639,57 @@ Yanıt içerik türü: application/xml
 </GetTranslationsResponse>
 ```
 
-Bu içeren bir `GetTranslationsResponse` aşağıdaki değerleri içeren öğe:
+Bu yanıt, aşağıdaki değerleri içeren bir `GetTranslationsResponse` öğesi içerir:
 
-* `Translations`: Bir dizi bir eşleşme bulunursa, TranslationMatch (aşağıya bakın) nesneleri depolanır. Çevirileri hafif varyantlarının (benzer öğe eşleştirmesi) özgün metin içerebilir. Çevirileri sıralanır: % 100 aşağıdaki belirsiz eşleşen ilk olarak eşleşir.
-* `From`: Yöntemin ilk dil belirtmediyseniz bu otomatik dil algılama sonucu olacaktır. Aksi durumda olur dili verilir.
-* `State`: Performanstaki istek ve yanıt yardımcı olmak için kullanıcı durumu. TranslateOptions parametresinde belirtilen değeri içerir.
+* `Translations`: `TranslationMatch` nesnelerinde depolanan eşleşmelerin bir dizisi (aşağıdaki bölümde açıklanmıştır). Çeviriler orijinal metnin hafif türevlerini (belirsiz eşleşme) içerebilir. Çeviriler sıralanacaktır: ilk olarak% 100 eşleşme, belirsiz eşleşme ileri.
+* `From`: Yöntem bir `From` dili belirtmezse, bu değer otomatik dil algılamasında gelir. Aksi halde, belirtilen `From` dili olur.
+* `State`: istek ve yanıtı ilişkilendirmenize yardımcı olmak için Kullanıcı durumu. @No__t-0 parametresinde sağlanan değeri içerir.
 
-TranslationMatch nesne aşağıdakilerden oluşur:
+@No__t-0 nesnesi şu değerlerden oluşur:
 
-* `Error`: Belirli bir giriş dizesini bir hata oluştu hata kodu saklanır. Aksi takdirde alanı boş.
-* `MatchDegree`: Sistem filtresinin eşleşmeleri de dahil olmak üzere deposu ile karşılaştırarak giriş cümleler eşleşir.  Ne kadar yakın giriş metni depoda orijinal metinle eşleşen MatchDegree gösterir. Aralık 0-100'e 0 olduğu hiçbir benzerlik döndürülen değer ve 100 tam büyük/küçük harf duyarlı eşleşmedir.
-MatchedOriginalText: Bu sonuç için eşleştirildi orijinal metni. Yalnızca eşleşen orijinal metni giriş metin farklı döndürdü. Benzer eşleştirme kaynak metnin döndürmek için kullanılır. Microsoft Translator sonuçları döndürülmez.
-* `Rating`: Kalite kararı kişinin yetkilisi gösterir. Makine çevirisi 5 derecesi sonuçlara yol açabilir. Yetkili olarak sağlanan çevirileri 6-10 derecesi genellikle sahip artırabileceksiniz anonim olarak sağlanan çevirileri genellikle 1-4 derecesi sahiptir.
-* `Count`: Bu çeviri Bu derecelendirme seçili sayısı. Değer otomatik olarak çevrilmiş yanıtı için 0 olacaktır.
-* `TranslatedText`: Çevrilmiş metin.
+* `Error`: belirli bir giriş dizesi için bir hata oluşursa hata kodu. Aksi takdirde, bu alan boştur.
+* `MatchDegree`: giriş metninin depoda bulunan özgün metinle ne kadar yakın olduğunu gösterir. Sistem, tam eşleşmeler dahil olmak üzere, depoya karşı giriş cümlelerini eşleştirir. Değer, 0 ile 100 arasında bir değer döndürür; burada 0 benzerlik yoktur ve 100 tam, büyük/küçük harfe duyarlı bir eşleşmedir.
+* `MatchedOriginalText`: bu sonuçla eşleşen özgün metin. Bu değer yalnızca eşleşen özgün metnin giriş metninde farklı olması durumunda döndürülür. Benzer bir eşleşmenin kaynak metnini döndürmek için kullanılır. Bu değer, Microsoft Translator sonuçları için döndürülmez.
+* `Rating`: kalite kararı veren kişinin yetkilisini belirtir. Makine çevirisi sonuçlarında 5 derecelendirmesi vardır. Anonim olarak belirtilen Çeviriler genellikle 1 ile 4 arasında bir derecelendirmesine sahiptir. Yetkili olarak sağlanmış Çeviriler genellikle 6 ile 10 arasında bir derecelendirme olur.
+* `Count`: Bu derecelendirmeden bu çevirinin kaç kez seçildiği. Değer, otomatik olarak çevrilmiş yanıt için 0 ' dır.
+* `TranslatedText`: çevrilmiş metin.
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
-A `GetTranslationsResponse` yukarıda açıklanan biçimde bir nesne.
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
+Daha önce açıklanan biçimdeki `GetTranslationsResponse` nesnesi.
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
  
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|appid|(boş)|Gereklidir. Varsa `Authorization` veya `Ocp-Apim-Subscription-Key` üstbilgi kullanılır, AppID alanı boş bırakın, aksi takdirde dahil içeren bir dize `"Bearer" + " " + "access_token"`.|sorgu|string|
-|metin|(boş)|Gereklidir. Çevrilecek metin temsil eden bir dize. Metin boyutu 10000 karakterden uzun olmamalıdır.|sorgu|string|
-|from|(boş)|Gereklidir. Çeviri metnin dil kodu temsil eden bir dize.|sorgu|string|
-|- |(boş)    |Gereklidir. Metni Çevir oluşturulacağı dilin kodu temsil eden bir dize.|sorgu|string|
-|maxTranslations|(boş)|Gereklidir. Döndürülecek çevirileri maksimum sayısını temsil eden bir tamsayı.|sorgu|integer|
-|Yetkilendirme| (boş)|Gerekli if `appid` alan veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|string| üst bilgi|
-|Ocp-Apim-Subscription-Key|(boş)  |Gerekli if `appid` alan veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|AppID|olmamalıdır|Gerekli. @No__t-0 veya `Ocp-Apim-Subscription-Key` üst bilgisi kullanılırsa, `appid` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.|sorgu|dize|
+|metin|olmamalıdır|Gerekli. Çevrilecek metni temsil eden bir dize. Metnin en büyük boyutu 10.000 karakterdir.|sorgu|dize|
+|Kaynak|olmamalıdır|Gerekli. Çevrilen metnin dil kodunu temsil eden bir dize.|sorgu|dize|
+|to |olmamalıdır    |Gerekli. Metni çevirecek dilin dil kodunu temsil eden bir dize.|sorgu|dize|
+|Maxçeviriler|olmamalıdır|Gerekli. Döndürülecek en fazla çeviri sayısını temsil eden bir tamsayı.|sorgu|tamsayı|
+|Yetkilendirme| olmamalıdır|@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|dize|  üstbilgi|
+|OCP-apim-Subscription-Key|olmamalıdır  |@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgisinde yer istek kimliği sağlamak `X-MS-Trans-Info`.|
-|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503|Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
-## <a name="post-gettranslationsarray"></a>/GetTranslationsArray gönderin
+## <a name="post-gettranslationsarray"></a>POST/GetTranslationsArray
 
-### <a name="implementation-notes"></a>Uygulama Notları
-Kullanım `GetTranslationsArray` birden fazla kaynak metni için birden fazla çeviri aday almak için yöntemi.
+### <a name="implementation-notes"></a>Uygulama notları
+Birden çok kaynak metin için birden çok çeviri adayları alır.
 
-İstek URİ'si `https://api.microsofttranslator.com/V2/Http.svc/GetTranslationsArray`.
+İstek URI 'SI `https://api.microsofttranslator.com/V2/Http.svc/GetTranslationsArray` ' dır.
 
-İstek gövdesi biçimi aşağıdaki gibidir.
+İstek gövdesinin biçimi şöyledir:
 
 ```
 <GetTranslationsArrayRequest>
@@ -705,29 +711,32 @@ Kullanım `GetTranslationsArray` birden fazla kaynak metni için birden fazla ç
 </GetTranslationsArrayRequest>
 ```
 
-`GetTranslationsArrayRequest` Aşağıdaki öğeleri içerir:
+`GetTranslationsArrayRequest` şu öğeleri içerir:
 
-* `AppId`: Gereklidir. Yetkilendirme üst bilgisi kullandıysanız, AppID alanı boş bırakın başka dahil içeren bir dize `"Bearer" + " " + "access_token"`.
-* `From`: Gereklidir. Çeviri metnin dil kodu temsil eden bir dize.
-* `MaxTranslations`: Gereklidir. Döndürülecek çevirileri maksimum sayısını temsil eden bir tamsayı.
-* `Options`: İsteğe bağlı. Aşağıda listelenen değerleri içeren bir seçenekler nesne. Bunlar tümü isteğe bağlıdır ve varsayılan en sık kullanılan ayarları için. Belirtilen öğelerin alfabetik olarak listelenmiş olmalıdır.
-    - Kategori ': Çeviri kategorisi (etki alanı) içeren bir dize. Varsayılan olarak genel.
-    - `ContentType`: Desteklenen tek ve varsayılan olarak, metin/düz bir seçenektir.
-    - `IncludeMultipleMTAlternatives`: Boole bayrağı birden fazla alternatifleri MT altyapısından döndürülüp döndürülmeyeceğini belirler. Geçerli değerler true ve false (büyük-küçük harfe duyarlı). Varsayılan değer false'tur ve yalnızca 1 seçenek içerir. Bayrağı true olarak ayarlamak, çeviri, işbirliğine dayalı çevirileri framework (CTF) ile tamamen tümleşik yapay alternatifleri oluşturmak için sağlar. Kod Çözücü en iyi n listesinden yapay alternatifleri ekleyerek CTF içinde hiçbir alternatifleri sahip cümleleri alternatifleri döndürmek için bu özellik sağlar.
-        - Derecelendirmeleri derecelendirmeleri şu şekilde uygulanır: 1) 5 derecesi en iyi bir otomatik çeviri var. 2) CTF'den diğer yollar için -10 + 10'dan Gözden Geçiren yetkilisi yansıtır. 3) otomatik olarak oluşturulan (en iyi n) çeviri alternatifleri de derecesi 0 ve 100 eşleşme derecesi sahiptir.
-        - Döndürülen alternatifleri sayısı kadar maxTranslations olmakla birlikte daha az olabilir alternatifleri sayısı.
-        - Dil çiftleri bu işlevselliği çevirileri Basitleştirilmiş ve Geleneksel Çince, her iki yönde de arasında kullanılamaz. Diğer tüm Microsoft Translator desteklenen dil çiftleri için kullanılabilir.
-* `State`: Performanstaki istek ve yanıt yardımcı olmak için kullanıcı durumu. Aynı içeriğini yanıta döndürülür.
-* `Uri`: Bu URI sonuçları filtreleyin. Değer ayarlanmışsa varsayılan değer tümüdür.
-* `User`: Bu kullanıcı tarafından sonuçları filtreleyin. Değer ayarlanmışsa varsayılan değer tümüdür.
-* `Texts`: Gereklidir. Metin çevirisi içeren bir dizi. Tüm dizeleri aynı dilde olması gerekir. Çevrilecek tüm metinler toplamı 10000 karakterden uzun olmamalıdır. Dizi öğelerinin sayısı 10'dur.
-* `To`: Gereklidir. Metni Çevir oluşturulacağı dilin kodu temsil eden bir dize.
+* `AppId`: gerekli. @No__t-0 üstbilgisi kullanılıyorsa, `AppId` alanını boş bırakın. Aksi takdirde, `"Bearer" + " " + "access_token"` içeren bir dize ekleyin.
+* `From`: gerekli. Çevrilen metnin dil kodunu temsil eden bir dize.
+* `MaxTranslations`: gerekli. Döndürülecek en fazla çeviri sayısını temsil eden bir tamsayı.
+* `Options`: Isteğe bağlı. Aşağıdaki değerleri içeren `Options` nesnesi. Bunların tümü isteğe bağlıdır ve varsayılan olarak en sık kullanılan ayarlara sahiptir. Belirtilen öğelerin alfabetik sırada listelenmesi gerekir.
+    - `Category`: çevirinin kategorisini (etki alanı) içeren bir dize. Varsayılan, `general` değeridir.
+    - `ContentType`: desteklenen tek seçenek ve varsayılan, `text/plain` ' dir.
+    - `IncludeMultipleMTAlternatives`: MT altyapısından birden fazla alternatif döndürülüp döndürülmeyeceğini belirten bir Boole bayrağı. Geçerli değerler `true` ve `false` (büyük/küçük harfe duyarlı). Varsayılan değer yalnızca bir alternatif döndüren `false` ' dır. Bayrak `true` olarak ayarlandığında, birlikte çalışan Çeviri Çerçevesi (CTF) ile tam olarak tümleştirilmiş, çeviride yapay alternatifler oluşturulmasına olanak sağlar. Özelliği, kod çözücüsünün *n*en iyi listesinden yapay alternatifler ekleyerek CTF 'de alternatif olmayan cümleler için alternatifler döndürmeyi mümkün.
+        - Derecelendirmeler aşağıdaki gibi uygulanır:
+          - En iyi otomatik çeviri, 5 derecesine sahiptir.
+          - CTF 'nin alternatifleri gözden geçirenin yetkilisini yansıtır. -10 ile + 10 arasında değişir.
+          - Otomatik olarak oluşturulan (*n*-en iyi) çeviri alternatifleri, 0 derecelendirmesine ve 100 eşleşme derecesine sahiptir.
+        - Alternatifin sayısı. Döndürülen alternatiflere ilişkin sayı `maxTranslations` ' da belirtilen değer kadar yüksek olabilir, ancak daha az olabilir.
+        - Dil çiftleri. Bu işlev, Basitleştirilmiş Çince ve geleneksel Çince arasında her iki yönde de çeviri için kullanılamaz. Microsoft Translator tarafından desteklenen tüm diğer dil çiftleri için kullanılabilir.
+* `State`: istek ve yanıtı ilişkilendirmenize yardımcı olmak için Kullanıcı durumu. Yanıtta aynı içerik döndürülecek.
+* `Uri`: sonuçları bu URI 'ye göre filtreleyin. Değer ayarlanmamışsa, varsayılan değer `all` ' dır.
+* `User`: sonuçları bu kullanıcıya göre filtreleyin. Değer ayarlanmamışsa, varsayılan değer `all` ' dır.
+* `Texts`: gerekli. Çeviri metnini içeren bir dizi. Tüm dizeler aynı dilde olmalıdır. Çevrilecek tüm metinlerin toplamı 10.000 karakteri aşamaz. Dizi öğelerinin maksimum sayısı 10 ' dur.
+* `To`: gerekli. Metni çevirecek dilin dil kodunu temsil eden bir dize.
 
-İsteğe bağlı öğeler atlanabilir. Doğrudan alt öğesi olan öğeleri `GetTranslationsArrayRequest` alfabetik olarak listelenmiş olmalıdır.
+İsteğe bağlı öğeleri atlayabilirsiniz. @No__t-0 ' ın doğrudan alt öğesi olan öğelerin alfabetik sırada listelenmesi gerekir.
 
-İstek `Content-Type` olmalıdır `text/xml`.
+İstek `Content-Type` `text/xml` olmalıdır.
 
-**Dönüş değeri:** Yanıt biçimi aşağıdaki gibidir.
+**Dönüş değeri:** Yanıtın biçimi şöyledir:
 
 ```
 <ArrayOfGetTranslationsResponse xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2" xmlns:i="https://www.w3.org/2001/XMLSchema-instance">
@@ -754,54 +763,46 @@ Kullanım `GetTranslationsArray` birden fazla kaynak metni için birden fazla ç
 </ArrayOfGetTranslationsResponse>
 ```
 
-Her `GetTranslationsResponse` öğesi aşağıdaki değerleri içerir:
+Her `GetTranslationsResponse` öğesi şu değerleri içerir:
 
-* `Translations`: Bir dizi eşleşme bulundu, depolanan `TranslationMatch` nesneleri (aşağıya bakın). Çevirileri hafif varyantlarının (benzer öğe eşleştirmesi) özgün metin içerebilir. Çevirileri sıralanır: % 100 aşağıdaki belirsiz eşleşen ilk olarak eşleşir.
-* `From`: Yöntem belirtmediyseniz bir `From` dil, bu otomatik dil algılama sonucu olacaktır. Aksi durumda olur dili verilir.
-* `State`: Performanstaki istek ve yanıt yardımcı olmak için kullanıcı durumu. İçinde haliyle aynı değeri içeren `TranslateOptions` parametresi.
+* `Translations`: `TranslationMatch` nesnelerinde depolanan eşleşmelerin bir dizisi (aşağıdaki bölümde açıklanmıştır). Çeviriler orijinal metnin hafif türevlerini (belirsiz eşleşme) içerebilir. Çeviriler sıralanacaktır: ilk olarak% 100 eşleşme, belirsiz eşleşme ileri.
+* `From`: Yöntem bir `From` dili belirtmezse, bu değer otomatik dil algılamasında gelir. Aksi halde, belirtilen `From` dili olur.
+* `State`: istek ve yanıtı ilişkilendirmenize yardımcı olmak için Kullanıcı durumu. @No__t-0 parametresinde sağlanan değeri içerir.
 
-`TranslationMatch` Nesne aşağıdakilerden oluşur:
-* `Error`: Belirli bir giriş dizesini bir hata oluştu hata kodu saklanır. Aksi takdirde alanı boş.
-* `MatchDegree`: Sistem filtresinin eşleşmeleri de dahil olmak üzere deposu ile karşılaştırarak giriş cümleler eşleşir.  `MatchDegree` ne kadar yakın giriş metni depoda orijinal metinle eşleşen gösterir. Aralık 0-100'e 0 olduğu hiçbir benzerlik döndürülen değer ve 100 tam büyük/küçük harf duyarlı eşleşmedir.
-* `MatchedOriginalText`: Bu sonuç için eşleştirildi orijinal metni. Yalnızca eşleşen orijinal metni giriş metin farklı döndürdü. Benzer eşleştirme kaynak metnin döndürmek için kullanılır. Microsoft Translator sonuçları döndürülmez.
-* `Rating`: Kalite kararı kişinin yetkilisi gösterir. Makine çevirisi 5 derecesi sonuçlara yol açabilir. Yetkili olarak sağlanan çevirileri 6-10 derecesi genellikle sahip artırabileceksiniz anonim olarak sağlanan çevirileri genellikle 1-4 derecesi sahiptir.
-* `Count`: Bu çeviri Bu derecelendirme seçili sayısı. Değer otomatik olarak çevrilmiş yanıtı için 0 olacaktır.
-* `TranslatedText`: Çevrilmiş metin.
+@No__t-0 nesnesi aşağıdaki değerleri içerir:
+* `Error`: belirli bir giriş dizesi için bir hata oluşursa hata kodu. Aksi takdirde, bu alan boştur.
+* `MatchDegree`: giriş metninin depoda bulunan özgün metinle ne kadar yakın olduğunu gösterir. Sistem, tam eşleşmeler dahil olmak üzere, depoya karşı giriş cümlelerini eşleştirir. Değer, 0 ile 100 arasında bir değer döndürür; burada 0 benzerlik yoktur ve 100 tam, büyük/küçük harfe duyarlı bir eşleşmedir.
+* `MatchedOriginalText`: bu sonuçla eşleşen özgün metin. Bu değer yalnızca eşleşen özgün metnin giriş metninde farklı olması durumunda döndürülür. Benzer bir eşleşmenin kaynak metnini döndürmek için kullanılır. Bu değer, Microsoft Translator sonuçları için döndürülmez.
+* `Rating`: kalite kararı veren kişinin yetkilisini belirtir. Makine çevirisi sonuçlarında 5 derecelendirmesi vardır. Anonim olarak belirtilen Çeviriler genellikle 1 ile 4 arasında bir derecelendirmesine sahiptir. Yetkili olarak sağlanmış Çeviriler genellikle 6 ile 10 arasında bir derecelendirmesine sahiptir.
+* `Count`: Bu derecelendirmeden bu çevirinin kaç kez seçildiği. Değer, otomatik olarak çevrilmiş yanıt için 0 ' dır.
+* `TranslatedText`: çevrilmiş metin.
 
 
-### <a name="response-class-status-200"></a>Yanıt sınıfı (durum 200)
+### <a name="response-class-status-200"></a>Response sınıfı (durum 200)
 
-string
+dize
 
-Yanıt içerik türü: application/xml
+Yanıt içerik türü: Application/XML
  
 ### <a name="parameters"></a>Parametreler
 
-|Parametre|Value|Açıklama|Parametre türü|Veri Türü|
+|Parametre|Değer|Açıklama|Parametre türü|Veri türü|
 |:--|:--|:--|:--|:--|
-|Yetkilendirme  |(boş)    |Gerekli if `appid` alan veya `Ocp-Apim-Subscription-Key` üstbilgisi belirtilmedi. Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üst bilgi|string|
-|Ocp-Apim-Subscription-Key|(boş)  |Gerekli if `appid` alan veya `Authorization` üstbilgisi belirtilmedi.|üst bilgi|string|
+|Yetkilendirme  |olmamalıdır    |@No__t-0 alanı ve `Ocp-Apim-Subscription-Key` üst bilgisi boş bırakılırsa gereklidir.  Yetkilendirme belirteci: `"Bearer" + " " + "access_token"`.|üstbilgi|dize|
+|OCP-apim-Subscription-Key|olmamalıdır  |@No__t-0 alanı ve `Authorization` üst bilgisi boş bırakılırsa gereklidir.|üstbilgi|dize|
 
-### <a name="response-messages"></a>Yanıt iletilerini
+### <a name="response-messages"></a>Yanıt iletileri
 
-|HTTP durum kodu|Reason|
+|HTTP durum kodu|Neden|
 |:--|:--|
-|400    |Hatalı istek. Giriş parametreleri ve ayrıntılı hata yanıtı kontrol edin.|
-|401    |Geçersiz kimlik bilgileri|
-|500    |Sunucu hatası. Sorun devam ederse, bize bildirin. Lütfen bize yaklaşık tarih ve saat istek ve yanıt üst bilgisinde yer istek kimliği sağlamak `X-MS-Trans-Info`.|
-|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hata devam ederse bize bildirin.|
+|400    |Hatalı istek. Giriş parametrelerini ve ayrıntılı hata yanıtını denetleyin.|
+|401    |Geçersiz kimlik bilgileri.|
+|500    |Sunucu hatası. Hata devam ederse, bize bilgi verin. Lütfen isteğin yaklaşık Tarih & ve `X-MS-Trans-Info` yanıt üstbilgisine dahil edilen istek KIMLIĞIYLE bize bildirin.|
+|503    |Hizmet geçici olarak kullanılamıyor. Lütfen yeniden deneyin ve hatanın devam edip etmediğini bize bildirin.|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [V3 Translator metin API'si geçirme](../migrate-to-v3.md)
-
-
-
-
-
-
-
-
+> [Translator Metin Çevirisi API'si v3 'ye geçir](../migrate-to-v3.md)
 
 

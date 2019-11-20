@@ -1,9 +1,9 @@
 ---
-title: BLOB ile çalışmaya başlama depolama ve Visual Studio bağlı hizmetler (bulut Hizmetleri) | Microsoft Docs
-description: Visual Studio kullanarak bir depolama hesabına bağlandıktan sonra bir bulut hizmeti projesini Visual Studio'da, Azure Blob Depolama ile çalışmaya başlamak nasıl bağlı hizmetler
+title: Visual Studio kullanarak blob depolamayı kullanmaya başlama (bulut Hizmetleri)
+description: Visual Studio bağlı hizmetler 'i kullanarak bir depolama hesabına bağlandıktan sonra Visual Studio 'da bir bulut hizmeti projesinde Azure Blob depolamayı kullanmaya başlama
 services: storage
 author: ghogen
-manager: douge
+manager: jillfra
 ms.assetid: 1144a958-f75a-4466-bb21-320b7ae8f304
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
@@ -12,69 +12,70 @@ ms.workload: azure-vs
 ms.topic: conceptual
 ms.date: 12/02/2016
 ms.author: ghogen
-ms.openlocfilehash: 9f1ef06e0275954343c548d0f6937b9c6fbcfd18
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX,NOFOLLOW
+ms.openlocfilehash: d151e55f627166d8ad7d8affa53740e86cd1e501
+ms.sourcegitcommit: 8b44498b922f7d7d34e4de7189b3ad5a9ba1488b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62122949"
+ms.lasthandoff: 10/13/2019
+ms.locfileid: "72298799"
 ---
-# <a name="get-started-with-azure-blob-storage-and-visual-studio-connected-services-cloud-services-projects"></a>Azure Blob Depolama ve Visual Studio ile çalışmaya başlama bağlı hizmetler (bulut hizmeti projeleri)
+# <a name="get-started-with-azure-blob-storage-and-visual-studio-connected-services-cloud-services-projects"></a>Azure Blob depolama ve Visual Studio bağlı hizmetlerini kullanmaya başlama (Cloud Services projeleri)
 [!INCLUDE [storage-try-azure-tools-blobs](../../includes/storage-try-azure-tools-blobs.md)]
 
 ## <a name="overview"></a>Genel Bakış
-Bu makalede oluşturduğunuz veya Visual Studio kullanarak bir Azure depolama hesabı başvurulan sonra Azure Blob depolamayı kullanmaya başlama işlemini açıklamaktadır **bağlı hizmet Ekle** iletişim kutusunda Visual Studio cloud services projesi. Nasıl erişmek ve blob kapsayıcıları oluşturma ve karşıya yükleme, listeleme ve blobları indirme gibi yaygın görevlerin nasıl gerçekleştirileceğini göstereceğiz. Örnekler C dilinde yazılan\# ve [.NET için Microsoft Azure depolama istemci Kitaplığı](https://msdn.microsoft.com/library/azure/dn261237.aspx).
+Bu makalede, Visual Studio Cloud Services projesindeki Visual Studio **bağlı hizmetler Ekle** iletişim kutusunu kullanarak bir Azure depolama hesabı oluşturduktan veya başvurduktan sonra Azure Blob Storage 'ı kullanmaya nasıl başlacağınız açıklanır. Blob kapsayıcılarının nasıl erişebileceğini ve oluşturulacağını ve Blobları karşıya yükleme, listeleme ve indirme gibi genel görevlerin nasıl gerçekleştirileceğini göstereceğiz. Örnekler C @ no__t-0 dilinde yazılır ve [.NET için Microsoft Azure depolama Istemci kitaplığını](https://msdn.microsoft.com/library/azure/dn261237.aspx)kullanır.
 
-Azure Blob Depolama, büyük miktarlarda herhangi bir HTTP veya HTTPS aracılığıyla dünyanın erişilebilen yapılandırılmamış verileri depolamak için kullanılan bir hizmettir. Bir blobun herhangi bir boyutta olabilir. Görüntüleri, ses ve video dosyaları, ham verileri ve belge dosyaları gibi blobları olabilir.
+Azure Blob depolama, dünyanın her yerinden HTTP veya HTTPS aracılığıyla erişilebilen büyük miktarda yapılandırılmamış veriyi depolamaya yönelik bir hizmettir. Tek bir blob herhangi bir boyutta olabilir. Blob 'lar görüntüler, ses ve video dosyaları, ham veriler ve belge dosyaları gibi şeyler olabilir.
 
-Dosyaları klasörler halinde yalnızca canlı olarak kapsayıcılarda depolama BLOB'ları dinamik. Bir depolama oluşturduktan sonra depolamada bir veya daha fazla kapsayıcı oluşturun. Örneğin, "Koleksiyon defteri" adlı bir depolama, resimleri depolamak için "Görüntü" adlı depolama kapsayıcıları oluşturabilirsiniz ve "ses dosyaları depolamak için ses" adlı bir tane. Kapsayıcıları oluşturduktan sonra bunları tek tek blob dosyalarını karşıya yükleyebilirsiniz.
+Klasörlerde canlı olan dosyalar gibi, depolama Blobları kapsayıcılar içinde de vardır. Depolama oluşturduktan sonra, depolamada bir veya daha fazla kapsayıcı oluşturursunuz. Örneğin, "Scrapbook" adlı bir depolama alanında, resimleri depolamak için "resimler" adlı depolamada ve ses dosyalarını depolamak için "ses" olarak adlandırılan bir kapsayıcı oluşturabilirsiniz. Kapsayıcıları oluşturduktan sonra ayrı BLOB dosyalarını bunlara yükleyebilirsiniz.
 
-* Program aracılığıyla BLOB'ları düzenleme hakkında daha fazla bilgi için bkz: [.NET kullanarak Azure Blob depolamayı kullanmaya başlama](../storage/blobs/storage-dotnet-how-to-use-blobs.md).
+* Blob 'ları programlı olarak işleme hakkında daha fazla bilgi için bkz. [.NET kullanarak Azure Blob depolamayı kullanmaya başlama](../storage/blobs/storage-dotnet-how-to-use-blobs.md).
 * Azure depolama hakkında genel bilgi için bkz. [depolama belgeleri](https://azure.microsoft.com/documentation/services/storage/).
-* Azure bulut hizmetleri hakkında genel bilgi için bkz. [bulut Hizmetleri belgeleri](https://azure.microsoft.com/documentation/services/cloud-services/).
-* ASP.NET uygulamalarını programlama hakkında daha fazla bilgi için bkz. [ASP.NET](https://www.asp.net).
+* Azure Cloud Services hakkında genel bilgi için bkz. [Cloud Services belgeleri](https://azure.microsoft.com/documentation/services/cloud-services/).
+* ASP.NET uygulamalarını programlama hakkında daha fazla bilgi için bkz. [ASP.net](https://www.asp.net).
 
-## <a name="access-blob-containers-in-code"></a>Kod erişim blob kapsayıcıları
-Zaten mevcut değilse bulut hizmeti projeleri blob'larda programlı olarak erişmek için aşağıdaki öğeler eklemeniz gerekir.
+## <a name="access-blob-containers-in-code"></a>Koddaki blob kapsayıcılarına erişin
+Bulut hizmeti projelerindeki bloblara programlı bir şekilde erişmek için, zaten mevcut değilse aşağıdaki öğeleri eklemeniz gerekir.
 
-1. Aşağıdaki kod ad alanı bildirimi programlı bir şekilde Azure Depolama'ya erişmek istediğiniz tüm C# dosyasının en üstüne ekleyin.
+1. Aşağıdaki kod ad alanı bildirimlerini, Azure Storage 'a programlı bir C# şekilde erişmek istediğiniz herhangi bir dosyanın en üstüne ekleyin.
    
         using Microsoft.Framework.Configuration;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Blob;
         using System.Threading.Tasks;
         using LogLevel = Microsoft.Framework.Logging.LogLevel;
-2. Alma bir **CloudStorageAccount** depolama hesap bilgilerini temsil eden nesne. Almak için aşağıdaki kodu kullanın. Azure hizmet yapılandırma depolama hesabı bilgilerini ve depolama bağlantı dizesi.
+2. Depolama hesabı bilgilerinizi temsil eden bir **Cloudstorageaccount** nesnesi alın. Azure hizmet yapılandırmasından depolama Bağlantı dizenizi ve depolama hesabı bilgilerinizi almak için aşağıdaki kodu kullanın.
    
         CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
         CloudConfigurationManager.GetSetting("<storage account name>_AzureStorageConnectionString"));
-3. Alma bir **CloudBlobClient** depolama hesabınızda var olan bir kapsayıcı başvurmak için nesne.
+3. Depolama hesabınızdaki mevcut bir kapsayıcıya başvuracak bir **Cloudblobclient** nesnesi alın.
    
         // Create a blob client.
         CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-4. Alma bir **CloudBlobContainer** belirli bir blob kapsayıcısı başvurmak için nesne.
+4. Belirli bir blob kapsayıcısına başvurmak için **Cloudblobcontainer** nesnesi alın.
    
         // Get a reference to a container named "mycontainer."
         CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
 
 > [!NOTE]
-> Aşağıdaki bölümlerde gösterilen kod önünde önceki yordamda gösterilen tüm kodları kullanın.
+> Aşağıdaki bölümlerde gösterilen kodun önünde önceki yordamda gösterilen tüm kodu kullanın.
 > 
 > 
 
-## <a name="create-a-container-in-code"></a>Kod içinde bir kapsayıcı oluşturma
+## <a name="create-a-container-in-code"></a>Kodda kapsayıcı oluşturma
 > [!NOTE]
-> ASP.NET'te Azure Storage'a göz çağrıları gerçekleştirmek bazı API'leri zaman uyumsuzdur. Bkz: [Async ve Await ile zaman uyumsuz programlama](https://msdn.microsoft.com/library/hh191443.aspx) daha fazla bilgi için. Aşağıdaki örnek kodda, zaman uyumsuz programlama yöntemler kullandığınızı varsayar.
+> ASP.NET ' deki Azure depolama 'ya çağrılar gerçekleştiren bazı API 'Ler zaman uyumsuzdur. Daha fazla bilgi için bkz. [Async ve await Ile zaman uyumsuz programlama](https://msdn.microsoft.com/library/hh191443.aspx) . Aşağıdaki örnekteki kod, zaman uyumsuz programlama yöntemlerini kullandığınızı varsayar.
 > 
 > 
 
-Depolama hesabınızdaki bir kapsayıcı oluşturmak için yapmanız gereken tek şey bir çağrı ekleyin **Createıfnotexistsasync** şu kod gibi:
+Depolama hesabınızda bir kapsayıcı oluşturmak için tüm yapmanız gereken, aşağıdaki kodda bir **Createifnotexistsasync** çağrısı eklemektir:
 
     // If "mycontainer" doesn't exist, create it.
     await container.CreateIfNotExistsAsync();
 
 
-Kapsayıcı içindeki dosyaların herkese kullanılabilmesi için genel olarak aşağıdaki kodu kullanarak kapsayıcıyı ayarlayabilirsiniz.
+Kapsayıcının içindeki dosyaları herkes için kullanılabilir hale getirmek için, aşağıdaki kodu kullanarak kapsayıcıyı ortak olacak şekilde ayarlayabilirsiniz.
 
     await container.SetPermissionsAsync(new BlobContainerPermissions
     {
@@ -82,10 +83,10 @@ Kapsayıcı içindeki dosyaların herkese kullanılabilmesi için genel olarak a
     });
 
 
-Internet'teki herkes ortak bir kapsayıcıdaki blobları görebilir ancak değiştirdiğinizde ya da yalnızca uygun erişim anahtarınız varsa bunları silin.
+Internet 'teki herkes blob 'ları ortak bir kapsayıcıda görebilir, ancak yalnızca uygun erişim anahtarınız varsa bunları değiştirebilir veya silebilirsiniz.
 
 ## <a name="upload-a-blob-into-a-container"></a>Bir kapsayıcıya bir blob yükleme
-Azure Storage blok blobları ve sayfa bloblarını destekler. Çoğu durumda kullanılması önerilen blob türü blok blobudur.
+Azure depolama, blok bloblarını ve sayfa bloblarını destekler. Çoğu durumda kullanılması önerilen blob türü blok blobudur.
 
 Bir dosyayı bir blok blobuna yüklemek için bir kapsayıcı başvurusu alın ve blok blob başvurusu almak için kullanın. Bir blob başvurusu edindiğinizde **UploadFromStream** yöntemini çağırarak istediğiniz veri akışını yükleyebilirsiniz. Bu işlemle, eğer önceden oluşturulmadıysa bir blob oluşturulacaktır, aksi takdirde üzerine yazılacaktır. Aşağıdaki örnek kapsayıcının önceden oluşturulduğunu varsayarak bir blobun bir kapsayıcıya nasıl yükleneceğini gösterir.
 
@@ -99,7 +100,7 @@ Bir dosyayı bir blok blobuna yüklemek için bir kapsayıcı başvurusu alın v
     }
 
 ## <a name="list-the-blobs-in-a-container"></a>Blob’ları bir kapsayıcıda listeleme
-Blob’ları bir kapsayıcıda listelemek için ilk olarak bir kapsayıcı başvurusu edinin. Ardından içindeki blobları ve/veya dizinleri almak için kapsayıcının **ListBlobs** yöntemini kullanabilirsiniz. Zengin özellik ve yöntem dönen erişmeye **Ilistblobıtem**, kendisine dönüştürmelisiniz bir **CloudBlockBlob**, **CloudPageBlob**, veya  **CloudBlobDirectory** nesne. Tür bilinmiyorsa, hangisine yayınlayacağınızı belirlemek için bir tür denetimi kullanabilirsiniz. Aşağıdaki kod, **resimler** kapsayıcısındaki her nesnenin URI’sinin nasıl alınacağını ve çıkacağını gösterir:
+Blob’ları bir kapsayıcıda listelemek için ilk olarak bir kapsayıcı başvurusu edinin. Ardından içindeki blobları ve/veya dizinleri almak için kapsayıcının **ListBlobs** yöntemini kullanabilirsiniz. Döndürülen bir **ıblobitem**için zengin özellik ve Yöntem kümesine erişmek için, bunu bir **Cloudblockblob**, **Cloudpageblob**veya **cloudblobdirectory** nesnesine atamalısınız. Tür bilinmiyorsa, hangisine yayınlayacağınızı belirlemek için bir tür denetimi kullanabilirsiniz. Aşağıdaki kod, **resimler** kapsayıcısındaki her nesnenin URI’sinin nasıl alınacağını ve çıkacağını gösterir:
 
     // Loop over items within the container and output the length and URI.
     foreach (IListBlobItem item in container.ListBlobs(null, false))
@@ -126,7 +127,7 @@ Blob’ları bir kapsayıcıda listelemek için ilk olarak bir kapsayıcı başv
         }
     }
 
-Önceki kod örneğinde gösterildiği gibi blob hizmeti kapsayıcıları da içindeki dizinlerin kavramı vardır. Bu, böylelikle daha fazla klasör gibi bir yapı bloblarınızın düzenleyebilirsiniz. Örneğin bir kapsayıcıda yer alan ve **resimler** olarak adlandırılan aşağıdaki blok blobları kümesine göz atın:
+Önceki kod örneğinde gösterildiği gibi, blob hizmeti de kapsayıcılar içinde dizin kavramıdır. Bu, bloblarınızı daha fazla klasör benzeri bir yapıda düzenleyebilmenizi sağlamak için kullanılır. Örneğin bir kapsayıcıda yer alan ve **resimler** olarak adlandırılan aşağıdaki blok blobları kümesine göz atın:
 
     photo1.jpg
     2010/architecture/description.txt
@@ -137,14 +138,14 @@ Blob’ları bir kapsayıcıda listelemek için ilk olarak bir kapsayıcı başv
     2011/architecture/description.txt
     2011/photo7.jpg
 
-Çağırdığınızda **ListBlobs** kapsayıcısında (Yukarıdaki örnek) olduğu gibi döndürülen koleksiyon içeren **CloudBlobDirectory** ve **CloudBlockBlob** nesneleri dizinleri ve blobları en üst düzeyinde bulunan temsil eden. Sonuç çıktısı aşağıdaki gibidir:
+Kapsayıcıda **listbloblarını** çağırdığınızda (önceki örnekte olduğu gibi), döndürülen koleksiyon **cloudblobdirectory** ve en üst düzeyde bulunan dizinleri ve Blobları temsil eden **cloudblockblob** nesnelerini içerir. Elde edilen çıktı şöyledir:
 
     Directory: https://<accountname>.blob.core.windows.net/photos/2010/
     Directory: https://<accountname>.blob.core.windows.net/photos/2011/
     Block blob of length 505623: https://<accountname>.blob.core.windows.net/photos/photo1.jpg
 
 
-İsteğe bağlı olarak **ListBlobs** yönteminin **UseFlatBlobListing** parametresini **true** olarak ayarlayabilirsiniz. Her blob olarak döndürülen sonuçlanır bir **CloudBlockBlob**dizin ne olursa olsun. Çağrı işte **ListBlobs**:
+İsteğe bağlı olarak **ListBlobs** yönteminin **UseFlatBlobListing** parametresini **true** olarak ayarlayabilirsiniz. Bu, dizinden bağımsız olarak her Blobun bir **Cloudblockblob**olarak döndürüldüğünden oluşur. **Listblob**'ların çağrısı aşağıda verilmiştir:
 
     // Loop over items within the container and output the length and URI.
     foreach (IListBlobItem item in container.ListBlobs(null, true))
@@ -152,7 +153,7 @@ Blob’ları bir kapsayıcıda listelemek için ilk olarak bir kapsayıcı başv
        ...
     }
 
-ve sonuçları şunlardır:
+sonuçlar şunlardır:
 
     Block blob of length 4: https://<accountname>.blob.core.windows.net/photos/2010/architecture/description.txt
     Block blob of length 314618: https://<accountname>.blob.core.windows.net/photos/2010/architecture/photo3.jpg
@@ -163,7 +164,7 @@ ve sonuçları şunlardır:
     Block blob of length 399751: https://<accountname>.blob.core.windows.net/photos/2011/photo7.jpg
     Block blob of length 505623: https://<accountname>.blob.core.windows.net/photos/photo1.jpg
 
-Daha fazla bilgi için [CloudBlobContainer.ListBlobs](https://msdn.microsoft.com/library/azure/dd135734.aspx).
+Daha fazla bilgi için bkz. [Cloudblobcontainer. Listbloblar](https://msdn.microsoft.com/library/azure/dd135734.aspx).
 
 ## <a name="download-blobs"></a>Blob’ları indirme
 Blob’ları indirmek için ilk olarak bir blob başvurusu alın ve ardından **DownloadToStream** yöntemini çağırın. Aşağıdaki örnek, blob içeriklerini bir akış nesnesine aktarmak ve ardından yerel bir dosyaya kalıcı olarak almak için **DownloadToStream** yöntemini kullanır:
@@ -190,7 +191,7 @@ Bunun yanında bir blobun içeriklerini metin dizesi olarak indirmek için **Dow
     }
 
 ## <a name="delete-blobs"></a>Blob’ları silme
-Bir blobu silmek için önce bir blob başvurusu alın ve sonra çağrı **Sil** yöntemi.
+Bir blobu silmek için önce bir blob başvurusu alın ve ardından **Delete** yöntemini çağırın.
 
     // Get a reference to a blob named "myblob.txt".
     CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob.txt");

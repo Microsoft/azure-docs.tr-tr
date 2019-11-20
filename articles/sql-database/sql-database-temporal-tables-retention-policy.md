@@ -1,6 +1,6 @@
 ---
-title: Zamana bağlı tablolarda geçmiş verilerin bekletme ilkesi ile yönetme | Microsoft Docs
-description: Geçmiş verileri denetiminiz altında tutmak için zamana bağlı bekletme ilkesini kullanmayı öğrenin.
+title: Zamana bağlı tablolardaki geçmiş verileri yönetme
+description: Geçmiş verileri denetiminizin altında tutmak için zamana bağlı saklama ilkesini nasıl kullanacağınızı öğrenin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: development
@@ -10,39 +10,38 @@ ms.topic: conceptual
 author: bonova
 ms.author: bonova
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 09/25/2018
-ms.openlocfilehash: 62e88d912c55015f87cc00f21527010ad01ee00c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3c2460c6f5e0905f45106148ecc3e8a949cf221f
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60615708"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820680"
 ---
-# <a name="manage-historical-data-in-temporal-tables-with-retention-policy"></a>Zamana bağlı tablolarda geçmiş verilerin bekletme ilkesi ile yönetme
+# <a name="manage-historical-data-in-temporal-tables-with-retention-policy"></a>Bekletme ilkesiyle zamana bağlı tablolardaki geçmiş verileri yönetme
 
-Zamana bağlı tablolarda, özellikle daha uzun bir süre için geçmiş verileri tutuyorsanız normal tablolar, birden çok veritabanı boyutu artırabilir. Bu nedenle, geçmiş verileri için bekletme ilkesini planlama ve her zamana bağlı tablo yaşam döngüsü yönetimi önemli bir yönüdür ' dir. Zamana bağlı tablolarda Azure SQL veritabanı'nda, bu görevi gerçekleştirmenize yardımcı olan kullanımı kolay bekletme mekanizması ile gelir.
+Zamana bağlı tablolar, özellikle geçmiş verileri daha uzun bir süre boyunca saklamanız durumunda, normal tablolardan daha fazla veritabanı boyutunu artırabilir. Bu nedenle, geçmiş veriler için bekletme ilkesi, her zamana bağlı tablonun yaşam döngüsünün planlanmasına ve yönetilmesine ilişkin önemli bir yönüdür. Azure SQL veritabanı 'nda zamana bağlı tablolar, bu görevi gerçekleştirmenize yardımcı olan kullanımı kolay bekletme mekanizmasıyla birlikte gelir.
 
-Zamana bağlı geçmiş saklama olabilir tek tek tablo düzeyinde yapılandırılır, kullanıcıların esnek eskime oluşturmasına olanak tanıyan ilkeler. Zamana bağlı bekletme uygulama basittir: Tablo oluşturma veya şema değişikliği sırasında ayarlamak için yalnızca bir parametresi gerektirir.
+Zamana bağlı geçmiş tutma, kullanıcıların esnek eskime ilkeleri oluşturmalarına olanak sağlayan ayrı tablo düzeyinde yapılandırılabilir. Zamana bağlı saklama uygulamak basittir: tablo oluşturma veya şema değişikliği sırasında yalnızca bir parametre ayarlanmasını gerektirir.
 
-Bekletme İlkesi tanımladıktan sonra Azure SQL veritabanı otomatik veri temizleme için uygun geçmiş satırlar olup olmadığını düzenli olarak denetimini başlatır. Eşleşen satır tanımlayıcısı ve geçmiş tablosu, kaldırma, zamanlanan ve sistem tarafından çalıştırın arka plan görevinin saydam bir şekilde oluşur. Geçerlilik süresi geçmiş tablo satırları ULUN system_tıme süre sonunu temsil eden bir sütuna göre denetlenir. Saklama dönemi, örneğin, altı ay ayarlarsanız, temizleme için uygun olan tablo satırları aşağıdaki koşul karşılar:
+Saklama ilkesini tanımladıktan sonra, otomatik veri temizleme için uygun geçmiş satırları varsa Azure SQL veritabanı düzenli olarak denetlemeye başlar. Eşleşen satırların tanımlanması ve geçmiş tablosundan kaldırılması, sistem tarafından zamanlanan ve çalıştırılan arka plan görevinde saydam bir şekilde gerçekleşir. Geçmiş tablosu satırları için yaş koşulu, SYSTEM_TIME döneminin sonunu temsil eden sütuna göre denetlenir. Örneğin, saklama dönemi altı aya ayarlanırsa, temizleme için uygun tablo satırları aşağıdaki koşulu karşılar:
 
 ```
 ValidTo < DATEADD (MONTH, -6, SYSUTCDATETIME())
 ```
 
-Önceki örnekte, biz, kabul **ValidTo** sütun system_tıme süre sonuna karşılık gelir.
+Yukarıdaki örnekte, **ValidTo** sütununun SYSTEM_TIME döneminin sonuna karşılık geldiğini varsaydık.
 
-## <a name="how-to-configure-retention-policy"></a>Bekletme İlkesi yapılandırma
+## <a name="how-to-configure-retention-policy"></a>Saklama ilkesini yapılandırma
 
-Zamana bağlı tablo için bekletme ilkesini yapılandırmadan önce öncelikle zamana bağlı geçmiş saklama etkin olup olmadığını denetleyin *veritabanı düzeyinde*.
+Zamana bağlı bir tablo için bekletme ilkesini yapılandırmadan önce, *veritabanı düzeyinde*zamana bağlı geçmiş saklama özelliğinin etkinleştirilip etkinleştirilmediğini denetleyin.
 
 ```
 SELECT is_temporal_history_retention_enabled, name
 FROM sys.databases
 ```
 
-Veritabanı bayrağı **is_temporal_history_retention_enabled** varsayılan olarak açık olarak ayarlandı, ancak kullanıcılar, ALTER DATABASE deyimi ile bunu değiştirebilirsiniz. OFF sonra da otomatik olarak ayarlanmış [zaman noktasına](sql-database-recovery-using-backups.md) işlemi. Veritabanınız için zamana bağlı geçmiş saklama temizleme etkinleştirmek için aşağıdaki deyimi yürütün:
+Veritabanı bayrağı **is_temporal_history_retention_enabled** varsayılan olarak açık olarak ayarlanmıştır, ancak KULLANıCıLAR onu alter database ifadesiyle değiştirebilir. Ayrıca, bir [süre geri yükleme](sql-database-recovery-using-backups.md) işleminden sonra OTOMATIK olarak kapalı olarak ayarlanır. Veritabanınız için zamana bağlı geçmiş bekletme temizleme işlemini etkinleştirmek için aşağıdaki ifadeyi yürütün:
 
 ```sql
 ALTER DATABASE <myDB>
@@ -50,9 +49,9 @@ SET TEMPORAL_HISTORY_RETENTION  ON
 ```
 
 > [!IMPORTANT]
-> Bekletme durumunda bile zamana bağlı tablolar için yapılandırabileceğiniz **is_temporal_history_retention_enabled** Kapalı'dır, ancak eski satırlar için otomatik temizleme değil tetiklenir durumda.
+> **IS_TEMPORAL_HISTORY_RETENTION_ENABLED** kapalı olsa bile, zamana bağlı tablolar için bekletme yapılandırabilirsiniz, ancak eski satırlar için otomatik temizleme bu durumda tetiklenmez.
 
-Bekletme İlkesi öğesini INFINITE olarak ayarlamayı parametresi için değer belirleyerek tablo oluşturma sırasında yapılandırılır:
+Bekletme ilkesi, HISTORY_RETENTION_PERIOD parametresi için değer belirtilerek tablo oluşturma sırasında yapılandırılır:
 
 ```sql
 CREATE TABLE dbo.WebsiteUserInfo
@@ -74,9 +73,9 @@ CREATE TABLE dbo.WebsiteUserInfo
  );
 ```
 
-Azure SQL veritabanı Bekletme dönemi farklı zaman birimlerini kullanarak belirtmenize olanak sağlar: GÜN, hafta, ay ve yıl. Öğesini INFINITE olarak ayarlamayı atlanırsa, SINIRSIZ bekletme varsayılır. SONSUZ anahtar sözcüğü açıkça de kullanabilirsiniz.
+Azure SQL veritabanı farklı zaman birimleri kullanarak saklama süresi belirtmenizi sağlar: gün, hafta, ay ve yıl. HISTORY_RETENTION_PERIOD atlanırsa, sonsuz saklama varsayılır. SONSUZ anahtar sözcüğünü açıkça de kullanabilirsiniz.
 
-Bazı senaryolarda tablo oluşturulduktan sonra saklamayı yapılandırmak isteyebilirsiniz veya değer daha önce değiştirmek için yapılandırılmış. Bu durumda, ALTER TABLE deyimini kullanın:
+Bazı senaryolarda, tablo oluşturulduktan sonra bekletme yapılandırmak veya daha önce yapılandırılan değeri değiştirmek isteyebilirsiniz. Bu durumda ALTER TABLE deyimini kullanın:
 
 ```sql
 ALTER TABLE dbo.WebsiteUserInfo
@@ -84,9 +83,9 @@ SET (SYSTEM_VERSIONING = ON (HISTORY_RETENTION_PERIOD = 9 MONTHS));
 ```
 
 > [!IMPORTANT]
-> System_versıonıng öğesini OFF olarak ayarlanıyor *korumak değil* Bekletme dönemi değeri. Öğesini INFINITE olarak ayarlamayı, SINIRSIZ bekletme süresi sonuçları açıkça belirtilen olmadan system_versıonıng ON olarak ayarlanamadı.
+> SYSTEM_VERSIONING kapalı olarak ayarlamak *,* saklama süresi değerini korumaz. SYSTEM_VERSIONING HISTORY_RETENTION_PERIOD olmadan açık olarak ayarlanması, sonsuz saklama süresi içinde açıkça sonuçlanır.
 
-Bekletme İlkesi geçerli durumunu gözden geçirmek için tek tek tablolar için bekletme süreleri olan veritabanı düzeyinde zamana bağlı bekletme etkinleştirme bayrağını birleştiren aşağıdaki sorguyu kullanın:
+Bekletme ilkesinin geçerli durumunu gözden geçirmek için, tek tek tablolar için bekletme dönemleriyle veritabanı düzeyinde zamana bağlı saklama etkinleştirme bayrağını birleştiren aşağıdaki sorguyu kullanın:
 
 ```sql
 SELECT DB.is_temporal_history_retention_enabled,
@@ -104,28 +103,28 @@ ON T1.history_table_id = T2.object_id WHERE T1.temporal_type = 2
 
 ## <a name="how-sql-database-deletes-aged-rows"></a>SQL veritabanı eski satırları nasıl siler
 
-Temizleme işlemi geçmiş tablosu üzerinde dizin düzeni bağlıdır. Dikkat edin önemlidir *yalnızca geçmiş tablosu kümelenmiş bir dizin (B-ağacı veya columnstore) ile yapılandırılmış sınırlı saklama ilkesi olabilir*. Bir arka plan görevi, sınırlı saklama süresi ile tüm zamana bağlı tablolar için eski verileri temizleme işlemini gerçekleştirmek için oluşturulur.
-Temizleme mantığı rowstore (B-Ağacı) kümelenmiş dizini için (en fazla 10 K) daha küçük öbekler halinde eski satır siler baskı veritabanının günlük ve g/ç alt en aza indirir. Temizleme mantığı kullanır ancak B-Ağacı dizini, saklama dönemi sıkıca garanti edilemez daha eski satırlar için silme sırasını gereklidir. Bu nedenle, *bağımlılığın uygulamalarınızı temizleme sırayla almayan*.
+Temizleme işlemi, geçmiş tablosunun Dizin düzenine bağlıdır. *Yalnızca kümelenmiş dizine (B-ağacı veya columnstore) sahip geçmiş tablolarının sınırlı bekletme ilkesi yapılandırıldığını*fark etmek önemlidir. Sınırlı saklama süresine sahip tüm zamana bağlı tablolar için eski veri temizleme işlemini gerçekleştirmek üzere bir arka plan görevi oluşturulur.
+Rowstore (B-ağacı) kümelenmiş dizini için Temizleme mantığı, daha küçük öbeklerdeki eski satırı (10.000 'ye kadar) siler ve veritabanı günlüğü ve GÇ alt sistemi üzerindeki basınç en aza indirir. Temizleme mantığı gerekli B-ağacı dizinini kullanmasına karşın, saklama süresinden eski olan satırlarda silme işlemlerinin sırası en kesin garanti edilemez. Bu nedenle, *uygulamalarınızda Temizleme sırası üzerinde hiçbir bağımlılık*kullanmayın.
 
-Kümelenmiş columnstore için temizleme görevini tüm kaldırır [satır grupları](https://msdn.microsoft.com/library/gg492088.aspx) tek seferde (genellikle 1 milyon satır her, özellikle geçmiş verileri yüksek bir hızda oluşturulduğunda çok verimli olan içerir).
+Kümelenmiş columnstore için temizleme görevi tüm [satır gruplarını](https://msdn.microsoft.com/library/gg492088.aspx) tek seferde kaldırır (genellikle 1.000.000 satır içerir), özellikle de geçmiş veriler yüksek bir hızda oluşturulduktan sonra oldukça etkilidir.
 
-![Kümelenmiş columnstore bekletme](./media/sql-database-temporal-tables-retention-policy/cciretention.png)
+![Kümelenmiş columnstore saklama](./media/sql-database-temporal-tables-retention-policy/cciretention.png)
 
-İş yükünüz yüksek miktarda geçmiş verileri hızlı bir şekilde oluşturduğunda columnstore dizini senaryolar için mükemmel bir seçim kümelenmiş, mükemmel veri sıkıştırma ve verimli saklama temizleme yapar. Bu yoğun için tipik bir desendir [zamana bağlı tablolar kullanan bir işlem gerçekleştirme iş yüklerinde](https://msdn.microsoft.com/library/mt631669.aspx) değişiklik izleme ve denetleme, eğilim analizi ve IOT veri alımı.
+Mükemmel veri sıkıştırma ve verimli bekletme Temizleme, iş yükünüz hızlı bir şekilde yüksek miktarda geçmiş veri oluşturduğunda, kümelenmiş columnstore dizinini senaryolar için kusursuz bir tercih yapar. Bu model, değişiklik izleme ve denetim, eğilim analizi veya IoT veri alımı için zamana bağlı [tabloları kullanan yoğun işlem temelli işleme iş yükleri](https://msdn.microsoft.com/library/mt631669.aspx) için tipik bir işlemdir.
 
-## <a name="index-considerations"></a>Dizin konuları
+## <a name="index-considerations"></a>Dizin değerlendirmeleri
 
-Dizin, kümelenmiş rowstore dizini ile tablolar için temizleme görevini system_tıme süre sonuna karşılık gelen sütun ile başlamasını gerektirir. Böyle bir dizin yoksa, sınırlı saklama süresi yapılandıramazsınız:
+Rowstore kümelenmiş dizini olan tablolar için temizleme görevi, SYSTEM_TIME döneminin sonuna karşılık gelen sütunla başlamak için Dizin gerektirir. Böyle bir dizin yoksa, sınırlı bir saklama süresi yapılandıramazsınız:
 
-*Msg 13765, Level 16, State 1 <br> </br> sınırlı saklama süresi ayarlanamadı 'temporalstagetestdb.dbo.WebsiteUserInfo' sistem sürümü tutulan zamana bağlı tablo üzerinde olduğundan geçmiş tablosu ' temporalstagetestdb.dbo.WebsiteUserInfoHistory' gerekli kümelenmiş dizini içermiyor. Kümelenmiş columnstore veya B-Ağacı dizini system_tıme süresinin sonuyla eşleşen sütunla başlayan oluşturmayı göz önünde bulundurun geçmiş tablosunda, dönem.*
+*İleti 13765, düzey 16, durum 1 <br></br> sınırlı saklama süresi ayarı sistem sürümü tutulan zamana bağlı ' temporalstagetestdb. dbo. Websiteuserınfo ' tablosunda başarısız oldu, çünkü ' temporalstagetestdb. dbo. Websiteuserınfohistory ' geçmiş tablosu gerekli kümelenmiş dizini içerir. Geçmiş tablosunda SYSTEM_TIME döneminin sonuyla eşleşen sütundan başlayarak kümelenmiş bir columnstore veya B-ağacı dizini oluşturmayı düşünün.*
 
-Azure SQL veritabanı tarafından önceden oluşturulmuş varsayılan geçmiş tablosu için bekletme ilkesi uyumlu dizin, kümelenmiş olduğuna dikkat edin önemlidir. Bu dizin tablosunda sınırlı saklama süresi ile kaldırmaya işlemi şu hatayla başarısız olur:
+Azure SQL veritabanı tarafından oluşturulan varsayılan geçmiş tablosunun, bekletme ilkesi için uyumlu olan kümelenmiş dizine zaten sahip olduğunu fark etmek önemlidir. Sınırlı saklama süresine sahip bir tabloda bu dizini kaldırmaya çalışırsanız, işlem aşağıdaki hatayla başarısız olur:
 
-*Msg 13766, Level 16, State 1 <br> </br> eski verileri otomatik olarak temizleme için kullanıldığından 'WebsiteUserInfoHistory.IX_WebsiteUserInfoHistory' kümelenmiş dizini bırakılamıyor. Bu dizini bırakmanız gerekiyorsa sistem sürümü tutulan ilgili zamana bağlı tablo üzerinde INFINITE öğesini INFINITE olarak ayarlamayı ayarlamayı göz önünde bulundurun.*
+*Msg 13766, Level 16, durum 1 <br></br> ' Websiteuserınfohistory. IX_WebsiteUserInfoHistory ' kümelenmiş dizinini, eski verilerin otomatik temizlemesi için kullanıldığından bırakamıyor. Bu dizini bırakmalısınız, ilgili sistem sürümü tutulan zamana bağlı tabloda HISTORY_RETENTION_PERIOD sonsuz olarak ayarlamayı düşünün.*
 
-Geçmiş tablosu SYSTEM_VERSIONIOING mekanizması tarafından özel olarak doldurulduğunda her zaman söz konusu olduğu (dönem sütunu sonunda sıralı) artan düzende, geçmiş satırlar eklenir temizleme üzerinde kümelenmiş columnstore dizini en iyi şekilde çalışır. Geçmiş tablosu satır sonuna kadar (var olan geçmiş verileri geçirdiyseniz, durum olabilecek) dönem sütunu sıralı değil, doğru en iyi elde etmek için sıralanır B-Ağacı rowstore dizini üzerinde kümelenmiş columnstore dizini yeniden oluşturmanız gerekir performans.
+Geçmiş satırları artan düzende (dönem sonuna kadar sıralanır) eklenirse ve bu durum, geçmiş tablosu SYSTEM_VERSIONIOING mekanizması tarafından özel olarak doldurulduğu zaman büyük/küçük harf olarak, kümelenmiş columnstore dizininde Temizleme işlemi en iyi şekilde gerçekleşir. Geçmiş tablosundaki satırlar dönem sonuna göre sıralı değilse (mevcut geçmiş verileri geçirdiyseniz bu durum söz konusu olabilir), en iyi şekilde elde edilen B-Tree rowstore dizininin üstünde kümelenmiş columnstore dizinini yeniden oluşturmanız gerekir mının.
 
-Geçmiş tablosunda sınırlı saklama süresi ile kümelenmiş columnstore dizinini yeniden oluşturmayı kaçının, çünkü doğal olarak sistem sürümü oluşturma işlemi tarafından uygulanan satır gruplarında sırası değişebilir. Geçmiş tablosunda kümelenmiş columnstore dizini yeniden oluşturmanız gerekiyorsa, bu normal veri temizleme için gereken satır grupları olarak sıralama koruma uyumlu B-Ağacı dizini üzerinde yeniden oluşturmanız gerekir. Sütun dizini garantili veri sırası olmadan kümelenmiş mevcut geçmiş tablosunda zamana bağlı tablo oluşturursanız, aynı yaklaşımı gerçekleştirilmelidir:
+Geçmiş tablosunda, sistem sürümü oluşturma işlemi tarafından doğal olarak uygulanan satır gruplarındaki sıralamayı değiştirebileceğinden, sınırlı saklama süresine sahip kümelenmiş columnstore dizinini yeniden oluşturmayı önleyin. Geçmiş tablosunda kümelenmiş columnstore dizinini yeniden oluşturmanız gerekiyorsa, bunu uyumlu B ağacı dizininin en üstünde yeniden oluşturarak, normal veri temizleme için gereken RowGroups sıralamasını koruyarak yapın. Garantili veri sırası olmayan kümelenmiş sütun dizini olan mevcut geçmiş tablosuyla zamana bağlı tablo oluşturursanız aynı yaklaşım gerçekleştirilmelidir:
 
 ```sql
 /*Create B-tree ordered by the end of period column*/
@@ -137,43 +136,43 @@ CREATE CLUSTERED COLUMNSTORE INDEX IX_WebsiteUserInfoHistory ON WebsiteUserInfoH
 WITH (DROP_EXISTING = ON);
 ```
 
-Sınırlı saklama süresi, kümelenmiş columnstore dizini olan geçmiş tablosu için yapılandırıldığında, o tablosunda kümelenmemiş ek B-Ağacı dizinleri oluşturulamıyor:
+Kümelenmiş columnstore diziniyle geçmiş tablosu için sınırlı saklama süresi yapılandırıldığında, bu tabloda ek kümelenmemiş B-ağacı dizinleri oluşturamazsınız:
 
 ```sql
 CREATE NONCLUSTERED INDEX IX_WebHistNCI ON WebsiteUserInfoHistory ([UserName])
 ```
 
-Deyimi yürütme girişimi şu hatayla başarısız olur:
+Yukarıdaki deyimin yürütülmesi girişimi aşağıdaki hatayla başarısız olur:
 
-*Msg 13772, Level 16, State 1 <br> </br> sınırlı saklama süresi ve kümelenmiş columnstore dizini tanımlı olduğundan zamana bağlı geçmiş tablosunda bulunan 'WebsiteUserInfoHistory' kümelenmiş dizini oluşturulamıyor.*
+*İleti 13772, düzey 16, durum 1 <br></br>, sınırlı saklama süresi ve tanımlanmış kümelenmiş columnstore dizini olduğundan, ' Websiteuserınfohistory ' zamana bağlı geçmiş tablosunda kümelenmemiş dizin oluşturamıyor.*
 
-## <a name="querying-tables-with-retention-policy"></a>Bekletme İlkesi olan tabloları sorgulama
+## <a name="querying-tables-with-retention-policy"></a>Tabloları bekletme ilkesiyle sorgulama
 
-Tüm sorguların zamana bağlı tablosunda sınırlı saklama İlkesi, eski satırları temizleme görevi tarafından silinebilir olduğundan tahmin edilemez ve tutarsız sonuçlar önlemek için eşleşen geçmiş satırlar otomatik olarak filtrelemek *herhangi bir noktada süresi ve rasgele Sipariş*.
+Eski satırlar temizleme görevi tarafından *herhangi bir zamanda ve isteğe bağlı*olarak silinebildiğinden, geçici tablodaki tüm sorgular sonlu bekletme ilkesiyle eşleşen geçmiş satırları otomatik olarak filtreler.
 
-Aşağıdaki resimde, basit bir sorgu için sorgu planı gösterilmiştir:
+Aşağıdaki resimde basit bir sorgu için sorgu planı gösterilmektedir:
 
 ```sql
 SELECT * FROM dbo.WebsiteUserInfo FOR SYSTEM_TIME ALL;
 ```
 
-Sorgu planı dönem sütunu (ValidTo) sonuna kadar uygulanan ek filtresi (vurgulu) geçmiş tablosunda kümelenmiş dizin tarama işleci içerir. Bu örnek, bir aylık bekletme süresi WebsiteUserInfo tablosunda ayarlandı varsayar.
+Sorgu planı, geçmiş tablosundaki (vurgulanmış) kümelenmiş dizin tarama işlecinde dönem sonu sütununa (ValidTo) uygulanan ek filtre içerir. Bu örnekte, Websiteuserınfo tablosunda bir ay bekletme döneminin ayarlandığı varsayılır.
 
 ![Bekletme sorgu filtresi](./media/sql-database-temporal-tables-retention-policy/queryexecplanwithretention.png)
 
-Ancak, geçmiş tablosu doğrudan sorgularsanız, dönem ancak herhangi bir garanti olmadan tekrarlanabilir sorgu sonuçları için belirtilen bekletme değerinden daha eski olan satırları görebilirsiniz. Aşağıdaki resimde, sorgu için sorgu yürütme planı uygulanan ek filtreler geçmiş tablosunda gösterilmektedir:
+Ancak, geçmiş tablosunu doğrudan sorgularsınız, belirtilen saklama süresinden eski olan ve yinelenebilir sorgu sonuçları garantisi olmadan daha eski olan satırları görebilirsiniz. Aşağıdaki resimde, ek filtreler uygulanmadan geçmiş tablosundaki sorgu için sorgu yürütme planı gösterilmektedir:
 
-![Geçmiş saklama filtresi olmadan sorgulama](./media/sql-database-temporal-tables-retention-policy/queryexecplanhistorytable.png)
+![Saklama filtresi olmadan geçmişi sorgulama](./media/sql-database-temporal-tables-retention-policy/queryexecplanhistorytable.png)
 
-İş mantığınızı, tutarsız veya beklenmeyen sonuçlar alabilirsiniz gibi geçmiş tablosu saklama süresi ötesinde okuma güvenmeyin. Zamana bağlı sorgular zamana bağlı tablolardaki verileri çözümlemek için FOR system_tıme yan tümcesiyle birlikte kullanmanızı öneririz.
+Tutarsız veya beklenmedik sonuçlar elde ettiğiniz için, saklama süresinden daha fazla bilgi almak için iş mantığınızı dayanmayın. Zamana bağlı tablolardaki verileri analiz etmek için SYSTEM_TIME yan tümcesiyle birlikte zamana bağlı sorgular kullanmanızı öneririz.
 
-## <a name="point-in-time-restore-considerations"></a>İşaret zaman geri yükleme konuları
+## <a name="point-in-time-restore-considerations"></a>Zaman içindeki bir noktaya geri yükleme konuları
 
-Yeni bir veritabanı oluşturduğunuzda, [var olan veritabanı zaman içinde belirli bir noktaya geri yükleme](sql-database-recovery-using-backups.md), veritabanı düzeyinde devre dışı zamana bağlı bekletme sahiptir. (**is_temporal_history_retention_enabled** bayrağı OFF olarak ayarlayın). Bu işlev, tüm geçmiş satırları geri yükleme sırasında bunları sorgulamak ulaşmadan önce eski satır kaldırılır endişelenmeden incelemenize olanak tanır. Bunu kullanabilirsiniz *ötesinde bir yapılandırılmış elde tutma süresi geçmiş verileri İnceleme*.
+[Mevcut veritabanını belirli bir noktaya geri yükleyerek](sql-database-recovery-using-backups.md)yeni veritabanı oluşturduğunuzda, veritabanı düzeyinde zamana bağlı saklama devre dışıdır. (**is_temporal_history_retention_enabled** bayrak kapalı olarak ayarlanır). Bu işlevsellik, geri yükleme sırasında geçmiş tüm satırları inceleyerek, eski satırlar sorgulanmadan önce kaldırılmalarını kaygılanmadan incelemenizi sağlar. Bu işlemi, *geçmiş verileri yapılandırılan bekletme döneminin ötesinde incelemek*için kullanabilirsiniz.
 
-Zamana bağlı tablo, bir aylık Bekletme dönemi belirtilen olduğunu varsayalım. Premium hizmet katmanında veritabanınız oluşturulmuş olsa bile, 35 günde geri geçmişte yedekleme veritabanı durumu ile veritabanı kopyası oluşturmak mümkün olacaktır. Etkili bir şekilde geçmiş tablosu doğrudan sorgulayarak 65 güne kadar eski olan geçmiş satırlar analiz çalıştırmasına olanak tanır.
+Zamana bağlı bir tabloda bir ay Bekletme dönemi olduğunu varsayalım. Veritabanınız Premium hizmet katmanında oluşturulduysa, son olarak 35 güne kadar veritabanı durumu ile veritabanı kopyası oluşturabilirsiniz. Bu, geçmiş tablosunu doğrudan sorgulayarak 65 güne kadar eski olan geçmiş satırları analiz etmenize olanak tanır.
 
-Zamana bağlı bekletme temizleme etkinleştirmek istiyorsanız, zaman geri yükleme noktası sonra aşağıdaki Transact-SQL deyimi çalıştırın:
+Zamana bağlı saklama temizlemeyi etkinleştirmek istiyorsanız, zaman sonra geri yükleme sonrasında aşağıdaki Transact-SQL ifadesini çalıştırın:
 
 ```sql
 ALTER DATABASE <myDB>
@@ -182,8 +181,8 @@ SET TEMPORAL_HISTORY_RETENTION  ON
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Zamana bağlı tablolarda, uygulamalarınızda kullanılacak öğrenmek için kullanıma [zamana bağlı tablolarda Azure SQL veritabanı ile çalışmaya başlama](sql-database-temporal-tables.md).
+Uygulamalarınızda zamana bağlı tabloları nasıl kullanacağınızı öğrenmek için [Azure SQL veritabanı 'nda](sql-database-temporal-tables.md)zamana bağlı tabloları kullanmaya başlama konusunu inceleyin.
 
-Dinlemek için Channel 9 ziyaret bir [gerçek müşteri zamana bağlı uygulama başarı hikayesi](https://channel9.msdn.com/Blogs/jsturtevant/Azure-SQL-Temporal-Tables-with-RockStep-Solutions) ve izleme bir [zamana bağlı tanıtım canlı](https://channel9.msdn.com/Shows/Data-Exposed/Temporal-in-SQL-Server-2016).
+[Gerçek zamanlı bir müşteri uygulama başarısı hikayesini](https://channel9.msdn.com/Blogs/jsturtevant/Azure-SQL-Temporal-Tables-with-RockStep-Solutions) dinlemek ve canlı bir zamana bağlı [tanıtım](https://channel9.msdn.com/Shows/Data-Exposed/Temporal-in-SQL-Server-2016)izlemek için Channel 9 ' a gidin.
 
-Zamana bağlı tablolar hakkında ayrıntılı bilgi için gözden [MSDN belgelerine](https://msdn.microsoft.com/library/dn935015.aspx).
+Zamana bağlı tablolar hakkında ayrıntılı bilgi için [MSDN belgelerini](https://msdn.microsoft.com/library/dn935015.aspx)gözden geçirin.

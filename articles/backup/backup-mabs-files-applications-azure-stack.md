@@ -1,139 +1,137 @@
 ---
-title: Azure Stack Vm'leri dosyalarında yedekleme
-description: Azure Backup, yedekleme ve Azure Stack dosyalarının ve uygulamalarının Azure Stack ortamınıza kurtarmak için kullanın.
-services: backup
-author: adigan
-manager: shivamg
-ms.service: backup
+title: Azure Stack VM 'lerde dosyaları yedekleme
+description: Azure Stack dosyalarını ve uygulamaları Azure Stack ortamınıza yedeklemek ve kurtarmak için Azure Backup kullanın.
 ms.topic: conceptual
-ms.date: 6/5/2018
-ms.author: adigan
-ms.openlocfilehash: 67d79f2aa41bab8a14d693098538d22ffeb05a4e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 06/05/2018
+ms.openlocfilehash: 2bcdf7f720708db1487d7d5cdaee41dc93c05728
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60848805"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172328"
 ---
-# <a name="back-up-files-on-azure-stack"></a>Azure Stack'te dosyaları yedekleme
-Azure Backup, korumak (veya yedeklemek için) kullanabilirsiniz dosyaları ve Azure Stack'te uygulamaları. Dosya ve uygulamaları yedeklemek için Azure Stack üzerinde çalışan bir sanal makine olarak Microsoft Azure Backup sunucusu yükleyin. Aynı sanal ağdaki herhangi bir Azure Stack sunucuda dosyaları koruyabilirsiniz. Azure Backup sunucusu yükledikten sonra kısa vadeli yedekleme verileri için kullanılabilir yerel depolama alanını artırmak için Azure disk ekleyin. Azure Backup sunucusu, uzun süreli saklama için Azure depolama kullanır.
+# <a name="back-up-files-and-applications-on-azure-stack"></a>Azure Stack üzerinde dosya ve uygulama yedekleme
+
+Azure Stack üzerinde dosya ve uygulamaları korumak (veya yedeklemek) için Azure Backup kullanabilirsiniz. Dosya ve uygulamaları yedeklemek için, Azure Stack üzerinde çalışan bir sanal makine olarak Microsoft Azure Backup sunucusu ' nu kurun. Aynı sanal ağdaki herhangi bir Azure Stack sunucusundaki dosyaları koruyabilirsiniz. Azure Backup Sunucusu yükledikten sonra, kısa vadeli yedekleme verileri için kullanılabilir yerel depolamayı artırmak üzere Azure diskleri ekleyin. Azure Backup Sunucusu uzun süreli saklama için Azure depolama kullanır.
 
 > [!NOTE]
-> Azure Backup sunucusu ve System Center Data Protection Manager (DPM) benzer olsa da, DPM Azure Stack ile kullanmak için desteklenmiyor.
+> Azure Backup Sunucusu ve System Center Data Protection Manager (DPM) benzerdir, ancak DPM Azure Stack ile kullanım için desteklenmez.
 >
 
-Bu makalede, Azure Backup sunucusu yükleme Azure Stack ortamında kapsamaz. Azure Stack'te Azure Backup sunucusu yüklemek için bkz [Azure Backup sunucusu yükleme](backup-mabs-install-azure-stack.md).
+Bu makale, Azure Stack ortamında Azure Backup Sunucusu yüklenmesini kapsamaz. Azure Stack Azure Backup Sunucusu yüklemek için [Azure Backup sunucusu yükleme](backup-mabs-install-azure-stack.md)makalesine bakın.
 
+## <a name="back-up-files-and-folders-in-azure-stack-vms-to-azure"></a>Azure Stack VM 'lerdeki dosya ve klasörleri Azure 'a yedekleme
 
-## <a name="back-up-files-and-folders-in-azure-stack-vms-to-azure"></a>Dosya ve klasörleri Azure Stack vm'lerinin Azure'a yedekleme
+Azure Stack sanal makinelerdeki dosyaları korumak üzere Azure Backup Sunucusu yapılandırmak için Azure Backup Sunucusu konsolunu açın. Koruma gruplarını yapılandırmak ve sanal makinelerinizdeki verileri korumak için konsolunu kullanırsınız.
 
-Azure Stack sanal makineler'de dosyaları korumak için Azure Backup sunucusu yapılandırmak için Azure Backup Sunucusu konsolunu açın. Konsolunda, koruma gruplarını yapılandırma ve sanal makinelerinizi şirket verilerini korumak için kullanacaksınız.
+1. Azure Backup Sunucusu konsolunda, **koruma** ' ya tıklayın ve araç çubuğunda Yeni ' ye tıklayarak **yeni koruma grubu oluşturma** **Sihirbazı ' nı** açın.
 
-1. Azure Backup sunucusu konsolunda **koruma** ve araç çubuğunda **yeni** açmak için **yeni koruma grubu oluşturma** Sihirbazı.
+   ![Azure Backup Sunucusu konsolunda korumayı yapılandırma](./media/backup-mabs-files-applications-azure-stack/1-mabs-menu-create-protection-group.png)
 
-   ![Azure Backup sunucusu konsolunda korumasını yapılandırma](./media/backup-mabs-files-applications-azure-stack/1-mabs-menu-create-protection-group.png)
+    Sihirbazın açılması birkaç saniye sürebilir. Sihirbaz açıldıktan sonra, **İleri** ' ye tıklayarak **koruma grubu türü seçin** ekranına ilerleyin.
 
-    Bu Sihirbazı'nı açmak için birkaç saniye sürebilir. Sihirbaz bitince **sonraki** ilerletmek için **koruma grubu türünü seçin** ekran.
+   ![Yeni Koruma Grubu Sihirbazı açılır](./media/backup-mabs-files-applications-azure-stack/2-create-new-protection-group-wiz.png)
 
-   ![Yeni koruma grubu Sihirbazı'nı açar.](./media/backup-mabs-files-applications-azure-stack/2-create-new-protection-group-wiz.png)
+2. **Koruma grubu türünü seçin** ekranında **sunucular** ' ı seçin ve **İleri**' ye tıklayın.
 
-2. Üzerinde **koruma grubu türünü seçin** ekran öğesini **sunucuları** tıklatıp **sonraki**.
+    ![Yeni Koruma Grubu Sihirbazı açılır](./media/backup-mabs-files-applications-azure-stack/3-select-protection-group-type.png)
 
-    ![Yeni koruma grubu Sihirbazı'nı açar.](./media/backup-mabs-files-applications-azure-stack/3-select-protection-group-type.png)
+    **Grup üyelerini seçin** ekranı açılır.
 
-    **Grup üyelerini seçin** ekranı açılır. 
+    ![Yeni Koruma Grubu Sihirbazı açılır](./media/backup-mabs-files-applications-azure-stack/4-opening-screen-choose-servers.png)
 
-    ![Yeni koruma grubu Sihirbazı'nı açar.](./media/backup-mabs-files-applications-azure-stack/4-opening-screen-choose-servers.png)
+3. **Grup üyelerini seçin** ekranında, alt öğeleri listesini genişletmek için **+** ' a tıklayın. Korumak istediğiniz tüm öğeler için onay kutusunu işaretleyin. Tüm öğeler seçildikten sonra **İleri**' ye tıklayın.
 
-3. İçinde **grup üyelerini seçin** ekranında **+** alt öğeleri listesini genişletin. Korumak istediğiniz tüm öğeleri için onay kutusunu işaretleyin. Tüm öğeleri seçtikten sonra tıklayın **sonraki**.
+    ![Yeni Koruma Grubu Sihirbazı açılır](./media/backup-mabs-files-applications-azure-stack/5-select-group-members.png)
 
-    ![Yeni koruma grubu Sihirbazı'nı açar.](./media/backup-mabs-files-applications-azure-stack/5-select-group-members.png)
+    Microsoft, bir koruma ilkesini paylaşacak tüm verilerin tek bir koruma grubuna yerleştirilmesini önerir. Koruma gruplarını planlama ve dağıtma hakkında ayrıntılı bilgi için bkz. System Center DPM makalesi, [koruma gruplarını dağıtma](https://docs.microsoft.com/system-center/dpm/create-dpm-protection-groups?view=sc-dpm-1801).
 
-    Microsoft, bir koruma İlkesi bir koruma grubu paylaşacak tüm verilerden yararlanabiliyor önerir. System Center DPM makaleye bakın hakkında planlama ve koruma gruplarını dağıtma eksiksiz bilgi [koruma gruplarını dağıtma](https://docs.microsoft.com/system-center/dpm/create-dpm-protection-groups?view=sc-dpm-1801).
+4. **Veri koruma yöntemini seçin** ekranında, koruma grubu için bir ad yazın. **Kullanarak kısa vadeli koruma** istiyorum onay kutusunu seçin ve **çevrimiçi koruma**istiyorum ' u seçin. **İleri**’ye tıklayın.
 
-4. İçinde **veri koruma yöntemini seçin** ekranında, koruma grubu için bir ad yazın. Onay kutusunu seçip **vadeli koruma istiyorum:** ve **çevrimiçi koruma istiyorum**. **İleri**’ye tıklayın.
+    ![Yeni Koruma Grubu Sihirbazı açılır](./media/backup-mabs-files-applications-azure-stack/6-select-data-protection-method.png)
 
-    ![Yeni koruma grubu Sihirbazı'nı açar.](./media/backup-mabs-files-applications-azure-stack/6-select-data-protection-method.png)
+    **Çevrimiçi koruma**istiyorum ' u seçmek için, önce: disk **kullanarak kısa vadeli koruma istiyorum** ' u seçmeniz gerekir. Azure Backup Sunucusu banda korumaz, bu yüzden disk kısa süreli koruma için tek seçenektir.
 
-    Seçilecek **çevrimiçi koruma istiyorum**, önce seçmeniz gerekir. **vadeli koruma istiyorum:** Disk. Tek seçim kısa dönem koruma için disk, bu nedenle, azure Backup sunucusu bant olarak korumaz.
-
-5. İçinde **kısa vadeli hedefleri belirtin** ekranında, disk ve artımlı yedeklemeleri kaydetmek ne zaman kaydedildi kurtarma noktalarını tutmak ne kadar süre seçin. **İleri**’ye tıklayın.
+5. **Kısa dönem hedeflerini belirtin** ekranında, diske kaydedilen kurtarma noktalarının ne kadar süreyle saklanacağını ve artımlı yedeklemelerin ne zaman kaydedileceğini seçin. **İleri**’ye tıklayın.
 
     > [!IMPORTANT]
-    > Yapmanız gerekenler **değil** beş günden fazla bir süre için Azure Backup sunucusu bağlı disklerde operasyonel Kurtarma (Yedekleme) verileri korur.
+    > Beş günden uzun bir süre boyunca Azure Backup Sunucusu bağlı disklerde işlemsel kurtarma (yedekleme) **verilerini saklamamalıdır** .
     >
 
-    ![Yeni koruma grubu Sihirbazı'nı açar.](./media/backup-mabs-files-applications-azure-stack/7-select-short-term-goals.png) 
+    ![Yeni Koruma Grubu Sihirbazı açılır](./media/backup-mabs-files-applications-azure-stack/7-select-short-term-goals.png)
 
-    Hızlı çalıştırmak için artımlı yedeklemeler için bir aralık seçmek yerine hemen her önce tam yedekleme zamanlanmış kurtarma noktası, tıklayın **bir kurtarma noktasından hemen önce**. Uygulama iş yüklerini koruyorsanız, (uygulamanın artımlı yedeklemeleri desteklediği koşuluyla) Azure Backup sunucusu başına eşitlemesinin sıklığı kurtarma noktası oluşturur. Uygulama artımlı yedeklemeleri desteklemiyorsa, Azure Backup sunucusu hızlı çalışan tam yedekleme.
+    Artımlı yedeklemeler için bir Aralık seçmek yerine, zamanlanan her kurtarma noktasının hemen öncesinde hızlı tam yedekleme çalıştırmak için, **bir kurtarma noktasının hemen öncesinde**' ne tıklayın. Uygulama iş yüklerini koruyorsanız, Azure Backup Sunucusu eşitleme sıklığı zamanlaması başına kurtarma noktaları oluşturur (uygulama artımlı yedeklemeleri desteklediğinde). Uygulama artımlı yedeklemeleri desteklemiyorsa Azure Backup Sunucusu hızlı tam yedekleme çalıştırır.
 
-    İçin **dosya kurtarma noktaları**, Kurtarma noktaları oluşturmak ne zaman belirtin. Tıklayın **Değiştir** kurtarma noktalarının oluşturulma haftanın günleri ve saatler ayarlamak için.
+    **Dosya kurtarma noktaları**için, kurtarma noktalarının ne zaman oluşturulacağını belirtin. Kurtarma noktalarının oluşturulduğu haftanın saatlerini ve günlerini ayarlamak için **Değiştir** ' e tıklayın.
 
-6. İçinde **disk ayırmasını gözden geçirin** ekranında, koruma grubu için ayrılmış depolama havuzu disk alanını inceleyin.
+6. **Disk ayırmayı İncele** ekranında, koruma grubu için ayrılmış depolama havuzu disk alanını gözden geçirin.
 
-    **Toplam veri boyutu** yedeklemek istediğiniz veri boyutu ve **sağlanacak alan Disk** üzerinde Azure Backup sunucusu koruma grubu için önerilen alandır. Azure Backup sunucusu ayarları temel alarak ideal yedekleme birimini seçer. Ancak, Disk ayırma ayrıntıları yedekleme birimi seçeneklerini düzenleyebilirsiniz. İş yükleri için açılan menüden tercih edilen depolamayı seçin. Düzenlemeleriniz kullanılabilir Disk depolama alanı bölmesinde toplam depolama alanı ve boş depolama alanı için değerleri değiştirin. Yetersiz sağlanmış alan Azure Backup sunucusu, yedeklemeler sayesinde gelecekte sorunsuz bir şekilde devam etmek için birime eklemenizi önerdiği depolama miktarıdır.
+    **Toplam veri boyutu** , yedeklemek istediğiniz verilerin boyutudur ve Azure Backup sunucusu üzerinde **sağlanacak disk alanı** , koruma grubu için önerilen alandır. Azure Backup Sunucusu, ayarlara bağlı olarak ideal yedekleme birimini seçer. Ancak, disk ayırma ayrıntılarında yedekleme birimi seçimlerini düzenleyebilirsiniz. İş yükleri için açılan menüden tercih edilen depolamayı seçin. Düzenlemeleriniz, kullanılabilir Disk Depolama bölmesinde toplam depolama ve boş depolama değerlerini değiştirir. Yetersiz sağlanan alan, daha sonra yedeklemeye sorunsuz bir şekilde devam etmek için, birime eklemenizi öneren Azure Backup Sunucusu depolama miktarıdır.
 
-7. İçinde **çoğaltma oluşturma yöntemini seçin**nasıl ilk tam veri çoğaltmasını istediğinizi seçin. Ağ üzerinden çoğaltmasına karar verirseniz, yoğun olmayan bir saat seçtiğiniz Azure önerir. Büyük miktarda veri ve en iyi durumda olmayan ağ koşulları için verileri çıkarılabilir medya kullanarak çoğaltmayı göz önünde bulundurun.
+7. **Çoğaltma oluşturma yöntemini seçin**kısmında ilk tam veri çoğaltmasını nasıl işlemek istediğinizi seçin. Ağ üzerinden çoğaltmaya karar verirseniz, Azure yoğun olmayan bir zaman seçmenizi önerir. Büyük miktarlarda veri veya en iyi ağ koşullarına göre, verileri çıkarılabilir medya kullanarak çoğaltmayı göz önünde bulundurun.
 
-8. İçinde **tutarlılık denetimi seçenekleri**nasıl tutarlılık denetimleri otomatikleştirilmesini istediğinizi seçin. Veri çoğaltma tutarsız hale geldiğinde veya bir zamanlamaya göre çalıştırmak tutarlılık denetimlerini etkinleştir. Otomatik tutarlılık denetimini yapılandırmak istemiyorsanız, istediğiniz zaman el ile denetim çalıştırın:
-    * İçinde **koruma** Azure Backup sunucusu konsolunun alana sağ tıklayın ve koruma grubunu seçin **tutarlılık denetimi gerçekleştir**.
+8. **Tutarlılık denetimi seçenekleri**' nde, tutarlılık denetimlerini otomatik hale getirmek istediğinizi seçin. Tutarlılık denetimlerini yalnızca veri çoğaltma tutarsız hale geldiğinde veya bir zamanlamaya göre çalışacak şekilde etkinleştirin. Otomatik tutarlılık denetimini yapılandırmak istemiyorsanız, istediğiniz zaman el ile denetim çalıştırın:
+    * Azure Backup Sunucusu konsolunun **koruma** alanında, koruma grubuna sağ tıklayın ve **tutarlılık denetimi gerçekleştir**' i seçin.
 
-9. Üzerinde Azure'a yedeklemek isterseniz **çevrimiçi koruma verilerini belirtin** sayfasında Azure'a yedeklemek istediğiniz iş yüklerinin seçili olduğundan emin olun.
+9. Azure 'a yedeklemeyi seçerseniz, **çevrimiçi koruma verilerini belirtin** sayfasında Azure 'a yedeklemek istediğiniz iş yüklerinin seçili olduğundan emin olun.
 
-10. İçinde **çevrimiçi yedekleme zamanlamasını**, azure'a artımlı yedeklemelerin ne zaman gerçekleşmesi gerektiğini belirtin. 
+10. **Çevrimiçi yedekleme zamanlamasını belirtin**kısmında, Azure 'a artımlı yedeklemelerin ne zaman gerçekleşeceğini belirtin.
 
-    Her gün/hafta/ay/yıl ve hangi çalışacakları saat/tarih çalışacak yedeklemeler zamanlayabilirsiniz. Yedeklemeler günde ortaya çıkabilir. Bir yedekleme işinin çalışma, her zaman Azure Backup sunucusu diskte depolanan yedeklenmiş verilerin kopyasından Azure üzerinde bir kurtarma noktası oluşturulur.
+    Yedeklemeleri, her gün/hafta/ay/yıl ve çalıştırılacağı zaman/tarih ile çalışacak şekilde zamanlayabilirsiniz. Yedeklemeler günde en fazla iki kez bulunabilir. Bir yedekleme işi her çalıştığında, Azure 'da Azure Backup Sunucusu diskte depolanan yedeklenen verilerin kopyasından bir veri kurtarma noktası oluşturulur.
 
-11. İçinde **çevrimiçi bekletme ilkesini belirtin**, günlük/Haftalık/Aylık/yıllık yedeklerden oluşturulan kurtarma noktalarının Azure'da nasıl bekletileceğini belirtin.
+11. **Çevrimiçi saklama Ilkesini belirtin**kısmında günlük/haftalık/aylık/yıllık yedeklerden oluşturulan kurtarma noktalarının Azure 'da nasıl korunacağını belirtin.
 
-12. İçinde **çevrimiçi çoğaltma seçin**, ilk tam veri çoğaltmanın nasıl gerçekleştirildiğini belirtin. 
+12. **Çevrimiçi çoğaltma Seç**' de, verilerin ilk tam çoğaltmasının nasıl gerçekleşeceğini belirtin.
 
-13. Üzerinde **özeti**, ayarlarınızı gözden geçirin. Tıkladığınızda **Grup Oluştur**, ilk veri çoğaltma gerçekleşir. Veri kopyalama tamamlandığında, üzerinde **durumu** sayfasında, koruma grubunun durumu gösteren olarak **Tamam**. İlk yedekleme işini ayarlarına uygun olarak bir koruma grubu gerçekleşir.
+13. **Özet**sayfasında, ayarlarınızı gözden geçirin. **Grup Oluştur**' a tıkladığınızda, ilk veri çoğaltması oluşur. Veri çoğaltma tamamlandığında, **durum** sayfasında, koruma grubu durumu **Tamam**olarak gösterilir. İlk yedekleme işi, koruma grubu ayarları ile birlikte gerçekleşir.
 
-## <a name="recover-file-data"></a>Dosya verilerini kurtarma
+## <a name="recover-file-data"></a>Dosya verilerini kurtar
 
-Sanal makinenize verileri kurtarmak için Azure Backup Sunucusu konsolunu kullanın.
+Verileri sanal makinenize kurtarmak için Azure Backup Sunucusu konsolunu kullanın.
 
-1. Azure Backup sunucusu konsolunda, gezinti çubuğunda tıklatın **kurtarma** kurtarmak istediğiniz verilerin göz atın. Sonuçlar bölmesinde verileri seçin.
+1. Azure Backup Sunucusu konsolunda, gezinti çubuğunda **Kurtarma** ' yı tıklatın ve kurtarmak istediğiniz verilere gidin. Sonuçlar bölmesinde verileri seçin.
 
-2. Kurtarma noktaları bölümündeki takvimde Kalın tarihleri kullanılabilir kurtarma noktalarını belirtin. Kurtarma tarihi seçin.
+2. Kurtarma noktaları bölümündeki takvimde, kalın olan tarihler kurtarma noktalarının kullanılabilir olduğunu gösterir. Kurtarılacak tarihi seçin.
 
-3. İçinde **kurtarılabilir öğe** bölmesinde, kurtarmak istediğiniz öğeyi seçin.
+3. **Kurtarılabilir öğe** bölmesinde, kurtarmak istediğiniz öğeyi seçin.
 
-4. İçinde **eylemleri** bölmesinde tıklayın **kurtarmak** Kurtarma Sihirbazı'nı açın.
+4. Kurtarma Sihirbazı 'nı açmak için **Eylemler** bölmesinde **kurtar** ' ı tıklatın.
 
-5. Veriler aşağıdaki gibi kurtarabilirsiniz:
+5. Verileri aşağıdaki şekilde kurtarabilirsiniz:
 
-    * **Özgün konumuna kurtarma** -istemci bilgisayar VPN üzerinden bağlı ise, bu seçeneği çalışmıyor. Bunun yerine alternatif bir konum kullanın ve verileri o konumdan kopyalayın.
-    * **Alternatif bir konuma Kurtar**
+    * **Özgün konuma kurtar** -ISTEMCI bilgisayar VPN üzerinden bağlandıysa, bu seçenek çalışmaz. Bunun yerine, alternatif bir konum kullanın ve ardından bu konumdan verileri kopyalayın.
+    * **Alternatif bir konuma kurtar**
 
 6. Kurtarma seçeneklerini belirtin:
 
-    * İçin **var olan sürüm kurtarma davranışı**seçin **kopya oluştur**, **atla**, veya **üzerine yaz**. Üzerine yalnızca özgün konuma kurtarma yaptığınızda kullanılabilir.
-    * İçin **geri güvenlik**, seçin **ayarlarını hedef bilgisayara Uygula** veya **kurtarma noktası sürümünün güvenlik ayarlarını uygula**.
-    * İçin **ağ bant genişliği kullanımını azaltma**, tıklayın **Değiştir** ağ bant genişliği kullanımını azaltmayı etkinleştirmek için.
-    * **Bildirim** tıklayın **kurtarma tamamlandığında e-posta Gönder**, ve bildirimi alacak olan alıcıları belirtin. E-posta adreslerini virgülle ayırın.
-    * Seçimleri yaptıktan sonra tıklayın **İleri**
+    * **Var olan sürüm kurtarma davranışı**Için **kopyalama oluştur**, **Atla**veya **üzerine yaz**' ı seçin. Üzerine yazma yalnızca özgün konuma kurtarma sırasında kullanılabilir.
+    * **Güvenlik geri yükleme**için **hedef bilgisayarın ayarlarını uygula** ' yı veya **Kurtarma noktası sürümünün güvenlik ayarlarını uygula**' yı seçin.
+    * **Ağ bant genişliği kullanımını azaltma**için, ağ bant genişliği kullanımını azaltmayı etkinleştirmek için **Değiştir** ' e tıklayın.
+    * **Bildirim** **Kurtarma tamamlandığında e-posta gönder**' i tıklatın ve bildirimi alacak alıcıları belirtin. E-posta adreslerini virgülle ayırın.
+    * Seçimleri yaptıktan sonra **İleri** ' ye tıklayın.
 
-7. Kurtarma ayarlarınızı gözden geçirin ve tıklayın **kurtarmak**. 
+7. Kurtarma ayarlarınızı gözden geçirin ve **kurtar**' ı tıklatın.
 
-    > [!Note] 
-    > Kurtarma işi devam ederken, seçilen kurtarma öğeleri için tüm eşitleme işleri iptal edilir.
-    >
+    >[!Note]
+    >Kurtarma işi devam ederken, seçilen kurtarma öğeleri için tüm eşitleme işleri iptal edilir.
 
-Modern yedekleme depolama alanı (MBS) kullanıyorsanız, dosya sunucusu son kullanıcı Kurtarma (EUR) desteklenmez. Dosya sunucusu EUR Birim Gölge Kopyası Hizmeti (Modern yedekleme depolama alanı kullanmaz, VSS üzerinde), bir bağımlılığı vardır. EUR etkinleştirilirse, verileri kurtarmak için aşağıdaki adımları kullanın:
+Modern Yedekleme Alanı (MB) kullanıyorsanız, dosya sunucusu son kullanıcı kurtarma (EUR) desteklenmez. Dosya sunucusu EUR 'nin Birim Gölge Kopyası Hizmeti (VSS) bağımlılığı vardır ve bu Modern Yedekleme Alanı kullanmaz. EUR etkinse, verileri kurtarmak için aşağıdaki adımları kullanın:
 
-1. Korumalı dosyalara gidin ve dosya adını sağ tıklatın ve seçin **özellikleri**.
+1. Korunan dosyalar ' a gidin ve dosya adına sağ tıklayıp **Özellikler**' i seçin.
 
-2. Üzerinde **özellikleri** menüsünde tıklatın **önceki sürümler** ve kurtarmak istediğiniz sürümü seçin.
+2. **Özellikler** menüsünde, **önceki sürümler** ' e tıklayın ve kurtarmak istediğiniz sürümü seçin.
 
-## <a name="view-azure-backup-server-with-a-vault"></a>Bir kasa ile görünümü Azure Backup sunucusu
-Azure portalında Azure Backup sunucusu olan varlıkları görüntülemek için aşağıdaki adımları izleyin:
+## <a name="view-azure-backup-server-with-a-vault"></a>Kasala Azure Backup Sunucusu görüntüleme
+
+Azure portal Azure Backup Sunucusu varlıkları görüntülemek için aşağıdaki adımları izleyebilirsiniz:
+
 1. Kurtarma Hizmetleri kasasını açın.
-2. Yedekleme Altyapısı'nı tıklatın.
-3. Yedekleme Yönetimi sunucularının görünümü.
+2. Yedekleme Altyapısı ' na tıklayın.
+3. Yedekleme yönetim sunucularını görüntüleyin.
 
-## <a name="see-also"></a>Ayrıca bkz.
-Diğer iş yüklerini korumak için Azure Backup sunucusu kullanma hakkında daha fazla bilgi için aşağıdaki makalelerden birine bakın:
-- [SharePoint grubunu yedekleme](https://docs.microsoft.com/azure/backup/backup-mabs-sharepoint-azure-stack)
-- [SQL server'ı yedekleme](https://docs.microsoft.com/azure/backup/backup-mabs-sql-azure-stack)
+## <a name="next-steps"></a>Sonraki adımlar
+
+Diğer iş yüklerini korumak için Azure Backup Sunucusu kullanma hakkında daha fazla bilgi için aşağıdaki makalelerden birine bakın:
+
+* [SharePoint grubunu yedekleme](https://docs.microsoft.com/azure/backup/backup-mabs-sharepoint-azure-stack)
+* [SQL Server 'ı yedekleme](https://docs.microsoft.com/azure/backup/backup-mabs-sql-azure-stack)

@@ -1,169 +1,171 @@
 ---
-title: Azure DNS'yi kullanarak Azure kaynaklarınızı tümleştirme
-description: Boyunca Azure DNS, DNS, Azure kaynaklarınızı sağlamak için kullanmayı öğrenin.
+title: Azure DNS Azure kaynaklarınızla tümleştirin
+description: Azure kaynaklarınız için DNS sağlamak üzere Azure DNS kullanımı hakkında bilgi edinin.
 services: dns
 author: vhorne
 ms.service: dns
 ms.topic: article
-ms.date: 1/18/2019
+ms.date: 7/13/2019
 ms.author: victorh
-ms.openlocfilehash: 5c098c6c22b079d586c0bd808df9af4a737c17a8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 051aabed758f80208549cf64bf5d74b1fecfbe75
+ms.sourcegitcommit: 470041c681719df2d4ee9b81c9be6104befffcea
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62096257"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67854166"
 ---
-# <a name="use-azure-dns-to-provide-custom-domain-settings-for-an-azure-service"></a>Bir Azure hizmeti için özel etki alanı ayarları sağlamak için Azure DNS kullanma
+# <a name="use-azure-dns-to-provide-custom-domain-settings-for-an-azure-service"></a>Azure hizmeti için özel etki alanı ayarları sağlamak üzere Azure DNS kullanma
 
-Azure DNS özel etki alanları desteği ya da tam etki alanı adı (FQDN) sahip tüm Azure kaynaklarınızın için özel bir etki alanı için DNS sağlar. Bir Azure web uygulamanız ve ya da erişmesini istediğiniz örnektir contoso.com veya www kullanarak\.bir FQDN olarak contoso.com. Bu makalede, Azure service ile Azure DNS özel etki alanlarını kullanmak için nasıl yapılandıracağınız anlatılmaktadır.
+Azure DNS, özel etki alanlarını destekleyen veya tam etki alanı adı (FQDN) olan Azure kaynaklarınızın herhangi biri için özel bir etki alanı için DNS sağlar. Örneğin, bir Azure Web uygulamanız var ve kullanıcılarınızın buna bir FQDN olarak contoso.com ya da www\.contoso.com kullanarak erişmesini istiyorsunuz. Bu makalede, Azure hizmetinizi özel etki alanlarının kullanımı için Azure DNS yapılandırma adımları gösterilmektedir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure DNS için özel etki alanınızı kullanmak için etki alanınızı Azure DNS'e devretmeniz gerekir. Ziyaret [bir etki alanını Azure DNS'ye devretme](./dns-delegate-domain-azure-dns.md) ad sunucularınızın temsilcisi için yapılandırma hakkında yönergeler için. Etki alanınızda, Azure DNS bölgesini temsilci sonra gerekli DNS kayıtlarını yapılandırabilirsiniz.
+Özel etki alanınız için Azure DNS kullanabilmeniz için öncelikle etki alanınızı Azure DNS için temsilci olarak vermelisiniz. Ad sunucularınızı temsilci olarak yapılandırmayla ilgili yönergeler için [Azure DNS için bir etki alanı temsilcisini](./dns-delegate-domain-azure-dns.md) ziyaret edin. Etki alanınız Azure DNS bölgenize atandıktan sonra, gereken DNS kayıtlarını yapılandırabilirsiniz.
 
-Gösterim veya özel etki alanı için yapılandırabileceğiniz [Azure işlev uygulamaları](#azure-function-app), [genel IP adresleri](#public-ip-address), [App Service (Web uygulamaları)](#app-service-web-apps), [Blob Depolama](#blob-storage), ve [Azure CDN](#azure-cdn).
+[Azure işlev uygulamaları](#azure-function-app), [genel IP adresleri](#public-ip-address), [App Service (Web Apps)](#app-service-web-apps), [BLOB depolama](#blob-storage)ve [Azure CDN](#azure-cdn)için bir gösterim veya özel etki alanı yapılandırabilirsiniz.
 
-## <a name="azure-function-app"></a>Azure işlev uygulaması
+## <a name="azure-function-app"></a>Azure İşlev Uygulaması
 
-Azure işlev uygulamaları için özel bir etki alanı yapılandırmak için işlev uygulaması yapılandırmasına yanı sıra bir CNAME kaydı oluşturulur.
+Azure işlev uygulamaları için özel bir etki alanı yapılandırmak üzere, bir CNAME kaydının ve işlev uygulamasının kendisi üzerinde yapılandırma olarak oluşturulması gerekir.
  
-Gidin **işlev uygulaması** ve işlev uygulamanızı seçin. Tıklayın **Platform özellikleri** altında **ağ** tıklayın **özel etki alanları**.
+**İşlev uygulaması** gidin ve işlev uygulamanızı seçin. **Platform özellikleri** ' ne ve **ağ** altında **özel etki alanları**' na tıklayın.
 
-![işlev uygulaması dikey](./media/dns-custom-domain/functionapp.png)
+![işlev uygulaması dikey penceresi](./media/dns-custom-domain/functionapp.png)
 
-Geçerli URL'sini not alın **özel etki alanları** dikey penceresinde, bu adresi diğer ad olarak oluşturulan DNS kaydı için kullanılır.
+**Özel etki alanları** dikey penceresindeki geçerli URL 'yi aklınızda, bu adres oluşturulan DNS kaydı için diğer ad olarak kullanılır.
 
-![özel etki alanı dikey penceresi](./media/dns-custom-domain/functionshostname.png)
+![Özel etki alanı dikey penceresi](./media/dns-custom-domain/functionshostname.png)
 
-DNS bölgenizi gelin ve tıklayın **+ kayıt kümesi**. Aşağıdaki bilgileri doldurun **kayıt kümesi Ekle** dikey de **Tamam** oluşturun.
+DNS bölgenize gidin ve **+ kayıt kümesi**' ne tıklayın. **Kayıt kümesi Ekle** dikey penceresinde aşağıdaki bilgileri doldurun ve oluşturmak için **Tamam** ' ı tıklatın.
 
-|Özellik  |Değer  |Açıklama  |
+|Özellik  |Value  |Açıklama  |
 |---------|---------|---------|
-|Ad     | myfunctionapp        | Bu etki alanı ad etiketi ile birlikte özel etki alanı adı FQDN değerdir.        |
-|Tür     | CNAME        | Bir diğer ad kullanımı bir CNAME kaydı kullanıyor.        |
-|TTL     | 1        | 1 saat boyunca 1 kullanılır        |
-|TTL birimi     | Saat        | Saatleri zaman ölçümü kullanılır         |
-|Alias     | adatumfunction.azurewebsites.net        | DNS adı varsayılan olarak işlev uygulaması için sağlanan adatumfunction.azurewebsites.net DNS adı olduğu Bu örnekte, diğer oluşturuyorsunuz.        |
+|Ad     | myfunctionapp        | Bu değer, etki alanı adı etiketiyle birlikte özel etki alanı adı için FQDN 'dir.        |
+|Type     | CNAME        | CNAME kaydı kullanmak bir diğer ad kullanıyor.        |
+|TTL     | 1\.        | 1 saat için 1 kullanılır        |
+|TTL birimi     | Saat        | Saatler zaman ölçümü olarak kullanılır         |
+|Alias     | adatumfunction.azurewebsites.net        | Diğer adı oluşturmakta olduğunuz DNS adı, bu örnekte, işlev uygulaması için varsayılan olarak sağlanmış olan adatumfunction.azurewebsites.net DNS adıdır.        |
 
-İşlev uygulamanıza geri gidin, tıklayın **Platform özellikleri**, altında **ağ** tıklayın **özel etki alanları**, altında **özel ana bilgisayar adları** tıklayın **+ konak adı Ekle**.
+İşlev uygulamanıza geri gidin, **platform özellikleri**' ne tıklayın ve **ağ** ' ın altında **özel etki alanları**' na tıklayın, ardından **özel ana bilgisayar adları** ' na tıklayarak **+ konak**
 
-Üzerinde **konak adı Ekle** dikey penceresinde, CNAME kaydı girin **hostname** metni alanına ve tıklayın **doğrulama**. Kaydı bulunamazsa, **konak adı Ekle** düğmesi görünür. Tıklayın **konak adı Ekle** diğer ad eklemek için.
+**Konak adı Ekle** dikey penceresinde, **hostname** metin alanına CNAME kaydını girin ve **Doğrula**' ya tıklayın. Kayıt bulunursa, **ana bilgisayar adı Ekle** düğmesi görüntülenir. Diğer adı eklemek için **konak adı Ekle** ' ye tıklayın.
 
-![işlev uygulamaları konak adı dikey penceresi ekleme](./media/dns-custom-domain/functionaddhostname.png)
+![işlev uygulamaları konak adı Ekle dikey penceresi](./media/dns-custom-domain/functionaddhostname.png)
 
 ## <a name="public-ip-address"></a>Genel IP adresi
 
-Özel bir etki alanı için bir genel IP kullanan hizmetler Application Gateway, yük dengeleyici, bulut hizmeti, Resource Manager Vm'lerinde gibi kaynak adres ve klasik VM'ler, bir A kaydı kullanılan yapılandırmak için.
+Application Gateway, Load Balancer, bulut hizmeti, Kaynak Yöneticisi VM 'Ler ve klasik VM 'Ler gibi genel bir IP adresi kaynağı kullanan hizmetler için özel bir etki alanı yapılandırmak için bir kayıt kullanılır.
 
-Gidin **ağ** > **genel IP adresi**, genel IP kaynağı seçin ve tıklayın **yapılandırma**. Gösterilen IP adresiyle bildirmek.
+**Ağ** > **genel IP adresi**' ne gidin, genel IP kaynağını seçin ve **yapılandırma**' ya tıklayın. Gösterilen IP adresini önemli bir şekilde ekleyin.
 
-![genel IP dikey penceresi](./media/dns-custom-domain/publicip.png)
+![Genel IP dikey penceresi](./media/dns-custom-domain/publicip.png)
 
-DNS bölgenizi gelin ve tıklayın **+ kayıt kümesi**. Aşağıdaki bilgileri doldurun **kayıt kümesi Ekle** dikey de **Tamam** oluşturun.
+DNS bölgenize gidin ve **+ kayıt kümesi**' ne tıklayın. **Kayıt kümesi Ekle** dikey penceresinde aşağıdaki bilgileri doldurun ve oluşturmak için **Tamam** ' ı tıklatın.
 
 
 |Özellik  |Değer  |Açıklama  |
 |---------|---------|---------|
-|Ad     | mywebserver        | Bu etki alanı ad etiketi ile birlikte özel etki alanı adı FQDN değerdir.        |
-|Tür     | A        | Kaynak IP adresi olduğu gibi bir A kaydı kullanın.        |
-|TTL     | 1        | 1 saat boyunca 1 kullanılır        |
-|TTL birimi     | Saat        | Saatleri zaman ölçümü kullanılır         |
+|Ad     | MyWebServer        | Bu değer, etki alanı adı etiketiyle birlikte özel etki alanı adı için FQDN 'dir.        |
+|Type     | A        | Kaynak bir IP adresi olduğu için bir kayıt kullanın.        |
+|TTL     | 1\.        | 1 saat için 1 kullanılır        |
+|TTL birimi     | Saat        | Saatler zaman ölçümü olarak kullanılır         |
 |IP Adresi     | `<your ip address>`       | Genel IP adresi.|
 
-![bir A kaydı oluşturma](./media/dns-custom-domain/arecord.png)
+![Bir kayıt oluştur](./media/dns-custom-domain/arecord.png)
 
-A kaydını oluşturulduktan sonra Çalıştır `nslookup` kayıt çözümler doğrulamak için.
+Kayıt oluşturulduktan sonra, kaydın çözümlendiğini doğrulamak `nslookup` için öğesini çalıştırın.
 
-![genel IP dns araması](./media/dns-custom-domain/publicipnslookup.png)
+![Genel IP DNS araması](./media/dns-custom-domain/publicipnslookup.png)
 
-## <a name="app-service-web-apps"></a>App Service (Web uygulamaları)
+## <a name="app-service-web-apps"></a>App Service (Web Apps)
 
-Aşağıdaki adımları bir app service web uygulaması için özel bir etki alanı yapılandırma yoluyla uygulayın.
+Aşağıdaki adımlarda, bir App Service Web uygulaması için özel bir etki alanı yapılandırma işlemleri yapılır.
 
-Gidin **App Service** ve bir özel etki alanı adı yapılandırma ve tıklayın kaynağı seçin **özel etki alanları**.
+**App Service** gidin ve özel bir etki alanı adı yapılandırdığınız kaynağı seçin ve **özel etki alanları**' na tıklayın.
 
-Geçerli URL'sini not alın **özel etki alanları** dikey penceresinde, bu adresi diğer ad olarak oluşturulan DNS kaydı için kullanılır.
+**Özel etki alanları** dikey penceresindeki geçerli URL 'yi aklınızda, bu adres oluşturulan DNS kaydı için diğer ad olarak kullanılır.
 
-![özel etki alanları dikey penceresi](./media/dns-custom-domain/url.png)
+![Özel etki alanları dikey penceresi](./media/dns-custom-domain/url.png)
 
-DNS bölgenizi gelin ve tıklayın **+ kayıt kümesi**. Aşağıdaki bilgileri doldurun **kayıt kümesi Ekle** dikey de **Tamam** oluşturun.
+DNS bölgenize gidin ve **+ kayıt kümesi**' ne tıklayın. **Kayıt kümesi Ekle** dikey penceresinde aşağıdaki bilgileri doldurun ve oluşturmak için **Tamam** ' ı tıklatın.
 
 
-|Özellik  |Değer  |Açıklama  |
+|Özellik  |Value  |Açıklama  |
 |---------|---------|---------|
-|Ad     | mywebserver        | Bu etki alanı ad etiketi ile birlikte özel etki alanı adı FQDN değerdir.        |
-|Tür     | CNAME        | Bir diğer ad kullanımı bir CNAME kaydı kullanıyor. Kaynak IP adresi kullandıysanız, bir A kaydı kullanılabilir.        |
-|TTL     | 1        | 1 saat boyunca 1 kullanılır        |
-|TTL birimi     | Saat        | Saatleri zaman ölçümü kullanılır         |
-|Alias     | webserver.azurewebsites.net        | DNS adı varsayılan olarak web uygulaması için sağlanan webserver.azurewebsites.net DNS adı olduğu Bu örnekte, diğer oluşturuyorsunuz.        |
+|Ad     | MyWebServer        | Bu değer, etki alanı adı etiketiyle birlikte özel etki alanı adı için FQDN 'dir.        |
+|Type     | CNAME        | CNAME kaydı kullanmak bir diğer ad kullanıyor. Kaynak bir IP adresi kullansaydı bir kayıt kullanılır.        |
+|TTL     | 1\.        | 1 saat için 1 kullanılır        |
+|TTL birimi     | Saat        | Saatler zaman ölçümü olarak kullanılır         |
+|Alias     | webserver.azurewebsites.net        | Diğer adı oluşturmakta olduğunuz DNS adı, bu örnekte varsayılan olarak Web uygulamasına sunulan webserver.azurewebsites.net DNS adıdır.        |
 
 
-![bir CNAME kaydı oluşturun](./media/dns-custom-domain/createcnamerecord.png)
+![CNAME kaydı oluşturma](./media/dns-custom-domain/createcnamerecord.png)
 
-Özel etki alanı adı için yapılandırılmış app Service'e geri gidin. Tıklayın **özel etki alanları**, ardından **ana bilgisayar adları**. Oluşturduğunuz CNAME kaydı eklemek için tıklatın **+ konak adı Ekle**.
+Özel etki alanı adı için yapılandırılmış olan App Service 'e geri gidin. **Özel etki alanları**' na ve ardından **konak adları**' na tıklayın Oluşturduğunuz CNAME kaydını eklemek için **+ konak adı Ekle**' ye tıklayın.
 
 ![Şekil 1](./media/dns-custom-domain/figure1.png)
 
-İşlem tamamlandıktan sonra Çalıştır **nslookup** ad çözümlemesini doğrulamak için çalışmaktadır.
+İşlem tamamlandıktan sonra, ad çözümlemenin çalıştığını doğrulamak için **nslookup** ' ı çalıştırın.
 
 ![Şekil 1](./media/dns-custom-domain/finalnslookup.png)
 
-App Service özel etki alanı eşleme hakkında daha fazla bilgi edinmek için [mevcut bir özel DNS adını Azure Web Apps ile eşleme](../app-service/app-service-web-tutorial-custom-domain.md?toc=%dns%2ftoc.json).
+Özel bir etki alanını App Service eşleme hakkında daha fazla bilgi edinmek için, [mevcut bir özel DNS adını Azure Web Apps eşleme](../app-service/app-service-web-tutorial-custom-domain.md?toc=%dns%2ftoc.json)adresini ziyaret edin.
 
-Özel bir etki alanı satın almak için ihtiyacınız varsa bkz [Azure Web Apps için bir özel etki alanı adı satın alma](../app-service/manage-custom-dns-buy-domain.md) App Service etki alanları hakkında daha fazla bilgi edinmek için.
+Etkin bir DNS adını nasıl geçirebileceğinizi öğrenmek için bkz. [Azure App Service için etkin BIR DNS adı geçirme](../app-service/manage-custom-dns-migrate-domain.md).
+
+Özel bir etki alanı satın almanız gerekiyorsa, App Service etki alanları hakkında daha fazla bilgi edinmek için [Azure Web Apps için özel etki alanı adı satın alma](../app-service/manage-custom-dns-buy-domain.md) sayfasını ziyaret edin.
 
 ## <a name="blob-storage"></a>Blob depolama
 
-Aşağıdaki adımları asverify yöntemi kullanarak blob depolama hesabı için bir CNAME kaydı nasıl yapılandıracağınız uygulayın. Bu yöntem, kapalı kalma süresi sağlar.
+Aşağıdaki adımlar, asverify metodunu kullanarak bir BLOB depolama hesabı için bir CNAME kaydı yapılandırmanıza yardımcı olacak. Bu yöntem, kapalı kalma süresi olmamasını sağlar.
 
-Gidin **depolama** > **depolama hesapları**, depolama hesabınızı seçin ve tıklayın **özel etki alanı**. 2\. adım altında FQDN bildirmek, bu değer, ilk CNAME kaydı oluşturmak için kullanılır
+**Depolama** > **depolama hesapları**' na gidin, depolama hesabınızı seçin ve **özel etki alanı**' na tıklayın. 2\. adım altında FQDN 'yi oluşturma, bu değer ilk CNAME kaydını oluşturmak için kullanılır
 
-![BLOB Depolama özel etki alanı](./media/dns-custom-domain/blobcustomdomain.png)
+![BLOB depolama özel etki alanı](./media/dns-custom-domain/blobcustomdomain.png)
 
-DNS bölgenizi gelin ve tıklayın **+ kayıt kümesi**. Aşağıdaki bilgileri doldurun **kayıt kümesi Ekle** dikey de **Tamam** oluşturun.
+DNS bölgenize gidin ve **+ kayıt kümesi**' ne tıklayın. **Kayıt kümesi Ekle** dikey penceresinde aşağıdaki bilgileri doldurun ve oluşturmak için **Tamam** ' ı tıklatın.
 
 
-|Özellik  |Değer  |Açıklama  |
+|Özellik  |Value  |Açıklama  |
 |---------|---------|---------|
-|Ad     | asverify.mystorageaccount        | Bu etki alanı ad etiketi ile birlikte özel etki alanı adı FQDN değerdir.        |
-|Tür     | CNAME        | Bir diğer ad kullanımı bir CNAME kaydı kullanıyor.        |
-|TTL     | 1        | 1 saat boyunca 1 kullanılır        |
-|TTL birimi     | Saat        | Saatleri zaman ölçümü kullanılır         |
-|Alias     | asverify.adatumfunctiona9ed.blob.core.windows.net        | DNS adı Bu örnekte, varsayılan depolama hesabı tarafından sağlanan asverify.adatumfunctiona9ed.blob.core.windows.net DNS adı olduğu için diğer ad oluşturuyorsunuz.        |
+|Ad     | asverify. mystorageaccount        | Bu değer, etki alanı adı etiketiyle birlikte özel etki alanı adı için FQDN 'dir.        |
+|Type     | CNAME        | CNAME kaydı kullanmak bir diğer ad kullanıyor.        |
+|TTL     | 1\.        | 1 saat için 1 kullanılır        |
+|TTL birimi     | Saat        | Saatler zaman ölçümü olarak kullanılır         |
+|Alias     | asverify.adatumfunctiona9ed.blob.core.windows.net        | Diğer adı oluşturmakta olduğunuz DNS adı, bu örnekte varsayılan olarak depolama hesabına sağlanmış olan asverify.adatumfunctiona9ed.blob.core.windows.net DNS adıdır.        |
 
-Tıklayarak, depolama hesabınıza gidin **depolama** > **depolama hesapları**, depolama hesabınızı seçin ve tıklayın **özel etki alanı**. Metin kutusundaki onay asverify öneki olmadan oluşturduğunuz diğer ad türü ** dolaylı CNAME doğrulaması kullan öğesini tıklatıp **Kaydet**. Bu adım tamamlandıktan sonra DNS bölgenizi dönün ve asverify öneki olmadan bir CNAME kaydı oluşturun.  Ondan sonra ön eki cdnverify CNAME kaydını silmek güvenlidir.
+Depolama**depolama hesapları**' **na tıklayarak** > depolama hesabınıza geri gidin, depolama hesabınızı seçin ve **özel etki alanı**' na tıklayın. Metin kutusunda asverify öneki olmadan oluşturduğunuz diğer adı yazın, * * dolaylı CNAME doğrulaması kullan ' ı işaretleyin ve **Kaydet**' e tıklayın. Bu adım tamamlandıktan sonra DNS bölgenize dönün ve asverify öneki olmadan bir CNAME kaydı oluşturun.  Bu noktadan sonra, CNAME kaydını cdnverify önekiyle silmeniz güvenlidir.
 
-![BLOB Depolama özel etki alanı](./media/dns-custom-domain/indirectvalidate.png)
+![BLOB depolama özel etki alanı](./media/dns-custom-domain/indirectvalidate.png)
 
-Çalıştırarak DNS çözümlemesini doğrulayın. `nslookup`
+Çalıştırarak DNS çözümlemesini doğrulama`nslookup`
 
-Ziyaret bir blob depolama uç noktasına özel etki alanı eşleme hakkında daha fazla bilgi edinmek için [Blob Depolama uç noktanız için bir özel etki alanı adı yapılandırma](../storage/blobs/storage-custom-domain-name.md?toc=%dns%2ftoc.json)
+Özel bir etki alanını BLOB depolama uç noktası ile eşleme hakkında daha fazla bilgi edinmek için [bkz. blob depolama uç noktanız için özel etki alanı adı yapılandırma](../storage/blobs/storage-custom-domain-name.md?toc=%dns%2ftoc.json)
 
 ## <a name="azure-cdn"></a>Azure CDN
 
-Aşağıdaki adımları cdnverify yöntemini kullanarak bir CDN uç noktası için bir CNAME kaydı nasıl yapılandıracağınız uygulayın. Bu yöntem, kapalı kalma süresi sağlar.
+Aşağıdaki adımlar, cdnverify metodunu kullanarak bir CDN uç noktası için CNAME kaydı yapılandırmaya kılavuzluk eden bir yöntemdir. Bu yöntem, kapalı kalma süresi olmamasını sağlar.
 
-Gidin **ağ** > **CDN profilleri**, CDN profilinizi seçin.
+**Ağ** > **CDN profilleri**' ne gidin, CDN profilinizi seçin.
 
-İle çalışma ve tıklayın uç noktayı seçin **+ özel etki alanı**. Not **uç noktası ana bilgisayar** CNAME kaydı için kaydı bu değeri olduğu gibi.
+Çalıştığınız uç noktayı seçin ve **+ özel etki alanı**' na tıklayın. Bu değer olarak, CNAME kaydının işaret ettiği kayıt olan **bitiş noktası ana bilgisayar adını** unutmayın.
 
 ![CDN özel etki alanı](./media/dns-custom-domain/endpointcustomdomain.png)
 
-DNS bölgenizi gelin ve tıklayın **+ kayıt kümesi**. Aşağıdaki bilgileri doldurun **kayıt kümesi Ekle** dikey de **Tamam** oluşturun.
+DNS bölgenize gidin ve **+ kayıt kümesi**' ne tıklayın. **Kayıt kümesi Ekle** dikey penceresinde aşağıdaki bilgileri doldurun ve oluşturmak için **Tamam** ' ı tıklatın.
 
 |Özellik  |Değer  |Açıklama  |
 |---------|---------|---------|
-|Ad     | cdnverify.mycdnendpoint        | Bu etki alanı ad etiketi ile birlikte özel etki alanı adı FQDN değerdir.        |
-|Tür     | CNAME        | Bir diğer ad kullanımı bir CNAME kaydı kullanıyor.        |
-|TTL     | 1        | 1 saat boyunca 1 kullanılır        |
-|TTL birimi     | Saat        | Saatleri zaman ölçümü kullanılır         |
-|Alias     | cdnverify.adatumcdnendpoint.azureedge.net        | DNS adı Bu örnekte, varsayılan depolama hesabı tarafından sağlanan cdnverify.adatumcdnendpoint.azureedge.net DNS adı olduğu için diğer ad oluşturuyorsunuz.        |
+|Ad     | cdnverify. mycdnendpoint        | Bu değer, etki alanı adı etiketiyle birlikte özel etki alanı adı için FQDN 'dir.        |
+|Type     | CNAME        | CNAME kaydı kullanmak bir diğer ad kullanıyor.        |
+|TTL     | 1\.        | 1 saat için 1 kullanılır        |
+|TTL birimi     | Saat        | Saatler zaman ölçümü olarak kullanılır         |
+|Alias     | cdnverify.adatumcdnendpoint.azureedge.net        | Diğer adı oluşturmakta olduğunuz DNS adı, bu örnekte varsayılan olarak depolama hesabına sağlanmış olan cdnverify.adatumcdnendpoint.azureedge.net DNS adıdır.        |
 
-Tıklayarak, CDN uç noktasına gidin **ağ** > **CDN profilleri**, CDN profilinizi seçin. Tıklayın **+ özel etki alanı** cdnverify öneki olmadan CNAME kaydı diğer adınızı girip __iade **Ekle**.
+**Ağ** > **CDN profilleri**' ne tıklayarak CDN uç noktanıza geri gidin ve CDN profilinizi seçin. **+ Özel etki alanı** ' na tıklayın ve cdnverify ÖNEKI olmadan CNAME kaydı diğer adınızı girip **Ekle**' ye tıklayın.
 
-Bu adım tamamlandıktan sonra DNS bölgenizi dönün ve cdnverify öneki olmadan bir CNAME kaydı oluşturun.  Ondan sonra ön eki cdnverify CNAME kaydını silmek güvenlidir. CDN ve Ara kayıt adımı olmadan özel bir etki alanı yapılandırma hakkında daha fazla bilgi için ziyaret [harita Azure CDN içeriğini özel bir etki alanıyla](../cdn/cdn-map-content-to-custom-domain.md?toc=%dns%2ftoc.json).
+Bu adım tamamlandıktan sonra DNS bölgenize dönün ve cdnverify öneki olmadan bir CNAME kaydı oluşturun.  Bu noktadan sonra, CNAME kaydını cdnverify önekiyle silmeniz güvenlidir. CDN hakkında daha fazla bilgi ve ara kayıt adımı olmadan özel bir etki alanını yapılandırma hakkında daha fazla bilgi için [harita Azure CDN içeriğini özel bir etki alanına](../cdn/cdn-map-content-to-custom-domain.md?toc=%dns%2ftoc.json)ziyaret edin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi edinmek için nasıl [Azure'da barındırılan hizmetleri için ters DNS yapılandırma](dns-reverse-dns-for-azure-services.md).
+[Azure 'da barındırılan hizmetler için ters DNS yapılandırmayı](dns-reverse-dns-for-azure-services.md)öğrenin.

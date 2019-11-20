@@ -1,57 +1,57 @@
 ---
-title: Azure veri fabrikası eşleme veri akışını dönüştürme Çöz
-description: Azure veri fabrikası eşleme veri akışını dönüştürme Çöz
+title: Azure Data Factory eşleme veri akışı UNPIVOT dönüşümü
+description: Azure Data Factory eşleme veri akışı UNPIVOT dönüşümü
 author: kromerm
 ms.author: makromer
 ms.reviewer: douglasl
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 01/30/2019
-ms.openlocfilehash: 160ff8bbcb8ce5a4f1f32245cc366281640c5919
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 41423f704c87f05ad3e31b253d4a80799a554849
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61348312"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72387739"
 ---
-# <a name="azure-data-factory-unpivot-transformation"></a>Azure veri fabrikası Çöz dönüştürme
+# <a name="azure-data-factory-unpivot-transformation"></a>Özet Azure Data Factory dönüştürmeyi kaldır
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
 
-Unpıvot ADF eşleme veri akışı tek bir kayıt içindeki birden fazla sütundaki değerleri tek bir sütunda aynı değerlerle birden fazla kayda genişleterek daha normalleştirilmiş bir sürümüne Normalleştirilmemiş bir veri kümesini açmak için bir yol kullanın.
 
-![Dönüştürme Çöz](media/data-flow/unpivot1.png "Çöz seçenekleri 1")
+Tek bir kayıttaki birden fazla sütundaki değerleri tek bir sütunda aynı değerlerle birden çok kayda genişleterek, Normalleştirilmemiş bir veri kümesini daha normalleştirilmiş bir sürüme dönüştürmek için bir yol olarak ADF eşleme veri akışı ' nda UNPIVOT kullanın.
 
-## <a name="ungroup-by"></a>Tarafından grubunu Çöz
+![Özet olmayan dönüştürme](media/data-flow/unpivot1.png "UNPIVOT seçenekleri 1")
 
-![Dönüştürme Çöz](media/data-flow/unpivot5.png "Çöz seçenekleri 2")
+## <a name="ungroup-by"></a>Çözme ölçütü
 
-İlk olarak, pivot toplama için istediğiniz Gruplanacak sütunları ayarlayın. İle çözme için bir veya daha fazla sütun kümesi + sütun listesi yanındaki işareti.
+![Özet olmayan dönüştürme](media/data-flow/unpivot5.png "Özet seçeneklerini kaldırma 2")
 
-## <a name="unpivot-key"></a>Anahtar Çöz
+İlk olarak, pivot toplamadır için gruplandırmak istediğiniz sütunları ayarlayın. Gruplama için bir veya daha fazla sütunu sütun listesinin yanındaki + işaretiyle ayarlayın.
 
-![Dönüştürme Çöz](media/data-flow/unpivot6.png "seçenekleri 3 Çöz")
+## <a name="unpivot-key"></a>Özet olmayan anahtar
 
-ADF satırdan sütuna Özet sütun Pivot anahtardır. Varsayılan olarak, bu alan için veri kümesindeki her bir benzersiz değer için bir sütun Özet. Ancak, Özet sütun değerleri istediğiniz veri kümesinden isteğe bağlı olarak değerleri girebilirsiniz.
+![Özet olmayan dönüştürme](media/data-flow/unpivot6.png "UNPIVOT seçenekleri 3")
 
-## <a name="unpivoted-columns"></a>Özet sütunlar çözüldü
+Pivot tuşu, ADF 'nin satırdan sütuna kadar Pivot olacağını belirten sütundur. Varsayılan olarak, bu alan için veri kümesindeki her benzersiz değer bir sütuna Özet olur. Ancak, isteğe bağlı olarak sütun değerlerine Pivot eklemek istediğiniz veri kümesinden değerleri girebilirsiniz.
 
-![Dönüştürme Çöz](media/data-flow//unpivot7.png "seçenekleri 4 Çöz")
+## <a name="unpivoted-columns"></a>Özetlenen sütunlar
 
-Son olarak, ve yeni çıkış projeksiyon dönüşümü gelen görüntülenecek sütunları yönteminizi özetlenmiş değerler için kullanmak istediğiniz toplama seçin.
+![Özet olmayan dönüştürme](media/data-flow//unpivot7.png "UNPIVOT seçenekleri 4")
 
-(İsteğe bağlı) Bir adlandırma deseni bir önek, Orta ve satır değerleri her yeni sütun adına eklenecek son eki ile ayarlayabilirsiniz.
+Son olarak, özetleme değerleri için kullanmak istediğiniz toplamayı ve yeni çıkış projeksiyonundaki sütunları dönüşümden nasıl görüntülenmesini istediğinizi seçin.
 
-Örneğin, "Bölge" göre özetleyerek "Sales" yalnızca yeni sütun değerlerini her satış değeri verirsiniz. Örneğin: "25", "50", "1000", ... "Sales" ön eki değeri ayarlarsanız, ancak ardından "Sales" değerleri için önek olarak eklenir.
+Seçim Satır değerlerinden her yeni sütun adına eklenmek üzere ön ek, orta ve son ek içeren bir adlandırma deseninin ayarlanabilir olmasını sağlayabilirsiniz.
+
+Örneğin, "bölge" ile "Sales" özetleme, her bir satış değerinden yalnızca yeni sütun değerleri sunar. Örneğin: "25", "50", "1000",... Bununla birlikte, "Sales" önekini bir önek değeri olarak ayarlarsanız, "Sales" değerinin ön eki olur.
 
 <img src="media/data-flow/unpivot3.png" width="400">
 
-Sütun düzenini "Normal" ayarını Grup birlikte tüm toplanan değerleriyle özetlenmiş sütun. Sütunları düzenleme için "Yanal" ayarı, sütun ve değer arasında alternatif.
+Sütun düzenlemesini "normal" olarak ayarlamak, özetleme sütunlarının tümünü toplanmış değerlerle birlikte gruplandırır. Sütun düzenleme "yan yana" olarak ayarlandığında sütun ve değer arasında alternatif olur.
 
-![Dönüştürme Çöz](media/data-flow//unpivot7.png "seçenekleri 5 Çöz")
+![Özet olmayan dönüştürme](media/data-flow//unpivot7.png "Özet kaldırma seçenekleri 5")
 
-Ayrı bir satır değerlerine Çözüldü artık sütun toplamları son Çözüldü veri sonuç kümesi gösterir.
+Özet olmayan son veri sonuç kümesi, artık ayrı satır değerlerine göre özetlenen sütun toplamlarını gösterir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kullanım [Özet dönüştürme](data-flow-pivot.md) pivot satırları sütunlara.
+Satırları sütunlara eklemek için [Pivot dönüşümünü](data-flow-pivot.md) kullanın.

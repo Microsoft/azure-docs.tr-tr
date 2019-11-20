@@ -1,66 +1,65 @@
 ---
-title: Bir Windows 10 veya Windows Server 2016 VM azure'da uzaktan bağlanırken netvsc.sys sorun giderme | Microsoft Docs
-description: Netsvc.sys ile ilgili bir RDP sorunlarını gidermeyi öğrenin ne zaman sorun, Windows 10 veya Windows Server 2016 VM azure'da bağlanma.
+title: Azure 'da bir Windows 10 veya Windows Server 2016 VM 'ye uzaktan bağlandığınızda netvsc. sys sorununu giderin | Microsoft Docs
+description: Azure 'da bir Windows 10 veya Windows Server 2016 VM 'sine bağlanırken Netsvc. sys ile ilgili bir RDP sorunuyla ilgili sorunları nasıl giderebileceğinizi öğrenin.
 services: virtual-machines-windows
 documentationCenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: v-jesits
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 11/19/2018
 ms.author: genli
-ms.openlocfilehash: e6685a5e77d92bb9e05ab9578e48c99e80a64b74
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4c10a2dcd55c1605cfafe6c67cfefd9d8a3c5f9d
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60362263"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71057979"
 ---
-# <a name="cannot-connect-remotely-to-a-windows-10-or-windows-server-2016-vm-in-azure-because-of-netvscsys"></a>Uzaktan Windows 10 veya Windows Server 2016 VM azure'da netvsc.sys nedeniyle bağlanılamıyor
+# <a name="cannot-connect-remotely-to-a-windows-10-or-windows-server-2016-vm-in-azure-because-of-netvscsys"></a>Netvsc. sys nedeniyle Azure 'da bir Windows 10 veya Windows Server 2016 VM 'ye uzaktan bağlanılamıyor
 
-Bu makalede olduğu ağ bağlantısı bir Windows 10 veya Windows Server 2016 Datacenter sanal makinesi (VM) bir Hyper-V Server 2016 konağında bağlandığınızda bir sorunun nasıl giderileceği açıklanmaktadır.
+Bu makalede bir Hyper-V Server 2016 ana bilgisayarında Windows 10 veya Windows Server 2016 Datacenter sanal makinesine (VM) bağlandığınızda ağ bağlantısı bulunmayan bir sorunun nasıl giderileceği açıklanmaktadır.
 
 ## <a name="symptoms"></a>Belirtiler
 
-Uzak Masaüstü Protokolü (RDP) kullanarak bir Azure Windows 10 veya Windows Server 2016 VM bağlanamıyor. İçinde [önyükleme tanılaması](boot-diagnostics.md), ekran, ağ arabirim kartı (NIC) üzerinde kırmızı çarpı işareti gösterir. Bu, işletim sistemini tam olarak yüklendikten sonra VM bağlantısı olduğunu gösterir.
+Uzak Masaüstü Protokolü (RDP) kullanarak bir Azure Windows 10 veya Windows Server 2016 VM 'sine bağlanamazsınız. [Önyükleme tanılamasında](boot-diagnostics.md), ekranda ağ arabirim kartı (NIC) üzerinde kırmızı bir çapraz gösterilir. Bu, işletim sistemi tam olarak yüklendikten sonra sanal makinenin bağlantısının olmadığını gösterir.
 
-Genellikle, Windows bu sorun oluşur [derleme 14393](https://support.microsoft.com/help/4093120/) ve [derleme 15063](https://support.microsoft.com/help/4015583/). Bu makalede, işletim sistemi sürümü bu sürümlerden daha sonraysa, senaryonuz için geçerli değildir. Sistem sürümü denetlemek için bir CMD oturumda açın [seri erişim Konsolu özelliği](serial-console-windows.md)ve ardından çalıştırın **Ver**.
+Genellikle, bu sorun Windows [build 14393](https://support.microsoft.com/help/4093120/) ve [derleme 15063](https://support.microsoft.com/help/4015583/)' de oluşur. İşletim sisteminizin sürümü bu sürümlerden daha sonra ise, bu makale senaryonuz için de geçerlidir. Sistemin sürümünü denetlemek için, [seri erişim konsolu özelliğinde](serial-console-windows.md)bir cmd oturumu açın ve ardından **ver**' i çalıştırın.
 
 ## <a name="cause"></a>Nedeni
 
-Yüklü netvsc.sys sistem dosyasının sürümü ise bu sorun ortaya çıkabilir **10.0.14393.594** veya **10.0.15063.0**. Bu netvsc.sys sürümleri, Azure platformuyla etkileşim sistem engelleyebilir.
+Yüklü netvsc. sys sistem dosyasının sürümü **10.0.14393.594** veya **10.0.15063.0**ise bu sorun oluşabilir. Netvsc. sys ' nin bu sürümleri sistemin Azure platformuyla etkileşimini engelleyebilir.
 
 
 ## <a name="solution"></a>Çözüm
 
-Bu adımları izlemeden önce [sistem diski anlık](../windows/snapshot-copy-managed-disk.md) etkilenen VM yedek olarak. Bu sorunu gidermek için seri konsolu veya [çevrimdışı VM'yi onarın](#repair-the-vm-offline) sanal Makinenin sistem diskini bir kurtarma sanal Makinesine ekleyerek.
+Bu adımları izlemeden önce, etkilenen VM 'nin [sistem diskinin bir anlık görüntüsünü](../windows/snapshot-copy-managed-disk.md) yedek olarak alın. Bu sorunu gidermek için seri konsolu veya [çevrimdışı VM'yi onarın](#repair-the-vm-offline) sanal Makinenin sistem diskini bir kurtarma sanal Makinesine ekleyerek.
 
 
-### <a name="use-the-serial-console"></a>Seri Konsolu
+### <a name="use-the-serial-console"></a>Seri konsolunu kullanma
 
-Bağlanma [seri konsolu, PowerShell örneği açın](serial-console-windows.md)ve ardından aşağıdaki adımları izleyin.
+[Seri konsoluna bağlanın, bir PowerShell örneği açın](serial-console-windows.md)ve ardından aşağıdaki adımları izleyin.
 
 > [!NOTE]
 > Seri konsol sanal makinenizde etkin değilse, Git [çevrimdışı VM'yi onarın](#repair-the-vm-offline) bölümü.
 
-1. Dosya sürümünü almak için bir PowerShell örneği aşağıdaki komutu çalıştırın (**c:\windows\system32\drivers\netvsc.sys**):
+1. Bir PowerShell örneğinde, dosyanın sürümünü (**c:\windows\system32\drivers\netvsc.sys**) almak için aşağıdaki komutu çalıştırın:
 
    ```
    (get-childitem "$env:systemroot\system32\drivers\netvsc.sys").VersionInfo.FileVersion
    ```
 
-2. Aynı bölgeden çalışan VM bağlı yeni veya var olan veri diski için uygun güncelleştirmeyi indirin:
+2. İlgili güncelleştirmeyi aynı bölgeden çalışan bir sanal makineye bağlı yeni veya mevcut bir veri diskine indirin:
 
-   - **10.0.14393.594**: [KB4073562](https://support.microsoft.com/help/4073562) ya da daha yeni bir güncelleştirme
-   - **10.0.15063.0**: [KB4016240](https://support.microsoft.com/help/4016240) ya da daha yeni bir güncelleştirme
+   - **10.0.14393.594**: [KB4073562 veya sonraki bir](https://support.microsoft.com/help/4073562) güncelleştirme
+   - **10.0.15063.0**: [KB4016240](https://support.microsoft.com/help/4016240) veya sonraki bir güncelleştirme
 
-3. VM çalışmasını yardımcı diski çıkarın ve ardından bozuk VM'e ekleyin.
+3. Yardımcı programı diskini çalışan sanal makineden ayırın ve sonra bozuk VM 'ye bağlayın.
 
-4. Sanal makinede güncelleştirmeyi yüklemek için aşağıdaki komutu çalıştırın:
+4. Güncelleştirmeyi VM 'ye yüklemek için aşağıdaki komutu çalıştırın:
 
    ```
    dism /ONLINE /add-package /packagepath:<Utility Disk Letter>:\<KB .msu or .cab>
@@ -76,15 +75,15 @@ Bağlanma [seri konsolu, PowerShell örneği açın](serial-console-windows.md)v
 
 3. Disk olarak işaretlenmiş olduğundan emin olun **çevrimiçi** Disk Yönetimi Konsolu'nda. Bağlı sistem diskine atanmış sürücü harfini unutmayın.
 
-4. Bir kopyasını oluşturmak **\Windows\System32\config** klasör değişiklikleri geri alma bir durumda gereklidir.
+4. Değişiklikler üzerinde geri almanın gerekli olması durumunda **\Windows\system32\config** klasörünün bir kopyasını oluşturun.
 
-5. Kayıt Defteri Düzenleyicisi'ni (regedit.exe) kurtarma VM üzerinde başlatın.
+5. Kurtarma VM 'sinde, kayıt defteri Düzenleyicisi 'ni (Regedit. exe) başlatın.
 
-6. Seçin **HKEY_LOCAL_MACHINE** anahtar ve ardından **dosya** > **yığını** menüsünde.
+6. **HKEY_LOCAL_MACHINE** anahtarını seçin ve sonra menüden **Dosya** > **yükleme Hive** ' yi seçin.
 
-7. Sistem dosyayı bulun **\Windows\System32\config** klasör.
+7. **\Windows\system32\config** klasöründeki sistem dosyasını bulun.
 
-8. Seçin **açık**, türü **BROKENSYSTEM** genişletin adı için **HKEY_LOCAL_MACHINE** anahtar ve adlı ek bir anahtar bulun **BROKENSYSTEM** .
+8. **Aç**' ı seçin, ad Için **brokensystem** yazın, **HKEY_LOCAL_MACHINE** anahtarını genişletin ve sonra da **brokensystem**adlı ek anahtarı bulun.
 
 9. Şu konuma gidin:
 
@@ -92,31 +91,31 @@ Bağlanma [seri konsolu, PowerShell örneği açın](serial-console-windows.md)v
    HKLM\BROKENSYSTEM\ControlSet001\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}
    ```
 
-10. Her alt anahtarında (örneğin, 0000) incelemek **DriverDesc** olarak görüntülenen değer **Microsoft HYPER-V ağ bağdaştırıcısı**.
+10. Her alt anahtarda (0000 gibi), **MICROSOFT Hyper-V ağ bağdaştırıcısı**olarak görüntülenen **DriverDesc** değerini inceleyin.
 
-11. Alt anahtarında inceleyin **DriverVersion** sanal makinenin ağ bağdaştırıcısı sürücü sürümü olan değer.
+11. Alt anahtarda, sanal makinenin ağ bağdaştırıcısının sürücü sürümü olan **DriverVersion** değerini inceleyin.
 
 12. Uygun güncelleştirmeyi indirin:
 
-    - **10.0.14393.594**: [KB4073562](https://support.microsoft.com/help/4073562) ya da daha yeni bir güncelleştirme
-    - **10.0.15063.0**: [KB4016240](https://support.microsoft.com/help/4016240) ya da daha yeni bir güncelleştirme
+    - **10.0.14393.594**: [KB4073562 veya sonraki bir](https://support.microsoft.com/help/4073562) güncelleştirme
+    - **10.0.15063.0**: [KB4016240](https://support.microsoft.com/help/4016240) veya sonraki bir güncelleştirme
 
-13. Sistem diski, güncelleştirmeyi indirin bir kurtarma sanal makinesinde veri diski olarak ekleyin.
+13. Sistem diskini, üzerinde güncelleştirmeyi indirebileceğiniz bir kurtarma sanal makinesine veri diski olarak ekleyin.
 
-14. Sanal makinede güncelleştirmeyi yüklemek için aşağıdaki komutu çalıştırın:
+14. Güncelleştirmeyi VM 'ye yüklemek için aşağıdaki komutu çalıştırın:
 
     ```
     dism /image:<OS Disk letter>:\ /add-package /packagepath:c:\temp\<KB .msu or .cab>
     ```
 
-15. Yığınlar kaldırmak için aşağıdaki komutu çalıştırın:
+15. Kovanları çıkarmak için aşağıdaki komutu çalıştırın:
 
     ```
     reg unload HKLM\BROKENSYSTEM
     ```
 
-16. [VM yeniden oluşturma ve sistem diskini](../windows/troubleshoot-recovery-disks-portal.md).
+16. [Sistem diskini ayırın ve VM 'yi yeniden oluşturun](../windows/troubleshoot-recovery-disks-portal.md).
 
 ## <a name="need-help-contact-support"></a>Yardım mı gerekiyor? Desteğe başvurun
 
-Hala yardıma ihtiyacınız varsa [Azure desteğine başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için.
+Hala yardıma ihtiyacınız varsa, sorununuzun hızla çözülmesini sağlamak için [Azure desteğine başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) .

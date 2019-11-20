@@ -1,11 +1,11 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile kayması | Microsoft Docs'
-description: Azure Active Directory ve kaymaları arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: DRFT ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory Microsoft Docs'
+description: Azure Active Directory ile DRFT arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
 manager: mtillman
-ms.reviewer: celested
+ms.reviewer: barbkess
 ms.assetid: 39dcbb95-c192-448c-86a1-cedede1c0972
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
@@ -13,184 +13,177 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 05/27/2019
+ms.date: 10/17/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 88940b40eb309a5fb6ff73c04a47813ec3a47669
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0cd749ef66ee62f6d89d949cef7ce800bc46d59a
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67103873"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72554360"
 ---
-# <a name="tutorial-integrate-drift-with-azure-active-directory"></a>Öğretici: Kayması Azure Active Directory ile tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-drift"></a>Öğretici: DRFT ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile kayması tümleştirme öğreneceksiniz. Kayması Azure AD ile tümleştirdiğinizde, şunları yapabilirsiniz:
+Bu öğreticide, Azure Active Directory (Azure AD) ile Drift tümleştirme hakkında bilgi edineceksiniz. DRFT 'yi Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Kayması erişimi, Azure AD'de denetler.
-* Otomatik olarak kayması için kendi Azure AD hesapları ile oturum açmış olmasını sağlayın.
-* Bir merkezi konumda - Azure portalı hesaplarınızı yönetin.
+* Azure AD 'de, DRFT 'ye erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla birlikte çalışmak üzere otomatik olarak oturum açmaları için etkinleştirin.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla bilgi için bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Başlamak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir aboneliğiniz yoksa, alabileceğiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/free/).
-* Kayması çoklu oturum açma (SSO) abonelik etkin.
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* DRFT çoklu oturum açma (SSO) etkin abonelik.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD SSO bir test ortamında test edin. Kayma destekler **SP ve IDP** tarafından başlatılan ve **zamanında** kullanıcı sağlama.
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-## <a name="adding-drift-from-the-gallery"></a>Galeriden kayması ekleme
+* Drift **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler
+* Drift **, tam zamanında** Kullanıcı sağlamayı destekler
 
-Azure AD'de kayması tümleştirmesini yapılandırmak için kayması Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+> [!NOTE]
+> Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
+
+## <a name="adding-drift-from-the-gallery"></a>Galeriden DRFT ekleme
+
+Drift 'in Azure AD 'ye tümleştirmesini yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize DRFT eklemeniz gerekir.
 
 1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
-1. Sol gezinti bölmesinde seçin **Azure Active Directory** hizmeti.
-1. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları**.
-1. Yeni bir uygulama eklemek için seçin **yeni uygulama**.
-1. İçinde **Galeriden Ekle** bölümüne şunu yazın **kayması** arama kutusuna.
-1. Seçin **kayması** gelen sonuçlar panelinde ve uygulama ekleyin. Uygulama, kiracınıza eklendiği sırada birkaç saniye bekleyin.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **DRFT** yazın.
+1. Sonuçlar panelinden **DRFT** ' i seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on-for-drift"></a>DRFT için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Yapılandırma ve kaymaları adlı bir test kullanıcı kullanarak ile Azure AD SSO test **b Simon**. Çalışmak SSO için kayması içinde bir Azure AD kullanıcısı ile ilgili kullanıcı arasında bir bağlantı ilişki oluşturmanız gerekir.
+**B. Simon**adlı bir test kullanıcısı kullanarak, DRFT Ile Azure AD SSO 'yu yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı arasında DRFT 'de bir bağlantı ilişkisi kurmanız gerekir.
 
-Yapılandırma ve kaymaları ile Azure AD SSO sınamak için aşağıdaki yapı taşlarını tamamlayın:
+Azure AD SSO 'yu DRFT ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-1. **[Azure AD SSO'yu yapılandırma](#configure-azure-ad-sso)**  kullanıcılarınız bu özelliği kullanmak etkinleştirmek için.
-2. **[Yapılandırma değişikliklerini](#configure-drift)**  uygulama tarafında SSO ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  Azure AD çoklu oturum açma b Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  Azure AD çoklu oturum açmayı kullanmak b Simon etkinleştirmek için.
-5. **[Kayması test kullanıcısı oluşturma](#create-drift-test-user)**  b Simon bir karşılığı kullanıcı Azure AD gösterimini bağlı kayması sağlamak için.
-6. **[Test SSO](#test-sso)**  yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    1. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. **[DRFT SSO 'Yu yapılandırma](#configure-drift-sso)** -uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+    1. DRFT 'de, kullanıcının Azure AD gösterimine bağlı olan, dron 'da B. Simon 'a sahip olmak için, **[drift test kullanıcısı oluşturun](#create-drift-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-### <a name="configure-azure-ad-sso"></a>Azure AD SSO'yu yapılandırma
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-Azure portalında Azure AD SSO'yu etkinleştirmek üzere aşağıdaki adımları izleyin.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **kayması** uygulama tümleştirme sayfası, bulma **Yönet** bölümünde ve seçin **çoklu oturum açma**.
-1. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** sayfasında **SAML**.
-1. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında, düzenleme/kalem simgesine tıklayıp **temel SAML yapılandırma** ayarlarını düzenlemek için.
+1. [Azure Portal](https://portal.azure.com/), **DRFT** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-1. Üzerinde **temel SAML yapılandırma** bölümünde, uygulamanın önceden yapılandırılmış olduğu ve gerekli URL'ler zaten Azure ile önceden doldurulur. Tıklayarak yapılandırmayı kaydetmek kullanıcının erişmesi **Kaydet** düğmesine tıklayın ve aşağıdaki adımları gerçekleştirin:
+1.  **Temel SAML yapılandırması** bölümünde, uygulama **IDP** başlatılmış modda önceden yapılandırılmıştır ve gerekli URL 'ler Azure ile önceden doldurulmuştur. Kullanıcının  button **Kaydet** ' e tıklayarak yapılandırmayı kaydetmesi gerekir.
 
-    a. Tıklayın **ek URL'lerini ayarlayın**.
+    a. **Ek URL 'Ler ayarla**' ya tıklayın.
  
-    b. İçinde **geçiş durumu** metin kutusuna bir URL yazın: `https://app.drift.com` 
+    b. **Geçiş durumu** metin kutusuna bir URL yazın: `https://app.drift.com` 
 
-    c. Uygulamada yapılandırmak istiyorsanız **SP** başlatılan modu aşağıdaki adımı uygulayın:
+    c. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımı uygulayın:
 
-    d. İçinde **oturum açma URL'si** metin kutusuna bir URL yazın: `https://start.drift.com`
+    d. **Oturum açma URL 'si** metin kutusuna bir URL yazın: `https://start.drift.com`
 
-6. Kayması uygulamanız SAML onaylamalarını özel öznitelik eşlemelerini SAML belirteci öznitelikleri yapılandırmanıza ekleyin gerektiren belirli bir biçimde bekliyor. Aşağıdaki ekran görüntüsünde, varsayılan öznitelikler listesinde gösterilmiştir. Tıklayın **Düzenle** kullanıcı öznitelikleri iletişim kutusunu açmak için simge.
+6. DRFT uygulamanız, SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde SAML onayları bekliyor. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir.
 
     ![image](common/edit-attribute.png)
 
-7. Buna ek olarak, yukarıda application kayma için SAML yanıtta geçirilecek birkaç daha fazla öznitelik bekliyor. Kullanıcı öznitelikleri iletişim kutusunda kullanıcı talepleri bölümünde gösterildiği gibi SAML belirteci özniteliği eklemek için aşağıdaki adımları gerçekleştirin tablonun altındaki: 
+7. Yukarıdakine ek olarak, DRFT uygulaması aşağıda gösterilen SAML yanıtına daha fazla öznitelik geçirilmesini bekler. Bu öznitelikler de önceden doldurulur, ancak gereksiniminize göre bunları gözden geçirebilirsiniz. 
 
-    | Ad | Kaynak özniteliği|
+    | Adı | Kaynak özniteliği|
     | ---------------| --------------- |    
-    | Ad | user.displayname |
+    | Adı | User. DisplayName |
 
-    a. Tıklayın **Ekle yeni talep** açmak için **yönetmek, kullanıcı talepleri** iletişim.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **Federasyon meta verileri XML** 'i bulun ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-    ![image](common/new-save-attribute.png)
+    ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-    ![image](common/new-attribute-details.png)
+1. **DRFT ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    b. İçinde **adı** metin kutusuna, bu satır için gösterilen öznitelik adı yazın.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    c. Bırakın **Namespace** boş.
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-    d. Kaynağı olarak **özniteliği**.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-    e. Gelen **kaynak özniteliği** listesinde, ilgili satır için gösterilen öznitelik değeri yazın.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extension girin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**’a tıklayın.
 
-    f. Tıklayın **Tamam**
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-    g. **Kaydet**’e tıklayın.
+Bu bölümde, DRFT 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-1. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde, bulma **Federasyon meta verileri XML** seçip **indirin** sertifikayı indirin ve bilgisayarınıza kaydedin.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **DRFT**' i seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-   ![Sertifika indirme bağlantısı](common/metadataxml.png)
+   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-1. Üzerinde **kayması kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-   ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-### <a name="configure-drift"></a>Yapılandırma kayması
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-1. Yapılandırma değişikliklerini içinde otomatikleştirmek için yüklemeniz gerekir **My Apps güvenli oturum açma tarayıcı uzantısı** tıklayarak **uzantıyı yükleme**.
+## <a name="configure-drift-sso"></a>Drift SSO yapılandırma
 
-    ![Uygulamaları uzantım](common/install-myappssecure-extension.png)
+1. Yapılandırmayı DRFT ' de otomatik hale getirmek için, **uzantıyı yüklemeniz**' ne tıklayarak **uygulamalarımın güvenli oturum açma tarayıcı uzantısını** yüklemeniz gerekir.
 
-2. Uzantı tarayıcıya ekledikten sonra tıklayarak **Kurulum kayması** kayması uygulamaya yönlendirir. Burada, kayması oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı otomatik olarak sizin için uygulamayı yapılandırma ve 3-4 arası adımları otomatik hale getirin.
+    ![Uygulamalarım uzantısı](common/install-myappssecure-extension.png)
+
+2. Tarayıcıya Uzantı eklendikten sonra, **Kurulum DRFT** 'e tıkladığınızda sizi DRFT uygulamaya yönlendirebilirsiniz. Buradan, DRFT 'de oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı, uygulamayı sizin için otomatik olarak yapılandırır ve 3-4 adımlarını otomatikleştirecektir.
 
     ![Kurulum yapılandırması](common/setup-sso.png)
 
-3. Kayması el ile ayarlamak istiyorsanız, yeni bir web tarayıcı penceresi ve oturum kayması şirketinizin sitesi yönetici olarak oturum açın ve aşağıdaki adımları gerçekleştirin:
+3. Drift 'i el ile ayarlamak istiyorsanız yeni bir Web tarayıcısı penceresi açın ve yönetici olarak DRFT şirket sitenizde oturum açın ve aşağıdaki adımları gerçekleştirin:
 
-4. Menü çubuğunun sol taraftan tıklayarak **ayarlar simgesine** > **uygulama ayarları** > **kimlik doğrulaması** ve aşağıdaki adımları gerçekleştirin:
+4. Menü çubuğunun sol tarafında, **Ayarlar simgesine**  > **uygulama ayarları**  > **kimlik doğrulaması** ' na tıklayın ve aşağıdaki adımları uygulayın:
 
-    ![Yönetim bağlantı](./media/drift-tutorial/tutorial_drift_admin.png)
+    ![Yönetici bağlantısı](./media/drift-tutorial/tutorial_drift_admin.png)
 
-    a. Karşıya yükleme **Federasyon meta verileri XML** içine Azure portalından yüklediğiniz **karşıya kimlik sağlayıcısı meta veri dosyası** metin kutusu.
+    a. Azure portal indirdiğiniz **Federasyon meta VERI XML** **dosyasını karşıya yükleme kimlik sağlayıcısı meta veri dosyası** metin kutusuna yükleyin.
 
-    b. Meta veri dosyasını karşıya yükledikten sonra kalan değerler sayfada otomatik olarak doldurulur otomatik alın.
+    b. Meta veri dosyasını karşıya yükledikten sonra, kalan değerler otomatik olarak sayfada otomatik olarak doldurulur.
 
-    c. Tıklayın **etkinleştirme SAML**.
+    c. **SAML etkinleştir**' e tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-drift-test-user"></a>Drift test kullanıcısı oluşturma
 
-Bu bölümde, bir test kullanıcısı b Simon adlı Azure portalında oluşturacaksınız.
-
-1. Azure Portalı'ndaki sol bölmeden seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
-1. Seçin **yeni kullanıcı** ekranın üstünde.
-1. İçinde **kullanıcı** özellikleri, aşağıdaki adımları izleyin:
-   1. **Ad** alanına `B. Simon` girin.  
-   1. İçinde **kullanıcı adı** alanına username@companydomain.extension. Örneğin, `B. Simon@contoso.com`.
-   1. Seçin **Show parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
-   1. **Oluştur**’a tıklayın.
-
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
-
-Bu bölümde, B. kayması için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Simon tıklatmalarını sağlarsınız.
-
-1. Azure portalında **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
-1. Uygulamalar listesinde **kayması**.
-1. Uygulamanın genel bakış sayfasında bulma **Yönet** seçin ve bölüm **kullanıcılar ve gruplar**.
-
-   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
-
-1. Seçin **Kullanıcı Ekle**, ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
-
-    ![Kullanıcı ekleme bağlantısı](common/add-assign-user.png)
-
-1. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **b Simon** kullanıcılar listesinden ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. SAML onaylama işlemi herhangi bir rolü değer de beklediğiniz varsa **rolü Seç** iletişim kutusunda, listeden bir kullanıcı için uygun rolü seçin ve ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. İçinde **atama Ekle** iletişim kutusunda, tıklayın **atama** düğmesi.
-
-### <a name="create-drift-test-user"></a>Kayması test kullanıcısı oluşturma
-
-Bu bölümde, Britta Simon adlı bir kullanıcı kayması oluşturulur. Kayması just-ın-time kullanıcı hazırlama, varsayılan olarak etkin olduğu destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Bir kullanıcı kayması içinde zaten mevcut değilse yeni bir kimlik doğrulamasından sonra oluşturulur.
+Bu bölümde, drift 'de Britta Simon adlı bir Kullanıcı oluşturulur. Drift, varsayılan olarak etkinleştirilen tam zamanında Kullanıcı sağlamayı destekler. Bu bölümde sizin için herhangi bir eylem öğesi yok. Bir kullanıcı zaten DRFT 'de yoksa, kimlik doğrulamasından sonra yeni bir tane oluşturulur.
 
 >[!Note]
->Bir kullanıcı el ile oluşturmanız gerekiyorsa, kişi [kayması Destek ekibine](mailto:integrations@drift.com).
+>El ile bir kullanıcı oluşturmanız gerekiyorsa, [DRFT destek ekibine](mailto:integrations@drift.com)başvurun.
 
-### <a name="test-sso"></a>Test SSO
+## <a name="test-sso"></a>Test SSO 'SU 
 
-Erişim Paneli'nde kayması kutucuğu seçtiğinizde, otomatik olarak SSO'yu ayarlama kayması için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+Erişim panelinde DRFT kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız DRFT 'de otomatik olarak oturum açmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+## <a name="additional-resources"></a>Ek kaynaklar
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+
+- [Azure AD ile DRFT deneme](https://aad.portal.azure.com/)
+

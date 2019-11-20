@@ -1,6 +1,6 @@
 ---
-title: Apache Cordova eklentisi için Azure Mobile Apps kullanma
-description: Apache Cordova eklentisi için Azure Mobile Apps kullanma
+title: Azure için Apache Cordova eklentisi 'ni kullanma Mobile Apps
+description: Azure için Apache Cordova eklentisi 'ni kullanma Mobile Apps
 services: app-service\mobile
 documentationcenter: javascript
 author: elamalani
@@ -14,43 +14,44 @@ ms.devlang: javascript
 ms.topic: article
 ms.date: 06/25/2019
 ms.author: emalani
-ms.openlocfilehash: 327cb3a3667c63454549ec694790769c9ea1fd58
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 25bff77da6c2bd89916fe40ebb153ff9631e62eb
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67446431"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72388799"
 ---
-# <a name="how-to-use-apache-cordova-client-library-for-azure-mobile-apps"></a>Azure Mobile Apps için Apache Cordova istemci kitaplığını kullanma
+# <a name="how-to-use-apache-cordova-client-library-for-azure-mobile-apps"></a>Azure için Apache Cordova istemci kitaplığı 'nı kullanma Mobile Apps
 [!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 > [!NOTE]
-> Visual Studio App Center, mobil uygulama geliştirme merkezi hizmetlerinde yeni ve tümleşik yatırım yapıyor. Geliştiriciler **derleme**, **Test** ve **Dağıt** hizmetlerinin sürekli tümleştirme ve teslim işlem hattı ayarlayın. Uygulama dağıtıldığında, geliştiriciler kendi uygulamasını kullanarak kullanımı ve durumu izleyebilirsiniz **Analytics** ve **tanılama** kullanarak kullanıcılarla etkileşim kurun ve hizmetlerini **anında iletme** hizmeti. Geliştiriciler de yararlanabilir **Auth** , kullanıcıların kimliğini doğrulamak ve **veri** kalıcı hale getirmek ve uygulama verilerini bulutta eşitleme hizmeti. Kullanıma [App Center](https://appcenter.ms/?utm_source=zumo&utm_campaign=app-service-mobile-cordova-how-to-use-client-library) bugün.
+> Visual Studio App Center mobil uygulama dağıtımında merkezi konumdaki uçtan uca ve tümleşik hizmetleri destekler. Geliştiriciler Sürekli Tümleştirme ve Teslim işlem hattını ayarlamak için **Oluşturma**, **Test** ve **Dağıtım** hizmetlerini kullanabilir. Uygulama dağıtıldıktan sonra, geliştiriciler **Analiz** ve **Tanılama** hizmetlerini kullanarak uygulamanın durumunu ve kullanımını izleyebilir, **Gönderme** hizmetini kullanarak kullanıcılarla etkileşim kurabilir. Geliştiriciler ayrıca kullanıcıların kimliğini doğrulamak için **Kimlik Doğrulaması**'ndan ve uygulama verilerini bulutta kalıcı hale getirmek ve eşitlemek için **Veri** hizmetinden yararlanabilir.
 >
+> Mobil uygulamanızda bulut hizmetlerini tümleştirmek istiyorsanız bugün [App Center](https://appcenter.ms/?utm_source=zumo&utm_medium=Azure&utm_campaign=zumo%20doc) kaydolun.
 
 ## <a name="overview"></a>Genel Bakış
-Bu kılavuzu kullanarak en yaygın senaryoları gerçekleştirmek için öğretir [Azure mobil uygulamalar için Apache Cordova eklentisi]. Azure Mobile Apps için yeni başladıysanız, ilk olarak işlemini [Azure Mobile Apps Hızlı Başlangıç] bir arka ucu oluşturmak için tablo oluşturma ve önceden oluşturulmuş bir Apache Cordova projenizi indirin. Bu kılavuzda, biz üzerinde istemci tarafı Apache Cordova eklentisi odaklanın.
+Bu kılavuz, [Azure Mobile Apps Apache Cordova eklentisi]kullanarak genel senaryoları gerçekleştirmenizi öğretir. Azure Mobile Apps 'yi yeni kullanıyorsanız, ilk olarak [azure Mobile Apps hızlı başlangıç] tamamladıktan sonra arka uç oluşturun, tablo oluşturun ve önceden oluşturulmuş bir Apache Cordova projesini indirin. Bu kılavuzda, istemci tarafı Apache Cordova eklentisine odaklanıyoruz.
 
 ## <a name="supported-platforms"></a>Desteklenen platformlar
-Apache Cordova v6.0.0 ve daha sonra iOS, Android ve Windows bu SDK'yı destekleyen cihazlar.  Platform desteği aşağıdaki gibidir:
+Bu SDK, iOS, Android ve Windows cihazlarında Apache Cordova v 6.0.0 ve üstünü destekler.  Platform desteği aşağıdaki gibidir:
 
-* Android API 19-24 (KitKat Nougat aracılığıyla).
-* iOS 8.0 ve üzeri sürümler.
-* Windows Phone 8.1.
-* Evrensel Windows platformu.
+* Android API 19-24 (KitKat üzerinden Nougat).
+* iOS sürümleri 8,0 ve üzeri.
+* Windows Phone 8,1.
+* Evrensel Windows Platformu.
 
 ## <a name="Setup"></a>Kurulum ve Önkoşullar
-Bu kılavuz, bir arka ucu içeren bir tablo oluşturdunuz varsayılır. Bu kılavuz, tablo bu öğreticilerde tabloların aynı şemaya sahip olduğunu varsayar. Bu kılavuz ayrıca kodunuza Apache Cordova eklentisi eklediğinizi varsayar.  Bunu yapmadıysanız, Apache Cordova eklentisi komut satırında projenize ekleyebilirsiniz:
+Bu kılavuzda, bir tablo ile arka uç oluşturduğunuzu varsayılmaktadır. Bu kılavuzda, tablonun bu öğreticilerde bulunan tablolarla aynı şemaya sahip olduğu varsayılır. Bu kılavuzda, kodunuza Apache Cordova eklentisi eklediğinizi de varsayılmaktadır.  Bunu yapmadıysanız, komut satırında projenize Apache Cordova eklentisini ekleyebilirsiniz:
 
 ```
 cordova plugin add cordova-plugin-ms-azure-mobile-apps
 ```
 
-Oluşturma hakkında daha fazla bilgi için [ilk Apache Cordova uygulamanızı], kendi belgelerine bakın.
+[ilk Apache Cordova uygulamanız]oluşturma hakkında daha fazla bilgi için belgelerine bakın.
 
-## <a name="ionic"></a>Ionic v2 uygulama ayarlama
+## <a name="ionic"></a>Ionic v2 uygulaması ayarlama
 
-Ionic v2 proje düzgün bir şekilde yapılandırmak için ilk temel bir uygulama oluşturun ve Cordova eklentisini ekleyin:
+Bir Ionic v2 projesini doğru şekilde yapılandırmak için öncelikle temel bir uygulama oluşturun ve Cordova eklentisini ekleyin:
 
 ```
 ionic start projectName --v2
@@ -58,78 +59,78 @@ cd projectName
 ionic plugin add cordova-plugin-ms-azure-mobile-apps
 ```
 
-Aşağıdaki satırları ekleyin `app.component.ts` istemci nesnesini oluşturmak için:
+İstemci nesnesini oluşturmak için `app.component.ts` ' a aşağıdaki satırları ekleyin:
 
 ```typescript
 declare var WindowsAzure: any;
 var client = new WindowsAzure.MobileServiceClient("https://yoursite.azurewebsites.net");
 ```
 
-Artık, derleme ve proje tarayıcıda çalıştırın:
+Projeyi artık tarayıcıda derleyip çalıştırabilirsiniz:
 
 ```
 ionic platform add browser
 ionic run browser
 ```
 
-Azure Mobile Apps Cordova eklentisini hem Ionic v1 ve v2 uygulamalarını destekler.  Ionic v2 uygulamalar için ek bildirim gerektiriyor. yalnızca `WindowsAzure` nesne.
+Azure Mobile Apps Cordova eklentisi hem Ionic v1 hem de v2 uygulamalarını destekler.  Yalnızca Ionic v2 uygulamaları `WindowsAzure` nesnesi için ek bildirim gerektirir.
 
 [!INCLUDE [app-service-mobile-html-js-library.md](../../includes/app-service-mobile-html-js-library.md)]
 
-## <a name="auth"></a>Nasıl Yapılır: Kullanıcıların kimliklerini doğrulama
-Azure App Service kimlik doğrulama ve yetkilendirme çeşitli dış kimlik sağlayıcısı kullanarak uygulama kullanıcılarının destekler: Facebook, Google, Microsoft hesabı ve Twitter gibi. Tablolarda yalnızca kimliği doğrulanmış kullanıcılar için belirli işlemler için erişimi sınırlandırmak için izinleri ayarlayabilirsiniz. Sunucu betiklerini yetkilendirme kurallarını uygulamak için kimliği doğrulanmış kullanıcıların kimliğini de kullanabilirsiniz. Daha fazla bilgi için [kimlik doğrulamayı kullanmaya başlama] öğretici.
+## <a name="auth"></a>Nasıl yapılır: kullanıcıların kimliğini doğrulama
+Azure App Service, farklı dış kimlik sağlayıcıları kullanarak uygulama kullanıcılarının kimlik doğrulamasını ve yetkilendiriyi destekler: Facebook, Google, Microsoft hesabı ve Twitter. Belirli işlemlere erişimi yalnızca kimliği doğrulanmış kullanıcılarla kısıtlamak için tablolar üzerinde izinler belirleyebilirsiniz. Ayrıca, sunucu betiklerine yetkilendirme kuralları uygulamak için kimliği doğrulanmış kullanıcıların kimliğini de kullanabilirsiniz. Daha fazla bilgi için [kimlik doğrulaması ile çalışmaya başlama] öğreticisine bakın.
 
-Bir Apache Cordova uygulamasında kimlik doğrulaması kullanırken, aşağıdaki Cordova eklentileri kullanılabilir olmalıdır:
+Apache Cordova uygulamasında kimlik doğrulaması kullanırken, aşağıdaki Cordova eklentileri kullanılabilir olmalıdır:
 
-* [cordova-plugin-device]
-* [cordova-plugin-ınappbrowser'a]
+* [Cordova-eklenti-cihaz]
+* [Cordova-Plugin-ınappbrowser]
 
-İki kimlik doğrulama akışı desteklenir: sunucu akış ve istemci akışı.  Sağlayıcının web kimlik doğrulaması arabirimde olmasına olduğundan sunucu akışı Basit kimlik doğrulaması deneyimi sağlar. Gibi istemci akışı için cihaza özgü özellikleri ile daha derin tümleştirme sağlayan çoklu oturum açma olarak, sağlayıcıya özgü cihaza özgü dillerde kullanır.
+İki kimlik doğrulama akışı desteklenir: sunucu akışı ve istemci akışı.  Sunucu akışı, sağlayıcının web kimlik doğrulama arabirimini temel aldığından en basit kimlik doğrulama deneyimini sağlar. İstemci akışı, sağlayıcıya özel cihaza özgü SDK 'lara dayandığından, tek oturum açma gibi cihaza özgü yetenekler ile daha derin tümleştirme sağlar.
 
 [!INCLUDE [app-service-mobile-html-js-auth-library.md](../../includes/app-service-mobile-html-js-auth-library.md)]
 
-### <a name="configure-external-redirect-urls"></a>Nasıl Yapılır: Mobil uygulama hizmetiniz için dış yönlendirme URL'leri yapılandırın.
-Birden fazla Apache Cordova uygulamaları, OAuth UI akışları işlemek için bir geri döngü olanağını kullanın.  Kimlik doğrulama hizmeti yalnızca hizmetiniz varsayılan olarak nasıl bilir beri localhost OAuth UI akışlarda sorunlara neden.  Sorunlu OAuth UI akışlar örnekleri şunlardır:
+### <a name="configure-external-redirect-urls"></a>Nasıl yapılır: mobil App Service dış yeniden yönlendirme URL 'Leri için yapılandırma.
+Birçok Apache Cordova uygulama türü, OAuth Kullanıcı arabirimi akışlarını işlemek için bir geri döngü özelliği kullanır.  Kimlik doğrulama hizmeti yalnızca varsayılan olarak hizmetinize nasıl yararlanacağını öğrendiğinden, localhost üzerinde OAuth Kullanıcı arabirimi akışları sorunlara neden olur.  Sorunlu OAuth Kullanıcı arabirimi akışlarına örnek olarak şunlar verilebilir:
 
-* Ripple öykünücüsüne.
-* Canlı yeniden yükleme Ionic ile.
-* Mobil arka uç yerel olarak çalıştırma
-* Mobil arka uç sağlayan bir kimlik doğrulaması değerinden farklı bir Azure App Service'te çalışıyor.
+* Ripple öykünücüsü.
+* Ionic ile canlı yeniden yükleme.
+* Mobil arka ucunu yerel olarak çalıştırma
+* Mobil arka ucu, kimlik doğrulaması sağlamaktan farklı bir Azure App Service çalışıyor.
 
-Yerel ayarlarınızı yapılandırmaya eklemek için aşağıdaki yönergeleri izleyin:
+Yapılandırmaya yerel ayarlarınızı eklemek için aşağıdaki yönergeleri izleyin:
 
-1. [Azure portal]’nda oturum açın
-2. Seçin **tüm kaynakları** veya **uygulama hizmetleri** ardından mobil uygulamanızın adına tıklayın.
-3. Tıklayın **araçları**
-4. Tıklayın **kaynak Gezgini** GÖZLEMLE menüde, ardından **Git**.  Yeni penceresi veya sekmesinde açar.
-5. Genişletin **config**, **authsettings** sitenizin sol taraftaki gezinti düğümleri.
-6. Tıklayın **Düzenle**
-7. "AllowedExternalRedirectUrls" öğesini arayın.  Null ya da bir dizi değere ayarlanabilir.  Değeri şu değere değiştirin:
+1. [Azure portalda]’nda oturum açın
+2. **Tüm kaynaklar** veya **uygulama hizmetleri** ' ni seçin ve ardından mobil uygulamanızın adına tıklayın.
+3. **Araçlar** 'a tıklayın
+4. GÖZLEMLEME menüsünde **Kaynak Gezgini** ' ne tıklayın ve ardından **Git**' e tıklayın.  Yeni bir pencere veya sekme açılır.
+5. Sol taraftaki gezinmede sitenizin **config**, **authsettings öğesine tıklayın** düğümlerini genişletin.
+6. **Düzenle** 'ye tıklayın
+7. "AllowedExternalRedirectUrls" öğesini arayın.  Null ya da bir değerler dizisine ayarlanmış olabilir.  Değeri şu değere değiştirin:
 
          "allowedExternalRedirectUrls": [
              "http://localhost:3000",
              "https://localhost:3000"
          ],
 
-    URL'leri hizmetinizin URL ile değiştirin.  Örnekler `http://localhost:3000` (Node.js örnek hizmeti için) veya `http://localhost:4400` (Ripple hizmeti için).  Örnekleri - örneklerde sözü Hizmetleri dahil olmak üzere durumunuz farklı olabilir ancak, bu URL'ler uygulanır.
-8. Tıklayın **okuma/yazma** ekranının sağ üst köşesindeki düğme.
-9. Yeşil tıklayın **PUT** düğmesi.
+    URL 'Leri hizmetinizin URL 'Leriyle değiştirin.  Örnekler arasında `http://localhost:3000` (node. js örnek hizmeti için) veya `http://localhost:4400` (Ripple hizmeti için) verilebilir.  Ancak, bu URL 'Ler örnektir; örneklerde bahsedilen hizmetler de dahil olmak üzere durumunuz farklı olabilir.
+8. Ekranın sağ üst köşesindeki **oku/yaz** düğmesine tıklayın.
+9. Yeşil **PUT** düğmesine tıklayın.
 
-Bu noktada ayarlar kaydedildi.  Ayarları bitinceye kadar tarayıcı penceresini kapatmayın kaydediliyor.
-App Service CORS ayarlarını da bu döngü URL'leri ekleyin:
+Ayarlar bu noktada kaydedilir.  Ayarlar kaydetme işlemi tamamlanana kadar tarayıcı penceresini kapatmayın.
+Ayrıca, bu geri döngü URL 'Lerini App Service CORS ayarlarına ekleyin:
 
-1. [Azure portal]’nda oturum açın
-2. Seçin **tüm kaynakları** veya **uygulama hizmetleri** ardından mobil uygulamanızın adına tıklayın.
-3. Ayarlar dikey penceresi otomatik olarak açılır.  Tıklayarak içermiyorsa **tüm ayarlar**.
-4. Tıklayın **CORS** API menüsü altında.
-5. Enter kutuya eklemek istediğiniz URL'yi sağlanan ve Enter tuşuna basın.
-6. Gerektiğinde ek URL'leri girin.
+1. [Azure portalda]’nda oturum açın
+2. **Tüm kaynaklar** veya **uygulama hizmetleri** ' ni seçin ve ardından mobil uygulamanızın adına tıklayın.
+3. Ayarlar dikey penceresi otomatik olarak açılır.  Aksi takdirde, **Tüm ayarlar**' a tıklayın.
+4. API menüsünde **CORS** ' ye tıklayın.
+5. Belirtilen kutuya eklemek istediğiniz URL 'YI girin ve ENTER 'a basın.
+6. Gerektiğinde ek URL 'Ler girin.
 7. Ayarları kaydetmek için **Kaydet**’e tıklayın.
 
-Bu işlem yaklaşık 10-15 etkili olması için saniye yeni ayarların götürür.
+Yeni ayarların etkili olması yaklaşık 10-15 saniye sürer.
 
-## <a name="register-for-push"></a>Nasıl Yapılır: Anında iletme bildirimleri için kaydolun
-Yükleme [modul phonegap plugin push] anında iletme bildirimleri işlemek için.  Bu eklentiyi kullanarak kolayca eklenebilir `cordova plugin add` komut satırında veya Visual Studio içinde Git eklentisi yükleyici aracılığıyla komutu.  Aşağıdaki kodda, Apache Cordova uygulamanızı anında iletme bildirimleri için Cihazınızı kaydeder:
+## <a name="register-for-push"></a>Nasıl yapılır: anında iletme bildirimleri için kaydolma
+Anında iletme bildirimlerini işlemek için [PhoneGap-eklenti-gönderim] ' i yükleme.  Bu eklenti, komut satırında `cordova plugin add` komutu kullanılarak veya Visual Studio içindeki Git eklentisi yükleyicisi aracılığıyla kolayca eklenebilir.  Apache Cordova uygulamanızda aşağıdaki kod, cihazınızı anında iletme bildirimleri için kaydeder:
 
 ```javascript
 var pushOptions = {
@@ -168,22 +169,22 @@ pushHandler.on('error', function (error) {
 });
 ```
 
-Sunucudan anında iletme bildirimleri göndermek için Notification Hubs SDK'sı kullanın.  Hiçbir zaman doğrudan istemcilerden anında iletme bildirimleri gönderin. Bunun yapılması bir bildirim hub'ları veya PNS karşı hizmet saldırısı reddi tetiklemek için kullanılabilir.  PNS trafiğinizi bu tür saldırıları sonucunda yasaklamak.
+Sunucudan anında iletme bildirimleri göndermek için Notification Hubs SDK 'sını kullanın.  Anında iletme bildirimlerini hiçbir şekilde doğrudan istemcilerden göndermeyin. Bunun yapılması, Notification Hubs veya PNS 'ye karşı bir hizmet reddi saldırısı tetiklenmesi için kullanılabilir.  PNS, bu tür saldırılardan kaynaklanan trafiğinizi yasaklayamaz.
 
 ## <a name="more-information"></a>Daha fazla bilgi
 
-Ayrıntılı API ayrıntıları bulabilirsiniz bizim [API belgeleri](https://azure.github.io/azure-mobile-apps-js-client/).
+[API belgelerimizde](https://azure.github.io/azure-mobile-apps-js-client/)ayrıntılı API ayrıntılarını bulabilirsiniz.
 
 <!-- URLs. -->
-[Azure portal]: https://portal.azure.com
+[Azure portalda]: https://portal.azure.com
 [Azure Mobile Apps hızlı başlangıç]: app-service-mobile-cordova-get-started.md
-[Kimlik doğrulamayı kullanmaya başlama]: app-service-mobile-cordova-get-started-users.md
+[Kimlik doğrulaması ile çalışmaya başlama]: app-service-mobile-cordova-get-started-users.md
 [Add authentication to your app]: app-service-mobile-cordova-get-started-users.md
 
-[Azure mobil uygulamalar için Apache Cordova eklentisi]: https://www.npmjs.com/package/cordova-plugin-ms-azure-mobile-apps
-[ilk Apache Cordova uygulamanızı]: https://cordova.apache.org/#getstarted
+[Azure Mobile Apps Apache Cordova eklentisi]: https://www.npmjs.com/package/cordova-plugin-ms-azure-mobile-apps
+[ilk Apache Cordova uygulamanız]: https://cordova.apache.org/#getstarted
 [phonegap-facebook-plugin]: https://github.com/wizcorp/phonegap-facebook-plugin
-[modul phonegap plugin push]: https://www.npmjs.com/package/phonegap-plugin-push
-[cordova-plugin-device]: https://www.npmjs.com/package/cordova-plugin-device
-[cordova-plugin-ınappbrowser'a]: https://www.npmjs.com/package/cordova-plugin-inappbrowser
+[PhoneGap-eklenti-gönderim]: https://www.npmjs.com/package/phonegap-plugin-push
+[Cordova-eklenti-cihaz]: https://www.npmjs.com/package/cordova-plugin-device
+[Cordova-Plugin-ınappbrowser]: https://www.npmjs.com/package/cordova-plugin-inappbrowser
 [Query object documentation]: https://msdn.microsoft.com/library/azure/jj613353.aspx

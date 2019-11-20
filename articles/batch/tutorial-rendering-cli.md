@@ -3,20 +3,20 @@ title: Bulutta bir sahneyi işleme - Azure Batch
 description: Öğretici - Batch Renderin Hizmetini ve Azure Komut Satırı Arabirimini kullanarak Autodesk 3ds Max sahnesini Arnold ile işleme
 services: batch
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 ms.service: batch
 ms.topic: tutorial
 ms.date: 12/11/2018
 ms.author: lahugh
 ms.custom: mvc
-ms.openlocfilehash: 5abc2e673438a1ffa22e8d010bf2ee395cd521ae
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 28914244f7ea84ec133821d4b125cbd3b0378348
+ms.sourcegitcommit: a6718e2b0251b50f1228b1e13a42bb65e7bf7ee2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66127290"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71272328"
 ---
-# <a name="tutorial-render-a-scene-with-azure-batch"></a>Öğretici: Azure Batch ile bir Sahneyi işleme 
+# <a name="tutorial-render-a-scene-with-azure-batch"></a>Öğretici: Azure Batch bir sahneyi işleme 
 
 Azure Batch, kullanım başına ödeme temelinde bulut ölçekli işleme özellikleri sağlar. Azure Batch; Autodesk Maya, 3ds Max, Arnold ve V-Ray gibi işleme uygulamalarını destekler. Bu öğreticide, Azure Komut Satırı Arabirimi kullanılarak Batch ile küçük bir sahneyi işleme adımları gösterilir. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
@@ -168,25 +168,25 @@ az storage container create \
     --name job-myrenderjob
 ```
 
-Çıkış dosyalarını kapsayıcıya yazmak için, Batch'in Paylaşılan Erişim İmzası (SAS) belirteci kullanması gerekir. [az storage account generate-sas](/cli/azure/storage/account#az-storage-account-generate-sas) komutuyla belirteci oluşturun. Bu örnekte, hesaptaki herhangi bir blob kapsayıcısına yazmak için belirteç oluşturulur ve 15 Kasım 2018'de belirtecin süresi dolar:
+Çıkış dosyalarını kapsayıcıya yazmak için, Batch'in Paylaşılan Erişim İmzası (SAS) belirteci kullanması gerekir. [az storage account generate-sas](/cli/azure/storage/account#az-storage-account-generate-sas) komutuyla belirteci oluşturun. Bu örnekte, hesaptaki herhangi bir blob kapsayıcısına yazmak için bir belirteç oluşturulur ve 15 Kasım 2020 ' de belirtecin süresi dolar:
 
 ```azurecli-interactive
 az storage account generate-sas \
     --permissions w \
     --resource-types co \
     --services b \
-    --expiry 2019-11-15
+    --expiry 2020-11-15
 ```
 
 Komut tarafından döndürülen belirteci not alın; aşağıdakine benzer olacaktır. Sonraki bir adımda bu belirteci kullanacaksınız.
 
 ```
-se=2018-11-15&sp=rw&sv=2017-04-17&ss=b&srt=co&sig=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+se=2020-11-15&sp=rw&sv=2019-09-24&ss=b&srt=co&sig=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ## <a name="render-a-single-frame-scene"></a>Tek kareli bir sahneyi işleme
 
-### <a name="create-a-job"></a>İş oluştur
+### <a name="create-a-job"></a>Bir iş oluşturma
 
 [az batch job create](/cli/azure/batch/job#az-batch-job-create) komutunu kullanarak havuzda çalıştırılacak bir işleme işi oluşturun. Başlangıçta iş hiçbir görev içermez.
 
@@ -217,7 +217,7 @@ JSON dosyasındaki `blobSource` ve `containerURL` öğelerini, depolama hesabın
   "commandLine": "cmd /c \"%3DSMAX_2018%3dsmaxcmdio.exe -secure off -v:5 -rfw:0 -start:1 -end:1 -outputName:\"dragon.jpg\" -w 400 -h 300 MotionBlur-DragonFlying.max\"",
   "resourceFiles": [
     {
-        "blobSource": "https://mystorageaccount.blob.core.windows.net/scenefiles/MotionBlur-DragonFlying.max",
+        "httpUrl": "https://mystorageaccount.blob.core.windows.net/scenefiles/MotionBlur-DragonFlying.max",
         "filePath": "MotionBlur-DragonFlying.max"
     }
   ],

@@ -32,12 +32,18 @@
       items:
         - name: Verilere erişim atama
           href: assign-access-acm-data.md
+        - name: Yaygın görevlerde maliyet analizini kullanma
+          href: cost-analysis-common-uses.md
         - name: Maliyet uyarılarını kullanma
           href: cost-mgt-alerts-monitor-usage-spending.md
         - name: AWS tümleştirmesini ayarlama ve yapılandırma
           href: aws-integration-set-up-configure.md
         - name: AWS maliyet ve kullanımını yönetme
           href: aws-integration-manage.md
+        - name: İş ortakları için Maliyet Yönetimi
+          href: get-started-partners.md
+        - name: Power BI Desktop’a bağlanma
+          href: /power-bi/desktop-connect-azure-cost-management
     - name: Başvuru
       items:
         - name: Azure Maliyet Yönetimi REST API

@@ -1,53 +1,53 @@
 ---
-title: Azure VMware çözümüyle CloudSimple - CloudSimple Bakım ve güncelleştirmeler
-description: Zamanlanan Bakım ve güncelleştirmeler için CloudSimple hizmet işlemi açıklanır
+title: CloudSimple-CloudSimple bakımı ve güncelleştirmeleri tarafından Azure VMware çözümü
+description: Zamanlanmış bakım ve güncelleştirmeler için CloudSimple hizmeti işlemini açıklar
 author: sharaths-cs
 ms.author: dikamath
-ms.date: 04/30/2019
+ms.date: 08/20/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 4dde358f10e9ac5054297ff68a0971404c0dc135
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 92f02c0abef6755213d4c73189c7e0a593867ef6
+ms.sourcegitcommit: b3bad696c2b776d018d9f06b6e27bffaa3c0d9c3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65160253"
+ms.lasthandoff: 08/21/2019
+ms.locfileid: "69877943"
 ---
-# <a name="cloudsimple-maintenance-and-updates"></a>CloudSimple Bakım ve güncelleştirmeler
+# <a name="cloudsimple-maintenance-and-updates"></a>CloudSimple bakım ve güncelleştirmeleri
 
-Özel bulut ortamı yok tek hata noktası sağlamak için tasarlanmıştır:
+Özel bulut ortamı, tek hata noktası olmayacak şekilde tasarlanmıştır.
 
-* ESXi kümeler vSphere yüksek kullanılabilirlik ile yapılandırılmıştır. Kümeler, dayanıklılık için en az bir yedek düğüm için boyutlandırılır.
-* Yedekli birincil depolama, tek bir hataya karşı koruma sağlamak için en az üç düğüm gerektiren vSAN tarafından sağlanır. vSAN, daha büyük kümeleri için daha yüksek bir dayanıklılık sağlamak üzere yapılandırılabilir.
-* vCenter ve PSC NSX Yöneticisi VM'ler depolama arızasına karşı korumak için RAID 10 saklama İlkesi ile yapılandırılır. Vm'leri vSphere ile HA düğümü/ağ hatalarına karşı korunur.
-* ESXi konakları gereksiz fanlar ve NIC ' var.
-* TOR ve sırt anahtarları HA çiftlerini dayanıklılık sağlamak üzere yapılandırılır.
+* ESXi kümeleri, vSphere yüksek kullanılabilirlik (HA) ile yapılandırılır. Kümeler dayanıklılık için en az bir yedek düğüme sahip olacak şekilde boyutlandırılır.
+* Gereksiz birincil depolama, tek bir hataya karşı koruma sağlamak için en az üç düğüm gerektiren vSAN tarafından sağlanır. vSAN, daha büyük kümeler için daha yüksek dayanıklılık sağlamak üzere yapılandırılabilir.
+* vCenter, PSC ve NSX Yöneticisi VM 'Leri, depolama hatasına karşı korunmak için RAID-10 depolama ile yapılandırılır. Sanal makineler vSphere HA tarafından düğüm/ağ hatalarıyla korunmaktadır.
+* ESXi konaklarının gereksiz fanları ve NIC 'Leri vardır.
+* TOR ve sırt geçişleri, dayanıklılık sağlamak için HA çiftlerine göre yapılandırılmıştır.
 
-CloudSimple sürekli çalışma süresi ve kullanılabilirlik için aşağıdaki sanal makineleri izler ve kullanılabilirlik SLA'larını sunar:
+CloudSimple, çalışma süresi ve kullanılabilirlik için aşağıdaki VM 'Leri sürekli izler ve kullanılabilirlik SLA 'Ları sağlar:
 
-* ESXi ana bilgisayarları
+* ESXi Konakları
 * vCenter
 * PSC
 * NSX Yöneticisi
 
-CloudSimple ayrıca aşağıdaki hataları için sürekli olarak izler:
+CloudSimple Ayrıca hatalara karşı sürekli olarak aşağıdaki işlemleri izler:
 
 * Sabit diskler
-* Fiziksel NIC bağlantı noktası
+* Fiziksel NIC bağlantı noktaları
 * Sunucular
-* Fanı
-* Güç
+* Larına
+* Açılma
 * Anahtarlar
-* Anahtar bağlantı noktaları
+* Bağlantı noktalarını Değiştir
 
-Bir disk veya düğüm başarısız olursa, yeni bir düğüm hemen sistem durumu geri getirmek için etkilenen VMware küme otomatik olarak eklenir.
+Bir disk veya düğüm başarısız olursa, etkilenen VMware kümesine hemen sistem durumuna geri getirmek için yeni bir düğüm otomatik olarak eklenir.
 
-CloudSimple yedekler, korur ve bu özel Bulutları VMware öğeleri güncelleştirir:
+CloudSimple yedekler, bu VMware öğelerini özel bulutlarda tutar ve güncelleştirir:
 
 * ESXi
-* vCenter Platform Hizmetleri
+* vCenter platform hizmetleri
 * Denetleyici
 * vSAN
 * NSX
@@ -56,53 +56,53 @@ CloudSimple yedekler, korur ve bu özel Bulutları VMware öğeleri güncelleşt
 
 CloudSimple yedeklemesi şunları içerir:
 
-* VCenter ve PSC DVS her gece artımlı yedeklerini kuralları.
-* Kullanım vCenter'ın uygulama katmanındaki bileşenleri yedeklemek için yerel API.
-* Otomatik yedekleme önce herhangi bir güncelleştirme veya yükseltme VMware yönetim yazılımı.
-* Kaynaktaki verileri Azure'a TLS1.2 şifrelenmiş bir kanal üzerinden aktarmadan önce vcenter veri şifreleme. Verilerin nerede bölgede çoğaltılan Azure blob'a depolanır.
+* VCenter, PSC ve DVS kurallarının gece artımlı yedeklemeleri.
+* uygulama katmanında bileşenleri yedeklemek için vCenter yerel API 'Leri.
+* VMware yönetim yazılımını güncelleştirmeden veya yükseltmeden önce otomatik yedekleme.
+* veriler TLS 1.2 ile şifrelenmiş bir kanal üzerinden Azure 'a aktarılmadan önce kaynaktaki vCenter veri şifrelemesi. Veriler, bölgeler arasında çoğaltılan bir Azure Blob 'unda depolanır.
 
-Bir geri yükleme açarak isteyebilir bir [destek isteği](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest).
+Bir [destek isteği](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)açarak geri yükleme isteğinde bulabilirsiniz.
 
 ## <a name="maintenance"></a>Bakım
 
-CloudSimple birden fazla planlanmış bakım gerçekleştirir.
+CloudSimple, çeşitli planlı bakım türlerini yapar.
 
-### <a name="backendinternal-maintenance"></a>Arka uç/dahili bakım
+### <a name="backendinternal-maintenance"></a>Arka uç/iç bakım
 
-Bu bakım, genellikle fiziksel varlıklar yeniden yapılandırma ya da yazılım düzeltme eklerini yüklemeyi içerir. Bu normal tüketiminin bakımda varlıkları etkilemez. Her bir fiziksel rafa giderek yedekli NIC ile normal ağ trafiğini ve özel bulut işlemleri etkilenmez. Bir performans etkisi, yalnızca kuruluşunuzun tam yedekli bant genişliği bakım aralığı sırasında kullanılacak bekliyorsa fark edebilirsiniz.
+Bu bakım genellikle fiziksel varlıkları yeniden yapılandırma veya yazılım düzeltme eklerini yükleme içerir. Hizmet verilen varlıkların normal tüketimini etkilemez. Her fiziksel rafa giden yedekli NIC 'lerle, normal ağ trafiği ve özel bulut işlemleri etkilenmez. Yalnızca kuruluşunuz, bakım aralığı sırasında tam yedekli bant genişliğini kullanmayı bekliyorsa, bir performans etkisi fark edebilirsiniz.
 
-### <a name="cloudsimple-portal-maintenance"></a>CloudSimple portal bakım
+### <a name="cloudsimple-portal-maintenance"></a>CloudSimple Portal Bakımı
 
-Bazı sınırlı kapalı kalma CloudSimple denetim düzlemi veya altyapı güncelleştirildiğinde gereklidir. Şu anda bakım aralıkları ayda bir kez kadar sık olabilir. Sıklığını, zaman içinde reddetme beklenir. CloudSimple portal bakımı için bildirim sağlar ve aralığı olabildiğince kısa tutar. Bir portal bakım aralığı sırasında aşağıdaki hizmetleri herhangi bir etkisi çalışmaya devam eder:
+CloudSimple denetim düzlemi veya altyapısı güncelleniyorsa, bazı sınırlı hizmet kapalı kalma süresi gereklidir. Şu anda, bakım aralıkları ayda bir kez daha sık olabilir. Zamanın zaman içinde reddedilecek sıklık beklenmektedir. CloudSimple, Portal bakımı için bildirim sağlar ve aralığı mümkün olduğunca kısa tutar. Bir portal bakım aralığı sırasında, aşağıdaki hizmetler herhangi bir etki olmadan çalışmaya devam eder:
 
-* VMware yönetim düzlemi ve uygulamalar
-* vCenter erişim
+* VMware yönetim düzlemi ve uygulamaları
+* vCenter erişimi
 * Tüm ağ ve depolama
-* Tüm Azure trafiğinin
+* Tüm Azure trafiği
 
 ### <a name="vmware-infrastructure-maintenance"></a>VMware altyapı Bakımı
 
-Bazen VMware altyapısı yapılandırmada değişiklik yapmak gereklidir.  Şu anda, bu aralık 1-2 ayda oluşabilir, ancak sıklığı zaman içinde reddetme beklenir. Bu tür bir bakım genellikle normal tüketim CloudSimple Hizmetleri kesintiye uğratmadan yapılabilir. Bir VMware bakım aralığı sırasında aşağıdaki hizmetleri herhangi bir etkisi çalışmaya devam eder:
+Bazen VMware altyapısının yapılandırmasında değişiklik yapmak gerekir.  Şu anda bu aralıklar her 1-2 ayda bir gerçekleşebilir, ancak zamanın zaman içinde reddetmesi beklenir. Bu tür bir bakım genellikle CloudSimple hizmetlerinin normal tüketimi kesintiye uğramadan yapılabilir. Bir VMware bakım aralığı sırasında, aşağıdaki hizmetler herhangi bir etki olmadan çalışmaya devam eder:
 
-* VMware yönetim düzlemi ve uygulamalar
-* vCenter erişim
+* VMware yönetim düzlemi ve uygulamaları
+* vCenter erişimi
 * Tüm ağ ve depolama
-* Tüm Azure trafiğinin
+* Tüm Azure trafiği
 
 ## <a name="updates-and-upgrades"></a>Güncelleştirmeler ve yükseltmeler
 
-CloudSimple yaşam döngüsü yönetimi ve özel bulutta VMware yazılımının (ESXi ve vCenter, PSC ve NSX) sorumludur.
+CloudSimple, özel bulutta VMware yazılımının (ESXi, vCenter, PSC ve NSX) yaşam döngüsü yönetiminden sorumludur.
 
-Yazılım güncelleştirmeleri içerir:
+Yazılım güncelleştirmeleri şunları içerir:
 
-* **Düzeltme ekleri**. Güvenlik düzeltme ekleri veya VMware tarafından yayımlanan hata düzeltmeleri.
-* **Güncelleştirmeleri**. Bir VMware yığın bileşenin podverze değiştirin.
-* **Yükseltmeler**. Bir VMware yığın bileşenin sürümle değiştirin.
+* **Düzeltme ekleri**. VMware tarafından yayınlanan güvenlik düzeltme ekleri veya hata düzeltmeleri.
+* **Güncelleştirmeler**. VMware Stack bileşeninin küçük sürüm değişikliği.
+* **Yükseltmeleri**. VMware Stack bileşeninin ana sürüm değişikliği.
 
-Vmware'den kullanılabilir duruma geldiğinde CloudSimple kritik güvenlik düzeltme eki sınar. SLA'sı CloudSimple bir hafta içinde özel bulut ortamları için güvenlik düzeltme ekini yapar.
+CloudSimple, VMware 'den kullanılabilir hale geldiğinde kritik bir güvenlik düzeltme ekini test eder. SLA 'Sı başına, CloudSimple, güvenlik düzeltme ekini bir hafta içinde özel bulut ortamlarına kaydeder.
 
-Üç aylık bakım güncelleştirmeleri için VMware yazılım bileşenlerini CloudSimple sağlar. VMware yazılım'ın yeni bir ana sürüm kullanılabilir olduğunda CloudSimple yükseltme için uygun bakım penceresi koordine etmek için müşteriler ile çalışır.
+CloudSimple, VMware yazılım bileşenlerine üç aylık bakım güncelleştirmeleri sağlar. VMware yazılımının yeni bir ana sürümü kullanılabilir olduğunda, CloudSimple, yükseltme için uygun bir bakım penceresini koordine etmek üzere müşterilerle birlikte çalışmaktadır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Geri Veeam kullanarak iş yükü Vm'leri yedekleme](https://docs.azure.cloudsimple.com/backup-workloads-veeam/).
+[Veead kullanarak iş yükü VM 'lerini yedekleme](backup-workloads-veeam.md)

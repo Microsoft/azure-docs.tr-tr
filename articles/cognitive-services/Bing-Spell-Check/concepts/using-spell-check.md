@@ -1,50 +1,50 @@
 ---
 title: Bing Yazım Denetimi API’sini kullanma
-titlesuffix: Azure Cognitive Services
-description: Bing yazım denetimi modları, ayarları ve API için ilgili diğer bilgileri hakkında bilgi edinin.
+titleSuffix: Azure Cognitive Services
+description: Bing Yazım Denetimi modları, ayarları ve API ile ilgili diğer bilgiler hakkında bilgi edinin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-spell-check
-ms.topic: overview
+ms.topic: conceptual
 ms.date: 02/20/2019
 ms.author: aahi
-ms.openlocfilehash: b847615e8440a8992c8130d12cd6111afe3d33d2
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: c5c9ad8be8bd4cd834b01a0c67e0bbc81b8cdd4a
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66390232"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68881880"
 ---
 # <a name="using-the-bing-spell-check-api"></a>Bing Yazım Denetimi API’sini kullanma
 
-Bing yazım denetimi API'si bağlamsal dil bilgisi ve yazım denetimi kullanma hakkında bilgi edinmek için bu makaleyi kullanın. Sözlüğe dayalı kural kümeleri üzerinde yazım denetleyicileri kullanır, ancak makine öğrenimi ve istatistiksel makine çevirisi doğru ve bağlamsal düzeltmeleri sağlamak için Bing yazım denetleyicisi yararlanır. 
+Bağlamsal dilbilgisi ve yazım denetimi gerçekleştirmek için Bing Yazım Denetimi API'si kullanma hakkında bilgi edinmek için bu makaleyi kullanın. Çoğu yazım denetimcisi sözlük tabanlı kural kümelerine güvenirken, Bing yazım denetleyicisi doğru ve bağlamsal düzeltmeler sağlamak için makine öğrenimi ve istatistiksel makine çevirisi kullanır. 
 
 ## <a name="spell-check-modes"></a>Yazım denetimi modları
 
 API, `Proof` ve `Spell` olmak üzere iki denetleme modunu destekler.  Örnekleri [burada](https://azure.microsoft.com/services/cognitive-services/spell-check/) deneyebilirsiniz.
 
-### <a name="proof---for-documents"></a>Kanıt - belgeleri 
+### <a name="proof---for-documents"></a>Prova-belgeler için 
 
 `Proof`, varsayılan moddur. `Proof` yazım denetimi modu, belge oluşturmaya yardımcı olmak için büyük/küçük harf kullanımını düzeltme ve temel noktalama işaretleri ekleme gibi çeşitli özellikler sunarak en kapsamlı denetimleri sağlar. Ancak bu mod yalnızca en-US (İngilizce-Amerika Birleşik Devletleri), es-ES (İspanyolca) ve pt-BR (Portekizce) pazarlarında kullanılabilir. (Not: İspanyolca ve Portekizce için yalnızca beta sürümünde sunulur). Diğer tüm pazarlar için mode sorgu parametresini Spell olarak ayarlayın. 
 
 > [!NOTE]
-> Sorgu metni uzunluğu 4096 aşarsa, 4096 karakterle kesilecek sonra işlenir. 
+> Sorgu metninin uzunluğu 4096 ' i aşarsa, 4096 karaktere kısaltılacak ve sonra işlenir. 
 
-### <a name="spell----for-web-searchesqueries"></a>-Web aramaları/sorgular için yazım
+### <a name="spell----for-web-searchesqueries"></a>Web aramaları/sorguları için yazım denetimi
 
 `Spell`, daha iyi arama sonuçları döndürmek için daha agresif şekilde çalışır. `Spell` modu, çoğu yazım hatasını bulur ancak `Proof` modunda yakalanan, gibi bazı dil bilgisi hatalarını (örneğin, büyük/küçük harf kullanımı ve yinelenen sözcükler ile ilgili hatalar) saptayamaz.
 
 > [!NOTE]
-> * Maksimum desteklenen sorgu uzunluğu aşağıda verilmiştir. Sorgu en fazla uzunluğu aşıyor, sorgu ve sonuçları değiştirilmeyecek.
->    * Aşağıdaki dil kodları 130 karakter: tr, de, es, fr, pl, pt, sv, ru, nl, nb, tr-tr, it, zh, ko. 
->    * diğer tüm 65 karakter.
-> * Yazım modu köşeli ayraç karakterleri desteklemez (`[` ve `]`), sorgu ve tutarsız sonuçlara neden olabilir. Bunları Yazım modunu kullanırken, sorgularından kaldırma öneririz.
+> * Desteklenen en fazla sorgu uzunluğu aşağıda verilmiştir. Sorgu uzunluk üst sınırını aşarsa sorgu ve sonuçları değiştirilmez.
+>    * Şu dil kodları için 130 karakter: en, de, es, fr, pl, PT, ZF, ru, nl, NB, tr-tr, it, zh, Ko. 
+>    * Tüm diğerleri için 65 karakter.
+> * Yazım modu sorgularda köşeli ayraç karakterlerini (`[` ve `]`) desteklemez ve tutarsız sonuçlara neden olabilir. Yazım modunu kullanırken Sorgularınızdaki onları kaldırmanızı öneririz.
 
 ## <a name="market-setting"></a>Pazar ayarı
 
-A [pazara kod](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#market-codes) ile belirtilmelidir `mkt` sorgu parametresi isteğinizdeki. API, aksi durumda bir varsayılan piyasaya isteğin IP adresine göre kullanır.
+İsteğiniz içinde `mkt` sorgu parametresiyle bir [Pazar kodu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#market-codes) belirtilmelidir. Bu durumda, API, isteğin IP adresine göre varsayılan bir pazar kullanacaktır.
 
 
 ## <a name="http-post-and-get-support"></a>HTTP POST ve GET desteği
@@ -122,5 +122,5 @@ Aşağıda, bir önceki isteğin yanıtı gösterilmektedir. Yanıt, [SpellCheck
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Bing yazım denetimi API'si nedir?](../overview.md)
+- [Bing Yazım Denetimi API'si nedir?](../overview.md)
 - [Bing Yazım Denetimi API’si v7 Başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference)

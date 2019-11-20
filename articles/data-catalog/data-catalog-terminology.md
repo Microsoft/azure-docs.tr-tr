@@ -1,89 +1,89 @@
 ---
-title: Azure veri Kataloğu terminolojisi
-description: Bu makalede, kavramlar ve terimler Azure veri Kataloğu belgelerde kullanılan bir giriş sağlar.
+title: Azure Veri Kataloğu terminolojisi
+description: Bu makalede, Azure Veri Kataloğu belgelerinde kullanılan kavramlar ve koşullara bir giriş sunulmaktadır.
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 04/05/2019
-ms.openlocfilehash: a6f2cf1dcee6a85376c8d767e57c504b6b246e5d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 08/01/2019
+ms.openlocfilehash: d6c813dec3922334f7462b1226ea22371fd5f43b
+ms.sourcegitcommit: c662440cf854139b72c998f854a0b9adcd7158bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60580468"
+ms.lasthandoff: 08/02/2019
+ms.locfileid: "68736283"
 ---
-# <a name="azure-data-catalog-terminology"></a>Azure veri Kataloğu terminolojisi
+# <a name="azure-data-catalog-terminology"></a>Azure Veri Kataloğu terminolojisi
 
-Bu makalede, kavramlar ve terimler Azure veri Kataloğu belgelerde kullanılan bir giriş sağlar.
+Bu makalede, Azure Veri Kataloğu belgelerinde kullanılan kavramlar ve koşullara bir giriş sunulmaktadır.
 
 ## <a name="catalog"></a>Katalog
 
-Azure veri Kataloğu, veri kaynakları ve veri varlıklarını kaydedilebilir meta verileri bulut tabanlı bir depodur. Kataloğu, veri kaynağından ayıklanan yapısal meta verilere ve kullanıcılar tarafından eklenen açıklayıcı meta veri merkezi depolama konumu olarak görev yapar.
+Azure Veri Kataloğu, veri kaynakları ve veri varlıklarının kaydedileceği bulut tabanlı bir meta veri deposudur. Katalog, veri kaynaklarından ayıklanan yapısal meta veriler için ve kullanıcılar tarafından eklenen açıklayıcı meta veriler için merkezi bir depolama konumu görevi görür.
 
 ## <a name="data-source"></a>Veri kaynağı
 
-Bir veri kaynağı, bir sistem veya veri varlıklarını yöneten kapsayıcı ' dir. SQL Server veritabanları, Oracle veritabanları, SQL Server Analysis Services veritabanları (tablosal veya çok boyutlu) ve SQL Server Reporting Services sunucularında örneklerindendir.
+Veri kaynağı, veri varlıklarını yöneten bir sistem veya kapsayıcıdır. Örnekler arasında SQL Server veritabanları, Oracle veritabanları, SQL Server Analysis Services veritabanları (Tablolu veya çok boyutlu) ve SQL Server Reporting Services sunucuları verilebilir.
 
 ## <a name="data-asset"></a>Veri varlığı
 
-Veri varlıklarını kataloğa kayıtlı veri kaynaklarını içindeki nesneleridir. SQL Server Reporting Services raporları ve SQL Server tabloları ve görünümleri, Oracle tabloları ve görünümleri, SQL Server Analysis Services ölçüler, boyutlar ve KPI'leri örnekleri içerir.
+Veri varlıkları, katalog ile kaydedilenebilir veri kaynakları içinde yer alan nesnelerdir. SQL Server tabloları ve görünümleri, Oracle tabloları ve görünümleri, SQL Server Analysis Services ölçüleri, boyutları ve KPI 'Leri ve SQL Server Reporting Services raporları sayılabilir.
 
-## <a name="data-asset-location"></a>Veri varlığı konumu
+## <a name="data-asset-location"></a>Veri varlık konumu
 
-Kataloğu veri kaynağı veya bir istemci uygulaması kullanarak kaynağına bağlanmak için kullanılan veri varlığına konumunu saklar. Biçimi ve konumu ayrıntılarını veri kaynağı türüne göre değişir. Örneğin, bir SQL Server Raporlama Hizmetleri rapor URL'sini tarafından tanımlanabilir sırada bir SQL Server tablo Dört bölümlü adıyla – sunucu adı, veritabanı adı, şema adı, nesne adı – tanımlanabilir.
+Katalog, bir veri kaynağının veya veri varlığının konumunu depolar ve bu, bir istemci uygulaması kullanılarak kaynağa bağlanmak için kullanılabilir. Konumun biçimi ve ayrıntıları, veri kaynağı türüne göre farklılık gösterir. Örneğin, bir SQL Server tablosu, dört bölüm adı – sunucu adı, veritabanı adı, şema adı, nesne adı ile tanımlanabilir, ancak bir SQL Server Reporting Services raporu URL 'SI ile tanımlanabilir.
 
-## <a name="structural-metadata"></a>Yapısal meta verileri
+## <a name="structural-metadata"></a>Yapısal meta veriler
 
-Yapısal meta verilerin bir veri varlığına yapısını açıklayan bir veri kaynağından ayıklanan meta verileri ' dir. Bu varlıklar konumu, nesne adı ve türü ve ek türe özgü özelliklerini içerir. Örneğin, adları ve veri türleri nesnenin sütunları için tabloları ve görünümleri yapısal meta verileri içerir.
+Yapısal meta veriler, bir veri varlığının yapısını açıklayan bir veri kaynağından ayıklanan meta verilerdir. Bu, varlık konumunu, nesne adını ve türünü ve türe özgü ek özellikleri içerir. Örneğin, tablolar ve görünümler için yapısal meta veriler, nesne sütunlarının adlarını ve veri türlerini içerir.
 
-## <a name="descriptive-metadata"></a>Açıklayıcı meta verileri
+## <a name="descriptive-metadata"></a>Açıklayıcı meta veriler
 
-Açıklayıcı meta verileri, amacını ve amacı, bir veri varlığı tanımlayan meta verilerdir. Açıklayıcı meta verileri Azure veri Kataloğu portalını kullanarak katalog kullanıcıları tarafından genellikle eklenir, ancak bunu ayrıca veri kaynağından sırasında kayıt ayıklanabileceği. Azure veri Kataloğu kayıt aracı SQL Server Analysis Services ve SQL Server Reporting Services ve gelen açıklama özelliğinden açıklamaları gibi ayıklayacaktır [genişletilmiş özelliği ms_description](https://technet.microsoft.com/library/ms190243.aspx) SQL Bu özellikler değerlerle doldurulduğunu, server veritabanları.
+Açıklayıcı meta veriler, bir veri varlığının amacını veya amacını tanımlayan meta verileridir. Genellikle, Azure Veri Kataloğu Portalı kullanılarak Katalog kullanıcıları tarafından açıklayıcı meta veriler eklenir, ancak kayıt sırasında veri kaynağından da ayıklanamaz. Örneğin, Azure Veri Kataloğu kayıt aracı, SQL Server Analysis Services ve SQL Server Reporting Services içindeki Description özelliğinden ve SQL Server veritabanlarındaki [MS_Description Extended özelliğinden](https://technet.microsoft.com/library/ms190243.aspx) açıklamaları ayıklar, ancak Bu özellikler değerlerle doldurulmuştur.
 
 ## <a name="request-access"></a>Erişim izni iste
 
-Bir veri varlığına ait açıklayıcı meta verileri, veri varlığı veya veri kaynağına erişim isteme konusunda bilgi içerebilir. Bu bilgiler, veri varlığı konumu ile sunulan ve bir veya daha fazla aşağıdaki seçeneklerden birini içerebilir:
+Veri varlığının açıklayıcı meta verileri, veri varlığına veya veri kaynağına erişim isteme hakkında bilgi içerebilir. Bu bilgiler, veri varlık konumuyla birlikte sunulur ve aşağıdaki seçeneklerden birini veya daha fazlasını içerebilir:
 
-* Bir kullanıcı veya ekibe veri kaynağına erişim hakkı vermekten sorumlu e-posta adresi.
-* Kullanıcılar veri kaynağına erişmek için izlemeniz gereken belgelenmiş işlem URL'si.
-* Veri kaynağına erişmek için kullanılan bir kimlik ve erişim yönetim aracı (Microsoft Identity Manager gibi) URL'si.
-* Kullanıcılar veri kaynağına erişim elde edebilir nasıl açıklar serbest metin girişi.
+* Veri kaynağına erişim vermekten sorumlu kullanıcı veya takımın e-posta adresi.
+* Veri kaynağına erişim kazanmak için kullanıcıların izlemesi gereken belgelenmiş işlemin URL 'SI.
+* Veri kaynağına erişim kazanmak için kullanılabilen bir kimlik ve erişim yönetimi aracının URL 'SI (örneğin Microsoft Identity Manager).
+* Kullanıcıların veri kaynağına nasıl erişim kazanabileceğinizi açıklayan bir serbest metin girişi.
 
 ## <a name="preview"></a>Önizleme
 
-Bir Azure veri Kataloğu kayıt sırasında veri kaynağından ayıklanan ve veri varlık meta verilerle kataloğunda depolanan en fazla 20 kayıt anlık görüntüsünü önizlemededir. Önizleme yardımcı olabilecek bir veri varlığı bulma kullanıcılar daha iyi anlamak, işlevi ve amacı. Diğer bir deyişle, örnek verileri görme hakkındaki yalnızca sütun adları ve veri türleri görmeye değerinden daha değerli olabilir.
-Önizlemeler, yalnızca tablolar ve görünümler için desteklenir ve kayıt sırasında kullanıcı tarafından açıkça seçilmelidir.
+Azure Veri Kataloğu 'ndaki önizleme, kayıt sırasında veri kaynağından Ayıklanacak ve veri varlık meta verileri ile katalogda depolanabilen 20 ' ye kadar kaydın bir anlık görüntüsüdür. Önizleme, bir veri varlığını keşfettiğiniz kullanıcıların işlevini ve amacını daha iyi anlamasına yardımcı olabilir. Diğer bir deyişle, örnek verileri görmek yalnızca sütun adlarını ve veri türlerini görmekten daha değerli olabilir.
+Önizlemeler yalnızca tablolar ve görünümler için desteklenir ve kayıt sırasında Kullanıcı tarafından açıkça seçilmelidir.
 
 ## <a name="data-profile"></a>Veri Profili
 
-Azure veri Kataloğu'nda veri profili, kayıt sırasında veri kaynağından ayıklanan ve veri varlık meta verilerle kataloğunda depolanan bir kayıtlı veri varlığı hakkındaki meta verileri tablo ve sütun düzeyi anlık görüntüsüdür. Veri profili yardımcı olabilecek bir veri varlığı bulma kullanıcılar daha iyi anlamak, işlevi ve amacı. Benzer şekilde önizlemeleri, veri profilleri açıkça kullanıcı tarafından kayıt sırasında seçilmelidir.
+Azure Veri Kataloğu 'ndaki bir veri profili, kayıt sırasında veri kaynağından ayıklanabilen ve veri varlığı meta verileriyle Katalogda depolanan kayıtlı bir veri varlığı hakkındaki tablo düzeyi ve sütun düzeyi meta verilerin bir anlık görüntüsüdür. Veri profili, bir veri varlığını keşfettiğiniz kullanıcıların işlevini ve amacını daha iyi anlamasına yardımcı olabilir. Önizlemelere benzer şekilde, veri profillerinin kayıt sırasında Kullanıcı tarafından açıkça seçilmesi gerekir.
 
 > [!NOTE]
-> Veri profili ayıklanması büyük tablolar ve görünümler için pahalı bir işlem olabilir ve bir veri kaynağına kaydetmek için gereken zamanı önemli ölçüde artırabilirsiniz.
+> Veri profilini ayıklamak büyük tablolar ve görünümler için maliyetli bir işlem olabilir ve bir veri kaynağını kaydetmek için gereken süreyi önemli ölçüde artırabilir.
 
 
 ## <a name="user-perspective"></a>Kullanıcı perspektifi
 
-Azure veri Kataloğu'nda herhangi bir kullanıcı bir kayıtlı veri varlığı için açıklayıcı meta verileri sağlayabilirsiniz. Her kullanıcı verileri ve kullanımına ayrı bir perspektif sahiptir. Örneğin, bir sunucu için sorumlu yönetici, hizmet düzeyi sözleşmesi (SLA) veya yedekleme pencereleri ayrıntılarını sağlayabilir; Veri Görevlisi işletmelere yönelik belgelere bağlantılar verilerinizin desteklediği işlemleri sağlayabilir; ve diğer analistleri için en uygun olan ve olabilen bulmak ve verileri anlamak için gereken bu kullanıcılar için en değerli koşulları açıklamasında Analistin sağlayabilir.
+Azure veri kataloğunda, tüm kullanıcılar kayıtlı bir veri varlığı için açıklayıcı meta veriler sağlayabilir. Her kullanıcının verileri ve kullanımı üzerinde ayrı bir perspektifi vardır. Örneğin, bir sunucudan sorumlu yönetici, hizmet düzeyi sözleşmesi (SLA) veya yedekleme pencerelerinin ayrıntılarını sağlayabilir; veri, verilerin desteklediği iş süreçlerine yönelik belgelere bağlantılar verebilir; Analist, diğer analistlerle ilgili şartlar için bir açıklama sağlayabilir ve bu, verileri bulması ve anlaması gereken kullanıcılara en değerli olabilir.
 
-Her biri bu Perspektifleri kendiliğinden değerlidir ve Azure veri Kataloğu ile her kullanıcının tüm kullanıcıların veri ve amacını anlamak için bu bilgiyi kullanabilirsiniz, ancak bunları için anlamlı bilgiler sağlayabilir.
+Bu perspektiflerin her biri, doğal olarak değerlidir ve Azure Veri Kataloğu ile her bir Kullanıcı, verileri ve amacını anlamak için bu bilgileri kullanabilir.
 
 ## <a name="expert"></a>Uzman
 
-Uzman bilinçli bir "Uzman" perspektifi için bir veri varlığına sahip olarak tanımlanmış bir kullanıcıdır. Herhangi bir kullanıcı, bir varlık için uzman kendileri veya başka bir kullanıcı ekleyebilirsiniz. Azure veri Kataloğu'nda herhangi bir ek ayrıcalık Uzman listelenmesini BELİRTMEMEKTEDİR; Bu, kullanıcıların bir varlığın açıklayıcı meta verileri gözden geçirirken kullanışlı olması büyük olasılıkla bu Perspektifler kolayca bulmasına olanak tanır.
+Uzman, bir veri varlığı için bilinçli "uzman" perspektifine sahip olarak tanımlanmış bir kullanıcı. Herhangi bir Kullanıcı, kendisini veya başka bir kullanıcıyı bir varlık için uzman olarak ekleyebilir. Uzman olarak listelenmekte olan Azure Veri Kataloğu 'nda hiçbir ek ayrıcalık iletmiyor; Kullanıcıların, bir varlığın açıklayıcı meta verilerini gözden geçirirken yararlı olması gereken perspektifleri kolayca bulmasını sağlar.
 
 ## <a name="owner"></a>Sahip
 
-Azure veri Kataloğu'nda bir veri varlığına yönetmek için ek ayrıcalıklarına sahip bir kullanıcı sahibidir. Kullanıcılar, kayıtlı veri varlıklarının sahipliğini alabilir ve sahipleri ortak sahip olarak diğer kullanıcıları ekleyebilirsiniz. Daha fazla bilgi için [veri varlıklarını yönetme](data-catalog-how-to-manage.md)  
+Sahip, Azure Veri Kataloğu 'nda bir veri varlığını yönetmek için ek ayrıcalıklara sahip bir kullanıcı. Kullanıcılar kayıtlı veri varlıklarının sahipliğini alabilir ve sahipler diğer kullanıcıları ikincil sahipler olarak ekleyebilir. Daha fazla bilgi için bkz. [veri varlıklarını yönetme](data-catalog-how-to-manage.md)  
 
 > [!NOTE]
-> Sahipliği ve yönetimi, yalnızca, Azure veri Kataloğu standart sürümü içinde kullanılabilir.
+> Sahiplik ve yönetim yalnızca Azure Veri Kataloğu 'nun standart sürümünde kullanılabilir.
 
 ## <a name="registration"></a>Kayıt
 
-Kayıt, veri kaynağından veri varlık meta verilerini ayıklayarak ve Azure veri Kataloğu hizmetine kopyalama işlemidir. Kayıtlı veri varlıklarını ardından ek açıklama ve bulundu.
+Kayıt, veri varlığı meta verilerini bir veri kaynağından ayıklayarak Azure Veri Kataloğu hizmetine kopyalamadır. Daha sonra kayıtlı olan veri varlıkları açıklaneklenebilir ve bulunabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Hızlı Başlangıç: Bir Azure veri Kataloğu oluşturma](data-catalog-get-started.md) 
+[Hızlı Başlangıç: Azure Veri Kataloğu oluşturma](data-catalog-get-started.md) 

@@ -1,31 +1,27 @@
 ---
-title: Microsoft Azure Backup sunucusu v3 için sürüm notları
-description: Bu makalede, MABS v3 için geçici çözümler ve bilinen sorunlar hakkında bilgi sağlar.
-services: backup
-author: JYOTHIRMAISURI
-manager: vvithal
-ms.service: backup
+title: Microsoft Azure Backup Server v3 için sürüm notları
+description: Bu makalede, Microsoft Azure Backup Server (MABS) v3 için bilinen sorunlar ve geçici çözümler hakkında bilgi verilmektedir.
 ms.topic: conceptual
 ms.date: 11/22/2018
-ms.author: v-jysur
 ms.asset: 0c4127f2-d936-48ef-b430-a9198e425d81
-ms.openlocfilehash: d37245d7eed39ee9d219578db9e0a50d758ba9a2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b47d83e0e3714f3f035397acaadeac9cda39d12a
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60499707"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172272"
 ---
 # <a name="release-notes-for-microsoft-azure-backup-server"></a>Microsoft Azure Backup sunucusu için sürüm notları
-Bu makalede, Microsoft Azure Backup sunucusu (MABS) V3 için bilinen sorunlar ve geçici çözümler sağlar.
 
-##  <a name="backup-and-recovery-fails-for-clustered-workloads"></a>Yedekleme ve kurtarma başarısız kümelenmiş iş yükleri için
+Bu makalede Microsoft Azure Backup Server (MABS) v3 için bilinen sorunlar ve geçici çözümler sağlanmaktadır.
 
-**Açıklama:** Yedekleme/geri yükleme veritabanı kullanılabilirlik grubundaki (DAG) Hyper-V kümesine, SQL kümesi (SQL Always On) veya Exchange gibi kümelenmiş veri kaynakları için MABS V2 MABS V3 yükseltildikten sonra başarısız oldu.
+## <a name="backup-and-recovery-fails-for-clustered-workloads"></a>Kümelenmiş iş yükleri için yedekleme ve kurtarma başarısız oluyor
 
-**Geçici çözüm:** Bunu önlemek için SQL Server Management Studio (SSMS) açın) ve DPM DB'yi üzerinde aşağıdaki SQL betiğini çalıştırın:
+**Açıklama:** MABS v2 'yi MABS v3 sürümüne yükselttikten sonra, Hyper-V kümesi veya SQL kümesi (SQL her zaman açık) veya veritabanı kullanılabilirlik grubu (DAG) gibi kümelenmiş veri kaynakları için yedekleme/geri yükleme başarısız olur.
 
+**Geçici çözüm:** Bunu engellemek için SQL Server Management Studio (SSMS)) açın ve aşağıdaki SQL betiğini DPM DB 'de çalıştırın:
 
+```sql
     IF EXISTS (SELECT * FROM dbo.sysobjects
         WHERE id = OBJECT_ID(N'[dbo].[tbl_PRM_DatasourceLastActiveServerMap]')
         AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
@@ -50,31 +46,31 @@ Bu makalede, Microsoft Azure Backup sunucusu (MABS) V3 için bilinen sorunlar ve
             0
         ) FOR [IsGCed]
     GO
+```
 
+## <a name="upgrade-to-mabs-v3-fails-in-russian-locale"></a>Rusça yerel ayarında MABS v3 'e yükseltme başarısız oluyor
 
-##  <a name="upgrade-to-mabs-v3-fails-in-russian-locale"></a>Rusça yerel ayarda MABS V3 yükseltme başarısız
+**Açıklama:** MABS v2 'den MABS v3 sürümüne yükseltme, Rusça yerel ayarında **4387**hata koduyla başarısız oluyor.
 
-**Açıklama:** MABS V2 yükseltmeye MABS V3 Rusça yerel ayardaki bir hata koduyla başarısız **4387**.
+**Geçici çözüm:** Rusça Install paketini kullanarak MABS v3 'e yükseltmek için aşağıdaki adımları uygulayın:
 
-**Geçici çözüm:** MABS V3 yükseltmek için aşağıdaki adımları uygulayın Rusça'ı kullanarak paketi yükleyin:
+1. SQL veritabanınızı [yedekleyin](https://docs.microsoft.com/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server?view=sql-server-2017#SSMSProcedure) ve Mabs v2 'yi kaldırın (kaldırma sırasında korumalı verileri tutmayı seçin).
+2. Yükseltme kapsamında SQL 2017 (Enterprise) ve raporlamayı Kaldır ' a yükseltin.
+3. [Yüklemesi](https://docs.microsoft.com/sql/reporting-services/install-windows/install-reporting-services?view=sql-server-2017#install-your-report-server) SQL Server Reporting Services (SSRS).
+4. [Yüklemesi](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) SQL Server Management Studio (SSMS).
+5. [SQL 2017 Ile SSRS yapılandırmasında](https://docs.microsoft.com/azure/backup/backup-azure-microsoft-azure-backup#upgrade-mabs)belgelenen parametreleri kullanarak raporlamayı yapılandırın.
+6. [Yüklemesi](backup-azure-microsoft-azure-backup.md) MABS V3.
+7. [Geri yükle](https://docs.microsoft.com/sql/relational-databases/backup-restore/restore-a-database-backup-using-ssms?view=sql-server-2017) SSMS kullanarak SQL ve [burada](https://docs.microsoft.com/previous-versions/system-center/data-protection-manager-2010/ff634215(v=technet.10))AÇıKLANDıĞı gibi DPM-Sync aracını çalıştırın.
+8. Aşağıdaki komutu kullanarak dbo. tbl_DLS_GlobalSetting tablosundaki ' DataBaseVersion ' özelliğini güncelleştirin:
 
-1.  [Yedekleme](https://docs.microsoft.com/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server?view=sql-server-2017#SSMSProcedure) SQL veritabanı ve MABS V2 kaldırırsanız (kaldırma sırasında korunan verileri tutmak seçin).
-2.  SQL 2017'ye (Kurumsal) yükseltin ve yükseltmesinin bir parçası raporlama kaldırın.
-3. [Yükleme](https://docs.microsoft.com/sql/reporting-services/install-windows/install-reporting-services?view=sql-server-2017#install-your-report-server) SQL Server Raporlama Hizmetleri (SSRS).
-4.  [Yükleme](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017#ssms-installation-tips-and-issues-ssms-1791) SQL Server Management Studio'yu (SSMS).
-5.  Parametreleri açıklandığı gibi kullanarak raporlama yapılandırma [SQL 2017 ile SSRS yapılandırma](https://docs.microsoft.com/azure/backup/backup-azure-microsoft-azure-backup#upgrade-mabs).
-6.  [Yükleme](backup-azure-microsoft-azure-backup.md) MABS V3.
-7. [Geri yükleme](https://docs.microsoft.com/sql/relational-databases/backup-restore/restore-a-database-backup-using-ssms?view=sql-server-2017) SSMS ve çalışma DPM eşitleme aracı açıklanan şekilde kullanarak SQL [burada](https://docs.microsoft.com/previous-versions/system-center/data-protection-manager-2010/ff634215(v=technet.10)).
-8.  Aşağıdaki komutu kullanarak dbo.tbl_DLS_GlobalSetting tablo 'DataBaseVersion' özelliğinde güncelleştirin:
-
+```sql
         UPDATE dbo.tbl_DLS_GlobalSetting
         set PropertyValue = '13.0.415.0'
         where PropertyName = 'DatabaseVersion'
+```
 
-
-9.  MSDPM hizmetini başlatın.
-
+9. MSDPM hizmetini başlatın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[MABS V3 sürümünde yenilikler nelerdir?](backup-mabs-whats-new-mabs.md)
+[MABS v3 'deki yenilikler](backup-mabs-whats-new-mabs.md)

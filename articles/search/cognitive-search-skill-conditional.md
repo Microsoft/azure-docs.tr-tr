@@ -1,27 +1,25 @@
 ---
-title: Koşullu bilişsel arama beceri (Azure Search) | Microsoft Docs
-description: Filtreleme, varsayılan oluşturma ve değerleri birleştirme koşullu yeteneği sağlar.
-services: search
-manager: pablocas
+title: Koşullu Bilişsel Beceri
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama koşullu yetenek filtreleme, varsayılanlar oluşturma ve bir beceri tanımında değerleri birleştirme imkanı sunar.
+manager: nitinme
 author: luiscabrer
-ms.service: search
-ms.devlang: NA
-ms.workload: search
-ms.topic: conceptual
-ms.date: 05/01/2019
 ms.author: luisca
-ms.openlocfilehash: 149b701d4a1700787656448e2bdd0d92d2a93844
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: b5f1fc7f877854dd06fbbe09ff82e47208fa12d0
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65791510"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72792039"
 ---
-#   <a name="conditional-skill"></a>Koşullu beceri
+# <a name="conditional-cognitive-skill"></a>Koşullu Bilişsel Beceri
 
-*Koşullu beceri* atamak için bir çıktı verileri belirlemek için bir Boole işlem gerektiren Azure Search senaryoların gerçekleşmesine olanak tanır. Bu senaryolar, filtreleme, varsayılan bir değer atamak ve bir koşulu temel alarak veri birleştirme içerir.
+**Koşullu** Beceri, bir Boole işleminin bir çıkışa atanacak verileri belirlemesini gerektiren Azure bilişsel arama senaryolarına olanak sağlar. Bu senaryolar filtreleme, varsayılan bir değer atama ve bir koşula göre verileri birleştirme işlemlerini içerir.
 
-Aşağıdaki sözde kod koşullu Yeteneğin ne gerçekleştirir gösterir:
+Aşağıdaki sözde kod, koşullu yeteneğin ne yaptığını göstermektedir:
 
 ```
 if (condition) 
@@ -31,19 +29,19 @@ else
 ```
 
 > [!NOTE]
-> Bu yetenek, bir Azure Bilişsel hizmetler API'si bağlı olmayan ve kullanmak için ücretlendirilmezsiniz. Ancak hala [Bilişsel hizmetler kaynağı ekleme](cognitive-search-attach-cognitive-services.md) zenginleştirmelerinin günde az sayıda için sınırlar "Ücretsiz" resource seçeneği geçersiz kılınacak.
+> Bu beceri, bir Azure bilişsel hizmetler API 'siyle bağlantılı değildir ve bunu kullanmak için ücretlendirilmez. Ancak, sizi gün başına az sayıda zenginleştirme ile sınırlayan "ücretsiz" Kaynak seçeneğini geçersiz kılmak için bilişsel [Hizmetler kaynağı iliştirmelisiniz](cognitive-search-attach-cognitive-services.md) .
 
 ## <a name="odatatype"></a>@odata.type  
-Microsoft.Skills.Util.ConditionalSkill
+Microsoft. yetenekler. util. Conditionalbeceri
 
 
-## <a name="evaluated-fields"></a>Hesaplanan alanlar
+## <a name="evaluated-fields"></a>Değerlendirilen alanlar
 
-Girişleri hesaplanan alanlar olduğundan bu özel bir yetenektir.
+Bu beceri, girişleri değerlendirilen alanlar olduğundan özeldir.
 
-Aşağıdaki öğeler, bir ifadenin geçerli değerler şunlardır:
+Aşağıdaki öğeler bir ifadenin geçerli değerleridir:
 
--   Ek açıklama yolları (ifadeler yollarında ayrılmış, tarafından "$(" and ")")
+-   Ek açıklama yolları (deyimlerdeki yollar "$ (" ve ")" ile ayrılmış olmalıdır)
  <br/>
     Örnekler:
     ```
@@ -51,7 +49,7 @@ Aşağıdaki öğeler, bir ifadenin geçerli değerler şunlardır:
         "= $(/document/content)"
     ```
 
--  Değişmez değerler (dizeler, sayılar, true, false, null) <br/>
+-  Değişmez değerler (dizeler, sayılar, doğru, yanlış, null) <br/>
     Örnekler:
     ```
        "= 'this is a string'"   // string (note the single quotation marks)
@@ -60,21 +58,21 @@ Aşağıdaki öğeler, bir ifadenin geçerli değerler şunlardır:
        "= null"                 // null value
     ```
 
--  Karşılaştırma işleçleri kullanan ifade (==,! =, > =, >, < =, <) <br/>
+-  Karşılaştırma işleçleri kullanan ifadeler (= =,! =, > =, >, < =, <) <br/>
     Örnekler:
     ```
         "= $(/document/language) == 'en'"
         "= $(/document/sentiment) >= 0.5"
     ```
 
--   Boole işleçleri kullanan ifade (& &, ||,!, ^) <br/>
+-   Boole işleçleri kullanan ifadeler (& &, | |,!, ^) <br/>
     Örnekler:
     ```
         "= $(/document/language) == 'en' && $(/document/sentiment) > 0.5"
         "= !true"
     ```
 
--   Sayısal işleçleri kullanan ifade (+, -, \*, /, %) <br/>
+-   Sayısal işleçler kullanan ifadeler (+,-, \*,/,%) <br/>
     Örnekler: 
     ```
         "= $(/document/sentiment) + 0.5"         // addition
@@ -82,25 +80,25 @@ Aşağıdaki öğeler, bir ifadenin geçerli değerler şunlardır:
         "= $(/document/lengthInMeters) / 0.3049" // division
     ```
 
-Koşullu beceri değerlendirme desteklediğinden, küçük transformation senaryolarda kullanabilirsiniz. Örneğin, [beceri tanımı 4](#transformation-example).
+Koşullu beceri değerlendirmeyi desteklediğinden, bunu küçük dönüştürme senaryolarında kullanabilirsiniz. Örneğin, bkz. [beceri tanımı 4](#transformation-example).
 
 ## <a name="skill-inputs"></a>Beceri girişleri
-Girdi büyük/küçük harfe duyarlıdır.
+Girişler büyük/küçük harfe duyarlıdır.
 
 | Girdi   | Açıklama |
 |-------------|-------------|
-| condition   | Bu giriş bir [hesaplanan alan](#evaluated-fields) değerlendirmek için koşulu temsil eder. Bu durum, bir Boolean değerine değerlendirmelidir (*true* veya *false*).   <br/>  Örnekler: <br/> "= true" <br/> "$(/document/language) ="fr"==" <br/> "= $(/belge/sayfaları/\*/language) $ == (/ belge/expectedLanguage)" <br/> |
-| whenTrue    | Bu giriş bir [hesaplanan alan](#evaluated-fields) koşulu için değerlendirilir ise döndürülecek değeri temsil eden *true*. Dize sabitleri tek tırnak işaretleri döndürülen ('ve'). <br/>Örnek değerler: <br/> "'sözleşme' ="<br/>"= $(/ belge/contractType)" <br/> "= $(/belge/varlıklar/\*)" <br/> |
-| whenFalse   | Bu giriş bir [hesaplanan alan](#evaluated-fields) koşulu için değerlendirilir ise döndürülecek değeri temsil eden *false*. <br/>Örnek değerler: <br/> "'sözleşme' ="<br/>"= $(/ belge/contractType)" <br/> "= $(/belge/varlıklar/\*)" <br/>
+| Koşul   | Bu giriş, değerlendirilecek koşulu temsil eden [değerlendirilmiş bir alandır](#evaluated-fields) . Bu koşul, bir Boole değeri (*true* veya *false*) olarak değerlendirilmelidir.   <br/>  Örnekler: <br/> "= true" <br/> "= $ (/Document/Language) = = ' fr '" <br/> "= $ (/Document/Pages/\*/Language) = = $ (/document/expectedLanguage)" <br/> |
+| whenTrue    | Bu giriş, koşul *true*olarak değerlendirilirse döndürülecek değeri temsil eden [değerlendirilmiş bir alandır](#evaluated-fields) . Sabitler dizeleri tek tırnak işaretleri (' ve ') olarak döndürülmelidir. <br/>Örnek değerler: <br/> "=" Sözleşme ' "<br/>"= $ (/document/contractType)" <br/> "= $ (/Document/Entities/\*)" <br/> |
+| whenFalse   | Bu giriş, koşul *false*olarak değerlendirilirse döndürülecek değeri temsil eden [değerlendirilmiş bir alandır](#evaluated-fields) . <br/>Örnek değerler: <br/> "=" Sözleşme ' "<br/>"= $ (/document/contractType)" <br/> "= $ (/Document/Entities/\*)" <br/>
 
-## <a name="skill-outputs"></a>Beceri çıkışları
-Yalnızca "çıkış" olarak adlandırılan tek bir çıkış Değeri döndürür *whenFalse* koşul false ise veya *whenTrue* koşul true ise.
+## <a name="skill-outputs"></a>Yetenek çıkışları
+Yalnızca "çıktı" olarak adlandırılan tek bir çıktı vardır. Koşul false ise *whenfalse* veya koşul true Ise *whentrue* ise value değerini döndürür.
 
 ## <a name="examples"></a>Örnekler
 
-### <a name="sample-skill-definition-1-filter-documents-to-return-only-french-documents"></a>Örnek beceri tanımı 1: Yalnızca Fransızca belgeler döndürülecek belgeleri filtreleme
+### <a name="sample-skill-definition-1-filter-documents-to-return-only-french-documents"></a>Örnek beceri tanımı 1: belgeleri yalnızca Fransızca belge döndürecek şekilde filtreleyin
 
-Belgenin dilinin Fransızca ise aşağıdaki çıktıyı cümlelerden ("/ Belge/frenchSentences") bir dizi döndürür. Fransızca Dil değilse, değeri şuna ayarlı *null*.
+Aşağıdaki çıktı, belgenin dili Fransızca ise bir dizi cümle ("/Document/frenchcümleler") döndürür. Dil Fransızca değilse, değer *null*olarak ayarlanır.
 
 ```json
 {
@@ -114,12 +112,12 @@ Belgenin dilinin Fransızca ise aşağıdaki çıktıyı cümlelerden ("/ Belge/
     "outputs": [ { "name": "output", "targetName": "frenchSentences" } ]
 }
 ```
-"/ Belge/frenchSentences" olarak kullanılıp kullanılmadığını *bağlam* "/ Belge/frenchSentences" olarak ayarlarsanız değil, başka bir beceri, yetenek yalnızca çalışır *null*.
+"/Document/frenchcümleler" başka bir beceri *bağlamı* olarak kullanılırsa, bu beceri yalnızca "/Document/frenchcümleler" *null*olarak ayarlanmamışsa çalışır.
 
 
-### <a name="sample-skill-definition-2-set-a-default-value-for-a-value-that-doesnt-exist"></a>Örnek beceri tanımı 2: Mevcut olmayan bir değer için varsayılan değer ayarlama
+### <a name="sample-skill-definition-2-set-a-default-value-for-a-value-that-doesnt-exist"></a>Örnek beceri tanımı 2: var olmayan bir değer için varsayılan değer ayarlayın
 
-Aşağıdaki çıktı dil ayarlanmadıysa, belge dili veya "es" olarak bir açıklama ("/ Belge/languageWithDefault") oluşturur.
+Aşağıdaki çıktı, belgenin diline ayarlanmış bir ek açıklama ("/document/languageWithDefault") oluşturur ve dil ayarlanmamışsa "es" olarak ayarlanır.
 
 ```json
 {
@@ -134,9 +132,9 @@ Aşağıdaki çıktı dil ayarlanmadıysa, belge dili veya "es" olarak bir açı
 }
 ```
 
-### <a name="sample-skill-definition-3-merge-values-from-two-fields-into-one"></a>Örnek beceri tanımı 3: İki alan değerlerini birleştirmek
+### <a name="sample-skill-definition-3-merge-values-from-two-fields-into-one"></a>Örnek beceri tanımı 3: iki alandan bir değer birleştirme
 
-Bu örnekte, bazı cümleler sahip bir *frenchSentiment* özelliği. Her *frenchSentiment* özelliği null, kullanmak istediğiniz *englishSentiment* değeri. Biz çıkış çağrılan bir üyesine atama *yaklaşım* ("/ Belge/yaklaşım / * / yaklaşım").
+Bu örnekte, bazı Tümcelerin *Frenchsentiment* özelliği vardır. *Frenchsentiment* özelliği null olduğunda, *englisentiment* değerini kullanmak istiyoruz. Çıktıyı, *yaklaşım* ("/Document/Sentiment/*/Sentiment") adlı bir üyeye atacağız.
 
 ```json
 {
@@ -151,12 +149,12 @@ Bu örnekte, bazı cümleler sahip bir *frenchSentiment* özelliği. Her *french
 }
 ```
 
-## <a name="transformation-example"></a>Örnek dönüştürme
-### <a name="sample-skill-definition-4-data-transformation-on-a-single-field"></a>Örnek beceri tanımı 4: Tek bir alana veri dönüştürme
+## <a name="transformation-example"></a>Dönüştürme örneği
+### <a name="sample-skill-definition-4-data-transformation-on-a-single-field"></a>Örnek beceri tanımı 4: tek bir alanda veri dönüştürme
 
-Bu örnekte, aldığımız bir *yaklaşım* 0 ile 1 arasında olmasıdır. Bunu -1 ile 1 arasında olacak şekilde dönüştürmek istiyoruz. Bu küçük transformation yapmak için koşullu beceri kullanabiliriz.
+Bu örnekte, 0 ile 1 arasında *bir yaklaşım* alırız. Bunu-1 ile 1 arasında olacak şekilde dönüştürmek istiyoruz. Bu küçük dönüşümü yapmak için koşullu yetenek kullanabiliriz.
 
-Bu örnekte biz koşul her zaman olduğundan yetenek koşullu yönüyle kullanmayın *true*.
+Bu örnekte, koşulun her zaman *doğru*olduğu için yeteneğin koşullu yönünü kullanmıyoruz.
 
 ```json
 {
@@ -171,11 +169,11 @@ Bu örnekte biz koşul her zaman olduğundan yetenek koşullu yönüyle kullanma
 }
 ```
 
-## <a name="special-considerations"></a>Özel durumlar
-Bazı parametreler değerlendirilir, bu belgelenmiş desende özellikle dikkat etmek gerekir. İfadeler, bir eşittir işareti ile başlamalıdır. Bir yol ile sınırlanması gerekir "$(" and ")". Dizeleri içinde tek tırnak işaretleri koyma emin olun. Bu, dizeler ve gerçek yolları ve işleçleri arasında ayrım değerlendirici yardımcı olur. Ayrıca işleçler etrafındaki boşlukları yerleştirdiğinizden emin olun (örneğin, bir "*" bir yolda multiply ' farklı bir şey anlamına gelir).
+## <a name="special-considerations"></a>Özel Konular
+Bazı parametreler değerlendirilir, bu nedenle belgelenen kalıbı izlemeniz için özellikle dikkatli olmanız gerekir. İfadeler bir eşittir işareti ile başlamalıdır. Yolun "$ (" ve ")" ile ayrılmış olması gerekir. Dizeleri tek tırnak işaretlerine yerleştirdiğinizden emin olun. Bu, değerlendirici dizelerin ve gerçek yolların ve işleçlerin ayırt edilmesini sağlar. Ayrıca, boşluk (örneğin, bir yoldaki bir "*", çarpma dışında bir şey) yerleştirdiğinizden emin olun.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-+ [Önceden tanımlanmış beceriler](cognitive-search-predefined-skills.md)
-+ [Bir beceri kümesi tanımlama](cognitive-search-defining-skillset.md)
++ [Yerleşik yetenekler](cognitive-search-predefined-skills.md)
++ [Beceri tanımlama](cognitive-search-defining-skillset.md)

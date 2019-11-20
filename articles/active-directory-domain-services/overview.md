@@ -1,103 +1,125 @@
 ---
-title: Azure Active Directory etki alanı Hizmetleri'ne Genel Bakış | Microsoft Docs
-description: Azure Active Directory etki alanı Hizmetleri'ne Genel Bakış
+title: Azure Active Directory Domain Services genel bakış | Microsoft Docs
+description: Bu genel bakışta, bulutta uygulamalara ve hizmetlere kimlik hizmetleri sağlamak için Azure Active Directory Domain Services neler sağladığını ve kuruluşunuzda nasıl kullanacağınızı öğrenin.
 services: active-directory-ds
-documentationcenter: ''
 author: iainfoulds
 manager: daveba
-editor: curtand
-ms.assetid: 0d47178f-773e-45f9-9ff4-9e8cffa4ffa2
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: conceptual
-ms.date: 05/20/2019
+ms.topic: overview
+ms.date: 10/30/2019
 ms.author: iainfou
-ms.openlocfilehash: e29936915f0cd0b7e7ae7adfdbdb90d31195cd34
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 3d4ac9ed9b8d5162f820f7e981d3380b95cf41e4
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67472741"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73172818"
 ---
-# <a name="azure-active-directory-ad-domain-services"></a>Azure Active Directory (AD) etki alanı Hizmetleri
-## <a name="overview"></a>Genel Bakış
-Azure altyapı hizmetlerinin, geniş kapsamlı bilgi işlem çözümlerini Çevik bir şekilde dağıtmanızı sağlar. Azure sanal makineler ile neredeyse anında dağıtım yapabilir ve yalnızca dakika başına ödeme yaparsınız. Windows, Linux, SQL Server, Oracle, IBM, SAP ve BizTalk için destek kullanarak dağıtabileceğiniz her türlü iş yükü, neredeyse tüm işletim sistemlerinde herhangi bir dilde. Bu avantajlar azure'a giderlerinizi üzerinde kaydetmek için şirket içi dağıtılan eski uygulamaları geçirmek etkinleştirin.
+# <a name="what-is-azure-active-directory-domain-services"></a>Azure Active Directory Domain Services nedir?
 
-Bu uygulamaların kimlik ihtiyaçlarını temel bir yönü, şirket içi uygulamalarını azure'a geçirme işleyen. Dizin kullanan uygulamalarınızı okuma veya yazma erişimi Kurumsal dizin üzerinde LDAP kullanır veya Windows tümleşik son kullanıcıların kimliğini doğrulamak için kimlik doğrulaması (Kerberos veya NTLM kimlik doğrulaması) kullanır. Güvenli bir Grup İlkesi kullanarak yönetilebilir şekilde Windows Server üzerinde çalışan satır iş kolu (LOB) uygulamaları, genellikle etki alanına katılmış makinelerde dağıtılır. Kurumsal kimlik altyapısını Bu bağımlılıklar için 'lift-and-shift ile taşıma' şirket içi uygulamaları buluta çözülmesi gerekir.
+Azure Active Directory Domain Services (Azure AD DS), etki alanına katılması, Grup ilkesi, Hafif Dizin Erişim Protokolü (LDAP) ve Windows Server etkin ile tam olarak uyumlu Kerberos/NTLM kimlik doğrulaması gibi yönetilen etki alanı Hizmetleri sağlar Dizinden. Bulutta etki alanı denetleyicileri dağıtma, yönetme ve düzeltme eki uygulama gerekmeden bu etki alanı hizmetlerini kullanırsınız. Azure AD DS, mevcut Azure AD kiracınızla tümleştirilir, bu da kullanıcıların mevcut kimlik bilgilerini kullanarak oturum açmasını olanaklı kılar. Ayrıca, mevcut grupları ve Kullanıcı hesaplarını, kaynaklara erişimi güvenli hale getirmek için de kullanabilirsiniz. Bu, şirket içi kaynakların daha yumuşak bir şekilde daha iyi bir şekilde daha iyi bir şekilde daha iyi bir şekilde
 
-Yöneticiler, genellikle uygulamalarını Azure'da dağıtılan kimlik ihtiyaçlarını karşılamak için aşağıdaki çözümlerden birini açın:
+Azure AD DS, Azure AD 'den kimlik bilgilerini çoğalttığından, bu nedenle yalnızca bulutta bulunan veya şirket içi Active Directory Domain Services (AD DS) ortamıyla eşitlenen Azure AD kiracılarıyla birlikte çalışmaktadır. Her iki ortam için de aynı Azure AD DS özellikleri kümesi vardır.
 
-* Azure altyapı hizmetleri ve kurumsal dizin şirket içinde çalışan iş yükleri arasında siteden siteye VPN bağlantısı dağıtın.
-* Kurumsal AD etki alanına/ormana altyapısı, kopya etki alanı denetleyicilerini Azure sanal makineleri kullanarak ayarlayarak genişletin.
-* Tek başına bir etki alanına etki alanı denetleyicilerini Azure sanal makineleri olarak dağıtılan kullanarak azure'da dağıtın.
+* Mevcut bir şirket içi AD DS ortamınız varsa, kullanıcılar için tutarlı bir kimlik sağlamak üzere Kullanıcı hesabı bilgilerini eşzamanlı hale getirebilirsiniz.
+* Yalnızca bulut ortamlarında, Azure AD DS merkezi kimlik hizmetlerini kullanmak için geleneksel bir şirket içi AD DS ortamına ihtiyacınız yoktur.
 
-Bu yaklaşım, yüksek maliyet ve yönetim yükünü düşebilir. Yöneticiler, etki alanı denetleyicileri Azure'da sanal makineleri kullanarak dağıtmak için gereklidir. Ayrıca, yönetme, güvenli, düzeltme eki uygulama, izleme, yedekleme ve sorun giderme bu sanal makineler gerekir. VPN bağlantıları şirket içi dizine güvenme geçici ağ hataları veya kesintiler savunmasız azure'da dağıtılmış iş yüklerini neden olur. Bu ağ kesintileri, daha düşük bir çalışma süresi ve bu uygulamalar için düşük güvenilirlik, sırayla sonuçlanır.
+Aşağıdaki videoda, Bulutta kimlik hizmetleri sağlamak için Azure AD DS uygulamalarınızın ve iş yüklerinizde nasıl tümleştirildiğini gösteren bir genel bakış sunulmaktadır:
 
-Azure AD Domain Services daha kolay bir alternatif sağlamak için tasarladığımız.
-
-### <a name="watch-an-introductory-video"></a>Tanıtım videosunu izleyin
+<br />
 
 >[!VIDEO https://www.youtube.com/embed/T1Nd9APNceQ]
 
-## <a name="introducing-azure-ad-domain-services"></a>Azure AD etki alanı hizmetlerine giriş
+## <a name="common-ways-to-provide-identity-solutions-in-the-cloud"></a>Bulutta kimlik çözümleri sağlamanın yaygın yolları
 
-Azure AD Domain Services yönetilen etki alanı Hizmetleri gibi etki alanına katılmış, Windows Server Active Directory ile tamamen uyumlu Grup İlkesi, LDAP, Kerberos/NTLM kimlik doğrulaması sağlar. Bu etki alanı Hizmetleri dağıtma, yönetme ve bulutta etki alanı denetleyicileri düzeltme eki gereksinimi olmadan kullanabilir. Azure AD etki alanı Hizmetleri, böylece kullanıcılar şirket kimlik bilgilerini kullanarak oturum açması için olası yapmadan mevcut Azure AD kiracınız ile tümleştirilir. Ayrıca, bu nedenle bir daha yumuşak 'lift-and-shift' Azure altyapı hizmetleri için şirket içi kaynakların sağlama kaynaklarına erişimi güvenli hale getirmek için var olan Grup ve kullanıcı hesaplarını kullanabilirsiniz.
+Mevcut iş yüklerini buluta geçirdiğinizde, dizin durumunu algılayan uygulamalar, bir şirket içi AD DS dizinine okuma veya yazma erişimi için LDAP kullanabilir. Windows Server 'da çalışan uygulamalar genellikle etki alanına katılmış sanal makinelere (VM 'Ler) dağıtılır ve bu sayede grup ilkesi kullanarak güvenli bir şekilde yönetilebilir. Uygulamalar, son kullanıcıların kimliğini doğrulamak için Kerberos veya NTLM kimlik doğrulaması gibi Windows tümleşik kimlik doğrulamasına de bağlı olabilir.
 
-Azure AD etki alanı hizmetleri işlevleri, Azure AD kiracınızda yalnızca Bulut veya şirket içi Active Directory ile eşitlenen bağımsız olarak sorunsuz çalışır.
+BT yöneticileri, Azure 'da çalışan uygulamalara bir kimlik hizmeti sağlamak için genellikle aşağıdaki çözümlerden birini kullanır:
 
-### <a name="azure-ad-domain-services-for-cloud-only-organizations"></a>Yalnızca bulut kuruluşlar için Azure AD etki alanı Hizmetleri
+* Azure 'da ve şirket içi AD DS ortamında çalışan iş yükleri arasında siteden siteye VPN bağlantısı yapılandırın.
+* AD DS etki alanı/ormanı genişletmek için Azure sanal makinelerini (VM 'Ler) kullanarak çoğaltma etki alanı denetleyicileri oluşturun.
+* Azure VM 'lerde çalışan etki alanı denetleyicilerini kullanarak Azure 'da tek başına AD DS ortamı dağıtın.
 
-Yalnızca bulutta herhangi bir şirket içi kimlik ayak (genellikle 'yönetilen kiracılar' denir) Azure AD kiracısına sahip değil. Diğer bir deyişle, kullanıcı hesapları, parolaları ve grup üyeliklerini diğer bir deyişle, oluşturulan ve Azure AD'de yönetilen bir bulut - tüm yerel. Bir süre için Contoso salt bulut olduğunu göz önünde bulundurun. Azure AD kiracısı. Aşağıdaki çizimde gösterildiği gibi Contoso'nun yönetici Azure altyapı hizmetlerinde bir sanal ağ yapılandırdı. Uygulamaları ve sunucu iş yükleri, Azure sanal makineler'de bu sanal ağa dağıtılır. Contoso bir yalnızca bulut Kiracı olduğundan, tüm kullanıcı kimlikleri, kimlik bilgilerini ve grup üyeliklerini oluşturulur ve Azure AD'de yönetilir.
+Bu yaklaşımlar sayesinde, şirket içi dizine yönelik VPN bağlantıları, uygulamaları geçici ağ kesintileri veya kesintiler için savunmasız hale getirir. Azure 'da VM 'Leri kullanarak etki alanı denetleyicileri dağıtırsanız, BT ekibi VM 'Leri bunları yönetmeli, güvenli, düzeltme eki, izleme, yedekleme ve sorunlarını gidermelidir.
 
-![Azure AD etki alanı hizmetleri genel bakış](./media/active-directory-domain-services-overview/aadds-overview.png)
+Azure AD DS, kimlik hizmetleri sağlamak için şirket içi AD DS ortamına VPN bağlantıları oluşturma veya Azure 'da VM 'Leri çalıştırma ve yönetme gereksinimlerine yönelik alternatifler sunmaktadır. Yönetilen bir hizmet olarak Azure AD DS, hem karma hem de yalnızca bulut ortamları için tümleşik bir kimlik çözümü oluşturma karmaşıklığını azaltır.
 
-Contoso'nun BT yöneticisi, Azure AD kiracısı için Azure AD Domain Services etkinleştirebilir ve etki alanı hizmetlerini bu sanal ağda kullanılabilir hale getirmek seçin. Bundan sonra Azure AD etki alanı Hizmetleri, yönetilen bir etki alanı sağlar ve sanal ağda kullanılabilir hale getirir. Ayrıca bu yeni oluşturulan etki alanındaki tüm kullanıcı hesapları, grup üyeliklerini ve Contoso Azure AD kiracısında mevcut kullanıcı kimlik bilgileri kullanılabilir. Bu özellik kuruluştaki kullanıcıların Kurumsal kimlik bilgileriyle - Örneğin, etki alanına katılmış makinelerde Uzak Masaüstü aracılığıyla uzaktan bağlanırken oluşan kullanarak etki alanında oturum açmak sağlar. Yöneticiler, var olan grup üyelikleri kullanarak etki alanındaki kaynaklara erişim sağlayabilirsiniz. Sanal ağda sanal makinelerde dağıtılan uygulamalar, etki alanına katılım, LDAP okuma, LDAP bağlaması, NTLM ve Kerberos kimlik doğrulaması ve Grup İlkesi gibi özellikleri kullanabilirsiniz.
+## <a name="azure-ad-ds-features-and-benefits"></a>Azure AD DS özellikleri ve avantajları
 
-Yönetilen etki alanı, Azure AD Domain Services tarafından sağlanan bazı belirgin yönleri şunlardır:
+Bulutta uygulamalara ve sanal makinelere kimlik hizmetleri sağlamak için Azure AD DS, etki alanına katılması, Güvenli LDAP (LDAPS), grup ilkesi ve DNS yönetimi ve LDAP bağlama ve okuma desteği gibi işlemler için geleneksel bir AD DS ortamıyla tamamen uyumludur. LDAP yazma desteği, Azure AD DS yönetilen etki alanında oluşturulan nesneler için kullanılabilir, ancak Azure AD 'den eşitlenen kaynaklar için kullanılabilir. Azure AD DS dağıtım ve yönetim işlemlerini basitleştirecek aşağıdaki özellikler:
 
-* Contoso'nun BT yöneticisi, yönetme, düzeltme eki veya bu etki alanına veya bu yönetilen etki alanı için herhangi bir etki alanı denetleyicilerini izlemek gerekmez.
-* Bu etki alanı için AD çoğaltmayı yönetmek için gerek yoktur. Bu yönetilen etki alanı içinde otomatik olarak kullanıcı hesapları ve grup üyeliklerini Contoso Azure AD Kiracı kimlik bilgileri kullanılabilir.
-* Azure AD etki alanı Hizmetleri tarafından Contoso kişinin etki alanı yönetilmesinden BT yöneticisi bu etki alanında etki alanı yöneticisinin veya Kurumsal Yönetici ayrıcalıkları yok.
+* **Basitleştirilmiş dağıtım deneyimi:** Azure AD DS, Azure portal tek bir sihirbaz kullanılarak Azure AD kiracınız için etkinleştirilmiştir.
+* **Azure AD Ile tümleşik:** Kullanıcı hesapları, grup üyelikleri ve kimlik bilgileri Azure AD kiracınızdan otomatik olarak kullanılabilir. Azure AD kiracınızdan veya şirket içi AD DS ortamınızda bulunan yeni kullanıcılar, gruplar veya özniteliklerde yapılan değişiklikler otomatik olarak Azure AD DS eşitlenir.
+    * Azure AD 'nize bağlı dış dizinlerdeki hesaplar Azure AD DS kullanılamıyor. Bu dış dizinler için kimlik bilgileri kullanılamaz, bu nedenle Azure AD DS yönetilen bir etki alanına eşitlenemez.
+* **Şirket kimlik bilgilerinizi/parolalarınızı kullanın:** Azure AD kiracınızdaki kullanıcılar için parolalar Azure AD DS ile aynıdır. Kullanıcılar, Şirket kimlik bilgilerini etki alanına katmak, etkileşimli olarak veya uzak masaüstü üzerinden oturum açmak ve Azure AD DS yönetilen etki alanında kimlik doğrulaması yapmak için kullanabilir.
+* **NTLM ve Kerberos kimlik doğrulaması:** NTLM ve Kerberos kimlik doğrulaması desteğiyle, Windows ile tümleşik kimlik doğrulamasına dayanan uygulamalar dağıtabilirsiniz.
+* **Yüksek kullanılabilirlik:** Azure AD DS, yönetilen etki alanınız için yüksek kullanılabilirlik sağlayan birden çok etki alanı denetleyicisi içerir. Bu yüksek kullanılabilirlik, hizmet çalışma süresini ve esnekliği hatalara karşı garanti eder.
+    * [Azure kullanılabilirlik alanları][availability-zones]destekleyen bölgelerde, bu etki alanı denetleyicileri ek dayanıklılık için bölgelere da dağıtılır. 
 
-### <a name="azure-ad-domain-services-for-hybrid-organizations"></a>Hibrit kuruluşlar için Azure AD etki alanı Hizmetleri
-Karma bir BT altyapısı olan kuruluşlar, Bulut ve şirket kaynaklarının bir karışımını kullanır. Bu durumdaki kuruluşların, kendi Azure AD kiracısı için kimlik bilgileri, şirket içi dizinden eşitleyin. Hibrit kuruluşlar daha geçirmek için konum olarak kendi şirket içi uygulamaların buluta, özellikle dizin kullanan eski uygulamalarınızı, Azure AD Domain Services için yararlı olabilir.
+Azure AD DS yönetilen bir etki alanının bazı önemli yönleri şunları içerir:
 
-Litware Corporation dağıtıldı [Azure AD Connect](../active-directory/hybrid/whatis-hybrid-identity.md), kendi Azure AD kiracısı için kendi şirket içi dizinden kimlik bilgileri eşitlenemedi. Eşitlenen kimlik bilgilerini, kullanıcı hesapları, kimlik doğrulaması (parola karması eşitleme) ve grup üyeliklerini, kimlik bilgisi karmalarını içerir.
+* Azure AD DS yönetilen etki alanı tek başına bir etki alanıdır. Şirket içi bir etki alanının uzantısı değildir.
+* BT takımınızın bu Azure AD DS yönetilen etki alanı için etki alanı denetleyicilerini yönetmesi, düzeltme eki uygulama veya izleme yapması gerekmez.
 
-> [!NOTE]
-> **Hibrit kuruluşlar Azure AD Domain Services'ı kullanmak parola karması eşitleme zorunludur**. Bu gereksinim, NTLM veya Kerberos kimlik doğrulama yöntemleri aracılığıyla bu kullanıcıların kimliğini doğrulamak için Azure AD Domain Services tarafından sağlanan yönetilen etki alanındaki kullanıcıların kimlik bilgileri gerekli olmasıdır.
->
->
+Şirket içinde AD DS çalıştıran hibrit ortamlarda, AD çoğaltmasını Azure AD DS yönetilen etki alanına yönetmeniz gerekmez. Şirket içi dizininizdeki Kullanıcı hesapları, grup üyelikleri ve kimlik bilgileri [Azure AD Connect][azure-ad-connect]aracılığıyla Azure AD ile eşitlenir. Bu Kullanıcı hesapları, grup üyelikleri ve kimlik bilgileri, Azure AD DS yönetilen etki alanı içinde otomatik olarak kullanılabilir.
 
-![Litware Corporation için Azure AD etki alanı Hizmetleri](./media/active-directory-domain-services-overview/aadds-overview-synced-tenant.png)
+## <a name="how-does-azure-ad-ds-work"></a>Azure AD DS nasıl çalışır?
 
-Önceki çizim, karma bir BT altyapısının, Litware Corporation gibi bir kuruluşlarıyla Azure AD Domain Services nasıl kullanabileceğinizi gösterir. Lıtware 's uygulamalar ve etki alanı Hizmetleri gerektiren sunucu iş yükleri, Azure altyapı Hizmetleri'nde bir sanal ağda dağıtılır. Litware BT yöneticisi, Azure AD kiracısı için Azure AD Domain Services'ı etkinleştirmek ve yönetilen bir etki alanı bu sanal ağda kullanılabilir hale getirmek seçin. Karma bir BT altyapısının bir kuruluşla Lıtware olduğundan, kendi Azure AD kiracısına kullanıcı hesapları, grupları ve kimlik bilgilerini, şirket içi dizininizden eşitlenmiş. Bu özellik makinelere uzaktan bağlanma Uzak Masaüstü aracılığıyla etki alanına katıldığında, şirket kimlik bilgilerini - örneğin, kullanarak etki alanına oturum açmalarını sağlar. Yöneticiler, var olan grup üyelikleri kullanarak etki alanındaki kaynaklara erişim sağlayabilirsiniz. Sanal ağda sanal makinelerde dağıtılan uygulamalar, etki alanına katılım, LDAP okuma, LDAP bağlaması, NTLM ve Kerberos kimlik doğrulaması ve Grup İlkesi gibi özellikleri kullanabilirsiniz.
+Azure, kimlik hizmetleri sağlamak için seçtiğiniz bir sanal ağ üzerinde bir AD DS örneği oluşturur. Arka planda ve yönetmeniz, güvenli hale getirmeniz veya güncelleştirmeniz gerekmeden yedekliliğe sahip bir Windows Server etki alanı denetleyicileri çifti sağlanır.
 
-Yönetilen etki alanı, Azure AD Domain Services tarafından sağlanan bazı belirgin yönleri şunlardır:
+Azure AD DS yönetilen etki alanı, merkezi bir grup kullanıcıya, gruba ve kimlik bilgilerine erişim sağlamak için Azure AD 'den tek yönlü bir eşitleme gerçekleştirecek şekilde yapılandırılmıştır. Kaynakları doğrudan Azure AD DS yönetilen etki alanında oluşturabilirsiniz, ancak Azure AD 'ye geri eşitlenmez. Azure 'daki bu sanal ağa bağlanan uygulamalar, hizmetler ve VM 'Ler, etki alanına katılması, Grup ilkesi, LDAP ve Kerberos/NTLM kimlik doğrulaması gibi ortak AD DS özellikleri kullanabilir.
 
-* Yönetilen etki alanı, tek başına bir etki alanıdır. Litware'nın şirket içi etki alanı uzantısı değil.
-* Litware, düzeltme eki, yönetme veya bu yönetilen etki alanı için etki alanı denetleyicilerini izlemek BT yöneticinize gerekmez.
-* Bu etki alanı için AD çoğaltmayı yönetmek için gerek yoktur. Kullanıcı hesapları ve grup üyeliklerini Litware'nın şirket içi dizinden kimlik, Azure AD Connect yoluyla Azure ad'yle eşitlenir. Bu kullanıcı hesapları, Grup üyeliklerinin ve kimlik bilgilerini yönetilen etki alanında otomatik olarak kullanılabilir.
-* Azure AD etki alanı Hizmetleri tarafından Litware kişinin etki alanı yönetilmesinden BT yöneticisi bu etki alanında etki alanı yöneticisinin veya Kurumsal Yönetici ayrıcalıkları yok.
+Şirket içi AD DS ortamı olan bir karma ortamda, [Azure AD Connect][azure-ad-connect] kimlik BILGILERINI Azure AD ile eşitler.
 
-## <a name="benefits"></a>Avantajlar
-Azure AD Domain Services ile aşağıdaki avantajlardan yararlanabilirsiniz:
+![AD Connect kullanarak Azure AD ve şirket içi Active Directory Domain Services Azure AD Domain Services eşitleme](./media/active-directory-domain-services-design-guide/sync-topology.png)
 
-* **Basit** – Azure altyapı hizmetlerine birkaç basit tıklama ile dağıtılan sanal makinelerin kimlik ihtiyaçlarını karşılayabilecek. Dağıtma ve Azure ya da kurulum bağlantısı, şirket içi kimlik altyapınızı dön kimlik altyapısını yönetmek gerekmez.
-* **Tümleşik** – Azure AD Domain Services, Azure AD kiracınız ile son derece tümleşiktir. Azure AD, hem modern uygulamalar hem de Geleneksel dizin kullanan uygulamalar için ihtiyaçlarını oluşturabilmesine olanak sağlar. bir tümleşik bulut tabanlı Kurumsal dizini olarak artık kullanabilirsiniz.
-* **Uyumlu** – Azure AD Domain Services, Windows Server Active Directory kanıtlanmış kurumsal sınıf altyapısında oluşturulur. Bu nedenle, uygulamalarınızı Windows Server Active Directory özellikleri ile uyumluluk büyük ölçüde güvenebilirsiniz. Windows Server AD tüm özellikler şu anda Azure AD Etki Alanı Hizmetleri'nde kullanılabilir. Ancak, kullanılabilir özellikler, şirket içi altyapınızda kullandığınız karşılık gelen Windows Server AD özelliklerinin ile uyumludur. LDAP, Kerberos, NTLM, Grup İlkesi ve etki alanı katılma özellikleri test edilmiş ve çeşitli Windows Server sürümlere göre iyileştirilmektedir olgun bir teklif oluşturur.
-* **Uygun maliyetli** – Azure AD Domain Services ile geleneksel dizin kullanan uygulamalarınızı desteklemek için kullanılan kimlik altyapısını yönetme ile ilgili olan altyapı ve yönetim yükünü önleyebilirsiniz. Bu uygulamaların Azure altyapı hizmetleri için taşıma ve işletimsel giderlerinizi hakkında daha fazla tasarruf yararlanın.
+Azure AD DS 'yi eylemde görmek için birkaç örneğe göz atalım:
 
+* [Hibrit kuruluşlar için Azure AD DS](#azure-ad-ds-for-hybrid-organizations)
+* [Yalnızca bulutta kuruluşlar için Azure AD DS](#azure-ad-ds-for-cloud-only-organizations)
+
+### <a name="azure-ad-ds-for-hybrid-organizations"></a>Hibrit kuruluşlar için Azure AD DS
+
+Birçok kuruluş, hem bulut hem de şirket içi uygulama iş yüklerini içeren karma bir altyapı çalıştırır. Yükseltme ve kaydırma stratejisinin bir parçası olarak Azure 'a geçirilen eski uygulamalar, kimlik bilgilerini sağlamak için geleneksel LDAP bağlantıları kullanabilir. Bu karma altyapıyı desteklemek için, şirket içi AD DS ortamından kimlik bilgileri bir Azure AD kiracısıyla eşitlenebilir. Daha sonra Azure AD DS, Azure 'da bu eski uygulamaları bir kimlik kaynağıyla, şirket içi dizin hizmetlerine geri uygulama bağlantısını yapılandırmaya ve yönetmeye gerek kalmadan sağlar.
+
+Hem şirket içinde hem de Azure kaynaklarını çalıştıran bir karma kuruluş olan Litwa Corporation için bir örneğe bakalım:
+
+![Şirket içi eşitleme içeren karma kuruluş için Azure Active Directory Domain Services](./media/overview/synced-tenant.png)
+
+* Etki alanı Hizmetleri gerektiren uygulamalar ve sunucu iş yükleri, Azure 'daki bir sanal ağa dağıtılır.
+    * Bu, yükseltme ve kaydırma stratejisinin bir parçası olarak Azure 'a geçirilen eski uygulamaları içerebilir.
+* Şirket içi dizinlerinden kimlik bilgilerini Azure AD kiracısıyla eşleştirmek için, Litwa şirketi [Azure AD Connect][azure-ad-connect]dağıtır.
+    * Eşitlenen kimlik bilgileri, Kullanıcı hesaplarını ve grup üyeliklerini içerir.
+* Litwonların BT ekibi, bu veya eşlenmiş bir sanal ağ üzerinden Azure AD kiracısı için Azure AD DS sunar.
+* Azure sanal ağında dağıtılan uygulamalar ve VM 'Ler, etki alanına katılması, LDAP okuma, LDAP bağlama, NTLM ve Kerberos kimlik doğrulaması ve grup ilkesi gibi Azure AD DS özelliklerini kullanabilir.
+
+### <a name="azure-ad-ds-for-cloud-only-organizations"></a>Yalnızca bulutta kuruluşlar için Azure AD DS
+
+Yalnızca bulutta yer alan bir Azure AD kiracısı, şirket içi kimlik kaynağına sahip değildir. Örneğin, Kullanıcı hesapları ve grup üyelikleri doğrudan Azure AD 'de oluşturulur ve yönetilir.
+
+Şimdi yalnızca, kimlik için Azure AD kullanan bir yalnızca bulut organizasyonu olan contoso örneğine göz atalım. Tüm Kullanıcı kimlikleri, kimlik bilgileri ve grup üyelikleri, Azure AD 'de oluşturulur ve yönetilir. Şirket içi bir dizinden herhangi bir kimlik bilgisini eşitlemeye yönelik Azure AD Connect ek bir yapılandırması yoktur.
+
+![Şirket içi eşitleme olmadan yalnızca bulutta yer alan bir kuruluş için Azure Active Directory Domain Services](./media/overview/cloud-only-tenant.png)
+
+* Etki alanı Hizmetleri gerektiren uygulamalar ve sunucu iş yükleri, Azure 'daki bir sanal ağa dağıtılır.
+* Contoso BT ekibi, Azure AD kiracısının bu veya eşlenmiş bir sanal ağ için Azure AD DS sunar.
+* Azure sanal ağında dağıtılan uygulamalar ve VM 'Ler, etki alanına katılması, LDAP okuma, LDAP bağlama, NTLM ve Kerberos kimlik doğrulaması ve grup ilkesi gibi Azure AD DS özelliklerini kullanabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-### <a name="learn-more-about-azure-ad-domain-services"></a>Azure AD Domain Services hakkında daha fazla bilgi edinin
-* [Özellikler](active-directory-ds-features.md)
-* [Dağıtım senaryoları](scenarios.md)
-* [Azure AD Domain Services, kullanım örneklerinize uygun öğrenin](comparison.md)
-* [Azure AD Domain Services ile Azure AD dizininizi nasıl eşitleneceğini anlama](synchronization.md)
 
-### <a name="get-started-with-azure-ad-domain-services"></a>Azure AD Etki Alanı Hizmetleri’ni kullanmaya başlama
-* [Azure portalını kullanarak Azure AD Domain Services'ı etkinleştir](create-instance.md)
+Azure AD DS diğer kimlik çözümleriyle ve eşitlemenin nasıl çalıştığı hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+
+* [Azure AD DS Azure AD ile karşılaştırın, Azure VM 'lerinde Active Directory Domain Services ve şirket içi Active Directory Domain Services][compare]
+* [Azure AD Domain Services Azure AD dizininizle nasıl eşitleneceğini öğrenin][synchronization]
+
+Başlamak için [Azure Portal kullanarak Azure AD DS yönetilen bir etki alanı oluşturun][tutorial-create].
+
+<!-- INTERNAL LINKS -->
+[compare]: compare-identity-solutions.md
+[synchronization]: synchronization.md
+[tutorial-create]: tutorial-create-instance.md
+[azure-ad-connect]: ../active-directory/hybrid/whatis-azure-ad-connect.md
+[password-hash-sync]: ../active-directory/hybrid/how-to-connect-password-hash-synchronization.md
+[availability-zones]: ../availability-zones/az-overview.md

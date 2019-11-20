@@ -1,71 +1,59 @@
 ---
-title: Etkin öğrenme - Personalizer
+title: Etkin ve etkin olmayan olaylar-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: ''
+description: Bu makalede, kişiselleştirici hizmeti içinde etkin ve etkin olmayan olayların, öğrenme ayarlarının ve öğrenme ilkelerinin kullanımı ele alınmaktadır.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
+ms.topic: conceptual
 ms.date: 05/30/2019
-ms.author: edjez
-ms.openlocfilehash: d758e8fc7952a414003746d39df9368f3274b08b
-ms.sourcegitcommit: cababb51721f6ab6b61dda6d18345514f074fb2e
+ms.author: diberry
+ms.openlocfilehash: 1641a1020193395d7d2ddb9c4893bd7bc89cdcd0
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66481400"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73681870"
 ---
-# <a name="active-learning-and-learning-policies"></a>Etkin olarak öğrenmeye ve ilkeleri öğrenme 
+# <a name="active-and-inactive-events"></a>Etkin ve etkin olmayan olaylar
 
-Uygulamanız sıralama API çağırdığında, içeriği derecesini alırsınız. İş mantığı bu boyut, içerik kullanıcıya görünen kaldırılması gerekip gerekmediğini belirlemek için kullanabilirsiniz. Görüntülediğinizde dereceli içeriği, diğer bir deyişle bir _etkin_ derece olay. Uygulamanızı değil görüntülediğinizde, içerik, yani sıralanmış bir _etkin olmayan_ derece olay. 
+Uygulamanız, derecelendirme API 'sini çağırdığında, uygulamanın **Rewarterctionıd** alanında göstermesi gereken eylemi alırsınız.  Bu andan itibaren, kişiselleştirici aynı EventID 'ye sahip bir yeniden çağrı bekliyor. Ödül puanı, modeli gelecekteki derece çağrılar için eğitebilmek üzere kullanılacaktır. EventID için bir ödül çağrısı alınmıyorsa, varsayılan bir yeniden eşleşme uygulanır. Varsayılan yeniden ödüller Azure portal ayarlanır.
 
-Etkin derece olay bilgileri için Personalizer döndürülür. Bu bilgiler, geçerli öğrenme İlkesi aracılığıyla modeli eğitmek devam etmek için kullanılır.
+Bazı senaryolarda, uygulamanın, sonucun ne şekilde kullanılacağını veya kullanıcıya görüntülendiğini bilse bile, uygulamanın sırasıyla derece çağrısı yapması gerekebilir. Bu durum, örneğin, yükseltilen içeriğin sayfa işleme bir pazarlama kampanyası tarafından üzerine yazılmasından kaynaklanıyor olabilir. Sıra çağrısının sonucu hiç kullanılmadıysa ve Kullanıcı onu hiç görmüyorsa, karşılık gelen bir ödül çağrısı göndermeyin.
 
-## <a name="active-events"></a>Etkin olaylar
+Genellikle, şu durumlarda bu senaryolar meydana gelir:
 
-Etkin olaylar her zaman kullanıcıya gösterilen ve ödül çağrı öğrenme döngüyü yönlendirileceksiniz. 
+* Kullanıcının görebileceğini veya görmeyebilirsiniz prerendering kullanıcı ARABIRIMI. 
+* Uygulamanız, çok sayıda gerçek zamanlı bağlamla derecelendirme çağrılarının yapıldığı ve uygulamanın çıktıyı kullanmasının veya kullanmayabilir. 
 
-### <a name="inactive-events"></a>Etkin olmayan olaylar 
+Bu durumlarda, etkinliğin _devre dışı_olmasını isteyen derece çağrısı yapmak Için kişiselleştirici kullanın. Kişiselleştirici bu olay için bir ödül beklemez ve varsayılan bir ödül uygulamaz. İş mantığınızdaki daha sonra uygulama, sıralama çağrısından bilgileri kullanıyorsa, olayı _etkinleştirmeniz_ yeterlidir. Etkinlik etkin olduğunda, kişiselleştirici bir olay yeniden bekliyor. Reward API 'sine açık bir çağrı yapılmıyorsa, kişiselleştirici varsayılan bir ödül uygular.
 
-Kullanıcı dereceli içeriğinden seçmek için bir fırsat sağlanmamış olduğundan etkin olmayan olayları temel alınan modelin değiştirmeniz gerekmez.
+## <a name="inactive-events"></a>Etkin olmayan olaylar
 
-## <a name="dont-train-with-inactive-rank-events"></a>Etkin olmayan sıralama olaylarla eğitme yok 
+Bir olaya yönelik eğitimi devre dışı bırakmak için `learningEnabled = False`kullanarak derece çağırın. Etkin olmayan bir olay için, EventID için bir ödül gönderirseniz veya bu EventID için `activate` API 'sini çağırdığınızda öğrenme işlemi örtülü olarak etkinleştirilir.
 
-Bazı uygulamalarda, uygulamanızın sonuçları kullanıcıya görüntülenecekse henüz bilmeden derece API'ye çağrı gerekebilir. 
+## <a name="learning-settings"></a>Öğrenme ayarları
 
-Böyle olduğunda:
+Öğrenme ayarları, model eğitiminin *hiper parametrelerini* belirlenir. Farklı öğrenme ayarları üzerinde eğitilen aynı verilerin iki modeli farklı olacaktır.
 
-* Bazı kullanıcı Arabirimi kullanıcı görmek alamayabilir veya önceden işleme. 
-* Uygulamanızı, daha az gerçek zamanlı bağlamı ile yapılan derece çağrıları ve çıktılarını olabilir veya uygulama tarafından kullanılamayabilir Tahmine dayalı kişiselleştirme yapılıyor. 
+### <a name="import-and-export-learning-policies"></a>Öğrenme ilkelerini içeri ve dışarı aktarma
 
-### <a name="disable-active-learning-for-inactive-rank-events-during-rank-call"></a>Etkin olmayan bir derecelendirme olaylar için etkin olarak öğrenmeye derece çağrısı sırasında devre dışı bırak
+Azure portal öğrenme ilkesi dosyalarını içeri ve dışarı aktarabilirsiniz. Mevcut ilkeleri kaydetmek, test etmek, değiştirmek ve bunları kaynak kodu denetiinizde daha sonra başvurmak ve denetlemek için yapıtlar olarak arşivlemek için bu yöntemi kullanın.
 
-Otomatik öğrenme devre dışı bırakmak için derecesi ile çağrı `learningEnabled = False`.
+### <a name="understand-learning-policy-settings"></a>Öğrenme ilkesi ayarlarını anlama
 
-Boyut için bir ödül gönderirseniz öğrenme etkin olmayan bir olay için örtük olarak etkinleştirilir.
+Öğrenme ilkesindeki ayarların değiştirilmesi amaçlanmamaktadır. Ayarları yalnızca, kişiselleştirici tarafından nasıl etkilendiklerini anladıysanız değiştirin. Bu bilgi olmadan, geçersiz kılma için kişiselleştirici modeller dahil olmak üzere sorunlara neden olabilirsiniz.
 
-## <a name="learning-policies"></a>İlkeleri öğrenme
+### <a name="compare-learning-policies"></a>Öğrenme ilkelerini karşılaştırın
 
-İlke öğrenme belirler belirli *hiperparametreleri* model eğitimini. Farklı öğrenme ilkeleri, eğitim aynı verilerin iki modeli farklı davranır.
+[Çevrimdışı değerlendirmeler](concepts-offline-evaluation.md)yaparak, farklı öğrenme Ilkelerinin kişiselleştirici günlüklerinde geçmiş verilere karşı nasıl gerçekleştirileceğini karşılaştırabilirsiniz.
 
-### <a name="importing-and-exporting-learning-policies"></a>İçeri ve dışarı aktarma öğrenme ilkeleri
+Geçerli öğrenme ilkesiyle karşılaştırmak için [kendi öğrenme Ilkelerinizi karşıya yükleyin](how-to-offline-evaluation.md) .
 
-İçeri ve dışarı aktarma öğrenme Azure portalından ilke dosyaları. Bu, mevcut ilkeleri kaydedin, bunları test etmeniz, bunları değiştirmek ve gelecekte başvurmak ve denetim için yapıt olarak, kaynak kodu denetiminde arşivleyin sağlar.
+### <a name="optimize-learning-policies"></a>Öğrenme ilkelerini iyileştirme
 
-### <a name="learning-policy-settings"></a>Öğrenme ilke ayarları
+Kişiselleştirici, [çevrimdışı bir değerlendirmede](how-to-offline-evaluation.md)iyileştirilmiş bir öğrenme ilkesi oluşturabilir. Çevrimdışı değerlendirmede daha iyi bir değerlendirme olan iyileştirilmiş bir öğrenme ilkesi, kişiselleştirmede çevrimiçi olarak kullanıldığında daha iyi sonuçlar verir.
 
-Ayarlarında **öğrenme ilke** değiştirilmesi amaçlanmayan. Yalnızca bunların Personalizer nasıl etkilediği anladığınızda ayarlarını değiştirin. Bu bir bilgi olmadan ayarlarını değiştirme Personalizer modelleri geçersiz kılmalarını da dahil olmak üzere, yan etkileri neden olur.
-
-### <a name="comparing-effectiveness-of-learning-policies"></a>İlkeleri öğrenme açısından karşılaştırma
-
-Farklı öğrenme ilkeleri karşılaştırabilirsiniz Personalizer günlüklerinde geçmiş verilere karşı yaparak yapacağı [çevrimdışı değerlendirmeleri](concepts-offline-evaluation.md).
-
-[Kendi öğrenme ilkelerinizi karşıya](how-to-offline-evaluation.md) geçerli öğrenme ilke ile karşılaştırmak için.
-
-### <a name="discovery-of-optimized-learning-policies"></a>En iyi duruma getirilmiş öğrenme ilkeleri bulma
-
-Personalizer, daha en iyi duruma getirilmiş bir öğrenme ilkesi oluşturabilir, yaparken bir [çevrimdışı değerlendirme](how-to-offline-evaluation.md). Çevrimdışı bir değerlendirme daha iyi ödüller için gösterilen daha en iyi duruma getirilmiş bir öğrenme ilke çevrimiçi Personalizer içinde kullanıldığında daha iyi sonuçlar verecek.
-
-En iyi duruma getirilmiş öğrenme ilke oluşturulduktan sonra bunu doğrudan Personalizer için geçerli ilkeyi hemen değiştirir veya daha fazla değerlendirme için Kaydet ve gelecekte AT, kaydedin ve daha sonra uygulama karar uygulayabilirsiniz.
+Bir öğrenme ilkesini iyileştirdikten sonra, geçerli ilkenin hemen yerini alacak şekilde doğrudan Kişiselleştiriciye uygulayabilirsiniz. Ayrıca, daha fazla değerlendirme için iyileştirilmiş ilkeyi kaydedebilir ve daha sonra atma, kaydetme veya uygulama seçeneklerinden hangisi olduğuna karar verebilirsiniz.

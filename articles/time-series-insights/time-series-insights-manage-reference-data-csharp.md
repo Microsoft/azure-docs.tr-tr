@@ -1,48 +1,47 @@
 ---
-title: C# kullanarak Azure zaman serisi görüşleri ortamdaki başvuru verilerini yönetme | Microsoft Docs
-description: Bu makalede C# (c-sharp) .NET dilinde yazılan özel bir uygulama oluşturarak bir Azure zaman serisi görüşleri ortamınıza başvuru veri yönetme konusunda açıklanır.
+title: -Azure Time Series Insights | kullanarak C# GA ortamınızda başvuru verilerini yönetme Microsoft Docs
+description: İçinde C#yazılmış özel bir uygulama oluşturarak GA ortamınız için başvuru verilerini yönetmeyi öğrenin.
 ms.service: time-series-insights
 services: time-series-insights
-author: ashannon7
+author: deepakpalled
 ms.author: dpalled
 manager: cshankar
-ms.reviewer: jasonh, kfile
 ms.devlang: csharp
 ms.workload: big-data
 ms.topic: conceptual
-ms.date: 06/05/2019
+ms.date: 10/03/2019
 ms.custom: seodec18
-ms.openlocfilehash: 0a482ae44c796e1519ffad0a604510166b1ac63c
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: a32bf00d21311a1a8041a901f70b9b400a49ab76
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67165618"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74012561"
 ---
-# <a name="manage-ga-reference-data-for-an-azure-time-series-insights-environment-by-using-c"></a>Bir Azure zaman serisi görüşleri ortamınıza başvuru verilerini GA kullanarak yönetmeC#
+# <a name="manage-ga-reference-data-for-an-azure-time-series-insights-environment-by-using-c"></a>Kullanarak bir Azure Time Series Insights ortamı için GA başvuru verilerini yönetmeC#
 
-Bu makalede bir Azure zaman serisi görüşleri ortamınıza başvuru veri yönetmek için derleme örnek C# projesinde açıklanır.
+Bu makalede, bir Azure Time Series Insights C# ortamı için başvuru verilerini yönetmek üzere derleyebileceğiniz örnek bir proje açıklanmaktadır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Derlemek ve örnek kodu çalıştırma önce aşağıdaki adımları tamamlayın:
+Örnek kodu derleyip çalıştırmadan önce aşağıdaki adımları gerçekleştirin:
 
-1. [Başvuru veri kümesi oluşturma](time-series-insights-add-reference-data-set.md).
+1. [Bir başvuru veri kümesi oluşturun](time-series-insights-add-reference-data-set.md).
 
-1. Uygulama kimlik doğrulama erişim belirtecinin yapılandırın. Belirteç, Azure Active Directory API'si edinilen emin olun. Bu belirteci geçmelidir `Authorization` her sorgu API'si isteği üstbilgisi.
+1. Uygulama için yetkilendirme erişim belirtecini yapılandırın. Belirtecin Azure Active Directory API aracılığıyla alındığından emin olun. Bu belirteci her sorgu API isteğinin `Authorization` üstbilgisine geçirmeniz gerekir.
 
-   Etkileşimli olmayan uygulama ayarlama hakkında daha fazla bilgi için bkz: [kimlik doğrulama ve yetkilendirme](time-series-insights-authentication-and-authorization.md).
+   Etkileşimli olmayan uygulamaları ayarlama hakkında daha fazla bilgi için bkz. [kimlik doğrulama ve yetkilendirme](time-series-insights-authentication-and-authorization.md).
 
-1. Örnek kod, atanan örnek sabitleri değiştirmek için Düzenle **DUMMY #** , neredeyse kod başlangıcı.
+1. Örnek kodu, kodun başlangıcına yakın olan **#DUMMY #** ' da belirtilen örnek sabitlerini değiştirecek şekilde düzenleyin.
 
 > [!NOTE]
-> GA örnek kodlar da görüntüleme [ https://github.com/Azure-Samples/Azure-Time-Series-Insights ](https://github.com/Azure-Samples/Azure-Time-Series-Insights/tree/master/csharp-tsi-ga-sample).
+> [https://github.com/Azure-Samples/Azure-Time-Series-Insights](https://github.com/Azure-Samples/Azure-Time-Series-Insights/tree/master/csharp-tsi-ga-sample)' de GA örnek kodunu görüntüleyin.
 
 ## <a name="project-dependencies"></a>Proje bağımlılıkları
 
-NuGet paketleri Ekle `Microsoft.IdentityModel.Clients.ActiveDirectory` ve `Newtonsoft.Json` bu örneğin.
+Bu örnek için NuGet paketleri `Microsoft.IdentityModel.Clients.ActiveDirectory` ve `Newtonsoft.Json` ekleyin.
 
-## <a name="c-sample-code"></a>C# örnek kod
+## <a name="c-sample-code"></a>C#örnek kod
 
 ```csharp
 // Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -247,4 +246,4 @@ namespace TimeSeriesInsightsReferenceDataSampleApp
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Okuma [başvuru verileri API'si](/rest/api/time-series-insights/ga-reference-data-api).
+- [Başvuru VERILERI API](https://docs.microsoft.com/rest/api/time-series-insights/ga-reference-data-api)'sini okuyun.

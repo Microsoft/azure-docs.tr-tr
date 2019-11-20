@@ -7,12 +7,12 @@ ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 05/23/2019
 ms.author: sngun
-ms.openlocfilehash: d61d3d00de5b46f7dad44625509eabe6836ca7cf
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: ae1773ec1d470b9cff2efb00c200427b7b4c2fb4
+ms.sourcegitcommit: e42c778d38fd623f2ff8850bb6b1718cdb37309f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447265"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69614828"
 ---
 # <a name="tuning-query-performance-with-azure-cosmos-db"></a>Azure Cosmos DB ile sorgu performansını ayarlama
 
@@ -44,7 +44,7 @@ SDK'ları, sorgu yürütme için çeşitli seçenekler sunar. Örneğin,. NET'te
 | `EnableScanInQuery` | Dizin oluşturma dışında seçtiyseniz true, ancak sorguyu bir tarama ile yine de çalıştırmak istediğiniz ayarlamanız gerekir. Yalnızca geçerli istenen filtre yolu için dizin oluşturma devre dışı bırakıldı. | 
 | `MaxItemCount` | Sunucuya gidiş dönüş döndürülecek öğe maksimum sayısı. -1, ayarına göre sunucu öğe sayısını yönetme izin verebilirsiniz. Veya yalnızca az sayıda gidiş dönüş başına öğeleri almak için bu değer düşürebilirsiniz. 
 | `MaxBufferedItemCount` | Bir istemci-tarafı seçenektir ve bölümler arası ORDER BY gerçekleştirirken bellek tüketimini sınırlamak için kullanılır. Daha yüksek bir değer bölümler arası sıralama gecikme süresini azaltmaya yardımcı olur. |
-| `MaxDegreeOfParallelism` | Alır veya Azure Cosmos DB veritabanı hizmetinde paralel sorgu yürütme sırasında istemci tarafı çalıştırma eşzamanlı işlemlerin sayısını ayarlar. Bir pozitif özellik değeri kümesi değerine eşzamanlı işlemlerin sayısını sınırlar. 0'dan düşük bir değere ayarlanırsa, sistem çalıştırmak için eşzamanlı işlemlerin sayısını otomatik olarak karar verir. |
+| `MaxDegreeOfParallelism` | Azure Cosmos veritabanı hizmetinde paralel sorgu yürütme sırasında istemci tarafında çalışan eşzamanlı işlem sayısını alır veya ayarlar. Bir pozitif özellik değeri kümesi değerine eşzamanlı işlemlerin sayısını sınırlar. 0'dan düşük bir değere ayarlanırsa, sistem çalıştırmak için eşzamanlı işlemlerin sayısını otomatik olarak karar verir. |
 | `PopulateQueryMetrics` | Yük süresi sorgu yürütme derleme zamanı, döngü süresi dizini ve belge gibi çeşitli aşamaları harcanan süreyi istatistiklerin ayrıntılı günlüğü etkinleştirir. İstatistikleri sorgu çıktısı sorgu performansı sorunlarını tanılamak için Azure desteği ile paylaşabilirsiniz. |
 | `RequestContinuation` | Herhangi bir sorgu tarafından döndürülen donuk devamlılık belirteci ileterek sorgu yürütme devam edebilir. Devamlılık belirteci, sorgu yürütme için gerekli tüm durum kapsüller. |
 | `ResponseContinuationTokenLimitInKb` | Sunucu tarafından döndürülen devam belirtecini en büyük boyutunu sınırlandırabilirsiniz. Uygulama ana bilgisayarı yanıt üstbilgi boyutu sınırları varsa bunu ayarlamanız gerekebilir. Bu ayar, genel süresi ve sorgu için tüketilen RU artırabilir.  |
@@ -216,7 +216,7 @@ Sorgu yürütme ölçümleri bölümüne sorguları sunucu yürütme süresi alm
 ### <a name="indexing-policy"></a>Dizin oluşturma ilkesi
 Bkz: [dizin oluşturma ilkesini yapılandırma](index-policy.md) yollarını, tür ve modlarını ve bunların sorgu yürütme nasıl etkilediği dizinleme. Varsayılan olarak, dizin oluşturma ilkesini dizeler için karma dizin kullanır etkin olduğu için eşitlik sorguları, ancak aralık sorguları/sıralama ölçütü sorguları için değil. Aralık sorguları için dizeleri ihtiyacınız varsa, tüm dizeleri aralığı dizin türü belirtme öneririz. 
 
-Varsayılan olarak, Azure Cosmos DB, tüm veriler için otomatik dizin oluşturma uygulanır. Senaryoları için yüksek performanslı eklemek, bu her ekleme işlemi RU maliyetini azaltır gibi yolları dışlamayı göz önünde bulundurun. 
+Varsayılan olarak, Azure Cosmos DB tüm verilere otomatik dizin oluşturma uygular. Yüksek performanslı ekleme senaryolarında, bu işlemi her ekleme işleminin RU maliyetini azaltacak şekilde dışarıda bırakmayı düşünün. 
 
 ## <a name="query-execution-metrics"></a>Sorgu yürütme ölçümleri
 İsteğe bağlı geçirerek sorgu yürütme üzerindeki ayrıntılı ölçümleri elde `x-ms-documentdb-populatequerymetrics` üst bilgisi (`FeedOptions.PopulateQueryMetrics` .NET SDK'sındaki). Döndürülen değer `x-ms-documentdb-query-metrics` Gelişmiş sorun giderme sorgunun yürütülmesi için gereken aşağıdaki anahtar-değer çiftleri sahiptir. 

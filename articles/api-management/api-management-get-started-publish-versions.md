@@ -9,17 +9,16 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.custom: mvc
 ms.topic: tutorial
-ms.date: 06/15/2018
+ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: 6820b44309ac2b3dbeb5ad6f0beb460c8712e9af
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: d0c837ac376f9d496baaf1ed67d0ec80c996804a
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67203698"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73176824"
 ---
 # <a name="publish-multiple-versions-of-your-api"></a>API'nizin birden fazla sürümünü yayımlama 
 
@@ -39,7 +38,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 + [Azure API Management terminolojisini](api-management-terminology.md) öğrenin.
 + Şu hızlı başlangıcı tamamlayın: [Azure API Management örneği oluşturma](get-started-create-service-instance.md).
-+ Ayrıca şu öğreticiyi tamamlayın: [İçeri aktarma ve ilk API'nizi yayımlama](import-and-publish.md).
++ Ayrıca, şu öğreticiyi tamamlayın: [İlk API'nizi içeri aktarma ve yayımlama](import-and-publish.md).
 
 ## <a name="add-a-new-version"></a>Yeni bir sürüm ekleme
 
@@ -95,11 +94,10 @@ Azure API Management, çağıranlara istedikleri API sürümünü belirtme olana
 ## <a name="browse-the-developer-portal-to-see-the-version"></a>Sürümü görüntülemek için geliştirici portalına göz atma
 
 1. Üstteki menüden **Geliştirici Portalı**’nı seçin.
-2. **API'ler** seçeneğini belirleyin. **Demo Konferans API’sinin** **Özgün** ve **v1** sürümlerini gösterdiğine dikkat edin.
-3. **v1**’i seçin.
-4. Listedeki ilk işlemin **İstek URL'sine** dikkat edin. Bu, API URL’si yolunun **v1** içerdiğini gösterir.
-
-    ![API Bağlam menüsü - sürüm ekleme](media/api-management-getstarted-publish-versions/developer_portal.png)
+2. **API 'leri** seçin ve **Tanıtım Konferansı API 'sine**tıklayın.
+3. API adının yanında birden fazla sürümü olan bir açılan menü görmeniz gerekir.
+4. **v1**’i seçin.
+5. Listedeki ilk işlemin **İstek URL'sine** dikkat edin. Bu, API URL’si yolunun **v1** içerdiğini gösterir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

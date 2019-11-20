@@ -1,6 +1,6 @@
 ---
-title: Kimlik deneyimi çerçevesi şema Azure Active Directory B2C için StringCollection talep dönüştürme örnekler | Microsoft Docs
-description: StringCollection dönüşüm örnekleri kimlik deneyimi çerçevesi şema, Azure Active Directory B2C için talep.
+title: Azure Active Directory B2C | Identity Experience Framework şeması için StringCollection talep dönüştürme örnekleri | Microsoft Docs
+description: StringCollection, Azure Active Directory B2C Identity Experience Framework şeması için bir dönüşüm örnekleri talep ediyor.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,32 +10,32 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 98453daeb34d093b49cdcc636f68c3d7ae017126
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9add75b8922fe958fc348fb2a6dd48a7b300eade
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66512430"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71063305"
 ---
-# <a name="stringcollection-claims-transformations"></a>StringCollection talep dönüşümleri
+# <a name="stringcollection-claims-transformations"></a>StringCollection talep dönüştürmeleri
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Bu makalede, Azure Active Directory (Azure AD) B2C'de kimlik deneyimi çerçevesi şema dize koleksiyonu talep Dönüşümleri kullanma örnekleri sağlar. Daha fazla bilgi için [ClaimsTransformations](claimstransformations.md).
+Bu makalede, Azure Active Directory B2C (Azure AD B2C) öğesinde kimlik deneyimi çerçevesi şemasının dize koleksiyonu talep dönüştürmelerinin kullanılmasına yönelik örnekler sağlanmaktadır. Daha fazla bilgi için bkz. [Claimstransformations](claimstransformations.md).
 
 ## <a name="additemtostringcollection"></a>AddItemToStringCollection
 
-Yeni bir stringCollection talep dize talep ekler. 
+Yeni bir stringCollection talebine bir dize talebi ekler.
 
-| Öğe | TransformationClaimType | Veri Türü | Notlar |
+| Öğe | Dönüştürme Tionclaimtype | Veri Türü | Notlar |
 | ---- | ----------------------- | --------- | ----- |
-| Inputclaim | Öğesi | string | Çıkış talebi için eklenecek ClaimType. |
-| Inputclaim | Koleksiyon | StringCollection | [İsteğe bağlı] Belirtilmişse, talep dönüştürme bu koleksiyondan öğelerin kopyalar ve çıkış koleksiyon talep sonuna öğe ekler. |
-| outputClaim | Koleksiyon | StringCollection | Bu ClaimsTransformation çağrıldıktan sonra üretilen ClaimTypes. |
+| Inputclaim | maddesinin | dize | Çıkış talebine eklenecek ClaimType. |
+| Inputclaim | koleksiyon | stringCollection | Seçim Belirtilmişse, talep dönüştürmesi öğeleri bu koleksiyondan kopyalar ve öğeyi çıkış koleksiyonu talebinin sonuna ekler. |
+| outputClaim | koleksiyon | stringCollection | Bu Claimstranssetting sonrasında üretilen ClaimTypes çağrılır. |
 
-Kullanım bu dönüştürme için yeni veya mevcut bir stringCollection bir dize eklemek için talep. İçinde yaygın olarak kullanılan bir **AAD UserWriteUsingAlternativeSecurityId** teknik profili. Yeni bir sosyal hesap oluşturulmadan önce **CreateOtherMailsFromEmail** talep dönüştürme ClaimType okur ve değerine ekler **otherMails** ClaimType. 
+Yeni veya mevcut bir stringCollection 'a bir dize eklemek için bu talep dönüşümünü kullanın. Bu, yaygın olarak bir **AAD-Userwriteusingalternativesecurityıd** teknik profilinde kullanılır. Yeni bir sosyal hesap oluşturulmadan önce, **Createothermailsfromemail** talep dönüştürmesi ClaimType 'ı okur ve değeri **Diğer postalar** ClaimType 'a ekler.
 
-Aşağıdaki talep dönüştürme ekler **e-posta** için ClaimType **otherMails** ClaimType.
+Aşağıdaki talep dönüştürmesi, **e-posta** ClaimType 'ı **Diğer postalar** ClaimType 'a ekler.
 
 ```XML
 <ClaimsTransformation Id="CreateOtherMailsFromEmail" TransformationMethod="AddItemToStringCollection">
@@ -54,20 +54,20 @@ Aşağıdaki talep dönüştürme ekler **e-posta** için ClaimType **otherMails
 - Giriş talepleri:
   - **koleksiyon**: ["someone@outlook.com"]
   - **öğe**: "admin@contoso.com"
-- Çıkış talep: 
-  - **koleksiyon**: ["someone@outlook.com","admin@contoso.com"]
+- Çıkış talepleri:
+  - **koleksiyon**: ["someone@outlook.com", "admin@contoso.com"]
 
 ## <a name="addparametertostringcollection"></a>AddParameterToStringCollection
 
-Bir dize parametresi için yeni bir stringCollection talep ekler. 
+Yeni bir stringCollection talebine bir String parametresi ekler.
 
-| Öğe | TransformationClaimType | Veri Türü | Notlar |
+| Öğe | Dönüştürme Tionclaimtype | Veri Türü | Notlar |
 | ---- | ----------------------- | --------- | ----- |
-| Inputclaim | Koleksiyon | StringCollection | [İsteğe bağlı] Belirtilmişse, talep dönüştürme bu koleksiyondan öğelerin kopyalar ve çıkış koleksiyon talep sonuna öğe ekler. |
-| InputParameter | Öğesi | string | Çıkış talebi için eklenecek değer. |
-| outputClaim | Koleksiyon | StringCollection | Bu ClaimsTransformation çağrıldıktan sonra üretilecek ClaimTypes. |
+| Inputclaim | koleksiyon | stringCollection | Seçim Belirtilmişse, talep dönüştürmesi öğeleri bu koleksiyondan kopyalar ve öğeyi çıkış koleksiyonu talebinin sonuna ekler. |
+| InputParameter | maddesinin | dize | Çıkış talebine eklenecek değer. |
+| outputClaim | koleksiyon | stringCollection | Bu Claimstrans, tarafından üretilecek olan ClaimTypes çağrılır. |
 
-Kullanım bu talep dönüştürmeyi için yeni veya mevcut bir stringCollection bir dize değeri ekleyin. Aşağıdaki örnek, bir sabit bir e-posta adresini ekler (admin@contoso.com) için **otherMails** talep. 
+Yeni veya mevcut bir stringCollection 'a bir dize değeri eklemek için bu talep dönüşümünü kullanın. Aşağıdaki örnek, **Diğer postalar** talebine bir sabit eadmin@contoso.com-posta adresi () ekler.
 
 ```XML
 <ClaimsTransformation Id="SetCompanyEmail" TransformationMethod="AddParameterToStringCollection">
@@ -87,21 +87,21 @@ Kullanım bu talep dönüştürmeyi için yeni veya mevcut bir stringCollection 
 
 - Giriş talepleri:
   - **koleksiyon**: ["someone@outlook.com"]
-- Giriş parametreleri 
+- Giriş parametreleri
   - **öğe**: "admin@contoso.com"
-- Çıkış talep:
-  - **koleksiyon**: ["someone@outlook.com","admin@contoso.com"]
+- Çıkış talepleri:
+  - **koleksiyon**: ["someone@outlook.com", "admin@contoso.com"]
 
-## <a name="getsingleitemfromstringcollection"></a>GetSingleItemFromStringCollection
+## <a name="getsingleitemfromstringcollection"></a>Getsingleıtemfromstringcollection
 
-İlk öğe, sağlanan dizenin koleksiyondan alır. 
+Belirtilen dize koleksiyonundan ilk öğeyi alır.
 
-| Öğe | TransformationClaimType | Veri Türü | Notlar |
+| Öğe | Dönüştürme Tionclaimtype | Veri Türü | Notlar |
 | ---- | ----------------------- | --------- | ----- |
-| Inputclaim | Koleksiyon | StringCollection | Talep dönüştürme tarafından öğesini almak için kullanılan ClaimTypes. |
-| outputClaim | extractedItem | string | Bu ClaimsTransformation çağrıldıktan sonra üretilen ClaimTypes. Koleksiyondaki ilk öğe. |
+| Inputclaim | koleksiyon | stringCollection | Öğeyi almak için talep dönüştürmesi tarafından kullanılan ClaimTypes. |
+| outputClaim | Extracteditıtem | dize | Bu Claimstranssetting sonrasında üretilen ClaimTypes çağrılır. Koleksiyondaki ilk öğe. |
 
-Aşağıdaki örnek okur **otherMails** talep ve ilk öğesine dönüş **e-posta** talep. 
+Aşağıdaki örnek, **Diğer postalar** talebini okur ve ilk öğeyi **e-posta** talebine döndürür.
 
 ```XML
 <ClaimsTransformation Id="CreateEmailFromOtherMails" TransformationMethod="GetSingleItemFromStringCollection">
@@ -117,7 +117,7 @@ Aşağıdaki örnek okur **otherMails** talep ve ilk öğesine dönüş **e-post
 ### <a name="example"></a>Örnek
 
 - Giriş talepleri:
-  - **koleksiyon**: ["someone@outlook.com","someone@contoso.com"]
-- Çıkış talep: 
-  - **extractedItem**: "someone@outlook.com"
+  - **koleksiyon**: ["someone@outlook.com", "someone@contoso.com"]
+- Çıkış talepleri:
+  - **Extracteditıtem**: "someone@outlook.com"
 

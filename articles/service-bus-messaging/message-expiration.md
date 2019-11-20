@@ -1,6 +1,6 @@
 ---
-title: Azure Service Bus ileti süre | Microsoft Docs
-description: Geçerlilik süresi ve Azure Service Bus iletileri yaşam süresi
+title: İleti süre sonu Azure Service Bus | Microsoft Docs
+description: Azure Service Bus iletilerinin yaşam süresi ve yaşam süresi
 services: service-bus-messaging
 documentationcenter: ''
 author: axisc
@@ -13,78 +13,78 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2019
 ms.author: aschhab
-ms.openlocfilehash: fdfd7794961b0254526b124525c6e978d13b0114
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 109ecc671b43365c433a626ff8d9fe55a5a626b5
+ms.sourcegitcommit: f5075cffb60128360a9e2e0a538a29652b409af9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65800272"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68310287"
 ---
 # <a name="message-expiration-time-to-live"></a>İleti süre sonu (Yaşam Süresi)
 
-Bir ileti bir komut veya bir alıcıya, ileti ilettiği sorgulama neredeyse her zaman uygulama düzeyi sona erme tarihi çeşit tabi yüktür. Böyle bir son tarihine ulaşıldıktan sonra içerik artık teslim veya istenen işlem artık yürütülür.
+Bir iletideki yük veya bir iletinin alıcıyı ileten bir komut ya da sorgulama, neredeyse her zaman bir uygulama düzeyi sona erme tarihi biçimine tabidir. Bu süre sonunda, içerik artık teslim edilmemiş veya istenen işlem artık yürütülmemiş.
 
-Geliştirme ve test ortamları, kuyruklar ve konular genellikle uygulama veya uygulama bölümleri kısmi çalıştırmaları bağlamında kullanılan için de otomatik olarak sonraki test çalıştırın böylece atık olabilir kenarda kalmış test iletileri için tercih edilir temiz başlatın.
+Kuyrukların ve konuların genellikle uygulamaların veya uygulama bölümlerinin kısmi çalıştırmaları bağlamında kullanıldığı geliştirme ve test ortamları için, bir sonraki Test çalıştırmasının kullanılabilmesi için, yabanlanılan test iletilerinin otomatik olarak atık toplanmasını sağlamak da istenebilir temizlemeyi başlatın.
 
-Herhangi bir ileti için süre sonu ayarlayarak denetlenebilir [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) göreli süre belirten sistem özelliği. İleti kuyruğa alınan varlık içine süre sonu mutlak anlık olur. O zaman [ExpiresAtUtc](/dotnet/api/microsoft.azure.servicebus.message.expiresatutc) özellik değerini alır [(**EnqueuedTimeUtc**](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.enqueuedtimeutc#Microsoft_ServiceBus_Messaging_BrokeredMessage_EnqueuedTimeUtc) + [**TimeToLive**)](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive). Hiçbir istemci etkin bir şekilde dinlerken, aracılı ileti yaşam süresi (TTL) ayarı zorlanmaz.
+Her bir ileti için süre sonu, göreli bir süre belirten [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) System özelliği ayarlanarak denetlenebilir. İleti varlığa sıralandığında süre sonu mutlak bir anlık olur. Bu sırada, [ExpiresAtUtc](/dotnet/api/microsoft.azure.servicebus.message.expiresatutc) özelliği değeri alır [(**enqueuedtimeutc**](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.enqueuedtimeutc#Microsoft_ServiceBus_Messaging_BrokeredMessage_EnqueuedTimeUtc) + [**TimeToLive**)](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive). Aracılı bir iletideki yaşam süresi (TTL) ayarı, etkin bir istemci olmadığında zorunlu değildir.
 
-Son **ExpiresAtUtc** anında, iletileri alma işlemi için uygun olur. Sona erme için teslim şu anda kilitli iletileri etkilemez. Bu iletileri hala normal şekilde işlenir. Kilit süresi dolana veya sözleşme ileti bırakıldı, sona erme hemen etkili olur.
+**ExpiresAtUtc** Instant 'tan geçmiş iletiler, alma işlemi için uygun hale gelir. Süre sonu, şu anda teslim için kilitli iletileri etkilemez; Bu iletiler normal olarak yine de işlenir. Kilidin süresi dolarsa veya ileti durdurulmadığında, süre sonu hemen yürürlüğe girer.
 
-İleti kilidi altında olsa da, uygulama süresi dolmuş bir ileti elinde olabilir. Uygulama işlemeyle devam konusunda istekli mi veya iletiyi bırak seçtiğinde kadar uygulayan ' dir.
+İleti kilit altındayken uygulama, süresi sona ermemiş bir iletinin elinde olabilir. Uygulamanın işleme devam edip etmeyeceğini veya iletiyi bırakmaya izin verip uygulamamayı tercih edin.
 
-## <a name="entity-level-expiration"></a>Varlık düzeyinde süre sonu
+## <a name="entity-level-expiration"></a>Varlık düzeyi süre sonu
 
-Bir kuyruk veya konuda gönderilen tüm iletilerin varlıkta ayarlanmış varsayılan süre sonu ile düzeyi tabidir [defaultMessageTimeToLive](/azure/templates/microsoft.servicebus/namespaces/queues) özelliği ve bu da ayarlanabilir portalda oluşturma sırasında ve daha sonra ayarlanır. Varsayılan süre sonu varlığa gönderilen tüm iletiler için kullanılan burada [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) açıkça ayarlı değil. Varsayılan süre sonu için bir tavan olarak da işler **TimeToLive** değeri. Uzun olan iletiler **TimeToLive** sona erme varsayılan değerinden sessizce için ayarlanmış **defaultMessageTimeToLive** sıraya alınıyor önce değeri.
+Bir sıraya veya konuya gönderilen tüm iletiler, [Defaultmessagetimetolive](/azure/templates/microsoft.servicebus/namespaces/queues) özelliğine sahip varlık düzeyinde ayarlanan varsayılan bir süre sonuna tabidir ve oluşturma sırasında portalda ayarlanabilir ve daha sonra ayarlanabilir. Varsayılan süre sonu, [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) 'nin açıkça ayarlanmamasının varlığına gönderilen tüm iletiler için kullanılır. Varsayılan süre sonu Ayrıca **TimeToLive** değeri için tavan olarak çalışır. Varsayılan değerden daha uzun **TimeToLive** süresi dolduktan sonra, kuyruğa alınmadan önce **defaultmessagetimetolive** değerine sessizce ayarlanır.
 
 > [!NOTE]
-> Varsayılan [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) aracılı ileti değeri [TimeSpan.Max](https://docs.microsoft.com/dotnet/api/system.timespan.maxvalue) belirtilmişse Aksi takdirde.
+> Aracılı bir ileti için varsayılan [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) değeri [TimeSpan.](https://docs.microsoft.com/dotnet/api/system.timespan.maxvalue) aksi belirtilmedikçe Max değeridir.
 >
-> Varlıkları (kuyruklar ve konular) Mesajlaşma için varsayılan sona erme süresini de olduğundan [TimeSpan.Max](https://docs.microsoft.com/dotnet/api/system.timespan.maxvalue) Service Bus standart ve premium katmanları için.  Temel katmanı için varsayılan süre 14 gündür.
+> Mesajlaşma varlıkları (kuyruklar ve konular) için, varsayılan sona erme saati de Service Bus standart ve Premium katmanlar için [TimeSpan. Max](https://docs.microsoft.com/dotnet/api/system.timespan.maxvalue) ' dur.  Temel katman için, varsayılan sona erme saati 14 gündür.
 
-Süresi dolan iletileri isteğe bağlı olarak taşınabileceği bir [eski ileti sırası](service-bus-dead-letter-queues.md) ayarlayarak [EnableDeadLetteringOnMessageExpiration](/dotnet/api/microsoft.servicebus.messaging.queuedescription.enabledeadletteringonmessageexpiration#Microsoft_ServiceBus_Messaging_QueueDescription_EnableDeadLetteringOnMessageExpiration) özelliği veya portaldaki ilgili kutuyu işaretleyerek. Süresi dolan iletileri seçeneği devre dışı bırakılırsa, bırakılır. Süresi dolan iletileri teslim edilemeyen kuyruğa taşındı ayırt edilebilir diğer eski lettered iletilerden değerlendirerek [DeadletterReason](service-bus-dead-letter-queues.md#moving-messages-to-the-dlq) Aracısı kullanıcı özellikleri bölümünde; depolar özelliği değerdir[TTLExpiredException](service-bus-dead-letter-queues.md#moving-messages-to-the-dlq) böyle bir durumda.
+Süre dolmayan iletiler, [EnableDeadLetteringOnMessageExpiration](/dotnet/api/microsoft.servicebus.messaging.queuedescription.enabledeadletteringonmessageexpiration#Microsoft_ServiceBus_Messaging_QueueDescription_EnableDeadLetteringOnMessageExpiration) özelliğini ayarlayarak veya portalda ilgili kutusunu denetleyerek, isteğe bağlı olarak bir [atılacak ileti kuyruğuna](service-bus-dead-letter-queues.md) taşınabilir. Seçenek devre dışı bırakılırsa, zaman aşımına uğradı iletileri bırakılır. Teslim edilemeyen ileti kuyruğuna taşınan süre sonu iletileri, kullanıcının Özellikler bölümünde aracı tarafından depolanan [DeadletterReason](service-bus-dead-letter-queues.md#moving-messages-to-the-dlq) özelliği hesaplanarak, diğer kullanılmayan iletilerden ayırt edilebilir. değer, bu durumda [Ttlexpiredexception](service-bus-dead-letter-queues.md#moving-messages-to-the-dlq) olur.
 
-Kilit edilmeden veya süresi içinde iletinin kilit ve varlıkta bayrağı ayarlanmış olup olmadığını altında süre sonu gelen korumalı yukarıda sözü edilen durumda eski ileti sırası için ileti taşınır. Bununla birlikte, iletinin başarılı bir şekilde kapatılır, daha sonra uygulama başarıyla, artma nominal sona erme işlediği olduğunu varsayar, taşınmaz.
+Kilit sırasında iletinin süresinin dolma karşı korunduğu ve varlıkta ayarlanmış olması durumunda ileti, kilitlenme terk edildiği veya süresi dolduğunda ileti atılacak ileti kuyruğuna taşınır. Ancak, ileti başarıyla kapatılmışsa taşınmaz ve bu da uygulamanın, kabul edilen süre sonu artma içinde başarıyla işlendiğini varsayar.
 
-Birleşimi [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) ve otomatik (ve işlem) ulaşmayan geçerlilik sonu için bir işleyici veya bir son tarih altında işleyicileri gruba verilen bir iş olup alınır, güven oluşturma için değerli bir araç Son olarak işleme ulaşıldı.
+[TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) ve otomatik (ve işlem) kullanım süresinin dolma kombinasyonu, bir işleyiciye verilen bir işin veya bir son tarih altındaki bir işleyici grubunun son tarih olarak işlenmesine alınması için değerli bir araçtır ulaşıldı.
 
-Örneğin, bir web sitesi, güvenilir bir şekilde bir ölçek kısıtlı arka uç işleri yürütmek gereken ve bazen deneyimleri trafik ani veya bu arka uç kullanılabilirlik bölümlerini karşı yalıtılmış istediği göz önünde bulundurun. Normal durumda, sunucu tarafı işleyici gönderilen kullanıcı verileri için bilgileri bir kuyruğa gönderir ve daha sonra başarılı bir yanıt kuyruğu harekete işlenmesini onaylayan bir yanıt alır. Bir trafik ani ve arka uç işleyici kendi biriktirme listesi öğelerini zamanında işleyemez, süresi dolmuş işler üzerinde eski ileti sırası döndürülür. Etkileşimli kullanıcı, istenen işlem normalden biraz daha uzun sürer ve istek sonra işleme yolu için farklı bir sırada nerede işleme nihai sonucu kullanıcıya e-posta ile gönderilen konulabilir bildirilebilir. 
+Örneğin, işleri ölçeği kısıtlanmış bir arka uçta güvenilir bir şekilde yürütmek için gereken bir Web sitesini göz önünde bulundurun ve zaman zaman trafik artışlarını ve bu arka ucun kullanılabilirlik bölümlerini ayrı olarak ele almak istemektedir. Normal durumda, gönderilen Kullanıcı verilerine yönelik sunucu tarafı işleyicisi bilgileri bir kuyruğa gönderir ve ardından işlemin başarılı bir şekilde işlenmesini onaylayan bir yanıt alır. Bir trafik ani işlemcisi varsa ve arka uç işleyicisi biriktirme listesi öğelerini zamanında işleyemezse, süresi dolmayan işler atılacak ileti kuyruğunda döndürülür. Etkileşimli kullanıcıya, istenen işlemin normalden biraz daha uzun sürmesi ve isteğin nihai işleme sonucunun e-posta ile kullanıcıya gönderildiği bir işleme yolu için farklı bir sıraya konabileceğini görebilirsiniz. 
 
 
 ## <a name="temporary-entities"></a>Geçici varlıklar
 
-Service Bus kuyrukları, konular ve abonelikler, belirtilen bir süre için kullanılmamış bağlandığınızda otomatik olarak kaldırılır geçici varlıklar olarak oluşturulabilir.
+Service Bus kuyrukları, konuları ve abonelikleri, belirli bir süre boyunca kullanıldıklarında otomatik olarak kaldırılan geçici varlıklar olarak oluşturulabilir.
  
-Otomatik temizleme varlıklarını dinamik olarak oluşturulur ve kullanımı, test veya hata ayıklama çalışma bazı kesinti nedeniyle sonra temizlenir değil geliştirme ve test senaryolarında yararlıdır. Web sunucusu işlemine geri yükleme ya da güvenilir bir şekilde kişilikleri temizlemek zor olduğu başka bir görece kısa süreli nesnesine yanıtlar almak için bir yanıt kuyruğu gibi dinamik varlıkları bir uygulama oluşturduğunda de kullanışlıdır, nesne Örnek kaybolur.
+Otomatik Temizleme, varlıkların dinamik olarak oluşturulduğu ve test ya da hata ayıklama çalıştırmasının kesintiye uğraması nedeniyle, kullanım sonrasında temizlenmeyen geliştirme ve test senaryolarında yararlıdır. Ayrıca, bir uygulama bir yanıt kuyruğu gibi dinamik varlıklar oluştururken, bir Web sunucusu işlemine geri yanıt almak için veya nesne olduğunda bu varlıkları güvenilir bir şekilde temizlemek zor olan başka bir görece kısa süreli nesne olduğunda da yararlıdır. örnek kayboluyor.
 
-Bu özellik kullanılarak etkinleştirilir [autoDeleteOnIdle](/azure/templates/microsoft.servicebus/namespaces/queues) özelliği. Bu özellik için bir varlık gerekir olması boşta (kullanılmayan) otomatik olarak silinmeden önce süresi için ayarlanır. Bu özellik için en düşük değer 5'tir.
+Özelliği, [oto Deleteonıdle](/azure/templates/microsoft.servicebus/namespaces/queues) özelliği kullanılarak etkinleştirilir. Bu özellik otomatik olarak silinmeden önce bir varlığın boşta (kullanılmamış) olması gereken süreye ayarlanır. Bu özellik için en düşük değer 5 ' tir.
  
-**AutoDeleteOnIdle** özelliği ayarlanmalıdır, .NET Framework istemci aracılığıyla veya bir Azure Resource Manager işlem [NamespaceManager](/dotnet/api/microsoft.servicebus.namespacemanager) API'leri. Portalda ayarlanamaz.
+**Oto Deleteonıdle** özelliği bir Azure Resource Manager işlem veya .NET Framework Client [NamespaceManager](/dotnet/api/microsoft.servicebus.namespacemanager) API 'leri aracılığıyla ayarlanmalıdır. Portal 'da ayarlayamazsınız.
 
-## <a name="idleness"></a>Modu boşta kalma oranı
+## <a name="idleness"></a>Uyku modu
 
-İşte ne kabul modu boşta kalma oranı varlıkları (kuyruklar, konular ve abonelikler):
+Varlıkların (kuyruklar, konular ve abonelikler) kullanım dışı olduğu kabul edilir:
 
 - Kuyruklar
-    - Hiçbir gönderir  
-    - Hayır alır  
-    - Kuyruğa güncelleştirme yok  
+    - Gönderme yok  
+    - Alma yok  
+    - Kuyrukta güncelleştirme yok  
     - Zamanlanmış ileti yok  
-    - Hiçbir gözatma/göz atma 
+    - Göz atma/göz atma yok 
 - Konu başlıkları  
-    - Hiçbir gönderir  
+    - Gönderme yok  
     - Konuya güncelleştirme yok  
     - Zamanlanmış ileti yok 
-- Subscriptions
-    - Hayır alır  
-    - Abonelik için güncelleştirme yok  
-    - Abonelik için eklenen yeni kural  
-    - Hiçbir gözatma/göz atma  
+- Abonelikler
+    - Alma yok  
+    - Abonelikte güncelleştirme yok  
+    - Aboneliğe yeni kural eklenmedi  
+    - Göz atma/göz atma yok  
  
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Service Bus mesajlaşması hakkında daha fazla bilgi edinmek için aşağıdaki konulara bakın:
+Service Bus mesajlaşma hakkında daha fazla bilgi edinmek için aşağıdaki konulara bakın:
 
 * [Service Bus kuyrukları, konu başlıkları ve abonelikleri](service-bus-queues-topics-subscriptions.md)
 * [Service Bus kuyrukları ile çalışmaya başlama](service-bus-dotnet-get-started-with-queues.md)

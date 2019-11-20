@@ -1,6 +1,6 @@
 ---
-title: Web SDK Desteklenen tarayıcılar - Azure haritalar | Microsoft Docs
-description: Azure haritalar Web SDK'sı için desteklenen tarayıcılar hakkında bilgi edinin
+title: Web SDK desteklenen tarayıcılar-Azure Maps | Microsoft Docs
+description: Azure Maps web SDK için desteklenen tarayıcılar hakkında bilgi edinin
 author: rbrundritt
 ms.author: richbrun
 ms.date: 03/25/2019
@@ -8,21 +8,21 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: cpendleton
-ms.openlocfilehash: 84c5dbcf5073ba8c0ae662af019cde590a9adf10
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d867e9a1afcb495aee7e8b0e0b3b001104f48a4c
+ms.sourcegitcommit: adc1072b3858b84b2d6e4b639ee803b1dda5336a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64686640"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70844811"
 ---
 # <a name="web-sdk-supported-browsers"></a>Web SDK destekleyen tarayıcılar
 
-Azure haritalar Web SDK'sı olarak adlandırılan bir yardımcı işlevini sağlar [atlas.isSupported](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas?view=azure-iot-typescript-latest#issupported-boolean-). Bu işlev, bir web tarayıcısı WebGL özellikleri yükleniyor ve harita denetimini işleme desteklemek için gereken en düşük ayarlanıp ayarlanmadığını algılar. İşlev ilişkin bir örnek aşağıda verilmiştir:
+Azure Haritalar Web SDK 'Sı, [Atlas. IsSupported](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas?view=azure-iot-typescript-latest#issupported-boolean-)adlı bir yardımcı işlev sağlar. Bu işlev, bir Web tarayıcısının harita denetimini yüklemeyi ve işlemeyi desteklemek için gereken en düşük WebGL özellikleri kümesine sahip olup olmadığını algılar. İşlevin nasıl kullanılacağına ilişkin bir örnek aşağıda verilmiştir:
 
-```
-if(!atlas.isSupported()) {
+```JavaScript
+if (!atlas.isSupported()) {
     alert('Your browser is not supported by Azure Maps');
-} else if(!atlas.isSupported(true)) {
+} else if (!atlas.isSupported(true)) {
     alert('Your browser is supported by Azure Maps, but may have major performance caveats.');
 } else {
     // Your browser is supported. Add your map code here.
@@ -31,53 +31,53 @@ if(!atlas.isSupported()) {
 
 ## <a name="desktop"></a>Masaüstü
 
-Azure haritalar Web SDK'sı aşağıdaki masaüstü tarayıcıları destekler:
+Azure Haritalar Web SDK 'Sı, aşağıdaki masaüstü tarayıcılarını destekler:
 
 - Microsoft Edge (geçerli ve önceki sürüm)
 - Google Chrome (geçerli ve önceki sürüm)
 - Mozilla Firefox (geçerli ve önceki sürüm)
 - Apple Safari (Mac OS X) (geçerli ve önceki sürüm)
 
-Ayrıca bkz: [hedef eski tarayıcılar](#Target-Legacy-Browsers) bu makalenin ilerleyen bölümlerinde.
+Ayrıca, bu makalenin ilerleyen kısımlarında bulunan [eski tarayıcıları de hedefleyin](#Target-Legacy-Browsers) .
 
 ## <a name="mobile"></a>Mobil
 
-Azure haritalar Web SDK'sı aşağıdaki mobil tarayıcılar destekler:
+Azure Haritalar Web SDK 'Sı, aşağıdaki mobil tarayıcıları destekler:
 
 - Android
-  - Geçerli sürümü Chrome Android 6.0 ve üzeri
-  - Chrome WebView Android 6.0 ve üzeri
+  - Android 6,0 ve üzeri cihazlarda geçerli Chrome sürümü
+  - Android 6,0 ve üzeri cihazlarda Chrome WebView
 - iOS
-  - Geçerli ve önceki ana sürümü üzerinde iOS mobil Safari
-  - UIWebView ve geçerli ve önceki ana sürümü üzerinde iOS WKWebView
-  - Geçerli sürümü Chrome iOS için
+  - İOS 'un geçerli ve önceki ana sürümünde Mobile Safari
+  - İOS 'un geçerli ve önceki ana sürümündeki UIWebView ve WKWebView
+  - İOS için Chrome 'un geçerli sürümü
 
 > [!TIP]
-> Bir WebView denetimi kullanarak mobil uygulamasına bir harita ekleme yapıyorsanız, kullanmayı tercih edebilirsiniz [Azure haritalar Web SDK'sının npm paketini](https://www.npmjs.com/package/azure-maps-control) yerine Azure içerik teslim üzerinde barındırılan SDK sürümü başvurma Ağ. SDK, kullanıcının cihazında zaten olması ve çalışma zamanında indirilmesi gerekmez çünkü bu yaklaşım yükleme süresini azaltır.
+> Bir Web görünümü kullanarak bir mobil uygulamanın içine harita ekliyorsanız, Azure Content Delivery Network 'de barındırılan SDK sürümüne başvurmak yerine [Azure Maps web SDK 'sının NPM paketini](https://www.npmjs.com/package/azure-maps-control) kullanmayı tercih edebilirsiniz. Bu yaklaşım yükleme süresini azaltır çünkü SDK zaten kullanıcının cihazında olduğundan ve çalışma zamanında indirilmesinin gerekli değildir.
 
 ## <a name="nodejs"></a>Node.js
 
-Aşağıdaki Web SDK'sı modüller, node.js'de de desteklenir:
+Node. js ' de aşağıdaki Web SDK modülleri de desteklenir:
 
-- Hizmetleri modülü ([belgeleri](how-to-use-services-module.md) | [npm modülünü](https://www.npmjs.com/package/azure-maps-rest))
+- Hizmetler modülü ([Belgeler](how-to-use-services-module.md) | [NPM modülü](https://www.npmjs.com/package/azure-maps-rest))
 
-## <a name="Target-Legacy-Browsers"></a>Eski tarayıcılar
+## <a name="Target-Legacy-Browsers"></a>Hedef eski tarayıcılar
 
-Yalnızca bu desteği sınırlı veya, WebGL desteklemeyen eski tarayıcılar hedeflemek isteyebilirsiniz. Azure haritalar Hizmetleri gibi bir açık kaynak harita denetimi ile birlikte kullanmanızı tavsiye ederiz Böyle durumlarda [Leaflet](https://leafletjs.com/). Bir örneği aşağıda verilmiştir:
+WebGL 'yi desteklemeyen veya yalnızca sınırlı desteği olan eski tarayıcıları hedeflemek isteyebilirsiniz. Bu gibi durumlarda, Azure haritalar hizmetlerini, [leaflet](https://leafletjs.com/)gibi bir açık kaynaklı eşleme denetimiyle birlikte kullanmanızı öneririz. Bir örneği aşağıda verilmiştir:
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Azure haritalar + Leaflet" src="//codepen.io/azuremaps/embed/GeLgyx/?height=500&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-Kalem bkz <a href='https://codepen.io/azuremaps/pen/GeLgyx/'>Azure haritalar + Leaflet</a> Azure haritalar tarafından (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) üzerinde <a href='https://codepen.io'>CodePen</a>.
+<iframe height="500" style="width: 100%;" scrolling="no" title="Azure haritalar + leaflet" src="//codepen.io/azuremaps/embed/GeLgyx/?height=500&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<a href='https://codepen.io'>Codepen</a>'da Azure Maps <a href='https://codepen.io/azuremaps/pen/GeLgyx/'>+ leaflet</a> 'e Azure Maps<a href='https://codepen.io/azuremaps'>@azuremaps</a>() tarafından bakın.
 </iframe>
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure haritalar Web SDK'sı hakkında daha fazla bilgi edinin:
+Azure Haritalar Web SDK 'Sı hakkında daha fazla bilgi edinin:
 
 > [!div class="nextstepaction"]
 > [Harita denetimi](how-to-use-map-control.md)
 
 > [!div class="nextstepaction"]
-> [Hizmetleri modülü](how-to-use-services-module.md)
+> [Hizmetler modülü](how-to-use-services-module.md)

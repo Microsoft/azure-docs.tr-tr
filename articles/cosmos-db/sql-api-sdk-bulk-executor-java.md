@@ -1,6 +1,6 @@
 ---
-title: "Azure Cosmos DB: Java API, SDK'sı & kaynakları Yürütücü toplu"
-description: Java API'si ve SDK'sı yayın tarihleri, sona erme tarihlerini ve her bir Azure Cosmos DB toplu Yürütücü Java SDK'sı sürümü arasında yapılan değişiklikler dahil olmak üzere tüm toplu Yürütücü hakkında öğrenin.
+title: "Azure Cosmos DB: toplu yürütücü Java API 'SI, SDK & kaynakları"
+description: Toplu yürütücü Java API 'SI ve SDK ve sürüm tarihleri, emeklilik tarihleri ve Azure Cosmos DB toplu yürütücü Java SDK 'sının her sürümü arasında yapılan değişiklikler dahil olmak üzere tüm bilgileri öğrenin.
 author: tknandu
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
@@ -8,14 +8,14 @@ ms.devlang: java
 ms.topic: reference
 ms.date: 11/21/2018
 ms.author: ramkris
-ms.openlocfilehash: 51499b86aa44b89442f84a345cba6e9093f8c274
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3dc2a2d7c0e9fae425340ab1aa91790070708cd1
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62129494"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606198"
 ---
-# <a name="java-bulk-executor-library-download-information"></a>Java toplu Yürütücü kitaplığı: Yükleme bilgileri
+# <a name="java-bulk-executor-library-download-information"></a>Java toplu yürütücü kitaplığı: Indirme bilgileri
 
 > [!div class="op_single_selector"]
 > * [.NET](sql-api-sdk-dotnet.md)
@@ -28,15 +28,15 @@ ms.locfileid: "62129494"
 > * [REST](https://docs.microsoft.com/rest/api/cosmos-db/)
 > * [REST Kaynak Sağlayıcısı](https://docs.microsoft.com/rest/api/cosmos-db-resource-provider/)
 > * [SQL](sql-api-query-reference.md)
-> * [Toplu Yürütücü - .NET](sql-api-sdk-bulk-executor-dot-net.md)
-> * [Toplu Yürütücü - Java](sql-api-sdk-bulk-executor-java.md)
+> * [Toplu yürütücü-.NET](sql-api-sdk-bulk-executor-dot-net.md)
+> * [Toplu yürütücü-Java](sql-api-sdk-bulk-executor-java.md)
 
 | |  |
 |---|---|
-|**Açıklama**|Azure Cosmos DB hesaplarında toplu işlemleri gerçekleştirmek istemci uygulamaları toplu Yürütücü kitaplık sağlar. Toplu Yürütücü kitaplığı BulkImport, sağlar ve BulkUpdate ad alanları. Toplu olarak modülü BulkImport alma belgeleri bir en iyi duruma getirilmiş şekilde sağlayacak şekilde bir koleksiyon için sağlanan aktarım hızı, azami ölçüde kullanılır. Toplu olarak modülü BulkUpdate düzeltme ekleri olarak Azure Cosmos DB kapsayıcıları mevcut verileri güncelleştirin.|
-|**SDK'sını indirme**|[Maven](https://search.maven.org/#search%7Cga%7C1%7Cdocumentdb-bulkexecutor)|
-|**Github'da Bulkexecutor'a kitaplığı**|[GitHub](https://github.com/Azure/azure-cosmosdb-bulkexecutor-java-getting-started)|
-| **API belgeleri**| [.NET API başvuru belgeleri](https://docs.microsoft.com/java/api/com.microsoft.azure.documentdb.bulkexecutor)|
-|**Kullanmaya başlama**|[Java SDK'sı toplu Yürütücü kitaplığını kullanmaya başlama](bulk-executor-java.md)|
-|**En düşük desteklenen çalışma zamanı**|[Java Geliştirme Seti (JDK) 7 +](https://aka.ms/azure-jdks)|
+|**Açıklama**|Toplu yürütücü kitaplığı, istemci uygulamalarının Azure Cosmos DB hesaplarında toplu işlemler gerçekleştirmesine olanak sağlar. toplu yürütücü kitaplığı, BulkImport ve BulkUpdate ad alanları sağlar. BulkImport modülü, bir koleksiyon için sağlanan aktarım hızı en büyük ölçüde tüketilebilmesi için belgeleri en iyi duruma getirilmiş bir şekilde toplu Içe alabilir. BulkUpdate modülü Azure Cosmos kapsayıcılarındaki mevcut verileri düzeltme eki olarak toplu güncelleştirebilir.|
+|**SDK indirmesi**|[Maven](https://search.maven.org/#search%7Cga%7C1%7Cdocumentdb-bulkexecutor)|
+|**GitHub 'da toplu yürütücü kitaplığı**|[GitHub](https://github.com/Azure/azure-cosmosdb-bulkexecutor-java-getting-started)|
+| **API belgeleri**| [Java API başvuru belgeleri](https://docs.microsoft.com/java/api/com.microsoft.azure.documentdb.bulkexecutor)|
+|**Başlangıç**|[Toplu yürütücü kitaplığı Java SDK 'sını kullanmaya başlama](bulk-executor-java.md)|
+|**Desteklenen en düşük çalışma zamanı**|[Java Development Kit (JDK) 7 +](https://aka.ms/azure-jdks)|
 

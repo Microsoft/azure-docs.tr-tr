@@ -1,10 +1,10 @@
 ---
-title: Bölgesel frontend - Azure PowerShell ile bir yük dengeleyici oluşturma
+title: Bölgesel ön ucu ile Load Balancer oluşturun Azure PowerShell
 titlesuffix: Azure Load Balancer
-description: Azure PowerShell kullanarak bir bölgesel ön uç ile standart yük dengeleyici oluşturmayı öğrenin
+description: Azure PowerShell kullanarak bölgesel ön ucu ile standart Load Balancer oluşturma hakkında bilgi edinin
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 manager: twooley
 ms.service: load-balancer
 ms.devlang: na
@@ -13,17 +13,17 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/21/2019
-ms.author: kumud
-ms.openlocfilehash: 8ede8df2f069681008175494cfd5937738ce5ea9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: allensu
+ms.openlocfilehash: a2c637ddbf5b7f5883016afe4a6d58ad9752cfc5
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66122146"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68275125"
 ---
-#  <a name="create-a-standard-load-balancer-with-zonal-frontend-using-azure-powershell"></a>Azure PowerShell kullanarak bölgesel ön uç ile standart yük dengeleyici oluşturma
+#  <a name="create-a-standard-load-balancer-with-zonal-frontend-using-azure-powershell"></a>Azure PowerShell kullanarak bölgesel ön ucu ile standart Load Balancer oluşturma
 
-Bu makalede adımları genel oluşturma işleminde [Standard Load Balancer](https://aka.ms/azureloadbalancerstandard) genel IP standart bir adres kullanarak bölgesel bir ön uç ile. Kullanılabilirlik alanları standart Load Balancer ile nasıl çalıştığını anlamak için bkz: [Standard Load Balancer ve kullanılabilirlik bölgeleri](load-balancer-standard-availability-zones.md). 
+Bu makalede, genel bir IP standart adresi kullanılarak bir genel [Standart Load Balancer](https://aka.ms/azureloadbalancerstandard) ön uç ile oluşturma adımları sağlanır. Kullanılabilirlik alanları standart Load Balancer ile nasıl çalıştığını anlamak için bkz: [Standard Load Balancer ve kullanılabilirlik bölgeleri](load-balancer-standard-availability-zones.md). 
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
@@ -89,7 +89,7 @@ $probe = New-AzLoadBalancerProbeConfig -Name 'myHealthProbe' -Protocol Http -Por
 ```
 
 ## <a name="create-a-load-balancer"></a>Yük dengeleyici oluşturma
-Aşağıdaki komutu kullanarak bir Standard Load Balancer oluşturun:
+Aşağıdaki komutu kullanarak bir Standart Load Balancer oluşturun:
 
 ```azurepowershell-interactive
 $lb = New-AzLoadBalancer -ResourceGroupName myResourceGroupZLB -Name 'MyLoadBalancer' -Location westeurope `

@@ -25,7 +25,7 @@ Azure Maliyet Yönetimi, Cloudyn'e benzer işlevler sunar. Azure Maliyet Yöneti
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
-- https://portal.azure.com adresinden Azure portalında oturum açın.
+- [https://portal.azure.com](https://portal.azure.com ) adresinden Azure portalında oturum açın.
 
 ## <a name="register-with-cloudyn"></a>Cloudyn’e kaydolma
 

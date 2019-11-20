@@ -1,29 +1,28 @@
 ---
-title: Öğretici - Linux VM’ler için Azure sanal ağları oluşturma ve yönetme | Microsoft Docs
+title: Öğretici-Linux VM 'Ler için Azure sanal ağları oluşturma ve yönetme
 description: Bu öğreticide, Azure CLI kullanarak Linux sanal makineleri için Azure sanal ağları oluşturup yönetmeyi öğrenirsiniz
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 05/10/2017
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: e90880aeaae17c80d6714f917f2ea849c953711f
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: d6624b9d5d77a8552584049463b63738bbf17627
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66169322"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74034341"
 ---
-# <a name="tutorial-create-and-manage-azure-virtual-networks-for-linux-virtual-machines-with-the-azure-cli"></a>Öğretici: Oluşturma ve Azure CLI ile Linux sanal makineleri için Azure sanal ağları yönetme
+# <a name="tutorial-create-and-manage-azure-virtual-networks-for-linux-virtual-machines-with-the-azure-cli"></a>Öğretici: Azure CLI ile Linux sanal makineleri için Azure sanal ağlarını yönetme
 
 Azure sanal makineleri, iç ve dış ağ iletişimi için Azure ağını kullanır. Bu öğretici, iki sanal makineyi dağıtma ve bu VM’ler için Azure ağını yapılandırma konusunda rehberlik sunar. Bu öğreticideki örneklerde VM’lerde veritabanı arka ucuna sahip bir web uygulaması barındırıldığı varsayılır, ancak öğreticide uygulama dağıtılmaz. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
@@ -34,7 +33,7 @@ Azure sanal makineleri, iç ve dış ağ iletişimi için Azure ağını kullan�
 > * Ağ trafiğinin güvenliğini sağlama
 > * Arka uç VM’si oluşturma
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+Bu öğretici, en son sürüme sürekli olarak güncellenen [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)içindeki CLI 'yi kullanır. Cloud Shell açmak için herhangi bir kod bloğunun en üstünden **deneyin** ' i seçin.
 
 CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu öğretici için Azure CLI 2.0.30 veya sonraki bir sürümünü çalıştırmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme]( /cli/azure/install-azure-cli).
 
@@ -66,7 +65,7 @@ Sanal ağ oluşturabilmek için önce [az group create](/cli/azure/group) ile bi
 az group create --name myRGNetwork --location eastus
 ```
 
-### <a name="create-virtual-network"></a>Sanal ağ oluştur
+### <a name="create-virtual-network"></a>Sanal ağ oluşturma
 
 Sanal ağ oluşturmak için [az network vnet create](/cli/azure/network/vnet) komutunu kullanın. Bu örnekte ağ, *mvVNet* olarak adlandırılmaktadır ve *10.0.0.0/16* adres öneki belirtilmiştir. Ayrıca *myFrontendSubnet* adıyla ve *10.0.1.0/24* önekiyle bir alt ağ oluşturulmaktadır. Bu öğreticinin ilerleyen bölümlerinde bu alt ağa bir ön uç bağlanmaktadır. 
 
@@ -191,7 +190,7 @@ az network vnet subnet update \
 
 Ön uç VM’si oluşturulduğunda 22 numaralı bağlantı noktasından gelen trafiğe izin veren bir NSG kuralı oluşturulur. Bu kural, VM ile SSH bağlantısı kurulmasına izin verir. Bu örnekte aynı zamanda *80* numaralı bağlantı noktasındaki trafiğe de izin verilmelidir. Bu yapılandırma VM’den web uygulamasına erişilmesine izin verir.
 
-*80* numaralı bağlantı noktası için bir kural oluşturmak üzere [az network nsg rule create](/cli/azure/network/nsg/rule) komutunu kullanın.
+[80](/cli/azure/network/nsg/rule) numaralı bağlantı noktası için bir kural oluşturmak üzere *az network nsg rule create* komutunu kullanın.
 
 ```azurecli-interactive 
 az network nsg rule create \

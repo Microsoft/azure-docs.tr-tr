@@ -1,106 +1,106 @@
 ---
-title: Bir 404 durum kodu döndüren bir Azure CDN uç noktası sorunlarını giderme | Microsoft Docs
-description: Azure CDN uç noktası ile 404 yanıt kodlarını sorunlarını giderin.
+title: Azure CDN uç noktalar sorunlarını giderme-404 durum kodu
+description: Azure CDN uç noktalarıyla 404 yanıt kodu sorunlarını giderin.
 services: cdn
 documentationcenter: ''
 author: zhangmanling
 manager: erikre
 editor: ''
 ms.assetid: b588a1eb-ab69-4fc7-ae4d-157c3e46f4a8
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 66ee211856bb451caad7af02103aa306d76e8f97
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c332c6712cdf057491e3039854aa1a29bd54196f
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60323706"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083126"
 ---
-# <a name="troubleshooting-azure-cdn-endpoints-that-return-a-404-status-code"></a>Bir 404 durum kodu döndüren bir Azure CDN uç noktası sorunlarını giderme
-Bu makalede, 404 HTTP yanıtı durum kodları iade Azure Content Delivery Network (CDN) uç noktaları ile ilgili sorunları giderme sağlar.
+# <a name="troubleshooting-azure-cdn-endpoints-that-return-a-404-status-code"></a>404 durum kodu döndüren uç noktalar Azure CDN sorunlarını giderme
+Bu makale, 404 HTTP yanıt durum kodu döndüren Azure Content Delivery Network (CDN) uç noktalarıyla ilgili sorunları gidermenize olanak sağlar.
 
-Bu makalede herhangi bir noktada daha fazla yardıma ihtiyacınız olursa, üzerinde Azure uzmanlarıyla iletişime geçebilirsiniz [Azure MSDN ve Stack Overflow forumları](https://azure.microsoft.com/support/forums/). Alternatif olarak, bir Azure destek olayına dosya. Git [Azure Destek sitesi](https://azure.microsoft.com/support/options/) seçip **destek al**.
+Bu makalenin herhangi bir noktasında daha fazla yardıma ihtiyacınız varsa, [MSDN Azure ve Stack Overflow forumlarında](https://azure.microsoft.com/support/forums/)Azure uzmanlarıyla iletişim kurun. Alternatif olarak, bir Azure destek olayı da oluşturabilirsiniz. [Azure destek sitesine](https://azure.microsoft.com/support/options/) gidin ve **Destek Al**' ı seçin.
 
 ## <a name="symptom"></a>Belirti
-CDN profili ve uç nokta oluşturdunuz, ancak içerik CDN'de kullanılabilir olmasını desteklemiyor. İçeriğinizi aracılığıyla CDN URL'sine erişmeye çalışan kullanıcılar bir HTTP 404 durum kodu alır. 
+Bir CDN profili ve uç noktası oluşturdunuz, ancak içeriğiniz CDN 'de mevcut görünmüyor. CDN URL 'SI aracılığıyla içeriğinize erişmeye çalışan kullanıcılar bir HTTP 404 durum kodu alır. 
 
 ## <a name="cause"></a>Nedeni
-Birkaç olası nedeni vardır:
+Aşağıdakiler de dahil olmak üzere birkaç olası nedeni vardır:
 
-* Dosyanın kaynağından CDN için görünür değildir.
-* Neden yanlış yere aramak CDN uç noktası hatalı yapılandırılmış.
-* Ana bilgisayar, ana bilgisayar üstbilgisi CDN reddediyor.
-* Uç nokta CDN yayılması zaman sahip.
+* Dosyanın kaynağı CDN 'ye görünür değil.
+* Uç nokta yanlış yapılandırılmıştır ve CDN 'nin yanlış yere bakmasına neden olur.
+* Konak, CDN 'den konak üstbilgisini reddediyor.
+* Uç noktanın CDN genelinde yayılması zaman almamıştı.
 
 ## <a name="troubleshooting-steps"></a>Sorun giderme adımları
 > [!IMPORTANT]
-> Kaydın CDN'de yayılması zaman alır bir CDN uç noktası oluşturduktan sonra bunu hemen kullanılmaya kullanılabilir olacaktır değil:
+> Bir CDN uç noktası oluşturduktan sonra, kaydın CDN aracılığıyla yayılması zaman alacağından, bu, kullanım için hemen kullanılabilir olmayacaktır:
 > - **Microsoft’tan Azure CDN Standart** profilleri için yayma işlemi genellikle on dakikada tamamlanır. 
 > - **Akamai’den Azure CDN Standart** profilleri için yayma işlemi genellikle bir dakika içinde tamamlanır. 
 > - **Verizon’dan Azure CDN Standart** ve **Verizon’dan Azure CDN Premium** profilleri için yayma işlemi genellikle 90 dakika içinde tamamlanır. 
 > 
-> Bu belgedeki adımları tamamlayın ve hala geçmesine karşın 404 yanıtlarını karşılaşacağınız, bir destek bileti açmadan önce kontrol etmek için birkaç saat bekleniyor göz önünde bulundurun.
+> Bu belgedeki adımları tamamlayıp hala 404 yanıtını alıyorsanız, bir destek bileti açmadan önce birkaç saat bekledikten sonra tekrar kontrol etmeniz gerekir.
 > 
 > 
 
-### <a name="check-the-origin-file"></a>Kaynak dosyayı denetleyin
-İlk olarak, dosya önbelleği için kaynak sunucuda kullanılabilir olduğunu ve internet'te genel olarak erişilebilir olduğunu doğrulayın. Bunu yapmanın en hızlı yolu bir tarayıcı doğrudan dosyaya göz atın ve bir özel veya gizli oturum açmaktır. Yazın veya URL adres kutusuna yapıştırın ve dosyayı beklediğiniz sonuçları doğrulayın. Örneğin, bir Azure depolama hesabında, https erişilebilir bir dosya olduğunu varsayalım:\//cdndocdemo.blob.core.windows.net/publicblob/lorem.txt. Bu dosyanın içeriğini başarıyla yükleyebilir, test başarılı olur.
+### <a name="check-the-origin-file"></a>Kaynak dosyasını denetleme
+İlk olarak, önbelleğe alma dosyasının kaynak sunucuda kullanılabilir olduğunu ve internet üzerinde herkese açık olduğunu doğrulayın. Bunu yapmanın en hızlı yolu, bir tarayıcıyı özel veya inbilito oturumunda açmak ve doğrudan dosyaya gözatmanız kullanmaktır. URL 'YI yazın veya Adres kutusuna yapıştırın ve istediğiniz dosyayla sonuçlandığından emin olun. Örneğin, https:\//cdndocdemo.blob.core.windows.net/publicblob/lorem.txt adresinden erişilebilen bir Azure depolama hesabında bir dosyanız olduğunu varsayalım. Bu dosyanın içeriğini başarıyla yükleyebiliyorsanız, testi geçirir.
 
 ![Başarılı!](./media/cdn-troubleshoot-endpoint/cdn-origin-file.png)
 
 > [!WARNING]
-> Bu dosyanızı herkes tarafından kullanılabilir, kuruluşunuzdaki bazı ağ yapılandırmaları, görünen hale getirebilecek doğrulamak için hızlı ve kolay bir yolu olsa da, aslında, (içinde barındırıldığı olsa bile yalnızca görünür ağınızdaki kullanıcılara olduğunda bir dosyayı genel kullanıma açıktır Azure için). Bu durumda olmadığından emin olmak için dosya, kuruluşunuzun ağa veya azure'daki bir sanal makinenin bağlı olmayan bir mobil cihazı gibi dış tarayıcı ile test edin.
+> Bu, dosyanızın herkese açık bir şekilde doğrulanması için en hızlı ve en kolay yoldur, ancak kuruluşunuzdaki bazı ağ yapılandırmalarının bir dosyanın herkese açık bir şekilde, yalnızca ağınızın kullanıcıları tarafından görülebilmesi gibi görünmesini sağlayabilir ( Azure). Bunun durum olmamasını sağlamak için, dosyayı kuruluşunuzun ağına bağlı olmayan bir mobil cihaz veya Azure 'da bir sanal makine gibi bir dış tarayıcıyla test edin.
 > 
 > 
 
-### <a name="check-the-origin-settings"></a>Kaynak ayarlarını kontrol edin
-Dosya internet üzerinde herkes tarafından kullanılabilir doğruladıktan sonra kaynak ayarlarınızı doğrulayın. İçinde [Azure portalı](https://portal.azure.com), CDN profilinize gidin ve sorun giderme uç noktayı seçin. Bulunan değerden **uç nokta** sayfasında, kaynak seçin.  
+### <a name="check-the-origin-settings"></a>Kaynak ayarlarını denetleyin
+Dosyanın Internet 'te herkese açık olduğunu doğruladıktan sonra, kaynak ayarlarınızı doğrulayın. [Azure portalında](https://portal.azure.com), CDN profilinize gidin ve sorun gidermeye çalıştığınız uç noktayı seçin. Elde edilen **uç nokta** sayfasında, kaynağı seçin.  
 
-![Vurgulanan kaynak uç noktası sayfası](./media/cdn-troubleshoot-endpoint/cdn-endpoint.png)
+![Kaynak vurgulanacak uç nokta sayfası](./media/cdn-troubleshoot-endpoint/cdn-endpoint.png)
 
 **Kaynak** sayfası görüntülenir. 
 
-![Başlangıç sayfası](./media/cdn-troubleshoot-endpoint/cdn-origin-settings.png)
+![Kaynak sayfası](./media/cdn-troubleshoot-endpoint/cdn-origin-settings.png)
 
 #### <a name="origin-type-and-hostname"></a>Kaynak türü ve ana bilgisayar adı
-Doğrulayın değerlerini **kaynak türü** ve **kaynak konak adı** doğrudur. Bu örnekte, https:\//cdndocdemo.blob.core.windows.net/publicblob/lorem.txt, URL konak adı kısmı *cdndocdemo.blob.core.windows.net*, doğru olduğu. Azure depolama, Web uygulaması ve bulut hizmeti kaynakları için bir açılan liste değer kullandığından **kaynak konak adı** alan, yanlış yazım bir sorun değildir. Ancak özel kaynak kullanırsanız, konak adı doğru yazıldığından emin olun.
+**Kaynak türü** ve **kaynak konak adı** değerlerinin doğru olduğundan emin olun. Bu örnekte, https:\//cdndocdemo.blob.core.windows.net/publicblob/lorem.txt, URL 'nin ana bilgisayar adı kısmı doğru olan *cdndocdemo.blob.Core.Windows.net*'dir. Azure depolama, Web uygulaması ve bulut hizmeti kaynakları, **kaynak ana bilgisayar adı** alanı için bir açılan liste değeri kullandığından, yanlış yazımlar sorun değildir. Ancak, özel bir kaynak kullanırsanız, ana bilgisayar adının doğru yazıldığından emin olun.
 
 #### <a name="http-and-https-ports"></a>HTTP ve HTTPS bağlantı noktaları
-Denetleme, **HTTP** ve **HTTPS bağlantı noktaları**. Çoğu durumda, 80 ve 443 doğru olduğundan ve hiçbir değişiklik yapılmasını gerektirir.  Ancak, kaynak sunucu farklı bir bağlantı noktasında dinliyorsa, burada gösterilen gerekecektir. Emin değilseniz, kaynak dosyanız için URL görüntüleyin. HTTP ve HTTPS özellikleri varsayılan olarak 80 ve 443 bağlantı noktalarını kullanın. Örnek URL, https:\//cdndocdemo.blob.core.windows.net/publicblob/lorem.txt, bir bağlantı noktası, varsayılan 443 olduğu varsayılır ve ayarları doğru şekilde belirtilmedi.  
+**Http** ve **HTTPS bağlantı noktalarınızı**denetleyin. Çoğu durumda, 80 ve 443 doğru olur ve hiçbir değişiklik yapmanız gerekmez.  Ancak, kaynak sunucu farklı bir bağlantı noktasında dinliyorsa, bu da burada temsil edilir. Emin değilseniz, kaynak dosyanızın URL 'sini görüntüleyin. HTTP ve HTTPS belirtimleri varsayılanlar olarak 80 ve 443 bağlantı noktalarını kullanır. Örnek URL 'de, https:\//cdndocdemo.blob.core.windows.net/publicblob/lorem.txt, bir bağlantı noktası belirtilmez, bu nedenle varsayılan 443 varsayılır ve ayarların doğru olması gerekir.  
 
-Daha önce test kaynak dosyası için http URL'sini ancak varsayalım:\//www.contoso.com:8080/file.txt. Not *: 8080* hostname segmentin sonuna bölümü. Sayı www web sunucusuna bağlanmak için bağlantı noktası 8080 kullanılacak tarayıcı bildirir\.contoso.com, bu nedenle gereken girin *8080* içinde **HTTP bağlantı noktası** alan. Yalnızca hangi bağlantı noktası uç noktanın kaynaktan bilgi almak için kullanır. Bu bağlantı noktası ayarlarını etkileyen dikkat edin önemlidir.
+Ancak, daha önce test ettiğiniz kaynak dosyanın URL 'sinin http:\//www.contoso.com:8080/file.txt olduğunu varsayalım. Ana bilgisayar adı segmentinin sonundaki *: 8080* kısmına göz önüne alın. Bu sayı, tarayıcıya www\.contoso.com adresindeki Web sunucusuna bağlanmak için 8080 numaralı bağlantı noktasını kullanmasını söyler. bu nedenle, **http bağlantı noktası** alanına *8080* girmeniz gerekir. Bu bağlantı noktası ayarlarının yalnızca uç noktanın kaynaktan bilgi almak için kullandığı bağlantı noktasını etkilediğini unutmayın.
 
 > [!NOTE]
-> **Azure CDN standart Akamai** uç noktaları kaynakları için tam TCP bağlantı noktası aralığına izin vermez.  İzin verilmeyen kaynak bağlantı noktalarının listesi için bkz. [Akamai'den Azure CDN İzin Verilen Kaynak Bağlantı Noktaları](/previous-versions/azure/mt757337(v=azure.100)).  
+> **Akamai bitiş noktalarından Azure CDN Standart** , kaynaklar IÇIN tam TCP bağlantı noktası aralığına izin vermez.  İzin verilmeyen kaynak bağlantı noktalarının listesi için bkz. [Akamai'den Azure CDN İzin Verilen Kaynak Bağlantı Noktaları](/previous-versions/azure/mt757337(v=azure.100)).  
 > 
 > 
 
-### <a name="check-the-endpoint-settings"></a>Uç nokta ayarlarını kontrol edin
-Üzerinde **uç nokta** sayfasında **yapılandırma** düğmesi.
+### <a name="check-the-endpoint-settings"></a>Uç nokta ayarlarını denetleyin
+**Uç nokta** sayfasında **Yapılandır** düğmesini seçin.
 
-![Uç nokta sayfasıyla Yapılandır düğmesi](./media/cdn-troubleshoot-endpoint/cdn-endpoint-configure-button.png)
+![Yapılandır düğmesinin vurgulandığı uç nokta sayfası](./media/cdn-troubleshoot-endpoint/cdn-endpoint-configure-button.png)
 
-CDN uç noktası **yapılandırma** sayfası görüntülenir.
+CDN uç noktası **Yapılandır** sayfası görünür.
 
-![Yapılandır sayfası](./media/cdn-troubleshoot-endpoint/cdn-configure.png)
+![Sayfayı Yapılandır](./media/cdn-troubleshoot-endpoint/cdn-configure.png)
 
 #### <a name="protocols"></a>Protokoller
-İçin **protokolleri**, istemcileri tarafından kullanılan protokol'ın seçili olduğundan emin olun. Kaynağa erişmek için kullanılan bir istemci tarafından kullanılan aynı protokol olduğu için önceki bölümde doğru yapılandırılmış kaynak bağlantı noktalarının olması önemlidir. CDN uç noktasına, yalnızca varsayılan HTTP ve HTTPS bağlantı noktalarındaki (80 ve 443), kaynak bağlantı noktalarının bakılmaksızın dinler.
+**Protokoller**için, istemciler tarafından kullanılan protokolün seçili olduğunu doğrulayın. İstemci tarafından kullanılan aynı protokol, kaynağa erişmek için kullanılan bağlantı noktası olduğundan, önceki bölümde kaynak bağlantı noktalarının doğru bir şekilde yapılandırılması önemlidir. CDN uç noktası, kaynak bağlantı noktalarından bağımsız olarak yalnızca varsayılan HTTP ve HTTPS bağlantı noktalarını (80 ve 443) dinler.
 
-Şimdi kuramsal örneğimizde http ile geri dönün:\//www.contoso.com:8080/file.txt.  Contoso, anımsanır gibi belirtilen *8080* , HTTP bağlantı noktası, ancak aynı zamanda belirtilen varsayalım *44300* kendi HTTPS bağlantı noktası olarak.  Bunlar adlı bir uç nokta oluşturduysanız *contoso*, kendi CDN uç noktası ana bilgisayar adı olacaktır *contoso.azureedge.net*.  Http isteği:\//contoso.azureedge.net/file.txt olan bir HTTP isteği için uç nokta, kaynaktan almak için 8080 bağlantı noktasında HTTP kullanırsınız.  HTTPS, https üzerinden güvenli bir istek: \/ /contoso.azureedge.net/file.txt, HTTPS bağlantı noktasına 44300 dosyayı kaynaktan alınırken kullanılacak uç nokta neden.
+Http:\//www.contoso.com:8080/file.txt ile kuramsal örneğimize dönelim.  Anımsanacak şekilde contoso, HTTP bağlantı noktası olarak *8080* ' i belirtti, ancak aynı zamanda HTTPS bağlantı noktası olarak *44300* ' i belirteceğiz.  *Contoso*adlı bir uç nokta OLUŞTURULDUKLARıNDA, CDN uç noktası ana bilgisayar adı *contoso.azureedge.net*olacaktır.  Http:\//contoso.azureedge.net/file.txt için bir istek bir HTTP isteğidir, bu nedenle uç nokta 8080 numaralı bağlantı noktasında kaynağı istemciden almak için HTTP kullanır.  HTTPS üzerinden güvenli bir istek https:\//contoso.azureedge.net/file.txt, bitiş noktasının, dosyayı kaynaktan alırken bağlantı noktası 44300 üzerinde HTTPS kullanmasına neden olur.
 
-#### <a name="origin-host-header"></a>Kaynak barındırma üst bilgisi
-**Kaynak barındırma üst bilgisi** her isteğin birlikte kaynağa gönderilen ana bilgisayar üstbilgisi değeri.  Çoğu durumda, bu aynı olmalıdır **kaynak konak adı** daha önce doğrulanır.  Bu alandaki yanlış bir değere 404 durumu genellikle neden olmaz, ancak hangi kaynak bekliyor bağlı olarak diğer 4xx durum neden olabilir.
+#### <a name="origin-host-header"></a>Kaynak ana bilgisayar üst bilgisi
+**Kaynak ana bilgisayar üst bilgisi** , her istekle birlikte kaynağa gönderilen ana bilgisayar üst bilgisi değeridir.  Çoğu durumda bu, daha önce doğrulandığımız **kaynak ana bilgisayar adıyla** aynı olmalıdır.  Bu alandaki yanlış bir değer genellikle 404 durum oluşmasına neden olmaz, ancak kaynağın beklediği değere bağlı olarak diğer 4xx durumlarının oluşmasına neden olabilir.
 
 #### <a name="origin-path"></a>Kaynak yolu
-Son olarak, biz doğrulamalıdır bizim **kaynak yolu**.  Varsayılan olarak bu boştur.  CDN'de kullanılabilir olmasını istediğiniz kaynak barındırılan kaynakları kapsamını daraltmak isterseniz, bu alan yalnızca kullanmalısınız.  
+Son olarak, **kaynak yolumuzu**doğrulayacağız.  Varsayılan olarak bu boştur.  Bu alanı yalnızca CDN 'de kullanılabilir hale getirmek istediğiniz kaynak tarafından barındırılan kaynakların kapsamını daraltmak istiyorsanız kullanmanız gerekir.  
 
-Örnek uç nokta istedik kullanılabilir olması için depolama hesabındaki tüm kaynaklar için **kaynak yolu** boş bırakılır.  Bir https isteği buna:\//cdndocdemo.azureedge.net/publicblob/lorem.txt sonuçları bir bağlantı uç noktasından ister cdndocdemo.core.windows.net */publicblob/lorem.txt*.  Benzer şekilde, https için bir istek:\//cdndocdemo.azureedge.net/donotcache/status.png sonuçları uç nokta isteyen */donotcache/status.png* kaynaktan.
+Örnek uç noktada, depolama hesabındaki tüm kaynakların kullanılabilir olmasını istiyoruz, bu nedenle **kaynak yolu** boş bırakılmıştı.  Bu, https:\//cdndocdemo.azureedge.net/publicblob/lorem.txt isteğinin bitiş noktasından */publicblob/Lorem.txt*isteyen cdndocdemo.Core.Windows.net 'e bir bağlantıyla sonuçlanır.  Benzer şekilde, https:\//cdndocdemo.azureedge.net/donotcache/status.png için bir istek kaynaktan */donotcache/Status. png* isteğinde bulunan uç noktada sonuçlanır.
 
-Ancak ne kaynağınıza üzerinde her yol için bir CDN kullanmayı istemiyorsanız?  Söyleyin yalnızca istediğinizi göstermek *publicblob* yolu.  Biz girerseniz */publicblob* içinde **kaynak yolu** eklemek uç nokta neden olacak alan */publicblob* kaynağa yapılan her isteği önce.  Bu istek için https anlamına gelir:\//cdndocdemo.azureedge.net/publicblob/lorem.txt artık gerçekte alacağınız isteği bölümü URL'SİNİN */publicblob/lorem.txt*ve ekleme */publicblob* başına. Bir istek için sonuçlanır */publicblob/publicblob/lorem.txt* kaynaktan.  Bu yol için gerçek bir dosya sorunu çözmezse, kaynağı bir 404 durum döndürür.  Bu örnekte lorem.txt almak için doğru URL, https gerçekten olacaktır:\//cdndocdemo.azureedge.net/lorem.txt.  Unutmayın, biz içermez */publicblob* hiç yolu isteği bölümü URL'SİNİN olduğundan */lorem.txt* ve uç nokta ekler */publicblob*, imzalanmayarak */publicblob/lorem.txt* kaynağa geçirilen istek.
+Ancak kaynak üzerinde her yol için CDN 'yi kullanmak istemiyorsanız ne olacak?  Yalnızca *publicblob* yolunu göstermek istediğinizi varsayalım.  **Kaynak yolu** alanına */publicblob* ' u girmemiz durumunda bu, bitiş noktasının kaynağa yapılan her istek için */publicblob* eklemesi oluşmasına neden olur.  Bu, https:\//cdndocdemo.azureedge.net/publicblob/lorem.txt isteğinin artık URL 'nin istek kısmını, */publicblob/Lorem.txt*ve Append */publicblob* ' u başlangıca alacağını gösterir. Bu, kaynaktan */publicblob/publicblob/Lorem.txt* isteğine neden olur.  Bu yol gerçek bir dosyaya çözümlenmezse, kaynak 404 durumunu döndürür.  Bu örnekteki Lorem. txt dosyasını almaya yönelik doğru URL aslında https:\//cdndocdemo.azureedge.net/lorem.txt.  URL 'nin istek kısmı */lorem.txt* olduğundan ve uç nokta */publicblob*' u eklediğinden, kaynak kaynağa geçilen istek nedeniyle/publicblob/Lorem.txt ile sonuçlanan */publicblob* yolunu herkese eklememiz gerektiğini unutmayın.
 

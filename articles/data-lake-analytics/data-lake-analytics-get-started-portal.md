@@ -1,7 +1,6 @@
 ---
-title: Azure portalı kullanarak Azure Data Lake Analytics ile çalışmaya başlama
+title: '& Sorgu oluşturma Azure Data Lake Analytics-Azure portal'
 description: Azure portalı kullanarak Azure Data Lake Analytics hesabı oluşturun ve bir U-SQL işi gönderin.
-services: data-lake-analytics
 ms.service: data-lake-analytics
 author: saveenr
 ms.author: saveenr
@@ -9,12 +8,12 @@ ms.reviewer: jasonwhowell
 ms.assetid: b1584d16-e0d2-4019-ad1f-f04be8c5b430
 ms.topic: conceptual
 ms.date: 03/21/2017
-ms.openlocfilehash: 25d58bdc5791de868c6302b4d2763fa34e98af17
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 46da3750e4d0ac78c5fd9df91ae37670e541302d
+ms.sourcegitcommit: 9fba13cdfce9d03d202ada4a764e574a51691dcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60615033"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71315751"
 ---
 # <a name="get-started-with-azure-data-lake-analytics-using-the-azure-portal"></a>Azure portalı kullanarak Azure Data Lake Analytics ile çalışmaya başlama
 [!INCLUDE [get-started-selector](../../includes/data-lake-analytics-selector-get-started.md)]
@@ -27,23 +26,23 @@ Bu öğreticiye başlamadan önce bir **Azure aboneliğinizin** olması gerekir.
 
 ## <a name="create-a-data-lake-analytics-account"></a>Data Lake Analytics hesabı oluşturma
 
-Şimdi, aynı anda bir Data Lake Analytics ve Azure Data Lake depolama Gen1 hesabı oluşturacaksınız.  Bu basit bir adımdır ve tamamlanması yaklaşık olarak 60 saniye sürer.
+Şimdi aynı anda bir Data Lake Analytics ve Azure Data Lake Storage 1. hesabı oluşturacaksınız.  Bu basit bir adımdır ve tamamlanması yaklaşık olarak 60 saniye sürer.
 
 1. [Azure portalı](https://portal.azure.com) üzerinde oturum açın.
 2. **Kaynak oluştur** >  **Veri ve Analiz** > **Data Lake Analytics** seçeneğine tıklayın.
 3. Aşağıdaki öğeler için değerleri seçin:
-   * **Ad**: (Yalnızca küçük harf ve sayı kullanılabilir) Data Lake Analytics hesabınızı adlandırın.
-   * **Abonelik**: Analytics hesabı için kullanılan Azure aboneliği seçin.
+   * **Ad**: Data Lake Analytics hesabınızı adlandırın (yalnızca küçük harf ve sayılara izin verilir).
+   * **Abonelik**: Analiz hesabı için kullanılan Azure aboneliğini seçin.
    * **Kaynak Grubu**. Var olan bir Azure Kaynak Grubu'nu seçin veya yeni bir grup oluşturun.
    * **Konum**. Data Lake Analytics hesabı için bir Azure veri merkezi seçin.
-   * **Data Lake depolama Gen1**: Yeni bir Data Lake depolama Gen1 hesabı oluşturmaya yönelik yönergeyi uygulayın veya var olanı seçin. 
+   * **Data Lake Storage 1.** : Yeni bir Data Lake Storage 1. hesabı oluşturmak için yönergeyi izleyin veya var olan bir hesabı seçin. 
 4. İsteğe bağlı olarak Data Lake Analytics hesabınıza yönelik bir fiyatlandırma katmanı seçebilirsiniz.
 5. **Oluştur**’a tıklayın. 
 
 
 ## <a name="your-first-u-sql-script"></a>İlk U-SQL betiğiniz
 
-Aşağıda basit bir U-SQL betiği gösterilmiştir. Yaptığı şey, betik içinde küçük bir veri kümesi tanımlayın ve ardından bu veri kümesinin varsayılan Data Lake depolama Gen1 hesabına adlı bir dosya olarak yazılmasına yarar `/data.csv`.
+Aşağıda basit bir U-SQL betiği gösterilmiştir. Tüm bu, komut dosyası içinde küçük bir veri kümesi tanımlar ve ardından bu veri kümesini varsayılan Data Lake Storage 1. hesabına, adlı `/data.csv`bir dosya olarak yazar.
 
 ```
 @a  = 

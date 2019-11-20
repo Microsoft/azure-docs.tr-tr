@@ -1,6 +1,6 @@
 ---
-title: Azure Stream analytics'te ortak sorgu desenleri
-description: Bu makalede, bir dizi ortak sorgu kalıpları ve Azure Stream Analytics işlerinde yararlı olan tasarımlar açıklanır.
+title: Azure Stream Analytics ortak sorgu desenleri
+description: Bu makalede, Azure Stream Analytics işlerinde yararlı olan birçok ortak sorgu deseni ve tasarımı açıklanmaktadır.
 services: stream-analytics
 author: jseb225
 ms.author: jeanb
@@ -8,34 +8,34 @@ ms.reviewer: jasonh
 ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 05/16/2019
-ms.openlocfilehash: b0f513462f1e09718dc18e9ce454b82e8978961f
-ms.sourcegitcommit: 08138eab740c12bf68c787062b101a4333292075
+ms.openlocfilehash: 729385a2ce9feb6e69f9be29c2175b403093be3f
+ms.sourcegitcommit: c556477e031f8f82022a8638ca2aec32e79f6fd9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/22/2019
-ms.locfileid: "67329602"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68413371"
 ---
-# <a name="query-examples-for-common-stream-analytics-usage-patterns"></a>Örnekler için sık kullanılan Stream Analytics kullanım desenlerini sorgulama
+# <a name="query-examples-for-common-stream-analytics-usage-patterns"></a>Ortak Stream Analytics kullanım desenlerine yönelik sorgu örnekleri
 
-Azure Stream Analytics sorguları bir SQL benzeri bir sorgu dilinde ifade edilir. Dil yapıları bölümünde belgelendirilen [Stream Analytics sorgu dili başvurusu](/stream-analytics-query/stream-analytics-query-language-reference) Kılavuzu. 
+Azure Stream Analytics sorguları SQL benzeri bir sorgu dilinde ifade edilir. Dil yapıları [Stream Analytics sorgu dili başvuru](/stream-analytics-query/stream-analytics-query-language-reference) kılavuzunda belgelenmiştir. 
 
-Sorgu Tasarım olay verilerini bir giriş akışından bir çıkış veri deposuna taşımak için basit bir geçiş mantıksal ifade edebilirsiniz veya gibi çeşitli zaman pencereleri üzerinden toplamları hesaplamak için zengin desen eşleştirme ve geçici analiz yapmak için [IOT oluşturun Stream Analytics kullanarak çözüm](stream-analytics-build-an-iot-solution-using-stream-analytics.md) Kılavuzu. Akış olaylarını birleştirmek için birden fazla giriş verilerinden katılabilir ve olay değerleri zenginleştirmek için statik başvuru verileri karşı aramalar yapabilirsiniz. İçin birden çok çıktı verileri de yazabilirsiniz.
+Sorgu tasarımı, olay verilerini bir giriş akışından çıkış veri deposuna taşımak için basit geçiş mantığını hızlı bir şekilde ifade edebilir veya çeşitli zaman pencerelerinin toplamlarını hesaplamak için zengin kalıp eşleştirme ve zamana bağlı analizler [kullanarak bir IoT çözümü oluşturma Stream Analytics Kılavuzu kullanma](stream-analytics-build-an-iot-solution-using-stream-analytics.md) . Akış olaylarını birleştirmek için birden çok girişe veri katılabilir ve olay değerlerini zenginleştirmek için statik başvuru verilerine yönelik aramalar yapabilirsiniz. Ayrıca, birden fazla çıkışına veri yazabilirsiniz.
 
-Bu makalede, birkaç ortak sorgu kalıpları gerçek dünya senaryoları tabanlı çözümleri özetlenmektedir.
+Bu makalede, gerçek dünyada senaryolar temelinde birkaç ortak sorgu desenlerine yönelik çözümler özetlenmektedir.
 
 ## <a name="work-with-complex-data-types-in-json-and-avro"></a>JSON ve AVRO'da karmaşık Veri Türleri ile çalışma
 
-Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini destekler.
+Azure Stream Analytics CSV, JSON ve avro veri biçimlerinde olayları işlemeyi destekler.
 
-İç içe geçmiş nesnelerde (kayıtlar) veya diziler gibi karmaşık türler, hem JSON hem de Avro içerebilir. Bu karmaşık veri türleri ile çalışma hakkında daha fazla bilgi için [JSON ayrıştırma ve AVRO verileri](stream-analytics-parsing-json.md) makalesi.
+Hem JSON hem de avro, iç içe geçmiş nesneler (kayıtlar) veya diziler gibi karmaşık türler içerebilir. Bu karmaşık veri türleriyle çalışma hakkında daha fazla bilgi için bkz. [JSON ve avro veri ayrıştırma](stream-analytics-parsing-json.md) makalesi.
 
-## <a name="query-example-convert-data-types"></a>Sorgu örnek: Veri türlerini dönüştürme
+## <a name="query-example-convert-data-types"></a>Sorgu örneği: Veri türlerini Dönüştür
 
-**Açıklama**: Özelliklerin türleri, giriş akışında tanımlayın. Örneğin, araba ağırlık giriş akışında dize olarak geliyor ve dönüştürülmesi gerekiyor **INT** gerçekleştirmek için **toplam**.
+**Açıklama**: Giriş akışındaki özellik türlerini tanımlayın. Örneğin, araba ağırlığı giriş akışında dizeler olarak geliyor ve **toplamı**gerçekleştirmek için **Int** 'e dönüştürülmesi gerekir.
 
 **Giriş**:
 
-| Yapın | Zaman | Ağırlık |
+| Yapın | Time | Ağırlık |
 | --- | --- | --- |
 | Honda |2015-01-01T00:00:01.0000000Z |"1000" |
 | Honda |2015-01-01T00:00:02.0000000Z |"2000" |
@@ -59,16 +59,16 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
         TumblingWindow(second, 10)
 ```
 
-**Açıklama**: Kullanım bir **ATAMA** deyiminde **ağırlık** alanını kendi veri türü belirtin. Desteklenen veri türleri listesini [veri türleri (Azure Stream Analytics)](/stream-analytics-query/data-types-azure-stream-analytics).
+**Açıklama**: Veri türünü belirtmek için **Ağırlık** alanındaki bir **cast** ifadesini kullanın. Veri türlerinde desteklenen veri türleri listesine bakın [(Azure Stream Analytics)](/stream-analytics-query/data-types-azure-stream-analytics).
 
-## <a name="query-example-use-likenot-like-to-do-pattern-matching"></a>Sorgu örnek: Kullanım LIKE/NOT desen eşleştirme için gibi
+## <a name="query-example-use-likenot-like-to-do-pattern-matching"></a>Sorgu örneği: LIKE ve LIKE stili eşleştirme için kullanın
 
-**Açıklama**: Olay bir alan değerini belirli bir desenle eşleşip eşleşmediğini denetleyin.
-Örneğin, sonucu bir ile başlayıp 9 ile lisans kalıplarını döndürür denetleyin.
+**Açıklama**: Olaydaki bir alan değerinin belirli bir Düzenle eşleşip eşleşmediğini denetleyin.
+Örneğin, sonucun, ile başlayan ve 9 ile biten lisans levhalarını döndürdüğünden emin olun.
 
 **Giriş**:
 
-| Yapın | LicensePlate | Zaman |
+| Yapın | LicensePlate | Time |
 | --- | --- | --- |
 | Honda |ABC-123 |2015-01-01T00:00:01.0000000Z |
 | Toyota |AAA-999 |2015-01-01T00:00:02.0000000Z |
@@ -76,7 +76,7 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
 
 **Çıkış**:
 
-| Yapın | LicensePlate | Zaman |
+| Yapın | LicensePlate | Time |
 | --- | --- | --- |
 | Toyota |AAA-999 |2015-01-01T00:00:02.0000000Z |
 | Nissan |ABC-369 |2015-01-01T00:00:03.0000000Z |
@@ -92,15 +92,15 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
         LicensePlate LIKE 'A%9'
 ```
 
-**Açıklama**: Kullanım **gibi** denetlemek için bildirimi **LicensePlate** alan değer. Bir harfle başlamalı ardından sıfır veya daha fazla karakter dizesi sahip ve ardından 9 sayısı ile bitmesi gerekir. 
+**Açıklama**: **Licenselevha** alan değerini denetlemek için **LIKE** ifadesini kullanın. A harfi ile başlamalı, ardından sıfır veya daha fazla karakter dizesi olmalı ve ardından 9 sayısıyla bitmelidir. 
 
-## <a name="query-example-specify-logic-for-different-casesvalues-case-statements"></a>Sorgu örnek: Mantıksal farklı durumları/değerleri (CASE deyimleri) için belirtin
+## <a name="query-example-specify-logic-for-different-casesvalues-case-statements"></a>Sorgu örneği: Farklı durumlar/değerler için mantık belirtme (CASE deyimleri)
 
-**Açıklama**: Belirli bir ölçütü temel alan bir alan için farklı bir hesaplama sağlar. Örneğin, bir özel durum için 1 ile aynı kaç otomobiller yapmak için bir dize açıklamasını geçirilen sağlar.
+**Açıklama**: Bir alan için belirli bir ölçüte göre farklı bir hesaplama sağlayın. Örneğin, 1 için özel bir durum ile aynı şekilde kaç otomobilin geçtiğini gösteren bir dize açıklaması sağlayın.
 
 **Giriş**:
 
-| Yapın | Zaman |
+| Yapın | Time |
 | --- | --- |
 | Honda |2015-01-01T00:00:01.0000000Z |
 | Toyota |2015-01-01T00:00:02.0000000Z |
@@ -108,9 +108,9 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
 
 **Çıkış**:
 
-| CarsPassed | Zaman |
+| Carsgeçti | Time |
 | --- | --- |
-| 1 Honda |2015-01-01T00:00:10.0000000Z |
+| 1 Honda dili |2015-01-01T00:00:10.0000000Z |
 | 2 Toyotas |2015-01-01T00:00:10.0000000Z |
 
 **Çözüm**:
@@ -121,7 +121,7 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
             WHEN COUNT(*) = 1 THEN CONCAT('1 ', Make)
             ELSE CONCAT(CAST(COUNT(*) AS NVARCHAR(MAX)), ' ', Make, 's')
         END AS CarsPassed,
-        System.TimeStamp() AS Time
+        System.TimeStamp() AS AsaTime
     FROM
         Input TIMESTAMP BY Time
     GROUP BY
@@ -129,15 +129,15 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
         TumblingWindow(second, 10)
 ```
 
-**Açıklama**: **Çalışması** ifade sonucu belirlemek için basit bir ifade kümesi bir ifadeyi karşılaştırır. Bu örnekte, 1 sayısı 1 dışında olan vehicle yapar daha farklı dize açıklamasını döndürülen sayısı olan araç sağlar.
+**Açıklama**: **Case** ifadesi, sonucu tespit etmek için bir ifadeyi basit ifadeler kümesiyle karşılaştırır. Bu örnekte, araç 1 sayımla birlikte 1 ' den farklı bir dize açıklaması döndürdü ve 1 dışında bir sayı getirir.
 
-## <a name="query-example-send-data-to-multiple-outputs"></a>Sorgu örnek: İçin birden çok çıkış veri gönderme
+## <a name="query-example-send-data-to-multiple-outputs"></a>Sorgu örneği: Verileri birden çok çıkışına gönder
 
-**Açıklama**: Verileri tek bir işten birden çok çıkış hedefe gönderin. Örneğin, eşik tabanlı bir uyarı için verileri analiz etmek ve tüm blob depolama olaylarına arşivleyin.
+**Açıklama**: Tek bir işten birden çok çıkış hedefi 'ne veri gönderme. Örneğin, eşik tabanlı bir uyarı için verileri analiz edin ve tüm olayları blob depolamaya arşivleyebilirsiniz.
 
 **Giriş**:
 
-| Yapın | Zaman |
+| Yapın | Time |
 | --- | --- |
 | Honda |2015-01-01T00:00:01.0000000Z |
 | Honda |2015-01-01T00:00:02.0000000Z |
@@ -147,7 +147,7 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
 
 **Output1**:
 
-| Yapın | Zaman |
+| Yapın | Time |
 | --- | --- |
 | Honda |2015-01-01T00:00:01.0000000Z |
 | Honda |2015-01-01T00:00:02.0000000Z |
@@ -157,7 +157,7 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
 
 **Output2**:
 
-| Yapın | Zaman | Sayı |
+| Yapın | Time | Count |
 | --- | --- | --- |
 | Toyota |2015-01-01T00:00:10.0000000Z |3 |
 
@@ -173,7 +173,7 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
 
     SELECT
         Make,
-        System.TimeStamp() AS Time,
+        System.TimeStamp() AS AsaTime,
         COUNT(*) AS [Count]
     INTO
         AlertOutput
@@ -186,9 +186,9 @@ Azure Stream Analytics, olayları işlemeyi CSV, JSON ve Avro veri biçimlerini 
         [Count] >= 3
 ```
 
-**Açıklama**: **INTO** yan tümcesi, Stream Analytics söyler, bu ifade için verileri yazmak için çıktı. İlk sorgu adlı bir çıktı için alınan verilerin bir geçiş diski olduğundan **ArchiveOutput**. İkinci sorgu bazı basit toplama ve filtreleme ve bunu yapan bir aşağı akış Uyarı sistemine sonuçları gönderir **AlertOutput**.
+**Açıklama**: **Into** yan tümcesi, bu deyimden verileri yazmak için çıkışların Stream Analytics belirtir. İlk sorgu, **ArchiveOutput**adlı bir çıktıya alınan verilerin bir geçişinden oluşur. İkinci sorgu bazı basit toplama ve filtreleme işlemlerini yapar ve sonuçları bir aşağı akış uyarı sistemine, **Alertoutput**'a gönderir.
 
-Not ortak tablo ifadeleri (Cte'lerin) sonuçlarını da kullanabilirsiniz (gibi **ile** deyimleri) birden çok çıkış deyimlerinde. Bu seçenek, daha az giriş kaynağı okuyucularına açma eklenen avantajına sahiptir.
+Birden çok çıktı deyiminde ortak tablo ifadelerinin (örneğin **,** deyimler) sonuçlarını da yeniden kullanabileceğinizi unutmayın. Bu seçenekte, giriş kaynağına daha az okuyucu açma avantajı eklenmiştir.
 
 Örneğin: 
 
@@ -205,13 +205,13 @@ Not ortak tablo ifadeleri (Cte'lerin) sonuçlarını da kullanabilirsiniz (gibi 
     SELECT * INTO ToyotaOutput FROM AllRedCars WHERE Make = 'Toyota'
 ```
 
-## <a name="query-example-count-unique-values"></a>Sorgu örnek: Benzersiz değerleri Say
+## <a name="query-example-count-unique-values"></a>Sorgu örneği: Benzersiz değerleri say
 
-**Açıklama**: Akış bir zaman penceresi içinde görünen alanın benzersiz değerlerin sayısını sayar. Örneğin, kaç tane benzersiz 2 saniyelik penceresinde Ücretli standına geçtiğini arabaların birçoğu yapar?
+**Açıklama**: Bir zaman penceresi içinde akışta görünen benzersiz alan değerlerinin sayısını say. Örneğin, arabaların kaç tane benzersiz olması, 2 saniyelik bir pencerede ücretli stand üzerinden mi geçer?
 
 **Giriş**:
 
-| Yapın | Zaman |
+| Yapın | Time |
 | --- | --- |
 | Honda |2015-01-01T00:00:01.0000000Z |
 | Honda |2015-01-01T00:00:02.0000000Z |
@@ -221,17 +221,17 @@ Not ortak tablo ifadeleri (Cte'lerin) sonuçlarını da kullanabilirsiniz (gibi 
 
 **Çıkış:**
 
-| CountMake | Zaman |
+| CountMake | Time |
 | --- | --- |
 | 2 |2015-01-01T00:00:02.000Z |
-| 1 |2015-01-01T00:00:04.000Z |
+| 1\. |2015-01-01T00:00:04.000Z |
 
-**Çözüm:**
+**Çözümden**
 
 ```SQL
 SELECT
      COUNT(DISTINCT Make) AS CountMake,
-     System.TIMESTAMP() AS TIME
+     System.TIMESTAMP() AS AsaTIME
 FROM Input TIMESTAMP BY TIME
 GROUP BY 
      TumblingWindow(second, 2)
@@ -239,22 +239,22 @@ GROUP BY
 
 
 **Açıklama:** 
-**COUNT (DISTINCT olun)** benzersiz değerleri döndürür **olun** sütunu bir zaman penceresi içinde.
+**Count (DISTINCT Make)** , bir zaman penceresi içindeki **Make** sütunundaki ayrı değerlerin sayısını döndürür.
 
-## <a name="query-example-determine-if-a-value-has-changed"></a>Sorgu örnek: Bir değer değişip değişmediğini belirlemek
+## <a name="query-example-determine-if-a-value-has-changed"></a>Sorgu örneği: Değerin değişip değişmediğini belirleme
 
-**Açıklama**: Geçerli değerden farklı olup olmadığını belirlemek için bir önceki değerine bakın. Örneğin, önceki araba Ücretli yolda geçerli araba olarak aynı yap mi?
+**Açıklama**: Geçerli değerden farklı olup olmadığını öğrenmek için önceki değere bakın. Örneğin, bir önceki otomobilin, geçerli araba ile aynı anda BT yolunda mi olduğunu?
 
 **Giriş**:
 
-| Yapın | Zaman |
+| Yapın | Time |
 | --- | --- |
 | Honda |2015-01-01T00:00:01.0000000Z |
 | Toyota |2015-01-01T00:00:02.0000000Z |
 
 **Çıkış**:
 
-| Yapın | Zaman |
+| Yapın | Time |
 | --- | --- |
 | Toyota |2015-01-01T00:00:02.0000000Z |
 
@@ -270,30 +270,30 @@ GROUP BY
         LAG(Make, 1) OVER (LIMIT DURATION(minute, 1)) <> Make
 ```
 
-**Açıklama**: Kullanım **LAG** Giriş akışı bir olaya geri Özet ve almak için **olun** değeri. Kendisine karşılaştırma **olun** değeri geçerli olayı ve farklı olmaları durumunda olay çıktı.
+**Açıklama**: Giriş  akışına bir olay geri göz atın ve **Make** değerini alın. Ardından, geçerli olaydaki **Make** değeri ile karşılaştırın ve farklı olmaları durumunda olayı çıkış.
 
-## <a name="query-example-find-the-first-event-in-a-window"></a>Sorgu örnek: Bir pencere içinde ilk olayı bulun
+## <a name="query-example-find-the-first-event-in-a-window"></a>Sorgu örneği: Penceredeki ilk olayı bulma
 
-**Açıklama**: İlk araba, her 10 dakikalık zaman aralığını bulur.
+**Açıklama**: Her 10 dakikalık aralıkta ilk arabayı bulun.
 
 **Giriş**:
 
-| LicensePlate | Yapın | Zaman |
+| LicensePlate | Yapın | Time |
 | --- | --- | --- |
 | DXE 5291 |Honda |2015-07-27T00:00:05.0000000Z |
 | YZK 5704 |Ford |2015-07-27T00:02:17.0000000Z |
 | RMV 8282 |Honda |2015-07-27T00:05:01.0000000Z |
-| YHN 6970 |Toyota |2015-07-27T00:06:00.0000000Z |
+| YILHN 6970 |Toyota |2015-07-27T00:06:00.0000000Z |
 | VFE 1616 |Toyota |2015-07-27T00:09:31.0000000Z |
-| QYF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
-| MDR 6128 |BMW |2015-07-27T00:13:45.0000000Z |
+| QYIF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
+| MDR 6128 |BMW |2015-07-27T00:13:45.0000000 Z |
 
 **Çıkış**:
 
-| LicensePlate | Yapın | Zaman |
+| LicensePlate | Yapın | Time |
 | --- | --- | --- |
 | DXE 5291 |Honda |2015-07-27T00:00:05.0000000Z |
-| QYF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
+| QYIF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
 
 **Çözüm**:
 
@@ -308,15 +308,15 @@ GROUP BY
         IsFirst(minute, 10) = 1
 ```
 
-Şimdi şimdi sorun değiştirin ve her 10 dakikalık zaman aralığını belirli olun, ilk araba bulun.
+Şimdi sorunu değiştirip 10 dakikalık aralıklarla belirli bir işin ilk arabasını bulalim.
 
-| LicensePlate | Yapın | Zaman |
+| LicensePlate | Yapın | Time |
 | --- | --- | --- |
 | DXE 5291 |Honda |2015-07-27T00:00:05.0000000Z |
 | YZK 5704 |Ford |2015-07-27T00:02:17.0000000Z |
-| YHN 6970 |Toyota |2015-07-27T00:06:00.0000000Z |
-| QYF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
-| MDR 6128 |BMW |2015-07-27T00:13:45.0000000Z |
+| YILHN 6970 |Toyota |2015-07-27T00:06:00.0000000Z |
+| QYIF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
+| MDR 6128 |BMW |2015-07-27T00:13:45.0000000 Z |
 
 **Çözüm**:
 
@@ -331,28 +331,28 @@ GROUP BY
         IsFirst(minute, 10) OVER (PARTITION BY Make) = 1
 ```
 
-## <a name="query-example-find-the-last-event-in-a-window"></a>Sorgu örnek: Bir pencere içinde son olayı bulun
+## <a name="query-example-find-the-last-event-in-a-window"></a>Sorgu örneği: Penceredeki son olayı bulma
 
-**Açıklama**: Son araba, her 10 dakikalık zaman aralığını bulur.
+**Açıklama**: Her 10 dakikalık aralıkta son arabayı bulun.
 
 **Giriş**:
 
-| LicensePlate | Yapın | Zaman |
+| LicensePlate | Yapın | Time |
 | --- | --- | --- |
 | DXE 5291 |Honda |2015-07-27T00:00:05.0000000Z |
 | YZK 5704 |Ford |2015-07-27T00:02:17.0000000Z |
 | RMV 8282 |Honda |2015-07-27T00:05:01.0000000Z |
-| YHN 6970 |Toyota |2015-07-27T00:06:00.0000000Z |
+| YILHN 6970 |Toyota |2015-07-27T00:06:00.0000000Z |
 | VFE 1616 |Toyota |2015-07-27T00:09:31.0000000Z |
-| QYF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
-| MDR 6128 |BMW |2015-07-27T00:13:45.0000000Z |
+| QYIF 9358 |Honda |2015-07-27T00:12:02.0000000Z |
+| MDR 6128 |BMW |2015-07-27T00:13:45.0000000 Z |
 
 **Çıkış**:
 
-| LicensePlate | Yapın | Zaman |
+| LicensePlate | Yapın | Time |
 | --- | --- | --- |
 | VFE 1616 |Toyota |2015-07-27T00:09:31.0000000Z |
-| MDR 6128 |BMW |2015-07-27T00:13:45.0000000Z |
+| MDR 6128 |BMW |2015-07-27T00:13:45.0000000 Z |
 
 **Çözüm**:
 
@@ -377,25 +377,24 @@ GROUP BY
         AND Input.Time = LastInWindow.LastEventTime
 ```
 
-**Açıklama**: Sorguda iki adımı vardır. İlk 10 dakikalık windows en son zaman damgasını bulur. İkinci adım, her penceresindeki Son zaman damgaları eşleşen olayları bulmak için özgün stream ile ilk sorgusunun sonuçları birleştirir. 
+**Açıklama**: Sorguda iki adım vardır. Birincisi, 10 dakikalık Windows 'da en son zaman damgasını bulur. İkinci adım, her penceredeki son damgalar ile eşleşen olayları bulmak için ilk sorgunun sonuçlarını orijinal akışa birleştirir. 
 
-## <a name="query-example-detect-the-absence-of-events"></a>Sorgu örnek: Var olmayan olayları algılama
+## <a name="query-example-locate-correlated-events-in-a-stream"></a>Sorgu örneği: Bağıntılı olayları bir akışta bulma
 
-**Açıklama**: Bir akış, belirli bir ölçütle eşleşen herhangi bir değer olup olmadığını denetleyin.
-Örneğin, aynı olun 2 ardışık otomobilleri Ücretli yol Son 90 saniye içinde girdiğiniz?
+**Açıklama**: Bir akışta bağıntılı olayları bulun. Örneğin, en son 90 saniye içinde, aynı kaynaktan 2 ' den fazla araba mi girsin?
 
 **Giriş**:
 
-| Yapın | LicensePlate | Zaman |
+| Yapın | LicensePlate | Time |
 | --- | --- | --- |
 | Honda |ABC-123 |2015-01-01T00:00:01.0000000Z |
 | Honda |AAA-999 |2015-01-01T00:00:02.0000000Z |
-| Toyota |DEF 987 |2015-01-01T00:00:03.0000000Z |
+| Toyota |DEF-987 |2015-01-01T00:00:03.0000000Z |
 | Honda |GHI-345 |2015-01-01T00:00:04.0000000Z |
 
 **Çıkış**:
 
-| Yapın | Zaman | CurrentCarLicensePlate | FirstCarLicensePlate | FirstCarTime |
+| Yapın | Time | Currentcarlicenselevha | Firstcarlicenselevha | FirstCarTime |
 | --- | --- | --- | --- | --- |
 | Honda |2015-01-01T00:00:02.0000000Z |AAA-999 |ABC-123 |2015-01-01T00:00:01.0000000Z |
 
@@ -414,22 +413,22 @@ GROUP BY
         LAG(Make, 1) OVER (LIMIT DURATION(second, 90)) = Make
 ```
 
-**Açıklama**: Kullanım **LAG** Giriş akışı bir olaya geri Özet ve almak için **olun** değeri. Karşılaştırmak için **olun** değeri geçerli olay ve aynı olmaları durumunda olay çıktıda. Ayrıca **LAG** önceki araba hakkındaki verileri almak için.
+**Açıklama**: Giriş  akışına bir olay geri göz atın ve **Make** değerini alın. Geçerli olaydaki **Make** değeri ile karşılaştırın ve aynı ise olayı çıkış. Ayrıca, önceki otomobil hakkındaki verileri almak için de **gecikme** kullanabilirsiniz.
 
-## <a name="query-example-detect-the-duration-between-events"></a>Sorgu örnek: Olaylar arasındaki süreyi algılayın
+## <a name="query-example-detect-the-duration-between-events"></a>Sorgu örneği: Olaylar arasındaki süreyi Algıla
 
-**Açıklama**: Belirli bir olayın süresi bulun. Örneğin, web tıklama dizisi göz önünde bulundurulduğunda, bir özellik üzerinde harcanan zamanı belirler.
+**Açıklama**: Belirli bir olayın süresini bulur. Örneğin, bir web tıklama akışı verildiğinde, bir özellikte harcanan süreyi saptayın.
 
 **Giriş**:  
 
-| Kullanıcı | Özellik | Olay | Zaman |
+| Kullanıcı | Özellik | Olay | Time |
 | --- | --- | --- | --- |
-| user@location.com |RightMenu |Başlatma |2015-01-01T00:00:01.0000000Z |
+| user@location.com |RightMenu |Start |2015-01-01T00:00:01.0000000Z |
 | user@location.com |RightMenu |End |2015-01-01T00:00:08.0000000Z |
 
 **Çıkış**:  
 
-| Kullanıcı | Özellik | Süre |
+| Kullanıcı | Özellik | Duration |
 | --- | --- | --- |
 | user@location.com |RightMenu |7 |
 
@@ -448,15 +447,15 @@ GROUP BY
         Event = 'end'
 ```
 
-**Açıklama**: Kullanım **son** son almak için işlevi **zaman** değer olay türü olduğunda **Başlat**. **Son** işlevini kullanan **PARTITION BY [kullanıcı]** sonucu benzersiz kullanıcı başına hesaplanır belirtmek için. Sorguyu 1 saatlik en yüksek eşik arasındaki zaman farkı için sahip **Başlat** ve **Durdur** olayları, ancak gerektiğinde yapılandırılabilir **(sınırı DURATION(hour, 1)** .
+**Açıklama**: **Son** işlevi, olay türü başlatıldığında son **zaman** değerini almak için **kullanın.** **Son** işlev, sonucun benzersiz kullanıcı başına hesaplandığını göstermek için **[user] tarafından bölüm** kullanır. Sorgu, **Başlangıç** ve **durdurma** olayları arasındaki zaman farkı için 1 saatlik en büyük eşiğe sahiptir, ancak gerektiğinde yapılandırılabilir **(süre sınırı (saat, 1)** .
 
-## <a name="query-example-detect-the-duration-of-a-condition"></a>Sorgu örnek: Bir koşul süresi algılayın
-**Açıklama**: Bir koşul oluştu ne kadar out bulun.
-Örneğin, yanlış bir ağırlık (yukarıda 20.000 pound) sahip tüm otomobiller içinde bir hata ile sonuçlandı ve o hatanın süresi hesaplanan değer olduğunu varsayalım.
+## <a name="query-example-detect-the-duration-of-a-condition"></a>Sorgu örneği: Bir koşulun süresini Algıla
+**Açıklama**: Bir koşulun ne kadar süreyle oluştuğunu öğrenin.
+Örneğin, bir hata, tüm otomobillerin yanlış ağırlığa (20.000 sterlini üzerinde) sahip olduğunu ve bu hatanın süresinin hesaplanması gerektiğini varsayalım.
 
 **Giriş**:
 
-| Yapın | Zaman | Ağırlık |
+| Yapın | Time | Ağırlık |
 | --- | --- | --- |
 | Honda |2015-01-01T00:00:01.0000000Z |2000 |
 | Toyota |2015-01-01T00:00:02.0000000Z |25000 |
@@ -494,28 +493,28 @@ GROUP BY
         AND previousWeight > 20000
 ```
 
-**Açıklama**: Kullanım **LAG** 24 saat için giriş akışı görüntülemek ve aramak için örnekleri nereden **StartFault** ve **StopFault** ağırlık < 20000 tarafından kapsanan.
+**Açıklama**: Giriş akışını 24 saat için görüntülemek ve **startfault** ve **stopfault** 'in 20000 < ağırlığa göre kapladığı örnekleri aramak için **lag** kullanın.
 
-## <a name="query-example-fill-missing-values"></a>Sorgu örnek: Eksik değerleri doldurun
+## <a name="query-example-fill-missing-values"></a>Sorgu örneği: Eksik değerleri doldur
 
-**Açıklama**: Eksik değerleri olan olayların akış için düzenli aralıklarla ile akışı üretir. Örneğin, en son görülen veri noktası raporları 5 saniyede bir olay oluşturur.
+**Açıklama**: Eksik değerlere sahip olayların akışı için düzenli aralıklarla olayların akışını üretin. Örneğin, en son görülen veri noktasını raporlayan her 5 saniyede bir olay oluşturun.
 
 **Giriş**:
 
 | t | value |
 | --- | --- |
-| "2014-01-01T06:01:00" |1 |
+| "2014-01-01T06:01:00" |1\. |
 | "2014-01-01T06:01:05" |2 |
 | "2014-01-01T06:01:10" |3 |
 | "2014-01-01T06:01:15" |4 |
 | "2014-01-01T06:01:30" |5 |
 | "2014-01-01T06:01:35" |6 |
 
-**Çıkış (ilk 10 satırı)** :
+**Çıkış (ilk 10 satır)** :
 
-| windowend | lastevent.t | lastevent.Value |
+| windowend | lastevent. t | lastevent. değer |
 | --- | --- | --- |
-| 2014-01-01T14:01:00.000Z |2014-01-01T14:01:00.000Z |1 |
+| 2014-01-01T14:01:00.000Z |2014-01-01T14:01:00.000Z |1\. |
 | 2014-01-01T14:01:05.000Z |2014-01-01T14:01:05.000Z |2 |
 | 2014-01-01T14:01:10.000Z |2014-01-01T14:01:10.000Z |3 |
 | 2014-01-01T14:01:15.000Z |2014-01-01T14:01:15.000Z |4 |
@@ -537,41 +536,41 @@ GROUP BY
     GROUP BY HOPPINGWINDOW(second, 300, 5)
 ```
 
-**Açıklama**: Bu sorgu, her 5 saniyede bir olay oluşturur ve daha önce alınan son olay çıkartır. [Hopping penceresi](/stream-analytics-query/hopping-window-azure-stream-analytics) süresini belirler (Bu örnekte 300 saniye) en son olayı bulmak için ne kadar bekleyen sorgu arar.
+**Açıklama**: Bu sorgu, her 5 saniyede bir olay oluşturur ve daha önce alınan son olayı çıkarır. [Atlamalı pencere](/stream-analytics-query/hopping-window-azure-stream-analytics) süresi, sorgunun en son olayı (bu örnekte 300 saniye) bulmak için ne kadar geri göründüğünü belirler.
 
 
-## <a name="query-example-correlate-two-event-types-within-the-same-stream"></a>Sorgu örnek: İki olay türleri aynı akışta içinde ilişkilendirin
+## <a name="query-example-correlate-two-event-types-within-the-same-stream"></a>Sorgu örneği: Aynı akış içindeki iki olay türünü ilişkilendirme
 
-**Açıklama**: Bazen uyarılar oluşturulacak belirli bir zaman aralığında gerçekleşen birden çok olay türlere göre gerekir. Örneğin, ev fırınlar bir IOT senaryoda, fan sıcaklık 40'tan küçük ve maksimum güç son 3 dakika boyunca 10'dan küçük olduğunda bir uyarı oluşturulmalıdır.
+**Açıklama**: Bazen belirli bir zaman aralığında oluşan birden çok olay türüne göre uyarıların oluşturulması gerekir. Örneğin, Home ovens için bir IoT senaryosunda, fan sıcaklığı 40 ' den az olduğunda ve son 3 dakika boyunca maksimum güç 10 ' dan küçük olduğunda bir uyarı oluşturulmalıdır.
 
 **Giriş**:
 
 | time | deviceId | sensorName | value |
 | --- | --- | --- | --- |
-| "2018-01-01T16:01:00" | "Oven1" | "temp" |120 |
-| "2018-01-01T16:01:00" | "Oven1" | "power" |15 |
-| "2018-01-01T16:02:00" | "Oven1" | "temp" |100 |
-| "2018-01-01T16:02:00" | "Oven1" | "power" |15 |
-| "2018-01-01T16:03:00" | "Oven1" | "temp" |70 |
-| "2018-01-01T16:03:00" | "Oven1" | "power" |15 |
-| "2018-01-01T16:04:00" | "Oven1" | "temp" |50 |
-| "2018-01-01T16:04:00" | "Oven1" | "power" |15 |
-| "2018-01-01T16:05:00" | "Oven1" | "temp" |30 |
-| "2018-01-01T16:05:00" | "Oven1" | "power" |8 |
-| "2018-01-01T16:06:00" | "Oven1" | "temp" |20 |
-| "2018-01-01T16:06:00" | "Oven1" | "power" |8 |
-| "2018-01-01T16:07:00" | "Oven1" | "temp" |20 |
-| "2018-01-01T16:07:00" | "Oven1" | "power" |8 |
-| "2018-01-01T16:08:00" | "Oven1" | "temp" |20 |
-| "2018-01-01T16:08:00" | "Oven1" | "power" |8 |
+| "2018-01-01T16:01:00" | "Oven1" | kopyalar |120 |
+| "2018-01-01T16:01:00" | "Oven1" | açılma |15 |
+| "2018-01-01T16:02:00" | "Oven1" | kopyalar |100 |
+| "2018-01-01T16:02:00" | "Oven1" | açılma |15 |
+| "2018-01-01T16:03:00" | "Oven1" | kopyalar |70 |
+| "2018-01-01T16:03:00" | "Oven1" | açılma |15 |
+| "2018-01-01T16:04:00" | "Oven1" | kopyalar |50 |
+| "2018-01-01T16:04:00" | "Oven1" | açılma |15 |
+| "2018-01-01T16:05:00" | "Oven1" | kopyalar |30 |
+| "2018-01-01T16:05:00" | "Oven1" | açılma |8 |
+| "2018-01-01T16:06:00" | "Oven1" | kopyalar |20 |
+| "2018-01-01T16:06:00" | "Oven1" | açılma |8 |
+| "2018-01-01T16:07:00" | "Oven1" | kopyalar |20 |
+| "2018-01-01T16:07:00" | "Oven1" | açılma |8 |
+| "2018-01-01T16:08:00" | "Oven1" | kopyalar |20 |
+| "2018-01-01T16:08:00" | "Oven1" | açılma |8 |
 
 **Çıkış**:
 
-| eventTime | deviceId | Temp | alertMessage | maxPowerDuringLast3mins |
+| eventTime | deviceId | kopyalar | alertMessage | maxPowerDuringLast3mins |
 | --- | --- | --- | --- | --- | 
-| "2018-01-01T16:05:00" | "Oven1" |30 | "Öğeleri ısıtma kısa devre" |15 |
-| "2018-01-01T16:06:00" | "Oven1" |20 | "Öğeleri ısıtma kısa devre" |15 |
-| "2018-01-01T16:07:00" | "Oven1" |20 | "Öğeleri ısıtma kısa devre" |15 |
+| "2018-01-01T16:05:00" | "Oven1" |30 | "Kısa devre ısıtma öğeleri" |15 |
+| "2018-01-01T16:06:00" | "Oven1" |20 | "Kısa devre ısıtma öğeleri" |15 |
+| "2018-01-01T16:07:00" | "Oven1" |20 | "Kısa devre ısıtma öğeleri" |15 |
 
 **Çözüm**:
 
@@ -611,35 +610,35 @@ WHERE
     AND t2.maxPower > 10
 ```
 
-**Açıklama**: İlk sorgu `max_power_during_last_3_mins`, kullandığı [hareketli penceresi](/stream-analytics-query/sliding-window-azure-stream-analytics) son 3 dakika içinde power algılayıcı her cihaz için en büyük değeri bulunacak. İkinci sorgu, güç değeri en son penceresinde ilgili için geçerli olay bulmak için ilk sorgu için birleştirilir. ' İ tıklatın ve ardından, koşullar karşılandığında sağlanan, cihaz için bir uyarı üretilir.
+**Açıklama**: İlk sorgu `max_power_during_last_3_mins`, son 3 dakika içinde her cihaz için güç algılayıcısı 'nın en büyük değerini bulmak üzere [kayan pencereyi](/stream-analytics-query/sliding-window-azure-stream-analytics) kullanır. İkinci sorgu, geçerli olayla ilgili en son pencerede bulunan güç değerini bulmak için ilk sorguya birleştirilir. Daha sonra koşullara uyulduğunda, cihaz için bir uyarı oluşturulur.
 
-## <a name="query-example-process-events-independent-of-device-clock-skew-substreams"></a>Sorgu örnek: Cihaz saat eğriltme (alt akışları) bağımsız işlem olayları
+## <a name="query-example-process-events-independent-of-device-clock-skew-substreams"></a>Sorgu örneği: Olayları cihaz saati Eğilerinden (alt akışlar) bağımsız olarak işle
 
-**Açıklama**: Geç gelen olaylar veya sıralamaya olay üreticilerinden arasında saat farklarından kaynaklanan, saat arasında bölümler veya ağ gecikmesi Eğer. Aşağıdaki örnekte, arkasında TollID 1 cihaz saati TollID 2 beş saniyedir ve arkasındaki TollID 1 cihaz saati TollID 3 on saniyedir. 
+**Açıklama**: Olaylar, Event üreticileri, bölümler arasındaki saat eğetkinlikleri veya ağ gecikmesi arasındaki saat eğlemeleri nedeniyle geçmiş veya sıra dışı olabilir. Aşağıdaki örnekte, Tollıd 2 için cihaz saatinin Tollıd 1 ' in arkasında beş saniye olması ve Tollıd 3 ' ün cihaz saatinin Tollıd 1 ' in arkasında on saniye olması gerekir. 
 
 **Giriş**:
 
-| LicensePlate | Yapın | Zaman | TollID |
+| LicensePlate | Yapın | Time | TollID |
 | --- | --- | --- | --- |
-| DXE 5291 |Honda |2015-07-27T00:00:01.0000000Z | 1 |
-| YHN 6970 |Toyota |2015-07-27T00:00:05.0000000Z | 1 |
-| QYF 9358 |Honda |2015-07-27T00:00:01.0000000Z | 2 |
-| GXF 9462 |BMW |2015-07-27T00:00:04.0000000Z | 2 |
-| VFE 1616 |Toyota |2015-07-27T00:00:10.0000000Z | 1 |
-| RMV 8282 |Honda |2015-07-27T00:00:03.0000000Z | 3 |
-| MDR 6128 |BMW |2015-07-27T00:00:11.0000000Z | 2 |
-| YZK 5704 |Ford |2015-07-27T00:00:07.0000000Z | 3 |
+| DXE 5291 |Honda |2015-07-27T00:00:01.0000000 Z | 1\. |
+| YILHN 6970 |Toyota |2015-07-27T00:00:05.0000000Z | 1\. |
+| QYIF 9358 |Honda |2015-07-27T00:00:01.0000000 Z | 2 |
+| GXF 9462 |BMW |2015-07-27T00:00:04.0000000 Z | 2 |
+| VFE 1616 |Toyota |2015-07-27T00:00:10.0000000 Z | 1\. |
+| RMV 8282 |Honda |2015-07-27T00:00:03.0000000 Z | 3 |
+| MDR 6128 |BMW |2015-07-27T00:00:11.0000000 Z | 2 |
+| YZK 5704 |Ford |2015-07-27T00:00:07.0000000 Z | 3 |
 
 **Çıkış**:
 
 | TollID | Count |
 | --- | --- |
-| 1 | 2 |
+| 1\. | 2 |
 | 2 | 2 |
-| 1 | 1 |
-| 3 | 1 |
-| 2 | 1 |
-| 3 | 1 |
+| 1\. | 1\. |
+| 3 | 1\. |
+| 2 | 1\. |
+| 3 | 1\. |
 
 **Çözüm**:
 
@@ -652,28 +651,28 @@ FROM input
 GROUP BY TUMBLINGWINDOW(second, 5), TollId
 ```
 
-**Açıklama**: [TIMESTAMP BY OVER](/stream-analytics-query/timestamp-by-azure-stream-analytics#over-clause-interacts-with-event-ordering) yan tümcesi kullanılarak ayrı alt akışları her cihaz Zaman Çizelgesi'arar. Bunlar, olayların sırasına göre sıralanan yerine tüm cihazlar aynı düzende değilmiş gibi her TollID olduğu anlamına hesaplanır gibi her TollID çıkış olayları üretilir.
+**Açıklama**: [Over](/stream-analytics-query/timestamp-by-azure-stream-analytics#over-clause-interacts-with-event-ordering) yan tümcesi, alt akışlar kullanılarak her cihaz zaman çizelgesine ayrı olarak bakar. Her bir Tollıd için çıkış olayları, hesaplandıkları sırada oluşturulur. Bu, olayların, tüm cihazlar aynı saat üzerinde olduğu gibi yeniden sıralamak yerine her bir Tollıd 'e göre olduğu anlamına gelir.
 
-## <a name="query-example-remove-duplicate-events-in-a-window"></a>Sorgu örnek: Bir pencere içinde yinelenen olayları kaldırın
+## <a name="query-example-remove-duplicate-events-in-a-window"></a>Sorgu örneği: Penceredeki yinelenen olayları kaldırma
 
-**Açıklama**: Belirli bir zaman penceresinde olaylar üzerinde ortalamalar hesaplama gibi bir işlemi gerçekleştirirken, yinelenen olayları filtrelenmelidir. Aşağıdaki örnekte, ikinci olay ilk yineleniyor.
+**Açıklama**: Belirli bir zaman penceresinde olaylar üzerinde ortalamaları hesaplama gibi bir işlem gerçekleştirirken, yinelenen olayların filtrelenmelidir. Aşağıdaki örnekte ikinci olay, birincisinin yinelemesidir.
 
 **Giriş**:  
 
-| DeviceId | Zaman | Öznitelik | Value |
+| DeviceId | Time | Öznitelik | Value |
 | --- | --- | --- | --- |
-| 1 |2018-07-27T00:00:01.0000000Z |Sıcaklık |50 |
-| 1 |2018-07-27T00:00:01.0000000Z |Sıcaklık |50 |
-| 2 |2018-07-27T00:00:01.0000000Z |Sıcaklık |40 |
-| 1 |2018-07-27T00:00:05.0000000Z |Sıcaklık |60 |
-| 2 |2018-07-27T00:00:05.0000000Z |Sıcaklık |50 |
-| 1 |2018-07-27T00:00:10.0000000Z |Sıcaklık |100 |
+| 1\. |2018-07-27T00:00:01.0000000 Z |Sıcaklık |50 |
+| 1\. |2018-07-27T00:00:01.0000000 Z |Sıcaklık |50 |
+| 2 |2018-07-27T00:00:01.0000000 Z |Sıcaklık |40 |
+| 1\. |2018-07-27T00:00:05.0000000 Z |Sıcaklık |60 |
+| 2 |2018-07-27T00:00:05.0000000 Z |Sıcaklık |50 |
+| 1 |2018-07-27T00:00:10.0000000 Z |Sıcaklık |100 |
 
 **Çıkış**:  
 
-| AverageValue | DeviceId |
+| Averagedeğeri | DeviceId |
 | --- | --- |
-| 70 | 1 |
+| 70 | 1\. |
 |45 | 2 |
 
 **Çözüm**:
@@ -699,16 +698,16 @@ FROM Temp
 GROUP BY DeviceId,TumblingWindow(minute, 5)
 ```
 
-**Açıklama**: [COUNT (DISTINCT saati)](/stream-analytics-query/count-azure-stream-analytics) bir zaman penceresi içinde Time sütununda benzersiz değerlerin sayısını döndürür. Çıkış bu adımın ardından çoğaltmaları atarak cihaz başına ortalama işlem için de kullanabilirsiniz.
+**Açıklama**: [Count (ayrık süre)](/stream-analytics-query/count-azure-stream-analytics) bir zaman penceresi içindeki zaman sütunundaki ayrı değerlerin sayısını döndürür. Daha sonra, yinelenenleri atarak cihaz başına ortalamayı hesaplamak için bu adımın çıkışını kullanabilirsiniz.
 
-## <a name="geofencing-and-geospatial-queries"></a>Bölge sınırlaması ve Jeo-uzamsal sorguları
-Azure Stream Analytics paylaşımı, bağlı arabalar ve varlık izleme bulutumuzda Filo yönetimi gibi senaryoları uygulamak için kullanılan yerleşik Jeo-uzamsal işlevler sağlar. Jeo-uzamsal veriler GeoJSON ya da WKT biçimlerde olay akışının bir parçası olarak aktarılabilir veya verilere başvurur. Daha fazla bilgi için [Azure Stream Analytics ile sona bölge sınırlaması ve Jeo-uzamsal toplama senaryoları](geospatial-scenarios.md) makalesi.
+## <a name="geofencing-and-geospatial-queries"></a>Bölge sınırlaması ve jeo-uzamsal sorgular
+Azure Stream Analytics, filo yönetimi, arttırıldığında paylaşımı, bağlantılı otomobil ve varlık izleme gibi senaryoları uygulamak için kullanılabilen yerleşik Jeo-uzamsal işlevler sağlar. Jeo-uzamsal veriler, coğrafi JSON veya WKT biçimlerinde olay akışı veya başvuru verilerinin bir parçası olarak alınabilir. Daha fazla bilgi için, Azure Stream Analytics makalesinde [Bölge sınırlaması ve jeo uzamsal toplama senaryolarına](geospatial-scenarios.md) bakın.
 
-## <a name="language-extensibility-through-javascript-and-c"></a>JavaScript dil genişletilebilirlik veC#
-Azure Stream Ananlytics sorgu langugae uzatabilirsiniz JavaScript'te yazılmış özel işlevler ile veya C# diller. Daha fazla bilgi için foolowing makalelere bakın:
-* [Azure Stream Analytics JavaScript kullanıcı tanımlı işlevleri](stream-analytics-javascript-user-defined-functions.md)
-* [Azure Stream Analytics JavaScript kullanıcı tanımlı toplamları](stream-analytics-javascript-user-defined-aggregates.md)
-* [Azure Stream Analytics Edge işleri için .NET Standard kullanıcı tanımlı işlevleri geliştirme](stream-analytics-edge-csharp-udf-methods.md)
+## <a name="language-extensibility-through-javascript-and-c"></a>JavaScript ile dil genişletilebilirliği veC#
+Azure Stream Ananlytiği Query langugae, JavaScript veya C# dillerde yazılmış özel işlevlerle genişletilebilir. Daha fazla bilgi için bkz. foolowing makaleleri:
+* [JavaScript Kullanıcı tanımlı işlevleri Azure Stream Analytics](stream-analytics-javascript-user-defined-functions.md)
+* [JavaScript Kullanıcı tanımlı toplamaları Azure Stream Analytics](stream-analytics-javascript-user-defined-aggregates.md)
+* [Azure Stream Analytics Edge işleri için .NET Standard Kullanıcı tanımlı işlevler geliştirme](stream-analytics-edge-csharp-udf-methods.md)
 
 ## <a name="get-help"></a>Yardım alın
 
@@ -718,6 +717,6 @@ Daha fazla yardım için deneyin bizim [Azure Stream Analytics forumumuzu](https
 * [Azure Stream analytics'e giriş](stream-analytics-introduction.md)
 * [Azure Akış Analizi'ni kullanmaya başlama](stream-analytics-real-time-fraud-detection.md)
 * [Azure Akış Analizi işlerini ölçeklendirme](stream-analytics-scale-jobs.md)
-* [Azure Akış Analizi Sorgu Dili Başvurusu](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure Akış Analizi Sorgu Dili Başvurusu](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
 * [Azure Akış Analizi Yönetimi REST API'si Başvurusu](https://msdn.microsoft.com/library/azure/dn835031.aspx)
 

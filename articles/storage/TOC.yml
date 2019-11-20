@@ -8,13 +8,13 @@
     - name: 'Blobları, Dosyaları veya Diskleri seçme'
       href: ./common/storage-decide-blobs-files-disks.md
 - name: Bloblar
-  href: ./blobs/storage-blobs-overview.md
+  href: ./blobs/index.yml?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
 - name: Data Lake Storage Gen2
-  href: ./blobs/data-lake-storage-introduction.md
+  href: ./blobs/index.yml?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
 - name: Dosyalar
-  href: ./files/storage-files-introduction.md
+  href: ./files/index.yml?toc=%2fazure%2fstorage%2ffiles%2ftoc.json
 - name: Kuyruklar
-  href: ./queues/storage-queues-introduction.md
+  href: ./queues/index.yml?toc=%2fazure%2fstorage%2fqueues%2ftoc.json
 - name: Tablolar
   href: ./tables/table-storage-overview.md
 - name: Diskler

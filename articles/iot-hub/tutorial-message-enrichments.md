@@ -1,6 +1,6 @@
 ---
-title: Öğretici - Azure IOT Hub ileti zenginleştirmelerinin kullanma
-description: Azure IOT Hub iletilerini ileti zenginleştirmelerinin kullanmayı gösteren öğretici.
+title: Öğretici-Azure IoT Hub ileti zenginleştirme kullanma
+description: Azure IoT Hub iletileri için ileti zenginlerinin nasıl kullanılacağını gösteren öğretici
 author: robinsh
 manager: philmea
 ms.service: iot-hub
@@ -8,27 +8,27 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 05/10/2019
 ms.author: robinsh
-ms.openlocfilehash: e4906bf9f2aead69c315ddb7b2e3b10489378d87
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0dd6c410040eea9eb4039ab5da183cc0b6799493
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66259082"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74005757"
 ---
-# <a name="tutorial-using-azure-iot-hub-message-enrichments-preview"></a>Öğretici: Azure IOT Hub ileti zenginleştirmelerinin (Önizleme) kullanma
+# <a name="tutorial-using-azure-iot-hub-message-enrichments"></a>Öğretici: Azure IoT Hub ileti zenginleştirme kullanma
 
-*İleti zenginleştirmelerinin* IOT Hub'ına özelliğidir *damga* iletileri belirlenen uç noktasına gönderilmeden önce ek bilgilerle iletileri. İleti zenginleştirmelerinin kullanmak için bir neden, aşağı akış işleme basitleştirmek için kullanılan veri eklemektir. Örneğin, cihaz ikizi etiketi ile cihaz telemetri iletilerini zenginleştirme, müşterilerin, cihaz ikizi için bu bilgileri API çağrıları yapmak için yük azaltabilir. Daha fazla bilgi için [ileti zenginleştirmelerinin bakış](iot-hub-message-enrichments-overview.md).
+*İleti zenginleştirmelerinin* iletileri belirlenen uç noktaya gönderilmeden önce ek bilgilerle iletileri *damgalamak* IoT Hub yeteneğidir. İleti zenginleştirmelerinin tek bir nedeni, aşağı akış işlemeyi basitleştirmek için kullanılabilecek verileri içermektir. Örneğin, cihaz ikizi etiketiyle cihaz telemetri iletileri zenginleştirilmesi, bu bilgilere yönelik cihaz ikizi API çağrıları yapmak için müşterilerin yükünü azaltabilir. Daha fazla bilgi için bkz. [iletinin Enzenginleştirmelerinin genel bakışı](iot-hub-message-enrichments-overview.md).
 
-Bu öğreticide, kaynakları, ayarlamak için Azure CLI kullanmak için iki farklı depolama kapsayıcılar--gösteren iki uç nokta dahil olmak üzere **zenginleştirilmiş** ve **özgün**. Kullanmanız [Azure portalında](https://portal.azure.com) uç noktası ile gönderilen iletilere uygulanacak ileti zenginleştirmelerinin yapılandırmak için **zenginleştirilmiş** depolama kapsayıcısı. İletileri IOT Hub'ına, her iki depolama kapsayıcılarına yönlendirilen gönderir. Uç nokta için gönderilen iletileri yalnızca **zenginleştirilmiş** depolama kapsayıcısı zenginleştirilmiş.
+Bu öğreticide, Azure CLı 'yi kullanarak, iki farklı depolama kapsayıcısının işaret eden iki uç nokta da dahil olmak üzere kaynakları **ayarlayabilirsiniz.** Ardından, ileti **zenginleştirmelerinin yalnızca gelişmiş** depolama kapsayıcısı ile uç noktaya gönderilen iletilere uygulanacağını yapılandırmak için [Azure Portal](https://portal.azure.com) kullanırsınız. IoT Hub iletileri, her iki depolama kapsayıcılarına yönlendirilen gönderirsiniz. Yalnızca **zenginleştirilmiş** depolama kapsayıcısı için uç noktaya gönderilen iletiler de zenginleştirilebilir.
 
-Bu öğreticiyi tamamlamak için gerçekleştirdiğiniz görevler şunlardır:
+Bu öğreticiyi tamamlamak için gerçekleştireceğiniz görevler şunlardır:
 
-**IOT Hub ileti zenginleştirmelerinin kullanma**
+**IoT Hub ileti zenginleştirme kullanma**
 > [!div class="checklist"]
-> * Azure CLI'yı kullanarak kaynakları--bir IOT hub'ı, iki uç nokta ile bir depolama hesabı ve yönlendirme yapılandırması oluşturun.
-> * İleti zenginleştirmelerinin yapılandırmak için Azure portalını kullanın.
-> * Bir IOT hub'ına iletileri gönderen bir cihaza benzetim bir uygulamayı çalıştırın.
-> * Sonuçları görüntülemek ve ileti zenginleştirmelerinin beklendiği gibi çalıştığını doğrulayın.
+> * Azure CLı 'yı kullanarak, kaynakları oluşturma--bir IoT Hub, iki uç nokta içeren bir depolama hesabı ve Yönlendirme yapılandırması.
+> * İleti zenginleştirme 'yi yapılandırmak için Azure portal kullanın.
+> * Hub 'a ileti gönderen bir IoT cihazının benzetimini yapan bir uygulama çalıştırın.
+> * Sonuçları görüntüleyin ve ileti sorgularının beklendiği gibi çalıştığını doğrulayın.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -38,53 +38,53 @@ Bu öğreticiyi tamamlamak için gerçekleştirdiğiniz görevler şunlardır:
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-## <a name="retrieve-the-sample-code"></a>Örnek kodu alın
+## <a name="retrieve-the-sample-code"></a>Örnek kodu alma
 
-İndirme [IOT cihaz benzetimi](https://github.com/Azure-Samples/azure-iot-samples-csharp/archive/master.zip) ve sıkıştırmasını açın. Bu depo, IOT hub'ına ileti göndermek için kullanacağınız de dahil olmak üzere çeşitli uygulamaların içinde sahiptir.
+[IoT cihaz benzetimini](https://github.com/Azure-Samples/azure-iot-samples-csharp/archive/master.zip) indirin ve sıkıştırmayı açın. Bu depoda, IoT Hub 'ına ileti göndermek için kullanacağınız bir de dahil olmak üzere çeşitli uygulamalar vardır.
 
-Bu yükleme ayrıca ileti zenginleştirmelerinin test etmek için kullanılan kaynakları oluşturmak için komut dosyası içerir. İçinde /azure-iot-samples-csharp/iot-hub/Tutorials/Routing/SimulatedDevice/resources/iothub_msgenrichment_cli.azcli betiğidir. Şimdilik komut bulun ve kullanın. Ayrıca, komut dosyasını doğrudan makalesinden kopyalayabilirsiniz.
+Bu indirme, ileti zenginleştirmelerini test etmek için kullanılan kaynakları oluşturmaya yönelik betiği de içerir. Betik/azure-iot-samples-csharp/iot-hub/Tutorials/Routing/SimulatedDevice/resources/iothub_msgenrichment_cli. azclı ' dir. Şimdilik, betiğe bakabilir ve onu kullanabilirsiniz. Ayrıca, komut dosyasını doğrudan makaleden kopyalayabilirsiniz.
 
-Test başlatmaya hazır olduğunuzda, IOT hub'ınıza ileti göndermek için bu indirmeyi cihaz benzetimi uygulamadan kullanır.
+Teste başlamaya hazırsanız, IoT Hub 'ınıza ileti göndermek için bu indirden cihaz benzetimi uygulamasını kullanacaksınız.
 
-## <a name="set-up-and-configure-resources"></a>Ayarlama ve kaynakları yapılandırma
+## <a name="set-up-and-configure-resources"></a>Kaynakları ayarlama ve yapılandırma
 
-Azure CLI betiği gerekli kaynakları oluşturmaya ek olarak, ayrı depolama kapsayıcıları uç noktalar için iki yol da yapılandırır. Yönlendirme yapılandırma hakkında daha fazla bilgi için bkz. [yönlendirme öğretici](tutorial-routing.md). Kaynaklar ayarladıktan sonra kullandığınız [Azure portalında](https://portal.azure.com) ileti zenginleştirmelerinin her uç noktası için yapılandırın ve ardından test adımına devam edin.
+Azure CLı betiği, gerekli kaynakları oluşturmanın yanı sıra ayrı depolama kapsayıcıları olan uç noktalara iki yol da yapılandırır. Yönlendirmeyi yapılandırma hakkında daha fazla bilgi için bkz. [yönlendirme öğreticisi](tutorial-routing.md). Kaynaklar kurulduktan sonra, her bitiş noktası için ileti zenginlerinizi yapılandırmak üzere [Azure Portal](https://portal.azure.com) kullanır ve ardından test adımına geçin.
 
 > [!NOTE]
-> Tüm iletiler, hem Uç noktalara yönlendirilir, ancak yalnızca yapılandırılmış ileti zenginleştirmelerinin ile uç noktasına giden iletileri zenginleştirilmiş.
+> Tüm iletiler her iki uç noktaya yönlendirilir, ancak yalnızca yapılandırılan ileti zenginleştirmelerinin bulunduğu uç noktaya giden iletiler zenginleştirilebilir.
 >
 
-Aşağıdaki betiği kullanın ya da indirilen depo /resources klasöründe bulunan komut dosyasını açın. Betik gerçekleştireceğiniz adımlar şunlardır:
+Aşağıdaki betiği kullanabilir veya betiği indirilen deponun/Resources klasöründe açabilirsiniz. Betiğinin gerçekleştireceği adımlar aşağıda verilmiştir:
 
 * Bir IoT Hub oluşturma.
-* Bir depolama hesabı oluşturun.
-* --Biri zenginleştirilmiş iletiler için ve biri değil zenginleştirilmiş iletileri için depolama hesabında iki kapsayıcı oluşturun.
-* İki farklı depolama hesapları için üretim akışı ayarlayabilirsiniz.
-    * Her Depolama hesabı kapsayıcı için bir uç noktası oluşturun.
-    * Her Depolama hesabı kapsayıcı uç noktaları için bir yol oluşturun.
+* Depolama hesabı oluşturma.
+* Depolama hesabında iki kapsayıcı oluşturun; bir tane, zenginleştirilmiş iletiler ve diğeri de zenginleştirilmiş iletiler için.
+* İki farklı depolama hesabı için yönlendirmeyi ayarlayın.
+    * Her depolama hesabı kapsayıcısı için bir uç nokta oluşturun.
+    * Her depolama hesabı kapsayıcısı uç noktası için bir yol oluşturun.
 
-IOT hub'ı adı ve depolama hesabı adı gibi genel olarak benzersiz olması gereken birkaç kaynak adları vardır. Betik çalıştırmasını sağlamak için bu kaynak adları adlı rastgele alfasayısal bir değer eklenir *randomValue*. RandomValue komut dosyasının üst kısmında bir kez oluşturulur ve komut dosyası gerektiğinde kaynak adları için eklenmiş. Rastgele olmasını istemiyorsanız, boş bir dize veya belirli bir değere ayarlayabilirsiniz.
+IoT Hub adı ve depolama hesabı adı gibi genel olarak benzersiz olması gereken birkaç kaynak adı vardır. Betiği daha kolay çalıştırmak için, bu kaynak adlarına rastgele *değer*adı verilen rastgele alfasayısal bir değer eklenir. Rasgeledeğeri, komut dosyasının en üstünde bir kez oluşturulur ve komut dosyası boyunca gerektiğinde kaynak adlarına eklenir. Rastgele olmasını istemiyorsanız, bunu boş bir dizeye veya belirli bir değere ayarlayabilirsiniz.
 
-Zaten yapmadıysanız, açık bir [Bash Cloud Shell penceresini.](https://shell.azure.com). Sıkıştırması açılmış depoda komut dosyasını açın, kullanmak, tümünü seçmek için Ctrl-A ve ardından bunu kopyalamak için Ctrl-C. Alternatif olarak, aşağıdaki CLI betiği kopyalayın veya doğrudan cloud shell'de açın. Komut satırına sağ tıklatıp seçerek betiği Azure cloud shell penceresine yapıştırın **Yapıştır**. Betik, bir deyim teker teker çalıştırılır. Komut çalışmayı bırakan seçin **Enter** son komut çalıştığından emin olmak için. Aşağıdaki kod bloğu, ne yaptığını açıklayan yorumlar ile kullanılan betik gösterir.
+Daha önce yapmadıysanız, bir [Cloud Shell penceresi](https://shell.azure.com) açın ve Bash olarak ayarlandığından emin olun. Betiği sıkıştırmasız depoda açın, tümünü seçmek için CTRL-A, sonra da kopyalamak için CTRL-C kullanın. Alternatif olarak, aşağıdaki CLı betiğini kopyalayabilir veya doğrudan Cloud Shell ' de açabilirsiniz. Komut satırına sağ tıklayıp **Yapıştır**' ı seçerek betiği Cloud Shell penceresine yapıştırın. Betik tek seferde bir ifade çalıştırır. Betiği çalışmayı bitirdikten sonra, son komutu çalıştırdığından emin olmak için **ENTER** ' u seçin. Aşağıdaki kod bloğu, ne yaptığını açıklayan yorumlarla birlikte kullanılan betiği gösterir.
 
-Betiği tarafından oluşturulan kaynaklar aşağıda verilmiştir. **Zenginleştirilmiş** kaynak zenginleştirmelerinin ile iletiler için olduğu anlamına gelir. **Özgün** kaynak değil zenginleştirilmiş iletiler için olduğu anlamına gelir.
+Komut dosyası tarafından oluşturulan kaynaklar aşağıda verilmiştir. **Zenginleştirme, kaynağın zenginleştirilmiş** iletiler için olduğu anlamına gelir. **Orijinal** , kaynağın zenginleştirilmiş iletiler için olduğu anlamına gelir.
 
 | Ad | Değer |
 |-----|-----|
-| Kaynak grubu | ContosoResourcesMsgEn |
-| Kapsayıcı adı | Özgün  |
-| Kapsayıcı adı | Zenginleştirilmiş  |
-| IOT cihaz adı | Contoso-Test-Device |
-| IOT hub'ı adı | ContosoTestHubMsgEn |
-| Depolama hesabı adı | contosostorage |
+| resourceGroup | ContosoResourcesMsgEn |
+| kapsayıcı adı | Özgün  |
+| kapsayıcı adı | zenginleştirilmiş  |
+| IoT cihaz adı | Contoso-test-cihaz |
+| IoT Hub adı | ContosoTestHubMsgEn |
+| depolama hesabı adı | contosostorage |
 | uç nokta adı 1 | ContosoStorageEndpointOriginal |
 | uç nokta adı 2 | ContosoStorageEndpointEnriched|
-| Rota adı 1 | ContosoStorageRouteOriginal |
-| Rota adı 2 | ContosoStorageRouteEnriched |
+| yol adı 1 | Contosostoragerouteorjinal |
+| yol adı 2 | Contosostoragerouerricric |
 
 ```azurecli-interactive
 # This command retrieves the subscription id of the current Azure account.
-# This field is used when setting up the routing rules.
+# This field is used when setting up the routing queries.
 subscriptionID=$(az account show --query id -o tsv)
 
 # Concatenate this number onto the resources that have to be globally unique.
@@ -168,10 +168,10 @@ az iot hub device-identity show --device-id $iotDeviceName \
 ##### ROUTING FOR STORAGE #####
 
 # You're going to have two routes and two endpoints.
-# One points to container1 in the storage account
-#   and includes all messages.
-# The other points to container2 in the same storage account
-#   and only includes enriched messages.
+# One route points to the first container ("original") in the storage account
+#   and includes the original messages.
+# The other points to the second container ("enriched") in the same storage account
+#   and includes the enriched versions of the messages.
 
 endpointType="azurestoragecontainer"
 endpointName1="ContosoStorageEndpointOriginal"
@@ -190,7 +190,7 @@ storageConnectionString=$(az storage account show-connection-string \
 # Create the routing endpoints and routes.
 # Set the encoding format to either avro or json.
 
-# This is the endpoint for container 1, for endpoint messages that are not enriched.
+# This is the endpoint for the first container, for endpoint messages that are not enriched.
 az iot hub routing-endpoint create \
   --connection-string $storageConnectionString \
   --endpoint-name $endpointName1 \
@@ -202,7 +202,7 @@ az iot hub routing-endpoint create \
   --resource-group $resourceGroup \
   --encoding json
 
-# This is the endpoint for container 2, for endpoint messages that are enriched.
+# This is the endpoint for the second container, for endpoint messages that are enriched.
 az iot hub routing-endpoint create \
   --connection-string $storageConnectionString \
   --endpoint-name $endpointName2 \
@@ -225,7 +225,8 @@ az iot hub route create \
   --enabled \
   --condition $condition
 
-# This is the route for messages that are not enriched.
+# This is the route for messages that are enriched.
+# Create the route for the second storage endpoint.
 az iot hub route create \
   --name $routeName2 \
   --hub-name $iotHubName \
@@ -236,86 +237,86 @@ az iot hub route create \
   --condition $condition
 ```
 
-Bu noktada, tüm küme hazır kaynakları ve yönlendirme yapılandırılır. Portalda ileti yönlendirme yapılandırmasını görüntülemek ve ileti zenginleştirmelerinin için giden iletiler için ayarlama **zenginleştirilmiş** depolama kapsayıcısı.
+Bu noktada, kaynakların hepsi ayarlanır ve yönlendirme yapılandırılır. İleti yönlendirme yapılandırmasını portalda görüntüleyebilir ve zenginleştirilmiş depolama kapsayıcısına giden iletiler için ileti **zenginleştirmelerinin** kurulumunu yapabilirsiniz.
 
-### <a name="view-routing-and-configure-the-message-enrichments"></a>Yönlendirme görüntülemek ve ileti zenginleştirmelerinin yapılandırma
+### <a name="view-routing-and-configure-the-message-enrichments"></a>Yönlendirmeyi görüntüleme ve ileti zenginleştirme yapılandırma
 
-1. Seçerek IOT Hub'ınıza gidin **kaynak grupları**, ardından Bu öğretici için ayarlanan kaynak grubunu seçin (**ContosoResources_MsgEn**). IOT hub'ı listede bulun ve seçin. Seçin *ileti yönlendirme** IOT hub'ının.
+1. **Kaynak grupları**' nı seçerek IoT Hub gidin ve bu öğretici için ayarlanmış kaynak grubunu seçin (**ContosoResources_MsgEn**). Listede IoT Hub bulun ve seçin. IoT Hub 'ı için **Ileti yönlendirmeyi** seçin.
 
-   ![İleti yönlendirme seçin](./media/tutorial-message-enrichments/select-iot-hub.png)
+   ![İleti yönlendirmeyi seçin](./media/tutorial-message-enrichments/select-iot-hub.png)
 
-   İleti yönlendirme bölmesi olan üç sekme-- **yollar**, **özel uç noktalar**, ve **zenginleştirin iletileri**. Komut dosyası tarafından ayarlanan yapılandırma görmek için ilk iki sekme göz atabilirsiniz. Üçüncü sekme ileti zenginleştirmelerinin eklemek için kullanın. Şimdi adlı depolama kapsayıcısı için uç nokta için giden iletiler zenginleştirin **zenginleştirilmiş**. Ad ve değer girin ve ardından uç noktayı seçin **ContosoStorageEndpointEnriched** aşağı açılan listeden. IOT hub'ı adı ekler bir iyileştirmesini ayarlama bir örnek aşağıda verilmiştir:
+   İleti yönlendirme bölmesinde üç sekme vardır-- **yollar**, **Özel uç noktalar**ve **zenginleştirme iletileri**. Komut dosyası tarafından ayarlanan yapılandırmayı görmek için ilk iki sekmeye gidebilirsiniz. İleti zenginleştirme eklemek için üçüncü sekmeyi kullanın. **Gelişmiş**olarak adlandırılan depolama kapsayıcısı için uç noktaya giden iletileri zenginleştirme. Ad ve değeri girin ve ardından açılır listeden **ContosoStorageEndpointEnriched** uç noktasını seçin. İşte IoT Hub adı ' na ekleyen bir zenginleştirme örneği aşağıda verilmiştir:
 
    ![İlk zenginleştirme Ekle](./media/tutorial-message-enrichments/add-message-enrichments.png)
 
-2. Bu değerleri ContosoStorageEndpointEnriched uç noktası için listesine ekleyin.
+2. Bu değerleri ContosoStorageEndpointEnriched uç noktası için listeye ekleyin.
 
-   | Ad | Değer | Uç noktası (açılan listesi) |
+   | Anahtar | Değer | Uç nokta (açılan liste) |
    | ---- | ----- | -------------------------|
-   | myIotHub | $iothubname | AzureStorageContainers > ContosoStorageEndpointEnriched |
-   | Cihaz konumu | $twin.tags.location | AzureStorageContainers > ContosoStorageEndpointEnriched |
-   |CustomerID | 6ce345b8-1e4a-411e-9398-d34587459a3a | AzureStorageContainers > ContosoStorageEndpointEnriched |
+   | myIotHub | $iothubname | Azurestoraygecontainers > ContosoStorageEndpointEnriched |
+   | deviceLocation | $twin.tags.location | Azurestoraygecontainers > ContosoStorageEndpointEnriched |
+   |Ister | 6ce345b8-1e4a-411e-9398-d34587459a3a | Azurestoraygecontainers > ContosoStorageEndpointEnriched |
 
    > [!NOTE]
-   > Cihazınızı bir çifti yoksa buraya koyun değer ileti zenginleştirmelerinin değeri için bir dize olarak damgalı. Cihaz ikizi bilgi, portalda hub'ınıza gidin görmek için ardından **IOT cihazları**Cihazınızı seçin ve ardından **cihaz ikizi** sayfanın üstünde.
+   > Cihazınızda bir ikizi yoksa, buraya yerleştirdiğiniz değer ileti zenginlerinin değeri için bir dize olarak damgalanacaktır. Cihaz ikizi bilgilerini görmek için portalda hub 'ınıza gidip **IoT cihazları**' nı seçin, cihazınızı seçin ve ardından sayfanın en üstündeki **cihaz ikizi** ' yi seçin.
    >
-   > (Örneğin, konum) etiketler ekleyebilir ve isterseniz, belirli bir değere ayarlamak için ikizi bilgileri düzenleyebilirsiniz. Daha fazla bilgi için bkz. [IoT Hub'daki cihaz ikizlerini kavrama ve kullanma](iot-hub-devguide-device-twins.md)
+   > İkizi bilgilerini düzenleyerek etiketleri (konum gibi) ekleyebilir ve isterseniz belirli bir değere ayarlayabilirsiniz. Daha fazla bilgi için bkz. [IoT Hub'daki cihaz ikizlerini kavrama ve kullanma](iot-hub-devguide-device-twins.md)
 
-3. İşlemi tamamladığınızda, bölmenize Bu resme benzer görünmelidir:
+3. İşiniz bittiğinde, bölmenizi şu resme benzer şekilde görünmelidir:
 
-   ![Eklenen tüm zenginleştirmelerinin içeren tablo](./media/tutorial-message-enrichments/all-message-enrichments.png)
+   ![Tüm enzenginler eklenen tablo](./media/tutorial-message-enrichments/all-message-enrichments.png)
 
-4. Seçin **Uygula** değişiklikleri kaydedin.
+4. Değişiklikleri kaydetmek için **Uygula** ' yı seçin.
 
-## <a name="send-messages-to-the-iot-hub"></a>IOT Hub'ına ileti gönderme
+## <a name="send-messages-to-the-iot-hub"></a>IoT Hub ileti gönderin
 
-İleti zenginleştirmelerinin uç nokta için yapılandırılmış olan, IOT Hub'ına ileti göndermek için sanal cihaz uygulaması çalıştırın. Hub'ı aşağıdaki kurallar ile ayarlanan:
+İleti zenginleştirmelerinin uç nokta için yapılandırıldığına göre, IoT Hub ileti göndermek için sanal cihaz uygulamasını çalıştırın. Hub, aşağıdakileri gerçekleştiren ayarlarla ayarlanmıştır:
 
-* Depolama uç noktasına ContosoStorageEndpointOriginal yönlendirilmiş iletiler değil zenginleştirilmiş ve depolama kapsayıcısında depolanan `original`.
+* Depolama uç noktası ContosoStorageEndpointOriginal yönlendirilen iletiler uyumlu olmaz ve depolama kapsayıcısı `original`depolanır.
 
-* Depolama uç noktasına ContosoStorageEndpointEnriched yönlendirilmiş iletiler zenginleştirilmiş ve depolama kapsayıcısında depolanan `enriched`.
+* Depolama uç noktası ContosoStorageEndpointEnriched yönlendirilen iletiler, `enriched`ve depolama kapsayıcısında depolanır.
 
-Sanal cihaz uygulaması sıkıştırması indirmeyle uygulamalardan biridir. Uygulama, her biri farklı bir ileti yönlendirme yöntemleri için iletileri gönderir. [yönlendirme öğretici](tutorial-routing.md); Bu, Azure depolama içerir.
+Sanal cihaz uygulaması, sıkıştırılmış olmayan indirme uygulamalarınızdan biridir. Uygulama, [yönlendirme öğreticisindeki](tutorial-routing.md)farklı ileti yönlendirme yöntemlerinin her biri için ileti gönderir; Buna Azure Storage dahildir.
 
-Çözüm dosyası (IoT_SimulatedDevice.sln) kodu Visual Studio'da açmak için çift tıklayın ve ardından program.cs dosyasını açın. Yedek `{your hub name}` ile IOT hub adı. IOT hub ana bilgisayar adı biçimi **{hub adınız} .azure devices.net**. Bu öğreticide, hub ana bilgisayar adı olan **ContosoTestHubMsgEn.azure devices.net**. Ardından, yedek `{device key}` cihaz anahtarı ile kaynakları oluşturmak için komut dosyasını çalıştırırken daha önce kaydedildi.
+Kodu Visual Studio 'da açmak için çözüm dosyasına (IoT_SimulatedDevice. sln) çift tıklayın ve ardından Program.cs ' yi açın. İşaret `{your hub name}`için IoT Hub 'ı adını değiştirin. IoT Hub ana bilgisayar adının biçimi **{hub adınız}. Azure-Devices.net**. Bu öğreticide, hub ana bilgisayar adı **ContosoTestHubMsgEn.Azure-Devices.net**' dir. Sonra, işaretleyici `{your device key}`için kaynak oluşturmak üzere betiği çalıştırırken daha önce kaydettiğiniz Cihaz anahtarını değiştirin.
 
-Cihaz anahtarı sahip değilseniz, portaldan alabilirsiniz. Oturum açtıktan sonra Git **kaynak grupları**, kaynak grubunuzu seçin ve ardından IOT Hub'ınızı seçin. Altına bakın **IOT cihazları** test cihazınız için ve Cihazınızı seçin. Kopyala simgesini seçin **birincil anahtar** panoya kopyalamak için.
+Cihaz anahtarınız yoksa portaldan alabilirsiniz. Oturum açtıktan sonra, **kaynak grupları**' na gidin, kaynak grubunuzu seçin ve IoT Hub seçin. Test cihazınız için **IoT cihazları** ' na bakın ve cihazınızı seçin. **Birincil anahtar** ' ın yanındaki Kopyala simgesini seçerek Pano 'ya kopyalayın.
 
    ```csharp
-        static string myDeviceId = "contoso-test-device";
-        static string iotHubUri = "ContosoTestHubMsgEn.azure-devices.net";
+        private readonly static string s_myDeviceId = "Contoso-Test-Device";
+        private readonly static string s_iotHubUri = "ContosoTestHubMsgEn.azure-devices.net";
         // This is the primary key for the device. This is in the portal.
         // Find your IoT hub in the portal > IoT devices > select your device > copy the key.
-        static string deviceKey = "{your device key here}";
+        private readonly static string s_deviceKey = "{your device key}";
    ```
 
 ## <a name="run-and-test"></a>Çalıştırma ve test etme
 
-Konsol uygulamasını çalıştırın. Birkaç dakika bekleyin. Gönderilen iletileri uygulamanın konsol ekranında görüntülenir.
+Konsol uygulamasını çalıştırın. Birkaç dakika bekleyin. Gönderilmekte olan iletiler, uygulamanın konsol ekranında görüntülenir.
 
-Uygulama, IoT hub'ına her saniye yeni bir cihazdan buluta iletisi gönderir. İleti, cihaz kimliği, sıcaklık, nem düzeyi ve ileti düzeyi (varsayılan `normal` değeriyle) bilgileriyle bir JSON seri hale getirilmiş nesnesi içerir. Rastgele bir düzeyi atar `critical` veya `storage`, varsayılan uç nokta veya depolama hesabına yönlendirilecek ve iletinin işlenmemesine. Gönderilen iletileri **zenginleştirilmiş** depolama hesabında bir kapsayıcıda zenginleştirilmiş.
+Uygulama, IoT hub'ına her saniye yeni bir cihazdan buluta iletisi gönderir. İleti, cihaz kimliği, sıcaklık, nem düzeyi ve ileti düzeyi (varsayılan `normal` değeriyle) bilgileriyle bir JSON seri hale getirilmiş nesnesi içerir. Rastgele bir `critical` veya `storage`düzeyi atar, bu da iletinin depolama hesabına veya varsayılan uç noktaya yönlendirilmesine neden olur. Depolama hesabındaki **zenginleştirilmiş** kapsayıcıya gönderilen iletiler zenginleştirilebilir.
 
-Birkaç depolama ileti gönderildikten sonra verileri görüntüleyin.
+Birkaç depolama iletisi gönderildikten sonra, verileri görüntüleyin.
 
-1. Seçin **kaynak grupları**, ardından kaynak grubunuzun (ContosoResourcesMsgEn) bulun ve seçin.
+1. **Kaynak grupları**' nı seçin, sonra kaynak grubunuzu bulun (ContosoResourcesMsgEn) ve seçin.
 
-2. Depolama hesabınızı (contosostorage) seçin. Ardından **Depolama Gezgini (Önizleme)** soldaki seçimi bölmesinden.
+2. Depolama hesabınızı (contosostorage) seçin. Ardından sol taraftaki seçim bölmesinden **Depolama Gezgini (Önizleme)** öğesini seçin.
 
-   ![Depolama Gezgini seçin](./media/tutorial-message-enrichments/select-storage-explorer.png)
+   ![Depolama Gezginini seçin](./media/tutorial-message-enrichments/select-storage-explorer.png)
 
-   Seçin **BLOB KAPSAYICILARI** kullanılabilecek iki kapsayıcıları görmek için.
+   Kullanılabilecek iki kapsayıcıyı görmek için **BLOB kapsayıcıları** ' nı seçin.
 
-   ![Depolama hesabındaki kapsayıcıları bakın](./media/tutorial-message-enrichments/show-blob-containers.png)
+   ![Depolama hesabındaki kapsayıcılara bakın](./media/tutorial-message-enrichments/show-blob-containers.png)
 
-Kapsayıcıdaki iletiler olarak adlandırılan **zenginleştirilmiş** iletilerine dahil ileti zenginleştirmelerinin sahip. Kapsayıcıdaki iletiler olarak adlandırılan **özgün** hiçbir zenginleştirmelerinin ham iletilerle sahip olur. Altına alın ve en son ileti dosyası açın ve diğer kapsayıcı kapsayıcıdaki iletilere eklenen hiçbir zenginleştirmelerinin olmadığını doğrulamak için de aynısını yapın kadar kapsayıcıları birine detayına gidin.
+**Zenginleştirilmiş** olarak adlandırılan kapsayıcıda iletiler, iletilere eklenmiş olan ileti içerir. Kapsayıcıda **özgün** olarak adlandırılan iletiler, zenginleştirmesiz ham iletilere sahip olur. En Alta ulaşana ve en son ileti dosyasını açana kadar kapsayıcılardan birinin detayına gidin ve bu kapsayıcıdaki iletilere hiçbir zenginleştirme olmadığını doğrulamak için diğer kapsayıcı için aynısını yapın.
 
-Zenginleştirilmiş iletilere göz baktığınızda, "My IOT hub'ı" konumu yanı sıra hub adı ile ve bu gibi müşteri kimliği görmeniz gerekir:
+Zenginleştirilmiş iletilere göz atadığınızda, hub adına "My IoT Hub", ayrıca konum ve müşteri KIMLIĞI ile birlikte aşağıdaki gibi bir ileti görürsünüz:
 
 ```json
-{"EnqueuedTimeUtc":"2019-05-10T06:06:32.7220000Z","Properties":{"level":"storage","my IoT Hub":"contosotesthubmsgen3276","device location":"$twin.tags.location","customerID":"6ce345b8-1e4a-411e-9398-d34587459a3a"},"SystemProperties":{"connectionDeviceId":"Contoso-Test-Device","connectionAuthMethod":"{\"scope\":\"device\",\"type\":\"sas\",\"issuer\":\"iothub\",\"acceptingIpFilterRule\":null}","connectionDeviceGenerationId":"636930642531278483","enqueuedTime":"2019-05-10T06:06:32.7220000Z"},"Body":"eyJkZXZpY2VJZCI6IkNvbnRvc28tVGVzdC1EZXZpY2UiLCJ0ZW1wZXJhdHVyZSI6MjkuMjMyMDE2ODQ4MDQyNjE1LCJodW1pZGl0eSI6NjQuMzA1MzQ5NjkyODQ0NDg3LCJwb2ludEluZm8iOiJUaGlzIGlzIGEgc3RvcmFnZSBtZXNzYWdlLiJ9"}
+{"EnqueuedTimeUtc":"2019-05-10T06:06:32.7220000Z","Properties":{"level":"storage","my IoT Hub":"contosotesthubmsgen3276","devicelocation":"$twin.tags.location","customerID":"6ce345b8-1e4a-411e-9398-d34587459a3a"},"SystemProperties":{"connectionDeviceId":"Contoso-Test-Device","connectionAuthMethod":"{\"scope\":\"device\",\"type\":\"sas\",\"issuer\":\"iothub\",\"acceptingIpFilterRule\":null}","connectionDeviceGenerationId":"636930642531278483","enqueuedTime":"2019-05-10T06:06:32.7220000Z"},"Body":"eyJkZXZpY2VJZCI6IkNvbnRvc28tVGVzdC1EZXZpY2UiLCJ0ZW1wZXJhdHVyZSI6MjkuMjMyMDE2ODQ4MDQyNjE1LCJodW1pZGl0eSI6NjQuMzA1MzQ5NjkyODQ0NDg3LCJwb2ludEluZm8iOiJUaGlzIGlzIGEgc3RvcmFnZSBtZXNzYWdlLiJ9"}
 ```
 
-Burada da bir unenriched iletisi. "Hiçbir zenginleştirmelerinin Bu uç noktaya sahip olduğundan"My IOT hub'ı ","cihaz konumu"ve"CustomerID"Burada gösterilmez.
+Aşağıda, zenginleştirilmiş bir ileti verilmiştir. "My IoT Hub", "devicelocation" ve "CustomerID" burada gösterilmez, çünkü bunlar, enrichments tarafından eklenecek alanlardır ve bu uç noktanın hiç bir zenginleştirmesiz olması.
 
 ```json
 {"EnqueuedTimeUtc":"2019-05-10T06:06:32.7220000Z","Properties":{"level":"storage"},"SystemProperties":{"connectionDeviceId":"Contoso-Test-Device","connectionAuthMethod":"{\"scope\":\"device\",\"type\":\"sas\",\"issuer\":\"iothub\",\"acceptingIpFilterRule\":null}","connectionDeviceGenerationId":"636930642531278483","enqueuedTime":"2019-05-10T06:06:32.7220000Z"},"Body":"eyJkZXZpY2VJZCI6IkNvbnRvc28tVGVzdC1EZXZpY2UiLCJ0ZW1wZXJhdHVyZSI6MjkuMjMyMDE2ODQ4MDQyNjE1LCJodW1pZGl0eSI6NjQuMzA1MzQ5NjkyODQ0NDg3LCJwb2ludEluZm8iOiJUaGlzIGlzIGEgc3RvcmFnZSBtZXNzYWdlLiJ9"}
@@ -323,11 +324,11 @@ Burada da bir unenriched iletisi. "Hiçbir zenginleştirmelerinin Bu uç noktaya
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu öğreticide oluşturduğunuz tüm kaynakları kaldırmak istiyorsanız, kaynak grubunu silin. Bu eylem grubun içerdiği tüm kaynakları siler. Bu durumda, IOT hub'ı, depolama hesabı ve kaynak grubu kaldırılır.
+Bu öğreticide oluşturduğunuz tüm kaynakları kaldırmak istiyorsanız, kaynak grubunu silin. Bu eylem grubun içerdiği tüm kaynakları siler. Bu durumda, IoT Hub, depolama hesabı ve kaynak grubunun kendisini kaldırır.
 
-### <a name="use-the-azure-cli-to-clean-up-resources"></a>Kaynakları temizlemek için Azure CLI kullanma
+### <a name="use-the-azure-cli-to-clean-up-resources"></a>Azure CLı kullanarak kaynakları Temizleme
 
-Kaynak grubunu kaldırmak için [az group delete](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-delete) komutunu kullanın. `$resourceGroup` ayarlandı **ContosoResources** Bu öğreticinin geri başında.
+Kaynak grubunu kaldırmak için [az group delete](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-delete) komutunu kullanın. `$resourceGroup`, Bu öğreticinin başlangıcında **Contosoresources** olarak ayarlanmıştır.
 
 ```azurecli-interactive
 az group delete --name $resourceGroup
@@ -335,19 +336,19 @@ az group delete --name $resourceGroup
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, yapılandırılmış ve aşağıdaki adımları kullanarak IOT Hub iletilerini ekleme ileti zenginleştirmelerinin test:
+Bu öğreticide, aşağıdaki adımları kullanarak ileti zenginleştirmelerinin IoT Hub iletileri ekleme ve test edilmiştir:
 
-**IOT Hub ileti zenginleştirmelerinin kullanma**
+**IoT Hub ileti zenginleştirme kullanma**
 > [!div class="checklist"]
-> * Azure CLI'yı kullanarak kaynakları--bir IOT hub'ı, bir depolama hesabı ile iki enendpoints ve yönlendirme yapılandırması oluşturun.
-> * İleti zenginleştirmelerinin yapılandırmak için Azure portalını kullanın.
-> * IOT cihaz gönderen iletisini hub'a taklit eden bir uygulamayı çalıştırın.
-> * Sonuçları görüntülemek ve ileti zenginleştirmelerinin beklendiği gibi çalıştığını doğrulayın.
+> * Azure CLı 'yı kullanarak, kaynakları oluşturun--bir IoT Hub, iki uç noktaya sahip bir depolama hesabı ve Yönlendirme yapılandırması.
+> * İleti zenginleştirme 'yi yapılandırmak için Azure portal kullanın.
+> * Hub 'a ileti gönderen bir IoT cihazının benzetimini yapan bir uygulama çalıştırın.
+> * Sonuçları görüntüleyin ve ileti sorgularının beklendiği gibi çalıştığını doğrulayın.
 
-İleti zenginleştirmelerinin hakkında daha fazla bilgi için bkz: [ileti zenginleştirmelerinin bakış](iot-hub-message-enrichments-overview.md).
+İleti zenginleştirmelerinin hakkında daha fazla bilgi için bkz. [iletinin enzenginleştirmelerinin Özeti](iot-hub-message-enrichments-overview.md).
 
 İleti yönlendirme hakkında daha fazla bilgi için şu makalelere bakın:
 
-* [Farklı uç noktalar için CİHAZDAN buluta iletileri göndermek için IOT Hub ileti yönlendirme kullanın](iot-hub-devguide-messages-d2c.md)
+* [Farklı uç noktalara cihazdan buluta iletiler göndermek için IoT Hub ileti yönlendirmeyi kullanma](iot-hub-devguide-messages-d2c.md)
 
-* [Öğretici: IOT Hub'ın Yönlendirme](tutorial-routing.md)
+* [Öğretici: IoT Hub yönlendirme](tutorial-routing.md)

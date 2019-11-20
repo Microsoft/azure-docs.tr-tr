@@ -7,25 +7,25 @@ ms.author: mamccrea
 ms.reviewer: jasonh
 ms.service: stream-analytics
 ms.topic: conceptual
-ms.date: 6/21/2019
+ms.date: 06/21/2019
 ms.custom: seodec18
-ms.openlocfilehash: cb81c73f7946a10bae0470a55dcf1c0d55c2b847
-ms.sourcegitcommit: 08138eab740c12bf68c787062b101a4333292075
+ms.openlocfilehash: 093ada2b2751540b986154be3a2f333784c1259f
+ms.sourcegitcommit: ee61ec9b09c8c87e7dfc72ef47175d934e6019cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/22/2019
-ms.locfileid: "67330043"
+ms.lasthandoff: 08/30/2019
+ms.locfileid: "70173301"
 ---
-# <a name="stop-or-delete-your-azure-stream-analytics-job"></a>Durdurma veya Azure Stream Analytics işinizi Sil
+# <a name="stop-or-delete-your-azure-stream-analytics-job"></a>Azure Stream Analytics işinizi durdurma veya silme
 
-Azure Stream Analytics işleri kolayca durduruldu veya Azure portalı, Azure PowerShell, .net veya REST API'si için Azure SDK'sı aracılığıyla silindi. Bir Stream Analytics işi, silindikten sonra kurtarılamaz.
+Azure Stream Analytics işleri Azure portal, Azure PowerShell, .NET için Azure SDK veya REST API aracılığıyla kolayca durdurulabilir veya silinebilir. Bir Stream Analytics işi silindikten sonra kurtarılamaz.
 
 >[!NOTE] 
 >Stream Analytics işinizi durdurduğunuzda, verileri olay hub'ları veya Azure SQL veritabanı gibi giriş ve çıkış depolama alanında yalnızca devam ettirir. Azure'dan verilerini kaldırmak için gerekliyse, Stream Analytics işinizin giriş ve çıkış kaynakları temizleme işlemini izleyin emin olun.
 
 ## <a name="stop-a-job-in-azure-portal"></a>Azure portalında bir işini durdurma
 
-Bir işi durdurduğunuzda, deprovisionned kaynaklarıdır ve olayları işlemeyi durdurur. Bu projeyle ilgili ücretleri de durdurulur. Ancak, tüm yapılandırma tutulur ve daha sonra işi yeniden 
+Bir işi durdurduğunuzda, kaynakların sağlanması kaldırılır ve olayları işlemeyi durdurur. Bu işle ilgili ücretler de durdurulur. Ancak tüm yapılandırmanız korunur ve işi daha sonra yeniden başlatabilirsiniz 
 
 1. [Azure Portal](https://portal.azure.com) oturum açın. 
 
@@ -39,7 +39,7 @@ Bir işi durdurduğunuzda, deprovisionned kaynaklarıdır ve olayları işlemeyi
 ## <a name="delete-a-job-in-azure-portal"></a>Azure portalında iş Sil
 
 >[!WARNING] 
->Bir Stream Analytics işi, silindikten sonra kurtarılamaz.
+>Bir Stream Analytics işi silindikten sonra kurtarılamaz.
 
 1. Azure Portal’da oturum açın. 
 
@@ -54,7 +54,7 @@ Bir işi durdurduğunuzda, deprovisionned kaynaklarıdır ve olayları işlemeyi
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-PowerShell kullanarak bir işi durdurmak için kullanın [Stop-AzStreamAnalyticsJob](https://docs.microsoft.com/powershell/module/az.streamanalytics/stop-azstreamanalyticsjob) cmdlet'i. PowerShell kullanarak işi silmek için kullanın [Remove-AzStreamAnalyticsJob](https://docs.microsoft.com/powershell/module/az.streamanalytics/Remove-azStreamAnalyticsJob) cmdlet'i.
+PowerShell 'i kullanarak bir işi durdurmak için [stop-AzStreamAnalyticsJob](https://docs.microsoft.com/powershell/module/az.streamanalytics/stop-azstreamanalyticsjob) cmdlet 'ini kullanın. PowerShell 'i kullanarak bir işi silmek için [Remove-AzStreamAnalyticsJob](https://docs.microsoft.com/powershell/module/az.streamanalytics/Remove-azStreamAnalyticsJob) cmdlet 'ini kullanın.
 
 ## <a name="stop-or-delete-a-job-using-azure-sdk-for-net"></a>Durdurma veya .NET için Azure SDK'sını kullanarak iş Sil
 

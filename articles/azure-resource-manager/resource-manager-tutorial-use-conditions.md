@@ -1,32 +1,24 @@
 ---
-title: Azure Resource Manager şablonlarında koşulları kullanma | Microsoft Docs
-description: Azure kaynaklarını koşullara bağlı olarak dağıtmayı öğrenin.
-services: azure-resource-manager
-documentationcenter: ''
+title: Şablonlarda koşul kullanma
+description: Azure kaynaklarını koşullara bağlı olarak dağıtmayı öğrenin. Yeni bir kaynağın nasıl dağıtılacağını veya var olan bir kaynağı nasıl kullanacağınızı gösterir.
 author: mumian
-manager: dougeby
-editor: tysonn
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 05/21/2019
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 0d27eef8ee2c70449bacaced0de89bdc5e6989ff
-ms.sourcegitcommit: 8e76be591034b618f5c11f4e66668f48c090ddfd
+ms.openlocfilehash: fe0a30ab3931be0473ea4f067d6a02797fec1e4d
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66357822"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150394"
 ---
-# <a name="tutorial-use-condition-in-azure-resource-manager-templates"></a>Öğretici: Azure Resource Manager şablonlarını koşul kullanın
+# <a name="tutorial-use-condition-in-azure-resource-manager-templates"></a>Öğretici: Azure Resource Manager şablonlarında koşulları kullanma
 
 Azure kaynaklarını koşullara bağlı olarak dağıtmayı öğrenin.
 
-[Kaynak dağıtım sırasını ayarlama](./resource-manager-tutorial-create-templates-with-dependent-resources.md) öğreticisinde bir sanal makine, bir sanal ağ ve bir depolama hesabı dahil olmak üzere ek birkaç bağımlı kaynak oluşturmuştunuz. Her defasında yeni depolama hesabı oluşturmak yerine kullanıcıların yeni depolama hesabı oluşturma veya var olan depolama hesabını kullanma arasında seçim yapmasını sağlayacaksınız. Bu hedefe ulaşmak için ek bir parametre tanımlamanız gerekir. Parametrenin değeri "new" olduğunda yeni bir depolama hesabı oluşturulur. Aksi takdirde, sağlanan ada sahip mevcut bir depolama hesabı kullanılır.
+[Kaynak dağıtım sırasını ayarlama](./resource-manager-tutorial-create-templates-with-dependent-resources.md) öğreticisinde bir sanal makine, bir sanal ağ ve bir depolama hesabı dahil olmak üzere ek birkaç bağımlı kaynak oluşturmuştunuz. Her defasında yeni depolama hesabı oluşturmak yerine kullanıcıların yeni depolama hesabı oluşturma veya var olan depolama hesabını kullanma arasında seçim yapmasını sağlayacaksınız. Bu hedefe ulaşmak için ek bir parametre tanımlamanız gerekir. Parametrenin değeri "new" olduğunda yeni bir depolama hesabı oluşturulur. Aksi halde, belirtilen ada sahip mevcut bir depolama hesabı kullanılır.
 
-![Resource Manager şablonu kullanım durumu diyagramı](./media/resource-manager-tutorial-use-conditions/resource-manager-template-use-condition-diagram.png)
+![Kaynak Yöneticisi şablonu kullanım koşulu diyagramı](./media/resource-manager-tutorial-use-conditions/resource-manager-template-use-condition-diagram.png)
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
@@ -36,12 +28,12 @@ Bu öğretici aşağıdaki görevleri kapsar:
 > * Şablonu dağıtma
 > * Kaynakları temizleme
 
-Bu öğretici yalnızca koşullarını kullanarak temel bir senaryoyu kapsar. Daha fazla bilgi için bkz.
+Bu öğretici yalnızca koşulların kullanıldığı temel bir senaryoyu ele alır. Daha fazla bilgi için bkz.
 
-* [Şablon dosya yapısı: Koşul](./resource-group-authoring-templates.md#condition).
-* [Koşullu olarak kaynak içinde bir Azure Resource Manager şablonu dağıtma](/azure/architecture/building-blocks/extending-templates/conditional-deploy).
-* [Şablon işlevi: Varsa](./resource-group-template-functions-logical.md#if).
-* [Karşılaştırma işlevleri için Azure Resource Manager şablonları](./resource-group-template-functions-comparison.md)
+* [Şablon dosyası yapısı: koşul](conditional-resource-deployment.md).
+* [Azure Resource Manager şablonunda bir kaynağı koşullu olarak dağıtın](/azure/architecture/building-blocks/extending-templates/conditional-deploy).
+* [Şablon işlevi: Eğer](./resource-group-template-functions-logical.md#if).
+* [Azure Resource Manager şablonları için karşılaştırma işlevleri](./resource-group-template-functions-comparison.md)
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
@@ -49,14 +41,14 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](htt
 
 Bu makaleyi tamamlamak için gerekenler:
 
-* [Resource Manager Araçları uzantısı](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#prerequisites) içeren [Visual Studio Code](https://code.visualstudio.com/).
+* [Resource Manager Araçları uzantısı](https://code.visualstudio.com/) içeren [Visual Studio Code](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#prerequisites).
 * Güvenliği artırmak istiyorsanız sanal makine yönetici hesabı için oluşturulmuş bir parola kullanın. Parola oluşturma örneği aşağıda verilmiştir:
 
     ```azurecli-interactive
     openssl rand -base64 32
     ```
 
-    Azure Key Vault şifreleme anahtarları ve diğer gizli dizileri korumak üzere tasarlanmıştır. Daha fazla bilgi için [Öğreticisi: Resource Manager şablon dağıtımı Azure anahtar kasası tümleştirme](./resource-manager-tutorial-use-key-vault.md). Ayrıca parolanızı üç ayda bir güncelleştirmenizi öneririz.
+    Azure Key Vault şifreleme anahtarları ve diğer gizli dizileri korumak üzere tasarlanmıştır. Daha fazla bilgi için bkz. [Öğretici: Azure Key Vault'u Resource Manager şablonu dağıtımıyla tümleştirme](./resource-manager-tutorial-use-key-vault.md). Ayrıca parolanızı üç ayda bir güncelleştirmenizi öneririz.
 
 ## <a name="open-a-quickstart-template"></a>Hızlı başlangıç şablonunu açma
 
@@ -86,15 +78,15 @@ Azure Hızlı Başlangıç Şablonları, Resource Manager şablonları için bir
 Var olan şablonda iki değişiklik yapın:
 
 * Depolama hesabı ad parametresi ekleyin. Kullanıcılar ya yeni bir depolama hesabı adını ya da var olan bir depolama hesabı adını belirleyebilir.
-* **newOrExisting** adlı yeni bir parametre ekleyin. Dağıtım bu parametreyi kullanarak yeni depolama hesabı oluşturma veya var olan depolama hesabını kullanma kararını verir.
+* **newOrExisting** adlı yeni bir parametre ekleyin. Dağıtım, yeni bir depolama hesabı mı oluşturulacağını yoksa mevcut bir depolama hesabını mı kullanacağınızı öğrenmek için bu parametreyi kullanır.
 
 Değişiklik yapmak için aşağıdaki adımları izleyin:
 
 1. **azuredeploy.json** dosyasını Visual Studio Code ile açın.
-2. Üç değiştirin **variables('storageAccountName')** ile **parameters('storageAccountName')** tüm şablondaki.
+2. Bu üç **değişkeni (' storageAccountName ')** tüm şablonda **Parametreler (' storageAccountName ')** ile değiştirin.
 3. Aşağıdaki değişken tanımını kaldırın:
 
-    ![Resource Manager şablonu kullanım durumu diyagramı](./media/resource-manager-tutorial-use-conditions/resource-manager-tutorial-use-condition-template-remove-storageaccountname.png)
+    ![Kaynak Yöneticisi şablonu kullanım koşulu diyagramı](./media/resource-manager-tutorial-use-conditions/resource-manager-tutorial-use-condition-template-remove-storageaccountname.png)
 
 4. Şablona aşağıdaki iki parametreyi ekleyin:
 
@@ -126,7 +118,7 @@ Değişiklik yapmak için aşağıdaki adımları izleyin:
     Güncelleştirilmiş depolama hesabı tanımı şu şekilde görünür:
 
     ![Resource Manager kullanım koşulu](./media/resource-manager-tutorial-use-conditions/resource-manager-tutorial-use-condition-template.png)
-6. Güncelleştirme **storageUri** özelliğinin şu değerle birlikte sanal makine kaynak tanımı:
+6. Sanal makine kaynak tanımının **Storageuri** özelliğini aşağıdaki değerle güncelleştirin:
 
     ```json
     "storageUri": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net')]"
@@ -138,7 +130,7 @@ Değişiklik yapmak için aşağıdaki adımları izleyin:
 
 ## <a name="deploy-the-template"></a>Şablonu dağıtma
 
-Bölümündeki yönergeleri [şablonu dağıtmak](./resource-manager-tutorial-create-templates-with-dependent-resources.md#deploy-the-template) Cloud Shell'i açmak ve düzeltilmiş şablonunu karşıya yükleyin ve ardından izleme şablonu dağıtmak için PowerShell betiğini çalıştırın.
+Cloud Shell 'i açmak için [şablonu dağıtma](./resource-manager-tutorial-create-templates-with-dependent-resources.md#deploy-the-template) bölümündeki yönergeleri izleyin ve düzeltilmiş şablonu karşıya yükleyin ve ardından şablonu dağıtmak Için aşağıdaki PowerShell betiğini çalıştırın.
 
 ```azurepowershell
 $resourceGroupName = Read-Host -Prompt "Enter the resource group name"
@@ -163,11 +155,11 @@ New-AzResourceGroupDeployment `
 > [!NOTE]
 > **newOrExisting** değeri **new** olduğunda ancak belirtilen depolama hesabı adına sahip olan bir depolama hesabı mevcut olduğunda dağıtım başarısız olur.
 
-**newOrExisting** için "existing" değerini ileterek ve var olan bir depolama hesabını belirterek başka bir dağıtım yapmayı deneyin. Depolama hesabını önceden oluşturmak için bkz. [Depolama hesabı oluşturma](../storage/common/storage-quickstart-create-account.md).
+**Neworexıting** ile "var" olarak ayarlanmış başka bir dağıtım yapmayı deneyin ve var olan bir depolama hesabı belirtin. Depolama hesabını önceden oluşturmak için bkz. [Depolama hesabı oluşturma](../storage/common/storage-quickstart-create-account.md).
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığınız kaynakları temizleyin. Kaynak grubunu silmek için seçin **deneyin** Cloud Shell'i açmak için. PowerShell betiğini yapıştırmak için kabuk bölmesinde sağ tıklayın ve ardından **yapıştırın**.
+Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığınız kaynakları temizleyin. Kaynak grubunu silmek için, Cloud Shell 'i açmak için **dene** ' yi seçin. PowerShell betiğini yapıştırmak için kabuk bölmesine sağ tıklayın ve ardından **Yapıştır**' ı seçin.
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the same resource group name you used in the last procedure"

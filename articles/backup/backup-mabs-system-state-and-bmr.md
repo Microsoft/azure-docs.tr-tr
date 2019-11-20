@@ -1,224 +1,219 @@
 ---
-title: Azure Backup sunucusu sistem durumu korur ve çıplak için geri yükler
-description: Azure Backup sunucusu, sistem durumunu yedekleme ve tam kurtarma (BMR) koruma sağlamak için kullanın.
-services: backup
-author: rayne-wiselman
-manager: carmonm
-keywords: ''
-ms.service: backup
+title: Sistem durumu ve tam kurtarma koruması
+description: Sistem durumunu yedeklemek ve tam kurtarma (BMR) koruması sağlamak için Azure Backup Sunucusu kullanın.
 ms.topic: conceptual
 ms.date: 05/15/2017
-ms.author: raynew
-ms.openlocfilehash: 35ab150670cdc27efcedca233928e0c2184aeca6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2940ef5b8c0c2a7d751c46209253d4f4dbe6d13f
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62116184"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172258"
 ---
-# <a name="back-up-system-state-and-restore-to-bare-metal-with-azure-backup-server"></a>Azure Backup sunucusu ile çıplak bilgisayardan geri yüklemek ve sistem durumunu yedekleme
+# <a name="back-up-system-state-and-restore-to-bare-metal-with-azure-backup-server"></a>Sistem durumunu yedekleme ve Azure Backup Sunucusu ile çıplak sisteme geri yükleme
 
-Azure Backup sunucusu, sistem durumunu yedeklediğinde ve tam kurtarmayı (BMR) koruma sağlar.
+Azure Backup Sunucusu sistem durumunu yedekler ve tam kurtarma (BMR) koruması sağlar.
 
-*   **Sistem durumu yedeklemesi**: İşletim sistemi dosyalarını yedekler ve böylece bir bilgisayar başlatıldığında ancak sistem dosyalarını ve kayıt defteri kaybolur kurtarabilirsiniz. Bir sistem durumu yedeklemesi içerir:
-    * Etki alanı üyesi: Önyükleme dosyaları, COM + sınıf kaydı veritabanı, kayıt defteri
-    * Etki alanı denetleyicisi: Windows Server Active Directory (NTDS), önyükleme dosyaları, COM + sınıf kaydı veritabanı, kayıt defteri, sistem birimi (SYSVOL)
-    * Küme hizmetlerini çalıştıran bilgisayar: Küme sunucusu meta verileri
-    * Sertifika Hizmetleri çalıştıran bilgisayarda: Sertifika verileri
-* **Tam yedekleme**: Kritik birimler (dışındaki kullanıcı verileri) üzerinde işletim sistemi dosyalarını ve tüm verileri yedekler. Tanımına göre bir BMR yedeklemesi, sistem durumu yedeklemesi içerir. Bir bilgisayar başlatılamıyor ve her şeyi koruma sağlar.
+* **Sistem durumu yedeklemesi**: bir bilgisayar başladığında kurtarabilmeniz için işletim sistemi dosyalarını yedekler, ancak sistem dosyaları ve kayıt defteri kaybedilir. Bir sistem durumu yedeklemesi şunları içerir:
+  * Etki alanı üyesi: önyükleme dosyaları, COM+ sınıf kaydı veritabanı, kayıt defteri
+  * Etki alanı denetleyicisi: Windows Server Active Directory (NTDS), önyükleme dosyaları, COM+ sınıf kaydı veritabanı, kayıt defteri, sistem birimi (SYSVOL)
+  * Küme hizmetlerini çalıştıran bilgisayar: küme sunucusu meta verileri
+  * Sertifika Hizmetleri 'ni çalıştıran bilgisayar: sertifika verileri
+* **Çıplak yedekleme**: işletim sistemi dosyalarını ve kritik birimlerdeki tüm verileri (Kullanıcı verileri hariç) yedekler. Tanım olarak bir BMR yedeklemesi, sistem durumu yedeklemesi içerir. Bir bilgisayar başlamadığınızda ve her şeyi kurtarmanız gerektiğinde koruma sağlar.
 
-Aşağıdaki tabloda, yedekleme ve kurtarma özetlenmektedir. Sistem durumu ve BMR ile korunabilecek uygulama sürümleri hakkında ayrıntılı bilgi için bkz: [yaptığı Azure Backup sunucusu yedekleme?](backup-mabs-protection-matrix.md).
+Aşağıdaki tabloda neleri yedekleyebileceğiniz ve kurtarabileceğiniz özetlenmektedir. Sistem durumu ve BMR ile korunabilen uygulama sürümleri hakkında ayrıntılı bilgi için bkz. [ne Azure Backup sunucusu yedeklenecek?](backup-mabs-protection-matrix.md).
 
-|Backup|Sorun|Azure Backup Sunucusu'na yedeklemeden Kurtar|Sistem durumu yedeklemesinden kurtarma|BMR|
+|Backup|Sorun|Azure Backup Sunucusu yedekten kurtar|Sistem durumu yedeklemesinden kurtarma|BMR|
 |----------|---------|---------------------------|------------------------------------|-------|
 |**Dosya verileri**<br /><br />Normal veri yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp dosya verileri|E|N|N|
-|**Dosya verileri**<br /><br />Dosya verilerinin Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp veya hasarlı işletim sistemi|N|E|E|
-|**Dosya verileri**<br /><br />Dosya verilerinin Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veri birimleri bozulmamış)|N|N|E|
-|**Dosya verileri**<br /><br />Dosya verilerinin Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veri birimleri kayıp)|E|Hayır|Evet (BMR'den, yedeklenen dosya verilerinin normal kurtarılması sonra)|
-|**SharePoint verilerini**:<br /><br />Grup verilerinin Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp site, listeler, liste öğelerini, belgeleri|E|N|N|
-|**SharePoint verilerini**:<br /><br />Grup verilerinin Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp veya hasarlı işletim sistemi|N|E|E|
-|**SharePoint verilerini**:<br /><br />Grup verilerinin Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Olağanüstü durum kurtarma|N|N|N|
-|Windows Server 2012 R2 Hyper-V<br /><br />Hyper-V konak veya konuk Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeğini konak|Kayıp VM|E|N|N|
-|Hyper-V<br /><br />Hyper-V konak veya konuk Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeğini konak|Kayıp veya hasarlı işletim sistemi|N|E|E|
-|Hyper-V<br /><br />Hyper-V konak veya konuk Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeğini konak|Kayıp Hyper-V Konağı (VM'ler bozulmamış)|N|N|E|
-|Hyper-V<br /><br />Hyper-V konak veya konuk Azure Backup sunucusu yedekleme<br /><br />BMR/sistem durumu yedeğini konak|Kayıp Hyper-V Konağı (VM'ler kayıp)|N|N|E<br /><br />BMR, normal Azure Backup sunucusu ardından|
-|SQL Server/Exchange<br /><br />Azure Backup sunucusu uygulama yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp uygulama verileri|E|N|N|
-|SQL Server/Exchange<br /><br />Azure Backup sunucusu uygulama yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp veya hasarlı işletim sistemi|N|Y|E|
-|SQL Server/Exchange<br /><br />Azure Backup sunucusu uygulama yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veritabanı/işlem günlüğü dosyaları bozulmamış)|N|N|E|
-|SQL Server/Exchange<br /><br />Azure Backup sunucusu uygulama yedekleme<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veritabanı/işlem günlüğü kayıp)|N|N|E<br /><br />BMR kurtarma ardından normal Azure Backup sunucusu kurtarma|
+|**Dosya verileri**<br /><br />Azure Backup Sunucusu dosya verileri yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp veya hasarlı işletim sistemi|N|E|E|
+|**Dosya verileri**<br /><br />Azure Backup Sunucusu dosya verileri yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veri birimleri bozulmamış)|N|N|E|
+|**Dosya verileri**<br /><br />Azure Backup Sunucusu dosya verileri yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veri birimleri kayıp)|E|Hayır|Evet (BMR, ardından yedeklenen dosya verilerinin normal kurtarması)|
+|**SharePoint verileri**:<br /><br />Azure Backup Sunucusu grubu verileri yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp site, listeler, liste öğeleri, belgeler|E|N|N|
+|**SharePoint verileri**:<br /><br />Azure Backup Sunucusu grubu verileri yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp veya hasarlı işletim sistemi|N|E|E|
+|**SharePoint verileri**:<br /><br />Azure Backup Sunucusu grubu verileri yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Olağanüstü durum kurtarma|N|N|N|
+|Windows Server 2012 R2 Hyper-V<br /><br />Hyper-V konağının veya konuğun yedeklemesini Azure Backup Sunucusu<br /><br />Ana bilgisayarın BMR/sistem durumu yedeklemesi|Kayıp VM|E|N|N|
+|Hyper-V<br /><br />Hyper-V konağının veya konuğun yedeklemesini Azure Backup Sunucusu<br /><br />Ana bilgisayarın BMR/sistem durumu yedeklemesi|Kayıp veya hasarlı işletim sistemi|N|E|E|
+|Hyper-V<br /><br />Hyper-V konağının veya konuğun yedeklemesini Azure Backup Sunucusu<br /><br />Ana bilgisayarın BMR/sistem durumu yedeklemesi|Kayıp Hyper-V konağı (VM 'Ler bozulmadan)|N|N|E|
+|Hyper-V<br /><br />Hyper-V konağının veya konuğun yedeklemesini Azure Backup Sunucusu<br /><br />Ana bilgisayarın BMR/sistem durumu yedeklemesi|Kayıp Hyper-V konağı (VM 'Ler kayıp)|N|N|E<br /><br />BMR, ardından normal Azure Backup Sunucusu kurtarma|
+|SQL Server/Exchange<br /><br />Azure Backup Sunucusu uygulama yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp uygulama verileri|E|N|N|
+|SQL Server/Exchange<br /><br />Azure Backup Sunucusu uygulama yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp veya hasarlı işletim sistemi|N|Y|E|
+|SQL Server/Exchange<br /><br />Azure Backup Sunucusu uygulama yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veritabanı/işlem günlükleri bozulmamış)|N|N|E|
+|SQL Server/Exchange<br /><br />Azure Backup Sunucusu uygulama yedeklemesi<br /><br />BMR/sistem durumu yedeklemesi|Kayıp sunucu (veritabanı/işlem günlükleri kayıp)|N|N|E<br /><br />BMR kurtarma, ardından normal Azure Backup Sunucusu kurtarma|
 
-## <a name="how-system-state-backup-works"></a>Sistem durumu yedeklemesi nasıl çalışır?
+## <a name="how-system-state-backup-works"></a>Sistem durumu yedeklemesinin nasıl çalıştığı
 
-Bir sistem durumu yedeklemesi çalıştığında, yedekleme sunucusu Windows Server sunucunun sistem durumunun bir yedeğini ister Backup ile iletişim kurar. Varsayılan olarak, en fazla kullanılabilir boş alana sahip bir sürücü Backup sunucusu ve Windows Server Yedekleme'yi kullanın. Bu sürücü hakkındaki bilgiler PSDataSourceConfig.xml dosyasına kaydedilir. Bu yedeklemeler için Windows Server Yedekleme kullanan sürücüdür.
+Bir sistem durumu yedeklemesi çalıştığında, yedekleme sunucusu sunucunun sistem durumunun bir yedeğini istemek için Windows Server Yedekleme ile iletişim kurar. Varsayılan olarak, yedekleme sunucusu ve Windows Server Yedekleme en fazla kullanılabilir boş alana sahip olan sürücüyü kullanır. Bu sürücü hakkındaki bilgiler PSDataSourceConfig. xml dosyasına kaydedilir. Bu, Windows Server Yedekleme yedeklemeler için kullanılan sürücüdür.
 
-Yedek sunucu sistem durumu yedeklemesi için kullandığı sürücüyü özelleştirebilirsiniz. Korumalı sunucuda C:\Program Files\Microsoft Data Protection Manager\MABS\Datasources gidin. Düzenlemek için PSDataSourceConfig.xml dosyasını açın. Değişiklik \<FilesToProtect\> değerini sürücü harfi için. Dosyayı kaydedin ve kapatın. Bilgisayarın sistem durumunu korumak için bir koruma grubu kümesine varsa bir tutarlılık denetimi çalıştırın. Bir uyarının oluşturulması durumunda seçin **koruma grubunu değiştir** uyarısında ve ardından Sihirbazı tamamlayın. Ardından, başka bir tutarlılık denetimi çalıştırın.
+Yedekleme sunucusunun sistem durumu yedeklemesi için kullandığı sürücüyü özelleştirebilirsiniz. Korunan sunucuda C:\Program Files\Microsoft Data Protection Manager\mabs\datasourcesdizinine gidin. Düzenlenmek üzere PSDataSourceConfig. xml dosyasını açın. Sürücü harfi için \<FilesToProtect\> değerini değiştirin. Dosyayı kaydedin ve kapatın. Bilgisayarın sistem durumunu korumak üzere ayarlanmış bir koruma grubu varsa bir tutarlılık denetimi çalıştırın. Bir uyarı oluşturulursa, uyarıdaki **koruma grubunu değiştir** ' i seçin ve ardından Sihirbazı doldurun. Ardından başka bir tutarlılık denetimi çalıştırın.
 
-Koruma sunucusu bir kümenin içindeyse en fazla boş alana sahip olarak bir küme sürücüsü seçilmiş olması olası unutmayın. Sürücü sahipliğinin başka bir düğüme ve sistem durumu yedekleme çalıştırılana geçirildi, sürücü kullanılamaz ve yedekleme başarısız olur. Bu senaryoda, bir yerel sürücüye Psdatasourceconfig.XML'yi değiştirerek.
+Koruma sunucusu bir kümedeyse, en fazla boş alana sahip olan sürücü olarak bir küme sürücüsünün seçilebileceğini unutmayın. Bu sürücü sahipliği başka bir düğüme dönüştürüldüğünde ve sistem durumu yedeklemesi çalıştırılıyorsa, sürücü kullanılamaz ve yedekleme başarısız olur. Bu senaryoda, PSDataSourceConfig. xml ' yi yerel bir sürücüye işaret etmek üzere değiştirin.
 
-Ardından, Windows Server Yedekleme geri yükleme klasörünün kök dizininde WindowsImageBackup adında bir klasör oluşturur. Windows Server Yedekleme yedekleme oluşturduğu gibi tüm veriler bu klasöre yerleştirilir. Yedekleme tamamlandığında dosya Backup sunucusu bilgisayara aktarılır. Aşağıdaki bilgileri not edin:
+Sonra, Windows Server Yedekleme restore klasörünün kökünde WindowsImageBackup adlı bir klasör oluşturur. Windows Server Yedekleme yedekleme oluştururken tüm veriler bu klasöre yerleştirilir. Yedekleme tamamlandığında, dosya yedekleme sunucusu bilgisayarına aktarılır. Aşağıdaki bilgileri not edin:
 
-* Yedekleme veya Aktarım tamamlandığında bu klasörü ve içeriği temizlenir değil. Bunu düşünmenin en iyi yolu, alan bir yedekleme tamamlandıktan sonraki seferde ayrılan ' dir.
-* Bir yedekleme yapılan tüm değişiklikler klasör oluşturulur. Saat ve tarih damgası, son sistem durumu yedeklemenizin zamanını yansıtır.
+* Yedekleme veya aktarım bittiğinde bu klasör ve içeriği temizlenmez. Bunu düşünmenin en iyi yolu, bir sonraki yedeklemenin tamamlanışında alanın ayrılmaktır.
+* Klasör her yedekleme yapıldığında oluşturulur. Saat ve tarih damgası, son sistem durumu yedeklemenizin zamanını yansıtır.
 
 ## <a name="bmr-backup"></a>BMR yedekleme
 
-(Bir sistem durumu yedeklemesi içerir), BMR için yedekleme işi, doğrudan bir paylaşıma yedekleme sunucusu bilgisayarında kaydedilir. Korunan sunucuda bir klasöre kaydedilmez.
+BMR için (bir sistem durumu yedeklemesi dahil), yedekleme işi doğrudan yedekleme sunucusu bilgisayarındaki bir paylaşıma kaydedilir. Korumalı sunucudaki bir klasöre kaydedilmez.
 
-Backup sunucusu, Windows Server Yedekleme çağırır ve bu BMR yedekleme için çoğaltma birimini paylaşır. Bu durumda, bu en fazla boş alana sahip sürücüyü kullanmak için Windows Server Yedekleme sunmayacaktır. Bunun yerine, iş için oluşturulan paylaşımı kullanır.
+Yedekleme sunucusu Windows Server Yedekleme çağırır ve bu BMR yedekleme için çoğaltma birimini paylaşır. Bu durumda, en fazla boş alana sahip olan sürücüyü kullanmak Windows Server Yedekleme söylemez. Bunun yerine, iş için oluşturulan paylaşımdan yararlanır.
 
-Yedekleme tamamlandığında dosya Backup sunucusu bilgisayara aktarılır. Günlükler, C:\Windows\Logs\WindowsServerBackup dizininde depolanır.
+Yedekleme tamamlandığında, dosya yedekleme sunucusu bilgisayarına aktarılır. Günlükler C:\windows\logs\windowsserverbackupkonumunda depolanır.
 
 ## <a name="prerequisites-and-limitations"></a>Önkoşullar ve sınırlamalar
 
--   BMR, Windows Server 2003 çalıştıran bilgisayarlar için veya bir istemci işletim sistemi çalıştıran bilgisayarlar için desteklenmiyor.
+* BMR, Windows Server 2003 çalıştıran bilgisayarlar veya bir istemci işletim sistemi çalıştıran bilgisayarlar için desteklenmez.
 
--   Farklı koruma gruplarındaki aynı bilgisayar için BMR'yi ve sistem durumunu koruyamazsınız.
+* Farklı koruma gruplarındaki aynı bilgisayar için BMR 'yi ve sistem durumunu koruyamazsınız.
 
--   Bir yedekleme sunucusu bilgisayar, BMR için kendisini koruyamaz.
+* Bir yedekleme sunucusu bilgisayarı BMR için kendisini koruyamaz.
 
--   BMR için banda (diske ve banda veya D2T) kısa vadeli koruma desteklenmez. Uzun vadeli depolama için banda (disk-disk-için-banda veya D2D2T) desteklenir.
+* Banda kısa vadeli koruma (diskten banda veya D2T) BMR için desteklenmez. Banda uzun vadeli depolama (diskten diske ve banda veya D2D2T) desteklenir.
 
--   BMR koruma için Windows Server Yedekleme korumalı bilgisayara yüklenmesi gerekir.
+* BMR koruması için, Windows Server Yedekleme korunan bilgisayarda yüklü olmalıdır.
 
--   BMR koruma için farklı sistem durumu koruması için yedekleme sunucusu herhangi bir alan gereksinimi korumalı bilgisayarda yok. Windows Server Yedekleme, yedeklemeleri doğrudan yedekleme sunucu bilgisayarına aktarır. Yedek sunucu yedekleme aktarım işi görünmez **işleri** görünümü.
+* BMR koruması için, sistem durumu korumasından farklı olarak, yedekleme sunucusunda korunan bilgisayarda herhangi bir alan gereksinimi yoktur. Windows Server Yedekleme yedeklemeleri yedekleme sunucusu bilgisayarına doğrudan aktarır. Yedekleme aktarma işi yedekleme sunucusu **işleri** görünümünde görünmüyor.
 
--   Backup sunucusu, BMR için 30 GB alan çoğaltma biriminde tutar. Bu değiştirebilirsiniz **Disk ayırmayı** sayfasında koruma grubunu Değiştirme Sihirbazı'nı veya Get-DatasourceDiskAllocation ve Set-DatasourceDiskAllocation PowerShell cmdlet'lerini kullanarak. Kurtarma noktası birimde BMR koruması, beş gün bekletme için yaklaşık 6 GB gerektirir.
-    * Çoğaltma birimi boyutunun 15 GB'tan daha az olamayacağını unutmayın.
-    * Backup sunucusu, BMR veri kaynağının boyutunu hesaplamaz. Tüm sunucular için 30 GB olduğunu varsayar. Ortamınızda beklenen BMR yedeklemelerinin boyutuna göre değeri değiştirin. Bir BMR yedeklemesinin boyutu kabaca tüm kritik birimlerde kullanılan alanın toplamı olarak hesaplanabilir. Kritik birimler = önyükleme birimi + sistem birimi + Active Directory gibi sistem durumu verilerini barındıran birim.
+* Backup Server, BMR için çoğaltma biriminde 30 GB alan ayırır. Bunu, koruma grubunu değiştirme Sihirbazı 'ndaki **disk ayırma** sayfasında veya Get-DatasourceDiskAllocation ve set-DatasourceDiskAllocation PowerShell cmdlet 'lerini kullanarak değiştirebilirsiniz. Kurtarma noktası biriminde BMR koruması, beş gün bekletme için yaklaşık 6 GB gerektirir.
+  * Çoğaltma birimi boyutunun 15 GB 'tan az olamayacağını unutmayın.
+  * Yedekleme sunucusu BMR veri kaynağının boyutunu hesaplamaz. Tüm sunucular için 30 GB olduğunu varsayar. Ortamınızda beklediğinizi BMR yedeklemelerinin boyutuna göre değeri değiştirin. Bir BMR yedeklemesinin boyutu kabaca, tüm kritik birimlerde kullanılan alanın toplamı olarak hesaplanabilir. Kritik birimler = Önyükleme birimi + sistem birimi + Active Directory gibi sistem durumu verilerini barındıran birim.
 
--   Sistem durumu korumasından BMR korumasına değiştirirseniz, BMR koruması üzerinde daha az alan gerektirir *kurtarma noktası birimi*. Ancak birimdeki ek alan geri alınmaz. Üzerinde birim boyutunu el ile küçültebilirsiniz **Disk ayırmayı Değiştir** sayfasında koruma grubunu Değiştirme Sihirbazı'nın veya Get-DatasourceDiskAllocation ve Set-DatasourceDiskAllocation PowerShell cmdlet'lerini kullanarak.
+* Sistem durumu korumasından BMR korumasına geçiş yaparsanız, BMR koruması, *Kurtarma noktası biriminde*daha az alan gerektirir. Ancak, birimdeki ek alan geri kazanılır. Koruma grubunu değiştirme Sihirbazı 'nın **disk ayırmayı Değiştir** sayfasında birim boyutunu el ile küçültebilirsiniz veya Get-DatasourceDiskAllocation ve set-DatasourceDiskAllocation PowerShell cmdlet 'lerini kullanabilirsiniz.
 
-    Sistem durumu korumasından BMR korumasına değiştirirseniz, BMR koruması hakkında daha fazla alan gerektirir *çoğaltma birimi*. Birim otomatik olarak genişletilir. Varsayılan alan ayırmalarını değiştirmek istiyorsanız Modify-diskallocation öğesini PowerShell cmdlet'ini kullanın.
+    Sistem durumu korumasından BMR korumasına geçiş yaparsanız, BMR koruması, *Çoğaltma biriminde*daha fazla alan gerektirir. Birim otomatik olarak genişletilir. Varsayılan alan ayırmalarını değiştirmek istiyorsanız, modify-DiskAllocation PowerShell cmdlet 'ini kullanın.
 
--   BMR korumasından sistem durumu korumasına değiştirirseniz, kurtarma noktası biriminde daha fazla alana ihtiyacınız olur. Backup sunucusu, birimi otomatik olarak artırmak deneyebilir. Depolama havuzunda yeterli alan yoksa, bir hata oluşur.
+* BMR korumasından sistem durumu korumasına geçiş yaparsanız, kurtarma noktası biriminde daha fazla alana sahip olmanız gerekir. Yedekleme sunucusu birimi otomatik olarak artırmayı deneyebilir. Depolama havuzunda yeterli alan yoksa bir hata oluşur.
 
-    BMR korumasından sistem durumu korumasına değiştirirseniz, korumalı bilgisayar üzerindeki alan gerekir. Sistem durumu koruması ilk kopyayı yerel bilgisayara yazar ve ardından yedekleme sunucu bilgisayarına aktarır olmasıdır.
+    BMR korumasından sistem durumu korumasına geçiş yaparsanız, korunan bilgisayarda alan gerekir. Bunun nedeni, sistem durumu korumasının önce çoğaltmayı yerel bilgisayara yazması ve ardından bunu yedekleme sunucusu bilgisayarına aktarmasıdır.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-1.  **Azure Backup sunucusu dağıtma**. Backup sunucusu doğru şekilde dağıtıldığını doğrulayın. Daha fazla bilgi için bkz.
-    * [Azure Backup sunucusu için sistem gereksinimleri](https://docs.microsoft.com/system-center/dpm/install-dpm#setup-prerequisites)
-    * [Backup sunucusu koruma Matrisi](backup-mabs-protection-matrix.md)
+1. **Azure Backup sunucusu dağıtın**. Yedekleme sunucusunun doğru şekilde dağıtıldığını doğrulayın. Daha fazla bilgi için bkz.
+    * [Azure Backup Sunucusu için sistem gereksinimleri](https://docs.microsoft.com/system-center/dpm/install-dpm#setup-prerequisites)
+    * [Yedekleme sunucusu koruma matrisi](backup-mabs-protection-matrix.md)
 
-2.  **Depolamayı ayarlama**. Yedekleme verileri, diskte, bantta ve Azure ile bulutta depolayabilirsiniz. Daha fazla bilgi için [veri depolamayı hazırlama](https://docs.microsoft.com/system-center/dpm/plan-long-and-short-term-data-storage).
+2. **Depolamayı ayarlayın**. Yedekleme verilerini diskte, bantta ve Azure ile bulutta saklayabilirsiniz. Daha fazla bilgi için bkz. [veri depolamayı hazırlama](https://docs.microsoft.com/system-center/dpm/plan-long-and-short-term-data-storage).
 
-3.  **Set up the protection agent**. Koruma aracısını yedeklemek istediğiniz bir bilgisayara yükleyin. Daha fazla bilgi için [DPM koruma aracısını dağıtma](https://docs.microsoft.com/system-center/dpm/deploy-dpm-protection-agent).
+3. **Koruma aracısını ayarlayın**. Koruma aracısını yedeklemek istediğiniz bilgisayara kurun. Daha fazla bilgi için bkz. [DPM koruma aracısını dağıtma](https://docs.microsoft.com/system-center/dpm/deploy-dpm-protection-agent).
 
-## <a name="back-up-system-state-and-bare-metal"></a>Sistem durumu ve tam yedekleme
-Bölümünde anlatıldığı gibi bir koruma grubu ayarlayın [koruma gruplarını dağıtma](https://docs.microsoft.com/system-center/dpm/create-dpm-protection-groups). Not farklı gruplardaki aynı bilgisayar için BMR'yi ve sistem durumunu koruyamazsınız. Ayrıca, BMR'yi seçtiğinizde sistem durumunun otomatik olarak etkinleştirilir.
+## <a name="back-up-system-state-and-bare-metal"></a>Sistem durumunu yedekleme ve tam kurtarma
 
+Koruma [gruplarını dağıtma](https://docs.microsoft.com/system-center/dpm/create-dpm-protection-groups)bölümünde açıklandığı gibi bir koruma grubu ayarlayın. Farklı gruplardaki aynı bilgisayar için BMR 'yi ve sistem durumunu koruyamayacağınızı unutmayın. Ayrıca, BMR 'yi seçtiğinizde sistem durumu otomatik olarak etkinleştirilir.
 
-1.  Yedek sunucu yöneticisi Konsolu'ndaki yeni koruma grubu oluşturma Sihirbazı'nı açmak için seçin **koruma** > **eylemleri** > **koruma grubu oluşturma** .
+1. Yedekleme sunucusu Yönetici Konsolu **yeni koruma grubu** oluşturma Sihirbazı 'nı açmak için koruma > **Eylemler** > **koruma grubu oluştur**' u seçin.
 
-2.  Üzerinde **koruma grubu türünü seçin** sayfasında **sunucuları**ve ardından **sonraki**.
+2. **Koruma grubu türünü seçin** sayfasında **sunucular**' ı seçin ve ardından **İleri**' yi seçin.
 
-3.  Üzerinde **grup üyelerini seçin** sayfasında, bilgisayarı genişletin ve ardından ya da **BMR** veya **sistem durumu**.
+3. **Grup üyelerini seçin** sayfasında, bilgisayarı genişletin ve sonra **BMR** veya **sistem durumu**' nu seçin.
 
-    Hem BMR ve sistem durumunu farklı gruplardaki aynı bilgisayar için koruyamayacağınızı unutmayın. Ayrıca, BMR'yi seçtiğinizde sistem durumunun otomatik olarak etkinleştirilir. Daha fazla bilgi için [koruma gruplarını dağıtma](https://docs.microsoft.com/system-center/dpm/create-dpm-protection-groups).
+    Farklı gruplardaki aynı bilgisayar için BMR ve sistem durumunu koruyamayacağınızı unutmayın. Ayrıca, BMR 'yi seçtiğinizde sistem durumu otomatik olarak etkinleştirilir. Daha fazla bilgi için bkz. [koruma gruplarını dağıtma](https://docs.microsoft.com/system-center/dpm/create-dpm-protection-groups).
 
-4.  Üzerinde **veri koruma yöntemini seçin** sayfasında, kısa vadeli ve uzun süreli yedekleme işlemini nasıl istediğinizi seçin. Kısa vadeli yedekleme her zaman olduğu için ilk olarak diske, diskten Azure'a yedekleme seçeneği ile Azure Backup (kısa veya uzun süreli) kullanarak bulut. Buluta uzun süreli yedekleme için yedekleme sunucusuna bağlı bir tek başına bant cihaz veya bant kitaplığına uzun süreli yedekleme ayarlamak için alternatiftir.
+4. **Veri koruma yöntemini seçin** sayfasında, kısa vadeli ve uzun vadeli yedeklemeyi nasıl işlemek istediğinizi seçin. Kısa süreli yedekleme, Azure Backup (kısa dönem veya uzun dönem) kullanarak diskten Azure bulutuna yedekleme seçeneğiyle her zaman ilk olarak diske yapılır. Buluta uzun süreli yedeklemeye alternatif olarak, bir tek başına bant cihazına veya yedekleme sunucusuna bağlı bant kitaplığına uzun süreli yedekleme ayarlanalım.
 
-5.  Üzerinde **kısa vadeli hedefleri seçin** sayfasında, nasıl diskte kısa süreli depolama için yedeklemek istediğinizi seçin:
-    1. İçin **bekletme aralığı**, ne kadar süreyle verileri disk üzerinde tutmak istediğinizi seçin. 
-    2. İçin **eşitleme sıklığı**, diske artımlı yedekleme işlemi yapılmasını istediğiniz sıklığı seçin. Bir yedekleme aralığı ayarlamak istemiyorsanız, denetleyebilirsiniz **bir kurtarma noktasından hemen önce** seçeneği. Backup sunucusu, yalnızca her kurtarma noktası zamanlanmadan önce hızlı, tam bir yedekleme çalışır.
+5. **Kısa vadeli hedefleri seçin** sayfasında, diskte kısa süreli depolamaya nasıl yedekleme yapmak istediğinizi seçin:
+    1. **Bekletme aralığı**için, verileri diskte ne kadar süreyle saklamak istediğinizi seçin.
+    2. **Eşitleme sıklığı**için, diskte artımlı bir yedeklemeyi ne sıklıkta çalıştırmak istediğinizi seçin. Bir yedekleme aralığı ayarlamak istemiyorsanız, **bir kurtarma noktası seçeneğinden hemen önce** ' yi kontrol edebilirsiniz. Yedekleme sunucusu, her bir kurtarma noktası zamanlanmadan hemen önce bir hızlı ve tam yedekleme çalıştırır.
 
-6.  Banttaki verilerin uzun vadeli depolama için depolamak istiyorsanız **uzun vadeli hedefleri belirtin** sayfasında, ne kadar süreyle (1-99 yıl) bant verilerini saklamak istediğinizi seçin. 
-    1. İçin **yedekleme sıklığı**, ne sıklıkta banda yedekleme Çalıştır'ı seçin. Sıklık, seçtiğiniz bekletme aralığına dayalıdır:
-        * Bekletme aralığı 1-99 yıl arası olduğunda, yedeklemelerin günlük, haftalık, iki haftalık, aylık, üç aylık, altı aylık veya yıllık olarak gerçekleşmesini için seçebilirsiniz.
-        * Bekletme aralığı 1-11 ay arası olduğunda, yedeklemelerin günlük, haftalık, iki haftada, oluşmasına veya aylık seçebilirsiniz.
-        * Bekletme aralığı 1-4 hafta arası olduğunda, yedeklemelerin günlük veya haftalık olarak gerçekleşmesini seçebilirsiniz.
+6. Verileri uzun vadeli depolama için banda depolamak istiyorsanız, **uzun vadeli hedefleri belirtin** sayfasında, bant verilerini ne kadar süreyle saklamak istediğinizi seçin (1-99 yıl).
+    1. **Yedekleme sıklığı**için, banttaki yedeklemenin ne sıklıkta çalışacağını seçin. Sıklık, seçtiğiniz bekletme aralığına göre belirlenir:
+        * Bekletme aralığı 1-99 yıl olduğunda, yedeklemeleri günlük, haftalık, iki haftada bir, aylık, üç aylık, yarı yıllık veya yıllık gerçekleşecek şekilde seçebilirsiniz.
+        * Bekletme aralığı 1-11 ay olduğunda, yedeklemeleri günlük, haftalık, iki haftada bir veya aylık gerçekleşecek şekilde seçebilirsiniz.
+        * Bekletme aralığı 1-4 hafta olduğunda, yedeklemeleri günlük veya haftalık gerçekleşecek şekilde seçebilirsiniz.
 
-    2. Üzerinde **bant ve kitaplık ayrıntılarını seçin** sayfasında kullanılacak bant ve kitaplığı seçin ve olup veri sıkıştırılır ve şifrelenir.
+    2. **Bant ve kitaplık ayrıntılarını Seç** sayfasında, kullanılacak bant ve kitaplığı ve verilerin sıkıştırılması ve şifrelenmesi gerekip gerekmediğini seçin.
 
-7.  Üzerinde **Disk ayırmayı gözden** sayfasında, koruma grubu için ayrılmış depolama havuzu disk alanını inceleyin.
+7. **Disk ayırmayı İncele** sayfasında, koruma grubu için ayrılan depolama havuzu disk alanını gözden geçirin.
 
-    1. **Toplam veri boyutu** yedeklemek istediğiniz veri boyutu.
-    2. **Azure Backup sunucusu üzerinde sağlanacak alan disk** Backup sunucusu koruma grubu için önerdiği alandır. Backup sunucusu ayarları temel alarak ideal yedekleme birimini seçer. Ancak, yedekleme birimi seçeneklerini düzenleyebilirsiniz **Disk ayırma ayrıntıları**. 
-    3. İş yükleri için açılan menüden tercih edilen depolamayı seçin. Düzenlemeleriniz değerlerini değiştirmek **toplam depolama alanı** ve **boş depolama alanı** içinde **kullanılabilir Disk depolama alanı** bölmesi. Yetersiz sağlanmış alan Backup sunucusu kesintisiz yedeklemeleri emin olmak için birime eklediğiniz önerdiği depolama miktarıdır.
+    1. **Toplam veri boyutu** , yedeklemek istediğiniz verilerin boyutudur.
+    2. **Azure Backup sunucusu sağlanacak disk alanı** , yedekleme sunucusunun koruma grubu için önerdiği alandır. Yedekleme sunucusu, ayarlara bağlı olarak ideal yedekleme birimini seçer. Ancak, **disk ayırma ayrıntılarında**yedekleme birimi seçimlerini düzenleyebilirsiniz.
+    3. İş yükleri için açılan menüden tercih edilen depolamayı seçin. Düzenlemeleriniz, **kullanılabilir disk depolama** bölmesinde **toplam depolama** ve **boş depolama** değerlerini değiştirir. Yetersiz sağlanan alan, kesintisiz yedeklemeler sağlamak için yedekleme sunucusunun birime eklemenizi önerdiği depolama miktarıdır.
 
-8.  Üzerinde **çoğaltma oluşturma yöntemini seçin** sayfasında, ilk tam veri çoğaltmasını istediğiniz şekli seçin. Ağ üzerinden çoğaltılmasını seçerseniz yoğun olmayan bir saat seçmenizi öneririz. Büyük miktarlarda veri veya en iyi durumda olmayan ağ koşulları, çıkarılabilir medya kullanarak çevrimdışı veri çoğaltmayı göz önünde bulundurun.
+8. **Çoğaltma oluşturma yöntemini seçin** sayfasında, ilk tam veri çoğaltmasını nasıl işlemek istediğinizi seçin. Ağ üzerinden çoğaltmayı seçerseniz, yoğun olmayan bir zaman seçmeniz önerilir. Büyük miktarlarda veri veya en iyi durumda olmayan ağ koşulları için, çıkarılabilir medya kullanarak verileri çevrimdışı olarak çoğaltmayı göz önünde bulundurun.
 
-9. Üzerinde **tutarlılık denetimi seçenekleri seçin** sayfasında, tutarlılık denetimlerinin otomatikleştirmek istediğiniz şekli seçin. Çoğaltma verilerini olduğunda onay tutarsız olarak veya bir zamanlamaya göre çalıştırmayı seçebilirsiniz. Otomatik tutarlılık denetimini yapılandırmak istemiyorsanız, istediğiniz zaman bir el ile denetim gerçekleştirebilirsiniz. El ile denetim çalıştırmak için **koruma** alan yedekleme Sunucu Yöneticisi konsolunun koruma grubuna sağ tıklayın ve ardından **tutarlılık denetimi gerçekleştir**.
+9. **Tutarlılık denetimi seçenekleri seçin** sayfasında, tutarlılık denetimlerinin nasıl otomatikleştirilmesi istediğinizi seçin. Yalnızca çoğaltma verileri tutarsız hale geldiğinde veya bir zamanlamaya göre bir denetim çalıştırmayı seçebilirsiniz. Otomatik tutarlılık denetimini yapılandırmak istemiyorsanız, istediğiniz zaman el ile denetim gerçekleştirebilirsiniz. El ile denetim çalıştırmak için, yedekleme sunucusu Yönetici Konsolu **koruma** alanında, koruma grubuna sağ tıklayın ve ardından **tutarlılık denetimi gerçekleştir**' i seçin.
 
-10. Azure Backup kullanarak buluta yedekleme seçtiyseniz **çevrimiçi koruma verilerini belirtin** sayfasında, iş yüklerini Azure'a yedeklemek istediğiniz seçtiğinizden emin olun.
+10. Azure Backup kullanarak buluta yedeklemeyi seçtiyseniz, **çevrimiçi koruma verilerini belirtin** sayfasında, Azure 'a yedeklemek istediğiniz iş yüklerini seçtiğinizden emin olun.
 
-11. Üzerinde **çevrimiçi yedekleme zamanlamasını belirtin** sayfasında, seçme ne sıklıkta artımlı yedeklemeleri azure'a meydana gelir. Her gün, hafta, ay ve yıl çalıştırmak ve hangi çalışacakları saat ve tarihi seçin için yedeklemeler zamanlayabilirsiniz. Yedeklemeler günde ortaya çıkabilir. Bir yedekleme her çalıştığında, yedekleme sunucusuna diskte depolanan yedekleme verileri kopyasından Azure'da bir kurtarma noktası oluşturulur.
+11. **Çevrimiçi yedekleme zamanlamasını belirtin** sayfasında, Azure 'a yönelik artımlı yedeklemelerin nasıl olacağını seçin. Yedeklemeleri her gün, hafta, ay ve yıl çalışacak şekilde zamanlayabilir ve çalıştırılacağı saati ve tarihi seçebilirsiniz. Yedeklemeler günde en fazla iki kez bulunabilir. Yedekleme her çalıştığında, yedekleme sunucusu diskinde depolanan yedekleme verilerinin kopyasından Azure 'da bir veri kurtarma noktası oluşturulur.
 
-12. Üzerinde **çevrimiçi saklama ilkesini belirtin** sayfasında, günlük, haftalık, aylık ve yıllık yedeklerden oluşturulan kurtarma noktalarının Azure'da nasıl bekletileceğini seçin.
+12. **Çevrimiçi saklama Ilkesini belirtin** sayfasında, günlük, haftalık, aylık ve yıllık yedeklerden oluşturulan kurtarma noktalarının Azure 'da nasıl korunduğunu seçin.
 
-13. Üzerinde **çevrimiçi çoğaltma seçin** sayfasında, ilk tam veri çoğaltmanın nasıl gerçekleşir. Ağ üzerinden çoğaltma veya Çevrimdışı Yedekleme (çevrimdışı dengeli dağıtım). Çevrimdışı Yedekleme Azure içe aktarma özelliğini kullanır. Daha fazla bilgi için [Azure backup'ta Çevrimdışı Yedekleme iş akışı](backup-azure-backup-import-export.md).
+13. **Çevrimiçi çoğaltma Seç** sayfasında, verilerin ilk tam çoğaltmasının nasıl gerçekleşeceğini seçin. Ağ üzerinden çoğaltma yapabilir veya çevrimdışı yedekleme yapabilirsiniz (çevrimdışı dengeli dağıtım). Çevrimdışı yedekleme, Azure Içeri aktarma özelliğini kullanır. Daha fazla bilgi için bkz. [Azure Backup çevrimdışı yedekleme iş akışı](backup-azure-backup-import-export.md).
 
-14. Üzerinde **özeti** sayfasında, ayarlarınızı gözden geçirin. Seçtikten sonra **Grup Oluştur**, ilk veri çoğaltma işlemi gerçekleşir. Veri kopyalama tamamlandığında, üzerinde **durumu** sayfasıdır, koruma grubunun durumu **Tamam**. Yedekleme sonra her koruma grubu ayarlarını gerçekleşir.
+14. **Özet** sayfasında, ayarlarınızı gözden geçirin. **Grup Oluştur**' u seçtikten sonra, verilerin ilk çoğaltması oluşur. Veri çoğaltma tamamlandığında, **durum** sayfasında, koruma grubu durumu **Tamam**' dır. Yedekleme, koruma grubu ayarlarına göre gerçekleşir.
 
 ## <a name="recover-system-state-or-bmr"></a>Sistem durumu veya BMR kurtarma
-BMR veya sistem durumunu bir ağ konumuna kurtarabilir. BMR'yi yedeklediyseniz, sisteminizi başlatmak ve ağa bağlanmak için Windows Kurtarma Ortamı'nı (WinRE) kullanın. Ardından ağ konumundan kurtarmak için Windows Server Yedekleme'yi kullanın. Yalnızca sistem durumunu yedeklediyseniz ağ konumundan kurtarmak için Windows Server Yedekleme'yi kullanın.
 
-### <a name="restore-bmr"></a>BMR'yi geri yükleme
-Kurtarma, yedekleme sunucusu bilgisayarında çalıştırabilirsiniz:
+BMR 'yi veya sistem durumunu bir ağ konumuna kurtarabilirsiniz. BMR 'yi yedeklediyseniz, sisteminizi başlatmak ve ağa bağlamak için Windows kurtarma ortamı 'nı (WinRE) kullanın. Ardından, ağ konumundan kurtarmak için Windows Server Yedekleme kullanın. Sistem durumunu yedeklediyseniz, ağ konumundan kurtarmak için Windows Server Yedekleme kullanmanız yeterlidir.
 
-1.  İçinde **kurtarma** bölmesinde, kurtarmak istediğiniz bulma bilgisayar ve ardından **tam kurtarma**.
+### <a name="restore-bmr"></a>BMR 'yi geri yükle
 
-2.  Kullanılabilir kurtarma noktaları gösterilir Takvim üzerinde kalın. Tarih ve saat için kullanmak istediğiniz kurtarma noktasını seçin.
+Yedekleme sunucusu bilgisayarında kurtarma çalıştırın:
 
-3.  Üzerinde **kurtarma türünü seçin** sayfasında **bir ağ klasörüne kopyala.**
+1. **Kurtarma** bölmesinde, kurtarmak istediğiniz bilgisayarı bulun ve **tam kurtarma**' yı seçin.
 
-4.  Üzerinde **hedefi belirtin** verileri kopyalamak istediğiniz sayfasında, seçin. Seçilen hedefin, yeterli alana sahip olması gerektiğini unutmayın. Yeni bir klasör oluşturmanızı öneririz.
+2. Kullanılabilir kurtarma noktaları, takvimde kalın olarak gösterilir. Kullanmak istediğiniz kurtarma noktasının tarihini ve saatini seçin.
 
-5.  Üzerinde **kurtarma seçeneklerini belirtin** sayfasında, uygulanacak güvenlik ayarlarını seçin. Ardından, depolama alanı ağı (SAN) kullanmak isteyip istemediğinizi seçin-daha hızlı kurtarma için donanım anlık görüntülerini alarak. (Yalnızca bir SAN ile sağlanan bu işlevsellik ve özelliği oluşturma ve kopyayı bölme yazılabilir yapmak için varsa, bu bir seçenektir. Ayrıca, korumalı bilgisayar ve Backup sunucusu bilgisayar aynı ağa bağlanması gerekir.)
+3. **Kurtarma türünü seçin** sayfasında **bir ağ klasörüne kopyala** ' yı seçin.
 
-6.  Bildirim seçeneklerini ayarlayın. Üzerinde **onay** sayfasında **kurtarmak**.
+4. **Hedef belirtin** sayfasında, verileri kopyalamak istediğiniz yeri seçin. Seçili hedefin yeterli yere sahip olması gerektiğini unutmayın. Yeni bir klasör oluşturmanızı öneririz.
 
-Paylaşım konumunu ayarlayın:
+5. **Kurtarma seçeneklerini belirtin** sayfasında, uygulanacak güvenlik ayarlarını seçin. Daha sonra, daha hızlı kurtarma için depolama alanı ağı (SAN) tabanlı donanım anlık görüntülerini kullanmak isteyip istemediğinizi seçin. (Bu, yalnızca bu işlevselliğe sahip bir SAN 'a sahipseniz ve bir kopyayı yazılabilir yapmak için bölme yeteneği olduğunda bir seçenektir. Ayrıca, korumalı bilgisayar ve yedek sunucu bilgisayarının aynı ağa bağlı olması gerekir.)
 
-1.  Geri yükleme konumunda yedeklemeyi içeren klasöre gidin.
+6. Bildirim seçeneklerini ayarlayın. **Onay** sayfasında, **kurtar**' ı seçin.
 
-2.  Böylece paylaşılan klasörün kökünün WindowsImageBackup klasörü, bir düzey WindowsImageBackup üzerindeki klasörü paylaşın. Bunu yapmazsanız, geri yükleme yedeği bulamaz. Windows Kurtarma Ortamı'nı (WinRE) kullanarak bağlanmak için doğru IP adresini ve kimlik bilgileri ile WinRE erişebileceğiniz bir paylaşım gerekir.
+Paylaşma konumunu ayarlayın:
 
-Sistem Geri yükleme:
+1. Geri yükleme konumunda, yedeği olan klasöre gidin.
 
-1.  Geri yüklediğiniz sisteme için Windows DVD'SİNİ'ı kullanarak resmi geri yüklemek istediğiniz hedef bilgisayarı başlatın.
+2. Paylaşılan klasörün kökünün WindowsImageBackup klasörü olabilmesi için WindowsImageBackup üzerindeki bir düzey klasörü paylaşabilirsiniz. Bunu yapmazsanız, geri yükleme yedeği bulamaz. Windows kurtarma ortamı 'nı (WinRE) kullanarak bağlanmak için, WinRE 'de doğru IP adresi ve kimlik bilgileriyle erişebileceğiniz bir paylaşıma ihtiyacınız vardır.
 
-2.  İlk sayfasında, dil ve yerel ayarları doğrulayın. Üzerinde **yükleme** sayfasında **Bilgisayarınızı onarın**.
+Sistemi geri yükleme:
 
-3.  Üzerinde **Sistem Kurtarma Seçenekleri** sayfasında **önceden oluşturduğunuz sistem görüntüsünü kullanarak bilgisayarınızı geri yükleyin**.
+1. Geri yüklemekte olduğunuz sistem için Windows DVD 'sini kullanarak resmi geri yüklemek istediğiniz bilgisayarı başlatın.
 
-4.  Üzerinde **bir sistem resmi yedeği seçin** sayfasında **Sistem Görüntüsü Seç** > **Gelişmiş** > **sistem görüntüsü Ara ağ üzerinde**. Bir uyarı görünürse seçin **Evet**. Gidin paylaşım yolu için kimlik bilgilerini girin ve ardından Kurtarma noktasını seçin. Bu, bu kurtarma noktasında kullanılabilir belirli yedeklemelerinize yönelik tarar. Kullanmak istediğiniz kurtarma noktasını seçin.
+2. İlk sayfada dili ve yerel ayarları doğrulayın. **Install** sayfasında, **Bilgisayarınızı onarın**' ı seçin.
 
-5.  Üzerinde **yedeklemeyi geri yükleme şeklini seçin** sayfasında **diskleri Biçimlendir ve yeniden bölümle**. Sonraki sayfada, ayarları doğrulayın. 
+3. **Sistem kurtarma seçenekleri** sayfasında, **daha önce oluşturduğunuz bir sistem görüntüsünü kullanarak bilgisayarınızı geri yükle**' yi seçin.
 
-6.  Geri yüklemeyi başlatmak için seçin **son**. Yeniden başlatma gerekiyor.
+4. **Bir sistem görüntüsü yedeklemesi seçin** sayfasında, **Gelişmiş** >  > **sistem görüntüsü Seç** ' i seçin ve **ağ üzerinde bir sistem görüntüsü arayın**. Bir uyarı görünürse **Evet**' i seçin. Paylaşma yoluna gidin, kimlik bilgilerini girin ve kurtarma noktasını seçin. Bu, kurtarma noktasında kullanılabilir olan belirli yedekleri tarar. Kullanmak istediğiniz kurtarma noktasını seçin.
 
-### <a name="restore-system-state"></a>Sistem durumu geri yükleme
+5. **Yedeklemenin nasıl geri yükleneceğini seçin** sayfasında, **Diskleri biçimlendir ve yeniden bölümle**' yı seçin. Sonraki sayfada ayarları doğrulayın.
 
-Kurtarma, yedekleme sunucusu çalıştırın:
+6. Geri yüklemeyi başlatmak için **son**' u seçin. Yeniden başlatma gerekiyor.
 
-1.  İçinde **kurtarma** bölmesinde, kurtarmak istediğiniz bilgisayar bulma ve ardından **tam kurtarma**.
+### <a name="restore-system-state"></a>Sistem durumunu geri yükle
 
-2.  Kullanılabilir kurtarma noktaları gösterilir Takvim üzerinde kalın. Tarih ve saat için kullanmak istediğiniz kurtarma noktasını seçin.
+Yedekleme sunucusunda kurtarmayı Çalıştır:
 
-3.  Üzerinde **kurtarma türünü seçin** sayfasında **bir ağ klasörüne Kopyala**.
+1. **Kurtarma** bölmesinde, kurtarmak istediğiniz bilgisayarı bulun ve **tam kurtarma**' yı seçin.
 
-4.  Üzerinde **hedefi belirtin** , verileri kopyalamak istediğiniz sayfasında, seçin. Seçilen hedefte yeterli alan olması gerektiğini unutmayın. Yeni bir klasör oluşturmanızı öneririz.
+2. Kullanılabilir kurtarma noktaları, takvimde kalın olarak gösterilir. Kullanmak istediğiniz kurtarma noktasının tarihini ve saatini seçin.
 
-5.  Üzerinde **kurtarma seçeneklerini belirtin** sayfasında, uygulanacak güvenlik ayarlarını seçin. Ardından, daha hızlı kurtarma için SAN tabanlı donanım anlık görüntüleri kullanmak isteyip istemediğinizi seçin. (Yalnızca oluşturma ve kopyayı yazılabilir yapmak için bölme bu işlevselliği ile özelliği bir SAN varsa bir seçenek budur. Ayrıca, yedekleme sunucusu ve korumalı bilgisayar aynı ağa bağlanması gerekir.)
+3. **Kurtarma türünü seçin** sayfasında **bir ağ klasörüne kopyala**' yı seçin.
 
-6.  Bildirim seçeneklerini ayarlayın. Üzerinde **onay** sayfasında **kurtarmak**.
+4. **Hedef belirtin** sayfasında, verileri kopyalamak istediğiniz yeri seçin. Seçili hedefin yeterli yere ihtiyacı olduğunu unutmayın. Yeni bir klasör oluşturmanızı öneririz.
 
-Windows Server Yedekleme çalıştırın:
+5. **Kurtarma seçeneklerini belirtin** sayfasında, uygulanacak güvenlik ayarlarını seçin. Daha sonra, daha hızlı kurtarma için SAN tabanlı donanım anlık görüntülerini kullanmak isteyip istemediğinizi seçin. (Bu, yalnızca bu işlevselliğe sahip bir SAN 'a sahipseniz ve bir kopyayı yazılabilir yapmak için bölme özelliği olan bir seçenektir. Ayrıca, korumalı bilgisayar ve yedek sunucu sunucusunun aynı ağa bağlı olması gerekir.)
 
-1.  Seçin **eylemleri** > **kurtarmak** > **bu sunucu** > **sonraki**.
+6. Bildirim seçeneklerini ayarlayın. **Onay** sayfasında, **kurtar**' ı seçin.
 
-2.  Seçin **başka bir sunucuya**seçin **konum türünü belirtin** sayfasında ve ardından **paylaşılan uzak klasör**. Kurtarma noktasını içeren klasörün yolunu girin.
+Windows Server Yedekleme Çalıştır:
 
-3.  Üzerinde **kurtarma türünü seçin** sayfasında **sistem durumu**. 
+1. **Bu sunucuya** > **kurtarmak** > **Eylemler** ' i > **İleri**' ye tıklayın.
 
-4. Üzerinde **sistem durumu kurtarma için konum seçin** sayfasında **özgün konumuna**.
+2. **Başka bir sunucu**seçin, **konum türünü belirtin** sayfasını seçin ve ardından **uzak paylaşılan klasör**' i seçin. Kurtarma noktasını içeren klasörün yolunu girin.
 
-5.  Üzerinde **onay** sayfasında **kurtarmak**. Geri yüklemeden sonra sunucuyu yeniden başlatın.
+3. **Kurtarma türünü seçin** sayfasında **sistem durumu**' nu seçin.
 
-6.  Bir komut isteminde sistem durumu geri yüklemesi de çalıştırabilirsiniz. Bunu yapmak için kurtarmak istediğiniz bilgisayarda Windows Server Yedekleme başlatın. Bir komut isteminde sürüm tanımlayıcısını almak için şunu girin: ```wbadmin get versions -backuptarget \<servername\sharename\>```
+4. **Sistem durumu kurtarma Için konum seçin** sayfasında, **orijinal konum**' u seçin.
 
-    Sistem durumu geri yüklemesi başlatmak için sürüm tanıtıcısını kullanın. Komut isteminde girin: ```wbadmin start systemstaterecovery -version:<versionidentified> -backuptarget:<servername\sharename>```
+5. **Onay** sayfasında, **kurtar**' ı seçin. Geri yüklemeden sonra sunucuyu yeniden başlatın.
 
-    Kurtarma işlemini başlatmak istediğinizi onaylayın. Komut İstemi penceresinde işlemi görebilirsiniz. Geri yükleme günlüğü oluşturulur. Geri yüklemeden sonra sunucuyu yeniden başlatın.
+6. Ayrıca sistem durumu geri yüklemesini bir komut isteminde çalıştırabilirsiniz. Bunu yapmak için, kurtarmak istediğiniz bilgisayarda Windows Server Yedekleme başlatın. Sürüm tanımlayıcısını almak için, bir komut isteminde şunu girin: ```wbadmin get versions -backuptarget \<servername\sharename\>```
 
+    Sistem durumu geri yüklemeyi başlatmak için sürüm tanımlayıcıyı kullanın. Komut isteminde şunu girin: ```wbadmin start systemstaterecovery -version:<versionidentified> -backuptarget:<servername\sharename>```
+
+    Kurtarmayı başlatmak istediğinizi onaylayın. İşlemi komut Istemi penceresinde görebilirsiniz. Geri yükleme günlüğü oluşturulur. Geri yüklemeden sonra sunucuyu yeniden başlatın.

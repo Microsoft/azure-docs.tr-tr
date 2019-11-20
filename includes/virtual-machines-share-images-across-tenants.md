@@ -8,57 +8,57 @@ ms.topic: include
 ms.date: 04/25/2019
 ms.author: cynthn
 ms.custom: include file
-ms.openlocfilehash: 499aeccdf00980eeb66ac6ee06e45267fd515143
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: f74d4cbc17e49345534a37e9e6612a36e19be295
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188335"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73903694"
 ---
-Paylaşılan resim galerileri, RBAC kullanarak paylaşım görüntüleri sağlar. Görüntüleri kiracınızdaki ve hatta kişiler, kiracınızın dışında paylaşmak için RBAC kullanabilirsiniz. Ancak, uygun ölçekte, Azure kiracınızın dışındaki görüntülerin paylaşmak istiyorsanız, paylaşımını kolaylaştırmak için bir uygulama kaydı oluşturmanız gerekir.  Bir uygulama kaydı kullanarak gibi daha karmaşık paylaşım senaryolarını etkinleştirebilirsiniz: 
+Ancak, Azure kiracınızın dışındaki görüntüleri, ölçeklendirerek paylaşmak istiyorsanız, paylaşmayı kolaylaştırmak için bir uygulama kaydı oluşturmanız gerekir.  Bir uygulama kaydının kullanılması, şunun gibi daha karmaşık paylaşım senaryolarına olanak sağlayabilir: 
 
-* Görüntüleri bir şirket başka alır ve Azure altyapı ayrı kiracılar genelinde dağıldığında paylaşılan yönetme. 
-* Azure iş ortakları, müşterilerine adına Azure altyapısını yönetme. Görüntü özelleştirme iş ortakları Kiracı içinde gerçekleştirilir, ancak altyapısı dağıtımlarını müşteri kiracısında gerçekleşir. 
-
-
-## <a name="create-the-app-registration"></a>Uygulama kaydı oluşturma
-
-Görüntü Galerisi kaynakları paylaşmak için hem de kiracılar tarafından kullanılacak bir uygulama kaydı oluşturun.
-1. Açık [uygulama kayıtları (Önizleme) Azure portalında](https://ms.portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade/quickStartType//sourceType/).    
-1. Seçin **yeni kayıt** sayfanın üst kısmındaki menüden.
-1. İçinde **adı**, türü *myGalleryApp*.
-1. İçinde **desteklenen hesap türleri**seçin **herhangi bir kuruluş dizinini ve kişisel Microsoft hesapları hesaplarında**.
-1. İçinde **yeniden yönlendirme URI'si**, türü *https://www.microsoft.com* seçip **kaydetme**. Uygulama kaydı oluşturulduktan sonra genel bakış sayfası açılır.
-1. Genel bakış sayfasında kopyalamak **uygulama (istemci) kimliği** ve daha sonra kullanmak üzere kaydetme.   
-1. Seçin **sertifikaları ve parolaları**ve ardından **yeni gizli**.
-1. İçinde **açıklama**, türü *paylaşılan görüntü Galerisi kiracılar arası uygulama gizli anahtarı*.
-1. İçinde **Expires**, varsayılan değerini bırakın **1 yıl** seçip **Ekle**.
-1. Gizli anahtar değerini kopyalayın ve güvenli bir yere kaydedin. Sayfadan çıktıktan sonra alamazsınız.
+* Bir şirket diğeri edindiğinde paylaşılan görüntüleri yönetme ve Azure altyapısı ayrı kiracılar arasında yayılır. 
+* Azure Iş ortakları, Azure altyapısını müşterileri adına yönetir. Görüntülerin özelleştirilmesi iş ortakları kiracısı içinde yapılır, ancak altyapı dağıtımları müşterinin kiracısında gerçekleşecektir. 
 
 
-Paylaşılan görüntü Galerisi kullanmak için uygulama kaydı izin verin.
-1. Azure portalında, başka bir kiracıyla paylaşmak istediğiniz paylaşılan görüntü Galerisi seçin.
-1. Seçin **erişim denetimi (IAM) seçin**, altında **rol ataması Ekle** seçin *Ekle*. 
-1. Altında **rol**seçin **okuyucu**.
-1. Altında **erişim ata:** , bu olarak bırakın **Azure AD kullanıcı, Grup veya hizmet sorumlusu**.
-1. Altında **seçin**, türü *myGalleryApp* ve listede görünür olduğunda bu seçeneği belirleyin. İşiniz bittiğinde **Kaydet**.
+## <a name="create-the-app-registration"></a>Uygulama kaydını oluşturma
+
+Görüntü Galerisi kaynaklarını paylaşmak için her iki kiracı tarafından kullanılacak bir uygulama kaydı oluşturun.
+1. [Azure portal uygulama kayıtları (Önizleme)](https://ms.portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade/quickStartType//sourceType/)öğesini açın.    
+1. Sayfanın üst kısmındaki menüden **Yeni kayıt** ' ı seçin.
+1. **Ad**alanına *myGalleryApp*yazın.
+1. **Desteklenen hesap türleri**' nde, **herhangi bir kurumsal dizin ve kişisel Microsoft hesabında hesaplar**' ı seçin.
+1. **Yeniden yönlendirme URI 'si**içinde *https://www.microsoft.com* yazın ve ardından **Kaydet**' i seçin. Uygulama kaydı oluşturulduktan sonra genel bakış sayfası açılır.
+1. Genel Bakış sayfasında, **uygulama (istemci) kimliğini** kopyalayın ve daha sonra kullanmak üzere kaydedin.   
+1. **Sertifikalar & sertifikalar**' ı seçin ve ardından **yeni istemci parolası**' nı seçin.
+1. **Açıklama**' da *paylaşılan görüntü Galerisi çapraz kiracı uygulama gizli*dizisi yazın.
+1. **Süre sonu**' nde, varsayılan değeri **1 yıl olarak** bırakın ve ardından **Ekle**' yi seçin.
+1. Gizli dizi değerini kopyalayın ve güvenli bir yere kaydedin. Sayfadan ayrıldıktan sonra bunu alamazsınız.
 
 
-## <a name="give-tenant-2-access"></a>Kiracı 2 erişimi verin
+Paylaşılan görüntü galerisini kullanmak için uygulama kaydı iznini verin.
+1. Azure portal, başka bir kiracıyla paylaşmak istediğiniz paylaşılan görüntü Galerisi ' ni seçin.
+1. **Erişim denetimi Seç (IAM)** seçeneğini belirleyin ve **rol ataması Ekle** altında *Ekle*' yi seçin. 
+1. **Rol**altında **okuyucu**' yı seçin.
+1. **Erişime ata:** ' nın altında, bunu **Azure AD kullanıcısı, Grup veya hizmet sorumlusu**olarak bırakın.
+1. **Seç**' ın altında *myGalleryApp* yazın ve listede gösterdiği zaman seçin. İşiniz bittiğinde **Kaydet**' i seçin.
 
-Kiracı 2 erişmesini uygulamaya, bir tarayıcı kullanarak bir oturum açma isteyerek sağlayın. Değiştirin *<Tenant2 ID>* , görüntü Galerisi ile paylaşmak istiyorsunuz kiracısı için Kiracı kimliği. Değiştirin *< Uygulama (istemci) kimliği >* oluşturduğunuz uygulama kaydı uygulama kimliği. Değişiklik yapmadan işiniz bittiğinde, URL'yi tarayıcıya yapıştırın ve Kiracı 2 oturum açmak için oturum açma yönergeleri izleyin.
+
+## <a name="give-tenant-2-access"></a>Kiracı 2 erişimi verme
+
+Bir tarayıcı kullanarak oturum açmayı isteyerek kiracı 2 ' ye uygulamaya erişim izni verin. *\<TENANT2 ıd >* , görüntü galerinizi paylaşmak istediğiniz KIRACıNıN kiracı kimliğiyle değiştirin. *\<uygulaması (istemci) kimliği >* , oluşturduğunuz uygulama KAYDıNıN uygulama kimliğiyle değiştirin. Değişiklikleri yapmayı tamamladığınızda, URL 'YI bir tarayıcıya yapıştırın ve kiracı 2 ' de oturum açmak için oturum açma istemlerini izleyin.
 
 ```
 https://login.microsoftonline.com/<Tenant 2 ID>/oauth2/authorize?client_id=<Application (client) ID>&response_type=code&redirect_uri=https%3A%2F%2Fwww.microsoft.com%2F 
 ```
 
-İçinde [Azure portalında](https://portal.azure.com) Kiracı 2 olarak oturum açın ve VM'yi oluşturmak istediğiniz kaynak grubunu uygulama kayıt erişim verin.
+[Azure Portal](https://portal.azure.com) kiracı 2 olarak oturum açın ve uygulama kaydını VM oluşturmak istediğiniz kaynak grubuna erişim izni verin.
 
-1. Kaynak grubunu seçin ve ardından **erişim denetimi (IAM)** . Altında **rol ataması Ekle** seçin **Ekle**. 
-1. Altında **rol**, türü **katkıda bulunan**.
-1. Altında **erişim ata:** , bu olarak bırakın **Azure AD kullanıcı, Grup veya hizmet sorumlusu**.
-1. Altında **seçin** türü *myGalleryApp* listede görünür olduğunda seçin. İşiniz bittiğinde **Kaydet**.
+1. Kaynak grubunu seçin ve ardından **erişim denetimi (IAM)** seçeneğini belirleyin. **Rol ataması Ekle** altında **Ekle**' yi seçin. 
+1. **Rol**altında **katkıda bulunan**yazın.
+1. **Erişime ata:** ' nın altında, bunu **Azure AD kullanıcısı, Grup veya hizmet sorumlusu**olarak bırakın.
+1. Tür *MyGalleryApp* **seçin** altında, listede gösterildiği zaman seçin. İşiniz bittiğinde **Kaydet**' i seçin.
 
 > [!NOTE]
-> Görüntü sürümü yerleşik ve başka bir görüntü sürümünü oluşturmak için aynı yönetilen görüntüsünü kullanabilmeniz için önce çoğaltılmış tamamen tamamlanmasını beklemeniz gerekir.
+> Farklı bir görüntü sürümü oluşturmak için aynı yönetilen görüntüyü kullanabilmeniz için görüntü sürümünün oluşturulması ve çoğaltılması tamamen bitmesini beklemeniz gerekir.
 

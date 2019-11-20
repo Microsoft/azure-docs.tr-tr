@@ -1,45 +1,45 @@
 ---
-title: Bing konuşma kimlik doğrulaması | Microsoft Docs
+title: Bing Konuşma kimlik doğrulaması | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Bing konuşma API'si kullanılacak kimlik doğrulaması isteme
+description: Bing Konuşma API'si kullanmak için kimlik doğrulaması isteyin
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 11d6256fb63452b849a80abab181876d14b3b6a6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: d1e708ff29293b87935d0d191ba44ad4a11917a0
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515051"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70965667"
 ---
-# <a name="authenticate-to-the-speech-api"></a>Konuşma tanıma API'si için kimlik doğrulaması
+# <a name="authenticate-to-the-speech-api"></a>Konuşma API 'sine kimlik doğrulama
 
 [!INCLUDE [Deprecation note](../../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Bing konuşma kullanarak kimlik doğrulamasını destekler:
+Bing Konuşma, kullanarak kimlik doğrulamasını destekler:
 
 - Abonelik anahtarı.
-- Bir yetkilendirme belirteci.
+- Yetkilendirme belirteci.
 
-## <a name="use-a-subscription-key"></a>Bir abonelik anahtarı kullanma
+## <a name="use-a-subscription-key"></a>Abonelik anahtarı kullan
 
-Konuşma hizmeti kullanmak için Bilişsel hizmetler (daha önce Project Oxford) bir parçasıdır konuşma tanıma API'sine abone olması gerekir. Ücretsiz deneme aboneliği anahtarları alabilirsiniz [Bilişsel hizmetler abonelik](https://azure.microsoft.com/try/cognitive-services/) sayfası. Konuşma tanıma API'si belirledikten sonra seçin **API anahtarı alma** anahtarını almak için. Birincil ve ikincil anahtar döndürür. İki anahtarı kullanabilmeniz için her iki anahtarı aynı kotası bağlıdır.
+Konuşma hizmetini kullanmak için önce bilişsel hizmetler 'in (daha önce Project Oxford) bir parçası olan konuşma API 'sine abone olmanız gerekir. Bilişsel [Hizmetler aboneliği](https://azure.microsoft.com/try/cognitive-services/) sayfasından ücretsiz deneme aboneliği anahtarlarına sahip olabilirsiniz. Konuşma API 'sini seçtikten sonra anahtarı almak için **API anahtarı al** ' ı seçin. Birincil ve ikincil anahtar döndürür. Her iki anahtar de aynı kotaya bağlıdır, bu nedenle her iki anahtarı da kullanabilirsiniz.
 
-Uzun süreli kullanım veya daha fazla kotaya için kaydolmaya bir [Azure hesabı](https://azure.microsoft.com/free/).
+Uzun süreli kullanım veya daha yüksek bir kota için [Azure hesabı](https://azure.microsoft.com/free/)için kaydolun.
 
-Abonelik anahtarı geçmesi gerek konuşma REST API'sini kullanmayı `Ocp-Apim-Subscription-Key` istek üstbilgisinde alan.
+Konuşma REST API kullanmak için, istek üstbilgisindeki `Ocp-Apim-Subscription-Key` alana abonelik anahtarını geçirmeniz gerekir.
 
-Ad| Biçimi| Açıklama
+Name| Biçimi| Açıklama
 ----|-------|------------
 Ocp-Apim-Subscription-Key | ASCII | YOUR_SUBSCRIPTION_KEY
 
-İstek üstbilgisi örneği verilmiştir:
+Aşağıda bir istek üst bilgisi örneği verilmiştir:
 
 ```HTTP
 POST https://speech.platform.bing.com/speech/recognition/interactive/cognitiveservices/v1?language=en-US&format=detailed HTTP/1.1
@@ -52,26 +52,26 @@ Expect: 100-continue
 ```
 
 > [!IMPORTANT]
-> Kullanırsanız [istemci kitaplıkları](../GetStarted/GetStartedClientLibraries.md) uygulamanızda abonelik anahtarınız ile yetkilendirme belirteci alabilirsiniz aşağıdaki bölümde açıklanan şekilde doğrulayın. İstemci kitaplıkları, bir yetkilendirme belirteci almanız ve ardından belirteci kimlik doğrulaması için kullanmak için abonelik anahtarını kullanın.
+> Uygulamanızda [istemci kitaplıkları](../GetStarted/GetStartedClientLibraries.md) kullanıyorsanız, aşağıdaki bölümde açıklandığı gibi, abonelik anahtarınızla yetkilendirme belirtecini almak istediğinizi doğrulayın. İstemci kitaplıkları bir yetkilendirme belirteci almak için abonelik anahtarını kullanır ve ardından kimlik doğrulaması için belirteci kullanır.
 
-## <a name="use-an-authorization-token"></a>Bir yetkilendirme belirteci kullanın
+## <a name="use-an-authorization-token"></a>Yetkilendirme belirteci kullanma
 
-Alternatif olarak, bir yetkilendirme belirteci kimlik doğrulaması için kimlik doğrulama/yetkilendirme kanıtı olarak kullanabilirsiniz. Bu belirteci almak için önce bir abonelik anahtarı konuşma tanıma API'SİNDEN açıklandığı almanız gerekir [önceki bölümde yer](#use-a-subscription-key).
+Alternatif olarak, kimlik doğrulama/yetkilendirme açısından kimlik doğrulaması için bir yetkilendirme belirteci kullanabilirsiniz. Bu belirteci almak için ilk olarak, [önceki bölümde](#use-a-subscription-key)açıklandığı gıbı konuşma API 'sinden bir abonelik anahtarı edinmeniz gerekir.
 
-### <a name="get-an-authorization-token"></a>Bir yetkilendirme belirteci alma
+### <a name="get-an-authorization-token"></a>Yetkilendirme belirteci al
 
-Geçerli abonelik anahtarı oluşturduktan sonra Bilişsel Hizmetler'in belirteç hizmetine bir POST isteği gönderin. Yanıtta bir JSON Web Token (JWT olarak) yetkilendirme belirtecini alır.
+Geçerli bir abonelik anahtarınız olduktan sonra bilişsel hizmetler 'in belirteç hizmetine bir POST isteği gönderin. Yanıtta, yetkilendirme belirtecini JSON Web Token (JWT) olarak alırsınız.
 
 > [!NOTE]
-> Belirteç, 10 dakikalık bir zaman aşımı vardır. Belirteci yenilemek için aşağıdaki bölüme bakın.
+> Belirtecin süresi 10 dakikadır. Belirteci yenilemek için aşağıdaki bölüme bakın.
 
-Belirteç hizmet URI'si şuradan ulaşabilirsiniz:
+Belirteç hizmeti URI 'SI şurada bulunur:
 
 ```
 https://api.cognitive.microsoft.com/sts/v1.0/issueToken
 ```
 
-Aşağıdaki kod örneği, bir erişim belirteci almak gösterilmektedir. Değiştirin `YOUR_SUBSCRIPTION_KEY` kendi abonelik anahtarınızla:
+Aşağıdaki kod örneği, bir erişim belirtecinin nasıl alınacağını gösterir. Kendi `YOUR_SUBSCRIPTION_KEY` abonelik anahtarınızla değiştirin:
 
 # <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -89,9 +89,9 @@ $OAuthToken
 
 ```
 
-# <a name="curltabcurl"></a>[Curl](#tab/curl)
+# <a name="curltabcurl"></a>[kıvr](#tab/curl)
 
-Bu örnek, Linux üzerinde bash ile curl kullanır. Platformunuzda bulunan kullanılabilir durumda değilse, curl yüklemeniz gerekebilir. Örnek, Windows, Git Bash, zsh ve diğer Kabukları Cygwin üzerinde de çalışır.
+Örnek, Bash ile Linux 'ta kıvrımlı kullanır. Platformda yoksa, kıvrımlı yüklemeniz gerekebilir. Örnek ayrıca Windows, git Bash, ZSH ve diğer kabukların Cygwin üzerinde de kullanılabilir.
 
 ```
 curl -v -X POST "https://api.cognitive.microsoft.com/sts/v1.0/issueToken" -H "Content-type: application/x-www-form-urlencoded" -H "Content-Length: 0" -H "Ocp-Apim-Subscription-Key: YOUR_SUBSCRIPTION_KEY"
@@ -138,7 +138,7 @@ curl -v -X POST "https://api.cognitive.microsoft.com/sts/v1.0/issueToken" -H "Co
 
 ---
 
-POST isteğinin örneği aşağıda verilmiştir:
+Aşağıda örnek bir POST isteği verilmiştir:
 
 ```HTTP
 POST https://api.cognitive.microsoft.com/sts/v1.0/issueToken HTTP/1.1
@@ -149,16 +149,16 @@ Content-Length: 0
 Connection: Keep-Alive
 ```
 
-Bir yetkilendirme belirteci Hizmeti'nden belirteç alınamıyor, abonelik anahtarınızı hala geçerli olup olmadığını denetleyin. Ücretsiz bir deneme sürümü anahtarı kullanıyorsanız, Git [Bilişsel hizmetler abonelik](https://azure.microsoft.com/try/cognitive-services/) sayfasında, ücretsiz deneme sürümü anahtarı uygulamak için kullandığınız hesabı kullanarak oturum açma ve abonelik anahtarının süresi doldu veya aşıyor denetlemek için "Oturum açma" tıklayın Kota.
+Belirteç hizmetinden bir yetkilendirme belirteci alamazsanız, abonelik anahtarınızın hala geçerli olup olmadığını denetleyin. Ücretsiz deneme anahtarı kullanıyorsanız, bilişsel [Hizmetler aboneliği](https://azure.microsoft.com/try/cognitive-services/) sayfasına gidin, ücretsiz deneme anahtarını uygulamak için kullandığınız hesabı kullanarak oturum açmak Için "oturum aç" a tıklayın ve abonelik anahtarının süresinin dolup dolmadığını veya kotayı aşıp aşmadığını denetleyin.
 
-### <a name="use-an-authorization-token-in-a-request"></a>Bir istekte bir yetkilendirme belirteci kullanın
+### <a name="use-an-authorization-token-in-a-request"></a>İstekte bir yetkilendirme belirteci kullanma
 
-Konuşma tanıma API'si çağrısı, her Yetkilendirme belirteci geçirmek gereken `Authorization` başlığı. `Authorization` Üst bilgi, bir JWT belirteç içermelidir.
+Konuşma API 'sini her çağırdığınızda, `Authorization` üstbilgideki yetkilendirme belirtecini geçirmeniz gerekir. `Authorization` Üst bilgi bir JWT erişim belirteci içermelidir.
 
-Aşağıdaki örnek konuşma REST API çağırdığınızda bir yetkilendirme belirteci kullanmayı gösterir.
+Aşağıdaki örnek, konuşma REST API çağırdığınızda bir yetkilendirme belirtecinin nasıl kullanılacağını gösterir.
 
 > [!NOTE]
-> Değiştirin `YOUR_AUDIO_FILE` ile önceden kaydedilmiş ses dosyanızın yolu. Değiştirin `YOUR_ACCESS_TOKEN` önceki adımda aldığınız yetkilendirme belirteciyle [yetkilendirme belirtecini alma](#get-an-authorization-token).
+> Değiştirin `YOUR_AUDIO_FILE` ile önceden kaydedilmiş ses dosyanızın yolu. Önceki `YOUR_ACCESS_TOKEN` adımda aldığınız yetkilendirme belirteciyle değiştirin ve [yetkilendirme belirteci alın](#get-an-authorization-token).
 
 # <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -184,7 +184,7 @@ $RecoResponse
 
 ```
 
-# <a name="curltabcurl"></a>[Curl](#tab/curl)
+# <a name="curltabcurl"></a>[kıvr](#tab/curl)
 
 ```
 curl -v -X POST "https://speech.platform.bing.com/speech/recognition/interactive/cognitiveservices/v1?language=en-us&format=detailed" -H "Transfer-Encoding: chunked" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -H "Content-type: audio/wav; codec=audio/pcm; samplerate=16000" --data-binary @YOUR_AUDIO_FILE
@@ -231,11 +231,11 @@ using (fs = new FileStream(audioFile, FileMode.Open, FileAccess.Read))
 
 ---
 
-### <a name="renew-an-authorization-token"></a>Yetkilendirme belirteci yenileme
+### <a name="renew-an-authorization-token"></a>Yetkilendirme belirtecini yenileme
 
-Yetkilendirme belirtecini, belirli bir zaman aralığına sonra (şu anda 10 dakika) süresi dolar. Süresi dolmadan önce yetkilendirme belirtecini yenilemek gerekir.
+Yetkilendirme belirtecinin süresi belirli bir süre (Şu anda 10 dakika) sonra dolar. Yetkilendirme belirtecini süresi dolmadan önce yenilemeniz gerekir.
 
-Aşağıdaki kod, C# yetkilendirme belirteci yenilemeye ilişkin örnek bir uygulamadır:
+Aşağıdaki kod, yetkilendirme belirtecinin nasıl yenileneceği C# içindeki örnek bir uygulamasıdır:
 
 ```cs
     /*

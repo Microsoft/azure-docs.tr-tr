@@ -1,59 +1,53 @@
 ---
-title: Windows için Log Analytics Aracısı sorunlarını giderme | Microsoft Docs
-description: Azure İzleyici'de Windows için Log Analytics Aracısı belirtileri, nedenleri ve en sık karşılaşılan sorunlara yönelik çözümler açıklanmaktadır.
-services: azure-monitor
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: tysonn
-ms.assetid: ''
+title: Windows için Log Analytics Aracısı sorunlarını giderme
+description: Azure Izleyici 'de Windows için Log Analytics Aracısı ile ilgili en yaygın sorunların belirtilerini, nedenlerini ve çözümlemesini açıklama.
 ms.service: azure-monitor
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 06/12/2019
+ms.subservice: ''
+ms.topic: conceptual
+author: MGoedtel
 ms.author: magoedte
-ms.openlocfilehash: afa4483677336e9a887908a8cccf9590eed27af3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 06/12/2019
+ms.openlocfilehash: 7bf0c8429eaecd6cba83872cbea5876cc0c31221
+ms.sourcegitcommit: fa5ce8924930f56bcac17f6c2a359c1a5b9660c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67120116"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73199016"
 ---
 # <a name="how-to-troubleshoot-issues-with-the-log-analytics-agent-for-windows"></a>Windows için Log Analytics Aracısı ile ilgili sorunları giderme 
 
-Bu makalede, Azure İzleyici'de Windows için Log Analytics aracısını ile karşılaşabilirsiniz ve bunların çözülmesine yönelik olası çözümler önerir hatalarını giderme hakkında Yardım sağlar.
+Bu makalede, Azure Izleyici 'de Windows için Log Analytics aracısında karşılaşabileceğiniz sorunları gidermeye yönelik yardım ve bunları çözmek için olası çözümler sunulmaktadır.
 
-Bu adımların hiçbiri işinize yaramazsa aşağıdaki Destek kanallarını da kullanılabilir:
+Bu adımlardan hiçbiri sizin için çalışmazsa, aşağıdaki destek kanalları da kullanılabilir:
 
-* Avantajları Premier Destek ile bir destek isteği açabilirsiniz [Premier](https://premier.microsoft.com/).
-* Azure destek sözleşmeleri olan müşteriler, bir destek isteği açabilirsiniz [Azure portalında](https://manage.windowsazure.com/?getsupport=true).
-* Gönderilen fikirleri ve hataları gözden geçirmek için Log Analytics geri bildirim sayfasını ziyaret edin [ https://aka.ms/opinsightsfeedback ](https://aka.ms/opinsightsfeedback) veya yeni bir dosya. 
+* Premier destek avantajlarına sahip müşteriler, [Premier](https://premier.microsoft.com/)ile bir destek isteği açabilir.
+* Azure destek sözleşmeleri olan müşteriler [Azure Portal](https://manage.windowsazure.com/?getsupport=true)bir destek talebi açabilir.
+* Gönderilen fikirleri ve hataları [https://aka.ms/opinsightsfeedback](https://aka.ms/opinsightsfeedback) veya yeni bir dosya dosyasını gözden geçirmek Için Log Analytics geri bildirim sayfasını ziyaret edin. 
 
 ## <a name="important-troubleshooting-sources"></a>Önemli sorun giderme kaynakları
 
- Windows için Log Analytics aracısını ilgili sorunları gidermeye yardımcı olmak için aracı olayları Windows olay günlüğüne, özellikle altında kaydeder *uygulama ve Services\Operations Manager*.  
+ Aracı, Windows için Log Analytics aracısıyla ilgili sorunları gidermeye yardımcı olmak üzere olayları Windows olay günlüğü 'ne özel olarak *uygulama ve Services\Operations Manager*altında günlüğe kaydeder.  
 
 ## <a name="connectivity-issues"></a>Bağlantı sorunları
 
-Aracıyı bir proxy sunucusu veya Güvenlik Duvarı iletişim kuruyorsa kısıtlamalar yerde kaynak bilgisayarı ve Azure İzleyici hizmeti iletişimi engelliyor olabilir. İletişim engellenirse, yanlış yapılandırma, ek bir çalışma alanına raporlama yapacak Aracısı Kurulum sonrası yapılandırma aracı yüklemeye çalışmadan ya da sonra başarılı kayıt aracı iletişimi başarısız bir çalışma alanı ile kayıt başarısız olabilir. Bu bölümde, bu tür bir Windows Aracısı ile ilgili sorun giderme yöntemleri açıklar. 
+Aracı bir ara sunucu veya güvenlik duvarı üzerinden iletişim kurduğundan, kaynak bilgisayardan ve Azure Izleyici hizmetinden iletişimi engelleyen kısıtlamalar olabilir. İletişim engellendiğinde, yanlış yapılandırma nedeniyle bir çalışma alanı ile kayıt, aracıyı yüklemeye çalışırken başarısız olabilir veya aracı Kurulum sonrası ek bir çalışma alanına rapor verebilir. Kayıt başarıyla kaydedildikten sonra aracı iletişimi başarısız olabilir. Bu bölümde, Windows aracısında bu tür bir sorunu gidermeye yönelik yöntemler açıklanmaktadır.
 
-Çift güvenlik duvarı veya proxy aşağıdaki bağlantı noktaları ve URL'ler aşağıdaki tabloda açıklanan izin verecek şekilde yapılandırıldığını denetleyin. Ayrıca, Azure İzleyici ve aracı arasında güvenli bir TLS kanal engelleyebilir gibi HTTP İnceleme web trafiği için etkin değil doğrulayın.  
+Güvenlik duvarının veya proxy 'nin aşağıdaki tabloda açıklanan bağlantı noktalarına ve URL 'Lere izin verecek şekilde yapılandırıldığından emin olun. Ayrıca, aracı ve Azure Izleyici arasında güvenli bir TLS kanalını engelleyebilen için HTTP incelemesini web trafiği için etkin değil olarak onaylayın.  
 
 |Aracı Kaynağı|Bağlantı Noktaları |Yön |HTTPS denetlemesini atlama|
 |------|---------|--------|--------|   
-|*.ods.opinsights.azure.com |Bağlantı noktası 443 |Giden|Evet |  
-|*.oms.opinsights.azure.com |Bağlantı noktası 443 |Giden|Evet |  
-|*.blob.core.windows.net |Bağlantı noktası 443 |Giden|Evet |  
-|*.azure-automation.net |Bağlantı noktası 443 |Giden|Evet |  
+|*.ods.opinsights.azure.com |Bağlantı noktası 443 |Giden|Yes |  
+|*.oms.opinsights.azure.com |Bağlantı noktası 443 |Giden|Yes |  
+|*.blob.core.windows.net |Bağlantı noktası 443 |Giden|Yes |  
+|*.azure-automation.net |Bağlantı noktası 443 |Giden|Yes |  
 
-Azure kamu için gerekli güvenlik duvarı için bilgi [Azure kamu Yönetimi](../../azure-government/documentation-government-services-monitoringandmanagement.md#azure-monitor-logs). 
+Azure Kamu için gereken güvenlik duvarı bilgileri için bkz. [Azure Kamu Yönetimi](../../azure-government/documentation-government-services-monitoringandmanagement.md#azure-monitor-logs). 
 
-Aracıyı Azure İzleyici ile başarıyla iletişim kurduğu, doğrulayabilirsiniz birkaç yolu vardır.
+Aracının Azure Izleyici ile başarılı bir şekilde iletişim kurduğunu doğrulayabilmeniz için birkaç yol vardır.
 
-- Etkinleştirme [Azure Log Analytics aracı sistem durumu değerlendirme](../insights/solution-agenthealth.md) çalışma. Aracı sistem durumu Panosu'nu **yanıt vermeyen aracı sayısı** hızla aracı listelenip listelenmediğini sütunu.  
+- Çalışma alanında [Azure Log Analytics Aracı durumu değerlendirmesini](../insights/solution-agenthealth.md) etkinleştirin. Aracının listelenip listelenmediğini görmek için Aracı Durumu panosundan, **yanıt vermeyen aracılar sütununun sayısını** görüntüleyin.  
 
-- Aracı çalışma alanına raporlama yapacak şekilde yapılandırılmış bir sinyal gönderen onaylamak için aşağıdaki sorguyu çalıştırın. Değiştirin <ComputerName> gerçek makine adını.
+- Aracının raporlamak üzere yapılandırıldığı çalışma alanına bir sinyal gönderdiğini doğrulamak için aşağıdaki sorguyu çalıştırın. `<ComputerName>`, makinenin gerçek adıyla değiştirin.
 
     ```
     Heartbeat 
@@ -61,36 +55,36 @@ Aracıyı Azure İzleyici ile başarıyla iletişim kurduğu, doğrulayabilirsin
     | summarize arg_max(TimeGenerated, * ) by Computer 
     ```
 
-    Bilgisayarı başarıyla hizmetiyle iletişim kurulurken, sorgu bir sonuç döndürmesi gerekir. Sorgu bir sonuç döndürmedi, ilk aracıyı doğru çalışma alanına rapor yapılandırıldığını doğrulayın. Doğru şekilde yapılandırıldıysa, 3. adımına devam etmek ve aracıyı hangi sorunu, Azure İzleyici ile iletişim kurmasını engelleyen günlüğü tanımlamak için Windows olay günlüğü arayın.
+    Bilgisayar hizmetle başarılı bir şekilde iletişim kurduğundan sorgu bir sonuç döndürmelidir. Sorgu bir sonuç döndürmezse, önce aracının doğru çalışma alanına rapor verecek şekilde yapılandırıldığını doğrulayın. Doğru yapılandırılmışsa, adım 3 ' e ilerleyin ve Windows olay günlüğü 'nde, aracının Azure Izleyici ile iletişim kurmasını önlemek için hangi sorunun günlüğe kaydedilmesine neden olduğunu belirlemek için arama yapın.
 
-- Bir bağlantı sorunu belirlemek üzere başka bir yöntem çalışıyor **TestCloudConnectivity** aracı. Aracın aracıda klasöründe varsayılan olarak yüklü *%SystemRoot%\Program Files\Microsoft Monitoring Agent\Agent*. Yükseltilmiş bir komut isteminden klasörüne gidin ve aracı çalıştırın. Aracı vurgular (örneğin, belirli bir bağlantı noktası/engellenen URL ilişkili ise) testin başarısız olduğu ve sonuçları döndürür. 
+- Bir bağlantı sorununu belirlemek için başka bir yöntem **Testcloudconnectivity aracını çalıştırmıştır** . Araç varsayılan olarak *%systemroot%\Program Files\Microsoft Monitoring sagent*klasöründe aracı ile yüklenir. Yükseltilmiş bir komut isteminden klasöre gidin ve aracı çalıştırın. Araç sonuçları ve testin başarısız olduğunu vurgular (örneğin, engellenen belirli bir bağlantı noktası/URL ile ilgiliyse). 
 
-    ![TestCloudConnection aracı yürütme sonuçları](./media/agent-windows-troubleshoot/output-testcloudconnection-tool-01.png)
+    ![TestCloudConnection Aracı yürütme sonuçları](./media/agent-windows-troubleshoot/output-testcloudconnection-tool-01.png)
 
-- Filtre *Operations Manager* olay günlüğüne göre **olay kaynakları** - *sistem durumu hizmet modülleri*, *HealthService*, ve *Hizmet Bağlayıcısı* ve filtre **olay düzeyi** *uyarı* ve *hata* , olaylarından yazılmış, onaylamak için Aşağıdaki tablo. Böyle bir durumda dahil olası her olay için çözüm adımlarını gözden geçirin.
+- *Operations Manager* olay günlüğünü **olay kaynaklarına**göre filtreleyin  - *sistem sağlığı hizmeti modüller*, *HealthService*ve *Hizmet Bağlayıcısı* ve **olay düzeyindeki** *Uyarı* ve *hata* ile filtreleme Aşağıdaki tablodan olayları yazıp yazlamayacağını onaylayın. Bunlar, olası her olay için dahil edilen çözüm adımlarını gözden geçirin.
 
-    |Olay Kimliği |source |Açıklama |Çözüm |
+    |Olay KIMLIĞI |Kaynak |Açıklama |Çözünürlük |
     |---------|-------|------------|-----------|
-    |2133 & 2129 |Sistem sağlığı hizmeti |Hizmet Aracısı'ndan bağlantısı başarısız oldu |Aracıyı doğrudan veya Azure İzleyici hizmeti bir güvenlik duvarı/Ara sunucu üzerinden iletişim kurduğunda bu hata oluşabilir. Aracı proxy ayarları veya ağ güvenlik duvarı/proxy hizmeti bilgisayardan gelen TCP trafiğine izin verdiğini doğrulayın.|
-    |2138 |Sistem durumu hizmet modülleri |Proxy kimlik doğrulaması gerektiriyor |Aracı proxy ayarlarını yapılandırın ve proxy sunucusu ile kimlik doğrulamak için gereken kullanıcı adı/parola belirtin. |
-    |2129 |Sistem durumu hizmet modülleri |Başarısız bağlantı/başarısız SSL anlaşması |Ağ bağdaştırıcısının TCP/IP ayarlarını ve aracı proxy ayarlarını denetleyin.|
-    |2127 |Sistem durumu hizmet modülleri |Veri gönderme başarısız oldu, hata kodu alındı |Yalnızca bir gün boyunca düzenli aralıklarla gerçekleşir, yalnızca göz ardı edilebilir rastgele bir anomali olabilir. Ne kadar sıklıkla olduğunu anlamak için izleyin. Gün boyunca sık sık olursa, ağ yapılandırması ve proxy ayarlarını denetleyin. HTTP hata kodu 404 tanım içerir ve aracı hizmete veri göndermeye ilk kez ise, bir iç 404 hata kodlu bir 500 hata içerir. 404 bulunamadı, yeni bir çalışma alanı için depolama alanı yine sağlanıyor gösteren anlamına gelir. Sonraki yeniden deneme sırasında başarıyla çalışma alanına veri, beklenen şekilde yazılacaktır. Bir HTTP Hata 403 izni veya kimlik bilgilerini sorunu gösterebilir. Sorunu gidermeye yardımcı olmak için 403 hatası dahil daha fazla bilgi bulunmaktadır.|
-    |4000 |Hizmet Bağlayıcısı |DNS ad çözümlemesi başarısız oldu |Makine, veri hizmetine gönderirken kullanılan Internet adresi çözümlenemedi. DNS Çözümleyicisi ayarları makinenizi, yanlış proxy ayarlarını veya belki de geçici bir DNS sorununun sağlayıcınızla kaynaklanıyor olabilir. Düzenli aralıklarla olursa, geçici bir ağ ile ilgili sorun tarafından kaynaklanabilir.|
-    |4001 |Hizmet Bağlayıcısı |Hizmet bağlantısı başarısız oldu. |Aracıyı doğrudan veya Azure İzleyici hizmeti bir güvenlik duvarı/Ara sunucu üzerinden iletişim kurduğunda bu hata oluşabilir. Aracı proxy ayarları veya ağ güvenlik duvarı/proxy hizmeti bilgisayardan gelen TCP trafiğine izin verdiğini doğrulayın.|
-    |4002 |Hizmet Bağlayıcısı |Hizmet bir sorguya yanıt olarak HTTP durum kodu 403 döndürdü. Sistem durumu hizmetinin hizmet yöneticisine danışın. Sorgu daha sonra yeniden denenecek. |Bu hata, aracının ilk kayıt aşamasında yazılır ve aşağıdakine benzer bir URL görürsünüz: *https://<workspaceID>.oms.opinsights.azure.com/AgentService.svc/AgentTopologyRequest*. Bir hata kodu 403 anlamına gelir Yasak ve yanlış yazılan çalışma alanı kimliği veya anahtarı tarafından kaynaklanabilir veya veri ve zaman, bu bilgisayarda yanlış. Saati geçerli saatten 15 dakika +/-ise, ardından ekleme başarısız olur. Bunu düzeltmek için tarih ve/veya Windows bilgisayarınız saat dilimini güncelleştirin.|
+    |2133 & 2129 |Sistem Sağlığı Hizmeti |Aracıdan hizmetle bağlantı kurulamadı |Bu hata, aracı doğrudan veya bir güvenlik duvarı/ara sunucu aracılığıyla Azure Izleyici hizmetine iletişim kuramadığınızda ortaya çıkabilir. Aracı ara sunucu ayarlarını doğrulayın veya ağ güvenlik duvarının/proxy 'sinin bilgisayardan hizmete TCP trafiğine izin verdiğini doğrulayın.|
+    |2138 |Sistem Sağlığı Hizmeti modüller |Proxy kimlik doğrulaması gerektiriyor |Aracı proxy ayarlarını yapılandırın ve proxy sunucu ile kimlik doğrulamak için gereken kullanıcı adını/parolayı belirtin. |
+    |2129 |Sistem Sağlığı Hizmeti modüller |Bağlantı başarısız oldu/SSL anlaşması |Ağ bağdaştırıcınızın TCP/IP ayarları ve aracı ara sunucu ayarlarını kontrol edin.|
+    |2127 |Sistem Sağlığı Hizmeti modüller |Veri göndermede hata kodu alındı |Yalnızca gün boyunca düzenli olarak gerçekleşdiğinde, yok sayılacak bir yalnızca rastgele bir anomali olabilir. Ne sıklıkta gerçekleştiğini anlamak için izleyin. Gün boyunca sıklıkla gerçekleşmezse, önce ağ yapılandırmanızı ve ara sunucu ayarlarını kontrol edin. Açıklama HTTP hata kodu 404 ' ü içeriyorsa ve Aracı, hizmete veri göndermeyi ilk kez denediğinde, iç 404 hata koduna sahip bir 500 hatası olur. 404, yeni çalışma alanı için depolama alanının sağlanmakta olduğunu belirten, bulunamadı anlamına gelir. Bir sonraki yeniden denendiğinde, veriler çalışma alanına beklendiği gibi başarıyla yazar. HTTP Hatası 403, izin veya kimlik bilgileri sorununu gösterebilir. Sorunu gidermeye yardımcı olmak için 403 hatasına daha fazla bilgi dahildir.|
+    |4000 |Hizmet Bağlayıcısı |DNS ad çözümlemesi başarısız oldu |Makine, hizmete veri gönderilirken kullanılan Internet adresini çözümleyemedi. Bu, makinenizde DNS çözümleyici ayarları, yanlış ara sunucu ayarları veya sağlayıcınızda geçici bir DNS sorunu olabilir. Düzenli aralıklarla gerçekleşirse, ağla ilgili geçici bir sorundan kaynaklanabilir.|
+    |4001 |Hizmet Bağlayıcısı |Hizmetle bağlantı kurulamadı. |Bu hata, aracı doğrudan veya bir güvenlik duvarı/ara sunucu aracılığıyla Azure Izleyici hizmetine iletişim kuramadığınızda ortaya çıkabilir. Aracı ara sunucu ayarlarını doğrulayın veya ağ güvenlik duvarının/proxy 'sinin bilgisayardan hizmete TCP trafiğine izin verdiğini doğrulayın.|
+    |4002 |Hizmet Bağlayıcısı |Hizmet, bir sorguya yanıt olarak 403 HTTP durum kodunu döndürdü. Hizmetin sistem durumu için Hizmet Yöneticisi ile görüşün. Sorgu daha sonra yeniden denenecek. |Bu hata aracının ilk kayıt aşamasında yazılır ve aşağıdakine benzer bir URL görürsünüz: *https://\<Çalışma alanı kimliği >. OMS. OpInsights. Azure. com/AgentService. svc/AgentTopologyRequest*. 403 hata kodu yasak anlamına gelir ve yanlış yazılmış bir çalışma alanı KIMLIĞI veya anahtarından kaynaklanabilir ya da veri ve saat bilgisayarda yanlış olur. Süre geçerli zamandan +/-15 dakika ise, ekleme başarısız olur. Bunu düzeltmek için, Windows bilgisayarınızın tarihini ve/veya saat dilimini güncelleştirin.|
 
 ## <a name="data-collection-issues"></a>Veri toplama sorunları
 
-Aracı yüklendikten sonra raporlar, yapılandırılan çalışma alanına veya çalışma alanları, yapılandırma, toplama veya iletme performansı, günlükleri veya diğer verileri etkin olup olmadığına bağlı olarak hizmete alma ve bilgisayarı hedefleyen durdurabilir. Belirlemek gereklidir:
+Aracı yüklendikten ve yapılandırılan çalışma alanına ya da çalışma alanlarına rapor ettikten sonra, etkin olan ve bilgisayar hedefleme ayarlarına bağlı olarak, yapılandırmayı ve performansı, günlükleri veya diğer verileri hizmete almayı durdurabilir. Şunları öğrenmek gereklidir:
 
-- Bu, belirli bir veri türüne veya çalışma alanında kullanılabilir olmayan tüm verileri mi?
-- Bir çözüm tarafından belirtilen ya da çalışma verisi toplama yapılandırması bir parçası olarak belirtilen veri türü?
-- Kaç bilgisayar etkilendi? Bu, tek bir veya birden çok bilgisayar çalışma alanına raporlama mi?
-- Çalışır durumda olan ve günün belirli bir zamanda durdu veya toplanan olmamıştı? 
-- Kullanmakta olduğunuz günlük arama sorgusu sözdizimsel olarak doğru mu? 
-- Aracı, Azure İzleyici'den hiç olmadığı kadar yapılandırmasıyla aldı?
+- Bu, belirli bir veri türü veya çalışma alanında kullanılamayan tüm veriler mi?
+- Veri türü bir çözüm tarafından belirtilmiş veya çalışma alanı veri koleksiyonu yapılandırmasının parçası olarak belirtilmiş mi?
+- Kaç bilgisayar etkileniyor? Bu, çalışma alanına rapor veren tek veya birden çok bilgisayar mı?
+- Çalışıyor mu, günün belirli bir saatinde mi duruyor, yoksa hiç toplanmadı mi? 
+- Günlük arama sorgusu, sözdizimsel olarak doğru mı kullanıyorsunuz? 
+- Aracı, Azure Izleyici 'nin yapılandırmasını hiç aldı mı?
 
-Sorun giderme ilk adımı, bilgisayar bir sinyal olay gönderiyor belirlemektir.
+Sorun gidermenin ilk adımı, bilgisayarın bir sinyal olayı gönderdiğini belirlemektir.
 
 ```
 Heartbeat 
@@ -98,18 +92,18 @@ Heartbeat
     | summarize arg_max(TimeGenerated, * ) by Computer
 ```
 
-Sorgu sonuçları döndürürse, belirli bir veri türüne değil toplanan ve hizmete iletildi olmadığını belirlemeniz gerekir. Bu hizmeti veya aracı normal çalışmasını engelleyen başka bir belirti güncelleştirilmiş yapılandırmayı almak aracısı tarafından kaynaklanabilir. Daha fazla sorun giderme için aşağıdaki adımları gerçekleştirin.
+Sorgu sonuçları döndürürse, belirli bir veri türünün toplanmadığını ve hizmete iletilip iletilmeyeceğini belirlemeniz gerekir. Bunun nedeni, aracının hizmetten güncelleştirilmiş yapılandırmayı almamasından veya aracının normal şekilde çalıştırılmasını engellediği başka bir belirtiyle kaynaklanıyor olabilir. Daha fazla sorun gidermek için aşağıdaki adımları gerçekleştirin.
 
-1. Bilgisayarda yükseltilmiş bir komut istemi açın ve yazarak aracı hizmetini yeniden başlatmanız `net stop healthservice && net start healthservice`.
-2. Açık *Operations Manager* olay günlüğü ve arama **olay kimlikleri** *7023, 7024, 7025, 7028* ve *1210* gelen **olay Kaynak** *HealthService*.  Bu olaylar, aracıyı Azure İzleyici'deki yapılandırma başarıyla alıyor ve etkin olarak bilgisayarı izlemeye gösterir. Olay Kimliği 1210 son da belirteceksiniz olay açıklamasında tüm çözümler ve aracıda izleme kapsamını dahil edilen İçgörüler satır.  
+1. Bilgisayarda yükseltilmiş bir komut istemi açın ve `net stop healthservice && net start healthservice` yazarak aracı hizmetini yeniden başlatın.
+2. *Operations Manager* olay günlüğünü açın ve olay **kaynağı** *healthservice*'ten *7023, 7024, 7025, 7028* ve *1210* **olay kimliklerini** arayın.  Bu olaylar, aracının Azure Izleyici 'den başarıyla yapılandırmayı aldığını ve bilgisayarı etkin bir şekilde izliyor olduğunu gösterir. Olay KIMLIĞI 1210 için olay açıklaması, aracıdaki izleme kapsamına dahil edilen tüm çözümlerin ve öngörülerin son satırına da dahil edilir.  
 
-    ![Olay Kimliği 1210 açıklaması](./media/agent-windows-troubleshoot/event-id-1210-healthservice-01.png)
+    ![Olay KIMLIĞI 1210 açıklaması](./media/agent-windows-troubleshoot/event-id-1210-healthservice-01.png)
 
-3. Birkaç dakika sonra beklenen verileri Görselleştirme ve sorgu sonuçlarını görmüyorsanız, eğer bağlı olarak bir çözüm ya da Öngörülere verilerden gelen görüntülediğiniz *Operations Manager* olay günlüğü, arama **olay Kaynakları** *HealthService* ve *sistem durumu hizmet modülleri* ve filtre **olay düzeyi** *uyarı* ve *Hata* olayları aşağıdaki tablodan yazılmış, onaylamak için.
+3. Birkaç dakika sonra sorgu sonuçlarında veya görselleştirmede beklenen verileri görmenizin ne olduğuna bağlı olarak, *Operations Manager* olay günlüğünden **olay kaynakları** sistem durumu hizmeti ' ni arayın.Ayrıca, *modüller sistem sağlığı hizmeti* ve **Olay düzeyi** *uyarısı* ile filtreleyip aşağıdaki tablodan *olayları yazıp* yazamadığına emin olun.
 
-    |Olay Kimliği |source |Açıklama |Çözüm |
+    |Olay KIMLIĞI |Kaynak |Açıklama |Çözünürlük |
     |---------|-------|------------|
-    |8000 |HealthService |Bu olay, bir iş akışı ilişkilidir, performans için olay veya toplanan diğer veri türleri için çalışma alanına alımı hizmetini iletemiyor belirteceksiniz. | Olay Kimliği 2136 HealthService bu olay ile birlikte yazılır ve aracıyı belirtebilir kaynağından proxy ve kimlik doğrulama ayarları, ağ kesintisi veya ağ güvenlik duvarı yanlış yapılandırılması nedeniyle muhtemelen hizmetiyle iletişim kuramadı / Proxy hizmetine bilgisayardan gelen TCP trafiğine izin vermez.| 
-    |10102 ve 10103 |Sistem durumu hizmet modülleri |İş akışı veri kaynağı çözümlenemedi. |Belirtilen performans sayacı örneği bilgisayarda mevcut değil veya yanlış çalışma alanı veri ayarlarında tanımlanır varsa bu durum oluşabilir. Bu kullanıcı tarafından belirtilen ise [performans sayacı](data-sources-performance-counters.md#configuring-performance-counters), belirtilen bilgileri doğru biçimde aşağıdaki doğrulayın ve hedef bilgisayarlarda bulunmaktadır. |
-    |26002 |Sistem durumu hizmet modülleri |İş akışı veri kaynağı çözümlenemedi. |Belirtilen Windows olay günlüğü bilgisayarda mevcut değilse bu durum oluşabilir. Bu kullanıcı tarafından belirtilen, aksi takdirde kayıtlı bu olay günlüğü için bilgisayar görülmüyorsa bu hata güvenle yoksayılabilir [olay günlüğü](data-sources-windows-events.md#configuring-windows-event-logs), belirttiğiniz bilgilerin doğru olduğunu doğrulayın. |
+    |8000 |HealthService |Bu olay, performans, olay veya toplanan diğer veri türüyle ilgili bir iş akışının, çalışma alanına alma için hizmete iletilememesine yönelik olduğunu belirtir. | Kaynak HealthService 'ten olay KIMLIĞI 2136, bu olayla birlikte yazılır ve aracının, büyük olasılıkla proxy ve kimlik doğrulama ayarları, ağ kesintisi veya ağ güvenlik duvarının yanlış yapılandırılması nedeniyle hizmetin hizmetle iletişim kuramadığını belirtebilir. Proxy, bilgisayardan hizmete TCP trafiğine izin vermez.| 
+    |10102 ve 10103 |Sistem Sağlığı Hizmeti modüller |İş akışı veri kaynağını çözümleyemedi. |Bu durum, belirtilen performans sayacı veya örneği bilgisayarda yoksa veya çalışma alanı veri ayarları 'nda yanlış tanımlanmışsa oluşabilir. Bu, Kullanıcı tarafından belirtilen bir [performans sayacıdır](data-sources-performance-counters.md#configuring-performance-counters), belirtilen bilgilerin doğru biçimi takip ettiğini ve hedef bilgisayarlarda mevcut olduğunu doğrulayın. |
+    |26002 |Sistem Sağlığı Hizmeti modüller |İş akışı veri kaynağını çözümleyemedi. |Belirtilen Windows olay günlüğü bilgisayarda yoksa bu durum oluşabilir. Bu hata, bilgisayarın bu olay günlüğünün kayıtlı olması beklenmiyorsa güvenli bir şekilde yoksayılabilir, aksi takdirde Kullanıcı tarafından belirtilen bir [olay günlüğü](data-sources-windows-events.md#configuring-windows-event-logs)ise, belirtilen bilgilerin doğru olduğundan emin olun. |
 

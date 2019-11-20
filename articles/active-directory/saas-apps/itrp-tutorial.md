@@ -15,12 +15,12 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: jeedes
-ms.openlocfilehash: c3be09c998399cdca886f207bf5fc621bf51d8dd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d44391624e29d2bdd182bb07452e0e8def2d1407
+ms.sourcegitcommit: cf438e4b4e351b64fd0320bf17cc02489e61406a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67099594"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67656687"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-itrp"></a>Öğretici: ITRP ile Azure Active Directory Tümleştirme
 
@@ -153,9 +153,9 @@ Azure AD çoklu oturum açma ile ITRP yapılandırmak için şu adımları uygul
 
     1. **Etkin**’i seçin.
 
-    1. İçinde **uzak oturum kapatma URL'si** kutusu, yapıştırma **oturum kapatma URL'si** Azure portaldan kopyaladığınız değeri.
+    1. İçinde **uzak oturum kapatma URL'si** kutusu, yapıştırma **oturum kapatma URL'si** Azure portaldan kopyaladığınız değeri.
 
-    1. İçinde **SAML SSO URL** kutusu, yapıştırma **oturum açma URL'si** Azure portaldan kopyaladığınız değeri.
+    1. İçinde **SAML SSO URL** kutusu, yapıştırma **oturum açma URL'si** Azure portaldan kopyaladığınız değeri.
 
     1. İçinde **sertifika parmak izi** kutusu, yapıştırma **parmak izi** Azure portaldan kopyaladığınız sertifika değeri.
 

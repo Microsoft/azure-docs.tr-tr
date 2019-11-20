@@ -1,24 +1,23 @@
 ---
-title: "Hızlı Başlangıç: Azure Data Lake depolama Gen2 verileri yönetmek için Azure Depolama Gezgini'ni kullanma "
-description: Bu hızlı başlangıçta, Azure Depolama Gezgini bir Azure Data Lake depolama Gen2 hesabı hem de bir dizin ve dosya bir dosya sistemi oluşturmak için kullanmayı öğrenin. Ardından, dosyayı yerel bilgisayarınıza indirmek nasıl yanı sıra, bir dizindeki tüm dosyayı görüntüleme öğrenin.
-services: storage
+title: Azure Data Lake Storage 2. verileri yönetmek için Azure Depolama Gezgini kullanma
+description: Bu hızlı başlangıçta, bir Azure Data Lake Storage 2. hesabında bir kapsayıcı oluşturmak için Azure Depolama Gezgini kullanmayı ve bir dizin ve bir dosyayı öğrenirsiniz. Ardından, dosyanın yerel bilgisayarınıza nasıl indirileceği ve tüm dosyanın bir dizinde nasıl görüntüleneceği hakkında bilgi edineceksiniz.
 author: normesta
 ms.subservice: data-lake-storage-gen2
-ms.custom: mvc
 ms.service: storage
-ms.topic: quickstart
-ms.date: 12/05/2018
+ms.topic: conceptual
+ms.date: 07/19/2019
 ms.author: normesta
-ms.openlocfilehash: 01743eb7ec7f6650a0fd28fd9c4f090bebd524b3
-ms.sourcegitcommit: c53a800d6c2e5baad800c1247dce94bdbf2ad324
+ms.reviewer: stewu
+ms.openlocfilehash: 95d7a58c8188e8c6633f6be50af608aed437edff
+ms.sourcegitcommit: 007ee4ac1c64810632754d9db2277663a138f9c4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/30/2019
-ms.locfileid: "64939354"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "69991413"
 ---
-# <a name="quickstart-use-azure-storage-explorer-to-manage-data-in-an-azure-data-lake-storage-gen2-account"></a>Hızlı Başlangıç: Bir Azure Data Lake depolama Gen2 hesabındaki verileri yönetmek için Azure Depolama Gezgini'ni kullanma
+# <a name="use-azure-storage-explorer-to-manage-data-in-an-azure-data-lake-storage-gen2-account"></a>Azure Data Lake Storage 2. hesabındaki verileri yönetmek için Azure Depolama Gezgini kullanma
 
-Bu hızlı başlangıçta nasıl kullanılacağını öğrenin [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) bir dizin ve blob oluşturmak için. Ardından, nasıl blob yerel bilgisayarınıza indirin ve tüm blobların bir dizinde görüntüleme öğrenin. Ayrıca bir blobun anlık görüntüsünü oluşturma, dizin erişim ilkelerini yönetmenize ve paylaşılan erişim imzası oluşturma hakkında bilgi edinin.
+Bu hızlı başlangıçta, [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) kullanarak dizin ve BLOB oluşturma hakkında bilgi edineceksiniz. Ardından, Blobun yerel bilgisayarınıza nasıl indirileceği ve bir dizindeki tüm Blobların nasıl görüntüleneceği hakkında bilgi edineceksiniz. Ayrıca, bir Blobun anlık görüntüsünü oluşturmayı, Dizin erişim ilkelerini yönetmeyi ve paylaşılan erişim imzası oluşturmayı öğreneceksiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -26,13 +25,13 @@ Bu hızlı başlangıçta nasıl kullanılacağını öğrenin [Azure Depolama G
 
 Bu hızlı başlangıç Azure Depolama Gezgini'ni yüklemenizi gerektirir. Windows, Macintosh veya Linux işletim sisteminde Azure Depolama Gezgini’ni yüklemek için bkz. [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/).
 
-## <a name="sign-in-to-storage-explorer"></a>Depolama Gezgini için oturum açın
+## <a name="sign-in-to-storage-explorer"></a>Depolama Gezgini oturum açın
 
-Uygulamayı ilk kez başlattığınızda **Microsoft Azure Depolama Gezgini - Bağlan** penceresi görüntülenir. Depolama Gezgini depolama hesaplarına bağlamak için birçok yol sağlar ancak yalnızca bir yolu şu anda ACL'leri yönetmek için desteklenir.
+Uygulamayı ilk kez başlattığınızda **Microsoft Azure Depolama Gezgini - Bağlan** penceresi görüntülenir. Depolama Gezgini depolama hesaplarına bağlanmak için çeşitli yollar sağladığından, ACL 'Leri yönetmek için şu anda yalnızca bir yol desteklenir.
 
 |Görev|Amaç|
 |---|---|
-|Azure Hesabı ekleme | Azure'da kimlik doğrulaması gerçekleştirmek için kuruluşunuzun oturum açma sayfasını açar. Yönetme ve ACL'ler ayarlamak istiyorsanız şu anda bu tek desteklenen kimlik doğrulama yöntemidir. |
+|Azure Hesabı ekleme | Azure'da kimlik doğrulaması gerçekleştirmek için kuruluşunuzun oturum açma sayfasını açar. ACL 'Leri yönetmek ve ayarlamak istiyorsanız şu anda desteklenen tek kimlik doğrulama yöntemidir. |
 
 **Azure Hesabı Ekle**'yi seçip **Oturum açın**'a tıklayın. Azure hesabınızda oturum açmak için ekrandaki talimatları izleyin.
 
@@ -42,35 +41,35 @@ Bağlantı kurulduğunda Azure Depolama Gezgini yüklenir ve **Gezgin** sekmesi 
 
 ![Microsoft Azure Depolama Gezgini - Bağlan penceresi](media/storage-quickstart-blobs-storage-explorer/mainpage.png)
 
-## <a name="create-a-file-system"></a>Bir dosya sistemi oluşturun
+## <a name="create-a-container"></a>Bir kapsayıcı oluşturma
 
-Bloblar her zaman bir dizine yüklenir. Bu, blob gruplarını bilgisayarınızdaki dosyaları klasörler halinde düzenlediğiniz gibi düzenleyebilmenizi sağlar.
+Blob 'lar her zaman bir dizine yüklenir. Bu, blob gruplarını bilgisayarınızdaki dosyaları klasörler halinde düzenlediğiniz gibi düzenleyebilmenizi sağlar.
 
-Bir dizin oluşturmak için önceki adımda oluşturduğunuz depolama hesabını genişletin. Seçin **Blob kapsayıcısı**seçin ve sağ tıklatıp **oluşturma Blob kapsayıcısı**. Dosya sistemi için bir ad girin. İşlem tamamlandığında basın **Enter** dosya sistemi oluşturmak için. Blob dizini başarıyla oluşturulduktan sonra altında gösterilir **Blob kapsayıcısı** seçili depolama hesabı için bir klasör.
+Bir dizin oluşturmak için, devam adımında oluşturduğunuz depolama hesabını genişletin. **BLOB kapsayıcısı**' nı seçin, sağ tıklayın ve **BLOB kapsayıcısı oluştur**' u seçin. Kapsayıcının adını girin. Tamamlandığında, kapsayıcıyı oluşturmak için **ENTER** tuşuna basın. Blob dizini başarıyla oluşturulduktan sonra, seçili depolama hesabı için **BLOB kapsayıcısı** klasörü altında görüntülenir.
 
-![Microsoft Azure Depolama Gezgini - bir dosya sistemi oluşturma](media/storage-quickstart-blobs-storage-explorer/creating-a-filesystem.png)
+![Microsoft Azure Depolama Gezgini-kapsayıcı oluşturma](media/storage-quickstart-blobs-storage-explorer/creating-a-filesystem.png)
 
-## <a name="upload-blobs-to-the-directory"></a>Dizine blobları karşıya yüklemek
+## <a name="upload-blobs-to-the-directory"></a>Blob 'ları dizine yükleme
 
 Blob depolama blok blobları, ekleme bloblarını ve sayfa bloblarını destekler. IaaS VM’lerini yedeklemek için kullanılan VHD dosyaları sayfa bloblarıdır. Ekleme blobları, bir dosyaya yazıp daha sonradan daha fazla bilgi eklemek istediğiniz durumlarda günlüğe kaydetme için kullanılır. Blob depolamada depolanan çoğu dosya blok blobudur.
 
-Dizin Şerit üzerinde seçin **karşıya**. Bu işlemi kullanarak klasör veya dosya yükleyebilirsiniz.
+Dizin şeridinde **karşıya yükle**' yi seçin. Bu işlemi kullanarak klasör veya dosya yükleyebilirsiniz.
 
 Yüklenecek dosyaları veya klasörü seçin. **Blob türü**'nü seçin. **Ekleme**, **Sayfa** veya **Blok** bloblarını seçebilirsiniz.
 
 .vhd veya .vhdx dosyası yüklüyorsanız **.vhd/.vhdx dosyalarını sayfa blobları olarak yükle (önerilen)** seçeneğini belirleyin.
 
-İçinde **karşıya yükleme (isteğe bağlı) klasörü** dosyaları depolamak için bir klasör adı veya dizin altında klasörlerin alan. Hiçbir klasör seçilmezse dosyalar doğrudan dizininin altına yüklenir.
+**Klasöre yükle (isteğe bağlı)** alanına, dosya veya klasörleri dizin altındaki bir klasöre depolamak için bir klasör adı. Klasör seçili değilse, dosyalar doğrudan dizinin altına yüklenir.
 
 ![Microsoft Azure Depolama Gezgini - blob yükleme](media/storage-quickstart-blobs-storage-explorer/uploadblob.png)
 
 **Tamam**'ı seçtiğinizde dosyalar yüklenmek üzere kuyruğa alınır ve tüm dosyalar yüklenir. Yükleme işlemi tamamlandığında sonuçlar **Etkinlikler** penceresinde gösterilir.
 
-## <a name="view-blobs-in-a-directory"></a>Bir dizin blob'larda görüntüle
+## <a name="view-blobs-in-a-directory"></a>Blob 'ları bir dizinde görüntüleme
 
-İçinde **Azure Depolama Gezgini** uygulama dizininin altında bir depolama hesabı seçin. Ana bölmede, Seçili dizinde blobların listesi gösterilir.
+**Azure Depolama Gezgini** uygulamasında, depolama hesabı altında bir dizin seçin. Ana bölmede, seçili dizindeki Blobların bir listesi gösterilir.
 
-![Microsoft Azure Depolama Gezgini - bir dizin içindeki blobları listeleme](media/storage-quickstart-blobs-storage-explorer/listblobs.png)
+![Bir dizindeki Microsoft Azure Depolama Gezgini Blobları listeleme](media/storage-quickstart-blobs-storage-explorer/listblobs.png)
 
 ## <a name="download-blobs"></a>Blob’ları indirme
 
@@ -78,7 +77,7 @@ Yüklenecek dosyaları veya klasörü seçin. **Blob türü**'nü seçin. **Ekle
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, dosyaları **Azure Depolama Gezgini** kullanarak yerel bir disk ve Azure Blob depolama arasında aktarmayı öğrendiniz. ACL, dosyaları ve dizinleri ayarlama hakkında bilgi edinmek için konu ile ilgili bizim nasıl yapılır devam edin.
+Bu hızlı başlangıçta, dosyaları **Azure Depolama Gezgini** kullanarak yerel bir disk ve Azure Blob depolama arasında aktarmayı öğrendiniz. Dosyalarınızda ve dizinlerinizde ACL 'Lerin nasıl ayarlanacağı hakkında bilgi edinmek için, konudaki nasıl yapılır? konusundaki deneyimimize devam edin.
 
 > [!div class="nextstepaction"]
-> [ACL'ler dosyaları ve dizinleri ayarlama](data-lake-storage-how-to-set-permissions-storage-explorer.md)
+> [Dosyalar ve dizinler üzerinde ACL 'Ler ayarlama](data-lake-storage-how-to-set-permissions-storage-explorer.md)

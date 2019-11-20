@@ -1,30 +1,27 @@
 ---
-title: İlk data factory’nizi derleme (Visual Studio) | Microsoft Belgeleri
+title: İlk Data Factory 'nizi derleme (Visual Studio)
 description: Bu öğreticide Visual Studio kullanarak örnek bir Azure Data Factory işlem hattı oluşturursunuz.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-ms.assetid: 7398c0c9-7a03-4628-94b3-f2aaef4a72c5
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
-ms.custom: vs-azure
-ms.tgt_pltfrm: na
 ms.topic: tutorial
+ms.custom: vs-azure
 ms.date: 01/22/2018
-ms.author: shlo
-robots: noindex
-ms.openlocfilehash: 2d816ab2f14be8574f77491807d4dbd071487f42
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 888f3b1a53ba2e31195e3b9d577a475df441e972
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66164248"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73682999"
 ---
 # <a name="tutorial-create-a-data-factory-by-using-visual-studio"></a>Öğretici: Visual Studio kullanarak veri fabrikası oluşturma
 > [!div class="op_single_selector" title="Tools/SDKs"]
 > * [Genel bakış ve önkoşullar](data-factory-build-your-first-pipeline.md)
-> * [Azure portal](data-factory-build-your-first-pipeline-using-editor.md)
 > * [Visual Studio](data-factory-build-your-first-pipeline-using-vs.md)
 > * [PowerShell](data-factory-build-your-first-pipeline-using-powershell.md)
 > * [Resource Manager Şablonu](data-factory-build-your-first-pipeline-using-arm.md)
@@ -32,34 +29,34 @@ ms.locfileid: "66164248"
 
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [hızlı başlangıç: Azure Data Factory kullanarak veri fabrikası oluşturma](../quickstart-create-data-factory-dot-net.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory'nin geçerli sürümünü kullanıyorsanız [Hızlı Başlangıç: Azure Data Factory'yi kullanarak veri fabrikası oluşturma](../quickstart-create-data-factory-dot-net.md) konusunu inceleyin.
 
 Bu öğreticide Visual Studio kullanarak bir Azure veri fabrikası oluşturma ve izleme işlemi gösterilmektedir. Data Factory proje şablonunu kullanarak bir Visual Studio projesi oluşturacak, JSON biçiminde Data Factory varlıkları (bağlı hizmetler, veri kümeleri ve işlem hattı) tanımlayacak ve ardından bu varlıkları bulutta yayımlayacak/dağıtacaksınız. 
 
 Bu öğreticideki işlem hattı bir etkinlik içerir: **HDInsight Hive etkinliği**. Bu etkinlik, Azure HDInsight kümesi üzerinde çıkış verileri üretmek üzere giriş verilerini dönüştüren bir hive betiği çalıştırır. İşlem hattı, belirtilen başlangıç ve bitiş saatleri arasında ayda bir kez çalışacak şekilde zamanlanmıştır. 
 
 > [!NOTE]
-> Bu öğreticide, Azure Data Factory kullanarak verilerin nasıl kopyalanacağı gösterilmemektedir. Azure Data Factory kullanarak veri kopyalama hakkında bir öğretici için bkz. [Öğreticisi: Blob depolama alanından SQL veritabanı'na veri kopyalamak](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+> Bu öğreticide, Azure Data Factory kullanarak verilerin nasıl kopyalanacağı gösterilmemektedir. Azure Data Factory kullanarak verileri kopyalama öğreticisi için bkz. [Öğretici: Blob Depolama’dan SQL Veritabanı’na veri kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 > 
 > Bir işlem hattında birden fazla etkinlik olabilir. Bir etkinliğin çıkış veri kümesini diğer etkinliğin giriş veri kümesi olarak ayarlayarak iki etkinliği zincirleyebilir, yani bir etkinliğin diğerinden sonra çalıştırılmasını sağlayabilirsiniz. Daha fazla bilgi için bkz. [Data Factory'de zamanlama ve yürütme](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline).
 
 
-## <a name="walkthrough-create-and-publish-data-factory-entities"></a>Çözüm: Oluşturma ve Data Factory varlıklarını yayımlama
+## <a name="walkthrough-create-and-publish-data-factory-entities"></a>İzlenecek Yol: Data Factory varlıkları oluşturma ve yayımlama
 Bu izlenecek yolun bir parçası olarak gerçekleştireceğiniz adımlar şunlardır:
 
-1. İki bağlı hizmet oluşturma: **AzureStorageLinkedService1** ve **Hdınsightondemandlinkedservice1**. 
+1. İki bağlı hizmet oluşturun: **AzureStorageLinkedService1** ve **HDInsightOnDemandLinkedService1**. 
    
     Bu öğreticide, hive etkinliği için giriş ve çıkış verileri aynı Azure Blob Depolama içindedir. İsteğe bağlı HDInsight kümesini kullanarak, çıkış verileri üretmek üzere mevcut giriş verilerini işleyebilirsiniz. İsteğe bağlı HDInsight kümesi, giriş verileri işlenmeye hazır olduğunda Azure Data Factory tarafından çalışma zamanında otomatik olarak oluşturulur. Çalışma zamanında Data Factory hizmetinin veri depolarınıza veya işlemlerinize bağlanabilmesi için, bunları veri fabrikanıza bağlamanız gerekir. Bu nedenle, AzureStorageLinkedService1 kullanarak Azure Depolama Hesabınızı veri fabrikasına bağlarsınız ve HDInsightOnDemandLinkedService1 kullanarak isteğe bağlı HDInsight kümesini bağlarsınız. Yayımlama sırasında, oluşturulacak veri fabrikasının adını veya mevcut bir veri fabrikasını belirtirsiniz.  
-2. İki veri kümesi oluşturursunuz: **Inputdataset** ve **OutputDataset**, Azure blob depolamada depolanan girdi/çıktı verilerini temsil eder. 
+2. Azure blob depolama alanında depolanan giriş/çıkış verilerini temsil eden iki veri kümesi oluşturun: **InputDataset** ve **OutputDataset**. 
    
     Bu veri kümesi tanımları, önceki adımda oluşturduğunuz bağlı Azure Depolama hizmetini ifade eder. InputDataset için blob kapsayıcısını (adfgetstarted) ve giriş verileriyle birlikte blob içeren klasörü (inptutdata) belirtin. OutputDataset için blob kapsayıcısını (adfgetstarted) ve çıkış verilerini içeren klasörü (partitioneddata) belirtin. Yapı, kullanılabilirlik ve ilke gibi diğer özellikleri de belirtirsiniz.
 3. **MyFirstPipeline** adlı bir işlem hattı oluşturun. 
   
-    Bu kılavuzda, işlem hattı yalnızca bir etkinlik içerir: **HDInsight Hive etkinliği**. Bu etkinlik, isteğe bağlı bir HDInsight kümesi üzerinde hive betiği çalıştırarak çıkış verileri üretmek üzere giriş verilerini dönüştürür. Hive etkinliği hakkında daha fazla bilgi edinmek için bkz. [Hive Etkinliği](data-factory-hive-activity.md) 
+    Bu kılavuzdaki işlem hattı yalnızca bir etkinlik içerir: **HDInsight Hive Etkinliği**. Bu etkinlik, isteğe bağlı bir HDInsight kümesi üzerinde hive betiği çalıştırarak çıkış verileri üretmek üzere giriş verilerini dönüştürür. Hive etkinliği hakkında daha fazla bilgi edinmek için bkz. [Hive Etkinliği](data-factory-hive-activity.md) 
 4. **DataFactoryUsingVS** adlı bir veri fabrikası oluşturun. Veri fabrikasını ve tüm Data Factory varlıklarını (bağlı hizmetler, tablolar ve işlem hattı) dağıtın.
 5. Yayımladıktan sonra, işlem hattını izlemek için Azure portalı dikey pencereleri ile İzleme ve Yönetim Uygulamasını kullanabilirsiniz. 
   
-### <a name="prerequisites"></a>Önkoşullar
+### <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
@@ -68,7 +65,7 @@ Bu izlenecek yolun bir parçası olarak gerçekleştireceğiniz adımlar şunlar
 3. Bilgisayarınızda şunların yüklü olması gerekir:
    * Visual Studio 2013 veya Visual Studio 2015
    * Visual Studio 2013 veya Visual Studio 2015 için Azure SDK’sını indirin. [Azure İndirme Sayfası](https://azure.microsoft.com/downloads/)’na gidin ve **.NET** bölümündeki **VS 2013** veya **VS 2015**’e tıklayın.
-   * Visual Studio için en son Azure Data Factory eklentisini indirin: [VS 2013](https://visualstudiogallery.msdn.microsoft.com/754d998c-8f92-4aa7-835b-e89c8c954aa5) veya [VS 2015](https://visualstudiogallery.msdn.microsoft.com/371a4cf9-0093-40fa-b7dd-be3c74f49005). Ayrıca, aşağıdaki adımları uygulayarak eklentiyi güncelleştirebilirsiniz: Menüsünde **Araçları** -> **Uzantılar ve güncelleştirmeler** -> **çevrimiçi** -> **Visual Studio Galerisi**  ->  **Visual Studio için Microsoft Azure Data Factory Araçları** -> **güncelleştirme**.
+   * Visual Studio için en son Azure Data Factory eklentisini indirin: [VS 2013](https://visualstudiogallery.msdn.microsoft.com/754d998c-8f92-4aa7-835b-e89c8c954aa5) veya [VS 2015](https://visualstudiogallery.msdn.microsoft.com/371a4cf9-0093-40fa-b7dd-be3c74f49005). Aşağıdaki adımları uygulayarak eklentiyi güncelleştirebilirsiniz: Menüde **Araçlar** -> **Uzantılar ve Güncelleştirmeler** -> **Çevrimiçi** -> **Visual Studio Galerisi** -> **Visual Studio için Microsoft Azure Data Factory Araçları** -> **Güncelleştir**’e tıklayın.
 
 Şimdi bir Azure data factory oluşturmak için Visual Studio kullanalım.
 
@@ -82,7 +79,7 @@ Bu izlenecek yolun bir parçası olarak gerçekleştireceğiniz adımlar şunlar
     ![Çözüm Gezgini](./media/data-factory-build-your-first-pipeline-using-vs/solution-explorer.png)
 
 ### <a name="create-linked-services"></a>Bağlı hizmetler oluşturma
-Bu adımda iki bağlı hizmet oluşturursunuz: **Azure depolama** ve **HDInsight üzerine**. 
+Bu adımda iki bağlı hizmet oluşturursunuz: **Azure Depolama** ve **İsteğe bağlı HDInsight**. 
 
 Azure Depolama bağlı hizmeti, bağlantı bilgilerini sağlayarak Azure Depolama hesabınızı veri fabrikasına bağlar. Data Factory hizmeti, çalışma zamanında Azure depolamaya bağlanmak için bağlı hizmet ayarındaki bağlantı dizesini kullanır. Bu depolama alanı, işlem hattının giriş ve çıkış verilerinin yanı sıra hive etkinliği tarafından kullanılan hive betik dosyasını içerir. 
 
@@ -136,7 +133,7 @@ Azure Depolama bağlı hizmeti, bağlantı bilgilerini sağlayarak Azure Depolam
     JSON özellikleri hakkında daha fazla bilgi için [İşlem bağlı hizmetleri](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) makalesine bakın. 
 4. **HDInsightOnDemandLinkedService1.json** dosyasını kaydedin.
 
-### <a name="create-datasets"></a>Veri kümeleri oluşturma
+### <a name="create-datasets"></a>Veri kümeleri oluşturun
 Bu adımda, Hive işlenmesi için girdi ve çıktı verilerini temsil edecek veri kümeleri oluşturursunuz. Bu veri kümeleri, bu öğreticide daha önce oluşturduğunuz **AzureStorageLinkedService1** öğesine başvurur. Bağlı hizmet Azure Storage hesabını belirtirken, veri kümeleri de girdi ve çıktı verilerini tutan depolama biriminde kapsayıcı, klasör, dosya adı belirtir.   
 
 #### <a name="create-input-dataset"></a>Girdi veri kümesi oluşturma
@@ -173,7 +170,7 @@ Bu adımda, Hive işlenmesi için girdi ve çıktı verilerini temsil edecek ver
 
     Özellik | Açıklama |
     -------- | ----------- |
-    tür |Veriler Azure Blob Depolamada yer aldığından type özelliği **AzureBlob** olarak ayarlanmıştır.
+    type |Veriler Azure Blob Depolamada yer aldığından type özelliği **AzureBlob** olarak ayarlanmıştır.
     linkedServiceName | Daha önce oluşturduğunuz AzureStorageLinkedService1’i ifade eder.
     fileName |Bu özellik isteğe bağlıdır. Bu özelliği atarsanız, tüm folderPath dosyaları alınır. Bu durumda, yalnızca input.log işlenir.
     type | Günlük dosyaları metin biçiminde olduğundan TextFormat kullanacağız. |
@@ -217,7 +214,7 @@ Bu adımda, Hive işlenmesi için girdi ve çıktı verilerini temsil edecek ver
 4. **OutputDataset.json** dosyasını kaydedin.
 
 ### <a name="create-pipeline"></a>İşlem hattı oluşturma
-Şimdiye kadar, Azure Depolama bağlı hizmetinin yanı sıra giriş ve çıkış veri kümelerini oluşturdunuz. Şimdi, **HDInsightHive** etkinliğiyle bir işlem hattı oluşturacaksınız. Hive etkinliğinin **input** değeri **AzureBlobInput**, **output** değeri ise **AzureBlobOutput** olarak ayarlanır. Giriş veri kümesinin bir dilimi aylık olarak kullanılabilir (Sıklık: Ay, interval: 1) ve çıktı dilimi ayda üretilir. 
+Şimdiye kadar, Azure Depolama bağlı hizmetinin yanı sıra giriş ve çıkış veri kümelerini oluşturdunuz. Şimdi, **HDInsightHive** etkinliğiyle bir işlem hattı oluşturacaksınız. Hive etkinliğinin **input** değeri **AzureBlobInput**, **output** değeri ise **AzureBlobOutput** olarak ayarlanır. Giriş veri kümesinin bir dilimi ayda bir kez kullanılabilir (sıklık: Ay, aralık: 1), çıkış dilimi de ayda bir kez üretilir. 
 
 1. **Çözüm Gezgini**’nde **İşlem Hatları**’na sağ tıklayın, **Ekle**’nin üzerine gelip **Yeni Öğe**’ye tıklayın.
 2. Listeden **Hive Dönüşüm İşlem Hattı**’nı seçin ve **Ekle**’ye tıklayın.
@@ -278,7 +275,7 @@ Bu adımda, Hive işlenmesi için girdi ve çıktı verilerini temsil edecek ver
 
     HDInsight Hive etkinliğine özel type özelliklerinde, hangi Azure Depolama bağlı hizmetinin hive betik dosyasına sahip olduğunu, betik dosyasının yolunu ve betik dosyasının parametrelerini belirtin. 
 
-    **partitionweblogs.hql** Hive betik dosyası Azure depolama hesabında (scriptLinkedService tarafından belirtilir) ve `adfgetstarted` kapsayıcısındaki `script` klasöründe depolanır.
+    **partitionweblogs.hql** Hive betik dosyası Azure depolama hesabında (scriptLinkedService tarafından belirtilir) ve `script` kapsayıcısındaki `adfgetstarted` klasöründe depolanır.
 
     `defines` bölümü, hive betiğine Hive yapılandırma değerleri olarak (örn `${hiveconf:inputtable}`, `${hiveconf:partitionedtable})`) geçirilen çalışma zamanı ayarlarını belirtmek için kullanılır.
 
@@ -291,7 +288,7 @@ Bu adımda, Hive işlenmesi için girdi ve çıktı verilerini temsil edecek ver
 1. **Çözüm Gezgini** penceresinde **Bağımlılıklar**’a sağ tıklayın, **Ekle**’nin üzerine gelip **Mevcut Öğe**’ye tıklayın.  
 2. **C:\ADFGettingStarted** yoluna gidin ve **partitionweblogs.hql**, **input.log** dosyalarını seçip **Ekle**’ye tıklayın. Bu iki dosyayı [Öğreticiye Genel Bakış](data-factory-build-your-first-pipeline.md)’taki ön koşulların bir parçası olarak oluşturmuştunuz.
 
-Sonraki adımda çözümü yayımladığınızda, **partitionweblogs.hql** dosyası `adfgetstarted` blob kapsayıcısındaki **script** klasörüne yüklenir.   
+Sonraki adımda çözümü yayımladığınızda, **partitionweblogs.hql** dosyası **blob kapsayıcısındaki**script`adfgetstarted` klasörüne yüklenir.   
 
 ### <a name="publishdeploy-data-factory-entities"></a>Data Factory varlıklarını yayımlama/dağıtma
 Bu adımda, projenizdeki Data Factory varlıklarını (bağlı hizmetler, veri kümeleri ve işlem hattı) Azure Data Factory hizmetinde yayımlayacaksınız. Yayımlama sürecinde, veri fabrikanızın adını belirtin. 
@@ -326,7 +323,7 @@ Bu adımda, projenizdeki Data Factory varlıklarını (bağlı hizmetler, veri k
 
 Dikkat edilmesi gereken önemli noktalar şunlardır:
 
-- Hatayı alırsanız: **Bu abonelik Microsoft.DataFactory ad alanını kullanacak şekilde kaydedilmemiş**, aşağıdakilerden birini yapın ve yeniden yayımlamayı deneyin:
+- **Abonelik, Microsoft.DataFactory ad alanını kullanacak şekilde kaydedilmemiş** hatasını alırsanız, aşağıdakilerden birini yapın ve yeniden yayımlamayı deneyin:
     - Azure PowerShell’de Data Factory sağlayıcısını kaydetmek için aşağıdaki komutu çalıştırın.
         ```powershell   
         Register-AzResourceProvider -ProviderNamespace Microsoft.DataFactory
@@ -348,7 +345,7 @@ Bu adımda, veri fabrikasının Diyagram Görünümünü kullanarak işlem hatt�
    1. **Diğer hizmetler** ve **Data factory’ler** öğesine tıklayın.
        
         ![Data factory’lere göz atma](./media/data-factory-build-your-first-pipeline-using-vs/browse-datafactories.png)
-   2. Veri fabrikanızın adını seçin (örneğin: **DataFactoryUsingVS09152016**) veri fabrikaları listesinde.
+   2. Veri fabrikası listesinden veri fabrikanızın adını seçin (örneğin: **DataFactoryUsingVS09152016**).
    
        ![Data factory’nizi seçme](./media/data-factory-build-your-first-pipeline-using-vs/select-first-data-factory.png)
 2. Veri fabrikanızın giriş sayfasında penceresinde **Diyagram**’a tıklayın.
@@ -378,7 +375,7 @@ Bu adımda, veri fabrikasının Diyagram Görünümünü kullanarak işlem hatt�
    > İsteğe bağlı HDInsight kümesinin oluşturulması genellikle biraz zaman alır (yaklaşık 20 dakika). Bu nedenle, işlem hattının dilimi işlemesi için **yaklaşık 30 dakika** bekleyin.  
    
     ![Veri kümesi](./media/data-factory-build-your-first-pipeline-using-vs/dataset-slice-ready.png)    
-10. Dilim **Hazır** durumunda olduğunda çıktı verileri için blob depolama alanınızın `adfgetstarted` kapsayıcısında `partitioneddata` klasörünü denetleyin.  
+10. Dilim **Hazır** durumunda olduğunda çıktı verileri için blob depolama alanınızın `partitioneddata` kapsayıcısında `adfgetstarted` klasörünü denetleyin.  
 
     ![çıktı verileri](./media/data-factory-build-your-first-pipeline-using-vs/three-ouptut-files.png)
 11. Dilimin ayrıntılarını bir **Veri dilimi** dikey penceresinde görmek için dilime tıklayın.
@@ -405,11 +402,11 @@ Bu öğreticide oluşturduğunuz işlem hattını ve veri kümelerini izlemek ü
     ![Etkinlik penceresi ayrıntıları](./media/data-factory-build-your-first-pipeline-using-vs/activity-window-details.png)
 
 > [!IMPORTANT]
-> Dilim başarıyla işlendiğinde girdi dosyası silinir. Bu nedenle, dilimi yeniden çalıştırmak veya öğreticiyi yeniden uygulamak isterseniz girdi dosyasını (input.log) `adfgetstarted` kapsayıcısının `inputdata` klasörüne yükleyin.
+> Dilim başarıyla işlendiğinde girdi dosyası silinir. Bu nedenle, dilimi yeniden çalıştırmak veya öğreticiyi yeniden uygulamak isterseniz girdi dosyasını (input.log) `inputdata` kapsayıcısının `adfgetstarted` klasörüne yükleyin.
 
 ### <a name="additional-notes"></a>Ek notlar
 - Bir veri fabrikasında bir veya daha fazla işlem hattı olabilir. İşlem hattında bir veya daha fazla etkinlik olabilir. Örneğin, bir kaynaktan hedef veri deposuna veri kopyalama amaçlı bir Kopyalama Etkinliği ve giriş verilerini dönüştürmek üzere Hive betiği çalıştırma amaçlı bir HDInsight Hive etkinliği. Kopyalama Etkinliği tarafından desteklenen tüm kaynaklar ve havuzlar için bkz. [desteklenen veri depoları](data-factory-data-movement-activities.md#supported-data-stores-and-formats). Data Factory tarafından desteklenen işlem hizmetlerinin listesi için bkz. [bağlantılı işlem hizmetleri](data-factory-compute-linked-services.md).
-- Bağlı hizmetler veri depolarını veya işlem hizmetlerini Azure data factory’ye bağlar. Kopyalama Etkinliği tarafından desteklenen tüm kaynaklar ve havuzlar için bkz. [desteklenen veri depoları](data-factory-data-movement-activities.md#supported-data-stores-and-formats). Data Factory tarafından desteklenen işlem hizmetlerinin listesi ve bunlar üzerinde çalışabilecek [dönüşüm etkinlikleri](data-factory-data-transformation-activities.md) için [işlem bağlı hizmetleri](data-factory-compute-linked-services.md) bölümüne bakın.
+- Bağlı hizmetler veri depolarını veya işlem hizmetlerini Azure data factory’ye bağlar. Kopyalama Etkinliği tarafından desteklenen tüm kaynaklar ve havuzlar için bkz. [desteklenen veri depoları](data-factory-data-movement-activities.md#supported-data-stores-and-formats). Data Factory tarafından desteklenen işlem hizmetlerinin listesi ve bunlar üzerinde çalışabilecek [dönüşüm etkinlikleri](data-factory-compute-linked-services.md) için [işlem bağlı hizmetleri](data-factory-data-transformation-activities.md) bölümüne bakın.
 - Azure Depolama bağlı hizmet tanımında kullanılan JSON özellikleri hakkında ayrıntılı bilgi için bkz. [Azure Blob’a/Blob’dan veri taşıma](data-factory-azure-blob-connector.md#azure-storage-linked-service).
 - İsteğe bağlı HDInsight kümesi yerine kendi HDInsight kümenizi kullanabilirsiniz. Ayrıntılar için bkz. [İşlem Bağlı Hizmetleri](data-factory-compute-linked-services.md).
 -  Data Factory, sizin için önceki JSON ile **Linux tabanlı** bir HDInsight kümesi oluşturur. Ayrıntılar için bkz. [İsteğe Bağlı HDInsight Bağlı Hizmeti](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service).
@@ -417,7 +414,7 @@ Bu öğreticide oluşturduğunuz işlem hattını ve veri kümelerini izlemek ü
     
     Daha fazla dilim işlendikçe, Azure blob depolamanızda çok sayıda kapsayıcı görürsünüz. İşlerin sorunları giderilmesi için bunlara gerek yoksa, depolama maliyetini azaltmak için bunları silmek isteyebilirsiniz. Bu kapsayıcı adları bir düzene sahiptir: `adf**yourdatafactoryname**-**linkedservicename**-datetimestamp`. Azure blob depolamada kapsayıcı silmek için [Microsoft Storage Gezgini](https://storageexplorer.com/) gibi araçları kullanın.
 - Şu anda, çıktı veri kümesi zamanlamayı yönetendir; bu nedenle etkinlik hiçbir çıktı oluşturmasa bile sizin bir çıktı veri kümesi oluşturmanız gerekir. Etkinlik herhangi bir girdi almazsa, girdi veri kümesi oluşturma işlemini atlayabilirsiniz. 
-- Bu öğreticide, Azure Data Factory kullanarak verilerin nasıl kopyalanacağı gösterilmemektedir. Azure Data Factory kullanarak veri kopyalama hakkında bir öğretici için bkz. [Öğreticisi: Blob depolama alanından SQL veritabanı'na veri kopyalamak](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+- Bu öğreticide, Azure Data Factory kullanarak verilerin nasıl kopyalanacağı gösterilmemektedir. Azure Data Factory kullanarak verileri kopyalama öğreticisi için bkz. [Öğretici: Blob Depolama’dan SQL Veritabanı’na veri kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 
 
 ## <a name="use-server-explorer-to-view-data-factories"></a>Data factory’leri görüntülemek için Sunucu Gezgini’ni kullanın
@@ -551,7 +548,7 @@ Bağlantı dizeleri gibi hassas verilerin kod deposuna işlenmesi önerilmez ve 
 ## <a name="summary"></a>Özet
 Bu öğreticide, HDInsight hadoop kümesindeki Hive betiği çalıştırılarak verileri işlemek için bir Azure data factory oluşturdunuz. Aşağıdaki adımları uygulamak için Azure Portal’da Data Factory Düzenleyici’yi kullandınız:  
 
-1. Azure **data factory** oluşturuldu.
+1. Oluşturulan Azure **data factory**.
 2. Oluşturulan iki **bağlı hizmet**:
    1. Girdi/çıktı dosyalarını tutan Azure blob depolamanızı data factory’ye bağlamak için **Azure Storage** bağlı hizmeti.
    2. İsteğe bağlı HDInsight Hadoop kümesini data factory’ye bağlamak için isteğe bağlı **Azure HDInsight** bağlı hizmeti. Azure Data Factory, girdi verilerini işlemek, çıktı verilerini de oluşturmak için tam zamanında HDInsight Hadoop kümesi oluşturur.
@@ -559,7 +556,7 @@ Bu öğreticide, HDInsight hadoop kümesindeki Hive betiği çalıştırılarak 
 4. **HDInsight Hive** etkinliğine sahip oluşturulan bir **işlem hattı**.  
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-Bu makalede, isteğe bağlı HDInsight kümesinde bir Hive betiği çalıştıran dönüştürme etkinliğine (HDInsight Etkinliği) sahip işlem hattı oluşturdunuz. Verileri Azure Blob'tan Azure SQL'e kopyalamak için kopyalama etkinliği'ni kullanma hakkında bilgi için bkz: [Öğreticisi: Azure veri kopyalama-Azure SQL blob](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+Bu makalede, isteğe bağlı HDInsight kümesinde bir Hive betiği çalıştıran dönüştürme etkinliğine (HDInsight Etkinliği) sahip işlem hattı oluşturdunuz. Verileri Azure Blob’tan Azure SQL’e kopyalamak için Kopyalama Etkinliği’nin kullanılması hakkında bilgi için bkz. [Öğretici: Verileri Azure blob’tan Azure SQL’e kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 
 Bir etkinliğin çıkış veri kümesini diğer etkinliğin giriş veri kümesi olarak ayarlayarak iki etkinliği zincirleyebilir, yani bir etkinliği diğerinden sonra çalıştırılmasını sağlayabilirsiniz. Ayrıntılı bilgi için bkz. [Data Factory’de zamanlama ve yürütme](data-factory-scheduling-and-execution.md). 
 

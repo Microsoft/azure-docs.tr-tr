@@ -1,9 +1,10 @@
 ---
-title: Sayfa yeniden yükler (JavaScript için Microsoft kimlik doğrulama kitaplığı) kaçınmak | Azure
-description: Sayfa yüklemelere alırken önlemek ve Microsoft kimlik doğrulama kitaplığı (MSAL.js) için JavaScript kullanarak sessiz yenileyen belirteçleri öğrenin.
+title: Sayfa yeniden yüklemeden kaçının (JavaScript için Microsoft kimlik doğrulama kitaplığı)
+titleSuffix: Microsoft identity platform
+description: JavaScript için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL. js) kullanarak belirteçleri sessizce alırken sayfa yeniden yüklemeden kaçınmanın nasıl yapılacağını öğrenin.
 services: active-directory
 documentationcenter: dev-center-name
-author: rwike77
+author: TylerMSFT
 manager: CelesteDG
 editor: ''
 ms.service: active-directory
@@ -13,35 +14,35 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 05/29/2019
-ms.author: nacanuma
+ms.author: twhitney
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 162811221e6dde89ad11f358b2ec8f32f3c82522
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 29edafdc27a3835653f82ec36d576a4871e66155
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66420476"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72803113"
 ---
-# <a name="avoid-page-reloads-when-acquiring-and-renewing-tokens-silently-using-msaljs"></a>Sayfa yeniden yükler alırken ve sessiz bir şekilde MSAL.js kullanılarak yenileyen belirteçleri kaçının
-Microsoft kimlik doğrulama kitaplığı (MSAL.js) JavaScript kullanımlar gizli `iframe` almak ve yenileme belirteçleri arka planda sessizce öğeleri. Azure AD geri belirteç isteğinde belirtilen kayıtlı redirect_uri belirteç döndürür (varsayılan olarak uygulama kök sayfası budur). Bir 302 yanıt olduğundan, HTML için ilgili sonuçları `redirect_uri` içinde yüklenmekte `iframe`. Genellikle uygulamanın `redirect_uri` kök sayfa ve bu da yeniden yüklemek neden olur.
+# <a name="avoid-page-reloads-when-acquiring-and-renewing-tokens-silently-using-msaljs"></a>MSAL. js kullanarak belirteçleri sessizce alırken ve yenilerken sayfa yeniden yüklemeden kaçının
+JavaScript için Microsoft kimlik doğrulama kitaplığı (MSAL. js), arka planda belirteçleri sessizce almak ve yenilemek için gizli `iframe` öğeleri kullanır. Azure AD belirteci, belirteç isteğinde belirtilen kayıtlı redirect_uri öğesine geri döndürür (varsayılan olarak uygulamanın kök sayfasıdır). Yanıt bir 302 olduğundan, `iframe`yüklenmesi `redirect_uri` buna karşılık gelen HTML ile sonuçlanır. Genellikle uygulamanın `redirect_uri` kök sayfasıdır ve bunun yeniden yüklenmesine neden olur.
 
-Uygulamanın kök sayfasına gidin, kimlik doğrulaması gerektiriyorsa, diğer durumlarda, bu çok iç içe geçmiş yol açabilecek `iframe` öğeleri veya `X-Frame-Options: deny` hata.
+Diğer durumlarda, uygulamanın kök sayfasına gidildiğinde kimlik doğrulaması yapılması gerekiyorsa, iç içe `iframe` öğelere veya `X-Frame-Options: deny` hataya yol açabilir.
 
-MSAL.js Azure AD tarafından verilen 302 kapatılamıyor ve döndürülen belirteç işlemi için gerekli olduğundan önleyemez `redirect_uri` içinde yüklenmekte gelen `iframe`.
+MSAL. js, Azure AD tarafından verilen 302 'yı kapata, ve döndürülen belirteci işlemek için gerekli olduğundan, `redirect_uri` `iframe`yüklenmesini engellemez.
 
-Tüm uygulamayı yeniden yeniden yüklemeyi veya diğer hatalar nedeniyle bunun önlemek için lütfen bu çözümler izleyin.
+Uygulamanın tamamının yeniden yüklenmesi veya bunun nedeniyle oluşan diğer hataların olmaması için lütfen bu geçici çözümleri izleyin.
 
-## <a name="specify-different-html-for-the-iframe"></a>İframe için farklı bir HTML belirtin
+## <a name="specify-different-html-for-the-iframe"></a>İframe için farklı HTML belirtme
 
-Ayarlama `redirect_uri` kimlik doğrulaması gerektirmeyen basit bir sayfaya, yapılandırma özelliği. İle eşleştiğinden emin olmak sahip olduğunuz `redirect_uri` Azure Portalı'nda kayıtlı. MSAL, başlangıç sayfası kaydedildikçe kullanıcı oturum açma işlemi başlar ve oturum açma tamamlandıktan sonra tam konumuna yeniden yönlendirir. Bu kullanıcının oturum açma deneyimi etkilemez.
+Config üzerinde `redirect_uri` özelliğini, kimlik doğrulaması gerektirmeyen basit bir sayfa olarak ayarlayın. Azure portal kayıtlı `redirect_uri` eşleştiğinden emin olmanız gerekir. Bu, kullanıcının oturum açma işlemini başlatması ve oturum açma işlemi tamamlandıktan sonra tam konuma yeniden yönlendirdiği için MSAL olarak kullanıcının oturum açma deneyimini etkilemez.
 
-## <a name="initialization-in-your-main-app-file"></a>Ana uygulama dosyanızdaki başlatma
+## <a name="initialization-in-your-main-app-file"></a>Ana uygulama dosyanızda başlatma
 
-Yoktur uygulama başlatma, Yönlendirme ve başka şeyler tanımlayan bir merkezi Javascript dosyası, uygulamanızı yapılandırılırsa olup uygulama içinde yüklüyor üzerinde tabanlı uygulama modüllerinizi koşullu olarak yükleyebilir bir `iframe` veya yok. Örneğin:
+Uygulamanız, uygulamanın başlatma, Yönlendirme ve diğer öğeleri tanımlayan bir merkezi JavaScript dosyası gibi yapılandırılmış ise, uygulama modüllerinizi uygulamanın bir `iframe` yüklenip yüklenmemesine göre koşullu olarak yükleyebilirsiniz. Örnek:
 
-AngularJS,: app.js
+AngularJS içinde: App. js
 
 ```javascript
 // Check that the window is an iframe and not popup
@@ -78,7 +79,7 @@ else {
 }
 ```
 
-Angular içinde: app.module.ts
+Angular içinde: App. Module. TS
 
 ```javascript
 // Imports...
@@ -150,4 +151,4 @@ export class MsalComponent {
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Daha fazla bilgi edinin [tek sayfalı uygulama (SPA) oluşturma](scenario-spa-overview.md) MSAL.js kullanılarak.
+MSAL. js kullanarak [tek sayfalı uygulama (Spa) oluşturma](scenario-spa-overview.md) hakkında daha fazla bilgi edinin.

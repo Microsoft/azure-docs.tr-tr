@@ -1,56 +1,50 @@
 ---
-title: Terratest kullanarak Azure'da Terraform modülleri test etme
+title: Azure 'da Terraytest kullanarak Terrayform modüllerini test etme
 description: Terraform modüllerinizi test etmek için Terratest’i kullanmayı öğrenin.
-services: terraform
-ms.service: azure
-keywords: terraform, devops, depolama hesabı, azure, terratest, birim testi, tümleştirme testi
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.topic: tutorial
-ms.date: 03/19/2019
-ms.openlocfilehash: 9d621905122ab7bf64432323d7d11cf8f1b50750
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 10/26/2019
+ms.openlocfilehash: 41f7f9c00f626cf622ea781f01da6db1f46cd805
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60888380"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158954"
 ---
-# <a name="test-terraform-modules-in-azure-by-using-terratest"></a>Terratest kullanarak Azure'da Terraform modülleri test etme
+# <a name="tutorial-test-terraform-modules-in-azure-using-terratest"></a>Öğretici: Terraytest kullanarak Azure 'da Teraform modüllerini test etme
 
 > [!NOTE]
-> Bu makaledeki örnek kod 0.12 (ve büyük) sürümü ile çalışmaz.
+> Bu makaledeki örnek kod sürüm 0,12 (ve üzeri) ile çalışmaz.
 
-Yeniden kullanılabilir, birleştirilebilir oluşturmak için Azure Terraform modüllerini ve test edilebilir bileşenlerini kullanabilirsiniz. Terraform modülleri altyapı kodu işlemleri uygulamak yararlı olan kapsülleme dahil edilip derecelendirilir.
+Azure Terrayform modüllerini yeniden kullanılabilir, birleştirilebilir ve test edilebilir bileşenler oluşturmak için kullanabilirsiniz. Terırform modülleri, kod işlemi olarak altyapıyı uygulama konusunda yararlı olan kapsülleme dahil ediyor.
 
-Terraform modülleri oluşturduğunuzda, kalite güvencesi uygulamak önemlidir. Ne yazık ki, sınırlı belgeleri nasıl birim testleri ve tümleştirme testleri Terraform modülleri'nde Yazar açıklamak kullanılabilir. Bir test altyapısı ve oluşturduk, biz benimsenen en iyi yöntemler Bu öğretici tanıtır bizim [Azure Terraform modüllerini](https://registry.terraform.io/browse?provider=azurerm).
+Terrayform modülleri oluştururken kalite güvencesi uygulamanız önemlidir. Ne yazık ki, Terrayform modüllerinde birim testlerinin ve tümleştirme testlerinin nasıl yazılacağını açıklayan sınırlı belge mevcuttur. Bu öğretici, [Azure Terkform modüllerimizi](https://registry.terraform.io/browse?provider=azurerm)oluştururken benimsediğimiz bir test altyapısını ve en iyi uygulamaları tanıtır.
 
-Test altyapıları ve seçerseniz en popüler inceledik [Terratest](https://github.com/gruntwork-io/terratest) bizim Terraform modülleri test etmek için kullanılacak. Terratest, Go kitaplığı olarak uygulanır. Terratest yardımcı işlevleri ve desenleri ortak altyapı gibi HTTP isteğinde bulunan ve belirli bir sanal makineye erişmek için SSH kullanarak görevleri, test için koleksiyonu sağlar. Aşağıdaki liste, bazı Terratest kullanmanın önemli avantajları açıklanmaktadır:
+En popüler test altyapılarına baktık ve Terlarform modüllerimizi test etmek için kullanılacak [terrampatest](https://github.com/gruntwork-io/terratest) ' i seçtik. Terratest, Go kitaplığı olarak uygulanır. Terraytest, HTTP istekleri yapma ve belirli bir sanal makineye erişmek için SSH kullanma gibi ortak altyapı testi görevlerine yönelik bir yardımcı işlev ve desen koleksiyonu sağlar. Aşağıdaki listede, Terraytest kullanmanın önemli avantajlarından bazıları açıklanmaktadır:
 
-- **Altyapı denetlemek için kullanışlı Yardımcıları sağladığı**. Bu özellik, gerçek altyapınızı gerçek ortamda doğrulamak istediğiniz zamanlar işinize yarar.
-- **Klasör yapısı NET bir şekilde düzenlenmiştir**. Test çalışmalarınızı izleyin ve net bir şekilde düzenlenir [standart Terraform modülü klasör yapısını](https://www.terraform.io/docs/modules/create.html#standard-module-structure).
-- **Tüm test çalışmalarını bir seferde yazılır**. Terraform kullanan Çoğu geliştirici, Git geliştiricilerin önerilir. Git geliştiricisiyseniz Terratest başka bir programlama dili öğrenmek zorunda değilsiniz. Ayrıca, test çalışmaları Terratest çalıştırmanız için gerekli olan yalnızca Git ve Terraform bağımlılıklardır.
-- **Yüksek düzeyde genişletilebilir altyapısıdır**. Azure özgü özellikler dahil olmak üzere, Terratest üzerine ek işlevler genişletebilirsiniz.
+- **Altyapıyı denetlemek için kullanışlı yardımcıları sağlar**. Bu özellik, gerçek altyapınızı gerçek ortamda doğrulamak istediğiniz zamanlar işinize yarar.
+- **Klasör yapısı açıkça düzenlenir**. Test çalışmalarınız net bir şekilde düzenlenir ve [Standart Teraform modül klasörü yapısını](https://www.terraform.io/docs/modules/create.html#standard-module-structure)izler.
+- **Tüm test çalışmaları go 'da yazılmıştır**. Terrayform kullanan geliştiricilerin çoğu geliştirici geliştiricilerdedir. Bir go geliştiriciyseniz, Terraytest kullanmak için başka bir programlama dili öğrenmeniz gerekmez. Ayrıca, Terraytest 'te test çalışmalarını çalıştırmak için gereken tek bağımlılıklar Go ve terımform ' dur.
+- **Altyapı yüksek düzeyde genişletilebilir**. Azure 'a özgü özellikler de dahil olmak üzere Terktest 'in üzerine ek işlevler genişletebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Platformdan bağımsız Bu uygulamalı makaledir. Bu makalede kullandığımız kod örnekleri Windows, Linux veya Macos'ta çalıştırabilirsiniz. 
+Bu uygulamalı makale, platformdan bağımsızdır. Windows, Linux veya MacOS 'ta Bu makalede kullandığımız kod örneklerini çalıştırabilirsiniz. 
 
-Başlamadan önce aşağıdaki yazılımları yükleyin:
+Başlamadan önce aşağıdaki yazılımları yükleyebilirsiniz:
 
-- **Go programlama dili**: Terraform test çalışmaları yazılır [Git](https://golang.org/dl/).
+- **Go programlama dili**: terrayform test çalışmaları [Go](https://golang.org/dl/)olarak yazılmıştır.
 - **dep**: [dep](https://github.com/golang/dep#installation), Go’nun bağımlılık yönetimi aracıdır.
-- **Azure CLI**: [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) Azure kaynaklarını yönetmek için kullanabileceğiniz bir komut satırı aracıdır. (Terraform destekleyen bir hizmet sorumlusu Azure için kimlik doğrulama veya [Azure CLI aracılığıyla](https://www.terraform.io/docs/providers/azurerm/authenticating_via_azure_cli.html).)
-- **Görüntü**: Kullandığımız [yürütülebilir görüntü](https://github.com/magefile/mage/releases) çalışan Terratest çalışmaları basitleştirmek gösterilir. 
+- Azure **CLI**: Azure [CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) , Azure kaynaklarını yönetmek için kullanabileceğiniz bir komut satırı aracıdır. (Terrayform, hizmet sorumlusu aracılığıyla veya [Azure CLI aracılığıyla](https://www.terraform.io/docs/providers/azurerm/authenticating_via_azure_cli.html)Azure 'da kimlik doğrulamasını destekler.)
+- **Mage**: Terlartest çalışmalarını çalıştırmanın nasıl basitleştireceğinizi göstermek için [Mage yürütülebilirini](https://github.com/magefile/mage/releases) kullanıyoruz. 
 
 ## <a name="create-a-static-webpage-module"></a>Statik bir web sayfası modülü oluşturma
 
-Bu öğreticide, statik bir Web sayfası için bir Azure depolama blobu tek bir HTML dosyası yükleyerek sağlayan bir Terraform modülü oluşturun. Bu modül, dünya erişim geçici olarak kullanıcılara modülü döndüren bir URL ile bir Web sayfası sağlar.
+Bu öğreticide, Azure depolama blobuna tek bir HTML dosyası yükleyerek statik bir Web sayfası sağlayan bir Teraform modülü oluşturacaksınız. Bu modül, kullanıcıların, modülün döndürdüğü bir URL aracılığıyla Web sayfasına dünya erişimi olmasını sağlar.
 
 > [!NOTE]
-> Bu bölümünde açıklanan tüm dosyaları oluşturmak, [GOPATH](https://github.com/golang/go/wiki/SettingGOPATH) konumu.
+> [Gopath](https://github.com/golang/go/wiki/SettingGOPATH) konumunuz altında bu bölümde açıklanan tüm dosyaları oluşturun.
 
-İlk olarak, adlı yeni bir klasör oluşturun `staticwebpage` , GoPath altında `src` klasör. Bu öğreticinin genel klasör yapısı aşağıdaki örnekte gösterilmiştir. Yıldız ile işaretlenmiş dosyalar `(*)` bu bölümdeki birincil odağı olan.
+İlk olarak, GoPath `src` klasörünüz altında `staticwebpage` adlı yeni bir klasör oluşturun. Bu öğreticinin genel klasör yapısı aşağıdaki örnekte gösterilmiştir. Yıldız `(*)` işaretlenen dosyalar bu bölümdeki birincil odadır.
 
 ```
  📁 GoPath/src/staticwebpage
@@ -70,7 +64,7 @@ Bu öğreticide, statik bir Web sayfası için bir Azure depolama blobu tek bir 
    └ 📄 variables.tf (*)
 ```
 
-Statik Web modülü üç girişleri kabul eder. Girişleri bildirilen `./variables.tf`:
+Statik Web sayfası modülü üç girişi kabul eder. Girdiler `./variables.tf`olarak belirtilir:
 
 ```hcl
 variable "location" {
@@ -87,49 +81,49 @@ variable "html_path" {
 }
 ```
 
-Makalenin önceki bölümlerinde belirttiğimiz gibi bu modül de içinde bildirilen bir URL çıkışları `./outputs.tf`:
+Makalede daha önce bahsedildiği gibi, bu modül ayrıca `./outputs.tf`bildirilen bir URL 'YI de verir:
 
 ```hcl
 output "homepage_url" {
-  value = "${azurerm_storage_blob.homepage.url}"
+  value = azurerm_storage_blob.homepage.url
 }
 ```
 
-Modül ana mantığını dört kaynaklar sağlar:
-- **Kaynak grubu**: Kaynak grubunun adı `website_name` tarafından eklenen giriş `-staging-rg`.
-- **Depolama hesabı**: Depolama hesabının adıdır `website_name` tarafından eklenen giriş `data001`. Depolama hesabının adı kısıtlamaları için uyması için modül tüm özel karakterleri kaldırır ve küçük harfler tüm depolama hesabı adını kullanır.
-- **ad kapsayıcısı sabit**: Kapsayıcı adındaki `wwwroot` ve depolama hesabı oluşturulur.
-- **tek bir HTML dosyası**: HTML dosyasını okuyabilir `html_path` giriş ve yüklenen `wwwroot/index.html`.
+Modülün ana mantığı dört kaynak sağlar:
+- **kaynak grubu**: kaynak grubunun adı, `-staging-rg`tarafından eklenen `website_name` giriştir.
+- **depolama hesabı**: depolama hesabının adı, `data001`tarafından eklenen `website_name` giriştir. Depolama hesabının AD kısıtlamalarına bağlı kalmak için, modül tüm özel karakterleri kaldırır ve tüm depolama hesabı adındaki küçük harfleri kullanır.
+- **ad kapsayıcısı düzeltildi**: kapsayıcı `wwwroot` olarak adlandırılır ve depolama hesabında oluşturulur.
+- **tek HTML dosyası**: html dosyası `html_path` girişinden okundu ve `wwwroot/index.html`yüklenir.
 
 Statik web sayfası modülünün mantığı `./main.tf` içinde uygulanır:
 
 ```hcl
 resource "azurerm_resource_group" "main" {
   name     = "${var.website_name}-staging-rg"
-  location = "${var.location}"
+  location = var.location
 }
 
 resource "azurerm_storage_account" "main" {
   name                     = "${lower(replace(var.website_name, "/[[:^alnum:]]/", ""))}data001"
-  resource_group_name      = "${azurerm_resource_group.main.name}"
-  location                 = "${azurerm_resource_group.main.location}"
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
 resource "azurerm_storage_container" "main" {
   name                  = "wwwroot"
-  resource_group_name   = "${azurerm_resource_group.main.name}"
-  storage_account_name  = "${azurerm_storage_account.main.name}"
+  resource_group_name   = azurerm_resource_group.main.name
+  storage_account_name  = azurerm_storage_account.main.name
   container_access_type = "blob"
 }
 
 resource "azurerm_storage_blob" "homepage" {
   name                   = "index.html"
-  resource_group_name    = "${azurerm_resource_group.main.name}"
-  storage_account_name   = "${azurerm_storage_account.main.name}"
-  storage_container_name = "${azurerm_storage_container.main.name}"
-  source                 = "${var.html_path}"
+  resource_group_name    = azurerm_resource_group.main.name
+  storage_account_name   = azurerm_storage_account.main.name
+  storage_container_name = azurerm_storage_container.main.name
+  source                 = var.html_path
   type                   = "block"
   content_type           = "text/html"
 }
@@ -137,11 +131,11 @@ resource "azurerm_storage_blob" "homepage" {
 
 ### <a name="unit-test"></a>Birim testi
 
-Terratest tümleştirme testleri için tasarlanmıştır. Bu amaçla Terratest gerçek bir ortamda gerçek kaynak sağlar. Bazen, özellikle çok sayıda kaynak sağlama olduğunda tümleştirme test işleri olağanüstü büyük olabilir. Önceki bölümde diyoruz depolama hesabı adları dönüştürür mantıksal iyi bir örnektir. 
+Terraytest, tümleştirme testleri için tasarlanmıştır. Bu amaçla, Terktest gerçek bir ortamda gerçek kaynakları sağlar. Bazen, özellikle de temin edilecek çok sayıda kaynağınız olduğunda, tümleştirme test işleri çok büyük olabilir. Önceki bölümde başvurduğumuz depolama hesabı adlarını dönüştüren mantık iyi bir örnektir. 
 
-Ancak, gerçekte herhangi bir kaynak sağlamanız gerekmez. Yalnızca adlandırma dönüştürme mantığını doğru olduğundan emin olmak istiyoruz. Birim testleri Terratest'ın esnekliği sayesinde, kullanabiliriz. Birim testleri yerel (internet erişimi gerekli olsa da) test çalışmalarını çalıştırma. Birim test çalışmalarını `terraform init` ve `terraform plan` çıktısını ayrıştırmak için komutları `terraform plan` ve öznitelik değerleri karşılaştırmak bakın.
+Ancak, gerçekten herhangi bir kaynak sağlanması gerekmez. Yalnızca adlandırma dönüştürme mantığının doğru olduğundan emin olmak istiyoruz. Terktest esnekliği sayesinde birim testlerini kullanabiliriz. Birim testleri yerel çalışan test çalışmalardır (ancak internet erişimi zorunlu olsa da). Birim test çalışmaları, `terraform plan` çıkışını ayrıştırmak ve Karşılaştırılacak öznitelik değerlerini aramak için `terraform init` ve `terraform plan` komutlarını yürütür.
 
-Bu bölümün geri kalanında, biz Terratest depolama hesabı adları dönüştürmek için kullanılan mantıksal doğru olduğundan emin olmak için birim testi uygulamak için kullanma açıklanmaktadır. Yalnızca yıldızla işaretlenmiş dosyaların ilgileniriz `(*)`.
+Bu bölümün geri kalanında, depolama hesabı adlarını dönüştürmek için kullanılan mantığın doğru olduğundan emin olmak üzere bir birim testi uygulamak için Terraytest kullanma yöntemleri açıklanmaktadır. Yalnızca bir yıldız işareti ile işaretlenmiş dosyalarda ilgileniyoruz `(*)`.
 
 ```
  📁 GoPath/src/staticwebpage
@@ -161,9 +155,9 @@ Bu bölümün geri kalanında, biz Terratest depolama hesabı adları dönüşt�
    └ 📄 variables.tf
 ```
 
-İlk olarak, adlı boş bir HTML dosyası kullandığımız `./test/fixtures/storage-account-name/empty.html` yer tutucu olarak.
+İlk olarak, yer tutucu olarak `./test/fixtures/storage-account-name/empty.html` adlı boş bir HTML dosyası kullanıyoruz.
 
-Dosya `./test/fixtures/storage-account-name/main.tf` test çalışması çerçevesidir. Bir giriş kabul ettiği `website_name`, olduğu da birim testleri girişi. Mantık burada gösterilmiştir:
+Dosya `./test/fixtures/storage-account-name/main.tf` test çalışması çerçevesidir. Tek bir girişi kabul eder, bu da birim testlerinin girişi olan `website_name`. Logic aþaðýda gösterilmektedir:
 
 ```hcl
 variable "website_name" {
@@ -173,22 +167,22 @@ variable "website_name" {
 module "staticwebpage" {
   source       = "../../../"
   location     = "West US"
-  website_name = "${var.website_name}"
+  website_name = var.website_name
   html_path    = "empty.html"
 }
 ```
 
-Temel bir bileşeni birim testleri uygulamasıdır `./test/storage_account_name_unit_test.go`.
+Ana bileşen, `./test/storage_account_name_unit_test.go`birim testlerinin uygulamasıdır.
 
-Geliştiriciler büyük olasılıkla görürsünüz türünde bir bağımsız değişken kabul ederek birim testini bir Klasik Git test işlev imzası eşleştiğini Git `*testing.T`.
+Geliştiriciler, büyük olasılıkla birim testinin, `*testing.T`türünde bir bağımsız değişken kabul ederek klasik bir go test işlevinin imzasıyla eşleşip eşleşmediğini fark eder.
 
-Birim testi gövdesinde değişkeninde tanımlanan beş çalışmaları toplam sahibiz `testCases` (`key` , giriş olarak ve `value` beklenen çıkış olarak). Her birim test çalışması için önce çalıştırıyoruz `terraform init` ve test düzeni klasörü hedef (`./test/fixtures/storage-account-name/`). 
+Birim testinin gövdesinde, değişken `testCases` (giriş olarak`key` ve beklenen çıkış olarak `value`) tanımlanmış toplam beş durum vardır. Her birim test çalışması için öncelikle `terraform init` çalıştırıp test armatürü klasörünü hedefliyoruz (`./test/fixtures/storage-account-name/`). 
 
-Ardından, bir `terraform plan` belirli test çalışması giriş kullanan komut (göz atın `website_name` tanımında `tfOptions`) sonucu kaydeder `./test/fixtures/storage-account-name/terraform.tfplan` (Genel klasör yapısı içinde listelenmeyen).
+Ardından, belirli test çalışması girişi kullanan bir `terraform plan` komutu (`tfOptions``website_name` tanımına göz atın) sonucu `./test/fixtures/storage-account-name/terraform.tfplan` kaydeder (genel klasör yapısında listelenmez).
 
-Bu sonuç dosyası kod tarafından okunabilen bir yapıya resmi Terraform planı ayrıştırıcının kullanılarak ayrıştırılır.
+Bu sonuç dosyası resmi Terrampaplan ayrıştırıcısı kullanılarak kod okunabilir bir yapıya ayrıştırılır.
 
-Şimdi biz ilginizi duyuyoruz öznitelikler arayın (Bu durumda, `name` , `azurerm_storage_account`) ve sonuçları beklenen çıktıyı ile karşılaştırın:
+Şimdi ilgilendiğiniz öznitelikleri (Bu durumda, `azurerm_storage_account``name`) inceleyeceğiz ve sonuçları beklenen çıktıyla karşılaştırıyoruz:
 
 ```go
 package test
@@ -226,7 +220,7 @@ func TestUT_StorageAccountName(t *testing.T) {
         // Terraform init and plan only
         tfPlanOutput := "terraform.tfplan"
         terraform.Init(t, tfOptions)
-        terraform.RunTerraformCommand(t, tfOptions, terraform.FormatArgs(tfOptions.Vars, "plan", "-out="+tfPlanOutput)...)
+        terraform.RunTerraformCommand(t, tfOptions, terraform.FormatArgs(tfOptions, "plan", "-out="+tfPlanOutput)...)
 
         // Read and parse the plan output
         f, err := os.Open(path.Join(tfOptions.TerraformDir, tfPlanOutput))
@@ -252,7 +246,7 @@ func TestUT_StorageAccountName(t *testing.T) {
 }
 ```
 
-Birim testlerini çalıştırmak için komut satırında aşağıdaki adımları tamamlayın:
+Birim testlerini çalıştırmak için komut satırında aşağıdaki adımları gerçekleştirin:
 
 ```shell
 $ cd [Your GoPath]/src/staticwebpage
@@ -264,13 +258,13 @@ GoPath/src/staticwebpage/test$ az login    # Required when no service principal 
 GoPath/src/staticwebpage/test$ go test -run TestUT_StorageAccountName
 ```
 
-Yaklaşık bir dakika içinde geleneksel Git test sonucunu döndürür.
+Geleneksel go test sonucu yaklaşık bir dakika içinde döndürülür.
 
 ### <a name="integration-test"></a>Tümleştirme testi
 
-Birim testleri aksine, tümleştirme testlerini kaynakları gerçek bir ortama bir uçtan uca perspektifi için hazırlamanız gerekir. Bu tür bir görev iyi bir iş Terratest yapar. 
+Birim testlerinin aksine, tümleştirme testlerinin, uçtan uca bir perspektifle gerçek bir ortama kaynak sağlaması gerekir. Terraytest, bu tür bir görevle iyi bir iş yapar. 
 
-Terraform modülleri için en iyi uygulamaları dahil yükleme `examples` klasör. `examples` Klasörü bazı uçtan uca örnekler içerir. Gerçek verileri içeren çalışma önlemek için bu örnekleri tümleştirme testleri test neden? Bu bölümde, yıldız ile işaretlenmiş üç dosyayı odaklanıyoruz `(*)` aşağıdaki klasörü yapısı içinde:
+Terrayform modülleri için en iyi uygulamalar `examples` klasörü yüklemeyi içerir. `examples` klasörü, bazı uçtan uca örnekler içerir. Gerçek verilerle çalışmayı önlemek için bu örnekleri tümleştirme testleri olarak test etme. Bu bölümde, aşağıdaki klasör yapısında bir yıldız `(*)` işaretlenmiş üç dosyaya odaklanıyoruz:
 
 ```
  📁 GoPath/src/staticwebpage
@@ -290,7 +284,7 @@ Terraform modülleri için en iyi uygulamaları dahil yükleme `examples` klasö
    └ 📄 variables.tf
 ```
 
-Örnekleri ile başlayalım. Adlı yeni bir örnek klasörüne `hello-world/` oluşturulur `./examples/` klasör. Burada, karşıya yüklenecek basit bir HTML sayfası sunuyoruz: `./examples/hello-world/index.html`.
+Örneklerle başlayalım. `./examples/` klasöründe `hello-world/` adlı yeni bir örnek klasör oluşturulur. Burada, karşıya yüklenecek basit bir HTML sayfası sağlıyoruz: `./examples/hello-world/index.html`.
 
 ```html
 <!DOCTYPE html>
@@ -306,7 +300,7 @@ Terraform modülleri için en iyi uygulamaları dahil yükleme `examples` klasö
 </html>
 ```
 
-Terraform örnek `./examples/hello-world/main.tf` birim testinde gösterilene benzer. Önemli bir fark yoktur: örnek adlı bir Web sayfası karşıya yüklenen HTML URL de yazdırır. `homepage`.
+Terrayform örnek `./examples/hello-world/main.tf`, birim testinde gösterilenle benzerdir. Önemli bir farklılık vardır: örnek ayrıca karşıya yüklenen HTML 'nin URL 'sini `homepage`adlı bir Web sayfası olarak yazdırır.
 
 ```hcl
 variable "website_name" {
@@ -317,19 +311,19 @@ variable "website_name" {
 module "staticwebpage" {
   source       = "../../"
   location     = "West US"
-  website_name = "${var.website_name}"
+  website_name = var.website_name
 }
 
 output "homepage" {
-  value = "${module.staticwebpage.homepage_url}"
+  value = module.staticwebpage.homepage_url
 }
 ```
 
-Terratest kullanırız ve klasik Git test işlevleri yeniden tümleştirme söz konusu test dosyası `./test/hello_world_example_test.go`.
+`./test/hello_world_example_test.go`tümleştirme testi dosyasında Terraytest ve klasik go test işlevlerini yeniden kullanırız.
 
-Birim testleri, tümleştirme testlerini Azure'da gerçek kaynakları oluşturun. İşte bu adlandırma çakışmalarından kaçınmak için dikkatli olmanız gerekir. (Özel depolama hesabı adları gibi bazı genel olarak benzersiz adları için dikkat edin.) Bu nedenle, test mantığı ilk adımı bir rastgele oluşturmaktır `websiteName` kullanarak `UniqueId()` Terratest tarafından sağlanan işlev. Bu işlev, küçük harfler, büyük harfler ve sayılar içeren rastgele bir ad oluşturur. `tfOptions` Terraform komutların hedefleyen yapar `./examples/hello-world/` klasör. Ayrıca, emin olur `website_name` rastgele ayarlanmışsa `websiteName`.
+Birim testlerinin aksine, tümleştirme testleri Azure 'da gerçek kaynakları oluşturur. Bu nedenle, adlandırma çakışmalarını önlemek için dikkatli olmanız gerekir. (Depolama hesabı adları gibi bazı genel benzersiz adlara özel dikkat ödeyin.) Bu nedenle, test mantığının ilk adımı, Terraytest tarafından sunulan `UniqueId()` işlevini kullanarak rastgele bir `websiteName` oluşturur. Bu işlev, küçük harf, büyük harf veya sayı içeren bir rastgele ad üretir. `tfOptions`, `./examples/hello-world/` klasörünü hedefleyen tüm Terlarform komutlarının olmasını sağlar. Ayrıca, `website_name` rastgele `websiteName`olarak ayarlandığından emin olur.
 
-Ardından birer birer `terraform init`, `terraform apply` ve `terraform output` yürütülür. Başka bir yardımcı işlevini kullanırız `HttpGetWithCustomValidation()`, Terratest tarafından sağlanır. HTML çıkışı karşıya yüklendiğini emin olmak için yardımcı işlevini kullanırız `homepage` tarafından döndürülen URL `terraform output`. Biz HTTP GET durum kodu ile karşılaştırma `200` ve bazı anahtar sözcükler HTML içerik arayın. Son olarak, Go'nun `defer` özelliğinden yararlanılarak `terraform destroy` komutunun yürütülmesi "taahhüt edildi".
+Ardından birer birer `terraform init`, `terraform apply` ve `terraform output` yürütülür. Terraytest tarafından sağlanmış olan `HttpGetWithCustomValidation()`başka bir yardımcı işlevi kullanıyoruz. HTML 'nin `terraform output`tarafından döndürülen çıkış `homepage` URL 'sine yüklendiğinden emin olmak için yardımcı işlevini kullanırız. HTTP GET durum kodunu `200` karşılaştırdık ve HTML içeriğindeki bazı anahtar sözcükleri arayıyoruz. Son olarak, Go'nun `terraform destroy` özelliğinden yararlanılarak `defer` komutunun yürütülmesi "taahhüt edildi".
 
 ```go
 package test
@@ -373,7 +367,7 @@ func TestIT_HelloWorldExample(t *testing.T) {
 }
 ```
 
-Tümleştirme testleri çalıştırmak için komut satırında aşağıdaki adımları tamamlayın:
+Tümleştirme testlerini çalıştırmak için komut satırında aşağıdaki adımları gerçekleştirin:
 
 ```shell
 $ cd [Your GoPath]/src/staticwebpage
@@ -385,20 +379,19 @@ GoPath/src/staticwebpage/test$ az login    # Required when no service principal 
 GoPath/src/staticwebpage/test$ go test -run TestIT_HelloWorldExample
 ```
 
-Yaklaşık iki dakika içinde geleneksel Git test sonucunu döndürür. Bu komutlar yürüterek birim testleri ve tümleştirme testleri hem de çalıştırabilirsiniz:
+Geleneksel go test sonucu yaklaşık iki dakika içinde döndürülür. Ayrıca, bu komutları yürüterek hem birim testlerini hem de tümleştirme testlerini çalıştırabilirsiniz:
 
 ```shell
 GoPath/src/staticwebpage/test$ go fmt
 GoPath/src/staticwebpage/test$ go test
 ```
 
-Tümleştirme testleri, birim testleri (bir dakika boyunca beş birim durumları ile karşılaştırıldığında bir tümleştirme çalışması için iki dakika) değerinden daha uzun sürer. Ancak kararınız birim testleri kullanın veya bir senaryoda tümleştirme testleri. Genellikle, Terraform ve HCL işlevlerini kullanarak karmaşık mantık için birim testleri kullanmayı tercih ederiz. Biz genellikle bir kullanıcı için uçtan uca perspektif tümleştirme testleri kullanın.
+Tümleştirme Testleri birim testlerinden çok daha uzun sürer (beş birim servis talebi için bir dakika ile karşılaştırıldığında bir tümleştirme çalışması için iki dakika). Ancak, bir senaryoda birim testlerini veya tümleştirme testlerini mi kullanacağınızı karardır. Genellikle, Terkform HCL işlevlerini kullanarak karmaşık mantık için birim testleri kullanmayı tercih ediyoruz. Genellikle bir kullanıcının uçtan uca perspektifi için tümleştirme testlerini kullanırız.
 
 ## <a name="use-mage-to-simplify-running-terratest-cases"></a>Terratest çalışmalarının yürütülmesini basitleştirmek için mage kullanma 
+Azure Cloud Shell ' de test çalışmalarını çalıştırmak, çeşitli dizinlerde farklı komutların yürütülmesini gerektirir. Bu işlemi daha verimli hale getirmek için, projemizdeki derleme sistemini tanıttık. Bu bölümde, iş için bir go derleme sistemi olan Mage kullanacağız.
 
-Azure Cloud Shell'de test çalışmalarını bir kolayca görev değildir. Farklı dizine gidin ve farklı komutları yürütmek sahip. Cloud Shell kullanmaktan kaçınmak için biz derleme sistemi projemizdeki tanıtır. Bu bölümde, iş için bir Git yapı sistemi, görüntü, kullanırız.
-
-Görüntü tarafından gereken tek şey `magefile.go` projenizin kök dizininde (ile işaretlenen `(+)` aşağıdaki örnekte):
+Image tarafından gereken tek şey, projenizin kök dizininde `magefile.go` (aşağıdaki örnekte `(+)` ile işaretlenir):
 
 ```
  📁 GoPath/src/staticwebpage
@@ -419,12 +412,12 @@ Görüntü tarafından gereken tek şey `magefile.go` projenizin kök dizininde 
    └ 📄 variables.tf
 ```
 
-İşte bir örnek `./magefile.go`. Git içinde yazılan bu derleme betiğindeki şu beş yapı adımları uygulayın:
-- `Clean`: Bu adım, test yürütme sırasında oluşturulan tüm oluşturulan ve geçici dosyalar kaldırır.
-- `Format`: Adımı `terraform fmt` ve `go fmt` kod tabanınızın biçimlendirmek için.
-- `Unit`: Adım tüm birim testlerini çalıştırır (işlev adı kuralı kullanarak `TestUT_*`) altında `./test/` klasör.
-- `Integration`: Adım benzer `Unit`, ancak isteğe bağlı olarak, birim testlerini yerine tümleştirme testleri yürütür (`TestIT_*`).
-- `Full`: Adımı `Clean`, `Format`, `Unit`, ve `Integration` dizideki.
+Aşağıda bir `./magefile.go`örneği verilmiştir. Bu derleme betiğine git ile yazılan beş derleme adımını uyguladık:
+- `Clean`: adım, test yürütmeleri sırasında oluşturulan tüm oluşturulan ve geçici dosyaları kaldırır.
+- `Format`: adım, kod tabanınızı biçimlendirmek için `terraform fmt` ve `go fmt` çalışır.
+- `Unit`: adım, `./test/` klasörü altındaki tüm birim testlerini (`TestUT_*`işlev adı kuralını kullanarak) çalıştırır.
+- `Integration`: adım `Unit`benzerdir, ancak birim testleri yerine, tümleştirme testlerini yürütür (`TestIT_*`).
+- `Full`: adım `Clean`, `Format`, `Unit`ve `Integration` sırayla çalıştırır.
 
 ```go
 // +build mage
@@ -501,7 +494,7 @@ func Clean() error {
 }
 ```
 
-Bir tam test paketi çalıştırmak için aşağıdaki komutları kullanabilirsiniz. Kod, önceki bir bölümde kullandık çalışan adımlar benzerdir. 
+Tam test paketini yürütmek için aşağıdaki komutları kullanabilirsiniz. Kod, önceki bölümde kullandığımız çalışan adımlara benzerdir. 
 
 ```shell
 $ cd [Your GoPath]/src/staticwebpage
@@ -512,15 +505,15 @@ GoPath/src/staticwebpage$ az login    # Required when no service principal envir
 GoPath/src/staticwebpage$ mage
 ```
 
-Son komut satırında ek mage adımlarla değiştirebilirsiniz. Örneğin, kullanabileceğiniz `mage unit` veya `mage clean`. Katıştırmak için iyi bir fikirdir `dep` komutları ve `az login` magefile içinde. Size kodu buraya gösterme. 
+Son komut satırını ek Mage adımları ile değiştirebilirsiniz. Örneğin, `mage unit` veya `mage clean`kullanabilirsiniz. `dep` komutları ve `az login` ImageFile içine eklemek iyi bir fikirdir. Kodu burada göstermedik. 
 
-Görüntü ile Git paket sistemini kullanarak da adımları paylaşabilir. Bu durumda, ortak bir uygulama başvuru ve bağımlılıkları bildirme tüm modüller arasında magefiles basitleştirebilirsiniz (`mg.Deps()`).
+Mage ile, go paket sistemini kullanarak da adımları paylaşabilirsiniz. Bu durumda, yalnızca ortak bir uygulamaya başvurarak ve bağımlılıkları bildirerek (`mg.Deps()`), tüm modüllerinizin tamamında ımagefiles 'ı basitleştirebilirsiniz.
 
-**İsteğe bağlı: Kabul testleri çalıştırmak için hizmet sorumlusu ortam değişkenlerini ayarlama**
+**İsteğe bağlı: kabul testlerini çalıştırmak için hizmet sorumlusu ortam değişkenlerini ayarlama**
  
-Yürütme yerine `az login` testleri önce hizmet sorumlusu ortam değişkenlerini ayarlayarak Azure kimlik doğrulaması tamamlayabilirsiniz. Terraform yayımlar bir [ortam değişken adları listesi](https://www.terraform.io/docs/providers/azurerm/index.html#testing). (Bu ortam değişkenlerinden yalnızca ilk dördü gereklidir.) Terraform açıklayan ayrıntılı yönergeler de yayımlar nasıl [bu ortam değişkenleri değeri elde etmek](https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html).
+Testlerin önüne `az login` yürütmek yerine, hizmet sorumlusu ortam değişkenlerini ayarlayarak Azure kimlik doğrulamasını tamamlayabilirsiniz. Terrayform [, ortam değişkeni adlarının bir listesini](https://www.terraform.io/docs/providers/azurerm/index.html#testing)yayımlar. (Bu ortam değişkenlerinin yalnızca ilk dördü gereklidir.) Terrayform Ayrıca [, bu ortam değişkenlerinin değerinin](https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html)nasıl alınacağını açıklayan ayrıntılı yönergeler yayımlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Terratest hakkında daha fazla bilgi için bkz: [Terratest GitHub sayfasına](https://github.com/gruntwork-io/terratest).
-* Görüntü hakkında daha fazla bilgi için bkz. [mage GitHub sayfasına](https://github.com/magefile/mage) ve [mage Web sitesi](https://magefile.org/).
+> [!div class="nextstepaction"] 
+> [Terraytest GitHub sayfası](https://github.com/gruntwork-io/terratest).

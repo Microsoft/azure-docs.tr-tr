@@ -1,56 +1,74 @@
 ---
-title: 'Azure Blob Depolama: Azure arama için tam metin araması Ekle'
-description: Azure Search HTTP REST API'leri kullanarak kod içinde dizin için Azure Blob Depolama alanında gezinme metin içeriği.
-services: search
-ms.service: search
+title: Azure Blob depolamaya tam metin araması ekleme
+titleSuffix: Azure Cognitive Search
+description: Azure bilişsel bir şekilde tam metin arama dizini oluştururken içeriği ayıklayın ve Azure bloblarına yapı ekleyin.
+manager: nitinme
+author: HeidiSteen
+ms.author: heidist
+ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 03/01/2019
-author: mgottein
-manager: cgronlun
-ms.author: magottei
-ms.custom: seodec2018
-ms.openlocfilehash: b6bb70e4c56adb162006d2597d301c73b12d2a8a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/04/2019
+ms.openlocfilehash: af7d04bd74ada296b9f0e0f7c149c2a781cec579
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65540882"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73496487"
 ---
-# <a name="searching-blob-storage-with-azure-search"></a>Azure Search ile Blob deposu arama
+# <a name="add-full-text-search-to-azure-blob-data-using-azure-cognitive-search"></a>Azure Bilişsel Arama kullanarak Azure Blob verilerine tam metin araması ekleme
 
-Azure Blob depolamada depolanan içerik türleri çeşitli arama çözmek için zor bir sorun olabilir. Ancak, dizin ve Azure Search kullanarak Bloblarınızın içeriğini yalnızca birkaç tıklamayla arayın. BLOB deposu arama, bir Azure Search hizmet sağlanması gerekir. Çeşitli hizmet sınırları ve Azure Search'ün fiyatlandırma katmanları bulunabilir [fiyatlandırma sayfası](https://aka.ms/azspricing).
+Azure Blob depolamada depolanan çeşitli içerik türleri arasında arama yapmak zor bir sorun olabilir. Ancak, [Azure bilişsel arama](search-what-is-azure-search.md)kullanarak bloblarınızın içeriğini yalnızca birkaç tıklamayla dizinleyerek ve arayabilirsiniz. Azure Bilişsel Arama, dizin oluşturma için veri kaynağı kullanan yetenekleri ekleyen bir [*BLOB Indexer*](search-howto-indexing-azure-blob-storage.md) aracılığıyla blob depolamayı dizine almayı sağlayan yerleşik tümleştirmeye sahiptir.
 
-## <a name="what-is-azure-search"></a>Azure Search nedir?
-[Azure Search'ü](https://aka.ms/whatisazsearch) geliştiricilerin web ve mobil uygulamalarınıza ekleyin, güçlü tam metin arama deneyimleri sağlayan bir arama hizmetidir. Bir hizmet olarak Azure Search teklifi sırasında herhangi bir arama altyapısını yönetme ihtiyacını ortadan kaldırır. bir [% 99,9 çalışma süresi SLA'sı](https://aka.ms/azuresearchsla).
+## <a name="what-it-means-to-add-full-text-search-to-blob-data"></a>Blob verilerine tam metin araması eklemenin anlamı
 
-## <a name="index-and-search-enterprise-document-formats"></a>Dizin ve arama Kurumsal Belge biçimleri
-Desteğiyle [belge ayıklama](https://aka.ms/azsblobindexer) Azure Blob Depolama alanında aşağıdaki içeriğe dizin oluşturabilirsiniz:
+Azure Bilişsel Arama, arama hizmetinizde barındırılan Kullanıcı tanımlı dizinlerin üzerinde çalışan dizin oluşturma ve sorgu motorları sağlayan bir bulut arama hizmetidir. Ara değerli içeriğinizi bulutta sorgu altyapısından birlikte bulmak, performans için gerekli olan sonuçları hızlı bir şekilde döndürmek için gereklidir.
+
+Azure Bilişsel Arama, dizin oluşturma katmanında Azure Blob depolama ile tümleşir, bu da blob içeriğinizi *ters dizinler* ve serbest form metin sorgularını ve Filtre ifadelerini destekleyen diğer sorgu yapılarına dizinli arama belgeleri olarak içeri aktarın . Blob içeriğiniz bir arama dizininde dizinlendiği için, blob içeriğine erişim Azure Bilişsel Arama 'deki sorgu özelliklerinin tam aralığından yararlanabilir.
+
+Dizin oluşturulup doldurulduktan sonra, blob kapsayıcınızda bağımsız olarak bulunur, ancak dizin oluşturma işlemlerini yeniden çalıştırıp Dizin oluşturmayı temel kapsayıcıda yapılan değişikliklerle yenileyebilirsiniz. Tek bloblarda zaman damgası bilgileri değişiklik algılama için kullanılır. Yenileme mekanizması olarak zamanlanmış yürütme ya da isteğe bağlı dizin oluşturma için kabul edebilirsiniz.
+
+Azure Blob depolama alanında, tek bir kapsayıcıda bulunan bloblarınızın girdileri vardır. Blob 'lar neredeyse her türlü metin verisi olabilir. Bloblarınız görüntü içeriyorsa, görüntülerden metin oluşturup çıkarmak için bir [BLOB dizin oluşturmaya AI zenginleştirme](search-blob-ai-integration.md) ekleyebilirsiniz.
+
+Çıktı, istemci uygulamalarında hızlı metin arama, alma ve araştırma için kullanılan her zaman bir Azure Bilişsel Arama dizinidir. Between, dizin oluşturma ardışık düzen mimarisidir. İşlem hattı, bu makalede daha fazla açıklanılan *Dizin Oluşturucu* özelliğine dayanır.
+
+## <a name="start-with-services"></a>Hizmetlerle başlayın
+
+Azure Bilişsel Arama ve Azure Blob depolamaya ihtiyacınız vardır. BLOB depolama alanında, kaynak içerik sağlayan bir kapsayıcıya ihtiyacınız vardır.
+
+Doğrudan depolama hesabı portalı sayfanızda başlayabilirsiniz. Sol Gezinti sayfasında, **BLOB hizmeti** altında **Azure bilişsel arama Ekle** ' ye tıklayarak yeni bir hizmet oluşturun veya var olan bir hizmeti seçin. 
+
+Depolama hesabınıza Azure Bilişsel Arama eklediğinizde, blob verilerini indekslemek için standart işlemi izleyebilirsiniz. Kolay bir başlangıç girişi için Azure Bilişsel Arama **veri alma** Sihirbazı 'nı öneririz veya Postman gibi bir araç kullanarak REST API 'leri çağırabilirsiniz. Bu öğretici, Postman 'da REST API çağırma adımlarında size yol gösterir: [Azure bilişsel arama 'de yarı yapılandırılmış verileri (JSON blob 'ları) dizin ve arama](search-semi-structured-data.md). 
+
+## <a name="use-a-blob-indexer"></a>Blob Dizin Oluşturucu kullanma
+
+*Dizin Oluşturucu* , verileri örnekleme, meta veri verileri okuma, verileri alma ve yerel biçimlerdeki verileri, sonraki içeri aktarma için JSON belgelerine serileştirmede iç mantığa sahip olan veri kaynağı kullanan bir alt hizmettir. 
+
+Azure depolama 'daki Bloblar, [azure bilişsel arama blob Storage Indexer](search-howto-indexing-azure-blob-storage.md)kullanılarak dizine alınır. **Veri alma** Sihirbazı 'nı, bir REST API veya .NET SDK 'sını kullanarak bu dizin oluşturucuyu çağırabilirsiniz. Kod içinde, bu dizin oluşturucuyu türü ayarlayarak ve bir blob kapsayıcısı ile birlikte bir Azure depolama hesabı içeren bağlantı bilgilerini sağlayarak kullanırsınız. Daha sonra bir parametre olarak geçirebilen veya bir dosya türü uzantısı üzerinde filtreleyerek sanal bir dizin oluşturarak bloblarınızı alt kümelayabilirsiniz.
+
+Bir Dizin Oluşturucu, içeriği incelemek için bir blob açan "belgeyi çözme" yapmaz. Veri kaynağına bağlandıktan sonra, işlem hattının ilk adımı vardır. Blob verileri için PDF, Office belgeleri ve diğer içerik türlerinin algılandığı yerdir. Metin ayıklama ile belge çözme ücretsizdir. Bloblarınız görüntü içeriği içeriyorsa, [AI zenginleştirme](search-blob-ai-integration.md)eklemediğiniz takdirde görüntüler yok sayılır. Standart dizin oluşturma yalnızca metin içeriği için geçerlidir.
+
+Blob Indexer yapılandırma parametreleriyle birlikte gelir ve temel alınan veriler yeterli bilgi sağlıyorsa değişiklik izlemeyi destekler. [Azure bilişsel arama blob Storage Indexer](search-howto-indexing-azure-blob-storage.md)'ın temel işlevleri hakkında daha fazla bilgi edinebilirsiniz.
+
+### <a name="supported-content-types"></a>Desteklenen içerik türleri
+
+Bir kapsayıcı üzerinde bir blob Indexer çalıştırarak, aşağıdaki içerik türlerinden metin ve meta verileri tek bir sorgu ile ayıklayabilirsiniz:
 
 [!INCLUDE [search-blob-data-sources](../../includes/search-blob-data-sources.md)]
 
-Bu dosya türlerinden metin ve meta verilerini ayıklayarak tek bir sorgu ile birden çok dosya biçimleri arasında arama yapabilirsiniz. 
+### <a name="indexing-blob-metadata"></a>Blob meta verileri dizinleniyor
 
-## <a name="search-through-your-blob-metadata"></a>Blob meta verilerinizi arayın
-Herhangi bir içerik türü bir blob'un üzerinden sıralamak kolaylaştıran sık karşılaşılan bir senaryodur özel meta veriler hem Sistem özellikleri her blob için dizin sağlamaktır. Bu şekilde, belge türü ne olursa olsun tüm bloblar için bilgi dizine alınır. Ardından tüm Blob Depolama içeriği arasında sıralama, filtreleme ve modeli geçebilirsiniz.
+Herhangi bir içerik türünün Blobları arasında sıralama yapmayı kolaylaştıran yaygın bir senaryo, her blob için hem özel meta verileri hem de sistem özelliklerini dizinlemek. Bu şekilde, tüm Bloblar için bilgiler, arama hizmetinizde bir dizinde depolanan belge türünden bağımsız olarak dizinlenir. Yeni dizininizi kullanarak, tüm blob depolama içeriklerine göre sıralama, filtreleme ve model işleme devam edebilirsiniz.
 
-[Meta veriler blob dizin oluşturma hakkında daha fazla bilgi edinin.](https://aka.ms/azsblobmetadataindexing)
+### <a name="indexing-json-blobs"></a>JSON bloblarını dizine alma
+Dizin oluşturucular, JSON içeren bloblarda bulunan yapılandırılmış içerikleri ayıklamak üzere yapılandırılabilir. Bir Dizin Oluşturucu, JSON bloblarını okuyabilir ve yapılandırılmış içeriği bir arama belgesinin uygun alanlarıyla ayrıştırır. Dizin oluşturucular Ayrıca, bir dizi JSON nesnesi içeren Bloblar alabilir ve her öğeyi ayrı bir arama belgesiyle eşler. Dizin Oluşturucu tarafından oluşturulan JSON nesnesinin türünü etkilemek için bir ayrıştırma modu ayarlayabilirsiniz.
 
-## <a name="image-search"></a>Resim arama
-Azure Search'ün tam metin araması, çok yönlü gezinme ve sıralama özellikleri artık meta veri blob'larda depolanan görüntülerin uygulanabilir.
+## <a name="search-blob-content-in-a-search-index"></a>Arama dizininde blob içeriğini ara 
 
-Bilişsel arama içeren görüntü işleme becerileri gibi [optik karakter tanıma (OCR)](cognitive-search-skill-ocr.md) tanımlama ve [görsel özellikleri](cognitive-search-skill-image-analysis.md) olun, her bulunan görsel içerik dizinleme olanağı görüntü.
+Bir dizin oluşturma işleminin çıktısı, bir istemci uygulamasında ücretsiz metin ve filtrelenmiş sorgular kullanan etkileşimli araştırma için kullanılan bir arama dizinidir. İçeriğin ilk araştırılması ve doğrulanması için, belge yapısını incelemek üzere portalda [Arama Gezgini](search-explorer.md) ile başlamasını öneririz. Arama Gezgini 'nde [basit sorgu söz dizimi](query-simple-syntax.md), [tam sorgu söz](query-lucene-syntax.md)dizimi ve [filtre ifadesi sözdizimini](query-odata-filter-orderby-syntax.md) kullanabilirsiniz.
 
-## <a name="index-and-search-through-json-blobs"></a>Dizin ve JSON BLOB'ları ile arama
-Azure Search, JSON içeren bloblar bulundu yapılandırılmış içeriği ayıklamak için yapılandırılabilir. Azure Search, JSON BLOB'ları okuyun ve bir Azure Search belgesinin uygun alanlara yapılandırılmış içeriği ayrıştırılamıyor. Azure arama, bir JSON nesne dizisi içerir ve her öğe için ayrı bir Azure Search belge harita blobları da yararlanabilirsiniz.
+Daha kalıcı bir çözüm, sorgu girişleri toplamaktır ve yanıtı bir istemci uygulamasında arama sonuçları olarak sunar. Aşağıdaki C# öğreticide bir arama uygulamasının nasıl oluşturulacağı açıklanmaktadır: [Azure bilişsel arama ilk uygulamanızı oluşturma](tutorial-csharp-create-first-app.md).
 
-JSON ayrıştırma şu anda portal üzerinden yapılandırılabilir değildir. [Azure Search'te JSON ayrıştırma hakkında daha fazla bilgi edinin.](https://aka.ms/azsjsonblobindexing)
+## <a name="next-steps"></a>Sonraki adımlar
 
-## <a name="quick-start"></a>Hızlı başlangıç
-Azure arama, doğrudan Blob Depolama portal sayfasında blob'lara eklenebilir.
-
-![](./media/search-blob-storage-integration/blob-blade.png)
-
-Tıklayın **Azure Search Ekle** burada mevcut bir Azure Search hizmeti seçin veya yeni bir hizmet oluşturun, bir akışı başlatmak için. Yeni bir hizmet oluşturun, depolama hesabınızın portal deneyimi gitme. Geri depolama portal sayfasına gidin ve yeniden seçin **Azure Search Ekle** hizmetiniz seçebileceğiniz seçeneği.
-
-## <a name="next-steps"></a>Sonraki Adımlar
-Azure Search Blob dizin oluşturucu tam hakkında daha fazla bilgi [belgeleri](https://aka.ms/azsblobindexer).
++ [Azure portal (Azure Blob depolama) ile Blobları karşıya yükleme, indirme ve listeleme](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
++ [Blob Dizin oluşturucuyu ayarlama (Azure Bilişsel Arama)](search-howto-indexing-azure-blob-storage.md) 

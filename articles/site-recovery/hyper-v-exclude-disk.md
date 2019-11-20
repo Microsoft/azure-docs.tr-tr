@@ -1,19 +1,18 @@
 ---
-title: Azure Site Recovery hizmeti ile olağanüstü durum kurtarmayı ayarlarken, diskleri çoğaltmanın dışında tutma | Microsoft Docs
-description: VM diskleri Azure'a olağanüstü durum kurtarma sırasında çoğaltmanın dışında tutmak açıklar.
+title: Azure Site Recovery ile olağanüstü durum kurtarma 'da diskleri çoğaltmanın dışında tutma
+description: Azure 'a olağanüstü durum kurtarma sırasında VM disklerinin çoğaltma işleminden nasıl dışlanacağını açıklar.
 author: mayurigupta13
 manager: rochakm
 ms.service: site-recovery
-services: site-recovery
 ms.topic: conceptual
-ms.date: 01/19/2019
+ms.date: 11/12/2019
 ms.author: mayg
-ms.openlocfilehash: f86ded99ef5280a4e6929c39a9fd323d1b61f6f0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 12304067e1a92559c2313fd7382f271249a8c784
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60773952"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73961448"
 ---
 # <a name="exclude-disks-from-replication"></a>Diskleri çoğaltmanın dışında tutma
 Bu makalede, disklerin çoğaltmanın dışında nasıl tutulacağı açıklanmaktadır. Bu dışında tutma, kullanılan çoğaltma bant genişliğini iyileştirebilir veya bu gibi disklerin kullandığı hedef tarafı kaynakları iyileştirebilir.
@@ -22,7 +21,7 @@ Bu makalede, disklerin çoğaltmanın dışında nasıl tutulacağı açıklanma
 
 **Özelliği** | **Vmware’den Azure’a** | **Hyper-V'den Azure'a** | **Azure'dan Azure'a**| **Hyper-V'den Hyper-V'ye** 
 --|--|--|--|--
-Diski hariç tutma | Evet | Evet | Hayır | Hayır
+Diski hariç tutma | Yes | Yes | Hayır | Hayır
 
 ## <a name="why-exclude-disks-from-replication"></a>Diskleri çoğaltmanın dışında tutma nedenleri nelerdir?
 Disklerin çoğaltmanın dışında tutulması, çoğu zaman aşağıdaki nedenlerden dolayı gereklidir:
@@ -60,7 +59,7 @@ Disk dışarıda tutma özelliğini daha iyi anlamak için iki senaryoyu düşü
 - SQL Server tempdb diski
 - Disk belleği dosyası (pagefile.sys) diski
 
-## <a name="example-1-exclude-the-sql-server-tempdb-disk"></a>Örnek 1: SQL Server tempdb diskini dışarıda tutma
+## <a name="example-1-exclude-the-sql-server-tempdb-disk"></a>Örnek 1: SQL Server tempdb diskini dışlama
 Dışlanabilecek bir tempdb’si olan bir SQL Server sanal makinesi düşünelim.
 
 Sanal disk adı SalesDB şeklindedir.
@@ -163,12 +162,12 @@ DB-Disk2 (Dışlanan disk) | Disk2 | E:\ | Geçici dosyalar
 DB-Disk3 (Dışlanan disk) | Disk3 | F:\ | SQL tempdb veritabanı (klasör yolu (F:\MSSQL\Data\)
 DB-Disk4 | Disk4 | G:\ | Kullanıcı Veritabanı2
 
-## <a name="example-2-exclude-the-paging-file-pagefilesys-disk"></a>Örnek 2: Disk belleği dosyası (pagefile.sys) diskini dışarıda tutma
+## <a name="example-2-exclude-the-paging-file-pagefilesys-disk"></a>Örnek 2: Disk belleği dosyası (pagefile.sys) diskini dışlama
 
 Dışarıda tutulabilecek bir disk belleği dosyası diski olan bir sanal makine düşünelim.
 İki durum vardır.
 
-### <a name="case-1-the-paging-file-is-configured-on-the-d-drive"></a>1\. durum: Disk belleği dosyası D: sürücüsünde yapılandırılmış
+### <a name="case-1-the-paging-file-is-configured-on-the-d-drive"></a>Durum 1: Disk belleği dosyası D: sürücüsünde yapılandırılmıştır
 Disk yapılandırması aşağıdaki gibidir:
 
 **Disk adı** | **Konuk işletim sistemi disk no.** | **Sürücü harfi** | **Diskteki veri türü**
@@ -197,7 +196,7 @@ Azure sanal makinesindeki disk belleği dosyası ayarları şunlardır:
 
 ![Azure sanal makinesindeki disk belleği dosyası ayarları](./media/hyper-v-exclude-disk/pagefile-on-Azure-vm-after-failover.png)
 
-### <a name="case-2-the-paging-file-is-configured-on-another-drive-other-than-d-drive"></a>2\. durum: Disk belleği dosyası başka bir sürücüde (D: sürücüsü dışında) yapılandırılmış
+### <a name="case-2-the-paging-file-is-configured-on-another-drive-other-than-d-drive"></a>Durum 2: Disk belleği dosyası başka bir sürücüde (D: sürücüsü dışında) yapılandırılmıştır
 
 Kaynak sanal makine disk yapılandırması şöyledir:
 

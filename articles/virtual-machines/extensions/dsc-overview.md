@@ -1,6 +1,6 @@
 ---
-title: Desired State Configuration Azure genel bakış
-description: Microsoft Azure uzantısı işleyicisi PowerShell Desired State Configuration (DSC için) kullanmayı öğrenin. Makalede Önkoşullar, mimari ve cmdlet'leri içerir.
+title: Azure için istenen durum yapılandırması genel bakış
+description: PowerShell Istenen durum yapılandırması (DSC) için Microsoft Azure uzantısı işleyicisini nasıl kullanacağınızı öğrenin. Makale önkoşulları, mimarisi ve cmdlet 'leri içerir.
 services: virtual-machines-windows
 documentationcenter: ''
 author: bobbytreed
@@ -10,113 +10,112 @@ tags: azure-resource-manager
 keywords: DSC
 ms.assetid: bbacbc93-1e7b-4611-a3ec-e3320641f9ba
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: na
 ms.date: 05/02/2018
 ms.author: robreed
-ms.openlocfilehash: 410990ecdca8a94be9c7c3d0b48a5092fcaa6060
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7e309237589dfaf037114401172fc8f928a30077
+ms.sourcegitcommit: 42748f80351b336b7a5b6335786096da49febf6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66515899"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72176643"
 ---
-# <a name="introduction-to-the-azure-desired-state-configuration-extension-handler"></a>Azure Desired State Configuration uzantısı işleyicisi giriş
+# <a name="introduction-to-the-azure-desired-state-configuration-extension-handler"></a>Azure Istenen durum yapılandırması uzantı işleyicisine giriş
 
-Microsoft Azure altyapı hizmetleri, Azure VM aracısı ve ilişkili uzantıları parçasıdır. VM uzantıları VM işlevselliğini genişleten ve çeşitli VM yönetimi işlemleri basitleştirmek yazılım bileşenleridir.
+Azure VM Aracısı ve ilişkili uzantılar Microsoft Azure altyapı hizmetlerinin bir parçasıdır. VM uzantıları, VM işlevlerini genişleten ve çeşitli VM yönetimi işlemlerini basitleştiren yazılım bileşenleridir.
 
-Azure Desired State Configuration (DSC) uzantısı için bir VM önyükleme için birincil kullanım örneği [Azure Otomasyon durum yapılandırması (DSC) hizmetini](../../automation/automation-dsc-overview.md).
-Hizmeti sağlayan [avantajları](/powershell/dsc/metaconfig#pull-service) VM yapılandırması ve Azure izleme gibi işletimsel diğer araçlarla tümleştirme devam eden Yönetimi içerir.
-Sanal makinenin hizmetine kaydetmek için eklentiyi kullanarak, Azure abonelikleri genelinde bile çalışır esnek bir çözüm sağlar.
+Azure Istenen durum yapılandırması (DSC) uzantısı için birincil kullanım örneği, bir VM 'yi [Azure Otomasyonu durum yapılandırması (DSC) hizmetine](../../automation/automation-dsc-overview.md)önkullanmaktır.
+Hizmet, VM yapılandırmasının sürekli yönetimini ve Azure Izleme gibi diğer işletimsel araçlarla tümleştirmeyi kapsayan [avantajlar](/powershell/scripting/dsc/managing-nodes/metaConfig#pull-service) sağlar.
+VM 'leri hizmetine kaydetme uzantısının kullanılması, Azure aboneliklerinde bile çalışacak esnek bir çözüm sağlar.
 
-DSC uzantısı Automation DSC hizmet bağımsız olarak kullanabilirsiniz.
-Ancak, bu yalnızca bir yapılandırma için VM bildirim yapar.
-Devam eden bir raporlama olmadan yerel olarak VM dışında kullanılabilir.
+DSC uzantısını Automation DSC hizmetinden bağımsız olarak kullanabilirsiniz.
+Ancak, bu yalnızca VM 'ye bir yapılandırma gönderir.
+Sanal makinede yerel olarak bulunmayan sürekli raporlama yok.
 
-Bu makalede her iki senaryoyu hakkında bilgi sağlar: DSC uzantısı için Otomasyon ekleme ve Azure SDK'sını kullanarak sanal makineleri için yapılandırmaları atamak için bir araç olarak DSC uzantısı kullanarak.
+Bu makalede her iki senaryo hakkında bilgi verilmektedir: Otomasyon ekleme için DSC uzantısını kullanma ve DSC uzantısını Azure SDK kullanarak VM 'lere yapılandırma atamak için bir araç olarak kullanma.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- **Yerel makine**: Azure VM uzantısı ile etkileşimde bulunmak üzere Azure portalında veya Azure PowerShell SDK'sını kullanmanız gerekir.
-- **Konuk Aracısı**: DSC yapılandırması tarafından yapılandırılmış bir Azure VM, Windows Management Framework (WMF) 4.0 veya üzeri destekleyen bir işletim sistemi olmalıdır. Desteklenen işletim sistemi sürümleri tam listesi için bkz. [DSC uzantısı sürüm geçmişi](/powershell/dsc/azuredscexthistory).
+- **Yerel makine**: Azure VM uzantısıyla etkileşim kurmak için Azure Portal ya da Azure PowerShell SDK 'sını kullanmanız gerekir.
+- **Konuk Aracısı**: DSC yapılandırması tarafından YAPıLANDıRıLAN Azure VM, Windows Management Framework (WMF) 4,0 veya üstünü destekleyen bir işletim sistemi olmalıdır. Desteklenen işletim sistemi sürümlerinin tam listesi için [DSC Uzantısı Sürüm geçmişine](/powershell/scripting/dsc/getting-started/azuredscexthistory)bakın.
 
-## <a name="terms-and-concepts"></a>Terimleri ve kavramları
+## <a name="terms-and-concepts"></a>Hüküm ve kavramlar
 
-Bu kılavuz, aşağıdaki kavramları bilindiğini varsayar:
+Bu kılavuzda, aşağıdaki kavramlarla benzerlik varsayılmaktadır:
 
-- **Yapılandırma**: DSC yapılandırma belgesi.
-- **Düğüm**: DSC yapılandırması için bir hedef. Bu belgedeki *düğüm* her zaman bir Azure VM'ye ifade eder.
-- **Yapılandırma verilerini**: Bir yapılandırma için çevresel verileri olan bir .psd1 dosyası.
+- **Yapılandırma**: bir DSC yapılandırma belgesi.
+- **Düğüm**: DSC yapılandırması için bir hedef. Bu belgede, *düğüm* her zaman BIR Azure VM 'sine başvurur.
+- **Yapılandırma verileri**: bir yapılandırma için çevresel verileri olan bir. psd1 dosyası.
 
-## <a name="architecture"></a>Mimari
+## <a name="architecture"></a>Mimarisini
 
-Azure DSC uzantı Azure VM Aracısı framework sunun, yürürlüğe koymasına ve Azure Vm'lerinde çalışan DSC yapılandırmaları raporlamak için kullanır. DSC uzantısı yapılandırma belgesi ve bir dizi parametre kabul eder. Hiçbir dosya sağlanırsa, bir [varsayılan yapılandırma betiğini](#default-configuration-script) uzantısıyla katıştırılır. Yalnızca meta veri kümesi için kullanılan varsayılan yapılandırma betiğini [yerel Configuration Manager](/powershell/dsc/metaconfig).
+Azure DSC Uzantısı, Azure VM 'lerde çalışan DSC yapılandırmasını teslim etmek, uygulamak ve raporlamak için Azure VM Aracısı çerçevesini kullanır. DSC Uzantısı bir yapılandırma belgesini ve bir dizi parametreyi kabul eder. Dosya sağlanmazsa, uzantıya sahip bir [varsayılan yapılandırma betiği](#default-configuration-script) eklenir. Varsayılan yapılandırma betiği yalnızca [yerel Configuration Manager](/powershell/scripting/dsc/managing-nodes/metaConfig)meta verileri ayarlamak için kullanılır.
 
-Uzantının ilk kez çağrıldığında, aşağıdaki mantık kullanarak WMF sürümünü yükler:
+Uzantı ilk kez çağrıldığında, aşağıdaki mantığı kullanarak WMF 'in bir sürümünü yüklenir:
 
-- Azure VM işletim sistemi Windows Server 2016 ise, hiçbir işlem yapılmaz. Windows Server 2016 yüklü PowerShell'in en son sürümünü zaten var.
-- Varsa **wmfVersion** özelliği belirtilmişse, bu sürüm sanal makinenin işletim sistemi ile uyumlu olmadığı sürece WMF sürümünün yüklü.
-- Hayır ise **wmfVersion** özelliği belirtildi, wmf'nin ayrıca ilgili en son sürümü yüklü.
+- Azure VM OS Windows Server 2016 ise hiçbir işlem yapılmaz. Windows Server 2016 ' de zaten PowerShell 'in en son sürümü yüklü.
+- **Wmfversion** özelliği belirtilmişse, bu sürüm VM 'nin işletim sistemi ile uyumlu olmadığı IÇIN bu WMF sürümü yüklenir.
+- **Wmfversion** özelliği belirtilmemişse, en son geçerli WMF sürümü yüklenir.
 
-WMF yükleme yeniden başlatılması gerekiyor. Yeniden başlattıktan sonra uzantıyı belirtilen .zip dosyasını indirir **modulesUrl** sağlanırsa, özellik. Bu konum, Azure Blob Depolama alanında ise, bir SAS belirtecini belirtebilirsiniz **sasToken** dosyaya erişmek için özelliği. .zip indirilir ve açılmış sonra yapılandırma işlevi içinde tanımlanan **configurationFunction** .mof dosyası oluşturmak için çalışır. Uzantı ardından çalıştırır `Start-DscConfiguration -Force` oluşturulan .mof dosyasını kullanarak. Uzantı çıktısını yakalar ve Azure durumu kanala yazar.
+WMF 'nin yüklenmesi için yeniden başlatma gerekir. Yeniden başlatıldıktan sonra uzantı, sağlanmışsa, **modulesUrl** özelliğinde belirtilen. zip dosyasını indirir. Bu konum Azure Blob depolama alanında ise, dosyaya erişmek için **Sastoken** ÖZELLIĞINDE bir SAS belirteci belirtebilirsiniz. . Zip indirildikten ve yüklendikten sonra, **configurationfunction** içinde tanımlanan yapılandırma işlevi bir. mof dosyası oluşturmak için çalışır. Daha sonra uzantı, oluşturulan. mof dosyasını kullanarak `Start-DscConfiguration -Force` ' ı çalıştırır. Uzantı çıktıyı yakalar ve Azure durum kanalına yazar.
 
 ### <a name="default-configuration-script"></a>Varsayılan yapılandırma betiği
 
-Azure DSC uzantısı olması amaçlanan bir varsayılan yapılandırma betiği içeren kullanılabilir eklemenize Azure Automation DSC hizmetine bir VM. Betik parametreleri yapılandırılabilir özellikleriyle hizalanır [yerel Configuration Manager](/powershell/dsc/metaconfig). Betik parametreleri için bkz. [varsayılan yapılandırma betiğini](dsc-template.md#default-configuration-script) içinde [Desired State Configuration uzantısı Azure Resource Manager şablonları ile](dsc-template.md). Tam betik için bkz [github'da Azure Hızlı Başlangıç şablonu](https://github.com/Azure/azure-quickstart-templates/blob/master/dsc-extension-azure-automation-pullserver/UpdateLCMforAAPull.zip?raw=true).
+Azure DSC Uzantısı, Azure Automation DSC hizmetine bir VM eklediğinizde kullanılması amaçlanan bir varsayılan yapılandırma betiği içerir. Betik parametreleri, [yerel Configuration Manager](/powershell/scripting/dsc/managing-nodes/metaConfig)yapılandırılabilir özellikleriyle hizalanır. Betik parametreleri için, [Azure Resource Manager şablonlar Ile Istenen durum yapılandırma uzantısında](dsc-template.md) [varsayılan yapılandırma betiği](dsc-template.md#default-configuration-script) ' ne bakın. Tam betik için [GitHub 'Da Azure hızlı başlangıç şablonu](https://github.com/Azure/azure-quickstart-templates/blob/master/dsc-extension-azure-automation-pullserver/UpdateLCMforAAPull.zip?raw=true)' na bakın.
 
-## <a name="information-for-registering-with-azure-automation-state-configuration-dsc-service"></a>Azure Otomasyonu durum yapılandırması (DSC) hizmeti ile kaydetme hakkında bilgi
+## <a name="information-for-registering-with-azure-automation-state-configuration-dsc-service"></a>Azure Otomasyonu durum yapılandırması (DSC) hizmeti ile kaydolma bilgileri
 
-DSC uzantısı ile durum Yapılandırma hizmetini bir düğüm kaydetmek için kullanırken, üç değer sağlanması gerekir.
+Bir düğümü durum yapılandırma hizmetine kaydetmek için DSC uzantısını kullanırken üç değerin sağlanması gerekecektir.
 
-- RegistrationUrl - Azure Otomasyonu hesabını https adresi
-- RegistrationKey - düğümleri hizmetiyle kaydetmek için kullanılan bir paylaşılan gizlilik
-- NodeConfigurationName - ' % s'adı, düğüm yapılandırma (hizmet sunucu rolünü çekmek için MOF)
+- RegistrationUrl-Azure Otomasyonu hesabının https adresi
+- RegistrationKey-düğümleri hizmete kaydetmek için kullanılan paylaşılan bir gizli dizi
+- NodeConfigurationName-sunucu rolünü yapılandırmak için hizmetten çekilecek düğüm yapılandırmasının (MOF) adı
 
-Bu bilgiler görülebilir [Azure portalında](../../automation/automation-dsc-onboarding.md#azure-portal) veya PowerShell'i kullanabilirsiniz.
+Bu bilgiler [Azure Portal](../../automation/automation-dsc-onboarding.md#azure-portal) görünebilir veya PowerShell kullanabilirsiniz.
 
 ```powershell
 (Get-AzAutomationRegistrationInfo -ResourceGroupName <resourcegroupname> -AutomationAccountName <accountname>).Endpoint
 (Get-AzAutomationRegistrationInfo -ResourceGroupName <resourcegroupname> -AutomationAccountName <accountname>).PrimaryKey
 ```
 
-Düğüm yapılandırması adı, Azure durum yapılandırmasında düğüm yapılandırması var. emin olun.  Kullanmıyorsa, uzantı dağıtımı bir hata döndürür.  Ayrıca adını kullandığınızdan emin olun *düğüm yapılandırması* ve yapılandırma.
-Kullanılan komut dosyasında tanımlanmış bir yapılandırması [düğüm yapılandırması (MOF dosyası) derlemek için](https://docs.microsoft.com/azure/automation/automation-dsc-compile).
-Ad bir nokta yapılandırması her zaman olacak `.` ve her iki `localhost` veya belirli bir bilgisayar adı.
+Düğüm yapılandırma adı için, düğüm yapılandırmasının Azure Durum Yapılandırması 'nda bulunduğundan emin olun.  Değilse, uzantı dağıtımı bir hata döndürür.  Ayrıca, yapılandırma değil, *düğüm yapılandırmasının* adını kullandığınızdan emin olun.
+Bir yapılandırma, [düğüm yapılandırmasını (MOF dosyası) derlemek için](https://docs.microsoft.com/azure/automation/automation-dsc-compile)kullanılan bir betikte tanımlanır.
+Ad her zaman yapılandırma olacaktır `.` ve `localhost` ya da belirli bir bilgisayar adı.
 
-## <a name="dsc-extension-in-resource-manager-templates"></a>Resource Manager şablonlarında DSC uzantısı
+## <a name="dsc-extension-in-resource-manager-templates"></a>Kaynak Yöneticisi şablonlarda DSC Uzantısı
 
-Çoğu senaryoda, Resource Manager dağıtım şablonlarını DSC uzantısı ile çalışmak için beklenen yoludur. Daha fazla bilgi ve Resource Manager dağıtım şablonlarında DSC uzantısı ekleme örnekleri için bkz: [Desired State Configuration uzantısı Azure Resource Manager şablonları ile](dsc-template.md).
+Çoğu senaryoda, Kaynak Yöneticisi dağıtım şablonları DSC uzantısıyla çalışmanın beklenen yoludur. Daha fazla bilgi ve Kaynak Yöneticisi dağıtım şablonlarına DSC uzantısını ekleme örnekleri için, [Azure Resource Manager şablonlarla Istenen durum yapılandırma uzantısı](dsc-template.md)' na bakın.
 
-## <a name="dsc-extension-powershell-cmdlets"></a>DSC uzantısı PowerShell cmdlet'leri
+## <a name="dsc-extension-powershell-cmdlets"></a>DSC Uzantısı PowerShell cmdlet 'leri
 
-DSC uzantısı'nı yönetmek için kullanılan PowerShell cmdlet'lerini, etkileşimli sorun giderme ve bilgi toplama senaryolar en iyi şekilde kullanılır. Cmdlet'ler, paketleme, yayımlama ve DSC uzantı dağıtımlarını izlemek için kullanabilirsiniz. DSC uzantısı için cmdlet'leri olmayan henüz çalışmak için güncelleştirilmiş [varsayılan yapılandırma betiğini](#default-configuration-script).
+DSC uzantısını yönetmek için kullanılan PowerShell cmdlet 'leri, etkileşimli sorun giderme ve bilgi toplama senaryolarında en iyi şekilde kullanılır. DSC uzantı dağıtımlarını paketlemek, yayımlamak ve izlemek için cmdlet 'lerini kullanabilirsiniz. DSC uzantısının cmdlet 'leri henüz [varsayılan yapılandırma betiği](#default-configuration-script)ile çalışacak şekilde güncellenmez.
 
-**Yayımla AzVMDscConfiguration** cmdlet'i bir yapılandırma dosyasında alır, bağımlı DSC kaynakları tarar ve ardından bir .zip dosyası oluşturur. .Zip dosyasını, yapılandırma ve yapılandırmayı uygulamak için gereken DSC kaynakları içerir. Cmdlet ayrıca paketin yerel olarak kullanarak oluşturabilirsiniz *- OutputArchivePath* parametresi. Aksi takdirde, cmdlet .zip dosyasını BLOB depolamaya yayımlar ve bir SAS belirteci ile güvenliğini sağlar.
+**Publish-AzVMDscConfiguration** cmdlet 'i bir yapılandırma dosyası alır, bunu bağımlı DSC kaynakları için tarar ve bir. zip dosyası oluşturur. . Zip dosyası yapılandırmayı uygulamak için gereken yapılandırma ve DSC kaynaklarını içerir. Cmdlet 'i *-OutputArchivePath* parametresini kullanarak paketi yerel olarak da oluşturabilir. Aksi takdirde, cmdlet. zip dosyasını BLOB depolama alanına yayımlar ve ardından bir SAS belirteci ile güvenliğini sağlar.
 
-Cmdlet oluşturan .ps1 yapılandırma Arşiv klasörünün kökünde .zip dosyasındaki betiğidir. Modül klasörü kaynakları arşivi klasöre yerleştirilir.
+Cmdlet 'in oluşturduğu. ps1 yapılandırma betiği Arşiv klasörünün kökündeki. zip dosyasında bulunur. Modül klasörü, kaynaklardaki arşiv klasörüne yerleştirilir.
 
-**Kümesi AzVMDscExtension** cmdlet'i bir VM yapılandırma nesnesine PowerShell DSC uzantısı için gerekli ayarları ekler.
+**Set-AzVMDscExtension** cmdlet 'ı PowerShell DSC uzantısının gerektirdiği ayarları bir VM yapılandırma nesnesi olarak çıkarır.
 
-**Get-AzVMDscExtension** cmdlet'i belirli bir VM DSC uzantı durumunu alır.
+**Get-AzVMDscExtension** cmdlet 'i belirli bir sanal makinenin DSC uzantı durumunu alır.
 
-**Get-AzVMDscExtensionStatus** cmdlet'i DSC uzantı işleyici tarafından yapılandırmalara uygun koşullarda çalışıldığından DSC yapılandırma durumunu alır. Bu eylem, bir grup VM'yi veya tek bir VM üzerinde gerçekleştirilebilir.
+**Get-AzVMDscExtensionStatus** cmdlet 'ı, DSC uzantı işleyicisi tarafından Işlem yapılan DSC yapılandırmasının durumunu alır. Bu eylem, tek bir VM veya bir VM grubu üzerinde gerçekleştirilebilir.
 
-**Remove-AzVMDscExtension** cmdlet'i uzantısı işleyicinin belirli bir sanal makineden kaldırır. Bu cmdlet mu *değil* yapılandırmasını kaldırmak, WMF kaldırın veya VM üzerinde uygulanan ayarları değiştirin. Uzantı işleyici yalnızca kaldırır. 
+**Remove-AzVMDscExtension** cmdlet 'i belırlı bir VM 'den uzantı işleyicisini kaldırır. Bu cmdlet yapılandırmayı *kaldırmaz, WMF 'yi kaldırmaz veya* uygulanan ayarları sanal makinede değiştirmez. Yalnızca uzantı işleyicisini kaldırır. 
 
-Resource Manager DSC uzantı cmdlet'leri hakkında önemli bilgiler:
+Kaynak Yöneticisi DSC Uzantısı cmdlet 'leri hakkında önemli bilgiler:
 
-- Azure Resource Manager cmdlet'leri, zaman uyumlu.
-- *ResourceGroupName*, *VMName*, *ArchiveStorageAccountName*, *sürüm*, ve *konumu*gerekli tüm parametreleri.
-- *ArchiveResourceGroupName* isteğe bağlı bir parametredir. Sanal Makinenin oluşturulduğu olandan farklı bir kaynak grubu için depolama hesabınıza ait olduğunda, bu parametre belirtebilirsiniz.
-- Kullanım **AutoUpdate** uzantısı işleyicisi uygun olduğunda en son sürüme otomatik olarak güncelleştirmek için anahtar. Bu parametre WMF yeni bir sürümü yayımlandığında sanal makinede yeniden neden olma olasılığı vardır.
+- Azure Resource Manager cmdlet 'leri zaman uyumludur.
+- *Resourcegroupname*, *VMName*, *ArchiveStorageAccountName*, *Version*ve *Location* parametrelerinin hepsi gereklidir.
+- *ArchiveResourceGroupName* isteğe bağlı bir parametredir. Depolama Hesabınız VM 'nin oluşturulduğu sunucudan farklı bir kaynak grubuna aitse, bu parametreyi belirtebilirsiniz.
+- Uzantı işleyicisini **, kullanılabilir** olduğunda en son sürüme otomatik olarak güncelleştirmek için otomatik güncelleştirme anahtarını kullanın. Bu parametrenin yeni bir WMF sürümü yayınlandığında VM 'de yeniden başlatmalara neden olma olasılığı vardır.
 
-### <a name="get-started-with-cmdlets"></a>Cmdlet'lerini kullanmaya başlama
+### <a name="get-started-with-cmdlets"></a>Cmdlet 'leri kullanmaya başlama
 
-Azure DSC uzantı DSC yapılandırma belgelerini doğrudan dağıtım sırasında Azure Vm'leri yapılandırmak için kullanabilirsiniz. Bu adım, otomasyon için düğümü kaydettirin değil. Düğüm *değil* merkezi olarak yönetilen.
+Azure DSC Uzantısı, dağıtım sırasında doğrudan Azure VM 'Leri yapılandırmak için DSC yapılandırma belgelerini kullanabilir. Bu adım, düğümü Otomasyon 'a kaydetmez. Düğüm merkezi olarak *yönetilmez* .
 
-Aşağıdaki örnek bir yapılandırma basit bir örneği gösterilmektedir. Yapılandırmayı Iısınstall.ps1 yerel olarak kaydedin.
+Aşağıdaki örnek, bir yapılandırmaya ilişkin basit bir örnek gösterir. Yapılandırmayı ıısınstall. ps1 olarak yerel olarak kaydedin.
 
 ```powershell
 configuration IISInstall
@@ -132,7 +131,7 @@ configuration IISInstall
 }
 ```
 
-Aşağıdaki komutları Iısınstall.ps1 betiğin belirtilen VM yerleştirin. Komutlar da yapılandırmasını yürütün ve durumuna geri rapor.
+Aşağıdaki komutlar, ıısınstall. ps1 betiğini belirtilen sanal makineye yerleştirir. Komutlar Ayrıca yapılandırmayı yürütür ve sonra durum ' u yeniden bildirir.
 
 ```powershell
 $resourceGroup = 'dscVmDemo'
@@ -144,11 +143,11 @@ Publish-AzVMDscConfiguration -ConfigurationPath .\iisInstall.ps1 -ResourceGroupN
 Set-AzVMDscExtension -Version '2.76' -ResourceGroupName $resourceGroup -VMName $vmName -ArchiveStorageAccountName $storageName -ArchiveBlobName 'iisInstall.ps1.zip' -AutoUpdate -ConfigurationName 'IISInstall'
 ```
 
-## <a name="azure-cli-deployment"></a>Azure CLI dağıtım
+## <a name="azure-cli-deployment"></a>Azure CLı dağıtımı
 
-DSC uzantısı varolan bir sanal makineye dağıtmak için Azure CLI kullanılabilir.
+Azure CLı, DSC uzantısını var olan bir sanal makineye dağıtmak için kullanılabilir.
 
-Bir Windows çalıştıran sanal makine için:
+Windows çalıştıran bir sanal makine için:
 
 ```azurecli
 az vm extension set \
@@ -160,7 +159,7 @@ az vm extension set \
   --settings '{}'
 ```
 
-Bir Linux çalıştıran sanal makine için:
+Linux çalıştıran bir sanal makine için:
 
 ```azurecli
 az vm extension set \
@@ -172,40 +171,40 @@ az vm extension set \
   --settings '{}'
 ```
 
-## <a name="azure-portal-functionality"></a>Azure portal işlevi
+## <a name="azure-portal-functionality"></a>Azure portal işlevselliği
 
-Portalda DSC ayarlamak için:
+Portalda DSC 'yi ayarlamak için:
 
-1. Bir sanal makineye gidin.
-2. **Ayarlar** bölümünde **Uzantılar**’ı seçin.
-3. Oluşturulan yeni sayfasında seçin **+ Ekle**ve ardından **PowerShell Desired State Configuration**.
-4. Tıklayın **Oluştur** uzantı bilgileri sayfanın alt kısmındaki.
+1. Bir VM 'ye gidin.
+2. **Ayarlar**altında **Uzantılar**' ı seçin.
+3. Oluşturulan yeni sayfada **+ Ekle**' yi seçin ve ardından **PowerShell İstenen Durum Yapılandırması**' nı seçin.
+4. Uzantı bilgileri sayfasının alt kısmındaki **Oluştur** ' a tıklayın.
 
-Portal şu giriş toplar:
+Portal aşağıdaki girişi toplar:
 
-- **Yapılandırma modülleri veya betik**: Bu alan zorunludur (formu için güncelleştirilmemiş [varsayılan yapılandırma betiğini](#default-configuration-script)). Yapılandırma modülleri ve komut dosyalarını bir yapılandırma betiği içeren bir .ps1 dosyası veya kökünde bir .ps1 yapılandırma betiği içeren bir .zip dosyası gerektirir. Bir .zip dosyası kullanıyorsanız, tüm bağımlı kaynaklarla .zip modülü klasörlerdeki eklenmesi gerekir. .Zip dosyasını kullanarak oluşturabileceğiniz **Yayımla AzureVMDscConfiguration - OutputArchivePath** Azure PowerShell SDK'sına dahil cmdlet'i. .Zip dosyası, kullanıcı blob depolama alanına yüklenir ve bir SAS belirteci tarafından güvenli hale getirilmiş.
+- **Yapılandırma modülleri veya betiği**: Bu alan zorunludur (form [varsayılan yapılandırma betiği](#default-configuration-script)için güncelleştirilmemiş). Yapılandırma modülleri ve betikler, bir yapılandırma betiğine sahip bir. ps1 dosyası veya kökte. ps1 yapılandırma betiği içeren bir. zip dosyası gerektirir. Bir. zip dosyası kullanıyorsanız, tüm bağımlı kaynakların. zip içindeki modül klasörlerine dahil olması gerekir. . Zip dosyasını, Azure PowerShell SDK 'ya dahil olan **Publish-AzureVMDscConfiguration-OutputArchivePath** cmdlet 'ini kullanarak oluşturabilirsiniz. . Zip dosyası, Kullanıcı BLOB depolama alanına yüklenir ve bir SAS belirteci tarafından güvenli hale getirilir.
 
-- **Modül adını yapılandırma**: Bir .ps1 dosyasına birden çok yapılandırma işlevleri içerebilir. Ardından yapılandırma .ps1 komut dosyasının adını girin \\ ve yapılandırma işlevin adı. Örneğin, .ps1 komut dosyanızın adı configuration.ps1 ve yapılandırmayı ise **IisInstall**, girin **configuration.ps1\IisInstall**.
+- **Modülün nitelikli adı**: bir. ps1 dosyasına birden çok yapılandırma işlevi ekleyebilirsiniz. Configuration. ps1 betiğinin adını, ardından \\ ve yapılandırma işlevinin adını girin. Örneğin,. ps1 betiğinizin adı Configuration. ps1 ise ve yapılandırma **ıisınstall**ise **Configuration. ps1\IisInstall**girin.
 
-- **Yapılandırma değişkenleri**: Yapılandırma işlev bağımsız değişkeni alır, bunları burada biçiminde girin **argumentName1 value1, argumentName2 = Value2**. Bu biçim, PowerShell cmdlet'leri veya Resource Manager şablonlarında yapılandırma bağımsız değişkenleri kabul edilir, farklı bir biçimidir.
+- **Yapılandırma bağımsız değişkenleri**: yapılandırma işlevi bağımsız değişkenler alırsa, bunları **argumentName1 = değer1, argumentName2 = değer2**biçiminde girin. Bu biçim, PowerShell cmdlet 'lerinde veya Kaynak Yöneticisi şablonlarda yapılandırma bağımsız değişkenlerinin kabul edildiği farklı bir biçimdir.
 
-- **Yapılandırma verileri PSD1 dosyası**: Bu alan isteğe bağlıdır. Yapılandırmanızı .psd1 yapılandırma veri dosyası gerektiriyorsa, veri alanını seçebilir ve kullanıcı blob depolamaya yüklemek için bu alanı kullanın. Yapılandırma verileri dosyası, blob depolama alanındaki bir SAS belirteci tarafından sağlanır.
+- **Yapılandırma VERILERI PSD1 dosyası**: Bu alan isteğe bağlıdır. Yapılandırmanız için. psd1 içinde bir yapılandırma veri dosyası gerekiyorsa, bu alanı kullanarak veri alanını seçin ve Kullanıcı BLOB depolama alanına yükleyin. Yapılandırma veri dosyası, BLOB depolama alanındaki bir SAS belirteci ile korunmuş olur.
 
-- **WMF sürümünü**: Sanal makinenizde yüklü Windows Management Framework (WMF) sürümünü belirtir. Bu özellik için en son yükler WMF'nin en son sürümünü ayarlama. Şu anda bu özellik için yalnızca olası değerler şunlardır 4.0, 5.0, 5.1 ve son. Bu olası değerler şunlardır: güncelleştirmeleri tabidir. Varsayılan değer **son**.
+- **WMF sürümü**: sanal makinenize yüklenmesi gereken Windows Management Framework (WMF) sürümünü belirtir. Bu özelliğin en son olarak ayarlanması WMF 'nin en son sürümünü yüklüyor. Şu anda bu özellik için olası tek değerler 4,0, 5,0, 5,1 ve en son değerlerdir. Bu olası değerler güncelleştirmelere tabidir. Varsayılan değer **en**sonuncusudur.
 
-- **Veri toplama**: Uzantı bir telemetri toplarız belirler. Daha fazla bilgi için [Azure DSC uzantı veri koleksiyonu](https://blogs.msdn.microsoft.com/powershell/2016/02/02/azure-dsc-extension-data-collection-2/).
+- **Veri toplama**: uzantının telemetri toplayıp toplayacağını belirler. Daha fazla bilgi için bkz. [Azure DSC Uzantısı veri toplama](https://blogs.msdn.microsoft.com/powershell/2016/02/02/azure-dsc-extension-data-collection-2/).
 
-- **Sürüm**: Yüklemek için DSC uzantı sürümünü belirtir. Sürümleri hakkında daha fazla bilgi için bkz. [DSC uzantısı sürüm geçmişi](/powershell/dsc/azuredscexthistory).
+- **Sürüm**: yüklenecek DSC uzantısının sürümünü belirtir. Sürümler hakkında bilgi için bkz. [DSC Uzantısı sürüm geçmişi](/powershell/scripting/dsc/getting-started/azuredscexthistory).
 
-- **Otomatik yükseltme Podverze**: Bu alan eşlendiği **AutoUpdate** geçiş cmdlet'leri ve otomatik olarak yükleme sırasında en son sürüme güncelleştirmek uzantı sağlar. **Evet** kullanılabilir en son sürüme kullanılacak uzantısı işleyicisi yenilemelerini ister ve **Hayır** zorlayacak **sürüm** belirtilen yüklenecek. Hiçbirini seçme **Evet** ya da **Hayır** seçerek aynı **Hayır**.
+- Alt **sürümü otomatik Yükselt**: Bu alan cmdlet **'lerde otomatik güncelleştirme anahtarına eşlenir** ve uzantının yükleme sırasında en son sürüme otomatik olarak güncelleştirilmesini sağlar. **Evet** seçeneği, uzantı işleyicisinin kullanılabilir en son sürümü kullanmasını ve **Hayır** 'ın, belirtilen **sürümü** yüklemeye zormasını sağlar. Hayır **Evet** veya **Hayır** seçeneği belirlendiğinde **Hayır**seçeneği belirlenmeyecektir.
 
-## <a name="logs"></a>Günlükler
+## <a name="logs"></a>Logs
 
-Uzantı için günlükleri şu konumda depolanır: `C:\WindowsAzure\Logs\Plugins\Microsoft.Powershell.DSC\<version number>`
+Uzantıya ait Günlükler şu konumda depolanır: `C:\WindowsAzure\Logs\Plugins\Microsoft.Powershell.DSC\<version number>`
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- PowerShell DSC hakkında daha fazla bilgi için Git [PowerShell Belge Merkezi](/powershell/dsc/overview).
-- İnceleme [DSC uzantısı için Resource Manager şablonu](dsc-template.md).
-- PowerShell DSC kullanarak yönetebilirsiniz. daha fazla işlevsellik ve daha fazla DSC kaynakları için Gözat [PowerShell Galerisi](https://www.powershellgallery.com/packages?q=DscResource&x=0&y=0).
-- Yapılandırmalarına önemli parametreleri geçirme hakkında daha fazla ayrıntı için bkz [yönetin, DSC uzantısı işleyicisine ile güvenli kimlik bilgileri](dsc-credentials.md).
+- PowerShell DSC hakkında daha fazla bilgi için [PowerShell belge merkezine](/powershell/scripting/dsc/overview/overview)gidin.
+- [DSC uzantısının Kaynak Yöneticisi şablonunu](dsc-template.md)inceleyin.
+- PowerShell DSC 'yi kullanarak yönetebileceğiniz daha fazla işlevsellik ve daha fazla DSC kaynağı için [PowerShell Galerisi](https://www.powershellgallery.com/packages?q=DscResource&x=0&y=0)' ne gözatabileceğinizi unutmayın.
+- Hassas parametreleri yapılandırmalara geçirme hakkında ayrıntılı bilgi için bkz. [DSC uzantı işleyicisiyle kimlik bilgilerini güvenli bir şekilde yönetme](dsc-credentials.md).

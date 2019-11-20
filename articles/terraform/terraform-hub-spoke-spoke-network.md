@@ -1,42 +1,36 @@
 ---
-title: Azure'da Terraform ile bağlı bileşen ağ oluşturma
-description: Sanal ağlar bir merkez-uç topolojisi bir hub'ına bağlı iki uç uygulamayı öğrenin
-services: terraform
-ms.service: azure
-keywords: terraform, hub ve bağlı bileşen, ağlar, hibrit ağlar, devops, sanal makine, azure, sanal ağ eşlemesi, bileşen, merkez-uç
-author: VaijanathB
-manager: jeconnoc
-ms.author: vaangadi
+title: Öğretici-Terrayform kullanarak Azure 'da bir bağlı ağ oluşturma
+description: Hub-kol topolojisinde hub 'a bağlı iki bağlı bileşen sanal ağı uygulamayı öğrenin
 ms.topic: tutorial
-ms.date: 03/01/2019
-ms.openlocfilehash: 9cce809401a26eb2b45b11303afcd4818a1f950b
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 10/26/2019
+ms.openlocfilehash: 2a36b8ac22fb52f6b8f1246fd254d9c3ff22fc82
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60884545"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159015"
 ---
-# <a name="tutorial-create-a-spoke-virtual-network-with-terraform-in-azure"></a>Öğretici: Azure'da Terraform ile uç sanal ağ oluşturma
+# <a name="tutorial-create-a-spoke-network-in-azure-using-terraform"></a>Öğretici: Terrayform kullanarak Azure 'da bir bağlı ağ oluşturma
 
-Bu öğreticide, iş yükü ayrımı göstermek için iki ayrı bileşen ağlarını uygulayın. Ağlarda hub sanal ağ'ı kullanarak ortak kaynakları paylaşır. Uçlar, iş yüklerini diğer uçlardan ayrı olarak yönetilen kendi sanal ağlarında yalıtmak için kullanılabilir. Her iş yükü birden fazla katman içerebilir. Birden fazla alt ağ, Azure yük dengeleyicileri aracılığıyla birbirine bağlanır.
+Bu öğreticide, iş yüklerinin ayrılmasını göstermek için iki ayrı bağlı ağa sahip olursunuz. Ağlar, hub sanal ağını kullanarak ortak kaynakları paylaşır. Uçlar, iş yüklerini diğer uçlardan ayrı olarak yönetilen kendi sanal ağlarında yalıtmak için kullanılabilir. Her iş yükü birden fazla katman içerebilir. Birden fazla alt ağ, Azure yük dengeleyicileri aracılığıyla birbirine bağlanır.
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
 > [!div class="checklist"]
-> * Merkez-uç topolojisinde uç Vnet'ler uygulamak için HCL (HashiCorp dili) kullanın
-> * Uç ağları sanal makineler oluşturmak için Terraform'u kullanın
-> * Hub ağları ile sanal ağ eşlemesi oluşturmak için Terraform'u kullanın
+> * Hub-ışınsal-uç topolojisinde bağlı olan sanal ağları uygulamak için HCL (HashiCorp Language) kullanın
+> * Bağlı ağlardaki sanal makineler oluşturmak için Terrayform kullanma
+> * Sanal ağ eşayarlarını hub ağlarla oluşturmak için Terrayform kullanın
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-1. [Bir hub'ı oluşturup azure'da Terraform ile karma ağ topolojisi](./terraform-hub-spoke-introduction.md).
-1. [Azure'da Terraform ile şirket içi sanal ağ oluşturma](./terraform-hub-spoke-on-prem.md).
-1. [Azure'da Terraform ile merkez sanal ağ oluşturma](./terraform-hub-spoke-hub-network.md).
-1. [Azure'da Terraform ile merkez sanal ağ Gereci oluşturma](./terraform-hub-spoke-hub-nva.md).
+1. [Azure 'Da Terrayform ile bir hub ve bağlı bileşen karma ağ topolojisi oluşturun](./terraform-hub-spoke-introduction.md).
+1. [Azure 'Da Terrayform ile şirket içi sanal ağ oluşturun](./terraform-hub-spoke-on-prem.md).
+1. [Azure 'Da Terrayform ile bir hub sanal ağı oluşturun](./terraform-hub-spoke-hub-network.md).
+1. [Azure 'Da Terrayform ile bir hub sanal ağ gereci oluşturun](./terraform-hub-spoke-hub-nva.md).
 
 ## <a name="create-the-directory-structure"></a>Dizin yapısını oluşturma
 
-Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sanal ağ ve sanal makine iş yükü için tanımlar. Eşlenmiş sanal ağa hub'ından uç sonra oluşturulur.
+Bu bölümde iki bağlı bileşen komut dosyası oluşturulur. Her betik, bir bağlı ağ sanal ağını ve iş yükü için bir sanal makineyi tanımlar. Hub 'dan bağlı ağa eşlenen bir sanal ağ daha sonra oluşturulur.
 
 1. [Azure portala](https://portal.azure.com) gidin.
 
@@ -56,9 +50,9 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
     cd hub-spoke
     ```
 
-## <a name="declare-the-two-spoke-networks"></a>İki bileşen ağlarını bildirme
+## <a name="declare-the-two-spoke-networks"></a>İki bağlı ağ ağını bildirme
 
-1. Cloud Shell'de adlı yeni bir dosya açın `spoke1.tf`.
+1. Cloud Shell ' de, `spoke1.tf`adlı yeni bir dosya açın.
 
     ```bash
     code spoke1.tf
@@ -66,7 +60,7 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
 
 1. Aşağıdaki kodu düzenleyiciye yapıştırın:
 
-    ```JSON
+    ```hcl
     locals {
       spoke1-location       = "CentralUS"
       spoke1-resource-group = "spoke1-vnet-rg"
@@ -74,40 +68,40 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
     }
 
     resource "azurerm_resource_group" "spoke1-vnet-rg" {
-      name     = "${local.spoke1-resource-group}"
-      location = "${local.spoke1-location}"
+      name     = local.spoke1-resource-group
+      location = local.spoke1-location
     }
 
     resource "azurerm_virtual_network" "spoke1-vnet" {
       name                = "spoke1-vnet"
-      location            = "${azurerm_resource_group.spoke1-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.spoke1-vnet-rg.name}"
+      location            = azurerm_resource_group.spoke1-vnet-rg.location
+      resource_group_name = azurerm_resource_group.spoke1-vnet-rg.name
       address_space       = ["10.1.0.0/16"]
 
       tags {
-        environment = "${local.prefix-spoke1 }"
+        environment = local.prefix-spoke1
       }
     }
 
     resource "azurerm_subnet" "spoke1-mgmt" {
       name                 = "mgmt"
-      resource_group_name  = "${azurerm_resource_group.spoke1-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.spoke1-vnet.name}"
+      resource_group_name  = azurerm_resource_group.spoke1-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.spoke1-vnet.name
       address_prefix       = "10.1.0.64/27"
     }
 
     resource "azurerm_subnet" "spoke1-workload" {
       name                 = "workload"
-      resource_group_name  = "${azurerm_resource_group.spoke1-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.spoke1-vnet.name}"
+      resource_group_name  = azurerm_resource_group.spoke1-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.spoke1-vnet.name
       address_prefix       = "10.1.1.0/24"
     }
 
     resource "azurerm_virtual_network_peering" "spoke1-hub-peer" {
       name                      = "spoke1-hub-peer"
-      resource_group_name       = "${azurerm_resource_group.spoke1-vnet-rg.name}"
-      virtual_network_name      = "${azurerm_virtual_network.spoke1-vnet.name}"
-      remote_virtual_network_id = "${azurerm_virtual_network.hub-vnet.id}"
+      resource_group_name       = azurerm_resource_group.spoke1-vnet-rg.name
+      virtual_network_name      = azurerm_virtual_network.spoke1-vnet.name
+      remote_virtual_network_id = azurerm_virtual_network.hub-vnet.id
 
       allow_virtual_network_access = true
       allow_forwarded_traffic = true
@@ -118,23 +112,23 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
 
     resource "azurerm_network_interface" "spoke1-nic" {
       name                 = "${local.prefix-spoke1}-nic"
-      location             = "${azurerm_resource_group.spoke1-vnet-rg.location}"
-      resource_group_name  = "${azurerm_resource_group.spoke1-vnet-rg.name}"
+      location             = azurerm_resource_group.spoke1-vnet-rg.location
+      resource_group_name  = azurerm_resource_group.spoke1-vnet-rg.name
       enable_ip_forwarding = true
 
       ip_configuration {
-        name                          = "${local.prefix-spoke1}"
-        subnet_id                     = "${azurerm_subnet.spoke1-mgmt.id}"
+        name                          = local.prefix-spoke1
+        subnet_id                     = azurerm_subnet.spoke1-mgmt.id
         private_ip_address_allocation = "Dynamic"
       }
     }
 
     resource "azurerm_virtual_machine" "spoke1-vm" {
       name                  = "${local.prefix-spoke1}-vm"
-      location              = "${azurerm_resource_group.spoke1-vnet-rg.location}"
-      resource_group_name   = "${azurerm_resource_group.spoke1-vnet-rg.name}"
-      network_interface_ids = ["${azurerm_network_interface.spoke1-nic.id}"]
-      vm_size               = "${var.vmsize}"
+      location              = azurerm_resource_group.spoke1-vnet-rg.location
+      resource_group_name   = azurerm_resource_group.spoke1-vnet-rg.name
+      network_interface_ids = [azurerm_network_interface.spoke1-nic.id]
+      vm_size               = var.vmsize
 
       storage_image_reference {
         publisher = "Canonical"
@@ -152,8 +146,8 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
 
       os_profile {
         computer_name  = "${local.prefix-spoke1}-vm"
-        admin_username = "${var.username}"
-        admin_password = "${var.password}"
+        admin_username = var.username
+        admin_password = var.password
       }
 
       os_profile_linux_config {
@@ -161,15 +155,15 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
       }
 
       tags {
-        environment = "${local.prefix-spoke1}"
+        environment = local.prefix-spoke1
       }
     }
 
     resource "azurerm_virtual_network_peering" "hub-spoke1-peer" {
       name                      = "hub-spoke1-peer"
-      resource_group_name       = "${azurerm_resource_group.hub-vnet-rg.name}"
-      virtual_network_name      = "${azurerm_virtual_network.hub-vnet.name}"
-      remote_virtual_network_id = "${azurerm_virtual_network.spoke1-vnet.id}"
+      resource_group_name       = azurerm_resource_group.hub-vnet-rg.name
+      virtual_network_name      = azurerm_virtual_network.hub-vnet.name
+      remote_virtual_network_id = azurerm_virtual_network.spoke1-vnet.id
       allow_virtual_network_access = true
       allow_forwarded_traffic   = true
       allow_gateway_transit     = true
@@ -188,7 +182,7 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
     
 1. Aşağıdaki kodu düzenleyiciye yapıştırın:
     
-    ```JSON
+    ```hcl
     locals {
       spoke2-location       = "CentralUS"
       spoke2-resource-group = "spoke2-vnet-rg"
@@ -196,40 +190,40 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
     }
 
     resource "azurerm_resource_group" "spoke2-vnet-rg" {
-      name     = "${local.spoke2-resource-group}"
-      location = "${local.spoke2-location}"
+      name     = local.spoke2-resource-group
+      location = local.spoke2-location
     }
 
     resource "azurerm_virtual_network" "spoke2-vnet" {
       name                = "${local.prefix-spoke2}-vnet"
-      location            = "${azurerm_resource_group.spoke2-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.spoke2-vnet-rg.name}"
+      location            = azurerm_resource_group.spoke2-vnet-rg.location
+      resource_group_name = azurerm_resource_group.spoke2-vnet-rg.name
       address_space       = ["10.2.0.0/16"]
 
       tags {
-        environment = "${local.prefix-spoke2}"
+        environment = local.prefix-spoke2
       }
     }
 
     resource "azurerm_subnet" "spoke2-mgmt" {
       name                 = "mgmt"
-      resource_group_name  = "${azurerm_resource_group.spoke2-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.spoke2-vnet.name}"
+      resource_group_name  = azurerm_resource_group.spoke2-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.spoke2-vnet.name
       address_prefix       = "10.2.0.64/27"
     }
 
     resource "azurerm_subnet" "spoke2-workload" {
       name                 = "workload"
-      resource_group_name  = "${azurerm_resource_group.spoke2-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.spoke2-vnet.name}"
+      resource_group_name  = azurerm_resource_group.spoke2-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.spoke2-vnet.name
       address_prefix       = "10.2.1.0/24"
     }
 
     resource "azurerm_virtual_network_peering" "spoke2-hub-peer" {
       name                      = "${local.prefix-spoke2}-hub-peer"
-      resource_group_name       = "${azurerm_resource_group.spoke2-vnet-rg.name}"
-      virtual_network_name      = "${azurerm_virtual_network.spoke2-vnet.name}"
-      remote_virtual_network_id = "${azurerm_virtual_network.hub-vnet.id}"
+      resource_group_name       = azurerm_resource_group.spoke2-vnet-rg.name
+      virtual_network_name      = azurerm_virtual_network.spoke2-vnet.name
+      remote_virtual_network_id = azurerm_virtual_network.hub-vnet.id
 
       allow_virtual_network_access = true
       allow_forwarded_traffic = true
@@ -240,27 +234,27 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
 
     resource "azurerm_network_interface" "spoke2-nic" {
       name                 = "${local.prefix-spoke2}-nic"
-      location             = "${azurerm_resource_group.spoke2-vnet-rg.location}"
-      resource_group_name  = "${azurerm_resource_group.spoke2-vnet-rg.name}"
+      location             = azurerm_resource_group.spoke2-vnet-rg.location
+      resource_group_name  = azurerm_resource_group.spoke2-vnet-rg.name
       enable_ip_forwarding = true
 
       ip_configuration {
-        name                          = "${local.prefix-spoke2}"
-        subnet_id                     = "${azurerm_subnet.spoke2-mgmt.id}"
+        name                          = local.prefix-spoke2
+        subnet_id                     = azurerm_subnet.spoke2-mgmt.id
         private_ip_address_allocation = "Dynamic"
       }
 
       tags {
-        environment = "${local.prefix-spoke2}"
+        environment = local.prefix-spoke2
       }
     }
 
     resource "azurerm_virtual_machine" "spoke2-vm" {
       name                  = "${local.prefix-spoke2}-vm"
-      location              = "${azurerm_resource_group.spoke2-vnet-rg.location}"
-      resource_group_name   = "${azurerm_resource_group.spoke2-vnet-rg.name}"
-      network_interface_ids = ["${azurerm_network_interface.spoke2-nic.id}"]
-      vm_size               = "${var.vmsize}"
+      location              = azurerm_resource_group.spoke2-vnet-rg.location
+      resource_group_name   = azurerm_resource_group.spoke2-vnet-rg.name
+      network_interface_ids = [azurerm_network_interface.spoke2-nic.id]
+      vm_size               = var.vmsize
 
       storage_image_reference {
         publisher = "Canonical"
@@ -278,8 +272,8 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
 
       os_profile {
         computer_name  = "${local.prefix-spoke2}-vm"
-        admin_username = "${var.username}"
-        admin_password = "${var.password}"
+        admin_username = var.username
+        admin_password = var.password
       }
 
       os_profile_linux_config {
@@ -287,15 +281,15 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
       }
 
       tags {
-        environment = "${local.prefix-spoke2}"
+        environment = local.prefix-spoke2
       }
     }
 
     resource "azurerm_virtual_network_peering" "hub-spoke2-peer" {
       name                      = "hub-spoke2-peer"
-      resource_group_name       = "${azurerm_resource_group.hub-vnet-rg.name}"
-      virtual_network_name      = "${azurerm_virtual_network.hub-vnet.name}"
-      remote_virtual_network_id = "${azurerm_virtual_network.spoke2-vnet.id}"
+      resource_group_name       = azurerm_resource_group.hub-vnet-rg.name
+      virtual_network_name      = azurerm_virtual_network.hub-vnet.name
+      remote_virtual_network_id = azurerm_virtual_network.spoke2-vnet.id
       allow_virtual_network_access = true
       allow_forwarded_traffic   = true
       allow_gateway_transit     = true
@@ -309,4 +303,4 @@ Bu bölümde iki uç komut dosyası oluşturulur. Her komut dosyası, bir uç sa
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"] 
-> [Azure'da Terraform ile merkez ve uç ağ doğrula](./terraform-hub-spoke-validation.md)
+> [Azure 'da Terrayform ile bir hub ve bağlı bileşen ağı doğrulama](./terraform-hub-spoke-validation.md)

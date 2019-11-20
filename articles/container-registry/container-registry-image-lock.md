@@ -1,43 +1,47 @@
 ---
-title: Görüntüyü Azure Container Registry Kilitle
-description: Bu nedenle, silinemez veya bir Azure container Registry'de üzerine bir kapsayıcı görüntüsü ya da depo için öznitelikler ayarlayın.
+title: Azure Container Registry bir görüntüyü kilitleme
+description: Bir Azure Container Registry 'de silinememesi veya üzerine yazılmaması için bir kapsayıcı görüntüsü veya deposunun özniteliklerini ayarlayın.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: article
-ms.date: 02/19/2019
+ms.date: 09/30/2019
 ms.author: danlep
-ms.openlocfilehash: ebbfaba158e7ddb669111f097eb1adde2373aa6c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1ef6d5366e5db07a7f03bac251c24b1ff76a13e9
+ms.sourcegitcommit: 4f7dce56b6e3e3c901ce91115e0c8b7aab26fb72
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60828656"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71949512"
 ---
-# <a name="lock-a-container-image-in-an-azure-container-registry"></a>Bir Azure container registry'den kapsayıcı görüntüsü Kilitle
+# <a name="lock-a-container-image-in-an-azure-container-registry"></a>Azure Container Registry 'de kapsayıcı görüntüsünü kilitleme
 
-Bir Azure container Registry'de silinmiş veya güncelleştirilmiş bir görüntü sürümü veya bir depo kilitleyebilirsiniz. Görüntü veya bir depo kilitlemek için Azure CLI komutunu kullanarak özniteliklerini güncelleştirme [az acr deposunun güncelleştirilmesi][az-acr-repository-update]. 
+Bir Azure Container Registry 'de, bir görüntü sürümünü veya depoyu, silinememesi veya güncelleştirilemeyebilir. Bir görüntüyü veya depoyu kilitlemek için [az ACR Repository Update][az-acr-repository-update]olan Azure CLI komutunu kullanarak özniteliklerini güncelleştirin. 
 
-Bu makalede, Azure Cloud Shell'i Azure CLI'da çalıştırın veya yerel olarak gerektirir (2.0.55 sürümü veya üzeri önerilir). Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme][azure-cli].
+Bu makale, Azure CLı 'yı Azure Cloud Shell veya yerel olarak çalıştırmanızı gerektirir (sürüm 2.0.55 veya üzeri önerilir). Sürümü bulmak için `az --version` ' yı çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse bkz. [Azure CLI 'Yı yüklemek][azure-cli].
+
+> [!IMPORTANT]
+> Bu makale, bir kayıt defterinin tamamını kilitlemek için (örneğin, Azure portal **ayarları >** veya Azure clı içindeki `az lock` komutları kullanılarak) uygulanmaz. Kayıt defteri kaynağını kilitlemek, depolarda veri oluşturmanızı, güncelleştirmenizi veya silmenizi önler. Kayıt defterinin kilitlenmesi, yalnızca çoğaltmaları ekleme veya silme veya kayıt defterinin kendisini silme gibi yönetim işlemlerini etkiler. [Beklenmedik değişiklikleri engellemek için kaynakları kilitle ' ye](../azure-resource-manager/resource-group-lock-resources.md)daha fazla bilgi.
 
 ## <a name="scenarios"></a>Senaryolar
 
-Varsayılan olarak, bir Azure Container Registry'de etiketli görüntüsüdür *değişebilir*, uygun izinlerle tekrar tekrar güncelleştirebilir ve görüntünün aynı etikete sahip bir kayıt defterine iletin. Kapsayıcı görüntülerini de olabilir [silinmiş](container-registry-delete.md) gerektiğinde. Bu davranış, görüntüleri geliştirdiğinizde ve kayıt defteriniz için bir boyut sürdürmeniz gerekir yararlıdır.
+Varsayılan olarak, Azure Container Registry etiketli bir görüntü *değiştirilebilir*, bu nedenle uygun izinlerle bir görüntüyü bir kayıt defterine yeniden güncelleştirebilir ve aynı etiketle birlikte görüntüleyebilirsiniz. Kapsayıcı görüntüleri de gerektiğinde [silinebilir](container-registry-delete.md) . Bu davranış, görüntü geliştirirken ve kayıt defteriniz için bir boyut korumanız gerektiğinde faydalıdır.
 
-Ancak, bir kapsayıcı görüntüsü üretime dağıtırken ihtiyacınız olabilecek bir *değişmez* kapsayıcı görüntüsü. Bir sabit görüntü, yanlışlıkla üzerine veya silemeyeceğiniz biridir. Kullanım [az acr deposunun güncelleştirilmesi] [ az-acr-repository-update] komutu, böylece depo özniteliklerini ayarlayın:
+Ancak, üretime bir kapsayıcı görüntüsü dağıttığınızda, *sabit* bir kapsayıcı görüntüsü gerekebilir. Sabit görüntü, yanlışlıkla silememe veya üzerine yazılmayacağı bir görüntüdür. Depo özniteliklerini ayarlamak için [az ACR Repository Update][az-acr-repository-update] komutunu kullanın, böylece şunları yapabilirsiniz:
 
-* Görüntü sürümü ya da bir deponun tamamı Kilitle
+* Bir görüntü sürümünü veya tüm depoyu kilitleme
 
-* Görüntü sürümü ya da depo silinmeye karşı korunmasına ancak güncelleştirmelere izin ver
+* Görüntü sürümünü veya depoyu silinmeye karşı koruma, ancak güncelleştirmelere izin verme
 
-* Görüntü sürümü ya da bir deponun tamamı üzerinde okuma (çekin) işlemleri engelle
+* Görüntü sürümünde veya tüm depoda okuma (çekme) işlemlerini engelle
 
 Örnekler için aşağıdaki bölümlere bakın.
 
-## <a name="lock-an-image-or-repository"></a>Bir resim veya depo Kilitle 
+## <a name="lock-an-image-or-repository"></a>Bir görüntüyü veya depoyu kilitleme 
 
-### <a name="show-the-current-repository-attributes"></a>Geçerli depo öznitelikleri göster
-Geçerli bir depo özniteliklerini görmek için aşağıdaki komutu çalıştırın. [az acr depo show] [ az-acr-repository-show] komutu:
+### <a name="show-the-current-repository-attributes"></a>Geçerli depo özniteliklerini göster
+Bir deponun geçerli özniteliklerini görmek için şu [az ACR Repository Show][az-acr-repository-show] komutunu çalıştırın:
 
 ```azurecli
 az acr repository show \
@@ -45,8 +49,8 @@ az acr repository show \
     --output jsonc
 ```
 
-### <a name="show-the-current-image-attributes"></a>Geçerli görüntü öznitelikleri göster
-Bir etiketin geçerli öznitelikleri görmek için aşağıdaki komutu çalıştırın. [az acr depo show] [ az-acr-repository-show] komutu:
+### <a name="show-the-current-image-attributes"></a>Geçerli görüntü özniteliklerini göster
+Bir etiketin geçerli özniteliklerini görmek için şu [az ACR Repository Show][az-acr-repository-show] komutunu çalıştırın:
 
 ```azurecli
 az acr repository show \
@@ -54,9 +58,9 @@ az acr repository show \
     --output jsonc
 ```
 
-### <a name="lock-an-image-by-tag"></a>Etikete göre bir görüntü Kilitle
+### <a name="lock-an-image-by-tag"></a>Resmi etikete göre kilitle
 
-Kilidi *myrepo / myimage:tag* görüntüsü *myregistry*, aşağıdakini çalıştırarak [az acr deposunun güncelleştirilmesi] [ az-acr-repository-update] komutu:
+*Myrepo/MyImage:* *myregistry*içindeki Tag Image etiketini kilitlemek için şu [az ACR Repository Update][az-acr-repository-update] komutunu çalıştırın:
 
 ```azurecli
 az acr repository update \
@@ -64,9 +68,9 @@ az acr repository update \
     --write-enabled false
 ```
 
-### <a name="lock-an-image-by-manifest-digest"></a>Görüntü tarafından bildirim Özet Kilitle
+### <a name="lock-an-image-by-manifest-digest"></a>Bir görüntüyü bildirim özetine göre kilitleme
 
-Kilidi bir *myrepo/myımage* bildirim Özet tarafından tanımlanan görüntüsü (SHA-256 karma değeri olarak temsil edilen `sha256:...`), aşağıdaki komutu çalıştırın. (Bir veya daha fazla görüntü etiketler ile ilişkili bildirim Özet bulmak için çalıştırın [az acr depo show-bildirimleri] [ az-acr-repository-show-manifests] komutu.)
+Bildirim Özeti tarafından tanımlanan bir *myrepo/MyImage* görüntüsünü kilitlemek için (`sha256:...` olarak temsıl edilen SHA-256 karması), aşağıdaki komutu çalıştırın. (Bir veya daha fazla görüntü etiketleriyle ilişkili bildirim özetini bulmak için [az ACR Repository Show-bildirimleri][az-acr-repository-show-manifests] komutunu çalıştırın.)
 
 ```azurecli
 az acr repository update \
@@ -74,9 +78,9 @@ az acr repository update \
     --write-enabled false
 ```
 
-### <a name="lock-a-repository"></a>Bir depo Kilitle
+### <a name="lock-a-repository"></a>Depoyu kilitleme
 
-Kilidi *myrepo/myımage* depoyu ve içindeki tüm görüntüleri aşağıdaki komutu çalıştırın:
+*Myrepo/MyImage* deposunu ve içindeki tüm görüntüleri kilitlemek için aşağıdaki komutu çalıştırın:
 
 ```azurecli
 az acr repository update \
@@ -84,11 +88,11 @@ az acr repository update \
     --write-enabled false
 ```
 
-## <a name="protect-an-image-or-repository-from-deletion"></a>Bir resim veya depo silinmeye karşı koru
+## <a name="protect-an-image-or-repository-from-deletion"></a>Bir görüntüyü veya depoyu silinmeye karşı koruma
 
-### <a name="protect-an-image-from-deletion"></a>Görüntü silinmeye karşı koru
+### <a name="protect-an-image-from-deletion"></a>Bir görüntüyü silinmeye karşı koruma
 
-İzin vermek için *myrepo / myimage:tag* görüntü güncelleştirildi ancak silinmez, aşağıdaki komutu çalıştırın:
+*Myrepo/MyImage: Tag* resminin güncelleştirilmesine izin vermek, ancak silinmemelidir, şu komutu çalıştırın:
 
 ```azurecli
 az acr repository update \
@@ -96,9 +100,9 @@ az acr repository update \
     --delete-enabled false --write-enabled true
 ```
 
-### <a name="protect-a-repository-from-deletion"></a>Bir depo silinmeye karşı koru
+### <a name="protect-a-repository-from-deletion"></a>Depoyu silinmeye karşı koruma
 
-Aşağıdaki komut kümelerini *myrepo/myımage* silinemez bu nedenle depo. Ayrı görüntüleri hala güncelleştirildi veya silindi.
+Aşağıdaki komut, *myrepo/MyImage* deposunu, silinememesi için ayarlar. Tek tek görüntüler yine de güncelleştirilemeyebilir veya silinebilir.
 
 ```azurecli
 az acr repository update \
@@ -106,9 +110,9 @@ az acr repository update \
     --delete-enabled false --write-enabled true
 ```
 
-## <a name="prevent-read-operations-on-an-image-or-repository"></a>Bir resim veya depo okuma işlemlerinin engelle
+## <a name="prevent-read-operations-on-an-image-or-repository"></a>Görüntüde veya depoda okuma işlemlerini engelle
 
-Üzerinde okuma (çekin) işlemleri önlemek için *myrepo / myimage:tag* görüntü, aşağıdaki komutu çalıştırın:
+*Myrepo/MyImage: Tag* görüntüsündeki okuma (çekme) işlemlerini engellemek için aşağıdaki komutu çalıştırın:
 
 ```azurecli
 az acr repository update \
@@ -116,7 +120,7 @@ az acr repository update \
     --read-enabled false
 ```
 
-' Ndaki tüm görüntüler okuma işlemlerinin önlemek için *myrepo/myımage* depo, aşağıdaki komutu çalıştırın:
+*Myrepo/MyImage* deposundaki tüm görüntülerde okuma işlemlerini engellemek için aşağıdaki komutu çalıştırın:
 
 ```azurecli
 az acr repository update \
@@ -124,9 +128,9 @@ az acr repository update \
     --read-enabled false
 ```
 
-## <a name="unlock-an-image-or-repository"></a>Bir resim veya depo kilidini aç
+## <a name="unlock-an-image-or-repository"></a>Bir görüntünün veya deponun kilidini açma
 
-Varsayılan davranışı geri yüklemek için *myrepo / myimage:tag* silinecek ve güncelleştirilmiş, böylece görüntü aşağıdaki komutu çalıştırın:
+*Myrepo/MyImage: Tag* resminin varsayılan davranışını silmek ve güncelleştirilmesini sağlamak üzere geri yüklemek için şu komutu çalıştırın:
 
 ```azurecli
 az acr repository update \
@@ -134,7 +138,7 @@ az acr repository update \
     --delete-enabled true --write-enabled true
 ```
 
-Varsayılan davranışı geri yüklemek için *myrepo/myımage* depo ve tüm görüntüleri böylece bunlar silinecek ve güncelleştirilmiş, aşağıdaki komutu çalıştırın:
+*Myrepo/MyImage* deposunun ve tüm görüntülerinin varsayılan davranışını silmek ve güncelleştiribilecekleri şekilde geri yüklemek için şu komutu çalıştırın:
 
 ```azurecli
 az acr repository update \
@@ -144,11 +148,11 @@ az acr repository update \
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, kullanma hakkında bilgi edindiniz [az acr deposunun güncelleştirilmesi] [ az-acr-repository-update] silme veya bir depodaki görüntü sürümlerinin güncelleştirme önlemek için komutu. Ek öznitelikler ayarlamak için bkz [az acr deposunun güncelleştirilmesi] [ az-acr-repository-update] komut başvurusu.
+Bu makalede, bir depodaki görüntü sürümlerinin silinmesini veya güncelleştirilmesini engellemek için [az ACR Repository Update][az-acr-repository-update] komutunu kullanma hakkında bilgi edindiniz. Ek öznitelikler ayarlamak için, [az ACR Repository Update][az-acr-repository-update] komut başvurusuna bakın.
 
-Öznitelik bir görüntü sürümü ya da depo kümesini görmek için [az acr depo show] [ az-acr-repository-show] komutu.
+Bir görüntü sürümü veya depo için ayarlanan öznitelikleri görmek için [az ACR Repository Show][az-acr-repository-show] komutunu kullanın.
 
-Silme işlemleri hakkında daha fazla ayrıntı için bkz: [Sil kapsayıcı görüntülerini Azure Container Registry'de][container-registry-delete].
+Silme işlemleri hakkında daha fazla bilgi için bkz. [Azure Container Registry kapsayıcı görüntülerini silme][container-registry-delete].
 
 <!-- LINKS - Internal -->
 [az-acr-repository-update]: /cli/azure/acr/repository#az-acr-repository-update

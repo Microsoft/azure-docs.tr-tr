@@ -1,40 +1,69 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Sanal WAN
+### YamlMime:Landing
+title: Sanal WAN belgeleri
+summary: Azure Sanal WAN'ı yapılandırmayı, oluşturmayı ve yönetmeyi öğrenin. Güvenli küresel ölçekli dal bağlantısı oluşturun.
 metadata:
-  document_id: null
-  title: 'Sanal WAN Belgeleri - Öğreticiler, API başvuruları | Microsoft Docs'
-  meta.description: 'Learn how to configure, create, and manage an Azure Virtual WAN. Build secure global scale branch connectivity.'
+  title: Sanal WAN belgeleri
+  description: Sanal WAN hakkında
   services: virtual-wan
-  author: cherylmc
-  manager: jeconnoc
   ms.service: virtual-wan
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 10/01/2018
+  author: cherylmc
   ms.author: cherylmc
-abstract:
-  description: 'Azure Sanal WAN''ı yapılandırmayı, oluşturmayı ve yönetmeyi öğrenin. Güvenli küresel ölçekli dal bağlantısı oluşturun.'
-sections:
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure Sanal WAN kullanarak bağlantıları yapılandırmayı, oluşturmayı ve yönetmeyi öğrenin.'
-      - type: list
-        style: unordered
-        className: spaced Bullet
-        items:
-          - html: <a href="/azure/virtual-wan/virtual-wan-site-to-site-portal">Siteden Siteye bağlantılar</a>
-          - html: <a href="/azure/virtual-wan/virtual-wan-point-to-site-portal">Noktadan Siteye bağlantılar</a>
-          - html: <a href="/azure/virtual-wan/virtual-wan-expressroute-portal">ExpressRoute bağlantıları</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: '<p><a href="/powershell/module/az.network#networking">PowerShell</a></p><p><a href="/cli/azure/ext/virtual-wan">Azure CLI</a></p>'
-          - title: REST
-            html: '<p><a href="https://go.microsoft.com/fwlink/p/?linkid=2005000">REST API başvurusu</a></p>'
+  ms.date: 11/13/2019
+  ms.openlocfilehash: f004b965901f161d16034f0cea91a99c50cc2575
+  ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/14/2019
+  ms.locfileid: "74072230"
+landingContent:
+- title: Sanal WAN Hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Sanal WAN nedir?
+      url: virtual-wan-about.md
+  - linkListType: concept
+    links:
+    - text: Konumlar ve iş ortakları ile çalışma
+      url: virtual-wan-locations-partners.md
+    - text: SSS
+      url: virtual-wan-faq.md
+- title: Başlarken
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Siteden siteye bağlantı oluşturma
+      url: virtual-wan-site-to-site-portal.md
+    - text: ExpressRoute ilişkisi oluşturma
+      url: virtual-wan-expressroute-portal.md
+    - text: Kullanıcı VPN (noktadan siteye) bağlantısı oluşturma
+      url: virtual-wan-point-to-site-portal.md
+  - linkListType: how-to-guide
+    links:
+    - text: Sanal hub'dan NVA'ya trafik yönlendirme
+      url: virtual-wan-route-table-portal.md
+    - text: Sanal WAN iş ortakları için otomasyonu yapılandırma
+      url: virtual-wan-configure-automation-providers.md
+  - linkListType: concept
+    links:
+    - text: IPSec bağlantısı için varsayılan ilkeler
+      url: virtual-wan-ipsec.md
+- title: Mimari
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Genel geçiş ağ mimarisi
+      url: virtual-wan-global-transit-network-architecture.md
+    - text: Sanal WAN'a geçme
+      url: migrate-from-hub-spoke-topology.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure CLI
+      url: /cli/azure/ext/virtual-wan/network
+    - text: Azure PowerShell
+      url: /powershell/module/az.network#networking
+    - text: REST
+      url: /rest/api/virtualwan

@@ -1,6 +1,6 @@
 ---
-title: Sorun giderme - Azure ön kapısı hizmeti yapılandırmanız ile ilgili sorunları giderme | Microsoft Docs
-description: Bu öğreticide, şirket içinde ön kapısı karşılaşabilecekleri yaygın sorunlardan bazılarını sorunlarını giderme konusunda bilgi edinin.
+title: Sorun giderme-Azure ön kapı hizmeti yapılandırmanızla ilgili sorunları giderin | Microsoft Docs
+description: Bu öğreticide, ön kapılarınız için yüz yüze olabilecek bazı yaygın sorunları nasıl giderebileceğinizi öğreneceksiniz.
 services: frontdoor
 documentationcenter: ''
 author: sharad4u
@@ -12,61 +12,61 @@ ms.devlang: na
 ms.topic: article
 ms.date: 09/22/2018
 ms.author: sharadag
-ms.openlocfilehash: 7a261d65a7bd3eea150dd764c65b94ddd47466b3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 420d7afe0d825da9149f2cb2ae1540a2805b357c
+ms.sourcegitcommit: e9c866e9dad4588f3a361ca6e2888aeef208fc35
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60736131"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68335884"
 ---
-# <a name="troubleshooting-common-routing-issues"></a>Genel yönlendirme sorunlarını giderme
-Bu makalede bazı Azure ön kapısı hizmet yapılandırmanızı karşılaşabilecekleri yönlendirme yaygın sorunların nasıl giderileceği açıklanmaktadır. 
+# <a name="troubleshooting-common-routing-issues"></a>Yaygın yönlendirme sorunlarını giderme
+Bu makalede, Azure ön kapı hizmeti yapılandırmanız için kullanabileceğiniz bazı yaygın yönlendirme sorunları nasıl giderilir açıklanmaktadır. 
 
-## <a name="hostname-not-routing-to-backend-and-returns-400-status-code"></a>Ana bilgisayar adı için arka uç ve döndürür 400 durum kodu yönlendirme değil
+## <a name="hostname-not-routing-to-backend-and-returns-400-status-code"></a>Ana bilgisayar adı arka uca yönlendirmedi ve 400 durum kodu döndürüyor
 
 
 ### <a name="symptom"></a>Belirti
-- Bir ön kapısı oluşturduysanız ancak ön uç barındırmak için bir istek bir HTTP 400 durum kodu döndürüyor.
+- Ön kapı oluşturdunuz, ancak ön uç konağına bir istek HTTP 400 durum kodu döndürüyor.
 
-  - Bir DNS oluşturduğunuz yapılandırdığınız özel bir etki alanından ön uç ana bilgisayara eşleme. Ancak, özel etki alanı konak adı için bir istek, bir HTTP 400 durum kodu döndürür ve sizin için backend(s) yönlendirmek için görünmez gönderme yapılandırdığınızdan.
+  - Özel bir etki alanından yapılandırdığınız ön uç konağına bir DNS eşlemesi oluşturdunuz. Ancak, özel etki alanı ana bilgisayar adına bir istek gönderdiğinizde bir HTTP 400 durum kodu döndürülür ve yapılandırdığınız arka uçlara yol gösterilmiyor.
 
 ### <a name="cause"></a>Nedeni
-- Frontend ana bilgisayar olarak eklemiş olduğunuz özel bir etki alanı için bir yönlendirme kuralı yapılandırmadıysanız Bu belirti oluşabilir. Yönlendirme kuralı bir ön kapısı alt etki alanı altında frontend ana bilgisayar için zaten yapılandırılmış olsa bile, frontend ana bilgisayar için açıkça eklenmesi gerekir (*. azurefd.net) özel etki alanınız için bir DNS eşlemesi sahiptir.
+- Bu belirti, ön uç Konağı olarak eklediğiniz özel etki alanı için bir yönlendirme kuralı yapılandırmadıysanız meydana gelebilir. Özel etki alanınızın bir DNS eşlemesine sahip olduğu ön kapı alt etki alanı (*. azurefd.net) altındaki ön uç ana bilgisayar için zaten yapılandırılmış olsa bile, bu ön uç ana bilgisayar için bir yönlendirme kuralının açıkça eklenmesi gerekir.
 
 ### <a name="troubleshooting-steps"></a>Sorun giderme adımları
-- Yönlendirme kuralı özel etki alanından istenen arka uç havuzuna ekleyin.
+- Özel etki alanından istenen arka uç havuzuna bir yönlendirme kuralı ekleyin.
 
-## <a name="request-to-frontend-hostname-returns-404-status-code"></a>Frontend ana bilgisayar adı için döndürür 404 durum kodu istek
+## <a name="request-to-frontend-hostname-returns-404-status-code"></a>Ön uç konak adı isteği 404 durum kodu döndürüyor
 
 ### <a name="symptom"></a>Belirti
-- Bir ön kapısı oluşturduğunuza ve frontend ana bilgisayar, bir arka uç havuzu ile da en az bir arka uç ve arka uç havuzuna frontend ana bağlayan yönlendirme kuralı yapılandırılmış. Bir HTTP 404 durum kodu döndürdüğünden yapılandırılmış ön uç ana bilgisayara bir isteği gönderirken kullanılabilir olması için içeriğinizi görünmüyor.
+- Ön kapı oluşturdunuz ve bir ön uç Konağı, içinde en az bir arka uç içeren bir arka uç havuzu ve ön uç konağını arka uç havuzuna bağlayan bir yönlendirme kuralı yapılandırdınız. Bir HTTP 404 durum kodu döndürüldüğünden, içerik yapılandırılmış ön uç konağına bir istek gönderilirken kullanılamıyor gibi görünüyor.
 
 ### <a name="cause"></a>Nedeni
-Bu belirti birkaç olası nedeni vardır:
- - Arka uç, genel kullanıma yönelik bir arka uç değil ve ön kapısı hizmete görünür değil.
+Bu belirtinin birkaç olası nedeni vardır:
+ - Arka uç, genel kullanıma yönelik bir arka uç değildir ve ön kapı hizmeti için görünür değildir.
 
-- Arka uç, yanlış isteği göndermek ön kapı hizmetin neden yanlış yapılandırılmış (diğer bir deyişle, arka uç HTTP yalnızca kabul eder ancak sahip olmayan ön kapısı HTTPS iletmeye çalışıyor için HTTPS isteklerini verme denetlenmeyen).
-- Arka uç ile isteği arka uca iletildi ana bilgisayar üst bilgisini reddediyor.
-- Arka uç yapılandırmasını henüz tam olarak dağıtılmadı.
+- Arka uç, ön kapı hizmetinin yanlış isteği göndermesini sağlayan (Yani arka ucunuz yalnızca HTTP 'yi kabul eder, ancak ön kapıda HTTPS isteklerini iletmeyi denemenize izin verilmemiştir.
+- Arka uç, istekle birlikte arka uca iletilen konak üstbilgisini reddediyor.
+- Arka ucun yapılandırması henüz tam olarak dağıtılmadı.
 
 ### <a name="troubleshooting-steps"></a>Sorun giderme adımları
-1. Dağıtım süresi
-    - Dağıtılacak yapılandırma için yaklaşık 10 dakika süre bekledi olun.
+1. Dağıtım saati
+    - Yapılandırmanın dağıtılması için yaklaşık 10 dakika beklediğinizden emin olun.
 
-2. Arka uç ayarlarını kontrol edin
-   - (Bağlıdır için yapılandırılmış bir yönlendirme kuralını nasıl olan) istek yönlendirme arka uç havuzu gidin ve doğrulayın _arka uç ana bilgisayar türü_ ve arka uç ana bilgisayar adı doğru. Arka uç, özel bir ana bilgisayar ise, doğru yazdığınızdan emin olun. 
+2. Arka uç ayarlarını denetleyin
+   - İsteğin yönlendirilmesi gereken arka uç havuzuna gidin (yönlendirme kuralını nasıl yapılandırdığınıza bağlıdır) ve _arka uç konak türünün_ ve arka uç ana bilgisayar adının doğru olduğundan emin olun. Arka uç özel bir ana bilgisayar ise doğru yazdığınızdan emin olun. 
 
-   - HTTP ve HTTPS bağlantı noktaları kontrol edin. Çoğu durumda, 80 ve 443 (sırasıyla) doğru olduğundan ve hiçbir değişiklik gerekli olacaktır. Ancak, arka ucunuza bu şekilde yapılandırılmamış ve farklı bir bağlantı noktasında dinleme imkanı yoktur.
+   - HTTP ve HTTPS bağlantı noktalarınızı denetleyin. Çoğu durumda, 80 ve 443 (sırasıyla) doğru olur ve hiçbir değişiklik yapmanız gerekmez. Ancak, arka ucunuzun bu şekilde yapılandırılmadığı ve farklı bir bağlantı noktasında dinleme yaptığı bir şansınız vardır.
 
-     - Denetleme _arka uç ana bilgisayar üstbilgisi_ Frontend ana bilgisayar yönlendirme arka uçları için yapılandırılmış. Çoğu durumda, bu üst bilgisi ile aynı olmalıdır _arka uç ana bilgisayar adı_. Ancak, arka uç farklı bir şey bekliyorsa yanlış bir değere çeşitli HTTP 4xx durum kodları neden olabilir. Arka uç IP adresini girin, ayarlamanız gerekebilir _arka uç ana bilgisayar üstbilgisi_ arka uç ana bilgisayar adı için.
+     - Ön uç konağın yönlendirilmesi gereken _arka uç ana bilgisayar üst bilgisini_ denetleyin. Çoğu durumda bu üst bilgi, _arka uç ana bilgisayar adıyla_aynı olmalıdır. Ancak, arka uç farklı bir şeyi bekliyorsa, yanlış bir değer çeşitli HTTP 4xx durum kodlarına neden olabilir. Arka ucunuzun IP adresini girverirseniz, arka uç _ana bilgisayar üst bilgisini_ arka ucun ana bilgisayar adına ayarlamanız gerekebilir.
 
 
-3. Yönlendirme kuralı ayarlarını kontrol edin
-     - Frontend ana bilgisayar adını söz konusu bir arka uç havuzuna yönlendirmek yönlendirme kuralı gidin. Kabul edilen protokollerden doğru şekilde yapılandırıldığından emin olun ya da aksi takdirde, iletilmeden ön kapısı kullanacaksınız Protokolü doğru şekilde yapılandırıldığından emin olun. _Kabul protokolleri_ , ön kapısı kabul isteyeceğini belirler ve _Protokolü iletme_ altında _Gelişmiş_ sekmesi, hangi ön kapısı Protokolü belirler arka uç isteği iletmek için kullanmanız gerekir.
-          - Arka uç yalnızca HTTP isteklerini kabul ediyorsa bir örnek olarak, aşağıdaki yapılandırmalar geçerli olacaktır:
-               - _Kabul protokolleri_ HTTP ve HTTPS. _Protokol iletme_ HTTP'dir. Eşleşen istek, izin verilen bir protokolü HTTPS olduğundan ve bir istek HTTPS geliyorsa, HTTPS kullanılarak iletmek ön kapı isteriz çalışmaz.
+3. Yönlendirme kuralı ayarlarını denetleyin
+     - Söz konusu ön uç ana bilgisayar adından bir arka uç havuzuna yönlendirilmesi gereken yönlendirme kuralına gidin. Kabul edilen protokollerin doğru yapılandırıldığından emin olun, aksi takdirde, isteğin iletilmesi doğru şekilde yapılandırıldığında protokol ön kapısının kullanılmasını sağlayın. _Kabul edilen protokoller_ hangi Isteklerin ön kapısının kabul edeceğini belirler ve _iletme Protokolü_ , isteği arka uca Iletmek Için hangi protokol ön kapısının kullanılacağını belirler.
+          - Örnek olarak, arka uç yalnızca HTTP isteklerini kabul ediyorsa aşağıdaki yapılandırma geçerli olacaktır:
+               - _Kabul edilen protokoller_ http ve https 'dir. _İletme Protokolü_ http 'dir. HTTPS izin verilen bir protokol olduğundan ve bir istek HTTPS olarak verildiyse, ön kapı HTTPS kullanarak iletmeyi dener.
 
-               - _Kabul protokolleri_ HTTP. _Protokol iletme_ isteği veya HTTPS ya da eşleşen olduğu.
+               - _Kabul edilen protokoller_ http. _İletme Protokolü_ , istek ya da https ile eşleşiyor.
 
-   - Tıklayarak _Gelişmiş_ yönlendirme kuralı yapılandırma bölmesinde üst kısmındaki sekme. _URL yeniden yazma_ varsayılan olarak devre dışıdır ve arka uç tarafından barındırılan ve kullanılabilir hale getirmek istediğiniz kaynakları kapsamını daraltmak isterseniz bu alan yalnızca kullanmanız gerekir. Devre dışı bırakıldığında, ön kapısı aldığı aynı istek yolu iletir. Bu alan hatalı yapılandırıldı ve ön kapısı böylece bir HTTP 404 durum kodu döndürerek bir kaynak kullanılabilir değil, arka uç isteyen mümkündür.
+   - _URL yeniden yazma_ varsayılan olarak devre dışıdır ve yalnızca kullanılabilir hale getirmek istediğiniz arka uç barındırılan kaynakların kapsamını daraltmak istiyorsanız bu alanı kullanmanız gerekir. Devre dışı bırakıldığında, ön kapıda aldığı istek yolunu iletecektir. Bu alan yanlış yapılandırılmış ve ön kapı, bir HTTP 404 durum kodu döndüren arka uçta bir kaynak istiyor olabilir.
 

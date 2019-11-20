@@ -1,71 +1,70 @@
 ---
-title: Bir Windows AWS Vm'leri Azure'a taşıma | Microsoft Docs
-description: Amazon Web Services (AWS) EC2 Windows örneği için bir Azure sanal makinesi taşıyın.
+title: Windows AWS VM 'lerini Azure 'a taşıma
+description: Bir Amazon Web Services (AWS) EC2 Windows örneğini bir Azure sanal makinesine taşıyın.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 06/01/2018
 ms.author: cynthn
-ms.openlocfilehash: d6a4c5b2b6d9818dffdb1c1fee8c4c0df7cad77c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9bd01f24ac2cada02f51089d238519cd6c7e0248
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61456215"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039280"
 ---
-# <a name="move-a-windows-vm-from-amazon-web-services-aws-to-an-azure-virtual-machine"></a>Bir Windows VM Amazon Web Services'dan (AWS) için bir Azure sanal makinesi taşıyın.
+# <a name="move-a-windows-vm-from-amazon-web-services-aws-to-an-azure-virtual-machine"></a>Windows VM 'yi Amazon Web Services (AWS) 'den Azure sanal makinesine taşıma
 
-İş yüklerinizi barındırmak için Azure sanal makineleri değerlendiriyorsanız mevcut Amazon Web Services (AWS) EC2 Windows VM örneği dışarı sonra sanal sabit disk (VHD) Azure'a yükleyin. VHD'yi karşıya yüklendikten sonra VHD'den azure'da yeni bir VM oluşturabilirsiniz. 
+İş yüklerinizi barındırmak için Azure sanal makinelerini değerlendiriyorsanız, mevcut bir Amazon Web Services (AWS) EC2 Windows sanal makıne örneğini dışa aktarabilir ve ardından sanal sabit diski (VHD) Azure 'a yükleyebilirsiniz. VHD karşıya yüklendikten sonra, VHD 'den Azure 'da yeni bir VM oluşturabilirsiniz. 
 
-Bu makalede tek bir VM AWS'den Azure'a taşıma anlatılmaktadır. Vm'leri AWS'den Azure'a ölçekte taşımak istiyorsanız, bkz. [Amazon Web Services (AWS) sanal makineler Azure Site Recovery ile Azure'a geçiş](../../site-recovery/site-recovery-migrate-aws-to-azure.md).
+Bu makalede, AWS 'den Azure 'a tek bir VM 'nin taşınması ele alınmaktadır. AWS 'den Azure 'a sanal makineleri ölçekli olarak taşımak istiyorsanız, bkz. [Amazon Web Services (AWS) sanal makinelerini Azure Site Recovery Azure 'A geçirme](../../site-recovery/site-recovery-migrate-aws-to-azure.md).
 
 ## <a name="prepare-the-vm"></a>VM’yi hazırlama 
  
-Azure için genelleştirilmiş ve özelleştirilmiş VHD yükleyebilirsiniz. Her tür AWS'den dışarı aktarmadan önce VM'yi hazırlama gerektirir. 
+Hem Genelleştirilmiş hem de özelleştirilmiş VHD 'leri Azure 'a yükleyebilirsiniz. Her tür, VM 'leri AWS 'den dışarı aktarmadan önce hazırlamanızı gerektirir. 
 
-- **Genelleştirilmiş VHD** -genelleştirilmiş VHD tüm kişisel hesap bilgilerinizi Sysprep kullanarak kaldırılan oluşturdu. VHD, yeni sanal makineler oluşturmak için bir görüntü olarak kullanmak istiyorsanız, şunları yapmalısınız: 
+- **GENELLEŞTIRILMIŞ VHD** -GENELLEŞTIRILMIŞ bir VHD, tüm kişisel hesap bilgilerinizin Sysprep kullanılarak kaldırıldığını içeriyordu. VHD 'yi ' den yeni VM 'Ler oluşturmak için bir görüntü olarak kullanmayı düşünüyorsanız şunları yapmalısınız: 
  
-    * [Bir Windows VM hazırlama](prepare-for-upload-vhd-image.md).  
-    * Sanal makine Sysprep kullanarak genelleştirin.  
+    * [Windows VM 'Yi hazırlayın](prepare-for-upload-vhd-image.md).  
+    * Sysprep kullanarak sanal makineyi genelleştirin.  
 
  
-- **Özelleştirilmiş VHD** -özelleştirilmiş bir VHD'yi kullanıcı hesaplarını, uygulamaları ve orijinal VM'yi diğer Durum verilerini tutar. VHD olarak kullanmak istiyorsanız,-olan yeni bir VM oluşturmak için aşağıdaki adımları tamamlandığından emin olun.  
-    * [Windows Azure'a karşıya yüklenecek VHD'yi hazırlama](prepare-for-upload-vhd-image.md). **Sağlamadığı** Sysprep kullanarak VM'yi Genelleştirme. 
-    * Herhangi bir konuk sanallaştırma araçları ve (yani, VMware araçları) VM'de yüklü aracıları kaldırın. 
-    * VM, IP adresi ve DNS ayarlarını DHCP yoluyla çekmek için yapılandırılan emin olun. Bu, başladığında sunucunun sanal ağ içindeki bir IP adresi alacağını sağlar.  
+- **ÖZELLEŞTIRILMIŞ VHD** -ÖZELLEŞTIRILMIŞ bir VHD, özgün VM 'nizden Kullanıcı hesaplarını, uygulamaları ve diğer durum verilerini korur. Yeni bir VM oluşturmak için VHD 'YI kullanmak istiyorsanız, aşağıdaki adımların tamamlandığından emin olun.  
+    * [Bir WINDOWS VHD 'Yi Azure 'a yüklemek Için hazırlayın](prepare-for-upload-vhd-image.md). Sysprep 'ı kullanarak VM 'yi **genelleştirmeyin** . 
+    * VM 'de yüklü olan tüm konuk sanallaştırma araçlarını ve aracılarını (örneğin, VMware araçları) kaldırın. 
+    * VM 'nin IP adresini ve DNS ayarlarını DHCP aracılığıyla çekmek üzere yapılandırıldığından emin olun. Bu, sunucu başlatıldığında sanal ağ içinde bir IP adresi elde edilmesini sağlar.  
 
 
-## <a name="export-and-download-the-vhd"></a>Dışarı aktarma ve VHD'yi indirin 
+## <a name="export-and-download-the-vhd"></a>VHD 'YI dışarı ve indirin 
 
-EC2 örneği, bir Amazon S3 demetini VHD dışarı aktarın. Amazon belgeleri makaledeki adımları izleyin [örneği bir VM kullanarak VM'yi içeri/dışarı aktarma olarak dışarı aktarma](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html) çalıştırıp [oluşturma-örnek-dışarı aktarma-görev](https://docs.aws.amazon.com/cli/latest/reference/ec2/create-instance-export-task.html) EC2 örneği için bir VHD dosyasını dışarı aktarmak için komutu. 
+EC2 örneğini bir Amazon S3 demetini içindeki bir VHD 'ye aktarın. [Sanal makine içeri/dışarı aktarma kullanarak bir ÖRNEĞI VM olarak dışarı](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html) aktarmak için Amazon belge makalesindeki adımları IZLEYIN ve EC2 ÖRNEĞINI bir VHD dosyasına aktarmak için [Create-Instance-Export-Task](https://docs.aws.amazon.com/cli/latest/reference/ec2/create-instance-export-task.html) komutunu çalıştırın. 
 
-Dışarı aktarılan VHD dosyasının belirttiğiniz Amazon S3 demetini kaydedilir. Temel sözdizimi aşağıda olan VHD dışarı aktarma için yalnızca değiştirmek yer tutucu metni \<ayraçlar > bilgilerinizle.
+İçe aktarılmış VHD dosyası, belirttiğiniz Amazon S3 demet içine kaydedilir. VHD 'YI dışa aktarmaya yönelik temel sözdizimi aşağıda verilmiştir \<> köşeli yer tutucu metni bilgilerinizi ile değiştirin.
 
 ```
 aws ec2 create-instance-export-task --instance-id <instanceID> --target-environment Microsoft \
   --export-to-s3-task DiskImageFormat=VHD,ContainerFormat=ova,S3Bucket=<bucket>,S3Prefix=<prefix>
 ```
 
-VHD dışarı sonra yönergeleri izleyin [nasıl indiririm bir nesne bir S3 Demetini?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/download-objects.html) S3 demetini VHD dosyasını indirmek için. 
+VHD verildiğinde, S3 demetini 'nden VHD dosyasını indirmek için [S3 demetini nasıl bir nesne indiririm?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/download-objects.html) bölümündeki yönergeleri izleyin. 
 
 > [!IMPORTANT]
-> VHD indirme ücretleri AWS ücretleri veri aktarımı. Bkz: [Amazon S3 fiyatlandırma](https://aws.amazon.com/s3/pricing/) daha fazla bilgi için.
+> AWS, VHD 'YI indirmek için veri aktarımı ücretleri ücretlendirir. Daha fazla bilgi için bkz. [Amazon S3 fiyatlandırması](https://aws.amazon.com/s3/pricing/) .
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Artık Azure'a VHD yükleme ve yeni bir VM oluşturun. 
+Şimdi de VHD 'yi Azure 'a yükleyebilir ve yeni bir VM oluşturabilirsiniz. 
 
-- Kaynağınıza Sysprep çalıştırdıysanız **generalize** dışarı aktarma, önce bkz [genelleştirilmiş VHD yükleme ve Azure'da yeni bir VM oluşturmak için bunu kullanın](upload-generalized-managed.md)
-- Dışarı aktarmadan önce Sysprep çalıştırmıyorsa, VHD olarak kabul edilir **özelleştirilmiş**, bkz: [Azure'a özelleştirilmiş bir VHD'yi karşıya yükleme ve yeni VM oluşturma](create-vm-specialized.md)
+- Vermeden önce **genelleştirmek** için kaynağınız üzerinde Sysprep 'i çalıştırdıysanız, bkz. [genelleştirilmiş bir VHD 'yi karşıya yükleme ve Azure 'Da yeni VM 'ler oluşturmak için kullanma](upload-generalized-managed.md)
+- Vermeden önce Sysprep 'ı çalıştırmadınız, VHD **özelleştirilmiş**olarak kabul edilir, bkz. [özelleştirilmiş bir VHD 'Yi Azure 'a yükleme ve yeni bir VM oluşturma](create-vm-specialized.md)
 
  

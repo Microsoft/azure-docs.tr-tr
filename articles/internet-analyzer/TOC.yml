@@ -1,0 +1,36 @@
+- name: Internet Analyzer Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Internet Analyzer hakkında
+      href: internet-analyzer-overview.md
+- name: Öğretici
+  items:
+    - name: Portalı kullanarak Internet Analyzer testi oluşturma
+      href: internet-analyzer-create-test-portal.md
+    - name: CLI kullanarak Internet Analyzer testi oluşturma
+      href: internet-analyzer-cli.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: İstemciyi ekleme
+      href: internet-analyzer-embed-client.md
+    - name: Özel uç nokta yapılandırma
+      href: internet-analyzer-custom-endpoint.md
+    - name: Karnenizi yorumlama
+      href: internet-analyzer-scorecard.md
+- name: Kaynaklar
+  items:
+    - name: Internet Analyzer hakkında SSS
+      href: internet-analyzer-faq.md
+    - name: Internet Analyzer CLI başvurusu
+      href: 'https://docs.microsoft.com/cli/azure/ext/internet-analyzer/internet-analyzer?view=azure-cli-latest'
+    - name: Azure Yol Haritası
+      href: 'https://azure.microsoft.com/roadmap/?category=networking'
+    - name: Blog
+      href: 'https://azure.microsoft.com/blog/topics/networking'
+    - name: Forum
+      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=WAVirtualMachinesVirtualNetwork'
+    - name: Önizleme SLA'sı
+      href: 'https://azure.microsoft.com/support/legal/preview-supplemental-terms'
+    - name: SLA
+      href: 'https://azure.microsoft.com/support/legal/sla'

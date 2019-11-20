@@ -1,55 +1,87 @@
 ---
-title: ETL yerine Azure SQL veri ambarı için ELT tasarlama | Microsoft Docs
-description: ETL yerine, verileri veya Azure SQL veri ambarı'nı yüklemek için ayıklama, yükleme ve dönüştürme (ELT) işlemi tasarlayın.
+title: ETL yerine,, ELT tasarlayın
+description: ETL yerine, verileri veya Azure SQL veri ambarını yüklemek için bir ayıklama, yükleme ve dönüştürme (ELT) işlemi tasarlayın.
 services: sql-data-warehouse
 author: kevinvngo
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
-ms.subservice: load data
-ms.date: 05/10/2019
+ms.subservice: load-data
+ms.date: 11/07/2019
 ms.author: kevin
 ms.reviewer: igorstan
-ms.openlocfilehash: de5649498dddcec8c65f2cfca6dcb39fa20a9267
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 9220bf0cf94eaae6ddc945e83deac2a6041158d2
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66242253"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73748514"
 ---
-# <a name="designing-a-polybase-data-loading-strategy-for-azure-sql-data-warehouse"></a>Azure SQL veri ambarı için stratejisi yüklenirken PolyBase veri tasarlama
+# <a name="data-loading-strategies-for-azure-sql-data-warehouse"></a>Azure SQL veri ambarı için veri yükleme stratejileri
 
-SMP veri ambarları geleneksel bir ayıklama, dönüştürme ve yükleme (ETL) işlemi, verileri yüklemek için kullanın. Azure SQL veri ambarı avantajı ölçeklenebilirlik ve esneklik işlem ve depolama kaynakları alan yüksek düzeyde paralel işleme (MPP) bir mimaridir. Bir ayıklama, yükleme ve dönüştürme (ELT) işlemi kullanılarak MPP avantajlarından yararlanın ve yükleme öncesinde verilerin dönüştürmek için gerekli kaynakları ortadan kaldırın. SQL veri ambarı Polybase olmayan seçenekleri BCP ve SQL BulkCopy API gibi dahil olmak üzere birçok yükleme yöntemleri desteklese de tarih yüklemenin en hızlı ve en ölçeklenebilir PolyBase yoludur.  PolyBase, T-SQL dili ile Azure Blob Depolama veya Azure Data Lake Store içinde depolanan dış verilere erişen bir teknolojidir.
+Geleneksel SMP veri ambarları, verileri yüklemek için bir ayıklama, dönüştürme ve yükleme (ETL) işlemi kullanır. Azure SQL veri ambarı, bilgi işlem ve depolama kaynaklarının ölçeklenebilirlik ve esnekliğinden yararlanan, yüksek düzeyde paralel işleme (MPP) mimarisidir. Bir ayıklama, yükleme ve dönüştürme (ELT) işleminin kullanılmasıyla, MPP 'den yararlanabilir ve yüklemeden önce verileri dönüştürmek için gereken kaynakları ortadan kaldırabilir. SQL veri ambarı BCP ve SQL BulkCopy API gibi popüler SQL Server seçenekleri de dahil olmak üzere birçok yükleme yöntemini desteklese de, verileri yüklemenin en hızlı ve en ölçeklenebilir yolu PolyBase dış tabloları ve [Copy deyimleridir](/sql/t-sql/statements/copy-into-transact-sql?view=azure-sqldw-latest) (Önizleme).  PolyBase ve COPY ifadesiyle, Azure Blob depolamada depolanan dış verilere veya T-SQL dili üzerinden Azure Data Lake Store erişebilirsiniz. SQL veri ambarı 'na yükleme yaparken en fazla esneklik için, COPY ifadesinin kullanılması önerilir. 
 
+> [!NOTE]  
+> COPY deyimleri Şu anda genel önizlemededir. Geri bildirim sağlamak için şu dağıtım listesine e-posta gönderin: sqldwcopypreview@service.microsoft.com.
+>
+        
+ 
 > [!VIDEO https://www.youtube.com/embed/l9-wP7OdhDk]
 
 
 ## <a name="what-is-elt"></a>ELT nedir?
 
-Ayıklama, yükleme ve dönüştürme (ELT) olarak veri kaynak sistemden ayıklanan yüklenen veri ambarı'na ve ardından dönüştürülmüş bir işlemdir. 
+Ayıklama, yükleme ve dönüştürme (ELT), verilerin bir kaynak sistemden ayıklandığı, bir veri ambarına yüklendiği ve sonra dönüştürülebileceği bir işlemdir. 
 
-Bir SQL veri ambarı PolyBase ELT uygulamak için temel adımlar şunlardır:
+SQL veri ambarı için ELT 'ı uygulamaya yönelik temel adımlar şunlardır:
 
 1. Kaynak verileri metin dosyalarına ayıklayın.
-2. Verileri Azure Blob Depolama veya Azure Data Lake Store gelirsiniz.
-3. Veri yüklemesi için hazırlayın.
-4. Veri hazırlama tablolarından PolyBase kullanarak SQL Data Warehouse'a veri yükleme. 
+2. Verileri Azure Blob depolama alanına veya Azure Data Lake Store ekleyin.
+3. Verileri yükleme için hazırlayın.
+4. PolyBase veya COPY komutuyla verileri SQL veri ambarı hazırlama tablolarına yükleyin. 
 5. Verileri dönüştürün.
-6. Üretim tablolarına veri ekleyin.
+6. Verileri üretim tablolarına ekleyin.
 
 
-Yükleme öğreticisi için bkz. [verileri Azure blob depolama alanından Azure SQL veri ambarı'na yüklemek için PolyBase kullanma](load-data-from-azure-blob-storage-using-polybase.md).
+PolyBase yükleme öğreticisi için bkz. [Azure Blob depolamadan Azure SQL veri ambarı 'na veri yüklemek Için PolyBase kullanma](load-data-from-azure-blob-storage-using-polybase.md).
 
-Daha fazla bilgi için [desenleri blog yüklenirken](https://blogs.msdn.microsoft.com/sqlcat/20../../azure-sql-data-warehouse-loading-patterns-and-strategies/). 
+Daha fazla bilgi için bkz. [desenleri web günlüğü yükleme](https://blogs.msdn.microsoft.com/sqlcat/20../../azure-sql-data-warehouse-loading-patterns-and-strategies/). 
 
 
-## <a name="1-extract-the-source-data-into-text-files"></a>1. Kaynak verileri metin dosyalarına ayıklayın
+## <a name="1-extract-the-source-data-into-text-files"></a>1. kaynak verileri metin dosyalarına ayıklayın
 
-Kaynak sisteminiz dışında veri alma, depolama konumuna bağlıdır.  Sınırlandırılmış metin dosyaları desteklenen PolyBase verileri taşımak için hedeftir. 
+Kaynak sisteminizden veri alma, depolama konumuna bağlıdır.  Amaç, verileri PolyBase 'e ve kopya desteklenen sınırlandırılmış metin veya CSV dosyalarını taşımaktır. 
 
-### <a name="polybase-external-file-formats"></a>PolyBase dış dosya biçimleri
+### <a name="polybase-and-copy-external-file-formats"></a>PolyBase ve dış dosya biçimlerini Kopyala
 
-PolyBase UTF-8'den verileri yükler ve UTF-16 kodlamalı sınırlandırılmış metin dosyaları. Sınırlandırılmış metin dosyalarının yanı sıra Hadoop dosyası biçimlerinden RC dosyası ORC ve Parquet yükler. PolyBase Ayrıca, Gzip ve Snappy sıkıştırılmış dosyalar veri yükleyebilirsiniz. PolyBase, genişletilmiş ASCII, sabit genişlikli biçimi ve iç içe geçmiş biçimleri WinZip, JSON ve XML gibi şu anda desteklemiyor. SQL Server'dan dışarı aktarıyorsanız, kullanabileceğiniz [bcp komut satırı aracını](/sql/tools/bcp-utility) verileri sınırlandırılmış metin dosyalarına veri aktarmak için. SQL DW veri türü eşlemesi Parquet aşağıda verilmiştir:
+PolyBase ve COPY ifadesiyle, UTF-8 ve UTF-16 kodlamalı sınırlandırılmış metin veya CSV dosyalarından veri yükleyebilirsiniz. Ayrılmış metin veya CSV dosyalarına ek olarak, ORC ve Parquet gibi Hadoop dosya biçimlerinden yüklenir. PolyBase ve COPY deyimleri, verileri gzip ve Snappy sıkıştırılmış dosyalarından de yükleyebilir. Genişletilmiş ASCII, sabit genişlikli biçim ve WinZip veya XML gibi iç içe biçimler desteklenmez. SQL Server dışarı aktarıyorsanız, verileri sınırlandırılmış metin dosyalarına aktarmak için [bcp komut satırı aracını](/sql/tools/bcp-utility?view=azure-sqldw-latest) kullanabilirsiniz. 
+
+## <a name="2-land-the-data-into-azure-blob-storage-or-azure-data-lake-store"></a>2. verileri Azure Blob depolama alanına veya Azure Data Lake Store ekleyin
+
+Verileri Azure depolama 'ya taşımak için [Azure Blob depolama](../storage/blobs/storage-blobs-introduction.md) alanına veya [Azure Data Lake Store Gen2](../data-lake-store/data-lake-store-overview.md)taşıyabilirsiniz. Her iki konumda da veriler metin dosyalarında depolanmalıdır. PolyBase ve COPY deyimleri her iki konumdan de yüklenebilir.
+
+Verileri Azure depolama 'ya taşımak için kullanabileceğiniz araçlar ve hizmetler:
+
+- [Azure ExpressRoute](../expressroute/expressroute-introduction.md) hizmeti ağ aktarım hızını, performansı ve öngörülebilirlik geliştirir. ExpressRoute, verilerinizi Azure 'a adanmış bir özel bağlantıyla yönlendiren bir hizmettir. ExpressRoute bağlantıları, verileri genel İnternet üzerinden yönlendirmez. Bağlantılar, genel İnternet üzerinden tipik bağlantılardan daha fazla güvenilirlik, daha hızlı hız, daha düşük gecikme süreleri ve daha yüksek güvenlik sunar.
+- [AZCopy yardımcı programı](../storage/common/storage-moving-data.md) , verileri genel Internet üzerinden Azure depolama 'ya taşıtabilecek. Bu, veri boyutlarınızın 10 TB 'den küçük olması durumunda geçerlidir. AZCopy ile düzenli olarak yükleme gerçekleştirmek için, kabul edilebilir olup olmadığını görmek için ağ hızını test edin. 
+- [Azure Data Factory (ADF)](../data-factory/introduction.md) , yerel sunucunuza yükleyebileceğiniz bir ağ geçidine sahip olabilir. Daha sonra, yerel sunucunuzdaki verileri Azure depolama 'ya taşımak için bir işlem hattı oluşturabilirsiniz. SQL veri ambarı ile Data Factory kullanmak için bkz. [SQL Data Warehouse 'a veri yükleme](/azure/data-factory/load-azure-sql-data-warehouse).
+
+
+## <a name="3-prepare-the-data-for-loading"></a>3. verileri yükleme için hazırlama
+
+Depolama hesabınızdaki verileri SQL veri ambarı 'na yüklemeden önce hazırlamanız ve temizlemeniz gerekebilir. Veriler kaynakta olduğunda veri hazırlama gerçekleştirilebilir, verileri metin dosyalarına dışarı aktardığınızda veya veriler Azure Storage 'dayken olur.  Mümkün olduğunca önce verilerle çalışmak en kolay yoldur.  
+
+### <a name="define-external-tables"></a>Dış tabloları tanımlama
+
+PolyBase kullanıyorsanız, yüklemeden önce veri Ambarınızda dış tablolar tanımlamanız gerekir. COPY ifadesinin dış tabloları gerekli değildir. PolyBase, Azure depolama 'daki verileri tanımlamak ve verilere erişmek için dış tabloları kullanır. Dış tablo, veritabanı görünümüne benzer. Dış tablo tablo şemasını içerir ve veri ambarının dışında depolanan verileri gösterir. 
+
+Dış tabloları tanımlama, veri kaynağını, metin dosyalarının biçimini ve tablo tanımlarını belirtmeyi içerir. T-SQL sözdizimi konuları ihtiyacınız olacak:
+- [DıŞ VERI KAYNAĞı OLUŞTUR](/sql/t-sql/statements/create-external-data-source-transact-sql?view=azure-sqldw-latest)
+- [CREATE EXTERNAL FILE FORMAT](/sql/t-sql/statements/create-external-file-format-transact-sql?view=azure-sqldw-latest)
+- [DıŞ TABLO OLUŞTUR](/sql/t-sql/statements/create-external-table-transact-sql?view=azure-sqldw-latest)
+
+Parquet yüklenirken SQL DW ile veri türü eşlemesi:
 
 | **Parquet veri türü** |                      **SQL veri türü**                       |
 | :-------------------: | :----------------------------------------------------------: |
@@ -57,98 +89,74 @@ PolyBase UTF-8'den verileri yükler ve UTF-16 kodlamalı sınırlandırılmış 
 |       smallint        |                           smallint                           |
 |          int          |                             int                              |
 |        bigint         |                            bigint                            |
-|        boole        |                             bit                              |
+|        boole        |                             sürümleri                              |
 |        double         |                            float                             |
-|         float         |                             real                             |
-|        double         |                            money                             |
-|        double         |                          smallmoney                          |
+|         float         |                             gerçek                             |
+|        double         |                            etmenize                             |
+|        double         |                          küçük para                          |
 |        string         |                            nchar                             |
 |        string         |                           nvarchar                           |
-|        string         |                             char                             |
+|        string         |                             Char                             |
 |        string         |                           varchar                            |
-|        binary         |                            binary                            |
-|        binary         |                          varbinary                           |
+|        ý         |                            ý                            |
+|        ý         |                          ikili                           |
 |       timestamp       |                             date                             |
-|       timestamp       |                        smalldatetime                         |
+|       timestamp       |                        girişin                         |
 |       timestamp       |                          datetime2                           |
 |       timestamp       |                           datetime                           |
 |       timestamp       |                             time                             |
-|       date        | İnt ve atama tarihi (1) yükleme </br> (2) [da Azure Databricks SQL DW bağlayıcı](https://docs.microsoft.com/azure/azure-databricks/databricks-extract-load-sql-data-warehouse#load-data-into-azure-sql-data-warehouse) ile </br> spark.conf.set( "spark.sql.parquet.writeLegacyFormat", "true" ) </br> (**yakında güncelleştirme**) |
-|        decimal        | [Azure Databricks SQL DW bağlayıcı kullanma](https://docs.microsoft.com/azure/azure-databricks/databricks-extract-load-sql-data-warehouse#load-data-into-azure-sql-data-warehouse) ile </br> spark.conf.set( "spark.sql.parquet.writeLegacyFormat", "true" ) </br> (**yakında güncelleştirme**) |
+|       date            |                             date                             |
+|        decimal        |                            decimal                           |
 
-## <a name="2-land-the-data-into-azure-blob-storage-or-azure-data-lake-store"></a>2. Verileri Azure Blob Depolama veya Azure Data Lake Store gelirsiniz.
+Dış nesne oluşturma hakkında bir örnek için, yükleme öğreticisindeki [dış tablo oluşturma](load-data-from-azure-blob-storage-using-polybase.md#create-external-tables-for-the-sample-data) adımına bakın.
 
-Verileri Azure depolamada kavuşmak için kendisine taşıyabilirsiniz [Azure Blob Depolama](../storage/blobs/storage-blobs-introduction.md) veya [Azure Data Lake Store](../data-lake-store/data-lake-store-overview.md). İki konumdan birinde verileri metin dosyalarına depolanması gerekir. PolyBase, her iki konumdan yükleyebilir.
+### <a name="format-text-files"></a>Metin dosyalarını biçimlendirme
 
-Araçları ve Hizmetleri Azure Depolama'ya veri taşımak için kullanabilirsiniz:
+PolyBase kullanıyorsanız, tanımlanan dış nesnelerin metin dosyalarının satırlarını dış tablo ve dosya biçimi tanımıyla hizalamaları gerekir. Metin dosyasının her satırındaki veriler tablo tanımıyla hizalanmalıdır.
+Metin dosyalarını biçimlendirmek için:
 
-- [Azure ExpressRoute](../expressroute/expressroute-introduction.md) hizmeti ağ aktarım hızı, performans ve tahmin edilebilirliğini artırır. ExpressRoute adanmış özel bağlantı üzerinden verilerinizi Azure'a yönlendiren bir hizmettir. ExpressRoute bağlantıları ortak internet üzerinden veri yönlendirmediğinden. Bağlantılar genel internet üzerinden daha fazla güvenilirlik, daha yüksek hız, düşük gecikme ve tipik bağlantılardan daha yüksek güvenlik sunar.
-- [AZCopy yardımcı programını](../storage/common/storage-moving-data.md) verileri Azure Depolama'ya genel internet üzerinden taşır. Bu, veri boyutu 10 TB'den az olduğunda çalışır. AZCopy ile düzenli aralıklarla yükleri gerçekleştirmek için kabul edilebilir olup olmadığını görmek için ağ hızını test edin. 
-- [Azure Data Factory (ADF)](../data-factory/introduction.md) sahip bir ağ geçidi, yerel sunucuya yükleyebilirsiniz. Ardından, Azure depolama kadar yerel sunucunuzdan veri taşımak için işlem hattı oluşturabilirsiniz. Data Factory, SQL veri ambarı ile kullanmak için bkz: [SQL Data Warehouse'a veri yükleme](/azure/data-factory/load-azure-sql-data-warehouse).
-
-
-## <a name="3-prepare-the-data-for-loading"></a>3. Yükleme için verileri hazırlama
-
-Hazırlamak ve SQL veri ambarı'na yüklemeden önce depolama hesabınızdaki verileri temizlemek gerekebilir. Veri hazırlama, verileri metin dosyalarına dışarı aktarma gibi veri kaynağında olsa veya Azure Depolama'da veri olduktan sonra gerçekleştirilebilir.  Mümkün olduğunca erken işleminde verilerle çalışmak kolaydır.  
-
-### <a name="define-external-tables"></a>Dış tabloları tanımlama
-
-Verileri yüklemeden önce veri ambarı'nda dış tablolar tanımlamanız gerekir. PolyBase, tanımlamak ve Azure Depolama'daki verilere erişmek için dış tabloları kullanır. Bir dış tablo, veritabanı görünümü benzerdir. Dış tablo tablo şemasını içerir ve veri ambarı dışında depolanan veriler için gösterir. 
-
-Dış tablolar tanımlama, veri kaynağını, metin dosyalarını ve tablo tanımları biçimini belirten içerir. İhtiyacınız olacak T-SQL söz dizimi konularına şunlardır:
-- [DIŞ VERİ KAYNAĞI OLUŞTURMA](/sql/t-sql/statements/create-external-data-source-transact-sql)
-- [CREATE EXTERNAL FILE FORMAT](/sql/t-sql/statements/create-external-file-format-transact-sql)
-- [DIŞ TABLO OLUŞTURMA](/sql/t-sql/statements/create-external-table-transact-sql)
-
-Dış nesneler oluşturma örneği için bkz: [dış tablolar oluşturma](load-data-from-azure-blob-storage-using-polybase.md#create-external-tables-for-the-sample-data) yükleme öğreticide adım.
-
-### <a name="format-text-files"></a>Biçim metin dosyaları
-
-Dış nesneler tanımlandıktan sonra dış tablo ve dosya biçimi tanımını içeren metin dosyalarını satırlarını hizalamak gerekir. Metin dosyasının her bir satırdaki verileri tablo tanımı ile hizalamanız gerekir.
-Metni biçimlendirmek için dosyalar:
-
-- Verileriniz ilişkisel olmayan bir kaynaktan geliyorsa, satırlar ve sütunlar haline dönüştürmek gerekir. İlişkisel ve ilişkisel olmayan bir kaynaktan veri olup olmadığını, verileri veri yükleme planladığınız tablosunun sütun tanımları ile hizalamak için dönüştürülmesi gerekir. 
-- SQL veri ambarı hedef tabloda sütun ve veri türleri ile hizalamak için metin dosyasındaki veri biçimi. Yanlış hizalanmış veri türleri dış metin dosyalarındaki ve veri ambarı tablosu arasında yük reddedilir satırları neden olur.
-- Bir sonlandırıcı içeren metin dosyası ayrı alanlar.  Bir karakteri ya da kaynak verilerinizi bulunmayan bir karakter dizisi kullandığınızdan emin olun. İle belirtilen Sonlandırıcı kullanın [CREATE EXTERNAL FILE FORMAT](/sql/t-sql/statements/create-external-file-format-transact-sql).
+- Verileriniz ilişkisel olmayan bir kaynaktan geliyorsa, onu satırlara ve sütunlara dönüştürmeniz gerekir. Verilerin ilişkisel veya ilişkisel olmayan bir kaynaktan olup olmadığı, verileri yüklemeyi planladığınız tablonun sütun tanımlarına göre hizalanacak şekilde dönüştürülmesi gerekir. 
+- Metin dosyasındaki verileri, SQL veri ambarı hedef tablosundaki sütunlar ve veri türleriyle hizalamak için biçimlendirin. Dış metin dosyalarındaki veri türleri arasındaki hatalı hizalanmış ve veri ambarı tablosu, yük sırasında satırların reddedilmesine neden olur.
+- Metin dosyasındaki alanları Sonlandırıcı ile ayırın.  Kaynak verilerinizde bulunmayan bir karakter veya karakter dizisi kullandığınızdan emin olun. [Dış dosya biçimi oluştur](/sql/t-sql/statements/create-external-file-format-transact-sql)ile belirttiğiniz sonlandırıcıyı kullanın.
 
 
-## <a name="4-load-the-data-into-sql-data-warehouse-staging-tables-using-polybase"></a>4. Veri hazırlama tablolarından PolyBase kullanarak SQL Data Warehouse'a veri yükleme
+## <a name="4-load-the-data-into-sql-data-warehouse-staging-tables-using-polybase-or-the-copy-statement"></a>4. PolyBase veya COPY ifadesini kullanarak verileri SQL veri ambarı hazırlama tablolarına yükleyin
 
-Verileri bir hazırlama tablosuna yüklemek için en iyi bir uygulamadır. Hazırlama tabloları, üretim tablolarla engellemeden hataları işlemek izin verin. Hazırlama tablosuna ayrıca SQL veri ambarı MPP veri dönüşümleri için üretim tablolarına veri eklemeden önce kullanmanıza olanak sağlar.
+Hazırlama tablosuna veri yüklemek en iyi uygulamadır. Hazırlama tabloları, üretim tablolarının kesintiye uğramadan hataları işleyebilmeniz için izin verir. Hazırlama tablosu, verileri üretim tablolarına eklemeden önce veri dönüştürmeleri için SQL veri ambarı MPP kullanma fırsatını de sağlar. KOPYALAMA ile hazırlama tablosuna yükleme sırasında tablonun önceden oluşturulması gerekir.
 
-### <a name="options-for-loading-with-polybase"></a>PolyBase ile yükleme seçenekleri
+### <a name="options-for-loading-with-polybase-and-copy-statement"></a>PolyBase ve COPY ifadesiyle yükleme seçenekleri
 
-PolyBase ile veri yükleme için şu yükleme seçeneklerinden herhangi birini kullanabilirsiniz:
+PolyBase ile veri yüklemek için, bu yükleme seçeneklerinden herhangi birini kullanabilirsiniz:
 
-- [PolyBase ile T-SQL](load-data-from-azure-blob-storage-using-polybase.md) verilerinizi Azure Blob Depolama veya Azure Data Lake Store içinde olduğunda iyi çalışır. Yükleme işlemi üzerinde en çok denetimi verir, ancak Ayrıca, dış veri nesneleri tanımlamanızı gerektirir. Kaynak tablolarına hedef tablolara eşleme gibi diğer yöntemleri bu nesneleri Sahne arkasında tanımlayın.  T-SQL yükleri düzenlemek için Azure Data Factory, SSIS veya Azure işlevleri kullanabilirsiniz. 
-- [PolyBase ile SSIS](/sql/integration-services/load-data-to-sql-data-warehouse) kaynak verilerinizi SQL Server'da SQL Server şirket içinde veya bulutta olduğunda iyi çalışır. SSIS kaynağı için hedef tablo eşlemelerini tanımlar ve ayrıca yük düzenler. SSIS paketlerini zaten varsa, yeni veri ambarı hedefi ile çalışmak için paketlerini değiştirebilirsiniz. 
-- [PolyBase ile Azure Data Factory (ADF)](sql-data-warehouse-load-with-data-factory.md) başka bir düzenleme aracıdır.  Bu, bir işlem hattı tanımlar ve işleri zamanlar. 
-- [PolyBase ile Azure DataBricks](../azure-databricks/databricks-extract-load-sql-data-warehouse.md) aktarır verileri SQL veri ambarı tablodan bir Databricks veri çerçevesi için ve/veya veri bir Databricks dataframe PolyBase kullanarak SQL veri ambarı tablo için yazar.
+- [T-SQL Ile PolyBase](load-data-from-azure-blob-storage-using-polybase.md) , verileriniz Azure Blob depolama veya Azure Data Lake Store olduğunda iyi bir şekilde çalışabilir. Bu, yükleme işlemi üzerinde en fazla denetim sağlar, ancak dış veri nesneleri tanımlamanızı da gerektirir. Diğer yöntemler, kaynak tablolarını hedef tablolarla eşleştirdiğinizde arka planda bu nesneleri tanımlar.  T-SQL yüklemelerini düzenlemek için Azure Data Factory, SSIS veya Azure işlevlerini kullanabilirsiniz. 
+- [SSIS Ile PolyBase](/sql/integration-services/load-data-to-sql-data-warehouse) , kaynak verileriniz SQL Server, şirket içinde veya bulutta SQL Server olduğunda iyi çalışacaktır. SSIS, kaynağı hedef tablo eşlemelerine tanımlar ve ayrıca yükü düzenler. SSIS paketleriniz zaten varsa, yeni veri ambarı hedefle çalışacak şekilde paketleri değiştirebilirsiniz. 
+- [Azure Data Factory (ADF) Ile PolyBase ve Copy deyimleri](sql-data-warehouse-load-with-data-factory.md) başka bir düzenleme aracıdır.  İşlem hattını tanımlar ve işleri zamanlar. 
+- [Azure Databricks Ile PolyBase,](../azure-databricks/databricks-extract-load-sql-data-warehouse.md) bir SQL veri ambarı tablosundan Databricks veri çerçevesine veri aktarır ve/veya databricks veri çerçevesindeki verileri PolyBase kullanarak bir SQL veri ambarı tablosuna yazar.
 
-### <a name="non-polybase-loading-options"></a>Olmayan PolyBase yükleme seçenekleri
+### <a name="other-loading-options"></a>Diğer yükleme seçenekleri
 
-Verilerinizi PolyBase ile uyumlu değilse, kullanabileceğiniz [bcp](/sql/tools/bcp-utility) veya [SQLBulkCopy API](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy.aspx). BCP Azure Blob Depolama geçmeden doğrudan SQL veri ambarı'na yükler ve yalnızca küçük yükler için tasarlanmıştır. Unutmayın, bu seçeneklerin yükleme performansını önemli ölçüde PolyBase yavaştır. 
-
-
-## <a name="5-transform-the-data"></a>5. Verileri dönüştürme
-
-Veri hazırlama tablosunda olsa da, İş yükünüzün gerektirdiği dönüşümleri gerçekleştirir. Ardından verileri üretim tablosuna taşıyın.
+PolyBase ve COPY deyimlerinin yanı sıra [bcp](/sql/tools/bcp-utility?view=azure-sqldw-latest) veya [SqlBulkCopy API](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy.aspx)'sini de kullanabilirsiniz. BCP, Azure Blob depolama alanına geçmeden doğrudan SQL veri ambarı 'na yüklenir ve yalnızca küçük yüklemeler için tasarlanmıştır. Bu seçeneklerin yük performansı, PolyBase ve COPY deyiminden daha yavaştır. 
 
 
-## <a name="6-insert-the-data-into-production-tables"></a>6. Üretim tablolarına veri ekleme
+## <a name="5-transform-the-data"></a>5. verileri dönüştürme
 
-İÇİNE ekle... SELECT deyimi veri hazırlama tablodan kalıcı tablosuna taşır. 
-
-ETL işlemi tasarlarken, bir küçük test örneğinde çalışan işlem deneyin. 1000 satırı tablodan bir dosyaya ayıklama deneyin, Azure'a taşıyın ve sonra bir hazırlama tablosuna Yükleme'ı deneyin. 
+Veriler hazırlama tablodayken, iş yükünüzün gerektirdiği dönüştürmeleri gerçekleştirin. Sonra verileri bir üretim tablosuna taşıyın.
 
 
-## <a name="partner-loading-solutions"></a>İş ortağı çözümler yüklenirken
+## <a name="6-insert-the-data-into-production-tables"></a>6. verileri üretim tablolarına ekleyin
 
-İş Ortaklarımızın çoğu, çözümleri yükleniyor vardır. Daha fazla bilgi için bir listesini görmek bizim [çözüm ortakları](sql-data-warehouse-partner-business-intelligence.md). 
+INSERT INTO... SELECT ifadesinin verileri hazırlama tablosundan kalıcı tabloya taşınıyor. 
+
+Bir ETL işlemi tasarlarken, işlemi küçük bir test örneğinde çalıştırmayı deneyin. Tablodaki 1000 satırı bir dosyaya ayıklamayı deneyin, Azure 'a taşıyın ve sonra hazırlama tablosuna yüklemeyi deneyin. 
+
+
+## <a name="partner-loading-solutions"></a>İş ortağı yükleme çözümleri
+
+İş ortaklarımızın birçoğu çözüm yüklüyor. Daha fazla bilgi edinmek için [çözüm iş ortaklarımızın](sql-data-warehouse-partner-business-intelligence.md)listesini inceleyin. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yüklemeyle ilgili Rehber için bkz: [veri Yükleme Kılavuzu](guidance-for-loading-data.md).
+Yükleme Kılavuzu için bkz. [veri yükleme kılavuzu](guidance-for-loading-data.md).
 
 

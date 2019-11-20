@@ -1,20 +1,18 @@
 ---
 title: Azure Hızlı Başlangıç - PHP kullanarak nesne depolamada blob oluşturma | Microsoft Docs
 description: PHP kullanarak nesneleri Azure Blob depolama içine/dışına aktarmayı kısa sürede öğrenin
-services: storage
 author: mhopkins-msft
-ms.service: storage
-ms.devlang: php
-ms.topic: quickstart
-ms.date: 11/14/2018
 ms.author: mhopkins
-ms.reviewer: seguler
-ms.openlocfilehash: 790c6a372021542daa1098e94209c91b7bcecfd5
-ms.sourcegitcommit: f6ba5c5a4b1ec4e35c41a4e799fb669ad5099522
+ms.date: 11/14/2018
+ms.service: storage
+ms.subservice: blobs
+ms.topic: quickstart
+ms.openlocfilehash: 0453d7465479fb1410d1436cc3fa53914633ece5
+ms.sourcegitcommit: 85b3973b104111f536dc5eccf8026749084d8789
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65149452"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68726385"
 ---
 #  <a name="transfer-objects-tofrom-azure-blob-storage-using-php"></a>PHP kullanarak nesneleri Azure Blob depolama içine/dışına aktarma
 Bu hızlı başlangıçta, Azure Blob depolamadaki bir kapsayıcıda blok bloblarını karşıya yüklemek, indirmek ve listelemek için PHP'yi nasıl kullanabileceğinizi öğreneceksiniz. 
@@ -26,7 +24,7 @@ Bu hızlı başlangıçta, Azure Blob depolamadaki bir kapsayıcıda blok blobla
 Aşağıdaki ek önkoşulların yüklü olduğundan emin olun:
 
 * [PHP](https://php.net/downloads.php)
-* [PHP için Azure depolama SDK'si](https://github.com/Azure/azure-storage-php)
+* [PHP için Azure depolama SDK 'Sı](https://github.com/Azure/azure-storage-php)
 
 ## <a name="download-the-sample-application"></a>Örnek uygulamayı indirin:
 Bu hızlı başlangıçta kullanılan [örnek uygulama](https://github.com/Azure-Samples/storage-blobs-php-quickstart.git), temel bir PHP uygulamasıdır.  

@@ -1,7 +1,7 @@
 ---
-title: Görüntüleri - görüntü işleme açıklayan
+title: Görüntü açıklamaları-Görüntü İşleme
 titleSuffix: Azure Cognitive Services
-description: Görüntü işleme API'si görüntü açıklama özelliğiyle ilgili kavramları.
+description: Görüntü İşleme API'si resim açıklaması özelliğiyle ilgili kavramlar.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
@@ -11,22 +11,22 @@ ms.topic: conceptual
 ms.date: 02/11/2019
 ms.author: pafarley
 ms.custom: seodec18
-ms.openlocfilehash: 91618b211fdd869daf74491b175d6359ffa3f30c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: dcf61c642a9f8ad7aa68d72736ce8fdb0e9a6e3c
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60368394"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68945259"
 ---
-# <a name="describe-images-with-human-readable-language"></a>Kullanıcı tarafından okunabilen bir dil ile görüntü açıklayın
+# <a name="describe-images-with-human-readable-language"></a>İnsan tarafından okunabilen dilin görüntülerini açıklama
 
-Görüntü işleme, bir resmi çözümleme ve içeriğini açıklayan insanlar tarafından okunabilen bir cümle oluşturur. Farklı görsel özellikleri ve her açıklaması retruns birkaç açıklamaları gerçekten göre algoritması bir güven puanı verilir. Son çıkış açıklamaları en yüksek öncelikten en düşük güven için sıralanmış bir listesidir.
+Görüntü İşleme bir görüntüyü çözümleyebilir ve içeriğini açıklayan bir insan tarafından okunabilen tümce oluşturabilir. Algoritma aslında farklı görsel özelliklere göre birkaç açıklama döndürür ve her açıklamaya Güvenirlik puanı verilir. Nihai çıktı, en yüksek ve en düşük güvenle sıralanan açıklamaların bir listesidir.
 
-## <a name="image-description-example"></a>Resim Açıklama örneği
+## <a name="image-description-example"></a>Görüntü açıklaması örneği
 
-Görüntü işleme örnek görüntünün görsel özelliklerini anlatırken döndürür aşağıdaki JSON yanıtı gösterir.
+Aşağıdaki JSON yanıtında, görsel özelliklerine göre örnek resim açıklanırken ne Görüntü İşleme döndürdüğü gösterilmektedir.
 
-![Siyah beyaz Manhattan stockholm'deki resmi](./Images/bw_buildings.png)
+![Manhattan içindeki binalara ilişkin siyah ve beyaz bir resim](./Images/bw_buildings.png)
 
 ```json
 {
@@ -58,4 +58,4 @@ Görüntü işleme örnek görüntünün görsel özelliklerini anlatırken dön
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kavramları hakkında bilgi edinin [görüntüleri etiketleme](concept-tagging-images.md) ve [görüntüleri kategorilendirme](concept-categorizing-images.md).
+[Görüntüleri etiketleme](concept-tagging-images.md) ve [görüntüleri kategorilere ayırma](concept-categorizing-images.md)hakkında kavramlar öğrenin.

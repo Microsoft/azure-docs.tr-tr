@@ -1,5 +1,5 @@
 ---
-title: 'Hızlı Başlangıç: JavaScript ve REST API ile bir resimdeki yüz algılama'
+title: 'Hızlı Başlangıç: REST API ve JavaScript kullanarak görüntüdeki yüzeyleri algılama'
 titleSuffix: Azure Cognitive Services
 description: Bu hızlı başlangıçta, Bilişsel Hizmetler’de JavaScript ile Yüz Tanıma API’sini kullanarak bir görüntüdeki yüzleri algılayacaksınız.
 services: cognitive-services
@@ -8,27 +8,27 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: face-api
 ms.topic: quickstart
-ms.date: 02/07/2019
+ms.date: 09/06/2019
 ms.author: pafarley
-ms.openlocfilehash: d1aa3e3a23acf82af8435cbb075fac38353500e5
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: bc8d20abcc7bc66d319874978e134c5c86c86e1c
+ms.sourcegitcommit: 65131f6188a02efe1704d92f0fd473b21c760d08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60815589"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70859050"
 ---
-# <a name="quickstart-detect-faces-in-an-image-using-the-rest-api-and-javascript"></a>Hızlı Başlangıç: JavaScript ve REST API ile bir resimdeki yüz algılama
+# <a name="quickstart-detect-faces-in-an-image-using-the-rest-api-and-javascript"></a>Hızlı Başlangıç: REST API ve JavaScript kullanarak görüntüdeki yüzeyleri algılama
 
-Bu hızlı başlangıçta, bir resimdeki İnsan yüzlerini algılamak için Azure yüz REST API ile JavaScript kullanır.
+Bu hızlı başlangıçta, bir görüntüdeki insan yüzlerini algılamak için Azure yüz REST API JavaScript ile kullanacaksınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Yüz tanıma API'si abonelik anahtarı. Ücretsiz deneme aboneliği anahtarından alabilirsiniz [Bilişsel Hizmetler'i deneyin](https://azure.microsoft.com/try/cognitive-services/?api=face-api). Veya yönergeleri [Bilişsel Hizmetler hesabı oluşturma](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) yüz tanıma API'si hizmete abone ve anahtarınızı alın.
-- Bir kod Düzenleyicisi gibi [Visual Studio Code](https://code.visualstudio.com/download)
+- [Visual Studio Code](https://code.visualstudio.com/download) gibi bir kod Düzenleyicisi
 
-## <a name="initialize-the-html-file"></a>HTML dosyasını başlatın
+## <a name="initialize-the-html-file"></a>HTML dosyasını başlatma
 
-Yeni bir HTML dosyası oluşturun *detectFaces.html*ve aşağıdaki kodu ekleyin.
+Yeni bir HTML dosyası oluşturun, *detectFaces. html*ve aşağıdaki kodu ekleyin.
 
 ```html
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ Yeni bir HTML dosyası oluşturun *detectFaces.html*ve aşağıdaki kodu ekleyin
 </html>
 ```
 
-Ardından aşağıdaki kodu ekleyin `body` öğesi belgenin. Bu URL alana sahip bir temel kullanıcı arabirimini ayarlar bir **yüz analiz** düğmesi, bir yanıtı bölme ve bir görüntü bölmesini görüntüle.
+Ardından, belgenin `body` öğesi içine aşağıdaki kodu ekleyin. Bu kod, bir URL alanı, bir çözüm **Çözümle** düğmesi, yanıt bölmesi ve görüntü görüntü bölmesi ile temel bir kullanıcı arabirimi ayarlar.
 
 ```html
 <h1>Detect Faces:</h1>
@@ -63,9 +63,9 @@ Image to analyze: <input type="text" name="inputImage" id="inputImage"
 </div>
 ```
 
-## <a name="write-the-javascript-script"></a>JavaScript komut dosyası yazma
+## <a name="write-the-javascript-script"></a>JavaScript betiğini yazma
 
-Hemen yukarıdaki aşağıdaki kodu ekleyin `h1` , belgedeki öğe. Bu, yüz tanıma API'sini çağıran JavaScript kodunu ayarlar.
+Aşağıdaki kodu, belgenizin hemen üstüne `h1` ekleyin. Bu kod, Yüz Tanıma API'si çağıran JavaScript kodunu ayarlar.
 
 ```html
 <script type="text/javascript">
@@ -73,16 +73,8 @@ Hemen yukarıdaki aşağıdaki kodu ekleyin `h1` , belgedeki öğe. Bu, yüz tan
         // Replace <Subscription Key> with your valid subscription key.
         var subscriptionKey = "<Subscription Key>";
     
-        // NOTE: You must use the same region in your REST call as you used to
-        // obtain your subscription keys. For example, if you obtained your
-        // subscription keys from westus, replace "westcentralus" in the URL
-        // below with "westus".
-        //
-        // Free trial subscription keys are generated in the "westus" region.
-        // If you use a free trial subscription key, you shouldn't need to change 
-        // this region.
         var uriBase =
-            "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+            "https://<My Endpoint String>.com/face/v1.0/detect";
     
         // Request parameters.
         var params = {
@@ -132,15 +124,17 @@ Hemen yukarıdaki aşağıdaki kodu ekleyin `h1` , belgedeki öğe. Bu, yüz tan
 </script>
 ```
 
-Güncellemeniz gerekecektir `subscriptionKey` alan abonelik anahtarınız ve değeri ile değiştirmek gerekebilir `uriBase` doğru bölge tanımlayıcısı içeren dize (bkz [yüz tanıma API'si belgeleri](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236) tüm bölge listesi uç noktaları). `returnFaceAttributes` Alanı almak için hangi yüz öznitelikleri belirtir; Bu dize öngörülen kullanımınıza bağlı olarak değiştirmek isteyebilirsiniz.
+`subscriptionKey` Alanı abonelik anahtarınızın değeriyle güncelleştirmeniz gerekir ve `uriBase` dizeyi doğru uç nokta dizesini içerecek şekilde değiştirmeniz gerekir. Alan `returnFaceAttributes` , alınacak yüz özniteliklerini belirtir; bu dizeyi amaçlanan kullanıma bağlı olarak değiştirmek isteyebilirsiniz.
+
+[!INCLUDE [subdomains-note](../../../../includes/cognitive-services-custom-subdomains-note.md)]
 
 ## <a name="run-the-script"></a>Betiği çalıştırın
 
-Açık *detectFaces.html* tarayıcınızda. Tıkladığınızda **yüz analiz** düğmesini uygulaması belirtilen URL'den görüntüyü ve yüz veri bir JSON dizesi yazdırma.
+Tarayıcınızda *detectFaces. html* dosyasını açın. **Yüzü çözümle** düğmesine tıkladığınızda, UYGULAMANıN verilen URL 'den görüntüyü görüntülemesi ve bir JSON veri dizesini yazdırması gerekir.
 
 ![GettingStartCSharpScreenshot](../Images/face-detect-javascript.png)
 
-Başarılı bir JSON yanıtı örneği verilmiştir.
+Aşağıdaki metin, başarılı bir JSON yanıtı örneğidir.
 
 ```json
 [
@@ -236,7 +230,7 @@ Başarılı bir JSON yanıtı örneği verilmiştir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, bir resimdeki yüz algılama ve onların öznitelikleri döndürmek için Azure yüz tanıma API'si çağıran bir JavaScript komut dosyası yazıldı. Ardından, daha fazla bilgi için yüz API başvuru belgeleri keşfedin.
+Bu hızlı başlangıçta, bir görüntüdeki yüzeyleri algılamak ve özniteliklerini döndürmek için Azure Yüz Tanıma API'si çağıran bir JavaScript betiği yazmış olursunuz. Daha fazla bilgi edinmek için Yüz Tanıma API'si başvuru belgelerini inceleyin.
 
 > [!div class="nextstepaction"]
 > [Yüz Tanıma API’si](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236)

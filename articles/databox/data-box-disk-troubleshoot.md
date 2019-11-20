@@ -8,12 +8,12 @@ ms.subservice: disk
 ms.topic: article
 ms.date: 06/14/2019
 ms.author: alkohli
-ms.openlocfilehash: f725f38a335972ae8e0a8b8402a99202caa54a70
-ms.sourcegitcommit: 72f1d1210980d2f75e490f879521bc73d76a17e1
+ms.openlocfilehash: f8116ec0836623adf803991017950ddc7f960923
+ms.sourcegitcommit: 47ce9ac1eb1561810b8e4242c45127f7b4a4aa1a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67147078"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67805719"
 ---
 # <a name="use-logs-to-troubleshoot-validation-issues-in-azure-data-box-disk"></a>Azure Data Box Disk doğrulama sorunları gidermek için günlükleri kullanma
 
@@ -90,8 +90,8 @@ Bulunan hataları *error.xml* önerilen eylemler ilgili olan aşağıdaki tablod
 | `InvalidBlobNameFormat` | Dosya yolu, Azure Blob adlandırma kuralları uyarınca bulutta geçerli blob yola eşlemiyor.|Dosyayı yeniden adlandırın uyacağını [Azure adlandırma kurallarına](data-box-disk-limits.md#azure-block-blob-page-blob-and-file-naming-conventions). Doğrulamayı yeniden deneyin. |
 | `InvalidFileNameFormat` | Dosya yolu için geçerli bir dosya yolu buluttaki Azure dosya adlandırma kuralları uyarınca eşlemiyor. |Dosyayı yeniden adlandırın uyacağını [Azure adlandırma kurallarına](data-box-disk-limits.md#azure-block-blob-page-blob-and-file-naming-conventions). Doğrulamayı yeniden deneyin. |
 | `InvalidDiskNameFormat` | Dosya yolu, geçerli disk adına Azure yönetilen diski adlandırma kurallarına göre bulutta eşlemiyor. |Dosyayı yeniden adlandırın uyacağını [Azure adlandırma kurallarına](data-box-disk-limits.md#azure-block-blob-page-blob-and-file-naming-conventions). Doğrulamayı yeniden deneyin.       |
-| `NotPartOfFileShare` | Dosyaları karşıya yükleme yolu geçerli olmadığından karşıya yüklenemedi. Azure dosyaları bir klasörde dosya yükleme.   | Hata dosyaları kaldırın ve bu dosyaları precreated klasöre yükleyin. Doğrulamayı yeniden deneyin. |
-| `NonVhdFileNotSupportedForManagedDisk` | Yönetilen disk olarak olmayan VHD dosyası karşıya yüklenemiyor. |Bunlar desteklenmemesi dışında olmayan VHD dosyalarını kaldırın. Doğrulamayı yeniden deneyin. |
+| `NotPartOfFileShare` | Dosyaları karşıya yükleme yolu geçerli değil. Azure dosyaları bir klasörde dosya yükleme.   | Hata dosyaları kaldırın ve bu dosyaları precreated klasöre yükleyin. Doğrulamayı yeniden deneyin. |
+| `NonVhdFileNotSupportedForManagedDisk` | Yönetilen disk olarak olmayan VHD dosyası karşıya yüklenemiyor. |VHD olmayan dosyaların kaldırmak `ManagedDisk` bu klasöre desteklenmemektedir veya bu dosyalara Taşı bir `PageBlob` klasör. Doğrulamayı yeniden deneyin. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

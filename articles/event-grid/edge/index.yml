@@ -1,0 +1,67 @@
+### YamlMime:Landing
+title: IoT Edge üzerinde Event Grid belgeleri
+summary: Kenar cihazlarında oluşturulan ilgili olaylara neredeyse gerçek zamanlı olarak tepki vermek için IoT Edge üzerinde Event Grid kullanmayı öğrenin.
+metadata:
+  title: IoT Edge üzerinde Event Grid belgeleri
+  description: Kenar cihazlarında oluşturulan ilgili olaylara neredeyse gerçek zamanlı olarak tepki vermek için IoT Edge üzerinde Event Grid kullanmayı öğrenin.
+  services: event-grid
+  ms.service: event-grid
+  ms.subservice: 
+  ms.topic: landing-page
+  ms.collection: collection
+  author: spelluru
+  ms.author: spelluru
+  ms.date: 10/12/2019
+  ms.openlocfilehash: 4b79d64240b96ed41b535f8dbcd1155d67e76282
+  ms.sourcegitcommit: 92d42c04e0585a353668067910b1a6afaf07c709
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/28/2019
+  ms.locfileid: "72991622"
+landingContent:
+- title: IoT Edge üzerinde Event Grid hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: IoT Edge üzerinde Event Grid nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Event Grid kavramları
+      url: concepts.md
+    - text: Olay şemaları
+      url: event-schemas.md
+    - text: Çıkışı toplu işleme
+      url: delivery-output-batching.md
+    - text: Gelişmiş filtreleme
+      url: advanced-filtering.md
+    - text: Teslim ve yeniden deneme
+      url: delivery-retry.md
+- title: Senaryolar
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Olayları yerel olarak yayımlama ve abone olma
+      url: pub-sub-events-webhook-local.md
+    - text: Olayları bulutta yayımlama ve abone olma
+      url: pub-sub-events-webhook-cloud.md
+    - text: Olayları Azure Event Grid’e iletme
+      url: forward-events-event-grid-cloud.md
+    - text: Olayları Azure IoT Hub’a iletme
+      url: forward-events-event-grid-cloud.md
+    - text: Azure Blob depolama olaylarına yerel olarak tepki verme
+      url: react-blob-storage-events-locally.md
+- title: Güvenlik
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Güvenlik ve kimlik doğrulaması
+      url: security-authentication.md
+  - linkListType: how-to-guide
+    links:
+    - text: İstemci kimlik doğrulamasını yapılandırma
+      url: configure-client-auth.md
+    - text: Web kancası abone kimlik doğrulamasını yapılandırma
+      url: configure-webhook-subscriber-auth.md
+    - text: Kimlik doğrulamasını yapılandırma
+      url: configure-identity-auth.md

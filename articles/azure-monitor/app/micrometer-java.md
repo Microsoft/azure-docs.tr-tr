@@ -1,43 +1,38 @@
 ---
-title: Azure Application Insights Java SDK ile Micrometer kullanma | Microsoft Docs
-description: 'Application Insights Spring Boot ve Spring Boot uygulamalarınızla Micrometer kullanma hakkında adım adım kılavuz. '
-services: application-insights
-documentationcenter: java
-author: lgayhardt
-manager: carmonm
-ms.assetid: 051d4285-f38a-45d8-ad8a-45c3be828d91
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Java SDK ile mikro ölçüm kullanma | Microsoft Docs
+description: 'Application Insights Spring Boot ve Spring Boot uygulamaları ile mikro ölçer kullanma hakkında adım adım kılavuz. '
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 11/01/2018
+author: lgayhardt
 ms.author: lagayhar
-ms.openlocfilehash: 778690fb2796cea3154b3acbb662341fdaea87da
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/01/2018
+ms.openlocfilehash: 267665c97f683740c05ae6602a416225c79aa44c
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60699147"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72819315"
 ---
-# <a name="how-to-use-micrometer-with-azure-application-insights-java-sdk"></a>Azure Application Insights Java SDK ile Micrometer kullanma
-Micrometer uygulama izleme ölçüler ölçümleri JVM tabanlı bir uygulama için kod ve izleme sistemlerinden sevdiğiniz veri dışa aktarmanızı sağlar. Bu makalede Spring Boot ve Spring Boot uygulamaları için Application Insights ile Micrometer kullanmayı öğretir.
+# <a name="how-to-use-micrometer-with-azure-application-insights-java-sdk"></a>Azure Application Insights Java SDK ile mikro ölçüm kullanma
+Mikro ölçüm uygulama izleme, JVM tabanlı uygulama kodu için ölçümleri ölçer ve verileri en sevdiğiniz izleme sistemlerine aktarmanıza olanak tanır. Bu makale, hem Spring Boot hem de Spring Boot uygulamaları için Application Insights ile mikro ölçer 'i nasıl kullanacağınızı öğretir.
 
-## <a name="using-spring-boot-15x"></a>Spring kullanarak önyükleme 1,5 x
-Pom.xml veya build.gradle dosyanıza aşağıdaki bağımlılıkları ekleyin: 
-* [Application Insights spring-boot-Başlatıcı](https://github.com/Microsoft/ApplicationInsights-Java/tree/master/azure-application-insights-spring-boot-starter)1.1.0-BETA veya üzeri
-* Micrometer Azure kayıt defteri 1.1.0 veya üzeri
-* [Micrometer Spring eski](https://micrometer.io/docs/ref/spring/1.5) 1.1.0 veya üzeri (Bu backports Spring framework autoconfig kodda).
-* [Applicationınsights kaynak](../../azure-monitor/app/create-new-resource.md )
+## <a name="using-spring-boot-15x"></a>Spring Boot 1.5 x kullanma
+Pod. xml veya Build. Gradle dosyanıza aşağıdaki bağımlılıkları ekleyin: 
+* [Application Insights Spring-Boot-Starter](https://github.com/Microsoft/ApplicationInsights-Java/tree/master/azure-application-insights-spring-boot-starter) 2.5.0 veya üzeri
+* Mikro ölçüm Azure kayıt defteri 1.1.0 veya üzeri
+* [Mikro ölçüm yay eski](https://micrometer.io/docs/ref/spring/1.5) 1.1.0 veya üzeri (Bu Işlem, Spring Framework içindeki otomatik yapılandırma kodunu geri barındırır).
+* [ApplicationInsights kaynağı](../../azure-monitor/app/create-new-resource.md )
 
 Adımlar
 
-1. Spring Boot uygulamasının pom.xml dosyasını güncelleştirin ve aşağıdaki bağımlılıkları ekleyebilirsiniz:
+1. Spring Boot uygulamanızın pom. xml dosyasını güncelleştirin ve içine aşağıdaki bağımlılıkları ekleyin:
 
     ```XML
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>applicationinsights-spring-boot-starter</artifactId>
-        <version>1.1.0-BETA</version>
+        <version>2.5.0</version>
     </dependency>
 
     <dependency>
@@ -53,23 +48,23 @@ Adımlar
     </dependency>
 
     ```
-2. Application.properties veya yml dosyasını aşağıdaki özelliği kullanarak Application Insights izleme anahtarı ile güncelleştirin:
+2. Aşağıdaki özelliği kullanarak Application. Properties veya YML dosyasını Application Insights Izleme anahtarıyla güncelleştirin:
 
      `azure.application-insights.instrumentation-key=<your-instrumentation-key-here>`
-1. Uygulamanızı derleme ve çalıştırma
-2. Yukarıdaki, almalısınız ve önceden toplanan ölçümler otomatik ile çalışan Azure İzleyici toplanır. Application Insights Spring Boot Başlatıcı ince ayar yapma hakkında ayrıntılı bilgi için bkz [github'daki Benioku](https://github.com/Microsoft/ApplicationInsights-Java/blob/master/azure-application-insights-spring-boot-starter/README.md).
+1. Uygulamanızı derleyin ve çalıştırın
+2. Yukarıdaki, Azure Izleyici 'ye otomatik olarak toplanan önceden toplanmış ölçümler ile çalışmaya başlamanızı sağlamalıdır. Application Insights Spring Boot Starter 'ın ince ayar hakkında daha fazla bilgi için [GitHub 'daki Benioku](https://github.com/Microsoft/ApplicationInsights-Java/blob/master/azure-application-insights-spring-boot-starter/README.md)dosyasına bakın.
 
-## <a name="using-spring-2x"></a>Spring 2.x kullanma
+## <a name="using-spring-2x"></a>Spring 2. x kullanma
 
-Pom.xml veya build.gradle dosyanıza aşağıdaki bağımlılıkları ekleyin:
+Pod. xml veya Build. Gradle dosyanıza aşağıdaki bağımlılıkları ekleyin:
 
-* Application Insights Spring boot Başlatıcı 2.1.2'yi veya üzeri
-* Azure-spring-önyükleme-ölçümlerini-başlangıç 2.0.7 veya üzeri  
+* Application Insights Spring-Boot-Starter 2.1.2 'yi veya üzeri
+* Azure-Spring-Boot-ölçümleri-Starters 2.0.7 veya üzeri
 * [Application Insights kaynağı](../../azure-monitor/app/create-new-resource.md )
 
 Adımlar:
 
-1. Spring Boot uygulamasının pom.xml dosyasını güncelleştirin ve aşağıdaki bağımlılığı ekleyin:
+1. Spring Boot uygulamanızın Pod. xml dosyasını güncelleştirin ve aşağıdaki bağımlılığı ekleyin:
 
     ```XML
     <dependency> 
@@ -78,59 +73,57 @@ Adımlar:
           <version>2.0.7</version>
     </dependency>
     ```
-1. Application.properties veya yml dosyasını aşağıdaki özelliği kullanarak Application Insights izleme anahtarı ile güncelleştirin:
+1. Aşağıdaki özelliği kullanarak Application. Properties veya YML dosyasını Application Insights Izleme anahtarıyla güncelleştirin:
 
      `azure.application-insights.instrumentation-key=<your-instrumentation-key-here>`
-3. Uygulamanızı derleme ve çalıştırma
-4. Yukarıdaki, önceden toplanan ölçümler otomatik toplanan Azure İzleyici ile çalışan almanız gerekir. Application Insights Spring Boot Başlatıcı ince ayar yapma hakkında ayrıntılı bilgi için bkz [github'daki Benioku](https://github.com/Microsoft/azure-spring-boot/releases/latest).
+3. Uygulamanızı derleyin ve çalıştırın
+4. Yukarıdaki, Azure Izleyici 'ye otomatik olarak toplanan önceden toplanmış ölçümler ile çalışmaya başlamanızı sağlamalıdır. Application Insights Spring Boot Starter 'ın ince ayar hakkında daha fazla bilgi için [GitHub 'daki Benioku](https://github.com/Microsoft/azure-spring-boot/releases/latest)dosyasına bakın.
 
-Varsayılan ölçümleri:
+Varsayılan ölçümler:
 
-*    Otomatik olarak ölçümleri Tomcat, JVM, Logback ölçümleri, çalışma süresi ölçümleri, işlemci ölçümleri FileDescriptorMetrics Log4J ölçümler için yapılandırılır.
-*    Örneğin, netflix hystrix sınıfı yolunda mevcut olup olmadığını biz de bu ölçümleri alır. 
-*    Aşağıdaki ölçümler, ilgili Fasulye ekleyerek kullanılabilir. 
-        - CacheMetrics (CaffeineCache, EhCache2, GuavaCache, HazelcaseCache, Jcache)     
+*    Tomcat, JVM, Logback ölçümleri, Log4J ölçümleri, çalışma süresi ölçümleri, Işlemci ölçümleri, Filedescriptormetrikleri için otomatik olarak yapılandırılmış ölçümler.
+*    Örneğin, bir sınıf yolunda Netflix Hyçabax varsa, bu ölçümleri de alırız. 
+*    Aşağıdaki ölçümler ilgili bede ekleyerek kullanılabilir. 
+        - Cacheölçümlerini (CaffeineCache, EhCache2, GuavaCache, Hazonbir önbellek, JCache)     
         - DataBaseTableMetrics 
         - HibernateMetrics 
-        - JettyMetrics 
+        - Jettymetrikleri 
         - OkHttp3 ölçümleri 
         - Kafka ölçümleri 
 
  
 
-Otomatik ölçüm koleksiyonunu devre dışı bırakma nasıl: 
+Otomatik ölçüm toplamayı devre dışı bırakma: 
  
 - JVM ölçümleri: 
-    - management.metrics.binders.jvm.enabled=false 
-- Logback ölçümleri: 
-    - management.metrics.binders.logback.enabled=false
+    - Management. ölçümler. ciltler. JVM. Enabled = false 
+- Günlüğe kaydetme ölçümleri: 
+    - Management. ölçümler. ciltler. logback. Enabled = false
 - Çalışma süresi ölçümleri: 
-    - management.metrics.binders.uptime.enabled=false 
+    - Management. ölçümler. ciltler. çalışma süresi. Enabled = false 
 - İşlemci ölçümleri:
-    -  management.metrics.binders.processor.enabled=false 
-- FileDescriptorMetrics:
-    - management.metrics.binders.files.enabled=false 
-- Hystrix ölçümleri, sınıf kitaplığı: 
-    - management.metrics.binders.hystrix.enabled=false 
-- AspectJ ölçümleri, sınıf kitaplığı: 
-    - spring.aop.enabled=false 
+    -  Management. ölçümler. ciltler. Processor. Enabled = false 
+- Dosya Descriptormetrikleri:
+    - Management. ölçümler. ciltler. Files. Enabled = false 
+- Sınıfyolunda kitaplık varsa hyçabax ölçümleri: 
+    - Management. ölçümler. ciltler. hyçabax. Enabled = false 
+- AspectJ ölçümleri, sınıfyolunda kitaplık: 
+    - yay. AOP. Enabled = false 
 
 > [!NOTE]
-> Spring Boot uygulamasının application.properties veya application.yml dosyasında yukarıda özellikleri belirtin
+> Yukarıdaki özellikleri, Spring Boot uygulamanızın Application. Properties veya Application. yıml dosyasında belirtin
 
-## <a name="use-micrometer-with-non-spring-boot-web-applications"></a>Spring Boot web uygulamalarıyla Micrometer kullanın
+## <a name="use-micrometer-with-non-spring-boot-web-applications"></a>Spring Boot Web uygulamalarıyla mikro ölçüm kullanın
 
-Pom.xml veya build.gradle dosyanıza aşağıdaki bağımlılıkları ekleyin:
- 
-* [Application Insight çekirdek 2.2.0](https://www.nuget.org/packages/Microsoft.ApplicationInsights/2.2.0) veya üzeri
-* [Application Insights Web 2.2.0](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web/2.2.0) veya üzeri
-* [Kayıt Web filtresi](https://docs.microsoft.com/azure/application-insights/app-insights-java-get-started)
-* Micrometer Azure kayıt defteri 1.1.0 veya üzeri
+Pod. xml veya Build. Gradle dosyanıza aşağıdaki bağımlılıkları ekleyin:
+
+* Application Insights Web Auto 2.5.0 veya üzeri
+* Mikro ölçüm Azure kayıt defteri 1.1.0 veya üzeri
 * [Application Insights kaynağı](../../azure-monitor/app/create-new-resource.md )
 
 Adımlar:
 
-1. Pom.xml veya build.gradle dosyanıza aşağıdaki bağımlılıkları ekleyin:
+1. Pod. xml veya Build. Gradle dosyanıza aşağıdaki bağımlılıkları ekleyin:
 
     ```XML
         <dependency>
@@ -141,14 +134,41 @@ Adımlar:
         
         <dependency>
             <groupId>com.microsoft.azure</groupId>
-            <artifactId>applicationinsights-web</artifactId>
-            <version>2.2.0</version>
-        </dependency
+            <artifactId>applicationinsights-web-auto</artifactId>
+            <version>2.5.0</version>
+        </dependency>
      ```
 
-2. Uygulama Insights.xml kaynaklar klasörüne yerleştirin.
+2. `ApplicationInsights.xml` dosyasını Resources klasörüne Yerleştir:
 
-    Örnek Servlet sınıfına (bir zamanlayıcı ölçüm gösterir):
+    ```XML
+    <?xml version="1.0" encoding="utf-8"?>
+    <ApplicationInsights xmlns="http://schemas.microsoft.com/ApplicationInsights/2013/Settings" schemaVersion="2014-05-30">
+    
+       <!-- The key from the portal: -->
+       <InstrumentationKey>** Your instrumentation key **</InstrumentationKey>
+    
+       <!-- HTTP request component (not required for bare API) -->
+       <TelemetryModules>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.modules.WebRequestTrackingTelemetryModule"/>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.modules.WebSessionTrackingTelemetryModule"/>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.modules.WebUserTrackingTelemetryModule"/>
+       </TelemetryModules>
+    
+       <!-- Events correlation (not required for bare API) -->
+       <!-- These initializers add context data to each event -->
+       <TelemetryInitializers>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.initializers.WebOperationIdTelemetryInitializer"/>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.initializers.WebOperationNameTelemetryInitializer"/>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.initializers.WebSessionTelemetryInitializer"/>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.initializers.WebUserTelemetryInitializer"/>
+          <Add type="com.microsoft.applicationinsights.web.extensibility.initializers.WebUserAgentTelemetryInitializer"/>
+       </TelemetryInitializers>
+    
+    </ApplicationInsights>
+    ```
+
+3. Örnek servlet sınıfı (bir Zamanlayıcı ölçümü yayar):
 
     ```Java
         @WebServlet("/hello")
@@ -187,7 +207,7 @@ Adımlar:
     
     ```
 
-      Örnek yapılandırma sınıfı:
+4. Örnek yapılandırma sınıfı:
 
     ```Java
          @WebListener
@@ -226,15 +246,15 @@ Adımlar:
          }
     ```
 
-Ölçümler hakkında daha fazla bilgi için bkz [Micrometer belgeleri](https://micrometer.io/docs/).
+Ölçümler hakkında daha fazla bilgi edinmek için [mikro ölçüm belgelerine](https://micrometer.io/docs/)bakın.
 
-Diğer örnek kod ölçümleri farklı türleri oluşturma konusunda bulunabilir[resmi Micrometer GitHub deposunu](https://github.com/micrometer-metrics/micrometer/tree/master/samples/micrometer-samples-core/src/main/java/io/micrometer/core/samples).
+Farklı ölçüm türlerinin nasıl oluşturulacağı hakkında diğer örnek kod[, resmi mikro ölçüm GitHub](https://github.com/micrometer-metrics/micrometer/tree/master/samples/micrometer-samples-core/src/main/java/io/micrometer/core/samples)deposunda bulunabilir.
 
-## <a name="how-to-bind-additional-metrics-collection"></a>Ek ölçümler toplama bağlama
+## <a name="how-to-bind-additional-metrics-collection"></a>Ek ölçüm koleksiyonu bağlama
 
 ### <a name="springbootspring"></a>SpringBoot/Spring
 
-Bir çekirdeği ilgili ölçüm kategorisi oluşturun. Örneğin, Guava ihtiyacımız düşünelim önbellek ölçümlerini:
+İlgili ölçüm kategorisinin bir çekirdeklere oluşturun. Örneğin, guava önbellek ölçümlerinin gerekli olduğunu varsayalım:
 
 ```Java
     @Bean
@@ -242,7 +262,7 @@ Bir çekirdeği ilgili ölçüm kategorisi oluşturun. Örneğin, Guava ihtiyac�
         Return new GuavaCacheMetrics();
     }
 ```
-Varsayılan olarak etkin değildir, ancak yukarıdaki biçimde bağlanabilir birkaç ölçüm vardır. Tam bir listesi için başvurmak [resmi Micrometer GitHub deposunu](https://github.com/micrometer-metrics/micrometer/tree/master/micrometer-core/src/main/java/io/micrometer/core/instrument/binder ).
+Varsayılan olarak etkinleştirilmemiş ancak yukarıdaki biçimde bağlanabilen birkaç ölçüm vardır. Tüm liste için [resmi mikro ölçüm GitHub deposu](https://github.com/micrometer-metrics/micrometer/tree/master/micrometer-core/src/main/java/io/micrometer/core/instrument/binder )' na bakın.
 
 ### <a name="non-spring-apps"></a>Spring olmayan uygulamalar
 Aşağıdaki bağlama kodunu yapılandırma dosyasına ekleyin:
@@ -252,5 +272,5 @@ Aşağıdaki bağlama kodunu yapılandırma dosyasına ekleyin:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Resmi başvuran Micrometer hakkında daha fazla bilgi edinmek için [Micrometer belgeleri](https://micrometer.io/docs).
-* Spring hakkında bilgi edinmek için resmi Azure'da bakın [Azure Belgeleri'nde Spring](https://docs.microsoft.com/java/azure/spring-framework/?view=azure-java-stable).
+* Mikro ölçüm hakkında daha fazla bilgi için bkz. resmi [mikro ölçüm belgeleri](https://micrometer.io/docs).
+* Azure 'daki Spring hakkında bilgi edinmek için bkz. [Azure 'da resmi yay belgeleri](https://docs.microsoft.com/java/azure/spring-framework/?view=azure-java-stable).

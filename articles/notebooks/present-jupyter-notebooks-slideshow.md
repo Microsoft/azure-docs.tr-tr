@@ -1,108 +1,107 @@
 ---
-title: Jupyter Not Defteri, azure'da bir slayt gösterisi olarak sunmak
-description: Slayt gösterisi modu hücre bir Jupyter not defteri yapılandırın ve ardından ortaya çıkmasına neden uzantısını kullanarak slayt gösterisi sunmak nasıl.
+title: Azure 'da bir Jupyter Not defteri olarak slayt gösterisi sunun
+description: Bir Jupyter not defterinde slayt gösterisi modu için hücreleri yapılandırma ve sonra da RISE uzantısını kullanarak slayt gösterisini sunma.
 services: app-service
 documentationcenter: ''
 author: kraigb
-manager: douge
+manager: barbkess
 ms.assetid: c372175b-beb5-4b45-b2f8-34cb06990117
 ms.service: azure-notebooks
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 12/04/2018
 ms.author: kraigb
-ms.openlocfilehash: 405fe71676de311ed7e59ea72798ff4fd2db0f62
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 04612dc8892a544397251580b3494badc84e2ad5
+ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60237371"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71973108"
 ---
-# <a name="run-a-notebook-slideshow"></a>Bir not defteri slayt gösterisi çalıştırın
+# <a name="run-a-notebook-slideshow"></a>Bir not defteri slayt gösterisi Çalıştır
 
-Azure not defterleri ile Jupyter/Ipython slayt gösterisi uzantısı (bir slayt gösterisi olarak doğrudan bir not defteri göstermenize olanak sağlayan HACMİNDEKİ) önceden yapılandırılmış. Bir slayt gösterisi hücreleri genellikle görüntülenen teker teker büyük ekranlar ve size sunmak kod hala çalıştırabilirsiniz için uygun bir yazı tipi boyutu yerine ayrı bir tanıtım bilgisayara geçiş ' dir.
+Azure Notebooks, doğrudan slayt gösterisi olarak bir not defteri sunmanıza olanak tanıyan Jupyter/IPython slayt gösterisi uzantısı (yüksemle) ile önceden yapılandırılmıştır. Bir slayt gösterisinde, genellikle büyük ekranlarda sunum yapmak için uygun bir yazı tipi boyutu kullanılarak birer birer görüntülenir ve ayrı bir demo bilgisayara geçiş yerine kodu çalıştırmaya devam edebilirsiniz.
 
-Aşağıdaki görüntüde, Markdown ve kod hücreleri tümünü bir araya görebileceğiniz standart not defteri görünümü gösterilmektedir:
+Aşağıdaki görüntüde, Markaşağı ve kod hücrelerini birlikte görebileceğiniz standart Not defteri görünümü gösterilmektedir:
 
-![Standart görünümünde bir not defteri](media/slideshow/slideshow-notebook-view.png)
+![Standart görünümde bir not defteri](media/slideshow/slideshow-notebook-view.png)
 
-Slayt gösterisi başlatmak, ilk hücrenin tarayıcı dolduracak şekilde genişletilir burada **X** slayt gösterisi, sol üst çıkar **?** alt sol görüntüler slaytlar arasında klavye kısayolları ve sağ alt köşesinde oklar gidin:
+Bir slayt gösterisi başlattığınızda, ilk hücre tarayıcıyı dolduracak şekilde genişletilir ve sol üst taraftaki **X** **, slayt** gösterisinin çıkar. sol alt köşede klavye kısayolları görüntülenir ve sağ alt taraftaki oklar slaytlar arasında gezinin:
 
-![Slayt gösterisi modunda bir not defteri](media/slideshow/slideshow-slide-view.png)
+![Slayt gösterisi modundaki bir not defteri](media/slideshow/slideshow-slide-view.png)
 
-Bir not defteri için slayt gösterisi hazırlama birincil iki etkinlik içerir:
+Bir slayt için bir not defteri hazırlama iki birincil etkinlik içerir:
 
-1. Markdown hücreleri büyük yazı tipleriyle işlendiği için bazı içerikleri slayt gösterisi olarak görünmeyebilir. Bu nedenle genellikle belirli bir hücre metinde miktarı sınırı, genellikle dört ile altı çizgili bir üst bilgi en iyi şekilde çalışır. Daha fazla metin varsa, bu bilgileri birden çok hücreye bölün.
+1. Markaşağı hücreleri büyük yazı tipleriyle işlendiği için bazı içerikler slayt gösterisinde görünmeyebilir. Böylece, genellikle belirli bir hücredeki metin miktarını sınırlayabilirsiniz; dört ile altı satıra sahip bir üstbilgi genellikle en iyi şekilde kullanılır. Daha fazla metin varsa, bu bilgileri birden çok hücreye ayırın.
 
-2. Her bir hücresinde davranışını slayt gösterisi hücresi araç çubuğunu kullanarak slayt gösterisi olarak yapılandırın. Gezinti düğmelerinin davranışını hücresi türlerini belirleyin.
+2. Slayt gösterisi hücresi araç çubuğunu kullanarak, slayt gösterisinde her hücrenin davranışını yapılandırın. Hücre türleri, gezinti düğmelerinin davranışını belirlenir.
 
-## <a name="the-anatomy-of-a-slideshow"></a>Slayt gösterisi anatomisi
+## <a name="the-anatomy-of-a-slideshow"></a>Slayt gösterisinin anatomumu
 
-Rastgele bir not alın ve bunu kullanmak için bir slayt gösterisi, tüm hücreleri birlikte önlenmiş ve içeriğin tarayıcı penceresinin alt kısmındaki gizli genellikle bulun. Etkili bir sunum yapmak, daha sonra bir slayt gösterisi türü slayt gösterisi hücresi araç çubuğunu kullanarak her hücreye atamanız gerekir:
+Rastgele bir not defteri alıp bir slayt gösterisi için kullanıyorsanız, genellikle tüm hücrelerin bir arada olduğunu ve içeriğin büyük bir kısmını tarayıcı penceresinin alt tarafında gizlemiş olduğunu fark edersiniz. Etkili bir sunum yapmak için, slayt gösterisi hücresi araç çubuğunu kullanarak her hücreye bir slayt gösterisi türü atamanız gerekir:
 
-1. Üzerinde **görünümü** menüsünde **hücresi araç** > **slayt gösterisi**:
+1. **Görünüm** menüsünde **hücre araç çubuğunu**seçin  > **Slayt gösterisi**:
 
-    ![Hücre slayt gösterisi araç kapatma](media/slideshow/slideshow-view-cell-toolbar.png)
+    ![Hücre slayt gösterisi araç çubuğunu açma](media/slideshow/slideshow-view-cell-toolbar.png)
 
-1. A **slayt türü** sağ üst kısmındaki her hücreye not defterindeki açılan bulunur:
+1. Not defterindeki her hücrenin sağ üst köşesinde bir **slayt türü** açılır listesi görünür:
 
     ![Hücre slayt gösterisi araç çubuğu](media/slideshow/slideshow-cell-toolbar.png)
 
-1. Her bir hücresinde beş türlerinden birini seçin:
+1. Her hücre için beş türden birini seçin:
 
     ![Hücre slayt gösterisi türleri](media/slideshow/slideshow-cell-slide-types.png)
 
     | Slayt türü | Davranış |
     | --- | --- |
-    | -(ayarlanmamış) | Hücre sık istenen bir slayt gösterisi etkili değildir önceki hücrenin görüntülenir. |
-    | Slayt | Hücre Gezinti denetimin sol ve sağ okları kullanarak çıkıldığında birincil bir slayttır. |
-    | Alt slayt | "Below" Gezinti denetimi aşağı okunu kullanarak gittiğinizde, birincil bir slayt hücre var. Yukarı Ok birincil slayta döndürür. Alt slaytları bir sunu ana yolunda Atla, ancak gerekirse kullanıma hazır ikincil malzeme için kullanılır. |
-    | Parça | Hücre içeriğini önceki slayt veya alt slayt bağlamında (bir parça yukarı ok kullanırken kaldırılır) gezinti oku kullanılırken görünür. Birden çok parçaya (sonraki bölümde örneğe bakın) tek bir metin madde işaretleri görünür yapmak için kullanabilirsiniz veya bir parça, kod içinde bir slayt görünür hale getirmek için bir kod hücresi ile kullanabilirsiniz. Geçerli slaytta parçaları oluşturmak için aşırı parçaları tarayıcı penceresinin alt kısmındaki devre dışı görünür olmayacaktır. |
-    | Atla | Hücre slayt gösterisi olarak gösterilmez. |
-    | Notlar | Slayt gösterisi olarak gösterilmez Konuşmacı notları, hücre içerir. |
+    | -(ayarlı değil) | Hücre, genellikle bir slayt gösterisinde istenen etkileri olmayan bir önceki hücreyle birlikte görüntülenir. |
+    | Inıza | Hücre, Gezinti denetiminin sol ve sağ okları kullanılarak gezindiği birincil bir slaydır. |
+    | Alt slayt | Hücre, bir birincil slaydın "altında", Gezinti denetiminin aşağı okuna gidildiği. Yukarı ok, birincil slayda geri döner. Alt slaytlar, bir sununun ana yolunda atlayabilmeniz gereken ikincil malzemeler için kullanılır, ancak gerekirse kolayca kullanılabilir. |
+    | Parçada | Aşağı gezinti oku kullanılırken hücre içeriği önceki slaytın veya alt slaydın bağlamında görünür (yukarı ok kullanılırken bir parça kaldırılır). Kodun bir slaytta görünmesini sağlamak için kod hücresi içeren bir parça kullanabilir veya birden çok parça kullanarak metin madde işaretlerinin tek bir tane görünmesini sağlayabilirsiniz (bir sonraki bölümde örneğe bakın). Parçalar geçerli slaytta oluşturulduğundan, aşırı parçalar tarayıcı penceresinin alt kısmında görünmez. |
+    | Atla | Hücre, slayt gösterisinde gösterilmez. |
+    | Notlar | Hücre, slayt gösterisinde görünmeyen konuşmacı notları içeriyor. |
 
-1. Başlangıçta seçilecek yardımcı **slayt** her hücre için. Ardından, slayt gösterisi çalıştırın ve uygun ayarlamaları yapın.
+1. Başlangıçta, her hücre için **Slayt** seçmek yararlıdır. Ardından, slayt gösterisini çalıştırabilir ve uygun ayarlamaları yapabilirsiniz.
 
-### <a name="example-fragment-cells-for-bullet-items"></a>Örnek: parça hücreleri maddesi öğeleri için
+### <a name="example-fragment-cells-for-bullet-items"></a>Örnek: madde işareti öğeleri için parçacık hücreleri
 
-Tek bir yerde Markdown hücrede slayt üstbilgi görünür madde işaretleri slayttaki yapmak **slayt** yazın, sonra ayrı bir Markdown hücre her madde işareti koyun **parça** türü:
+Bir slaytta yer alan madde işaretlerinin tek tek görünmesi için, slayt başlığını **Slayt** türüyle bir markaşağı hücresine yerleştirip, her bir madde işaretini **parça** türüyle ayrı bir markaşağı hücresine yerleştirin:
 
-![Birden fazla Markdown hücre maddesi öğeleri için oluşturma örneği](media/slideshow/slideshow-fragments.png)
+![Madde işareti öğeleri için birden çok Markaşağı hücre oluşturma örneği](media/slideshow/slideshow-fragments.png)
 
-Slayt gösterisi madde işaretleri aynı hücrede olduğunda, daha fazla dikey daha aralığı ile parçalarını işler çünkü çok madde işaretlerini kullanmanız mümkün olmayabilir.
+Slayt gösterisi, tüm madde işaretlerinin aynı hücrede olduğu tarihten daha fazla dikey aralığa sahip parçalar oluşturduğundan, çok sayıda madde işareti öğesi kullanmayabilir.
 
-## <a name="run-the-slideshow"></a>Slayt gösterisi çalıştırın
+## <a name="run-the-slideshow"></a>Slayt gösterisini Çalıştır
 
-1. Markdown hücreler düzenlenebilir, aksi durumda görünürler, HTML işlemek için bunları çalıştırmaya karar emin *olarak* slayt gösterisi Markdown'da.
+1. Herhangi bir Markaşağı hücresini düzenlediyseniz, bunları HTML olarak işlemek için çalıştırdığınızdan emin olun, aksi takdirde slayt gösterisinde markaşağı *olarak* görünürler.
 
-1. Yapılandırdıktan sonra **slayt türü** her hücre için slayt gösterisi başlatmak ve ardından istediğiniz içeren hücreyi seçin **Enter/çıkış YÜKSELMEYE slayt gösterisi** ana araç çubuğunda:
+1. Her hücre için **Slayt türünü** yapılandırdıktan sonra, slayt gösterisinin başlatılacağı hücreyi seçin, sonra ana araç çubuğundaki **Slayt gösterisini gir/çık** düğmesini seçin:
 
-    ![Ana araç çubuğunda girin/çıkış YÜKSELMEYE slayt gösterisi](media/slideshow/slideshow-start.png)
+    ![Ana araç çubuğundaki slayt gösterisini gir/çık düğmesi](media/slideshow/slideshow-start.png)
 
-1. Parçaları yanı sıra slaytları arasında gezinmek için sol ve sağ ok Gezinti denetimi olarak kullanın. Denetimdeki metin temsil eden bir sayıyı gösteren *slide.sub slayt*.
+1. Parçaların yanı sıra parçalar arasında gezinmek için, gezinti denetimindeki sol ve sağ okları kullanın. Denetimdeki metin, *Slide. alt slaytı*temsil eden bir sayı gösterir.
 
-    ![Slayt gösterisi gezinme kontrolü](media/slideshow/slideshow-navigation-control.png)
+    ![Slayt gösterisi gezinti denetimi](media/slideshow/slideshow-navigation-control.png)
 
-1. Slayt ve alt slaytları yanı arasında parçalar gezinmek için yukarı ve etkinleştirilirse, oklar aşağı:
+1. Slaytlar ve alt slaytların yanı sıra parçalar arasında gezinmek için, etkinse yukarı ve aşağı okları kullanın:
 
-    ![Slayt gösterisi gezinti denetimlerinin alt dilimleyiciler için](media/slideshow/slideshow-navigation-control-subslide.png)
+    ![Alt slaytlar için slayt gösterisi gezinti denetimleri](media/slideshow/slideshow-navigation-control-subslide.png)
 
-1. Kodu hücreyi temel kodu çalıştırmak için Yürüt düğmesini kullanın; Çıktı, slaytta görünür:
+1. Kod hücresinde yürütme düğmesini kullanarak kodu çalıştırın; slaytta çıkış görüntülenir:
 
-    ![Kod hücresini çalıştırmak için YÜRÜT düğmesine](media/slideshow/slideshow-run-code-cell.png)
+    ![Kod hücresini çalıştırmak için Yürüt düğmesi](media/slideshow/slideshow-run-code-cell.png)
 
-    ![Kodu hücreyi çıkış slayt gösterisi görünür.](media/slideshow/slideshow-run-code-cell-output.png)
+    ![Slayt gösterisinde kod hücresi çıkışı görüntülenir](media/slideshow/slideshow-run-code-cell-output.png)
 
     > [!Tip]
-    > Hücre çıkış bir slayt gösterisi hücresinde bir parçası olarak kabul edilir. Not Defteri veya Slayt Gösterisi Görünümü'nde bir hücre çalıştırırsanız, çıkış diğer görünümünde de görüntülenir. Çıkışı silmek için kullanın **hücre** > **geçerli çıkışları** > **Temizle** (geçerli hücreyi) komutunu veya **hücre**  >  **Tüm çıkışları** > **Temizle** (için tüm hücreleri).
+    > Hücre çıktısı, bir slayt gösterisinde hücrenin bir parçası olarak değerlendirilir. Bir hücreyi not defterinde veya slayt gösterisi görünümünde çalıştırırsanız, çıkış diğer görünümde de görüntülenir. Çıktıyı temizlemek için  > **geçerli çıktıları** > **clear** komutu (geçerli hücre için **) veya @no__t**-6**tüm çıktılar** > **clear** (tüm hücreler için **) hücresini kullanın**.
 
-1. Slayt gösterisi ile işiniz bittiğinde kullanın **X** not defteri görünümüne dönmek için.
+1. Slayt gösterisine işiniz bittiğinde, **X** ' i kullanarak not defteri görünümüne geri dönün.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Nasıl yapılır: Yapılandırma ve projeleri yönetme](configure-manage-azure-notebooks-projects.md)
-- [Nasıl yapılır: İçinde bir not defteri paketleri yükleme](install-packages-jupyter-notebook.md)
-- [Nasıl yapılır: Veri dosyaları ile çalışma](work-with-project-data-files.md)
-- [Nasıl yapılır: Veri kaynaklarına erişim](access-data-resources-jupyter-notebooks.md)
+- [Nasıl yapılır: projeleri yapılandırma ve yönetme](configure-manage-azure-notebooks-projects.md)
+- [Nasıl yapılır: bir not defteri içinden paket yüklemesi](install-packages-jupyter-notebook.md)
+- [Nasıl yapılır: veri dosyalarıyla çalışma](work-with-project-data-files.md)
+- [Nasıl yapılır: veri kaynaklarına erişme](access-data-resources-jupyter-notebooks.md)

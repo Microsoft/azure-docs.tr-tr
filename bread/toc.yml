@@ -74,6 +74,9 @@
         - name: Azure PowerShell
           tocHref: /azure/api-management/scripts/
           topicHref: /azure/api-management/powershell-samples/
+    - name: Azure için Avere vFXT
+      tocHref: /azure/avere-vfxt/
+      topicHref: /azure/avere-vfxt/
     - name: Azure Uygulama Yapılandırması
       tocHref: /azure/azure-app-configuration/
       topicHref: /azure/azure-app-configuration/
@@ -105,9 +108,19 @@
     - name: Otomasyon
       tocHref: /azure/automation/
       topicHref: /azure/automation/
-    - name: Azure Blok Zinciri Hizmeti
-      tocHref: /azure/blockchain/service
-      topicHref: /azure/blockchain/service
+    - name: Blok zinciri
+      tocHref: /azure/blockchain/
+      topicHref: /azure/blockchain/
+      items:
+        - name: Blok Zinciri Hizmeti
+          tocHref: /azure/blockchain/service/
+          topicHref: /azure/blockchain/service/index
+        - name: Blok Zinciri Belirteçleri
+          tocHref: /azure/blockchain/tokens/
+          topicHref: /azure/blockchain/tokens/index
+        - name: Blockchain Workbench
+          tocHref: /azure/blockchain/workbench/
+          topicHref: /azure/blockchain/workbench/
     - name: Azure Databricks
       tocHref: /azure/azure-databricks/
       topicHref: /azure/azure-databricks/
@@ -117,6 +130,12 @@
     - name: Azure Digital Twins
       tocHref: /azure/digital-twins/
       topicHref: /azure/digital-twins/
+    - name: Azure HPC Önbelleği
+      tocHref: /azure/hpc-cache/
+      topicHref: /azure/hpc-cache/
+    - name: Azure Lighthouse
+      tocHref: /azure/lighthouse/
+      topicHref: /azure/lighthouse/
     - name: Azure İzleyici
       tocHref: /azure/azure-monitor/
       topicHref: /azure/azure-monitor/
@@ -135,7 +154,10 @@
       items:
         - name: Dayanıklı İşlevler
           tocHref: /azure/azure-functions/durable/
-          topicHref: /azure/azure-functions/durable/durable-functions-overview
+          topicHref: /azure/azure-functions/durable/
+    - name: Azure Avustralya
+      tocHref: /azure/azure-australia/
+      topicHref: /azure/azure-australia/
     - name: Azure Kamu
       tocHref: /azure/azure-government/
       topicHref: /azure/azure-government/
@@ -161,9 +183,31 @@
         - name: IoT Central
           tocHref: /azure/iot-central/
           topicHref: /azure/iot-central/
+          items:
+            - name: IoT Central
+              tocHref: /azure/iot-central/core/
+              topicHref: /azure/iot-central/core/
+            - name: IoT Central (önizleme)
+              tocHref: /azure/iot-central/preview/
+              topicHref: /azure/iot-central/preview/
+            - name: Enerji için IoT Central
+              tocHref: /azure/iot-central/energy/
+              topicHref: /azure/iot-central/energy/
+            - name: Kamu için IoT Central
+              tocHref: /azure/iot-central/government/
+              topicHref: /azure/iot-central/government/
+            - name: Sağlık Hizmetleri için IoT Central
+              tocHref: /azure/iot-central/healthcare/
+              topicHref: /azure/iot-central/healthcare/
+            - name: Perakende için IoT Central
+              tocHref: /azure/iot-central/retail/
+              topicHref: /azure/iot-central/retail/
         - name: IoT Edge
           tocHref: /azure/iot-edge/
           topicHref: /azure/iot-edge/
+        - name: IoT Tak Çalıştır
+          tocHref: /azure/iot-pnp/
+          topicHref: /azure/iot-pnp/
         - name: Azure Digital Twins
           tocHref: /azure/digital-twins/
           topicHref: /azure/digital-twins/
@@ -209,9 +253,6 @@
     - name: BizTalk Services
       tocHref: /azure/biztalk-services/
       topicHref: /azure/biztalk-services/
-    - name: Blockchain Workbench
-      tocHref: /azure/blockchain-workbench/
-      topicHref: /azure/blockchain-workbench/
     - name: Bot Hizmeti
       tocHref: /azure/bot-service/
       topicHref: /azure/bot-service/
@@ -224,6 +265,9 @@
     - name: Cloud Services
       tocHref: /azure/cloud-services/
       topicHref: /azure/cloud-services/
+    - name: Bilişsel Arama
+      tocHref: /azure/search/
+      topicHref: /azure/search/
     - name: Bilişsel Hizmetler
       tocHref: /azure/cognitive-services/
       topicHref: /azure/cognitive-services/
@@ -321,9 +365,6 @@
         - name: Translator Metin Çevirisi
           tocHref: /azure/cognitive-services/translator/
           topicHref: /azure/cognitive-services/translator/
-        - name: Translator Konuşma Çevirisi
-          tocHref: /azure/cognitive-services/translator-speech/
-          topicHref: /azure/cognitive-services/translator-speech/
         - name: Video Indexer
           tocHref: /azure/cognitive-services/video-indexer/
           topicHref: /azure/cognitive-services/video-indexer/video-indexer-overview
@@ -419,9 +460,15 @@
     - name: Güvenlik duvarı
       tocHref: /azure/firewall/
       topicHref: /azure/firewall/
+    - name: Güvenlik Duvarı Yöneticisi
+      tocHref: /azure/firewall-manager
+      topicHref: /azure/firewall-manager
     - name: Front Door Service
       tocHref: /azure/frontdoor/
       topicHref: /azure/frontdoor/
+    - name: FXT Edge Filer
+      tocHref: /azure/fxt-edge-filer/
+      topicHref: /azure/fxt-edge-filer/
     - name: Genomiks
       tocHref: /azure/genomics/
       topicHref: /azure/genomics/
@@ -475,6 +522,13 @@
     - name: FHIR için Azure API'si
       tocHref: /azure/healthcare-apis
       topicHref: /azure/healthcare-apis
+    - name: Sektör için Azure
+      tocHref: /azure/industry
+      topicHref: /azure/industry
+      items:
+        - name: Azure FarmBeats
+          tocHref: /azure/industry
+          topicHref: /azure/industry
     - name: Jenkins
       tocHref: /azure/jenkins/
       topicHref: /azure/jenkins/
@@ -494,17 +548,13 @@
       tocHref: /azure/logic-apps/
       topicHref: /azure/logic-apps/
     - name: Machine Learning
-      tocHref: /azure/machine-learning/
+      tocHref: /azure/machine-learning
       topicHref: /azure/machine-learning/
       items:
-        - name: Hizmet
-          tocHref: /azure/machine-learning/service
-          topicHref: /azure/machine-learning/service/
-          items:
-            - name: Algoritma ve Modül Başvurusu
-              tocHref: /azure/machine-learning/algorithm-module-reference
-              topicHref: /azure/machine-learning/algorithm-module-reference/module-reference
-        - name: Studio
+        - name: Algoritma ve Modül Başvurusu
+          tocHref: /azure/machine-learning/algorithm-module-reference
+          topicHref: /azure/machine-learning/algorithm-module-reference/module-reference
+        - name: Studio (klasik)
           tocHref: /azure/machine-learning/studio
           topicHref: /azure/machine-learning/studio/
         - name: Team Data Science Process
@@ -532,6 +582,9 @@
         - name: Video Indexer
           tocHref: /azure/media-services/video-indexer/
           topicHref: /azure/media-services/video-indexer/
+    - name: Geçiş
+      tocHref: /azure/migrate/
+      topicHref: /azure/migrate/
     - name: Mobile Engagement
       tocHref: /azure/mobile-engagement/
       topicHref: /azure/mobile-engagement/
@@ -575,6 +628,9 @@
     - name: Power BI Çalışma Alanı Koleksiyonları
       tocHref: /azure/power-bi-workspace-collections/
       topicHref: /azure/power-bi-workspace-collections/
+    - name: Özel Bağlantı
+      tocHref: /azure/private-link/
+      topicHref: /azure/private-link/
     - name: Redis için Azure Önbelleği
       tocHref: /azure/azure-cache-for-redis/
       topicHref: /azure/azure-cache-for-redis/
@@ -593,13 +649,13 @@
     - name: Scheduler
       tocHref: /azure/scheduler/
       topicHref: /azure/scheduler/
-    - name: Arama
-      tocHref: /azure/search/
-      topicHref: /azure/search/
     - name: Güvenlik
       tocHref: /azure/security/
       topicHref: /azure/security/
       items:
+        - name: Temel Konular
+          tocHref: /azure/security/fundamentals/
+          topicHref: /azure/security/fundamentals/
         - name: Geliştirme
           tocHref: /azure/security/develop/
           topicHref: /azure/security/develop/
@@ -627,12 +683,15 @@
     - name: Site Recovery
       tocHref: /azure/site-recovery/
       topicHref: /azure/site-recovery/
-    - name: SQL Veri Ambarı
+    - name: Synapse Analytics
       tocHref: /azure/sql-data-warehouse/
       topicHref: /azure/sql-data-warehouse/
-    - name: SQL Database
+    - name: SQL Veritabanı
       tocHref: /azure/sql-database/
       topicHref: /azure/sql-database/
+    - name: Uç Cihazlar için SQL Veritabanı
+      tocHref: /azure/sql-database-edge/
+      topicHref: /azure/sql-database-edge/
     - name: SQL Server Stretch Database
       tocHref: /azure/sql-server-stretch-database/
       topicHref: /azure/sql-server-stretch-database/
@@ -658,9 +717,12 @@
     - name: StorSimple
       tocHref: /azure/storsimple/
       topicHref: /azure/storsimple/
-    - name: Akış Analizi
+    - name: Stream Analytics
       tocHref: /azure/stream-analytics/
       topicHref: /azure/stream-analytics/
+    - name: Internet Analyzer
+      tocHref: /azure/internet-analyzer/
+      topicHref: /azure/internet-analyzer/
     - name: Traffic Manager
       tocHref: /azure/traffic-manager/
       topicHref: /azure/traffic-manager/
@@ -707,9 +769,15 @@
     - name: Sanal Ağ
       tocHref: /azure/virtual-network/
       topicHref: /azure/virtual-network/
+    - name: Eşleme Hizmeti
+      tocHref: /azure/peering-service/
+      topicHref: /azure/peering-service/
     - name: VPN Gateway
       tocHref: /azure/vpn-gateway/
       topicHref: /azure/vpn-gateway/
+    - name: Web Uygulaması Güvenlik Duvarı
+      tocHref: /azure/web-application-firewall/
+      topicHref: /azure/web-application-firewall/
     - name: Windows Sanal Masaüstü
       tocHref: /azure/virtual-desktop/
       topicHref: /azure/virtual-desktop/

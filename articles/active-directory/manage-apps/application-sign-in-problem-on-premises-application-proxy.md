@@ -1,6 +1,6 @@
 ---
-title: Azure AD uygulama proxy'sini kullanarak şirket içi uygulamaya oturum açmada sorun | Microsoft Docs
-description: Azure AD uygulama ara sunucusu kullanarak Azure AD ile tümleştirilmiş bir şirket içi uygulamaya oturum açamıyor genişlettiklerinde karşılaştığı yaygın sorunları giderme
+title: Azure AD uygulama proxy 'sini kullanarak şirket içi uygulamada oturum açma sorunu | Microsoft Docs
+description: Azure AD Uygulama Ara Sunucusu kullanarak Azure AD ile tümleştirilmiş şirket içi bir uygulamada oturum açarken karşılaşılan yaygın sorunları giderme
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -15,16 +15,16 @@ ms.date: 05/21/2018
 ms.author: mimart
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0adc2effb27ffcd870ec543ee7b353a092808797
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4483dc75d116e75521cb348b56dac418b3e012a8
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65825253"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68381313"
 ---
-# <a name="problems-signing-in-to-an-on-premises-application-using-the-azure-ad-application-proxy"></a>Azure AD uygulama proxy'sini kullanarak şirket içi uygulamaya oturum açmada sorun
+# <a name="problems-signing-in-to-an-on-premises-application-using-the-azure-ad-application-proxy"></a>Azure AD uygulama proxy 'sini kullanarak şirket içi bir uygulamada oturum açma sorunları
 
-Şirket içi uygulamada oturum sorun yaşıyorsanız, sorunu çözmek için aşağıdaki adımları izleyerek deneyebilirsiniz.
+Şirket içi bir uygulamada oturum açarken sorun yaşıyorsanız, sorunu çözmek için aşağıdaki adımları takip edebilirsiniz.
 
 ## <a name="i-can-load-my-application-but-something-on-the-page-looks-broken"></a>Uygulamamı yükleyebiliyorum ama sayfadaki bir şey bozuk görünüyor
 
@@ -56,7 +56,7 @@ Aşağıdaki belgeler, bu kategoriye giren yaygın sorunların çoğunu çözmen
 
 ## <a name="im-having-a-problem-with-the-application-proxy-agent-connector"></a>Uygulama Ara Sunucusu Aracı Bağlayıcısı’nda sorun yaşıyorum
   Aşağıdaki belgeler, bu kategoriye giren yaygın sorunların çoğunu çözmenize yardımcı olabilir.
-  * [Uygulama proxy'si aracı Bağlayıcısı'nı yükleme sorunları yaşıyorum](application-proxy-connector-installation-problem.md)
+  * [Uygulama Ara Sunucusu Aracı Bağlayıcısı’nı yüklerken sorun yaşıyorum](application-proxy-connector-installation-problem.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 [Şirket içi uygulamalara güvenli uzaktan erişim sağlama](application-proxy.md)

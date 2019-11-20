@@ -4,24 +4,25 @@ ms.service: cosmos-db
 ms.topic: include
 ms.date: 03/23/2019
 ms.author: sngun
-ms.openlocfilehash: e7fc8f57c0fe290809354ce19fe92337178a84b6
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.custom: seo-java-september2019
+ms.openlocfilehash: d5a0e8412b928aea83670ad9f7c99a892a058c70
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188914"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71210362"
 ---
-Azure Cosmos DB hesabı ve web uygulaması ile işiniz bittiğinde, daha fazla ücret ödememeniz oluşturduğunuz Azure kaynaklarını silebilirsiniz. Kaynakları silmek için:
+Web uygulamanız ve Azure Cosmos DB hesabınızla işiniz bittiğinde, daha fazla ücret ödemeniz için oluşturduğunuz Azure kaynaklarını silebilirsiniz. Kaynakları silmek için:
 
-1. Azure portalının en sol tarafındaki **Kaynak gruplarını** seçin. Soldaki menü daraltılmışsa, seçin ![genişletme düğmesi](./media/cosmos-db-delete-resource-group/expand.png) genişletin.
+1. Azure portalının en sol tarafındaki **Kaynak gruplarını** seçin. Sol menü daraltılmışsa, genişletmek için Genişlet ![düğmesini](./media/cosmos-db-delete-resource-group/expand.png) seçin.
 
-2. Bu Hızlı Başlangıç için oluşturduğunuz kaynak grubunu seçin.  
+2. Bu hızlı başlangıç için oluşturduğunuz kaynak grubunu seçin.  
 
-   ![Azure portalında ölçümler](./media/cosmos-db-delete-resource-group/delete-resources-select.png)
+   ![Silinecek kaynak grubunu seçin](./media/cosmos-db-delete-resource-group/delete-resources-select.png)
 
-2. Yeni pencerede seçin **kaynak grubunu Sil**.
+2. Yeni pencerede, **kaynak grubunu sil**' i seçin.
 
-   ![Azure portalında ölçümler](./media/cosmos-db-delete-resource-group/delete-resources.png)   
+   ![Kaynak grubunu silme](./media/cosmos-db-delete-resource-group/delete-resources.png)   
 
-3. Sonraki penceresinde adını, kaynak grubunu silin ve ardından **Sil**.
+3. Sonraki pencerede, silinecek kaynak grubunun adını girin ve **Sil**' i seçin.
 

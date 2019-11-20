@@ -1,5 +1,5 @@
 ---
-title: Azure AD Connect ve Azure AD Connect Health yükleme yol haritası. | Microsoft Docs
+title: Azure AD Connect ve Azure AD Connect Health yükleme yol haritası. | Microsoft Belgeleri
 description: Bu belgede, yükleme seçeneklerinin ve Azure AD Connect ve Connect Health yüklemesi için kullanılabilen yolların genel bakışı sağlanmaktadır.
 services: active-directory
 author: billmath
@@ -13,19 +13,19 @@ ms.date: 09/18/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5d6cce859aa26935f0b6007fe8e5ff2c2239b210
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cddf2ab36b2372ce93ae8a2a6230ccb02ae30117
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67109444"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73721019"
 ---
 # <a name="azure-ad-connect-and-azure-ad-connect-health-installation-roadmap"></a>Azure AD Connect ve Azure AD Connect Health yükleme yol haritası
 
-## <a name="install-azure-ad-connect"></a>Azure AD Connect'i yükleme
+## <a name="install-azure-ad-connect"></a>Azure AD Connect Yükleme
 
 > [!IMPORTANT]
-> Microsoft, resmi olarak belgelenen eylemler dışında Azure AD Connect eşitlemesinin değiştirilmesini veya çalıştırılmasını desteklemez. Bu eylemler, tutarsız veya desteklenmeyen Azure AD Connect eşitlemesi durumuyla sonuçlanabilir. Sonuç olarak Microsoft, bu tür dağıtımlar için teknik destek sağlayamaz.
+> Microsoft, resmi olarak belgelenen eylemler dışında Azure AD Connect eşitlemesinin değiştirilmesini veya çalıştırılmasını desteklemez. Bu eylemlerden herhangi biri tutarsız veya Azure AD Connect eşitlemeye neden olabilecek bir durum oluşabilir. Sonuç olarak, Microsoft bu tür dağıtımlar için teknik destek sağlayamaz.
 
 Azure AD Connect'i [Microsoft İndirme Merkezi](https://go.microsoft.com/fwlink/?LinkId=615771)'nden indirebilirsiniz.
 
@@ -56,7 +56,7 @@ Azure AD Connect'i [Microsoft İndirme Merkezi](https://go.microsoft.com/fwlink/
 |Desteklenen topolojiler | [Azure AD Connect için topolojiler](plan-connect-topologies.md)|
 |Tasarım kavramları | [Azure AD Connect tasarım kavramları](plan-connect-design-concepts.md)|
 |Yükleme için kullanılan hesaplar | [Azure AD Connect kimlik bilgileri ve izinleri hakkında daha fazla bilgi](reference-connect-accounts-permissions.md)|
-|İşletimsel planlama | [Azure AD Connect eşitlemesi: İşletimsel görevler ve önemli noktalar](how-to-connect-sync-operations.md)|
+|İşletimsel planlama | [Azure AD Connect Eşitleme: İşletimsel görevler ve önemli noktalar](how-to-connect-sync-operations.md)|
 |Kullanıcı oturumu açma seçenekleri | [Azure AD Connect kullanıcı oturumu açma seçenekleri](plan-connect-user-signin.md)|
 
 ## <a name="configure-sync-features"></a>Eşitleme özelliklerini yapılandırma
@@ -68,7 +68,7 @@ Azure AD Connect, isteğe bağlı olarak açabileceğiniz veya varsayılan olara
 
 [Parola geri yazma](../authentication/quickstart-sspr.md) özelliği, kullanıcılarınızın buluttaki parolalarını değiştirmelerine ve sıfırlamalarına olanak sağlamanın yanı sıra şirket içi parola ilkenizi uygular.
 
-[Cihaz geri yazmayı](how-to-connect-device-writeback.md) şirket içi Active Directory'ye geri yazılması için koşullu erişim kullanılabilmesi için Azure AD'de kayıtlı cihazın izin verir.
+[Cihaz geri yazma](how-to-connect-device-writeback.md) özelliği, Azure AD 'de kayıtlı bir cihazın, koşullu erişim için kullanılabilmesi amacıyla şirket içi Active Directory geri yazılmasına izin verir.
 
 [Yanlışlıkla silmeleri engelle](how-to-connect-sync-feature-prevent-accidental-deletes.md) özelliği, varsayılan olarak açıktır ve bulut dizininizi aynı anda gerçekleştirilen çoklu silme işlemlerine karşı korur. Varsayılan olarak, her çalıştırma sırasında 500 silme işlemine izin verir. Kuruluşunuzun büyüklüğüne bağlı olarak bu ayarı değiştirebilirsiniz.
 
@@ -77,12 +77,12 @@ Azure AD Connect, isteğe bağlı olarak açabileceğiniz veya varsayılan olara
 ### <a name="next-steps-to-configure-sync-features"></a>Eşitleme özelliklerini yapılandırmak için sonraki adımlar
 |Konu |Bağlantı|  
 | --- | --- |
-|Filtrelemeyi yapılandırma | [Azure AD Connect eşitlemesi: Filtrelemeyi yapılandırma](how-to-connect-sync-configure-filtering.md)|
+|Filtrelemeyi yapılandırma | [Azure AD Connect eşitleme: Filtrelemeyi yapılandırma](how-to-connect-sync-configure-filtering.md)|
 |Parola karması eşitleme | [Parola karması eşitleme](how-to-connect-password-hash-synchronization.md)|
 |Doğrudan Kimlik Doğrulama | [Doğrudan kimlik doğrulama](how-to-connect-pta.md)
 |Parola geri yazma | [Parola yönetimine başlarken](../authentication/quickstart-sspr.md)|
 |Cihaz geri yazma | [Azure AD Connect’te cihaz geri yazma özelliğini etkinleştirme](how-to-connect-device-writeback.md)|
-|Yanlışlıkla silmeleri engelleme | [Azure AD Connect eşitlemesi: ](how-to-connect-sync-feature-prevent-accidental-deletes.md)Yanlışlıkla silmeleri engelleme|
+|Yanlışlıkla silmeleri engelleme | [Azure AD Connect eşitleme: Yanlışlıkla Silmeleri Engelleme](how-to-connect-sync-feature-prevent-accidental-deletes.md)|
 |Otomatik yükseltme | [Azure AD Connect: Otomatik yükseltme](how-to-connect-install-automatic-upgrade.md)|
 
 ## <a name="customize-azure-ad-connect-sync"></a>Azure AD Connect Eşitleme'yi özelleştirme
@@ -98,9 +98,9 @@ Eşitlemedeki yapılandırma modeli, [bildirim temelli hazırlama](concept-azure
 |Konu |Bağlantı|  
 | --- | --- |
 |Tüm Azure AD Connect Eşitleme makaleleri | [Azure AD Connect eşitleme](how-to-connect-sync-whatis.md)|
-|Teknik kavramlar | [Azure AD Connect eşitlemesi: Teknik Kavramlar](how-to-connect-sync-technical-concepts.md)|
-|Varsayılan yapılandırmayı anlama | [Azure AD Connect eşitlemesi: Varsayılan yapılandırmayı anlama](concept-azure-ad-connect-sync-default-configuration.md)|
-|Kullanıcıları ve kişileri anlama | [Azure AD Connect eşitlemesi: Kullanıcıları ve kişileri anlama](concept-azure-ad-connect-sync-user-and-contacts.md)|
+|Teknik kavramlar | [Azure AD Connect eşitleme: Teknik Kavramlar](how-to-connect-sync-technical-concepts.md)|
+|Varsayılan yapılandırmayı anlama | [Azure AD Connect eşitleme: Varsayılan yapılandırmayı anlama](concept-azure-ad-connect-sync-default-configuration.md)|
+|Kullanıcıları ve kişileri anlama | [Azure AD Connect eşitleme: Kullanıcıları ve Kişileri Anlama](concept-azure-ad-connect-sync-user-and-contacts.md)|
 |Bildirim temelli hazırlama | [Azure AD Connect eşitleme: Bildirim Temelli Sağlama İfadelerini Anlama](concept-azure-ad-connect-sync-declarative-provisioning-expressions.md)|
 |Varsayılan yapılandırmayı değiştirme | [Varsayılan yapılandırmanın değiştirilmesine ilişkin önerilen yöntemler](how-to-connect-sync-best-practices-changing-default-configuration.md)|
 
@@ -162,10 +162,11 @@ Azure AD Connect Health portalı; uyarıları, performans izlemeyi ve kullanım 
 * **Hızlı Başlangıç**: Bu seçeneği belirlediğinizde **Hızlı Başlangıç** dikey penceresi açılır. **Araçları Edinme**'yi seçerek Azure AD Connect Health Aracısı'nı indirebilirsiniz. Ayrıca, belgelere erişebilir ve geri bildirim gönderebilirsiniz.
 * **Azure Active Directory Connect (eşitleme)** : Bu seçenek, Azure AD Connect Health'in o anda izlediği Azure AD Connect sunucularınızı gösterir. **Eşitleme hataları** girişi, uygulamaya alınan ilk eşitleme hizmetinizin temel eşitleme hatalarını kategorilere ayrılmış şekilde gösterir. **Eşitleme hizmetleri** girişini seçtiğinizde açılan dikey pencerede Azure AD Connect sunucularınız hakkında bilgiler gösterilir. Özellikler hakkında daha fazla bilgi için bkz. [Eşitleme için Azure AD Connect Health'i kullanma](how-to-connect-health-sync.md).
 * **Active Directory Federasyon Hizmetleri**: Bu seçenek, Azure AD Connect Health'in o anda izlediği tüm AD FS hizmetlerini gösterir. Örneklerden birini seçtiğinizde açılan dikey pencerede seçtiğiniz hizmet örneğiyle ilgili bilgiler gösterilir. Bu bilgiler; genel bakışı, özellikleri, uyarıları, izlemeyi ve kullanım analizlerini içerir. Özellikler hakkında daha fazla bilgi için bkz. [Azure AD Connect Health'i AD FS ile kullanma](how-to-connect-health-adfs.md).
-* **Active Directory etki alanı Hizmetleri**: Bu seçenek, Azure AD Connect Health'in o anda izlediği tüm AD DS ormanlarını gösterir. Ormanlardan birini seçtiğinizde açılan dikey pencerede seçtiğiniz ormanla ilgili bilgiler gösterilir. Bu bilgiler; temel bilgiler, Etki Alanı Denetleyicileri panosu, Çoğaltma Durumu panosu, uyarılar ve izlemeye genel bakış içerir. Özellikler hakkında daha fazla bilgi için bkz. [Azure AD Connect Health'i AD DS ile kullanma](how-to-connect-health-adds.md).
-* **Yapılandırma**: Bu bölümde aşağıdakileri açma veya kapatma yönelik seçenekler içerir:
+* **Active Directory Domain Services**: Bu seçenek, Azure AD Connect Health'in o anda izlediği tüm AD DS ormanlarını gösterir. Ormanlardan birini seçtiğinizde açılan dikey pencerede seçtiğiniz ormanla ilgili bilgiler gösterilir. Bu bilgiler; temel bilgiler, Etki Alanı Denetleyicileri panosu, Çoğaltma Durumu panosu, uyarılar ve izlemeye genel bakış içerir. Özellikler hakkında daha fazla bilgi için bkz. [Azure AD Connect Health'i AD DS ile kullanma](how-to-connect-health-adds.md).
+* **Yapılandırma**: Bu bölümde aşağıdakileri açma veya kapatma seçenekleri bulunur:
 
-  - **Ayarlar** girişi, aracılarınızın temel yapılandırmasını içerir. Otomatik yükseltme ayarı etkinleştirir, Azure AD Connect Health aracısını en son sürüme otomatik olarak güncelleştir: Kullanıma sunulduğunda Azure AD Connect Health aracısını en son sürümleri için otomatik olarak güncelleştirilir. Bu, varsayılan olarak etkindir. Microsoft yalnız sorun gidermek amacıyla, Microsoft'un Azure AD directory durum verilerine erişmesine izin ver: Bu etkinleştirildiğinde Microsoft gördüğünüz verilerin aynılarını görür. Bu bilgiler sorun giderme konusunda yardımcı olabilir. Bu, varsayılan olarak devre dışıdır.
+   - Azure AD Connect Health aracısının en son sürüme **otomatik olarak güncelleştirilmesi** : yeni sürümler kullanılabilir olduğunda Azure AD Connect Health Aracısı otomatik olarak güncelleştirilir. Bu seçenek varsayılan olarak etkindir.
+   - Microsoft tarafından yalnızca sorun giderme amacıyla Azure AD dizini bütünlüğünden **verilere erişim** : Bu seçenek etkinleştirilirse, Microsoft Kullanıcı tarafından görüntülenen verilere erişebilir. Bu bilgiler, sorun giderme ve gerekli yardımı sağlamak için yararlı olabilir. Bu seçenek varsayılan olarak devre dışıdır
 * **Rol tabanlı erişim denetimi (IAM)** , Connect Health verilerine erişimi rol tabanlı olarak yönetebileceğiniz bölümdür. 
 
 ## <a name="next-steps"></a>Sonraki Adımlar

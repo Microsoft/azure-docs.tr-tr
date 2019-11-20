@@ -1,50 +1,49 @@
 ---
-title: Ortak uyarı şema Logic Apps ile tümleştirme
-description: Tüm uyarılarınız işlemek için ortak uyarı şema yararlanan bir mantıksal uygulama oluşturmayı öğrenin.
-author: ananthradhakrishnan
-services: azure-monitor
+title: Ortak uyarı şemasını Logic Apps ile tümleştirme
+description: Tüm uyarılarınızı işlemek için ortak uyarı şemasıyla yararlanan bir mantıksal uygulama oluşturmayı öğrenin.
 ms.service: azure-monitor
-ms.topic: conceptual
-ms.date: 05/27/2019
-ms.author: anantr
 ms.subservice: alerts
-ms.openlocfilehash: 13cb3880662e1665b03dd63f009645acbe97fc75
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: conceptual
+author: ananthradhakrishnan
+ms.author: robb
+ms.date: 05/27/2019
+ms.openlocfilehash: 50a6067d271ad824f17df1ece36c3dd919c7b55b
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66734883"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555658"
 ---
-# <a name="how-to-integrate-the-common-alert-schema-with-logic-apps"></a>Ortak uyarı şema Logic Apps ile tümleştirme
+# <a name="how-to-integrate-the-common-alert-schema-with-logic-apps"></a>Ortak uyarı şemasını Logic Apps ile tümleştirme
 
-Bu makalede, tüm uyarıları yönetmek için ortak uyarı şema yararlanan bir mantıksal uygulama oluşturma işlemini gösterir.
+Bu makalede, tüm uyarılarınızı işlemek için ortak uyarı şemasının kullanıldığı bir mantıksal uygulamanın nasıl oluşturulacağı gösterilmektedir.
 
 ## <a name="overview"></a>Genel Bakış
 
-[Ortak uyarı şeması](https://aka.ms/commonAlertSchemaDocs) tüm, farklı uyarı türleri arasında standartlaştırılmış ve Genişletilebilir bir JSON şeması sağlar. Ortak uyarı şema program aracılığıyla – Web kancaları, runbook'ları ve logic apps kullanılabilir olduğunda yararlıdır. Bu makalede, tüm uyarıları yönetmek için tek bir mantıksal uygulama'nın nasıl yazılabilir gösterir. Programlı diğer yöntemler ile aynı ilkeler uygulanabilir. Bu makalede açıklanan mantıksal uygulama için iyi tanımlanmış değişkenler oluşturur ['önemli' alanlar](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-definitions#essentials-fields)ve ayrıca nasıl işleyebileceğini açıklar [uyarı türü](/azure/azure-monitor/platform/alerts-common-schema-definitions#alert-context-fields) belirli mantığı.
+[Ortak uyarı şeması](https://aka.ms/commonAlertSchemaDocs) , tüm farklı uyarı türlerinizin genelinde standartlaştırılmış ve GENIŞLETILEBILIR bir JSON şeması sağlar. Ortak uyarı şeması, yararlanılabilir programlı olarak Web kancaları, runbook 'lar ve Logic Apps aracılığıyla yararlıdır. Bu makalede, tüm uyarılarınızı işlemek için tek bir Logic App 'in nasıl yazıldığı gösterilmektedir. Aynı ilkeler diğer programlama yöntemlerine de uygulanabilir. Bu makalede açıklanan mantıksal uygulama, [' Essential ' alanları](alerts-common-schema-definitions.md#essentials)için iyi tanımlanmış değişkenler oluşturur ve ayrıca [Uyarı türüne](alerts-common-schema-definitions.md#alert-context) özgü mantığı nasıl işleyebileceğinizi açıklar.
 
 
 ## <a name="prerequisites"></a>Önkoşullar 
 
-Bu makalede okuyucu alışkın olduğu varsayılır. 
+Bu makalede, okuyucunun öğrenildiği varsayılmaktadır 
 * Uyarı kurallarını ayarlama ([ölçüm](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-metric), [günlük](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-log), [etkinlik günlüğü](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-activity-log))
-* Ayarlama [Eylem grupları](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups)
-* Etkinleştirme [ortak uyarı şeması](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema#how-do-i-enable-the-common-alert-schema) Gelen Eylem grupları içinde
+* [Eylem gruplarını](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups) ayarlama
+* Eylem gruplarının içinden [ortak uyarı şemasının](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema#how-do-i-enable-the-common-alert-schema) etkinleştirilmesi
 
-## <a name="create-a-logic-app-leveraging-the-common-alert-schema"></a>Ortak uyarı şema yararlanarak bir mantıksal uygulama oluşturma
+## <a name="create-a-logic-app-leveraging-the-common-alert-schema"></a>Ortak uyarı şemasından yararlanan bir mantıksal uygulama oluşturma
 
-1. İzleyin [özetlenen adımları mantıksal uygulamanızı oluşturmak için](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups-logic-app). 
+1. [Mantıksal uygulamanızı oluşturmak için özetlenen adımları](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups-logic-app)izleyin. 
 
-1.  Tetikleyiciyi seçin: **Bir HTTP isteği alındığında**.
+1.  Tetikleyiciyi seçin: **BIR http isteği alındığında**.
 
-    ![Mantıksal uygulama Tetikleyicileri](media/action-groups-logic-app/logic-app-triggers.png "mantıksal uygulama Tetikleyicileri")
+    ![Mantıksal uygulama Tetikleyicileri](media/action-groups-logic-app/logic-app-triggers.png "Mantıksal uygulama tetikleyicileri")
 
-1.  Seçin **Düzenle** HTTP isteği tetikleyicisi değiştirmek için.
+1.  HTTP istek tetikleyicisini değiştirmek için **Düzenle** ' yi seçin.
 
-    ![HTTP isteği Tetikleyicileri](media/action-groups-logic-app/http-request-trigger-shape.png "HTTP isteği Tetikleyicileri")
+    ![HTTP istek Tetikleyicileri](media/action-groups-logic-app/http-request-trigger-shape.png "HTTP istek Tetikleyicileri")
 
 
-1.  Aşağıdaki şema kopyalayıp yeniden oluştur:
+1.  Aşağıdaki şemayı kopyalayıp yapıştırın:
 
     ```json
         {
@@ -113,34 +112,34 @@ Bu makalede okuyucu alışkın olduğu varsayılır.
         }
     ```
 
-1. Seçin **+** **yeni adım** seçip **Eylem Ekle**.
+1. **@No__t_1** **yeni adım** ' ı seçin ve ardından **Eylem Ekle**' yi seçin.
 
-    ![Eylem Ekle](media/action-groups-logic-app/add-action.png "Eylem Ekle")
+    ![Eylem ekleme](media/action-groups-logic-app/add-action.png "Eylem ekleme")
 
-1. Bu aşamada, belirli iş gereksinimlerinize göre çeşitli bağlayıcılar (Microsoft Teams, Slack, Salesforce, vb.) ekleyebilirsiniz. 'Gerekli alanları' nın-hazır kullanabilirsiniz. 
+1. Bu aşamada, belirli iş gereksinimlerinize göre çeşitli bağlayıcılar (Microsoft ekipleri, bolluk, Salesforce vb.) ekleyebilirsiniz. ' Temel alanlar ' kutusunu kullanabilirsiniz. 
 
-    ![Önemli alanlar](media/alerts-common-schema-integrations/logic-app-essential-fields.png "önemli alanlar")
+    ![Gerekli alanlar](media/alerts-common-schema-integrations/logic-app-essential-fields.png "Gerekli alanlar")
     
-    Alternatif olarak, koşullu mantık 'Expression' seçeneği kullanılarak uyarı türüne göre yazabilirsiniz.
+    Alternatif olarak, ' Ifade ' seçeneğini kullanarak uyarı türüne göre koşullu mantık yazabilirsiniz.
 
-    ![Mantıksal uygulama ifade](media/alerts-common-schema-integrations/logic-app-expressions.png "mantıksal uygulama ifadesi")
+    ![Mantıksal uygulama ifadesi](media/alerts-common-schema-integrations/logic-app-expressions.png "Mantıksal uygulama ifadesi")
     
-     ['MonitoringService' alanı](/azure/azure-monitor/platform/alerts-common-schema-definitions#alert-context-fields) uyarı türü benzersiz olarak tanımlanabilmesi tanır temel üzerinde koşullu mantık oluşturabilirsiniz.
+     [' Monitoringservice ' alanı](alerts-common-schema-definitions.md#alert-context) , koşullu mantığı oluşturabileceğiniz uyarı türünü benzersiz olarak tanımlamanızı sağlar.
 
     
-    Örneğin, aşağıdaki kod parçacığını denetler uyarı bir Application Insights tabanlı günlük uyarı ve bu durumda, arama sonuçlarını yazdırır. Aksi takdirde 'NA' yazdırır.
+    Örneğin, aşağıdaki kod parçacığı uyarının Application Insights tabanlı bir günlük uyarısı olup olmadığını denetler ve bu durumda arama sonuçları yazdırılır. Aksi takdirde, ' NA ' yazdırır.
 
     ```text
       if(equals(triggerBody()?['data']?['essentials']?['monitoringService'],'Application Insights'),triggerBody()?['data']?['alertContext']?['SearchResults'],'NA')
     ```
     
-     Daha fazla bilgi edinin [logic app ifadeleri yazarken](https://docs.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference#logical-comparison-functions).
+     [Mantıksal uygulama ifadeleri yazma](https://docs.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference#logical-comparison-functions)hakkında daha fazla bilgi edinin.
 
     
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Eylem grupları hakkında daha fazla bilgi](../../azure-monitor/platform/action-groups.md).
-* [Ortak uyarı şeması hakkında daha fazla bilgi](https://aka.ms/commonAlertSchemaDocs).
+* [Eylem grupları hakkında daha fazla bilgi edinin](../../azure-monitor/platform/action-groups.md).
+* [Ortak uyarı şeması hakkında daha fazla bilgi edinin](https://aka.ms/commonAlertSchemaDocs).
 

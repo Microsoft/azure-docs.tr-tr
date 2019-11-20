@@ -1,7 +1,7 @@
 ---
 title: Bing Otomatik Öneri nedir?
-titlesuffix: Azure Cognitive Services
-description: Bing Otomatik Öneri API’sini kullanmayı öğrenin.
+titleSuffix: Azure Cognitive Services
+description: Bing Otomatik Öneri API'si, arama kutusundaki kısmi sorgu dizesine göre önerilen sorguların bir listesini döndürür.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
@@ -10,38 +10,38 @@ ms.subservice: bing-autosuggest
 ms.topic: overview
 ms.date: 02/20/2019
 ms.author: scottwhi
-ms.openlocfilehash: 24f35d795b34e7d9c214a23c040791841b4a711b
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 5b1e4cc8dfc89d6dcc5d29a368e089402b284352
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66382566"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74072865"
 ---
 # <a name="what-is-bing-autosuggest"></a>Bing Otomatik Öneri nedir?
 
-Uygulamanızın tüm Bing arama API'leri sorguları gönderirse, Bing otomatik öneri API'si kullanıcılarınızın arama deneyimini geliştirmek için kullanabilirsiniz. Bing otomatik öneri API'si, bir arama kutusu kısmi sorgu dizesine göre önerilen sorgular listesi döndürür. Arama kutusuna girilen karakterler gibi aşağı açılan listede önerileri görüntüleyebilirsiniz.
+Uygulamanız Bing Arama API'leri herhangi birine sorgu gönderiyorsa, kullanıcılarınızın arama deneyimini geliştirmek için Bing Otomatik Öneri API'si kullanabilirsiniz. Bing Otomatik Öneri API'si, arama kutusundaki kısmi sorgu dizesine göre önerilen sorguların bir listesini döndürür. Arama kutusuna karakterler girildiğinde, önerileri bir açılan listede görüntüleyebilirsiniz.
 
-## <a name="bing-autosuggest-api-features"></a>Bing otomatik öneri API'si özellikleri
+## <a name="bing-autosuggest-api-features"></a>Bing Otomatik Öneri API'si özellikleri
 
 | Özellik                                                                                                                                                                                 | Açıklama                                                                                                                                                            |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Gerçek zamanlı arama terimleri önerme](concepts/get-suggestions.md) | Bunlar yazıldığı gibi önerilen arama terimlerini görüntülemek için otomatik öneri API'si kullanarak uygulama deneyiminizi geliştirin. |
+| [Gerçek zamanlı arama terimleri önerme](concepts/get-suggestions.md) | Otomatik öneri API 'sini kullanarak, girilen arama koşullarını göstermek için uygulama deneyiminizi geliştirebilirsiniz. |
 
 ## <a name="workflow"></a>İş akışı
 
-Bing otomatik öneri API'si bir RESTful web HTTP istekleri ve JSON Ayrıştır tüm programlama dilinden çağırmak kolay hizmettir. 
+Bing Otomatik Öneri API'si, HTTP istekleri yapan ve JSON 'u ayrıştırabilen herhangi bir programlama dilinden kolayca çağrılacak bir Web hizmetidir. 
 
 1. Bing Arama API'lerine erişimi olan bir [Bilişsel Hizmetler API'si hesabı](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) oluşturun. Azure aboneliğiniz yoksa ücretsiz olarak [hesap oluşturabilirsiniz](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api).
-2. Bir istek, bir kullanıcı, uygulamanızın arama kutusuna yeni karakter türleri her zaman bu API'ye gönderin.
+2. Her kullanıcı uygulamanızın arama kutusuna yeni bir karakter yazdığında, bu API 'ye bir istek gönderin.
 3. Döndürülen JSON iletisini ayrıştırarak API yanıtını işleyin.
 
-Genellikle, her seferinde kullanıcı, uygulamanızın arama kutusuna yeni karakter türleri bu API çağrısıyla sonlandırmalısınız. Daha fazla karakter girdiniz gibi API'nin daha ilgili önerilen arama sorguları döndürür. Öneriler API'si için tek bir örnek döndürebilir `s` için daha az ilgili olasılığı `sail`.
+Genellikle, kullanıcı uygulamanızın arama kutusuna her yeni bir karakter yazdığında bu API 'YI çağırın. Daha fazla karakter girildiğinde, API daha ilgili önerilen arama sorgularını geri döndürür. Örneğin, API 'nin tek bir `s` döndürebileceğinden öneriler, `sail`ait olanlardan daha az ilgili olabilir.
 
-Aşağıdaki örnek, Bing otomatik öneri API'si bir açılan arama kutusuna önerilen sorgu terimleri gösterir.
+Aşağıdaki örnek, Bing Otomatik Öneri API'si önerilen sorgu koşullarına sahip bir açılan arama kutusunu gösterir.
 
 ![Otomatik öneri açılır arama kutusu listesi](./media/cognitive-services-bing-autosuggest-api/bing-autosuggest-drop-down-list.PNG)
 
-Bir kullanıcının açılan listeden bir öneri seçtiğinde, Bing arama API'leri biriyle aramaya başlanacak kullanın veya doğrudan Bing arama sonuçları sayfasına gidin.
+Kullanıcı aşağı açılan listeden bir öneri seçtiğinde, Bing Arama API'leri birini kullanarak aramaya başlayabilir veya doğrudan Bing arama sonuçları sayfasına gidebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,6 +1,6 @@
 ---
-title: Belirli bir kullanıcı bir uygulamaya erişmeye çalıştığında ne zaman sunulacaktır kullanıma bulma | Microsoft Docs
-description: Kritik düzeyde önemli bir kullanıcı Azure AD ile kullanıcı sağlama için yapılandırmış olduğunuz bir uygulamaya erişmeye çalıştığında, bulma
+title: Belirli bir kullanıcının bir uygulamaya ne zaman erişebileceğini öğrenin | Microsoft Docs
+description: Kritik öneme sahip bir kullanıcının Azure AD ile Kullanıcı sağlaması için yapılandırdığınız bir uygulamaya ne zaman erişebileceğini bulma
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -12,97 +12,95 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 06/12/2019
+ms.date: 09/03/2019
 ms.author: mimart
 ms.reviewer: arvinh
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1fd6b70e7a4542a4cad2ee95fa280ddf8fbe6553
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.openlocfilehash: 7d3b334df8cd24a1d8ca88c8ac2e3117bdd24d8b
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67310019"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71057758"
 ---
-# <a name="check-the-status-of-user-provisioning"></a>Kullanıcı sağlama durumunu denetleyin
+# <a name="check-the-status-of-user-provisioning"></a>Kullanıcı hazırlama durumunu denetleme
 
-Azure AD sağlama hizmeti, kaynak ve hedef sistemi, düzenli aralıklarla artımlı döngüsü tarafından izlenen karşı bir ilk sağlama döngüsü çalıştırır. Bir uygulama için sağlama yapılandırdığınızda, sağlama hizmetinin geçerli durumunu denetleyin ve ne zaman bir kullanıcı bir uygulamaya erişmek mümkün olacaktır bakın.
+Azure AD sağlama hizmeti, kaynak sistem ve hedef sisteme karşı bir ilk sağlama döngüsü çalıştırır ve ardından düzenli artımlı Döngülerde. Bir uygulama için sağlama yapılandırdığınızda, sağlama hizmetinin geçerli durumunu denetleyebilir ve bir kullanıcının uygulamaya ne zaman erişebileceğini görebilirsiniz.
 
-## <a name="view-the-provisioning-progress-bar-preview"></a>Sağlama görüntülemek ilerleme: (Önizleme)
+## <a name="view-the-provisioning-progress-bar"></a>Sağlama ilerleme çubuğunu görüntüleme
 
- Üzerinde **sağlama** sayfa bir uygulama için Azure AD sağlama hizmeti durumunu görüntüleyebilirsiniz. **Geçerli durumu** sayfanın alt kısmındaki bölümde sağlama döngüsü kullanıcı hesaplarını sağlama başlayıp başlamadığını gösterir. Döngüsü ilerlemesini izleyin, kaç kullanıcılar ve gruplar sağlanan bakın ve kaç rollerin oluşturulacağını bakın.
+ Bir uygulamanın **sağlama** sayfasında, Azure AD sağlama hizmeti 'nin durumunu görüntüleyebilirsiniz. Sayfanın alt kısmındaki **geçerli durum** bölümü, sağlama döngüsünün Kullanıcı hesapları sağlamaya başlayıp başlamadığına ilişkin gösterir. Döngüsünün ilerlemesini izleyebilir, kaç Kullanıcı ve grup sağlandığını görebilir ve kaç rolün oluşturulduğunu görebilirsiniz.
 
-Otomatik sağlama, ilk kez yapılandırırken **geçerli durumu** sayfanın alt kısmındaki bölümde ilk sağlama döngüsü durumunu gösterir. Bu bölümde, artımlı bir döngü her çalıştığında güncelleştirir. Aşağıdaki ayrıntıları gösterilir:
-- Çalışmakta olan veya son tamamlanan sağlama döngüsü (ilk veya artan) türü.
-- A **ilerleme çubuğu** tamamlandığını sağlama döngüsü yüzdesini gösteren. Yüzde sağlanan sayfaların sayısını yansıtır. Her bir sayfa birden fazla kullanıcılar veya gruplar, yüzde doğrudan kullanıcı sayısı için bağıntısını olmayan şekilde, grupların veya rollerin sağlanan içerebilir unutmayın.
-- A **Yenile** düğmesi güncelleştirilmiş görünümü tutmak için kullanabilirsiniz.
-- Sayısını **kullanıcılar** ve **grupları** hazırlandı ve oluşturulan roller sayısı. İlk döngü sırasında **kullanıcılar** sayar 1 tarafından bir kullanıcı oluşturulduğunda veya güncelleştirildiğinde ve bir kullanıcı silindiğinde, 1 ile değerden aşağı sayıyor. Artımlı bir döngüsü sırasında kullanıcı güncelleştirmeleri etkilemez **kullanıcılar** sayısı; sayı değişiklikleri kullanıcılar yalnızca oluşturulduğu veya silindiği zaman.
-- A **denetim günlüklerini görüntüle** bağlantı, Azure AD denetim açılır oturum tüm işlemleri hakkındaki ayrıntıları sağlama durumu bireysel kullanıcılar için de dahil olmak üzere kullanıcı sağlama hizmeti tarafından çalıştırın (bkz [kullanım denetim günlükleri](#use-audit-logs-to-check-a-users-provisioning-status)bölümüne bakın).
+Otomatik sağlamayı ilk yapılandırdığınızda, sayfanın en altındaki **geçerli durum** bölümü ilk sağlama döngüsünün durumunu gösterir. Bu bölüm, her bir artımlı döngüsünün çalıştırıldığı her seferinde güncellenir. Aşağıdaki ayrıntılar gösterilir:
+- Şu anda çalışmakta olan veya en son tamamlanan sağlama döngüsünün (ilk veya artımlı) türü.
+- Tamamlanan sağlama döngüsünün yüzdesini gösteren bir **ilerleme çubuğu** . Yüzde değeri, sağlanan sayfa sayısını yansıtır. Her sayfanın birden çok kullanıcı veya grup içerebileceğini unutmayın. bu nedenle yüzde, izin sağlanan Kullanıcı, Grup veya rol sayısıyla doğrudan bağıntılı değildir.
+- Görünümü güncelleştirilmesini sağlamak için kullanabileceğiniz bir **yenileme** düğmesi.
+- Sağlanan **Kullanıcı** ve **grupların** sayısı ve oluşturulan rol sayısı. İlk zaman **içinde, Kullanıcı numarası 1** ' den bir kullanıcı oluşturulduğunda veya güncelleştirilirken, bir Kullanıcı silindiğinde 1 olarak sayılır. Artımlı bir döngüde **, Kullanıcı güncelleştirmeleri Kullanıcı sayısını etkilemez** ; sayı yalnızca kullanıcılar oluşturulduğunda veya silindiğinde değişir.
+- Bireysel kullanıcıların sağlama durumu da dahil olmak üzere, Kullanıcı sağlama hizmeti tarafından çalıştırılan tüm işlemler hakkındaki ayrıntılar için Azure AD sağlama günlüklerini **görüntüleme** (aşağıdaki [sağlama günlüklerini kullanma](#use-provisioning-logs-to-check-a-users-provisioning-status) bölümüne bakın).
 
-Sağlama döngüsü tamamlandıktan sonra **tarih istatistikleri** Bölüm kullanıcıları ve grupları tarih, tamamlanma tarihini ve son döneminin süresi ile birlikte sağlanan toplu sayılarını gösterir. **Etkinlik kimliği** en son sağlama döngüsü benzersiz olarak tanımlar. **İş kimliği** sağlama işi için benzersiz bir tanımlayıcıdır ve kiracınızdaki uygulamaya özgüdür.
+Bir sağlama süresi tamamlandıktan sonra, tarihe göre **İstatistikler** bölümü, son döngüsünün tamamlanma tarihi ve süresiyle birlikte tarih olarak sağlanan Toplam Kullanıcı ve grup sayısını gösterir. **Etkınlık kimliği** en son sağlama döngüsünü benzersiz şekilde tanımlar. **Iş kimliği** , sağlama işi için benzersiz bir tanımlayıcıdır ve kiracınızdaki uygulamaya özeldir.
 
-Sağlama ilerleme görüntülenen Azure portalında **Azure Active Directory &gt; Kurumsal uygulamaları &gt; \[uygulama adı\] &gt; sağlama** sekmesi.
+Sağlama ilerlemesi, Azure Portal **Azure Active Directory &gt; Enterprise Apps &gt; \[\] uygulama adı&gt; sağlama** sekmesinde görüntülenebilir.
 
-![Sayfa ilerleme çubuğu sağlama](media/application-provisioning-when-will-provisioning-finish-specific-user/provisioning-progress-bar-section.png)
+![Sağlama sayfası ilerleme çubuğu](media/application-provisioning-when-will-provisioning-finish-specific-user/provisioning-progress-bar-section.png)
 
-## <a name="use-audit-logs-to-check-a-users-provisioning-status"></a>Bir kullanıcının sağlama durumunu denetlemek için Denetim günlükleri kullanın
+## <a name="use-provisioning-logs-to-check-a-users-provisioning-status"></a>Bir kullanıcının sağlama durumunu denetlemek için sağlama günlüklerini kullanma
 
-Seçilen kullanıcı için sağlama durumunu görmek için Azure AD'de denetim günlüklerini inceleyin. Sağlama hizmeti kullanıcı tarafından çalıştırılan tüm işlemleri Azure AD'de kayıtlı denetim günlükleri. Bu tüm içeren okuma ve yazma işlemleri kaynak ve hedef sistemleri ve okuma veya her işlemi sırasında yazılan kullanıcı verileri için yapılır.
+Seçilen bir kullanıcının sağlama durumunu görmek için Azure AD 'de [sağlama günlüklerine (Önizleme)](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context) bakın. Kullanıcı sağlama hizmeti tarafından çalıştırılan tüm işlemler, Azure AD sağlama günlüklerine kaydedilir. Bu, kaynak ve hedef sistemlere yapılan tüm okuma ve yazma işlemlerini ve her işlem sırasında okunan veya yazılan kullanıcı verilerini içerir.
 
-Sağlama denetim günlüklerinin Azure portalında erişilebilen **Azure Active Directory &gt; Kurumsal uygulamaları &gt; \[uygulama adı\] &gt; denetim günlükleri** sekmesi. Günlükleri filtreleyin **hesap sağlama** yalnızca bu uygulama için sağlama olayları görmek için kategori. "İçinde öznitelik eşlemelerini kendileri için yapılandırılan eşleşen ID" göre kullanıcılar için arama yapabilirsiniz. 
+&gt; **Etkinlik** bölümünde **Kurumsal uygulamalar** &gt; **sağlama günlükleri (Önizleme)** **Azure Active Directory** ' ni seçerek Azure Portal sağlama günlüklerine erişebilirsiniz. Sağlama verilerini kullanıcı adına veya kaynak sistemde ya da hedef sistemde tanımlayıcı temelinde arayabilirsiniz. Ayrıntılar için bkz. [sağlama günlükleri (Önizleme)](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context). 
 
-Örneğin "kullanıcı asıl adı" veya "Azure AD tarafında eşleşen öznitelik olarak e-posta adresi" yapılandırılmış ve değerini değil sağlama kullanıcı varsa, "audrey@contoso.com", ardından Denetim günlüklerini arama "audrey@contoso.com" ve ardından girişlerini gözden geçirin döndürdü.
+Sağlama günlükleri aşağıdakiler de dahil olmak üzere, sağlama hizmeti tarafından gerçekleştirilen tüm işlemleri kaydeder:
 
-Sağlama hizmeti tarafından gerçekleştirilen tüm işlemleri sağlama denetim günlüklerini kaydetme dahil olmak üzere:
+* Sağlama kapsamında olan atanmış kullanıcılar için Azure AD sorgulama
+* Hedef uygulama, bu kullanıcıların varlığı için sorgulanıyor
+* Sistem arasındaki kullanıcı nesnelerini karşılaştırma
+* Karşılaştırma temelinde hedef sistemde Kullanıcı hesabını ekleme, güncelleştirme veya devre dışı bırakma
 
-* Azure AD sağlama kapsamında olan atanan kullanıcılar için sorgulama
-* Hedef uygulama bu kullanıcıların varlığı için sorgulama
-* Sistem arasındaki kullanıcı nesneleri karşılaştırma
-* Ekleme, güncelleştirme veya karşılaştırma üzerine dayalı hedef sistemde kullanıcı hesabı devre dışı bırakma
+Azure portal sağlama günlüklerinin nasıl okunmasıyla ilgili daha fazla bilgi için bkz. [sağlama Raporlama Kılavuzu](check-status-user-account-provisioning.md).
 
-Azure portalında denetim günlükleri okuma hakkında daha fazla bilgi için bkz. [sağlama raporlama Kılavuzu](check-status-user-account-provisioning.md).
+## <a name="how-long-will-it-take-to-provision-users"></a>Kullanıcıları sağlamak için ne kadar sürer?
+Azure AD, bir uygulamayla otomatik Kullanıcı sağlamayı kullanırken, düzenli olarak zamanlanan bir zaman aralığında, genellikle her 40 dakikada bir [Kullanıcı ve grup ataması](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal) gibi öğelere dayalı olarak bir uygulamadaki Kullanıcı hesaplarını otomatik olarak sağlar ve güncelleştirir.
 
-## <a name="how-long-will-it-take-to-provision-users"></a>Ne kadar kullanıcıları sağlama sürer?
-Bir uygulama ile otomatik kullanıcı hazırlama kullanırken, Azure AD'ye otomatik olarak sağlar ve kullanıcı hesapları gibi şeyleri temel alan bir uygulama, güncelleştirmeleri [kullanıcı ve Grup atamasına](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal) bir düzenli olarak zamanlanan saat aralığı, genellikle 10 dakikada bir.
+Belirli bir kullanıcının sağlanması için gereken süre, genellikle sağlama işinizin bir başlangıç döngüsünü mi yoksa artımlı bir döngüyü mi çalıştırdığına bağlıdır.
 
-Belirli bir kullanıcının sağlanması gereken süreyi çoğunlukla sağlama iş bir ilk eşitleme ya da bir artımlı eşitleme kullanılıp kullanılmadığını bağlıdır.
+- **İlk döngüde**iş süresi, sağlama için kapsamdaki Kullanıcı ve grup sayısı ve kaynak sistemdeki Toplam Kullanıcı ve grup sayısı dahil olmak üzere birçok faktöre bağlıdır. Azure AD ve uygulama arasındaki ilk eşitleme, Azure AD dizininin boyutuna ve sağlama kapsamındaki kullanıcı sayısına bağlı olarak 20 dakikadan birkaç saate kadar sürebilir. İlk geçiş performansını etkileyen faktörlerin kapsamlı bir listesi bu bölümün ilerleyen kısımlarında özetlenir.
 
-- İçin **ilk eşitlemeler**, sağlama, kapsamında kullanıcıların ve grupların sayısı da dahil olmak üzere, birçok faktöre ve kullanıcı ve grup kaynak sistemindeki toplam sayısı işi zaman bağlıdır. Azure AD arasında ilk eşitleme ve uygulama herhangi bir Azure AD dizinindeki kullanıcıların sağlama kapsamında sayısı ve boyutuna bağlı olarak birkaç saat 20 dakika sürebilir. İlk eşitleme performansı etkileyen faktörleri kapsamlı bir listesi bu bölümde daha sonra özetlenir.
+- İlk döngüden sonra **artımlı döngüler** için iş süreleri daha hızlı (ör. 10 dakika içinde) olur, çünkü sağlama hizmeti ilk döngüden sonra her iki sistemin durumunu temsil eden filigranları depolar, bundan sonraki performansı artırır eşit. İş saati, bu sağlama döngüsündeki algılanan değişiklik sayısına bağlıdır. 5\.000 'den az Kullanıcı veya grup üyeliği değişikliği varsa, iş tek bir artımlı sağlama döngüsünün içinde bitebilirler. 
 
-- İçin **artımlı eşitlemeler** ilk eşitlemeden sonra iş saatleri sağlama hizmeti performansını iyileştirme ilk eşitlemeden sonra her iki sistem durumunu temsil eden filigranlar depoları olarak (örn: 10 dakika içinde), daha hızlı olma eğilimindedir sonraki eşitlemeler. İş saati içinde sağlama, döngü algılandı değişikliklerin sayısı bağlıdır. 5\. 000'den daha az kullanıcı veya grup üyeliği değişiklikleri varsa, tek bir artımlı sağlama döngüsü içinde iş tamamlayabilir. 
-
-Eşitleme zamanlarını sağlama yaygın senaryolar için aşağıdaki tabloda özetlenmiştir. Bu senaryolarda, Azure AD kaynaklı sistemidir ve hedef sistemde bir SaaS uygulamasıdır. Eşitleme sürelerini ServiceNow, çalışma alanı, Salesforce ve G Suite SaaS uygulamaları için eşitleme işlerinin istatistiksel çözümleme türetilmiştir.
+Aşağıdaki tabloda, yaygın sağlama senaryolarının eşitleme süreleri özetlenmektedir. Bu senaryolarda, kaynak sistem Azure AD ve hedef sistem bir SaaS uygulamasıdır. Eşitleme süreleri, SaaS uygulamaları ServiceNow, Workplace, Salesforce ve G Suite için eşitleme işlerinin istatistiksel analizinden türetilir.
 
 
-| Kapsam yapılandırması | Kullanıcılara, gruplara veya kapsamda üyeleri | İlk eşitleme zamanı | Artımlı eşitleme zamanı |
+| Kapsam yapılandırması | Kapsam içindeki kullanıcılar, gruplar ve Üyeler | İlk zaman çevrimi süresi | Artımlı zaman çevrimi süresi |
 | -------- | -------- | -------- | -------- |
-| Atanan kullanıcı ve grupları yalnızca Eşitle |  < 1,000 |  < 30 dakika | < 30 dakika |
-| Atanan kullanıcı ve grupları yalnızca Eşitle |  1\.000 - 10.000 | 142 - 708 dakika | < 30 dakika |
-| Atanan kullanıcı ve grupları yalnızca Eşitle |   10,000 - 100,000 | 1,170 - 2,340 dakika | < 30 dakika |
-| Azure AD'de tüm kullanıcıları ve grupları Eşitle |  < 1,000 | < 30 dakika  | < 30 dakika |
-| Azure AD'de tüm kullanıcıları ve grupları Eşitle |  1\.000 - 10.000 | < 30-120 dakika | < 30 dakika |
-| Azure AD'de tüm kullanıcıları ve grupları Eşitle |  10,000 - 100,000  | 713 - 1,425 dakika | < 30 dakika |
-| Tüm kullanıcılar Azure AD'de eşitleme|  < 1,000  | < 30 dakika | < 30 dakika |
-| Tüm kullanıcılar Azure AD'de eşitleme | 1\.000 - 10.000  | 43 - 86 dakika | < 30 dakika |
+| Yalnızca atanan kullanıcıları ve grupları Eşitle |  < 1.000 |  < 30 dakika | < 30 dakika |
+| Yalnızca atanan kullanıcıları ve grupları Eşitle |  1\.000 - 10.000 | 142-708 dakika | < 30 dakika |
+| Yalnızca atanan kullanıcıları ve grupları Eşitle |   10.000-100.000 | 1\.170-2.340 dakika | < 30 dakika |
+| Azure AD 'de tüm kullanıcıları ve grupları eşitleme |  < 1.000 | < 30 dakika  | < 30 dakika |
+| Azure AD 'de tüm kullanıcıları ve grupları eşitleme |  1\.000 - 10.000 | < 30-120 dakika | < 30 dakika |
+| Azure AD 'de tüm kullanıcıları ve grupları eşitleme |  10.000-100.000  | 713-1.425 dakika | < 30 dakika |
+| Azure AD 'de tüm kullanıcıları eşitleme|  < 1.000  | < 30 dakika | < 30 dakika |
+| Azure AD 'de tüm kullanıcıları eşitleme | 1\.000 - 10.000  | 43-86 dakika | < 30 dakika |
 
 
-Yapılandırma için **eşitleme atanan kullanıcı ve grupları yalnızca**, şu formüllerden yaklaşık minimum ve maksimum beklenen belirlemek için kullanabileceğiniz **ilk eşitleme** saatler:
+**Yalnızca yapılandırma eşitlemesi atanan kullanıcı ve gruplar**için aşağıdaki formülleri kullanarak yaklaşık en düşük ve en fazla beklenen **ilk zaman döngüsünü** belirleyebilirsiniz:
 
     Minimum minutes =  0.01 x [Number of assigned users, groups, and group members]
     Maximum minutes = 0.08 x [Number of assigned users, groups, and group members] 
     
-Tamamlamak süresini etkileyen faktörler özeti bir **ilk eşitleme**:
+Bir **Başlangıç döngüsünün**tamamlanışında geçen süreyi etkileyen faktörlerin Özeti:
 
-- Kullanıcılar ve gruplar sağlama kapsamında toplam sayısı.
+- Sağlama için kapsamdaki Toplam Kullanıcı ve grup sayısı.
 
-- Kullanıcılar, gruplar ve Grup üyeleri kaynak sistemde bulunan (Azure AD) toplam sayısı.
+- Kaynak sistemde (Azure AD) bulunan kullanıcıların, grupların ve grup üyelerinin toplam sayısı.
 
-- Olup kullanıcıların sağlama kapsamında hedef uygulamada mevcut kullanıcılar eşleştirilir veya ilk kez oluşturulması gerekir. Eşitleme işleri, tüm kullanıcılar için ilk kez oluşturulur ele hakkında *iki kez sürece* olarak eşitleme işleri, tüm kullanıcılar için mevcut kullanıcıların eşleştirilir.
+- Sağlama kapsamındaki kullanıcıların hedef uygulamadaki mevcut kullanıcılarla eşleştirilip eşleştirilmediğini veya ilk kez oluşturulması gerektiğini belirtir. Tüm kullanıcılar için ilk kez oluşturulan eşitleme işleri, tüm kullanıcıların mevcut kullanıcılarla eşleştiği eşitleme işleri kadar *iki kez* sürer.
 
-- Hataların sayısı [denetim günlükleri](check-status-user-account-provisioning.md). Çok sayıda hata ve sağlama hizmeti bir karantina duruma geçti performans daha yavaş olur.    
+- [Sağlama günlüklerindeki](check-status-user-account-provisioning.md)hataların sayısı. Çok sayıda hata varsa ve sağlama hizmeti bir karantina durumuna gittiğinden performans daha yavaştır. 
 
-- İstek hız sınırları ve hedef sistem tarafından uygulanan kısıtlama. Bazı hedef sistemleri, istek hızı sınırlarını ve kısıtlama, büyük eşitleme işlemler sırasındaki performansınızı etkileyebilir uygular. Bu şartlar altında çok fazla istek çok hızlı aldığı uygulama yanıt hızını yavaş veya bağlantıyı kapatın. Performansı artırmak için bağlayıcı uygulama isteklerini uygulama bunları işleyebileceğinden daha hızlı göndererek değil ayarlamak gerekir. Microsoft tarafından oluşturulan sağlama bağlayıcılar bu ayarı yapın. 
+- Hedef sistem tarafından uygulanan istek hızı sınırları ve azaltma. Bazı hedef sistemler, büyük eşitleme işlemleri sırasında performansı etkileyebilecek istek hızı sınırlarını ve azaltmasını uygular. Bu koşullarda çok fazla sayıda istek alan bir uygulama, yanıt oranını yavaşlatabilir veya bağlantıyı kapatabilir. Performansı artırmak için bağlayıcının uygulama isteklerini, uygulamanın işleyebileceğinden daha hızlı göndermediğinden ayarlanması gerekir. Microsoft tarafından oluşturulan sağlama bağlayıcıları bu ayarlamayı yapar. 
 
-- Atanan gruplar boyutunu ve sayı. Atanan gruplar eşitleniyor kullanıcıları eşitleme daha uzun sürer. Sayı ve boyutları atanan gruplar performansı etkileyebilir. Bir uygulama varsa [eşlemeleri için nesne eşitleme grubu etkin](customize-application-attributes.md#editing-group-attribute-mappings)grubu adları gibi Grup Özellikleri ve üyeliklerinin yanı sıra kullanıcılar eşitlenmiş. Bu ek eşitlemeler yalnızca kullanıcı, nesneyi eşitleme daha uzun sürer.
+- Atanan grupların sayısı ve boyutları. Atanan grupların eşitlenmesi, kullanıcıları eşitlemeye göre daha uzun sürer. Atanan grupların sayısı ve boyutları, performansı etkiler. Bir uygulamada, [Grup nesnesi eşitlemesi için etkin eşlemeler](customize-application-attributes.md#editing-group-attribute-mappings)varsa, grup adları ve üyelikleri gibi Grup Özellikleri, kullanıcılara ek olarak eşitlenir. Bu ek eşitlemeler, yalnızca kullanıcı nesnelerinden eşitlemeden daha uzun sürer.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 [Azure Active Directory ile SaaS uygulamalarına kullanıcı hazırlama ve sağlamayı kaldırma işlemlerini otomatik hale getirme](https://docs.microsoft.com/azure/active-directory/active-directory-saas-app-provisioning)

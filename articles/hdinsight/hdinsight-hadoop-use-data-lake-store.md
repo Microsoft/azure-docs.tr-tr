@@ -1,82 +1,82 @@
 ---
-title: Azure HDInsight, Hadoop ile Data Lake depolama Gen1 kullanın
-description: Azure Data Lake depolama Gen1 verileri sorgulamaya ve analiz sonuçlarınızı depolamak için hakkında bilgi edinin.
+title: Azure HDInsight 'ta Hadoop ile Data Lake Storage 1. kullanma
+description: Azure Data Lake Storage 1. verileri sorgulamayı ve analizinizdeki sonuçları nasıl depolayacağınızı öğrenin.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.topic: conceptual
-ms.date: 05/10/2019
-ms.openlocfilehash: 890cd7080447649396855bfbe051dca4470a4564
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/04/2019
+ms.openlocfilehash: 309af904f0dbfc0664c4341803cb6a4dc8a2c8a4
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65546291"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73839278"
 ---
-# <a name="use-data-lake-storage-gen1-with-azure-hdinsight-clusters"></a>Data Lake depolama Gen1 Azure HDInsight kümeleri ile kullanma
+# <a name="use-data-lake-storage-gen1-with-azure-hdinsight-clusters"></a>Azure HDInsight kümeleri ile Data Lake Storage 1. kullanma
 
-> [!Note] 
-> Kullanarak yeni HDInsight kümelerini dağıtmayı [Azure Data Lake depolama Gen2](hdinsight-hadoop-use-data-lake-storage-gen2.md) performans ve yeni özellikler.
+> [!Note]
+> Gelişmiş performans ve yeni özellikler için [Azure Data Lake Storage 2.](hdinsight-hadoop-use-data-lake-storage-gen2.md) kullanarak yeni HDInsight kümeleri dağıtın.
 
-HDInsight kümesindeki verileri çözümlemek için veri ya da depolayabilirsiniz içinde [Azure depolama](../storage/common/storage-introduction.md), [Azure Data Lake depolama Gen 1](../data-lake-store/data-lake-store-overview.md) veya [Azure Data Lake depolama Gen 2](../storage/blobs/data-lake-storage-introduction.md). Tüm depolama seçenekleri, kullanıcı verilerini kaybetmeden hesaplama için kullanılan HDInsight kümelerini güvenle silmenizi sağlar.
+HDInsight kümesindeki verileri çözümlemek için verileri [Azure depolama](../storage/common/storage-introduction.md)'da, [Azure Data Lake Storage Gen 1](../data-lake-store/data-lake-store-overview.md)' e veya [Azure Data Lake Storage Gen 2](../storage/blobs/data-lake-storage-introduction.md)' de saklayabilirsiniz. Tüm depolama seçenekleri, hesaplama için kullanılan HDInsight kümelerini Kullanıcı verilerini kaybetmeden güvenle silmenizi sağlar.
 
-Bu makalede, Data Lake depolama Gen1 HDInsight kümeleri ile nasıl çalıştığını öğrenin. Azure Depolama’nın HDInsight kümeleriyle nasıl çalıştığı hakkında bilgi edinmek için bkz. [Azure Depolama’yı Azure HDInsight kümeleri ile kullanma](hdinsight-hadoop-use-blob-storage.md). HDInsight kümesi oluşturma hakkında daha fazla bilgi için bkz. [Apache Hadoop kümeleri oluşturma HDInsight](hdinsight-hadoop-provision-linux-clusters.md).
+Bu makalede, Data Lake Storage 1. HDInsight kümeleri ile nasıl çalıştığını öğrenirsiniz. Azure Depolama’nın HDInsight kümeleriyle nasıl çalıştığı hakkında bilgi edinmek için bkz. [Azure Depolama’yı Azure HDInsight kümeleri ile kullanma](hdinsight-hadoop-use-blob-storage.md). HDInsight kümesi oluşturma hakkında daha fazla bilgi için bkz. [HDInsight 'ta Apache Hadoop kümeleri oluşturma](hdinsight-hadoop-provision-linux-clusters.md).
 
 > [!NOTE]  
-> Bu yüzden Data Lake depolama Gen1 güvenli bir kanal üzerinden her zaman erişilebilir hiçbir `adls` dosya sistemi Düzen adı. Her zaman `adl` kullanırsınız.
+> Data Lake Storage 1. her zaman güvenli bir kanaldan erişilir, bu nedenle `adls` dosya sistemi Düzen adı yoktur. Her zaman `adl` kullanırsınız.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="availability-for-hdinsight-clusters"></a>HDInsight kümeleri için kullanılabilirlik
 
-Apache Hadoop varsayılan dosya sistemi kavramını destekler. Varsayılan dosya sistemi varsayılan şema ve yetkilisi anlamına gelir. Bu göreceli yolları çözümlemek için de kullanılabilir. HDInsight kümesi oluşturma işlemi sırasında varsayılan dosya sistemi olarak Azure storage'da bir blob kapsayıcısı belirtebilir veya HDInsight 3.5 ve yeni sürümler ile Azure depolama veya Azure Data Lake depolama Gen1 ile varsayılan dosya sistemi olarak seçebilirsiniz bir Bazı özel durumlar. 
+Apache Hadoop, varsayılan dosya sisteminin bir kavramını destekler. Varsayılan dosya sistemi varsayılan şema ve yetkilisi anlamına gelir. Bu göreceli yolları çözümlemek için de kullanılabilir. HDInsight kümesi oluşturma işlemi sırasında Azure depolama 'da bir blob kapsayıcısını varsayılan dosya sistemi olarak belirtebilir veya HDInsight 3,5 ve daha yeni sürümlerde Azure Storage veya Azure Data Lake Storage 1. ile varsayılan dosya sistemi olarak seçebilirsiniz. birkaç özel durum.
 
-HDInsight kümeleri Data Lake depolama Gen1 iki şekilde kullanabilir:
+HDInsight kümeleri, Data Lake Storage 1. iki şekilde kullanabilir:
 
 * Varsayılan depolama alanı olarak
 * Azure Depolama Blobunun varsayılan depolama alanı olduğu durumlarda ek depolama alanı olarak.
 
-Şu anda, varsayılan depolama alanı ve ek depolama hesapları Data Lake depolama Gen1 kullanan türleri/sürümleri desteği yalnızca bazı HDInsight küme:
+Şu andan itibaren, HDInsight küme türleri/sürümleri, varsayılan depolama ve ek depolama hesapları olarak Data Lake Storage 1. kullanmayı destekler:
 
-| HDInsight küme türü | Varsayılan depolama alanı olarak Data Lake depolama Gen1 | Ek depolama alanı olarak Data Lake depolama Gen1| Notlar |
+| HDInsight küme türü | Varsayılan depolama alanı olarak Data Lake Storage 1. | Ek depolama alanı olarak Data Lake Storage 1.| Notlar |
 |------------------------|------------------------------------|---------------------------------------|------|
-| HDInsight sürüm 4.0 | Hayır | Hayır |ADLS Gen1 HDInsight 4.0 ile desteklenmiyor |
+| HDInsight sürüm 4,0 | Hayır | Hayır |HDInsight 4,0 ADLS 1. desteklenmez |
 | HDInsight sürümü 3.6 | Evet | Evet | HBase dışında|
 | HDInsight sürümü 3.5 | Evet | Evet | HBase dışında|
 | HDInsight sürümü 3.4 | Hayır | Evet | |
 | HDInsight sürümü 3.3 | Hayır | Hayır | |
 | HDInsight sürümü 3.2 | Hayır | Evet | |
-| Storm | | |Data Lake depolama Gen1 bir Storm topolojisinden veri yazmak için kullanabilirsiniz. Data Lake Storage, ardından okunabilir bir Storm topolojisinden okunabilecek başvuru verileri için de kullanabilirsiniz.|
+| Storm | | |Data Lake Storage 1., bir fırtınası topolojisinden veri yazmak için kullanabilirsiniz. Daha sonra, bir fırtınası topolojisi tarafından okunabilen başvuru verileri için Data Lake Storage de kullanabilirsiniz.|
 
 > [!WARNING]  
-> HDInsight HBase ile Azure Data Lake depolama Gen1 desteklenmiyor
+> HDInsight HBase Azure Data Lake Storage 1. ile desteklenmiyor
 
-Ek depolama hesabı Data Lake depolama Gen1 kullanarak, performans veya okuma veya kümeden Azure depolamaya yazma olanağı etkilemez.
+Ek depolama hesabı olarak Data Lake Storage 1. kullanmak, performansı veya kümeden Azure depolama alanını okuma veya yazma özelliğini etkilemez.
 
-## <a name="use-data-lake-storage-gen1-as-default-storage"></a>Varsayılan depolama alanı olarak Data Lake depolama Gen1 kullanın
+## <a name="use-data-lake-storage-gen1-as-default-storage"></a>Data Lake Storage 1. varsayılan depolama olarak kullan
 
-HDInsight ile varsayılan depolama alanı olarak Data Lake depolama Gen1 dağıtıldığında, kümeyle ilişkili dosyalar depolanan `adl://mydatalakestore/<cluster_root_path>/`burada `<cluster_root_path>` Data Lake Store içinde oluşturduğunuz klasörün adıdır. Her küme için kök yolu belirterek, birden fazla küme için aynı Data Lake Storage hesabını kullanabilirsiniz. Bunu yaptığınızda şöyle bir durum olabilir:
+HDInsight, varsayılan depolama alanı olarak Data Lake Storage 1. dağıtıldığında, küme ile ilgili dosyalar `adl://mydatalakestore/<cluster_root_path>/`depolanır; burada `<cluster_root_path>` Data Lake Storage içinde oluşturduğunuz klasörün adıdır. Her küme için bir kök yolu belirterek, birden fazla küme için aynı Data Lake Storage hesabını kullanabilirsiniz. Bunu yaptığınızda şöyle bir durum olabilir:
 
 * Cluster1 `adl://mydatalakestore/cluster1storage` yolunu kullanabilir.
 * Cluster2 `adl://mydatalakestore/cluster2storage` yolunu kullanabilir.
 
-Her iki hesabın aynısını Data Lake depolama Gen1 kullandığına dikkat edin **mydatalakestore**. Her küme Data Lake Store içinde kendi kök dosya sistemine erişebilir. Özellikle Azure portalı dağıtımı deneyimi sizden kök yol olarak **/clusters/\<clustername>** gibi bir klasör adı kullanmanızı ister.
+Her iki küme de aynı Data Lake Storage 1. hesabını kullanır **mydatalakestore**. Her kümenin, Data Lake Storage içinde kendi kök dosya sistemine erişimi vardır. Özellikle Azure portalı dağıtımı deneyimi sizden kök yol olarak **/clusters/\<clustername>** gibi bir klasör adı kullanmanızı ister.
 
-Varsayılan depolama alanı olarak Data Lake depolama Gen1 kullanabilmek için aşağıdaki yollara hizmet sorumlusu erişimi vermeniz gerekir:
+Data Lake Storage 1. varsayılan depolama alanı olarak kullanabilmek için, hizmet sorumlusu erişimini aşağıdaki yollara vermeniz gerekir:
 
-- Data Lake depolama Gen1 hesabının kökü.  Örneğin: adl://mydatalakestore/.
-- Tüm küme klasörlerine yönelik klasör.  Örneğin: adl://mydatalakestore/clusters.
-- Kümenin klasörü.  Örneğin: adl://mydatalakestore/clusters/cluster1storage.
+* Data Lake Storage 1. hesabı kökü.  Örneğin: adl://mydatalakestore/.
+* Tüm küme klasörlerine yönelik klasör.  Örneğin: adl://mydatalakestore/clusters.
+* Kümenin klasörü.  Örneğin: adl://mydatalakestore/clusters/cluster1storage.
 
-Data Lake Storage'ı yapılandırmak için hizmet sorumlusu oluşturma ve erişim verme daha fazla bilgi için bkz erişim.
+Hizmet sorumlusu oluşturma ve erişim verme hakkında daha fazla bilgi için bkz. Configure Data Lake Storage Access.
 
-### <a name="extracting-a-certificate-from-azure-keyvault-for-use-in-cluster-creation"></a>Küme oluşturma kullanmak için Azure anahtar Kasası ' bir sertifika ayıklanıyor
+### <a name="extracting-a-certificate-from-azure-keyvault-for-use-in-cluster-creation"></a>Küme oluşturmada kullanılmak üzere Azure Keykasasından bir sertifika ayıklama
 
-Sertifika, hizmet sorumlusu için Azure anahtar Kasası'nda depolanır ve yeni küme için varsayılan depolama alanı olarak Azure Data Lake depolama Gen1 ayarlamak istiyorsanız, sertifikayı doğru biçime dönüştürmek için gereken bazı ek adımlar vardır. Aşağıdaki kod parçacıkları nasıl dönüştürme yapılacağı gösterir.
+Yeni bir küme için varsayılan depolama alanı olarak Azure Data Lake Storage 1. ayarlamak istiyorsanız ve hizmet sorumlusuna yönelik sertifika Azure Key Vault ' de depolanıyorsa, sertifikayı doğru biçime dönüştürmek için gereken birkaç ek adım vardır. Aşağıdaki kod parçacıkları, dönüştürmenin nasıl gerçekleştirileceğini gösterir.
 
-İlk olarak, sertifika Key Vault'tan indirilip ayıklanması `SecretValueText`.
+İlk olarak, Key Vault sertifikayı indirin ve `SecretValueText`ayıklayın.
 
 ```powershell
 $certPassword = Read-Host "Enter Certificate Password"
@@ -84,7 +84,7 @@ $cert = (Get-AzureKeyVaultSecret -VaultName 'MY-KEY-VAULT' -Name 'MY-SECRET-NAME
 $certValue = [System.Convert]::FromBase64String($cert.SecretValueText)
 ```
 
-Ardından, dönüştürme `SecretValueText` bir sertifikaya.
+Sonra `SecretValueText` bir sertifikaya dönüştürün.
 
 ```powershell
 $certObject = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList $certValue,$null,"Exportable, PersistKeySet"
@@ -92,7 +92,7 @@ $certBytes = $certObject.Export([System.Security.Cryptography.X509Certificates.X
 $identityCertificate = [System.Convert]::ToBase64String($certBytes)
 ```
 
-Kullanabileceğiniz sonra `$identityCertificate` aşağıdaki kod parçacığını olduğu gibi yeni bir kümeye dağıtmak için:
+Ardından, aşağıdaki kod parçacığında olduğu gibi yeni bir küme dağıtmak için `$identityCertificate` kullanabilirsiniz:
 
 ```powershell
 New-AzResourceGroupDeployment `
@@ -106,65 +106,126 @@ New-AzResourceGroupDeployment `
     -servicePrincipalApplicationId $application.ApplicationId
 ```
 
-## <a name="use-data-lake-storage-gen1-as-additional-storage"></a>Ek depolama alanı olarak Data Lake depolama Gen1 kullanın
+## <a name="use-data-lake-storage-gen1-as-additional-storage"></a>Ek depolama alanı olarak Data Lake Storage 1. kullan
 
-Küme için ek depolama alanı olarak Data Lake depolama Gen1 kullanabilirsiniz. Böyle durumlarda kümenin varsayılan depolama ya da bir Azure depolama blobu veya Data Lake Store hesabı olabilir. HDInsight işlerini ek depolama alanı olarak Data Lake Store içinde depolanan verilere göre çalıştırıyorsanız, dosyaları tam yolu kullanmanız gerekir. Örneğin:
-
-    adl://mydatalakestore.azuredatalakestore.net/<file_path>
-
-Artık URL'de **cluster_root_path** olmadığını unutmayın. Tüm yapmanız gereken dosyaların yolunu sağlamanız Data Lake Storage varsayılan depolama alanı bu durumda olmadığından olmasıdır.
-
-Ek depolama alanı olarak Data Lake depolama Gen1 kullanabilmek için yalnızca dosyalarınızın depolandığı yollara hizmet sorumlusu erişimi vermeniz gerekir.  Örneğin:
+Data Lake Storage 1., küme için ek depolama alanı olarak da kullanabilirsiniz. Bu gibi durumlarda, küme varsayılan depolaması bir Azure Depolama Blobu ya da Data Lake Storage hesabı olabilir. HDInsight işlerini ek depolama alanı olarak Data Lake Storage depolanan verilere karşı çalıştırıyorsanız, dosyaların tam yolunu kullanmanız gerekir. Örneğin:
 
     adl://mydatalakestore.azuredatalakestore.net/<file_path>
 
-Data Lake Storage'ı yapılandırmak için hizmet sorumlusu oluşturma ve erişim verme daha fazla bilgi için bkz erişim.
+Artık URL'de **cluster_root_path** olmadığını unutmayın. Bunun nedeni, bu durumda Data Lake Storage bir varsayılan depolama olmadığından, tüm yapmanız gereken dosyaların yolunu sağlamaktır.
 
+Bir Data Lake Storage 1. ek depolama alanı olarak kullanabilmek için, yalnızca Dosyalarınızın depolandığı yollara hizmet sorumlusu erişimi vermeniz gerekir.  Örneğin:
 
-## <a name="use-more-than-one-data-lake-storage-accounts"></a>Birden fazla Data Lake Storage hesaplarını kullanma
+    adl://mydatalakestore.azuredatalakestore.net/<file_path>
 
-Bir Data Lake Store hesabına ek olarak ekleme ve birden fazla Data Lake Storage ekleme hesapları bir veya birden fazla Data Lake Storage hesaplarını verilerde HDInsight kümesine izin verilerek gerçekleştirilir. Bkz: yapılandırma Data Lake depolama erişim.
+Hizmet sorumlusu oluşturma ve erişim verme hakkında daha fazla bilgi için bkz. Configure Data Lake Storage Access.
 
-## <a name="configure-data-lake-storage-access"></a>Data Lake Store erişimini yapılandırma
+## <a name="use-more-than-one-data-lake-storage-accounts"></a>Birden fazla Data Lake Storage hesabı kullan
 
-HDInsight kümenizden Data Lake Store erişimi yapılandırmak için bir Azure Active directory (Azure AD) hizmet sorumlusu olması gerekir. Hizmet sorumlusu yalnızca bir Azure AD yöneticisi tarafından oluşturulabilir. Hizmet sorumlusunun bir sertifika ile oluşturulması gerekir. Daha fazla bilgi için [hızlı başlangıç: HDInsight kümelerinde ayarlama](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md), ve [self-otomatik olarak imzalanan sertifika ile hizmet sorumlusu oluşturma](../active-directory/develop/howto-authenticate-service-principal-powershell.md#create-service-principal-with-self-signed-certificate).
+Bir Data Lake Storage hesabını ek olarak eklemek ve birden fazla Data Lake Storage hesabı eklemek, bir veya daha fazla Data Lake Storage hesabında veri üzerinde HDInsight kümesi izni vererek gerçekleştirilir. Bkz. Data Lake Storage erişimi yapılandırma.
+
+## <a name="configure-data-lake-storage-access"></a>Data Lake Storage erişimini yapılandırma
+
+HDInsight kümenizdeki Data Lake Storage erişimi yapılandırmak için bir Azure Active Directory (Azure AD) hizmet sorumlusuna sahip olmanız gerekir. Hizmet sorumlusu yalnızca bir Azure AD yöneticisi tarafından oluşturulabilir. Hizmet sorumlusunun bir sertifika ile oluşturulması gerekir. Daha fazla bilgi edinmek için bkz. [Hızlı başlangıç: HDInsight'ta kümeleri ayarlama](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md) ve [Otomatik olarak imzalanan sertifika ile hizmet sorumlusu oluşturma](../active-directory/develop/howto-authenticate-service-principal-powershell.md#create-service-principal-with-self-signed-certificate).
 
 > [!NOTE]  
-> HDInsight kümesi için ek depolama alanı olarak Azure Data Lake depolama Gen1 kullanılacak kullanacaksanız, bu makalede açıklandığı gibi kümeyi oluştururken yapmanız önemle önerilir. Ekleyerek Azure Data Lake depolama Gen1 var olan bir HDInsight kümesine ek depolama alanı olarak desteklenen bir senaryo değildir.
->
+> HDInsight kümesi için ek depolama alanı olarak Azure Data Lake Storage 1. kullanacaksanız, bu makalede açıklandığı gibi kümeyi oluştururken bunu yapmanızı önemle öneririz. Mevcut bir HDInsight kümesine ek depolama alanı olarak Azure Data Lake Storage 1. eklemek, desteklenen bir senaryo değildir.
 
 ## <a name="access-files-from-the-cluster"></a>Kümeden dosyalara erişme
 
-Data Lake Storage dosyalarında bir HDInsight kümesinden erişmenin birkaç yolu vardır.
+HDInsight kümesinden Data Lake Storage dosyalara erişmek için çeşitli yollar vardır.
 
 * **Tam adı kullanarak**. Bu yöntemle, erişmek istediğiniz dosyanın tam yolunu girersiniz.
 
-        adl://mydatalakestore.azuredatalakestore.net/<cluster_root_path>/<file_path>
+    ```
+    adl://<data_lake_account>.azuredatalakestore.net/<cluster_root_path>/<file_path>
+    ```
 
-* **Kısaltılmış yol biçimi kullanarak**. Bu yöntemle, yolu küme kökü ve adl ile değiştirirsiniz: / / /. Yukarıdaki örnekte `adl://mydatalakestore.azuredatalakestore.net/<cluster_root_path>/` ile `adl:///` değerini değiştirebilirsiniz.
+* **Kısaltılmış yol biçimi kullanarak**. Bu yaklaşımda, yolu küme köküne kadar değiştirirsiniz:
 
-        adl:///<file path>
+    ```
+    adl:///<file path>
+    ```
 
-* **Göreli yolu kullanarak**. Bu yöntemle, erişmek istediğiniz dosyanın yalnızca göreli yolunu girersiniz. Örneğin dosyanın tam yolu şöyleyse:
+* **Göreli yolu kullanarak**. Bu yöntemle, erişmek istediğiniz dosyanın yalnızca göreli yolunu girersiniz.
 
-        adl://mydatalakestore.azuredatalakestore.net/<cluster_root_path>/example/data/sample.log
+    ```
+    /<file.path>/
+    ```
 
-    Aynı sample.log dosyasına göreli yolu kullanarak erişebilirsiniz.
+### <a name="data-access-examples"></a>Veri erişimi örnekleri
 
-        /example/data/sample.log
+Örnekler, kümenin baş düğümüne bir [ssh bağlantısını](./hdinsight-hadoop-linux-use-ssh-unix.md) temel alır. Örneklerde, üç URI şeması da kullanılır. `DATALAKEACCOUNT` ve `CLUSTERNAME` ilgili değerleri ile değiştirin.
 
-## <a name="create-hdinsight-clusters-with-access-to-data-lake-storage-gen1"></a>Data Lake depolama Gen1 erişimi olan HDInsight kümeleri oluşturma
+#### <a name="a-few-hdfs-commands"></a>Birkaç bir bu komut
 
-Data Lake depolama Gen1 erişimi olan HDInsight kümeleri oluşturma konusunda ayrıntılı yönergeler için aşağıdaki bağlantıları kullanın.
+1. Yerel depolamada basit bir dosya oluşturun.
 
-* [Portalı kullanma](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md)
-* [PowerShell kullanma (ile varsayılan depolama alanı olarak Data Lake depolama Gen1)](../data-lake-store/data-lake-store-hdinsight-hadoop-use-powershell-for-default-storage.md)
-* [PowerShell kullanma (ek depolama alanı olarak Data Lake depolama Gen1 ile)](../data-lake-store/data-lake-store-hdinsight-hadoop-use-powershell.md)
+    ```bash
+    touch testFile.txt
+    ```
+
+1. Küme depolamada dizinler oluşturun.
+
+    ```bash
+    hdfs dfs -mkdir adl://DATALAKEACCOUNT.azuredatalakestore.net/clusters/CLUSTERNAME/sampledata1/
+    hdfs dfs -mkdir adl:///sampledata2/
+    hdfs dfs -mkdir /sampledata3/
+    ```
+
+1. Yerel depolamadan küme depolamaya veri kopyalama.
+
+    ```bash
+    hdfs dfs -copyFromLocal testFile.txt adl://DATALAKEACCOUNT.azuredatalakestore.net/clusters/CLUSTERNAME/sampledata1/
+    hdfs dfs -copyFromLocal testFile.txt adl:///sampledata2/
+    hdfs dfs -copyFromLocal testFile.txt /sampledata3/
+    ```
+
+1. Küme depolamada dizin içeriğini listeleyin.
+
+    ```bash
+    hdfs dfs -ls adl://DATALAKEACCOUNT.azuredatalakestore.net/clusters/CLUSTERNAME/sampledata1/
+    hdfs dfs -ls adl:///sampledata2/
+    hdfs dfs -ls /sampledata3/
+    ```
+
+#### <a name="creating-a-hive-table"></a>Hive tablosu oluşturma
+
+Üç dosya konumu tanım amacıyla gösterilmiştir. Gerçek yürütme için `LOCATION` girdilerden yalnızca birini kullanın.
+
+```hql
+DROP TABLE myTable;
+CREATE EXTERNAL TABLE myTable (
+    t1 string,
+    t2 string,
+    t3 string,
+    t4 string,
+    t5 string,
+    t6 string,
+    t7 string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
+STORED AS TEXTFILE
+LOCATION 'adl://DATALAKEACCOUNT.azuredatalakestore.net/clusters/CLUSTERNAME/example/data/';
+LOCATION 'adl:///example/data/';
+LOCATION '/example/data/';
+```
+
+## <a name="identify-storage-path-from-abmari"></a>Abmarı 'den depolama yolunu tanımla
+
+Yapılandırılmış varsayılan deponun tüm yolunu belirlemek için, > **config** 'ler ' **e gidin ve** filtre girişi kutusuna `fs.defaultFS` girin.
+
+## <a name="create-hdinsight-clusters-with-access-to-data-lake-storage-gen1"></a>Data Lake Storage 1. erişimi olan HDInsight kümeleri oluşturma
+
+Data Lake Storage 1. erişimi olan HDInsight kümeleri oluşturma hakkında ayrıntılı yönergeler için aşağıdaki bağlantıları kullanın.
+
+* [Portal’ı kullanma](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md)
+* [PowerShell 'i kullanma (Data Lake Storage 1. varsayılan depolama alanı olarak)](../data-lake-store/data-lake-store-hdinsight-hadoop-use-powershell-for-default-storage.md)
+* [PowerShell 'i kullanma (Data Lake Storage 1. ek depolama alanı olarak)](../data-lake-store/data-lake-store-hdinsight-hadoop-use-powershell.md)
 * [Azure şablonlarını kullanma](../data-lake-store/data-lake-store-hdinsight-hadoop-use-resource-manager-template.md)
 
-## <a name="refresh-the-hdinsight-certificate-for-data-lake-storage-gen1-access"></a>Data Lake depolama Gen1 erişim HDInsight sertifikasını Yenile
+## <a name="refresh-the-hdinsight-certificate-for-data-lake-storage-gen1-access"></a>Data Lake Storage 1. erişim için HDInsight sertifikasını yenileme
 
-Aşağıdaki örnek PowerShell kodu yerel dosya ya da Azure Key Vault, sertifika okur ve HDInsight kümenizi erişim Azure Data Lake depolama Gen1 yeni sertifikayı güncelleştirir. Kendi HDInsight küme adı, kaynak grubu adı, abonelik kimliği, uygulama kimliği, sertifika yerel yolu belirtin. İstendiğinde parolayı yazın.
+Aşağıdaki örnek PowerShell kodu bir sertifikayı yerel bir dosyadan veya Azure Key Vault okur ve HDInsight kümenizi, Azure Data Lake Storage 1. erişmek için yeni sertifikayla güncelleştirir. Kendi HDInsight küme adınızı, kaynak grubu adını, abonelik KIMLIĞINI, uygulama KIMLIĞINI, sertifikaya yönelik yerel yolu belirtin. İstendiğinde parolayı yazın.
 
 ```powershell-interactive
 $clusterName = '<clustername>'
@@ -237,29 +298,15 @@ Invoke-AzResourceAction `
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, HDFS uyumlu Azure Data Lake kullanmayı öğrendiniz depolama Gen1 HDInsight ile. Bu, ölçeklenebilir, uzun vadeli, arşivlemeli veri edinme çözümleri oluşturmanıza ve depolanan yapılandırılmış ve yapılandırılmamış verilerdeki bilgilerin kilidini açmak için HDInsight kullanmanıza olanak sağlar.
+
+Bu makalede, bkz. HDInsight ile uyumlu Azure Data Lake Storage 1. kullanmayı öğrendiniz. Bu, ölçeklenebilir, uzun vadeli, arşivlemeli veri edinme çözümleri oluşturmanıza ve depolanan yapılandırılmış ve yapılandırılmamış verilerdeki bilgilerin kilidini açmak için HDInsight kullanmanıza olanak sağlar.
 
 Daha fazla bilgi için bkz.
 
-* [Azure HDInsight'ı Kullanmaya Başlama][hdinsight-get-started]
-* [Hızlı Başlangıç: HDInsight kümelerinde ayarlama](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md)
-* [Data Lake depolama Gen1 kullanmak için HDInsight kümesi oluşturmak için Azure PowerShell kullanma](../data-lake-store/data-lake-store-hdinsight-hadoop-use-powershell.md)
-* [HDInsight'a veri yükleme][hdinsight-upload-data]
-* [Apache Hive, HDInsight ile kullanma][hdinsight-use-hive]
-* [Apache Pig, HDInsight ile kullanma][hdinsight-use-pig]
-* [HDInsight ile verilere erişimi kısıtlamak için Azure Depolama Paylaşılan Erişim İmzaları kullanma][hdinsight-use-sas]
-
-[hdinsight-use-sas]: hdinsight-storage-sharedaccesssignature-permissions.md
-[powershell-install]: /powershell/azureps-cmdlets-docs
-[hdinsight-creation]: hdinsight-hadoop-provision-linux-clusters.md
-[hdinsight-get-started]:hadoop/apache-hadoop-linux-tutorial-get-started.md
-[hdinsight-upload-data]: hdinsight-upload-data.md
-[hdinsight-use-hive]:hadoop/hdinsight-use-hive.md
-[hdinsight-use-pig]:hadoop/hdinsight-use-pig.md
-
-[blob-storage-restAPI]: https://msdn.microsoft.com/library/windowsazure/dd135733.aspx
-[azure-storage-create]:../storage/common/storage-create-storage-account.md
-
-[img-hdi-powershell-blobcommands]: ./media/hdinsight-hadoop-use-blob-storage/HDI.PowerShell.BlobCommands.png
-[img-hdi-quick-create]: ./media/hdinsight-hadoop-use-blob-storage/HDI.QuickCreateCluster.png
-[img-hdi-custom-create-storage-account]: ./media/hdinsight-hadoop-use-blob-storage/HDI.CustomCreateStorageAccount.png  
+* [Azure HDInsight 'ı kullanmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md)
+* [Hızlı başlangıç: HDInsight'ta kümeleri ayarlama](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md)
+* [Azure PowerShell kullanarak Data Lake Storage 1. kullanmak için HDInsight kümesi oluşturma](../data-lake-store/data-lake-store-hdinsight-hadoop-use-powershell.md)
+* [HDInsight 'a veri yükleme](hdinsight-upload-data.md)
+* [HDInsight ile Apache Hive kullanma](hadoop/hdinsight-use-hive.md)
+* [HDInsight ile verilere erişimi kısıtlamak için Azure depolama paylaşılan erişim Imzalarını kullanma](hdinsight-storage-sharedaccesssignature-permissions.md)
+* [Öğretici: Azure HDInsight 'ta etkileşimli sorgu kullanarak verileri ayıklama, dönüştürme ve yükleme](./interactive-query/interactive-query-tutorial-analyze-flight-data.md)

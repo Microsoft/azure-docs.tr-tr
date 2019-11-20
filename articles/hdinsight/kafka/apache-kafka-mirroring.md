@@ -1,247 +1,261 @@
 ---
-title: Apache Kafka konularını - Azure HDInsight yansıtma
-description: İkincil bir kümeye konuları yansıtarak bir HDInsight kümesinde Kafka kopyasını korumak için Apache Kafka'nın yansıtma özelliğini kullanmayı öğrenin.
+title: Yansıtma Apache Kafka konuları-Azure HDInsight
+description: Bir ikincil kümeye konuları yansıtarak HDInsight kümesinde bir Kafka çoğaltmasını sürdürmek için Apache Kafka yansıtma özelliğini kullanmayı öğrenin.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
-ms.date: 05/01/2018
-ms.openlocfilehash: ba04ed7c95cbf00d5996ef237d3ac65053da0662
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 05/24/2019
+ms.openlocfilehash: 270bc5401e58f4e5c99cae3c5ab06b4f03ae9543
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64727381"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71123235"
 ---
-# <a name="use-mirrormaker-to-replicate-apache-kafka-topics-with-kafka-on-hdinsight"></a>HDInsight üzerinde Kafka ile Apache Kafka konularını çoğaltma MirrorMaker kullanın
+# <a name="use-mirrormaker-to-replicate-apache-kafka-topics-with-kafka-on-hdinsight"></a>HDInsight üzerinde Kafka ile Apache Kafka konuları çoğaltmak için MirrorMaker kullanın
 
-İkincil bir kümeye konuları çoğaltmak için Apache Kafka'nın yansıtma özelliğini kullanmayı öğrenin. Yansıtma sürekli bir işlem olarak çalışan veya aralıklı olarak geçirme yöntemi olarak kullanılan bir kümeden veri.
+Apache Kafka yansıtma özelliğini kullanarak konuları ikincil bir kümeye nasıl çoğaltacağınızı öğrenin. Yansıtma sürekli bir işlem olarak çalıştırılabilir veya bir kümeden diğerine veri geçirme yöntemi olarak zaman zaman kullanılabilir.
 
-Bu örnekte, yansıtma konular iki HDInsight kümeleri arasında çoğaltmak için kullanılır. Bir Azure sanal ağ aynı bölgedeki iki kümeleridir.
+Bu örnekte, iki HDInsight kümesi arasındaki konuları çoğaltmak için yansıtma kullanılır. Her iki küme de farklı veri merkezlerinde farklı sanal ağlarda bulunur.
 
 > [!WARNING]  
-> Yansıtma, hataya dayanıklılık elde etmek için bir yol değerlendirilmemelidir. Uzaklık içindeki bir konuya öğelerine kaynak ve hedef kümeler arasında farklı nedenle istemciler birbirinin yerine iki kullanamazsınız.
+> Yansıtma, hata toleransı elde etmek için bir yol olarak değerlendirilmemelidir. Bir konu içindeki öğelerin farkı, birincil ve ikincil kümeler arasında farklıdır, bu nedenle istemciler iki birbirlerinin yerine kullanamaz.
 >
-> Hataya dayanıklılık hakkında endişeleriniz varsa, çoğaltma konular için küme içinde ayarlamanız gerekir. Daha fazla bilgi için [HDInsight üzerinde Apache Kafka ile çalışmaya başlama](apache-kafka-get-started.md).
+> Hataya dayanıklılık konusunda endişeleriniz varsa, kümenizin içindeki konular için çoğaltma ayarlamanız gerekir. Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
 
-## <a name="how-apache-kafka-mirroring-works"></a>Apache Kafka ile yansıtma nasıl çalışır
+## <a name="how-apache-kafka-mirroring-works"></a>Apache Kafka yansıtma nasıl kullanılır
 
-Kullanarak çalışır yansıtma [MirrorMaker](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) Aracı (Apache Kafka parçası) kaynak kümede konulardan, kayıtları ve ardından hedef kümede yerel bir kopyasını oluşturun. MirrorMaker kullanan bir (veya daha fazla) *tüketiciler* kaynak kümesinden okuyan ve *üretici* (hedef) yerel kümeye yazar.
+Yansıtma, birincil kümedeki konulardaki kayıtları tüketmek ve sonra ikincil kümede yerel bir kopya oluşturmak için, [Mirroroluşturucu](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) aracı (Apache Kafka bir parçası) kullanılarak işe yarar. MirrorMaker birincil kümeden okuyan bir (veya daha fazla) *Tüketici* ve yerel (ikincil) kümeye yazan bir *üretici* kullanır.
 
-Aşağıdaki diyagramda, yansıtma işlemini gösterir:
+Olağanüstü durum kurtarma için en yararlı yansıtma kurulumu, farklı Azure bölgelerinde Kafka kümelerinden yararlanır. Bunu başarmak için kümelerin bulunduğu sanal ağlar birlikte işlenir.
 
-![Yansıtma işlem diyagramı](./media/apache-kafka-mirroring/kafka-mirroring.png)
+Aşağıdaki diyagramda, yansıtma işlemi ve iletişimin kümeler arasında nasıl akabileceği gösterilmektedir:
 
-HDInsight üzerinde Apache Kafka, genel internet üzerinden Kafka hizmetine erişim sağlamaz. Kafka üreticileri veya tüketiciler Kafka kümesindeki düğümler aynı Azure sanal ağ içinde olmalıdır. Bu örnekte, Kafka kaynak ve hedef kümeler, bir Azure sanal ağında yer alır. Aşağıdaki diyagramda, nasıl kümeleri iletişimin akış gösterilmektedir:
+![Yansıtma işleminin diyagramı](./media/apache-kafka-mirroring/kafka-mirroring-vnets2.png)
 
-![Bir Azure sanal ağında diyagramı kaynak ve hedef Kafka kümeleri](./media/apache-kafka-mirroring/spark-kafka-vnet.png)
+Birincil ve ikincil kümeler düğüm ve bölüm sayısında farklı olabilir ve konuların içindeki uzaklıklar da farklı olabilir. Yansıtma, bölümleme için kullanılan anahtar değerini korur, bu nedenle kayıt sırası anahtar başına temelinde korunur.
 
-Kaynak ve hedef küme düğümlerine ve bölümlerine sayısında farklı olabilir ve uzaklık içinde konuları da farklıdır. Kayıt siparişi anahtar başına temelinde korunacak şekilde yansıtma bölümleme için kullanılan anahtar değerini korur.
+### <a name="mirroring-across-network-boundaries"></a>Ağ sınırları genelinde yansıtma
 
-### <a name="mirroring-across-network-boundaries"></a>Ağ sınırları ötesinde yansıtma
+Farklı ağlardaki Kafka kümeleri arasında yansıtma yapmanız gerekiyorsa, aşağıdaki ek konular vardır:
 
-Farklı ağlarda Kafka kümeleri arasında yansıtmak gerekiyorsa, aşağıdaki ek hususlar vardır:
+* **Ağ geçitleri**: Ağların TCP/IP düzeyinde iletişim kurabilmesi gerekir.
 
-* **Ağ geçitleri**: Ağları TCPIP düzeyinde iletişim kurabilmesi gerekir.
+* **Sunucu adresleme**: Küme düğümlerinizin IP adreslerini veya tam etki alanı adlarını kullanarak adreslemek üzere seçim yapabilirsiniz.
 
-* **Ad çözümlemesi**: Her ağ içinde Kafka kümeleri ana bilgisayar adları kullanarak birbirine mümkün olması gerekir. Bu, diğer ağlara istekleri iletmek üzere yapılandırıldığı her ağındaki bir etki alanı adı sistemi (DNS) sunucusu gerektirebilir.
-
-    Bir Azure sanal ağ ile sağlanan otomatik DNS kullanmak yerine ağ oluştururken, özel bir DNS sunucusu ve sunucunun IP adresini belirtmeniz gerekir. Sanal ağ oluşturulduktan sonra ardından bu IP adresini kullanan bir Azure sanal makine oluşturma sonra yükleyin ve DNS yazılım üzerinde yapılandırmanız gerekir.
+    * **IP adresleri**: Kafka kümelerinizi IP adresi tanıtımı kullanacak şekilde yapılandırırsanız, aracı düğümlerinin ve Zookeeper düğümlerinin IP adreslerini kullanarak yansıtma kurulumuna devam edebilirsiniz.
+    
+    * **Etki alanı adları**: IP adresi tanıtımı için Kafka kümelerinizi yapılandırmazsanız kümelerin, tam etki alanı adlarını (FQDN) kullanarak birbirlerine bağlanabilmesi gerekir. Bu, istekleri diğer ağlara iletmek üzere yapılandırılmış her bir ağda bir etki alanı adı sistemi (DNS) sunucusu gerektirir. Bir Azure sanal ağı oluştururken, ağla birlikte sunulan otomatik DNS kullanmak yerine, sunucu için özel bir DNS sunucusu ve IP adresi belirtmeniz gerekir. Sanal ağ oluşturulduktan sonra, bu IP adresini kullanan bir Azure sanal makinesi oluşturmanız ve ardından DNS yazılımını bu IP ile yapılandırmanız gerekir.
 
     > [!WARNING]  
-    > Oluşturun ve HDInsight sanal ağa yüklemeden önce özel bir DNS sunucusu yapılandırın. Sanal ağ için yapılandırılan DNS sunucusunun kullanılacağını HDInsight için gereken ek yapılandırma yoktur.
+    > HDInsight 'ı sanal ağa yüklemeden önce özel DNS sunucusu oluşturun ve yapılandırın. HDInsight 'ın sanal ağ için yapılandırılmış DNS sunucusunu kullanması için ek bir yapılandırma gerekmez.
 
-İki Azure sanal ağları bağlama hakkında daha fazla bilgi için bkz. [bir VNet-VNet bağlantısını yapılandırma](../../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md).
+İki Azure sanal ağını bağlama hakkında daha fazla bilgi için bkz. [VNET-VNET bağlantısını yapılandırma](../../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md).
 
-## <a name="create-apache-kafka-clusters"></a>Apache Kafka kümeleri oluşturma
+## <a name="mirroring-architecture"></a>Yansıtma mimarisi
 
-Bir Azure sanal ağı oluşturabilirsiniz ve el ile Kafka kümeleri olsa da bir Azure Resource Manager şablonu kullanmak daha kolaydır. Bir Azure sanal ağı ve iki Kafka kümeleri, Azure aboneliğinize dağıtmak için aşağıdaki adımları kullanın.
+Bu mimari, farklı kaynak gruplarındaki ve sanal ağlardaki iki kümeyi sunar: **birincil** ve **İkincil**.
 
-1. Aşağıdaki düğmeyi kullanarak Azure'da oturum açın ve şablonu Azure portalında açın.
-   
-    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fhditutorialdata.blob.core.windows.net%2Farmtemplates%2Fcreate-linux-based-kafka-mirror-cluster-in-vnet-v2.1.json" target="_blank"><img src="./media/apache-kafka-mirroring/deploy-to-azure.png" alt="Deploy to Azure"></a>
-   
-    Azure Resource Manager şablonu **https://hditutorialdata.blob.core.windows.net/armtemplates/create-linux-based-kafka-mirror-cluster-in-vnet-v2.1.json** sayfasında bulunur.
+### <a name="creation-steps"></a>Oluşturma adımları
 
-    > [!WARNING]  
-    > HDInsight üzerinde Kafka'yı kullanabilmeniz için kümenizin en az üç çalışan düğümü içermesi gerekir. Bu şablon, üç çalışan düğümü içeren bir Kafka kümesi oluşturur.
+1. İki yeni kaynak grubu oluşturun:
 
-2. Girişleri doldurmak için aşağıdaki bilgileri kullanın **özel dağıtım** dikey penceresinde:
+    |Kaynak Grubu | Location |
+    |---|---|
+    | Kafka-birincil-RG | Orta ABD |
+    | Kafka-ikincil-RG | Orta Kuzey ABD |
+
+1. **Kafka-Primary-RG**içinde yeni bir sanal ağ **Kafka-Primary-VNET** oluşturun. Varsayılan ayarları bırakın.
+1. Aynı zamanda varsayılan ayarlarla, **Kafka-Secondary-RG**içinde yeni bir sanal ağ **Kafka-Secondary-VNET** oluşturun.
+
+1. İki yeni Kafka kümesi oluşturun:
+
+    | Küme adı | Kaynak Grubu | Sanal Ağ | Depolama Hesabı |
+    |---|---|---|---|
+    | Kafka-birincil-küme | Kafka-birincil-RG | Kafka-birincil-VNET | kafkaprimarystorage |
+    | Kafka-ikincil küme | Kafka-ikincil-RG | Kafka-ikincil-VNET | kafkasecondarystorage |
+
+1. Sanal ağ eşlemesi oluşturun. Bu adım iki eşleme oluşturur: biri **Kafka-Primary-VNET** 'ten **Kafka-ikincil-VNET** 'e, diğeri **Kafka-ikincil VNET** 'ten **Kafka-Primary-VNET**'e kadar bir geri.
+    1. **Kafka-Primary-VNET** sanal ağını seçin.
+    1. Ayarlar **altında eşlemeler** 'e tıklayın.
+    1. **Ekle**'yi tıklatın.
+    1. **Eşleme Ekle** ekranında, aşağıdaki ekran görüntüsünde gösterildiği gibi ayrıntıları girin.
+
+        ![HDInsight Kafka VNET eşlemesi Ekle](./media/apache-kafka-mirroring/hdi-add-vnet-peering.png)
+
+1. IP tanıtımı yapılandırın:
+    1. Birincil kümenin ambarı panosuna gidin: `https://PRIMARYCLUSTERNAME.azurehdinsight.net`.
+    1. **Hizmetler** > **Kafka**' e tıklayın. **Configs** sekmesine tıklayın.
+    1. Aşağıdaki yapılandırma satırlarını alt **Kafka-env şablonu** bölümüne ekleyin. **Kaydet**’e tıklayın.
     
-    ![HDInsight özel dağıtım](./media/apache-kafka-mirroring/parameters.png)
-    
-    * **Kaynak grubu**: Bir grup oluşturun veya var olanı seçin. Bu grup, HDInsight kümesi içerir.
+        ```
+        # Configure Kafka to advertise IP addresses instead of FQDN
+        IP_ADDRESS=$(hostname -i)
+        echo advertised.listeners=$IP_ADDRESS
+        sed -i.bak -e '/advertised/{/advertised@/!d;}' /usr/hdp/current/kafka-broker/conf/server.properties
+        echo "advertised.listeners=PLAINTEXT://$IP_ADDRESS:9092" >> /usr/hdp/current/kafka-broker/conf/server.properties
+        ```
 
-    * **Konum**: Coğrafi olarak yakın bir konum seçin.
-     
-    * **Temel küme adı**: Bu değer, Kafka kümeleri için temel adı olarak kullanılır. Örneğin, girme **hdı** adlandırılmış kümeler oluşturur **kaynak hdı** ve **dest hdı**.
+    1. **Yapılandırma kaydet** ekranına bir Note girin ve **Kaydet**' e tıklayın.
+    1. Yapılandırma Uyarısı istenirse, **yine de devam et**' e tıklayın.
+    1. **Yapılandırma değişikliklerini kaydet**sayfasında **Tamam** ' a tıklayın.
+    1. Yeniden başlatma gerekli bildiriminde**etkilenen tüm** **Yeniden Başlat ' a**tıklayın.  >  **Tümünü yeniden başlatmayı Onayla**' ya tıklayın.
 
-    * **Küme oturum açma kullanıcı adı**: Kaynak ve hedef için yönetici kullanıcı adı, Kafka kümeleri.
+        ![Apache ambarı yeniden başlatma etkilendi](./media/apache-kafka-mirroring/ambari-restart-notification.png)
 
-    * **Küme oturum açma parolası**: Kaynak ve hedef için yönetici kullanıcı parolası, Kafka kümeleri.
+1. Tüm ağ arabirimlerini dinlemek için Kafka yapılandırın.
+    1. **Hizmetler** Kafka'ninaltındakiconfigs > sekmesinde kalın. **Kafka Broker** bölümünde **Listeners** özelliğini olarak `PLAINTEXT://0.0.0.0:9092`ayarlayın.
+    1. **Kaydet**’e tıklayın.
+    1. **Yeniden Başlat**' a tıklayıp **Tümünü Yeniden Başlat**' ı onaylayın.
 
-    * **SSH kullanıcı adı**: İçin kaynak ve hedef Kafka kümeleri oluşturmak için SSH kullanıcısı.
+1. Birincil küme için Kayıt Aracısı IP adreslerini ve Zookeeper adreslerini kaydeder.
+    1. Ambarı panosundaki **konaklar** ' a tıklayın.
+    1. Aracılar ve zookeepers için IP adreslerini bir yere göz önünde yapın. Aracı düğümlerinin, ana bilgisayar adının ilk iki harfi ve Zookeeper düğümleri ana bilgisayar adının ilk iki harfi olarak **ZK** **'a sahiptir.**
 
-    * **SSH parolası**: Kaynak ve hedef SSH kullanıcısının parolasını Kafka kümeleri.
+        ![Apache ambarı görünümü düğüm IP adresleri](./media/apache-kafka-mirroring/view-node-ip-addresses2.png)
 
-3. **Hüküm ve Koşullar**’ı okuyun ve ardından **Yukarıda belirtilen hüküm ve koşulları kabul ediyorum**’u seçin.
+1. İkinci küme için önceki üç adımı tekrarlayın **Kafka-ikincil-küme**: IP reklacılarını yapılandırın, dinleyicileri ayarlayın ve Broker ve Zookeeper IP adreslerini bir yere göz önünde yapın.
 
-4. Son olarak, **Panoya sabitle**’yi işaretleyin ve **Satın Al**’ı seçin. Kümelerin oluşturulması yaklaşık 20 dakika sürer.
+## <a name="create-topics"></a>Konu başlıkları oluştur
 
-> [!IMPORTANT]  
-> HDInsight kümeleri adı **kaynak BASENAME** ve **dest BASENAME**, BASENAME şablona verdiğiniz adı olduğu yer. Kümeye bağlanırken bu adlar daha sonraki adımlarda kullanın.
-
-## <a name="create-topics"></a>Konu oluşturma
-
-1. Bağlanma **kaynak** SSH kullanarak kümeye:
+1. SSH kullanarak **birincil** kümeye bağlanma:
 
     ```bash
-    ssh sshuser@source-BASENAME-ssh.azurehdinsight.net
+    ssh sshuser@PRIMARYCLUSTER-ssh.azurehdinsight.net
     ```
 
-    Değiştirin **sshuser** ile kümeyi oluştururken kullanılan SSH kullanıcı adı. Değiştirin **BASENAME** kümeyi oluştururken kullanılan temel adına sahip.
+    **Sshuser** öğesini kümeyi oluştururken kullanılan SSH kullanıcı adıyla değiştirin. **BASENAME** değerini, kümeyi oluştururken kullanılan temel adla değiştirin.
 
     Bilgi için bkz. [HDInsight ile SSH kullanma](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-2. Kaynak kümesi için Apache Zookeeper konakları bulmak için aşağıdaki komutları kullanın:
+2. Birincil küme için Apache Zookeeper konaklarıyla bir değişken oluşturmak için aşağıdaki komutu kullanın. Benzer `ZOOKEEPER_IP_ADDRESS1` dizeler, `10.23.0.11` ve `10.23.0.7`gibi daha önce kaydedilen gerçek IP adresleriyle değiştirilmelidir. Özel bir DNS sunucusu ile FQDN çözümlemesi kullanıyorsanız, aracı ve Zookeeper adlarını almak için [aşağıdaki adımları](apache-kafka-get-started.md#getkafkainfo) izleyin.:
 
     ```bash
-    # Install jq if it is not installed
-    sudo apt -y install jq
-    # get the zookeeper hosts for the source cluster
-    export SOURCE_ZKHOSTS=`curl -sS -u admin -G https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/ZOOKEEPER/components/ZOOKEEPER_SERVER | jq -r '["\(.host_components[].HostRoles.host_name):2181"] | join(",")' | cut -d',' -f1,2`
+    # get the zookeeper hosts for the primary cluster
+    export PRIMARY_ZKHOSTS='ZOOKEEPER_IP_ADDRESS1:2181, ZOOKEEPER_IP_ADDRESS2:2181, ZOOKEEPER_IP_ADDRESS3:2181'
     ```
 
-    Değiştirin `$CLUSTERNAME` ile kaynak kümesinin adı. İstendiğinde, küme oturum açma (yönetici) hesabı için parolayı girin.
-
-3. Adlı bir konu oluşturmak için `testtopic`, aşağıdaki komutu kullanın:
+3. Adlı `testtopic`bir konu oluşturmak için aşağıdaki komutu kullanın:
 
     ```bash
-    /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 2 --partitions 8 --topic testtopic --zookeeper $SOURCE_ZKHOSTS
+    /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 2 --partitions 8 --topic testtopic --zookeeper $PRIMARY_ZKHOSTS
     ```
 
-3. Konu oluşturulduğunu doğrulamak için aşağıdaki komutu kullanın:
+3. Konunun oluşturulduğunu doğrulamak için aşağıdaki komutu kullanın:
 
     ```bash
-    /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --list --zookeeper $SOURCE_ZKHOSTS
+    /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --list --zookeeper $PRIMARY_ZKHOSTS
     ```
 
-    Yanıtı içeren `testtopic`.
+    Yanıt içerir `testtopic`.
 
-4. Bu Zookeeper konak bilgilerini görüntülemek için aşağıdakileri kullanın ( **kaynak**) küme:
+4. Bu ( **birincil**) küme için Zookeeper ana bilgisayar bilgilerini görüntülemek için aşağıdakileri kullanın:
 
     ```bash
-    echo $SOURCE_ZKHOSTS
+    echo $PRIMARY_ZKHOSTS
     ```
 
-    Bu bilgiler aşağıdaki metne benzer döndürür:
+    Bu, aşağıdaki metne benzer bilgiler döndürür:
 
-    `zk0-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:2181,zk1-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:2181`
+    `10.23.0.11:2181,10.23.0.7:2181,10.23.0.9:2181`
 
     Bu bilgileri kaydedin. Sonraki bölümde kullanılır.
 
-## <a name="configure-mirroring"></a>Yansıtmasını yapılandırma
+## <a name="configure-mirroring"></a>Yansıtmayı yapılandırma
 
-1. Bağlanma **hedef** farklı bir SSH oturumundan küme:
+1. Farklı bir SSH oturumu kullanarak **İkincil** kümeye bağlanın:
 
     ```bash
-    ssh sshuser@dest-BASENAME-ssh.azurehdinsight.net
+    ssh sshuser@SECONDARYCLUSTER-ssh.azurehdinsight.net
     ```
 
-    Değiştirin **sshuser** ile kümeyi oluştururken kullanılan SSH kullanıcı adı. Değiştirin **BASENAME** kümeyi oluştururken kullanılan temel adına sahip.
+    **Sshuser** öğesini kümeyi oluştururken kullanılan SSH kullanıcı adıyla değiştirin. **Secondarycluster** öğesini kümeyi oluştururken kullanılan adla değiştirin.
 
     Bilgi için bkz. [HDInsight ile SSH kullanma](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-2. A `consumer.properties` ile iletişimi yapılandırmak için kullanılan dosya **kaynak** kümesi. Dosyayı oluşturmak için aşağıdaki komutu kullanın:
+2. Birincil `consumer.properties` kümeyle iletişimi yapılandırmak için bir dosya kullanılır. Dosyayı oluşturmak için aşağıdaki komutu kullanın:
 
     ```bash
     nano consumer.properties
     ```
 
-    Aşağıdaki metni içeriğini kullanın `consumer.properties` dosyası:
+    `consumer.properties` Dosyanın içeriği olarak aşağıdaki metni kullanın:
 
     ```yaml
-    zookeeper.connect=SOURCE_ZKHOSTS
+    zookeeper.connect=PRIMARY_ZKHOSTS
     group.id=mirrorgroup
     ```
 
-    Değiştirin **SOURCE_ZKHOSTS** Zookeeper konak bilgilerle **kaynak** kümesi.
+    **PRIMARY_ZKHOSTS** değerini **BIRINCIL** kümeden Zookeeper IP adresleriyle değiştirin.
 
-    Bu dosya, Kafka kümesi kaynaktan okunurken kullanılacak tüketici bilgileri açıklar. Daha fazla bilgi tüketici yapılandırma için bkz: [tüketici yapılandırmaları](https://kafka.apache.org/documentation#consumerconfigs) kafka.apache.org adresindeki.
+    Bu dosya, birincil Kafka kümesinden okurken kullanılacak tüketici bilgilerini açıklamaktadır. Daha fazla bilgi için tüketici yapılandırması, kafka.apache.org adresindeki [Tüketici yapılandırmaları](https://kafka.apache.org/documentation#consumerconfigs) bölümüne bakın.
 
-    Dosyayı kaydetmek için kullanın **Ctrl + X**, **Y**, ardından **Enter**.
+    Dosyayı kaydetmek için **CTRL + X**, **Y**kullanın ve ardından **girin**.
 
-3. Hedef küme iletişim kuran üretici yapılandırmadan önce ana bilgisayar için aracı bulmalıdır **hedef** kümesi. Bu bilgileri almak için aşağıdaki komutları kullanın:
+3. İkincil kümeyle iletişim kuran üreticisi yapılandırmadan önce, **İkincil** KÜMENIN aracı IP adresleri için bir değişken ayarlayın. Bu değişkeni oluşturmak için aşağıdaki komutları kullanın:
 
     ```bash
-    sudo apt -y install jq
-    DEST_BROKERHOSTS=`curl -sS -u admin -G https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/KAFKA/components/KAFKA_BROKER | jq -r '["\(.host_components[].HostRoles.host_name):9092"] | join(",")' | cut -d',' -f1,2`
-    echo $DEST_BROKERHOSTS
+    export SECONDARY_BROKERHOSTS='BROKER_IP_ADDRESS1:9092,BROKER_IP_ADDRESS2:9092,BROKER_IP_ADDRESS2:9092'
     ```
 
-    Değiştirin `$CLUSTERNAME` hedef küme adı. İstendiğinde, küme oturum açma (yönetici) hesabı için parolayı girin.
+    Komut `echo $SECONDARY_BROKERHOSTS` aşağıdaki metne benzer bilgiler döndürmelidir:
 
-    `echo` Komut bilgileri aşağıdaki metne benzer döndürür:
+    `10.23.0.14:9092,10.23.0.4:9092,10.23.0.12:9092`
 
-        wn0-dest.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092,wn1-dest.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092
-
-4. A `producer.properties` iletişim kurmak için kullanılan dosya __hedef__ kümesi. Dosyayı oluşturmak için aşağıdaki komutu kullanın:
+4. İkincil `producer.properties` kümeyi iletmek için bir dosya kullanılır . Dosyayı oluşturmak için aşağıdaki komutu kullanın:
 
     ```bash
     nano producer.properties
     ```
 
-    Aşağıdaki metni içeriğini kullanın `producer.properties` dosyası:
+    `producer.properties` Dosyanın içeriği olarak aşağıdaki metni kullanın:
 
     ```yaml
-    bootstrap.servers=DEST_BROKERS
+    bootstrap.servers=SECONDARY_BROKERHOSTS
     compression.type=none
     ```
 
-    Değiştirin **DEST_BROKERS** önceki adımdan aracısı bilgileri.
+    **SECONDARY_BROKERHOSTS** değerini, önceki adımda kullanılan aracı IP adresleriyle değiştirin.
 
-    Daha fazla bilgi üretici yapılandırma için bkz: [üretici yapılandırmaları](https://kafka.apache.org/documentation#producerconfigs) kafka.apache.org adresindeki.
+    Daha fazla bilgi üreticisi yapılandırması için kafka.apache.org adresindeki [Producer configs](https://kafka.apache.org/documentation#producerconfigs) bölümüne bakın.
 
-5. Zookeeper konakları için hedef küme bulmak için aşağıdaki komutları kullanın:
+5. İkincil küme için Zookeeper konaklarının IP adreslerine sahip bir ortam değişkeni oluşturmak için aşağıdaki komutları kullanın:
 
     ```bash
-    # Install jq if it is not installed
-    sudo apt -y install jq
-    # get the zookeeper hosts for the source cluster
-    export DEST_ZKHOSTS=`curl -sS -u admin -G https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/ZOOKEEPER/components/ZOOKEEPER_SERVER | jq -r '["\(.host_components[].HostRoles.host_name):2181"] | join(",")' | cut -d',' -f1,2`
+    # get the zookeeper hosts for the secondary cluster
+    export SECONDARY_ZKHOSTS='ZOOKEEPER_IP_ADDRESS1:2181,ZOOKEEPER_IP_ADDRESS2:2181,ZOOKEEPER_IP_ADDRESS3:2181'
     ```
 
-    Değiştirin `$CLUSTERNAME` hedef küme adı. İstendiğinde, küme oturum açma (yönetici) hesabı için parolayı girin.
+7. HDInsight üzerinde Kafka için varsayılan yapılandırma, konuların otomatik olarak oluşturulmasına izin vermez. Yansıtma işlemini başlatmadan önce aşağıdaki seçeneklerden birini kullanmanız gerekir:
 
-7. HDInsight üzerinde Kafka için varsayılan yapılandırma konuları otomatik olarak oluşturulmasını izin vermez. Yansıtma işlemini başlatmadan önce aşağıdaki seçeneklerden birini kullanmanız gerekir:
+    * **İkincil kümede konuları oluşturun**: Bu seçenek ayrıca bölüm sayısını ve çoğaltma faktörünü ayarlamanıza olanak sağlar.
 
-    * **Konular hedef kümede oluşturma**: Bu seçenek, bölümler ve çoğaltma faktörü sayısını ayarlamanızı sağlar.
-
-        Aşağıdaki komutu kullanarak önceden konuları oluşturabilirsiniz:
+        Aşağıdaki komutu kullanarak zaman içinde daha fazla konu oluşturabilirsiniz:
 
         ```bash
-        /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 2 --partitions 8 --topic testtopic --zookeeper $DEST_ZKHOSTS
+        /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 2 --partitions 8 --topic testtopic --zookeeper $SECONDARY_ZKHOSTS
         ```
 
-        Değiştirin `testtopic` oluşturmak için konu adına sahip.
+        Oluşturulacak `testtopic` konunun adıyla değiştirin.
 
-    * **Küme için otomatik konu oluşturmayı yapılandırma**: Bunları farklı sayıda bölüm ve çoğaltma faktörü kaynak konuyu daha oluşturun ancak bu seçenek MirrorMaker konuları, otomatik olarak oluşturmasını sağlar.
+    * **Kümeyi otomatik konu oluşturma Için yapılandırın**: Bu seçenek, MirrorMaker 'ın otomatik olarak konu oluşturmasını sağlar, ancak bunları, birincil konudan farklı sayıda bölüm veya çoğaltma faktörüyle oluşturabilir.
 
-        Konular otomatik olarak oluşturmak için hedef küme yapılandırmak için aşağıdaki adımları gerçekleştirin:
+        İkincil kümeyi otomatik olarak konu başlıkları oluşturacak şekilde yapılandırmak için aşağıdaki adımları uygulayın:
 
-        1. Gelen [Azure portalında](https://portal.azure.com), Kafka kümesi hedef seçin.
-        2. Küme genel bakış'tan seçin __küme Panosu__. Ardından __HDInsight küme Panosu__. İstendiğinde, küme için oturum açma (Yönetici) kimlik bilgilerini kullanarak kimlik doğrulaması.
-        3. Seçin __Kafka__ sayfasının sol taraftaki listeden hizmet.
-        4. Seçin __yapılandırmaları__ sayfanın ortasındaki.
-        5. İçinde __filtre__ değeri alanına, `auto.create`. Bu özellikler ve görüntüler listesini filtreler `auto.create.topics.enable` ayarı.
-        6. Değiştirin `auto.create.topics.enable` true ve ardından __Kaydet__. Not ekleyin ve ardından __Kaydet__ yeniden.
-        7. Seçin __Kafka__ hizmetini seçin __yeniden__ve ardından __etkilenen tüm yeniden başlatma__. Sorulduğunda, __Onayla yeniden tüm__.
+        1. İkincil kümenin ambarı panosuna gidin: `https://SECONDARYCLUSTERNAME.azurehdinsight.net`.
+        1. **Hizmetler** > **Kafka**' e tıklayın. **Configs** sekmesine tıklayın.
+        5. __Filtre__ alanına bir değeri `auto.create`girin. Bu, Özellik listesini filtreler ve `auto.create.topics.enable` ayarı görüntüler.
+        6. Değerini `auto.create.topics.enable` true olarak değiştirin ve ardından __Kaydet__' i seçin. Bir Note ekleyin ve sonra yeniden __Kaydet__ ' i seçin.
+        7. __Kafka__ hizmetini seçin, __Yeniden Başlat__' ı seçin ve ardından __etkilenen tümünü yeniden Başlat__' ı seçin. İstendiğinde, __Tümünü Yeniden Başlat__' ı seçin.
 
-## <a name="start-mirrormaker"></a>MirrorMaker'ı Başlat
+        ![Kafka otomatik oluşturma konularını etkinleştir](./media/apache-kafka-mirroring/kafka-enable-auto-create-topics.png)
 
-1. İçin SSH bağlantısından **hedef** küme, MirrorMaker işlemini başlatmak için aşağıdaki komutu kullanın:
+## <a name="start-mirrormaker"></a>MirrorMaker 'ı Başlat
+
+1. SSH bağlantısından **İkincil** kümeye, mirrormaker işlemini başlatmak için aşağıdaki komutu kullanın:
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-run-class.sh kafka.tools.MirrorMaker --consumer.config consumer.properties --producer.config producer.properties --whitelist testtopic --num.streams 4
@@ -249,55 +263,45 @@ Bir Azure sanal ağı oluşturabilirsiniz ve el ile Kafka kümeleri olsa da bir 
 
     Bu örnekte kullanılan parametreler şunlardır:
 
-    * **--consumer.config**: Tüketici özellikleri içeren dosyayı belirtir. Bu özellikler okur bir tüketici oluşturmak için kullanılan *kaynak* Kafka kümesi.
+    * **--Consumer. config**: Tüketici özelliklerini içeren dosyayı belirtir. Bu özellikler, *birincil* Kafka kümesinden okuyan bir tüketici oluşturmak için kullanılır.
 
-    * **--producer.config**: Üretici özellikleri içeren dosyayı belirtir. Bu özellikler yazan bir üretici oluşturmak için kullanılan *hedef* Kafka kümesi.
+    * **--Producer. config**: Üretici özelliklerini içeren dosyayı belirtir. Bu özellikler, *İkincil* Kafka kümesine yazan bir üretici oluşturmak için kullanılır.
 
-    * **--beyaz liste**: MirrorMaker hedef kaynak kümeden çoğaltır konuların listesi.
+    * **--beyaz liste**: MirrorMaker 'ın birincil kümeden ikincil kümeye çoğaltıldığı konuların listesi.
 
-    * **--num.streams**: Oluşturmak için tüketici iş parçacığı sayısı.
+    * **--say. akışlar**: Oluşturulacak tüketici iş parçacığı sayısı.
 
-   Başlangıç sırasında aşağıdaki metne benzer bilgiler MirrorMaker döndürür:
+    İkincil düğümdeki tüketici artık ileti almayı bekliyor.
 
-    ```json
-    {metadata.broker.list=wn1-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092,wn0-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092, request.timeout.ms=30000, client.id=mirror-group-3, security.protocol=PLAINTEXT}{metadata.broker.list=wn1-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092,wn0-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092, request.timeout.ms=30000, client.id=mirror-group-0, security.protocol=PLAINTEXT}
-    metadata.broker.list=wn1-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092,wn0-kafka.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092, request.timeout.ms=30000, client.id=mirror-group-2, security.protocol=PLAINTEXT}
-    metadata.broker.list=wn1-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092,wn0-source.aazwc2onlofevkbof0cuixrp5h.gx.internal.cloudapp.net:9092, request.timeout.ms=30000, client.id=mirror-group-1, security.protocol=PLAINTEXT}
-    ```
-
-2. İçin SSH bağlantısından **kaynak** küme, bir üretici başlatmak ve konuya ileti göndermek için aşağıdaki komutu kullanın:
+2. SSH bağlantısından **birincil** kümeye aşağıdaki komutu kullanarak bir üretici başlatın ve konuya ileti gönderin:
 
     ```bash
-    SOURCE_BROKERHOSTS=`curl -sS -u admin -G https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/KAFKA/components/KAFKA_BROKER | jq -r '["\(.host_components[].HostRoles.host_name):9092"] | join(",")' | cut -d',' -f1,2`
+    export PRIMARY_BROKERHOSTS=BROKER_IP_ADDRESS1:9092,BROKER_IP_ADDRESS2:9092,BROKER_IP_ADDRESS2:9092
     /usr/hdp/current/kafka-broker/bin/kafka-console-producer.sh --broker-list $SOURCE_BROKERHOSTS --topic testtopic
     ```
 
-    Değiştirin `$CLUSTERNAME` ile kaynak kümesinin adı. İstendiğinde, küme oturum açma (yönetici) hesabı için parolayı girin.
+     Bir imlece sahip boş bir satıra geldiğinizde birkaç metin mesajı yazın. İletiler, **birincil** kümedeki konuya gönderilir. İşiniz bittiğinde, Producer işlemini sonlandırmak için **CTRL + C** tuşlarını kullanın.
 
-     Boş bir satır ile imleç ulaşırsınız zaman içinde birkaç metin iletisi yazın. İletiler konu başlığına gönderilen **kaynak** kümesi. İşiniz bittiğinde, kullanın **Ctrl + C** üretici işlemi sonlandırmak için.
-
-3. İçin SSH bağlantısından **hedef** küme, kullanın **Ctrl + C** MirrorMaker işlemi sonlandırmak için. Bu işlemi sonlandırmak için birkaç saniye sürebilir. İletileri hedefe çoğaltıldığını doğrulamak için aşağıdaki komutu kullanın:
+3. SSH bağlantısından **İkincil** kümeye, mirrormaker işlemini sonlandırmak için **CTRL + C** kullanın. İşlemin bitmesi birkaç saniye sürebilir. İletilerin ikinciye çoğaltıldığından emin olmak için aşağıdaki komutu kullanın:
 
     ```bash
-    /usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper $DEST_ZKHOSTS --topic testtopic --from-beginning
+    /usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $SECONDARY_ZKHOSTS --topic testtopic --from-beginning
     ```
 
-    Değiştirin `$CLUSTERNAME` hedef küme adı. İstendiğinde, küme oturum açma (yönetici) hesabı için parolayı girin.
-
-    Artık konuların listesini içeren `testtopic`, hedef kaynak kümesinden konuya MirrorMaster yansıtan zaman oluşturuldu. Konu başlığından alınan iletileri kaynak kümede girilen ile aynıdır.
+    Bu konu başlığı altında `testtopic`, mirrormaster konuyu ikincil kümeden ikinciye yansıtdığına göre oluşturulan konuların listesi. Konudan alınan iletiler, birincil kümede girdikleriyle aynıdır.
 
 ## <a name="delete-the-cluster"></a>Küme silme
 
 [!INCLUDE [delete-cluster-warning](../../../includes/hdinsight-delete-cluster-warning.md)]
 
-Bu belgedeki adımlarda, aynı Azure kaynak grubu içinde her iki küme oluşturma olduğundan, Azure portalında kaynak grubunu silebilirsiniz. Kaynak grubunun silinmesi, bu belge, Azure sanal ağ ve küme tarafından kullanılan depolama hesabı'nı izleyerek oluşturulan tüm kaynakları kaldırır.
+Bu belgedeki adımlar farklı Azure Kaynak gruplarında kümeler oluşturdu. Oluşturulan tüm kaynakları silmek için, oluşturulan iki kaynak grubunu silebilirsiniz: **Kafka-Primary-RG** ve **Kafka-secondary_rg**. Kaynak gruplarını silmek, kümeler, sanal ağlar ve depolama hesapları da dahil olmak üzere bu belgeyi izleyerek oluşturulan tüm kaynakları kaldırır.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-Bu belgede, nasıl kullanacağınızı öğrendiniz [MirrorMaker](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) bir kopyasını oluşturmak için bir [Apache Kafka](https://kafka.apache.org/) kümesi. Kafka ile çalışmak için diğer yollarını bulmak için aşağıdaki bağlantıları kullanın:
+Bu belgede, [Apache Kafka](https://kafka.apache.org/) kümesinin bir çoğaltmasını oluşturmak Için [mirrormaker](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) 'ın nasıl kullanılacağını öğrendiniz. Kafka ile çalışmanın diğer yollarını saptamak için aşağıdaki bağlantıları kullanın:
 
-* [Apache Kafka MirrorMaker belgeleri](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) cwiki.apache.org konumunda.
-* [HDInsight üzerinde Apache Kafka ile çalışmaya başlama](apache-kafka-get-started.md)
+* Cwiki.apache.org adresinde [MirrorMaker belgeleri Apache Kafka](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) .
+* [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md)
 * [HDInsight üzerinde Apache Kafka ile Apache Spark kullanma](../hdinsight-apache-spark-with-kafka.md)
-* [Apache Storm'u HDInsight üzerinde Apache Kafka ile kullanma](../hdinsight-apache-storm-with-kafka.md)
-* [Apache Kafka ile bir Azure sanal ağına bağlanma](apache-kafka-connect-vpn-gateway.md)
+* [HDInsight üzerinde Apache Kafka ile Apache Storm kullanma](../hdinsight-apache-storm-with-kafka.md)
+* [Azure sanal ağı üzerinden Apache Kafka bağlanma](apache-kafka-connect-vpn-gateway.md)

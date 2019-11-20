@@ -1,8 +1,8 @@
 ---
-title: Azure Active Directory risk olayları | Microsoft Docs
-description: Bu artice risk olayları nelerdir ayrıntılı genel bakış sağlar.
+title: Risk algılamalarını Azure Active Directory | Microsoft Docs
+description: Bu arku, risk algılamaları hakkında ayrıntılı bir genel bakış sunar.
 services: active-directory
-keywords: Azure active directory kimlik koruması, güvenlik, risk, risk düzeyi, güvenlik açığı, güvenlik ilkesi
+keywords: Azure Active Directory kimlik koruması, güvenlik, risk, risk düzeyi, güvenlik açığı, güvenlik ilkesi
 author: MarkusVi
 manager: daveba
 ms.assetid: fa2c8b51-d43d-4349-8308-97e87665400b
@@ -16,160 +16,160 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e50cc4ca9c98cb6a8e0f19cfcf6c1f86f1949beb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e1f3755d61b5fa082665cfdb9aa91d1e31e2d4e4
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67107689"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014473"
 ---
-# <a name="azure-active-directory-risk-events"></a>Azure Active Directory risk olayları
+# <a name="azure-active-directory-risk-detections"></a>Risk algılamalarını Azure Active Directory
 
-Güvenlik ihlallerini büyük çoğunluğu göz önüne bir yerde saldırganların bir kullanıcının kimliğini çalarak bir ortama erişimi elde edin. Tehlikeye atılmış kimlik keşfetme hiçbir kolay bir görevdir. Azure Active Directory, kullanıcı hesaplarınızla ilgili kuşkulu eylemleri algılamak için Uyarlamalı makine öğrenimi algoritmaları ve buluşsal yöntemler kullanır. Her kuşkulu eylem adlı bir kayıt depolanır algılanan bir **risk olayı**.
+Saldırganlar bir kullanıcının kimliğini çalarak bir ortama erişim kazanıyorsa güvenlik ihlallerinin büyük çoğunluğu bu şekilde gerçekleşir. Güvenliği aşılmış kimlikleri bulma işlemi kolay bir görev değildir. Azure Active Directory, kullanıcı hesaplarınızla ilgili şüpheli eylemleri algılamak için uyarlamalı makine öğrenimi algoritmaları ve buluşsal yöntemler kullanır. Algılanan her şüpheli eylem, **risk algılama**adlı bir kayıtta saklanır.
 
-İki yerde bildirilmiş risk olaylarını gözden burada verilmiştir:
+Bildirilen risk algılamalarını gözden geçibileceğiniz iki yer vardır:
 
- - **Azure AD raporlama** -Risk olayları, Azure AD'nin güvenlik parçası olan raporlar. Daha fazla bilgi için [risk altındaki kullanıcılar güvenlik raporu](concept-user-at-risk.md) ve [riskli oturum açma işlemleri güvenlik raporu](concept-risky-sign-ins.md).
+ - **Azure AD raporlama** -risk ALGıLAMALARı Azure AD 'nin güvenlik raporlarının bir parçasıdır. Daha fazla bilgi için [risk altındaki kullanıcılar güvenlik raporuna](concept-user-at-risk.md) ve [riskli oturum açma güvenlik raporuna](concept-risky-sign-ins.md)bakın.
 
- - **Azure AD kimlik koruması** -Risk olayları parçası olan Raporlama yeteneklerini [Azure Active Directory kimlik koruması](../active-directory-identityprotection.md).
+ - **Azure AD kimlik koruması** riskli algılamalar Ayrıca [Azure Active Directory kimlik koruması](../active-directory-identityprotection.md)raporlama yeteneklerinin bir parçasıdır.
 
-Ayrıca, kullanabileceğiniz [kimlik koruması risk olayları API](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/identityriskevent) Microsoft Graph'ı kullanarak güvenlik algılamaları programlı erişim elde etmek için. Daha fazla bilgi için [Microsoft Graph ve Azure Active Directory kimlik koruması ile çalışmaya başlama](../identity-protection/graph-get-started.md). 
+Ayrıca, Microsoft Graph kullanarak güvenlik algılamalarından programlı erişim kazanmak için [kimlik koruması risk ALGıLAMA API](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/identityriskevent) 'sini de kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory kimlik koruması ve Microsoft Graph ile çalışmaya başlama](../identity-protection/graph-get-started.md). 
 
-Şu anda, Azure Active Directory risk olayları altı tür algılar:
+Şu anda Azure Active Directory altı riskli algılama türünü algılar:
 
 - [Sızdırılan kimlik bilgilerine sahip kullanıcılar](#leaked-credentials) 
-- [Anonim IP adreslerinden oturum açma](#sign-ins-from-anonymous-ip-addresses) 
-- [Alışılmadık konumlara imkansız seyahat](#impossible-travel-to-atypical-locations) 
-- [Bulaşma olan cihazlardan oturum açma](#sign-ins-from-infected-devices) 
-- [Şüpheli etkinliğin olduğu IP adreslerinden oturum açma](#sign-ins-from-ip-addresses-with-suspicious-activity) 
-- [Alışılmadık konumlardan oturum açma](#sign-in-from-unfamiliar-locations) 
+- [Anonim IP adreslerinden oturum açma işlemleri](#sign-ins-from-anonymous-ip-addresses) 
+- [Atipik konumlara imkansız seyahat](#impossible-travel-to-atypical-locations) 
+- [Virüslü cihazlardan oturum açma işlemleri](#sign-ins-from-infected-devices) 
+- [Şüpheli etkinlikteki IP adreslerinden oturum açma işlemleri](#sign-ins-from-ip-addresses-with-suspicious-activity) 
+- [Bilmediğiniz konumlardan oturum açma işlemleri](#sign-in-from-unfamiliar-locations) 
 
-![Risk olayı](./media/concept-risk-events/91.png)
+![Risk algılama](./media/concept-risk-events/91.png)
 
 > [!IMPORTANT]
-> Bazı durumlarda, karşılık gelen oturum açma bir giriş olmadan bir risk olayını bulabilirsiniz [oturum açma işlemleri raporu](concept-sign-ins.md). Kimlik koruması her ikisi için risk değerlendirdiğinden budur **etkileşimli** ve **etkileşimli olmayan** oturum açma işlemleri, oysa yalnızca etkileşimli oturum açma oturum açma işlemleri raporu gösterir.
+> Bazen, [oturum açma raporuna](concept-sign-ins.md)karşılık gelen bir oturum açma girişi olmadan bir risk algılamayı bulabilirsiniz. Bunun nedeni, kimlik korumasının hem **etkileşimli** hem de **etkileşimli olmayan** oturum açma işlemlerinin riskini değerlendirmesinde, oturum açma raporunda yalnızca etkileşimli oturum açma işlemleri gösterilir.
 
-Algılanan risk olayı için alma öngörü için Azure AD aboneliğiniz bağlıdır. 
+Algılanan bir risk algılaması için aldığınız Öngörüler, Azure AD aboneliğinize bağlıdır. 
 
-* İle **Azure AD Premium P2 sürümünü**, temel alınan tüm algılamalar hakkında en ayrıntılı bilgileri alın. 
-* İle **Azure AD Premium P1 edition**, Gelişmiş algılamalar (örneğin, alışılmadık oturum açma özellikleri) lisansınızı tarafından kapsanmaz ve adın altında görünür **ek risk algılandı ile oturum açma** . Ayrıca, risk düzeyi ve risk ayrıntı alanlarını gizlenir.
+* **Azure AD Premium P2 sürümüyle**, temeldeki Tüm algılamalar hakkında en ayrıntılı bilgileri alırsınız. 
+* **Azure AD Premium P1 sürümü**ile, gelişmiş algılamalar (bilmediğiniz oturum açma özellikleri gibi) lisansınızın kapsamında değildir ve ad **oturum açma tarafından algılanan ek risk**altında görünür. Ayrıca, risk düzeyi ve risk ayrıntıları alanları gizlidir.
 
-Risk olayları zaten algılanması kimliklerinizi korumanın önemli bir yönüdür temsil ederken, ayrıca el ile bunları adres veya koşullu erişim ilkelerini yapılandırarak otomatik yanıtlar uygulamak seçeneğiniz vardır. Daha fazla bilgi için [Azure Active Directory kimlik koruması](../active-directory-identityprotection.md).
+Risk algılamaları algılanırken, kimliklerinizi korumanın önemli bir yönü zaten var olsa da, koşullu erişim ilkelerini yapılandırarak onları el ile adresleyerek veya otomatikleştirilmiş yanıtları uygulama seçeneğiniz de vardır. Daha fazla bilgi için bkz. [Azure Active Directory kimlik koruması](../active-directory-identityprotection.md).
 
-## <a name="risk-event-types"></a>Risk olayı türleri
+## <a name="risk-detection-types"></a>Risk algılama türleri
 
-**Risk olayı türü** özelliği için bir risk olayını kaydı oluşturuldu şüpheli eylem için bir tanımlayıcıdır.
+**Risk algılama türü** özelliği, için risk algılama kaydının oluşturulduğu şüpheli eyleme yönelik bir tanıtıcıdır.
 
-Microsoft'un sürekli yatırım Algılama işlemi neden:
+Microsoft 'un algılama işlemine yönelik sürekli yatırımlar şu şekilde yapılır:
 
-- Mevcut risk olaylarının algılama doğruluğu geliştirmeleri 
-- Gelecekte eklenecek yeni risk olayı türleri
+- Mevcut risk algılamalarının algılama doğruluğunu geliştirmeye yönelik iyileştirmeler 
+- Daha sonra eklenecek yeni risk algılama türleri
 
 ### <a name="leaked-credentials"></a>Sızdırılan kimlik bilgileri
 
-Kullanıcıların geçerli parolalarını cybercriminals tehlikeye, bunlar genellikle bu kimlik bilgilerini paylaşır. Bu genellikle, bunları herkese açık şekilde koyu Yapıştır ya da web sitelerinde veya ticari veya kimlik bilgilerini siyah piyasadaki satış yayınlayarak da gerçekleştirilir. Microsoft kimlik bilgilerinin sızdırılması hizmet edinme kullanıcı adı / parola çiftlerini ortak veya koyu web sitelerini izleme ve çalışma tarafından:
+Sidolandırıcılar meşru kullanıcıların geçerli parolalarını tehlikeye ayorsa, genellikle bu kimlik bilgilerini paylaşır. Bu, genellikle koyu Web üzerinde herkese açık bir şekilde gönderilir veya siteleri yapıştırabilir ya da siyah Pazar üzerine kimlik bilgileri satıyor veya satarak yapılır. Microsoft sızdırılan kimlik bilgileri hizmeti, genel ve koyu Web sitelerini izleyerek ve ile çalışarak Kullanıcı adı/parola çiftleri alır:
 
 - Araştırmacılar
-- Yasal makamlar
-- Microsoft Güvenlik takımlar
-- Diğer güvenilen kaynaklardan 
+- Yasalar zorlaması
+- Microsoft 'ta güvenlik ekipleri
+- Diğer güvenilir kaynaklar 
 
-Zaman hizmeti edinir kullanıcı adı / parola çiftleri bunlar denetlenir karşı AAD kullanıcıların geçerli geçerli kimlik bilgileri. Bir eşleşme bulunduğunda, bir kullanıcının parolasını aşıldığını gösterir ve **kimlik risk olayı sızmasına** oluşturulur.
+Hizmet, Kullanıcı adı/parola çiftleri edindiğinde AAD kullanıcılarının geçerli geçerli kimlik bilgileriyle denetlenir. Bir eşleşme bulunduğunda, kullanıcının parolasının tehlikeye girdiği ve bir **sızdırılan kimlik bilgileri risk algılaması** oluşturulduğu anlamına gelir.
 
 ### <a name="sign-ins-from-anonymous-ip-addresses"></a>Anonim IP adreslerinden oturum açma işlemleri
 
-Bu risk olayı türünü başarıyla anonim proxy IP adresi tanımlanmış bir IP adresinden oturum açmış kullanıcılar tanımlar. Bu proxy'ler cihazlarının IP adresini gizlemek istediğiniz ve için kötü amaçlı kullanılan kişiler tarafından kullanılır.
+Bu risk algılama türü, anonim proxy IP adresi olarak tanımlanmış bir IP adresinden başarıyla oturum açan kullanıcıları tanımlar. Bu proxy'ler cihazlarının IP adresini gizlemek istediğiniz ve için kötü amaçlı kullanılan kişiler tarafından kullanılır.
 
 ### <a name="impossible-travel-to-atypical-locations"></a>Alışılmadık konumlara imkansız seyahat
 
-Davranışı verilen burada konumları en az biri de kullanıcı için alışılmadık olabilir, coğrafi olarak uzak konumlardan gerçekleştirilen iki oturum açma Bu risk olayı türünü tanımlar. Diğer çeşitli faktörler arasında bu makine öğrenimi algoritmasının iki oturum açma ve bu kullanıcının ilk konumdan farklı bir kullanıcı aynı kullandığını gösteren ikinci, seyahat alacağı saat arasındaki süre dikkate alır kimlik bilgileri.
+Bu risk algılama türü, coğrafi olarak uzak konumlardan kaynaklanan iki oturum açma işlemini tanımlar. Bu konumlar, konumların en az birinin Kullanıcı için de normal bir şekilde (geçmiş davranışa göre) de olabileceğini belirtir. Bu makine öğrenimi algoritması, bu iki oturum açma işlemi arasındaki süreyi ve kullanıcının ilk konumdan ikincisine geçebileceği süreyi, farklı bir kullanıcının aynı kullandığını belirten şekilde hesaba götürüyordu. Credentials.
 
-Algoritma "VPN'ler ve kuruluştaki diğer kullanıcılar tarafından düzenli olarak kullanılan konumlar gibi mümkün olmayan seyahat koşullar katkıda bulunan belirgin hatalı pozitif sonuçlar" yok sayar. Sistem bir öğrenme dönemi boyunca yeni bir kullanıcının oturum açma davranışı öğrenir 14 gün vardır. 
+Algoritma, kuruluştaki diğer kullanıcılar tarafından düzenli olarak kullanılan VPN 'Ler ve konumlar gibi mümkün olmayan seyahat koşullarına katkıda bulunan açık "yanlış pozitif sonuçlar" i yoksayar. Sistemin yeni bir kullanıcının oturum açma davranışını öğrenirken 14 günlük ilk öğrenme dönemi vardır. 
 
-### <a name="sign-in-from-unfamiliar-locations"></a>Alışılmadık konumlardan oturum açın
+### <a name="sign-in-from-unfamiliar-locations"></a>Bilmediğiniz konumlardan oturum açma
 
-Oturum açma konumları Bu risk olayı türünü göz önünde bulundurur (IP, enlem / boylam ve ASN) yeni / alışılmadık konumlara belirlemek için. Sistem, bir kullanıcı tarafından kullanılan önceki konumları hakkında bilgi depolar ve bu "tanıdık" konumlar göz önünde bulundurur. Risk olayı bilinen konumları listesinde olmayan bir konumdan oturum açma meydana geldiğinde tetiklenir. Sistem, bu sırada, yeni konumlarına tanınmayan konumlardan olarak işaretlemez 30 günlük bir öğrenme dönemi sahiptir. Tanıdık cihazlardan ve coğrafi olarak bilinen bir konuma yakın olan konumlardan oturum açma işlemleri de yoksayar. 
+Bu risk algılama türü, yeni/bilinmeyen konumları saptamak için son oturum açma konumlarını (IP, Enlem/Boylam ve ASN) dikkate alır. Sistem, bir kullanıcı tarafından kullanılan önceki konumlara ilişkin bilgileri depolar ve bu "tanıdık" konumları dikkate alır. Risk algılama, oturum açma, zaten tanıdık konumlar listesinde olmayan bir konumdan gerçekleştirildiğinde tetiklenir. Sistemin ilk öğrenme dönemi 30 gün, bu sırada hiçbir yeni konumu bilmediğiniz olmayan konumlar olarak bayrak eklemez. Sistem ayrıca tanıdık cihazlardan oturum açma işlemlerini ve coğrafi olarak tanıdık bir konuma yakın konumları yoksayar. 
 
-Kimlik koruması, ayrıca temel kimlik doğrulaması için alışılmadık konumlardan oturum açma algılar / eski protokoller. Bu protokollerin istemci kimliği gibi modern tanıdık özellikleri olmadığı için hatalı pozitif sonuçları azaltmak için yeterli telemetri yok. Algılanan risk olayları sayısını azaltmak için modern kimlik doğrulaması için taşımanız gerekir.   
+Kimlik koruması, temel kimlik doğrulaması/eski protokoller için de bilinmeyen konumlardan oturum açma işlemlerini algılar. Bu protokollerde istemci kimliği gibi modern tanıdık Özellikler olmadığından, hatalı pozitif sonuçları azaltmak için yeterli telemetri yoktur. Algılanan risk algılamaları sayısını azaltmak için modern kimlik doğrulamasına geçmeniz gerekir.   
 
 ### <a name="sign-ins-from-infected-devices"></a>Bulaşma olan cihazlardan oturum açma işlemleri
 
-Etkin bir bot sunucusuyla iletişim kurmak için bilinen kötü amaçlı yazılım, virüs bulaşmış cihazlardan oturum açma Bu risk olayı türünü tanımlar. Bu, IP adreslerini kullanıcı cihazının iletişim kurmayan bir bot sunucusu olan IP adresleri karşı karşılaştırılarak ilişkilendirilmesi yoluyla belirlenir. 
+Bu risk algılama türü, kötü amaçlı yazılımdan etkilenen cihazlardan oturum açma işlemlerini tanımlar ve bu, bir bot sunucusuyla etkin bir şekilde iletişim kuran bilinmektedir. Bu, Kullanıcı cihazının IP adreslerinin, bir bot sunucusuyla iletişim içinde olan IP adresleriyle ilişkilendirilmesi ile belirlenir. 
 
 ### <a name="sign-ins-from-ip-addresses-with-suspicious-activity"></a>Şüpheli etkinlik gösteren IP adreslerinden gerçekleştirilen oturum açma işlemleri
-IP adresleri, çok sayıda başarısız oturum açma denemesi, birden çok kullanıcı hesabında, kısa bir süre içinde karşılaşılan bu risk olayı türünü tanımlar. Bu durum, saldırganlar tarafından kullanılan IP adresleri trafik düzenleriyle eşleşir ve hesapları ya da zaten veya hakkında riske girdiği güçlü bir göstergesi olduğu. Bir machine learning belirgin yanlış pozitifleri, düzenli olarak kuruluştaki diğer kullanıcılar tarafından kullanılan IP adresleri gibi yoksayar algoritması budur.  Burada, yeni kullanıcı ve yeni Kiracı oturum davranışını öğrenir 14 günlük bir öğrenme dönemi sistem var.
+Bu risk algılama türü, çok sayıda kullanıcı hesabında, kısa bir süre boyunca çok sayıda başarısız oturum açma girişiminin görüldüğü IP adreslerini tanımlar. Bu, saldırganlar tarafından kullanılan IP adreslerinin trafik desenleriyle eşleşir ve hesapların zaten ya da tehlikede olduğu bir güçlü göstergedir. Bu, kuruluştaki diğer kullanıcılar tarafından düzenli olarak kullanılan IP adresleri gibi belirgin hatalı pozitif durumları yok sayan bir makine öğrenimi algoritmasıdır.  Sistemin, yeni bir kullanıcının ve yeni kiracının oturum açma davranışını öğrendiğinde 14 günlük ilk öğrenme dönemi vardır.
 
 ## <a name="detection-type"></a>Algılama türü
 
-Algılama type özelliği göstergesidir (**gerçek zamanlı** veya **çevrimdışı**) için bir risk olayının algılama zaman çerçevesi. Şu anda, risk olayı gerçekleştikten sonra çoğu risk olayları çevrimdışı bir işlem sonrası işlemi algılandı.
+Algılama türü özelliği, risk algılamada algılama zaman çerçevesi için bir göstergedir (**gerçek** zamanlı veya **çevrimdışı**). Şu anda, risk algılaması gerçekleştirildikten sonra bir işlem sonrası işleminde en çok risk algılamaları çevrimdışı olarak algılanır.
 
-Aşağıdaki tabloda, ilgili bir raporda görünmesini algılama türü için gereken süre miktarını listeler:
+Aşağıdaki tabloda, bir algılama türünün ilgili bir raporda görünmesi için gereken süre miktarı listelenmektedir:
 
-| Algılama türü | Raporlama gecikme süresi |
+| Algılama türü | Raporlama gecikmesi |
 | --- | --- |
-| Gerçek zamanlı | 5-10 dakika |
-| Çevrimdışı | 2-4 saat |
+| Gerçek zamanlı | 5 ila 10 dakika |
+| Offline | 2-4 saat |
 
 
-Azure Active Directory algılar risk olayı türleri için saptama türleri şunlardır:
+Azure Active Directory algıladığı risk algılama türleri için, algılama türleri şunlardır:
 
-| Risk olayı türü | Algılama türü |
+| Risk algılama türü | Algılama türü |
 | :-- | --- | 
-| [Sızdırılan kimlik bilgilerine sahip kullanıcılar](#leaked-credentials) | Çevrimdışı |
-| [Anonim IP adreslerinden oturum açma](#sign-ins-from-anonymous-ip-addresses) | Gerçek zamanlı |
-| [Alışılmadık konumlara imkansız seyahat](#impossible-travel-to-atypical-locations) | Çevrimdışı |
-| [Alışılmadık konumlardan oturum açma](#sign-in-from-unfamiliar-locations) | Gerçek zamanlı |
-| [Bulaşma olan cihazlardan oturum açma](#sign-ins-from-infected-devices) | Çevrimdışı |
-| [Şüpheli etkinliğin olduğu IP adreslerinden oturum açma](#sign-ins-from-ip-addresses-with-suspicious-activity) | Çevrimdışı|
+| [Sızdırılan kimlik bilgilerine sahip kullanıcılar](#leaked-credentials) | Offline |
+| [Anonim IP adreslerinden oturum açma işlemleri](#sign-ins-from-anonymous-ip-addresses) | Gerçek zamanlı |
+| [Atipik konumlara imkansız seyahat](#impossible-travel-to-atypical-locations) | Offline |
+| [Bilmediğiniz konumlardan oturum açma işlemleri](#sign-in-from-unfamiliar-locations) | Gerçek zamanlı |
+| [Virüslü cihazlardan oturum açma işlemleri](#sign-ins-from-infected-devices) | Offline |
+| [Şüpheli etkinlikteki IP adreslerinden oturum açma işlemleri](#sign-ins-from-ip-addresses-with-suspicious-activity) | Offline|
 
 
 ## <a name="risk-level"></a>Risk düzeyi
 
-Bir risk olayının risk düzeyi özelliği göstergesidir (**yüksek**, **orta**, veya **düşük**) önem ve bir risk olayının güven için. Bu özellik, gerçekleştirmeniz gereken eylemler öncelik vermenize yardımcı olur. 
+Risk algılamanın risk düzeyi özelliği, bir riskin önem derecesi ve güvenilirliği için bir göstergedir (**yüksek**, **Orta**veya **düşük**). Bu özellik, gerçekleştirmeniz gereken eylemleri önceliklendirmenize yardımcı olur. 
 
-Risk olayının önem kimliğinin tehlike bir tahmin unsuru sinyal gücünü temsil eder. Güvenle hatalı pozitif sonuçları olasılığını göstergesidir. 
+Risk algılamanın önem derecesi, sinyalin bir kimlik uzlaşması olarak tahmin düzeyini temsil eder. Güvenirlik, hatalı pozitif sonuçlar olasılığını için bir göstergedir. 
 
 Örneğin, 
 
-* **Yüksek**: Yüksek güvenilirlik ve önem derecesi yüksek risk olayı. Bu, kullanıcının kimliğini açığa çıkardığını ve etkilenen tüm kullanıcı hesaplarını hemen düzeltilmesi güçlü göstergeleri olaylardır.
+* **Yüksek**: yüksek güvenilirlik ve yüksek öneme sahip risk algılama. Bu olaylar, Kullanıcı kimliğinin tehlikeye girdiği güçlü göstergeler ve etkilenen tüm Kullanıcı hesapları hemen düzeltilmelidir.
 
-* **Orta**: Yüksek öneme sahip, ancak daha düşük güven risk olayı ya da tam tersi. Riskli olabilecek bu olaylar ve etkilenen tüm kullanıcı hesaplarını düzeltilmesi.
+* **Orta**: yüksek önem derecesi, ancak daha düşük güvenilirlik riski algılama veya tam tersi. Bu olaylar riskli olabilir ve etkilenen tüm Kullanıcı hesapları düzeltilmelidir.
 
-* **Düşük**: Düşük güvenilirlik ve düşük önem derecesi risk olayı. Bu olay bir Acil eylem gerekli değil, ancak diğer risk olayları ile birleştirildiğinde kimlik tehlikeye girmemesini güçlü bir gösterge sağlayabilir.
+* **Düşük**: düşük güvenilirlik ve düşük önem derecesi riski algılama. Bu olay acil eylem gerektirmeyebilir, ancak diğer risk algılamaları ile birleştirildiğinde, kimliğin güvenliğinin aşıldığına yönelik güçlü bir gösterge sağlayabilir.
 
 ![Risk düzeyi](./media/concept-risk-events/01.png)
 
 ### <a name="leaked-credentials"></a>Sızdırılan kimlik bilgileri
 
-Risk olayları olarak sınıflandırılan kimlik bilgilerinin sızdırılması bir **yüksek**, kullanıcı adı ve parola için bir saldırgan kullanılabilir olduğunu NET bir belirti sağlarlar.
+Sızdırılan kimlik bilgileri risk algılamaları, Kullanıcı adı ve parolasının bir saldırgan tarafından kullanılabilir olduğunu açık bir gösterge sağladığından **yüksek**olarak sınıflandırılmaktadır.
 
 ### <a name="sign-ins-from-anonymous-ip-addresses"></a>Anonim IP adreslerinden oturum açma işlemleri
 
-Bu risk olayı türü için risk düzeyi **orta** anonim bir IP adresi geçerli olmadığından bir hesabı tehlike güçlü bir göstergesi. Anonim IP adresleri kullanmakta olduğunuz olmadığını doğrulamak için kullanıcı hemen başvurmanızı öneririz.
+Anonim bir IP adresi bir hesap güvenliğinin kesin bir göstergesi olmadığından, bu risk algılama türünün risk düzeyi **Orta** değildir. Anonim IP adresleri kullanıp kullandıklarından emin olmak için kullanıcıyla hemen iletişim kurmanız önerilir.
 
 
 ### <a name="impossible-travel-to-atypical-locations"></a>Alışılmadık konumlara imkansız seyahat
 
-Mümkün olmayan seyahat genellikle bir bilgisayar korsanının başarıyla oturum açabilir, iyi bir göstergesidir. Ancak, bir kullanıcı yeni bir cihaz veya genellikle kuruluştaki diğer kullanıcılar tarafından kullanılmayan bir VPN kullanarak dolaşırken yanlış pozitifleri ortaya çıkabilir. Hatalı sunucu IP'ler görünümünü verebilir IP'ler, istemci olarak geçen uygulamaları yanlış pozitifleri başka bir kaynağıdır oturum açma işlemleri alma Burada, uygulama arka uç veri merkezi bir yerde barındırılan (Microsoft veri merkezleri, bunlar genellikle, görünümünü verebilir ait IP adresleri Microsoft gerçekleşen oturum açma işlemleri). Bu yanlış pozitifleri sonucunda bu risk olayı yönelik risk düzeyi olan **orta**.
+Mümkün olmayan seyahat genellikle bir korsanın başarıyla oturum açabilme konusunda iyi bir göstergedir. Bununla birlikte, bir Kullanıcı yeni bir cihaz kullanarak veya kuruluştaki diğer kullanıcılar tarafından kullanılmayan bir VPN kullanarak seyahat edildiğinde yanlış pozitif sonuçlar ortaya çıkabilir. Başka bir yanlış pozitif sonuç kaynağı, sunucu IP 'lerini istemci IP 'Leri olarak hatalı bir şekilde geçiren uygulamalardır ve bu, uygulamanın arka ucunun barındırıldığı veri merkezinden gerçekleştirilen oturum açma işlemlerinin görünüşünü verebilir (genellikle bunlar Microsoft veri merkezlerdir. Microsoft 'un sahip olduğu IP adreslerinden gerçekleştirilen oturum açma işlemlerinin görünümünü verebilir. Bu yanlış pozitif sonuçlar nedeniyle, bu risk algılaması için risk düzeyi **Orta**' dir.
 
 > [!TIP]
-> Yapılandırarak bu risk olayı türü bildirilen yanlış pozitifleri miktarını azaltabilirsiniz [adlandırılmış Konumlar](../active-directory-named-locations.md). 
+> [Adlandırılmış konumları](../active-directory-named-locations.md)yapılandırarak bu risk algılama türü için bildirilen hatalı pozitif sonuç miktarını azaltabilirsiniz. 
 
-### <a name="sign-in-from-unfamiliar-locations"></a>Alışılmadık konumlardan oturum açın
+### <a name="sign-in-from-unfamiliar-locations"></a>Bilmediğiniz konumlardan oturum açma
 
-Tanınmayan konumlardan saldırgan çalınan kimlik kullanabilmek için güçlü bir gösterge sağlar. Bir kullanıcı seyahatindeki, yeni bir cihaz olduğunu çalışıyor ya da yeni bir VPN kullanarak yanlış pozitifleri ortaya çıkabilir. Bu hatalı pozitif sonuçları sonucu olarak, bu olay türüne yönelik risk düzeyi olan **orta**.
+Bilmediğiniz konumlar, bir saldırganın çalınmış bir kimlik kullanabilmesi için güçlü bir bildirim sağlayabilir. Kullanıcı seyahat ederken, yeni bir cihaz denerken veya yeni bir VPN kullanırken yanlış pozitif sonuçlar oluşabilir. Bu yanlış pozitif sonuçlar nedeniyle, bu olay türü için risk düzeyi **Orta**olur.
 
 ### <a name="sign-ins-from-infected-devices"></a>Bulaşma olan cihazlardan oturum açma işlemleri
 
-Bu risk olayı IP adresleri, kullanıcı cihazları tanımlar. Tek bir IP adresi birden fazla cihazlardır ve yalnızca bazı olan diğer cihazlardan oturum açma işlemleri bir bot ağ my tetikleyicisi bu olay gereksiz yere, bu risk olayı olarak sınıflandırılır neden olduğu denetlediği **düşük**.  
+Bu risk algılama, Kullanıcı aygıtlarını değil, IP adreslerini tanımlar. Birden çok cihaz tek bir IP adresinin arkasındaysa ve yalnızca bazıları bir bot ağı tarafından denetleniyorsa, diğer cihazlardan oturum açma işlemleri bu olayı gereksiz yere tetiklerim, bu da bu risk algılama işleminin **düşük**olarak sınıflandırıldığı anlamına gelir.  
 
-Kullanıcıyla iletişime geçin ve kullanıcının tüm cihazlarına tarama öneririz. Ayrıca bir kullanıcının kişisel cihaz bulaşmış veya başkasının kullanıcı olarak aynı IP adresini bir virüs bulaşmış CİHAZDAN kullanıyordu mümkündür. Etkilenen cihazlar genellikle tarafından virüsten koruma yazılımının henüz belirlenmedi ve aygıtın bulaşmış haline yaşamış olabileceğiniz herhangi bir hatalı kullanıcı alışkanlıkları da gösterebilir kötü amaçlı yazılım tarafından etkilenen.
+Kullanıcıyla iletişim kurmanız ve tüm kullanıcıların cihazlarını taramanızı öneririz. Ayrıca, bir kullanıcının kişisel cihazının virüslü olması veya başka birinin kullanıcıyla aynı IP adresinden virüslü bir cihaz kullanıyor olması mümkündür. Virüslü cihazlar genellikle virüsten koruma yazılımı tarafından henüz tanımlanmayan kötü amaçlı yazılımlardan etkilenir ve cihazın virüs bulaşmış olmasına neden olabilecek kötü amaçlı kullanıcı alışkanlıklarını da belirtebilir.
 
-Adresi kötü amaçlı yazılımdan Etkilenme hakkında daha fazla bilgi için bkz. [kötü amaçlı yazılımdan koruma Merkezi](https://www.microsoft.com/en-us/security/portal/definitions/adl.aspx/).
+Kötü amaçlı yazılımlardan etkilenme hakkında daha fazla bilgi için bkz. [kötü amaçlı yazılımdan koruma merkezi](https://www.microsoft.com/en-us/security/portal/definitions/adl.aspx/).
 
 ### <a name="sign-ins-from-ip-addresses-with-suspicious-activity"></a>Şüpheli etkinlik gösteren IP adreslerinden gerçekleştirilen oturum açma işlemleri
 
-Bunlar gerçekten şüpheli olarak işaretlendi bir IP adresinden oturum olmadığını doğrulamak için kullanıcı başvurmanızı öneririz. Bu olay türü için risk düzeyi "**orta**" çeşitli cihazlar aynı IP adresini olabileceğinden, yalnızca kuşkulu etkinlik için sorumlu olabilir çalışırken. 
+Şüpheli olarak işaretlenen bir IP adresinden gerçekten oturum açtıklarından emin olmak için kullanıcıyla iletişim kurmanız önerilir. Bu olay türü için risk düzeyi "**Orta**" olduğundan, birkaç CIHAZ aynı IP adresinin arkasında olabileceğinden, yalnızca bazıları şüpheli etkinlikten sorumlu olabilir. 
 
 
 ## <a name="next-steps"></a>Sonraki Adımlar

@@ -1,8 +1,8 @@
 ---
-title: Azure SQL Data Warehouse'da tablo AS SELECT (CTAS) oluşturma | Microsoft Docs
-description: Açıklama ve çözümleri geliştirmek için Azure SQL veri ambarı CREATE TABLE AS SELECT (CTAS) deyiminde örnekleri.
+title: SELECT OLARAK CREATE TABLE (CTAS)
+description: Çözüm geliştirmeye yönelik Azure SQL veri ambarı 'nda SELECT AS SELECT (CTAS) bildiriminin açıklaması ve CREATE TABLE örnekleri.
 services: sql-data-warehouse
-author: XiaoyuL-Preview
+author: XiaoyuMSFT
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
@@ -11,26 +11,26 @@ ms.date: 03/26/2019
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seoapril2019
-ms.openlocfilehash: 91de474cc0610099b4264cc6d0dfbd26e8df0618
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4992bb00fa5397ef6a4e055e08b445d35f5ed77a
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65851440"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685855"
 ---
-# <a name="create-table-as-select-ctas-in-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse'da tablo AS SELECT (CTAS) oluşturma
+# <a name="create-table-as-select-ctas-in-azure-sql-data-warehouse"></a>Azure SQL veri ambarı 'nda SELECT (CTAS) olarak CREATE TABLE
 
-Bu makalede, Azure SQL veri ambarı CREATE TABLE AS SELECT (CTAS) T-SQL deyiminde çözümleri geliştirmek için açıklanmaktadır. Makale, kod örnekleri de sağlar.
+Bu makalede, çözümlerin geliştirilmesi için Azure SQL veri ambarı 'nda SELECT (CTAS) T-SQL ifadesiyle CREATE TABLE açıklanmaktadır. Makale Ayrıca kod örnekleri de sağlar.
 
-## <a name="create-table-as-select"></a>TABLO AS SELECT OLUŞTURMA
+## <a name="create-table-as-select"></a>SEÇIM OLARAK CREATE TABLE
 
-[CREATE TABLE AS SELECT](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse) (CTAS) deyimi, en önemli T-SQL özellikleri biridir. CTAS bir SELECT deyiminin çıktı göre yeni bir tablo oluşturur paralel bir işlemdir. CTAS oluşturma ve tek bir komutla bir tabloya veri ekleme basit ve hızlı bir yoludur.
+[Select as Select](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse) (CTAS) bildirisi, kullanılabilen en önemli T-SQL özelliklerinden biridir. Create Table CTAS, SELECT ifadesinin çıktısına göre yeni bir tablo oluşturan paralel bir işlemdir. CTAS, tek bir komutla bir tabloya veri oluşturup eklemenin en basit ve en hızlı yoludur.
 
-## <a name="selectinto-vs-ctas"></a>SEÇİN... Vs'ye. CTAS
+## <a name="selectinto-vs-ctas"></a>Seç... Vs. CTAS 'A
 
-CTAS, daha fazla özelleştirilebilir bir sürümü olan [seçin... İÇİNE](/sql/t-sql/queries/select-into-clause-transact-sql) deyimi.
+CTAS, Select... öğesinin daha özelleştirilebilir bir sürümüdür [. INTO](/sql/t-sql/queries/select-into-clause-transact-sql) bildirisi.
 
-Aşağıdaki basit bir SELECT örneğidir... İÇİNE:
+Aşağıda basit bir seçme örneği verilmiştir... BIRLEŞTIRIN
 
 ```sql
 SELECT *
@@ -38,31 +38,30 @@ INTO    [dbo].[FactInternetSales_new]
 FROM    [dbo].[FactInternetSales]
 ```
 
-SEÇİN... İÇİNE işleminin bir parçası olarak dağıtım yöntemini ya da dizin türünü değiştirmek izin vermez. Oluşturduğunuz `[dbo].[FactInternetSales_new]` ROUND_ROBIN varsayılan dağıtım türü ve kümelenmiş COLUMNSTORE dizini varsayılan tablo yapısını kullanarak.
+Seç... ' De, dağıtım yöntemini veya dizin türünü işlemin bir parçası olarak değiştirmenize izin vermez. Varsayılan ROUND_ROBIN dağıtım türünü ve KÜMELENMIŞ COLUMNSTORE DIZINININ varsayılan tablo yapısını kullanarak `[dbo].[FactInternetSales_new]` oluşturursunuz.
 
-CTAS ile diğer yandan, her iki dağıtım tablo verilerini ve bunun yanı sıra tablo yapısı türü belirtebilirsiniz. CTAS önceki örneğe dönüştürmek için:
+CTAS ile, diğer yandan tablo verilerinin hem dağıtımını hem de tablo yapısı türünü belirtebilirsiniz. Önceki örneği CTAS 'ya dönüştürmek için:
 
 ```sql
 CREATE TABLE [dbo].[FactInternetSales_new]
 WITH
 (
-    DISTRIBUTION = ROUND_ROBIN
-   ,CLUSTERED COLUMNSTORE INDEX
+ DISTRIBUTION = ROUND_ROBIN
+ ,CLUSTERED COLUMNSTORE INDEX
 )
 AS
 SELECT  *
-FROM    [dbo].[FactInternetSales]
-;
+FROM    [dbo].[FactInternetSales];
 ```
 
 > [!NOTE]
-> Yalnızca CTAS işlemi dizin değiştirmeye çalıştığınız ve kaynak tablo karma dağıtılmış olduğundan, aynı dağıtım sütunu ve veri türünü koruyun. Bu geçici dağıtım veri taşıma daha etkilidir işlemi sırasında önler.
+> Yalnızca CTAS işleminde dizini değiştirmeye çalışıyorsanız ve kaynak tablo karma olarak dağıtılmışsa, aynı dağıtım sütununu ve veri türünü koruyun. Bu, işlem sırasında çapraz dağıtım veri hareketini önler ve daha etkilidir.
 
-## <a name="use-ctas-to-copy-a-table"></a>CTAS bir tabloyu kopyalama için kullanın
+## <a name="use-ctas-to-copy-a-table"></a>Bir tabloyu kopyalamak için CTAS kullanma
 
-Belki de DDL değiştirmek için CTAS en yaygın kullanımlarından biri, bir tablonun kopyasını oluşturuyor. Şimdi deyin başlangıçta tablonuz olarak oluşturduğunuz `ROUND_ROBIN`ve artık bir sütun üzerinde dağıtılan bir tablo için değiştirmek istiyorsanız. CTAS, nasıl dağıtım sütununun değiştiğini ' dir. CTAS, bölümlendirme, dizin oluşturma veya sütun türlerini değiştirmek için de kullanabilirsiniz.
+Belki de en yaygın CTAS kullanımları, DDL 'yi değiştirmek için bir tablonun bir kopyasını oluşturuyor. İlk olarak tablonuzu `ROUND_ROBIN`olarak oluşturduğunuzu ve şimdi bir sütunda dağıtılan bir tabloyla değiştirmek istediğinizi varsayalım. CTAS, dağıtım sütununu değiştirme. Ayrıca, CTAS 'yi bölümleme, dizin oluşturma veya sütun türlerini değiştirmek için de kullanabilirsiniz.
 
-Şimdi deyin bu tablonun varsayılan dağıtım türünü kullanarak oluşturduğunuz `ROUND_ROBIN`, bir dağıtım sütun belirtmeden `CREATE TABLE`.
+Bu tabloyu, `CREATE TABLE`dağıtım sütunu belirtmeksizin `ROUND_ROBIN`varsayılan dağıtım türünü kullanarak oluşturduğunuzu varsayalım.
 
 ```sql
 CREATE TABLE FactInternetSales
@@ -89,11 +88,10 @@ CREATE TABLE FactInternetSales
     TaxAmt money NOT NULL,
     Freight money NOT NULL,
     CarrierTrackingNumber nvarchar(25),
-    CustomerPONumber nvarchar(25)
-);
+    CustomerPONumber nvarchar(25));
 ```
 
-Bu tabloda yeni bir kopyasını oluşturmak istediğiniz artık bir `Clustered Columnstore Index`, kümelenmiş Columnstore tablolarının performansını yararlanabilir. Ayrıca bu tablo üzerinde dağıtmak istediğiniz `ProductKey`, çünkü bu sütunda birleştirme bekleme ve üzerinde birleştirme sırasında veri hareketini önlemek istiyorsanız `ProductKey`. Son olarak, aynı zamanda üzerinde bölümleme eklemek istediğiniz `OrderDateKey`, eski bölümleri bırakarak hızlı bir şekilde eski verileri silebilirsiniz. Eski e-tablonuzda yeni bir tabloya kopyaladığı CTAS deyimi aşağıda verilmiştir.
+Artık bu tablonun yeni bir kopyasını oluşturmak için `Clustered Columnstore Index`, kümelenmiş columnstore tablolarının performansının avantajlarından yararlanabilirsiniz. Ayrıca, bu sütunda benimsemeyi bekleme birleşimler olduğu ve `ProductKey`birleştirme sırasında veri hareketini önlemek istediğiniz için bu tabloyu `ProductKey`dağıtmak istiyorsunuz. Son olarak, eski bölümleri bırakarak eski verileri hızlıca silebilmeniz için `OrderDateKey`bölümlemeyi de eklemek istersiniz. Eski tablonuzu yeni bir tabloya kopyalayan CTAS deyimleri aşağıda verilmiştir.
 
 ```sql
 CREATE TABLE FactInternetSales_new
@@ -114,7 +112,7 @@ WITH
 AS SELECT * FROM FactInternetSales;
 ```
 
-Son olarak, yeni tablonuzun değiştirme ve ardından eski tablonuzun tablolarınızı yeniden adlandırabilirsiniz.
+Son olarak, yeni tablonuzu değiştirmek için tablolarınızı yeniden adlandırabilir ve sonra eski tablonuzu bırakabilirsiniz.
 
 ```sql
 RENAME OBJECT FactInternetSales TO FactInternetSales_old;
@@ -123,46 +121,45 @@ RENAME OBJECT FactInternetSales_new TO FactInternetSales;
 DROP TABLE FactInternetSales_old;
 ```
 
-## <a name="use-ctas-to-work-around-unsupported-features"></a>Desteklenmeyen özellikler etrafında çalışmak için CTAS kullanın
+## <a name="use-ctas-to-work-around-unsupported-features"></a>Desteklenmeyen özellikleri geçici olarak çözmek için CTAS kullanın
 
-CTAS, aşağıda listelenen desteklenmeyen özellikler geçici olarak çözmek için de kullanabilirsiniz. Bu yöntem genellikle yalnızca kodunuzu uyumlu olur, ancak genellikle SQL Data Warehouse'da daha hızlı çalışacaktır, yararlı. Bu performans, tam olarak paralel tasarımını sonucudur. Senaryolar şunlardır:
+CTAS 'yi, aşağıda listelenen desteklenmeyen özelliklerin bir sayısını çözmek için de kullanabilirsiniz. Yalnızca kodunuzun uyumlu olması, ancak SQL Data Warehouse üzerinde daha hızlı çalışması için bu yöntem genellikle yararlı olabilir. Bu performans, tam paralelleştirilmiş tasarımın bir sonucudur. Senaryolar şunlardır:
 
-* ANSI BİRLEŞTİRMELER güncelleştirmeleri
-* ANSI birleştirmeler üzerinde siler
-* MERGE deyimi
+* Güncelleştirmeler üzerinde ANSI BIRLEŞTIRMELERI
+* Silmeler üzerinde ANSI birleştirmeleri
+* MERGE ekstresi
 
 > [!TIP]
-> Düşünme deneyin "CTAS ilk." Sonuç olarak daha fazla veri yazıyorsanız bile CTAS kullanarak sorun giderme iyi bir yaklaşım genel olarak geçerlidir.
+> Önce "CTAS" öğesini düşünmek deneyin. Sonuç olarak daha fazla veri yazıyorsanız bile CTAS kullanarak bir sorunun çözülmesi genellikle iyi bir yaklaşımdır.
 
-## <a name="ansi-join-replacement-for-update-statements"></a>Güncelleştirme ifadeler için ANSI birleştirme değiştirme
+## <a name="ansi-join-replacement-for-update-statements"></a>Update deyimleri için ANSI JOIN değiştirme
 
-Karmaşık bir güncelleştirme olduğunu fark edebilirsiniz. Güncelleştirme ikiden fazla tablo, UPDATE veya DELETE gerçekleştirmek için ANSI JOIN söz dizimini kullanarak birlikte birleştirir.
+Karmaşık bir güncelleştirmeniz olduğunu fark edebilirsiniz. Güncelleştirme, GÜNCELLEŞTIRMEYI veya SILMEYI gerçekleştirmek için ANSI JOIN söz dizimini kullanarak ikiden fazla tabloyu birleştirir.
 
-Bu tabloda güncelleştirmeye sahip olduğunu düşünün:
+Bu tabloyu güncelleştirmek zorunda kaldığınızı düşünün:
 
 ```sql
 CREATE TABLE [dbo].[AnnualCategorySales]
-(    [EnglishProductCategoryName]    NVARCHAR(50)    NOT NULL
-,    [CalendarYear]                    SMALLINT        NOT NULL
-,    [TotalSalesAmount]                MONEY            NOT NULL
+( [EnglishProductCategoryName]    NVARCHAR(50)    NOT NULL
+, [CalendarYear]                    SMALLINT        NOT NULL
+, [TotalSalesAmount]                MONEY            NOT NULL
 )
 WITH
 (
     DISTRIBUTION = ROUND_ROBIN
-)
-;
+);
 ```
 
-Özgün sorgu şu örnekteki gibi bir şey görünüyordu:
+Özgün sorgu Şu örneğe benzer bir şey bakmış olabilir:
 
 ```sql
 UPDATE    acs
 SET        [TotalSalesAmount] = [fis].[TotalSalesAmount]
 FROM    [dbo].[AnnualCategorySales]     AS acs
 JOIN    (
-        SELECT    [EnglishProductCategoryName]
-        ,        [CalendarYear]
-        ,        SUM([SalesAmount])                AS [TotalSalesAmount]
+        SELECT [EnglishProductCategoryName]
+        , [CalendarYear]
+        , SUM([SalesAmount])                AS [TotalSalesAmount]
         FROM    [dbo].[FactInternetSales]        AS s
         JOIN    [dbo].[DimDate]                    AS d    ON s.[OrderDateKey]                = d.[DateKey]
         JOIN    [dbo].[DimProduct]                AS p    ON s.[ProductKey]                = p.[ProductKey]
@@ -174,51 +171,46 @@ JOIN    (
         ,        [CalendarYear]
         ) AS fis
 ON    [acs].[EnglishProductCategoryName]    = [fis].[EnglishProductCategoryName]
-AND    [acs].[CalendarYear]                = [fis].[CalendarYear]
-;
+AND    [acs].[CalendarYear]                = [fis].[CalendarYear];
 ```
 
-SQL veri ambarı, ANSI birleşimlerde desteklemiyor `FROM` yan tümcesi bir `UPDATE` deyimi, önceki örnekte değiştirmeden kullanamazlar.
+SQL veri ambarı, bir `UPDATE` deyimin `FROM` yan tümcesinde ANSI birleştirmeleri desteklemez, bu nedenle önceki örneği değiştirmeden kullanamazsınız.
 
-Önceki örnekte değiştirmek için CTAS ve dolaylı bir birleşim bir bileşimini kullanabilirsiniz:
+Önceki örneği değiştirmek için CTAS ve örtük bir birleşimin birleşimini kullanabilirsiniz:
 
 ```sql
 -- Create an interim table
 CREATE TABLE CTAS_acs
 WITH (DISTRIBUTION = ROUND_ROBIN)
 AS
-SELECT    ISNULL(CAST([EnglishProductCategoryName] AS NVARCHAR(50)),0)    AS [EnglishProductCategoryName]
-,        ISNULL(CAST([CalendarYear] AS SMALLINT),0)                         AS [CalendarYear]
-,        ISNULL(CAST(SUM([SalesAmount]) AS MONEY),0)                        AS [TotalSalesAmount]
+SELECT    ISNULL(CAST([EnglishProductCategoryName] AS NVARCHAR(50)),0) AS [EnglishProductCategoryName]
+, ISNULL(CAST([CalendarYear] AS SMALLINT),0)  AS [CalendarYear]
+, ISNULL(CAST(SUM([SalesAmount]) AS MONEY),0)  AS [TotalSalesAmount]
 FROM    [dbo].[FactInternetSales]        AS s
 JOIN    [dbo].[DimDate]                    AS d    ON s.[OrderDateKey]                = d.[DateKey]
 JOIN    [dbo].[DimProduct]                AS p    ON s.[ProductKey]                = p.[ProductKey]
 JOIN    [dbo].[DimProductSubCategory]    AS u    ON p.[ProductSubcategoryKey]    = u.[ProductSubcategoryKey]
 JOIN    [dbo].[DimProductCategory]        AS c    ON u.[ProductCategoryKey]        = c.[ProductCategoryKey]
 WHERE     [CalendarYear] = 2004
-GROUP BY
-        [EnglishProductCategoryName]
-,        [CalendarYear]
-;
+GROUP BY [EnglishProductCategoryName]
+, [CalendarYear];
 
 -- Use an implicit join to perform the update
 UPDATE  AnnualCategorySales
 SET     AnnualCategorySales.TotalSalesAmount = CTAS_ACS.TotalSalesAmount
 FROM    CTAS_acs
 WHERE   CTAS_acs.[EnglishProductCategoryName] = AnnualCategorySales.[EnglishProductCategoryName]
-AND     CTAS_acs.[CalendarYear]               = AnnualCategorySales.[CalendarYear]
-;
+AND     CTAS_acs.[CalendarYear]  = AnnualCategorySales.[CalendarYear] ;
 
 --Drop the interim table
-DROP TABLE CTAS_acs
-;
+DROP TABLE CTAS_acs;
 ```
 
-## <a name="ansi-join-replacement-for-delete-statements"></a>ANSI birleştirme ardılı delete deyimleri
+## <a name="ansi-join-replacement-for-delete-statements"></a>Delete deyimleri için ANSI JOIN değiştirme
 
-Bazen verileri silmek için en iyi yaklaşım CTAS, özellikle kullanmaktır `DELETE` sözdizimi ANSI kullanan deyimleri katılın. SQL veri ambarı ANSI birleşimlerde desteklemiyor olmasıdır `FROM` yan tümcesi bir `DELETE` deyimi. Verileri silme yerine, korumak istediğiniz verileri seçin.
+Bazen, verileri silmenin en iyi yaklaşımı, özellikle ANSI JOIN söz dizimini kullanan `DELETE` deyimleri için CTAS kullanmaktır. Bunun nedeni, SQL veri ambarının bir `DELETE` bildiriminin `FROM` yan tümcesinde ANSI birleştirmelerini desteklemezler. Verileri silmek yerine, tutmak istediğiniz verileri seçin.
 
-Dönüştürülen bir örneği verilmiştir `DELETE` deyimi:
+Dönüştürülmüş `DELETE` bildirimine bir örnek aşağıda verilmiştir:
 
 ```sql
 CREATE TABLE dbo.DimProduct_upsert
@@ -227,23 +219,22 @@ WITH
 ,   CLUSTERED INDEX (ProductKey)
 )
 AS -- Select Data you want to keep
-SELECT     p.ProductKey
-,          p.EnglishProductName
-,          p.Color
-FROM       dbo.DimProduct p
+SELECT p.ProductKey
+, p.EnglishProductName
+,  p.Color
+FROM  dbo.DimProduct p
 RIGHT JOIN dbo.stg_DimProduct s
-ON         p.ProductKey = s.ProductKey
-;
+ON p.ProductKey = s.ProductKey;
 
-RENAME OBJECT dbo.DimProduct        TO DimProduct_old;
+RENAME OBJECT dbo.DimProduct TO DimProduct_old;
 RENAME OBJECT dbo.DimProduct_upsert TO DimProduct;
 ```
 
-## <a name="replace-merge-statements"></a>Merge deyimlerinde değiştirin
+## <a name="replace-merge-statements"></a>Merge deyimlerini Değiştir
 
-Merge deyimlerinde bölümünde CTAS kullanarak en az değiştirebilirsiniz. Birleştirebilirsiniz `INSERT` ve `UPDATE` tek bir deyim içinde. Tüm silinen kayıtlar kısıtlı `SELECT` sonuçlardan atlamak için deyimi.
+Birleştirme deyimlerini CTAS kullanarak en az kısmen bir şekilde değiştirebilirsiniz. `INSERT` ve `UPDATE` tek bir deyime birleştirebilirsiniz. Tüm silinen kayıtlar `SELECT` deyimden, sonuçlardan atlamak için kısıtlanmalıdır.
 
-Aşağıdaki örnek için bir `UPSERT`:
+Aşağıdaki örnek bir `UPSERT`içindir:
 
 ```sql
 CREATE TABLE dbo.[DimProduct_upsert]
@@ -253,30 +244,29 @@ WITH
 )
 AS
 -- New rows and new versions of rows
-SELECT      s.[ProductKey]
-,           s.[EnglishProductName]
-,           s.[Color]
+SELECT s.[ProductKey]
+, s.[EnglishProductName]
+, s.[Color]
 FROM      dbo.[stg_DimProduct] AS s
 UNION ALL  
 -- Keep rows that are not being touched
 SELECT      p.[ProductKey]
-,           p.[EnglishProductName]
-,           p.[Color]
+, p.[EnglishProductName]
+, p.[Color]
 FROM      dbo.[DimProduct] AS p
 WHERE NOT EXISTS
 (   SELECT  *
     FROM    [dbo].[stg_DimProduct] s
     WHERE   s.[ProductKey] = p.[ProductKey]
-)
-;
+);
 
 RENAME OBJECT dbo.[DimProduct]          TO [DimProduct_old];
 RENAME OBJECT dbo.[DimProduct_upsert]  TO [DimProduct];
 ```
 
-## <a name="explicitly-state-data-type-and-nullability-of-output"></a>Veri türü ve null değer alabilme durumunun çıkış açıkça belirtin.
+## <a name="explicitly-state-data-type-and-nullability-of-output"></a>Açık durum veri türü ve Nullable çıkış
 
-Kod geçişi sırasında bu tür bir kodlama düzeni arasında çalıştırdığınız bulabilirsiniz:
+Kodu geçirirken, bu tür bir kodlama düzeniyle çalıştırıldığını fark edebilirsiniz:
 
 ```sql
 DECLARE @d decimal(7,2) = 85.455
@@ -288,56 +278,51 @@ CREATE TABLE result
 WITH (DISTRIBUTION = ROUND_ROBIN)
 
 INSERT INTO result
-SELECT @d*@f
-;
+SELECT @d*@f;
 ```
 
-Bu kod için CTAS geçirmeniz gerekir ve doğru olacaktır düşünebilirsiniz. Ancak, burada gizli bir sorun yoktur.
+Bu kodu CTAS 'ye geçirmeniz gerektiğini ve doğru olduğunu düşünebilirsiniz. Ancak burada gizli bir sorun var.
 
-Aşağıdaki kod, aynı sonucu verecek değil:
+Aşağıdaki kod aynı sonucu vermez:
 
 ```sql
 DECLARE @d decimal(7,2) = 85.455
-,       @f float(24)    = 85.455
-;
+, @f float(24)    = 85.455;
 
 CREATE TABLE ctas_r
 WITH (DISTRIBUTION = ROUND_ROBIN)
 AS
-SELECT @d*@f as result
-;
+SELECT @d*@f as result;
 ```
 
-"Sonuç" sütun İleri ifadenin veri türünü ve öğesinin değerleri taşıyan dikkat edin. Dikkatli olmazsanız veri taşıyan İleri türü değerlerinde ince farklarını neden olabilir.
+"Result" sütununun, ifadenin veri türünü ve null değer alabilme değerlerini iletdiğine dikkat edin. Veri türü iletme, dikkatli değilseniz değerlerde hafif sapmaya yol açabilir.
 
-Bu örneği deneyin:
+Şu örneği deneyin:
 
 ```sql
 SELECT result,result*@d
-from result
-;
+from result;
 
 SELECT result,result*@d
-from ctas_r
-;
+from ctas_r;
 ```
 
-Sonuç için depolanan değeri farklıdır. Sonuç sütunu kalıcı değeri diğer ifadeler kullanıldıkça, hata daha önemli hale gelir.
+Sonuç için depolanan değer farklı. Sonuç sütunundaki kalıcı değer diğer ifadelerde kullanıldığında, hata daha da önemli olur.
 
-![Ekran görüntüsü, CTAS sonuçları](media/sql-data-warehouse-develop-ctas/ctas-results.png)
+![CTAS sonuçlarının ekran görüntüsü](media/sql-data-warehouse-develop-ctas/ctas-results.png)
 
-Bu, veri geçişler için önemlidir. İkinci sorgu tartışmaya daha doğru olsa bile bir sorun yoktur. Veriler için kaynak sistem karşılaştırıldığında farklı olacaktır ve bu soruların geçişin bütünlüğü gidiyor. Bu, nadir durumlarda "yanlış" yanıt gerçekten doğru olanı olduğu biridir!
+Bu, veri geçişleri için önemlidir. İkinci sorgu daha doğru bir şekilde daha doğru olsa da bir sorun oluştu. Veriler, kaynak sistemle karşılaştırıldığında farklılık gösterir ve bu, geçiş sırasında bütünlük sorularına yol açar. Bu, "yanlış" yanıtın gerçekten doğru bir şekilde olduğu nadir durumlardan biridir!
 
-İki sonuçtan arasında bir uyuşmazlık görüyoruz örtük tür atama nedeniyle nedenidir. İlk örnekte, tablonun sütun tanımı tanımlar. Örtük tür dönüştürme satır eklendiğinde gerçekleşir. İkinci örnekte, örtük tür dönüştürme ifadesi sütunun veri türünü tanımlar gibi bulunur.
+İki sonuç arasında bir eşlik görtiğimiz neden örtük tür atama nedeniyle oluşur. İlk örnekte tablo, sütun tanımını tanımlar. Satır eklendiğinde, örtük bir tür dönüştürmesi oluşur. İkinci örnekte, ifadesi sütunun veri türünü tanımladığından örtük bir tür dönüştürmesi yoktur.
 
-Ayrıca ilk örnekte, henüz ise ikinci örnekteki sütun null yapılabilir bir sütun olarak tanımlanmış dikkat edin. Tablonun ilk örnekte oluşturulurken sütun öğesinin açıkça tanımlandı. İkinci örnekte, bu ifadeyi bırakıldı ve varsayılan olarak NULL tanımında neden olur.
+Ayrıca, ikinci örnekteki sütunun null yapılabilir bir sütun olarak tanımlandığından, ancak ilk örnekte olmadığına dikkat edin. Tablo ilk örnekte oluşturulduğunda, null değer alabilirlik açık bir şekilde tanımlanmıştır. İkinci örnekte, ifadeye ayrılmıştı ve varsayılan olarak NULL tanımına neden olur.
 
-Bu sorunları çözmek için açıkça CTAS deyimi seçme bölümünde öğesinin ve tür dönüştürme ayarlamanız gerekir. Bu özellikler 'CREATE TABLE' ayarlanamıyor.
-Aşağıdaki örnek kod düzeltme gösterilmektedir:
+Bu sorunları çözmek için CTAS bildiriminin SELECT bölümünde tür dönüştürme ve null değer alabilirlik ' i açıkça ayarlamanız gerekir. Bu özellikleri ' CREATE TABLE ' içinde ayarlayamazsınız.
+Aşağıdaki örnek, kodun nasıl düzeltileceğini göstermektedir:
 
 ```sql
 DECLARE @d decimal(7,2) = 85.455
-,       @f float(24)    = 85.455
+, @f float(24)    = 85.455
 
 CREATE TABLE ctas_r
 WITH (DISTRIBUTION = ROUND_ROBIN)
@@ -347,25 +332,25 @@ SELECT ISNULL(CAST(@d*@f AS DECIMAL(7,2)),0) as result
 
 Şunlara dikkat edin:
 
-* CAST kullanabilirsiniz veya DÖNÜŞTÜREBİLİRSİNİZ.
-* IsNull, birleşim değil öğesinin zorlamak için kullanın. Aşağıdaki nota bakın.
-* IsNull en dıştaki bir işlevdir.
-* İkinci IsNull 0 sabiti parçasıdır.
+* CAST veya CONVERT kullanabilirsiniz.
+* Null değer verilebilirliği zorlamak için ıSNULL, BIRLEŞIM değil ' i kullanın. Aşağıdaki nota bakın.
+* ISNULL, en dıştaki işlevdir.
+* ISNULL 'nin ikinci bölümü bir sabittir, 0.
 
 > [!NOTE]
-> Öğesinin doğru şekilde ayarlanması, ISNULL ve değil COALESCE kullanmak için önemlidir. COALESCE belirleyici bir işlev değil ve bu nedenle ifadesinin sonucu boş değer her zaman olur. IsNull farklıdır. Bu belirleyici bir işlemdir. Bu nedenle, IsNull işlevi ikinci bölümü, sabit bir değer veya bir sabit değer olduğunda, sonuç değerini olduğu NOT NULL.
+> Null değer, doğru şekilde ayarlanverilebilmesi için, ıSNULL ve BIRLEŞIM değil kullanılması çok önemlidir. BIRLEŞIM belirleyici bir işlev değildir ve bu nedenle, ifadenin sonucu her zaman null yapılabilir olur. ISNULL farklı. Belirleyici. Bu nedenle, ıSNULL işlevinin ikinci bölümü bir sabit veya değişmez değer olduğunda, sonuç değeri NULL olmaz.
 
-Hesaplamalarınızı bütünlüğünü sağlamaya da tabloda bölüm değiştirme için önemlidir. Bu tabloda bir Olgu Tablosu tanımlanan sahip olduğunuzu düşünün:
+Hesaplamalarınızın bütünlüğünden emin olmak tablo bölümü değiştirme için de önemlidir. Bu tablonun olgu tablosu olarak tanımlandığını düşünün:
 
 ```sql
 CREATE TABLE [dbo].[Sales]
 (
     [date]      INT     NOT NULL
-,   [product]   INT     NOT NULL
-,   [store]     INT     NOT NULL
-,   [quantity]  INT     NOT NULL
-,   [price]     MONEY   NOT NULL
-,   [amount]    MONEY   NOT NULL
+, [product]   INT     NOT NULL
+, [store]     INT     NOT NULL
+, [quantity]  INT     NOT NULL
+, [price]     MONEY   NOT NULL
+, [amount]    MONEY   NOT NULL
 )
 WITH
 (   DISTRIBUTION = HASH([product])
@@ -374,19 +359,18 @@ WITH
                     ,20030101,20040101,20050101
                     )
                 )
-)
-;
+);
 ```
 
-Ancak, tutarı hesaplanan bir ifadedir. Bu kaynak veriler bir parçası değil.
+Ancak, tutar alanı hesaplanmış bir ifadedir. Kaynak verilerin bir parçası değildir.
 
-Bölümlenmiş kümenizi oluşturmak için aşağıdaki kodu kullanmak isteyebilirsiniz:
+Bölümlenmiş veri kümenizi oluşturmak için aşağıdaki kodu kullanmak isteyebilirsiniz:
 
 ```sql
 CREATE TABLE [dbo].[Sales_in]
 WITH
-(   DISTRIBUTION = HASH([product])
-,   PARTITION   (   [date] RANGE RIGHT FOR VALUES
+( DISTRIBUTION = HASH([product])
+, PARTITION   (   [date] RANGE RIGHT FOR VALUES
                     (20000101,20010101
                     )
                 )
@@ -400,38 +384,37 @@ SELECT
 ,   [price]
 ,   [quantity]*[price]  AS [amount]
 FROM [stg].[source]
-OPTION (LABEL = 'CTAS : Partition IN table : Create')
-;
+OPTION (LABEL = 'CTAS : Partition IN table : Create');
 ```
 
-Sorgu mükemmel çalışır. Bölüm anahtarı yapmayı denediğinizde sorun gelir. Tablo tanımları eşleşmiyor. Tablo tanımları eşleşmiyor, eklemek için CTAS değişiklik yapmak için bir `ISNULL` sütun null atanabilirlik özniteliğine korumak için işlevi.
+Sorgu sorunsuz bir şekilde çalışır. Bu sorun, Bölüm anahtarını yapmayı denediğinizde gönderilir. Tablo tanımları eşleşmiyor. Tablo tanımlarının eşleşmesini sağlamak için CTAS 'yi, sütunun null olabilme özniteliğini korumak üzere bir `ISNULL` işlevi ekleyecek şekilde değiştirin.
 
 ```sql
 CREATE TABLE [dbo].[Sales_in]
 WITH
-(   DISTRIBUTION = HASH([product])
-,   PARTITION   (   [date] RANGE RIGHT FOR VALUES
+( DISTRIBUTION = HASH([product])
+, PARTITION   (   [date] RANGE RIGHT FOR VALUES
                     (20000101,20010101
                     )
                 )
 )
 AS
 SELECT
-    [date]
-,   [product]
-,   [store]
-,   [quantity]
-,   [price]   
-,   ISNULL(CAST([quantity]*[price] AS MONEY),0) AS [amount]
+  [date]
+, [product]
+, [store]
+, [quantity]
+, [price]   
+, ISNULL(CAST([quantity]*[price] AS MONEY),0) AS [amount]
 FROM [stg].[source]
 OPTION (LABEL = 'CTAS : Partition IN table : Create');
 ```
 
-Türü tutarlılık ve öğesinin özellikte CTAS Bakımı bir mühendislik en iyi durumda olduğunu görebilirsiniz. Hesaplamalarınızda bütünlüğünü sağlamaya yardımcı olur ve ayrıca bölüm değiştirme mümkün olmasını sağlar.
+Tür tutarlılığı ve bir CTAS üzerinde null değer alabilme özelliklerinin sürdürülmesi, mühendisliğin en iyi yöntemidir. Hesaplamalarınızda tutarlılığın sağlanmasına yardımcı olur ve ayrıca bölüm geçişinin mümkün olmasını sağlar.
 
-CTAS, SQL veri ambarı en önemli deyimlerinde biridir. İyice anladığınızdan emin olun. Bkz: [CTAS belgeleri](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse).
+CTAS, SQL Data Warehouse 'daki en önemli ifadelerden biridir. Kapsamlı olarak anladığınızdan emin olun. Bkz. [CTAS belgeleri](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla geliştirme ipuçları için bkz: [geliştirmeye genel bakış](sql-data-warehouse-overview-develop.md).
+Daha fazla geliştirme ipucu için [geliştirmeye genel bakış](sql-data-warehouse-overview-develop.md)bölümüne bakın.
 

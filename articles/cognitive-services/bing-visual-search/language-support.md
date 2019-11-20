@@ -1,45 +1,45 @@
 ---
-title: Dil desteği - Bing görsel arama API'si
+title: Dil desteği-Bing Görsel Arama API'si
 titleSuffix: Azure Cognitive Services
-description: Doğal dil, ülke ve Bing görsel arama API'si tarafından desteklenen bölgeler listesi. Bing görsel arama API'sine birden fazla üç düzine ülkeler/bölgeler, çoğu birden fazla dili destekler.
+description: Bing Görsel Arama API'si tarafından desteklenen doğal dillerin, ülkelerin ve bölgelerin listesi. Bing Görsel Arama API'si, birden fazla dilden çok sayıda ülkeyi/bölgeyi destekler.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-visual-search
-ms.topic: article
+ms.topic: conceptual
 ms.date: 09/25/2018
 ms.author: scottwhi
-ms.openlocfilehash: 1639b8066f3c9943bc42f5151fcb456585441baf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b17341bc234ff3dfecc2c6dcd84ef77116a95d61
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64866240"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68883542"
 ---
-# <a name="language-and-region-support-for-the-bing-visual-search-api"></a>Bing görsel arama API'sine dil ve bölge desteği
+# <a name="language-and-region-support-for-the-bing-visual-search-api"></a>Bing Görsel Arama API'si için dil ve bölge desteği
 
-Bing görsel arama API'sine birden fazla üç düzine ülkeler/bölgeler, çoğu birden fazla dili destekler. Her istek, kullanıcının ülke/bölge ve tercih ettiğiniz dilde içermelidir. Kullanıcının Pazar bilerek uygun sonuçları döndürmek Bing yardımcı olur. Bir ülke/bölge ve dil belirtmezseniz, Bing, kullanıcının ülke/bölge ve dil belirlemek için bir en iyi hale getirir. Sonuçları Bing bağlantılar içeriyor olabileceğinden, kullanıcının Bing bağlantıları tıklarsa ülke/bölge ve dil bilerek tercih edilen bir yerelleştirilmiş Bing kullanıcı deneyimini sağlayabilir.
+Bing Görsel Arama API'si, birden fazla dilden çok sayıda ülkeyi/bölgeyi destekler. Her istek, kullanıcının ülke/bölge ve tercih edilen dilini içermelidir. Kullanıcının pazarını bilmek, Bing 'in uygun sonuçlara dönüşmesini sağlar. Bir ülke/bölge ve dil belirtmezseniz, Bing kullanıcının ülke/bölge ve dilini belirlemek için en iyi çabayı sağlar. Sonuçlar Bing bağlantıları içerebileceğinden, Kullanıcı Bing bağlantılarına tıkladığında ülke/bölge ve dil tercih edilen yerelleştirilmiş Bing Kullanıcı deneyimi sağlayabilir.
 
-Ülke/Bölge ve dil belirtmek için ayarlayın `mkt` (Pazar) sorgu parametresine bir koddan **pazarlara** aşağıdaki tabloda. Market, bir ülke/bölge ve dil belirtir. Kullanıcının tercih ettiği görmek, metni farklı bir dilde görüntülemek, ayarlamak `setLang` sorgu parametresi için uygun dil kodu.
+Ülke/bölge ve dil belirtmek için, `mkt` (Pazar) sorgu parametresini aşağıdaki **pazarlar** tablosundan bir koda ayarlayın. Pazar, hem ülke/bölge hem de dili belirtir. Kullanıcı farklı bir dilde görüntüleme metnini görmeyi tercih ediyorsa, sorgu parametresini uygun dil `setLang` koduna ayarlayın.
 
-Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametresi. Bir ülke/bölge belirtirseniz, kullanarak bir veya daha fazla dil kodunu da belirtmeniz gerekir `Accept-Language` HTTP üstbilgisi. Desteklenen diller, ülke/bölgeye göre değişiklik gösterir; pazarlara tablodaki her bir ülkede verilir.
+Alternatif olarak, ülke/bölge ' yi `cc` sorgu parametresini kullanarak belirtebilirsiniz. Bir ülke/bölge belirtirseniz, `Accept-Language` http üstbilgisini kullanarak bir veya daha fazla dil kodu da belirtmeniz gerekir. Desteklenen diller ülkeye/bölgeye göre farklılık gösterir. Bunlar, pazarlar tablosundaki her bir ülke için verilir.
 
 
 
 > [!NOTE]
-> Aşağıdaki market kısıtlamalar uygulanır:
+> Aşağıdaki Pazar kısıtlamaları geçerlidir:
 >
-> - Görüntü tanıma ek açıklamalar yalnızca İngilizce dilinde kullanılabilir.
-> - Tarif, alışveriş ve sayfalar dahil ınsights yalnızca en-US pazarında kullanılabilir.
+> - Görüntü tanıma ek açıklamaları yalnızca Ingilizce olarak kullanılabilir.
+> - İçgörüler, alışveriş ve sayfalar dahil Öngörüler yalnızca en-US pazarında sunulmaktadır.
 
 
-## <a name="countriesregions"></a>Ülkeler/bölgeler
+## <a name="countriesregions"></a>Ülkeler/Bölgeler
 
 |Ülke/bölge|Kod|
 |-------|----|
 |Arjantin|AR|
-|Avustralya|AU|
+|Avustralya|Otomatik Olarak Güncelleştir|
 |Avusturya|AT|
 |Belçika|BE|
 |Brezilya|BR|
@@ -51,8 +51,8 @@ Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametr
 |Almanya|DE|
 |Hong Kong SAR|HK|
 |Hindistan|IN|
-|Endonezya|Kimlik|
-|İtalya|BT|
+|Endonezya|id|
+|İtalya|IT|
 |Japonya|JP|
 |Güney Kore|KR|
 |Malezya|MY|
@@ -76,40 +76,40 @@ Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametr
 |Amerika Birleşik Devletleri|ABD|
 
 
-## <a name="markets"></a>Pazarlar
+## <a name="markets"></a>Pazar
 
-|Ülke/bölge|Dil|Pazar kod|
+|Ülke/bölge|Dil|Pazar kodu|
 |-------|--------|-----------|
 |Arjantin|İspanyolca|es-AR|
 |Avustralya|Türkçe|tr-AU|
 |Avusturya|Almanca|de-AT|
-|Belçika|Felemenkçe|NL-olabilir|
-|Belçika|Fransızca|FR-olabilir|
+|Belçika|Felemenkçe|nl-|
+|Belçika|Fransızca|fr-of|
 |Brezilya|Portekizce|pt-BR|
 |Kanada|Türkçe|CA tr|
 |Kanada|Fransızca|fr-CA|
-|Şili|İspanyolca|ES-CL|
+|Şili|İspanyolca|es-CL|
 |Danimarka|Danca|v-DK|
 |Finlandiya|Fince|FI-FI|
 |Fransa|Fransızca|fr-FR|
 |Almanya|Almanca|de-DE|
 |Hong Kong SAR|Geleneksel Çince|zh-HK|
 |Hindistan|Türkçe|tr-giriş|
-|Endonezya|Türkçe|tr kimliği|
+|Endonezya|Türkçe|En-KIMLIĞI|
 |İtalya|İtalyanca|İt-IT|
 |Japonya|Japonca|ja-JP|
 |Güney Kore|Korece|ko-KR|
-|Malezya|Türkçe|MY tr|
+|Malezya|Türkçe|En-MY|
 |Meksika|İspanyolca|es-MX|
 |Hollanda|Felemenkçe|NL-NL|
 |Yeni Zelanda|Türkçe|tr NZ|
 |Çin|Çince|zh-CN|
 |Polonya|Lehçe|pl-PL|
 |Portekiz|Portekizce|pt-PT|
-|Filipinler|Türkçe|tr PH|
+|Filipinler|Türkçe|En-PH|
 |Rusya|Rusça|ru-RU|
 |Suudi Arabistan|Arapça|ar-SA|
-|Güney Afrika|Türkçe|tr-ZA|
+|Güney Afrika|Türkçe|En-ZA|
 |İspanya|İspanyolca|es-ES|
 |İsveç|İsveççe|sv-SE|
 |İsviçre|Fransızca|FR-CH|
@@ -118,4 +118,4 @@ Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametr
 |Türkiye|Türkçe|tr-TR|
 |Birleşik Krallık|Türkçe|en-GB|
 |Amerika Birleşik Devletleri|Türkçe|en-US|
-|Amerika Birleşik Devletleri|İspanyolca|ES-ABD|
+|Amerika Birleşik Devletleri|İspanyolca|es-US|

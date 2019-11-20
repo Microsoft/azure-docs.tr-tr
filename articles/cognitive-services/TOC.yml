@@ -1,16 +1,26 @@
 - name: Azure Bilişsel Hizmetler Belgeleri
-  href: index.md
+  href: index.yml
 - name: Genel Bakış
   expanded: true
   items:
     - name: Bilişsel Hizmetler nedir?
       href: Welcome.md
+    - name: Bilişsel Hizmetler ve Makine öğrenmesi
+      href: cognitive-services-and-machine-learning.md
+    - name: Bilişsel Hizmetler için sanal ağlar
+      href: cognitive-services-virtual-networks.md
+    - name: Bilişsel Hizmetler’e yönelik özel alt etki alanları
+      href: cognitive-services-custom-subdomains.md
     - name: Dil desteği
       href: language-support.md
 - name: Kapsayıcı desteği
   items:
     - name: Kapsayıcı desteği
       href: cognitive-services-container-support.md
+    - name: Kapsayıcı görüntüsü etiketleri
+      href: ./containers/container-image-tags.md
+    - name: Kapsayıcı hakkında SSS
+      href: ./containers/container-faq.md
     - name: Kapsayıcı tarifleri
       items:
         - name: Kapsayıcıyı Yeniden Kullanma
@@ -31,9 +41,9 @@
           href: ../aks/tutorial-kubernetes-prepare-app.md
 - name: Hızlı Başlangıçlar
   items:
-    - name: Azure portalı kullanarak bir hesap oluşturma
+    - name: Azure portalını kullanarak yeni kaynak oluşturma
       href: cognitive-services-apis-create-account.md
-    - name: Azure CLI kullanarak bir hesap oluşturma
+    - name: Azure CLI’yi kullanarak yeni kaynak oluşturma
       href: cognitive-services-apis-create-account-cli.md
     - name: Kimlik Doğrulaması
       href: authentication.md
@@ -49,6 +59,8 @@
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Uyumluluk
       href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: Hizmet Düzeyi Sözleşmesi (SLA)
+      href: 'https://azure.microsoft.com/support/legal/sla/cognitive-services/v1_1/'
     - name: Videolar
       href: 'https://azure.microsoft.com/resources/videos/index/?services=cognitive-services'
     - name: Blog

@@ -1,39 +1,39 @@
 ---
-title: İstek birimleri ve maliyet Azure Cosmos DB'de sorguları çalıştırmak için en iyi duruma getirme
-description: Bir sorgu için istek birimi ücreti değerlendirmek ve sorgu performansı ve maliyet açısından en iyi duruma getirme hakkında bilgi edinin.
-author: rimman
+title: Azure Cosmos DB sorguları çalıştırmak için istek birimlerini ve maliyeti iyileştirin
+description: Bir sorgu için istek birimi ücretlerini değerlendirmeyi ve sorguyu performans ve maliyet açısından en uygun hale getirmeyi öğrenin.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/21/2019
-ms.author: rimman
-ms.openlocfilehash: 2d1ac054abf4bb8228bdb5cc20d79cb751af7a33
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/01/2019
+ms.openlocfilehash: 376c1a32a70951448b35a4c02022719229a3aad2
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65967448"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72753298"
 ---
-# <a name="optimize-query-cost-in-azure-cosmos-db"></a>Azure Cosmos DB'de sorgu gerçekleştirerek
+# <a name="optimize-query-cost-in-azure-cosmos-db"></a>Azure Cosmos DB 'de sorgu maliyetini iyileştirin
 
-Azure Cosmos DB veritabanı işlemleri bir kapsayıcı içindeki öğeleri üzerinde çalışacağı ilişkisel ve hiyerarşik sorgular da dahil olmak üzere zengin bir özellik kümesi sunar. Bu işlemlerden her biriyle ilişkilendirilmiş maliyet, CPU, GÇ ve işlemi tamamlamak için gerekli belleğe göre değişir. Hakkında düşünmek ve donanım kaynaklarını yönetmek yerine, bir istek Birimi'ni (RU), bir isteğe hizmet vermek için çeşitli veritabanı işlemlerini gerçekleştirmek için gereken kaynaklar için tek ölçü olarak düşünebilirsiniz. Bu makalede, bir sorgu için istek birimi ücreti değerlendirmek ve sorgu performansı ve maliyet açısından en iyi duruma getirmek açıklar. 
+Azure Cosmos DB, bir kapsayıcı içindeki öğelerde çalışan ilişkisel ve hiyerarşik sorgular da dahil olmak üzere zengin bir veritabanı işlemleri kümesi sunar. Bu işlemlerden her biriyle ilişkilendirilmiş maliyet, işlemi gerçekleştirmek için gereken CPU, GÇ ve belleğe göre değişir. Donanım kaynaklarını düşünmek ve yönetmek yerine bir istek birimi (RU), bir isteğe yönelik çeşitli veritabanı işlemlerini gerçekleştirmek için gereken kaynaklar için tek bir ölçü olarak düşünebilirsiniz. Bu makalede, bir sorgu için istek birimi ücretlerinin nasıl değerlendirileceği ve sorgunun performans ve maliyet açısından en iyi hale getirileceği açıklanır. 
 
-Azure Cosmos DB'de sorguları genellikle hızlı/en verimli daha yavaş/daha az verimli aktarım hızı açısından için şu şekilde sıralanır:  
+Azure Cosmos DB sorguları genellikle aktarım açısından en hızlı/en etkili ve daha az verimlidir  
 
-* ALMA işlemi tek bir bölüm anahtarı ve öğe anahtarı.
+* Tek bir bölüm anahtarında ve öğe anahtarında işlem al.
 
-* Bir filtre yan tümcesi içinde tek bir bölüm anahtarı ile sorgulama.
+* Tek bir bölüm anahtarı içinde bir filtre yan tümcesi ile sorgulayın.
 
-* Bir eşitlik veya aralık filtre yan tümcesi olmadan herhangi bir özellikte sorgulayın.
+* Herhangi bir özellikte eşitlik veya Aralık filtresi yan tümcesi olmadan sorgu.
 
-* Bir filtre içermeyen sorgulayın.
+* Filtre olmadan sorgulayın.
 
-Bir veya birden çok bölümdeki verileri okuma sorguları, daha yüksek gecikme uygulanır ve daha yüksek sayıda istek birimleri kullanma. Her bölüm tüm özellikleri için otomatik dizin oluşturma olduğundan, sorgu dizinden verimli bir şekilde sunulabilir. Birden çok bölüm paralellik seçenekleri kullanarak daha hızlı kullanan sorguları yapabilirsiniz. Bölümlendirme ve bölüm anahtarları hakkında daha fazla bilgi için bkz: [Azure Cosmos DB'de bölümleme](partitioning-overview.md).
+Bir veya daha fazla bölümden verileri okuyan sorgular, daha yüksek gecikme süresine ve daha yüksek sayıda istek birimi tüketir. Her bölümde tüm özellikler için otomatik dizin oluşturma olduğundan, sorgu dizinden verimli bir şekilde sunulabilir. Paralellik seçeneklerini kullanarak birden çok bölüm kullanan sorguları daha hızlı yapabilirsiniz. Bölümlendirme ve bölüm anahtarları hakkında daha fazla bilgi edinmek için bkz. [Azure Cosmos DB bölümlendirme](partitioning-overview.md).
 
-## <a name="evaluate-request-unit-charge-for-a-query"></a>Bir sorgu için istek birimi ücretine ek olarak değerlendir
+## <a name="evaluate-request-unit-charge-for-a-query"></a>Bir sorgu için istek birimi ücreti değerlendir
 
-Azure Cosmos kapsayıcılarınızı veya depolanan bazı verileri bir kez oluşturun ve, sorguları çalıştırmak için Azure portalında Veri Gezgini'ni kullanabilirsiniz. Veri Gezgini'ni kullanarak, sorguları maliyetini de alabilirsiniz. Bu yöntem gerçek ücretleri tipik sorgular ve sisteminizin desteklediği işlemleri ile ilgili bir fikir verir.
+Azure Cosmos kapsayıcılarınızda bazı verileri depoladıktan sonra, sorgularınızı oluşturmak ve çalıştırmak için Azure portal Veri Gezgini kullanabilirsiniz. Ayrıca, Veri Gezgini 'ni kullanarak sorguların maliyetini de alabilirsiniz. Bu yöntem, sisteminizin desteklediği tipik sorgular ve işlemlerle ilgili gerçek ücretler hakkında fikir verecektir.
 
-SDK'ları kullanarak sorguları maliyetini programlı olarak da edinebilirsiniz. Herhangi bir işlem yükü ölçmek için gibi oluştururken, güncelleştirme veya silme İnceleme `x-ms-request-charge` REST API'si kullanılırken başlığı. .NET veya Java SDK'sı kullanıyorsanız `RequestCharge` isteği ücret alınacak eşdeğer özelliğin bir özelliktir ve bu özellik ResourceResponse veya FeedResponse içinde yok.
+SDK 'Ları kullanarak, programlı bir şekilde sorgu maliyeti de alabilirsiniz. Oluşturma, güncelleştirme veya silme gibi herhangi bir işlemin ek yükünü ölçmek için REST API kullanırken `x-ms-request-charge` üst bilgisini inceleyin. .NET veya Java SDK kullanıyorsanız, `RequestCharge` özelliği istek ücreti almak için eşdeğer bir özelliktir ve bu özellik Resourceres, FeedResponse içinde bulunur.
 
 ```csharp
 // Measure the performance (request units) of writes 
@@ -51,15 +51,15 @@ while (queryable.HasMoreResults)
      }
 ```
 
-## <a name="factors-influencing-request-unit-charge-for-a-query"></a>Bir sorgu için istek birimi ücreti etkileyen faktörler
+## <a name="factors-influencing-request-unit-charge-for-a-query"></a>Bir sorgu için istek birimi ücretlendirmeyi etkileyen etmenler
 
-Sorgular için istek birimleri, bir dizi faktöre bağlıdır. Örneğin, Azure Cosmos öğe sayısını yüklendi/döndürülen, arama ve dizin sorgu derleme karşı sayısı vb. ayrıntıları zaman. Azure Cosmos DB, aynı veri yürütüldüğünde aynı sorgu her zaman istek birimleri bile tekrar yürütme ile aynı sayıda tüketecektir garanti eder. Sorgu yürütme ölçümleri kullanarak sorguyu profili istek birimleri nasıl harcanan bir iyi fikir verir.  
+Sorgular için istek birimleri, bir dizi etkene bağımlıdır. Örneğin, yüklenen/döndürülen Azure Cosmos öğelerinin sayısı, dizinde yapılan arama sayısı, sorgu derleme süresi vb. ayrıntılar. Azure Cosmos DB aynı verilerde yürütüldüğü sırada aynı sorgunun her zaman aynı sayıda istek birimi de tekrarlayarak yineleme yürütmelerinin aynısını kullanmasını güvence altına alır. Sorgu yürütme ölçümlerini kullanan sorgu profili, istek birimlerinin nasıl harcandığına ilişkin iyi bir fikir verir.  
 
-Bazı durumlarda, 200 ve 429 yanıtları ve değişken istek birimleri cinsinden sorguları kullanılabilir RU'ları üzerinde temel mümkün olduğunca hızlı çalışır çünkü Disk bellekli bir yürütme sorgu, bir dizi görebilirsiniz. Birden çok birden/sunucu ve istemci arasındaki gelişlerin yuvarlak bir sorgu yürütme görebilirsiniz. Örneğin, 10.000 öğeleri döndürülmesi birden çok sayfa her sayfada gerçekleştirilen hesaplama göre ücretlendirilir. Bu sayfada topladığımızda için sorgunun tamamını elde edebileceğiniz gibi aynı sayıda RU almanız gerekir.  
+Bazı durumlarda, sorgular kullanılabilir ru 'yı temel alarak mümkün olduğunca hızlı çalışacağı için bir dizi 200 ve 429 yanıt ve çok sayıda sorgu üzerinde değişken istek birimleri görebilirsiniz. Sunucu ve istemci arasında birden fazla sayfaya/gidiş dönüşe bir sorgu yürütme kesmesi görebilirsiniz. Örneğin, 10.000 öğe, her biri bu sayfada gerçekleştirilen hesaplamayı temel alarak ücretlendirilen birden çok sayfa olarak döndürülebilir. Bu sayfalar arasında toplama yaptığınızda, tüm sorgu için alacağınız aynı ru sayısını almalısınız.  
 
-## <a name="metrics-for-troubleshooting"></a>Sorun giderme için ölçümleri
+## <a name="metrics-for-troubleshooting"></a>Sorun giderme ölçümleri
 
-Performans ve kullanıcı tanımlı işlevler (UDF'ler) sorgular tarafından genellikle kullanılan aktarım hızı, işlev gövdesinde bağlıdır. Sorgu yürütme UDF ve tüketilen, RU sayısını harcandığını ne kadar süre öğrenmek için en kolay yolu olan sorgu ölçümlerini etkinleştirerek. .NET SDK'sı kullanıyorsanız, SDK tarafından döndürülen örnek sorgu ölçümler şunlardır:
+Sorgular tarafından tüketilen performans ve aktarım hızı, Kullanıcı tanımlı işlevler (UDF 'ler) genellikle işlev gövdesine bağlıdır. Sorgu yürütmesinin UDF 'de ne kadar zaman harcandığını ve tüketilen saat sayısını bulmanın en kolay yolu, sorgu ölçümlerini etkinleştirir. .NET SDK kullanıyorsanız, SDK tarafından döndürülen örnek sorgu ölçümleri aşağıda verilmiştir:
 
 ```bash
 Retrieved Document Count                 :               1              
@@ -85,30 +85,30 @@ Total Query Execution Time               :   �
     Request Charge                       :            3.19 RUs  
 ```
 
-## <a name="best-practices-to-cost-optimize-queries"></a>Sorguları en iyi yöntemler maliyetini en iyi duruma getirme 
+## <a name="best-practices-to-cost-optimize-queries"></a>Sorguları iyileştirmek için en iyi uygulamalar 
 
-Aşağıdaki en iyi maliyet sorgularında iyileştirilmesi sırasında göz önünde bulundurun:
+Aşağıdaki en iyi yöntemleri maliyet için iyileştirirken göz önünde bulundurun:
 
-* **Birden çok varlık türleri birlikte bulundurma**
+* **Birden çok varlık türünü birlikte bulundurma**
 
-   Kapsayıcıları tek ya da daha küçük bir dizi içinde birden çok varlık türleri birlikte bulundurmanıza olanak deneyin. Bu yöntemin avantajları yalnızca fiyatlandırma açısından, aynı zamanda sorgu yürütme ve işlemler için verir. Sorgular tek bir kapsayıcıya kapsamına eklenir; ve saklı yordamlar/Tetikleyicileri aracılığıyla birden çok kayıt üzerinden atomik işlemler tek bir kapsayıcıdaki bir bölüm anahtarı kapsamına eklenir. Aynı kapsayıcı içindeki varlıklar birlikte bulundurma ağ sayısını azaltabilirsiniz kayıtlarda ilişkilerini çözmek için gidiş dönüş. Böylece uçtan uca performansını artırır, daha büyük bir veri kümesi için birden çok kayıt atomik işlemler sağlar ve sonuç olarak maliyetlerini düşürür. Kapsayıcıları tek ya da daha küçük bir dizi içinde birden çok varlık türleri birlikte bulundurma genellikle var olan bir uygulamayı geçiş yaptığınız ve - herhangi bir kod değişikliği yapmak istiyor musunuz senaryonuz için zor olduğundan, ardından sağlama düşünmelisiniz veritabanı düzeyinde aktarım hızı.  
+   Birden çok varlık türünü tek veya daha küçük bir kapsayıcı içinde bulundurmanıza çalışın. Bu yöntem, yalnızca bir fiyatlandırma perspektifinden değil, sorgu yürütme ve işlemler için de avantaj verir. Sorgular tek bir kapsayıcıya kapsamlandırılır; saklı yordamlar/Tetikleyiciler aracılığıyla birden çok kayıt üzerinde Atomik işlemler, tek bir kapsayıcı içindeki bir bölüm anahtarının kapsamına alınır. Aynı kapsayıcı içindeki varlıkları birlikte bulundurma, kayıtlar arasındaki ilişkileri çözümlemek için ağ gidiş dönüş sayısını azaltabilir. Bu nedenle, uçtan uca performansı artırarak, daha büyük bir veri kümesi için birden çok kayıt üzerinde atomik işlemleri sağlar ve sonuç olarak maliyetleri düşürür. Tek veya daha küçük bir kapsayıcı içinde birden çok varlık türünü birlikte bulundurma senaryosunda, genellikle var olan bir uygulamayı geçiriyorsanız ve herhangi bir kod değişikliği yapmak istemediğiniz için, daha sonra sağlamayı düşünmelisiniz veritabanı düzeyinde aktarım hızı.  
 
-* **Ölçün ve için alt istek birimi/saniye kullanım ayarlayın.**
+* **Düşük istek birimleri/ikinci kullanım için ölçme ve ayarlama**
 
-   Kaç tane istek birimi (RU) bir işlem için kullanılan bir sorgu karmaşıklığı etkiler. Koşullar, koşullarına, UDF'ler sayısı ve boyutu kaynak veri kümesi yapısı sayısı. Tüm bu faktörler sorgu işlemlerinin maliyetini etkiler. 
+   Bir sorgunun karmaşıklığı, bir işlem için kaç tane istek birimi (ru) tüketildiğini etkiler. Koşulların sayısı, koşulların doğası, UDF sayısı ve kaynak veri kümesinin boyutu. Tüm bu faktörler, sorgu işlemlerinin maliyetini etkiler. 
 
-   İstek üstbilgisinde döndürülen istek yükü, belirli bir sorgu maliyetini gösterir. Örneğin, bir sorgu 1000 1 KB'lık öğeleri döndürürse, işlemin maliyeti 1000'dir. Bu nedenle, bir saniye içinde sonraki istekleri hız sınırı önce yalnızca iki tür isteklere sunucunun geliştirir. Daha fazla bilgi için [istek birimi](request-units.md) makale ve istek birimi hesaplayıcı. 
+   İstek üstbilgisinde döndürülen istek ücreti, belirli bir sorgunun maliyetini gösterir. Örneğin, bir sorgu 1000 1 KB 'lik öğeler döndürürse, işlemin maliyeti 1000 ' dir. Bu nedenle, bir saniye içinde sunucu, sonraki istekleri sınırlayan orandan önce yalnızca iki istek için geçerlidir. Daha fazla bilgi için bkz. [İstek birimleri](request-units.md) makalesi ve istek birimi hesaplayıcısı. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağıdaki makalelerde Azure Cosmos DB'de maliyet iyileştirmesi hakkında daha fazla bilgi edinmek için sonraki geçebilirsiniz:
+Daha sonra, aşağıdaki makalelerle Azure Cosmos DB maliyet iyileştirmesi hakkında daha fazla bilgi edinebilirsiniz:
 
-* Daha fazla bilgi edinin [nasıl çalıştığını fiyatlandırma Azure Cosmos](how-pricing-works.md)
-* Daha fazla bilgi edinin [en iyi duruma getirme için geliştirme ve test etme](optimize-dev-test.md)
-* Daha fazla bilgi edinin [Azure Cosmos DB faturanızı anlama](understand-your-bill.md)
-* Daha fazla bilgi edinin [aktarım hızı maliyeti en iyi duruma getirme](optimize-cost-throughput.md)
-* Daha fazla bilgi edinin [depolama maliyetini en iyi duruma getirme](optimize-cost-storage.md)
-* Daha fazla bilgi edinin [okuma ve yazma işlemleri maliyetini en iyi duruma getirme](optimize-cost-reads-writes.md)
-* Daha fazla bilgi edinin [çok bölgeli Azure Cosmos hesapları maliyetini en iyi duruma getirme](optimize-cost-regions.md)
-* Daha fazla bilgi edinin [Azure Cosmos DB ayrılan kapasite](cosmos-db-reserved-capacity.md)
+* [Azure Cosmos fiyatlandırmasının nasıl çalıştığı](how-pricing-works.md) hakkında daha fazla bilgi edinin
+* [Geliştirme ve test Için iyileştirme](optimize-dev-test.md) hakkında daha fazla bilgi edinin
+* [Azure Cosmos DB Faturanızı Anlama](understand-your-bill.md) hakkında daha fazla bilgi edinin
+* [Verimlilik maliyetini iyileştirme](optimize-cost-throughput.md) hakkında daha fazla bilgi edinin
+* [Depolama maliyetini iyileştirme](optimize-cost-storage.md) hakkında daha fazla bilgi edinin
+* [Okuma ve yazma maliyetlerini iyileştirme](optimize-cost-reads-writes.md) hakkında daha fazla bilgi edinin
+* [Çok bölgeli Azure Cosmos hesaplarının maliyetini En Iyi duruma getirme](optimize-cost-regions.md) hakkında daha fazla bilgi edinin
+* [Azure Cosmos DB ayrılmış kapasite](cosmos-db-reserved-capacity.md) hakkında daha fazla bilgi edinin
 

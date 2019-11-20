@@ -1,10 +1,10 @@
 ---
-title: Bölgesel frontend - Azure CLI ile bir yük dengeleyici oluşturma
-titlesuffix: Azure Load Balancer
-description: Azure CLI kullanarak bölgesel ön uç ile standart yük dengeleyici oluşturmayı öğrenin
+title: Bölgesel ön ucu ile yük dengeleyici oluşturma-Azure CLI
+titleSuffix: Azure Load Balancer
+description: Azure CLI kullanarak bölgesel ön ucu ile standart Load Balancer oluşturma hakkında bilgi edinin
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 manager: twooley
 ms.service: load-balancer
 ms.devlang: na
@@ -12,17 +12,17 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/26/2018
-ms.author: kumud
-ms.openlocfilehash: 3b89c11c11276781ec63367247601fccfd2fa858
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: allensu
+ms.openlocfilehash: 620e4456e86a8610819495bd490353a3a5681738
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66122194"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076080"
 ---
-#  <a name="create-a-standard-load-balancer-with-zonal-frontend-using-azure-cli"></a>Azure CLI kullanarak bölgesel ön uç ile standart yük dengeleyici oluşturma
+#  <a name="create-a-standard-load-balancer-with-zonal-frontend-using-azure-cli"></a>Azure CLI kullanarak bölgesel ön ucu ile standart Load Balancer oluşturma
 
-Bu makalede adımları genel oluşturma işleminde [Standard Load Balancer](https://aka.ms/azureloadbalancerstandard) bölgesel bir ön uç ile. Sahip. bir bölgedeki tek bir bölge tarafından sunulan herhangi bir gelen veya giden akış bölgesel ön uç anlamına gelir. Ön uç yapılandırmasına bölgesel bir standart genel IP adresi kullanarak bir yük dengeleyici ile bölgesel bir ön uç oluşturabilirsiniz. Kullanılabilirlik alanları standart Load Balancer ile nasıl çalıştığını anlamak için bkz: [Standard Load Balancer ve kullanılabilirlik bölgeleri](load-balancer-standard-availability-zones.md). 
+Bu makalede, bölgesel ön ucu ile genel [Standart Load Balancer](https://aka.ms/azureloadbalancerstandard) oluşturma adımları sağlanır. Bir ZGen ön ucu olması, gelen veya giden akışın bir bölgedeki tek bir bölge tarafından hizmet verdiği anlamına gelir. Ön uç yapılandırmasında bölgesel standart genel IP adresini kullanarak, bölgesel ön ucu ile yük dengeleyici oluşturabilirsiniz. Kullanılabilirlik alanları standart Load Balancer ile nasıl çalıştığını anlamak için bkz: [Standard Load Balancer ve kullanılabilirlik bölgeleri](load-balancer-standard-availability-zones.md). 
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
@@ -44,7 +44,7 @@ az group create --name myResourceGroupZLB --location westeurope
 
 ## <a name="create-a-public-standard-ip-address"></a>Genel Standart IP adresi oluşturma
 
-Aşağıdaki komutu kullanarak bölgesel bir standart genel IP adresi oluşturun:
+Aşağıdaki komutu kullanarak bir bölgesel standart genel IP adresi oluşturun:
 
 ```azurecli-interactive
 az network public-ip create --resource-group myResourceGroupZLB --name myPublicIPZonal --sku Standard --zone 1
@@ -52,7 +52,7 @@ az network public-ip create --resource-group myResourceGroupZLB --name myPublicI
 
 ## <a name="create-a-load-balancer"></a>Yük dengeleyici oluşturma
 
-Standart genel ıp'li aşağıdaki komutu kullanarak önceki adımda oluşturduğunuz genel bir Standard Load Balancer oluşturun:
+Aşağıdaki komutu kullanarak önceki adımda oluşturduğunuz standart genel IP ile genel bir Standart Load Balancer oluşturun:
 
 ```azurecli-interactive
 az network lb create --resource-group myResourceGroupZLB --name myLoadBalancer --public-ip-address myPublicIPZonal --frontend-ip-name myFrontEnd --backend-pool-name myBackEndPool --sku Standard

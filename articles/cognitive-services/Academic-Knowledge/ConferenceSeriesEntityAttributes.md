@@ -1,32 +1,35 @@
 ---
-title: Konferans serisi varlık öznitelikleri - akademik bilgi API'si
+title: Konferans Serisi varlık öznitelikleri-Akademik Bilgi API
 titlesuffix: Azure Cognitive Services
-description: Konferans serisi varlıkla kullanabileceğiniz öznitelikleri hakkında bilgi edinin.
+description: Konferans Serisi varlığıyla kullanabileceğiniz öznitelikler hakkında bilgi edinin.
 services: cognitive-services
-author: alch-msft
-manager: nitinme
+author: darrine
+manager: kuansanw
 ms.service: cognitive-services
 ms.subservice: academic-knowledge
 ms.topic: conceptual
-ms.date: 03/23/2017
-ms.author: alch
-ms.openlocfilehash: 38b4aa4c899668a68041f042ce6981ddd8c58219
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/14/2019
+ms.author: darrine
+ROBOTS: NOINDEX
+ms.openlocfilehash: ecd8042212987849d9d302642f03e59493235599
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61340205"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74143912"
 ---
-# <a name="conference-series-entity"></a>Konferans serisi varlık
+# <a name="conference-series-entity"></a>Konferans Serisi varlığı
 
-<sub> * Şu öznitelikleri konferans serisi varlığa özgüdür. (Ty = '3') </sub>
+> [!NOTE]
+> Aşağıdaki öznitelikler, konferans serisi varlığına özgüdür. (Ty = ' 3 ')
 
-Ad    |Açıklama                            |Tür       | İşlemler
-------- | ------------------------------------- | --------- | ----------------------------
-Kimlik      |Varlık Kimliği                              |Int64      |Eşittir
-CN      |Konferans serisi normalleştirilmiş adı      |String     |Eşittir
-DCN     |Konferans serisi görünen adı         |String     |Yok
-CC      |Konferans serisi toplam alıntı sayısı         |Int32      |Yok  
-ECC     |Konferans serisi tahmini toplam alıntı sayısı   |Int32      |Yok
-F.FId   |Konferans serisi ile ilişkili çalışma varlık kimliği alanı |Int64  | Eşittir
-F.FN    |Konferans serisi ile ilişkili çalışma ad alanı  | Eşittir<br/>StartsWith
+Ad | Açıklama | Tür | İşlemler
+--- | --- | --- | ---
+BILGISI      |Konferans Serisi Toplam alıntı sayısı         |Int32      |None  
+CN      |Konferans Serisi normalleştirilmiş adı      |Dize     |Eşittir
+DCN     |Konferans Serisi görünen adı         |Dize     |None
+ECC     |Konferans Serisi Toplam tahmini alıntı sayısı   |Int32      |None
+F. FID   |Konferans serisiyle ilişkili çalışma varlık KIMLIĞI alanı |Int64  | Eşittir
+F. FN    |Konferans serisiyle ilişkili çalışma adı alanı  | Eşittir<br/>StartsWith
+Kimlik      |Varlık KIMLIĞI                              |Int64      |Eşittir
+PC    |Konferans Serisi toplam yayın sayısı |Int32 | None

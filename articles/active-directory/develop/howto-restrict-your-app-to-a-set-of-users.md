@@ -1,6 +1,7 @@
 ---
-title: Bir kullanıcı grubuyla Azure Active Directory'ye kayıtlı uygulama kısıtlama
-description: Seçili bir kullanıcı kümesine Azure AD'de kayıtlı uygulamalarınızın erişimi kısıtlama hakkında bilgi edinin.
+title: Azure Active Directory kayıtlı uygulamanızı bir Kullanıcı kümesiyle sınırlayın
+titleSuffix: Microsoft identity platform
+description: Azure AD 'de kayıtlı uygulamalarınıza erişimi seçili bir kullanıcı kümesine kısıtlamayı öğrenin.
 services: active-directory
 documentationcenter: ''
 author: kalyankrishna1
@@ -17,65 +18,82 @@ ms.author: kkrishna
 ms.reviewer: ''
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e07d9f0fa6ec6b4abc7ce96279b7b02faae298fa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c768730a00d424333e735bb4f6a385d294f38513
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65540188"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72803957"
 ---
-# <a name="how-to-restrict-your-app-to-a-set-of-users"></a>Nasıl yapılır: Uygulamanızı bir kullanıcı kümesiyle sınırlama
+# <a name="how-to-restrict-your-app-to-a-set-of-users"></a>Nasıl yapılır: uygulamanızı bir Kullanıcı kümesiyle kısıtlama
 
-Bir Azure Active Directory (Azure AD) kiracısına kayıtlı uygulamalar başarıyla kimlik doğrulaması yapan tüm kullanıcılar Kiracı için kullanılabilir olan varsayılan olarak yapılandırılır.
+Bir Azure Active Directory (Azure AD) kiracısında kayıtlı uygulamalar, varsayılan olarak, başarıyla kimlik doğrulayan kiracının tüm kullanıcıları tarafından kullanılabilir.
 
-Benzer şekilde, içinde durumunda, bir [çok kiracılı](howto-convert-app-to-be-multi-tenant.md) uygulama, tüm kullanıcılar bu uygulamayı hangi burada Azure AD kiracısında oluşturabileceksiniz kendi kendilerine ait kiracıda başarıyla kimlik doğrulaması sonra bu uygulamaya erişmek.
+Benzer şekilde, [çok kiracılı](howto-convert-app-to-be-multi-tenant.md) bir uygulama söz konusu olduğunda, bu uygulamanın SAĞLANDıĞı Azure AD kiracısındaki tüm kullanıcılar ilgili kiracısında başarıyla kimlik doğrulamasından sonra bu uygulamaya erişebilir.
 
-Kiracı Yöneticiler ve geliştiriciler genellikle bir uygulama belirli bir kullanıcı grubuyla kısıtlı olmalıdır nerede gereksinimleri vardır. Geliştiricilerin aynı popüler yetkilendirme desenleri gibi rol tabanlı erişim denetimi (RBAC) kullanarak gerçekleştirebilirsiniz, ancak bu yaklaşım, önemli miktarda iş parçasındaki Geliştirici gerektirir.
+Kiracı yöneticileri ve geliştiricileri, genellikle bir uygulamanın belirli bir Kullanıcı kümesiyle kısıtlanması gereken gereksinimlere sahiptir. Geliştiriciler rol tabanlı Access Control (RBAC) gibi popüler yetkilendirme düzenlerini kullanarak aynısını gerçekleştirebilir, ancak bu yaklaşım geliştiricinin bir bölümünde önemli miktarda iş gerektirir.
 
-Azure AD Kiracı Yöneticiler ve geliştiriciler bir uygulama belirli bir kullanıcı veya güvenlik grupları kiracıdaki kümesini sınırlamak sağlar.
+Azure AD, kiracı yöneticilerinin ve geliştiricilerin bir uygulamayı Kiracıdaki belirli bir kullanıcı veya güvenlik grubu kümesiyle kısıtlamasına olanak sağlar.
 
-## <a name="supported-app-configurations"></a>Desteklenen uygulama yapılandırmaları
+## <a name="supported-app-configurations"></a>Desteklenen uygulama konfigürasyonları
 
-Bir uygulama kullanıcıların veya güvenlik gruplarının bir kiracıda belirli bir kümesini sınırlandırmak için seçenek aşağıdaki uygulama türleri ile çalışır:
+Bir uygulamayı bir Kiracıdaki belirli bir kullanıcı veya güvenlik grubu kümesiyle kısıtlama seçeneği aşağıdaki uygulama türleri ile birlikte kullanılabilir:
 
-- Federasyon çoklu oturum açma için SAML tabanlı kimlik doğrulaması ile yapılandırılan uygulamalar
-- Azure AD ön kimlik doğrulama kullanan uygulama proxy uygulamaları
-- Doğrudan Azure AD uygulama platform üzerinde oluşturulan uygulamaları, OAuth 2.0/Openıd Connect kimlik doğrulamasından sonra bir kullanıcı veya yönetici bu uygulamaya onay verdi kullanın.
+- SAML tabanlı kimlik doğrulaması ile federe çoklu oturum açma için yapılandırılmış uygulamalar
+- Azure AD ön kimlik doğrulaması kullanan uygulama proxy uygulamaları
+- Bir kullanıcı veya yönetici bu uygulamaya alındıktan sonra, OAuth 2.0/OpenID Connect kimlik doğrulaması kullanan doğrudan Azure AD uygulama platformunda oluşturulan uygulamalar.
 
      > [!NOTE]
-     > Web uygulaması/web API'si ve kurumsal uygulamaları için yalnızca bu özellik kullanılabilir. Olarak kayıtlı uygulamalar [yerel](quickstart-v1-integrate-apps-with-azure-ad.md) kullanıcıların veya güvenlik gruplarının kiracıda bir dizi kısıtlı olamaz.
+     > Bu özellik yalnızca Web uygulaması/Web API 'SI ve kurumsal uygulamalar için kullanılabilir. [Yerel](quickstart-v1-integrate-apps-with-azure-ad.md) olarak kaydedilen uygulamalar, Kiracıdaki bir grup kullanıcı veya güvenlik grubu ile kısıtlanamaz.
 
-## <a name="update-the-app-to-enable-user-assignment"></a>Kullanıcı Ataması etkinleştirmek için uygulamayı güncelleştirme
+## <a name="update-the-app-to-enable-user-assignment"></a>Kullanıcı atamasını etkinleştirmek için uygulamayı güncelleştirme
 
-1. Git [ **Azure portalında** ](https://portal.azure.com/) ve oturum açma olarak bir **genel yönetici.**
-1. Üst çubuğunda, oturum açtığınız hesabı seçin. 
-1. Altında **dizin**, burada uygulamanın kayıtlı Azure AD kiracısı seçin.
-1. Sol taraftaki gezinti bölmesinde **Azure Active Directory**. Azure Active Directory Gezinti bölmesinde kullanılabilir durumda değilse, ardından aşağıdaki adımları izleyin:
+Etkin Kullanıcı atamasına sahip bir uygulama oluşturmanın iki yolu vardır. Biri **genel yönetici** rolü gerektirir, ikincisi değildir.
 
-    1. Seçin **tüm hizmetleri** ana sol gezinti menüsünün üstünde.
-    1. Yazın **Azure Active Directory** filtre arama kutusuna ve ardından **Azure Active Directory** sonuç öğesi.
+### <a name="enterprise-applications-requires-the-global-adminstrator-role"></a>Kurumsal uygulamalar (genel yönetici rolü gerektirir)
 
-1. İçinde **Azure Active Directory** bölmesinde **kurumsal uygulamalar** gelen **Azure Active Directory** sol taraftaki gezinti menüsünde.
-1. Seçin **tüm uygulamaları** tüm uygulamaların bir listesini görüntülemek için.
+1. [**Azure Portal**](https://portal.azure.com/) gidin ve **genel yönetici**olarak oturum açın.
+1. Üstteki çubukta, oturum açma hesabı ' nı seçin. 
+1. **Dizin**altında, uygulamanın KAYDEDILECEĞI Azure AD kiracısını seçin.
+1. Sol taraftaki Gezinti bölmesinde **Azure Active Directory**' yi seçin. Gezinti bölmesinde Azure Active Directory yoksa, aşağıdaki adımları izleyin:
 
-     Burada görünmesi istediğiniz uygulamayı göremiyorsanız en üstündeki çeşitli filtreleri kullanın **tüm uygulamaları** liste veya uygulama bulmak için listede aşağı kısıtlamak için liste.
+    1. Sol taraftaki Gezinti menüsünün en üstündeki **tüm hizmetler** ' i seçin.
+    1. Filtre arama kutusuna **Azure Active Directory** yazın ve sonra sonuçtan **Azure Active Directory** öğesini seçin.
 
-1. Bir kullanıcı veya güvenlik grubuna listesinden atamak istediğiniz uygulamayı seçin.
-1. İçinde uygulamanın **genel bakış** sayfasında **özellikleri** uygulamanın sol taraftaki gezinti menüsünde.
-1. Ayarını bulun **kullanıcı ataması gerekli mi?** ve **Evet**. Bu seçenek ayarlandığında **Evet**, ardından kullanıcıları bu erişebilmeleri için önce bu uygulama için önce atanmalıdır.
-1. Seçin **Kaydet** bu yapılandırma değişikliği kaydetmek için.
+1. **Azure Active Directory** bölmesinde, **Azure Active Directory** sol taraftaki gezinti menüsünden **Kurumsal uygulamalar** ' ı seçin.
+1. Tüm uygulamalarınızın listesini görüntülemek için **tüm uygulamalar** ' ı seçin.
 
-## <a name="assign-users-and-groups-to-the-app"></a>Kullanıcıları ve grupları uygulamaya atama
+     Burada görünmesini istediğiniz uygulamayı görmüyorsanız, listeyi kısıtlamak için **tüm uygulamalar** listesinin en üstündeki çeşitli filtreleri kullanın veya uygulamanızı bulmak için listeyi aşağı kaydırın.
 
-Kullanıcı Ataması etkinleştirmek için uygulamanızın yapılandırdıktan sonra devam edin ve kullanıcıları ve grupları uygulamaya atama.
+1. Listeden bir kullanıcı veya güvenlik grubu atamak istediğiniz uygulamayı seçin.
+1. Uygulamanın **genel bakış** sayfasında, uygulamanın sol taraftaki gezinti menüsünden **Özellikler** ' i seçin.
+1. **Kullanıcı atamasının gerekli** ayarını bulun ve **Evet**olarak ayarlayın. Bu seçenek **Evet**olarak ayarlandığında, kullanıcıların bu uygulamaya erişebilmesi için önce bu uygulamaya atanması gerekir.
+1. Bu yapılandırma değişikliğini kaydetmek için **Kaydet** ' i seçin.
 
-1. Seçin **kullanıcılar ve gruplar** bölmesinde uygulamanın sol taraftaki gezinti menüsünde.
-1. Üst kısmındaki **kullanıcılar ve gruplar** listesinden **Kullanıcı Ekle** açmak için düğmeyi **atama Ekle** bölmesi.
-1. Seçin **kullanıcılar** seçiciden **atama Ekle** bölmesi. 
+### <a name="app-registration"></a>Uygulama kaydı
 
-     Kullanıcılar ve güvenlik grupları listesi, aramak ve belirli bir kullanıcı veya grup bulmak için bir textbox ile birlikte gösterilir. Bu ekran, tek bir seferde birden çok kullanıcı ve grupları seçmenize olanak sağlar.
+1. [**Azure Portal**](https://portal.azure.com/)gidin.
+1. Üstteki çubukta, oturum açma hesabı ' nı seçin. 
+1. **Dizin**altında, uygulamanın KAYDEDILECEĞI Azure AD kiracısını seçin.
+1. Sol taraftaki Gezinti bölmesinde **Azure Active Directory**' yi seçin.
+1. **Azure Active Directory** bölmesinde, **Azure Active Directory** sol taraftaki gezinti menüsünden **uygulama kayıtları** ' nı seçin.
+1. Yönetmek istediğiniz uygulamayı oluşturun veya seçin. Bu uygulama kaydının **sahibi** olmanız gerekir.
+1. Uygulamanın **genel bakış** sayfasında, sayfanın üst kısmındaki temel parçalar altında bulunan **Yerel Dizin bağlantısındaki yönetilen uygulamayı** izleyin. Bu, sizi uygulama kaydlarınızın _yönetilen kurumsal uygulamasına_ götürür.
+1. Sol taraftaki Gezinti dikey penceresinden **Özellikler**' i seçin.
+1. **Kullanıcı atamasının gerekli** ayarını bulun ve **Evet**olarak ayarlayın. Bu seçenek **Evet**olarak ayarlandığında, kullanıcıların bu uygulamaya erişebilmesi için önce bu uygulamaya atanması gerekir.
+1. Bu yapılandırma değişikliğini kaydetmek için **Kaydet** ' i seçin.
 
-1. İşiniz bittiğinde kullanıcıları ve grupları seçme, basın **seçin** düğmesine bir sonraki bölümüne geçmeye alt.
-1. Tuşuna **atama** son kullanıcılar ve gruplar için uygulama atamalarını için alt düğmesine. 
-1. Kullanıcıları ve grupları eklediğiniz güncelleştirilmiş gösterdiklerini doğrulayın **kullanıcılar ve gruplar** listesi.
+## <a name="assign-users-and-groups-to-the-app"></a>Uygulamaya Kullanıcı ve Grup atama
+
+Uygulamanızı Kullanıcı atamasını etkinleştirecek şekilde yapılandırdıktan sonra, uygulamaya gidip kullanıcıları ve grupları uygulamaya atayabilirsiniz.
+
+1. Uygulamanın sol taraftaki gezinti menüsünde **Kullanıcılar ve gruplar** bölmesini seçin.
+1. **Kullanıcılar ve gruplar** listesinin en üstünde, **atama Ekle** bölmesini açmak için **Kullanıcı Ekle** düğmesini seçin.
+1. **Atama Ekle** bölmesinden **Kullanıcılar** seçicisini seçin. 
+
+     Kullanıcı ve güvenlik gruplarının listesi, belirli bir kullanıcı veya grubu aramak ve bulmak için bir metin kutusuyla birlikte gösterilir. Bu ekran, tek bir go içinde birden çok kullanıcı ve grup seçmenizi sağlar.
+
+1. Kullanıcıları ve grupları seçmeyi tamamladıktan sonra, sonraki bölüme geçmek için alt kısımdaki **Seç** düğmesine basın.
+1. Uygulamanın kullanıcı ve grupların atamalarını sona erdirmeyi sağlamak için alt kısımdaki **ata** düğmesine basın. 
+1. Eklediğiniz kullanıcı ve grupların, güncelleştirilmiş **Kullanıcılar ve gruplar** listesinde görüntülendiğini doğrulayın.
 

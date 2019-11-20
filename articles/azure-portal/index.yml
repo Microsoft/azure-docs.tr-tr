@@ -1,45 +1,77 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure portal belgeleri
+### YamlMime:Landing
+title: Azure portalı belgeleri
+summary: Azure portalı komut satırı araçlarına bir alternatif sağlayan web tabanlı birleşik bir konsoldur. Azure portalıyla Azure aboneliğinizi yönetebilirsiniz. Basit web uygulamalarından karmaşık bulut dağıtımlarına kadar her şeyi oluşturun, yönetin ve izleyin. Kaynakların düzenli bir görünümünü elde etmek için özel panolar oluşturun ve en iyi deneyim için erişilebilirlik seçeneklerini yapılandırın.
 metadata:
-  description: Azure portalını kullanmayı ve özel panolar oluşturmayı öğrenin.
-  services: azure portal
-  documentationcenter: ''
-  author: kfollis
-  manager: mtillman
-  editor: ''
-  ms.assetid: 3e12c488-9c8c-4d0d-9b07-e018dec42fc6
+  title: Azure portal belgeleri
+  description: Azure portalı web tabanlı konsolunu kullanarak Azure aboneliğinizi ve kaynaklarınızı yönetmeyi öğrenin.
+  services: Azure portal
   ms.service: azure-portal
-  ms.devlang: na
+  ms.subservice: 
   ms.topic: landing-page
-  ms.tgt_pltfrm: na
-  ms.workload: na
-  ms.date: 10/08/2018
+  ms.collection: collection
+  author: kfollis
   ms.author: kfollis
-abstract:
-  description: 'Azure portal basit web uygulamalarından karmaşık bulut uygulamalarına kadar her şeyi oluşturmanızı, yönetmenizi ve izlemenizi sağlayan web tabanlı, birleştirilmiş bir konsoldur. Özelleştirilebilir bir pano ve erişilebilirlik seçeneklerine sahiptir.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/azure-preview-portal-supported-browsers-devices
-            html: <p>Tüm modern masaüstü ve tablet cihazlar ile tarayıcılarda Azure portalı çalıştırabilirsiniz.</p>
-            title: Desteklenen tarayıcılar ve cihazlar
-          - href: /azure/azure-portal/azure-portal-change-theme-high-contrast
-            html: <p>Azure portalda karşıtlığı veya renk düzenini değiştirin.</p>
-            title: Yüksek karşıtlığı açma
-          - href: /azure/azure-portal/azure-portal-keyboard-shortcuts
-            html: <p>Azure portalda çalışan klavye kısayolları hakkında bilgi edinin.</p>
-            title: Klavye kısayolları
-          - href: /azure/azure-portal/azure-portal-dashboards
-            html: <p>Birden çok pano oluşturun ve bunları Azure aboneliğinize erişimi olan kişilerle paylaşın.</p>
-            title: Azure panoları oluşturma ve paylaşma
-          - href: /azure/azure-portal/azure-portal-dashboard-share-access
-            html: <p>Pano yayımlayın ve kuruluşunuzdaki diğer kullanıcılarla paylaşın.</p>
-            title: RBAC kullanarak panoları paylaşma
-          - href: /azure/azure-portal/azure-portal-dashboards-create-programmatically
-            html: <p>Kuruluşunuz için program aracılığıyla panolar oluşturun ve yayımlayın</p>
-            title: Program aracılığıyla Azure panoları oluşturma
+  ms.date: 09/17/2019
+  ms.openlocfilehash: 7fdd6f95ee2f84abc151f5c6e6e7929df2bc57a1
+  ms.sourcegitcommit: 8ef0a2ddaece5e7b2ac678a73b605b2073b76e88
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/17/2019
+  ms.locfileid: "71076645"
+landingContent:
+- title: Azure portalı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure portalı nedir?
+      url: azure-portal-overview.md
+    - text: Desteklenen tarayıcılar ve cihazlar
+      url: azure-portal-supported-browsers-devices.md
+- title: Azure portalını özelleştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Özel panoları oluşturma ve paylaşma
+      url: azure-portal-dashboards.md
+    - text: Sık kullanılanlarınızı yönetme
+      url: azure-portal-add-remove-sort-favorites.md
+- title: Azure portalına erişimi yönetme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure portalı URL’lerini güvenli listeye alma
+      url: azure-portal-safelist-urls.md
+    - text: Panolar için rol tabanlı erişim denetimi
+      url: azure-portal-dashboard-share-access.md
+  - linkListType: learn
+    links:
+    - text: Azure'da kaynakları yönetme
+      url: /learn/paths/manage-resources-in-azure/
+    - text: Rol tabanlı erişim denetimi (RBAC) ile Azure kaynaklarınızın güvenliğini sağlama
+      url: /learn//modules/secure-azure-resources-with-rbac/
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Hızlı Başlangıç Merkezi'nde çalışmaya başlama
+      url: azure-portal-quickstart-center.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure portalı nasıl yapılır video serisi
+      url: azure-portal-video-series.md
+  - linkListType: learn
+    links:
+    - text: Azure'ın temelleri
+      url: /learn/paths/azure-fundamentals/
+    - text: Bulut Kavramları - Bulut bilişimin ilkeleri
+      url: /learn/modules/principles-cloud-computing/
+- title: Erişilebilirlik seçeneklerini kullanma
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Klavye kısayolları
+      url: azure-portal-keyboard-shortcuts.md
+  - linkListType: how-to-guide
+    links:
+    - text: Yüksek karşıtlığı açma
+      url: azure-portal-change-theme-high-contrast.md

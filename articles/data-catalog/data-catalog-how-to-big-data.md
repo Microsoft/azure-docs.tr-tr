@@ -1,31 +1,33 @@
 ---
-title: Azure veri Kataloğu'nda 'büyük veri' veri kaynaklarıyla çalışma
-description: Nasıl yapılır makalesi için Azure veri kataloğu kullanarak Azure Blob Depolama, Azure Data Lake ve Hadoop HDFS gibi 'büyük veri' veri kaynaklarıyla desenleri vurgulama.
-services: data-catalog
+title: Azure Veri Kataloğu 'nda büyük verileri katalog halinde kullanma
+description: Azure Blob depolama, Azure Data Lake ve Hadoop gibi ' büyük veri ' veri kaynaklarıyla Azure Veri Kataloğu 'Nu kullanmaya yönelik desenleri vurgulama hakkında nasıl yapılır makalesi.
 author: JasonWHowell
 ms.author: jasonh
-ms.assetid: 626d1568-0780-4726-bad1-9c5000c6b31a
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 01/18/2018
-ms.openlocfilehash: b6b419d575e2164fc683b8e6b5020572db74d1b4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/01/2019
+ms.openlocfilehash: 88dc85003fa2a3e41d8a31055ff8ba9b0fcc7492
+ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61001750"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71300578"
 ---
-# <a name="how-to-work-with-big-data-sources-in-azure-data-catalog"></a>Azure veri Kataloğu'nda büyük veri kaynaklarıyla çalışma
+# <a name="how-to-catalog-big-data-in-azure-data-catalog"></a>Azure Veri Kataloğu 'nda büyük verileri katalog halinde kullanma
+
 ## <a name="introduction"></a>Giriş
-**Microsoft Azure veri Kataloğu** kayıt ve kurumsal veri kaynakları için bulma sistemi olarak görev yapan tam yönetilen bir bulut hizmetidir. Bu yardımcı kişiler hakkında keşfedin, anlamak ve veri kaynakları ve yardımcı kuruluşların büyük veri dahil olmak üzere, mevcut veri kaynağından daha fazla değer elde kullanacağınızı olur.
 
-**Azure veri Kataloğu** Azure Blog depolama BLOB'ları ve dizinleri yanı sıra Hadoop HDFS dosya ve dizinleri kaydını destekler. Bu veri kaynaklarının yapısını yarı yapılandırılmış büyük esneklik sağlar. Ancak, bunları kaydetme en değerini almak için **Azure veri Kataloğu**, kullanıcıların veri kaynaklarını nasıl düzenlendiği düşünmeniz gerekir.
+**Microsoft Azure Veri Kataloğu** , kurumsal veri kaynakları için bir kayıt sistemi ve bulma sistemi olarak hizmet veren tam olarak yönetilen bir bulut hizmetidir. Kişilerin veri kaynaklarını bulmasına, anlamasına ve kullanmasına yardımcı olmak ve kuruluşların büyük veriler de dahil olmak üzere mevcut veri kaynaklarından daha fazla değer almasını sağlar.
 
-## <a name="directories-as-logical-data-sets"></a>Mantıksal veri kümesi olarak dizinleri
-Büyük veri kaynakları düzenlemek için yaygın dizinleri mantıksal veri kümesi değerlendirilecek modelidir. Üst düzey dizinleri alt bölümleri tanımlayın ve veri içerdikleri depolamak bir veri kümesi tanımlamak için kullanılır.
+**Azure Veri Kataloğu** , Azure blog depolama bloblarının ve dizinlerinin yanı sıra Hadoop, dosya ve dizinlerin kaydedilmesini da destekler. Bu veri kaynaklarının yarı yapılandırılmış doğası büyük esneklik sağlar. Ancak, **Azure Veri Kataloğu**'na kaydolduğunuz en yüksek değeri almak için, kullanıcıların veri kaynaklarının nasıl düzenlendiğini göz önünde bulundurmaları gerekir.
 
-Bu düzenin bir örnek olabilir:
+## <a name="directories-as-logical-data-sets"></a>Mantıksal veri kümeleri olarak dizinler
 
+Büyük veri kaynaklarını düzenlemek için ortak bir düzen, dizinleri mantıksal veri kümeleri olarak değerlendirmek olur. Üst düzey dizinler, bir veri kümesini tanımlamak için kullanılır, alt klasörler bölümleri tanımlar ve içerdikleri dosyalar verilerin kendisini depolar.
+
+Bu düzene bir örnek şu olabilir:
+
+```text
     \vehicle_maintenance_events
         \2013
         \2014
@@ -38,26 +40,32 @@ Bu düzenin bir örnek olabilir:
     \location_tracking_events
         \2013
         ...
+```
 
-Bu örnekte, mantıksal veri kümesi vehicle_maintenance_events ve location_tracking_events temsil eder. Bu klasörlerin her yıl ve aya göre alt klasörler halinde düzenlenmiş veri dosyalarını içerir. Bu klasörler, yüzlerce veya binlerce dosya potansiyel olarak içerebilir.
+Bu örnekte, vehicle_maintenance_events ve location_tracking_events mantıksal veri kümelerini temsil eder. Bu klasörlerin her biri, alt klasörlere yıl ve ay göre düzenlenmiş veri dosyaları içerir. Bu klasörlerin her biri yüzlerce veya binlerce dosya içerebilir.
 
-Bu düzende, tek tek dosyaları kaydetme **Azure veri Kataloğu** büyük olasılıkla mantıklı değildir. Bunun yerine, verilerle çalışan kullanıcılar için anlamlı veri kümelerini göstermek dizinleri kaydedin.
+Bu düzende, tek tek dosyaların **Azure Veri Kataloğu** ile kaydedilmesi büyük olasılıkla anlamlı değildir. Bunun yerine, verilerle çalışan kullanıcılara anlamlı olan veri kümelerini temsil eden dizinleri kaydedin.
 
 ## <a name="reference-data-files"></a>Başvuru veri dosyaları
-Başvuru veri kümeleri, tek tek dosyalar olarak depolamak tamamlayıcı bir desendir. Bu veri kümesi 'küçük' tarafında büyük veri zorlayıcı olabilir ve genellikle bir analitik veri modeli boyutları benzer. Başvuru veri dosyaları, toplu başka bir yerde büyük veri deposunda saklanan veri dosyaları için bağlam sağlamak için kullanılan kayıtları içerir.
 
-Bu düzenin bir örnek olabilir:
+Tamamlayıcı bir model, başvuru veri kümelerini tek tek dosyalar olarak depolayıcıdır. Bu veri kümeleri, büyük verilerin ' küçük ' tarafı olarak düşünülebilir ve genellikle bir analitik veri modelindeki boyutlara benzerdir. Başvuru veri dosyaları, büyük veri deposunda başka bir yerde depolanan veri dosyalarının toplu olarak bağlamını sağlamak için kullanılan kayıtları içerir.
 
+Bu düzene bir örnek şu olabilir:
+
+```text
     \vehicles.csv
     \maintenance_facilities.csv
     \maintenance_types.csv
+```
 
-Bir analist veya veri Bilimcisi daha büyük bir dizin yapıları, içerdiği veriler ile çalışırken, bu başvuru dosyalardaki veriler yalnızca ada veya Kimliğe göre daha büyük veri kümesinde başvurulan varlıklar için daha ayrıntılı bilgi sağlamak için kullanılabilir.
+Bir analist veya veri bilimcu daha büyük dizin yapılarında bulunan verilerle çalışıyorsa, bu başvuru dosyalarındaki veriler, yalnızca daha büyük veri kümesindeki ad veya KIMLIĞE göre başvuruda bulunulan varlıklara yönelik daha ayrıntılı bilgi sağlamak için kullanılabilir.
 
-Bu düzende, tek başvuru veri dosyalarıyla birlikte kaydetmek için mantıklı **Azure veri Kataloğu**. Her dosya, bir veri kümesini temsil eder ve her bir ek açıklama ve ayrı ayrı bulunan.
+Bu düzende, bireysel başvuru verileri dosyalarını **Azure Veri Kataloğu**ile kaydetmek mantıklı olur. Her dosya bir veri kümesini temsil eder ve her biri tek tek açıklanmış ve keşfedilebilir.
 
-## <a name="alternate-patterns"></a>Alternatif desenleri
-Önceki bölümde açıklanan desenleri için büyük veri deposu düzenlenmiş olabilir yalnızca iki olası yolu olsa da, her farklı bir uygulamasıdır. Nasıl veri kaynaklarınızı, büyük veri kaynaklarıyla kaydederken yapılandırılmıştır bakılmaksızın **Azure veri Kataloğu**, dosyaları ve dizinleri temsil eden değer başkalarına içinde veri kümeleri kaydetmede odaklanmak, Kuruluş. Tüm dosyalar ve dizinler kaydetme, kullanıcıların ihtiyaç duydukları bulmak daha zor hale Kataloğu daraltabilir.
+## <a name="alternate-patterns"></a>Alternatif desenler
+
+Önceki bölümde açıklanan desenler, büyük veri deposunun organize olabilme biçimleridir ancak her uygulama farklıdır. Veri kaynaklarınızın yapılandırılma şeklinden bağımsız olarak, **Azure Veri Kataloğu**ile büyük veri kaynaklarını kaydederken, kuruluşunuzdaki diğer kullanıcılara değer olan veri kümelerini temsil eden dosya ve dizinleri kaydetmeye odaklanın. Tüm dosyaları ve dizinleri kaydetmek, kataloğun üzerinde değişiklik yapmalarını sağlayarak kullanıcıların ihtiyaç duydukları öğeleri bulmasını zorlaştırır.
 
 ## <a name="summary"></a>Özet
-İle veri kaynaklarını kaydederek **Azure veri Kataloğu** bulunmasını ve anlaşılmasını kolaylaştırır. Kaydetme ve büyük veri dosyaları ve dizinleri temsil eden mantıksal veri kümesi yorumlama, ihtiyaç duydukları büyük veri kaynaklarını bulabilir ve kullanıcılara yardımcı olabilir.
+
+**Azure Veri Kataloğu** ile veri kaynaklarını kaydetme, bulmayı ve anlamayı kolaylaştırır. Mantıksal veri kümelerini temsil eden büyük veri dosyalarını ve dizinleri kaydederek ve bunlara ek olarak, kullanıcıların ihtiyaç duydukları büyük veri kaynaklarını bulmasına ve kullanmasına yardımcı olabilirsiniz.

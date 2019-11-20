@@ -1,43 +1,43 @@
 ---
-title: Azure Active Directory B2C'de bir özel ilke kullanarak uygulamanızın kullanıcı arabirimini özelleştirme | Microsoft Docs
-description: Özel bir ilke kullanarak Azure Active Directory B2C'de bir kullanıcı arabirimi özelleştirme hakkında bilgi edinin.
+title: Azure Active Directory B2C | içinde özel bir ilke kullanarak uygulamanızın kullanıcı arabirimini özelleştirme | Microsoft Docs
+description: Azure Active Directory B2C özel bir ilke kullanarak Kullanıcı arabirimini özelleştirme hakkında bilgi edinin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 12/18/2018
+ms.date: 09/11/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 0a051b0e853b60dfc1f5b6c3453d9ed8361f1748
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 1ef4ddc422041de623b96f3a0c85f067427cacd7
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67438830"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72374221"
 ---
-# <a name="customize-the-user-interface-of-your-application-using-a-custom-policy-in-azure-active-directory-b2c"></a>Azure Active Directory B2C'de bir özel ilke kullanarak uygulamanızın kullanıcı arabirimini özelleştirme
+# <a name="customize-the-user-interface-of-your-application-using-a-custom-policy-in-azure-active-directory-b2c"></a>Azure Active Directory B2C özel bir ilke kullanarak uygulamanızın kullanıcı arabirimini özelleştirme
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Bu makaleyi tamamladıktan sonra marka ve görünüm ile kaydolma ve oturum açma özel İlkesi gerekir. Azure Active Directory B2C ile kullanıcılar için sunulan HTML ve CSS içeriğin neredeyse tam denetim elde (Azure AD B2C). Özel bir ilke kullandığınızda, kullanıcı arabirimini özelleştirme XML denetimleri Azure Portalı'nda kullanmak yerine yapılandırdığınız. 
+Bu makaleyi tamamladıktan sonra, marka ve görünümünüzdeki bir kaydolma ve oturum açma özel ilkesine sahip olacaksınız. Azure Active Directory B2C (Azure AD B2C) sayesinde, kullanıcılara sunulan HTML ve CSS içeriğinin neredeyse tam denetimini alırsınız. Özel bir ilke kullandığınızda, Azure portal denetimleri kullanmak yerine, XML 'de UI özelleştirmesini yapılandırırsınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bölümündeki adımları tamamlamanız [özel ilkeleri kullanmaya başlama](active-directory-b2c-get-started-custom.md). Kaydolma ve oturum açma ile yerel hesaplar için bir çalışma özel ilke olması gerekir.
+[Özel ilkelerle çalışmaya başlama](active-directory-b2c-get-started-custom.md)bölümündeki adımları uygulayın. Kaydolma ve yerel hesaplarla oturum açma için çalışan bir özel ilkenize sahip olmanız gerekir.
 
-## <a name="page-ui-customization"></a>Sayfa UI özelleştirmesi
+## <a name="page-ui-customization"></a>Sayfa Kullanıcı arabirimi özelleştirmesi
 
-Sayfa UI özelleştirmesi özelliğini kullanarak, herhangi bir özel ilke görünümünü özelleştirebilirsiniz. Ayrıca bu sayede uygulamanızla Azure AD B2C arasında marka ve görsel tutarlılığı sağlayabilirsiniz.
+Sayfa UI özelleştirmesi özelliğini kullanarak, herhangi bir özel ilkenin görünümünü özelleştirebilirsiniz. Ayrıca bu sayede uygulamanızla Azure AD B2C arasında marka ve görsel tutarlılığı sağlayabilirsiniz.
 
-Şöyle çalışır: Azure AD B2C kod müşterinizin tarayıcıda çalışan ve modern bir yaklaşımı adlı kullanır [çıkış noktaları arası kaynak paylaşımı (CORS)](https://www.w3.org/TR/cors/). İlk olarak, özelleştirilmiş HTML içerikli özel ilkesindeki bir URL belirtin. Azure AD B2C, kullanıcı arabirimi öğelerini URL'nizden yüklenen HTML içeriğiyle birleştirdikten sonra sayfayı müşteriye gösterir.
+Şu şekilde çalışır: Azure AD B2C kodu müşterinizin tarayıcısında çalıştırır ve [çıkış noktaları arası kaynak paylaşımı (CORS)](https://www.w3.org/TR/cors/)adlı modern bir yaklaşım kullanır. İlk olarak, özel ilkede özelleştirilmiş HTML içeriğiyle bir URL belirtirsiniz. Azure AD B2C, kullanıcı arabirimi öğelerini URL'nizden yüklenen HTML içeriğiyle birleştirdikten sonra sayfayı müşteriye gösterir.
 
-## <a name="create-your-html5-content"></a>HTML5 içerik oluşturma
+## <a name="create-your-html5-content"></a>HTML5 içeriğinizi oluşturma
 
-HTML başlığında ürününüzün marka adı ile içerik oluşturun.
+Başlığında ürününüzün marka adıyla HTML içeriği oluşturun.
 
-1. Aşağıdaki HTML kod parçacığını kopyalayın. İyi biçimlendirilmiş adlı boş bir öğe ile HTML5 *\<div kimliği = "API"\>\</div\>* içinde bulunan *\<gövdesi\>* etiketler. Bu öğe, Azure AD B2C içeriğin eklenecek olduğu gösterir.
+1. Aşağıdaki HTML kod parçacığını kopyalayın. *@No__t-1div ID = "api" \> @ no__t-3/div @ no__t-4* adlı *\<body @ no__t-7* etiketleri içinde bulunan boş bir öğe ile iyi biçimlendirilmiş HTML5. Bu öğe Azure AD B2C içeriğin nereye ekleneceğini gösterir.
 
    ```html
    <!DOCTYPE html>
@@ -51,80 +51,82 @@ HTML başlığında ürününüzün marka adı ile içerik oluşturun.
    </html>
    ```
 
-2. Kopyalanmış kod parçacığı bir metin düzenleyiciye yapıştırın ve ardından dosyayı farklı Kaydet *özelleştirme ui.html*.
+1. Kopyalanmış parçacığı bir metin düzenleyicisine yapıştırın, sonra dosyayı *Customize-ui. html*olarak kaydedin.
 
-## <a name="create-an-azure-blob-storage-account"></a>Bir Azure Blob Depolama hesabı oluşturma
+> [!NOTE]
+> Login.microsoftonline.com kullanırsanız, güvenlik kısıtlamaları nedeniyle HTML form öğeleri kaldırılır. Özel HTML içerikinizdeki HTML form öğelerini kullanmak istiyorsanız lütfen b2clogin.com kullanın. Diğer avantajlar için bkz. [B2clogin.com kullanma](b2clogin.md) .
+
+## <a name="create-an-azure-blob-storage-account"></a>Azure Blob depolama hesabı oluşturma
 
 >[!NOTE]
-> Bu makalede, Azure Blob Depolama içeriklerimizde barındırmak için kullanırız. Bir web sunucusunda içeriğinizi barındırmak seçebilirsiniz, ancak gerekir [web sunucunuzda CORS'yi etkinleştirme](https://enable-cors.org/server.html).
+> Bu makalede, içeriğimizi barındırmak için Azure Blob depolamayı kullanırız. İçeriğinizi bir Web sunucusunda barındırabilirsiniz, ancak [Web SUNUCUNUZDA CORS 'yi etkinleştirmeniz](https://enable-cors.org/server.html)gerekir.
 
-Blob depolama alanındaki bu HTML içeriğini barındırmak için aşağıdakileri yapın:
+Bu HTML içeriğini blob depolamada barındırmak için aşağıdaki adımları uygulayın:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Üzerinde **Hub** menüsünde **yeni** > **depolama** > **depolama hesabı**.
-3. Benzersiz bir girin **adı** depolama hesabınız için.
-4. **Dağıtım modeli** kalabileceği **Resource Manager**.
-5. Değişiklik **hesap türü** için **Blob Depolama**.
-6. **Performans** kalabileceği **standart**.
-7. **Çoğaltma** kalabileceği **RA-GRS**.
-8. **Erişim katmanı** kalabileceği **etkin**.
-9. **Depolama hizmeti şifrelemesi** kalabileceği **devre dışı bırakılmış**.
-10. Seçin bir **abonelik** depolama hesabınız için.
-11. Oluşturma bir **kaynak grubu** veya var olan bir hesabı seçin.
-12. Seçin **coğrafi konum** depolama hesabınız için.
-13. Depolama hesabını oluşturmak için **Oluştur**’a tıklayın.  
-    Dağıtım tamamlandıktan sonra **depolama hesabı** dikey penceresi otomatik olarak açılır.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.
+1. **Hub** menüsünde **Yeni** > **depolama** > **depolama hesabı**' nı seçin.
+1. Depolama hesabınız için bir **abonelik** seçin.
+1. Bir **kaynak grubu** oluşturun veya var olan bir grubu seçin.
+1. Depolama hesabınız için benzersiz bir **ad** girin.
+1. Depolama hesabınız için **coğrafi konumu** seçin.
+1. **Dağıtım modeli** **Kaynak Yöneticisi**kalabilirler.
+1. **Performans** **Standart**kalabilirler.
+1. **Hesap türünü** **BLOB depolama alanı**olarak değiştirin.
+1. **Çoğaltma** , **RA-GRS**kalabilir.
+1. **Erişim katmanı** , **sık**kalabilir.
+1. Depolama hesabı oluşturmak için **gözden geçir + oluştur** ' a tıklayın.
+    Dağıtım tamamlandıktan sonra, **depolama hesabı** sayfası otomatik olarak açılır.
 
 ## <a name="create-a-container"></a>Bir kapsayıcı oluşturma
 
-Blob Depolama alanında ortak bir kapsayıcı oluşturmak için aşağıdakileri yapın:
+Blob depolamada ortak bir kapsayıcı oluşturmak için aşağıdaki adımları uygulayın:
 
-1. Altında **Blob hizmeti** sol taraftaki menüde **Blobları**.
-2. Tıklayın **+ kapsayıcı**.
-3. İçin **adı**, girin *kök*. Bu, örneğin, seçtiğiniz bir ad olabilir *wingtiptoys*, ancak kullandığımız *kök* kolaylık olması için bu örnekte.
-4. İçin **genel erişim düzeyi**seçin **Blob**, ardından **Tamam**.
-5. Tıklayın **kök** yeni bir kapsayıcı açın.
-6. **Karşıya Yükle**'ye tıklayın.
-7. Klasör simgesine tıklayın **bir dosya seçin**.
-8. Bulun ve seçin **özelleştirme ui.html** sayfa UI özelleştirmesi bölümünde daha önce oluşturduğunuz.
-9. Bir alt klasöre yüklemek isterseniz, genişletme **Gelişmiş** ve bir klasör adı girin **karşıya yükleme klasörüne**.
-10. **Karşıya Yükle**’yi seçin.
-11. Seçin **özelleştirme ui.html** karşıya yüklediğiniz blobu.
-12. Sağındaki **URL** metin kutusunda **Panoya Kopyala** simgesini URL'sini panonuza kopyalayın.
-13. Web tarayıcısında karşıya yüklediğiniz blobu erişilebilir olduğunu doğrulamak için kopyaladığınız URL'ye gidin. Karşılaşırsanız örneğin erişilemez durumdaysa bir `ResourceNotFound` hata, kapsayıcı erişim türü emin olun kümesine **blob**.
+1. Sol taraftaki menüdeki **BLOB hizmeti** altında **Bloblar**' ı seçin.
+1. **+ Kapsayıcı**' ya tıklayın.
+1. **Ad**için *kök*girin. Bu, seçtiğimiz bir ad olabilir, örneğin *wingtiptoys*, ancak basitlik için bu örnekteki *kökü* kullanırız.
+1. **Genel erişim düzeyi**için **BLOB**' u ve ardından **Tamam**' ı seçin.
+1. Yeni kapsayıcıyı açmak için **kök** öğesine tıklayın.
+1. **Karşıya Yükle**'ye tıklayın.
+1. **Dosya Seç**' in yanındaki klasör simgesine tıklayın.
+1. Sayfasına gidin ve sayfa UI özelleştirmesi bölümünde daha önce oluşturduğunuz **Customize-ui. html** dosyasını seçin.
+1. Bir alt klasöre yüklemek istiyorsanız, **Gelişmiş** ' i genişletin ve klasöre **Yükle ' ye**bir klasör adı girin.
+1. **Karşıya Yükle**’yi seçin.
+1. Karşıya yüklediğiniz **Customize-ui. html** blobu seçin.
+1. **URL metin kutusunun** SAĞıNDA, URL 'yi panonuza kopyalamak Için **Panoya Kopyala** simgesini seçin.
+1. Web tarayıcısında, karşıya yüklediğiniz Blobun erişilebilir olduğunu doğrulamak için kopyaladığınız URL 'ye gidin. Erişilemezse, örneğin, `ResourceNotFound` hatasıyla karşılaşırsanız, kapsayıcı erişim türünün **BLOB**olarak ayarlandığından emin olun.
 
 ## <a name="configure-cors"></a>CORS Yapılandırma
 
-BLOB Depolama aşağıdakileri yaparak çıkış noktaları arası kaynak paylaşımı için yapılandırın:
+Aşağıdaki adımları gerçekleştirerek, çıkış noktaları arası kaynak paylaşımı için blob depolamayı yapılandırın:
 
-1. Menüde **CORS**.
-2. İçin **çıkış noktaları**, girin `https://your-tenant-name.b2clogin.com`. Değiştirin `your-tenant-name` Azure AD B2C kiracınızın adı. Örneğin, `https://fabrikam.b2clogin.com`. Kiracı adınızın girerken tamamen küçük harf kullanmanız gerekir.
-3. İçin **izin verilen yöntemleri**, her ikisini de seçin `GET` ve `OPTIONS`.
-4. İçin **izin verilen üstbilgileri**, yıldız işareti (*) girin.
-5. İçin **kullanıma sunulan üst bilgiler**, yıldız işareti (*) girin.
-6. İçin **Maksimum yaş**, 200 girin.
-7. **Kaydet**’e tıklayın.
+1. Menüsünde **CORS**' yi seçin.
+1. **Izin verilen çıkış noktaları**için `https://your-tenant-name.b2clogin.com` girin. @No__t-0 ' yı Azure AD B2C kiracınızın adıyla değiştirin. Örneğin, `https://fabrikam.b2clogin.com`. Kiracı adınızı girerken tüm küçük harfleri kullanmanız gerekir.
+1. **Izin verilen Yöntemler**için `GET` ve `OPTIONS` ' yi seçin.
+1. **Izin verilen üst bilgiler**için bir yıldız işareti (*) girin.
+1. **Gösterilen üstbilgiler**için bir yıldız işareti (*) girin.
+1. **Maksimum yaş**için 200 girin.
+1. **Kaydet** düğmesine tıklayın.
 
-## <a name="test-cors"></a>CORS'yi test etme
+## <a name="test-cors"></a>Test CORS
 
-Aşağıdakileri yaparak hazır kimliğinizi doğrulayın:
+Aşağıdaki adımları gerçekleştirerek hazırlandığınızı doğrulayın:
 
-1. Git [www.test-cors.org](https://www.test-cors.org/) Web sitesine gidin ve sonra URL'yi yapıştırın **uzak URL** kutusu.
-2. Tıklayın **gönderme isteği**.  
-    Bir hata alırsanız, emin olun, [CORS ayarları](#configure-cors) doğrudur. Tarayıcı önbelleğini temizlemeniz veya Ctrl + Shift + P tuşlarına basarak bir özel tarama oturumu açmak gerekebilir.
+1. [Www.test-CORS.org](https://www.test-cors.org/) Web sitesine gidin ve ardından **uzak URL** kutusuna URL 'yi yapıştırın.
+1. **Istek gönder**' e tıklayın.
+    Bir hata alırsanız, [CORS ayarlarınızın](#configure-cors) doğru olduğundan emin olun. Ayrıca CTRL + SHIFT + P tuşlarına basarak tarayıcı önbelleğinizi temizlemeniz veya özel bir gözatma oturumu açmanız gerekebilir.
 
-## <a name="modify-the-extensions-file"></a>Uzantıları dosyasını değiştirme
+## <a name="modify-the-extensions-file"></a>Uzantılar dosyasını değiştirme
 
-UI Özelleştirme yapılandırmak için kopyalama **ContentDefinition** ve uzantıları dosyasının temel dosyasından onun alt öğeleri.
+UI özelleştirmesini yapılandırmak için, **ContentDefinition** ve onun alt öğelerini temel dosyadan uzantılar dosyasına kopyalayın.
 
-1. İlkenizin temel dosyasını açın. Örneğin, *TrustFrameworkBase.xml*.
-2. İçin arama yapın ve tüm içeriğini kopyalayın **ContentDefinitions** öğesi.
-3. Uzantı dosyası açın. Örneğin, *TrustFrameworkExtensions.xml*. Arama **BuildingBlocks** öğesi. Öğe yoksa, bunu ekleyin.
-4. Tüm içeriğini yapıştırın **ContentDefinitions** öğesi alt öğesi olarak kopyaladığınız **BuildingBlocks** öğesi. 
-5. Arama **ContentDefinition** öğesini içeren `Id="api.signuporsignin"` kopyaladığınız XML.
-6. Değiştirin **LoadUri** depolama alanına yüklenir HTML dosyasının URL'si. Örneğin, `https://your-storage-account.blob.core.windows.net/your-container/customize-ui.html`.
-    
-    Özel ilkenizi aşağıdaki gibi görünmelidir:
+1. İlkenizin temel dosyasını açın. Örneğin, <em>`SocialAndLocalAccounts/` **`TrustFrameworkBase.xml`** </em> . Bu, önkoşullu olarak elde etmeniz gereken özel ilke başlangıç paketine eklenen ilke dosyalarından biridir, [özel ilkeleri](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-get-started-custom)kullanmaya başlayın.
+1. **ContentDefinitions** öğesinin tüm içeriğini arayın ve kopyalayın.
+1. Uzantı dosyasını açın. Örneğin, *TrustFrameworkExtensions. xml*. **Buildingblocks** öğesi için arama yapın. Öğe yoksa, ekleyin.
+1. **Buildingblocks** öğesinin bir alt öğesi olarak kopyaladığınız **ContentDefinitions** öğesinin tüm içeriğini yapıştırın.
+1. Kopyaladığınız XML 'de `Id="api.signuporsignin"` içeren **ContentDefinition** öğesini arayın.
+1. **Loaduri** değerini, depolama ALANıNA yüklediğiniz HTML dosyasının URL 'si ile değiştirin. Örneğin, `https://your-storage-account.blob.core.windows.net/your-container/customize-ui.html`.
+
+    Özel ilkeniz aşağıdaki gibi görünmelidir:
 
     ```xml
     <BuildingBlocks>
@@ -141,67 +143,68 @@ UI Özelleştirme yapılandırmak için kopyalama **ContentDefinition** ve uzant
     </BuildingBlocks>
     ```
 
-7. Uzantıları dosyayı kaydedin.
+1. Uzantı dosyasını kaydedin.
 
-## <a name="upload-your-updated-custom-policy"></a>Güncelleştirilmiş özel ilkenizi karşıya yükleme
+## <a name="upload-your-updated-custom-policy"></a>Güncelleştirilmiş özel ilkenizi karşıya yükleyin
 
-1. Azure AD B2C kiracınızı tıklayarak içeren dizine kullandığınızdan emin olun **dizin ve abonelik filtresi** üst menü ve kiracınız içeren dizine seçme.
-3. Seçin **tüm hizmetleri** Azure portalı ve ardından arayın ve seçin, sol üst köşedeki **Azure AD B2C**.
-4. Seçin **kimlik deneyimi çerçevesi**.
-2. Tıklayın **tüm ilkeleri**.
-3. Tıklayın **karşıya yükleme İlkesi**.
-4. Daha önce değiştirdiğiniz extensions dosyasını yükleyin.
+1. Üst menüdeki **Dizin + abonelik** filtresini seçip kiracınızı içeren dizini seçerek Azure AD B2C kiracınızı içeren dizini kullandığınızdan emin olun.
+1. Azure portal sol üst köşesindeki **tüm hizmetler** ' i seçin ve ardından **Azure AD B2C**' i arayıp seçin.
+1. **Kimlik deneyimi çerçevesini**seçin.
+1. **Tüm ilkeler**' e tıklayın.
+1. **Ilkeyi karşıya yükle**' ye tıklayın.
+1. Daha önce değiştirdiğiniz uzantıları dosyasını karşıya yükleyin.
 
-## <a name="test-the-custom-policy-by-using-run-now"></a>Özel ilke kullanarak test **Şimdi Çalıştır**
+## <a name="test-the-custom-policy-by-using-run-now"></a>**Şimdi Çalıştır** 'ı kullanarak özel ilkeyi test etme
 
-1. Üzerinde **Azure AD B2C** dikey penceresinde, Git **tüm ilkeleri**.
-2. Yüklenmiş ve'ı tıklatın özel bir ilkeyi seçin **Şimdi Çalıştır** düğmesi.
-3. Bir e-posta adresi kullanarak kaydolun olması gerekir.
+1. **Azure AD B2C** sayfasında, **Tüm ilkeler**' e gidin.
+1. Karşıya yüklediğiniz özel ilkeyi seçin ve **Şimdi Çalıştır** düğmesine tıklayın.
+1. Bir e-posta adresi kullanarak kaydolabilirsiniz.
 
 ## <a name="reference"></a>Başvuru
 
 ### <a name="sample-templates"></a>Örnek şablonlar
-Örnek şablonları UI özelleştirmesi burada bulabilirsiniz:
+UI özelleştirmesi için örnek şablonları buradan bulabilirsiniz:
 
 ```
 git clone https://github.com/azureadquickstarts/b2c-azureblobstorage-client
 ```
 
-Aşağıdaki HTML dosyaları sample_templates/wingtip klasör içerir:
+Sample_templates/Wingtip klasörü aşağıdaki HTML dosyalarını içerir:
 
 | HTML5 şablonu | Açıklama |
 |----------------|-------------|
-| *phonefactor.HTML* | Bu dosya için çok faktörlü kimlik doğrulaması sayfası şablon olarak kullanın. |
-| *ResetPassword.HTML* | Bu dosya için bir şablon olarak kullanmak bir parolamı unuttum sayfası. |
-| *selfasserted.html* | Bu dosya, bir sosyal hesap kaydolma sayfası, bir yerel hesap kaydolma sayfası veya bir yerel hesap oturum açma sayfası için bir şablon olarak kullanın. |
-| *Unified.HTML* | Bu dosya bir birleşik kaydolma veya oturum açma sayfası için bir şablon olarak kullanın. |
-| *updateprofile.html* | Bu dosya için bir profil güncelleştirme sayfasını şablon olarak kullanın. |
+| *PhoneFactor. html* | Bu dosyayı Multi-Factor Authentication sayfası için şablon olarak kullanın. |
+| *ResetPassword. html* | Parolayı unuttum sayfası için bu dosyayı şablon olarak kullanın. |
+| *selfassırted. html* | Bu dosyayı bir sosyal hesap kaydolma sayfası, yerel hesap kaydolma sayfası veya yerel hesap oturum açma sayfası için şablon olarak kullanın. |
+| *Birleşik. html* | Bu dosyayı Birleşik kaydolma veya oturum açma sayfası için şablon olarak kullanın. |
+| *updateprofile. html* | Bu dosyayı profil güncelleştirme sayfası için şablon olarak kullanın. |
 
-Örnek kullanımı konusunda adımlar şunlardır. 
-1. Deposunu yerel makinenize kopyalayın. Sample_templates altında bir şablon klasörü seçin. Kullanabileceğiniz `wingtip` veya `contoso`.
-2. Altındaki tüm dosyaları karşıya yükleme `css`, `fonts`, ve `images` klasörleri önceki bölümlerde açıklandığı gibi Blob Depolama. 
-3. Ardından, her açın \*.html dosyası ya da kökünde `wingtip` veya `contoso` (hangisi ilk adımda seçtiğiniz) ve tüm örneklerinin yerine "http://localhost" 2. adımda yüklediğiniz css, görüntü ve yazı tipleri dosyaların URL'leri ile.
-4. Kaydet \*.html dosyalarının ve bunları Blob depolama alanına yükleyin.
-5. Şimdi daha önce belirtildiği gibi uzantıları dosyasını değiştirin [uzantıları dosyasını değiştirme](#modify-the-extensions-file).
-6. Yazı tipleri, görüntüleri ya da css görürseniz, lütfen başvurularınızı uzantıları ilkesinde denetleyin ve \*.html dosyaları.
+Aşağıda, örneği kullanma adımları verilmiştir:
 
-### <a name="content-defintion-ids"></a>İçerik tanımı kimlikleri
+1. Yerel makinenizde depoyu kopyalayın. Sample_templates altında bir şablon klasörü seçin. @No__t-0 veya `contoso` ' i kullanabilirsiniz.
+1. @No__t-0, `fonts` ve `images` klasörlerinin altındaki tüm dosyaları önceki bölümlerde açıklandığı gibi BLOB depolamaya yükleyin.
+1. Ardından, her bir @no__t -0. html dosyasını `wingtip` veya `contoso` ' nin kökünde açın (ilk adımda seçtiğinizden) ve "http://localhost" öğesinin tüm örneklerini adım 2 ' de karşıya yüklediğiniz CSS, resim ve yazı tipi dosyalarının URL 'Leriyle değiştirin.
+1. @No__t -0. html dosyalarını kaydedin ve BLOB depolamaya yükleyin.
+1. Şimdi uzantılar dosyasını [değiştirme](#modify-the-extensions-file)bölümünde belirtildiği gibi uzantılar dosyasını değiştirin.
+1. Eksik yazı tiplerini, görüntüleri veya CSS 'yi görürseniz, uzantılar ilkesi ve @no__t -0. html dosyaları içindeki başvurularınızı kontrol edin.
 
-İçerik tanımı için yapılandırdığınız Değiştir kaydolma veya oturum açma özel bir ilke bölümü `api.idpselections`. İçerik kümesinin aşağıdaki tabloda, Azure AD B2C kimlik deneyimi çerçevesi ve açıklamalarının tarafından tanınan tanım kimlikleri şunlardır:
+### <a name="content-definition-ids"></a>İçerik tanımı kimlikleri
 
-| İçerik tanımı kimliği | Açıklama | 
+Kaydolma veya oturum açma özel ilkesini değiştirme bölümünde, `api.idpselections` için içerik tanımını yapılandırdınız. Azure AD B2C Identity Experience Framework ve açıklamaları tarafından tanınan içerik tanımı kimliklerinin tam kümesi aşağıdaki tabloda verilmiştir:
+
+| İçerik tanımı KIMLIĞI | Açıklama |
 |-----------------------|-------------|
-| *api.error* | **Hata sayfası**. Bu sayfa, bir özel durum veya hata ile karşılaşıldığında görüntülenir. |
-| *api.idpselections* | **Kimlik sağlayıcısı seçim sayfası**. Bu sayfa, oturum açma sırasında kullanıcı seçebileceği kimlik sağlayıcılarının bir listesini içerir. Bu, Kurumsal kimlik sağlayıcıları, Facebook ve Google + gibi sosyal kimlik sağlayıcıları ya da yerel hesaplar seçeneklerdir. |
-| *api.idpselections.signup* | **Kimlik sağlayıcısı seçim için kaydolma**. Bu sayfa kullanıcı kayıt sırasında seçebileceği kimlik sağlayıcılarının bir listesini içerir. Bu, Kurumsal kimlik sağlayıcıları, Facebook ve Google + gibi sosyal kimlik sağlayıcıları ya da yerel hesaplar seçeneklerdir. |
-| *api.localaccountpasswordreset* | **Parolanızı mı unuttunuz sayfasını**. Bu sayfa kullanıcı parola sıfırlama başlatmak için tamamlaması gereken form içerir.  |
-| *api.localaccountsignin* | **Yerel hesap oturum açma sayfası**. Bu sayfa, bir e-posta adresi veya kullanıcı adına göre yerel bir hesap ile oturum imzalamak için bir oturum açma formunu içerir. Form, metin girişi kutusunu ve parola giriş kutusu içerebilir. |
-| *api.localaccountsignup* | **Yerel hesap kaydolma sayfası**. Bu sayfa, bir e-posta adresi veya bir kullanıcı adı temel alan bir yerel hesap kaydolma için bir kayıt formunu içerir. Form, metin girişi kutusunu, parola girişi kutusu, radyo düğmesi, tekli seçim açılır kutuları ve çoklu seçim onay kutularını gibi çeşitli giriş denetimleri içerebilir. |
-| *api.phonefactor* | **Çok faktörlü kimlik doğrulaması sayfası**. Bu sayfada, kullanıcıların kendi telefon numaralarını (metin ya da ses) kaydolma veya oturum açma sırasında doğrulayabilirsiniz. |
-| *api.selfasserted* | **Sosyal hesap kaydolma sayfası**. Bu sayfa, bunlar bir sosyal kimlik sağlayıcısı Facebook veya Google + gibi var olan bir hesap ile oturum açarken kullanıcıların tamamlamalısınız kaydolma form içerir. Bu sayfa, önceki sosyal hesap kaydolma sayfası, parola giriş alanları dışında benzerdir. |
-| *api.selfasserted.profileupdate* | **Profili güncelleştirme sayfasını**. Bu sayfa, kullanıcıların kendi profilini güncelleştirmek için kullanabileceği bir form içerir. Bu sayfa, parola giriş alanları dışında sosyal hesap kaydolma sayfası benzerdir. |
-| *api.signuporsignin* | **Birleşik kaydolma veya oturum açma sayfası**. Bu sayfa hem kaydolma ve oturum açma Kurumsal kimlik sağlayıcıları, Facebook veya Google + veya yerel hesaplar gibi sosyal kimlik sağlayıcıları kullanan kullanıcıların işler.  |
+| *api. Error* | **Hata sayfası**. Bu sayfa bir özel durum veya hata ile karşılaşıldığında görüntülenir. |
+| *api. ıdpseçimlerin* | **Kimlik sağlayıcısı seçim sayfası**. Bu sayfa, kullanıcının oturum açma sırasında aralarından seçim yapabileceğiniz kimlik sağlayıcılarının bir listesini içerir. Bu seçenekler, kurumsal kimlik sağlayıcılarıdır, Facebook ve Google + gibi sosyal kimlik sağlayıcıları ya da yerel hesaplar. |
+| *api. ıdpseçimlerin. Signup* | **Kaydolma Için kimlik sağlayıcısı seçimi**. Bu sayfa, kullanıcının kaydolma sırasında aralarından seçim yapabileceğiniz kimlik sağlayıcılarının bir listesini içerir. Bu seçenekler, kurumsal kimlik sağlayıcılarıdır, Facebook ve Google + gibi sosyal kimlik sağlayıcıları ya da yerel hesaplar. |
+| *api. localaccountpasswordreset* | **Parolayı unuttum sayfası**. Bu sayfa, kullanıcının parola sıfırlama işlemini başlatmak için tamamlaması gereken bir form içerir.  |
+| *api. localaccountsignın* | **Yerel hesap oturum açma sayfası**. Bu sayfa, bir e-posta adresine veya Kullanıcı adına dayalı bir yerel hesapla oturum açmak için bir oturum açma formu içerir. Form bir metin girişi kutusu ve parola giriş kutusu içerebilir. |
+| *api. localaccountsignup* | **Yerel hesap kaydolma sayfası**. Bu sayfa, bir e-posta adresini veya Kullanıcı adını temel alan bir yerel hesaba kaydolma için bir kayıt formu içerir. Form, metin girişi kutusu, parola girişi kutusu, radyo düğmesi, tek seçim açılan kutuları ve çoklu seçim onay kutuları gibi çeşitli giriş denetimleri içerebilir. |
+| *api. phonefactor* | **Multi-Factor Authentication sayfası**. Bu sayfada, kullanıcılar telefon numaralarını (metin veya ses kullanarak) kaydolma veya oturum açma sırasında doğrulayabilirler. |
+| *api. selfasted* | **Sosyal hesap kaydolma sayfası**. Bu sayfa, kullanıcıların Facebook veya Google + gibi bir sosyal kimlik sağlayıcısından mevcut bir hesabı kullanarak kaydolduklarında tamamlaması gereken bir kaydolma formu içerir. Bu sayfa, parola girişi alanları hariç, önceki sosyal hesap kaydolma sayfasına benzer. |
+| *api. selfasserted. profileUpdate* | **Profil güncelleştirme sayfası**. Bu sayfa, kullanıcıların profilini güncelleştirmek için kullanabileceği bir form içerir. Bu sayfa, parola girişi alanları hariç sosyal hesap kaydolma sayfasına benzerdir. |
+| *api. signuporsignın* | **Birleşik kaydolma veya oturum açma sayfası**. Bu sayfa, kullanıcıların kaydolma ve oturum açma öğelerinin yanı sıra kurumsal kimlik sağlayıcıları, Facebook veya Google + gibi sosyal kimlik sağlayıcıları veya yerel hesaplar tarafından kullanılabilir.  |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Özelleştirilebilir kullanıcı Arabirimi öğeleri hakkında ek bilgi için bkz: [başvuru kılavuzu için yerleşik ilkeleri için kullanıcı Arabirimi özelleştirme](active-directory-b2c-reference-ui-customization.md).
+Özelleştirilebilecek Kullanıcı arabirimi öğeleri hakkında daha fazla bilgi için bkz. [Yerleşik ilkeler IÇIN UI özelleştirmesi için başvuru kılavuzu](active-directory-b2c-reference-ui-customization.md).

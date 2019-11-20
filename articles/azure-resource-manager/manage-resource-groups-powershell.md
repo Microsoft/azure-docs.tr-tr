@@ -1,40 +1,37 @@
 ---
-title: Azure PowerShell kullanarak Azure Resource Manager grupları yönetme | Microsoft Docs
-description: Azure PowerShell, Azure Resource Manager gruplarınızı yönetmek için kullanın.
-services: azure-resource-manager
-documentationcenter: ''
+title: Kaynak gruplarını yönetme-Azure PowerShell
+description: Kaynak gruplarınızı Azure Resource Manager kullanarak yönetmek için Azure PowerShell kullanın. Kaynak grupları oluşturma, listeleme ve silme işlemlerinin nasıl yapılacağını gösterir.
 author: mumian
-ms.service: azure-resource-manager
 ms.topic: conceptual
 ms.date: 02/11/2019
 ms.author: jgao
-ms.openlocfilehash: 3d6a102b794ca9c43e1dd18f923f6ce224596499
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.openlocfilehash: 5d0d7394de2763c785640b0981de9017cf0a7ae7
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67296253"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149801"
 ---
 # <a name="manage-azure-resource-manager-resource-groups-by-using-azure-powershell"></a>Azure PowerShell kullanarak Azure Resource Manager kaynak gruplarını yönetme
 
-Azure PowerShell ile kullanma hakkında bilgi edinin [Azure Resource Manager](resource-group-overview.md) , Azure kaynak gruplarını yönetme. Azure kaynaklarını yönetmek için bkz: [Azure PowerShell kullanarak Azure kaynaklarınızı yönetme](./manage-resources-powershell.md).
+Azure Kaynak gruplarınızı yönetmek için [Azure Resource Manager](resource-group-overview.md) Azure PowerShell nasıl kullanacağınızı öğrenin. Azure kaynaklarını yönetmek için bkz. [Azure PowerShell kullanarak Azure kaynaklarını yönetme](./manage-resources-powershell.md).
 
 Kaynak gruplarını yönetme hakkında diğer makaleler:
 
-- [Azure portalını kullanarak Azure kaynak gruplarını yönetme](./manage-resources-portal.md)
-- [Azure CLI kullanarak Azure kaynak gruplarını yönetme](./manage-resources-cli.md)
+- [Azure portal kullanarak Azure kaynak gruplarını yönetme](./manage-resources-portal.md)
+- [Azure CLı kullanarak Azure kaynak gruplarını yönetme](./manage-resources-cli.md)
 
-## <a name="what-is-a-resource-group"></a>Bir kaynak grubu nedir
+## <a name="what-is-a-resource-group"></a>Kaynak grubu nedir?
 
-Kaynak grubu, bir Azure çözümü için ilgili kaynakları bir arada tutan kapsayıcıdır. Kaynak grubu bir çözümün tüm kaynaklarını veya yalnızca grup olarak yönetmek istediğiniz kaynakları içerebilir. Kuruluş için önemli olan faktörleri temel alarak kaynakları kaynak gruplarına nasıl ayıracağınıza siz karar verirsiniz. Genellikle, kolayca dağıtabilir, güncelleştirme ve onları bir grup olarak silmek için aynı kaynak grubuna aynı yaşam döngüsünü paylaşan kaynakların ekleyin.
+Kaynak grubu, bir Azure çözümü için ilgili kaynakları bir arada tutan kapsayıcıdır. Kaynak grubu bir çözümün tüm kaynaklarını veya yalnızca grup olarak yönetmek istediğiniz kaynakları içerebilir. Kuruluş için önemli olan faktörleri temel alarak kaynakları kaynak gruplarına nasıl ayıracağınıza siz karar verirsiniz. Genellikle, bunları bir grup olarak kolayca dağıtabilmeniz, güncelleştirebilmeniz ve silebilmeniz için aynı yaşam döngüsünü paylaşan kaynakları ekleyin.
 
 Kaynak grubu, kaynaklarla ilgili meta verileri depolar. Bu nedenle, kaynak grubu için bir konum belirttiğinizde meta verilerin nereye depolanacağını belirtirsiniz. Uyumluluk nedeniyle verilerinizin belirli bir bölgeye depolandığından emin olmanız gerekebilir.
 
-Kaynak grubu, kaynaklarla ilgili meta verileri depolar. Kaynak grubu için bir konum belirttiğinizde meta verilerin depolandığı belirlediniz.
+Kaynak grubu, kaynaklarla ilgili meta verileri depolar. Kaynak grubu için bir konum belirttiğinizde, meta verilerin nerede depolandığını belirtirsiniz.
 
-## <a name="create-resource-groups"></a>Kaynak grupları oluşturun
+## <a name="create-resource-groups"></a>Kaynak grupları oluşturma
 
-Aşağıdaki PowerShell Betiği, bir kaynak grubu oluşturur ve sonra kaynak grubunu gösterir.
+Aşağıdaki PowerShell betiği bir kaynak grubu oluşturur ve ardından kaynak grubunu gösterir.
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -47,7 +44,7 @@ Get-AzResourceGroup -Name $resourceGroupName
 
 ## <a name="list-resource-groups"></a>Kaynak gruplarını listeleme
 
-Aşağıdaki PowerShell Betiği, aboneliğiniz altında kaynak grupları listeler.
+Aşağıdaki PowerShell betiği, aboneliğinizin altındaki kaynak gruplarını listeler.
 
 ```azurepowershell-interactive
 Get-AzResourceGroup
@@ -61,9 +58,9 @@ $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
 Get-AzResourceGroup -Name $resourceGroupName
 ```
 
-## <a name="delete-resource-groups"></a>Kaynak gruplarını silin
+## <a name="delete-resource-groups"></a>Kaynak gruplarını silme
 
-Aşağıdaki PowerShell betiğini bir kaynak grubunu siler:
+Aşağıdaki PowerShell betiği bir kaynak grubunu siler:
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -71,31 +68,31 @@ $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
 Remove-AzResourceGroup -Name $resourceGroupName
 ```
 
-Azure Resource Manager kaynakların silinmesini nasıl siparişler hakkında daha fazla bilgi için bkz. [Azure Resource Manager kaynak grubu silme işlemi](./resource-group-delete.md).
+Kaynakların silinmesini Azure Resource Manager nasıl sipariş Azure Resource Manager hakkında daha fazla bilgi için bkz. [kaynak grubu silme](./resource-group-delete.md).
 
 ## <a name="deploy-resources-to-an-existing-resource-group"></a>Kaynakları var olan bir kaynak grubuna dağıtma
 
-Bkz: [kaynakları var olan bir kaynak grubuna dağıtma](./manage-resources-powershell.md#deploy-resources-to-an-existing-resource-group).
+Bkz. [kaynakları var olan bir kaynak grubuna dağıtma](./manage-resources-powershell.md#deploy-resources-to-an-existing-resource-group).
 
-Bir kaynak grubu dağıtımı doğrulamak için bkz: [Test AzResourceGroupDeployment](https://docs.microsoft.com/powershell/module/Az.Resources/Test-AzResourceGroupDeployment?view=azps-1.3.0).
+Bir kaynak grubu dağıtımını doğrulamak için bkz. [Test-AzResourceGroupDeployment](https://docs.microsoft.com/powershell/module/Az.Resources/Test-AzResourceGroupDeployment?view=azps-1.3.0).
 
-## <a name="deploy-a-resource-group-and-resources"></a>Bir kaynak grubu ve kaynakları dağıtma
+## <a name="deploy-a-resource-group-and-resources"></a>Kaynak grubu ve kaynakları dağıtma
 
-Bir kaynak grubu oluşturun ve kaynakları Resource Manager şablonu kullanarak grubuna dağıtın. Daha fazla bilgi için [kaynak grubu oluşturun ve kaynakları dağıtma](./deploy-to-subscription.md#create-resource-group-and-deploy-resources).
+Kaynak Yöneticisi şablonu kullanarak bir kaynak grubu oluşturabilir ve gruba kaynak dağıtabilirsiniz. Daha fazla bilgi için bkz. [kaynak grubu oluşturma ve kaynakları dağıtma](./deploy-to-subscription.md#resource-group-and-resources).
 
-## <a name="redeploy-when-deployment-fails"></a>Dağıtım başarısız olduğunda yeniden dağıtma
+## <a name="redeploy-when-deployment-fails"></a>Dağıtım başarısız olduğunda yeniden Dağıt
 
-Bu özellik olarak da bilinir *hatada geri alma*. Daha fazla bilgi için [dağıtımı başarısız olduğunda yeniden](./resource-group-template-deploy.md#redeploy-when-deployment-fails).
+Bu özellik *hata durumunda geri alma*olarak da bilinir. Daha fazla bilgi için bkz. [dağıtım başarısız olduğunda yeniden dağıtma](./rollback-on-error.md).
 
 ## <a name="move-to-another-resource-group-or-subscription"></a>Başka bir kaynak grubuna veya aboneliğe taşıma
 
-Kaynak grubunda başka bir kaynak grubuna taşıyabilirsiniz. Daha fazla bilgi için bkz. [Kaynakları yeni kaynak grubuna veya aboneliğe taşıma](./resource-group-move-resources.md#move-resources).
+Gruptaki kaynakları başka bir kaynak grubuna taşıyabilirsiniz. Daha fazla bilgi için bkz. [Kaynakları yeni kaynak grubuna veya aboneliğe taşıma](./resource-group-move-resources.md).
 
-## <a name="lock-resource-groups"></a>Kilit kaynak grupları
+## <a name="lock-resource-groups"></a>Kaynak gruplarını kilitle
 
-Kilitleme yanlışlıkla Azure aboneliği, kaynak grubu ya da kaynağa gibi kritik kaynakları silmesini veya kuruluşunuzdaki diğer kullanıcılar engeller. 
+Kilitleme, kuruluşunuzdaki diğer kullanıcıların Azure aboneliği, kaynak grubu veya kaynak gibi önemli kaynakları yanlışlıkla silmesini veya değiştirmelerini engeller. 
 
-Kaynak grubu silindi için aşağıdaki betiği bir kaynak grubu kilitler.
+Aşağıdaki betik bir kaynak grubunu kilitleyerek kaynak grubu silinemez.
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -103,7 +100,7 @@ $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
 New-AzResourceLock -LockName LockGroup -LockLevel CanNotDelete -ResourceGroupName $resourceGroupName 
 ```
 
-Aşağıdaki komut dosyası için bir kaynak grubu tüm kilitleri alır:
+Aşağıdaki betik, bir kaynak grubu için tüm kilitleri alır:
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -113,18 +110,18 @@ Get-AzResourceLock -ResourceGroupName $resourceGroupName
 
 Daha fazla bilgi için bkz. [Azure Resource Manager ile kaynakları kilitleme](resource-group-lock-resources.md).
 
-## <a name="tag-resource-groups"></a>Etiket kaynak grupları
+## <a name="tag-resource-groups"></a>Kaynak gruplarını etiketleme
 
-Varlıklarınızı mantıksal olarak düzenlemek için kaynak grupları ve kaynaklar için etiketler ekleyebilirsiniz. Bilgi için [etiketleri kullanarak Azure kaynaklarınızı düzenleme](./resource-group-using-tags.md#powershell).
+Varlıklarınızı mantıksal olarak düzenlemek için kaynak gruplarına ve kaynaklarına Etiketler uygulayabilirsiniz. Daha fazla bilgi için bkz. [Azure kaynaklarınızı düzenlemek için etiketleri kullanma](./resource-group-using-tags.md#powershell).
 
-## <a name="export-resource-groups-to-templates"></a>Kaynak grupları için şablonları dışarı aktarma
+## <a name="export-resource-groups-to-templates"></a>Kaynak gruplarını şablonlara aktarma
 
-Kaynak grubunuzun ayarladıktan sonra kaynak grubu için bir Resource Manager şablonu görüntüleyebilirsiniz. Şablonu dışarı aktarma iki avantajı sunar:
+Kaynak grubunuzu ayarladıktan sonra kaynak grubu için bir Kaynak Yöneticisi şablonu görüntüleyebilirsiniz. Şablonu dışarı aktarmak iki avantaj sunar:
 
-- Şablon eksiksiz altyapı içerdiğinden çözümün gelecekteki dağıtımlar otomatikleştirin.
-- Şablon söz dizimi, JavaScript nesne gösterimi (çözümünüzü temsil eden JSON konumunda) bakarak öğrenin.
+- Şablon, tüm altyapıyı içerdiğinden çözümün gelecekteki dağıtımlarını otomatikleştirin.
+- Çözümünüzü temsil eden JavaScript Nesne Gösterimi (JSON) bakarak Şablon sözdizimini öğrenin.
 
-Bir kaynak grubundaki tüm kaynakları dışarı aktarmak için kullanın [dışarı aktarma AzResourceGroup](/powershell/module/az.resources/Export-AzResourceGroup) cmdlet'i ve kaynak grubu adı girin.
+Bir kaynak grubundaki tüm kaynakları dışarı aktarmak için [Export-AzResourceGroup](/powershell/module/az.resources/Export-AzResourceGroup) cmdlet 'ini kullanın ve kaynak grubu adını sağlayın.
 
 ```azurepowershell-interactive
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
@@ -132,11 +129,11 @@ $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
 Export-AzResourceGroup -ResourceGroupName $resourceGroupName
 ```
 
-Bu şablon bir yerel dosya olarak kaydeder.
+Şablonu yerel bir dosya olarak kaydeder.
 
-Kaynak grubundaki tüm kaynakları dışarı aktarma yerine dışarı aktarmak için hangi kaynakların seçebilirsiniz.
+Kaynak grubundaki tüm kaynakları dışarı aktarmak yerine, hangi kaynakların dışarı aktarılacağını seçebilirsiniz.
 
-Bir kaynağı vermek için bu kaynak kimliği geçirin.
+Bir kaynağı dışarı aktarmak için bu kaynak KIMLIĞINI geçirin.
 
 ```azurepowershell-interactive
 $resource = Get-AzResource `
@@ -148,7 +145,7 @@ Export-AzResourceGroup `
   -Resource $resource.ResourceId
 ```
 
-Birden fazla kaynak dışarı aktarmak için ' % s'kaynak kimliklerini bir dizideki geçirin.
+Birden fazla kaynağı dışarı aktarmak için, kaynak kimliklerini bir dizide geçirin.
 
 ```azurepowershell-interactive
 Export-AzResourceGroup `
@@ -156,7 +153,7 @@ Export-AzResourceGroup `
   -Resource @($resource1.ResourceId, $resource2.ResourceId)
 ```
 
-Şablon dışa aktarırken parametreleri şablonda kullanılıp kullanılmayacağını belirtebilirsiniz. Varsayılan olarak, kaynak adları için parametreleri dahil edilir, ancak varsayılan bir değere sahip değildir. Dağıtım sırasında bu parametre değeri geçmesi gerekir.
+Şablonu dışarı aktarırken, şablonda parametrelerin kullanılıp kullanılmayacağını belirtebilirsiniz. Varsayılan olarak, kaynak adları için parametreler dahil edilir ancak varsayılan bir değere sahip değildir. Dağıtım sırasında bu parametre değerini geçirmeniz gerekir.
 
 ```json
 "parameters": {
@@ -171,7 +168,7 @@ Export-AzResourceGroup `
 }
 ```
 
-Kaynak kısmında, parametre adı için kullanılır.
+Kaynağında, adı için parametresi kullanılır.
 
 ```json
 "resources": [
@@ -184,7 +181,7 @@ Kaynak kısmında, parametre adı için kullanılır.
 ]
 ```
 
-Kullanırsanız `-IncludeParameterDefaultValue` şablonu dışarı aktarılırken parametresi şablon parametresi geçerli bir değere ayarlanmış varsayılan bir değer içerir. Bu varsayılan değeri kullanın veya farklı bir değer aktararak varsayılan değerin üzerine.
+Şablonu dışarı aktarırken `-IncludeParameterDefaultValue` parametresini kullanırsanız, şablon parametresi geçerli değere ayarlanmış bir varsayılan değer içerir. Bu varsayılan değeri kullanabilir ya da farklı bir değere geçirerek varsayılan değerin üzerine yazabilirsiniz.
 
 ```json
 "parameters": {
@@ -199,7 +196,7 @@ Kullanırsanız `-IncludeParameterDefaultValue` şablonu dışarı aktarılırke
 }
 ```
 
-Kullanırsanız `-SkipResourceNameParameterization` kaynak adları şablonuna dahil için şablon parametreleri verirken parametresi. Bunun yerine, kaynak adı, doğrudan kaynaktaki geçerli değerine ayarlanır. Dağıtım sırasında adı özelleştiremezsiniz.
+Şablonu dışarı aktarırken `-SkipResourceNameParameterization` parametresini kullanırsanız, kaynak adları için parametreler şablona dahil edilmez. Bunun yerine, kaynak adı kaynak üzerinde doğrudan geçerli değerine ayarlanır. Dağıtım sırasında adı özelleştiremezsiniz.
 
 ```json
 "resources": [
@@ -212,15 +209,15 @@ Kullanırsanız `-SkipResourceNameParameterization` kaynak adları şablonuna da
 ]
 ```
 
-Daha fazla bilgi için [şablonu Azure portalında tek ve birden çok kaynak dışarı aktarma](./export-template-portal.md).
+Daha fazla bilgi için, [Azure Portal ' de tek ve çoklu kaynak verme şablonuna](./export-template-portal.md)bakın.
 
 ## <a name="manage-access-to-resource-groups"></a>Kaynak gruplarına erişimi yönetme
 
-[Rol tabanlı erişim denetimi (RBAC)](../role-based-access-control/overview.md), Azure'daki kaynaklara erişimi yönetmek için kullanılan sistemdir. Daha fazla bilgi için [RBAC ve Azure PowerShell kullanarak erişimini yönetme](../role-based-access-control/role-assignments-powershell.md).
+[Rol tabanlı erişim denetimi (RBAC)](../role-based-access-control/overview.md), Azure'daki kaynaklara erişimi yönetmek için kullanılan sistemdir. Daha fazla bilgi için bkz. [RBAC ve Azure PowerShell kullanarak erişimi yönetme](../role-based-access-control/role-assignments-powershell.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure Resource Manager bilgi edinmek için [Azure Resource Manager'a genel bakış](./resource-group-overview.md).
-- Resource Manager şablon söz dizimi bilgi edinmek için [yapısını ve Azure Resource Manager şablonları söz dizimini anlamak](./resource-group-authoring-templates.md).
-- Şablonları geliştirme hakkında bilgi edinmek için [adım adım öğreticiler](/azure/azure-resource-manager/).
-- Azure Resource Manager Şablon Şemaları görüntülemek için bkz: [şablon başvurusu](/azure/templates/).
+- Azure Resource Manager öğrenmek için bkz. [Azure Resource Manager genel bakış](./resource-group-overview.md).
+- Kaynak Yöneticisi Şablon sözdizimini öğrenmek için bkz. [Azure Resource Manager şablonlarının yapısını ve sözdizimini anlayın](./resource-group-authoring-templates.md).
+- Şablon geliştirmeyi öğrenmek için [adım adım öğreticiler](/azure/azure-resource-manager/)bölümüne bakın.
+- Azure Resource Manager şablonu şemalarını görüntülemek için bkz. [şablon başvurusu](/azure/templates/).

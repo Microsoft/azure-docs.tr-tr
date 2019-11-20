@@ -1,7 +1,7 @@
 ---
-title: Projeniz için 3.0 geçirme API
-titlesuffix: Azure Cognitive Services
-description: Custom Vision projeleri API önceki sürümünden 3. 0'geçirmeyi öğrenin API.
+title: Projenizi 3,0 API 'sine güncelleştirme
+titleSuffix: Azure Cognitive Services
+description: Özel Görüntü İşleme projelerini API 'nin önceki sürümünden 3,0 API 'sine güncelleştirme hakkında bilgi edinin.
 services: cognitive-services
 author: areddish
 manager: nitinme
@@ -10,57 +10,50 @@ ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 04/04/2019
 ms.author: areddish
-ms.openlocfilehash: 9dd473aadd7123cafc27209f5c34322fdbcffb71
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c134f30b124113a23df0e73cd1bbc8209e335183
+ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60816465"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73647493"
 ---
-# <a name="migrate-to-the-30-api"></a>3\. 0'geçirme API
+# <a name="update-to-the-30-api"></a>3,0 API 'sine güncelleştirme
 
-Özel görüntü işleme artık genel kullanım sınırına ulaştı ve bir API'yi güncelleştirme gerçekleştirdi.
-Bu güncelleştirme birkaç yeni özellik ve daha önemlisi, birkaç önemli değişiklikler içerir:
+Özel Görüntü İşleme artık genel kullanılabilirliğe ulaştı ve bir API güncelleştirmesi gerçekleştirdi.
+Bu güncelleştirme, birkaç yeni özellik ve daha önemlisi bazı önemli değişiklikler içerir:
 
-* Tahmin API artık içinde iki proje türüne göre bölünür.
-* Belirli bir şekilde bir proje oluşturmak için işleme yapay ZEKA Geliştirme Seti (VAIDK) dışarı aktarma seçeneği gerekir.
-* Varsayılan yineleme yerine Yayımla kaldırılmış / adlandırılmış bir yineleme Yayımdan Kaldır.
+* Tahmin API 'SI artık proje türüne göre iki olarak bölünür.
+* Vision AI geliştirici seti (VAıDK) dışa aktarma seçeneği, bir projenin belirli bir şekilde oluşturulmasını gerektirir.
+* Varsayılan yinelemeler, adlandırılmış bir yinelemeyi Yayımla/yayımdan kaldırma yararına kaldırılmıştır.
 
-Bu kılavuz, projelerinize yeni API sürümüyle çalışacak şekilde güncelleştirme konusunda gösterilmektedir. Bkz: [sürüm notları](release-notes.md) değişikliklerin tam listesi için.
+Bu kılavuzda, projelerinizi yeni API sürümüyle çalışacak şekilde nasıl güncelleşdirecektir. Değişikliklerin tam listesi için [sürüm notlarına](release-notes.md) bakın.
 
-## <a name="use-the-updated-prediction-api"></a>Güncelleştirilmiş tahmin API'sini kullanma
+## <a name="use-the-updated-prediction-api"></a>Güncelleştirilmiş tahmin API 'sini kullanma
 
-API 2.x aynı tahmin çağrısı resim sınıflandırıcıları ve nesne algılayıcısı projeleri için kullanılır. Her iki proje türleri için kabul edilebilir **PredictImage** ve **PredictImageUrl** çağırır. Çağrı proje türüyle eşleşmesi gerekir böylece 3.0 ile başlayarak, biz bu API böldüyseniz:
+2\. x API 'Leri hem görüntü sınıflandırıcıları hem de nesne algılayıcı projeleri için aynı tahmin çağrısını kullandı. Her iki proje türü de **Predictımage** ve **Predictımageurl** çağrıları için kabul edilebilir. 3,0 ' den başlayarak, bu API 'yi, bu API 'yi, bu API 'yi, çağrı ile eşleştirmek için ayırdık:
 
-* Kullanım **[ClassifyImage](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c15)** ve **[ClassifyImageUrl](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c14)** görüntü sınıflandırma projeleri için Öngörüler edinmek için.
-* Kullanım **[DetectImage](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c19)** ve **[DetectImageUrl](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c18)** nesne algılama projeleri için Öngörüler edinmek için.
+* Görüntü sınıflandırma projelerine yönelik öngörülere ulaşmak için **[ClassifyImage](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c15)** ve **[ClassifyImageUrl](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c14)** kullanın.
+* Nesne algılama projelerine ilişkin tahminleri almak için **[Detectımage](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c19)** ve **[Detectımageurl](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Prediction_3.0/operations/5c82db60bf6a2b11a8247c18)** kullanın.
 
 ## <a name="use-the-new-iteration-publishing-workflow"></a>Yeni yineleme yayımlama iş akışını kullanın
 
-API 2.x tahmin için kullanılacak yinelemeyi seçmek için varsayılan yineleme veya belirtilen yineleme kimliği kullanılır. 3\. 0'dan başlayarak ilk yapabildiği eğitim API'sinden belirtilen bir adla yineleme yayımlama yayımlama akış benimsemiştir. Daha sonra kullanmak için hangi yineleme belirtmek için tahmin yöntemleri adı geçirin.
+2\. x API 'Leri, tahmine göre kullanılacak yinelemeyi seçmek için varsayılan yinelemeyi veya belirtilen bir yineleme KIMLIĞINI kullandı. 3,0 ' den başlayarak, ilk olarak eğitim API 'sinden belirtilen bir ad altında bir yineleme yayımladığınızda yayımlama akışını benimsedik. Ardından, kullanılacak yinelemeyi belirtmek için adı tahmin yöntemlerine geçitirsiniz.
 
 > [!IMPORTANT]
-> 3\.0 API'leri varsayılan yineleme özelliğini kullanmayın. Biz daha eski API'lar kullanımdan kadar API 2.x varsayılan olarak bir yineleme geçiş yapmak için kullanmaya devam edebilirsiniz. Bu API'ler, bir süre için korunur ve çağırabilirsiniz **[UpdateIteration](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Training_3.0/operations/5c771cdcbf6a2b18a0c3b818)** yineleme varsayılan olarak işaretlemek için yöntemi.
+> 3,0 API 'Leri varsayılan yineleme özelliğini kullanmaz. Eski API 'Leri kullanımdan kaldırana kadar, bir yinelemeyi varsayılan olarak değiştirmek için 2. x API 'Lerini kullanmaya devam edebilirsiniz. Bu API 'Ler bir süre boyunca tutulacaktır ve bir yinelemeyi varsayılan olarak işaretlemek için **[Updateıteration](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Training_3.0/operations/5c771cdcbf6a2b18a0c3b818)** metodunu çağırabilirsiniz.
 
-### <a name="publish-an-iteration"></a>Bir yineleme yayımlama
+### <a name="publish-an-iteration"></a>Yineleme yayımlama
 
-Bir yineleme eğitildi sonra bunu kullanarak tahmin için kullanılabilir duruma getirebilirsiniz **[PublishIteration](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Training_3.0/operations/5c82db28bf6a2b11a8247bbc)** yöntemi. Bir yineleme yayımlama CustomVision Web sitesinin Ayarları sayfasında kullanılabilir tahmin kaynak kimliği gerekir.
+Bir yineleme eğitilirken, **[Publishyineleme](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Training_3.0/operations/5c82db28bf6a2b11a8247bbc)** yöntemini kullanarak tahmin için kullanılabilir hale getirebilirsiniz. Bir yinelemeyi yayımlamak için, CustomVision Web sitesinin ayarlar sayfasında bulunan tahmini kaynak KIMLIĞI gereklidir.
 
-![Özel görüntü işleme Web Sitesi Ayarları sayfası özetlenen tahmin kaynak Kimliğine sahip.](./media/update-application-to-3.0-sdk/prediction-id.png)
+![Tahmin kaynak KIMLIĞI ana hatlarıyla Özel Görüntü İşleme Web sitesi ayarları sayfası.](./media/update-application-to-3.0-sdk/prediction-id.png)
 
 > [!TIP]
-> Bu bilgi de edinebilirsiniz [Azure portalı](https://portal.azure.com) Custom Vision tahmin kaynağa ve seçerek **özellikleri**.
+> Bu bilgileri [Azure portalından](https://portal.azure.com) özel görüntü işleme tahmin kaynağına giderek ve **Özellikler**' i seçerek de alabilirsiniz.
 
-Yineleme yayımlandıktan sonra uygulamaları bu tahmin için kendi tahmin API çağrısı içinde adı belirterek kullanabilirsiniz. Bir yineleme tahmin çağrısı için kullanılabilir yapmak için **[UnpublishIteration](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Training_3.0/operations/5c771cdcbf6a2b18a0c3b81a)** API.
-
-## <a name="additional-export-options"></a>Ek dışarı aktarma seçenekleri
-
-3\.0 ile biz gösterme iki ek API'ler dışarı hedefleri: ARM mimarisi ve işleme yapay ZEKA Geliştirme Seti.
-
-* ARM kullanılacak sıkıştırılmış bir etki alanı seçin ve DockerFile'ı seçin ve ardından dışarı aktarma seçenekleri ARM yeterlidir.
-* İşleme yapay ZEKA Geliştirme Seti için proje ile oluşturulmalıdır __genel (CD)__ etki alanı hem de hedef VAIDK belirterek platformlar bağımsız değişken dışarı aktarma.
+Yineleme yayımlandıktan sonra, uygulamalar bu adı tahmin API çağrısında belirterek tahmin için kullanabilir. Bir yinelemeyi tahmin çağrıları için kullanılamaz hale getirmek için **[Unpublishıteration](https://southcentralus.dev.cognitive.microsoft.com/docs/services/Custom_Vision_Training_3.0/operations/5c771cdcbf6a2b18a0c3b81a)** API 'sini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Eğitim API başvuru belgeleri (REST)](https://go.microsoft.com/fwlink/?linkid=865446)
-* [Tahmin API başvuru belgeleri (REST)](https://go.microsoft.com/fwlink/?linkid=865445)
+* [Eğitim API 'SI başvuru belgeleri (REST)](https://go.microsoft.com/fwlink/?linkid=865446)
+* [Tahmin API 'SI başvuru belgeleri (REST)](https://go.microsoft.com/fwlink/?linkid=865445)

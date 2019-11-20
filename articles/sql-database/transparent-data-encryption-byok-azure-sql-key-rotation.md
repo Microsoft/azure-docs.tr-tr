@@ -1,54 +1,53 @@
 ---
-title: PowerShell - döndürme TDE koruyucusuna - Azure SQL veritabanı | Microsoft Docs
-description: Bir Azure SQL sunucusu için saydam veri şifrelemesi (TDE) koruyucu döndürme hakkında bilgi edinin.
+title: TDE koruyucuyu döndürme-PowerShell
+description: Azure SQL Server için Saydam Veri Şifrelemesi (TDE) koruyucusunu döndürme hakkında bilgi edinin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
-ms.custom: ''
+ms.custom: seo-lt-2019
 ms.devlang: ''
 ms.topic: conceptual
 author: aliceku
 ms.author: aliceku
 ms.reviewer: vanto
-manager: jhubbard
 ms.date: 03/12/2019
-ms.openlocfilehash: c3e982c0fc46ea72692d5fa7f27e14b88c6383df
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 5bfcacb9348940e0b36947f6e4e0d27839de35bb
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67274260"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824676"
 ---
-# <a name="rotate-the-transparent-data-encryption-tde-protector-using-powershell"></a>PowerShell kullanarak saydam veri şifrelemesi (TDE) koruyucu Döndür
+# <a name="rotate-the-transparent-data-encryption-tde-protector-using-powershell"></a>PowerShell kullanarak Saydam Veri Şifrelemesi (TDE) koruyucusunu döndürme
 
-Bu makalede, Azure Key vault'tan TDE koruyucusu kullanarak bir Azure SQL sunucusu için anahtar döndürme açıklanır. Bir Azure SQL server'ın TDE koruyucusu anlamına gelir, korunan sunucudaki veritabanlarını yeni bir asimetrik anahtar geçiş döndürme. Anahtar döndürme, çevrimiçi bir işlemdir ve yalnızca bu yalnızca şifresini çözer ve veritabanının veri şifreleme anahtarı, tüm veritabanını yeniden şifreler olduğundan tamamlanması birkaç saniye sürer.
+Bu makalede, Azure Key Vault 'den bir TDE koruyucusu kullanılarak Azure SQL Server için anahtar döndürme açıklanmaktadır. Azure SQL Server 'ın TDE koruyucusunu döndürme, sunucudaki veritabanlarını koruyan yeni bir asimetrik anahtara geçiş anlamına gelir. Anahtar döndürme bir çevrimiçi işlemdir ve yalnızca birkaç saniye sürer, çünkü bu yalnızca veritabanının veri şifreleme anahtarını çözer ve veritabanının tamamını değil, yeniden şifreler.
 
-Bu kılavuz, sunucuda TDE koruyucusuna döndürmek için iki seçenek açıklanır.
+Bu kılavuzda, sunucuda TDE koruyucusunu döndürmek için iki seçenek ele alınmaktadır.
 
 > [!NOTE]
-> Duraklatılmış bir SQL veri ambarı, anahtar devirlerini önce sürdürüldü gerekir.
+> Duraklatılmış bir SQL veri ambarı, anahtar döndürmelerinde devam etmelidir.
 >
 
 > [!IMPORTANT]
-> **Silemediğini yapmak** önceki bir geçiş anahtarı.  Anahtarları uzatılabilir, bazı veriler hala eski veritabanı yedeklemeleri gibi önceki anahtarlarla şifrelenir. 
+> Bir geçişten sonra anahtarın önceki sürümlerini **silmeyin** .  Anahtarlar devralındığında, bazı veriler, daha eski veritabanı yedeklemeleri gibi önceki anahtarlarla de şifrelenir. 
 >
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 > [!IMPORTANT]
-> Azure Resource Manager PowerShell modülü, Azure SQL veritabanı tarafından hala desteklenmektedir, ancak tüm gelecekteki geliştirme için Az.Sql modüldür. Bu cmdlet'ler için bkz. [Azurerm.SQL'e](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az modül ve AzureRm modülleri komutları için bağımsız değişkenler büyük ölçüde aynıdır.
+> PowerShell Azure Resource Manager modülü Azure SQL veritabanı tarafından hala desteklenmektedir, ancak gelecekteki tüm geliştirmeler az. SQL modülüne yöneliktir. Bu cmdlet 'ler için bkz. [Azurerd. SQL](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az Module ve Azurerd modüllerinde komutların bağımsız değişkenleri önemli ölçüde aynıdır.
 
-- Bu nasıl yapılır kılavuzunda, zaten Azure Key vault'tan bir anahtar TDE koruyucusu olarak bir Azure SQL veritabanı veya veri ambarı için kullandığınızı varsayar. Bkz: [BYOK destekli saydam veri şifrelemesi](transparent-data-encryption-byok-azure-sql.md).
-- Azure PowerShell yüklenmiş ve çalışıyor olması gerekir.
-- [İsteğe bağlı ancak önerilen] Bir donanım güvenlik modülü (HSM) anahtar malzemesi için TDE koruyucusu oluşturun veya yerel anahtarı ilk depolamak ve anahtar malzemesi Azure anahtar Kasası'na içeri aktarın. İzleyin [bir donanım güvenlik modülü (HSM) ve anahtar kasası kullanmaya yönelik yönergeler](https://docs.microsoft.com/azure/key-vault/key-vault-get-started) daha fazla bilgi için.
+- Bu nasıl yapılır kılavuzunda, bir Azure SQL veritabanı veya veri ambarı için TDE koruyucusu olarak Azure Key Vault bir anahtar kullandığınızı varsaymış olursunuz. Bkz. [BYOK desteği ile saydam veri şifrelemesi](transparent-data-encryption-byok-azure-sql.md).
+- Azure PowerShell yüklü ve çalışıyor olmanız gerekir.
+- [Önerilir, ancak isteğe bağlı] Önce bir donanım güvenlik modülünde (HSM) veya yerel anahtar deposunda TDE koruyucusu için anahtar malzemesi oluşturun ve Azure Key Vault için anahtar malzemesini içeri aktarın. Daha fazla bilgi edinmek için [donanım güvenlik modülü (HSM) kullanma ve Key Vault yönergelerini](https://docs.microsoft.com/azure/key-vault/key-vault-get-started) izleyin.
 
 ## <a name="manual-key-rotation"></a>El ile anahtar döndürme
 
-El ile anahtar döndürme kullanan [Ekle AzKeyVaultKey](/powershell/module/az.keyvault/Add-AzKeyVaultKey), [Ekle AzSqlServerKeyVaultKey](/powershell/module/az.sql/add-azsqlserverkeyvaultkey), ve [kümesi AzSqlServerTransparentDataEncryptionProtector](/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) cmdlet'leri eklemek için bir tamamen yeni anahtarı altında yeni bir anahtar adı veya hatta başka bir anahtar kasası olabilir. Bu yaklaşımı kullanarak, aynı anahtarı yüksek oranda kullanılabilir ve coğrafi-dr senaryoları desteklemek için farklı anahtar kasalarına eklenmesini destekler.
+El ile anahtar döndürme, [Add-AzKeyVaultKey](/powershell/module/az.keyvault/Add-AzKeyVaultKey), [Add-AzSqlServerKeyVaultKey](/powershell/module/az.sql/add-azsqlserverkeyvaultkey)ve [set-AzSqlServerTransparentDataEncryptionProtector](/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) cmdlet 'lerini kullanarak yeni bir anahtar adı veya hatta başka bir anahtar altında olabilecek tamamen yeni bir anahtar ekler ka. Bu yaklaşımın kullanılması, yüksek kullanılabilirlik ve coğrafi Dr senaryolarını desteklemek üzere farklı anahtar kasalarına aynı anahtarı eklemeyi destekler.
 
 >[!NOTE]
->Birleşik anahtar adını ve anahtar kasası adı için 94 karakter uzunluğunda olabilir.
+>Anahtar Kasası adı ve anahtar adının birleşik uzunluğu 94 karakteri aşamaz.
 
    ```powershell
    # Add a new key to Key Vault
@@ -72,9 +71,9 @@ El ile anahtar döndürme kullanan [Ekle AzKeyVaultKey](/powershell/module/az.ke
    ```
 
 
-## <a name="other-useful-powershell-cmdlets"></a>Diğer kullanışlı PowerShell cmdlet'leri
+## <a name="other-useful-powershell-cmdlets"></a>Diğer yararlı PowerShell cmdlet 'leri
 
-- Microsoft tarafından yönetilen gelen TDE koruyucusuna BYOK moduna geçiş yapmak için kullanın [kümesi AzSqlServerTransparentDataEncryptionProtector](/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) cmdlet'i.
+- TDE, Microsoft tarafından yönetilen ve BYOK moduna geçiş yapmak için [set-AzSqlServerTransparentDataEncryptionProtector](/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) cmdlet 'ini kullanın.
 
    ```powershell
    Set-AzSqlServerTransparentDataEncryptionProtector `
@@ -84,7 +83,7 @@ El ile anahtar döndürme kullanan [Ekle AzKeyVaultKey](/powershell/module/az.ke
    -ResourceGroup <SQLDatabaseResourceGroupName>
    ```
 
-- İçin Microsoft tarafından yönetilen, BYOK modundan TDE koruyucusuna geçiş yapmak için kullanın [kümesi AzSqlServerTransparentDataEncryptionProtector](/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) cmdlet'i.
+- TDE koruyucusunu BYOK modundan Microsoft tarafından yönetilen olarak değiştirmek için [set-AzSqlServerTransparentDataEncryptionProtector](/powershell/module/az.sql/set-azsqlservertransparentdataencryptionprotector) cmdlet 'ini kullanın.
 
    ```powershell
    Set-AzSqlServerTransparentDataEncryptionProtector `
@@ -95,6 +94,6 @@ El ile anahtar döndürme kullanan [Ekle AzKeyVaultKey](/powershell/module/az.ke
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bir güvenlik riski olması durumunda, riskli olabilecek TDE koruyucusu kaldırma işlemleri gerçekleştirmeyi öğreneceksiniz: [Riskli olabilecek bir anahtarı Kaldır](transparent-data-encryption-byok-azure-sql-remove-tde-protector.md) 
+- Güvenlik riskine karşı, riskli olabilecek bir TDE koruyucuyu kaldırma hakkında bilgi edinin: [riskli olabilecek bir anahtarı kaldırma](transparent-data-encryption-byok-azure-sql-remove-tde-protector.md) 
 
-- TDE için kendi anahtarını Getir destek ve Azure anahtar kasası tümleştirme ile kullanmaya başlayın: [PowerShell kullanarak Key vault'tan kendi anahtarınızı kullanarak TDE Aç](transparent-data-encryption-byok-azure-sql-configure.md)
+- Azure Key Vault tümleştirme ile çalışmaya başlayın ve TDE için Kendi Anahtarını Getir desteğini kullanın: [PowerShell kullanarak Key Vault kendi anahtarınızı kullanarak TDE açma](transparent-data-encryption-byok-azure-sql-configure.md)

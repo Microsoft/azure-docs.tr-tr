@@ -1,62 +1,64 @@
 ---
-title: Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) geçiş
-description: Azure Notification hubs'ı FCM geçiş Google GCM nasıl ele açıklar.
+title: Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) geçişi
+description: Azure Notification Hubs 'ın Google GCM 'e FCM geçişine nasıl adresleneceğini açıklar.
 services: notification-hubs
-author: jwargo
-manager: patniko
-editor: spelluru
+author: sethmanheim
+manager: femila
+editor: jwargo
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: ''
 ms.devlang: ''
 ms.topic: article
 ms.date: 04/10/2019
-ms.author: jowargo
-ms.openlocfilehash: 4cbfc67bc66e84b4743f3326db40872241e5d474
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 04/10/2019
+ms.openlocfilehash: 80eae09240bde61870995468485338db5f0b9c2d
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61458306"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71212309"
 ---
-# <a name="azure-notification-hubs-and-the-google-firebase-cloud-messaging-fcm-migration"></a>Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) geçiş
+# <a name="azure-notification-hubs-and-the-google-firebase-cloud-messaging-fcm-migration"></a>Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) geçişi
 
-## <a name="current-state"></a>Geçerli durumu
+## <a name="current-state"></a>Geçerli durum
 
-Ne zaman Google, geçiş Google Cloud Messaging (GCM) öğesinden için Firebase Cloud Messaging (FCM), bizim bildirimleri değişiklik uyum sağlamak için Android cihazlarına nasıl gönderdiğimiz ayarlamak zorunda gibi anında iletme hizmetlerini duyurdu.
+Google, Google Cloud Messaging (GCM) kaynağından Firebase Cloud Messaging 'e (FCM) ait geçişi duyurduğu zaman, bizler gibi anında iletme hizmetleri, bu değişikliğe uyum sağlamak için Android cihazlara nasıl bildirim gönderildiğini ayarlamamız gerekiyordu.
 
-Size sunduğumuz hizmeti arka ucuna güncelleştirildi ve ardından güncelleştirmeleri bizim API ve SDK'lar gerektiği gibi yayımlanan. Kararlılığımızın ile müşteri etkiyi en aza indirmek için mevcut GCM bildirim şemalar ile uyumluluğu korumak için karar yaptık. Bu şu anda bildirimleri FCM FCM eski modda kullanarak Android cihazları için göndermesi anlamına gelir. Sonuç olarak, FCM, yük biçimi ve yeni özellikler dahil olmak üzere doğru desteği eklemek istiyoruz. Daha uzun vadeli bir değişikliği ve geçerli geçiş mevcut uygulamaları ve SDK uyumluluk koruma üzerinde odaklanmıştır. Size bildirim doğru biçimde gönderildiğinden emin olmak ve uygulamanıza (birlikte, SDK'mız) GCM veya FCM SDK'ları kullanabilirsiniz.
+Hizmet arka ucumuzu güncelleştirdik ve gereken güncelleştirmeleri API 'imizde ve SDK 'larda yayımladık. Uygulamamız sayesinde, müşteri etkisini en aza indirmek için mevcut GCM bildirim şemalarıyla uyumluluğu sağlama kararı yaptık. Bu, şu anda FCM eski modda FCM kullanarak Android cihazlara Bildirim gönderdiğimiz anlamına gelir. Son olarak, yeni özellikler ve yük biçimi dahil olmak üzere FCM için gerçek destek eklemek istiyoruz. Bu, daha uzun süreli bir değişiklik ve geçerli geçiş, mevcut uygulamalar ve SDK 'lara uyumlulukla korunmaya odaklanılmıştır. Uygulamanızda GCM veya FCM SDK 'larını (SDK 'umuza birlikte) kullanabilirsiniz ve bildirimin doğru şekilde gönderildiğinden emin olun.
 
-Bazı müşteriler Google uyarı bildirimleri için bir GCM uç noktası kullanan uygulamalar hakkında kısa bir süre önce bir e-posta aldı. Bu yalnızca bir uyarı oluştu ve hiçbir şey bozuk – uygulamanızın Android bildirimleri işleme için hala Google'a gönderilir ve Google yine de bunları işler. GCM uç noktası açıkça kendi hizmet yapılandırmasında belirtilen bazı müşteriler, kullanım dışı uç nokta hala kullanıyordu. Biz bu aralık zaten tanımlanmış ve Google e-posta gönderildiğinde sorunu düzeltme çalışma.
+Bazı müşteriler son zamanlarda, bildirimler için GCM uç noktası kullanan uygulamalar hakkında Google uyarısında bir e-posta aldı. Bu yalnızca bir uyarıdır ve hiçbir şey yok. uygulamanızın Android bildirimleri işlenmek üzere Google 'a gönderilmeye devam ediyor ve Google hala işliyor. GCM uç noktasını hizmet yapılandırmasında açıkça belirtmiş bazı müşteriler hala kullanım dışı uç noktasını kullanıyor. Bu boşluğu zaten tanımladık ve Google e-postayı gönderdikten sonra sorunu gidermeye çalışıyoruz.
 
-Biz bu kullanım dışı bırakılan uç noktaya değiştirildi ve düzeltme dağıtılır.
+Bu kullanım dışı bitiş noktasını değiştirdik ve düzeltmeler dağıtıldı.
 
-## <a name="going-forward"></a>Bundan sonra
+## <a name="going-forward"></a>İleri git
 
-Google'nın FCM ile ilgili SSS ifadesini içeren herhangi bir şey yapmanız gerekmez. İçinde [FCM ile ilgili SSS](https://developers.google.com/cloud-messaging/faq), Google söylediğiniz "İstemci SDK'ları ve GCM belirteçleri devam süresiz olarak çalışacak şekilde. Ancak, sizin için FCM geçirmezseniz Google Play Hizmetleri Android uygulamanızda en son sürümünü hedefleyecek şekilde mümkün olmayacaktır."
+Google 'ın FCM hakkında SSS, herhangi bir şey yapmanız gerekmez. [FCM hakkında SSS](https://developers.google.com/cloud-messaging/faq)bölümünde, Google "Istemci SDK 'LARı ve GCM belirteçleri sürekli olarak çalışmaya devam edecektir. Ancak, FCM 'ye geçmediğiniz müddetçe Android uygulamanızda Google Play Hizmetleri en son sürümünü hedefleyebilirsiniz. "
 
-Uygulamanızı GCM kitaplığı kullanıyorsa, devam edin ve FCM Kitaplığı'nda uygulamanızı yükseltmek için Google'nın yönergeleri izleyin. SDK'mız ya ile uyumlu olduğundan (bizim SDK sürümü ile güncel olduğunuz sürece) bizim tarafında uygulamanızda herhangi bir şeyi güncelleştirmeniz gerekmez.
+Uygulamanız GCM kitaplığını kullanıyorsa, devam edin ve Google 'ın yönergelerini izleyerek uygulamanızdaki FCM kitaplığına yükseltin. SDK 'imiz ile uyumludur, bu nedenle uygulamanızdaki herhangi bir şeyi bizim tarafımızda güncelleştirmeniz gerekmez (SDK sürümümüzle güncel olduğunuz sürece).
 
 ## <a name="questions-and-answers"></a>Sorular ve yanıtlar
 
-Bazı biz müşterilerden duydunuz sık sorulan soruların yanıtlarını şu şekildedir:
+Müşterilerin duyduğu yaygın soruların bazı yanıtları aşağıda verilmiştir:
 
-**S:** Ne kesme tarihe göre uyumlu olacak şekilde yapmak ihtiyacım (Google geçerli kesme tarihinden 29 Mayıs olduğu ve değişebilir)?
+**S:** Kesme tarihi ile uyumlu olması için ne yapmam gerekir (Google 'ın geçerli kesme tarihi 29 Mayıs ve değişebilir)?
 
-**C:** Bir şey yok. Biz varolan GCM bildirim şeması ile uyumluluk tutacaktır. GCM anahtarınızı herhangi bir GCM SDK'ları ve kitaplıkları uygulamanız tarafından kullanılan olarak normal şekilde çalışmaya devam eder.
+**C:** Yapma. Mevcut GCM bildirim şeması ile uyumluluğu koruyacağız. GCM anahtarınız, uygulamanız tarafından kullanılan tüm GCM SDK 'Ları ve kitaplıkları olacak şekilde normal şekilde çalışmaya devam edecektir.
 
-Olursa/olduğunda yeni özelliklerden yararlanmak için FCM SDK'ları ve kitaplıkları için yükseltmeye karar, GCM anahtarınızı çalışmaya devam eder. İstediğiniz, ancak Firebase yeni bir Firebase projesi oluştururken, mevcut GCM projenize eklediğiniz olun FCM anahtarı kullanarak geçiş yapabilirsiniz. Bu, GCM SDK'ları ve kitaplıklarını kullanmaya devam edebilirsiniz uygulamanın eski sürümlerini çalıştıran müşterilere ile geriye dönük uyumluluk garanti eder.
+Yeni özelliklerden yararlanmak için FCM SDK 'larına ve kitaplıklarına yükseltmeye karar verirseniz, GCM anahtarınız çalışmaya devam edecektir. İsterseniz FCM anahtarını kullanarak geçiş yapabilirsiniz, ancak yeni Firebase projesi oluştururken var olan GCM projenize Firebase 'i eklediğinizden emin olabilirsiniz. Bu, uygulamanın GCM SDK 'larını ve kitaplıklarını kullanmaya devam eden eski sürümlerini çalıştıran müşterilerinizle geriye dönük uyumluluğu garanti eder.
 
-Yeni FCM proje oluşturma ve yeni FCM gizli dizi ile Notification hubs'ı güncelleştirdikten sonra varolan GCM projesine ekleme değil yeni FCM anahtarı eski GCM bağlantı olduğundan, özelliği anında iletme bildirimleri göndermek, geçerli uygulama yüklemelerini kaybedersiniz. Proje.
+Yeni bir FCM projesi oluşturuyorsanız ve var olan GCM projesine ekleme yapmadıysanız, yeni FCM gizli anahtarı ile Notification Hubs güncelleştirdikten sonra, yeni FCM anahtarının eski GCM 'ye bağlantısı olmadığından, geçerli uygulama yüklemelerine bildirim gönderme özelliğini kaybedersiniz. Proje.
 
-**S:** Bu e-posta kullanılan eski GCM uç noktaları hakkında neden alıyorum? Yapmak ne gerekir?
+**S:** Bu e-postayı neden kullanılmakta olan eski GCM uç noktaları hakkında alıyorum? Ne yapmam gerekir?
 
-**C:** Bir şey yok. Biz yeni uç noktalar için geçiş ve değişiklik gerekli olmayacak biçimde yakında tamamlanmış olacaktır. Bir şey bozuk, bizim eksik bir uç nokta, uyarı iletileri yalnızca Google'nın neden oldu.
+**C:** Yapma. Yeni uç noktalara geçiş yaptık ve yakında bitirilecektir, bu nedenle hiçbir değişiklik gerekli değildir. Hiçbir şey yok, kaçırılmış bir uç nokta yalnızca Google 'dan gelen uyarı iletilerine neden oldu.
 
-**S:** Nasıl miyim yeni FCM SDK'ları ve kitaplıkları mevcut kullanıcıların bozmadan geçiş yapabilir?
+**S:** Mevcut kullanıcıları bozmadan yeni FCM SDK 'larına ve kitaplıklarına nasıl geçiş yapabilirim?
 
-Y: Herhangi bir zamanda yükseltin. Google mevcut GCM SDK kitaplıkları ve herhangi bir kullanımdan kaldırma henüz duyurmadı. Anında iletme bildirimleri mevcut kullanıcılarınız için bölme, emin olmak için mevcut GCM projenizle ilişkilendirerek yeni bir Firebase projesi oluşturun. Bu, gizli dizileri FCM SDK'ları ve kitaplıkları ile uygulamanızın yeni kullanıcıların yanı sıra, GCM SDK'ları ve kitaplıkları ile uygulamanızı daha eski sürümlerini çalıştıran kullanıcılar için işe yeni Firebase garanti eder.
+Y: İstediğiniz zaman yükseltin. Google henüz var olan GCM SDK 'larını ve kitaplıklarını kullanımdan kaldırma hakkında duyurmadı. Mevcut kullanıcılarınıza anında iletme bildirimleri kesmemenizi sağlamak için, var olan GCM projenizle ilişkilendirdiğiniz yeni Firebase projesini oluştururken emin olun. Bu, yeni Firebase gizliliklerin, GCM SDK 'Ları ve kitaplıkları ile uygulamanızın eski sürümlerini çalıştıran kullanıcılar için ve FCM SDK 'Ları ve kitaplıkları ile uygulamanızın yeni kullanıcıları için çalışacaktır.
 
-**S:** Yeni FCM özellikleri ve şemaları Bildirimlerim için ne zaman kullanabilirim?
+**S:** Bildirimlerim için yeni FCM özelliklerini ve şemalarını ne zaman kullanabilirim?
 
-**C:** Bizim API ve SDK'lar, Azure.microsoft.com'a – güncelleştirme yayımlama sonra bir şey, önümüzdeki aylarda olmasını bekliyoruz.
+**C:** API ve SDK 'larımız için bir güncelleştirme yayımladığımızda, daha sonra gelen aylarda sizin için bir şey olması beklenir.

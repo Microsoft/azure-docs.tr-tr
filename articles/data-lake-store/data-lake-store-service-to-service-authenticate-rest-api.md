@@ -1,41 +1,38 @@
 ---
-title: 'Hizmetten hizmete kimlik doğrulaması: REST API kullanarak Azure Active Directory ile Azure Data Lake depolama Gen1 | Microsoft Docs'
-description: Azure Data Lake depolama Gen1 ile hizmetten hizmete kimlik doğrulaması REST API kullanarak Azure Active Directory kullanarak elde öğrenin
-services: data-lake-store
-documentationcenter: ''
+title: Hizmetten hizmete kimlik doğrulaması-Data Lake Storage 1. REST API
+description: Azure Data Lake Storage 1. ile hizmetten hizmete kimlik doğrulaması elde etme hakkında bilgi edinin ve REST API kullanarak Azure Active Directory.
 author: twooley
-manager: mtillman
-editor: cgronlun
 ms.service: data-lake-store
-ms.devlang: na
 ms.topic: conceptual
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: c48f7d7608b2b70f4ae41e2af5792cff72bb0dd2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 59d0bf20b16beda47d76e6a9940ac9fa4436da3f
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60195791"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73904524"
 ---
-# <a name="service-to-service-authentication-with-azure-data-lake-storage-gen1-using-rest-api"></a>Azure Data Lake depolama Gen1 ile hizmetten hizmete kimlik doğrulaması REST API'sini kullanma
+# <a name="service-to-service-authentication-with-azure-data-lake-storage-gen1-using-rest-api"></a>REST API kullanarak Azure Data Lake Storage 1. ile hizmetten hizmete kimlik doğrulaması
 > [!div class="op_single_selector"]
 > * [Java kullanma](data-lake-store-service-to-service-authenticate-java.md)
-> * [.NET SDK’yı kullanma](data-lake-store-service-to-service-authenticate-net-sdk.md)
+> * [.NET SDK’sını kullanma](data-lake-store-service-to-service-authenticate-net-sdk.md)
 > * [Python’u kullanma](data-lake-store-service-to-service-authenticate-python.md)
-> * [REST API’sini kullanma](data-lake-store-service-to-service-authenticate-rest-api.md)
+> * [REST API kullanma](data-lake-store-service-to-service-authenticate-rest-api.md)
 > 
 > 
 
-Bu makalede, Azure Data Lake depolama Gen1 ile hizmetten hizmete kimlik doğrulaması yapmak için REST API kullanma hakkında bilgi edinin. REST API kullanarak son kullanıcı kimlik doğrulaması ile Data Lake depolama Gen1 bkz [REST API kullanarak son kullanıcı kimlik doğrulaması ile Data Lake depolama Gen1](data-lake-store-end-user-authenticate-rest-api.md).
+Bu makalede, Azure Data Lake Storage 1. ile hizmetten hizmete kimlik doğrulaması yapmak için REST API nasıl kullanacağınızı öğreneceksiniz. REST API kullanarak Data Lake Storage 1. ile son kullanıcı kimlik doğrulaması için bkz. [REST API kullanarak Data Lake Storage 1. Ile Son Kullanıcı kimlik doğrulaması](data-lake-store-end-user-authenticate-rest-api.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
-* **Bir Azure aboneliği**. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/pricing/free-trial/).
 
-* **Bir Azure Active Directory "Web" uygulaması oluşturma**. Adımları tamamlamış olmanız gerekir [hizmetten hizmete kimlik doğrulaması Azure Active Directory kullanarak Data Lake depolama Gen1 ile](data-lake-store-service-to-service-authenticate-using-active-directory.md).
+* **Azure aboneliği**. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/pricing/free-trial/).
+
+* **Azure Active Directory "Web" uygulaması oluşturun**. [Azure Active Directory kullanarak, Data Lake Storage 1. Ile hizmetten hizmete kimlik doğrulaması](data-lake-store-service-to-service-authenticate-using-active-directory.md)adımlarını tamamlamış olmanız gerekir.
 
 ## <a name="service-to-service-authentication"></a>Hizmetten hizmete kimlik doğrulaması
-Bu senaryoda, uygulama işlemleri gerçekleştirmek için kendi kimlik bilgilerini sağlar. Bunun için aşağıdaki kod parçacığında gösterilene benzer bir POST isteği yayımlamanız gerekir: 
+
+Bu senaryoda, uygulama, işlemleri gerçekleştirmek için kendi kimlik bilgilerini sağlar. Bunun için, aşağıdaki kod parçacığında gösterildiği gibi bir POST isteği oluşturmanız gerekir:
 
     curl -X POST https://login.microsoftonline.com/<TENANT-ID>/oauth2/token  \
       -F grant_type=client_credentials \
@@ -43,15 +40,15 @@ Bu senaryoda, uygulama işlemleri gerçekleştirmek için kendi kimlik bilgileri
       -F client_id=<CLIENT-ID> \
       -F client_secret=<AUTH-KEY>
 
-İstek çıktısını bir yetkilendirme belirteci içerir (çağrılarınızla `access-token` aşağıdaki çıktıda) REST API çağrılarınıza sonradan geçirin. Kimlik Doğrulama belirtecini bir metin dosyasına kaydedin; Data Lake depolama Gen1 REST çağrı yaparken gerekir.
+İsteğin çıktısı, daha sonra REST API çağrılarınız ile geçirdiğiniz bir yetkilendirme belirteci (aşağıdaki çıktıda `access-token` gösterilir) içerir. Kimlik doğrulama belirtecini bir metin dosyasına kaydedin; Data Lake Storage 1. için bekleyen çağrılar yaparken buna ihtiyaç duyarsınız.
 
     {"token_type":"Bearer","expires_in":"3599","expires_on":"1458245447","not_before":"1458241547","resource":"https://management.core.windows.net/","access_token":"<REDACTED>"}
 
-Bu makalede, **etkileşimli olmayan** yaklaşım kullanılmıştır. Etkileşimli olmayan seçeneği (hizmet-hizmet çağrıları) hakkında daha fazla bilgi için bkz. [Kimlik bilgilerini kullanarak gerçekleştirilen hizmet-hizmet çağrıları](https://msdn.microsoft.com/library/azure/dn645543.aspx). 
+Bu makalede, **etkileşimli olmayan** yaklaşım kullanılmıştır. Etkileşimli olmayan seçeneği (hizmet-hizmet çağrıları) hakkında daha fazla bilgi için bkz. [Kimlik bilgilerini kullanarak gerçekleştirilen hizmet-hizmet çağrıları](https://msdn.microsoft.com/library/azure/dn645543.aspx).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, Data Lake depolama Gen1 ile kimlik doğrulaması için hizmetten hizmete kimlik doğrulaması kullanmayı öğrendiniz REST API kullanarak. Data Lake depolama Gen1 ile çalışmak için REST API kullanma hakkında konuşmak Aşağıdaki makaleler artık göz atabilirsiniz.
 
-* [Data Lake depolama Gen1 hesap yönetim işlemlerini REST API'sini kullanma](data-lake-store-get-started-rest-api.md)
-* [Data Lake depolama Gen1 REST API kullanarak veri işlemleri](data-lake-store-data-operations-rest-api.md)
+Bu makalede, REST API kullanarak Data Lake Storage 1. kimlik doğrulaması yapmak için hizmetten hizmete kimlik doğrulamasını nasıl kullanacağınızı öğrendiniz. Artık, Data Lake Storage 1. çalışmak için REST API kullanma hakkında konuşabilecek aşağıdaki makalelere bakabilirsiniz.
 
+* [REST API kullanarak Data Lake Storage 1. hesap yönetimi işlemleri](data-lake-store-get-started-rest-api.md)
+* [REST API kullanarak Data Lake Storage 1. veri işlemleri](data-lake-store-data-operations-rest-api.md)

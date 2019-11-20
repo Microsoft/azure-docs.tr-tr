@@ -1,6 +1,6 @@
 ---
-title: Stream SumoLogic Azure İzleyicisi'ni kullanarak Azure Active Directory günlükleri | Microsoft Docs
-description: Azure Active Directory günlükleri Azure İzleyicisi'ni kullanarak SumoLogic ile tümleştirmeyi öğrenin
+title: Azure Izleyici kullanarak günlükleri SumoLogic 'e akış | Microsoft Docs
+description: Azure Izleyici kullanarak Azure Active Directory günlüklerini SumoLogic ile tümleştirmeyi öğrenin
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -17,28 +17,28 @@ ms.date: 04/18/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7ccf9cd550b3848be841f193f4ab8a6094cf671d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 6cdfc4e393ca7bf4bcbd523b4fad72690d5f2744
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60437873"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014380"
 ---
-# <a name="integrate-azure-active-directory-logs-with-sumologic-using-azure-monitor"></a>Azure İzleyicisi'ni kullanarak SumoLogic ile Azure Active Directory günlükleri tümleştirme
+# <a name="integrate-azure-active-directory-logs-with-sumologic-using-azure-monitor"></a>Azure Izleyici kullanarak Azure Active Directory günlüklerini SumoLogic ile tümleştirme
 
-Bu makalede, Azure Active Directory (Azure AD) günlüklerini Azure İzleyicisi'ni kullanarak SumoLogic ile tümleştirme öğrenin. Ardından olay hub'ı SumoLogic ile tümleştirin ve günlükleri Azure olay hub'ına ilk yönlendirebilirsiniz.
+Bu makalede, Azure Izleyici kullanarak Azure Active Directory (Azure AD) günlüklerini SumoLogic ile tümleştirmeyi öğreneceksiniz. Önce günlükleri bir Azure Olay Hub 'ına yönlendirdiğinizde Olay Hub 'ını SumoLogic ile tümleştirin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu özelliği kullanmak için şunlara ihtiyacınız vardır:
-* Azure AD etkinlik içeren bir Azure olay hub'ına kaydeder. Bilgi edinmek için nasıl [, etkinlik günlükleri Olay hub'ına akış](quickstart-azure-monitor-stream-logs-to-event-hub.md). 
-* Bir SumoLogic çoklu oturum açma abonelik etkin.
+* Azure AD etkinlik günlüklerini içeren bir Azure Olay Hub 'ı. [Etkinlik günlüklerinizi bir olay hub 'ına akışa](quickstart-azure-monitor-stream-logs-to-event-hub.md)alma hakkında bilgi edinin. 
+* SumoLogic çoklu oturum açma etkin aboneliği.
 
-## <a name="steps-to-integrate-azure-ad-logs-with-sumologic"></a>Azure AD günlükleri SumoLogic ile tümleştirmek için adımları 
+## <a name="steps-to-integrate-azure-ad-logs-with-sumologic"></a>Azure AD günlüklerini SumoLogic ile tümleştirme adımları 
 
-1. İlk olarak, [Azure olay hub'ına Azure AD'ye günlüklerin akışını](quickstart-azure-monitor-stream-logs-to-event-hub.md).
-2. SumoLogic Örneğinize yapılandırma [günlükleri toplamak için Azure Active Directory](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory/Collect_Logs_for_Azure_Active_Directory).
-3. [Azure AD SumoLogic uygulama yükleme](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory/Install_the_Azure_Active_Directory_App_and_View_the_Dashboards) ortamınızın gerçek zamanlı analiz sağlayan önceden yapılandırılmış panoları kullanmak için.
+1. İlk olarak [Azure AD günlüklerini bir Azure Olay Hub 'ına akışı](quickstart-azure-monitor-stream-logs-to-event-hub.md)yapın.
+2. [Azure Active Directory günlüklerini toplamak](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory/Collect_Logs_for_Azure_Active_Directory)için SumoLogic örneğinizi yapılandırın.
+3. Ortamınızın gerçek zamanlı analizini sağlayan önceden yapılandırılmış panoları kullanmak için [Azure AD SumoLogic uygulamasını yükler](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory/Install_the_Azure_Active_Directory_App_and_View_the_Dashboards) .
 
    ![Pano](./media/howto-integrate-activity-logs-with-sumologic/overview-dashboard.png)
 

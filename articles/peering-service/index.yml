@@ -1,0 +1,52 @@
+### YamlMime:Landing
+title: Azure Eşleme Hizmeti Önizleme
+summary: Azure Eşleme Hizmeti hakkında bilgi edinin
+metadata:
+  title: Azure Eşleme Hizmeti Önizleme belgeleri
+  description: Eşleme Hizmeti bağlantısını yönetmeyi ve dağıtmayı öğrenin
+  services: peering-service
+  ms.service: peering-service
+  ms.subservice: peering-service
+  ms.topic: landing-page
+  author: ypitsch
+  ms.author: v-meravi
+  ms.date: 11/04/2019
+  ms.openlocfilehash: 3f026ca55b19d1285ad555dbf1dffa009ef167e7
+  ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/14/2019
+  ms.locfileid: "74084780"
+landingContent:
+- title: Eşleme Hizmeti hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Eşleme Hizmeti nedir?
+      url: about.md
+  - linkListType: concept
+    links:
+    - text: Konumlar ve iş ortakları
+      url: location-partners.md
+    - text: Bağlantılar
+      url: connection.md
+    - text: Bağlantı telemetrisi
+      url: connection-telemetry.md
+    - text: Ekleme modeli
+      url: onboarding-model.md
+- title: Başlarken
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Eşleme Hizmeti'ni kaydetme - Azure portalı
+      url: azure-portal.md
+- title: Telemetri
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Bağlantı telemetrisi
+      url: connection-telemetry.md
+  - linkListType: how-to-guide
+    links:
+    - text: Bağlantısı telemetrisini ölçme
+      url: measure-connection-telemetry.md

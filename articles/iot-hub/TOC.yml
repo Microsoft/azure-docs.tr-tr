@@ -5,9 +5,12 @@
     - name: Azure IoT Hub nedir?
       href: about-iot-hub.md
 - name: Hızlı Başlangıçlar
+  expanded: true
   items:
     - name: Telemetri gönderme
       items:
+        - name: Başlarken
+          href: quickstart-send-telemetry-cli.md
         - name: C
           href: quickstart-send-telemetry-c.md
         - name: Node.js
@@ -36,7 +39,7 @@
           href: quickstart-control-device-android.md
     - name: Cihaz akışlarını kullanarak iletişim kurma (önizleme)
       items:
-        - name: 'C#'
+        - name: .NET
           href: quickstart-device-streams-echo-csharp.md
         - name: Node.js
           href: quickstart-device-streams-echo-nodejs.md
@@ -44,7 +47,7 @@
           href: quickstart-device-streams-echo-c.md
     - name: Cihaz akışlarını kullanarak SSH/RDP (önizleme)
       items:
-        - name: 'C#'
+        - name: .NET
           href: quickstart-device-streams-proxy-csharp.md
         - name: Node.js
           href: quickstart-device-streams-proxy-nodejs.md
@@ -90,6 +93,10 @@
       href: iot-hub-scaling.md
     - name: Yüksek kullanılabilirlik ve olağanüstü durum kurtarma
       href: iot-hub-ha-dr.md
+    - name: IoT Hub’ı başka bir bölgeye kopyalama
+      href: iot-hub-how-to-clone.md
+    - name: IoT hub’ı IP adresini anlama
+      href: iot-hub-understand-ip-address.md
     - name: Ek protokollerin desteklenmesi
       href: iot-hub-protocol-gateway.md
     - name: İleti ve olay yönlendirmeyi karşılaştırma
@@ -247,7 +254,7 @@
               href: iot-hub-python-python-module-twin-getstarted.md
             - name: C
               href: iot-hub-c-c-module-twin-getstarted.md
-            - name: Node
+            - name: Node.js
               href: iot-hub-node-node-module-twin-getstarted.md
         - name: Cihaz yönetimini kullanmaya başlama
           items:
@@ -284,7 +291,7 @@
             - name: REST API kullanma
               href: iot-hub-rm-rest.md
             - name: Azure PowerShell’den şablon kullanma
-              displayName: 'Azure Resource Manager, ARM'
+              displayName: Azure Resource Manager
               href: iot-hub-rm-template-powershell.md
             - name: .NET’ten şablon kullanma
               href: iot-hub-rm-template.md
@@ -329,8 +336,6 @@
               href: iot-hub-raspberry-pi-kit-c-get-started.md
             - name: Arduino ile MXChip IoT DevKit
               href: iot-hub-arduino-iot-devkit-az3166-get-started.md
-            - name: Arduino ile Adafruit Feather HUZZAH ESP8266
-              href: iot-hub-arduino-huzzah-esp8266-get-started.md
         - name: MXChip IoT DevKit kullanma
           items:
             - name: Azure Bilişsel Hizmetler ile sesli mesajı çevirme
@@ -405,14 +410,16 @@
   items:
     - name: Çözümler
       items:
-        - name: IoT çözüm hızlandırıcıları
-          href: /azure/iot-accelerators
         - name: IoT Central
           href: 'https://docs.microsoft.com/microsoft-iot-central/'
+        - name: IoT çözüm hızlandırıcıları
+          href: /azure/iot-accelerators
     - name: Platform Hizmetleri
       items:
         - name: IoT Hub
           href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
         - name: IoT Hub Cihazı Sağlama Hizmeti
           href: /azure/iot-dps
         - name: IoT Hizmet SDK’ları
@@ -454,7 +461,7 @@
     - name: iothub-diagnostics tool
       href: 'https://github.com/Azure/iothub-diagnostics'
     - name: MSDN forumu
-      href: 'https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=azureiothub'
+      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=azureiothub'
     - name: Fiyatlandırma
       href: 'https://azure.microsoft.com/pricing/details/iot-hub/'
     - name: Fiyatlandırma hesaplayıcı

@@ -1,60 +1,54 @@
 ---
-title: Active Directory çoğaltma durumu Azure İzleyici ile izleme | Microsoft Docs
-description: Active Directory çoğaltma durumu çözüm paketi, Active Directory ortamınızı çoğaltma hataları için düzenli olarak izler.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: 1b988972-8e01-4f83-a7f4-87f62778f91d
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.topic: article
-ms.date: 01/24/2018
+title: Azure Izleyici ile Active Directory çoğaltma durumunu izleme | Microsoft Docs
+description: Active Directory Çoğaltma Durumu çözüm paketi, tüm çoğaltma hatalarıyla ilgili Active Directory ortamınızı düzenli olarak izler.
+ms.service: azure-monitor
+ms.subservice: logs
+ms.topic: conceptual
+author: MGoedtel
 ms.author: magoedte
-ms.openlocfilehash: f7bbde98c6ef35021cc03b2646193d3601ca1cff
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 01/24/2018
+ms.openlocfilehash: 04112042c871f5268c64bda374f040f1bba92969
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60495194"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72931345"
 ---
-# <a name="monitor-active-directory-replication-status-with-azure-monitor"></a>Azure İzleyici ile Active Directory çoğaltma durumunu izleme
+# <a name="monitor-active-directory-replication-status-with-azure-monitor"></a>Azure Izleyici ile Active Directory çoğaltma durumunu izleme
 
-![AD çoğaltma durumu simgesi](./media/ad-replication-status/ad-replication-status-symbol.png)
+![AD Çoğaltma Durumu simgesi](./media/ad-replication-status/ad-replication-status-symbol.png)
 
-Active Directory kuruluş BT ortamında önemli bir bileşenidir. Yüksek kullanılabilirlik ve yüksek performans sağlamak için kendi Active Directory veritabanının kopyasını her etki alanı denetleyicisi vardır. Etki alanı denetleyicileri birbirlerini değişiklikleri kuruluş genelinde yaymak için çoğaltma. Bu çoğaltma işlemi hataları kuruluş genelinde çeşitli sorunlara neden olabilir.
+Active Directory, kurumsal BT ortamının temel bir bileşenidir. Yüksek kullanılabilirlik ve yüksek performans sağlamak için her etki alanı denetleyicisinin kendi Active Directory veritabanının bir kopyası vardır. Etki alanı denetleyicileri, değişiklikleri kuruluş genelinde yaymak için birbirleriyle çoğaltılır. Bu çoğaltma işlemindeki başarısızlıklar, kuruluş genelinde çeşitli sorunlara neden olabilir.
 
-AD çoğaltma durumu çözüm paketi, Active Directory ortamınızı çoğaltma hataları için düzenli olarak izler.
+AD Çoğaltma Durumu çözüm paketi, tüm çoğaltma hatalarıyla ilgili Active Directory ortamınızı düzenli olarak izler.
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand-solution.md)]
 
-## <a name="installing-and-configuring-the-solution"></a>Çözümünü yükleme ve yapılandırma
+## <a name="installing-and-configuring-the-solution"></a>Çözümü yükleme ve yapılandırma
 Çözümü yüklemek ve yapılandırmak için aşağıdaki bilgileri kullanın.
 
-### <a name="install-agents-on-domain-controllers"></a>Etki alanı denetleyicilerinde aracıları yükleyin
-Değerlendirilecek etki alanının üyesi olan etki alanı denetleyicilerinde aracıları yüklemeniz gerekir. Veya üye sunuculara aracıları yükleyin ve aracılar için Azure İzleyici AD çoğaltma verileri göndermek için yapılandırmanız gerekir. Windows bilgisayarları Azure İzleyicisi'ne bağlanma hakkında bilgi almak için bkz. [Azure İzleyici bağlanmak Windows bilgisayarlara](../../azure-monitor/platform/agent-windows.md). Etki alanı denetleyicisine bağlanmak için Azure İzleyici, görmek istediğiniz mevcut bir System Center Operations Manager ortamın parçası ise [Azure İzleyici için Operations Manager'ı bağlama](../../azure-monitor/platform/om-agents.md).
+### <a name="install-agents-on-domain-controllers"></a>Aracıları etki alanı denetleyicilerine yükler
+, Değerlendirilecek etki alanının üyesi olan etki alanı denetleyicilerine aracılar yüklemelisiniz. Ya da, aracıları üye sunuculara yüklemeli ve aracıları Azure Izleyici 'ye AD Çoğaltma verileri gönderecek şekilde yapılandırmanız gerekir. Windows bilgisayarlarını Azure Izleyici 'ye bağlamayı anlamak için bkz. [Windows bilgisayarlarını Azure izleyici 'ye bağlama](../../azure-monitor/platform/agent-windows.md). Etki alanı denetleyiciniz Azure Izleyici 'ye bağlamak istediğiniz mevcut bir System Center Operations Manager ortamının zaten parçasıysa, bkz. [Azure izleyiciyi Operations Manager bağlama](../../azure-monitor/platform/om-agents.md).
 
-### <a name="enable-non-domain-controller"></a>Olmayan etki alanı denetleyicisi etkinleştir
-Herhangi bir etki alanı denetleyicilerinizin doğrudan Azure İzleyici bağlanmak istemiyorsanız, herhangi bir bilgisayarda etki alanınızı Azure İzleyicisi'ne bağlı olarak AD çoğaltma durumu çözüm paketi için veri toplamak ve bu verileri göndermek için kullanabilirsiniz.
+### <a name="enable-non-domain-controller"></a>Etki alanı olmayan Denetleyiciyi Etkinleştir
+Etki alanı denetleyicilerinizin herhangi birine doğrudan Azure Izleyici 'ye bağlanmasını istemiyorsanız, Azure Izleyici 'ye bağlı etki alanındaki başka bir bilgisayarı kullanarak AD Çoğaltma Durumu çözüm paketine yönelik verileri toplayabilir ve verileri göndermesini sağlayabilirsiniz.
 
-1. Bilgisayarı AD çoğaltma durumu çözümünü kullanarak izlemek istediğiniz etki alanının bir üyesi olduğunu doğrulayın.
-2. [Azure İzleyicisi ile Windows bilgisayarı bağlantı](../../azure-monitor/platform/om-agents.md) veya [mevcut Operations Manager ortamınızı Azure İzleyicisi'ni kullanarak bağlanma](../../azure-monitor/platform/om-agents.md), zaten bağlı değil.
-3. Bu bilgisayarda, aşağıdaki kayıt defteri anahtarını ayarlayın:<br>Anahtar: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HealthService\Parameters\Management Groups\<ManagementGroupName>\Solutions\ADReplication**<br>Değer: **IsTarget**<br>Değer verisi: **true**
+1. Bilgisayarın AD Çoğaltma Durumu çözümünü kullanarak izlemek istediğiniz etki alanının bir üyesi olduğunu doğrulayın.
+2. [Windows bilgisayarını Azure izleyici 'ye bağlayın](../../azure-monitor/platform/om-agents.md) veya zaten bağlı değilse [Azure izleyici 'ye mevcut Operations Manager ortamınızı kullanarak bağlayın](../../azure-monitor/platform/om-agents.md).
+3. Bu bilgisayarda, aşağıdaki kayıt defteri anahtarını ayarlayın:<br>Anahtar: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HealthService\Parameters\Management Groups\<ManagementGroupName > \Solutions\ADReplication**<br>Değer: **ıstarget**<br>Değer verisi: **true**
 
    > [!NOTE]
-   > Bu değişiklikler (HealthService.exe) Microsoft Monitoring Agent hizmeti yeniden başlatılana kadar etkili olmaz.
-   > ### <a name="install-solution"></a>Çözüm yükleme
-   > Açıklanan işlemi izleyin [bir izleme çözümü yükleme](solutions.md#install-a-monitoring-solution) eklemek için **Active Directory çoğaltma durumu** Log Analytics çalışma alanınıza çözüm. Başka bir yapılandırma işlemi gerekmez.
+   > Bu değişiklikler, Microsoft Monitoring Agent hizmeti (HealthService. exe) yeniden başlatılana kadar etkili olmaz.
+   > ### <a name="install-solution"></a>Çözümü yükler
+   > **Active Directory çoğaltma durumu** çözümünü Log Analytics çalışma alanınıza eklemek için [bir izleme çözümü yüklerken](solutions.md#install-a-monitoring-solution) açıklanan süreci izleyin. Başka bir yapılandırma işlemi gerekmez.
 
 
-## <a name="ad-replication-status-data-collection-details"></a>AD çoğaltma durumu verileri toplama ayrıntıları
-Veri toplama metotlarını ve verileri için AD çoğaltma durumu nasıl toplanır hakkında diğer ayrıntıları aşağıdaki tabloda gösterilmektedir.
+## <a name="ad-replication-status-data-collection-details"></a>Veri toplama ayrıntılarını AD Çoğaltma Durumu
+Aşağıdaki tabloda, verilerin AD Çoğaltma Durumu için nasıl toplandığı hakkında veri toplama yöntemleri ve diğer ayrıntılar gösterilmektedir.
 
-| Platform | Doğrudan aracı | SCOM Aracısı | Azure Storage | SCOM gerekli? | Yönetim grubu gönderilen SCOM Aracısı verileri | Toplama sıklığı |
+| platformunun | Doğrudan aracı | SCOM Aracısı | Azure Depolama | SCOM gerekli mi? | Yönetim grubu aracılığıyla gönderilen SCOM Aracısı verileri | toplama sıklığı |
 | --- | --- | --- | --- | --- | --- | --- |
-| Windows |&#8226; |&#8226; |  |  |&#8226; |beş günde bir |
+| Windows |&#8226; |&#8226; |  |  |&#8226; |Beş günde bir |
 
 
 
@@ -62,97 +56,97 @@ Veri toplama metotlarını ve verileri için AD çoğaltma durumu nasıl toplan�
 
 [!INCLUDE [azure-monitor-solutions-overview-page](../../../includes/azure-monitor-solutions-overview-page.md)]
 
-AD çoğaltma durumu kutucuğu şu anda kaç çoğaltma hataları görüntüler. **Kritik çoğaltma hataları** veya % 75'ini üzerindeki hatalar [ömründen](https://technet.microsoft.com/library/cc784932%28v=ws.10%29.aspx) , Active Directory ormanı için.
+AD Çoğaltma Durumu kutucuğu Şu anda kaç tane çoğaltma hatası olduğunu gösterir. **Kritik çoğaltma hataları** , Active Directory ormanınızın [kaldırılma süresinin](https://technet.microsoft.com/library/cc784932%28v=ws.10%29.aspx) %75 ' ının üzerinde veya üstünde olan hatalardır.
 
-![AD çoğaltma durumu kutucuğu](./media/ad-replication-status/oms-ad-replication-tile.png)
+![AD Çoğaltma Durumu kutucuğu](./media/ad-replication-status/oms-ad-replication-tile.png)
 
-Kutucuğa tıkladığınızda, hatalar hakkında daha fazla bilgi görüntüleyebilirsiniz.
-![AD çoğaltma durumu Panosu](./media/ad-replication-status/oms-ad-replication-dash.png)
+Kutucuğa tıkladığınızda hatalar hakkında daha fazla bilgi görüntüleyebilirsiniz.
+AD Çoğaltma Durumu Pano](./media/ad-replication-status/oms-ad-replication-dash.png) ![
 
 ### <a name="destination-server-status-and-source-server-status"></a>Hedef sunucu durumu ve kaynak sunucu durumu
-Bu sütunlar, hedef sunucu ve çoğaltma hataları yaşayan kaynak sunucular durumunu gösterir. Her etki alanı denetleyicisi adından sonra sayı, bu etki alanı denetleyicisi çoğaltma hatalarını sayısını gösterir.
+Bu sütunlarda, hedef sunucuların ve çoğaltma hataları yaşayan kaynak sunucularının durumu gösterilmektedir. Her etki alanı denetleyicisi adından sonraki sayı, bu etki alanı denetleyicisindeki çoğaltma hatalarının sayısını belirtir.
 
-Bazı sorunlar kaynak sunucu Perspektif ve diğer kaynaklardan hedef sunucu açısından gidermeyi kolaylaştırması açısından çünkü hedef sunucuları hem de kaynak sunucular için hataları gösterilmektedir.
+Kaynak sunucu perspektifinden ve diğer kullanıcıların hedef sunucu perspektifinden sorun gidermesi daha kolay olduğundan, hedef sunucular ve kaynak sunucuların her ikisi için de hatalar gösterilir.
 
-Bu örnekte, birden çok hedef sunucu aynı sayıda hata kabaca olması, ancak tüm diğerlerinden çok daha fazla hata sahip bir kaynak sunucu (ADDC35) görebilirsiniz. Bazı sorun olduğunu, çoğaltma ortaklarından veri göndermek başarısız olmasına neden olan ADDC35 üzerinde olasıdır. Üzerinde ADDC35 sorunlarını giderme hedef sunucu alanında görünen hatalarda birçoğu çözebilir.
+Bu örnekte, birçok hedef sunucunun kabaca aynı sayıda hataya sahip olduğunu görebilirsiniz, ancak diğerlerinden çok daha fazla hataya sahip bir kaynak sunucu (ADDC35) vardır. ADDC35 üzerinde, onun çoğaltma iş ortaklarına veri gönderememesine neden olan bir sorun olabilir. ADDC35 'deki sorunları düzeltmek, hedef sunucu alanında görüntülenen birçok hatayı çözebilir.
 
 ### <a name="replication-error-types"></a>Çoğaltma hatası türleri
-Bu alan, kuruluşunuza algılanan hatalar türleri hakkında bilgi sağlar. Her bir benzersiz sayısal kodu ve hatanın nedenini belirlemenize yardımcı olabilecek bir ileti hatalı.
+Bu alan, kuruluşunuz genelinde algılanan hata türleri hakkında bilgi sağlar. Her hatanın benzersiz bir sayısal kodu ve hatanın temel nedenini belirlemenize yardımcı olabilecek bir ileti vardır.
 
-Üst halka hangi hataları daha fazla görünür ve daha az sıklıkta ortamınızda fikir verir.
+Üstteki halka, ortamınızda hangi hataların daha fazla ve daha az sıklıkla görünceğinin bir fikrini sunar.
 
-Birden çok etki alanı denetleyicileri aynı çoğaltma hatası kullanırken gösterilir. Bu durumda, keşfedin veya bir etki alanı denetleyicisinde bir çözüm sonra aynı hatayı tarafından etkilenen diğer etki alanı denetleyicilerinde yineleyin.
+Birden çok etki alanı denetleyicisi aynı çoğaltma hatasıyla karşılaşdığını gösterir. Bu durumda, bir etki alanı denetleyicisinde bir çözümü bulabilir veya tanımlayabilir, ardından aynı hatadan etkilenen diğer etki alanı denetleyicilerinde yineleyebilirsiniz.
 
-### <a name="tombstone-lifetime"></a>Silinmiş Öğe işareti yaşam süresi
-Silinmiş Öğe işareti yaşam bir kaldırma anılan ne kadar silinmiş bir nesneye belirler, Active Directory veritabanında tutulur. Silinmiş bir nesneyi silinmiş öğe işareti yaşam süresi geçtiğinde, çöp toplama işlemi Active Directory veritabanından otomatik olarak kaldırır.
+### <a name="tombstone-lifetime"></a>Silinmiş öğe ömrü
+Kaldırılma süresi ömrü, silinmiş bir nesnenin kaldırılma olarak ifade edilen Active Directory veritabanında ne kadar süreyle korunduğunu belirler. Silinen bir nesne kaldırılma süresini geçtiğinde, bir çöp toplama işlemi onu Active Directory veritabanından otomatik olarak kaldırır.
 
-Varsayılan silinmiş öğe işareti yaşam 180 gün Windows, en son sürümleri için ancak daha eski sürümlerindeki 60 gün olduğu ve açıkça bir Active Directory Yöneticisi tarafından değiştirilebilir.
+Varsayılan kaldırılma süresi, Windows 'un en son sürümleri için 180 gündür, ancak eski sürümlerde 60 gündür ve açıkça bir Active Directory yöneticisi tarafından değiştirilebilir.
 
-Kullanım ömrü yaklaştığı ya da çoğaltma hatalarının yaşıyorsanız, bilmek önemlidir. İki etki alanı denetleyicisi kullanım ömrü devam eden bir çoğaltma hatası karşılaşırsanız, temel çoğaltma hata düzeltilene bile çoğaltma bu iki etki alanı denetleyicileri arasında devre dışı bırakıldı.
+Bu, yaklaşan veya kaldırılma süresini aşan çoğaltma hatalarıyla karşılaşıp yaşamadığınızı bilmeniz önemlidir. İki etki alanı denetleyicisi, kaldırılma süresinin ötesinde devam eden bir çoğaltma hatası yaşalıyorsa, temel alınan çoğaltma hatası düzeltilse bile bu iki etki alanı denetleyicisi arasında çoğaltma devre dışı bırakılır.
 
-Silinmiş Öğe işareti yaşam süresi alan devre dışı çoğaltma gerçekleşmesini tehlikesi olduğu yerde belirlemenize yardımcı olur. Her bir hata **% 100'den TSL** kategorisi için kaynak ve hedef sunucu arasında en az bir orman için silinmiş öğe işareti yaşam çoğaltılmamış bir bölümünü temsil eder.
+Silinmiş öğe ömrü alanı, devre dışı çoğaltmanın gerçekleştiği yerleri belirlemenize yardımcı olur. **100 ' den fazla% TSL** kategorisindeki her hata, kaynak ve hedef sunucu arasında çoğaltılmamış olan bir bölümü, en azından ormanın kaldırılma süresini temsil eder.
 
-Bu durumda, yalnızca çoğaltma hatası düzeltme yeterli olmaz. En az çoğaltma yeniden başlatmadan önce kalan nesneleri yukarı temizlemek üzere el ile araştırma gerekir. Hatta bir etki alanı denetleyicisi yetkisini gerekebilir.
+Bu durumda, çoğaltma hatasını düzeltmek yeterli olmayacaktır. Çoğaltmayı yeniden başlatmadan önce, en azından, kalan nesneleri tanımlamak ve temizlemek için el ile araştırmanız gerekir. Bir etki alanı denetleyicisinin yetkisini almanız da gerekebilir.
 
-Kullanım ömrü kalıcı çoğaltma hataları belirlemeye ek olarak, ayrıca içine denk gelen tüm hataları dikkat edilmesi gereken istediğiniz **50-%75 TSL** veya **75-%100 TSL** kategorileri.
+Kaldırılma süresinden sonra kalıcı olan herhangi bir çoğaltma hatasını tanımlamaya ek olarak, **50-75% TSL** veya **75-100% TSL** kategorilerine kalan tüm hatalara dikkat etmek de isteyebilirsiniz.
 
-Bunlar büyük olasılıkla ihtiyaç duydukları müdahale çözümlenecek şekilde açıkça kalan, geçici olmayan hatalar var. Güzel bir haberimiz var, bunlar henüz ömründen ulaştığınıza değil ' dir. Varsa, bu sorunları en kısa sürede düzeltmek ve *önce* ömründen ulaşmadan, çoğaltmayı el ile müdahale en az yeniden başlatın.
+Bunlar, geçici olarak değil, geçici olarak kalan ve bu nedenle müdahale etmeniz gereken hatalardan kaynaklanıyor. İyi haber, henüz kaldırılma süresine ulaşmamıştır. Bu sorunları hemen düzeltirseniz ve kaldırılma süresine ulaşmadan *önce* , çoğaltma en düşük el ile müdahale ile yeniden başlatılabilir.
 
-AD çoğaltma durumu çözümü sayısını gösterir. Pano kutucuğu daha önce belirtildiği gibi *kritik* %75 (hatalar dahil olmak üzere kullanım ömrü'nın üzerinde olan hata olarak tanımlanır, ortamınızda çoğaltma hataları üzerinde TSL %100 olan). Bu sayı 0'da korumak ister.
+Daha önce belirtildiği gibi, AD Çoğaltma Durumu çözümü için Pano kutucuğu ortamınızdaki *kritik* çoğaltma hatalarının sayısını gösterir ve bu, kaldırılma süresinin %75 ' ınden (TSL 'nin %100 ' inden fazla olan hatalar da dahil olmak üzere) hata olarak tanımlanır. Bu sayıyı 0 ' da tutmak için çaba yapın.
 
 > [!NOTE]
-> Bir özel silinmiş öğe işareti yaşam süresi değeri ayarlanmış olsa bile bu yüzdeleri doğru güvenebileceğiniz şekilde tüm silinmiş öğe işareti yaşam süresi yüzdesi hesaplamalar, Active Directory ormanı için gerçek ömründen temel alır.
+> Tüm kaldırılma süresi yüzdesi hesaplamaları, Active Directory ormanınızın gerçek kaldırılma süresini temel alır. bu nedenle, özel bir kaldırma yaşam süresi değeri ayarlamış olsanız bile bu yüzdeleri doğru şekilde güvende olabilirsiniz.
 >
 >
 
 ### <a name="ad-replication-status-details"></a>AD çoğaltma durumu ayrıntıları
-Herhangi bir öğeyi, listelerden birine tıkladığınızda, bir günlük sorgusu kullanarak hakkındaki ek ayrıntıları bakın. Sonuçları yalnızca bu öğe ile ilgili hataları gösterecek şekilde filtrelenir. Tıklayarak etki alanı denetleyicisine altında listelendiğinden **hedef sunucu durumu (ADDC02)** , sorgu sonuçları için filtre gördüğünüz show hata etki alanı denetleyicisi ile hedef sunucu olarak listelenen:
+Listelerden birindeki herhangi bir öğeye tıkladığınızda, bir günlük sorgusu kullanarak onunla ilgili ek ayrıntılar görürsünüz. Sonuçlar yalnızca söz konusu öğeyle ilgili hataları gösterecek şekilde filtrelenmiştir. Örneğin, **hedef sunucu durumu (ADDC02)** altında listelenen ilk etki alanı denetleyicisine tıklarsanız, hedef sunucu olarak listelenen etki alanı denetleyicisi ile ilgili hataları göstermek üzere filtrelenmiş sorgu sonuçları görürsünüz:
 
 ![Sorgu sonuçlarında AD çoğaltma durumu hataları](./media/ad-replication-status/oms-ad-replication-search-details.png)
 
-Buradan daha fazla filtrelemek, günlük sorguyu değiştirin ve benzeri. Azure İzleyici'de günlük sorguları kullanma hakkında daha fazla bilgi için bkz. [analiz günlük verilerini Azure İzleyici'de](../../azure-monitor/log-query/log-query-overview.md).
+Buradan, daha fazla filtre uygulayabilir, günlük sorgusunu değiştirebilir ve bu şekilde devam edebilirsiniz. Azure Izleyici 'de günlük sorgularını kullanma hakkında daha fazla bilgi için bkz. [Azure izleyici 'de günlük verilerini çözümleme](../../azure-monitor/log-query/log-query-overview.md).
 
-**HelpLink** alan belirli hata hakkında ek ayrıntılar ile TechNet sayfanın URL'sini gösterir. Kopyalayın ve bu bağlantı sorunlarını giderme ve hata düzeltme hakkında bilgi için tarayıcı pencerenizi yapıştırın.
+**HelpLink** alanı, bu belirli hata hakkında ek ayrıntıları Içeren bir TechNet sayfasının URL 'sini gösterir. Sorun giderme ve hatayı düzeltme hakkında bilgi edinmek için bu bağlantıyı kopyalayıp tarayıcı pencerenize yapıştırabilirsiniz.
 
-Ayrıca **dışarı** sonuçları Excel'e. Verileri dışarı aktarma, çoğaltma hatası görselleştirmek istediğiniz herhangi bir şekilde yardımcı olabilir.
+Ayrıca, sonuçları Excel 'e aktarmak için **dışarı aktar** ' a da tıklayabilirsiniz. Verilerin dışarı aktarılması, çoğaltma hatası verilerini dilediğiniz şekilde görselleştirmenize yardımcı olabilir.
 
-![Excel dışarı aktarılan AD çoğaltma durumu hataları](./media/ad-replication-status/oms-ad-replication-export.png)
+![Excel 'de AD çoğaltma durumu hataları veriliyor](./media/ad-replication-status/oms-ad-replication-export.png)
 
-## <a name="ad-replication-status-faq"></a>AD çoğaltma durumu ile ilgili SSS
-**S: Ne sıklıkta AD çoğaltma durumu veriler güncelleştirildi mi?**
-Y: Bilgiler, beş günde bir güncelleştirilir.
+## <a name="ad-replication-status-faq"></a>AD Çoğaltma Durumu SSS
+**S: AD çoğaltma durumu verileri ne sıklıkta güncelleştiriliyor?**
+Y: bilgi her beş günde bir güncelleştirilir.
 
-**S: Bu veriler sıklıkla güncelleştirilir yapılandırmak için bir yol var mı?**
+**S: Bu verilerin ne sıklıkta güncelleştirileceğini yapılandırmak için bir yol var mı?**
 Y: Şu anda değil.
 
-**S: Tüm etki alanı denetleyicilerine my çoğaltma durumunu görmek için Log Analytics çalışma alanıma Ekle gerekiyor mu?**
-Y: Hayır, yalnızca bir tek etki alanı denetleyicisi eklenmelidir. Log Analytics çalışma alanınızda birden çok etki alanı denetleyiciniz varsa, bunları tüm veriler Azure İzleyicisi'ne gönderilir.
+**S: çoğaltma durumunu görmek için etki alanı denetleyicilerimin tümünü Log Analytics çalışma alanına eklemem gerekiyor mu?**
+Y: Hayır, yalnızca tek bir etki alanı denetleyicisi eklenmelidir. Log Analytics çalışma alanınızda birden çok etki alanı denetleyiciniz varsa, bunların tümünün verileri Azure Izleyici 'ye gönderilir.
 
-**S: Herhangi bir etki alanı denetleyicileri Log Analytics çalışma alanıma Ekle istemiyorum. AD çoğaltma durumu çözümü kullanabilir miyim?**
+**S: Log Analytics çalışma alanına herhangi bir etki alanı denetleyicisi eklemek istemiyorum. AD Çoğaltma Durumu çözümünü kullanmaya devam edebilir miyim?**
 
-Y: Evet. Etkinleştirmek için bir kayıt defteri anahtarının değerini ayarlayabilirsiniz. Bkz: [etkin olmayan etki alanı denetleyicisi](#enable-non-domain-controller).
+C: Evet. Bir kayıt defteri anahtarının değerini etkinleştirmek için ayarlayabilirsiniz. Bkz. [etki alanı olmayan denetleyiciyi etkinleştirme](#enable-non-domain-controller).
 
-**S: Veri koleksiyonu yapan işlemin adı nedir?**
-Y: AdvisorAssessment.exe
+**S: veri toplamayı yapan işlemin adı nedir?**
+A: Danışmanorassessment. exe
 
-**S: Ne kadar toplanacak veri için sürer?**
-Y: Veri Toplama süresi, Active Directory ortamında boyutuna bağlıdır, ancak genellikle 15 dakikadan kısa sürer.
+**S: verilerin toplanması ne kadar sürer?**
+Y: veri toplama süresi Active Directory ortamının boyutuna bağlıdır, ancak genellikle 15 dakikadan kısa sürer.
 
-**S: Ne tür verilere toplanır?**
-Y: Çoğaltma bilgileri LDAP toplanır.
+**S: ne tür veriler toplanır?**
+Y: çoğaltma bilgileri LDAP aracılığıyla toplanır.
 
-**S: Verileri toplandığında yapılandırmak için bir yol var mı?**
+**S: veri toplandığında yapılandırmak için bir yol var mı?**
 Y: Şu anda değil.
 
-**S: Verileri toplamak hangi izinlerin gerekiyor?**
-Y: Active Directory normal kullanıcı izinlerini yeterlidir.
+**S: veri toplamak için hangi izinlere ihtiyacım var?**
+Y: Active Directory için normal Kullanıcı izinleri yeterlidir.
 
 ## <a name="troubleshoot-data-collection-problems"></a>Veri toplama sorunlarını giderme
-Veri toplamak için Log Analytics çalışma alanınıza bağlı için en az bir etki alanı denetleyicisi AD çoğaltma durumu çözüm paketi gerektirir. Bir etki alanı denetleyicisine bağlanmak kadar belirten bir ileti görünür **veri hala toplanmakta olan**.
+AD Çoğaltma Durumu çözüm paketi, verileri toplamak için en az bir etki alanı denetleyicisinin Log Analytics çalışma alanınıza bağlanmasını gerektirir. Bir etki alanı denetleyicisine bağlanana kadar, **verilerin toplanmakta**olduğunu belirten bir ileti görüntülenir.
 
-Etki alanı denetleyicilerinizden biri bağlama konusunda yardıma ihtiyacınız varsa, belgeleri görüntüleyebilirsiniz [Azure İzleyici bağlanmak Windows bilgisayarlara](../../azure-monitor/platform/om-agents.md). Alternatif olarak, etki alanı denetleyicinize bir System Center Operations Manager ortamı için zaten bağlıysa, belgeleri görüntüleyebilirsiniz [System Center Operations Manager bağlanmak için Azure İzleyici](../../azure-monitor/platform/om-agents.md).
+Etki alanı Denetleyicilerinizden birini bağlamak için yardıma ihtiyacınız varsa, [Windows bilgisayarlarını Azure izleyici 'ye bağlama](../../azure-monitor/platform/om-agents.md)sırasında belgeleri görüntüleyebilirsiniz. Alternatif olarak, etki alanı denetleyiciniz zaten var olan bir System Center Operations Manager ortamına bağlandıysa, [Azure izleyici 'ye System Center Operations Manager Connect (bağlantı](../../azure-monitor/platform/om-agents.md)) belgesine bakabilirsiniz.
 
-Herhangi bir etki alanı denetleyicilerinizin doğrudan Azure İzleyici veya System Center Operations Manager bağlanmak istemiyorsanız bkz [etkin olmayan etki alanı denetleyicisi](#enable-non-domain-controller).
+Etki alanı denetleyicilerinizin herhangi birini doğrudan Azure Izleyici 'ye veya System Center Operations Manager bağlamak istemiyorsanız, bkz. [etki alanı dışı denetleyiciyi etkinleştirme](#enable-non-domain-controller).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kullanım [sorgular Azure İzleyici'de oturum](../../azure-monitor/log-query/log-query-overview.md) ayrıntılı Active Directory çoğaltma Durumu verisini görüntülemek için.
+* Ayrıntılı Active Directory çoğaltma durumu verilerini görüntülemek için [Azure izleyici 'de günlük sorgularını](../../azure-monitor/log-query/log-query-overview.md) kullanın.

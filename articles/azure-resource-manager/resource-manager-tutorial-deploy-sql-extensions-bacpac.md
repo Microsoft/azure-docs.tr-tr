@@ -1,28 +1,20 @@
 ---
-title: Azure Resource Manager şablonlarıyla SQL BACPAC dosyalarını içeri aktarma | Microsoft Docs
-description: Azure Resource Manager şablonları ile SQL BACPAC dosyalarını içeri aktarmak için SQL veritabanı uzantısını kullanmayı öğrenin.
-services: azure-resource-manager
-documentationcenter: ''
+title: SQL BACPAC dosyalarını şablonlarla içeri aktarma
+description: SQL veritabanı uzantısı 'nı kullanarak SQL BACPAC dosyalarını Azure Resource Manager şablonlarıyla içeri aktarma hakkında bilgi edinin.
 author: mumian
-manager: dougeby
-editor: ''
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 04/08/2019
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 08befabfbd14651475fa56dec95bdf4c2fe54c9c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: a1454c1b551ee16303f8fda7297910ce8642b523
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60390316"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150402"
 ---
-# <a name="tutorial-import-sql-bacpac-files-with-azure-resource-manager-templates"></a>Öğretici: Azure Resource Manager şablonları ile SQL BACPAC dosyalarını içeri aktarın
+# <a name="tutorial-import-sql-bacpac-files-with-azure-resource-manager-templates"></a>Öğretici: Azure Resource Manager şablonlarıyla SQL BACPAC dosyalarını içeri aktarma
 
-Azure Resource Manager şablonları ile bir BACPAC dosyasını içeri aktarmak için Azure SQL veritabanı Uzantıları'nı kullanmayı öğrenin. Dağıtım yapıtları dağıtımı tamamlamak için gereken ana şablon dosyası yanı sıra tüm dosyalarıdır. BACPAC dosyasını bir yapıdır. Bu öğreticide bir Azure SQL sunucusu, bir SQL veritabanı dağıtmak için bir şablon oluşturmak ve bir BACPAC dosyasını içeri aktarın. Azure sanal makine uzantıları Azure Resource Manager şablonlarını kullanarak dağıtma hakkında daha fazla bilgi için bkz: [# Öğreticisi: Sanal makine uzantıları Azure Resource Manager şablonları ile dağıtma](./resource-manager-tutorial-deploy-vm-extensions.md).
+Azure Resource Manager şablonlarıyla BACPAC dosyasını içeri aktarmak için Azure SQL veritabanı uzantıları 'nı nasıl kullanacağınızı öğrenin. Dağıtım yapıtları, bir dağıtımı tamamlaması gereken ana şablon dosyasına ek olarak herhangi bir dosyadır. BACPAC dosyasını bir yapıdır. Bu öğreticide, bir Azure SQL Server, bir SQL veritabanını dağıtmak ve BACPAC dosyasını içeri aktarmak için bir şablon oluşturacaksınız. Azure Resource Manager şablonlarını kullanarak Azure sanal makine uzantılarını dağıtma hakkında daha fazla bilgi için bkz. [# Öğretici: Azure Resource Manager şablonlarıyla sanal makine uzantılarını dağıtma](./resource-manager-tutorial-deploy-vm-extensions.md).
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
@@ -45,21 +37,21 @@ Bu makaleyi tamamlamak için gerekenler:
     ```azurecli-interactive
     openssl rand -base64 32
     ```
-    Azure Key Vault şifreleme anahtarları ve diğer gizli dizileri korumak üzere tasarlanmıştır. Daha fazla bilgi için [Öğreticisi: Resource Manager şablon dağıtımı Azure anahtar kasası tümleştirme](./resource-manager-tutorial-use-key-vault.md). Ayrıca parolanızı üç ayda bir güncelleştirmenizi öneririz.
+    Azure Key Vault şifreleme anahtarları ve diğer gizli dizileri korumak üzere tasarlanmıştır. Daha fazla bilgi için bkz. [Öğretici: Azure Key Vault'u Resource Manager şablonu dağıtımıyla tümleştirme](./resource-manager-tutorial-use-key-vault.md). Ayrıca parolanızı üç ayda bir güncelleştirmenizi öneririz.
 
 ## <a name="prepare-a-bacpac-file"></a>BACPAC dosyası hazırlama
 
-Bir BACPAC dosyası üzerinde paylaşılan bir [Azure depolama hesabı](https://armtutorials.blob.core.windows.net/sqlextensionbacpac/SQLDatabaseExtension.bacpac) genel erişimi. Kendiniz bir dosya oluşturmak isterseniz bkz. [Azure SQL Veritabanı’nı bir BACPAC dosyasına dışarı aktarma](../sql-database/sql-database-export.md). Dosyayı kendi belirleyeceğiniz bir konumda yayımlarsanız öğreticinin ilerleyen bölümlerinde şemayı güncelleştirmeniz gerekir.
+Bir BACPAC dosyası [GitHub](https://github.com/Azure/azure-docs-json-samples/raw/master/tutorial-sql-extension/SQLDatabaseExtension.bacpac)'da paylaşılır. Kendiniz bir dosya oluşturmak isterseniz bkz. [Azure SQL Veritabanı’nı bir BACPAC dosyasına dışarı aktarma](../sql-database/sql-database-export.md). Dosyayı kendi belirleyeceğiniz bir konumda yayımlarsanız öğreticinin ilerleyen bölümlerinde şemayı güncelleştirmeniz gerekir.
 
 ## <a name="open-a-quickstart-template"></a>Hızlı başlangıç şablonunu açma
 
-Bu öğreticide kullanılan şablon depolanan bir [Azure depolama hesabı](https://armtutorials.blob.core.windows.net/createsql/azuredeploy.json). 
+Bu öğreticide kullanılan şablon [GitHub](https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-sql-extension/azuredeploy.json)' da depolanır.
 
 1. Visual Studio Code’dan **Dosya**>**Dosya Aç**’ı seçin.
 2. **Dosya adı**’na şu URL’yi yapıştırın:
 
     ```url
-    https://armtutorials.blob.core.windows.net/createsql/azuredeploy.json
+    https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-sql-extension/azuredeploy.json
     ```
 3. Dosyayı açmak için **Aç**’ı seçin.
 
@@ -74,7 +66,7 @@ Bu öğreticide kullanılan şablon depolanan bir [Azure depolama hesabı](https
 
 ## <a name="edit-the-template"></a>Şablonu düzenleme
 
-İki ek kaynaklar için şablonu ekleyin.
+Şablona iki ek kaynak ekleyin.
 
 * SQL veritabanı uzantısının BACPAC dosyalarını içeri aktarması için Azure hizmetlerine erişim izni vermeniz gerekir. SQL Server tanımına aşağıdaki JSON kodunu ekleyin:
 
@@ -112,7 +104,7 @@ Bu öğreticide kullanılan şablon depolanan bir [Azure depolama hesabı](https
             "properties": {
                 "storageKeyType": "SharedAccessKey",
                 "storageKey": "?",
-                "storageUri": "https://armtutorials.blob.core.windows.net/sqlextensionbacpac/SQLDatabaseExtension.bacpac",
+                "storageUri": "https://github.com/Azure/azure-docs-json-samples/raw/master/tutorial-sql-extension/SQLDatabaseExtension.bacpac",
                 "administratorLogin": "[variables('databaseServerAdminLogin')]",
                 "administratorLoginPassword": "[variables('databaseServerAdminLoginPassword')]",
                 "operationMode": "Import",
@@ -127,11 +119,11 @@ Bu öğreticide kullanılan şablon depolanan bir [Azure depolama hesabı](https
 
     Kaynak tanımını anlamak için bkz. [SQL Veritabanı uzantısı başvurusu](https://docs.microsoft.com/azure/templates/microsoft.sql/servers/databases/extensions). Önemli öğeler şunlardır:
 
-    * **dependsOn**: SQL veritabanı oluşturulduktan sonra uzantı kaynak oluşturulması gerekir.
-    * **storageKeyType**: Depolama anahtarı türü. Değer `StorageAccessKey` veya `SharedAccessKey` olabilir. Sağlanan BACPAC dosyası genel erişime açık bir Azure Depolama hesabında paylaşıldığından burada `SharedAccessKey' kullanılmıştır.
-    * **Depolama anahtarı**: Depolama anahtarı. Depolama anahtarı türü SharedAccessKey olarak belirlenirse başına "?" eklenmelidir.
-    * **storageUri**: Kullanılacak depolama URI'si. Sağlanan BACPAC dosyasını kullanmazsanız buradaki değerleri güncelleştirmeniz gerekir.
-    * **administratorLoginPassword**: SQL yönetici parolası. Oluşturulan bir parola kullanın. [Ön koşullara](#prerequisites) bakın.
+    * **dependsOn**: Uzantı kaynağının SQL veritabanı oluşturulduktan sonra oluşturulması gerekir.
+    * **storageKeyType**: Kullanılacak depolama anahtarının türüdür. Değer `StorageAccessKey` veya `SharedAccessKey` olabilir. Sağlanan BACPAC dosyası genel erişime açık bir Azure Depolama hesabında paylaşıldığından burada `SharedAccessKey' kullanılmıştır.
+    * **storageKey**: Kullanılacak depolama anahtarıdır. Depolama anahtarı türü SharedAccessKey olarak belirlenirse başına "?" eklenmelidir.
+    * **storageUri**: Kullanılacak depolama URI'sidir. Sağlanan BACPAC dosyasını kullanmazsanız buradaki değerleri güncelleştirmeniz gerekir.
+    * **administratorLoginPassword**: SQL yönetici parolasıdır. Oluşturulan bir parola kullanın. [Ön koşullara](#prerequisites) bakın.
 
 ## <a name="deploy-the-template"></a>Şablonu dağıtma
 
@@ -172,7 +164,7 @@ Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığı
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide bir SQL Server ve bir SQL Veritabanı oluşturup bir BACPAC dosyasını içeri aktardınız. BACPAC dosyası, bir Azure depolama hesabında depolanır. URL herkesle dosya erişebilirsiniz. BACPAC dosyası (yapı) güvenliğini sağlamayı öğrenmek için bkz:
+Bu öğreticide bir SQL Server ve bir SQL Veritabanı oluşturup bir BACPAC dosyasını içeri aktardınız. BACPAC dosyası bir Azure depolama hesabında depolanır. URL ile anybody dosyaya erişebilir. BACPAC dosyasını (yapıt) güvenli hale getirme hakkında bilgi edinmek için bkz.
 
 > [!div class="nextstepaction"]
-> [Yapıtlar güvenliğini sağlama](./resource-manager-tutorial-secure-artifacts.md)
+> [Yapıtları güvenli hale getirme](./resource-manager-tutorial-secure-artifacts.md)

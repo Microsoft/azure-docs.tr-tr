@@ -1,6 +1,6 @@
 ---
-title: Güvenlik bilgileri (Önizleme) yöntemleri ve bilgileri - Azure Active Directory değiştirme hakkında genel bakış | Microsoft Docs
-description: Ekleme, güncelleştirme ve iki Faktörlü doğrulama ve passsword Self Servis sıfırlama için güvenlik bilgisi yöntemlerinizi silme konusunda genel bakış.
+title: Güvenlik bilgilerinizi değiştirme hakkında genel bakış (Önizleme)-Azure AD
+description: İki öğeli doğrulama ve self servis parola sıfırlama için güvenlik bilgileri yöntemlerinizi ekleme, güncelleştirme ve silme hakkındaki makalelere bağlantılar.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -12,34 +12,37 @@ ms.topic: overview
 ms.date: 02/13/2019
 ms.author: lizross
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 115354985284b090fef890068ade6ddaf5867f04
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 3b781cd30bc5f63199ef9bff45670fa618e2ca17
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60474119"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73803817"
 ---
-# <a name="overview-about-changing-your-security-info-preview-methods-and-information"></a>Güvenlik bilgileri (Önizleme) yöntemleri ve bilgileri değiştirme hakkında genel bakış
-Ekleme, düzenleme, silme ve varsayılan güvenlik bilgisi yönteminizi içinden değiştirmek **güvenlik bilgisi** sayfaları. Her yöntem ve bilgilerinizi değiştirme hakkında daha fazla bilgi için ilişkili, yöntem tabanlı makalesine bakın.
+# <a name="overview-about-changing-your-security-info-preview-methods-and-information"></a>Güvenlik bilgileri (Önizleme) yöntemlerinizi ve bilgilerinizi değiştirme hakkında genel bakış
 
-## <a name="two-factor-verification-versus-password-reset-authentication"></a>Kimlik doğrulaması iki Faktörlü doğrulama ve parola sıfırlama
-Güvenlik bilgisi yöntemleri, parola sıfırlama ve her iki iki adımlı doğrulama için kullanılır. Ancak, tüm yöntemleri için her ikisi de kullanılabilir.
+**Güvenlik bilgileri** sayfaları içinden varsayılan güvenlik bilgileri yönteminizi ekleyebilir, düzenleyebilir, silebilir ve değiştirebilirsiniz. Her yöntem ve bilgilerinizin nasıl değiştirileceği hakkında daha fazla bilgi için, bkz. ilişkili, Yöntem tabanlı makale.
 
-|Yöntem|Kullanıldığı yerler|
-|------|--------|
-|Authenticator uygulaması|İki aşamalı doğrulama ve parola kimlik doğrulaması sıfırlayın.|
-|Kısa mesaj|İki aşamalı doğrulama ve parola kimlik doğrulaması sıfırlayın.|
-|Telefon aramaları|İki aşamalı doğrulama ve parola kimlik doğrulaması sıfırlayın.|
-|E-posta hesabı|Yalnızca kimlik doğrulaması parolasını sıfırlayın. İki aşamalı doğrulama için başka bir yöntem seçmeniz gerekir.|
-|Güvenlik soruları|Yalnızca kimlik doğrulaması parolasını sıfırlayın. İki aşamalı doğrulama için başka bir yöntem seçmeniz gerekir.|
+## <a name="two-factor-verification-versus-password-reset-authentication"></a>İki öğeli doğrulama ve parola sıfırlama kimlik doğrulaması
 
-## <a name="method-based-how-to-articles"></a>Metot tabanlı nasıl yapılır makaleleri
-Bu liste yöntemi tabanlı makaleler içerir. Her makalede, ekleme, düzenleme, silme veya güvenlik bilgilerinizi belirtilen yöntemi değiştirme hakkında ayrıntılı bilgi sağlar.
+Güvenlik bilgileri yöntemleri hem iki öğeli doğrulama hem de parola sıfırlama için kullanılır. Ancak, her ikisi için tüm yöntemler kullanılamaz.
 
-|Makale |Açıklama |
-|------|------------|
-|[Güvenlik bilgilerini bir kimlik doğrulayıcı uygulama ayarlama](security-info-setup-auth-app.md)|Microsoft Authenticator uygulaması için güvenlik bilgisi yönteminizi değiştirmek açıklar.|
-|[Metin iletileri için güvenlik bilgilerini ayarlama](security-info-setup-text-msg.md)|Metin iletileri için güvenlik bilgisi yönteminizi değiştirmek açıklar.|
-|[Güvenlik bilgilerini telefon aramalarını kullanacak şekilde ayarlama](security-info-setup-phone-number.md)|Telefon aramaları için güvenlik bilgisi yönteminizi değiştirmek açıklar.|
-|[Güvenlik bilgilerini e-posta kullanacak şekilde ayarlama](security-info-setup-email.md)|Bir e-posta adresini kullanmak için güvenlik bilgisi yönteminizi değiştirmek açıklar.|
-|[Güvenlik bilgilerini önceden tanımlı güvenlik sorularını kullanacak şekilde ayarlama](security-info-setup-questions.md)|Güvenlik sorularını kullanmak için güvenlik bilgisi yönteminizi değiştirmek açıklar.|
+| Yöntem | Kullanıldığı yerler |
+| ------ | -------- |
+| Authenticator uygulaması | İki öğeli doğrulama ve parola sıfırlama kimlik doğrulaması. |
+| Metin iletileri | İki öğeli doğrulama ve parola sıfırlama kimlik doğrulaması. |
+| Telefon görüşmeleri | İki öğeli doğrulama ve parola sıfırlama kimlik doğrulaması. |
+| E-posta hesabı | Yalnızca parola sıfırlama kimlik doğrulaması. İki öğeli doğrulama için başka bir yöntem seçmeniz gerekir. |
+| Güvenlik soruları | Yalnızca parola sıfırlama kimlik doğrulaması. İki öğeli doğrulama için başka bir yöntem seçmeniz gerekir. |
+
+## <a name="method-based-how-to-articles"></a>Yöntem tabanlı nasıl yapılır makaleleri
+
+Bu liste, Yöntem tabanlı makaleleri içerir. Her makale, belirtilen yönteme göre güvenlik bilgilerinizi ekleme, düzenleme, silme veya değiştirme hakkındaki ayrıntıları sağlar.
+
+| Makale | Açıklama |
+| ------ |------------ |
+| [Bir doğrulayıcı uygulaması için güvenlik bilgilerini ayarlama](security-info-setup-auth-app.md) | Microsoft Authenticator uygulaması için güvenlik bilgisi yönteminizin nasıl değiştirileceğini açıklar. |
+| [SMS mesajlaşma için güvenlik bilgilerini ayarlama](security-info-setup-text-msg.md) | SMS mesajlaşma için güvenlik bilgisi yönteminizin nasıl değiştirileceğini açıklar. |
+| [Güvenlik bilgilerini telefon aramalarını kullanacak şekilde ayarlama](security-info-setup-phone-number.md) | Telefon aramaları için güvenlik bilgisi yönteminizin nasıl değiştirileceğini açıklar. |
+| [Güvenlik bilgilerini e-posta kullanacak şekilde ayarlama](security-info-setup-email.md) | Güvenlik bilgisi yönteminizin bir e-posta adresi kullanmak üzere nasıl değiştirileceğini açıklar. |
+| [Güvenlik bilgilerini önceden tanımlı güvenlik sorularını kullanacak şekilde ayarlama](security-info-setup-questions.md)|Güvenlik sorularını kullanmak için güvenlik bilgisi yönteminizin nasıl değiştirileceğini açıklar. |

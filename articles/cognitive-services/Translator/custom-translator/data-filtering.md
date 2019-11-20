@@ -1,61 +1,61 @@
 ---
-title: Verileri filtreleme - özel Translator
+title: Veri filtreleme-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Özel bir sistem eğitim için kullanılacak belgeleri gönderdiğinizde, belgeleri işlemek ve filtreleme adımları eğitim için hazırlamak için bir dizi geçeriz.
+description: Özel bir sistem eğitimi için kullanılmak üzere belge gönderdiğinizde, belgeler bir dizi işleme ve filtreleme adımlarında eğitim için hazırlanmaya devam edin.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: a224a30114d03468c5764528e6c7472572a93f1c
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 1028443eaaf6c483cd7cd57289b0dcf2a9f11902
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67443445"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68595913"
 ---
 # <a name="data-filtering"></a>Veri filtreleme
 
-Özel bir sistem eğitim için kullanılacak belgeleri gönderdiğinizde, belgeleri işlemek ve filtreleme adımları eğitim için hazırlamak için bir dizi geçeriz. Bu adımlar aşağıda açıklanmıştır. Filtreleme bilgi belgeler özel Translator eğitimlerle hazırlamak için kendiniz alabilir adımları yanı sıra özel translator görüntülenen cümle sayısı anlamanıza yardımcı olabilir.
+Özel bir sistem eğitimi için kullanılmak üzere belge gönderdiğinizde, belgeler bir dizi işleme ve filtreleme adımlarında eğitim için hazırlanmaya devam edin. Bu adımlar burada açıklanmıştır. Filtrelemeye ilişkin bilgi, özel çevirmende görünen tümce sayısını anlamanıza yardımcı olabilir ve belgeleri özel çevirmenle eğitmek üzere hazırlamak için kendinize uygulayabileceğiniz adımlar.
 
 ## <a name="sentence-alignment"></a>Tümce hizalama
-Belgenizi XLIFF, TMX veya HİZALA biçiminde değilse, kaynak ve hedef belgelerinizi, birbiriyle tümce tümce cümleleri özel Translator hizalar. Translator belge hizalama gerçekleştirmez: başka bir dilde, eşleşen belge bulmak için belgelerin adlandırma izler. Belgenin içinde özel Translator karşılık gelen cümlenin başka bir dilde bulmayı dener. Belge kullanan katıştırılmış HTML gibi biçimlendirme etiketleri ile aynı doğrultuda yardımcı olmak için.  
+Belgeniz XLıFF, TMX veya HIZALAMA biçiminde değilse, özel çevirmen, kaynak ve hedef belgelerinizin cümlelerini birbirlerine ve tümce cümlelere göre hizalar. Translator belge hizalaması gerçekleştirmez. diğer dilin eşleşen belgesini bulmak için belge adlandırmalarınızın ardından gelir. Belge içinde özel çevirici, ilgili cümleyi diğer dilde bulmaya çalışır. Hizalamayla yardım etmek için katıştırılmış HTML etiketleri gibi belge işaretlemesini kullanır.  
 
-Kaynak cümlelerde sayısı arasında büyük bir tutarsızlık bakın ve hedef tarafı belgeleri, belgenizi ilk başta paralel olmuş olabilir veya diğer nedenlerle hizalı uygulanamadı. Belge ile büyük bir fark çiftlerini (> % 10) Her iki taraftaki tümcelerin bunlar gerçekten paralel olduğunuzdan emin olmak için ikinci bir görünüm isteyebilirsiniz. Tümce sayısı gecikmeleri anormal biçimde farklıysa, özel Translator belgenin yanında bir uyarı gösterir.  
+Kaynak ve hedef kenar belgelerindeki Tümcelerin sayısı arasında büyük bir tutarsızlık görürseniz, belgeniz ilk yerde paralel olmayabilir ya da başka nedenlerden dolayı hizalanamaz. Belge çiftleri büyük bir fark (>% 10) Her yandaki cümleler, aslında paralel olduklarından emin olmak için ikinci bir görünüm sağlar. Tümce sayısı suspiciously farklıysa, özel çevirmen belgenin yanında bir uyarı gösterir.  
 
 
 ## <a name="deduplication"></a>Yinelenenleri kaldırma
-Özel Translator, test ve eğitim verilerini belgelerden ayarlama bulunan cümleleri kaldırır. Kaldırma işlemi dinamik olarak çalıştırın, veri işleme adımı değil eğitim içinde gerçekleşir. Özel Translator cümle sayısı, bu kaldırma işlemi önce proje genel bakış içindeki raporlar.  
+Özel çevirici, eğitim verilerinden test ve ayarlama belgelerinde bulunan cümleleri kaldırır. Kaldırma işlemi, veri işleme adımında değil, eğitim çalıştırmasının içinde dinamik olarak gerçekleşir. Özel çevirici, bu kaldırma işleminden önce projeye genel bakış bölümünde tümce sayısını raporlar.  
 
-## <a name="length-filter"></a>Uzunluğu filtresi
-* Cümleleri iki tarafındaki yalnızca bir sözcük ile kaldırın.
-* Cümleleri 100'den fazla kelimelerin ile kaldırın.  Çince, Japonca, Korece muaf tutulur.
-* Cümleleri az 3 karakter ile kaldırın. Çince, Japonca, Korece muaf tutulur.
-* Cümleleri 2000'den fazla karakter içeren Çince, Japonca, Korece kaldırın.
-* % 1'den az alfa karakterler içeren cümleleri kaldırın.
-* 50'den fazla sözcükler içeren sözlük girişleri kaldırın.
+## <a name="length-filter"></a>Uzunluk filtresi
+* Cümleleri her iki tarafta yalnızca bir sözcükle kaldırın.
+* Her iki tarafta 100 ' ten fazla sözcükten oluşan cümleleri kaldırın.  Çince, Japonca, Korece muaf tutulur.
+* 3 karakterden kısa bir cümle kaldırın. Çince, Japonca, Korece muaf tutulur.
+* Çince, Japonca, Korece için 2000 karakterden uzun cümleler kaldırın.
+* % 1 ' den az Alfa karakteri olan cümleleri kaldırın.
+* 50 'den fazla sözcük içeren sözlük girişlerini kaldırın.
 
 ## <a name="white-space"></a>Boşluk
-* Beyaz boşluk karakterleri sekmeler ve tek bir boşluk karakteri ile CR/LF sıraları dahil olmak üzere herhangi bir dizi değiştirin.
-* İçinde cümlenin başında veya sonunda boşluk Kaldır
+* Sekme ve CR/LF dizileri dahil olmak üzere boşluk karakterlerinden oluşan herhangi bir diziyi tek bir boşluk karakteriyle değiştirin.
+* Tümcedeki baştaki veya sondaki boşluğu kaldır
 
-## <a name="sentence-end-punctuation"></a>Tümce bitiş noktalama işareti
-Birden çok cümle bitiş noktalama işaretleri, tek bir örnekle değiştirin.  
+## <a name="sentence-end-punctuation"></a>Tümce sonu noktalama işaretleri
+Birden çok cümle sonu noktalama karakterini tek bir örnekle değiştirin.  
 
 ## <a name="japanese-character-normalization"></a>Japonca karakter normalleştirme
-Tam genişlikli harfler ve rakamlar yarı geniş karakterlere dönüştürür.
+Tam genişlik ve rakamları yarı genişlik karakterlerine dönüştürür.
 
-## <a name="unescaped-xml-tags"></a>Atlanmayan XML etiketleri
-Dönüşümler atlanmayan etiketleri kaçan etiketi ekleyerek filtreleme:
-* `&lt;` olur `&amp;lt;`
-* `&gt;` olur `&amp;gt;`
-* `&amp;` olur `&amp;amp;`
+## <a name="unescaped-xml-tags"></a>Kaçışsız XML etiketleri
+Atlanan olmayan etiketleri kaçış etiketlerine dönüştürür:
+* `&lt;`geldiğinde`&amp;lt;`
+* `&gt;`geldiğinde`&amp;gt;`
+* `&amp;`geldiğinde`&amp;amp;`
 
 ## <a name="invalid-characters"></a>Geçersiz karakterler
-Özel Translator, U + FFFD Unicode karakter içeren cümleleri kaldırır. ' % S'karakter U + FFFD başarısız bir kodlama dönüştürme gösterir.
+Özel çevirici, U + FFFD Unicode karakterini içeren cümleleri kaldırır. U + FFFD karakteri, başarısız bir kodlama dönüşümünü gösterir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Bir model eğitip](how-to-train-model.md) özel Translator içinde.
+- Özel çevirmende [bir modeli eğitme](how-to-train-model.md) .

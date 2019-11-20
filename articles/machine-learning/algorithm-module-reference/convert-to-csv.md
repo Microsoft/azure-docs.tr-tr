@@ -1,60 +1,60 @@
 ---
-title: "CSV'ye Dönüştür: Modül başvurusu"
-titleSuffix: Azure Machine Learning service
-description: CSV modülüne Dönüştür Azure Machine Learning hizmetinde bir veri kümesi indirilen, dışarı aktarılan veya R veya Python betik modülleri ile paylaşılan bir CSV biçime dönüştürmek için nasıl kullanılacağını öğrenin.
+title: "CSV 'ye Dönüştür: modül başvurusu"
+titleSuffix: Azure Machine Learning
+description: Bir veri kümesini, R veya Python betik modülleriyle yüklenebilen, verilelebilecek veya paylaşılabilen CSV biçimine dönüştürmek için Azure Machine Learning CSV 'ye dönüştürme modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 8b8b6758cc2df7a092ce36e9507f84ac534d0e3d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 999f78ab08e1a2c9dd6b28d853e49fbb559fab83
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65028733"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73493842"
 ---
 # <a name="convert-to-csv-module"></a>CSV modülüne Dönüştür
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-İndirilen, dışarı aktarılan veya R veya Python betik modülleri ile paylaşılan bir CSV biçiminde bir veri kümesini dönüştürmek için bu modülü kullanın.
+Bir veri kümesini, R veya Python betik modülleriyle yüklenebilen, verilelebilecek veya paylaşılabilen bir CSV biçimine dönüştürmek için bu modülü kullanın.
 
 ### <a name="more-about-the-csv-format"></a>CSV biçimi hakkında daha fazla bilgi 
 
-"Virgülle ayrılmış değerler için" anlamına gelir, CSV biçimi, machine learning araçları çok sayıda dış tarafından kullanılan bir dosya biçimidir. CSV, R veya Python gibi açık kaynaklı dilleriyle çalışırken yaygın bir değişim biçimi.
+"Virgülle ayrılmış değerler" için temsil eden CSV biçimi, birçok harici makine öğrenimi aracı tarafından kullanılan bir dosya biçimidir. CSV, R veya Python gibi açık kaynak dillerle çalışırken ortak bir değişim biçimidir.
 
-Azure Machine learning'de iş çoğunu olsa bile, olduğunda, Veri kümenizi dış araçları kullanmak için CSV dönüştürmek için kullanışlı bulabilirsiniz zamanlar vardır. Örneğin:
+Azure Machine Learning ' de çalışmalarınızın çoğunu olsanız bile, veri kümenizi dış araçlar 'da kullanmak üzere CSV 'ye dönüştürmeyi yararlı bulabileceğiniz zamanlar olabilir. Örneğin:
 
-+ Excel ile açmak için CSV dosyası indirin veya ilişkisel veritabanına aktarmak.  
-+ Bulut depolama ve görselleştirme oluşturmak için Power BI'dan bağlanmak için CSV dosyasını kaydedin.  
-+ CSV biçimi, R ve Python kullanmak için veri hazırlamak için kullanın. Yalnızca doğrudan Python ya da bir Jupyter not defteri verilere erişmek için gereken kodu oluşturmak için bir modülün çıkışına sağ tıklayın. 
++ Excel ile açmak veya ilişkisel bir veritabanına içeri aktarmak için CSV dosyasını indirin.  
++ CSV dosyasını bulut depolama alanına kaydedin ve görselleştirmeler oluşturmak için Power BI adresinden bağlanın.  
++ Verileri R ve Python 'da kullanmak üzere hazırlamak için CSV biçimini kullanın. Doğrudan Python veya Jupyter Not defteri 'nden verilere erişmek için gereken kodu oluşturmak üzere modülün çıktısına sağ tıklayın. 
 
-Bir veri kümesi CSV'ye Dönüştür dosyayı Azure ML çalışma alanınızda kaydedilir. Açıp dosyayı doğrudan kullanmak için bir Azure depolama yardımcı programını kullanabilirsiniz veya modülün çıkış sağ tıklayın ve CSV dosyasını bilgisayarınıza indirin veya R veya Python kodu kullanın.  
+Bir veri kümesini CSV 'ye dönüştürdüğünüzde, dosya Azure ML çalışma alanınıza kaydedilir. Azure Storage yardımcı programını kullanarak dosyayı doğrudan açabilir ve kullanabilir veya modül çıktısına sağ tıklayıp CSV dosyasını bilgisayarınıza indirebilir veya R ya da Python kodunda kullanabilirsiniz.  
 
-## <a name="how-to-configure-convert-to-csv"></a>CSV Dönüştür yapılandırma
+## <a name="how-to-configure-convert-to-csv"></a>CSV 'ye dönüştürme yapılandırma
 
-1.  Ekleme [CSV'ye Dönüştür](./convert-to-csv.md) denemenizi modülü. Bu modülde bulabilirsiniz **veri biçim dönüştürmelerini** arabirimi grubu. 
 
-2. Bu, bir veri kümesi veren tüm modülüne bağlayın.   
+1.  [CSV 'ye dönüştürme](./convert-to-csv.md) modülüne işlem hattınızı ekleyin. Bu modülü, tasarımcıda **veri biçimi dönüştürmeleri** grubunda bulabilirsiniz. 
+
+2. Veri kümesini çıkaran herhangi bir modüle bağlayın.   
   
-3.  Denemeyi çalıştırın.
+3.  İşlem hattını çalıştırma.
 
 ### <a name="results"></a>Sonuçlar
   
 
-Çıkışı çift [CSV'ye Dönüştür](./convert-to-csv.md), aşağıdaki seçeneklerden birini seçin.  
+[CSV 'ye Dönüştür](./convert-to-csv.md)çıktısına çift tıklayın ve bu seçeneklerden birini belirleyin.  
 
- + **Sonuç veri kümesi -> indirme**: Hemen bir yerel klasöre kaydedebilirsiniz CSV biçiminde verilerin bir kopyasını açılır. Bir klasör belirtmezseniz varsayılan dosya adı uygulanır ve CSV dosyası yerel kaydedilir **indirir** kitaplığı.
+ + **Sonuç veri kümesi-> indirme**: bir yerel klasöre KAYDEDEBILECEĞINIZ CSV biçimindeki verilerin bir kopyasını hemen açar. Bir klasör belirtmezseniz, varsayılan bir dosya adı uygulanır ve CSV dosyası yerel **indirmeler** kitaplığına kaydedilir.
 
 
- + **Sonuç veri kümesini veri kümesi olarak Kaydet ->** : CSV dosyası ayrı bir veri kümesi Azure ML çalışma alanına kaydeder.
+ + **Sonuç veri kümesi-veri kümesi olarak kaydet >** : CSV dosyasını Azure ML çalışma alanına ayrı bir veri kümesi olarak geri kaydeder.
 
- + **Veri erişim kodu**: Azure ML iki Python kullanarak ya da r kullanarak verilere erişmek kod oluşturur Verilere erişmek için uygulamanıza kod parçacığını kopyalayın. (*Veri erişim kodu oluşturmak gelen yakında.* )
+ + **Veri erişim kodu oluştur**: Azure ml, verileri Python kullanarak veya R kullanarak erişmeniz için iki kod kümesi oluşturur. Verilere erişmek için kod parçacığını uygulamanıza kopyalayın. (*Veri erişim kodu oluşturma yakında yakında sunulacaktır.* )
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

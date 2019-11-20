@@ -1,51 +1,51 @@
 ---
-title: OpenCensus Git Azure Application Insights ile izleme | Microsoft Docs
-description: Yerel ileticisi ve Application Insights ile izleme Git OpenCensus tümleştirmek için yönergeler sağlar
-services: application-insights
-keywords: ''
+title: OpenCensus ile Azure Application Insights izleme | Microsoft Docs
+description: OpenCensus go izlemeyi yerel iletici ve Application Insights tümleştirme hakkında yönergeler sağlar
+ms.service: azure-monitor
+ms.subservice: application-insights
+ms.topic: conceptual
 author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 09/15/2018
-ms.service: application-insights
-ms.topic: conceptual
-manager: carmonm
-ms.openlocfilehash: cdf01fbbcc8ef1f90b2e0f8973f59c46c5bf70f8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 99f26bb2b89ef9642a36aa2be2037d04aafcdcd4
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60577907"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72819274"
 ---
-# <a name="collect-distributed-traces-from-go-preview"></a>Toplama dağıtılmış izlemelerinden Git (Önizleme)
+# <a name="collect-distributed-traces-from-go-preview"></a>Go 'dan dağıtılmış izlemeler toplayın (Önizleme)
 
-Go uygulamaları ile tümleştirme yoluyla izlemeyi destekleyen dağıtılmış artık application Insights [OpenCensus](https://opencensus.io) ve yeni [yerel ileticisi](./opencensus-local-forwarder.md). Bu makalede, Go için OpenCensus ayarlama ve Application Insights izleme verilerinize alma sürecinde adım adım yol gösterir.
+Application Insights artık [Opencensus](https://opencensus.io) ve yeni [Yerel ileticimiz](./opencensus-local-forwarder.md)Ile tümleştirme aracılığıyla dağıtılmış go uygulamalarının izlenmesini desteklemektedir. Bu makalede,, Go için OpenCensus ayarlama ve izleme verilerinizi Application Insights alma sürecinde adım adım yönergeler sunulacaktır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Bir Azure Aboneliğine sahip olmanız gerekir.
-- Git yüklenmesi, bu makalede 1.11 sürümü kullanan [Git indirme](https://golang.org/dl/).
-- Yüklemek için yönergeleri izleyin [yerel iletici bir Windows hizmeti olarak](./opencensus-local-forwarder.md).
+- Git 'in yüklü olması gerekir, bu makalede 1,11 sürümüne [Git indirme](https://golang.org/dl/)sürümü kullanılmaktadır.
+- [Yerel ileticisini bir Windows hizmeti olarak](./opencensus-local-forwarder.md)yüklemek için yönergeleri izleyin.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.com/free/) bir hesap oluşturun.
 
 ## <a name="sign-in-to-the-azure-portal"></a>Azure portalında oturum açın
 
-[Azure Portal](https://portal.azure.com/) oturum açın.
+[Azure Portal](https://portal.azure.com/)’ında oturum açın.
 
-## <a name="create-application-insights-resource"></a>Application Insights kaynağı oluşturun
+## <a name="create-application-insights-resource"></a>Application Insights kaynağı oluşturma
 
-Öncelikle, bir izleme anahtarını (ikey) oluşturacak bir Application Insights kaynağı oluşturmanız gerekir. İkey sonra Application Insights için izleme eklenmiş OpenCensus uygulamanızdan dağıtılmış izlemeleri göndermek için yerel ileticisi yapılandırmak için kullanılır.   
+İlk olarak, bir izleme anahtarı (Ikey) oluşturacak bir Application Insights kaynağı oluşturmanız gerekir. Daha sonra Ikey, OpenCensus tarafından izlenen uygulamanızdaki dağıtılmış izlemeleri Application Insights olarak göndermek üzere yerel ileticisini yapılandırmak için kullanılır.   
 
-1. Seçin **kaynak Oluştur** > **Geliştirici Araçları** > **Application Insights**.
+1. **Application Insights** > **Geliştirici Araçları** > **kaynak oluştur** ' u seçin.
 
    ![Application Insights Kaynağı ekleme](./media/opencensus-Go/0001-create-resource.png)
+
+ > [!NOTE]
+   >İlk kez bir Application Insights kaynağı oluşturuyorsanız [Application Insights kaynak oluştur](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource) makalesini ziyaret ederek daha fazla bilgi edinebilirsiniz.
 
    Bir yapılandırma kutusu görünür. Giriş alanlarını doldurmak için aşağıdaki tabloyu kullanın.
 
     | Ayarlar        | Değer           | Açıklama  |
    | ------------- |:-------------|:-----|
-   | **Ad**      | Genel Olarak Benzersiz Değer | İzlemekte olduğunuz uygulamayı tanımlayan ad |
-   | **Uygulama Türü** | Genel | İzlemekte olduğunuz uygulamanın türü |
+   | **Adı**      | Genel Olarak Benzersiz Değer | İzlemekte olduğunuz uygulamayı tanımlayan ad |
    | **Kaynak Grubu**     | myResourceGroup      | App Insights verilerini barındıran yeni kaynak grubunun adı |
    | **Konum** | Doğu ABD | Yakınınızda bulunan veya uygulamanızın barındırıldığı konumun yakınında olan bir konum seçin |
 
@@ -55,9 +55,9 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
 
 1. **Genel Bakış** > **Temel Bilgiler**’i seçin > Uygulamanızın **İzleme Anahtarı**’nı kopyalayın.
 
-   ![İzleme anahtarı ekran görüntüsü](./media/opencensus-Go/0003-instrumentation-key.png)
+   ![İzleme anahtarının ekran görüntüsü](./media/opencensus-Go/0003-instrumentation-key.png)
 
-2. Düzenleme, `LocalForwarder.config` dosya ve izleme anahtarınızı ekleyin. İçindeki yönergeleri izlediyseniz [önkoşul](./opencensus-local-forwarder.md) dosyası şu konumdadır `C:\LF-WindowsServiceHost`
+2. `LocalForwarder.config` dosyanızı düzenleyin ve izleme anahtarınızı ekleyin. [Önkoşul](./opencensus-local-forwarder.md) ' deki yönergeleri izlediyseniz, dosyanın bulunduğu `C:\LF-WindowsServiceHost`
 
     ```xml
       <OpenCensusToApplicationInsights>
@@ -74,18 +74,18 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
     </LocalForwarderConfiguration>
     ```
 
-3. Uygulamayı yeniden **yerel ileticisi** hizmeti.
+3. Uygulama **Yerel ileticisi** hizmetini yeniden başlatın.
 
-## <a name="opencensus-go-packages"></a>OpenCensus Git paketleri
+## <a name="opencensus-go-packages"></a>OpenCensus go paketleri
 
-1. Komut satırından Git için açık Görselleştirmenizdeki paketleri yükleyin:
+1. Komut satırından Go için açık Census paketlerini yükler:
 
     ```go
     go get -u go.opencensus.io
     go get -u contrib.go.opencensus.io/exporter/ocagent
     ```
 
-2. .Go dosyaya aşağıdaki kodu ekleyin ve ardından derleyin ve çalıştırın. (Bu örnekte yerel iletici ile tümleştirme kolaylaştıran eklenen kodu resmi OpenCensus yönergeleriyle türetilir)
+2. Aşağıdaki kodu bir. go dosyasına ekleyin ve oluşturup çalıştırın. (Bu örnek, yerel ileticiyle tümleştirmeyi kolaylaştıran eklenen kodla resmi OpenCensus kılavuzlarından türetilir)
 
      ```go
         // Copyright 2018, OpenCensus Authors
@@ -184,45 +184,45 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
         }
      ```
 
-3. Basit bir go uygulaması çalıştıran bir kez gidin `http://localhost:50030`. Her yenileme tarayıcı "yerel ileticisi tarafından devralındığında karşılık gelen bir aralık veri eşlik metin hello world" oluşturur.
+3. Basit Go uygulaması çalışmaya başladıktan sonra `http://localhost:50030`gidin. Her tarayıcıyı yenileme işlemi, yerel iletici tarafından çekilen ilgili yayılmış veriler ile birlikte "Hello World" metnini oluşturur.
 
-4. Onaylamak için **yerel ileticisi** izlemeleri denetimi çekme `LocalForwarder.config` dosya. Adımları izlediyseniz [önkoşul](https://docs.microsoft.com/azure/application-insights/local-forwarder), içinde almayacaktır `C:\LF-WindowsServiceHost`.
+4. **Yerel ileticinin** izlemelerin kullanıma hazır olduğunu doğrulamak için `LocalForwarder.config` dosyasına bakın. [Önkoşulun](https://docs.microsoft.com/azure/application-insights/local-forwarder)içindeki adımları izlediyseniz `C:\LF-WindowsServiceHost`' de yer alır.
 
-    Günlük dosyasının içinde görüntü bir verici burada ekledik, ikinci komut çalıştırılmadan önce gördüğünüz gibi `OpenCensus input BatchesReceived` 0. Güncelleştirilmiş betiği çalıştıran başladıktan sonra `BatchesReceived` girdiğimiz değerlerinin sayısı artan eşit:
+    Günlük dosyasının altındaki görüntüde, `OpenCensus input BatchesReceived` bir dışarı aktarma eklediğimiz ikinci betiği çalıştırmadan önce 0 idi. Güncelleştirilmiş betiği çalıştırmaya başladığımızda, girdiğimiz değer sayısına eşit olarak artırılır `BatchesReceived`:
     
     ![Yeni App Insights kaynağı formu](./media/opencensus-go/0004-batches-received.png)
 
 ## <a name="start-monitoring-in-the-azure-portal"></a>Azure portalında izlemeyi başlatma
 
-1. Artık Application ınsights'ı yeniden açabilirsiniz **genel bakış** şu anda çalışan uygulamanızın hakkında ayrıntıları görüntülemek için Azure portalında sayfası. Seçin **ölçüm Stream canlı**.
+1. Artık çalışmakta olan uygulamanızla ilgili ayrıntıları görüntülemek için Azure portal Application Insights **genel bakış** sayfasını yeniden açabilirsiniz. **Canlı ölçüm akışı**' nı seçin.
 
-   ![Canlı ölçüm akışı kırmızı kutu içinde seçili genel bakış bölmesinin ekran görüntüsü](./media/opencensus-go/0005-overview-live-metrics-stream.png)
+   ![Kırmızı kutuda seçili canlı ölçüm akışının bulunduğu genel bakış bölmesinin ekran görüntüsü](./media/opencensus-go/0005-overview-live-metrics-stream.png)
 
-2. İkinci bir Go uygulaması'nı yeniden çalıştırın ve başlatmak için tarayıcıyı yenilemeyi `http://localhost:50030`, göreceğiniz Canlı İzleme verilerini Application Insights'da yerel ileticisi hizmetinden gelir.
+2. İkinci Go uygulamasını yeniden çalıştırırsanız ve `http://localhost:50030`için tarayıcıyı yenilemeyi başlatırsanız, canlı izleme verilerini yerel iletici hizmetinden Application Insights ulaştığı şekilde görürsünüz.
 
-   ![Canlı ölçüm akışı görüntülenen performans verileri ile ekran görüntüsü](./media/opencensus-go/0006-stream.png)
+   ![Performans verileri görüntülenirken canlı ölçüm akışının ekran görüntüsü](./media/opencensus-go/0006-stream.png)
 
-3. Geri gidin **genel bakış** sayfasından seçim yapıp **Uygulama Haritası** çağrı zamanlama uygulama bileşenleriniz arasındaki bağımlılık ilişkileri ve görsel düzeni için.
+3. **Genel bakış** sayfasına geri dönün ve bağımlılık ilişkilerinin görsel düzeni ve uygulama bileşenleriniz arasındaki çağrı zamanlaması Için **uygulama Haritası** ' nı seçin.
 
-    ![Temel Uygulama Haritası ekran görüntüsü](./media/opencensus-go/0007-application-map.png)
+    ![Temel uygulama eşlemesinin ekran görüntüsü](./media/opencensus-go/0007-application-map.png)
 
-    Biz yalnızca bir yöntem çağrısının izleme olduğundan, bizim Uygulama Haritası olarak ilginç değil. Ancak, Uygulama Haritası daha dağıtılmış uygulamalar görselleştirmek için ölçeklendirebilirsiniz:
+    Yalnızca bir yöntem çağrısını izliyor olduğundan, uygulama haritamız ilginç değildir. Ancak uygulama Haritası, daha fazla Dağıtılmış uygulamayı görselleştirmek için ölçeklendirebilir:
 
    ![Uygulama Eşlemesi](media/opencensus-go/application-map.png)
 
-4. Seçin **araştırmak performans** ayrıntılı Performans Analizi gerçekleştirebilir ve performansın kök nedenini belirlemek için.
+4. Ayrıntılı performans analizi gerçekleştirmek ve performansının yavaşlamasına neden olan performansı belirlemek için **performansı araştır** ' ı seçin.
 
     ![Performans bölmesinin ekran görüntüsü](./media/opencensus-go/0008-performance.png)
 
-5. Seçme **örnekleri** ve ardından sağ bölmede görüntülenen örnekleri hiçbirinde uçtan uca işlem ayrıntıları deneyimi başlayacaktır. Örnek uygulamamız yalnızca tek bir olay gösterecek, ancak daha karmaşık bir uygulama, tek tek olay çağrı yığını düzeyini aşağı uçtan uca işlem keşfetmek çalıştırmasına olanak tanır.
+5. **Örnekler** ' i seçip sağ bölmede görüntülenen örneklerden birine tıkladığınızda, uçtan uca işlem ayrıntıları deneyimi başlatılır. Örnek uygulamamız yalnızca tek bir olay gösterirken, daha karmaşık bir uygulama, tek bir olayın çağrı yığınının düzeyine kadar uçtan uca işlemleri araştırmanıza olanak sağlar.
 
      ![Uçtan uca işlem arabiriminin ekran görüntüsü](./media/opencensus-go/0009-end-to-end-transaction.png)
 
-## <a name="opencensus-trace-for-go"></a>Go için OpenCensus izleme
+## <a name="opencensus-trace-for-go"></a>Go için OpenCensus izlemesi
 
-Yalnızca ele aldığımız OpenCensus Go için Application Insights ve yerel iletici ile tümleştirmeye ilişkin temel bilgileri. [Resmi OpenCensus Git Kullanım Kılavuzu](https://godoc.org/go.opencensus.io) daha gelişmiş konuları kapsar.
+Yalnızca OpenCensus ile yerel iletici ve Application Insights ile ilgili olarak tümleştirme hakkında temel bilgiler ele alınmıştır. [Resmi OpenCensus go kullanım kılavuzu](https://godoc.org/go.opencensus.io) , daha gelişmiş konular içerir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Uygulama Haritası](./../../azure-monitor/app/app-map.md)
+* [Uygulama eşlemesi](./../../azure-monitor/app/app-map.md)
 * [Uçtan uca performans izleme](./../../azure-monitor/learn/tutorial-performance.md)

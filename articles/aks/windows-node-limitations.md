@@ -1,84 +1,113 @@
 ---
-title: Windows Server düğümü havuzlarını Azure Kubernetes Service (AKS) için kısıtlamalar
-description: Azure Kubernetes Service (AKS) Windows Server düğüm havuzları ve uygulama iş yüklerini çalıştırırken bilinen sınırlamalar hakkında bilgi edinin
+title: Azure Kubernetes Service (AKS) içindeki Windows Server düğüm havuzlarının sınırlamaları
+description: Azure Kubernetes Service 'te (AKS) Windows Server düğüm havuzlarını ve uygulama iş yüklerini çalıştırırken oluşan bilinen sınırlamalar hakkında bilgi edinin
 services: container-service
-author: tylermsft
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 05/31/2019
-ms.author: twhitney
-ms.openlocfilehash: 457a908a70fccd9f4209121d9b99e5e53905500b
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.author: mlearned
+ms.openlocfilehash: 2cec24e5ea50360531e247b37369802f3ef4e336
+ms.sourcegitcommit: 92d42c04e0585a353668067910b1a6afaf07c709
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67444096"
+ms.lasthandoff: 10/28/2019
+ms.locfileid: "72990291"
 ---
-# <a name="current-limitations-for-windows-server-node-pools-and-application-workloads-in-azure-kubernetes-service-aks"></a>Windows Server düğüm havuzları ve uygulama iş yüklerini Azure Kubernetes Service (AKS) için geçerli sınırlamalar
+# <a name="current-limitations-for-windows-server-node-pools-and-application-workloads-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içindeki Windows Server düğüm havuzları ve uygulama iş yükleri için geçerli sınırlamalar
 
-Azure Kubernetes Service (AKS), düğümler üzerinde konuk işletim sistemi Windows Server çalıştıran bir düğüm havuzunu oluşturabilirsiniz. Bu düğümler, .NET Framework üzerine inşa edilmiş gibi yerel Windows kapsayıcı uygulamalarının çalıştırabilirsiniz. Önemli farklar nasıl Linux ve Windows işletim sistemi sağlayan kapsayıcı desteği gibi bazı yaygın Kubernetes ve pod güvenlikle ilgili özellikler için Windows düğüm havuzları şu anda kullanılabilir değil.
+Azure Kubernetes Service (AKS) ' de, düğümlerde Konuk işletim sistemi olarak Windows Server çalıştıran bir düğüm havuzu oluşturabilirsiniz. Bu düğümler, .NET Framework yerleşik olanlar gibi yerel Windows kapsayıcı uygulamaları çalıştırabilir. Linux ve Windows işletim sisteminin kapsayıcı desteği sağladığı önemli farklılıklar söz konusu olduğunda, bazı yaygın Kubernetes ve pod ile ilgili özellikler Şu anda Windows düğüm havuzları için kullanılamaz.
 
-Bu makalede, bazı sınırlamalar ve Windows Server AKS düğümleri işletim sistemi kavramlarını açıklar. Windows Server için düğüm havuzları şu anda Önizleme aşamasındadır.
+Bu makalede, AKS 'deki Windows Server düğümlerine yönelik bazı sınırlamalar ve işletim sistemi kavramları özetlenmektedir. Windows Server için düğüm havuzları Şu anda önizlemededir.
 
 > [!IMPORTANT]
-> AKS Önizleme özellikleri, Self Servis, kabul etme. Görüş ve hata topluluğumuza toplamak için sağlanır. Önizleme'de, bu özelliklerin üretim kullanılmak üzere geliştirilmiş değildir. Genel Önizleme Özellikleri 'en yüksek çaba' destek kapsamında ayrılır. İş saatleri Pasifik Saat dilimi sırasında (Pasifik Saati) yalnızca AKS teknik destek ekipleri Yardım kullanılabilir. Ek bilgi için lütfen aşağıdaki destek makaleleri bakın:
+> AKS Önizleme özellikleri self servis kabul etme sürecindedir. Önizlemeler, "olduğu gibi" ve "kullanılabilir olarak" verilmiştir ve hizmet düzeyi sözleşmelerinden ve sınırlı garantiden çıkarılır. AKS önizlemeleri, müşteri desteğinin en iyi çaba temelinde kısmen ele alınmıştır. Bu nedenle, bu özellikler üretim kullanımı için tasarlanmamıştır. Ek bilgi için lütfen aşağıdaki destek makalelerine bakın:
 >
-> * [AKS destek ilkeleri][aks-support-policies]
+> * [AKS destek Ilkeleri][aks-support-policies]
 > * [Azure desteği SSS][aks-faq]
 
-## <a name="limitations-for-windows-server-in-kubernetes"></a>Windows Server'da Kubernetes sınırlamaları
+## <a name="which-windows-operating-systems-are-supported"></a>Hangi Windows işletim sistemleri destekleniyor?
 
-Windows Server kapsayıcıları bir Windows tabanlı bir kapsayıcı konağı üzerinde çalıştırmanız gerekir. Windows Server kapsayıcıları AKS çalıştırma için [Windows Server çalıştıran bir düğüm havuzunu oluşturma][windows-node-cli] konuk işletim sistemi olarak. Yukarı Akış Kubernetes projesi Windows Server'da parçası olan bazı sınırlamalar penceresi sunucu düğüm havuzu desteği içerir. Bu sınırlamalar, AKS için özgü değildir. Bu Yukarı Akış Kubernetes Windows Server desteği hakkında daha fazla bilgi için bkz. [Kubernetes sınırlamaları Windows Server kapsayıcıları](https://docs.microsoft.com/azure/aks/windows-node-limitations).
+AKS, ana bilgisayar işletim sistemi sürümü olarak Windows Server 2019 kullanır ve yalnızca işlem yalıtımını destekler. Diğer Windows Server sürümleri kullanılarak oluşturulan kapsayıcı görüntüleri desteklenmez. [Windows kapsayıcı sürümü uyumluluğu][windows-container-compat]
 
-Windows Server kapsayıcıları kubernetes için Yukarı Akış aşağıdaki sınırlamalar AKS için uygundur:
+## <a name="is-kubernetes-different-on-windows-and-linux"></a>Kubernetes, Windows ve Linux 'ta farklı midir?
 
-- Windows Server kapsayıcıları, yalnızca temel alınan Windows Server düğümün işletim sistemi ile eşleşen Windows Server 2019 kullanabilirsiniz.
-    - Desteklenmeyen temel işletim sistemi olarak Windows Server 2016 kullanılarak oluşturulan kapsayıcı görüntüleri.
-- Ayrıcalıklı kapsayıcıları kullanılamaz.
-- Windows Server kapsayıcıları farklıkullanıcı, SELinux, AppArmor veya POSIX özellikleri gibi Linux'a özgü özellikleri kullanılamaz.
-    - Kullanıcı izinleri UUI/GUID gibi Linux'a özgü olan dosya sistemi sınırlamaları da Windows Server kapsayıcıları mevcut değildir.
-- Azure diskleri ve Azure dosyaları Windows Server kapsayıcı NTFS birimlerinde erişilebilir desteklenen birim türleri var.
-    - NFS tabanlı depolama / birimler desteklenmez.
+Pencere sunucusu düğüm havuzu desteği, Kubernetes projesinde yukarı akış Windows Server 'ın bir parçası olan bazı sınırlamalar içerir. Bu sınırlamalar AKS 'e özgü değildir. Kubernetes 'te Windows Server için bu yukarı akış desteği hakkında daha fazla bilgi için, Kubernetes projesinden [Kubernetes belgesinde Windows desteği 'Ne giriş][intro-windows] konusunun [desteklenen işlevsellik ve sınırlamalar][upstream-limitations] bölümüne bakın.
 
-## <a name="aks-limitations-for-windows-server-node-pools"></a>Windows Server düğüm havuzları için AKS sınırlamaları
+Kubernetes, geçmişte Linux odaklı. Yukarı akış [Kubernetes.io][kubernetes] Web sitesinde kullanılan birçok örnek, Linux düğümlerinde kullanılmak üzere tasarlanmıştır. Windows Server kapsayıcıları kullanan dağıtımlar oluşturduğunuzda, işletim sistemi düzeyinde aşağıdaki noktalar geçerlidir:
 
-Windows Server düğüm havuzu desteği aks'deki aşağıdaki ek kısıtlamalar geçerlidir:
+- **Identity** -Linux bir kullanıcıyı bir tamsayı Kullanıcı TANıMLAYıCıSıNA (UID) göre tanımlar. Kullanıcının oturum açmak için alfasayısal bir Kullanıcı adı da vardır. Bu, Linux 'un Kullanıcı UID 'ye çeviri anlamına gelir. Benzer şekilde Linux bir kullanıcı grubunu bir tamsayı grubu tanımlayıcısı (GID) ile tanımlar ve bir grup adını karşılık gelen GID 'ye çevirir.
+    - Windows Server, Windows güvenlik erişimi Yöneticisi (SAM) veritabanında depolanan daha büyük bir ikili güvenlik tanımlayıcısı (SID) kullanır. Bu veritabanı, konak ve kapsayıcılar ile ya da kapsayıcılar arasında paylaşılmaz.
+- **Dosya izinleri** -Windows Server, bir bit MASKESI ve UID + GID yerine SID 'lere dayalı bir erişim denetim listesi kullanır
+- **Dosya yolları** -Windows Server 'daki kural/yerine \ ' i kullanmaktır.
+    - Birimleri takmaya yönelik Pod özellikleri, Windows Server kapsayıcıları için yolu doğru belirtin. Örneğin, bir Linux kapsayıcısında */mnt/Volume* bağlama noktası yerine, *K:* sürücüsü olarak takılacak bir sürücü harfi ve */k/birimi* gibi bir konum belirtin.
 
-- Bir AKS kümesi, her zaman ilk düğüm havuzu olarak Linux düğüm havuzu içerir. AKS kümesi silinmedikçe bu ilk Linux tabanlı düğüm havuzu silinemiyor.
-- AKS kümeleri Azure CNI (Gelişmiş) ağ modeli kullanmanız gerekir.
-    - Kubernetes (Temel) ağ desteklenmiyor. Kubernetes kullanan bir AKS kümesi oluşturulamıyor. Ağ modelleri arasındaki farklılıklar hakkında daha fazla bilgi için bkz. [kavramları aks'deki uygulamalar için ağ][azure-network-models].
-    - Azure CNI ağ modeli, ek planlama ve IP adresi yönetim değerlendirmeleri gerektirir. Planlama ve Azure CNI uygulama konusunda daha fazla bilgi için bkz. [Azure CNI yapılandırma ağ aks'deki][configure-azure-cni].
-- Windows Server düğümleri aks'deki olmalıdır *yükseltilmiş* en son düzeltme eki korumak için en son Windows Server 2019 sürümü düzeltir ve güncelleştirir. Windows güncelleştirmeleri temel düğüm görüntüde aks'deki etkin değil. Düzenli bir zamanlamaya göre Windows Güncelleştirme sürüm döngüsü ve kendi doğrulama işlemi, AKS kümenizi yükseltme üzerinde Windows Server düğüm havuzları gerçekleştirmeniz gerekir. Bir Windows Server düğüm havuzu yükseltme hakkında daha fazla bilgi için bkz. [aks'deki bir düğüm havuzunu yükseltme][nodepool-upgrade].
-    - Bu Windows Server yükseltir, geçici olarak eski düğüm kaldırılmadan önce yeni bir düğüm dağıtılmış olduğundan sanal ağ alt ağında ek IP adreslerini kullanır.
-    - Yeni bir düğüm dağıtıldığında, vCPU kotaları abonelikte de geçici olarak kullandığı sonra eski düğüm kaldırıldı.
-    - Otomatik olarak güncelleştirin ve yeniden başlatma kullanarak yönetme `kured` aks'deki Linux düğümleri ile.
-- AKS kümesi en fazla sekiz düğüm havuzları sahip olabilir.
-    - En fazla 400 düğümleri bu sekiz düğüm havuzları arasında olabilir.
-- Windows Server düğüm havuzu adı, 6 karakterlik bir sınırı vardır.
-- Windows Server düğümleri için olmayan ağ ilkesi ve küme ölçeklendirici, onaylı gibi AKS Önizleme özellikleri.
-- Giriş denetleyicileri yalnızca Linux düğümlerinde bir NodeSelector kullanarak zamanlanmalıdır.
-- Azure geliştirme alanları şu anda yalnızca Linux tabanlı düğüm havuzları için kullanılabilir.
-- Grup yönetilen hizmet hesapları Windows sunucusu düğümlerinin bir Active Directory etki alanına katılmamış (gMSA) desteği, AKS içinde şu anda kullanılabilir değil.
-    - Açık kaynak, Yukarı Akış [aks altyapısı][aks-engine] proje şu anda gMSA destek sağlar, bu özelliği kullanmanız gerekir.
+## <a name="what-kind-of-disks-are-supported-for-windows"></a>Windows için ne tür diskler destekleniyor?
 
-## <a name="os-concepts-that-are-different"></a>Farklı işletim sistemi kavramları
+Azure diskleri ve Azure dosyaları, Windows Server kapsayıcısında NTFS birimleri olarak erişilen desteklenen birim türleridir.
 
-Kubernetes tarihsel olarak Linux odaklıdır. Yukarı Akış olarak kullanılan birçok örneği [Kubernetes.io][kubernetes] Web sitesi kullanmak üzere Linux düğümleri yöneliktir. Windows Server kapsayıcıları, işletim sistemi düzeyinde Uygula, aşağıdaki konuları kullanan dağıtımlar oluşturduğunuzda:
+## <a name="can-i-run-windows-only-clusters-in-aks"></a>AKS 'de yalnızca Windows kümelerini çalıştırabilir miyim?
 
-- **Kimlik** -Linux UserID (UID) ve tamsayı türleri olarak temsil edilen GroupID (GID) kullanır. Kullanıcı ve grup adları kurallı olmayan - diğer adı içinde oldukları */etc/grupları* veya */etc/parola* UID + GID dönün.
-    - Windows Server, Windows güvenlik erişim Yöneticisi (SAM) veritabanına depolanmış bir büyük ikili güvenlik tanımlayıcısı (SID) kullanır. Bu veritabanı, kapsayıcıları veya ana bilgisayar ve kapsayıcılar arasında paylaşılmaz.
-- **Dosya izinleri** -Windows Server kullanan SID yerine bir bit maskesi UID + GID ve izinler dayalı erişim denetim listesi
-- **Dosya yolları** -Windows Server'da kuraldır kullanılacak \ yerine /.
-    - Bağlama birimleri pod özellikleri Windows Server kapsayıcıları için doğru yolu belirtin. Örneğin, yerine bağlama noktasını *birimi/mnt/* bir Linux kapsayıcısında bir sürücü harfi ve konum gibi belirtin */bin/birim* olarak takmak için *K:* sürücü.
+Bir AKS kümesindeki ana düğümler (denetim düzlemi) hizmet tarafından barındırılır, ana bileşenleri barındıran düğümlerin işletim sistemine maruz olmayacaktır. Tüm AKS kümesi, Linux tabanlı olan varsayılan ilk düğüm havuzu ile oluşturulur. Bu düğüm havuzu, kümenin çalışması için gerekli olan sistem hizmetlerini içerir. Kümenizin güvenilirliğini ve küme işlemlerini yapma yeteneğini sağlamak için ilk düğüm havuzunda en az iki düğüm çalıştırmanız önerilir. AKS kümesinin kendisi silinmediği takdirde ilk Linux tabanlı düğüm havuzu silinemez.
+
+## <a name="what-network-plug-ins-are-supported"></a>Hangi ağ eklentileri destekleniyor?
+
+Windows node havuzlarıyla AKS kümelerinin Azure CNı (Gelişmiş) ağ modelini kullanması gerekir. Kubenet (temel) ağı desteklenmez. Ağ modellerindeki farklılıklar hakkında daha fazla bilgi için bkz. [AKS 'teki uygulamalar Için ağ kavramları][azure-network-models]. -Azure CNı ağ modeli, IP adresi yönetimi için ek planlama ve dikkat edilecek noktalar gerektirir. Azure CNı 'nin nasıl planlanacağı ve uygulanacağı hakkında daha fazla bilgi için bkz. [AKS 'de Azure CNI ağını yapılandırma][configure-azure-cni].
+
+## <a name="can-i-change-the-min--of-pods-per-node"></a>Düğüm başına en az sayıda Pod 'yi değiştirebilir miyim?
+
+Kümelerinizin güvenilirliğini güvence altına almak için şu anda en az 30 Pod olarak ayarlanması gereksinimidir.
+
+## <a name="how-do-patch-my-windows-nodes"></a>Windows düğümlerimi nasıl yaalabilirim?
+
+En son düzeltme eki düzeltmelerini ve güncelleştirmelerini almak için AKS 'deki Windows Server düğümlerinin *yükseltilmesi* gerekir. Windows güncelleştirmeleri AKS içindeki düğümlerde etkin değildir. AKS yeni düğüm havuzu görüntülerini yayınlar, ancak düzeltme ekleri kullanılabilir olduğunda, bu durumda müşterilerin düğüm havuzlarını yükselterek düzeltme ekleri ve düzeltmede güncel kalmasını sağlar. Bu, aynı zamanda kullanılan Kubernetes sürümü için de geçerlidir. AKS sürüm notları, yeni sürümlerin ne zaman kullanılabilir olduğunu gösterir. Bir Windows Server düğüm havuzunu yükseltme hakkında daha fazla bilgi için bkz. [AKS 'de düğüm havuzunu yükseltme][nodepool-upgrade].
+
+> [!NOTE]
+> Güncelleştirilmiş Windows Server görüntüsü, düğüm havuzu yükseltmeden önce bir küme yükseltmesi (denetim düzlemi yükseltmesi) gerçekleştirildiğinde kullanılacaktır
+>
+
+## <a name="how-many-node-pools-can-i-create"></a>Kaç düğüm havuzu oluşturabilirim?
+
+AKS kümesinde en fazla sekiz (8) düğüm havuzu olabilir. Bu düğüm havuzlarının üzerinde en fazla 400 düğümünüz olabilir. [Düğüm havuzu sınırlamaları][nodepool-limitations].
+
+## <a name="what-can-i-name-my-windows-node-pools"></a>Windows node havuzlarımı nasıl kullanabilirim?
+
+Adı en fazla 6 (altı) karaktere saklamanız gerekir. Bu, AKS 'in geçerli bir sınırlamasıdır.
+
+## <a name="are-all-features-supported-with-windows-nodes"></a>Tüm özellikler Windows düğümleriyle destekleniyor mu?
+
+Ağ ilkeleri ve Kubernetes kullanan Şu anda Windows düğümleri ile desteklenmemektedir. 
+
+## <a name="can-i-run-ingress-controllers-on-windows-nodes"></a>Giriş denetleyicilerini Windows düğümlerinde çalıştırabilir miyim?
+
+Evet, Windows Server kapsayıcıları destekleyen bir giriş denetleyicisi AKS 'deki Windows düğümlerinde çalıştırılabilir.
+
+## <a name="can-i-use-azure-dev-spaces-with-windows-nodes"></a>Windows düğümleri ile Azure Dev Spaces kullanabilir miyim?
+
+Azure Dev Spaces Şu anda yalnızca Linux tabanlı düğüm havuzları için kullanılabilir.
+
+## <a name="can-my-windows-server-containers-use-gmsa"></a>Windows Server kapsayıcılarım gMSA kullanıyor mu?
+
+Grup tarafından yönetilen hizmet hesapları (gMSA) desteği şu anda AKS 'de kullanılamıyor.
+
+## <a name="can-i-use-azure-monitor-for-containers-with-windows-nodes-and-containers"></a>Windows düğümleri ve kapsayıcılarıyla kapsayıcılar için Azure Izleyici kullanabilir miyim?
+
+Evet, ancak Azure Izleyici, Windows kapsayıcılarından günlükleri (STDOUT) toplamaz. Yine de bir Windows kapsayıcısından stdout günlüklerinin canlı akışına iliştirebilirsiniz.
+
+## <a name="what-if-i-need-a-feature-which-is-not-supported"></a>Desteklenmeyen bir özelliğe ihtiyacım varsa ne olur?
+
+AKS 'de Windows 'a ihtiyacınız olan tüm özellikleri getirmek için çok çalıştık, ancak boşluklar yaşarsanız açık kaynaklı, yukarı akış [aks-motor][aks-engine] projesi, Windows desteği dahil olmak üzere Azure 'Da Kubernetes 'in kolay ve tamamen özelleştirilebilir bir yolunu sağlar. Lütfen kendi [aks yol haritasını][aks-roadmap]inceleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-AKS, Windows Server kapsayıcıları kullanmaya başlamak için [AKS Windows Server çalıştıran bir düğüm havuzunu oluşturma][windows-node-cli].
+AKS 'de Windows Server kapsayıcıları kullanmaya başlamak için [AKS 'de Windows Server çalıştıran bir düğüm havuzu oluşturun][windows-node-cli].
 
 <!-- LINKS - external -->
-[upstream-limitations]: https://kubernetes.io/docs/setup/windows/#limitations
 [kubernetes]: https://kubernetes.io
 [aks-engine]: https://github.com/azure/aks-engine
+[upstream-limitations]: https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/#supported-functionality-and-limitations
+[intro-windows]: https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/
+[aks-roadmap]: https://github.com/Azure/AKS/projects/1
 
 <!-- LINKS - internal -->
 [azure-network-models]: concepts-network.md#azure-virtual-networks
@@ -88,3 +117,6 @@ AKS, Windows Server kapsayıcıları kullanmaya başlamak için [AKS Windows Ser
 [aks-support-policies]: support-policies.md
 [aks-faq]: faq.md
 [azure-outbound-traffic]: ../load-balancer/load-balancer-outbound-connections.md#defaultsnat
+[nodepool-limitations]: use-multiple-node-pools.md#limitations
+[preview-support]: support-policies.md#preview-features-or-feature-flags
+[windows-container-compat]: https://docs.microsoft.com/virtualization/windowscontainers/deploy-containers/version-compatibility#windows-server-2019-host-os-compatibility

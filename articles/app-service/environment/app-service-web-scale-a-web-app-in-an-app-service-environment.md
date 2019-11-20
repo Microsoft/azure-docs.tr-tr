@@ -1,6 +1,6 @@
 ---
-title: Bir App Service ortamı - Azure uygulama ölçeklendirme
-description: Bir App Service ortamında bir uygulamayı ölçeklendirme
+title: App Service Ortamı Azure 'da bir uygulamayı ölçeklendirme
+description: App Service Ortamı bir uygulamayı ölçeklendirme
 services: app-service
 documentationcenter: ''
 author: ccompy
@@ -10,63 +10,62 @@ ms.assetid: 78eb1e49-4fcd-49e7-b3c7-f1906f0f22e3
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 10/17/2016
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 6e683eb07b690d7d5680b7a4d429d1150f22f67e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 711dc4d59785418d6637eb144b644948ed495e2c
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60767714"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70069722"
 ---
 # <a name="scaling-apps-in-an-app-service-environment"></a>App Service Ortamında uygulamaları ölçeklendirme
-Azure App Service'te normalde ölçeklendirebileceğiniz üç şey vardır:
+Azure App Service, genellikle ölçeklenebilmeniz gereken üç şey vardır:
 
 * Fiyatlandırma planı
 * çalışan boyutu 
 * örnek sayısı.
 
-Bir ASE'de seçmek veya fiyatlandırma planı değiştirmek için gerek yoktur.  Özellikleri açısından, bir Premium fiyatlandırma özellik düzeyi zaten yer sağlar.  
+Bir Ao 'da fiyatlandırma planını seçme veya değiştirme gereksinimi yoktur.  Özellikler açısından, zaten Premium fiyatlandırma yetenek düzeyindedir.  
 
-Çalışan boyutlarına göre her çalışan havuzu için kullanılacak işlem kaynağı boyutunu ASE yönetici atayabilirsiniz.  P4 işlem kaynaklarıyla çalışan havuzu 1 olabilir ve çalışan havuzu 2 P1 bilgi işlem kaynakları, isterseniz anlamına gelir.  Boyutu olması gerekmez.  Belge burada ayrıntılarla boyutlarını ve fiyatlarını görmek için [Azure App Service fiyatlandırması][AppServicePricing].  Bu, olması için App Service ortamında web apps ve App Service planları için ölçeklendirme seçenekleri bırakır:
+ATıCı Yöneticisi, çalışan boyutlarına göre her çalışan havuzu için kullanılacak işlem kaynağının boyutunu atayabilir.  Bu, istenirse, P4 işlem kaynakları ve çalışan Havuzu 2 olan çalışan havuzu 1 ' i, varsa P1 işlem kaynakları ile sahip olabileceği anlamına gelir.  Bunların boyut düzeninde olması gerekmez.  Boyutlara ve bunların fiyatlandırmasına ilişkin ayrıntılar için bu belgeyi [fiyatlandırma Azure App Service][AppServicePricing]buraya bakın.  Bu, Web uygulamaları için ölçeklendirme seçeneklerini ve bir App Service Ortamı App Service planlarını şu şekilde bırakır:
 
 * çalışan havuzu seçimi
 * örnek sayısı
 
-Her iki öğe değiştirme ASE'niz App Service planlarında barındırılan için gösterilen uygun kullanıcı Arabirimi aracılığıyla gerçekleştirilir.  
+Her iki öğenin de değiştirilmesi, AKEN barındırılan App Service planlarınız için gösterilen uygun Kullanıcı arabirimi aracılığıyla yapılır.  
 
 ![][1]
 
-ASP içinde çalışan havuzu kullanılabilir bilgi işlem kaynaklarının sayısını aşan ASP yukarı ölçeklendirilemez.  Bilgi işlem kaynaklarını, çalışan havuzunda varsa bunları eklemek için ASE yöneticinize almanız gerekir.  Yeniden yapılandırma geçici olarak bilgi ASE'nizi buradaki bilgileri okuyun: [Bir App Service ortamını yapılandırma][HowtoConfigureASE].  Kapasite zamanlama veya ölçümleri temel alan eklemek için ASE otomatik ölçeklendirme özelliklerinden yararlanmak isteyebilirsiniz.  ASE ortam için otomatik ölçeklendirmeyi yapılandırma hakkında ayrıntılı bilgi almak için bkz [bir App Service ortamı için otomatik ölçeklendirme yapılandırma][ASEAutoscale].
+ASP 'nizin içinde bulunduğu çalışan havuzundaki kullanılabilir işlem kaynakları sayısının ötesinde ASP 'nizi ölçeklendirebilirsiniz.  Bu çalışan havuzunda işlem kaynaklarına ihtiyacınız varsa, ATıCı yöneticinizden bunları eklemesi gerekir.  ATıCı 'nizi yeniden yapılandırma hakkında daha fazla bilgi için buradaki bilgileri okuyun: [App Service ortamını yapılandırma][HowtoConfigureASE].  Ayrıca, zamanlamaya veya ölçümlere göre kapasite eklemek için ATıCı otomatik ölçeklendirme özelliklerinden de yararlanmak isteyebilirsiniz.  Ao ortamı için otomatik ölçeklendirmeyi yapılandırma hakkında daha fazla bilgi edinmek için bkz. [Otomatik ölçeklendirmeyi bir App Service ortamı için yapılandırma][ASEAutoscale].
 
-Hizmet planları farklı çalışan havuzlarını işlem kaynakları kullanılarak birden çok uygulama oluşturabilir veya aynı çalışan havuzunu kullanabilirsiniz.  (4) kullanan çalışan havuzu 1'de kullanılabilir bilgi işlem kaynakları (10) varsa, (6) işlem kaynakları kullanılarak bir app service planı oluşturmak seçebilirsiniz ve ikinci bir app service planı örneği için işlem kaynakları.
+Farklı çalışan havuzlarından işlem kaynaklarını kullanarak birden çok App Service planı oluşturabilir veya aynı çalışan havuzunu kullanabilirsiniz.  Örneğin, çalışan havuzu 1 ' de (10) kullanılabilir işlem kaynağınız varsa, (6) işlem kaynaklarını kullanarak bir App Service planı oluşturmayı ve (4) işlem kaynaklarını kullanan ikinci bir App Service planını oluşturmayı tercih edebilirsiniz.
 
-### <a name="scaling-the-number-of-instances"></a>Örnek sayısında ölçeklendirme
-İlk web uygulamanızı bir App Service ortamında oluşturduğunuzda, 1 örnek ile başlar.  Ardından uygulamanız için ek işlem kaynakları sağlamak için ek örnekler için ölçeği genişletebilirsiniz.   
+### <a name="scaling-the-number-of-instances"></a>Örnek sayısını ölçeklendirme
+Web uygulamanızı bir App Service Ortamı ilk kez oluşturduğunuzda 1 örnek ile başlar.  Daha sonra, uygulamanız için ek işlem kaynakları sağlamak üzere ek örneklere ölçeklendirebilirsiniz.   
 
-ASE'nizi yeterli kapasitesi varsa, ardından bu oldukça basittir.  App Service ölçek ölçeği artırma ve istediğiniz siteleri tutan planınız için gittiğiniz.  Bu, el ile ölçek kümesi için ASP veya reddedebileceğiniz, ASP için otomatik ölçeklendirme kuralları yapılandırma kullanıcı arabirimini açar.  El ile sadece uygulamanızın ölçeğini ayarlamak ***ölçeklendirilmesine*** için ***el ile girdiğim bir örnek sayısı***.  Buradan kaydırıcıyı istediğiniz miktar değerine sürükleyin veya kaydırıcıyı yanındaki kutuya girin.  
+AŞIRIN yeterli kapasitesi varsa, bu oldukça basittir.  Ölçeği genişletmek istediğiniz siteleri tutan App Service planına gidin ve ölçek ' i seçin.  Bu, ASP için ölçeği el ile ayarlayabileceğiniz veya ASP 'niz için otomatik ölçeklendirme kurallarını yapılandırabileceğiniz Kullanıcı arabirimini açar.  Uygulamanızı el ile ölçeklendirmek için ölçeği ***, el ile girdiğim bir örnek sayısına*** ***göre*** ayarlamanız yeterlidir.  Buradan kaydırıcıyı istediğiniz miktara sürükleyin ya da kaydırıcının yanındaki kutuya girin.  
 
 ![][2] 
 
-Bunlar her zamanki gibi bir ASP ASE için otomatik ölçeklendirme kuralları aynı şekilde işler.  Seçebileceğiniz ***CPU yüzdesi*** altında ***ölçeklendirilmesine*** ve CPU yüzdesi veya size göre ASP kullanarak daha karmaşık kurallar oluşturabilirsiniz için otomatik ölçeklendirme kuralları oluşturma ***zamanlama ve performans kuralları*** .  Yapılandırma hakkında daha ayrıntılı bilgi için otomatik ölçeklendirmeyi kullanma Kılavuzu burada [bir uygulamasını Azure App Service'te ölçeklendirme][AppScale]. 
+Ao 'da bir ASP için otomatik ölçeklendirme kuralları, normal şekilde çalıştıkları gibi çalışır.  ***Ölçek ölçütü*** altında ***CPU yüzdesi*** ' ni seçebilir ve CPU yüzdesine göre ASP 'niz için otomatik ölçeklendirme kuralları oluşturabilirsiniz veya ***zamanlama ve performans kurallarını***kullanarak daha karmaşık kurallar oluşturabilirsiniz.  Otomatik ölçeklendirmeyi yapılandırma hakkında daha ayrıntılı bilgileri görmek için, burada [Azure App Service bir uygulamayı ölçeklendirin][AppScale]. 
 
 ### <a name="worker-pool-selection"></a>Çalışan havuzu seçimi
-Çalışan havuzu seçimi, daha önce belirtildiği gibi ASP Arabiriminden erişilir.  Çalışan havuzunu seçin ve istediğiniz ASP dikey penceresini açın.  Tüm App Service Ortamı'nda yapılandırdığınız çalışan havuzları görürsünüz.  Ardından, yalnızca bir çalışan havuzu varsa yalnızca listelenen bir havuz görürsünüz.  ASP bulunduğu hangi çalışan havuzunu değiştirmek için yalnızca App Service taşımak için planınızı istediğiniz çalışan havuzunu seçin.  
+Daha önce belirtildiği gibi, çalışan havuzu seçimine ASP kullanıcı arabiriminden erişilir.  Ölçeklendirmek istediğiniz ASP için dikey pencereyi açın ve çalışan havuzu ' nu seçin.  App Service Ortamı yapılandırdığınız tüm çalışan havuzları görüntülenir.  Yalnızca bir çalışan havuzunuz varsa, yalnızca bir havuzu listelenmiş olarak görürsünüz.  ASP 'nizin hangi çalışan havuzunu değiştirmek için, App Service planınızın taşınmasını istediğiniz çalışan havuzunu seçmeniz yeterlidir.  
 
 ![][3]
 
-ASP bir çalışan havuzundan diğerine geçmeden önce ASP için yeterli kapasiteye sahip emin olmak önemlidir.  Çalışan havuzları listesi, yalnızca çalışan havuzu adı listelenen ancak kaç çalışanları, çalışan havuzunda kullanılabilir olduğunu da görebilirsiniz.  App Service planınız içerecek şekilde örnekleri yeterli olduğundan emin olun.  Daha fazla işlem kaynaklarını taşımak istediğiniz çalışan havuzunda, sonra bunları eklemek için ASE yöneticinize alın.  
+ASP 'nizi bir çalışan havuzundan diğerine taşımadan önce ASP 'niz için yeterli kapasiteye sahip olduğunuzdan emin olmak önemlidir.  Çalışan havuzları listesinde, yalnızca listelenen çalışan havuzu adı değil, söz konusu çalışan havuzunda kaç tane çalışan olduğunu da görebilirsiniz.  App Service planınızı içerecek yeterli sayıda örnek olduğundan emin olun.  Taşımak istediğiniz çalışan havuzunda daha fazla bilgi işlem kaynağına ihtiyacınız varsa, açı yöneticinizden bunları eklemesini sağlayın.  
 
 > [!NOTE]
-> ASP uygulamalarında, soğuk bir çalışan havuzu öğesinden bir ASP açacak taşıma başlatır.  Bu istekleri yeni işlem kaynakları üzerinde çalışmaya uygulamanızı soğuk olduğu gibi yavaş çalışmasına neden olabilir.  Hazırlıksız başlatma kullanılarak önlenebilir [uygulama çalışmaya sıcak] [ AppWarmup] Azure App Service'te.  Yeni bilgi işlem kaynaklarını başlatılan uygulamalar soğuk hale geldiğinde başlatma işlemi ayrıca çağrıldığından makalesinde açıklanan uygulama başlatma modül kaldırmanıza için de kullanılabilir. 
+> Bir ASP 'nin bir çalışan havuzundan taşınması, o ASP 'deki uygulamaların soğuk başlamasına neden olur.  Bu, uygulamanız yeni işlem kaynaklarında soğuk olarak başlatıldığından isteklerin yavaş çalışmasına neden olabilir.  Azure App Service ' deki [uygulamanın ısınma özelliği][AppWarmup] kullanılarak soğuk başlatmaya kaçınılabilir.  Makalede açıklanan uygulama başlatma modülü, uygulamalar yeni işlem kaynaklarında soğuk başladığında başlatma işlemi de çağrıldığı için de soğuk başlangıçları için de kullanılır. 
 > 
 > 
 
 ## <a name="getting-started"></a>Başlarken
-App Service ortamları ile çalışmaya başlamak için bkz: [nasıl için oluşturma bir App Service ortamı][HowtoCreateASE]
+App Service ortamları ile çalışmaya başlamak için bkz. [nasıl App Service ortamı oluşturma][HowtoCreateASE]
 
 <!--Image references-->
 [1]: ./media/app-service-web-scale-a-web-app-in-an-app-service-environment/aseappscale-aspblade.png
@@ -75,12 +74,12 @@ App Service ortamları ile çalışmaya başlamak için bkz: [nasıl için oluş
 
 <!--Links-->
 [WhatisASE]: app-service-app-service-environment-intro.md
-[ScaleWebapp]: ../web-sites-scale.md
+[ScaleWebapp]: ../manage-scale-up.md
 [HowtoCreateASE]: app-service-web-how-to-create-an-app-service-environment.md
 [HowtoConfigureASE]: app-service-web-configure-an-app-service-environment.md
 [CreateWebappinASE]: app-service-web-how-to-create-a-web-app-in-an-ase.md
 [Appserviceplans]: ../overview-hosting-plans.md
 [AppServicePricing]: https://azure.microsoft.com/pricing/details/app-service/ 
 [ASEAutoscale]: app-service-environment-auto-scale.md
-[AppScale]: ../web-sites-scale.md
+[AppScale]: ../manage-scale-up.md
 [AppWarmup]: https://ruslany.net/2015/09/how-to-warm-up-azure-web-app-during-deployment-slots-swap/

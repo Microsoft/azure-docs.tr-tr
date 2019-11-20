@@ -1,0 +1,40 @@
+- name: Genel Bakış
+  items:
+    - name: FarmBeats nedir?
+      href: overview.md
+- name: Öğreticiler
+  expanded: true
+  items:
+    - name: Toprak nemi haritası oluşturma
+      href: generate-soil-moisture-map.md
+    - name: Geçmiş telemetri verilerini alma
+      href: ingest-historical-telemetry-data.md
+- name: Kavramlar
+  items:
+    - name: Tümleştirme desenleri
+      href: integration-patterns.md
+    - name: Algılayıcı iş ortağı tümleştirmesi
+      href: sensor-partner-integration.md
+    - name: Görüntüleme iş ortağı tümleştirmesi
+      href: imagery-partner-integration.md
+- name: Nasıl Yapılır Kılavuzları
+  items:
+    - name: FarmBeats'i dağıtma
+      href: prepare-for-deployment.md
+    - name: Grupları yönetme
+      href: manage-farms.md
+    - name: Algılayıcı verilerini alma
+      href: get-sensor-data-from-sensor-partner.md
+    - name: Haritalar oluşturma
+      href: generate-maps.md
+    - name: Kuralları yapılandırma ve uyarıları yönetme
+      href: configure-rules-alerts.md
+    - name: Dron görüntülerini alma
+      href: get-drone-imagery.md
+- name: Sorun giderme
+  items:
+    - name: FarmBeats'in sorunlarını giderme
+      href: troubleshoot-project-farmbeats.md
+- name: Başvuru
+  items: null
+  href: references-for-farmbeats.md

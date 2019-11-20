@@ -5,24 +5,29 @@ services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: include
-ms.date: 03/04/2019
+ms.date: 10/09/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: de9bc91e438ff694c96966486908c54562e93902
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 2e4ad3d54420d316be68f720e6bb909e28b73ed6
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188276"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73489052"
 ---
-İş ortakları tarafından sunulan hizmetler hakkında daha fazla bilgi için bu bölümdeki bağlantılar kontrol edebilirsiniz. Aşağıdaki bölümde, dal cihaz iş ortağı listede yoksa bizimle dal cihaz sağlayıcınız vardır. Bunlar bize bir e-posta göndererek iletişime geçebilirsiniz azurevirtualwan@microsoft.com.
+İş ortakları tarafından sunulan hizmetler hakkında daha fazla bilgi için bu bölümdeki bağlantıları kontrol edebilirsiniz. Dal cihazı ortağınız aşağıdaki bölümde listelenmiyorsa, dal cihaz sağlayıcınızın bizimle iletişim kurun. azurevirtualwan@microsoft.comadresine bir e-posta göndererek bizimle iletişim kurabilirler.
 
 |İş Ortakları|
 |---|
-|[Barracuda ağlar](https://www.barracuda.com/AzurevWAN)|
-| [Denetim noktası](https://www.checkpoint.com/solutions/microsoft-azure-virtual-wan/) |
-| [Citrix](https://www.citrix.com/global-partners/microsoft/sd-wan-for-azure-virtual-wan.html)|
-|[Netfoundry](https://netfoundry.io/solutions/netfoundry-for-microsoft-azure-virtual-wan/)|
-|[Palo Alto Networks tarafından sağlanan](https://researchcenter.paloaltonetworks.com/2018/09/azure-vwan-integration/) |
-|[Riverbed teknolojisi](https://www.riverbed.com/go/steelconnect-azurewan.html)|
 |[128 teknolojisi](https://www.128technology.com/partners/azure) |
+|[Barçcuda ağları](https://www.barracuda.com/AzurevWAN)|
+| [Check Point](https://www.checkpoint.com/solutions/microsoft-azure-virtual-wan/) |
+| [Yardımıyla](https://www.citrix.com/global-partners/microsoft/sd-wan-for-azure-virtual-wan.html)|
+| [Cloudgenx](https://www.cloudgenix.com/microsoft-azure/) |
+| [Fortinet](https://www.fortinet.com/azure-vwan) |
+| [Netlen Ry](https://netfoundry.io/solutions/netfoundry-for-microsoft-azure-virtual-wan/)|
+|[Nuage (Nokia)](https://www.nuagenetworks.net/our-partners/nuage-networks-virtualized-cloud-interconnect-for-azure/)
+|[Palo Alto ağları](https://researchcenter.paloaltonetworks.com/2018/09/azure-vwan-integration/) |
+|[Riveryatak teknolojisi](https://www.riverbed.com/go/steelconnect-azurewan.html)|
+|[Gümüş yoğun](https://www.silver-peak.com/company/tech-partners/cloud/microsoft-azure)|
+| [Ekler](https://www.versa-networks.com/partners/microsoft-azure-virtual-WAN) |

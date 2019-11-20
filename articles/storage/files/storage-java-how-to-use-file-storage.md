@@ -1,20 +1,18 @@
 ---
 title: Java ile Azure dosyaları için geliştirme | Microsoft Docs
-description: Java uygulamalarını ve dosya verilerini depolamak için Azure dosyaları'nı kullanma hizmetlerini geliştirmeyi öğrenin.
-services: storage
+description: Dosya verilerini depolamak için Azure dosyaları kullanan Java uygulamaları ve hizmetleri geliştirmeyi öğrenin.
 author: roygara
 ms.service: storage
-ms.devlang: Java
-ms.topic: article
+ms.topic: conceptual
 ms.date: 09/19/2017
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 238e5971e79b192e0ef422dcd452859ff7566580
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 28a280ea7c3bf9ef84a1fff05da5090ed526fb12
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64721673"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73837469"
 ---
 # <a name="develop-for-azure-files-with-java"></a>Java ile Azure dosyaları için geliştirme
 [!INCLUDE [storage-selector-file-include](../../../includes/storage-selector-file-include.md)]
@@ -22,21 +20,21 @@ ms.locfileid: "64721673"
 [!INCLUDE [storage-check-out-samples-java](../../../includes/storage-check-out-samples-java.md)]
 
 ## <a name="about-this-tutorial"></a>Bu öğretici hakkında
-Bu öğretici, dosya verilerini depolamak için Azure dosyaları'nı kullanma uygulamaları veya hizmetleri geliştirmek için Java kullanmanın temellerini gösterir. Bu öğreticide, biz bir konsol uygulaması oluşturun ve nasıl Java ve Azure dosyaları ile temel Eylemler gerçekleştirileceğini göstereceğiz:
+Bu öğretici, dosya verilerini depolamak için Azure dosyaları kullanan uygulamaları veya hizmetleri geliştirmek üzere Java kullanmanın temellerini gösterir. Bu öğreticide, bir konsol uygulaması oluşturacağız ve Java ve Azure dosyaları ile nasıl temel eylemler gerçekleştirileceğini göstereceğiz:
 
-* Oluşturma ve Azure dosya paylaşımını silme
-* Oluşturma ve dizinleri silme
-* Dosyalar ve dizinler bir Azure dosya paylaşımı içindeki numaralandırın
-* Yükleme, indirme ve dosya silme
+* Azure dosya paylaşımları oluşturma ve silme
+* Dizin oluşturma ve silme
+* Azure dosya paylaşımındaki dosyaları ve dizinleri listeleme
+* Dosya yükleme, indirme ve silme
 
 > [!Note]  
-> Azure dosyaları SMB üzerinden erişilebildiğinden, standart Java g/ç sınıflarını kullanarak Azure dosya paylaşımına erişen uygulamalar yazmak mümkündür. Bu makalede, Azure depolama Java kullanan SDK'yı kullanan uygulamaların nasıl yazılacağı anlatmaktadır [Azure dosya REST API'sini](https://docs.microsoft.com/rest/api/storageservices/file-service-rest-api) Azure dosyaları'na bahsedeceğiz.
+> Azure dosyalarına SMB üzerinden erişilebildiğinden, standart Java g/ç sınıflarını kullanarak Azure dosya paylaşımında erişim sağlayan uygulamalar yazmak mümkündür. Bu makalede, Azure dosyaları ile iletişim sağlamak için [REST API](https://docs.microsoft.com/rest/api/storageservices/file-service-rest-api) Azure Storage Java SDK 'sını kullanan uygulamaların nasıl yazılacağı açıklanır.
 
 ## <a name="create-a-java-application"></a>Java uygulaması oluşturma
-Örnekleri oluşturmak için Java Development Kit (JDK) gerekir ve [Java için Azure depolama SDK'sı](https://github.com/Azure/azure-storage-java). Ayrıca bir Azure depolama hesap oluşturmuş olmanız.
+Örnekleri derlemek için Java Geliştirme Seti (JDK) ve [Java Için Azure depolama SDK 'sı](https://github.com/Azure/azure-storage-java)gerekir. Ayrıca bir Azure depolama hesabı oluşturmuş olmanız gerekir.
 
-## <a name="set-up-your-application-to-use-azure-files"></a>Azure dosyaları'nı kullanmak için uygulamanızı ayarlama
-Azure depolama API'leri kullanmak için burada Depolama hizmetinden erişmek için istediğinize Java dosyasının en üstüne aşağıdaki ifadeyi ekleyin.
+## <a name="set-up-your-application-to-use-azure-files"></a>Uygulamanızı Azure dosyalarını kullanacak şekilde ayarlama
+Azure depolama API 'Lerini kullanmak için aşağıdaki ifadeyi, ' den depolama hizmetine erişmeyi planladığınız Java dosyasının en üstüne ekleyin.
 
 ```java
 // Include the following imports to use blob APIs.
@@ -44,8 +42,8 @@ import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.file.*;
 ```
 
-## <a name="set-up-an-azure-storage-connection-string"></a>Bir Azure depolama bağlantı dizesi ayarlama
-Azure dosyaları'nı kullanmak için Azure depolama hesabınıza bağlanmanız gerekir. Depolama hesabınıza bağlanmak için kullanacağınız bir bağlantı dizesini yapılandırmak için ilk adım olacaktır. Şimdi bunu yapmak için statik bir değişken tanımlayın.
+## <a name="set-up-an-azure-storage-connection-string"></a>Azure depolama bağlantı dizesi ayarlama
+Azure dosyalarını kullanmak için Azure depolama hesabınıza bağlanmanız gerekir. İlk adım, depolama hesabınıza bağlanmak için kullanacağımız bir bağlantı dizesi yapılandırmak olacaktır. Bunu yapmak için bir statik değişken tanımlayalim.
 
 ```java
 // Configure the connection-string with your values
@@ -56,12 +54,12 @@ public static final String storageConnectionString =
 ```
 
 > [!NOTE]
-> Your_storage_account_name ve your_storage_account_key depolama hesabınız için gerçek değerlerle değiştirin.
+> Your_storage_account_name ve your_storage_account_key değerini depolama hesabınızın gerçek değerleriyle değiştirin.
 > 
 > 
 
-## <a name="connecting-to-an-azure-storage-account"></a>Bir Azure depolama hesabına bağlanma
-Depolama hesabınıza bağlanmak için kullanmanız gerekir **CloudStorageAccount** nesnesinin bir bağlantı dizesi, **ayrıştırma** yöntemi.
+## <a name="connecting-to-an-azure-storage-account"></a>Azure depolama hesabına bağlanma
+Depolama hesabınıza bağlanmak için, **Cloudstorageaccount** nesnesini kullanarak bir bağlantı dizesini **ayrıştırma** yöntemine geçirerek kullanmanız gerekir.
 
 ```java
 // Use the CloudStorageAccount object to connect to your storage account
@@ -72,24 +70,24 @@ try {
 }
 ```
 
-**CloudStorageAccount.parse** bir try/catch bloğu içinde koymak ihtiyacınız olacak şekilde bir InvalidKeyException oluşturur.
+**Cloudstorageaccount. Parse** bir ınvalidkeyexception oluşturur, bu nedenle bunu bir try/catch bloğunun içine koymanız gerekir.
 
 ## <a name="create-an-azure-file-share"></a>Azure dosya paylaşımı oluşturma
-Tüm dosyalar ve dizinler Azure dosyaları'nda adlı bir kapsayıcı içinde bulunan bir **paylaşımı**. Depolama hesabınızın hesap kapasitenizi verdiğinden çok paylaşımları olabilir. Bir paylaşımı ve içeriği erişimi elde etmek için bir Azure dosyaları istemci kullanmanız gerekir.
+Azure dosyalarındaki tüm dosyalar ve dizinler, **Share**adlı bir kapsayıcıda bulunur. Depolama hesabınızda, hesap kapasiteniz izin verdiğinden çok sayıda paylaşım olabilir. Bir paylaşıma ve içeriğine erişim sağlamak için bir Azure dosyaları istemcisi kullanmanız gerekir.
 
 ```java
 // Create the Azure Files client.
 CloudFileClient fileClient = storageAccount.createCloudFileClient();
 ```
 
-Azure dosyaları İstemcisi'ni kullanarak bir paylaşım başvuru edinebilirsiniz.
+Azure dosyaları istemcisini kullanarak bir paylaşıma yönelik bir başvuru elde edebilirsiniz.
 
 ```java
 // Get a reference to the file share
 CloudFileShare share = fileClient.getShareReference("sampleshare");
 ```
 
-Aslında paylaşımı oluşturmak için kullanmak **Createıfnotexists** CloudFileShare nesnesinin yöntemi.
+Paylaşımı gerçekten oluşturmak için CloudFileShare nesnesinin **Createifnotexists** metodunu kullanın.
 
 ```java
 if (share.createIfNotExists()) {
@@ -97,10 +95,10 @@ if (share.createIfNotExists()) {
 }
 ```
 
-Bu noktada, **paylaşmak** adlı bir paylaşım için bir başvuru tutan **sampleshare**.
+Bu noktada, **Share** **sampleshare**adlı bir paylaşımın başvurusunu barındırır.
 
-## <a name="delete-an-azure-file-share"></a>Azure dosya paylaşımını Sil
-Bir paylaşımı siliniyor yapılır çağırarak **deleteIfExists** CloudFileShare nesnesi üzerinde yöntemi. Yapan örnek kod aşağıda verilmiştir.
+## <a name="delete-an-azure-file-share"></a>Azure dosya paylaşımından silme
+Bir paylaşımın silinmesi, CloudFileShare nesnesinde **Deleteifexists** yöntemi çağrılarak yapılır. Örnek kod aşağıda verilmiştir.
 
 ```java
 try
@@ -123,7 +121,7 @@ try
 ```
 
 ## <a name="create-a-directory"></a>Dizin oluşturma
-Ayrıca, depolama, yerine tümünün kök dizininde alt dizinlerin içindeki dosyaları koyarak de düzenleyebilirsiniz. Azure dosyaları hesabınıza izin verdiği sayıda dizin oluşturmanıza olanak sağlar. Aşağıdaki kodu adlı bir alt dizinde oluşturacak **sampledir** kök dizininin altındaki.
+Ayrıca, dosyaları kök dizinde kullanmak yerine alt dizinlere yerleştirerek depolamayı düzenleyebilirsiniz. Azure dosyaları, hesabınızın izin verdiği sayıda dizin oluşturmanıza olanak sağlar. Aşağıdaki kod, kök dizin altında **sampledir** adlı bir alt dizin oluşturacak.
 
 ```java
 //Get a reference to the root directory for the share.
@@ -140,7 +138,7 @@ if (sampleDir.createIfNotExists()) {
 ```
 
 ## <a name="delete-a-directory"></a>Bir dizini silme
-Hala dosyalarını içeren bir dizin ya da diğer dizinleri silinemiyor unutulmamalıdır rağmen bir dizini silme basit bir görev olduğundan.
+Bir dizini silme işlemi, hala dosyalar veya diğer dizinler içeren bir dizini silememenizin belirtilemediği halde, basit bir görevdir.
 
 ```java
 // Get a reference to the root directory for the share.
@@ -155,8 +153,8 @@ if ( containerDir.deleteIfExists() ) {
 }
 ```
 
-## <a name="enumerate-files-and-directories-in-an-azure-file-share"></a>Dosyalar ve dizinler bir Azure dosya paylaşımı içindeki numaralandırın
-Bir paylaşımı içindeki dosyalara ve dizinlere listesini kolayca yapılır çağırarak **listFilesAndDirectories** CloudFileDirectory başvuru üzerinde. Yöntemi, üzerinde yineleme ListFileItem nesnelerin bir listesini döndürür. Örnek olarak, aşağıdaki kod, dosyalar ve dizinler kök dizin içinde listelenir.
+## <a name="enumerate-files-and-directories-in-an-azure-file-share"></a>Azure dosya paylaşımındaki dosyaları ve dizinleri listeleme
+Bir paylaşımdaki dosya ve dizinlerin listesini almak, bir CloudFileDirectory başvurusunda **Listfilesanddizinler** çağrılarak kolayca yapılır. Yöntemi, yineleyebilir Listfileıtem nesnelerinin bir listesini döndürür. Örnek olarak, aşağıdaki kod kök dizinin içindeki dosya ve dizinleri listeler.
 
 ```java
 //Get a reference to the root directory for the share.
@@ -168,16 +166,16 @@ for ( ListFileItem fileItem : rootDir.listFilesAndDirectories() ) {
 ```
 
 ## <a name="upload-a-file"></a>Dosyayı karşıya yükleme
-Bu bölümde, bir paylaşım kök dizini üzerine yerel depodan bir dosyayı karşıya yüklemeyi öğreneceksiniz.
+Bu bölümde yerel depolama alanından bir paylaşımın kök dizinine dosya yüklemeyi öğreneceksiniz.
 
-Bir dosyayı karşıya yüklemeyi ilk adımı, bulunduğu dizinine başvuru elde edilir. Çağrı yaparak bunu **getRootDirectoryReference** Paylaşım nesnesinin yöntemi.
+Bir dosyayı karşıya yüklemek için ilk adım, bulunması gereken dizine bir başvuru elde etmelidir. Bunu, Share nesnesinin **Getrootdirectoryreference** yöntemini çağırarak yapabilirsiniz.
 
 ```java
 //Get a reference to the root directory for the share.
 CloudFileDirectory rootDir = share.getRootDirectoryReference();
 ```
 
-Paylaşım kök dizini başvuru olduğuna göre üzerine aşağıdaki kodu kullanarak bir dosyayı karşıya yükleyebilirsiniz.
+Artık paylaşımın kök dizinine başvurunuz olduğuna göre, aşağıdaki kodu kullanarak bir dosyayı üzerine yükleyebilirsiniz.
 
 ```java
         // Define the path to a local file.
@@ -188,7 +186,7 @@ Paylaşım kök dizini başvuru olduğuna göre üzerine aşağıdaki kodu kulla
 ```
 
 ## <a name="download-a-file"></a>Dosya indirme
-Azure dosyaları karşı gerçekleştirir daha sık operations dosyaları indirmek için biridir. Aşağıdaki örnekte, kod SampleFile.txt indirir ve içeriğini görüntüler.
+Azure dosyalarına karşı gerçekleştirdiğiniz daha sık gerçekleştirilen işlemlerden biri dosyaları indirilecektir. Aşağıdaki örnekte, kod SampleFile. txt ' yi indirir ve içeriğini görüntüler.
 
 ```java
 //Get a reference to the root directory for the share.
@@ -205,7 +203,7 @@ System.out.println(file.downloadText());
 ```
 
 ## <a name="delete-a-file"></a>Dosyayı silme
-Başka bir yaygın Azure dosyaları dosya silme işlemidir. Aşağıdaki kod SampleFile.txt adlı bir dizin içinde depolanan adlı bir dosya siler **sampledir**.
+Başka bir yaygın Azure dosyaları işlemi dosya silme işlemidir. Aşağıdaki kod SampleFile. txt adlı bir dosyayı **sampledir**adlı bir dizin içinde saklı olarak siler.
 
 ```java
 // Get a reference to the root directory for the share.
@@ -224,12 +222,12 @@ if ( file.deleteIfExists() ) {
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Diğer Azure depolama API'leri hakkında daha fazla bilgi edinmek istiyorsanız, aşağıdaki bağlantıları izleyin.
+Diğer Azure depolama API 'Leri hakkında daha fazla bilgi edinmek istiyorsanız bu bağlantıları izleyin.
 
-* [Java geliştiricileri için Azure](/java/azure)/)
-* [Java için Azure depolama SDK'si](https://github.com/azure/azure-storage-java)
-* [Azure depolama SDK'sı Android için](https://github.com/azure/azure-storage-android)
-* [Azure Depolama İstemcisi SDK Başvurusu](http://dl.windowsazure.com/storage/javadoc/)
+* [Java geliştiricileri Için Azure](/java/azure)/)
+* [Java için Azure depolama SDK 'Sı](https://github.com/azure/azure-storage-java)
+* [Android için Azure depolama SDK 'Sı](https://github.com/azure/azure-storage-android)
+* [Azure Depolama İstemcisi SDK Başvurusu](https://javadoc.io/doc/com.microsoft.azure/azure-core/0.8.0/index.html)
 * [Azure Depolama Hizmetleri REST API'si](https://msdn.microsoft.com/library/azure/dd179355.aspx)
 * [Azure Depolama Ekibi Blog’u](https://blogs.msdn.com/b/windowsazurestorage/)
 * [AzCopy Komut Satırı Yardımcı Programı ile veri aktarımı](../common/storage-use-azcopy.md)

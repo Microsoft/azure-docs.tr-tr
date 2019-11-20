@@ -2,76 +2,76 @@
 author: cynthn
 ms.service: virtual-machines
 ms.topic: include
-ms.date: 01/27/2019
+ms.date: 09/30/2019
 ms.author: cynthn
-ms.openlocfilehash: ac400c86af8236ff5d67b8b6fbf99f6f4b1d36c9
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 93a2554b5d3cc24e1b5fc1e3d0f18ed1bfe0579c
+ms.sourcegitcommit: 5f0f1accf4b03629fcb5a371d9355a99d54c5a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188344"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71692053"
 ---
-Toplama, görüntüleme ve çözümleme tanılama Vm'lerinizi izleme için birçok fırsat avantajlarından yararlanın ve verilerini günlüğe kaydedebilirsiniz. Basit yapmak için [izleme](../articles/azure-monitor/overview.md) VM'NİZDE, Azure portalında sanal makine için genel bakış ekranını kullanabilirsiniz. Kullanabileceğiniz [uzantıları](../articles/virtual-machines/windows/extensions-features.md) Vm'lerinizde ek ölçüm verilerini toplamak için tanılamayı yapılandırmak için. Gibi daha gelişmiş izleme seçeneklerini kullanabilirsiniz [Application Insights](../articles/azure-monitor/app/app-insights-overview.md) ve [Log Analytics](../articles/azure-monitor/log-query/log-query-overview.md).
+Azure 'da barındırılan VM 'lerin önemli büyümesi sayesinde, destekledikleri uygulamaları ve altyapı hizmetlerini etkileyen performans ve sistem durumu sorunlarını belirlemek önemlidir. Temel izleme, Azure ile varsayılan olarak, CPU kullanımı, disk kullanımı, bellek kullanımı ve konak Hiper Yöneticisi tarafından toplanan ağ trafiği ölçüm türlerine göre dağıtılır. Konuk işletim sisteminden sanal makinelerinizdeki tanılamayı yapılandırmak için ek ölçüm ve günlük verileri, [uzantıları](../articles/virtual-machines/windows/extensions-features.md) kullanılarak toplanabilir.
+
+VM içinde çalışan konuk işletim sistemi, .NET tabanlı veya Java Web uygulaması bileşenlerinde performans ve sistem durumu sorunlarını algılamak ve tanılamak için, Azure Izleyici VM'ler için Azure İzleyici gibi kapsamlı özelliklerle merkezi bir izleme sağlar ve Application Insights.
 
 ## <a name="diagnostics-and-metrics"></a>Tanılama ve ölçümler 
 
-Ayarlama ve izleme koleksiyonunu [tanılama verilerini](https://docs.microsoft.com/cli/azure/vm/diagnostics) kullanarak [ölçümleri](../articles/monitoring-and-diagnostics/monitoring-overview-metrics.md) Azure portalı, Azure CLI, Azure PowerShell ve programlama uygulama programlama arabirimleri (API). Örneğin, şunları yapabilirsiniz:
+Azure portal, Azure CLı, Azure PowerShell ve programlama uygulamaları programlama arabirimleri (API 'Ler) ' nde [ölçümleri](../articles/monitoring-and-diagnostics/monitoring-overview-metrics.md) kullanarak [Tanılama verilerinin](https://docs.microsoft.com/cli/azure/vm/diagnostics) toplanmasını ayarlayabilir ve izleyebilirsiniz. Örneğin, şunları yapabilirsiniz:
 
-- **Temel ölçümler için VM gözlemleyin.** Azure portalının genel bakış ekranda gösterilen temel ölçümleri CPU kullanımı, ağ kullanımı, toplam disk bayt ve saniye başına disk işlemleri içerir.
+- **VM için temel ölçümleri gözlemleyin.** Azure portal genel bakış ekranında, gösterilen temel ölçümler CPU kullanımı, ağ kullanımı, disk baytlarının toplamı ve saniye başına disk işlemleri içerir.
 
-- **Önyükleme tanılaması toplanmasını etkinleştirmek ve Azure portalını kullanarak görüntüleyebilirsiniz.** Kendi görüntünüzü Azure veya hatta bir platform görüntüleri önyükleme yapma sırasında neden VM önyüklenebilir olmayan bir duruma gelmesinin birçok nedeni olabilir. Tıklayarak bir VM oluşturduğunuzda önyükleme tanılamaları kolayca etkinleştirebilirsiniz **etkin** ayarlar ekranının izleme bölümünde önyükleme tanılaması için.
+- **Önyükleme tanılaması koleksiyonunu etkinleştirin ve Azure portal kullanarak görüntüleyin.** Kendi görüntünüzü Azure 'a getirirken veya platform görüntülerinden birini önyüklerken, bir sanal makinenin önyüklenebilir olmayan bir duruma kaç nedenden kaynaklanabilir. Ayarlar ekranının Izleme bölümünde önyükleme tanılaması için **Etkinleştir** ' i TıKLATARAK bir VM oluşturduğunuzda, önyükleme tanılamayı kolayca etkinleştirebilirsiniz.
 
-    Vm'lerde önyükleme yapılırken önyükleme tanılama Aracısı önyükleme çıktısını yakalar ve Azure depolama alanında depolar. Bu veriler VM önyükleme sorunlarını gidermek için kullanılabilir. Komut satırı araçları'ndan bir VM oluşturduğunuzda önyükleme tanılamaları otomatik olarak etkinleştirilmez. Önyükleme tanılamalarını etkinleştirmeden önce, önyükleme günlüklerini depolamak için bir depolama hesabı oluşturulmalıdır. Azure portalında önyükleme tanılaması etkinleştirirseniz, otomatik olarak bir depolama hesabı oluşturulur.
+    VM 'Ler önyüklemesinde, önyükleme tanılama Aracısı önyükleme çıkışını yakalar ve Azure Storage 'da depolar. Bu veriler VM önyükleme sorunlarını gidermek için kullanılabilir. Komut satırı araçlarından bir VM oluşturduğunuzda önyükleme tanılaması otomatik olarak etkinleştirilmez. Önyükleme tanılamalarını etkinleştirmeden önce, önyükleme günlüklerini depolamak için bir depolama hesabı oluşturulmalıdır. Azure portal önyükleme tanılamayı etkinleştirirseniz, sizin için otomatik olarak bir depolama hesabı oluşturulur.
 
-    Önyükleme tanılaması etkinleştirmediyseniz, sanal Makineyi oluştururken, her zaman daha sonra kullanarak etkinleştirebilirsiniz [Azure CLI](https://docs.microsoft.com/cli/azure/vm/boot-diagnostics), [Azure PowerShell](https://docs.microsoft.com/powershell/module/az.compute/set-azvmbootdiagnostic), veya bir [Azure Resource Manager şablonu](../articles/virtual-machines/windows/extensions-diagnostics-template.md).
+    VM oluşturulduğunda önyükleme tanılamayı etkinleştirmediyseniz, daha sonra [Azure CLI](https://docs.microsoft.com/cli/azure/vm/boot-diagnostics), [Azure PowerShell](https://docs.microsoft.com/powershell/module/az.compute/set-azvmbootdiagnostic)veya bir [Azure Resource Manager şablonu](../articles/virtual-machines/windows/extensions-diagnostics-template.md)kullanarak her zaman etkinleştirebilirsiniz.
 
-- **Konuk işletim sistemi tanılama verilerinin toplanmasını sağlar.** Bir VM oluşturduğunuzda, konuk işletim sistemi Tanılama'yı etkinleştirmek için ayarlar ekranında fırsatına sahip olursunuz. Tanılama verilerinin toplanmasını etkinleştirdiğinizde [Linux için IaaSDiagnostics uzantısı](../articles/virtual-machines/linux/diagnostic-extension.md) veya [IaaSDiagnostics uzantısı Windows](../articles/virtual-machines/windows/ps-extensions-diagnostics.md) ek toplamanızı sağlayan VM eklenir disk, CPU ve bellek verileri.
+- **Konuk işletim sistemi Tanılama verileri koleksiyonunu etkinleştirin.** Bir VM oluşturduğunuzda, Konuk işletim sistemi tanılamayı etkinleştirmek için Ayarlar ekranında fırsat alırsınız. Tanılama verileri koleksiyonunu etkinleştirdiğinizde, [Linux Için ıaasdiagnostics uzantısı](../articles/virtual-machines/linux/diagnostic-extension.md) veya [Windows Için ıaasdiagnostics](../articles/virtual-machines/windows/ps-extensions-diagnostics.md) uzantısı, ek disk, CPU ve bellek VERILERI toplamanıza olanak sağlayan sanal makineye eklenir.
 
-    Toplanan Tanılama verileri kullanarak, sanal makineleriniz için otomatik ölçeklendirme yapılandırabilirsiniz. Günlükleri, performans oldukça doğru olmadığı durumlarda size bildirmek için uyarılar ayarlayın ve verileri depolamak için de yapılandırabilirsiniz.
+    Toplanan tanılama verilerini kullanarak, sanal makinelerinize yönelik otomatik ölçeklendirmeyi yapılandırabilirsiniz. Ayrıca, verileri depolamak için [Azure Izleyici günlüklerini](../articles/azure-monitor/platform/data-platform-logs.md) yapılandırabilir ve performansı doğru olmadığında size bildirmek üzere uyarılar ayarlayabilirsiniz.
 
 ## <a name="alerts"></a>Uyarılar
 
-Oluşturabileceğiniz [uyarılar](../articles/azure-monitor/platform/alerts-overview.md) belirli performans ölçümlerine bağlı. Ortalama CPU kullanımı belirli bir eşiği aştığında veya kullanılabilir boş disk alanı belirli bir miktarın altına düşünceye, hakkında uyarı almak sorunları örnekleridir. Uyarılar yapılandırılabilir [Azure portalında](../articles/azure-monitor/platform/alerts-classic-portal.md)kullanarak [Azure PowerShell](../articles/azure-monitor/platform/alerts-classic-portal.md#with-powershell), veya [Azure CLI](../articles/azure-monitor/platform/alerts-classic-portal.md#with-azure-cli).
+Belirli performans ölçümlerine göre [Uyarılar](../articles/azure-monitor/platform/alerts-overview.md) oluşturabilirsiniz. Ortalama CPU kullanımı belirli bir eşiği aştığında veya kullanılabilir boş disk alanı belirli bir miktarın altına düştüğünde, sorun hakkında uyarı alabilirsiniz. Uyarılar [Azure Portal](../articles/azure-monitor/platform/alerts-metric.md#create-with-azure-portal), [Azure Resource Manager ŞABLONLARı](../articles/azure-monitor/platform/alerts-metric-create-templates.md)veya [Azure CLI](../articles/azure-monitor/platform/alerts-metric.md#with-azure-cli)kullanılarak yapılandırılabilir.
 
 ## <a name="azure-service-health"></a>Azure Hizmet Durumu
 
-[Azure hizmet durumu](../articles/service-health/service-health-overview.md) Azure hizmetlerindeki sorunlardan etkilendiğiniz, ve yardımcı olur, hazırlama için yaklaşan planlı bakım için kişiselleştirilmiş rehberlik ve destek sağlar. Azure hizmet durumu sizi ve takımlarınızı hedefli ve esnek bildirimleri kullanarak sizi uyarır.
+Azure [hizmet durumu](../articles/service-health/service-health-overview.md) , Azure hizmetlerindeki sorunlardan etkilendiğiniz durumlarda kişiselleştirilmiş rehberlik ve destek sağlar ve yaklaşan planlı bakımın hazırlanmasına yardımcı olur. Azure hizmet durumu, hedeflenen ve esnek bildirimleri kullanarak sizi ve takımlarınızı uyarır.
 
 ## <a name="azure-resource-health"></a>Azure Kaynak Durumu
 
-[Azure kaynak durumu](../articles/service-health/resource-health-overview.md) tanılamanıza ve bir Azure sorunu kaynaklarınızı etkilediğinde destek almanıza yardımcı olur. Kaynaklarınızın güncel ve geçmiş durumu hakkında bilgiler sağlar ve sorunları azaltmaya yardımcı olur. Kaynak Durumu, Azure hizmet sorunları ile ilgili yardıma ihtiyacınız olduğunda teknik destek sağlar.
+[Azure Kaynak durumu](../articles/service-health/resource-health-overview.md) , kaynaklarınızı etkileyen bir Azure sorunu tanılamanıza ve destek almanıza yardımcı olur. Kaynaklarınızın hem geçerli durumu hem de geçmişteki durumları hakkında bilgi verir ve sorunların etkisini azaltmanıza katkıda bulunur. Kaynak durumu, Azure hizmetleriyle ilgili sorunlarda yardıma ihtiyacınız olduğunda teknik destek sağlar.
 
 ## <a name="azure-activity-log"></a>Azure etkinlik günlüğü
 
-[Azure etkinlik günlüğü](../articles/azure-monitor/platform/activity-logs-overview.md) oluşan Azure'da abonelik düzeyindeki olayların sağlayan bir abonelik günlüktür. Günlük verileri, hizmet durumu olayları güncelleştirmelerinin Azure Resource Manager işletimsel verileri içerir. Sanal Makineniz için günlüğü görüntülemek için Azure portalında etkinlik günlüğü tıklayabilirsiniz.
+[Azure etkinlik günlüğü](../articles/azure-monitor/platform/activity-logs-overview.md) , Azure 'da oluşan abonelik düzeyindeki olaylara ilişkin Öngörüler sağlayan bir abonelik günlüğü. Günlük, Azure Resource Manager işletimsel verilerden hizmet durumu olaylarında güncelleştirmelere kadar bir veri aralığı içerir. VM 'nizin günlüğünü görüntülemek için Azure portal etkinlik günlüğü ' ne tıklayabilirsiniz.
 
-Etkinlik günlüğü ile yapabileceğiniz çok şey bazıları şunlardır:
+Etkinlik günlüğünde yapabileceğiniz bazı şeyler şunlardır:
 
-- Oluşturma bir [bir etkinlik günlüğü olayında uyarı](../articles/azure-monitor/platform/activity-logs-overview.md).
-- [Olay Hub'ına Stream](../articles/azure-monitor/platform/activity-logs-stream-event-hubs.md) alımı üçüncü taraf hizmeti veya Power BI gibi özel bir analiz çözümü için.
-- Power BI kullanarak Analiz [Power BI içerik paketi](https://powerbi.microsoft.com/documentation/powerbi-content-pack-azure-audit-logs/).
-- [Bir depolama hesabına kaydedin](../articles/azure-monitor/platform/archive-activity-log.md) arşivleme veya el ile İnceleme. Günlük profilini kullanarak elde tutma süresi (gün cinsinden) belirtebilirsiniz.
+- [Etkinlik günlüğü olayında uyarı](../articles/azure-monitor/platform/activity-logs-overview.md)oluşturma.
+- Bir üçüncü taraf hizmeti veya Power BI gibi özel analizler tarafından alım için [bir olay hub 'ına akış](../articles/azure-monitor/platform/activity-logs-stream-event-hubs.md) .
+- [Power BI içerik paketini](https://powerbi.microsoft.com/documentation/powerbi-content-pack-azure-audit-logs/)kullanarak Power BI analiz edin.
+- Arşiv veya el ile inceleme için [bir depolama hesabına kaydedin](../articles/azure-monitor/platform/archive-activity-log.md) . Günlük profilini kullanarak saklama süresini (gün olarak) belirtebilirsiniz.
 
-Etkinlik günlüğü verileri kullanarak da erişebilirsiniz [Azure PowerShell](https://docs.microsoft.com/powershell/module/azurerm.insights/), [Azure CLI](https://docs.microsoft.com/cli/azure/monitor), veya [İzleyici REST API'leri](https://docs.microsoft.com/rest/api/monitor/).
+Etkinlik günlüğü verilerine [Azure PowerShell](https://docs.microsoft.com/powershell/module/azurerm.insights/), [Azure CLı](https://docs.microsoft.com/cli/azure/monitor)veya [izleme REST API 'lerini](https://docs.microsoft.com/rest/api/monitor/)kullanarak da erişebilirsiniz.
 
-[Azure tanılama günlükleri](../articles/azure-monitor/platform/diagnostic-logs-overview.md) olan kendi işlemiyle ilgili zengin, sık sık veri sağlayan tarafından sanal makinenizin günlüklerdir. Tanılama günlükleri, VM içinde gerçekleştirilen işlemler hakkında öngörü sağlayan etkinlik günlüğünde farklılık gösterir.
+[Azure Kaynak günlükleri](../articles/azure-monitor/platform/resource-logs-overview.md) , kendi işlemi hakkında zengin ve sık veriler sağlayan, VM 'niz tarafından yayılan günlüklerdir. Kaynak günlükleri, VM 'de gerçekleştirilen işlemler hakkında Öngörüler sunarak etkinlik günlüğünden farklıdır.
 
-Tanılama günlükleri ile yapabileceklerinizden bazıları şunlardır:
+Tanılama günlükleri ile gerçekleştirebileceğiniz işlemlerden bazıları şunlardır:
 
-- [Bir depolama hesabına kaydetmekte](../articles/azure-monitor/platform/archive-diagnostic-logs.md) denetim veya el ile İnceleme. Kaynak tanılama ayarlarını kullanarak elde tutma süresi (gün cinsinden) belirtebilirsiniz.
-- [Event Hubs için bunları Stream](../articles/azure-monitor/platform/diagnostic-logs-stream-event-hubs.md) alımı üçüncü taraf hizmeti veya Power BI gibi özel bir analiz çözümü için.
-- Bunları analiz [Log Analytics](../articles/log-analytics/log-analytics-azure-storage.md).
+- Denetim veya el ile inceleme için [bunları bir depolama hesabına kaydedin](../articles/azure-monitor/platform/archive-diagnostic-logs.md) . Kaynak tanılama ayarlarını kullanarak saklama süresini (gün olarak) belirtebilirsiniz.
+- [Bunları](../articles/azure-monitor/platform/resource-logs-stream-event-hubs.md) bir üçüncü taraf hizmeti veya Power BI gibi özel analizler tarafından alma için Event Hubs.
+- [Log Analytics](../articles/log-analytics/log-analytics-azure-storage.md)ile çözümleyin.
 
 ## <a name="advanced-monitoring"></a>Gelişmiş izleme
 
-- [Azure İzleyici](../articles/azure-monitor/overview.md) bulut izler ve şirket içi Ortamlarınızdaki kullanılabilirliği ve performansı korumak için bir hizmettir. Bu bulut alınan telemetri üzerinde çalışan toplama ve analiz için kapsamlı bir çözüm sunar ve şirket içi Ortamlarınızdaki. Uygulamalarınızın performansını anlamanıza ve uygulamalarla bağlı oldukları kaynakları etkileyen sorunları önceden tespit etmenize yardımcı olur. Bir uzantı yükleyebileceğiniz bir [Linux VM](../articles/virtual-machines/linux/extensions-oms.md) veya [Windows VM](../articles/virtual-machines/windows/extensions-oms.md) günlük verilerini toplamak ve Log Analytics çalışma alanında depolamak için Log Analytics aracısını yükler.
+Azure VM ve sanal makine ölçek kümeleri tarafından desteklenen uygulama veya hizmetin görünürlüğü için, Konuk işletim sistemi veya VM 'de çalışan iş yüküyle ilgili sorunların, uygulamanın kullanılabilirliğini veya performansını etkileyip etkilemediğini anlamak için tanımlanması veya bir uygulamayla ilgili sorun hem [VM'ler için Azure izleyici](../articles/azure-monitor/insights/vminsights-overview.md) hem de [Application Insights](../articles/azure-monitor/app/app-insights-overview.md)etkinleştirin.
 
-    Windows ve Linux Vm'leri için Log Analytics aracısını yükleyerek günlüklerinin toplanması için önerilen yöntem olduğu. Bir VM'ye Log Analytics aracısını yüklemek için en kolay yolu aracılığıyladır [Log Analytics VM uzantısını](../articles/log-analytics/log-analytics-azure-vm-extension.md). Uzantıyı kullanmak yükleme işlemini kolaylaştırır ve aracıyı belirttiğiniz Log Analytics çalışma alanına veri göndermek üzere otomatik olarak yapılandırır. Ayrıca aracı otomatik olarak yükseltilerek her zaman en yeni özellik ve düzeltmelere sahip olmanız sağlanır.
-
-- [Ağ İzleyicisi](../articles/network-watcher/network-watcher-monitoring-overview.md) olduğu ağ ile ilgili olarak, VM'yi ve ilişkili kaynakları izlemenize olanak sağlar. Ağ İzleyicisi Aracısı uzantısı yükleyebileceğiniz bir [Linux VM](../articles/virtual-machines/linux/extensions-nwa.md) veya [Windows VM](../articles/virtual-machines/windows/extensions-nwa.md).
-
-- [VM'ler için Azure İzleyici](../articles/azure-monitor/insights/vminsights-overview.md) Azure sanal makinelerinizi (VM) Windows ve Linux Vm'leri, farklı işlemler ve diğer kaynakları ve dış birbirine bağımlılıkları da dahil olmak üzere, sistem durumu ve performansı çözümleyerek ölçekli olarak izler. işler. 
+VM'ler için Azure İzleyici, Windows ve Linux sanal makinelerinizin farklı süreçler ve diğer kaynaklardaki ve dış süreçlerdeki birbirine bağlı bağımlılıklar dahil olmak üzere, Windows ve Linux VM 'lerinizin performansını ve sistem durumunu analiz ederek ölçeklendirerek Azure sanal makinelerinizi (VM keşfede. Sorun araştırmada ve sanal makinelerinizin kapasitesini değerlendirmekte yardımcı olacak çeşitli eğilim performansı grafikleri içerir. Bağımlılık haritasında, izlenen ve izlenmeyen makineler, işlem ve bu makineler arasında etkin ağ bağlantıları gösterilir ve standart ağ bağlantısı ölçümlerine sahip eğilim grafikleri gösterilmektedir. Application Insights ile birlikte, uygulamanızı izler ve HTTP istekleri, özel durumlar vb. gibi Telemetriyi yakalayın. böylece, VM 'Ler ve uygulamanız arasındaki sorunları ilişkilendirebilmenizi sağlayabilirsiniz. VM'ler için Azure İzleyici tarafından toplanan izleme verilerinden algılanan önemli koşullar hakkında uyarı almak için [Azure izleyici uyarılarını](../articles/azure-monitor/platform/alerts-overview.md) yapılandırın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- İzleyeceğiniz adımlarda size yol [Azure PowerShell ile Windows sanal makine izleme](../articles/virtual-machines/windows/tutorial-monitoring.md) veya [Azure CLI ile Linux sanal makinesi izleme](../articles/virtual-machines/linux/tutorial-monitoring.md).
-- Geçici olarak en iyi uygulamalar hakkında daha fazla bilgi [izleme ve tanılama](https://docs.microsoft.com/azure/architecture/best-practices/monitoring).
+
+- Azure CLı ile [bir Windows sanal makinesini Azure PowerShell](../articles/virtual-machines/windows/tutorial-monitoring.md) veya [Linux sanal makinesini izleme](../articles/virtual-machines/linux/tutorial-monitoring.md)bölümündeki adımları izleyin.
+
+- [İzleme ve tanılama](https://docs.microsoft.com/azure/architecture/best-practices/monitoring)etrafında en iyi uygulamalar hakkında daha fazla bilgi edinin.

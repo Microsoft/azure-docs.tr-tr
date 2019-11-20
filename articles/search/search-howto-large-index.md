@@ -1,109 +1,110 @@
 ---
-title: Dizin büyük veri kümesi yerleşik dizin oluşturucular - Azure Search kullanma
-description: Büyük veri dizini oluşturma veya işlem bakımından yoğun toplu iş modunda dizin oluşturma, kaynak ve zamanlanmış, paralel ve dağıtılmış dizin oluşturma teknikleri stratejileri öğrenin.
-services: search
+title: Yerleşik Dizin oluşturucular kullanarak büyük veri kümesini dizin oluşturma
+titleSuffix: Azure Cognitive Search
+description: Toplu iş modu, kaynak kaynağı oluşturma ve zamanlanan, paralel ve Dağıtılmış dizin oluşturma teknikleri aracılığıyla büyük veri dizinleme veya hesaplama açısından yoğun dizin oluşturma stratejileri.
+manager: nitinme
 author: HeidiSteen
-manager: cgronlun
-ms.service: search
-ms.topic: conceptual
-ms.date: 12/19/2018
 ms.author: heidist
-ms.custom: seodec2018
-ms.openlocfilehash: 8c067b6e238fab2970e5e40f0660a5c7555a8f2e
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: bd158eaf22025a64d7464c632d3f0fa510a4b5a3
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67302221"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72793756"
 ---
-# <a name="how-to-index-large-data-sets-in-azure-search"></a>Büyük veri kümeleri Azure Search dizinleme
+# <a name="how-to-index-large-data-sets-in-azure-cognitive-search"></a>Azure Bilişsel Arama büyük veri kümelerini dizin oluşturma
 
-Veri birimleri büyütmek ya da işleme gereksinimlerine gibi varsayılan dizin stratejileri artık pratik bulabilirsiniz. Azure arama için zamanlanmış ve dağıtılmış iş yükleri için özel kaynak dizin oluşturucu kullanarak verileri karşıya yükleme isteği, nasıl yapı gelen arasında değişen büyük veri kümelerini destekleme için birçok yaklaşım vardır.
+Veri birimlerinin büyümesi veya işlenmesi değiştikçe, basit veya varsayılan dizin oluşturma stratejilerinin artık pratik olmadığını görebilirsiniz. Azure Bilişsel Arama için, bir veri yükleme isteğini nasıl yapılandıracağınıza, zamanlanmış ve dağıtılmış iş yükleri için kaynağa özel bir dizin oluşturucunun kullanılmasına kadar, daha büyük veri kümelerine sahip olmak için çeşitli yaklaşımlar vardır.
 
-Büyük veriler için aynı teknikleri, uzun süre çalışan işlemler için de geçerlidir. Adımlar özellikle özetlenen [paralel dizin](#parallel-indexing) işlem bakımından yoğun dizin oluşturma, görüntü analizi veya doğal dil işleme gibi yararlıdır [bilişsel arama işlem hatları](cognitive-search-concept-intro.md).
+Aynı teknikler de uzun süreli süreçler için de geçerlidir. Özellikle, [paralel dizin oluşturma](#parallel-indexing) bölümünde özetlenen adımlar, bir [AI zenginleştirme ardışık düzeninde](cognitive-search-concept-intro.md)görüntü analizi veya doğal dil işleme gibi yoğun hesaplama gerektiren dizin oluşturma için yararlıdır.
 
-## <a name="batch-indexing"></a>Toplu dizin oluşturma
+Aşağıdaki bölümlerde, büyük miktarlarda veri dizinlemeye yönelik üç teknik araştırılamaz.
 
-Birden çok belge veya kayıtları tek bir istek göndermek için daha büyük bir veri kümesi dizinini oluşturmak için basit mekanizmaları birisidir. Tüm yükü 16 MB altında olduğu sürece, bir toplu karşıya yükleme işleminde en fazla 1000 belge bir isteği işleyebilir. Varsayılarak [ekleme veya güncelleştirme belgeleri REST API](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents), 1000 istek gövdesi belgelerde paketlemeniz gerekir.
+## <a name="option-1-pass-multiple-documents"></a>Seçenek 1: birden çok belge geçirme
 
-Toplu dizin oluşturma, REST veya .NET kullanarak tek tek istekler için ya da dizin oluşturucular aracılığıyla uygulanır. Birkaç dizin oluşturucular farklı sınırlar altında çalışır. Özellikle, Azure Blob dizin toplu iş boyutu 10 belgeleri ortalama belge büyük dolayı ayarlar. Temel dizin oluşturucular için [dizin oluşturucu REST API oluşturma](https://docs.microsoft.com/rest/api/searchservice/Create-Indexer ), ayarlayabileceğiniz `BatchSize` verilerinizi özelliklerini daha iyi eşleşmesi için bu ayarı özelleştirmek için bağımsız değişken. 
+Daha büyük bir veri kümesini dizinlemeye yönelik en basit mekanizmalardan biri, tek bir istekte birden fazla belge veya kayıt gönderkullanmaktır. Tüm yükün 16 MB altında olduğu sürece, bir istek toplu karşıya yükleme işleminde en fazla 1000 belge işleyebilir. Bu sınırlar, .NET SDK 'da [belge ekle REST API](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents) veya [Dizin yöntemi](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.documentsoperationsextensions.index?view=azure-dotnet) kullanıp kullanmayacağınızı uygular. Her iki API için de, her isteğin gövdesinde 1000 belge paketlemeyi yapmanız gerekir.
 
-> [!NOTE]
-> Belge boyutunu tutmak, istekten sorgulanamayan verileri dışlamak unutmayın. Resimler ve diğer ikili veriler doğrudan aranabilir değil ve dizinde depolanan olmamalıdır. Arama sonuçlarında sorgulanamayan veri tümleştirmek için bir URL kaynağına başvuru depolar aranabilir olmayan bir alanı tanımlamanız gerekir.
-
-## <a name="add-resources"></a>Kaynak Ekle
-
-Biri sağlanan hizmetleri [standart fiyatlandırma katmanları](search-sku-tier.md) getiren kapasite hem depolama hem de iş yüklerini (sorguları veya dizin), çoğu zaman yeterince [bölüm ve çoğaltma sayısını artırma ](search-capacity-planning.md) destekleme daha büyük veri kümeleri için belirgin bir çözüm. En iyi sonuçlar için her iki kaynakları gerekir: depolama ve veri alımı iş çoğaltmaları bölümler.
-
-Artan çoğaltmalar ve bölümler maliyetlerinizi artırabilir, Faturalanabilir olayların içindir, ancak sürekli olarak en yüksek yük altında dizin sürece, dizin oluşturma işlemi boyunca ölçek eklemek ve dizin oluşturma konusunda olduktan sonra kaynak düzeylerini aşağı ayarlayın bitti.
-
-## <a name="use-indexers"></a>Dizin oluşturucular kullanma
-
-[Dizin oluşturucular](search-indexer-overview.md) aranabilir içeriği için dış veri kaynaklarına gezinme için kullanılır. Büyük ölçekli dizin oluşturma işlemi için özel olarak tasarlanmış olmakla birlikte, çeşitli dizin oluşturucu özelliklerini daha büyük veri kümelerini destekleme için yararlıdır:
-
-+ Zamanlayıcıları, böylece size, zaman içinde dağılmış, düzenli aralıklarla dizin kullanıma paket olanak tanır.
-+ Zamanlanmış dizin son bilinen durdurma noktadan sürdürebilirsiniz. Bir veri kaynağı bir 24 saatlik pencerede tamamen gezinilemiyor, dizin oluşturucu günde iki yerde kaldığı, dizin oluşturma devam edecek.
-+ Daha küçük bağımsız veri kaynaklarında veri bölümleme paralel işlemeye olanak tanır. Büyük bir veri kümesini daha küçük veri kümeleri halinde bölün ve ardından sıralanabilir birden çok veri kaynağı tanımlarının paralel olarak oluşturun.
+Toplu dizin oluşturma, REST veya .NET kullanan tek istekler veya Dizin oluşturucular aracılığıyla uygulanır. Birkaç Dizin Oluşturucu farklı limitlerde çalışır. Özellikle, Azure Blob dizinlemesi, 10 belge üzerinde toplu iş boyutunu, büyük ortalama belge boyutunu tanımaya göre ayarlar. [Create Indexer REST API](https://docs.microsoft.com/rest/api/searchservice/Create-Indexer)temel alan Dizin oluşturucular için, bu ayarı özelleştirmek üzere `BatchSize` bağımsız değişkenini, verilerinizin özellikleriyle daha iyi eşleşecek şekilde ayarlayabilirsiniz. 
 
 > [!NOTE]
-> Bir dizin oluşturucu yaklaşımı kullanarak yalnızca azure'da seçili veri kaynakları için uygun olacak şekilde dizin oluşturucular veri kaynağı-özgü şunlardır: [SQL veritabanı](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md), [Blob Depolama](search-howto-indexing-azure-blob-storage.md), [tablo depolama](search-howto-indexing-azure-tables.md), [Cosmos DB](search-howto-index-cosmosdb.md).
+> Belge boyutunu aşağı tutmak için, sorgulanabilir olmayan verileri bir dizine eklemekten kaçının. Görüntüler ve diğer ikili veriler doğrudan aranabilir değildir ve dizinde depolanmamalıdır. Sorgulanabilir olmayan verileri arama sonuçlarıyla bütünleştirmek için, kaynağa bir URL başvurusu depolayan aranabilir olmayan bir alan tanımlamalısınız.
 
-## <a name="scheduled-indexing"></a>Dizin oluşturma zamanlandı
+## <a name="option-2-add-resources"></a>2\. seçenek: kaynak ekleme
 
-Dizin Oluşturucu ile zamanlama gibi bilişsel arama ardışık düzeninde görüntü analizi yavaş çalışan işlemlerin yanı sıra büyük veri kümeleri, işlem için önemli bir mekanizmadır. Dizin Oluşturucu işleme bir 24 saatlik penceresi içinde çalışır. İşleme 24 saat içinde tamamlamak için başarısız olursa, Dizin Oluşturucu ile zamanlama davranışları kendi yararınıza çalışabilir. 
+[Standart fiyatlandırma katmanlarından](search-sku-tier.md) birinde sağlanan hizmetler genellikle hem depolama hem de iş yükleri (sorgular ya da dizin oluşturma) için yetersiz kapasiteye sahiptir ve bu sayede [bölüm ve çoğaltmanın artması](search-capacity-planning.md) için açık bir çözüm sayılır daha büyük veri kümelerini koname. En iyi sonuçları elde etmek için, her iki kaynağa de ihtiyacınız vardır: depolama için bölümler ve veri alımı iş çoğaltmaları.
 
-Tasarım gereği, genellikle bir sonraki zamanlanmış aralıkta devam etmeden önce tamamlanmasını bir işlemle dizin oluşturma başlatıldığında belirli aralıklarla zamanlanmış. Ancak, işleme aralığı içinde tamamlanmazsa, dizin oluşturucu (süre bitti çalıştığından) durdurur. Sonraki aralıkta nerede oluştuğunu, son kapalı, sistem tutma ile kaldığı işleme sürdürür izleyin. 
+Çoğaltmaları ve bölümleri artırmak, maliyetinizi artıran etkinliklerdir, ancak en fazla yük altında sürekli olarak dizin oluşturmadığınız sürece, dizin oluşturma işlemi süresince ölçek ekleyebilir ve ardından kaynak düzeylerini dizin oluşturma işleminin süresi boyunca aşağı doğru ayarlayabilirsiniz bitirdikten.
 
-Dizin yüklemelerini birkaç gün genişleme için pratik anlamda, 24 saatlik zaman çizelgesinde dizin oluşturucu koyabilirsiniz. Sürdürür sonraki 24 saat döngüsü için dizin oluştururken en son bilinen iyi belgeyi yeniden başlatır. Bu şekilde, bir dizin oluşturucu, bir dizi tüm işlenmemiş belgeleri işlenene kadar bir gün üzerinden yolu bir belge biriktirme listesi ile çalışabilir. Bu yaklaşımı hakkında daha fazla bilgi için bkz: [Azure Blob depolamada büyük veri kümelerini dizin](search-howto-indexing-azure-blob-storage.md#indexing-large-datasets). Genel zamanlamaları ayarlama hakkında daha fazla bilgi için bkz [dizin oluşturucu REST API oluşturma](https://docs.microsoft.com/rest/api/searchservice/Create-Indexer#request-syntax) veya [dizin oluşturucular için Azure Search zamanlama](search-howto-schedule-indexers.md).
+## <a name="option-3-use-indexers"></a>Seçenek 3: Dizin oluşturucular kullanma
+
+[Dizin oluşturucular](search-indexer-overview.md) , aranabilir içerik Için desteklenen Azure veri kaynaklarını gezinmek üzere kullanılır. Özellikle büyük ölçekli dizin oluşturma için özel bir yöntem olmasa da, birkaç dizin oluşturucu özelliği özellikle daha büyük veri kümelerine göz sallarken yararlı olur:
+
++ Zamanlayıcılar, zaman içinde yayabilmeniz için dizin oluşturmayı düzenli aralıklarla kullanmanıza olanak sağlar.
++ Zamanlanan dizin oluşturma, bilinen son durdurma noktasında sürdürülür. Bir veri kaynağı 24 saatlik bir pencerede tam olarak gezinilmemişse, Dizin Oluşturucu, her yerde iki gün boyunca Dizin oluşturmayı sürdürür.
++ Verileri daha küçük tekil veri kaynaklarına bölümlemek paralel işleme etkinleştirilir. Kaynak verileri Azure Blob depolamada birden çok kapsayıcı gibi daha küçük bileşenlere bölebilir ve ardından, paralel olarak dizinlenebilir Azure Bilişsel Arama karşılık gelen, birden fazla [veri kaynağı nesnesi](https://docs.microsoft.com/rest/api/searchservice/create-data-source) oluşturabilirsiniz.
+
+> [!NOTE]
+> Dizin oluşturucular veri kaynağına özgüdür, bu nedenle bir Dizin Oluşturucu yaklaşımı kullanmak yalnızca Azure 'daki seçili veri kaynakları için geçerlidir: [SQL veritabanı](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md), [BLOB depolama](search-howto-indexing-azure-blob-storage.md), [Tablo depolama](search-howto-indexing-azure-tables.md), [Cosmos DB](search-howto-index-cosmosdb.md).
+
+### <a name="scheduled-indexing"></a>Zamanlanan dizin oluşturma
+
+Dizin Oluşturucu zamanlaması, büyük veri kümelerini işlemeye yönelik önemli bir mekanizmadır ve bilişsel arama işlem hattındaki görüntü analizi gibi yavaş çalışan işlemleri. Dizin Oluşturucu işleme, 24 saatlik bir pencere içinde çalışır. İşlem, 24 saat içinde sonlanamazsa, Dizin Oluşturucu zamanlamalarının davranışları avantajınıza çalışabilir. 
+
+Tasarıma göre, zamanlanan dizin oluşturma işlemi, genellikle zamanlanan bir sonraki aralıkta devam etmeden önce tamamlanan bir iş ile belirli aralıklarla başlar. Ancak, işlem Aralık içinde tamamlanmazsa, Dizin Oluşturucu duraklar (zaman aşımına uğradığından). Sonraki aralıkta, işleme en son kaldığınız yerden devam eder ve sistem nerede olursa olduğu gibi izler. 
+
+Pratik koşullarda, birkaç güne yayılan Dizin yükleri için Dizin oluşturucuyu 24 saatlik bir zamanlamaya yerleştirebilirsiniz. Sonraki 24 saat boyunca yeniden çalışmaya devam ederse, en son bilinen iyi belgede yeniden başlatılır. Bu şekilde, bir Dizin Oluşturucu, tüm işlenmemiş belgeler işlenene kadar bir dizi gün boyunca bir belge biriktirme listesi aracılığıyla çalışmasını sağlayabilir. Bu yaklaşım hakkında daha fazla bilgi için bkz. [Azure Blob depolamada büyük veri kümelerini dizine alma](search-howto-indexing-azure-blob-storage.md#indexing-large-datasets). Zamanlamaları genel olarak ayarlama hakkında daha fazla bilgi için bkz. [Dizin Oluşturucu oluşturma REST API](https://docs.microsoft.com/rest/api/searchservice/Create-Indexer#request-syntax) veya [Azure bilişsel arama için Dizin oluşturucuyu zamanlama](search-howto-schedule-indexers.md).
 
 <a name="parallel-indexing"></a>
 
-## <a name="parallel-indexing"></a>Paralel dizin oluşturma
+### <a name="parallel-indexing"></a>Paralel dizin oluşturma
 
-Dizin oluşturma stratejisi paralel, burada her veri kaynağı tanımını verilerin bir alt kümesini belirtir birden çok veri kaynağına uyum içinde yönetebileceğiniz, dizin üzerinde temel alır. 
+Paralel dizin oluşturma stratejisi, her veri kaynağı tanımının verilerin bir alt kümesini belirttiği, uyum içinde birden çok veri kaynağını dizine almayı temel alır. 
 
-Yordamı olmayan, işlem bakımından yoğun dizin gereksinimleri için - bilişsel arama işlem hattı, görüntü analizi veya doğal dil işleme - taranan belgeleri üzerinde OCR gibi dizin oluşturma stratejisi paralel genellikle tamamlamaya doğru yaklaşımdır bir uzun süre çalışan işlem en kısa sürede. Kaldırın veya sorgu isteği azaltmak, paralel sorguları aynı anda işleme olmayan bir hizmette dizin oluşturma, en iyi stratejisi yavaş işleme içeriğin büyük bir gövde ile çalışmak için seçenektir. 
+Bir bilişsel arama işlem hattındaki taranmış belgelerde OCR gibi rutin olmayan, yoğun şekilde yoğun dizin oluşturma gereksinimleri, görüntü analizi veya doğal dil işleme için, paralel bir dizin oluşturma stratejisi genellikle bir uzun süre çalışan işlem en kısa sürede. Sorgu isteklerini ortadan kaldırabilir veya azaltabiliyorsanız, sorguları eşzamanlı olarak işleme olmayan bir hizmette Paralel dizin oluşturma, büyük bir yavaş işleme içeriği ile çalışmaya yönelik en iyi strateji seçeneğidir. 
 
-Paralel işleme Bu öğe vardır:
+Paralel işleme şu öğelere sahiptir:
 
-+ Birden çok kapsayıcı veya aynı kapsayıcı içinde birden çok sanal klasörler arasında kaynak verileri alt bölümlere ayırır. 
-+ Mini her veri kümesi kendi eşleme [veri kaynağı](https://docs.microsoft.com/rest/api/searchservice/create-data-source), kendi için eşleştirilmiş [dizin oluşturucu](https://docs.microsoft.com/rest/api/searchservice/create-indexer).
-+ Bilişsel arama için aynı başvuru [beceri kümesi](https://docs.microsoft.com/rest/api/searchservice/create-skillset) her dizin oluşturucu tanımı.
-+ Aynı hedef arama dizinine yazma. 
-+ Tüm Dizin oluşturucuların aynı anda çalışacak şekilde zamanlayın.
++ Kaynak verileri birden çok kapsayıcı veya aynı kapsayıcı içindeki birden çok sanal klasör arasında alt bölümlere ayır. 
++ Her bir mini veri kümesini kendi [veri kaynağına](https://docs.microsoft.com/rest/api/searchservice/create-data-source)eşleyin ve kendi [Dizin oluşturucula](https://docs.microsoft.com/rest/api/searchservice/create-indexer)eşleştirilmiş olarak eşleştirin.
++ Bilişsel arama için, her bir Dizin Oluşturucu tanımında aynı [beceri](https://docs.microsoft.com/rest/api/searchservice/create-skillset) başvurun.
++ Aynı hedef arama dizinine yazın. 
++ Tüm dizin oluşturucularının aynı anda çalışmasını zamanlayın.
 
 > [!NOTE]
-> Azure arama, ayrılmış çoğaltmalar veya bölümler belirli iş yükleri için desteklemez. Ağır eşzamanlı dizin oluşturma riskini zarar sisteminize sorgu performansını overburdening olduğu. Bir test ortamınız varsa, paralel var. ilk ödün anlamak için dizin oluşturma uygulayın.
+> Azure Bilişsel Arama, çoğaltmaları veya bölümleri belirli iş yüklerine ayırabilirsiniz. Ağır eşzamanlı dizin oluşturma riski, sisteminizin sorgu performansının üstesinden gelme riskini ortadan kaldırır. Bir sınama ortamınız varsa, bu avantajları anlamak için öncelikle Paralel dizin oluşturma uygulayın.
 
-### <a name="how-to-configure-parallel-indexing"></a>Paralel dizin oluşturma yapılandırma
+### <a name="how-to-configure-parallel-indexing"></a>Paralel dizin oluşturmayı yapılandırma
 
-Dizin oluşturucular için işleme kapasitesini gevşek bir dizin oluşturucu alt sisteminde arama hizmetiniz tarafından kullanılan her bir hizmet birimi (SU) için temel alır. Birden çok eşzamanlı dizin oluşturucular en az iki çoğaltmaları olan temel veya standart katmanlarda sağlanan Azure Search Hizmetleri mümkündür. 
+Dizin oluşturucular için, işlem kapasitesi, arama hizmetiniz tarafından kullanılan her bir hizmet birimi (SU) için bir Dizin Oluşturucu alt sistemine bağlıdır. En az iki çoğaltmaya sahip temel veya Standart katmanlarda sağlanan Azure Bilişsel Arama hizmetlerinde birden çok eş zamanlı Dizin Oluşturucu mümkündür. 
 
-1. İçinde [Azure portalında](https://portal.azure.com), search hizmeti Panonuzda **genel bakış** sayfasında **fiyatlandırma katmanı** onaylamak uyum paralel dizin oluşturma için. Temel ve standart katmanları birden çok çoğaltma sunar.
+1. [Azure Portal](https://portal.azure.com), arama hizmeti panonuz **genel bakış** sayfasında, **fiyatlandırma katmanını** denetleyerek Paralel dizin oluşturma işleminin uyumlu olduğunu doğrulayın. Hem temel hem de Standart katmanlar birden çok çoğaltma sunar.
 
-2. İçinde **ayarları** > **ölçek**, [çoğaltmaları artırmak](search-capacity-planning.md) paralel işleme: her dizin oluşturucu iş yükü için ek bir çoğaltma. Varolan bir sorgu birimi için yeterli sayıda bırakın. Dizin oluşturma için sorgu iş yükleri ödün iyi bir denge değil.
+2. **Ayarlar** > **ölçeğinde**, paralel işleme için [çoğaltmaları artırın](search-capacity-planning.md) : her bir dizin oluşturucu iş yükü için bir ek çoğaltma. Mevcut sorgu birimi için yeterli bir sayı bırakın. Dizin oluşturma için sorgu iş yüklerinin Fede iyi bir zorunluluğunu getirir değildir.
 
-3. Azure Search dizin oluşturucularında ulaşabileceği bir düzeyinde birden çok kapsayıcılarına veri dağıtın. Bu, birden çok tablodan Azure SQL veritabanı, Azure Blob Depolama alanında birden çok kapsayıcı veya birden çok koleksiyon olabilir. Her bir tablo ya da kapsayıcı için bir veri kaynağı nesnesi tanımlayın.
+3. Azure Bilişsel Arama dizin oluşturucularının ulaşabileceği bir düzeyde verileri birden çok kapsayıcıya dağıtın. Bu, Azure SQL veritabanı 'nda birden çok tablo, Azure Blob depolamada birden çok kapsayıcı veya birden çok koleksiyon olabilir. Her tablo veya kapsayıcı için bir veri kaynağı nesnesi tanımlayın.
 
-4. Oluşturma ve paralel olarak çalıştırmak için birden çok dizin oluşturucu zamanlayabilirsiniz:
+4. Paralel olarak çalışmak için birden çok Dizin Oluşturucu oluşturun ve zamanlayın:
 
-   + Altı hizmetiyle varsayılır. Altı dizin oluşturucular, altıda tüm veri kümesinin 6 yönlü bölme için veri kümesi içeren bir veri kaynağı için eşlenen her birini yapılandırın. 
+   + Altı çoğaltmalarla bir hizmet varsayın. Her biri, veri kümesinin tamamının 6 yönlü bölünmesi için veri kümesinin altıncı bir kısmını içeren bir veri kaynağıyla eşleştirilmiş altı Dizin oluşturucuyu yapılandırın. 
 
-   + Her dizin oluşturucu, aynı dizine işaret edin. Bilişsel arama iş yükleri için her dizin oluşturucu için aynı becerilerine gelin.
+   + Her dizin oluşturucuyu aynı dizine işaret edin. Bilişsel arama iş yükleri için, her bir dizin oluşturucuyu aynı beceri işaret edin.
 
-   + Her dizin oluşturucu tanımı içinde aynı çalışma zamanı yürütme düzeni zamanlayın. Örneğin, `"schedule" : { "interval" : "PT8H", "startTime" : "2018-05-15T00:00:00Z" }` 2018-05-15 üzerinde tüm dizin oluşturucular, sekiz saatlik aralıklarla çalışan bir zamanlama oluşturur.
+   + Her bir Dizin Oluşturucu tanımı içinde aynı çalışma zamanı yürütme modelini zamanlayın. Örneğin, `"schedule" : { "interval" : "PT8H", "startTime" : "2018-05-15T00:00:00Z" }`, tüm dizin oluşturucularda sekiz saatlik aralıklarla çalışan, 2018-05-15 üzerinde bir zamanlama oluşturur.
 
-Planlanan zamanda tüm dizin oluşturucuların yürütme, veri yükleme, (bir bilişsel arama işlem hattı yapılandırılmışsa) zenginleştirmelerinin uygulama ve dizine yazmaya başlayın. Azure arama dizini güncelleştirmeleri kilitlemez. Eşzamanlı yazma belirli bir yazma ilk denemede başarısız olursa yeniden deneme ile yönetilir.
+Zamanlanan zamanda, tüm dizin oluşturucular yürütme, veri yükleme, zenginleştirme uygulama (bilişsel arama işlem hattı yapılandırdıysanız) ve dizine yazma işlemini başlatır. Azure Bilişsel Arama, güncelleştirme dizinini kilitlemez. İlk denemede belirli bir yazma işlemi başarısız olursa, eşzamanlı yazma işlemleri yönetilir.
 
 > [!Note]
-> Çoğaltmaları artırılması, dizin boyutu büyük ölçüde artırmak için öngörülen, bölüm sayısını artırmayı düşünün. Bölüm dilimleri dizinlenmiş içeriği depolar; Daha fazla bölüm sahip olduğunuz, depolamak daha küçük dilim her birine sahiptir.
+> Çoğaltmaları arttırdığınızda, dizin boyutu önemli ölçüde artırmak için yansıtıldıysanız bölüm sayısını artırmayı göz önünde bulundurun. Bölümler, dizinli içeriğin dilimlerini depolar; ne kadar çok bölüm varsa, dilimin her birinin depolanması gerekir.
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
 + [Dizin Oluşturucu’ya genel bakış](search-indexer-overview.md)
 + [Portalda dizin oluşturma](search-import-data-portal.md)
-+ [Azure SQL veritabanı dizin oluşturucu](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md)
++ [Azure SQL veritabanı Dizin Oluşturucu](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md)
 + [Azure Cosmos DB dizinleyici](search-howto-index-cosmosdb.md)
 + [Azure Blob Depolama dizin oluşturucu](search-howto-indexing-azure-blob-storage.md)
 + [Azure Tablo Depolama dizin oluşturucu](search-howto-indexing-azure-tables.md)
-+ [Azure Search'te güvenlik](search-security-overview.md)
++ [Azure Bilişsel Arama güvenliği](search-security-overview.md)

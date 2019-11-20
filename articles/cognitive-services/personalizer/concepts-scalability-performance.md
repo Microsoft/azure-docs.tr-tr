@@ -1,67 +1,54 @@
 ---
-title: Pekiştirmeye dayalı öğrenme - Personalizer
+title: Ölçeklenebilirlik ve performans-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: 'Yüksek performanslı ve trafiği yüksek Web siteleri ve uygulamalar ile Personalizer ölçeklenebilirlik ve performans için dikkate alınması gereken iki ana etmene vardır: gecikme süresi ve eğitim işleme.'
+description: 'Yüksek performanslı ve yüksek trafikli web siteleri ve uygulamalar, ölçeklenebilirlik ve performans için kişiselleştirmede göz önünde bulundurmanız gereken iki ana etkene sahiptir: gecikme süresi ve eğitim performansı.'
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
-ms.date: 06/07/2019
-ms.author: edjez
-ms.openlocfilehash: 242cc1b96c08cd79dc3e2ef5efbbe96a934b8ad3
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.topic: conceptual
+ms.date: 10/24/2019
+ms.author: diberry
+ms.openlocfilehash: 5ac9a870cb05328f040febd0f8161a97f0982e09
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67058444"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490778"
 ---
 # <a name="scalability-and-performance"></a>Ölçeklenebilirlik ve performans
 
-Yüksek performanslı ve trafiği yüksek Web siteleri ve uygulamalar ile Personalizer ölçeklenebilirlik ve performans için dikkate alınması gereken iki ana Etkenler vardır:
+Yüksek performanslı ve yüksek trafikli web siteleri ve uygulamalar, ölçeklenebilirlik ve performans için Kişiselleştiriciye göz önünde bulundurmanız gereken iki ana etkene sahiptir:
 
-* Düşük gecikme süresi derece API çağrısı yaparken tutma
-* Eğitim aktarım hızı ile olay girişi sürdürdüğünden emin olma
+* Derecelendirme API 'SI çağrıları yaparken düşük gecikme süresi tutma
+* Eğitim aktarım hızının olay girişi ile devam ettiğinizden emin olma
 
-Kişiselleştirme derecede çok hızlı bir şekilde ile REST API aracılığıyla iletişim ayrılmış çağrı süresi çoğunu döndürebilir. Azure otomatik ölçeklendirme isteklerine hızlı yanıt olanağı sağlar.
+Kişiselleştirme, REST API aracılığıyla iletişime ayrılan çağrı süresinin büyük bir bölümünü hızla bir derece döndürebilir. Azure, isteklere hızla yanıt verebilme özelliğini otomatik olarak sağlar.
 
-##  <a name="low-latency-scenarios"></a>Düşük gecikme süresi senaryoları
+##  <a name="low-latency-scenarios"></a>Düşük gecikmeli senaryolar
 
-Bazı uygulamalar, düşük gecikme süreleriyle derecede döndürülürken gerektirir. Bu gerekli değildir:
+Bazı uygulamalar bir derece döndürürken düşük gecikme süreleri gerektirir. Düşük gecikme süreleri gereklidir:
 
-* Kullanıcı göstermeden önce belirgin bir süre beklemesini tutmak için içerik sıralanmış.
-* Aşırı trafik yaşayan bir sunucu yardımcı olacak nadir işlem saati ve ağ bağlantıları bağlamadan kaçının.
-
-<!--
-
-If your web site is scaled on your infrastructure, you can avoid making HTTP calls by hosting the Personalizer API in your own servers running a Docker container.
-
-This change would be transparent to your application, other than using an endpoint URL referring to the running docker instances as opposed to an online service in the cloud.
+* Kullanıcının, derecelendirilen içeriği görüntülemeden önce fark edilebilir bir süre beklememasını sağlamak.
+* Extreme trafiği yaşayan bir sunucuda, nadir işlem süresini ve ağ bağlantılarını kullanmaktan kaçının.
 
 
+## <a name="scalability-and-training-throughput"></a>Ölçeklenebilirlik ve eğitim performansı
 
-### Extreme Low Latency Scenarios
+Kişiselleştirici, API 'Lerin derecelendirmeden ve geri alındıktan sonra zaman uyumsuz olarak gönderilen iletilere bağlı olarak yeniden paketlenmiş bir model güncelleştirerek işe yarar. Bu iletiler, uygulama için bir Azure EventHub kullanılarak gönderilir.
 
-If you require latencies under a millisecond, and have already tested using Personalizer via containers, please contact our support team so we can assess your scenario and provide guidance suited to your needs.
+ Çoğu uygulama, kişiselleştirici için en fazla katılma ve eğitim aktarım hızına ulaşacaktır. Bu sınıra ulaşıldığında, uygulama yavaşlamadan, Olay Hub 'ı sıralarının, temizlenmeden daha hızlı doldurulmuş olduğunu fark eder.
 
--->
+## <a name="how-to-estimate-your-throughput-requirements"></a>Verimlilik gereksinimlerinizi tahmin etme
 
-## <a name="scalability-and-training-throughput"></a>Ölçeklenebilirlik ve eğitim aktarım hızı
+* Bağlam ve eylem JSON belgelerinin uzunluklarını ekleyerek sıralama olayı başına ortalama bayt sayısını tahmin edin.
+* Bu tahmini ortalama bayt ile 20 MB/sn bölün.
 
-Boyut sayısı ve ödül API'leri sonra Personalizer tarafından zaman uyumsuz olarak gönderilen iletileri retrained bir model güncelleştirerek personalizer works temel. Bu iletiler, uygulama için bir Azure Event Hubs'a kullanarak gönderilir.
+Örneğin, ortalama yükünüzü 500 özelliği varsa ve her biri tahmini 20 karakter ise, her olay yaklaşık 10 KB olur. Bu tahminlerde 20.000.000/10.000 = 2.000 olay/sn, bu da 173.000.000 olaylar/gün ile ilgilidir. 
 
- Çoğu uygulama, en fazla birleştirme ve eğitim Personalizer verimini ulaşacak düşüktür. Bu üst sınıra ulaşana uygulamayı yavaşlatır değil, ancak olay hub'ı kuyrukları, temizlenmesi dahili olarak hızlı doldurulur kapsıyor.
-
-## <a name="how-to-estimate-your-throughput-requirements"></a>Aktarım hızı gereksinimlerinizi tahmin etme
-
-* Bağlamını ve eylem JSON belgelerini uzunluklarının ekleme sıralaması olay başına bayt sayısını tahmin edin.
-* 20 MB/sn bu tahmini ortalama bayt sayısı ile böler.
-
-Örneğin, ortalama yükünüzü 500 özelliklere sahiptir ve her bir tahmini 20 karakter ise, her olay yaklaşık 10 kb olduğundan. Bu tahminler, u 20.000.000 / 10.000 2.000 olay/sn, yaklaşık 173 milyon olay/gün olduğu =. 
-
-Limitler ulaşıyor, aynı zamanda mimarisi öneriler için lütfen destek ekibimize başvurun.
+Bu sınırlara ulaşmanız durumunda, lütfen mimari önerisi için destek ekibimize başvurun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Oluşturma ve yapılandırma Personalizer](how-to-settings.md).
+[Kişiselleştirici oluşturma ve yapılandırma](how-to-settings.md).

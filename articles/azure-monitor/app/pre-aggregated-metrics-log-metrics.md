@@ -1,73 +1,71 @@
 ---
-title: Azure Application Insights günlük tabanlı ve önceden toplanmış ölçümlerde | Microsoft Docs
-description: Neden oturum tabanlı önceden toplanan ölçümler Azure Application ınsights'ı kullanın.
-services: application-insights
-keywords: ''
+title: Azure Application Insights günlük tabanlı ve önceden toplanmış ölçümler | Microsoft Docs
+description: Azure Application Insights günlük tabanlı ve önceden toplanmış ölçümleri kullanma
+ms.service: azure-monitor
+ms.subservice: application-insights
+ms.topic: conceptual
 author: vgorbenko
 ms.author: vitalyg
-ms.reviewer: mbullwin
 ms.date: 09/18/2018
-ms.service: application-insights
-ms.topic: conceptual
-manager: carmonm
-ms.openlocfilehash: 9520cbb9973071bf1c52266d7718837607c1d10f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.reviewer: mbullwin
+ms.openlocfilehash: e0a0784c6331bdf4575f5c044c67cf9b4df3152f
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66256123"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820664"
 ---
-# <a name="log-based-and-pre-aggregated-metrics-in-application-insights"></a>Günlük tabanlı ve önceden toplanan ölçümler Application ınsights
+# <a name="log-based-and-pre-aggregated-metrics-in-application-insights"></a>Application Insights 'de günlük tabanlı ve önceden toplanmış ölçümler
 
-Bu makalede günlüklerine göre "Geleneksel" Application Insights ölçüm ve şu anda genel Önizleme aşamasındadır önceden toplanan ölçümler arasındaki farkı açıklar. Her iki tür ölçüm Application Insights kullanıcıları için kullanılabilir ve her uygulama sistem durumu, tanılama ve analiz izleme benzersiz bir değer getirir. İşaretleme uygulamaları geliştiriciler ölçüm türü en iyi seçenek olduğuna karar verebilirsiniz uygulama boyutuna bağlı olarak belirli bir senaryo için telemetri ve iş gereksinimleri, beklenen birim ölçümleri duyarlık ve uyarı amacıyla uygun.
+Bu makalede, günlükleri temel alan "geleneksel" Application Insights ölçümler ve şu anda genel önizleme aşamasında olan önceden toplanmış ölçümler arasındaki fark açıklanmaktadır. Her iki ölçüm türü de Application Insights kullanıcıları için kullanılabilir ve her biri, uygulama durumunu, tanılamayı ve analizlerini izlemek için benzersiz bir değer getirir. Uygulamaları seçen geliştiriciler, uygulamanın boyutuna, beklenen telemetri hacmine ve ölçüm duyarlılığı ve uyarı için iş gereksinimlerine bağlı olarak belirli bir senaryoya en uygun ölçüm türü olarak karar verebilir.
 
-## <a name="log-based-metrics"></a>Günlük tabanlı ölçümleri
+## <a name="log-based-metrics"></a>Günlük tabanlı ölçümler
 
-Yakın zamanda kadar uygulama Application Insights telemetri veri modelinde izleme yalnızca olaylar, istekler, özel durumlar, bağımlılık çağrıları, sayfa görüntülemeleri, vb. gibi önceden tanımlanmış tür az sayıda temel. Geliştiriciler ya da el ile (SDK'sı açıkça çağıran kod yazarak) bu olayları yaymak için SDK'sını kullanabilir veya otomatik izleme olaylarını otomatik olarak toplama üzerinde güvenebilirsiniz. Her iki durumda da, Application Insights arka uç tüm toplanan olayları günlükleri olarak depolar ve günlüklerinden olay-tabanlı verileri görselleştirmeye yönelik bir analiz ve Tanılama Aracı Azure portalındaki Application Insights dikey pencereleri görür.
+Son olarak, Application Insights içindeki uygulama izleme telemetri verileri modeli, istekler, özel durumlar, bağımlılık çağrıları, sayfa görünümleri vb. gibi önceden tanımlanmış çok sayıda olay türünü temel alır. Geliştiriciler SDK 'Yı kullanarak bu olayları el ile (SDK 'Yı açıkça çağıran kodu yazarak) veya otomatik izleme 'den otomatik olay koleksiyonuna güvenebilirler. Her iki durumda da Application Insights arka ucu toplanan tüm olayları günlük olarak depolar ve Azure portal Application Insights dikey pencereleri, olay tabanlı verileri günlüklere görselleştirmede analitik ve Tanılama aracı olarak davranır.
 
-Olayları eksiksiz bir kümesini korumak için günlükleri kullanma, analiz ve tanılama fayda getirebilirsiniz. Örneğin, bir tam sayı istekleri belirli bir URL'ye bu çağrıları yapan benzersiz kullanıcı sayısı ile elde edebilirsiniz. Özel durumlar dahil olmak üzere ayrıntılı tanılama izlemeleri alabilirsiniz ve tüm kullanıcı oturumlarını bağımlılık çağrıları. Bu tür bilgiler sahip uygulama durumunu ve kullanım süresini bir uygulama ile ilgili sorunları tanılamak gerekli Kes izin vererek, önemli ölçüde artırabilir. 
+Tüm olayların bir kümesini sürdürmek için günlüklerin kullanılması harika analitik ve tanılama değeri getirebilir. Örneğin, bu çağrıları yapan farklı kullanıcı sayısı ile belirli bir URL 'ye yönelik isteklerin tam sayımını yapabilirsiniz. Ya da herhangi bir Kullanıcı oturumu için özel durumlar ve bağımlılık çağrıları da dahil olmak üzere ayrıntılı tanılama izlemeleri edinebilirsiniz. Bu tür bilgilerin olması, uygulama durumunun ve kullanımının görünürlüğünü önemli ölçüde iyileştirebiliyor ve bir uygulamayla ilgili sorunları tanılamak için gereken süreyi kesmeye izin verir. 
 
-Aynı zamanda, eksiksiz bir olay toplama pratik (veya hatta imkansız) olabilir, çok sayıda telemetri oluşturan uygulamalar için. Olayların hacmine çok yüksek olduğunda durumlar için Application Insights birkaç telemetri birim azaltma teknikleri gibi uygulayan [örnekleme](https://docs.microsoft.com/azure/application-insights/app-insights-sampling) ve [filtreleme](https://docs.microsoft.com/azure/application-insights/app-insights-api-filtering-sampling) sayısını azaltın toplanan ve depolanan olayları. Ne yazık ki, depolanmış olayların sayısı da doğruluğu, arka planda, olay günlüklerinde saklanan sorgu süresini toplamalar gerçekleştirmeniz gerekir ölçümleri düşürür.
+Aynı zamanda, çok sayıda telemetri üreten uygulamalar için tüm olayların bir kümesini toplamak pratik (veya hatta imkansız) olabilir. Olay hacmi çok yüksek olduğunda Application Insights, toplanan ve depolanan olayların sayısını azaltan [örnekleme](https://docs.microsoft.com/azure/application-insights/app-insights-sampling) ve [filtreleme](https://docs.microsoft.com/azure/application-insights/app-insights-api-filtering-sampling) gibi çeşitli telemetri hacmi azaltma tekniklerini uygular. Ne yazık ki, depolanan olayların sayısını azaltmak, arka planda saklanan olayların sorgu süresi toplamaları gerçekleştirmelidir.
 
 > [!NOTE]
-> Uygulama anlayışları'nda sorgu süresi toplama olayları ve ölçümleri günlüklerinde saklanan bağlı ölçümlerin günlük tabanlı ölçümler çağrılır. Bu ölçümler genellikle bunları, analiz için üstün sağlar, olay özelliklerinden birçok boyutlara sahip ancak bu ölçümler doğruluğunu örnekleme ve filtreleme olumsuz etkilenir.
+> Application Insights, günlüklerde depolanan olayların ve ölçümlerin sorgu süresi toplamasını temel alan ölçümler günlük tabanlı ölçümler olarak adlandırılır. Bu ölçümler genellikle olay özelliklerinden çok sayıda boyuta sahiptir ve bunları analiz için üst düzey yapar, ancak bu ölçümlerin doğruluğu örnekleme ve filtreleme tarafından olumsuz etkilenir.
 
-## <a name="pre-aggregated-metrics"></a>Önceden toplanan ölçümler
+## <a name="pre-aggregated-metrics"></a>Önceden toplanmış ölçümler
 
-Günlük tabanlı ölçümler ek olarak, Application Insights ekibi zaman serisi için en iyi duruma getirilmiş özel bir depoda depolanan ölçümleri genel önizlemesi 2018'den sonbaharda birlikte gelir. Yeni ölçümler, artık çok sayıda özellikleri tek tek olayları olarak tutulur. Bunun yerine, bunlar önceden toplanmış zaman serisi olarak ve yalnızca anahtar boyutlarla depolanır. Bu yeni ölçümler sorgu zamanında üstün sağlar: veri alma, çok daha hızlı gerçekleşir ve daha az işlem gücü gerektirir. Bu nedenle yeni senaryoları gibi sağlar [neredeyse gerçek zamanlı ölçüm boyutlara uyarı](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-near-real-time-metric-alerts)ve daha duyarlı [panolar](https://docs.microsoft.com/azure/azure-monitor/app/overview-dashboard)ve daha fazlası.
+2018 ' de günlük tabanlı ölçümlere ek olarak, Application Insights ekibi, zaman serisi için iyileştirilmiş özel bir depoda depolanan ölçümlerin genel bir önizlemesini sevk ediyor. Yeni ölçümler artık çok sayıda özelliği olan ayrı olaylar olarak tutulmayacaktır. Bunun yerine, önceden toplanmış zaman serisi olarak ve yalnızca anahtar boyutlarıyla depolanır. Bu, sorgu sırasında yeni ölçümlerin üstün olmasını sağlar: verilerin alınması çok daha hızlı gerçekleşir ve daha az işlem gücü gerektirir. Bu nedenle, ölçüm boyutları, daha fazla yanıt veren [panolar](https://docs.microsoft.com/azure/azure-monitor/app/overview-dashboard)ve daha fazlası [hakkında neredeyse gerçek zamanlı uyarı](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-near-real-time-metric-alerts)gibi yeni senaryolar sağlanır.
 
 > [!IMPORTANT]
-> Hem günlük tabanlı hem de önceden toplanan ölçümler Application Insights'da arada. Geleneksel ölçümleri olayları "için ölçüler günlük tabanlı" adlandırılırsa sırada önceden toplanan ölçümler "Standart ölçümler (Önizleme)", artık adlandırılır Application ınsights'ta UX iki ayırt etmek için.
+> Hem günlük tabanlı hem de önceden toplanmış ölçümler Application Insights. İkisini de ayırt etmek için, Application Insights UX ön toplanmış ölçümler artık "standart ölçümler (Önizleme)" olarak adlandırılmaktadır, ancak olaylar için geleneksel ölçümler "günlük tabanlı ölçümler" olarak yeniden adlandırıldı.
 
-Yeni SDK'ları ([Application Insights 2.7](https://www.nuget.org/packages/Microsoft.ApplicationInsights/2.7.2) SDK veya .NET için sonraki bir sürümü) önceden toplu ölçümleri telemetri birim azaltma teknikleri önce toplama sırasında etkisini göstermeye. Başka bir deyişle, yeni ölçümler doğruluğunu örnekleme ve en son Application Insights SDK'ları kullanırken filtreleme etkilenmez.
+Daha yeni SDK 'lar (.NET için[Application Insights 2,7](https://www.nuget.org/packages/Microsoft.ApplicationInsights/2.7.2) SDK veya üzeri), telemetri birimi azaltma teknikleri başlamadan önce koleksiyon sırasında ön toplama ölçümleri. Bu, yeni Ölçümlerin doğruluğu, en son Application Insights SDK 'Ları kullanılırken örnekleme ve filtreleme tarafından etkilenmediği anlamına gelir.
 
-Önceden toplayarak (diğer bir deyişle, eski sürümleri Application Insights SDK'ları veya tarayıcı araçları) uygulamayıp SDK'ları için Application Insights arka uç hala yeni ölçümler uygulama tarafından alınan olayları toplayarak doldurur Insights olay toplama bitiş noktası. Azaltılmış kablo üzerinden aktarılan veri hacmi yararlı değildir, ancak yine de önceden toplanan ölçümler olarak kullanıp daha iyi performans ve neredeyse gerçek zamanlı boyutlu içermeyen SDK'ları ile uyarılar desteği deneyimi, yani Koleksiyon sırasında önceden toplu ölçümleri.
+Ön toplamayı uygulamayan SDK 'lar için (yani Application Insights SDK 'ların daha eski sürümleri veya tarayıcı araçları için) Application Insights arka ucu, uygulamanın aldığı olayları toplayarak yeni ölçümleri hala doldurur Öngörüler olay toplama uç noktası. Bu, kablo üzerinden iletilen azaltılan veri hacminin avantajına sahip olmadığınız sürece, önceden toplanmış ölçümleri kullanmaya devam edebilir ve şu olmayan SDK 'lar ile neredeyse gerçek zamanlı boyut uyarısı hakkında daha iyi performans ve destek alabilirsiniz. toplama sırasında ölçümleri ön toplayın.
 
-Toplama bitiş noktası önceden anlamına alım örneklemesi önce olayları toplayan bahseden değer olduğu [alım örneklemesi](https://docs.microsoft.com/azure/application-insights/app-insights-sampling) etkisi SDK sürümünden bağımsız olarak önceden toplanan ölçümler doğruluğunu hiçbir zaman, uygulamanızla birlikte kullanın.  
+Koleksiyon uç noktasının, alma örneklemeye başlamadan önce olayları ön topladığından önce, giriş [örneklemenin](https://docs.microsoft.com/azure/application-insights/app-insights-sampling) , kullandığınız SDK sürümünden bağımsız olarak önceden toplanmış ölçümlerin doğruluğunu hiçbir şekilde etkilemeyeceği anlamına gelir. Uygulamanızı.  
 
-## <a name="using-pre-aggregation-with-application-insights-custom-metrics"></a>Application Insights özel ölçümler ile önceden toplayarak kullanma
+## <a name="using-pre-aggregation-with-application-insights-custom-metrics"></a>Application Insights özel ölçümlerle ön toplamayı kullanma
 
-Önceden toplayarak ile özel ölçümleri kullanabilirsiniz. İki ana faydası özelliği yapılandırın ve özel ölçüm ve Application Insights toplama bitiş noktası için SDK'sından gönderilen veri hacmini azaltarak boyut uyarı var.
+Özel ölçümlerle ön toplamayı kullanabilirsiniz. İki ana avantaj, özel bir ölçümün boyutunu yapılandırma ve uyarma ve SDK 'dan Application Insights koleksiyon uç noktasına gönderilen veri hacmini azaltmaktır.
 
-Vardır [özel ölçümler Application Insights SDK'sından gönderme yolları](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics). SDK sürümünüze sunuyorsa [GetMetric ve TrackValue](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#getmetric) yöntemleri budur gönderen özel ölçümler, tercih edilen yol olduğundan bu durumda yalnızca depolanan verilerin hacmini azaltarak, SDK içinde önceden toplayarak olur Azure, aynı zamanda SDK'sından Application Insights'a aktarılan veri hacmi. Aksi takdirde kullanın [trackMetric](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackmetric) veri alımı sırasında önceden ölçüm olayları toplayacak yöntemi.
+[APPLICATION INSIGHTS SDK 'dan özel ölçümler göndermenin birkaç yolu](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics)vardır. SDK sürümünüz [GetMetric ve TrackValue](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#getmetric) yöntemlerini sunuyorsa, bu durumda yalnızca Azure 'da depolanan veri hacminin azaltılmasından DEĞIL, SDK 'nın içinde olduğu için özel ölçümlerin gönderilmesi için tercih edilen yöntem budur. SDK 'dan aktarılan verilerin Application Insights. Aksi takdirde, veri alımı sırasında ölçüm olaylarını ön toplayan [trackmetric](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackmetric) yöntemini kullanın.
 
-## <a name="custom-metrics-dimensions-and-pre-aggregation"></a>Özel ölçümler boyutları ve önceden toplayarak
+## <a name="custom-metrics-dimensions-and-pre-aggregation"></a>Özel Ölçüm boyutları ve ön toplama
 
-Kullanarak gönderdiğiniz tüm ölçümler [trackMetric](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackmetric) veya [GetMetric ve TrackValue](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#getmetric) API çağrılarıdır otomatik olarak hem günlükleri ve ölçümleri depolarında depolanan. Ancak, özel ölçüm günlük tabanlı sürümü her zaman tüm boyutlar tutarken ölçüm önceden toplanmış sürümünü herhangi bir boyutu ile varsayılan olarak depolanır. Özel ölçümler boyutlarını koleksiyonunda kapatma [kullanım ve tahmini maliyet](https://docs.microsoft.com/azure/application-insights/app-insights-pricing) "Özel ölçüm boyutlara etkin uyarı" denetleyerek sekmesinde: 
+[Trackmetric](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackmetric) veya [GetMetric ile trackvalue](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#getmetric) API çağrılarını kullanarak göndereceğiniz tüm ölçümler otomatik olarak hem günlüklerde hem de ölçüm depolarında depolanır. Ancak, özel ölçümünüzün günlük tabanlı sürümü her zaman tüm boyutları koruurken, ölçümün önceden toplanmış sürümü, varsayılan olarak herhangi bir boyut olmadan saklanır. "Özel ölçüm boyutlarında uyarı etkinleştir" seçeneğini işaretleyerek [kullanım ve tahmini maliyet](https://docs.microsoft.com/azure/application-insights/app-insights-pricing) sekmesinde özel ölçümlerin boyut toplanmasını etkinleştirebilirsiniz: 
 
 ![Kullanım ve tahmini maliyet](./media/pre-aggregated-metrics-log-metrics/001-cost.png)
 
-## <a name="why-is-collection-of-custom-metrics-dimensions-turned-off-by-default"></a>Neden özel ölçümler boyutları koleksiyonu varsayılan olarak kapalıdır?
+## <a name="why-is-collection-of-custom-metrics-dimensions-turned-off-by-default"></a>Özel Ölçüm boyutlarının toplanması neden varsayılan olarak kapalı?
 
-Boyutsuz özel ölçümler depolama (en fazla bir kota) ücretsiz kalır ancak gelecekte boyutları olan özel ölçümler depolama ayrı olarak uygulama anlayışları'ndan Faturalandırılacak çünkü özel ölçümler boyutları koleksiyonu varsayılan olarak devre dışıdır . Bizim resmi yaklaşan fiyatlandırma modeli değişiklikleri hakkında bilgi edinebilirsiniz [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/monitor/).
+Özel Ölçüm boyutlarının toplanması, daha sonra boyutlarla birlikte özel ölçümleri depolamanın Application Insights 'den ayrı olarak faturalandırılacağından, boyutlu olmayan özel ölçümlerin depolanması boş kalır (bir kotasına kadar) . Resmi [fiyatlandırma sayfamızda](https://azure.microsoft.com/pricing/details/monitor/)yaklaşan fiyatlandırma modeli değişiklikleri hakkında bilgi edinebilirsiniz.
 
-## <a name="creating-charts-and-exploring-log-based-and-standard-pre-aggregated-metrics"></a>Grafik oluşturma ve oturum tabanlı ve standart önceden toplanan ölçümleri keşfederken
+## <a name="creating-charts-and-exploring-log-based-and-standard-pre-aggregated-metrics"></a>Grafik oluşturma ve günlük tabanlı ve standart önceden toplanmış ölçümleri keşfetme
 
-Kullanım [Azure İzleyici ölçüm Gezgini'ni](../platform/metrics-getting-started.md) grafikleri önceden toplanmış ve günlük tabanlı ölçümleri ve yazar panolara grafiklerle çizmek için. İstediğiniz Application Insights kaynağını seçtikten sonra standart (Önizleme) ve günlük tabanlı ölçümler arasında geçiş yapmak için ad alanı seçiciyi kullanın veya özel bir ölçüm ad alanı seçin:
+Önceden toplanmış ve günlük tabanlı ölçülerden grafikler çizmek ve panoları grafiklerle yazmak için [Azure izleyici ölçüm Gezgini](../platform/metrics-getting-started.md) kullanın. İstenen Application Insights kaynağını seçtikten sonra standart (Önizleme) ve günlük tabanlı ölçümler arasında geçiş yapmak için ad alanı seçicisini kullanın veya özel bir ölçüm ad alanı seçin:
 
 ![Ölçüm ad alanı](./media/pre-aggregated-metrics-log-metrics/002-metric-namespace.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Neredeyse gerçek zamanlı uyarı verme](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-near-real-time-metric-alerts)
+* [Neredeyse gerçek zamanlı uyarı](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-near-real-time-metric-alerts)
 * [GetMetric ve TrackValue](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#getmetric)

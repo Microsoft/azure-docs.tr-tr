@@ -1,71 +1,68 @@
 ---
-title: Güvenlik Merkezi'nin standart katmanında Gelişmiş güvenlik için yükseltme | Microsoft Docs
-description: Bu makale için Azure Güvenlik Merkezi fiyatlandırma bilgileri sağlar.
+title: Azure Güvenlik Merkezi katmanlarının fiyatlandırması
+description: Bu makalede, Azure Güvenlik Merkezi fiyatlandırması hakkında bilgi sağlanır.
 services: security-center
 documentationcenter: na
-author: monhaber
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: 4d1364cd-7847-425a-bb3a-722cb0779f78
 ms.service: security-center
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/17/2019
-ms.author: v-mohabe
-ms.openlocfilehash: 547aed05746cb3f6c73c420169c727cc98c4ac4f
-ms.sourcegitcommit: 978e1b8cac3da254f9d6309e0195c45b38c24eb5
+ms.date: 11/04/2019
+ms.author: memildin
+ms.openlocfilehash: 0c3fdc48d9b3bc77b629d4d6f1da081d70658c88
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67551749"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73664254"
 ---
-# <a name="upgrade-to-security-centers-standard-tier-for-enhanced-security"></a>Güvenlik Merkezi'nin Gelişmiş güvenlik için standart katmana yükseltin
-Azure Güvenlik Merkezi, Azure’da, şirket içinde ve diğer bulutlarda çalışan iş yükleri için birleşik güvenlik yönetimi ve gelişmiş tehdit koruması sağlar. Bu, hibrit bulut iş yükleri, hızla gelişen siber saldırı ile uydurmanıza yardımcı olmak için tehditleri ve akıllı algılama maruz kalma riskinizi azaltmak etkin savunmaları üzerinde görünürlük ve denetim sunar.
+# <a name="upgrade-to-security-centers-standard-tier-for-enhanced-security"></a>Gelişmiş güvenlik için Güvenlik Merkezi 'nin standart katmanına yükseltme
+Azure Güvenlik Merkezi, Azure’da, şirket içinde ve diğer bulutlarda çalışan iş yükleri için birleşik güvenlik yönetimi ve gelişmiş tehdit koruması sağlar. Karma bulut iş yükleri, tehditlere maruz kalma olasılığını azaltan etkin savunmaları ve hızlı gelişen siber saldırılarına karşı hızlanmanıza yardımcı olacak akıllı algılama üzerinde görünürlük ve denetim sağlar.
 
 ## <a name="pricing-tiers"></a>Fiyatlandırma katmanları
 Güvenlik Merkezi iki katmanda sunulur:
 
-- **Ücretsiz** katmanı, tüm Azure abonelikleri üzerinde otomatik olarak etkinleştirilir ve güvenlik ilkesi, sürekli güvenlik değerlendirmesi ve Azure kaynaklarınızı korumanıza yardımcı olması için eyleme dönüştürülebilir güvenlik önerileri sağlar.
-- **Standart** katman ücretsiz katmanı yeteneklerini genişletir özel ve diğer genel bulutlarda çalışan iş yükleri için güvenlik yönetimi ve tehdit koruması, hibrit bulut iş yüklerinde birleşik sağlama. Standart katman da ekler Gelişmiş tehdit algılama özellikleri, ağ saldırılarına ve kötü amaçlı yazılım maruz kalma riskinizi azaltmak için yerleşik davranış analizi ve makine öğrenimi saldırıları ve sıfır gün açıklarından, erişim ve uygulama denetimlerini tanımlamak kullandığı, ve Daha fazla. Standart katmanında ücretsiz deneyebilirsiniz. Azure Güvenlik Merkezi standart destekleyen kaynaklar Vm'leri de dahil olmak üzere, sanal makine ölçek kümeleri, App Service, SQL Server ve depolama hesapları. Azure Güvenlik Merkezi standart varsa kaynak türüne göre desteği seçebilirsiniz. 
+- İlk kez Azure portal Azure Güvenlik Merkezi panosunu ziyaret ettiğinizde veya API aracılığıyla programlı olarak etkinleştirilmişse, **ücretsiz** katman tüm Azure aboneliklerinizde etkin olur. Ücretsiz katman, Azure kaynaklarınızı korumanıza yardımcı olmak için güvenlik ilkesi, sürekli güvenlik değerlendirmesi ve eyleme dönüştürülebilir güvenlik önerileri sağlar.
+- **Standart** katman, hibrit bulut iş yüklerinizde birleştirilmiş güvenlik yönetimi ve tehdit koruması sağlayarak, ücretsiz katmanın yeteneklerini özel ve diğer genel bulutlarda çalışan iş yüklerine genişletir. Standart katman Ayrıca, saldırıları ve sıfır günlük güvenlik açıklarını belirlemek için yerleşik davranış analizi ve makine öğrenimi, ağ saldırılarına ve kötü amaçlı yazılımların etkilenme olasılığını azaltmak için erişim ve uygulama denetimlerini kullanan gelişmiş tehdit algılama özellikleri de ekler ve daha fazla. Standart katmanı ücretsiz olarak deneyebilirsiniz. Güvenlik Merkezi Standart; VM 'Ler, sanal makine ölçek kümeleri, App Service, SQL sunucuları ve depolama hesapları gibi Azure kaynaklarını destekler. Azure Güvenlik Merkezi Standart sürümüne sahipseniz, kaynak türüne göre destek ' i devre dışı bırakabilirsiniz. 
 
+VM 'Ler için ücretsiz katman güvenlik değerlendirmelerinin çoğunun yanı sıra standart katman güvenlik uyarılarının çoğu için Microsoft Monitoring Agent (MMA) özelliğinin yüklenmesi gerekir. Azure VM 'leriniz için aracıyı otomatik olarak dağıtmak üzere, güvenlik merkezi 'nde otomatik sağlamayı etkinleştirebilirsiniz.
 
-Daha fazla bilgi için bkz: Güvenlik Merkezi [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/security-center/).
+## <a name="try-standard-free-for-30-days"></a>30 gün boyunca standart ücretsiz deneyin
+Standart katman ilk 30 gün boyunca ücretsizdir. 30 günün sonunda hizmeti kullanmaya devam etmeyi seçmeniz gerekir, kullanım için otomatik olarak ücretlendirilecektir.
 
-## <a name="try-standard-free-for-30-days"></a>Standart 30 gün boyunca ücretsiz deneyin
-Standart katman, ilk 30 gün boyunca ücretsizdir. 30 günün sonunda, hizmeti kullanmaya devam etmeyi tercih ederseniz otomatik olarak kullanım için başlarız.
+Tüm Azure aboneliğini, abonelik içindeki tüm kaynaklar tarafından devralınan Standart katmana yükseltebilirsiniz.
 
-Tüm Azure aboneliğinin, abonelik içindeki tüm kaynaklar tarafından devralınır standart katmana yükseltebilirsiniz.
+Standart katmanı almak için:
 
-Standart katman almak için:
+1. **Güvenlik Merkezi** ana menüsünde **fiyatlandırma & ayarları** ' nı seçin.
+2. Standart sürümüne yükseltmek istediğiniz aboneliği seçin.
+3. **Fiyatlandırma katmanı**'nı seçin.
+4. Yükseltmek için **Standart** ' ı seçin.
+5. **Kaydet** düğmesine tıklayın.
 
-1. Seçin **fiyatlandırma & ayarları** üzerinde **Güvenlik Merkezi** ana menü.
-2. Standart olarak yükseltmek istediğiniz aboneliği seçin.
-3. Seçin **fiyatlandırma katmanı**.
-4. Seçin **standart** yükseltmek için.
-5. **Kaydet**’e tıklayın.
-
-(Görüntüde örneğin yalnızca fiyatlarıdır.) ![Güvenlik Merkezi fiyatlandırma](./media/security-center-pricing/get-standard.png)
+(Görüntüdeki fiyatlar yalnızca tanım amacıyla sağlanır) [![Güvenlik Merkezi fiyatlandırması](media/security-center-pricing/pricing-tier-page.png)](media/security-center-pricing/pricing-tier-page.png#lightbox)
 
 > [!NOTE]
-> Tüm Güvenlik Merkezi özelliklerini etkinleştirmek için ilgili sanal makinelerin bulunduğu aboneliğe Standart fiyatlandırma katmanını uygulamanız gerekir. Fiyatlandırmanın bir çalışma alanı için yapılandırılması, Azure kaynakları için tam zamanında VM erişimini, uyarlamalı uygulama denetimlerini ve ağ algılama özelliklerini etkinleştirmez.
->
+> Tüm Güvenlik Merkezi özelliklerini etkinleştirmek için ilgili sanal makinelerin bulunduğu aboneliğe Standart fiyatlandırma katmanını uygulamanız gerekir. Bir çalışma alanı için fiyatlandırmayı yapılandırmak, Azure kaynakları için tam zamanında VM erişimi, uyarlamalı uygulama denetimleri ve ağ algılamalarını etkinleştirmez.
 >
 
-## <a name="why-upgrade-to-standard"></a>Neden standart sürümüne yükseltebilir?
-Güvenlik Merkezi, Artırılmış Güvenlik ve tehdit koruması gibi hibrit bulut iş yükleri için sunar:
+## <a name="why-upgrade-to-standard"></a>Neden standart olarak yükseltilir?
+Güvenlik Merkezi, karma bulut iş yükleriniz için aşağıdakiler dahil gelişmiş güvenlik ve tehdit koruması sağlar:
 
-- **Karma güvenlik** – tüm şirket içi güvenlik birleşik bir görünümünü elde ve bulut iş yükleri. Güvenlik ilkeleri uygulayın ve güvenlik standartlarıyla uyumluluğu sağlamak için karma bulut iş yüklerinizin güvenliğini sürekli değerlendirin. Güvenlik duvarları ve diğer iş ortaklarının çözümleri gibi farklı kaynaklardan güvenlik verileri toplayın, bunlar üzerinde arama ve analiz gerçekleştirin.
-- **Gelişmiş tehdit algılama** -Gelişmiş analiz ve Microsoft Intelligent Security gelişen siber saldırılardan üzerinden kenar almak için Graph kullanın.  Yerleşik davranış analizi ve makine öğrenimi özelliklerinden yararlanarak saldırıları ve sıfır gün saldırılarına yol açabilecek güvenlik açıklarını tespit edin. Ağları, makineleri ve bulut hizmetlerini gelen saldırılara veya güvenlik ihlali sonrası etkinliklere karşı izleyin. Etkileşimli araçlar ve bağlama dayalı tehdit zekası ile araştırmaları kolaylaştırın.
-- **Erişim ve uygulama denetimlerini** -kendi iş yüklerinize göre uyarlanmış ve makine öğrenimi tarafından desteklenen blok kötü amaçlı yazılım ve diğer istenmeyen uygulamaları beyaz listeye alma önerilerini uygulayarak. Ağ saldırı yüzeyini tam zamanında, denetimli erişimi ile yönetim bağlantı noktalarına önemli ölçüde deneme yanılma ve diğer ağ saldırılarına maruz kalma riskinizi azaltır, Azure sanal makinelerinde azaltın.
+- **Karma güvenlik** : tüm şirket içi ve bulut iş yüklerinizde güvenliğin birleştirilmiş bir görünümünü alın. Güvenlik standartları ile uyumluluğu sağlamak için güvenlik ilkelerini uygulayın ve hibrit bulut iş yüklerinizin güvenliğini sürekli değerlendirin. Güvenlik duvarları ve diğer iş ortağı çözümleri dahil olmak üzere birden çok kaynaktan güvenlik verilerini toplayın, arayın ve çözümleyin.
+- **Gelişmiş tehdit algılama** -gelişmiş analizler ve Microsoft Intelligent Security Graph gelişen Cyber saldırılarına karşı bir kenar almak için kullanın. Yerleşik davranış analizi ve makine öğrenimi özelliklerinden yararlanarak saldırıları ve sıfır gün saldırılarına yol açabilecek güvenlik açıklarını tespit edin. Ağları, makineleri ve bulut hizmetlerini gelen saldırılara veya güvenlik ihlali sonrası etkinliklere karşı izleyin. Etkileşimli araçlar ve bağlama dayalı tehdit zekası ile araştırmaları kolaylaştırın.
+- **Erişim ve uygulama denetimleri** -belirli iş yüklerinize yönelik makine öğrenimi destekli beyaz listeleme önerilerini uygulayarak kötü amaçlı yazılımları ve diğer istenmeyen uygulamaları engelleyin. Azure VM 'lerinde yönetim bağlantı noktalarına tam zamanında, denetimli erişimle ağ saldırısı yüzeyini küçültün. Bu, deneme yanılma ve diğer ağ saldırılarına maruz kalma olasılığını önemli ölçüde azaltır.
+- **Kapsayıcı güvenlik özellikleri** -Kapsayıcılı ortamlarınızda güvenlik açığı yönetimi ve gerçek zamanlı tehdit algılamasından yararlanın. Kapsayıcı kayıt defterleri kaynağı etkinleştirilirken, tüm özellikler etkinleştirilene kadar bu işlem 12 saat kadar sürebilir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, için Güvenlik Merkezi fiyatlandırma eklenmiştir. Standart katmanın Gelişmiş Güvenlik ve Gelişmiş tehdit koruması hakkında daha fazla bilgi için bkz:
+Bu makalede, Güvenlik Merkezi için fiyatlandırmaya sunulmuştur. Standart katmanın gelişmiş güvenlik ve Gelişmiş tehdit koruması hakkında daha fazla bilgi edinmek için bkz.:
 
 - [Gelişmiş tehdit algılama](security-center-threat-report.md)
-- [Yalnızca zaman VM erişim denetimi](security-center-just-in-time.md)
-
-<!--Image references-->
-[1]: ./media/security-center-pricing/get-standard.png
+- [Tam zamanında VM erişimi denetimi](security-center-just-in-time.md)
+- [Kapsayıcı güvenliğine genel bakış](container-security.md)
+- [Seçtiğiniz para birimi ve bölgenize göre fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/security-center/)

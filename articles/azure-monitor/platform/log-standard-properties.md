@@ -1,35 +1,33 @@
 ---
-title: Azure İzleyici'de standart özellikler günlük kayıtlarının | Microsoft Docs
-description: Azure İzleyici günlüklerine birden çok veri türü için ortak olan özellikleri açıklar.
-services: log-analytics
-documentationcenter: ''
+title: Azure Izleme günlük kayıtlarında standart özellikler | Microsoft Docs
+description: Azure Izleyici günlüklerinde birden çok veri türü için ortak olan özellikleri açıklar.
+ms.service: azure-monitor
+ms.subservice: logs
+ms.topic: conceptual
 author: bwren
-manager: carmonm
-editor: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.topic: article
-ms.date: 03/20/2019
 ms.author: bwren
-ms.openlocfilehash: 50804e1f6ab4f352239d3f405e5b41e4e0c58d14
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.date: 07/18/2019
+ms.openlocfilehash: d765422957392a5cdb170208b809c24bf5aec2a3
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67292815"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72932202"
 ---
-# <a name="standard-properties-in-azure-monitor-logs"></a>Azure İzleyici günlüklerine standart özellikler
-Azure İzleyici günlüklerine verilerde [kümesi bir Log Analytics çalışma alanı veya Application Insights uygulama kayıtları olarak depolanan](../log-query/logs-structure.md), her bir özellik kümesi olan belirli veri türüne sahip. Birçok veri türleri, birden çok türlerinde ortak olan standart özellikleri olacaktır. Bu makalede, bu özellikleri açıklar ve nasıl bunları sorgularında kullanabileceğiniz örnekler sağlar.
+# <a name="standard-properties-in-azure-monitor-logs"></a>Azure Izleyici günlüklerinde standart özellikler
+Azure Izleyici günlüklerindeki veriler, her biri benzersiz bir özellik kümesine sahip olan belirli bir veri türüne sahip bir [Log Analytics çalışma alanında veya Application Insights uygulamasında bir kayıt kümesi olarak depolanır](../log-query/logs-structure.md). Birçok veri türü, birden çok tür genelinde ortak olan standart özelliklere sahip olacaktır. Bu makalede bu özellikler açıklanmakta ve bunları sorgularda nasıl kullanabileceğiniz hakkında örnekler verilmektedir.
 
-Bazı veri türleri, ancak henüz diğerleri bunları görebilirsiniz bu özelliklerin bazıları hala uygulanan sürecinde, olduğundan.
+> [!NOTE]
+> Bazı standart Propertis, Log Analytics şema görünümünde veya IntelliSense 'de gösterilmez ve doğrudan çıktıda özelliği belirtmediğiniz takdirde sorgu sonuçlarında gösterilmez.
 
 ## <a name="timegenerated-and-timestamp"></a>TimeGenerated ve zaman damgası
-**TimeGenerated** (Log Analytics çalışma alanı) ve **zaman damgası** kaydın oluşturulduğu saat ve tarihi (Application Insights uygulaması) özellikleri içerir. Bu, filtreleme veya zamana göre özetlemek için kullanılacak ortak bir özellik sağlar. Azure portalında bir zaman aralığı için bir görünüm veya Panoda seçtiğinizde, sonuçları filtrelemek için TimeGenerated veya zaman damgası kullanır.
+**TimeGenerated** (Log Analytics çalışma alanı) ve **zaman damgası** (Application Insights uygulaması) özellikleri, kaydın veri kaynağı tarafından oluşturulduğu tarih ve saati içerir. Daha fazla ayrıntı için bkz. [Azure izleyici 'de günlük verisi alma süresi](data-ingestion-time.md) .
+
+**TimeGenerated** ve **timestamp** zamana göre filtreleme veya özetleme için kullanılacak ortak bir özellik sağlar. Azure portal bir görünüm veya Pano için zaman aralığı seçtiğinizde, sonuçları filtrelemek için TimeGenerated veya timestamp kullanılır. 
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki sorgu, önceki haftanın her günü için oluşturulan hata olay sayısını döndürür.
+Aşağıdaki sorgu, önceki haftanın her günü için oluşturulan hata olaylarının sayısını döndürür.
 
 ```Kusto
 Event
@@ -39,7 +37,7 @@ Event
 | sort by TimeGenerated asc 
 ```
 
-Aşağıdaki sorgu, önceki haftanın her günü için oluşturulan özel durumların sayısını döndürür.
+Aşağıdaki sorgu, önceki hafta içinde her gün için oluşturulan özel durumların sayısını döndürür.
 
 ```Kusto
 exceptions
@@ -48,28 +46,46 @@ exceptions
 | sort by timestamp asc 
 ```
 
-## <a name="type-and-itemtype"></a>Tür ve Itemtype
-**Türü** (Log Analytics çalışma alanı) ve **Itemtype** (Application Insights uygulaması) özellikleri askıya kaydı Ayrıca hangi can alınmıştır tablonun adını düşündüğünüz kayıt olarak yazın. Bu özellik, kayıtları kullananlar gibi birden çok tablodan birleştirmek sorgularda yararlıdır `search` farklı türlerde kayıtlar arasında ayrım yapmak için işleci. **$table** yerine kullanılan **türü** bazı yerlerde.
+## <a name="_timereceived"></a>\_zaman damgası
+**\_zaman damgası** özelliği, Azure bulutundaki Azure izleyici alma noktası tarafından kaydın alındığı tarih ve saati içerir. Bu, veri kaynağı ve bulut arasındaki gecikme sorunlarını belirlemek için yararlı olabilir. Bir örneğin, bir aracıdan alınan verilerle gecikmeye neden olan bir ağ sorunu olabilir. Daha fazla ayrıntı için bkz. [Azure izleyici 'de günlük verisi alma süresi](data-ingestion-time.md) .
+
+Aşağıdaki sorgu, bir aracıdan gelen olay kayıtları için saate göre ortalama gecikme süresini verir. Bu, aracıdan buluta kadar olan süreyi ve günlük sorguları için kullanılabilir kayıt için toplam süreyi içerir.
+
+```Kusto
+Event
+| where TimeGenerated > ago(1d) 
+| project TimeGenerated, TimeReceived = _TimeReceived, IngestionTime = ingestion_time() 
+| extend AgentLatency = toreal(datetime_diff('Millisecond',TimeReceived,TimeGenerated)) / 1000
+| extend TotalLatency = toreal(datetime_diff('Millisecond',IngestionTime,TimeGenerated)) / 1000
+| summarize avg(AgentLatency), avg(TotalLatency) by bin(TimeGenerated,1hr)
+``` 
+
+## <a name="type-and-itemtype"></a>Tür ve ItemType
+**Tür** (Log Analytics çalışma alanı) ve **ıtemtype** (Application Insights uygulama) özellikleri, kaydın alındığı tablonun adını, kayıt türü olarak da düşünülebilir. Bu özellik, farklı türlerin kayıtlarını ayırt etmek için `search` işlecini kullananlar gibi birden çok tablodan kayıtları birleştiren sorgularda yararlıdır. **$Table** , bazı yerlerde **tür** yerine kullanılabilir.
 
 ### <a name="examples"></a>Örnekler
-Aşağıdaki sorgu, geçtiğimiz saat içinde toplanan türüne göre kayıt sayısını döndürür.
+Aşağıdaki sorgu, son saate göre toplanan kayıt sayısını döndürür.
 
 ```Kusto
 search * 
 | where TimeGenerated > ago(1h)
 | summarize count() by Type
+
 ```
+## <a name="_itemid"></a>\_öğe kimliği
+**\_ItemId** özelliği, kayıt için benzersiz bir tanımlayıcı tutar.
 
-## <a name="resourceid"></a>\_ResourceId
-**\_ResourceId** özelliği kaydı ile ilişkili kaynak için benzersiz bir tanımlayıcı içerir. Bu, sorgunuzu kayıtlarına yalnızca belirli bir kaynaktan kapsam veya ilgili verileri birden çok tabloda katılmak için kullanılacak bir standart özelliği sağlar.
 
-Değerini, Azure kaynakları için **_ResourceId** olduğu [Azure kaynak kimliği URL](../../azure-resource-manager/resource-group-template-functions-resource.md). Şu anda Azure kaynaklarına sınırlı bir özelliğidir, ancak şirket içi bilgisayarlar gibi Azure dışındaki kaynaklar için genişletilir.
+## <a name="_resourceid"></a>\_RESOURCEID
+**\_RESOURCEID** özelliği, kaydın ilişkilendirildiği kaynak için benzersiz bir tanımlayıcı tutar. Bu, sorgunuzu yalnızca belirli bir kaynaktaki kayıtlarla birleştirmek veya ilgili verileri birden çok tablo genelinde birleştirmek için kullanabileceğiniz standart bir özellik sunar.
+
+Azure kaynakları için **_Resourceıd** değeri [Azure kaynak kimliği URL 'sidir](../../azure-resource-manager/resource-group-template-functions-resource.md). Özelliği şu anda Azure kaynaklarıyla sınırlıdır, ancak şirket içi bilgisayarlar gibi Azure dışındaki kaynaklara genişletilir.
 
 > [!NOTE]
-> Bazı veri türleri içeren Azure kaynak Kimliğini veya en az parça alan zaten var, abonelik kimliği gibi Bu alanlar, geriye dönük uyumluluk için tutulur, ancak daha tutarlı olduğundan çapraz korelasyon gerçekleştirmek için _ResourceId kullanmak için önerilir.
+> Bazı veri türlerinde zaten Azure Kaynak KIMLIĞI veya abonelik KIMLIĞI gibi en az parçalar içeren alanlar var. Bu alanlar geriye dönük uyumluluk için tutulurken, daha tutarlı olacağı için çapraz bağıntı gerçekleştirmek üzere _Resourceıd kullanılması önerilir.
 
 ### <a name="examples"></a>Örnekler
-Aşağıdaki sorguda her bilgisayar için performans ve olay verileri birleştirir. Kimliğine sahip tüm olaylar gösterir _101_ ve işlemci kullanımı % 50 üzerindeki.
+Aşağıdaki sorgu, her bilgisayar için performans ve olay verilerini birleştirir. KIMLIĞI _101_ olan tüm olayları ve %50 üzerinde işlemci kullanımını gösterir.
 
 ```Kusto
 Perf 
@@ -80,7 +96,7 @@ Perf
 ) on _ResourceId
 ```
 
-Aşağıdaki Sorguda birleştirme _AzureActivity_ kayıtlar _SecurityEvent_ kaydeder. Bu, tüm etkinlik işlemleri bu makinelerde oturum açmış kullanıcıları gösterir.
+Aşağıdaki sorgu, _AzureActivity_ kayıtlarını _securityevent_ kayıtlarıyla birleştirir. Bu makinede oturum açmış kullanıcılarla tüm etkinlik işlemleri gösterilir.
 
 ```Kusto
 AzureActivity 
@@ -94,7 +110,7 @@ AzureActivity
 ) on _ResourceId  
 ```
 
-Aşağıdaki sorguda ayrıştırıyor **_ResourceId** ve toplamalar veri hacimleri Azure aboneliği başına faturalandırılır.
+Aşağıdaki sorgu, her Azure aboneliği için, **_Resourceıd** ayrıştırır ve Faturalanan veri birimlerini toplar.
 
 ```Kusto
 union withsource = tt * 
@@ -104,16 +120,16 @@ union withsource = tt *
 | summarize Bytes=sum(_BilledSize) by subscriptionId | sort by Bytes nulls last 
 ```
 
-Bu `union withsource = tt *` veri türlerinde taramaları çalıştırmak pahalı olduğundan tutumlu sorgular.
+Veri türlerindeki taramaların yürütülmesi pahalı olduğundan bu `union withsource = tt *` sorguları dikkatli bir şekilde kullanın.
 
-## <a name="isbillable"></a>\_IsBillable
-**\_IsBillable** özelliği, içe alınan veri Faturalanabilir olup olmadığını belirtir. Verilerle  **\_IsBillable** eşit _false_ ücretsiz toplanan ve Azure hesabınızda faturalandırılmaz.
+## <a name="_isbillable"></a>\_ıfaturalanabilir
+**\_ıfaturalanabilir** özelliği, alınan verilerin faturalandırılabilir olup olmadığını belirtir. **\_** ile eşit olan _veriler, ücretsiz olarak toplanır_ ve Azure hesabınıza faturalandırılmaz.
 
 ### <a name="examples"></a>Örnekler
-Faturalandırılan veri türleri gönderme bilgisayarların listesini almak için aşağıdaki sorguyu kullanın:
+Faturalanan veri türlerini gönderen bilgisayarların listesini almak için aşağıdaki sorguyu kullanın:
 
 > [!NOTE]
-> İle sorguları kullanma `union withsource = tt *` veri türlerinde taramaları çalıştırmak pahalı olduğundan gerektiğinde. 
+> Veri türlerindeki taramaların yürütülmesi pahalı olduğundan, `union withsource = tt *` sahip olan sorguları gelişigüzel şekilde kullanın. 
 
 ```Kusto
 union withsource = tt * 
@@ -123,7 +139,7 @@ union withsource = tt *
 | summarize TotalVolumeBytes=sum(_BilledSize) by computerName
 ```
 
-Veri türleri gönderen bilgisayarlar / saat sayısı faturalandırılır döndürmek için Genişletilebilir:
+Bu, faturalanan veri türlerini Gönderen saat başına bilgisayar sayısını döndürmek için Genişletilebilir:
 
 ```Kusto
 union withsource = tt * 
@@ -133,11 +149,12 @@ union withsource = tt *
 | summarize dcount(computerName) by bin(TimeGenerated, 1h) | sort by TimeGenerated asc
 ```
 
-## <a name="billedsize"></a>\_BilledSize
-**\_BilledSize** özelliği, Azure hesabınızda faturalandırılırsınız veri bayt cinsinden boyutunu belirtir  **\_IsBillable** geçerlidir.
+## <a name="_billedsize"></a>\_bilme boyutu
+**\_BilledSize** özelliği, **\_ıfaturalanabilir** değeri true ise Azure hesabınıza Faturalanacak verilerin bayt cinsinden boyutunu belirtir.
+
 
 ### <a name="examples"></a>Örnekler
-Bilgisayar başına alınan Faturalanabilir olayların boyutunu görmek için `_BilledSize` bayt cinsinden boyut sağlayan özelliği:
+Bilgisayar başına alınan faturalandırılabilir olayların boyutunu görmek için, boyutu bayt cinsinden sağlayan `_BilledSize` özelliğini kullanın:
 
 ```Kusto
 union withsource = tt * 
@@ -145,7 +162,7 @@ union withsource = tt *
 | summarize Bytes=sum(_BilledSize) by  Computer | sort by Bytes nulls last 
 ```
 
-Abonelik başına alınan Faturalanabilir olayların boyutunu görmek için aşağıdaki sorguyu kullanın:
+Abonelik başına alınan faturalandırılabilir olayların boyutunu görmek için aşağıdaki sorguyu kullanın:
 
 ```Kusto
 union withsource=table * 
@@ -154,7 +171,7 @@ union withsource=table *
 | summarize Bytes=sum(_BilledSize) by  SubscriptionId | sort by Bytes nulls last 
 ```
 
-Kaynak grubu başına alınan Faturalanabilir olayların boyutunu görmek için aşağıdaki sorguyu kullanın:
+Kaynak grubu başına alınan faturalandırılabilir olayların boyutunu görmek için aşağıdaki sorguyu kullanın:
 
 ```Kusto
 union withsource=table * 
@@ -172,7 +189,7 @@ union withsource = tt *
 | summarize count() by Computer | sort by count_ nulls last
 ```
 
-Bilgisayar başına alınan Faturalanabilir olayların sayısını görmek için aşağıdaki sorguyu kullanın: 
+Bilgisayar başına alınan faturalandırılabilir olayların sayısını görmek için aşağıdaki sorguyu kullanın: 
 
 ```Kusto
 union withsource = tt * 
@@ -180,7 +197,7 @@ union withsource = tt *
 | summarize count() by Computer  | sort by count_ nulls last
 ```
 
-Belirli bir bilgisayar Faturalanabilir veri türlerinden sayısını görmek için aşağıdaki sorguyu kullanın:
+Belirli bir bilgisayardan faturalanabilir veri türleri sayısını görmek için aşağıdaki sorguyu kullanın:
 
 ```Kusto
 union withsource = tt *
@@ -191,6 +208,6 @@ union withsource = tt *
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Nasıl hakkında daha fazla bilgiyi [Azure İzleyici günlük verilerinin depolandığı](../log-query/log-query-overview.md).
-- Ders almak [günlük sorguları yazma](../../azure-monitor/log-query/get-started-queries.md).
-- Ders almak [günlük sorgularda tabloları birleştirme](../../azure-monitor/log-query/joins.md).
+- [Azure izleyici günlük verilerinin nasıl depolandığı](../log-query/log-query-overview.md)hakkında daha fazla bilgi edinin.
+- [Günlük sorgularını yazarken](../../azure-monitor/log-query/get-started-queries.md)bir ders alın.
+- [Günlük sorgularında tabloları birleştirme](../../azure-monitor/log-query/joins.md)konusunda bir ders alın.

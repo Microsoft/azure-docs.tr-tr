@@ -1,27 +1,28 @@
 ---
 title: Azure HDInsight, YARN sorunlarını giderme
 description: Azure HDInsight ve Apache Hadoop YARN ile çalışma hakkında sık sorulan soruların yanıtlarını alın.
-ms.service: hdinsight
 author: hrasheed-msft
 ms.author: hrasheed
-ms.topic: conceptual
-ms.date: 12/06/2018
-ms.openlocfilehash: 8396f682558b71ca99af845bd51f7b2c8059f79b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.reviewer: jasonh
+ms.service: hdinsight
+ms.topic: troubleshooting
+ms.date: 08/15/2019
+ms.openlocfilehash: a0eb0d15d931cf1b2f71740c7a9359cf16205481
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67072009"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71122523"
 ---
-# <a name="troubleshoot-apache-hadoop-yarn-by-using-azure-hdinsight"></a>Azure HDInsight'ı kullanarak Apache Hadoop YARN sorunlarını giderme
+# <a name="troubleshoot-apache-hadoop-yarn-by-using-azure-hdinsight"></a>Azure HDInsight 'ı kullanarak Apache Hadoop YARN sorunlarını giderme
 
 Apache Ambari, Apache Hadoop YARN yükü ile çalışırken sık karşılaşılan sorunlar ve çözümleri hakkında bilgi edinin.
 
 ## <a name="how-do-i-create-a-new-yarn-queue-on-a-cluster"></a>Bir kümede yeni YARN kuyruk nasıl oluşturabilirim?
 
-### <a name="resolution-steps"></a>Çözüm adımları 
+### <a name="resolution-steps"></a>Çözüm adımları
 
-Yeni YARN kuyruk oluşturmak için Ambari aşağıdaki adımları kullanın ve ardından kapasite ayırma tüm kuyrukları arasında dengeleme. 
+Yeni YARN kuyruk oluşturmak için Ambari aşağıdaki adımları kullanın ve ardından kapasite ayırma tüm kuyrukları arasında dengeleme.
 
 Bu örnekte, iki mevcut kuyrukları (**varsayılan** ve **thriftsvr**) hem de % 50 kapasiteden yeni kuyruğu (spark) % 50 kapasitesini sunan % 25 kapasiteye değiştirilir.
 
@@ -33,27 +34,27 @@ Bu örnekte, iki mevcut kuyrukları (**varsayılan** ve **thriftsvr**) hem de % 
 
 1. Seçin **Ambari görünümleri** simgesi ve Kılavuz düzeni seçin. Ardından, **YARN Kuyruk yöneticisi**.
 
-    ![Ambari görünümlerini simgesini seçin](media/hdinsight-troubleshoot-yarn/create-queue-1.png)
+    ![Apache ambarı panosu YARN Kuyruk Yöneticisi](media/hdinsight-troubleshoot-yarn/apache-yarn-create-queue-1.png)
 2. Seçin **varsayılan** kuyruk.
 
-    ![Varsayılan kuyruk seçin](media/hdinsight-troubleshoot-yarn/create-queue-2.png)
+    ![Apache ambarı YARN varsayılan kuyruğu seçin](media/hdinsight-troubleshoot-yarn/apache-yarn-create-queue-2.png)
 3. İçin **varsayılan** kuyruk, değiştirme **kapasite** 50 %'için % 25. İçin **thriftsvr** kuyruk, değiştirme **kapasite** % 25.
 
-    ![Varsayılan ve thriftsvr kuyruklar için % 25'ine kapasitesini değiştirme](media/hdinsight-troubleshoot-yarn/create-queue-3.png)
+    ![Varsayılan ve thriftsvr kuyruklar için % 25'ine kapasitesini değiştirme](media/hdinsight-troubleshoot-yarn/apache-yarn-create-queue-3.png)
 4. Yeni bir kuyruk oluşturmak için Seç **kuyruk Ekle**.
 
-    ![Kuyruk Ekle'yi seçin](media/hdinsight-troubleshoot-yarn/create-queue-4.png)
+    ![Apache ambarı YARN Pano ekleme kuyruğu](media/hdinsight-troubleshoot-yarn/apache-yarn-create-queue-4.png)
 
 5. Yeni kuyruk adı.
 
-    ![Spark kuyruk adı](media/hdinsight-troubleshoot-yarn/create-queue-5.png)  
+    ![Apache ambarı YARN Pano adı kuyruğu](media/hdinsight-troubleshoot-yarn/apache-yarn-create-queue-5.png)  
 
 6. Bırakın **kapasite** % 50 tıklayın ve ardından değerlerinde **eylemleri** düğmesi.
 
-    ![Eylemler düğmeyi seçin](media/hdinsight-troubleshoot-yarn/create-queue-6.png)  
+    ![Apache ambarı YARN seçim eylemi](media/hdinsight-troubleshoot-yarn/apache-yarn-create-queue-6.png)  
 7. Seçin **kaydedin ve yenileyin kuyrukları**.
 
-    ![Kaydet'i seçin ve kuyruklarını Yenile](media/hdinsight-troubleshoot-yarn/create-queue-7.png)  
+    ![Kaydet'i seçin ve kuyruklarını Yenile](media/hdinsight-troubleshoot-yarn/apache-yarn-create-queue-7.png)  
 
 Bu değişiklikler hemen YARN Zamanlayıcı UI görülebilir.
 
@@ -61,19 +62,18 @@ Bu değişiklikler hemen YARN Zamanlayıcı UI görülebilir.
 
 - [Apache Hadoop YARN CapacityScheduler](https://hadoop.apache.org/docs/r2.7.2/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html)
 
-
 ## <a name="how-do-i-download-yarn-logs-from-a-cluster"></a>Bir kümeden YARN günlüklerini nasıl indiririm?
 
-
-### <a name="resolution-steps"></a>Çözüm adımları 
+### <a name="resolution-steps"></a>Çözüm adımları
 
 1. Güvenli Kabuk (SSH) istemcisi kullanarak HDInsight kümesine bağlanın. Daha fazla bilgi için [ek okuma](#additional-reading-2).
 
-2. Şu anda çalışan YARN uygulamaları tüm uygulama kimliklerini listelemek için aşağıdaki komutu çalıştırın:
+1. Şu anda çalışan YARN uygulamaları tüm uygulama kimliklerini listelemek için aşağıdaki komutu çalıştırın:
 
     ```apache
     yarn top
     ```
+
     Kimlikleri listelenen **APPLİCATİONID** sütun. Günlükleri indirebilirsiniz **APPLİCATİONID** sütun.
 
     ```apache
@@ -89,51 +89,57 @@ Bu değişiklikler hemen YARN Zamanlayıcı UI görülebilir.
      application_1490377567345_0006 hive            spark  thriftsvr       1       0       1       0      1G      0G    1628430    2442645  10.00   18:20:20 Thrift JDBC/ODBC Server
     ```
 
-3. YARN kapsayıcı günlükleri indirmek için tüm uygulama yöneticileri için aşağıdaki komutu kullanın:
-   
+1. YARN kapsayıcı günlükleri indirmek için tüm uygulama yöneticileri için aşağıdaki komutu kullanın:
+
     ```apache
     yarn logs -applicationIdn logs -applicationId <application_id> -am ALL > amlogs.txt
     ```
 
-    Bu komut amlogs.txt adlı bir günlük dosyası oluşturur. 
+    Bu komut amlogs.txt adlı bir günlük dosyası oluşturur.
 
-4. YARN kapsayıcı günlükleri yalnızca en son uygulama şablonu indirmek için aşağıdaki komutu kullanın:
+1. YARN kapsayıcı günlükleri yalnızca en son uygulama şablonu indirmek için aşağıdaki komutu kullanın:
 
     ```apache
     yarn logs -applicationIdn logs -applicationId <application_id> -am -1 > latestamlogs.txt
     ```
 
-    Bu komut latestamlogs.txt adlı bir günlük dosyası oluşturur. 
+    Bu komut latestamlogs.txt adlı bir günlük dosyası oluşturur.
 
-4. İlk iki uygulama yöneticileri için YARN kapsayıcı günlükleri indirmek için aşağıdaki komutu kullanın:
+1. İlk iki uygulama yöneticileri için YARN kapsayıcı günlükleri indirmek için aşağıdaki komutu kullanın:
 
     ```apache
-    yarn logs -applicationIdn logs -applicationId <application_id> -am 1,2 > first2amlogs.txt 
+    yarn logs -applicationIdn logs -applicationId <application_id> -am 1,2 > first2amlogs.txt
     ```
 
-    Bu komut first2amlogs.txt adlı bir günlük dosyası oluşturur. 
+    Bu komut first2amlogs.txt adlı bir günlük dosyası oluşturur.
 
-5. Tüm YARN kapsayıcı günlükleri indirmek için aşağıdaki komutu kullanın:
+1. Tüm YARN kapsayıcı günlükleri indirmek için aşağıdaki komutu kullanın:
 
     ```apache
     yarn logs -applicationIdn logs -applicationId <application_id> > logs.txt
     ```
 
-    Bu komut logs.txt adlı bir günlük dosyası oluşturur. 
+    Bu komut logs.txt adlı bir günlük dosyası oluşturur.
 
-6. YARN kapsayıcı günlüğü için belirli bir kapsayıcıya yüklemek için aşağıdaki komutu kullanın:
+1. YARN kapsayıcı günlüğü için belirli bir kapsayıcıya yüklemek için aşağıdaki komutu kullanın:
 
     ```apache
-    yarn logs -applicationIdn logs -applicationId <application_id> -containerId <container_id> > containerlogs.txt 
+    yarn logs -applicationIdn logs -applicationId <application_id> -containerId <container_id> > containerlogs.txt
     ```
 
     Bu komut containerlogs.txt adlı bir günlük dosyası oluşturur.
 
 ### <a name="additional-reading-2"></a>Ek okuma
 
-- [SSH kullanarak HDInsight için (Apache Hadoop) bağlanma](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-linux-use-ssh-unix)
+- [SSH kullanarak HDInsight 'a (Apache Hadoop) bağlanma](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-linux-use-ssh-unix)
 - [Apache Hadoop YARN kavramları ve uygulamaları](https://hadoop.apache.org/docs/r2.7.4/hadoop-yarn/hadoop-yarn-site/WritingYarnApplications.html#Concepts_and_Flow)
 
+## <a name="next-steps"></a>Sonraki adımlar
 
-### <a name="see-also"></a>Ayrıca Bkz.
-[Azure HDInsight'ı kullanarak sorun giderme](hdinsight-troubleshoot-guide.md)
+Sorununuzu görmüyorsanız veya sorununuzu çözemediyseniz, daha fazla destek için aşağıdaki kanallardan birini ziyaret edin:
+
+- Azure [topluluk desteği](https://azure.microsoft.com/support/community/)aracılığıyla Azure uzmanlarından yanıt alın.
+
+- [@AzureSupport](https://twitter.com/azuresupport) Müşteri deneyimini iyileştirmek için resmi Microsoft Azure hesabına bağlanın. Azure Community 'yi doğru kaynaklara bağlama: yanıtlar, destek ve uzmanlar.
+
+- Daha fazla yardıma ihtiyacınız varsa [Azure Portal](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/)bir destek isteği gönderebilirsiniz. Menü çubuğundan **destek** ' i seçin veya **Yardım + Destek** hub 'ını açın. Daha ayrıntılı bilgi için [Azure destek isteği oluşturma](https://docs.microsoft.com/azure/azure-supportability/how-to-create-azure-support-request)konusunu inceleyin. Abonelik yönetimi ve faturalandırma desteği 'ne erişim Microsoft Azure aboneliğinize dahildir ve [Azure destek planlarından](https://azure.microsoft.com/support/plans/)biri aracılığıyla teknik destek sağlanır.

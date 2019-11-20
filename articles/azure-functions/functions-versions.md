@@ -1,129 +1,135 @@
 ---
-title: Azure işlevleri çalışma zamanı sürümleri genel bakış
-description: Azure İşlevleri, birden fazla çalışma zamanı sürümünü destekler. Bunları sizin için doğru olanı seçme arasındaki farkları öğrenin.
-services: functions
-documentationcenter: ''
+title: Azure Işlevleri çalışma zamanı sürümlerine genel bakış
+description: Azure Işlevleri, çalışma zamanının birden çok sürümünü destekler. Aralarındaki farkları ve sizin için doğru olanı seçme hakkında bilgi edinin.
 author: ggailey777
-manager: jeconnoc
+manager: gwallace
 ms.service: azure-functions
 ms.topic: conceptual
-ms.date: 10/03/2018
+ms.date: 10/10/2019
 ms.author: glenga
-ms.openlocfilehash: 6988fb547b07f81891efea3caad8bf34f4c8a476
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9ca7006bb842cbe235d2e982e611613e1fd74ed9
+ms.sourcegitcommit: b4f201a633775fee96c7e13e176946f6e0e5dd85
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61036323"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72597421"
 ---
-# <a name="azure-functions-runtime-versions-overview"></a>Azure işlevleri çalışma zamanı sürümleri genel bakış
+# <a name="azure-functions-runtime-versions-overview"></a>Azure Işlevleri çalışma zamanı sürümlerine genel bakış
 
- Azure işlevleri çalışma zamanı ana iki sürümü vardır: 1.x ve 2.x'i. Hem de üretim senaryolarında desteklenir ancak burada yeni özellik çalışmalarına ve geliştirmeler yapılmıştır geçerli 2.x sürümüdür.  İkisi arasındaki farklılıklar aşağıdaki ayrıntıları nasıl, her sürüm oluşturabilir ve 2.x'i 1.x ' yükseltme.
+Azure Işlevleri çalışma zamanının ana sürümleri, çalışma zamanının temel aldığı .NET sürümü ile ilgilidir. Aşağıdaki tabloda, çalışma zamanının geçerli sürümü, sürüm düzeyi ve ilgili .NET sürümü gösterilmektedir. 
 
-> [!NOTE]
-> Bu makalede, Azure işlevleri bulut hizmetine başvurur. Azure işlevleri şirket içi çalıştırmanıza olanak sağlayan bir önizleme ürünü hakkında daha fazla bilgi için bkz. [Azure işlevleri çalışma zamanına genel bakış](functions-runtime-overview.md).
+| Çalışma zamanı sürümü | Yayın düzeyi<sup>1</sup> | .NET sürümü | 
+| --------------- | ------------- | ------------ |
+| 3.x  | önizleme | .NET Core 3. x | 
+| 2.x | Genel Kullanım | .NET Core 2.2 |
+| 'in | GA<sup>2</sup> | .NET Framework 4,6<sup>3</sup> |
 
-## <a name="cross-platform-development"></a>Platformlar arası geliştirme
+<sup>1</sup> GA sürümleri, üretim senaryolarında desteklenir.   
+<sup>2</sup> Sürüm 1. x bakım modunda. Geliştirmeler yalnızca sonraki sürümlerde sağlanır.   
+<sup>3</sup> Yalnızca Azure portal veya Windows bilgisayarlarda yerel olarak geliştirme desteklenir.
 
-Sürüm 2.x çalışma zamanı, macOS ve Linux gibi .NET Core tarafından desteklenen tüm platformlarda çalışmasını sağlayan .NET Core 2 üzerinde çalışır. .NET Core üzerinde çalışan platformlar arası geliştirme ve barındırma senaryolarında sağlar.
+>[!NOTE]  
+> Işlevler çalışma zamanının 3. x sürümü önizlemededir ve üretim ortamlarında desteklenmez. Sürüm 3. x ' i denemek hakkında daha fazla bilgi için [bu duyuruya](https://dev.to/azure/develop-azure-functions-using-net-core-3-0-gcm)bakın.
 
-Buna karşılık olarak sürüm 1.x çalışma zamanı yalnızca geliştirme ve Azure portalında veya Windows bilgisayarlarda barındırma destekler.
+Bu makalede çeşitli sürümler, her sürümü nasıl oluşturabileceğiniz ve sürümlerin nasıl değiştirileceği hakkında bazı farklılıklar açıklanır.
 
-## <a name="languages"></a>Languages
+## <a name="languages"></a>Diller
 
-Sürüm 2.x çalışma zamanı, yeni bir dil genişletilebilirlik modeli kullanır. Sürüm 2.x, bir işlev uygulamasında tüm işlevleri aynı dilde paylaşım gerekir. Bir işlev uygulaması işlevlerinde dili uygulama oluşturulurken seçilir.
+Sürüm 2. x ile başlayarak, çalışma zamanı bir dil genişletilebilirlik modeli kullanır ve bir işlev uygulamasındaki tüm işlevler aynı dili paylaşmalıdır. İşlev uygulamasındaki işlevlerin dili, uygulama oluşturulurken seçilir ve [işlevler \_WORKER \_RUNTIME](functions-app-settings.md#functions_worker_runtime) ayarında saklanır. 
 
-Azure işlevleri 1.x Deneysel dillerden bunlar 2.x'i desteklenmez. Bu nedenle yeni modeli kullanmak için güncelleştirilmez. Aşağıdaki tablo, hangi programlama dilleri içinde her çalışma zamanı sürümü şu anda desteklenen belirtir.
+Azure Işlevleri 1. x deneysel dilleri yeni modeli kullanamaz, bu nedenle 2. x içinde desteklenmez. Aşağıdaki tablo, her çalışma zamanı sürümünde hangi programlama dillerinin desteklendiğini gösterir.
 
 [!INCLUDE [functions-supported-languages](../../includes/functions-supported-languages.md)]
 
 Daha fazla bilgi için bkz. [Desteklenen diller](supported-languages.md).
 
-## <a name="creating-1x-apps"></a>Sürümünde çalışmasını 1.x
+## <a name="creating-1x-apps"></a>Belirli bir sürümde Çalıştır
 
-Varsayılan olarak, Azure portalında oluşturulan işlev uygulamaları için sürüm ayarlanır 2.x. Mümkün olduğunda, yeni özellik Yatırımlar burada yapılan bu çalışma zamanı sürümünü kullanmanız gerekir. Gerek duyarsanız, bir işlev uygulaması sürüm 1.x çalışma zamanı üzerinde çalıştırabilirsiniz. İşlev uygulamanızı oluşturduktan sonra ancak tüm işlevleri eklemeden önce yalnızca çalışma zamanı sürümünü değiştirebilirsiniz. 1\.x çalışma zamanı sürümüne sabitleme öğrenmek için bkz. [görüntüleyin ve güncelleştirme geçerli çalışma zamanı sürümünü](set-runtime-version.md#view-and-update-the-current-runtime-version).
+Varsayılan olarak, Azure portal oluşturulan işlev uygulamaları ve Azure CLı tarafından sürüm 2. x olarak ayarlanır. Mümkün olduğunda, bu çalışma zamanı sürümünü kullanmanız gerekir. Gerekirse, sürüm 1. x çalışma zamanında bir işlev uygulamasını çalıştırmaya devam edebilirsiniz. Çalışma zamanı sürümünü yalnızca işlev uygulamanızı oluşturduktan sonra değiştirebilirsiniz, ancak herhangi bir işlev eklemeden önce. Çalışma zamanı sürümünü 1. x 'e nasıl sabitleyeceğinizi öğrenmek için bkz. [geçerli çalışma zamanı sürümünü görüntüleme ve güncelleştirme](set-runtime-version.md#view-and-update-the-current-runtime-version).
 
-## <a name="migrating-from-1x-to-2x"></a>2\.x için 1.x geçiş
+Ayrıca, önizleme aşamasında olan çalışma zamanının 3. x sürümüne de yükseltebilirsiniz. İşlevlerinizi .NET Core 3. x üzerinde çalıştırabilmeniz gerekiyorsa bunu yapın. 3\. x sürümüne yükseltmeyi öğrenmek için bkz. [geçerli çalışma zamanı sürümünü görüntüleme ve güncelleştirme](set-runtime-version.md#view-and-update-the-current-runtime-version).
 
-Bunun yerine sürümünü kullanmak için sürüm 1.x çalışma zamanı kullanmak için yazılmış var olan bir uygulamayı geçirmek seçebilirsiniz 2.x. Yapmanız gereken değişiklikleri çoğu .NET Framework 4.7 ile .NET Core 2 arasındaki C# API değişiklikleri gibi dil çalışma zamanı değişiklikleri ilgilidir. Ayrıca kodunuzun emin olmanız gerekir ve kitaplıkları seçtiğiniz dil çalışma zamanı ile uyumludur. Son olarak, herhangi bir değişiklik tetikleyici, bağlamalar ve aşağıda vurgulanan özellikleri not etmeyi unutmayın. En iyi geçiş sonuçlar için sürüm için yeni bir işlev uygulaması oluşturmanız gerekir, mevcut sürümü 1.x işlevi yeni uygulamasına kod 2.x ve bağlantı noktası.  
+## <a name="migrating-from-1x-to-later-versions"></a>1\. x 'den sonraki sürümlere geçiş
 
-### <a name="changes-in-triggers-and-bindings"></a>Tetikleyiciler ve bağlamalar değişiklikleri
+Sürüm 1. x çalışma zamanını kullanmak üzere yazılmış mevcut bir uygulamayı bunun yerine 2. x sürümünü kullanacak şekilde geçirmeyi tercih edebilirsiniz. Yapmanız gereken değişikliklerin çoğu, dil çalışma zamanındaki değişikliklerle ilgilidir, örneğin .NET Framework 4,7 ile .NET Core 2 arasındaki C# API değişiklikleri. Ayrıca, kodunuzun ve kitaplıklarınızın seçtiğiniz dil çalışma zamanıyla uyumlu olduğundan emin olmanız gerekir. Son olarak, aşağıda vurgulanan tetikleyici, bağlamalar ve özelliklerde değişiklik yaptığınızdan emin olun. En iyi geçiş sonuçları için, sürüm 2. x için yeni bir işlev uygulaması oluşturmanız ve var olan sürüm 1. x işlev kodunuzun yeni uygulamaya bağlantı noktası oluşturmanız gerekir.  
 
-Sürüm 2.x belirli Tetikleyicileri ve bağlamaları işlevler uygulamanız tarafından kullanılan uzantıları yüklemek gerektirir. Bir uzantı gerektirmeyen bu HTTP ve Zamanlayıcı Tetikleyicileri için tek özel durum.  Daha fazla bilgi için [kaydedin ve uzantılarını bağlama yükleme](./functions-bindings-register.md).
+### <a name="changes-in-triggers-and-bindings"></a>Tetikleyiciler ve bağlamalardaki değişiklikler
 
-Ayrıca bazı değişiklikleri de olmuştur `function.json` veya işlevin sürümleri arasında öznitelikleri. Örneğin, olay hub'ı `path` özelliği, artık `eventHubName`. Bkz: [varolan bağlama tablosu](#bindings) her bağlama için belgelere bağlantılar için.
+Sürüm 2. x, uygulamanızdaki işlevler tarafından kullanılan belirli Tetikleyiciler ve bağlamalar için uzantıları yüklemenizi gerektirir. Bu HTTP ve Zamanlayıcı Tetikleyicileri için uzantı gerektirmeyen tek özel durum.  Daha fazla bilgi için bkz. [bağlama uzantılarını kaydetme ve yüklemeyi bağlama](./functions-bindings-register.md).
 
-### <a name="changes-in-features-and-functionality"></a>Özellikler ve işlevsellik değişiklikler
+Ayrıca, sürümler arasında işlevin `function.json` veya özniteliklerinde birkaç değişiklik de vardır. Örneğin, Event hub `path` özelliği artık `eventHubName`. Her bağlamaya yönelik belgelerin bağlantıları için [mevcut bağlama tablosuna](#bindings) bakın.
 
-Ayrıca kaldırılmış olan bazı özellikleri güncelleştirilmiş veya yeni bir sürümde değiştirildi. Bu bölümde sürümünde gördüğünüz değişiklikleri ayrıntıları 2.x sürümü kullandıktan sonra 1.x.
+### <a name="changes-in-features-and-functionality"></a>Özelliklerde ve işlevlerde yapılan değişiklikler
 
-Sürüm 2.x, aşağıdaki değişiklikler yapıldı:
+Yeni sürümde kaldırılan, güncellenen veya değiştirilmiş birkaç özellik. Bu bölümde, sürüm 1. x kullandıktan sonra 2. x sürümünde gördüğünüz değişikliklerin ayrıntıları yer aldığı bir ayrıntılardır.
 
-* HTTP uç noktalarını çağırma anahtarlar her zaman şifreli Azure Blob Depolama alanında depolanır. Sürümünde 1.x, anahtarları depolanmış Azure dosya depolama, varsayılan olabilir. Bir uygulama sürümüne yükseltirken 1.x sürümüne 2.x, dosya depolama alanında olan mevcut gizli dizileri sıfırlanır.
+2\. x sürümünde aşağıdaki değişiklikler yapılmıştır:
 
-* Sürüm 2.x çalışma zamanı, Web kancası sağlayıcıları için yerleşik destek içermez. Performansı artırmak için bu değişiklik yapılmıştır. HTTP Tetikleyicileri uç noktaları için Web kancaları kullanmaya devam edebilirsiniz.
+* HTTP uç noktalarını çağırma anahtarları, her zaman Azure Blob depolamada şifrelenir. 1\. x sürümünde anahtarlar Azure dosya depolama alanında depolanır. Bir uygulamayı 1. x sürümünden sürüm 2. x ' e yükseltirken, dosya depolamada bulunan mevcut gizlilikler sıfırlanır.
 
-* Ana bilgisayar yapılandırma dosyası (host.json) boş olabilir veya dize sahip `"version": "2.0"`.
+* Sürüm 2. x çalışma zamanı, Web kancası sağlayıcıları için yerleşik destek içermez. Bu değişiklik performansı artırmak için yapılmıştır. HTTP tetikleyicilerini Web kancaları için uç nokta olarak kullanmaya devam edebilirsiniz.
 
-* İzleme, Web işleri Panosu'nu kullanılan portalında geliştirmek için [ `AzureWebJobsDashboard` ](functions-app-settings.md#azurewebjobsdashboard) ayarı, Azure kullanan uygulamanızla, değiştirilir [ `APPINSIGHTS_INSTRUMENTATIONKEY` ](functions-app-settings.md#appinsights_instrumentationkey) ayarı. Daha fazla bilgi için [İzleyici Azure işlevleri](functions-monitoring.md).
+* Ana bilgisayar yapılandırma dosyası (Host. JSON) boş olmalıdır veya `"version": "2.0"` dize olmalıdır.
 
-* Bir işlev uygulamasında tüm işlevleri aynı dilde paylaşmanız gerekir. Bir işlev uygulaması oluşturduğunuzda, uygulama için çalışma zamanı yığını seçmeniz gerekir. Çalışma zamanı yığını tarafından belirtilen [ `FUNCTIONS_WORKER_RUNTIME` ](functions-app-settings.md#functions_worker_runtime) uygulama ayarlarındaki değer. Bu gereksinim, Ayak izi ve başlangıç süresini kısaltmak için eklendi. Yerel olarak geliştirirken, bu ayarda de dahil etmelisiniz [local.settings.json dosyasında](functions-run-local.md#local-settings-file).
+* İzlemeyi geliştirmek için, portalda [`AzureWebJobsDashboard`](functions-app-settings.md#azurewebjobsdashboard) ayarının kullanıldığı Web işleri panosu, [`APPINSIGHTS_INSTRUMENTATIONKEY`](functions-app-settings.md#appinsights_instrumentationkey) ayarını kullanan Azure Application Insights ile değiştirilmiştir. Daha fazla bilgi için bkz. [Azure Işlevlerini izleme](functions-monitoring.md).
 
-* App Service planı işlevleri için varsayılan zaman aşımını 30 dakika ile değiştirilir. El ile zaman aşımı sınırsız kullanarak değiştirebileceğiniz [functionTimeout](functions-host-json.md#functiontimeout) host.json ayarlama.
+* Bir işlev uygulamasındaki tüm işlevler aynı dili paylaşmalıdır. Bir işlev uygulaması oluşturduğunuzda, uygulama için bir çalışma zamanı yığını seçmeniz gerekir. Çalışma zamanı yığını, uygulama ayarlarındaki [`FUNCTIONS_WORKER_RUNTIME`](functions-app-settings.md#functions_worker_runtime) değeriyle belirtilir. Bu gereksinim, parmak izini ve başlangıç süresini artırmak için eklenmiştir. Yerel olarak geliştirilirken, bu ayarı [Local. Settings. JSON dosyasına](functions-run-local.md#local-settings-file)da dahil etmeniz gerekir.
 
-* Örnek başına 100 eş zamanlı isteklerin varsayılan tüketim planı işlevleri için varsayılan olarak HTTP eşzamanlılık kısıtlamalar uygulanır. Bu konuda değiştirebilirsiniz [ `maxConcurrentRequests` ](functions-host-json.md#http) host.json dosyasında ayarı.
+* Bir App Service planındaki işlevler için varsayılan zaman aşımı 30 dakikaya dönüştürülür. Host. json ' daki [functiontimeout](functions-host-json.md#functiontimeout) ayarını kullanarak, zaman aşımını tekrar sınırsız olarak değiştirebilirsiniz.
 
-* Nedeniyle [.NET core sınırlamaları](https://github.com/Azure/azure-functions-host/issues/3414), desteği F# betik (.fsx) işlevleri kaldırıldı. Derlenmiş F# işlevleri (.fs) hala destekleniyor.
+* HTTP eşzamanlılık kısıtlılığı, örnek başına 100 eşzamanlı istek içeren tüketim planı işlevleri için varsayılan olarak uygulanır. Bunu, Host. JSON dosyasındaki [`maxConcurrentRequests`](functions-host-json.md#http) ayarında değiştirebilirsiniz.
 
-* Olay Kılavuzu tetikleyicisi Web kancaları URL biçimi değiştirildi `https://{app}/runtime/webhooks/{triggerName}`.
+* [.NET Core sınırlamaları](https://github.com/Azure/azure-functions-host/issues/3414)nedeniyle, komut dosyası ( F# . FSX) işlevleri için destek kaldırılmıştır. Derlenen F# işlevler (. FS) hala desteklenmektedir.
+
+* Event Grid tetikleyici Web kancalarının URL biçimi `https://{app}/runtime/webhooks/{triggerName}` olarak değiştirildi.
 
 ### <a name="migrating-a-locally-developed-application"></a>Yerel olarak geliştirilmiş bir uygulamayı geçirme
 
-İşlev uygulaması projeleri yerel olarak sürüm 1.x çalışma zamanı kullanılarak geliştirilen mevcut olabilir. Sürümüne yükseltmek için 2.x sürümüne karşı yerel işlev uygulaması projesi oluşturmak, varolan kod yeni bir uygulamaya 2.x ve bağlantı noktası. El ile güncelleştirmeniz mevcut proje ve kod, "yerinde" Yükseltme bir tür. Ancak, diğer iyileştirmeler sürümü arasında vardır 1.x ve sürümü hala yapmanız gerekebilir 2.x. Örneğin, C# hata ayıklama nesnesi değiştirildi `TraceWriter` için `ILogger`. Yeni bir sürüm 2.x projesi oluşturarak, güncelleştirilmiş işlevler en son sürüm 2.x şablonlar temelinde ile başlayın.
+1\. x çalışma zamanı sürümünü kullanarak yerel olarak geliştirmiş olduğunuz işlev uygulaması projelerine sahip olabilirsiniz. Sürüm 2. x ' e yükseltmek için, sürüm 2. x sürümüne ve mevcut kodunuzun bağlantı noktasına karşı yeni uygulamaya yönelik bir yerel işlev uygulama projesi oluşturmanız gerekir. Mevcut projeyi ve kodu, "yerinde" yükseltme için el ile güncelleştirebilirsiniz. Ancak, 1. x ve sürüm 2. x arasında hala yapmanız gerekebilecek bazı diğer geliştirmeler vardır. Örneğin, hata ayıklama C# nesnesi `TraceWriter`, `ILogger` olarak değiştirilmiştir. Yeni bir sürüm 2. x projesi oluşturarak, en son sürüm 2. x şablonlarına göre güncelleştirilmiş işlevlerle başlayabilirsiniz.
 
 #### <a name="visual-studio-runtime-versions"></a>Visual Studio çalışma zamanı sürümleri
 
-Visual Studio'da bir proje oluşturduğunuzda, çalışma zamanı sürümünü seçin. Visual Studio için Azure işlevleri araçları iki ana çalışma zamanı sürümünü destekler. Hata ayıklama ve yayımlama proje ayarlarına göre doğru sürümü kullanılır. Sürüm ayarlarını tanımlanan `.csproj` dosyasında aşağıdaki özellikleri:
+Visual Studio 'da, bir proje oluştururken çalışma zamanı sürümünü seçersiniz. Visual Studio için Azure Işlevleri araçları, hem önemli çalışma zamanı sürümlerini destekler. Hata ayıklama sırasında ve proje ayarlarına bağlı olarak yayımlandığında doğru sürüm kullanılır. Sürüm ayarları, aşağıdaki özelliklerde `.csproj` dosyasında tanımlanır:
 
-##### <a name="version-1x"></a>Sürüm 1.x
+##### <a name="version-1x"></a>Sürüm 1. x
 
 ```xml
 <TargetFramework>net461</TargetFramework>
 <AzureFunctionsVersion>v1</AzureFunctionsVersion>
 ```
 
-##### <a name="version-2x"></a>Sürüm 2.x
+##### <a name="version-2x"></a>Sürüm 2. x
 
 ```xml
 <TargetFramework>netcoreapp2.2</TargetFramework>
 <AzureFunctionsVersion>v2</AzureFunctionsVersion>
 ```
 
-Hata ayıklama veya projenizi yayımlamak, doğru çalışma zamanı sürümü kullanılır.
+Projenizi hata ayıkladığınızda veya yayımladığınızda, çalışma zamanının doğru sürümü kullanılır.
 
-#### <a name="vs-code-and-azure-functions-core-tools"></a>VS Code ve Azure işlevleri temel araçları
+#### <a name="vs-code-and-azure-functions-core-tools"></a>VS Code ve Azure Functions Core Tools
 
-[Azure işlevleri temel araçları](functions-run-local.md) komut satırı geliştirme için ve ayrıca tarafından kullanılan [Azure işlevleri uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) Visual Studio Code için. Sürüm karşı geliştirmek için 2.x, yükleme sürüm 2.x çekirdek araçlar. Sürüm 1.x geliştirme sürümünü gerektirir 1.x temel araçlar. Daha fazla bilgi için [Azure Functions Core Tools'u yükleme](functions-run-local.md#install-the-azure-functions-core-tools).
+[Azure Functions Core Tools](functions-run-local.md) , komut satırı geliştirme ve ayrıca Visual Studio Code Için [Azure işlevleri uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) tarafından kullanılır. Sürüm 2. x ' i geliştirmek için çekirdek araçların 2. x sürümünü yüklemelisiniz. Sürüm 1. x geliştirme, çekirdek araçların 1. x sürümünü gerektirir. Daha fazla bilgi için bkz. [Azure Functions Core Tools yüklemesi](functions-run-local.md#install-the-azure-functions-core-tools).
 
-Visual Studio Code geliştirme için Ayrıca kullanıcı ayarını güncelleştirmeniz gerekebilir `azureFunctions.projectRuntime` araçlarının yüklü sürümüyle eşleşecek şekilde.  Bu ayar, ayrıca şablonları ve işlev uygulaması oluşturma sırasında kullanılan dilleri güncelleştirir.
+Visual Studio Code geliştirme için, Ayrıca, `azureFunctions.projectRuntime` için Kullanıcı ayarını, yüklü araçların sürümüyle eşleşecek şekilde güncelleştirmeniz gerekebilir.  Bu ayar, işlev uygulaması oluşturma sırasında kullanılan şablonları ve dilleri de güncelleştirir.
 
-### <a name="changing-version-of-apps-in-azure"></a>Azure'da uygulama sürümünü değiştirme
+### <a name="changing-version-of-apps-in-azure"></a>Azure 'da uygulamaların sürümünü değiştirme
 
-Azure'da yayımlanan uygulamalar tarafından kullanılan işlevler çalışma zamanı sürümü tarafından dikte [ `FUNCTIONS_EXTENSION_VERSION` ](functions-app-settings.md#functions_extension_version) uygulama ayarı. Değerini `~2` sürüm 2.x çalışma zamanını hedefleyen ve `~1` sürüm 1.x çalışma zamanını hedefleyen. Rasgele diğer uygulama ayarı değişikliklerini ve kod değişikliklerini işlevlerinizi büyük olasılıkla gerekli olduğu için bu ayarı değiştirmeyin. İşlev uygulamanızın farklı çalışma zamanı sürümüne geçirmek için önerilen yöntem hakkında bilgi edinmek için bkz. [Azure işlevleri çalışma zamanı sürümlerini hedeflemek nasıl](set-runtime-version.md).
+Azure 'da yayımlanan uygulamalar tarafından kullanılan Işlevlerin çalışma zamanının sürümü [`FUNCTIONS_EXTENSION_VERSION`](functions-app-settings.md#functions_extension_version) uygulama ayarı tarafından belirlenir. @No__t_0 değeri sürüm 2. x çalışma zamanına ve `~1` sürüm 1. x çalışma zamanını hedefliyor. Bu ayarı rastgele değiştirmeyin, çünkü işlevinizdeki diğer uygulama ayarı değişiklikleri ve kod değişiklikleri muhtemelen gereklidir. İşlev uygulamanızı farklı bir çalışma zamanı sürümüne geçirmek için önerilen yöntem hakkında bilgi edinmek için bkz. [Azure işlevleri çalışma zamanı sürümlerini hedefleme](set-runtime-version.md).
 
 ## <a name="bindings"></a>Bağlamalar
 
-Yeni bir sürüm 2.x çalışma zamanı kullanan [bağlama genişletilebilirlik modeli](https://github.com/Azure/azure-webjobs-sdk-extensions/wiki/Binding-Extensions-Overview) , aşağıdaki avantajları sunar:
+Çalışma zamanı, sürüm 2. x ile başlayarak bu avantajları sunan yeni bir [bağlama genişletilebilirlik modeli](https://github.com/Azure/azure-webjobs-sdk-extensions/wiki/Binding-Extensions-Overview) kullanır:
 
 * Üçüncü taraf bağlama uzantıları için destek.
 
-* Çalışma zamanı bağlamaları ve ayırma. Bu değişiklik, bağlama uzantıları tutulan ve bağımsız olarak yayımlanan olmasını sağlar. Örneğin, temel alınan bir SDK'ın daha yeni bir sürümüne bağımlı bir uzantı sürümünü yükseltmek için iyileştirilmiş olabilir.
+* Çalışma zamanının ve bağlamaların ayrılması. Bu değişiklik, bağlama uzantılarının bağımsız olarak yayınlanabilmesini ve serbest bırakılacağını sağlar. Örneğin, temel bir SDK 'nın daha yeni bir sürümüne bağımlı olan bir uzantının sürümüne yükseltmeyi tercih edebilirsiniz.
 
-* Bağlamaları kullanımda olduğu bilinen ve çalışma zamanı tarafından yüklenen bir açık yürütme ortamı.
+* Yalnızca kullanımdaki bağlamaların bilinen ve çalışma zamanı tarafından yüklendiği, daha hafif bir yürütme ortamıdır.
 
-HTTP ve Zamanlayıcı Tetikleyicileri hariç tüm bağlamaları gerekir açıkça işlevi uygulaması projesine eklemek veya Portalı'nda kayıtlı. Daha fazla bilgi için [kaydetme bağlama uzantıları](./functions-bindings-expressions-patterns.md).
+HTTP ve Zamanlayıcı Tetikleyicileri hariç olmak üzere tüm bağlamalar, işlev uygulaması projesine açıkça eklenmelidir veya portalda kayıtlı olmalıdır. Daha fazla bilgi için bkz. [bağlama uzantılarını kaydetme](./functions-bindings-expressions-patterns.md).
 
-Aşağıdaki tablo, hangi bağlamaları her çalışma zamanı sürümünde desteklenen gösterir.
+Aşağıdaki tabloda, her çalışma zamanı sürümünde hangi bağlamaların desteklendiği gösterilmektedir.
 
 [!INCLUDE [Full bindings table](../../includes/functions-bindings.md)]
 
@@ -134,5 +140,5 @@ Aşağıdaki tablo, hangi bağlamaları her çalışma zamanı sürümünde dest
 Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
 * [Azure İşlevleri’ni yerel olarak kodlama ve test etme](functions-run-local.md)
-* [Azure işlevleri çalışma zamanı sürümlerini hedeflemek nasıl](set-runtime-version.md)
+* [Azure Işlevleri çalışma zamanı sürümlerini hedefleme](set-runtime-version.md)
 * [Sürüm notları](https://github.com/Azure/azure-functions-host/releases)

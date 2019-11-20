@@ -1,44 +1,95 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Data Box Belgeleri - Çevrimdışı Aktarım
+### YamlMime:Landing
+title: Azure Data Box belgeleri - Çevrimdışı aktarım
+summary: Süre, ağ veya maliyet konusunda sınırlarınız varsa çevrimdışı veri aktarımı için Azure Data Box cihazlarını kullanabilirsiniz. Verilerinizin boyutuna göre Data Box Disk, Data Box veya Data Box Heavy çözümlerinden birini seçebilirsiniz.
 metadata:
   title: Azure Data Box Belgeleri - Çevrimdışı Aktarım
-  description: 'Süre, ağ veya maliyet konusunda sınırlarınız varsa Azure’a çevrimdışı veri aktarımı için Data Box cihazlarını kullanabilirsiniz.'
+  description: Süre, ağ veya maliyet konusunda sınırlar varsa Azure’a çevrimdışı veri aktarımı için Data Box cihazlarını kullanabilirsiniz.
   services: databox
-  author: alkohli
-  manager: twooley
   ms.service: databox
   ms.subservice: pod
   ms.topic: landing-page
-  ms.date: 01/09/2019
+  ms.collection: collection
+  author: alkohli
   ms.author: alkohli
-abstract:
-  description: 'Azure Data Box ailesi hızlı, ucuz ve güvenilir bir yolla yüzlerce terabayt boyutundaki veriyi Azure''a aktarmanıza olanak tanır. Süre, ağ veya maliyet konusunda sınırlarınız varsa çevrimdışı veri aktarımı için Data Box cihazlarını kullanabilirsiniz.<p>Verilerinizin boyutuna göre Data Box Disk, Data Box veya Data Box Heavy <SUP>Önizleme</SUP> çözümlerinden birini seçebilirsiniz. Her cihazda Azure''a aktarım 4 kolay adımda gerçekleşir: sipariş, teslim alma, verileri cihaza kopyalama ve cihazı Azure''a geri gönderme. Azure veri merkezinde veriler yüklenir ve ardından cihazdan silinir.</p><p>Çevrimdışı veri aktarımı için Data Box ürünlerini kullanma hakkında bilgi edinmek için hızlı başlangıçlara ve öğreticilere göz atın.</p>'
-sections:
-  - title: Hızlı Başlangıç
-    items:
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_quick-start.svg'
-            text: Azure portalında Data Box'ı ayarlama
-            href: /azure/databox/data-box-quickstart-portal
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_quick-start.svg'
-            text: Azure portalında Data Box Disk'i ayarlama
-            href: /azure/databox/data-box-disk-quickstart-portal
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_quick-start.svg'
-            text: Data Box Heavy<SUP>Önizleme</SUP> hizmetine kaydolma
-            href: '/azure/databox/data-box-heavy-overview#sign-up'
-  - title: Öğreticiler
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Data Box için
-            html: <p><a href="/azure/databox/data-box-deploy-ordered">Azure Data Box sipariş etme</a></p><p><a href="/azure/databox/data-box-deploy-set-up">Azure Data Box'ın kablolarını takma ve bağlantıları kurma</a></p><p><a href="/azure/databox/data-box-deploy-copy-data">Azure Data Box'a veri kopyalama</a></p><p><a href="/azure/databox/data-box-deploy-picked-up">Azure Data Box'ı geri gönderme ve yükleme işlemini doğrulama</a></p>
-          - title: Data Box Disk için
-            html: '<p><a href="/azure/databox/data-box-disk-deploy-ordered">Azure Data Box Disk sipariş etme</a></p><p><a href="/azure/databox/data-box-disk-deploy-set-up">Azure Data Box Disk''i paketinden çıkarma, bağlama, kilidini açma</a></p><p><a href="/azure/databox/data-box-disk-deploy-copy-data">Azure Data Box Disk''e veri kopyalama</a></p><p><a href="/azure/databox/data-box-disk-deploy-picked-up">Azure Data Box Disk''i geri gönderme ve yükleme işlemini doğrulama</a></p>'
+  ms.date: 08/16/2019
+  ms.openlocfilehash: 2c42ee93804eb1e0e24b0b67925a092cc8517ceb
+  ms.sourcegitcommit: bb8e9f22db4b6f848c7db0ebdfc10e547779cccc
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/20/2019
+  ms.locfileid: "69650365"
+landingContent:
+- title: Data Box ailesi hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Data Box nedir?
+      url: data-box-overview.md
+    - text: Data Box Disk nedir?
+      url: data-box-disk-overview.md
+    - text: Data Box Heavy nedir?
+      url: data-box-heavy-overview.md
+  - linkListType: architecture
+    links:
+    - text: Azure veri aktarımı seçeneklerini belirleme
+      url: /azure/storage/common/storage-choose-data-transfer-solution
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Data Box’ı ayarlama
+      url: data-box-quickstart-portal.md
+    - text: Data Box Disk’i ayarlama
+      url: data-box-disk-quickstart-portal.md
+    - text: Data Box Heavy’yi ayarlama
+      url: data-box-heavy-quickstart-portal.md
+  - linkListType: learn
+    links:
+    - text: Data Box ile verileri çevrimdışı ortama içeri aktarma
+      url: https://docs.microsoft.com/learn/modules/move-data-with-azure-data-box/
+- title: Gereksinimleri görüntüleme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Data Box için
+      url: data-box-system-requirements.md
+    - text: Data Box Disk için
+      url: data-box-disk-system-requirements.md
+    - text: Data Box Heavy için
+      url: data-box-heavy-system-requirements.md
+- title: Sıralama, ayarlama, kopyalama, döndürme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Data Box
+      url: data-box-deploy-ordered.md
+    - text: Data Box Disk
+      url: data-box-disk-deploy-ordered.md
+    - text: Data Box Heavy
+      url: data-box-heavy-deploy-ordered.md
+- title: Cihaz yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure’da Data Box
+      url: data-box-portal-admin.md
+    - text: Azure’da Data Box Disk
+      url: data-box-portal-ui-admin.md
+    - text: Azure’da Data Box Heavy
+      url: data-box-portal-admin.md
+- title: Sorun giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Data Box
+      url: data-box-troubleshoot.md
+    - text: Data Box Disk
+      url: data-box-disk-troubleshoot.md
+    - text: Data Box Heavy
+      url: data-box-troubleshoot.md
+    - text: Data Box Hakkında SSS Aracılığıyla
+      url: data-box-faq.md
+    - text: Data Box Disk Hakkında SSS Aracılığıyla
+      url: data-box-disk-faq.md
+    - text: Destek bileti açma
+      url: data-box-disk-contact-microsoft-support.md

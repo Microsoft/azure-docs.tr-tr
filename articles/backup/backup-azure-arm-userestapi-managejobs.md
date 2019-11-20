@@ -1,29 +1,23 @@
 ---
-title: 'Azure yedekleme: REST API kullanarak yedekleme işlerini yönetme'
-description: Yedeklemeyi yönetme ve Azure REST API kullanarak yedekleme işlerinin geri yükleme
-services: backup
-author: pvrk
-manager: shivamg
-keywords: REST API; Azure VM yedeklemesi; Azure VM geri yükleme;
-ms.service: backup
+title: REST API kullanarak yedekleme Işlerini yönetme
+description: Bu makalede REST API kullanarak Azure Backup yedekleme ve geri yükleme işlerini izleme ve yönetme hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 08/03/2018
-ms.author: pullabhk
 ms.assetid: b234533e-ac51-4482-9452-d97444f98b38
-ms.openlocfilehash: eb8b7dc77d180eb56c2585e93e60a36742f6c84c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 628569c547aa776ec2fbb7ec7e32edad7c1fe7dd
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60646631"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74173404"
 ---
 # <a name="track-backup-and-restore-jobs-using-rest-api"></a>REST API kullanarak yedekleme ve geri yükleme işlerini izleme
 
-Azure Backup hizmeti yedekleme tetikleniyor gibi çeşitli senaryolarda arka planda, geri yükleme işlemleri, yedekleme devre dışı bırakma işleri tetikler. Bu işleri, kimlikleri kullanılarak izlenebilir.
+Azure Backup hizmeti, yedekleme, geri yükleme işlemlerini tetikleme, yedeklemeyi devre dışı bırakma gibi çeşitli senaryolarda arka planda çalışan işleri tetikler. Bu işler kimlikleri kullanılarak izlenebilir.
 
-## <a name="fetch-job-information-from-operations"></a>İş bilgileri işlemlerinden getirilemedi
+## <a name="fetch-job-information-from-operations"></a>İşlemlerden Iş bilgilerini getir
 
-Yedeklemeyi tetikleme gibi bir işlemin her zaman bir iş kimliği döndürür. İçin örn: Son yanıtı bir [yedekleme REST API işlemi tetikleyen](backup-azure-arm-userestapi-backupazurevms.md#example-responses-3) aşağıdaki gibidir:
+Yedeklemenin tetiklenmesi gibi bir işlem, her zaman bir iş kimliği döndürür. Örneğin: bir [tetikleyici yedekleme REST API işleminin](backup-azure-arm-userestapi-backupazurevms.md#example-responses-3) son yanıtı aşağıdaki gibidir:
 
 ```http
 {
@@ -39,15 +33,15 @@ Yedeklemeyi tetikleme gibi bir işlemin her zaman bir iş kimliği döndürür. 
 }
 ```
 
-Azure VM yedekleme işi "iş kimliği" alanı tarafından tanımlanır ve belirtildiği gibi izlenen [burada](https://docs.microsoft.com/rest/api/backup/jobdetails/) kullanarak basit bir *alma* isteği.
+Azure VM yedekleme işi "JobId" alanı tarafından tanımlanır ve basit bir *Get* isteği kullanılarak [burada](https://docs.microsoft.com/rest/api/backup/jobdetails/) belirtildiği gibi izlenebilir.
 
-## <a name="tracking-the-job"></a>İş izleme
+## <a name="tracking-the-job"></a>İşi izleme
 
 ```http
-GET https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}?api-version=2017-07-01
+GET https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}?api-version=2019-05-13
 ```
 
-`{jobName}` "JobId" yukarıda belirtilen. Yanıt her zaman 200 Tamam işin geçerli durumu gösteren "Durum" ile bir alandır. 'ExtendedInfo' bölümünde "Completed" veya "CompletedWithWarnings" olduğunda, iş hakkında daha fazla ayrıntı ortaya çıkarır.
+`{jobName}` yukarıda bahsedilen "JobId" dır. Yanıt, işin geçerli durumunu gösteren "durum" alanı ile her zaman 200 Tamam olur. "Completed" veya "Completedwithuyarılarla" olduğunda, ' Extendeınfo ' bölümü iş hakkında daha fazla ayrıntı gösterir.
 
 ### <a name="response"></a>Yanıt
 
@@ -57,7 +51,7 @@ GET https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{
 
 #### <a name="example-response"></a>Örnek yanıt
 
-Bir kez *alma* URI gönderildi, bir 200 (Tamam) yanıt döndürülür.
+*Get* URI 'si gönderildikten sonra bir 200 (Tamam) yanıtı döndürülür.
 
 ```http
 HTTP/1.1 200 OK

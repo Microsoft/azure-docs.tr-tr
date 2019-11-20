@@ -1,74 +1,56 @@
 ---
-title: Sorguları - Azure Search çok dili İngilizce olmayan için dizin arama
-description: Azure Search, Lucene ve doğal dil işleme teknolojisinden Microsoft gelen dil Çözümleyicileri yararlanarak 56 dilleri destekler.
+title: Ingilizce olmayan arama sorguları için çok dilli dizin oluşturma
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama, Microsoft 'un Lucene ve doğal dil Işleme teknolojisinden dil çözümleyicilerinden yararlanarak 56 dili destekler.
+manager: nitinme
 author: yahnoosh
-manager: jlembicz
-services: search
-ms.service: search
-ms.topic: conceptual
-ms.date: 05/02/2019
 ms.author: jlembicz
-ms.custom: seodec2018
-ms.openlocfilehash: cc9f271c1c79f34ba62fa22d6ce4fd6bf16738f1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: ca2bc66c755da2011cc7016f37b194caa6200d9a
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65025262"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72793585"
 ---
-# <a name="create-an-index-for-documents-in-multiple-languages-in-azure-search"></a>Azure Search'te birden çok dilde belgeler için dizin oluşturma
-> [!div class="op_single_selector"]
->
-> * [Portal](search-language-support.md)
-> * [REST](https://msdn.microsoft.com/library/azure/dn879793.aspx)
-> * [.NET](https://msdn.microsoft.com/library/azure/microsoft.azure.search.models.analyzername.aspx)
->
->
+# <a name="how-to-create-an-index-for-multiple-languages-in-azure-cognitive-search"></a>Azure Bilişsel Arama birden çok dil için dizin oluşturma
 
-Dil Çözümleyicileri gücünü unleashing aranabilir bir alanı dizin tanımında bir özellik ayarı olarak kadar kolay hale gelir. Bu adımda portalı artık bunu yapabilirsiniz.
+Dizinler, birden fazla dilin içeriğini içeren alanları içerebilir, örneğin dile özgü dizeler için ayrı alanlar oluşturabilir. Dizin oluşturma ve sorgulama sırasında en iyi sonuçlar için, uygun dil kurallarını sağlayan bir dil Çözümleyicisi atayın. 
 
-Aşağıda Azure arama için bir dizin şemasını tanımlamak kullanıcıların Azure portalı dikey pencereleri ekran görüntüleri verilmiştir. Bu dikey pencereden, kullanıcılar tüm alanları oluşturabilir ve bunların her biri için çözümleyici özelliğini ayarlayın.
+Azure Bilişsel Arama, her iki Lucene ve Microsoft 'tan gelen ve çözümleyici özelliği kullanılarak tek tek alanlara atanabilecek dil çözümleyicilerinin büyük bir seçimini sunmaktadır. Portalda, bu makalede açıklandığı gibi bir dil Çözümleyicisi de belirtebilirsiniz.
 
-> [!IMPORTANT]
-> Yalnızca bir dil Çözümleyicisi alan tanımı sırasında olarak sıfırdan yeni bir dizin oluşturan oluştururken veya mevcut bir dizine yeni alan ekleme ayarlayabilirsiniz. Tüm öznitelikler, alanın oluşturulurken Çözümleyicisi dahil olmak üzere tam olarak belirttiğinizden emin olun. Öznitelikleri düzenlemek veya değişiklikleri kaydettikten sonra çözümleyici türünü değiştirmek mümkün olmayacaktır.
->
->
+## <a name="add-analyzers-to-fields"></a>Alanlara çözümleyiciler ekleme
 
-## <a name="define-a-new-field-definition"></a>Yeni bir alan tanımı tanımlayın
-1. Oturum [Azure portalında](https://portal.azure.com) ve search hizmetinizin hizmet dikey penceresini açın.
-2. Tıklayın **dizin** yeni bir dizin başlatmak veya mevcut bir dizine eklediğiniz yeni alanları bir çözümleyici ayarlamak için varolan bir dizini açmak için hizmet panosuna üst kısmındaki komut çubuğunda.
-3. Alanları dikey penceresi görünür ve dizin şemasını tanımlamak için seçenekler sunan Çözümleyicisi sekmesinde de dahil olmak üzere bir dil Çözümleyicisi seçmek için kullanılır.
-4. Alanları, bir ad sağlamayı, veri türünü seçme ve öznitelikleri ayarlarıyla alan tam metin aranabilir, arama sonuçlarında, model Gezinti yapılarda kullanılabilir alınabilir sıralanabilir ve benzeri işaretlemek için bir alan tanımı başlatın.
-5. Sonraki alana geçmeden önce açık **Çözümleyicisi** sekmesi.
+Bir alan oluşturulduğunda dil Çözümleyicisi belirtilir. Var olan bir alan tanımına çözümleyici eklemek için, dizini üzerine yazma (ve yeniden yükleme) ya da orijinalle özdeş yeni bir alan oluşturma (çözümleyici atamasıyla) gerekir. Daha sonra, kullanılmayan alanı dilediğiniz zaman silebilirsiniz.
 
-![][1]
-*Bir çözümleyici seçilecek alanlar dikey Çözümleyicisi sekmesini tıklatın.*
+1. [Azure Portal](https://portal.azure.com) oturum açın ve arama hizmetinizi bulun.
+1. Yeni bir dizin başlatmak için hizmet panosunun en üstündeki komut çubuğunda **Dizin Ekle** ' ye tıklayın veya var olan bir dizine eklemekte olduğunuz yeni alanlara bir çözümleyici ayarlamak için mevcut bir dizini açın.
+1. Bir ad sağlayarak alan tanımı başlatın.
+1. EDM. String veri türünü seçin. Yalnızca dize alanları tam metin aranabilir.
+1. Çözümleyici özelliğini etkinleştirmek için **aranabilir** özniteliği ayarlayın. Bir dil Çözümleyicisi 'nin kullanılabilmesi için alanın metin tabanlı olması gerekir.
+1. Kullanılabilir çözümleyiciler arasından birini seçin. 
 
-## <a name="choose-an-analyzer"></a>Bir çözümleyici seçin
-1. Tanımladığınız alanı bulmak için kaydırın.
-2. Alan aranabilir olarak işaretliyse yüklemediyseniz şimdi olarak işaretlemek için onay kutusuna tıklayın **aranabilir**.
-3. Çözümleyici alanın kullanılabilir Çözümleyicileri listesini görüntülemek için tıklayın.
-4. Kullanmak istediğiniz çözümleyiciyi seçin.
+![Alan tanımı sırasında dil Çözümleyicileri atama](media/search-language-support/select-analyzer.png "Alan tanımı sırasında dil Çözümleyicileri atama")
 
-![][2]
-*Her bir alan için desteklenen Çözümleyicileri birini seçin*
+Varsayılan olarak, tüm aranabilir alanlar, dilden bağımsız olan [Standart Lucene çözümleyici](https://lucene.apache.org/core/6_6_1/core/org/apache/lucene/analysis/standard/StandardAnalyzer.html) 'yi kullanır. Desteklenen çözümleyiciler listesinin tam listesini görüntülemek için bkz. [Azure bilişsel arama dizinine dil Çözümleyicileri ekleme](index-add-language-analyzers.md).
 
-Varsayılan olarak, tüm aranabilir alanları kullanın [standart olarak Lucene çözümleyici](https://lucene.apache.org/core/4_10_0/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html) dil belirsiz olduğu. Desteklenen Çözümleyicileri tam listesini görüntülemek için bkz: [Azure Arama'da dil desteği](https://msdn.microsoft.com/library/azure/dn879793.aspx).
+Portalda, çözümleyiciler olduğu gibi kullanılmak üzere tasarlanmıştır. Özelleştirmeler veya filtre ve belirteçlerin belirli bir yapılandırmasına ihtiyacınız varsa, kodda [özel bir çözümleyici oluşturmanız](index-add-custom-analyzers.md) gerekir. Portal özel Çözümleyicileri seçmeyi veya yapılandırmayı desteklemez.
 
-Bir alan için bir dil Çözümleyicisi seçtikten sonra bu alan için dizin oluşturma ve arama her istekle kullanılır. Bir sorgu farklı çözümleyicilerini kullanarak birden çok alan karşı verildiğinde sorgu bağımsız olarak her alan için doğru çözümleyiciler tarafından işlenir.
+## <a name="query-language-specific-fields"></a>Dile özgü alanları sorgulama
 
-Kullanıcılar farklı dilleri kullanarak dünya çapındaki çok sayıda web ve mobil uygulamaları hizmet. Desteklenen her dil için bir alan oluşturarak bu gibi bir senaryo için dizin tanımlamak mümkündür.
+Bir alan için dil Çözümleyicisi seçildikten sonra, bu alan için her bir dizin oluşturma ve arama isteğiyle birlikte kullanılacaktır. Farklı çözümleyiciler kullanılarak birden çok alana karşı bir sorgu verildiğinde, sorgu her bir alan için atanan çözümleyiciler tarafından bağımsız olarak işlenir.
 
-![][3]
-*Desteklenen her dil için bir açıklama alanı ile dizin tanımı*
+Bir sorgu veren aracının dili biliniyorsa, bir arama isteği, **Searchfields** sorgu parametresi kullanılarak belirli bir alana kapsam yapılabilir. Aşağıdaki sorgu yalnızca Lehçe 'daki açıklamaya göre verilecek:
 
-Bir sorgu verme aracı dili biliniyorsa, arama isteği kullanarak bir özel alan kapsamlandırılabilir **searchFields** sorgu parametresi. Aşağıdaki sorguda yalnızca Lehçe açıklamaya karşı verilir:
+`https://[service name].search.windows.net/indexes/[index name]/docs?search=darmowy&searchFields=PolishContent&api-version=2019-05-06`
 
-`https://[service name].search.windows.net/indexes/[index name]/docs?search=darmowy&searchFields=description_pl&api-version=2019-05-06`
+Yukarıdaki gibi bir sorguya benzer bir sorgu yapıştırmak için [**Arama Gezgini**](search-explorer.md) 'ni kullanarak portalınızın dizinini sorgulayabilirsiniz.
 
-Dizininizi portalından sorgulayabilirsiniz kullanarak **arama Gezgini** yukarıda gösterilene benzer bir sorgu içinde yapıştırın. Arama Gezgini hizmet dikey penceresinde komut çubuğundan kullanılabilir. Bkz: [portalda Azure Search dizininizi sorgulama](search-explorer.md) Ayrıntılar için.
+## <a name="boost-language-specific-fields"></a>Dile özgü alanları arttırma
 
-Bazen bir sorgu verme aracı dili, bu durumda sorgu karşı tüm alanlar aynı anda verilebilmesi için bilinmiyor. Gerekirse, belirli bir dilde sonuçları tercih kullanılarak tanımlanabilir [Puanlama profilleri](https://msdn.microsoft.com/library/azure/dn798928.aspx). Aşağıdaki örnekte, İngilizce açıklamada bulunan eşleşen Lehçe ve Fransızca eşleşme göre daha yüksek puanlanması:
+Bazen bir sorguyu veren aracının dili, bu durumda sorgunun tüm alanlara aynı anda verilebileceği anlamına gelir. Gerekirse, belirli bir dilin sonuçları için tercih, [Puanlama profilleri](index-add-scoring-profiles.md)kullanılarak tanımlanabilir. Aşağıdaki örnekte, Ingilizce 'deki açıklamada bulunan eşleşmeler, Lehçe ve Fransızca 'daki eşleştirmelere göre daha yüksek puanlanacaktır:
 
     "scoringProfiles": [
       {
@@ -81,9 +63,6 @@ Bazen bir sorgu verme aracı dili, bu durumda sorgu karşı tüm alanlar aynı a
 
 `https://[service name].search.windows.net/indexes/[index name]/docs?search=Microsoft&scoringProfile=englishFirst&api-version=2019-05-06`
 
-.NET geliştiricisiyseniz, dil Çözümleyicileri kullanarak yapılandırabileceğinize dikkat edin [Azure Search .NET SDK'sı](https://www.nuget.org/packages/Microsoft.Azure.Search). En son sürümü Microsoft dil Çözümleyicileri de destekler.
+## <a name="next-steps"></a>Sonraki adımlar
 
-<!-- Image References -->
-[1]: ./media/search-language-support/AnalyzerTab.png
-[2]: ./media/search-language-support/SelectAnalyzer.png
-[3]: ./media/search-language-support/IndexDefinition.png
+.NET geliştiricisiyseniz, [Azure bilişsel arama .NET SDK](https://www.nuget.org/packages/Microsoft.Azure.Search) ve [çözümleyici](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.analyzer?view=azure-dotnet) özelliğini kullanarak dil Çözümleyicileri yapılandırabileceğinizi unutmayın. 

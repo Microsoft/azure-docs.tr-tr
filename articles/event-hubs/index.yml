@@ -1,168 +1,149 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Event Hubs Belgeleri
+### YamlMime:Landing
+title: Azure Event Hubs belgeleri
+summary: Event Hubs’ı kullanarak bağlı cihazlardan ve uygulamalardan saniyede milyonlarca olay alma işlemlerini nasıl yapabileceğinizi öğrenin.
 metadata:
-  document_id: ''
-  title: 'Azure Event Hubs Belgeleri - Öğreticiler, hızlı başlangıçlar, API Başvurusu'
-  meta.description: Learn how to use Event Hubs to ingest millions of events per second from connected IoT devices and applications on a broad set of platforms.
+  title: Azure Event Hubs belgeleri
+  description: Event Hubs’ı kullanarak bağlı cihazlardan ve uygulamalardan saniyede milyonlarca olay alma işlemlerini nasıl yapabileceğinizi öğrenin.
   services: event-hubs
-  author: spelluru
-  manager: timlt
   ms.service: event-hubs
+  ms.subservice: 
   ms.topic: landing-page
-  ms.date: 10/15/2018
+  ms.collection: collection
+  author: spelluru
   ms.author: spelluru
-abstract:
-  description: 'Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Apache Kafka için Event Hubs, Event Hubs ile yalnızca yapılandırma değişiklikleriyle sorunsuz bir şekilde çalışmak için Mirror Maker, Apache Flink ve Akka Streams gibi yerel Kafka istemcilerini, araçlarını ve uygulamalarını etkinleştirir.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: /azure/event-hubs/media/index/stream-big-data-kafka-event-hubs.png
-      width: 250
-    title: 'Kafka ve Event Hubs ile Azure’da Büyük Veri Akışı Yapma (1:20:13)'
-    href: 'https://azure.microsoft.com/resources/videos/streaming-big-data-in-azure-with-kafka-and-event-hubs/'
-    width: 250
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Olay hub’ı <b>oluşturma</b> hakkında bilgi edinin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/event-hubs/media/index/portal.svg
-            text: Azure portal
-            href: /azure/event-hubs/event-hubs-quickstart-portal
-          - image:
-              src: /azure/event-hubs/media/index/cli.svg
-            text: Azure CLI
-            href: /azure/event-hubs/event-hubs-quickstart-cli
-          - image:
-              src: /azure/event-hubs/media/index/logo_powershell.svg
-            text: Azure PowerShell
-            href: /azure/event-hubs/event-hubs-quickstart-powershell
-          - image:
-              src: /azure/event-hubs/media/index/logo_arm.svg
-            text: Azure Resource Manager şablonu
-            href: /azure/event-hubs/event-hubs-resource-manager-namespace-event-hub
-      - type: paragraph
-        text: 'Olay hub’ına <b>olay göndermeyi</b> ve olay hub''ından <b>olay almayı</b> öğrenin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/event-hubs/media/index/logo_net.svg
-            text: .NET Framework
-            href: /azure/event-hubs/event-hubs-dotnet-framework-getstarted-send
-          - image:
-              src: /azure/event-hubs/media/index/logo_netcore.svg
-            text: .NET Standard
-            href: /azure/event-hubs/event-hubs-dotnet-standard-getstarted-send
-          - image:
-              src: /azure/event-hubs/media/index/logo_java.svg
-            text: Java
-            href: /azure/event-hubs/event-hubs-java-get-started-send
-          - image:
-              src: /azure/event-hubs/media/index/logo_python.svg
-            text: Python
-            href: /azure/event-hubs/event-hubs-python-get-started-send
-          - image:
-              src: /azure/event-hubs/media/index/logo_nodejs.svg
-            text: Node.js
-            href: /azure/event-hubs/event-hubs-node-get-started-send
-          - image:
-              src: /azure/event-hubs/media/index/logo_go.svg
-            text: Başlayın
-            href: /azure/event-hubs/event-hubs-go-get-started-send
-          - image:
-              src: /azure/event-hubs/media/index/logo_c.svg
-            text: C
-            href: /azure/event-hubs/event-hubs-c-getstarted-send
-          - image:
-              src: /azure/event-hubs/media/index/storm_r.svg
-            text: Apache Storm
-            href: /azure/event-hubs/event-hubs-storm-getstarted-receive
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure Event Hubs kullanarak olay oluşturmayı, yönetmeyi ve akışla aktarmayı öğrenme'
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://docs.microsoft.com/azure/event-hubs/event-hubs-tutorial-visualize-anomalies">Azure Stream Analytics ile bir Event Hubs veri akışı okuma ve anormallikleri görselleştirme</a>'
-          - html: '<a href="https://docs.microsoft.com/azure/event-hubs/store-captured-data-data-warehouse">Yakalanan Event Hubs verilerini Event Grid ve Azure İşlevleri''ni kullanarak işleme ve bir SQL Veri Ambarı''nda yakalama</a>'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-databricks/databricks-stream-from-eventhubs">Event Hubs kullanarak Azure Databricks’e veri akışı sağlama</a>'
-          - html: '<a href="https://docs.microsoft.com/azure/event-hubs/event-hubs-kafka-mirror-maker-tutorial">Kafka özellikli bir olay hub''ında Kafka aracısını yansıtma</a>'
-          - html: '<a href="https://docs.microsoft.com/azure/event-hubs/event-hubs-kafka-flink-tutorial">Apache Flink’i Kafka özellikli olay hub''larına bağlama</a>'
-          - html: '<a href="https://docs.microsoft.com/azure/event-hubs/event-hubs-kafka-akka-streams-tutorial">Akka Streams’i Kafka özellikli olay hub''larına bağlama</a>'
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Event Hubs'ı kullanarak Büyük Veri Uygulamaları için güvenilir mesajlaşma sağlama
-            href: /learn/modules/enable-reliable-messaging-for-big-data-apps-using-event-hubs/
-            image:
-              src: 'https://docs.microsoft.com/learn/achievements/enable-reliable-messaging-for-big-data-apps-using-azure-event-hubs.svg'
-              href: /learn/modules/enable-reliable-messaging-for-big-data-apps-using-event-hubs/
-      - type: paragraph
-        text: <a href="/learn/browse/?products=azure-event-hubs">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Ücretsiz Pluralsight Video Eğitimi
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: .NET Geliştiricileri için Azure Event Hubs - Temel Bilgiler
-            href: 'https://www.pluralsight.com/courses/azure-event-hubs-dotnet-developers-fundamentals'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://www.pluralsight.com/courses/azure-event-hubs-dotnet-developers-fundamentals'
-  - title: Örnekler
-    items:
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/event-hubs/media/index/logo_net.svg
-            text: .NET Framework
-            href: 'https://github.com/Azure/azure-event-hubs/tree/master/samples/DotNet'
-          - image:
-              src: /azure/event-hubs/media/index/logo_java.svg
-            text: Java
-            href: 'https://github.com/Azure/azure-event-hubs/tree/master/samples/Java'
-          - image:
-              src: /azure/event-hubs/media/index/logo_python.svg
-            text: Python
-            href: 'https://github.com/Azure/azure-event-hubs-python/tree/master/examples'
-          - image:
-              src: /azure/event-hubs/media/index/logo_nodejs.svg
-            text: Node.js
-            href: 'https://github.com/Azure/azure-event-hubs-node'
-          - image:
-              src: /azure/event-hubs/media/index/logo_go.svg
-            text: Başlayın
-            href: 'https://github.com/Azure/azure-event-hubs-go/tree/master/_examples'
-          - image:
-              src: /azure/event-hubs/media/index/cli.svg
-            text: Azure CLI
-            href: 'https://github.com/Azure/azure-event-hubs/tree/master/samples/Management/CLI'
-          - image:
-              src: /azure/event-hubs/media/index/logo_powershell.svg
-            text: Azure PowerShell
-            href: 'https://github.com/Azure/azure-event-hubs/tree/master/samples/Management/PowerShell'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/module/az.eventhub/">Azure PowerShell</a></p><p><a href="/cli/azure/eventhubs">Azure CLI</a></p>
-          - title: Diller
-            html: <p><a href="/dotnet/api/microsoft.servicebus.messaging">.NET Framework</a></p><p><a href="/dotnet/api/microsoft.azure.eventhubs">.NET Standard</a></p><p><a href="/java/api/overview/azure/eventhub">Java</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/eventhub/">REST API başvurusu</a></p>
+  ms.date: 09/05/2019
+  ms.openlocfilehash: 8a4d99c195cd1341e491e5112a4f58013b074115
+  ms.sourcegitcommit: 083aa7cc8fc958fc75365462aed542f1b5409623
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/11/2019
+  ms.locfileid: "70915416"
+landingContent:
+- title: Event Hubs hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Event Hubs nedir?
+      url: event-hubs-about.md
+    - text: Apache Kafka için Event Hubs nedir?
+      url: event-hubs-for-kafka-ecosystem-overview.md
+    - text: Event Hubs Capture nedir?
+      url: event-hubs-capture-overview.md
+    - text: Event Hubs Ayrılmış nedir?
+      url: event-hubs-dedicated-overview.md
+- title: Olay hub’ı oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure portal
+      url: event-hubs-create.md
+    - text: Azure CLI
+      url: event-hubs-quickstart-cli.md
+    - text: Azure PowerShell
+      url: event-hubs-quickstart-powershell.md
+    - text: Azure Resource Manager şablonu
+      url: event-hubs-resource-manager-namespace-event-hub.md
+- title: Ayrılmış küme oluşturma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Event Hubs Ayrılmış nedir?
+      url: event-hubs-dedicated-overview.md
+  - linkListType: quickstart
+    links:
+    - text: Ayrılmış Event Hubs kümesi oluşturma
+      url: event-hubs-dedicated-cluster-create-portal.md
+- title: Apache Kafka ile tümleştirme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Apache Kafka için Event Hubs nedir?
+      url: event-hubs-for-kafka-ecosystem-overview.md
+  - linkListType: quickstart
+    links:
+    - text: Apache Kafka için Event Hubs’da akış yapma
+      url: event-hubs-quickstart-kafka-enabled-event-hubs.md
+  - linkListType: tutorial
+    links:
+    - text: Stream Analytics kullanarak olayları işleme
+      url: event-hubs-kafka-stream-analytics.md
+  - linkListType: how-to-guide
+    links:
+    - text: Apache Kafka özellikli olay hub'ı oluşturma
+      url: event-hubs-create-kafka-enabled.md
+    - text: Bir olay hub'ında Kafka aracısı yansıtma
+      url: event-hubs-kafka-mirror-maker-tutorial.md
+    - text: Apache Spark'ı bir olay hub'ına bağlama
+      url: event-hubs-kafka-spark-tutorial.md
+    - text: Apache Flink'i bir olay hub'ına bağlama
+      url: event-hubs-kafka-flink-tutorial.md
+    - text: Apache Kafka Connect'i bir olay hub’ıyla tümleştirme
+      url: event-hubs-kafka-connect-tutorial.md
+    - text: Akka akışlarını bir olay hub'ına bağlama
+      url: event-hubs-kafka-akka-streams-tutorial.md
+- title: Olay gönderme ve alma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: .NET Core
+      url: event-hubs-dotnet-standard-getstarted-send.md
+    - text: Java
+      url: event-hubs-java-get-started-send.md
+    - text: Python
+      url: event-hubs-python-get-started-send.md
+    - text: Node.js
+      url: event-hubs-node-get-started-send.md
+    - text: Apache Kafka
+      url: event-hubs-quickstart-kafka-enabled-event-hubs.md#send-and-receive-messages-with-kafka-in-event-hubs
+    - text: Apache Storm (yalnızca alma)
+      url: event-hubs-storm-getstarted-receive.md
+    - text: Başlayın
+      url: event-hubs-go-get-started-send.md
+- title: Olayları yakalama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Olayları Azure Blob Depolama’da veya Azure Data Lake Storage’da yakalama
+      url: event-hubs-dedicated-overview.md
+  - linkListType: quickstart
+    links:
+    - text: Olayların yakalanmasını etkinleştirmek için Azure portal kullanma
+      url: event-hubs-capture-enable-through-portal.md
+    - text: Resource Manager şablonu kullanma
+      url: event-hubs-resource-manager-namespace-event-hub-enable-capture.md
+    - text: Python uygulamasından yakalamayı etkinleştirme
+      url: event-hubs-capture-python.md
+- title: Olay işleme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Event Hubs veri akışları üzerindeki veri anormalliklerini görselleştirme
+      url: event-hubs-tutorial-visualize-anomalies.md
+    - text: Stream Analytics kullanarak Apache Kafka için Event Hubs’ı işleme
+      url: event-hubs-kafka-stream-analytics.md
+    - text: Event Hubs kullanarak Azure Databricks’e veri akışı sağlama
+      url: ../azure-databricks/databricks-stream-from-eventhubs.md
+- title: İzleme ve yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure İzleyici’yi kullanarak Event Hubs'ı izleme
+      url: event-hubs-metrics-azure-monitor.md
+    - text: Tanılama günlükleri ayarlama
+      url: event-hubs-diagnostic-logs.md
+    - text: İşleme birimlerini otomatik ölçeklendirme
+      url: event-hubs-auto-inflate.md
+    - text: Özel durumlarla ilgili sorun giderme
+      url: event-hubs-messaging-exceptions.md
+- title: Güvenlik
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Güvenlik duvarı kurallarını kullanma
+      url: event-hubs-ip-filtering.md
+    - text: Sanal ağ hizmet uç noktalarını kullanma
+      url: event-hubs-service-endpoints.md
+    - text: Bekleyen verileri şifrelemek için müşteri tarafından yönetilen anahtarları yapılandırma
+      url: configure-customer-managed-key.md
+    - text: Sanal Ağ tümleştirmesi ve güvenlik duvarlarını etkinleştirme
+      url: event-hubs-tutorial-virtual-networks-firewalls.md

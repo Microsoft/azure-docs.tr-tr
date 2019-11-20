@@ -1,6 +1,6 @@
 ---
-title: Logic apps'te sorgu eylemi ekleyin | Microsoft Docs
-description: Filtre dizisi gibi eylemleri gerçekleştirmek için sorgu eylemi genel bakış.
+title: Logic Apps 'e sorgu eylemi ekleme | Microsoft Docs
+description: Filtre dizisi gibi eylemleri gerçekleştirmeye yönelik sorgu eylemine genel bakış.
 services: ''
 documentationcenter: ''
 author: jeffhollan
@@ -9,78 +9,77 @@ editor: ''
 tags: connectors
 ms.assetid: 34e702c7-f9e5-4885-9266-fc7404adecfe
 ms.service: logic-apps
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/20/2016
 ms.author: jehollan
-ms.openlocfilehash: 2a82afe396039857e5b9ad6b8a6d0e710573037f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 10332b95e0d385d7155003efcc52b4bae3969313
+ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60538252"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71973758"
 ---
-# <a name="get-started-with-the-query-action"></a>Sorgu eylemi ile çalışmaya başlama
-Sorgu eylemi kullanarak, toplu işleri ve iş akışlarına gerçekleştirmek için dizileri ile çalışabilirsiniz:
+# <a name="get-started-with-the-query-action"></a>Sorgu eylemini kullanmaya başlayın
+Sorgu eylemini kullanarak, iş akışlarını gerçekleştirmek için toplu işlerle ve dizilerle çalışabilirsiniz:
 
-* Tüm yüksek öncelikli kayıt için bir görev, bir veritabanından oluşturun.
-* Bir Azure blob içinde e-postalar için tüm PDF ekleri kaydedin.
+* Bir veritabanından tüm yüksek öncelikli kayıtlar için bir görev oluşturun.
+* E-postalar için tüm PDF eklerini bir Azure blobuna kaydedin.
 
-Bir mantıksal uygulama çalıştırmasında sorgu eylemi ile çalışmaya başlamak için bkz: [mantıksal uygulama oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
+Bir mantıksal uygulamadaki sorgu eylemini kullanmaya başlamak için bkz. [mantıksal uygulama oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
 
-## <a name="use-the-query-action"></a>Sorgu eylemi kullanın
-Bir eylem mantıksal uygulamada tanımlanan iş akışı tarafından gerçekleştirilen bir işlemdir. 
-[Eylemler hakkında daha fazla bilgi](../connectors/apis-list.md).  
+## <a name="use-the-query-action"></a>Sorgu eylemini kullanma
+Eylem, mantıksal uygulamada tanımlanan iş akışı tarafından yürütülen bir işlemdir. 
+[Eylemler hakkında daha fazla bilgi edinin](../connectors/apis-list.md).  
 
-Sorgu eylemi şu anda Tasarımcısı'nda sunulan filtre dizisi olarak adlandırılan tek bir işlem yok. Bu, bir dizi sorgu ve bir filtre uygulanmış bir sonuç kümesinin dönmesini sağlar.
+Sorgu eyleminde Şu anda, tasarımcı içinde gösterilen filtre dizisi olarak adlandırılan bir işlem vardır. Bu, bir diziyi sorgulamanızı ve filtrelenmiş bir sonuç kümesi döndürbırakmanıza olanak tanır.
 
-İşte nasıl bir mantıksal uygulama çalıştırmasında ekleyebilirsiniz:
+Mantıksal uygulamada nasıl ekleyebileceğiniz aşağıda açıklanmıştır:
 
-1. Seçin **yeni adım** düğmesi.
-2. Seçin **Eylem Ekle**.
-3. Eylem arama kutusuna **filtre** listesine **filtre dizisi** eylem.
+1. **Yeni adım** düğmesini seçin.
+2. **Eylem Ekle**' yi seçin.
+3. Eylem arama kutusunda, filtre **dizisi** eylemini listelemek için **filtre** yazın.
    
-    ![Sorgu eylemi seçin](./media/connectors-native-query/using-action-1.png)
-4. Filtre uygulamak için bir dizi seçin. (Aşağıdaki ekran görüntüsünde bir Twitter arama sonuçlarını dizisini gösterir.)
-5. Her bir öğede değerlendirmek için bir koşul oluşturun. (Aşağıdaki ekran görüntüsünde, 100'den fazla Takipçisi olan kullanıcılardan gelen tweetleri filtreler.)
+    ![Sorgu eylemini seçin](./media/connectors-native-query/using-action-1.png)
+4. Filtrelenecek bir dizi seçin. (Aşağıdaki ekran görüntüsünde, bir Twitter aramasının sonuçlarının dizisi gösterilmektedir.)
+5. Her öğede değerlendirmek için bir koşul oluşturun. (Aşağıdaki ekran görüntüsünde 100 ' den fazla izleyici bulunan kullanıcılardan fazla sayıda Kullanıcı filtresi yapılır.)
    
-    ![Sorgu eylemi tamamlayın](./media/connectors-native-query/using-action-2.png)
+    ![Sorgu eylemini tamamlar](./media/connectors-native-query/using-action-2.png)
    
-    Eylem filtresi gereksinimleri karşılayan sonuçları içeren yeni bir dizi çıkarır.
-6. Kaydetmek için araç çubuğunun sol üst köşesindeki tıklayın ve mantıksal uygulamanızı kaydetmek yayımlama hem (etkinleştir).
+    Eylem, yalnızca filtre gereksinimlerini karşılayan sonuçları içeren yeni bir dizi çıktısı alınacaktır.
+6. Kaydetmek için araç çubuğunun sol üst köşesine tıklayın ve mantıksal uygulamanız hem kaydet hem de Yayımla (etkinleştir) olarak değişir.
 
-\* Bir HTTP uç noktasını çağırmak ve bir JSON yanıtı alma, kullanmanız _JSON Ayrıştır_ eylemi JSON yanıtı ayrıştıramadı. Bu adım olmadan _filtre dizisi_ yalnızca gövdesi görebilir ve JSON yükü yapısını anlamak değil.
+\* bir HTTP uç noktası arıyorsanız ve bir JSON yanıtı alıyorsanız JSON yanıtını ayrıştırmak için JSON 'u _ayrıştırma_ eylemini kullanın. Bu adımı uygulamadan, _filtre dizisi_ yalnızca gövde görür ve JSON yükünün yapısını anlamaz.
 
 ## <a name="query-action"></a>Sorgu eylemi
-Bu bağlayıcıyı destekler eylemini ilgili ayrıntıları aşağıda verilmiştir. Bağlayıcısı, olası bir eylem vardır.
+Bu, bağlayıcının desteklediği eylemin ayrıntılarını aşağıda bulabilirsiniz. Bağlayıcının olası bir eylemi vardır.
 
 | Eylem | Açıklama |
 | --- | --- |
-| Diziyi filtreleme |Bir dizideki her öğe için bir koşulu değerlendirir ve sonuçları döndürür |
+| Diziyi filtrele |Dizideki her öğe için bir koşulu değerlendirir ve sonuçları döndürür |
 
 ## <a name="action-details"></a>Eylem ayrıntıları
-Sorgu eylemi olası tek bir eylem ile birlikte gelir. Aşağıdaki tablolar, gerekli ve isteğe bağlı giriş alanları için eylem ve eylemini kullanarak ile ilişkilendirilmiş ilgili çıkış ayrıntılarını açıklar.
+Sorgu eylemi olası bir eylemle birlikte gelir. Aşağıdaki tablolarda eyleme yönelik gerekli ve isteğe bağlı giriş alanları ve eylemi kullanımıyla ilişkili ilgili çıkış ayrıntıları açıklanır.
 
-### <a name="filter-array"></a>Diziyi filtreleme
-Giden HTTP isteği yapan eylem için giriş alanlarını verilmiştir.
-A * gerekli alan olduğu anlamına gelir.
+### <a name="filter-array"></a>Diziyi filtrele
+Aşağıdakiler, bir HTTP giden isteği oluşturan eylem için giriş alanlarıdır.
+Bir *, gerekli bir alan olduğu anlamına gelir.
 
-| Display name | Özellik adı | Açıklama |
+| Görünen ad | Özellik adı | Açıklama |
 | --- | --- | --- |
-| Gelen * |from |Filtrelenecek dizi |
-| Koşul * |Burada |Her öğe için değerlendirilecek koşulu |
+| 'Ten |Kaynak |Filtrelenecek dizi |
+| Koşul |olmadığı |Her öğe için değerlendirilecek koşul |
 
 <br>
 
-### <a name="output-details"></a>Çıkış Ayrıntıları
-HTTP yanıtının çıkış ayrıntılarını aşağıda verilmiştir.
+### <a name="output-details"></a>Çıkış ayrıntıları
+HTTP yanıtı için çıkış ayrıntıları aşağıda verilmiştir.
 
 | Özellik adı | Veri türü | Açıklama |
 | --- | --- | --- |
-| Filtrelenmiş bir dizi |array |Her filtre uygulanmış bir sonuç için bir nesne içeren bir dizi |
+| Filtrelenmiş dizi |array |Filtrelenen her sonuç için bir nesne içeren bir dizi |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Şimdi, platformu deneyin ve [mantıksal uygulama oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md). Diğer bağlayıcıları logic apps'teki bakarak keşfedebilirsiniz bizim [API listesi](apis-list.md).
+Şimdi, platformu deneyin ve [bir mantıksal uygulama oluşturun](../logic-apps/quickstart-create-first-logic-app-workflow.md). Mantıksal uygulamalarda kullanılabilir olan diğer bağlayıcıları, [API](apis-list.md)'larımıza bakarak inceleyebilirsiniz.
 

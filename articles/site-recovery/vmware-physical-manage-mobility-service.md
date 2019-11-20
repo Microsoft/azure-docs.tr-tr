@@ -1,81 +1,82 @@
 ---
-title: Mobility Aracısı VMware vm'lerinin olağanüstü durum kurtarma için sunucular ve Azure Site Recovery ile fiziksel sunucuları yönetme | Microsoft Docs
-description: VMware Vm'lerini ve fiziksel sunucuları Azure Site Recovery hizmetini kullanarak azure'a olağanüstü durum kurtarma için Mobility Hizmeti Aracısı yönetin.
+title: Azure Site Recovery ile VMware/fiziksel sunucuları için Mobility Aracısı 'nı yönetme
+description: Azure Site Recovery hizmetini kullanarak VMware VM 'Leri ve fiziksel sunucuları Azure 'a olağanüstü durum kurtarma için Mobility hizmeti aracısını yönetin.
 author: Rajeswari-Mamilla
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 03/25/2019
 ms.author: ramamill
-ms.openlocfilehash: 69b8e1c533747d1bade69949911ea43f299f49e9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e6e7beeb4c10098f36636aad2709e03d1a1a0fea
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66117319"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73953640"
 ---
-# <a name="manage-mobility-agent-on-protected-machines"></a>Mobility Aracısı korunan makinelere yönetme
+# <a name="manage-the-mobility-agent"></a>Mobility aracısını yönetme 
 
-VMware Vm'lerini ve fiziksel sunucuları azure'a olağanüstü durum kurtarma için Azure Site Recovery kullandığınızda sunucunuzda mobility aracınızı ayarlayın. Mobility Aracısı, korunan makinenin, yapılandırma sunucusu/genişleme işlem sunucusu arasındaki iletişimi düzenler ve veri çoğaltma işlemlerini yönetir. Bu makalede dağıtıldıktan sonra mobility aracısını yönetmek için ortak görevler özetlenir.
+VMware VM 'lerini ve fiziksel sunucuları Azure 'a olağanüstü durum kurtarması için Azure Site Recovery kullandığınızda Mobility Agent 'ı sunucunuzda ayarlarsınız. Mobility Aracısı, korumalı makineniz, yapılandırma sunucusu/genişleme işlem sunucusu arasındaki iletişimleri koordine eder ve veri çoğaltmasını yönetir. Bu makalede, Mobility aracısının dağıtıldıktan sonra yönetilmesi için ortak görevler özetlenmektedir.
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="update-mobility-service-from-azure-portal"></a>Azure portalından mobility hizmetini güncelleştirme
+## <a name="update-mobility-service-from-azure-portal"></a>Mobility hizmetini Azure portal güncelleştirme
 
-1. Başlamadan önce Mobility hizmetinin korunan makinelere güncelleştirmeden önce yapılandırma sunucusunu, ölçeği genişletilmiş işlem sunucularını ve dağıtımınızın bir parçası olan herhangi bir ana hedef sunucuları güncelleştirildiğinden emin olun.
-2. Kasa portalda açın > **çoğaltılan öğeler**.
-3. Yapılandırma sunucusunu en son sürüm ise "Yeni Site recovery çoğaltma aracısı güncelleştirmesi kullanılabilir. okuyan bir bildirim görür Yüklemek için tıklayın."
+1. Başlamadan önce, korunan makinelerde Mobility hizmetini güncelleştirmeden önce, yapılandırma sunucusunun, genişleme işlem sunucularının ve dağıtımınızın bir parçası olan ana hedef sunucuların güncelleştirildiğinden emin olun.
+2. Portalda, **çoğaltılan öğeler**> kasayı açın.
+3. Yapılandırma sunucusu en son sürümsa, "Yeni Site Recovery çoğaltma Aracısı güncelleştirmesi kullanılabilir ' ı okuduğunu belirten bir bildirim görürsünüz. Yüklemek için tıklayın. "
 
-     ![Çoğaltılan öğeler penceresi](./media/vmware-azure-install-mobility-service/replicated-item-notif.png)
+     ![Çoğaltılan Öğeler penceresi](./media/vmware-azure-install-mobility-service/replicated-item-notif.png)
 
-4. Bildirime tıklayın ve **Aracısı güncelleştirmesi**, Mobility hizmetini yükseltmek istediğiniz makineleri seçin. Daha sonra, **Tamam**'a tıklayın.
+4. Bildirime tıklayın ve **Aracı güncelleştirme**' de Mobility hizmetini yükseltmek istediğiniz makineleri seçin. Daha sonra, **Tamam**'a tıklayın.
 
      ![Çoğaltılan öğeler VM listesi](./media/vmware-azure-install-mobility-service/update-okpng.png)
 
-5. Her seçili makineler için Mobility hizmetini güncelleştirme işlemi başlatır.
+5. Mobility hizmetini Güncelleştir işi seçilen makinelerin her biri için başlar.
 
-## <a name="update-mobility-service-through-powershell-script-on-windows-server"></a>Windows server powershell betiği ile Mobility hizmetini güncelleştirme
+## <a name="update-mobility-service-through-powershell-script-on-windows-server"></a>Windows Server 'da PowerShell betiği aracılığıyla Mobility hizmetini güncelleştirme
 
-Power shell cmdlet'i aracılığıyla bir sunucu üzerinde Mobility hizmetini yükseltme betiği aşağıdaki kullanın
+Power Shell cmdlet 'i aracılığıyla bir sunucuda Mobility hizmetini yükseltmek için aşağıdaki betiği kullanın
 
 ```azurepowershell
 Update-AzRecoveryServicesAsrMobilityService -ReplicationProtectedItem $rpi -Account $fabric.fabricSpecificDetails.RunAsAccounts[0]
 ```
 
-## <a name="update-account-used-for-push-installation-of-mobility-service"></a>Mobility hizmeti gönderme yüklemesi için kullanılan hesabı güncelleştirme
+## <a name="update-account-used-for-push-installation-of-mobility-service"></a>Mobility hizmetinin anında yüklenmesi için kullanılan hesabı Güncelleştir
 
-Mobility hizmetinin göndererek yüklenmesine ilişkin etkinleştirmek için Site Recovery dağıttığınızda makinelerine erişebilir ve makine için çoğaltma etkinleştirildiğinde, hizmeti yüklemek için Site Recovery işlem sunucusu kullanan bir hesap belirtilene. Bu hesabın kimlik bilgilerini güncelleştirmek istiyorsanız, izleyin [bu yönergeleri](vmware-azure-manage-configuration-server.md#modify-credentials-for-mobility-service-installation).
+Site Recovery dağıttığınızda, Mobility hizmetini göndererek yüklemeyi etkinleştirmek için, Site Recovery işlem sunucusunun makinelere erişmek için kullandığı bir hesap belirttiniz ve makine için çoğaltma etkinleştirildiğinde hizmeti yükler. Bu hesabın kimlik bilgilerini güncelleştirmek istiyorsanız, [Bu yönergeleri](vmware-azure-manage-configuration-server.md#modify-credentials-for-mobility-service-installation)izleyin.
 
-## <a name="uninstall-mobility-service"></a>Mobility hizmetini kaldırın
+## <a name="uninstall-mobility-service"></a>Mobility hizmetini kaldır
 
-### <a name="on-a-windows-machine"></a>Bir Windows makinede
+### <a name="on-a-windows-machine"></a>Bir Windows makinesinde
 
-Kullanıcı Arabirimi veya komut istemi'ni kaldırın.
+Kullanıcı arabiriminden veya bir komut isteminden kaldırın.
 
-- **Kullanıcı arabiriminden**: Denetim Masası'nda makinenin seçin **programlar**. Seçin **Microsoft Azure Site Recovery Mobility hizmeti/ana hedef sunucusu** > **kaldırma**.
-- **Bir komut isteminden**: Makinede bir yönetici olarak bir komut istemi penceresi açın. Şu komutu çalıştırın: 
+- **Kullanıcı arabiriminden**: makinenin Denetim Masası 'Nda, **Programlar**' ı seçin. **Microsoft Azure Site Recovery Mobility hizmeti/ana hedef sunucusu** > **Kaldır**' ı seçin.
+- **Bir komut isteminden**: makinede yönetici olarak bir komut istemi penceresi açın. Şu komutu çalıştırın: 
     ```
     MsiExec.exe /qn /x {275197FC-14FD-4560-A5EB-38217F80CBD1} /L+*V "C:\ProgramData\ASRSetupLogs\UnifiedAgentMSIUninstall.log"
     ```
 
 ### <a name="on-a-linux-machine"></a>Bir Linux makinesinde
-1. Linux makinesinde oturum olarak bir **kök** kullanıcı.
-2. Bir terminal penceresinde /user/local/ASR için gidin.
+1. Linux makinesinde, **kök** Kullanıcı olarak oturum açın.
+2. Bir terminalde/usr/local/asrdizinine gidin.
 3. Şu komutu çalıştırın:
     ```
     uninstall.sh -Y
+   ```
+   
+## <a name="install-site-recovery-vss-provider-on-source-machine"></a>Kaynak makineye Site Recovery VSS sağlayıcısı 'nı yükler
 
-## Install Site Recovery VSS provider on source machine
+Uygulama tutarlılığı noktaları oluşturmak için kaynak makinede Azure Site Recovery VSS sağlayıcısı gerekir. Sağlayıcı yüklemesi göndererek yükleme işlemi başarılı olmadıysa, el ile yüklemek için aşağıdaki yönergeleri izleyin.
 
-Azure Site Recovery VSS provider is required on the source machine to generate application consistency points. If the installation of the provider didn't succeed through push installation, follow the below given guidelines to install it manually.
+1. Yönetici cmd penceresini açın.
+2. Mobility hizmeti yükleme konumuna gidin. (Örn. C:\Program Files (x86) \Microsoft Azure Site Recovery\agent)
+3. InMageVSSProvider_Uninstall. cmd betiğini çalıştırın. Bu işlem zaten varsa hizmeti kaldırır.
+4. VSS sağlayıcısını el ile yüklemek için InMageVSSProvider_Install. cmd betiğini çalıştırın.
 
-1. Open admin cmd window.
-2. Navigate to the mobility service installation location. (Eg - C:\Program Files (x86)\Microsoft Azure Site Recovery\agent)
-3. Run the script InMageVSSProvider_Uninstall.cmd . This will uninstall the service if it already exists.
-4. Run the script InMageVSSProvider_Install.cmd to install the VSS provider manually.
+## <a name="next-steps"></a>Sonraki adımlar
 
-## Next steps
-
-- [Set up disaster recovery for VMware VMs](vmware-azure-tutorial.md)
-- [Set up disaster recovery for physical servers](physical-azure-disaster-recovery.md)
+- [VMware VM 'Leri için olağanüstü durum kurtarmayı ayarlama](vmware-azure-tutorial.md)
+- [Fiziksel sunucular için olağanüstü durum kurtarmayı ayarlama](physical-azure-disaster-recovery.md)

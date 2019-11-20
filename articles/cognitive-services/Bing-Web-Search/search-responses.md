@@ -1,7 +1,7 @@
 ---
-title: Bing Web araması API'si yanıt yapısı ve yanıt türleri
+title: Bing Web Araması API'si yanıt yapısı ve yanıt türleri
 titleSuffix: Azure Cognitive Services
-description: Bing Web araması API'si tarafından kullanılan yanıtlar ve yanıt türleri hakkında bilgi edinin.
+description: Bir arama isteği Bing Web Araması gönderdiğinizde, yanıt gövdesinde bir `SearchResponse` nesnesi döndürür.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -11,16 +11,16 @@ ms.topic: conceptual
 ms.date: 06/25/2019
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: 5380713af17a751ab695fee90895b4f6b0d2369b
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: 95ebfaef863a1fa05e8a5d3b46fca9659c61f6b7
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67542822"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74110624"
 ---
-# <a name="bing-web-search-api-response-structure-and-answer-types"></a>Bing Web araması API'si yanıt yapısı ve yanıt türleri  
+# <a name="bing-web-search-api-response-structure-and-answer-types"></a>Bing Web Araması API'si yanıt yapısı ve yanıt türleri  
 
-Bing Web araması arama isteği gönderdiğinizde, döndürür bir [ `SearchResponse` ](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#searchresponse) yanıt gövdesinde bir nesne. Bing sorgu ile ilgili belirlendi her yanıt için bir alan nesne içerir. Bu örnekte, Bing tüm yanıtları döndürdüyse bir yanıt nesnesi gösterilmektedir:
+Bir arama isteği Bing Web Araması gönderdiğinizde, yanıt gövdesinde bir [`SearchResponse`](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#searchresponse) nesnesi döndürür. Nesnesi, Bing 'in sorguyla ilgili olduğunu tespit eden her yanıt için bir alan içerir. Bu örnek, Bing tüm yanıtları döndürmediğinde bir yanıt nesnesini gösterir:
 
 ```json
 {
@@ -38,13 +38,13 @@ Bing Web araması arama isteği gönderdiğinizde, döndürür bir [ `SearchResp
 }, ...
 ```
 
-Genellikle, Bing Web araması yanıtlar bir alt kümesi döndürür. Örneğin, sorgu terimine olduysa *Yelkenli dinghies*, yanıt içerebilir `webPages`, `images`, ve `rankingResponse`. Kullandığınız sürece [responseFilter](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#responsefilter) Web sayfalarını filtrelemek için yanıt her zaman içeriyor `webpages` ve `rankingResponse` yanıtlar.
+Genellikle, Bing Web Araması yanıtların bir alt kümesini döndürür. Örneğin, Sorgu terimi *saptıklandı*ise, yanıt `webPages`, `images`ve `rankingResponse`içerebilir. Web sayfalarını filtrelemek için [Responsefilter](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#responsefilter) kullanmadığınız müddetçe, yanıt her zaman `webpages` ve `rankingResponse` yanıtlarını içerir.
 
 [!INCLUDE [cognitive-services-bing-url-note](../../../includes/cognitive-services-bing-url-note.md)]
 
-## <a name="webpages-answer"></a>Web sayfası yanıt
+## <a name="webpages-answer"></a>Web sayfası yanıtı
 
-[Web sayfalarını](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#webanswer) yanıt, Bing Web araması sorgu ile ilgili olan belirlenen Web sayfalarına bağlantılar listesini içerir. Her [web sayfası](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#webpage) listesinde içerecektir: sayfanın adı, url, URL, içerik ve Bing içerik bulunan tarih kısa bir açıklamasını görüntüler.
+[Web sayfası](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#webanswer) yanıtı, sorguyla ilgili Bing Web araması belirlenen Web sayfalarına bağlantıların bir listesini içerir. Listedeki her bir [Web sayfası](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#webpage) şunları içerir: sayfanın adı, URL 'si, görüntüleme URL 'si, içeriğin kısa bir açıklaması ve Bing 'in içeriği bulduğu tarih.
 
 ```json
 {
@@ -57,7 +57,7 @@ Genellikle, Bing Web araması yanıtlar bir alt kümesi döndürür. Örneğin, 
 }, ...
 ```
 
-Kullanım `name` ve `url` kullanıcının Web sayfasına alan köprü oluşturmak için.
+Kullanıcıyı Web sayfasına alan bir köprü oluşturmak için `name` ve `url` kullanın.
 
 <!-- Remove until this can be replaced with a sanitized version.
 The following shows an example of how you might display the webpage in a search results page.
@@ -65,9 +65,9 @@ The following shows an example of how you might display the webpage in a search 
 ![Rendered webpage example](./media/cognitive-services-bing-web-api/bing-rendered-webpage-example.PNG)
 -->
 
-## <a name="images-answer"></a>Görüntüleri yanıt
+## <a name="images-answer"></a>Görüntü yanıtı
 
-[Görüntüleri](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) yanıtı Bing sorgu ile ilgili olduğunu düşündük görüntülerin bir listesini içerir. Her [görüntü](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#image) listesinde görüntü, boyutunu, boyutlar ve kodlama, biçim URL'sini içerir. Görüntü nesnesi aynı zamanda görüntü küçük resminin URL'sini ve küçük resmin boyutlarını içerir.
+[Görüntüler](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) yanıtı, Bing 'in sorguyla ilgili olduğunu düşündük görüntülerin bir listesini içerir. Listedeki her [görüntüde](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#image) görüntünün URL 'si, boyutu, boyutları ve kodlama biçimi bulunur. Görüntü nesnesi aynı zamanda görüntü küçük resminin URL'sini ve küçük resmin boyutlarını içerir.
 
 ```json
 {
@@ -93,25 +93,25 @@ The following shows an example of how you might display the webpage in a search 
 }, ...
 ```
 
-Kullanıcının cihazına bağlı olarak, kullanıcı için bir seçenek ile küçük bir alt kümesi genelde görüntüleyecektir [aracılığıyla sayfasında](paging-webpages.md) kalan görüntüler.
+Kullanıcının cihazına bağlı olarak, genellikle küçük resimlerin bir alt kümesini görüntülenir ve bu, kullanıcının kalan görüntülerde [sayfa](paging-webpages.md) sonuna kadar bir seçeneğe sahip olmasını sağlar.
 
 <!-- Remove until this can be replaced with a sanitized version.
 ![List of thumbnail images](./media/cognitive-services-bing-web-api/bing-web-image-thumbnails.PNG)
 -->
 
-Küçük resimlerin, kullanıcı imleci üzerine getirdiğinde büyütülmesini de sağlayabilirsiniz. Büyütmeniz halinde görüntüye bağlam sağlamayı unutmayın. Örneğin konaktan ayıklama tarafından `hostPageDisplayUrl` ve aşağıdaki resim görüntüleme. Küçük resmi yeniden boyutlandırma hakkında bilgi için bkz. [Küçük Resimleri Yeniden Boyutlandırma ve Kırpma](./resize-and-crop-thumbnails.md).
+Küçük resimlerin, kullanıcı imleci üzerine getirdiğinde büyütülmesini de sağlayabilirsiniz. Büyütmeniz halinde görüntüye bağlam sağlamayı unutmayın. Örneğin, `hostPageDisplayUrl` konaktan çıkararak ve görüntünün altında görüntüleyerek. Küçük resmi yeniden boyutlandırma hakkında bilgi için bkz. [Küçük Resimleri Yeniden Boyutlandırma ve Kırpma](./resize-and-crop-thumbnails.md).
 
 <!-- Remove until this can be replaced with a sanitized version.
 ![Expanded view of thumbnail image](./media/cognitive-services-bing-web-api/bing-web-image-thumbnail-expansion.PNG)
 -->
 
-Küçük resim kullanıcı tıklar kullanırsanız `webSearchUrl` görüntülerin bir desende içeren Bing'in arama sonuçları sayfasını görüntüler için kullanıcıya yapılacak.
+Kullanıcı küçük resme tıklarsa, kullanıcıyı görüntünün bir collajı içeren görüntüler için Bing arama sonuçları sayfasına götürmek üzere `webSearchUrl` kullanın.
 
-Görüntü yanıt ve görüntüleri hakkında daha fazla ayrıntı için bkz: [resim arama API'si](../bing-image-search/search-the-web.md).
+Görüntü yanıtı ve görüntüleri hakkında daha fazla bilgi için bkz. [resım arama API](../bing-image-search/search-the-web.md).
 
-## <a name="related-searches-answer"></a>İlgili aramalar yanıt
+## <a name="related-searches-answer"></a>İlgili aramalar yanıtı
 
-[RelatedSearches](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#searchresponse-relatedsearches) yanıt diğer kullanıcılar tarafından yapılan en popüler ilgili sorgular bir listesini içerir. Her [sorgu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#query_obj) listesinde bir sorgu dizesi içeren (`text`), isabet vurgulama karakter içeren bir sorgu dizesi (`displayText`) ve bir URL (`webSearchUrl`) için bu sorgu için Bing'in arama sonuçları sayfası.
+[Relatedaramaları](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#searchresponse-relatedsearches) yanıtı, diğer kullanıcılar tarafından yapılan en popüler ilgili sorguların listesini içerir. Listedeki her [sorgu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#query_obj) , bir sorgu dizesi (`text`), isabet vurgulama karakterleri içeren bir sorgu dizesi (`displayText`) ve bu sorgu için Bing 'in arama sonuçları SAYFASıNA bir URL (`webSearchUrl`) içerir.
 
 ```json
 {
@@ -121,17 +121,17 @@ Görüntü yanıt ve görüntüleri hakkında daha fazla ayrıntı için bkz: [r
 }, ...
 ```
 
-Kullanım `displayText` sorgu dizesi ve `webSearchUrl` URL Bing arama'nın kullanıcının gerçekleştirdiği köprü oluşturmak için sonuçları ilgili sorgu sayfası. Ayrıca kullanabileceğinizi `text` sorgu kendi Web arama API'si sorgu dizesi ve sonuçları kendiniz görüntüleyin.
+Kullanıcıyı ilgili sorgu için Bing arama sonuçları sayfasına alan bir köprü oluşturmak için `displayText` sorgu dizesini ve `webSearchUrl` URL 'sini kullanın. Ayrıca, kendi Web Araması API sorgunuzda `text` sorgu dizesini kullanabilir ve sonuçları kendiniz görüntüleyebilirsiniz.
 
-Vurgu işaretlerinin içinde nasıl ele alınacağını öğrenmek için `displayText`, bkz: [isabet vurgulama](./hit-highlighting.md).
+`displayText`vurgu işaretleyicilerini işleme hakkında daha fazla bilgi için bkz. [Isabet vurgulama](../bing-web-search/hit-highlighting.md).
 
-Aşağıdaki örnek ilgili sorgular kullanımı Bing.com içinde gösterir.
+Aşağıda, Bing.com içinde ilgili sorgu kullanımının bir örneği gösterilmektedir.
 
-![İlgili aramalar örnek bing'de](./media/cognitive-services-bing-web-api/bing-web-rendered-relatedsearches.GIF)
+![Bing üzerinde ilgili aramalar örneği](./media/cognitive-services-bing-web-api/bing-web-rendered-relatedsearches.GIF)
 
-## <a name="videos-answer"></a>Videoları yanıt
+## <a name="videos-answer"></a>Videolar yanıtı
 
-[Videoları](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videos) yanıt Bing sorgu ile ilgili olduğunu düşündük videoların bir listesini içerir. Her [video](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#video) listesinde video, süresi, boyutlar ve kodlama, biçim URL'sini içerir. Video nesnesi aynı zamanda video küçük resminin URL'sini ve küçük resmin boyutlarını içerir.
+[Videolar](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videos) yanıtı, Bing 'in sorguyla ilgili olduğu videoların bir listesini içerir. Listedeki her [video](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#video) videonun URL 'sini, süresini, boyutlarını ve kodlama biçimini içerir. Video nesnesi aynı zamanda video küçük resminin URL'sini ve küçük resmin boyutlarını içerir.
 
 ```json
 {
@@ -163,13 +163,13 @@ Aşağıdaki örnek ilgili sorgular kullanımı Bing.com içinde gösterir.
 }, ...
 ```
 
-Kullanıcının cihaza bağlı olarak, genellikle bir alt kümesini kullanıcının diğer videoları bir seçenek ile videoları görüntülenecekti. Bir küçük resim video uzunluğu, videonun görüntüleyecektir açıklaması (ad) ve atıf (yayımcı).
+Kullanıcının cihazına bağlı olarak, kullanıcıların kalan videoları görüntülemesi için bir seçenek içeren videoların bir alt kümesini görüntüleriz. Videonun uzunluğu, açıklaması (adı) ve atısyon (yayımcı) ile videonun küçük resmini görüntüleyebilirsiniz.
 
 <!-- Remove until this can be replaced with a sanitized version.
 ![List of video thumbnails](./media/cognitive-services-bing-web-api/bing-web-video-thumbnails.PNG)
 -->
 
-Küçük resmin üzerinde kullanıcı gezinen olarak kullanabileceğiniz `motionThumbnailUrl` videonun küçük bir sürüm yürütülecek. Hareket küçük resmini görüntülediğinizde öznitelik belirlediğinizden emin olun.
+Kullanıcı küçük resmin üzerine geldiğinde, videonun küçük resim sürümünü oynatmak için `motionThumbnailUrl` kullanabilirsiniz. Hareket küçük resmini görüntülediğinizde öznitelik belirlediğinizden emin olun.
 
 <!-- Remove until this can be replaced with a sanitized version.
 ![Motion thumbnail of a video](./media/cognitive-services-bing-web-api/bing-web-video-motion-thumbnail.PNG)
@@ -177,15 +177,15 @@ Küçük resmin üzerinde kullanıcı gezinen olarak kullanabileceğiniz `motion
 
 Kullanıcı küçük resme tıklarsa, aşağıdaki video görüntüleme seçenekleri sunulur:
 
-- Kullanım `hostPageUrl` konak Web sitesinde (örneğin, YouTube) videoyu görüntülemek için
-- Kullanım `webSearchUrl` Bing video tarayıcıda videoyu görüntülemek için
-- Kullanım `embedHtml` kendi deneyimi video eklemek için
+- Ana bilgisayar web sitesinde videoyu görüntülemek için `hostPageUrl` kullanın (örneğin, YouTube)
+- Bing video tarayıcısı 'ndaki videoyu görüntülemek için `webSearchUrl` kullanın
+- Videoyu kendi deneyiminize eklemek için `embedHtml` kullanın
 
-Videolar ve video yanıt hakkında daha fazla ayrıntı için bkz: [Video arama API'si](../bing-video-search/search-the-web.md).
+Video yanıtı ve videoları hakkında daha fazla bilgi için bkz. [VIDEO arama API](../bing-video-search/search-the-web.md).
 
-## <a name="news-answer"></a>Haber yanıt
+## <a name="news-answer"></a>Haber yanıtı
 
-[Haber](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#news) yanıt Bing sorgu ile ilgili olduğunu düşündük haber makaleleri bir listesini içerir. Listedeki her [haber makalesi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#newsarticle), makalenin adı, açıklaması ve konağın web sitesindeki makalenin URL’sini içerir. Makale bir görüntü içeriyorsa, nesne görüntünün küçük resmini içerir.
+[Haber](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#news) yanıtı, Bing 'in sorguyla ilgili olduğu haber makalelerinin bir listesini içerir. Listedeki her [haber makalesi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#newsarticle), makalenin adı, açıklaması ve konağın web sitesindeki makalenin URL’sini içerir. Makale bir görüntü içeriyorsa, nesne görüntünün küçük resmini içerir.
 
 ```json
 {
@@ -208,7 +208,7 @@ Videolar ve video yanıt hakkında daha fazla ayrıntı için bkz: [Video arama 
 }, ...
 ```
 
-Kullanıcının cihaza bağlı olarak, haber makaleleri kullanıcının kalan makaleleri görüntülemek bir seçenek kümesini görüntüleyebilir. Kullanıcıyı konağın sitesindeki haber makalesine götüren bir köprü bağlantı oluşturmak için `name` ve `url` kullanın. Makale bir görüntü içerdiğinden, görüntü tıklanabilir kullanarak olun `url`. Makaleyi ilişkilendirmek için `provider` kullandığınızdan emin olun.
+Kullanıcının cihazına bağlı olarak, kullanıcının kalan makaleleri görüntülemesine yönelik bir seçeneğe sahip haber makalelerinin bir alt kümesini görüntülerdiniz. Kullanıcıyı konağın sitesindeki haber makalesine götüren bir köprü bağlantı oluşturmak için `name` ve `url` kullanın. Makale bir görüntü içeriyorsa, `url`kullanarak görüntüyü tıklatılabilir hale getirin. Makaleyi ilişkilendirmek için `provider` kullandığınızdan emin olun.
 
 <!-- Remove until this can be replaced with a sanitized version.
 The following shows an example of how you might display articles in a search results page.
@@ -216,15 +216,15 @@ The following shows an example of how you might display articles in a search res
 ![List of news articles](./media/cognitive-services-bing-web-api/bing-web-news-list.PNG)
 -->
 
-Haber makaleleri ve haber yanıt hakkında daha fazla ayrıntı için bkz: [haber arama API'si](../bing-news-search/search-the-web.md).
+Haber yanıtı ve haber makaleleri hakkında daha fazla bilgi için bkz. [Haber Arama API](../bing-news-search/search-the-web.md).
 
-## <a name="computation-answer"></a>Hesaplama yanıt
+## <a name="computation-answer"></a>Hesaplama yanıtı
 
-Kullanıcı, bir matematik ifadesindeki veya birim dönüştürme sorgusunu girerse, yanıt içerebilir bir [hesaplama](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#computation) yanıt. `computation` Yanıt normalleştirilmiş ifade ve sonucunu içerir.
+Kullanıcı bir matematik ifadesi veya bir birim dönüştürme sorgusu girerse, yanıt bir [Hesaplama](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#computation) yanıtı içerebilir. `computation` yanıtı, normalleştirilmiş ifadeyi ve sonucunu içerir.
 
-Bir birim dönüştürme sorgu başka bir birimi dönüştüren bir sorgudur. Örneğin, *10 metre olarak kaç ayak?* veya *1/4 cup'ta kaç çorba kaşığına?*
+Birim dönüştürme sorgusu, bir birimi diğerine dönüştüren bir sorgudur. Örneğin, *10 metrede* kaç metre veya *1/4 kupa bir kaç tane*
 
-Aşağıdaki gösterildiği `computation` için yanıt *10 metre olarak kaç ayak?*
+Aşağıda, *10 metrede kaç fit* 'in `computation` yanıtı gösterilmektedir?
 
 ```json
 "computation": {
@@ -234,7 +234,7 @@ Aşağıdaki gösterildiği `computation` için yanıt *10 metre olarak kaç aya
 }, ...
 ```
 
-Aşağıdaki örnekler matematik sorguları ve bunlara karşılık gelen gösterir `computation` yanıtlar.
+Aşağıda matematik sorgularının örnekleri ve bunlara karşılık gelen `computation` yanıtları gösterilmektedir.
 
 ```
 Query: (5+3)(10/2)+8
@@ -288,53 +288,53 @@ Encoded query: 8^2%2B11^2-2*8*11*cos%2837%29
 }
 ```
 
-Matematik ifadesi şu simgeleri içerebilir:
+Matematik ifadesi aşağıdaki sembolleri içerebilir:
 
 |Sembol|Açıklama|
 |------------|-----------------|
-|+|Toplama|
-|-|Çıkarma|
-|/|Bölme|
-|*|Çarpma|
+|+|Ek olarak|
+|-|StrA|
+|/|Bölmenin|
+|*|Anda|
 |^|Güç|
-|!|Faktöriyelini|
-|.|Decimal|
-|()|Öncelik gruplandırma|
+|!|Imı|
+|.|Ondalık|
+|()|Öncelik gruplandırması|
 |[]|İşlev|
 
-Matematik ifadesi aşağıdaki sabitler içerebilir:
+Matematik ifadesinde aşağıdaki sabitler bulunabilir:
 
 |Sembol|Açıklama|
 |------------|-----------------|
-|Pi|3.14159...|
-|Derece|Derece|
-|Ben|Sanal numarası|
-|E|e 2.71828...|
-|GoldenRatio|Altın oranını 1.61803...|
+|PI|3,14159...|
+|Ölçüde|Ölçüde|
+|Ben|Sanal sayı|
+|A|e, 2,71828...|
+|GoldenRatio|Altın oran, 1,61803...|
 
 Matematik ifadesi aşağıdaki işlevleri içerebilir:
 
 |Sembol|Açıklama|
 |------------|-----------------|
-|Sırala|Karekök|
-|Sin [x], Cos [x], Bronz [x]<br />CSC [x], [x] sn Cot [x]|Trigonometrik işlevler (ile radyan cinsinden bağımsız değişkenler)|
-|ArcSin [x], [x] ArcCos ArcTan [x]<br />ArcCsc [x], [x] ArcSec ArcCot [x]|Ters trigonometrik işlevler (radyan cinsinden sonuçları vermiş)|
-|Exp [x] E ^ x|Üstel işlevi|
-|Günlük [x]|Doğal logaritma|
-|SİNH [x], [x] Cosh Tanh [x]<br />Csch [x], [x] Sech Coth [x]|Hiperbolik İşlevler|
-|ArcSinh [x], [x] ArcCosh ArcTanh [x]<br />ArcCsch [x], [x] ArcSech ArcCoth [x]|Ters hiperbolik İşlevler|
+|Sırala|Kare kök|
+|Sin [x], cos [x], tan [x]<br />CSC [x], SEC [x], COT [x]|Trigonometrik İşlevler (radyan cinsinden bağımsız değişkenlerle)|
+|ArcSin [x], ArcCos [x], ArcTan [x]<br />ArcCsc [x], ArcSec [x], ArcCot [x]|Ters Trigonometrik İşlevler (radyan cinsinden sonuçlar verir)|
+|Exp [x], E ^ x|Üstel işlevi|
+|[X] günlüğü|Doğal logaritma|
+|Sinh [x], cosh [x], tanh [x]<br />Csch [x], sech [x], coth [x]|Hiperbolik İşlevler|
+|ArcSinh [x], ArcCosh [x], ArcTanh [x]<br />ArcCsch [x], ArcSech [x], ArcCoth [x]|Ters hiperbolik işlevler|
 
-Değişkenleri (örneğin, 4 x + x değişken olduğu 6 = 18,) içeren Matematik ifadeler desteklenmez.
+Değişkenleri içeren matematik ifadeleri (örneğin, 4X + 6 = 18, burada x değişkendir) desteklenmez.
 
-## <a name="timezone-answer"></a>Saat dilimi yanıt
+## <a name="timezone-answer"></a>Saat dilimi yanıtı
 
-Kullanıcının bir tarih ya da sorgu girerse, yanıt içerebilir bir [saat dilimi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#timezone) yanıt. Bu yanıt, örtük veya açık sorguları destekler. Örtük bir sorgu gibi *olduğu ne zaman?* , kullanıcının konumuna göre yerel saati döndürür. Açık bir sorgu gibi *Seattle olduğu ne zaman?* , Seattle, WA için yerel saati döndürür.
+Kullanıcı bir saat veya tarih sorgusu girerse, yanıt bir [saat dilimi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#timezone) yanıtı içerebilir. Bu yanıt örtük veya açık sorguları destekler. Kapalı bir sorgu; Örneğin, *ne zaman*olduğu gibi, kullanıcının konumuna göre yerel saati döndürür. Bir açık sorgu (örneğin, *Seattle 'Da ne zaman)?* , Seattle, WA için yerel saati döndürür.
 
-`timeZone` Yanıt konumu, geçerli UTC tarihi ve saati adı belirtilen konumda sağlar ve UTC'ye uzaklık. Konum sınırları içinde birden fazla saat dilimlerini ise, geçerli UTC tarih ve saat, tüm saat dilimlerini sınırları içinde yanıt içerir. Örneğin, Florida durumu içinde iki saat dilimlerini kaldığından, yanıt yerel tarih ve saat, her iki saat dilimlerini içerir.  
+`timeZone` yanıtı konumun adını, belirtilen konumdaki geçerli UTC tarihini ve saatini ve UTC sapmasını sağlar. Konumun sınırı birden çok saat dilimi içindeyse, yanıt, sınırın içindeki tüm saat dilimlerinin geçerli UTC Tarih ve saatini içerir. Örneğin, Florida durumu iki saat diliminin içinde olduğundan, yanıt her iki saat dilimindeki yerel tarih ve saati içerir.  
 
-Sorgu bir eyalet veya ülke/bölge süresini isterse, Bing konumun coğrafi sınırları içinde birincil Şehir belirler ve bunu döndürür `primaryCityTime` alan. Sınır birden fazla saat dilimlerini içeriyorsa, kalan saat dilimlerini döndürülür `otherCityTimes` alan.
+Sorgu bir eyalet veya ülke/bölge zamanını isterse, Bing birincil şehri konumun coğrafi sınırının içinde belirler ve `primaryCityTime` alanına geri döndürür. Sınır birden çok saat dilimi içeriyorsa, kalan saat dilimleri `otherCityTimes` alanında döndürülür.
 
-Aşağıdaki örnekte gösterildiği döndüren sorgular `timeZone` yanıt.
+Aşağıda `timeZone` yanıtını döndüren örnek sorgular gösterilmiştir.
 
 ```
 Query: What time is it?
@@ -417,9 +417,9 @@ Query: What time is it in the U.S.
 }
 ```
 
-## <a name="spellsuggestion-answer"></a>SpellSuggestion yanıt
+## <a name="spellsuggestion-answer"></a>Yazım önerisi yanıtı
 
-Bing belirlerse, kullanıcının farklı bir şey için aranacak hedeflenen, yanıt içeren bir [SpellSuggestions](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#spellsuggestions) nesne. Örneğin, kullanıcı *carlos kalem*, Bing kullanıcının büyük olasılıkla Carlos Pena için bunun yerine arama geçmesini belirlemek (başkaları tarafından son aramaları tabanlı *carlos kalem*). Bir örnek yazım yanıt aşağıda gösterilmiştir.
+Bing, kullanıcının farklı bir şeyi aramak için tasarlanmış olabileceğini belirlerse, yanıt bir [yazım önerisi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#spellsuggestions) nesnesi içerir. Örneğin, Kullanıcı *Carlos Pen*'u arayıyorsa, Bing kullanıcının bunun yerine Carlos pena aramak için (yani, *Carlos Pen*'ın başkaları tarafından geçmiş aramalara bağlı olarak) arama yapma amacını belirleyebilir. Aşağıda örnek bir yazım yanıtı gösterilmektedir.
 
 ```json
 "spellSuggestions": {
@@ -431,27 +431,27 @@ Bing belirlerse, kullanıcının farklı bir şey için aranacak hedeflenen, yan
 }, ...
 ```
 
-## <a name="response-headers"></a>Yanıt Üstbilgileri
+## <a name="response-headers"></a>Yanıt üst bilgileri
 
-Bing Web araması API'si alınan yanıtları aşağıdaki üst bilgiler içerebilir:
+Bing Web Araması API'si yanıtları aşağıdaki üst bilgileri içerebilir:
 
 |||
 |-|-|
-|`X-MSEdge-ClientID`|Bing kullanıcıya atanmış benzersiz kimliği|
-|`BingAPIs-Market`|İsteği gerçekleştirmek için kullanılan Pazar|
-|`BingAPIs-TraceId`|Bu istek (desteği gibi) için Bing API'si sunucusundaki günlük girişi|
+|`X-MSEdge-ClientID`|Bing 'in kullanıcıya atadığı benzersiz KIMLIK|
+|`BingAPIs-Market`|İsteği yerine getirmek için kullanılan Pazar|
+|`BingAPIs-TraceId`|Bu istek için Bing API sunucusundaki günlük girdisi (destek için)|
 
-İstemci kimliği kalıcı hale getirmek ve sonraki istekleri ile döndürmek özellikle önemlidir. Bunu yaptığınızda, arama, arama sonuçlarını sıralamasını bağlamını geçmiş kullanın ve tutarlı bir kullanıcı deneyimi de sağlar.
+İstemci KIMLIĞINI kalıcı hale getirmek ve sonraki isteklerle döndürmek özellikle önemlidir. Bunu yaptığınızda arama, arama sonuçlarında geçmiş bağlam kullanır ve ayrıca tutarlı bir kullanıcı deneyimi sağlar.
 
-Bing Web araması API'si JavaScript'ten çağırdığınızda, ancak, tarayıcınızın yerleşik güvenlik özellikleri (CORS), bu üstbilgi değerlerini erişmesini engelleyebilir.
+Ancak, JavaScript 'ten Bing Web Araması API'si çağırdığınızda, tarayıcınızın yerleşik güvenlik özellikleri (CORS) bu üstbilgilerin değerlerine erişmenizi engelleyebilir.
 
-Üst bilgilerine erişmek için Bing Web araması API'si isteği bir CORS Ara sunucu aracılığıyla yapabilirsiniz. Böyle bir ara sunucudan gelen yanıtta, yanıt üst bilgilerini beyaz listeye alan ve JavaScript’in kullanımına sunan `Access-Control-Expose-Headers` üst bilgisi bulunur.
+Üstbilgilere erişim kazanmak için bir CORS proxy 'si aracılığıyla Bing Web Araması API'si isteği yapabilirsiniz. Böyle bir ara sunucudan gelen yanıtta, yanıt üst bilgilerini beyaz listeye alan ve JavaScript’in kullanımına sunan `Access-Control-Expose-Headers` üst bilgisi bulunur.
 
-İzin vermek için bir CORS Ara Sunucusu'nun yükleneceği kolaydır bizim [öğretici uygulama](tutorial-bing-web-search-single-page-app.md) isteğe bağlı istemci üstbilgileri erişmek için. İlk olarak, henüz yüklemediyseniz [Node.js'yi yükleyin](https://nodejs.org/en/download/). Ardından bir komut isteminde aşağıdaki komutu girin.
+[Öğretici uygulamamız](tutorial-bing-web-search-single-page-app.md) , isteğe bağlı istemci üst bilgilerine erişmesine izin vermek IÇIN bir CORS proxy yüklemek kolaydır. İlk olarak, henüz yüklemediyseniz [Node.js'yi yükleyin](https://nodejs.org/en/download/). Sonra bir komut isteminde aşağıdaki komutu girin.
 
     npm install -g cors-proxy-server
 
-Ardından, Bing Web araması API'si uç nokta HTML dosyasındaki değiştirin:
+Sonra, HTML dosyasındaki Bing Web Araması API'si uç noktasını şu şekilde değiştirin:
 
     http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search
 
@@ -461,22 +461,22 @@ Son olarak, aşağıdaki komutla CORS ara sunucusunu başlatın:
 
 Öğretici uygulamasını kullanırken komut penceresini açık bırakın; pencere kapatılırsa ara sunucu durdurulur. Arama sonuçlarının altındaki genişletilebilir HTTP Üst Bilgileri bölümünde artık `X-MSEdge-ClientID` üst bilgisini (diğerleriyle birlikte) görebilir ve bunun her istekte aynı olduğunu doğrulayabilirsiniz.
 
-## <a name="response-headers-in-production"></a>Üretimde yanıt üstbilgileri
+## <a name="response-headers-in-production"></a>Üretimdeki yanıt üst bilgileri
 
-Önceki yanıtında açıklanan CORS Ara yaklaşımı, geliştirme, test ve öğrenme için uygundur.
+Önceki cevap bölümünde açıklanan CORS proxy yaklaşımı geliştirme, test ve öğrenme için uygundur.
 
-Bir üretim ortamında, Bing Web araması API'si kullanan Web sayfası olarak aynı etki alanında bir sunucu tarafı betik barındırmamalısınız. Bu betik, Web sayfası JavaScript'ten istek API çağrıları yapabilir ve istemciye üst bilgiler dahil olmak üzere tüm sonuçları geçirin. Bir kaynak (sayfa ve komut dosyası) iki Kaynakları paylaşarak CORS kullanılmaz ve özel üstbilgi JavaScript Web sayfasındaki erişilebilir.
+Bir üretim ortamında, Bing Web Araması API'si kullanan Web sayfasıyla aynı etki alanında bir sunucu tarafı betiği barındırmalısınız. Bu betik, Web sayfası JavaScript 'ten istek üzerine API çağrıları yapıp, üst bilgiler dahil olmak üzere tüm sonuçları istemciye geri iletmelidir. İki kaynak (sayfa ve betik) bir kaynağı paylaştığından, CORS kullanılmaz ve özel üst bilgilere Web sayfasındaki JavaScript 'in erişimine erişilebilir.
 
-Sunucu tarafı betik ihtiyaç duyduğu yalnızca bu yaklaşım ayrıca API anahtarınızı genel maruz kalma riskinizi beri önler. Betik, isteğin yetkilendirilip emin olmak için başka bir yöntemi kullanabilirsiniz.
+Bu yaklaşım ayrıca API anahtarınızı herkese açık hale karşı korur, çünkü yalnızca sunucu tarafı betiği için gereklidir. Betik, isteğin yetkilendirildiğinden emin olmak için başka bir yöntem kullanabilir.
 
-Bing yazım önerisi nasıl kullandığını gösterir.
+Aşağıda, Bing 'in yazım önerisi nasıl kullanıldığı gösterilmektedir.
 
-![Bing yazım önerisi örneği](./media/cognitive-services-bing-web-api/bing-web-spellingsuggestion.GIF)  
+![Bing yazım denetimi önerisi örneği](./media/cognitive-services-bing-web-api/bing-web-spellingsuggestion.GIF)  
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
-* Gözden geçirme [istek azaltma](throttling-requests.md) belgeleri.  
+* [İstek azaltma](throttling-requests.md) belgelerini gözden geçirin.  
 
 ## <a name="see-also"></a>Ayrıca bkz.  
 
-* [Bing Web araması API'si başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference)
+* [Bing Web Araması API'si Başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference)

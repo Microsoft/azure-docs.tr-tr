@@ -1,74 +1,75 @@
 ---
-title: Özel konuşma tanıma - konuşma Hizmetleri doğruluğu değerlendir
-titlesuffix: Azure Cognitive Services
-description: Bu belgede, Microsoft'un Konuşmayı metne modeli veya özel modelinizin kalitesini quantitatively ölçmek öğreneceksiniz. Ses + insan etiketli transkripsiyonu veri doğruluğunu test etmek için gereklidir ve temsili bir ses 5 saat 30 dakika sağlanmalıdır.
+title: Özel Konuşma Tanıma konuşma hizmeti için doğruluğu değerlendirin
+titleSuffix: Azure Cognitive Services
+description: Bu belgede, konuşmadan metin modelimizin veya özel modelinizin kalitesini nasıl ölçeceğinizi öğreneceksiniz. Ses + insan etiketli Döküm verileri, doğruluk sınaması için gereklidir ve 5 saatlik temsili ses sağlanmalıdır.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 05/02/2019
+ms.date: 09/06/2019
 ms.author: erhopf
-ms.openlocfilehash: 7c1b3602b09c1a129923180c4b1d4a5f8293de2c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 77dc50df7b46aeb6ddfddf92710d576f85492471
+ms.sourcegitcommit: b7b0d9f25418b78e1ae562c525e7d7412fcc7ba0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65025916"
+ms.lasthandoff: 09/08/2019
+ms.locfileid: "70801552"
 ---
-# <a name="evaluate-custom-speech-accuracy"></a>Özel konuşma doğruluğunu değerlendir
+# <a name="evaluate-custom-speech-accuracy"></a>Doğruluk Özel Konuşma Tanıma değerlendirin
 
-Bu belgede, Microsoft'un Konuşmayı metne modeli veya özel modelinizin kalitesini quantitatively ölçmek öğreneceksiniz. Ses + insan etiketli transkripsiyonu veri doğruluğunu test etmek için gereklidir ve temsili bir ses 5 saat 30 dakika sağlanmalıdır.
+Bu belgede, Microsoft 'un konuşmaya metin modeli veya özel modeliniz kalitesini nasıl ölçeceğinizi öğreneceksiniz. Ses + insan etiketli Döküm verileri, doğruluk sınaması için gereklidir ve 5 saatlik temsili ses sağlanmalıdır.
 
 ## <a name="what-is-word-error-rate-wer"></a>Word hata oranı (WER) nedir?
 
-Model doğruluğu ölçmek için endüstri standardıdır *Word hata oranı* (WER). WER'i tanıma sırasında belirlenen yanlış sözcükleri sayar ve ardından bir kelimelerin İnsan etiketli transkripti sağlanan toplam sayı böler. Son olarak, bu sayıyı WER hesaplamak için % 100 ile çarpılır.
+Model doğruluğunu ölçmek için sektör standardı, *sözcük hata oranı* (WER). WER, tanıma sırasında tanımlanan yanlış sözcüklerin sayısını sayar ve sonra, insan etiketli döküm dosyasında belirtilen toplam sözcük sayısına böler. Son olarak, bu sayı WER 'i hesaplamak için% 100 ile çarpılır.
 
-![WER'i formülü](./media/custom-speech/custom-speech-wer-formula.png)
+![WER formülü](./media/custom-speech/custom-speech-wer-formula.png)
 
-Hatalı olarak üç kategoriye ayrılır sözcükleri tanımlanır:
+Yanlış tanımlanmış kelimeler üç kategoride yer almalıdır:
 
-* Ekleme (ı): Yanlış varsayım transkripti eklenmiş olan sözcükler
-* Silme (D): Hipotezin transkripti algılanmayan sözcükler
-* Değiştirme (S): Başvuru ile varsayım arasında yerine sözcükler
+* Ekleme (ı): Varsayıma betiğine yanlış eklenen sözcükler
+* Silme (D): Varsayım dökümü 'nde algılanmayan sözcükler
+* Değiştirme (ler): Başvuru ve varsayım arasında değiştirilen kelimeler
 
 Bir örneği aşağıda verilmiştir:
 
-![Örnek hatalı tanımlanmış bir kelimelerin](./media/custom-speech/custom-speech-dis-words.png)
+![Yanlış tanımlanmış sözcüklerin örneği](./media/custom-speech/custom-speech-dis-words.png)
 
-## <a name="resolve-errors-and-improve-wer"></a>Hataları giderin ve WER'e geliştirin
+## <a name="resolve-errors-and-improve-wer"></a>Hataları çözün ve WER 'i geliştirebilirsiniz
 
-WER'i makine tanıma sonuçlarından, uygulama, aracı veya ürün kullanarak model kalitesini değerlendirmek için kullanabilirsiniz. WER'i bir % 5-%10, kaliteli olduğu kabul edilir ve kullanıma hazır. Ek eğitim isteyebilirsiniz ancak bir WER % 20 kullanılabilir. Bir WER % 30 veya daha düşük kaliteli bildirir ve özelleştirme ve eğitim gerektirir.
+Uygulamanızı, aracınız veya ürününüzle kullandığınız modelin kalitesini değerlendirmek için makine tanıma sonuçlarından WER ' i kullanabilirsiniz. % 5 oranında bir WER, iyi bir kalite gibi kabul edilir ve kullanıma hazır hale gelir. % 20 oranında bir WER kabul edilebilir, ancak ek eğitime göz önüne almanız gerekebilir. % 30 veya daha fazla bir WER, kalite ve eğitim gerektirir.
 
-Hataları nasıl dağıtıldığını önemlidir. Birçok silme hatalarıyla karşılaşıldı, genellikle zayıf ses sinyal gücü nedeniyle olur. Bu sorunu çözmek için kaynak yaklaştırarak ses verilerini toplamak gerekir. Ekleme hataları ses gürültülü ortamında kaydedilmiştir ve söze tanıma sorunlarına neden olan mevcut olabilir anlamına gelir. Etki alanına özgü koşulları yetersiz bir örnek olarak ya da insan etiketli döküm sağlanan veya ilgili, değiştirme hatalarla karşılaştı genellikle metin.
+Hataların dağıtılması önemlidir. Birçok silme hatası ile karşılaşıldığında, genellikle zayıf ses sinyali gücü nedeniyle oluşur. Bu sorunu çözmek için, kaynağa daha yakın ses verileri toplamanız gerekir. Ekleme hataları, sesin gürültülü bir ortama kaydedildiği ve Crosstalk mevcut olabileceği ve tanınma sorunlarına neden olduğu anlamına gelir. Değiştirme hatalarıyla genellikle, etki alanına özgü koşulların yetersiz bir örneği, insan etiketli döküm veya ilgili metin olarak sağlandıysa, bu durum oluşur.
 
-Tek tek dosyaları analiz ederek, hangi türde hataları var ve hangi hataları belirli bir dosyaya benzersiz belirleyebilirsiniz. Dosya düzeyinde anlama sorunları size yardımcı olacak hedef geliştirmeleri.
+Tek tek dosyaları çözümleyerek, hangi tür hataların var olduğunu ve belirli bir dosyaya hangi hataların benzersiz olduğunu belirleyebilirsiniz. Dosya düzeyindeki sorunları anlamak, iyileştirmeleri hedefetmenize yardımcı olur.
 
 ## <a name="create-a-test"></a>Test oluşturma
 
-Microsoft'un Konuşmayı metne temel modeli veya eğitim almış özel bir model kalitesini test etmek istiyorsanız, iki modeli doğruluğu değerlendirmek için yan yana karşılaştırabilirsiniz. Karşılaştırma WER ve tanıma sonuçları içerir. Genellikle, özel bir model, Microsoft'un temel modeli ile karşılaştırılır.
+Microsoft 'un konuşmaya metin taban çizgisi modeli veya eğitilen özel bir model kalitesini test etmek isterseniz doğruluğu değerlendirmek için iki modeli yan yana karşılaştırabilirsiniz. Karşılaştırma, WER ve tanıma sonuçlarını içerir. Genellikle, özel bir model Microsoft 'un temel modeliyle karşılaştırılır.
 
-Modeli yan yana değerlendirmek için:
+Modelleri yan yana değerlendirmek için:
 
-1. Gidin **konuşma metin > özel konuşma > test**.
-2. Tıklayın **Test Ekle**.
-3. Seçin **doğruluğu değerlendirmek**. Test açıklaması, bir ad verin ve ses + insan etiketli transkripsiyonu kümenizi seçin.
-4. Test etmek istediğiniz en fazla iki modeli seçin.
-5. **Oluştur**’a tıklayın.
+1. [Özel konuşma tanıma portalında](https://speech.microsoft.com/customspeech)oturum açın.
+2. **> konuşmadan metne git Özel Konuşma Tanıma > testi**yapın.
+3. **Test Ekle**' ye tıklayın.
+4. **Doğruluğu değerlendir**' i seçin. Teste bir ad, açıklama verin ve ses + insan etiketli döküm veri kümenizi seçin.
+5. Test etmek istediğiniz en fazla iki model seçin.
+6. **Oluştur**'a tıklayın.
 
-Test başarılı bir şekilde oluşturulduktan sonra sonuçları yan yana karşılaştırabilirsiniz.
+Testiniz başarıyla oluşturulduktan sonra sonuçları yan yana karşılaştırabilirsiniz.
 
 ## <a name="side-by-side-comparison"></a>Yan yana karşılaştırma
 
-Test tamamlandıktan sonra durum değişikliği için belirttiği *başarılı*, test çalıştırmanızda dahil her iki modelleri için WER birkaç bulabilirsiniz. Test ayrıntı sayfası görüntülemek için test adına tıklayın. Bu Ayrıntıları sayfası, tüm konuşma transkripsiyonu gönderilen veri kümesinden yanı sıra iki modeli tanıma sonuçları gösteren veri kümenizde, listeler. Yan yana karşılaştırmayı denetlemek amacıyla, ekleme, silme ve değiştirme gibi çeşitli hata türleri geçiş yapabilirsiniz. Ses için dinleme ve tanıma sonuçları her sütunda İnsan etiketli transkripsiyonu gösterir ve iki konuşma metin model için sonuçları karşılaştırma hangi modelle ihtiyaçlarınıza uygun ve ek eğitim ve geliştirmeleri olduğu karar verebilirsiniz Gerekli.
+Test tamamlandıktan sonra durum değişikliği *başarılı*olarak belirtilmişse, testinizde her iki model için de bir wer numarası bulacaksınız. Test ayrıntısı sayfasını görüntülemek için test adına tıklayın. Bu ayrıntı sayfasında, veri kümenizdeki tüm bildirimler listelenir. Bu, gönderilen veri kümesinden gelen döküm ile birlikte iki modelin tanınma sonuçlarını gösterir. Yan yana karşılaştırmayı incelemeye yardımcı olması için ekleme, silme ve değiştirme gibi çeşitli hata türlerini değiştirebilirsiniz. Her bir sütunda sesli dinleyerek ve iki konuşmadan metne modellerle ilgili sonuçları gösteren her bir sütundaki tanıma sonuçlarını karşılaştıran şekilde, hangi modelin ihtiyaçlarınıza uygun olduğunu ve ek eğitim ve geliştirmelerin nerede olduğunu seçebilirsiniz. Gerekli.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Modelinizi eğitin](how-to-custom-speech-train-model.md)
-* [Modelinizi dağıtma](how-to-custom-speech-deploy-model.md)
+* [Modelinize eğitme](how-to-custom-speech-train-model.md)
+* [Modelinizi dağıtın](how-to-custom-speech-deploy-model.md)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Hazırlama ve test, verileri](how-to-custom-speech-test-data.md)
-* [Verilerinizi denetleyin](how-to-custom-speech-inspect-data.md)
+* [Verilerinizi hazırlayın ve test edin](how-to-custom-speech-test-data.md)
+* [Verilerinizi inceleyin](how-to-custom-speech-inspect-data.md)

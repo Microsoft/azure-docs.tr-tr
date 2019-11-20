@@ -5,83 +5,83 @@ services: virtual-machines
 author: shants123
 ms.service: virtual-machines
 ms.topic: include
-ms.date: 4/30/2019
+ms.date: 8/22/2019
 ms.author: shants
 ms.custom: include file
-ms.openlocfilehash: c2931fa410cf92755a5df5b7129dcf93de900930
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: b2a7bbef2c421281780c0191fa32381468899bbf
+ms.sourcegitcommit: 3f78a6ffee0b83788d554959db7efc5d00130376
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188351"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70020362"
 ---
-Azure platformu güvenilirlik, performans ve sanal makineler için konak altyapısının güvenliğini iyileştirmek için düzenli olarak güncelleştirir. Bu güncelleştirmeler amacı, yazılım bileşenlerini yükseltme bileşenleri ağ veya donanım yetkisini alma barındırma ortamında düzeltme eki uygulama aralıkları. 
+Azure, sanal makineler için konak altyapısının güvenilirliğini, performansını ve güvenliğini artırmak üzere platformunu düzenli olarak güncelleştirir. Bu güncelleştirmelerin amacı, ağ bileşenlerini yükseltmek veya donanım yetkisini almak için barındırma ortamındaki yazılım bileşenlerinde düzeltme eki uygulama bileşenlerinden oluşur. 
 
-Güncelleştirmeleri nadiren barındırılan sanal makineleri etkiler. Güncelleştirmeleri bir etkisi yoktur, Azure güncelleştirmeleri için en az etkili yöntem seçer:
+Güncelleştirmeler barındırılan VM 'Leri nadiren etkiler. Güncelleştirmelerin bir etkisi olduğunda Azure, güncelleştirmeler için en az ımpacımpact yöntemini seçer:
 
-- Güncelleştirmenin yeniden başlatma gerektirmez, VM konak güncelleştirildiğinde ya da Canlı-geçişi zaten güncelleştirilmiş bir konağa sanal makine duraklatıldı.
+- Güncelleştirme için bir yeniden başlatma gerektirmiyorsa, konak güncelleştirilirken VM duraklatılır veya VM canlı olarak zaten güncelleştirilmiş bir konağa geçirilir.
 
-- Bakım yeniden başlatma gerektirirse planlı bakım bildirim alırsınız. Azure Ayrıca, bir zaman penceresi içinde bakım kendiniz için en uygun zamanda başlatabilirsiniz sağlar. Bakım Acil olmadığı sürece kendine kendine bakım penceresi genellikle 30 gündür. Azure platformu planlı bakım VM'lerin yeniden başlatılmasını gerektiren bir servis talebi sayısını azaltmak için teknolojileri yatırım yapıyor. 
+- Bakım için yeniden başlatma gerekiyorsa, planlı bakım hakkında bilgilendirilirsiniz. Azure aynı zamanda, sizin için uygun bir zamanda bakımı kendiniz başlatabileceğinizi bir zaman penceresi sağlar. Bakım acil değilse, kendi kendine bakım penceresi genellikle 35 gün olur. Azure, planlı platform bakımının VM 'Lerin yeniden başlatılmasını gerektirdiği durum sayısını azaltmak için teknolojiden yatırım yapıyor. 
 
-Bu sayfada Azure bakım her iki türdeki nasıl gerçekleştireceğini açıklar. Planlanmamış olaylar (kesinti) hakkında daha fazla bilgi için bkz. [Vm'leri için Windows kullanılabilirliğini yönetme](../articles/virtual-machines/windows/manage-availability.md) veya ilgili makaleyi [Linux](../articles/virtual-machines/linux/manage-availability.md).
+Bu sayfa, Azure 'un her iki türde bakım gerçekleştirmesini açıklar. Planlanmamış Olaylar (kesintiler) hakkında daha fazla bilgi için bkz. [Windows Için VM 'lerin kullanılabilirliğini yönetme](../articles/virtual-machines/windows/manage-availability.md) veya [Linux](../articles/virtual-machines/linux/manage-availability.md)için ilgili makale.
 
-Bir VM içinde tarafından yaklaşan bakımlar hakkında bildirim almak [Windows için zamanlanmış olaylar kullanarak](../articles/virtual-machines/windows/scheduled-events.md) veya [Linux](../articles/virtual-machines/linux/scheduled-events.md).
+Bir VM içinde, Windows veya [Linux](../articles/virtual-machines/linux/scheduled-events.md)için [zamanlanan olaylar kullanarak](../articles/virtual-machines/windows/scheduled-events.md) yaklaşan bakım hakkında bildirim alabilirsiniz.
 
-Planlı bakım yönetme ile ilgili yönergeler için bkz: [planlı bakım bildirimlerini Linux için işleme](../articles/virtual-machines/linux/maintenance-notifications.md) veya ilgili makaleyi [Windows](../articles/virtual-machines/windows/maintenance-notifications.md).
+Planlı bakım yönetimi hakkında yönergeler için bkz. [Linux için planlı bakım bildirimlerini işleme](../articles/virtual-machines/linux/maintenance-notifications.md) veya [Windows](../articles/virtual-machines/windows/maintenance-notifications.md)için ilgili makale.
 
-## <a name="maintenance-that-doesnt-require-a-reboot"></a>Yeniden başlatma gerektirmez bakım
+## <a name="maintenance-that-doesnt-require-a-reboot"></a>Yeniden başlatma gerektirmeyen bakım
 
-Daha önce belirtildiği gibi birçok platform güncelleştirmelerinin müşteri Vm'leri etkilemez. Etkisiz güncelleştirme mümkün olmadığında, Azure müşteri Vm'leri için en az impactful güncelleştirme mekanizması seçer. 
+Daha önce belirtildiği gibi, çoğu platform güncelleştirmesi müşteri sanal makinelerini etkilemez. Etkili olmayan bir güncelleştirme mümkün olmadığında Azure, müşteri VM 'lerine en az olumsuz bir güncelleştirme mekanizması seçer. 
 
-Çoğu etkisi sıfır bakım 10 saniyeden kısa bir süre için sanal Makineyi duraklatır. Bazı durumlarda, Azure, bellek tasarruflu bakım mekanizmalarını kullanır. Bu mekanizmalar, 30 saniyeye kadar sanal Makineyi duraklatmak ve RAM belleği koruyabilirsiniz. Ardından VM sürdürülür ve kendi saati otomatik olarak eşitlenir. 
+Sıfır olmayan etki çok etkili bakım, VM 'yi 10 saniyeden daha az süreyle duraklatır. Azure, belirli durumlarda, bellek koruma bakım mekanizmalarını kullanır. Bu mekanizmalar, VM 'yi en fazla 30 saniye duraklatıp RAM 'teki belleği korur. VM daha sonra sürdürülür ve saati otomatik olarak eşitlenir. 
 
-Bellek tasarruflu bakım fazla yüzde 90'dan için Azure sanal makineleri çalışır. Bu, G, M, N ve H serisi için çalışmaz. Azure, giderek daha fazla dinamik geçiş teknolojilerini kullanır ve duraklama sürelerini azaltmak için bakım mekanizmaları bellek tasarruflu artırır.  
+Bellek koruma bakımı, Azure VM 'lerinin yüzde 90 ' sinden daha fazlası için geçerlidir. G, M, N ve H serisi için çalışmaz. Azure, dinamik geçiş teknolojileri kullanır ve duraklatma sürelerini azaltmak için bellek koruma bakım mekanizmalarını geliştirir.  
 
-Yeniden başlatma gerektirmeyen bu bakım uygulanan bir hata etki alanı aynı anda işlemlerdir. Herhangi bir uyarı sistem durumu sinyal aldıkları durumunda durdurulur. 
+Yeniden başlatma gerektirmeyen bu bakım işlemleri, tek seferde bir hata etki alanı uygulanır. Herhangi bir uyarı sistem durumu sinyali aldıklarında bunları durdurur. 
 
-Bu türden güncelleştirmeler, bazı uygulamaları etkileyebilir. VM'yi farklı bir konağa dinamik-geçişi olduğunda, önemli bazı iş yükleri için VM duraklatma sonlanan birkaç dakika içinde küçük bir performans düşüşü gösterebilir. Sanal makine bakım için hazırlanmanıza ve Azure bakım sırasında etkisini azaltmak için deneyin [Windows için zamanlanmış olaylar kullanarak](../articles/virtual-machines/windows/scheduled-events.md) veya [Linux](../articles/virtual-machines/linux/scheduled-events.md) gibi uygulamalar için. Azure, bakım denetim özellikleri hassas uygulamalar için çalışmaktadır. 
+Bu tür güncelleştirmeler bazı uygulamaları etkileyebilir. SANAL makine dinamik olarak farklı bir konağa geçirildiğinde, bazı hassas iş yükleri VM duraklatmaya en az birkaç dakika sonunda küçük bir performans düşüşü gösterebilir. VM bakımına hazırlanmak ve Azure Bakımı sırasında etkileri azaltmak için, bu tür uygulamalar için Windows veya [Linux](../articles/virtual-machines/linux/scheduled-events.md) [için zamanlanan olaylar kullanmayı](../articles/virtual-machines/windows/scheduled-events.md) deneyin. Azure Ayrıca, [Azure adanmış konaklar](../articles/virtual-machines/windows/dedicated-hosts.md) ve [yalıtılmış VM](../articles/security/fundamentals/isolation-choices.md)'lerde bu tür sıfır olmayan etki platformu bakımı üzerinde tam denetim sağlar. Bakım denetimi özelliği önizlemededir ve [Kaydolma formunu](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR6lJf7DwiQxNmz51ksQvxV9UNUM3UllWUjBMTFZQUFhHUDI0VTBPQlJFNS4u)göndererek erişim isteğinde bulunabilir. Bu, sıfır olmayan etki platformu güncelleştirmelerini atlama ve güncelleştirmeleri 35 günlük bir işlem penceresinde dilediğiniz zaman toplu olarak uygulama seçeneği sunar.
 
 ### <a name="live-migration"></a>Dinamik geçiş
 
-Dinamik geçiş, yeniden başlatma gerektirmez ve sanal makine için bellek koruyan bir işlemdir. Duraklatma veya dondurma, genellikle en fazla 5 saniye çözülebilecek neden olur. G dışında M, N ve H serisi, bir hizmet (Iaas) Vm'leri olarak tüm altyapı, dinamik geçiş için uygundur. Uygun sanal makineleri için Azure fleet dağıtılan Iaas Vm'leri yüzde 90'den fazla temsil eder. 
+Dinamik geçiş, bir yeniden başlatma gerektirmeyen ve VM için belleği koruyan bir işlemdir. Genellikle 5 saniyeden fazla bir duraklama veya dondurma ile devam etmesine neden olur. G, M, N ve H serisi dışında tüm hizmet olarak altyapı (IaaS) VM 'Leri dinamik geçiş için uygun değildir. Uygun VM 'Ler, Azure Fleet 'e dağıtılan IaaS sanal makinelerinin yüzde 90 ' inden fazlasını temsil eder. 
 
-Azure platformu, aşağıdaki senaryolarda dinamik geçiş başlar:
+Azure platformu, aşağıdaki senaryolarda dinamik geçiş başlatır:
 - Planlı bakım
-- Donanım arızası
-- Ayırma en iyi duruma getirme
+- Donanım hatası
+- Ayırma iyileştirmeleri
 
-Bazı planlı bakım senaryolarını dinamik geçiş kullanan ve zamanlanmış olaylar önceden Canlı öğrenmek için kullanabileceğiniz geçiş işlemlerini başlayacak.
+Bazı planlı bakım senaryoları dinamik geçiş kullanır ve dinamik geçiş işlemleri başlatıldığında Zamanlanan Olaylar kullanımı için kullanabilirsiniz.
 
-Dinamik geçiş, Azure Machine Learning algoritmaları yaklaşan bir donanım hatası veya VM ayırma iyileştirmek istediğinizde tahmin, sanal makineleri taşımak için de kullanılabilir. Algılayan düşürülmüş donanım örneklerini Tahmine dayalı modelleme hakkında daha fazla bilgi için bkz: [Tahmine dayalı makine öğrenimi ve dinamik geçiş ile geliştirme Azure VM dayanıklılığını](https://azure.microsoft.com/blog/improving-azure-virtual-machine-resiliency-with-predictive-ml-and-live-migration/?WT.mc_id=thomasmaurer-blog-thmaure). Bu hizmetler kullanırsanız, dinamik geçiş bildirimleri İzleyici ve hizmetin sistem durumunu günlükleri de zamanlanmış olaylar olduğu gibi Azure portalında görünür.
+Dinamik geçiş Ayrıca, Azure Machine Learning algoritmalarda olası bir donanım hatası tahmin edildiğinde veya VM ayırmalarını iyileştirmek istediğinizde VM 'Leri taşımak için de kullanılabilir. Azaltılmış donanım örneklerini algılayan tahmine dayalı modelleme hakkında daha fazla bilgi için bkz. tahmine [dayalı makine öğrenimi ve dinamik geçiş Ile Azure VM dayanıklılığı geliştirme](https://azure.microsoft.com/blog/improving-azure-virtual-machine-resiliency-with-predictive-ml-and-live-migration/?WT.mc_id=thomasmaurer-blog-thmaure). Canlı geçiş bildirimleri Izleyici ve hizmet durumu günlüklerinde Azure portal ve bu Hizmetleri kullanıyorsanız Zamanlanan Olaylar görüntülenir.
 
-## <a name="maintenance-that-requires-a-reboot"></a>Yeniden başlatma gerektiren bir bakım
+## <a name="maintenance-that-requires-a-reboot"></a>Yeniden başlatma gerektiren bakım
 
-VM'ler için planlı bakım başlatılması gereken yere nadir durumlarda, önceden bildirilir. Planlı bakım için iki aşaması vardır: Self Servis aşaması ve zamanlanan bakım aşaması.
+Planlanan bakım için VM 'Lerin yeniden başlatılması gereken nadir bir durumda, önceden bildirilir. Planlı bakım iki aşamaya sahiptir: Self Servis aşaması ve zamanlanmış bakım aşaması.
 
-Sırasında *Self Servis aşaması*, genellikle sürer dört haftada, Vm'lerinizde Bakımı Başlat. Self Servis bir parçası olarak, her VM durumunu ve Bakım isteğiniz sonucunu görmek için sorgulayabilirsiniz.
+Genellikle dört hafta içinde olan *self servis aşaması*sırasında, VM 'lerinize bakım başlatabilirsiniz. Self Servis 'nin bir parçası olarak, her bir VM 'yi sorgulayabilir ve son bakım isteğinizin sonucunu görebilirsiniz.
 
-Self Servis bakım başlattığınızda, sanal makinenizin zaten güncelleştirilmiş bir düğüme yeniden. VM yeniden geçici disk kaybolur ve dinamik IP adresleri sanal ağ arabirimiyle ilişkili güncelleştirilir.
+Self servis bakımı 'nı başlattığınızda, VM 'niz zaten güncelleştirilmiş bir düğüme yeniden dağıtılır. VM yeniden başlatıldığında geçici disk kaybedilir ve sanal ağ arabirimiyle ilişkili dinamik IP adresleri güncelleştirilir.
 
-Self Servis bakım sırasında işlemi durdurur, bir hata oluşursa VM güncelleştirilmez ve Self Servis bakım yeniden dene seçeneğine sahip olursunuz. 
+Self servis bakımı sırasında bir hata oluşursa, işlem duraklar, VM güncellenmez ve self servis bakımını yeniden deneme seçeneğini alırsınız. 
 
-Self Servis aşaması sona erdiğinde *zamanlanan bakım aşaması* başlar. Bu aşamasında, yine de bakım aşaması için sorgu yapabilirsiniz, ancak kendiniz bakım başlatılamıyor.
+Self Servis aşaması sona erdiğinde, *zamanlanmış bakım aşaması* başlar. Bu aşamada bakım aşaması için sorgulama devam edebilir, ancak Bakımı kendiniz başlatamazsınız.
 
-Yeniden başlatma gerektiren bir bakım yönetme ile ilgili daha fazla bilgi için bkz: [planlı bakım bildirimlerini Linux için işleme](../articles/virtual-machines/linux/maintenance-notifications.md) veya ilgili makaleyi [Windows](../articles/virtual-machines/windows/maintenance-notifications.md). 
+Yeniden başlatma gerektiren bakım yönetimi hakkında daha fazla bilgi için bkz. [Linux için planlı bakım bildirimlerini işleme](../articles/virtual-machines/linux/maintenance-notifications.md) veya [Windows](../articles/virtual-machines/windows/maintenance-notifications.md)için ilgili makale. 
 
-### <a name="availability-considerations-during-scheduled-maintenance"></a>Zamanlanan bakım sırasında kullanılabilirlik konuları 
+### <a name="availability-considerations-during-scheduled-maintenance"></a>Zamanlanmış bakım sırasında kullanılabilirlik konuları 
 
-Zamanlanan bakım aşaması kadar beklenecek karar verirseniz, sanal makinelerinizin yüksek kullanılabilirliği sürdürmek için dikkate almanız gereken birkaç nokta vardır. 
+Zamanlanan bakım aşamasına kadar beklemek isterseniz, VM 'lerinizin en yüksek kullanılabilirliğini sürdürmek için göz önünde bulundurmanız gereken birkaç nokta vardır. 
 
 #### <a name="paired-regions"></a>Eşleştirilmiş bölgeler
 
-Her Azure bölgesi aynı coğrafi yakın çevre içinde başka bir bölgeyle eşleştirilir. Bu arada, bölge çiftine olun. Zamanlanan bakım aşaması sırasında Azure Vm'leri yalnızca tek bir bölgede bir bölge çiftine güncelleştirir. Örneğin, Orta Kuzey ABD VM'yi güncelleştirilirken Azure Orta Güney ABD'deki tüm VM'ler aynı anda güncelleştirmez. Ancak, Kuzey Avrupa gibi diğer bölgelerde, Doğu ABD ile aynı zamanda bakım yapılabilir. Bölge çiftlerinin nasıl yararlanabileceğiniz understanding bölgeler arasında daha iyi Vm'lerinizi dağıtın. Daha fazla bilgi için [Azure bölge çiftleri](https://docs.microsoft.com/azure/best-practices-availability-paired-regions).
+Her Azure bölgesi aynı coğrafi yakın çevre kapsamında başka bir bölgeyle eşleştirilir. Birlikte, bir bölge çifti oluşturur. Zamanlanan Bakım aşamasında, Azure yalnızca bölge çiftinin tek bölgesindeki VM 'Leri güncelleştirir. Örneğin, Orta Kuzey ABD ' de sanal makineyi güncelleştirirken, Azure Orta Güney ABD aynı anda hiçbir sanal makineyi güncelleştirmez. Ancak, Kuzey Avrupa gibi diğer bölgelerde, Doğu ABD ile aynı zamanda bakım yapılabilir. Bölge çiftlerinin nasıl çalıştığını anlamak, sanal makinelerinizi bölgeler arasında daha iyi dağıtmanıza yardımcı olabilir. Daha fazla bilgi için bkz. [Azure bölge çiftleri](https://docs.microsoft.com/azure/best-practices-availability-paired-regions).
 
 #### <a name="availability-sets-and-scale-sets"></a>Kullanılabilirlik kümeleri ve ölçek kümeleri
 
-Bir iş yükü Azure sanal makinelerinde dağıtırken, VM içinde oluşturabileceğiniz bir *kullanılabilirlik kümesi* uygulamanıza yüksek kullanılabilirlik sağlamak için. Kullanılabilirlik kümeleri kullanarak, en az bir VM yeniden başlatma gerektiren bir kesinti veya bakım olayları sırasında kullanılabilir olduğundan emin olabilirsiniz.
+Azure VM 'lerinde bir iş yükü dağıttığınızda, uygulamanız için yüksek kullanılabilirlik sağlamak üzere VM 'Leri bir *kullanılabilirlik kümesi* içinde oluşturabilirsiniz. Kullanılabilirlik kümelerini kullanarak, yeniden başlatma gerektiren kesinti veya bakım olayları sırasında en az bir VM 'nin kullanılabilir olmasını sağlayabilirsiniz.
 
-Bir kullanılabilirlik kümesi içinde tek tek sanal makineleri, (UD) en fazla 20 güncelleştirme etki alanlarına dağıtılır. Planlanan bakım sırasında belirli bir zamanda yalnızca bir UD güncelleştirilir. UD mutlaka sıralı olarak güncelleştirilmez. 
+Bir kullanılabilirlik kümesi içinde, tek tek VM 'Ler en fazla 20 güncelleştirme etki alanına (UDs) yayılır. Zamanlanan Bakım sırasında, belirli bir zamanda yalnızca bir UD güncellenir. UDs, her zaman ardışık olarak güncellenmez. 
 
-Sanal makine *ölçek kümeleri* olan bir Azure işlem, özdeş Vm'lerden oluşan bir kümesini tek bir kaynak olarak dağıtıp yönetmek için kullanabileceğiniz kaynak. Ölçek kümesi, bir kullanılabilirlik kümesindeki VM'ler gibi Ud'ler arasında otomatik olarak dağıtılır. Ölçek kümeleri kullanırken olarak kullanılabilirlik kümeleri ile yalnızca bir UD planlanan bakım sırasında herhangi bir belirli zamanda güncelleştirilir.
+Sanal makine *Ölçek Kümeleri* , aynı VM 'lerin bir kümesini tek bir kaynak olarak dağıtmak ve yönetmek için kullanabileceğiniz bir Azure işlem kaynağıdır. Ölçek kümesi, bir kullanılabilirlik kümesindeki VM 'Ler gibi UDs 'lerde otomatik olarak dağıtılır. Kullanılabilirlik kümelerinde olduğu gibi, ölçek kümeleri kullandığınızda, zamanlanan bakım sırasında belirli bir zamanda yalnızca bir UD güncelleştirilir.
 
-Vm'lerinizi yüksek kullanılabilirlik için ayarlama hakkında daha fazla bilgi için bkz. [, Vm'leri için Windows kullanılabilirliğini yönetme](../articles/virtual-machines/windows/manage-availability.md) veya ilgili makaleyi [Linux](../articles/virtual-machines/linux/manage-availability.md).
+Sanal makinelerinizi yüksek kullanılabilirlik için ayarlama hakkında daha fazla bilgi için bkz. [Windows Için sanal makinelerinizin kullanılabilirliğini yönetme](../articles/virtual-machines/windows/manage-availability.md) veya [Linux](../articles/virtual-machines/linux/manage-availability.md)için ilgili makale.

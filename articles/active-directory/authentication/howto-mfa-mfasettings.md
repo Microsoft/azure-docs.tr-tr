@@ -1,394 +1,430 @@
 ---
-title: Azure çok faktörlü kimlik doğrulama - Azure Active Directory'yi yapılandırma
-description: Bu makalede Azure portalında Azure multi-Factor Authentication ayarlarını yapılandırma
+title: Azure Multi-Factor Authentication Yapılandırma-Azure Active Directory
+description: Bu makalede, Azure portal Azure Multi-Factor Authentication ayarlarının nasıl yapılandırılacağı açıklanmaktadır
 services: multi-factor-authentication
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 06/03/2019
+ms.date: 11/18/2019
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 618377d532dc932eb21f282ac8ba7f6c07df16f2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 26744791dd3abe732f56f69ca05dd7c781755e9b
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67113454"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74167982"
 ---
-# <a name="configure-azure-multi-factor-authentication-settings"></a>Azure multi-Factor Authentication ayarlarını yapılandırma
+# <a name="configure-azure-multi-factor-authentication-settings"></a>Azure Multi-Factor Authentication ayarlarını yapılandırma
 
-Bu makale, Azure portalında çok faktörlü kimlik doğrulaması ayarlarını yönetmek için yardımcı olur. En iyi Azure multi-Factor Authentication dışında almaya yardımcı olan çeşitli konuları kapsar. Azure multi-Factor Authentication'ın her sürümünde kullanılabilir olan tüm özellikleri.
+Bu makale, Azure portal Multi-Factor Authentication ayarlarını yönetmenize yardımcı olur. Azure Multi-Factor Authentication en iyi şekilde yararlanmanıza yardımcı olacak çeşitli konular ele alınmaktadır. Her Azure Multi-Factor Authentication sürümünde tüm özellikler kullanılamaz.
 
-Göz atarak Azure portalından Azure multi-Factor Authentication için ilgili ayarlar erişebileceğiniz **Azure Active Directory** > **MFA**.
+Azure Multi-Factor Authentication ile ilgili ayarlara **Azure Active Directory** > **güvenlik** > **MFA**' ya giderek Azure Portal erişebilirsiniz.
 
-![Azure portal - Azure AD çok faktörlü kimlik doğrulama ayarları](./media/howto-mfa-mfasettings/multi-factor-authentication-settings-portal.png)
+![Azure portal-Azure AD Multi-Factor Authentication ayarları](./media/howto-mfa-mfasettings/multi-factor-authentication-settings-portal.png)
 
 ## <a name="settings"></a>Ayarlar
 
-Bu ayarlardan bazıları, MFA sunucusu, Azure mfa'yı veya her ikisi de uygulanır.
+Bu ayarlardan bazıları MFA sunucusu, Azure MFA veya her ikisi için de geçerlidir.
 
 | Özellik | Açıklama |
 | ------- | ----------- |
-| Hesap kilitleme | Geçici olarak kilitleme hesaplar çok faktörlü kimlik doğrulaması hizmeti varsa çok fazla satırda kimlik doğrulama girişimlerini reddedildi. Bu özellik, yalnızca kimlik doğrulaması için PIN giren kullanıcılar için geçerlidir. (MFA sunucusu) |
-| [Kullanıcı engelle/engelini kaldır](#block-and-unblock-users) | Çok faktörlü kimlik doğrulaması isteklerini almak için belirli kullanıcıların engellemek için kullanılır. Engellenen kullanıcılar için kimlik doğrulama girişimleri otomatik olarak reddedilir. Kullanıcı engellendikten andan itibaren 90 gün boyunca engellenmiş kalır. |
-| [Sahtekarlık Uyarısı](#fraud-alert) | Doğrulama istekleri raporlamak için kullanıcıların özelliğiyle ilgili ayarları yapılandırın |
-| Bildirimler | MFA sunucusu olay bildirimlerini etkinleştirin. |
-| [OATH belirteçleri](concept-authentication-methods.md#oath-hardware-tokens-public-preview) | Bulut tabanlı Azure mfa'yı ortamlarında, kullanıcıların OATH belirteçlerini yönetmek için kullanılır. |
-| [Telefon araması ayarları](#phone-call-settings) | Telefon aramaları ve Bulut ve şirket içi ortamlar için tebrikler ilgili ayarları yapılandırın. |
-| Sağlayıcılar | Hesabınızla ilişkili bu var olan tüm kimlik doğrulama sağlayıcılarını gösterir. 1 Eylül 2018'den itibaren yeni kimlik doğrulama sağlayıcıları oluşturulmayabilir |
+| Hesap kilitleme | Bir satırda çok fazla Reddedilen kimlik doğrulama denemesi varsa, Multi-Factor Authentication hizmetindeki hesapları geçici olarak kilitleyin. Bu özellik yalnızca kimlik doğrulaması için PIN girişi yapan kullanıcılar için geçerlidir. (MFA sunucusu) |
+| [Kullanıcıları engelle/engelini kaldır](#block-and-unblock-users) | Belirli kullanıcıların Multi-Factor Authentication isteklerini almasına engel olmak için kullanılır. Engellenen kullanıcılar için tüm kimlik doğrulaması denemeleri otomatik olarak reddedilir. Kullanıcılar engellendikleri tarihten 90 gün sonrasına kadar engellenmiş olarak kalır. |
+| [Sahtekarlık uyarısı](#fraud-alert) | Kullanıcılara sahte doğrulama isteklerini bildirme yeteneği ile ilgili ayarları yapılandırın |
+| [Bildirimler](#notifications) | MFA sunucusundan olayların bildirimlerini etkinleştirin. |
+| [OATH belirteçleri](concept-authentication-methods.md#oath-hardware-tokens-public-preview) | Kullanıcılar için OATH belirteçlerini yönetmek üzere bulut tabanlı Azure MFA ortamlarında kullanılır. |
+| [Telefon araması ayarları](#phone-call-settings) | Bulut ve şirket içi ortamlar için telefon çağrılarıyla ve tebrikler ilgili ayarları yapılandırın. |
+| Sağlayıcılar | Bu, hesabınızla ilişkilendirdiğiniz mevcut herhangi bir kimlik doğrulama sağlayıcısını gösterir. Yeni kimlik doğrulama sağlayıcıları 1 Eylül 2018 itibariyle oluşturulmayabilir |
 
-## <a name="manage-mfa-server"></a>MFA sunucusunu yönetme
+## <a name="manage-mfa-server"></a>MFA sunucusunu yönet
 
-Bu bölümde MFA sunucusu için yalnızca ayarlarıdır.
+Bu bölümdeki ayarlar yalnızca MFA sunucusu içindir.
 
 | Özellik | Açıklama |
 | ------- | ----------- |
-| Sunucu ayarları | MFA Sunucusu'nu indirme ve ortamınızı başlatmak için etkinleştirme kimlik bilgileri oluştur |
-| [Bir kerelik atlama](#one-time-bypass) | Sınırlı bir süre için iki aşamalı doğrulama gerçekleştirmeden kimlik doğrulama açmasına izin verin. |
-| [Önbelleğe alma kuralları](#caching-rules) |  Önbelleğe alma, öncelikli olarak VPN gibi şirket içi sistemler, ilk isteği hala devam ederken birden fazla doğrulama isteği gönderdiğinizde kullanılır. Bu özellik, kullanıcı ilk doğrulama devam ediyor başarılı olduktan sonra otomatik olarak başarılı olması sonraki istekleri sağlar. |
-| Sunucu durumu | Sürüm, durum, IP ve son iletişim saat ve tarih dahil olmak üzere şirket içi MFA sunucularınızın durumunu görürsünüz. |
+| Sunucu ayarları | Ortamınızı başlatmak için MFA sunucusunu indirin ve etkinleştirme kimlik bilgilerini oluşturun |
+| [Bir kerelik geçiş](#one-time-bypass) | Kullanıcının sınırlı bir süre için iki aşamalı doğrulama gerçekleştirmeden kimlik doğrulamasına izin verin. |
+| [Önbelleğe alma kuralları](#caching-rules) |  Önbelleğe alma, birincil olarak ilk istek devam ederken VPN gibi şirket içi sistemler, birden çok doğrulama isteği gönderirken kullanılır. Bu özellik, sonraki isteklerin otomatik olarak başarılı olmasını sağlar ve Kullanıcı devam eden ilk doğrulamayı başarılı olduktan sonra. |
+| Sunucu durumu | Sürüm, durum, IP ve son iletişim saat ve tarih dahil olmak üzere şirket içi MFA sunucularınızın durumuna bakın. |
 
-## <a name="activity-report"></a>Etkinlik Raporu
+## <a name="activity-report"></a>Etkinlik raporu
 
-Burada kullanılabilen raporlama, MFA sunucusu (şirket içi) için özeldir. Azure MFA (bulut) için Azure AD'de oturum açma işlemleri raporu rapor bakın.
+Burada kullanılabilir olan raporlama MFA sunucusuna (Şirket içi) özgüdür. Azure MFA (bulut) raporlarında, Azure AD 'de oturum açma işlemleri raporuna bakın.
 
-## <a name="block-and-unblock-users"></a>Engelleme ve kullanıcıların engelini kaldırma
+## <a name="block-and-unblock-users"></a>Kullanıcıları engelle ve engellemeyi kaldır
 
-Kullanım _engelleme ve kullanıcıların engelini kaldırma_ kullanıcılar kimlik doğrulama isteklerini almasını önlemek için özellik. Engellenen kullanıcılar için kimlik doğrulama girişimleri otomatik olarak reddedilir. Kullanıcı engellendikten andan itibaren 90 gün boyunca engellenmiş kalır.
+Kullanıcıların kimlik doğrulama isteklerini almasını engellemek için _kullanıcıları engelle ve engellemeyi kaldır_ özelliğini kullanın. Engellenen kullanıcılar için tüm kimlik doğrulaması denemeleri otomatik olarak reddedilir. Kullanıcılar engellendikleri tarihten 90 gün sonrasına kadar engellenmiş olarak kalır.
 
-### <a name="block-a-user"></a>Kullanıcıları engelle
-
-1. [Azure Portal](https://portal.azure.com)’da yönetici olarak oturum açın.
-2. Gözat **Azure Active Directory** > **MFA** > **kullanıcıları engelle/engelini kaldır**.
-3. Seçin **Ekle** bir kullanıcıyı engellemek için.
-4. Seçin **çoğaltma grubu**. Engellenen bir kullanıcı olarak için kullanıcı adını girin **kullanıcıadı\@etkialanı.com**. Bir yorum girin **neden** alan.
-5. Seçin **Ekle** engelleyen kullanıcı tamamlanması.
-
-### <a name="unblock-a-user"></a>Kullanıcıların engelini kaldır
+### <a name="block-a-user"></a>Kullanıcıyı engelle
 
 1. [Azure Portal](https://portal.azure.com)’da yönetici olarak oturum açın.
-2. Gözat **Azure Active Directory** > **MFA** > **kullanıcıları engelle/engelini kaldır**.
-3. Seçin **Engellemeyi Kaldır** içinde **eylem** Engellemesi kaldırılacak kullanıcının yanındaki sütuna.
-4. Bir yorum girin **neden engellemesini kaldırmak için** alan.
-5. Seçin **Engellemeyi Kaldır** kullanıcının engellemesini kaldırma tamamlanması.
+2. **Azure Active Directory** > **güvenlik** > **MFA** > , **kullanıcıları engelle/Engeli kaldır**' a gidin.
+3. Kullanıcıyı engellemek için **Ekle** ' yi seçin.
+4. **Çoğaltma grubunu**seçin. Engellenen kullanıcının Kullanıcı adını Kullanıcı **adı\@Domain.com**olarak girin. **Neden** alanına bir açıklama girin.
+5. Kullanıcıyı engellemeyi durdurmak için **Ekle** ' yi seçin.
+
+### <a name="unblock-a-user"></a>Kullanıcının engellemesini kaldırma
+
+1. [Azure Portal](https://portal.azure.com)’da yönetici olarak oturum açın.
+2. **Azure Active Directory** > **güvenlik** > **MFA** > , **kullanıcıları engelle/Engeli kaldır**' a gidin.
+3. Engellemeyi kaldırmak için kullanıcının yanındaki **eylem** sütununda **Engellemeyi kaldır** ' ı seçin.
+4. **Engellemeyi kaldırma nedeni** alanına bir açıklama girin.
+5. Kullanıcının engellemesini kaldırma işleminin bitmesini **kaldırmak Için engellemeyi kaldır** seçeneğini belirleyin.
 
 ## <a name="fraud-alert"></a>Sahtekarlık uyarısı
 
-Yapılandırma _sahtekarlık Uyarısı_ böylece kullanıcılarınız, kullanıcıların kaynaklara erişmeye sahte çalışır bildirebilirsiniz özelliği. Kullanıcıların sahtekarlık denemeleri mobil uygulamasını kullanarak ya da telefon numaraları bildirebilirsiniz.
+Kullanıcılarınızın kaynaklarına erişmek için sahte denemeleri bildirebilmesi için _sahtekarlık uyarı_ özelliğini yapılandırın. Kullanıcılar, mobil uygulamayı veya telefonlarını kullanarak sahtekarlık girişimlerini rapor edebilir.
 
-### <a name="turn-on-fraud-alerts"></a>Dolandırıcılık uyarılarını Aç
+### <a name="turn-on-fraud-alerts"></a>Sahtekarlık uyarılarını aç
 
 1. [Azure Portal](https://portal.azure.com)’da yönetici olarak oturum açın.
-2. Gözat **Azure Active Directory** > **MFA** > **sahtekarlık Uyarısı**.
-3. Ayarlama **kullanıcıların sahtekarlık uyarısı göndermesine izin ver** ayarını **üzerinde**.
+2. **Azure Active Directory** > **güvenlik** > **MFA** > **sahtekarlık uyarısı**' na gidin.
+3. **Kullanıcıların sahtekarlık uyarıları göndermesine Izin ver** ayarını **Açık**olarak ayarlayın.
 4. **Kaydet**’i seçin.
 
 ### <a name="configuration-options"></a>Yapılandırma seçenekleri
 
-* **Sahtekarlık bildirildiğinde kullanıcıyı engelle**: Bir kullanıcı sahtekarlık bildirirse, kendi hesabı 90 gün veya yönetici hesabını engellemesinin kaldırıldığı kadar engellenir. Yönetici oturum açma raporunu kullanarak oturum açma işlemleri gözden geçirin ve gelecekteki sahtekarlığı önlemek, uygun eylemi gerçekleştirin. Yönetici böylece [engellemesini](#unblock-a-user) kullanıcının hesabı.
-* **İlk Karşılama sırasında sahtekarlık bildirme kodu**: Kullanıcılar, iki aşamalı doğrulamayı gerçekleştirmek için bir telefon araması aldığında, bunlar normal basın **#** kullanıcıların oturum açma onaylamak için. Rapor sahtekarlık bir kod tuşlarına basarak önce kullanıcının girdiği **#** . Bu kodu **0** varsayılan olarak, ancak bunu özelleştirebilirsiniz.
+* **Sahtekarlık bildirildiğinde kullanıcıyı engelle**: bir Kullanıcı sahtekarlık bildirirse, hesabı 90 gün boyunca engellenir veya bir yönetici kendi hesabını engellemez. Yönetici, oturum açma raporunu kullanarak oturum açma işlemlerini gözden geçirebilir ve ileride sahtekarlık oluşmasını önlemek için gerekli işlemleri gerçekleştirebilir. Yönetici daha sonra kullanıcının hesabının [engellemesini kaldırabilir](#unblock-a-user) .
+* **İlk tebrik sırasında sahtekarlık raporlamak Için kod**: kullanıcılar iki adımlı doğrulama gerçekleştirmek için bir telefon araması aldıklarında, oturum açma işlemini onaylamak için normalde **#** ' a basın. Sahtekarlık raporlamak için Kullanıcı **#** basmadan önce bir kod girer. Bu kod varsayılan olarak **0** ' dır, ancak özelleştirebilirsiniz.
 
    >[!NOTE]
-   >Microsoft gelen varsayılan sesli karşılamalar basın seçmemelerini **0#** sahtekarlık uyarısı göndermek için. Bir kod dışında kullanmak istiyorsanız **0**, kaydedin ve kullanıcılarınız için uygun yönergelere ile kendi özel sesli karşılamalar karşıya yükleyin.
+   >Microsoft 'un varsayılan ses tebrikleri, kullanıcılardan bir sahtekarlık uyarısı göndermesi için **0 #** tuşlarına basmalarını ister. **0**dışında bir kod kullanmak istiyorsanız, kullanıcılarınız için uygun yönergeler ile kendi özel ses tebrikleri kaydedin ve yükleyin.
    >
 
-### <a name="view-fraud-reports"></a>Sahtekarlık raporlarını görüntüle
+### <a name="view-fraud-reports"></a>Sahtekarlık raporlarını görüntüleme
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **Azure Active Directory** > **oturum açma**. Sahtekarlık rapor artık standart Azure AD oturum açma işlemleri raporu bir parçasıdır.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. **Azure Active Directory** > **oturum açma**işlemlerini seçin. Sahtekarlık raporu artık standart Azure AD oturum açma işlemleri raporunun bir parçasıdır.
+
+## <a name="notifications"></a>Bildirimler
+
+Sahtekarlık uyarı e-postaları alacak kullanıcılar için buradaki e-posta adreslerini yapılandırın.
+
+![Bildirim sahtekarlık uyarısı e-posta örneği](./media/howto-mfa-mfasettings/multi-factor-authentication-fraud-alert-email.png)
 
 ## <a name="phone-call-settings"></a>Telefon araması ayarları
 
-### <a name="caller-id"></a>Arayan kimliği
+### <a name="caller-id"></a>Arayan KIMLIĞI
 
-**MFA arayan kimlik numarası** -Bu, sayı, kullanıcılarınızın telefonlarında da görürsünüz. Yalnızca ABD tabanlı sayı izin verilir.
+**MFA arayan kimlik numarası** -kullanıcılarınızın telefonlarındaki göreceği sayıdır. Yalnızca ABD tabanlı sayılara izin verilir.
 
 >[!NOTE]
->Bazen genel telefon ağ üzerinden multi-Factor Authentication aramalarını yerleştirildiğinde, bunlar arayan kimliği desteği olmayan bir taşıyıcı yönlendirilir Çok faktörlü kimlik doğrulama sistemi her zaman gönderdiği olsa bile bu nedenle, arayan kimliği, garanti edilmez.
+>Multi-Factor Authentication çağrıları genel telefon ağı üzerinden yerleştirildiğinde, bazen arayan KIMLIĞINI desteklemeyen bir taşıyıcı aracılığıyla yönlendirilir. Bu nedenle, Multi-Factor Authentication sistemi her zaman tarafından gönderilse de arayan KIMLIĞI garanti edilmez.
 
-### <a name="custom-voice-messages"></a>Özel sesli mesajları
+Birleşik Devletler, MFA arayanın KIMLIĞINI yapılandırmadıysanız, Microsoft 'tan sesli aramalar şu numaralardan gelir: + 1 (866) 539 4191, + 1 (855) 330 8653 ve + 1 (877) 668 6536. İstenmeyen posta filtreleri kullanıyorsanız, bu sayıları dışlediğinizden emin olun.
 
-İki aşamalı doğrulamayla için kendi kayıt veya greetings kullanabilirsiniz _özel sesli mesajları_ özelliği. Bu iletiler, ek olarak veya Microsoft kayıtları değiştirmek için kullanılabilir.
+### <a name="custom-voice-messages"></a>Özel ses iletileri
+
+_Özel sesli iletiler_ özelliğiyle, iki adımlı doğrulama için kendi kayıtlarınızı veya selamlarınızı kullanabilirsiniz. Bu iletiler, Microsoft kayıtlarının yanı sıra veya değiştirmek için de kullanılabilir.
 
 Başlamadan önce aşağıdaki kısıtlamalara dikkat edin:
 
-* Desteklenen dosya biçimleri .wav ve .mp3 ' dir.
-* Dosya boyutu sınırı 5 MB şeklindedir.
-* Kimlik doğrulama iletilerinde 20 saniyeden daha kısa olmalıdır. 20 saniyeden daha uzun bir iletiyi doğrulama başarısız olmasına neden olabilir. Kullanıcının ileti tamamlanır ve doğrulama zaman aşımına uğramadan önce yanıt vermeyebilir.
+* Desteklenen dosya biçimleri. wav ve. mp3.
+* Dosya boyutu sınırı 1 MB 'tır.
+* Kimlik doğrulama iletileri 20 saniyeden kısa olmalıdır. 20 saniyeden uzun olan iletiler doğrulamanın başarısız olmasına neden olabilir. İleti tamamlanmadan önce Kullanıcı yanıt vermemeyebilir ve doğrulama zaman aşımına uğrar.
 
-### <a name="custom-message-language-behavior"></a>Özel ileti dil davranışı
+### <a name="custom-message-language-behavior"></a>Özel ileti dili davranışı
 
-Kullanıcıya özel sesli mesajı yürütüldüğünde, ileti dilini şu etkenlere bağlıdır:
+Kullanıcıya özel bir sesli mesaj yürütüldüğünde, iletinin dili şu etkenlere bağlıdır:
 
 * Geçerli kullanıcının dili.
-  * Kullanıcının tarayıcı tarafından algılanan dili.
-  * Diğer kimlik doğrulama senaryoları farklı şekilde davranabilir.
-* Kullanılabilir hiçbir özel iletiler dili.
-  * Özel bir ileti eklendiğinde, bu dil Yöneticisi tarafından seçilir.
+  * Kullanıcının tarayıcısı tarafından algılanan dil.
+  * Diğer kimlik doğrulama senaryoları farklı davranabilirler.
+* Kullanılabilir özel iletilerin dili.
+  * Bu dil, özel bir ileti eklendiğinde yönetici tarafından seçilir.
 
-Örneğin, biri Almanca dil içeren tek bir özel ileti ise:
+Örneğin, yalnızca bir özel ileti varsa, Almanca dili vardır:
 
-* Almanca dilinde kimliğini doğrulayan bir kullanıcı özel Almanca ileti duyacaktır.
-* İngilizce dilinde kimliğini doğrulayan bir kullanıcıyı standart İngilizce ileti duyacaktır.
+* Almanca dilinde kimlik doğrulaması yapan bir Kullanıcı, özel Alman iletisini duyacaktır.
+* Ingilizce 'de kimlik doğrulaması yapan bir Kullanıcı standart Ingilizce iletisini duyacaktır.
 
-### <a name="set-up-a-custom-message"></a>Özel bir iletiyi ayarlayın
+### <a name="set-up-a-custom-message"></a>Özel bir ileti ayarlama
 
 1. [Azure Portal](https://portal.azure.com)’da yönetici olarak oturum açın.
-1. Gözat **Azure Active Directory** > **MFA** > **telefon araması ayarları**.
-1. Seçin **Ekle Karşılama**.
-1. Karşılama türü seçin.
+1. **Azure Active Directory** > **güvenlik** > **MFA** > **telefon araması ayarları**' na gidin.
+1. **Karşılama Ekle**' yi seçin.
+1. Selamlama türünü seçin.
 1. Dili seçin.
-1. Karşıya yüklenecek bir .mp3 veya .wav ses dosyasını seçin.
+1. Karşıya yüklenecek bir. mp3 veya. wav ses dosyası seçin.
 1. **Add (Ekle)** seçeneğini belirleyin.
 
-## <a name="one-time-bypass"></a>Bir kerelik atlama
+### <a name="custom-voice-message-defaults"></a>Özel sesli ileti Varsayılanları
 
-_Bir kerelik atlama_ iki aşamalı doğrulama gerçekleştirmeden bir kereliğine kimlik doğrulaması bir kullanıcı özelliği sağlar. Geçiş geçicidir ve belirtilen sayıda saniye geçtikten sonra süresi dolar. Burada mobil uygulaması ya da telefon bir bildirim ya da telefon aramasına almıyor durumlarda, kullanıcının istenen kaynağa erişebilmek için bir kerelik geçiş izin verebilirsiniz.
+Özel iletiler oluşturmak için örnek betikler.
 
-### <a name="create-a-one-time-bypass"></a>Bir kerelik geçiş oluşturmak
+| İleti adı | Betik |
+| --- | --- |
+| Kimlik doğrulama başarılı | Oturum açma bilgileriniz başarıyla doğrulandı. Goodbye. |
+| Uzantı istemi | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Devam etmek için lütfen kare tuşuna basın. |
+| Sahtekarlık onayı | Bir sahtekarlık uyarısı gönderildi. Hesabınızın engelini kaldırmak için lütfen şirketinizin BT yardım masasına başvurun. |
+| Sahtekarlık karşılama (Standart) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen kare tuşuna basın. Bu doğrulamayı başlatmadıysanız birisi hesabınıza erişmeye çalışıyor olabilir. Sahtekarlık uyarısı göndermek için lütfen 0 kare tuşuna basın. Bu, şirketinizin BT ekibine bildirir ve daha fazla doğrulama denemesini engeller. |
+| Sahtekarlık bir sahtekarlık uyarısı gönderildiğini bildirdi. | Hesabınızın engelini kaldırmak için lütfen şirketinizin BT yardım masasına başvurun. |
+| Etkinleştirme | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen kare tuşuna basın. |
+| Kimlik doğrulaması yeniden denensin | Doğrulama reddedildi. |
+| Yeniden dene (Standart) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen kare tuşuna basın. |
+| Karşılama (Standart) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen kare tuşuna basın. |
+| Karşılama (PIN) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen PIN 'inizi girip kare tuşuna basın. |
+| Sahtekarlık karşılama (PIN) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler.  Doğrulamanızı tamamlaması için lütfen PIN 'inizi girip kare tuşuna basın. Bu doğrulamayı başlatmadıysanız birisi hesabınıza erişmeye çalışıyor olabilir. Sahtekarlık uyarısı göndermek için lütfen 0 kare tuşuna basın. Bu, şirketinizin BT ekibine bildirir ve daha fazla doğrulama denemesini engeller. |
+| Yeniden dene (PIN) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen PIN 'inizi girip kare tuşuna basın. |
+| Rakamlardan sonra uzantı istemi | Zaten bu uzantıda varsa, devam etmek için kare tuşuna basın. |
+| Kimlik doğrulaması reddedildi | Ne yazık ki şu anda oturumunuzu açamıyorum. Lütfen daha sonra tekrar deneyin. |
+| Etkinleştirme karşılama (Standart) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen kare tuşuna basın. |
+| Etkinleştirme yeniden deneme (Standart) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen kare tuşuna basın. |
+| Etkinleştirme karşılama (PIN) | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Doğrulamanızı tamamlaması için lütfen PIN 'inizi girip kare tuşuna basın. |
+| Rakamlardan önce uzantı istemi | Microsoft 'un oturum açma doğrulama sistemini kullandığınız için teşekkürler. Lütfen bu çağrıyı uzantıya aktarın... |
+
+## <a name="one-time-bypass"></a>Bir kerelik geçiş
+
+_Tek seferlik atlama_ özelliği, bir kullanıcının iki adımlı doğrulama gerçekleştirmeksizin tek bir kez kimlik doğrulaması yapmasına olanak sağlar. Atlama geçicidir ve belirtilen sayıda saniye sonra süresi dolar. Mobil uygulamanın veya telefonun bir bildirim veya telefon araması almaışında, kullanıcının istenen kaynağa erişebilmesi için bir kerelik geçişe izin verebilirsiniz.
+
+### <a name="create-a-one-time-bypass"></a>Tek seferlik atlama oluşturma
 
 1. [Azure Portal](https://portal.azure.com)’da yönetici olarak oturum açın.
-2. Gözat **Azure Active Directory** > **MFA** > **bir kerelik atlama**.
+2. **Azure Active Directory** > **güvenlik** > **MFA** > **tek seferlik atlama**' ye gidin.
 3. **Add (Ekle)** seçeneğini belirleyin.
-4. Gerekirse, çoğaltma grubu için geçiş'i seçin.
-5. Kullanıcı adı olarak girin **kullanıcıadı\@etkialanı.com**. Atlama sürmelidir saniye sayısını girin. Atlama nedeni girin.
-6. **Add (Ekle)** seçeneğini belirleyin. Zaman sınırı hemen uygulanmaya başlanır. Kullanıcının bir kerelik atlama süresi dolmadan önce oturum açmanız gerekir.
+4. Gerekirse, atlama için çoğaltma grubunu seçin.
+5. Kullanıcı adını **Kullanıcı adı\@Domain.com**olarak girin. Atlatma 'nin en son kaç saniye sayısını girin. Atlama nedenini girin.
+6. **Add (Ekle)** seçeneğini belirleyin. Zaman sınırı hemen yürürlüğe girer. Kullanıcının bir kerelik atlama süresi dolmadan önce oturum açması gerekir.
 
-### <a name="view-the-one-time-bypass-report"></a>Bir kerelik atlama raporunu görüntüle
+### <a name="view-the-one-time-bypass-report"></a>Tek seferlik atlama raporunu görüntüleme
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Gözat **Azure Active Directory** > **MFA** > **bir kerelik atlama**.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. **Azure Active Directory** > **güvenlik** > **MFA** > **tek seferlik atlama**' ye gidin.
 
 ## <a name="caching-rules"></a>Önbelleğe alma kuralları
 
-Bir kullanıcı kullanarak kimlik doğrulaması yapıldıktan sonra kimlik doğrulama girişimlerini izin vermek için bir zaman dönemi ayarlayabilirsiniz _önbelleğe alma_ özelliği. Belirtilen kullanıcı için sonraki kimlik doğrulama girişimleri otomatik olarak döneme başarılı. Önbelleğe alma, öncelikli olarak VPN gibi şirket içi sistemler, ilk isteği hala devam ederken birden fazla doğrulama isteği gönderdiğinizde kullanılır. Bu özellik, kullanıcı ilk doğrulama devam ediyor başarılı olduktan sonra otomatik olarak başarılı olması sonraki istekleri sağlar.
+_Önbelleğe alma_ özelliğini kullanarak bir kullanıcının kimliği doğrulandıktan sonra kimlik doğrulama girişimlerine izin vermek için bir zaman aralığı ayarlayabilirsiniz. Belirli bir süre içinde Kullanıcı için sonraki kimlik doğrulama girişimleri otomatik olarak başarılı olur. Önbelleğe alma, birincil olarak ilk istek devam ederken VPN gibi şirket içi sistemler, birden çok doğrulama isteği gönderirken kullanılır. Bu özellik, sonraki isteklerin otomatik olarak başarılı olmasını sağlar ve Kullanıcı devam eden ilk doğrulamayı başarılı olduktan sonra.
 
 >[!NOTE]
->Önbelleğe alma özelliği, Azure Active Directory (Azure AD) için oturum açma için kullanılmak üzere tasarlanmamıştır.
+>Önbelleğe alma özelliği, Azure Active Directory (Azure AD) için oturum açma işlemleri için kullanılmak üzere tasarlanmamıştır.
 
-### <a name="set-up-caching"></a>Önbelleğe alma ayarlayın
+### <a name="set-up-caching"></a>Önbelleğe almayı ayarla
 
 1. [Azure Portal](https://portal.azure.com)’da yönetici olarak oturum açın.
-2. Gözat **Azure Active Directory** > **MFA** > **önbelleğe alma kuralları**.
+2. **Azure Active Directory** > **güvenlik** > **MFA** > **önbelleğe alma kurallarını**inceleyin.
 3. **Add (Ekle)** seçeneğini belirleyin.
-4. Seçin **önbellek türü** aşağı açılan listeden. En fazla sayısını girin **önbelleğe saniye**.
-5. Gerekirse, kimlik doğrulama türünü seçin ve bir uygulama belirtin.
+4. Açılan listeden **önbellek türünü** seçin. En fazla **önbellek saniyesi**sayısını girin.
+5. Gerekirse, bir kimlik doğrulama türü seçin ve bir uygulama belirtin.
 6. **Add (Ekle)** seçeneğini belirleyin.
 
 ## <a name="mfa-service-settings"></a>MFA hizmet ayarları
 
-Uygulama parolaları için ayarları, güvenilen IP'ler, doğrulama seçenekleri ve Azure multi-Factor Authentication için multi-Factor authentication hizmeti ayarlarında bulunabilir unutmayın. Hizmet ayarları erişilebilir Azure portalından göz atarak **Azure Active Directory** > **MFA** > **Başlarken**  >  **Yapılandırma** > **ek bulut tabanlı MFA ayarları**.
+Uygulama parolaları, güvenilir IP 'Ler, doğrulama seçenekleri ve Azure Multi-Factor Authentication için çok faktörlü kimlik doğrulamasını hatırlama ayarları, hizmet ayarları ' nda bulunabilir. Hizmet ayarlarına **Azure Active Directory** > **güvenlik** > **MFA** 'ya göz atarak Azure Portal erişilebilir ve **bulut tabanlı diğer MFA ayarlarını** > **yapılandırma** ** >  > ** .
 
-![Azure multi-Factor Authentication hizmeti ayarları](./media/howto-mfa-mfasettings/multi-factor-authentication-settings-service-settings.png)
+![Azure Multi-Factor Authentication hizmet ayarları](./media/howto-mfa-mfasettings/multi-factor-authentication-settings-service-settings.png)
+
+Güvenilen IP adresi aralıkları özel veya genel olabilir.
 
 ## <a name="app-passwords"></a>Uygulama parolaları
 
-Bazı uygulamalar, Office 2010 veya önceki ve iOS 11, önce Apple Mail iki aşamalı doğrulamayı desteklemez. Uygulamalar, ikinci bir doğrulama kabul edecek şekilde yapılandırılmamışlardır. Bu uygulamaları kullanmak için yararlanmak _uygulama parolaları_ özelliği. İki aşamalı doğrulamayı atlayabilir ve çalışmaya devam etmek için uygulama izin vermek için geleneksel parolanız yerine uygulama parolasını kullanın.
+Office 2010 veya önceki bir sürümü ve iOS 11 ' den önceki Apple Mail gibi bazı uygulamalar, iki aşamalı doğrulamayı desteklemezler. Uygulamalar, ikinci bir doğrulamayı kabul edecek şekilde yapılandırılmamış. Bu uygulamaları kullanmak için _Uygulama parolaları_ özelliğinden yararlanın. Uygulamanın iki aşamalı doğrulamayı atlamasına ve çalışmaya devam etmesine izin vermek için, geleneksel parolanızın yerine bir uygulama parolası kullanabilirsiniz.
 
-Modern kimlik doğrulaması için Microsoft Office 2013 istemcilerindeki ve sonraki sürümlerde desteklenir. Outlook gibi office 2013 modern kimlik doğrulama protokolleri destekleyin ve iki aşamalı doğrulamayla çalışması için etkinleştirilebilir. Uygulama parolaları, istemci etkinleştirildikten sonra istemci için gerekli değildir.
+Modern kimlik doğrulaması Microsoft Office 2013 istemcileri ve sonraki sürümler için desteklenir. Outlook dahil Office 2013 istemcileri, modern kimlik doğrulama protokollerini destekler ve iki adımlı doğrulamayla çalışmak üzere etkinleştirilebilir. İstemci etkinleştirildikten sonra istemci için uygulama parolaları gerekli değildir.
 
 >[!NOTE]
->Uygulama parolaları, koşullu erişim tabanlı çok faktörlü kimlik doğrulaması ilkeleri ve modern kimlik doğrulaması ile çalışmaz.
+>Uygulama parolaları, koşullu erişim tabanlı Multi-Factor Authentication ilkeleriyle ve modern kimlik doğrulamasıyla çalışmaz.
 
-### <a name="considerations-about-app-passwords"></a>Uygulama parolaları hakkında dikkat edilecek noktalar
+### <a name="considerations-about-app-passwords"></a>Uygulama parolalarıyla ilgili önemli noktalar
 
-Uygulama parolaları kullanılırken aşağıdaki önemli noktaları göz önünde bulundurun:
+Uygulama parolaları kullanırken aşağıdaki önemli noktaları göz önünde bulundurun:
 
-* Uygulama parolaları, yalnızca uygulama başına bir kez girilir. Kullanıcıların parolalarını izlemek veya bunları her zaman girmeniz gerekmez.
-* Gerçek parola otomatik olarak oluşturulur ve kullanıcı tarafından sağlanmaz. Otomatik olarak oluşturulan parolanın bir saldırgan tarafından tahmin edilmesi ve daha güvenlidir.
-* Kullanıcı başına 40 parolalık bir sınır yoktur.
-* Parolaları önbelleğe almak ve bunları şirket içi senaryolarda kullanan uygulamalar, uygulama parolasını dışında iş veya Okul hesabı bilinen değilse başarısız başlayabilirsiniz. Bu senaryoya örnek olarak şirket içi Exchange e-postalar, ancak arşivlenen postanın bulutta. Bu senaryoda, aynı parola çalışmaz.
-* Multi-Factor Authentication kullanıcının hesabında etkinleştirildikten sonra uygulama parolaları en tarayıcı olmayan istemciler gibi Outlook ve Microsoft Skype ile iş için kullanılabilir. Windows PowerShell gibi tarayıcı olmayan uygulamaları ile uygulama parolaları kullanarak yönetim eylemlerini gerçekleştirilemiyor. Kullanıcı bir yönetici hesabı olsa bile eylem gerçekleştirilemiyor. PowerShell betikleri çalıştırmak için güçlü bir parolası olan bir hizmet hesabı oluşturun ve hesabı için iki aşamalı doğrulamayı etkinleştirme.
+* Uygulama parolaları, uygulama başına yalnızca bir kez girilir. Kullanıcıların parolaları izlemek veya her seferinde onları girmesi gerekmez.
+* Asıl parola otomatik olarak oluşturulur ve Kullanıcı tarafından sağlanmaz. Otomatik olarak oluşturulan parolanın bir saldırgan tarafından tahmin edilmesi daha zordur ve daha güvenlidir.
+* Kullanıcı başına 40 parola sınırı vardır.
+* Uygulama parolası iş veya okul hesabı dışında olmadığından, parolaları önbelleğe alan ve bunları şirket içi senaryolarda kullanan uygulamalar başarısız olabilir. Bu senaryoya bir örnek, şirket içi Exchange e-postalarının bir örneğidir, ancak Arşivlenmiş posta bulutta yer alır. Bu senaryoda, aynı parola çalışmaz.
+* Kullanıcı hesabında Multi-Factor Authentication etkinleştirildikten sonra, uygulama parolaları Outlook ve Microsoft Skype Kurumsal gibi tarayıcı olmayan birçok istemci ile birlikte kullanılabilir. Windows PowerShell gibi tarayıcı olmayan uygulamalar aracılığıyla Uygulama parolaları kullanılarak yönetim eylemleri gerçekleştirilemez. Kullanıcı bir yönetici hesabına sahip olsa bile eylemler gerçekleştirilemez. PowerShell betikleri çalıştırmak için güçlü parolalı bir hizmet hesabı oluşturun ve iki adımlı doğrulama için hesabı etkinleştirmeyin.
 
 >[!WARNING]
->Uygulama parolaları burada istemciler hem şirket içi ile iletişim kurar ve uç noktaları bulut otomatik olarak bulmak Karma ortamlarda çalışmaz. Etki alanı parolalarını şirket içi kimlik doğrulaması için gereklidir. Uygulama parolaları, bulut kimlik doğrulaması için gereklidir.
+>Uygulama parolaları, istemcilerin hem şirket içi hem de bulut otomatik bulma uç noktaları ile iletişim kurduğu karma ortamlarda çalışmaz. Şirket içinde kimlik doğrulaması yapmak için etki alanı parolaları gereklidir. Bulutta kimlik doğrulaması yapmak için uygulama parolaları gereklidir.
 
-### <a name="guidance-for-app-password-names"></a>Uygulama parolası adlarının Kılavuzu
+### <a name="guidance-for-app-password-names"></a>Uygulama parolası adları için rehberlik
 
-Uygulama parolası adlarının üzerinde kullanıldıklarından cihaz yansıtmalıdır. Outlook, Word ve Excel gibi tarayıcı olmayan uygulamalar içeren dizüstü bilgisayarınız varsa, adlı bir uygulama parolası oluşturma **dizüstü** bu uygulamalar için. Adlı başka bir uygulama parolası oluşturmanız **Masaüstü** , masaüstü bilgisayarınızda aynı uygulamaları için.
-
->[!NOTE]
->Uygulama başına bir uygulama parolası yerine, cihaz başına bir uygulama parolası oluşturmanız önerilir.
-
-### <a name="federated-or-single-sign-on-app-passwords"></a>Federe veya çoklu oturum açma uygulama parolaları
-
-Azure AD, şirket içi Windows Server Active Directory etki alanı Hizmetleri ile (AD DS) veya Federasyon çoklu oturum açma (SSO) destekler. Kuruluşunuz Azure AD ile birleştirildiyse ve Azure multi-Factor Authentication kullanıyorsanız, uygulama parolaları hakkında aşağıdaki noktaları göz önünde bulundurun.
+Uygulama parolası adları, kullanıldıkları aygıtı yansıtmalıdır. Outlook, Word ve Excel gibi tarayıcı olmayan uygulamalar içeren bir dizüstü bilgisayarınız varsa, bu uygulamalar için **dizüstü bilgisayar** adlı bir uygulama parolası oluşturun. Masaüstü bilgisayarınızda çalışan uygulamalar için **Masaüstü** adlı başka bir uygulama parolası oluşturun.
 
 >[!NOTE]
->Aşağıdaki noktaları yalnızca federasyon (SSO) müşteriler için geçerlidir.
+>Her uygulama için bir uygulama parolası yerine her cihaz için bir uygulama parolası oluşturmanızı öneririz.
 
-* Uygulama parolaları Azure AD tarafından doğrulanır ve bu nedenle Federasyonu atlar. Federasyon, etkin bir şekilde uygulama parolaları yalnızca ayarlanırken kullanılır.
-* Kimlik sağlayıcısı (IDP) pasif akışı aksine Federasyon (SSO) kullanıcıları kurulmadı. İş veya Okul hesabı uygulama parolaları depolanır. Bir kullanıcı şirketten ayrıldığında, kullanıcının bilgileri için iş veya Okul hesabı kullanarak akışları **DirSync** gerçek zamanlı olarak. Hesabı devre dışı bırakma/silme, Azure AD'de uygulama parolasını devre dışı bırakma/silme geciktirip eşitlemek için üç saat sürebilir.
-* Şirket içi istemci erişim denetimi ayarları uygulama parolaları özelliği tarafından kabul değildir.
-* Günlüğe kaydetme/denetim özelliği şirket içi kimlik doğrulaması ile uygulama parolaları özelliğini kullanmak için kullanılabilir.
-* Bazı gelişmiş mimarileri, istemcilerle iki aşamalı doğrulama için kimlik bilgilerini bir birleşimini gerektirir. Bu kimlik bilgileri, bir iş veya Okul hesabı kullanıcı adı ve parolaları ve uygulama parolaları içerebilir. Kimlik doğrulamasının nasıl yapıldığı gereksinimleri bağlıdır. Bir şirket içi altyapı karşı kimlik doğrulaması istemcileri için bir iş veya Okul hesabı kullanıcı adı ve parola gerekli. Azure AD karşı kimlik doğrulaması istemcileri için bir uygulama parolası gereklidir.
+### <a name="federated-or-single-sign-on-app-passwords"></a>Federasyon veya çoklu oturum açma uygulama parolaları
 
-  Örneğin, aşağıdaki mimari olduğunu varsayalım:
+Azure AD, şirket içi Windows Server Active Directory Domain Services (AD DS) ile Federasyon veya çoklu oturum açmayı (SSO) destekler. Kuruluşunuz Azure AD ile federe ise ve Azure Multi-Factor Authentication kullanıyorsanız, uygulama parolaları hakkında aşağıdaki noktaları dikkate alın.
 
-  * Bir şirket içi Active Directory örneğini Azure AD ile birleştirildiyse.
-  * Exchange online kullanıyorsanız.
-  * Skype Kurumsal şirket içi için kullanıyorsunuz.
-  * Azure çok faktörlü kimlik doğrulaması kullanıyorsunuz.
+>[!NOTE]
+>Aşağıdaki noktaları yalnızca Federal (SSO) müşteriler için geçerlidir.
 
-  Bu senaryoda, aşağıdaki kimlik bilgilerini kullanın:
+* Uygulama parolaları Azure AD tarafından doğrulanır ve bu nedenle, Federasyonu atlayın. Federasyon yalnızca uygulama parolaları ayarlanırken etkin bir şekilde kullanılır.
+* Pasif akışın aksine, kimlik sağlayıcısı (IDP), Federasyon (SSO) kullanıcıları için bağlantı kurulmadı. Uygulama parolaları iş veya okul hesabında depolanır. Bir kullanıcı şirketten ayrılırsa, kullanıcının bilgileri, **DirSync** 'i gerçek zamanlı olarak kullanarak iş veya okul hesabına akar. Hesabı devre dışı bırakma/silme işlemi üç saate kadar sürebilir ve bu, Azure AD 'de uygulama parolasının devre dışı/silinmesini erteleyebilir.
+* Şirket içi istemci Access Control ayarları uygulama parolaları özelliği tarafından kabul edilmez.
+* Uygulama parolaları özelliği ile kullanabileceğiniz şirket içi kimlik doğrulaması günlüğü/Denetim yeteneği kullanılamaz.
+* Bazı gelişmiş mimarilerin, istemcilerle iki adımlı doğrulama için kimlik bilgilerinin birleşimini gerektirir. Bu kimlik bilgileri, iş veya okul hesabı Kullanıcı adı ve parolaları ile uygulama parolalarını içerebilir. Gereksinimler, kimlik doğrulamanın nasıl gerçekleştirilebileceğini temel alır. Şirket içi altyapıya karşı kimlik doğrulaması yapan istemciler için bir iş veya okul hesabı Kullanıcı adı ve parola gerekir. Azure AD kimlik doğrulaması yapan istemciler için bir uygulama parolası gerekir.
 
-  * Skype Kurumsal'a oturum açmak için iş veya Okul hesabı kullanıcı adı ve parola kullanın.
-  * Adres Defteri'ni çevrimiçi Exchange'e bağlayan bir Outlook istemcisinden erişmek için bir uygulama parolasını kullanın.
+  Örneğin, aşağıdaki mimarinin olduğunu varsayalım:
 
-### <a name="allow-users-to-create-app-passwords"></a>Kullanıcıların uygulama parolaları oluşturmasına izin ver
+  * Şirket içi Active Directory örneğiniz Azure AD ile federe olarak sağlanır.
+  * Exchange Online kullanıyorsunuz.
+  * Skype Kurumsal Şirket içi kullanıyorsunuz.
+  * Azure Multi-Factor Authentication kullanıyorsunuz.
 
-Varsayılan olarak, kullanıcılar uygulama parolaları oluşturamaz. Uygulama parolaları özelliği etkinleştirilmelidir. Kullanıcıların uygulama parolaları oluşturma olanağı vermek için aşağıdaki yordamı kullanın:
+  Bu senaryoda, aşağıdaki kimlik bilgilerini kullanırsınız:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol tarafta, seçin **Azure Active Directory** > **kullanıcılar ve gruplar** > **tüm kullanıcılar**.
-3. Seçin **çok faktörlü kimlik doğrulaması**.
-4. Multi-Factor Authentication'ın altında seçin **hizmet ayarları**.
-5. Üzerinde **hizmet ayarları** sayfasında **kullanıcıların tarayıcı olmayan uygulamalara oturum açmak için uygulama parolaları oluşturmasına izin** seçeneği.
+  * Skype Kurumsal 'da oturum açmak için iş veya okul hesabınızın Kullanıcı adı ve parolasını kullanın.
+  * Exchange Online 'a bağlanan bir Outlook istemcisinden adres defterine erişmek için bir uygulama parolası kullanın.
+
+### <a name="allow-users-to-create-app-passwords"></a>Kullanıcıların uygulama parolaları oluşturmalarına izin ver
+
+Varsayılan olarak, kullanıcılar uygulama parolaları oluşturamaz. Uygulama parolaları özelliğinin etkinleştirilmesi gerekir. Kullanıcılara uygulama parolaları oluşturma yeteneği vermek için aşağıdaki yordamı kullanın:
+
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol tarafta **Azure Active Directory** > **kullanıcıları**' nı seçin.
+3. **Multi-Factor Authentication**seçin.
+4. Multi-Factor Authentication altında **hizmet ayarları**' nı seçin.
+5. **Hizmet ayarları** sayfasında, **kullanıcıların tarayıcı olmayan uygulamalara oturum açmak için uygulama parolaları oluşturmasına izin ver** seçeneğini belirleyin.
 
 ### <a name="create-app-passwords"></a>Uygulama parolaları oluşturma
 
-Kullanıcıların uygulama parolaları, ilk kayıt sırasında oluşturabilirsiniz. Kullanıcının kayıt işleminin sonunda uygulama parolaları oluşturma seçeneği vardır.
+Kullanıcılar, ilk kaydı sırasında uygulama parolaları oluşturabilir. Kullanıcının kayıt işleminin sonunda uygulama parolaları oluşturma seçeneği vardır.
 
-Kullanıcılar, uygulama parolaları kayıt sonrasında de oluşturabilirsiniz. Daha fazla bilgi ve kullanıcılarınız için ayrıntılı adımlar için bkz. [Azure multi-Factor Authentication, uygulama parolaları nedir?](../user-help/multi-factor-authentication-end-user-app-passwords.md)
+Kullanıcılar, kayıt sonrasında Uygulama parolaları da oluşturabilir. Kullanıcılarınıza yönelik daha fazla bilgi ve ayrıntılı adımlar için bkz. [Azure Multi-Factor Authentication uygulama parolaları nelerdir?](../user-help/multi-factor-authentication-end-user-app-passwords.md)
 
 ## <a name="trusted-ips"></a>Güvenilen IP'ler
 
-_Güvenilen IP'ler_ özelliği, Azure multi-Factor Authentication, yönetilen veya Federasyon Kiracı yöneticileri tarafından kullanılır. Bu özellik şirket intranetten oturum kullanıcılar için iki aşamalı doğrulamayı atlar. Bu özellik, Azure multi-Factor Authentication'ın tam sürümünü ve Yöneticiler için değil ücretsiz sürümü ile kullanılabilir. Azure multi-Factor Authentication'ın tam sürümünü alma hakkında daha fazla ayrıntı için bkz. [Azure multi-Factor Authentication](multi-factor-authentication.md).
+Azure Multi-Factor Authentication 'nin _güvenilir IP 'leri_ özelliği, yönetilen veya federal bir kiracının yöneticileri tarafından kullanılır. Özelliği, şirket intranetinden oturum açan kullanıcılar için iki aşamalı doğrulamayı atlar. Özelliği, yöneticilerin ücretsiz sürümü değil, Azure Multi-Factor Authentication 'nin tam sürümüyle kullanılabilir. Azure Multi-Factor Authentication 'nin tam sürümünü alma hakkında daha fazla bilgi için bkz. [azure Multi-Factor Authentication](multi-factor-authentication.md).
 
 > [!NOTE]
-> Yalnızca IPv4 adresleriyle iş IP'ler ve koşullu erişim adlandırılmış konumlar MFA güvenilen.
+> MFA güvenilir IP 'Leri ve koşullu erişim adlandırılmış konumlar yalnızca ıPV4 adresleriyle çalışır.
 
-Kuruluşunuz için şirket içi uygulamaları Not MFA NPS uzantısı dağıtır, kaynak IP adresini her zaman kimlik doğrulama denemesi akar NPS sunucusu olarak görünür.
+Kuruluşunuz, şirket içi uygulamalara MFA sağlamak üzere NPS uzantısını dağıttığında, kaynak IP adresi her zaman kimlik doğrulama girişiminin akışa aldığı NPS sunucusu olacak şekilde görünür.
 
-| Azure AD Kiracı türü | Güvenilen IP'ler özellik seçenekleri |
+| Azure AD kiracı türü | Güvenilen IP 'Ler özellik seçenekleri |
 |:--- |:--- |
-| Yönetilen |**Belirli IP adresleri**: Yöneticiler, kullanıcılar şirket intranetten oturum açmak için iki aşamalı doğrulamayı atlayabilir bir IP adresi aralığı belirtin.|
-| Federasyon |**Tüm Federasyon kullanıcıları**: Kuruluşunuzun içinde oturum tüm Federasyon kullanıcıları, iki aşamalı doğrulamayı atlayabilir. Kullanıcıların, Active Directory Federasyon Hizmetleri (AD FS) tarafından verilen bir talep kullanarak doğrulamayı atlama.<br/>**Belirli IP adresleri**: Yöneticiler, kullanıcılar şirket intranetten oturum açmak için iki aşamalı doğrulamayı atlayabilir bir IP adresi aralığı belirtin. |
+| Yönetilen |**Belırlı IP adresi aralığı**: Yöneticiler, şirket intranetinden oturum açan kullanıcılar için iki aşamalı doğrulamayı atlayabilen bir IP adresi aralığı belirtir. En fazla 50 güvenilen IP aralığı yapılandırılabilir.|
+| Federasyon |**Tüm Federasyon kullanıcıları**: kuruluşun içinden oturum açan tüm Federasyon kullanıcıları, iki aşamalı doğrulamayı atlayabilir. Kullanıcılar, Active Directory Federasyon Hizmetleri (AD FS) (AD FS) tarafından verilen bir talep kullanarak doğrulamayı atlar.<br/>**Belırlı IP adresi aralığı**: Yöneticiler, şirket intranetinden oturum açan kullanıcılar için iki aşamalı doğrulamayı atlayabilen bir IP adresi aralığı belirtir. |
 
-Güvenilen IP'ler, şirket intraneti içinde yalnızca çalıştığını atlama. Seçerseniz **tüm Federasyon kullanıcıları** seçeneği ve bir kullanıcı oturum açtığında gelen şirket intranet dışından, kullanıcının iki aşamalı doğrulama kullanarak kimlik doğrulaması gerekir. Kullanıcının AD FS talep sunsa bile işlem aynıdır. 
+Güvenilen IP 'Leri atlama yalnızca şirket intraneti 'nin içinden çalışacak. **Tüm Federasyon kullanıcıları** seçeneğini belirlerseniz ve Kullanıcı şirket intranet dışından oturum açarsa, kullanıcının kimlik doğrulaması iki aşamalı doğrulamayı kullanarak yapılır. Kullanıcı bir AD FS talebi sunsa bile, işlem aynıdır. 
 
 ### <a name="end-user-experience-inside-of-corpnet"></a>Corpnet içinde son kullanıcı deneyimi
 
-Güvenilen IP'ler özelliği devre dışı bırakıldığında, iki aşamalı doğrulama tarayıcı akışlar için gereklidir. Uygulama parolaları, eski zengin istemci uygulamaları için gereklidir.
+Güvenilir IP 'Ler özelliği devre dışı bırakıldığında, tarayıcı akışları için iki aşamalı doğrulama gerekir. Daha eski zengin istemci uygulamaları için uygulama parolaları gereklidir.
 
-Güvenilen IP'ler özelliği etkinleştirilmişse, bu iki aşamalı doğrulama, *değil* tarayıcı akışlar için gereklidir. Uygulama parolaları tarafından *değil* koşuluyla kullanıcının bir uygulama parolası oluşturmadı eski zengin istemci uygulamaları için gerekli. Bir uygulama parolası kullanımda sonra parolayı gerekli olarak kalır. 
+Güvenilen IP 'Ler özelliği etkinleştirildiğinde, tarayıcı akışları için iki aşamalı doğrulama gerekli *değildir* . Kullanıcı bir uygulama parolası *oluşturmadığı* için, daha eski zengin istemci uygulamaları için uygulama parolaları gerekli değildir. Bir uygulama parolası kullanımda olduktan sonra parola gerekli kalır. 
 
-### <a name="end-user-experience-outside-corpnet"></a>Son kullanıcı deneyimi corpnet dışında
+### <a name="end-user-experience-outside-corpnet"></a>Corpnet dışında son kullanıcı deneyimi
 
-Güvenilen IP'ler özellik etkinleştirilip etkinleştirilmediği bağımsız olarak, iki aşamalı doğrulama tarayıcı akışlar için gerekli değildir. Uygulama parolaları, eski zengin istemci uygulamaları için gereklidir.
+Güvenilen IP 'Lerin özelliğinin etkinleştirilip etkinleştirilmediği bağımsız olarak, tarayıcı akışları için iki aşamalı doğrulama gerekir. Daha eski zengin istemci uygulamaları için uygulama parolaları gereklidir.
 
-### <a name="enable-named-locations-by-using-conditional-access"></a>Koşullu erişim kullanarak adlandırılmış konumlar etkinleştir
+### <a name="enable-named-locations-by-using-conditional-access"></a>Koşullu erişimi kullanarak adlandırılmış konumları etkinleştir
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol tarafta, seçin **Azure Active Directory** > **koşullu erişim** > **adlandırılmış Konumlar**.
-3. Seçin **yeni konuma**.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol tarafta, **adlandırılmış konumlar** > **Azure Active Directory** > **güvenlik** > **koşullu erişim** ' i seçin.
+3. **Yeni konum**' u seçin.
 4. Konum için bir ad girin.
-5. Seçin **güvenilen konum olarak işaretle**.
-6. CIDR gösteriminde gibi IP aralığını girin **192.168.1.1/24**.
-7. **Oluştur**’u seçin.
+5. **Güvenilen konum olarak işaretle**' yi seçin.
+6. IP aralığını **192.168.1.1/24**gibi CIDR gösteriminde girin.
+7. **Oluştur**'u seçin.
 
-### <a name="enable-the-trusted-ips-feature-by-using-conditional-access"></a>Koşullu erişim kullanarak güvenilen IP'ler özelliğini etkinleştir
+### <a name="enable-the-trusted-ips-feature-by-using-conditional-access"></a>Koşullu erişimi kullanarak güvenilir IP 'Ler özelliğini etkinleştirme
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol tarafta, seçin **Azure Active Directory** > **koşullu erişim** > **adlandırılmış Konumlar**.
-3. Seçin **MFA güvenilen Ip'lerini Yapılandır**.
-4. Üzerinde **hizmet ayarları** sayfasındaki **güvenilen IP'ler**, aşağıdaki iki seçenekten birini seçin:
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol tarafta, **adlandırılmış konumlar** > **Azure Active Directory** > **güvenlik** >  **koşullu erişim** ' i seçin.
+3. **MFA güvenilir IP 'Lerini Yapılandır**' ı seçin.
+4. **Hizmet ayarları** sayfasında, **güvenilir IP 'ler**altında, aşağıdaki iki seçenekten birini seçin:
 
-   * **Benim intranet bağlantısı intranetimden gelen Federasyon kullanıcılarının istekleri için**: Bu seçeneği için onay kutusunu işaretleyin. Tüm kullanıcılar, Kurumsal ağda oturum açma AD FS tarafından verilen bir talep kullanarak iki aşamalı doğrulamayı atlama sürümüyle federasyona eklenenler. AD FS uygun trafiği intranet talep eklemek için bir kuralı olduğundan emin olun. Kural yoksa, aşağıdaki kural AD FS'de oluşturun:
+   * **İntranetten kaynaklanan Federal kullanıcılardan gelen Istekler için**: Bu seçeneği belirlemek için onay kutusunu seçin. Şirket ağından oturum açan tüm Federasyon kullanıcıları, AD FS tarafından verilen bir talebi kullanarak iki aşamalı doğrulamayı atlar. AD FS, intranet talebini uygun trafiğe eklemek için bir kural içerdiğinden emin olun. Kural yoksa AD FS ' de aşağıdaki kuralı oluşturun:
 
       `c:[Type== "http://schemas.microsoft.com/ws/2012/01/insidecorporatenetwork"] => issue(claim = c);`
 
-   * **İstekleri belirli bir aralıktan genel IP'lerin**: Bu seçeneği belirlemek için metin kutusuna CIDR gösterimini kullanarak IP adreslerini girin.
-      * Aralık xxx.xxx.xxx.1 xxx.xxx.xxx.254 aracılığıyla bulunan IP adresleri için gibi gösterimi kullanın **xxx.xxx.xxx.0/24**.
-      * Tek bir IP adresi gibi gösterimi kullanın **xxx.xxx.xxx.xxx/32**.
-      * 50 adede kadar IP adresi aralıklarını girin. Bu IP adreslerinden oturum açma kullanıcıların iki aşamalı doğrulamayı atlama.
+   * **Belirli bir genel IP aralığından gelen Istekler için**: Bu seçeneği belirlemek IÇIN, CIDR gösterimini kullanarak metın kutusuna IP adreslerini girin.
+      * Xxx. xxx. xxx. 1 ile xxx. xxx. xxx. 254 aralığındaki IP adresleri için, **xxx. xxx. xxx. 0/24**gibi bir gösterim kullanın.
+      * Tek bir IP adresi için **xxx.xxx.xxx.xxx/32**gibi bir gösterim kullanın.
+      * En fazla 50 IP adresi aralığı girin. Bu IP adreslerinden oturum açan kullanıcılar iki aşamalı doğrulamayı atlar.
 
 5. **Kaydet**’i seçin.
 
-### <a name="enable-the-trusted-ips-feature-by-using-service-settings"></a>Güvenilen IP'ler özelliği hizmet ayarlarını kullanarak etkinleştirin.
+### <a name="enable-the-trusted-ips-feature-by-using-service-settings"></a>Hizmet ayarlarını kullanarak güvenilir IP 'Leri özelliğini etkinleştirme
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol tarafta, seçin **Azure Active Directory** > **kullanıcılar**.
-3. Seçin **çok faktörlü kimlik doğrulaması**.
-4. Multi-Factor Authentication'ın altında seçin **hizmet ayarları**.
-5. Üzerinde **hizmet ayarları** sayfasındaki **güvenilen IP'ler**, aşağıdaki iki seçenekten birini (veya her ikisi de) seçin:
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol tarafta **Azure Active Directory** > **kullanıcıları**' nı seçin.
+3. **Multi-Factor Authentication**seçin.
+4. Multi-Factor Authentication altında **hizmet ayarları**' nı seçin.
+5. **Hizmet ayarları** sayfasında, **güvenilir IP 'ler**altında, aşağıdaki iki seçenekten birini (veya her ikisini) seçin:
 
-   * **İntranetimde bulunan Federasyon kullanıcılardan gelen istekleri için**: Bu seçeneği için onay kutusunu işaretleyin. Tüm kullanıcılar, Kurumsal ağda oturum açma AD FS tarafından verilen bir talep kullanarak iki aşamalı doğrulamayı atlama sürümüyle federasyona eklenenler. AD FS uygun trafiği intranet talep eklemek için bir kuralı olduğundan emin olun. Kural yoksa, aşağıdaki kural AD FS'de oluşturun:
+   * **İntranetimde Federal kullanıcılardan gelen Istekler için**: Bu seçeneği belirlemek için onay kutusunu işaretleyin. Şirket ağından oturum açan tüm Federasyon kullanıcıları, AD FS tarafından verilen bir talebi kullanarak iki aşamalı doğrulamayı atlar. AD FS, intranet talebini uygun trafiğe eklemek için bir kural içerdiğinden emin olun. Kural yoksa AD FS ' de aşağıdaki kuralı oluşturun:
 
       `c:[Type== "http://schemas.microsoft.com/ws/2012/01/insidecorporatenetwork"] => issue(claim = c);`
 
-   * **Belirtilen IP adresi alt ağları gelen istekleri için**: Bu seçeneği belirlemek için metin kutusuna CIDR gösterimini kullanarak IP adreslerini girin.
-      * Aralık xxx.xxx.xxx.1 xxx.xxx.xxx.254 aracılığıyla bulunan IP adresleri için gibi gösterimi kullanın **xxx.xxx.xxx.0/24**.
-      * Tek bir IP adresi gibi gösterimi kullanın **xxx.xxx.xxx.xxx/32**.
-      * 50 adede kadar IP adresi aralıklarını girin. Bu IP adreslerinden oturum açma kullanıcıların iki aşamalı doğrulamayı atlama.
+   * **Belirli BIR IP adresi alt ağı aralığından gelen Istekler için**: Bu seçeneği belirlemek IÇIN, CIDR gösterimini kullanarak metın kutusuna IP adreslerini girin.
+      * Xxx. xxx. xxx. 1 ile xxx. xxx. xxx. 254 aralığındaki IP adresleri için, **xxx. xxx. xxx. 0/24**gibi bir gösterim kullanın.
+      * Tek bir IP adresi için **xxx.xxx.xxx.xxx/32**gibi bir gösterim kullanın.
+      * En fazla 50 IP adresi aralığı girin. Bu IP adreslerinden oturum açan kullanıcılar iki aşamalı doğrulamayı atlar.
 
 6. **Kaydet**’i seçin.
 
 ## <a name="verification-methods"></a>Doğrulama yöntemleri
 
-Kullanıcılarınız için kullanılabilir doğrulama yöntemleri seçebilirsiniz. Aşağıdaki tabloda yöntemleri kısa bir genel bakış sağlar.
+Kullanıcılarınız için kullanılabilir doğrulama yöntemlerini seçebilirsiniz. Aşağıdaki tabloda yöntemlere kısa bir genel bakış sunulmaktadır.
 
-Kullanıcılarınız için Azure multi-Factor Authentication, hesaplarını kaydettiğinizde, etkinleştirdiğiniz seçenekler arasından tercih edilen doğrulama yöntemi seçin. Kullanıcı kayıt sürecinde rehberlik sağlanır [hesabım için iki aşamalı doğrulamayı ayarlama](../user-help/multi-factor-authentication-end-user-first-time.md).
+Kullanıcılarınız Azure Multi-Factor Authentication hesaplarını kaydettiğinde, etkinleştirdiğiniz seçeneklerden tercih edilen doğrulama yöntemini seçer. Kullanıcı kayıt işlemine kılavuzluk, [iki adımlı doğrulama için hesabımı ayarlama](../user-help/multi-factor-authentication-end-user-first-time.md)bölümünde verilmiştir.
 
 | Yöntem | Açıklama |
 |:--- |:--- |
-| Telefonu arama |Otomatik bir sesli çağrıyla yerleştirir. Kullanıcı telefonu yanıtladığında ve telefon tuş kimliğini doğrulamak için # tuşuna basar. Telefon numarası şirket içi Active Directory ile eşitlenmez. |
-| Telefona kısa mesaj |Bir doğrulama kodu içeren bir kısa mesaj gönderir. Kullanıcı doğrulama kodunu oturum açma arabirimine girmesi istenir. Bu işlem, tek yönlü SMS çağrılır. İki yönlü SMS, belirli bir kodu metnin geri gerektiğini anlamına gelir. İki yönlü SMS kullanım dışı ve 14 Kasım 2018'den sonra desteklenmiyor. İki yönlü SMS otomatik olarak ayarlı için yapılandırılmış kullanıcılar _telefon_ doğrulama o zaman.|
-| Mobil uygulama üzerinden bildirim |Telefonunuza veya kayıtlı cihazınıza anında iletme bildirimi gönderir. Kullanıcı bildirimi görünümleri ve seçer **doğrulama** doğrulamayı tamamlamak için. Microsoft Authenticator uygulamasını kullanılabilir [Windows Phone](https://go.microsoft.com/fwlink/?Linkid=825071), [Android](https://go.microsoft.com/fwlink/?Linkid=825072), ve [iOS](https://go.microsoft.com/fwlink/?Linkid=825073). |
-| Mobil uygulama veya donanım belirteci doğrulama kodu |Microsoft Authenticator uygulamasını her 30 saniyede yeni bir OATH doğrulama kodu oluşturur. Kullanıcı oturum açma arabirimine doğrulama kodunu girer. Microsoft Authenticator uygulamasını kullanılabilir [Windows Phone](https://go.microsoft.com/fwlink/?Linkid=825071), [Android](https://go.microsoft.com/fwlink/?Linkid=825072), ve [iOS](https://go.microsoft.com/fwlink/?Linkid=825073). |
+| Telefon çağrısı |Otomatik bir sesli çağrı koyar. Kullanıcı, aramaya yanıt verir ve telefon tuş takımında # tuşuna basar. Telefon numarası şirket içi Active Directory ile eşitlenmez. |
+| Telefona kısa mesaj |Doğrulama kodu içeren bir kısa mesaj gönderir. Kullanıcıdan, doğrulama kodunu oturum açma arabirimine girmesi istenir. Bu işlem tek yönlü SMS olarak adlandırılır. İki yönlü SMS, kullanıcının belirli bir kodu doğru bir şekilde geri metin döndürmelidir. İki yönlü SMS kullanım dışıdır ve 14 Kasım 2018 sonrasında desteklenmez. Yöneticiler, daha önce iki yönlü SMS kullanan kullanıcılar için başka bir yöntemi etkinleştirmelidir.|
+| Mobil uygulama aracılığıyla bildirim |Telefonunuza veya kayıtlı cihazınıza anında iletme bildirimi gönderir. Kullanıcı bildirimi görüntüler ve doğrulamayı tamamlamaya yönelik **Doğrula** ' yı seçer. Microsoft Authenticator uygulaması [Windows Phone](https://www.microsoft.com/p/microsoft-authenticator/9nblgggzmcj6), [Android](https://go.microsoft.com/fwlink/?Linkid=825072)ve [iOS](https://go.microsoft.com/fwlink/?Linkid=825073)için kullanılabilir. |
+| Mobil uygulama veya donanım belirtecinden doğrulama kodu |Microsoft Authenticator uygulaması, her 30 saniyede yeni bir OATH doğrulama kodu oluşturur. Kullanıcı doğrulama kodunu oturum açma arabirimine girer. Microsoft Authenticator uygulaması [Windows Phone](https://www.microsoft.com/p/microsoft-authenticator/9nblgggzmcj6), [Android](https://go.microsoft.com/fwlink/?Linkid=825072)ve [iOS](https://go.microsoft.com/fwlink/?Linkid=825073)için kullanılabilir. |
 
-### <a name="enable-and-disable-verification-methods"></a>Etkinleştirme ve doğrulama yöntemlerini devre dışı
+### <a name="enable-and-disable-verification-methods"></a>Doğrulama yöntemlerini etkinleştirme ve devre dışı bırakma
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol tarafta, seçin **Azure Active Directory** > **kullanıcılar ve gruplar** > **tüm kullanıcılar**.
-3. Seçin **çok faktörlü kimlik doğrulaması**.
-4. Multi-Factor Authentication'ın altında seçin **hizmet ayarları**.
-5. Üzerinde **hizmet ayarları** sayfasındaki **doğrulama seçenekleri**, kullanıcılarınıza sağlamak için yöntemleri seçin/seçimini kaldırın.
-6. **Kaydet**’e tıklayın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol tarafta **Azure Active Directory** > **kullanıcıları**' nı seçin.
+3. **Multi-Factor Authentication**seçin.
+4. Multi-Factor Authentication altında **hizmet ayarları**' nı seçin.
+5. **Hizmet ayarları** sayfasında, **doğrulama seçenekleri**altında kullanıcılarınıza sağlanacak yöntemlerin seçin/seçimini kaldırın.
+6. **Save (Kaydet)** düğmesine tıklayın.
 
-Kimlik doğrulama yöntemlerinin kullanımı hakkında ek bilgi makalesinde bulunabilir [kimlik doğrulama yöntemleri nelerdir](concept-authentication-methods.md).
+Kimlik doğrulama yöntemlerinin kullanımıyla ilgili ek ayrıntılar makalesinde, [kimlik doğrulama yöntemleri nelerdir](concept-authentication-methods.md).
 
-## <a name="remember-multi-factor-authentication"></a>Çok faktörlü kimlik doğrulamasını anımsa
+## <a name="remember-multi-factor-authentication"></a>Multi-Factor Authentication anımsa
 
-_Çok faktörlü kimlik doğrulamasını anımsa_ özelliğidir cihazlar ve kullanıcı tarafından güvenilen tarayıcılar için multi-Factor Authentication tüm kullanıcılar için ücretsiz bir özellik. Kullanıcılar, belirtilen sayıda gün, bunlar başarıyla bir cihaz için çok faktörlü kimlik doğrulaması kullanarak oturum açmış sonra sonraki doğrulamaları atlayabilirsiniz. Özellik, bir kullanıcının aynı cihazda iki adımlı doğrulama için sayısını en aza indirerek kullanılabilirliği geliştirir.
-
->[!IMPORTANT]
->Bir hesabı ya da cihaz tehlikedeyse, çok faktörlü kimlik doğrulaması için güvenilen cihazları hatırlamak güvenlik etkileyebilir. Bir kurumsal hesap güvenliği tehlikeye girdiğinde ya da güvenilir bir cihaz kaybolur veya çalınırsa, aşağıdakileri yapmalısınız [tüm cihazlarda multi-Factor Authentication geri](howto-mfa-userdevicesettings.md#restore-mfa-on-all-remembered-devices-for-a-user).
->
->Tüm cihazlardan bir güvenilen durum geri yükleme eylemini iptal eder ve kullanıcıyı yeniden iki adımlı doğrulama için gereklidir. Kullanıcılarınızın çok faktörlü kimlik doğrulaması'ndaki yönergeleri ile kendi cihazlarını geri yüklemek için de bildirebilirsiniz [iki adımlı doğrulama ayarlarınızı yönetme](../user-help/multi-factor-authentication-end-user-manage-settings.md#require-two-step-verification-again-on-a-device-youve-marked-as-trusted).
->
-
-### <a name="how-the-feature-works"></a>Özelliği nasıl çalışır
-
-Bir kullanıcı seçtiğinde anımsa multi-Factor Authentication özelliğini tarayıcıda kalıcı bir tanımlama bilgisi ayarlar **X için bir daha sorma gün** oturum açma seçeneği. Tanımlama bilgisi süresi doluncaya kadar tekrar için multi-Factor Authentication, aynı tarayıcıdan kullanıcıdan değil. Kullanıcının aynı cihazda farklı bir tarayıcı açar veya kendi tanımlama bilgilerini temizler, bunlar yeniden doğrulayın istenir.
-
-**X için bir daha sorma gün** seçeneği, tarayıcı olmayan uygulamaları uygulaması modern kimlik doğrulamasını destekleyip desteklemediğini üzerinde göremiyorsanız. Bu uygulamaları kullanabilmek _yenileme belirteçleri_ her saat yeni erişim belirteçleri sağlar. Bir yenileme belirteci doğrulandığında, Azure AD'ye son iki aşamalı doğrulama belirtilen gün sayısı içinde oluştu denetler.
-
-Bu özellik, normal olarak her zaman sor web apps'te, kimlik doğrulama sayısını azaltır. Bu özellik, normalde her 90 günde ister modern kimlik doğrulaması istemcileri kimlik doğrulamalarını sayısını artırır. Ayrıca, koşullu erişim ilkeleriyle birlikte kullanıldığında doğrulama sayısını artırabilir.
+Kullanıcı tarafından güvenilen cihazlar ve tarayıcılar için _Multi-Factor Authentication hatırla_ özelliği, tüm Multi-Factor Authentication kullanıcılar için ücretsiz bir özelliktir. Kullanıcılar, Multi-Factor Authentication kullanarak bir cihaza başarıyla oturum açtıktan sonra, belirtilen gün sayısı için sonraki doğrulamaları atlayabilir. Özelliği, bir kullanıcının aynı cihazda iki aşamalı doğrulamayı kaç kez gerçekleştirmesi gerektiğini en aza indirerek kullanılabilirliği geliştirir.
 
 >[!IMPORTANT]
->**Çok faktörlü kimlik doğrulamasını anımsa** özelliği ile uyumlu değil **Oturumumu açık bırak** kullanıcılar gerçekleştirirken iki aşamalı doğrulama için AD FS ile Azure multi-Factor Authentication AD FS özelliği Kimlik doğrulama sunucusu veya bir üçüncü taraf multi-Factor authentication çözümünü.
+>Bir hesap veya cihazın güvenliği tehlikeye girerse, güvenilir cihazlar için Multi-Factor Authentication hatırlama güvenliği etkileyebilir. Bir şirket hesabının güvenliği tehlikeye girerse veya güvenilir bir cihaz kaybedilirse veya çalınırsa, [MFA oturumlarını iptal](howto-mfa-userdevicesettings.md)etmeniz gerekir.
 >
->Kullanıcılarınızın seçerseniz **Oturumumu açık bırak** AD FS işareti olarak cihazlarını çok faktörlü kimlik doğrulaması için güvenilen Ayrıca, kullanıcının otomatik olarak sonra doğrulanmış değil **çok faktörlü kimlik doğrulamasıunutmayın**gün sayısı sona. Azure AD yeni iki aşamalı doğrulama isteklerini, ancak AD FS özgün çok faktörlü kimlik doğrulaması talep ve tarih yerine yeniden gerçekleştiriliyor iki aşamalı doğrulama ile bir belirteç döndürür. **Azure arasında bir doğrulama döngüsü kapalı bu tepki ayarlar AD ve AD FS.**
+>Geri yükleme eylemi tüm cihazlardan gelen güvenilen durumu iptal eder ve kullanıcının iki aşamalı doğrulamayı yeniden gerçekleştirmesi gerekir. Ayrıca, kullanıcılarınızın kendi cihazlarındaki Multi-Factor Authentication geri yüklemesini, [ayarlarınızı iki adımlı doğrulama Için yönetme](../user-help/multi-factor-authentication-end-user-manage-settings.md#turn-on-two-factor-verification-prompts-on-a-trusted-device)konusundaki yönergelerle de söyleyebilirsiniz.
+
+### <a name="how-the-feature-works"></a>Özelliğin çalışma şekli
+
+Multi-Factor Authentication hatırlayın özelliği, Kullanıcı oturum açma sırasında **X gün için yeniden sorma** seçeneğini seçtiğinde tarayıcıda kalıcı bir tanımlama bilgisi ayarlıyor. Tanımlama bilgisinin süresi dolana kadar Kullanıcı aynı tarayıcıdan Multi-Factor Authentication için bir daha istenmez. Kullanıcı aynı cihazda farklı bir tarayıcı açarsa veya tanımlama bilgilerini temizlerse, bunları doğrulamak için bir kez daha istenir.
+
+Uygulamanın modern kimlik doğrulamasını destekleyip desteklemediğini fark etmeksizin, **X gün boyunca yeniden sorma** seçeneği, tarayıcı olmayan uygulamalarda gösterilmez. Bu uygulamalar, her saat yeni erişim belirteçleri sağlayan _yenileme belirteçlerini_ kullanır. Yenileme belirteci doğrulandıktan sonra, Azure AD, son iki adımlı doğrulamanın belirtilen gün sayısı içinde gerçekleştiğini denetler.
+
+Özelliği, Web Apps 'teki kimlik doğrulama sayısını azaltır ve bu, normalde her seferinde uyarır. Özelliği, normalde her 90 günde bir bilgi veren modern kimlik doğrulama istemcileri için kimlik doğrulama sayısını artırır. , Koşullu erişim ilkeleriyle birleştirildiğinde kimlik doğrulama sayısını da artırabilir.
+
+>[!IMPORTANT]
+>**Multi-Factor Authentication anımsa** özelliği, kullanıcılar Azure Multi-Factor Authentication sunucusu veya üçüncü taraf Multi-Factor ile AD FS için iki aşamalı doğrulama gerçekleştirirken, AD FS Oturumumu **açık tut** özelliği ile uyumlu değildir kimlik doğrulama çözümü.
+>
+>Kullanıcılarınız Oturumumu AD FS açık **tut** ' u seçer ve ayrıca cihazlarını Multi-Factor Authentication için güvenilir olarak işaretledikten sonra, **Multi-Factor Authentication** gün sayısı ' nın süresinin dolmasını doğruladıktan sonra Kullanıcı otomatik olarak doğrulanmaz. Azure AD, iki adımlı bir doğrulama ister, ancak AD FS iki adımlı doğrulamayı yeniden gerçekleştirmek yerine özgün Multi-Factor Authentication talep ve Tarih ile bir belirteç döndürür. **Bu yeniden eylem, Azure AD ile AD FS arasındaki bir doğrulama döngüsünü belirler.**
+>
+>**Multi-Factor Authentication anımsa** özelliği B2B kullanıcılarıyla uyumlu değildir ve davet edilen kiracılarda oturum açarken B2B kullanıcıları için görünür olmayacaktır.
 >
 
-### <a name="enable-remember-multi-factor-authentication"></a>Çok faktörlü kimlik doğrulamasını etkinleştir unutmayın
+### <a name="enable-remember-multi-factor-authentication"></a>Enable Multi-Factor Authentication anımsa
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol tarafta, seçin **Azure Active Directory** > **kullanıcılar ve gruplar** > **tüm kullanıcılar**.
-3. Seçin **çok faktörlü kimlik doğrulaması**.
-4. Multi-Factor Authentication'ın altında seçin **hizmet ayarları**.
-5. Üzerinde **hizmet ayarları** sayfasında **yönetmek çok faktörlü kimlik doğrulamasını anımsa**seçin **çok faktörlü kimlik doğrulamasını anımsa kullanıcılarıngüvendiklericihazlarda**seçeneği.
-6. İki aşamalı doğrulamayı atlama güvenilen cihazlara izin vermek için gün sayısını ayarlayın. Varsayılan değer 14 gündür.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol tarafta **Azure Active Directory** > **kullanıcıları**' nı seçin.
+3. **Multi-Factor Authentication**seçin.
+4. Multi-Factor Authentication altında **hizmet ayarları**' nı seçin.
+5. **Hizmet ayarları** sayfasında, **çok faktörlü kimlik doğrulamasını anımsa**' yı yönetin, **kullanıcıların güvendikleri cihazlarda Multi-Factor Authentication 'ı anımsamasını izin ver** seçeneğini belirleyin.
+6. Güvenilen cihazların iki aşamalı doğrulamayı atlamasına izin vermek için gün sayısını ayarlayın. Varsayılan değer 14 gündür.
 7. **Kaydet**’i seçin.
 
-### <a name="mark-a-device-as-trusted"></a>Bir aygıt güvenilen olarak işaretleyin
+### <a name="mark-a-device-as-trusted"></a>Bir cihazı güvenilir olarak işaretle
 
-Parolayı anımsa çok faktörlü kimlik doğrulaması özelliği etkinleştirdikten sonra kullanıcıların ne zaman güvenilir olarak bir cihaz işaretleyebilirsiniz seçerek oturum **bir daha sorma**.
+Multi-Factor Authentication hatırla özelliğini etkinleştirdikten sonra, kullanıcılar **yeniden sorma**seçeneğini belirleyerek bir cihazı güvenilir olarak işaretleyebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Azure AD oturum açma sayfasında bulunan marka değiştirme](../fundamentals/customize-branding.md)
+[Azure AD oturum açma sayfası markalamasını değiştirme](../fundamentals/customize-branding.md)

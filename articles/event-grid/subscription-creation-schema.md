@@ -8,12 +8,12 @@ ms.service: event-grid
 ms.topic: reference
 ms.date: 01/02/2019
 ms.author: babanisa
-ms.openlocfilehash: 9464ab89e08f53f61cb6f5a4b1e91da35b785af0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6129c7f498ce6c52fce4266f693c6a304642f8c3
+ms.sourcegitcommit: adc1072b3858b84b2d6e4b639ee803b1dda5336a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60822799"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70845463"
 ---
 # <a name="event-grid-subscription-schema"></a>Event Grid abonelik şeması
 
@@ -42,17 +42,17 @@ Olay aboneliği adı 3-64 karakter uzunluğunda olmalıdır ve yalnızca a-z, A-
 
 | Özellik | Tür | Açıklama |
 | -------- | ---- | ----------- |
-| endpointType | dize | (Web kancası/HTTP, olay hub'ı veya kuyruk) abonelik için uç nokta türü. | 
-| endpointUrl | dize | Bu olay aboneliğine olaylar için hedef URL. | 
+| endpointType | string | (Web kancası/HTTP, olay hub'ı veya kuyruk) abonelik için uç nokta türü. | 
+| endpointUrl | string | Bu olay aboneliğine olaylar için hedef URL. | 
 
 ### <a name="filter-object"></a>filtre nesnesi
 
 | Özellik | Tür | Açıklama |
 | -------- | ---- | ----------- |
 | includedEventTypes | array | Olay türü olay iletisi olduğunda bu olay türü adları birine tam bir eşleşme eşleşmedir. Olay adı, olay kaynağı için kayıtlı olay türü adları eşleşmediğinde bir hata oluşturur. Varsayılan, tüm olay türleri eşleşir. |
-| subjectBeginsWith | dize | Ön ek eşleştirmesi için konu alanında olay iletisi filtreleyin. Varsayılan ya da boş dize tüm eşleşir. | 
-| subjectEndsWith | dize | Bir sonek eşleşme Konu alanına olay iletisi filtreleyin. Varsayılan ya da boş dize tüm eşleşir. |
-| isSubjectCaseSensitive | dize | Denetimler için filtreler eşleştirme büyük küçük harfe duyarlı. |
+| subjectBeginsWith | string | Ön ek eşleştirmesi için konu alanında olay iletisi filtreleyin. Varsayılan ya da boş dize tüm eşleşir. | 
+| subjectEndsWith | string | Bir sonek eşleşme Konu alanına olay iletisi filtreleyin. Varsayılan ya da boş dize tüm eşleşir. |
+| isSubjectCaseSensitive | string | Denetimler için filtreler eşleştirme büyük küçük harfe duyarlı. |
 
 
 ## <a name="example-subscription-schema"></a>Örnek abonelik şeması
@@ -68,7 +68,7 @@ Olay aboneliği adı 3-64 karakter uzunluğunda olmalıdır ve yalnızca a-z, A-
     },
     "filter": {
       "includedEventTypes": [ "Microsoft.Storage.BlobCreated", "Microsoft.Storage.BlobDeleted" ],
-      "subjectBeginsWith": "blobServices/default/containers/mycontainer/log",
+      "subjectBeginsWith": "/blobServices/default/containers/mycontainer/log",
       "subjectEndsWith": ".jpg",
       "isSubjectCaseSensitive ": "true"
     }

@@ -5,23 +5,23 @@ ms.topic: include
 ms.date: 09/04/2018
 ms.author: glenga
 ms.openlocfilehash: 49ac1a7585ddf2a6500c7e9382880109c3f7f431
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: 040abc24f031ac9d4d44dbdd832e5d99b34a8c61
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188142"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69534276"
 ---
-## <a name="export-an-api-definition"></a>Bir API tanımını dışarı aktarma
-Gelen işleviniz için bir Openapı tanımına sahip [bir işlev için Openapı tanımı oluşturma](../articles/azure-functions/functions-openapi-definition.md). Bu işlem bir sonraki adım, PowerApps ve Microsoft Flow özel bir API kullanabilirsiniz, böylece API tanımını dışa aktarma sağlamaktır.
+## <a name="export-an-api-definition"></a>API tanımını dışarı aktarma
+İşleviniz için bir Openapı tanımı [oluşturun, bir işlev Için openapı tanımı oluşturun](../articles/azure-functions/functions-openapi-definition.md). Bu işlemin bir sonraki adımında, PowerApps ve Microsoft Flow bunu özel bir API 'de kullanabilmesi için API tanımını dışarı aktarmaları.
 
 > [!IMPORTANT]
-> Azure'a powerapps Hizmetinizine ilişkin kullanırsınız ve Microsoft Flow Kiracı kimlik bilgileri ile oturum açmanız gerekir olduğunu unutmayın. Bu özel API oluşturma ve PowerApps ve Microsoft Flow için kullanılabilmesi Azure sağlar.
+> PowerApps ve Microsoft Flow kiracılarınız için kullandığınız kimlik bilgileriyle Azure 'da oturum açmanız gerektiğini unutmayın. Bu, Azure 'un özel API oluşturmasını ve PowerApps ve Microsoft Flow için kullanılabilir olmasını sağlar.
 
-1. İçinde [Azure portalında](https://portal.azure.com), işlev uygulamanızın adı tıklayın (gibi **function-demo-energy**) > **Platform özellikleri** > **API tanımı** .
+1. [Azure Portal](https://portal.azure.com), **platform özellikleri** > **API tanımı**> işlev uygulamanızın adını ( **işlev gösterimi-enerji**gibi) tıklatın.
 
     ![API tanımı](media/functions-export-api-definition/api-definition.png)
 
-1. Tıklayın **PowerApps + Flow'a dışarı aktarma**.
+1. **PowerApps + Flow 'A Aktar öğesine**tıklayın.
 
     ![API tanımı kaynağı](media/functions-export-api-definition/export-api-1.png)
 
@@ -29,11 +29,11 @@ Gelen işleviniz için bir Openapı tanımına sahip [bir işlev için Openapı 
 
     |Ayar|Açıklama|
     |--------|------------|
-    |**Dışarı aktarma modu**|Seçin **Express** özel API'yi otomatik olarak oluşturulacak. Seçme **el ile** dışarı aktarmaları API tanımı, ancak ardından gerekir almak, PowerApps ve Microsoft Flow el ile. Daha fazla bilgi için [dışarı aktarmak için PowerApps ve Microsoft Flow](../articles/azure-functions/app-service-export-api-to-powerapps-and-flow.md).|
-    |**Ortam**|Özel API'yi kaydedilmesi gereken ortamı seçin. Daha fazla bilgi için [ortamlara genel bakış (PowerApps)](https://powerapps.microsoft.com/tutorials/environments-overview/) veya [ortamlara genel bakış (Microsoft Flow)](https://us.flow.microsoft.com/documentation/environments-overview-admin/).|
-    |**Özel API adı**|Gibi bir ad girin `Turbine Repair`.|
-    |**API anahtarı adı**|Özel API Arabiriminde uygulama ve akış oluşturucular görmelisiniz adı girin. Örnek yararlı bilgiler içerdiğini unutmayın.|
+    |**Dışarı aktarma modu**|Özel API 'yi otomatik olarak oluşturmak için **Express** ' i seçin. **El ile** ' yı seçtiğinizde API tanımını dışarı aktarır, ancak bunu PowerApps 'e aktarmanız ve el ile Microsoft Flow gerekir. Daha fazla bilgi için bkz. [PowerApps ve Microsoft Flow 'e aktarma](../articles/azure-functions/app-service-export-api-to-powerapps-and-flow.md).|
+    |**Ortam**|Özel API 'nin kaydedilmesi gereken ortamı seçin. Daha fazla bilgi için bkz. [ortamlara genel bakış (PowerApps)](https://powerapps.microsoft.com/tutorials/environments-overview/) veya [ortamlara genel bakış (Microsoft Flow)](https://us.flow.microsoft.com/documentation/environments-overview-admin/).|
+    |**Özel API adı**|Gibi `Turbine Repair`bir ad girin.|
+    |**API anahtarı adı**|Uygulama ve akış oluşturucuların özel API Kullanıcı arabiriminde göreceği adı girin. Örneğin yararlı bilgiler içerdiğine unutmayın.|
  
     ![PowerApps ve Microsoft Flow’a dışarı aktarma](media/functions-export-api-definition/export-api-2.png)
 
-1. **Tamam** düğmesine tıklayın. Özel API'yi yerleşik ve belirttiğiniz ortama eklenir.
+1. **Tamam**'ı tıklatın. Özel API artık kurulmuştur ve belirlediğiniz ortama eklenir.

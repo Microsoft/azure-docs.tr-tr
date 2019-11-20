@@ -1,45 +1,45 @@
 ---
-title: NOAA ile açık bir veri kümesini kullanarak örnek Jupyter Not Defterleri
+title: NOAA verileri kullanan örnek jupi Not defterleri
 titleSuffix: Azure Open Datasets
-description: Açık veri kümeleri yüklenemedi ve tanıtım verileri zenginleştirmek için bunları kullanmayı öğrenmek için örnek Jupyter not defterleri Azure açın veri kümeleri için kullanın. Teknikleri, Spark ve Pandas veriyi işlemek için kullanımını içerir.
+description: Açık veri kümelerini nasıl yükleyeceğinizi ve tanıtım verilerini zenginleştirmek için bunları nasıl kullanacağınızı öğrenmek için Azure açık veri kümeleri için örnek jupi not defterlerini kullanın. Teknikler, verileri işlemek için Spark ve Pandas kullanımını içerir.
 ms.service: open-datasets
 ms.topic: sample
 author: cjgronlund
 ms.author: cgronlun
-ms.date: 05/02/2019
-ms.openlocfilehash: b62a2690e5879e45a14d0b06a38e8c5171dda14e
-ms.sourcegitcommit: 4891f404c1816ebd247467a12d7789b9a38cee7e
+ms.date: 11/04/2019
+ms.openlocfilehash: 8b96a35db91a282be1fb5e4c6143e6bd0a0203f2
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65442339"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606135"
 ---
-# <a name="example-jupyter-notebooks-show-how-to-enrich-data-with-open-datasets"></a>Açık veri kümelerini verilerle zenginleştirerek nasıl örnek Jupyter not defterleri Göster 
-Azure açık veri kümeleri için örnek Jupyter not defterlerini açık veri kümelerini yüklemek ve tanıtım verileri zenginleştirmek için bunları kullanmayı gösterilmektedir. Teknikleri, veriyi işlemek için Apache Spark ve Pandas kullanımını içerir.
+# <a name="example-jupyter-notebooks-show-how-to-enrich-data-with-open-datasets"></a>Örnek jupi Not defterleri açık veri kümeleriyle verilerin nasıl zenginleştiralınacağını gösterir 
+Azure açık veri kümelerine yönelik örnek jupi Not defterleri, açık veri kümelerinin nasıl yükleneceğini ve bunları zenginleştirmek için bunları nasıl kullanacağınızı gösterir. Teknikler, verileri işlemek için Apache Spark ve Pandas kullanımını içerir.
 
 >[!IMPORTANT]
->Spark olmayan ortamda çalışırken, açık veri kümeleri, büyük veri kümeleriyle MemoryError önlemek için yalnızca bir aylık veri birer birer belirli sınıflarla indirme sağlar.
+>Spark olmayan bir ortamda çalışırken, açık veri kümeleri, büyük veri kümeleriyle MemoryError önlemek için belirli sınıflarla tek seferde yalnızca bir ay indirmeyi sağlar.
 
-## <a name="load-noaa-integrated-surface-database-isd-data"></a>NOAA tümleşik Surface veritabanı (ISD) veri yükleme 
+## <a name="load-noaa-integrated-surface-database-isd-data"></a>NOAA tümleşik yüzey veritabanı (ICD) verilerini yükle 
 |Not Defteri        | Açıklama                                    |
 |----------------|------------------------------------------------|
-|[Hava durumu verilerine en son bir ayın Pandas dataframe'e yüklemek](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-access/02-weather-to-pandas-dataframe.ipynb) | Tarihsel hava verilerine sık kullanılan Pandas dataframe'e yüklemek hakkında bilgi edinin. |
-|[Hava durumu verilerine en son bir ayın Spark dataframe'e yüklemek](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-access/01-weather-to-spark-dataframe.ipynb) | Tarihsel hava verilerine sık kullandığınız Spark dataframe'e yüklemek hakkında bilgi edinin.  |
+|[Hava durumu verilerinin son ayını bir Pandas dataframe 'e yükleme](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-access/02-weather-to-pandas-dataframe.ipynb) | Geçmiş hava durumu verilerini en sevdiğiniz Pandas dataframe 'e yüklemeyi öğrenin. |
+|[Bir Spark veri çerçevesine en son bir hava durumu verileri yükleme](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-access/01-weather-to-spark-dataframe.ipynb) | Geçmiş hava durumu verilerini en sevdiğiniz Spark dataframe 'e yüklemeyi öğrenin.  |
 
-## <a name="join-demo-data-with-noaa-isd-data"></a>Tanıtım verileri NOAA ISD verilerle katılın 
+## <a name="join-demo-data-with-noaa-isd-data"></a>NOAA ISD verileri ile tanıtım verilerini birleştirin 
 |Not Defteri        | Açıklama                                    |
 |----------------|------------------------------------------------|
-|[Tanıtım verileri ile hava durumu verileri - Pandas katılın](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/02-weather-join-in-pandas.ipynb) | Algılayıcı konumların hava durumu okumalar ile 1 aylık tanıtım veri kümesi içinde bir Pandas dataframe katılın.  |
-|[Tanıtım verileri ile hava durumu verileri Spark katılın](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/01-weather-join-in-spark.ipynb) | Hava durumu okumalar algılayıcı konumlarla bir tanıtım veri kümesi içinde bir Spark dataframe katılın. |
+|[Tanıtım verileri ile hava durumu verilerini birleştirin-Pandas](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/02-weather-join-in-pandas.ipynb) | Bir Pandas dataframe 'teki Hava durumu okumalarıyla algılayıcı konumlarının 1 aylık tanıtım veri kümesine katın.  |
+|[Hava durumu verileriyle tanıtım verileri ekleme – Spark](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/01-weather-join-in-spark.ipynb) | Bir Spark veri çerçevesindeki Hava durumu okumalarıyla algılayıcı konumlarının tanıtım veri kümesini birleştirin. |
 
-## <a name="join-nyc-taxi-data-with-noaa-isd-data"></a>NYC taksi verilerini NOAA ISD verileriyle katılın 
+## <a name="join-nyc-taxi-data-with-noaa-isd-data"></a>NOAA ıMD verileri ile NYC TAXI verilerini birleştirin 
 |Not Defteri        | Açıklama                                    |
 |----------------|------------------------------------------------|
-|[Taksi seyahat verileri ile hava durumu verileri - Pandas zenginleştirilmiş](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/04-nyc-taxi-join-weather-in-pandas.ipynb) | NYC yeşil taksi verilerini (1 ay içinde) yüklemek ve hava durumu verileri Pandas dataframe zenginleştirin. Bu örnek yöntemini geçersiz kılan `get_pandas_limit` ve veri miktarı ile veri yükleme performansını dengeler.|
-|[Taksi seyahat verileri ile hava durumu verileri – Spark zenginleştirilmiş](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/03-nyc-taxi-join-weather-in-spark.ipynb) | NYC yeşil taksi verileri yüklemek ve hava durumu verileri, Spark dataframe zenginleştirin.  |
+|[Vergilenme verileri hava durumu verileri ile zenginleştirdim-Pandas](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/04-nyc-taxi-join-weather-in-pandas.ipynb) | NYC yeşil TAXI verilerini yükleyin (1 aydan fazla) ve bir Pandas dataframe içindeki hava durumu verileriyle zenginleştirin. Bu örnek, `get_pandas_limit` ve veri yükü performansını veri miktarıyla dengeleyen yöntemi geçersiz kılar.|
+|[Vergilenme verileri hava durumu verileriyle zenginleştirir – Spark](https://github.com/Azure/OpenDatasetsNotebooks/blob/master/tutorials/data-join/03-nyc-taxi-join-weather-in-spark.ipynb) | Spark dataframe 'de NYC yeşil TAXI verilerini yükleyin ve hava durumu verileriyle zenginleştirin.  |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Öğretici: Regresyon otomatik makine öğrenimi ve açık bir veri kümesi ile modelleme](tutorial-opendatasets-automl.md)
-* [Açık veri kümeleri için Python SDK](https://aka.ms/open-datasets-api)
-* [Azure açık veri kümeleri Kataloğu](https://azure.microsoft.com/services/open-datasets/catalog/)
+* [Öğretici: otomatik makine öğrenimi ve açık bir veri kümesi ile gerileme modelleme](/azure/machine-learning/service/tutorial-auto-train-models?context=azure/open-datasets/context/open-datasets-context)
+* [Açık veri kümeleri için Python SDK](/python/api/azureml-opendatasets/azureml.opendatasets?view=azure-ml-py)
+* [Azure açık veri kümeleri kataloğu](https://azure.microsoft.com/services/open-datasets/catalog/)

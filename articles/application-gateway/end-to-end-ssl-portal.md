@@ -1,107 +1,123 @@
 ---
-title: Hızlı Başlangıç - Azure Application Gateway - Azure portalı ile uçtan uca SSL şifrelemesini yapılandırma | Microsoft Docs
-description: Azure Application Gateway uçtan uca SSL şifrelemesi ile oluşturmak için Azure portalını kullanmayı öğrenin.
+title: Portalı kullanarak uçtan uca SSL şifrelemesini yapılandırma
+titleSuffix: Azure Application Gateway
+description: Uçtan uca SSL şifrelemesi ile uygulama ağ geçidi oluşturmak için Azure portal nasıl kullanacağınızı öğrenin.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: article
-ms.date: 4/30/2019
+ms.date: 11/14/2019
 ms.author: absha
 ms.custom: mvc
-ms.openlocfilehash: bd165f81b45e3ae0c121fb8876ed88e68d493195
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a878b966266bdd326db35d266bc14b2f81161e92
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64946791"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075135"
 ---
-# <a name="configure-end-to-end-ssl-by-using-application-gateway-with-the-portal"></a>Portal ile uygulama ağ geçidi'ni kullanarak uçtan uca SSL'yi yapılandırma
+# <a name="configure-end-to-end-ssl-by-using-application-gateway-with-the-portal"></a>Portal ile Application Gateway kullanarak uçtan uca SSL 'yi yapılandırma
 
-Bu makalede bir uygulama ağ geçidi ile uçtan uca SSL şifrelemesini yapılandırmak için Azure portalını kullanmayı gösterir v1 SKU.  
+Bu makalede, Azure Application Gateway v1 SKU 'SU aracılığıyla uçtan uca Güvenli Yuva Katmanı (SSL) şifrelemesini yapılandırmak için Azure portal nasıl kullanılacağı açıklanır.
 
 > [!NOTE]
-> Uygulama ağ geçidi v2 SKU etkinleştirme uçtan uca yapılandırma için güvenilen kök sertifika gerektirir. Güvenilen kök sertifika eklemek için portal desteği henüz mevcut değildir. Bu nedenle, durumunda v2 SKU bkz [PowerShell kullanarak uçtan uca SSL'yi yapılandırma](https://docs.microsoft.com/azure/application-gateway/application-gateway-end-to-end-ssl-powershell).
+> Application Gateway v2 SKU 'SU, uçtan uca yapılandırmayı etkinleştirmek için güvenilen kök sertifikaları gerektirir.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bir uygulama ağ geçidi ile uçtan uca SSL'yi yapılandırmak için bir sertifika ağ geçidi için gereklidir ve arka uç sunucuları için sertifikaları gereklidir. Ağ geçidi sertifikası, bir simetrik anahtar SSL protokolü belirtimi uyarınca türetmek için kullanılır. Simetrik anahtar, ardından şifrelemek ve şifresini çözmek için ağ geçidi gönderilen trafiği için kullanılır. Uçtan uca SSL şifrelemesi için arka uç uygulama ağ geçidiyle Güvenilenler listesinde olmalıdır. Bunu yapmak için uygulama ağ geçidi arka uç sunucuların, kimlik doğrulama sertifikası olarak da bilinir, ortak sertifika karşıya yükleyin. Sertifika ekleme, uygulama ağ geçidi yalnızca bilinen arka uç örnekleriyle iletişim sağlar. Bu daha fazla uçtan uca iletişimin güvenliğini sağlar.
+Bir Application Gateway ile uçtan uca SSL yapılandırmak için ağ geçidi için bir sertifikaya ihtiyacınız vardır. Ayrıca, arka uç sunucuları için sertifikalar gerekir. Ağ Geçidi sertifikası, SSL protokolü belirtimiyle uyumlu bir simetrik anahtar türetmek için kullanılır. Daha sonra simetrik anahtar, ağ geçidine gönderilen trafiği şifrelemek ve şifresini çözmek için kullanılır. 
 
-Daha fazla bilgi için bkz. [SSL sonlandırma ve uçtan uca SSL](https://docs.microsoft.com/azure/application-gateway/ssl-overview).
+Uçtan uca SSL şifrelemesi için, uygulama ağ geçidinde doğru arka uç sunucularına izin verilmelidir. Bu erişime izin vermek için, arka uç sunucularının, kimlik doğrulama sertifikaları (v1) veya güvenilir kök sertifikalar (v2) olarak da bilinen genel sertifikasını uygulama ağ geçidine yükleyin. Sertifikayı eklemek, Application Gateway 'in yalnızca bilinen arka uç örnekleriyle iletişim kuracağını sağlar. Bu yapılandırma uçtan uca iletişimin güvenliğini sağlar.
+
+Daha fazla bilgi edinmek için bkz. [SSL sonlandırması ve uçtan uca SSL](https://docs.microsoft.com/azure/application-gateway/ssl-overview).
 
 ## <a name="create-a-new-application-gateway-with-end-to-end-ssl"></a>Uçtan uca SSL ile yeni bir uygulama ağ geçidi oluşturma
 
-Uçtan uca SSL şifrelemesi ile yeni bir uygulama ağ geçidi oluşturmak için önce yeni bir uygulama ağ geçidi oluşturulurken, SSL sonlandırma etkinleştirmeniz gerekir. Bu, istemci ve uygulama ağ geçidi arasındaki iletişim için SSL şifrelemesini etkinleştirir. Ardından, uçtan uca SSL şifrelemesini yerine getirmeye uygulama ağ geçidi ve arka uç sunucuları arasındaki iletişim için SSL şifrelemesini etkinleştirmek için HTTP ayarlarında arka uç sunucular için güvenilir sertifikaları için gerekir.
+Uçtan uca SSL şifrelemesi ile yeni bir uygulama ağ geçidi oluşturmak için, ilk olarak yeni bir uygulama ağ geçidi oluştururken SSL sonlandırmasını etkinleştirmeniz gerekir. Bu eylem, istemci ve uygulama ağ geçidi arasındaki iletişim için SSL şifrelemesini mümkün bir şekilde sunar. Daha sonra, HTTP ayarlarındaki arka uç sunucularının sertifikalarını güvenli alıcılara yerleştirmeniz gerekir. Bu yapılandırma, uygulama ağ geçidi ve arka uç sunucuları arasındaki iletişim için SSL şifrelemesi sunar. Bu, uçtan uca SSL şifrelemesi gerçekleştirir.
 
-### <a name="enable-ssl-termination-while-creating-a-new-application-gateway"></a>Yeni bir uygulama ağ geçidi oluşturulurken, SSL sonlandırmayı etkinleştirin
+### <a name="enable-ssl-termination-while-creating-a-new-application-gateway"></a>Yeni bir uygulama ağ geçidi oluştururken SSL sonlandırmasını etkinleştir
 
-Anlamak için bu makaleyi okuyun nasıl [yeni bir uygulama ağ geçidi oluşturulurken, SSL sonlandırmayı etkinleştirme](https://docs.microsoft.com/azure/application-gateway/create-ssl-portal).
+Daha fazla bilgi edinmek için bkz. [Yeni bir uygulama ağ geçidi oluştururken SSL sonlandırmasını etkinleştirme](https://docs.microsoft.com/azure/application-gateway/create-ssl-portal).
 
-### <a name="whitelist-certificates-for-backend-servers"></a>Arka uç sunucular için güvenilir sertifikaları
+### <a name="add-authenticationroot-certificates-of-back-end-servers"></a>Arka uç sunucularının kimlik doğrulama/kök sertifikalarını ekleyin
 
-1. Seçin **tüm kaynakları**ve ardından **myAppGateway**.
+1. **Tüm kaynaklar**' ı ve ardından **myappgateway**' i seçin.
 
-2. Seçin **HTTP ayarları** sol menüden. Azure otomatik olarak oluşturulan varsayılan HTTP ayarı **appGatewayBackendHttpSettings**, uygulama ağ geçidi oluşturduğunuzda. 
+2. Sol taraftaki menüden **http ayarları** ' nı seçin. Azure, uygulama ağ geçidini oluştururken **Appgatewaybackendhttpsettings**varsayılan HTTP ayarını otomatik olarak oluşturdu. 
 
-3. Seçin **appGatewayBackendHttpSettings**.
+3. **Appgatewaybackendhttpsettings**öğesini seçin.
 
-4. Altında **Protokolü**seçin **HTTPS**. Bir bölme için **arka uç kimlik doğrulama sertifikaları** görünür. 
+4. **Protokol**altında **https**' yi seçin. **Arka uç kimlik doğrulama sertifikaları veya güvenilen kök sertifikaların** bölmesi görüntülenir.
 
-5. Altında **arka uç kimlik doğrulama sertifikaları**, seçin **Yeni Oluştur**.
+5. **Yeni oluştur**’u seçin.
 
-6. Uygun girin **adı**.
+6. **Ad** alanına uygun bir ad girin.
 
-7. Kullanarak sertifikayı karşıya yükleme **karşıya CER sertifikası** kutusunu.![ addcert](./media/end-to-end-ssl-portal/addcert.png)
+7. **Cer sertifikasını karşıya yükle** kutusunda sertifika dosyasını seçin.
 
-   > [!NOTE]
-   > Bu adımda sağlanan sertifikanın ortak anahtarını .pfx sertifikasını arka uçta mevcut olmalıdır. Talep ve kanıt akıl (CER) biçiminde arka uç sunucuda yüklü sertifika (kök sertifika değil) dışarı aktarma ve bu adımı kullanın. Bu adım beyaz arka uç uygulama ağ geçidiyle.
+   Standart ve WAF (v1) uygulama ağ geçitleri için arka uç sunucu sertifikanızın ortak anahtarını. cer biçiminde yüklemeniz gerekir.
+
+   ![Sertifika ekleme](./media/end-to-end-ssl-portal/addcert.png)
+
+   Standard_v2 ve WAF_v2 uygulama ağ geçitleri için, arka uç sunucu sertifikasının kök sertifikasını. cer biçiminde yüklemeniz gerekir. Arka uç sertifikası iyi bilinen bir sertifika yetkilisi (CA) tarafından verildiyse, **Iyi BILINEN CA sertifikasını kullan** onay kutusunu seçebilir ve ardından bir sertifikayı karşıya yüklemeniz gerekmez.
+
+   ![Güvenilen kök sertifika ekle](./media/end-to-end-ssl-portal/trustedrootcert-portal.png)
+
+   ![Kök sertifika](./media/end-to-end-ssl-portal/trustedrootcert.png)
 
 8. **Kaydet**’i seçin.
 
-## <a name="enable-end-to-end-ssl-for-existing-application-gateway"></a>Mevcut uygulama ağ geçidi için uçtan uca SSL'yi etkinleştirme
+## <a name="enable-end-to-end-ssl-for-an-existing-application-gateway"></a>Mevcut uygulama ağ geçidi için uçtan uca SSL 'yi etkinleştirme
 
-Mevcut uygulama ağ geçidi ile uçtan uca SSL şifrelemesini yapılandırmak için ilk etkinleştir SSL sonlandırma, dinleyici gerekir. Bu, istemci ve uygulama ağ geçidi arasındaki iletişim için SSL şifrelemesini etkinleştirir. Ardından, uçtan uca SSL şifrelemesini yerine getirmeye uygulama ağ geçidi ve arka uç sunucuları arasındaki iletişim için SSL şifrelemesini etkinleştirmek için HTTP ayarlarında arka uç sunucular için güvenilir sertifikaları için gerekir.
+Uçtan uca SSL şifrelemesi ile mevcut bir uygulama ağ geçidini yapılandırmak için, önce dinleyicide SSL sonlandırmasını etkinleştirmeniz gerekir. Bu eylem, istemci ve uygulama ağ geçidi arasındaki iletişim için SSL şifrelemesini mümkün bir şekilde sunar. Daha sonra, bu sertifikaları, Güvenli Alıcılar listesindeki HTTP ayarlarındaki arka uç sunucuları için koyun. Bu yapılandırma, uygulama ağ geçidi ve arka uç sunucuları arasındaki iletişim için SSL şifrelemesi sunar. Bu, uçtan uca SSL şifrelemesi gerçekleştirir.
 
-SSL sonlandırma etkinleştirmek için bir dinleyici HTTPS protokolünü ve sertifika ile kullanmak gerekir. Var olan bir dinleyici Protokolü değiştiremezsiniz. Bu nedenle, HTTPS protokolünü ve sertifika ile var olan bir dinleyici kullanın veya yeni dinleyici oluşturun ya da seçebilirsiniz. Önceki seçtiğiniz uyarıdaki yoksayabilirsiniz adımları aşağıda belirtilen **mevcut application Gateway'de etkinleştirme SSL sonlandırma** ve doğrudan gitme **arka uç sunucular için güvenilir sertifikaları** bölümü. İkinci seçeneği seçerseniz, aşağıdaki adımları kullanın.
+SSL sonlandırmasını etkinleştirmek için HTTPS protokolü ve bir sertifika ile bir dinleyici kullanmanız gerekir. Bu koşulları karşılayan mevcut bir dinleyiciyi kullanabilir ya da yeni bir dinleyici oluşturabilirsiniz. Önceki seçeneği belirlerseniz, aşağıdaki "var olan bir uygulama ağ geçidinde SSL sonlandırmasını etkinleştir" bölümünü yoksayabilirsiniz ve doğrudan "arka uç sunucuları için kimlik doğrulaması/güvenilen kök sertifikaları Ekle" bölümüne geçebilirsiniz.
 
-### <a name="enable-ssl-termination-in-existing-application-gateway"></a>Mevcut uygulama ağ geçidinde SSL sonlandırmayı etkinleştirin
+İkinci seçeneği belirlerseniz, adımları aşağıdaki yordamda uygulayın.
+### <a name="enable-ssl-termination-in-an-existing-application-gateway"></a>Mevcut bir uygulama ağ geçidinde SSL sonlandırmasını etkinleştir
 
-1. Seçin **tüm kaynakları**ve ardından **myAppGateway**.
+1. **Tüm kaynaklar**' ı ve ardından **myappgateway**' i seçin.
 
-2. Seçin **dinleyicileri** sol menüden.
+2. Sol taraftaki menüden **dinleyicileri** seçin.
 
-3. Arasında seçim **temel** ve **çok siteli** ihtiyacınıza göre dinleyicisi.
+3. Gereksinimlerinize bağlı olarak **temel** veya **çok** siteli dinleyici ' i seçin.
 
-4. Altında **Protokolü**seçin **HTTPS**. Bir bölme için **sertifika** görünür.
+4. **Protokol**altında **https**' yi seçin. Bir **sertifika** bölmesi görüntülenir.
 
-5. İstemci ve uygulama ağ geçidi arasında SSL sonlandırma için kullanmayı planladığınız bir PFX sertifikasını karşıya yükleyin.
+5. İstemci ve uygulama ağ geçidi arasında SSL sonlandırma için kullanmayı düşündüğünüz PFX sertifikasını karşıya yükleyin.
 
    > [!NOTE]
-   > Test amacıyla otomatik olarak imzalanan bir sertifika kullanabilirsiniz. Üretim iş yükleri için otomatik olarak imzalanan sertifika kullanmamalıdır. Bilgi edinmek için nasıl [otomatik olarak imzalanan bir sertifika oluşturmak](https://docs.microsoft.com/azure/application-gateway/create-ssl-portal#create-a-self-signed-certificate).
+   > Sınama amacıyla, kendinden imzalı bir sertifika kullanabilirsiniz. Ancak, bu, üretim iş yükleri için önerilmez çünkü yönetilmesi zordur ve tamamen güvende değildir. Daha fazla bilgi için bkz. [otomatik olarak imzalanan sertifika oluşturma](https://docs.microsoft.com/azure/application-gateway/create-ssl-portal#create-a-self-signed-certificate).
 
-6. Eklemek için gerekli diğer ayarları **dinleyici** ihtiyacınıza göre.
+6. Gereksinimlerinize bağlı olarak, **dinleyici**için gereken diğer ayarları ekleyin.
 
 7. Kaydetmek için **Tamam**’ı seçin.
 
-### <a name="whitelist-certificates-for-backend-servers"></a>Arka uç sunucular için güvenilir sertifikaları
+### <a name="add-authenticationtrusted-root-certificates-of-back-end-servers"></a>Arka uç sunucularının kimlik doğrulaması/güvenilen kök sertifikalarını ekleyin
 
-1. Seçin **tüm kaynakları**ve ardından **myAppGateway**.
+1. **Tüm kaynaklar**' ı ve ardından **myappgateway**' i seçin.
 
-2. Seçin **HTTP ayarları** sol menüden. Var olan bir arka uç HTTP ya da güvenilir sertifikaları için ayarlama veya yeni bir HTTP ayarı oluşturun. İçindeki adım varsayılan HTTP ayarı için güvenilir sertifika yapacağız **appGatewayBackendHttpSettings**.
+2. Sol taraftaki menüden **http ayarları** ' nı seçin. Sertifikaları, Güvenli Alıcılar listesinde var olan bir arka uç HTTP ayarına yerleştirebilir veya yeni bir HTTP ayarı oluşturabilirsiniz. (Bir sonraki adımda, **Appgatewaybackendhttpsettings**varsayılan http ayarının sertifikası Güvenli Alıcılar listesine eklenir.)
 
-3. Seçin **appGatewayBackendHttpSettings**.
+3. **Appgatewaybackendhttpsettings**öğesini seçin.
 
-4. Altında **Protokolü**seçin **HTTPS**. Bir bölme için **arka uç kimlik doğrulama sertifikaları** görünür. 
+4. **Protokol**altında **https**' yi seçin. **Arka uç kimlik doğrulama sertifikaları veya güvenilen kök sertifikaların** bölmesi görüntülenir. 
 
-5. Altında **arka uç kimlik doğrulama sertifikaları**, seçin **Yeni Oluştur**.
+5. **Yeni oluştur**’u seçin.
 
-6. Uygun girin **adı**.
+6. **Ad** alanına uygun bir ad girin.
 
-7. Kullanarak sertifikayı karşıya yükleme **karşıya CER sertifikası** kutusunu.![ addcert](./media/end-to-end-ssl-portal/addcert.png)
+7. **Cer sertifikasını karşıya yükle** kutusunda sertifika dosyasını seçin.
 
-   > [!NOTE]
-   > Bu adımda sağlanan sertifikanın ortak anahtarını .pfx sertifikasını arka uçta mevcut olmalıdır. Talep ve kanıt akıl (CER) biçiminde arka uç sunucuda yüklü sertifika (kök sertifika değil) dışarı aktarma ve bu adımı kullanın. Bu adım beyaz arka uç uygulama ağ geçidiyle.
+   Standart ve WAF (v1) uygulama ağ geçitleri için arka uç sunucu sertifikanızın ortak anahtarını. cer biçiminde yüklemeniz gerekir.
+
+   ![Sertifika ekleme](./media/end-to-end-ssl-portal/addcert.png)
+
+   Standard_v2 ve WAF_v2 uygulama ağ geçitleri için, arka uç sunucu sertifikasının kök sertifikasını. cer biçiminde yüklemeniz gerekir. Arka uç sertifikası iyi bilinen bir CA tarafından verildiyse, **Iyi BILINEN CA sertifikasını kullan** onay kutusunu seçebilirsiniz ve ardından bir sertifikayı karşıya yüklemeniz gerekmez.
+
+   ![Güvenilen kök sertifika ekle](./media/end-to-end-ssl-portal/trustedrootcert-portal.png)
 
 8. **Kaydet**’i seçin.
 

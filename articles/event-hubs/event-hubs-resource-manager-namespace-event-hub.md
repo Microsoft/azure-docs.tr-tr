@@ -1,6 +1,6 @@
 ---
-title: Tüketici grubu - Azure Event Hubs bir olay hub'ı oluşturun | Microsoft Docs
-description: Bir olay hub'ı ve Azure Resource Manager şablonlarını kullanarak bir tüketici grubu ile bir Event Hubs ad alanı oluşturma
+title: "Hızlı başlangıç: Tüketici grubu ile bir olay hub 'ı oluşturma-Azure Event Hubs"
+description: "Hızlı başlangıç: Azure Resource Manager şablonları kullanarak bir olay hub 'ı ve bir tüketici grubuyla Event Hubs ad alanı oluşturma"
 services: event-hubs
 documentationcenter: .net
 author: ShubhaVijayasarathy
@@ -9,37 +9,37 @@ editor: ''
 ms.assetid: 28bb4591-1fd7-444f-a327-4e67e8878798
 ms.service: event-hubs
 ms.devlang: tbd
-ms.topic: article
+ms.topic: quickstart
 ms.tgt_pltfrm: dotnet
 ms.workload: na
-ms.date: 07/02/2019
+ms.date: 11/05/2019
 ms.author: shvija
-ms.openlocfilehash: 29e494b23176f9e936816a371a09e1c4ffeceae0
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.openlocfilehash: b262f5f4122256a55c005002c4323205a5b564f0
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67537998"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73717652"
 ---
-# <a name="quickstart-create-an-event-hub-by-using-an-azure-resource-manager-template"></a>Hızlı Başlangıç: Bir Azure Resource Manager şablonu kullanarak bir olay hub'ı oluşturma
+# <a name="quickstart-create-an-event-hub-by-using-an-azure-resource-manager-template"></a>Hızlı başlangıç: Azure Resource Manager şablonu kullanarak bir olay hub 'ı oluşturma
 
 Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Olay Hub’larının ayrıntılı genel bakışı için bkz. [Olay Hub’larına genel bakış](event-hubs-about.md) ve [Olay Hub’ları özellikleri](event-hubs-features.md).
 
-Bu hızlı başlangıçta, bir olay hub'ı kullanarak oluşturduğunuz bir [Azure Resource Manager şablonu](../azure-resource-manager/resource-group-overview.md). Türünde bir ad alanı oluşturmak için bir Azure Resource Manager şablonu dağıtma [Event Hubs](event-hubs-what-is-event-hubs.md), bir olay hub'ı ile. Makalede nasıl tanımlamak için hangi kaynaklara dağıtılır ve parametrelerin nasıl dağıtıldığının ve dağıtım yürütülürken belirtilen gösterilmektedir. Bu şablonu kendi dağıtımlarınız için kullanabilir veya kendi gereksinimlerinize göre özelleştirebilirsiniz. Şablonları oluşturma hakkında daha fazla bilgi için bkz: [Azure Resource Manager şablonları yazma][Authoring Azure Resource Manager templates]. JSON söz dizimi ve bir şablonunda kullanmak için özellikler için bkz: [Microsoft.EventHub kaynak türleri](/azure/templates/microsoft.eventhub/allversions).
+Bu hızlı başlangıçta, bir [Azure Resource Manager şablonu](../azure-resource-manager/resource-group-overview.md)kullanarak bir olay hub 'ı oluşturursunuz. Bir Azure Resource Manager şablonunu, bir olay hub 'ı ile [Event Hubs](event-hubs-what-is-event-hubs.md)türünde bir ad alanı oluşturmak üzere dağıtırsınız. Makalede hangi kaynakların dağıtıldığını ve dağıtım yürütüldüğünde belirtilen parametrelerin nasıl tanımlanacağı gösterilmektedir. Bu şablonu kendi dağıtımlarınız için kullanabilir veya kendi gereksinimlerinize göre özelleştirebilirsiniz. Şablon oluşturma hakkında daha fazla bilgi için bkz. [Azure Resource Manager şablonları yazma][Authoring Azure Resource Manager templates]. Bir şablonda kullanılacak JSON sözdizimi ve özellikler için bkz. [Microsoft. EventHub kaynak türleri](/azure/templates/microsoft.eventhub/allversions).
 
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="create-an-event-hub"></a>Olay hub’ı oluşturma
 
-Bu hızlı başlangıçta, kullandığınız bir [var olan bir hızlı başlangıç şablonunu](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-eventhubs-create-namespace-and-eventhub/azuredeploy.json):
+Bu hızlı başlangıçta, [mevcut bir hızlı başlangıç şablonunu](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-eventhubs-create-namespace-and-eventhub/azuredeploy.json)kullanacaksınız:
 
 [!code-json[create-azure-event-hub-namespace](~/quickstart-templates/101-eventhubs-create-namespace-and-eventhub/azuredeploy.json)]
 
-Daha fazla şablon örnekleri bulmak için bkz: [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/?term=eventhub&pageNumber=1&sort=Popular).
+Daha fazla şablon örneği bulmak için bkz. [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/?term=eventhub&pageNumber=1&sort=Popular).
 
 Şablonu dağıtmak için:
 
-1. Seçin **deneyin** gelen aşağıdaki kod bloğunu ve ardından Azure bulut kabuğunda oturum açmak için yönergeleri izleyin.
+1. Aşağıdaki kod bloğundan **deneyin** ' i seçin ve ardından Azure Cloud Shell 'de oturum açmak için yönergeleri izleyin.
 
    ```azurepowershell-interactive
    $projectName = Read-Host -Prompt "Enter a project name that is used for generating resource names"
@@ -53,14 +53,14 @@ Daha fazla şablon örnekleri bulmak için bkz: [Azure hızlı başlangıç şab
    Write-Host "Press [ENTER] to continue ..."
    ```
 
-   Bir olay hub'ı oluşturmak için birkaç dakika sürer.
+   Bir olay hub 'ı oluşturmak birkaç dakika sürer.
 
-1. Seçin **kopyalama** PowerShell betiğini kopyalanacak.
-1. Kabuk konsolun sağ tıklayın ve ardından **Yapıştır**.
+1. PowerShell betiğini kopyalamak için **Kopyala** ' yı seçin.
+1. Kabuk konsoluna sağ tıklayın ve ardından **Yapıştır**' ı seçin.
 
 ## <a name="verify-the-deployment"></a>Dağıtımı doğrulama
 
-Dağıtımı doğrulamak ya da kaynak grubundan açabilirsiniz [Azure portalında](https://portal.azure.com), veya aşağıdaki Azure PowerShell betiğini kullanın.  Cloud shell hala açık değilse, ilk satırın (Read-Host) kopyalama/çalıştırma gerekmez.
+Dağıtımı doğrulamak için [Azure Portal](https://portal.azure.com)kaynak grubunu açabilir ya da aşağıdaki Azure PowerShell betiğini kullanabilirsiniz.  Cloud Shell hala açıksa, ilk satırı (Read-Host) kopyalamanız/çalıştırmanız gerekmez.
 
 ```azurepowershell-interactive
 $projectName = Read-Host -Prompt "Enter the same project name that you used in the last procedure"
@@ -74,7 +74,7 @@ Write-Host "Press [ENTER] to continue ..."
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığınız kaynakları temizleyin. Cloud shell hala açık değilse, ilk satırın (Read-Host) kopyalama/çalıştırma gerekmez.
+Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığınız kaynakları temizleyin. Cloud Shell hala açıksa, ilk satırı (Read-Host) kopyalamanız/çalıştırmanız gerekmez.
 
 ```azurepowershell-interactive
 $projectName = Read-Host -Prompt "Enter the same project name that you used in the last procedure"
@@ -87,7 +87,7 @@ Write-Host "Press [ENTER] to continue ..."
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, bir Event Hubs ad alanı ve bir olay hub'ında ad alanı oluşturdunuz. Olayları gönderme (veya) bir olay hub'ından olay alma hakkında adım adım yönergeler için bkz **olayları alıp göndermek** öğreticiler:
+Bu makalede bir Event Hubs ad alanı ve ad alanında bir olay hub 'ı oluşturdunuz. Olay Hub 'ından olay alma (veya) olayları gönderme hakkında adım adım yönergeler için, bkz. **olayları gönderme ve alma** öğreticileri:
 
 - [.NET Core](event-hubs-dotnet-standard-getstarted-send.md)
 - [.NET Framework](event-hubs-dotnet-framework-getstarted-send.md)

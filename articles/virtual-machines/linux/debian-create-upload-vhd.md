@@ -1,40 +1,39 @@
 ---
-title: Azure'da bir Debian Linux VHD hazırlama | Microsoft Docs
-description: Azure'da dağıtım için Debian VHD görüntüleri oluşturmayı öğrenin.
+title: Azure 'da bir debir Linux VHD hazırlama
+description: Azure 'da dağıtım için deni VHD görüntüleri oluşturmayı öğrenin.
 services: virtual-machines-linux
 documentationcenter: ''
 author: szarkos
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: a6de7a7c-cc70-44e7-aed0-2ae6884d401a
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
 ms.date: 11/13/2018
 ms.author: szark
-ms.openlocfilehash: 6ef0a9f6efbf5f8398ba242150b2eb6102875f7e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7f371e2681ecc2b3bb4bcb3e1a8b642061dc2449
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60799288"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036468"
 ---
 # <a name="prepare-a-debian-vhd-for-azure"></a>Azure için Debian VHD hazırlama
 ## <a name="prerequisites"></a>Önkoşullar
-Bu bölümde, zaten bir Debian Linux işletim sistemi indirilen bir .iso dosyasından yüklediğiniz varsayılarak hazırlanmıştır [Debian Web sitesi](https://www.debian.org/distrib/) bir sanal sabit diske. Birden çok araç, .vhd dosyaları oluşturmak için mevcut; Hyper-V, yalnızca bir örnektir. Hyper-V kullanma yönergeleri için bkz: [Hyper-V rolünü yükleme ve sanal makine yapılandırma](https://technet.microsoft.com/library/hh846766.aspx).
+Bu bölümde, [de, Web sitesinden](https://www.debian.org/distrib/) bir sanal sabit diske indirilen bir. iso dosyasından bir de, Linux işletim sistemini zaten yüklemiş olduğunuz varsayılmaktadır. . Vhd dosyaları oluşturmak için birden çok araç var; Hyper-V yalnızca bir örnektir. Hyper-V ' y i kullanma hakkında yönergeler için bkz. [Hyper-v rolünü yükleyip sanal makineyi yapılandırma](https://technet.microsoft.com/library/hh846766.aspx).
 
 ## <a name="installation-notes"></a>Yükleme notları
-* Ayrıca bkz: [genel Linux yükleme notları](create-upload-generic.md#general-linux-installation-notes) Linux için Azure hazırlama hakkında daha fazla ipucu için.
-* Azure'da yeni VHDX biçimi desteklenmiyor. Disk Hyper-V Yöneticisi'ni kullanarak VHD biçimine dönüştürebilir veya **convert-vhd** cmdlet'i.
-* Linux sistemini yüklerken LVM (genellikle birçok yüklemeleri için varsayılan) yerine standart bölümlerini kullanmanız önerilir. Özellikle bir işletim sistemi diski hiç sorun giderme için başka bir VM'ye bağlı gerekiyorsa, bu kopyalanan sanal makineler ile ad çakışmalarını LVM uğraşmasına gerek kalmaz. [LVM'yi](configure-lvm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) veya [RAID](configure-raid.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) veri disklerinde, tercih etmeleri durumunda kullanılıyor olabilir.
-* İşletim sistemi diski üzerinde takas bölümü yapılandırmayın. Azure Linux Aracısı, geçici kaynak diski üzerinde takas dosyası oluşturmak için yapılandırılabilir. Aşağıdaki adımlarda daha fazla bilgi bulunabilir.
-* Tüm VHD'leri azure'da bir sanal Boyut 1 MB ile uyumlu olması gerekir. Ham bir diskten VHD'ye dönüştürme yaparken, ham disk boyutu 1 MB dönüştürmeden önce bir çok olduğundan emin olmalısınız. Daha fazla bilgi için [Linux yükleme notları](create-upload-generic.md#general-linux-installation-notes).
+* Ayrıca bkz. Azure için Linux hazırlama hakkında daha fazla ipucu için bkz. [Genel Linux yükleme notları](create-upload-generic.md#general-linux-installation-notes) .
+* Yeni VHDX biçimi Azure 'da desteklenmez. Hyper-V Yöneticisi 'Ni veya **Convert-VHD** cmdlet 'ini kullanarak diski vhd biçimine dönüştürebilirsiniz.
+* Linux sistemini yüklerken, LVM yerine standart bölümler kullanmanız önerilir (genellikle çoğu yükleme için varsayılan değer). Bu, özellikle de bir işletim sistemi diskinin sorun gidermeye yönelik başka bir VM 'ye bağlanması gerekiyorsa, kopyalanmış VM 'lerle LVM adı çakışmalarını önler. Tercih edilen durumlarda [LVM](configure-lvm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) veya [RAID](configure-raid.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) , veri disklerinde kullanılabilir.
+* İşletim sistemi diski üzerinde takas bölümü yapılandırmayın. Azure Linux Aracısı, geçici kaynak diskinde bir takas dosyası oluşturmak için yapılandırılabilir. Aşağıdaki adımlarda daha fazla bilgi bulabilirsiniz.
+* Azure 'daki tüm VHD 'ler, 1 MB 'a hizalanmış bir sanal boyuta sahip olmalıdır. Bir ham diskten VHD 'ye dönüştürme yaparken,, dönüştürmeden önce ham disk boyutunun 1 MB 'ın katı olduğundan emin olmanız gerekir. Daha fazla bilgi için bkz. [Linux yükleme notları](create-upload-generic.md#general-linux-installation-notes).
 
-## <a name="use-azure-manage-to-create-debian-vhds"></a>Debian VHD oluşturmak için Azure Yönet'i kullanın
-Azure için Debian VHD gibi oluşturmak için kullanılabilen araçları vardır [azure-yönetme](https://github.com/credativ/azure-manage) komut dosyalarını [Credativ](https://www.credativ.com/). Bu, sıfırdan bir görüntü oluşturma ve önerilen yaklaşımdır. Örneğin, bir Debian 8 VHD çalıştırma aşağıdaki oluşturmak için indirmek için komutları `azure-manage` yardımcı programını (ve bağımlılıkları) çalıştırıp `azure_build_image` betiği:
+## <a name="use-azure-manage-to-create-debian-vhds"></a>Azure-Manage kullanarak detem VHD 'leri oluşturun
+Azure için Azure-Manage betikleri, [Credadtiv](https://www.credativ.com/)içindeki [Azure-Manage](https://github.com/credativ/azure-manage) betikleri gibi araçlar oluşturmaya yönelik araçlar mevcuttur. Bu, sıfırdan bir görüntü oluşturulmasına karşı önerilen yaklaşımdır. Örneğin, bir debir 8 VHD oluşturmak için, `azure-manage` yardımcı programını (ve bağımlılıklarını) indirmek ve `azure_build_image` betiğini çalıştırmak için aşağıdaki komutları çalıştırın:
 
     # sudo apt-get update
     # sudo apt-get install git qemu-utils mbr kpartx debootstrap
@@ -48,22 +47,22 @@ Azure için Debian VHD gibi oluşturmak için kullanılabilen araçları vardır
     # sudo azure_build_image --option release=jessie --option image_size_gb=30 --option image_prefix=debian-jessie-azure section
 
 
-## <a name="manually-prepare-a-debian-vhd"></a>El ile bir Debian VHD hazırlama
-1. Hyper-V Yöneticisi'nde, sanal makineyi seçin.
-2. Tıklayın **Connect** sanal makine için bir konsol penceresi açın.
-3. Ardından bir ISO kullanarak işletim sistemi yüklü değilse, ilgili herhangi bir satırı Açıklama "`deb cdrom`" içinde `/etc/apt/source.list`.
+## <a name="manually-prepare-a-debian-vhd"></a>Bir deni VHD 'YI el ile hazırlama
+1. Hyper-V Yöneticisi 'nde sanal makineyi seçin.
+2. **Bağlan** ' a tıklayarak sanal makine için bir konsol penceresi açın.
+3. İşletim sistemini bir ISO kullanarak yüklediyseniz `/etc/apt/source.list`"`deb cdrom`" ile ilgili herhangi bir satırı açıklama olarak ekleyin.
 
-4. Düzen `/etc/default/grub` dosya ve değiştirme **GRUB_CMDLINE_LINUX** gibi ek çekirdek parametreleri için Azure içerecek şekilde parametresi.
+4. `/etc/default/grub` dosyasını düzenleyin ve Azure için ek çekirdek parametreleri eklemek üzere **GRUB_CMDLINE_LINUX** parametresini aşağıdaki şekilde değiştirin.
    
         GRUB_CMDLINE_LINUX="console=tty0 console=ttyS0,115200n8 earlyprintk=ttyS0,115200"
 
-5. Grub'ı yeniden derleyin ve çalıştırın:
+5. Grub 'yi yeniden oluşturun ve çalıştırın:
 
         # sudo update-grub
 
-6. Debian'ın Azure depoları için /etc/apt/sources.list Debian 8 veya 9 ekleyin:
+6. De, 8 veya 9 ' un Azure depolarını/etc/apt/sources.exe listesine ekleyin:
 
-    **Debian 8.x "Jessie"**
+    **Desek8. x "Jese"**
 
         deb http://debian-archive.trafficmanager.net/debian jessie main
         deb-src http://debian-archive.trafficmanager.net/debian jessie main
@@ -74,7 +73,7 @@ Azure için Debian VHD gibi oluşturmak için kullanılabilen araçları vardır
         deb http://debian-archive.trafficmanager.net/debian jessie-backports main
         deb-src http://debian-archive.trafficmanager.net/debian jessie-backports main
 
-    **Debian 9.x "Uzat"**
+    **9. x "uzat"**
 
         deb http://debian-archive.trafficmanager.net/debian stretch main
         deb-src http://debian-archive.trafficmanager.net/debian stretch main
@@ -86,27 +85,27 @@ Azure için Debian VHD gibi oluşturmak için kullanılabilen araçları vardır
         deb-src http://debian-archive.trafficmanager.net/debian stretch-backports main
 
 
-7. Azure Linux Aracısı'nı yükleyin:
+7. Azure Linux aracısını yükler:
    
         # sudo apt-get update
         # sudo apt-get install waagent
 
-8. Debian 9 + için bu yeni Debian bulut çekirdek azure'da sanal makineler ile kullanılmak için önerilir. Bu yeni çekirdek yüklemek için önce aşağıdaki içeriklerle /etc/apt/preferences.d/linux.pref adlı bir dosya oluşturun:
+8. Deler 9 + için, Azure 'da VM 'lerle kullanılmak üzere yeni de, bulut çekirdeğini kullanmanız önerilir. Bu yeni çekirdeği yüklemek için ilk olarak/etc/apt/Preferences.exe \ \ Linux.exe ' adlı bir dosyayı aşağıdaki içeriklerle oluşturun:
    
         Package: linux-* initramfs-tools
         Pin: release n=stretch-backports
         Pin-Priority: 500
    
-    Yeni bir Debian bulut çekirdek yüklemek için çalıştırın "sudo apt-get install linux-görüntü-bulut-amd64".
+    Ardından, yeni detem bulut çekirdeğini yüklemek için "sudo apt-get Install Linux-Image-Cloud-amd64" öğesini çalıştırın.
 
-9. Sanal makinenin sağlamasını kaldırma ve Azure'da sağlama için hazırlamak ve çalıştırın:
+9. Sanal makinenin sağlamasını kaldırır ve Azure 'da sağlama için hazırlayın ve şunu çalıştırın:
    
         # sudo waagent –force -deprovision
         # export HISTSIZE=0
         # logout
 
-10. Tıklayın **eylem** kapatma aşağı Hyper-V Yöneticisi'nde ->. Linux VHD'nizi artık Azure'a yüklenmek hazırdır.
+10. Hyper-V Yöneticisi 'nde **eylem** -> Kapat ' a tıklayın. Linux VHD 'niz artık Azure 'a yüklenmeye hazırdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Artık Azure'da yeni sanal makineler oluşturmak için Debian sanal sabit diski kullanmaya hazırsınız. Bu Azure'a .vhd dosyasını karşıya ilk kez kullanıyorsanız, bkz. [bir özel diskten Linux VM oluşturma](upload-vhd.md#option-1-upload-a-vhd).
+Artık Azure 'da yeni sanal makineler oluşturmak için de, sanal sabit diskinizi kullanmaya hazırsınız. . Vhd dosyasını ilk kez Azure 'a yüklüyorsanız, bkz. [özel bir diskten LINUX VM oluşturma](upload-vhd.md#option-1-upload-a-vhd).
 

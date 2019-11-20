@@ -1,183 +1,185 @@
 ---
-title: Azure maliyet Yönetimi verilerine erişim atama | Microsoft Docs
-description: Bu makalede, Azure maliyet Yönetimi verilerine erişim kapsamları çeşitli iznini atama rağmen gösterilmektedir.
+title: Azure maliyet yönetimi verilerine erişim atama
+description: Bu makalede, çeşitli erişim kapsamları için Azure maliyet yönetimi verilerine izin atama işlemi gösterilmektedir.
 services: cost-management
 keywords: ''
 author: bandersmsft
 ms.author: banders
-ms.date: 06/04/2019
+ms.date: 10/14/2019
 ms.topic: conceptual
 ms.service: cost-management
 manager: vitavor
 ms.custom: secdec18
-ms.openlocfilehash: 946a9bd7595692dddd157d01945fd15bdf1ab965
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ebc56d27b7adc8f1fea9eafabe1b211f3f0ad560
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66493764"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72375122"
 ---
-# <a name="assign-access-to-cost-management-data"></a>Maliyet Yönetimi verilerine erişim atama
+# <a name="assign-access-to-cost-management-data"></a>Maliyet yönetimi verilerine erişim atama
 
-Azure Kurumsal anlaşmalar için kullanıcılar, Azure portalında hem de kurumsal (EA) portalında verilen izinler, Azure maliyet Yönetimi verilerine bir kullanıcının erişim düzeyini tanımlayın. Diğer Azure hesap türleri, bir kullanıcının erişim düzeyine sahip kullanıcılar için için maliyet Yönetimi verilerine daha kolay olacaktır. Bu makalede, maliyet Yönetimi verilerine erişim atama aracılığıyla gösterilmektedir. Maliyet Yönetimi'nde kullanıcı görünümleri verileri için ve Azure Portalı'nda seçtiğiniz kapsamda erişime sahip oldukları kapsamına göre bu izinleri birleşimi atandıktan sonra.
+Azure Kurumsal sözleşmeleri olan kullanıcılar için, Azure portal ve Enterprise (EA) portalında verilen izinlerin bir birleşimi kullanıcının Azure maliyet yönetimi verilerine erişim düzeyini tanımlar. Diğer Azure hesabı türlerine sahip kullanıcılar için, bir kullanıcının maliyet yönetimi verilerine erişim düzeyini tanımlamak, Azure rol tabanlı erişim denetimi kullanılarak daha basittir. Bu makalede, maliyet yönetimi verilerine erişim atama işlemi adım adım açıklanmaktadır. İzin birleşimi atandıktan sonra Kullanıcı, erişim sahibi oldukları kapsamı ve Azure portal seçtikleri kapsama göre maliyet yönetimi 'ndeki verileri görüntüler.
 
-Bir kullanıcının seçtiği kapsam maliyet yönetimi, veri birleştirme sağlamak ve maliyet bilgilerini erişimi denetlemek için kullanılır. Kapsamları kullanırken, kullanıcılar çoklu seçim yoksa bunları. Bunun yerine, alt kapsamlar kadar geri alma ve sonra bunlar filtre görüntülemek istediklerini için aşağı daha büyük bir kapsam seçin. Veri birleştirme, bazı kişiler, alt kapsamlar aktarma hedefi bir üst kapsama erişimi olmaması nedeniyle anlamak önemlidir.
+Kullanıcının seçtiği kapsam, veri birleştirme sağlamak ve maliyet bilgilerine erişimi denetlemek için maliyet yönetimi genelinde kullanılır. Kapsamları kullanırken, kullanıcılar bunları çoklu seçmezsiniz. Bunun yerine, alt kapsamların toplanan daha büyük bir kapsamı seçer ve ardından bunları görüntülemek istedikleri öğeye göre filtreler. Bazı kişilerin alt kapsamların bir üst kapsama erişimi olmaması gerektiğinden, veri birleştirme anlamak önemlidir.
 
-İzleme [Azure maliyet yönetimi ile erişim atama](https://www.youtube.com/watch?v=J997ckmwTa8) video maliyetleri ve Azure rol tabanlı erişim denetimi ile ücretleri görüntüleme erişimi atama hakkında bilgi edinin.
+Azure rol tabanlı erişim denetimi ile maliyetleri ve ücretleri görüntüleme erişimi atama hakkında bilgi edinmek için [Azure maliyet yönetimi videosu Ile nasıl erişim atayacağınızı](https://www.youtube.com/watch?v=J997ckmwTa8) izleyin.
 
 >[!VIDEO https://www.youtube.com/embed/J997ckmwTa8]
 
-## <a name="cost-management-scopes"></a>Maliyet Yönetimi kapsamları
+## <a name="cost-management-scopes"></a>Maliyet yönetimi kapsamları
 
-Maliyet yönetimi, çeşitli Azure hesabı türlerini destekler. Desteklenen bir hesap türleri için tam listesini görüntülemek için bkz: [anlamak maliyet Yönetimi verilerine](understand-cost-mgt-data.md). Hesap türünü kullanılabilir kapsamlarını belirler.
+Maliyet yönetimi çeşitli Azure hesap türlerini destekler. Desteklenen hesap türlerinin tam listesini görüntülemek için bkz. [maliyet yönetimi verilerini anlama](understand-cost-mgt-data.md). Hesap türü kullanılabilir kapsamları belirler.
 
-### <a name="azure-ea-subscription-scopes"></a>Azure EA aboneliği kapsamları
+### <a name="azure-ea-subscription-scopes"></a>Azure EA abonelik kapsamları
 
-Azure EA abonelikleri için maliyet verilerini görüntülemek için bir kullanıcı en az bir veya daha fazla aşağıdaki kapsamları okuma erişimi gerekir.
+Azure EA abonelikleriyle ilgili maliyet verilerini görüntülemek için, bir kullanıcının aşağıdaki kapsamlardan bir veya daha fazlasına en azından okuma erişimi olması gerekir.
 
-| **Kapsam** | **Tanımlanma yeri** | **Verileri görüntülemek için gerekli erişim** | **Önkoşul EA ayarı** | **Verileri bir araya getirir** |
+| **Kapsam** | **Tanımlanma yeri** | **Verileri görüntülemek için gerekli erişim** | **Önkoşul EA ayarı** | **Verileri birleştirir** |
 | --- | --- | --- | --- | --- |
-| Faturalama hesabı<sup>1</sup> | [https://ea.azure.com](https://ea.azure.com/) | Kuruluş Yöneticisi | None | Kurumsal sözleşmedeki tüm abonelikler |
-| Bölüm | [https://ea.azure.com](https://ea.azure.com/) | Bölüm Yöneticisi | **Ücretleri görüntüle DA** etkin | Bölüme bağlı olan kayıt hesabına ait olan tüm abonelikler |
-| Kayıt hesabı<sup>2</sup> | [https://ea.azure.com](https://ea.azure.com/) | Hesap Sahibi | **Saniye başına AO ücretleri görüntüle** etkin | Kayıt hesabındaki tüm abonelikler |
-| Yönetim grubu | [https://portal.azure.com](https://portal.azure.com/) | Maliyet Yönetimi Okuyucusu (veya Okuyucu) | **Saniye başına AO ücretleri görüntüle** etkin | Yönetim grubu altındaki tüm abonelikler |
-| Abonelik | [https://portal.azure.com](https://portal.azure.com/) | Maliyet Yönetimi Okuyucusu (veya Okuyucu) | **Saniye başına AO ücretleri görüntüle** etkin | Abonelikteki tüm kaynaklar/kaynak grupları |
-| Kaynak grubu | [https://portal.azure.com](https://portal.azure.com/) | Maliyet Yönetimi Okuyucusu (veya Okuyucu) | **Saniye başına AO ücretleri görüntüle** etkin | Kaynak grubundaki tüm kaynaklar |
+| Faturalama hesabı<sup>1</sup> | [https://ea.azure.com](https://ea.azure.com/) | Kuruluş Yöneticisi | Hiçbiri | Kurumsal sözleşmedeki tüm abonelikler |
+| Bölüm | [https://ea.azure.com](https://ea.azure.com/) | Bölüm Yöneticisi | **Da görüntüleme ücretleri** etkin | Bölüme bağlı olan kayıt hesabına ait olan tüm abonelikler |
+| Kayıt hesabı<sup>2</sup> | [https://ea.azure.com](https://ea.azure.com/) | Hesap Sahibi | **Ao görüntüleme ücretleri** etkin | Kayıt hesabındaki tüm abonelikler |
+| Yönetim grubu | [https://portal.azure.com](https://portal.azure.com/) | Maliyet Yönetimi Okuyucusu (veya Okuyucu) | **Ao görüntüleme ücretleri** etkin | Yönetim grubu altındaki tüm abonelikler |
+| Abonelik | [https://portal.azure.com](https://portal.azure.com/) | Maliyet Yönetimi Okuyucusu (veya Okuyucu) | **Ao görüntüleme ücretleri** etkin | Abonelikteki tüm kaynaklar/kaynak grupları |
+| Kaynak grubu | [https://portal.azure.com](https://portal.azure.com/) | Maliyet Yönetimi Okuyucusu (veya Okuyucu) | **Ao görüntüleme ücretleri** etkin | Kaynak grubundaki tüm kaynaklar |
 
-<sup>1</sup> fatura hesabın da Kurumsal Anlaşma ya da kayıt adlandırılır.
+<sup>1</sup> faturalandırma hesabına kurumsal anlaşma veya kayıt olarak da başvurulur.
 
 <sup>2</sup> kayıt hesabı da hesap sahibi olarak adlandırılır.
 
-Aşağıdaki diyagramda, rolleri ile maliyet Yönetimi kapsamları ve EA portal ayarları arasındaki ilişkiyi gösterir.
+Aşağıdaki diyagramda, rol ve EA Portal ayarlarıyla maliyet yönetimi kapsamları arasındaki ilişki gösterilmektedir.
 
-![Rolleri ile maliyet Yönetimi kapsamları ve EA portal ayarları ilişkiyi gösteren diyagram](./media/assign-access-acm-data/scope-access-relationship-diagram.png)
+![Roller ve EA Portal ayarlarıyla maliyet yönetimi kapsamları arasındaki ilişkiyi gösteren diyagram](./media/assign-access-acm-data/scope-access-relationship-diagram.png)
 
-Zaman **DA ücretleri görüntüle** devre dışı EA Portalı'nda belirten bir ileti görürsünüz *maliyetleri, kuruluşunuz için devre dışı* denediğinizde Departmanlar ve hesapları için maliyetleri görüntülemek üzere.
+EA portalında **da görüntüleme ücretleri** devre dışı bırakıldığında, departmanlar ve hesapların maliyetlerini görüntülemeye çalıştığınızda *Kuruluşunuz için maliyetleri devre dışı* bildiren bir ileti görürsünüz.
 
-Benzer şekilde, **AO ücretleri görüntüle** devre dışı bırakıldı EA Portalı'nda belirten bir ileti görürsünüz *maliyetleri, kuruluşunuz için devre dışı* kayıt hesapları, Yönetim grupları maliyetleri görüntülemeye çalıştığınızda Abonelikler ve kaynak grupları.
+Benzer şekilde, EA portalında, **Ao görüntüleme ücretleri** devre dışı bırakıldığında, kayıt hesapları, yönetim grupları, abonelikler ve kaynak grupları için maliyetleri görüntülemeye çalıştığınızda *Kuruluşunuz için maliyetleri devre dışı* olarak belirten bir ileti görürsünüz.
 
-## <a name="other-azure-account-scopes"></a>Diğer Azure hesabı kapsamları
+## <a name="other-azure-account-scopes"></a>Diğer Azure hesap kapsamları
 
-Diğer Azure aboneliklerine maliyet verilerini görüntülemek için bir kullanıcı en az bir veya daha fazla aşağıdaki kapsamları okuma erişimi gerekir:
+Diğer Azure abonelikleriyle ilgili maliyet verilerini görüntülemek için, bir kullanıcının aşağıdaki kapsamlardan bir veya daha fazlasına en azından okuma erişimi olması gerekir:
 
 - Azure hesabı
 - Yönetim grubu
 - Kaynak grubu
 
-## <a name="enable-access-to-costs-in-the-ea-portal"></a>EA portal maliyetlerini erişimi etkinleştirme
+Çeşitli kapsamlar, iş ortaklarının müşterileri bir Microsoft Müşteri sözleşmesine ekledikten sonra kullanılabilir. CSP müşterileri, CSP iş ortakları tarafından etkinleştirildiğinde maliyet yönetimi özelliklerini kullanabilir. Daha fazla bilgi için bkz. [iş ortakları Için Azure maliyet yönetimi ile çalışmaya başlama](get-started-partners.md).
 
-Departman kapsamı gerektirir **DA ücretleri görüntüle** seçeneği **etkin** EA portalında. Diğer tüm kapsamları **AO ücretleri görüntüle** seçeneği **etkin** EA portalında.
+## <a name="enable-access-to-costs-in-the-ea-portal"></a>EA portalındaki maliyetlere erişimi etkinleştir
 
-Seçeneği etkinleştirmek için:
+Departman kapsamı, EA portalında da **etkin** olan **da görüntüleme ücretleri** seçeneğini gerektirir. Diğer tüm kapsamlar, EA portalında **etkin** bir şekilde **görüntüleme ücretleri** seçeneği gerektirir.
 
-1. EA portalında oturum açın [ https://ea.azure.com ](https://ea.azure.com) Kurumsal Yönetici hesabı.
-2. Seçin **Yönet** sol bölmesinde.
-3. Maliyet yönetimi, kapsamları için ücret seçeneğini etkinleştirmek için erişim sağlamak istiyorsanız **DA ücretleri görüntüle** ve/veya **AO ücretleri görüntüle**.  
-    ![Seçenekleri DA ve saniye başına AO görünümü gösteren kayıt sekmesi ücretleri](./media/assign-access-acm-data/ea-portal-enrollment-tab.png)
+Bir seçeneği etkinleştirmek için:
 
-Görünüm ücret seçeneklerini etkinleştirildikten sonra çoğu kapsamları, ayrıca Azure portalında rol tabanlı erişim denetimi (RBAC) iznini yapılandırma gerektirir.
+1. Kurumsal Yönetici hesabıyla [https://ea.azure.com](https://ea.azure.com) ' de EA portalında oturum açın.
+2. Sol bölmedeki **Yönet** ' i seçin.
+3. Erişim sağlamak istediğiniz maliyet yönetimi kapsamları için, ücretlendirmeyi ve/veya **Ao görünüm ücretlerini** **görüntüleme ücreti** seçeneğini etkinleştirin.  
+    ![ ve AO gösteren 0 kayıt sekmesi ücret görüntüleme seçenekleri @ no__t-1
 
-## <a name="enterprise-administrator-role"></a>Kuruluş yöneticisi rolü
+Görüntüleme ücreti seçenekleri etkinleştirildikten sonra çoğu kapsam, Azure portal rol tabanlı erişim denetimi (RBAC) izin yapılandırması da gerektirir.
 
-Varsayılan olarak, bir kuruluş yöneticisi Faturalama hesabı (Kurumsal Anlaşma/kaydı) ve alt kapsamlar olan tüm diğer kapsamlar için erişim vardır. Kuruluş Yöneticisi, diğer kullanıcılar için kapsamlar için erişim atar. İş sürekliliği için en iyi uygulama olarak her zaman iki kullanıcı Kurumsal yönetici erişimine sahip olmalıdır. Aşağıdaki bölümlerde kapsamlar diğer kullanıcılar için Kurumsal Yönetici atama erişim gözden geçirme örnekleri var.
+## <a name="enterprise-administrator-role"></a>Kuruluş Yöneticisi rolü
 
-## <a name="assign-billing-account-scope-access"></a>Fatura hesabı kapsam erişim atama
+Varsayılan olarak, bir kuruluş yöneticisinin faturalandırma hesabına (Kurumsal Anlaşma/kayıt) ve alt kapsamlar olan diğer tüm kapsamlara erişimi vardır. Kuruluş Yöneticisi, diğer kullanıcılar için kapsamlara erişim atar. İş sürekliliği için en iyi uygulama olarak, Kurumsal Yönetici erişimine sahip her zaman iki kullanıcınız olmalıdır. Aşağıdaki bölümlerde, kuruluş yöneticisinin diğer kullanıcılara yönelik kapsamlara erişim atama örnekleri verilmiştir.
 
-Fatura hesabı kapsamı erişim EA portalında Kurumsal yönetici izni gerektirir. Kuruluş Yöneticisi tüm EA kaydı veya birden çok kayıtlar arasında maliyetlerini görüntüleme erişimine sahiptir. Azure portalında Faturalama hesabı kapsam için herhangi bir eylemi gereklidir.
+## <a name="assign-billing-account-scope-access"></a>Faturalandırma hesabı kapsamına erişim atama
 
-1. EA portalında oturum açın [ https://ea.azure.com ](https://ea.azure.com) Kurumsal Yönetici hesabı.
-2. Seçin **Yönet** sol bölmesinde.
-3. Üzerinde **kayıt** sekmesinde, yönetmek istediğiniz kaydı seçin.  
-    ![EA Portalı'nda kaydınız seçin](./media/assign-access-acm-data/ea-portal.png)
-4. Tıklayın **+ yönetici Ekle**.
-5. Yönetici Ekle iletişim kutusunda, kimlik doğrulama türünü seçin ve kullanıcının e-posta adresini yazın.
-6. Kullanıcı altında maliyet ve kullanım verileri, salt okunur erişimi olmaması gerekiyorsa **salt okunur**seçin **Evet**.  Aksi takdirde seçin **Hayır**.
-7. Tıklayın **Ekle** hesabı oluşturmak için.  
-    ![Ekleme Yöneticisi kutusunda gösterilen örnek bilgileri](./media/assign-access-acm-data/add-admin.png)
+Faturalandırma hesabı kapsamına erişim, EA portalında kurumsal yönetici izni gerektirir. Kuruluş yöneticisinin, tüm EA kaydı veya birden çok kayıt genelinde maliyetleri görüntüleme erişimi vardır. Faturalandırma hesabı kapsamında Azure portal hiçbir işlem yapılması gerekmez.
 
-Bu yeni kullanıcı maliyet Yönetimi'nde verilere erişmeden önce tamamlanması 30 dakika sürebilir.
+1. Kurumsal Yönetici hesabıyla [https://ea.azure.com](https://ea.azure.com) ' de EA portalında oturum açın.
+2. Sol bölmedeki **Yönet** ' i seçin.
+3. **Kayıt** sekmesinde, yönetmek istediğiniz kaydı seçin.  
+    ![ EA portalında kaydınız seçin @ no__t-1
+4. **+ Yönetici Ekle**' ye tıklayın.
+5. Yönetici Ekle kutusunda kimlik doğrulaması türünü seçin ve kullanıcının e-posta adresini yazın.
+6. Kullanıcının maliyet ve kullanım verilerine salt okuma erişimi olması gerekiyorsa, **salt okunurdur**' ın altında **Evet**' i seçin.  Aksi takdirde **Hayır**' ı seçin.
+7. Hesabı oluşturmak için **Ekle** ' ye tıklayın.  
+    @no__t-# no__t-1 Yönetici Ekle kutusunda gösterilen bilgiler
 
-### <a name="assign-department-scope-access"></a>Departman kapsam erişim atama
+Yeni kullanıcının maliyet yönetimi verilerine erişmesi 30 dakika kadar sürebilir.
 
-Departman kapsamı için EA portalında departman Yöneticisi (DA ücretleri görüntüle) erişim gerekir. Bölüm Yöneticisi maliyetleri ve bir departman veya birden çok bölümlerine ilişkili kullanım verilerini görüntüleme erişimine sahiptir. Veri bölümü için bölüm için bağlı bir kayıt hesabına ait tüm abonelikler içerir. Azure portalında herhangi bir eylemi gereklidir.
+### <a name="assign-department-scope-access"></a>Bölüm kapsamı erişimi atama
 
-1. EA portalında oturum açın [ https://ea.azure.com ](https://ea.azure.com) Kurumsal Yönetici hesabı.
-2. Seçin **Yönet** sol bölmesinde.
-3. Üzerinde **kayıt** sekmesinde, yönetmek istediğiniz kaydı seçin.
-4. Tıklayın **departmanı** sekmesine ve ardından **Yöneticisi Ekle**.
-5. Departman Yöneticisi Ekle iletişim kutusunda, kimlik doğrulaması türünü seçin ve ardından kullanıcının e-posta adresini yazın.
-6. Kullanıcı altında maliyet ve kullanım verileri, salt okunur erişimi olmaması gerekiyorsa **salt okunur**seçin **Evet**.  Aksi takdirde seçin **Hayır**.
-7. Departman yönetici izni vermek istediğiniz bölümleri seçin.
-8. Tıklayın **Ekle** hesabı oluşturmak için.  
-    ![Ekle departman Yöneticisi iletişim kutusunda gerekli bilgileri girin](./media/assign-access-acm-data/add-depart-admin.png)
+Departman kapsamına erişim, EA portalında Departman Yöneticisi (DA görüntüleme ücretleri) erişimine ihtiyaç duyar. Departman yöneticisinin, bir departmanla veya birden çok departmana ilişkin maliyetleri ve kullanım verilerini görüntüleme erişimi vardır. Departmanın verileri, departmana bağlı bir kayıt hesabına ait olan tüm abonelikleri içerir. Azure portal herhangi bir eylem gerekmiyor.
 
-## <a name="assign-enrollment-account-scope-access"></a>Kayıt hesabı kapsam erişim atama
+1. Kurumsal Yönetici hesabıyla [https://ea.azure.com](https://ea.azure.com) ' de EA portalında oturum açın.
+2. Sol bölmedeki **Yönet** ' i seçin.
+3. **Kayıt** sekmesinde, yönetmek istediğiniz kaydı seçin.
+4. **Departman** sekmesine tıklayın ve ardından **yönetici Ekle**' ye tıklayın.
+5. Bölüm Yöneticisi Ekle kutusunda kimlik doğrulaması türünü seçin ve ardından kullanıcının e-posta adresini yazın.
+6. Kullanıcının maliyet ve kullanım verilerine salt okuma erişimi olması gerekiyorsa, **salt okunurdur**' ın altında **Evet**' i seçin.  Aksi takdirde **Hayır**' ı seçin.
+7. Departman yönetici izni vermek istediğiniz departmanları seçin.
+8. Hesabı oluşturmak için **Ekle** ' ye tıklayın.  
+    ![ Departman Yöneticisi Ekle kutusuna gereken bilgileri girin @ no__t-1
 
-Kayıt hesabı kapsam erişim EA portalında hesap sahibi (saniye başına AO görünümü ücretleri) erişimi gerektirir. Hesap sahibinin kim maliyetlerini ve kullanım verileri kayıt hesaptan oluşturulan abonelikleriyle ilişkili görüntüleyebilirsiniz. Azure portalında herhangi bir eylemi gereklidir.
+## <a name="assign-enrollment-account-scope-access"></a>Kayıt hesabı kapsamına erişim atama
 
-1. EA portalında oturum açın [ https://ea.azure.com ](https://ea.azure.com) Kurumsal Yönetici hesabı.
-2. Seçin **Yönet** sol bölmesinde.
-3. Üzerinde **kayıt** sekmesinde, yönetmek istediğiniz kaydı seçin.
-4. Tıklayın **hesabı** sekmesine ve ardından **hesabı Ekle**.
-5. Hesabı Ekle kutusunda **departmanı** atanmamış ilişkilendirmek için hesap ya da devre dışı olarak bırakın.
-6. Kimlik doğrulaması türünü seçin ve hesap adını yazın.
-7. Kullanıcının e-posta adresini yazın ve isteğe bağlı olarak maliyet merkezini girin.
-8. Tıklayarak **Ekle** hesabı oluşturmak için.  
-    ![bir kayıt hesabı için Hesap Ekle kutusuna gerekli bilgileri girin](./media/assign-access-acm-data/add-account.png)
+Kayıt hesabı kapsamına erişim, EA portalında hesap sahibi (AO görüntüleme ücretleri) erişimi gerektirir. Hesap sahibi, bu kayıt hesabından oluşturulan aboneliklerle ilişkili maliyetleri ve kullanım verilerini görüntüleyebilir. Azure portal herhangi bir eylem gerekmiyor.
 
-Yukarıdaki adımları tamamladıktan sonra kullanıcı hesabının Enterprise portal kayıt hesabı haline gelir ve abonelikleri oluşturabilirsiniz. Kullanıcı, oluşturdukları abonelikler için maliyet ve kullanım verileri erişebilir.
+1. Kurumsal Yönetici hesabıyla [https://ea.azure.com](https://ea.azure.com) ' de EA portalında oturum açın.
+2. Sol bölmedeki **Yönet** ' i seçin.
+3. **Kayıt** sekmesinde, yönetmek istediğiniz kaydı seçin.
+4. **Hesap** sekmesine tıklayın ve ardından **Hesap Ekle**' ye tıklayın.
+5. Hesap Ekle kutusunda, hesabı ilişkilendirilecek **departmanı** seçin veya atanmamış olarak bırakın.
+6. Kimlik doğrulama türünü seçin ve hesap adını yazın.
+7. Kullanıcının e-posta adresini yazın ve isteğe bağlı olarak maliyet merkezini yazın.
+8. Hesabı oluşturmak için **Ekle** ' ye tıklayın.  
+    ![ kayıt hesabının hesap ekle kutusuna gerekli bilgileri girin @ no__t-1
 
-## <a name="assign-management-group-scope-access"></a>Yönetim grubu kapsamı erişim atama
+Yukarıdaki adımları tamamladıktan sonra, Kullanıcı hesabı kurumsal portalda bir kayıt hesabı haline gelir ve abonelikler oluşturabilir. Kullanıcı, oluşturdukları abonelikler için maliyet ve kullanım verilerine erişebilir.
 
-Bir yönetim grubu kapsamı erişim, en az maliyet Yönetimi Okuyucu (veya Okuyucu) izni gerektirir. Azure portalında bir yönetim grubu için izinleri yapılandırabilirsiniz. En az, diğerleri için erişimi etkinleştirmek yönetim grubu için kullanıcı erişimi Yöneticisi'ni (veya sahibi) iznine de sahip olmalıdır. Ve Azure EA hesapları için de etkinleştirdiyseniz gerekir **AO ücretleri görüntüle** EA portalında ayarlama.
+## <a name="assign-management-group-scope-access"></a>Yönetim grubu kapsamına erişim atama
+
+Yönetim grubu kapsamını görüntüleme erişimi için en azından maliyet yönetimi okuyucusu (veya okuyucu) izni gerekir. Azure portal bir yönetim grubu için izinleri yapılandırabilirsiniz. Diğer kullanıcıların erişimini etkinleştirmek için yönetim grubu için en azından Kullanıcı erişimi Yöneticisi (veya sahibi) izninizin olması gerekir. Ayrıca, Azure EA hesaplarında de EA portalındaki **Ao görünüm ücretleri** ayarını etkinleştirmiş olmanız gerekir.
 
 1. [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
-2. Seçin **tüm hizmetleri** ve Kenar çubuğunda arama _Yönetim grupları_, ardından **Yönetim grupları**.
-3. Yönetim grubu ve hiyerarşide seçebilirsiniz.
-4. Yönetim grubunuzun adının yanında, tıklayın **ayrıntıları**.
-5. Seçin **erişim denetimi (IAM)** sol bölmeden.
+2. Yan çubukta **tüm hizmetler** ' i seçin, _Yönetim grupları_' nı arayın ve **Yönetim grupları**' nı seçin.
+3. Hiyerarşide yönetim grubunu seçin.
+4. Yönetim grubunuzun adının yanındaki **Ayrıntılar**' a tıklayın.
+5. Sol bölmeden **Access Control (IAM)** seçeneğini belirleyin.
 6. **Ekle**'ye tıklayın.
-7. Altında **rol**seçin **maliyet Yönetimi okuyucu**.
-8. Altında **erişim Ata**seçin **Azure AD kullanıcı, Grup veya uygulama**.
-9. Erişim atamak için arama yapın ve ardından kullanıcıyı seçin.
-10. **Kaydet**’e tıklayın.  
-    ![bir yönetim grubu için Ekle izinler kutusunda örneği bilgileri](./media/assign-access-acm-data/add-permissions.png)
+7. **Rol**altında **maliyet yönetimi okuyucusu**' nu seçin.
+8. **Erişim ata**' nın altında **Azure AD Kullanıcı, Grup veya uygulama**' yı seçin.
+9. Erişim atamak için, kullanıcıyı arayın ve ardından seçin.
+10. **Kaydet** düğmesine tıklayın.  
+    ![ bir yönetim grubu için izin Ekle kutusunda (örneğin, @ no__t-1)
 
-## <a name="assign-subscription-scope-access"></a>Abonelik kapsamı erişim atama
+## <a name="assign-subscription-scope-access"></a>Abonelik kapsamı erişimi atama
 
-Bir aboneliğe erişim, en az maliyet Yönetimi Okuyucu (veya Okuyucu) izni gerektirir. Azure portalında bir aboneliği üzerindeki izinler yapılandırabilirsiniz. En az, diğerleri için erişimi etkinleştirmek abonelik için kullanıcı erişimi Yöneticisi'ni (veya sahibi) iznine de sahip olmalıdır. Ve Azure EA hesapları için de etkinleştirdiyseniz gerekir **AO ücretleri görüntüle** EA portalında ayarlama.
+Abonelik erişimi için en az maliyet yönetimi okuyucusu (veya okuyucu) izni gerekir. Azure portal bir abonelik için izinleri yapılandırabilirsiniz. Diğer kullanıcıların erişimini etkinleştirmek için abonelik için en azından Kullanıcı erişimi Yöneticisi (veya sahibi) izninizin olması gerekir. Ayrıca, Azure EA hesaplarında de EA portalındaki **Ao görünüm ücretleri** ayarını etkinleştirmiş olmanız gerekir.
 
 1. [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
-2. Seçin **tüm hizmetleri** ve Kenar çubuğunda arama _abonelikleri_, ardından **abonelikleri**.
+2. Yan çubukta **tüm hizmetler** ' i seçin, _abonelikler_' i arayın ve ardından **abonelikler**' i seçin.
 3. Aboneliğinizi seçin.
-4. Seçin **erişim denetimi (IAM)** sol bölmeden.
+4. Sol bölmeden **Access Control (IAM)** seçeneğini belirleyin.
 5. **Ekle**'ye tıklayın.
-6. Altında **rol**seçin **maliyet Yönetimi okuyucu**.
-7. Altında **erişim Ata**seçin **Azure AD kullanıcı, Grup veya uygulama**.
-8. Erişim atamak için arama yapın ve ardından kullanıcıyı seçin.
-9. **Kaydet**’e tıklayın.
+6. **Rol**altında **maliyet yönetimi okuyucusu**' nu seçin.
+7. **Erişim ata**' nın altında **Azure AD Kullanıcı, Grup veya uygulama**' yı seçin.
+8. Erişim atamak için, kullanıcıyı arayın ve ardından seçin.
+9. **Kaydet** düğmesine tıklayın.
 
-## <a name="assign-resource-group-scope-access"></a>Kaynak grubu kapsamı erişim atama
+## <a name="assign-resource-group-scope-access"></a>Kaynak grubu kapsam erişimini ata
 
-Bir kaynak grubuna erişim, en az maliyet Yönetimi Okuyucu (veya Okuyucu) izni gerektirir. Azure portalında bir kaynak grubu için izinleri yapılandırabilirsiniz. En az, diğerleri için erişimi etkinleştirmek kaynak grubu için kullanıcı erişimi Yöneticisi'ni (veya sahibi) iznine de sahip olmalıdır. Ve Azure EA hesapları için de etkinleştirdiyseniz gerekir **AO ücretleri görüntüle** EA portalında ayarlama.
+Bir kaynak grubuna erişim için en azından maliyet yönetimi okuyucusu (veya okuyucu) izni gerekir. Azure portal bir kaynak grubuna yönelik izinleri yapılandırabilirsiniz. Diğer kullanıcıların erişimini etkinleştirmek için kaynak grubu için en azından Kullanıcı erişimi Yöneticisi (veya sahibi) izninizin olması gerekir. Ayrıca, Azure EA hesaplarında de EA portalındaki **Ao görünüm ücretleri** ayarını etkinleştirmiş olmanız gerekir.
 
 1. [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
-2. Seçin **tüm hizmetleri** ve Kenar çubuğunda arama _kaynak grupları_, ardından **kaynak grupları**.
+2. Yan çubukta **tüm hizmetler** ' i seçin, _kaynak grupları_' nı arayın ve **kaynak grupları**' nı seçin.
 3. Kaynak grubunuzu seçin.
-4. Seçin **erişim denetimi (IAM)** sol bölmeden.
+4. Sol bölmeden **Access Control (IAM)** seçeneğini belirleyin.
 5. **Ekle**'ye tıklayın.
-6. Altında **rol**seçin **maliyet Yönetimi okuyucu**.
-7. Altında **erişim Ata**seçin **Azure AD kullanıcı, Grup veya uygulama**.
-8. Erişim atamak için arama yapın ve ardından kullanıcıyı seçin.
-9. **Kaydet**’e tıklayın.
+6. **Rol**altında **maliyet yönetimi okuyucusu**' nu seçin.
+7. **Erişim ata**' nın altında **Azure AD Kullanıcı, Grup veya uygulama**' yı seçin.
+8. Erişim atamak için, kullanıcıyı arayın ve ardından seçin.
+9. **Kaydet** düğmesine tıklayın.
 
-## <a name="cross-tenant-authentication-issues"></a>Kiracılar arası kimlik doğrulama sorunları
+## <a name="cross-tenant-authentication-issues"></a>Çapraz Kiracı kimlik doğrulama sorunları
 
-Şu anda, Azure maliyet yönetimi, kiracılar arası kimlik doğrulaması için destek sınırlıdır. Bazı durumlarda, kiracılar arasında kimlik doğrulaması çalıştığınızda alabileceğiniz bir **erişim reddedildi** maliyet analizi hatası. Başka bir kiracının aboneliğine rol tabanlı erişim denetimi (RBAC) yapılandırma ve maliyet verilerini görüntüleme deneyin, bu sorun ortaya çıkabilir.
+Şu anda Azure maliyet yönetimi, çapraz Kiracı kimlik doğrulaması için sınırlı desteğe sahiptir. Kiracılar genelinde kimlik doğrulamaya çalıştığınızda bazı durumlarda, maliyet analizinde **erişim reddedildi** hatası alabilirsiniz. Bu sorun, rol tabanlı erişim denetimi 'ni (RBAC) başka bir kiracının aboneliğine yapılandırırsanız ve maliyet verilerini görüntülemeye çalışırsanız meydana gelebilir.
 
-*Sorunu gidermek için*: Kiracılar arası RBAC yapılandırdıktan sonra bir saat beklemeniz gerekebilir. Maliyet analizi maliyetleri görüntülemek veya her iki kiracılarındaki kullanıcılara maliyet Yönetimi erişim daha sonra deneyin.  
+*Sorunu geçici olarak çözmek için*: çapraz kiracı RBAC yapılandırdıktan sonra bir saat bekleyin. Ardından, maliyet analizinde maliyetleri görüntülemeyi deneyin veya her iki Kiracıdaki kullanıcılara maliyet yönetimi erişimi verin.  
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Maliyet yönetimi için zaten ilk hızlı tamamlamadıysanız, hem okuma [maliyetleri başlamanızı](quick-acm-cost-analysis.md).
+- Maliyet yönetimi için ilk hızlı başlangıcı Henüz tamamlamadıysanız, [maliyetleri çözümlemeye başlamak](quick-acm-cost-analysis.md)için bunu okuyun.

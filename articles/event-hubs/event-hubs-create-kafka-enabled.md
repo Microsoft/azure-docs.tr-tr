@@ -1,30 +1,30 @@
 ---
-title: Apache Kafka etkin olay hub'ı - Azure Event Hubs oluşturma | Microsoft Docs
-description: Bu makalede, Azure portalını kullanarak Azure Event Hubs ad alanı bir Apache Kafka oluşturmak için bir kılavuz etkin sağlar.
+title: Apache Kafka etkin olay hub 'ı oluşturma-Azure Event Hubs | Microsoft Docs
+description: Bu makalede Azure portal kullanarak Apache Kafka etkin bir Azure Event Hubs ad alanı oluşturmaya yönelik bir yol sunulmaktadır.
 services: event-hubs
 documentationcenter: .net
-author: basilhariri
+author: ShubhaVijayasarathy
 manager: timlt
 ms.service: event-hubs
 ms.devlang: dotnet
 ms.topic: article
 ms.custom: seodec18
 ms.date: 12/06/2018
-ms.author: bahariri
-ms.openlocfilehash: 125da95349fce0e75b44b5619baba28d34a74be1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: shvija
+ms.openlocfilehash: 9ce0f74ec6d4e536bfb3fe827ae6f8ae143b640e
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60822493"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555804"
 ---
-# <a name="create-apache-kafka-enabled-event-hubs"></a>Apache Kafka etkin event hubs'ı oluşturma
+# <a name="create-apache-kafka-enabled-event-hubs"></a>Apache Kafka etkin olay hub 'ları oluşturma
 
-Azure Event Hubs, büyük bir akış platformu olarak saniye başına milyonlarca olayı alır ve gerçek zamanlı analiz ve görselleştirme için düşük gecikme ve yüksek performans sağlayan bir hizmet (PaaS) veri.
+Azure Event Hubs, saniyede milyonlarca olayı gösteren (PaaS) büyük bir veri akışı platformudur ve gerçek zamanlı analiz ve görselleştirme için düşük gecikme süresi ve yüksek performans sağlar.
 
-Azure Event Hubs ile bir Kafka uç noktası sağlar. Event Hubs ad alanınızın yerel olarak anlamak Bu uç noktayı etkinleştirir [Apache Kafka](https://kafka.apache.org/intro) iletisi protokolü ve API'ler. Bu özellik sayesinde ile Kafka konularını Protokolü istemcilerinize değiştirme veya kendi kümelerini çalıştırmak gibi event hubs ile iletişim kurabilir. Event hubs'ı destekleyen [Apache Kafka sürümleri 1.0](https://kafka.apache.org/10/documentation.html) ve daha sonra.
+Azure Event Hubs, size bir Kafka uç noktası sağlar. Bu uç nokta, Event Hubs ad alanının [Apache Kafka](https://kafka.apache.org/intro) ileti protokolünü ve API 'leri yerel olarak anlamasına olanak sağlar. Bu özellik sayesinde, protokol istemcilerinizi değiştirmeden veya kendi kümelerinizi çalıştırmadan Kafka konularda yaptığınız gibi Olay Hub 'lerinizle iletişim kurabilirsiniz. Event Hubs, [1,0 ve üzeri sürümleri Apache Kafka](https://kafka.apache.org/10/documentation.html) destekler.
 
-Bu makalede bir Event Hubs ad alanı oluşturma ve Kafka özellikli bir olay hub'ları Kafka uygulamalarına bağlanmak için gerekli bağlantı dizesini alın.
+Bu makalede, bir Event Hubs ad alanı oluşturma ve Kafka uygulamalarını Kafka etkin olay hub 'larına bağlamak için gereken bağlantı dizesinin nasıl alınacağı açıklanır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -32,7 +32,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="create-a-kafka-enabled-event-hubs-namespace"></a>Kafka etkin Event Hubs ad alanı oluşturma
 
-1. Oturum [Azure portalında][Azure portal], tıklatıp **kaynak Oluştur** , ekranın sol üst köşesindeki.
+1. [Azure Portal][Azure portal]oturum açın ve ekranın sol üst kısmında bulunan **kaynak oluştur ' a** tıklayın.
 
 2. Event Hubs araması yapın ve burada gösterilen seçenekleri belirleyin:
     
@@ -56,7 +56,7 @@ Artık Kafka protokolünü kullanan uygulamalarınızdaki olayların akışını
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Event Hubs hakkında daha fazla bilgi için şu bağlantıları ziyaret edin:
+Event Hubs hakkında daha fazla bilgi edinmek için şu bağlantıları ziyaret edin:
 
 * [Kafka uygulamalarınızdan Event Hubs'a akış yapma](event-hubs-quickstart-kafka-enabled-event-hubs.md)
 * [Kafka için Event Hubs hakkında bilgi edinin](event-hubs-for-kafka-ecosystem-overview.md)

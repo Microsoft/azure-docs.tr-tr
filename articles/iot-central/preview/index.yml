@@ -1,0 +1,99 @@
+### YamlMime:Landing
+title: Azure IoT Central belgeleri (önizleme özellikleri)
+summary: Azure IoT Central, IoT çözümlerinin oluşturulmasını kolaylaştıran bir IoT uygulama platformudur. Azure IoT Central, IoT çözümünüzün ilk kurulumunu basitleştirir ve yönetim yüklerini, operasyonel maliyetleri ve normal bir IoT projesinin ek yüklerini ortadan kaldırır. Hızlı başlangıç kılavuzlarımız ve öğreticilerimizden yararlanarak Azure IoT Central uygulamasını oluşturmayı, özelleştirmeyi, yönetmeyi ve kullanmayı öğrenin.
+metadata:
+  title: Azure IoT Central belgeleri
+  description: Azure IoT Central, IoT çözümlerinin oluşturulmasını kolaylaştıran bir IoT uygulama platformudur. Azure IoT Central, IoT çözümünüzün ilk kurulumunu basitleştirir ve yönetim yüklerini, operasyonel maliyetleri ve normal bir IoT projesinin ek yüklerini ortadan kaldırır. Hızlı başlangıç kılavuzlarımız ve öğreticilerimizden yararlanarak Azure IoT Central uygulamasını oluşturmayı, özelleştirmeyi, yönetmeyi ve kullanmayı öğrenin.
+  services: iot-central
+  ms.service: iot-central
+  ms.topic: landing-page
+  author: philmea
+  ms.author: philmea
+  ms.date: 10/25/2019
+  ms.openlocfilehash: 97a378eaab323391ccfcc0b03f337f6693a2a761
+  ms.sourcegitcommit: b1a8f3ab79c605684336c6e9a45ef2334200844b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/13/2019
+  ms.locfileid: "74048320"
+landingContent:
+- title: Azure IoT Central hakkında (önizleme özellikleri)
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure IoT Central nedir?
+      url: overview-iot-central.md
+    - text: IoT Çözümü seçenekleri
+      url: overview-iot-central-tour.md
+    - text: Kullanıcı arabiriminde tura katılma
+      url: overview-iot-central-tour.md
+  - linkListType: architecture
+    links:
+    - text: Azure IoT Central mimarisi
+      url: concepts-architecture.md
+  - linkListType: quickstart
+    links:
+    - text: Yeni uygulama oluşturma
+      url: quick-deploy-iot-central.md
+- title: Bağlanma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Cihaz şablonu ayarlama
+      url: howto-set-up-template.md
+    - text: IoT Tak Çalıştır cihazını bağlama
+      url: tutorial-connect-pnp-device.md
+  - linkListType: how-to-guide
+    links:
+    - text: MX Chip IoT DevKit'i hazırlama ve bağlama
+      url: howto-connect-devkit.md
+    - text: Diğer IoT bulutlarına bağlanma
+      url: ../core/howto-build-iotc-device-bridge.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+- title: Bağlı kalma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Cihaz gruplarını kullanma
+      url: tutorial-use-device-groups.md
+  - linkListType: how-to-guide
+    links:
+    - text: Cihazlarınızı yönetme
+      url: howto-manage-devices.md
+    - text: İş çalıştırma
+      url: ../core/howto-run-a-job.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+    - text: Cihaz verilerinizi analiz etme
+      url: howto-create-analytics.md
+- title: Dönüşüm
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Kural oluşturma
+      url: quick-configure-rules.md
+    - text: Telemetri kuralları oluşturma
+      url: tutorial-create-telemetry-rules.md
+    - text: Blob Depolama'ya aktarma
+      url: howto-export-data.md
+  - linkListType: how-to-guide
+    links:
+    - text: Özel kurallar oluşturma
+      url: howto-create-custom-rules.md
+    - text: Özel analiz oluşturma
+      url: howto-create-custom-analytics.md
+- title: Yönetim
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Uygulamanızı yönetme
+      url: howto-administer.md
+    - text: Kullanıcıları ve rolleri yönetme
+      url: howto-manage-users-roles.md
+    - text: Faturanızı görüntüleme
+      url: howto-view-bill.md
+    - text: Uygulama kullanıcı arabirimini özelleştirme
+      url: howto-customize-ui.md
+    - text: Kişisel panoları yapılandırma
+      url: ../core/howto-create-personal-dashboards.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+    - text: Pano kutucukları kullanma
+      url: ../core/howto-add-tiles-to-your-dashboard.md?toc=/azure/iot-central/preview/toc.json&bc=/azure/iot-central/preview/breadcrumb/toc.json
+    - text: Uygulama şablonlarını kullanma
+      url: howto-use-app-templates.md

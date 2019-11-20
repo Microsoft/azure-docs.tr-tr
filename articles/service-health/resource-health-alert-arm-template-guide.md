@@ -1,62 +1,62 @@
 ---
-title: Resource Manager şablonlarını kullanarak bir Azure kaynak sistem durumu uyarılarını yapılandırma | Microsoft Docs
-description: Azure kaynaklarınızı kullanılamaz duruma geldiğinde programlı olarak bunu size bildirecek uyarılar oluşturun.
+title: Kaynak Yöneticisi şablonları kullanarak Azure Kaynak durumu uyarılarını yapılandırma | Microsoft Docs
+description: Azure kaynaklarınızın kullanım dışı olmasına göre size bildirimde bulunan uyarıları programlı bir şekilde oluşturun.
 author: stephbaron
 ms.author: stbaron
 ms.topic: conceptual
 ms.service: service-health
 ms.date: 9/4/2018
-ms.openlocfilehash: e552b90a4c98eff7b04cbeaef26aa10749ce672c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 10a940e43b2ab4dff1b7c90aa7d6d274ddef82d9
+ms.sourcegitcommit: d47a30e54c5c9e65255f7ef3f7194a07931c27df
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66493408"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73023907"
 ---
-# <a name="configure-resource-health-alerts-using-resource-manager-templates"></a>Resource Manager şablonlarını kullanarak kaynak sistem durumu uyarılarını yapılandırma
+# <a name="configure-resource-health-alerts-using-resource-manager-templates"></a>Kaynak Yöneticisi şablonları kullanarak kaynak sistem durumu uyarılarını yapılandırma
 
-Bu makale, Azure Resource Manager şablonları ve Azure PowerShell kullanarak program aracılığıyla kaynak sistem durumu etkinlik günlüğü uyarıları oluşturma işlemini gösterir.
+Bu makalede, Azure Resource Manager şablonlarını ve Azure PowerShell kullanarak programlı olarak Kaynak Durumu etkinlik günlüğü uyarılarını nasıl oluşturacağınız gösterilmektedir.
 
-Azure kaynaklarınızın geçerli ve geçmiş sistem durumu hakkında bilgilendirmeye azure kaynak durumu korur. Azure kaynak durumu uyarıları gerçek zamanlı olduğunda bu kaynakları bir değişiklik sistem durumlarına sahip bildirebilir. Kaynak durumu oluşturma uyarılar program aracılığıyla oluşturma ve Uyarıları toplu özelleştirme kullanıcıların sağlar.
+Azure Kaynak Durumu, Azure kaynaklarınızın geçerli ve geçmiş sistem durumu hakkında bilgi sahibi olmanızı önler. Azure Kaynak Durumu uyarılar, bu kaynakların sistem durumunda bir değişiklik olduğunda sizi neredeyse gerçek zamanlı olarak uyarabilirler. Kaynak Durumu uyarılar oluşturma, kullanıcıların uyarıları toplu olarak oluşturmalarına ve özelleştirmesine izin verir.
 
 > [!NOTE]
-> Kaynak sistem durumu uyarıları, şu anda Önizleme aşamasındadır.
+> Kaynak Durumu uyarılar Şu anda önizleme aşamasındadır.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu sayfadaki yönergeleri izleyerek için birkaç önceden ayarlamalar yapmanız gerekir:
+Bu sayfadaki yönergeleri izlemek için, önceden birkaç şey ayarlamanız gerekir:
 
-1. Yüklemeniz gereken [Azure PowerShell Modülü](https://docs.microsoft.com/powershell/azure/install-Az-ps)
-2. Şunları yapmanız [oluşturmak veya bir eylem grubu yeniden](../azure-monitor/platform/action-groups.md) size bildirecek şekilde yapılandırılmış
+1. [Azure PowerShell modülünü](https://docs.microsoft.com/powershell/azure/install-Az-ps) yüklemeniz gerekiyor
+2. Sizi bilgilendirmek için yapılandırılmış [bir eylem grubu oluşturmanız veya yeniden kullanmanız](../azure-monitor/platform/action-groups.md) gerekir
 
 ## <a name="instructions"></a>Yönergeler
-1. PowerShell kullanarak Azure'da hesabınızı kullanarak oturum açın ve etkileşim kurmak istediğiniz aboneliği seçin
+1. PowerShell 'i kullanarak hesabınızı kullanarak Azure 'da oturum açın ve etkileşimde bulunmak istediğiniz aboneliği seçin
 
         Login-AzAccount
         Select-AzSubscription -Subscription <subscriptionId>
 
-    > Kullanabileceğiniz `Get-AzSubscription` abonelikleri listelemek için erişiminiz olması.
+    > Erişiminiz olan abonelikleri listelemek için `Get-AzSubscription` kullanabilirsiniz.
 
-2. Bulun ve tam Azure Resource Manager Kimliğini kaydetmek için eylem grubu
+2. Eylem grubunuz için tam Azure Resource Manager KIMLIĞINI bulun ve kaydedin
 
         (Get-AzActionGroup -ResourceGroupName <resourceGroup> -Name <actionGroup>).Id
 
-3. Oluşturmak ve kaydetmek için kaynak durumu uyarı olarak Resource Manager şablonu `resourcehealthalert.json` ([aşağıdaki ayrıntılara göz atın](#resource-manager-template-options-for-resource-health-alerts))
+3. Kaynak Durumu Uyarıları için `resourcehealthalert.json` olarak Kaynak Yöneticisi şablonu oluşturun ve kaydedin ([aşağıdaki ayrıntılara bakın](#resource-manager-template-options-for-resource-health-alerts))
 
-4. Bu şablonu kullanarak yeni bir Azure Resource Manager dağıtım oluştur
+4. Bu şablonu kullanarak yeni bir Azure Resource Manager dağıtımı oluşturun
 
         New-AzResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <resourceGroup> -TemplateFile <path\to\resourcehealthalert.json>
 
-5. Uyarı adı ve eylem grubu kaynağı daha önce kopyaladığınız kimliği yazın istenir:
+5. Daha önce kopyaladığınız uyarı adını ve eylem grubu kaynak KIMLIĞINI yazmanız istenir:
 
         Supply values for the following parameters:
         (Type !? for Help.)
         activityLogAlertName: <Alert Name>
         actionGroupResourceId: /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/microsoft.insights/actionGroups/<actionGroup>
 
-6. Her şey başarıyla yaradıysa, PowerShell'de bir onay alırsınız.
+6. Her şey başarıyla çalıştıysa, PowerShell 'de bir onay alacaksınız
 
         DeploymentName          : ExampleDeployment
         ResourceGroupName       : <resourceGroup>
@@ -74,13 +74,13 @@ Bu sayfadaki yönergeleri izleyerek için birkaç önceden ayarlamalar yapmanız
         Outputs                 :
         DeploymentDebugLogLevel :
 
-Bu işlemi tamamen otomatik bir hale getirme planlıyorsanız, yalnızca 5. adım değerlerinin istemez için Resource Manager şablonu Düzen gerektiğini unutmayın.
+Bu işlemi tamamen otomatikleştirmeye planlarken, 5. adımdaki değerleri sorması için yalnızca Kaynak Yöneticisi şablonunu düzenlemeniz gerektiğini unutmayın.
 
-## <a name="resource-manager-template-options-for-resource-health-alerts"></a>Kaynak sistem durumu uyarıları için Resource Manager şablonu seçenekleri
+## <a name="resource-manager-template-options-for-resource-health-alerts"></a>Kaynak Durumu Uyarıları için Kaynak Yöneticisi şablonu seçenekleri
 
-Kaynak durumu uyarı oluşturmak için başlangıç noktası olarak bu temel şablonu kullanabilirsiniz. Bu şablon, yazıldığı gibi çalışır ve bir Abonelikteki tüm kaynaklar genelinde tüm yeni etkinleştirilen kaynak sistem durumu olayları uyarıları almak için kaydolduktan.
+Bu temel şablonu, Kaynak Durumu uyarı oluşturmak için başlangıç noktası olarak kullanabilirsiniz. Bu şablon yazıldığı gibi çalışacaktır ve bir abonelikteki tüm kaynaklar genelinde yeni etkinleştirilen tüm kaynak sistem durumu olayları için uyarı almak üzere oturumunuzu açacaktır.
 
-> Bu makalenin alt kısmında da sinyal/gürültü oranına için bu şablona göre kaynak sistem durumu uyarılarını artırmalısınız daha karmaşık bir uyarı şablon ekledik.
+> Bu makalenin en altında, bu şablonla karşılaştırıldığında Kaynak Durumu Uyarıları için gürültü oranına yönelik sinyali artırması gereken daha karmaşık bir uyarı şablonu da sunuyoruz.
 
 ```json
 {
@@ -137,26 +137,26 @@ Kaynak durumu uyarı oluşturmak için başlangıç noktası olarak bu temel şa
 }
 ```
 
-Ancak, bunun gibi geniş bir uyarı genellikle önerilmez. Nasıl Biz bu uyarı, biz aşağıda verdiğiniz olayları odaklanmak için aşağı kapsamını belirleyebilirsiniz öğrenin.
+Ancak, bunun gibi geniş bir uyarı genellikle önerilmez. Bu uyarıyı aşağıda ele aldığımız olaylara odaklanmak için nasıl kapsam yapabileceğinizi öğrenin.
 
-### <a name="adjusting-the-alert-scope"></a>Uyarı kapsamı ayarlama
+### <a name="adjusting-the-alert-scope"></a>Uyarı kapsamını ayarlama
 
-Kaynak sistem durumu uyarıları, üç farklı kapsamlardaki olayları izlemek için yapılandırılabilir:
+Kaynak Durumu uyarılar, olayları üç farklı kapsam üzerinde izlemek için yapılandırılabilir:
 
  * Abonelik Düzeyi
  * Kaynak grubu düzeyi
  * Kaynak düzeyi
 
-Uyarı şablonu abonelik düzeyinde yapılandırılır, ancak yalnızca belirli kaynakları veya belirli bir kaynak grubu içindeki kaynakları hakkında bilgilendirmek üzere uyarınızı yapılandırmak istiyorsanız, yalnızca değiştirmeniz gerekir `scopes` yukarıdaki bölümde şablonu.
+Uyarı şablonu abonelik düzeyinde yapılandırılır, ancak uyarınızı yalnızca belirli kaynaklar veya belirli bir kaynak grubundaki kaynaklar hakkında bilgilendirecek şekilde yapılandırmak istiyorsanız Yukarıdaki şablonda `scopes` bölümünü değiştirmeniz yeterlidir.
 
-Kaynak grubu düzeyi için bir kapsam, kapsamları bölümü gibi görünmelidir:
+Kaynak grubu düzeyi kapsamı için kapsamlar bölümü şöyle görünmelidir:
 ```json
 "scopes": [
     "/subscriptions/<subscription id>/resourcegroups/<resource group>"
 ],
 ```
 
-Ve kaynak düzeyi kapsam için kapsam bölümü şöyle görünmelidir:
+Kaynak düzeyi kapsamı için kapsam bölümü şöyle görünmelidir:
 
 ```json
 "scopes": [
@@ -166,11 +166,11 @@ Ve kaynak düzeyi kapsam için kapsam bölümü şöyle görünmelidir:
 
 Örneğin, `"/subscriptions/d37urb3e-ed41-4670-9c19-02a1d2808ff9/resourcegroups/myRG/providers/microsoft.compute/virtualmachines/myVm"`
 
-> Azure Portalı'na gidin ve URL'de bu dizesini almak için Azure kaynağınıza görüntülerken bakın.
+> Azure portalına giderek bu dizeyi almak için Azure kaynağınız görüntülenirken URL 'ye bakabilirsiniz.
 
-### <a name="adjusting-the-resource-types-which-alert-you"></a>Kaynağı ayarlama, uyarı türleri
+### <a name="adjusting-the-resource-types-which-alert-you"></a>Sizi uyaran kaynak türlerini ayarlama
 
-Uyarılar abonelik veya kaynak grubu düzeyinde kaynakları farklı türde olabilir. Yalnızca kaynak türleri bir belirli bir alt kümesinden gelen uyarılar sınırlandırmak istiyorsanız, tanımlayabilirsiniz `condition` şablon bölümünü şu şekilde:
+Abonelik veya kaynak grubu düzeyindeki uyarıların farklı türlerde kaynakları olabilir. Yalnızca belirli bir kaynak türü alt kümesinden gelen uyarıları sınırlamak istiyorsanız, bunu şöyle olacak şekilde şablonun `condition` bölümünde tanımlayabilirsiniz:
 
 ```json
 "condition": {
@@ -180,12 +180,12 @@ Uyarılar abonelik veya kaynak grubu düzeyinde kaynakları farklı türde olabi
             "anyOf": [
                 {
                     "field": "resourceType",
-                    "equals": "Microsoft.Compute/virtualMachines",
+                    "equals": "MICROSOFT.COMPUTE/VIRTUALMACHINES",
                     "containsAny": null
                 },
                 {
                     "field": "resourceType",
-                    "equals": "Microsoft.Storage/storageAccounts",
+                    "equals": "MICROSOFT.STORAGE/STORAGEACCOUNTS",
                     "containsAny": null
                 },
                 ...
@@ -195,12 +195,12 @@ Uyarılar abonelik veya kaynak grubu düzeyinde kaynakları farklı türde olabi
 },
 ```
 
-Burada kullandığımız `anyOf` belirlediğimizden, belirli kaynak türlerine hedeflemek için uyarılar verme koşullardan herhangi biri ile eşleştirilecek kaynak sistem durumu uyarısı izin vermek için sarmalayıcı.
+Burada, kaynak sistem durumu uyarısının belirlediğimiz koşullardan herhangi biriyle eşleşmesini sağlamak için `anyOf` sarmalayıcı kullanılır ve belirli kaynak türlerini hedefleyen uyarılara izin verilir.
 
-### <a name="adjusting-the-resource-health-events-that-alert-you"></a>Kaynak durumu olayları size uyarı ayarlama
-Kaynak sistem durumu olayı geçmeleri, sistem durumu olayı durumunu temsil eden bir dizi aşamadan gidebilirsiniz: `Active`, `InProgress`, `Updated`, ve `Resolved`.
+### <a name="adjusting-the-resource-health-events-that-alert-you"></a>Sizi uyaran Kaynak Durumu olaylarını ayarlama
+Kaynaklar bir sistem durumu olayına sahip olduğunda, sistem durumu olayının durumunu temsil eden bir dizi aşamadan geçebilir: `Active`, `In Progress`, `Updated`ve `Resolved`.
 
-Uyarınız yalnızca bildirmek için yapılandırmak istediğiniz bu durumda, yalnızca bir kaynak sistem durumu kötü olduğunda bildirim almak isteyebilirsiniz `status` olduğu `Active`. Ayrıca diğer aşamalar hakkında bildirim almak istiyorsanız, ancak bu ayrıntıları ekleyebilirsiniz şu şekilde:
+Yalnızca bir kaynak sağlıksız hale geldiğinde bildirim almak isteyebilirsiniz, bu durumda uyarınızı yalnızca `status` `Active`olduğunda bilgilendirecek şekilde yapılandırmak isteyebilirsiniz. Bununla birlikte, diğer aşamalar üzerinde de bildirim almak istiyorsanız bu ayrıntıları şöyle ekleyebilirsiniz:
 
 ```json
 "condition": {
@@ -214,7 +214,7 @@ Uyarınız yalnızca bildirmek için yapılandırmak istediğiniz bu durumda, ya
                 },
                 {
                     "field": "status",
-                    "equals": "InProgress"
+                    "equals": "In Progress"
                 },
                 {
                     "field": "status",
@@ -230,13 +230,13 @@ Uyarınız yalnızca bildirmek için yapılandırmak istediğiniz bu durumda, ya
 }
 ```
 
-Sistem durumu olaylarını dört tüm aşamalarında için bildirim almak isteyen, bu durum tümünü bir araya kaldırabilirsiniz ve uyarı bakılmadan, size bildirecektir `status` özelliği.
+Tüm dört sistem durumu olayı aşaması için bildirim almak istiyorsanız, bu koşulu tümü birlikte kaldırabilirsiniz ve uyarı `status` özelliğinden bağımsız olarak sizi uyarır.
 
-### <a name="adjusting-the-resource-health-alerts-to-avoid-unknown-events"></a>"Bilinmeyen" olayları önlemek için kaynak durumu uyarıları ayarlama
+### <a name="adjusting-the-resource-health-alerts-to-avoid-unknown-events"></a>"Bilinmeyen" olayları önlemek için Kaynak Durumu uyarılarını ayarlama
 
-Azure kaynak durumu raporlama yapabilir, en son kaynaklarınızın sistem durumunu sürekli olarak bunları izleyerek test çalıştırıcılar kullanma. İlgili bildirilen durum durumlar şunlardır: "Kullanılabilir olma", "Kullanılamıyor" ve "Düşürülmüş". Ancak, Çalıştırıcısı ve Azure kaynak iletişim kurmada başarısız olduğu durumlarda, kaynak için bir "Bilinmeyen" durumu bildirilir ve bir "Etkin" sistem durumu olayı kabul edilir.
+Azure Kaynak Durumu, test çalıştıranlar kullanarak onları sürekli izleyerek kaynaklarınızın en son durumunu rapor edebilir. Bildirilen ilgili sistem durumu durumları şunlardır: "kullanılabilir", "kullanılamıyor" ve "düşürülmüş". Ancak, Çalıştırıcısı ve Azure kaynağının iletişim kurmadığı durumlarda, kaynak için "Bilinmeyen" bir sistem durumu bildirilir ve bu durum "etkin" bir sistem durumu olayı olarak kabul edilir.
 
-Bir kaynak, "Bilinmeyen" bildirdiğinde, ancak sistem durumunun son doğru rapor bu yana değişmemiştir olasıdır. "Bilinmeyen" olayları ile ilgili uyarılar ortadan kaldırmak istiyorsanız, bu mantığı şablonda belirtebilirsiniz:
+Ancak, bir kaynak "bilinmiyor" olarak raporladığında, büyük olasılıkla sistem durumu en son doğru rapordan bu yana değişmemiştir. "Bilinmeyen" olaylarda uyarıları kaldırmak istiyorsanız, bu mantığı şablonda belirtebilirsiniz:
 
 ```json
 "condition": {
@@ -284,15 +284,15 @@ Bir kaynak, "Bilinmeyen" bildirdiğinde, ancak sistem durumunun son doğru rapor
 },
 ```
 
-Bu örnekte biz yalnızca burada geçerli ve önceki sistem durumunu "Bilinmeyen" yok olayları bildirme. Bu değişikliği doğrudan, cep telefonu veya e-posta uyarıları gönderilen yararlı bir toplama olabilir. 
+Bu örnekte, yalnızca geçerli ve önceki sistem durumunun "Unknown" olmadığı olaylara bildirimde bulunur. Bu değişiklik, uyarılarınız doğrudan cep telefonunuza veya e-postaya gönderiliyorsa yararlı bir ek olabilir. 
 
-Bazı olaylar null olacak şekilde currentHealthStatus ve previousHealthStatus özelliklerini mümkün olduğunu unutmayın. Örneğin, güncelleştirilmiş bir olay gerçekleştiğinde bu ek olay bilgileri yalnızca kaynak sistem durumu son raporun bu yana değişmemiştir olası olduğu (örneğin neden). Properties.currentHealthStatus ve properties.previousHealthStatus değerlerin ayarlandığından bu nedenle, yukarıdaki yan tümcesini tetiklenen değil, bazı uyarıların görüntülenmesine neden null.
+CurrentHealthStatus ve previousHealthStatus özelliklerinin bazı olaylarda null olması mümkün olduğunu unutmayın. Örneğin, güncelleştirilmiş bir olay gerçekleştiğinde kaynağın sistem durumunun son rapordan bu yana değişmediğinden, yalnızca ilgili ek olay bilgileri kullanılabilir (ör. nedeni). Bu nedenle, yukarıdaki yan tümcesinin kullanılması bazı uyarıların tetiklenmesi nedeniyle, Properties. currentHealthStatus ve Properties. previousHealthStatus değerleri null olarak ayarlanacak.
 
-### <a name="adjusting-the-alert-to-avoid-user-initiated-events"></a>Kullanıcı tarafından başlatılan olayları önlemek için uyarı ayarlama
+### <a name="adjusting-the-alert-to-avoid-user-initiated-events"></a>Kullanıcı tarafından başlatılan olayların oluşmasını önlemek için uyarıyı ayarlama
 
-Kaynak sistem durumu olayları tetikleyicisi tarafından başlatılan bir platform olabilir ve kullanıcı tarafından başlatılan olayları. Bu sistem durumu olayı, Azure platformu tarafından neden yalnızca bir bildirim göndermesini mantıklı olabilir.
+Kaynak Durumu olaylar, platform tarafından başlatılan ve Kullanıcı tarafından başlatılan olaylar tarafından tetiklenebilir. Yalnızca Azure platformunun sistem durumu olayına neden olduğunda bir bildirim gönderilmesi anlamlı olabilir.
 
-Yalnızca bu tür olaylar için filtre uygulamak için uyarınızı yapılandırmak kolaydır:
+Bu olay türlerini filtrelemek için uyarınızı kolayca yapılandırmak kolaydır:
 
 ```json
 "condition": {
@@ -306,11 +306,11 @@ Yalnızca bu tür olaylar için filtre uygulamak için uyarınızı yapılandır
     ]
 }
 ```
-Bazı olaylar null olacak neden alanı mümkün olduğunu unutmayın. Diğer bir deyişle, bir sistem durumu geçişi (kullanılamaz örneğin kullanılabilir) gerçekleşir ve bildirim önlemek için geciktirir hemen olay günlüğe kaydedilir. Properties.clause özellik değerinin ayarlandığından bu nedenle, yukarıdaki yan tümcesini tetiklenen değil, bir uyarıya neden olabilir null.
+Nedeni alanının bazı olaylarda null olması mümkün olduğunu unutmayın. Diğer bir deyişle, bir sistem durumu geçişi gerçekleşir (örneğin, kullanılamaz olarak kullanılabilir) ve olay bildirim gecikmelerini engellemek için hemen günlüğe kaydedilir. Bu nedenle, yukarıdaki yan tümceyi kullanmak bir uyarının tetiklenmediği için, Properties. Clause özelliği değeri null olarak ayarlanacak.
 
-## <a name="complete-resource-health-alert-template"></a>Tam kaynak durumu uyarı şablonu
+## <a name="complete-resource-health-alert-template"></a>Kaynak Durumu uyarı şablonunu doldurun
 
-Önceki bölümde açıklanan farklı ayarlamaları kullanarak sinyal/gürültü oranına en üst düzeye çıkarmak için yapılandırılmış bir örnek şablonu aşağıda verilmiştir. Aklınızda burada currentHealthStatus previousHealthStatus ve neden özellik değerlerini bazı olayları null olabilir yukarıda belirtilen uyarılar size aittir.
+Önceki bölümde açıklanan farklı ayarlamaları kullanarak, gürültü oranına sinyali en üst düzeye çıkarmak için yapılandırılmış örnek bir şablon aşağıda verilmiştir. Yukarıda belirtilen uyarıları, bazı olaylarda currentHealthStatus, previousHealthStatus ve neden özellik değerlerinin null olabileceğini göz önünde bulundurun.
 
 ```json
 {
@@ -409,7 +409,7 @@ Bazı olaylar null olacak neden alanı mümkün olduğunu unutmayın. Diğer bir
                                 },
                                 {
                                     "field": "status",
-                                    "equals": "InProgress",
+                                    "equals": "In Progress",
                                     "containsAny": null
                                 },
                                 {
@@ -434,15 +434,15 @@ Bazı olaylar null olacak neden alanı mümkün olduğunu unutmayın. Diğer bir
 }
 ```
 
-Ancak, en iyi hangi yapılandırmalar sizin için geçerli olduğunu, bu nedenle kendi özelleştirme yapmak için bu belgede verilen araçları kullanmanız gerekir.
+Bununla birlikte, en iyi yapılandırmaların sizin için geçerli olduğunu bilirsiniz, bu nedenle kendi özelleştirmenizi yapmak için bu belgede size olan araçları kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kaynak durumu hakkında daha fazla bilgi edinin:
--  [Azure kaynak durumu genel bakış](Resource-health-overview.md)
+Kaynak Durumu hakkında daha fazla bilgi edinin:
+-  [Azure Kaynak Durumu genel bakış](Resource-health-overview.md)
 -  [Azure Kaynak Durumu aracılığıyla kullanılabilen kaynak türleri ve durum denetimleri](resource-health-checks-resource-types.md)
 
 
-Hizmet durumu uyarıları oluşturun:
+Hizmet durumu uyarıları oluşturma:
 -  [Hizmet durumu için uyarıları yapılandırma](../azure-monitor/platform/alerts-activity-log-service-notifications.md) 
 -  [Azure etkinlik günlüğü olay şeması](../azure-monitor/platform/activity-log-schema.md)

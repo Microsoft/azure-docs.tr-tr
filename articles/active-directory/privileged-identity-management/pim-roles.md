@@ -1,48 +1,48 @@
 ---
-title: PIM - Azure Active Directory yönetemezsiniz rolleri | Microsoft Docs
-description: Azure AD Privileged Identity Management (PIM) yönetemez rolleri açıklanır.
+title: Privileged Identity Management içinde yönetilemez roller-Azure Active Directory | Microsoft Docs
+description: Azure AD Privileged Identity Management (PıM) içinde yönetebileceğiniz rolleri açıklar.
 services: active-directory
 documentationcenter: ''
-author: rolyon
+author: curtand
 manager: mtillman
 editor: ''
 ms.service: active-directory
 ms.topic: conceptual
 ms.workload: identity
 ms.subservice: pim
-ms.date: 01/18/2019
-ms.author: rolyon
+ms.date: 10/23/2019
+ms.author: curtand
 ms.custom: pim ; H1Hack27Feb2017;oldportal;it-pro;
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: aa5fb632ee5fd9c18bde7443e81fe2ef6e5335e4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 6fac7074cf85a585c93ece60be9eea8ffb9a6345
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60437282"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72895198"
 ---
-# <a name="roles-you-cannot-manage-in-pim"></a>Rolleri PIM'de yönetemez.
+# <a name="roles-you-cant-manage-in-privileged-identity-management"></a>Privileged Identity Management içinde yönetileyemiyorum roller
 
-Azure Active Directory (Azure AD) Privileged Identity Management (PIM) tüm yönetmenize imkan sağlar [Azure AD rolleri](../users-groups-roles/directory-assign-admin-roles.md) ve tüm [Azure kaynağı rolleri](../../role-based-access-control/built-in-roles.md). Bu roller, Yönetim grupları, abonelik, kaynak grupları ve kaynaklara bağlı özel rollerinizi de içerir. Ancak, yönetemezsiniz birkaç rol vardır. Bu makalede PIM'de yönetemez rolleri açıklanır.
+Azure Active Directory (Azure AD) Privileged Identity Management (PıM), tüm [Azure AD rollerini](../users-groups-roles/directory-assign-admin-roles.md) ve tüm [Azure Kaynak rollerini](../../role-based-access-control/built-in-roles.md)yönetmenize olanak sağlar. Bu roller ayrıca yönetim gruplarınız, abonelikleriniz, kaynak grupları ve kaynaklarınıza iliştirilmiş özel rollerinizi de içerir. Ancak, yönetebilmeniz gereken birkaç rol vardır. Bu makalede, Privileged Identity Management içinde yönetiyoruz roller açıklanmaktadır.
 
 ## <a name="classic-subscription-administrator-roles"></a>Klasik abonelik yönetici rolleri
 
-PIM aşağıdaki Klasik Abonelik Yöneticisi rolleri yönetemezsiniz:
+Privileged Identity Management ' de aşağıdaki klasik abonelik yöneticisi rollerini yönetemezsiniz:
 
 - Hesap Yöneticisi
 - Hizmet Yöneticisi
 - Ortak Yönetici
 
-Klasik Abonelik Yöneticisi rolleri hakkında daha fazla bilgi için bkz: [Klasik Abonelik Yöneticisi rolleri, Azure RBAC rolleri ve Azure AD yönetici rollerini](../../role-based-access-control/rbac-and-directory-admin-roles.md).
+Klasik abonelik yöneticisi rolleri hakkında daha fazla bilgi için bkz. [Klasik abonelik yöneticisi rolleri, Azure RBAC rolleri ve Azure AD yönetici rolleri](../../role-based-access-control/rbac-and-directory-admin-roles.md).
 
-## <a name="what-about-office-365-admin-roles"></a>Office 365 Yönetici rolleri hakkında neler diyeceksiniz?
+## <a name="what-about-office-365-admin-roles"></a>Office 365 Yönetici rolleri hakkında ne olacak?
 
-Exchange Online veya SharePoint Online, Exchange yönetici ve SharePoint Yöneticisi rolleri Azure AD'de temsil edilmez ve PIM'de yönetilemez. Bu Office 365 hizmetleri hakkında daha fazla bilgi için bkz. [Office 365 Yönetici rolleri](https://docs.microsoft.com/office365/admin/add-users/about-admin-roles).
+Exchange Yöneticisi ve SharePoint Yöneticisi dışında, Exchange Online veya SharePoint Online içindeki roller, Azure AD 'de gösterilmediğinden Privileged Identity Management yönetilemiyor. Bu Office 365 hizmetleri hakkında daha fazla bilgi için bkz. [office 365 Yönetici rolleri](https://docs.microsoft.com/office365/admin/add-users/about-admin-roles).
 
 > [!NOTE]
-> SharePoint Yöneticisi, SharePoint Online Yönetim Merkezi SharePoint Online yönetimsel erişim sahibi ve hemen her görevi SharePoint Online'da gerçekleştirebilirsiniz. Uygun kullanıcılar PIM'de etkinleştirdikten sonra SharePoint içinde bu rolü kullanarak gecikme.
+> SharePoint Yöneticisi SharePoint Online Yönetim Merkezi aracılığıyla SharePoint Online 'a yönetici erişimine sahiptir ve SharePoint Online 'da neredeyse tüm görevleri gerçekleştirebilir. Uygun kullanıcılar, Privileged Identity Management ' de etkinleştirdikten sonra SharePoint içindeki bu rolü kullanarak gecikmelere neden olabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure AD PIM Rolleri Ata](pim-how-to-add-role-to-user.md)
-- [PIM Azure kaynak Rolleri Ata](pim-resource-roles-assign-roles.md)
+- [Privileged Identity Management Azure AD rolleri atama](pim-how-to-add-role-to-user.md)
+- [Privileged Identity Management Azure Kaynak rolleri atama](pim-resource-roles-assign-roles.md)

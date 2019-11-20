@@ -1,6 +1,6 @@
 ---
-title: Coğrafi olarak dağıtılmış bir Azure SQL veritabanı çözümü uygulama | Microsoft Docs
-description: Azure SQL veritabanı ve çoğaltılan bir veritabanına yük devretme için uygulamanızın yapılandırma ve yük devretme testi hakkında bilgi edinin.
+title: Coğrafi olarak dağıtılmış bir çözüm uygulama
+description: Azure SQL veritabanınızı ve uygulamanızı, çoğaltılan bir veritabanına yük devretme için yapılandırmayı ve yük devretmeyi test yapmayı öğrenin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: high-availability
@@ -10,58 +10,57 @@ ms.topic: conceptual
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mathoma, carlrab
-manager: craigg
 ms.date: 03/12/2019
-ms.openlocfilehash: 6022c016b83ffe1362db4d826a5ee4397afd4128
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 51380d312c778380602c64cac766b050511cf994
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60338998"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73810935"
 ---
-# <a name="tutorial-implement-a-geo-distributed-database"></a>Öğretici: Coğrafi olarak dağıtılmış bir veritabanı uygulama
+# <a name="tutorial-implement-a-geo-distributed-database"></a>Öğretici: coğrafi olarak dağıtılmış bir veritabanı uygulama
 
-Bir Azure SQL veritabanı ve uzak bir bölgeye yük devretme için uygulama yapılandırma ve test yük devretme planı. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
+Bir Azure SQL veritabanı ve uygulamasını uzak bir bölgeye yük devretme için yapılandırın ve yük devretme planını test edin. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> - Oluşturma bir [yük devretme grubu](sql-database-auto-failover-group.md)
-> - Bir Azure SQL veritabanını sorgulamak için Java uygulaması çalıştırma
+> - [Yük devretme grubu](sql-database-auto-failover-group.md) oluşturma
+> - Bir Java uygulamasını çalıştırarak bir Azure SQL veritabanını sorgulama
 > - Yük devretme testi
 
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 > [!IMPORTANT]
-> Azure Resource Manager PowerShell modülü, Azure SQL veritabanı tarafından hala desteklenmektedir, ancak tüm gelecekteki geliştirme için Az.Sql modüldür. Bu cmdlet'ler için bkz. [Azurerm.SQL'e](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az modül ve AzureRm modülleri komutları için bağımsız değişkenler büyük ölçüde aynıdır.
+> PowerShell Azure Resource Manager modülü Azure SQL veritabanı tarafından hala desteklenmektedir, ancak gelecekteki tüm geliştirmeler az. SQL modülüne yöneliktir. Bu cmdlet 'ler için bkz. [Azurerd. SQL](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az Module ve Azurerd modüllerinde komutların bağımsız değişkenleri önemli ölçüde aynıdır.
 
-Bu öğreticiyi tamamlamak için aşağıdaki öğeler yüklediğiniz emin olun:
+Öğreticiyi tamamlayabilmeniz için aşağıdaki öğeleri yüklediğinizden emin olun:
 
 - [Azure PowerShell](/powershell/azureps-cmdlets-docs)
-- Bir Azure SQL veritabanı. Bir kullanım oluşturmak için
+- Azure SQL veritabanı 'nda tek bir veritabanı. Bir kullanım oluşturmak için
   - [Portal](sql-database-single-database-get-started.md)
   - [CLI](sql-database-cli-samples.md)
   - [PowerShell](sql-database-powershell-samples.md)
 
   > [!NOTE]
-  > Öğreticide *AdventureWorksLT* örnek veritabanı.
+  > Öğretici, *AdventureWorksLT* örnek veritabanını kullanır.
 
-- Bkz: Java ve Maven [SQL Server kullanarak uygulama derleme](https://www.microsoft.com/sql-server/developer-get-started/), vurgulayın **Java** ve ortamınızı seçin ve ardından adımları izleyin.
+- Java ve Maven, bkz. [SQL Server kullanarak uygulama oluşturma](https://www.microsoft.com/sql-server/developer-get-started/), **Java 'yı** vurgulama ve ortamınızı seçme, ardından adımları izleyin.
 
 > [!IMPORTANT]
-> Bu öğreticideki adımları gerçekleştirdiğiniz bilgisayarın genel IP adresini kullanmak için güvenlik duvarı kurallarını ayarladığınızdan emin olun. Veritabanı düzeyinde güvenlik duvarı kuralları ikincil sunucuya otomatik olarak çoğaltır.
+> Bu öğreticideki adımları gerçekleştirdiğiniz bilgisayarın genel IP adresini kullanmak için güvenlik duvarı kuralları ayarladığınızdan emin olun. Veritabanı düzeyinde güvenlik duvarı kuralları otomatik olarak ikincil sunucuya çoğaltılır.
 >
-> Bilgi için [veritabanı düzeyinde güvenlik duvarı kuralı oluşturma](/sql/relational-databases/system-stored-procedures/sp-set-database-firewall-rule-azure-sql-database) veya belirlemek için IP adresini bilgisayarınız için sunucu düzeyinde güvenlik duvarı kuralı için kullanılan bakın [sunucu düzeyinde güvenlik duvarı oluşturma](sql-database-server-level-firewall-rule.md).  
+> Bilgi için bkz. [veritabanı düzeyinde güvenlik duvarı kuralı oluşturma](/sql/relational-databases/system-stored-procedures/sp-set-database-firewall-rule-azure-sql-database) veya bilgisayarınızın sunucu düzeyinde güvenlik duvarı kuralı IÇIN kullanılan IP adresini belirleme bkz. [sunucu düzeyinde güvenlik duvarı oluşturma](sql-database-server-level-firewall-rule.md).  
 
-## <a name="create-a-failover-group"></a>Bir yük devretme grubu oluşturma
+## <a name="create-a-failover-group"></a>Yük devretme grubu oluşturma
 
-Azure PowerShell kullanarak oluşturma [yük devretme grupları](sql-database-auto-failover-group.md) mevcut bir Azure SQL server ve başka bir bölgede yeni bir Azure SQL sunucusu arasında. Ardından örnek veritabanını yük devretme grubuna ekleyin.
+Azure PowerShell kullanarak, var olan bir Azure SQL Server ve başka bir bölgedeki yeni bir Azure SQL sunucusu arasında [Yük devretme grupları](sql-database-auto-failover-group.md) oluşturun. Ardından örnek veritabanını yük devretme grubuna ekleyin.
 
 > [!IMPORTANT]
 > [!INCLUDE [sample-powershell-install](../../includes/sample-powershell-install-no-ssh.md)]
 
-Bir yük devretme grubu oluşturmak için aşağıdaki betiği çalıştırın:
+Yük devretme grubu oluşturmak için aşağıdaki betiği çalıştırın:
 
    ```powershell
     # Set variables for your server and database
@@ -102,11 +101,11 @@ Bir yük devretme grubu oluşturmak için aşağıdaki betiği çalıştırın:
        -FailoverGroupName $myfailovergroupname
    ```
 
-Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritabanınızın ardından seçerek **ayarları** > **coğrafi çoğaltma**.
+Coğrafi çoğaltma ayarları Azure portal Ayrıca, veritabanınızı seçip, ardından **coğrafi çoğaltma** > **Ayarlar** ' da değiştirilebilir.
 
 ![Coğrafi çoğaltma ayarları](./media/sql-database-implement-geo-distributed-database/geo-replication.png)
 
-## <a name="run-the-sample-project"></a>Örnek projeyi Çalıştır
+## <a name="run-the-sample-project"></a>Örnek projeyi çalıştırma
 
 1. Konsolunda, aşağıdaki komutla bir Maven projesi oluşturun:
 
@@ -114,17 +113,17 @@ Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritaban�
    mvn archetype:generate "-DgroupId=com.sqldbsamples" "-DartifactId=SqlDbSample" "-DarchetypeArtifactId=maven-archetype-quickstart" "-Dversion=1.0.0"
    ```
 
-1. Tür **Y** basın **Enter**.
+1. **Y** yazın ve **ENTER**tuşuna basın.
 
-1. Yeni Proje dizinleri.
+1. Dizinleri yeni proje ile değiştirin.
 
    ```bash
    cd SqlDbSample
    ```
 
-1. Tercih ettiğiniz düzenleyiciyi kullanarak açın *pom.xml* proje klasörünüzdeki dosya.
+1. En sevdiğiniz düzenleyiciyi kullanarak, proje klasörünüzdeki *Pod. xml* dosyasını açın.
 
-1. SQL Server bağımlılık için Microsoft JDBC sürücüsü aşağıdakileri ekleyerek `dependency` bölümü. Bağımlılık büyük içinde yapıştırılan gerekir `dependencies` bölümü.
+1. Aşağıdaki `dependency` bölümünü ekleyerek SQL Server bağımlılığı için Microsoft JDBC sürücüsü ekleyin. Bağımlılığın daha büyük `dependencies` bölümü içine yapıştırılabilmesi gerekir.
 
    ```xml
    <dependency>
@@ -134,7 +133,7 @@ Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritaban�
    </dependency>
    ```
 
-1. Ekleyerek Java sürümü belirtmek `properties` sonra bölüm `dependencies` bölümü:
+1. `dependencies` bölümünden sonra `properties` bölümünü ekleyerek Java sürümünü belirtin:
 
    ```xml
    <properties>
@@ -143,7 +142,7 @@ Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritaban�
    </properties>
    ```
 
-1. Bildirim dosyaları ekleyerek destekler `build` sonra bölüm `properties` bölümü:
+1. `properties` bölümünden sonra `build` bölümünü ekleyerek bildirim dosyalarını destekleme:
 
    ```xml
    <build>
@@ -164,9 +163,9 @@ Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritaban�
    </build>
    ```
 
-1. Kaydet ve Kapat *pom.xml* dosya.
+1. *Pod. xml* dosyasını kaydedin ve kapatın.
 
-1. Açık *App.java* bulunan dosya... \SqlDbSample\src\main\java\com\sqldbsamples ve içeriğini aşağıdaki kodla değiştirin:
+1. İçinde bulunan *app. Java* dosyasını açın. \Sqldbsample\src\mainjava\com\sqldbsamples ve içeriği şu kodla değiştirin:
 
    ```java
    package com.sqldbsamples;
@@ -272,7 +271,7 @@ Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritaban�
    }
    ```
 
-1. Kaydet ve Kapat *App.java* dosya.
+1. *App. Java* dosyasını kaydedin ve kapatın.
 
 1. Komut konsolunda aşağıdaki komutu çalıştırın:
 
@@ -280,7 +279,7 @@ Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritaban�
    mvn package
    ```
 
-1. El ile yük devretme testi çalıştırmak için size zaman izin vererek durdurulana kadar yaklaşık 1 saat boyunca çalışacak uygulamayı başlatın.
+1. El ile durduruluncaya kadar yaklaşık 1 saat boyunca çalışacak uygulamayı başlatın ve yük devretme testini çalıştırma zamanı sağlar.
 
    ```bash
    mvn -q -e exec:java "-Dexec.mainClass=com.sqldbsamples.App"
@@ -299,9 +298,9 @@ Coğrafi çoğaltma ayarları da değiştirilebilir Azure portalında veritaban�
 
 ## <a name="test-failover"></a>Yük devretme testi
 
-Bir yük devretme benzetimini gerçekleştirmek ve uygulama sonuçlarını gözlemleyin için aşağıdaki komut dosyasını çalıştırın. Veritabanı geçiş sırasında nasıl bazı ekler ve seçer bildirimi başarısız olur.
+Yük devretmenin benzetimini yapmak ve uygulama sonuçlarını gözlemlemek için aşağıdaki komut dosyalarını çalıştırın. Veritabanı geçişi sırasında bazı ekleme ve seçimi nasıl başarısız olacağını fark edebilirsiniz.
 
-Aşağıdaki komutla test sırasında olağanüstü durum kurtarma sunucusu rolünü de göz atabilirsiniz:
+Aşağıdaki komutla, test sırasında olağanüstü durum kurtarma sunucusunun rolünü de denetleyebilirsiniz:
 
    ```powershell
    (Get-AzSqlDatabaseFailoverGroup `
@@ -310,9 +309,9 @@ Aşağıdaki komutla test sırasında olağanüstü durum kurtarma sunucusu rol�
       -ServerName $mydrservername).ReplicationRole
    ```
 
-Bir yük devretme testi için:
+Yük devretmeyi test etmek için:
 
-1. Yük devretme grubunun el ile bir yük devretme başlatın:
+1. Yük devretme grubunun el ile yük devretmesini başlatın:
 
    ```powershell
    Switch-AzSqlDatabaseFailoverGroup `
@@ -321,7 +320,7 @@ Bir yük devretme testi için:
       -FailoverGroupName $myfailovergroupname
    ```
 
-1. Yük devretme grubu için birincil sunucuya geri dönmek:
+1. Yük devretme grubunu birincil sunucuya geri çevir:
 
    ```powershell
    Switch-AzSqlDatabaseFailoverGroup `
@@ -332,14 +331,14 @@ Bir yük devretme testi için:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide bir Azure SQL veritabanı ve uygulamaya uzak bir bölgeye yük devretme için yapılandırılmış ve bir yük devretme planı test. Şunları öğrendiniz:
+Bu öğreticide, uzak bir bölgeye yük devretme için bir Azure SQL veritabanı ve uygulaması yapılandırmış ve bir yük devretme planını test edersiniz. Şunları öğrendiniz:
 
 > [!div class="checklist"]
 > - Coğrafi çoğaltma yük devretme grubu oluşturma
-> - Bir Azure SQL veritabanını sorgulamak için Java uygulaması çalıştırma
+> - Bir Java uygulamasını çalıştırarak bir Azure SQL veritabanını sorgulama
 > - Yük devretme testi
 
-DMS kullanarak geçirme hakkında bir sonraki öğreticiye ilerleyin.
+DMS kullanarak geçiş yapmak için bir sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
-> [DMS kullanarak Azure SQL veritabanı yönetilen örneği için SQL Server'ı geçirme](../dms/tutorial-sql-server-to-managed-instance.md)
+> [DMS kullanarak SQL Server Azure SQL veritabanı yönetilen örneği 'ne geçirme](../dms/tutorial-sql-server-to-managed-instance.md)

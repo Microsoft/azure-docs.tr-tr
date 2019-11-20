@@ -1,5 +1,5 @@
 ---
-title: Statik HTML web uygulaması - Azure App Service oluştur | Microsoft Docs
+title: Statik HTML Web uygulaması oluşturma-Azure App Service | Microsoft Docs
 description: Statik bir HTML örnek uygulaması dağıtarak Azure App Service'te web uygulaması çalıştırmayı öğrenin.
 services: app-service\web
 documentationcenter: ''
@@ -10,21 +10,20 @@ ms.assetid: 60495cc5-6963-4bf0-8174-52786d226c26
 ms.service: app-service-web
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
-ms.date: 11/20/2018
+ms.date: 08/23/2019
 ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: 064466b73e03e9648b78c32b7e6ffcd83defd607
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 12c034e6521a1afd25e2390502faec39461bf5b5
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66139373"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73471480"
 ---
 # <a name="create-a-static-html-web-app-in-azure"></a>Azure'da statik bir HTML web uygulaması oluşturma
 
-[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar. Bu hızlı başlangıçta, temel bir HTML + CSS sitesini Azure App Service'e dağıtma işlemi gösterilmektedir. Bu hızlı başlangıcı [Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)'de tamamlayacaksınız ama bu komutları [Azure CLI](/cli/azure/install-azure-cli) ile yerel olarak da çalıştırabilirsiniz.
+[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar. Bu hızlı başlangıçta, Azure App Service için temel bir HTML + CSS sitesinin nasıl dağıtılacağı gösterilmektedir. Bu hızlı başlangıcı [Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)'de tamamlayacaksınız ama bu komutları [Azure CLI](/cli/azure/install-azure-cli) ile yerel olarak da çalıştırabilirsiniz.
 
 ![Örnek uygulamanın giriş sayfası](media/app-service-web-get-started-html/hello-world-in-browser-az.png)
 
@@ -48,7 +47,7 @@ Ardından, örnek uygulama deposunu quickstart dizininize kopyalamak için aşa�
 git clone https://github.com/Azure-Samples/html-docs-hello-world.git
 ```
 
-## <a name="create-a-web-app"></a>Web uygulaması oluşturun
+## <a name="create-a-web-app"></a>Web uygulaması oluşturma
 
 Örnek kodu içeren dizine geçin ve `az webapp up` komutunu çalıştırın.
 
@@ -90,7 +89,7 @@ Bu komutun çalıştırılması birkaç dakika sürebilir. Çalıştırıldığ�
 
 ## <a name="browse-to-the-app"></a>Uygulamaya göz atma
 
-Bir tarayıcıda, uygulama URL'sine gidin: `http://<app_name>.azurewebsites.net`.
+Bir tarayıcıda uygulama URL 'sine gidin: `http://<app_name>.azurewebsites.net`.
 
 Sayfa bir Azure App Service web uygulaması çalıştırıyor.
 
@@ -116,11 +115,13 @@ Dağıtım tamamlandıktan sonra **Uygulamaya göz atma** adımında açılan ta
 
 ![Güncelleştirilen örnek uygulama giriş sayfası](media/app-service-web-get-started-html/hello-azure-in-browser-az.png)
 
-## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetme
+## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetin
 
-Oluşturduğunuz web uygulamasını yönetmek için <a href="https://portal.azure.com" target="_blank">Azure portalına</a> gidin.
+Oluşturduğunuz Web uygulamasını yönetmek için [Azure Portal](https://portal.azure.com), **uygulama hizmetleri**' ni arayıp seçin. 
 
-Sol menüden **uygulama hizmetleri**ve ardından Azure uygulamanızın adına tıklayın.
+![Azure portal uygulama hizmetleri 'ni seçin](./media/app-service-web-get-started-html/portal0.png)
+
+**Uygulama hizmetleri** sayfasında, Azure uygulamanızın adını seçin.
 
 ![Azure uygulamasına portal gezintisi](./media/app-service-web-get-started-html/portal1.png)
 

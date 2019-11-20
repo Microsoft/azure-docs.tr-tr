@@ -1,68 +1,68 @@
 ---
-title: Azure portal - Azure depolama içinde depolama hesabı ayarlarını yönetme | Microsoft Docs
-description: Erişim katmanını değiştirme veya hesap tarafından kullanılan çoğaltma türünü değiştirme hesap erişim anahtarlarını yeniden erişim denetimi ayarlarını yapılandırma dahil olmak üzere Azure portalında depolama hesabı ayarlarını yönetmeyi öğrenin. Ayrıca Portalı'nda bir depolama hesabını silmek nasıl öğrenin.
+title: Azure portal-Azure Storage 'da depolama hesabı ayarlarını yönetme | Microsoft Docs
+description: Erişim denetimi ayarlarını yapılandırma, hesap erişim anahtarlarını yeniden oluşturma, erişim katmanını değiştirme veya hesap tarafından kullanılan çoğaltma türünü değiştirme gibi Azure portal depolama hesabı ayarlarını yönetmeyi öğrenin. Ayrıca, portalda bir depolama hesabını silmeyi de öğrenin.
 services: storage
 author: tamram
 ms.service: storage
-ms.topic: article
-ms.date: 06/20/2019
+ms.topic: conceptual
+ms.date: 11/06/2019
 ms.author: tamram
-ms.openlocfilehash: 66bdc4bd1e17347419a6eccd7c9532db17b33001
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: 3c01cc870b20c8256b215eb700548e6cd69ad0d5
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67303488"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73748996"
 ---
-# <a name="manage-storage-account-settings-in-the-azure-portal"></a>Azure portalında depolama hesabı ayarlarını yönetme
+# <a name="manage-storage-account-settings-in-the-azure-portal"></a>Azure portal depolama hesabı ayarlarını yönetme
 
-Çeşitli ayarları depolama hesabınız için kullanılabilir [Azure portalında](https://portal.azure.com). Bu makalede bu ayarlar ve bunları nasıl kullanacağınızı bazılarını açıklar.
+Depolama hesabınızın çeşitli ayarları [Azure Portal](https://portal.azure.com)kullanılabilir. Bu makalede, bu ayarlardan bazıları ve bunların nasıl kullanılacağı açıklanmaktadır.
 
 ## <a name="access-control"></a>Erişim denetimi
 
-Azure depolama, Blob Depolama ve kuyruk depolama ile rol tabanlı erişim denetimi (RBAC) için Azure Active Directory ile yetkilendirme destekler. Azure AD ile yetkilendirme hakkında daha fazla bilgi için bkz: [erişimi yetkilendirin Azure blobları ve Azure Active Directory'yi kullanarak sıralar](storage-auth-aad.md).
+Azure depolama, rol tabanlı erişim denetimi (RBAC) aracılığıyla BLOB depolama ve kuyruk depolama için Azure Active Directory yetkilendirmeyi destekler. Azure AD ile yetkilendirme hakkında daha fazla bilgi için bkz. [Azure Active Directory kullanarak Azure bloblarına ve kuyruklara erişim yetkisi verme](storage-auth-aad.md).
 
-**Erişim denetimi** ayarları Azure portalında kullanıcıları, grupları, hizmet sorumluları ve yönetilen kimlikleri için RBAC rolleri atamak için basit bir yol sunar. RBAC rollerini atama hakkında daha fazla bilgi için bkz. [RBAC ile blob ve kuyruk verilere erişim haklarını yönetme](storage-auth-aad-rbac.md).
+Azure portal **erişim denetimi** ayarları, kullanıcılara, gruplara, hizmet sorumlularına ve YÖNETILEN kimliklere RBAC rolleri atamak için basit bir yol sunar. RBAC rolleri atama hakkında daha fazla bilgi için bkz. [RBAC ile blob ve kuyruk verileri için erişim haklarını yönetme](storage-auth-aad-rbac.md).
 
-## <a name="tags"></a>Tags
+## <a name="tags"></a>Etiketler
 
-Azure depolama, özelleştirilmiş bir taksonomi kullanarak Azure kaynaklarınızı düzenlemek için Azure Resource Manager etiketleri destekler. Böylece bunları mantıksal bir şekilde aboneliğinizde gruplandırabilirsiniz, depolama hesaplarınıza etiketler ekleyebilirsiniz.
+Azure depolama, Azure kaynaklarınızı özelleştirilmiş bir taksonomi ile düzenlemek için Azure Resource Manager etiketlerini destekler. Depolama hesaplarınıza Etiketler uygulayarak bunları aboneliğinizde mantıksal bir biçimde gruplayabilirsiniz.
 
-Depolama hesapları için bir etiket adı 128 karakterle sınırlıdır ve etiket değeri 256 karakterle sınırlıdır.
+Depolama hesapları için, bir etiket adı 128 karakterle sınırlıdır ve bir etiket değeri 256 karakterle sınırlıdır.
 
-Daha fazla bilgi için [Azure kaynaklarınızı düzenlemek için etiketleri kullanma](../../azure-resource-manager/resource-group-using-tags.md).
+Daha fazla bilgi için bkz. [Azure kaynaklarınızı düzenlemek için etiketleri kullanma](../../azure-resource-manager/resource-group-using-tags.md).
 
-## <a name="access-keys"></a>Erişim anahtarları
+## <a name="access-keys"></a>Erişim tuşları
 
-Bir depolama hesabı oluşturduğunuzda, Azure, iki adet 512 bit depolama hesabı erişim anahtarlarını oluşturur. Bu anahtarları, depolama hesabınızın paylaşılan anahtar aracılığıyla erişim yetkisi vermek için kullanılabilir. Döndürme ve uygulamalarınızı kesinti olmadan anahtarları yeniden ve Microsoft bunu düzenli olarak yapmak önerir.
+Bir depolama hesabı oluşturduğunuzda, Azure 2 512 bit depolama hesabı erişim anahtarları oluşturur. Bu anahtarlar, paylaşılan anahtar aracılığıyla depolama hesabınıza erişim yetkisi vermek için kullanılabilir. Uygulamalarınız için kesintiye uğramadan anahtarları döndürebilir ve yeniden oluşturabilirsiniz. Microsoft, bunu düzenli olarak yapmanızı önerir.
 
 [!INCLUDE [storage-account-key-note-include](../../../includes/storage-account-key-note-include.md)]
 
 [!INCLUDE [storage-recommend-azure-ad-include](../../../includes/storage-recommend-azure-ad-include.md)]
 
-### <a name="view-account-keys-and-connection-string"></a>Hesap anahtarları ve bağlantı dizesini görüntüle
+### <a name="view-account-keys-and-connection-string"></a>Hesap anahtarlarını ve bağlantı dizesini görüntüle
 
 [!INCLUDE [storage-view-keys-include](../../../includes/storage-view-keys-include.md)]
 
 ### <a name="regenerate-access-keys"></a>Erişim anahtarlarını yeniden oluştur
 
-Microsoft, düzenli aralıklarla depolama hesabınızın korunmasına yardımcı olmak için erişim anahtarlarınızı yeniden önerir. Böylece, anahtarlarınızın döndürebilirsiniz iki erişim tuşu atanır. Anahtarlarınızı döndürürken, uygulamanızın Azure depolama erişimi süreç boyunca tutar emin olun. 
+Microsoft, depolama hesabınızı güvende tutmaya yardımcı olmak için erişim anahtarlarınızı düzenli aralıklarla yeniden oluşturmanız önerilir. Anahtarlarınızı döndürebilmeniz için iki erişim tuşu atanır. Anahtarlarınızı döndürdüğünüzde, uygulamanızın işlem boyunca Azure depolama 'ya erişimini koruduğundan emin olursunuz. 
 
 > [!WARNING]
-> Erişim tuşlarınızı yeniden oluşturmak, herhangi bir uygulama veya depolama hesabı anahtarı bağımlı olan Azure hizmetleri etkileyebilir. Depolama hesabına erişmek için hesap anahtarı kullanan tüm istemciler, media services, bulut, masaüstü ve mobil uygulamalar ve Azure depolama için grafik kullanıcı arabirimi uygulamalar aşağıdaki gibi yeni anahtarı kullanacak şekilde güncelleştirilmelidir [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/).
+> Erişim anahtarlarınızın yeniden oluşturulması, depolama hesabı anahtarına bağlı olan tüm uygulamaları veya Azure hizmetlerini etkileyebilir. Depolama hesabına erişmek için hesap anahtarını kullanan tüm istemciler, Media Services, bulut, masaüstü ve mobil uygulamalar gibi yeni anahtarı kullanacak şekilde ve Azure depolama için grafik kullanıcı arabirimi uygulamaları (örneğin, Azure Depolama Gezgini) kullanmak üzere güncelleştirilmeleri gerekir [ ](https://azure.microsoft.com/features/storage-explorer/).
 
-Bu işlem, depolama hesabı anahtarlarını döndürmek için izleyin:
+Depolama hesabı anahtarlarınızı döndürmek için bu işlemi izleyin:
 
-1. İkincil anahtarı kullanmak için uygulama kodunuzdaki bağlantı dizelerini güncelleştirin.
-2. Depolama hesabınız için birincil erişim tuşunu yeniden oluşturun. Üzerinde **erişim anahtarlarını** Azure portalındaki dikey **anahtarı yeniden oluştur1**ve ardından **Evet** yeni bir anahtar oluşturmak istediğinizi onaylamak için.
+1. İkincil anahtarı kullanmak için uygulama kodunuzda bağlantı dizelerini güncelleştirin.
+2. Depolama hesabınız için birincil erişim tuşunu yeniden oluşturun. Azure portal **erişim tuşları** dikey penceresinde, yeniden **Oluştur KEY1**' a tıklayın ve sonra yeni bir anahtar oluşturmak istediğinizi onaylamak için **Evet** ' e tıklayın.
 3. Yeni birincil erişim tuşunu referans olarak kullanmak için bağlantı dizelerini güncelleştirin.
 4. İkincil erişim tuşunu da aynı şekilde yeniden oluşturun.
 
-## <a name="account-configuration"></a>Hesabı yapılandırma
+## <a name="account-configuration"></a>Hesap yapılandırması
 
-Bir depolama hesabı oluşturduktan sonra yapılandırmasını değiştirebilirsiniz. Örneğin, nasıl verilerinizi çoğaltılır veya hesabın erişim katmanı sık erişimli'den seyrek erişimliye değiştirmek değiştirebilirsiniz. İçinde [Azure portalında](https://portal.azure.com), depolama hesabınıza gidin, ardından bulun ve tıklatın **yapılandırma** altında **ayarları** görüntülemek ve/veya hesap yapılandırmasını değiştirmek için.
+Bir depolama hesabı oluşturduktan sonra, yapılandırmasını değiştirebilirsiniz. Örneğin, verilerinizin nasıl çoğaltılabileceğini değiştirebilir veya hesabın erişim katmanını sık erişimli iken seyrek erişimli olarak değiştirebilirsiniz. [Azure Portal](https://portal.azure.com), depolama hesabınıza giderek hesap yapılandırmasını görüntülemek ve/veya değiştirmek için **Ayarlar** ' ın altındaki **yapılandırma** ' yı bulup tıklayın.
 
-Depolama hesap yapılandırmasını değiştirme eklenen maliyetlerini neden olabilir. Daha fazla ayrıntı için [Azure depolama fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/) sayfası.
+Depolama hesabı yapılandırmasını değiştirmek, maliyetlerine neden olabilir. Daha ayrıntılı bilgi için bkz. [Azure Depolama fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/) sayfası.
 
 ## <a name="delete-a-storage-account"></a>Bir depolama hesabını silme
 

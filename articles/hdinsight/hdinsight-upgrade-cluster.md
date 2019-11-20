@@ -1,45 +1,47 @@
 ---
-title: Daha yeni bir sürüme yükseltme HDInsight kümesi-Azure
-description: Bilgi daha yeni bir sürüme yükseltme HDInsight kümesine nasıl.
-ms.service: hdinsight
+title: HDInsight kümesini daha yeni bir sürüme yükseltme-Azure
+description: Azure HDInsight kümenizi daha yeni bir sürüme yükseltmeye yönelik yönergeleri öğrenin.
 author: omidm1
 ms.author: omidm
+ms.reviewer: jasonh
+ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 04/04/2017
-ms.openlocfilehash: 4d391c095495a3d0e34a2111d7b4564e6f4f2b8d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 808e592a01bca2066b7d3d37a5fdfa697d739d4b
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67072005"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71122445"
 ---
-# <a name="upgrade-hdinsight-cluster-to-a-newer-version"></a>HDInsight kümesini yeni sürüme yükseltme
-En son HDInsight özelliklerden yararlanmak için HDInsight kümeleri en son sürüme yükseltilmesi özellikle önerilir. İzleyin, HDInsight'ı yükseltmek için yönergeleri küme sürümleri.
+# <a name="upgrade-hdinsight-cluster-to-a-newer-version"></a>HDInsight kümesini daha yeni bir sürüme yükseltme
+
+En son HDInsight özelliklerinden yararlanmak için HDInsight kümelerinin en son sürüme yükseltilmesi önerilir. HDInsight küme sürümlerinizi yükseltmek için aşağıdaki yönergeleri izleyin.
 
 > [!NOTE]  
-> HDInsight'ın desteklenen sürümleri hakkında daha fazla bilgi için bkz: [HDInsight bileşen sürümü](hdinsight-component-versioning.md#supported-hdinsight-versions).
+> HDInsight 'ın desteklenen sürümleri hakkında bilgi için bkz. [HDInsight bileşen sürümleri](hdinsight-component-versioning.md#supported-hdinsight-versions).
 
 ## <a name="upgrade-tasks"></a>Yükseltme görevleri
-HDInsight kümesini yükseltme iş akışı aşağıdaki gibidir.
 
-![Yükseltme iş akışı diyagramı](./media/hdinsight-upgrade-cluster/upgrade-workflow.png)
+HDInsight kümesini yükseltmek için iş akışı aşağıdaki gibidir.
+![HDInsight yükseltme iş akışı diyagramı](./media/hdinsight-upgrade-cluster/upgrade-workflow-diagram.png)
 
-1. Bu belgede, HDInsight kümenizi yükseltme sırasında gerekli olabilecek değişiklikleri anlamak için her bir bölümünü okuyun.
-2. Bir küme bir test/kalite güvencesi ortamı oluşturun. Küme oluşturma ile ilgili daha fazla bilgi için bkz: [Linux tabanlı HDInsight kümeleri oluşturmayı öğrenin](hdinsight-hadoop-provision-linux-clusters.md)
-3. Mevcut işleri, veri kaynağı ve havuz yeni ortama kopyalayın.
-4. İşlerinizi yeni kümede beklendiği gibi çalıştığından emin olmak için doğrulama sınaması gerçekleştirin.
+1. HDInsight kümenizi yükseltirken gerekebilecek değişiklikleri anlamak için bu belgenin her bölümünü okuyun.
+2. Test/kalite güvencesi ortamı olarak bir küme oluşturun. Küme oluşturma hakkında daha fazla bilgi için bkz. [Linux tabanlı HDInsight kümeleri oluşturma](hdinsight-hadoop-provision-linux-clusters.md) hakkında bilgi edinin
+3. Mevcut işleri, veri kaynaklarını ve havuzları yeni ortama kopyalayın.
+4. İşlerinizin yeni kümede beklendiği gibi çalıştığından emin olmak için doğrulama testi gerçekleştirin.
 
-Her şeyin beklendiği gibi çalıştığını doğruladıktan sonra geçiş kapalı kalma süresi zamanlayın. Bu kesinti sırasında aşağıdaki eylemleri gerçekleştirin:
+Her şeyin beklendiği gibi çalıştığından emin olduktan sonra geçiş için kapalı kalma süresi zamanlayın. Bu kapalı kalma süresi boyunca aşağıdaki işlemleri yapın:
 
-1.  Küme düğümleri üzerinde yerel olarak depolanan tüm geçici verileri yedekleyin. Örneğin, doğrudan bir baş düğüm üzerinde depolanan verileri varsa.
-2.  Var olan kümeyi silin.
-3.  Bir küme önceki kümeyle aynı varsayılan veri deposunu kullanarak en son (veya desteklenen) HDI sürümü ile aynı sanal ağ alt ağda oluşturun. Bu, var olan üretim verileriniz çalışmaya devam etmek yeni kümeye sağlar.
-4.  Yedeklediğiniz herhangi bir geçici veri içeri aktarın.
-5.  Başlangıç işleri/yeni küme kullanarak işleme devam edin.
+1.  Küme düğümlerinde yerel olarak depolanan tüm geçici verileri yedekleyin. Örneğin, doğrudan bir baş düğümde depolanan verileriniz varsa.
+2.  Mevcut kümeyi silin.
+3.  Önceki kümenin kullandığı varsayılan veri deposunu kullanarak en son (veya desteklenen) HDI sürümü ile aynı VNET alt ağında bir küme oluşturun. Bu, yeni kümenin mevcut üretim verilerinize karşı çalışmaya devam etmesine olanak tanır.
+4.  Yedeklediğiniz tüm geçici verileri içeri aktarın.
+5.  Yeni kümeyi kullanarak işleri başlatın/işleme devam edin.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
+
 * [Linux tabanlı HDInsight kümeleri oluşturmayı öğrenin](hdinsight-hadoop-provision-linux-clusters.md)
 * [SSH kullanarak HDInsight’a bağlanma](hdinsight-hadoop-linux-use-ssh-unix.md)
-* [Apache Ambari kullanarak Linux tabanlı küme yönetme](hdinsight-hadoop-manage-ambari.md)
-
+* [Apache ambarı 'nı kullanarak Linux tabanlı bir kümeyi yönetme](hdinsight-hadoop-manage-ambari.md)

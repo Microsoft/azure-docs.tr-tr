@@ -3,17 +3,16 @@ documentType: LandingData
 title: Bing Resim Arama API'si Belgeleri
 metadata:
   document_id: ce69fd12-adf8-11e7-abc4-cec278b6b50a
-  title: 'Bing Resim Arama API''si Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları | Microsoft Docs'
-  description: Web'de görüntü aramak için Bing Resim Arama API'sinin nasıl kullanılacağını öğrenin.
+  title: 'Bing Resim Arama API’si Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları'
+  titleSuffix: Azure Cognitive Services
+  description: Bing Resim Arama API'si Bing'in resim arama özelliklerini uygulamalarınızla tümleştirmenize olanak tanır.
   services: cognitive-services
   author: nitinme
-  manager: cgronlun
+  manager: nitinme
   ms.service: cognitive-services
   ms.subservice: bing-image-search
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 1/16/2019
+  ms.date: 7/25/2019
   ms.author: nitinme
 abstract:
   description: Bing Resim Arama API'si Bing'in resim arama özelliklerini uygulamalarınızla tümleştirmenize olanak tanır. API ile kullanıcı arama sorguları göndererek bing.com/images benzeri ilgili ve yüksek kaliteli resimler alıp görüntüleyebilirsiniz.
@@ -96,7 +95,7 @@ sections:
           - title: REST
             html: '<p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference">Bing Resim Arama API’si v7</a></p><p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v5-reference/">Bing Resim Arama API’si v5</p>'
           - title: SDK’lar
-            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingimagesearch?view=azure-dotnet">.NET</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/imagesearch?view=azure-java-stable">Java</a></p> <p><a href="https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/imagesearch?view=azure-python">Python</a></p> <p><a href="https://docs.microsoft.com/javascript/api/azure-cognitiveservices-imagesearch?view=azure-node-latest">Node.js</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/imagesearch">Go</a></p>'
+            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingimagesearch?view=azure-dotnet">.NET</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingimagesearch?view=azure-java-stable">Java</a></p> <p><a href="https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/imagesearch?view=azure-python">Python</a></p> <p><a href="https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-imagesearch/?view=azure-node-latest">Node.js</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/imagesearch">Go</a></p>'
           - title: PowerShell
             html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
           - title: CLI

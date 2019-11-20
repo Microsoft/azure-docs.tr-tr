@@ -1,26 +1,19 @@
 ---
-title: Azure CLI betik örneği - Premium Azure önbelleği için Redis Kümeleme ile oluşturma | Microsoft Docs
+title: Azure CLı betik örneği-kümeleme ile Reda için Premium Azure önbelleği oluşturma
 description: Azure CLI betik örneği - Azure Cache Premium katmanı için Redis Kümeleme ile oluşturma
-services: cache
-documentationcenter: ''
 author: yegu-ms
-manager: jhubbard
-editor: ''
 tags: azure-service-management
-ms.assetid: 07bcceae-2521-4fe3-b88f-ed833104ddd2
 ms.service: cache
 ms.devlang: azurecli
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: tbd
+ms.topic: sample
 ms.date: 08/30/2017
 ms.author: yegu
-ms.openlocfilehash: 18538cf713d2938b0b595c9d4664c39c6ada5231
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1813bf7112969436012627147b94f656537029d5
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62130458"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74122498"
 ---
 # <a name="create-a-premium-azure-cache-for-redis-with-clustering"></a>Premium Azure önbelleği için Redis Kümeleme ile oluşturma
 

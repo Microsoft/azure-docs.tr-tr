@@ -1,6 +1,6 @@
 ---
-title: Azure AD raporlama API'si ile çalışmaya başlama | Microsoft Docs
-description: Nasıl Azure Active Directory raporlama API'SİYLE çalışmaya başlama
+title: Azure AD Raporlama API 'SI ile çalışmaya başlama | Microsoft Docs
+description: Azure Active Directory Reporting API 'SI ile çalışmaya başlama
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -17,61 +17,61 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2ff3e530dae3a6db4b7c84292a25e83c11000baf
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c841195cacd8c8d7698f69435572587bf04c3d67
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60286736"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74008370"
 ---
-# <a name="get-started-with-the-azure-active-directory-reporting-api"></a>Azure Active Directory raporlama API'SİYLE çalışmaya başlama
+# <a name="get-started-with-the-azure-active-directory-reporting-api"></a>Azure Active Directory Reporting API 'SI ile çalışmaya başlama
 
-Azure Active Directory ile çeşitli sağlar [raporları](overview-reports.md), SIEM sistemleri, Denetim ve iş zekası araçları gibi uygulamalar için yararlı bilgiler içeren. 
+Azure Active Directory, SıEM sistemleri, denetim ve iş zekası araçları gibi uygulamalar için yararlı bilgiler içeren çeşitli [raporlar](overview-reports.md)sağlar. 
 
-Azure AD raporlar için Microsoft Graph API'sini kullanarak, bir dizi REST tabanlı API aracılığıyla verilere programlı erişim elde edebilirsiniz. Çeşitli programlama dilleri ve araçlarından bu API'leri çağırabilirsiniz.
+Azure AD raporları için Microsoft Graph API 'sini kullanarak, bir dizi REST tabanlı API aracılığıyla verilere programlı erişim elde edebilirsiniz. Çeşitli programlama dilleri ve araçlarından bu API'leri çağırabilirsiniz.
 
-Bu makalede erişim yolları dahil olmak üzere Raporlama API'si ile bir genel bakış sağlar.
+Bu makalede, size erişme yolları dahil olmak üzere Raporlama API 'sine ilişkin bir genel bakış sunulmaktadır.
 
-Sorun yaşarsanız bkz [Azure Active Directory için destek alma](https://docs.microsoft.com/azure/active-directory/active-directory-troubleshooting-support-howto).
+Sorunlarla karşılaşırsanız, bkz. [Azure Active Directory için destek alma](https://docs.microsoft.com/azure/active-directory/active-directory-troubleshooting-support-howto).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Raporlama API'si ile veya kullanıcı müdahalesi olmadan erişmek için gerekir:
+Raporlama API 'sine erişmek için veya Kullanıcı müdahalesi olmadan, şunları yapmanız gerekir:
 
-1. (Güvenlik okuyucusu, Güvenlik Yöneticisi, genel yönetici) Rolleri Ata
+1. Rol atama (güvenlik okuyucusu, Güvenlik Yöneticisi, genel yönetici)
 2. Bir uygulamayı kaydetme
 3. İzinleri verme
-4. Yapılandırma ayarlarını toplayın
+4. Yapılandırma ayarlarını topla
 
-Ayrıntılı yönergeler için bkz. [Azure Active Directory raporlama API'SİYLE erişmek için Önkoşullar](howto-configure-prerequisites-for-reporting-api.md). 
+Ayrıntılı yönergeler için [Azure Active Directory Raporlama API 'sine erişim önkoşulları](howto-configure-prerequisites-for-reporting-api.md)bölümüne bakın. 
 
 ## <a name="api-endpoints"></a>API uç noktaları 
 
-Microsoft Graph API uç nokta için denetim günlüklerini `https://graph.microsoft.com/beta/auditLogs/directoryAudits` ve oturum açma işlemleri için Microsoft Graph API uç noktası `https://graph.microsoft.com/beta/auditLogs/signIns`. Daha fazla bilgi için [denetim API'si başvurusu](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/directoryaudit) ve [oturum açma, API Başvurusu](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/signIn).
+Denetim günlükleri için Microsoft Graph API uç noktası `https://graph.microsoft.com/beta/auditLogs/directoryAudits` ve oturum açma işlemleri için Microsoft Graph API uç noktası `https://graph.microsoft.com/beta/auditLogs/signIns`. Daha fazla bilgi için bkz. [API başvurusunu denetleme](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/directoryaudit) ve [oturum açma API başvurusu](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/signIn).
 
-Ayrıca, kullanabileceğiniz [kimlik koruması risk olayları API](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/identityriskevent) Microsoft Graph'ı kullanarak güvenlik algılamaları programlı erişim elde etmek için. Daha fazla bilgi için [Microsoft Graph ve Azure Active Directory kimlik koruması ile çalışmaya başlama](../identity-protection/graph-get-started.md). 
+Ayrıca, Microsoft Graph kullanarak güvenlik algılamalarından programlı erişim kazanmak için [kimlik koruması risk ALGıLAMA API](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/identityriskevent) 'sini de kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory kimlik koruması ve Microsoft Graph ile çalışmaya başlama](../identity-protection/graph-get-started.md). 
 
 > [!NOTE]
->  **Https:\/\/graph.windows.net\/\<Kiracı adı\>\/raporları\/**  uç nokta kullanım dışı bırakılmıştır. Etkinlik ve güvenlik raporları program aracılığıyla erişmek için yukarıda açıklanan yeni API uç noktalarını kullanın.
+>  **Https:\/\/graph.windows.net\/\<kiracı-adı\>\/raporlar\/** uç noktası kullanım dışıdır. Etkinlik ve güvenlik raporlarına programlı bir şekilde erişmek için yukarıda açıklanan yeni API uç noktalarını kullanın.
   
-## <a name="apis-with-graph-explorer"></a>API'leri ile Graph Gezgini
+## <a name="apis-with-graph-explorer"></a>Graph Explorer ile API 'Ler
 
-Kullanabileceğiniz [explorer MSGraph](https://developer.microsoft.com/graph/graph-explorer) oturum açma işleminizi doğrulamak ve API veri denetleyebilirsiniz. Oturum açma düğmelerinin her ikisi de Graph Gezgini Arabiriminde kullanarak hesabınızda oturum açtığınızdan emin olun ve ayarlama **AuditLog.Read.All** ve **Directory.Read.All** gösterildiği kiracınız için izinleri.   
+Oturum açma ve denetim API 'SI verilerini doğrulamak için [MSGraph Gezginini](https://developer.microsoft.com/graph/graph-explorer) kullanabilirsiniz. Graph Explorer Kullanıcı arabirimindeki oturum açma düğmelerinden her ikisini kullanarak hesabınızda oturum açıp **AuditLog. Read. All** ve **Directory. Read.** , kiracınız için gösterildiği gibi tüm izinleri ayarlayın.   
 
 ![Graph Gezgini](./media/concept-reporting-api/graph-explorer.png)
 
-![UI izinleri değiştirme](./media/concept-reporting-api/modify-permissions.png)
+![İzin Kullanıcı arabirimini değiştirme](./media/concept-reporting-api/modify-permissions.png)
 
-## <a name="use-certificates-to-access-the-azure-ad-reporting-api"></a>Azure AD raporlama API'si erişmek için sertifika kullanma 
+## <a name="use-certificates-to-access-the-azure-ad-reporting-api"></a>Azure AD Raporlama API 'sine erişmek için sertifikaları kullanma 
 
-Kullanıcı müdahalesi olmadan raporlama verilerini almak planlıyorsanız Azure AD raporlama API'si ile sertifikaları kullanır.
+Raporlama verilerini kullanıcı müdahalesi olmadan almayı planlıyorsanız, Azure AD Raporlama API 'sini sertifikalarla birlikte kullanın.
 
-Ayrıntılı yönergeler için bkz. [sertifikalarla Azure AD raporlama API'sini kullanarak veri alma](tutorial-access-api-with-certificates.md).
+Ayrıntılı yönergeler için bkz. [sertifikalarla Azure AD Raporlama API 'sini kullanarak veri edinme](tutorial-access-api-with-certificates.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
- * [Raporlama API'sini erişmek için Önkoşullar](howto-configure-prerequisites-for-reporting-api.md) 
- * [Sertifikalarla Azure AD raporlama API'sini kullanarak veri alma](tutorial-access-api-with-certificates.md)
- * [Azure AD raporlama API'sini hatalarını giderme](troubleshoot-graph-api.md)
+ * [Raporlama API 'sine erişim önkoşulları](howto-configure-prerequisites-for-reporting-api.md) 
+ * [Sertifikalarla Azure AD Raporlama API 'sini kullanarak veri edinme](tutorial-access-api-with-certificates.md)
+ * [Azure AD Raporlama API 'sindeki hataların sorunlarını giderme](troubleshoot-graph-api.md)
 
 

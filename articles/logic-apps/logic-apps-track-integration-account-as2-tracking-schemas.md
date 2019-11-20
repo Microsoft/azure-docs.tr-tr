@@ -76,7 +76,7 @@ Yardımcı olmak için başarı, hatalar ve ileti özelliklerini işletmeden iş
 | outgoingHeaders |JToken sözlüğü | AS2 ileti üst bilgisi ayrıntıları giden. (İsteğe bağlı) |
 | isNrrEnabled | Boolean | Değer olmayan biliniyorsa varsayılan değeri kullanın. (Zorunlu) |
 | isMdnExpected | Boolean | Değer olmayan biliniyorsa varsayılan değeri kullanın. (Zorunlu) |
-| mdnType | Enum | İzin verilen değerler **NotConfigured**, **eşitleme**, ve **zaman uyumsuz**. (Zorunlu) |
+| mdnType | Enum | İzin verilen değerler **NotConfigured**, **Sync**, ve **Async**. (Zorunlu) |
 ||||
 
 ## <a name="as2-mdn-tracking-schema"></a>AS2 MDN izleme şeması

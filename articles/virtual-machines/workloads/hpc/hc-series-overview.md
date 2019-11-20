@@ -4,7 +4,7 @@ description: Azure'da HC serisi VM boyutu için Önizleme desteği hakkında dah
 services: virtual-machines
 documentationcenter: ''
 author: vermagit
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
@@ -12,12 +12,12 @@ ms.workload: infrastructure-services
 ms.topic: article
 ms.date: 05/07/2019
 ms.author: amverma
-ms.openlocfilehash: f96a1179c103dd9dfb4d358572f9a9adbe24b977
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6cdb539846104f70dabf684925685fb062fea8af
+ms.sourcegitcommit: 66237bcd9b08359a6cce8d671f846b0c93ee6a82
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66809880"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67797543"
 ---
 # <a name="hc-series-virtual-machine-overview"></a>HC serisi sanal makineye genel bakış
 
@@ -31,7 +31,7 @@ Yukarıdaki topolojisi HC serisi hiper yönetici yapılandırması için de yaş
 
 Sanal makine pCores 0-1 ve 25 24 verilen olmayan, bilgi içeriyor. Bu nedenle, bunu yerel olarak 22 çekirdek varmış gibi her vNUMA kullanıma sunar.
 
-Sıra Intel Xeon Platinum, altın ve Gümüş CPU bir-zar 2B kafes ağ içinde iletişim kurmak ve dış CPU yuvaya uygular. İşlemi en iyi performans ve tutarlılık için sabitleme kesinlikle öneririz. İşlem sabitleme çalışır HC serisi VM'ler üzerinde temel alınan Silikon olarak açığa çıkarıldığı-Konuk VM. Daha fazla üzerinde Intel Xeon SP mimarisi: https://bit.ly/2RCYkiE
+Sıra Intel Xeon Platinum, altın ve Gümüş CPU bir-zar 2B kafes ağ içinde iletişim kurmak ve dış CPU yuvaya uygular. İşlemi en iyi performans ve tutarlılık için sabitleme kesinlikle öneririz. İşlem sabitleme çalışır HC serisi VM'ler üzerinde temel alınan Silikon olarak açığa çıkarıldığı-Konuk VM. Daha fazla bilgi için bkz. [Intel Xeon SP mimarisi](https://bit.ly/2RCYkiE).
 
 Aşağıdaki diyagramda çekirdek ayrımı ayrılmış Azure hiper Yöneticisi ve HC serisi VM için gösterilmektedir.
 

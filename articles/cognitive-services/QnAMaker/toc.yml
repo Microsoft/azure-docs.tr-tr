@@ -4,11 +4,15 @@
   items:
     - name: Soru-Cevap Oluşturma nedir?
       href: Overview/overview.md
+    - name: Yenilikler
+      href: whats-new.md
 - name: Hızlı Başlangıçlar
   items:
     - name: Yeni bilgi bankası oluşturma
-      href: How-To/create-knowledge-base.md
-    - name: Bilgi bankasından yanıt alın
+      href: quickstarts/create-publish-knowledge-base.md
+    - name: Meta verilerle soru ekleme
+      href: quickstarts/add-question-metadata-portal.md
+    - name: Yanıt alma
       items:
         - name: Postman'i kullanma
           href: Quickstarts/get-answer-from-kb-using-postman.md
@@ -25,7 +29,7 @@
             - name: Java
               href: Quickstarts/create-new-kb-java.md
             - name: Node.js
-              href: Quickstarts/create-new-kb-nodejs.md
+              href: Quickstarts/create-knowledge-rest-api-nodejs.md
             - name: Python
               href: Quickstarts/create-new-kb-python.md
         - name: Bilgi bankası yayımlama
@@ -37,10 +41,10 @@
             - name: Java
               href: Quickstarts/publish-kb-java.md
             - name: Node.js
-              href: Quickstarts/publish-kb-nodejs.md
+              href: 'Quickstarts/create-knowledge-rest-api-nodejs.md##publish-a-knowledge-base'
             - name: Python
               href: Quickstarts/publish-kb-python.md
-        - name: Bilgi bankasından yanıt alın
+        - name: Yanıt alma
           items:
             - name: 'C#'
               href: Quickstarts/get-answer-from-knowledge-base-csharp.md
@@ -52,6 +56,14 @@
               href: Quickstarts/get-answer-from-knowledge-base-nodejs.md
             - name: Python
               href: Quickstarts/get-answer-from-knowledge-base-python.md
+    - name: SDK'ları kullanma
+      items:
+        - name: 'C#'
+          href: ./Quickstarts/create-publish-kb-csharp-sdk.md
+        - name: Node.js
+          href: ./Quickstarts/create-publish-kb-nodejs-sdk.md
+        - name: Python
+          href: ./Quickstarts/python-sdk.md
 - name: Öğreticiler
   items:
     - name: KB’den oluşturma ve yanıtlama
@@ -66,8 +78,11 @@
     - name: Bilgi bankası
       href: Concepts/knowledge-base.md
       displayName: 'metadata, pair'
+    - name: LUIS ve Soru-Cevap Oluşturma'yı kullanma
+      href: ../luis/choose-natural-language-processing-service.md?toc=/azure/cognitive-services/qnamaker/toc.json
     - name: Bilgi bankası geliştirme yaşam döngüsü
       href: Concepts/development-lifecycle-knowledge-base.md
+      displayName: 'version control, test, index, publish, monitor usage, create'
     - name: En iyi uygulamalar
       href: Concepts/best-practices.md
       displayName: 'tag, rank, score, threshold, question, alternate, filter, synonym, answer, active learning, collaborate, alteration, metadata, bot, personality, extraction, chit-chat'
@@ -98,10 +113,10 @@
           displayName: 'create bot, bot, publish to bot, test, edit'
         - name: Meta verileri kullanarak yanıt alma
           href: How-To/metadata-generateanswer-usage.md
-          displayName: 'isTest, test, route, request, http, post, body, header, json, metadata, top, strictFilters, GenerateAnswer, API, answer, RankerType, id, text, question, context'
-        - name: Bilgi bankasıyla etkinleştirilen bot oluşturma
+          displayName: 'isTest, test, route, request, http, post, body, header, json, metadata, top, strictFilters, GenerateAnswer, API, answer, RankerType, id, text, question, context, 200, 2xx, 400, 401, 403, 404'
+        - name: Soru-Cevap Oluşturma ve LUIS ile bot oluşturma
           href: Tutorials/integrate-qnamaker-luis.md
-        - name: Farklı bir dilde bilgi bankası oluşturma
+        - name: Dil seçimi
           href: How-To/language-knowledge-base.md
         - name: Bilgi bankasını geçirme
           href: Tutorials/migrate-knowledge-base.md
@@ -115,34 +130,27 @@
           displayName: 'active learning, suggestion, dialog prompt, train api, feedback loop, autolearn, auto-learn, user setting, service setting, services setting, accept, reject, filter by suggestion, filter active learning, clusterHead, totalAutoSuggestedCount, totalUserSuggestedCount, autoSuggestedCount, userSuggestedCount'
     - name: Hizmeti yönetme
       items:
-        - name: Soru-Cevap Oluşturma hizmetini ayarlama
+        - name: Kaynakları yönetme
           href: How-To/set-up-qnamaker-service-azure.md
-        - name: Bilgi bankanız hakkında analizler alma
+          displayName: 'azure, resource, key, upgrade, pricing, tier,'
+        - name: Analiz alma
           href: How-To/get-analytics-knowledge-base.md
-        - name: Anahtarları yönetme
-          href: How-To/key-management.md
-        - name: Soru-Cevap Oluşturma dağıtımınız için kapasite seçme
+        - name: Kapasite seçme
           href: Tutorials/choosing-capacity-qnamaker-deployment.md
-        - name: Soru-Cevap Oluşturma hizmetinizi yükseltme
-          href: How-To/upgrade-qnamaker-service.md
-        - name: Soru-Cevap Oluşturma için iş sürekliliği oluşturma
+        - name: İş sürekliliği planı oluşturma
           href: How-To/business-continuity-plan.md
-        - name: Soru-Cevap Oluşturma çalışma zamanı için sorun giderme ve güncelleştirme
-          href: How-To/troubleshooting-runtime.md
-    - name: REST API’yi kullanma
-      items:
-        - name: 'C#'
-          href: Quickstarts/csharp.md
-        - name: Java
-          href: Quickstarts/java.md
-        - name: Node.js
-          href: Quickstarts/nodejs.md
-        - name: Python
-          href: Quickstarts/python.md
-        - name: Başlayın
-          href: Quickstarts/go.md
 - name: Başvuru
   items:
+    - name: Diller
+      href: Overview/language-support.md
+    - name: Sınırlar
+      href: limits.md
+    - name: Sorun giderme
+      href: troubleshooting.md
+    - name: Dosya biçimleri
+      items:
+        - name: Toplu test TSV
+          href: reference-tsv-format-batch-testing.md
     - name: REST API Başvurusu
       items:
         - name: Yazma API’leri
@@ -152,15 +160,6 @@
         - name: API eğitme
           href: 'https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime/train'
       href: 'https://go.microsoft.com/fwlink/?linkid=2092179'
-    - name: SSS
-      href: faqs.md
-    - name: Sınırlar
-      href: limits.md
-    - name: Sözlük
-      href: glossary.md
-    - name: HTTP yanıt kodları
-      displayName: '200, 2xx, 400, 401, 403, 404'
-      href: http-response-codes.md
     - name: Örnekler
       items:
         - name: Soru-Cevap Oluşturma yardım robotu
@@ -169,20 +168,36 @@
       items:
         - name: 'C#'
           items:
-            - name: NuGet
+            - name: Başvuru Belgeleri
+              href: 'https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet'
+            - name: NuGet paketi
               href: 'https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker/'
+            - name: Örnekler
+              href: 'https://github.com/Azure-Samples/cognitive-services-qnamaker-csharp'
         - name: Başlayın
           items:
+            - name: Başvuru Belgeleri
+              href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v4.0/qnamaker'
             - name: SDK
               href: 'https://github.com/Azure/azure-sdk-for-go/tree/master/services/cognitiveservices/v4.0/qnamaker'
+            - name: Örnekler
+              href: 'https://github.com/Azure-Samples/cognitive-services-qnamaker-go'
         - name: Node.js
           items:
+            - name: Başvuru Belgeleri
+              href: 'https://docs.microsoft.com/javascript/api/%40azure/cognitiveservices-qnamaker/index?view=azure-node-latest'
             - name: NPM
               href: 'https://www.npmjs.com/package/azure-cognitiveservices-qnamaker'
+            - name: Örnekler
+              href: 'https://github.com/Azure-Samples/cognitive-services-qnamaker-nodejs'
         - name: Python
           items:
+            - name: Başvuru Belgeleri
+              href: 'https://docs.microsoft.com/python/api/azure-cognitiveservices-knowledge-qnamaker/azure.cognitiveservices.knowledge.qnamaker?view=azure-python'
             - name: Pip
               href: 'https://pypi.org/project/azure-cognitiveservices-knowledge-qnamaker/'
+            - name: Örnekler
+              href: 'https://github.com/Azure-Samples/cognitive-services-qnamaker-python'
         - name: Ruby
           items:
             - name: Gem
@@ -197,13 +212,13 @@
       href: 'https://azure.microsoft.com/roadmap/'
     - name: Fiyatlandırma ve limitler
       href: 'https://aka.ms/qnamaker-pricing'
-    - name: Dil desteği
-      href: Overview/language-support.md
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/QnAMaker'
     - name: UserVoice
-      href: 'https://aka.ms/qnamaker-uservoice'
+      href: 'https://cognitive.uservoice.com/forums/578689-qna-maker-api'
     - name: Arama
       href: 'https://docs.microsoft.com/search/index?search=QnAMaker'
     - name: Blog
       href: 'https://blog.botframework.com/category/QnAMaker/'
+- name: Soru-Cevap Oluşturma portalı
+  href: 'https://www.qnamaker.ai'

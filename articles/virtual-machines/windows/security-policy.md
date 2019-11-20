@@ -1,10 +1,10 @@
 ---
-title: Güvenli ve Azure Windows Vm'leriniz üzerinde ilkelerini kullanma | Microsoft Docs
-description: Windows ve azure'da sanal makineler için güvenlik ve ilkeleri hakkında bilgi edinin.
+title: Azure 'daki Windows sanal makinelerinizdeki ilkeleri güvenli hale getirin ve kullanın
+description: Azure 'daki Windows ve sanal makineler için güvenlik ve ilkeler hakkında bilgi edinin.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
@@ -14,14 +14,14 @@ ms.tgt_pltfrm: vm-windows
 ms.date: 11/26/2018
 ms.author: cynthn
 ms.topic: conceptual
-ms.openlocfilehash: ce8429934157bacde8e709165cf2f35c98d2bb15
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4ae87a7a7a62d2cbf9b712fdd99b9a275aaf4f22
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60405425"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073299"
 ---
-# <a name="secure-and-use-policies-on-virtual-machines-in-azure"></a>Güvenli ve Azure içindeki sanal makinelerde ilkelerini kullanma
+# <a name="secure-and-use-policies-on-virtual-machines-in-azure"></a>Azure 'da sanal makinelerde ilkeleri güvenli hale getirme ve kullanma
 
 [!INCLUDE [virtual-machines-security-policy](../../../includes/virtual-machines-security-policy.md)]
 

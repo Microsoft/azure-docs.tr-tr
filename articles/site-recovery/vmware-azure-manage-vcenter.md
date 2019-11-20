@@ -1,121 +1,121 @@
 ---
-title: Azure Site Recovery kullanılarak Azure'da VMware vm'lerinin olağanüstü durum kurtarma için VMware vCenter sunucularını yönetme | Microsoft Docs
-description: Bu makalede nasıl ekleme ve Azure'da Azure Site Recovery ile VMware vm'lerinin olağanüstü durum kurtarma için VMware vCenter'ı yönetme.
+title: Azure Site Recovery VMware vCenter sunucularını yönetme
+description: Bu makalede, Azure Site Recovery ile Azure 'a VMware VM 'lerinin olağanüstü durum kurtarması için VMware vCenter 'ın nasıl ekleneceği ve yönetileceği açıklanmaktadır.
 author: Rajeswari-Mamilla
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 03/13/2019
 ms.author: ramamill
-ms.openlocfilehash: 9694c682f171ab715812b05fed2064c9bbcd36b3
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 8f339103f67f37d10999ef43fa57a6eb27b60f37
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60600362"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083970"
 ---
-# <a name="manage-vmware-vcenter-server"></a>VMware vCenter server'ı yönetme
+# <a name="manage-vmware-vcenter-server"></a>VMware vCenter Server 'ı yönetme
 
-Bu makalede, bir VMware vCenter üzerinde gerçekleştirilen çeşitli Site Recovery işlemleri açıklanır. Doğrulama [önkoşulları](vmware-physical-azure-support-matrix.md#replicated-machines) başlamadan önce.
+Bu makalede, bir VMware vCenter üzerinde gerçekleştirilebilecek çeşitli Site Recovery işlemleri açıklanmaktadır. Başlamadan önce [önkoşulları](vmware-physical-azure-support-matrix.md#replicated-machines) doğrulayın.
 
 
-## <a name="set-up-an-account-for-automatic-discovery"></a>Otomatik bulma için bir hesabı ayarlayın
+## <a name="set-up-an-account-for-automatic-discovery"></a>Otomatik bulma için bir hesap ayarlayın
 
-Site Recovery, yük devretme ve yeniden çalışma sanal makinelerin ve işlem sunucusu sanal makineleri otomatik olarak bulmak üzere VMware erişmesi gerekir. Erişim için bir hesap şu şekilde oluşturun:
+Site Recovery, işlem sunucusunun sanal makineleri otomatik olarak bulması ve sanal makinelerin yük devretme ve yeniden çalışma için VMware 'e erişmesi gerekir. Erişim için aşağıdaki gibi bir hesap oluşturun:
 
-1. Yapılandırma sunucusu makinede oturum açın.
-2. Başlatma masaüstü kısayolunu kullanarak cspsconfigtool.exe açın.
-3. Tıklayın **hesabı Ekle** üzerinde **hesabı Yönet** sekmesi.
+1. Yapılandırma sunucusu makinesinde oturum açın.
+2. Masaüstü kısayolunu kullanarak Cspsconfigtool. exe ' yi başlatın.
+3. **Hesabı Yönet** sekmesinde **Hesap Ekle** ' ye tıklayın.
 
    ![Hesap Ekle](./media/vmware-azure-manage-vcenter/addaccount.png)
-1. Hesabı ayrıntılarını girin ve tıklatın **Tamam** ekleyin.  Hesabınız aşağıdaki tabloda özetlenen ayrıcalıkları olmalıdır. 
+1. Hesap ayrıntılarını girip **Tamam** ' a tıklayarak ekleyin.  Hesap, aşağıdaki tabloda özetlenen ayrıcalıklara sahip olmalıdır. 
 
-Yedekleme Site Recovery hizmeti ile eşitlenmesi hesap bilgileri için yaklaşık 15 dakika sürer.
+Hesap bilgilerinin Site Recovery hizmetiyle eşitlenmesi yaklaşık 15 dakika sürer.
 
 ### <a name="account-permissions"></a>Hesap izinleri
 
 |**Görev** | **Hesap** | **İzinler** | **Ayrıntılar**|
 |--- | --- | --- | ---|
-|**Otomatik bulma/geçirme (olmadan yeniden çalışma)** | En az bir salt okunur kullanıcı gerekir | Veri Merkezi nesnesi –> Alt Nesneye Yay, role=Read-only | Kullanıcı veri merkezi düzeyinde atandı ve bu veri merkezindeki tüm nesnelere erişimi var.<br/><br/> Erişimi kısıtlamak için Ata **erişemez** rolüyle **alt yay** nesnesine alt nesnelere (vSphere konakları, veri depoları, sanal makineler ve ağlar).|
-|**Çoğaltma/yük devretme** | En az bir salt okunur kullanıcı gerekir| Veri Merkezi nesnesi –> Alt Nesneye Yay, role=Read-only | Kullanıcı veri merkezi düzeyinde atandı ve bu veri merkezindeki tüm nesnelere erişimi var.<br/><br/> Erişimi kısıtlamak için Ata **erişemez** rolüyle **alt yay** nesne alt nesnelere (vSphere konakları, veri depoları, sanal makineler ve ağlar).<br/><br/> Geçiş amacıyla, ancak tam çoğaltma, yük devretme, yeniden çalışma için kullanışlıdır.|
-|**Çoğaltma/yük devretme/yeniden çalışma** | Gerekli izinlere sahip bir rol (AzureSiteRecoveryRole) oluşturup rolü VMware kullanıcısı veya grubu atayabilirsiniz öneririz. | Veri Merkezi nesnesi –> alt nesneye yay, rol AzureSiteRecoveryRole =<br/><br/> Veri deposu -> Alan ayırma, veri deposuna göz atma, düşük düzeyli dosya işlemleri, dosyayı kaldırma, sanal makine dosyalarını güncelleştirme<br/><br/> Ağ -> Ağ ataması<br/><br/> Kaynak -> VM’yi kaynak havuzuna atama, kapalı VM’yi geçirme, açık VM’yi geçirme<br/><br/> Görevler -> Görev oluşturma, görevi güncelleştirme<br/><br/> Sanal makine -> Yapılandırma<br/><br/> Sanal makine -> Etkileşim -> soruyu yanıtlama, cihaz bağlantısı, CD ortamını yapılandırma, disket ortamını yapılandırma, kapatma, açma, VMware araçlarını yükleme<br/><br/> Sanal makine -> Envanter -> Oluşturma, kaydetme, kaydı kaldırma<br/><br/> Sanal makine -> Sağlama -> Sanal makine indirmeye izin verme, Sanal makine dosyalarını karşıya yüklemeye izin verme<br/><br/> Sanal makine -> Anlık görüntüler -> Anlık görüntüleri kaldırma | Kullanıcı veri merkezi düzeyinde atandı ve bu veri merkezindeki tüm nesnelere erişimi var.<br/><br/> Erişimi kısıtlamak için Ata **erişemez** rolüyle **alt yay** nesnesine alt nesnelere (vSphere konakları, veri depoları, sanal makineler ve ağlar).|
+|**Otomatik keşif/geçiş (yeniden çalışma olmadan)** | En az bir salt okunurdur Kullanıcı gerekir | Veri Merkezi nesnesi –> Alt Nesneye Yay, role=Read-only | Kullanıcı veri merkezi düzeyinde atandı ve bu veri merkezindeki tüm nesnelere erişimi var.<br/><br/> Erişimi kısıtlamak için, **alt nesnelere yay** nesnesine göre **erişim** rolü (vSphere Konakları, veri depoları, sanal makineler ve ağlar) atayın.|
+|**Çoğaltma/yük devretme** | En az bir salt okunurdur Kullanıcı gerekir| Veri Merkezi nesnesi –> Alt Nesneye Yay, role=Read-only | Kullanıcı veri merkezi düzeyinde atandı ve bu veri merkezindeki tüm nesnelere erişimi var.<br/><br/> Erişimi kısıtlamak için, alt nesnelere (vSphere Konakları, datamağazalar, sanal makineler ve ağlar), **alt nesneye yay** ile **hiçbir erişim** rolü atayın.<br/><br/> Geçiş amaçları için kullanışlıdır, ancak tam çoğaltma, yük devretme, yeniden çalışma.|
+|**Çoğaltma/yük devretme/yeniden çalışma** | Gerekli izinlerle bir rol (AzureSiteRecoveryRole) oluşturmanızı ve ardından rolü bir VMware kullanıcısına veya grubuna atamayı öneririz | Veri merkezi nesnesi – > alt nesneye yay, rol = AzureSiteRecoveryRole<br/><br/> Veri deposu -> Alan ayırma, veri deposuna göz atma, düşük düzeyli dosya işlemleri, dosyayı kaldırma, sanal makine dosyalarını güncelleştirme<br/><br/> Ağ -> Ağ ataması<br/><br/> Kaynak -> VM’yi kaynak havuzuna atama, kapalı VM’yi geçirme, açık VM’yi geçirme<br/><br/> Görevler -> Görev oluşturma, görevi güncelleştirme<br/><br/> Sanal makine -> Yapılandırma<br/><br/> Sanal makine -> Etkileşim -> soruyu yanıtlama, cihaz bağlantısı, CD ortamını yapılandırma, disket ortamını yapılandırma, kapatma, açma, VMware araçlarını yükleme<br/><br/> Sanal makine -> Envanter -> Oluşturma, kaydetme, kaydı kaldırma<br/><br/> Sanal makine -> Sağlama -> Sanal makine indirmeye izin verme, Sanal makine dosyalarını karşıya yüklemeye izin verme<br/><br/> Sanal makine -> Anlık görüntüler -> Anlık görüntüleri kaldırma | Kullanıcı veri merkezi düzeyinde atandı ve bu veri merkezindeki tüm nesnelere erişimi var.<br/><br/> Erişimi kısıtlamak için, **alt nesnelere yay** nesnesine göre **erişim** rolü (vSphere Konakları, veri depoları, sanal makineler ve ağlar) atayın.|
 
 
-## <a name="add-vmware-server-to-the-vault"></a>Kasaya VMware sunucusunu ekleme
+## <a name="add-vmware-server-to-the-vault"></a>VMware sunucusunu kasaya ekleme
 
-1. Kasanızın Azure portalında açın > **Site Recovery altyapısı** > **yapılandırma sunucularından**, yapılandırma sunucusunu açın.
-2. Üzerinde **ayrıntıları** sayfasında **+ vCenter**.
+1. Azure portal, > **altyapınızı Site Recovery altyapıyı** > **yapılandırma mühürlerinizi**açın ve yapılandırma sunucusunu açın.
+2. **Ayrıntılar** sayfasında **+ vCenter**' a tıklayın.
 
 [!INCLUDE [site-recovery-add-vcenter](../../includes/site-recovery-add-vcenter.md)]
 
-## <a name="modify-credentials"></a>Kimlik bilgilerini değiştirme
+## <a name="modify-credentials"></a>Kimlik bilgilerini değiştir
 
-Aşağıdaki gibi vCenter sunucusu veya ESXi ana bilgisayarına bağlanmak için kullanılan kimlik bilgilerini değiştirin:
+VCenter sunucusuna veya ESXi konağına bağlanmak için kullanılan kimlik bilgilerini aşağıdaki gibi değiştirin:
 
-1. Yapılandırma sunucuya oturum açın ve masaüstünden cspsconfigtool.exe'yi başlatın.
-2. Tıklayın **hesabı Ekle** üzerinde **hesabı Yönet** sekmesi.
+1. Yapılandırma sunucusunda oturum açın ve masaüstündeki Cspsconfigtool. exe ' yi başlatın.
+2. **Hesabı Yönet** sekmesinde **Hesap Ekle** ' ye tıklayın.
 
    ![Hesap Ekle](./media/vmware-azure-manage-vcenter/addaccount.png)
-3. Yeni hesap ayrıntılarını belirtin ve tıklayın **Tamam** ekleyin. Hesabınız listelenen ayrıcalıkları olmalıdır [yukarıda](#account-permissions).
-4. Kasa Azure portalında açın > **Site Recovery altyapısı** > **yapılandırma sunucularından**, yapılandırma sunucusunu açın.
-5. İçinde **ayrıntıları** sayfasında **sunucusunu Yenile eylemi**.
-6. Sunucuyu Yenile işi tamamlandıktan sonra ' % s'vCenter sunucusu ile vCenter'ı açmak için seçin **özeti** sayfası.
-7. Yeni eklenen hesaptaki **vCenter sunucusu/vSphere ana bilgisayar hesabı** alan ve tıklayın **Kaydet**.
+3. Yeni hesap ayrıntılarını girip **Tamam** ' a tıklayarak ekleyin. Hesabın [yukarıda](#account-permissions)listelenen ayrıcalıklara sahip olması gerekir.
+4. Azure portal, altyapı > **yapılandırma**ve yapılandırma sunucusunu açmak için kasa > **Site Recovery** açın.
+5. **Ayrıntılar** sayfasında, **sunucuyu Yenile**' ye tıklayın.
+6. Sunucuyu Yenile işi tamamlandıktan sonra, vCenter **Özet** sayfasını açmak için vCenter Server seçin.
+7. **VCenter Server/vSphere konak hesabı** alanında yeni eklenen hesabı seçin ve **Kaydet**' e tıklayın.
 
-   ![Hesap Değiştir](./media/vmware-azure-manage-vcenter/modify-vcente-creds.png)
+   ![değiştirme hesabı](./media/vmware-azure-manage-vcenter/modify-vcente-creds.png)
 
-## <a name="delete-a-vcenter-server"></a>VCenter sunucusu silme
+## <a name="delete-a-vcenter-server"></a>VCenter sunucusunu silme
 
-1. Kasanızın Azure portalında açın > **Site Recovery altyapısı** > **yapılandırma sunucularından**, yapılandırma sunucusunu açın.
-2. Üzerinde **ayrıntıları** sayfasında, vCenter server'ı seçin.
-3. Tıklayarak **Sil** düğmesi.
+1. Azure portal, > **altyapınızı Site Recovery altyapıyı** > **yapılandırma mühürlerinizi**açın ve yapılandırma sunucusunu açın.
+2. **Ayrıntılar** sayfasında vCenter Server ' ı seçin.
+3. **Sil** düğmesine tıklayın.
 
-   ![hesabı Sil](./media/vmware-azure-manage-vcenter/delete-vcenter.png)
+   ![Hesabı Sil](./media/vmware-azure-manage-vcenter/delete-vcenter.png)
 
-## <a name="modify-the-vcenter-ip-address-and-port"></a>VCenter IP adresi ve bağlantı noktası değiştirme
+## <a name="modify-the-vcenter-ip-address-and-port"></a>VCenter IP adresini ve bağlantı noktasını değiştirme
 
 1. Azure Portal’da oturum açın.
-2. Gidin **kurtarma Hizmetleri kasası** > **Site Recovery altyapısı** > **Configuration Servers**.
-3. Atanan yapılandırma sunucusundaki vCenter'ı tıklatın.
-4. İçinde **vCenter sunucuları** bölümünde, değiştirmek istediğiniz vCenter'ı tıklatın.
-5. VCenter Özet sayfasında, ilgili alanları vCenter'ın bağlantı noktası ve IP adresi güncelleştirin ve ardından değişikliklerinizi kaydedin.
+2. **Kurtarma Hizmetleri kasası** > **Site Recovery altyapı** > **yapılandırma sunucularına**gidin.
+3. VCenter 'ın atandığı yapılandırma sunucusuna tıklayın.
+4. **VCenter Servers** bölümünde, değiştirmek istediğiniz vCenter 'a tıklayın.
+5. VCenter Summary sayfasında, ilgili alanlarda vCenter 'un IP adresini ve bağlantı noktasını güncelleştirin ve ardından değişikliklerinizi kaydedin.
 
    ![add_ip_new_vcenter](media/vmware-azure-manage-vcenter/add-ip.png)
 
-6. Değişikliklerinin etkinleşmesi için 15 dakika bekleyin ya da [yapılandırma sunucusunu Yenile](vmware-azure-manage-configuration-server.md#refresh-configuration-server).
+6. Değişikliklerin etkili olması için 15 dakika bekleyin veya [yapılandırma sunucusunu yenileyin](vmware-azure-manage-configuration-server.md#refresh-configuration-server).
 
-## <a name="migrate-all-protected-virtual-machines-to-a-new-vcenter"></a>Yeni bir vCenter tüm korumalı sanal makineleri geçirme
+## <a name="migrate-all-protected-virtual-machines-to-a-new-vcenter"></a>Tüm korumalı sanal makineleri yeni bir vCenter 'a geçir
 
-Yeni vCenter tüm sanal makineleri geçirmek için başka bir vCenter hesabı eklemeyin. Bu, yinelenen girişler için açabilir. Yalnızca yeni vCenter'ın IP adresini güncelleştirin:
+Tüm sanal makineleri yeni vCenter 'a geçirmek için başka bir vCenter hesabı eklemeyin. Bu, yinelenen girişlere yol açabilir. Yalnızca yeni vCenter 'un IP adresini güncelleştirin:
 
 1. Azure Portal’da oturum açın.
-2. Gidin **kurtarma Hizmetleri kasası** > **Site Recovery altyapısı** > **Configuration Servers**.
-3. Atanan yapılandırma sunucusundaki eski vCenter'ı tıklatın.
-4. İçinde **vCenter sunucuları** bölümünde, geçiş planlıyorsanız vcenter'ı tıklatın.
-5. IP adresi alanına yeni vCenter'ın vCenter Özet sayfasında, güncelleştirme **vCenter sunucusu/vSphere konak adı veya IP adresi**. Yaptığınız değişiklikleri kaydedin.
+2. **Kurtarma Hizmetleri kasası** > **Site Recovery altyapı** > **yapılandırma sunucularına**gidin.
+3. Eski vCenter 'ın atandığı yapılandırma sunucusuna tıklayın.
+4. **VCenter Servers** bölümünde, geçiş yapmak istediğiniz vCenter 'a tıklayın.
+5. VCenter Summary sayfasında, **vCenter Server/vSphere konak adı veya IP adresi**alanındaki yeni vCenter 'un IP adresini güncelleştirin. Yaptığınız değişiklikleri kaydedin.
 
-IP adresi güncelleştirildikten hemen sonra Site Recovery bileşenlerini yeni vCenter sanal makinelerin bulma bilgileri almaya başlar. Bu, devam eden çoğaltma etkinlikleri etkilemez.
+IP adresi güncelleştirildikten hemen sonra, Site Recovery bileşenleri yeni vCenter 'dan sanal makinelerin bulma bilgilerini almaya başlar. Bu işlem devam eden çoğaltma etkinliklerini etkilemez.
 
-## <a name="migrate-few-protected-virtual-machines-to-a-new-vcenter"></a>Yeni bir vCenter birkaç korumalı sanal makineleri geçirme
+## <a name="migrate-few-protected-virtual-machines-to-a-new-vcenter"></a>Birkaç korumalı sanal makineyi yeni bir vCenter 'a geçirme
 
 > [!NOTE]
-> Bu bölüm, yalnızca zaman birkaç korumalı sanal makineleriniz için yeni bir vCenter geçirdiğiniz geçerlidir. Yeni bir vCenter Server'dan yeni bir sanal makine kümesi korumak istiyorsanız [yapılandırma sunucusuna yeni vCenter ayrıntılarını Ekle](#add-vmware-server-to-the-vault) ve başlayın  **[korumayı etkinleştir](vmware-azure-tutorial.md#enable-replication)** .
+> Bu bölüm yalnızca, korunan sanal makinelerinizin birkaçını yeni bir vCenter 'a geçirdiğinizde geçerlidir. Yeni bir vCenter 'dan yeni bir sanal makine kümesini korumak istiyorsanız, [yapılandırma sunucusuna yeni vCenter ayrıntıları ekleyin](#add-vmware-server-to-the-vault) ve **[korumayı etkinleştir](vmware-azure-tutorial.md#enable-replication)** ' i kullanmaya başlayın.
 
-Yeni bir vCenter birkaç sanal makineleri taşımak için:
+Birkaç sanal makineyi yeni bir vCenter 'a taşımak için:
 
-1. [Yapılandırma sunucusuna yeni vCenter ayrıntılarını ekleme](#add-vmware-server-to-the-vault).
-2. [Sanal makinelerin çoğaltmasını devre dışı bırakın](site-recovery-manage-registration-and-protection.md#disable-protection-for-a-vmware-vm-or-physical-server-vmware-to-azure) geçirilmesi için planlama.
-3. Yeni vcenter seçili sanal makinelerin geçişini tamamlayın.
-4. Şimdi, geçirilen sanal makineler tarafından korumak [korumayı etkinleştirdiğinizde yeni vCenter'ı seçerek](vmware-azure-tutorial.md#enable-replication).
+1. [Yeni vCenter ayrıntılarını yapılandırma sunucusuna ekleyin](#add-vmware-server-to-the-vault).
+2. Geçirmeyi planladığınız [sanal makinelerin çoğaltmasını devre dışı bırakın](site-recovery-manage-registration-and-protection.md#disable-protection-for-a-vmware-vm-or-physical-server-vmware-to-azure) .
+3. Seçili sanal makinelerin yeni vCenter 'a geçişini doldurun.
+4. Şimdi, [korumayı etkinleştirdiğinizde yeni vCenter](vmware-azure-tutorial.md#enable-replication)' ı seçerek geçirilen sanal makineleri koruyun.
 
 > [!TIP]
-> Geçirilmekte olan sanal makinelerin sayı **yüksek** burada verilen yönergeleri kullanarak yeni vCenter'ın IP adresi güncelleştirme eski vCenter korunan sanal makine sayısı. Eski vCenter korunur birkaç sanal makineler için [çoğaltmayı devre dışı bırak](site-recovery-manage-registration-and-protection.md#disable-protection-for-a-vmware-vm-or-physical-server-vmware-to-azure); [yapılandırma sunucusuna yeni vCenter ayrıntılarını Ekle](#add-vmware-server-to-the-vault)ve başlangıç  **[korumayı etkinleştir](vmware-azure-tutorial.md#enable-replication)** .
+> Geçirilmekte olan sanal makinelerin sayısı, eski vCenter 'da saklanan sanal makine sayısı sayısından **yüksekse** , burada verilen yönergeleri kullanarak yeni vCenter 'un IP adresini güncelleştirin. Eski vCenter 'da tutulan bazı sanal makineler için [çoğaltmayı devre dışı bırakın](site-recovery-manage-registration-and-protection.md#disable-protection-for-a-vmware-vm-or-physical-server-vmware-to-azure); [yapılandırma sunucusuna yeni vCenter ayrıntıları ekleyin](#add-vmware-server-to-the-vault)ve **[korumayı etkinleştir](vmware-azure-tutorial.md#enable-replication)** ' i başlatın.
 
 ## <a name="frequently-asked-questions"></a>Sık sorulan sorular
 
-1. Korunan sanal makinelerin bir ESXi konağından diğerine taşınırsa, çoğaltma etkileyecek?
+1. Korunan sanal makineler bir ESXi konağından diğerine taşınırsa çoğaltmayı etkiler mi?
 
-    Hayır, bu devam eden çoğaltma etkilemez. Ancak, [yeterli ayrıcalıklara sahip ana hedef sunucusu dağıttığınızdan emin olun](vmware-azure-reprotect.md#deploy-a-separate-master-target-server)
+    Hayır, bu işlem devam eden çoğaltmayı etkilemez. Ancak, [ana hedef sunucuyu yeterli ayrıcalıklarla dağıttığınızdan emin olun](vmware-azure-reprotect.md#deploy-a-separate-master-target-server)
 
-2. Bağlantı noktası numaralarıdır için vCenter ve diğer Site Recovery arasındaki iletişim için bileşenleri kullanılıyor?
+2. VCenter ve diğer Site Recovery bileşenleri arasındaki iletişimde kullanılan bağlantı noktası numaraları nelerdir?
 
-    Varsayılan bağlantı noktası 443 ' dir. Yapılandırma Sunucusu'na vCenter/vSphere konak bilgilerini Bu bağlantı noktası üzerinden erişir. Bu bilgileri güncelleştirmek isterseniz, tıklayın [burada](#modify-the-vcenter-ip-address-and-port).
+    Varsayılan bağlantı noktası 443 ' dir. Yapılandırma sunucusu, vCenter/vSphere ana bilgisayar bilgilerine bu bağlantı noktası üzerinden erişir. Bu bilgileri güncelleştirmek istiyorsanız [buraya](#modify-the-vcenter-ip-address-and-port)tıklayın.

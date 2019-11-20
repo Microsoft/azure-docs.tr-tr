@@ -1,191 +1,153 @@
 ---
-title: Veri depolama ve Azure zaman serisi öngörüleri önizlemesinde giriş | Microsoft Docs
-description: Veri depolama ve Azure zaman serisi öngörüleri önizlemesinde giriş anlama.
-author: ashannon7
+title: Önizlemede veri depolama ve giriş-Azure Time Series Insights | Microsoft Docs
+description: Azure Time Series Insights önizlemede veri depolama ve giriş hakkında bilgi edinin.
+author: deepakpalled
 ms.author: dpalled
-ms.workload: big-data
 manager: cshankar
+ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
-ms.date: 05/20/2019
+ms.date: 11/04/2019
 ms.custom: seodec18
-ms.openlocfilehash: 33ca86fc2d13fb7f6e29c43e9a7c1d2dc6ef4169
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 62ee248c06d2b26b935f72b3bb73cf708f949c72
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66755227"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014703"
 ---
-# <a name="data-storage-and-ingress-in-azure-time-series-insights-preview"></a>Veri depolama ve Azure zaman serisi öngörüleri önizlemesinde giriş
+# <a name="data-storage-and-ingress-in-azure-time-series-insights-preview"></a>Azure Time Series Insights önizlemede veri depolama ve giriş
 
-Bu makalede, Azure zaman serisi öngörüleri Önizleme verileri depolama ve giriş değişiklikleri açıklar. Temel alınan depolama yapısı, dosya biçimi ve zaman serisi ID özelliği kapsar. Makalede ayrıca temel alınan giriş işlemi, aktarım hızı ve sınırlamalar açıklanır.
+Bu makalede Azure Time Series Insights önizlemesi için veri depolama ve giriş güncelleştirmeleri açıklanmaktadır. Temel depolama yapısını, dosya biçimini ve zaman serisi KIMLIĞI özelliğini içerir. Ayrıca temel alınan giriş işlemini, en iyi uygulamaları ve geçerli önizleme sınırlamalarını da açıklar.
 
-## <a name="data-storage"></a>Veri depolama
+## <a name="data-ingress"></a>Veri girişi
 
-Zaman serisi öngörüleri Önizleme Kullandıkça Öde SKU ortam oluşturduğunuzda, iki kaynak oluşturmakta olduğunuz:
-
-* Zaman serisi görüşleri ortamına.
-* Verilerin depolanacağı bir Azure depolama genel amaçlı V1 hesabı.
-
-Zaman serisi öngörüleri Önizleme Parquet dosya türü ile Azure Blob Depolama kullanır. Time Series Insights, dizin oluşturma ve Azure depolama hesabındaki verileri bölümleme BLOB'ları oluşturma da dahil olmak üzere tüm veri işlemlerini yönetir. Bu BLOB'ları, bir Azure depolama hesabı kullanarak oluşturun.
-
-Diğer Azure depolama blobları gibi Time Series Insights oluşturulan BLOB'ları, okuma ve yazma için bunları çeşitli tümleştirme senaryolarını desteklemek üzere olanak tanır.
-
-> [!TIP]
-> Okuma veya çok sık, bloblar için yazma zaman serisi görüşleri performansını olumsuz yönde etkilenebilir.
-
-Azure Blob depolamaya genel bakış için bkz. [depolama blobları giriş](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction).
-
-Parquet dosya türü hakkında daha fazla bilgi için bkz. [desteklenen dosya türleri Azure Depolama'da](https://docs.microsoft.com/azure/data-factory/supported-file-formats-and-compression-codecs#parquet-format).
-
-## <a name="parquet-file-format"></a>Parquet dosyası biçimi
-
-Parquet için tasarlanmış bir sütun odaklı veri dosyası biçimi şöyledir:
-
-* Birlikte çalışabilirlik
-* Alan verimliliğini
-* Sorgu verimliliği artar
-
-Time Series Insights düzenleri, kodlama ile toplu karmaşık veri işleyebilir performans Gelişmiş ve verimli veri sıkıştırma sağladığından Parquet seçtiniz.
-
-Daha iyi Parquet dosya biçimine anlamak için bkz: [Parquet belgeleri](https://parquet.apache.org/documentation/latest/).
-
-### <a name="event-structure-in-parquet"></a>Parquet içindeki olay yapısı
-
-Time Series Insights, oluşturur ve blobları kopyalarını aşağıdaki iki biçimlerde depolar:
-
-1. İlk, ilk kopyalama geliş saati bölümlenmiş:
-
-    * `V=1/PT=Time/Y=<YYYY>/M=<MM>/<YYYYMMDDHHMMSSfff>_<TSI_INTERNAL_SUFFIX>.parquet`
-    * Bölümlenmiş geliş saati ile BLOB'ları için BLOB oluşturma zamanı.
-
-1. Zaman serisi kimliği bir dinamik gruplandırma bölümlenmiş ikinci, yeniden bölümlenebildiği Kopyala:
-
-    * `V=1/PT=TsId/Y=<YYYY>/M=<MM>/<YYYYMMDDHHMMSSfff>_<TSI_INTERNAL_SUFFIX>.parquet`
-    * Zaman serisi kimliği ile bölümlenmiş BLOB'ları için BLOB en kısa olay zaman damgası
-
-> [!NOTE]
-> * `<YYYY>` 4 basamaklı bir yıl gösterimi eşlenir.
-> * `<MM>` 2-basamaklı ay gösterimi eşlenir.
-> * `<YYYYMMDDHHMMSSfff>` bir zaman damgası biçimi 4 basamaklı bir yıl ile eşlenir (`YYYY`), 2-basamaklı ay (`MM`), 2 basamaklı gün (`DD`), 2 basamaklı saat (`HH`), 2 basamaklı dakika (`MM`), 2-basamaklı saniye (`SS`) ve 3 haneli milisaniye (`fff`).
-
-Zaman serisi görüşleri olay Parquet dosya içerikleri için şu şekilde eşlenir:
-
-* Her olay için tek bir satır eşler.
-* Yerleşik **zaman damgası** bir olay zaman damgası içeren sütun. Zaman damgası özelliği, hiçbir zaman null olur. Varsayılan **olay kaynağı sıraya saati** zaman damgası özellik belirtilmezse, olay kaynağı. UTC zaman damgası var. 
-* Sütunlarıyla eşlenen diğer tüm özellikler ile bitemez `_string` (dize) `_bool` (Boolean) `_datetime` (TarihSaat), ve `_double` (çift), özellik türüne bağlı olarak.
-* Eşleme düzeni olarak dosya biçimi'nün ilk sürümü için olan **V = 1**. Bu özellik geliştikçe adı için artırılır **V = 2**, **V = 3**ve benzeri.
-
-## <a name="partitions"></a>Bölümler
-
-Her zaman serisi öngörüleri Önizleme ortamı olmalıdır bir **zaman serisi kimliği** özelliği ve **zaman damgası** benzersiz olarak tanımlayan özellik. Zaman serisi Kimliğinizi verileriniz için mantıksal bir bölümü olarak görev yapar ve zaman serisi öngörüleri Önizleme ortamı, verileri fiziksel bölümler arasında dağıtmak için doğal bir sınır sağlar. Fiziksel bölüm yönetimi, bir Azure depolama hesabında zaman serisi öngörüleri Preview tarafından yönetilir.
-
-Time Series Insights, bırakarak ve bölümleri yeniden oluşturarak depolamayı ve sorgu performansını iyileştirmek için dinamik bölümlemeyi kullanır. Zaman serisi öngörüleri dinamik bölümleme algoritması çalıştığında birden çok, verileri tek bir fiziksel bölüm önlemek için Önizleme ayrı, mantıksal bölümler. Diğer bir deyişle, bölümleme algoritması tüm verileri bir tek zaman serisi kimliği Parquet dosyalarını yalnızca mevcut diğer zaman serisi kimliklerle aralıklı olmadan belirli saklar. Dinamik bölümleme algoritma ayrıca tek bir zaman serisi kimliği içindeki olayların özgün sırasını korumaya çalışır
-
-Başlangıçta, böylece bir tek, mantıksal bölüm belirtilen zaman aralığı içinde birden çok fiziksel bölümler arasında yayılabilir Giriş zaman zaman damgası tarafından veri bölümlenen. Tek bir fiziksel bölüm de çoğu veya tüm mantıksal bölümler içeriyor olabilir. En uygun bölümleme, hatta ile blob boyutu sınırlamaları nedeniyle tek bir mantıksal bölüm birden çok fiziksel bölüme kaplayabilir.
-
-> [!NOTE]
-> Varsayılan olarak, ileti zaman damgası değerdir *sıraya zaman* yapılandırılan olay kaynağınızdaki.
-
-Geçmiş verileri veya toplu iletileri karşıya yüklemekte, verilerinize uygun zaman damgası için eşleşen bir zaman damgası özelliği ile depolamak istediğiniz değeri atayın. Zaman damgası özelliği, büyük/küçük harf duyarlıdır. Daha fazla bilgi için [zaman serisi modeli](./time-series-insights-update-tsm.md).
-
-### <a name="physical-partitions"></a>Fiziksel bölümler
-
-Bir fiziksel bölüm depolama hesabınızda depolanan bir blok blobudur. Anında iletme oranına boyutuna bağlı olduğundan blobları gerçek boyutu değişebilir. Ancak, BLOB'ları yaklaşık 50 MB 20 MB boyutunda olmasını bekliyoruz. Sorgu performansını iyileştirmek için boyut 20 MB'ı seçin zaman serisi görüşleri takımın bu beklentisi gerektiriyordu. Bu boyut, dosya boyutu ve veri giriş hız bağlı olarak, zaman içinde değişebilir.
-
-> [!NOTE]
-> * Bloblar, 20 MB boyutlandırılır.
-> * Azure BLOB'ları bazen daha iyi performans için olarak bırakılır ve yeniden oluşturulduğunda yeniden bölümlenebildiği.
-> * Ayrıca, aynı zaman serisi öngörüleri verilerini iki veya daha fazla bloblar bulunabilir.
-
-### <a name="logical-partitions"></a>Mantıksal bölümler
-
-Bir mantıksal bölüm, bir tek bölüm anahtarı değeri ile ilişkili tüm verileri depolayan bir fiziksel bölüm içindeki bir bölümdür. Zaman serisi öngörüleri Önizleme iki özelliğe göre her bir blob mantıksal bölümler:
-
-* **Zaman serisi kimliği**: Tüm zaman serisi öngörüleri verilerini olay akışını ve model için bölüm anahtarı.
-* **Zaman damgası**: İlk giriş üzerinde bağlı süre.
-
-Bu iki özelliklerine bağlı, yüksek performanslı sorgular zaman serisi öngörüleri Önizleme sağlar. Bu iki özellik, zaman serisi öngörüleri verilerini hızla sunmak için en etkili yöntem de sağlar.
-
-Sabit bir özelliği olduğundan, uygun bir zaman serisi kimliği seçmeniz önemlidir. Daha fazla bilgi için [seçin zaman serisi kimlikleri](./time-series-insights-update-how-to-id.md).
-
-## <a name="azure-storage"></a>Azure Storage
-
-### <a name="your-storage-account"></a>Depolama hesabınız
-
-Time Series Insights Kullandıkça Öde ortam oluşturduğunuzda, iki kaynak oluşturma: zaman serisi görüşleri ortamına ve verilerin depolanacağı bir Azure depolama genel amaçlı V1 hesabı. Birlikte çalışabilirlik, fiyat ve Performans nedeniyle varsayılan kaynak Azure depolama genel amaçlı V1 yapmak seçtik. 
-
-Time Series Insights, Azure depolama hesabınızdaki her bir olay en fazla iki kopyasını yayımlar. Başlangıç kopyası, her zaman hızla diğer hizmetleri kullanarak sorgulayabilmesi korunur. Bu altyapılar temel dosya adı filtreleme desteklediğinden kolayca Spark, Hadoop ve diğer tanıdık araçlar arasında zaman serisi kimlikleri ham Parquet dosyalarını kullanabilirsiniz. Blobları yıl ve aya göre gruplandırma, belirli bir zaman aralığı için bir özel iş içindeki blobları listeleme için kullanışlı bir yoldur. 
-
-Ayrıca, zaman serisi görüşleri, zaman serisi öngörüleri API'leri için en iyi duruma getirme Parquet dosyalarını yeniden bölümlendirir. En son repartitioned dosya da kaydedilir.
-
-Genel Önizleme sırasında veriler Azure depolama hesabınızdaki süresiz olarak depolanır.
-
-### <a name="writing-and-editing-time-series-insights-blobs"></a>Yazma ve Time Series Insights BLOB'ları düzenleme
-
-Sorgu performansı ve veri kullanılabilirliğini sağlamak için yoksa düzenleyin veya zaman serisi görüşleri tarafından oluşturulan tüm blobları silin.
-
-### <a name="accessing-and-exporting-data-from-time-series-insights-preview"></a>Erişim ve zaman serisi öngörüleri Önizlemesi'nden verileri dışarı aktarma
-
-Diğer hizmetler ile birlikte kullanmak için zaman serisi öngörüleri Önizleme Gezgini içinde depolanan verilere erişmek isteyebilirsiniz. Örneğin, Azure Machine Learning Studio'yu kullanarak makine öğrenimi için veya bir not defteri uygulaması Jupyter not defterleri ile kullanmak için rapor verilerinizi Power BI'da kullanmak isteyebilirsiniz.
-
-Verilerinizi üç genel yollarla erişebilirsiniz:
-
-* Zaman serisi öngörüleri Önizleme Gezgini'nden: zaman serisi öngörüleri Önizleme Gezgini'nden bir CSV dosyası olarak verileri dışarı aktarabilirsiniz. Daha fazla bilgi için [zaman serisi öngörüleri Önizleme Gezgini](./time-series-insights-update-explorer.md).
-* Time Series Insights Önizleme API'leri öğesinden: API uç noktası adresinden ulaşılabilir `/getRecorded`. Bu API hakkında daha fazla bilgi için bkz: [zaman serisi sorgu](./time-series-insights-update-tsq.md).
-* Doğrudan bir Azure depolama hesabından (aşağıda).
-
-#### <a name="from-an-azure-storage-account"></a>Bir Azure depolama hesabından
-
-* Zaman serisi görüşleri verilerinize erişmek için kullandığınız hangi hesabı okuma erişimine ihtiyacı vardır. Daha fazla bilgi için [depolama hesabı kaynaklarına erişimi yönetme](https://docs.microsoft.com/azure/storage/blobs/storage-manage-access-to-resources).
-* Azure Blob depolama alanından verileri okumak için doğrudan yöntemleri hakkında daha fazla bilgi için bkz. [veri taşımak ve depolama hesabınızdan](https://docs.microsoft.com/azure/storage/common/storage-moving-data?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
-* Bir Azure depolama hesabındaki verileri dışarı aktarmak için:
-    * İlk hesabınızı verileri dışarı aktarma için gereksinimleri karşıladığından emin olun. Daha fazla bilgi için [depolama içeri ve dışarı aktarma gereksinimleri](https://docs.microsoft.com/azure/storage/common/storage-import-export-requirements).
-    * Azure depolama hesabınızdan verileri dışarı aktarma için kullanabileceğiniz diğer yöntemler hakkında bilgi edinmek için bkz. [BLOB'ları içeri ve dışarı aktarma verileri](https://docs.microsoft.com/azure/storage/common/storage-import-export-data-from-blobs).
-
-### <a name="data-deletion"></a>Veri silme
-
-Blobları silmeyin. Yalnızca bunlar yararlı denetimi ve bir kayıt verilerinizi korumak için zaman serisi öngörüleri Önizleme her blob içinde blob meta verilerini tutar.
-
-## <a name="time-series-insights-data-ingress"></a>Zaman serisi görüşleri veri girişi
+Azure Time Series Insights ortamınız, zaman serisi verilerini toplamak, işlemek ve depolamak için bir giriş altyapısı içerir. Ortamınızı planlarken, tüm gelen verilerin işlenmesini sağlamak ve yüksek giriş ölçeğine ulaşmak ve giriş gecikmesini en aza indirmek için göz önünde bulundurmanız gereken bazı noktalar vardır. (TSI tarafından olaydan gelen verileri okumak ve işlemek için geçen süre Kaynak). Time Series Insights önizlemede, veri giriş ilkeleri verilerin nereden kaynakta yapılabileceğini ve verilerin ne biçimde olması gerektiğini tespit edebilir.
 
 ### <a name="ingress-policies"></a>Giriş ilkeleri
 
-Zaman serisi öngörüleri Önizleme Time Series Insights şu anda destekler aynı olay kaynakları ve dosya türlerini destekler.
+Time Series Insights önizlemesi aşağıdaki olay kaynaklarını destekler:
 
-Desteklenen olay kaynakları şunlardır:
+- [Azure IoT Hub](../iot-hub/about-iot-hub.md)
+- [Azure Event Hubs](../event-hubs/event-hubs-about.md)
 
-- Azure IoT Hub
-- Azure Event Hubs
+Time Series Insights önizlemesi, örnek başına en fazla iki olay kaynağını destekler.
   
-  > [!NOTE]
-  > Azure olay hub'ı örnekleri Kafka destekler.
+Azure Time Series Insights Azure IoT Hub veya Azure Event Hubs aracılığıyla gönderilen JSON 'yi destekler.
 
-Desteklenen dosya türleri şunlardır:
+> [!WARNING] 
+> Time Series Insights önizleme ortamınıza yeni bir olay kaynağı eklerken, şu anda IoT Hub veya Olay Hub 'ında bulunan olay sayısına bağlı olarak, ilk alma gecikmesi gecikme süresine karşılaşabilirsiniz. Verilerin içeri alınmasının ardından, bu yüksek gecikme süresini alt tarafa beklemeniz gerekir, ancak deneyiminiz yoksa, lütfen Azure portal bir destek bileti göndererek bizimle iletişim kurun.
 
-* JSON: Biz işleyebilir desteklenen JSON şekilleri hakkında daha fazla bilgi için bkz: [şekli JSON nasıl](./time-series-insights-send-events.md#json).
+## <a name="ingress-best-practices"></a>Giriş en iyi uygulamaları
+
+Aşağıdaki en iyi yöntemleri kullanmanızı öneririz:
+
+* Time Series Insights ve bir IoT Hub veya Olay Hub 'ını aynı bölgede yapılandırın. Bu, ağ nedeniyle oluşan gecikme süresini azaltır.
+* Beklenen alma hızınızı hesaplayarak ve aşağıda listelenen desteklenen oran dahilinde olduğunu doğrulayarak ölçek gereksinimlerinizi planlayın
+* Giriş [ve sorgu IÇIN JSON şeklini](./time-series-insights-update-how-to-shape-events.md)okuyarak, JSON verilerinizin ve önizleme aşamasında geçerli sınırlamaların nasıl iyileştirileceği ve şekillendirilmeli olduğunu anlayın.
+
+### <a name="ingress-scale-and-limitations-in-preview"></a>Önizlemede giriş ölçeği ve sınırlamalar
+
+Time Series Insights önizleme, varsayılan olarak, ortam başına en fazla 1 megabayt (MB/sn) kadar bir başlangıç giriş ölçeğini destekler. Gerekirse, en fazla 16 MB/sn aktarım hızı mevcuttur, lütfen bu gerekliyse Azure portal bir destek bileti göndererek bizimle iletişim kurun. Ayrıca, 0,5 MB/sn 'lik bölüm başına sınır vardır. Bu, IoT Hub bir cihaz bölümü arasındaki benzeşim verildiğinde, özellikle IoT Hub kullanan müşterilere yönelik etkileri vardır. Bir ağ geçidi cihazının kendi cihaz KIMLIĞI ve bağlantı dizesi kullanılarak hub 'a ileti ileten senaryolarda, olay yükü farklı TS 'yi belirtse bile, iletilerin tek bir bölüme ulaştığını sağlayan 0,5 MB/s sınırına ulaşmada tehlike vardır. Ayrılacak. Genel olarak, giriş oranı, kuruluşunuzda bulunan cihaz sayısının, olay egörev sıklığının ve bir olay boyutunun faktörü olarak görüntülenir. Alma oranını hesaplarken, IoT Hub kullanıcıların kuruluştaki toplam cihaz yerine kullanımdaki Hub bağlantısı sayısını kullanması gerekir. Gelişmiş ölçeklendirme desteği devam etmektedir. Bu belgeler, bu geliştirmeleri yansıtacak şekilde güncelleştirilecektir. 
+
+> [!WARNING]
+> Bir olay kaynağı olarak IoT Hub kullanan ortamlarda, kullanımdaki hub cihazlarının sayısını kullanarak alım oranını hesaplayın.
+
+İşleme birimleri ve bölümleri hakkında daha fazla bilgi için lütfen aşağıdaki bağlantılara bakın:
+
+* [IoT Hub ölçeği](https://docs.microsoft.com/azure/iot-hub/iot-hub-scaling)
+* [Olay Hub 'ı ölçeği](https://docs.microsoft.com/azure/event-hubs/event-hubs-scalability#throughput-units)
+* [Olay Hub 'ı bölümleri](https://docs.microsoft.com/azure/event-hubs/event-hubs-features#partitions)
+
+### <a name="data-storage"></a>Veri depolama
+
+Bir Time Series Insights Preview Kullandıkça Öde SKU ortamı oluşturduğunuzda iki Azure kaynağı oluşturursunuz:
+
+* İsteğe bağlı olarak, sıcak mağaza yeteneklerini içerebilen bir Time Series Insights önizleme ortamı.
+* Soğuk veri depolama için Azure depolama genel amaçlı v1 blob hesabı.
+
+Isınma deponuzdaki veriler yalnızca [zaman serisi sorgusu](./time-series-insights-update-tsq.md) ve [Azure Time Series Insights önizleme Gezgini](./time-series-insights-update-explorer.md)ile kullanılabilir. 
+
+Time Series Insights önizleme, soğuk mağaza verilerinizi [Parquet dosya biçiminde](#parquet-file-format-and-folder-structure)Azure Blob depolamaya kaydeder. Time Series Insights önizlemesi, bu soğuk depolama verilerini özel olarak yönetir, ancak doğrudan standart Parquet dosyaları olarak okumanız için kullanılabilir.
+
+> [!WARNING]
+> Soğuk depo verilerinin bulunduğu Azure Blob depolama hesabının sahibi olarak hesaptaki tüm verilere tam erişiminiz vardır. Bu erişim yazma ve silme izinleri içerir. Veri kaybına neden olabileceğinden, önizleme yazmaları Time Series Insights verileri düzenleme veya silme.
 
 ### <a name="data-availability"></a>Veri kullanılabilirliği
 
-Zaman serisi öngörüleri Önizleme, bir blob boyutu iyileştirme stratejisi kullanarak verilerin dizinini oluşturur. Bu, ne kadar veri ve hangi hız uygun yayımlanacak dayalı olarak dizinlendikten sonra sorgulamak veri kullanılabilir.
+En iyi sorgu performansı için bölümleri ve dizinleri Time Series Insights görüntüleyin. Veriler dizinlendikten sonra sorgu için kullanılabilir hale gelir. Alınan veri miktarı bu kullanılabilirliği etkileyebilir.
 
 > [!IMPORTANT]
-> * Time Series Insights genel kullanıma (GA) sürümü veri bir olay kaynağı ulaşmaktan sonra 60 saniye içinde kullandıracağınız. 
-> * Önizleme sırasında veri kullanıma sunulmadan önce daha uzun bir süre bekler.
-> * Önemli bir gecikme karşılaşırsanız bizimle emin olun.
+> Time Series Insights gelecek genel kullanılabilirlik (GA) sürümü, verilerin olay kaynağından okunduktan sonra 60 saniye içinde kullanılabilir hale gelir. Önizleme sırasında, veriler kullanılabilir hale gelmeden önce daha uzun bir süre yaşayabilirsiniz. 60 saniyenin ötesinde önemli gecikme yaşınızı yaşıyorsanız lütfen Azure portal bir destek bileti gönderebilirsiniz.
 
-### <a name="scale"></a>Ölçek
+## <a name="azure-storage"></a>Azure Storage
 
-Zaman serisi öngörüleri Önizleme, ortam başına en fazla 1 Mega (bayt/sn Mbps) saniyede bir ilk giriş ölçeği destekler. Gelişmiş ölçeklendirme desteği devam ediyor. Bu geliştirmeler yansıtacak şekilde belgelerimize güncelleştirmeyi planlıyoruz.
+Bu bölümde Azure Time Series Insights önizlemesiyle ilgili Azure depolama ayrıntıları açıklanmaktadır.
+
+Azure Blob depolama alanının kapsamlı bir açıklaması için, [depolama Blobları giriş](../storage/blobs/storage-blobs-introduction.md)' i okuyun.
+
+### <a name="your-storage-account"></a>Depolama hesabınız
+
+Bir Time Series Insights Preview Kullandıkça Öde ortamı oluşturduğunuzda, uzun vadeli soğuk depolduğunuz için bir Azure depolama genel amaçlı v1 blob hesabı oluşturulur.  
+
+Time Series Insights önizlemesi, Azure Depolama hesabınızdaki her bir olayın en fazla iki kopyasını yayımlar. İlk kopyanın alma zamanına göre sıralanmış olayları vardır ve her zaman korunur, böylece bu hizmete erişmek için diğer hizmetleri kullanabilirsiniz. Ham Parquet dosyalarını işlemek için Spark, Hadoop ve diğer tanıdık araçları kullanabilirsiniz. 
+
+Time Series Insights Preview, Time Series Insights sorgu için iyileştirmek üzere Parquet dosyalarını yeniden bölümlendirir. Verilerin yeniden bölümlenmiş kopyası da kaydedilir.
+
+Genel Önizleme sırasında veriler Azure depolama hesabınızda süresiz olarak depolanır.
+
+### <a name="writing-and-editing-time-series-insights-blobs"></a>Time Series Insights blob 'ları yazma ve düzenlemekle
+
+Sorgu performansının ve veri kullanılabilirliğinin emin olmak için Time Series Insights önizlemenin oluşturduğu blob 'ları düzenlemeyin veya silmeyin.
+
+### <a name="accessing-and-exporting-data-from-time-series-insights-preview"></a>Time Series Insights önizlemeye erişme ve verileri dışarı aktarma
+
+Diğer hizmetlerle birlikte kullanmak üzere Time Series Insights önizleme Gezgininde görüntülenen verilere erişmek isteyebilirsiniz. Örneğin, Power BI bir rapor oluşturmak veya Azure Machine Learning Studio kullanarak makine öğrenimi modelini eğitebilmeniz için verilerinizi kullanabilirsiniz. Ya da verilerinizi Jupyıter Not defterlerinizde dönüştürmek, görselleştirmek ve modellemek için kullanabilirsiniz.
+
+Verilerinize üç genel yolla erişebilirsiniz:
+
+* Time Series Insights önizleme Gezgini ' nden. Verileri bir CSV dosyası olarak gezgin 'den dışarı aktarabilirsiniz. Daha fazla bilgi için [Time Series Insights önizleme Gezgini](./time-series-insights-update-explorer.md)' ne bakın.
+* Time Series Insights Preview API 'sinden. API uç noktasına `/getRecorded`adresinden ulaşabilirsiniz. Bu API hakkında daha fazla bilgi edinmek için bkz. [zaman serisi sorgusu](./time-series-insights-update-tsq.md).
+* Doğrudan bir Azure Storage hesabından. Time Series Insights Preview verilerinize erişmek için kullandığınız hesaba okuma erişiminizin olması gerekir. Daha fazla bilgi için bkz. [depolama hesabı kaynaklarınıza erişimi yönetme](../storage/blobs/storage-manage-access-to-resources.md).
+
+### <a name="data-deletion"></a>Veri silme
+
+Time Series Insights önizleme dosyalarınızı silmeyin. İlgili verileri yalnızca Time Series Insights Preview içinden yönetmeniz gerekir.
+
+## <a name="parquet-file-format-and-folder-structure"></a>Parquet dosya biçimi ve klasör yapısı
+
+Parquet, verimli depolama ve performans için tasarlanan açık kaynaklı bir sütunlu dosya biçimidir. Time Series Insights önizleme, bu nedenlerle Parquet kullanır. Veri, ölçek sırasında sorgu performansı için zaman serisi KIMLIĞINE göre verileri bölümler.  
+
+Parquet dosya türü hakkında daha fazla bilgi için, bkz. [Parquet belgeleri](https://parquet.apache.org/documentation/latest/).
+
+Time Series Insights önizlemesi verilerinizin kopyalarını aşağıdaki gibi depolar:
+
+* Birincisi, ilk kopya alma zamanına göre bölümlendirilir ve verileri kabaca gelişme sırasıyla depolar. Veriler `PT=Time` klasöründe bulunur:
+
+  `V=1/PT=Time/Y=<YYYY>/M=<MM>/<YYYYMMDDHHMMSSfff>_<TSI_INTERNAL_SUFFIX>.parquet`
+
+* İkinci, yeniden bölümlenmiş kopya, zaman serisi kimliklerinin gruplandırılmasıyla bölümlenir ve `PT=TsId` klasöründe bulunur:
+
+  `V=1/PT=TsId/Y=<YYYY>/M=<MM>/<YYYYMMDDHHMMSSfff>_<TSI_INTERNAL_SUFFIX>.parquet`
+
+Her iki durumda da, zaman değerleri blob oluşturulma zamanına karşılık gelir. `PT=Time` klasöründeki veriler korunur. `PT=TsId` klasördeki veriler, zaman içinde sorgu için iyileştirilebilir ve statik olarak kalmaz.
+
+> [!NOTE]
+> * `<YYYY>` dört basamaklı bir yıl gösterimine eşlenir.
+> * `<MM>` iki basamaklı bir ay gösterimiyle eşlenir.
+> * `<YYYYMMDDHHMMSSfff>`, dört basamaklı yıl (`YYYY`), iki basamaklı ay (`MM`), iki basamaklı gün (`DD`), iki basamaklı bir saat (`HH`), iki basamaklı dakika (`MM`), iki basamaklı saniye (`SS`) ve üç basamaklı milisaniyeye sahip zaman damgası gösterimine eşlenir (`fff`).
+
+Time Series Insights Preview olayları, aşağıdaki gibi, Parquet dosya içeriklerine eşlenir:
+
+* Her olay tek bir satırla eşlenir.
+* Her satır, bir olay zaman damgasıyla **zaman damgası** sütunu içerir. Zaman damgası özelliği hiçbir zaman null değildir. Olay kaynağında zaman damgası özelliği belirtilmemişse, **olay sıraya alınan zamanı** varsayılan olarak belirler. Zaman damgası her zaman UTC 'dir.
+* Her satır, Time Series Insights ortamı oluşturulduğunda tanımlanan zaman serisi ID sütununu içerir. Özellik adı `_string` sonekini içerir.
+* Telemetri verileri olarak gönderilen diğer tüm özellikler, özellik türüne bağlı olarak `_string` (dize), `_bool` (Boolean), `_datetime` (DateTime) veya `_double` (Double) ile biten sütun adlarıyla eşlenir.
+* Bu eşleme düzeni, **V = 1**olarak başvurulan dosya biçiminin ilk sürümü için geçerlidir. Bu özellik geliştikçe, ad arttırılabilirler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Okuma [Azure Time Series Insights, depolama ve giriş Önizleme](./time-series-insights-update-storage-ingress.md).
+- [Azure Time Series Insights önizleme depolama ve](./time-series-insights-update-storage-ingress.md)giriş makalesini okuyun.
 
-- Yeni hakkında okuyun [veri modelleme](./time-series-insights-update-tsm.md).
-
-<!-- Images -->
-[1]: media/v2-update-storage-ingress/storage-architecture.png
-[2]: media/v2-update-storage-ingress/parquet-files.png
-[3]: media/v2-update-storage-ingress/blob-storage.png
+- Yeni [veri modelleme](./time-series-insights-update-tsm.md)hakkında bilgi edinin.

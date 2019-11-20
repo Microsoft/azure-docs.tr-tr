@@ -1,174 +1,175 @@
 ---
-title: 'Hızlı Başlangıç: LUIS portalda yeni bir uygulama oluşturma'
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: Bu hızlı başlangıçta, LUIS Portalı'nda yeni bir uygulama oluşturun. Uygulama, amaçlarını ve varlıkların temel parçaları oluşturun. Uygulamayı test etmek için tahmin edilen amacını almak için etkileşimli test panelinde bir örnek kullanıcı utterance sağlayarak. Bir uygulama oluşturmak ücretsizdir; Bu, bir Azure aboneliği gerektirmez.
+title: 'Hızlı başlangıç: LUO portalında yeni bir uygulama oluşturma'
+titleSuffix: Azure Cognitive Services
+description: Bu hızlı başlangıçta, bir uygulamanın, amaçlarınızın ve varlıkların temel parçalarını ve Ayrıca Lua portalındaki örnek utbotlarla test oluşturursunuz.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: quickstart
-ms.date: 05/07/2019
+ms.date: 11/04/2019
 ms.author: diberry
-ms.openlocfilehash: 2e4ff7dc97e3ee72336bd4c081caf1aa1a62bc56
-ms.sourcegitcommit: f6ba5c5a4b1ec4e35c41a4e799fb669ad5099522
+ms.openlocfilehash: 087b3a61902c533648b5d6e1b4b763f88ee5d794
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65146516"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73669671"
 ---
-# <a name="quickstart-create-a-new-app-in-the-luis-portal"></a>Hızlı Başlangıç: LUIS portalda yeni bir uygulama oluşturma
+# <a name="quickstart-create-a-new-app-in-the-luis-portal"></a>Hızlı başlangıç: LUO portalında yeni bir uygulama oluşturma
 
-Bu hızlı başlangıçta, yeni bir uygulama oluşturun [LUIS portalı](https://www.luis.ai). İlk olarak, bir uygulamanın temel parçaları oluşturun **hedefleri**, ve **varlıkları**. Ardından örnek kullanıcı utterance tahmin edilen hedefi almak için etkileşimli test panelinde sağlayarak uygulama sınayın.
+[!INCLUDE [Uses preview portal](./includes/uses-portal-preview.md)]
 
-Bir uygulama oluşturmak ücretsizdir ve bir Azure aboneliği gerektirmez. Uygulamanızı dağıtmaya hazır olduğunuzda bkz [uygulama dağıtmak için Hızlı Başlangıç](get-started-portal-deploy-app.md). Bir Azure Bilişsel Hizmet kaynağı oluşturun ve uygulamaya atama gösterir.
+Bu hızlı başlangıçta, [LUI portalında](https://www.luis.ai)yeni bir uygulama oluşturacaksınız. İlk olarak bir uygulama, **Amaç**ve **varlıkların**temel parçalarını oluşturursunuz. Ardından, tahmin edilen amacı almak için etkileşimli test panelinde örnek bir Kullanıcı yazarak uygulamayı test edersiniz.
+
+Uygulama oluşturma ücretsizdir ve bir Azure aboneliği gerektirmez. Uygulamanızı dağıtmaya hazırsanız, [uygulamayı dağıtmaya yönelik hızlı başlangıç](get-started-portal-deploy-app.md)bölümüne bakın. Azure bilişsel hizmet kaynağı oluşturma ve uygulamaya atama işlemlerinin nasıl yapılacağını gösterir.
+
+[!INCLUDE [Sign in to LUIS](./includes/sign-in-process.md)]
 
 ## <a name="create-an-app"></a>Uygulama oluşturma
 
-1. Açık [LUIS portalı](https://www.luis.ai) tarayıcı ve oturum açın. İlk kez oturum açarken ise, bir ücretsiz LUIS portal kullanıcı hesabı oluşturmanız gerekir.
+1. Bağlam araç çubuğundan **+ Oluştur** ' u seçin.
 
-1. Seçin **yeni uygulama oluştur** bağlam araç çubuğundan.
+   [LUSıS portalında yeni uygulama oluşturma ![](./media/create-app-in-portal.png)](./media/create-app-in-portal.png#lightbox)
 
-   [![LUIS portalında yeni bir uygulama oluşturun](./media/get-started-portal-build-app/create-app-in-portal.png)](./media/get-started-portal-build-app/create-app-in-portal.png#lightbox)
-
-1. Açılır pencerede aşağıdaki ayarlarla uygulamayı yapılandırın ve ardından **Bitti**.
+1. Açılır pencerede, uygulamayı aşağıdaki ayarlarla yapılandırın ve **bitti**' yi seçin.
 
    |Ayar adı| Değer | Amaç|
    |--|--|--|
-   |Ad|`myEnglishApp`|Benzersiz LUIS uygulaması adı<br>gerekli|
-   |Kültür|**İngilizce**|Kullanıcıların, konuşma, dil **en-us**<br>gerekli|
-   |Açıklama|`App made with LUIS Portal`|Uygulama açıklaması<br>isteğe bağlı|
-   | | | |
+   |Ad|`myEnglishApp`|Benzersiz LUSıS uygulama adı<br>Gerekli|
+   |Kültür|**İngilizce**|Kullanıcılardan gelen **söylenme dili, en-US**<br>Gerekli|
+   |Açıklama (Isteğe bağlı)|`App made with LUIS Portal`|Uygulamanın açıklaması<br>Seçim|
+   |Tahmin kaynağı (Isteğe bağlı) |-  |' Yi seçmeyin. LUSıS, yazma ve 1.000 tahmin uç noktası istekleri için ücretsiz olarak kullanabileceğiniz bir başlangıç anahtarı sağlar. |
 
-   ![Yeni uygulama ayarları girin](./media/get-started-portal-build-app/create-new-app-settings.png)
+   ![Yeni uygulama ayarlarını girin](./media/get-started-portal-build-app/create-new-app-settings.png)
 
 ## <a name="create-intents"></a>Amaç oluşturma
 
-LUIS uygulaması oluşturduktan sonra hedefleri oluşturmanız gerekir. Amacı, kullanıcıların metin kategorilere ayırmak için bir yoludur. Örneğin, İnsan Kaynakları uygulamasında iki işlev de sahip olabilir. Kişilerin yardımcı olmak için:
+LUIN uygulaması oluşturulduktan sonra, amaçları oluşturmanız gerekir. Amaçlar, kullanıcıdan metin sınıflandırmanız için bir yoldur. Örneğin, insan kaynakları uygulamasında iki işlev olabilir. Kişilere yardım etmek için:
 
- 1. Bulma ve işler için geçerlidir
- 1. Formları için işleri uygulamak için
+ 1. İşler için bul ve Uygula
+ 1. İşler için uygulanacak formları bulma
 
-Uygulamayı iki farklı kullanıcının _amaçları_ hizalamak için aşağıdaki hedefleri:
+Uygulamanın _iki farklı amacı_ aşağıdaki amaçlar için hizalanacaktır:
 
-|Amaç|Örnek metin kullanıcıdan<br>bilinen bir _utterance_|
+|Amaç|Kullanıcıdan örnek metin<br>_söylenişi_ olarak bilinen|
 |--|--|
 |ApplyForJob|`I want to apply for the new software engineering position in Cairo.`|
 |FindForm|`Where is the job transfer form hrf-123456?`|
 
-Intents oluşturmak için aşağıdaki adımları tamamlayın:
+Amaç oluşturmak için aşağıdaki adımları izleyin:
 
-1. Uygulama oluşturulduktan sonra olan **hedefleri** sayfasının **derleme** bölümü. **Create new intent** (Yeni amaç oluştur) öğesini seçin.
+1. Uygulama oluşturulduktan sonra, **derleme** bölümünün **amaçlar** sayfasında olursunuz. **Oluştur**'u seçin.
 
-   [![Yeni Oluştur hedefi düğmesini seçin](./media/get-started-portal-build-app/create-new-intent-button.png)](./media/get-started-portal-build-app/create-new-intent-button.png#lightbox)
+   [Yeni amaç oluşturmak için Oluştur ' u ![seçin](./media/get-started-portal-build-app/create-new-intent-button.png)](./media/get-started-portal-build-app/create-new-intent-button.png#lightbox)
 
-1. Hedefi bir ad girin `FindForm`ve ardından **Bitti**.
+1. Amaç adı ' nı `FindForm`girin ve **bitti**' yi seçin.
 
-   ![FindForm hedefi adını girin](./media/get-started-portal-build-app/create-new-intent-dialog.png)
+## <a name="add-an-example-utterance"></a>Örnek bir mekan ekleyin
 
-## <a name="add-an-example-utterance"></a>Bir örnek utterance Ekle
+Amaçları oluşturduktan sonra örnek bir parametre ekleyin. Örnek, kullanıcının bir sohbet bot veya diğer istemci uygulamasına girdiği metindir. Kullanıcı metninin amacı bir LUO amacı ile eşlenir.
 
-Intents oluşturduktan sonra örnek Konuşma ekleme. Örnek konuşma bir sohbet Robotu veya başka bir istemci uygulama, kullanıcının girdiği metinlerdir. Bunlar, kullanıcının metin amacınıza LUIS ıntent'e eşleyin.
+Bu örnek uygulamanın `FindForm` amacı için, bu örnek, form numarasını içerir. İstemci uygulaması, kullanıcının isteğini yerine getirmek için form numarasına ihtiyaç duyuyor, bu yüzden bunu utterde eklemek önemlidir.
 
-Bu örnek uygulama için `FindForm` hedefi, örnek konuşma form numarası da içerecektir. İstemci uygulamasının utterance içerecek şekilde önemli olduğu için kullanıcının isteği gerçekleştirmek için form sayısının gerekir.
+[![FindForm amacı için örnek utbotları girin](./media/get-started-portal-build-app/add-example-utterance.png)](./media/get-started-portal-build-app/add-example-utterance.png#lightbox)
 
-[![FindForm amaç için örnek konuşma girin](./media/get-started-portal-build-app/add-example-utterance.png)](./media/get-started-portal-build-app/add-example-utterance.png#lightbox)
-
-Aşağıdaki örnek 15 konuşma için ekleme `FindForm` hedefi.
+Aşağıdaki 15 örnek utbotları `FindForm` amacına ekleyin.
 
 |#|Örnek konuşmalar|
 |--|--|
-|1|İçin Hrf 123456 aranıyor|
-|2|İnsan Kaynakları form hrf 234591 nerede?|
-|3|hrf-345623 olduğu|
-|4|Bana Gönder hrf 345794 mümkündür|
-|5|Dahili bir iş için uygulanacak hrf 234695 ihtiyacım var?|
-|6|Yöneticim hrf 234091 ile bir proje için uygulama bilmeniz gerekiyor mu|
-|7|Hrf 234918 nereye gönderebilirim? Alındığı bir e-posta yanıtı alabilir miyim?|
-|8|Hrf 234555|
-|9|Hrf 234987 ne zaman güncelleştirildiği?|
-|10|Form hrf-876345 için mühendislik konumlarına uygulamak için kullanabilirim|
-|11|My açık isteği için gönderilen hrf 765234 yeni bir sürümü neydi?|
-|12|Uluslararası işleri hrf 234234 kullanıyor musunuz?|
-|13|Hrf 234598 yazım hatası|
-|14|Yeni gereksinimleri Hrf 234567 düzenlenecek|
-|15|Hrf 123456, hrf 123123 hrf 234567|
+|1|HRF-123456 aranıyor|
+|2|İnsan kaynakları ne tür HRF-234591?|
+|3|HRF-345623, burada|
+|4|Bana HRF-345794 göndermek mümkün|
+|5|Bir iç iş için uygulanacak HRF-234695 gerekiyor mu?|
+|6|HRF-234091 ile bir iş için yöneticimin uygulamasını öğrenmesi gerekir|
+|7|HRF-234918 ' I nereden gönderebilirim? Alındığını bir e-posta yanıtı alıyorum?|
+|8|HRF-234555|
+|9|HRF-234987 ne zaman güncelleştirildi?|
+|10|Mühendislik konumları için uygulanacak HRF-876345 formunu kullanıyorum|
+|11|Açık REQ için yeni bir HRF-765234 sürümü gönderildi mi?|
+|12|Uluslararası işler için HRF-234234 ' I kullanıyorum mi?|
+|13|HRF-234598 yazım hatası|
+|14|yeni gereksinimler için HRF-234567 düzenlenecek|
+|15|HRF-123456, HRF-123123, HRF-234567|
 
-Tasarım gereği, bu örnek konuşma aşağıdaki yollarla farklılık gösterir:
+Bu örnek, tasarıma göre aşağıdaki yollarla farklılık gösterir:
 
-* utterance uzunluğu
-* Noktalama işaretleri
+* söylenişi uzunluğu
+* edilen
 * sözcük seçimi
-* Fiili şimdiki (ise, oluştu, olacaktır)
-* sözcük sırasını
+* fiil zaman hali (yani, was, olacaktır)
+* sözcük sırası
 
 
 
-## <a name="create-a-regular-expression-entity"></a>Bir normal ifade varlık oluşturma
+## <a name="create-a-regular-expression-entity"></a>Normal ifade varlığı oluşturma
 
-Form sayısının çalışma zamanı tahmin yanıtta döndürülecek form bir varlık olarak işaretlenmesi gerekir. Form numarası metni ileri düzeyde yapılandırılmış olduğundan, normal ifade varlık kullanarak işaretleyebilirsiniz. Varlık, aşağıdaki adımlarla oluşturun:
+Çalışma zamanı tahmin yanıtında form numarasını döndürmek için formun bir varlık olarak işaretlenmesi gerekir. Form numarası metni yüksek düzeyde yapılandırıldığı için, normal bir ifade varlığı kullanarak işaretleyebilirsiniz. Varlığı aşağıdaki adımlarla oluşturun:
 
-1. Seçin **varlıkları** sol taraftaki menüden.
+1. Sol taraftaki menüden **varlıklar** ' ı seçin.
 
-1. Seçin **yeni varlık Oluştur** üzerinde **varlıkları** sayfası.
+1. **Varlıklar** sayfasında **Oluştur** ' u seçin.
 
-1. Bir ad girin `Human Resources Form Number`seçin **Regex** varlık yazın ve normal ifade girin `hrf-[0-9]{6}`. Bu giriş sabit karakterleriyle eşleşen `hrf-`ve tam olarak 6 basamak sağlar.
+1. `Human Resources Form Number`adı girin, **Regex** varlık türünü seçin ve ardından **İleri**' yi seçin.
 
-   ![Normal ifade varlık için varlık bilgilerini girin](./media/get-started-portal-build-app/create-regular-expression-entity.png)
+   ![Normal ifade varlığı oluştur](./media/get-started-portal-build-app/create-regular-expression-entity.png)
 
-1. **Done** (Bitti) öğesini seçin.
+1. `hrf-[0-9]{6}`normal ifade (**Regex**) ifadesini girin. Bu giriş, `hrf-`değişmez karakterlerle eşleşir, tam olarak 6 basamak sağlar ve ardından **Oluştur**' u seçin.
 
-## <a name="add-example-utterances-to-the-none-intent"></a>Örnek konuşma hiçbiri hedefi ekleme
+   ![Varlık için normal ifade girin](./media/get-started-portal-build-app/create-regular-expression-entity-with-expression.png)
 
-**Hiçbiri** hedefi temel amacı ve boş bırakılması gerekir. Bu amaç için uygulama başka bir ıntents için eklediğiniz her 10 örnek konuşma bir utterance içermelidir.
 
-**Hiçbiri** amaç'ın örnek konuşma dışında istemci uygulama etki alanında olmalıdır.
+## <a name="add-example-utterances-to-the-none-intent"></a>Hiçbiri amacına örnek ekleme
 
-1. Seçin **hedefleri** sol menüsünü ve ardından **hiçbiri** hedefleri listesinde.
+**Hiçbiri** amacı geri dönüş amacını ve boş bırakılmalıdır. Bu amaç, uygulamanın diğer amaçları için eklemiş olduğunuz her 10 örnek için bir söylenişi içermelidir.
 
-1. Aşağıdaki örnek konuşma ıntent'e ekleyin:
+**Hiçbir** üyenin örnek utbotları, istemci uygulama etki alanınız dışında olmalıdır.
 
-   |Hiçbiri hedefi örnek konuşma|
+1. Sol menüden **amaçlar** ' ı seçin ve ardından amaçlar listesinden **hiçbiri** ' ni seçin.
+
+1. Amacına aşağıdaki örnek söyleyeni ekleyin:
+
+   |Hiçbiri amacı örnek söyliği|
    |--|
    |Barking dogs are annoying (Havlayan köpekler rahatsız eder)|
    |Order a pizza for me (Bana bir pizza söyle)|
    |Penguins in the ocean (Okyanustaki penguenler)|
 
-   Bu İnsan Kaynakları uygulaması için örnek konuşma bu etki alanının dışında ' dir. İnsan Kaynakları etki alanınızı içeren hayvanlar, Yemek veya Okyanusu sonra farklı bir örnek konuşma için kullanması gereken **hiçbiri** hedefi.
+   Bu uygulama için bu örnek, etki alanının dışındadır. Etki alanınız hayvanlar, yiyecek veya okyanus içeriyorsa, **none** amacı için farklı örnek utbotları kullanmanız gerekir.
 
 ## <a name="train-the-app"></a>Uygulamayı eğitme
 
-Sağ üstteki menüde **eğitme** amacı ve varlık uygulamak için uygulamanın geçerli sürüme modeli değiştirir.
+[!INCLUDE [LUIS How to Train steps](includes/howto-train.md)]
 
-## <a name="look-at-the-regular-expression-entity-in-the-example-utterances"></a>Örnek konuşma normal ifade varlıkta bakın
+## <a name="look-at-the-regular-expression-entity-in-the-example-utterances"></a>Örnek mekan normal ifade varlığına bakın
 
-1. Varlık içinde bulunan doğrulayın **FindForm** seçerek hedefi **hedefleri** sol menüden. Ardından **FindForm** hedefi.
+1. Sol menüden **amaçlar** ' a tıklayarak varlığın **FindForm** hedefi ' nde bulunduğunu doğrulayın. Ardından **FindForm** hedefini seçin.
 
-   Varlık örnek konuşma göründüğü işaretlenir. Varlık adı yerine orijinal metni görmek isterseniz değiştirme **varlıkları görünümü** araç çubuğundan.
+   Varlık, örnek noktada göründüğü yerde işaretlenir. Varlık adı yerine özgün metni görmek isterseniz, **varlıklar görünümünü** araç çubuğundan değiştirin.
 
-   [![Varlıklar ile işaretlenmiş tüm örnek konuşma](./media/get-started-portal-build-app/all-example-utterances-marked-with-entities.png)](./media/get-started-portal-build-app/all-example-utterances-marked-with-entities.png#lightbox)
+   [varlıklar ile işaretlenen tüm örnek ![örnekleri](./media/get-started-portal-build-app/all-example-utterances-marked-with-entities.png)](./media/get-started-portal-build-app/all-example-utterances-marked-with-entities.png#lightbox)
 
-## <a name="test-your-new-app-with-the-interactive-test-pane"></a>Yeni uygulamanızı etkileşimli test Bölmesi ile test etme
+## <a name="test-your-new-app-with-the-interactive-test-pane"></a>Etkileşimli test bölmesiyle yeni uygulamanızı test etme
 
-Etkileşimli kullanın **Test** varlık uygulama henüz görülen henüz yeni konuşma ayıklanır doğrulamak için LUIS portalındaki bölmesinde.
+Varlığın, uygulamanın henüz görülmemiş yeni dıklardan ayıklandığını doğrulamak için, lug portalındaki etkileşimli **Test** bölmesini kullanın.
 
-1. Seçin **Test** sağ üst menüsünde.
+1. Sağ üst menüden **Test** ' i seçin.
 
-1. Yeni bir utterance ekleyin ve ardından Enter tuşuna basın:
+1. Yeni bir söylenişi ekleyin ve ardından ENTER tuşuna basın:
 
    ```Is there a form named hrf-234098```
 
-   ![Test Bölmesi'nde yeni utterance test](./media/get-started-portal-build-app/test-new-utterance.png)
+   ![Test bölmesinde yeni söylenişi test etme](./media/get-started-portal-build-app/test-new-utterance.png)
 
-   Üst tahmin hedefi olan doğru **FindForm** % 90'ile güvenle (0.977). **İnsan Kaynakları Form numarası** varlık hrf 234098 değeriyle ayıklanır.
+   En iyi tahmin edilen amaç, %90 güvenilirlikli (0,977) ile doğru **FindForm** . **Insan kaynakları form numarası** varlığı, HRF-234098 değeri ile ayıklanır.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu Hızlı Başlangıç ile işiniz bittiğinde ve bir sonraki hızlı açın taşıma olmayan bittiğinde **uygulamalarım** üst gezinti menüsünde. Sonra liste ve select uygulamanın sol onay kutusunu seçin **Sil** listesinin üst bağlam araç çubuğundan.
-
-[![Uygulamalar listemde uygulamayı Sil](./media/get-started-portal-build-app/delete-app.png)](./media/get-started-portal-build-app/delete-app.png#lightbox)
+Bu hızlı başlangıç ile işiniz bittiğinde ve sonraki hızlı başlangıca geçmeden, üst gezinti menüsünden **uygulamalarım** ' ı seçin. Ardından listedeki uygulamanın sol onay kutusunu seçin ve listenin üzerindeki bağlam araç çubuğundan **Sil** ' i seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [2. Uygulama dağıtma](get-started-portal-deploy-app.md)
+> [2. uygulama dağıtma](get-started-portal-deploy-app.md)

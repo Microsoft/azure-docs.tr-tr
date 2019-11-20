@@ -1,6 +1,7 @@
 ---
-title: Korumalı Web API'si - üretim ortamına taşıma | Azure
-description: (Üretim taşıma) korumalı Web API'si oluşturmayı öğrenin.
+title: Korumalı Web API 'SI-üretime taşı
+titleSuffix: Microsoft identity platform
+description: Korumalı bir Web API 'SI oluşturma (üretime geçme) hakkında bilgi edinin.
 services: active-directory
 documentationcenter: dev-center-name
 author: jmprieur
@@ -15,30 +16,30 @@ ms.date: 05/07/2019
 ms.author: jmprieur
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8e78cb712501b86f98d3459cac6280d0484f41a1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: deb5a04f23268edc112c38c993b190827fa65061
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65833105"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72802511"
 ---
-# <a name="protected-web-api---move-to-production"></a>Korumalı web API'si - üretim Git
+# <a name="protected-web-api---move-to-production"></a>Korumalı Web API 'SI-üretime taşı
 
-Web API'nizi koruma konusunda bilmeniz, işte nasıl üretime taşıyabilirsiniz.
+Artık Web API 'nizi nasıl koruyabileceğinizi öğrenmiş olduğunuza göre, bunu üretime nasıl taşıyabileceğinizi aşağıda bulabilirsiniz.
 
 [!INCLUDE [Move to production common steps](../../../includes/active-directory-develop-scenarios-production.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağı Akış API'leri çağırmak öğrenin:
+Aşağı akış API 'Lerini çağırmayı öğrenin:
 
 > [!div class="nextstepaction"]
-> [Senaryo - aşağı akış API'leri Web API'sini çağırır.](scenario-web-api-call-api-overview.md)
+> [Senaryo-Web API 'SI aşağı akış API 'lerini çağırır](scenario-web-api-call-api-overview.md)
 
-Öğreticiler ve örnekler ile daha fazla bilgi edinin:
-
-> [!div class="nextstepaction"]
-> [ASP.NET Core web API Öğreticisi](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2)
+Öğreticiler ve örneklerle daha fazla bilgi edinin:
 
 > [!div class="nextstepaction"]
-> [ASP.NET web API örneği](https://github.com/azureadquickstarts/appmodelv2-nativeclient-dotnet)
+> [ASP.NET Core Web API 'SI öğreticisi](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2)
+
+> [!div class="nextstepaction"]
+> [ASP.NET Web API 'SI örneği](https://github.com/azureadquickstarts/appmodelv2-nativeclient-dotnet)

@@ -1,7 +1,7 @@
 ---
-title: V3 - Translator metin çevirisi API'si geçirme
-titlesuffix: Azure Cognitive Services
-description: V2'den Translator Text API V3 geçirmeyi öğrenin.
+title: V3-Translator Metin Çevirisi API'si 'e geçiş
+titleSuffix: Azure Cognitive Services
+description: Bu makalede, v2 'den Azure bilişsel hizmetler Translator Metin Çevirisi API'si 'dan v3 'e geçiş yapmanıza yardımcı olacak adımlar sağlanmaktadır.
 services: cognitive-services
 author: swmachan
 manager: nitinme
@@ -10,36 +10,36 @@ ms.subservice: translator-text
 ms.topic: conceptual
 ms.date: 02/01/2019
 ms.author: swmachan
-ms.openlocfilehash: 8a2530a4eb4365a022ab11279b344a5d2852430b
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: eb43d549d3e0cd449c865d533fc8701c4c3912fd
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448292"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73837321"
 ---
-# <a name="translator-text-api-v2-to-v3-migration"></a>Translator Text API V2 V3 geçiş
+# <a name="translator-text-api-v2-to-v3-migration"></a>Translator Metin Çevirisi API'si v2 'yi v3 geçişine
 
 > [!NOTE]
-> V2 30 Nisan 2018'de kullanım dışı bırakıldı. Lütfen yalnızca V3 sürümünde kullanılabilir olan yeni işlevsellikten yararlanmak için V3, uygulamalarınızı geçirin.
+> V2, 30 Nisan 2018 tarihinde kullanımdan kaldırılmıştır. Yalnızca v3 'de bulunan yeni işlevsellikten yararlanmak için uygulamalarınızı v3 'e geçirin.
 > 
-> 17 Mayıs 2019 üzerinde Microsoft Translator hub'ı kullanımdan kaldırılacaktır. [Önemli geçiş bilgilerini ve tarihleri görüntüleme](https://www.microsoft.com/translator/business/hub/).  
+> Microsoft Translator hub 'ı 17 Mayıs 2019 tarihinde kullanımdan kaldırılacaktır. [Önemli geçiş bilgilerini ve tarihlerini görüntüleyin](https://www.microsoft.com/translator/business/hub/).  
 
-Microsoft Translator takım Translator metin çevirisi API'si, sürüm 3 (V3) kullanıma sundu. Bu sürüm, yeni özellikler, kullanım dışı yöntemler ve gönderme ve Microsoft Translator hizmetten veri almak için yeni bir biçim içerir. Bu belge V3 kullanan uygulamaları değiştirmek için bilgi sağlar. 
+Microsoft Translator ekibi, Translator Metin Çevirisi API'si sürüm 3 ' ü (v3) yayımladı. Bu sürüm, yeni özellikler, kullanım dışı Yöntemler ve Microsoft Translator hizmetinden veri almaya yönelik yeni bir biçim içerir. Bu belge, uygulamaları v3 kullanacak şekilde değiştirmeye yönelik bilgiler sağlar. 
 
-Bu belgenin sonuna, daha fazla bilgi edinmek için yararlı bağlantılar içerir.
+Bu belgenin sonu, daha fazla bilgi edinmek için yararlı bağlantılar içerir.
 
 ## <a name="summary-of-features"></a>Özelliklerin özeti
 
-* İzleme yok - V3 No-izleme, Azure portalında tüm fiyatlandırma katmanları için geçerlidir. Bu özellik V3 API'sine gönderilen metin kaydedilir, Microsoft tarafından anlamına gelir.
-* JSON - XML, JSON değiştirilir. Hizmete gönderilen ve hizmetten alınan tüm veriler JSON biçiminde olan.
-* Tek bir istek - Çevir yöntemi birden çok hedef dilde 'to' birden çok dil için çeviri tek bir istek kabul eder. Örneğin, tek bir istek 'from' İngilizce ve 'to' Almanca, İspanyolca ve Japonca veya diğer bir dil grubunu olabilir.
-* İki dilli sözlük - API için iki dilli sözlük yöntemi eklendi. Bu yöntem 'Ara' ve 'örnekler' içerir.
-* Alfabeye - transliterate yöntemi API için eklendi. Bu yöntem, sözcük ve bir betik (örneğin cümlelerde dönüştürülecektir. Arapça) (örneğin başka bir komut dosyası içine Latin).
-* Dil - yeni bir 'diller' yöntemi 'Çevir', 'Sözlüğü' ve 'alfabeye' yöntemleri ile kullanmak için JSON biçiminde dil bilgileri sunar.
-* Çeviri - yeni ayrı yöntemler olarak V2 API'si olan özelliklerden bazıları desteklemek için 'Çevir' yöntemi için yeni özellikler eklenmiştir. TranslateArray buna bir örnektir.
-* Yöntem konuşun - metin okuma işlevselliği artık Microsoft Translator API'SİNDE desteklenmiyor. Metin okuma işlevi [Microsoft konuşma hizmeti](https://docs.microsoft.com/azure/cognitive-services/speech-service/text-to-speech).
+* Hiçbir Trace-of v3 No-Trace, Azure portal tüm fiyatlandırma katmanları için geçerlidir. Bu özellik, v3 API 'sine gönderilen metinlerin Microsoft tarafından kaydedileceği anlamına gelir.
+* JSON-XML dosyası JSON ile değiştirilmiştir. Hizmete gönderilen ve hizmetten alınan tüm veriler JSON biçimindedir.
+* Tek bir istekte birden çok hedef dil-çevirme yöntemi, tek bir istekteki çeviri için birden fazla ' to ' dillerini kabul eder. Örneğin, tek bir istek ' Ingilizce ve '-' Almanca, Ispanyolca ve Japonca ya da başka bir dil grubu olabilir.
+* İki dilli sözlük-API 'ye iki dilli sözlük yöntemi eklenmiştir. Bu yöntem ' Lookup ' ve ' örnekler ' içerir.
+* Alfabe içinde, API 'ye bir alfabede bir yöntem eklenmiştir. Bu yöntem, sözcükleri ve tümceleri tek bir betikte dönüştürür (ör. Arapça) başka bir betiğe (ör. Latin).
+* Diller-yeni bir ' Languages ' yöntemi, ' Translate ', ' Dictionary ' ve ' alfabede ' yöntemleriyle kullanılmak üzere dil bilgilerini JSON biçiminde sunar.
+* Çeviri için yeni-' Çevir ' yöntemine yeni özellikler eklenmiştir. v2 API 'sinde ayrı yöntemler olarak bulunan özelliklerden bazıları desteklenir. TranslateArray örneği bir örnektir.
+* Konuş yöntemi-metin okuma işlevselliği artık Microsoft Translator API 'sinde desteklenmez. Metin okuma işlevselliği, [Microsoft konuşma hizmeti](https://docs.microsoft.com/azure/cognitive-services/speech-service/text-to-speech)'nde bulunabilir.
 
-Aşağıdaki listede yer alan V2 ve V3 yöntemleri V2 ile gelen işlevselliği sağlayan API'ler ve V3 yöntemleri tanımlar.
+Aşağıdaki v2 ve v3 yöntemleri listesi, v2 ile gelen işlevleri sağlayacak olan v3 yöntemlerini ve API 'Leri tanımlar.
 
 | V2 API yöntemi   | V3 API uyumluluğu |
 |:----------- |:-------------|
@@ -49,38 +49,38 @@ Aşağıdaki listede yer alan V2 ve V3 yöntemleri V2 ile gelen işlevselliği s
 | `GetLanguagesForTranslate`     | [Diller](reference/v3-0-languages.md)       |
 | `GetLanguagesForSpeak`      | [Microsoft konuşma hizmeti](https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#text-to-speech)         |
 | `Speak`     | [Microsoft konuşma hizmeti](https://docs.microsoft.com/azure/cognitive-services/speech-service/text-to-speech)          |
-| `Detect`     | [Algılama](reference/v3-0-detect.md)         |
-| `DetectArray`     | [Algılama](reference/v3-0-detect.md)         |
-| `AddTranslation`     | Özelliği artık desteklenmiyor       |
-| `AddTranslationArray`    | Özelliği artık desteklenmiyor          |
-| `BreakSentences`      | [BreakSentence](reference/v3-0-break-sentence.md)       |
-| `GetTranslations`      | Özelliği artık desteklenmiyor         |
-| `GetTranslationsArray`      | Özelliği artık desteklenmiyor         |
+| `Detect`     | [Acağı](reference/v3-0-detect.md)         |
+| `DetectArray`     | [Acağı](reference/v3-0-detect.md)         |
+| `AddTranslation`     | Özellik artık desteklenmiyor       |
+| `AddTranslationArray`    | Özellik artık desteklenmiyor          |
+| `BreakSentences`      | [Breakcümlesi](reference/v3-0-break-sentence.md)       |
+| `GetTranslations`      | Özellik artık desteklenmiyor         |
+| `GetTranslationsArray`      | Özellik artık desteklenmiyor         |
 
-## <a name="move-to-json-format"></a>JSON biçimine Taşı
+## <a name="move-to-json-format"></a>JSON biçimine taşı
 
-Microsoft Translator metin çevirisi V2 kabul edilir ve XML biçiminde veriler döndürdü. V3 sürümünde API'si kullanılarak alınan tüm veriler JSON biçiminde olan. XML bundan böyle kabul edilecek veya V3 sürümünde döndürdü.
+Microsoft Translator Metin Çevirisi çeviri v2, XML biçimindeki verileri kabul etti ve döndürdü. V3 'de, API kullanılarak gönderilen ve alınan tüm veriler JSON biçimindedir. XML artık v3 'de kabul edilmez veya döndürülmeyecektir.
 
-Bu değişiklik V2 metin çevirisi API'si için yazılan bir uygulamanın çeşitli yönlerini etkiler. Örneğin: Dilleri API, metin çevirisi, harf çevirisi ve iki sözlük yöntemleri için dil bilgilerini döndürür. Tüm dil bilgisinin bir çağrıda tüm yöntemleri için istek veya bunları ayrı ayrı isteyin.
+Bu değişiklik, v2 metin çevirisi API 'SI için yazılmış bir uygulamanın çeşitli yönlerini etkileyecektir. Örnek olarak: diller API 'SI metin çevirisi, alfabede ve iki sözlük yöntemi için dil bilgilerini döndürür. Tüm yöntemler için tüm dil bilgilerini tek bir çağrıda isteyebilir veya tek tek talep edebilirsiniz.
 
-Dilleri yöntemi kimlik doğrulaması gerektirmez; Aşağıdaki bağlantıyı tıklatarak json'da V3 için tüm dil bilgileri görebilirsiniz:
+Diller yöntemi kimlik doğrulaması gerektirmez; Aşağıdaki bağlantıya tıklayarak, JSON 'da v3 için tüm dil bilgilerini görebilirsiniz:
 
-[https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation, sözlük, harf çevirisi](https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation,dictionary,transliteration)
+[https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation, sözlük, alfabede](https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation,dictionary,transliteration)
 
-## <a name="authentication-key"></a>Kimlik Doğrulaması Anahtarı
+## <a name="authentication-key"></a>Kimlik doğrulama anahtarı
 
-V2 için kullandığınız kimlik doğrulama anahtarı V3 için kabul edilir. Yeni bir abonelik edinmeniz gerekir değil. V2 XML'den V3 JSON-yine de geçiş sırasında yeni sürümlerini yayınlama kolaylaştırmaya V2 ve V3 yearlong geçiş dönemi boyunca, uygulamalarınızda karıştırmak mümkün olmayacak.
+V2 için kullandığınız kimlik doğrulama anahtarı v3 için kabul edilecektir. Yeni bir abonelik almanız gerekmez. Yıluzun geçiş süresi boyunca uygulamalarınızda v2 ve v3 'i karıştıracaksınız, ancak hala v2-XML ' den v3-JSON ' a geçiş yaparken yeni sürümler yayınlanmasını kolaylaştırabilirsiniz.
 
 ## <a name="pricing-model"></a>Fiyatlandırma Modeli
 
-Microsoft Translator V3 V2 fiyatlandırılır aynı şekilde fiyatlandırılır; karakter boşluklar dahil. V3'daki yeni özelliklerin hangi karakter faturalandırması sayılan birkaç değişiklik yapalım.
+Microsoft Translator v3, v2 fiyatlandırılmıştı. boşluk da dahil olmak üzere karakter başına. V3 sürümündeki yeni özellikler, faturalandırma için hangi karakterlerin sayıldığını bazı değişiklikler yapar.
 
 | V3 yöntemi   | Faturalandırma için sayılan karakterler |
 |:----------- |:-------------|
-| `Languages`     | Gönderilen herhangi bir karakter yok sayılan, ücret alınmaz.          |
-| `Translate`     | Sayısı temel karakterlerinin kaçının tutulacağını gönderilen çeviri ve kaç diller için karakter çevrilir. 50 karakteri gönderildi ve istenen 5 dilleri 50 x 5 olacaktır.           |
-| `Transliterate`     | Harf çevirisi için gönderilen karakter sayısına göre sayılır.         |
-| `Dictionary lookup & example`     | Sözlük Arama ve örnekler için gönderilen karakter sayısına göre sayılır.         |
+| `Languages`     | Hiçbir karakter gönderilmedi, atanmadı, hiçbir ücret alınmaz.          |
+| `Translate`     | Sayı, çeviri için kaç karakter gönderildiğini ve karakterlerin kaç dilde çevrileceğini temel alır. 50 karakter gönderildi ve 5 dil istendi.           |
+| `Transliterate`     | Alfabede gönderilen karakterlerin sayısı sayılır.         |
+| `Dictionary lookup & example`     | Sözlük araması ve örnekleri için gönderilen karakter sayısı sayılır.         |
 | `BreakSentence`     | Ücret alınmaz.       |
 | `Detect`     | Ücret alınmaz.      |
 
@@ -90,7 +90,7 @@ Genel
 
 * api.cognitive.microsofttranslator.com
 
-## <a name="v3-api-text-translations-methods"></a>V3 API metin çevirileri yöntemleri
+## <a name="v3-api-text-translations-methods"></a>V3 API metin çevirisi yöntemleri
 
 [`Languages`](reference/v3-0-languages.md)
 
@@ -110,40 +110,40 @@ Genel
 
 > [!NOTE]
 > 
-> 17 Mayıs 2019 üzerinde Microsoft Translator hub'ı kullanımdan kaldırılacaktır. [Önemli geçiş bilgilerini ve tarihleri görüntüleme](https://www.microsoft.com/translator/business/hub/).   
+> Microsoft Translator hub 'ı 17 Mayıs 2019 tarihinde kullanımdan kaldırılacaktır. [Önemli geçiş bilgilerini ve tarihlerini görüntüleyin](https://www.microsoft.com/translator/business/hub/).   
 
-Microsoft Translator V3 sinirsel makine çevirisi, varsayılan olarak kullanır. Bu nedenle, Microsoft Translator hub'ı ile kullanılamaz. Translator hub'ı yalnızca istatistiksel makine çevirisi eski destekler. Özelleştirme sinirsel çeviri için özel Translator'ı kullanarak kullanıma sunuldu. [Sinirsel makine çevirisi özelleştirme hakkında daha fazla bilgi edinin](custom-translator/overview.md)
+Microsoft Translator v3 varsayılan olarak sinir makine çevirisini kullanır. Bu nedenle, Microsoft Translator hub 'ı ile kullanılamaz. Translator hub 'ı yalnızca eski istatistiksel makine çevirisini destekler. Sinir çevirisi özelleştirmesi artık özel çevirici kullanılarak kullanılabilir. [Sinir makine çevirisini özelleştirme hakkında daha fazla bilgi edinin](custom-translator/overview.md)
 
-Sinirsel çeviri V3 metin tanıma API'si ile standart kategorileri (SMT, konuşma, teknoloji, generalnn) kullanımını desteklemiyor.
+V3 metin API 'SI ile sinir çevirisi, standart kategorilerin (SMT, konuşma, teknik, generalnn) kullanımını desteklemez.
 
-| |Uç Nokta|    GDPR işlemci uyumluluğu|  Translator hub'ı kullanın| Özel Translator (Önizleme) kullanma|
+| |Uç Nokta|    GDPR Işlemci uyumluluğu|  Çevirmen hub 'ı kullan| Özel çevirici kullan (Önizleme)|
 |:-----|:-----|:-----|:-----|:-----|
-|Translator Text API sürüm 2| api.microsofttranslator.com|    Hayır  |Evet    |Hayır|
-|Translator Text API sürüm 3| api.cognitive.microsofttranslator.com|  Evet|    Hayır| Evet|
+|Translator Metin Çevirisi API'si sürüm 2| api.microsofttranslator.com|    Hayır  |Evet    |Hayır|
+|Translator Metin Çevirisi API'si sürüm 3| api.cognitive.microsofttranslator.com|  Evet|    Hayır| Evet|
 
-**Translator Text API sürüm 3**
-* Genel olarak kullanılabilir ve tam olarak desteklenen ' dir.
-* GDPR işlemci olarak uyumlu olduğundan ve tüm ISO 20001 ve SOC 3 sertifika yanı sıra 20018 gereksinimlerini karşılar. 
-* Özel Translator ile (Önizleme), yeni Translator NMT özelleştirme özelliği özelleştirdiğiniz sinir ağı çevirisi sistemleri çağrılacak sağlar. 
-* Microsoft Translator hub'ı kullanarak oluşturduğunuz özel çevirisi sistemleri için erişim sağlamaz.
+**Translator Metin Çevirisi API'si sürüm 3**
+* Genel olarak kullanılabilir ve tamamen desteklenir.
+* , GDPR uyumlu bir işlemci olarak uyumludur ve tüm ISO 20001 ve 20018 yanı sıra SOC 3 sertifika gereksinimlerini karşılar. 
+* Yeni Translator NMT özelleştirme özelliği olan özel çevirmenle (Önizleme) özelleştirdiğiniz sinir ağ çevirisi sistemlerini çağırabilmeniz için izin verir. 
+* , Microsoft Translator hub 'ı kullanılarak oluşturulan özel çeviri sistemlerine erişim sağlamaz.
 
-Translator metin çevirisi API'si, sürüm 3 api.cognitive.microsofttranslator.com uç noktası kullanıyorsanız, kullanmakta olduğunuz.
+Api.cognitive.microsofttranslator.com uç noktasını kullanıyorsanız, Translator Metin Çevirisi API'si sürüm 3 ' ü kullanıyorsunuz.
 
-**Translator Text API sürüm 2**
-* Tüm 20001,20018 ISO ve SOC 3 sertifika gereksinimlerini karşılamıyor. 
-* Translator özelleştirme özelliği ile özelleştirdiğiniz sinir ağı çevirisi sistemleri çağırmak izin vermez.
-* Microsoft Translator hub'ı kullanarak oluşturduğunuz özel çevirisi sistemleri erişim sağlar.
-* Translator metin çevirisi API'si, sürüm 2, api.microsofttranslator.com uç noktası kullanıyorsanız kullanıyor.
+**Translator Metin Çevirisi API'si sürüm 2**
+* Tüm ISO 20.001, 20018 ve SOC 3 sertifika gereksinimlerini karşılamaz. 
+* , Çevirmen özelleştirme özelliğiyle özelleştirdiğiniz sinir ağ çevirisi sistemlerini çağırmada izin vermez.
+* Microsoft Translator hub 'ı kullanılarak oluşturulan özel çeviri sistemlerine erişim sağlar.
+* Api.microsofttranslator.com uç noktasını kullanıyorsanız, Translator Metin Çevirisi API'si sürüm 2 ' i kullanıyorsunuz.
 
-Translator API sürümü yok çevirilerinizi bir kaydını oluşturur. Hiçbir zaman çevirilerinizi kimseyle paylaşılmaz. Daha fazla bilgi [Translator yapmama](https://www.aka.ms/NoTrace) Web sayfası.
+Çevirmen API 'sinin hiçbir sürümü, çevirilerinizi bir kayıt oluşturur. Çevirlarınız hiçbir şekilde hiç kimseyle paylaşılmaz. [Çevirmen No-Trace](https://www.aka.ms/NoTrace) Web sayfası hakkında daha fazla bilgi.
 
 ## <a name="links"></a>Bağlantılar
 
-* [Microsoft gizlilik ilkesi](https://privacy.microsoft.com/privacystatement)
-* [Microsoft Azure yasal bilgiler](https://azure.microsoft.com/support/legal)
+* [Microsoft Gizlilik Ilkesi](https://privacy.microsoft.com/privacystatement)
+* [Yasal bilgileri Microsoft Azure](https://azure.microsoft.com/support/legal)
 * [Çevrimiçi hizmet koşulları](https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=31)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [V3.0 belgelerini görüntüleyin](reference/v3-0-reference.md)
+> [V 3.0 belgelerini görüntüle](reference/v3-0-reference.md)

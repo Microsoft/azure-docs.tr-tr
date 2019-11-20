@@ -1,5 +1,5 @@
 ---
-title: Azure için MongoDB, React ve Node.js Öğreticisi
+title: Azure için MongoDB, tepki verme ve Node. js öğreticisi
 description: Video temelli bu öğretici serisiyle Azure Cosmos DB üzerinde React ve Node ile MongoDB için kullandığınız aynı API'leri kullanarak bir MongoDB uygulaması oluşturmayı öğrenirsiniz.
 author: johnpapa
 ms.service: cosmos-db
@@ -9,18 +9,18 @@ ms.topic: tutorial
 ms.date: 09/05/2018
 ms.author: jopapa
 ms.reviewer: sngun
-ms.openlocfilehash: 1bb8779db51a3fdc3af4a9169ce5123ebf6e3f50
-ms.sourcegitcommit: cababb51721f6ab6b61dda6d18345514f074fb2e
+ms.openlocfilehash: 4efaa90281ddcebf1b800e1016578e38c24be651
+ms.sourcegitcommit: e42c778d38fd623f2ff8850bb6b1718cdb37309f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66477739"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69614106"
 ---
 # <a name="create-a-mongodb-app-with-react-and-azure-cosmos-db"></a>React ve Azure Cosmos DB ile bir MongoDB uygulaması oluşturma  
 
-Bu çok parçalı videolu öğretici, React ön ucuyla hero izleme uygulaması oluşturmayı gösterir. Uygulama, Node ve Express sunucusu için kullanılan, Cosmos veritabanı ile yapılandırılmış bağlandığı [Azure Cosmos DB'nin MongoDB API'si](mongodb-introduction.md)ve ardından React ön ucunu uygulamanın sunucu bölümüne bağlar. Öğreticinin ayrıca nasıl üzerine ve tıklama Cosmos DB Azure portalında ölçeklendirme yapın ve herkesin, sık kullanılan hero'ları izlemek için uygulamayı internet'e dağıtmak nasıl gösterir. 
+Bu çok parçalı videolu öğretici, React ön ucuyla hero izleme uygulaması oluşturmayı gösterir. Sunucu için düğüm ve Express kullanılan uygulama, [MongoDB için Azure Cosmos DB API 'si](mongodb-introduction.md)Ile yapılandırılmış Cosmos veritabanına bağlanır ve sonra tepki ön ucuna uygulamanın sunucu bölümüne bağlanır. Öğreticide Ayrıca, herkesin en sevdiğiniz Heroes 'yi izleyebilmesi için Azure portal Cosmos DB ölçeklendirme ve uygulamanın internet 'e nasıl dağıtılacağı gösterilmektedir. 
 
-[Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) destekleyen Azure Cosmos DB MongoDB yerine kullanmak istemcileri etkinleştirme ile MongoDB, protokol uyumluluk bağlayabilirsiniz.  
+[Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) MongoDB ile kablo protokol uyumluluğunu destekler ve Istemcilerin mongodb yerine Azure Cosmos DB kullanmasına olanak tanır.  
 
 Bu çok bölümlü öğretici aşağıdaki görevleri içerir:
 
@@ -69,7 +69,7 @@ Bu videoda, Azure portalında bir Azure Cosmos DB hesabı oluşturma, MongoDB ve
 
 ## <a name="read-and-create-heroes-in-the-app"></a>Uygulamada hero'ları okuma ve oluşturma
 
-Bu video, hero'ları okuyup Cosmos DB veritabanında hero'ları oluşturmayı, sonrasında da Postman ve React kullanıcı arabirimlerini kullanarak bu yöntemleri test etmeyi gösterir. 
+Bu videoda, Heroes 'nin nasıl okunacağı ve Cosmos veritabanında Heroes 'nin nasıl oluşturulduğu ve bu yöntemlerin Postman ve tepki verme Kullanıcı arabirimi kullanılarak nasıl test yapılacağı gösterilmektedir. 
 
 > [!VIDEO https://www.youtube.com/embed/AQK9n_8fsQI] 
 

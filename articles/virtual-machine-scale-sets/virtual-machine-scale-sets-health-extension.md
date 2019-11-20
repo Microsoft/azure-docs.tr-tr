@@ -1,6 +1,6 @@
 ---
-title: Uygulama durumunu uzantısını Azure sanal makine ölçek kümeleri ile kullanma | Microsoft Docs
-description: Sanal makine ölçek kümeleri üzerinde dağıtılan uygulamalarınızı durumunu izlemek için uygulama durumunu uzantısını kullanmayı öğrenin.
+title: Azure sanal makine ölçek kümeleri ile uygulama durumu uzantısı 'nı kullanma | Microsoft Docs
+description: Sanal makine ölçek kümelerine dağıtılan uygulamalarınızın sistem durumunu izlemek için uygulama durumu uzantısının nasıl kullanılacağını öğrenin.
 services: virtual-machine-scale-sets
 documentationcenter: ''
 author: mayanknayar
@@ -15,31 +15,31 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/30/2019
 ms.author: manayar
-ms.openlocfilehash: d1cff1011e190e5fbb2874657cbdfbdc68bde0c0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e074d76f9ed095725d99bddc9eb21925f4b3697c
+ms.sourcegitcommit: 8e1fb03a9c3ad0fc3fd4d6c111598aa74e0b9bd4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60619833"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70114478"
 ---
-# <a name="using-application-health-extension-with-virtual-machine-scale-sets"></a>Uygulama durumunu uzantısı ile sanal makine ölçek kümeleri
-Uygulamanızın sistem durumu izleme, yönetme ve yükseltme dağıtımınız için önemli bir sinyaldir. Azure sanal makine ölçek kümeleri için destek sağlar [toplu yükseltmeler](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model) dahil olmak üzere [otomatik işletim sistemi görüntüsü yükseltme](virtual-machine-scale-sets-automatic-upgrade.md), dağıtımınızı yükseltmek için tek tek örneklerini sistem durumu izlemeye güvenin .
+# <a name="using-application-health-extension-with-virtual-machine-scale-sets"></a>Sanal makine ölçek kümeleri ile uygulama durumu uzantısı 'nı kullanma
+Uygulamanızın sistem durumunu izlemek, dağıtımınızı yönetmek ve yükseltmek için önemli bir sinyaldir. Azure sanal makine ölçek kümeleri, dağıtımınızı yükseltmek için ayrı örneklerin sistem durumu izlemesini kullanan [Otomatik işletim sistemi görüntüsü yükseltmeleri](virtual-machine-scale-sets-automatic-upgrade.md)dahil olmak üzere, çalışan [yükseltmeler](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model) için destek sağlar.
 
-Bu makalede, sanal makine ölçek kümeleri üzerinde dağıtılan uygulamalarınızı durumunu izlemek için uygulama durumunu uzantıyı nasıl kullanabileceğiniz açıklanır.
+Bu makalede, sanal makine ölçek kümelerine dağıtılan uygulamalarınızın sistem durumunu izlemek için uygulama sistem durumu uzantısını nasıl kullanabileceğiniz açıklanır.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu makalede, aşina olduğunuzu varsayar:
+Bu makalede, hakkında bilgi sahibi olduğunuz varsayılmaktadır:
 -   Azure sanal makine [uzantıları](../virtual-machines/extensions/overview.md)
--   [Değiştirme](virtual-machine-scale-sets-upgrade-scale-set.md) sanal makine ölçek kümeleri
+-   Sanal makine ölçek kümelerini [değiştirme](virtual-machine-scale-sets-upgrade-scale-set.md)
 
-## <a name="when-to-use-the-application-health-extension"></a>Uygulama durumunu uzantıyı kullanmak ne zaman
-Uygulama durumunu uzantısı, sanal makine ölçek kümesi örneği ve sistem durumu VM ölçek kümesi örneğinin içinde raporlarda içinde dağıtılır. Bir uygulama uç noktaya yoklama ve uygulamanın bu örneği üzerinde durumunu güncelleştirmek için uzantısını yapılandırabilirsiniz. Bu örneği durumu örneği yükseltme işlemleri için uygun olup olmadığını belirlemek için Azure tarafından denetlenir.
+## <a name="when-to-use-the-application-health-extension"></a>Uygulama durumu uzantısının ne zaman kullanılacağı
+Uygulama sistem durumu uzantısı bir sanal makine ölçek kümesi örneği içine dağıtılır ve VM sistem durumu üzerinde, ölçek kümesi örneği içinden raporlar. Uzantıyı bir uygulama uç noktasında araştırma yapmak ve bu örnekteki uygulamanın durumunu güncelleştirmek için yapılandırabilirsiniz. Bu örnek durumu, bir örneğin yükseltme işlemlerine uygun olup olmadığını öğrenmek için Azure tarafından denetlenir.
 
-Uzantı raporları sistem bir VM içinde uzantı, dış araştırmalarının uygulama sistem durumu Araştırmalarının gibi durumlarda kullanılabilir (özel Azure Load Balancer kullanan [araştırmaları](../load-balancer/load-balancer-custom-probe-overview.md)) kullanılamaz.
+Uzantı, bir VM içinden sistem durumunu raporladığında, uzantı, uygulama sistem durumu Araştırmaları (özel Azure Load Balancer yoklamaları kullanan) gibi dış araştırmaların kullanılamaz durumda olabilir [](../load-balancer/load-balancer-custom-probe-overview.md).
 
 ## <a name="extension-schema"></a>Uzantı şeması
 
-Uygulama durumunu Uzantı Şeması aşağıdaki JSON'u göstermektedir. Uzantı "tcp" veya "http" istek ile ilişkili bir bağlantı noktası veya istek yolu en az gerektirir.
+Aşağıdaki JSON, uygulama sistem durumu uzantısının şemasını gösterir. Uzantı, en azından ilişkili bağlantı noktası veya istek yoluyla bir "TCP" ya da "http" isteği gerektirir.
 
 ```json
 {
@@ -67,23 +67,23 @@ Uygulama durumunu Uzantı Şeması aşağıdaki JSON'u göstermektedir. Uzantı 
 | ---- | ---- | ---- 
 | apiVersion | `2018-10-01` | date |
 | publisher | `Microsoft.ManagedServices` | string |
-| type | `ApplicationHealthLinux` (Linux), `ApplicationHealthWindows` (Windows) | string |
+| type | `ApplicationHealthLinux`(Linux), `ApplicationHealthWindows` (Windows) | string |
 | typeHandlerVersion | `1.0` | int |
 
 ### <a name="settings"></a>Ayarlar
 
-| Ad | Değer / örnek | Veri Türü
+| Name | Değer / örnek | Veri Türü
 | ---- | ---- | ----
 | protocol | `http` veya `tcp` | string |
-| port | Protokol olduğunda isteğe bağlı `http`zorunlu Protokolü `tcp` | int |
-| requestPath | Protokol olduğunda zorunlu `http`, protokol olduğunda izin verilmiyor `tcp` | string |
+| port | Protokol olduğunda isteğe bağlı `http`, protokol olduğunda zorunludur`tcp` | int |
+| Istek yolu | Protokol olduğunda zorunlu, protokol ise izin verilmez `http``tcp` | string |
 
-## <a name="deploy-the-application-health-extension"></a>Uygulama durumunu uzantısı dağıtma
-Ölçek kümenizi uzantısı, aşağıdaki örneklerde açıklandığı ayarlar uygulama durumunu dağıtma birden çok yolu vardır.
+## <a name="deploy-the-application-health-extension"></a>Uygulama durumu uzantısını dağıtma
+Aşağıdaki örneklerde açıklandığı şekilde, uygulama durumu uzantısını ölçek kümelerinizi dağıtmanın birden çok yolu vardır.
 
 ### <a name="rest-api"></a>REST API
 
-Aşağıdaki örnek uygulama durumunu uzantısıyla (adı myHealthExtension) ölçek kümesi modelinde bir Windows tabanlı ölçek kümesinin extensionprofile öğesine ekler.
+Aşağıdaki örnek, uygulama durumu uzantısını (myHealthExtension adlı) Windows tabanlı ölçek kümesinin ölçek kümesi modelinde extensionProfile öğesine ekler.
 
 ```
 PUT on `/subscriptions/subscription_id/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myScaleSet/extensions/myHealthExtension?api-version=2018-10-01`
@@ -105,13 +105,13 @@ PUT on `/subscriptions/subscription_id/resourceGroups/myResourceGroup/providers/
   }
 }
 ```
-Kullanım `PATCH` zaten dağıtılmış bir uzantı düzenlenecek.
+Zaten `PATCH` dağıtılmış bir uzantıyı düzenlemek için kullanın.
 
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-Kullanım [Ekle AzVmssExtension](/powershell/module/az.compute/add-azvmssextension) ölçek için uygulama durumunu uzantısı eklemek için cmdlet kümesi model tanımı.
+Uygulama durumu uzantısını ölçek kümesi model tanımına eklemek için [Add-AzVmssExtension](/powershell/module/az.compute/add-azvmssextension) cmdlet 'ini kullanın.
 
-Aşağıdaki örnek uygulama durumunu uzantısını ekler `extensionProfile` ölçek kümesi modelinde bir Windows tabanlı ölçek kümesi. Örneğin, yeni Az PowerShell modülü kullanır.
+Aşağıdaki örnek, uygulama sistem durumu uzantısını Windows tabanlı ölçek `extensionProfile` kümesinin ölçek kümesi modelinde öğesine ekler. Örnek, yeni az PowerShell modülünü kullanır.
 
 ```azurepowershell-interactive
 # Define the scale set variables
@@ -147,23 +147,32 @@ Update-AzVmss -ResourceGroupName $vmScaleSetResourceGroup `
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
 
-Kullanım [az vmss uzantı kümesi](/cli/azure/vmss/extension#az-vmss-extension-set) için uygulama durumunu uzantısı eklemek için ölçek kümesi modeli tanımı.
+Ölçek kümesi model tanımına uygulama durumu uzantısı eklemek için [az VMSS Extension set](/cli/azure/vmss/extension#az-vmss-extension-set) komutunu kullanın.
 
-Aşağıdaki örnek, Ölçek kümesi modeline Windows tabanlı ölçek kümesinin uygulama durumunu uzantısını ekler.
+Aşağıdaki örnek, uygulama durumu uzantısını Linux tabanlı ölçek kümesinin ölçek kümesi modeline ekler.
 
 ```azurecli-interactive
 az vmss extension set \
-  --name ApplicationHealthWindows \
+  --name ApplicationHealthLinux \
   --publisher Microsoft.ManagedServices \
   --version 1.0 \
   --resource-group <myVMScaleSetResourceGroup> \
   --vmss-name <myVMScaleSet> \
   --settings ./extension.json
 ```
+Uzantı. JSON dosya içeriği.
+
+```json
+{
+  "protocol": "<protocol>",
+  "port": "<port>",
+  "requestPath": "</requestPath>"
+}
+```
 
 
 ## <a name="troubleshoot"></a>Sorun giderme
-Uzantı yürütme çıkış dosyaları aşağıdaki dizinlerde bulunan kaydedilir:
+Uzantı yürütme çıktısı, aşağıdaki dizinlerde bulunan dosyalara kaydedilir:
 
 ```Windows
 C:\WindowsAzure\Logs\Plugins\Microsoft.ManagedServices.ApplicationHealthWindows\<version>\
@@ -173,7 +182,7 @@ C:\WindowsAzure\Logs\Plugins\Microsoft.ManagedServices.ApplicationHealthWindows\
 /var/lib/waagent/apphealth
 ```
 
-Günlükler uygulama sistem durumu da düzenli aralıklarla yakalayın.
+Günlükler Ayrıca uygulamanın sistem durumunu düzenli olarak yakalar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bilgi edinmek için nasıl [uygulamanızı dağıtmak](virtual-machine-scale-sets-deploy-app.md) üzerinde sanal makine ölçek kümeleri.
+Uygulamanızı sanal makine ölçek kümelerinde [dağıtmayı](virtual-machine-scale-sets-deploy-app.md) öğrenin.

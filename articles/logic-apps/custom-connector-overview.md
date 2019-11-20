@@ -1,6 +1,6 @@
 ---
-title: Özel bağlayıcı konu bağlantılar - Azure Logic Apps | Microsoft Docs
-description: Nasıl oluşturulacağını, hakkındaki konulara bağlantılar kullanma, paylaşma ve özel bağlayıcılar Onayla
+title: Özel bağlayıcı konu bağlantıları-Azure Logic Apps | Microsoft Docs
+description: Özel Bağlayıcılar oluşturma, kullanma, paylaşma ve onaylama hakkındaki konuların bağlantıları
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -9,18 +9,18 @@ ms.author: estfan
 ms.reviewer: divswa, LADocs
 ms.topic: article
 ms.date: 1/30/2018
-ms.openlocfilehash: 6b02954f9f89074c5eff7e3b7fad2bc6afb29540
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c4cc0201b8ac61c54aadcc59b549877238b95e54
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64689770"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73574468"
 ---
-# <a name="custom-connectors-in-logic-apps"></a>Logic Apps özel bağlayıcıları
+# <a name="custom-connectors-in-logic-apps"></a>Logic Apps özel bağlayıcılar
 
-Hiçbir kod yazmadan, [Azure Logic Apps](https://azure.microsoft.com/services/logic-apps), [Microsoft Flow](https://flow.microsoft.com) ve [PowerApps](https://powerapps.microsoft.com) kullanarak iş akışları ve uygulamalar oluşturabilirsiniz. Uygulamaları, verileri ve iş süreçlerini tümleştirmenize yardımcı olmak için bu hizmetler sağlamada [yaklaşık 200 Bağlayıcılar](https://docs.microsoft.com/connectors/) - Microsoft Hizmetleri ve ürünleri yanı sıra, GitHub, Salesforce, Twitter ve daha fazlası gibi diğer hizmetler için.
+Herhangi bir kod yazmadan, [Azure Logic Apps](https://azure.microsoft.com/services/logic-apps), [Power otomatikleştirir](https://flow.microsoft.com)ve [Power Apps](https://powerapps.microsoft.com)ile iş akışları ve uygulamalar oluşturabilirsiniz. Uygulamaları, verileri ve iş süreçlerini tümleştirmenize yardımcı olmak için bu hizmetler, Microsoft Hizmetleri ve ürünleri için (GitHub, Salesforce, Twitter ve daha fazlası gibi) ek hizmetler için [~ 200 bağlayıcılarını](https://docs.microsoft.com/connectors/) sunmaktadır.
 
-Yine de bazı durumlarda önceden oluşturulmuş bir bağlayıcı olarak sağlanmayan API'leri, hizmetleri ve sistemleri çağırmak isteyebilirsiniz. Gereksinimlerinize daha fazla uyarlanmış senaryoları desteklemek için, kendi tetikleyicileri ve eylemleri olan *özel bağlayıcılar* oluşturabilirsiniz. Özel Bağlayıcılarla ilgili tüm temel ve Gelişmiş eğitmenin bağlayıcılar belgeler sitesinde var. İle başlayabilirsiniz [özel bağlayıcıya genel bakış](https://docs.microsoft.com/connectors/custom-connectors/), ancak Ayrıca belirli bir alana hakkında ayrıntılı bilgi için bu konular için doğrudan gidebilirsiniz:
+Yine de bazı durumlarda önceden oluşturulmuş bir bağlayıcı olarak sağlanmayan API'leri, hizmetleri ve sistemleri çağırmak isteyebilirsiniz. Gereksinimlerinize daha fazla uyarlanmış senaryoları desteklemek için, kendi tetikleyicileri ve eylemleri olan *özel bağlayıcılar* oluşturabilirsiniz. Bağlayıcılar belge sitesi özel bağlayıcılar hakkında kapsamlı temel ve gelişmiş öğreticilere sahiptir. [Özel bağlayıcıya genel bakış](https://docs.microsoft.com/connectors/custom-connectors/)ile başlayabilirsiniz, ancak Ayrıca belirli bir alanla ilgili ayrıntılar için doğrudan bu konulara gidebilirsiniz:
 
 * [Logic Apps Bağlayıcısı oluşturma](https://docs.microsoft.com/connectors/custom-connectors/create-logic-apps-connector)
 
@@ -30,7 +30,7 @@ Yine de bazı durumlarda önceden oluşturulmuş bir bağlayıcı olarak sağlan
 
 * [Bir mantıksal uygulamadan özel bağlayıcı kullanma](https://docs.microsoft.com/connectors/custom-connectors/use-custom-connector-logic-apps)
 
-* [Kuruluşunuzda özel bağlayıcıları paylaşma](https://docs.microsoft.com/connectors/custom-connectors/share)
+* [Kuruluşunuzda özel bağlayıcılar paylaşma](https://docs.microsoft.com/connectors/custom-connectors/share)
 
 * [Bağlayıcılarınızı Microsoft sertifikası için gönderme](https://docs.microsoft.com/connectors/custom-connectors/submit-certification)
 

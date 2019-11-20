@@ -3,20 +3,21 @@ author: alkohli
 ms.service: databox
 ms.subservice: heavy
 ms.topic: include
-ms.date: 05/21/2019
+ms.date: 11/05/2019
 ms.author: alkohli
-ms.openlocfilehash: b159ec8620fa8c93e4917f73be9b9898e1b4fbcc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 16647b6a13e64073ab570d36a8a380d0e36bd855
+ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66244667"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73800178"
 ---
-- Dosyaları doğrudan precreated paylaşımları birine bulundurmanıza gerek yoktur. Paylaşım altında bir klasör oluşturun ve bu klasöre kopyalayın gerekir.
-- Bir klasörü altında *StorageAccount_BlockBlob* ve *StorageAccount_PageBlob* bir kapsayıcıdır. Örneğin, kapsayıcıları olarak oluşturulur *StorageAccount_BlockBlob/kapsayıcı* ve *StorageAccount_PageBlob/kapsayıcı*.
-- Doğrudan altında oluşturulan her klasörün *StorageAccount_AzureFiles* bir Azure dosya paylaşımına çevrilir.
-- Data Box, kopyalanan nesne olarak aynı ada sahip bir bulutta (örneğin, bir bloba veya bir dosya) var olan bir Azure nesne varsa, bulutta dosyanın üzerine yazar.
-- Her dosyanın içine yazılmış *StorageAccount_BlockBlob* ve *StorageAccount_PageBlob* paylaşımları yüklendiği bir blok blobu ve sayfa blobu olarak sırasıyla.
-- Azure blob Depolama dizinleri desteklememektedir. Bir klasörü altında oluşturursanız *StorageAccount_BlockBlob* klasörünü ve ardından sanal klasörler blob adı oluşturulur. Azure dosyaları için gerçek dizin yapısı korunur.
-- Herhangi bir boş (olmadan tüm dosyaları) dizin hiyerarşisi altında oluşturulan *StorageAccount_BlockBlob* ve *StorageAccount_PageBlob* değil klasörleri karşıya yüklendi.
-- Herhangi bir hata varsa verileri Azure'a karşıya yüklenirken bir hata günlüğü hedef depolama hesabında oluşturulur. Bu hata günlük yolunu karşıya yükleme tamamlandıktan ve düzeltme eylemi için günlüğü gözden geçirebilirsiniz kullanılabilir. Veri kaynağından karşıya yüklenen veriler doğrulamadan silmeyin.
+- Dosyaları, önceden yapılan paylaşımların hiçbirine doğrudan kopyalamayın. Paylaşımın altında bir klasör oluşturmanız ve ardından dosyaları bu klasöre kopyalamanız gerekir.
+- *StorageAccount_BlockBlob* ve *StorageAccount_PageBlob* altındaki bir klasör bir kapsayıcıdır. Örneğin, kapsayıcılar *StorageAccount_BlockBlob/Container* ve *StorageAccount_PageBlob/Container*olarak oluşturulur.
+- Doğrudan *StorageAccount_AzureFiles* altında oluşturulan her klasör bir Azure dosya paylaşımında çevrilir.
+- Bulutta, Kopyalanmakta olan nesneyle aynı ada sahip mevcut bir Azure nesneniz (blob veya bir dosya gibi) varsa Data Box buluttaki dosyanın üzerine yazar.
+- *StorageAccount_BlockBlob* ve *StorageAccount_PageBlob* paylaşımlarına yazılan her dosya sırasıyla Blok Blobu ve Sayfa Blobu olarak karşıya yüklenir.
+- Azure Blob depolama, dizinleri desteklemez. *StorageAccount_BlockBlob* klasörü altında bir klasör oluşturursanız, sanal klasörler blob adında oluşturulur. Azure dosyaları için gerçek dizin yapısı korunur.
+- *StorageAccount_BlockBlob* ve *StorageAccount_PageBlob* klasörlerinde oluşturulan boş dizin hiyerarşisi (herhangi bir dosya olmadan) karşıya yüklenmedi.
+- Verileri Azure 'a yüklerken herhangi bir hata oluşursa, hedef depolama hesabında bir hata günlüğü oluşturulur. Karşıya yükleme tamamlandığında bu hata günlüğüne yönelik yol kullanılabilir ve düzeltici eylem gerçekleştirmek için günlüğü gözden geçirebilirsiniz. Karşıya yüklenen verileri doğrulamadan verileri kaynaktan silmeyin.
+- Veriler Azure dosyalarına yüklendiğinde dosya meta verileri ve NTFS izinleri korunmaz. Örneğin, veriler kopyalanırken dosyaların *son değiştirilme özniteliği* tutulmaz.

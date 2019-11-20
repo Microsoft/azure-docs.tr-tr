@@ -1,45 +1,41 @@
 ---
-title: Otomasyon için Uyumluluk, Azure altyapısının Inspec kullanın
-description: Azure dağıtımlarınızı sorunları algılamak için Inspec kullanmayı öğrenin
-keywords: Azure, chef, devops, sanal makineler, genel bakış, otomatikleştirme, inspec
-ms.service: virtual-machines-linux
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
+title: Azure altyapınızın uyumluluk otomasyonu için InSpec kullanma
+description: InSpec kullanarak Azure dağıtımlarınızdaki sorunları tespit etme hakkında bilgi edinin
+keywords: Azure, Chef, DevOps, sanal makineler, genel bakış, otomatikleştir, inspec
 ms.date: 03/19/2019
 ms.topic: article
-ms.openlocfilehash: bdfa30b48c79a8910d503bb9e54a42c30e5adba6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 2531277eb1aa6048c93240031652e09582409e56
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60629807"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158232"
 ---
-# <a name="use-inspec-for-compliance-automation-of-your-azure-infrastructure"></a>Otomasyon için Uyumluluk, Azure altyapısının Inspec kullanın
+# <a name="use-inspec-for-compliance-automation-of-your-azure-infrastructure"></a>Azure altyapınızın uyumluluk otomasyonu için InSpec kullanma
 
-[İnSpec](https://www.chef.io/inspec/) yazılım mühendisleri, işlemler ve güvenlik mühendisi arasında paylaşılabilir güvenlik ve uyumluluk kurallarını tanımlamak için Chef'ın açık kaynak bir dildir. Kolay okuma ve yazma kolay InSpec kod içinde ifade belirttiğiniz istenen duruma gerçek durumuyla altyapınızın karşılaştırarak Inspec çalışır. Inspec ihlalleri algılar ve bir rapor biçiminde bulguları gösterir, ancak düzeltme denetiminde koyar.
+[InSpec](https://www.chef.io/inspec/) , yazılım mühendisleri, işlemler ve güvenlik mühendisleri arasında paylaşılabilen güvenlik & Uyumluluk kurallarını açıklamak için açık kaynaklı bir dildir. InSpec, altyapınızın gerçek durumunu, kolay okunabilir ve kolay yazılabilir InSpec kodunda ifade ettiğiniz istenen durumla karşılaştırarak işe yarar. InSpec ihlalleri algılar ve bulguları rapor biçiminde görüntüler, ancak sizi düzeltme denetimine geçirir.
 
-Inspec, kaynakların ve sanal makineler, ağ yapılandırmaları, Azure Active Directory ayarları ve daha fazlası dahil olmak üzere, bir Abonelikteki kaynak gruplarının durumunu doğrulamak için kullanabilirsiniz.
+Sanal makineler, ağ yapılandırması, Azure Active Directory ayarları ve daha fazlası dahil olmak üzere bir abonelikte kaynakların ve kaynak gruplarının durumunu doğrulamak için InSpec kullanabilirsiniz.
 
-Bu makalede, Azure'da güvenlik ve uyumluluk kolaylaştırmak için Inspec kullanmanın avantajları anlatılmaktadır.
+Bu makalede, Azure 'da güvenlik ve uyumluluk kolaylaştırmak için InSpec kullanmanın avantajları açıklanmaktadır.
 
-## <a name="make-compliance-easy-to-understand-and-assess"></a>Uyumluluk anlamak ve değerlendirmek kolay hale getirir
+## <a name="make-compliance-easy-to-understand-and-assess"></a>Uyumluluğun anlaşılması ve değerlendirilmesi kolay olsun
 
-Elektronik tablolar veya Word belgelerini yazılmış uyumluluk belgeleri gereksinimleri yorumlamak için açık kalır. Inspec ile gereksinimlerinizi tutulan, yürütülebilir, okunabilir koda dönüştürün. Kod ne Temizle amacıyla somut testleri ile değiştiriliyor değerlendirilmesi ilgili konuşmaları değiştirir.
+Elektronik tablolarda veya Word belgelerinde yazılan uyumluluk belgeleri, bu gereksinimlerin yorumu için açık kalmasını sağlar. InSpec ile, gereksinimlerinizi sürümlenmiş, çalıştırılabilir ve okunabilir bir koda dönüştürürler. Kod, net bir amaç ile somut testlerin ne kadar değerlendirileceğini öğrenmek için konuşmaları değiştirir.
 
-## <a name="detect-fleet-wide-issues-and-prioritize-their-remediation"></a>Filo genelindeki sorunları algılayın ve bunların düzeltme öncelik
+## <a name="detect-fleet-wide-issues-and-prioritize-their-remediation"></a>Fleet genelinde sorunları algılayın ve düzeltme önceliğini belirleyin
 
-Inspec aracısız algılama modu - ölçekte - Etkilenme düzeyinizi hızlı bir şekilde değerlendirmek için etkinleştirin. Puanlama etkisi/önem derecesi için yerleşik meta verileri, özel olarak hangi alanlarda odaklanmak için düzeltme üzerinde belirlenmesine yardımcı olur. Ayrıca, kuralları hızla yanıt olarak yeni güvenlik açıkları ve yönetmelikleri yazın ve hemen kullanıma.
+InSpec aracısız algılama modu, sıkışık düzeyini hızla değerlendirmenizi sağlar. Etki/önem puanlaması için yerleşik meta veriler düzeltilmeye odaklanabilecek alanlara yardımcı olur. Ayrıca, kuralları yeni güvenlik açıklarına veya düzenlemelerine yanıt olarak hızlıca yazabilir ve hemen alabilirsiniz.
 
-## <a name="audit-azure-virtual-machines-with-policy-guest-configuration"></a>Azure sanal makineler Konuk yapılandırma ilke ile denetleme
+## <a name="audit-azure-virtual-machines-with-policy-guest-configuration"></a>Ilke Konuk yapılandırması ile Azure sanal makinelerini denetleme
 
-Azure, doğrudan aracılığıyla Azure sanal makineleri denetlemek için Chef InSpec tanımları kullanımını destekleyen [Azure İlkesi Konuk Yapılandırması](/azure/governance/policy/concepts/guest-configuration). Konuk yapılandırma Linux sanal makinesi belirtilen Chef InSpec tanım ve Azure İlkesi aracılığıyla geri rapor uyumluluk için değerlendirilir. Bu denetimleri sonuçlarını da Azure İzleyici günlüklerine bildirilir; Uyarılar ve diğer Otomasyon senaryoları etkinleştiriliyor.
+Azure, Azure [Ilke Konuk yapılandırması](/azure/governance/policy/concepts/guest-configuration)aracılığıyla Azure sanal makinelerini denetlemek Için Chef InSpec tanımlarının kullanımını doğrudan destekler. Konuk yapılandırması, bir Linux sanal makinesini bir belirtilen Chef InSpec tanımına ve rapor uyumluluğunu Azure Ilkesi aracılığıyla geri değerlendirir. Bu denetimlerin sonuçları Azure Izleyici günlükleri aracılığıyla da bildirilir; uyarıları ve diğer otomasyon senaryolarını etkinleştirme.
 
-## <a name="satisfy-audits"></a>Denetimleri karşılamak
+## <a name="satisfy-audits"></a>Denetimleri karşılaın
 
-Inspec ile yalnızca aralıklarla belirlenmiş üç aylık veya yıllık gibi herhangi bir zamanda - soruları denetim yanıt verebilirsiniz. Sürekli olarak InSpec testleri çalıştırarak geçmişi ve tam uyumluluk duruşunu bilmek bir denetim döngüsü girmek yerine bir denetçi'nın bulgular tarafından Şaşırmış.
+InSpec ile, her zaman üç ayda bir veya yıllık gibi önceden belirlenmiş aralıklarda değil, denetim sorularına yanıt verebilirsiniz. InSpec testlerini sürekli olarak çalıştırarak, bir denetleyici bulguları tarafından şaşırmaktansa, tam uyumluluk duruşunuzu ve geçmişinizi bilmenin bir denetim döngüsünü girersiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"] 
-> [Azure Cloud Shell'de InSpec deneyin](https://shell.azure.com)
+> [Azure Cloud Shell InSpec deneyin](https://shell.azure.com)

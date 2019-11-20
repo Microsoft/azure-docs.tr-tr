@@ -1,32 +1,22 @@
 ---
-title: Azure depolama hesabı adı hataları | Microsoft Docs
-description: Bir depolama hesabı adı belirtilirken karşılaşabileceğiniz hatalar açıklanmaktadır.
-services: azure-resource-manager
-documentationcenter: ''
-author: tfitzmac
-manager: timlt
-editor: ''
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
+title: Depolama hesabı adı hataları
+description: Bir depolama hesabı adı belirtirken karşılaşabileceğiniz hataları açıklar.
 ms.topic: troubleshooting
 ms.date: 03/09/2018
-ms.author: tomfitz
-ms.openlocfilehash: c3d4d764b1076c8705cfa64d6c0b38e3b8c1a801
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6af75470ebab61a1eaf7afd0bf946564c5300611
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64716397"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149415"
 ---
-# <a name="resolve-errors-for-storage-account-names"></a>Depolama hesabı adları için hataları çözümleyin
+# <a name="resolve-errors-for-storage-account-names"></a>Depolama hesabı adları hatalarını çözme
 
-Bu makalede, bir depolama hesabını dağıtırken karşılaşabileceğiniz adlandırma hataları açıklanır.
+Bu makalede, bir depolama hesabı dağıtılırken karşılaşabileceğiniz adlandırma hataları açıklanır.
 
 ## <a name="symptom"></a>Belirti
 
-Depolama hesabınızın adını yasaklanmış karakterler içeriyorsa, gibi bir hata alırsınız:
+Depolama hesabı adınız yasaklanmış karakterler içeriyorsa, şöyle bir hata alırsınız:
 
 ```
 Code=AccountNameInvalid
@@ -34,29 +24,29 @@ Message=S!torageckrexph7isnoc is not a valid storage account name. Storage accou
 between 3 and 24 characters in length and use numbers and lower-case letters only.
 ```
 
-Depolama hesapları için Azure'da benzersiz olan bir kaynak için bir ad sağlamanız gerekir. Benzersiz bir ad belirtmezseniz, gibi bir hata alırsınız:
+Depolama hesapları için Azure genelinde benzersiz olan kaynak için bir ad sağlamanız gerekir. Benzersiz bir ad sağlamazsanız şöyle bir hata alırsınız:
 
 ```
 Code=StorageAccountAlreadyTaken
 Message=The storage account named mystorage is already taken.
 ```
 
-Aboneliğinizde mevcut bir depolama hesabı aynı ada sahip bir depolama hesabı dağıtmak, ancak farklı bir konum sağlayın, depolama hesabı zaten farklı bir konumda var olduğunu belirten bir hata alırsınız. Mevcut depolama hesabını silin veya mevcut bir depolama hesabı aynı konumda sağlayın.
+Aboneliğinizde var olan bir depolama hesabı ile aynı ada sahip bir depolama hesabı dağıtırsanız, ancak farklı bir konum sağlarsanız, depolama hesabının farklı bir konumda zaten var olduğunu belirten bir hata alırsınız. Var olan depolama hesabını silin veya var olan depolama hesabıyla aynı konumu belirtin.
 
 ## <a name="cause"></a>Nedeni
 
-Depolama hesabı adları 3 ila 24 karakter uzunluğunda olmalı ve sayı ve yalnızca küçük harflerden oluşmalıdır. Adın benzersiz olması gerekir.
+Depolama hesabı adları 3 ila 24 karakter uzunluğunda olmalı ve yalnızca rakam ve küçük harf kullanılmalıdır. Ad benzersiz olmalıdır.
 
 ## <a name="solution"></a>Çözüm
 
-Depolama hesabı adının benzersiz olduğundan emin olun. Benzersiz bir ad adlandırma kuralınızın sonucunu birleştirerek oluşturabileceğiniz [uniqueString](resource-group-template-functions-string.md#uniquestring) işlevi.
+Depolama hesabı adının benzersiz olduğundan emin olun. [Uniquestring](resource-group-template-functions-string.md#uniquestring) işlevinin sonucuyla birlikte adlandırma kurallarınızı birleştirerek benzersiz bir ad oluşturabilirsiniz.
 
 ```json
 "name": "[concat('storage', uniqueString(resourceGroup().id))]",
 "type": "Microsoft.Storage/storageAccounts",
 ```
 
-Depolama hesabınızın adını 24 karakterden uzun olmadığından emin olun. [UniqueString](resource-group-template-functions-string.md#uniquestring) işlevi 13 karakter döndürür. Birleştirme bir önek veya sonek için **uniqueString** neden, 11 karakter olan bir değer sağlayın ya da daha az.
+Depolama hesabı adınızın 24 karakterden uzun olmadığından emin olun. [Uniquestring](resource-group-template-functions-string.md#uniquestring) işlevi 13 karakter döndürür. **Uniquestring** sonucuna bir önek veya sonek eklerseniz, 11 karakter veya daha az bir değer sağlayın.
 
 ```json
 "parameters": {
@@ -71,4 +61,4 @@ Depolama hesabınızın adını 24 karakterden uzun olmadığından emin olun. [
 }
 ```
 
-Depolama hesabı adınızı herhangi bir büyük harf veya özel karakterler içermediğinden emin olun.
+Depolama hesabınızın adının büyük/küçük harf veya özel karakter içermediğinden emin olun.

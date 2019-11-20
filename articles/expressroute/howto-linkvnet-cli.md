@@ -1,26 +1,25 @@
 ---
-title: 'Bir sanal ağı ExpressRoute devresine bağlama: CLI: Azure | Microsoft Docs'
+title: 'Azure ExpressRoute: sanal ağı devre dışı bağlantı: CLı'
 description: Bu makalede, CLI ve Resource Manager dağıtım modeli kullanarak ExpressRoute bağlantı hatları için sanal ağlar (Vnet'ler) bağlantı işlemini göstermektedir.
 services: expressroute
 author: cherylmc
 ms.service: expressroute
 ms.topic: conceptual
 ms.date: 05/21/2019
-ms.author: anzaman,cherylmc
-ms.custom: seodec18
-ms.openlocfilehash: 9a6f16df4b827538c1f8bdb9b7382ed06d543b62
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: cherylmc
+ms.openlocfilehash: a8814030e6c4345227ec05ea1554104e0b21efbc
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65991514"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076552"
 ---
 # <a name="connect-a-virtual-network-to-an-expressroute-circuit-using-cli"></a>CLI kullanarak bir ExpressRoute bağlantı hattına bir sanal ağı bağlama
 
 Bu makalede, sanal ağlar (Vnet'ler) bağlantı CLI kullanarak Azure ExpressRoute bağlantı hatları için yardımcı olur. Azure CLI kullanarak bağlamak için sanal ağları Resource Manager dağıtım modeli kullanılarak oluşturulmuş olması gerekir. Bunlar aynı abonelik veya başka bir abonelik parçası olabilir. Bir ExpressRoute bağlantı hattı için sanal ağınıza bağlanmak için farklı bir yöntem kullanmak istiyorsanız, aşağıdaki listeden bir makale seçebilirsiniz:
 
 > [!div class="op_single_selector"]
-> * [Azure portal](expressroute-howto-linkvnet-portal-resource-manager.md)
+> * [Azure Portal](expressroute-howto-linkvnet-portal-resource-manager.md)
 > * [PowerShell](expressroute-howto-linkvnet-arm.md)
 > * [Azure CLI](howto-linkvnet-cli.md)
 > * [Video - Azure portalı](https://azure.microsoft.com/documentation/videos/azure-expressroute-how-to-create-a-connection-between-your-vpn-gateway-and-expressroute-circuit)
@@ -153,11 +152,11 @@ az network vpn-connection update --name ERConnection --resource-group ExpressRou
 
 Aralığı *RoutingWeight* 0-32000. Varsayılan değer 0’dır.
 
-## <a name="configure-expressroute-fastpath"></a>ExpressRoute FastPath yapılandırın 
-Etkinleştirebilirsiniz [ExpressRoute FastPath](expressroute-about-virtual-network-gateways.md) ExpressRoute devreniz açıksa [ExpressRoute doğrudan](expressroute-erdirect-about.md) ve sanal newtork Ultra yüksek performans veya ErGw3AZ noktanızdır. Veri yolu preformance Saniyedeki ve sanal ağınız ile şirket içi ağınız arasında saniye başına bağlantılar gibi FastPath artırır. 
+## <a name="configure-expressroute-fastpath"></a>ExpressRoute FastPath yapılandırma 
+ExpressRoute bağlantı hattınızı [ExpressRoute Direct](expressroute-erdirect-about.md) üzerinde ise ve sanal ağ seçin ağ geçidiniz Ultra Performance veya ErGw3AZ ise [ExpressRoute FastPath](expressroute-about-virtual-network-gateways.md) 'i etkinleştirebilirsiniz. FastPath, şirket içi ağınız ve sanal ağınız arasında saniyedeki paket sayısı ve saniye başına bağlantı gibi veri yolu preformance geliştirir. 
 
 > [!NOTE] 
-> Zaten bir sanal ağ bağlantısına sahip ancak FastPath etkinleştirmediniz sanal ağ bağlantısını silin ve yeni bir tane oluşturmanız gerekir. 
+> Zaten bir sanal ağ bağlantınız varsa ancak FastPath 'i etkinleştirmediyseniz, sanal ağ bağlantısını silmeniz ve yeni bir bağlantı oluşturmanız gerekir. 
 > 
 >  
 

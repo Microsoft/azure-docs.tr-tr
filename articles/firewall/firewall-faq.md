@@ -1,26 +1,26 @@
 ---
-title: Azure güvenlik duvarı ile ilgili SSS
-description: Azure Güvenlik Duvarı hakkında SSS
+title: Azure Güvenlik Duvarı SSS
+description: Azure Güvenlik Duvarı hakkında SSS. Azure sanal ağ kaynaklarınızı koruyan, yönetilen, bulut tabanlı bir ağ güvenlik hizmeti.
 services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: conceptual
-ms.date: 6/21/2019
+ms.date: 11/19/2019
 ms.author: victorh
-ms.openlocfilehash: 933b4167f25db5a01cf1160f5e781a1fe31afc6b
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: 418fafdec9bd44fa3682e33cc53bbca9c716dcf2
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67304591"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74167039"
 ---
-# <a name="azure-firewall-faq"></a>Azure güvenlik duvarı ile ilgili SSS
+# <a name="azure-firewall-faq"></a>Azure Güvenlik Duvarı SSS
 
 ## <a name="what-is-azure-firewall"></a>Azure Güvenlik Duvarı nedir?
 
-Azure Güvenlik Duvarı, Azure Sanal Ağ kaynaklarınızı koruyan yönetilen, bulut tabanlı bir güvenlik hizmetidir. Bir durum bilgisi olan tam olarak güvenlik duvarı olarak-hizmet ile yerleşik yüksek kullanılabilirlik ve ölçeklenebilirlik sınırsız bulut var. Aboneliklerle sanal ağlarda uygulama ve ağ bağlantısı ilkelerini merkezi olarak oluşturabilir, zorlayabilir ve günlüğe alabilirsiniz.
+Azure Güvenlik Duvarı, Azure Sanal Ağ kaynaklarınızı koruyan yönetilen, bulut tabanlı bir güvenlik hizmetidir. Yerleşik yüksek kullanılabilirliğe sahip ve Kısıtlanmamış bulut ölçeklenebilirliğine sahip, hizmet olarak tam durum bilgisi olan bir güvenlik duvarıdır. Aboneliklerle sanal ağlarda uygulama ve ağ bağlantısı ilkelerini merkezi olarak oluşturabilir, zorlayabilir ve günlüğe alabilirsiniz.
 
-## <a name="what-capabilities-are-supported-in-azure-firewall"></a>Azure Güvenlik Duvarı'nda hangi özellikler destekleniyor?
+## <a name="what-capabilities-are-supported-in-azure-firewall"></a>Azure Güvenlik duvarında hangi özellikler destekleniyor?
 
 * Hizmet olarak durum bilgisi olan güvenlik duvarı
 * Sınırsız bulut ölçeklenebilirliği içeren yerleşik yüksek kullanılabilirlik
@@ -29,64 +29,64 @@ Azure Güvenlik Duvarı, Azure Sanal Ağ kaynaklarınızı koruyan yönetilen, b
 * Ağ trafiği filtreleme kuralları
 * Giden SNAT desteği
 * Gelen DNAT desteği
-* Merkezi olarak oluşturma, zorlama ve Azure abonelikleri ve sanal ağlar arasında bağlantı ilkeleri uygulama ve ağ oturum
+* Azure abonelikleri ve sanal ağlar genelinde merkezi olarak uygulama ve ağ bağlantısı ilkeleri oluşturun, uygulayın ve günlüğe kaydedin
 * Günlüğe kaydetme ve analiz için tamamen tümleşik Azure İzleyici
 
-## <a name="what-is-the-typical-deployment-model-for-azure-firewall"></a>Azure Güvenlik Duvarı için tipik bir dağıtım modeli nedir?
+## <a name="what-is-the-typical-deployment-model-for-azure-firewall"></a>Azure Güvenlik Duvarı için tipik dağıtım modeli nedir?
 
-Azure güvenlik duvarı herhangi bir sanal ağda dağıtabilirsiniz, ancak müşteriler genellikle merkez sanal ağda dağıtmak ve diğer sanal ağlara ona hub-and-spoke modelini eş. Varsayılan yol, bu Merkezi güvenlik duvarı sanal ağa işaret edecek şekilde eşlenen sanal ağlardan sonra ayarlayabilirsiniz. Küresel VNet eşlemesi desteklenir ancak bu olası performans ve gecikme sorunlarını nedeniyle bölgeler arasında önerilmez. En iyi performans için her bölge bir güvenlik duvarı dağıtın.
+Azure Güvenlik duvarını herhangi bir sanal ağ üzerinde dağıtabilirsiniz, ancak müşteriler genellikle merkezi bir sanal ağda ve diğer sanal ağlara bir hub ve bağlı bileşen modelinde dağıtır. Daha sonra, eşlenen sanal ağlardan varsayılan yolu bu merkezi güvenlik duvarı sanal ağını işaret etmek üzere ayarlayabilirsiniz. Küresel VNet eşlemesi desteklenir, ancak bölgeler arasında olası performans ve gecikme sorunları nedeniyle önerilmez. En iyi performansı elde etmek için bölge başına bir güvenlik duvarı dağıtın.
 
-Bu modelin avantajı, merkezi olarak farklı abonelikler arasında birden çok uç sanal ağları denetimde uygulamak olanağıdır. Aynı zamanda her bir sanal ağ içindeki bir güvenlik duvarı ayrı ayrı dağıtmanız gerekmez olarak da maliyet tasarrufu vardır. Maliyet tasarruflarından ile müşteri trafik düzenlerini esas alarak ilişkilendirme eşleme maliyetin ölçülen.
+Bu modelin avantajı, farklı aboneliklerde birden çok bağlı ağ sanal ağlarına merkezi olarak denetim olanağı sağlar. Ayrıca, her VNet 'te ayrı bir güvenlik duvarı dağıtmanız gerekmiyorsa de maliyet tasarrufları vardır. Maliyet tasarrufları, müşteri trafiği desenlerine bağlı olarak eşleme maliyetini karşılaştırmalı olarak ölçülür.
 
-## <a name="how-can-i-install-the-azure-firewall"></a>Azure Güvenlik Duvarı'nı nasıl yükleyebilirim?
+## <a name="how-can-i-install-the-azure-firewall"></a>Azure Güvenlik duvarını nasıl yükleyebilirim?
 
-Azure Güvenlik Duvarı'nı, Azure portalı, PowerShell, REST API kullanarak veya şablonları kullanarak ayarlayabilirsiniz. Bkz: [Öğreticisi: Dağıtma ve Azure Azure portalını kullanarak güvenlik duvarı yapılandırma](tutorial-firewall-deploy-portal.md) adım adım yönergeler için.
+Azure portal, PowerShell, REST API veya şablonları kullanarak Azure Güvenlik Duvarı 'nı ayarlayabilirsiniz. Adım adım yönergeler için bkz. [öğretici: Azure Güvenlik Duvarı 'Nı dağıtma ve yapılandırma Azure Portal](tutorial-firewall-deploy-portal.md) .
 
-## <a name="what-are-some-azure-firewall-concepts"></a>Bazı Azure güvenlik duvarı kavramları nelerdir?
+## <a name="what-are-some-azure-firewall-concepts"></a>Azure Güvenlik Duvarı kavramları nelerdir?
 
-Azure güvenlik duvarı kuralları ve kural koleksiyonlarınızı destekler. Bir kural koleksiyonu, aynı sıraya ve önceliği paylaşan bir kurallar kümesidir. Kural koleksiyonları, öncelik sırasına göre çalıştırılır. Ağ kural topluluklarıdır uygulama kural koleksiyonları daha yüksek bir öncelik ve tüm kuralları sonlandırılıyor.
+Azure Güvenlik Duvarı, kuralları ve kural koleksiyonlarını destekler. Kural koleksiyonu, aynı sırayı ve önceliği paylaşan bir kurallar kümesidir. Kural koleksiyonları öncelikleri sırasıyla yürütülür. Ağ kuralı koleksiyonları, uygulama kuralı koleksiyonlarından daha yüksek önceliktir ve tüm kurallar sonlandırılıyor.
 
-Kural koleksiyonları üç tür vardır:
+Üç tür kural koleksiyonu vardır:
 
-* *Uygulama kuralları*: Bir alt ağdan erişilebilen, tam etki alanı adlarını (FQDN) yapılandırın.
-* *Ağ kuralları*: Kaynak adresleri, protokolleri, hedef bağlantı noktaları ve adresleri içeren kurallarını yapılandırın.
-* *NAT kuralları*: Dnat'ı kurallarını, gelen bağlantılara izin verecek şekilde yapılandırın.
+* *Uygulama kuralları*: bir alt ağdan erişilebilen tam etki alanı adlarını (FQDN) yapılandırın.
+* *Ağ kuralları*: kaynak adreslerini, protokolleri, hedef bağlantı noktalarını ve hedef adreslerini içeren kuralları yapılandırın.
+* *NAT kuralları*: gelen bağlantılara izin vermek için DNAT kurallarını yapılandırın.
 
-## <a name="does-azure-firewall-support-inbound-traffic-filtering"></a>Azure güvenlik duvarı, gelen trafiği filtreleme destekliyor mu?
+## <a name="does-azure-firewall-support-inbound-traffic-filtering"></a>Azure Güvenlik Duvarı gelen trafik filtrelemeyi destekliyor mu?
 
-Azure güvenlik duvarı, gelen ve giden filtrelemeyi destekler. HTTP/S dışındaki protokoller için gelen korumadır. Örneğin RDP, SSH ve FTP protokolleri.
+Azure Güvenlik Duvarı gelen ve giden filtrelemeyi destekler. Gelen koruma, HTTP olmayan/S protokolleri içindir. Örneğin, RDP, SSH ve FTP protokolleri.
 
-## <a name="which-logging-and-analytics-services-are-supported-by-the-azure-firewall"></a>Günlüğe kaydetme ve Analiz Hizmetleri Azure güvenlik duvarı tarafından destekleniyor mu?
+## <a name="which-logging-and-analytics-services-are-supported-by-the-azure-firewall"></a>Hangi günlük ve analiz hizmetleri Azure Güvenlik Duvarı tarafından destekleniyor?
 
-Azure güvenlik duvarı, görüntüleme ve güvenlik duvarı günlükleri analiz etmek için Azure İzleyici ile tümleşiktir. Günlükleri Log Analytics, Azure depolama veya Event Hubs gönderilebilir. Bunlar, Log analytics'te veya Excel ve Power BI gibi farklı araçları tarafından çözümlenebilir. Daha fazla bilgi için [Öğreticisi: Azure güvenlik duvarı günlükleri izleme](tutorial-diagnostics.md).
+Azure Güvenlik Duvarı, güvenlik duvarı günlüklerini görüntülemek ve analiz etmek için Azure Izleyici ile tümleşiktir. Günlükler Log Analytics, Azure depolama veya Event Hubs gönderilebilir. Log Analytics veya Excel ve Power BI gibi farklı araçlarla analiz edilebilir. Daha fazla bilgi için bkz. [öğretici: Azure Güvenlik Duvarı günlüklerini izleme](tutorial-diagnostics.md).
 
-## <a name="how-does-azure-firewall-work-differently-from-existing-services-such-as-nvas-in-the-marketplace"></a>Azure güvenlik duvarı farklı Market'te nva'ları gibi var olan hizmetlerden nasıl sağlanır?
+## <a name="how-does-azure-firewall-work-differently-from-existing-services-such-as-nvas-in-the-marketplace"></a>Azure Güvenlik Duvarı Market 'teki NVA 'lar gibi mevcut hizmetlerden farklı şekilde nasıl çalışır?
 
-Azure güvenlik duvarı, belirli müşteri senaryoları ele bir temel güvenlik duvarı hizmetidir. Üçüncü taraf nva'ları ve Azure Güvenlik Duvarı bir karışımını gerekir beklenmektedir. Birlikte daha iyi çalışan temel bir önceliktir.
+Azure Güvenlik Duvarı, belirli müşteri senaryolarına yönelik olarak kullanılabilen temel bir güvenlik duvarı hizmetidir. Üçüncü taraf NVA 'lar ve Azure Güvenlik duvarının bir karışımını elde etmeniz beklenmektedir. Birlikte çalışan, temel önceliktir.
 
-## <a name="what-is-the-difference-between-application-gateway-waf-and-azure-firewall"></a>Azure güvenlik duvarı ile Application Gateway WAF arasındaki fark nedir?
+## <a name="what-is-the-difference-between-application-gateway-waf-and-azure-firewall"></a>Application Gateway WAF ve Azure Güvenlik Duvarı arasındaki fark nedir?
 
-Web uygulaması Güvenlik Duvarı (WAF), web uygulamalarınızda açıklardan yararlanmaya ve güvenlik açıkları gelen merkezi koruma sağlayan bir Application Gateway özelliğidir. Azure güvenlik duvarı gelen koruma için HTTP/S olmayan protokolleri (örneğin, RDP, SSH, FTP), tüm bağlantı noktaları ve protokoller için giden ağ düzeyinde koruma ve uygulama düzeyinde koruma için giden HTTP/s sunar.
+Web uygulaması güvenlik duvarı (WAF), yaygın güvenlik açıklarından ve güvenlik açıklarından Web uygulamalarınızın merkezi bir gelen korumasını sağlayan bir Application Gateway özelliğidir. Azure Güvenlik Duvarı, HTTP/sn olmayan protokoller için gelen koruma sağlar (örneğin, RDP, SSH, FTP), tüm bağlantı noktaları ve protokoller için giden ağ düzeyinde koruma ve giden HTTP/S için uygulama düzeyinde koruma.
 
-## <a name="what-is-the-difference-between-network-security-groups-nsgs-and-azure-firewall"></a>Ağ güvenlik grupları (Nsg'ler) ile Azure güvenlik duvarı arasındaki fark nedir?
+## <a name="what-is-the-difference-between-network-security-groups-nsgs-and-azure-firewall"></a>Ağ güvenlik grupları (NSG 'ler) ve Azure Güvenlik Duvarı arasındaki fark nedir?
 
-Azure Güvenlik Duvarı hizmeti, ağ güvenlik grubu işlevselliğini tamamlar. Birlikte daha iyi "derinlemesine savunma" ağ güvenliği sağlar. Dağıtılmış ağ katmanı trafik filtreleme trafiğini her bir Abonelikteki sanal ağ içindeki kaynaklarla sınırlama için ağ güvenlik grupları belirtin. Bir tam durum bilgisi olan, merkezi bir ağ güvenlik duvarı-farklı abonelikler ve sanal ağları arasında ağ ve uygulama düzeyinde koruma sağlayan hizmet olarak, Azure güvenlik duvarı olup.
+Azure Güvenlik Duvarı hizmeti, ağ güvenlik grubu işlevini tamamlar. Birlikte, daha iyi "derinlemesine savunma" ağ güvenliği sağlar. Ağ güvenlik grupları, her abonelikteki sanal ağlarda bulunan kaynaklarla trafiği sınırlamak için dağıtılmış ağ katmanı trafiği filtrelemesi sağlar. Azure Güvenlik Duvarı, farklı abonelikler ve sanal ağlar arasında ağ ve uygulama düzeyinde koruma sağlayan, hizmet olarak tam durum bilgisi olan merkezi ağ güvenlik duvarıdır.
 
-## <a name="are-network-security-groups-nsgs-supported-on-the-azure-firewall-subnet"></a>Ağ güvenlik grupları (Nsg'ler), Azure güvenlik duvarı alt ağda destekleniyor mu?
+## <a name="are-network-security-groups-nsgs-supported-on-the-azure-firewall-subnet"></a>Azure Güvenlik Duvarı alt ağında ağ güvenlik grupları (NSG 'ler) destekleniyor mu?
 
-Azure güvenlik duvarı, NIC düzeyinde Nsg'ler (görüntülenemez) ile platform koruması da dahil olmak üzere birden çok koruma katmanları ile yönetilen bir hizmettir.  Alt ağ düzeyindeki Nsg'leri Azure güvenlik duvarı alt ağda gerekmez ve hizmet kesintisine neden olmadan emin olmak için devre dışı bırakılır.
+Azure Güvenlik Duvarı, NIC düzeyindeki NSG 'ler ile platform koruması (görüntülenemez) dahil olmak üzere birden çok koruma katmanı içeren bir yönetilen hizmettir.  Azure Güvenlik Duvarı alt ağında alt ağ düzeyi NSG 'ler gerekli değildir ve hizmet kesintisi olmamasını sağlamak için devre dışıdır.
 
-## <a name="how-do-i-set-up-azure-firewall-with-my-service-endpoints"></a>My hizmet uç noktaları ile Azure Güvenlik Duvarı'nı nasıl ayarlayabilirim?
+## <a name="how-do-i-set-up-azure-firewall-with-my-service-endpoints"></a>Azure Güvenlik Duvarı 'Nı hizmet uç noktalarıma göre Nasıl yaparım? mı?
 
-PaaS hizmetlerine güvenli erişim için hizmet uç noktaları önerilir. Azure güvenlik duvarı alt ağdaki hizmet uç noktalarının etkinleştirilmesi ve bağlı uç sanal ağlarında devre dışı bırakmak isteyebilirsiniz. Bu şekilde özellikleri--Hizmeti uç nokta güvenliği ve tüm trafik için Merkezi günlük yararlanır.
+PaaS hizmetlerine güvenli erişim için hizmet uç noktaları önerilir. Azure Güvenlik Duvarı alt ağında hizmet uç noktalarını etkinleştirmeyi ve bağlı bağlı bileşen sanal ağlarında devre dışı bırakmayı tercih edebilirsiniz. Bu şekilde, her iki özellikten de yararlanabilirsiniz--hizmet uç noktası güvenliği ve tüm trafik için merkezi günlük.
 
-## <a name="what-is-the-pricing-for-azure-firewall"></a>Azure Güvenlik Duvarı için fiyatlandırma nedir?
+## <a name="what-is-the-pricing-for-azure-firewall"></a>Azure Güvenlik Duvarı fiyatlandırması nedir?
 
-Bkz: [Azure güvenlik duvarı fiyatlandırma](https://azure.microsoft.com/pricing/details/azure-firewall/).
+Bkz. [Azure Güvenlik Duvarı fiyatlandırması](https://azure.microsoft.com/pricing/details/azure-firewall/).
 
-## <a name="how-can-i-stop-and-start-azure-firewall"></a>Nasıl durdurun ve Azure güvenlik duvarını başlatma?
+## <a name="how-can-i-stop-and-start-azure-firewall"></a>Azure Güvenlik duvarını nasıl durdurup başlatabilirim?
 
-Azure PowerShell kullanabilirsiniz *serbest* ve *tahsis* yöntemleri.
+Azure PowerShell *serbest bırakma* ve *ayırma* yöntemleri kullanabilirsiniz.
 
 Örneğin:
 
@@ -109,44 +109,69 @@ Set-AzFirewall -AzureFirewall $azfw
 ```
 
 > [!NOTE]
-> Bir güvenlik duvarı ve genel IP özgün kaynak grubu ve abonelik tahsis gerekir.
+> Bir güvenlik duvarını ve genel IP 'yi özgün kaynak grubuna ve aboneliğine yeniden ayırmanız gerekir.
 
-## <a name="what-are-the-known-service-limits"></a>Bilinen hizmet sınırları nelerdir?
+## <a name="what-are-the-known-service-limits"></a>Bilinen hizmet limitleri nelerdir?
 
-Azure Güvenlik Duvarı hizmeti limitleri için bkz. [Azure aboneliği ve hizmet limitleri, kotalar ve kısıtlamalar](../azure-subscription-service-limits.md#azure-firewall-limits).
+Azure Güvenlik Duvarı hizmeti sınırları için bkz. [Azure aboneliği ve hizmet limitleri, Kotalar ve kısıtlamalar](../azure-subscription-service-limits.md#azure-firewall-limits).
 
-## <a name="can-azure-firewall-in-a-hub-virtual-network-forward-and-filter-network-traffic-between-two-spoke-virtual-networks"></a>Azure Güvenlik Duvarı bir hub sanal ağında İleri olabilir ve iki ağlı sanal ağlar arasındaki ağ trafiğini filtreleme?
+## <a name="can-azure-firewall-in-a-hub-virtual-network-forward-and-filter-network-traffic-between-two-spoke-virtual-networks"></a>Bir hub sanal ağında Azure Güvenlik Duvarı 'Nı iletebilir ve iki bağlı bileşen sanal ağı arasındaki ağ trafiğini filtreleyebilir miyim?
 
-Evet, hub sanal ağında iki uç sanal ağ arasında yönlendirme ve filtreleme trafiği Azure Güvenlik Duvarı'nı kullanabilirsiniz. Her bağlı sanal ağlar, alt ağları düzgün çalışması için Azure Güvenlik Duvarı bu senaryo için bir varsayılan ağ geçidi olarak işaret eden UDR olması gerekir.
+Evet, iki bağlı bileşen sanal ağı arasındaki trafiği yönlendirmek ve filtrelemek için bir hub sanal ağında Azure Güvenlik Duvarı 'nı kullanabilirsiniz. Bu senaryonun düzgün çalışması için, bağlı olan sanal ağların her birinde bulunan alt ağların Azure Güvenlik duvarını varsayılan bir ağ geçidi olarak işaret ettiğinden, UDR 'nin aynı olması gerekir.
 
-## <a name="can-azure-firewall-forward-and-filter-network-traffic-between-subnets-in-the-same-virtual-network-or-peered-virtual-networks"></a>Azure güvenlik duvarı İleri yapabilirsiniz ve aynı sanal ağdaki veya eşlenmiş sanal ağlardaki alt ağlar arasındaki ağ trafiğini filtreleme?
+## <a name="can-azure-firewall-forward-and-filter-network-traffic-between-subnets-in-the-same-virtual-network-or-peered-virtual-networks"></a>Azure Güvenlik Duvarı aynı sanal ağdaki veya eşlenen sanal ağlardaki alt ağlar arasında ağ trafiğini iletebilir ve filtreleyebilir mi?
 
-Evet. Ancak, aynı sanal ağda alt ağlar arasındaki trafiği yönlendirmek için Udr'leri yapılandırma, ek bir ilgi gerektirir. Hedef öneki UDR için yeterli olduğundan sanal ağ adres aralığı kullanırken, bu da Azure güvenlik duvarı örneği ile aynı alt ağda başka bir makineye bir makineden tüm trafiği yönlendirir. Bunu önlemek için bir sonraki atlama türü ile UDR alt ağ için bir rota içerecek. **VNET**. Bu yolları yönetmek sıkıcı ve hataya açık olabilir. İç ağ kesimleme için önerilen yöntem, Udr gerektirmeyen ağ güvenlik grupları kullanmaktır.
+Evet. Ancak, aynı VNET 'teki alt ağlar arasında trafiği yeniden yönlendirmek üzere UDRs 'yi yapılandırmak için ek dikkat gerekir. VNET adres aralığının UDR için hedef ön ek olarak kullanılması yeterli olduğundan, bu, tüm trafiği Azure Güvenlik Duvarı örneği aracılığıyla aynı alt ağdaki başka bir makineye de yönlendirir. Bunu önlemek için, **sanal VNET**'in bir sonraki atlama türü ile UDR 'de alt ağ için bir yol ekleyin. Bu yolların yönetilmesi, bir miktar ve hataya açık olabilir. İç ağ kesimlenmesi için önerilen yöntem, UDRs gerektirmeyen ağ güvenlik gruplarını kullanmaktır.
 
-## <a name="does-azure-firewall-outbound-snat-between-private-networks"></a>Azure güvenlik duvarı özel ağlar arasında giden SNAT mu?
+## <a name="does-azure-firewall-outbound-snat-between-private-networks"></a>Azure Güvenlik Duvarı, özel ağlar arasında SNAT 'ye giden bir mıdır?
 
-Azure güvenlik duvarı, hedef IP adresi başına özel bir IP aralığı olduğunda SNAT değil [IANA RFC 1918](https://tools.ietf.org/html/rfc1918). Kuruluşunuz özel ağlar için genel bir IP adres aralığını kullanıyorsa, Azure güvenlik duvarı SNATs AzureFirewallSubnet içinde trafiğinin bir güvenlik duvarı özel IP adresleri.
+Hedef IP adresi, [ıANA RFC 1918](https://tools.ietf.org/html/rfc1918)başına özel bir IP aralığı olduğunda Azure GÜVENLIK duvarı SNAT değildir. Kuruluşunuz özel ağlar için genel bir IP adresi aralığı kullanıyorsa, Azure Güvenlik Duvarı AzureFirewallSubnet 'deki güvenlik duvarı özel IP adreslerinden birine giden trafiği yeniden çıkarır.
 
-## <a name="is-forced-tunnelingchaining-to-a-network-virtual-appliance-supported"></a>Bir sanal ağ desteklenen Gerecine tünel oluşturma ve zincirleme zorlanır?
+## <a name="is-forced-tunnelingchaining-to-a-network-virtual-appliance-supported"></a>Bir ağ sanal gerecine Zorlamalı tünel/zincir oluşturma işlemi destekleniyor mu?
 
-Varsayılan olarak zorlamalı tünel desteklenmez, ancak destek yardımıyla etkinleştirilebilir.
+Zorlamalı tünel Şu anda desteklenmiyor. Azure Güvenlik duvarının doğrudan Internet bağlantısı olmalıdır. AzureFirewallSubnet, BGP aracılığıyla şirket içi ağınıza varsayılan bir yol öğrenirse, doğrudan Internet bağlantısını sürdürmek için **Nexthoptype** değeri **Internet** olarak ayarlanmış bir 0.0.0.0/0 UDR ile geçersiz kılmanız gerekir.
 
-Azure güvenlik duvarı, doğrudan Internet bağlantısı olması gerekir. Bir varsayılan yolu BGP aracılığıyla şirket içi ağınıza, AzureFirewallSubnet öğrenir, bu ile 0.0.0.0/0 UDR ile geçersiz kılmanız gerekir **NextHopType** değer kümesini olarak **Internet** doğrudan korumak için Internet bağlantısı. Varsayılan olarak, bir şirket içi ağ için zorlamalı tünel, Azure Güvenlik Duvarı'nı desteklemez.
+Yapılandırmanız şirket içi bir ağa Zorlamalı tünel gerektiriyorsa ve Internet hedefleriniz için hedef IP öneklerini belirleyebiliyorsanız, bu aralıkları şirket içi ağ ile bir Kullanıcı tanımlı yol aracılığıyla sonraki atlama olarak yapılandırabilirsiniz. AzureFirewallSubnet. Ya da bu yolları tanımlamak için BGP kullanabilirsiniz.
 
-Bir şirket içi ağ için zorlamalı tünel yapılandırma gerektirir, ancak Microsoft bunu tek olay temelinde destekler. Biz durumunuzu gözden geçirmek, desteğe başvurun. Kabul ediyoruz aboneliğinizi ve gerekli güvenlik duvarı Internet bağlantısı korunduğundan emin olmak.
+## <a name="are-there-any-firewall-resource-group-restrictions"></a>Herhangi bir güvenlik duvarı kaynak grubu kısıtlaması var mı?
 
-## <a name="are-there-any-firewall-resource-group-restrictions"></a>Kaynak grubu kısıtlaması herhangi bir güvenlik duvarı vardır?
+Evet. Güvenlik duvarının, alt ağın, VNet 'in ve genel IP adresinin hepsi aynı kaynak grubunda olmalıdır.
 
-Evet. Güvenlik Duvarı, alt ağ, sanal ağ ve genel IP adresini tüm aynı kaynak grubunda olmalıdır.
+## <a name="when-configuring-dnat-for-inbound-network-traffic-do-i-also-need-to-configure-a-corresponding-network-rule-to-allow-that-traffic"></a>Gelen ağ trafiği için DNAT yapılandırılırken, bu trafiğe izin vermek için karşılık gelen bir ağ kuralı da yapılandırmam gerekir mi?
 
-## <a name="when-configuring-dnat-for-inbound-network-traffic-do-i-also-need-to-configure-a-corresponding-network-rule-to-allow-that-traffic"></a>Gelen ağ trafiğini dnat'ı yapılandırırken, ayrıca bu trafiğe izin vermek için ilgili ağ kuralını yapılandırmak ihtiyacım var?
+Hayır. NAT kuralları, çevrilen trafiğe izin vermek için, karşılık gelen bir ağ kuralını dolaylı olarak ekler. Bu davranışı, çevrilen trafikle eşleşen reddetme kuralları olan bir ağ kural koleksiyonunu açıkça ekleyerek geçersiz kılabilirsiniz. Azure Güvenlik Duvarı kural işleme mantığı hakkında daha fazla bilgi için bkz: [Azure Güvenlik Duvarı kural işleme mantığı](rule-processing.md).
 
-Hayır. NAT kuralları, örtük olarak çevrilmiş trafiğine izin verecek şekilde karşılık gelen bir ağ kuralı ekleyin. Bu davranışı, çevrilen trafikle eşleşen reddetme kuralları olan bir ağ kural koleksiyonunu açıkça ekleyerek geçersiz kılabilirsiniz. Azure Güvenlik Duvarı kural işleme mantığı hakkında daha fazla bilgi için bkz: [Azure Güvenlik Duvarı kural işleme mantığı](rule-processing.md).
+## <a name="how-do-wildcards-work-in-an-application-rule-target-fqdn"></a>Uygulama kuralı hedef FQDN 'de joker karakterler nasıl çalışır?
 
-## <a name="how-do-wildcards-work-in-an-application-rule-target-fqdn"></a>Joker karakterler bir uygulama kuralı hedef FQDN nasıl çalışır?
+* **. Contoso.com**yapılandırırsanız, *anyvalue*. contoso.com, ancak contoso.com (etki alanı tepesinde) izin verir. Etki alanı tepesinde izin vermek istiyorsanız, onu hedef FQDN olarak açıkça yapılandırmanız gerekir.
 
-Yapılandırırsanız * **. contoso.com**, veren *anyvalue*. contoso.com, ancak contoso.com (etki alanı tepesinde). Etki alanı tepesinde izin vermek istiyorsanız, bunu açıkça FQDN hedef olarak yapılandırmanız gerekir.
+## <a name="what-does-provisioning-state-failed-mean"></a>*Sağlama durumu* ne anlama geliyor?
 
-## <a name="what-does-provisioning-state-failed-mean"></a>Ne yaptığını *sağlama durumu: Başarısız* anlama gelir?
+Her bir yapılandırma değişikliği uygulandığında, Azure Güvenlik Duvarı temeldeki tüm arka uç örneklerini güncelleştirmeye çalışır. Nadir durumlarda, bu arka uç örneklerinden biri yeni yapılandırmayla güncelleştiremeyebilir ve güncelleştirme işlemi başarısız bir sağlama durumuyla birlikte durduruluyor. Azure Güvenlik duvarınız hala çalışıyor, ancak uygulanan yapılandırma tutarsız bir durumda olabilir, burada bazı örnekler başkalarının güncelleştirilmiş kural kümesine sahip olduğu önceki yapılandırmaya sahiptir. Bu durumda, işlem başarılı olana ve güvenlik duvarınız *başarılı* bir sağlama durumunda olduğundan, yapılandırmanızı bir kez daha güncelleştirmeyi deneyin.
 
-Bir yapılandırma değişikliği olduğunda, Azure güvenlik duvarı, temel alınan tüm arka uç örnekleriyle güncelleştirmek çalışır. Nadiren de olsa, bu arka uç örnekleriyle birini daha yeni yapılandırmayla başarısız olabilir ve başarısız bir sağlama durumu ile güncelleştirme işlemi durdurur. Azure güvenlik duvarınızı hala çalışıyor, ancak uygulanan yapılandırma bazı örnekleri önceki yapılandırmayı güncelleştirilmiş kural kümesi sahip olduğu diğer sahip olduğu tutarsız bir durumda olabilir. Böyle bir durumda güncelleştirme yapılandırma işlemi başarılı olur ve güvenlik duvarınızı bulunduğu kadar bir kez daha deneyin bir *başarılı* sağlama durumu.
+### <a name="how-does-azure-firewall-handle-planned-maintenance-and-unplanned-failures"></a>Azure Güvenlik Duvarı planlı bakım ve planlanmamış sorunları nasıl işler?
+Azure Güvenlik Duvarı, etkin-etkin bir yapılandırmada birkaç arka uç düğümünden oluşur.  Planlı bakım için, düğümleri düzgün şekilde güncelleştirmek için bağlantı boşaltma mantığı vardır.  Güncelleştirmeler, Azure bölgelerinin her biri için iş dışı saatlerde planlanmaktadır ve bu da kesinti riskini daha fazla sınırlar.  Plansız sorunlar için, hatalı düğümü değiştirecek yeni bir düğüm örnekliyoruz.  Yeni düğümle bağlantı, genellikle başarısızlık zamanından 10 saniye içinde yeniden oluşturulur.
+
+## <a name="is-there-a-character-limit-for-a-firewall-name"></a>Bir güvenlik duvarı adı için bir karakter sınırı var mı?
+
+Evet. Bir güvenlik duvarı adı için 50 karakter sınırı vardır.
+
+## <a name="why-does-azure-firewall-need-a-26-subnet-size"></a>Azure Güvenlik duvarı neden bir/26 alt ağ boyutuna ihtiyaç duyuyor?
+
+Azure Güvenlik duvarının ölçeklendirilen daha fazla sanal makine örneği sağlaması gerekir. A/26 adres alanı, güvenlik duvarının ölçeklendirmeye yetecek sayıda IP adresine sahip olmasını sağlar.
+
+## <a name="does-the-firewall-subnet-size-need-to-change-as-the-service-scales"></a>Hizmet ölçeklendirilirken güvenlik duvarı alt ağı boyutunun değiştirilmesi gerekiyor mu?
+
+Hayır. Azure Güvenlik Duvarı/26 ' dan büyük bir alt ağa gerek yoktur.
+
+## <a name="how-can-i-increase-my-firewall-throughput"></a>Güvenlik Duvarı iş üretimini nasıl artırabilirim?
+
+Azure Güvenlik duvarının ilk verimlilik kapasitesi 2,5-3 Gbps 'dir. Şu anda, ölçeği genişletme yalnızca CPU kullanımına dayanır. Bazı durumlarda ağ kuralları bir güvenlik duvarı, CPU kullanımını önemli ölçüde etkilemediğinden, yalnızca aktarım hızını artırmak için ölçeklenmez. Güvenlik duvarınız için daha yüksek aktarım hızına ihtiyacınız varsa, güvenlik duvarınızın ilk verimlilik kapasitesini artırmak için desteğe başvurun.
+
+## <a name="how-long-does-it-take-for-azure-firewall-to-scale-out"></a>Azure Güvenlik duvarının ölçeği ne kadar sürer?
+
+Şu anda Azure Güvenlik duvarının ölçeğini genişletmek için beş ila yedi dakika sürer. Daha hızlı bir otomatik ölçeklendirme gerektiren artışlarıyla 'niz varsa, güvenlik duvarınızın ilk verimlilik kapasitesini artırmak için desteğe başvurun.
+
+## <a name="does-azure-firewall-allow-access-to-active-directory-by-default"></a>Azure Güvenlik Duvarı varsayılan olarak Active Directory erişimine izin veriyor mu?
+
+Hayır. Azure Güvenlik Duvarı varsayılan olarak Active Directory erişimi engeller. Erişime izin vermek için AzureActiveDirectory Service etiketini yapılandırın. Daha fazla bilgi için bkz. [Azure Güvenlik Duvarı hizmeti etiketleri](service-tags.md).

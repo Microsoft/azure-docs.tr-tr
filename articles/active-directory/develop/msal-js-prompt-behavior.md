@@ -1,6 +1,7 @@
 ---
-title: İstemi davranışı etkileşimli istekleri (JavaScript için Microsoft kimlik doğrulama kitaplığı) | Azure
-description: JavaScript (MSAL.js) için Microsoft kimlik doğrulama kitaplığı kullanarak etkileşimli çağrılarındaki istemi davranışı özelleştirme hakkında bilgi edinin.
+title: Etkileşimli isteklerde istem davranışı (JavaScript için Microsoft kimlik doğrulama kitaplığı)
+titleSuffix: Microsoft identity platform
+description: JavaScript için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL. js) kullanarak etkileşimli çağrılarındaki istem davranışını özelleştirme hakkında bilgi edinin.
 services: active-directory
 documentationcenter: dev-center-name
 author: navyasric
@@ -17,20 +18,20 @@ ms.author: nacanuma
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dd0d736345f312f1a1d6f8f029b41429a3e5f0a7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 42d6c4415a3eeb28c999d95b838c6dd7c0f6e606
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65544264"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72803020"
 ---
-# <a name="prompt-behavior-in-msaljs-interactive-requests"></a>Komut istemi davranışı MSAL.js etkileşimli istekleri
+# <a name="prompt-behavior-in-msaljs-interactive-requests"></a>MSAL. js etkileşimli isteklerindeki istem davranışı
 
-Bir kullanıcı bir etkin Azure AD ile birden çok kullanıcı hesabı oturumun olduğunda, Azure AD oturum açma sayfasında varsayılan olarak oturum açmak için devam etmeden önce bir hesap seçmek için girmesini ister. Kullanıcılar tek bir Azure AD kimliği doğrulanmış oturumla ise deneyimi bir hesap seçimi görmez.
+Bir Kullanıcı birden çok kullanıcı hesabıyla etkin bir Azure AD oturumu kurmışsa, varsayılan olarak Azure AD oturum açma sayfasında oturum açmadan önce kullanıcıdan bir hesap seçmesini istenir. Azure AD ile yalnızca tek bir kimliği doğrulanmış oturum varsa, kullanıcılar bir hesap seçme deneyimi görmez.
 
-(İçinde v0.2.4 başlayarak) MSAL.js kitaplığı istemi parametresinin sırasında etkileşimli istekleri göndermez (`loginRedirect`, `loginPopup`, `acquireTokenRedirect` ve `acquireTokenPopup`) ve böylece herhangi bir komut istemi davranışı zorlamaz. Sessiz belirteç isteklerini kullanarak `acquireTokenSilent` yöntemi, MSAL.js ayarlamak bir istem parametresi geçirir `none`.
+MSAL. js kitaplığı (v 0.2.4 'den başlayarak) etkileşimli istekler (`loginRedirect`, `loginPopup`, `acquireTokenRedirect` ve `acquireTokenPopup`) sırasında istem parametresi göndermez ve bu nedenle herhangi bir istem davranışını zorlamaz. `acquireTokenSilent` yöntemi kullanılarak sessiz Belirteç istekleri için, MSAL. js, `none`olarak ayarlanan bir istem parametresi geçirir.
 
-Uygulama senaryonuza bağlı olarak, istek parametrelerini komut istemi parametreyi yöntemlere geçilen etkileşimli istekler ayarlayarak istemi davranışını kontrol edebilirsiniz. Örneğin, hesabı seçme deneyimi çağırmak istiyorsanız:
+Uygulama senaryonuza bağlı olarak, metotlara geçirilen istek parametrelerinde Prompt parametresini ayarlayarak etkileşimli isteklerin istem davranışını kontrol edebilirsiniz. Örneğin, hesap seçme deneyimini çağırmak istiyorsanız:
 
 ```javascript
 var request = {
@@ -42,16 +43,16 @@ userAgentApplication.loginRedirect(request);
 ```
 
 
-Aşağıdaki komut istemi değerleri, Azure AD ile kimlik doğrulaması yapılırken geçirilebilir:
+Azure AD kimlik doğrulaması sırasında aşağıdaki istem değerleri geçirilebilir:
 
-**Oturum açma:** Bu değer, kullanıcının kimlik doğrulama isteği kimlik bilgilerini girmesini zorunlu tutar.
+**oturum aç:** Bu değer, kullanıcının kimlik doğrulama isteğine kimlik bilgilerini girmesini zorlayacaktır.
 
-**select_account:** Bu değer kullanıcı oturumunda tüm hesapları listeleme bir hesabı seçme deneyimi sağlayacak.
+**select_account:** Bu değer, kullanıcıya oturumdaki tüm hesapların dökümünü alacak bir hesap seçme deneyimi sağlar.
 
-**onay:** Bu değer, kullanıcılara uygulama izinleri vermek OAuth onay iletişim kutusunu çağırır.
+**onay:** Bu değer, kullanıcıların uygulamaya izin vermesini sağlayan OAuth onay iletişim kutusunu çağırır.
 
-**Hiçbiri:** Bu değer, kullanıcının etkileşimli bir istemi görmez sağlayacaktır. Sahip olduğunuz bu değer MSAL.js etkileşimli yöntemlere geçirmemesi için önerilen beklenmeyen davranışlar. Bunun yerine, `acquireTokenSilent` sessiz çağrıları elde etmek için yöntemi.
+**hiçbiri:** Bu değer, kullanıcının etkileşimli bir istem görmemesini sağlayacaktır. Beklenmedik davranışlara sahip olduğundan, bu değerin MSAL. js içindeki etkileşimli yöntemlere iletilmesi önerilir. Bunun yerine, sessiz çağrılar elde etmek için `acquireTokenSilent` yöntemini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi edinin `prompt` parametresinde [OAuth 2.0 örtülü izin](v2-oauth2-implicit-grant-flow.md) Protokolü hangi MSAL.js kitaplığını kullanır.
+MSAL. js kitaplığı tarafından kullanılan [OAuth 2,0 örtük izin](v2-oauth2-implicit-grant-flow.md) protokolündeki `prompt` parametresi hakkında daha fazla bilgi edinin.

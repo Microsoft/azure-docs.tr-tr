@@ -1,69 +1,78 @@
 ---
-title: Azure veri Kataloğu hakkında sık sorulan sorular
-description: Veri kaynağı bulma, açıklama ve yönetim özelliklerini de dahil olmak üzere, Azure veri Kataloğu hakkında sık sorulan sorular.
+title: Azure Veri Kataloğu hakkında sık sorulan sorular
+description: Veri kaynağı bulma, ek açıklama ve yönetime yönelik yetenekler dahil olmak üzere Azure Veri Kataloğu hakkında sık sorulan sorular.
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 07/01/2019
-ms.openlocfilehash: 6ab5c67129b16cde5ca74e72effdf56ec0a22711
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.date: 08/01/2019
+ms.openlocfilehash: 3877648723a8866ec7d9c5f1987ae3a276114d5e
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508895"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73152049"
 ---
-# <a name="azure-data-catalog-frequently-asked-questions"></a>Azure veri Kataloğu hakkında sık sorulan sorular
-Bu makalede, Azure veri Kataloğu hizmeti ile ilgili sık sorulan soruların yanıtlarını sağlar.
+# <a name="azure-data-catalog-frequently-asked-questions"></a>Azure Veri Kataloğu hakkında sık sorulan sorular
+Bu makale, Azure Veri Kataloğu hizmetiyle ilgili sık sorulan soruların yanıtlarını sağlar.
 
 ## <a name="what-is-azure-data-catalog"></a>Azure Veri Kataloğu nedir?
-Veri Kataloğu, kayıt ve kurumsal veri kaynakları için bulma sistemi olarak görev yapan Microsoft azure'da barındırılan tam olarak yönetilen bir hizmettir. Veri Kataloğu ile analistler, veri bilimcilerine ve geliştiricilere, herhangi bir kullanıcı kaydetme, keşfedin, anlamak ve veri kaynaklarını.
+Veri Kataloğu, kurumsal veri kaynakları için kayıt ve bulma sistemi olarak görev yapan, Microsoft Azure ' de barındırılan, tam olarak yönetilen bir hizmettir. Veri Kataloğu, analistlerden veri bilimcilerine ve geliştiricilere kadar olan tüm kullanıcılar veri kaynaklarını kaydedebilir, bulabilir, anlayabilir ve kullanabilir.
 
-## <a name="what-customer-challenges-does-it-solve"></a>Mevcut hangi müşteri sorunları çözüyor?
-Veri Kataloğu veri kaynağı bulma ve "veri" sorunlarını ele alır, bu kullanıcıların keşfedin ve kurumsal veri kaynaklarını anlama.
+## <a name="what-customer-challenges-does-it-solve"></a>Hangi müşteri zorlukları çözüyor?
+Veri Kataloğu, kullanıcıların kurumsal veri kaynaklarını bulabilmesi ve anlayabilmesi için veri kaynağı bulma ve "koyu veri" sorunlarını ele alır.
 
-## <a name="what-are-its-target-audiences"></a>Hedef kitlelere nelerdir?
-Veri Kataloğu dahil olmak üzere teknik ve teknik olmayan kullanıcılar için tasarlanmıştır:
+## <a name="what-are-its-target-audiences"></a>Hedef kitleleri nelerdir?
+Veri Kataloğu, aşağıdakiler dahil olmak üzere teknik ve teknik olmayan kullanıcılar için tasarlanmıştır:
 
-* Veri geliştiricileri ve BI ve analiz uzmanları için: Başkalarının kullanmak veri ve analiz içeriği oluşturmaktan sorumlu olan kişiler.
-* Veri stewards: Veriler, ne anlama geldiğini ve nasıl kullanılması amaçlanmıştır hakkında bilgiye sahip kişiler.
-* Veri tüketicileri: Kolayca bulmak için gereken kişilere anlama ve kendi istediğiniz aracı kullanarak, işini yapması için ihtiyaç duydukları verilere bağlanın.
-* Merkezi BT: Yüzlerce veri kaynağına İşletme kullanıcıları tarafından bulunabilir hale getirmek gereksinim duyan ve verilerin nasıl kullanıldığı ve kim tarafından gözetim korumak gereksinim duyan kişiler.
+* Veri geliştiricileri ve bı ve Analytics uzmanları: başkalarının tüketmesi için veri ve analiz içeriği üretmekten sorumlu kişiler.
+* Veri özellikleri: veriler hakkında bilgi sahibi olan kişiler, ne anlama gelir ve nasıl kullanılması amaçlanan.
+* Veri tüketicileri: kendi tercih ettiği aracı kullanarak işlerini yapmak için ihtiyaç duydukları verileri kolayca bulabilmeleri, anlaması ve bunlara bağlanabilmesi gereken kişiler.
+* Orta BT: iş kullanıcıları tarafından yüzlerce veri kaynağı keşfetmek isteyen kişiler ve verilerin kullanılma ve kim tarafından nasıl kullanıldığı hakkında daha fazla bakış sahibi olması gerekir.
 
-## <a name="what-is-its-availability-by-region"></a>Bölgelere göre kullanılabilirliğini nedir?
-Veri Kataloğu Hizmetleri şu veri merkezlerinde şu anda kullanılabilir:
+## <a name="what-is-its-availability-by-region"></a>Bölgeye göre kullanılabilirliği nedir?
+Veri Kataloğu Hizmetleri şu anda aşağıdaki veri merkezlerinde kullanılabilir:
 
 * Batı ABD
-* East US
+* Doğu ABD
 * Batı Avrupa
 * Kuzey Avrupa
-* Avustralya Doğu
+* Doğu Avustralya
 * Güneydoğu Asya
 
-## <a name="what-are-its-limits-on-the-number-of-data-assets"></a>Veri varlıklarını sayısı kendi sınırlarına nelerdir?
-Ücretsiz sürüm, veri kataloğu için 5000 kayıtlı veri varlıklarını sınırlıdır.
+## <a name="what-are-its-limits-on-the-number-of-data-assets"></a>Veri varlıklarının sayısı sınırları nelerdir?
+Veri Kataloğu 'nun ücretsiz sürümü 5.000 kayıtlı veri varlığı ile sınırlıdır.
 
-, Veri Kataloğu standart sürümü, en çok 100.000 kayıtlı veri varlıklarını destekler.
+Veri Kataloğu 'nun standart sürümü en fazla 100.000 kayıtlı veri varlığını destekler.
 
-Herhangi bir nesne, bir veri varlığı olarak görünümler, dosyalar ve raporlar, sayıları tablolar gibi veri Kataloğu'nda kayıtlı.
+Tablolar, görünümler, dosyalar ve raporlar gibi veri kataloğunda kayıtlı olan herhangi bir nesne, veri varlığı olarak sayılır.
 
 ## <a name="what-are-its-supported-data-source-and-asset-types"></a>Desteklenen veri kaynağı ve varlık türleri nelerdir?
-Şu anda desteklenen veri kaynakları listesi için bkz. [veri Kataloğu DSR](data-catalog-dsr.md).
+Şu anda desteklenen veri kaynaklarının listesi için bkz. [Veri Kataloğu DSR](data-catalog-dsr.md).
 
-## <a name="how-do-i-request-support-for-another-data-source"></a>Başka bir veri kaynağı için destek nasıl ister?
-Özellik istekleri ve diğer geri bildirim göndermek için Git [Azure geri bildirim forumları veri Kataloğu](https://feedback.azure.com/forums/906052-data-catalog/category/320788-data-sources).
+## <a name="how-do-i-request-support-for-another-data-source"></a>Nasıl yaparım? başka bir veri kaynağı için destek isteği mi?
+Özellik isteklerini ve diğer geri bildirimleri göndermek için [Azure geri bildirim forumlarında veri kataloğuna](https://feedback.azure.com/forums/906052-data-catalog/category/320788-data-sources)gidin.
 
-## <a name="how-do-i-get-started-with-data-catalog"></a>Veri Kataloğu'nu kullanmaya nasıl başlayabilirim?
-Başlamak için en iyi giderek yoludur [veri Kataloğu ile çalışmaya başlama](data-catalog-get-started.md). Bu makalede hizmet özellikleri bir uçtan uca genel bakıştır.
+## <a name="why-do-i-get-an-error-catalog-already-exists-when-i-try-to-create-a-new-catalog"></a>Yeni bir katalog oluşturmaya çalıştığımda neden bir hata *kataloğu* aldım?
 
-## <a name="how-do-i-register-my-data"></a>Verilerimi nasıl kaydedebilirim?
-Veri Kataloğu'nda, verilerinizi kaydetmek için:
-1. Azure veri Kataloğu portalında içinde **Yayımla** alanında, Azure veri Kataloğu Kayıt Aracı'nı başlatın. 
-2. Veri Kataloğu veri kaynağı kayıt aracı, veri Kataloğu portalına erişmek için kullandığınız aynı kimlik bilgileriyle oturum açın.
-3. Veri kaynağı ve belirli kaydetmek istediğiniz varlıkları seçin.
+Office 365 E5 Power BI Pro lisansıyla satın aldığınızda, Microsoft, aboneliğin bölgesinde otomatik olarak varsayılan bir katalog oluşturur. Bu katalog, Ücretsiz SKU 'YU kullanır. Office 365/Power BI Kullanıcı Lisansı Office 365 Yönetim sayfasında yönetilir. 
 
-## <a name="what-properties-does-it-extract-for-data-assets-that-are-registered"></a>Hangi özelliklerin kayıtlı veri varlıklarını ayıklayın?
-Belirli özellikleri, veri kaynağından veri kaynağına farklılık gösterir ancak genel olarak, aşağıdaki bilgileri veri Kataloğu Yayımlama hizmeti ayıklar:
+Ancak, bu tür veri kataloğunda **yönetici seçeneği** yoktur ve **Azure Portal**görünmez. Bu tür veri kataloğunu silemezsiniz. Benzer şekilde, veri kataloğunu yeniden adlandırmanıza izin verilmez ve başka bir bölgeye taşıyamazsınız. 
+
+Power BI Pro lisansı atanan kullanıcı hesaplarının, Power BI Pro lisansıyla Office 365 E5 'a kaydolduklarında lisans anlaşması nedeniyle otomatik olarak veri kataloğuna erişimi vardır. Bu tür bir Kullanıcı, yönetim ayrıcalıklarına sahip olmayan veri kataloğu varlıklarına tam erişime sahiptir. Bu tür bir Kullanıcı, Azure Veri Kataloğu 'nda **Katalog Kullanıcı** rolünün bir parçası *değildir* .
+
+
+## <a name="how-do-i-get-started-with-data-catalog"></a>Veri Kataloğu 'Nu kullanmaya başlamak Nasıl yaparım? misiniz?
+Başlamak için en iyi yöntem, [Veri Kataloğu 'nu kullanmaya başlamanızı](data-catalog-get-started.md)sağlar. Bu makale, hizmette yetenekler hakkında uçtan uca bir genel bakış sağlar.
+
+## <a name="how-do-i-register-my-data"></a>Nasıl yaparım? verilerimi kaydetmek istiyor musunuz?
+Verilerinizi veri kataloğuna kaydetmek için:
+1. Azure Veri Kataloğu portalında, **Yayımla** alanında Azure Veri Kataloğu Kayıt Aracı ' nı başlatın. 
+2. Veri Kataloğu veri kaynağı kayıt aracında, veri kataloğu portalına erişmek için kullandığınız kimlik bilgileriyle oturum açın.
+3. Veri kaynağını ve kaydetmek istediğiniz belirli varlıkları seçin.
+
+## <a name="what-properties-does-it-extract-for-data-assets-that-are-registered"></a>Kayıtlı veri varlıkları için hangi özellikleri ayıklar?
+Belirli özellikler veri kaynağından veri kaynağına farklılık gösterir, ancak genel olarak, veri kataloğu yayımlama hizmeti aşağıdaki bilgileri ayıklar:
 
 * Varlık adı
 * Varlık türü
@@ -73,53 +82,53 @@ Belirli özellikleri, veri kaynağından veri kaynağına farklılık gösterir 
 * Öznitelik/sütun açıklaması
 
 > [!IMPORTANT]
-> Veri Kataloğu ile veri varlıklarını kaydetme taşımayın veya verilerinizi buluta kopyalayın. Bir veri kaynağından alınan varlıklar kaydetme varlıklar meta verileri Azure'a kopyalar ancak verileri var olan veri kaynağı konumu olarak kalır. Bu kuralın istisnası olarak, varlıkları kaydettiğinizde Önizleme kayıtları ya da veri profili yüklemek seçin ' dir. 20 kayıt kadar bir önizleme dahil ettiğinizde her varlığından kopyalanır ve veri Kataloğu'nda bir anlık görüntü olarak depolanır. Veri profili eklediğinizde, toplam bilgileri hesaplanır ve katalogdaki depolanan meta veriler dahil. Tablo, sütun başına null değerler yüzdesi veya sütun için en düşük, en yüksek ve ortalama değerler boyutunu toplam bilgileri içerebilir. 
+> Veri varlıklarını veri kataloğuna kaydetme, verilerinizi buluta taşımaz veya kopyalamaz. Bir veri kaynağından varlık kaydetme, varlıkların meta verilerini Azure 'a kopyalar, ancak veriler var olan veri kaynağı konumunda kalır. Bu kuralın istisnası, varlıkları kaydettiğinizde önizleme kayıtlarını veya bir veri profilini karşıya yüklemeyi tercih ediyorsanız yapılır. Önizleme eklediğinizde, her bir varlıktan 20 ' ye kadar kayıt kopyalanır ve veri kataloğunda anlık görüntü olarak depolanır. Bir veri profili eklediğinizde, toplu bilgiler hesaplanır ve Katalogda depolanan meta verilere dahil edilir. Toplu bilgiler, tabloların boyutunu, sütun başına null değer yüzdesini veya sütunlar için en düşük, en yüksek ve ortalama değerleri içerebilir. 
 >
 >
 
 > [!NOTE]
-> Birinci sınıf bir sahip SQL Server Analysis Services gibi veri kaynakları için **açıklama** özelliği, veri Kataloğu veri kaynağı kayıt aracını, özellik değeri ayıklar. SQL Server ilişkisel veritabanları için eksik bir birinci sınıf **açıklama** özelliği, veri Kataloğu veri kaynağı kayıt aracını değerini ayıklar **ms_description** genişletilmiş özelliği için nesneler ve sütun. Daha fazla bilgi için [kullanarak veritabanı nesneleri üzerinde Genişletilmiş Özellikler](https://technet.microsoft.com/library/ms190243%28v=sql.105%29.aspx).
+> Birinci sınıf **Açıklama** özelliğine sahip SQL Server Analysis Services gibi veri kaynakları Için, Veri Kataloğu veri kaynağı kayıt aracı bu özellik değerini ayıklar. Birinci sınıf **Açıklama** özelliği olmayan *Şirket içi* SQL Server Ilişkisel veritabanları için, Veri Kataloğu veri kaynağı kayıt aracı, **MS_Description** genişletilmiş özelliğinden değeri nesneler ve sütunlar için ayıklar. Daha fazla bilgi için bkz. [veritabanı nesnelerinde genişletilmiş özellikleri kullanma](https://technet.microsoft.com/library/ms190243%28v=sql.105%29.aspx).
 >
 >
 
-## <a name="how-long-should-it-take-for-newly-registered-assets-to-appear-in-the-catalog"></a>Ne kadar bu Kataloğu'nda görünmesi yeni kayıtlı varlıkların sürer?
-Veri Kataloğu ile varlıkları kaydettikten sonra bir süre 5-10 veri Kataloğu portalında göründükleri önce beklenecek saniye olabilir.
+## <a name="how-long-should-it-take-for-newly-registered-assets-to-appear-in-the-catalog"></a>Yeni kayıtlı varlıkların katalogda görünmesi ne kadar sürer?
+Varlıkları Veri Kataloğu ile kaydettikten sonra, veri kataloğu portalında görünmeleri için 5 ila 10 saniye arasında bir süre olabilir.
 
-## <a name="how-do-i-annotate-and-enrich-the-metadata-for-my-registered-data-assets"></a>Nasıl açıklama ve meta verileri benim için kayıtlı veri varlıklarını zenginleştirin?
-İçin kayıtlı varlık meta verilerini sağlamak için en basit yolu, veri Kataloğu Portalı'nda varlık seçin ve ardından değerleri seçili nesne için Özellikler bölmesi veya şema bölmesinde girin sağlamaktır.
+## <a name="how-do-i-annotate-and-enrich-the-metadata-for-my-registered-data-assets"></a>Kayıtlı veri varlıklarım için not ekleme ve meta verileri zenginleştirme Nasıl yaparım? misiniz?
+Kayıtlı varlıklar için meta verileri sağlamanın en basit yolu, veri kataloğu portalındaki varlığı seçmek ve ardından seçilen nesne için Özellikler bölmesi veya şema bölmesinde değerleri girmesidir.
 
-Ayrıca, bazı meta veri uzmanları ve etiketler gibi kayıt işlemi sırasında sağlayabilir. O anda kayıtlı tüm varlıklar veri Kataloğu yayımlama hizmetinde sağladığınız değerler geçerlidir. Ek açıklamalar için Portalı'nda kısa süre önce kayıtlı nesneleri görüntülemek için seçin **portalı görüntüle** veri Kataloğu veri kaynağı kayıt aracını son ekranındaki düğmesi.
+Ayrıca, kayıt işlemi sırasında uzmanlar ve Etiketler gibi bazı meta veriler de sağlayabilirsiniz. Veri Kataloğu yayımlama hizmetinde sağladığınız değerler, o anda kayıtlı olan tüm varlıklar için geçerlidir. Ek açıklama için portalda son kaydedilen nesneleri görüntülemek için, Veri Kataloğu veri kaynağı kayıt aracının son ekranındaki **portalı görüntüle** düğmesini seçin.
 
-## <a name="how-do-i-delete-my-registered-data-objects"></a>Kayıtlı veri nesnelerim nasıl silebilirim?
-Portalda nesneyi seçip, ardından tıklayarak veri Kataloğu'ndan bir nesne silebilirsiniz **Sil** düğmesi. Nesne kaldırma, veri Kataloğu'ndan meta verilerini kaldırır, ancak temel alınan veri kaynağına etkilemez.
+## <a name="how-do-i-delete-my-registered-data-objects"></a>Nasıl yaparım? kayıtlı veri nesnelerimi silmek mi istiyorsunuz?
+Portalda nesneyi seçip **Sil** düğmesine tıklayarak veri kataloğundan bir nesne silebilirsiniz. Nesnenin kaldırılması veri kataloğundan meta verilerini kaldırır, ancak temel alınan veri kaynağını etkilemez.
 
 ## <a name="what-is-an-expert"></a>Uzman nedir?
-Uzman veri nesnesi hakkında bilgiye dayalı bir perspektif olan bir kişi anlamına gelir. Bir nesne birden çok uzmanlar olabilir. Uzman bir nesne için "sahip" olması gerekmez, ancak verilerin nasıl olabilir ve kullanılması gereken bilen birisi teknolojidir.
+Uzman, veri nesnesi hakkında bilinçli bir perspektife sahip kişidir. Bir nesne birden çok uzmana sahip olabilir. Bir uzman nesnenin bir nesne için "Owner" olması gerekmez, ancak verilerin nasıl kullanılabileceğini ve nasıl kullanılacağını bilen bir kişidir.
 
-## <a name="how-do-i-share-information-with-the-data-catalog-team-if-i-encounter-problems"></a>Ben bir sorunla karşılaşırsanız nasıl bilgileri veri Kataloğu ekiple paylaşırım?
-Sorunları bildirmek için bilgi paylaşmak ve soru sorun, Git [Azure veri Kataloğu Forumunda](https://go.microsoft.com/fwlink/?LinkID=616424&clcid=0x409).
+## <a name="how-do-i-share-information-with-the-data-catalog-team-if-i-encounter-problems"></a>Sorun yaşarsanız, veri kataloğu ekibiyle bilgi Nasıl yaparım?.
+Sorunları raporlamak, bilgileri paylaşmak ve soru sormak için [Azure Veri Kataloğu forumuna](https://go.microsoft.com/fwlink/?LinkID=616424&clcid=0x409)gidin.
 
-## <a name="does-the-catalog-work-with-another-data-source-that-im-interested-in"></a>Katalog, şunlarla ilgileniyorum başka bir veri kaynağı ile çalışır mı?
-Etkin bir şekilde daha fazla veri kaynakları veri Kataloğu'na ekleme üzerinde çalışıyoruz. Desteklenen belirli bir veri kaynağına bakın, bunu önerir (veya zaten önerilen değilse, desteği ses) giderek isterseniz [Azure geri bildirim forumları veri Kataloğu](https://feedback.azure.com/forums/906052-data-catalog).
+## <a name="does-the-catalog-work-with-another-data-source-that-im-interested-in"></a>Katalog ilgilendiğiniz başka bir veri kaynağıyla mi çalışıyor?
+Veri kataloğuna daha fazla veri kaynağı ekleme konusunda etkin bir şekilde çalışıyoruz. Desteklenen belirli bir veri kaynağını görmek isterseniz, [Azure geri bildirim forumlarında veri kataloğuna](https://feedback.azure.com/forums/906052-data-catalog)giderek bunu önerin (veya zaten önerildiyse desteğiniz sesinizi).
 
-## <a name="what-permissions-do-i-need-to-register-assets-with-data-catalog"></a>Varlıklar, veri Kataloğu'na kaydetmek hangi izinlerin gerekiyor?
-Veri Kataloğu kayıt aracı çalıştırmak için meta veriler kaynaktan okumanıza izin verir veri kaynağında izinleri gerekir. Bir önizleme de dahil etmek için Kaydedilmekte nesne verilerden okunacak olanak sağlayan izinleri olmalıdır.
+## <a name="what-permissions-do-i-need-to-register-assets-with-data-catalog"></a>Veri Kataloğu ile varlıkları kaydetmek için hangi izinlere ihtiyacım var?
+Veri Kataloğu kayıt aracı 'nı çalıştırmak için, kaynaktan meta verileri okumanızı sağlayan veri kaynağında izinlere ihtiyacınız vardır. Ayrıca, bir önizleme de dahil etmek için, kaydedilen nesnelerden verileri okumanızı sağlayan izinleriniz olmalıdır.
 
-Veri Kataloğu, ayrıca hangi kullanıcıların ve grupların meta veri Kataloğu'na ekleyebilirsiniz kısıtlamak katalog yöneticileri sağlar. Ek bilgi için bkz: [veri kataloğu ve veri varlıklarına erişim güvenliğinin nasıl sağlanacağını](data-catalog-how-to-secure-catalog.md).
+Veri Kataloğu, Katalog yöneticilerinin kataloğa meta veri ekleyebileceği kullanıcıları ve grupları kısıtlamak için de izin verir. Daha fazla bilgi için bkz. [Veri Kataloğu ve veri varlıklarına erişimi güvenli hale getirme](data-catalog-how-to-secure-catalog.md).
 
-## <a name="will-data-catalog-be-made-available-for-on-premises-deployment-as-well"></a>Veri Kataloğu de şirket içi dağıtım için kullanılabilir hale getirilir?
-Veri Kataloğu, karma veri kaynağı bulma çözümü sunmak için hem buluttaki hem de şirket içi veri kaynaklarıyla çalışabilirsiniz bir bulut hizmetidir. Şu anda bir sürümü çalıştıran şirket içi veri Kataloğu hizmeti için plan yok.
+## <a name="will-data-catalog-be-made-available-for-on-premises-deployment-as-well"></a>Veri Kataloğu, şirket içi dağıtım için de kullanılabilir hale getirilir mi?
+Veri Kataloğu, karma veri kaynağı bulma çözümü sunmak için hem bulut hem de şirket içi veri kaynaklarıyla birlikte çalışabilme bir bulut hizmetidir. Şu anda şirket içinde çalışan veri kataloğu hizmetinin bir sürümü için bir plan yoktur.
 
-## <a name="can-i-extract-more-or-richer-metadata-from-the-data-sources-i-register"></a>Daha fazla veya daha zengin meta veriler kaydedebilirim veri kaynaklarından ayıklayabilmeniz için?
-Veri Kataloğu yeteneklerini genişletmek etkin olarak çalışıyoruz. Kayıt sırasında veri kaynağından ayıklanan meta verileri ek olmasını istiyorsanız, bunu (veya bu, zaten önerilen değilse oylayın) önerin [Azure geri bildirim forumları veri Kataloğu](https://feedback.azure.com/forums/906052-data-catalog). 
+## <a name="can-i-extract-more-or-richer-metadata-from-the-data-sources-i-register"></a>Kaydoldum veri kaynaklarından daha fazla veya daha zengin meta veri ayıklayabilir miyim?
+Veri Kataloğu 'nun yeteneklerini genişletmek için etkin bir şekilde çalışıyoruz. Kayıt sırasında veri kaynağından ayıklanan ek meta verilere sahip olmak istiyorsanız, [Azure geri bildirim forumlarındaki veri kataloğunda](https://feedback.azure.com/forums/906052-data-catalog)bu işlemi önerin (veya zaten önerildiyse). 
 
-Sütun/şema meta verileri, önizlemeler veya burada bu meta veri kaynağı kayıt aracı tarafından ayıklanan değil veri kaynakları için veri profilleri eklemek istiyorsanız, bu meta verileri eklemek için veri Kataloğu API'sini kullanabilirsiniz. Ek bilgi için bkz: [Azure veri Kataloğu REST API'si](https://docs.microsoft.com/rest/api/datacatalog/).
+Bu meta verilerin veri kaynağı kayıt aracı tarafından ayıklanmayan veri kaynakları için sütun/şema meta verilerini, önizlemeleri veya veri profillerini eklemek isterseniz, bu meta verileri eklemek için veri kataloğu API 'sini kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure veri kataloğu REST API](https://docs.microsoft.com/rest/api/datacatalog/).
 
-## <a name="how-do-i-restrict-the-visibility-of-registered-data-assets-so-that-only-certain-people-can-discover-them"></a>Yalnızca belirli kişilerin bunları keşfedebilmesi için kayıtlı veri varlıklarının görünürlüğünü nasıl kısıtlarım?
-Veri Kataloğu'nda veri varlıklarını seçin ve ardından **Sahipliği Al** düğmesi. Veri Kataloğu'nda veri varlıklarının sahipleri ya da sahibi varlıklarını bulmak veya görünürlük belirli kullanıcılara sınırlamak tüm kullanıcılara izin vermek için görünürlük ayarlarını değiştirebilirsiniz. Ek bilgi için bkz: [Azure veri Kataloğu'nda veri varlıklarını yönetme](data-catalog-how-to-manage.md).
+## <a name="how-do-i-restrict-the-visibility-of-registered-data-assets-so-that-only-certain-people-can-discover-them"></a>Yalnızca belirli kişilerin bulabilmesi için kayıtlı veri varlıklarının görünürlüğünü kısıtlamak Nasıl yaparım? misiniz?
+Veri kataloğunda veri varlıkları ' nı seçin ve ardından **Sahipliği Al** düğmesine tıklayın. Veri kataloğunda veri varlıklarının sahipleri, tüm kullanıcıların sahip olan varlıkları bulmasına izin vermek veya görünürlüğü belirli kullanıcılarla kısıtlayabilmesi için görünürlük ayarlarını değiştirebilir. Daha fazla bilgi için bkz. [Azure Veri Kataloğu 'nda veri varlıklarını yönetme](data-catalog-how-to-manage.md).
 
-## <a name="how-do-i-update-the-registration-for-a-data-asset-so-that-changes-in-the-data-source-are-reflected-in-the-catalog"></a>Veri kaynağındaki değişiklikleri katalogda yansıtılır. böylece bir veri varlığı kaydı nasıl güncelleştirebilirim?
-Katalogda zaten kayıtlı veri varlıklarını meta verilerini güncelleştirmek için basitçe varlıkları içeren veri kaynağını yeniden kaydedin. Veri kaynağında herhangi bir değişiklik Kataloğu'nda sütunları eklenmesi veya tabloları veya görünümleri kaldırılması gibi güncelleştirilir ancak kullanıcı tarafından sağlanan ek açıklamaları korunur.
+## <a name="how-do-i-update-the-registration-for-a-data-asset-so-that-changes-in-the-data-source-are-reflected-in-the-catalog"></a>Veri kaynağındaki değişikliklerin kataloğa yansıtılması için bir veri varlığının kaydını Nasıl yaparım? güncelleştirin mi?
+Katalogda zaten kayıtlı olan veri varlıklarının meta verilerini güncelleştirmek için, varlıkları içeren veri kaynağını yeniden kaydetmeniz yeterlidir. Veri kaynağında bulunan veya tablolardaki veya görünümlerde eklenen ya da kaldırılan sütunlar gibi tüm değişiklikler katalogda güncelleştirilir, ancak kullanıcılar tarafından sunulan tüm ek açıklamalar korunur.
 
-## <a name="my-question-isnt-answered-here-where-can-i-go-for-answers"></a>Sorumun cevabı burada bulamadığınız. Yanıtlar için nereye gidebilirim?
-Git [Azure veri Kataloğu Forumunda](https://go.microsoft.com/fwlink/?LinkID=616424&clcid=0x409). Burada sorulan sorular aşamalarından burada bulabilirsiniz.
+## <a name="my-question-isnt-answered-here-where-can-i-go-for-answers"></a>Sorum burada Yanıtlanmıyor. Yanıtlar için nereye gidebilirim?
+[Azure Veri Kataloğu forumuna](https://go.microsoft.com/fwlink/?LinkID=616424&clcid=0x409)gidin. Bu soruları burada bulabilirsiniz.

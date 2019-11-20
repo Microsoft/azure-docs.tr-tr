@@ -1,87 +1,106 @@
 ---
-title: Azure Application Gateway - Portal App service web apps gibi çok kiracılı uygulamalara yönelik trafiği yönetme
-description: Bu makalede, Azure App service web Apps'e mevcut veya yeni bir application Gateway, arka uç havuzu üyeleri olarak yapılandırma hakkında yönergeler sağlanır.
+title: Portalı kullanarak çok kiracılı uygulamalardaki trafiği yönetme
+titleSuffix: Azure Application Gateway
+description: Bu makalede, Azure App Service Web Apps 'i var olan veya yeni bir uygulama ağ geçidinde arka uç havuzunda üye olarak yapılandırma hakkında rehberlik sunulmaktadır.
 services: application-gateway
 author: abshamsft
 ms.service: application-gateway
 ms.topic: article
-ms.date: 3/11/2019
+ms.date: 11/14/2019
 ms.author: absha
-ms.openlocfilehash: 4dae04c14f9132c54dcc0575ccb2841a4742a626
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0ec417b3c7a025d2d05bdd74ec683a2891c3b0de
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60831222"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075171"
 ---
-# <a name="configure-app-service-with-application-gateway"></a>Application Gateway ile App Service'ı yapılandırma
+# <a name="configure-app-service-with-application-gateway"></a>Application Gateway ile App Service yapılandırma
 
-Uygulama ağ geçidi arka uç havuzu üyesi olarak bir Azure App service webapp veya diğer çok kiracılı hizmetlere sahip olmanızı sağlar. 
+App Service, bir dizi dağıtım yerine çok kiracılı bir hizmet olduğundan, isteği doğru App Service uç noktasına çözümlemek için gelen istekte ana bilgisayar üst bilgisini kullanır. Genellikle uygulamanın DNS adı, App Service 'i kapsayan uygulama ağ geçidi ile ilişkili DNS adıdır, arka uç App Service 'in etki alanı adından farklıdır. Bu nedenle, uygulama ağ geçidi tarafından alınan özgün istekteki ana bilgisayar üst bilgisi, arka uç hizmetinin ana bilgisayar adıyla aynı değildir. Bu nedenle, uygulama ağ geçidindeki istekteki ana bilgisayar üst bilgisi arka uç hizmetinin ana bilgisayar adına değiştirilmediği için, çok kiracılı arka uçlar isteği doğru uç noktaya çözemeyebilir.
+
+Application Gateway, istek Application Gateway arka uca yönlendirildiğini isteğin ana bilgisayar adıyla birlikte istekteki konak üstbilgisini geçersiz kılan `Pick host name from backend address` adlı bir anahtar sağlar. Bu özellik, Azure App Service ve API Management gibi çok kiracılı arka uçlar için destek sunar. 
 
 Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
 >
-> - Arka uç havuzu oluşturun ve App Service ekleyin
-> - Etkin "Konak adı seçin" anahtarlarla HTTP ayarları ve özel araştırma oluşturma
+> - Bir arka uç havuzu oluşturun ve buna bir App Service ekleyin
+> - "Seçme ana bilgisayar adı" anahtarları etkinken HTTP ayarları ve özel araştırma oluşturma
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Uygulama ağ geçidi: Mevcut uygulama ağ geçidine sahip değilseniz, bkz. nasıl [bir uygulama ağ geçidi oluşturma](https://docs.microsoft.com/azure/application-gateway/quick-create-portal)
-- Uygulama Hizmeti: Mevcut bir App service yoksa bkz [App service belgeleri](https://docs.microsoft.com/azure/app-service/).
+- Application Gateway: mevcut bir uygulama ağ geçidiniz yoksa bkz. [uygulama ağ geçidi oluşturma](https://docs.microsoft.com/azure/application-gateway/quick-create-portal)
+- App Service: mevcut bir App Service yoksa [App Service belgeleri](https://docs.microsoft.com/azure/app-service/)bölümüne bakın.
 
-## <a name="add-app-service-as-backend-pool"></a>Uygulama hizmet arka uç havuzu Ekle
+## <a name="add-app-service-as-backend-pool"></a>App Service 'i arka uç havuzu olarak ekle
 
-1. Azure portalında, uygulama ağ geçidi yapılandırma görünümünü açın.
+1. Azure portal, uygulama ağ geçidinizin yapılandırma görünümünü açın.
 
-2. Altında **arka uç havuzları**, tıklayarak **Ekle** yeni bir arka uç havuzu oluşturmak için.
+2. Yeni bir arka uç havuzu oluşturmak için **arka uç havuzları**altında **Ekle** ' ye tıklayın.
 
-3. Arka uç havuzu için uygun bir ad sağlayın. 
+3. Arka uç havuzuna uygun bir ad verin. 
 
-4. Altında **hedefleri**üzerindeki açılır menüye tıklayın ve seçin **uygulama hizmetleri** seçeneği olarak.
+4. **Hedefler**' in altında, açılan listeye tıklayın ve seçenek olarak **uygulama hizmetleri** ' ni seçin.
 
-5. Bir açılan hemen altındaki **hedefleri** açılan görünür olan App Service'leriniz listesini içerir. Bu açılan listeden, Ekle ve arka uç havuzu üyesi olarak eklemek istediğiniz App Service'ı seçin.
+5. **Hedefler** açılan listesinin hemen altındaki bir açılan liste, uygulama hizmetlerinizin listesini içerecek şekilde görünür. Bu açılan listeden, arka uç havuzu üyesi olarak eklemek istediğiniz App Service seçin ve Ekle ' ye tıklayın.
 
-   ![App service arka ucu](./media/configure-web-app-portal/backendpool.png)
+   ![App Service arka ucu](./media/configure-web-app-portal/backendpool.png)
+   
+   > [!NOTE]
+   > Açılan menü yalnızca Application Gateway aynı abonelikte olan uygulama hizmetlerini doldurur. Application Gateway olduğu sunucudan farklı bir abonelikte bulunan bir App Service kullanmak istiyorsanız, **hedefler** açılan menüsünde **uygulama hizmetleri** ' ni seçmek yerine, **IP adresi veya ana bilgisayar adı** seçeneğini belirleyin ve ana bilgisayar adını (örneğin,) girin. azurewebsites.net).
 
-## <a name="create-http-settings-for-app-service"></a>App service için HTTP ayarları oluşturma
+## <a name="create-http-settings-for-app-service"></a>App Service için HTTP ayarları oluşturma
 
-1. Altında **HTTP ayarları**, tıklayın **Ekle** yeni bir HTTP ayarı oluşturmak için.
+1. **Http ayarları**' nın altında **Ekle** ' ye tıklayarak yeni bir http ayarı oluşturun.
 
-2. HTTP ayarı için bir ad girin ve etkinleştirebilir veya tanımlama bilgisi tabanlı benzeşim ihtiyacınıza göre devre dışı bırakın.
+2. HTTP ayarı için bir ad girin ve ihtiyacınıza göre tanımlama bilgisi tabanlı benzeşimi etkinleştirebilir veya devre dışı bırakabilirsiniz.
 
-3. Kullanım Örneğinize ilişkin olarak HTTP veya HTTPS protokolünü seçin. 
+3. Kullanım çalışmanıza göre Protokolü HTTP veya HTTPS olarak seçin. 
 
-4. İçin kutuyu işaretleyin **kullanılmak üzere App Service** ve kapatma **arka uç adresi çekme ana bilgisayar adına sahip bir yoklama oluşturma** ve **arka uç adresi çekme konak adı** seçenekleri. Bu seçenek, aynı zamanda bir araştırma etkin anahtarı ile otomatik olarak oluşturun ve bu HTTP ayarıyla ilişkilendirmek.
+   > [!NOTE]
+   > HTTPS ' yi seçerseniz, App Service 'ın güvenilen bir Azure hizmeti olduğundan, uygulama hizmeti arka ucunu beyaz listeye almak için herhangi bir kimlik doğrulama sertifikası veya güvenilen kök sertifikası yüklemeniz gerekmez.
 
-5. Tıklayın **Tamam** HTTP ayarı oluşturmak için.
+4. **App Service Için kullanım** kutusunu işaretleyin. `Create a probe with pick host name from backend address` ve `Pick host name from backend address` anahtarlarının otomatik olarak etkin olacağını unutmayın.`Pick host name from backend address` istek Application Gateway arka uca yönlendirildiğini, istekteki konak üstbilgisini arka ucun ana bilgisayar adıyla geçersiz kılar.  
 
-   ![HTTP setting1](./media/configure-web-app-portal/http-setting1.png)
+   `Create a probe with pick host name from backend address` otomatik olarak bir durum araştırması oluşturacak ve bu HTTP ayarıyla ilişkilendilecektir. Bu HTTP ayarı için başka bir sistem durumu araştırması oluşturmanız gerekmez. <HTTP Setting name><Unique GUID> adlı yeni bir araştırmanın sistem durumu araştırmaları listesine eklendiğini ve bu anahtarın zaten anahtar `Pick host name from backend http settings enabled`olduğunu kontrol edebilirsiniz.
+
+   App Service için kullanılmakta olan bir veya daha fazla HTTP ayarı zaten varsa ve bu HTTP ayarları, oluşturmakta olduğunuz bir hizmet ile aynı protokolü kullanıyorsa, `Create a probe with pick host name from backend address` anahtarı yerine, özel araştırmaların birini seçmek için bir açılır liste alacaksınız. Bunun nedeni, App Service ile bir HTTP ayarı zaten var olduğundan, anahtarı `Pick host name from backend http settings enabled` olan bir sistem durumu araştırması de var. Açılan listeden özel araştırmayı seçin.
+
+5. HTTP ayarını oluşturmak için **Tamam** ' ı tıklatın.
+
+   ![HTTP-setting1](./media/configure-web-app-portal/http-setting1.png)
 
    ![HTTP-setting2](./media/configure-web-app-portal/http-setting2.png)
 
-## <a name="create-rule-to-tie-the-listener-backend-pool-and-http-setting"></a>Dinleyiciyi ve arka uç havuzu HTTP ayarı bağlamak için kural oluşturma
 
-1. Altında **kuralları**, tıklayın **temel** yeni bir temel kuralı oluşturun.
 
-2. Uygun bir ad sağlayın ve App service için gelen istekleri kabul eden dinleyici seçin.
+## <a name="create-rule-to-tie-the-listener-backend-pool-and-http-setting"></a>Dinleyiciyi, arka uç havuzunu ve HTTP ayarını bağlamak için kural oluşturma
 
-3. İçinde **arka uç havuzu** açılır listesinde, yukarıda oluşturduğunuz arka uç havuzu seçin.
+1. **Kurallar**altında **temel** ' ya tıklayarak yeni bir temel kural oluşturun.
 
-4. İçinde **HTTP ayarı** açılır listesinde, yukarıda oluşturulan ayarı HTTP seçin.
+2. Uygun bir ad girin ve uygulama hizmeti için gelen istekleri kabul edecek olan dinleyiciyi seçin.
 
-5. Tıklayın **Tamam** bu kuralı kaydedin.
+3. **Arka uç havuzu** açılan menüsünde, yukarıda oluşturduğunuz arka uç havuzunu seçin.
+
+4. **Http ayarı** açılan listesinde, yukarıda oluşturduğunuz http ayarını seçin.
+
+5. Bu kuralı kaydetmek için **Tamam** ' ı tıklatın.
 
    ![Kural](./media/configure-web-app-portal/rule.png)
 
-## <a name="restrict-access"></a>Erişimi kısıtlama
+## <a name="additional-configuration-in-case-of-redirection-to-app-services-relative-path"></a>App Service 'in göreli yoluna yeniden yönlendirme durumunda ek yapılandırma
 
-Bu örneklerde dağıtılan web uygulamaları doğrudan Internet'ten erişilebilen genel IP adresleri kullanın. Bu, yeni bir özellik hakkında öğrenirken sorun giderme ve yeni şeyler çalışırken yardımcı olur. Ancak, bir özellik üretim ortamında dağıtmak istiyorsanız, daha fazla kısıtlama eklemek isteyeceksiniz.
+App Service, göreli yoluna (örneğin, contoso.azurewebsites.net/path1 öğesinden contoso.azurewebsites.net/path2 'ye yeniden yönlendirme) yeniden yönlendirmek üzere istemciye bir yeniden yönlendirme yanıtı gönderdiğinde, uygulama ağ geçidinden aldığı istekte olduğu gibi yanıtının konum üstbilgisinde aynı ana bilgisayar adını kullanır. Bu nedenle, istemci, uygulama ağ geçidi (contoso.com/path2) boyunca değil, isteği doğrudan contoso.azurewebsites.net/path2 'a yapar. Application Gateway 'i atlamak istenmez.
 
-Web uygulamalarınız için erişimi kısıtlayabilir tek bir yolu [Azure App Service statik IP kısıtlamaları](../app-service/app-service-ip-restrictions.md). Örneğin, yalnızca uygulama ağ geçidinden trafiği alır, böylece web uygulaması kısıtlayabilirsiniz. Uygulama ağ geçidi VIP erişimi olan tek adres olarak listelemek için app service IP kısıtlama özelliğini kullanın.
+Kullanım durumunda, App Service 'in istemciye yeniden yönlendirme yanıtı gönderebilmesi gereken senaryolar vardır, [konum başlığını yeniden yazmak için ek adımları](https://docs.microsoft.com/azure/application-gateway/troubleshoot-app-service-redirection-app-service-url#sample-configuration)gerçekleştirin.
+
+## <a name="restrict-access"></a>Erişimi kısıtla
+
+Bu örneklerde dağıtılan Web uygulamaları, doğrudan Internet 'ten erişilebilen genel IP adreslerini kullanır. Bu, yeni bir özellik öğrenirken ve yeni şeyler gerçekleştirmeye çalışırken sorun gidermeye yardımcı olur. Ancak bir özelliği üretime dağıtmayı planlıyorsanız, daha fazla kısıtlama eklemek isteyeceksiniz.
+
+Web uygulamalarınıza erişimi kısıtlayabilmeniz için bir yol [STATIK IP kısıtlamaları Azure App Service](../app-service/app-service-ip-restrictions.md)kullanmaktır. Örneğin, Web uygulamasını yalnızca uygulama ağ geçidinden trafik alacak şekilde kısıtlayabilirsiniz. Uygulama ağ geçidi VIP 'sini erişimi olan tek adres olarak listelemek için App Service IP kısıtlaması özelliğini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-App service ve diğer uygulama ağ geçidi ile çok kiracılı desteği hakkında daha fazla bilgi için bkz: [application gateway ile çok kiracılı hizmet desteği](https://docs.microsoft.com/azure/application-gateway/application-gateway-web-app-overview).
-
-App service'inizin yanıttan App service'nın URL'ye yeniden yönlendirerek durumda görmek için nasıl [yeniden yönlendirme için App service'nın URL sorun giderme](https://docs.microsoft.com/azure/application-gateway/troubleshoot-app-service-redirection-app-service-url).
+Uygulama hizmeti ve Application Gateway ile diğer çok kiracılı destek hakkında daha fazla bilgi edinmek için bkz. [Application Gateway ile çok kiracılı hizmet desteği](https://docs.microsoft.com/azure/application-gateway/application-gateway-web-app-overview).

@@ -1,7 +1,7 @@
 ---
-title: Limitler ve kotalar - özel görüntü işleme hizmeti
-titlesuffix: Azure Cognitive Services
-description: Custom Vision Service için limitler ve kotalar hakkında bilgi edinin.
+title: Sınırlar ve Kotalar-Özel Görüntü İşleme Hizmeti
+titleSuffix: Azure Cognitive Services
+description: Bu makalede farklı lisans anahtarı türleri ve Özel Görüntü İşleme Hizmeti için sınırlar ve Kotalar açıklanmaktadır.
 services: cognitive-services
 author: anrothMSFT
 manager: nitinme
@@ -10,34 +10,40 @@ ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 03/25/2019
 ms.author: anroth
-ms.openlocfilehash: 9cff5fdac39be2338305cd37a4b2328a28a48255
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: e4fc3555d7d880dcbd4f76d8f507300e98c237db
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67269264"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718354"
 ---
 # <a name="limits-and-quotas"></a>Limitler ve kotalar
 
-Özel görüntü işleme hizmeti için anahtarların iki katmanı vardır. F0 (ücretsiz) veya Azure portalı üzerinden S0 (standart) abonelik için kaydolabilirsiniz. Buna karşılık gelen bkz [Bilişsel hizmetler fiyatlandırması sayfası](https://azure.microsoft.com/pricing/details/cognitive-services/custom-vision-service/) fiyatlandırma ve işlemler hakkında ayrıntı için.
+Özel Görüntü İşleme Hizmeti için iki anahtar katmanı vardır. Azure portal aracılığıyla bir F0 (ücretsiz) veya S0 (Standart) aboneliğine kaydolabilirsiniz. Fiyatlandırma ve işlemler hakkındaki ayrıntılar için ilgili bilişsel [Hizmetler fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/cognitive-services/custom-vision-service/) bakın.
 
-Eğitim resmi her proje ve proje başına etiket sayısı zamanla S0 projeleri için artması beklenmektedir.
+Her proje için bir proje ve etiket için eğitim görüntülerinin sayısının, S0 projelerinin zaman içinde artması beklenmektedir.
 
 ||**F0**|**S0**|
 |-----|-----|-----|
-|Projeler|2|100|
-|Proje başına eğitim resmi |5,000|100,000|
-|Öngörüler / ay|10,000 |Sınırsız|
-|Etiketler / project|50|500|
-|Yinelemeler |10|10|
-|Etiketlenmiş resimleri etiketleme, sınıflandırma (50 önerilir ve üzeri) başına min |5|5|
-|Etiketlenmiş resimleri etiketi, nesne algılama (50 önerilir ve üzeri) başına min|15|15|
-|Öngörü görüntülerini saklama|30 gün|30 gün|
-|[Tahmin](https://go.microsoft.com/fwlink/?linkid=865445) işlemleriyle depolama (işlem / saniye)|2|10|
-|[Tahmin](https://go.microsoft.com/fwlink/?linkid=865445) işlemleri olmadan depolama (işlem / saniye)|2|20|
-|[TrainProject](https://go.microsoft.com/fwlink/?linkid=865446) (API çağrıları / saniye)|2|10|
-|[Diğer API çağrıları](https://go.microsoft.com/fwlink/?linkid=865446) (işlem / saniye)|10|10|
-|En yüksek görüntü boyutu (eğitim resmi karşıya yükleme) |6 MB|6 MB|
-|En yüksek görüntü boyutu (tahmini)|4 MB|4 MB|
-|Nesne algılama eğitim görüntü başına en fazla bölge|200|200|
-|Sınıflandırma görüntü başına en fazla etiket|30|30|
+|projeyle|2|100|
+|Proje başına eğitim görüntüleri |5\.000|100.000|
+|Tahmin/ay|10,000 |Sınırsız|
+|Etiketler/proje|50|500|
+|Tekrarları |10|10|
+|Etiket başına en az etiketlenmiş görüntü, sınıflandırma (50 + önerilir) |5|5|
+|Etiket başına en az etiketlenmiş görüntü, nesne algılama (50 + önerilir)|15|15|
+|Tahmin görüntülerinin depolandığı süre|30 gün|30 gün|
+|Depolama ile [tahmin](https://go.microsoft.com/fwlink/?linkid=865445) Işlemleri (saniye başına işlem)|2|10|
+|Depolama olmadan [tahmin](https://go.microsoft.com/fwlink/?linkid=865445) Işlemleri (saniye başına işlem)|2|20|
+|[Traınproject](https://go.microsoft.com/fwlink/?linkid=865446) (saniye başına API çağrısı)|2|10|
+|[DIĞER API çağrıları](https://go.microsoft.com/fwlink/?linkid=865446) (saniye başına işlem)|10|10|
+|Kabul edilen görüntü türleri|jpg, PNG, BMP, GIF|jpg, PNG, BMP, GIF|
+|Piksel cinsinden en az görüntü yüksekliği/genişliği|256 (bkz. nota bakın)|256 (bkz. nota bakın)|
+|Piksel cinsinden en fazla görüntü yüksekliği/genişliği|sınırsız|sınırsız|
+|En fazla görüntü boyutu (eğitim resmi yüklemesi) |6 MB|6 MB|
+|En fazla görüntü boyutu (tahmin)|4 MB|4 MB|
+|Nesne algılama eğitim görüntüsü başına en fazla bölge|200|200|
+|Sınıflandırma görüntüsü başına en fazla etiket|30|30|
+
+> [!NOTE]
+> 256 pikselden küçük resimler kabul edilir ancak ölçeklendirilir.

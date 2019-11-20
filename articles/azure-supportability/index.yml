@@ -1,0 +1,47 @@
+### YamlMime:Landing
+title: Azure Supportability belgeleri
+summary: Azure müşterilerinin Azure portalında nasıl destek isteği oluşturup yönetebileceğini açıklar.
+metadata:
+  title: Azure Supportability belgeleri
+  description: Azure müşterilerinin Azure portalında nasıl destek isteği oluşturup yönetebileceğini açıklar.
+  services: azure supportability
+  ms.service: azure-supportability
+  ms.subservice: 
+  ms.topic: landing-page
+  ms.collection: 
+  author: arob98
+  ms.author: angrobe
+  ms.date: 08/24/2019
+  ms.openlocfilehash: 4ee8de0f591618be7eb3a08c04f5820faeebaf4a
+  ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/27/2019
+  ms.locfileid: "70052146"
+landingContent:
+- title: Destek isteği oluşturma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure destek isteği oluşturma
+      url: how-to-create-azure-support-request.md
+  - linkListType: get-started
+    links:
+    - text: Azure portalında bir destek isteği oluşturun
+      url: https://portal.azure.com/#create/Microsoft.Support
+- title: Kota isteklerini artırma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: VM Serisi vCPU sınır artışı
+      url: per-vm-quota-requests.md
+    - text: Toplam bölgesel vCPU sınır artışı
+      url: regional-quota-requests.md
+    - text: Ağ sınırını artırma
+      url: networking-quota-requests.md
+- title: Sorun giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Bölge veya SKU kullanılamıyor
+      url: sku-series-unavailable.md

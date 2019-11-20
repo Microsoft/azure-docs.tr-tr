@@ -1,6 +1,6 @@
 ---
-title: SQL veritabanı olağanüstü durum kurtarma Tatbikatlarını | Microsoft Docs
-description: Yönergeler ve olağanüstü durum kurtarma tatbikatı gerçekleştirme amacıyla Azure SQL veritabanı'nı kullanmak için en iyi uygulamaları öğrenin.
+title: Olağanüstü durum kurtarma ayrıntılarına ls
+description: Olağanüstü durum kurtarma detaylarını gerçekleştirmek için Azure SQL veritabanı 'nı kullanmaya yönelik kılavuzluk ve en iyi uygulamaları öğrenin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: high-availability
@@ -10,65 +10,64 @@ ms.topic: conceptual
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mathoma, carlrab
-manager: craigg
 ms.date: 12/18/2018
-ms.openlocfilehash: 5d754ae558d485036a9a55f573a3f40162ed9f84
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3ca00a03976ae38b7956616b8287220a7bc5998c
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60725440"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73825845"
 ---
-# <a name="performing-disaster-recovery-drill"></a>Olağanüstü durum kurtarma Tatbikatı gerçekleştirme
+# <a name="performing-disaster-recovery-drill"></a>Olağanüstü durum kurtarma ayrıntısı gerçekleştiriliyor
 
-Kurtarma iş akışı için uygulama hazır olma durumu doğrulaması düzenli aralıklarla gerçekleştirilen önerilir. Uygulamaları ve uygulama davranışı doğrulama, yük devretme veri kaybı ve/veya kesinti içerir iyi bir mühendislik uygulamasıdır. Ayrıca, çoğu endüstri standartlarına göre iş sürekliliği sertifika kapsamında olmasa da gereklidir.
+Kurtarma iş akışı için uygulama hazırlığını doğrulamanın düzenli aralıklarla gerçekleştirilmesi önerilir. Uygulama davranışının ve veri kaybı etkilerine ve/veya yük devretmenin kapsadığı kesintiye karşı doğrulama iyi bir mühendislik uygulamasıdır. Ayrıca, iş sürekliliği sertifikasının bir parçası olarak birçok sektör standardı için de bir gereksinimdir.
 
-Olağanüstü durum kurtarma tatbikatı gerçekleştirme şunlardan oluşur:
+Olağanüstü durum kurtarma detayının gerçekleştirilmesi aşağıdakilerden oluşur:
 
-* Veri katmanı kesinti benzetimi
-* Kurtarma
-* Uygulama bütünlüğünü post kurtarma doğrula
+* Veri katmanı kesintisi benzetimi yapma
+* Kurtar
+* Uygulama bütünlüğünü doğrulama sonrası kurtarma
 
-Nasıl bağlı olarak, [uygulamanız iş sürekliliği için tasarlanmış](sql-database-business-continuity.md), detaya yürütülecek iş akışını farklılık gösterebilir. Bu makalede, Azure SQL veritabanı bağlamında olağanüstü durum kurtarma tatbikatı gerçekleştirme için en iyi uygulamaları açıklar.
+[Uygulamanızı iş sürekliliği için nasıl tasarlamış](sql-database-business-continuity.md)olduğunuza bağlı olarak, detaya gitmeyi yürütmek için iş akışı farklılık gösterebilir. Bu makalede, Azure SQL veritabanı bağlamında olağanüstü durum kurtarma detayına yönelik en iyi yöntemler açıklanmaktadır.
 
 ## <a name="geo-restore"></a>Coğrafi Geri Yükleme
 
-Olağanüstü durum kurtarma tatbikatı gerçekleştirme, olası veri kaybını önlemek için üretim ortamının bir kopya oluşturma ve uygulamanın yük devretme iş akışını doğrulamak için kullanarak bir test ortamı'nı kullanarak detaya gerçekleştirin.
+Olağanüstü durum kurtarma detayını gerçekleştirirken olası veri kaybını engellemek için, üretim ortamının bir kopyasını oluşturarak ve uygulamanın yük devretme iş akışını doğrulamak üzere kullanarak bir test ortamı kullanarak detaya gitmeyi gerçekleştirin.
 
 ### <a name="outage-simulation"></a>Kesinti simülasyonu
 
-Kesinti benzetimini yapmak için kaynak veritabanının yeniden adlandırabilirsiniz. Bu ad değişikliği, uygulama bağlantı hatalarına neden oluyor.
+Kesinti benzetimini yapmak için kaynak veritabanını yeniden adlandırabilirsiniz. Bu ad değişikliği uygulama bağlantı hatalarıyla neden olur.
 
 ### <a name="recovery"></a>Kurtarma
 
-* Açıklandığı gibi farklı bir sunucuya veritabanı coğrafi geri yükleme gerçekleştirme [burada](sql-database-disaster-recovery.md).
-* Kurtarılan veritabanına bağlanmak ve takip uygulama yapılandırmasını değiştirmek [bir veritabanının kurtarma işleminden sonra yapılandırma](sql-database-disaster-recovery.md) ve kurtarmayı tamamlamak için Kılavuzu.
+* Veritabanının coğrafi geri yüklemesini [burada](sql-database-disaster-recovery.md)açıklandığı gibi farklı bir sunucuda gerçekleştirin.
+* Kurtarılan veritabanına bağlanacak uygulama yapılandırmasını değiştirin ve kurtarmayı tamamladıktan [sonra kurtarma işleminden sonra veritabanını Yapılandır](sql-database-disaster-recovery.md) kılavuzunu izleyin.
 
 ### <a name="validation"></a>Doğrulama
 
-(Bağlantı dizeleri, oturum açma bilgileri, temel işlevselliğini test etme veya diğer standart uygulama signoffs yordamları doğrulamaları kısmı dahil olmak üzere) uygulama bütünlüğünü post kurtarma doğrulayarak ayrıntıya tamamlayın.
+Uygulama bütünlüğü gönderisini (bağlantı dizeleri, oturum açmalar, temel işlevsellik testi veya standart uygulama sonuçlandır yordamlarının diğer doğrulamaları dahil) doğrulayarak detaya gitmeyi doldurun.
 
 ## <a name="failover-groups"></a>Yük devretme grupları
 
-Yük devretme grupları kullanarak korunan bir veritabanı için planlı yük devretme ikincil sunucuya ayrıntıya alıştırma içerir. Planlanmış yük devretme rolleri geçti, birincil ve ikincil veritabanları yük devretme grubuna eşitlenmiş durumda kalmasını sağlar. Planlanmamış yük devretme ayrıntıya üretim ortamında gerçekleştirilebilir şekilde bu işlem veri kaybına sonuçlanmaz.
+Yük devretme grupları kullanılarak korunan bir veritabanı için, detaya gitme işlemi ikincil sunucuya planlı yük devretme işlemini içerir. Planlı Yük devretme, roller geçildiğinde, yük devretme grubundaki birincil ve ikincil veritabanlarının eşitlenmiş durumda kalmasını sağlar. Planlanmamış yük devretmenin aksine, bu işlem veri kaybına neden olmaz; bu nedenle, detaya gitme üretim ortamında gerçekleştirilebilir.
 
 ### <a name="outage-simulation"></a>Kesinti simülasyonu
 
-Kesinti simülasyonu yapma web uygulaması veya veritabanına bağlı sanal makine devre dışı bırakabilirsiniz. Bu kesinti simülasyonu web istemcileri için bağlantı hataları oluşur.
+Kesinti benzetimi yapmak için, Web uygulamasını veya veritabanına bağlı sanal makineyi devre dışı bırakabilirsiniz. Bu kesinti simülasyonu, Web istemcilerinin bağlantı arızalarına neden olur.
 
 ### <a name="recovery"></a>Kurtarma
 
-* Yeni birincil tümüyle erişilebilir hale DR bölgeye işaret ikincil, eski uygulama yapılandırması emin olun.
-* Başlatma [planlı yük devretme](scripts/sql-database-setup-geodr-and-failover-database-powershell.md) ikincil sunucuya Yük devretme grubundan biri.
-* İzleyin [bir veritabanının kurtarma işleminden sonra yapılandırma](sql-database-disaster-recovery.md) ve kurtarmayı tamamlamak için Kılavuzu.
+* DR bölgesindeki uygulama yapılandırmasının, tümüyle erişilebilen yeni birincil haline gelen eski ikinciye işaret ettiğini doğrulayın.
+* İkincil sunucudan yük devretme grubunun [planlı yük devretmesini](scripts/sql-database-setup-geodr-and-failover-database-powershell.md) başlatın.
+* Kurtarmayı tamamladıktan [sonra kurtarma işleminden sonra veritabanını Yapılandır](sql-database-disaster-recovery.md) kılavuzunu izleyin.
 
 ### <a name="validation"></a>Doğrulama
 
-(Bağlantı, temel işlevselliğini test etme veya ayrıntıya signoffs için gereken başka bir doğrulama dahil olmak üzere) uygulama bütünlüğünü post kurtarma doğrulayarak ayrıntıya tamamlayın.
+Uygulama bütünlüğü sonrası kurtarma (bağlantı, temel işlevsellik testi veya detaya gitme için gereken diğer doğrulamalar dahil) doğrulayarak detaya gitmeyi doldurun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* İş sürekliliği senaryoları hakkında bilgi edinmek için [sürekliliği senaryoları](sql-database-business-continuity.md).
-* Veritabanı otomatik yedeklemeler Azure SQL hakkında bilgi edinmek için bkz: [SQL veritabanı otomatik yedekleme](sql-database-automated-backups.md)
-* Otomatik yedekleme, kurtarma için kullanma hakkında bilgi edinmek için [hizmet tarafından başlatılan yedeklemelerden veritabanını geri yükleme](sql-database-recovery-using-backups.md).
-* Daha hızlı kurtarma seçenekleri hakkında bilgi edinmek için [etkin coğrafi çoğaltma](sql-database-active-geo-replication.md) ve [otomatik yük devretme grupları](sql-database-auto-failover-group.md).
+* İş sürekliliği senaryoları hakkında bilgi edinmek için bkz. [süreklilik senaryoları](sql-database-business-continuity.md).
+* Azure SQL veritabanı otomatik yedeklemeleri hakkında bilgi edinmek için bkz. [SQL veritabanı otomatik yedeklemeleri](sql-database-automated-backups.md)
+* Kurtarmaya yönelik otomatik yedeklemeleri kullanma hakkında bilgi edinmek için bkz. [hizmet tarafından başlatılan yedeklemelerden bir veritabanını geri yükleme](sql-database-recovery-using-backups.md).
+* Daha hızlı kurtarma seçenekleri hakkında daha fazla bilgi edinmek için bkz. [etkin coğrafi çoğaltma](sql-database-active-geo-replication.md) ve [otomatik yük devretme grupları](sql-database-auto-failover-group.md).

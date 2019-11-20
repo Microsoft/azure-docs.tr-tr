@@ -8,11 +8,11 @@ ms.topic: include
 ms.date: 04/06/2018
 ms.author: mimig
 ms.custom: include file
-ms.openlocfilehash: b9c585e460dd2ed650de2b3a90b33c1d30eec43e
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 0747862158462089fa2696823ad6659259cc5c09
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188119"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72818634"
 ---
-Azure Cosmos DB Tablo API'si hesabı kullanma yönergeleri için bkz. [Tablo API'si hesabı oluşturma](../articles/cosmos-db/create-table-dotnet.md#create-a-database-account).
+Azure Cosmos DB Tablo API'si hesabı oluşturma yönergeleri için bkz. [veritabanı hesabı oluşturma](../articles/cosmos-db/create-table-dotnet.md#create-a-database-account).

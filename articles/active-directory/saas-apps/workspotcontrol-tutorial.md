@@ -176,7 +176,7 @@ Bu bölümde, Azure portalında bir test kullanıcısı oluşturun.
 
     1. İçinde **adı** alanına **BrittaSimon**.
   
-    1. İçinde **kullanıcı adı** girin * *@ brittasimon*yourcompanydomain.extension***. Örneğin,  **BrittaSimon@contoso.<i> </i>com**.
+    1. İçinde **kullanıcı adı** girin **brittasimon@* yourcompanydomain.extension***. Örneğin,  **BrittaSimon@contoso.<i> </i>com**.
 
     1. Seçin **Show parola** onay kutusu. Ardından görüntülenen değeri yazın **parola** kutusu.
 

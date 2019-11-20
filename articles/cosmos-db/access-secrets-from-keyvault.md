@@ -1,95 +1,95 @@
 ---
-title: Azure Cosmos DB anahtarlara erişmek ve depolamak için Key Vault'u kullanın
-description: Depolamak ve Azure Cosmos DB bağlantı dizesi, anahtar, uç noktalarına erişmek için Azure Key Vault'u kullanın.
-author: rimman
+title: Azure Cosmos DB anahtarlarını depolamak ve erişmek için Key Vault kullanma
+description: Azure Cosmos DB bağlantı dizesi, anahtarlar, uç noktaları depolamak ve erişmek için Azure Key Vault kullanın.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: conceptual
 ms.date: 05/23/2019
-ms.author: rimman
 ms.reviewer: sngun
-ms.openlocfilehash: 157ccd284c25cb5c7275aa942823ade2a40795cc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 55e6bbc338c1ac6f9ef935b4a3a05c32f2b5e9f5
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66239863"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72755218"
 ---
-# <a name="secure-azure-cosmos-keys-using-azure-key-vault"></a>Azure Cosmos anahtarları Azure Key Vault'u kullanarak güvenli hale getirme 
+# <a name="secure-azure-cosmos-keys-using-azure-key-vault"></a>Azure Key Vault kullanarak Azure Cosmos anahtarlarını güvenli hale getirme 
 
-Azure Cosmos DB için uygulamalarınızı kullanırken, uygulamanın yapılandırma dosyasında uç noktasını ve anahtarı kullanarak veritabanı, koleksiyonlar, belgeler erişebilirsiniz.  Ancak, kullanılabilir tüm kullanıcılar için düz metin biçiminde olduğundan, anahtarları ve URL'yi doğrudan uygulama koduna koymak güvenli değildir. Uç nokta ve anahtarlar kullanılabilir, ancak güvenli bir mekanizma aracılığıyla olduğundan emin olmanız gerekir. Bu, Azure Key Vault, güvenli bir şekilde depolamak ve uygulama parolalarını yönetme burada yardımcı olur.
+Uygulamalarınız için Azure Cosmos DB kullanırken, uç noktayı ve uygulamanın yapılandırma dosyası içindeki anahtarı kullanarak veritabanına, koleksiyonlara ve belgelere erişebilirsiniz.  Bununla birlikte, anahtar ve URL 'YI doğrudan uygulama koduna yerleştirmek güvenli değildir, çünkü tüm kullanıcılara açık metin biçiminde kullanılabilir. Uç noktanın ve anahtarların kullanılabilir olduğundan, ancak güvenli bir mekanizmaya karşı emin olmak istiyorsunuz. Bu, Azure Key Vault uygulama gizli dizilerini güvenli bir şekilde depolamanıza ve yönetmenize yardımcı olabilir.
 
-Aşağıdaki adımlar, depolama ve Azure Cosmos DB erişim anahtarlarını Key Vault'tan okumak için gereklidir:
+Key Vault Azure Cosmos DB erişim anahtarlarını depolamak ve okumak için aşağıdaki adımlar gereklidir:
 
 * Anahtar kasası oluşturma  
-* Azure Cosmos DB erişim tuşları anahtar Kasası'na ekleyin.  
-* Azure web uygulaması oluşturma  
-* Key Vault okuma izni verin ve uygulamayı kaydetme  
+* Key Vault Azure Cosmos DB erişim tuşları ekleyin  
+* Azure Web uygulaması oluşturma  
+* & Key Vault okumak için uygulamayı kaydetme izinleri verin  
 
 
 ## <a name="create-a-key-vault"></a>Anahtar kasası oluşturma
 
-1. Oturum [Azure portalında](https://portal.azure.com/).  
-2. Seçin **kaynak Oluştur > Güvenlik > Key Vault**.  
+1. [Azure portalında](https://portal.azure.com/)oturum açın.  
+2. **Kaynak oluştur > güvenlik > Key Vault**' yı seçin.  
 3. **Anahtar kasası oluşturma** bölümünde aşağıdaki bilgileri sağlayın:  
-   * **Adı:** Anahtar kasanız için benzersiz bir ad sağlayın.  
+   * **Ad:** Key Vault için benzersiz bir ad sağlayın.  
    * **Abonelik:** Kullanacağınız aboneliği seçin.  
    * **Kaynak Grubu** altında **Yeni oluştur**’u seçin ve bir kaynak grubu adı girin.  
-   * Konum aşağı açılır menüden bir konum seçin.  
-   * Diğer seçenekleri varsayılan değerlerinde bırakın.  
+   * Konum aşağı açılan menüsünde bir konum seçin.  
+   * Diğer seçenekleri varsayılanlarına bırakın.  
 4. Yukarıdaki bilgileri girdikten sonra **Oluştur**’u seçin.  
 
-## <a name="add-azure-cosmos-db-access-keys-to-the-key-vault"></a>Azure Cosmos DB erişim tuşları, anahtar Kasası'na ekleyin.
-1. Önceki adımda oluşturduğunuz, açık Key vault'a gidin **gizli dizileri** sekmesi.  
-2. Seçin **+ Oluştur/içeri aktar**, 
+## <a name="add-azure-cosmos-db-access-keys-to-the-key-vault"></a>Key Vault Azure Cosmos DB erişim anahtarları ekleyin.
+1. Önceki adımda oluşturduğunuz Key Vault gidin, **gizlilikler** sekmesini açın.  
+2. **+ Oluştur/Içeri aktar**' ı seçin. 
 
-   * Seçin **el ile** için **karşıya yükleme seçenekleri**.
-   * Sağlayan bir **adı** için gizli anahtarı
-   * Cosmos DB hesabınızın bağlantı dizesi sağlamanız **değer** alan. Ve ardından **Oluştur**.
+   * **Karşıya yükleme seçenekleri**Için **el ile** ' yi seçin.
+   * Gizli dizi için bir **ad** girin
+   * Cosmos DB hesabınızın bağlantı dizesini **değer** alanına girin. Sonra **Oluştur**' u seçin.
 
    ![Gizli anahtar oluşturma](./media/access-secrets-from-keyvault/create-a-secret.png)
 
-4. Gizli dizi oluşturulduktan sonra dosyayı açın ve kopyalayın ** şu biçimde bir gizli tanımlayıcı. Sonraki bölümde, bu tanımlayıcıyı kullanacaksınız. 
+4. Gizli dizi oluşturulduktan sonra açın ve aşağıdaki biçimde olan * * gizli tanımlayıcısını kopyalayın. Sonraki bölümde bu tanımlayıcıyı kullanacaksınız. 
 
    `https://<Key_Vault_Name>.vault.azure.net/secrets/<Secret _Name>/<ID>`
 
-## <a name="create-an-azure-web-application"></a>Azure web uygulaması oluşturma
+## <a name="create-an-azure-web-application"></a>Azure Web uygulaması oluşturma
 
-1. Bir Azure web uygulaması oluşturduğunuzda veya uygulamadan indirebileceğiniz [GitHub deposu](https://github.com/Azure/azure-cosmosdb-dotnet/tree/master/Demo/keyvaultdemo). Bu basit bir MVC uygulamasıdır.  
+1. Bir Azure Web uygulaması oluşturun veya uygulamayı [GitHub deposundan](https://github.com/Azure/azure-cosmosdb-dotnet/tree/master/Demo/keyvaultdemo)indirebilirsiniz. Bu basit bir MVC uygulamasıdır.  
 
-2. İndirilen uygulama ve açılması **HomeController.cs** dosya. Aşağıdaki satırı gizli kimliği güncelleştirin:
+2. İndirilen uygulamayı sıkıştırmayı açın ve **HomeController.cs** dosyasını açın. Aşağıdaki satırdaki gizli KIMLIĞI güncelleştirin:
 
    `var secret = await keyVaultClient.GetSecretAsync("<Your Key Vault’s secret identifier>")`
 
-3. **Kaydet** dosya **derleme** çözümü.  
-4. Ardından, uygulamayı azure'a dağıtın. Projeye sağ tıklayın ve seçin **yayımlama**. (Örneğin adı WebAppKeyVault1 uygulama) yeni bir app service profili oluşturun ve seçin **Yayımla**.   
+3. Dosyayı **kaydedin** , çözümü **derleyin** .  
+4. Ardından uygulamayı Azure 'a dağıtın. Projeye sağ tıklayın ve **Yayımla**' yı seçin. Yeni bir App Service profili oluşturun (uygulama WebAppKeyVault1 adını verebilir ve **Yayımla**' yı seçebilirsiniz.   
 
-5. Uygulama dağıtıldıktan sonra. Azure portalından, dağıtılan web uygulamasına gidin ve açmak **yönetilen hizmet kimliği** bu uygulamanın.  
+5. Uygulama dağıtıldıktan sonra. Azure portal, dağıttığınız Web uygulamasına gidin ve bu uygulamanın **yönetilen hizmet kimliğini** açın.  
 
    ![Yönetilen hizmet kimliği](./media/access-secrets-from-keyvault/turn-on-managed-service-identity.png)
 
-Uygulamayı şimdi çalıştırırsanız, anahtar Kasası'nda bu uygulama için hiçbir izin vermediği gibi aşağıdaki hata iletisini görürsünüz.
+Uygulamayı şimdi çalıştıracaksınız, Key Vault bu uygulama için herhangi bir izin vermediğinden aşağıdaki hatayı görürsünüz.
 
-![Uygulama erişimi olmadan dağıtılabilir.](./media/access-secrets-from-keyvault/app-deployed-without-access.png)
+![Uygulama erişim olmadan dağıtıldı](./media/access-secrets-from-keyvault/app-deployed-without-access.png)
 
-## <a name="register-the-application--grant-permissions-to-read-the-key-vault"></a>Key Vault okuma izni verin ve uygulamayı kaydetme
+## <a name="register-the-application--grant-permissions-to-read-the-key-vault"></a>& Key Vault okumak için uygulamayı kaydetme izinleri verin
 
-Bu bölümde, uygulamayı Azure Active Directory'ye kaydetmeniz ve Key Vault okumak uygulamanın izinlerini verin. 
+Bu bölümde, uygulamayı Azure Active Directory kaydeder ve uygulamanın Key Vault okuyabilmesi için izinler verirsiniz. 
 
-1. Azure portalında, açık gidin **Key Vault** önceki bölümde oluşturduğunuz.  
+1. Azure portal gidin, önceki bölümde oluşturduğunuz **Key Vault** açın.  
 
-2. Açık **erişim ilkeleri**seçin **+ yeni Ekle** izinleri seçin, dağıtılan web uygulaması bulun ve seçin **Tamam**.  
+2. **Erişim ilkelerini**açın, **+ Yeni Ekle** ' yi seçin ve dağıttığınız Web uygulamasını bulun, izinler ' i seçin ve **Tamam**' ı seçin.  
 
-   ![Erişim ilkesi ekleme](./media/access-secrets-from-keyvault/add-access-policy.png)
+   ![Erişim İlkesi Ekle](./media/access-secrets-from-keyvault/add-access-policy.png)
 
-Şimdi uygulamayı çalıştırırsanız, Key Vault'tan gizli dizi okuyabilirsiniz.
+Artık uygulamayı çalıştırırsanız, Key Vault gizli anahtarı okuyabilirsiniz.
 
-![Uygulama gizli anahtarı ile dağıtılan](./media/access-secrets-from-keyvault/app-deployed-with-access.png)
+![Gizli anahtar ile dağıtılan uygulama](./media/access-secrets-from-keyvault/app-deployed-with-access.png)
  
-Benzer şekilde, bu anahtar kasasına erişmek için bir kullanıcı ekleyebilirsiniz. Anahtar Kasası'na seçerek eklemeniz gerekir **erişim ilkeleri** ve uygulamayı Visual Studio'dan çalıştırmak gereken tüm izinleri verin. Bu uygulama masaüstünüzden çalışırken, kimliğinizi alır.
+Benzer şekilde, anahtar kasasına erişmek için bir kullanıcı ekleyebilirsiniz. **Erişim ilkeleri** ' ni seçerek ve ardından uygulamayı Visual Studio 'dan çalıştırmak için ihtiyacınız olan tüm izinleri vererek kendinizi Key Vault eklemeniz gerekir. Bu uygulama masaüstünüzden çalışırken kimliğinizi alır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Azure Cosmos DB için bkz. bir güvenlik duvarını [güvenlik duvarı desteği](firewall-support.md) makalesi.
-* Sanal ağ hizmet uç noktasını yapılandırmak için bkz: [sanal ağ hizmet uç noktası kullanarak erişim güvenliğini sağlama](vnet-service-endpoint.md) makalesi.
+* Azure Cosmos DB için bir güvenlik duvarı yapılandırmak için bkz. [güvenlik duvarı destek](firewall-support.md) makalesi.
+* Sanal ağ hizmeti uç noktasını yapılandırmak için, bkz. [VNET hizmeti uç noktası kullanarak güvenli erişim](vnet-service-endpoint.md) .

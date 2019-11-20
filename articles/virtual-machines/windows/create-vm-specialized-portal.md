@@ -1,83 +1,84 @@
 ---
-title: Azure Portalı'ndaki özelleştirilmiş bir VHD'den bir Windows VM oluşturma | Microsoft Docs
-description: Azure portalında bir VHD'den yeni bir Windows VM oluşturun.
+title: Azure portal özel bir VHD 'den bir Windows sanal makinesi oluşturun
+description: Azure portal bir VHD 'den yeni bir Windows sanal makinesi oluşturun.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 01/18/2019
 ms.author: cynthn
-ms.openlocfilehash: b24435501ed1312e91ebec9b9c434971dbc94b55
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 587acd37f465dda7e514b595f8451afe3d259dea
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61402313"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039138"
 ---
-# <a name="create-a-vm-from-a-vhd-by-using-the-azure-portal"></a>Azure portalını kullanarak bir VHD'den VM oluşturma
+# <a name="create-a-vm-from-a-vhd-by-using-the-azure-portal"></a>Azure portal kullanarak bir VHD 'den VM oluşturma
 
-Azure'da bir sanal makine (VM) oluşturmanın birkaç yolu vardır: 
+Azure 'da bir sanal makine (VM) oluşturmanın birkaç yolu vardır: 
 
-- Zaten sahip olduğunuz bir sanal sabit disk (VHD) kullanmak için veya VHD'yi kullanmak için mevcut bir VM'den kopyalamak isterseniz yeni bir VM tarafından oluşturabilirsiniz *ekleme* VHD bir işletim sistemi diski olarak yeni VM. 
+- Kullanmak üzere zaten bir sanal sabit disk (VHD) varsa veya VHD 'yi kullanmak için mevcut bir VM 'den kopyalamak istiyorsanız, VHD 'yi yeni VM 'ye bir işletim sistemi diski olarak *ekleyerek* yenı bir VM oluşturabilirsiniz. 
 
-- Silinmiş olan bir VM VHD'den yeni bir VM oluşturabilirsiniz. Örneğin, düzgün çalışmayan bir Azure VM varsa, VM'yi silin ve yeni bir VM oluşturmak için VHD kullanın. Aynı VHD'ye yeniden kullanabilir veya bir anlık görüntü oluşturma ve ardından yeni bir yönetilen disk anlık görüntüden oluşturarak VHD'nin kopyasını oluşturma. Anlık görüntü oluşturma birkaç adım daha sürmekle birlikte, özgün VHD korur ve geri dönüş konusunda sağlar.
+- Silinen bir VM 'nin VHD 'sinden yeni bir VM oluşturabilirsiniz. Örneğin, doğru şekilde çalışmayan bir Azure VM 'si varsa, sanal makineyi silebilir ve VHD 'YI kullanarak yeni bir VM oluşturabilirsiniz. Aynı VHD 'yi yeniden kullanabilir veya bir anlık görüntü oluşturup anlık görüntüden yeni bir yönetilen disk oluşturarak VHD 'nin kopyasını oluşturabilirsiniz. Anlık görüntü oluşturmak birkaç adım daha fazla olsa da, özgün VHD 'yi korur ve size bir geri dönüş sağlar.
 
-- Klasik VM'yi alın ve Resource Manager dağıtım modeli ve yönetilen diskler kullanan yeni bir VM oluşturmak için VHD'yi kullanın. En iyi sonuçlar için **Durdur** anlık görüntüsünü oluşturmadan önce Azure portalında Klasik VM.
+- Klasik bir VM alıp Kaynak Yöneticisi dağıtım modelini ve yönetilen diskleri kullanan yeni bir VM oluşturmak için VHD 'yi kullanın. En iyi sonuçlar için, anlık görüntüyü oluşturmadan önce Azure portal klasik VM 'yi **durdurun** .
  
-- Bir Azure VM, şirket içi VHD'yi karşıya yüklemek ve yeni bir sanal makineye ekleyerek şirket içi bir VHD'den oluşturabilirsiniz. Bir depolama hesabına VHD yüklemek için PowerShell veya başka bir araç kullanın ve ardından bir VHD'den yönetilen disk oluşturun. Daha fazla bilgi için [özelleştirilmiş bir VHD'yi karşıya yükleme](create-vm-specialized.md#option-2-upload-a-specialized-vhd). 
+- Şirket içi VHD 'den bir Azure VM oluşturabilir ve şirket içi VHD 'yi karşıya yükleyerek yeni bir VM 'ye ekleyebilirsiniz. VHD 'yi bir depolama hesabına yüklemek için PowerShell veya başka bir aracı kullanın ve ardından VHD 'den yönetilen bir disk oluşturursunuz. Daha fazla bilgi için bkz. [Özel BIR VHD 'Yi karşıya yükleme](create-vm-specialized.md#option-2-upload-a-specialized-vhd). 
 
-Birden çok VM oluşturmak istiyorsanız özel bir disk kullanmayın. Bunun yerine, daha büyük dağıtımlar için [görüntü oluşturma](capture-image-resource.md) ardından [birden çok VM oluşturmak için bu görüntüyü kullanan](create-vm-generalized-managed.md).
+Birden çok VM oluşturmak istiyorsanız özel bir disk kullanmayın. Bunun yerine, daha büyük dağıtımlar için [bir görüntü oluşturun](capture-image-resource.md) ve ardından [Bu görüntüyü kullanarak birden çok VM oluşturun](create-vm-generalized-managed.md).
 
+Tek bir anlık görüntü veya VHD 'den 20 VM 'ye eş zamanlı dağıtım sayısını sınırlamanızı öneririz. 
 
-## <a name="copy-a-disk"></a>Bir diski kopyalayın
+## <a name="copy-a-disk"></a>Disk kopyalama
 
-Anlık görüntü oluşturma ve bir disk anlık görüntüden oluşturun. Bu strateji, bir geri dönüş olarak özgün VHD tutmanızı sağlar:
+Anlık görüntü oluşturun ve ardından anlık görüntüden bir disk oluşturun. Bu strateji, özgün VHD 'YI geri dönüş olarak tutmanızı sağlar:
 
-1. Gelen [Azure portalında](https://portal.azure.com), sol menüsünde **tüm hizmetleri**.
-2. İçinde **tüm hizmetleri** girin, arama kutusuna **diskleri** seçip **diskleri** kullanılabilir disklerin listesini görüntülemek için.
-3. Kullanmak istediğiniz diski seçin. **Disk** görünür bu diskin sayfası.
-4. Üstteki menüden **oluşturma anlık görüntüsü**. 
-5. Girin bir **adı** anlık görüntü.
-6. Seçin bir **kaynak grubu** anlık görüntü. Bir ya da bir mevcut kaynak grubunu kullanın veya yeni bir tane oluşturun.
-7. İçin **hesap türü**, seçin ya da **standart (HDD)** veya **Premium (SSD)** depolama.
-8. İşiniz bittiğinde **Oluştur** anlık görüntüsünü oluşturmak için.
-9. Anlık görüntü oluşturulduktan sonra seçin **kaynak Oluştur** soldaki menüde.
-10. Arama kutusuna **yönetilen disk** seçip **yönetilen diskler** listeden.
-11. Üzerinde **yönetilen diskler** sayfasında **Oluştur**.
-12. Girin bir **adı** disk için.
-13. Seçin bir **kaynak grubu** disk için. Bir ya da bir mevcut kaynak grubunu kullanın veya yeni bir tane oluşturun. Bu seçim, burada diskten VM oluşturma kaynak grubu olarak da kullanılır.
-14. İçin **hesap türü**, seçin ya da **standart (HDD)** veya **Premium (SSD)** depolama.
-15. İçinde **kaynak türünü**, olun **anlık görüntü** seçilir.
-16. İçinde **kaynak anlık görüntüsü** açılan listesinde, kullanmak istediğiniz bir anlık görüntü seçin.
-17. Gerektiği gibi diğer ayarlamaları yapın ve ardından **Oluştur** disk oluşturmak için.
+1. [Azure Portal](https://portal.azure.com), sol taraftaki menüden **tüm hizmetler**' i seçin.
+2. **Tüm hizmetler** arama kutusunda, **diskler** ' i girip, ardından **diskler** ' i seçerek kullanılabilir disklerin listesini görüntüleyin.
+3. Kullanmak istediğiniz diski seçin. Bu diskin **disk** sayfası görüntülenir.
+4. Üstteki menüden **anlık görüntü oluştur**' u seçin. 
+5. Anlık görüntü için bir **ad** girin.
+6. Anlık görüntü için bir **kaynak grubu** seçin. Var olan bir kaynak grubunu kullanabilir ya da yeni bir tane oluşturabilirsiniz.
+7. **Hesap türü**için **Standart (HDD)** veya **Premium (SSD)** depolamayı seçin.
+8. İşiniz bittiğinde, anlık görüntüyü oluşturmak için **Oluştur** ' u seçin.
+9. Anlık görüntü oluşturulduktan sonra sol menüden **kaynak oluştur** ' u seçin.
+10. Arama kutusuna **yönetilen disk** girin ve ardından listeden **yönetilen diskler** ' i seçin.
+11. **Yönetilen diskler** sayfasında **Oluştur**' u seçin.
+12. Disk için bir **ad** girin.
+13. Disk için bir **kaynak grubu** seçin. Var olan bir kaynak grubunu kullanabilir ya da yeni bir tane oluşturabilirsiniz. Bu seçim, VM 'yi diskten oluşturduğunuz kaynak grubu olarak da kullanılacaktır.
+14. **Hesap türü**için **Standart (HDD)** veya **Premium (SSD)** depolamayı seçin.
+15. **Kaynak türü**' nde **anlık görüntünün** seçili olduğundan emin olun.
+16. **Kaynak anlık görüntü** açılır penceresinde, kullanmak istediğiniz anlık görüntüyü seçin.
+17. Gerektiğinde diğer ayarlamaları yapın ve sonra diski oluşturmak için **Oluştur** ' u seçin.
 
-## <a name="create-a-vm-from-a-disk"></a>Bir diskten VM oluşturma
+## <a name="create-a-vm-from-a-disk"></a>Diskten VM oluşturma
 
-Yönetilen disk kullanmak istediğiniz VHD'yi oluşturduktan sonra portalda VM oluşturabilirsiniz:
+Kullanmak istediğiniz yönetilen disk VHD 'sine sahip olduktan sonra, portalda VM 'yi oluşturabilirsiniz:
 
-1. Gelen [Azure portalında](https://portal.azure.com), sol menüsünde **tüm hizmetleri**.
-2. İçinde **tüm hizmetleri** girin, arama kutusuna **diskleri** seçip **diskleri** kullanılabilir disklerin listesini görüntülemek için.
-3. Kullanmak istediğiniz diski seçin. **Disk** sayfası bu diski açılır.
-4. İçinde **genel bakış** sayfasında **DISK durumu** olarak listelenen **eklenmemiş**. Aksi takdirde, diski sanal makineden çıkarın veya diskte boşaltmak için VM'yi silin gerekebilir.
-4. Sayfanın üst kısmındaki menüde **VM Oluştur**.
-5. Üzerinde **Temelleri** sayfasında yeni VM için girin bir **sanal makine adı** seçip ya da mevcut bir **kaynak grubu** veya yeni bir tane oluşturun.
-6. İçin **boyutu**seçin **değiştirme boyutu** erişimi **boyutu** sayfası.
-7. Bir VM boyutu satırı seçin ve ardından **seçin**.
-8. Üzerinde **ağ** sayfasında, tüm yeni kaynaklar oluşturan portal ya da izin veya mevcut bir seçebilirsiniz **sanal ağ** ve **ağ güvenlik grubu**. Portal her zaman yeni bir VM için yeni ağ arabirimi ve genel IP adresi oluşturur. 
-9. Üzerinde **Yönetim** sayfasında, herhangi bir değişiklik izleme seçenekleri.
-10. Üzerinde **Konuk config** sayfasında, tüm uzantıları gerektiği gibi ekleyin.
-11. İşiniz bittiğinde **gözden geçir + Oluştur**. 
-12. VM yapılandırması doğrulama testlerini geçerse, seçin **Oluştur** dağıtımı başlatmak için.
+1. [Azure Portal](https://portal.azure.com), sol taraftaki menüden **tüm hizmetler**' i seçin.
+2. **Tüm hizmetler** arama kutusunda, **diskler** ' i girip, ardından **diskler** ' i seçerek kullanılabilir disklerin listesini görüntüleyin.
+3. Kullanmak istediğiniz diski seçin. Bu diskin **disk** sayfası açılır.
+4. **Genel bakış** sayfasında, **DISK durumunun** **eklenmemiş**olarak listelendiğinden emin olun. Değilse, diski VM 'den ayırmanız ya da diski boşaltmak için VM 'yi silmeniz gerekebilir.
+4. Sayfanın üst kısmındaki menüde **VM oluştur**' u seçin.
+5. Yeni VM 'nin **temel bilgiler** sayfasında, bir **sanal makine adı** girin ve var olan bir **kaynak grubunu** seçin ya da yeni bir tane oluşturun.
+6. Boyut **için** **Boyut sayfasına erişmek üzere boyutu** **Değiştir** ' i seçin.
+7. Bir VM boyutu satırı seçip **Seç**' i seçin.
+8. **Ağ** sayfasında, portalın tüm yeni kaynaklar oluşturmasına izin verebilir veya var olan bir **sanal ağ** ve **ağ güvenlik grubunu**seçebilirsiniz. Portal, yeni VM için her zaman yeni bir ağ arabirimi ve genel IP adresi oluşturur. 
+9. **Yönetim** sayfasında, izleme seçeneklerinde tüm değişiklikleri yapın.
+10. **Konuk yapılandırması** sayfasında, gereken tüm uzantıları ekleyin.
+11. İşiniz bittiğinde, **gözden geçir + oluştur**' u seçin. 
+12. VM yapılandırması doğrulamayı geçerse, dağıtımı başlatmak için **Oluştur** ' u seçin.
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-PowerShell de kullanabilirsiniz [özel bir VM oluşturma ve Azure'a VHD yükleme](create-vm-specialized.md).
+Ayrıca, PowerShell kullanarak [BIR VHD 'Yi Azure 'a yükleyebilir ve özelleştirilmiş bir sanal makine oluşturabilirsiniz](create-vm-specialized.md).
 
 

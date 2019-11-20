@@ -4,16 +4,16 @@ ms.service: data-factory
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: jingwang
-ms.openlocfilehash: a2858ac73838b50c21a76db5860675171a306192
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 12c2f1bd2a3185d26eae02b5cd756392b5b87c16
+ms.sourcegitcommit: 6eecb9a71f8d69851bc962e2751971fccf29557f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188840"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72533191"
 ---
 ## <a name="create-a-self-hosted-integration-runtime"></a>Şirket içinde barındırılan tümleştirme çalışma zamanı oluşturma
 
-Bu bölümde, şirket içinde barındırılan bir tümleştirme çalışma zamanı oluşturur ve SQL Server veritabanını içeren bir şirket içi makine ile ilişkilendirirsiniz. Şirket içinde barındırılan tümleştirme çalışma zamanı, makinenizdeki SQL Server verilerini Azure Blob depolama alanına kopyalayan bileşendir. 
+Bu bölümde, şirket içinde barındırılan bir tümleştirme çalışma zamanı oluşturur ve SQL Server veritabanını içeren bir şirket içi makine ile ilişkilendirirsiniz. Şirket içinde barındırılan tümleştirme çalışma zamanı, makinenizdeki SQL Server verileri Azure SQL veritabanı 'na kopyalayan bileşendir. 
 
 1. Tümleştirme çalışma zamanının adı için bir değişken oluşturun. Benzersiz bir ad kullanın ve not edin. Daha sonra bu öğreticide kullanacaksınız. 
 
@@ -29,12 +29,12 @@ Bu bölümde, şirket içinde barındırılan bir tümleştirme çalışma zaman
    Örnek çıktı aşağıdaki gibidir:
 
    ```json
-    Id                : /subscriptions/<subscription ID>/resourceGroups/ADFTutorialResourceGroup/providers/Microsoft.DataFactory/factories/onpremdf0914/integrationruntimes/myonpremirsp0914
+    Name              : <Integration Runtime name>
     Type              : SelfHosted
-    ResourceGroupName : ADFTutorialResourceGroup
-    DataFactoryName   : onpremdf0914
-    Name              : myonpremirsp0914
-    Description       :
+    ResourceGroupName : <ResourceGroupName>
+    DataFactoryName   : <DataFactoryName>
+    Description       : 
+    Id                : /subscriptions/<subscription ID>/resourceGroups/<ResourceGroupName>/providers/Microsoft.DataFactory/factories/<DataFactoryName>/integrationruntimes/ADFTutorialIR
     ```
   
 3. Oluşturulan tümleştirme çalışma zamanının durumunu almak için aşağıdaki komutu çalıştırın. **Durum** özelliği değerinin **NeedRegistration** olarak ayarlı olduğunu onaylayın. 
@@ -45,21 +45,25 @@ Bu bölümde, şirket içinde barındırılan bir tümleştirme çalışma zaman
 
    Örnek çıktı aşağıdaki gibidir:
 
-   ```json
-   Nodes                     : {}
-   CreateTime                : 9/14/2017 10:01:21 AM
-   InternalChannelEncryption :
-   Version                   :
+   ```json  
+   State                     : NeedRegistration
+   Version                   : 
+   CreateTime                : 9/24/2019 6:00:00 AM
+   AutoUpdate                : On
+   ScheduledUpdateDate       : 
+   UpdateDelayOffset         : 
+   LocalTimeZoneOffset       : 
+   InternalChannelEncryption : 
    Capabilities              : {}
-   ScheduledUpdateDate       :
-   UpdateDelayOffset         :
-   LocalTimeZoneOffset       :
-   AutoUpdate                :
-   ServiceUrls               : {eu.frontend.clouddatahub.net, *.servicebus.windows.net}
+   ServiceUrls               : {eu.frontend.clouddatahub.net}
+   Nodes                     : {}
+   Links                     : {}
+   Name                      : ADFTutorialIR
+   Type                      : SelfHosted
    ResourceGroupName         : <ResourceGroup name>
    DataFactoryName           : <DataFactory name>
-   Name                      : <Integration Runtime name>
-   State                     : NeedRegistration
+   Description               : 
+   Id                        : /subscriptions/<subscription ID>/resourceGroups/<ResourceGroup name>/providers/Microsoft.DataFactory/factories/<DataFactory name>/integrationruntimes/<Integration Runtime name>
    ```
 
 4. Şirket içinde barındırılan tümleştirme çalışma zamanını bulutta Data Factory hizmetine kaydetmek üzere kimlik doğrulaması anahtarlarını almak için aşağıdaki komutu çalıştırın: 
@@ -72,8 +76,8 @@ Bu bölümde, şirket içinde barındırılan bir tümleştirme çalışma zaman
 
    ```json
    {
-       "AuthKey1":  "IR@0000000000-0000-0000-0000-000000000000@xy0@xy@xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=",
-       "AuthKey2":  "IR@0000000000-0000-0000-0000-000000000000@xy0@xy@yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy="
+    "AuthKey1": "IR@0000000000-0000-0000-0000-000000000000@xy0@xy@xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=",
+    "AuthKey2":  "IR@0000000000-0000-0000-0000-000000000000@xy0@xy@yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy="
    }
    ```    
 
@@ -92,27 +96,17 @@ Bu bölümde, şirket içinde barındırılan bir tümleştirme çalışma zaman
 
 6. **Microsoft Integration Runtime yüklenmeye hazır** sayfasında **Yükle**'yi seçin.
 
-7. Bilgisayarın kullanılmadığında uyku veya hazırda bekleme moduna geçecek şekilde yapılandırıldığını bildiren bir uyarı iletisi görürseniz **Tamam**'ı seçin.
+7. **Microsoft Integration Runtime Kurulumu Tamamlandı** sayfasında **Son**'u seçin.
 
-8. **Güç Seçenekleri** sayfasını görürseniz kapatın ve kurulum sayfasına geçin.
-
-9. **Microsoft Integration Runtime Kurulumu Tamamlandı** sayfasında **Son**'u seçin.
-
-10. **Integration Runtime’ı (Şirket içinde barındırılan) Kaydet** sayfasında, önceki bölümde kaydettiğiniz anahtarı yapıştırın ve **Kaydol**'u seçin. 
+8. **Integration Runtime’ı (Şirket içinde barındırılan) Kaydet** sayfasında, önceki bölümde kaydettiğiniz anahtarı yapıştırın ve **Kaydol**'u seçin. 
 
     ![Tümleştirme çalışma zamanını kaydetme](media/data-factory-create-install-integration-runtime/register-integration-runtime.png)
 
-11. Şirket içinde barındırılan tümleştirme çalışma zamanı başarıyla kaydedildiğinde aşağıdaki iletiyi görürsünüz:
+9. **Yeni Integration Runtime (Şirket içinde barındırılan) düğümü** sayfasında **son**' u seçin. 
+
+10. Şirket içinde barındırılan tümleştirme çalışma zamanı başarıyla kaydedildiğinde aşağıdaki iletiyi görürsünüz:
 
     ![Başarıyla kaydedildi](media/data-factory-create-install-integration-runtime/registered-successfully.png)
-
-12. **Yeni Integration Runtime (Şirket içinde barındırılan) Düğümü** sayfasında **İleri**'yi seçin. 
-
-    ![Yeni Tümleştirme Çalışma Zamanı Düğümü sayfası](media/data-factory-create-install-integration-runtime/new-integration-runtime-node-page.png)
-
-13. **İntranet İletişim Kanalı** sayfasında **Atla**'yı seçin. Çok düğümlü bir tümleştirme çalışma zamanı ortamında düğüm içi iletişimin güvenliğini sağlamak için bir TLS/SSL sertifikası seçin. 
-
-    ![İntranet İletişim Kanalı Sayfası](media/data-factory-create-install-integration-runtime/intranet-communication-channel-page.png)
 
 14. **Integration Runtime’ı (Şirket içinde barındırılan) Kaydet** sayfasında **Configuration Manager'ı Başlat**'ı seçin.
 
@@ -136,7 +130,7 @@ Bu bölümde, şirket içinde barındırılan bir tümleştirme çalışma zaman
 
     f. Kullanıcı adını girin.
 
-    g. Kullanıcı adı için parola girin.
+    g. Kullanıcı adı için ile ilişkili parolayı girin.
 
     h. Tümleştirme çalışma zamanının SQL Server’a bağlanabildiğini onaylamak için **Test**’i seçin. Bağlantı başarılı olursa yeşil bir onay işareti görürsünüz. Bağlantı başarılı olmazsa bir hata iletisi görürsünüz. Sorunları giderin ve tümleştirme çalışma zamanının SQL Server’a bağlanabildiğinden emin olun.    
 

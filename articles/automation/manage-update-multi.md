@@ -1,6 +1,6 @@
 ---
 title: Birden fazla Azure sanal makinesi için güncelleştirmeleri yönetme
-description: Bu makalede, Azure sanal makinesi için güncelleştirmeleri yönetme açıklar.
+description: Bu makalede, Azure sanal makineleri için güncelleştirmelerin nasıl yönetileceği açıklanır.
 services: automation
 ms.service: automation
 ms.subservice: update-management
@@ -9,85 +9,85 @@ ms.author: robreed
 ms.date: 04/02/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 0a4990673479c913777a5a7c410460d3d3b31264
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 367a4409c004c98cc4b5ec844aab5b05ec74abcb
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67478328"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72374505"
 ---
 # <a name="manage-updates-for-multiple-machines"></a>Birden çok makine için güncelleştirmeleri yönetme
 
-Güncelleştirme yönetimi çözümü, Windows ve Linux sanal makineleriniz için güncelleştirme ve düzeltme eklerini yönetmek için kullanabilirsiniz. [Azure Otomasyonu](automation-offering-get-started.md) hesabınızdan şunları yapabilirsiniz:
+Windows ve Linux sanal makineleriniz için güncelleştirmeleri ve yamaları yönetmek üzere Güncelleştirme Yönetimi çözümünü kullanabilirsiniz. [Azure Otomasyonu](automation-offering-get-started.md) hesabınızdan şunları yapabilirsiniz:
 
-- Sanal makine ekleme
-- Kullanılabilir güncelleştirmelerin durumunu değerlendirebilir
-- Gerekli güncelleştirmelerin yüklemesini zamanlayabilir
-- Güncelleştirme yönetimi etkin olduğu tüm sanal makineleri için güncelleştirmelerin başarıyla uygulandığını doğrulamak için dağıtım sonuçlarını gözden geçirin
+- Yerleşik sanal makineler
+- Kullanılabilir güncelleştirmelerin durumunu değerlendirin
+- Gerekli güncelleştirmelerin yüklemesini zamanla
+- Güncelleştirmelerin Güncelleştirme Yönetimi etkinleştirildiği tüm sanal makinelere başarıyla uygulandığını doğrulamak için dağıtım sonuçlarını gözden geçirin
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Güncelleştirme yönetimini kullanmak için gerekir:
+Güncelleştirme Yönetimi kullanmak için şunlar gerekir:
 
 - Desteklenen işletim sistemlerinden birinin yüklü olduğu bir sanal makine veya bilgisayar.
 
 ## <a name="supported-operating-systems"></a>Desteklenen işletim sistemleri
 
-Güncelleştirme yönetimi aşağıdaki işletim sistemlerinde desteklenir:
+Güncelleştirme Yönetimi aşağıdaki işletim sistemlerinde desteklenir:
 
 |İşletim sistemi  |Notlar  |
 |---------|---------|
-|Windows Server 2008, Windows Server 2008 R2 RTM    | Destekler, yalnızca değerlendirme güncelleştirin.         |
-|Windows Server 2008 R2 SP1 ve üzeri     |Windows PowerShell 4.0 veya üzeri gereklidir. ([WMF 4.0 indirme](https://www.microsoft.com/download/details.aspx?id=40855))</br> Windows PowerShell 5.1, daha fazla güvenilirlik için önerilir. ([İndirme WMF 5.1](https://www.microsoft.com/download/details.aspx?id=54616))         |
+|Windows Server 2008, Windows Server 2008 R2 RTM    | Yalnızca güncelleştirme değerlendirmelerini destekler.         |
+|Windows Server 2008 R2 SP1 ve üzeri     |Windows PowerShell 4,0 veya üzeri gereklidir. ([WMF 4,0 indirin](https://www.microsoft.com/download/details.aspx?id=40855))</br> Windows PowerShell 5,1, daha fazla güvenilirlik için önerilir. ([WMF 5,1 indirin](https://www.microsoft.com/download/details.aspx?id=54616))         |
 |CentOS 6 (x86/x64) ve 7 (x64)      | Linux aracılarının bir güncelleştirme havuzuna erişimi olmalıdır.        |
 |Red Hat Enterprise 6 (x86/x64) ve 7 (x64)     | Linux aracılarının bir güncelleştirme havuzuna erişimi olmalıdır.        |
 |SUSE Linux Enterprise Server 11 (x86/x64) ve 12 (x64)     | Linux aracılarının bir güncelleştirme havuzuna erişimi olmalıdır.        |
-|Ubuntu 14.04 LTS, 16.04 LTS ve 18.04 LTS (x86/x64)      |Linux aracılarının bir güncelleştirme havuzuna erişimi olmalıdır.         |
+|Ubuntu 14,04 LTS, 16,04 LTS ve 18,04 LTS (x86/x64)      |Linux aracılarının bir güncelleştirme havuzuna erişimi olmalıdır.         |
 
 > [!NOTE]
 > Güncelleştirmelerin Ubuntu'daki bakım penceresinin dışında uygulanmasının önüne geçmek için Katılımsız Yükseltme paketini otomatik güncelleştirmeler devre dışı bırakılacak şekilden yeniden yapılandırın. Daha fazla bilgi için bkz. [Ubuntu Server Kılavuzu'ndaki Otomatik Güncelleştirmeler konu başlığı](https://help.ubuntu.com/lts/serverguide/automatic-updates.html).
 
 Linux aracılarının bir güncelleştirme havuzuna erişimi olmalıdır.
 
-Bu çözüm, birden çok Azure Log Analytics çalışma alanı için rapor için yapılandırılmış Linux için Log Analytics aracısını desteklemez.
+Bu çözüm, birden çok Azure Log Analytics çalışma alanına raporlamak üzere yapılandırılmış Linux için Log Analytics aracısını desteklemez.
 
-## <a name="enable-update-management-for-azure-virtual-machines"></a>Azure sanal makineler için güncelleştirme yönetimini etkinleştirme
+## <a name="enable-update-management-for-azure-virtual-machines"></a>Azure sanal makineleri için Güncelleştirme Yönetimi etkinleştirme
 
-Azure portalında Otomasyon hesabınızı açın ve ardından **güncelleştirme yönetimi**.
+Azure portal Otomasyon hesabınızı açın ve **güncelleştirme yönetimi**' ni seçin.
 
-Seçin **Azure Vm'leri Ekle**.
+**Azure VM 'Leri Ekle**' yi seçin.
 
-![Azure VM Ekle sekmesi](./media/manage-update-multi/update-onboard-vm.png)
+![Azure VM sekmesi Ekle](./media/manage-update-multi/update-onboard-vm.png)
 
-Eklemek için bir sanal makine seçin. 
+Eklemek için bir sanal makine seçin.
 
-Altında **güncelleştirme yönetimini etkinleştirme**seçin **etkinleştirme** eklemek için sanal makine.
+**Güncelleştirme yönetimi etkinleştir**altında, sanal makineyi eklemek için **Etkinleştir** ' i seçin.
 
 ![Güncelleştirme Yönetimini Etkinleştir iletişim kutusu](./media/manage-update-multi/update-enable.png)
 
-Güncelleştirme yönetimi, onboarding tamamlandığında, sanal makineniz için etkinleştirilir.
+Ekleme tamamlandığında, sanal makineniz için Güncelleştirme Yönetimi etkinleştirilir.
 
-## <a name="enable-update-management-for-non-azure-virtual-machines-and-computers"></a>Azure olmayan sanal makineler ve bilgisayarlar için güncelleştirme yönetimini etkinleştirme
+## <a name="enable-update-management-for-non-azure-virtual-machines-and-computers"></a>Azure olmayan sanal makineler ve bilgisayarlar için Güncelleştirme Yönetimi etkinleştirme
 
-Azure Windows sanal makineleri ve bilgisayarlar için güncelleştirme yönetimini etkinleştirme hakkında bilgi için bkz: [azure'da Azure İzleyici'hizmetine bağlanmak için Windows bilgisayarları](../log-analytics/log-analytics-windows-agent.md).
+Azure olmayan Windows sanal makineleri ve bilgisayarları için Güncelleştirme Yönetimi etkinleştirmeyi öğrenmek için bkz. [Azure 'Da Windows bilgisayarlarını Azure izleyici hizmetine bağlama](../log-analytics/log-analytics-windows-agent.md).
 
-Azure olmayan Linux sanal makineleri ve bilgisayarlar için güncelleştirme yönetimini etkinleştirme hakkında bilgi için bkz: [azure'da Linux bilgisayarlarını Azure İzleyici günlüklerine bağlama](../log-analytics/log-analytics-agent-linux.md).
+Azure olmayan Linux sanal makineleri ve bilgisayarları için Güncelleştirme Yönetimi etkinleştirmeyi öğrenmek için bkz. [Linux bilgisayarlarınızı Azure izleyici günlüklerine bağlama](../log-analytics/log-analytics-agent-linux.md).
 
 ## <a name="view-computers-attached-to-your-automation-account"></a>Otomasyon hesabınıza bağlı bilgisayarları görüntüleme
 
-Makineleriniz için güncelleştirme yönetimini etkinleştirdikten sonra seçerek makine bilgilerini görüntüleyebilirsiniz **bilgisayarlar**. Bilgi bulabilirsiniz *makine adı*, *uyumluluk durumu*, *ortam*, *işletim sistemi türü*, *kritik ve güvenlik güncelleştirmeleri yüklü*, *diğer güncelleştirmelerin yüklü*, ve *Güncelleştirme Aracısı hazırlığı* bilgisayarlarınız için.
+Makineleriniz için Güncelleştirme Yönetimi etkinleştirdikten sonra **bilgisayarlar**' ı seçerek makine bilgilerini görebilirsiniz. *Makinenizde makine adı*, *uyumluluk durumu*, *ortam*, *işletim sistemi türü*, *kritik güncelleştirmeler ve güvenlik güncelleştirmeleri*, *yüklü diğer güncelleştirmeler*ve *Güncelleştirme Aracısı hazırlığı* hakkında bilgi alabilirsiniz: bilgisayarlar.
 
   ![Bilgisayarları görüntüle sekmesi](./media/manage-update-multi/update-computers-tab.png)
 
-Güncelleştirme yönetimi için yakın zamanda etkinleştirilmiş bilgisayarlar henüz değerlendirilmemiş değil. Bu bilgisayarların uyumluluk durumu durumu **değerlendirilmeyen**. Uyumluluk durumu için olası değerler listesi aşağıda verilmiştir:
+Güncelleştirme Yönetimi için yakın zamanda etkinleştirilen bilgisayarlar henüz değerlendirilemeyebilir. Bu bilgisayarların uyumluluk durumu durumu **değerlendirilmez**. Uyumluluk durumu için olası değerlerin bir listesi aşağıda verilmiştir:
 
-- **Uyumlu**: Eksik kritik güncelleştirmeleri veya güvenlik güncelleştirmeleri olan bilgisayarlar.
+- **Uyumlu**: eksik kritik veya güvenlik güncelleştirmeleri olmayan bilgisayarlar.
 
-- **Uyumlu olmayan**: En az bir kritik veya güvenlik eksik olan bilgisayarlar güncelleştirin.
+- **Uyumlu değil**: en az bir kritik veya güvenlik güncelleştirmesi eksik olan bilgisayarlar.
 
-- **Değerlendirilmedi**: Güncelleştirme Değerlendirme verileri beklenen zaman çerçevesi içinde bilgisayardan alınan edilmemiş. Linux bilgisayarlar için beklenen zaman çerçevesi içinde son saattir. Windows bilgisayarlar, son 12 saat içinde beklenen zaman çerçevesi içindir.
+- **Değerlendirilmedi**: güncelleştirme değerlendirmesi verileri bilgisayardan beklenen zaman çerçevesi içinde alınmadı. Linux bilgisayarları için beklenen zaman dilimi son saat içinde olur. Windows bilgisayarları için beklenen zaman dilimi son 12 saat içinde olur.
 
-Aracı durumunu görüntülemek için bağlantıyı seçin **güncelleştirme ARACISI hazırlığı** sütun. Bu seçeneğin belirlenmesi açılır **karma çalışanı** bölmesinde ve karma çalışanı durumunu gösterir. Aşağıdaki görüntüde, uzun bir süre için güncelleştirme yönetimini üzere bağlanmamış bir aracı örneği gösterilmektedir:
+Aracının durumunu görüntülemek için, **GÜNCELLEŞTIRME ARACıSı hazırlığı** sütunundaki bağlantıyı seçin. Bu seçeneğin belirlenmesi **karma çalışanı** bölmesini açar ve karma çalışanın durumunu gösterir. Aşağıdaki görüntüde, uzun bir süre Güncelleştirme Yönetimi bağlı olmayan bir aracının örneği gösterilmektedir:
 
 ![Bilgisayarları görüntüle sekmesi](./media/manage-update-multi/update-agent-broken.png)
 
@@ -97,7 +97,7 @@ Güncelleştirme Yönetimi etkinleştirildikten sonra **Güncelleştirme yöneti
 
 ## <a name="collect-data"></a>Veri toplama
 
-Sanal makine ve bilgisayarlarda yüklü aracılar, güncelleştirmelerle ilgili verileri toplar. Aracılar, verileri Azure güncelleştirme yönetimine gönderir.
+Sanal makinelere ve bilgisayarlara yüklenen aracılar güncelleştirmeler hakkında veri toplar. Aracılar, verileri Azure Güncelleştirme Yönetimi 'a gönderir.
 
 ### <a name="supported-agents"></a>Desteklenen aracılar
 
@@ -105,37 +105,37 @@ Aşağıdaki tabloda bu çözüm tarafından desteklenen bağlı kaynaklar açı
 
 | Bağlı kaynak | Desteklenen | Açıklama |
 | --- | --- | --- |
-| Windows aracıları |Evet |Güncelleştirme yönetimi, Windows aracılarından sistem güncelleştirme bilgilerini toplar ve ardından gerekli güncelleştirmelerin yüklemesini başlatır. |
-| Linux aracıları |Evet |Güncelleştirme yönetimi, Linux aracılarından sistem güncelleştirme bilgilerini toplar ve ardından desteklenen dağıtımlarda gerekli güncelleştirmelerin yüklemesini başlatır. |
-| Operations Manager yönetim grubu |Evet |Güncelleştirme yönetimi, bağlı Yönetim grubundaki aracılardan sistem güncelleştirmeleri hakkında bilgi toplar. |
-| Azure Storage hesabı |Hayır |Azure depolama, sistem güncelleştirme bilgilerini içermez. |
+| Windows aracıları |Yes |Güncelleştirme Yönetimi, Windows aracılarından sistem güncelleştirmeleri hakkında bilgi toplar ve gerekli güncelleştirmelerin yüklemesini başlatır. |
+| Linux aracıları |Yes |Güncelleştirme Yönetimi, Linux aracılarından sistem güncelleştirmeleri hakkında bilgi toplar ve desteklenen dağıtımlarda gerekli güncelleştirmelerin yüklemesini başlatır. |
+| Operations Manager yönetim grubu |Yes |Güncelleştirme Yönetimi bağlı bir yönetim grubundaki aracılardan sistem güncelleştirmeleri hakkında bilgi toplar. |
+| Azure Storage hesabı |Hayır |Azure depolama, sistem güncelleştirmeleriyle ilgili bilgiler içermez. |
 
 ### <a name="collection-frequency"></a>Toplama sıklığı
 
-Bilgisayar güncelleştirme uyumluluğu taraması tamamlandıktan sonra aracısı bilgileri toplu Azure İzleyici günlüklerine iletir. Bir Windows bilgisayarda Uyumluluk taraması varsayılan olarak her 12 saatte bir çalıştırılır.
+Bir bilgisayar güncelleştirme uyumluluğu taramasını tamamladıktan sonra, aracı bilgileri toplu olarak Azure Izleyici günlüklerine iletir. Bir Windows bilgisayarda, uyumluluk taraması varsayılan olarak her 12 saatte bir çalıştırılır.
 
-Tarama zamanlamasına ek olarak, güncelleştirme yüklemesi öncesinde ve güncelleştirme yüklemesi sonrasında yeniden başlatılmadan MMA 15 dakika içinde güncelleştirme uyumluluğu için tarama başlatılır.
+Tarama zamanlamasının yanı sıra, güncelleştirme uyumluluğuna yönelik tarama, güncelleştirme yüklemesinden önce ve güncelleştirme yüklemesinden sonra, 15 dakika içinde başlatılır.
 
-Bir Linux bilgisayar için Uyumluluk taraması varsayılan olarak her saat başı gerçekleştirilir. MMA aracısını yeniden başlatılması durumunda 15 dakika içinde Uyumluluk taraması başlatılır.
+Bir Linux bilgisayar için, uyumluluk taraması varsayılan olarak saatte bir gerçekleştirilir. MMA Aracısı yeniden başlatılırsa, 15 dakika içinde bir uyumluluk taraması başlatılır.
 
-30 dakika ve Panoda yönetilen bilgisayarlardan gelen güncelleştirilmiş verilerin görüntülenmesi için 6 saat arasında sürebilir.
+Panonun yönetilen bilgisayarlardan güncelleştirilmiş verileri görüntülemesi 30 dakika ile 6 saat arasında sürebilir.
 
 ## <a name="schedule-an-update-deployment"></a>Güncelleştirme dağıtımı zamanlama
 
-Güncelleştirmeleri yüklemek için yayın zamanlamanızı ve hizmet pencerenizi ile hizalar bir dağıtım zamanlayın. Dağıtıma hangi güncelleştirme türlerinin dahil edileceğini seçebilirsiniz. Örneğin, kritik güncelleştirmeleri veya güvenlik güncelleştirmelerini dahil edip güncelleştirme paketlerini dışlayabilirsiniz.
+Güncelleştirmeleri yüklemek için, sürüm zamanlamanız ve hizmet pencerenize göre hizalanan bir dağıtım zamanlayın. Dağıtıma hangi güncelleştirme türlerinin dahil edileceğini seçebilirsiniz. Örneğin, kritik güncelleştirmeleri veya güvenlik güncelleştirmelerini dahil edip güncelleştirme paketlerini dışlayabilirsiniz.
 
-Altında bir veya daha fazla sanal makineler için yeni bir güncelleştirme dağıtımı zamanlama **güncelleştirme yönetimi**seçin **güncelleştirme dağıtımı zamanla**.
+Bir veya daha fazla sanal makine için yeni bir güncelleştirme dağıtımı zamanlamak için, **güncelleştirme yönetimi**altında **güncelleştirme dağıtımı zamanla**' yı seçin.
 
-İçinde **yeni güncelleştirme dağıtım** bölmesinde aşağıdaki bilgileri belirtin:
+**Yeni güncelleştirme dağıtımı** bölmesinde aşağıdaki bilgileri belirtin:
 
-- **Ad**: Güncelleştirme dağıtımını tanımlamak için benzersiz bir ad girin.
-- **İşletim sistemi**: Seçin **Windows** veya **Linux**.
-- **(Önizleme) güncelleştirmek için grupları**: Abonelik, kaynak grupları, konumları ve etiketleri, dağıtımınızdaki dahil etmek için Azure vm'leri dinamik bir grup oluşturmak için bir birleşimini temel bir sorgu tanımlarsınız. Daha fazla bilgi edinmek için bkz. [Dinamik Gruplar](automation-update-management.md#using-dynamic-groups)
-- **Güncelleştirilecek makineler**: Kayıtlı arama, içeri aktarılan grubu veya güncelleştirmek istediğiniz makineleri seçin için makineleri seçin. **Makineler**'i seçerseniz makinenin hazır olma durumu **GÜNCELLEŞTİRME ARACISI HAZIRLIĞI** sütununda gösterilir. Güncelleştirme dağıtımı zamanlayabilirsiniz önce bilgisayarın sistem durumunu görebilirsiniz. Azure İzleyici günlüklerine bilgisayar grupları oluşturma farklı yöntemleri hakkında bilgi edinmek için bkz: [Azure İzleyici günlüklerine bilgisayar grupları](../azure-monitor/platform/computer-groups.md)
+- **Ad**: güncelleştirme dağıtımını tanımlamak için benzersiz bir ad girin.
+- **İşletim sistemi**: **Windows** veya **Linux**seçeneğini belirleyin.
+- **Güncelleştirilecek gruplar (önizleme)** : Dağıtımınıza dahil edilecek Azure sanal makinelerinin dinamik grubunu derlemek için bir abonelik, kaynak grupları, konumlar ve etiketler birleşimine göre bir sorgu tanımlayın. Daha fazla bilgi edinmek için bkz. [Dinamik Gruplar](automation-update-management-groups.md)
+- **Güncelleştirilecek makineler**: güncelleştirmek istediğiniz makineleri seçmek Için, kaydedilmiş bir arama, içeri aktarılan grup veya makine seçin ' i seçin. **Makineler**'i seçerseniz makinenin hazır olma durumu **GÜNCELLEŞTİRME ARACISI HAZIRLIĞI** sütununda gösterilir. Güncelleştirme dağıtımını zamanlamadan önce makinenin sistem durumunu görebilirsiniz. Azure Izleyici günlüklerinde bilgisayar grupları oluşturmaya yönelik farklı yöntemler hakkında bilgi edinmek için bkz. [Azure izleyici günlüklerinde bilgisayar grupları](../azure-monitor/platform/computer-groups.md)
 
   ![Yeni güncelleştirme dağıtım bölmesi](./media/manage-update-multi/update-select-computers.png)
 
-- **Güncelleştirme sınıflandırması**: Güncelleştirme dağıtımına dahil edilecek yazılım türlerini seçin. Sınıflandırma türleri açıklaması için bkz: [güncelleştirme sınıflandırmaları](automation-update-management.md#update-classifications). Sınıflandırma türleri şunlardır:
+- **Güncelleştirme sınıflandırması**: güncelleştirme dağıtımına dahil edilecek yazılım türlerini seçin. Sınıflandırma türlerinin açıklaması için bkz. [güncelleştirme sınıflandırmaları](automation-view-update-assessments.md#update-classifications). Sınıflandırma türleri şunlardır:
   - Kritik güncelleştirmeler
   - Güvenlik güncelleştirmeleri
   - Güncelleştirme paketleri
@@ -143,38 +143,38 @@ Altında bir veya daha fazla sanal makineler için yeni bir güncelleştirme da�
   - Hizmet paketleri
   - Tanım güncelleştirmeleri
   - Araçlar
-  - Güncelleştirmeler
+  - Güncellemeler
 
-- **Dahil edilecek/dışlanacak güncelleştirmeler** - Böylece **Dahil Et / Dışla** sayfası açılır. Dahil edilecek veya dışlanacak güncelleştirmeler ayrı sekmelerdedir. Dahil etmenin nasıl işleneceği hakkında ek bilgi için bkz. [dahil etme davranışı](automation-update-management.md#inclusion-behavior)
+- **Dahil edilecek/dışlanacak güncelleştirmeler** - Böylece **Dahil Et / Dışla** sayfası açılır. Dahil edilecek veya dışlanacak güncelleştirmeler ayrı sekmelerdedir. Ekleme hakkında daha fazla bilgi için bkz. [güncelleştirme dağıtımı zamanlama](automation-tutorial-update-management.md#schedule-an-update-deployment).
 
-- **Zamanlama ayarları**: Varsayılan tarih ve saat, 30 dakika sonrasını kabul edebilir. Farklı bir saat de belirtebilirsiniz.
+- **Zamanlama ayarları** - Geçerli saatten 30 dakika sonrası olan varsayılan tarih ve saati kabul edebilirsiniz. Ayrıca, farklı bir saat belirtebilirsiniz.
 
-   Ayrıca, dağıtımın bir kez veya yinelenen bir zamanlamaya göre gerçekleşeceğini belirtebilirsiniz. Yinelenen bir zamanlama ayarlamak altında için **yinelenme**seçin **yinelenen**.
+   Ayrıca, dağıtımın bir kez veya yinelenen bir zamanlamaya göre gerçekleşeceğini belirtebilirsiniz. Yinelenen bir zamanlama ayarlamak için **yinelenme**altında **yineleme**' yi seçin.
 
    ![Zamanlama Ayarları iletişim kutusu](./media/manage-update-multi/update-set-schedule.png)
 
-- **Önceden komutlar + sonrası betiklerini**: Önce ve sonra dağıtımınız betiklerin seçin. Daha fazla bilgi için bkz. [Ön ve Son betikleri yönetme](pre-post-scripts.md).
-- **Bakım penceresi (dakika)** : Güncelleştirme dağıtımının gerçekleşmesini istediğiniz süreyi belirtin. Bu ayar, değişikliklerin sizin tanımladığınız hizmet pencereleri içinde gerçekleştirilmesini sağlar.
+- **Ön betikler + Son betikler**: Dağıtımınızdan önce ve sonra çalıştırılacak betikleri seçin. Daha fazla bilgi için bkz. [Ön ve Son betikleri yönetme](pre-post-scripts.md).
+- **Bakım penceresi (dakika)** : güncelleştirme dağıtımının gerçekleşmesini istediğiniz süreyi belirtin. Bu ayar, değişikliklerin sizin tanımladığınız hizmet pencereleri içinde gerçekleştirilmesini sağlar.
 
-- **Denetim yeniden** -Bu ayar, yeniden başlatmalar güncelleştirme dağıtımı için nasıl işleneceğini belirler.
+- **Yeniden başlatma denetimi** -Bu ayar, güncelleştirme dağıtımı için yeniden başlatmalar nasıl işlendiğini belirler.
 
    |Seçenek|Açıklama|
    |---|---|
-   |Gerekirse yeniden başlatma| **(Varsayılan)**  Bakım penceresi izin veriyorsa yeniden başlatma gerekirse başlatılır.|
-   |Her zaman yeniden başlat|Yeniden başlatma, bir gerekip gerekmediğine bakılmaksızın başlatılır. |
-   |Hiçbir zaman yeniden başlatma|Bağımsız olarak, yeniden başlatma gerekirse yeniden başlatmalar görüntülenmez.|
-   |Yalnızca yeniden başlatma - güncelleştirmeleri yüklemez|Bu seçenek, güncelleştirmelerin yoksayar ve yalnızca yeniden başlatır.|
+   |Gerekirse yeniden Başlat| **(Varsayılan)** Gerekirse, bakım penceresi izin veriyorsa yeniden başlatma başlatılır.|
+   |Her zaman yeniden başlat|Bir yeniden başlatma, gerekli olup olmadığına bakılmaksızın başlatılır. |
+   |Hiçbir zaman yeniden başlatma|Yeniden başlatma gerekli olursa olsun, yeniden başlatmalar bastırılır.|
+   |Yalnızca yeniden başlatma - güncelleştirmeleri yüklemez|Bu seçenek güncelleştirmeleri yüklemeyi yoksayar ve yalnızca bir yeniden başlatma işlemi başlatır.|
 
-Zamanlamayı yapılandırmayı tamamladığınızda, seçin **Oluştur** düğmesi ve durum panosuna dönün. **Zamanlanmış** tablo oluşturduğunuz dağıtım zamanlaması gösterilir.
+Zamanlamayı yapılandırmayı tamamladığınızda, durum panosuna dönmek için **Oluştur** düğmesini seçin. **Zamanlanan** tablo, oluşturduğunuz dağıtım zamanlamasını gösterir.
 
 > [!NOTE]
-> Güncelleştirme Yönetimi, birinci taraf güncelleştirmelerini ve indirme öncesi yamalarını dağıtmayı destekler. Bu düzeltme eki sistemlerinde değişiklikler gerektirir, bkz: [birinci taraf ve öncesi destek indirme](automation-update-management.md#firstparty-predownload) sistemlerinize bu ayarları yapılandırmak hakkında bilgi edinmek için.
+> Güncelleştirme Yönetimi, birinci taraf güncelleştirmelerini ve indirme öncesi yamalarını dağıtmayı destekler. Bu, düzeltme eki eklenen sistemlerde değişiklik yapılmasını gerektirir, sistemlerinizde bu ayarların nasıl yapılandırılacağını öğrenmek için [ilk taraf ve indirme öncesi destek](automation-configure-windows-update.md#pre-download-updates) ' e bakın.
 
 ## <a name="view-results-of-an-update-deployment"></a>Güncelleştirme dağıtımının sonuçlarını görüntüleme
 
 Zamanlanmış dağıtım başladıktan sonra, bu dağıtımın durumunu **Güncelleştirme yönetimi** bölümündeki **Güncelleştirme dağıtımları** sekmesinde görebilirsiniz.
 
-Dağıtım o anda çalışıyorsa, **Sürüyor** durumundadır. Dağıtım başarıyla tamamlandıktan sonra durumu değişerek **başarılı**.
+Dağıtım o anda çalışıyorsa, **Sürüyor** durumundadır. Dağıtım başarıyla tamamlandıktan sonra durum **başarılı**olarak değişir.
 
 Dağıtımdaki bir veya daha fazla güncelleştirme başarısız olursa durum **Kısmen başarısız** olur.
 
@@ -182,19 +182,19 @@ Dağıtımdaki bir veya daha fazla güncelleştirme başarısız olursa durum **
 
 Bir güncelleştirme dağıtımının panosunu görmek için tamamlanan dağıtımı seçin.
 
-**Güncelleştirme sonuçları** bölmesinde toplam güncelleştirme sayısı ve sanal makine için dağıtım sonuçları gösterilir. Sağdaki tabloda her güncelleştirmenin ve yükleme sonuçları ayrıntılı bir dökümü verir. Yükleme sonuçları aşağıdaki değerlerden biri olabilir:
+**Güncelleştirme sonuçları** bölmesi, sanal makine için toplam güncelleştirme sayısını ve dağıtım sonuçlarını gösterir. Sağdaki tabloda her güncelleştirmenin ayrıntılı bir dökümü ve yükleme sonuçları verilmiştir. Yükleme sonuçları aşağıdaki değerlerden biri olabilir:
 
-- **Denenmedi**: Tanımlanan bakım penceresi süresine göre yeterli süre kullanılabilir olmadığından güncelleştirme yüklenmedi.
+- **Denenmedi**: tanımlanan bakım penceresine göre yetersiz süre kullanılamadığından güncelleştirme yüklenmedi.
 - **Başarılı**: Güncelleştirme başarılı oldu.
 - **Başarısız**: Güncelleştirme başarısız oldu.
 
 Dağıtımın oluşturduğu tüm günlük girişlerini görmek için **Tüm günlükler**’i seçin.
 
-Hedef sanal makinede güncelleştirme dağıtımını yöneten runbook'un iş akışını görmek için çıkış döşemesini seçin.
+Hedef sanal makinede güncelleştirme dağıtımını yöneten runbook 'un iş akışını görmek için çıktı kutucuğunu seçin.
 
 Dağıtımla ilgili her türlü hata hakkında ayrıntılı bilgi için **Hatalar**’ı seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Günlükler, çıktı ve hata dahil olmak üzere güncelleştirme yönetimi hakkında daha fazla bilgi için bkz. [güncelleştirme yönetimi çözümünü azure'da](../operations-management-suite/oms-solution-update-management.md).
+- Günlükler, çıkış ve hatalar dahil Güncelleştirme Yönetimi hakkında daha fazla bilgi edinmek için bkz. [Azure 'da güncelleştirme yönetimi çözümü](../operations-management-suite/oms-solution-update-management.md).
 

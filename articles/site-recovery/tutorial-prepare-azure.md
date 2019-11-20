@@ -1,23 +1,23 @@
 ---
-title: Azure Site Recovery ile şirket içi makineler için Azure'da olağanüstü durum kurtarma hazırlığı yapma | Microsoft Docs
+title: Azure Site Recovery ile şirket içi olağanüstü durum kurtarma için Azure 'u hazırlama
 description: Azure Site Recovery ile şirket içi makinelerin olağanüstü durum kurtarma işlemleri için Azure’ın nasıl hazırlanacağını öğrenin.
 services: site-recovery
 author: rayne-wiselman
 ms.service: site-recovery
 ms.topic: tutorial
-ms.date: 05/30/2019
+ms.date: 09/09/2019
 ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: cb2ca7229524cf8d84041140129c7b9ca6876ea3
-ms.sourcegitcommit: c05618a257787af6f9a2751c549c9a3634832c90
+ms.openlocfilehash: 1ec668fac087773001ca401eefb5ca8bc10ea2b8
+ms.sourcegitcommit: 6c2c97445f5d44c5b5974a5beb51a8733b0c2be7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66417813"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73620590"
 ---
-# <a name="prepare-azure-resources-for-disaster-recovery-of-on-premises-machines"></a>Şirket içi makinelerin olağanüstü durum kurtarma işlemleri için Azure kaynaklarını hazırlama
+# <a name="prepare-azure-for-on-premises-disaster-recovery-to-azure"></a>Azure 'da şirket içi olağanüstü durum kurtarma için Azure 'u hazırlama
 
-Bu makalede şirket içi VMware Vm'leri, Hyper-V Vm'leri veya Windows/Linux fiziksel sunucularını azure'a olağanüstü durum kurtarma ayarlayabilirsiniz böylece, Azure kaynakları ve bileşenleri hazırlama kullanarak [Azure Site Recovery](site-recovery-overview.md) hizmeti.
+Bu makalede, [Azure Site Recovery](site-recovery-overview.md) hizmetini kullanarak şirket Içi VMware VM 'Leri, Hyper-V VM 'Leri veya Windows/Linux fiziksel sunucularının Azure 'da olağanüstü durum kurtarmayı ayarlayabilmeniz için Azure kaynakları ve bileşenlerinin nasıl hazırlanacağı açıklanmaktadır.
 
 Bu makale, şirket içi sanal makineler için olağanüstü durum kurtarmanın nasıl ayarlanacağını gösteren serideki ilk öğreticidir. 
 
@@ -25,71 +25,73 @@ Bu makale, şirket içi sanal makineler için olağanüstü durum kurtarmanın n
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Azure hesabı, çoğaltma izinlerine sahip olduğunu doğrulayın.
+> * Azure hesabının çoğaltma izinlerine sahip olduğunu doğrulayın.
 > * Kurtarma Hizmetleri kasası oluşturun. Kasada VM'lerin meta veri ve yapılandırma bilgileri ile diğer çoğaltma bileşenleri tutulur.
-> * Azure sanal ağı (VNet) ayarlama ayarlayın. Yük devretme sonrasında Azure Vm'leri oluşturulduğunda bu ağa katılır.
+> * Bir Azure sanal ağı (VNet) ayarlayın. Yük devretmeden sonra Azure VM 'Leri oluşturulduğunda, bu ağa katılır.
 
 > [!NOTE]
-> Öğreticiler bir senaryo için en basit dağıtım yolu gösterir. Mümkün olduğunca varsayılan seçenekleri kullanır ve tüm olası ayarları ve yolları göstermez. Ayrıntılı yönergeler için Site Recovery İçindekiler bölümünde nasıl yapılır makalesine gözden geçirin.
+> Öğreticiler, bir senaryo için en basit dağıtım yolunu gösterir. Mümkün olduğunca varsayılan seçenekleri kullanır ve tüm olası ayarları ve yolları göstermez. Ayrıntılı yönergeler için Site Recovery Içindekiler tablosunun nasıl yapılır bölümündeki makaleyi gözden geçirin.
 
 ## <a name="before-you-start"></a>Başlamadan önce
 
-- Mimarisini İnceleme [VMware](vmware-azure-architecture.md), [Hyper-V](hyper-v-azure-architecture.md), ve [fiziksel sunucu](physical-azure-architecture.md) olağanüstü durum kurtarma.
-- Sık sorulan sorular için okuma [VMware](vmware-azure-common-questions.md) ve [Hyper-V](hyper-v-azure-common-questions.md)
+- [VMware](vmware-azure-architecture.md), [Hyper-V](hyper-v-azure-architecture.md)ve [fiziksel sunucu](physical-azure-architecture.md) olağanüstü durum kurtarma mimarisini gözden geçirin.
+- [VMware](vmware-azure-common-questions.md) ve [Hyper-V](hyper-v-azure-common-questions.md) için genel soruları okuyun
 
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial/) oluşturun. İçin oturum açın [Azure portalında](https://portal.azure.com).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial/) oluşturun. Ardından [Azure Portal](https://portal.azure.com)oturum açın.
 
 
 ## <a name="verify-account-permissions"></a>Hesap izinlerini doğrulama
 
-Yalnızca ücretsiz Azure hesabınızı oluşturduysanız aboneliğinizin Yöneticisi olduğunuz ve ihtiyaç duyduğunuz izinleri vardır. Abonelik yöneticisi değilseniz, ihtiyaç duyduğunuz izinleri atamak için yöneticiyle birlikte çalışın. Yeni bir sanal makineye yönelik çoğaltmayı etkinleştirmek için şunları yapma iznine sahip olmalısınız:
+Ücretsiz Azure hesabınızı oluşturduysanız aboneliğinizin yöneticisi olursunuz ve ihtiyacınız olan izinleriniz vardır. Abonelik yöneticisi değilseniz, ihtiyaç duyduğunuz izinleri atamak için yöneticiyle birlikte çalışın. Yeni bir sanal makineye yönelik çoğaltmayı etkinleştirmek için şunları yapma iznine sahip olmalısınız:
 
 - Seçilen kaynak grubunda sanal makine oluşturma.
 - Seçilen sanal ağda sanal makine oluşturma.
-- Bir Azure depolama hesabına yazma.
-- Yazma için bir Azure yönetilen disk.
+- Bir Azure depolama hesabına yazın.
+- Azure yönetilen diskine yazın.
 
-Bu görevleri tamamlamak için hesabınıza Sanal Makine Katkıda Bulunan yerleşik rolünün atanması gerekir. Ayrıca Site Recovery işlemlerini bir kasada yönetmek için hesabınıza Site Recovery Katkıda Bulunan yerleşik rolünün atanması gerekir.
+Bu görevleri tamamlamak için hesabınıza Sanal Makine Katkıda Bulunan yerleşik rolünün atanması gerekir. Ayrıca, bir kasadaki Site Recovery işlemleri yönetmek için hesabınıza Site Recovery katkıda bulunan yerleşik rolü atanmalıdır.
 
 
 ## <a name="create-a-recovery-services-vault"></a>Kurtarma Hizmetleri kasası oluşturma
 
-1. Azure portalında **+ kaynak Oluştur**ve markette Ara **kurtarma**.
-2. Tıklayın **yedekleme ve Site Recovery (OMS)** , Backup ve Site Recovery sayfasında tıklayın **Oluştur**. 
-1. İçinde **kurtarma Hizmetleri kasası** > **adı**, kasayı tanımlamak için bir kolay ad girin. Bu öğretici dizisi için **ContosoVMVault**’u kullanacağız.
-2. İçinde **kaynak grubu**, mevcut bir kaynak grubunu seçin veya yeni bir tane oluşturun. Bu öğretici için kullandığımız **contosoRG**.
-3. İçinde **konumu**, hangi kasa olmalıdır bölgeyi seçin. **Batı Avrupa** kullanacağız.
-4. Panodan kasaya hızlı şekilde erişmek için **Panoya sabitle** > **Oluştur**’u seçin.
+1. Azure portal menüsünde **kaynak oluştur**' u seçin ve markette **Kurtarma**için arama yapın.
+2. **Yedekleme ve** arama sonuçlarından Site Recovery seçin ve yedekleme ve Site Recovery sayfasında **Oluştur**' a tıklayın. 
+3. **Kurtarma Hizmetleri Kasası oluştur** sayfasında, **aboneliği**seçin. **Contoso aboneliği**kullanıyorsunuz.
+4. **Kaynak grubu**' nda, var olan bir kaynak grubunu seçin veya yeni bir tane oluşturun. Bu öğreticide **contosoRG**kullandık.
+5. **Kasa adı**alanına kasayı tanımlamak için bir kolay ad girin. Bu öğretici dizisi için **ContosoVMVault**’u kullanacağız.
+6. **Bölge**bölümünde, kasasının bulunduğu bölgeyi seçin. **Batı Avrupa** kullanacağız.
+7. **İncele ve oluştur**’u seçin.
 
    ![Yeni kasa oluştur](./media/tutorial-prepare-azure/new-vault-settings.png)
 
-   Yeni kasa, **Pano** > **Tüm kaynaklar** bölümünde ve ana **Kurtarma Hizmetleri kasaları** sayfasında görüntülenir.
+   Yeni kasa artık **pano** > **tüm kaynaklar**' da ve ana **Kurtarma Hizmetleri kasaları** sayfasında listelenir.
 
 ## <a name="set-up-an-azure-network"></a>Azure ağı ayarlama
 
-Şirket içinde makineleri Azure'a çoğaltılan yönetilen diskler. Yük devretme gerçekleştiğinde Azure Vm'leri yönetilen bu disklerden oluşturulan ve bu yordamda, belirttiğiniz Azure ağ alanına katıldı.
+Şirket içi makineler Azure yönetilen disklere çoğaltılır. Yük devretme gerçekleştiğinde, Azure VM 'Leri bu yönetilen disklerden oluşturulur ve bu yordamda belirttiğiniz Azure ağına eklenir.
 
 1. [Azure portalında](https://portal.azure.com) **Kaynak oluştur** > **Ağ** > **Sanal ağ** seçeneklerini belirleyin.
-2. Tutun **Resource Manager** dağıtım modeli olarak seçilmiş.
+2. Dağıtım modeli olarak **Kaynak Yöneticisi** seçili tut.
 3. **Ad** bölümünde bir ağ adı girin. Ad, Azure kaynak grubu içinde benzersiz olmalıdır. Bu öğreticide **ContosoASRnet** kullanıyoruz.
-4. İçinde ağın oluşturulacağı kaynak grubunu belirtin. Biz mevcut **contosoRG** kaynak grubunu kullanıyoruz.
-5. İçinde **adres aralığı**, ağ aralığı girin. Kullandığımız **10.1.0.0/24**ve bir alt ağı kullanmıyor.
-6. **Abonelik** bölümünde ağın oluşturulacağı aboneliği seçin.
-7. İçinde **konumu**, Kurtarma Hizmetleri kasası oluşturulduğu grubundakiyle aynı bölgeyi seçin. Müşterilerimize öğreticide sahip **Batı Avrupa**. Ağ, kasa ile aynı bölgede olması gerekir.
-8. Ağda hizmet uç noktası olmadan temel DDoS korumasının varsayılan seçeneklerini bırakıyoruz.
-9. **Oluştur**’a tıklayın.
+4. **Adres alanı**' nda, CDR gösteriminde sanal ağın adres aralığını girin. **10.1.0.0/24**kullanıyorsunuz.
+5. **Abonelik** bölümünde ağın oluşturulacağı aboneliği seçin.
+6. Ağın oluşturulacağı **kaynak grubunu** belirtin. Biz mevcut **contosoRG** kaynak grubunu kullanıyoruz.
+7. **Konum**' da, kurtarma hizmetleri kasasının oluşturulduğu bölgeyi seçin. Öğreticimizde **Batı Avrupa**. Ağın kasada aynı bölgede olması gerekir.
+8. **Adres aralığı**alanına ağ aralığını girin. Bir alt ağ kullanmadığınız için **10.1.0.0/24**kullanıyoruz.
+9. Temel DDoS korumasının varsayılan seçeneklerini hizmet uç noktası olmayan veya ağ üzerinde güvenlik duvarı olmadan terk ediyoruz.
+9. **Oluştur**'u seçin.
 
-   ![Sanal ağ oluşturma](media/tutorial-prepare-azure/create-network.png)
+   ![Sanal ağ oluşturun](media/tutorial-prepare-azure/create-network.png)
 
-Sanal ağın oluşturulması birkaç saniye sürer. Oluşturulduktan sonra, Azure portalı panosunda görünür.
+Sanal ağın oluşturulması birkaç saniye sürer. Oluşturulduktan sonra, Azure portal panosunda görürsünüz.
 
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- VMware olağanüstü durum kurtarma için [şirket içi VMware altyapısını hazırlama](tutorial-prepare-on-premises-vmware.md).
-- Hyper-V olağanüstü durum kurtarma için [şirket içi Hyper-V sunucuları hazırlama](hyper-v-prepare-on-premises-tutorial.md).
-- Fiziksel sunucu olağanüstü durum kurtarma için [yapılandırma sunucusu ve kaynak ortamını ayarlama](physical-azure-disaster-recovery.md)
+- VMware olağanüstü durum kurtarma için, [Şirket Içi VMware altyapısını hazırlayın](tutorial-prepare-on-premises-vmware.md).
+- Hyper-V olağanüstü durum kurtarma için, Şirket [Içi Hyper-v sunucularını hazırlayın](hyper-v-prepare-on-premises-tutorial.md).
+- Fiziksel sunucu olağanüstü durum kurtarma için [yapılandırma sunucusunu ve kaynak ortamı ayarlama](physical-azure-disaster-recovery.md)
 - Azure ağları [hakkında bilgi edinin](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview).
-- [Hakkında bilgi edinin](https://docs.microsoft.com/azure/virtual-machines/windows/managed-disks-overview) yönetilen diskler.
+- Yönetilen diskler [hakkında bilgi edinin](https://docs.microsoft.com/azure/virtual-machines/windows/managed-disks-overview) .

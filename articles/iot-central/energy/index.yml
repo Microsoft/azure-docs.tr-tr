@@ -1,0 +1,95 @@
+### YamlMime:Landing
+title: Enerji için Azure IoT Central belgeleri
+summary: IoT Central uygulama şablonlarını kullanarak enerji IoT çözümlerini oluşturmayı, özelleştirmeyi ve yönetmeyi öğrenin.
+metadata:
+  title: Enerji için Azure IoT Central belgeleri
+  description: IoT Central uygulama şablonlarını kullanarak enerji IoT çözümlerini oluşturmayı, özelleştirmeyi ve yönetmeyi öğrenin.
+  services: iot-central
+  ms.service: iot-central
+  ms.topic: landing-page
+  author: philmea
+  ms.author: philmea
+  ms.date: 10/25/2019
+  ms.openlocfilehash: d481df42220f9135010099f613c4c98e59935f4f
+  ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/09/2019
+  ms.locfileid: "73889166"
+landingContent:
+- title: Enerji çözümleri oluşturun
+  linkLists:
+  - linkListType: overview
+    links:
+    - url: overview-iot-central-energy.md
+      text: IoT Central ile enerji sektörü çözümleri oluşturma
+  - linkListType: tutorial
+    links:
+    - url: overview-iot-central-energy.md
+      text: IoT Central ile enerji sektörü çözümleri oluşturma
+    - url: tutorial-smart-meter-app.md
+      text: Akıllı sayaç izleme uygulaması oluşturma
+    - url: tutorial-solar-panel-app.md
+      text: Güneş paneli izleme uygulaması oluşturma
+- title: Bağlanma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Cihaz şablonu ayarlama
+      url: ../preview/howto-set-up-template.md
+    - text: IoT Tak Çalıştır cihazını bağlama
+      url: ../preview/tutorial-connect-pnp-device.md
+  - linkListType: how-to-guide
+    links:
+    - text: MX Chip IoT DevKit'i hazırlama ve bağlama
+      url: ../preview/howto-connect-devkit.md
+    - text: Diğer IoT bulutlarına bağlanma
+      url: ../core/howto-build-iotc-device-bridge.md
+- title: Bağlı kalma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Cihaz gruplarını kullanma
+      url: ../preview/tutorial-use-device-groups.md
+  - linkListType: how-to-guide
+    links:
+    - text: Cihazlarınızı yönetme
+      url: ../preview/howto-manage-devices.md
+    - text: İş çalıştırma
+      url: ../core/howto-run-a-job.md
+    - text: Cihaz verilerinizi analiz etme
+      url: ../preview/howto-create-analytics.md
+- title: Dönüşüm
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Kural oluşturma
+      url: ../preview/quick-configure-rules.md
+    - text: Telemetri kuralları oluşturma
+      url: ../preview/tutorial-create-telemetry-rules.md
+    - text: Blob Depolama'ya aktarma
+      url: ../preview/howto-export-data.md
+  - linkListType: how-to-guide
+    links:
+    - text: Özel kurallar oluşturma
+      url: ../preview/howto-create-custom-rules.md
+    - text: Özel analiz oluşturma
+      url: ../preview/howto-create-custom-analytics.md
+- title: Yönetim
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Uygulamanızı yönetme
+      url: ../preview/howto-administer.md
+    - text: Kullanıcıları ve rolleri yönetme
+      url: ../preview/howto-manage-users-roles.md
+    - text: Faturanızı görüntüleme
+      url: ../preview/howto-view-bill.md
+    - text: Uygulama kullanıcı arabirimini özelleştirme
+      url: ../preview/howto-customize-ui.md
+    - text: Kişisel panoları yapılandırma
+      url: ../core/howto-create-personal-dashboards.md
+    - text: Pano kutucukları kullanma
+      url: ../core/howto-add-tiles-to-your-dashboard.md
+    - text: Uygulama şablonlarını kullanma
+      url: ../preview/howto-use-app-templates.md

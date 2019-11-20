@@ -1,6 +1,6 @@
 ---
-title: Azure REST API - Azure kullanarak Apache Hadoop kümeleri oluşturma
-description: Azure REST API'si için Azure Resource Manager şablonları göndererek HDInsight kümeleri oluşturmayı öğrenin.
+title: Azure REST API kullanarak Apache Hadoop kümeleri oluşturma-Azure
+description: Azure REST API Azure Resource Manager şablonları göndererek HDInsight kümeleri oluşturmayı öğrenin.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,29 +8,29 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 05/02/2018
 ms.author: hrasheed
-ms.openlocfilehash: d771d91feaba942b88a0ddb68f0d997fad4a981e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 963dc71097a1ac53df77f3ab9c804b53597adeb5
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67059405"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73152002"
 ---
-# <a name="create-apache-hadoop-clusters-using-the-azure-rest-api"></a>Azure REST API'sini kullanarak Apache Hadoop kümeleri oluşturma
+# <a name="create-apache-hadoop-clusters-using-the-azure-rest-api"></a>Azure REST API kullanarak Apache Hadoop kümeleri oluşturma
 
 [!INCLUDE [selector](../../includes/hdinsight-create-linux-cluster-selector.md)]
 
-Bir Azure Resource Manager şablonu ve Azure REST API'sini kullanarak bir HDInsight kümesi oluşturmayı öğrenin.
+Azure Resource Manager şablonu ve Azure REST API kullanarak HDInsight kümesi oluşturmayı öğrenin.
 
-Azure REST API'si, HDInsight kümeleri gibi yeni kaynaklar oluşturma da dahil olmak üzere, Azure platformunda barındırılan hizmetler üzerinde yönetim işlemlerini gerçekleştirmenize olanak sağlar.
+Azure REST API, Azure platformunda barındırılan, HDInsight kümeleri gibi yeni kaynaklar oluşturma da dahil olmak üzere yönetim işlemleri gerçekleştirmenize olanak tanır.
 
 > [!NOTE]  
-> Bu adımları belge kullanım [curl (https://curl.haxx.se/) ](https://curl.haxx.se/) Azure REST API'si ile iletişim kurmasına yardımcı programı.
+> Bu belgedeki adımlarda, Azure REST API iletişim kurmak için [kıvrımlı (https://curl.haxx.se/)](https://curl.haxx.se/) yardımcı programı kullanılır.
 
 ## <a name="create-a-template"></a>Şablon oluşturma
 
-Azure Resource Manager şablonları açıklayan bir JSON belgeleri olan bir **kaynak grubu** ve içindeki tüm kaynakları (örneğin, HDInsight.) Şablona dayalı bu yaklaşım, tek bir şablonda HDInsight için ihtiyacınız olan kaynaklardan tanımlamanızı sağlar.
+Azure Resource Manager şablonlar, **kaynak grubunu** ve içindeki tüm kaynakları (HDInsight gibi) tanımlayan JSON belgelerdir. Bu şablon tabanlı yaklaşım, HDInsight için ihtiyaç duyduğunuz kaynakları tek bir şablonda tanımlamanızı sağlar.
 
-Şablon ve parametreleri dosyası bir birleşme aşağıdaki JSON belgesidir [ https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password ](https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password), SSH kullanıcı hesabının güvenliğini sağlamak için bir parola kullanarak Linux tabanlı bir küme oluşturur.
+Aşağıdaki JSON belgesi, SSH kullanıcı hesabının güvenliğini sağlamak için bir parola kullanan Linux tabanlı küme oluşturan [https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password](https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password)şablon ve parametre dosyalarının birleşmesi olur.
 
    ```json
    {
@@ -145,7 +145,7 @@ Azure Resource Manager şablonları açıklayan bir JSON belgeleri olan bir **ka
                                "name": "headnode",
                                "targetInstanceCount": "2",
                                "hardwareProfile": {
-                                   "vmSize": "Standard_D3"
+                                   "vmSize": "{}" 
                                },
                                "osProfile": {
                                    "linuxOperatingSystemProfile": {
@@ -158,7 +158,7 @@ Azure Resource Manager şablonları açıklayan bir JSON belgeleri olan bir **ka
                                "name": "workernode",
                                "targetInstanceCount": "[parameters('clusterWorkerNodeCount')]",
                                "hardwareProfile": {
-                                   "vmSize": "Standard_D3"
+                                   "vmSize": "{}"
                                },
                                "osProfile": {
                                    "linuxOperatingSystemProfile": {
@@ -205,58 +205,58 @@ Azure Resource Manager şablonları açıklayan bir JSON belgeleri olan bir **ka
    }
    ```
 
-Bu örnekte, bu belgedeki adımlarda kullanılır. Örneği değiştirecek *değerleri* içinde **parametreleri** kümenizin değerlerle bölümü.
+Bu örnek, bu belgedeki adımlarda kullanılır. **Parameters** bölümündeki örnek *değerleri* kümenizin değerleriyle değiştirin.
 
 > [!IMPORTANT]  
-> Şablon, bir HDInsight kümesi için varsayılan (4) çalışan düğümü sayısını kullanır. 32'den fazla çalışan düğümlerinde planlıyorsanız, bir baş düğüm boyutu en az 8 çekirdek ve 14 GB ram ile seçmeniz gerekir.
+> Şablon, HDInsight kümesi için varsayılan çalışan düğümü sayısını (4) kullanır. 32 ' den fazla çalışan düğümünü planlıyorsanız, en az 8 çekirdek ve 14 GB RAM içeren bir baş düğüm boyutu seçmeniz gerekir.
 >
 > Düğüm boyutları ve ilişkili maliyetler hakkında daha fazla bilgi için bkz. [HDInsight fiyatlandırması](https://azure.microsoft.com/pricing/details/hdinsight/).
 
 ## <a name="sign-in-to-your-azure-subscription"></a>Azure aboneliğinizde oturum açın
 
-Konusunda belgelenen adımları [Azure CLI ile çalışmaya başlama](https://docs.microsoft.com/cli/azure/get-started-with-az-cli2) ve kullanarak aboneliğinze bağlanın `az login` komutu.
+[Azure CLI kullanmaya başlama](https://docs.microsoft.com/cli/azure/get-started-with-az-cli2) bölümünde belgelenen adımları izleyin ve `az login` komutunu kullanarak aboneliğinize bağlanın.
 
 ## <a name="create-a-service-principal"></a>Hizmet sorumlusu oluşturma
 
 > [!NOTE]  
-> Bu adımlarla bir MMC'ye sürümünü *parola ile hizmet sorumlusu oluşturma* bölümünü [kaynaklara erişmek için bir hizmet sorumlusu oluşturmak için Azure CLI'yı kullanmak](../azure-resource-manager/resource-group-authenticate-service-principal-cli.md) belge. Bu adımlar Azure REST API'sine kimliğini doğrulamak için kullanılan bir hizmet sorumlusu oluşturur.
+> Bu adımlar, [kaynaklara erişmek üzere bir hizmet sorumlusu oluşturmak Için Azure CLI kullanma](../azure-resource-manager/resource-group-authenticate-service-principal-cli.md) başlıklı ' ın *parola Ile hizmet sorumlusu oluşturma* bölümünün, desteklenmeyen bir sürümüdür. Bu adımlar, Azure REST API kimlik doğrulaması yapmak için kullanılan bir hizmet sorumlusu oluşturur.
 
-1. Bir komut satırından Azure aboneliklerinizi listelemek için aşağıdaki komutu kullanın.
+1. Bir komut satırından, Azure aboneliklerinizi listelemek için aşağıdaki komutu kullanın.
 
    ```bash
    az account list --query '[].{Subscription_ID:id,Tenant_ID:tenantId,Name:name}'  --output table
    ```
 
-    Listeden unutmayın ve istediğiniz aboneliği seçin **Subscription_ID** ve __Kiracı__ sütunları. Bu değerleri kaydedin.
+    Listede, kullanmak istediğiniz aboneliği seçin ve **Subscription_ID** ve __Tenant_ID__ sütunlarını unutmayın. Bu değerleri kaydedin.
 
-2. Azure Active Directory'de uygulama oluşturmak için aşağıdaki komutu kullanın.
+2. Azure Active Directory bir uygulama oluşturmak için aşağıdaki komutu kullanın.
 
    ```bash
    az ad app create --display-name "exampleapp" --homepage "https://www.contoso.org" --identifier-uris "https://www.contoso.org/example" --password <Your password> --query 'appId'
    ```
 
-    Değerleri Değiştir `--display-name`, `--homepage`, ve `--identifier-uris` kendi değerlerinizle. Yeni Active Directory giriş için bir parola sağlayın.
+    `--display-name`, `--homepage`ve `--identifier-uris` değerlerini kendi değerlerinizle değiştirin. Yeni Active Directory girişi için bir parola girin.
 
    > [!NOTE]  
-   > `--home-page` Ve `--identifier-uris` değerleri, internet'te barındırılan gerçek bir web sayfasına başvurmak gerekmez. Benzersiz bir URI'leri olmaları gerekir.
+   > `--home-page` ve `--identifier-uris` değerlerinin Internet 'te barındırılan gerçek bir Web sayfasına başvurması gerekmez. Benzersiz URI 'Ler olmalıdır.
 
-   Bu komuttan döndürülen değer __uygulama kimliği__ yeni uygulama için. Bu değer kaydedin.
+   Bu komuttan döndürülen değer, yeni uygulamanın __uygulama kimliğidir__ . Bu değeri kaydedin.
 
-3. Kullanarak bir hizmet sorumlusu oluşturmak için aşağıdaki komutu kullanın **uygulama kimliği**.
+3. **Uygulama kimliğini**kullanarak bir hizmet sorumlusu oluşturmak için aşağıdaki komutu kullanın.
 
    ```bash
    az ad sp create --id <App ID> --query 'objectId'
    ```
 
-     Bu komuttan döndürülen değer __nesne kimliği__. Bu değer kaydedin.
+     Bu komuttan döndürülen değer, __nesne kimliğidir__. Bu değeri kaydedin.
 
-4. Ata **sahibi** kullanarak hizmet sorumlusu için rol **nesne kimliği** değeri. Kullanım **abonelik kimliği** daha önce edindiğiniz.
+4. **Nesne kimliği** değerini kullanarak hizmet sorumlusuna **sahip** rolünü atayın. Daha önce edindiğiniz **ABONELIK kimliğini** kullanın.
 
    ```bash
    az role assignment create --assignee <Object ID> --role Owner --scope /subscriptions/<Subscription ID>/
    ```
 
-## <a name="get-an-authentication-token"></a>Bir kimlik doğrulama belirtecini alma
+## <a name="get-an-authentication-token"></a>Kimlik doğrulama belirteci al
 
 Bir kimlik doğrulama belirteci almak için aşağıdaki komutu kullanın:
 
@@ -270,11 +270,11 @@ curl -X "POST" "https://login.microsoftonline.com/$TENANTID/oauth2/token" \
 --data-urlencode "resource=https://management.azure.com/"
 ```
 
-Ayarlama `$TENANTID`, `$APPID`, ve `$PASSWORD` elde edilen ya da daha önce kullanılan değerlerine.
+`$TENANTID`, `$APPID`ve `$PASSWORD` daha önce elde edilen veya kullanılan değerlere ayarlayın.
 
-Bu istek başarılı olursa, 200 serisi yanıt ve yanıt gövdesi JSON belgesini içerir.
+Bu istek başarılı olursa, bir 200 serisi yanıtı alırsınız ve yanıt gövdesi bir JSON belgesi içerir.
 
-Bu istek tarafından döndürülen JSON belgesini adlı bir öğe içeren **access_token**. Değerini **access_token** REST API için kimlik doğrulama istekleri için kullanılır.
+Bu istek tarafından döndürülen JSON belgesi, **access_token**adlı bir öğe içeriyor. **Access_token** değeri, REST API isteklerinde kimlik doğrulaması yapmak için kullanılır.
 
 ```json
 {
@@ -290,10 +290,10 @@ Bu istek tarafından döndürülen JSON belgesini adlı bir öğe içeren **acce
 
 Bir kaynak grubu oluşturmak için aşağıdakileri kullanın.
 
-* Ayarlama `$SUBSCRIPTIONID` abonelik kimliği alınan hizmet sorumlusu oluşturulurken.
-* Ayarlama `$ACCESSTOKEN` için önceki adımda alınan erişim belirteci.
-* Değiştirin `DATACENTERLOCATION` istediğiniz kaynak grubu ve kaynakları oluşturmak için veri merkezi ile. Örneğin, 'Orta Güney ABD'.
-* Ayarlama `$RESOURCEGROUPNAME` bu grup için kullanmak istediğiniz adı:
+* Hizmet sorumlusu oluşturulurken alınan abonelik KIMLIĞINE `$SUBSCRIPTIONID` ayarlayın.
+* Önceki adımda alınan erişim belirtecine `$ACCESSTOKEN` ayarlayın.
+* `DATACENTERLOCATION`, kaynak grubu oluşturmak istediğiniz veri merkezi ile ve içindeki kaynakları ile değiştirin. Örneğin, ' Orta Güney ABD '.
+* Bu grup için kullanmak istediğiniz ada `$RESOURCEGROUPNAME` ayarlayın:
 
 ```bash
 curl -X "PUT" "https://management.azure.com/subscriptions/$SUBSCRIPTIONID/resourcegroups/$RESOURCEGROUPNAME?api-version=2015-01-01" \
@@ -304,13 +304,13 @@ curl -X "PUT" "https://management.azure.com/subscriptions/$SUBSCRIPTIONID/resour
 }'
 ```
 
-Bu istek başarılı olursa, 200 serisi yanıt ve yanıt gövdesi grubu ile ilgili bilgileri içeren bir JSON belgesini içerir. `"provisioningState"` Ögesinin değerini `"Succeeded"`.
+Bu istek başarılı olursa, bir 200 serisi yanıtı alırsınız ve yanıt gövdesi, Grup hakkında bilgi içeren bir JSON belgesi içerir. `"provisioningState"` öğesi `"Succeeded"`değerini içerir.
 
-## <a name="create-a-deployment"></a>Bir dağıtım oluşturun
+## <a name="create-a-deployment"></a>Dağıtım oluşturma
 
-Kaynak grubu için şablonu dağıtmak için aşağıdaki komutu kullanın.
+Şablonu kaynak grubuna dağıtmak için aşağıdaki komutu kullanın.
 
-* Ayarlama `$DEPLOYMENTNAME` bu dağıtım için kullanmak istediğiniz adı.
+* Bu dağıtım için kullanmak istediğiniz ada `$DEPLOYMENTNAME` ayarlayın.
 
 ```bash
 curl -X "PUT" "https://management.azure.com/subscriptions/$SUBSCRIPTIONID/resourcegroups/$RESOURCEGROUPNAME/providers/microsoft.resources/deployments/$DEPLOYMENTNAME?api-version=2015-01-01" \
@@ -320,18 +320,18 @@ curl -X "PUT" "https://management.azure.com/subscriptions/$SUBSCRIPTIONID/resour
 ```
 
 > [!NOTE]  
-> Şablonu bir dosyaya kaydettiyseniz, aşağıdaki komutu yerine kullanabileceğiniz `-d "{ template and parameters}"`:
+> Şablonu bir dosyaya kaydettiyseniz, `-d "{ template and parameters}"`yerine aşağıdaki komutu kullanabilirsiniz:
 >
 > `--data-binary "@/path/to/file.json"`
 
-Bu istek başarılı olursa, 200 serisi yanıt ve dağıtım işlemi hakkında bilgi içeren bir JSON belgesi yanıt gövdesi içerir.
+Bu istek başarılı olursa, bir 200 serisi yanıtı alırsınız ve yanıt gövdesi dağıtım işlemiyle ilgili bilgileri içeren bir JSON belgesi içerir.
 
 > [!IMPORTANT]  
-> Dağıtım gönderildi ancak tamamlanmadı. Bu, genellikle yaklaşık 15, dağıtımın tamamlanması birkaç dakika sürebilir.
+> Dağıtım gönderildi, ancak tamamlanmadı. Dağıtımın tamamlanması için genellikle 15 etrafında birkaç dakika sürebilir.
 
-## <a name="check-the-status-of-a-deployment"></a>Bir dağıtım durumunu denetleyin
+## <a name="check-the-status-of-a-deployment"></a>Bir dağıtımın durumunu denetleme
 
-Dağıtım durumunu denetlemek için aşağıdaki komutu kullanın:
+Dağıtımın durumunu denetlemek için şu komutu kullanın:
 
 ```bash
 curl -X "GET" "https://management.azure.com/subscriptions/$SUBSCRIPTIONID/resourcegroups/$RESOURCEGROUPNAME/providers/microsoft.resources/deployments/$DEPLOYMENTNAME?api-version=2015-01-01" \
@@ -339,7 +339,7 @@ curl -X "GET" "https://management.azure.com/subscriptions/$SUBSCRIPTIONID/resour
 -H "Content-Type: application/json"
 ```
 
-Bu komut, dağıtım işlemi hakkında bilgi içeren bir JSON belgesini döndürür. `"provisioningState"` Öğesi dağıtım durumunu içerir. Bu öğe değerini içeriyorsa `"Succeeded"`, dağıtım başarıyla tamamlandıktan sonra.
+Bu komut, dağıtım işlemi hakkında bilgi içeren bir JSON belgesi döndürür. `"provisioningState"` öğesi dağıtımın durumunu içerir. Bu öğe bir `"Succeeded"`değeri içeriyorsa Dağıtım başarıyla tamamlanır.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
@@ -347,21 +347,21 @@ HDInsight kümeleri oluştururken sorun yaşarsanız bkz. [erişim denetimi gere
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bir HDInsight kümesi başarıyla oluşturuldu, kümenizi ile çalışma hakkında bilgi almak için aşağıdakileri kullanın.
+Artık bir HDInsight kümesini başarıyla oluşturduğunuza göre, kümenizle nasıl çalışacağınızı öğrenmek için aşağıdakileri kullanın.
 
-### <a name="apache-hadoop-clusters"></a>Apache Hadoop kümelerini
+### <a name="apache-hadoop-clusters"></a>Apache Hadoop kümeleri
 
-* [Apache Hive, HDInsight ile kullanma](hadoop/hdinsight-use-hive.md)
-* [Apache Pig, HDInsight ile kullanma](hadoop/hdinsight-use-pig.md)
+* [HDInsight ile Apache Hive kullanma](hadoop/hdinsight-use-hive.md)
+* [HDInsight ile Apache Pig kullanma](hadoop/hdinsight-use-pig.md)
 * [HDInsight ile MapReduce kullanma](hadoop/hdinsight-use-mapreduce.md)
 
 ### <a name="apache-hbase-clusters"></a>Apache HBase kümeleri
 
-* [HDInsight üzerinde Apache HBase kullanmaya başlama](hbase/apache-hbase-tutorial-get-started-linux.md)
-* [HDInsight üzerinde Apache HBase için Java uygulamaları geliştirin](hbase/apache-hbase-build-java-maven-linux.md)
+* [HDInsight 'ta Apache HBase ile çalışmaya başlama](hbase/apache-hbase-tutorial-get-started-linux.md)
+* [HDInsight 'ta Apache HBase için Java uygulamaları geliştirme](hbase/apache-hbase-build-java-maven-linux.md)
 
 ### <a name="apache-storm-clusters"></a>Apache Storm kümeleri
 
 * [HDInsight üzerinde Apache Storm için Java topolojileri geliştirme](storm/apache-storm-develop-java-topology.md)
-* [HDInsight üzerinde Apache Storm, Python bileşenlerini kullanma](storm/apache-storm-develop-python-topology.md)
-* [HDInsight üzerinde Apache Storm topolojileri dağıtma ve izleme](storm/apache-storm-deploy-monitor-topology-linux.md)
+* [HDInsight üzerinde Apache Storm Python bileşenlerini kullanma](storm/apache-storm-develop-python-topology.md)
+* [HDInsight üzerinde Apache Storm topolojilerini dağıtma ve izleme](storm/apache-storm-deploy-monitor-topology-linux.md)

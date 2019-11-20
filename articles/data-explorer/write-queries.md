@@ -1,43 +1,43 @@
 ---
-title: Azure Veri Gezgini için sorguları yazma
-description: Bu nasıl yapılır makalesinde Azure Veri Gezgini için temel ve daha gelişmiş sorguları gerçekleştirmeyi öğrenin.
+title: Azure Veri Gezgini için sorgular yazma
+description: Bu nasıl yapılır, Azure Veri Gezgini için temel ve daha gelişmiş sorgular gerçekleştirmeyi öğrenirsiniz.
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/07/2019
-ms.openlocfilehash: b1a7e64cf6b85b517bc027d6541d63c9be729734
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 80d3eaaf7e588766d62f5e5885d75e61c590970e
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60773987"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68881191"
 ---
-# <a name="write-queries-for-azure-data-explorer"></a>Azure Veri Gezgini için sorguları yazma
+# <a name="write-queries-for-azure-data-explorer"></a>Azure Veri Gezgini için sorgular yazma
 
-Bu makalede, en yaygın işleçli temel sorguları gerçekleştirmek için Azure veri Gezgini'nde sorgu dili kullanmayı öğrenin. Dil daha gelişmiş özelliklerinden bazılarını maruz ayrıca Al
+Bu makalede, en yaygın işleçlerle basit sorgular gerçekleştirmek için Azure Veri Gezgini 'de sorgu dilini nasıl kullanacağınızı öğreneceksiniz. Ayrıca, dilin daha gelişmiş özelliklerinden bazılarını da açığa alırsınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu makalede iki yoldan biriyle sorgular çalıştırabilirsiniz:
+Bu makaledeki sorguları iki şekilde çalıştırabilirsiniz:
 
-- Azure Veri Gezgini üzerindeki *Yardım kümesi* biz öğrenme yardımcı olmak için ayarladığınız.
-    [Küme oturum](https://dataexplorer.azure.com/clusters/help/databases/samples) ile Azure Active directory üyesi olan bir kuruluş e-posta hesabı.
+- Öğrendiğimiz Azure Veri Gezgini *Yardım kümesinde* .
+    Azure Active Directory 'nin üyesi olan bir kurumsal e-posta hesabıyla [kümede oturum açın](https://dataexplorer.azure.com/clusters/help/databases/samples) .
 
-- Kendi kümenizi, StormEvents örnek veriler içerir. Daha fazla bilgi için [hızlı başlangıç: Bir Azure Veri Gezgini kümesi ile veritabanı oluşturma](create-cluster-database-portal.md) ve [örnek verileri Azure veri Gezgini'ne alma](ingest-sample-data.md).
+- StormEvents örnek verilerini içeren kendi kümenizde. Daha fazla bilgi için bkz [. hızlı başlangıç: Azure Veri Gezgini kümesi ve veritabanı](create-cluster-database-portal.md) oluşturun ve [örnek verileri Azure Veri Gezgini içine alın](ingest-sample-data.md).
 
     [!INCLUDE [data-explorer-storm-events](../../includes/data-explorer-storm-events.md)]
 
-## <a name="overview-of-the-query-language"></a>Sorgu dili genel bakış
+## <a name="overview-of-the-query-language"></a>Sorgu diline genel bakış
 
-Azure veri Gezgini'nde bir sorgu dili, verilerini işleyebilir ve sonuçları döndürmek için salt okunur bir istektir. İsteği okumak, yazmak ve otomatik hale getirmek söz dizimi kolaylaştırmak için tasarlanmış bir veri akışı modelini kullanarak düz metin olarak belirtilir. SQL'e benzer bir hiyerarşideki düzenlenir şema varlıkları sorgusunu kullanır: veritabanı, tablolar ve sütunlar.
+Azure Veri Gezgini 'deki bir sorgu dili, verileri işlemek ve sonuçları döndürmek için salt okunurdur bir istek. İstek, sözdizimini okumayı, yazmayı ve otomatikleştirmeyi kolaylaştırmak için tasarlanan bir veri akışı modeli kullanılarak düz metin olarak belirtilir. Sorgu SQL: veritabanları, tablolar ve sütunlara benzer bir hiyerarşide düzenlenmiş şema varlıklarını kullanır.
 
-Sorgu ifadeleri, noktalı virgülle ayrılmış bir dizi sorgu oluşur (`;`), bir tablo ifadesi ifade edilen en az bir deyimi ile olduğu bir tablo gibi ağ sütun ve satır içinde düzenlenmiş veriler üretir bir ifade. Sorgunun tablosal ifade deyimleri, sorgunun sonuçlarını üretir.
+Sorgu, noktalı virgül (`;`) ile ayrılmış bir dizi sorgu deyiminden oluşur. Bu, en az bir deyim tablo benzeri bir sütun ve satır halinde düzenlenmiş veri üreten bir ifadedir. Sorgunun tablosal ifade deyimleri sorgunun sonuçlarını üretir.
 
-Tablosal bir ifade deyimi sözdizimi tablosal verileri içeren bir tablo sorgu işleci bir akıştan diğerine, veri kaynağı (örneğin, bir veritabanı veya veri üreten bir işleç tablosu) ile başlayan ve ardından veri dönüştürme bir dizi aracılığıyla akar. kanal kullanılarak birbirine bağlı işleçleri (`|`) sınırlayıcı.
+Tablosal ifade deyiminin sözdizimi, bir tablosal sorgu işlecinden diğerine, veri kaynağıyla başlayarak (örneğin, veritabanındaki bir tablo veya veri üreten bir operatör) ve sonra bir veri dönüştürme kümesi üzerinden akan tablo veri akışı içerir Kanal (`|`) sınırlayıcısı kullanılarak birbirine bağlanan işleçler.
 
-Örneğin, aşağıdaki sorguyu bir tablo ifadesi deyimi tek bir deyimde vardır. Adlı bir tablo başvurusu ifadesi başlayan `StormEvents` (Bu tablonun ana veritabanı örtük burada ve bağlantı bilgilerini bir parçası olan). Bu tablo için verileri (satır), ardından değeri tarafından filtrelenir `StartTime` sütun ve ardından değeri tarafından filtrelenen `State` sütun. Sorgu, ardından "satırları geri kalan" sayı döndürür.
+Örneğin, aşağıdaki sorguda tablolu ifade deyimi olan tek bir deyim vardır. İfade, adlı `StormEvents` bir tabloya başvuru ile başlar (Bu tabloyu barındıran veritabanı burada örtük olarak, bağlantı bilgilerinin bir parçası). Bu tabloya ait veriler (satırlar) daha sonra `StartTime` sütunun değerine göre filtrelenmiştir ve sonra `State` sütunun değerine göre filtrelenmiştir. Sorgu daha sonra "yeniden dönen" satırların sayısını döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSjPSC1KVQguSSwqCcnMTVWws1VISSxJLQGyNYwMDMx1DQ11DQw1FRLzUpBU2aArMgIpQjGvJFXB1lZByc3HP8jTxVFJQQEkm5xfmlcCAHoR9euCAAAA) **\]**
 
@@ -48,32 +48,32 @@ StormEvents
 | count
 ```
 
-Bu durumda, sonuç olur:
+Bu durumda, sonuç şu şekilde olur:
 
 |Count|
 |-----|
 |   23|
 | |
 
-Daha fazla bilgi için [sorgu dili başvurusu](https://aka.ms/kustolangref).
+Daha fazla bilgi için bkz. [sorgu dili başvurusu](https://aka.ms/kustolangref).
 
-## <a name="most-common-operators"></a>En yaygın işleçleri
+## <a name="most-common-operators"></a>En yaygın işleçler
 
-Bu bölümde yer alan işleçler, Azure veri Gezgini'ndeki sorguları anlamak için yapı taşlarıdır. Yazdığınız sorguların çoğu bu işleçlerden bazıları içerir.
+Bu bölümde ele alınan işleçler, Azure Veri Gezgini sorguları anlamak için yapı taşlarıdır. Yazdığınız çoğu sorguya bu işleçlerden birkaçı dahil edilir.
 
-Yardım kümesinde sorguları çalıştırmak için: seçin **sorgu çalıştırmak için tıklayın** yukarıda her sorgu.
+Yardım kümesinde sorguları çalıştırmak için: her bir sorgunun üzerindeki **sorguyu çalıştırmak Için tıklayın ' ı** seçin.
 
-Kendi kümenizi sorguları çalıştırmak için:
+Sorguları kendi kümenizde çalıştırmak için:
 
-1. Her sorgu, sorgu web tabanlı uygulamaya kopyalayın ve ardından sorguyu seçin veya sorguda imleci yerleştirin.
+1. Her sorguyu Web tabanlı sorgu uygulamasına kopyalayın ve ardından sorguyu seçin ya da imlecinizi sorguya yerleştirin.
 
-1. Uygulamanın üstünde seçin **çalıştırma**.
+1. Uygulamanın en üstünde **Çalıştır**' ı seçin.
 
 ### <a name="count"></a>count
 
-[**sayısı**](https://docs.microsoft.com/azure/kusto/query/countoperator): Tablodaki satır sayısını döndürür.
+[**sayı**](https://docs.microsoft.com/azure/kusto/query/countoperator): Tablodaki satır sayısını döndürür.
 
-Aşağıdaki sorguyu StormEvents tablodaki satır sayısını döndürür.
+Aşağıdaki sorgu, StormEvents tablosundaki satır sayısını döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVqhRSM4vzSsBALU2eHsTAAAA) **\]**
 
@@ -81,11 +81,11 @@ Aşağıdaki sorguyu StormEvents tablodaki satır sayısını döndürür.
 StormEvents | count
 ```
 
-### <a name="take"></a>sınav zamanı
+### <a name="take"></a>take
 
-[**ele**](https://docs.microsoft.com/azure/kusto/query/takeoperator): Veri satırı belirtilen sayıya kadar döndürür.
+şunları [**yapın**](https://docs.microsoft.com/azure/kusto/query/takeoperator): Belirtilen sayıda veri satırı döndürür.
 
-Aşağıdaki sorguda StormEvents tablosundan beş satırları döndürür. Anahtar sözcüğü *sınırı* için bir diğer addır *yararlanın.*
+Aşağıdaki sorgu, StormEvents tablosundan beş satır döndürür. Anahtar sözcük *sınırı* , al için bir diğer addır *.*
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVqhRKEnMTlUwBQDEz2b8FAAAAA%3d%3d) **\]**
 
@@ -94,13 +94,13 @@ StormEvents | take 5
 ```
 
 > [!TIP]
-> Kaynak veriler sürece hangi kayıtlar döndürülür bir garanti yoktur.
+> Kaynak veriler sıralanmamışsa hangi kayıtların döndürüleceğini garanti yoktur.
 
 ### <a name="project"></a>project
 
-[**Proje**](https://docs.microsoft.com/azure/kusto/query/projectoperator): Bir sütun alt kümesi seçer.
+[**Proje**](https://docs.microsoft.com/azure/kusto/query/projectoperator): Sütunların bir alt kümesini seçer.
 
-Aşağıdaki sorgu, belirli bir sütun kümesini döndürür.
+Aşağıdaki sorgu belirli bir sütun kümesini döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUShJzE5VMAWxCorys1KTSxSCSxKLSkIyc1N1FFzzUiAMoFgJiA%2fSFlJZAGS6JOYmpqcGFOUXpBaVVAKlCjKL81NS%2fRKLihJLMstSAY%2buIINnAAAA) **\]**
 
@@ -110,11 +110,11 @@ StormEvents
 | project StartTime, EndTime, State, EventType, DamageProperty, EpisodeNarrative
 ```
 
-### <a name="where"></a>Burada
+### <a name="where"></a>nereye
 
-[**Burada**](https://docs.microsoft.com/azure/kusto/query/whereoperator): Bir koşulu karşılayan satırların alt tablo filtreler.
+[**burada**](https://docs.microsoft.com/azure/kusto/query/whereoperator): Bir tabloyu bir koşula uyan satır alt kümesiyle filtreler.
 
-Aşağıdaki sorgu verileri göre filtreler `EventType` ve `State`.
+Aşağıdaki sorgu, ve `EventType` `State`ile verileri filtreler.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAEWMPQvCMBCGd8H%2fcFuWro4dBOvHkgoJOB%2fm0KjJhetRKfjjNe3g9n49r1OW1I2UdVivPvC%2bkxDM3k%2bFoG3B7F%2fMwQDmAE5Rl%2fCydceTPfjemsopPgk2VRXhB121TkV9TNRAl8MiZrz53zeww4Q3OgsXEp1%2bVYkDB7IoghpH%2bgI9OH8WnwAAAA%3d%3d) **\]**
 
@@ -125,11 +125,11 @@ StormEvents
 | project StartTime, EndTime, State, EventType, DamageProperty, EpisodeNarrative
 ```
 
-### <a name="sort"></a>Sıralama
+### <a name="sort"></a>düzenine
 
-[**Sıralama**](https://docs.microsoft.com/azure/kusto/query/sortoperator): Giriş tablosunun satırları sırada bir veya daha fazla sütuna göre sıralayın.
+[**Sırala**](https://docs.microsoft.com/azure/kusto/query/sortoperator): Giriş tablosunun satırlarını bir veya daha fazla sütuna göre sıraya göre sıralayın.
 
-Aşağıdaki sorguda göre azalan düzende verileri sıralar `DamageProperty`.
+Aşağıdaki sorgu, verileri azalan sırada sıraya göre `DamageProperty`sıralar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAF2NPQvCMBCGd8H%2fcFuXrI4dBOvHEoUGnM%2fm0KjphctRKfjjNe0guL0fvM%2fbKktsBuo1LxdveN1ICCbvxkRQ11Btn8y%2bAuw9tIo6h%2bd1uz%2fYnTvaquwyi8JlhA1GvNJJOJHoCJ5yV2rFB8GqqCR8p04LSdSFSAaa3s9iopvfu%2fnDfasUMnuyKIIaBvoAtvGMsb4AAAA%3d) **\]**
 
@@ -142,13 +142,13 @@ StormEvents
 ```
 
 > [!NOTE]
-> İşlemlerin sırası önemlidir. Yerleştirmeyi deneyin `take 5` önce `sort by`. Farklı sonuçlar elde ederim?
+> İşlem sırası önemlidir. Daha önce `take 5` `sort by`yerleştirmeyi deneyin. Farklı sonuçlar elde edilsin mi?
 
 ### <a name="top"></a>Sayfanın Üstü
 
-[**üst**](https://docs.microsoft.com/azure/kusto/query/topoperator): İlk döndürür *N* kayıtları belirtilen sütunlara göre sıralanır.
+[**üst**](https://docs.microsoft.com/azure/kusto/query/topoperator): Belirtilen sütunlara göre sıralanan ilk *N* kaydı döndürür.
 
-Aşağıdaki sorgu, aynı sonuçları üzerinde daha az bir işleci ile döndürür.
+Aşağıdaki sorgu, daha az bir operatör ile aynı sonuçları döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAF2NOwvCMBSFd8H%2fcLcsWR07CNbHkgoJOMfmohGTG24vlYA%2fXtsOgtt5cL5jhTi1I2YZ1qs3vO7ICLN3tSA0Daj9kygo8DmAFS9LeNna48kcXGfUtBMqsIFrhZ1P%2foZnpoIsFQIO%2fdQXpgf2MgFYXEyooc1hETNU%2f071H%2bRblThQQOOZvcQRP1rSng21AAAA) **\]**
 
@@ -159,11 +159,11 @@ StormEvents
 | project StartTime, EndTime, State, EventType, DamageProperty, EpisodeNarrative
 ```
 
-### <a name="extend"></a>Genişletme
+### <a name="extend"></a>genişletmeyi
 
-[**genişletme**](https://docs.microsoft.com/azure/kusto/query/extendoperator): Hesaplar sütunları türetilmiş.
+[**uzat**](https://docs.microsoft.com/azure/kusto/query/extendoperator): Türetilmiş sütunları hesaplar.
 
-Aşağıdaki sorgu, her satırda bir değer bilgi işlem tarafından yeni bir sütun oluşturur.
+Aşağıdaki sorgu her satırdaki bir değeri hesaplarken yeni bir sütun oluşturur.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAF2OvQ7CMAyEdyTewVuWMDJ2QGr5WQJSKzGHxoIiEkeuKVTi4WmooBKbfXeffaUQ%2b6LDIO189oLHBRnhs1d9RMgyUOsbkVNgg4NSrIzicVVud2ZT7Y1KnFCEJZx6yK23ZzwwRWTpwWFbJx%2bfggOf39lKQwEyKIKrGo%2bwSEdZ0pyCkemKtUyi%2fib1j9ZjDz311H9%2fBys2LTk0lhPT4RvwA3pn6AAAAA%3d%3d) **\]**
 
@@ -175,13 +175,13 @@ StormEvents
 | project StartTime, EndTime, Duration, State, EventType, DamageProperty, EpisodeNarrative
 ```
 
-İfadeler, normal tüm işleçleri içerebilir (+, -, *, /, %), ve bir dizi çağırabilirsiniz kullanışlı işlevi yoktur.
+İfadeler her zamanki işleçleri (+,-, *,/,%) içerebilir ve çağırabilmeniz için kullanabileceğiniz bir dizi kullanışlı işlev vardır.
 
-### <a name="summarize"></a>Özetleme
+### <a name="summarize"></a>ölçütü
 
-[**Özetleme**](https://docs.microsoft.com/azure/kusto/query/summarizeoperator): Satır gruplarını toplar.
+[**Özetle**](https://docs.microsoft.com/azure/kusto/query/summarizeoperator): Satır gruplarını toplar.
 
-Aşağıdaki sorgu olayların sayısını döndürür `State`.
+Aşağıdaki sorgu, tarafından `State`olayların sayısını döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlVIBYnFJ%2beX5pUo2CqAaQ1NhaRKheCSxJJUAB%2fedDI3AAAA) **\]**
 
@@ -190,9 +190,9 @@ StormEvents
 | summarize event_count = count() by State
 ```
 
-**Özetlemek** işleci grupları birlikte aynı değerlere sahip satırları **tarafından** yan tümcesi ve ardından toplama işlevini kullanıyor (gibi **sayısı**) her grubu birleştirmek için tek bir satıra. Bu nedenle, bu durumda, yoktur her durum için bir satır ve bu durumda bulunan satır sayısı için bir sütun.
+**Özetleme** işleci, **by** yan tümcesinde aynı değerlere sahip satırları birlikte gruplandırır ve sonra her grubu tek bir satırda birleştirmek için toplama işlevini ( **Count**gibi) kullanır. Bu nedenle, bu durumda her durum için bir satır ve bu durumdaki satır sayısı için bir sütun vardır.
 
-Toplama işlevleri çeşitli yoktur ve birkaç tanesi birinde kullanabilirsiniz **özetlemek** birkaç oluşturmak için işleç hesaplanan sütunları. Örneğin, fırtınalarını sayısı her durum ve fırtınalarını durumu başına benzersiz sayısını almak, ardından kullanmak **üst** en storm etkilenmeyen durumlarını almak için.
+Bir dizi toplama işlevi vardır ve birkaç hesaplanan sütun oluşturmak için bunlardan birkaçını tek bir **özetleme** işlecinde kullanabilirsiniz. Örneğin, her durumda fırtınalarını sayısını ve durum başına benzersiz fırtınalarını sayısını alabilir ve en üst düzey olarak etkilenen durumları almak için **yukarıdan** yararlanın.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlUIBkk455fmlSjYKiSDaA1NHYWQyoJU%2fzSwXDFQPAUiAdYPktJUSKoE6kwsSQUZVpJfoGAKEYGblZJanAwAgbFb73QAAAA%3d) **\]**
 
@@ -202,19 +202,19 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-Sonucu bir **özetlemek** işlem var:
+**Özetleme** işleminin sonucu:
 
-- Her bir sütunun adlı **tarafından**
+- İçindeki adlı her sütun
 
-- Her hesaplanan bir ifadenin bir sütun
+- Hesaplanan her ifade için bir sütun
 
-- Her kombinasyonu değerlere göre satır
+- Her değere göre birleşim için bir satır
 
-### <a name="render"></a>İşleme
+### <a name="render"></a>işlenecek
 
-[**işleme**](https://docs.microsoft.com/azure/kusto/query/renderoperator): Sonuçları bir grafik çıktı işler.
+[**işle**](https://docs.microsoft.com/azure/kusto/query/renderoperator): Sonuçları bir grafik çıkış olarak işler.
 
-Aşağıdaki sorgu, bir sütun grafiği görüntüler.
+Aşağıdaki sorgu bir sütun grafiğini görüntüler.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAFWMsQ7CQAxDdyT%2bIWMrdSgbSxmQ2Nj6Aei4Ru0hkqA0VwTi49uUBRZL9rPdmiidJmQbt5sPjJkoaHojoGeXKJmtWbUoK6DUQQNh6osj9onPwUq4vqC1YLjORc2Dpef2OaD%2bPcEBdvu6dvZQuWG077b6LTlV5A4VotwzcRyC2gxU6ktSqQAAAA%3d%3d) **\]**
 
@@ -227,7 +227,7 @@ StormEvents
 | render columnchart
 ```
 
-Aşağıdaki sorgu, bir basit zaman grafiği görüntüler.
+Aşağıdaki sorgu basit bir zaman grafiği görüntüler.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlVIBYnFJ%2beX5pXYgkkNTYWkSoWkzDyN4JLEopKQzNxUHQXDFE2QtqLUvJTUIoUSoFhyBlASAAyXWQJWAAAA) **\]**
 
@@ -237,7 +237,7 @@ StormEvents
 | render timechart
 ```
 
-Aşağıdaki sorgu, saatlerine binned süresi bir gün, modül olayları sayar ve zaman grafiği görüntüler.
+Aşağıdaki sorgu, olayları bir günde bir kez, saat olarak bir kez ve bir zaman grafiği görüntüleyerek sayar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEADWNQQqDMBRE90LvMBtBwY0HcNkT2L2k8UuEJh9%2bfqSWHt4k4GZghpk3s7L450FB46P5g75KYYXjJJiwfZilm9WIvnZPaDGuGDC6vnRj8t7I%2fiNQ2S%2bWU9CpatfjfVZKLbLo7WGiLZnkGxJoxlqX%2bRf81ZbyiAAAAA%3d%3d) **\]**
 
@@ -249,7 +249,7 @@ StormEvents
 | render timechart
 ```
 
-Aşağıdaki sorgu, birden çok günlük bir zaman grafiği serisinin karşılaştırır.
+Aşağıdaki sorgu, zaman grafiğinde birden çok günlük serisini karşılaştırır.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEACWPSwvCMBCE74L%2fYSgIFXrpD%2bihaKzxkUBTXyeputKCbSCmvvDHm9TL7gwzsN8qq03DHtTa%2b3DwBb0stRdUujMJrjetTQhlS2OLuiGMEF8QIa7GvvusyJBPLaFuEQbZZjWDnGHN9nwigyhYp1wwt7c8z7jgqZM7riZSKC6cFjIv5pimS1n4SLAdFixX7OCMzFkmRdAfundNU5r6QyAPejzrrrVJP8MxTu8eN%2fqT%2bL5xL5CBdcjnyrH%2fALPTSKnkAAAA) **\]**
 
@@ -262,17 +262,17 @@ StormEvents
 ```
 
 > [!NOTE]
-> **İşleme** işlecidir bölümü Altyapısı'nın yerine bir istemci-tarafı özelliği. Kullanım kolaylığı için dile tümleşiktir. Web uygulaması aşağıdaki seçeneklerini destekler: barchart, columnchart, zaman grafiğini, pasta grafiği görüntüsü ve linechart. 
+> **Render** işleci, altyapısının bir parçası yerine istemci tarafı bir özelliktir. Kullanım kolaylığı için dil ile tümleşiktir. Web uygulaması şu seçenekleri destekler: bargrafik, columnChart, piechart, timechart ve lineChart. 
 
 ## <a name="scalar-operators"></a>Skaler işleçler
 
-Bu bölümde bazı en önemli skaler işleçler kapsar.
+Bu bölüm, en önemli skalar işleçlerden bazılarını ele alır.
 
-### <a name="bin"></a>bin()
+### <a name="bin"></a>bin ()
 
-[**bin()** ](https://docs.microsoft.com/azure/kusto/query/binfunction): Değerleri tamsayı aşağı yuvarlar birden çok belirli bir depo boyutu.
+[**bin ()** ](https://docs.microsoft.com/azure/kusto/query/binfunction): Değerleri, belirli bir bin boyutunun bir tam sayıya yuvarlar.
 
-Aşağıdaki sorgu sayısı ile bir gün demet boyutunu hesaplar.
+Aşağıdaki sorgu, sayıyı bir günün demet boyutuyla hesaplar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSjPSC1KVQguSSwqCcnMTVWwU0hJLEktATI1jAwMzHUNjHQNTTQVEvNSkBTZYCoyMtQEGVdcmpubWJRZlaqQCrIiPjm%2fNK9EwVYBTGtoKiRVKiRl5mnAjdJRMEzRBABIhjnmkwAAAA%3d%3d) **\]**
 
@@ -282,11 +282,11 @@ StormEvents
 | summarize event_count = count() by bin(StartTime, 1d)
 ```
 
-### <a name="case"></a>case()
+### <a name="case"></a>Case ()
 
-[**case()** ](https://docs.microsoft.com/azure/kusto/query/casefunction): Koşullar listesini değerlendirir ve ilk sonuç ifade olan bir koşul karşılandığında ya da son verir **başka** ifade. Bu işleç, kategorilere veya verileri gruplandırmak için kullanabilirsiniz:
+[**Case ()** ](https://docs.microsoft.com/azure/kusto/query/casefunction): Koşulların listesini değerlendirir ve koşulu karşılanan ilk sonuç ifadesini veya son **Else** ifadesini döndürür. Bu işleci, verileri sınıflandırmak veya gruplandırmak için kullanabilirsiniz:
 
-Aşağıdaki sorgu yeni bir sütun döndürür `deaths_bucket` ve deaths numarasına göre gruplandırır.
+Aşağıdaki sorgu yeni bir sütun `deaths_bucket` ve grup sayısını sayı olarak döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAGWOwQrCQAxE74X%2bQ9hTCwX14FFBaK9e%2bgGS7gZdbFrYZEXFj7dbqgfNbfJmhml1DNzcaFDJsxdIZMbgnwSOUC8Cu%2fQq6lnUPpDVEroHtIpKKUB3pcEt7lMX7ZV0ClkUgiLPYLqlaQ%2fbdQWmx3AmU%2f2gTUJMzkf%2bYwkJY99%2fiDmuDqac545Bv3MAxb4Bic1Oy88AAAA%3d) **\]**
 
@@ -301,11 +301,11 @@ StormEvents
 | sort by State asc
 ```
 
-### <a name="extract"></a>extract()
+### <a name="extract"></a>Ayıkla ()
 
-[**extract()** ](https://docs.microsoft.com/azure/kusto/query/extractfunction): Bir metin dizesinden bir normal ifade için bir eşleşme alır.
+[**Ayıkla ()** ](https://docs.microsoft.com/azure/kusto/query/extractfunction): Bir metin dizesinden normal ifade için bir eşleşme alır.
 
-Aşağıdaki sorguda bir izlemesinden belirli bir öznitelik değerleri ayıklar.
+Aşağıdaki sorgu, belirli öznitelik değerlerini bir izleden ayıklar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAE2OwQrCMBBE74X%2bw9BTojHYagSVHJRevXkrHqJdpVBbSVew4McbFYungeXtvKmJsetzxw4WZQh2x5og9t6daIWOfdVcJIpkY1OFrc0U8rt3XLWNTbOZnhultU4UfoD5A4zRmVkovInDOo6%2bojh6gh5MTTmQwR0uQckiGb5FMZ0s9WEsQ3uo%2fixSccT9jdqz8ORqKTECV1cSaSdfq2k6L8oAAAA%3d) **\]**
 
@@ -315,13 +315,13 @@ MyData
 | extend Duration = extract("Duration=([0-9.]+)", 1, Trace, typeof(real)) * time(1s)
 ```
 
-Bu sorgu kullanan bir **izin** bir adı bağlayan deyimi (Bu durumda `MyData`) bir ifade. Burada kapsamı geri kalanı için **izin** deyimi görünür (genel kapsam veya bir işlev gövdesini kapsamında), adı, ilişkili değerine başvurmak için kullanılabilir.
+Bu sorgu, bir adı (Bu durumda `MyData`) bir ifadeye bağlayan Let deyimini kullanır. **Let** ifadesinin göründüğü kalan kapsam için (genel kapsam veya bir işlev gövdesi kapsamında), ad, ilişkili değerine başvurmak için kullanılabilir.
 
-### <a name="parsejson"></a>parse_json()
+### <a name="parse_json"></a>parse_json()
 
-[**parse_json()** ](https://docs.microsoft.com/azure/kusto/query/parsejsonfunction): Dize JSON değeri olarak yorumlar ve dinamik olarak değeri döndürür. Kullanarak üstündür **extractjson()** işlevi, bileşik bir JSON nesnesi birden fazla öğenin ayıklamak ihtiyacınız olduğunda.
+[**parse_json ()** ](https://docs.microsoft.com/azure/kusto/query/parsejsonfunction): Bir dizeyi JSON değeri olarak yorumlar ve değeri dinamik olarak döndürür. Bir bileşik JSON nesnesinin birden fazla öğesini ayıklamanız gerektiğinde **extractjson ()** işlevinin kullanımı üstün.
 
-Aşağıdaki sorguda bir diziden JSON öğeleri ayıklar.
+Aşağıdaki sorgu, JSON öğelerini bir diziden ayıklar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAHWPQQuCQBCF74L%2fYdmLBSJ6EGKjU17r1E0kJh1C2XZlHc0w%2f3ur1s1O896bB%2fONRGKnVwIE7MAKOwhuEtnmYiBHwRoypbpvXSf1Bl60BqjUiot04B3IFrmIol0Q%2bpPLdauIi3iyj9KWojCcNfRWx7NuqEiw48KaMRu9bO86y3HXeTPsCVXBzvg8amlpajANXqtGq4VmO5VqoyvM6dsKfkhpmAUzkf9nM9OtLi3reg79ar788AEVX8GkOAEAAA%3d%3d) **\]**
 
@@ -333,7 +333,7 @@ MyData
 | project NewCol.duration[0].value, NewCol.duration[0].valcount, NewCol.duration[0].min, NewCol.duration[0].max, NewCol.duration[0].stdDev
 ```
 
-Aşağıdaki sorgu, JSON öğeleri ayıklar.
+Aşağıdaki sorgu JSON öğelerini ayıklar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAE2OwQqCQBCG74LvsOzFBBE9CLHRKa916hYRkw6RbLuyO5pRvXvrGtZpvn9m4P8kEts%2bSiBga1a7QXCWyBZ7AxUKZslc1SVmh%2bjJe5AdcpHnyzRLxlTpThEXxRhvV%2bVOWeYZBseFZ0t1iT0XLryj4yoMprIweDEcCFXNdnjfaOnaWzAWT43VamqPx6fW6AYr%2bn6l3iH5S95hXjiLH8Mw82TxAQvJEB%2fsAAAA) **\]**
 
@@ -344,7 +344,7 @@ MyData
 | project NewCol.value, NewCol.valcount, NewCol.min, NewCol.max, NewCol.stdDev
 ```
 
-Aşağıdaki sorgu, dinamik veri türü ile JSON öğeleri ayıklar.
+Aşağıdaki sorgu, JSON öğelerini dinamik bir veri türüyle ayıklar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAD2NMQvCMBBG90D%2bw5GphVLSoSARt65ubuJwJjdU0lZiWlrU%2f25MotO9x8H7LHk4bh16hAOYcDxeLUFxcqhJgdlGHHpdcnbOWDzFgnYmoZpmV8tK6GkePTmh2q8N%2fRg%2bUkbGNXAb%2beFNR4tQQd7lZc9ZGuXsBXc33Uh7iJN1jFdZcvunIf5HXCvOEqf2BwXmDCnKAAAA) **\]**
 
@@ -355,11 +355,11 @@ MyData
 | project Trace.value, Trace.counter, Trace.min, Trace.max, Trace.stdDev
 ```
 
-### <a name="ago"></a>ago()
+### <a name="ago"></a>önce ()
 
-[**ago()** ](https://docs.microsoft.com/azure/kusto/query/agofunction): Geçerli saati UTC zamanından belirtilen timespan çıkarır.
+[**önce ()** ](https://docs.microsoft.com/azure/kusto/query/agofunction): Verilen TimeSpan değeri geçerli UTC saat zamanından çıkartır.
 
-Aşağıdaki sorgu, son 12 saat boyunca verileri döndürür.
+Aşağıdaki sorgu, son 12 saat için verileri döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA1WOQQ6CQAxF9yTc4S8hQcmQuNSNR4ALTKQyJDAlnSIuPLwzJGrctM3v+7+t684R7qMEhW6MafQUMJAnsUoIdl4mQm/VVrC+h0Z6shFOINZAIc/qOql24KIEL8nIAuWYohC6sfQB9yjtPtPA8SrhmGeLjF7RjTO1Gu+cIdYPVHjeisOpLyukKTbjYml5piuvXknwIU1lGlPm2Qvzg55L+u+b9udIyOZI6LfHZf/YNK58Ay2HrbAEAQAA) **\]**
 
@@ -371,11 +371,11 @@ print TimeStamp= range(now(-5d), now(), 1h), SomeCounter = range(1,121)
 | where TimeStamp > ago(12h)
 ```
 
-### <a name="startofweek"></a>startofweek()
+### <a name="startofweek"></a>startofweek ()
 
-[**startofweek()** ](https://docs.microsoft.com/azure/kusto/query/startofweekfunction): Sağlanırsa, bir uzaklık tarafından kaydırılacağı uzaklık tarihi içeren haftanın başlangıcını döndürür
+[**startofweek ()** ](https://docs.microsoft.com/azure/kusto/query/startofweekfunction): Belirtilmişse bir uzaklığa göre kaydırılan, tarihi içeren haftanın başlangıcını döndürür
 
-Aşağıdaki sorguyu farklı uzaklıkları ile haftanın başlangıcını döndürür.
+Aşağıdaki sorgu, farklı uzaklıklarla haftanın başlangıcını döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEACtKzEtPVchPSytOLVFIK8rPVdA1VCjJVzBUKC5JLVAw5OWqUSgoys9KTS5RKE9NzQ4uSSwqUbAFygLp%2fDSQkEZefrmGpg7UEE0dCA0AdE3lv1kAAAA%3d) **\]**
 
@@ -384,13 +384,13 @@ range offset from -1 to 1 step 1
 | project weekStart = startofweek(now(), offset),offset
 ```
 
-Bu sorgu kullanan **aralığı** işleci değerlerinin tek sütunlu bir tablo oluşturur. Ayrıca bkz: [ **startofday()** ](https://docs.microsoft.com/azure/kusto/query/startofdayfunction), [ **startofweek()** ](https://docs.microsoft.com/azure/kusto/query/startofweekfunction), [ **startofyear()** ](https://docs.microsoft.com/azure/kusto/query/startofyearfunction)), [ **startofmonth()** ](https://docs.microsoft.com/azure/kusto/query/startofmonthfunction), [ **endofday()** ](https://docs.microsoft.com/azure/kusto/query/endofdayfunction), [ **endofweek()**  ](https://docs.microsoft.com/azure/kusto/query/endofweekfunction), [ **endofmonth()** ](https://docs.microsoft.com/azure/kusto/query/endofmonthfunction), ve [ **endofyear()** ](https://docs.microsoft.com/azure/kusto/query/endofyearfunction).
+Bu sorgu, tek sütunlu bir değer tablosu üreten **Range** işlecini kullanır. Ayrıca bkz: [**startofday ()** ](https://docs.microsoft.com/azure/kusto/query/startofdayfunction), [**startofweek ()** ](https://docs.microsoft.com/azure/kusto/query/startofweekfunction), [**STARTOFYEAR ()** ](https://docs.microsoft.com/azure/kusto/query/startofyearfunction)), [**STARTOFMONTH ()** ](https://docs.microsoft.com/azure/kusto/query/startofmonthfunction), [**endofday ()** ](https://docs.microsoft.com/azure/kusto/query/endofdayfunction), [**endofweek ()** ](https://docs.microsoft.com/azure/kusto/query/endofweekfunction), [**ENDOFMONTH**](https://docs.microsoft.com/azure/kusto/query/endofmonthfunction)() ve [**ENDOFYEAR ()** ](https://docs.microsoft.com/azure/kusto/query/endofyearfunction).
 
-### <a name="between"></a>between()
+### <a name="between"></a>Between ()
 
-[**between()** ](https://docs.microsoft.com/azure/kusto/query/betweenoperator): Kapsamlı aralığı içinde bir girdiyle eşleşir.
+[ **() arasında**](https://docs.microsoft.com/azure/kusto/query/betweenoperator): Dahil edilen aralığın içindeki girişle eşleşir.
 
-Aşağıdaki sorgu verilerini belirtilen tarih aralığına göre filtreleyin.
+Aşağıdaki sorgu, verileri belirli bir tarih aralığına göre filtreliyor.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSjPSC1KVQguSSwqCcnMTVVISi0pT03NU9BISSxJLQGKaBgZGJjrApGRuaaCnp4ChrixgaYmyKTk%2fNK8EgBluyagXgAAAA%3d%3d) **\]**
 
@@ -400,7 +400,7 @@ StormEvents
 | count
 ```
 
-Aşağıdaki sorgu, belirli bir tarih aralığındaki, üç gün hafif çeşitlemesi ile tarafından verilere filtre (`3d`) başlangıç tarihinden itibaren.
+Aşağıdaki sorgu, verileri belirli bir tarih aralığına göre filtreleyerek, başlangıç tarihinden üç güne (`3d`) sahip küçük bir çeşitle.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSjPSC1KVQguSSwqCcnMTVVISi0pT03NU9BISSxJLQGKaBgZGJjrApGRuaaCnp6CcYomSF9yfmleCQCGAqjRTAAAAA%3d%3d) **\]**
 
@@ -410,15 +410,15 @@ StormEvents
 | count
 ```
 
-## <a name="tabular-operators"></a>Tablo işleçleri
+## <a name="tabular-operators"></a>Tablolu işleçler
 
-Kusto bazıları, bu makalenin diğer bölümlerde ele alınan tablo işleçlerinin çoğu, sahiptir. Burada odaklanacağız **ayrıştırma**. 
+Kusto, bazıları bu makalenin diğer bölümlerinde ele alınan çok tablolu işleçlere sahiptir. Burada **ayrıştırmaya**odaklanacağız. 
 
-### <a name="parse"></a>Ayrıştırma
+### <a name="parse"></a>MAZ
 
-[**Ayrıştırma**](https://docs.microsoft.com/azure/kusto/query/parseoperator): Bir dize ifadesi değerlendirilir ve bir veya daha fazla hesaplanmış sütunlara değeri ayrıştırır. Ayrıştırılacak üç yolu vardır: basit (varsayılan), regex ve gevşek.
+[**ayrıştırma**](https://docs.microsoft.com/azure/kusto/query/parseoperator): Bir dize ifadesini değerlendirir ve değerini bir veya daha fazla hesaplanmış sütunda ayrıştırır. Ayrıştırmanın üç yolu vardır: basit (varsayılan), Regex ve gevşek.
 
-Aşağıdaki sorgu bir izleme ayrıştırır ve basit ayrıştırma varsayılan ilgili değerleri ayıklar. (StringConstant adlandırılır) ifade bir normal bir dize değeridir ve bu eşleşme katı: genişletilmiş sütunları gerekli türleri eşleşmelidir.
+Aşağıdaki sorgu bir izlemeyi ayrıştırır ve varsayılan bir basit ayrıştırma kullanarak ilgili değerleri ayıklar. İfade (StringConstant olarak adlandırılır) normal bir dize değeri ve eşleşme katı: genişletilmiş sütunlar gereken türlerle eşleşmelidir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAN2UTU%2fDMAyG75X6H6xcxlCkpRlsUNQjN6gQ2wnEoevMFsiaKk2HJvHjabqvlI91l11QLrH12vETW5Zo4H411kmKEME0MdWZSISz2yVmpvaHhdEim3V979n3OrU%2fhFgZ8boaSZHiI0pMiipEY6FKnWKcLDB6EDlKkeEoneO0lKgpGGUSWYcUER9SKOw1LhcT1BHvU5AqfR%2bLKpbxXjDscRYMgF2FFyxkwRMFvX7ngCLXuBSqLO5%2bT9S%2ftrJuh54OI7g8iMFaMdhxGOy0GJz9i25w%2fjdG0IoRHNWNNe1ph2pwEKNlqI7HsEPley83vrfZCL73CXmiq%2fr32wA%2bhJnDOZAGEQHXBNIEIq4VSpXNbAIXkbjAO8UOmuz4bWoXlrhWWO0vqyA2%2bAcw2f7B1rORd60calat3jA1TRbq1A6NxsC%2bLdCoCuj3p74AKTs4pmcFAAA%3d) **\]**
 
@@ -436,7 +436,7 @@ MyTrace
 | project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previouLockTime
 ```
 
-Aşağıdaki sorgu bir izleme ayrıştırır ve ilgili değerleri kullanarak ayıklar `kind = regex`. StringConstant normal bir ifade olabilir.
+Aşağıdaki sorgu, kullanarak `kind = regex`bir izlemeyi ayrıştırır ve ilgili değerleri ayıklar. StringConstant bir normal ifade olabilir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAN2UQU%2fCQBCF7036HyZ7gWKRbVHQmgY9eNPGCCcoh9KOsLK0ZLtFMf54l6LQBgUuXEyTTbP7pt3vvclwlPC47IkgRHAhCqR6Rhyher%2fAWOb7TioFi8eGrg10rZLvO%2bAlkr0su5yF%2bIwcg1SVCEyTTIToBTN0n9gcOYuxG04wyjgKE2QiA56XpK7dNiFdvXrZbITCtZsm8CSc9piqpXbDajdsarWAXjkX1KFW3wSx%2fs8exVzggiVZ%2bvD7h5rXK5lRMU%2bHYV3uxaAHMehxGPS0GDb9F2nY9t8Y1kEM66g01rSnbarWXowDTXU8xqqpdG14o2vfE0HXPmEeCHX%2fKYsjNR8EjvEdtqMB3picAKme1zrGIKh%2f3NX7w5pLoEgLt6SM56c1PzpTq6oqYpIitMOTeAxAlKb6c3Wjs3GBbAzJJUV8UjQjP91BJztuOGryKbHvGwQgxxbJK4ayTFKKBbahQCkA2DX7C29veJJmBQAA) **\]**
 
@@ -454,7 +454,7 @@ MyTrace
 | project resourceName , sliceNumber , lockTime , releaseTime , previousLockTime
 ```
 
-Aşağıdaki sorgu bir izleme ayrıştırır ve ilgili değerleri kullanarak ayıklar `kind = relaxed`. StringConstant bir normal bir dize değeridir ve bu eşleşme gevşek: genişletilmiş sütunların kısmen gerekli türleri aynı.
+Aşağıdaki sorgu, kullanarak `kind = relaxed`bir izlemeyi ayrıştırır ve ilgili değerleri ayıklar. StringConstant normal bir dize değeridir ve eşleşme gevşek olabilir: genişletilmiş sütunlar, gereken türlerle kısmen eşleşir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAN2US0%2fCQBDH7036HSZ7wZpN2BYFrenRGzZG4KLxUNoRVpYu2W5REj%2b83fKw9QE1kYvppTOZx%2f%2b3MxmBGm5WQxXFCAEkkS6%2bsUA4uV5iqku%2fn2nF04ljWw%2b21Sr9PoRS86fVQPAY71BglBUpCjOZqxjDaI7BLV%2bg4CkO4ikmuUBFQUsdiTIlC7wehcz8hvl8jCrwOhSEjGdDXuQyr%2b322h5zu8Au%2fDPmM%2feeglr32ROxULjkMs%2f63xfqXJowp0WPh%2bGe78VgBzFYMwx2XAyP%2fYtpeN7PGO5BDLfRNNa0x12q7l6MA0vVHMMslW09XtnW5iLY1hssIlXon%2fE0CYom0SsmQP6IMxz1%2b7%2b7AnXQdX6TNXMIvHA9hVMgNYEEqiaQuj5StXwh04kpUNVLqup3ETsCsoMxpavSSdXyi7NrIohJ%2foJDtoRbzybcMeFQjkjJZ4x1nYVWtEPtleHjjaGmCujnVu%2fWU75tHgYAAA%3d%3d) **\]**
 
@@ -474,11 +474,11 @@ MyTrace
 
 ## <a name="time-series-analysis"></a>Zaman serisi analizi
 
-### <a name="make-series"></a>Oluştur-serisi
+### <a name="make-series"></a>diziyi oluştur
 
-[**yapma serisi**](https://docs.microsoft.com/azure/kusto/query/make-seriesoperator): gibi satır gruplarını bir araya toplar [özetlemek](https://docs.microsoft.com/azure/kusto/query/summarizeoperator), ancak oluşturur (zaman) serisi değerlere göre her birleşimi başına vektör.
+[ **-Series**](https://docs.microsoft.com/azure/kusto/query/make-seriesoperator): [özetleme](https://docs.microsoft.com/azure/kusto/query/summarizeoperator)gibi satır gruplarını toplar, ancak her değere göre her birleşimi için bir (Time) serisi vektörü oluşturur.
 
-Aşağıdaki sorgu, zaman serisi storm olayları her gün sayısı için bir dizi döndürür. Sorgu eksik depo 0 sabiti doldurma her durum, bir üç aylık dönemin kapsar:
+Aşağıdaki sorgu, gün başına fırtınası olay sayısı için bir zaman serisi kümesi döndürür. Sorgu, her durum için üç aylık bir dönemi ele alır ve kayıp sepetler 0 sabiti ile dolduruluyor:
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUchNzE7VLU4tykwtVsizTc4vzSvR0FRISU1LLM0psTVQyM9TCC5JLCoJycxNVcjMUyhKzEtP1UhJLEktAYpoGBkYmOsaGAKRpo4CmqixrjFI1DBFUyGpEmRKSSoAazsM0n0AAAA%3d) **\]**
 
@@ -487,9 +487,9 @@ StormEvents
 | make-series n=count() default=0 on StartTime in range(datetime(2007-01-01), datetime(2007-03-31), 1d) by State
 ```
 
-(Zaman) serisi kümesi oluşturduktan sonra anormal şekiller, Dönemsel desenleri ve çok daha fazlasını algılamak için serisi işlevleri uygulayabilirsiniz.
+Bir dizi (Time) serisi oluşturduktan sonra anormal şekilleri, mevsimsel desenleri ve çok daha fazlasını tespit etmek için seriler işlevleri uygulayabilirsiniz.
 
-Aşağıdaki sorgu, belirli bir gün içinde en çok olayın olan üst üç durumdan ayıklar:
+Aşağıdaki sorgu, belirli bir günde en fazla olay bulunan en iyi üç durumu ayıklar:
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAF2OsQoCMRBEe8F%2f2DIBAzmvsLrSLzj7EC%2brBs3mSPbkBD%2feLDYibPVmZmdGziUdn0hct5s3JH9HU7FErEDDlBdipSHgxS8PHixkgpF94VNMCJGgeLqiCp6RG1F7aw%2fGdu30Dv5ob3qhXdBwfskXRmnElZECfDtdbbgq0qJwnqEX76%2fmyCW%2ftkV1Ek9pWSwgNdOt7foAJIuybs8AAAA%3d) **\]**
 
@@ -501,19 +501,19 @@ StormEvents
 | render timechart
 ```
 
-Daha fazla bilgi için tam listesini gözden geçirin [serisi işlevleri](https://docs.microsoft.com/azure/kusto/query/scalarfunctions#series-processing-functions).
+Daha fazla bilgi için [seri işlevlerinin](https://docs.microsoft.com/azure/kusto/query/scalarfunctions#series-processing-functions)tam listesini gözden geçirin.
 
 ## <a name="advanced-aggregations"></a>Gelişmiş toplamalar
 
-Temel toplamalar gibi ele aldığımız **sayısı** ve **özetlemek**, bu makalenin üst kısmındaki. Bu bölümde, daha gelişmiş seçenekler sunar.
+Bu makalenin önceki bölümlerinde bulunan **say** ve **Özetle**gibi temel toplamalar kapsandık. Bu bölüm daha gelişmiş seçenekler sunar.
 
-### <a name="top-nested"></a>üst iç içe geçmiş
+### <a name="top-nested"></a>üst iç içe
 
-[**üst iç içe geçmiş**](https://docs.microsoft.com/azure/kusto/query/topnestedoperator): Her bir düzey detaya gitme önceki düzeyi değerlere dayalı olduğu hiyerarşik en iyi sonuçlar üretir.
+[**üst iç içe**](https://docs.microsoft.com/azure/kusto/query/topnestedoperator): Her düzeyin önceki düzey değerlere göre detaya gitme olduğu hiyerarşik üst sonuçlar üretir.
 
-Bu işleci veya Pano görselleştirme senaryolar için aşağıdaki gibi bir soruyu yanıtlamak gerekli olduğunda yararlıdır: "(Bazı toplama kullanarak); K1 üst N değerlerini bulma her biri için üst milyon değerlerini (başka bir toplama kullanarak); K2 nelerdir Bul ..."
+Bu işleç, pano görselleştirme senaryolarında veya aşağıdaki gibi bir soruyu yanıtlamak için gerekli olduğunda faydalıdır: "K1 'in top-N değerlerini bulur (bazı toplama kullanarak); Bunların her biri için, K2 (başka bir toplama kullanarak) en üst-b değerlerini bulun; ..."
 
-Aşağıdaki sorgu içeren hiyerarşik bir tablo döndürür. `State` en üst düzeyinde, arkasından `Sources`.
+Aşağıdaki sorgu, en üst düzeyde ve `State` `Sources`sonrasında bir hiyerarşik tablo döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSjJL9DNSy0uSU1RMFLIT1MILkksSVVIqlQoLs3VcEpNz8zzSSzR1OHlQlJoDFaYX1qUTEilIUila16KT35yYklmfh6GcgDrXwk5jgAAAA%3d%3d) **\]**
 
@@ -524,11 +524,11 @@ top-nested 3 of Source by sum(BeginLat),
 top-nested 1 of EndLocation by sum(BeginLat)
 ```
 
-### <a name="pivot-plugin"></a>pivot() plugin
+### <a name="pivot-plugin"></a>Pivot () eklentisi
 
-[**pivot() plugin**](https://docs.microsoft.com/azure/kusto/query/pivotplugin): Çıkış tablodaki birden çok sütuna Giriş tablosunda bir sütunda yalnızca benzersiz değerler açarak bir tablo döndürür. İşleci, kalan tüm sütun değerleri son Çıkışta burada gerekli toplamaları gerçekleştirir.
+[**Pivot () eklentisi**](https://docs.microsoft.com/azure/kusto/query/pivotplugin): Giriş tablosundaki bir sütundan benzersiz değerleri çıkış tablosunda birden çok sütuna açıp bir tabloyu döndürür. İşleci, son çıktıda kalan herhangi bir sütun değeri için gerektiğinde toplamaları gerçekleştirir.
 
-Aşağıdaki sorgu, bir filtre uygular ve satırları sütunlara döner.
+Aşağıdaki sorgu bir filtre uygular ve satırları sütunlar halinde özetler.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSgoys9KTS5RCC5JLEnVUQBLhFQWpILkyjNSi1IhMgrFJYlFJcXlmSUZCkqOPkoIabgOhYzEYgWl8My8FLBsalliTilIZ0FmWX6JBtgUTQDlv21NfQAAAA%3d%3d) **\]**
 
@@ -540,11 +540,11 @@ StormEvents
 | evaluate pivot(State)
 ```
 
-### <a name="dcount"></a>dcount()
+### <a name="dcount"></a>DCount ()
 
-[**dcount()** ](https://docs.microsoft.com/azure/kusto/query/dcount-aggfunction): Grup içinde tahmini bir ifadenin benzersiz değerlerin sayısını döndürür. Kullanım [ **Count() işlevi** ](https://docs.microsoft.com/azure/kusto/query/countoperator) tüm değerleri saymak için.
+[**DCount ()** ](https://docs.microsoft.com/azure/kusto/query/dcount-aggfunction): Gruptaki bir ifadenin farklı değer sayısının tahminini döndürür. Tüm değerleri saymak için [**Count ()** ](https://docs.microsoft.com/azure/kusto/query/countoperator) kullanın.
 
-Aşağıdaki sorguda ayrı olarak sayar `Source` tarafından `State`.
+Aşağıdaki sorgu, tarafından `Source` `State`birbirinden farklı sayılır.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlUIzi8tSk4tVrBVSEnOL80r0YAIaCokVSoElySWpAIAFKgSBDoAAAA%3d) **\]**
 
@@ -553,11 +553,11 @@ StormEvents
 | summarize Sources = dcount(Source) by State
 ```
 
-### <a name="dcountif"></a>dcountif()
+### <a name="dcountif"></a>değersay ()
 
-[**dcountif()** ](https://docs.microsoft.com/azure/kusto/query/dcountif-aggfunction): Farklı değer ifadesinin kendisi için koşulu değerlendirir satırlar için tahmini, true döndürür.
+[**değersay ()** ](https://docs.microsoft.com/azure/kusto/query/dcountif-aggfunction): Koşulun true olarak değerlendirdiği satırlar için ifadenin farklı değer sayısının tahminini döndürür.
 
-Aşağıdaki sorguyu farklı değerleri sayar `Source` nerede `DamageProperty < 5000`.
+Aşağıdaki sorgu, `Source` WHERE `DamageProperty < 5000`değerlerinin ayrı değerlerini sayar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVqhRKEnMTlUwNDDg5apRKC7NzU0syqxKVQjOLy1KTi1WsFVISc4vzSvJTNOACOkouCTmJqanBhTlF6QWlVQq2CiYGhgYaCokVSoElySWpAIAuk%2fTX14AAAA%3d) **\]**
 
@@ -567,11 +567,11 @@ StormEvents
 | summarize Sources = dcountif(Source, DamageProperty < 5000) by State
 ```
 
-### <a name="dcounthll"></a>dcount_hll()
+### <a name="dcount_hll"></a>dcount_hll()
 
-[**dcount_hll()** ](https://docs.microsoft.com/azure/kusto/query/dcount-hllfunction): Hesaplar **dcount** HyperLogLog sonuçlarından (tarafından oluşturulan [**hll**](https://docs.microsoft.com/azure/kusto/query/hll-aggfunction) veya [**hll_merge** ](https://docs.microsoft.com/azure/kusto/query/hll-merge-aggfunction).
+[**dcount_hll ()** ](https://docs.microsoft.com/azure/kusto/query/dcount-hllfunction): Hiperloglog sonuçlarından **DCount** değerini hesaplar ( [**hll**](https://docs.microsoft.com/azure/kusto/query/hll-aggfunction) veya [**hll_merge**](https://docs.microsoft.com/azure/kusto/query/hll-merge-aggfunction)tarafından oluşturulur.
 
-Aşağıdaki sorgu HLL algoritması sayısı üretmek için kullanır.
+Aşağıdaki sorgu, sayımı oluşturmak için HLL algoritmasını kullanır.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlXIyMkJSi1WsAUxNFwScxPTUwOK8gtSi0oqNRWSKhWSMvM0gksSi0pCMnNTdQwNcjUx9PumFqWnpkCMiM8FcTQgpoKVFhTlZ6UmlyikJOeX5pXEg6yB69EEAKm9wyCXAAAA) **\]**
 
@@ -582,11 +582,11 @@ StormEvents
 | project dcount_hll(hllMerged)
 ```
 
-### <a name="argmax"></a>arg_max()
+### <a name="arg_max"></a>arg_max()
 
-[**arg_max()** ](https://docs.microsoft.com/azure/kusto/query/arg-max-aggfunction): Bir ifade en üst düzeye çıkarır ve başka bir ifadenin değerini döndürür grubunda bir satırı bulur (veya * tüm satırı döndürülecek).
+[**arg_max()** ](https://docs.microsoft.com/azure/kusto/query/arg-max-aggfunction): Grupta bir ifadeyi en üst düzeye çıkaran ve başka bir ifadenin değerini döndüren bir satırı bulur (veya * tüm satırı döndürmek için).
 
-Aşağıdaki sorguyu her durumda son aşırı istek akışları nedeniyle raporun zaman döndürür.
+Aşağıdaki sorgu her durumda son taşma raporunun saatini döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSjPSC1KVQDzQyoLUhVsbRWU3HLy81OUQLLFpbm5iUWZVakKiUXp8bmJFRrBJYlFJSGZuak6ClqaCkmVCkCBklSQ2oKi%2fKzU5BKIgI4CkkLXvBQoA2YNAHO1S0OFAAAA) **\]**
 
@@ -597,11 +597,11 @@ StormEvents
 | project State, StartTime, EndTime, EventType
 ```
 
-### <a name="makeset"></a>makeset()
+### <a name="makeset"></a>makeset ()
 
-[**makeset()** ](https://docs.microsoft.com/azure/kusto/query/makeset-aggfunction): Bir dinamik bir ifade alan farklı değerler kümesini (JSON) dizisi grubunda döndürür.
+[**makeset ()** ](https://docs.microsoft.com/azure/kusto/query/makeset-aggfunction): Bir ifadenin grupta aldığı ayrı değerler kümesinin dinamik (JSON) dizisini döndürür.
 
-Aşağıdaki sorgu, ne zaman sel her durum rapor edilmiştir ve ayrı bir değerler kümesinden bir dizi oluşturur her zaman döndürür.
+Aşağıdaki sorgu, her durum tarafından bir taşma rapor edildiğinde ve ayrı değerler kümesinden bir dizi oluşturduğunda tüm süreleri geri döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAFWLQQ6CQBAE7yb8ocNJE76wR3mA8IEFOxF1mM3siIHweAVPHqsq1bianCeOnovDiveNRuzczokIAWX9VL2WW80vkWjDQuzuwqTmGQESH8z0Y%2bPRvB2EJ3QzvuTcvmR6Z%2b8%2fUf3NH6ZkMFeAAAAA) **\]**
 
@@ -612,11 +612,11 @@ StormEvents
 | project State, FloodReports
 ```
 
-### <a name="mv-expand"></a>MV-genişletin
+### <a name="mv-expand"></a>MV-Genişlet
 
-[**mv-expand**](https://docs.microsoft.com/azure/kusto/query/mvexpandoperator): Koleksiyondaki her değer ayrı bir satır alır, böylece birden çok değerli koleksiyonlar dinamik olarak yazılmış bir sütundan genişletir. Genişletilmiş satırdaki diğer tüm sütunlar yinelenir. Makelist tersidir.
+[**MV-Genişlet**](https://docs.microsoft.com/azure/kusto/query/mvexpandoperator): Koleksiyondaki her değerin ayrı bir satır alması için, dinamik olarak belirlenmiş bir sütundan çok değerli koleksiyonları genişletir. Genişletilmiş bir satırdaki diğer tüm sütunlar yinelenir. Bu, MakeList 'in tersidir.
 
-Aşağıdaki sorguyu örnek veri kümesi oluşturma ve göstermek için kullanarak oluşturur **mv-genişletin** özellikleri.
+Aşağıdaki sorgu, bir küme oluşturup daha sonra **MV-Expand** yeteneklerini göstermek için kullanarak örnek veriler üretir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAFWOQQ6CQAxF9yTcoWGliTcws1MPIFygyk9EKTPpVBTj4Z2BjSz%2f738v7WF06r1vD2xcp%2bCoNq9yHDFYLIsvvW5Q0JybKYCco2omqnyNTxHW7oPFckbwajFZhB%2bIsE1trNZ0gi1dpuRmQ%2baC%2bjuuthS7Fbwvi%2f%2bP8lpGvAMP7Wr3A6BceSu7AAAA) **\]**
 
@@ -629,11 +629,11 @@ FloodDataSet
 | mv-expand FloodReports
 ```
 
-### <a name="percentiles"></a>percentiles()
+### <a name="percentiles"></a>yüzdebirlik değeri ()
 
-[**percentiles()** ](https://docs.microsoft.com/azure/kusto/query/percentiles-aggfunction): Tahmin için belirtilen döndürür [**derece en yakın yüzde birlik**](https://docs.microsoft.com/azure/kusto/query/percentiles-aggfunction) popülasyonun bir ifadesi tarafından tanımlanan. Yüzdelik dilim bölgede popülasyonunu yoğunluğunu doğruluğu bağlıdır. Yalnızca toplama içinde bağlamında kullanılan [**özetlemek**](https://docs.microsoft.com/azure/kusto/query/summarizeoperator).
+[**yüzdebirlik değeri ()** ](https://docs.microsoft.com/azure/kusto/query/percentiles-aggfunction): Bir ifade tarafından tanımlanan popülasyonun belirtilen [**en yakın derecelendirme yüzdelik**](https://docs.microsoft.com/azure/kusto/query/percentiles-aggfunction) değeri için bir tahmin döndürür. Doğruluk, yüzdelik bölge 'nin içindeki popülasyon yoğunluğunu gösterir. Yalnızca [**özetleme**](https://docs.microsoft.com/azure/kusto/query/summarizeoperator)içinde toplama bağlamında kullanılabilir.
 
-Aşağıdaki sorgu storm süre yüzdebirliklerini hesaplar.
+Aşağıdaki sorgu, yüzdebirlik değeri for fırtınası süresini hesaplar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUUitKEnNS1FIKS1KLMnMz1OwVXDNSwnJzE1V0FUILkksKgGxQQrLM1KLUhHq7BQMirEI2ygYZ4CEi0tzcxOLMqtSFQpSi5KBlmXmpBZrwJTpKJjqKBgZACkgtgBiS1NNAEC7XiaYAAAA) **\]**
 
@@ -645,7 +645,7 @@ StormEvents
 | summarize percentiles(duration, 5, 20, 50, 80, 95)
 ```
 
-Aşağıdaki sorguda yüzdebirliklerini storm süresince durumuna göre hesaplar ve beş dakikalık depo verileri normalleştirir (`5m`).
+Aşağıdaki sorgu, yüzdebirlik değeri for fırtınası süresini duruma göre hesaplar ve verileri beş dakikalık sepetler (`5m`) ile normalleştirir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAG1NSwrCMBTcC95hli1EKEpBQd31BHUvafOgAZNI8uIPD28SEBVcDDMM8%2bnZedNdyHKYz56gG5NVUNFL1s5ih86qgzaEBXqWnrPOwetEnj65PZrwx95iNWU7RGOk1w8C5avj6KLlNF64qjHcMWhbvXsCralFPmT6rZ%2fJj2lAnyh8pwWWTaKEdcKmLYul%2fgLODFs%2b4AAAAA%3d%3d) **\]**
 
@@ -658,15 +658,15 @@ StormEvents
 | summarize percentiles(duration, 5, 20, 50, 80, 95) by State
 ```
 
-### <a name="cross-dataset"></a>Veri kümesi arası
+### <a name="cross-dataset"></a>Çapraz veri kümesi
 
-Bu bölüm, daha karmaşık sorgular oluşturmak, veritabanları ve kümelerdeki veri tabloları ve sorgu arasında JOIN olanak sağlayan öğe kapsar.
+Bu bölüm, daha karmaşık sorgular oluşturmanızı, tablolar arasında veri katılmayı ve veritabanları ile kümeler arasında sorgulama yapmayı sağlayan öğeleri ele alır.
 
-### <a name="let"></a>let
+### <a name="let"></a>atalım
 
-[**izin**](https://docs.microsoft.com/azure/kusto/query/letstatement): Modüler ve yeniden kullanımını artırır. **İzin** deyimi sağlar, olası karmaşık ifadeyi birden çok parçaya bölmek, her bir adına bağlı ve bu parçaların birlikte oluşturun. A **izin** deyimi de kullanıcı tanımlı işlevleri ve görünümleri (ifadelerin sonuçlarını aramak gibi yeni bir tablo tablolar üzerinden) oluşturmak için kullanılabilir. İfadeleri bağlı olarak bir **izin** deyimi skalar türü tablo türü veya kullanıcı tanımlı işlev (lambdalar) olabilir.
+[**izin ver**](https://docs.microsoft.com/azure/kusto/query/letstatement): Modülerliği ve yeniden kullanımı geliştirir. **Let** deyimi, potansiyel olarak karmaşık bir ifadeyi birden çok parçaya bölebilir, her biri bir ada bağlanır ve bu parçaları birlikte oluşturabilir. Bir **Let** deyimi, Kullanıcı tanımlı işlevler ve görünümler oluşturmak için de kullanılabilir (sonuçları yeni bir tablo gibi görünür tablolar üzerinde ifadeler). **Let** deyimi tarafından sınırlanan ifadeler, tablo türü veya Kullanıcı tanımlı işlev (Lambdas) türünde skalar türde olabilir.
 
-Aşağıdaki örnek, bir tablo türü değişken oluşturur ve bir sonraki ifade kullanır.
+Aşağıdaki örnek tablosal türünde bir değişken oluşturur ve sonraki bir ifadede onu kullanır.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAMtJLVHwyUzPKMnLzEsPLskvyi1WsOXlArNcy1LzSop5uWoUyjNSi1IVwPyQyoJUBVtbBSW4LiVrXq4coDGOZYk5iXnJGakkGQPXBTIGzSUgPVn5mXkKGmhmayrk5ykElySWpIKUpGQWl2TmJZdARACul3kY0gAAAA%3d%3d) **\]**
 
@@ -684,9 +684,9 @@ LightningStorms
 
 ### <a name="join"></a>join
 
-[**birleştirme**](https://docs.microsoft.com/azure/kusto/query/joinoperator): Belirtilen sütunların her tablodan eşleşen değerlere göre yeni bir tablo oluşturmak için iki tablonun satırlarını birleştirir. Kusto birleşim türleri çeşitli destekler: **fullouter**, **iç**, **innerunique**, **leftanti**, **leftantisemi **, **leftouter**, **leftsemi**, **rightanti**, **rightantisemi**, **rightouter **, **rightsemi**.
+[**Birleştir**](https://docs.microsoft.com/azure/kusto/query/joinoperator): Her tablonun belirtilen sütun (ler) değerlerini eşleştirerek yeni bir tablo oluşturmak için iki tablo satırını birleştirin. Kusto, tam bir birleşim türü aralığını destekler: **FullOuter**, **Inner**, **ınnerunique**, **leftantı**, **leftantiyarı**, **LeftOuter**, **leftyarı**, **sağtantı**, **sağlaştırılmış tiyarı**,, **rightyarı**.
 
-Aşağıdaki örnekte, bir iç birleştirme ile iki tabloyu birleştirir.
+Aşağıdaki örnek iki tabloyu bir iç birleşim ile birleştirir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA8tJLVGIULBVSEksAcKknFQN79RKq+KSosy8dB2FsMSc0lRDq5z8vHRNXq5oXi4FIFBPVNcx1IGyk9R1jJDYxjB2srqOCS9XrDUvVw7Qhkj8Nhih2wA0ydAAySgjZI4xnJMCtMQAYkuEQo1CVn5mnkJ2Zl6KbWZeXmoR0Nb8PAWgZQAFPLdO5AAAAA==) **\]**
 
@@ -710,13 +710,13 @@ X
 ```
 
 > [!TIP]
-> Kullanım **burada** ve **proje** birleştirme önce giriş tablosu içindeki satırları ve sütunları sayıda azaltmak için işleçler. Bir tablonun her zaman diğerinden daha küçük ise birleştirme (piped) sol tarafındaki kullanın. Birleştirme eşleşme sütunları aynı ada sahip olmalıdır. Kullanım **proje** tablolardan birinde bir sütunu yeniden adlandırmak gerekirse işleci.
+> JOIN öncesinde, giriş tablolarında bulunan satır ve sütun sayılarını azaltmak için **WHERE** ve **Proje** işleçlerini kullanın. Bir tablo her zaman diğerinin daha küçükse, bunu birleştirmenin sol (Piped) tarafı olarak kullanın. JOIN eşleşmesi için sütunlar aynı ada sahip olmalıdır. Tablolardan birindeki bir sütunu yeniden adlandırmak için gerekiyorsa **Proje** işlecini kullanın.
 
-### <a name="serialize"></a>Seri hale getirme
+### <a name="serialize"></a>Serialize
 
-[**seri hale getirme**](https://docs.microsoft.com/azure/kusto/query/serializeoperator): Serileştirilmiş veriler gibi gerektiren işlevleri kullanabilirsiniz. böylece satır serileştiren **row_number()** .
+[**seri hale getirme**](https://docs.microsoft.com/azure/kusto/query/serializeoperator): **Row_number ()** gibi serileştirilmiş veriler gerektiren işlevleri kullanabilmeniz için satır kümesini seri hale getirir.
 
-Verileri seri hale getirilmiş olduğundan aşağıdaki sorgu başarılı olur.
+Aşağıdaki sorgu, veriler serileştirildiği için başarılı oldu.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlVIzi%2fNK9HQVEiqVAguSSxJBcumFmUm5gBlQZzUipLUvBSFovzy%2bLzS3KTUIgVbJI6GJgB4pV4NWgAAAA%3d%3d) **\]**
 
@@ -727,7 +727,7 @@ StormEvents
 | extend row_number = row_number()
 ```
 
-Satır kümesi, ayrıca bir sonuç ise sıralanmış olarak değerlendirilir: **sıralama**, **üst**, veya **aralığı** işleçleri, ardından isteğe bağlı olarak **proje**, **proje koyma**, **genişletmek**, **burada**, **ayrıştırma**, **mv-genişletin**, veya **ele** işleçleri.
+Satır kümesi de bir sonuç ise serileştirilmiş olarak değerlendirilir: **sıralama**, **üst**veya **Aralık** işleçleri, isteğe bağlı olarak **Proje**, **Proje-kondu**, **uzat**, **WHERE**, **Parse**, **MV-Genişlet** veya işleçlerden **yararlanın** .
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlVIzi%2fNK9HQVEiqVAguSSxJBcvmF5XABRQSi5NBgqkVJal5KQpF%2beXxeaW5SalFCrZIHA1NAEGimf5iAAAA) **\]**
 
@@ -738,11 +738,11 @@ StormEvents
 | extend row_number = row_number()
 ```
 
-### <a name="cross-database-and-cross-cluster-queries"></a>Platformlar arası ve küme içi sorguları
+### <a name="cross-database-and-cross-cluster-queries"></a>Veritabanları arası ve çapraz küme sorguları
 
-[Platformlar arası ve küme içi sorguları](https://docs.microsoft.com/azure/kusto/query/cross-cluster-or-database-queries): Aynı küme üzerindeki bir veritabanı olarak başvurarak Sorgulayabileceğiniz `database("MyDatabase").MyTable`. Bir uzak kümesi üzerinde bir veritabanı olarak başvurarak Sorgulayabileceğiniz `cluster("MyCluster").database("MyDatabase").MyTable`.
+[Veritabanları arası ve çapraz küme sorguları](https://docs.microsoft.com/azure/kusto/query/cross-cluster-or-database-queries): Aynı kümede bir veritabanını olarak `database("MyDatabase").MyTable`başvurarak sorgulayabilirsiniz. Uzak bir kümede bir veritabanını, olarak `cluster("MyCluster").database("MyDatabase").MyTable`başvurarak sorgulayabilirsiniz.
 
-Aşağıdaki sorgu, bir kümeden olarak adlandırılır ve verileri sorgular `MyCluster` kümesi. Bu sorguyu çalıştırmak için küme adınızı ve veritabanı adını kullanın.
+Aşağıdaki sorgu, `MyCluster` kümeden bir kümeden ve sorgu verilerinden çağrılır. Bu sorguyu çalıştırmak için kendi küme adınızı ve veritabanı adınızı kullanın.
 
 ```Kusto
 cluster("MyCluster").database("Wiki").PageViews
@@ -750,15 +750,15 @@ cluster("MyCluster").database("Wiki").PageViews
 | take 1000;
 ```
 
-### <a name="user-analytics"></a>Kullanıcı analizi
+### <a name="user-analytics"></a>Kullanıcı Analizi
 
-Bu bölüm, öğeleri ve kullanıcı davranış analizi Kusto içinde gerçekleştirmek için ne kadar kolay olduğunu gösteren sorguları içerir.
+Bu bölüm, kusto içinde kullanıcı davranışlarının analizini gerçekleştirmeye ne kadar kolay olduğunu gösteren öğeleri ve sorguları içerir.
 
-### <a name="activitycountsmetrics-plugin"></a>activity_counts_metrics eklentisi
+### <a name="activity_counts_metrics-plugin"></a>activity_counts_metrics eklentisi
 
-[**activity_counts_metrics eklentisi**](https://docs.microsoft.com/azure/kusto/query/activity-counts-metrics-plugin): Yararlı etkinlik ölçümlerinin (toplam sayısı değerleri, ayrı sayım değerleri, yeni değerlerin ayrı sayım ve toplam ayrı sayım) hesaplar. Ölçümleri her zaman penceresi için hesaplanır ve ardından bunlar karşılaştırıldığında ve için ve tüm önceki zaman pencereleri toplanır.
+[**activity_counts_metrics eklentisi**](https://docs.microsoft.com/azure/kusto/query/activity-counts-metrics-plugin): Faydalı etkinlik ölçümlerini (Toplam sayı değerleri, farklı sayı değerleri, farklı yeni değer sayısı ve toplanmış ayrı sayım) hesaplar. Ölçümler her bir zaman penceresi için hesaplanır, sonra karşılaştırılır ve tüm önceki zaman pencereleri ile toplanır.
 
-Aşağıdaki sorgu, etkinlik sayısını hesaplayarak günlük kullanıcılar tarafından benimsenmesine analiz eder.
+Aşağıdaki sorgu, günlük etkinlik sayılarını hesaplayarak Kullanıcı benimsemesini analiz eder.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAJXSPQvCMBAG4L3Q%2f5CtFlLoFyiVDn4M6mqdREpsggTaKs1VEfzxXm0LDiEimcJz3CW8VwogClgDKWcgQFZiEvrB1PNnnh%2b4c9sqsUDUXMPxyA9Z8%2bsjDfhwz0hKsBzPuRSTgxLNlicKGllfKMmwBw6sbsnY0bWto205C4cS3Rso2tpgO4MtDbbSWvixzGD6eb1ttBYZev42%2fbzI8L%2fe9n9b3NkJQ8xs60XEnZUt1hBWgLxLeObFta1B5ZXAKAs1BPuVKO03iXb7gp36tXDfExVB%2f2ICAAA%3d) **\]**
 
@@ -788,11 +788,11 @@ T
 window)
 ```
 
-### <a name="activityengagement-plugin"></a>activity_engagement eklentisi
+### <a name="activity_engagement-plugin"></a>activity_engagement eklentisi
 
-[**activity_engagement eklentisi**](https://docs.microsoft.com/azure/kusto/query/activity-engagement-plugin): Etkinlik katılım oranı kayan bir zaman çizelgesi pencerede kimliği sütuna göre hesaplar. **activity_engagement eklentisi** günlük etkin kullanıcı, WAU ve MAU (günlük, haftalık ve aylık etkin kullanıcı) hesaplamak için kullanılabilir.
+[**activity_engagement eklentisi**](https://docs.microsoft.com/azure/kusto/query/activity-engagement-plugin): Kayan bir zaman çizelgesi penceresinde KIMLIK sütununa göre etkinlik katılım oranını hesaplar. **activity_engagement eklentisi** , Dau, WAU ve Mau 'ları hesaplamak için kullanılabilir (günlük, haftalık ve aylık etkin kullanıcılar).
 
-Aşağıdaki sorgu, uygulamanın toplam farklı kullanıcı uygulamayı haftalık olarak bir taşıma yedi gün penceresinde kullanarak günlük karşılaştırılan kullanarak toplam farklı kullanıcı sayısının oranı döndürür.
+Aşağıdaki sorgu, her gün bir uygulama kullanan toplam ayrı kullanıcı sayısını, haftalık olarak değişen yedi günlük bir pencerede döndürür.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAG1RQWrDMBC8G%2fyHvUVOHGy1lByKD6GBviDkUIoR1tpVsS0jr0MCeXxXiigpVAiBVjOzM6uigHcc0SlCcGrUdgCtSIFtYZnRgWrInA0ZnNOkR4J6JuUIKo9CMgOKp1LutqXknb1GDI76P8RzQHCXDqHW6gqt43ZRkeydNxNOIHWa3AAv5Ctei2xvx06IQNtGTlZInT0AHQN9BpFt5EO59kHmKvQVUUivX8q1y3L4c9%2fIks%2bt5LoMwsMZLxMrgtHVXcb7pOuEthWemEFvBkPARL%2fSpCjgTfXN0vuBHvbH4rQ%2fsikyNjg6q37xL3GsV47cqQ4HHEl8rIxefeZhNHmMmIehsB2dp8nunnZy9hsbiriDWuqTWqpfxdBsLb2ZGzhm8y%2f6b2i%2bWO8HLFcMGe8BAAA%3d) **\]**
 
@@ -812,13 +812,13 @@ range _day from _start to _end step 1d
 ```
 
 > [!TIP]
-> Günlük etkin kullanıcı/MAU hesaplarken son veri ve taşıma penceresi süresi (OuterActivityWindow) değiştirin.
+> Bau/MAU hesaplanırken, son verileri ve hareketli pencere dönemini (OuterActivityWindow) değiştirin.
 
-### <a name="activitymetrics-plugin"></a>activity_metrics eklentisi
+### <a name="activity_metrics-plugin"></a>activity_metrics eklentisi
 
-[**activity_metrics eklentisi**](https://docs.microsoft.com/azure/kusto/query/activity-metrics-plugin): Geçerli dönem pencerenin önceki dönem penceresine karşılaştırması göre yararlı etkinlik ölçümlerinin (ayrı sayım değerleri, yeni değerleri, elde tutma oranı ve karmaşıklık oranı ayrı sayım) hesaplar.
+[**activity_metrics eklentisi**](https://docs.microsoft.com/azure/kusto/query/activity-metrics-plugin): Geçerli dönem penceresine ve önceki dönem penceresine bağlı olarak, yararlı etkinlik ölçümlerini (farklı sayım değerleri, farklı yeni değer sayısı, bekletme oranı ve karmaşıklık oranı) hesaplar.
 
-Aşağıdaki sorgu, belirli bir veri kümesi için değişim sıklığı ve elde tutma oranı hesaplar.
+Aşağıdaki sorgu, belirli bir veri kümesi için karmaşıklığı ve bekletme oranını hesaplar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAG2SwW7CMAyG70i8g2%2bk0KoNE%2bIwscsOe4hpqqLGQFjaVKkLVNrDLw7RxjRyqBTr%2fz%2f3t1OW8IYdekUIXnXataAVKXB7GAf0oBoyZ0MGh%2fnMIkE9kPIEO1YhmRbFupLbopJFtc6ekwY7%2fV%2bxKZ4kK0KXA0Kt1QR7H9olIrmbbyDsQer57AvwSlxhFjnruoMQ0VYkT1ZKnd0JfRByBpGt5F255iDDLvYVCaSXm2rpsxz%2b3FfrKnwLGeoygtszXvtABKN3Nwz%2fJ009ur1gYwbWtIZAVvGw53JEn%2fK9PJwSi3rvTthQlOWBPp%2bVJbwq24yWN3FB%2fLQTeAwByLgOeD8x0lnZkRVpL1PdInnTDOJ9YfTiI0%2fE24DyONIctvpB0x94zfBlSJBDcxz97509PgDCM%2bAMzTEgvwEO44wSMAIAAA%3d%3d) **\]**
 
@@ -839,11 +839,11 @@ range _day from _start to _end step 1d
 | render timechart
 ```
 
-### <a name="newactivitymetrics-plugin"></a>new_activity_metrics plugin
+### <a name="new_activity_metrics-plugin"></a>new_activity_metrics eklentisi
 
-[**new_activity_metrics eklentisi**](https://docs.microsoft.com/azure/kusto/query/new-activity-metrics-plugin): Yararlı etkinlik ölçümlerinin (ayrı sayım değerleri, yeni değerleri, elde tutma oranı ve karmaşıklık oranı ayrı sayım) için yeni kullanıcılar kohortu hesaplar. Bu eklenti kavramını benzer [**activity_metrics eklentisi**](https://docs.microsoft.com/azure/kusto/query/activity-metrics-plugin), ancak yeni kullanıcılar üzerinde odaklanmaktadır.
+[**new_activity_metrics eklentisi**](https://docs.microsoft.com/azure/kusto/query/new-activity-metrics-plugin): Yeni kullanıcıların kohortu için kullanışlı etkinlik ölçümlerini (ayrı sayı değerleri, farklı yeni değer sayısı, bekletme hızı ve karmaşıklık oranı) hesaplar. Bu eklentinin kavramı [**activity_metrics eklentisine**](https://docs.microsoft.com/azure/kusto/query/activity-metrics-plugin)benzerdir, ancak yeni kullanıcılara odaklanır.
 
-Aşağıdaki sorguyu yeni kullanıcılar kohortu (ilk haftasında gelen kullanıcılar) için bir hafta üzerinden hafta penceresi ile bekletme ve değişim sıklığı bir oran hesaplar.
+Aşağıdaki sorgu, yeni kullanıcılar kohortu (ilk hafta gelen kullanıcılar) için haftalık bir hafta penceresinde bir bekletme ve değişim oranı hesaplar.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAG1Ry27DIBC8W%2fI%2f7C04wbJJFeVQ5VapP9BbVVnIrGMaGyy8eVjqxxcwh1QqBx7LzCwzVBW8o0EnCcFJo%2bwISpIE28F1RgeyJX3TpHHOswEJmpmkIzgFFJIeke1rcSzrQ1mL4jVh0Kj%2fEC8R4bucEd7kAp3z3ZIg2ZU2E04gVJ79AD4oVIIU2cGaM2OBVSZKUQlVPOGcxwUHrNiJp3ITbMyn2JUlHbU91FtXcPhz3u1rP5fC10UUHm%2f4mLwiaHVaZcIzaZnQdiwQCxj0qAlEHUeeVRV8yAuCNcMC1CN02s0Ed8QLtLa33igbpK9M0skRCd3q4CaHa%2fgBg%2fcmJb40%2ft7pdmafG602XzxExpN3HsPicFQ8z1IcQWhy9htbisk2EU92XZ1vZkhb04Sv5tD2V7fufwFYtolnAgIAAA%3d%3d) **\]**
 
@@ -861,11 +861,11 @@ range Day from _start to _end step 1d
 | project from_Day, to_Day, retention_rate, churn_rate
 ```
 
-### <a name="sessioncount-plugin"></a>session_count eklentisi
+### <a name="session_count-plugin"></a>session_count eklentisi
 
-[**session_count eklentisi**](https://docs.microsoft.com/azure/kusto/query/session-count-plugin): Oturum kimliği sütununda bir zaman çizelgesi üzerinde temel sayısı hesaplar.
+[**session_count eklentisi**](https://docs.microsoft.com/azure/kusto/query/session-count-plugin): Bir zaman çizelgesi üzerinden KIMLIK sütununa göre oturum sayısını hesaplar.
 
-Aşağıdaki sorgu oturumlarının sayısını döndürür. Bir oturum oturum geri Görünüm penceresi 41 zaman dilimini durumdayken bir kullanıcı kimliği en az bir kez 100 zamanı yuvaları bir zaman çerçevesi görünürse etkin olarak kabul edilir.
+Aşağıdaki sorgu, oturum sayısını döndürür. Kullanıcı KIMLIĞI, 100-saat yuvalarında en az bir kez görünürse, oturum geri arama penceresi 41-Time yuvadayken oturum etkin kabul edilir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAFWPQYvCQAyF74X%2bh3dZUCjYgfUgMkcP3r2XoZPqaM3INK4u7I%2ffzOwiNQRC8pKPl5EEnXfiYJEcHwmHcKUxMGFI8QoDidhoYBK6wdTVD%2bgpxB5dd6FvPSuzcwyMS2BvAzMlLP5gez%2fDrNt%2fCN4Z1iwRua5Kk2GPE6WZkY%2bMsRZt1m4pnqmXl9qouK2r1Qo75cUB5RlPQ%2bAgoWDzpPj%2bcuPdCWGiaVKp6%2bOdZbH3zYxmNFuNUhp8mmU%2bTWpWv8or%2fckl%2bQXutT48NwEAAA%3d%3d) **\]**
 
@@ -881,11 +881,11 @@ _data
 | render linechart
 ```
 
-### <a name="funnelsequence-plugin"></a>funnel_sequence eklentisi
+### <a name="funnel_sequence-plugin"></a>funnel_sequence eklentisi
 
-[**funnel_sequence eklentisi**](https://docs.microsoft.com/azure/kusto/query/funnel-sequence-plugin): Ayrı sayım durumları bir dizi almış kullanıcılar, hesaplar; neden olur ya da sırası tarafından takip önceki ve sonraki durumları dağılımını gösterir.
+[**funnel_sequence eklentisi**](https://docs.microsoft.com/azure/kusto/query/funnel-sequence-plugin): Bir durum dizisi almış olan kullanıcıların ayrı sayısını hesaplar; önceki ve sonraki durumların, sıranın sonunda veya ardından gelen dağılımını gösterir.
 
-Aşağıdaki sorgu, önce ve sonra tüm hortum olayları 2007'de hangi olay ne olduğunu gösterir.
+Aşağıdaki sorguda, 2007 ' deki tüm Tornado olayları ne kadar önce ve sonrasında gerçekleşen olay gösterilmektedir.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAGWOPYvCQBCG%2b0D%2bw3QmEEmieIqNVQrBRgxYiMhcdqKLyWzcnQiCP95V70DuYIrh5Xk%2f0hRWxpw1H8EwbMTYtrgSiwMnKNqJrtw8DNIU1vkcticUOGHXETv4ptpYgtJYRmWAnrbFGx39QbEWsv%2fIj7YwuHsZmx6FoO6ZqTk4uvTEFUVFp51RtFSJH4hWSt1SAsqj4r9olGXTYZb7i5Mw%2bJRnvzLkKhl%2fTXzAq668dc%2bAG2Orq2g3%2bBk22MfxA23MLGQQAQAA) **\]**
 
@@ -897,11 +897,11 @@ StormEvents
 | evaluate funnel_sequence(EpisodeId, StartTime, datetime(2007-01-01), datetime(2008-01-01), 1d,365d, EventType, dynamic(['Tornado']))
 ```
 
-### <a name="funnelsequencecompletion-plugin"></a>funnel_sequence_completion eklentisi
+### <a name="funnel_sequence_completion-plugin"></a>funnel_sequence_completion eklentisi
 
-[**funnel_sequence_completion eklentisi**](https://docs.microsoft.com/azure/kusto/query/funnel-sequence-completion-plugin): Huni tamamlanmış dizisi adımlarının farklı süreler içinde hesaplar.
+[**funnel_sequence_completion eklentisi**](https://docs.microsoft.com/azure/kusto/query/funnel-sequence-completion-plugin): Farklı zaman aralıklarında tamamlanan dizi adımlarının huni sayısını hesaplar.
 
-Aşağıdaki sorgu dizisi tamamlama Huni denetler: `Hail -> Tornado -> Thunderstorm -> Wind` "Genel" sürelerinin bir saate dört saat ve bir gün içinde (`[1h, 4h, 1d]`).
+Aşağıdaki sorgu, sıranın tamamlanma pirayini denetler: `Hail -> Tornado -> Thunderstorm -> Wind` bir saatin, dört saatin ve bir günün (`[1h, 4h, 1d]`) "genel" saatlerinde.
 
 **\[** [**Sorguyu çalıştırmak için tıklayın**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA12QTYvCMBCG74L/YW6tkIV2XT9g8SjsnlvwICKhM9JAOqlJqrj4402CW0RIIB/PPLwzmjwcnZfWwwZQevKqo/yzKFYfRRnW7Hs60ZEhxjdi/UZcFaO5VuqPAjhfLvD/w9F5IG7iM95YdqrJ99mPVDoTkNXGskSTju3ASNZ5Y7t43wVhdhj9PVll0L1aylbAV9glJqyKldsLsXfTyR3oIvUQAsNpYCY95jg2puuDUhnOt71yBukXBVRxCnVoTjwnIlLX4rUzAUlf3/pEPYViDDd7AOyqowFQAQAA) **\]**
 
@@ -917,12 +917,12 @@ StormEvents
 
 ## <a name="functions"></a>İşlevler
 
-Bu bölümde ele alınmaktadır [ **işlevleri**](https://docs.microsoft.com/azure/kusto/query/functions): sunucuda depolanan yeniden sorgular. İşlevler, sorgular ve (özyinelemeli işlevler desteklenmez) diğer işlevler tarafından çağrılabilir.
+Bu bölüm, sunucuda depolanan yeniden kullanılabilir sorgular olan [**işlevleri**](https://docs.microsoft.com/azure/kusto/query/functions)içerir. İşlevler, sorgular ve diğer işlevler tarafından çağrılabilir (Özyinelemeli işlevler desteklenmez).
 
 > [!NOTE]
-> Salt okunur Yardım kümede işlevleri oluşturulamıyor. Kendi test kümesi için bu bölümü kullanın.
+> Yardım kümesinde, salt okunurdur olan işlevler oluşturamazsınız. Bu bölüm için kendi test kümenizi kullanın.
 
-Aşağıdaki örnek, bir durum adı alan bir işlev oluşturur (`MyState`) bağımsız değişken olarak.
+Aşağıdaki örnek, bir durum adı (`MyState`) bağımsız değişken olarak alan bir işlev oluşturur.
 
 ```Kusto
 .create function with (folder="Demo")
@@ -933,14 +933,14 @@ StormEvents
 }
 ```
 
-Aşağıdaki örnek durumu Teksas'ın veri alan bir işlev çağırır.
+Aşağıdaki örnek, Texas durumu için veri alan bir işlevi çağırır.
 
 ```Kusto
 MyFunction ("Texas")
 | summarize count()
 ```
 
-Aşağıdaki örnek ilk adımda oluşturulan işlev siler.
+Aşağıdaki örnek, ilk adımda oluşturulan işlevi siler.
 
 ```Kusto
 .drop function MyFunction

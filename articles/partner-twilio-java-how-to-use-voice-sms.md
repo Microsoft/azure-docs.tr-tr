@@ -1,11 +1,9 @@
 ---
-title: Twilio ses ve SMS (Java) için kullanma | Microsoft Docs
-description: Telefon araması yapın ve Azure'da Twilio API'si hizmeti içeren bir SMS mesaj gönderme hakkında bilgi edinin. Java dilinde yazılan kod örneklerini.
+title: Ses ve SMS için Twilio kullanma (Java) | Microsoft Docs
+description: Azure 'da bir telefon araması yapmayı ve Twilio API hizmetiyle SMS iletisi göndermenizi öğrenin. Java 'da yazılan kod örnekleri.
 services: ''
 documentationcenter: java
-author: devinrader
-manager: twilio
-editor: mollybos
+author: georgewallace
 ms.assetid: f3508965-5527-4255-9d51-5d5f926f4d43
 ms.service: multiple
 ms.workload: na
@@ -13,51 +11,51 @@ ms.tgt_pltfrm: na
 ms.devlang: Java
 ms.topic: article
 ms.date: 11/25/2014
-ms.author: microsofthelp@twilio.com
-ms.openlocfilehash: 386b4b8440c74f6599e7147996b5843ea0f67e68
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: gwallace
+ms.openlocfilehash: 18e93ce18ed746612996399dc1aeb258abd26165
+ms.sourcegitcommit: 36e9cbd767b3f12d3524fadc2b50b281458122dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60623961"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69637218"
 ---
-# <a name="how-to-use-twilio-for-voice-and-sms-capabilities-in-java"></a>Ses ve SMS özellikleri Java için Twilio kullanma
-Bu kılavuzda, Azure üzerinde Twilio API'si hizmeti ile genel programlama görevlerini gerçekleştirmek gösterilmiştir. Telefon görüşmesi yapma ve kısa mesaj servisi (SMS) ileti gönderme senaryoları ele alınmaktadır. Twilio ve ses ve SMS uygulamalarınızda kullanma hakkında daha fazla bilgi için bkz. [sonraki adımlar](#NextSteps) bölümü.
+# <a name="how-to-use-twilio-for-voice-and-sms-capabilities-in-java"></a>Java 'daki Voice ve SMS özellikleri için Twilio kullanma
+Bu kılavuzda, Azure 'da Twilio API hizmetiyle ortak programlama görevlerinin nasıl gerçekleştirileceği gösterilmektedir. Kapsanan senaryolar, telefon araması yapmayı ve kısa mesaj hizmeti (SMS) iletisi göndermeyi içerir. Twilio hakkında daha fazla bilgi edinmek ve uygulamalarınızda sesli ve SMS kullanma hakkında daha fazla bilgi için [sonraki adımlar](#NextSteps) bölümüne bakın.
 
 ## <a id="WhatIs"></a>Twilio nedir?
-Twilio ses ve SMS uygulamaları oluşturmak için mevcut web dilleri ve becerilerinizi kullanmanıza olanak sağlayan bir telefon web hizmeti API'dir. Twilio, (bir Azure özelliğidir ve Microsoft Ürün değil) bir üçüncü taraf hizmetidir.
+Twilio, ses ve SMS uygulamaları oluşturmak için mevcut Web dillerinizi ve becerilerinizi kullanmanıza imkan tanıyan bir telefon Web hizmeti API 'sidir. Twilio bir üçüncü taraf hizmetidir (bir Microsoft ürünü değil, Azure özelliği değil).
 
-**Twilio ses** yapıp telefon çağrılarını almak, uygulamaların sağlar. **Twilio SMS** yapmak ve SMS mesajları uygulamalarınızı sağlar. **Twilio istemci** uygulamalarınızı mobil bağlantılar da dahil olmak üzere var olan Internet bağlantılarını kullanarak ses iletişimine olanak tanır.
+**Twilio Voice** , uygulamalarınızın telefon araması yapmasına ve almasına izin verir. **TWILIO SMS** , uygulamalarınızın SMS iletileri oluşturup almasına izin verir. **Twilio istemcisi** , uygulamalarınızın Mobil bağlantılar da dahil olmak üzere var olan Internet bağlantılarını kullanarak sesli iletişim kurmasını sağlar.
 
-## <a id="Pricing"></a>Twilio fiyatlandırma ve özel teklifler
-Twilio fiyatlandırması hakkında bilgi şu adreste [Twilio fiyatlandırma][twilio_pricing]. Azure müşterileri alır bir [özel teklif][special_offer]: ücretsiz kredi 1000 metinlerinin veya 1000 dakika sayısı. Bu teklif için kaydolun veya daha fazla bilgi edinmek için lütfen [ https://ahoy.twilio.com/azure ] [ special_offer].
+## <a id="Pricing"></a>Twilio fiyatlandırması ve özel teklifler
+Twilio fiyatlandırması hakkında bilgi [Twilio fiyatlandırması][twilio_pricing]adresinde bulunabilir. Azure müşterileri özel bir [teklif][special_offer]alır: ücretsiz kredi olarak 1000 metin veya 1000 gelen dakika. Bu teklif için kaydolmak veya daha fazla bilgi edinmek için lütfen adresini ziyaret [https://ahoy.twilio.com/azure][special_offer]edin.
 
-## <a id="Concepts"></a>Kavramları
-Twilio ses ve SMS işlevselliğini uygulamaları için sağlayan bir RESTful API API'dir. Birden fazla dilde istemci kitaplıkları vardır; bir liste için bkz. [Twilio API kitaplıkları][twilio_libraries].
+## <a id="Concepts"></a>Tiren
+Twilio API 'si, uygulamalar için ses ve SMS işlevselliği sağlayan bir Reststeme API 'sidir. İstemci kitaplıkları birden çok dilde kullanılabilir; bir liste için bkz. [TWILIO API Libraries][twilio_libraries].
 
-Twilio API'si önemli yönlerini Twilio fiilleri ve Twilio biçimlendirme dili (TwiML) var.
+Twilio API 'sinin önemli yönleri, Twilio Verbs ve Twilio Markup Language (TwiML).
 
-### <a id="Verbs"></a>Twilio Verbs
-Twilio'yu kullanarak API yapar; fiiller Örneğin, **&lt;Say&gt;** fiil kullanımı bir çağrıda bir iletiyi teslim etmek için Twilio bildirir.
+### <a id="Verbs"></a>Twilio fiilleri
+API, Twilio fiillerini kullanır; Örneğin, Twilio, **&lt;bir&gt;** çağrıda bir iletiyi sessiz olarak göndermek için söyleyin.
 
-Twilio fiillerin listesi verilmiştir.
+Aşağıda, Twilio fiillerinin bir listesi verilmiştir.
 
-* **&lt;Arama&gt;** : Çağıran, başka bir telefonu bağlanır.
-* **&lt;Gather&gt;** : Telefon tuş takımında girilen sayı toplar.
-* **&lt;Kapat&gt;** : Bir çağrı sona erer.
-* **&lt;Play&gt;** : Ses dosyası yürütülür.
-* **&lt;Kuyruk&gt;** : Ekleme çağıranlar kuyruğuna.
-* **&lt;Duraklatma&gt;** : Sessiz bir şekilde belirtilen sayıda saniye bekler.
-* **&lt;Kayıt&gt;** : Arayanın ses kayıtlarını ve kayıt içeren dosyanın URL'sini döndürür.
-* **&lt;Yeniden yönlendirme&gt;** : Arama veya SMS için farklı bir URL'de TwiML aktarımları denetim.
-* **&lt;Reddetme&gt;** : Faturalama olmadan Twilio numaranızı için gelen bir çağrıyı reddeder.
-* **&lt;Söyleyin&gt;** : Metin, üzerinde bir çağrı yapılır okuma dönüştürür.
-* **&lt;SMS&gt;** : Bir SMS mesajı gönderir.
+* Çevir:  **&lt;&gt;** Çağrıyı başka bir telefona bağlar.
+* Topla:  **&lt;&gt;** Telefon tuş takımında girilen sayısal rakamları toplar.
+* Kapat:  **&lt;&gt;** Bir çağrıyı sonlandırır.
+* Oynat:  **&lt;&gt;** Bir ses dosyası çalar.
+* Kuyruk:  **&lt;&gt;** ' İ çağıranlar kuyruğuna ekleyin.
+* Duraklat:  **&lt;&gt;** Belirtilen saniye sayısı için sessizce bekler.
+* Kayıt:  **&lt;&gt;** Arayanın sesini kaydeder ve kaydı içeren bir dosyanın URL 'sini döndürür.
+* **Yenidenyönlendir&gt;: &lt;** Farklı bir URL 'de TwiML 'ye bir çağrının veya SMS 'nin denetimini aktarır.
+* Reddet:  **&lt;&gt;** Size faturalandırma olmadan Twilio numaranız için gelen çağrıyı reddeder.
+* Şunu söyleyin:  **&lt;&gt;** Bir çağrıda yapılan metni konuşmaya dönüştürür.
+* SMS:  **&lt;&gt;** SMS iletisi gönderir.
 
 ### <a id="TwiML"></a>TwiML
-TwiML çağrı işlemek nasıl Twilio veya SMS konusunda bilgilendiren Twilio fiilleri XML tabanlı yönergeleri kümesidir.
+TwiML, bir çağrıyı veya SMS 'yi nasıl işleyebileceğini bilgilendirmek için Twilio fiillerini temel alan XML tabanlı yönergelerin bir kümesidir.
 
-Örneğin, aşağıdaki TwiML metin dönüştürecektir **Merhaba Dünya!** Konuşma.
+Örnek olarak, aşağıdaki TwiML Merhaba Dünya metni dönüştürür **!** konuşma.
 
 ```xml
     <?xml version="1.0" encoding="UTF-8" ?>
@@ -66,23 +64,23 @@ TwiML çağrı işlemek nasıl Twilio veya SMS konusunda bilgilendiren Twilio fi
     </Response>
 ```
 
-Uygulamanız için Twilio API'sini çağırdığında, API parametrelerden biri TwiML yanıt veren URL'dir. Geliştirme amacıyla, Twilio tarafından sağlanan URL uygulamalarınız tarafından kullanılan TwiML yanıtlar sağlamak için kullanabilirsiniz. TwiML yanıtları üretmek için kendi URL'leri de barındırabilir ve başka bir seçenek kullanmaktır **TwiMLResponse** nesne.
+Uygulamanız Twilio API 'sini çağırdığında, API parametrelerinden biri TwiML yanıtını döndüren URL 'dir. Geliştirme amacıyla, uygulamalarınız tarafından kullanılan TwiML yanıtlarını sağlamak için Twilio tarafından sağlanmış URL 'Leri kullanabilirsiniz. Ayrıca, TwiML yanıtlarını oluşturmak için kendi URL 'nizi barındırabilir ve **Twimlresponse** nesnesini kullanmak diğer bir seçenektir.
 
-Twilio fiilleri, öznitelikleri ve TwiML hakkında daha fazla bilgi için bkz: [TwiML][twiml]. Twilio API'si hakkında ek bilgi için bkz: [Twilio API'si][twilio_api].
+Twilio fiilleri, öznitelikleri ve TwiML hakkında daha fazla bilgi için bkz. [twiml][twiml]. Twilio API 'SI hakkında daha fazla bilgi için bkz. [TWILIO API][twilio_api].
 
-## <a id="CreateAccount"></a>Twilio hesap oluşturma
-Twilio hesap almak hazır olduğunuzda, adresinde kaydolun [deneyin Twilio][try_twilio]. Ücretsiz bir hesapla yeniden başlayın ve daha sonra hesabınızı yükseltin.
+## <a id="CreateAccount"></a>Twilio hesabı oluşturma
+Bir Twilio hesabı almaya hazırsanız, [TRY Twilio][try_twilio]' de kaydolun. Ücretsiz bir hesapla başlayabilir ve hesabınızı daha sonra yükseltebilirsiniz.
 
-Twilio hesabınız için kaydolduğunuzda, bir hesap kimliği ve kimlik doğrulama belirteci alırsınız. Hem Twilio API çağrıları gerçekleştirmek için gerekli olacaktır. Hesabınıza yetkisiz erişimi önlemek için kimlik doğrulama belirtecinizi güvenli tutun. Hesap Kimliği ve kimlik doğrulama belirteci adresindeki görüntülenebilir [Twilio konsol][twilio_console], etiketli alanları **hesap SID'si** ve **AUTH TOKEN**sırasıyla.
+Bir Twilio hesabı için kaydolduğunuzda, bir hesap KIMLIĞI ve bir kimlik doğrulama belirteci alırsınız. Twilio API çağrıları yapmak için her ikisi de gerekecektir. Hesabınıza yetkisiz erişimi engellemek için kimlik doğrulama belirtecinizi güvende tutun. Hesap KIMLIĞINIZ ve kimlik doğrulama belirteciniz, sırasıyla **Hesap SID 'si** ve **kimlik doğrulama belirteci**etiketli alanlarda [Twilio konsolunda][twilio_console]görüntülenebilir.
 
-## <a id="create_app"></a>Bir Java uygulaması oluşturma
-1. Twilio JAR edinin ve, Java derleme yolu ve WAR dağıtım derlemenize ekleyin. Konumunda [ https://github.com/twilio/twilio-java ] [ twilio_java], GitHub kaynakları indirmek ve kendi JAR oluşturmak veya önceden oluşturulmuş bir JAR (ile veya bağımlılıkları olmadan) indirin.
-2. JDK'ın olun **cacerts** keystore MD5 parmak izi 67:CB:9 D ile Equifax güvenli sertifika yetkilisi sertifika içeriyor: (seri numarası, 35:DE:F4:CF ve SHA1 C0:13:24:8A:82:9B:B2:17:1E:D1:1B:EC:D4 parmak izi olan D2:32:09:AD:23:D3:14:23:21:74:E4:0 D: 7F:9 D: 62:13:97:86:63:3A). Bu sertifika yetkilisi (CA) sertifikası, [ https://api.twilio.com ] [ twilio_api_service] tanımak için Twilio API'lerini kullanırken çağrılan hizmet. JDK'ın sağlama hakkında bilgi için **cacerts** keystore doğru CA sertifikası varsa, bkz: [bir sertifika eklemek için Java CA sertifika Store][add_ca_cert].
+## <a id="create_app"></a>Java uygulaması oluşturma
+1. Twilio JAR 'yi edinin ve Java derleme yolunuza ve WAR dağıtım derlemenize ekleyin. [https://github.com/twilio/twilio-java][twilio_java]' De, GitHub kaynaklarını indirebilir ve kendi jar 'nizi oluşturabilir veya önceden oluşturulmuş bir jar indirebilirsiniz (bağımlılıkları olan veya olmayan).
+2. JDK 'nin **CAcert** anahtar deposu 'un MD5 parmak izi 67 olan Equifax güvenli sertifika yetkilisi sertifikasını içerdiğinden emin olun: CB: 9D: C0:13:24:8A: 82:9B: B2:17:1e: D1:1B: EC: D4 (seri numarası 35: de: F4: CF ve SHA1 parmak izi D2:32:09: ad: 23 :D 3:14:23:21:: 74: E4:0D: 7F: 9D: 62:13:97:86:63:3A). Bu, Twilio API 'lerini kullandığınızda çağrılan, [https://api.twilio.com][twilio_api_service] hizmet için sertifika yetkilisi (CA) sertifikasıdır. JDK 'nin **CAcert** anahtar deposu 'un doğru CA sertifikasını içerdiğini sağlama hakkında bilgi için bkz. [Java CA sertifika deposuna sertifika ekleme][add_ca_cert].
 
-Java için Twilio istemci kitaplığını kullanmaya yönelik ayrıntılı yönergeleri [nasıl bir telefon araması Twilio kullanarak azure'da bir Java uygulaması görünebileceğini][howto_phonecall_java].
+Java için Twilio istemci kitaplığı 'nı kullanmaya yönelik ayrıntılı yönergeler, [Azure 'Da Java uygulamasında Twilio kullanarak nasıl telefon araması][howto_phonecall_java]yapılacağını bulabilirsiniz.
 
-## <a id="configure_app"></a>Twilio kitaplıkları kullanmak için uygulamanızı yapılandırma
-Kodunuzun içinde eklediğiniz **alma** Twilio paketleri veya uygulamanızda kullanmak istediğiniz sınıfları için kaynak dosyalarını üst kısmındaki deyimleri.
+## <a id="configure_app"></a>Uygulamanızı Twilio kitaplıklarını kullanacak şekilde yapılandırma
+Kodunuzun içinde, uygulamanızda kullanmak istediğiniz Twilio paketleri veya sınıfları için kaynak dosyalarınızın en üstüne **içeri aktarma** deyimleri ekleyebilirsiniz.
 
 Java kaynak dosyaları için:
 
@@ -93,7 +91,7 @@ Java kaynak dosyaları için:
     import com.twilio.twiml.*;
 ```
 
-Java sunucu sayfası (JSP) için kaynak dosyaları:
+Java sunucu sayfası (JSP) kaynak dosyaları için:
 
 ```java
     import="com.twilio.*"
@@ -102,10 +100,10 @@ Java sunucu sayfası (JSP) için kaynak dosyaları:
     import="com.twilio.twiml.*"
  ```
  
-Hangi Twilio paketleri veya sınıflar bağlı olarak kullanmak istediğiniz, **alma** deyimleri farklı olabilir.
+Kullanmak istediğiniz Twilio paketlerine veya sınıfa bağlı olarak, **içeri aktarma** deyimleriniz farklı olabilir.
 
 ## <a id="howto_make_call"></a>Nasıl Yapılır: Giden bir çağrı yapın
-Aşağıdaki çağrıda giden hale getirmeyi açıklayan **çağrı** sınıfı. Bu kod, Twilio tarafından sağlanan bir site ayrıca Twilio biçimlendirme dili (TwiML) yanıt için kullanır. Kendi değerlerinizi yerleştirin **gelen** ve **için** telefon numaraları ve doğrulamanız olun **gelen** kodu çalıştırmadan önce Twilio hesabı için telefon numarası.
+Aşağıda, **çağrı** sınıfını kullanarak nasıl giden bir çağrının yapılacağı gösterilmektedir. Bu kod ayrıca Twilio biçimlendirme dili (TwiML) yanıtını döndürmek için Twilio tarafından sağlanmış bir site kullanır. **Kimden** ve telefon numaraları için değerlerinizi değiştirin ve kodu çalıştırmadan önce Twilio hesabınızın telefon numarasını doğrulayın .
 
 ```java
     // Use your account SID and authentication token instead
@@ -129,12 +127,12 @@ Aşağıdaki çağrıda giden hale getirmeyi açıklayan **çağrı** sınıfı.
     Call.creator(to, from, uri).create();
 ```
 
-İçin geçirilen parametreler hakkında daha fazla bilgi için **Call.creator** yöntemi bkz [ https://www.twilio.com/docs/api/rest/making-calls ] [ twilio_rest_making_calls].
+**Call. Creator** metoduna geçirilen parametreler hakkında daha fazla bilgi için bkz [https://www.twilio.com/docs/api/rest/making-calls][twilio_rest_making_calls].
 
-Belirtildiği gibi bu kod bir Twilio tarafından sağlanan site TwiML yanıt döndürmek için kullanır. Bunun yerine, kendi site TwiML yanıt sağlamak için de kullanabilirsiniz; Daha fazla bilgi için [TwiML yanıtlarını azure'da bir Java uygulaması sağlamak için nasıl](#howto_provide_twiml_responses).
+Belirtildiği gibi, bu kod TwiML yanıtını döndürmek için Twilio tarafından sağlanmış bir site kullanır. Bunun yerine, TwiML yanıtı sağlamak için kendi sitenizi kullanabilirsiniz; daha fazla bilgi için bkz. [Azure 'Da Java uygulamasında TwiML yanıtları sağlama](#howto_provide_twiml_responses).
 
-## <a id="howto_send_sms"></a>Nasıl Yapılır: Bir SMS iletisi gönderin
-Aşağıdakileri kullanarak bir SMS iletisi göndermek nasıl gösterir **ileti** sınıfı. **Gelen** numarası **4155992671**, SMS mesajları gönderebilir tarafından deneme hesapları için Twilio sağlanır. **İçin** numarası doğrulandı, kodu çalıştırmadan önce Twilio hesabınız için.
+## <a id="howto_send_sms"></a>Nasıl Yapılır: SMS iletisi gönder
+Aşağıda **ileti** sınıfı kullanılarak SMS iletisi gönderme gösterilmektedir. Bu **4155992671**, Twilio tarafından SMS iletileri göndermek için deneme hesapları için sağlanmaktadır. Kodu çalıştırmadan önce, Twilio hesabınız için **-** Number için doğrulama yapılmalıdır.
 
 ```java
     // Use your account SID and authentication token instead
@@ -155,14 +153,14 @@ Aşağıdakileri kullanarak bir SMS iletisi göndermek nasıl gösterir **ileti*
     Message sms = Message.creator(to, from, body).create();
 ```
 
-İçin geçirilen parametreler hakkında daha fazla bilgi için **Message.creator** yöntemi bkz [ https://www.twilio.com/docs/api/rest/sending-sms ] [ twilio_rest_sending_sms].
+**İleti. Creator** yöntemine geçirilen parametreler hakkında daha fazla bilgi için bkz [https://www.twilio.com/docs/api/rest/sending-sms][twilio_rest_sending_sms].
 
-## <a id="howto_provide_twiml_responses"></a>Nasıl Yapılır: Kendi Web sitesinden TwiML yanıtları sağlayın
-Ne zaman uygulamanızı başlatan Twilio API'sine çağrıda örneğin aracılığıyla **CallCreator.create** yöntemi, Twilio gönderecek isteğiniz TwiML yanıt dönmesi beklenen bir URL. Yukarıdaki örnekte, Twilio tarafından sağlanan URL'yi kullanır [ https://twimlets.com/message ] [ twimlet_message_url]. (TwiML Web Hizmetleri tarafından kullanılmak üzere tasarlandığından, TwiML tarayıcınızda görüntüleyebilirsiniz. Örneğin, [ https://twimlets.com/message ] [ twimlet_message_url] boş görmek için **&lt; yanıt&gt;** öğesi; başka bir örnek olarak, tıklayın [ https://twimlets.com/message?Message%5B0%5D=Hello%20World%21 ] [ twimlet_message_url_hello_world] görmek için bir **&lt; yanıt&gt;** öğesini içeren bir **&lt; Say&gt;** öğesi.)
+## <a id="howto_provide_twiml_responses"></a>Nasıl Yapılır: Kendi web sitenizde TwiML yanıtları sağlayın
+Uygulamanız Twilio API 'sine bir çağrı başlattığında (örneğin, **Callcreator. Create** yöntemi aracılığıyla), Isteğiniz TwiML yanıtı döndürmesi beklenen bir URL 'ye gönderilir. Yukarıdaki örnek Twilio tarafından sağlanmış URL 'YI [https://twimlets.com/message][twimlet_message_url]kullanır. (TwiML, Web Hizmetleri tarafından kullanılmak üzere tasarlanırken, tarayıcınızda TwiML 'yi görüntüleyebilirsiniz. Örneğin, boş [https://twimlets.com/message][twimlet_message_url] [https://twimlets.com/message?Message%5B0%5D=Hello%20World%21][twimlet_message_url_hello_world] **&lt; bir yanıt&gt;** **öğesinigörmekiçinöğesinetıklayın;başkabirörnekolarak,şunuiçerenbiryanıtöğesinigörmekiçin&lt;&gt;** **&lt; Deyin&gt;** öğesi.)
 
-Twilio tarafından sağlanan URL üzerinde işlemine güvenmek yerine, HTTP yanıtlarını döndürür kendi URL site oluşturabilirsiniz. Sitenin HTTP yanıtlarını döndüren herhangi bir dilde oluşturabilirsiniz; Bu konuda, bir JSP sayfası URL'de barındırma varsayılır.
+Twilio tarafından sağlanmış URL 'ye güvenmek yerine, HTTP yanıtlarını döndüren kendi URL sitenizi oluşturabilirsiniz. Siteyi, HTTP yanıtlarını döndüren herhangi bir dilde oluşturabilirsiniz; Bu konuda, URL 'YI bir JSP sayfasında barındırabileceksiniz varsayılmaktadır.
 
-Aşağıdaki JSP sayfası sonuçları bildiren bir TwiML yanıtına **Merhaba Dünya!** arama üzerinde.
+Aşağıdaki JSP sayfası Merhaba Dünya belirten bir TwiML yanıtı ile sonuçlanır **!** çağırın.
 
 ```xml
     <%@ page contentType="text/xml" %>
@@ -171,7 +169,7 @@ Aşağıdaki JSP sayfası sonuçları bildiren bir TwiML yanıtına **Merhaba D�
     </Response>
 ```
 
-Metin diyor, birkaç duraklatır ve Twilio API sürümü ve Azure rol adı hakkında bilgi belirten bir TwiML yanıt aşağıdaki JSP sayfası sonuçlanır.
+Aşağıdaki JSP sayfası, bazı metinleri belirten, birkaç duraklatan oluşan ve Twilio API sürümü ve Azure rolü adı hakkında bilgi bildiren bir TwiML yanıtı ile sonuçlanır.
 
 ```xml
     <%@ page contentType="text/xml" %>
@@ -185,9 +183,9 @@ Metin diyor, birkaç duraklatır ve Twilio API sürümü ve Azure rol adı hakk�
     </Response>
 ```
 
-**ApiVersion** parametresi, Twilio ses istekler (SMS istek değil) kullanılabilir. Kullanılabilir İstek parametreleri için Twilio ses ve SMS isteklerini görmek için bkz: <https://www.twilio.com/docs/api/twiml/twilio_request> ve <https://www.twilio.com/docs/api/twiml/sms/twilio_request>sırasıyla. **RoleName** ortam değişkeni kullanılabilir Azure dağıtımın bir parçası olarak. (Bunlar gelen çekilmesi böylece özel ortam değişkenleri eklemek istiyorsanız **System.getenv**, ortam değişkenleri bölümüne bakın [çeşitli rol yapılandırma ayarları] [ misc_role_config_settings].)
+**Apiversion** parametresi, Twilio ses ISTEKLERINDE (SMS istekleri değil) kullanılabilir. Twilio ses ve SMS istekleri için kullanılabilir istek parametrelerini görmek için sırasıyla bkz <https://www.twilio.com/docs/api/twiml/twilio_request> . ve. <https://www.twilio.com/docs/api/twiml/sms/twilio_request> **RoleName** ortam değişkeni, Azure dağıtımının bir parçası olarak kullanılabilir. ( **System. getenv**'den alınabilmeleri için özel ortam değişkenleri eklemek Istiyorsanız, [çeşitli rol yapılandırma ayarlarındaki][misc_role_config_settings]ortam değişkenleri bölümüne bakın.)
 
-TwiML yanıt vermek şekilde ayarlamanız, JSP sayfası oluşturduktan sonra URL'yi içine geçirilen olarak JSP sayfası URL'sini kullanmak **Call.creator** yöntemi. Örneğin, adlı bir Web uygulaması varsa bir Azure projesi MyTwiML barındırılan hizmeti ve mytwiml.jsp JSP sayfası adıdır, URL geçirilebilir **Call.creator** aşağıda gösterildiği gibi:
+JSP sayfanız TwiML yanıtları sağlamak üzere ayarlandıktan sonra, **Call. Creator** metoduna geçirilen URL olarak JSP sayfasının URL 'sini kullanın. Örneğin, Azure 'da barındırılan bir hizmete dağıtılan MyTwiML adlı bir Web uygulamanız varsa ve JSP sayfasının adı mytwiml. jsp ise, URL, aşağıda gösterildiği gibi **Call. Creator** öğesine geçirilebilir:
 
 ```java
     // Declare To and From numbers and the URL of your JSP page
@@ -200,21 +198,21 @@ TwiML yanıt vermek şekilde ayarlamanız, JSP sayfası oluşturduktan sonra URL
     Call.creator(to, from, uri).create();
 ```
 
-Aracılığıyla TwiML ile yanıt için başka bir seçenek, **VoiceResponse** kullanılabilir sınıfı **com.twilio.twiml** paket.
+TwiML ile yanıt vermeye yönelik başka bir seçenek de **com. Twilio. twiml** paketinde bulunan **VoiceResponse** sınıfı aracılığıyla yapılır.
 
-Twilio Azure'u Java ile kullanma hakkında ek bilgi için bkz: [nasıl bir telefon araması Twilio kullanarak azure'da bir Java uygulaması görünebileceğini][howto_phonecall_java].
+Java ile Azure 'da Twilio kullanma hakkında daha fazla bilgi için bkz. [Azure 'Da Java uygulamasında Twilio kullanarak telefon araması yapma][howto_phonecall_java].
 
 ## <a id="AdditionalServices"></a>Nasıl Yapılır: Ek Twilio hizmetlerini kullanma
-Burada gösterilen örneklerden yanı sıra, Twilio, Azure uygulamanızı ek Twilio işlevinden yararlanmak için kullanabileceğiniz web tabanlı API'ler sunar. Tüm Ayrıntılar için bkz. [Twilio API'si belgeleri][twilio_api_documentation].
+Burada gösterilen örneklere ek olarak Twilio, Azure uygulamanızdan ek Twilio işlevsellikten yararlanmak için kullanabileceğiniz web tabanlı API 'Ler sunar. Tüm ayrıntılar için [TWILIO API belgelerine][twilio_api_documentation]bakın.
 
 ## <a id="NextSteps"></a>Sonraki Adımlar
-Twilio hizmeti temel bilgileri öğrendiniz, daha fazla bilgi için bu bağlantıları izleyin:
+Twilio hizmetinin temellerini öğrendiğinize göre artık daha fazla bilgi edinmek için bu bağlantıları izleyin:
 
 * [Twilio güvenlik yönergeleri][twilio_security_guidelines]
-* [Twilio nasıl yapılır kılavuzları ve örnek kod][twilio_howtos]
+* [Twilio nasıl ve örnek kodu][twilio_howtos]
 * [Twilio hızlı başlangıç öğreticileri][twilio_quickstarts]
-* [Twilio github'da][twilio_on_github]
-* [Twilio desteği için konuşma][twilio_support]
+* [GitHub üzerinde Twilio][twilio_on_github]
+* [Twilio desteğiyle konuşun][twilio_support]
 
 [twilio_java]: https://github.com/twilio/twilio-java
 [twilio_api_service]: https://api.twilio.com

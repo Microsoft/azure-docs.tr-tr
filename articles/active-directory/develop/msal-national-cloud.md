@@ -1,6 +1,6 @@
 ---
-title: Microsoft Authentication Library (MSAL) Ulusal bulutlarda - Microsoft kimlik platformu kullanın
-description: Microsoft Authentication Library (MSAL), uygulama geliştiricilerin güvenli web API'lerini çağırma için belirteçlerini almak sağlar. Bu web API'leri, Microsoft Graph, diğer Microsoft APIs, iş ortağı web API'leri veya web API olabilir. MSAL, birden çok uygulama mimarileri ve platformları destekler.
+title: Ulusal bulutlarda Microsoft kimlik doğrulama kitaplığı 'nı (MSAL) kullanma-Microsoft Identity platform
+description: Microsoft kimlik doğrulama kitaplığı (MSAL), uygulama geliştiricilerinin güvenli Web API 'Lerini çağırmak için belirteçleri almasına olanak sağlar. Bu Web API 'Leri Microsoft Graph, diğer Microsoft API 'leri, iş ortağı Web API 'Leri veya kendi Web API 'niz olabilir. MSAL birden çok uygulama mimarilerini ve platformunu destekler.
 services: active-directory
 documentationcenter: dev-center-name
 author: negoe
@@ -17,82 +17,82 @@ ms.author: negoe
 ms.reviewer: nacanuma
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f9958356cae3c486ecf68e280f33d63c6a537b14
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 97855a52831a63a92a46bd0d25d23ba3fc91a07b
+ms.sourcegitcommit: 263a69b70949099457620037c988dc590d7c7854
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66235258"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71268571"
 ---
-# <a name="use-msal-in-a-national-cloud-environment"></a>MSAL Ulusal bulut ortamında kullanın
+# <a name="use-msal-in-a-national-cloud-environment"></a>Ulusal bir bulut ortamında MSAL kullanma
 
-[Ulusal Bulutlar](authentication-national-cloud.md) fiziksel olarak yalıtılmış Azure örnekleridir. Bu Azure bölgelerine veri yerleşikliği, özerkliği ve uyumluluk gereksinimlerini coğrafi bölge içinde karşılanmasını sağlanmasına yardımcı olur.
+[Ulusal bulutlar](authentication-national-cloud.md) , Azure 'un fiziksel olarak yalıtılmış örnekleridir. Azure yardım 'ın bu bölgeleri, verilerin yer aldığı, egemenlik ve uyumluluk gereksinimlerinin coğrafi sınırlar içinde kabul edilen şekilde sağlandığından emin olmanızı sağlamak.
 
-Microsoft Dünya çapında bulutun yanı sıra, Ulusal bulutlarda uygulama geliştiricileri için kimlik doğrulaması ve güvenli web API'lerini çağırma belirteçlerini almak Microsoft kimlik doğrulama kitaplığı (MSAL) sağlar. Bu web API'leri, Microsoft Graph veya diğer Microsoft APIs olabilir.
+Microsoft kimlik doğrulama kitaplığı (MSAL), Microsoft Dünya çapındaki buluta ek olarak, Ulusal bulutlar 'daki uygulama geliştiricilerinin, güvenli Web API 'Lerini doğrulamak ve çağırmak için belirteçleri almasına olanak sağlar. Bu Web API 'Leri Microsoft Graph veya diğer Microsoft API 'Leri olabilir.
 
-Genel bulut dahil olmak üzere, Azure Active Directory (Azure AD) aşağıdaki Ulusal bulutlarda dağıtılır:  
+Genel bulut dahil, Azure Active Directory (Azure AD) aşağıdaki Ulusal bulutlara dağıtılır:  
 
 - Azure Kamu
 - Azure Çin 21Vianet
 - Azure Almanya
 
-Bu kılavuz, iş ve Okul hesapları, bir erişim belirteci alma ve Microsoft Graph API'sini çağırmak oturum açma gösterir [Azure kamu Bulutu](https://azure.microsoft.com/global-infrastructure/government/) ortam.
+Bu kılavuzda, iş ve okul hesaplarında oturum açma, erişim belirteci alma ve [Azure Kamu bulut](https://azure.microsoft.com/global-infrastructure/government/) ORTAMıNDA Microsoft Graph API 'sini çağırma işlemlerinin nasıl yapılacağı gösterilmiştir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Başlamadan önce bu önkoşulların karşılandığından emin olun.
+Başlamadan önce, bu önkoşulları karşıladığınızdan emin olun.
 
-### <a name="choose-the-appropriate-identities"></a>Uygun bir kimlik seçin
+### <a name="choose-the-appropriate-identities"></a>Uygun kimlikleri seçin
 
-[Azure kamu](https://docs.microsoft.com/azure/azure-government/) uygulamalar Azure AD kamu kimlikleri ve Azure AD genel kimlikleri kullanıcıların kimliğini doğrulamak için kullanabilirsiniz. Bu kimliklerin kullanabileceğinizden, senaryonuz için seçmelidir yetkili uç noktası karar vermeniz gerekir:
+[Azure Kamu](https://docs.microsoft.com/azure/azure-government/) uygulamaları, kullanıcıların kimliğini doğrulamak IÇIN Azure AD kamu kimliklerini ve Azure AD ortak kimliklerini kullanabilir. Bu kimliklerden herhangi birini kullanabilmeniz için senaryonuz için hangi yetkili uç noktasını seçmeniz gerektiğine karar vermeniz gerekir:
 
-- Azure AD genel: Kuruluşunuzda zaten Office 365 destek için bir Azure AD genel Kiracı (genel veya GCC) veya başka bir uygulama varsa yaygın olarak kullanılır.
-- Azure AD kamu: Kuruluşunuz zaten bir Azure AD kamu kiracısı için destek Office 365 (GCC yüksek veya DoD) varsa veya yeni bir kiracı, Azure AD devlet kurumları'nda oluşturma yaygın olarak kullanılır.
+- Azure AD Genel: Genellikle kuruluşunuzun Office 365 (genel veya GCC) veya başka bir uygulamayı desteklemesi için bir Azure AD ortak kiracısı zaten varsa kullanılır.
+- Azure AD kamu: Genellikle kuruluşunuzun Office 365 (GCC High veya DoD) desteği için bir Azure AD kamu kiracısı zaten varsa veya Azure AD kamu 'da yeni bir kiracı oluşturmak için kullanılır.
 
-Karar verdikten sonra bir özel uygulama kaydınızı gerçekleştirmek burada noktadır. Azure kamu uygulamanız için Azure AD genel kimlikleri seçerseniz, uygulamayı Azure AD genel kiracınıza kaydetmeniz gerekir.
+Karar verdikten sonra, uygulama kaydınızı gerçekleştirdiğiniz özel bir noktadır. Azure Kamu uygulamanız için Azure AD ortak kimlikleri ' ni seçerseniz, uygulamayı Azure AD Genel kiracınıza kaydetmeniz gerekir.
 
-### <a name="get-an-azure-government-subscription"></a>Bir Azure kamu aboneliği edinme
+### <a name="get-an-azure-government-subscription"></a>Azure Kamu aboneliği edinme
 
-Bir Azure kamu aboneliği edinmek için bkz. [yönetme ve Azure kamu, aboneliğinize bağlanma](https://docs.microsoft.com/azure/azure-government/documentation-government-manage-subscriptions).
+Azure Kamu aboneliği almak için bkz. [Azure Kamu 'da aboneliğinizi yönetme ve ile bağlanma](https://docs.microsoft.com/azure/azure-government/documentation-government-manage-subscriptions).
 
-Bir Azure kamu aboneliğiniz yoksa, oluşturun bir [ücretsiz bir hesap](https://azure.microsoft.com/global-infrastructure/government/request/) başlamadan önce.
+Azure Kamu aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/global-infrastructure/government/request/) oluşturun.
 
 ## <a name="javascript"></a>JavaScript
 
-### <a name="step-1-register-your-application"></a>1\. adım: Uygulamanızı kaydetme
+### <a name="step-1-register-your-application"></a>1\. adım: Uygulamanızı kaydedin
 
 1. [Azure Portal](https://portal.azure.us/) oturum açın.
     
-   Diğer Ulusal Bulutlar için Azure portal uç noktalarını bulmak için bkz: [uygulama kayıt uç noktaları](authentication-national-cloud.md#app-registration-endpoints).
+   Diğer ulusal bulutlar için Azure portal uç noktaları bulmak için bkz. [uygulama kayıt uç noktaları](authentication-national-cloud.md#app-registration-endpoints).
 
-1. Kiracı, erişmek için birden fazla Kiracı, sağ üst köşedeki hesabınızı seçin ve istenen Azure AD'ye portal oturumunuzu ayarlama, hesap sağlar.
-1. Git [uygulama kayıtları](https://aka.ms/ra/ff) geliştiriciler için Microsoft kimlik platformu sayfasında.
-1. Zaman **bir uygulamayı kaydetme** sayfası görüntülenirse, uygulamanız için bir ad girin.
-1. Altında **desteklenen hesap türleri**seçin **herhangi bir kuruluş dizini hesaplarında**.
-1. İçinde **yeniden yönlendirme URI'si** bölümünden **Web** platform ve uygulama URL'sine değerine göre web sunucunuzda kümesi. Ayarlayın ve Visual Studio ve düğüm yeniden yönlendirme URL'sini almak hakkında yönergeler için bir sonraki bölüme bakın.
+1. Hesabınız birden fazla kiracıya erişim veriyorsa, sağ üst köşede hesabınızı seçin ve Portal oturumunuzu istenen Azure AD kiracısı olarak ayarlayın.
+1. Geliştiriciler için Microsoft Identity platformunda [uygulama kayıtları](https://aka.ms/ra/ff) sayfasına gidin.
+1. **Bir uygulamayı kaydet** sayfası göründüğünde, uygulamanız için bir ad girin.
+1. **Desteklenen hesap türleri**altında, **herhangi bir kuruluş dizininde hesaplar**' ı seçin.
+1. **Yeniden yönlendirme URI 'si** bölümünde **Web** platformu ' nu seçin ve değeri Web sunucunuza göre uygulamanın URL 'si olarak ayarlayın. Visual Studio ve Node 'da yeniden yönlendirme URL 'sini ayarlama ve alma hakkında yönergeler için sonraki bölümlere bakın.
 1. **Kaydol**’u seçin.
-1. Uygulamasında **genel bakış** sayfa, Not **uygulama (istemci) kimliği** değeri.
-1. Bu öğretici etkinleştirmenizi gerektirir [örtük verme akışı](v2-oauth2-implicit-grant-flow.md). Kayıtlı uygulama sol bölmesinde seçin **kimlik doğrulaması**.
-1. İçinde **Gelişmiş ayarlar**altında **örtük vermeyi**seçin **kimlik belirteçlerini** ve **erişim belirteçlerini** onay kutuları. Bu uygulama kullanıcılarının oturumunu ve bir API'yi çağırması gerekir çünkü kimlik ve erişim belirteçler gereklidir.
+1. Uygulamaya **genel bakış** sayfasında, **uygulama (istemci) kimliği** değerini aklınızda edin.
+1. Bu öğretici, [örtük izin akışını](v2-oauth2-implicit-grant-flow.md)etkinleştirmenizi gerektirir. Kayıtlı uygulamanın sol bölmesinde **kimlik doğrulaması**' nı seçin.
+1. **Gelişmiş ayarlar**' da, **örtük izin**' ın altında, **Kimlik belirteçleri** ve **erişim belirteçleri** onay kutularını seçin. KIMLIK belirteçleri ve erişim belirteçleri gereklidir çünkü bu uygulamanın kullanıcıları oturum açması ve bir API çağırması gerekir.
 1. **Kaydet**’i seçin.
 
-### <a name="step-2--set-up-your-web-server-or-project"></a>2\. adım:  Web sunucusu veya proje ayarlama
+### <a name="step-2--set-up-your-web-server-or-project"></a>2\. adım:  Web sunucunuzu veya projenizi ayarlama
 
-- [Proje dosyalarını indirme](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip) düğüm gibi bir yerel web sunucusu için.
+- Düğüm gibi yerel bir Web sunucusu için [Proje dosyalarını indirin](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip) .
 
   or
 
-- [Visual Studio projeyi indirmek](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/vsquickstart.zip).
+- [Visual Studio projesini indirin](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/vsquickstart.zip).
 
-Ardından atlamak [, JavaScript SPA'ya yapılandırma](#step-4-configure-your-javascript-spa) çalıştırmadan önce kodu örneği yapılandırmak için.
+Ardından, kod örneğini çalıştırmadan önce yapılandırmak için [JAVASCRIPT Spa 'Nizi yapılandırma](#step-4-configure-your-javascript-spa) bölümüne atlayın.
 
-### <a name="step-3-use-the-microsoft-authentication-library-to-sign-in-the-user"></a>3\. adım: Kullanıcının oturum açmak için Microsoft kimlik doğrulama kitaplığını kullanma
+### <a name="step-3-use-the-microsoft-authentication-library-to-sign-in-the-user"></a>3\. adım: Kullanıcı oturumu açmak için Microsoft kimlik doğrulama kitaplığını kullanma
 
-İzleyeceğiniz adımlar [JavaScript öğretici](tutorial-v2-javascript-spa.md#create-your-project) projenizi oluşturma ve kullanıcı oturum açmak için MSAL tümleştirin.
+Projenizi oluşturmak için [JavaScript öğreticisindeki](tutorial-v2-javascript-spa.md#create-your-project) adımları izleyin ve Kullanıcı oturumu açmak için msal ile tümleştirin.
 
-### <a name="step-4-configure-your-javascript-spa"></a>4\. Adım: JavaScript SPA'ya yapılandırın
+### <a name="step-4-configure-your-javascript-spa"></a>4\. Adım: JavaScript SPA 'nizi yapılandırma
 
-İçinde `index.html` dosyası proje Kurulum sırasında oluşturulur, uygulama kayıt bilgilerini ekleyin. Üst içinde aşağıdaki kodu ekleyin `<script></script>` gövdesinde etiketleri, `index.html` dosyası:
+Proje kurulumu sırasında oluşturulan dosyada,uygulamakayıtbilgileriniekleyin.`index.html` Aşağıdaki kodu, `<script></script>` `index.html` dosyanızın gövdesinde yer alan etiketlerin içine ekleyin:
 
 ```javascript
 const msalConfig = {
@@ -111,30 +111,64 @@ const graphConfig = {
 const myMSALObj = new UserAgentApplication(msalConfig);
 ```
 
-Bu kodu:
+Bu kodda:
 
-- `Enter_the_Application_Id_here` olan **uygulama (istemci) kimliği** , kayıtlı uygulama için değer.
-- `Enter_the_Tenant_Info_Here` Aşağıdaki seçeneklerden birine ayarlayın:
-    - Uygulamanız destekliyorsa **hesapları kuruluş bu dizinde**, bu değer Kiracı Kimliğiyle değiştirin veya Kiracı adı (örneğin, contoso.microsoft.com).
-    - Uygulamanız destekliyorsa **herhangi bir kuruluş dizini hesaplarında**, bu değeri ile değiştirin `organizations`.
+- `Enter_the_Application_Id_here`, kaydettiğiniz uygulamanın **uygulama (istemci) kimlik** değeridir.
+- `Enter_the_Tenant_Info_Here`Aşağıdaki seçeneklerden birine ayarlanır:
+    - Uygulamanız **bu kuruluş dizinindeki hesapları**destekliyorsa, bu DEĞERI Kiracı kimliği veya kiracı adı (örneğin, contoso.Microsoft.com) ile değiştirin.
+    - Uygulamanız **herhangi bir kuruluş dizinindeki hesapları**destekliyorsa, bu değeri ile `organizations`değiştirin.
     
-    Ulusal Bulutlar için kimlik doğrulama uç noktaları öğrenmek için bkz [Azure AD kimlik doğrulama uç noktaları](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud#azure-ad-authentication-endpoints).
+    Tüm ulusal bulutların kimlik doğrulama uç noktalarını bulmak için bkz. [Azure AD kimlik doğrulama uç noktaları](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud#azure-ad-authentication-endpoints).
 
     > [!NOTE]
-    > Ulusal bulutlarda kişisel Microsoft hesapları desteklenmez.
+    > Kişisel Microsoft hesapları Ulusal bulutlarda desteklenmez.
   
-- `graphEndpoint` ABD kamu için Microsoft bulut için Microsoft Graph uç noktadır.
+- `graphEndpoint`, ABD kamu için Microsoft bulutu 'nın Microsoft Graph uç noktasıdır.
 
-   Ulusal Bulutlar için Microsoft Graph uç noktaları öğrenmek için bkz [Microsoft Graph uç noktaları Ulusal bulutlarda](https://docs.microsoft.com/graph/deployments#microsoft-graph-and-graph-explorer-service-root-endpoints).
+   Tüm ulusal bulutlar için Microsoft Graph uç noktaları bulmak için bkz. [National bulutlar içindeki Microsoft Graph uç noktaları](https://docs.microsoft.com/graph/deployments#microsoft-graph-and-graph-explorer-service-root-endpoints).
 
 ## <a name="net"></a>.NET
 
-Kullanıcılarının oturumunu belirteçlerini almak ve Ulusal bulutlarda Microsoft Graph API'sini çağırmak için MSAL.NET kullanabilirsiniz.
+Kullanıcıları oturum açmak, belirteçleri almak ve Microsoft Graph API 'sini Ulusal bulutlarda çağırmak için MSAL.NET kullanabilirsiniz.
 
-Aşağıdaki öğreticilerde, bir .NET Core 2.2 MVC Web uygulamasının nasıl oluşturulacağını gösterir. Uygulama, kullanıcıların bir Ulusal buluta ait bir kuruluşta bir iş ve Okul hesabı oturum açmak için Openıd Connect kullanır.
+Aşağıdaki öğreticilerde .NET Core 2,2 MVC web uygulamasının nasıl oluşturulacağı gösterilmektedir. Uygulama, ulusal bir buluta ait bir kuruluştaki iş ve okul hesabıyla kullanıcıları oturum açmak için OpenID Connect kullanır.
 
-- Kullanıcıların oturum açmak ve belirteçleri almak için izleyin [Bu öğreticide](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/1-WebApp-OIDC/1-4-Sovereign#build-an-aspnet-core-web-app-signing-in-users-in-sovereign-clouds-with-the-microsoft-identity-platform).
-- Microsoft Graph API'sini çağırmak için izleyin [Bu öğreticide](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/2-WebApp-graph-user/2-4-Sovereign-Call-MSGraph#using-the-microsoft-identity-platform-to-call-the-microsoft-graph-api-from-an-an-aspnet-core-2x-web-app-on-behalf-of-a-user-signing-in-using-their-work-and-school-account-in-microsoft-national-cloud).
+- Kullanıcıları oturum açmak ve belirteçleri almak için [Bu öğreticiyi](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/1-WebApp-OIDC/1-4-Sovereign#build-an-aspnet-core-web-app-signing-in-users-in-sovereign-clouds-with-the-microsoft-identity-platform)izleyin.
+- Microsoft Graph API 'sini çağırmak için [Bu öğreticiyi](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/2-WebApp-graph-user/2-4-Sovereign-Call-MSGraph#using-the-microsoft-identity-platform-to-call-the-microsoft-graph-api-from-an-an-aspnet-core-2x-web-app-on-behalf-of-a-user-signing-in-using-their-work-and-school-account-in-microsoft-national-cloud)izleyin.
+
+## <a name="msal-for-ios-and-macos"></a>İOS ve macOS için MSAL
+
+İOS ve macOS için MSAL, Ulusal bulutlarda belirteçleri almak için kullanılabilir, ancak oluştururken `MSALPublicClientApplication`ek yapılandırma gerektirir.
+
+Örneğin, uygulamanızın ulusal bir bulutta (burada ABD devlet) çok kiracılı bir uygulama olmasını istiyorsanız şunu yazabilirsiniz:
+
+Amaç-C:
+
+```objc
+MSALAADAuthority *aadAuthority =
+                [[MSALAADAuthority alloc] initWithCloudInstance:MSALAzureUsGovernmentCloudInstance
+                                                   audienceType:MSALAzureADMultipleOrgsAudience
+                                                      rawTenant:nil
+                                                          error:nil];
+                                                          
+MSALPublicClientApplicationConfig *config =
+                [[MSALPublicClientApplicationConfig alloc] initWithClientId:@"<your-client-id-here>"
+                                                                redirectUri:@"<your-redirect-uri-here>"
+                                                                  authority:aadAuthority];
+                                                                  
+NSError *applicationError = nil;
+MSALPublicClientApplication *application =
+                [[MSALPublicClientApplication alloc] initWithConfiguration:config error:&applicationError];
+```
+
+SWIFT
+
+```swift
+let authority = try? MSALAADAuthority(cloudInstance: .usGovernmentCloudInstance, audienceType: .azureADMultipleOrgsAudience, rawTenant: nil)
+        
+let config = MSALPublicClientApplicationConfig(clientId: "<your-client-id-here>", redirectUri: "<your-redirect-uri-here>", authority: authority)
+if let application = try? MSALPublicClientApplication(configuration: config) { /* Use application */}
+```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

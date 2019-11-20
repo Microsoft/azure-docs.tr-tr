@@ -1,6 +1,6 @@
 ---
-title: -Tek bir sunucu PostgreSQL için Azure veritabanı'na bağlanmak için go dilini kullanın
-description: Bu hızlı başlangıçta, bağlanıp - tek bir sunucu PostgreSQL için Azure veritabanı'ndan veri sorgulamak için kullanabileceğiniz Go programlama dili örneği sağlanmıştır.
+title: Go dilini kullanarak PostgreSQL için Azure veritabanı 'na bağlanma-tek sunucu
+description: Bu hızlı başlangıçta, PostgreSQL için Azure veritabanı 'na bağlanmak ve bu verileri sorgulamak için kullanabileceğiniz bir go programlama dili örneği sunulmaktadır-tek sunucu.
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
@@ -8,33 +8,33 @@ ms.custom: mvc
 ms.devlang: go
 ms.topic: quickstart
 ms.date: 5/6/2019
-ms.openlocfilehash: 9356379262cc078cd6a62f3280bcb8cc3d315844
-ms.sourcegitcommit: 0ae3139c7e2f9d27e8200ae02e6eed6f52aca476
+ms.openlocfilehash: 645d34961fb735542729091719dd55c42436db95
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65067329"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72244487"
 ---
-# <a name="azure-database-for-postgresql---single-server-use-go-language-to-connect-and-query-data"></a>PostgreSQL - tek bir sunucu için Azure veritabanı: Bağlanmak ve veri sorgulamak için go dilini kullanın
-Bu hızlı başlangıçta, [Go](https://golang.org/) dilinde (golang) yazılmış kod kullanılarak PostgreSQL için Azure Veritabanı’na nasıl bağlanılacağı gösterilmiştir. Hızlı başlangıçta, veritabanında verileri sorgulamak, eklemek, güncelleştirmek ve silmek için SQL deyimlerinin nasıl kullanılacağı da gösterilmiştir. Bu makalede, Go kullanarak geliştirmeyle ilgili bilgi sahibi olduğunuz ve PostgreSQL için Azure Veritabanı ile çalışmaya yeni başladığınız varsayılır.
+# <a name="azure-database-for-postgresql---single-server-use-go-language-to-connect-and-query-data"></a>PostgreSQL için Azure veritabanı-tek sunucu: bağlanmak ve veri sorgulamak için go dilini kullanın
+Bu hızlı başlangıçta, [Go](https://golang.org/) dilinde (golang) yazılan kod kullanılarak PostgreSQL Için Azure veritabanı 'na nasıl bağlanabileceği gösterilmektedir. Veritabanındaki verileri sorgulamak, eklemek, güncelleştirmek ve silmek için SQL deyimlerinin nasıl kullanılacağını gösterir. Bu makalede, Go kullanarak geliştirmeyle ilgili bilgi sahibi olduğunuz ve PostgreSQL için Azure veritabanı ile çalışmaya yeni başladığınız varsayılır.
 
-## <a name="prerequisites"></a>Önkoşullar
-Bu hızlı başlangıçta, başlangıç noktası olarak şu kılavuzlardan birinde oluşturulan kaynaklar kullanılmaktadır:
-- [DB Oluşturma - Portal](quickstart-create-server-database-portal.md)
-- [DB Oluşturma - Azure CLI](quickstart-create-server-database-azure-cli.md)
+## <a name="prerequisites"></a>Prerequisites
+Bu hızlı başlangıçta başlangıç noktası olarak bu kılavuzlardan birinde oluşturulan kaynaklar kullanılmaktadır:
+- [DB oluşturma-Portal](quickstart-create-server-database-portal.md)
+- [DB oluşturma-Azure CLı](quickstart-create-server-database-azure-cli.md)
 
-## <a name="install-go-and-pq-connector"></a>Go ve pq bağlayıcısını yükleme
-Makinenize [Go](https://golang.org/doc/install)’yu ve [Pure Go Postgres sürücüsünü (pq)](https://github.com/lib/pq) yükleyin. Platformunuza bağlı olarak, uygun adımları izleyin:
+## <a name="install-go-and-pq-connector"></a>Go ve PQ bağlayıcısını Install
+Kendi makinenize [Go](https://golang.org/doc/install) ve [saf go Postgres sürücüsünü (PQ)](https://github.com/lib/pq) yükleme. Platformunuza bağlı olarak, uygun adımları izleyin:
 
 ### <a name="windows"></a>Windows
-1. [Yükleme yönergelerine](https://golang.org/doc/install) uygun olarak Microsoft Windows için Go’yu [indirin](https://golang.org/dl/) ve yükleyin.
-2. Başlat menüsünden komut istemini başlatın.
-3. Projeniz için`mkdir  %USERPROFILE%\go\src\postgresqlgo` gibi bir klasör oluşturun.
-4. Dizini değiştirerek proje klasörünüze geçin; örneğin, `cd %USERPROFILE%\go\src\postgresqlgo`.
-5. GOPATH için ortam değişkenini kaynak kod dizinine işaret edecek şekilde ayarlayın. `set GOPATH=%USERPROFILE%\go`.
-6. `go get github.com/lib/pq` komutunu çalıştırarak [Pure Go Postgres sürücüsünü (pq)](https://github.com/lib/pq) yükleyin.
+1. [Yükleme yönergelerine](https://golang.org/doc/install)göre Microsoft Windows için [Yükle](https://golang.org/dl/) ve Yükle ' ye gidin.
+2. Başlat menüsünden komut istemi ' ni başlatın.
+3. Projeniz için `mkdir  %USERPROFILE%\go\src\postgresqlgo` gibi bir klasör oluşturun.
+4. Dizini, `cd %USERPROFILE%\go\src\postgresqlgo` gibi proje klasörüyle değiştirin.
+5. GOPATH için ortam değişkenini, kaynak kodu dizinini işaret etmek üzere ayarlayın. `set GOPATH=%USERPROFILE%\go`.
+6. @No__t-1 komutunu çalıştırarak [saf go Postgres sürücüsünü (PQ)](https://github.com/lib/pq) yükleme.
 
-   Özetle, Go’yu yükleyin ve ardından komut isteminde şu komutları çalıştırın:
+   Özet ' te, git ' i yükledikten sonra komut isteminde şu komutları çalıştırın:
    ```cmd
    mkdir  %USERPROFILE%\go\src\postgresqlgo
    cd %USERPROFILE%\go\src\postgresqlgo
@@ -44,13 +44,13 @@ Makinenize [Go](https://golang.org/doc/install)’yu ve [Pure Go Postgres sürü
 
 ### <a name="linux-ubuntu"></a>Linux (Ubuntu)
 1. Bash kabuğunu başlatın. 
-2. `sudo apt-get install golang-go` komutunu çalıştırarak Go'yu yükleyin.
-3. Giriş dizininizde projeniz için `mkdir -p ~/go/src/postgresqlgo/` gibi bir klasör oluşturun.
-4. Dizini değiştirerek klasöre geçin; örneğin, `cd ~/go/src/postgresqlgo/`.
-5. GOPATH ortam değişkenini geçerli bir kaynak dizine, örneğin geçerli giriş dizininizin go klasörüne işaret edecek şekilde ayarlayın. Bash kabuğunda `export GOPATH=~/go` komutunu çalıştırarak geçerli kabuk oturumu için GOPATH olarak go dizinini ayarlayın.
-6. `go get github.com/lib/pq` komutunu çalıştırarak [Pure Go Postgres sürücüsünü (pq)](https://github.com/lib/pq) yükleyin.
+2. @No__t-0 çalıştırarak git ' i çalıştırın.
+3. Ana dizininizdeki `mkdir -p ~/go/src/postgresqlgo/` gibi projeniz için bir klasör oluşturun.
+4. Dizini, `cd ~/go/src/postgresqlgo/` gibi klasöre değiştirin.
+5. GOPATH ortam değişkenini, geçerli giriş dizininizin go klasörü gibi geçerli bir kaynak dizine işaret etmek üzere ayarlayın. Bash kabuğunda, geçerli kabuk oturumunun GOPATH olarak go dizinini eklemek için `export GOPATH=~/go` ' ı çalıştırın.
+6. @No__t-1 komutunu çalıştırarak [saf go Postgres sürücüsünü (PQ)](https://github.com/lib/pq) yükleme.
 
-   Özetle şu bash komutlarını çalıştırın:
+   Özet bölümünde şu Bash komutlarını çalıştırın:
    ```bash
    sudo apt-get install golang-go
    mkdir -p ~/go/src/postgresqlgo/
@@ -60,14 +60,14 @@ Makinenize [Go](https://golang.org/doc/install)’yu ve [Pure Go Postgres sürü
    ```
 
 ### <a name="apple-macos"></a>Apple macOS
-1. Platformunuza uygun [yükleme yönergelerine](https://golang.org/doc/install) göre Go’yu indirip yükleyin. 
+1. Platformunuzla eşleşen [yükleme yönergelerine](https://golang.org/doc/install) göre go 'yu indirip yükleyin. 
 2. Bash kabuğunu başlatın. 
-3. Giriş dizininizde projeniz için `mkdir -p ~/go/src/postgresqlgo/` gibi bir klasör oluşturun.
-4. Dizini değiştirerek klasöre geçin; örneğin, `cd ~/go/src/postgresqlgo/`.
-5. GOPATH ortam değişkenini geçerli bir kaynak dizine, örneğin geçerli giriş dizininizin go klasörüne işaret edecek şekilde ayarlayın. Bash kabuğunda `export GOPATH=~/go` komutunu çalıştırarak geçerli kabuk oturumu için GOPATH olarak go dizinini ayarlayın.
-6. `go get github.com/lib/pq` komutunu çalıştırarak [Pure Go Postgres sürücüsünü (pq)](https://github.com/lib/pq) yükleyin.
+3. Ana dizininizdeki `mkdir -p ~/go/src/postgresqlgo/` gibi projeniz için bir klasör oluşturun.
+4. Dizini, `cd ~/go/src/postgresqlgo/` gibi klasöre değiştirin.
+5. GOPATH ortam değişkenini, geçerli giriş dizininizin go klasörü gibi geçerli bir kaynak dizine işaret etmek üzere ayarlayın. Bash kabuğunda, geçerli kabuk oturumunun GOPATH olarak go dizinini eklemek için `export GOPATH=~/go` ' ı çalıştırın.
+6. @No__t-1 komutunu çalıştırarak [saf go Postgres sürücüsünü (PQ)](https://github.com/lib/pq) yükleme.
 
-   Özetle, Go’yu yükleyin ve ardından şu bash komutlarını çalıştırın:
+   Özet ' te, git ' i yükledikten sonra şu Bash komutlarını çalıştırın:
    ```bash
    mkdir -p ~/go/src/postgresqlgo/
    cd ~/go/src/postgresqlgo/
@@ -75,31 +75,31 @@ Makinenize [Go](https://golang.org/doc/install)’yu ve [Pure Go Postgres sürü
    go get github.com/lib/pq
    ```
 
-## <a name="get-connection-information"></a>Bağlantı bilgilerini alma
-PostgreSQL için Azure Veritabanı'na bağlanmak üzere gereken bağlantı bilgilerini alın. Tam sunucu adına ve oturum açma kimlik bilgilerine ihtiyacınız vardır.
+## <a name="get-connection-information"></a>Bağlantı bilgilerini al
+PostgreSQL için Azure veritabanı 'na bağlanmak üzere gereken bağlantı bilgilerini alın. Tam sunucu adı ve oturum açma kimlik bilgileri gerekir.
 
-1. [Azure Portal](https://portal.azure.com/)’da oturum açın.
-2. Azure portalında sol taraftaki menüden **Tüm kaynaklar**'a tıklayın ve oluşturduğunuz sunucuyu (örneğin, **mydemoserver**) arayın.
-3. Sunucunun adına tıklayın.
-4. Sunucunun **Genel Bakış** panelinden **Sunucu adı** ile **Sunucu yöneticisi oturum açma adı**’nı not alın. Parolanızı unutursanız, bu panelden parolayı da sıfırlayabilirsiniz.
- ![PostgreSQL için Azure Veritabanı sunucu adı](./media/connect-go/1-connection-string.png)
+1. [Azure Portal](https://portal.azure.com/)oturum açın.
+2. Azure Portal sol taraftaki menüden **tüm kaynaklar**' a tıklayın ve oluşturduğunuz sunucuyu (örneğin, **demosunucum**) arayın.
+3. Sunucu adına tıklayın.
+4. Sunucunun **genel bakış** panelinden **sunucu adı** ve **Sunucu Yöneticisi oturum açma adı**' nı bir yere göz atın. Parolanızı unutursanız, bu panelden parolayı da sıfırlayabilirsiniz.
+ @no__t-PostgreSQL için Azure veritabanı sunucu adı @ no__t-1
 
-## <a name="build-and-run-go-code"></a>Go kodunu derleme ve çalıştırma 
-1. Golang kodlarını yazmak için Microsoft Windows’da Not Defteri, Ubuntu’da [VI](https://manpages.ubuntu.com/manpages/xenial/man1/nvi.1.html#contenttoc5) veya [Nano](https://www.nano-editor.org/), macOS’da TextEdit gibi düz metin düzenleyicilerini kullanabilirsiniz. Daha zengin bir Tümleşik Geliştirme Ortamı (IDE) tercih ediyorsanız [Atom](https://atom.io/), Jetbrains [Gogland](https://www.jetbrains.com/go/) veya Microsoft [Visual Studio Code](https://code.visualstudio.com/) kullanmayı deneyebilirsiniz.
-2. Aşağıdaki bölümde bulunan Golang kodunu metin dosyalarına yapıştırın ve \*.go dosya uzantısıyla proje klasörünüze kaydedin; örneğin, Windows'da `%USERPROFILE%\go\src\postgresqlgo\createtable.go` yolu veya Linux'ta `~/go/src/postgresqlgo/createtable.go` yolu.
-3. Kodda `HOST`, `DATABASE`, `USER` ve `PASSWORD` sabitlerini bulun ve örnek değerleri kendi değerlerinizle değiştirin.  
-4. Komut istemini veya bash kabuğunu başlatın. Dizini değiştirerek proje klasörünüze geçin. Örneğin; Windows’da `cd %USERPROFILE%\go\src\postgresqlgo\`. Linux'ta `cd ~/go/src/postgresqlgo/`. Belirtilen IDE ortamlarından bazıları kabuk komutları gerektirmeden hata ayıklama ve çalışma zamanı özellikleri sunar.
+## <a name="build-and-run-go-code"></a>Go kodu oluştur ve Çalıştır 
+1. Golang kodunu yazmak için, Microsoft Windows, [vi](https://manpages.ubuntu.com/manpages/xenial/man1/nvi.1.html#contenttoc5) veya [nano](https://www.nano-editor.org/) in Ubuntu 'Da Not defteri veya MacOS 'ta TEXTEDIT gibi bir düz metin düzenleyici kullanabilirsiniz. Daha zengin bir etkileşimli geliştirme ortamını tercih ediyorsanız (IDE), JetBrains, Microsoft veya [atom](https://atom.io/)tarafından [Visual Studio Code](https://code.visualstudio.com/) için [golantıd](https://www.jetbrains.com/go/) 'yi deneyin.
+2. Aşağıdaki bölümlerden Golang kodunu metin dosyalarına yapıştırın ve Windows yolu `%USERPROFILE%\go\src\postgresqlgo\createtable.go` veya Linux yolu `~/go/src/postgresqlgo/createtable.go` gibi @no__t -0. go dosya uzantısıyla proje klasörünüze kaydedin.
+3. Koddaki `HOST`, `DATABASE`, `USER` ve `PASSWORD` sabitlerini bulun ve örnek değerleri kendi değerlerinizle değiştirin.  
+4. Komut istemi veya bash kabuğunu başlatın. Dizini proje klasörünüze değiştirin. Örneğin, Windows `cd %USERPROFILE%\go\src\postgresqlgo\`. Linux `cd ~/go/src/postgresqlgo/`. Belirtilen IDE ortamlarından bazıları Kabuk komutlarına gerek duymadan hata ayıklama ve çalışma zamanı özellikleri sunar.
 5. Uygulamayı derlemek ve çalıştırmak için `go run createtable.go` komutunu yazarak kodu çalıştırın. 
-6. Alternatif olarak, kodu yerel bir uygulamada derlemek için `go build createtable.go` komutunu kullanın, ardından uygulamayı çalıştırmak için `createtable.exe`’yi başlatın.
+6. Alternatif olarak, kodu yerel bir uygulamada derlemek için `go build createtable.go`, ardından uygulamayı çalıştırmak için `createtable.exe` ' i başlatın.
 
-## <a name="connect-and-create-a-table"></a>Bağlanma ve tablo oluşturma
-**CREATE TABLE** SQL deyimini kullanarak bir tabloyu bağlamak ve oluşturmak ve ardından **INSERT INTO** SQL deyimlerini kullanarak tabloya satırlar eklemek için aşağıdaki kodu kullanın.
+## <a name="connect-and-create-a-table"></a>Bağlama ve tablo oluşturma
+**Create Table** SQL deyimini kullanarak bağlamak ve tablo oluşturmak için aşağıdaki kodu kullanın ve ardından tabloya satır eklemek için SQL deyimlerine **ekleyin** .
 
-Kod üç paketi içeri aktarır: [sql paketi](https://golang.org/pkg/database/sql/), PostgreSQL sunucusuyla iletişim kuran sürücü olarak [pq paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [fmt paketi](https://golang.org/pkg/fmt/).
+Kod üç paketi içeri aktarır: [SQL paketi](https://golang.org/pkg/database/sql/), PostgreSQL sunucusuyla iletişim kuracak sürücü olarak [PQ paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [FMT paketi](https://golang.org/pkg/fmt/) .
 
-Kod, [sql.Open()](https://godoc.org/github.com/lib/pq#Open) yöntemini çağırarak PostgreSQL için Azure Veritabanı veritabanına bağlanır ve [db.Ping()](https://golang.org/pkg/database/sql/#DB.Ping) yöntemini kullanarak bağlantıyı kontrol eder. İşlem boyunca, veritabanı sunucusu için bağlantı havuzunu tutan bir [veritabanı tanıtıcı](https://golang.org/pkg/database/sql/#DB) kullanılır. Kod, birkaç SQL komutunu çalıştırmak için birkaç kez [Exec()](https://golang.org/pkg/database/sql/#DB.Exec) yöntemini çağırır. Her seferinde özel bir checkError() yöntemi hata oluşup olmadığını kontrol eder ve hata oluşmuşsa acil çıkış yapar.
+Kod, SQL yöntemini çağırır [. ](https://godoc.org/github.com/lib/pq#Open)PostgreSQL Için Azure veritabanı veritabanına bağlanmak üzere () öğesini açın ve yöntemi DB kullanarak bağlantıyı kontrol edin [. Ping ()](https://golang.org/pkg/database/sql/#DB.Ping). Bir [veritabanı tanıtıcısı](https://golang.org/pkg/database/sql/#DB) , veritabanı sunucusu için bağlantı havuzunu tutan şekilde kullanılır. Kod, birden çok SQL komutu çalıştırmak için [Exec ()](https://golang.org/pkg/database/sql/#DB.Exec) yöntemini birkaç kez çağırır. Özel checkError () yöntemi her seferinde bir hata oluşup olmadığını ve bir hata meydana gelir.
 
-`HOST`, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
+@No__t-0, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
 
 ```go
 package main
@@ -158,14 +158,14 @@ func main() {
 }
 ```
 
-## <a name="read-data"></a>Verileri okuma
-**SELECT** SQL deyimini kullanarak bağlanmak ve verileri okumak için aşağıdaki kodu kullanın. 
+## <a name="read-data"></a>Verileri oku
+Bir **Select** SQL ifadesini kullanarak bağlanmak ve verileri okumak için aşağıdaki kodu kullanın. 
 
-Kod üç paketi içeri aktarır: [sql paketi](https://golang.org/pkg/database/sql/), PostgreSQL sunucusuyla iletişim kuran sürücü olarak [pq paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [fmt paketi](https://golang.org/pkg/fmt/).
+Kod üç paketi içeri aktarır: [SQL paketi](https://golang.org/pkg/database/sql/), PostgreSQL sunucusuyla iletişim kuracak sürücü olarak [PQ paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [FMT paketi](https://golang.org/pkg/fmt/) .
 
-Kod, [sql.Open()](https://godoc.org/github.com/lib/pq#Open) yöntemini çağırarak PostgreSQL için Azure Veritabanı veritabanına bağlanır ve [db.Ping()](https://golang.org/pkg/database/sql/#DB.Ping) yöntemini kullanarak bağlantıyı kontrol eder. İşlem boyunca, veritabanı sunucusu için bağlantı havuzunu tutan bir [veritabanı tanıtıcı](https://golang.org/pkg/database/sql/#DB) kullanılır. [db. Query()](https://golang.org/pkg/database/sql/#DB.Query) yöntemi çağrılarak select sorgusu çalıştırılır ve ortaya çıkan satırlar [rows](https://golang.org/pkg/database/sql/#Rows) türünden bir değişkende tutulur. Kod, [rows.Scan()](https://golang.org/pkg/database/sql/#Rows.Scan) yöntemini kullanarak geçerli satırdaki sütun veri değerlerini okur ve [rows.Next()](https://golang.org/pkg/database/sql/#Rows.Next) yineleyicisini kullanarak başka satır kalmayana dek satırları döndürür. Her satırın sütun değerleri konsol çıkışına yazdırılır. Her seferinde hata oluşup olmadığını kontrol etmek ve hata oluşmuşsa acil çıkış yapmak için özel bir checkError() yöntemi kullanılır.
+Kod, SQL yöntemini çağırır [. ](https://godoc.org/github.com/lib/pq#Open)PostgreSQL Için Azure veritabanı veritabanına bağlanmak üzere () öğesini açın ve yöntemi DB kullanarak bağlantıyı kontrol edin [. Ping ()](https://golang.org/pkg/database/sql/#DB.Ping). Bir [veritabanı tanıtıcısı](https://golang.org/pkg/database/sql/#DB) , veritabanı sunucusu için bağlantı havuzunu tutan şekilde kullanılır. SELECT sorgusu, yöntem DB çağırarak çalıştırılır [. Sorgu ()](https://golang.org/pkg/database/sql/#DB.Query)ve sonuç satırları [satır](https://golang.org/pkg/database/sql/#Rows)türünde bir değişkende tutulur. Kod, geçerli satırdaki sütun verisi değerlerini Yöntem satırları kullanarak okur [. ](https://golang.org/pkg/database/sql/#Rows.Scan)Yineleyici satırlarını kullanarak satırlar üzerinde tarama () ve döngüler [. Next ()](https://golang.org/pkg/database/sql/#Rows.Next) daha fazla satır yok. Her bir satırın sütun değerleri konsola yazdırılır. Her seferinde hata oluşup olmadığını denetlemek için bir özel checkError () yöntemi kullanılır ve bir hata oluşursa, çıkış yapmak üzere panik.
 
-`HOST`, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
+@No__t-0, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
 
 ```go
 package main
@@ -227,13 +227,13 @@ func main() {
 ```
 
 ## <a name="update-data"></a>Verileri güncelleştirme
-Bağlanmak ve bir **UPDATE** SQL deyimi kullanarak verileri güncelleştirmek için aşağıdaki kodu kullanın.
+Bir **Update** SQL ifadesini kullanarak bağlanmak ve verileri güncelleştirmek için aşağıdaki kodu kullanın.
 
-Kod üç paketi içeri aktarır: [sql paketi](https://golang.org/pkg/database/sql/), Postgres sunucusuyla iletişim kuran sürücü olarak [pq paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [fmt paketi](https://golang.org/pkg/fmt/).
+Kod üç paketi içeri aktarır: [SQL paketi](https://golang.org/pkg/database/sql/), Postgres sunucusuyla iletişim kuracak sürücü olarak [PQ paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [FMT paketi](https://golang.org/pkg/fmt/) .
 
-Kod, [sql.Open()](https://godoc.org/github.com/lib/pq#Open) yöntemini çağırarak PostgreSQL için Azure Veritabanı veritabanına bağlanır ve [db.Ping()](https://golang.org/pkg/database/sql/#DB.Ping) yöntemini kullanarak bağlantıyı kontrol eder. İşlem boyunca, veritabanı sunucusu için bağlantı havuzunu tutan bir [veritabanı tanıtıcı](https://golang.org/pkg/database/sql/#DB) kullanılır. Kod, tabloyu güncelleştiren SQL deyimini çalıştırmak için [Exec()](https://golang.org/pkg/database/sql/#DB.Exec) yöntemini çağırır. Hata oluşup olmadığını kontrol etmek ve hata oluşmuşsa acil çıkış yapmak için özel bir checkError() yöntemi kullanılır.
+Kod, SQL yöntemini çağırır [. ](https://godoc.org/github.com/lib/pq#Open)PostgreSQL Için Azure veritabanı veritabanına bağlanmak üzere () öğesini açın ve yöntemi DB kullanarak bağlantıyı kontrol edin [. Ping ()](https://golang.org/pkg/database/sql/#DB.Ping). Bir [veritabanı tanıtıcısı](https://golang.org/pkg/database/sql/#DB) , veritabanı sunucusu için bağlantı havuzunu tutan şekilde kullanılır. Kod, tabloyu güncelleştiren SQL ifadesini çalıştırmak için [Exec ()](https://golang.org/pkg/database/sql/#DB.Exec) yöntemini çağırır. Hata oluşup olmadığını denetlemek için özel checkError () yöntemi kullanılır.
 
-`HOST`, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
+@No__t-0, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
 ```go
 package main
 
@@ -279,14 +279,14 @@ func main() {
 }
 ```
 
-## <a name="delete-data"></a>Verileri silme
-**DELETE** SQL deyimini kullanarak bağlanmak ve verileri silmek için aşağıdaki kodu kullanın. 
+## <a name="delete-data"></a>Verileri Sil
+Bir **Delete** SQL ifadesini kullanarak bağlanmak ve verileri silmek için aşağıdaki kodu kullanın. 
 
-Kod üç paketi içeri aktarır: [sql paketi](https://golang.org/pkg/database/sql/), Postgres sunucusuyla iletişim kuran sürücü olarak [pq paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [fmt paketi](https://golang.org/pkg/fmt/).
+Kod üç paketi içeri aktarır: [SQL paketi](https://golang.org/pkg/database/sql/), Postgres sunucusuyla iletişim kuracak sürücü olarak [PQ paketi](https://godoc.org/github.com/lib/pq) ve komut satırında yazdırılan girdi ve çıktı için [FMT paketi](https://golang.org/pkg/fmt/) .
 
-Kod, [sql.Open()](https://godoc.org/github.com/lib/pq#Open) yöntemini çağırarak PostgreSQL için Azure Veritabanı veritabanına bağlanır ve [db.Ping()](https://golang.org/pkg/database/sql/#DB.Ping) yöntemini kullanarak bağlantıyı kontrol eder. İşlem boyunca, veritabanı sunucusu için bağlantı havuzunu tutan bir [veritabanı tanıtıcı](https://golang.org/pkg/database/sql/#DB) kullanılır. Kod, tablodan bir satır silen SQL deyimini çalıştırmak için [Exec()](https://golang.org/pkg/database/sql/#DB.Exec) yöntemini çağırır. Hata oluşup olmadığını kontrol etmek ve hata oluşmuşsa acil çıkış yapmak için özel bir checkError() yöntemi kullanılır.
+Kod, SQL yöntemini çağırır [. ](https://godoc.org/github.com/lib/pq#Open)PostgreSQL Için Azure veritabanı veritabanına bağlanmak üzere () öğesini açın ve yöntemi DB kullanarak bağlantıyı kontrol edin [. Ping ()](https://golang.org/pkg/database/sql/#DB.Ping). Bir [veritabanı tanıtıcısı](https://golang.org/pkg/database/sql/#DB) , veritabanı sunucusu için bağlantı havuzunu tutan şekilde kullanılır. Kod, tablodan bir satırı silen SQL ifadesini çalıştırmak için [Exec ()](https://golang.org/pkg/database/sql/#DB.Exec) yöntemini çağırır. Hata oluşup olmadığını denetlemek için özel checkError () yöntemi kullanılır.
 
-`HOST`, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
+@No__t-0, `DATABASE`, `USER` ve `PASSWORD` parametrelerini kendi değerlerinizle değiştirin. 
 ```go
 package main
 
@@ -334,4 +334,4 @@ func main() {
 
 ## <a name="next-steps"></a>Sonraki adımlar
 > [!div class="nextstepaction"]
-> [Dışarı Aktarma ve İçeri Aktarma seçeneğini kullanarak veritabanınızı geçirme](./howto-migrate-using-export-and-import.md)
+> [Dışarı aktarma ve Içeri aktarma kullanarak veritabanınızı geçirme](./howto-migrate-using-export-and-import.md)

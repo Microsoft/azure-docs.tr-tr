@@ -1,0 +1,60 @@
+### YamlMime:Landing
+title: Azure Veri Paylaşımı belgeleri
+summary: Azure Veri Paylaşımı, üçüncü taraf kuruluşlarla veri paylaşımına olanak sağlayan güvenli bir hizmettir.
+metadata:
+  title: Azure Veri Paylaşımı
+  description: Azure Veri Paylaşımı, üçüncü taraf kuruluşlarla veri paylaşımına olanak sağlayan güvenli bir hizmettir.
+  services: data-share
+  ms.service: data-share
+  ms.topic: landing-page
+  ms.collection: collection
+  author: hrasheed-msft
+  ms.author: hrasheed
+  ms.date: 09/13/2019
+  ms.openlocfilehash: 66350050a84617b789c6a73c38170dc25dad331d
+  ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/08/2019
+  ms.locfileid: "73802895"
+landingContent:
+- title: Azure Veri Paylaşımı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Veri Paylaşımı nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Azure Veri Paylaşımı kavramları
+      url: terminology.md
+    - text: Azure Veri Paylaşımı rolleri ve gereksinimleri
+      url: concepts-roles-permissions.md
+- title: Veri paylaşımı
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure Veri Paylaşımı’nı kullanarak verilerinizi paylaşma
+      url: share-your-data.md
+    - text: Azure Veri Paylaşımı’nı kullanarak veri kabul etme ve alma
+      url: subscribe-to-data-share.md
+  - linkListType: how-to-guide
+    links:
+    - text: Veri kümesi eşlemelerini yapılandırma
+      url: how-to-configure-mapping.md
+    - text: Veri kümeleri ekleme
+      url: how-to-add-datasets.md
+- title: İzleme ve yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Veri Paylaşımı’nı izleme
+      url: how-to-monitor.md
+    - text: Yaygın sorunları giderme
+      url: data-share-troubleshoot.md
+    - text: Veri kümeleri ekleme
+      url: how-to-add-datasets.md
+    - text: Davet silme
+      url: how-to-delete-invitation.md
+    - text: Paylaşım aboneliğini iptal etme
+      url: how-to-revoke-share-subscription.md

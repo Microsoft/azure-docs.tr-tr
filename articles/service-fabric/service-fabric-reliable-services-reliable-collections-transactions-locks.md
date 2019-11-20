@@ -1,9 +1,9 @@
 ---
-title: İşlemler ve kilit modları azure'da Service Fabric güvenilir koleksiyonlar | Microsoft Docs
-description: Azure Service Fabric güvenilir durum Yöneticisi ve güvenilir koleksiyonlar işlemleri ve kilitleme.
+title: Azure Service Fabric güvenilir koleksiyonlardaki işlemler ve kilit modları | Microsoft Docs
+description: Azure Service Fabric güvenilir durum Yöneticisi ve güvenilir koleksiyonlar Işlemleri ve kilitleme.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: masnider,rajak
 ms.assetid: 62857523-604b-434e-bd1c-2141ea4b00d1
@@ -13,67 +13,67 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 5/1/2017
-ms.author: aljo
-ms.openlocfilehash: 9785a09a3ac3e119507b4ac28075d887c7edc619
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: atsenthi
+ms.openlocfilehash: 8e77e488a3c0a40a714a0e8efffba0a2947454bf
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60774072"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68599320"
 ---
-# <a name="transactions-and-lock-modes-in-azure-service-fabric-reliable-collections"></a>İşlemler ve Azure Service Fabric Reliable Collections kilit modları
+# <a name="transactions-and-lock-modes-in-azure-service-fabric-reliable-collections"></a>Azure Service Fabric güvenilir koleksiyonlardaki işlemler ve kilit modları
 
 ## <a name="transaction"></a>İşlem
-Bir işlem, tek bir mantıksal birim iş olarak gerçekleştirilen işlemlerin sayısına bir dizidir.
-Bir işlem aşağıdaki ACID özellikleri göstermesi gerekir. (bkz: https://technet.microsoft.com/library/ms190612)
-* **Kararlılık**: Bir işlem çalışmanın bir atomik birim olması gerekir. Diğer bir deyişle, tüm veri değişiklikleri gerçekleştirilen ya da bunların hiçbiri gerçekleştirilir.
-* **Tutarlılık**: İşlem tamamlandığında, tüm verileri tutarlı bir durumda bırakmanız gerekir. Tüm iç veri yapılarını işlem sonunda doğru olması gerekir.
-* **Yalıtım**: Eşzamanlı işlem tarafından yapılan değişiklikler diğer eşzamanlı işlemler tarafından yapılan değişiklikler gelen yalıtılmış olması gerekir. Bir ITransaction içinde bir işlem için kullanılan yalıtım düzeyi, işlemi gerçekleştiren IReliableState tarafından belirlenir.
-* **Dayanıklılık**: İşlem tamamlandıktan sonra etkilerini sistemde kalıcı olarak yerdesiniz demektir. Değişikliklerin bir sistem hatası durumunda bile kalıcı hale getirin.
+İşlem, tek bir mantıksal iş birimi olarak gerçekleştirilen işlemlerin sırasıdır.
+Bir işlem aşağıdaki ACID özelliklerini göstermelidir. bakýn https://technet.microsoft.com/library/ms190612)
+* **Atomicity**: İşlem atomik bir iş birimi olmalıdır. Diğer bir deyişle, tüm veri değişiklikleri gerçekleştirilir veya hiçbir şey yapılmaz.
+* **Tutarlılık**: İşlem tamamlandığında, bir işlemin tüm verileri tutarlı bir durumda bırakması gerekir. Tüm iç veri yapıları işlemin sonunda doğru olmalıdır.
+* **Yalıtım**: Eş zamanlı işlemler tarafından yapılan değişiklikler, başka bir eşzamanlı işlem tarafından yapılan değişikliklerden yalıtılmalıdır. Bir ITransaction içindeki bir işlem için kullanılan yalıtım düzeyi, işlemi gerçekleştiren ıreliablestate tarafından belirlenir.
+* **Dayanıklılık**: İşlem tamamlandıktan sonra, etkileri sistemde kalıcı olarak yerinde yapılır. Değişiklikler, sistem hatası durumunda bile devam ediyor.
 
 ### <a name="isolation-levels"></a>Yalıtım düzeyleri
-İstediğiniz işlemin diğer işlemler tarafından yapılan değişiklikleri gelen yalıtılmış olmalıdır ne ölçüde yalıtılacağını yalıtım düzeyini tanımlar.
-Güvenilir koleksiyonlar desteklenen iki yalıtım düzeyi vardır:
+Yalıtım düzeyi, işlemin diğer işlemler tarafından yapılan değişikliklerden yalıtılması gereken dereceyi tanımlar.
+Güvenilir koleksiyonlarda desteklenen iki yalıtım düzeyi vardır:
 
-* **Tekrarlanabilir okuma**: Deyimleri değiştirilmiş, ancak diğer işlemler tarafından henüz uygulanmamış veri okunamıyor ve başka bir işlem geçerli işlem bitene kadar geçerli işlem tarafından okunan veri değiştirebilirsiniz belirtir. Daha fazla ayrıntı için [ https://msdn.microsoft.com/library/ms173763.aspx ](https://msdn.microsoft.com/library/ms173763.aspx).
-* **Anlık Görüntü**: Herhangi bir deyimle bir işlem tarafından okunan veri işlem başlangıcında var olan verileri işlemsel olarak tutarlı sürümü olduğunu belirtir.
-  İşlem, yalnızca işlem başlamadan önce kaydedilmiş veri değişiklikleri tanıyabilirsiniz.
-  Geçerli işlem başladıktan sonra diğer işlemler tarafından yapılan değişiklikleri geçerli işlem sırasında yürütülen deyimleri için görünür değildir.
-  Bir işlemde deyimleri bir işlemin başında yeterdir taahhüt edilen verilerin bir anlık görüntüsünü almak için gibi etkisidir.
-  Güvenilir koleksiyonlar genelinde tutarlı anlık görüntüleri.
-  Daha fazla ayrıntı için [ https://msdn.microsoft.com/library/ms173763.aspx ](https://msdn.microsoft.com/library/ms173763.aspx).
+* **Yinelenebilir okuma**: Bu deyimlerin değiştirilmiş ancak başka işlemler tarafından henüz onaylanmamış verileri okuyamadığından ve geçerli işlem tamamlanana kadar geçerli işlem tarafından okunan verileri değiştiremediğini belirtir. Daha ayrıntılı bilgi için bkz [https://msdn.microsoft.com/library/ms173763.aspx](https://msdn.microsoft.com/library/ms173763.aspx).
+* **Anlık görüntü**: Bir işlemdeki herhangi bir ifadeye göre okunan verilerin, işlemin başlangıcında varolan verilerin işlemsel olarak tutarlı bir sürümü olduğunu belirtir.
+  İşlem yalnızca işlemin başlangıcından önce kaydedilmiş olan veri değişikliklerini tanıyabilir.
+  Geçerli işlemin başlangıcından sonra gerçekleştirilen diğer işlemler tarafından yapılan veri değişiklikleri, geçerli işlemde yürütülen deyimlere görünür değildir.
+  Efekt, bir işlemdeki deyimler işlemin başlangıcında olduğu gibi yürütülen verilerin anlık görüntüsünü alır.
+  Anlık görüntüler, güvenilir koleksiyonlar arasında tutarlıdır.
+  Daha ayrıntılı bilgi için bkz [https://msdn.microsoft.com/library/ms173763.aspx](https://msdn.microsoft.com/library/ms173763.aspx).
 
-Güvenilir koleksiyonlar, otomatik olarak zaman hareketin oluşturma işlemi ve çoğaltmanın rolü, bağlı olarak belirli bir okuma işlemi için kullanılacak yalıtım düzeyini seçin.
-Güvenilir bir sözlük ve kuyruk işlemleri için yalıtım düzeyi varsayılan değerlerini gösteren tabloyu aşağıdadır.
+Güvenilir koleksiyonlar, işleme ve işlemin oluşturulduğu sırada çoğaltmanın rolüne bağlı olarak belirli bir okuma işlemi için kullanılacak yalıtım düzeyini otomatik olarak seçer.
+Aşağıda, güvenilir sözlük ve kuyruk işlemleri için yalıtım düzeyi varsayılan değerleri gösteren tablo verilmiştir.
 
-| İşlem \ rolü | Birincil | İkincil |
+| İşlem \ rol | Birincil | İkincil |
 | --- |:--- |:--- |
-| Tek varlık okuma |Tekrarlanabilir okuma |Anlık Görüntü |
-| Numaralandırma, sayısı |Anlık Görüntü |Anlık Görüntü |
+| Tek bir varlık okuma |Yinelenebilir okuma |Anlık Görüntü |
+| Sabit listesi, sayı |Anlık Görüntü |Anlık Görüntü |
 
 > [!NOTE]
-> Tek varlık işlemleri ortak verilebilir `IReliableDictionary.TryGetValueAsync`, `IReliableQueue.TryPeekAsync`.
+> Tek bir varlık Işlemleri için ortak örnekler `IReliableDictionary.TryGetValueAsync`şunlardır `IReliableQueue.TryPeekAsync`.
 > 
 
-Güvenilir bir sözlük ve güvenilir sıranın hem okuma bilgisayarınızı Yazar destekler.
-Diğer bir deyişle, bir işlem içinde herhangi bir yazma için aynı işlem ait aşağıdaki okuma için görünür olur.
+Hem güvenilir sözlük hem de güvenilir sıra, yazma bilgilerinizi okumayı destekler.
+Diğer bir deyişle, bir işlem içindeki herhangi bir yazma işlemi, aynı işleme ait olan aşağıdaki okuma için görünür olacaktır.
 
 ## <a name="locks"></a>Kilitler
-Kilitleme güvenilir koleksiyonlar titiz tüm işlemleri uygular iki aşama: bir işlem edinilen bir iptal veya bir işleme ile işlem sonlanana kadar kilitleri serbest bırakmaz.
+Güvenilir koleksiyonlar bölümünde tüm işlemler, her türlü katı iki aşamalı kilitleme uygular: bir işlem, işlem iptal veya işleme ile sonlanana kadar elde ettiği kilitleri serbest bırakmaz.
 
-Güvenilir bir sözlük kilitleme tüm tek varlık işlemler için satır düzeyinde kullanır.
-Eşzamanlılık katı işlem FIFO özelliği için kapalı güvenilir kuyruk arasında denge kurar.
-Güvenilir kuyruğu kullanan bir işlem ile izin verme işlemi düzeyi kilitleri `TryPeekAsync` ve/veya `TryDequeueAsync` ve bir işlem ile `EnqueueAsync` birer güncelleştirir.
-Olmadığını unutmayın FIFO, korumak için bir `TryPeekAsync` veya `TryDequeueAsync` hiç olmadığı kadar gözlemler güvenilir sıranın boş olduğundan, ayrıca kilitleyecek `EnqueueAsync`.
+Güvenilir sözlük tüm tek varlık işlemleri için satır düzeyinde kilitleme kullanır.
+Güvenilir sıra, katı işlem FıFO özelliği için eşzamanlılık kapatır.
+Güvenilir sıra, `TryPeekAsync` `EnqueueAsync` aynı anda ve/veya `TryDequeueAsync` ile bir işleme izin veren işlem düzeyinde kilitleri kullanır.
+FIFO 'un, güvenilir sıranın boş olduğunu bir `TryPeekAsync` veya `TryDequeueAsync` daha fazla hizmet veriyorsa, bunların de kilitlendiğine `EnqueueAsync`göz önünde durun.
 
-Yazma işlemlerinin her zaman özel kilit alıyor.
-Okuma işlemleri için kilitleme, birkaç etkene bağlıdır.
-Anlık görüntü yalıtımı kullanılarak gerçekleştirilen okuma işlemi kilitsiz ' dir.
-Varsayılan olarak herhangi bir tekrarlanabilir okuma işlemi paylaşılan kilit alır.
-Ancak, tekrarlanabilir okuma destekleyen tüm okuma işlemi için kullanıcı paylaşılan kilit yerine bir güncelleştirme kilidi isteyebilir.
-Bir güncelleştirme kilidi birden çok işlem sonraki bir zamanda potansiyel güncelleştirmeleri için kaynakları kilitleme geldiğinde gerçekleşen kilitlenme ortak bir tür önlemek için kullanılan bir asimetrik kilidi var.
+Yazma işlemleri her zaman özel kilitler alır.
+Okuma işlemleri için kilitleme, birkaç faktöre bağlıdır.
+Anlık görüntü yalıtımı kullanılarak gerçekleştirilen tüm okuma işlemleri boş bir kilit değildir.
+Varsayılan olarak herhangi bir yinelenebilir okuma işlemi, paylaşılan kilitleri alır.
+Ancak, yinelenebilir okumayı destekleyen tüm okuma işlemleri için, Kullanıcı paylaşılan kilit yerine bir güncelleştirme kilidi isteyebilir.
+Güncelleştirme kilidi, birden çok işlem, olası güncelleştirmeler için kaynakları daha sonra kilitleyen yaygın bir kilitlenme biçimini engellemek için kullanılan asimetrik bir kilitdir.
 
-Kilit uyumluluk matrisi aşağıdaki tabloda bulunabilir:
+Kilit uyumluluğu matrisi aşağıdaki tabloda bulunabilir:
 
 | İstek \ verildi | None | Paylaşılan | Güncelleştirme | Özel |
 | --- |:--- |:--- |:--- |:--- |
@@ -81,17 +81,17 @@ Kilit uyumluluk matrisi aşağıdaki tabloda bulunabilir:
 | Güncelleştirme |Çakışma yok |Çakışma yok |Çakışma |Çakışma |
 | Özel |Çakışma yok |Çakışma |Çakışma |Çakışma |
 
-Güvenilir koleksiyonlar API'lerde zaman aşımı bağımsız değişkeni, kilitlenme algılaması için kullanılır.
-Örneğin, iki işlemleri (T1 ve T2) okumasına ve güncelleştirmesine K1 deniyorsunuz.
-Her ikisi de paylaşılan kilit sonunda kilitlenme için mümkün olmasıdır.
-Bu durumda, bir veya iki işlem zaman aşımına uğrar.
+Güvenilir koleksiyonlar API 'Lerinde zaman aşımı bağımsız değişkeni, kilitlenme algılama için kullanılır.
+Örneğin, iki işlem (T1 ve T2) K1 okumayı ve güncelleştirmeyi deniyor.
+Her ikisi de paylaşılan kilide bulunduğundan kilitlenmeleri mümkündür.
+Bu durumda, işlemlerden biri veya her ikisi zaman aşımına uğrar.
 
-Bu kilitlenme senaryo, bir güncelleştirme kilidi kilitlenmeleri nasıl engelleyebilir, harika bir örnektir.
+Bu kilitlenme senaryosu, güncelleştirme kilidinin kilitlenmeleri nasıl engelleyebileceğini gösteren harika bir örnektir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * [Güvenilir Koleksiyonlar ile çalışma](service-fabric-work-with-reliable-collections.md)
 * [Reliable Services bildirimleri](service-fabric-reliable-services-notifications.md)
 * [Reliable Services yedekleme ve geri yükleme (olağanüstü durum kurtarma)](service-fabric-reliable-services-backup-restore.md)
-* [Güvenilir durum Yöneticisi'ni yapılandırma](service-fabric-reliable-services-configuration.md)
-* [Güvenilir koleksiyonlar için Geliştirici Başvurusu](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
+* [Güvenilir durum Yöneticisi yapılandırması](service-fabric-reliable-services-configuration.md)
+* [Güvenilir koleksiyonlar için geliştirici başvurusu](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
 

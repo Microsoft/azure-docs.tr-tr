@@ -1,19 +1,19 @@
 ---
-title: Microsoft Azure Data Box Disk'e genel bakış | Verilerde Microsoft Docs
-description: Büyük miktarlarda verinin Azure’a aktarılmasını sağlayan bir bulut çözümü olan Azure Data Box Disk’i açıklar
+title: Microsoft Azure Data Box Disk güvenlik özellikleri | Verilerdeki Microsoft Docs
+description: Büyük miktarlardaki verileri Azure 'a aktarmanızı sağlayan bir bulut çözümü olan Azure Data Box Disk için uygulanan güvenlik özelliklerini açıklar.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: disk
-ms.topic: overview
-ms.date: 01/09/2019
+ms.topic: conceptual
+ms.date: 11/04/2019
 ms.author: alkohli
-ms.openlocfilehash: afb344418f843e54c3172c17d28bde7055e101b4
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 5db65ab6f1c96ff816252ecaba2170adf358001c
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60327936"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606569"
 ---
 # <a name="azure-data-box-disk-security-and-data-protection"></a>Azure Data Box Disk güvenlik ve veri koruması
 
@@ -94,4 +94,4 @@ Daha fazla bilgi için, [Güven Merkezi](https://www.microsoft.com/trustcenter)�
 
 - [Data Box Disk gereksinimlerini](data-box-disk-system-requirements.md) gözden geçirin.
 - [Data Box Disk sınırlarını](data-box-disk-limits.md) anlayın.
-- Azure portalında [Azure Data Box Disk](data-box-disk-quickstart-portal.md)’i hızlı dağıtın.
+- [Azure Data Box Diskini](data-box-disk-quickstart-portal.md) Azure portal'da hızlıca dağıtın.

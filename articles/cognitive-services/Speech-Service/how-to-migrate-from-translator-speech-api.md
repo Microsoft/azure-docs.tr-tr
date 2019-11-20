@@ -1,7 +1,7 @@
 ---
-title: Translator konuşma API'sini konuşma Service'a dönüştürme
+title: Translator Konuşma Çevirisi API'si konuşma hizmetine geçirme
 titleSuffix: Azure Cognitive Services
-description: Uygulamalarınızı konuşma Hizmetleri için Translator konuşma tanıma API'SİNDEN geçirmeyi öğrenin.
+description: Uygulamalarınızı Translator Konuşma Çevirisi API'si konuşma hizmetine nasıl geçirebileceğinizi öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,61 +10,61 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 05/15/2019
 ms.author: aahi
-ms.openlocfilehash: 1ed494cea1ccf8845a25a3ab49d3194cc6a55509
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 841fa89f2e893052473bb1e2b7e634f1216ab505
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65785672"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73464597"
 ---
-# <a name="migrate-from-the-translator-speech-api-to-the-speech-service"></a>Translator konuşma API'sini konuşma Service'a dönüştürme
+# <a name="migrate-from-the-translator-speech-api-to-the-speech-service"></a>Translator Konuşma Çevirisi API'si konuşma hizmetine geçirme
 
-Microsoft Translator konuşma tanıma API'si için uygulamalarınızı geçirmek için bu makaleyi kullanın [konuşma hizmeti](index.yml). Bu kılavuz, Translator konuşma tanıma API'si ve konuşma hizmeti arasındaki farkları özetler ve uygulamalarınızı geçiş stratejileri önerir.
+Uygulamalarınızı Microsoft Translator Konuşma Çevirisi API'si 'den [konuşma hizmetine](index.md)geçirmek için bu makaleyi kullanın. Bu kılavuzda, Translator Konuşma Çevirisi API'si ile konuşma hizmeti arasındaki farklar özetlenmektedir ve uygulamalarınızın geçirilmesi için stratejiler önerilir.
 
 > [!NOTE]
-> Translator konuşma tanıma API'si abonelik anahtarınızı konuşma hizmeti tarafından kabul edilmez. Yeni bir konuşma Hizmetleri aboneliği oluşturmanız gerekir.
+> Translator Konuşma Çevirisi API'si abonelik anahtarınız konuşma hizmeti tarafından kabul edilmez. Yeni bir konuşma Hizmetleri aboneliği oluşturmanız gerekir.
 
 ## <a name="comparison-of-features"></a>Özelliklerin karşılaştırması
 
 | Özellik                                           | Translator Konuşma Çevirisi API’si                                  | Konuşma Hizmetleri | Ayrıntılar                                                                                                                                                                                                                                                                            |
 |---------------------------------------------------|-----------------------------------------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Metin çevirisi                               | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Konuşma çevirisi teknolojisini                             | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Genel uç noktası                                   | :heavy_check_mark:                                              | : heavy_minus_sign:                 | Konuşma hizmetleri genel bir uç noktası sunmamaktadır. Genel bir uç noktası otomatik olarak trafiği uygulamanızdaki gecikme süresini düşüren, bölgesel uç noktasına yakın yönlendirebilir.                                                    |
-| Bölgesel uç noktaları                                | : heavy_minus_sign:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Bağlantı zaman sınırı                             | 90 dakika                                               | SDK'sı ile sınırsız. 10 dakika WebSockets bağlantısı.                                                                                                                                                                                                                                                                                   |
-| Üst bilgisindeki kimlik doğrulama anahtarı                                | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Tek bir istekte birden çok dil çevirisi | : heavy_minus_sign:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Kullanılabilir SDK'lar                                    | : heavy_minus_sign:                                              | :heavy_check_mark:                 | Bkz: [konuşma Hizmetleri belgeleri](index.yml) kullanılabilir SDK'ları için.                                                                                                                                                    |
+| Metne çeviri                               | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
+| Konuşmaya çeviri                             | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
+| Genel uç nokta                                   | :heavy_check_mark:                                              | :heavy_minus_sign:                 | Konuşma Hizmetleri küresel bir uç nokta sunmaz. Küresel bir uç nokta, uygulamanızda gecikme süresini azaltarak trafiği en yakın bölgesel uç noktaya otomatik olarak yönlendirebilir.                                                    |
+| Bölgesel uç noktalar                                | :heavy_minus_sign:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
+| Bağlantı süresi sınırı                             | 90 dakika                                               | SDK ile sınırsız. WebSockets bağlantısıyla 10 dakika.                                                                                                                                                                                                                                                                                   |
+| Üst bilgide kimlik doğrulama anahtarı                                | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
+| Tek bir istekte birden çok dil çevrilmiş | :heavy_minus_sign:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
+| Kullanılabilir SDK 'lar                                    | :heavy_minus_sign:                                              | :heavy_check_mark:                 | Kullanılabilir SDK 'lar için [konuşma Hizmetleri belgelerine](index.md) bakın.                                                                                                                                                    |
 | WebSockets bağlantıları                             | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Dil API'si                                     | :heavy_check_mark:                                              | : heavy_minus_sign:                 | Konuşma Hizmetleri aynı açıklanan dilleri destekler [Translator API dil başvurusu](../translator-speech/languages-reference.md) makalesi. |
-| Küfür filtresini ve işaret                       | : heavy_minus_sign:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| . WAV/PCM giriş                                 | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Giriş olarak diğer dosya türleri                         | : heavy_minus_sign:                                              | : heavy_minus_sign:                 |                                                                                                                                                                                                                                                                                    |
+| Diller API 'SI                                     | :heavy_check_mark:                                              | :heavy_minus_sign:                 | Konuşma Hizmetleri, [Translator API dilleri başvuru](../translator-speech/languages-reference.md) makalesinde açıklanan dil aralığını destekler. |
+| Küfür filtresi ve Işaretleyici                       | :heavy_minus_sign:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
+| . Girdi olarak WAV/PCM                                 | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
+| Giriş olarak diğer dosya türleri                         | :heavy_minus_sign:                                              | :heavy_minus_sign:                 |                                                                                                                                                                                                                                                                                    |
 | Kısmi sonuçlar                                   | :heavy_check_mark:                                              | :heavy_check_mark:                 |                                                                                                                                                                                                                                                                                    |
-| Zamanlama bilgisi                                       | :heavy_check_mark:                                              | : heavy_minus_sign:                 |                                                                                                                                                                 |
-| Bağıntı Kimliği                                    | :heavy_check_mark:                                              | : heavy_minus_sign:                 |                                                                                                                                                                                                                                                                                    |
-| Özel konuşma modelleri                              | : heavy_minus_sign:                                              | :heavy_check_mark:                 | Konuşma Hizmetleri, konuşma tanıma, kuruluşunuzun benzersiz kelime için özelleştirmenize olanak sağlayan özel konuşma modelleri sunar.                                                                                                                                           |
-| Özel çeviri modellerini                         | : heavy_minus_sign:                                              | :heavy_check_mark:                 | Microsoft metin çevirisi API'sine abone kullanmanıza olanak sağlar [özel Translator](https://www.microsoft.com/translator/business/customization/) için daha doğru çevirileri kendi verilerinizi kullanmak için.                                                 |
+| Zamanlama bilgisi                                       | :heavy_check_mark:                                              | :heavy_minus_sign:                 |                                                                                                                                                                 |
+| Bağıntı Kimliği                                    | :heavy_check_mark:                                              | :heavy_minus_sign:                 |                                                                                                                                                                                                                                                                                    |
+| Özel konuşma modelleri                              | :heavy_minus_sign:                                              | :heavy_check_mark:                 | Konuşma Hizmetleri, konuşma tanımayı kuruluşunuzun benzersiz sözlüğüne özelleştirmenizi sağlayan özel konuşma modelleri sunar.                                                                                                                                           |
+| Özel çeviri modelleri                         | :heavy_minus_sign:                                              | :heavy_check_mark:                 | Microsoft metin çevirisi API 'sine abone olmak, daha doğru çeviriler için kendi verilerinizi kullanmak üzere [özel çevirici](https://www.microsoft.com/translator/business/customization/) kullanmanıza olanak sağlar.                                                 |
 
 ## <a name="migration-strategies"></a>Geçiş stratejileri
 
-Translator konuşma tanıma API'si kullanan uygulamaları geliştirme veya üretim, sizin veya kuruluşunuzun varsa, bunları konuşma hizmeti kullanacak şekilde güncelleştirmeniz gerekir. Bkz: [konuşma hizmeti](index.yml) belgeleri kullanılabilir SDK'lar, kod örnekleri ve öğreticiler. Geçirmekte olduğunuz aşağıdakileri dikkate alın:
+Siz veya kuruluşunuzun Translator Konuşma Çevirisi API'si kullanan geliştirme veya üretim uygulamaları varsa, bunları konuşma hizmetini kullanacak şekilde güncelleştirmelisiniz. Kullanılabilir SDK 'lar, kod örnekleri ve öğreticiler için [konuşma hizmeti](index.md) belgelerine bakın. Geçiş yaparken aşağıdakileri göz önünde bulundurun:
 
-* Konuşma hizmetleri genel bir uç noktası sunmamaktadır. Uygulamanızı verimli bir şekilde, bölgesel tek bir uç nokta tüm trafik için kullandığında işlevleri, belirleyin. Aksi durumda, coğrafi konum en verimli uç nokta belirlemek için kullanın.
+* Konuşma Hizmetleri küresel bir uç nokta sunmaz. Uygulamanızın tüm trafiği için tek bir bölgesel uç nokta kullandığında uygulamanızın verimli bir şekilde işlev görür olup olmadığını belirleme. Aksi takdirde, en etkili uç noktayı öğrenmek için coğrafi konum kullanın.
 
-* Uygulamanızı uzun süreli bağlantılar kullanır ve kullanılabilir SDK'lar kullanamazsınız, WebSockets bağlantı kullanabilirsiniz. 10 dakikalık zaman aşımı sınırı, uygun zamanlarda yeniden bağlanmayı tarafından yönetin.
+* Uygulamanız uzun süreli bağlantılar kullanıyorsa ve kullanılabilir SDK 'Ları kullanamıyoruz, bir WebSockets bağlantısı kullanabilirsiniz. 10 dakikalık zaman aşımı sınırını uygun saatlere yeniden bağlanarak yönetin.
 
-* Translator konuşma tanıma API'si ve Translator Text API bir özel çeviri modellerini etkinleştirmek için uygulamanızın kullanıyorsa, konuşma hizmeti kullanarak doğrudan kategori kimlikleri ekleyebilirsiniz.
+* Uygulamanız özel çeviri modellerini etkinleştirmek için Translator Metin Çevirisi API'si ve Translator Konuşma Çevirisi API'si kullanıyorsa, konuşma hizmetini kullanarak kategori kimliklerini doğrudan ekleyebilirsiniz.
 
-* Translator konuşma tanıma API'si, konuşma Hizmetleri tek bir istekte birden fazla dilde içine çevirileri tamamlayabilirsiniz.
+* Translator Konuşma Çevirisi API'si farklı olarak, konuşma hizmetleri tek bir istekte çevirileri birden çok dilde tamamlayabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Konuşma Hizmetleri ücretsiz olarak deneyin](get-started.md)
-* [Hızlı Başlangıç: Bir UWP uygulamasında Speech SDK'sı kullanarak konuşma tanıma](quickstart-csharp-uwp.md)
+* [Konuşma hizmetlerini ücretsiz deneyin](get-started.md)
+* [Hızlı başlangıç: konuşma SDK 'sını kullanarak UWP uygulamasındaki konuşmayı tanıma](~/articles/cognitive-services/Speech-Service/quickstarts/speech-to-text-from-microphone.md?pivots=programming-language-csharp&tabs=uwp)
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [Konuşma hizmeti nedir](overview.md)
-* [Konuşma Hizmetleri ve Speech SDK'sı belgeleri](https://docs.microsoft.com/azure/cognitive-services/speech-service/speech-devices-sdk-qsg)
+* [Konuşma hizmeti nedir?](overview.md)
+* [Konuşma Hizmetleri ve konuşma SDK belgeleri](https://docs.microsoft.com/azure/cognitive-services/speech-service/speech-devices-sdk-qsg)

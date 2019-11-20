@@ -1,33 +1,33 @@
 ---
-title: Azure paylaşılan görüntüleri ile ilgili sorunları giderme | Microsoft Docs
-description: Paylaşılan resim galerileri ile ilgili sorunları giderme hakkında bilgi edinin.
+title: Azure 'da paylaşılan görüntülerle ilgili sorunları giderme
+description: Paylaşılan görüntü galerileriyle ilgili sorunları nasıl giderebileceğinizi öğrenin.
 services: virtual-machine-windows
 documentationcenter: virtual-machine-scale-sets
 author: axayjo
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 04/25/2019
-ms.author: akjosh; cynthn
+ms.author: akjosh
+ms.reviewer: cynthn
 ms.custom: ''
-ms.openlocfilehash: 5e8ff00090b3556eadceb3a64423736d8c876dca
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8ca47912a73a9d6e0502bd7847720154775c631f
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65150277"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74034670"
 ---
-# <a name="troubleshooting-shared-image-galleries"></a>Resim galerileri paylaşılan sorun giderme
+# <a name="troubleshooting-shared-image-galleries"></a>Paylaşılan görüntü galerilerini sorun giderme
 
 
 [!INCLUDE [virtual-machines-common-shared-image-troubleshooting](../../../includes/virtual-machines-common-shared-image-troubleshooting.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi edinin [resim galerileri paylaşılan](shared-image-galleries.md).
+[Paylaşılan görüntü galerileri](shared-image-galleries.md)hakkında daha fazla bilgi edinin.

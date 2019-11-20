@@ -1,90 +1,115 @@
 ---
-title: 'Azure Active Directory etki alanı Hizmetleri: Dağıtım senaryoları | Microsoft Docs'
-description: Azure AD Domain Services için dağıtım senaryoları
+title: Azure AD Domain Services için ortak dağıtım senaryoları | Microsoft Docs
+description: Değer sağlamak ve iş ihtiyaçlarını karşılamak için Azure Active Directory Domain Services bazı yaygın senaryolar ve kullanım örnekleri hakkında bilgi edinin.
 services: active-directory-ds
-documentationcenter: ''
 author: iainfoulds
 manager: daveba
-editor: curtand
 ms.assetid: c5216ec9-4c4f-4b7e-830b-9d70cf176b20
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: conceptual
-ms.date: 09/21/2017
+ms.date: 10/31/2019
 ms.author: iainfou
-ms.openlocfilehash: 9e8ac5e83fa3cc9b1e266a9009bad86f41233ed8
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 489f4a527a5afaf1bab5e2065137a5011d45baa6
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67472659"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73474447"
 ---
-# <a name="deployment-scenarios-and-use-cases"></a>Dağıtım senaryoları ve kullanım örnekleri
-Bu bölümde, bazı senaryolar ve Azure Active Directory (AD) etki alanı Hizmetleri'nden yararlanan kullanım örnekleri bakacağız.
+# <a name="common-use-cases-and-scenarios-for-azure-active-directory-domain-services"></a>Azure Active Directory Domain Services için yaygın kullanım örnekleri ve senaryolar
 
-## <a name="secure-easy-administration-of-azure-virtual-machines"></a>Azure sanal makinelerini güvenli, kullanımı kolay yönetim
-Azure sanal makinelerinizin kolaylaştırılmış bir şekilde yönetmek için Azure Active Directory Domain Services'ı kullanabilirsiniz. Azure sanal makineleri, böylece oturum açmak için Kurumsal AD kimlik bilgilerinizi kullanmanıza olanak yönetilen etki alanına katılabilir. Bu yaklaşım, Azure sanal makinelerinizin tümünde yerel yönetici hesapları bakımını yapma gibi kimlik bilgisi yönetimi sorunlarıyla uğraşmak zorunda kalmamanızı sağlar.
+Azure Active Directory Domain Services (Azure AD DS), etki alanına katılması, Grup ilkesi, Hafif Dizin Erişim Protokolü (LDAP) ve Kerberos/NTLM kimlik doğrulaması gibi yönetilen etki alanı Hizmetleri sağlar. Azure AD DS, mevcut Azure AD kiracınızla tümleştirilir, bu da kullanıcıların mevcut kimlik bilgilerini kullanarak oturum açmasını olanaklı kılar. Bu etki alanı hizmetlerini, bulutta etki alanı denetleyicileri dağıtma, yönetme ve düzeltme eki uygulama ile birlikte kullanarak, şirket içi kaynakların Azure 'a daha iyi bir şekilde daha iyi bir şekilde daha iyi bir şekilde daha iyi bir şekilde kaymasını sağlar.
 
-Yönetilen etki alanına Server sanal makineleri de yönetilebilir ve Grup İlkesi kullanılarak güvenli. Gerekli güvenlik temellerini Azure sanal makineleriniz için geçerlidir ve bunları Kurumsal güvenlik yönergelerine uygun olarak kilitleme. Örneğin, bu sanal makinelere başlatılabilen uygulamalar türlerini kısıtlamak için Grup İlkesi yönetim özelliklerini kullanabilirsiniz.
+Bu makalede, Azure AD DS 'nin değer sağladığı ve bu ihtiyaçları karşılayan bazı yaygın iş senaryoları özetlenmektedir.
 
-![Azure sanal makinelerini kolaylaştırılmış Yönetim](./media/active-directory-domain-services-scenarios/streamlined-vm-administration.png)
+## <a name="secure-administration-of-azure-virtual-machines"></a>Azure sanal makinelerinin güvenli yönetimi
 
-Contoso yaşam uç sunucuları ve diğer altyapısını ulaşır gibi birçok uygulama şu anda şirket içi bulutta barındırılan taşınıyor. Kendi geçerli BT standart kurumsal uygulamaları barındıran sunucu etki alanına katılmış ve Grup İlkesi kullanılarak yönetilen olmasını zorunlu kılar. Contoso'nun BT yöneticisi tercih ettiği etki alanı katılma sanal makineleri, Azure'a Dağıtılmış Yönetim kolaylaştırmak için. Sonuç olarak, Yöneticiler ve kullanıcılar şirket kimlik bilgilerini kullanarak da oturum açabilirsiniz. Aynı zamanda, Grup İlkesi kullanarak gerekli güvenlik temelleri ile uyum sağlamak için makine yapılandırılabilir. Contoso, dağıtma, izleme ve Azure sanal makineleri korumak için Azure etki alanı denetleyicilerini Yönet etmek zorunda kalmamayı tercih edebilir. Bu nedenle, Azure AD etki alanı Hizmetleri, bu kullanım örneği için çok uygun olabilir.
+Tek bir AD kimlik bilgileri kümesi kullanmanıza olanak sağlamak için Azure sanal makineleri (VM 'Ler) Azure AD DS yönetilen bir etki alanına katılabilir. Bu yaklaşım, her VM 'de yerel yönetici hesaplarının veya ortamlar arasında ayrı hesap ve parolaların saklanması gibi kimlik bilgisi yönetimi sorunlarını azaltır.
 
-**Dağıtım notları**
+Azure AD DS tarafından yönetilen bir etki alanına katılmış VM 'Ler de Grup İlkesi kullanılarak yönetilebilir ve güvenliği sağlanabilir. Gerekli güvenlik temelleri, kurumsal güvenlik yönergelerine uygun olarak onları kilitlemek için VM 'lere uygulanabilir. Örneğin, VM 'de başlatılabilen uygulama türlerini kısıtlamak için Grup İlkesi yönetimi özelliklerini kullanabilirsiniz.
 
-Bu dağıtım senaryosu için aşağıdaki önemli noktalara dikkat edin:
+![Azure sanal makinelerinin kolaylaştırılmış yönetimi](./media/active-directory-domain-services-scenarios/streamlined-vm-administration.png)
 
-* Yönetilen etki alanlarını Azure AD Domain Services tarafından sağlanan varsayılan olarak tek bir düz OU (kuruluş birimi) yapısı sağlar. Etki alanına katılmış tüm makinelerde tek bir düz OU'da yer alır. Ancak özel OU'ları oluşturmak tercih edebilirsiniz.
-* Azure AD etki alanı Hizmetleri, bir yerleşik GPO'yu her kullanıcıları ve bilgisayarları biçiminde basit Grup İlkesi destekler kapsayıcıları. Özel GPO'ları oluşturmak ve bunları özel OU'lara hedefleyin.
-* Azure AD etki alanı Hizmetleri temel AD bilgisayar nesnesi şemaya destekler. Bilgisayar nesnesinin şema genişletemezsiniz.
+Ortak bir örnek senaryoya göz atalım. Sunucular ve diğer altyapılar yaşam sonuna ulaştığında, contoso Şu anda şirket içinde barındırılan uygulamaları buluta taşımak istiyor. Şirket uygulamalarını barındıran sunucuların, etki alanına katılmış ve Grup İlkesi kullanılarak yönetilmesi gereken geçerli BT standardı. Contoso BT Yöneticisi, kullanıcıların kurumsal kimlik bilgilerini kullanarak oturum açmasını kolaylaştırmak için Azure 'da dağıtılan VM 'Lere etki alanına katılmayı tercih edebilir. Etki alanına katılmış olduğunda, VM 'Ler Grup İlkesi nesneleri (GPO 'Lar) kullanılarak gerekli güvenlik temellerine uymak üzere de yapılandırılabilir. Contoso, Azure 'da kendi etki alanı denetleyicilerini dağıtmayı, izlemeyi ve yönetmeyi tercih edebilir.
 
-## <a name="lift-and-shift-an-on-premises-application-that-uses-ldap-bind-authentication-to-azure-infrastructure-services"></a>Lift-and-shift ile taşıma LDAP bağlama kimlik doğrulaması için Azure altyapı hizmetleri kullanan bir şirket içi uygulama
+Azure AD DS bu kullanım örneği için harika bir fırsattır. Azure AD DS yönetilen bir etki alanı, VM 'Leri etki alanına katmanıza, tek bir kimlik bilgileri kümesi kullanmanıza ve Grup İlkesi uygulamanıza olanak tanır. Yönetilen bir etki alanı olarak, etki alanı denetleyicilerini kendiniz yapılandırmak ve bakımını yapmak zorunda kalmazsınız.
+
+### <a name="deployment-notes"></a>Dağıtım notları
+
+Aşağıdaki dağıtım konuları bu örnek kullanım örneği için geçerlidir:
+
+* Azure AD DS yönetilen etki alanları, varsayılan olarak tek bir düz kuruluş birimi (OU) yapısı kullanır. Etki alanına katılmış tüm VM 'Ler tek bir OU 'da bulunur. İsterseniz, özel OU 'Lar oluşturabilirsiniz.
+* Azure AD DS, her biri Kullanıcı ve bilgisayar kapsayıcıları için yerleşik GPO kullanır. Ek denetim için özel GPO 'Lar oluşturabilir ve bunları özel OU 'Lara hedefleyebilirsiniz.
+* Azure AD DS, temel AD bilgisayar nesne şemasını destekler. Bilgisayar nesnesinin şemasını genişletemezsiniz.
+
+## <a name="lift-and-shift-on-premises-applications-that-use-ldap-bind-authentication"></a>LDAP bağlama kimlik doğrulaması kullanan şirket içi uygulamaları kaldırın ve taşıyın
+
+Contoso, örnek senaryo olarak, bir ISV çok yıldan önce satın alınan şirket içi bir uygulamaya sahiptir. Uygulama Şu anda ISV tarafından bakım modunda ve uygulamada değişiklikler yapmak canlı olarak pahalıdır. Bu uygulamada, Kullanıcı kimlik bilgilerini bir Web formu kullanarak toplayan ve ardından Şirket içi AD DS ortamına LDAP bağlaması gerçekleştirerek kullanıcıların kimliğini doğrulayan Web tabanlı bir ön uç vardır.
+
 ![LDAP bağlama](./media/active-directory-domain-services-scenarios/ldap-bind.png)
 
-Contoso bir ISV çok sayıda yıl önce satın alınmış bir şirket içi uygulama sahiptir. Uygulama şu anda ISV tarafından Bakım modunda ve uygulamada değişiklik isteyen Contoso için fazla vakit pahalıdır. Bu uygulama bir web formu kullanarak kullanıcı kimlik bilgilerini toplayan ve ardından bir LDAP bağlaması Kurumsal Active Directory gerçekleştirerek kullanıcılarının kimliğini doğrulayan bir web tabanlı bir ön ucu vardır. Contoso, Azure altyapı hizmetleri için bu uygulamayı geçirmek istiyor. Uygulamanın herhangi bir değişikliğe gerek olmadan, olduğu gibi çalıştığını istenen bir durumdur. Ayrıca, kullanıcılar, mevcut Kurumsal kimlik bilgilerini kullanarak kimlik doğrulaması için olmalıdır ve kullanıcılar farklı işlemler yapmak üzere yeniden eğitme zorunda kalmadan. Diğer bir deyişle, son kullanıcıların uygulamayı nerede çalıştığını oblivious olmalıdır ve geçiş için saydam olmalıdır.
+Contoso bu uygulamayı Azure 'a geçirmek istiyor. Uygulama, hiçbir değişiklik gerekmeden olduğu gibi çalışmaya devam etmelidir. Ayrıca, kullanıcılar mevcut kurumsal kimlik bilgilerini ve ek eğitim olmadan kimlik doğrulaması yapabilmelidir. Uygulamanın çalıştığı son kullanıcılar için saydam olması gerekir.
 
-**Dağıtım notları**
+Bu senaryoda, Azure AD DS, uygulamaların kimlik doğrulama işleminin bir parçası olarak LDAP bağlamaları gerçekleştirmesini sağlar. Eski şirket içi uygulamalar, Azure 'a geçiş yapabilir ve yapılandırma veya kullanıcı deneyiminde değişiklik yapmadan kullanıcıların sorunsuzca kimlik doğrulamasından devam edebilir.
 
-Bu dağıtım senaryosu için aşağıdaki önemli noktalara dikkat edin:
+### <a name="deployment-notes"></a>Dağıtım notları
 
-* Uygulamanın dizine değiştirmek/yazma gerekmeyen emin olun. Yönetilen etki alanlarını Azure AD Domain Services tarafından sağlanan LDAP yazma erişimi desteklenmiyor.
-* Yönetilen etki alanına karşı doğrudan parolaları değiştiremezsiniz. Son kullanıcılara parolalarını değiştirebilir ya da Azure AD Self Servis parola değiştirme mekanizmasını kullanma veya şirket içi dizin karşı. Bu değişiklikleri otomatik olarak eşitlenen ve yönetilen etki alanında kullanılabilir.
+Aşağıdaki dağıtım konuları bu örnek kullanım örneği için geçerlidir:
 
-## <a name="lift-and-shift-an-on-premises-application-that-uses-ldap-read-to-access-the-directory-to-azure-infrastructure-services"></a>Azure altyapı hizmetleri dizine erişmek için LDAP kullanan bir şirket içi uygulamayı lift-and-shift ile taşıma okuyun
-Contoso neredeyse on yıl önce geliştirilmiş bir şirket içi iş kolu (LOB) uygulaması vardır. Bu uygulamayı kullanan dizin ve Windows Server AD ile çalışacak şekilde tasarlanmıştır. Uygulama, kullanıcılar hakkında bilgileri/özniteliklerini Active Directory'den okumak için LDAP (Basit Dizin Erişimi Protokolü) kullanır. Uygulama özniteliklerini değiştirin veya aksi halde dizine yazma desteklemez. Contoso, Azure altyapı hizmetleri için bu uygulamayı geçirmek ve şu anda bu uygulamayı barındıran eskime şirket içi donanım devre dışı bırakmak ister misiniz? Modern dizini REST tabanlı Azure AD Graph API gibi API'leri kullanmak için uygulamayı yeniden yazılması olamaz. Bu nedenle, kod değiştirme veya uygulama yeniden yazma bulutta çalıştırmak için uygulama geçirilebilir gerçekleştirilmesine lift-and-shift ile taşıma seçeneği istenir.
+* Uygulamanın dizin üzerinde değişiklik yapması ve dizine yazma ihtiyacı olmadığından emin olun. Azure AD DS yönetilen bir etki alanına LDAP yazma erişimi desteklenmez.
+* Parolaları doğrudan Azure AD DS yönetilen bir etki alanına karşı değiştiremezsiniz. Son kullanıcılar, Azure AD 'nin self servis parola değiştirme mekanizmasını veya şirket içi dizine karşı parolalarını değiştirebilir. Bu değişiklikler daha sonra otomatik olarak eşitlenir ve Azure AD DS yönetilen etki alanında kullanılabilir.
 
-**Dağıtım notları**
+## <a name="lift-and-shift-on-premises-applications-that-use-ldap-read-to-access-the-directory"></a>Dizine erişmek için LDAP Read kullanan şirket içi uygulamaları kaldırın ve taşıyın
 
-Bu dağıtım senaryosu için aşağıdaki önemli noktalara dikkat edin:
+Önceki örnek senaryoya benzer şekilde, contoso 'nun neredeyse yılda bir önce geliştirilen şirket içi iş kolu (LOB) uygulaması olduğunu varsayalım. Bu uygulama, Dizin farkınındır ve AD DS kullanıcılar hakkındaki bilgileri/öznitelikleri okumak için LDAP kullanmak üzere tasarlanmıştır. Uygulama, öznitelikleri değiştirmez veya başka bir şekilde dizine yazamaz.
 
-* Uygulamanın dizine değiştirmek/yazma gerekmeyen emin olun. Yönetilen etki alanlarını Azure AD Domain Services tarafından sağlanan LDAP yazma erişimi desteklenmiyor.
-* Uygulama özel genişletilmiş bir Active Directory şemasını gerekmeyen emin olun. Şema uzantıları, Azure AD Etki Alanı Hizmetleri'nde desteklenmez.
+Contoso bu uygulamayı Azure 'a geçirmek ve şu anda bu uygulamayı barındırmakta olan şirket içi donanımı devre dışı bırakmak istiyor. Uygulama, REST tabanlı Azure AD Graph API gibi modern Dizin API 'Lerini kullanmak için yeniden yazılabilir. Uygulama, kod değiştirmeden veya uygulamayı yeniden yazmadan bulutta çalışmak üzere geçirilebileceği bir kaldırma ve kaydırma seçeneği tercih edilir.
 
-## <a name="migrate-an-on-premises-service-or-daemon-application-to-azure-infrastructure-services"></a>Azure altyapı hizmetleri için bir şirket içi hizmet veya yordam uygulamasını geçirme
-Bazı uygulamalar birden çok katman, katmanlardan birine veritabanı katmanı gibi bir arka uç katmanı için kimliği doğrulanmış aramalar gerçekleştirmek için gereken yere oluşur. Active Directory hizmet hesapları, bu kullanım durumları için yaygın olarak kullanılır. Lift-and-shift ile taşıma için söz konusu uygulamalar, Azure altyapı hizmetleri ve bu uygulamaların kimlik gereksinimleri için Azure AD etki alanı Hizmetleri kullanın. Şirket içi dizininizden Azure AD'ye eşitlenen aynı hizmet hesabını kullanmayı da tercih edebilirsiniz. Alternatif olarak, ilk özel bir OU oluşturun ve ardından söz konusu uygulamalar dağıtmak için OU içinde ayrı bir hizmet hesabı oluşturun.
+Azure AD DS, bu senaryoya yardımcı olmak için uygulamaların, ihtiyaç duyacağı öznitelik bilgilerini almak için yönetilen etki alanında LDAP okumaları gerçekleştirmesini sağlar. Uygulamanın yeniden yazılması gerekmez, bu nedenle Azure 'a bir yükseltme ve kaydırma, kullanıcıların, çalıştığı yerde bir değişiklik yapmadan uygulamayı kullanmaya devam etmesine olanak tanır.
 
-![WIA kullanarak hizmet hesabı](./media/active-directory-domain-services-scenarios/wia-service-account.png)
+### <a name="deployment-notes"></a>Dağıtım notları
 
-Contoso bir arka uç FTP sunucusuna bir web ön ucu ve bir SQL server içeren bir özel olarak geliştirilmiş yazılımlar kasa uygulama vardır. Windows tümleşik kimlik doğrulaması hizmet hesapları, web ön ucu FTP sunucusuna kimlik doğrulaması için kullanılır. Web ön ucu bir hizmet hesabı çalışacak şekilde ayarlayın. Arka uç sunucusu için web ön uç hizmet hesabından erişim yetkisi vermek için yapılandırılır. Contoso, Azure altyapı hizmetleri bu uygulamaya taşımak için bulutta bir etki alanı denetleyicisi sanal makinesini dağıtmak almamayı tercih eder. Contoso'nun BT yöneticisi, web ön ucu, SQL server ve Azure sanal makinelerine FTP sunucusunun barındırma sunucuları dağıtabilirsiniz. Bu makineler sonra bir Azure AD Domain Services yönetilen etki alanına katılmış. Ardından, bunların aynı hizmet hesabını kendi şirket içi dizininde uygulamanın kimlik doğrulama amaçlarıyla kullanabilirsiniz. Bu hizmet hesabı, Azure AD Domain Services yönetilen etki alanına eşitlenir ve kullanıma hazırdır.
+Aşağıdaki dağıtım konuları bu örnek kullanım örneği için geçerlidir:
 
-**Dağıtım notları**
+* Uygulamanın dizin üzerinde değişiklik yapması ve dizine yazma ihtiyacı olmadığından emin olun. Azure AD DS yönetilen bir etki alanına LDAP yazma erişimi desteklenmez.
+* Uygulamanın özel/genişletilmiş Active Directory şemasına ihtiyacı olmadığından emin olun. Şema uzantıları Azure AD DS desteklenmez.
 
-Bu dağıtım senaryosu için aşağıdaki önemli noktalara dikkat edin:
+## <a name="migrate-an-on-premises-service-or-daemon-application-to-azure"></a>Şirket içi hizmet veya Daemon uygulamasını Azure 'a geçirme
 
-* Uygulama kimlik doğrulaması için kullanıcı adı/parola kullandığından emin olun. Sertifika/akıllı kart tabanlı kimlik doğrulaması, Azure AD Domain Services tarafından desteklenmiyor.
-* Yönetilen etki alanına karşı doğrudan parolaları değiştiremezsiniz. Son kullanıcılara parolalarını değiştirebilir ya da Azure AD Self Servis parola değiştirme mekanizmasını kullanma veya şirket içi dizin karşı. Bu değişiklikleri otomatik olarak eşitlenen ve yönetilen etki alanında kullanılabilir.
+Bazı uygulamalar, katmanların bir veritabanı gibi bir arka uç katmanına kimliği doğrulanmış çağrılar gerçekleştirmesi gereken birden çok katmanı içerir. AD hizmet hesapları, bu senaryolarda yaygın olarak kullanılır. Uygulamaları Azure 'a kaldırıp sürüklerken Azure AD DS, hizmet hesaplarını aynı şekilde kullanmaya devam etmenizi sağlar. Şirket içi dizininizden Azure AD 'ye eşitlenen aynı hizmet hesabını kullanmayı tercih edebilir veya özel bir OU oluşturup bu OU 'da ayrı bir hizmet hesabı oluşturabilirsiniz. Her iki yaklaşım ile de uygulamalar diğer katmanlara ve hizmetlere kimliği doğrulanmış çağrılar yapmak için aynı şekilde çalışmaya devam eder.
 
-## <a name="windows-server-remote-desktop-services-deployments-in-azure"></a>Azure dağıtımları Windows Server Uzak Masaüstü Hizmetleri
-Azure AD Domain Services, Azure'da dağıtılan, Uzak Masaüstü sunucularının yönetilen AD etki alanı hizmetleri sağlamak için kullanabilirsiniz.
+![WIA kullanan hizmet hesabı](./media/active-directory-domain-services-scenarios/wia-service-account.png)
 
-Bu dağıtım senaryosu hakkında daha fazla bilgi için bkz. nasıl [Azure AD Domain Services, RDS dağıtımı ile tümleştirmeniz](https://docs.microsoft.com/windows-server/remote/remote-desktop-services/rds-azure-adds).
+Bu örnek senaryoda contoso, Web ön ucu, SQL Server ve arka uç FTP sunucusu içeren özel olarak oluşturulmuş bir yazılım Kasası uygulamasına sahiptir. Windows-tümleşik kimlik doğrulaması hizmet hesaplarını kullanan Web ön ucunun FTP sunucusuna kimliğini doğrular. Web ön ucu bir hizmet hesabı olarak çalışacak şekilde ayarlanır. Arka uç sunucusu, Web ön ucunun hizmet hesabından erişim yetkisi verecek şekilde yapılandırılmıştır. Contoso, bu uygulamayı Azure 'a taşımak için bulutta kendi etki alanı denetleyicisi sanal makinelerini dağıtıp yönetmek istemiyor.
 
+Bu senaryo için, Web ön ucu, SQL Server ve FTP sunucusunu barındıran sunucular Azure sanal makinelerine geçirilebilir ve Azure AD DS yönetilen bir etki alanına eklenebilir. VM 'Ler daha sonra Azure AD aracılığıyla Azure AD Connect kullanılarak eşitlenen, uygulamanın kimlik doğrulama amaçları için şirket içi dizininde aynı hizmet hesabını kullanabilir.
+
+### <a name="deployment-notes"></a>Dağıtım notları
+
+Aşağıdaki dağıtım konuları bu örnek kullanım örneği için geçerlidir:
+
+* Uygulamalarda kimlik doğrulaması için bir Kullanıcı adı + parola kullandığınızdan emin olun. Sertifika veya akıllı kart tabanlı kimlik doğrulaması Azure AD DS tarafından desteklenmez.
+* Parolaları doğrudan Azure AD DS yönetilen bir etki alanına karşı değiştiremezsiniz. Son kullanıcılar, Azure AD 'nin self servis parola değiştirme mekanizmasını veya şirket içi dizine karşı parolalarını değiştirebilir. Bu değişiklikler daha sonra otomatik olarak eşitlenir ve Azure AD DS yönetilen etki alanında kullanılabilir.
+
+## <a name="windows-server-remote-desktop-services-deployments-in-azure"></a>Azure 'da Windows Server Uzak Masaüstü Hizmetleri dağıtımları
+
+Azure AD DS, Azure 'da dağıtılan uzak masaüstü sunucularına yönetilen etki alanı hizmetleri sağlamak için kullanabilirsiniz. Bu dağıtım senaryosu hakkında daha fazla bilgi için bkz. [Azure AD DOMAIN SERVICES RDS dağıtımıyla tümleştirme][windows-rds].
 
 ## <a name="domain-joined-hdinsight-clusters-preview"></a>Etki alanına katılmış HDInsight kümeleri (Önizleme)
-Apache Ranger etkin bir Azure AD Domain Services yönetilen etki alanına katılmış bir Azure HDInsight kümesi ayarlayabilirsiniz. Oluşturma ile Apache Ranger Hive ilkelerini uygulamak ve kullanıcıların (örneğin, veri uzmanları) için Hive ODBC tabanlı araçlar, örneğin Excel, Tableau vb. kullanarak bağlanmasına izin vermek. Microsoft kısa süre içinde etki alanına katılmış HDInsight için Storm, HBase ve Spark gibi diğer iş yükleri ekleme çalışmaktadır.
 
-Bu dağıtım senaryosu hakkında daha fazla bilgi için bkz. nasıl [etki alanına katılmış HDInsight kümelerini yapılandırma](../hdinsight/domain-joined/apache-domain-joined-configure.md)
+Apache Ranger etkin olan Azure AD DS tarafından yönetilen bir etki alanına katılmış bir Azure HDInsight kümesi oluşturabilirsiniz. Apache Ranger aracılığıyla Hive ilkeleri oluşturup uygulayabilir ve veri bilimcileri gibi kullanıcıların Excel veya Tableau gibi ODBC tabanlı araçları kullanarak Hive 'a bağlanmasına izin verebilirsiniz. Etki alanına katılmış HDInsight 'a HBase, Spark ve fırtınası gibi diğer iş yüklerini eklemek için çalışmaya devam ediyoruz.
+
+Bu dağıtım senaryosu hakkında daha fazla bilgi için bkz. [etki alanına katılmış HDInsight kümelerini yapılandırma][hdinsight]
+
+## <a name="next-steps"></a>Sonraki adımlar
+
+Başlamak için [Azure Active Directory Domain Services bir örnek oluşturun ve yapılandırın][tutorial-create-instance]
+
+<!-- INTERNAL LINKS -->
+[hdinsight]: ../hdinsight/domain-joined/apache-domain-joined-configure.md
+[tutorial-create-instance]: tutorial-create-instance.md
+
+<!-- EXTERNAL LINKS -->
+[windows-rds]: /windows-server/remote/remote-desktop-services/rds-azure-adds

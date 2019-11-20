@@ -3,7 +3,7 @@ title: Azure'da Service Fabric üzerinde Linux kapsayıcı uygulaması oluşturm
 description: Bu hızlı başlangıçta uygulamanızla bir Docker görüntüsü oluşturacak, görüntüyü bir kapsayıcı kayıt defterine iletecek ve kapsayıcınızı bir Service Fabric kümesine dağıtacaksınız.
 services: service-fabric
 documentationcenter: linux
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: ''
 ms.assetid: ''
@@ -12,21 +12,21 @@ ms.devlang: python
 ms.topic: quickstart
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 01/30/2019
-ms.author: aljo,suhuruli
+ms.date: 07/22/2019
+ms.author: suhuruli
 ms.custom: mvc
-ms.openlocfilehash: 1487c9e3e57a2fe4dcdcab04aa81cd81315decfd
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: 0f6e24d2790f78ab0ec7292640fda3ab30e03a03
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66302378"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68599406"
 ---
 # <a name="quickstart-deploy-linux-containers-to-service-fabric"></a>Hızlı Başlangıç: Linux kapsayıcıları Service Fabric'e dağıtma
 
 Azure Service Fabric; ölçeklenebilir ve güvenilir mikro hizmetleri ve kapsayıcıları dağıtmayı ve yönetmeyi sağlayan bir dağıtılmış sistemler platformudur.
 
-Bu hızlı başlangıçta, Azure Service Fabric kümesinde Linux kapsayıcıları dağıtma gösterilmektedir. Tamamladığınızda Service Fabric kümesinde çalışan Python web ön ucu ve Redis arka ucundan oluşan bir oy verme uygulamasına sahip olacaksınız. Ayrıca, bir uygulamanın yükünü devretme ve kümenizde bir uygulamayı ölçeklendirme hakkında da bilgi edineceksiniz.
+Bu hızlı başlangıçta, Linux kapsayıcılarını Azure 'da bir Service Fabric kümesine dağıtma gösterilmektedir. Tamamladığınızda Service Fabric kümesinde çalışan Python web ön ucu ve Redis arka ucundan oluşan bir oy verme uygulamasına sahip olacaksınız. Ayrıca, bir uygulamanın yükünü devretme ve kümenizde bir uygulamayı ölçeklendirme hakkında da bilgi edineceksiniz.
 
 ![Oylama uygulaması web sayfası][quickstartpic]
 
@@ -34,20 +34,20 @@ Bu hızlı başlangıçta, Azure Service Fabric kümesinde Linux kapsayıcılar�
 
 Bu hızlı başlangıcı tamamlamak için:
 
-1. Oluşturma bir [ücretsiz Azure hesabı](https://azure.microsoft.com/free/) bir aboneliğiniz yoksa başlamadan önce.
+1. Aboneliğiniz yoksa başlamadan önce [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/) oluşturun.
 
 2. [Azure CLI](/cli/azure/install-azure-cli-apt?view=azure-cli-latest)'yı yükleme
 
-3. Yükleme [Service Fabric SDK'sı ve CLI](service-fabric-get-started-linux.md#installation-methods)
+3. [SERVICE fabrıc SDK ve CLI](service-fabric-get-started-linux.md#installation-methods) 'yi yükler
 
-4. Yükleme [Git](https://git-scm.com/)
+4. [Git](https://git-scm.com/) 'i yükler
 
 
 ## <a name="get-the-application-package"></a>Uygulama paketini alma
 
 Kapsayıcıları Service Fabric üzerinde dağıtmak için ayrı kapsayıcıları ve uygulamayı açıklayan bildirim dosyası (uygulama tanımı) kümesine ihtiyacınız vardır.
 
-Konsolda, uygulama tanımının bir kopyasını için git kullanın. ardından dizinleri `Voting` dizini ile.
+Bir konsolunda, uygulama tanımının bir kopyasını klonlamak için git ' i kullanın; ardından dizinleri kopyanızda `Voting` dizin olarak değiştirin.
 
 ```bash
 git clone https://github.com/Azure-Samples/service-fabric-containers.git
@@ -57,7 +57,7 @@ cd service-fabric-containers/Linux/container-tutorial/Voting
 
 ## <a name="create-a-service-fabric-cluster"></a>Service Fabric kümesi oluşturma
 
-Uygulamayı Azure'a dağıtmak için, uygulamayı çalıştıracak bir Service Fabric kümesine ihtiyacınız vardır. Aşağıdaki komutlar, Azure'da beş düğümlü bir küme oluşturur.  Komutları da otomatik olarak imzalanan bir sertifika oluşturun, bir anahtar kasasına ekler ve sertifika yerel olarak indirilir. Yeni sertifikayı dağıtır ve istemcilerin kimliğini doğrulamak için kullanılan Küme güvenliğini sağlamak için kullanılır.
+Uygulamayı Azure'a dağıtmak için, uygulamayı çalıştıracak bir Service Fabric kümesine ihtiyacınız vardır. Aşağıdaki komutlar Azure 'da beş düğümlü bir küme oluşturur.  Komutlar Ayrıca otomatik olarak imzalanan bir sertifika oluşturur, bunu bir anahtar kasasına ekler ve sertifikayı yerel olarak indirir. Yeni sertifika, dağıtıldıktan sonra kümenin güvenliğini sağlamak için kullanılır ve istemcilerin kimliğini doğrulamak için kullanılır.
 
 ```azurecli
 #!/bin/bash
@@ -87,7 +87,7 @@ az sf cluster create --resource-group $ResourceGroupName --location $Location --
 ```
 
 > [!Note]
-> Web ön ucu hizmeti, gelen trafik için 80 numaralı bağlantı noktasını dinlemek üzere yapılandırılmıştır. Varsayılan olarak, kümenizi Vm'leri ve Azure load balancer 80 numaralı bağlantı noktasını açıktır.
+> Web ön ucu hizmeti, gelen trafik için 80 numaralı bağlantı noktasını dinlemek üzere yapılandırılmıştır. Varsayılan olarak, 80 numaralı bağlantı noktası, küme sanal makinelerinizdeki ve Azure Yük dengeleyicisinde açıktır.
 >
 
 ## <a name="configure-your-environment"></a>Ortamınızı yapılandırma
@@ -98,21 +98,21 @@ Service Fabric, bir kümeyi ve uygulamalarını yönetmek için kullanabileceği
 - Azure CLI üzerinde çalışan Service Fabric Komut Satırı Arabirimi (CLI). 
 - PowerShell komutları.
 
-Bu hızlı başlangıçta, Service Fabric CLI ve Service Fabric Explorer (bir web tabanlı araç) kullanın. Service Fabric Explorer'ı kullanmak için tarayıcıda Sertifika PFX dosyasını almanız gerekir. Varsayılan olarak, hiçbir parola PFX dosyasını vardır.
+Bu hızlı başlangıçta Service Fabric CLı ve Service Fabric Explorer (bir Web tabanlı araç) kullanacaksınız. Service Fabric Explorer kullanmak için, sertifika PFX dosyasını tarayıcıya aktarmanız gerekir. Varsayılan olarak PFX dosyasının parolası yoktur.
 
-Mozilla Firefox, Ubuntu 16.04 varsayılan tarayıcıda ' dir. Sertifikayı Firefox’a aktarmak için, tarayıcınızın sağ üst köşesindeki menü düğmesine ve ardından **Seçenekler**’e tıklayın. **Tercihler** sayfasında arama kutusunu kullanarak "sertifikalar" terimini arayın. **Sertifikaları Görüntüle**’ye tıklayın, **Sertifikalarınız** sekmesini seçin, **İçeri Aktar**’a tıklayın ve sertifikayı içeri aktarma istemlerini izleyin.
+Mozilla Firefox, Ubuntu 16,04 ' de varsayılan tarayıcıdır. Sertifikayı Firefox’a aktarmak için, tarayıcınızın sağ üst köşesindeki menü düğmesine ve ardından **Seçenekler**’e tıklayın. **Tercihler** sayfasında arama kutusunu kullanarak "sertifikalar" terimini arayın. **Sertifikaları Görüntüle**’ye tıklayın, **Sertifikalarınız** sekmesini seçin, **İçeri Aktar**’a tıklayın ve sertifikayı içeri aktarma istemlerini izleyin.
 
    ![Firefox’ta sertifika yükleme](./media/service-fabric-quickstart-containers-linux/install-cert-firefox.png)
 
 ## <a name="deploy-the-service-fabric-application"></a>Service Fabric uygulamasını dağıtma
 
-1. CLI kullanarak azure'daki Service Fabric kümesine bağlanın. Uç nokta, kümenizin yönetim uç noktasıdır. Önceki bölümde PEM dosyasını oluşturdunuz. 
+1. CLı kullanarak Azure 'da Service Fabric kümesine bağlanın. Uç nokta, kümenizin yönetim uç noktasıdır. Önceki bölümde PEM dosyasını oluşturdunuz. 
 
     ```bash
     sfctl cluster select --endpoint https://containertestcluster.eastus.cloudapp.azure.com:19080 --pem containertestcluster22019013100.pem --no-verify
     ```
 
-2. Yükleme betiğini kullanarak Oylama uygulaması tanımını kümeye kopyalayın, uygulama türünü kaydedin ve uygulamanın bir örneğini oluşturun.  PEM sertifikası dosyası aynı dizinde bulunmalıdır *install.sh* dosya.
+2. Yükleme betiğini kullanarak Oylama uygulaması tanımını kümeye kopyalayın, uygulama türünü kaydedin ve uygulamanın bir örneğini oluşturun.  PEK sertifika dosyası *install.sh* dosyası ile aynı dizinde bulunmalıdır.
 
     ```bash
     ./install.sh
@@ -179,7 +179,7 @@ Kümeden uygulama örneğini silmek ve uygulama türünün kaydını silmek içi
 
 Kümeyi ve kullandığı tüm kaynakları silmenin en basit yolu, kaynak grubunun silinmesidir.
 
-Azure'da oturum açın ve kümeyi kaldırmak istediğiniz abonelik Kimliğini seçin. Abonelik Kimliğinizi, Azure portalında oturum açarak bulabilirsiniz. Kaynak grubu ve kullanarak tüm küme kaynaklarını silin [az group delete komutu](/cli/azure/group?view=azure-cli-latest).
+Azure 'da oturum açın ve kümeyi kaldırmak istediğiniz abonelik KIMLIĞINI seçin. Azure portal oturum açarak abonelik KIMLIĞINIZI bulabilirsiniz. [Az Group Delete komutunu](/cli/azure/group?view=azure-cli-latest)kullanarak kaynak grubunu ve tüm küme kaynaklarını silin.
 
 ```azurecli
 az login
@@ -189,9 +189,9 @@ az group delete --name $ResourceGroupName
 ```
 
 Kümenizle çalışmayı tamamladıysanız, sertifikayı sertifika deposundan kaldırabilirsiniz. Örneğin:
-- Windows'da: Kullanım [sertifikalar MMC ek bileşenini](https://docs.microsoft.com/dotnet/framework/wcf/feature-details/how-to-view-certificates-with-the-mmc-snap-in). Ek bileşeni eklerken **Kullanıcı hesabım**’ı seçtiğinizden emin olun. `Certificates - Current User\Personal\Certificates` sayfasına gidip sertifikayı kaldırın.
+- Windows'da: [SERTIFIKALAR MMC ek bileşenini](https://docs.microsoft.com/dotnet/framework/wcf/feature-details/how-to-view-certificates-with-the-mmc-snap-in)kullanın. Ek bileşeni eklerken **Kullanıcı hesabım**’ı seçtiğinizden emin olun. `Certificates - Current User\Personal\Certificates` sayfasına gidip sertifikayı kaldırın.
 - Mac'te: Anahtarlık uygulamasını kullanın.
-- Ubuntu üzerinde: Sertifikaları görüntülemek ve sertifikayı kaldırmak için kullandığınız adımları izleyin.
+- Ubuntu 'da: Sertifikaları görüntülemek ve sertifikayı kaldırmak için kullandığınız adımları izleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

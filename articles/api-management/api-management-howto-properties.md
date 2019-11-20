@@ -1,6 +1,6 @@
 ---
-title: Adlandırılmış değerler Azure API Management ilkelerini kullanma
-description: Adlandırılmış değerler Azure API Management ilkelerini kullanmayı öğrenin.
+title: Azure API Management ilkelerinde adlandırılmış değerleri kullanma
+description: Azure API Management ilkelerinde adlandırılmış değerleri nasıl kullanacağınızı öğrenin.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,74 +9,73 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/25/2018
+ms.date: 11/05/2019
 ms.author: apimpm
-ms.openlocfilehash: 9e1b1953520c5502668fbbae70a37a140253b035
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d11239aa49a53a90a38f2b5336d36cea6c97e9df
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66241684"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824170"
 ---
-# <a name="how-to-use-named-values-in-azure-api-management-policies"></a>Adlandırılmış değerler Azure API Management ilkelerini kullanma
-API Management ilkeleri güçlü bir API configuration aracılığıyla davranışını değiştirmek Azure portalın sistem özellikleridir. İlkeler, bir API isteği veya yanıtı üzerinde sırayla yürütülen deyimlerin bir koleksiyonudur. İlke ifadeleri, metin değerleri, ilke ifadeleri kullanarak ve adlandırılmış değerler oluşturulabilir. 
+# <a name="how-to-use-named-values-in-azure-api-management-policies"></a>Azure API Management ilkelerinde adlandırılmış değerleri kullanma
 
-Her API Management hizmet örneği adlı hizmet örneği için genel kabul edilen değerler, adlı bir anahtar/değer çiftleri özellikleri koleksiyonu vardır. Bu adlandırılmış değerler, dize sabit değerleri, tüm API yapılandırması ve ilkelerini yönetmek için kullanılabilir. Her bir özellik aşağıdaki özniteliklere sahip olabilir:
+API Management ilkeleri, sistemin yapılandırma aracılığıyla API 'nin davranışını değiştirmesine Azure portal olanak tanıyan güçlü bir yetenektir. İlkeler, bir API isteği veya yanıtı üzerinde sırayla yürütülen deyimlerin bir koleksiyonudur. İlke deyimleri, sabit metin değerleri, ilke ifadeleri ve adlandırılmış değerler kullanılarak oluşturulabilir.
 
-| Öznitelik | Tür | Açıklama |
-| --- | --- | --- |
-| `Display name` |string |İlkeleri özelliğinde başvurmak için kullanılan alfasayısal dize. |
-| `Value`        |string |Özelliğin değeri. Değil boş olamaz veya yalnızca boşluktan oluşamaz olabilir. |
-| `Secret`       |boole|Değer bir gizli dizidir ve veya şifrelenmesi gerektiğini belirler.|
-| `Tags`         |dize dizisi |İsteğe bağlı etiketleri sağlandığında özellik listesini filtrelemek için kullanılabilir. |
+Her bir API Management hizmet örneği, hizmet örneği için genel olan adlandırılmış değerler olarak adlandırılan anahtar/değer çiftlerinin bir özellikler koleksiyonuna sahiptir. Koleksiyondaki öğe sayısı üzerinde hiçbir uygulanan sınır yoktur. Adlandırılmış değerler, tüm API yapılandırması ve ilkeleri genelinde sabit dize değerlerini yönetmek için kullanılabilir. Her bir adlandırılmış değer aşağıdaki özniteliklere sahip olabilir:
+
+| Öznitelik      | Tür            | Açıklama                                                                                                                         |
+| -------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `Display name` | string          | İlkelerdeki adlandırılmış değere başvurmak için kullanılır. Bir ile 256 karakter arasında bir dize. Yalnızca harfler, rakamlar, nokta ve tireye izin verilir. |
+| `Value`        | string          | Gerçek değer. Boş olmamalı veya yalnızca boşluklardan oluşmalıdır. En fazla 4096 karakter uzunluğunda.                                     |
+| `Secret`       | boole         | Değerin gizli olup olmadığını ve şifrelenmesinin gerekip gerekmediğini belirler.                                                            |
+| `Tags`         | dize dizisi | Adlandırılmış değer listesini filtrelemek için kullanılır. En fazla 32 etiket.                                                                                    |
 
 ![Adlandırılmış değerler](./media/api-management-howto-properties/named-values.png)
 
-Özellik değerleri, değişmez değer dizeleri içerebilir ve [ilke ifadeleri](/azure/api-management/api-management-policy-expressions). Örneğin, değeri `ExpressionProperty` geçerli tarih ve saat içeren bir dize döndüren bir ilke ifadesidir. Özellik `ContosoHeaderValue` değeri görüntülenmez, böylece bir gizli dizi işaretlenir.
+Adlandırılmış değerler, sabit dizeler ve [ilke ifadeleri](/azure/api-management/api-management-policy-expressions)içerebilir. Örneğin, `Expression` değeri geçerli tarih ve saati içeren bir dize döndüren bir ilke deyimidir. Adlandırılmış değer `Credential` gizli olarak işaretlenir, bu nedenle değeri varsayılan olarak görüntülenmez.
 
-| Ad | Value | Secret | Tags |
-| --- | --- | --- | --- |
-| ContosoHeader |Trackingıd |False |Contoso |
-| ContosoHeaderValue |•••••••••••••••••••••• |True |Contoso |
-| ExpressionProperty |@(DateTime.Now.ToString()) |False | |
+| Ad       | Değer                      | Gizli dizi | Etiketler          |
+| ---------- | -------------------------- | ------ | ------------- |
+| Değer      | 42                         | False  | önemli sayılar |
+| Kimlik Bilgisi | ••••••••••••••••••••••     | True   | güvenlik      |
+| İfadeler | @ (DateTime. Now. ToString ()) | False  |               |
 
-## <a name="to-add-and-edit-a-property"></a>Ekleme ve bir özelliği düzenlemek için
+## <a name="to-add-and-edit-a-named-value"></a>Adlandırılmış bir değer eklemek ve düzenlemek için
 
-![Özellik ekleme](./media/api-management-howto-properties/add-property.png)
+![Adlandırılmış bir değer ekleyin](./media/api-management-howto-properties/add-property.png)
 
 1. **API YÖNETİMİ** bölümünden **API’ler** öğesini seçin.
-2. Seçin **değerleri adlı**.
-3. Tuşuna **+ Ekle**.
+2. **Adlandırılmış değerleri**seçin.
+3. **+ Ekle**tuşuna basın.
 
-   Ad ve değer gerekli değerler. Bu özellik değeri bir gizli dizi ise, bu, gizli bir onay kutusu denetleyin. Girin veya adlandırılmış değerlerinizi düzenleme ile yardımcı ve daha fazla isteğe bağlı etiket kaydedin.
-4. **Oluştur**’a tıklayın.
+    Ad ve değer gerekli değerlerdir. Değer bir gizli dizi ise, *Bu gizli bir* onay kutusu olup olmadığını kontrol edin. Adlandırılmış değerlerinizi organize etmenize yardımcı olmak için bir veya daha fazla isteğe bağlı etiket girin ve Kaydet ' e tıklayın.
 
-Özellik oluşturulduktan sonra özellikte tıklayarak düzenleyebilirsiniz. Özellik adını değiştirirseniz, bu özelliğe başvuran tüm ilkeler yeni adı kullanacak şekilde otomatik olarak güncelleştirilir.
+4. **Oluştur**'a tıklayın.
 
-REST API kullanarak bir özellik düzenleme hakkında daha fazla bilgi için bkz. [REST API kullanarak bir özelliği düzenlemeyi](/rest/api/apimanagement/2019-01-01/property?patch).
+Adlandırılmış değer oluşturulduktan sonra, üzerine tıklayarak düzenleyebilirsiniz. Adlandırılmış değer adını değiştirirseniz, bu adlandırılmış değere başvuruda bulunan tüm ilkeler, yeni adı kullanacak şekilde otomatik olarak güncelleştirilir.
 
-## <a name="to-delete-a-property"></a>Bir özelliği silmek için
+REST API kullanarak adlandırılmış bir değeri düzenleme hakkında daha fazla bilgi için, bkz. [adlandırılmış bir değeri REST API kullanarak düzenleme](/rest/api/apimanagement/2019-01-01/property?patch).
 
-Bir özelliği silmek için tıklayın **Sil** silme özelliği yanında.
+## <a name="to-delete-a-named-value"></a>Adlandırılmış bir değeri silmek için
+
+Adlandırılmış bir değeri silmek için, silinecek adlandırılmış değerin yanındaki **Sil** ' e tıklayın.
 
 > [!IMPORTANT]
-> Özellik ilkelerle başvuruyorsa, onu kullanan tüm ilkelerden özelliği kaldırana kadar başarılı bir şekilde silmek mümkün olmayacaktır.
-> 
-> 
+> Adlandırılmış değere herhangi bir ilke tarafından başvuruluyorsa, adlandırılmış değeri onu kullanan tüm ilkelerden kaldırana kadar başarıyla silemezsiniz.
 
-REST API kullanarak bir özelliği silme hakkında daha fazla bilgi için bkz: [REST API kullanarak bir özelliği silmeye](/rest/api/apimanagement/2019-01-01/property/delete).
+REST API kullanarak adlandırılmış bir değeri silme hakkında daha fazla bilgi için, bkz. [REST API kullanarak adlandırılan değeri silme](/rest/api/apimanagement/2019-01-01/property/delete).
 
-## <a name="to-search-and-filter-named-values"></a>Arama ve filtre adlı değerleri
+## <a name="to-search-and-filter-named-values"></a>Adlandırılmış değerleri aramak ve filtrelemek için
 
-**Değerleri adlı** arama ve filtreleme özellikleri, adlandırılmış değerler yönetmenize yardımcı olmak için sekmesinde bulunur. Özellik listesi özellik adına göre filtre uygulamak için bir arama terimi girin. **arama özelliği** metin. Adlandırılmış tüm değerleri görüntülemek için Temizle **arama özelliği** metin kutusunu ve ENTER'a basın.
+**Adlandırılmış değerler** sekmesi, adlandırılmış değerlerinizi yönetmenize yardımcı olmak için arama ve filtreleme özelliklerini içerir. Adlandırılmış değerler listesini ada göre filtrelemek için **arama özelliği** metin kutusuna bir arama terimi girin. Tüm adlandırılmış değerleri göstermek için **arama özelliği** metin kutusunu temizleyin ve ENTER tuşuna basın.
 
-Etiket değerlerine göre özellik listesini filtrelemek için bir veya daha fazla etiketi ekleyerek girin **etiketlere göre filtre** metin. Adlandırılmış tüm değerleri görüntülemek için Temizle **etiketlere göre filtre** metin kutusunu ve ENTER'a basın.
+Listeyi etikete göre filtrelemek için **etiketlere göre filtrele** metin kutusuna bir veya daha fazla etiket girin. Tüm adlandırılmış değerleri göstermek için **etiketlere göre filtrele** metin kutusunu temizleyin ve ENTER tuşuna basın.
 
-## <a name="to-use-a-property"></a>Bir özelliği kullanmak için
+## <a name="to-use-a-named-value"></a>Adlandırılmış bir değer kullanmak için
 
-İlke bir özelliği kullanmak için özellik adı bir çift çifti gibi küme ayraçlarının içine yerleştirin `{{ContosoHeader}}`, aşağıdaki örnekte gösterildiği gibi:
+Bir ilkede adlandırılmış bir değer kullanmak için, aşağıdaki örnekte gösterildiği gibi, adını `{{ContosoHeader}}`gibi çift küme ayracı içine yerleştirin:
 
 ```xml
 <set-header name="{{ContosoHeader}}" exists-action="override">
@@ -84,11 +83,11 @@ Etiket değerlerine göre özellik listesini filtrelemek için bir veya daha faz
 </set-header>
 ```
 
-Bu örnekte, `ContosoHeader` üst bilgisinde adı olarak kullanılan bir `set-header` İlkesi ve `ContosoHeaderValue` bu üst bilgi değeri olarak kullanılır. Bu ilke, bir istek veya yanıt olarak API Management ağ geçidinde sırasında değerlendirilirken `{{ContosoHeader}}` ve `{{ContosoHeaderValue}}` ilgili özellik değerlerini ile değiştirilir.
+Bu örnekte `ContosoHeader`, bir `set-header` ilkesindeki bir üstbilginin adı olarak kullanılır ve bu üst bilginin değeri olarak `ContosoHeaderValue` kullanılır. Bu ilke bir istek sırasında veya API Management ağ geçidine yanıt sırasında değerlendirildiğinde, `{{ContosoHeader}}` ve `{{ContosoHeaderValue}}` ilgili değerleriyle değiştirilmiştir.
 
-Adlandırılmış değerler tam özniteliği veya öğenin değerlerini önceki örnekte gösterildiği gibi olarak kullanılabilir, ancak bunlar ayrıca eklenen veya aşağıdaki örnekte gösterildiği gibi bir metin ifadesinin bir parçası birleştirilmiş: `<set-header name = "CustomHeader{{ContosoHeader}}" ...>`
+Adlandırılmış değerler, önceki örnekte gösterildiği gibi, tüm öznitelik veya öğe değerleri olarak kullanılabilir, ancak aşağıdaki örnekte gösterildiği gibi, değişmez değer metin ifadesinin bir bölümüyle de eklenebilir veya birleştirilebilir: `<set-header name = "CustomHeader{{ContosoHeader}}" ...>`
 
-Adlandırılmış değerler, ilke ifadeleri de içerebilir. Aşağıdaki örnekte, `ExpressionProperty` kullanılır.
+Adlandırılmış değerler, ilke ifadeleri de içerebilir. Aşağıdaki örnekte `ExpressionProperty` kullanılır.
 
 ```xml
 <set-header name="CustomHeader" exists-action="override">
@@ -96,25 +95,25 @@ Adlandırılmış değerler, ilke ifadeleri de içerebilir. Aşağıdaki örnekt
 </set-header>
 ```
 
-Bu ilke değerlendirildiğinde `{{ExpressionProperty}}` değeriyle değiştirilir: `@(DateTime.Now.ToString())`. Değer bir ilke ifadesi olduğundan, ifade değerlendirilir ve ilke ile yürütme devam eder.
+Bu ilke değerlendirildiğinde `{{ExpressionProperty}}`, değeri ile değiştirilmiştir: `@(DateTime.Now.ToString())`. Değer bir ilke ifadesi olduğundan, ifade değerlendirilir ve ilke yürütmeye devam eder.
 
-Bu Geliştirici Portalı'nda adlandırılmış değerler ile bir ilke kapsamında olan bir işlemine çağrı yaparak test edebilirsiniz. Aşağıdaki örnekte, bir işlem önceki iki örnekle çağrılır `set-header` ilkeleriyle adlandırılmış değerler. Yanıt, ilkelerle adlandırılmış değerler ile yapılandırılmış iki özel üst içerdiğine dikkat edin.
+Kapsam içinde adlandırılmış değerlere sahip bir ilkeye sahip bir işlem çağırarak Geliştirici Portalında bunu test edebilirsiniz. Aşağıdaki örnekte, bir işlem adlandırılan iki örnekle `set-header` adlandırılmış değerlerle birlikte çağırılır. Yanıtın, adlandırılmış değerleri olan ilkeler kullanılarak yapılandırılmış iki özel üst bilgi içerdiğini unutmayın.
 
 ![Geliştirici portalı][api-management-send-results]
 
-Bakarsanız [API denetçisi izleme](api-management-howto-api-inspector.md) iki önceki örnek ilkeleriyle adlandırılmış değerler içeren bir çağrı için iki gördüğünüz `set-header` ilkeleriyle yanı sıra ilke ifadesi eklenmiş özellik değerleri ilke ifadesi içeren bir özellik için değerlendirme.
+Adlandırılmış değerlere sahip iki önceki örnek ilkeyi içeren bir çağrı için [API denetçisi izlemeye](api-management-howto-api-inspector.md) bakarsanız, adlandırılmış değerlerin eklendiği iki `set-header` ilkesini ve adlandırılmış değer için ilke ifadesi değerlendirmesini görebilirsiniz ilke ifadesini içeriyordu.
 
 ![API denetçisi izleme][api-management-api-inspector-trace]
 
-Özellik değerleri, özellik değerlerini ilke ifadeleri içerebilir ancak diğer adlandırılmış değerler içeremez. Bir özelliği başvuru içeren metin için bir özellik değeri gibi kullanılıyorsa `Property value text {{MyProperty}}`, bu özellik başvurusu değiştirilmesi gerekmez ve özellik değerinin bir parçası olarak dahil edilir.
+Adlandırılmış değerler ilke ifadeleri içerebildiği sürece, diğer adlandırılmış değerleri içeremez. Adlandırılmış bir değer başvurusu içeren metin, `Text: {{MyProperty}}`gibi bir değer için kullanılırsa, bu başvuru çözümlenmez ve değiştirilmez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* İlkeleriyle çalışma hakkında daha fazla bilgi edinin
-  * [API Management ilkeleri](api-management-howto-policies.md)
-  * [İlke başvurusu](/azure/api-management/api-management-policies)
-  * [İlke ifadeleri](/azure/api-management/api-management-policy-expressions)
+
+-   İlkelerle çalışma hakkında daha fazla bilgi edinin
+    -   [API Management ilkeler](api-management-howto-policies.md)
+    -   [İlke başvurusu](/azure/api-management/api-management-policies)
+    -   [İlke ifadeleri](/azure/api-management/api-management-policy-expressions)
 
 [api-management-send-results]: ./media/api-management-howto-properties/api-management-send-results.png
 [api-management-properties-filter]: ./media/api-management-howto-properties/api-management-properties-filter.png
 [api-management-api-inspector-trace]: ./media/api-management-howto-properties/api-management-api-inspector-trace.png
-

@@ -1,70 +1,69 @@
 ---
-title: Azure not defterleri için oturum açın
-description: Hızlı bir şekilde Azure not defterleri ile oturum açarak kaydedilmiş projelere erişebilir ve Not Defterleri başkalarıyla paylaşma olanağı sunan bir kullanıcı kimliği.
+title: Azure Notebooks oturum açın
+description: Azure not defterlerinde hızlı bir şekilde oturum açın ve bir kullanıcı KIMLIĞI ayarlayın. Bu, kayıtlı projelere erişme ve not defterlerini başkalarıyla paylaşma olanağı sağlar.
 services: app-service
 documentationcenter: ''
 author: kraigb
-manager: douge
+manager: barbkess
 ms.assetid: fb8c94b1-6d0a-4b77-8d14-ae6efcdd99f4
 ms.service: azure-notebooks
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
 ms.date: 04/15/2019
 ms.author: kraigb
-ms.openlocfilehash: a9ba6fcc0c8b74664f5c4b32e54530fb4aaa2881
-ms.sourcegitcommit: 45e4466eac6cfd6a30da9facd8fe6afba64f6f50
+ms.openlocfilehash: 0c12c8673ff61dcca62c72addcbf0d9b33c2c252
+ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/07/2019
-ms.locfileid: "66751729"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71973053"
 ---
-# <a name="quickstart-sign-in-and-set-a-user-id"></a>Hızlı Başlangıç: Oturum açma ve kullanıcı kimliği ayarlama
+# <a name="quickstart-sign-in-and-set-a-user-id"></a>Hızlı başlangıç: oturum açma ve Kullanıcı KIMLIĞI ayarlama
 
-Oturum açma olmadan her zaman Azure not defterleri görmenize rağmen not defterlerini çalıştırmak, kaydedilmiş projeler not defterlerini erişip ve not defterlerinizi başkalarıyla paylaşmak oturum açmanız gerekir.
+Oturum açmadan Azure Notebooks her zaman görüntüleyebilseniz de, not defterlerini çalıştırmak, kaydedilmiş projelere ve not defterlerine erişmek ve not defterlerinizi başkalarıyla paylaşmak için oturum açmanız gerekir.
 
 ## <a name="sign-in"></a>Oturum aç
 
-1. Seçin **oturum** üst sağında [notebooks.azure.com](https://notebooks.azure.com/).
+1. [Notebooks.Azure.com](https://notebooks.azure.com/)' un sağ üst kısmında **oturum aç** ' ı seçin.
 
-    ![Oturum açma komut Azure Not konumu](media/accounts/sign-in-command.png)
+    ![Azure Notebooks oturum açma komutunun konumu](media/accounts/sign-in-command.png)
 
-1. İstendiğinde Microsoft Account veya bir iş veya Okul hesabı ve Seç ' e-posta adresini girin **sonraki**. Hesap türleri üzerinde açıklanmıştır [Azure not defterleri için kullanıcı hesabınızın](azure-notebooks-user-account.md). Microsoft Account yok veya bir Azure not defterleri ile özel olarak kullanmak için yapmak istediğiniz yoksa, seçin **oluşturmak**:
+1. İstendiğinde, bir Microsoft hesabının e-posta adresini veya bir iş veya okul hesabını girip **İleri ' yi**seçin. Hesap türleri [Kullanıcı hesabınızda Azure Notebooks](azure-notebooks-user-account.md)açıklanmaktadır. Bir Microsoft hesabınız yoksa veya Azure Notebooks özel olarak kullanmak istiyorsanız, **birini oluştur**' u seçin:
 
-    ![Yeni bir Microsoft hesabı komut oturum açma istemine oluşturun](media/accounts/create-new-microsoft-account.png)
+    ![Oturum açma isteminde yeni Microsoft hesabı komutu oluştur](media/accounts/create-new-microsoft-account.png)
 
     > [!Tip]
-    > Kendisiyle ilişkilendirilmiş bir hesap zaten bir e-posta adresi ile yeni bir hesap oluşturmaya çalışırsanız, ", bir iş ile buradan kaydolun veya Okul e-posta adresi. iletiyi görebilirsiniz. "Gmail veya Yahoo! gibi kişisel bir e-kullanın veya yeni bir Outlook e-posta alın." Bu durumda, yeni bir hesap oluşturmadan iş e-posta adresiyle oturum açmayı deneyin.
+    > Zaten onunla ilişkili bir hesabı olan bir e-posta adresine sahip yeni bir hesap oluşturmaya çalışırsanız, "bir iş veya okul e-posta adresi ile burada kayıt yapamazsınız" iletisini görebilirsiniz. Gmail veya Yahoo! gibi kişisel bir e-posta kullanın veya yeni bir Outlook e-postası alın. " Bu durumda, yeni bir hesap oluşturmadan iş e-posta adresiyle oturum açmayı deneyin.
 
 1. İstendiğinde parolanızı girin.
 
-1. İlk kez oturum açma, Azure not defterleri hesabınıza erişmek için izin ister. Seçin **Evet** devam etmek için:
+1. İlk kez oturum açıyorsanız, Azure Notebooks hesabınıza erişmek için izin ister. Devam etmek için **Evet** ' i seçin:
 
-    ![Hesabı izinleri istemi](media/accounts/account-permission-prompt.png)
+    ![Hesap izinleri istemi](media/accounts/account-permission-prompt.png)
 
-## <a name="set-a-user-id"></a>Bir kullanıcı kimliği ayarlayın
+## <a name="set-a-user-id"></a>Kullanıcı KIMLIĞI ayarlama
 
-1. İlk oturum açıldığında, "anon-idrca3" gibi bir geçici kullanıcı kimliği atadığınız. İle başlayan bir kullanıcı kimliği sahip olduğunuzda "anon-", Azure not defterleri, kendinize ait bir kimlik oluşturmanızı ister. Kullanıcı Kimliğiniz URL'de benzersiz ve sizin için anlamlı elde projelerinizi ve Not Defterleri paylaşmak, bu nedenle bir şey seçin tüm kullanılır.
+1. İlk oturum açma sırasında, "Anon-idrca3" gibi geçici bir kullanıcı KIMLIĞI atanır. "Anon-" ile başlayan bir Kullanıcı KIMLIĞINIZ olduğunda, Azure Notebooks kendinizinkini bir KIMLIK oluşturmanız istenir. Kullanıcı KIMLIĞINIZ, projelerinizi ve not defterlerinizi paylaşmak için elde ettiğiniz herhangi bir URL 'de kullanılır, bu nedenle benzersiz ve anlamlı bir şey seçin.
 
-    ![Azure not defterleri için bir kullanıcı kimliği girmek için istemleri](media/accounts/create-user-id.png)
+    ![Azure Notebooks için Kullanıcı KIMLIĞI girmek isteyip sorma](media/accounts/create-user-id.png)
 
-    Seçerseniz **Hayır teşekkürler**, bir kullanıcı kimliği her sefer oturum açtığınızda, ister Azure not defterleri devam etmektedir. Kullanıcı kimliği de ayarlanabilir her zaman, [kullanıcı profili](azure-notebooks-user-profile.md).
+    **Hayır**' ı seçerseniz, Azure Notebooks her oturum AÇıŞıNıZDA Kullanıcı kimliğini sormaya devam eder. Kullanıcı KIMLIĞINIZ, [Kullanıcı profilinizde](azure-notebooks-user-profile.md)herhangi bir zamanda da ayarlanabilir.
 
-1. Başarıyla oturum açtıktan sonra Azure not defterleri üzerinde seçebilirsiniz, genel profil sayfasına gider **profil bilgilerini Düzenle** bilgilerinizin geri kalanını doldurmak için (daha fazla bilgi için [profilinizi ve kullanıcı kimliği](azure-notebooks-user-profile.md)):
+1. Başarıyla oturum açtıktan sonra Azure Notebooks, genel profil sayfanıza gider ve burada, bilgilerinizin geri kalanını dolduracak şekilde **profil bilgilerini düzenle** ' yi seçebilirsiniz (daha fazla bilgi için, [PROFILINIZE ve kullanıcı kimliğinize](azure-notebooks-user-profile.md)bakın):
 
-    ![Bir Azure not defterleri profili sayfasındaki başlangıç görünümü](media/accounts/profile-page-new.png)
+    ![Azure Notebooks profili sayfasının ilk görünümü](media/accounts/profile-page-new.png)
 
 > [!NOTE]
-> "Kullanıcı kimliği, kullanımda" iletisini görürseniz, farklı bir kimlik deneyin. Tüm Azure not defterleri hesaplarda kullanıcı kimlikleri benzersizdir ve Azure not defterleri de Microsoft marka adları gibi belirli kullanıcı kimlikleri ayırır.
+> "Kullanıcı KIMLIĞI zaten kullanımda" iletisini görürseniz, farklı bir KIMLIK deneyin. Kullanıcı kimlikleri tüm Azure Notebooks hesaplarında benzersizdir ve Azure Notebooks Microsoft marka adları gibi bazı Kullanıcı kimliklerini de ayırır.
 
-## <a name="sign-out"></a>Oturumu kapat
+## <a name="sign-out"></a>Oturumu Kapat
 
-Oturumu kapatın, sayfanın sağ üst kullanıcı adınızı seçin ve ardından **oturumunuzu**:
+Oturumu kapatmak için sayfanın sağ üst kısmındaki Kullanıcı adınızı seçin ve ardından **Oturumu Kapat**' ı seçin:
 
-![Oturum kapatma komutu Azure Not konumu](media/accounts/sign-out-command.png)
+![Azure Notebooks 'de oturum kapatma komutunun konumu](media/accounts/sign-out-command.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Hızlı Başlangıç: Oluşturma ve bir not defteri paylaşma](quickstart-create-share-jupyter-notebook.md)
+> [Hızlı başlangıç: Not defteri oluşturma ve paylaşma](quickstart-create-share-jupyter-notebook.md)

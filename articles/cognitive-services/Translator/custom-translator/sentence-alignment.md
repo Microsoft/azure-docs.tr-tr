@@ -1,46 +1,51 @@
 ---
-title: Eşleştirme ve hizalama - özel Translator cümle
+title: Tümce eşleştirme ve hizalama-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Eğitim yürütme sırasında paralel belgelerinde mevcut cümlelerin eşleştirilmiş veya hizalanır. Özel Translator çevirileri bir cümle, bir kerede bir cümle, bu cümleyi çevirisi okuyarak öğrenir. Ardından sözcük ve tümcecikleri birbirine bu iki cümle içinde hizalar.
+description: Eğitim yürütmesi sırasında, paralel belgelerde bulunan cümleler eşleştirilmiş veya hizalanır. Özel çevirici, bu tümcenin bir cümlesini okuyarak her seferinde bir cümleyi bir tümce öğrenir. Ardından, bu iki tümce içindeki kelimeleri ve tümceleri birbirlerine hizalar.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: f73c40704e10a8e2368ee1eb369ee3dccdf269ee
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: adbc21c3e963a98a8482de0c26bf5e257f43013e
+ms.sourcegitcommit: 9a4296c56beca63430fcc8f92e453b2ab068cc62
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448308"
+ms.lasthandoff: 10/20/2019
+ms.locfileid: "72675448"
 ---
-# <a name="sentence-pairing-and-alignment-in-parallel-documents"></a>Tümce eşleştirme ve paralel belgelerde hizalama
+# <a name="sentence-pairing-and-alignment-in-parallel-documents"></a>Paralel belgelerde tümce eşleştirme ve hizalama
 
-Eğitim sırasında paralel belgelerinde mevcut cümlelerin eşleştirilmiş veya hizalanır. Özel Translator hizalı cümlelerde her veri kümeleri olarak eşleştirin mümkün cümleler sayısını raporlar.
+Eğitim sırasında, paralel belgelerde bulunan cümleler eşleştirilmiş veya hizalanır. Özel çevirmen, veri kümelerinin her birinde hizalanmış cümleler olarak eşlenebildiği cümle sayısını raporlar.
 
 ## <a name="pairing-and-alignment-process"></a>Eşleştirme ve hizalama işlemi
 
-Özel Translator cümleler bir cümle çevirileri aynı anda öğrenir. Bu bir kaynak ve hedefin bu cümleyi çevirisi cümle okumalar. Ardından sözcük ve tümcecikleri birbirine bu iki cümle içinde hizalar. Bu işlem bir cümle eşdeğer sözcük ve tümcecikleri bu cümleyi çevirisi sözcük ve tümcecikleri haritasını oluşturmak için sağlar. Hizalama, sistemi çevirileri birbiriyle olan cümleler üzerinde eğitir emin olmak çalışır.
+Özel çevirici, her seferinde bir cümleden oluşan Tümcelerin çevirilerini öğrenir. Kaynaktan bir cümleyi ve sonra bu tümcenin hedeften çevirisini okumalar. Ardından, bu iki tümce içindeki kelimeleri ve tümceleri birbirlerine hizalar. Bu işlem, bir tümcedeki sözcüklerin ve deyimlerin, bu tümcenin çevirisi içindeki eşdeğer sözcüklere ve tümceciklere bir haritasını oluşturmasını sağlar. Hizalama, sistemin birbirleriyle çevirileri olan cümleler üzerinde hareket etmeye çalışır.
 
-## <a name="pre-aligned-documents"></a>Önceden hizalanmış belgeleri
+## <a name="pre-aligned-documents"></a>Önceden hizalanmış belgeler
 
-Paralel belgeleriniz biliyorsanız, önceden hizalı metin dosyaları sağlanarak cümle hizalama geçersiz kılabilir. Metin dosyasına satır ve karşıya yükleme ile düzenlenmiş bir cümle hem belgelerden tüm cümleleri ayıklayabileceğiniz bir `.align` uzantısı. `.align` Uzantısı sinyalleri özel Translator cümle hizalama atlayın.
+Paralel belgeleriniz olduğunu biliyorsanız, önceden hizalanmış metin dosyaları sağlayarak cümle hizalamasını geçersiz kılabilirsiniz. Her iki belgedeki tüm tümceleri metin dosyasına çıkarabilir, her satır için bir tümce düzenleyebilir ve bir `.align` uzantısıyla yükleyebilirsiniz. @No__t_0 uzantısı, tümce hizalamasını atlayabilmesi için özel çeviriciyi işaret eder.
 
-Her satırda bir cümle dosyalarınızı olduğundan emin olmak en iyi sonuçlar için deneyin. Bu kötü hizalamaları neden olacak şekilde bir tümce içinde yeni satır karakterleri yok.
+En iyi sonuçlar için, dosyalarınızda her satırda bir cümle olduğuna emin olun. Tümce içinde yeni satır karakterleri eklemeyin ve bu işlem kötü hizalamalara neden olur.
 
-## <a name="suggested-minimum-number-of-extracted-and-aligned-sentences"></a>Ayıklanan ve hizalanmış cümleler önerilen en düşük sayısı
+## <a name="suggested-minimum-number-of-sentences"></a>Önerilen en az sayıda tümce
 
-Bir eğitim işleminin başarılı olması aşağıdaki tabloda ayıklanan cümleler ve her bir veri kümesi gerekli hizalanmış cümleler en az sayısını gösterir. Ayıklanan cümleler önerilen en az sayıda hizalanmış cümleler cümle hizalama tüm ayıklanan cümleler başarıyla hizalamak mümkün olmayabilir olgu hesaba katması için önerilen en düşük sayısından çok yüksektir.
+Bir eğitimin başarılı olması için, aşağıdaki tabloda her belge türünde gereken en az sayıda tümce gösterilmektedir. Bu sınırlama, paralel Cümlelerinizin bir çeviri modelini başarıyla eğitmek için yeterli benzersiz sözlük içerdiğinden emin olmak için bir güvenlik ağı sağlar. Genel kılavuz, insan çevirisi kalitesinin daha fazla etki alanı içi paralel cümlelere sahip olmaya daha yüksek kaliteli modeller üretmelidir.
 
-| Veri kümesi   | Önerilen en düşük ayıklanan cümle sayısı | Önerilen en düşük hizalanmış cümle sayısı | En fazla hizalanmış cümle sayısı |
-|------------|--------------------------------------------|------------------------------------------|--------------------------------|
-| Eğitim   | 10,000                                     | 2,000                                    | Üst sınır                 |
-| Ayarlama     | 2,000                                      | 500                                      | 2,500                          |
-| Test Etme    | 2,000                                      | 500                                      | 2,500                          |
-| Sözlük | 0                                          | 0                                        | Üst sınır                 |
+| Belge türü   | Önerilen minimum tümce sayısı | En fazla tümce sayısı |
+|------------|--------------------------------------------|--------------------------------|
+| Eğitim   | 10,000                                     | Üst sınır yok                 |
+| Ayarlarını     | 5\.000                                      | 2\.500                          |
+| Test Etme    | 5\.000                                      | 2\.500                          |
+| Sözlük | 0                                          | Üst sınır yok                 |
+
+> [!NOTE]
+> - Eğitim başlatılmaz ve eğitim için en az 10.000 cümle sayısı karşılanmazsa başarısız olur. 
+> - Ayarlama ve test isteğe bağlıdır. Bunları sağlamazsanız, sistem, doğrulama ve test için kullanılan eğitimin uygun bir yüzdesini kaldırır. 
+> - Yalnızca Sözlük verilerini kullanarak bir modeli eğitebilirsiniz. Lütfen [sözlüğe](https://docs.microsoft.com/azure/cognitive-services/translator/custom-translator/what-is-dictionary)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Nasıl kullanacağınızı öğrenin bir [sözlük](what-is-dictionary.md) özel Translator içinde.
+- Özel çevirmende bir [sözlüğü](what-is-dictionary.md) nasıl kullanacağınızı öğrenin.

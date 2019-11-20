@@ -1,27 +1,26 @@
 ---
-title: Azure Iaas sanal makineleri için - yönetilen diskleri bir disk türü seçin
-description: Ultra SSD'ler, premium SSD, standart SSD ve HDD'ler standart dahil olmak üzere Linux sanal makineleri için kullanılabilir Azure disk türleri hakkında bilgi edinin.
-services: virtual-machines-linux,storage
+title: Azure IaaS Linux VM 'Leri tarafından yönetilen diskler için bir disk türü seçin
+description: Ultra diskler, Premium SSD 'Ler, standart SSD 'ler ve standart HDD 'Ler dahil olmak üzere Linux sanal makineleri için kullanılabilir Azure disk türleri hakkında bilgi edinin.
 author: roygara
 ms.author: rogarana
-ms.date: 05/10/2019
-ms.topic: article
+ms.date: 11/04/2019
+ms.topic: conceptual
 ms.service: virtual-machines-linux
-ms.tgt_pltfrm: linux
 ms.subservice: disks
-ms.openlocfilehash: 2413cfe02dfb3be61ec01518e4fdd7f4b78f5773
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 55483fd7b42a63e0e8a8073bca194e94eca64182
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65538354"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74013716"
 ---
+# <a name="what-disk-types-are-available-in-azure"></a>Azure 'da hangi disk türleri kullanılabilir?
 [!INCLUDE [virtual-machines-disk-types](../../../includes/virtual-machines-managed-disks-types-overview.md)]
 
-Ultra yüksek SSD kullanmaya başlamak istiyorsanız, konu üzerinde makalemizi bakın: [Azure ultra SSD etkinleştirme](disks-enable-ultra-ssd.md).
+Ultra diskler kullanmaya başlamak istiyorsanız, konudaki makalemize bakın: [Azure Ultra diskleri kullanma](disks-enable-ultra-ssd.md).
 
 [!INCLUDE [virtual-machines-managed-disks-types-ga](../../../includes/virtual-machines-managed-disks-types-ga.md)]
 
-Anlık görüntüleri hakkında daha fazla bilgi için anlık görüntü üzerinde bölümüne bakın. [yönetilen disk genel bakış](managed-disks-overview.md).
+Anlık görüntüler hakkında daha fazla bilgi için [yönetilen diske genel bakış](managed-disks-overview.md)' daki anlık görüntüler bölümüne bakın.
 
 [!INCLUDE [virtual-machines-disk-types](../../../includes/virtual-machines-managed-disks-types-billing-and-fees.md)]

@@ -1,77 +1,76 @@
 ---
-title: Github'dan Azure Linux aracısını güncelleştirme | Microsoft Docs
-description: Azure'da Linux VM Azure Linux Aracısı güncelleştirme hakkında bilgi edinin
+title: GitHub 'dan Azure Linux aracısını güncelleştirme
+description: Azure 'da Linux VM 'niz için Azure Linux aracısını güncelleştirme hakkında bilgi edinin
 services: virtual-machines-linux
 documentationcenter: ''
-author: roiyz-msft
-manager: jeconnoc
+author: axayjo
+manager: gwallace
 editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: f1f19300-987d-4f29-9393-9aba866f049c
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
 ms.date: 08/02/2017
-ms.author: roiyz
-ms.openlocfilehash: 5d53f34ea6b0983d0687cdaf6ec6271c703bb055
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: akjosh
+ms.openlocfilehash: 2215136c02d9cf967e0184af7588ce8d48362009
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60799749"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74072947"
 ---
-# <a name="how-to-update-the-azure-linux-agent-on-a-vm"></a>Bir VM'de Azure Linux Aracısı güncelleştirme
+# <a name="how-to-update-the-azure-linux-agent-on-a-vm"></a>Bir VM 'de Azure Linux aracısını güncelleştirme
 
-Güncelleştirilecek, [Azure Linux Aracısı](https://github.com/Azure/WALinuxAgent) azure'da bir Linux VM üzerinde zaten gerekir:
+Azure 'da bir Linux sanal makinesinde [Azure Linux aracınızı](https://github.com/Azure/WALinuxAgent) güncelleştirmek için şu durumda olmalıdır:
 
-- Azure'da çalışan bir Linux VM.
-- Bu Linux VM'ye SSH kullanarak bir bağlantı.
+- Azure 'da çalışan bir Linux VM 'si.
+- SSH kullanarak bu Linux VM 'sine bağlantı.
 
-Her zaman Linux distro deposundaki bir paket için ilk denetlemeniz gerekir. Paket kullanılabilir olmayabilir autoupdate etkinleştirme en son sürümü, ancak Linux Aracısı her zaman en son güncelleştirmeyi alırsınız sağlamak mümkündür. Paket yöneticilerinden yüklerken sorunlarla olmalıdır, distro satıcının destek arama.
+Önce Linux 'taki depodaki bir paketi denetlemeniz gerekir. Mevcut paketin en son sürümü olmayabilir, ancak otomatik güncelleştirme özelliğinin etkinleştirilmesi, Linux aracısının her zaman en son güncelleştirmeyi almasını sağlamaktır. Paket yöneticilerinden yükleme sorunlarıyla karşılaşmanız durumunda, çıkış satıcısından destek almanız gerekir.
 
-## <a name="minimum-virtual-machine-agent-support-in-azure"></a>Azure'da en düşük sanal makine Aracısı desteği
-Doğrulama [azure'da sanal makine aracıları için Minimum sürüm desteği](https://support.microsoft.com/help/4049215/extensions-and-virtual-machine-agent-minimum-version-support) devam etmeden önce.
+## <a name="minimum-virtual-machine-agent-support-in-azure"></a>Azure 'da en düşük sanal makine Aracısı desteği
+Devam etmeden önce [Azure 'da sanal makine aracıları Için en düşük sürüm desteğini](https://support.microsoft.com/help/4049215/extensions-and-virtual-machine-agent-minimum-version-support) doğrulayın.
 
 ## <a name="updating-the-azure-linux-agent"></a>Azure Linux aracısını güncelleştirme
 
 ## <a name="ubuntu"></a>Ubuntu
 
-#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü kontrol edin
+#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü denetleyin
 
 ```bash
 apt list --installed | grep walinuxagent
 ```
 
-#### <a name="update-package-cache"></a>Paket önbelleğini güncelleştirin
+#### <a name="update-package-cache"></a>Paket önbelleğini Güncelleştir
 
 ```bash
 sudo apt-get -qq update
 ```
 
-#### <a name="install-the-latest-package-version"></a>En son Paket sürümü yükleyin
+#### <a name="install-the-latest-package-version"></a>En son paket sürümünü yükler
 
 ```bash
 sudo apt-get install walinuxagent
 ```
 
-#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme etkinleştirildiğinden emin olun
+#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme 'nin etkinleştirildiğinden emin olun
 
-İlk olarak, etkin olup olmadığını denetleyin:
+İlk olarak, etkin olup olmadığını kontrol edin:
 
 ```bash
 cat /etc/waagent.conf
 ```
 
-'AutoUpdate.Enabled' bulun. Bu bir çıktı görmeniz durumunda etkinleştirilir:
+' Otomatik güncelleştir. etkinleştirildi ' öğesini bulun. Bu çıktıyı görürseniz, etkin olur:
 
 ```bash
 # AutoUpdate.Enabled=y
 AutoUpdate.Enabled=y
 ```
 
-Farklı Çalıştır'ı etkinleştirmek için:
+Çalıştırmayı etkinleştirmek için:
 
 ```bash
 sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
@@ -79,13 +78,13 @@ sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
 
 ### <a name="restart-the-waagent-service"></a>Waagent hizmetini yeniden başlatın
 
-#### <a name="restart-agent-for-1404"></a>14\.04 için aracıyı yeniden başlatın
+#### <a name="restart-agent-for-1404"></a>14,04 için aracıyı yeniden başlatın
 
 ```bash
 initctl restart walinuxagent
 ```
 
-#### <a name="restart-agent-for-1604--1704"></a>16\.04 için aracı yeniden / 17.04
+#### <a name="restart-agent-for-1604--1704"></a>16,04/17,04 için aracıyı yeniden Başlat
 
 ```bash
 systemctl restart walinuxagent.service
@@ -93,64 +92,64 @@ systemctl restart walinuxagent.service
 
 ## <a name="debian"></a>Debian
 
-### <a name="debian-7-wheezy"></a>Debian 7 “Wheezy”
+### <a name="debian-7-wheezy"></a>Deki 7 "Wheezy"
 
-#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü kontrol edin
+#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü denetleyin
 
 ```bash
 dpkg -l | grep waagent
 ```
 
-#### <a name="update-package-cache"></a>Paket önbelleğini güncelleştirin
+#### <a name="update-package-cache"></a>Paket önbelleğini Güncelleştir
 
 ```bash
 sudo apt-get -qq update
 ```
 
-#### <a name="install-the-latest-package-version"></a>En son Paket sürümü yükleyin
+#### <a name="install-the-latest-package-version"></a>En son paket sürümünü yükler
 
 ```bash
 sudo apt-get install waagent
 ```
 
-#### <a name="enable-agent-auto-update"></a>Aracı otomatik güncelleştirmesi etkinleştir
-Bu Debian sürümü bir sürümü yok > = 2.0.16, bu nedenle edinebilmeleri için kullanılabilir değil. Yukarıdaki komut çıktısı, paket güncel olup olmadığını gösterir.
+#### <a name="enable-agent-auto-update"></a>Aracı otomatik güncelleştirmesini etkinleştir
+De2.0.16 'in bu sürümünde bir sürüm > = yok, bu nedenle otomatik güncelleştirme kullanılamaz. Yukarıdaki komutun çıktısı, paketin güncel olup olmadığını gösterir.
 
-### <a name="debian-8-jessie--debian-9-stretch"></a>Debian 8 "Jessie" / "Debian 9 Uzat"
+### <a name="debian-8-jessie--debian-9-stretch"></a>8 "Jese"/deni 9 "uzat"
 
-#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü kontrol edin
+#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü denetleyin
 
 ```bash
 apt list --installed | grep waagent
 ```
 
-#### <a name="update-package-cache"></a>Paket önbelleğini güncelleştirin
+#### <a name="update-package-cache"></a>Paket önbelleğini Güncelleştir
 
 ```bash
 sudo apt-get -qq update
 ```
 
-#### <a name="install-the-latest-package-version"></a>En son Paket sürümü yükleyin
+#### <a name="install-the-latest-package-version"></a>En son paket sürümünü yükler
 
 ```bash
 sudo apt-get install waagent
 ```
-#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme etkinleştirildiğinden emin olun 
+#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme 'nin etkinleştirildiğinden emin olun 
 
-İlk olarak, etkin olup olmadığını denetleyin:
+İlk olarak, etkin olup olmadığını kontrol edin:
 
 ```bash
 cat /etc/waagent.conf
 ```
 
-'AutoUpdate.Enabled' bulun. Bu bir çıktı görmeniz durumunda etkinleştirilir:
+' Otomatik güncelleştir. etkinleştirildi ' öğesini bulun. Bu çıktıyı görürseniz, etkin olur:
 
 ```bash
 # AutoUpdate.Enabled=y
 AutoUpdate.Enabled=y
 ```
 
-Farklı Çalıştır'ı etkinleştirmek için:
+Çalıştırmayı etkinleştirmek için:
 
 ```bash
 sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
@@ -162,11 +161,11 @@ sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
 sudo systemctl restart walinuxagent.service
 ```
 
-## <a name="red-hat--centos"></a>Red Hat / CentOS
+## <a name="red-hat--centos"></a>Red Hat/CentOS
 
 ### <a name="rhelcentos-6"></a>RHEL/CentOS 6
 
-#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü kontrol edin
+#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü denetleyin
 
 ```bash
 sudo yum list WALinuxAgent
@@ -178,28 +177,28 @@ sudo yum list WALinuxAgent
 sudo yum check-update WALinuxAgent
 ```
 
-#### <a name="install-the-latest-package-version"></a>En son Paket sürümü yükleyin
+#### <a name="install-the-latest-package-version"></a>En son paket sürümünü yükler
 
 ```bash
 sudo yum install WALinuxAgent
 ```
 
-#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme etkinleştirildiğinden emin olun 
+#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme 'nin etkinleştirildiğinden emin olun 
 
-İlk olarak, etkin olup olmadığını denetleyin:
+İlk olarak, etkin olup olmadığını kontrol edin:
 
 ```bash
 cat /etc/waagent.conf
 ```
 
-'AutoUpdate.Enabled' bulun. Bu bir çıktı görmeniz durumunda etkinleştirilir:
+' Otomatik güncelleştir. etkinleştirildi ' öğesini bulun. Bu çıktıyı görürseniz, etkin olur:
 
 ```bash
 # AutoUpdate.Enabled=y
 AutoUpdate.Enabled=y
 ```
 
-Farklı Çalıştır'ı etkinleştirmek için:
+Çalıştırmayı etkinleştirmek için:
 
 ```bash
 sudo sed -i 's/\# AutoUpdate.Enabled=y/AutoUpdate.Enabled=y/g' /etc/waagent.conf
@@ -213,7 +212,7 @@ sudo service waagent restart
 
 ### <a name="rhelcentos-7"></a>RHEL/CentOS 7
 
-#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü kontrol edin
+#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü denetleyin
 
 ```bash
 sudo yum list WALinuxAgent
@@ -225,28 +224,28 @@ sudo yum list WALinuxAgent
 sudo yum check-update WALinuxAgent
 ```
 
-#### <a name="install-the-latest-package-version"></a>En son Paket sürümü yükleyin
+#### <a name="install-the-latest-package-version"></a>En son paket sürümünü yükler
 
 ```bash
 sudo yum install WALinuxAgent  
 ```
 
-#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme etkinleştirildiğinden emin olun 
+#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme 'nin etkinleştirildiğinden emin olun 
 
-İlk olarak, etkin olup olmadığını denetleyin:
+İlk olarak, etkin olup olmadığını kontrol edin:
 
 ```bash
 cat /etc/waagent.conf
 ```
 
-'AutoUpdate.Enabled' bulun. Bu bir çıktı görmeniz durumunda etkinleştirilir:
+' Otomatik güncelleştir. etkinleştirildi ' öğesini bulun. Bu çıktıyı görürseniz, etkin olur:
 
 ```bash
 # AutoUpdate.Enabled=y
 AutoUpdate.Enabled=y
 ```
 
-Farklı Çalıştır'ı etkinleştirmek için:
+Çalıştırmayı etkinleştirmek için:
 
 ```bash
 sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
@@ -262,7 +261,7 @@ sudo systemctl restart waagent.service
 
 ### <a name="suse-sles-11-sp4"></a>SUSE SLES 11 SP4
 
-#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü kontrol edin
+#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü denetleyin
 
 ```bash
 zypper info python-azure-agent
@@ -270,30 +269,30 @@ zypper info python-azure-agent
 
 #### <a name="check-available-updates"></a>Kullanılabilir güncelleştirmeleri denetle
 
-Yukarıdaki çıkış paketi güncel olup olmadığını gösterir.
+Yukarıdaki çıktı, paketin güncel olup olmadığını gösterir.
 
-#### <a name="install-the-latest-package-version"></a>En son Paket sürümü yükleyin
+#### <a name="install-the-latest-package-version"></a>En son paket sürümünü yükler
 
 ```bash
 sudo zypper install python-azure-agent
 ```
 
-#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme etkinleştirildiğinden emin olun 
+#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme 'nin etkinleştirildiğinden emin olun 
 
-İlk olarak, etkin olup olmadığını denetleyin:
+İlk olarak, etkin olup olmadığını kontrol edin:
 
 ```bash
 cat /etc/waagent.conf
 ```
 
-'AutoUpdate.Enabled' bulun. Bu bir çıktı görmeniz durumunda etkinleştirilir:
+' Otomatik güncelleştir. etkinleştirildi ' öğesini bulun. Bu çıktıyı görürseniz, etkin olur:
 
 ```bash
 # AutoUpdate.Enabled=y
 AutoUpdate.Enabled=y
 ```
 
-Farklı Çalıştır'ı etkinleştirmek için:
+Çalıştırmayı etkinleştirmek için:
 
 ```bash
 sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
@@ -307,7 +306,7 @@ sudo /etc/init.d/waagent restart
 
 ### <a name="suse-sles-12-sp2"></a>SUSE SLES 12 SP2
 
-#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü kontrol edin
+#### <a name="check-your-current-package-version"></a>Geçerli paket sürümünüzü denetleyin
 
 ```bash
 zypper info python-azure-agent
@@ -315,30 +314,30 @@ zypper info python-azure-agent
 
 #### <a name="check-available-updates"></a>Kullanılabilir güncelleştirmeleri denetle
 
-Yukarıdaki çıktıda Bu, paket güncel olup olmadığını gösterir.
+Yukarıdaki çıktıda, bu, paketin güncel olup olmadığını gösterir.
 
-#### <a name="install-the-latest-package-version"></a>En son Paket sürümü yükleyin
+#### <a name="install-the-latest-package-version"></a>En son paket sürümünü yükler
 
 ```bash
 sudo zypper install python-azure-agent
 ```
 
-#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme etkinleştirildiğinden emin olun 
+#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme 'nin etkinleştirildiğinden emin olun 
 
-İlk olarak, etkin olup olmadığını denetleyin:
+İlk olarak, etkin olup olmadığını kontrol edin:
 
 ```bash
 cat /etc/waagent.conf
 ```
 
-'AutoUpdate.Enabled' bulun. Bu bir çıktı görmeniz durumunda etkinleştirilir:
+' Otomatik güncelleştir. etkinleştirildi ' öğesini bulun. Bu çıktıyı görürseniz, etkin olur:
 
 ```bash
 # AutoUpdate.Enabled=y
 AutoUpdate.Enabled=y
 ```
 
-Farklı Çalıştır'ı etkinleştirmek için:
+Çalıştırmayı etkinleştirmek için:
 
 ```bash
 sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
@@ -352,17 +351,17 @@ sudo systemctl restart waagent.service
 
 ## <a name="oracle-6-and-7"></a>Oracle 6 ve 7
 
-Oracle Linux için emin `Addons` depo etkinleştirilir. Dosyayı düzenlemek seçin `/etc/yum.repos.d/public-yum-ol6.repo`(Oracle Linux 6) veya `/etc/yum.repos.d/public-yum-ol7.repo`(Oracle Linux), satır değiştirip `enabled=0` için `enabled=1` altında **[ol6_addons]** veya **[ol7_addons]** bu dosya.
+Oracle Linux için `Addons` deposunun etkinleştirildiğinden emin olun. `/etc/yum.repos.d/public-yum-ol6.repo`(Oracle Linux 6) veya `/etc/yum.repos.d/public-yum-ol7.repo`(Oracle Linux) dosyasını düzenlemeyi seçin ve satır `enabled=0` bu dosyadaki **[`enabled=1`]** veya **[ol6_addons]** altındaki ol7_addons olarak değiştirin.
 
-Ardından, Azure Linux Aracısı'nın en son sürümünü yüklemek için şunu yazın:
+Ardından, Azure Linux aracısının en son sürümünü yüklemek için şunu yazın:
 
 ```bash
 sudo yum install WALinuxAgent
 ```
 
-Eklenti depo bulamazsanız, Oracle Linux sürüme göre .repo dosyanızı sonunda bu satırlar yalnızca ekleyebilirsiniz:
+Eklenti deposunu bulamazsanız, bu satırları Oracle Linux sürümüne göre. repo dosyanızın sonuna eklemeniz yeterlidir:
 
-Sanal makineler için Oracle Linux 6:
+Oracle Linux 6 sanal makineler için:
 
 ```sh
 [ol6_addons]
@@ -373,7 +372,7 @@ gpgcheck=1
 enabled=1
 ```
 
-Oracle Linux 7 sanal makineler için:
+Oracle Linux 7 sanal makinesi için:
 
 ```sh
 [ol7_addons]
@@ -384,30 +383,30 @@ gpgcheck=1
 enabled=1
 ```
 
-Ardından yazın:
+Ardından şunu yazın:
 
 ```bash
 sudo yum update WALinuxAgent
 ```
 
-Genellikle bu, herhangi bir nedenden dolayı ondan yüklemeniz gerekir, ancak gereklidir https://github.com doğrudan, aşağıdaki adımları kullanın.
+Genellikle bu tek ihtiyacınız vardır ancak bazı nedenlerle https://github.com doğrudan yüklemeniz gerekiyorsa, aşağıdaki adımları kullanın.
 
 
-## <a name="update-the-linux-agent-when-no-agent-package-exists-for-distribution"></a>Hiçbir aracı paketi, dağıtım için mevcut olduğunda Linux aracısını güncelleştirme
+## <a name="update-the-linux-agent-when-no-agent-package-exists-for-distribution"></a>Dağıtım için bir aracı paketi yoksa Linux aracısını Güncelleştir
 
-(Varsayılan olarak, Red Hat, CentOS ve Oracle Linux sürümleri 6.4 ve 6.5 gibi yüklemeyin bazı dağıtımlarda yoktur) wget yazarak yükleme `sudo yum install wget` komut satırında.
+Wget 'i (Red hat, CentOS ve Oracle Linux sürüm 6,4 ve 6,5), komut satırına `sudo yum install wget` yazarak, bu uygulamayı varsayılan olarak yüklemek.
 
-### <a name="1-download-the-latest-version"></a>1. En son sürümünü indirin
-Açık [github'da Azure Linux Aracısı sürümü](https://github.com/Azure/WALinuxAgent/releases) bir web sayfası ve en son sürüm numarasını öğrenin. (Geçerli sürümünüzü yazarak bulabilirsiniz `waagent --version`.)
+### <a name="1-download-the-latest-version"></a>1. en son sürümü indirin
+[GitHub 'Da Azure Linux aracısının](https://github.com/Azure/WALinuxAgent/releases) sürümünü bir Web sayfasında açın ve en son sürüm numarasını bulun. (`waagent --version`yazarak geçerli sürümünüzü bulabilirsiniz.)
 
-#### <a name="for-version-22x-or-later-type"></a>Sürüm için 2.2.x veya daha sonra yazın:
+#### <a name="for-version-22x-or-later-type"></a>2\.2. x veya üzeri sürümler için şunu yazın:
 ```bash
 wget https://github.com/Azure/WALinuxAgent/archive/v2.2.x.zip
 unzip v2.2.x.zip
 cd WALinuxAgent-2.2.x
 ```
 
-Aşağıdaki satırı sürüm 2.2.0 örnek olarak kullanılmıştır:
+Aşağıdaki satır örnek olarak 2.2.0 sürümünü kullanır:
 
 ```bash
 wget https://github.com/Azure/WALinuxAgent/archive/v2.2.14.zip
@@ -415,63 +414,63 @@ unzip v2.2.14.zip
 cd WALinuxAgent-2.2.14
 ```
 
-### <a name="2-install-the-azure-linux-agent"></a>2. Azure Linux aracısını yükleme
+### <a name="2-install-the-azure-linux-agent"></a>2. Azure Linux aracısını yükler
 
-#### <a name="for-version-22x-use"></a>Sürüm için 2.2.x, kullanın:
-Paketi yüklemeniz gerekebilir `setuptools` ilk--bkz [burada](https://pypi.python.org/pypi/setuptools). Ardından şunu çalıştırın:
+#### <a name="for-version-22x-use"></a>2\.2. x sürümü için şunu kullanın:
+Önce paketi `setuptools` yüklemeniz gerekebilir. [buraya](https://pypi.python.org/pypi/setuptools)bakın. Ardından şunu çalıştırın:
 
 ```bash
 sudo python setup.py install
 ```
 
-#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme etkinleştirildiğinden emin olun
+#### <a name="ensure-auto-update-is-enabled"></a>Otomatik güncelleştirme 'nin etkinleştirildiğinden emin olun
 
-İlk olarak, etkin olup olmadığını denetleyin:
+İlk olarak, etkin olup olmadığını kontrol edin:
 
 ```bash
 cat /etc/waagent.conf
 ```
 
-'AutoUpdate.Enabled' bulun. Bu bir çıktı görmeniz durumunda etkinleştirilir:
+' Otomatik güncelleştir. etkinleştirildi ' öğesini bulun. Bu çıktıyı görürseniz, etkin olur:
 
 ```bash
 # AutoUpdate.Enabled=y
 AutoUpdate.Enabled=y
 ```
 
-Farklı Çalıştır'ı etkinleştirmek için:
+Çalıştırmayı etkinleştirmek için:
 
 ```bash
 sudo sed -i 's/# AutoUpdate.Enabled=n/AutoUpdate.Enabled=y/g' /etc/waagent.conf
 ```
 
-### <a name="3-restart-the-waagent-service"></a>3. Waagent hizmetini yeniden başlatın
-Linux dağıtım paketlerini çoğu için:
+### <a name="3-restart-the-waagent-service"></a>3. waagent hizmetini yeniden başlatın
+Çoğu Linux distros için:
 
 ```bash
 sudo service waagent restart
 ```
 
-Ubuntu için kullanın:
+Ubuntu için şunu kullanın:
 
 ```bash
 sudo service walinuxagent restart
 ```
 
-CoreOS için kullanın:
+CoreOS için şunu kullanın:
 
 ```bash
 sudo systemctl restart waagent
 ```
 
-### <a name="4-confirm-the-azure-linux-agent-version"></a>4. Azure Linux Aracısı sürümü onaylayın
+### <a name="4-confirm-the-azure-linux-agent-version"></a>4. Azure Linux Aracısı sürümünü onaylayın
     
 ```bash
 waagent -version
 ```
 
-CoreOS için yukarıdaki komutu çalışmayabilir.
+CoreOS için yukarıdaki komut çalışmayabilir.
 
-Azure Linux Aracısı sürüm en yeni sürüme güncelleştirilmiş olduğunu görürsünüz.
+Azure Linux Aracısı sürümünün yeni sürüme güncelleştirildiğini görürsünüz.
 
-Azure Linux Aracısı ile ilgili daha fazla bilgi için bkz. [Azure Linux Aracısı Benioku](https://github.com/Azure/WALinuxAgent).
+Azure Linux Aracısı hakkında daha fazla bilgi için bkz. [Azure Linux Aracısı Benioku dosyası](https://github.com/Azure/WALinuxAgent).

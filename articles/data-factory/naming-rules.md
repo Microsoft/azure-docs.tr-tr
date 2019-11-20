@@ -1,32 +1,31 @@
 ---
-title: Azure Data Factory varlıklarını adlandırma kuralları | Microsoft Docs
-description: Data Factory varlıkları için adlandırma kurallarını açıklar.
+title: Azure Data Factory varlıkları adlandırma kuralları
+description: Data Factory varlıkların adlandırma kurallarını açıklar.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-ms.assetid: bc5e801d-0b3b-48ec-9501-bb4146ea17f1
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 01/16/2018
-ms.author: shlo
-ms.openlocfilehash: c02a9393de72b827b7e38b52d06589f042d581b0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 59cddf04493333b441dcf130d1d99d4fa946748c
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60787011"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73837842"
 ---
-# <a name="azure-data-factory---naming-rules"></a>Azure Data Factory - adlandırma kuralları
-Aşağıdaki tablo için Data Factory yapıtlarının adlandırma kuralları sağlar.
+# <a name="azure-data-factory---naming-rules"></a>Azure Data Factory adlandırma kuralları
+Aşağıdaki tabloda Data Factory yapıtlar için adlandırma kuralları verilmiştir.
 
-| Ad | Ad benzersizliğini | Doğrulama denetimleri |
+| Ad | Ad benzersizliği | Doğrulama denetimleri |
 |:--- |:--- |:--- |
-| Data Factory |Microsoft Azure genelinde benzersiz. Adları büyük/küçük harfe, diğer bir deyişle, `MyDF` ve `mydf` aynı veri fabrikasına bakın. |<ul><li>Her veri fabrikasının tam olarak bir Azure aboneliğine bağlıdır.</li><li>Nesne adları bir harf veya sayı ile başlamalıdır ve yalnızca harf, rakam ve tire (-) karakteri içermelidir.</li><li>Her tire (-) karakterinin hemen önünde ve bir harf veya sayı tarafından izlenen gerekir. Kapsayıcı adlarında art arda tirelere izin verilmez.</li><li>Ad 3 ila 63 karakter uzunluğunda olabilir.</li></ul> |
-| Bağlı hizmetler/veri kümeleri/işlem hatları |Veri fabrikasında ile benzersiz. Adları büyük/küçük harfe duyarsızdır. |<ul><li>Nesne adları bir harf, sayı veya alt çizgi (_) ile başlamalıdır.</li><li>Karakterler kullanılamaz: ".", "+","?", "/", "<", ">","*", "%", "&", ":","\\"</li><li>Tire ("-") bağlı hizmetler ve yalnızca veri kümesi adlarındaki izin verilmez.</li></ul>  |
-| Kaynak Grubu |Microsoft Azure genelinde benzersiz. Adları büyük/küçük harfe duyarsızdır. | Daha fazla bilgi için bkz. [Azure adlandırma kuralları ve kısıtlamaları](https://docs.microsoft.com/azure/architecture/best-practices/naming-conventions#naming-rules-and-restrictions). |
+| Data Factory |Microsoft Azure genelinde benzersiz. Adlar büyük/küçük harf duyarsızdır, diğer bir deyişle `MyDF` ve `mydf` aynı veri fabrikasına başvurur. |<ul><li>Her veri fabrikası, tam olarak bir Azure aboneliğine bağlanır.</li><li>Nesne adları bir harf veya sayı ile başlamalıdır ve yalnızca harf, rakam ve tire (-) karakterini içerebilir.</li><li>Her tire (-) karakteri hemen önce ve ardından bir harf veya sayı gelmelidir. Kapsayıcı adlarında ardışık kesik çizgilerden izin verilmez.</li><li>Ad 3-63 karakter uzunluğunda olabilir.</li></ul> |
+| Bağlı hizmetler/veri kümeleri/işlem hatları |Bir veri fabrikasında ile benzersizdir. Adlar büyük/küçük harfe duyarlıdır. |<ul><li>Nesne adları bir harf, sayı veya alt çizgi (_) ile başlamalıdır.</li><li>Şu karakterlere izin verilmez: ".", "+", "?", "/", "<", ">", "*", "%", "&", ":", "\\"</li><li>Yalnızca bağlı hizmetlerin adlarında ve yalnızca veri kümelerinde tireler ("-") kullanılamaz.</li></ul>  |
+| Kaynak Grubu |Microsoft Azure genelinde benzersiz. Adlar büyük/küçük harfe duyarlıdır. | Daha fazla bilgi için bkz. [Azure adlandırma kuralları ve kısıtlamaları](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#resource-naming). |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Adım adım yönergeleri uygulayarak veri fabrikaları oluşturmayı öğrenmek [hızlı başlangıç: veri fabrikası oluşturma](quickstart-create-data-factory-powershell.md) makalesi. 
+[Hızlı başlangıç: Veri Fabrikası oluşturma](quickstart-create-data-factory-powershell.md) makalesinde adım adım yönergeleri izleyerek veri fabrikaları oluşturmayı öğrenin. 

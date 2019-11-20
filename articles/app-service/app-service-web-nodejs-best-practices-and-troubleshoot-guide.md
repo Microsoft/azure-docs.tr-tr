@@ -1,6 +1,6 @@
 ---
-title: En iyi yöntemler ve sorun giderme - Azure App Service Node.js için
-description: Azure App Service'te node.js uygulamaları için sorun giderme adımları ve en iyi uygulamaları öğrenin.
+title: Node. js için en iyi uygulamalar ve sorun giderme-Azure App Service
+description: Azure App Service üzerindeki düğüm uygulamaları için en iyi uygulamaları ve sorun giderme adımlarını öğrenin.
 services: app-service\web
 documentationcenter: nodejs
 author: ranjithr
@@ -13,61 +13,61 @@ ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
 ms.date: 11/09/2017
-ms.author: ranjithr
+ms.author: bwren
 ms.custom: seodec18
-ms.openlocfilehash: 321dbf891c77007952f01b32bb509a15c2ac3e6f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5ef0cf691ae3a199ea82cb8cfa23c386d30551dc
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60853080"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74024236"
 ---
-# <a name="best-practices-and-troubleshooting-guide-for-node-applications-on-azure-app-service-windows"></a>En iyi uygulamalar ve Azure App Service Windows üzerinde node.js uygulamaları için sorun giderme kılavuzu
+# <a name="best-practices-and-troubleshooting-guide-for-node-applications-on-azure-app-service-windows"></a>Azure App Service Windows 'da düğüm uygulamaları için en iyi uygulamalar ve sorun giderme kılavuzu
 
-Bu makalede, en iyi yöntemler ve sorun giderme adımları için bilgi [node uygulamaları](app-service-web-get-started-nodejs.md) Azure App Service üzerinde çalışan (ile [iisnode](https://github.com/azure/iisnode)).
+Bu makalede, Azure App Service ( [ıısnode](https://github.com/azure/iisnode)ile) üzerinde çalışan [düğüm uygulamaları](app-service-web-get-started-nodejs.md) için en iyi uygulamaları ve sorun giderme adımlarını öğreneceksiniz.
 
 > [!WARNING]
-> Sorun giderme adımları üretim sitenizi kullanırken dikkatli olun. Uygulamanızı bir üretim dışı Kurulum Örneğin, hazırlık yuvasına ve sorun düzeltildiğinde, hazırlama yuvasına, üretim yuvası ile takas için önerilir.
+> Üretim sitenizde sorun giderme adımlarını kullanırken dikkatli olun. Öneri, üretim dışı bir kurulumda (örneğin, hazırlama yuvanız) ve sorun düzeltildiğinde, hazırlama yuvalarınızı üretim yuvasıyla değiştirme konusunda uygulamanızı sorun gidermeye yöneliktir.
 >
 
-## <a name="iisnode-configuration"></a>IISNODE yapılandırma
+## <a name="iisnode-configuration"></a>IıSNODE yapılandırması
 
-Bu [şema dosyası](https://github.com/Azure/iisnode/blob/master/src/config/iisnode_schema_x64.xml) iisnode için yapılandırabileceğiniz tüm ayarları gösterilir. Uygulamanız için yararlı olan ayarlarını bazıları:
+Bu [şema dosyası](https://github.com/Azure/iisnode/blob/master/src/config/iisnode_schema_x64.xml) , ıısnode için yapılandırabileceğiniz tüm ayarları gösterir. Uygulamanız için yararlı olan ayarlardan bazıları:
 
 ### <a name="nodeprocesscountperapplication"></a>nodeProcessCountPerApplication
 
-Bu ayar, IIS uygulaması başlatılan işlemler düğüm sayısını denetler. Varsayılan değer 1’dir. Değer 0 olarak değiştirerek, VM vCPU sayısı olarak çok node.exes başlatabilirsiniz. Önerilen değer uygulamalarının çoğu için 0 olduğundan tüm vcpu makinenizde kullanabilirsiniz. Node.exe tek parçacıklı en fazla 1 vCPU bir node.exe kullanır. Node.js uygulamanızı dışında en yüksek performansı elde etmek için tüm Vcpu kullanmak istiyorsunuz.
+Bu ayar, IIS uygulaması başına başlatılan düğüm işlemlerinin sayısını denetler. Varsayılan değer 1'dir. Değeri 0 olarak değiştirerek VM vCPU sayısı olarak çok sayıda Node. exe ' de başlatabilirsiniz. Makinenizde tüm vCPU 'Ları kullanabilmeniz için önerilen değer çoğu uygulama için 0 ' dır. Node. exe tek iş parçacıklı olduğundan, tek bir Node. exe en fazla 1 vCPU tüketir. Düğüm uygulamanızdan en yüksek performansı almak için tüm vCPU 'Ları kullanmak istersiniz.
 
 ### <a name="nodeprocesscommandline"></a>nodeProcessCommandLine
 
-Bu ayar, node.exe yolu denetler. Bu değer, node.exe sürüme işaret edecek şekilde ayarlayabilirsiniz.
+Bu ayar Node. exe ' nin yolunu denetler. Bu değeri, Node. exe sürümünüzü gösterecek şekilde ayarlayabilirsiniz.
 
 ### <a name="maxconcurrentrequestsperprocess"></a>maxConcurrentRequestsPerProcess
 
-Bu ayar, en fazla iisnode tarafından gönderilen her node.exe için eş zamanlı istek sayısını denetler. Azure App Service üzerinde sınırsız varsayılan değerdir. Değer, uygulamanın aldığı kaç istekleri ve uygulamanızı her isteğin ne kadar hızlı işleme bağlı olarak yapılandırabilirsiniz.
+Bu ayar, ıısnode tarafından her Node. exe ' ye gönderilen en fazla eşzamanlı istek sayısını denetler. Azure App Service, varsayılan değer sonsuz ' dur. Uygulamanızı ne kadar istek alacağını ve uygulamanızın her bir isteği işleme hızını ve ne kadar hızlı bir şekilde bu değeri yapılandırabilirsiniz.
 
 ### <a name="maxnamedpipeconnectionretry"></a>maxNamedPipeConnectionRetry
 
-Bu ayar, en fazla kaç kez denetler iisnode deneme node.exe için istek göndermek için adlandırılmış kanal üzerindeki bağlantı oluşturma. Bu ayar namedPipeConnectionRetryDelay birlikte her isteğin iisnode içinde toplam zaman aşımı belirler. Azure App Service'te 200 varsayılan değerdir. Zaman aşımı saniye cinsinden toplam = (maxNamedPipeConnectionRetry \* namedPipeConnectionRetryDelay) / 1000
+Bu ayar, ıısnode 'un isteği Node. exe ' ye göndermesini sağlamak için, adlandırılmış kanalda bağlantı kuran en fazla kaç kez yeniden deneme olduğunu denetler. NamedPipeConnectionRetryDelay ile birlikte bu ayar, ıısnode içindeki her bir isteğin toplam zaman aşımını belirler. Varsayılan değer Azure App Service 200 ' dir. Saniye cinsinden toplam zaman aşımı = (maxNamedPipeConnectionRetry \* namedPipeConnectionRetryDelay)/1000
 
 ### <a name="namedpipeconnectionretrydelay"></a>namedPipeConnectionRetryDelay
 
-Bu ayar adlandırılmış kanal üzerinden node.exe için isteği göndermek için her yeniden deneme arasındaki süre (ms) iisnode bekler miktarını denetler. 250 ms varsayılan değerdir.
-Zaman aşımı saniye cinsinden toplam = (maxNamedPipeConnectionRetry \* namedPipeConnectionRetryDelay) / 1000
+Bu ayar, isteği adlandırılan kanal üzerinden Node. exe ' ye göndermek için her yeniden deneme arasında geçen süreyi (MS cinsinden) denetler. Varsayılan değer 250 MS 'dir.
+Saniye cinsinden toplam zaman aşımı = (maxNamedPipeConnectionRetry \* namedPipeConnectionRetryDelay)/1000
 
-Varsayılan olarak, Azure App Service'te iisnode toplam zaman aşımı 200'dür \* 250 ms = 50 saniye.
+Varsayılan olarak, Azure App Service ıısnode 'daki toplam zaman aşımı süresi 200 \* 250 ms = 50 saniyedir.
 
-### <a name="logdirectory"></a>logDirectory
+### <a name="logdirectory"></a>Günlüğe kaydetme dizini
 
-Bu ayar, burada stdout/stderr iisnode günlüklerini directory denetler. (Ana server.js mevcut olduğu dizin) ana komut dosyası dizinine göreli iisnode, varsayılan değer:
+Bu ayar ıısnode 'un stdout/stderr kaydettiği dizini denetler. Varsayılan değer, ana komut dosyası dizini (Main Server. js ' nin bulunduğu dizin) ile ilişkili iisnode ' dır.
 
 ### <a name="debuggerextensiondll"></a>debuggerExtensionDll
 
-Node.js uygulamanızı hata ayıklama sırasında node-Inspector iisnode hangi sürümünü kullanır. Bu ayarı denetler. Şu anda iisnode denetçisi 0.7.3.dll ve iisnode inspector.dll yalnızca iki geçerli Bu ayar için değerler. İisnode denetçisi 0.7.3.dll varsayılan değerdir. İisnode denetçisi 0.7.3.dll sürüm düğümü denetçisi 0.7.3 ve web yuvalarını kullanır. Bu sürümü kullanmak için Azure webapp üzerinde Web yuvalarını etkinleştirin. Bkz: <https://ranjithblogs.azurewebsites.net/?p=98> iisnode yeni node-Inspector'ı kullanmak için yapılandırma hakkında daha fazla ayrıntı için.
+Bu ayar, düğüm uygulamanızda hata ayıklarken ıısnode 'un hangi node-Inspector sürümünün kullandığını denetler. Şu anda, bu ayar için yalnızca iki geçerli değer olan iisnode-inspector-0.7.3. dll ve iisnode-inspector. dll vardır. Varsayılan değer iisnode-inspector-0.7.3. dll ' dir. İisnode-inspector-0.7.3. dll sürümü node-Inspector-0.7.3 kullanır ve Web yuvalarını kullanır. Azure WebApp 'de Web yuvalarını bu sürümü kullanacak şekilde etkinleştirin. Yeni node-Inspector 'ı kullanmak için iisnode 'un nasıl yapılandırılacağı hakkında daha fazla bilgi için bkz. <https://ranjithblogs.azurewebsites.net/?p=98>.
 
 ### <a name="flushresponse"></a>flushResponse
 
-Yanıt veri arabelleği IIS varsayılan davranış, ayarlamak için önce bir temizlemeye veya yanıt sonuna kadar 4 MB hangisinin önce geldiğine bağlı. iisnode bu davranışı geçersiz kılmak için bir yapılandırma ayarı sunar: iisnode node.exe'yi aldıktan hemen sonra bir parçasını yanıt varlık gövdesini temizlemek için ayarlanacak ihtiyacınız iisnode/@flushResponse özniteliği 'true' web.config dosyasında:
+IIS 'nin varsayılan davranışı, yeniden denemeden önce veya yanıtın sonuna kadar, ilk kez geldiği sürece 4 MB 'a kadar veri yanıtı arabelleğe alır. ıısnode, bu davranışı geçersiz kılmak için bir yapılandırma ayarı sunar: ıısnode onu Node. exe ' den aldığı anda yanıt varlık gövdesinin bir parçasını temizlemek için, Web. config dosyasında iisnode/@flushResponse özniteliğini ' true ' olarak ayarlamanız gerekir:
 
 ```xml
 <configuration>
@@ -78,9 +78,9 @@ Yanıt veri arabelleği IIS varsayılan davranış, ayarlamak için önce bir te
 </configuration>
 ```
 
-Bir temizlemeye etkinleştirme yanıtın her parçasını varlık gövdesini ~ %5 (itibariyle v0.1.13) tarafından sistemin aktarım hızını azaltan performans yükü ekler. Gerektiren yanıt akış uç noktaları için bu ayar kapsamı için en iyi şekilde (örneğin, kullanarak `<location>` web.config öğesinde)
+Yanıt varlık gövdesinin her parçasının temizlenme özelliğini etkinleştirmek, sistemin aktarım hızını %5 oranında azaltan (v 0.1.13 itibariyle) performans yükü ekler. Bu ayarı yalnızca yanıt akışı gerektiren uç noktalar için (örneğin, Web. config içinde `<location>` öğesini kullanarak) en iyi şekilde kullanın
 
-Buna ek olarak, uygulamalar, akış için de responseBufferLimit iisnode işleyicinizi, 0 olarak ayarlamanız gerekir.
+Buna ek olarak, akış uygulamaları için, ıısnode işleyicinizin responseBufferLimit öğesini de 0 olarak ayarlamanız gerekir.
 
 ```xml
 <handlers>
@@ -90,47 +90,47 @@ Buna ek olarak, uygulamalar, akış için de responseBufferLimit iisnode işleyi
 
 ### <a name="watchedfiles"></a>watchedFiles
 
-Değişiklikleri izlenen dosyaların listesi noktalı virgülle ayrılmış. Bir dosyaya herhangi bir değişikliği geri dönüştürmek uygulamanın neden olur. Ana uygulama giriş noktası bulunduğu dizini ile görelidir gerekli dosya adları yanı sıra, bir isteğe bağlı dizin adı her girdi oluşur. Joker karakterler yalnızca dosya adı bölümünde izin verilir. Varsayılan değer: `*.js;iisnode.yml`
+Değişiklikler için izlenen dosyaların noktalı virgülle ayrılmış listesi. Bir dosyada yapılan herhangi bir değişiklik uygulamanın geri dönüşüm yapmasına neden olur. Her giriş, bir isteğe bağlı dizin adından ve gerekli bir dosya adından oluşur ve bu, ana uygulama giriş noktasının bulunduğu dizine göre belirlenir. Yalnızca dosya adı bölümünde joker karakterler kullanılabilir. Varsayılan değer `*.js;iisnode.yml`
 
 ### <a name="recyclesignalenabled"></a>recycleSignalEnabled
 
-Varsayılan değer false'tur. Etkinleştirilirse, node.js uygulamanızı bir adlandırılmış kanala bağlanabilir (ortam değişkeni IISNODE\_denetimi\_kanal) ve bir "geri" ileti gönderin. Bu, yalnızca w3wp düzgün bir şekilde geri dönüştürülmesine neden olur.
+Varsayılan değer false'tur. Etkinleştirilirse, düğüm uygulamanız adlandırılmış bir kanala bağlanarak (ııSNODE\_DENETIM\_kanal) ve "geri dönüşüm" iletisi gönderebilir. Bu, W3wp 'in düzgün şekilde geri dönüştürülmesine neden olur.
 
-### <a name="idlepageouttimeperiod"></a>idlePageOutTimePeriod
+### <a name="idlepageouttimeperiod"></a>ıdlepageouttimeperiod
 
-Varsayılan değer, bu özellik devre dışı anlamına gelen 0 ' dır. Bir değeri 0'dan büyük olarak ayarlandığında, iisnode tüm alt işlemleri milisaniye cinsinden her 'idlePageOutTimePeriod' sayfa. Bkz: [belgeleri](/windows/desktop/api/psapi/nf-psapi-emptyworkingset) ne anlamına gelir sayfasında anlamak için. Bu ayar, yüksek miktarda bellek kullanır ve bazen RAM boşaltmak için disk belleği kullanıma sayfasında istediğiniz uygulamalar için yararlıdır.
+Varsayılan değer 0 ' dır, bu özelliğin devre dışı bırakıldığı anlamına gelir. 0 ' dan büyük bir değere ayarlandığında, ıısnode her ' ıdlepageouttimeperiod ' öğesinin her bir alt işlemini milisaniye olarak bir sayfa olarak çıkar. Sayfa hangi anlama geldiğini anlamak için [belgelere](/windows/desktop/api/psapi/nf-psapi-emptyworkingset) bakın. Bu ayar, yüksek miktarda bellek kullanan uygulamalar için yararlıdır ve RAM 'i boşaltmak için zaman içinde belleği diske eklemek ister.
 
 > [!WARNING]
-> Üretim uygulamaları aşağıdaki yapılandırma ayarları etkinleştirilirken dikkatli olun. Bunları Canlı üretim uygulamaları etkinleştirmemeniz önerilir.
+> Üretim uygulamalarında aşağıdaki yapılandırma ayarlarını etkinleştirirken dikkatli olun. Bu öneri, canlı üretim uygulamalarında etkinleştirilmemelidir.
 >
 
 ### <a name="debugheaderenabled"></a>debugHeaderEnabled
 
-Varsayılan değer false'tur. Bir HTTP yanıt üst bilgisi doğru iisnode kümeye eklerse `iisnode-debug` , gönderdiği her HTTP yanıtına `iisnode-debug` üst bilgi değeri: bir URL. Tek tek parçalarını tanılama bilgileri URL parçacığı bakarak elde edilebilir, ancak bir görselleştirme URL'sini bir tarayıcıda açarak kullanılabilir.
+Varsayılan değer false'tur. True olarak ayarlanırsa, ıısnode, `iisnode-debug` üst bilgi değeri bir URL olduğu her HTTP yanıtına bir HTTP yanıt üst bilgisi `iisnode-debug` ekler. Tek tek tanılama bilgileri parçaları URL parçasına bakarak elde edilebilir, ancak URL bir tarayıcıda açılarak görselleştirme kullanılabilir.
 
 ### <a name="loggingenabled"></a>loggingEnabled
 
-Bu ayar, stdout ve stderr günlük iisnode tarafından denetler. Iisnode stdout/stderr başlatır ve 'logDirectory' ayarında belirtilen dizine yazar düğüm işlemlerden yakalar. Bu etkinleştirildikten sonra uygulamanızın dosya sistemini ve uygulama tarafından gerçekleştirilen günlük miktarına bağlı olarak günlükler yazar, performans etkileri olabilir.
+Bu ayar, ıisnode tarafından stdout ve stderr 'in günlüğe kaydedilmesini denetler. Iısnode, başlatılan düğüm işlemlerinden stdout/stderr yakalar ve ' logDirectory ' ayarında belirtilen dizine yazar. Bu etkinleştirildikten sonra uygulamanız, günlükleri dosya sistemine yazar ve uygulama tarafından gerçekleştirilen günlüğe kaydetme miktarına bağlı olarak performans olumsuz etkileri olabilir.
 
 ### <a name="deverrorsenabled"></a>devErrorsEnabled
 
-Varsayılan değer false'tur. Ne zaman true iisnode kümesine HTTP durum kodu ve Win32 hata kodu tarayıcınızda görüntülenir. Win32 kodu, hata ayıklama sorunları belirli türlerdeki yararlıdır.
+Varsayılan değer false'tur. True olarak ayarlandığında, ıısnode, tarayıcınızda HTTP durum kodunu ve Win32 hata kodunu görüntüler. Win32 kodu, bazı sorun türlerinde hata ayıklamaya yardımcı olur.
 
-### <a name="debuggingenabled-do-not-enable-on-live-production-site"></a>debuggingEnabled (Canlı üretim sitesini üzerinde etkinleştirmeyin)
+### <a name="debuggingenabled-do-not-enable-on-live-production-site"></a>hata ayıklama Ggingenabled (canlı üretim sitesinde etkinleştirmeyin)
 
-Bu ayar, hata ayıklama özelliğini denetler. Iisnode node-Inspector ile tümleşiktir. Bu ayarın etkinleştirilmesi, düğüm uygulamanızı hata ayıklama etkinleştirin. Bu ayarın etkinleştirilmesi üzerine iisnode ilk node.js uygulamanızı hata ayıklama isteği 'debuggerVirtualDir' dizininde node-Inspector dosyaları oluşturur. Bir istek göndererek node-Inspector'ı yükleyebilir `http://yoursite/server.js/debug`. Hata ayıklama URL kesimi 'debuggerPathSegment' ayarıyla denetleyebilirsiniz. Varsayılan olarak, debuggerPathSegment = 'debug'. Ayarlayabileceğiniz `debuggerPathSegment` bir GUID, örneğin, bu nedenle olduğundan başkaları tarafından bulunması daha zor.
+Bu ayar hata ayıklama özelliğini denetler. Iısnode, Node-Inspector ile tümleşiktir. Bu ayarı etkinleştirdiğinizde, düğüm uygulamanızın hata ayıklamasını etkinleştirirsiniz. Iısnode, bu ayar etkinleştirildikten sonra, düğüm uygulamanıza ilk hata ayıklama isteğindeki ' debuggerVirtualDir ' dizininde düğüm denetçisi dosyaları oluşturur. `http://yoursite/server.js/debug`bir istek göndererek düğüm denetçisini yükleyebilirsiniz. Hata ayıklama URL segmentini ' debuggerPathSegment ' ayarıyla kontrol edebilirsiniz. Varsayılan olarak debuggerPathSegment = ' Debug '. Bir GUID 'ye `debuggerPathSegment` ayarlayabilirsiniz, örneğin, başkaları tarafından keşfedilmesi daha zordur.
 
-Okuma [Windows üzerinde node.js uygulamalarında hata ayıklama](https://tomasz.janczuk.org/2011/11/debug-nodejs-applications-on-windows.html) hata ayıklama hakkında daha fazla bilgi.
+Hata ayıklama hakkında daha fazla bilgi için [Windows üzerinde Debug Node. js uygulamalarını](https://tomasz.janczuk.org/2011/11/debug-nodejs-applications-on-windows.html) okuyun.
 
-## <a name="scenarios-and-recommendationstroubleshooting"></a>Senaryolar ve öneriler ve giderme
+## <a name="scenarios-and-recommendationstroubleshooting"></a>Senaryolar ve öneriler/sorun giderme
 
-### <a name="my-node-application-is-making-excessive-outbound-calls"></a>Düğüm Uygulamam giden çağrıları yapıyor
+### <a name="my-node-application-is-making-excessive-outbound-calls"></a>Düğüm Uygulamam çok fazla giden çağrı yapıyor
 
-Birçok uygulama, normal işlemlerinin bir parçası olarak giden bağlantılar oluşturmak istersiniz. Örneğin, bir istek geldiğinde, başka bir yerde REST API ile iletişime geçin ve isteği işlemek için bazı bilgiler almak düğüm uygulamanızı istersiniz. Http veya https çağrıları yapılırken canlı tutma aracı kullanmak isteyebilirsiniz. Canlı tutma aracısı olarak, bu giden çağrıları yapılırken agentkeepalive modülü kullanabilirsiniz.
+Birçok uygulama, normal işleminin bir parçası olarak giden bağlantılar yapmak istiyor. Örneğin, bir istek geldiğinde, düğüm uygulamanız başka bir REST API ile iletişim kurmak ve isteği işlemek için bazı bilgiler almak istiyor. Http veya https çağrıları yaparken canlı tut aracısını kullanmak istersiniz. Agentkeepalive modülünü, bu giden çağrıları yaparken canlı tut aracılarınız olarak kullanabilirsiniz.
 
-Yuvalar, Azure webapp VM yeniden kullanılan agentkeepalive modülü sağlar. Her bir giden talep üzerinde yeni bir yuva oluşturma, uygulamanıza ek yükü ekler. Giden istekler için yuva yeniden uygulamanızın olması, uygulamanızın VM başına ayrılmış maxSockets aşmaması sağlar. Azure App Service'te agentKeepAlive maxSockets değeri ayarlamak için toplam önerilir (node.exe 4 örneklerini \* 40 maxSockets/örnek) VM başına 160 yuva.
+Agentkeepalive modülü, Azure WebApp sanal makinenizde yuvaların yeniden kullanılmasını sağlar. Her giden istek üzerinde yeni bir yuva oluşturmak uygulamanıza ek yük ekler. Uygulamanızın çıkış istekleri için yuvaları yeniden kullanımını, uygulamanızın VM başına ayrılan maxSockets değerini aşmamasını sağlar. Azure App Service öneri, agentKeepAlive maxSockets değerini, VM başına 40 olan Node. exe \* maxSockets/Instance) 160 yuva olarak ayarlamadır.
 
-Örnek [agentKeepALive](https://www.npmjs.com/package/agentkeepalive) yapılandırma:
+Örnek [Agentkeepalive](https://www.npmjs.com/package/agentkeepalive) yapılandırması:
 
 ```nodejs
 let keepaliveAgent = new Agent({
@@ -142,17 +142,17 @@ let keepaliveAgent = new Agent({
 ```
 
 > [!IMPORTANT]
-> Bu örnekte, sanal makinenizde çalışan 4 node.exe sahip olduğunuz varsayılır. Node.exe VM'de çalışan farklı bir dizi varsa, buna göre ayarlama maxSockets değiştirmeniz gerekir.
+> Bu örnek, VM 'niz üzerinde 4 Node. exe ' nin çalıştığını varsayar. VM 'de çalışan farklı sayıda Node. exe dosyası varsa, maxSockets ayarını buna uygun olarak değiştirmeniz gerekir.
 >
 
-#### <a name="my-node-application-is-consuming-too-much-cpu"></a>Çok fazla CPU tükettiğini düğüm Uygulamam
+#### <a name="my-node-application-is-consuming-too-much-cpu"></a>Düğüm uygulamamın çok fazla CPU kullanıyor
 
-Yüksek cpu tüketimi hakkında portalınızdaki Azure uygulama Hizmeti'nden bir öneri alabilirsiniz. Belirli izlemek için izleyicilerinin ayarlayabilirsiniz [ölçümleri](web-sites-monitor.md). CPU kullanımı üzerinde denetlenirken [Azure portalı Panosu](../azure-monitor/app/web-monitor-performance.md), CPU, en yüksek değerleri kaçırmamak için en büyük değerleri kontrol edin.
-Uygulamanız çok fazla CPU kullanan ve neden açıklayamadığınız düşünüyorsanız öğrenmek için node.js uygulamanızı profilini oluşturabilirsiniz.
+Portalınızdaki Azure App Service, yüksek CPU tüketimi hakkında bir öneri alabilirsiniz. Ayrıca, belirli [ölçümleri](web-sites-monitor.md)izlemek için izleyicileri de ayarlayabilirsiniz. [Azure Portal PANOSUNDA](../azure-monitor/app/web-monitor-performance.md)CPU kullanımını denetlerken, en yüksek değerleri kaçırmamak için CPU 'nun en yüksek değerlerini denetleyin.
+Uygulamanızın çok fazla CPU kullandığını düşünüyorsanız ve nedenini açıklayadıysanız, öğrenmek için düğüm uygulamanızın profilini oluşturabilirsiniz.
 
-#### <a name="profiling-your-node-application-on-azure-app-service-with-v8-profiler"></a>Node.js uygulamanızı Azure App Service'te V8 Profiler ile profil oluşturma
+#### <a name="profiling-your-node-application-on-azure-app-service-with-v8-profiler"></a>V8-Profiler ile Azure App Service düğüm uygulamanızın profilini oluşturma
 
-Örneğin, aşağıdaki gibi profilini oluşturmak istediğiniz bir Merhaba Dünya uygulaması sahip varsayalım:
+Örneğin, profil eklemek istediğiniz bir Merhaba Dünya uygulamasına şu şekilde bakalım:
 
 ```nodejs
 const http = require('http');
@@ -173,16 +173,16 @@ http.createServer(function (req, res) {
 }).listen(process.env.PORT);
 ```
 
-Hata ayıklama konsolunu sitesine gidin `https://yoursite.scm.azurewebsites.net/DebugConsole`
+Hata ayıklama konsolu sitesine gidin `https://yoursite.scm.azurewebsites.net/DebugConsole`
 
-Site/wwwroot dizinine gidin. Aşağıdaki örnekte gösterildiği gibi bir komut istemi görürsünüz:
+Sitenize/Wwwroot dizinine gidin. Aşağıdaki örnekte gösterildiği gibi bir komut istemi görürsünüz:
 
 ![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/scm_install_v8.png)
 
 Komutunu çalıştırın `npm install v8-profiler`.
 
-Bu komut düğümü altında v8 profil oluşturucu yükler\_modülleri dizini ve tüm bağımlılıklarını.
-Şimdi, uygulamanızın profilini oluşturmak, server.js düzenleyin.
+Bu komut, düğüm\_modüller dizini ve tüm bağımlılıklarını V8-Profiler ' ın altına yüklenir.
+Şimdi, uygulamanızı profilinize yönelik Server. js ' yi düzenleyin.
 
 ```nodejs
 const http = require('http');
@@ -208,81 +208,81 @@ http.createServer(function (req, res) {
 }).listen(process.env.PORT);
 ```
 
-Önceki kod profilleri WriteConsoleLog işlevi ve ardından, site wwwroot 'profile.cpuprofile' dosyayı profili çıktı yazar. Uygulamanız için bir istek gönderin. 'Profile.cpuprofile' dosya oluşturulduğunda, site wwwroot altında görürsünüz.
+Önceki kod, WriteConsoleLog işlevini profiller ve sonra profil çıkışını sitenizin Wwwroot altındaki ' profile. cpuprofile ' dosyasına yazar. Uygulamanıza bir istek gönderin. Siteniz Wwwroot altında oluşturulmuş bir ' profile. cpuprofile ' dosyası görürsünüz.
 
 ![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/scm_profile.cpuprofile.png)
 
-Bu dosyayı indirin ve Chrome F12 araçları ile açın. Chrome'da F12 tuşuna basın ve ardından **profilleri** sekmesi. Seçin **yük** düğmesi. İndirdiğiniz profile.cpuprofile dosyanızı seçin. Yalnızca yüklenen profiline tıklayın.
+Bu dosyayı indirin ve Chrome F12 araçlarıyla açın. Chrome üzerinde F12 tuşuna basın, sonra **profiller** sekmesini seçin. **Yükle** düğmesini seçin. İndirdiğiniz profile. cpuprofile dosyanızı seçin. Az önce yüklediğiniz profile tıklayın.
 
 ![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/chrome_tools_view.png)
 
-%95 zaman WriteConsoleLog işlevi tarafından tüketilen görebilirsiniz. Çıktı Ayrıca, sorunu nedeniyle kaynak dosyaları ve tam satır numaralarını gösterir.
+Zamanın %95 ' nin WriteConsoleLog işlevi tarafından tüketildiğini görebilirsiniz. Çıktı Ayrıca, soruna neden olan tam satır numaralarını ve kaynak dosyalarını da gösterir.
 
-### <a name="my-node-application-is-consuming-too-much-memory"></a>Düğüm Uygulamam çok fazla bellek tüketiyor
+### <a name="my-node-application-is-consuming-too-much-memory"></a>Düğüm uygulamamın çok fazla bellek kullanıyor
 
-Uygulamanız çok fazla bellek kullanıp kullanmadığına portalınızdaki yüksek bellek tüketimi hakkında Azure App Service'in bir bildirim görürsünüz. Belirli izlemek için izleyicilerinin ayarlayabilirsiniz [ölçümleri](web-sites-monitor.md). Bellek kullanımı denetlenirken [Azure portalı Panosu](../azure-monitor/app/web-monitor-performance.md), en yüksek değerleri kaçırmamak için bellek için en büyük değerleri kontrol ettiğinizden emin olun.
+Uygulamanız çok fazla bellek kullanıyorsa, portalınızdaki Azure App Service yüksek bellek tüketimi hakkında bir bildirim görürsünüz. Belirli [ölçümleri](web-sites-monitor.md)izlemek için izleyicileri ayarlayabilirsiniz. [Azure Portal panosunda](../azure-monitor/app/web-monitor-performance.md)bellek kullanımını denetlerken, en yüksek değerleri kaçırmamak için bellek için maksimum değerleri denetlediğinizden emin olun.
 
-#### <a name="leak-detection-and-heap-diff-for-nodejs"></a>Sızıntı algılama ve node.js için yığın farkı
+#### <a name="leak-detection-and-heap-diff-for-nodejs"></a>Node. js için sızıntı algılama ve yığın farkı
 
-Kullanabileceğinizi [düğüm memwatch](https://github.com/lloyd/node-memwatch) bellek tanımlamanıza yardımcı olması için sızıntıları.
-Yükleyebileceğiniz `memwatch` yalnızca v8 profil oluşturucu ve kodunuzu yakalama ve fark yığınlarında tanımlamak için düzenleme gibi uygulamanızda bellek sızıntısı.
+Bellek sızıntılarını belirlemenize yardımcı olması için [node-memwatch](https://github.com/lloyd/node-memwatch) kullanabilirsiniz.
+V8-Profiler gibi `memwatch` yükleyebilir ve uygulamanızdaki bellek sızıntılarını belirlemek için kodunuzu yakalayıp fark edebilirsiniz.
 
-### <a name="my-nodeexes-are-getting-killed-randomly"></a>My node.exe rastgele sonlandırılan
+### <a name="my-nodeexes-are-getting-killed-randomly"></a>My Node. exe ' nin rastgele bir şekilde dolmak üzere
 
-Neden node.exe rastgele kapatıldığında birkaç nedeni vardır:
+Node. exe ' nin rastgele kapatılmasının birkaç nedeni vardır:
 
-1. Uygulamanızı Yakalanmayan Özel durumların – onay d: yanlamasına ivme kazanmaz\\giriş\\LogFiles\\uygulama\\Ayrıntılar için günlüğe kaydetme errors.txt dosyasını özel durum oluştu. Bu dosya, hata ayıklama ve uygulamanızı gidermek için yığın izlemesi sahiptir.
-2. Uygulamanızı Başlarken gelen diğer işlemleri etkilemeden çok fazla bellek tüketiyor. Toplam VM bellek yakın %100 ise, node.exe işlemi Yöneticisi tarafından sonlandırıldı. İşlem Yöneticisi, bazı iş yapma imkanına sahip diğer işlemlere izin vermek için bazı işlemleri sonlandırır. Bu sorunu gidermek için uygulamanız için bellek sızıntılarını profil. Uygulamanız büyük miktarda bellek gerekiyorsa (VM'ye kullanılabilir RAM artıran) daha büyük bir VM ölçeği artırabilirsiniz.
+1. Uygulamanız yakalanamayan özel durumlar üretiliyor – oluşturulan özel durum hakkındaki ayrıntılar için d:\\Home\\LogFiles\\uygulama\\Logging-Errors. txt dosyasını denetleyin. Bu dosya, uygulamanızı hata ayıklamaya ve düzeltmenize yardımcı olacak yığın izlemesine sahiptir.
+2. Uygulamanız çok fazla bellek kullanıyor, bu da çalışmaya başlamadan başka süreçler etkiliyor. Toplam VM belleği %100 ' e yakınsa, Node. exe ' nin işlem yöneticisi tarafından sonlandırılabilir. İşlem Yöneticisi, diğer işlemlerin bazı işleri gerçekleştirme şansı almasına izin vermek için bazı işlemleri Kilter. Bu sorunu onarmak için uygulamanızın bellek sızıntıları için profilini yapın. Uygulamanız büyük miktarda bellek gerektiriyorsa, daha büyük bir VM 'ye kadar ölçeği büyütün (VM 'nin kullanabildiği RAM miktarı artar).
 
 ### <a name="my-node-application-does-not-start"></a>Düğüm Uygulamam başlamıyor
 
-Başladığında uygulamanızın 500 hataları döndürüyor, birkaç nedeni olabilir:
+Uygulamanız başlatıldığında 500 hata döndürüyorsa, birkaç nedenden dolayı şunlar olabilir:
 
-1. Node.exe doğru konumda mevcut değil. NodeProcessCommandLine ayarını denetleyin.
-2. Ana komut dosyası doğru konumda mevcut değil. Web.config denetleyin ve ana kod dosyasında bulunan işleyiciler bölümündeki ana kod dosyasının adı eşleştiğinden emin olun.
-3. Web.config yapılandırması doğru değil-ayarları adları/değerleri kontrol edin.
-4. Hazırlıksız başlatma – uygulamanızı başlatmak için çok uzun sürüyor. Uygulamanızı daha uzun sürerse (maxNamedPipeConnectionRetry \* namedPipeConnectionRetryDelay) / 1000 saniye iisnode 500 hata döndürür. Zaman aşımına uğruyor ve 500 hata döndürüyor iisnode önlemek için uygulama başlangıç zamanı eşleşmesi için bu ayarları değerlerini artırın.
+1. Node. exe doğru konumda yok. NodeProcessCommandLine ayarını denetleyin.
+2. Ana betik dosyası doğru konumda yok. Web. config ' i denetleyin ve işleyiciler bölümündeki ana betik dosyasının adının ana betik dosyası ile eşleştiğinden emin olun.
+3. Web. config yapılandırması doğru değil; ayarların adlarını/değerlerini denetleyin.
+4. Soğuk başlangıç: uygulamanızın başlaması çok uzun sürüyor. Uygulamanız (maxNamedPipeConnectionRetry \* namedPipeConnectionRetryDelay)/1000 saniye daha uzun sürüyorsa, ıısnode 500 hatası döndürür. Iısnode 'un zaman aşımına uğramasını ve 500 hatasını döndürmesini engellemek için bu ayarların değerlerini uygulamanızın başlangıç zamanına uyacak şekilde artırın.
 
 ### <a name="my-node-application-crashed"></a>Düğüm Uygulamam kilitlendi
 
-Uygulamanızı Yakalanmayan Özel durumların – onay yanlamasına ivme kazanmaz `d:\\home\\LogFiles\\Application\\logging-errors.txt` Ayrıntılar için dosya üzerinde özel durum oluştu. Bu dosya, uygulamanızı tanılayıp yardımcı olmak için yığın izlemesi sahiptir.
+Uygulamanız yakalanamayan özel durumlar üretiliyor – oluşturulan özel durum hakkındaki ayrıntılar için `d:\\home\\LogFiles\\Application\\logging-errors.txt` dosyasını denetleyin. Bu dosyada, uygulamanızı tanılamanıza ve gidermeye yardımcı olacak yığın izlemesi vardır.
 
-### <a name="my-node-application-takes-too-much-time-to-start-cold-start"></a>Düğüm Uygulamam (Gecikmeli Başlatma) başlatmak için çok fazla zaman alır
+### <a name="my-node-application-takes-too-much-time-to-start-cold-start"></a>Düğüm uygulamamın başlaması çok fazla zaman alıyor (soğuk başlatma)
 
-Genel uzun uygulama başlangıç zamanlarını çok sayıda düğümü dosyalarında nedeni\_modüller. Uygulama başlatma sırasında bu dosyaları çoğunu yüklemek çalışır. Azure App Service'te, ağ paylaşımında dosyalarınızı depolandığından varsayılan olarak, çok sayıda dosya yüklenirken zaman alabilir.
-Bu işlem daha hızlı hale getirmek için bazı çözümler vardır:
+Uzun uygulama başlangıç sürelerinin yaygın nedeni, düğüm\_modüllerinde çok sayıda dosya olabilir. Uygulama, başlatıldığında bu dosyaların çoğunu yüklemeye çalışır. Varsayılan olarak, dosyalarınız Azure App Service ağ paylaşımında depolandığından, çok sayıda dosyanın yüklenmesi zaman alabilir.
+Bu işlemi daha hızlı hale getirmek için bazı çözümler şunlardır:
 
-1. Düz bağımlılık yapısı ve yinelenen bağımlılıkları yoktur, modüllerini yüklemek için npm3 kullanarak sahip olduğunuzdan emin olun.
-2. Yavaş deneyin yük düğümünüzü\_modülleri ve tüm uygulama başlangıcında modüllerini yüklenmeyecek. Modül kod yürütmeyi ilk önce işlev içindeki modül gerçekten ihtiyacınız olduğunda yavaş yük modüllerle require('module') çağrısı yapılmalıdır.
-3. Azure App Service yerel önbellek adı verilen bir özellik sunar. Bu özellik, içeriğinizi ağ paylaşımından VM yerel diskte kopyalar. Dosyaları yükleme süresi düğümünün yerel olduğundan\_modülleri çok daha hızlı.
+1. Modüllerinizi yüklemek için npm3 kullanarak düz bağımlılık yapısına sahip olduğunuzdan ve yinelenen bağımlılıklara sahip olduğunuzdan emin olun.
+2. Node\_modüllerinizi geç yüklemeyi deneyin ve uygulamanın başlangıcında tüm modülleri yüklemez. Yavaş yükleme modülleri için, modül kodunun ilk yürütmeden önce işlev içinde modüle ihtiyacınız olduğunda, gerekli (' Module ') çağrısı yapılmalıdır.
+3. Azure App Service, yerel önbellek adlı bir özellik sunar. Bu özellik, içeriğinizi ağ paylaşımından VM 'deki yerel diske kopyalar. Dosyalar yerel olduğundan, düğüm\_modüllerinin yükleme süresi çok daha hızlıdır.
 
-## <a name="iisnode-http-status-and-substatus"></a>IISNODE http durumu ve alt durumu
+## <a name="iisnode-http-status-and-substatus"></a>IıSNODE http durumu ve alt durumu
 
-`cnodeconstants` [Kaynak dosyası](https://github.com/Azure/iisnode/blob/master/src/iisnode/cnodeconstants.h) liste tüm olası durum substatus birleşimleri iisnode nedeniyle bir hata döndürebilir.
+`cnodeconstants` [kaynak dosyası](https://github.com/Azure/iisnode/blob/master/src/iisnode/cnodeconstants.h) , bir hata nedeniyle ıısnode 'un tüm olası durum/alt durum kombinasyonlarını döndürebilmesini sağlar.
 
-Win32 hata kodu görmek uygulamanızın FREB etkinleştir (performansı artırmak için üretim dışı sitelerindeki yalnızca FREB etkinleştirdiğinizden emin olun).
+Win32 hata kodunu görmek için uygulamanızın FREB 'sini etkinleştirin (performans nedenleriyle yalnızca üretim dışı sitelerde serbest bırak özelliğini etkinleştirdiğinizden emin olun).
 
-| Http durumu | HTTP alt durum | Olası nedeni nedir? |
+| Http durumu | Http alt durumu | Olası neden? |
 | --- | --- | --- |
-| 500 |1000 |IISNODE isteği gönderme sorun oluştu: node.exe başlatılıp başlatılmadığını denetleyin. Node.exe başlatırken kilitlenmiş. Web.config yapılandırma hatalarını denetleyin. |
-| 500 |1001 |-Win32Error 0x2 - uygulama URL'si yanıt vermiyor. Express uygulamanızın tanımlanan doğru rotalar varsa URL yeniden yazma kuralları veya onay kontrol edin. -Win32Error 0x6d – adlandırılmış kanal meşgul – kanal meşgul olduğundan Node.exe isteklerini kabul etmiyor. Yüksek cpu kullanımını denetleyin. -Diğer hataları – denetleyin, node.exe kilitlendi. |
-| 500 |1002 |Node.exe kilitlendi – d: denetleyin\\giriş\\LogFiles\\günlük errors.txt için yığın izlemesi. |
-| 500 |1003 |Kanal yapılandırma sorunu – adlandırılmış kanal yapılandırması doğru değil. |
-| 500 |1004-1018 |İstek gönderme veya node.exe/gelen yanıt işleme sırasında hata oluştu. Node.exe kilitlendi olmadığını denetleyin. d: denetleyin\\giriş\\LogFiles\\günlük errors.txt için yığın izlemesi. |
-| 503 |1000 |Daha fazla adlandırılmış kanal bağlantılarına ayırmak için yeterli bellek yok. Onay neden uygulamanızı çok fazla bellek tüketiyor. MaxConcurrentRequestsPerProcess ayarının değerini denetleyin. Sonsuz değildir ve çok sayıda istek varsa, bu hatayı önlemek için bu değeri artırın. |
-| 503 |1001 |Uygulamasını geri dönüşüme olduğundan isteği için node.exe dağıtılamadı. Uygulama beklemeli sonra istekleri normalde hizmet. |
-| 503 |1002 |Gerçek bir nedenle – isteği onay win32 hata kodu için bir node.exe dağıtılamadı. |
-| 503 |1003 |Adlandırılmış kanal çok meşgul – node.exe aşırı CPU kullanmadığına doğrulayın |
+| 500 |1000 |IISNODE 'a istek gönderilirken bir sorun oluştu: node. exe ' nin başlatılmış olup olmadığını denetleyin. Node. exe başlatıldığında kilitlendi. Web. config yapılandırmanızda hata olup olmadığını denetleyin. |
+| 500 |1001 |-Win32Error 0x2-Uygulama URL 'ye yanıt vermiyor. URL yeniden yazma kurallarını denetleyin veya Express uygulamanızda doğru yolların tanımlanmış olup olmadığını denetleyin. -Win32Error 0x6d – adlandırılmış kanal meşgul: Kanal meşgul olduğu için Node. exe istekleri kabul etmiyor. Yüksek CPU kullanımını denetleyin. -Diğer hatalar – Node. exe ' nin kilitlendiğini denetleyin. |
+| 500 |1002 |Node. exe kilitlendi – yığın izleme için d:\\Home\\LogFiles\\Logging-Errors. txt dosyasına bakın. |
+| 500 |1003 |Kanal yapılandırma sorunu – adlandırılmış kanal yapılandırması yanlış. |
+| 500 |1004-1018 |İstek gönderilirken veya Node. exe ' den gelen yanıtı işlerken bir hata oluştu. Node. exe ' nin kilitlendiğini denetleyin. yığın izleme için d:\\Home\\LogFiles\\Logging-Errors. txt dosyasına bakın. |
+| 503 |1000 |Daha fazla adlandırılmış kanal bağlantısı ayırmak için yeterli bellek yok. Uygulamanızın neden çok fazla bellek tükettiğini kontrol edin. MaxConcurrentRequestsPerProcess ayar değerini denetleyin. Sonsuz değilse ve çok sayıda isteğiniz varsa, bu hatayı engellemek için bu değeri arttırın. |
+| 503 |1001 |Uygulama geri dönüştürülüyor olduğundan Node. exe ' ye istek dağıtılamadı. Uygulama geri dönüştürüldükten sonra, istekler normal olarak sunulmalıdır. |
+| 503 |1002 |Gerçek neden için Win32 hata kodunu denetle – Istek bir Node. exe ' ye dağıtılamadı. |
+| 503 |1003 |Adlandırılmış kanal çok meşgul – Node. exe ' nin aşırı CPU kullanıp kullanmadığına emin olun |
 
-NODE.exe adlı bir ayar olan `NODE_PENDING_PIPE_INSTANCES`. Azure App Service, bu değer 5000 olarak ayarlanır. Bu node.exe kabul edebilir 5000 istekleri adlandırılmış kanal üzerinde bir seferde anlamına gelir. Bu değer, Azure App Service üzerinde çalışan düğümü uygulamalarının çoğu için yeterince iyi olmalıdır. 503\.1003 üzerinde Azure App Service'te yüksek değeri nedeniyle görmelisiniz değil `NODE_PENDING_PIPE_INSTANCES`
+NODE. exe `NODE_PENDING_PIPE_INSTANCES`adlı bir ayara sahiptir. Azure App Service, bu değer 5000 olarak ayarlanır. Node. exe ' nin, adlandırılmış kanalda her seferinde 5000 isteği kabul edebileceği anlamına gelir. Bu değer, Azure App Service üzerinde çalışan düğüm uygulamalarının çoğu için yeterince iyi olmalıdır. `NODE_PENDING_PIPE_INSTANCES` için yüksek değer Azure App Service için 503,1003 ' i görmemelisiniz
 
-## <a name="more-resources"></a>Daha fazla kaynak
+## <a name="more-resources"></a>Diğer kaynaklar
 
-Azure App Service'te node.js uygulamaları hakkında daha fazla bilgi için aşağıdaki bağlantıları izleyin.
+Azure App Service üzerindeki Node. js uygulamaları hakkında daha fazla bilgi edinmek için bu bağlantıları izleyin.
 
 * [Azure App Service’te Node.js web uygulamalarını kullanmaya başlama](app-service-web-get-started-nodejs.md)
-* [Azure Uygulama Hizmeti’ndeki bir Node.js web uygulamasına hata ayıklama](app-service-web-tutorial-nodejs-mongodb-app.md)
+* [Azure Uygulama Hizmeti’ndeki bir Node.js web uygulamasına hata ayıklama](https://blogs.msdn.microsoft.com/azureossds/2018/08/03/debugging-node-js-apps-on-azure-app-services/)
 * [Azure uygulamalarıyla Node.js Modüllerini kullanma](../nodejs-use-node-modules-azure-apps.md)
-* [Azure App Service Web uygulamaları: Node.js](https://blogs.msdn.microsoft.com/silverlining/2012/06/14/windows-azure-websites-node-js/)
+* [Azure Uygulama Hizmeti Web Apps: Node.js](https://blogs.msdn.microsoft.com/silverlining/2012/06/14/windows-azure-websites-node-js/)
 * [Node.js Geliştirici Merkezi](../nodejs-use-node-modules-azure-apps.md)
 * [Süper Gizli Kudu Hata Ayıklama Konsolunu keşfetme](https://azure.microsoft.com/documentation/videos/super-secret-kudu-debug-console-for-azure-web-sites/)

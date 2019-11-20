@@ -1,6 +1,6 @@
 ---
 title: Azure Active Directory kimlik doğrulama kitaplıkları | Microsoft Docs
-description: Azure AD Authentication Library (ADAL) istemci uygulama geliştiricilerin bulut kullanıcıların kimliklerini kolaylıkla doğrulayın sağlar veya şirket içi Active Directory (AD) ve ardından API çağrıları güvenliğini sağlamaya yönelik erişim belirteçleri edinin.
+description: Azure AD kimlik doğrulama kitaplığı (ADAL), istemci uygulama geliştiricilerinin kullanıcıların bulut veya şirket içi Active Directory (AD) için kolayca kimlik doğrulaması yapmasına ve ardından API çağrılarını güvenli hale getirmek için erişim belirteçleri almasına olanak tanır.
 services: active-directory
 documentationcenter: ''
 author: rwike77
@@ -10,80 +10,80 @@ ms.assetid: 2e4fc79a-0285-40be-8c77-65edee408a22
 ms.service: active-directory
 ms.subservice: develop
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 12/01/2018
 ms.author: ryanwi
 ms.reviewer: saeeda, jmprieur
-ms.custom: aaddev
+ms.custom: aaddev, identityplatformtop40
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b71585c178efbc30892cf95c5c2149818f0dcb3c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 53ddbdfc4efe5b8a7e58911c54994e9c7f6374e4
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65764580"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74131178"
 ---
 # <a name="azure-active-directory-authentication-libraries"></a>Azure Active Directory kimlik doğrulama kitaplıkları
 
-Azure Active Directory kimlik doğrulama kitaplığı (ADAL) v1.0 bulut için kullanıcıların kimliğini doğrulamak uygulama geliştiricilerin sağlayan veya şirket içi Active Directory (AD) ve API çağrılarını güvenliğini sağlamak için belirteçleri elde etmek. ADAL kimlik doğrulaması özellikleri sayesinde geliştiriciler için gibi kolaylaştırır:
+Azure Active Directory kimlik doğrulama kitaplığı (ADAL) v 1.0, uygulama geliştiricilerinin kullanıcıların bulut veya şirket içi Active Directory (AD) kimliğini doğrulamasını ve API çağrılarını güvenli hale getirmek için belirteçleri almasını sağlar. ADAL, geliştiriciler için kimlik doğrulamasını daha kolay hale getirir; örneğin:
 
-- Depoları erişim belirteçleri ve yenileme belirteçlerini yapılandırılabilir belirteç önbelleği
-- Bir erişim belirtecinin süresi ve yenileme belirteci kullanılabilir olduğunda otomatik belirteç yenileme
-- Zaman uyumsuz yöntem çağrıları için destek
+- Erişim belirteçlerini ve belirteçleri yenileme belirtecini depolayan yapılandırılabilir belirteç önbelleği
+- Bir erişim belirtecinin süresi dolarsa ve yenileme belirteci kullanılabilir olduğunda otomatik belirteç Yenile
+- Zaman uyumsuz yöntem çağrıları desteği
 
 > [!NOTE]
-> Azure AD v2.0 kitaplığı (MSAL) için mi arıyorsunuz? Kullanıma alma [MSAL kitaplık Kılavuzu](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-libraries).
+> Azure AD v 2.0 kitaplıkları (MSAL) aranıyor mu? [Msal kitaplığı kılavuzunu](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-libraries)kullanıma alın.
 >
 >
 
-## <a name="microsoft-supported-client-libraries"></a>Microsoft tarafından desteklenen istemci kitaplıkları
+## <a name="microsoft-supported-client-libraries"></a>Microsoft tarafından desteklenen Istemci kitaplıkları
 
-| Platform | Kitaplık | İndirme | Kaynak kodu | Örnek | Başvuru
+| Platform | Kitaplık | İndir | Kaynak kodu | Örnek | Başvuru
 | --- | --- | --- | --- | --- | --- |
-| .NET istemci, Windows Store, UWP, Xamarin iOS ve Android |ADAL .NET v3 |[NuGet](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet) | [Masaüstü uygulaması](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-dotnet) |[Başvuru](https://docs.microsoft.com/dotnet/api/microsoft.identitymodel.clients.activedirectory?view=azure-dotnet) |
-| .NET istemci, Windows Store, Windows Phone 8.1 |ADAL .NET v2 |[NuGet](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/2.28.4) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/releases/tag/v2.28.4) | [Masaüstü uygulaması](https://github.com/AzureADQuickStarts/NativeClient-DotNet/releases/tag/v2.X) | |
-| JavaScript |ADAL.js |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-js) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-js) |[Tek sayfalı uygulama](https://github.com/Azure-Samples/active-directory-javascript-singlepageapp-dotnet-webapi) | |
+| .NET Istemcisi, Windows Mağazası, UWP, Xamarin iOS ve Android |ADAL .NET v3 |[NuGet](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet) | [Masaüstü uygulaması](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-dotnet) |[Başvuru](https://docs.microsoft.com/dotnet/api/microsoft.identitymodel.clients.activedirectory?view=azure-dotnet) |
+| .NET Istemcisi, Windows Mağazası, Windows Phone 8,1 |ADAL .NET v2 |[NuGet](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/2.28.4) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/releases/tag/v2.28.4) | [Masaüstü uygulaması](https://github.com/AzureADQuickStarts/NativeClient-DotNet/releases/tag/v2.X) | |
+| JavaScript |ADAL. js |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-js) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-js) |[Tek sayfalı uygulama](https://github.com/Azure-Samples/active-directory-javascript-singlepageapp-dotnet-webapi) | |
 | iOS, macOS |ADAL |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-objc/releases) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-objc) |[iOS uygulaması](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-ios) | [Başvuru](http://cocoadocs.org/docsets/ADAL/2.5.1/)|
 | Android |ADAL |[Maven](https://search.maven.org/search?q=g:com.microsoft.aad+AND+a:adal&core=gav) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-android) |[Android uygulaması](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-android) | [JavaDocs](https://javadoc.io/doc/com.microsoft.aad/adal/)|
-| Node.js |ADAL |[npm](https://www.npmjs.com/package/adal-node) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-nodejs) | [Node.js web uygulaması](https://github.com/Azure-Samples/active-directory-node-webapp-openidconnect)|[Başvuru](https://docs.microsoft.com/javascript/api/adal-node/?view=azure-node-latest) |
+| Node.js |ADAL |[NPM](https://www.npmjs.com/package/adal-node) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-nodejs) | [Node.js web uygulaması](https://github.com/Azure-Samples/active-directory-node-webapp-openidconnect)|[Başvuru](https://docs.microsoft.com/javascript/api/overview/azure/activedirectory) |
 | Java |ADAL4J |[Maven](https://search.maven.org/#search%7Cga%7C1%7Ca%3Aadal4j%20g%3Acom.microsoft.azure) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-java) |[Java web uygulaması](https://github.com/Azure-Samples/active-directory-java-webapp-openidconnect) |[Başvuru](https://javadoc.io/doc/com.microsoft.azure/adal4j) |
 | Python |ADAL |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-python) |[GitHub](https://github.com/AzureAD/azure-activedirectory-library-for-python) |[Python web uygulaması](https://github.com/Azure-Samples/active-directory-python-webapp-graphapi) |[Başvuru](https://adal-python.readthedocs.io/) |
 
 ## <a name="microsoft-supported-server-libraries"></a>Microsoft tarafından desteklenen sunucu kitaplıkları
 
-| Platform | Kitaplık | İndirme | Kaynak kodu | Örnek | Başvuru
+| Platform | Kitaplık | İndir | Kaynak kodu | Örnek | Başvuru
 | --- | --- | --- | --- | --- | --- |
-| .NET |OWIN için AzureAD|[NuGet](https://www.nuget.org/packages/Microsoft.Owin.Security.ActiveDirectory/) |[GitHub](https://github.com/aspnet/AspNetKatana/tree/dev/src/Microsoft.Owin.Security.ActiveDirectory) |[MVC uygulaması](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-webapp-dotnet) | |
+| .NET |AzureAD için OWıN|[NuGet](https://www.nuget.org/packages/Microsoft.Owin.Security.ActiveDirectory/) |[GitHub](https://github.com/aspnet/AspNetKatana/tree/dev/src/Microsoft.Owin.Security.ActiveDirectory) |[MVC uygulaması](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-webapp-dotnet) | |
 | .NET |Openıdconnect için OWIN |[NuGet](https://www.nuget.org/packages/Microsoft.Owin.Security.OpenIdConnect) |[GitHub](https://github.com/aspnet/AspNetKatana/tree/dev/src/Microsoft.Owin.Security.OpenIdConnect) |[Web Uygulaması](https://github.com/AzureADSamples/WebApp-OpenIDConnect-DotNet) | |
-| .NET |OWIN için WS-Federasyon |[NuGet](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) |[GitHub](https://github.com/aspnet/AspNetKatana/tree/dev/src/Microsoft.Owin.Security.WsFederation) |[MVC Web App](https://github.com/AzureADSamples/WebApp-WSFederation-DotNet) | |
-| .NET |.NET 4.5 kimlik Protokolü uzantıları |[NuGet](https://www.nuget.org/packages/Microsoft.IdentityModel.Protocol.Extensions) |[GitHub](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet) | | |
-| .NET |.NET 4.5 için JWT işleyicisi |[NuGet](https://www.nuget.org/packages/System.IdentityModel.Tokens.Jwt) |[GitHub](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet) | | |
-| Node.js |Azure AD Passport |[npm](https://www.npmjs.com/package/passport-azure-ad) |[GitHub](https://github.com/AzureAD/passport-azure-ad) | [Web API](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-webapi-nodejs)| |
+| .NET |WS-Federation için OWıN |[NuGet](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) |[GitHub](https://github.com/aspnet/AspNetKatana/tree/dev/src/Microsoft.Owin.Security.WsFederation) |[MVC web uygulaması](https://github.com/AzureADSamples/WebApp-WSFederation-DotNet) | |
+| .NET |.NET 4,5 için kimlik Protokolü Uzantıları |[NuGet](https://www.nuget.org/packages/Microsoft.IdentityModel.Protocol.Extensions) |[GitHub](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet) | | |
+| .NET |.NET 4,5 için JWT Işleyicisi |[NuGet](https://www.nuget.org/packages/System.IdentityModel.Tokens.Jwt) |[GitHub](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet) | | |
+| Node.js |Azure AD Passport |[NPM](https://www.npmjs.com/package/passport-azure-ad) |[GitHub](https://github.com/AzureAD/passport-azure-ad) | [Web API](https://docs.microsoft.com/azure/active-directory/active-directory-devquickstarts-webapi-nodejs)| |
 
 ## <a name="scenarios"></a>Senaryolar
 
-ADAL kullanarak uzak bir kaynağa erişirken bir istemci üç yaygın senaryolar şunlardır:
+Aşağıda, bir uzak kaynağa erişen istemcide ADAL kullanmaya yönelik üç yaygın senaryo verilmiştir:
 
-### <a name="authenticating-users-of-a-native-client-application-running-on-a-device"></a>Bir cihaz üzerinde çalışan bir yerel istemci uygulaması, kullanıcıların kimliğini doğrulama
+### <a name="authenticating-users-of-a-native-client-application-running-on-a-device"></a>Bir cihazda çalışan yerel istemci uygulaması kullanıcılarının kimliğini doğrulama
 
-Bu senaryoda, bir geliştirici, bir mobil istemci veya bir web API gibi uzak bir kaynağa erişmesi gereken masaüstü uygulaması sahip. Web API'si, anonim çağrılarına izin vermemektedir ve kimliği doğrulanmış bir kullanıcı bağlamında çağrılmalıdır. Web API'si tarafından belirli bir verilen erişim belirteçleri güvenmek üzere önceden yapılandırılmış Azure AD kiracısı. Azure AD, bu kaynağa erişim belirteçlerini vermek için önceden yapılandırılmıştır. Geliştirici istemcisinden web API'sini çağırmak için Azure AD ile kimlik doğrulamasını kolaylaştırmak için ADAL kullanır. (Tarayıcı penceresi işlenmiş) kullanıcı kimlik bilgilerini toplamak için kullanıcı arabirimini oluşturmak için ADAL'ı kullanmak için en güvenli yolu var.
+Bu senaryoda, bir geliştirici, bir Web API 'SI gibi uzak bir kaynağa erişmesi gereken bir mobil istemci veya masaüstü uygulamasına sahiptir. Web API 'SI anonim çağrılara izin vermez ve kimliği doğrulanmış bir kullanıcı bağlamında çağrılmalıdır. Web API 'SI, belirli bir Azure AD kiracısı tarafından verilen erişim belirteçlerine güvenecek şekilde önceden yapılandırılmıştır. Azure AD, bu kaynak için erişim belirteçleri vermek üzere önceden yapılandırılmıştır. Web API 'sini istemciden çağırmak için, geliştirici Azure AD ile kimlik doğrulamasını kolaylaştırmak için ADAL kullanır. ADAL kullanmanın en güvenli yolu Kullanıcı kimlik bilgilerini toplamak için Kullanıcı arabirimini (tarayıcı penceresi olarak işlenir) işlemelidir.
 
-ADAL, bir kullanıcı kimlik doğrulaması, Azure AD'den bir erişim belirteci ve yenileme belirteci almak ve sonra web erişimi'ni kullanarak API çağırın belirteci kolaylaştırır.
+ADAL, kullanıcının kimliğini doğrulamayı, Azure AD 'den bir erişim belirteci almanızı ve belirteci yenilemeyi kolaylaştırır ve sonra erişim belirtecini kullanarak Web API 'sini çağırır.
 
-Azure ad kimlik doğrulaması kullanarak bu senaryoyu gösteren bir kod örneği için bkz. [yerel istemci WPF uygulaması Web API'si için](https://github.com/azureadsamples/nativeclient-dotnet).
+Azure AD kimlik doğrulamasını kullanarak bu senaryoyu gösteren bir kod örneği için, bkz. [Yerel ISTEMCI WPF uygulaması Web API 'si](https://github.com/azureadsamples/nativeclient-dotnet).
 
-### <a name="authenticating-a-confidential-client-application-running-on-a-web-server"></a>Bir web sunucusunda çalışan bir gizli istemci uygulaması kimlik doğrulaması
+### <a name="authenticating-a-confidential-client-application-running-on-a-web-server"></a>Web sunucusunda çalışan bir gizli istemci uygulamasının kimliğini doğrulama
 
-Bu senaryoda, bir geliştirici, web API'si gibi uzak bir kaynağa erişmesi gereken bir sunucu üzerinde çalışan bir uygulamanın sahip. Web API anonim izin vermiyor yetkili bir hizmetten çağrılmalıdır şekilde çağırır. Web API'si tarafından belirli bir verilen erişim belirteçleri güvenmek üzere önceden yapılandırılmış Azure AD kiracısı. Azure AD, bu kaynağa erişim belirteçleri (istemci kimliği ve parolası) istemci kimlik bilgileriyle bir hizmette sorun şekilde önceden yapılandırılmıştır. ADAL kimlik doğrulaması hizmeti Azure AD ile web API'sini çağırmak için kullanılabilecek bir erişim belirteci döndüren kolaylaştırır. Erişim belirtecinin ömrü, önbelleğe alma ve gerektiği şekilde yenileme yönetmeye ADAL da işler. Bu senaryoyu gösteren bir kod örneği için bkz. [arka plan programı konsol Web API'sine uygulama](https://github.com/AzureADSamples/Daemon-DotNet).
+Bu senaryoda, bir geliştirici, bir Web API 'SI gibi uzak bir kaynağa erişmesi gereken bir sunucuda çalışan bir uygulamaya sahiptir. Web API 'SI anonim çağrılara izin vermiyor, bu nedenle yetkilendirilmiş bir hizmetten çağrılmalıdır. Web API 'SI, belirli bir Azure AD kiracısı tarafından verilen erişim belirteçlerine güvenecek şekilde önceden yapılandırılmıştır. Azure AD, istemci kimlik bilgileri (istemci KIMLIĞI ve gizli) olan bir hizmete bu kaynak için erişim belirteçleri vermek üzere önceden yapılandırılmıştır. ADAL, Web API 'sini çağırmak için kullanılabilecek bir erişim belirteci döndüren Azure AD ile hizmetin kimlik doğrulamasını kolaylaştırır. ADAL Ayrıca, erişim belirtecinin ömrünü önbelleğe alarak ve gerektiği şekilde yenileerek yönetimini de işler. Bu senaryoyu gösteren bir kod örneği için bkz. [Daemon konsol uygulaması Web API 'si](https://github.com/AzureADSamples/Daemon-DotNet).
 
-### <a name="authenticating-a-confidential-client-application-running-on-a-server-on-behalf-of-a-user"></a>Bir kullanıcı adına bir sunucu üzerinde çalışan bir gizli bir istemci uygulaması kimlik doğrulaması
+### <a name="authenticating-a-confidential-client-application-running-on-a-server-on-behalf-of-a-user"></a>Bir kullanıcı adına sunucuda çalışan bir gizli istemci uygulamasının kimliğini doğrulama
 
-Bu senaryoda, bir geliştirici, web API'si gibi uzak bir kaynağa erişmesi gereken bir sunucu üzerinde çalışan bir web uygulaması sahip. Web API'si için kimliği doğrulanmış bir kullanıcı adına bir yetkili hizmetinden çağrılmalıdır anonim çağrıları izin vermez. Web API'si ön yapılandırma olan belirli bir Azure AD tarafından verilen erişim belirteçlere güvenecek şekilde Kiracı ve Azure AD erişim belirteçleri bu kaynak için istemci kimlik bilgileriyle hizmete vermek için önceden yapılandırılmış. Web uygulamasında kullanıcının kimliği doğrulandıktan sonra uygulamanın Azure AD'den bir yetkilendirme kodu kullanıcı için alabilirsiniz. Web uygulaması, bir erişim belirteci edinmek ve Azure ad uygulaması ile ilişkili yetkilendirme kodunu ve istemci kimlik bilgilerini kullanarak bir kullanıcı adına belirtecini yenilemek için ADAL sonra kullanabilirsiniz. Web uygulamasına erişim belirteci elinde eklendiğinde, belirteç süresi dolana kadar web API'si çağırabilirsiniz. Belirtecin süresi dolduğunda, web uygulamasının daha önce alan yeni bir erişim belirteci yenileme belirteci almak için ADAL kullanabilirsiniz. Bu senaryoyu gösteren bir kod örneği için bkz. [Web API'si için Web API'si için yerel istemci](https://github.com/Azure-Samples/active-directory-dotnet-webapi-onbehalfof).
+Bu senaryoda, bir geliştirici, bir Web API 'SI gibi uzak bir kaynağa erişmesi gereken bir sunucuda çalışan bir Web uygulamasına sahiptir. Web API 'SI anonim çağrılara izin vermediğinden, kimliği doğrulanmış bir kullanıcı adına yetkilendirilmiş bir hizmetten çağrılmalıdır. Web API 'SI, belirli bir Azure AD kiracısı tarafından verilen erişim belirteçlerine güvenmek üzere önceden yapılandırılmıştır ve Azure AD, istemci kimlik bilgileri olan bir hizmete bu kaynağa erişim belirteçleri vermek üzere önceden yapılandırılmıştır. Web uygulamasında kullanıcının kimliği doğrulandıktan sonra, uygulama Azure AD 'den Kullanıcı için bir yetkilendirme kodu alabilir. Web uygulaması daha sonra, Azure AD 'den uygulamayla ilişkili yetkilendirme kodunu ve istemci kimlik bilgilerini kullanarak bir kullanıcı adına bir erişim belirteci almak ve belirteci yenilemek için ADAL kullanabilir. Web uygulaması erişim belirtecini elinde olduktan sonra, belirtecin süresi dolana kadar Web API 'sini çağırabilir. Belirtecin süresi dolarsa, Web uygulaması daha önce alınmış yenileme belirtecini kullanarak yeni bir erişim belirteci almak için ADAL kullanabilir. Bu senaryoyu gösteren bir kod örneği için bkz. [Native Client to Web API to Web API](https://github.com/Azure-Samples/active-directory-dotnet-webapi-onbehalfof).
 
 ## <a name="see-also"></a>Ayrıca Bkz.
 
 - [Azure Active Directory Geliştirici Kılavuzu](v1-overview.md)
-- [Azure Active directory için kimlik doğrulama senaryoları](authentication-scenarios.md)
-- [Azure Active Directory kod örnekleri](sample-v1-code.md)
+- [Azure Active Directory için kimlik doğrulama senaryoları](v1-authentication-scenarios.md)
+- [Azure Active Directory kodu örnekleri](sample-v1-code.md)

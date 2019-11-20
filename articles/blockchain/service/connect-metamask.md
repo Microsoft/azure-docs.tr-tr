@@ -1,82 +1,75 @@
 ---
-title: Bir Azure blok zinciri Service ağına MetaMask bağlama
-description: MetaMask kullanarak Azure blok zinciri Service ağına bağlayın ve akıllı bir sözleşme dağıtın.
+title: MetaMask 'i Azure blok zinciri hizmeti ağına bağlama
+description: MetaMask kullanarak bir Azure blok zinciri hizmeti ağına bağlanın ve akıllı bir sözleşme dağıtın.
 services: azure-blockchain
 keywords: ''
 author: PatAltimore
 ms.author: patricka
-ms.date: 05/02/2019
+ms.date: 09/12/2019
 ms.topic: quickstart
 ms.service: azure-blockchain
 ms.reviewer: jackyhsu
 manager: femila
-ms.openlocfilehash: db029cee6edcd14d29c83964e5bf75aa45077e7e
-ms.sourcegitcommit: 4b9c06dad94dfb3a103feb2ee0da5a6202c910cc
+ms.openlocfilehash: b89e75d406a738fb685bb3294dca8d79a2b9170c
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/02/2019
-ms.locfileid: "65026903"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70966625"
 ---
-# <a name="quickstart-use-metamask-to-connect-and-deploy-a-smart-contract"></a>Hızlı Başlangıç: MetaMask kullanarak bağlanmak ve akıllı bir sözleşme dağıtma
+# <a name="quickstart-use-metamask-to-connect-and-deploy-a-smart-contract"></a>Hızlı Başlangıç: MetaMask kullanarak akıllı bir sözleşmeyi bağlama ve dağıtma
 
-Bu hızlı başlangıçta, bir Azure blok zinciri Service ağa bağlanma ve akıllı bir sözleşme dağıtmak için Remix MetaMask kullanacaksınız. Metamask Ether Cüzdan yönetmek ve akıllı sözleşme eylemleri gerçekleştirmek için bir tarayıcı uzantısıdır.
+Bu hızlı başlangıçta, bir Azure blok zinciri hizmeti ağına bağlanmak ve akıllı bir sözleşmeyi dağıtmak için yeniden karışımı kullanmak üzere MetaMask kullanacaksınız. Metamask, bir Ether cüzdan yönetmek ve akıllı sözleşme eylemleri gerçekleştirmek için bir tarayıcı uzantısıdır.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Azure Blockchain üye oluştur](create-member.md)
-* Yükleme [MetaMask tarayıcı uzantısı](https://metamask.io)
-* Bir MetaMask oluşturmak [Cüzdan](https://metamask.zendesk.com/hc/en-us/articles/360015488971-New-to-MetaMask-Learn-How-to-Setup-MetaMask-the-First-Time)
+* [Hızlı başlangıç: Azure Portal](create-member.md) veya[hızlı başlangıcı kullanarak bir blok zinciri üyesi oluşturun: Azure CLı kullanarak Azure blok zinciri hizmeti blok zinciri üyesi oluşturma](create-member-cli.md)
+* [MetaMask Browser uzantısını](https://metamask.io) yükler
+* MetaMask [cüzdan](https://metamask.zendesk.com/hc/en-us/articles/360015488971-New-to-MetaMask-Learn-How-to-Setup-MetaMask-the-First-Time) oluşturma
 
-## <a name="get-endpoint-address"></a>Uç nokta adresi alın
+## <a name="get-endpoint-address"></a>Uç nokta adresini al
 
-Blok zinciri ağa bağlanmak için Azure blok zinciri hizmet uç noktası adresi ihtiyacınız var. Uç nokta adresi ve erişim anahtarlarını Azure portalında bulabilirsiniz.
+Blok zinciri ağına bağlanmak için Azure blok zinciri hizmeti uç noktası adresine ihtiyacınız vardır. Uç nokta adresini ve erişim anahtarlarını Azure portal bulabilirsiniz.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-1. Azure Blockchain Service üyelik için gidin. Seçin **işlem düğümleri** ve varsayılan işlem düğüm bağlantısı.
+1. Azure blok zinciri hizmeti üyesine gidin. **İşlem düğümleri** ve varsayılan işlem düğümü bağlantısı ' nı seçin.
 
     ![Varsayılan işlem düğümünü seçin](./media/connect-metamask/transaction-nodes.png)
 
-1. Seçin **bağlantı dizelerini > erişim anahtarları**.
-1. Uç nokta adresini kopyalamak **HTTPS (erişim anahtarı: 1)**. Adres için sonraki bölüme ihtiyacınız var.
+1. **Erişim anahtarlarına > bağlantı dizeleri**seçin.
+1. Endpoint adresini **https 'den (erişim anahtarı 1)** kopyalayın. Sonraki bölüm için adrese ihtiyacınız vardır.
 
     ![Bağlantı dizesi](./media/connect-metamask/connection-string.png)
 
-## <a name="connect-metamask"></a>MetaMask bağlanma
+## <a name="connect-metamask"></a>MetaMask bağlama
 
-1. MetaMask tarayıcı uzantısı'nı açıp oturum açın.
-1. Ağ açılır menüden seçin **özel RPC**.
+1. MetaMask Browser uzantısını açın ve oturum açın.
+1. Ağ açılan menüsünde **özel RPC**' yi seçin.
 
     ![Özel RPC](./media/connect-metamask/custom-rpc.png)
 
-1. İçinde **yeni ağ > Yeni bir RPC URL**, önceki bölümde kopyaladığınız, uç nokta adresini girin.
+1. Yeni **ağ > yenı RPC URL 'si**' nde, önceki bölümden kopyalanmış olan bitiş noktası adresinizi girin.
 1. **Kaydet**’i seçin.
 
-    Bağlantı başarılı oldu, özel ağ ağ açılır listede görüntülenir.
+    Bağlantı başarılı olduysa, ağ açılan menüsünde özel ağ görüntülenir.
 
     ![Yeni ağ](./media/connect-metamask/new-network.png)
 
 ## <a name="deploy-smart-contract"></a>Akıllı sözleşme dağıtma
 
-Remix bir tarayıcı tabanlı Solidity geliştirme ortamıdır. MetaMask ve Remix birlikte kullanarak, dağıtabilir ve akıllı sözleşmelerinde eylemleri gerçekleştirin.
+Yeniden karıştırma, tarayıcı tabanlı bir Solidity geliştirme ortamıdır. MetaMask ve yeniden karıştır kullanarak akıllı sözleşmeleri dağıtabilir ve bunlar üzerinde işlem yapabilirsiniz.
 
 1. Tarayıcınızda `https://remix.ethereum.org` adresine gidin.
-1. **Çalıştır**'ı seçin. 
+1. **Dosya**altındaki **giriş** sekmesinde **yeni dosya** ' yı seçin.
 
-    MetaMask kümeleri, **ortam** için **eklenen Web3** ve **hesabı** ağınıza.
-
-    ![Çalıştır sekmesi](./media/connect-metamask/injected-web3.png)
-
-1. Seçin **yeni dosya oluştur**.
-
-    Yeni dosya adı `simple.sol`.
+    Yeni dosyayı `simple.sol`adlandırın.
 
     ![Dosya oluştur](./media/connect-metamask/create-file.png)
 
     **Tamam**’ı seçin.
-
-1. Aşağıdaki Remix Düzenleyicisi'nde yapıştırın **basit akıllı sözleşme** kod.
+1. Yeniden karıştır düzenleyicisinde, aşağıdaki **basit akıllı sözleşme** kodunu yapıştırın.
 
     ```solidity
     pragma solidity ^0.5.0;
@@ -98,53 +91,57 @@ Remix bir tarayıcı tabanlı Solidity geliştirme ortamıdır. MetaMask ve Remi
     }
     ```
 
-    **Basit sözleşme** bildirir adlandırılmış bir durum değişkeninin **Bakiye**. Tanımlı iki işlevi vardır. **Ekleme** işlevi için bir numara ekler **Bakiye**. **Alma** işlevi değerini döndürür **Bakiye**.
+    **Basit sözleşme** , **Bakiye**adlı bir durum değişkeni bildirir. Tanımlanmış iki işlev vardır. **Add** işlevi **dengelemek**için bir sayı ekler. **Get** işlevi, **Bakiyenin**değerini döndürür.
+1. Sözleşmeyi derlemek için önce Solidity derleyici bölmesini seçin, sonra **Simple. Nuevo derlemesini**seçin. 
 
-1. Sözleşme derlemek için işaretleyin **derleme > derlemek başlangıç**. Başarılı olursa yeşil bir sözleşme adı kutusu görüntülenir.
+    ![Derleme](./media/connect-metamask/compile.png)
 
-    ![Derle](./media/connect-metamask/compile.png)
+1. **Dağıtım & Çalıştır** bölmesini seçin ve ardından **ortamı** , MetaMask ile blok zinciri üyesine bağlamak üzere **eklenmiş Web3** olarak ayarlayın.
 
-1. Sözleşme yürütülecek seçin **çalıştırma** sekmesi. Seçin **basit** sonra Sözleşme **Dağıt**.
+    ![Çalışma sekmesi](./media/connect-metamask/injected-web3.png)
 
-    ![Özel RPC](./media/connect-metamask/deploy.png)
+1. **Basit** sözleşmeyi seçin ve ardından **dağıtın**.
 
-1. Sizi işlem gerçekleştirmek için yetersiz Bakiye MetaMask bildirim görüntülenir.
+    ![Dağıtma](./media/connect-metamask/deploy.png)
 
-    Ortak blok zinciri ağ için Ether işlem maliyeti için ödeme yapmam gerekir. Bu bir konsorsiyum özel bir ağda olduğundan, doğalgaz fiyat sıfır olarak ayarlayabilirsiniz.
 
-1.  Seçin **gaz Ücret > Düzenle > Gelişmiş**ayarlayın **gaz fiyat** 0.
+1. Bir MetaMask bildirimi, işlemi gerçekleştirmek için yeterli fon olduğunu uyarır.
 
-    ![Gaz fiyat](./media/connect-metamask/gas-price.png)
+    Ortak bir blok zinciri ağı için, işlem maliyeti için ödeme yapmanız gerekir. Bu bir konsorsiyumde özel bir ağ olduğundan, gaz fiyatını sıfır olarak ayarlayabilirsiniz.
+
+1.  **Gaz ücretini seçin > gelişmiş > düzenleyin**, **gaz fiyatını** 0 olarak ayarlayın.
+
+    ![Gaz fiyatı](./media/connect-metamask/gas-price.png)
 
     **Kaydet**’i seçin.
 
-1. Seçin **Onayla** blok zincirine akıllı sözleşme dağıtılacak.
-1. İçinde **dağıtılan sözleşmeleri** bölümünde, genişletmek **basit** sözleşme.
+1. Akıllı sözleşmeyi blok zincirine dağıtmak için **Onayla** ' yı seçin.
+1. **Dağıtılan sözleşmeler** bölümünde, **basit** sözleşmeyi genişletin.
 
-    ![Dağıtılan Sözleşmesi](./media/connect-metamask/deployed-contract.png)
+    ![Dağıtılan sözleşme](./media/connect-metamask/deployed-contract.png)
 
-    İki eylem **ekleme** ve **alma** sözleşmede tanımlanan işlevleri için eşleme.
+    İki eylem **ekleyin** **ve bu** , sözleşmede tanımlanan işlevlere eşleyin.
 
-1. Gerçekleştirmek için bir **ekleme** blok zinciri, işleme Ekle seçeneğini bir sayı girin **ekleme**.
-1. Benzer şekilde, sözleşmenin dağıttığınızda, sizi işlem gerçekleştirmek için yetersiz Bakiye MetaMask bildirim görüntülenir.
+1. Blok zincirinde bir işlem **ekleme** işlemi gerçekleştirmek için, eklenecek bir sayı girin ve **Ekle**' yi seçin. Yeniden karışmaya yönelik bir gaz tahmin hatası iletisi alabilirsiniz. İşlemi, gaz gerektirmeyen özel bir blok zincirine gönderiyorsunuz. İşlemi zorlamak için **Işlem gönder** ' i seçin.
+1. Sözleşmeyi dağıttığınıza benzer şekilde, işlemi gerçekleştirmek için yeterli fon MetaMask bildirimi görüntülenir.
 
-    Bu bir konsorsiyum özel bir ağda olduğundan, doğalgaz fiyat sıfır olarak ayarlayabilirsiniz.
+    Bu bir konsorsiyumun özel bir ağı olduğundan, gaz fiyatını sıfıra ayarlayabiliriz.
 
-1.  Seçin **gaz Ücret > Düzenle > Gelişmiş**ayarlayın **gaz fiyat** 0 ve **Kaydet**.
-1. Seçin **Onayla** blok zinciri üzerinde işlem gerçekleştirmek için.
-1. Seçin **alma** eylem. Bu sorgu düğümünün verilerine bir çağrıdır. Bir işlem gerekli değildir.
-1. Remix hata ayıklama bölmesinde uygun blok zinciri işlemler hakkında ayrıntı görebilirsiniz.
+1.  **Gaz ücretini seçin > gelişmiş > düzenleyin**, **gaz fiyatını** 0 olarak ayarlayın ve **Kaydet**' i seçin.
+1. İşlemi blok zincirine göndermek için **Onayla** ' yı seçin.
+1. Eylem **Al** ' ı seçin. Bu, düğüm verilerini sorgulamak için bir çağrıdır. Bir işlem gerekli değildir.
+1. Yeniden karıştırma 'nın hata ayıklama bölmesinde, blok zincirindeki işlemler hakkındaki ayrıntıları görebilirsiniz.
 
-    ![Geçmiş hata ayıklama](./media/connect-metamask/debug.png)
+    ![Hata ayıklama geçmişi](./media/connect-metamask/debug.png)
 
-    Gördüğünüz **basit** oluşturma işlemi için sözleşme **simple.add**ve çağrısı **simple.get**.
+    **Basit sözleşme oluşturma** , **basit. Ekle**için işlem ve **basit. Get**öğesine çağrı yapabilirsiniz.
 
-1. Ayrıca, işlem MetaMask geçmişinde görebilirsiniz. MetaMask tarayıcı uzantısı'nı açın.
-1. İçinde **geçmişi** bölümünde, dağıtılan sözleşme ve işlem günlüğü görebilirsiniz.
+1. Ayrıca, MetaMask içinde işlem geçmişini görebilirsiniz. MetaMask Browser uzantısını açın.
+1. **Geçmiş** bölümünde, dağıtılan sözleşmenin ve işlemlerin günlüğünü görebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, Azure Blockchain hizmeti işlem düğümüne bağlanmak için akıllı bir sözleşme dağıtıp bir işlem için blok zinciri Gönder MetaMask tarayıcı uzantısı kullanılır. Dağıtma ve Truffle kullanarak bir işlem göndermek için sonraki öğreticiye deneyin.
+Bu hızlı başlangıçta, bir Azure blok zinciri hizmeti işlem düğümüne bağlanmak, akıllı bir sözleşme dağıtmak ve blok zincirine bir işlem göndermek için MetaMask Browser uzantısını kullandınız. Bir işlem aracılığıyla akıllı sözleşme işlevi oluşturmak, derlemek, dağıtmak ve yürütmek için Ethereum ve truffle için Azure blok zinciri geliştirme setini kullanmak üzere bir sonraki öğreticiyi deneyin.
 
 > [!div class="nextstepaction"]
-> [Bir işlem Gönder](send-transaction.md)
+> [Akıllı sözleşmeleri oluşturmak, derlemek ve dağıtmak için Visual Studio Code kullanma](send-transaction.md)

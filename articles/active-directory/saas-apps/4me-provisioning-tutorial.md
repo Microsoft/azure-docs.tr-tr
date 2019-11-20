@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory ile otomatik kullanıcı hazırlama için 4me yapılandırma | Microsoft Docs'
-description: Otomatik olarak sağlama ve sağlamasını 4me kullanıcı hesaplarını Azure Active Directory yapılandırmayı öğrenin.
+title: 'Öğretici: Azure Active Directory ile otomatik Kullanıcı sağlama için 4me yapılandırma | Microsoft Docs'
+description: Kullanıcı hesaplarını 4me 'ye otomatik olarak sağlamak ve sağlamak üzere Azure Active Directory nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationcenter: ''
 author: zchia
@@ -8,167 +8,167 @@ writer: zchia
 manager: beatrizd
 ms.assetid: na
 ms.service: active-directory
-ms.component: saas-app-tutorial
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 06/3/2019
-ms.author: zchia
-ms.openlocfilehash: 0cfd760eb9d631bf6ab098afef0ef9b66c92cfa6
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.author: jeedes
+ms.openlocfilehash: 55aab6546efa323d1ddcd242cf75281c15e8e0e1
+ms.sourcegitcommit: fa45c2bcd1b32bc8dd54a5dc8bc206d2fe23d5fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67168161"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67849650"
 ---
-# <a name="tutorial-configure-4me-for-automatic-user-provisioning"></a>Öğretici: Otomatik kullanıcı hazırlama için 4me yapılandırın
+# <a name="tutorial-configure-4me-for-automatic-user-provisioning"></a>Öğretici: Otomatik Kullanıcı sağlaması için 4me yapılandırma
 
-Bu öğreticinin amacı 4me ve Azure Active Directory (Azure AD) otomatik olarak sağlamak ve kullanıcılara ve/veya gruplara 4me sağlamasını için Azure AD yapılandırmak için gerçekleştirilmesi gereken adımlar göstermektir.
+Bu öğreticinin amacı, Azure AD 'yi, kullanıcıları ve/veya grupları 4me 'ye otomatik olarak sağlamak ve devre dışı bırakmak üzere yapılandırmak için 4me ve Azure Active Directory (Azure AD) içinde gerçekleştirilecek adımları göstermektir.
 
 > [!NOTE]
-> Bu öğreticide, Azure AD kullanıcı sağlama hizmeti üzerinde oluşturulmuş bir bağlayıcı açıklanmaktadır. Bu hizmet yapar, nasıl çalıştığını ve sık sorulan sorular önemli ayrıntılar için bkz. [otomatik kullanıcı hazırlama ve sağlamayı kaldırma Azure Active Directory ile SaaS uygulamalarına](../manage-apps/user-provisioning.md).
+> Bu öğreticide, Azure AD Kullanıcı sağlama hizmeti ' nin üzerine oluşturulmuş bir bağlayıcı açıklanmaktadır. Bu hizmetin ne yaptığını, nasıl çalıştığını ve sık sorulan soruları hakkında önemli ayrıntılar için bkz. [Azure Active Directory Ile SaaS uygulamalarına Kullanıcı sağlamayı ve sağlamayı kaldırmayı otomatikleştirme](../manage-apps/user-provisioning.md).
 >
-> Bu bağlayıcı, şu anda genel Önizleme aşamasındadır. Genel Microsoft Azure için kullanım koşulları Önizleme özellikleri hakkında daha fazla bilgi için bkz. [ek kullanım koşulları, Microsoft Azure önizlemeleri için](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Bu bağlayıcı Şu anda genel önizleme aşamasındadır. Önizleme özellikleri için genel Microsoft Azure kullanım koşulları hakkında daha fazla bilgi için bkz. [Microsoft Azure önizlemeleri Için ek kullanım koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticide özetlenen senaryo, aşağıdaki önkoşulları zaten sahip olduğunuzu varsayar:
+Bu öğreticide özetlenen senaryo, aşağıdaki önkoşulların zaten olduğunu varsayar:
 
-* Azure AD kiracısı
-* [4me Kiracı](https://www.4me.com/trial/)
-* 4me yönetici izinlerine sahip bir kullanıcı hesabı.
+* Bir Azure AD kiracısı
+* [Bir 4me kiracısı](https://www.4me.com/trial/)
+* Yönetici izinleriyle 4me 'de bir kullanıcı hesabı.
 
-## <a name="add-4me-from-the-gallery"></a>Galeriden 4me Ekle
+## <a name="add-4me-from-the-gallery"></a>Galeriden 4me ekleyin
 
-Azure AD ile otomatik kullanıcı hazırlama için 4me yapılandırmadan önce 4me Azure AD uygulama galerisinden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Azure AD ile otomatik Kullanıcı sağlaması için 4me 'yi yapılandırmadan önce Azure AD uygulama galerisindeki 4me 'yi yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**Azure AD uygulama galerisinden 4me eklemek için aşağıdaki adımları gerçekleştirin:**
+**Azure AD Uygulama Galerisi 'nden 4me eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde  **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde seçin **Azure Active Directory**.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory**' i seçin.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Git **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
+2. **Kurumsal uygulamalar**' a gidin ve **tüm uygulamalar**' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni bir uygulama eklemek için seçin **yeni uygulama** bölmenin üstünde düğme.
+3. Yeni bir uygulama eklemek için bölmenin üst kısmındaki **Yeni uygulama** düğmesini seçin.
 
     ![Yeni Uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **4me**seçin **4me** sonuçlar paneli ve ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **4me**girin, sonuçlar panelinde **4me** ' yi seçin ve sonra uygulamayı eklemek için **Ekle** düğmesine tıklayın.
 
-    ![sonuç listesinde 4me](common/search-new-app.png)
+    ![Sonuç listesinde 4me](common/search-new-app.png)
 
-## <a name="assigning-users-to-4me"></a>4me için kullanıcı atama
+## <a name="assigning-users-to-4me"></a>Kullanıcıları 4me 'ye atama
 
-Azure Active Directory kullanan adlı bir kavram *atamaları* hangi kullanıcıların seçilen uygulamalara erişimi alması belirlemek için. Otomatik kullanıcı hazırlama bağlamında, yalnızca kullanıcı ve/veya Azure AD'de bir uygulamaya atanan gruplar eşitlenir.
+Azure Active Directory seçili uygulamalara hangi kullanıcıların erişimi alacağını belirleyen *atama* adı verilen bir kavram kullanır. Otomatik Kullanıcı sağlama bağlamında, yalnızca Azure AD 'de bir uygulamaya atanmış olan kullanıcılar ve/veya gruplar eşitlenir.
 
-Yapılandırma ve otomatik kullanıcı hazırlama etkinleştirmeden önce hangi kullanıcılara ve/veya Azure AD'de grupları 4me erişmesi karar vermeniz gerekir. Karar sonra buradaki yönergeleri izleyerek 4me için bu kullanıcılara ve/veya grupları atayabilirsiniz:
+Otomatik Kullanıcı sağlamayı yapılandırmadan ve etkinleştirmeden önce, Azure AD 'deki hangi kullanıcı ve/veya grupların 4me 'ye erişmesi gerektiğine karar vermeniz gerekir. Karar verdikten sonra buradaki yönergeleri izleyerek bu kullanıcıları ve/veya grupları 4me 'ye atayabilirsiniz:
 
-* [Kurumsal bir uygulamayı kullanıcı veya grup atama](../manage-apps/assign-user-or-group-access-portal.md)
+* [Kurumsal uygulamaya Kullanıcı veya Grup atama](../manage-apps/assign-user-or-group-access-portal.md)
 
-### <a name="important-tips-for-assigning-users-to-4me"></a>Kullanıcılar için 4me atamak için önemli ipuçları
+### <a name="important-tips-for-assigning-users-to-4me"></a>4me 'ye Kullanıcı atamaya yönelik önemli ipuçları
 
-* Önerilir tek bir Azure AD kullanıcı sağlama yapılandırmasını otomatik kullanıcı test etmek için 4me atanır. Ek kullanıcılar ve/veya grupları daha sonra atanabilir.
+* Otomatik Kullanıcı sağlama yapılandırmasını test etmek için tek bir Azure AD kullanıcısının 4me 'ye atanması önerilir. Ek kullanıcılar ve/veya grupları daha sonra atanabilir.
 
-* Bir kullanıcı için 4me atarken, (varsa) geçerli bir uygulamaya özgü rol ataması iletişim kutusunda seçmeniz gerekir. Kullanıcılarla **varsayılan erişim** rol sağlamasından dışlanır.
+* Bir kullanıcıyı 4me 'ye atarken, atama iletişim kutusunda uygulamaya özgü geçerli herhangi bir rolü (varsa) seçmeniz gerekir. **Varsayılan erişim** rolüne sahip kullanıcılar, sağlanmasından çıkarılır.
 
-## <a name="configuring-automatic-user-provisioning-to-4me"></a>4me için otomatik kullanıcı sağlamayı yapılandırma 
+## <a name="configuring-automatic-user-provisioning-to-4me"></a>Otomatik Kullanıcı sağlamayı 4me 'ye yapılandırma 
 
-Bu bölümde oluşturmak, güncelleştirmek ve kullanıcılara ve/veya Azure AD'de kullanıcı ve/veya grup atamaları temel alınarak 4me gruplarında devre dışı bırakmak için Azure AD sağlama hizmeti yapılandırmak için gereken adımları size kılavuzluk eder.
+Bu bölümde, Azure AD sağlama hizmeti 'ni kullanarak Kullanıcı ve/veya grupları Azure AD 'de Kullanıcı ve/veya grup atamalarına göre oluşturma, güncelleştirme ve devre dışı bırakma adımları adım adım kılavuzluk eder.
 
 > [!TIP]
-> Ayrıca SAML tabanlı çoklu oturum açma için 4me, etkinleştirmek sağlanan yönergeleri izleyerek seçebilirsiniz [oturum açma 4me tek öğretici](4me-tutorial.md). Bu iki özellik birbirine tamamlayıcı rağmen otomatik kullanıcı hazırlama bağımsız olarak, çoklu oturum açma yapılandırılabilir.
+> Ayrıca, 4me [Çoklu oturum açma öğreticisinde](4me-tutorial.md)sunulan yönergeleri izleyerek 4ME için SAML tabanlı çoklu oturum açmayı etkinleştirmeyi de tercih edebilirsiniz. Çoklu oturum açma, otomatik Kullanıcı sağlamasından bağımsız olarak yapılandırılabilir, ancak bu iki özellik birbirini karmaşıdirebilirler.
 
-### <a name="to-configure-automatic-user-provisioning-for-4me-in-azure-ad"></a>Azure AD'de 4me için otomatik kullanıcı hazırlama yapılandırmak için:
+### <a name="to-configure-automatic-user-provisioning-for-4me-in-azure-ad"></a>Azure AD 'de 4me için otomatik Kullanıcı sağlamayı yapılandırmak için:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın. Seçin **kurumsal uygulamalar**, ardından **tüm uygulamaları**.
+1. [Azure Portal](https://portal.azure.com) oturum açın. **Kuruluş uygulamaları**' nı seçin ve ardından **tüm uygulamalar**' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **4me**.
+2. Uygulamalar listesinde **4me**' yi seçin.
 
-    ![Uygulamalar listesinde 4me bağlantı](common/all-applications.png)
+    ![Uygulamalar listesindeki 4me bağlantısı](common/all-applications.png)
 
-3. Seçin **sağlama** sekmesi.
+3. **Sağlama** sekmesini seçin.
 
-    ![Sağlama sekmesinde](common/provisioning.png)
+    ![Sağlama sekmesi](common/provisioning.png)
 
-4. Ayarlama **hazırlama modu** için **otomatik**.
+4. **Sağlama modunu** **Otomatik**olarak ayarlayın.
 
-    ![Sağlama sekmesinde](common/provisioning-automatic.png)
+    ![Sağlama sekmesi](common/provisioning-automatic.png)
 
-5. Alınacak **Kiracı URL'si** ve **gizli belirteç** 4me hesabınızı adım 6'da açıklandığı gibi Kılavuzu izleyin.
+5. 4me hesabınızın **kiracı URL 'sini** ve **gizli belirtecini** almak için adım 6 ' da anlatıldığı şekilde izlenecek yolu izleyin.
 
-6. 4me yönetim konsoluna oturum açın. Gidin **ayarları**.
+6. 4me Yönetici konsolunuza oturum açın. **Ayarlar**' a gidin.
 
     ![4me ayarları](media/4me-provisioning-tutorial/4me01.png)
 
-    Yazın **uygulamaları** arama çubuğunda.
+    Arama çubuğuna **uygulamalar** yazın.
 
     ![4me uygulamaları](media/4me-provisioning-tutorial/4me02.png)
 
-    Açık **SCIM** belirteci gizli anahtarı ve SCIM uç noktası almak üzere açılır.
+    Gizli belirteç ve SCıM uç noktasını almak için **SCIM** açılan listesini açın.
 
-    ![4me SCIM](media/4me-provisioning-tutorial/4me03.png)
+    ![4me SCıM](media/4me-provisioning-tutorial/4me03.png)
 
-7. 5\. adımda gösterilen alanlar doldurma üzerine tıklayın **Test Bağlantısı** Azure emin olmak için AD için 4me bağlanabilirsiniz. Bağlantı başarısız olursa 4me hesabınız yönetici izinlerine sahip olduğundan emin olun ve yeniden deneyin.
+7. 5\. adımda gösterilen alanları doldurarak Azure AD 'nin 4me 'ye bağlanabildiğinden emin olmak için **Bağlantıyı Sına** ' ya tıklayın. Bağlantı başarısız olursa, 4me hesabınızın yönetici izinlerine sahip olduğundan emin olun ve yeniden deneyin.
 
     ![Belirteç](common/provisioning-testconnection-tenanturltoken.png)
 
-8. İçinde **bildirim e-posta** alanında, bir kişi veya grubun ve sağlama hata bildirimleri almak - onay e-posta adresi girin **birhataoluşursa,bire-postabildirimigönder**.
+8. **Bildirim e-postası** alanına, sağlama hatası bildirimlerini alması gereken bir kişinin veya grubun e-posta adresini girin ve hata oluştuğunda onay kutusu- **e-posta bildirimi gönder**' i işaretleyin.
 
     ![Bildirim e-postası](common/provisioning-notification-email.png)
 
 9. **Kaydet**’e tıklayın.
 
-10. Altında **eşlemeleri** bölümünden **eşitleme Azure Active Directory Kullanıcıları 4me**.
+10. Eşlemeler bölümünde, **kullanıcıları Azure Active Directory** **eşleme** ' yi seçin.
 
-    ![4me kullanıcı eşlemeleri](media/4me-provisioning-tutorial/4me-user-mapping.png)
+    ![4me Kullanıcı eşlemeleri](media/4me-provisioning-tutorial/4me-user-mapping.png)
     
-11. İçinde 4me için Azure AD'den eşitlenen kullanıcı özniteliklerini gözden **eşleme özniteliği** bölümü. Seçilen öznitelikler **eşleşen** özellikleri 4me güncelleştirme işlemleri için kullanıcı hesaplarını eşleştirmek için kullanılır. Seçin **Kaydet** düğmesine değişiklikleri uygulayın.
+11. **Öznitelik eşleme** bölümünde Azure AD 'den 4me 'ye eşitlenen Kullanıcı özniteliklerini gözden geçirin. **Eşleşen** özellikler olarak seçilen öznitelikler, güncelleştirme işlemleri için 4me 'deki Kullanıcı hesaplarını eşleştirmek için kullanılır. Değişiklikleri uygulamak için **Kaydet** düğmesini seçin.
 
-    ![4me kullanıcı eşlemeleri](media/4me-provisioning-tutorial/4me-user-attributes.png)
+    ![4me Kullanıcı eşlemeleri](media/4me-provisioning-tutorial/4me-user-attributes.png)
     
-12. Altında **eşlemeleri** bölümünden **eşitleme Azure Active Directory gruplarına 4me**.
+12. **Eşlemeler** bölümünde **Azure Active Directory gruplarını 4Me olarak eşitler**' ı seçin.
 
-    ![4me kullanıcı eşlemeleri](media/4me-provisioning-tutorial/4me-group-mapping.png)
+    ![4me Kullanıcı eşlemeleri](media/4me-provisioning-tutorial/4me-group-mapping.png)
     
-13. İçinde 4me için Azure AD'den eşitlenen grup öznitelikleri gözden **eşleme özniteliği** bölümü. Seçilen öznitelikler **eşleşen** özellikleri güncelleştirme işlemleri için 4me gruplarında eşleştirmek için kullanılır. Seçin **Kaydet** düğmesine değişiklikleri uygulayın.
+13. **Öznitelik eşleme** bölümünde Azure AD 'den 4me 'ye eşitlenen grup özniteliklerini gözden geçirin. **Eşleşen** özellikler olarak seçilen öznitelikler, güncelleştirme işlemleri için 4me 'deki grupları eşleştirmek için kullanılır. Değişiklikleri uygulamak için **Kaydet** düğmesini seçin.
 
-    ![4me Grup Eşlemeleri](media/4me-provisioning-tutorial/4me-group-attribute.png)
+    ![4me grup eşlemeleri](media/4me-provisioning-tutorial/4me-group-attribute.png)
 
-14. Kapsam belirleme filtrelerini yapılandırmak için aşağıdaki yönergelere bakın [Scoping filtre öğretici](../manage-apps/define-conditional-rules-for-provisioning-user-accounts.md).
+14. Kapsam filtrelerini yapılandırmak için, [kapsam filtresi öğreticisinde](../manage-apps/define-conditional-rules-for-provisioning-user-accounts.md)sunulan aşağıdaki yönergelere bakın.
 
-15. Azure AD sağlama hizmeti için 4me etkinleştirmek için değiştirin **sağlama durumu** için **üzerinde** içinde **ayarları** bölümü.
+15. Azure AD sağlama hizmetini 4me için etkinleştirmek üzere **Ayarlar** bölümünde **sağlama durumunu** **Açık** olarak değiştirin.
 
-    ![Açıkken sağlama durumu](common/provisioning-toggle-on.png)
+    ![Sağlama durumu değiştirildi](common/provisioning-toggle-on.png)
 
-16. Kullanıcılara ve/veya istediğiniz grupları 4me sağlamak için istenen değerleri seçerek tanımlamak **kapsam** içinde **ayarları** bölümü.
+16. **Ayarlar** bölümünde **kapsamda** istenen değerleri seçerek 4me 'ye sağlamak istediğiniz kullanıcıları ve/veya grupları tanımlayın.
 
-    ![Kapsam sağlama](common/provisioning-scope.png)
+    ![Sağlama kapsamı](common/provisioning-scope.png)
 
-17. Sağlama için hazır olduğunuzda, tıklayın **Kaydet**.
+17. Sağlamaya hazırsanız **Kaydet**' e tıklayın.
 
-    ![Sağlama yapılandırmasını kaydetme](common/provisioning-configuration-save.png)
+    ![Sağlama yapılandırması kaydediliyor](common/provisioning-configuration-save.png)
 
-Bu işlem, tüm kullanıcıların ilk eşitleme başlar ve/veya tanımlı gruplar **kapsam** içinde **ayarları** bölümü. İlk eşitleme yaklaşık 40 dakikada Azure AD sağlama hizmeti çalışıyor sürece oluşan sonraki eşitlemeler uzun sürer. Kullanabileceğiniz **eşitleme ayrıntıları** bölüm ilerlemeyi izlemek ve sağlama hizmeti 4me üzerinde Azure AD tarafından gerçekleştirilen tüm eylemler açıklayan Etkinlik Raporu sağlama için bağlantıları izleyin.
+Bu işlem, **Ayarlar** bölümünde **kapsam** içinde tanımlanan tüm kullanıcılar ve/veya grupların ilk eşitlemesini başlatır. İlk eşitlemenin daha sonra, Azure AD sağlama hizmeti çalıştığı sürece yaklaşık 40 dakikada bir oluşan sonraki eşitlemeler yerine gerçekleştirilmesi daha uzun sürer. İlerleme durumunu izlemek ve Azure AD sağlama hizmeti tarafından gerçekleştirilen tüm eylemleri 4me üzerinde gerçekleştirilen tüm eylemleri açıklayan, sağlama etkinliği raporuna yönelik bağlantıları izlemek için **eşitleme ayrıntıları** bölümünü kullanabilirsiniz.
 
 Azure AD günlüklerini sağlama okuma hakkında daha fazla bilgi için bkz. [hesabı otomatik kullanıcı hazırlama raporlama](../manage-apps/check-status-user-account-provisioning.md).
 
 ## <a name="connector-limitations"></a>Bağlayıcı sınırlamaları
 
-* test ve üretim ortamları için farklı SCIM uç nokta URL'lerini 4me sahiptir. Önceki ile sona erer **.qa** while ikinci biter **.com**
-* oluşturulan 4me gizli dizi belirteçleri, nesil gelen ayın bir sona erme tarihi vardır.
-* 4me desteklemiyor **Sil** işlemleri
+* 4me, test ve üretim ortamları için farklı SCıM uç noktası URL 'Lerine sahiptir. İkincisi,. **com** ile sona erdiğinde **. qa** ile biter
+* 4me üretilen gizli belirteçleri, oluşturma işleminden itibaren bir ayın sona erme tarihine sahiptir.
+* 4me **silme** işlemlerini desteklemiyor
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kullanıcı hesabı, kurumsal uygulamalar için sağlamayı yönetme](../manage-apps/configure-automatic-user-provisioning-portal.md)
+* [Kurumsal uygulamalar için Kullanıcı hesabı sağlamayı yönetme](../manage-apps/configure-automatic-user-provisioning-portal.md)
 * [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Günlükleri gözden geçirin ve sağlama etkinliği raporları alma hakkında bilgi edinin](../manage-apps/check-status-user-account-provisioning.md)
+* [Günlükleri İnceleme ve sağlama etkinliğinde rapor alma hakkında bilgi edinin](../manage-apps/check-status-user-account-provisioning.md)

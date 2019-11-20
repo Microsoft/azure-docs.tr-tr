@@ -1,6 +1,6 @@
 ---
-title: Azure Ağ İzleyicisi özellikleri kullanmak için gerekli izinleri | Microsoft Docs
-description: Ağ İzleyicisi özellikleri ile çalışmak için gereken hangi Azure rol tabanlı erişim denetimi izinleri hakkında bilgi edinin.
+title: Azure ağ Izleyicisi özelliklerini kullanmak için gereken izinler | Microsoft Docs
+description: Ağ Izleyicisi özellikleri ile çalışmak için hangi Azure rol tabanlı erişim denetimi izinlerinin gerekli olduğunu öğrenin.
 services: network-watcher
 documentationcenter: ''
 author: KumudD
@@ -14,108 +14,105 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/10/2018
 ms.author: kumud
-ms.openlocfilehash: 8c8fe6125d9c638fedadc3d299ff0ac0d601fd61
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5bd7e30a6a95d60bda4b7c3da44be1b8046bb71f
+ms.sourcegitcommit: 19a821fc95da830437873d9d8e6626ffc5e0e9d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64685692"
+ms.lasthandoff: 08/29/2019
+ms.locfileid: "70163789"
 ---
-# <a name="role-based-access-control-permissions-required-to-use-network-watcher-capabilities"></a>Ağ İzleyicisi özellikleri kullanmak için gereken rol tabanlı erişim denetimi izinleri
+# <a name="role-based-access-control-permissions-required-to-use-network-watcher-capabilities"></a>Ağ Izleyicisi yeteneklerini kullanmak için gereken rol tabanlı erişim denetimi izinleri
 
-Azure rol tabanlı erişim denetimi (RBAC), yalnızca belirli eylemler atanan sorumluluklarını tamamlamak için gereksinim duydukları kuruluşunuzun üyelerine atamanızı sağlar. Ağ İzleyicisi özellikleri kullanmak için oturum, azure'da kullandığınız hesabın atanmalıdır için [sahibi](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#owner), [katkıda bulunan](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#contributor), veya [ağ Katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#network-contributor) yerleşik roller veya atanmış bir [özel rol](../role-based-access-control/custom-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) aşağıdaki bölümlerde her Ağ İzleyicisi özelliği için listelenen eylemleri atanır. Ağ İzleyicisi'nin özellikleri hakkında daha fazla bilgi edinmek için [Ağ İzleyicisi nedir?](network-watcher-monitoring-overview.md).
+Azure rol tabanlı erişim denetimi (RBAC), kuruluşunuzun kendilerine atanan sorumlulukları tamamlaması için ihtiyaç duydukları üyelere yalnızca belirli eylemleri atamanızı sağlar. Ağ Izleyicisi yeteneklerini kullanmak için, Azure 'da oturum açarken kullandığınız hesap [sahibine](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#owner), [katkıda bulunan](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#contributor)veya [ağ katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#network-contributor) yerleşik rollerine atanmalıdır ya da şuna listelenen eylemlere atanmış [özel bir role](../role-based-access-control/custom-roles.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) atanmalıdır izleyen bölümlerde bulunan her bir ağ Izleyicisi özelliği. Ağ Izleyicisi 'nin özellikleri hakkında daha fazla bilgi edinmek için bkz. [Ağ İzleyicisi nedir?](network-watcher-monitoring-overview.md).
 
 ## <a name="network-watcher"></a>Ağ İzleyicisi
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/read                              | Ağ İzleyicisi Al                                          |
-| Microsoft.Network/networkWatchers/write                             | Ağ İzleyicisi güncelle                             |
-| Microsoft.Network/networkWatchers/delete                            | Ağ İzleyicisini Sil                                       |
+| Microsoft. Network/networkWatchers/Read                              | Ağ İzleyicisi edinme                                          |
+| Microsoft. Network/networkWatchers/Write                             | Ağ İzleyicisi oluşturma veya güncelleştirme                             |
+| Microsoft. Network/networkWatchers/Delete                            | Ağ İzleyicisi silme                                       |
 
 ## <a name="nsg-flow-logs"></a>NSG akış günlükleri
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/configureFlowLog/action           | Günlük akışını yapılandırın                                           |
-| Microsoft.Network/networkWatchers/queryFlowLogStatus/action         | Akış günlüğü için sorgu durumu                                    |
+| Microsoft. Network/networkWatchers/Configuyeniden Akıtılme günlüğü/eylemi           | Akış günlüğü yapılandırma                                           |
+| Microsoft. Network/networkWatchers/queryFlowLogStatus/Action         | Akış günlüğü için sorgu durumu                                    |
 
 ## <a name="connection-troubleshoot"></a>Bağlantı sorunlarını giderme
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/connectivityCheck/action          | Başlatma bağlantı testi sorunlarını giderme
-| Microsoft.Network/networkWatchers/queryTroubleshootResult/action    | Test sorgu sonuçlarının bir bağlantı sorunlarını giderme                |
-| Microsoft.Network/networkWatchers/troubleshoot/action               | Çalıştırma bağlantı testi sorunlarını giderme                             |
+| Microsoft. Network/networkWatchers/connectivityCheck/Action          | Bir bağlantı başlatma test sorunlarını giderme
+| Microsoft. Network/networkWatchers/Querybir TResult/Action    | Bir bağlantının sorgu sonuçları test sorunlarını giderme                |
+| Microsoft. Network/networkWatchers/sorun giderme/eylem               | Bir bağlantı çalıştırın test sorunlarını giderme                             |
 
-## <a name="connection-monitor"></a>Bağlantı İzleyicisi
+## <a name="connection-monitor"></a>Bağlantı izleyicisi
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/connectionMonitors/start/action   | Bağlantı izleyicisini Başlat                                     |
-| Microsoft.Network/networkWatchers/connectionMonitors/stop/action    | Bağlantı izleyicisini durdurmak                                      |
-| Microsoft.Network/networkWatchers/connectionMonitors/query/action   | Sorgu bir bağlantı İzleyicisi                                     |
-| Microsoft.Network/networkWatchers/connectionMonitors/read           | Bağlantı İzleyicisi Al                                       |
-| Microsoft.Network/networkWatchers/connectionMonitors/write          | Bağlantı izleyicisi oluşturma                                    |
-| Microsoft.Network/networkWatchers/connectionMonitors/delete         | Bağlantı izleyicisini Sil                                    |
+| Microsoft. Network/networkWatchers/Connectionizleyicileri/Başlat/eylem   | Bağlantı İzleyicisi başlatma                                     |
+| Microsoft. Network/networkWatchers/Connectionizleyicileri/durdur/eylem    | Bağlantı izleyicisini durdur                                      |
+| Microsoft. Network/networkWatchers/Connectionizleyicileri/sorgu/eylem   | Bağlantı izleyicisini sorgulama                                     |
+| Microsoft. Network/networkWatchers/Connectionmonitörleri/okuma           | Bağlantı İzleyicisi al                                       |
+| Microsoft. Network/networkWatchers/Connectionmonitörleri/yazma          | Bağlantı izleyicisi oluşturma                                    |
+| Microsoft. Network/networkWatchers/Connectionizleyicileri/silme         | Bağlantı izleyicisini silme                                    |
 
-## <a name="packet-capture"></a>Paket yakalama
+## <a name="packet-capture"></a>Paket yakalaması
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/packetCaptures/queryStatus/action | Paket yakalaması durumu sorgu                           |
-| Microsoft.Network/networkWatchers/packetCaptures/stop/action        | Paket Yakalamayı Durdur                                          |
-| Microsoft.Network/networkWatchers/packetCaptures/read               | Paket yakalaması Al                                           |
-| Microsoft.Network/networkWatchers/packetCaptures/write              | Paket Yakalaması oluşturma                                        |
-| Microsoft.Network/networkWatchers/packetCaptures/delete             | bir paket yakalamasını Sil                                        |
+| Microsoft. Network/networkWatchers/Packetyakalamaları/queryStatus/Action | Paket yakalamanın durumunu sorgulama                           |
+| Microsoft. Network/networkWatchers/Packetyakalamaları/durdur/eylem        | Paket yakalamayı durdur                                          |
+| Microsoft. Network/networkWatchers/Packetyakalamaları/Read               | Paket yakalaması alma                                           |
+| Microsoft. Network/networkWatchers/Packetyakalamaları/yazma              | Paket yakalaması oluşturma                                        |
+| Microsoft. Network/networkWatchers/Packetyakalamaları/silme             | Paket yakalamayı silme                                        |
 
 ## <a name="ip-flow-verify"></a>IP akışı doğrulama
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/ipFlowVerify/action               | IP akışı doğrulama                                              |
+| Microsoft. Network/networkWatchers/ipFlowVerify/Action               | Bir IP akışını doğrulama                                              |
 
 ## <a name="next-hop"></a>Sonraki atlama
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/nextHop/action                    | Sonraki atlama bir VM'den Al                                     |
+| Microsoft. Network/networkWatchers/Sonrakii/eylem                    | Bir VM 'den sonraki atlamayı al                                     |
 
 ## <a name="network-security-group-view"></a>Ağ güvenlik grubu görünümü
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/securityGroupView/action          | Güvenlik grupları görüntüleyin                                           |
+| Microsoft. Network/networkWatchers/securityGroupView/Action          | Güvenlik gruplarını görüntüle                                           |
 
 ## <a name="topology"></a>Topoloji
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/topology/action                   | Topoloji Al                                                   |
+| Microsoft. Network/networkWatchers/topoloji/eylem                   | Topolojiyi al                                                   |
 
-## <a name="reachability-report"></a>Erişilebilirlik rapor
+## <a name="reachability-report"></a>Ulaşılabilirlik raporu
 
-| Eylem                                                              | Ad                                                           |
+| Action                                                              | Açıklama                                                           |
 | ---------                                                           | -------------                                                  |
-| Microsoft.Network/networkWatchers/azureReachabilityReport/action    | Bir Azure ulaşılabilirlik rapor alma                               |
+| Microsoft. Network/networkWatchers/azureReachabilityReport/Action    | Azure ulaşılabilirlik raporu alın                               |
 
-## <a name="additional-actions"></a>Ek Eylemler
 
-Ağ İzleyicisi özellikleri, aşağıdaki eylemleri de gerektirir:
+## <a name="additional-actions"></a>Ek eylemler
 
-- Microsoft.Authorization/ \* /okuma
-- Microsoft.Resources/subscriptions/resourceGroups/Read
-- Microsoft.Storage/storageAccounts/Read
-- Microsoft.Storage/storageAccounts/listServiceSas/Action
-- Microsoft.Storage/storageAccounts/listAccountSas/Action
-- Microsoft.Storage/storageAccounts/listKeys/Action
-- Microsoft.Compute/virtualMachines/Read
-- Microsoft.Compute/virtualMachines/Write
-- Microsoft.Compute/virtualMachines/extensions/Read
-- Microsoft.Compute/virtualMachines/extensions/Write
-- Microsoft.Compute/virtualMachineScaleSets/Read
-- Microsoft.Compute/virtualMachineScaleSets/Write
-- Microsoft.Compute/virtualMachineScaleSets/extensions/Read
-- Microsoft.Compute/virtualMachineScaleSets/extensions/Write
-- Microsoft.Insights/alertRules/*
-- Microsoft.Support/*
+Ağ Izleyicisi özellikleri aşağıdaki eylemleri de gerektirir:
+
+| Eylem (ler)                                                           | Açıklama                                                    |
+| ---------                                                           | -------------                                                  |
+| Microsoft. Authorization/\*/Read                                     | RBAC rol atamalarını ve ilke tanımlarını getirmek için kullanılır          |
+| Microsoft. resources/abonelikler/resourceGroups/Read               | Bir abonelikteki tüm kaynak gruplarını listelemek için kullanılır    |
+| Microsoft. Storage/storageAccounts/Read                              | Belirtilen depolama hesabının özelliklerini almak için kullanılır   |
+| Microsoft. Storage/storageAccounts/listServiceSas/eylem, </br> Microsoft. Storage/storageAccounts/listAccountSas/eylem, <br> Microsoft. Storage/storageAccounts/listKeys/Action| [Depolama hesabına güvenli erişim](https://docs.microsoft.com/azure/storage/common/storage-sas-overview) ve depolama hesabına yazma olanağı sağlayan paylaşılan erişim IMZALARıNı (SAS) getirmek için kullanılır |
+| Microsoft. COMPUTE/virtualMachines/Read, </br> Microsoft. COMPUTE/virtualMachines/Write| VM 'de oturum açmak için kullanılan bir paket yakalama yapın ve depolama hesabına yükleyin|
+| Microsoft. COMPUTE/virtualMachines/Extensions/okuma </br> Microsoft. COMPUTE/virtualMachines/uzantılar/Write| Ağ Izleyicisi uzantısının mevcut olup olmadığını denetlemek ve gerekirse yüklemek için kullanılır |
+| Microsoft. COMPUTE/virtualMachineScaleSets/Read, </br> Microsoft. COMPUTE/virtualMachineScaleSets/Write| Sanal makine ölçek kümelerine erişmek için kullanılır, paket yakalar ve depolama hesabına yükler|
+| Microsoft. COMPUTE/virtualMachineScaleSets/Extensions/Read, </br> Microsoft. COMPUTE/virtualMachineScaleSets/Extensions/Write| Ağ Izleyicisi uzantısının mevcut olup olmadığını denetlemek ve gerekirse yüklemek için kullanılır |
+| Microsoft.Insights/alertRules/*                                     | Ölçüm uyarılarını ayarlamak için kullanılır                                     |
+| Microsoft. support/*                                                 | Ağ izleyicisinden destek bileti oluşturmak ve güncelleştirmek için kullanılır |

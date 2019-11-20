@@ -1,140 +1,140 @@
 ---
-title: Hortonworks korumalı alanı - Azure HDInsight ile Visual Studio için Data Lake araçları
-description: Azure Data Lake araçları, yerel bir VM'de çalışan Hortonworks korumalı alanı ile Visual Studio için kullanmayı öğrenin. Bu araçlarla oluşturun ve korumalı alan ve görünüm iş çıktısının ve geçmiş Hive ve Pig işleri çalıştırma.
+title: Visual Studio için Data Lake araçları & Hortonçalışmalar-Azure HDInsight
+description: Yerel bir VM 'de çalışan Hortonrunning korumalı alanı ile Visual Studio için Azure Data Lake araçları 'nı nasıl kullanacağınızı öğrenin. Bu araçlarla, Hive ve Pig işlerini sanal alanda oluşturup çalıştırabilir ve iş çıktısını ve geçmişini görüntüleyebilirsiniz.
 author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 05/07/2018
-ms.author: hrasheed
-ms.openlocfilehash: 3286ca3b9c85236ff322eb19324bc5ac7a904e22
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e128aaf6e1726b7a1341fefc6df3cdafd3beb880
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65605442"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73500161"
 ---
-# <a name="use-the-azure-data-lake-tools-for-visual-studio-with-the-hortonworks-sandbox"></a>Hortonworks korumalı alanı ile Visual Studio için Azure Data Lake Araçları'nı kullanın
+# <a name="use-the-azure-data-lake-tools-for-visual-studio-with-the-hortonworks-sandbox"></a>Hortonçalışmalar korumalı alanı ile Visual Studio için Azure Data Lake araçları 'nı kullanma
 
-Azure Data Lake genel Apache Hadoop kümeleriyle çalışmaya yönelik araçlar içerir. Bu belgede, yerel bir sanal makinede çalışan Hortonworks korumalı alanı ile Data Lake araçları kullanmak için atılması gereken adımları sağlar.
+Azure Data Lake, genel Apache Hadoop kümeleriyle çalışmaya yönelik araçlar içerir. Bu belge, yerel bir sanal makinede çalışan Hortonrunning korumalı alanı ile Data Lake araçlarını kullanmak için gereken adımları sağlar.
 
-Hortonworks korumalı alanı kullanarak Hadoop ile yerel olarak üzerinde geliştirme ortamınızı çalışmanıza olanak sağlar. Bir HDInsight kümesine, sonra çözüm geliştirmiş ve ölçekli olarak dağıtmak istediğiniz sonra taşıyabilirsiniz.
+Hortonçalışmalar korumalı alanının kullanılması, geliştirme ortamınızda yerel olarak Hadoop ile çalışmanıza olanak sağlar. Bir çözüm geliştirdikten ve ölçeği ölçekli olarak dağıtmak istediğinizde, bir HDInsight kümesine geçebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Hortonworks üzerinde geliştirme ortamınızı bir sanal makinede çalışan korumalı alanı. Bu belge yazılan ve Oracle VirtualBox içinde çalışan korumalı alanı ile test. Korumalı alan ayarlama hakkında daha fazla bilgi için bkz. [Hortonworks sandbox ile kullanmaya başlayın.](hadoop/apache-hadoop-emulator-get-started.md) Belge.
+* Geliştirme ortamınızdaki bir sanal makinede çalışan Hortonrunning korumalı alanı. Bu belge, Oracle VirtualBox 'da çalışan korumalı alanda yazılmıştır ve test edilmiştir. Korumalı alanı ayarlama hakkında daha fazla bilgi için bkz [. Hortonçalışmalarla çalışmaya başlama alanı.](hadoop/apache-hadoop-emulator-get-started.md) belgedeki.
 
 * Visual Studio.
 
-* [.NET için Azure SDK'sı](https://azure.microsoft.com/downloads/) 2.7.1 veya üzeri.
+* .NET 2.7.1 veya üzeri [Için Azure SDK](https://azure.microsoft.com/downloads/) .
 
-* [Visual Studio için Azure Data Lake Araçları](https://www.microsoft.com/download/details.aspx?id=49504).
+* [Visual Studio için Azure Data Lake araçları](https://www.microsoft.com/download/details.aspx?id=49504).
 
-## <a name="configure-passwords-for-the-sandbox"></a>Korumalı alan için parolaları yapılandırın
+## <a name="configure-passwords-for-the-sandbox"></a>Korumalı alan için parolaları yapılandırma
 
-Hortonworks korumalı alanı çalıştığından emin olun. Ardından adımları [Hortonworks korumalı alanı içinde kullanmaya başlayın](hadoop/apache-hadoop-emulator-get-started.md#set-sandbox-passwords) belge. Bu adımları, SSH için parolayı yapılandırmak `root` hesabı ve Apache Ambari `admin` hesabı. Bu parolalar, korumalı alan Visual Studio'dan bağlandığınızda kullanılır.
+Hortonçalışmalar korumalı alanının çalıştığından emin olun. Ardından, [Horton, çalışma alanı belgesinde kullanmaya başlama](hadoop/apache-hadoop-emulator-get-started.md#set-sandbox-passwords) bölümündeki adımları izleyin. Bu adımlar SSH `root` hesabının parolasını ve Apache ambarı `admin` hesabını yapılandırır. Bu parolalar, Visual Studio 'dan korumalı alana bağlandığınızda kullanılır.
 
-## <a name="connect-the-tools-to-the-sandbox"></a>Korumalı alan araçları bağlanma
+## <a name="connect-the-tools-to-the-sandbox"></a>Araçları korumalı alana bağlama
 
-1. Visual Studio'yu açın, **görünümü**ve ardından **Sunucu Gezgini**.
+1. Visual Studio 'yu açın, **Görünüm**' ü seçin ve ardından **Sunucu Gezgini**' yi seçin.
 
-2. Gelen **Sunucu Gezgini**, sağ **HDInsight** giriş tıklayın ve ardından **HDInsight öykünücüsü Bağlan**.
+2. **Sunucu Gezgini**, **HDInsight** girdisini sağ tıklatın ve ardından **HDInsight Emulator 'a Bağlan**' ı seçin.
 
-    ![Vurgulanan Gezgini'nin ekran görüntüsü Server ile HDInsight öykünücüsü Bağlan](./media/hdinsight-hadoop-emulator-visual-studio/connect-emulator.png)
+    ![Sunucu Gezgini, HDInsight Emulator 'a bağlanma vurgulandı](./media/hdinsight-hadoop-emulator-visual-studio/connect-hdinsight-emulator.png)
 
-3. Gelen **HDInsight öykünücüsü Bağlan** iletişim kutusunda, Ambari için yapılandırdığınız parolayı girin.
+3. **HDInsight öykünücüsüne Bağlan** iletişim kutusuna, ambarı için yapılandırdığınız parolayı girin.
 
-    ![Parola metin kutusu vurgulanmış iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/enter-ambari-password.png)
-
-    Devam etmek için **İleri**’yi seçin.
-
-4. Kullanım **parola** için yapılandırdığınız parolayı girmek için alan `root` hesabı. Diğer alanları varsayılan değerde bırakın.
-
-    ![Parola metin kutusu vurgulanmış iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/enter-root-password.png)
+    ![Ambarı parolası metin kutusu vurgulanmış iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/enter-ambari-password.png)
 
     Devam etmek için **İleri**’yi seçin.
 
-5. Doğrulama hizmetleri tamamlanması için bekleyin. Bazı durumlarda, doğrulama başarısız ve yapılandırmasını güncelleştirmek için ister. Doğrulama başarısız olursa, seçin **güncelleştirme**, yapılandırma ve doğrulama hizmeti tamamlanması için bekleyin.
+4. `root` hesabı için yapılandırdığınız parolayı girmek için **parola** alanını kullanın. Diğer alanları varsayılan değerde bırakın.
 
-    ![Güncelleştirme düğmesi vurgulanan iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/fail-and-update.png)
+    ![Kök parola metin kutusu vurgulanmış iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/enter-root-password1.png)
+
+    Devam etmek için **İleri**’yi seçin.
+
+5. Hizmetlerin doğrulanmasının bitmesini bekleyin. Bazı durumlarda, doğrulama başarısız olabilir ve yapılandırmayı güncelleştirmenizi isteyebilir. Doğrulama başarısız olursa **Güncelleştir**' i seçin ve hizmetin bitmesini ve doğrulanması için bekleyin.
+
+    ![Güncelleştirme düğmesi vurgulanmış şekilde iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/fail-and-update-window.png)
 
     > [!NOTE]  
-    > Güncelleştirme işlemi, Visual Studio için Data Lake araçları tarafından beklenen Hortonworks korumalı alanı yapılandırmasını değiştirmek için Ambari kullanır.
+    > Güncelleştirme işlemi, Hortonçalışmalar korumalı alanı yapılandırmasını Visual Studio için Data Lake araçları tarafından beklenildiği şekilde değiştirmek için ambarı kullanır.
 
-6. Doğrulama tamamlandıktan sonra seçin **son** yapılandırmayı tamamlamak için.
-    ![Son düğmesi vurgulanan iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/finished-connect.png)
+6. Doğrulama bittikten sonra, yapılandırmayı tamamladıktan sonra **son** ' u seçin.
+    Son düğme vurgulanmış şekilde iletişim kutusunun ![ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/finished-connect-dialog.png)
 
      >[!NOTE]  
-     > Geliştirme ortamı ve sanal makineye ayrılan bellek miktarını hızına bağlı olarak, uygulamanın yapılandırma ve doğrulama hizmetleri için birkaç dakika sürebilir.
+     > Geliştirme ortamınızın hızına ve sanal makineye ayrılan bellek miktarına bağlı olarak, hizmetleri yapılandırmak ve doğrulamak birkaç dakika sürebilir.
 
-Bu adımları uyguladıktan sonra artık sahip olduğunuz bir **HDInsight yerel küme** Sunucu Gezgini giriş altında **HDInsight** bölümü.
+Bu adımları tamamladıktan sonra, **HDInsight** bölümü altında Sunucu Gezgini bir **HDInsight yerel küme** girişi vardır.
 
-## <a name="write-an-apache-hive-query"></a>Apache Hive sorgusu Yaz
+## <a name="write-an-apache-hive-query"></a>Apache Hive bir sorgu yazın
 
-Hive, yapılandırılmış verilerle çalışmaya yönelik bir SQL benzeri bir sorgu dili (HiveQL) sağlar. Yerel kümede isteğe bağlı sorguları çalıştırma hakkında bilgi edinmek için aşağıdaki adımları kullanın.
+Hive yapılandırılmış verilerle çalışmak için SQL benzeri bir sorgu dili (HiveQL) sağlar. İsteğe bağlı sorguları yerel kümede çalıştırmayı öğrenmek için aşağıdaki adımları kullanın.
 
-1. İçinde **Sunucu Gezgini**, daha önce eklemiş olduğunuz yerel küme için girişe sağ tıklayın ve ardından **Hive sorgusu yaz**.
+1. **Sunucu Gezgini**' de, daha önce eklediğiniz yerel kümenin girişine sağ tıklayın ve ardından **Hive sorgusu yaz**' ı seçin.
 
-    ![Gezgini'nin ekran görüntüsü sunucusu ile vurgulanmış bir Hive sorgusu Yaz](./media/hdinsight-hadoop-emulator-visual-studio/write-hive-query.png)
+    ![Hive sorgusu yazma vurgulanmış Sunucu Gezgini ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/write-apache-hive-query.png)
 
-    Yeni bir sorgu penceresi görüntülenir. Hızla yapabilirsiniz buradan yazma ve sorgu yerel kümeye gönderme.
+    Yeni bir sorgu penceresi görüntülenir. Burada, yerel kümeye hızlı bir şekilde bir sorgu yazabilir ve gönderebilirsiniz.
 
-2. Yeni Sorgu penceresinde aşağıdaki komutu girin:
+2. Yeni sorgu penceresinde, aşağıdaki komutu girin:
 
         select count(*) from sample_08;
 
-    Sorguyu çalıştırmak için seçin **Gönder** pencerenin üst kısmındaki. Diğer değerleri bırakın (**Batch** ve sunucu adı) varsayılan değerlerinde.
+    Sorguyu çalıştırmak için pencerenin üst kısmında **Gönder** ' i seçin. Varsayılan değerlerde diğer değerleri (**Batch** ve sunucu adı) bırakın.
 
-    ![Gönder düğmesi ile sorgu penceresinin ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/submit-hive.png)
+    ![Gönder düğmesi vurgulanmış şekilde sorgu penceresinin ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/query-window-submit-hive.png)
 
-    Aşağı açılan menüsünün yanındaki kullanabilirsiniz **Gönder** seçilecek **Gelişmiş**. Gelişmiş seçenekleri, işi gönderdiğinizde, ek seçenekler sağlar olanak tanır.
+    **Gelişmiş**' i seçmek için **Gönder** ' in yanındaki açılan menüyü de kullanabilirsiniz. Gelişmiş Seçenekler işi gönderdiğinizde ek seçenekler sağlamanıza olanak tanır.
 
-    ![Ekran görüntüsü, betiği Gönder iletişim kutusu](./media/hdinsight-hadoop-emulator-visual-studio/advanced-hive.png)
+    ![Betik Gönder iletişim kutusu Hive ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/advanced-apache-hive.png)
 
-3. Sorgu gönderdikten sonra iş durumu görüntülenir. Hadoop tarafından işlendiği iş durumunu işle ilgili bilgileri görüntüler. **İş durumu** işinin durumunu sağlar. Durumu düzenli olarak güncelleştirilir ve durumu el ile yenilemek için yenile simgesini kullanın.
+3. Sorguyu gönderdikten sonra, iş durumu görüntülenir. İş durumu, Hadoop tarafından işlendiği gibi iş hakkındaki bilgileri görüntüler. **Iş durumu** işin durumunu sağlar. Durum düzenli olarak güncelleştirilir veya yenileme simgesini kullanarak durumu el ile yenileyebilirsiniz.
 
-    ![İş görünümü ekran iletişim kutusunda vurgulanan iş durumu](./media/hdinsight-hadoop-emulator-visual-studio/job-state.png)
+    ![İş durumu vurgulanmış şekilde Iş görünümü iletişim kutusunun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/job-view-dialog-box1.png)
 
-    Sonra **iş durumu** değişikliklerini **tamamlandı**, yönlendirilmiş Çevrimsiz graf (DAG) görüntülenir. Bu şema tarafından Tez Hive sorgusu işlenirken belirlendi yürütme yolunu açıklar. Tez Hive için varsayılan yürütme altyapısı yerel kümedeki ' dir.
-
-    > [!NOTE]  
-    > Linux tabanlı HDInsight kümeleri kullanılırken Apache Tez ayrıca varsayılandır. Varsayılan olarak Windows tabanlı HDInsight değil. Bunu kullanmak için satırın eklemelisiniz `set hive.execution.engine = tez;` Hive sorgunuzu başlangıcına.
-
-    Kullanım **iş çıktısı** çıkışı görüntülemek için bağlantı. Bu durumda, 823, sample_08 tablodaki satır sayısını gösterir. İşle ilgili tanılama bilgilerini kullanarak görüntüleyebileceğiniz **iş günlüğü** ve **YARN günlüğünü indirmek** bağlantıları.
-
-4. Ayrıca Hive işlerini etkileşimli olarak değiştirerek çalıştırabileceğiniz **Batch** alanı **etkileşimli**. Ardından **yürütme**.
-
-    ![Vurgulanan etkileşimli ekran görüntüsü ve yürütme düğmeleri](./media/hdinsight-hadoop-emulator-visual-studio/interactive-query.png)
-
-    Etkileşimli bir sorgu işleme sırasında üretilen çıkış günlüğü akışları **HiveServer2 çıkış** penceresi.
+    **Iş durumu** **tamamlandı**olarak değiştirildikten sonra, yönlendirilmiş bir ÇEVRIMSIZ Graf (DAG) görüntülenir. Bu diyagram, Hive sorgusu işlenirken tez tarafından belirlenen yürütme yolunu açıklar. Tez, yerel kümedeki Hive için varsayılan yürütme altyapısıdır.
 
     > [!NOTE]  
-    > Kullanılabilir aynı bilgilerdir **iş günlüğü** bir işi tamamlandıktan sonra bağlantı.
+    > Linux tabanlı HDInsight kümeleri kullanırken Apache Tez de varsayılandır. Windows tabanlı HDInsight 'ta varsayılan değildir. Burada kullanmak için, Hive sorgunuzun başlangıcına satır `set hive.execution.engine = tez;` eklemeniz gerekir.
 
-    ![Çıkış günlüğü görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/hiveserver2-output.png)
+    Çıktıyı görüntülemek için **Iş çıkışı** bağlantısını kullanın. Bu durumda, sample_08 tablosundaki satır sayısı 823 ' dir. İş **günlüğünü** kullanarak iş hakkında tanılama bilgilerini görüntüleyebilir ve **Yarn günlük bağlantılarını indirebilirsiniz** .
 
-## <a name="create-a-hive-project"></a>Bir Hive projesi oluşturma
+4. **Toplu iş** alanını **etkileşimli**olarak değiştirerek Hive işlerini etkileşimli olarak da çalıştırabilirsiniz. Ardından **Yürüt**' ü seçin.
 
-Ayrıca, birden çok Hive betiklerini içeren bir proje oluşturabilirsiniz. İlgili betikleri veya bir sürüm denetim sisteminde betikleri depolamak istediğiniz proje kullanırsınız.
+    ![Etkileşimli ve yürütme düğmelerinin vurgulandığı ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/hdi-interactive-query.png)
 
-1. Visual Studio'da **dosya**, **yeni**, ardından **proje**.
+    Etkileşimli bir sorgu, işleme sırasında oluşturulan çıkış günlüğünü **HiveServer2 çıkış** penceresine akıp.
 
-2. Projelerin listesinden genişletin **şablonları**, genişletme **Azure Data Lake**ve ardından **HIVE (HDInsight)** . Şablonlar listesinden **örnek Hive**. Bir ad ve konum girin ve ardından **Tamam**.
+    > [!NOTE]  
+    > Bilgi, iş bittikten sonra **Iş günlüğü** bağlantısından kullanılabilir.
 
-    ![Yeni Proje ekran penceresiyle Azure Data Lake, HIVE, örnek Hive ve Tamam'ı vurgulanmış](./media/hdinsight-hadoop-emulator-visual-studio/new-hive-project.png)
+    ![HiveServer2 çıktısının ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/hiveserver2-output-box.png)
 
-**Örnek Hive** projesini içeren iki komut **WebLogAnalysis.hql** ve **SensorDataAnalysis.hql**. Bu komut dosyalarını aynı kullanarak gönderebilirsiniz **Gönder** pencerenin üstünde düğme.
+## <a name="create-a-hive-project"></a>Hive projesi oluşturma
 
-## <a name="create-an-apache-pig-project"></a>Apache Pig projesi oluşturun
+Ayrıca, birden çok Hive komut dosyası içeren bir proje da oluşturabilirsiniz. İlgili betikleriniz varsa veya komut dosyalarını bir sürüm denetim sisteminde depolamak istediğinizde bir proje kullanın.
 
-Pig, Hive, yapılandırılmış verilerle çalışmak için SQL benzeri bir dil sağlarken, verilerinizde dönüşümler gerçekleştirerek çalışır. Pig, bir işlem hattı dönüşümlerinin geliştirmenize olanak veren bir dili (Pig Latin) sağlar. Yerel küme ile pig kullanma için bu adımları izleyin:
+1. Visual Studio 'da **Dosya**, **Yeni**ve ardından **Proje**' yi seçin.
 
-1. Visual Studio'yu açın ve seçin **dosya**, **yeni**, ardından **proje**. Projelerin listesinden genişletin **şablonları**, genişletme **Azure Data Lake**ve ardından **Pig (HDInsight)** . Şablonlar listesinden **Pig uygulama**. Konum, bir ad girin ve ardından **Tamam**.
+2. Projeler listesinden **Şablonlar**' ı genişletin, **Azure Data Lake**' ı genişletin ve **HIVE (HDInsight)** öğesini seçin. Şablon listesinden **Hive örneği**' ni seçin. Bir ad ve konum girip **Tamam**' ı seçin.
 
-    ![Yeni Proje ekran penceresiyle Azure Data Lake, Pig, Pig uygulama ve Tamam'ı vurgulanmış](./media/hdinsight-hadoop-emulator-visual-studio/new-pig.png)
+    ![Azure Data Lake, Hive örneği ve Tamam ile yeni proje penceresi](./media/hdinsight-hadoop-emulator-visual-studio/new-apache-hive-project.png)
 
-2. Aşağıdaki metni içeriğini girin **script.pig** bu projeyle oluşturulan dosya.
+**Hive örnek** projesi iki komut dosyası Içerir, **webloganalysis. HQL** ve **sensordataanalysis. HQL**. Pencerenin üst kısmındaki **Gönder** düğmesini kullanarak bu betikleri gönderebilirsiniz.
+
+## <a name="create-an-apache-pig-project"></a>Apache Pig projesi oluşturma
+
+Hive, yapılandırılmış verilerle çalışmak için SQL benzeri bir dil sağlarken, Pig veriler üzerinde dönüşümler gerçekleştirerek çalışır. Pig, bir dönüştürme işlem hattı geliştirmenize olanak sağlayan bir dil (Pig Latin) sağlar. Yerel küme ile Pig kullanmak için şu adımları izleyin:
+
+1. Visual Studio 'yu açın ve **Dosya**, **Yeni**ve ardından **Proje**' yi seçin. Projeler listesinden **Şablonlar**' ı genişletin, **Azure Data Lake**' ı genişletin ve ardından **Pig (HDInsight)** öğesini seçin. Şablonlar listesinden **Pig uygulaması**' nı seçin. Bir ad ve konum girin ve **Tamam**' ı seçin.
+
+    ![Azure Data Lake, Pig, Pig uygulaması ve Tamam vurgulanmış yeni proje penceresinin ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/new-apche-pig-project.png)
+
+2. Bu projeyle oluşturulan **Script. Pig** dosyasının içeriği olarak aşağıdaki metni girin.
 
         a = LOAD '/demo/data/Website/Website-Logs' AS (
             log_id:int,
@@ -147,57 +147,57 @@ Pig, Hive, yapılandırılmış verilerle çalışmak için SQL benzeri bir dil 
         c = GROUP b BY ip_address;
         DUMP c;
 
-    Pig, Hive farklı bir dil kullanırken, işlerin nasıl çalıştırdığınız her iki dil arasında tutarlı aracılığıyla **Gönder** düğmesi. Yanındaki açılan seçerek **Gönder** için Pig bir Gelişmiş Gönder iletişim kutusu görüntüler.
+    Pig, Hive 'den farklı bir dil kullandığında, işleri nasıl çalıştıracağınız, **Gönder** düğmesi aracılığıyla her iki dil arasında tutarlıdır. **Gönder** ' in yanındaki açılan kutuyu seçtiğinizde, Pig için bir Gelişmiş gönderme iletişim kutusu görüntülenir.
 
-    ![Ekran görüntüsü, betiği Gönder iletişim kutusu](./media/hdinsight-hadoop-emulator-visual-studio/advanced-pig.png)
+    ![Betik Gönder iletişim kutusunun ekran görüntüsü Pig](./media/hdinsight-hadoop-emulator-visual-studio/advanced-apache-pig1.png)
 
-3. İş durumunu ve çıkışını de görüntülenir, Hive sorgusu ile aynı.
+3. İş durumu ve çıkışı Ayrıca bir Hive sorgusuyla aynı şekilde görüntülenir.
 
-    ![Tamamlanmış bir Pig işi ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/completed-pig.png)
+    ![Tamamlanmış bir Pig işinin ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/completed-apache-pig.png)
 
 ## <a name="view-jobs"></a>İşleri görüntüle
 
-Data Lake araçları kolayca, Hadoop üzerinde çalışan işleri hakkında bilgileri görüntülemenizi sağlar. Yerel küme üzerinde çalıştırılır işleri görmek için aşağıdaki adımları kullanın.
+Data Lake araçları ayrıca Hadoop 'ta çalıştırılan işlerle ilgili bilgileri kolayca görüntülemenizi sağlar. Yerel kümede çalıştırılmış işleri görmek için aşağıdaki adımları kullanın.
 
-1. Gelen **Sunucu Gezgini**yerel kümeye sağ tıklayın ve ardından **işleri görüntüle**. Kümesine gönderilen işler listesi görüntülenir.
+1. **Sunucu Gezgini**, yerel kümeye sağ tıklayın ve ardından **işleri görüntüle**' yi seçin. Kümeye gönderilen işlerin bir listesi görüntülenir.
 
-    ![Gezgini'nin ekran görüntüsü sunucusu ile vurgulanmış işleri görüntüle](./media/hdinsight-hadoop-emulator-visual-studio/view-jobs.png)
+    ![Görünüm Işleri vurgulanmış şekilde Sunucu Gezgini ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/server-explorer-view-jobs.png)
 
-2. İşleri listesinden bir iş ayrıntılarını görüntülemek için seçin.
+2. İş listesinden, iş ayrıntılarını görüntülemek için bir tane seçin.
 
-    ![Ekran görüntüsü, iş, tarayıcı vurgulanmış işlerden biri](./media/hdinsight-hadoop-emulator-visual-studio/view-job-details.png)
+    ![Iş tarayıcısının, her biri vurgulanmış işlerin ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/hdi-view-job-details.png)
 
-    Çıkışı görüntülemek ve bilgi günlük bağlantılar dahil olmak üzere bir Hive veya Pig sorgu çalıştırdıktan sonra gördüğünüz üzere görüntülenen bilgileri benzerdir.
+    Görüntülenecek bilgiler, çıktı ve günlük bilgilerini görüntüleme bağlantıları dahil olmak üzere Hive veya Pig sorgusu çalıştırdıktan sonra gördüklerinize benzer.
 
-3. Ayrıca, değiştirebilir ve buradan işi yeniden gönderin.
+3. Ayrıca işi değiştirebilir ve buradan yeniden gönderebilirsiniz.
 
-## <a name="view-hive-databases"></a>Hive veritabanları görüntüleyin
+## <a name="view-hive-databases"></a>Hive veritabanlarını görüntüle
 
-1. İçinde **Sunucu Gezgini**, genişletme **HDInsight yerel küme** girişi ve ardından **Hive veritabanları**. **Varsayılan** ve **xademo** veritabanları alan yerel kümede görüntülenir. Bir veritabanını genişletmek, veritabanındaki tabloları gösterir.
+1. **Sunucu Gezgini**, **HDInsight yerel küme** girişini genişletin ve **Hive veritabanları**' nı genişletin. Yerel kümedeki **varsayılan** ve **xademo** veritabanları görüntülenir. Bir veritabanını genişletmek, veritabanının içindeki tabloları gösterir.
 
-    ![Sunucu Gezgini ekran veritabanları ile genişletilmiş](./media/hdinsight-hadoop-emulator-visual-studio/expanded-databases.png)
+    ![Veritabanları genişletilmiş Sunucu Gezgini ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/expanded-databases-view.png)
 
-2. Bir tablo genişleterek bu tablonun sütunlarını görüntüler. Verileri hızlıca görüntülemek için bir tablo sağ tıklatın ve seçin **ilk 100 satırı görüntüle**.
+2. Bir tablonun genişletilmesi, bu tablo için sütunları görüntüler. Verileri hızlı bir şekilde görüntülemek için bir tabloya sağ tıklayın ve **ilk 100 satırı görüntüle**' yi seçin.
 
-    ![Gezgini'nin ekran görüntüsü sunucu Genişletilmiş Tablo ve Görünüm ilk 100 satırı seçili](./media/hdinsight-hadoop-emulator-visual-studio/view-100.png)
+    ![Sunucu Gezgini, tablo genişletilmiş ve en üstteki 100 satırları görüntüleme seçili](./media/hdinsight-hadoop-emulator-visual-studio/hdi-view-top-100-rows.png)
 
 ### <a name="database-and-table-properties"></a>Veritabanı ve tablo özellikleri
 
-Bir veritabanı veya tablo özelliklerini görüntüleyebilirsiniz. Seçme **özellikleri** Özellikler penceresinde seçilen öğenin ayrıntılarını görüntüler. Örneğin, aşağıdaki ekran görüntüsünde gösterilen bilgiler bakın:
+Bir veritabanının veya tablonun özelliklerini görüntüleyebilirsiniz. **Özellikler** ' i seçmek, Özellikler penceresinde seçili öğenin ayrıntılarını görüntüler. Örneğin, aşağıdaki ekran görüntüsünde gösterilen bilgilere bakın:
 
-![Ekran görüntüsü, Özellikler penceresi](./media/hdinsight-hadoop-emulator-visual-studio/properties.png)
+![Özellikler penceresi ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/hdi-properties-window.png)
 
 ### <a name="create-a-table"></a>Bir tablo oluşturma
 
-Bir tablo oluşturmak için bir veritabanına sağ tıklayın ve ardından **Create Table**.
+Bir tablo oluşturmak için, bir veritabanına sağ tıklayın ve ardından **tablo oluştur**' u seçin.
 
-![Gezgini'nin ekran görüntüsü sunucusu ile vurgulanmış Tablo Oluştur](./media/hdinsight-hadoop-emulator-visual-studio/create-table.png)
+![Tablo oluştur vurgulanarak Sunucu Gezgini ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/server-explorer-create-table.png)
 
-Ardından, formu kullanarak tablo oluşturabilirsiniz. Aşağıdaki ekran görüntüsünde sayfanın en tablo oluşturmak için kullanılan ham HiveQL görebilirsiniz.
+Daha sonra formu kullanarak tablo oluşturabilirsiniz. Aşağıdaki ekran görüntüsünün en altında, tabloyu oluşturmak için kullanılan ham HiveQL ' yi görebilirsiniz.
 
-![Bir tablo oluşturmak için kullanılan biçiminde ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/create-table-form.png)
+![Tablo oluşturmak için kullanılan formun ekran görüntüsü](./media/hdinsight-hadoop-emulator-visual-studio/create-table-form-box.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Hortonworks korumalı alanı işin öğrenme](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-* [Apache Hadoop Öğreticisi - HDP ile çalışmaya başlama](https://hortonworks.com/hadoop-tutorial/hello-world-an-introduction-to-hadoop-hcatalog-hive-and-pig/)
+* [Hortonçalışmalar korumalı alanının servis 'i öğrenme](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+* [Apache Hadoop öğreticisi-HDP ile çalışmaya başlama](https://hortonworks.com/hadoop-tutorial/hello-world-an-introduction-to-hadoop-hcatalog-hive-and-pig/)

@@ -1,110 +1,107 @@
 ---
-title: Öğretici - yerel istemci uygulaması kimlik doğrulaması etkinleştirme - Azure Active Directory B2C | Microsoft Docs
-description: .NET Masaüstü uygulama için kullanıcının oturum açmasını sağlamak için Azure Active Directory B2C kullanma Öğreticisi.
+title: Öğretici-yerel istemci uygulamasındaki kullanıcıların kimliğini doğrulama-Azure Active Directory B2C
+description: .NET masaüstü uygulaması için Kullanıcı oturum açma bilgilerini sağlamak üzere Azure Active Directory B2C kullanma hakkında öğretici.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
 ms.author: marsma
-ms.date: 02/04/2019
+ms.date: 10/12/2019
 ms.custom: mvc
 ms.topic: tutorial
 ms.service: active-directory
 ms.subservice: B2C
-ms.openlocfilehash: 474aad3b4b2019c9f79f8f1316dd88769e0fabbd
-ms.sourcegitcommit: adb6c981eba06f3b258b697251d7f87489a5da33
+ms.openlocfilehash: cd0fc90988048f98be46370d2c7836d9506cc44a
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66508211"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73475296"
 ---
-# <a name="tutorial-enable-authentication-in-a-native-client-application-using-azure-active-directory-b2c"></a>Öğretici: Azure Active Directory B2C kullanarak bir yerel istemci uygulaması ile kimlik doğrulamasını etkinleştirin
+# <a name="tutorial-authenticate-users-in-a-native-desktop-client-using-azure-active-directory-b2c"></a>Öğretici: Azure Active Directory B2C kullanarak yerel masaüstü istemcisinde kullanıcıların kimliğini doğrulama
 
-Bu öğreticide, bir Windows Presentation Foundation (WPF) masaüstü uygulamasında kullanıcının oturumunu açmak ve kullanıcıyı kaydetmek için Azure Active Directory (Azure AD) B2C’nin nasıl kullanılacağı gösterilir. Azure AD B2C, uygulamalarınızın sosyal medya hesaplarını, Kurumsal hesaplarda ve Azure Active Directory hesaplarını açık standart protokoller kullanarak kimlik doğrulaması sağlar.
+Bu öğreticide, bir Windows Presentation Foundation (WPF) masaüstü uygulamasında Kullanıcı oturumu açmak ve kullanıcılara kaydolmak için Azure Active Directory B2C (Azure AD B2C) nasıl kullanılacağı gösterilmektedir. Azure AD B2C, uygulamalarınızın, açık standart protokoller kullanarak sosyal hesaplar, kurumsal hesaplar ve Azure Active Directory hesaplar için kimlik doğrulaması yapmasına olanak sağlar.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Yerel istemci uygulaması Ekle
-> * Örnek uygulamayı yapılandırma
-> * Kullanıcı akışı kullanarak kaydolma
+> * Yerel istemci uygulamasını ekleme
+> * Uygulamayı kullanmak için örneği yapılandırma
+> * Kullanıcı akışını kullanarak kaydolma
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Kullanıcı akışları oluşturma](tutorial-create-user-flows.md) uygulamanızdaki kullanıcı deneyimi sağlar. 
-- Yükleme [Visual Studio 2019](https://www.visualstudio.com/downloads/) ile **.NET masaüstü geliştirme** ve **ASP.NET ve web geliştirme** iş yükleri.
+- Uygulamanızdaki kullanıcı deneyimlerini etkinleştirmek için [Kullanıcı akışları oluşturun](tutorial-create-user-flows.md) .
+- **.Net masaüstü geliştirme** ve **ASP.net ve Web geliştirme** Iş yükleriyle [Visual Studio 2019](https://www.visualstudio.com/downloads/) ' ü yükler.
 
-## <a name="add-the-native-client-application"></a>Yerel istemci uygulaması Ekle
+## <a name="add-the-native-client-application"></a>Yerel istemci uygulamasını ekleme
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Azure AD B2C kiracınızı tıklayarak içeren dizine kullandığınızdan emin olun **dizin ve abonelik filtresi** üst menü ve kiracınız içeren dizine seçme.
-3. Seçin **tüm hizmetleri** Azure portalı ve ardından arayın ve seçin, sol üst köşedeki **Azure AD B2C**.
-4. Seçin **uygulamaları**ve ardından **Ekle**.
-5. Uygulama için bir ad girin. Örneğin, *nativeapp1*.
-6. İçin **içeren web uygulaması / web API'sini**seçin **Hayır**.
-7. İçin **yerel istemciyi dahil et**seçin **Evet**.
-8. İçin **yeniden yönlendirme URI'si**, özel bir düzen ile geçerli bir yeniden yönlendirme URI'si girin. Yeniden yönlendirme URI'si seçerken iki önemli noktalar vardır:
+[!INCLUDE [active-directory-b2c-appreg-native](../../includes/active-directory-b2c-appreg-native.md)]
 
-    - **Benzersiz** -yeniden yönlendirme URI'si şeması her uygulama için benzersiz olmalıdır. Örnekte `com.onmicrosoft.contoso.appname://redirect/path`, `com.onmicrosoft.contoso.appname` düzenidir. Bu düzen gelmelidir. İki uygulama aynı şemayı paylaşıyorsa, kullanıcı bir uygulama seçmek için bir seçenek verilir. Kullanıcı yanlış seçim yaparsa, oturum açma başarısız olur.
-    - **Tam** -yeniden yönlendirme URI'SİNİN bir şeması ve yolu olmalıdır. Yol, etki alanından sonra en az bir eğik çizgi içermelidir. Örneğin, `//contoso/` çalışır ve `//contoso` başarısız olur. Yeniden yönlendirme URI'si, alt çizgi gibi özel karakterleri içermeyen emin olun.
+Daha sonraki bir adımda kullanmak üzere **uygulama (istemci) kimliğini** kaydedin.
 
-9. **Oluştur**’a tıklayın.
-10. Özellikler sayfasında örnek yapılandırırken kullanacağınız uygulama Kimliğini kaydedin.
+## <a name="configure-the-sample"></a>Örneği yapılandırma
 
-## <a name="configure-the-sample"></a>Örnek yapılandırma
-
-Bu öğreticide, Github'dan indirebileceğiniz örnek yapılandırın. Örnek WPF Masaüstü uygulamasını gösteren kaydolma, oturum açma ve içinde Azure AD B2C korumalı web API'sini çağırır. [Bir zip dosyası indirin](https://github.com/Azure-Samples/active-directory-b2c-dotnet-desktop/archive/master.zip), [depoya göz atın](https://github.com/Azure-Samples/active-directory-b2c-dotnet-desktop) veya GitHub’dan örneği kopyalayın.
+Bu öğreticide, GitHub 'dan indirebileceğiniz bir örnek yapılandırırsınız. Örnek WPF Masaüstü uygulaması kaydolma, oturum açma ve Azure AD B2C ' de korumalı bir Web API 'SI çağırma gösterir. [Bir zip dosyası indirin](https://github.com/Azure-Samples/active-directory-b2c-dotnet-desktop/archive/master.zip), [depoya göz atın](https://github.com/Azure-Samples/active-directory-b2c-dotnet-desktop) veya GitHub’dan örneği kopyalayın.
 
 ```
 git clone https://github.com/Azure-Samples/active-directory-b2c-dotnet-desktop.git
 ```
 
-Uygulama ayarlarını değiştirmek için değiştirme `<your-tenant-name>` kiracınızın adı, replace ile`<application-ID`> kaydettiğiniz uygulama kimliği.
+Uygulamayı Azure AD B2C kiracınızla çalışacak şekilde güncelleştirmek ve varsayılan demo kiracısında olanlar yerine Kullanıcı akışlarını çağırmak için:
 
-1. `active-directory-b2c-wpf` çözümünü Visual Studio’da açın.
-2. `active-directory-b2c-wpf` projesinde, **App.xaml.cs** dosyasını açın ve aşağıdaki güncelleştirmeleri yapın:
+1. Visual Studio 'da **Active-Directory-B2C-WPF** çözümünü (`active-directory-b2c-wpf.sln`) açın.
+2. **Active-Directory-B2C-WPF** projesinde, *app.xaml.cs* dosyasını açın ve aşağıdaki değişken tanımlarını bulun. `{your-tenant-name}`, Azure AD B2C kiracı adınızla değiştirin ve daha önce kaydettiğiniz uygulama KIMLIĞIYLE `{application-ID}`.
 
-    ```C#
-    private static string Tenant = "<your-tenant-name>.onmicrosoft.com";
-    private static string ClientId = "<application-ID>";
+    ```csharp
+    private static readonly string Tenant = "{your-tenant-name}.onmicrosoft.com";
+    private static readonly string AzureAdB2CHostname = "{your-tenant-name}.b2clogin.com";
+    private static readonly string ClientId = "{application-ID}";
     ```
 
-3. Güncelleştirme **Policysignupsignın** değişken adıyla oluşturduğunuz kullanıcı akışı.
+3. İlke adı değişkenlerini, önkoşulların bir parçası olarak oluşturduğunuz Kullanıcı akışlarının adlarıyla güncelleştirin. Örneğin:
 
-    ```C#
+    ```csharp
     public static string PolicySignUpSignIn = "B2C_1_signupsignin1";
+    public static string PolicyEditProfile = "B2C_1_profileediting1";
+    public static string PolicyResetPassword = "B2C_1_passwordreset1";
     ```
 
 ## <a name="run-the-sample"></a>Örneği çalıştırma
 
-Tuşuna **F5** oluşturup örneği çalıştırın.
+Örneği derlemek ve çalıştırmak için **F5** tuşuna basın.
 
 ### <a name="sign-up-using-an-email-address"></a>E-posta adresi kullanarak kaydolma
 
-1. Tıklayın **oturum** kullanıcısı olarak kaydolmak için. Bu kullanır **B2C_1_signupsignin1** kullanıcı akışı.
-2. Azure AD B2C, kayıt bağlantısı içeren bir oturum açma sayfası sunar. Henüz bir hesabınız yoksa **Hemen kaydol** bağlantısına tıklayın. 
-3. Kaydolma iş akışında, kullanıcı kimliğini bir e-posta adresi kullanarak toplamak ve doğrulamak için bir sayfa sunar. Kaydolma iş akışı, ayrıca kullanıcının parolasını ve kullanıcı Akış içinde tanımlanmış istenen öznitelikleri toplar.
+1. Kullanıcı olarak kaydolmak için **oturum aç '** ı seçin. Bu, **B2C_1_signupsignin1** Kullanıcı akışını kullanır.
+2. Azure AD B2C, **Şimdi kaydol** bağlantısı olan bir oturum açma sayfası sunar. Henüz bir hesabınız olmadığından **Şimdi kaydolun** bağlantısını seçin.
+3. Kaydolma iş akışında, kullanıcı kimliğini bir e-posta adresi kullanarak toplamak ve doğrulamak için bir sayfa sunar. Kaydolma iş akışı, kullanıcının parolasını ve Kullanıcı akışında tanımlanan istenen öznitelikleri de toplar.
 
-    Geçerli bir e-posta adresi kullanın ve doğrulama kodunu kullanarak doğrulamayı gerçekleştirin. Parola ayarlayın. İstenen öznitelikler için değerleri girin. 
+    Geçerli bir e-posta adresi kullanın ve doğrulama kodunu kullanarak doğrulamayı gerçekleştirin. Parola ayarlayın. İstenen öznitelikler için değerleri girin.
 
-    ![Kaydolma iş akışı](media/active-directory-b2c-tutorials-desktop-app/sign-up-workflow.png)
+    ![Oturum açma/kaydolma iş akışının bir parçası olarak gösterilen kaydolma sayfası](media/active-directory-b2c-tutorials-desktop-app/azure-ad-b2c-sign-up-workflow.png)
 
-4. Azure AD B2C kiracısında yerel bir hesap oluşturmak için **Oluştur**’a tıklayın.
+4. Azure AD B2C kiracısında yerel hesap oluşturmak için **Oluştur** ' u seçin.
 
-Artık kullanıcı, oturum açmak ve masaüstü uygulamasını kullanmak için e-posta adresini kullanabilir.
+Kullanıcı artık e-posta adreslerini kullanarak oturum açabilir ve masaüstü uygulamasını kullanabilir. Başarılı bir kaydolma veya oturum açma işleminden sonra, belirteç ayrıntıları WPF uygulamasının alt bölmesinde görüntülenir.
 
-> [!NOTE]
-> **API’yi çağırma** düğmesine tıklarsanız "Yetkisiz" hatasıyla karşılaşırsınız. Bu hatayı, tanıtım kiracısındaki bir kaynağa erişmeye çalıştığınız için alırsınız. Erişim belirteci yalnızca Azure AD kiracınız için geçerli olduğundan, API çağrısı yetkilendirilmez. Kiracınız için korumalı bir web API’si oluşturmak amacıyla sonraki öğreticiye geçin.
+![WPF Masaüstü uygulamasının alt bölmesinde gösterilen belirteç ayrıntıları](media/active-directory-b2c-tutorials-desktop-app/desktop-app-01-post-signin.png)
+
+**API çağır** düğmesini seçerseniz bir **hata iletisi** görüntülenir. Bu hatayla karşılaşırsınız, çünkü geçerli durumunda uygulama tanıtım kiracısı tarafından korunan bir API 'ye erişmeye çalışıyor, `fabrikamb2c.onmicrosoft.com`. Erişim belirteciniz yalnızca Azure AD B2C kiracınız için geçerli olduğundan, API çağrısı bu nedenle yetkilendirilmemiş.
+
+Kendi kiracınızda korumalı bir Web API 'sini kaydetmek ve **API çağırma** işlevini etkinleştirmek için sonraki öğreticiye geçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 
 > [!div class="checklist"]
-> * Yerel istemci uygulaması Ekle
-> * Örnek uygulamayı yapılandırma
-> * Kullanıcı akışı kullanarak kaydolma
+> * Yerel istemci uygulamasını ekleme
+> * Uygulamayı kullanmak için örneği yapılandırma
+> * Kullanıcı akışını kullanarak kaydolma
+
+Sonra, **API 'Yi çağır** düğme işlevselliğini ETKINLEŞTIRMEK için WPF Masaüstü uygulamasına kendi Azure AD B2C kiracınızda kayıtlı BIR Web API 'sine erişim izni verin:
 
 > [!div class="nextstepaction"]
-> [Öğretici: Azure Active Directory B2C kullanarak bir masaüstü uygulamasından Node.js web API'si için verme erişim](active-directory-b2c-tutorials-spa-webapi.md)
+> [Öğretici: bir masaüstü uygulamasından Node. js web API 'sine erişim Izni verme >](active-directory-b2c-tutorials-desktop-app-webapi.md)

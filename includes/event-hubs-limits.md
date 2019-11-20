@@ -1,6 +1,6 @@
 ---
-title: include dosyası
-description: include dosyası
+title: içerme dosyası
+description: içerme dosyası
 services: event-hubs
 author: sethmanheim
 ms.service: event-hubs
@@ -8,42 +8,52 @@ ms.topic: include
 ms.date: 05/22/2019
 ms.author: spelluru
 ms.custom: include file
-ms.openlocfilehash: fa6b4d6d0db09f8c4955430d6dc227356416d915
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8c836582798f40cf6e9ffff264c1612cb4037f74
+ms.sourcegitcommit: 9f330c3393a283faedaf9aa75b9fcfc06118b124
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66735954"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "71996897"
 ---
-Aşağıdaki tabloda için belirli sınırları ve kotalar listeler [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/). Event Hubs fiyatlandırması hakkında daha fazla bilgi için bkz: [Event Hubs fiyatlandırması](https://azure.microsoft.com/pricing/details/event-hubs/).
+Aşağıdaki tablolarda [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/)'a özgü kotalar ve sınırlamalar sağlanmaktadır. Event Hubs fiyatlandırması hakkında daha fazla bilgi için bkz. [Event Hubs fiyatlandırması](https://azure.microsoft.com/pricing/details/event-hubs/).
 
-| Sınır | `Scope` | Notlar | Değer |
+Temel, standart ve adanmış katmanlarda aşağıdaki sınırlar yaygındır. 
+
+| Sınırlı | Kapsam | Notlar | Değer |
 | --- | --- | --- | --- |
-| Event Hubs ad alanlarını başına abonelik sayısı |Abonelik |- |100 |
-| Event hubs ad alanı başına sayısı |Ad Alanı |Yeni bir olay hub'ı oluşturmak için sonraki istekler reddedilir. |10 |
-| Olay hub'ı başına bölüm sayısı |Varlık |- |32 |
-| Her olay hub'ı tüketici grubu sayısı |Varlık |- |20 |
-| AMQP bağlantıları ad alanı başına sayısı |Ad Alanı |Bir ek bağlantı için sonraki istekler reddedilir ve bir özel durum çağıran kod tarafından alınır. |5,000 |
-| Event Hubs olay üst sınırı|Varlık |- |1 MB |
-| En büyük boyutu bir olay hub'ı adı |Varlık |- |50 karakteri |
-| Dönem olmayan alıcılar bir tüketici grubu başına sayısı |Varlık |- |5 |
-| Olay verilerinin en uzun bekletme süresi |Varlık |- |1-7 gün |
-| En fazla üretilen iş birimi |Ad Alanı |Verilerinizi kısıtlanabilir neden olur ve oluşturur aktarım hızı birimi sınırını aşan bir [sunucu meşgul özel durumu](/dotnet/api/microsoft.servicebus.messaging.serverbusyexception). Çok sayıda üretilen iş birimleri bir standart katman için istemek için dosya bir [destek isteği](/azure/azure-supportability/how-to-create-azure-support-request). [Ek üretilen iş birimleri](../articles/event-hubs/event-hubs-auto-inflate.md) taahhüt edilen satın almaya başına 20 bloklar halinde kullanılabilir. |20 |
-| Ad alanı başına yetkilendirme kuralları sayısı |Ad Alanı|Yetkilendirme kuralı oluşturma sonraki istekler reddedilir.|12 |
-| Getruntimeınformation metodu yapılan çağrı sayısı | Varlık | - | saniye başına 50 | 
+| Abonelik başına Event Hubs ad alanı sayısı |Aboneliğiniz |- |100 |
+| Ad alanı başına Olay Hub 'ları sayısı |Ad Alanı |Yeni bir olay hub 'ı oluşturmaya yönelik sonraki istekler reddedilir. |10 |
+| Olay Hub 'ı başına bölüm sayısı |Varlık |- |32 |
+| Bir olay hub 'ı adının en büyük boyutu |Varlık |- |50 karakter |
+| Tüketici grubu başına dönem olmayan alıcıların sayısı |Varlık |- |5 |
+| En fazla üretilen iş birimi |Ad Alanı |Üretilen iş birimi sınırının aşılması verilerinizin kısıtlanmasına neden olur ve [sunucu meşgul özel durumu](/dotnet/api/microsoft.servicebus.messaging.serverbusyexception)oluşturur. Standart katman için daha fazla sayıda üretilen iş birimi istemek üzere bir [destek isteği](/azure/azure-supportability/how-to-create-azure-support-request)dosyası. [Ek üretilen iş birimleri](../articles/event-hubs/event-hubs-auto-inflate.md) , taahhüt edilen satın alma esasına göre 20 blok halinde kullanılabilir. |20 |
+| Ad alanı başına yetkilendirme kuralı sayısı |Ad Alanı|Yetkilendirme kuralı oluşturma için sonraki istekler reddedilir.|12 |
+| GetRuntimeInformation metoduna yapılan çağrıların sayısı | Varlık | - | saniyede 50 | 
+| Sanal ağ (VNet) ve IP yapılandırma kuralları sayısı | Varlık | - | 128 | 
 
-### <a name="event-hubs-dedicated---quotas-and-limits"></a>Event Hubs Dedicated - kotalar ve sınırlar
-Event Hubs Dedicated teklifi, bir aylık fiyatla, en az 4 saatlik kullanım ücreti alınır. Adanmış katmanı, zorlu iş yüklerine sahip müşteriler için tüm özellikleri standart plan, ancak Kurumsal ölçek kapasitesi ve sınırları ile sunar. 
+### <a name="event-hubs-basic-and-standard---quotas-and-limits"></a>Temel ve standart kotaları ve limitleri Event Hubs
+| Sınırlı | Kapsam | Notlar | Temel | Stand |
+| --- | --- | --- | -- | --- |
+| Event Hubs olayının en büyük boyutu|Varlık | &nbsp; | 256 KB | 1 MB |
+| Olay Hub 'ı başına Tüketici grubu sayısı |Varlık | &nbsp; |1\. |20 |
+| Ad alanı başına AMQP bağlantısı sayısı |Ad Alanı |Daha sonraki ek bağlantı istekleri reddedilir ve çağıran kod tarafından bir özel durum alınır. |100 |5\.000|
+| Olay verilerinin maksimum bekletme süresi |Varlık | &nbsp; |1 gün |1-7 gün |
+|Apache Kafka etkin ad alanı|Ad Alanı |Event Hubs ad alanı, uygulamaları Kafka protokolünü kullanarak akışlar |Hayır | Evet |
+|Lamanız |Varlık | Etkinleştirildiğinde, aynı akışta mikro toplu işler |Hayır |Evet |
 
-| Özellik | Limits |
+
+### <a name="event-hubs-dedicated---quotas-and-limits"></a>Event Hubs Ayrılmış-kotalar ve sınırlar
+Event Hubs Ayrılmış teklif, en az 4 saatlik kullanım ile sabit bir aylık fiyatla faturalandırılır. Adanmış katman, standart planın tüm özelliklerini sunar, ancak yoğun iş yükleri olan müşterilere yönelik kurumsal ölçekli kapasite ve sınırlara sahiptir. 
+
+| Özellik | Değerleri |
 | --- | ---|
-| Bant genişliği |  20 cu |
-| Ad Alanları | 50 CU başına |
+| Bant genişliği |  20 cu düzeyinde kapsanır |
+| Ad Alanları | CU başına 50 |
 | Event Hubs |  ad alanı başına 1000 |
-| Giriş olayları | Dahil |
-| İleti Boyutu | 1 milyon bayt |
-| Bölümler | CU başına 2000 |
-| Tüketici grupları | Sınır, CU başına 1000 olay hub'ı başına |
-| Aracılı bağlantılar | 100 bin adet dahil |
-| İleti Saklama | 7 gün (çok yakında 90 gün saklama) yedekleme CU 10 TB dahil |
-| Capture | Dahil |
+| Giriş olayları | Verilen |
+| İleti boyutu | 1 MB |
+| Bölmeler | CU başına 2000 |
+| Tüketici grupları | Her saniyedeki limit yok, Olay Hub 'ı başına 1000 |
+| Aracılı bağlantılar | 100 K dahil |
+| İleti bekletme | 90 gün, CU başına 10 TB dahildir |
+| Lamanız | Verilen |

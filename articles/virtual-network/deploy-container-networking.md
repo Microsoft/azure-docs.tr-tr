@@ -16,12 +16,12 @@ ms.workload: infrastructure-services
 ms.date: 9/18/2018
 ms.author: aanandr
 ms.custom: ''
-ms.openlocfilehash: 657c23ad410d7aade17b3153f02ba0138edf4250
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 5146675b6eefd11fc1e6875ed9009ece92753ffb
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60825090"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72028097"
 ---
 # <a name="deploy-the-azure-virtual-network-container-network-interface-plug-in"></a>Azure Sanal Ağ kapsayıcı ağı arabirimi eklentisini dağıtma
 
@@ -97,8 +97,8 @@ Eklentiyi bir Kubernetes kümesindeki tüm Azure sanal makinelerine yüklemek i�
 
    - **CLI**: [Azure CLI kullanarak birden çok IP adresi atama](virtual-network-multiple-ip-addresses-cli.md)
    - **PowerShell**: [PowerShell kullanarak birden çok IP adresi atama](virtual-network-multiple-ip-addresses-powershell.md)
-   - **Portal**: [Azure portalını kullanarak birden çok IP adresi atama](virtual-network-multiple-ip-addresses-portal.md)
-   - **Azure Resource Manager şablonu**: [şablonlarını kullanarak birden çok IP adresi atama](virtual-network-multiple-ip-addresses-template.md)
+   - **Portal**: [Azure Portal kullanarak birden çok IP adresi atama](virtual-network-multiple-ip-addresses-portal.md)
+   - **Azure Resource Manager şablonu**: [şablonları kullanarak birden çok IP adresi atama](virtual-network-multiple-ip-addresses-template.md)
 
    Sanal makinede kullanmayı beklediğiniz tüm podlar için yeterli IP adresi eklediğinizden emin olun.
 
@@ -157,12 +157,12 @@ CLI ağ yapılandırma dosyası, JSON biçiminde ifade edilir. Varsayılan konum
 
 #### <a name="settings-explanation"></a>Ayarların açıklaması
 
-- **cniVersion**: Azure sanal ağ CNI eklentileri sürüm 0.3.0 ve 0.3.1, destek [CNI spec](https://github.com/containernetworking/cni/blob/master/SPEC.md).
-- **Ad**: Ağ adı. Bu özellik herhangi bir benzersiz değer olarak ayarlanabilir.
-- **Tür**: Eklenti ağının adı. Kümesine *azure vnet*.
-- **Modu**: Çalıştırma modu. Bu alan isteğe bağlıdır. Yalnızca "bridge" modu desteklenir. Daha fazla bilgi için [çalışma modları](https://github.com/Azure/azure-container-networking/blob/master/docs/network.md).
-- **Köprü**: Kapsayıcılar, bir sanal ağa bağlanmak için kullanılacak köprüsü adı. Bu alan isteğe bağlıdır. Belirtilmezse eklenti otomatik olarak ana arabirim dizinine göre benzersiz bir ad belirler.
-- **IPAM türü**: Eklenti IPAM'ın adı. Her zaman *azure vnet IPAM*.
+- **Cniversion**: Azure sanal ağ CNI eklentileri, [CNI belirtiminin](https://github.com/containernetworking/cni/blob/master/SPEC.md)0.3.0 ve 0.3.1 sürümlerini destekler.
+- **name**: Ağın adıdır. Bu özellik herhangi bir benzersiz değer olarak ayarlanabilir.
+- **type**: Ağ eklentisinin adıdır. *azure-vnet* olarak ayarlanmıştır.
+- **mode**: Çalıştırma modudur. Bu alan isteğe bağlıdır. Yalnızca "bridge" modu desteklenir. Daha fazla bilgi için bkz. [işletimsel modlar](https://github.com/Azure/azure-container-networking/blob/master/docs/network.md).
+- **bridge**: Kapsayıcıları sanal ağa bağlamak için kullanılacak köprünün adıdır. Bu alan isteğe bağlıdır. Belirtilmezse eklenti otomatik olarak ana arabirim dizinine göre benzersiz bir ad belirler.
+- **ipam type**: IPAM eklentisinin adıdır. Her zaman *azure-vnet-ipam* olarak ayarlanır.
 
 ## <a name="download-and-install-the-plug-in"></a>Eklentiyi indirme ve yükleme
 

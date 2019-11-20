@@ -1,6 +1,6 @@
 ---
-title: Bulut karşıya yükleme ve Azure Media Services ile depolama | Microsoft Docs
-description: Bu makalede bulut karşıya yükleme ve depolama kavramları.
+title: Azure Media Services hesapları ile Azure depolama hesapları | Microsoft Docs
+description: Media Services hesabı oluştururken, bir Azure Depolama hesabı kaynağının adını sağlamanız gerekir. Belirtilen depolama hesabı, Media Services hesabınıza eklenir.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -9,16 +9,16 @@ editor: ''
 ms.service: media-services
 ms.workload: ''
 ms.topic: article
-ms.date: 06/25/2019
+ms.date: 07/01/2019
 ms.author: juliako
-ms.openlocfilehash: fc5bf052a7677d76c7128404a420f8c886cf3fe1
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 5c5bfa224b87040f5142663e6adab01072c6e6ba
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67439116"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67619289"
 ---
-# <a name="cloud-upload-and-storage"></a>Bulutta karşıya yükleme ve depolama
+# <a name="azure-storage-accounts"></a>Azure Depolama hesapları
 
 Yönetmek, şifreleme, kodlama, çözümleme ve azure'da medya içeriği akışı başlatmak için bir Media Services hesabı oluşturmanız gerekir. Media Services hesabı oluştururken, bir Azure Depolama hesabı kaynağının adını sağlamanız gerekir. Belirtilen depolama hesabı, Media Services hesabınıza eklenir. 
 

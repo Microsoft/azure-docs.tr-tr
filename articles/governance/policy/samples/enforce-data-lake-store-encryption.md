@@ -1,22 +1,16 @@
 ---
-title: Örnek - Data Lake Store için şifreleme iste
-description: Bu örnek ilke tanımı, Data Lake Store şifrelemesi etkin olmasını gerektirir.
-services: azure-policy
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
+title: Örnek-Data Lake Store için şifreleme gerektir
+description: Bu örnek ilke tanımı Data Lake Store şifrelemenin etkinleştirilmesini gerektirir.
+ms.date: 01/23/2019
 ms.topic: sample
-origin.date: 04/27/2018
-ms.date: 03/11/2019
-ms.author: v-biyu
-ms.openlocfilehash: f9e38b737cad255ef2d9802490b5d114950d01e6
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: a8ed66e9b07e1fc15c8a1a3c8c33f0e218eb62b3
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545362"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74070666"
 ---
-# <a name="sample---require-data-lake-store-encryption"></a>Örnek - Data Lake Store şifrelemesi
+# <a name="sample---require-data-lake-store-encryption"></a>Örnek-Data Lake Store şifreleme gerektir
 
 Bu yerleşik ilke, şifreleme etkin olmayan Data Lake Store hesaplarını reddeder.
 
@@ -54,7 +48,7 @@ Bir ilke atarken, kullanılabilir yerleşik tanımlardan **DataLakeStore hesapla
 
 [!INCLUDE [sample-powershell-install](../../../../includes/sample-powershell-install-no-ssh-az.md)]
 
-```powershell
+```azurepowershell-interactive
 $definition = Get-AzPolicyDefinition -Id /providers/Microsoft.Authorization/policyDefinitions/a7ff3161-0087-490a-9ad9-ad6217f4f43a
 
 New-AzPolicyAssignment -name "Data Lake Store encryption" -PolicyDefinition $definition -Scope <scope>
@@ -64,7 +58,7 @@ New-AzPolicyAssignment -name "Data Lake Store encryption" -PolicyDefinition $def
 
 İlke atamasını kaldırmak için aşağıdaki komutu çalıştırın.
 
-```powershell
+```azurepowershell-interactive
 Remove-AzPolicyAssignment -Name "Data Lake Store encryption" -Scope <scope>
 ```
 
@@ -72,7 +66,7 @@ Remove-AzPolicyAssignment -Name "Data Lake Store encryption" -Scope <scope>
 
 [!INCLUDE [sample-cli-install](../../../../includes/sample-cli-install.md)]
 
-```cli
+```azurecli-interactive
 az policy assignment create --scope <scope> --name "Data Lake Store encryption" --policy a7ff3161-0087-490a-9ad9-ad6217f4f43a
 ```
 
@@ -80,7 +74,7 @@ az policy assignment create --scope <scope> --name "Data Lake Store encryption" 
 
 İlke atamasını kaldırmak için aşağıdaki komutu çalıştırın.
 
-```cli
+```azurecli-interactive
 az policy assignment delete --name "Data Lake Store encryption" --resource-group myResourceGroup
 ```
 

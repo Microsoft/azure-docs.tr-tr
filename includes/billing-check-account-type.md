@@ -4,28 +4,28 @@ ms.service: billing
 ms.topic: include
 ms.date: 07/01/2019
 ms.author: amberb
-ms.openlocfilehash: a271f03788bc7b831e6d8daff3d53503db5a2710
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: 79e5e0bf1476bf049e47ba6aedcc172cea0bb13c
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67491143"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73850525"
 ---
-Sözleşme türünü fatura hesabınıza türünü belirlemek için denetleme
+Ödeme hesabınızın türünü belirlemek için sözleşme türünü denetleme
  
-1. [Azure Portal]( http://portal.azure.com) oturum açın.
+1. [Azure Portal](https://portal.azure.com) oturum açın.
  
-2. Arama **maliyet Yönetimi + faturalandırma**.
+2. **Maliyet Yönetimi + Faturalama** araması yapın.
  
-   ![Azure portalı arama gösteren ekran görüntüsü](./media/billing-check-account-type/billing-search-cost-management-billing.png)    
+   ![Azure portalı aramasını gösteren ekran görüntüsü](./media/billing-check-account-type/billing-search-cost-management-billing.png)    
  
-3. Yalnızca bir faturalama kapsamına erişimi varsa, seçin **özellikleri** sol taraftaki.
+3. Yalnızca bir faturalama kapsamına erişiminiz varsa soldan **Özellikler**’i seçin.
  
-    ![Microsoft müşteri sözleşmesi özellikleri sayfasını gösteren ekran görüntüsü](./media/billing-check-account-type/billing-mca-property.png)
+    ![Özellikler sayfasında Microsoft müşteri sözleşmesini gösteren ekran görüntüsü](./media/billing-check-account-type/billing-mca-property.png)
     
-    **Faturalama hesabı türü** özellikleri sayfasında, hesap türünü belirler. Microsoft çevrimiçi hizmet programı, Kurumsal Anlaşma veya Microsoft Müşteri sözleşmesi olabilir. Faturalama hesaplarının türü hakkında daha fazla bilgi için bkz. [fatura hesaplarınızı Azure portalında görüntüleme](../articles/billing/billing-view-all-accounts.md).  
+    Özellikler sayfasındaki **Ödeme hesabı türü**, hesabınızın türünü belirler. Bu, Microsoft Online Service Programı, Kurumsal Anlaşma, Microsoft Müşteri Sözleşmesi veya Microsoft İş Ortağı Sözleşmesi olabilir. Ödeme hesapları türü hakkında daha fazla bilgi edinmek için bkz. [Azure portalında ödeme hesaplarınızı görüntüleme](../articles/billing/billing-view-all-accounts.md).  
  
-4. Faturalandırma birden çok kapsam erişiminiz varsa seçin **hesabı faturalama** veya **tüm faturalandırma kapsamlar** sol taraftaki. Türü İade **Faturalama hesabı türü** sütun.
+4. Birden çok faturalama kapsamına erişiminiz varsa, soldan **Ödeme hesabı** veya **Tüm faturalama kapsamları** seçeneğini belirleyin. **Ödeme hesabı türü** sütunundaki türü denetleyin.
  
-    ![Microsoft müşteri sözleşmesi Faturalama hesabı listesi sayfasını gösteren ekran görüntüsü](./media/billing-check-account-type/billing-account-type-in-the-list.png)
+    ![Ödeme hesabı liste sayfasında Microsoft müşteri sözleşmesini gösteren ekran görüntüsü](./media/billing-check-account-type/billing-account-type-in-the-list.png)
  

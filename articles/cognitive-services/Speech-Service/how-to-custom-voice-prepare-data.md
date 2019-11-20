@@ -1,155 +1,155 @@
 ---
-title: Özel ses - konuşma Hizmetleri için veri hazırlama
-titlesuffix: Azure Cognitive Services
-description: Markanız için özel bir ses Azure konuşma Hizmetleri ile oluşturun. Studio kayıtları ve ilişkili betikler sağlarsanız, hizmete kayıtlı ses için ayarlanmış bir benzersiz ses modeli oluşturur. Bu ürünler, araçları ve uygulamaları konuşma sentezlemek için kullanın.
+title: Özel ses okuma hizmeti için verileri hazırlama
+titleSuffix: Azure Cognitive Services
+description: Konuşma hizmeti ile marka için özel bir ses oluşturun. Stüdyo kayıtlarını ve ilişkili betikleri sağlarsınız, hizmet kayıtlı sesle ayarlanmış benzersiz bir ses modeli oluşturur. Ürün, araç ve uygulamalarınızda konuşmayı sentezleştirmek için bu sesi kullanın.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 05/06/2019
+ms.date: 11/04/2019
 ms.author: erhopf
-ms.openlocfilehash: 23ba45804632163cc5de41ac2353091b7cf850c1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a954118cd0697213674bb9981f0d94100488fb38
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67063182"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73464512"
 ---
-# <a name="prepare-data-to-create-a-custom-voice"></a>Özel ses oluşturma için verileri hazırlama
+# <a name="prepare-data-to-create-a-custom-voice"></a>Özel bir ses oluşturmak için verileri hazırlama
 
-Uygulamanız için bir özel metin okuma sesli oluşturmaya hazır olduğunuzda, ilk adım sesli kayıtlar ve ilişkili betikler ses modeli eğitmek başlatmak için toplamaktır. Hizmet, benzersiz bir ses kayıtları, ses eşleşecek şekilde ayarlanan oluşturmak için bu verileri kullanır. Ses eğittiğimize sonra uygulamalarınızda konuşma synthesizing başlayabilirsiniz.
+Uygulamanız için özel bir metin okuma sesi oluşturmaya hazırsanız, ilk adım ses kaydı ve ilişkili betikleri toplamaktır. böylece ses modeli eğitimi başlatılır. Hizmet bu verileri, kayıtlarda bulunan sesle eşleşecek şekilde ayarlanmış benzersiz bir ses oluşturmak için kullanır. Sesi eğitdikten sonra, uygulamalarınızda konuşmayı senizme başlatabilirsiniz.
 
-Küçük bir kavram kanıtı oluşturmak için veri miktarı ile başlayabilirsiniz. Ancak, sağladığınız veri,, özel sesli ses daha çok doğal. Kendi sesli metin okuma modeli eğitmek önce ses kayıtlarını ve ilgili metin döküm gerekir. Bu sayfada şu veri türlerini, bunların nasıl kullanıldığı ve her yönetme inceleyelim.
+Kavram kanıtı oluşturmak için az miktarda veri ile başlayabilirsiniz. Ancak, daha fazla veri sağlarsanız, özel sesinize daha fazla doğal olur. Kendi metinden konuşmaya ses modelinizi eğmeden önce, ses kayıtları ve ilişkili metin dökümlerinin olması gerekir. Bu sayfada, veri türlerini, bunların nasıl kullanıldığını ve bunların nasıl yönetileceğini inceleyeceğiz.
 
 ## <a name="data-types"></a>Veri türleri
 
-Sesli kayıtlar ve bir metin dosyası ile ilişkili döküm bir ses eğitim veri kümesi içerir. Her ses dosyası (tek veya tek bir cümle etkinleştirmek için bir iletişim sistemi) tek bir utterance içerir ve 15 saniyeden uzun olması gerekir.
+Sesli eğitim veri kümesi, ses kayıtları ve ilişkili dökümlere sahip bir metin dosyası içerir. Her ses dosyası tek bir söylenişi (tek bir cümle veya bir iletişim sistemi için tek bir adet) içermelidir ve 15 saniyeden az uzunluğunda olmalıdır.
 
-Bazı durumlarda, doğru veri kümesi hazır olmayabilir ve özel bir üslup eğitimi kısa veya uzun olan veya olmayan dökümleri kullanılabilir ses dosyaları test etmek istersiniz. Ses konuşma segmentlere ayırın ve dökümleri kullanarak Hazırlama yardımcı olacak araçlar (beta) sağladığımız [Batch tanıma API'sini](batch-transcription.md).
+Bazı durumlarda, doğru veri kümesi hazır olmayabilir ve uygun ses eğitimini, kısa veya uzun olan ve yazılı betikler olmadan, kısa veya uzun bir şekilde test etmek isteyeceksiniz. [Toplu Iş dökümü API](batch-transcription.md)'sini kullanarak sesinizi, betiğinin parçalara ayırmanıza ve bu betiklerin hazırlanmasına yardımcı olacak araçlar (Beta) sunuyoruz.
 
-Bu tablo veri türleri ve her bir özel metin okuma sesli model oluşturmak için nasıl kullanıldığını listeler.
+Bu tabloda, veri türleri ve bunların her birinin özel metin okuma ses modeli oluşturmak için nasıl kullanıldığı listelenmektedir.
 
-| Veri türü | Açıklama | Kullanılması gereken durumlar | Gerekli diğer hizmet | Modeli için bir miktar | Locale(s) |
+| Veri türü | Açıklama | Kullanılması gereken durumlar | Ek hizmet gerekli | Model eğitimi için miktar | Yerel ayarlar |
 | --------- | ----------- | ----------- | --------------------------- | ----------------------------- | --------- |
-| **Tek tek konuşma + eşleşen döküm** | Bir koleksiyonu (.zip) ses dosyaları (.wav) olarak tek tek konuşma. 15 saniye veya biçimlendirilmiş bir döküm (.txt) ile eşleştirilmiş daha az, her bir ses dosyası olmalıdır. | Dökümler eşleşen profesyonel kayıtları | Eğitim için hazır. | En-US ve zh-CN için sabit bir gereksinim. Birden fazla 2000'den fazla diğer yerel ayarlar için ayrı konuşma. | Tüm özel sesli yerel |
-| **Uzun ses + deşifre metni (beta)** | Eşleştirilmiş tüm konuşulan kelimeleri içeren bir dökümü ile (.txt) uzun, kesimli ses dosyaları (20 saniyeden daha uzun), koleksiyonu (.zip). | Ses dosyalarını ve eşleşen dökümleri gibi sahip olduğunuz, ancak konuşma bölümlenmiş değil. | Segment (batch transkripsiyonu kullanarak).<br>Ses biçimi dönüştürme gerekli olduğu durumlarda. | En-US ve zh-CN için sabit bir gereksinim. | `en-US` ve `zh-CN` |
-| **Yalnızca ses (beta)** | Bir koleksiyonu (.zip) bir döküm olmadan ses dosyaları. | Ses dosyaları dökümleri kullanılabilir yeterlidir. | Segment + döküm oluşturma (batch transkripsiyonu kullanarak).<br>Ses biçimi dönüştürme gerekli olduğu durumlarda.| İçin sabit bir gereksinim `en-US` ve `zh-CN`. | `en-US` ve `zh-CN` |
+| **Bireysel söyleyle + eşleşen döküm** | Tek tek bildirimler olarak ses dosyalarının (. wav) bir koleksiyonu (. zip). Her ses dosyası, biçimlendirilen bir döküm dosyası (. txt) ile eşleştirilmiş 15 saniye veya daha az uzunlukta olmalıdır. | Eşleşen yazılı betiklerle profesyonel kayıtlar | Eğitim için hazırlayın. | En-US ve zh-CN için sabit gereksinim yoktur. Diğer yerel ayarlar için 2000 ' den fazla + farklı utterleri. | [Tüm özel ses yerel ayarları](language-support.md#customization) |
+| **Uzun ses + döküm (Beta)** | Tüm konuşulan kelimeleri içeren bir döküm dosyası (. txt) ile eşleştirilmiş ve uzun, bölünmeden (20 saniyeden uzun) bir koleksiyon (. zip). | Ses dosyalarınız ve eşleşen yazılı betikleriniz var, ancak bunlar utterler halinde bölünmemelidir. | Segmentleme (toplu iş dökümü kullanılarak).<br>Gereken yerlerde ses biçimi dönüşümü. | Sabit gereksinim yok  | [Tüm özel ses yerel ayarları](language-support.md#customization) |
+| **Yalnızca ses (Beta)** | Döküm dosyası olmayan ses dosyalarının koleksiyonu (. zip). | Yazılı betikler olmadan yalnızca kullanılabilir ses dosyalarınız vardır. | Segment + döküm oluşturma (toplu iş dökümü kullanılarak).<br>Gereken yerlerde ses biçimi dönüşümü.| Sabit gereksinim yok | [Tüm özel ses yerel ayarları](language-support.md#customization) |
 
-Dosya türü bir veri kümesine göre gruplandırılmış ve karşıya bir zip dosyası. Her bir veri kümesi yalnızca bir tek veri türü içerebilir.
+Dosyalar bir veri kümesine türlerine göre gruplanmalı ve zip dosyası olarak karşıya yüklenir. Her veri kümesi yalnızca tek bir veri türü içerebilir.
 
 > [!NOTE]
-> Maksimum abonelik başına içeri aktarılacak izin verilen veri kümeleri (F0) aboneliği kullanıcıları ve 500 standart aboneliği (S0) kullanıcıları için ücretsiz 10 .zip dosya sayısıdır.
+> Abonelik başına içeri aktarılmaya izin verilen en fazla veri kümesi sayısı 10. ücretsiz abonelik (F0) kullanıcıları ve Standart abonelik (S0) kullanıcıları için 500. zip dosyalarıdır.
 
-## <a name="individual-utterances--matching-transcript"></a>Tek tek konuşma + eşleşen döküm
+## <a name="individual-utterances--matching-transcript"></a>Bireysel söyleyle + eşleşen döküm
 
-Kayıtları tek tek konuşma ve iki yolla eşleşen döküm hazırlayabilirsiniz. Ya da bir betik yazabilir ve bir ses beceri tarafından okunur veya herkese ses kullanın ve metin özelliği vardır. İkincisini yapmak, disfluencies "um" ve diğer filler sesleri, atlar, mumbled sözcükleri veya mispronunciations gibi ses dosyalarını düzenleyin.
+Tek tek dıklarınızın ve eşleşen döküm dosyalarının kayıtlarını iki şekilde hazırlayabilirsiniz. Bir komut dosyası yazın ve bir sesli taçın tarafından okunmasını ister İkincisini yaparsanız, "um" ve diğer dolgu sesleri, geri alma, geri alınan sözcükler veya yanlış söylenler gibi ses dosyalarından birliklerini düzenleyin.
 
-İyi ses tipi üretmek için yüksek kaliteli bir mikrofon sessiz bir odada kayıtları oluşturun. Tutarlı birim oranı, aralık ve konuşma ifadesel veren davranışların gibi konuşma gerekli.
+İyi bir ses yazı tipi oluşturmak için, yüksek kaliteli bir mikrofona sahip bir sessiz odada kayıtlar oluşturun. Tutarlı birim, konuşma oranı, konuşma sıklığı ve önemli öneme sahip bir konuşma
 
 > [!TIP]
-> Üretim kullanımı için bir ses oluşturmak için profesyonel kaydı studio ve ses beceri kullanmanızı öneririz. Daha fazla bilgi için [ses kaydetmek nasıl özel bir ses için örnekleri](record-custom-voice-samples.md).
+> Üretim kullanımı için bir ses oluşturmak üzere bir profesyonel Kayıt Studio ve ses taçı kullanmanızı öneririz. Daha fazla bilgi için bkz. [özel bir ses için ses örneklerini kaydetme](record-custom-voice-samples.md).
 
 ### <a name="audio-files"></a>Ses dosyaları
 
-Her ses dosyası (tek bir cümle veya tek bir kapatma bir iletişim sistemi), tek bir utterance 15 saniyeden uzun içermelidir. Tüm dosyalar aynı konuşulan dili içinde olmalıdır. Çok dilli özel seslerle metin okuma, Çince-İngilizce çift dilli dışında desteklenmez. Her ses dosyasının .wav dosya adı uzantılı dosyalar benzersiz sayısal dosya adı olmalıdır.
+Her ses dosyası, 15 saniyeden az uzunlukta tek bir söylenişi (tek bir cümle veya bir iletişim sisteminin tek bir kümesi) içermelidir. Tüm dosyalar aynı konuşulan dilde olmalıdır. Çok dilli özel metin okuma sesleri, Çince-Ingilizce bı-dil dışında, desteklenmez. Her ses dosyası,. wav dosya adı uzantısına sahip benzersiz bir sayısal dosya adına sahip olmalıdır.
 
-Ses hazırlarken aşağıdaki yönergeleri izleyin.
+Ses hazırlanırken bu yönergeleri izleyin.
 
 | Özellik | Değer |
 | -------- | ----- |
-| Dosya biçimi | Bir .zip dosyasına gruplandırılmış RIFF (.wav) |
-| Örnekleme hızı | en az 16. 000 Hz |
-| Örnek Biçim | PCM, 16-bit |
-| Dosya adı | Sayısal, .wav uzantısına sahip. Yinelenen dosya adlarına izin. |
-| Ses uzunluğu | 15 saniyeden daha kısa |
+| Dosya biçimi | Bir. zip dosyasında gruplandırılan RIFF (. wav) |
+| Örnekleme oranı | En az 16.000 Hz |
+| Örnek biçim | PCM, 16 bit |
+| Dosya adı | . Wav uzantısıyla sayısal. Yinelenen dosya adlarına izin verilmez. |
+| Ses uzunluğu | 15 saniyeden kısa |
 | Arşiv biçimi | .zip |
-| En uzun arşiv boyutu | 200 MB |
+| Maksimum Arşiv boyutu | 2048 MB |
 
 > [!NOTE]
-> .wav dosyaları 16.000 Hz reddedilir daha düşük bir örnekleme hızı. Bir .zip dosyası farklı bir örnek hızlara .wav dosyaları içeriyorsa, yalnızca eşit veya daha yüksek 16.000 Hz aktarılır. Portal şu anda içeri aktarmalar .zip 200 MB'a kadar arşivler. Ancak, birden fazla arşivini karşıya yüklenebilir.
+> örnekleme hızına 16.000 Hz 'den düşük olan. wav dosyaları reddedilir. Bir. zip dosyası farklı örnek oranlarına sahip. wav dosyaları içeriyorsa, yalnızca 16.000 Hz 'den büyük veya buna eşit olanlar içeri aktarılır. Portal Şu anda. zip arşivlerini 200 MB 'a kadar aktarır. Ancak, birden çok arşiv karşıya yüklenebilir.
 
 ### <a name="transcripts"></a>Dökümleri
 
-Düz metin dosyası döküm dosyasıdır. Döküm hazırlamak için aşağıdaki yönergeleri kullanın.
+Döküm dosyası bir düz metin dosyasıdır. Bu yönergeleri kullanarak dökümlerinizi hazırlayın.
 
 | Özellik | Değer |
 | -------- | ----- |
-| Dosya biçimi | Düz metin (.txt) |
-| Kodlama biçimi | ANSI/ASCII, UTF-8, UTF-8-BOM, UTF-16-LE veya UTF-16 olabilir. ANSI/ASCII ve UTF-8 Kodlamalar, zh-CN, desteklenmiyor. |
-| Satır başına konuşma sayısı | **Bir** -her satır döküm dosyasının karşılık gelen transkripsiyonu tarafından izlenen ses dosyaları, birinin adını içermelidir. Dosya adı ve transkripsiyon sekme (\t) ile ayrılmalıdır. |
-| En büyük dosya boyutu | 50 MB |
+| Dosya biçimi | Düz metin (. txt) |
+| Kodlama biçimi | ANSI/ASCII, UTF-8, UTF-8-BOM, UTF-16-LE veya UTF-16-of. Zh-CN için ANSI/ASCII ve UTF-8 kodlamaları desteklenmez. |
+| Satır başına konuşma sayısı | Döküm dosyasının her **bir** satırı, ses dosyalarından birinin adını ve ardından karşılık gelen dökümü içermelidir. Dosya adı ve transkripsiyon sekme (\t) ile ayrılmalıdır. |
+| En büyük dosya boyutu | 2048 MB |
 
-Dökümler utterance tarafından utterance bir .txt dosyasına nasıl düzenlenir, bir örnek aşağıda verilmiştir:
+Aşağıda, döküm dosyalarının tek bir. txt dosyasında söylenişi tarafından nasıl düzenlendiği hakkında bir örnek verilmiştir:
 
 ```
 0000000001[tab] This is the waistline, and it's falling.
 0000000002[tab] We have trouble scoring.
 0000000003[tab] It was Janet Maslin.
 ```
-Dökümler ilgili ses dosyasının doğru döküm % 100 olduğunu önemlidir. Dökümler hataları kalite kaybı eğitim sırasında başlatacaktır.
+Bu, döküm dosyalarının karşılık gelen sesin %100 doğru dökümünü gerektirdiğinden önemlidir. Dökümleri hataları eğitim sırasında kalite kaybı ortaya çıkaracak.
 
 > [!TIP]
-> Üretim uygulamasına alan metin okuma sesleri, konuşma seçin (veya yazma betikleri) oluştururken fonetik kapsamı hem verimlilik hesap. Sonuçları aşmakta sorun istiyor musunuz? [Özel ses başvurun](mailto:speechsupport@microsoft.com) bize sahip hakkında daha fazla inceleyin çıkış bulmak için takım.
+> Üretim metin okuma seslerini oluştururken, hem fonetik kapsamı hem de verimliliği hesaba katan (veya yazma betikleri) ' ni seçin. İstediğiniz sonuçları alırken sorun mu yaşıyorsunuz? [Başvurmamıza](mailto:speechsupport@microsoft.com) daha fazla bilgi edinmek Için özel ses ekibine başvurun.
 
-## <a name="long-audio--transcript-beta"></a>Uzun ses + deşifre metni (beta)
+## <a name="long-audio--transcript-beta"></a>Uzun ses + döküm (Beta)
 
-Bazı durumlarda, ses kullanılabilir segmentlere değil. Uzun ses dosyaları segmentlere ayırın ve döküm oluşturmanıza yardımcı olmak için özel sesli Portalı aracılığıyla (beta) bir hizmet sunuyoruz. Tutun göz önünde bulundurun konuşma metin abonelik kullanımınızı doğru bu hizmeti ücretlendirilecektir.
+Bazı durumlarda, uygun bölümsel ses olmayabilir. Uzun ses dosyalarını segmentetmenize ve döküm oluşturmanıza yardımcı olması için özel ses portalı aracılığıyla bir hizmet (Beta) sunuyoruz. Göz önünde bulundurun. bu hizmet, konuşma-metin abonelik kullanımınıza doğru ücretlendirilecektir.
 
 > [!NOTE]
-> Uzun ses Segment hizmet konuşma-yalnızca standart aboneliği (S0) kullanıcıları destekleyen metin, batch tanıma özelliği özelliğinden yararlanır. Segmentlere ayırma işlemi sırasında dosyalarınızı ses ve dökümler ayrıca özel konuşma hizmeti için tanıma modeli doğruluğu, verileriniz için geliştirilebilir şekilde daraltmak için gönderilir. Veri yok, bu işlem sırasında korunur. Segment yapıldıktan sonra indirme ve eğitim için yalnızca bölümlenmiş konuşma ve kendi eşleme Dökümleri depolanır.
+> Uzun süreli segmentasyon hizmeti, yalnızca Standart abonelik (S0) kullanıcılarını destekleyen, konuşmadan metne ait toplu iş dökümü özelliğinden yararlanır. Segmentlerin işlenmesi sırasında, ses dosyalarınız ve yazılı betikler, tanınma modelini iyileştirmek için Özel Konuşma Tanıma hizmetine de gönderilir, böylece veriler için doğruluk artırılabilir. Bu işlem sırasında hiçbir veri korunmaz. Segmentleme gerçekleştirildikten sonra, karşıdan yükleme ve eğitim için yalnızca uttasyonları ve onların eşleme dökümü depolanır.
 
 ### <a name="audio-files"></a>Ses dosyaları
 
-Ses kesimlemesi için hazırlarken aşağıdaki yönergeleri izleyin.
+Bu yönergeleri izleyerek ses segmentlemeye hazırlanırken izleyin.
 
 | Özellik | Değer |
 | -------- | ----- |
-| Dosya biçimi | En az 16 khz 16-bit PCM veya .mp3 örnekleme oranını en az 256 bir .zip dosyasına gruplandırılmış Kbps, bit hızı ile RIFF (.wav) |
-| Dosya adı | Yalnızca ASCII karakterler. Adında Unicode karakterler başarısız olur (örneğin, Çince karakterler veya benzeri semboller gibi "-"). Yinelenen adlara izin verilir. |
-| Ses uzunluğu | 20 daha uzun saniye |
+| Dosya biçimi | Bir. zip dosyasında gruplandırılan, en az 256 KBps 'e sahip PCM veya. mp3 olarak en az 16 kHz-16 bit örnekleme hızına sahip RIFF (. wav) |
+| Dosya adı | ASCII ve Unicode karakterleri desteklenir. Yinelenen adlara izin verilmez. |
+| Ses uzunluğu | 20 saniyeden uzun |
 | Arşiv biçimi | .zip |
-| En uzun arşiv boyutu | 200 MB |
+| Maksimum Arşiv boyutu | 2048 MB |
 
-Tüm ses dosyaları bir zip dosyası olarak gruplandırılmalıdır. .Wav dosyaları ve .mp3 dosyalarını ses bir ZIP dosyasına koymak için bir sorun yoktur, ancak hiçbir alt klasör zip dosyasında izin verilir. Örneğin, 'kingstory.wav', 45 saniye sürdüğü ve başka bir adlandırılmış 'queenstory.mp3', 200-ikinci-herhangi bir alt klasör olmadan uzun, adlandırılmış bir ses dosyasını içeren bir zip dosyası karşıya yükleyebilirsiniz. Tüm .mp3 dosyalar .wav biçime işlendikten sonra dönüştürülür.
+Tüm ses dosyaları bir ZIP dosyasında gruplandırılmalıdır. . Wav dosyalarını ve. mp3 dosyalarını tek bir ses zip dosyasına yerleştirmek tamam. Örneğin, ' kingöykü. wav ', 45-ikinci-uzun ve ' queenöykü. mp3 ', 200-Second-Long adlı bir ses dosyasını içeren bir zip dosyasını karşıya yükleyebilirsiniz. Tüm. mp3 dosyaları işlendikten sonra. WAV biçimine dönüştürülür.
 
 ### <a name="transcripts"></a>Dökümleri
 
-Bu tabloda listelenen belirtimlerine dökümleri hazırlanması gerekir. Her ses dosyası bir dökümü ile eşleşmelidir.
+Transcripts bu tabloda listelenen belirtimlerle hazırlanmalıdır. Her ses dosyası bir dökümünü bir döküm ile eşleştirmelidir.
 
 | Özellik | Değer |
 | -------- | ----- |
-| Dosya biçimi | Bir .zip gruplandırılmış düz metin (.txt) |
-| Dosya adı | Eşleşen bir ses dosyası olarak aynı adı kullanın |
-| Kodlama biçimi | UTF-8-BOM yalnızca |
+| Dosya biçimi | Düz metin (. txt), bir. zip olarak gruplandırılır |
+| Dosya adı | Eşleşen ses dosyası ile aynı adı kullan |
+| Kodlama biçimi | UTF-8-yalnızca BOM |
 | Satır başına konuşma sayısı | Sınırsız |
-| En büyük dosya boyutu | 50 MİLYON |
+| En büyük dosya boyutu | 2048 MB |
 
-Bu veri türü tüm dökümleri dosyaları bir zip dosyası olarak gruplandırılmalıdır. Hiçbir alt klasör zip dosyasında izin verilir. Örneğin, 45 saniye uzunluğundaki 'kingstory.wav' adlı bir ses dosyasını içeren bir zip dosyası karşıya yüklediğiniz ve başka bir adlandırılmış 'queenstory.mp3', 200 uzun saniye. Başka bir zip dosyası içeren iki dökümleri, bir adlandırılmış 'kingstory.txt', başka bir 'queenstory.txt' yüklemeniz gerekir. Her bir düz metin dosyası içinde doğru tam döküm eşleşen ses için sağlar.
+Bu veri türündeki tüm döküm dosyaları bir ZIP dosyasında gruplandırılmalıdır. Örneğin, ' kingöykü. wav ', 45 saniye uzunluğunda ve ' queenöykü. mp3 ', 200 saniye uzunluğunda bir ses dosyası içeren bir zip dosyası yüklediniz. Biri ' kingöykü. txt ', diğeri diğeri de ' queenöykü. txt ' adlı iki dökümü içeren başka bir ZIP dosyasını karşıya yüklemeniz gerekir. Her düz metin dosyasında, eşleşen ses için tam doğru dökümü sağlarsınız.
 
-Veri kümeniz başarıyla karşıya yüklendikten sonra ses dosyası konuşma sağlanan çeviri yazıya dayalı olarak segmentlere yardımcı olur. Veri kümesini yükleyerek segmentli konuşma ve eşleşen dökümleri kontrol edebilirsiniz. Benzersiz kimliklerinin segmentli konuşma otomatik olarak atanır. Sağladığınız dökümleri % 100 doğru olduğundan emin olmak önemlidir. Dökümleri hataları, ses ayrılmasını sırasında doğruluğu azaltmak ve daha fazla kalite kaybı daha sonra geldiğinde eğitim aşamasında tanıtır.
+Veri kümeniz başarıyla karşıya yüklendikten sonra, sağlanan dökümü temel alarak ses dosyasını el ile segmentlere ayırmanıza yardımcı olacak. Veri kümesini indirerek, kesimli ve eşleşen dökümü kontrol edebilirsiniz. Benzersiz kimlikler otomatik olarak kesimli şekilde atanır. Sağladığınız dökümlerin %100 doğru olduğundan emin olmanız önemlidir. Döküm dosyalarındaki hatalar, ses kesimlemesi sırasında doğruluğu azaltabilir ve daha sonra eğitim aşamasında daha fazla kalite kaybı ortaya çıkarabilir.
 
-## <a name="audio-only-beta"></a>Yalnızca ses (beta)
+## <a name="audio-only-beta"></a>Yalnızca ses (Beta)
 
-Ses kayıtlarınızı döküm sahip değilseniz kullanmak **yalnızca ses** verilerinizi yüklemek için seçeneği. Sistemimiz, segmentlere ayırın ve ses dosyalarınızı konuşmaların yardımcı olabilir. Unutmayın, bu hizmet, Konuşmayı metne abonelik kullanımınızı doğru sayılır.
+Ses kayıtlarınız için döküm yoksa, verilerinizi karşıya yüklemek için **yalnızca ses** seçeneğini kullanın. Sistemimiz, ses dosyalarınızı segmentinize ve uygulamanıza yardımcı olabilir. Göz önünde bulundurun. bu hizmet, konuşmadan metne abonelik kullanımınıza doğru sayılır.
 
-Ses hazırlarken aşağıdaki yönergeleri izleyin.
+Ses hazırlanırken bu yönergeleri izleyin.
 
 > [!NOTE]
-> Uzun ses Segment hizmet konuşma-yalnızca standart aboneliği (S0) kullanıcıları destekleyen metin, batch tanıma özelliği özelliğinden yararlanır.
+> Uzun süreli segmentasyon hizmeti, yalnızca Standart abonelik (S0) kullanıcılarını destekleyen, konuşmadan metne ait toplu iş dökümü özelliğinden yararlanır.
 
 | Özellik | Değer |
 | -------- | ----- |
-| Dosya biçimi | En az 16 khz 16-bit PCM veya .mp3 örnekleme oranını en az 256 bir .zip dosyasına gruplandırılmış Kbps, bit hızı ile RIFF (.wav) |
-| Dosya adı | Yalnızca ASCII karakterler. Adında Unicode karakterler başarısız olur (örneğin, Çince karakterler veya benzeri semboller gibi "-"). Yinelenen ad izin verilir. |
-| Ses uzunluğu | 20 daha uzun saniye |
+| Dosya biçimi | Bir. zip dosyasında gruplandırılan, en az 256 KBps 'e sahip PCM veya. mp3 olarak en az 16 kHz-16 bit örnekleme hızına sahip RIFF (. wav) |
+| Dosya adı | ASCII ve Unicode karakterleri desteklenir. Yinelenen ada izin verilmez. |
+| Ses uzunluğu | 20 saniyeden uzun |
 | Arşiv biçimi | .zip |
-| En uzun arşiv boyutu | 200 MB |
+| Maksimum Arşiv boyutu | 2048 MB |
 
-Tüm ses dosyaları bir zip dosyası olarak gruplandırılmalıdır. Hiçbir alt klasör zip dosyasında izin verilir. Veri kümeniz başarıyla karşıya yüklendikten sonra ses dosyası konuşma konuşma batch transkripsiyonu hizmetimiz dayalı olarak segmentlere yardımcı olur. Benzersiz kimliklerinin segmentli konuşma otomatik olarak atanır. Dökümler eşleşen konuşma tanıma aracılığıyla oluşturulur. Tüm .mp3 dosyalar .wav biçime işlendikten sonra dönüştürülür. Veri kümesini yükleyerek segmentli konuşma ve eşleşen dökümleri kontrol edebilirsiniz.
+Tüm ses dosyaları bir ZIP dosyasında gruplandırılmalıdır. Veri kümeniz başarıyla karşıya yüklendikten sonra, konuşma toplu iş dökümü hizmeti ' ne bağlı olarak ses dosyasını parçalara ayırmanıza yardımcı olacak. Benzersiz kimlikler otomatik olarak kesimli şekilde atanır. Eşleşen yazılı betikler, konuşma tanıma aracılığıyla oluşturulacaktır. Tüm. mp3 dosyaları işlendikten sonra. WAV biçimine dönüştürülür. Veri kümesini indirerek, kesimli ve eşleşen dökümü kontrol edebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Özel ses oluşturma](how-to-custom-voice-create-voice.md)
-- [Kılavuzu: Ses örneklerinizi kaydedin](record-custom-voice-samples.md)
+- [Özel bir ses oluşturun](how-to-custom-voice-create-voice.md)
+- [Kılavuz: ses örneklerinizi kaydetme](record-custom-voice-samples.md)

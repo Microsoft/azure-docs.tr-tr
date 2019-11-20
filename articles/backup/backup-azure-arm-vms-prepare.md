@@ -1,270 +1,258 @@
 ---
-title: Azure sanal makinelerini Azure Backup'ı kullanarak bir kurtarma Hizmetleri kasasına yedekleme
-description: Azure sanal makinelerini Azure Backup'ı kullanarak bir kurtarma Hizmetleri kasasında yedekleme açıklar
-service: backup
-author: rayne-wiselman
-manager: carmonm
-ms.service: backup
+title: Azure VM 'lerini bir kurtarma hizmetleri kasasında yedekleme
+description: Azure VM 'Leri bir kurtarma hizmetleri kasasında Azure Backup kullanarak nasıl yedekleyeceğiniz açıklanmaktadır.
 ms.topic: conceptual
 ms.date: 04/03/2019
-ms.author: raynew
-ms.openlocfilehash: 0835c3af52a16e7549698e35b3fded0f64c71dc4
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: dc47aa2b4da08a0fc2c9a91b4d547a0d19e1869a
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447703"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74173353"
 ---
-# <a name="back-up-azure-vms-in-a-recovery-services-vault"></a>Azure Vm'lerini bir kurtarma Hizmetleri kasasına yedekleme
+# <a name="back-up-azure-vms-in-a-recovery-services-vault"></a>Azure VM 'lerini bir kurtarma hizmetleri kasasında yedekleme
 
-Bu makalede Azure Vm'lerini bir kurtarma Hizmetleri kasasında yedekleme işlemini kullanarak [Azure Backup](backup-overview.md) hizmeti.
+Bu makalede, Azure VM 'lerinin [Azure Backup](backup-overview.md) hizmeti kullanılarak bir kurtarma hizmetleri kasasında nasıl yedekleneceği açıklanır.
 
 Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Azure sanal makineleri hazırlayın.
-> * Bir kasa oluşturun.
-> * Vm'leri bulmak ve yedekleme ilkesini yapılandırın.
-> * Azure Vm'leri için yedeklemeyi etkinleştirin.
+>
+> * Azure VM 'lerini hazırlayın.
+> * Kasa oluşturun.
+> * VM 'Leri bulun ve bir yedekleme ilkesi yapılandırın.
+> * Azure VM 'Leri için yedeklemeyi etkinleştirin.
 > * İlk yedeklemeyi çalıştırın.
 
-
 > [!NOTE]
-> Bu makalede bir kasası ayarlama ve sanal makineleri yedeklemek için seçin. Birden çok sanal makinelerini yedekleme istiyorsanız kullanışlıdır. Alternatif olarak, [tek bir Azure VM yedekleme](backup-azure-vms-first-look-arm.md) VM ayarlarını doğrudan.
+> Bu makalede, bir kasasının nasıl ayarlanacağı ve yedeklenecek VM 'Lerin nasıl ayarlanacağı açıklanır. Birden çok VM 'yi yedeklemek istiyorsanız bu yararlı olur. Alternatif olarak, [tek bir Azure VM](backup-azure-vms-first-look-arm.md) 'YI doğrudan VM ayarlarından yedekleyebilirsiniz.
 
 ## <a name="before-you-start"></a>Başlamadan önce
 
+* Azure VM yedekleme mimarisini [gözden geçirin](backup-architecture.md#architecture-built-in-azure-vm-backup) .
+* [Hakkında bilgi edinin](backup-azure-vms-introduction.md) Azure VM yedeklemesi ve yedekleme uzantısı.
+* Yedeklemeyi yapılandırmadan önce [destek matrisini gözden geçirin](backup-support-matrix-iaas.md) .
 
-- [Gözden geçirme](backup-architecture.md#architecture-direct-backup-of-azure-vms) Azure VM yedekleme mimarisi.
-- [Hakkında bilgi edinin](backup-azure-vms-introduction.md) Azure VM yedeklemesi ve yedek Dahili hat.
-- [Destek matrisi gözden](backup-support-matrix-iaas.md) yedekleme yapılandırmadan önce.
+Ayrıca, bazı durumlarda yapmanız gerekebilecek birkaç şey vardır:
 
-Ayrıca, birkaç bazı durumlarda yapmanız gerekebilecek şey vardır:
-
-- **VM Aracısı VM üzerinde yükleme**: Azure yedekleme makine üzerinde çalışan Azure VM aracısı için bir uzantı yükleyerek Azure sanal makinelerini yedekler. Sanal makinenize bir Azure Market görüntüsünden oluşturulduysa, aracı yüklü ve çalışır durumdadır. Özel bir VM oluşturmak veya bir şirket içi makineyi geçirmek gerekebilir [aracıyı el ile yükleme](#install-the-vm-agent).
-- **Açıkça giden erişime izin**: Genel olarak, giden ağ erişimi için Azure Backup ile iletişim kurmak bir Azure VM sırayla açıkça izin vermeniz gerekmez. Gösteren bazı VM'ler bağlantı sorunları, ancak karşılaşabilirsiniz **ExtensionSnapshotFailedNoNetwork** bağlanmaya çalışılırken bir hata oluştu. Böyle bir durumda, gereken [açıkça giden erişime izin](#explicitly-allow-outbound-access), Azure Backup uzantısı yedekleme trafiği için Azure genel IP adresleri ile iletişim kurabilirsiniz.
-
+* VM **ARACıSıNı VM 'ye yükleme**: Azure Backup makinede çalışan Azure VM aracısına bir uzantı yükleyerek Azure VM 'lerini yedekler. VM 'niz bir Azure Marketi görüntüsünden oluşturulduysa, aracı yüklenir ve çalışır. Özel bir VM oluşturursanız veya şirket içi bir makineyi geçirirseniz, [aracıyı el ile yüklemeniz](#install-the-vm-agent)gerekebilir.
+* **Giden erişime açıkça izin ver**: genel olarak, Azure Backup ile iletişim kurması Için BIR Azure VM 'ye giden ağ erişimine açıkça izin vermeniz gerekmez. Ancak, bazı VM 'Ler bağlantı sorunlarıyla karşılaşabilir ve bağlanmaya çalışırken **Extensionsnapshotfailednonetwork** hatası gösterir. Bu durumda, Azure Backup uzantısı yedekleme trafiği için Azure genel IP adresleriyle iletişim kurabildiğinden, [giden erişime açık bir şekilde izin vermeniz](#explicitly-allow-outbound-access)gerekir.
 
 ## <a name="create-a-vault"></a>Kasa oluşturma
 
- Kasa yedeklemeleri ve zaman içinde oluşturulan kurtarma noktalarını depolayan ve yedeklenen makine ile ilişkili yedekleme ilkeleri depolar. Şu şekilde bir kasa oluşturun:
+ Kasa, zaman içinde oluşturulan yedeklemeleri ve kurtarma noktalarını depolar ve yedeklenen makinelerle ilişkili yedekleme ilkelerini depolar. Aşağıdaki gibi bir kasa oluşturun:
 
-1. [Azure Portal](https://portal.azure.com/) oturum açın.
-2. Arama alanına yazın **kurtarma Hizmetleri**. Altında **Hizmetleri**, tıklayın **kurtarma Hizmetleri kasaları**.
+1. [Azure portalında](https://portal.azure.com/) oturum açın.
+2. Arama bölümünde, **Kurtarma Hizmetleri**yazın. **Hizmetler**' in altında, **Kurtarma Hizmetleri kasaları**' na tıklayın.
 
-     ![Kurtarma Hizmetleri kasaları arayın](./media/backup-azure-arm-vms-prepare/browse-to-rs-vaults-updated.png) <br/>
+     ![Kurtarma Hizmetleri kasalarını ara](./media/backup-azure-arm-vms-prepare/browse-to-rs-vaults-updated.png) <br/>
 
-3. İçinde **kurtarma Hizmetleri kasaları** menüsünü tıklatın **+ Ekle**.
+3. **Kurtarma Hizmetleri kasaları** menüsünde **+ Ekle**' ye tıklayın.
 
      ![Kurtarma Hizmetleri Kasası oluşturma 2. adım](./media/backup-azure-arm-vms-prepare/rs-vault-menu.png)
 
-4. İçinde **kurtarma Hizmetleri kasası**, kasayı tanımlamak için bir kolay ad yazın.
-    - Adın Azure aboneliği için benzersiz olması gerekir.
-    - Bu, 2 ile 50 karakter içerebilir.
-    - Bir harf ile başlamalı ve yalnızca harf, rakam ve kısa çizgi içerebilir.
-5. Azure aboneliği, kaynak grubu ve kasa oluşturulması gereken coğrafi bölgeyi seçin. Sonra **Oluştur**’a tıklayın.
-    - Bu, kasasının oluşturulması biraz zaman alabilir.
-    - Portalın sağ üst alandaki durum bildirimlerini izleyin.
+4. **Kurtarma Hizmetleri kasasında**kasayı tanımlamak için bir kolay ad yazın.
+    * Adın Azure aboneliği için benzersiz olması gerekir.
+    * Bu, 2 ile 50 karakter içerebilir.
+    * Bir harfle başlamalı ve yalnızca harf, rakam ve kısa çizgi içerebilir.
+5. Kasanın oluşturulması gereken Azure aboneliğini, kaynak grubunu ve coğrafi bölgeyi seçin. Sonra **Oluştur**’a tıklayın.
+    * Kasanın oluşturulması biraz zaman alabilir.
+    * Portalın sağ üst bölümündeki durum bildirimlerini izleyin.
 
-
- Kasayı oluşturduktan sonra kurtarma Hizmetleri kasaları listesinde görünür. Kasanız görmüyorsanız seçin **Yenile**.
+Kasa oluşturulduktan sonra kurtarma hizmetleri kasaları listesinde görünür. Kasanızı görmüyorsanız **Yenile**' yi seçin.
 
 ![Yedekleme kasalarının listesi](./media/backup-azure-arm-vms-prepare/rs-list-of-vaults.png)
 
 > [!NOTE]
-> Azure Backup hizmeti adlandırma biçimi ile anlık görüntü deposu için ayrı bir kaynak grubu (dışında VM kaynak grubu) oluşturur **AzureBackupRG_geography_number** (örnek: AzureBackupRG_northeurope_1). Bu kaynak grubundaki veriler, belirtilen gün sayısı süresince korunur *tut anında kurtarma anlık görüntü* Azure sanal makine yedekleme ilkesinin bir bölümü.  Bu kaynak grubu için bir kilit uygulama, yedekleme hatalarına neden olabilir.<br>
-Kısıtlama İlkesi yeniden yedekleme hatalarına neden olduğu kaynak noktası koleksiyonları oluşturulmasını engeller olarak bu kaynak grubu adı/etiketi kısıtlamalar da bırakılmalıdır.
+> Azure Backup hizmet, anlık görüntüyü depolamak için (örneğin: AzureBackupRG_northeurope_1) **AzureBackupRG_geography_number** , farklı bir kaynak grubu (VM kaynak grubu dışında) oluşturur. Bu kaynak grubundaki veriler, Azure sanal makine yedekleme ilkesinin *anlık kurtarma anlık görüntüsünü sakla* bölümünde belirtildiği gibi süre boyunca saklanacaktır.  Bu kaynak grubuna bir kilit uygulandığında yedekleme hatalara neden olabilir.<br>
+Bu kaynak grubu, bir kısıtlama ilkesi herhangi bir ad/etiket kısıtlamalarından dışlanmalıdır, çünkü bu durum, bir kısıtlama ilkesi üzerinde kaynak noktası koleksiyonlarının oluşturulmasını engeller.
 
+### <a name="modify-storage-replication"></a>Depolama çoğaltmasını değiştirme
 
-### <a name="modify-storage-replication"></a>Depolama çoğaltma değiştirme
+Varsayılan olarak, [kasalar coğrafi olarak yedekli depolama (GRS)](https://docs.microsoft.com/azure/storage/common/storage-redundancy-grs)kullanır.
 
-Varsayılan olarak, kullanım kasaları [coğrafi olarak yedekli depolama (GRS)](https://docs.microsoft.com/azure/storage/common/storage-redundancy-grs).
+* Kasa birincil yedekleme mekanizmanız ise GRS kullanmanızı öneririz.
+* Bir ucuz seçeneği için [yerel olarak yedekli depolama (LRS)](https://docs.microsoft.com/azure/storage/common/storage-redundancy-lrs?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) kullanabilirsiniz.
 
-- Kasa birincil yedekleme yönteminiz varsa, GRS kullanmanızı öneririz.
-- Kullanabileceğiniz [yerel olarak yedekli depolama (LRS)](https://docs.microsoft.com/azure/storage/common/storage-redundancy-lrs?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) ucuz seçeneği.
+Depolama çoğaltma türünü aşağıdaki gibi değiştirin:
 
-Depolama çoğaltma türü şu şekilde değiştirin:
-
-1. Yeni kasaya tıklayın **özellikleri** içinde **ayarları** bölümü.
-2. İçinde **özellikleri**altında **yedekleme yapılandırması**, tıklayın **güncelleştirme**.
-3. Depolama çoğaltma türü seçin ve tıklayın **Kaydet**.
+1. Yeni kasada, **Ayarlar** bölümünde **Özellikler** ' e tıklayın.
+2. **Özellikler**' de, **yedekleme yapılandırması**altında **Güncelleştir**' e tıklayın.
+3. Depolama çoğaltma türünü seçin ve **Kaydet**' e tıklayın.
 
       ![Yeni kasa için depolama yapılandırması ayarlama](./media/backup-try-azure-backup-in-10-mins/full-blade.png)
-> [!NOTE]
-   > Kasa ayarlanır ve yedekleme öğeleri içeren sonra depolama çoğaltma türü değiştirilemiyor. Bunu yapmak istiyorsanız kasaya yeniden oluşturmanız gerekir.
 
-## <a name="apply-a-backup-policy"></a>Yedekleme ilkesini uygulama
+> [!NOTE]
+   > Kasa ayarlandıktan ve yedekleme öğeleri içerdiğinde depolama çoğaltma türünü değiştiremezsiniz. Bunu yapmak istiyorsanız kasayı yeniden oluşturmanız gerekir.
+
+## <a name="apply-a-backup-policy"></a>Yedekleme ilkesi uygulama
 
 Kasa için bir yedekleme ilkesi yapılandırın.
 
-1. Kasaya tıklayın **+ yedekleme** içinde **genel bakış** bölümü.
+1. Kasada **genel bakış** bölümünde **+ Yedekle** ' ye tıklayın.
 
    ![Yedekleme düğmesi](./media/backup-azure-arm-vms-prepare/backup-button.png)
 
+2. **Yedekleme hedefi** 'nde > **Iş yükünüz nerede çalışıyor?** **Azure**' u seçin. **Neleri yedeklemek istiyorsunuz?** **sanal makine** >  **Tamam ' ı**seçin. Bu, VM uzantısını kasaya kaydeder.
 
-2. İçinde **yedekleme hedefi** > **iş yükünüz çalıştığı?** seçin **Azure**. İçinde **neleri yedeklemek istiyorsunuz?** seçin **sanal makine** >  **Tamam**. Bu kasada VM uzantısı kaydeder.
+   ![Yedekleme ve yedekleme hedef bölmeleri](./media/backup-azure-arm-vms-prepare/select-backup-goal-1.png)
 
-   ![Yedekleme ve yedekleme hedefi bölmeleri](./media/backup-azure-arm-vms-prepare/select-backup-goal-1.png)
+3. **Yedekleme ilkesinde**, kasa ile ilişkilendirmek istediğiniz ilkeyi seçin.
+    * Varsayılan ilke, VM 'yi günde bir kez yedekler. Günlük yedeklemeler 30 gün boyunca tutulur. Anlık kurtarma anlık görüntüleri iki gün boyunca tutulur.
+    * Varsayılan ilkeyi kullanmak istemiyorsanız, **Yeni oluştur**' u seçin ve sonraki yordamda açıklandığı gibi özel bir ilke oluşturun.
 
-3. İçinde **yedekleme İlkesi**, kasa ile ilişkilendirmek istediğiniz ilkeyi seçin.
-    - Varsayılan ilke günde bir kez VM'yi yedekler. Günlük yedekleri 30 gün boyunca saklanır. Anında kurtarma anlık görüntüleri iki gün boyunca saklanır.
-    - Varsayılan ilkeyi kullanmak istemiyorsanız seçin **Yeni Oluştur**ve bir sonraki yordamda açıklandığı gibi özel bir ilke oluşturun.
+      ![Varsayılan yedekleme ilkesi](./media/backup-azure-arm-vms-prepare/default-policy.png)
 
-      ![Varsayılan yedekleme İlkesi](./media/backup-azure-arm-vms-prepare/default-policy.png)
+4. **Sanal makineler Seç**bölümünde, ilkeyi kullanarak yedeklemek Istediğiniz VM 'leri seçin. Daha sonra, **Tamam**'a tıklayın.
 
-4. İçinde **sanal makineleri**, ilkeyi kullanan yedeklemek istediğiniz Vm'leri seçin. Daha sonra, **Tamam**'a tıklayın.
+   * Seçilen VM 'Ler doğrulanacak.
+   * Yalnızca kasala aynı bölgedeki VM 'Leri seçebilirsiniz.
+   * VM 'Ler yalnızca tek bir kasada yedeklenebilir.
 
-   - Seçili Vm'lerden doğrulanır.
-   - Kasayla aynı bölgede VM'ler yalnızca seçebilirsiniz.
-   - VM'ler yalnızca tek bir kasada yedeklenebilecek.
+     !["Sanal makine seçin" bölmesi](./media/backup-azure-arm-vms-prepare/select-vms-to-backup.png)
 
-     !["Sanal makineleri seçin" bölmesi](./media/backup-azure-arm-vms-prepare/select-vms-to-backup.png)
-
-5. İçinde **yedekleme**, tıklayın **yedeklemeyi etkinleştir**. Bu, ilkeyi kasaya ve vm'lere dağıtır ve Azure sanal makinesinde çalışan VM Aracısı yedekleme uzantısını yükler.
+5. **Yedekleme**'de **yedeklemeyi etkinleştir**' e tıklayın. Bu, ilkeyi kasaya ve VM 'lere dağıtır ve yedekleme uzantısını Azure VM 'de çalışan VM aracısına kurar.
 
      !["Yedeklemeyi etkinleştir" düğmesi](./media/backup-azure-arm-vms-prepare/vm-validated-click-enable.png)
 
-Backup'ı etkinleştirdikten sonra:
+Yedeklemeyi etkinleştirdikten sonra:
 
-- VM'nin çalışır durumda olup olmadığını Backup hizmeti yedekleme uzantısını yükler.
-- İlk yedekleme, yedekleme planınızın çalıştırılır.
-- Yedeklemeleri çalıştırdığınızda, dikkat edin:
-    - Çalıştıran bir VM sahip bir uygulamayla tutarlı kurtarma noktası yakalamak için olasılığını en yükseğe çıkarır.
-    - VM kapalı olsa bile ancak bunu yedeklenir. Böyle bir VM, bir çevrimdışı VM adı verilir. Bu durumda, kurtarma noktası kilitlenme tutarlı olur.
-
+* Yedekleme hizmeti, sanal makinenin çalışıp çalışmadığını, yedekleme uzantısını da yüklüyor.
+* İlk yedekleme, yedekleme zamanlamanıza uygun olarak çalışacaktır.
+* Yedeklemeler çalıştırıldığında şunları unutmayın:
+  * Çalıştıran bir VM, uygulamayla tutarlı bir kurtarma noktası yakalamak için en büyük şansınız vardır.
+  * Ancak, VM kapatılmış olsa bile. Bu tür bir VM, çevrimdışı bir VM olarak bilinir. Bu durumda, kurtarma noktası kilitlenmeyle tutarlı olacaktır.
 
 ### <a name="create-a-custom-policy"></a>Özel ilke oluşturma
 
-Yeni bir yedekleme ilkesi oluşturmak için seçtiyseniz, ilke ayarlarını doldurun.
+Yeni bir yedekleme ilkesi oluşturmayı seçtiyseniz, ilke ayarlarını girin.
 
-1. İçinde **ilke adı**, anlamlı bir ad belirtin.
-2. İçinde **yedekleme zamanlaması** yedeklemeleri ne zaman alınması gerektiğini belirtin. Azure Vm'leri için günlük veya haftalık yedeklemeler alabilir.
-2. İçinde **anında geri yükleme**, anlık geri yükleme için yerel anlık görüntüleri tutmak istediğiniz süreyi belirtin.
-    - Geri yüklendiğinde, yedeklenen VM'yi yedekleme, Kurtarma depolama konumuna ağda, depolama alanından disk kopyalanır. Anında geri yükleme ile bir yedekleme işi sırasında yedekleme verileri kasaya aktarılacak beklemeden alınan yerel olarak depolanan anlık görüntülere yararlanabilirsiniz.
-    - Bir ile beş gün arasında anında geri yükleme için anlık görüntüleri tutabilirsiniz. Varsayılan ayar iki gündür.
-3. İçinde **bekletme aralığı**, günlük veya haftalık yedekleme noktaları saklamak istediğiniz süreyi belirtin.
-4. İçinde **aylık yedekleme noktası bekletme**, aylık, günlük veya haftalık yedekleri yedekleme tutmak isteyip istemediğinizi belirtin.
-5. Tıklayın **Tamam** ilkeyi kaydedin.
+1. **İlke adı**' nda anlamlı bir ad belirtin.
+2. **Yedekleme zamanlaması**' nda, yedeklemelerin ne zaman alınacağını belirtin. Azure VM 'Leri için günlük veya haftalık yedeklemeler gerçekleştirebilirsiniz.
+3. **Anlık geri yükleme**' de anlık geri yükleme için anlık görüntüleri yerel olarak ne kadar süreyle bekletmek istediğinizi belirtin.
+    * ' Yi geri yüklerken, yedeklenen VM diskleri depolama alanından, ağ üzerinden kurtarma depolama konumuna kopyalanır. Anlık geri yükleme sayesinde, yedekleme verilerinin kasaya aktarılmasını beklemeden, bir yedekleme işi sırasında alınan yerel olarak depolanmış anlık görüntülerden yararlanabilirsiniz.
+    * Anlık geri yüklemenin anlık görüntülerini bir ila beş gün arasında tutabilirsiniz. Varsayılan ayar iki gün olur.
+4. **Bekletme aralığı**' nda, günlük veya haftalık yedekleme noktalarınızı ne kadar süreyle saklamak istediğinizi belirtin.
+5. **Aylık yedekleme noktasını bekletmek**için günlük veya haftalık yedeklemelerinizin aylık bir yedeklemesini korumak isteyip istemediğinizi belirtin.
+6. İlkeyi kaydetmek için **Tamam** ' ı tıklatın.
 
-    ![Yeni bir yedekleme İlkesi](./media/backup-azure-arm-vms-prepare/new-policy.png)
+    ![Yeni yedekleme ilkesi](./media/backup-azure-arm-vms-prepare/new-policy.png)
 
 > [!NOTE]
-   > Azure Backup, Azure VM yedeklemeleri için ışığından değişikliklerin otomatik saat ayarlama desteklememektedir. Zaman değişiklikler oldukça, yedekleme ilkeleri el ile gerektiği gibi değiştirin.
+   > Azure Backup, Azure VM yedeklemeleri için günışığından yararlanma değişiklikleri için otomatik saat ayarlamasını desteklemez. Zaman değişikliği gerçekleştiğinde, yedekleme ilkelerini gerektiği şekilde el ile değiştirin.
 
 ## <a name="trigger-the-initial-backup"></a>İlk yedeklemeyi tetikleme
 
-İlk yedeklemeyi zamanlamaya uygun olarak çalışır, ancak bunu hemen aşağıdaki gibi çalıştırabilirsiniz:
+İlk yedekleme zamanlamaya uygun olarak çalışır, ancak bunu hemen aşağıdaki gibi çalıştırabilirsiniz:
 
-1. Kasa menüden **yedekleme öğeleri**.
-2. İçinde **yedekleme öğeleri** tıklayın **Azure sanal makine**.
-3. İçinde **yedekleme öğeleri** listesinde, üç nokta (...) tıklayın.
-4. Tıklayın **Şimdi Yedekle**.
-5. İçinde **Şimdi Yedekle**, kurtarma noktası korunması gereken son günü seçmek için takvim denetimini kullanın. Daha sonra, **Tamam**'a tıklayın.
-6. Portal bildirimlerini izleyin. Kasa panosunda iş ilerleme durumunu izleyebilirsiniz > **yedekleme işleri** > **sürüyor**. VM’nizin boyutuna bağlı olarak, ilk yedeklemenin oluşturulması biraz zaman alabilir.
+1. Kasa menüsünde, **yedekleme öğeleri**' ne tıklayın.
+2. **Yedekleme öğeleri**' nde **Azure sanal makine**' ye tıklayın.
+3. **Yedekleme öğeleri** listesinde üç noktaya (...) tıklayın.
+4. **Şimdi Yedekle**'ye tıklayın.
+5. **Şimdi Yedekle**' de, kurtarma noktasının tutulacağı son günü seçmek için Takvim denetimini kullanın. Daha sonra, **Tamam**'a tıklayın.
+6. Portal bildirimlerini izleyin. İş ilerlemesini kasa panosunda izleyebilirsiniz > **yedekleme işleri** > **devam**ediyor. VM’nizin boyutuna bağlı olarak, ilk yedeklemenin oluşturulması biraz zaman alabilir.
 
-## <a name="verify-backup-job-status"></a>Yedekleme işi durumunu doğrulayın
+## <a name="verify-backup-job-status"></a>Yedekleme işinin durumunu doğrulama
 
-Her bir VM yedeğinin 2 aşamaları oluşur için yedekleme işi ayrıntıları **anlık görüntü** aşaması ve ardından **verileri kasaya aktar** aşaması.<br/>
-Anlık görüntü aşaması birlikte disklerinde depolanan kurtarma noktası kullanılabilirliğini garanti **anlık geri yükler** ve en fazla 5 gün kullanıcı tarafından yapılandırılan anlık görüntü saklama bağlı olarak kullanılabilir. Aktarım verileri kasaya kasasında uzun süreli saklama için kurtarma noktası oluşturur. Anlık görüntü aşaması tamamlandıktan sonra yalnızca başlatır kasaya veri aktarın.
+Her VM yedeklemesinin yedekleme işi ayrıntıları iki aşamadan oluşur, **anlık görüntü** aşaması ve ardından **verileri kasaya aktar** aşamasına gelir.<br/>
+Anlık görüntü aşaması, **anlık geri yüklemeler** için disklerle birlikte depolanan bir kurtarma noktasının kullanılabilirliğini garanti eder ve Kullanıcı tarafından yapılandırılan anlık görüntü bekletmesine bağlı olarak en fazla beş gün boyunca kullanılabilir. Verileri kasaya aktarma, uzun süreli saklama için kasada bir kurtarma noktası oluşturur. Verileri kasaya aktarma işlemi yalnızca anlık görüntü aşaması tamamlandıktan sonra başlar.
 
-  ![Yedekleme işi durumu](./media/backup-azure-arm-vms-prepare/backup-job-status.png)
+  ![Yedekleme Işi durumu](./media/backup-azure-arm-vms-prepare/backup-job-status.png)
 
-İki **alt görevler** arka uç, gelen denetlenebilir ön uç yedekleme işi için bir tane çalışan **yedekleme işi** aşağıdaki ayrıntıları dikey olarak verilen:
+Arka uçta çalışan, **yedekleme işi** ayrıntıları dikey penceresinden aşağıda verilen şekilde denetlenen bir ön uç yedekleme işi olan Iki **alt görev** vardır:
 
-  ![Yedekleme işi durumu](./media/backup-azure-arm-vms-prepare/backup-job-phase.png)
+  ![Yedekleme Işi durumu](./media/backup-azure-arm-vms-prepare/backup-job-phase.png)
 
-**Verileri kasaya aktar** aşaması tamamlamak disk boyutuna bağlı olarak, disk ve diğer çeşitli faktörler karmaşıklığı birkaç gün sürebilir.
+**Verileri kasaya aktar** aşamasına kadar, disklerin boyutuna, disk başına dalgalanma ve diğer birçok etkene göre tamamlanması çok gün sürebilir.
 
-İş durumu aşağıdaki senaryolarda bağlı olarak değişebilir:
+İş durumu, aşağıdaki senaryolara bağlı olarak değişebilir:
 
-**Anlık görüntü** | **Verileri kasaya Aktar** | **İş durumu**
+**Görüntüye** | **Verileri kasaya aktar** | **İş durumu**
 --- | --- | ---
-Tamamlandı | Sürüyor | Sürüyor
-Tamamlandı | Atlandı | Tamamlandı
+Tamamlandı | Devam ediyor | Devam ediyor
+Tamamlandı | Atlanmış | Tamamlandı
 Tamamlandı | Tamamlandı | Tamamlandı
-Tamamlandı | Başarısız | Uyarı ile tamamlandı
+Tamamlandı | Başarısız | Uyarıyla tamamlandı
 Başarısız | Başarısız | Başarısız
 
+Artık bu özellik ile aynı VM için iki yedek paralel çalışabilir, ancak her iki aşamada (anlık görüntü, verileri kasaya aktar) yalnızca bir alt görev çalışıyor olabilir. Bu nedenle, senaryolarda devam eden bir yedekleme işi olduğundan, bu ayırma işleviyle birlikte yedeklemenin başarısız olmasına neden olur. Sonraki günün yedeklemeleri, daha önceki bir günün yedekleme işi devam ediyorsa, **kasaya veri aktarımı** atlanırken anlık görüntü tamamlanabilir.
+Kasada oluşturulan artımlı kurtarma noktası, kasada oluşturulan son kurtarma noktasındaki tüm karmaşıklığı yakalar. Kullanıcı üzerinde bir ücret etkisi yoktur.
 
-Artık bu özellik sayesinde aynı VM için iki yedekleme paralel olarak çalıştırılabilir ancak her iki aşama (anlık görüntü, aktarımı verileri kasaya) yalnızca bir alt görevi çalışıyor olabilir. Bu nedenle de senaryoları sonraki günün yedekleme başarısız olmaya devam eden bir yedekleme işi sonuçlandı olan bu işlevselliği ayırma kaçınılması. Sonraki günlük yedeklemeler anlık görüntü sırasında tamamlanmış **verileri kasaya aktar** bir önceki güne ait yedekleme işi ilerleme durumundaysa atlandı.
-Kasada oluşturulan artımlı kurtarma noktası kasaya oluşturulan son kurtarma noktasından tüm karmaşıklığı yakalar. Kullanıcı maliyet etkisi yoktur.
+## <a name="optional-steps-install-agentallow-outbound"></a>İsteğe bağlı adımlar (aracıyı yükler/giden izin ver)
 
+### <a name="install-the-vm-agent"></a>VM aracısını yükler
 
-## <a name="optional-steps-install-agentallow-outbound"></a>İsteğe bağlı adımlar (Yükleme aracı/izin Giden)
-### <a name="install-the-vm-agent"></a>VM aracısını yükleyin
+Azure Backup, makinede çalışan Azure VM aracısına bir uzantı yükleyerek Azure VM 'lerini yedekler. VM 'niz bir Azure Marketi görüntüsünden oluşturulduysa, aracı yüklenir ve çalışır. Özel bir sanal makine oluşturursanız veya şirket içi bir makineyi geçirirseniz, aracıyı tabloda özetlenen şekilde el ile yüklemeniz gerekebilir.
 
-Azure yedekleme makine üzerinde çalışan Azure VM aracısı için bir uzantı yükleyerek Azure sanal makinelerini yedekler. Sanal makinenize bir Azure Market görüntüsünden oluşturulduysa, aracı yüklü ve çalışır durumdadır. Özel bir VM oluşturmak veya bir şirket içi makineyi geçirmek, aracıyı tabloda özetlendiği gibi el ile yüklemeniz gerekebilir.
-
-**VM** | **Ayrıntılar**
+**'Nın** | **Ayrıntılar**
 --- | ---
-**Windows** | 1. [İndirme ve yükleme](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409) Aracısı MSI dosyası.<br/><br/> 2. Makine üzerinde yönetici izinlerine sahip yükleyin.<br/><br/> 3. Yüklemeyi doğrulayın. İçinde *C:\WindowsAzure\Packages* VM'de sağ **WaAppAgent.exe** > **özellikleri**. Üzerinde **ayrıntıları** sekmesinde **ürün sürümü** 2.6.1198.718 olmalıdır veya üzeri.<br/><br/> Aracıyı güncelleştiriyorsanız, hiçbir yedekleme işlemleri çalışır durumda olduğundan emin olun ve [aracıyı yeniden](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409).
-**Linux** | Dağıtımınıza ait bir paket deposundaki bir RPM veya DEB paketini kullanarak yükleyin. Bu, yükleme ve Azure Linux Aracısı yükseltme için tercih edilen yöntemdir. Tüm [dağıtım sağlayıcıları onaylı](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros) Azure Linux Aracısı paketi, görüntüleri ve depoları tümleştirme. Aracı kullanılabilir [GitHub](https://github.com/Azure/WALinuxAgent), ancak buradan yükleme önermemekteyiz.<br/><br/> Aracıyı güncelleştiriyorsanız, hiçbir yedekleme işlemleri çalıştırıyorsanız ve ikili dosyalarını güncelleştir emin olun.
+**Windows** | 1. aracı MSI dosyasını [indirip yükleyin](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409) .<br/><br/> 2. makinede yönetici izinleriyle Install.<br/><br/> 3. yüklemeyi doğrulayın. VM 'deki *C:\windowsazure\packages* ' de, **Waappagent. exe** > **Özellikler**' e sağ tıklayın. **Ayrıntılar** sekmesinde **ürün sürümü** 2.6.1198.718 veya üzeri olmalıdır.<br/><br/> Aracıyı güncelleştiriyorsanız, hiçbir yedekleme işlemi olmadığından emin olun ve [aracıyı yeniden yükleyin](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409).
+**Linux** | Dağıtım paketi deposundan bir RPM veya bir DEB paketini kullanarak uygulamasını yükler. Bu, Azure Linux aracısını yüklemek ve yükseltmek için tercih edilen yöntemdir. Tüm [onaylı dağıtım sağlayıcıları](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros) , Azure Linux Aracısı paketini görüntülerle ve depolarında tümleştirin. Aracı [GitHub](https://github.com/Azure/WALinuxAgent)'da kullanılabilir ancak buradan yüklemeyi önermiyoruz.<br/><br/> Aracıyı güncelleştiriyorsanız, yedekleme işlemlerinin çalışmakta olmadığından emin olun ve ikili dosyaları güncelleştirin.
 
-### <a name="explicitly-allow-outbound-access"></a>Açıkça giden erişime izin ver
+### <a name="explicitly-allow-outbound-access"></a>Giden erişime açıkça izin ver
 
-VM'de çalışan yedekleme uzantısı, Azure genel IP adreslerine giden erişime izin gerekir.
+VM üzerinde çalışan yedekleme uzantısının Azure genel IP adreslerine giden erişimi olması gerekir.
 
-- Genellikle giden ağ erişimi için Azure Backup ile iletişim kurmak bir Azure VM sırayla açıkça izin vermeniz gerekmez.
-- Sorunlar bağlanma ile Vm'leri çalıştırma veya hata görürseniz **ExtensionSnapshotFailedNoNetwork** yedekleme uzantısını Azure genel IP için iletişim kurabilmesi bağlanmaya çalışılırken açıkça erişim izin vermeniz Yedekleme trafiği adresleridir. Erişim yöntemleri aşağıdaki tabloda özetlenmiştir.
+* Genellikle, Azure Backup ile iletişim kurması için bir Azure VM 'ye giden ağ erişimine açıkça izin vermeniz gerekmez.
+* VM 'lerle ilgili zorluklarla karşılaşıyorsanız veya bağlanmaya çalışırken **Extensionsnapshotfailednonetwork** hatası görürseniz, yedekleme uzantısının yedekleme trafiği için Azure genel IP adresleriyle iletişim kurabilmesi için açıkça erişime izin vermelisiniz. Erişim yöntemleri aşağıdaki tabloda özetlenmiştir.
 
-
-**Seçeneği** | **Eylem** | **Ayrıntılar**
+**Seçenek** | **Eylem** | **Ayrıntılar**
 --- | --- | ---
-**NSG kurallarını ayarlayın** | İzin [Azure veri merkezi IP aralıkları](https://www.microsoft.com/download/details.aspx?id=41653).<br/><br/> İzin verme ve her bir adres aralığı yönetmek yerine Azure Backup hizmetini kullanarak erişimine izin verecek bir kural ekleyebileceğiniz bir [hizmet etiketi](backup-azure-arm-vms-prepare.md#set-up-an-nsg-rule-to-allow-outbound-access-to-azure). | [Daha fazla bilgi edinin](../virtual-network/security-overview.md#service-tags) hizmet etiketleri hakkında.<br/><br/> Hizmet etiketleri erişim yönetimini basitleştirin ve ek ücret uygulanmaz.
-**Bir proxy dağıtma** | Bir HTTP proxy sunucusu için trafiği yönlendirme dağıtın. | Yalnızca depolama ve Azure'nın tam erişim sağlar.<br/><br/> Depolama URL'leri üzerinde ayrıntılı denetim izin verilir.<br/><br/> VM'ler için tek noktası internet erişimi.<br/><br/> Ek maliyet proxy.
-**Azure güvenlik duvarını ayarlama** | Azure Backup hizmeti için bir FQDN etiketi kullanarak VM, Azure güvenlik duvarı üzerinden trafiğine izin verin | Azure sanal ağ içindeki alt ağ ayarlama güvenlik duvarı varsa kullanımı kolaydır.<br/><br/> Kendi FQDN etiketleri oluşturun veya FQDN'ler bir etiketi değiştirme.<br/><br/> Azure sanal makinelerinize yönetilen disklere sahipseniz, ek bir açmanız gerekebilir (8443) üzerinde güvenlik duvarları bağlantı noktası.
+**NSG kurallarını ayarlama** | [Azure veri MERKEZI IP aralıklarına](https://www.microsoft.com/download/details.aspx?id=41653)izin verin.<br/><br/> Her adres aralığını izin vermek ve yönetmek yerine, bir [hizmet etiketi](backup-azure-arm-vms-prepare.md#set-up-an-nsg-rule-to-allow-outbound-access-to-azure)kullanarak Azure Backup hizmetine erişim sağlayan bir kural ekleyebilirsiniz. | Hizmet etiketleri hakkında [daha fazla bilgi edinin](../virtual-network/security-overview.md#service-tags) .<br/><br/> Hizmet etiketleri erişim yönetimini basitleştirir ve ek ücret vermez.
+**Proxy dağıtma** | Yönlendirme trafiği için bir HTTP proxy sunucusu dağıtın. | Yalnızca depolama alanı değil, Azure 'un tamamına erişim sağlar.<br/><br/> Depolama URL 'Lerine ayrıntılı denetime izin verilir.<br/><br/> VM 'Ler için tek bir internet erişimi noktası.<br/><br/> Ara sunucu için ek maliyetler.
+**Azure Güvenlik duvarını ayarlama** | Azure Backup hizmeti için bir FQDN etiketi kullanarak VM 'deki Azure Güvenlik Duvarı üzerinden trafiğe izin ver | Sanal ağ alt ağında Azure Güvenlik duvarınız ayarlandıysa, kullanımı basittir.<br/><br/> Kendi FQDN etiketlerinizi oluşturamaz veya bir etikette FQDN 'leri değiştirebilirsiniz.<br/><br/> Azure VM 'lerinizde yönetilen diskler varsa güvenlik duvarları üzerinde ek bir bağlantı noktası (8443) açmanız gerekebilir.
 
 #### <a name="establish-network-connectivity"></a>Ağ bağlantısı kurma
 
-Proxy veya güvenlik duvarı üzerinden ile NSG, bağlantı kurun
+NSG ile, ara sunucuya veya güvenlik duvarı üzerinden bağlantı kurma
 
-##### <a name="set-up-an-nsg-rule-to-allow-outbound-access-to-azure"></a>Azure'da giden erişime izin vermek için bir NSG kuralı ayarlama
+##### <a name="set-up-an-nsg-rule-to-allow-outbound-access-to-azure"></a>Azure 'a giden erişime izin vermek için bir NSG kuralı ayarlama
 
-Bir NSG, VM erişimi yönetir ise gerekli aralıkları ve bağlantı noktaları için Yedekleme depolaması için giden erişime izin verir.
+Bir NSG VM erişimini yönetirse, yedekleme depolama için gerekli aralıklar ve bağlantı noktalarına giden erişime izin verin.
 
-1. Sanal makine özellikleri > **ağ**seçin **giden bağlantı noktası kuralı Ekle**.
-2. İçinde **Giden Güvenlik Kuralı Ekle**seçin **Gelişmiş**.
-3. İçinde **kaynak**seçin **VirtualNetwork**.
-4. İçinde **kaynak bağlantı noktası aralıkları**, herhangi bir bağlantı noktasından giden erişime izin vermek için yıldız işareti (*) girin.
-5. İçinde **hedef**seçin **hizmet etiketi**. Listesinden **Storage.region**. Kasa ve yedeklemek istediğiniz VM'lerin bulunduğu bölgedir.
-6. İçinde **hedef bağlantı noktası aralıkları**, bağlantı noktasını seçin.
-    - Yönetilmeyen VM şifrelenmemiş bir depolama hesabı ile: 80
-    - Şifrelenmiş depolama hesabında yönetilmeyen VM: 443 (varsayılan ayar)
-    - Yönetilen sanal makine: 8443.
-7. İçinde **Protokolü**seçin **TCP**.
-8. İçinde **öncelik**, bir öncelik değeri belirtin değerinden daha da kuralları'nı engelle.
+1. VM Özellikleri > **ağ**' da, **giden bağlantı noktası kuralı ekle**' yi seçin.
+2. **Giden güvenlik kuralı ekle**' de **Gelişmiş**' i seçin.
+3. **Kaynak**bölümünde **VirtualNetwork**öğesini seçin.
+4. **Kaynak bağlantı noktası aralıklarında**, herhangi bir bağlantı noktasından giden erişime izin vermek için bir yıldız işareti (*) girin.
+5. **Hedef**bölümünde **hizmet etiketi**' ni seçin. Listeden **Storage. Region**' ı seçin. Bölge, kasanın ve yedeklemek istediğiniz VM 'Lerin bulunduğu yerdir.
+6. **Hedef bağlantı noktası aralıklarında**bağlantı noktasını seçin.
+    * Şifrelenmemiş depolama hesabıyla yönetilmeyen diskler kullanan VM: 80
+    * Şifrelenmiş depolama hesabıyla yönetilmeyen diskler kullanan VM: 443 (varsayılan ayar)
+    * Yönetilen diskleri kullanan VM: 8443.
+7. **Protokol**' de **TCP**' yi seçin.
+8. **Öncelik**bölümünde, daha yüksek reddetme kurallarından daha düşük bir öncelik değeri belirtin.
 
-   Kural yüksek erişimini engellediği bir kuralı varsa, yeni izin verin. Örneğin, bir **Deny_All** kural öncelik, 1000, yeni bir kural kümesi için 1000'den daha az ayarlanmalıdır.
-9. Bir ad ve kural için bir açıklama girin ve seçin **Tamam**.
+   Erişimi engelleyen bir kuralınız varsa, yeni izin verme kuralı daha yüksek olmalıdır. Örneğin, öncelik 1000 ' de ayarlanmış bir **Deny_All** kuralınız varsa, yeni kuralınızın ayarı 1000 ' den az olmalıdır.
+9. Kural için bir ad ve Açıklama girip **Tamam**' ı seçin.
 
-Birden fazla VM'ye giden erişime izin vermek için NSG kuralı uygulayabilirsiniz. Bu videoda sürecinde yardımcı olur.
+Giden erişime izin vermek için NSG kuralını birden çok VM 'ye uygulayabilirsiniz. Bu video, süreç boyunca size yol gösterir.
 
 >[!VIDEO https://www.youtube.com/embed/1EjLQtbKm1M]
 
+##### <a name="route-backup-traffic-through-a-proxy"></a>Yedekleme trafiğini bir ara sunucu aracılığıyla yönlendirme
 
-##### <a name="route-backup-traffic-through-a-proxy"></a>Bir ara sunucu aracılığıyla yedekleme trafiği yönlendirme
+Yedekleme trafiğini bir ara sunucu üzerinden yönlendirebilir ve ardından gerekli Azure aralıklarına proxy erişimi verebilirsiniz. Proxy VM 'yi aşağıdakilere izin verecek şekilde yapılandırın:
 
-Bir ara sunucu aracılığıyla yedekleme trafiği yönlendirmek ve ardından proxy erişimi için gerekli Azure aralıkları sağlar. VM aşağıdaki izin vermek için proxy yapılandırın:
+* Azure VM, genel İnternet 'e ait tüm HTTP trafiğini ara sunucu aracılığıyla yönlendirmelidir.
+* Proxy, geçerli sanal ağdaki VM 'lerden gelen trafiğe izin verir.
+* NSG, sanal makinenin proxy VM 'den giden internet trafiğine izin veren bir kurala ihtiyacı vardır.
 
-- Azure VM için genel internet Ara sunucusu üzerinden bağlı tüm HTTP trafiğini yönlendirme.
-- Proxy, geçerli bir sanal ağda Vm'lerden gelen trafiğe izin vermelidir.
-- NSG **NSF kilitleme** Ara sunucuya VM giden internet trafiğine izin verecek bir kural gerekir.
+###### <a name="set-up-the-proxy"></a>Proxy 'yi ayarlama
 
-###### <a name="set-up-the-proxy"></a>Proxy'sini ayarlama
+Bir sistem hesabı ara sunucusu yoksa, bir tane aşağıdaki şekilde ayarlayın:
 
-Bir sistem hesabı proxy sahip değilseniz, birini aşağıdaki ayarlamaları yapın:
-
-1. İndirme [PsExec](https://technet.microsoft.com/sysinternals/bb897553).
-2. Çalıştırma **PsExec.exe -i -s cmd.exe** komut istemini bir sistem hesabı altında çalıştırılacak.
-3. Tarayıcı sistem bağlamında çalışır. Örneğin, **%PROGRAMFILES%\Internet Explorer\iexplore.exe** Internet Explorer için.  
+1. [PsExec](https://technet.microsoft.com/sysinternals/bb897553)'yi indirin.
+2. Komut istemi 'ni bir sistem hesabı altında çalıştırmak için **PsExec. exe-i-s cmd. exe** ' yi çalıştırın.
+3. Tarayıcıyı sistem bağlamında çalıştırın. Örneğin, Internet Explorer için **%ProgramFiles%\Internet Explorer\iexplore.exe** kullanın.  
 4. Proxy ayarlarını tanımlayın.
-   - Linux makineleri üzerinde:
-     - Bu satırı **/etc/ortam** dosyası:
-       - **http_proxy = http:\//proxy IP adresi: proxy bağlantı noktası**
-     - Bu satırları ekleyin **/etc/waagent.conf** dosyası:
-         - **HttpProxy.Host=proxy IP adresi**
-         - **HttpProxy.Port=proxy bağlantı noktası**
-   - Windows makinelerinde, tarayıcı ayarlarınızı bir ara sunucu kullanılması gerektiğini belirtin. Bir kullanıcı hesabı şu anda bir ara sunucu kullanıyorsanız, sistem düzeyinde ayarları uygulamak için bu betiği kullanabilirsiniz.
+   * Linux makinelerde:
+     * Bu satırı **/etc/Environment** dosyasına ekleyin:
+       * **http_proxy = http:\//Proxy IP adresi: ara sunucu bağlantı noktası**
+     * Bu satırları **/etc/waagent.exe** dosyasına ekleyin:
+         * **HttpProxy. Host = Proxy IP adresi**
+         * **HttpProxy. Port = proxy bağlantı noktası**
+   * Windows makinelerinde, tarayıcı ayarları ' nda, bir ara sunucu kullanılması gerektiğini belirtin. Şu anda bir kullanıcı hesabında ara sunucu kullanıyorsanız, ayarı sistem hesabı düzeyinde uygulamak için bu betiği kullanabilirsiniz.
+
        ```powershell
       $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections"
       Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name DefaultConnectionSettings -Value $obj.DefaultConnectionSettings
@@ -275,43 +263,41 @@ Bir sistem hesabı proxy sahip değilseniz, birini aşağıdaki ayarlamaları ya
 
        ```
 
-###### <a name="allow-incoming-connections-on-the-proxy"></a>Proxy gelen bağlantılara izin verin
+###### <a name="allow-incoming-connections-on-the-proxy"></a>Ara sunucuda gelen bağlantılara izin ver
 
-Proxy ayarları gelen bağlantılara izin.
+Proxy ayarlarında gelen bağlantılara izin verin.
 
-1. Windows Güvenlik Duvarı'nda açın **Gelişmiş Güvenlik Özellikli Windows Güvenlik Duvarı**.
-2. Sağ **gelen kuralları** > **yeni kural**.
-3. İçinde **kural türü**seçin **özel** > **sonraki**.
-4. İçinde **Program**seçin **tüm programlar** > **sonraki**.
-5. İçinde **protokoller ve bağlantı noktaları**:
-   - Tür kümesine **TCP**.
-   - Ayarlama **yerel bağlantı noktaları** için **belirli bağlantı noktaları**.
-   - Ayarlama **uzak bağlantı noktası** için **tüm bağlantı noktaları**.
+1. Windows Güvenlik Duvarı 'nda, **Gelişmiş Güvenlik Özellikli Windows Güvenlik Duvarı 'nı**açın.
+2. **Yeni kural** > **gelen kurallar** ' a sağ tıklayın.
+3. **Kural türü**' nde, **özel** > **İleri**' yi seçin.
+4. **Programda**, **Ileri** > **tüm programlar** ' ı seçin.
+5. **Protokoller ve bağlantı noktaları**:
+   * Türü **TCP**olarak ayarlayın.
+   * **Yerel bağlantı noktalarını** **belirli bağlantı noktalarına**ayarlayın.
+   * **Uzak bağlantı noktasını** **tüm bağlantı noktalarına**ayarlayın.
 
 6. Sihirbazı tamamlayın ve kural için bir ad belirtin.
 
-###### <a name="add-an-exception-rule-to-the-nsg-for-the-proxy"></a>Bir özel durum kuralı için NSG için proxy ekleyin.
+###### <a name="add-an-exception-rule-to-the-nsg-for-the-proxy"></a>Proxy için NSG 'ye bir özel durum kuralı ekleme
 
-NSG üzerinde **NSF kilitleme**, 10.0.0.5 üzerinde herhangi bir bağlantı noktasından herhangi bir Internet adresi 80 (HTTP) veya 443 (HTTPS) bağlantı noktası üzerinde trafiğe izin vermek.
+NSG, 10.0.0.5üzerindeki herhangi bir bağlantı noktasından gelen trafiğe, bağlantı noktası 80 (http) veya 443 (https) üzerinde herhangi bir internet adresine izin verin.
 
-Aşağıdaki PowerShell betiğini trafiğe izin vermek için bir örnek sağlar.
-Tüm ortak Internet adreslerine giden izin vermek yerine, bir IP adresi aralığı belirtebilirsiniz (`-DestinationPortRange`), veya storage.region hizmet etiketini kullanabilirsiniz.   
+Aşağıdaki PowerShell betiği trafiğe izin vermek için bir örnek sağlar.
+Herkese açık internet adreslerine izin vermek yerine bir IP adresi aralığı (`-DestinationPortRange`) belirtebilir veya Storage. Region hizmet etiketini kullanabilirsiniz.
 
 ```powershell
 Get-AzureNetworkSecurityGroup -Name "NSG-lockdown" |
 Set-AzureNetworkSecurityRule -Name "allow-proxy " -Action Allow -Protocol TCP -Type Outbound -Priority 200 -SourceAddressPrefix "10.0.0.5/32" -SourcePortRange "*" -DestinationAddressPrefix Internet -DestinationPortRange "80-443"
 ```
 
-##### <a name="allow-firewall-access-with-an-fqdn-tag"></a>Bir FQDN etiketi ile güvenlik duvarı erişime izin ver
+##### <a name="allow-firewall-access-with-an-fqdn-tag"></a>FQDN etiketiyle güvenlik duvarı erişimine izin ver
 
-Azure Güvenlik Duvarı'nı, ağ trafiği için Azure Backup giden erişime izin verecek şekilde ayarlayabilirsiniz.
+Azure Backup ağ trafiğine giden erişime izin vermek için Azure Güvenlik Duvarı 'nı ayarlayabilirsiniz.
 
-- [Hakkında bilgi edinin](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal) Azure güvenlik duvarı dağıtılıyor.
-- [Hakkında bilgi edinin](https://docs.microsoft.com/azure/firewall/fqdn-tags) FQDN etiketler.
-
-
+* Azure Güvenlik Duvarı 'Nı dağıtma [hakkında bilgi edinin](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal) .
+* [Hakkında bilgi edinin](https://docs.microsoft.com/azure/firewall/fqdn-tags) FQDN etiketleri.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Herhangi bir sorunu gidermeye [Azure VM aracıları](backup-azure-troubleshoot-vm-backup-fails-snapshot-timeout.md) veya [Azure VM yedeklemesi](backup-azure-vms-troubleshoot.md).
-- [Geri yükleme](backup-azure-arm-restore-vms.md) Azure Vm'leri.
+* [Azure VM aracılarıyla](backup-azure-troubleshoot-vm-backup-fails-snapshot-timeout.md) veya [Azure VM yedeklemeyle](backup-azure-vms-troubleshoot.md)ilgili sorunları giderin.
+* [Geri yükle](backup-azure-arm-restore-vms.md) Azure VM 'Leri.

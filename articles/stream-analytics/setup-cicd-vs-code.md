@@ -1,6 +1,6 @@
 ---
-title: Sürekli tümleştirme ve Azure Stream Analytics CI/CD npm paketi ile geliştirin
-description: Bu makalede, bir sürekli tümleştirme ve dağıtım işlemi ayarlamak için Azure Stream Analytics CI/CD npm paketini kullanmayı açıklar.
+title: Azure Stream Analytics CI/CD NPM paketini kullanın
+description: Bu makalede bir sürekli tümleştirme ve dağıtım işlemi ayarlamak için Azure Stream Analytics CI/CD NPM paketinin nasıl kullanılacağı açıklanır.
 services: stream-analytics
 author: su-jie
 ms.author: sujie
@@ -8,55 +8,55 @@ ms.reviewer: jasonh
 ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 05/15/2019
-ms.openlocfilehash: fa5a57afa379c6bbe027be80f400fc176800d289
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: df9afaaeeb7e41c111fe6bd053047095a9cb9349
+ms.sourcegitcommit: ee61ec9b09c8c87e7dfc72ef47175d934e6019cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66158500"
+ms.lasthandoff: 08/30/2019
+ms.locfileid: "70173339"
 ---
-# <a name="continuously-integrate-and-develop-with-stream-analytics-cicd-npm-package"></a>Sürekli tümleştirme ve Stream Analytics CI/CD npm paketi ile geliştirin
-Bu makalede, bir sürekli tümleştirme ve dağıtım işlemi ayarlamak için Azure Stream Analytics CI/CD npm paketini kullanmayı açıklar.
+# <a name="use-the-stream-analytics-cicd-npm-package"></a>Stream Analytics CI/CD NPM paketini kullanın
+Bu makalede bir sürekli tümleştirme ve dağıtım işlemi ayarlamak için Azure Stream Analytics CI/CD NPM paketinin nasıl kullanılacağı açıklanır.
 
-## <a name="build-the-vs-code-project"></a>VS Code projeyi oluşturun
+## <a name="build-the-vs-code-project"></a>VS Code projeyi oluşturma
 
-Sürekli tümleştirme ve dağıtım kullanarak Azure Stream Analytics işleri için etkinleştirebilirsiniz **asa streamanalytics cıcd** npm paketi. Npm paketi, Azure Resource Manager şablonları oluşturmak için araçlar sağlar [Stream Analytics Visual Studio Code projeleri](quick-create-vs-code.md). Bunu Windows, macOS ve Linux üzerinde Visual Studio Code yükleme olmadan kullanılabilir.
+**Asa-streamanalytics-cicd** NPM paketini kullanarak Azure Stream Analytics işleri için sürekli tümleştirme ve dağıtım sağlayabilirsiniz. NPM paketi, [Stream Analytics Visual Studio Code projelerinin](quick-create-vs-code.md)Azure Resource Manager şablonlarını oluşturmak için araçlar sağlar. Visual Studio Code yüklenmeden Windows, macOS ve Linux 'ta kullanılabilir.
 
-Yapılandırmasını tamamladıktan [paketini karşıdan](https://www.npmjs.com/package/azure-streamanalytics-cicd), Azure Resource Manager şablonları çıktısını almak için aşağıdaki komutu kullanın. **ScriptPath** bağımsız değişkeni için mutlak yoludur **asaql** projenizdeki dosya. Asaproj.json ve JobConfig.json dosyaları, komut dosyası ile aynı klasörde olduğundan emin olun. Varsa **outputPath** belirtilmezse, şablonları yerleştirilecek **Dağıt** projenin altında klasör **bin** klasör.
+[Paketi indirdikten](https://www.npmjs.com/package/azure-streamanalytics-cicd)sonra, Azure Resource Manager şablonlarının çıktısını almak için aşağıdaki komutu kullanın. **ScriptPath** bağımsız değişkeni, projenizdeki **aşama QL** dosyasının mutlak yoludur. Asaproj. JSON ve JobConfig. JSON dosyalarının betik dosyası ile aynı klasörde olduğundan emin olun. **OutputPath** belirtilmemişse, şablonlar projenin **bin** klasörü altındaki **Dağıt** klasörüne yerleştirilir.
 
 ```powershell
 azure-streamanalytics-cicd build -scriptPath <scriptFullPath> -outputPath <outputPath>
 ```
-Örnek (macos'ta ile)
+Örnek (macOS 'ta)
 ```powershell
 azure-streamanalytics-cicd build -scriptPath "/Users/roger/projects/samplejob/script.asaql" 
 ```
 
-Stream Analytics Visual Studio Code Proje başarıyla oluşturulursa, altında aşağıdaki iki Azure Resource Manager şablonu dosyaları oluşturur **bin / Debug/perakende / Deploy** klasörü: 
+Bir Stream Analytics Visual Studio Code projesi başarıyla oluşturulduğunda, **bin/[Debug/Retail]/Deploy** klasörü altında aşağıdaki iki Azure Resource Manager şablon dosyasını oluşturur: 
 
-*  Resource Manager şablon dosyası
+*  Şablon dosyası Kaynak Yöneticisi
 
        [ProjectName].JobTemplate.json 
 
-*  Resource Manager parametre dosyası
+*  Kaynak Yöneticisi Parameters dosyası
 
        [ProjectName].JobTemplate.parameters.json   
 
-Visual Studio Code projenizdeki ayarlarından parameters.json dosyasındaki varsayılan parametreleri var. Parametreleri, başka bir ortama dağıtmak istiyorsanız, uygun şekilde değiştirin.
+Parameters. JSON dosyasındaki varsayılan parametreler Visual Studio Code projenizdeki ayarlardan alınır. Başka bir ortama dağıtmak istiyorsanız, parametreleri uygun şekilde değiştirin.
 
 > [!NOTE]
-> Tüm kimlik bilgilerini varsayılan değerlerin ayarlandığından null. İşiniz **gerekli** buluta dağıtmadan önce değerleri ayarlamak için.
+> Tüm kimlik bilgileri için varsayılan değerler null olarak ayarlanır. Buluta dağıtmadan önce değerleri ayarlamanız **gerekir** .
 
 ```json
 "Input_EntryStream_sharedAccessPolicyKey": {
       "value": null
     },
 ```
-Kullanma hakkında daha fazla bilgi edinin [bir Resource Manager şablon dosyası ve Azure PowerShell ile dağıtma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy). Kullanma hakkında daha fazla bilgi edinin [Resource Manager şablonunda bir parametre olarak bir nesne kullanmasını](https://docs.microsoft.com/azure/architecture/building-blocks/extending-templates/objects-as-parameters).
+[Kaynak Yöneticisi Şablon dosyası ve Azure PowerShell dağıtma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy)hakkında daha fazla bilgi edinin. Bir [nesnenin kaynak yöneticisi şablonunda parametre olarak nasıl kullanılacağı](https://docs.microsoft.com/azure/architecture/building-blocks/extending-templates/objects-as-parameters)hakkında daha fazla bilgi edinin.
 
-Yönetilen kimliği çıkış havuzu olarak Azure Data Lake Store Gen1 kullanmak için hizmet sorumlusu Azure'a dağıtmadan önce PowerShell kullanarak erişebilmesi gerekir. Kullanma hakkında daha fazla bilgi edinin [ADLS Gen1 yönetilen kimliği ile Resource Manager şablonu ile dağıtma](stream-analytics-managed-identities-adls.md#resource-manager-template-deployment).
+Azure Data Lake Store Gen1 için yönetilen kimliği çıkış havuzu olarak kullanmak için, Azure 'a dağıtılmadan önce PowerShell kullanarak hizmet sorumlusuna erişim sağlamanız gerekir. [Kaynak Yöneticisi şablonuyla yönetilen kimlik ile ADLS 1. dağıtma](stream-analytics-managed-identities-adls.md#resource-manager-template-deployment)hakkında daha fazla bilgi edinin.
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Hızlı Başlangıç: Visual Studio Code'da (Önizleme) Azure Stream Analytics bulut işi oluşturma](quick-create-vs-code.md)
-* [Stream Analytics sorguları Visual Studio Code (Önizleme) ile yerel olarak test etme](vscode-local-run.md)
-* [Visual Studio Code (Önizleme) ile Azure Stream Analytics'i keşfedin](vscode-explore-jobs.md)
+* [Hızlı Başlangıç: Visual Studio Code Azure Stream Analytics bulut işi oluşturma (Önizleme)](quick-create-vs-code.md)
+* [Sorguları Visual Studio Code ile yerel olarak test Stream Analytics (Önizleme)](vscode-local-run.md)
+* [Visual Studio Code ile Azure Stream Analytics araştırma (Önizleme)](vscode-explore-jobs.md)

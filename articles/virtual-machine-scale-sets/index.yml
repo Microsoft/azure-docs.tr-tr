@@ -4,14 +4,12 @@ title: Sanal Makine Ölçek Kümeleri Belgeleri
 metadata:
   title: 'Azure sanal makine ölçek kümeleri sayesinde bir grup özdeş, yük dengeli ve otomatik ölçeklendirilen VM’ler oluşturup yönetebilirsiniz. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle sanal makine ölçek kümeleri oluşturmayı, yapılandırmayı, yönetmeyi ve otomatik ölçeklendirmeyi öğrenin.'
   services: virtual-machine-scale-sets
-  author: carolz
-  manager: czeumault
+  author: georgewallace
+  manager: gwallace
   ms.service: virtual-machine-scale-sets
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
   ms.date: 03/14/2018
-  ms.author: carolz
+  ms.author: gwallace
 abstract:
   description: 'Azure sanal makine ölçek kümeleri sayesinde bir grup özdeş, yük dengeli ve otomatik ölçeklendirilen VM’ler oluşturup yönetebilirsiniz. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle sanal makine ölçek kümeleri oluşturmayı, yapılandırmayı, yönetmeyi ve otomatik ölçeklendirmeyi öğrenin.'
 sections:

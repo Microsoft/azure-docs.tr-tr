@@ -1,40 +1,23 @@
 ---
-title: Uygulama Seçki için Önkoşullar
-description: Uygulama seçki önkoşullarının listesi.
+title: Uygulama Seçdirme önkoşulları
+description: Kullanım dışı olan CPP makalesi, bılgısayar makalesine bağlı; "uygulama seçdirme önkoşulları listesi" idi.
 services: Azure, Marketplace, Cloud Partner Portal,
-author: pbutlerm
+author: ChJenk
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 03/13/2019
-ms.author: pabutler
-ms.openlocfilehash: 0219d7e8a94dd6710c553f2133442867e39f6870
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.author: v-chjen
+ms.openlocfilehash: 98a50481612d93a9a2d9d7d5bfb04bfa22db6e00
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935539"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819798"
 ---
-# <a name="prerequisites-for-application-curation"></a>Uygulama Seçki için Önkoşullar
+# <a name="prerequisites-for-application-curation"></a>Uygulama Seçdirme önkoşulları
 
-Microsoft, aşağıdaki gereksinimleri karşıladığını doğrulamak için belirli gözden geçirmeleri gerektirir:
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık finans ve operasyon teklifleri için Dynamics 365 oluşturma ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer).
 
-- Bir iş ortağı\'s özel kod uygun Microsoft yönergeleri.
-- Microsoft Dynamics yaşam döngüsü Hizmetleri (LCS) çözüm paketi başarıyla dağıtılabilir.
-- İşlem tamamlanabilir.
-
-Şu anda, iş ortakları bu gereksinimlerin karşılanmış olduğunu gösteren gerekir test dağıtımları yapmak ve sonra sonuçları Microsoft ile paylaşarak. Kod olacaktır, Microsoft forumlarındaki bir müşteri ortamında dağıtılan\'t doğrulandı. İş ortakları, aşağıdaki seçki yapıları ve testleri gerçekleştirmeniz gerekir:
-
-- Kod analizi raporu (CAR)
-- İş işlemi Modelleyicisi (BPM) test betikleri
-- Proje adı ve açıklaması
-- İş veritabanını yedekleme
-- Veri paketleri ve işlem veri paketleri (PDPs)
-- Yöntemi
-- İkili dosyaları (isteğe bağlı)
-- Dağıtılabilir paketleri
-- Modelleri (kod ve testler)
-- Pazarlama içeriği
-
-Teknik ve işlem gereksinimleri hakkında daha fazla bilgi için bkz. [Finans ve operasyon için uygulamaları doğrula](https://docs.microsoft.com/dynamics365/operations/dev-itpro/lcs-solutions/app-validation-lcs-solutions).  Ayrıca, zaten yapmadıysanız, gözden [Office 365, Dynamics 365, PowerApps ve Power BI teklifi yayımlama Kılavuzu](../appsource-offer-publishing-guide.md).
-
+Yeni bir Dynamics 365 for Operations teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer) bölümündeki yönergeleri izleyin.

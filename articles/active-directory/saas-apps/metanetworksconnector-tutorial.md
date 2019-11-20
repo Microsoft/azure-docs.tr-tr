@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Meta ağları Bağlayıcısı ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve Meta ağları bağlayıcı arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: meta ağlar Bağlayıcısı ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve meta ağları bağlayıcı arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,277 +8,278 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 4ae5f30d-113b-4261-b474-47ffbac08bf7
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/21/2019
 ms.author: jeedes
-ms.openlocfilehash: 82097b075ab86c4de5ab45e3110c9bc192ac7edb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a09eda25e8c7cc087770210cdfbe7e2bc9832acf
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67097360"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73160648"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-meta-networks-connector"></a>Öğretici: Meta ağları Bağlayıcısı ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-meta-networks-connector"></a>Öğretici: meta ağlar Bağlayıcısı ile Azure Active Directory tümleştirme
 
-Bu öğreticide, Meta ağları bağlayıcı Azure Active Directory (Azure AD) ile tümleştirmeyi öğrenin.
-Meta ağları Bağlayıcısı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, meta Networks bağlayıcısını Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Meta Networks bağlayıcısını Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Meta ağları bağlayıcı erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak Meta ağları bağlayıcıya (çoklu oturum açma) oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de meta ağları bağlayıcıya erişimi olan denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla meta ağlar Bağlayıcısı 'nda (çoklu oturum açma) otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Meta ağları Bağlayıcısı ile Azure AD tümleştirmesini yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini meta Networks Bağlayıcısı ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik meta ağları bağlayıcı çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Meta Networks Bağlayıcısı çoklu oturum açma etkin aboneliği
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Meta ağları bağlayıcı destekler **SP** ve **IDP** tarafından başlatılan
+* Meta Networks Bağlayıcısı **SP** ve **IDP** tarafından başlatılan SSO 'yu destekler
  
-* Meta ağları bağlayıcı destekler **zamanında** kullanıcı sağlama
+* Meta Networks Bağlayıcısı **, tam zamanında** Kullanıcı sağlamasını destekler
 
-## <a name="adding-meta-networks-connector-from-the-gallery"></a>Galeriden meta ağları bağlayıcı ekleme
+## <a name="adding-meta-networks-connector-from-the-gallery"></a>Galeriden meta Networks Bağlayıcısı ekleme
 
-Azure AD'ye Meta ağları bağlayıcı tümleştirmesini yapılandırmak için Meta ağları bağlayıcı Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Meta Networks bağlayıcısının Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden meta ağlar bağlayıcısını yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**Galeriden meta ağları bağlayıcı eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden meta ağlar Bağlayıcısı eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **Meta ağları bağlayıcı**seçin **Meta ağları bağlayıcı** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **meta ağlar Bağlayıcısı**yazın, sonuç panelinden **meta ağlar Bağlayıcısı** ' nı seçin, sonra da uygulamayı eklemek için düğme **Ekle** ' ye tıklayın.
 
-     ![Sonuç listesinde meta ağları Bağlayıcısı](common/search-new-app.png)
+     ![Sonuçlar listesindeki meta ağlar Bağlayıcısı](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve Meta ağları adlı bir test kullanıcı tabanlı Bağlayıcısı ile Azure AD çoklu oturum açmayı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve ilgili kullanıcı Meta ağları bağlayıcısında arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına bağlı olarak meta ağlar bağlayıcısıyla yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve meta ağlar bağlayıcısında ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma Meta ağları Bağlayıcısı ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı meta Networks Bağlayıcısı ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Meta ağları bağlayıcı çoklu oturum açmayı yapılandırma](#configure-meta-networks-connector-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Meta ağları bağlayıcı test kullanıcısı oluşturma](#create-meta-networks-connector-test-user)**  - kullanıcı Azure AD gösterimini bağlı Meta ağları bağlayıcısında Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. **[Meta Networks bağlayıcısını yapılandırma çoklu](#configure-meta-networks-connector-single-sign-on)** oturum açma, uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Kullanıcının Azure AD gösterimine bağlı olan meta ağlar bağlayıcısında Britta Simon 'a sahip olmak için **[meta Networks Bağlayıcısı test kullanıcısı oluşturun](#create-meta-networks-connector-test-user)** .
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma Meta ağları Bağlayıcısı ile yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı meta Networks Bağlayıcısı ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **Meta ağları bağlayıcı** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **meta ağlar Bağlayıcısı** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** başlatılan modu, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımları uygulayın:
 
-    ![Meta ağları bağlayıcı etki alanı ve URL'ler tek oturum açma bilgileri](common/idp-intiated.png)
+    ![Meta Networks bağlayıcı etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-intiated.png)
 
-    a. İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://login.nsof.io/v1/<ORGANIZATION-SHORT-NAME>/saml/metadata`
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://login.nsof.io/v1/<ORGANIZATION-SHORT-NAME>/saml/metadata`
 
-    b. İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://login.nsof.io/v1/<ORGANIZATION-SHORT-NAME>/sso/saml`
+    b. **Yanıt URL 'si** metin kutusuna şu kalıbı kullanarak bir URL yazın: `https://login.nsof.io/v1/<ORGANIZATION-SHORT-NAME>/sso/saml`
 
-5. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+5. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    ![Meta ağları bağlayıcı etki alanı ve URL'ler tek oturum açma bilgileri](common/both-advanced-urls.png)
+    ![Meta Networks bağlayıcı etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/both-advanced-urls.png)
 
-    a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<ORGANIZATION-SHORT-NAME>.metanetworks.com/login`
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<ORGANIZATION-SHORT-NAME>.metanetworks.com/login`
 
-    b. İçinde **geçiş durumu** metin kutusuna bir URL şu biçimi kullanarak: `https://<ORGANIZATION-SHORT-NAME>.metanetworks.com/#/`
+    b. **Geçiş durumu** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<ORGANIZATION-SHORT-NAME>.metanetworks.com/#/`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Yanıt URL'si gerçek tanımlayıcısı bu değerleri güncelleştirin ve oturum açma URL'si, öğreticinin ilerleyen bölümlerinde açıklanmıştır.
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı, yanıt URL 'SI ve oturum açma URL 'SI ile güncelleştirmek Öğreticinin ilerleyen kısımlarında açıklanmıştır.
 
-6. Meta ağları bağlayıcı uygulaması, özel öznitelik eşlemelerini SAML belirteci öznitelikleri yapılandırmanıza ekleyin gerektiren belirli bir biçimde SAML onaylamalarını bekliyor. Aşağıdaki ekran görüntüsünde, varsayılan öznitelikler listesinde gösterilmiştir. Tıklayın **Düzenle** açmak için simgeyi **kullanıcı öznitelikleri** iletişim.
+6. Meta Networks bağlayıcı uygulaması, SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde SAML onayları bekler. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir. **Kullanıcı öznitelikleri** iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![image](common/edit-attribute.png)
     
-7. Yukarıdaki için Ayrıca, SAML yanıtta geçirilecek birkaç daha fazla öznitelik Meta ağları bağlayıcı uygulaması bekliyor. İçinde **kullanıcı taleplerini** bölümünde **kullanıcı öznitelikleri** iletişim kutusunda gösterildiği gibi SAML belirteci özniteliği eklemek için aşağıdaki adımları gerçekleştirin tablonun altındaki:
+7. Meta Networks bağlayıcı uygulaması, yukarıdakine ek olarak, SAML yanıtına daha fazla öznitelik geçirilmesini bekler. **Kullanıcı öznitelikleri** Iletişim kutusundaki **Kullanıcı talepleri** bölümünde AŞAĞıDAKI tabloda gösterildiği gibi SAML belirteci özniteliği eklemek için aşağıdaki adımları gerçekleştirin:
     
-    | Ad | Kaynak özniteliği | Ad Alanı|
+    | Adı | Kaynak özniteliği | uzayına|
     | ---------------| --------------- | -------- |
-    | firstName | User.givenName | |
-    | Soyadı | User.surname | |
-    | emailaddress| User.Mail| `http://schemas.xmlsoap.org/ws/2005/05/identity/claims` |
-    | name | User.userPrincipalName| `http://schemas.xmlsoap.org/ws/2005/05/identity/claims` |
-    | Telefon | User.telephoneNumber | |
+    | FirstName | Kullanıcı. | |
+    | Soyadı | User. soyadı | |
+    | EmailAddress| Kullanıcı. Mail| `http://schemas.xmlsoap.org/ws/2005/05/identity/claims` |
+    | ad | User. UserPrincipalName| `http://schemas.xmlsoap.org/ws/2005/05/identity/claims` |
+    | Numarası | Kullanıcı. telephoneNumber | |
 
-    a. Tıklayın **Ekle yeni talep** açmak için **yönetmek, kullanıcı talepleri** iletişim.
+    a. **Kullanıcı taleplerini Yönet** iletişim kutusunu açmak için **yeni talep Ekle** ' ye tıklayın.
 
     ![image](common/new-save-attribute.png)
 
     ![image](common/new-attribute-details.png)
 
-    b. İçinde **adı** metin kutusuna, bu satır için gösterilen öznitelik adı yazın.
+    b. **Ad** metin kutusuna, bu satır için gösterilen öznitelik adını yazın.
 
-    c. Bırakın **Namespace** boş.
+    c. **Ad alanını** boş bırakın.
 
-    d. Kaynağı olarak **özniteliği**.
+    d. **Öznitelik**olarak kaynak seçin.
 
-    e. Gelen **kaynak özniteliği** listesinde, ilgili satır için gösterilen öznitelik değeri yazın.
+    e. **Kaynak özniteliği** listesinde, bu satır için gösterilen öznitelik değerini yazın.
 
-    f. Tıklayın **Tamam**
+    f. **Tamam 'a** tıklayın
 
-    g. **Kaydet**’e tıklayın.
+    g. **Kaydet** düğmesine tıklayın.
 
-8. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+8. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-9. Üzerinde **Meta ağları Bağlayıcısı'nı Ayarla** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+9. **Meta ağları ayarla Bağlayıcısı** bölümünde, uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure AD Tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-meta-networks-connector-single-sign-on"></a>Meta ağları bağlayıcı çoklu oturum açmayı yapılandırın
+### <a name="configure-meta-networks-connector-single-sign-on"></a>Meta Networks bağlayıcısını çoklu oturum açmayı yapılandırma
 
-1. Tarayıcınızda yeni bir sekme açın ve Meta ağları Bağlayıcısı yönetici hesabınızda oturum açın.
+1. Tarayıcınızda yeni bir sekme açın ve meta ağları bağlayıcı yönetici hesabınızda oturum açın.
     
     > [!NOTE]
-    > Güvenli sistem meta ağları Bağlayıcıdır. Bu nedenle, portal erişmeden önce kendi tarafında bir izin verilenler listesi eklenen, genel IP adresini almak gerekir. Genel IP adresi almak için izlemeniz aşağıdaki bağlantıda belirtilen [burada](https://whatismyipaddress.com/). IP adresiniz Gönder [Meta ağları bağlayıcı istemci Destek ekibine](mailto:support@metanetworks.com) bir izin verilenler listesine eklendiğinden, IP adresini almak için.
+    > Meta Networks Bağlayıcısı, güvenli bir sistemdir. Bu nedenle portala erişmeden önce, genel IP adresinizi kendi tarafında bir izin verilenler listesine eklemiş olmanız gerekir. Genel IP adresinizi almak için [burada](https://whatismyipaddress.com/)belirtilen aşağıdaki bağlantıyı izleyin. IP adresinizi bir izin verilenler listesine eklemek için, IP adresinizi [meta Networks Bağlayıcısı istemci destek ekibine](mailto:support@metanetworks.com) gönderin.
     
-2. Git **yönetici** seçip **ayarları**.
+2. **Yönetici** ' ye gidin ve **Ayarlar**' ı seçin.
     
-    ![Çoklu oturum açmayı yapılandırın](./media/metanetworksconnector-tutorial/configure3.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/metanetworksconnector-tutorial/configure3.png)
     
-3. Emin **Internet trafiğini günlüğe kaydetme** ve **zorla VPN MFA** kapalı olarak ayarlayın.
+3. **Internet trafiğini günlüğe kaydet** ve **VPN MFA 'yı zorla** olarak ayarlandığından emin olun.
     
-    ![Çoklu oturum açmayı yapılandırın](./media/metanetworksconnector-tutorial/configure1.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/metanetworksconnector-tutorial/configure1.png)
     
-4. Git **yönetici** seçip **SAML**.
+4. **Yönetici** ' ye gidin ve **SAML**' yi seçin.
     
-    ![Çoklu oturum açmayı yapılandırın](./media/metanetworksconnector-tutorial/configure4.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/metanetworksconnector-tutorial/configure4.png)
     
-5. Aşağıdaki adımları gerçekleştirin **ayrıntıları** sayfası:
+5. **Ayrıntılar** sayfasında aşağıdaki adımları gerçekleştirin:
     
-    ![Çoklu oturum açmayı yapılandırın](./media/metanetworksconnector-tutorial/configure2.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/metanetworksconnector-tutorial/configure2.png)
     
-    a. Kopyalama **SSO URL** yapıştırın ve değer **oturum açma URL'si** metin kutusunda **Meta ağları bağlayıcı etki alanı ve URL'ler** bölümü.
+    a. **SSO URL 'si** değerini kopyalayın ve **meta Networks Bağlayıcısı etki alanı ve URL 'Leri** bölümünde **oturum açma URL 'si** metin kutusuna yapıştırın.
     
-    b. Kopyalama **alıcı URL** yapıştırın ve değer **yanıt URL'si** metin kutusunda **Meta ağları bağlayıcı etki alanı ve URL'ler** bölümü.
+    b. **Alıcı URL 'si** değerini kopyalayın ve **meta Networks Bağlayıcısı etki alanı ve URL 'leri** bölümündeki **yanıt URL 'si** metin kutusuna yapıştırın.
     
-    c. Kopyalama **hedef kitle URİ'si (SP varlık kimliği)** yapıştırın ve değer **tanımlayıcı (varlık kimliği)** metin kutusunda **Meta ağları bağlayıcı etki alanı ve URL'ler** bölümü.
+    c. **Hedef kitle URI 'si (SP VARLıK kimliği)** değerini kopyalayın ve **meta Networks bağlayıcı etki alanı ve URL 'leri** bölümünde **tanımlayıcı (varlık kimliği)** metin kutusuna yapıştırın.
     
-    d. SAML'yi etkinleştir
+    d. SAML 'yi etkinleştirme
     
-6. Üzerinde **genel** sekmesinde aşağıdaki adımları gerçekleştirin:
+6. **Genel** sekmesinde. aşağıdaki adımları gerçekleştirin:
 
-    ![Çoklu oturum açmayı yapılandırın](./media/metanetworksconnector-tutorial/configure5.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/metanetworksconnector-tutorial/configure5.png)
 
-    a. İçinde **kimlik sağlayıcısının çoklu oturum açma URL'si**, Yapıştır **oturum açma URL'si** Azure portaldan kopyaladığınız değeri.
+    a. **Kimlik sağlayıcısı çoklu oturum açma URL**'sinde, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
 
-    b. İçinde **kimlik sağlayıcısını veren**, Yapıştır **Azure AD tanımlayıcısı** Azure portaldan kopyaladığınız değeri.
+    b. **Kimlik sağlayıcısı yayımcısı**' nda, Azure Portal KOPYALADıĞıNıZ **Azure AD tanımlayıcı** değerini yapıştırın.
 
-    c. Açık Not Defteri'nde, Azure portalından indirilen sertifikanın yapıştırın içine **X.509 sertifikası** metin.
+    c. İndirilen sertifikayı not defteri 'nde Azure portal açın, **X. 509.952 Certificate** metin kutusuna yapıştırın.
 
-    d. Etkinleştirme **tam zamanında sağlama**.
+    d. **Tam zamanında sağlamayı**etkinleştirin.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alanına **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**yazın.
   
-    b. İçinde **kullanıcı adı** alanına **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında, **\@yourcompansıon** ' yazın.  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma Meta ağları bağlayıcısına erişim izni verdiğinizde kullanmak Britta Simon etkinleştirin.
+Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak meta Networks bağlayıcısına erişim izni vererek Britta Simon 'u etkinleştirirsiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **Meta ağları bağlayıcı**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **meta ağlar Bağlayıcısı**' nı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **Meta ağları bağlayıcı**.
+2. Uygulamalar listesinde **meta ağlar Bağlayıcısı**' nı seçin.
 
-    ![Uygulamalar listesini Meta ağları Bağlayıcısı bağlantıyı](common/all-applications.png)
+    ![Uygulamalar listesindeki meta ağları bağlayıcı bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim kutusunda, tıklayın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-meta-networks-connector-test-user"></a>Meta ağları bağlayıcı test kullanıcısı oluşturma
+### <a name="create-meta-networks-connector-test-user"></a>Meta Networks Bağlayıcısı test kullanıcısı oluştur
 
-Bu bölümde, Britta Simon adlı bir kullanıcı Meta ağları bağlayıcısında oluşturulur. Meta ağları bağlayıcı tam zamanında sağlama, varsayılan olarak etkin olduğu destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Meta ağları bağlayıcısında bir kullanıcı zaten mevcut değilse yeni bir tane Meta ağları bağlayıcı erişmeye oluşturulur.
+Bu bölümde, meta ağlar Bağlayıcısı 'nda Britta Simon adlı bir Kullanıcı oluşturulur. Meta ağlar Bağlayıcısı, varsayılan olarak etkinleştirilen tam zamanında sağlamayı destekler. Bu bölümde sizin için herhangi bir eylem öğesi yok. Bir Kullanıcı meta Networks bağlayıcısında zaten mevcut değilse, meta ağları bağlayıcıya erişmeye çalıştığınızda yeni bir tane oluşturulur.
 
 >[!Note]
->Bir kullanıcı el ile oluşturmanız gerekiyorsa, kişi [Meta ağları bağlayıcı istemci Destek ekibine](mailto:support@metanetworks.com).
+>El ile bir kullanıcı oluşturmanız gerekiyorsa, [meta Networks Bağlayıcısı istemci destek ekibine](mailto:support@metanetworks.com)başvurun.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim panelinde Meta ağları bağlayıcı kutucuğa tıkladığınızda, otomatik olarak Meta ağları SSO'yu ayarlama bağlayıcısına oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde meta ağları bağlayıcı kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız meta ağları bağlayıcıya otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

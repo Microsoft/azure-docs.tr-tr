@@ -1,35 +1,35 @@
 ---
-title: Konuşma cihaz SDK'sı Roobo akıllı ses Dev Seti v1 - konuşma Hizmetleri
+title: Konuşma cihazları SDK Roobo akıllı ses geliştirme seti v1-konuşma hizmeti
 titleSuffix: Azure Cognitive Services
-description: Önkoşullar ve konuşma cihaz SDK'sı ile Roobo akıllı ses Dev Seti v1 başlamak için yönergeler.
+description: Konuşma cihazları SDK 'Sı ile çalışmaya başlama için Önkoşullar ve yönergeler, Roobo Smart Audio Dev Kit v1.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 05/02/2019
+ms.date: 07/05/2019
 ms.author: erhopf
-ms.openlocfilehash: 7c1a13a44d9db8ed029ce798f0bb34944a1a65a7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 08bac7cd833f52d2dfec4561c2f87330a4119748
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65409069"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68552870"
 ---
-# <a name="device-roobo-smart-audio-dev-kit"></a>Cihaz: Roobo akıllı ses Dev Seti
+# <a name="device-roobo-smart-audio-dev-kit"></a>Cihaz: Roobo akıllı ses geliştirme seti
 
-Bu makalede, cihaz Roobo akıllı ses Geliştirme Seti için belirli bilgiler sağlar.
+Bu makalede, Roobo Smart Audio Dev Kit için cihaza özgü bilgiler sağlanmaktadır.
 
 ## <a name="set-up-the-development-kit"></a>Geliştirme Seti ' ayarlayın
 
-1. Geliştirme Seti iki mikro USB bağlayıcı vardır. Sol bağlayıcının Geliştirme Seti desteklemek için ve güç aşağıdaki resimde vurgulanmıştır. Bunu kontrol edecek ve işaretlenmiş sağ görüntüde hata ayıklayın.
+1. Geliştirme setinde iki mikro USB bağlayıcısı vardır. Sol bağlayıcı, geliştirme setini güçlendirin ve aşağıdaki görüntüde güç olarak vurgulanır. Bu, doğru bir denetimdir ve görüntüde hata ayıklama olarak işaretlenir.
 
     ![dev Seti bağlanma](media/speech-devices-sdk/qsg-1.png)
 
-1. Bir bilgisayar için güç bağlantı bağlanın veya bağdaştırıcısı güç mikro USB kablosu kullanarak Geliştirme Seti güçlendirin. Yeşil power göstergesi üst panonun altında görüntülenir.
+1. Güç bağlantı noktasını bir BILGISAYARA veya güç bağdaştırıcısına bağlamak için mikro USB kablosu kullanarak geliştirme setini güçlendirin. Üst panonun altında yeşil bir güç göstergesi açılır.
 
-1. Geliştirme Seti denetlemek için ikinci bir mikro USB kablosu kullanarak hata ayıklama bağlantı bir bilgisayara bağlanın. Güvenli iletişimler sağlamak için yüksek kaliteli kablo kullanmak için gereklidir.
+1. Geliştirme setini denetlemek için, ikinci bir mikro USB kablosu kullanarak hata ayıklama bağlantı noktasını bir bilgisayara bağlayın. Güvenilir iletişimler sağlamak için yüksek kaliteli bir kablonun kullanılması önemlidir.
 
 1. Uygulamanızı Geliştirme Seti için döngüsel ya da doğrusal yapılandırma yönlendirmek.
 
@@ -40,7 +40,7 @@ Bu makalede, cihaz Roobo akıllı ses Geliştirme Seti için belirli bilgiler sa
 
     ![Doğrusal dev Seti yönü](media/speech-devices-sdk/qsg-2.png)
 
-1. Sertifikaları yükleme ve ses cihazı izinlerini ayarlayın. Bir komut istemi penceresinde aşağıdaki komutları yazın:
+1. Sertifikaları yükleyip ses cihazının izinlerini ayarlayın. Bir komut istemi penceresinde aşağıdaki komutları yazın:
 
    ```powershell
    adb push C:\SDSDK\Android-Sample-Release\scripts\roobo_setup.sh /data/
@@ -54,23 +54,23 @@ Bu makalede, cihaz Roobo akıllı ses Geliştirme Seti için belirli bilgiler sa
     > [!NOTE]
     > Android hata ayıklama köprüsü bu komutları kullanmak `adb.exe`, Android Studio yüklemesinin bir parçası olduğu. Bu araç C:\Users bulunur\[kullanıcı adı] \AppData\Local\Android\Sdk\platform araçları. Bu dizin çağırmak daha kullanışlı hale getirmek için yola ekleyebilirsiniz `adb`. Aksi takdirde, yüklemenizin adb.exe çağıran her komut için tam yolunu belirtmeniz gerekir `adb`.
     >
-    > Bir hata görürseniz `no devices/emulators found` sonra USB kablosu bağlı ve yüksek kaliteli kablo kontrol edin. Kullanabileceğiniz `adb devices` cihazların bir listesini döndürür gibi geliştirme setine bilgisayarınızı geçebildiğinden emin denetlemek için.
+    > Bir hata `no devices/emulators found` görürseniz, USB kablonuzun bağlı olduğunu ve yüksek kaliteli bir kablo olduğunu denetleyin. Bilgisayarınızın, cihaz `adb devices` listesini döndürdüğü için geliştirme seti ile konuştuğunu denetlemek için kullanabilirsiniz.
     >
     > [!TIP]
     > Bilgisayarınızın mikrofon ve Geliştirme Seti'nın mikrofonlar ile çalıştığından emin olmak Konuşmacı sessiz. Böylece, yanlışlıkla ses bilgisayardan cihazla tetiklemez.
 
-1. Konuşmacı geliştirme setine eklemek istiyorsanız, ses satırına bağlanabilirsiniz. 3,5 mm analog Tak ile kaliteli Konuşmacı seçmeniz gerekir.
+1. Konuşmacı geliştirme setine eklemek istiyorsanız, ses satırına bağlanabilirsiniz. 3,5 mm analog bir eklentiyle iyi kalitede bir konuşmacı seçmeniz gerekir.
 
     ![Vysor ses](media/speech-devices-sdk/qsg-14.png)
 
 ## <a name="development-information"></a>Geliştirme bilgileri
 
-Daha fazla geliştirme için bilgi [Roobo geliştirme Kılavuzu](http://dwn.roo.bo/server_upload/ddk/ROOBO%20Dev%20Kit-User%20Guide.pdf).
+Daha fazla geliştirme bilgisi için, [Roobo geliştirme kılavuzuna](http://dwn.roo.bo/server_upload/ddk/ROOBO%20Dev%20Kit-User%20Guide.pdf)bakın.
 
 ## <a name="audio"></a>Ses
 
-Roobo bellek Flash tüm ses yakalayan bir araç sağlar. Ses sorunları gidermenize yardımcı olabilir. Aracı sürümü her Geliştirme Seti yapılandırması için sağlanır. Üzerinde [Roobo site](https://ddk.roobo.com/)Cihazınızı seçin ve ardından **Roobo Araçları** sayfanın alt kısmındaki bağlantı.
+Roobo, Flash belleğine tüm sesleri yakalayan bir araç sağlar. Ses sorunları gidermenize yardımcı olabilir. Aracı sürümü her Geliştirme Seti yapılandırması için sağlanır. [Roobo sitesinde](https://ddk.roobo.com/)cihazınızı seçin ve ardından sayfanın altındaki **roobo araçları** bağlantısını seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Android örnek uygulamayı çalıştırma](speech-devices-sdk-android-quickstart.md)
+* [Android örnek uygulamasını çalıştırma](speech-devices-sdk-android-quickstart.md)

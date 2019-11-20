@@ -1,56 +1,77 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure kaynakları için RBAC belgeleri
+summary: Rol tabanlı erişim denetimi (RBAC), Azure kaynaklarına yönelik ayrıntılı erişim yönetimi sağlayan bir sistemdir. RBAC kullanarak ekibiniz içinde görevleri ayırabilir, bu işlere gerek duyan kişilere sadece erişim miktarını verebilirsiniz.
 metadata:
-  document_id: null
-  title: Azure kaynakları için rol tabanlı erişim denetimi (RBAC) belgeleri | Microsoft Docs
-  description: 'Azure kaynaklarına erişebilen kişileri, bu kişilerin bu kaynaklarla yapabileceklerini ve erişebildikleri alanları yönetmek için rol tabanlı erişim denetimi (RBAC) hakkında bilgi edinin.'
-  services: active-directory
-  author: rolyon
-  manager: mtillman
+  title: Azure kaynakları için rol tabanlı erişim denetimi (RBAC) belgeleri
+  description: Azure kaynaklarına erişebilen kişileri, bu kişilerin bu kaynaklarla yapabileceklerini ve erişebildikleri alanları yönetmek için rol tabanlı erişim denetimi (RBAC) hakkında bilgi edinin.
+  services: role-based-access-control
   ms.service: role-based-access-control
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: na
   ms.topic: landing-page
-  ms.date: 02/16/2019
+  ms.collection: na
+  author: rolyon
   ms.author: rolyon
-abstract:
-  description: 'Rol tabanlı erişim denetimi (RBAC), Azure kaynaklarına yönelik ayrıntılı erişim yönetimi sağlayan bir sistemdir. RBAC kullanarak ekibiniz içinde görevleri ayırabilir, bu işlere gerek duyan kişilere sadece erişim miktarını verebilirsiniz.'
-  aside:
-    image:
-      alt: null
-      height: 112
-      src: media/index/video-thumb-get-started.png
-      width: 200
-    title: 'Azure erişimini kilitleme (1:16)'
-    href: 'https://www.youtube.com/embed/FKBoWWKRnvI'
-    width: 200
-sections:
-  - title: 5 dakikalık hızlı başlangıçlar
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/role-based-access-control/check-access">Kullanıcının erişimini görüntüleme</a>
-  - title: Adım adım öğreticiler
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/role-based-access-control/quickstart-assign-role-user-portal">Kullanıcı erişimi verme - Portal</a>
-          - html: <a href="/azure/role-based-access-control/tutorial-role-assignments-group-powershell">Grup erişimi verme - PowerShell</a>
-          - html: <a href="/azure/role-based-access-control/tutorial-custom-role-powershell">Özel rol oluşturma - PowerShell</a>
-          - html: <a href="/azure/role-based-access-control/tutorial-custom-role-cli">Özel rol oluşturma - CLI</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Rol tabanlı erişim denetimi (RBAC) ile Azure kaynaklarınızın güvenliğini sağlama
-            href: /learn/modules/secure-azure-resources-with-rbac/
-            image:
-              src: /learn/achievements/secure-azure-resources-with-rbac.svg
-              href: /learn/modules/secure-azure-resources-with-rbac/
-      - type: paragraph
-        text: <a href="/learn/browse/?products=azure-active-directory">Daha fazla etkileşimli öğrenme içeriği...</a>
+  ms.date: 08/26/2019
+  ms.openlocfilehash: e947b1ab685bcc1da5d3895e49c07d1ff56c0937
+  ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/13/2019
+  ms.locfileid: "70968305"
+landingContent:
+- title: Azure kaynakları için RBAC hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: RBAC nedir?
+      url: overview.md
+    - text: Farklı rolleri anlama
+      url: rbac-and-directory-admin-roles.md
+  - linkListType: video
+    links:
+    - text: 'Microsoft Ignite: Azure erişimini kilitleme'
+      url: https://www.youtube.com/embed/FKBoWWKRnvI
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Kullanıcının erişimini görüntüleme
+      url: check-access.md
+  - linkListType: tutorial
+    links:
+    - text: Kullanıcı erişimi verme - Portal
+      url: quickstart-assign-role-user-portal.md
+    - text: Grup erişimi verme - PowerShell
+      url: tutorial-role-assignments-group-powershell.md
+  - linkListType: learn
+    links:
+    - text: RBAC ile Azure kaynaklarınızın güvenliğini sağlayın
+      url: https://docs.microsoft.com/learn/modules/secure-azure-resources-with-rbac/
+- title: Erişimi yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Portal
+      url: role-assignments-portal.md
+    - text: Portal - konuk kullanıcılar
+      url: role-assignments-external-users.md
+    - text: PowerShell
+      url: role-assignments-powershell.md
+    - text: Azure CLI
+      url: role-assignments-cli.md
+    - text: REST API
+      url: role-assignments-rest.md
+    - text: Şablon
+      url: role-assignments-template.md
+- title: Özel roller oluşturma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Özel roller
+      url: custom-roles.md
+  - linkListType: tutorial
+    links:
+    - text: Özel rol oluşturma - PowerShell
+      url: tutorial-custom-role-powershell.md
+    - text: Özel rol oluşturma - CLI
+      url: tutorial-custom-role-cli.md

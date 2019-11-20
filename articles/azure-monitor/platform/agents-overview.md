@@ -1,80 +1,101 @@
 ---
-title: Azure İzleme Aracısı genel bakış | Microsoft Docs
-description: Bu makalede, Azure'da veya karma ortamda barındırılan sanal makineleri izleme destekleyen Azure aracıları ayrıntılı bir genel bakış sağlar.
+title: Azure izleme aracılarına genel bakış | Microsoft Docs
+description: Bu makalede, Azure 'da veya karma ortamda barındırılan sanal makineleri izlemeyi destekleyen Azure aracılarına yönelik ayrıntılı bir genel bakış sunulmaktadır.
 services: azure-monitor
-documentationcenter: azure-monitor
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
 ms.service: azure-monitor
-ms.workload: na
-ms.tgt_pltfrm: na
+ms.subservice: ''
 ms.topic: conceptual
-ms.date: 11/14/2018
-ms.author: magoedte
-ms.openlocfilehash: 12eea032c37c8d737ae004d622b72536195c4444
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+author: bwren
+ms.author: bwren
+ms.date: 11/15/2019
+ms.openlocfilehash: a01258799efa81c8d3ddba398facaa90c24c2513
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65977579"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150036"
 ---
-# <a name="overview-of-the-azure-monitoring-agents"></a>Azure İzleme Aracısı genel bakış 
-Microsoft Azure, Microsoft Windows ve Azure, veri merkezinizi veya diğer bulut sağlayıcılarında barındırılan Linux çalıştıran sanal makineler farklı veri türleri toplamak için birden çok yol sağlar. Bir VM'yi izlemek için kullanılabilen aracıları üç tür şunlardır:
+# <a name="overview-of-the-azure-monitor-agents"></a>Azure Izleyici aracılarına genel bakış 
+Sanal makineler gibi işlem kaynakları, performansını ve kullanılabilirliğini yalnızca [diğer bulut kaynakları](../insights/monitor-azure-resource.md)gibi izlemek için veri oluşturur. İşlem kaynaklarında Ayrıca, izlenmesi gereken bir konuk işletim sistemi ve iş yükleri de vardır. Bu izleme verilerinin kaynağın içinden toplanması bir aracı gerektirir. Bu makalede, Azure Izleyici tarafından kullanılan aracılar açıklanmakta ve belirli ortamınızın gereksinimlerini karşılamanız gerektiğini belirlemenize yardımcı olur.
 
-* Azure tanılama uzantısı
-* Linux ve Windows için log Analytics aracısını
-* Bağımlılık aracısı
+## <a name="summary-of-agents"></a>Aracıların Özeti
 
-Bu makalede, sırayla, hangi BT Hizmet Yönetimi veya genel izleme gereksinimlerini destekleyecek belirlemek bunları ve bunların özelliklerini arasındaki farklar açıklanmaktadır.  
+> [!NOTE]
+> Azure Izleyici 'nin şu anda birden çok Aracısı vardır çünkü Azure Izleyici 'nin son birleştirme ve Log Analytics. Her iki aracı da bazı özellikleri paylaşır, ancak diğer özellikler belirli bir aracıya özeldir. Gereksinimlerinize bağlı olarak, aracılardan biri veya her ikisi de gerekebilir. 
+
+Azure Izleyici, her birinin belirli bir işlevi sağladığı üç aracı vardır. Gereksinimlerinize bağlı olarak, sanal makinelerinize ve diğer işlem kaynaklarına tek bir aracı veya birden çok yükleyebilirsiniz.
+
+* [Azure Tanılama uzantısı](#azure-diagnostic-extension)
+* [Log Analytics Aracısı](#log-analytics-agent)
+* [Bağımlılık Aracısı](#dependency-agent)
+
+Aşağıdaki tabloda, farklı aracıların hızlı karşılaştırması sağlanmıştır. Bu makalenin geri kalanında Ayrıntılar için bkz.
+
+| | Azure tanılama uzantısı | Log Analytics Aracısı | Bağımlılık aracısı |
+|:---|:---|:---|:---|
+| Desteklenen ortamlar | Azure | Azure<br>Diğer bulut<br>Şirket içi | Azure<br>Diğer bulut<br>Şirket içi |
+| İşletim sistemleri | Windows<br>Linux | Windows<br>Linux | Windows<br>Linux
+| Aracı bağımlılıkları  | None | None | Log Analytics Aracısı gerektirir |
+| Toplanan veriler | Olay Günlükleri<br>ETW olayları<br>Syslog<br>Performans<br>IIS günlükleri<br>.NET uygulama izleme çıkış günlükleri<br>Kilitlenme bilgi dökümleri | Olay Günlükleri<br>Syslog<br>Performans<br>IIS günlükleri<br>Özel günlükler<br>Çözümlerdeki veriler | İşlem ayrıntıları ve bağımlılıklar<br>Ağ bağlantısı ölçümleri |
+| Gönderilen veriler | Azure Storage<br>Azure Izleyici ölçümleri<br>Olay Hub'ı | Azure İzleyici Günlükleri | Azure İzleyici Günlükleri |
+
+
 
 ## <a name="azure-diagnostic-extension"></a>Azure tanılama uzantısı
-[Azure tanılama uzantısını](../../azure-monitor/platform/diagnostics-extension-overview.md) (genellikle Windows Azure tanılama (WAD) ya da Linux Azure tanılama (LAD) bir uzantısı olarak adlandırılır), sağlanan Azure bulut Hizmetleri için 2010'da genel kullanıma sunulan duyurulduğu tanılama veri koleksiyonu basit bir VM gibi bir Azure işlem kaynağı sunar ve Azure depolama için kalıcı bir aracıdır. Depolama alanında birkaç kullanılabilir araç biriyle gibi görüntülemek seçtikten sonra [Visual Studio sunucu Gezgini'ndeki](/visualstudio/azure/vs-azure-tools-storage-resources-server-explorer-browse-manage) ve [Azure Depolama Gezgini](../../vs-azure-tools-storage-manage-with-storage-explorer.md).
+[Azure tanılama uzantısı](../../azure-monitor/platform/diagnostics-extension-overview.md) , Konuk işletim sisteminden ve Azure işlem kaynaklarının iş yüklerinden izleme verilerini toplar. Birincil olarak Azure Storage 'da veri toplar. Azure Izleyici 'yi, verileri depolamadan bir Log Analytics çalışma alanına kopyalayacak şekilde yapılandırabilirsiniz. Ayrıca, Azure Izleyici ölçümlerine konuk performans verileri toplayabilirsiniz.
 
-Toplanacak seçebilirsiniz:
+Azure tanılama uzantısı, genellikle Microsoft Azure tanılama (WAD) veya Linux Azure tanılama (LAD) uzantısı olarak adlandırılır.
 
-* İşletim sistemi performans sayaçları ve olay günlüklerini veya önceden tanımlanmış birtakım toplamak belirtebilirsiniz. 
-* Tüm istekleri ve/veya bir IIS web sunucusuna başarısız istekler
-* .NET uygulama izleme çıkış günlükleri
-* Windows (ETW) olayları için olay izleme 
-* Syslog günlüğü olaylarını Topla  
-* Kilitlenme bilgi dökümleri 
 
-Azure Tanılama aracı, aşağıdakileri yapmak istediğinizde kullanılmalıdır:
+### <a name="scenarios-supported"></a>Desteklenen senaryolar
 
-* Arşiv günlükleri ve Azure depolama ölçümleri
-* İzleme verileri, üçüncü taraf araçlarla tümleştirin. Birçok farklı yöntemle sorgulama için iletilen depolama hesabı dahil olmak üzere bu araçları kullanın [Event Hubs](../../event-hubs/event-hubs-about.md), veya ile sorgulama [Azure izleme REST API'si](../../azure-monitor/platform/rest-api-walkthrough.md)
-* Azure portalında ölçüm grafikleri oluşturma veya neredeyse gerçek zamanlı oluşturmak için Azure İzleyici Veril [ölçüm uyarıları](../../azure-monitor/platform/alerts-metric-overview.md). 
-* Sanal makine ölçek kümelerini otomatik ölçeklendirme ve klasik bulut Hizmetleri, konuk işletim sistemi ölçümlere göre.
-* VM önyükleme sorunlarını denetleyin [önyükleme tanılaması](../../virtual-machines/troubleshooting/boot-diagnostics.md).
-* Uygulamalarınızı nasıl performans gösterdiğini anlamak ve bunlarla etkileyen sorunları proaktif olarak tanımlayan [Application Insights](../../azure-monitor/overview.md).
-* Azure İzleyici ölçümleri almak ve Cloud Services'dan Klasik VM'ler, toplanan verileri günlüğe yapılandırın ve Service Fabric düğümleri bir Azure depolama hesabında depolanır.
+Azure Tanılama uzantısı tarafından desteklenen senaryolar şunlardır:
+
+* Azure işlem kaynaklarından günlükleri ve performans verilerini toplayın.
+* Konuk işletim sisteminden Azure depolama 'ya Günlükler ve performans verileri arşivleyin.
+* [Azure Depolama Gezgini](../../vs-azure-tools-storage-manage-with-storage-explorer.md)gibi bir araç kullanarak izleme verilerini depolamada görüntüleyin.
+* Neredeyse gerçek zamanlı [ölçüm uyarıları](../../azure-monitor/platform/alerts-metric-overview.md) ve [Otomatik ölçeklendirme](autoscale-overview.md)gibi [Azure izleyici ölçümleri](data-platform-metrics.md) tarafından desteklenen özelliklerden yararlanmak için bir ölçüm veritabanında performans verilerini toplayın. 
+* [Günlük sorguları](../log-query/log-query-overview.md)gibi [Azure izleyici günlükleri](data-platform-logs.md#what-can-you-do-with-azure-monitor-logs) tarafından desteklenen özelliklerden yararlanmak için [depolama 'dan bir Log Analytics çalışma alanına](azure-storage-iis-table.md) izleme verileri toplayın.
+* [Azure Event Hubs](diagnostics-extension-stream-event-hubs.md)kullanarak, üçüncü taraf araçlara izleme verileri gönderin.
+* [Önyükleme tanılamaları](../../virtual-machines/troubleshooting/boot-diagnostics.md)ile VM önyüklemesi sorunlarını araştırın.
+* Diğer uygulama izlemeyle tümleştirilecek [APPLICATION INSIGHTS](diagnostics-extension-to-application-insights.md) sanal makinenizde çalışan uygulamalardan verileri kopyalayın.
 
 ## <a name="log-analytics-agent"></a>Log Analytics Aracısı
-Gelişmiş, birden fazla ölçüm ve günlükleri kümesini toplamak gereken izleme için Log Analytics aracısını (Microsoft Monitoring Agent (MMA) olarak da bilinir) Windows ve Linux için gereklidir. Log Analytics aracısını kapsamlı yönetimi için şirket içi fiziksel ve sanal makineler arasında bilgisayarlar System Center Operations Manager tarafından izlenen geliştirilmiştir ve diğer bulutlarda Vm'lerinde barındırılan. Windows ve Linux aracıları hem çözüm tabanlı izleme verilerini, hem de, yapılandırdığınız özel veri kaynaklarını toplamak için Azure İzleyici'de bir Log Analytics çalışma alanına bağlayın.
+[Log Analytics Aracısı](log-analytics-agent.md) , Azure 'da, diğer bulut sağlayıcılarında ve Şirket içindeki sanal makinelerin Konuk işletim sisteminden ve iş yüklerinden izleme verilerini toplar. Log Analytics çalışma alanına veri toplar.
 
-[!INCLUDE [log-analytics-agent-note](../../../includes/log-analytics-agent-note.md)]
+Log Analytics Aracısı, System Center Operations Manager tarafından kullanılan aracıdır ve yönetim grubunuz ve Azure Izleyici ile aynı anda iletişim kurmak üzere çok ana aracı bilgisayarlardır. Bu aracı, Azure Izleyici 'deki belirli çözümler için de gereklidir.
 
-Log Analytics aracısını istediğinizde kullanılmalıdır:
+Windows için Log Analytics Aracısı genellikle Microsoft Yönetim Aracısı (MMA) olarak adlandırılır. Linux için Log Analytics Aracısı genellikle OMS Aracısı olarak adlandırılır.
 
-* Kaynakları hem Azure, diğer bulut sağlayıcıları ve şirket içi kaynaklara içindeki çeşitli veri toplayın. 
-* İzleme çözümleri gibi Azure İzleyici birini [VM'ler için Azure İzleyici](../insights/vminsights-overview.md), [kapsayıcılar için Azure İzleyici](../insights/container-insights-overview.md)vb.  
-* Diğer Azure Yönetim Hizmetleri gibi birini [Azure Güvenlik Merkezi](../../security-center/security-center-intro.md), [Azure Otomasyonu](../../automation/automation-intro.md)vb.
 
-Çeşitli Azure Hizmetleri olarak daha önce toplanmış *Operations Management Suite*, ve bunun sonucunda, Log Analytics aracısını Azure Güvenlik Merkezi ve Azure Otomasyonu gibi hizmetleriyle paylaşılır.  Bu, kapsamlı yönetimini sağlayan Azure Vm'leriniz yaşam döngüleri boyunca teslim sundukları özellik kümesini içerir.  Bu bazı örnekleri şunlardır:
+### <a name="scenarios-supported"></a>Desteklenen senaryolar
 
-* [Azure Otomasyonu, güncelleştirme yönetimi](../../automation/automation-update-management.md) işletim sistemi güncelleştirmeleri.
-* [Azure Otomasyonu Desired State Configuration](../../automation/automation-dsc-overview.md) tutarlı yapılandırma durumunu korumak üzere.
-* İzleme yapılandırma değişiklikleriyle [Azure Otomasyon, değişiklik izleme ve stok](../../automation/change-tracking.md).
-* Azure Hizmetleri gibi [Application Insights](https://docs.microsoft.com/azure/application-insights/) ve [Azure Güvenlik Merkezi](https://docs.microsoft.com/azure/security-center/), hangi yerel olarak depolamak verilerini doğrudan Log Analytics'te.  
+Log Analytics Aracısı tarafından desteklenen senaryolar şunlardır:
+
+* Azure, diğer bulut sağlayıcıları ve şirket içi sanal makinelerden gelen günlükleri ve performans verilerini toplayın. 
+* [Günlük sorguları](../log-query/log-query-overview.md)gibi [Azure izleyici günlükleri](data-platform-logs.md#what-can-you-do-with-azure-monitor-logs) tarafından desteklenen özelliklerden yararlanmak için bir Log Analytics çalışma alanına izleme verileri toplayın.
+* [VM'ler için Azure izleyici](../insights/vminsights-overview.md), [kapsayıcılar için Azure izleyici](../insights/container-insights-overview.md)vb. gibi Azure izleyici izleme çözümlerini kullanın.  
+* Log Analytics aracısını gerektiren [Azure Sentinel](../../sentinel/overview.md) 'i kullanarak sanal makinelerinizin güvenliğini yönetin.
+* Log Analytics aracısını gerektiren [Azure Güvenlik Merkezi](../../security-center/security-center-intro.md) 'ni kullanarak sanal makinelerinizin güvenliğini yönetin.
+* Azure [Otomasyonu](../../automation/automation-intro.md) özelliklerini kullanarak Azure VM 'lerinizi yaşam döngülerinde kapsamlı bir şekilde yönetimini sunun.  Log Analytics aracısını gerektiren bu özelliklerin örnekleri şunlardır:
+  * İşletim sistemi güncelleştirmelerinin [Azure Otomasyonu güncelleştirme yönetimi](../../automation/automation-update-management.md) .
+  * Tutarlı yapılandırma durumunu korumak için [Azure Otomasyonu durum yapılandırması](../../automation/automation-dsc-overview.md) .
+  * [Azure otomasyonu değişiklik izleme ve envanteriyle](../../automation/change-tracking.md)yapılandırma değişikliklerini izleyin.
 
 ## <a name="dependency-agent"></a>Bağımlılık aracısı
-Bağımlılık Aracısı'nı, başlangıçta Microsoft tarafından geliştirilmiş değil hizmet eşlemesi çözümünün parçası olarak geliştirilmiştir. [Hizmet eşlemesi](../insights/service-map.md) ve [VM'ler için Azure İzleyici](../insights/vminsights-overview.md) gerektiren bir bağımlılık aracısını Windows ve Linux sanal makineleri ve ile tümleştirilir sanal üzerinde çalışan işlemler hakkında bulunan veri toplamak için Log Analytics aracısını makine ve işlem dış bağımlılıkları. Bu verileri bir Log Analytics çalışma alanında depolar ve bulunan birbirine bağlı bileşenleri görselleştirir.
+Bağımlılık Aracısı, sanal makine ve dış işlem bağımlılıkları üzerinde çalışan işlemler hakkında bulunan verileri toplar. Bu aracı [hizmet eşlemesi](../insights/service-map.md) ve eşleme özelliği [VM'ler için Azure izleyici](../insights/vminsights-overview.md)için gereklidir. Bağımlılık Aracısı Log Analytics aracısına gerek duyar ve verileri Azure Izleyici 'de bir Log Analytics çalışma alanına yazar.
 
-Sanal makinenizin izlemek üzere bu aracı bileşimi gerekebilir. Aracıları yan yana Azure uzantıları ancak yüklenebilir Linux'ta, Log Analytics aracısını *gerekir* yüklenmesi ilk; Aksi takdirde yükleme başarısız olur. 
+
+## <a name="using-multiple-agents"></a>Birden çok aracı kullanma
+Belirli bir sanal makine için Azure tanılama uzantısı 'nı veya Log Analytics aracısını kullanmak üzere belirli gereksinimlere sahip olabilirsiniz. Örneğin, Azure tanılama uzantısı gerektiren ölçüm uyarılarını kullanmak isteyebilirsiniz. Ancak, bağımlılık Aracısı ve Log Analytics Aracısı gerektiren VM'ler için Azure İzleyici Map özelliğini de kullanmak isteyebilirsiniz. Bu durumda, birden çok aracı kullanabilirsiniz ve bu, her birinden işlevselliği gerektiren müşteriler için yaygın bir senaryodur.
+
+### <a name="considerations"></a>Dikkat edilmesi gerekenler
+
+- Bağımlılık Aracısı, Log Analytics aracısının aynı sanal makinede yüklü olmasını gerektirir.
+- Linux VM 'lerinde, Azure tanılama uzantısından önce Log Analytics aracısının yüklenmesi gerekir.
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz: [Log Analytics aracısını bakış](../../azure-monitor/platform/log-analytics-agent.md) gereksinimleri ve desteklenen yöntemlerden makineleri Azure'da, veri merkezinizi veya başka bir bulut ortamında barındırılan aracı dağıtmak için gözden geçirmek için.
+- Aracıyı Azure 'da, veri merkezinizde veya diğer bulut ortamınızda barındırılan makinelere dağıtmak için gereksinimleri ve desteklenen yöntemleri gözden geçirmek üzere [Log Analytics aracısına genel bakış](../../azure-monitor/platform/log-analytics-agent.md) konusuna bakın.
 

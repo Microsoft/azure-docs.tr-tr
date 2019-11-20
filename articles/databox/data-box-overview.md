@@ -7,14 +7,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: pod
 ms.topic: overview
-ms.date: 07/03/2019
+ms.date: 09/17/2019
 ms.author: alkohli
-ms.openlocfilehash: cd2a776988ba27add54c69b0feccbc3fce8337aa
-ms.sourcegitcommit: 978e1b8cac3da254f9d6309e0195c45b38c24eb5
+ms.openlocfilehash: a3e27cf427de3a33f71d6f4a0af9b1590abeb573
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67551520"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71066993"
 ---
 # <a name="what-is-azure-data-box"></a>Azure Data Box nedir?
 
@@ -59,11 +59,11 @@ Data Box cihazı bu sürümde aşağıdaki özelliklere sahiptir.
 | Belirtimler                                          | Açıklama              |
 |---------------------------------------------------------|--------------------------|
 | Ağırlık                                                  | < 50 lb                |
-| Boyutlar                                              | Cihaz - Width: 309.0 mm yükseklik: 430.4 mm derinliği: 502.0 mm |            
+| Boyutlar                                              | Cihaz genişliği: 309,0 mm Yükseklik: 430,4 mm Derinlik: 502,0 mm |            
 | Raf alanı                                              | Yanlamasına rafa yerleştirildiğinde 7 U (rafa takılamaz)|
 | Gerekli kablolar                                         | 1 X güç kablosu (dahildir) <br> 2 RJ45 kablosu <br> 2 X SFP+ Twinax bakır kablo|
 | Depolama kapasitesi                                        | 100 TB boyutundaki cihaz, RAID 5 korumasından sonra 80 TB kullanılabilir kapasiteye sahip|
-| Güç derecelendirme                                            | Güç kaynağı birim için 700 derecelendirmesi <br> Genellikle, birim çizer 375 Batı Avustralya|
+| Güç derecelendirmesi                                            | Güç kaynağı birimi 700 W için derecelendirilir. <br> Genellikle, birim 375 W çizer.|
 | Ağ arabirimleri                                      | 2 X 1 GbE arabirimi - MGMT, DATA 3. <br> MGMT - yönetim için, kullanıcı tarafından yapılandırılamaz, ilk kurulumda kullanılır <br> DATA3 - veriler için, kullanıcı tarafından yapılandırılabilir ve varsayılan olarak dinamiktir <br> MGMT ve DATA 3, 10 GbE olarak da çalışabilir <br> 2 X 10 GbE arabirimi - DATA 1, DATA 2 <br> Her ikisi de veriler içindir, dinamik (varsayılan) veya statik olarak yapılandırılabilir |
 | Veri aktarım medyası                                     | RJ45, SFP+ bakır 10 GbE Ethernet  |
 | Güvenlik                                                | Üzerinde oynanmasına karşı dayanıklı özel vidaları olan, sağlamlaştırılmış cihaz kasası <br> Cihazın altına yapıştırılmış, üzerinde oynandığını belli eden çıkartmalar|
@@ -109,16 +109,9 @@ Bu işlem boyunca tüm durum değişiklikleri e-posta ile bildirilir. Ayrıntıl
 
 ## <a name="region-availability"></a>Bölge kullanılabilirliği
 
-Veri kutusu hizmeti dağıtılan bölgeye göre veri aktarma cihazı sevk ülke/bölge ve ' % s'hedef Azure depolama hesabı veri aktarma burada. 
+Data Box, Hizmetin dağıtıldığı bölge, cihazın gönderildiği ülke/bölge ve verileri aktardığınız hedef Azure depolama hesabı temelinde veri aktarabilir. 
 
-- **Hizmet kullanılabilirliği** - Bu sürümde, Data Box hizmeti şu bölgelerde kullanılabilir:
-    - Birleşik Devletler'deki tüm bölgeler: Orta Batı ABD, Batı ABD2, Batı ABD, Orta Güney ABD, Orta ABD, Orta Kuzey ABD, Doğu ABD ve Doğu ABD2.
-    - Avrupa Birliği: Batı Avrupa ve Kuzey Avrupa.
-    - Birleşik Krallık: UK Güney ve UK Batı.
-    - Fransa: Fransa Orta ve Fransa Güney.
-    - Japonya - Japonya Doğu ve Japonya Batı.
-    - Avustralya - Avustralya Doğu ve Avustralya Güneydoğu.
-    - Kanada - Kanada Doğu ve Kanada orta.
+- **Hizmet kullanılabilirliği** -bölge kullanılabilirliği hakkında bilgi için [bölgeye göre kullanılabilir Azure ürünlerine](https://azure.microsoft.com/global-infrastructure/services/?products=databox&regions=all)gidin. Data Box, Azure Kamu Bulutu 'nda da dağıtılabilir. Daha fazla bilgi için bkz. [Azure Kamu nedir?](https://docs.microsoft.com/azure/azure-government/documentation-government-welcome).
 
 - **Hedef Depolama hesapları**: Verilerin depolandığı depolama hesapları, hizmetin kullanılabildiği tüm Azure bölgelerinde sağlanır.  
 

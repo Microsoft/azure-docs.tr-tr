@@ -1,97 +1,104 @@
 ---
-title: B2B işbirliği - Azure Active Directory sorunlarını giderme | Microsoft Docs
-description: Azure Active Directory B2B işbirliği ile karşılaşılan sorunlara yönelik çözümler
+title: B2B işbirliği sorunlarını giderme-Azure Active Directory | Microsoft Docs
+description: Azure Active Directory B2B işbirliğiyle ilgili yaygın sorunlar için çözümler
 services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
-ms.topic: conceptual
-ms.date: 05/25/2017
+ms.topic: troubleshooting
+ms.date: 11/12/2019
+tags: active-directory
 ms.author: mimart
 author: v-miegge
-manager: celestedg
+manager: dcscontentpm
 ms.reviewer: mal
-ms.custom: it-pro, seo-update-azuread-jan
+ms.custom:
+- it-pro
+- seo-update-azuread-jan"
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4185d29ff1770ed9549b4b63a2e5da579bcf054f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6aee049f91aaa071595ab42e9bb4d6b2f5e8616d
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65767166"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74021835"
 ---
-# <a name="troubleshooting-azure-active-directory-b2b-collaboration"></a>Azure Active Directory B2B işbirliği sorunlarını giderme
+# <a name="troubleshooting-azure-active-directory-b2b-collaboration"></a>B2B işbirliği Azure Active Directory sorunlarını giderme
 
-Azure Active Directory (Azure AD) B2B işbirliği ile karşılaşılan sorunlara yönelik bazı çözümler aşağıda verilmiştir.
+İşte Azure Active Directory (Azure AD) B2B işbirliğiyle ilgili yaygın sorunlar için bazı çözümler.
 
-## <a name="ive-added-an-external-user-but-do-not-see-them-in-my-global-address-book-or-in-the-people-picker"></a>Bir dış kullanıcının ekledik ancak bunların benim Genel Adres Defteri'nde veya kişi seçici görmez
+## <a name="ive-added-an-external-user-but-do-not-see-them-in-my-global-address-book-or-in-the-people-picker"></a>Dış Kullanıcı ekledim ancak bunları Genel Adres defterimde veya kişiler seçicisinde gördüm
 
-Burada dış kullanıcılar listede doldurulmaz durumlarda, nesne çoğaltmak için birkaç dakika sürebilir.
+Dış kullanıcıların listede doldurulmadığı durumlarda, nesnenin çoğaltılması birkaç dakika sürebilir.
 
-## <a name="a-b2b-guest-user-is-not-showing-up-in-sharepoint-onlineonedrive-people-picker"></a>B2B Konuk kullanıcı SharePoint Online/OneDrive Kişi Seçici gösterilmiyor
+## <a name="a-b2b-guest-user-is-not-showing-up-in-sharepoint-onlineonedrive-people-picker"></a>B2B Konuk Kullanıcı, SharePoint Online/OneDrive kişi seçicisinde gösterilmiyor
 
-SharePoint Online (SPO) Kişi Seçici var olan konuk kullanıcılar için arama özelliğini eski davranışı eşleştirmek için varsayılan olarak kapalı'dır.
+SharePoint Online (SPO) kişi seçicisindeki mevcut Konuk kullanıcıları arama özelliği, eski davranışa uyacak şekilde varsayılan olarak KAPALıDıR.
 
-'ShowPeoplePickerSuggestionsForGuestUsers' ayarı Kiracı ve site koleksiyonu düzeyinde kullanarak bu özelliği etkinleştirebilirsiniz. Üyelerinin dizindeki tüm mevcut Konuk kullanıcıları aramak Set-SPOTenant ve Set-SPOSite cmdlet'lerini kullanarak özelliğini ayarlayabilirsiniz. Değişiklikler Kiracı kapsamında zaten sağlanan SPO site etkilemez.
+Kiracı ve site koleksiyonu düzeyinde ' ShowPeoplePickerSuggestionsForGuestUsers ' ayarını kullanarak bu özelliği etkinleştirebilirsiniz. Özelliği set-SPOTenant ve set-SPOSite cmdlet 'lerini kullanarak ayarlayabilirsiniz. Bu özellik, üyelerin dizindeki tüm mevcut Konuk kullanıcıları aramasını sağlar. Kiracı kapsamındaki değişiklikler zaten sağlanmış olan SPO sitelerini etkilemez.
 
-## <a name="invitations-have-been-disabled-for-directory"></a>Davet dizini devre dışı bırakıldı
+## <a name="invitations-have-been-disabled-for-directory"></a>Dizin için davetler devre dışı bırakıldı
 
-Kullanıcıları davet için izinlere sahip değilsiniz bildirilir, kullanıcı hesabınızın kullanıcı ayarları altında dış kullanıcıları davet yetkisi olduğunu doğrulayın:
+Kullanıcıları davet etme izniniz yoksa, Kullanıcı hesabınızın Azure Active Directory > Kullanıcı ayarlarından dış kullanıcıları davet etmek için > > dış işbirliği ayarlarını yönetme yetkisine sahip olduğunu doğrulayın:
 
-![Dış kullanıcılar ayarları gösteren ekran görüntüsü](media/troubleshoot/external-user-settings.png)
+![Dış Kullanıcı ayarlarını gösteren ekran görüntüsü](media/troubleshoot/external-user-settings.png)
 
-Size kısa süre önce bu ayarları değiştiren veya konuk davet edici rolüne atanmış bir kullanıcıya, değişiklikler etkili olmadan önce 15-60 dakika gecikme olabilir.
+Son zamanlarda bu ayarları değiştirdiyseniz veya konuk davet eden rolünü bir kullanıcıya atadıysanız, değişiklikler yürürlüğe girmeden önce 15-60 dakikalık bir gecikme olabilir.
 
-## <a name="the-user-that-i-invited-is-receiving-an-error-during-redemption"></a>Davet ettim ve kullanıcı alma sırasında bir hata mesajı
+## <a name="the-user-that-i-invited-is-receiving-an-error-during-redemption"></a>Davet etdiğim Kullanıcı, kullanım sırasında bir hata alıyor
 
 Sık karşılaşılan hatalar şunlardır:
 
-### <a name="invitees-admin-has-disallowed-emailverified-users-from-being-created-in-their-tenant"></a>Davetli'nın yönetici kendilerine ait kiracıda oluşturulan EmailVerified kullanıcıların izin verilmeyen
+### <a name="invitees-admin-has-disallowed-emailverified-users-from-being-created-in-their-tenant"></a>Davetli kullanıcının yöneticisinin kiracısında, Emaildoğrulanan kullanıcıların oluşturulmasını izin vermemiş
 
-Kullanıcılar, kuruluşunuzun Azure Active Directory kullanıyor, ancak burada belirli bir kullanıcının hesabı yok davet ettiğinizde (örneğin, kullanıcının Azure AD contoso.com yok). Contoso.com yönetici, kullanıcıların oluşturulmasını önleyen bir yerde bir ilkesi olabilir. Kullanıcı, dış kullanıcılar izin verilmediğini belirlemek için yönetici ile iade etmeniz gerekir. Dış kullanıcının yönetici e-posta ile doğrulanmış kullanıcıların kendi etki alanlarındaki gerekebilir (bkz. Bu [makale](/powershell/module/msonline/set-msolcompanysettings?view=azureadps-1.0) e-posta doğrulanmış kullanıcıların üzerinde).
+Kuruluş, Azure Active Directory kullanan kullanıcıları davet ederken, ancak belirli kullanıcı hesabının bulunmadığı (örneğin, Kullanıcı Azure AD contoso.com 'de yok). Contoso.com yöneticisinin, kullanıcıların oluşturulmasını önlemek için bir ilke olabilir. Kullanıcının dış kullanıcılara izin verilip verilmeyeceğini öğrenmek için yönetici ile denetlemesi gerekir. Dış kullanıcının yöneticisinin etki alanında e-posta doğrulanmış kullanıcılara izin verilmesi gerekebilir (e-posta doğrulanan kullanıcılara izin verme konusunda bu [makaleye](/powershell/module/msonline/set-msolcompanysettings?view=azureadps-1.0) bakın).
 
-![Kullanıcılar Kiracı e-posta izin vermiyor belirten hata doğrulandı](media/troubleshoot/allow-email-verified-users.png)
+![Kiracıyı bildiren hata, e-posta tarafından doğrulanan kullanıcılara izin vermiyor](media/troubleshoot/allow-email-verified-users.png)
 
-### <a name="external-user-does-not-exist-already-in-a-federated-domain"></a>Dış kullanıcı zaten bir Federasyon etki alanında yok.
+### <a name="external-user-does-not-exist-already-in-a-federated-domain"></a>Dış Kullanıcı zaten Federasyon etki alanında yok
 
-Kullanıcı zaten Azure Active Directory'de mevcut değil ve Federasyon kimlik doğrulaması kullanıyorsanız, kullanıcı davet edilemiyor.
+Federasyon kimlik doğrulaması kullanıyorsanız ve Kullanıcı Azure Active Directory zaten mevcut değilse, Kullanıcı davet edilemez.
 
-Bu sorunu çözmek için dış kullanıcının yönetici kullanıcının hesabı Azure Active Directory'ye eşitlemeniz gerekir.
+Bu sorunu çözmek için, dış kullanıcının Yöneticisi kullanıcının hesabını Azure Active Directory eşitlemelidir.
 
-## <a name="how-does--which-is-not-normally-a-valid-character-sync-with-azure-ad"></a>Nasıl mu\#', hangi değil genellikle geçerli bir karakter, Azure AD ile eşitleme?
+## <a name="how-does--which-is-not-normally-a-valid-character-sync-with-azure-ad"></a>Normal olarak geçerli bir karakter olmayan '\#', Azure AD ile eşitleme nasıl yapılır?
 
-"\#" UPN, Azure AD B2B işbirliği veya dış kullanıcılar için ayrılmış bir karakter olduğundan davet edilen hesabı user@contoso.com user_contoso.com#EXT# olur@fabrikam.onmicrosoft.com. Bu nedenle, \# şirket içinden gelen UPN, Azure portalında oturum açmak için izin verilmez. 
+davet edilen hesap user@contoso.com user_contoso hale geldiği için, "\#", Azure AD B2B işbirliği veya dış kullanıcılar için UPN 'de ayrılmış bir karakterdir. com # EXT #@fabrikam.onmicrosoft.com. Bu nedenle, Şirket içinden gelen UPN \# Azure portal oturum açmasına izin verilmez. 
 
-## <a name="i-receive-an-error-when-adding-external-users-to-a-synchronized-group"></a>Dış kullanıcılar eşitlenmiş bir gruba eklerken bir hata alıyorum
+## <a name="i-receive-an-error-when-adding-external-users-to-a-synchronized-group"></a>Dış kullanıcıları eşitlenmiş bir gruba eklerken bir hata alıyorum
 
-Dış kullanıcılar "atandı" veya "Güvenlik" grupları ve ana kopyalı şirket içinde gruplarına eklenebilir.
+Dış kullanıcılar, yalnızca "atanan" veya "güvenlik" gruplarına eklenebilir ve şirket içinde ana kopyalı gruplar için kullanılamaz.
 
-## <a name="my-external-user-did-not-receive-an-email-to-redeem"></a>My dış kullanıcı kullanmak için e-posta almadı.
+## <a name="my-external-user-did-not-receive-an-email-to-redeem"></a>Dış Kullanıcı kullanılacak e-posta almadı
 
-Davetli aşağıdaki adresi izin verildiğinden emin olmak için ISS ya da istenmeyen posta Filtresi ile denetlemeniz gerekir: Invites@microsoft.com
+Davetli kişinin, şu adrese izin verildiğinden emin olmak için ISS veya e-posta filtresini denetlemesi gerekir: Invites@microsoft.com
 
-## <a name="i-notice-that-the-custom-message-does-not-get-included-with-invitation-messages-at-times"></a>Özel ileti bazen davet iletileri ile birlikte almaz olduğunu fark ederim
+## <a name="i-notice-that-the-custom-message-does-not-get-included-with-invitation-messages-at-times"></a>Özel iletinin, zaman içinde davet iletilerine dahil edilmediğini fark ediyorum
 
-Gizlilik yasalarıyla uyum sağlamak için Apı'lerimizi özel iletiler posta içermez olduğunda:
+Gizlilik yasaları ile uyum sağlamak için, API 'lerimiz şu durumlarda e-posta davetine özel iletiler içermez:
 
-- Davet eden davet eden kiracının bir e-posta adresi yok
-- Appservice sorumlusu davet gönderdiğinde
+- Davette, davet edilen kiracıda bir e-posta adresi yok
+- Bir appservice sorumlusu daveti gönderdiğinde
 
-Bu senaryo sizin için önemli ise, API davet e-postamıza gösterme ve tercih ettiğiniz e-posta mekanizması gönderin. Bu şekilde da gizlilik yasalarına uyumlu gönderdiğiniz herhangi bir e-emin olmak için kuruluşunuzun yasal Konseyi başvurun.
+Bu senaryo sizin için önemliyse, API davetiyesi e-postamızı engelleyebilir ve tercih ettiğiniz e-posta mekanizmasıyla gönderebilirsiniz. Bu şekilde göndereceğiniz tüm e-postaların gizlilik yasaları ile uyumlu olduğundan emin olmak için kuruluşunuzun yasal sayılığınıza başvurun.
 
-## <a name="you-receive-an-aadsts65005-error-when-you-try-to-log-in-to-an-azure-resource"></a>Bir Azure kaynağı için oturum açmayı denediğinizde bir "AADSTS65005" hatasını alıyorsunuz.
+## <a name="you-receive-an-aadsts65005-error-when-you-try-to-log-in-to-an-azure-resource"></a>Bir Azure kaynağında oturum açmaya çalıştığınızda bir "AADSTS65005" hatası alıyorsunuz
 
-Bir Konuk hesabı olan bir kullanıcı oturum açamaz ve şu iletiyi alıyor:
+Konuk hesabına sahip olan bir Kullanıcı oturum açıp şu hata iletisini alıyor:
 
     AADSTS65005: Using application 'AppName' is currently not supported for your organization contoso.com because it is in an unmanaged state. An administrator needs to claim ownership of the company by DNS validation of contoso.com before the application AppName can be provisioned.
 
-Kullanıcının bir Azure kullanıcı hesabı sahiptir ve durdurulmuş veya yönetilmeyen bir viral Kiracı. Ayrıca, vardır Hayır genel veya Kiracı Yöneticiler şirket.
+Kullanıcının bir Azure Kullanıcı hesabı vardır ve terk edilmiş ya da yönetilmeyen bir viral kiracısı vardır. Ayrıca, kiracıda genel veya Şirket Yöneticisi yoktur.
 
-Bu sorunu çözmek için üzerinde terk edilmiş Kiracı atmanız gerekir. Başvurmak [Azure Active Directory'de yönetici olarak yönetilmeyen bir dizini devralma](https://docs.microsoft.com/azure/active-directory/users-groups-roles/domains-admin-takeover). Ayrıca, ad alanı denetimi sizdedir doğrudan kanıt sağlamak için söz konusu etki alanı soneki için internet'e yönelik DNS erişmeniz gerekir. Kiracı, yönetilen bir duruma döndürüldükten sonra lütfen müşteri ile kullanıcıların bırakarak olmadığını tartışmak ve doğrulanmış etki alanı adı, kuruluş için en iyi seçenektir.
+Bu sorunu çözmek için, bırakılan kiracıyı devralmalısınız. [Azure Active Directory yönetilmeyen bir dizinden yönetici olarak alma](https://docs.microsoft.com/azure/active-directory/users-groups-roles/domains-admin-takeover)bölümüne bakın. Ayrıca, ad alanını kontrol ettiğiniz doğrudan kanıt sağlamak için söz konusu etki alanı sonekine yönelik İnternet 'e yönelik DNS 'e erişmeniz gerekir. Kiracı yönetilen bir duruma dönmeden sonra, kullanıcılar ve doğrulanmış etki alanı adının kuruluş için en iyi seçenek olup olmadığını müşteriyle birlikte tartışın.
 
-## <a name="a-guest-user-with-a-just-in-time-or-viral-tenant-is-unable-to-reset-their-password"></a>Just-ın-time veya "viral" Kiracı ile Konuk kullanıcı parolalarını sıfırlama alamıyor
+## <a name="a-guest-user-with-a-just-in-time-or-viral-tenant-is-unable-to-reset-their-password"></a>Tam zamanında veya "viral" kiracısına sahip bir Konuk Kullanıcı parolasını sıfırlayamaz
 
-(Ayrı, yönetilmeyen bir Azure kiracısı olduğu anlamına gelir), just-in-time (JIT) veya viral Kiracı kimliği kiracısı ise, Konuk kullanıcı parolalarını sıfırlayabilir. Bazen bir kuruluş olacak [viral Kiracı yönetimini devralmasına](https://docs.microsoft.com/azure/active-directory/users-groups-roles/domains-admin-takeover) çalışanlar Hizmetleri için kaydolmak için iş e-posta adreslerini kullandığınızda oluşturulur. Kuruluş viral Kiracı gerçekleştirdikten sonra yalnızca söz konusu kuruluştaki bir yönetici kullanıcının parolasını sıfırlama veya SSPR'yi etkinleştir. Gerekirse, davet eden kuruluştan olarak, dizininizdeki Konuk kullanıcı hesabını kaldırmanız ve daveti yeniden gönder.
+Kimlik kiracısı tam zamanında (JıT) veya viral kiracınız (yani ayrı, yönetilmeyen bir Azure kiracısı) ise, yalnızca Konuk Kullanıcı parolasını sıfırlayabilir. Bazen bir kuruluş, çalışanlar hizmetlere kaydolmak için iş e-posta adreslerini kullandıklarında oluşturulan [viral kiracılarının yönetimini ele geçirebilir](https://docs.microsoft.com/azure/active-directory/users-groups-roles/domains-admin-takeover) . Kuruluş bir viral kiracısı gerçekleştirdikten sonra, yalnızca o kuruluştaki bir yönetici kullanıcı parolasını sıfırlayabilir veya SSPR 'yi etkinleştirebilir. Gerekirse, kuruluş olarak, Konuk Kullanıcı hesabını dizininizden kaldırabilir ve bir daveti yeniden gönderebilirsiniz.
+
+## <a name="a-guest-user-is-unable-to-use-the-azuread-powershell-v1-module"></a>Konuk Kullanıcı AzureAD PowerShell v1 modülünü kullanamıyor
+
+18 Kasım 2019 itibariyle, dizininizde bulunan Konuk kullanıcılar ( **UserType** özelliğinin **Konuk**olduğu Kullanıcı hesapları olarak tanımlanır), azuread PowerShell v1 modülünü kullanmak için engellenir. İleri giderek, bir kullanıcının üye Kullanıcı ( **UserType** eşittir **üyesi**) olması veya azuread PowerShell V2 modülünü kullanması gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[B2B işbirliği için destek alma](get-support.md)
+[B2B işbirliği için destek alın](get-support.md)

@@ -1,6 +1,7 @@
 ---
-title: Media Services dinamik şifreleme - Azure'ı kullanarak, içerik koruma | Microsoft Docs
-description: Bu makalede, dinamik şifreleme ile içerik koruma genel bir bakış sağlar. Akış protokolleri ve şifreleme türleri hakkında konuşuyor.
+title: Media Services dinamik şifreleme ile içeriğinizi koruyun
+titleSuffix: Azure Media Services
+description: Azure Media Services içindeki dinamik şifreleme, akış protokolleri ve şifreleme türleriyle içerik koruması hakkında bilgi edinin.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -11,161 +12,229 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/28/2019
+ms.date: 10/29/2019
 ms.author: juliako
 ms.custom: seodec18
-ms.openlocfilehash: 140e6c338d12732d1e41ccd9dabef1de7d5cf8d8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: eeb1dc44341768984bd6e337a2fe65a277f5aa77
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67068839"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73581208"
 ---
-# <a name="content-protection-with-dynamic-encryption"></a>Dinamik şifreleme ile içerik koruma
+# <a name="protect-your-content-with-media-services-dynamic-encryption"></a>Media Services dinamik şifreleme ile içeriğinizi koruyun
 
-Azure Media Services, depolama, işleme ve teslim üzerinden bilgisayarınıza çıkışında medyanızdaki güvenliğini sağlamak için kullanabilirsiniz. Media Services sayesinde, Gelişmiş Şifreleme Standardı (AES-128) veya üç ana dijital hak yönetimi (DRM) sistemlerinden ile dinamik olarak şifrelenmiş canlı ve isteğe bağlı içerik teslim edebilirsiniz: Microsoft PlayReady, Google Widevine ve FairPlay Apple. Media Services de AES anahtarları ve DRM sunmaya yönelik bir hizmet sağlar (PlayReady, Widevine ve FairPlay) lisansları yetkili istemcilere. 
+Ortamınızı, depolama, işleme ve teslim aracılığıyla bilgisayarınızdan tamamen ayrılmaları için güvenli hale getirmek üzere Azure Media Services kullanın. Media Services ile canlı ve isteğe bağlı içeriğinizi Gelişmiş Şifreleme Standardı (AES-128) veya üç ana dijital hak yönetimi (DRM) sisteminden (Microsoft PlayReady, Google Widevine ve Apple FairPlay ile) dinamik olarak dağıtabilirsiniz. Media Services, yetkili istemcilere AES anahtarları ve DRM (PlayReady, Widevine ve FairPlay) lisanslarını sunmaya yönelik bir hizmet sağlar.  
 
-Aşağıdaki resimde Media Services content protection iş akışı gösterilmektedir: 
+Media Services v3 'de, içerik anahtarı akış Konumlandırıcı ile ilişkilendirilir ( [Bu örneğe](protect-with-aes128.md)bakın). Media Services anahtar teslim hizmetini kullanıyorsanız, sizin için içerik anahtarını Azure Media Services oluşturabilirsiniz. Size ait anahtar teslim hizmetini kullanıyorsanız veya iki veri merkezinde aynı içerik anahtarına sahip olmanız gereken yüksek bir kullanılabilirlik senaryosunu işlemeniz gerekiyorsa, içerik anahtarı kendiniz oluşturulmalıdır.
 
-![İçerik koruma](./media/content-protection/content-protection.svg)
+Bir akış bir oyuncu tarafından istendiğinde, Media Services AES şifresiz anahtar veya DRM şifrelemesini kullanarak içeriğinizi dinamik olarak şifrelemek için belirtilen anahtarı kullanır. Player, akışın şifresini çözmek için Media Services anahtar teslim hizmetinden veya belirttiğiniz anahtar teslim hizmetinden anahtarı ister. Kullanıcının anahtarı almak için yetkilendirilip yetkilendirilmeyeceğine karar vermek için, hizmet, anahtar için belirttiğiniz içerik anahtarı ilkesini değerlendirir.
 
-&#42;*dinamik şifreleme, AES-128 "şifresiz anahtar" ve CBCS CENC destekler. Ayrıntılar için destek matrisi bkz [burada](#streaming-protocols-and-encryption-types).*
+Lisanslar ve anahtarlarınız için yetkilendirme ve kimlik doğrulama ilkelerini yapılandırmak üzere REST API veya Media Services istemci kitaplığını kullanabilirsiniz.
 
-Bu makalede, kavramlar ve terminoloji content protection ile Media Services anlamak için ilgili açıklanmaktadır.
+Aşağıdaki görüntüde Media Services içerik koruması için iş akışı gösterilmektedir:
+
+![Media Services içerik koruması için iş akışı](./media/content-protection/content-protection.svg)
+  
+&#42;*Dinamik şifreleme, AES-128 Clear Key, CBCS ve CENC 'yi destekler. Ayrıntılar için bkz. [destek matrisi](#streaming-protocols-and-encryption-types).*
+
+Bu makalede, Media Services ile içerik korumayı anlamanıza yardımcı olacak kavramlar ve terminoloji açıklanmaktadır.
 
 ## <a name="main-components-of-a-content-protection-system"></a>Bir içerik koruma sisteminin ana bileşenleri
 
-"Content protection" sistem/uygulama tasarımınızı başarıyla tamamlamak için kapsamı çalışmasının tam olarak anlamak için gerekir. Aşağıdaki liste, üç bölümden uygulamanız gereken genel bir bakış sağlar. 
-
-1. Azure Media Services kod
-  
-   [DRM](https://github.com/Azure-Samples/media-services-v3-dotnet-tutorials/blob/master/AMSV3Tutorials/EncryptWithDRM/Program.cs) örnek, birden çok DRM sistemiyle .NET ile Media Services v3 uygulamak nasıl gösterir. Ayrıca, Media Services lisans/anahtar teslim hizmetin nasıl kullanılacağını gösterir. Her bir varlığı birden fazla şifreleme türü (AES-128, PlayReady, Widevine, FairPlay) ile şifreleyebilirsiniz. Birlikte kullanılabilecek türler hakkında bilgi almak için bkz. [Akış protokolleri ve şifreleme türleri](#streaming-protocols-and-encryption-types).
-  
-   Örnekte gösterildiği nasıl yapılır:
-
-   1. Oluşturma ve yapılandırma bir [içerik anahtar ilkeleri](content-key-policy-concept.md). Oluşturduğunuz bir **içerik anahtarı ilke** istemcileri sonuna (güvenli erişim sağlayan varlıklarınız için) bir içerik anahtarı nasıl teslim edildiğini yapılandırmak için.    
-
-      * JWT talepleri temel yetkilendirme denetiminin mantık belirtme lisans teslim yetkilendirme tanımlayın.
-      * Yapılandırma [PlayReady](playready-license-template-overview.md), [Widevine](widevine-license-template-overview.md), ve/veya [FairPlay](fairplay-license-overview.md) lisansları. Şablonları hakları ve izinleri her kullanılan benzeri DRM yapılandırmanıza olanak sağlar.
-
-        ```
-        ContentKeyPolicyPlayReadyConfiguration playReadyConfig = ConfigurePlayReadyLicenseTemplate();
-        ContentKeyPolicyWidevineConfiguration widevineConfig = ConfigureWidevineLicenseTempate();
-        ContentKeyPolicyFairPlayConfiguration fairPlayConfig = ConfigureFairPlayPolicyOptions();
-        ```
-   2. Oluşturma bir [akış Bulucu](streaming-locators-concept.md) şifrelenmiş varlık akışını sağlamak için yapılandırılmış. 
-  
-      **Akış Bulucu** ilişkilendirilmesi gereken bir [akış ilke](streaming-policy-concept.md). Örnekte, "Predefined_MultiDrmCencStreaming" ilkeye StreamingLocator.StreamingPolicyName ayarladık. PlayReady ve Widevine şifrelemeler uygulanır, anahtar yapılandırılmış DRM lisansları temel kayıttan yürütme istemciye teslim edilir. Akışınızı CBCS (FairPlay) ile de şifrelemek isterseniz "Predefined_MultiDrmStreaming" öğesini kullanın.
-      
-      Akış Bulucu Ayrıca ilişkili olduğu **içerik anahtarı ilke** , tanımlandı.
-    
-   3. Bir test belirteci oluşturun.
-
-      **GetTokenAsync** yöntemi bir test oluşturmak nasıl belirteci gösterir.
-   4. Akış URL'sini oluşturun.
-
-      **GetDASHStreamingUrlAsync** yöntemi akış URL'si oluşturmak nasıl gösterir. Bu durumda, URL akışları **DASH** içeriği.
-
-2. AES veya DRM istemci oynatıcı. Bir oynatıcı SDK (yerel veya tarayıcı tabanlı) tabanlı bir video oynatıcı uygulaması aşağıdaki gereksinimleri karşılaması gerekir:
-   * Oyuncu SDK gerekli DRM istemcileri destekler
-   * Oyuncu SDK gerekli akış protokollerini destekler: Kesintisiz, DASH ve/veya HLS
-   * Oyuncu SDK lisansı edinme istekte bir JWT belirteci geçirme işleyebilir olması gerekir
-  
-     Bir oynatıcı kullanarak oluşturabileceğiniz [Azure Media Player API'sine](https://amp.azure.net/libs/amp/latest/docs/). Kullanma [Azure Media Player ProtectionInfo API'sine](https://amp.azure.net/libs/amp/latest/docs/) farklı DRM platformlarda kullanılacak DRM teknolojileri belirtmek için.
-
-     Test AES veya şifrelenmiş CENC (Widevine ve/veya PlayReady) için içerik, kullanabileceğiniz [Azure Media Player](https://ampdemo.azureedge.net/azuremediaplayer.html). "Gelişmiş Seçenekler" seçeneğini tıklatın ve denetimi, şifreleme seçenekleri emin olun.
-
-     FairPlay şifreli içeriği test etmek istediğiniz kullanırsanız [bu test yürütücünün](https://aka.ms/amtest). Player, Widevine, PlayReady, destekler ve benzeri FairPlay DRM ve bunun yanı sıra AES-128 şifresiz anahtar şifrelemesiyle koruyun. 
-    
-     Farklı benzeri DRM test etmek için doğru tarayıcı seçmeniz gerekebilir: Chrome/Opera/Firefox'ta Widevine, Microsoft Edge/ıe11 PlayReady için Safari macOS FairPlay için.
-
-3. Belirteç Hizmeti (JSON Web Token (JWT) olarak arka uç kaynağına erişim için erişim belirteci verir STS), güvenli hale getirin. AMS lisans teslim hizmetleri arka uç kaynağı olarak kullanabilirsiniz. STS sahip aşağıdaki tanımlamak:
-
-   * Veren ve İzleyici (veya kapsam)
-   * İçerik koruma, iş gereksinimleri bağımlı olan talepleri
-   * İmza doğrulaması için simetrik ya da asimetrik doğrulama
-   * Anahtar geçişi desteği (gerekirse)
-
-     Kullanabileceğiniz [bu STS araç](https://openidconnectweb.azurewebsites.net/DRMTool/Jwt) doğrulama anahtarı tüm 3 türlerini destekleyen STS, test için: simetrik, asimetrik veya Azure AD ile anahtar geçişi. 
+İçerik koruma sisteminizi başarıyla tamamlayabilmeniz için efor kapsamını tam olarak anlamanız gerekir. Aşağıdaki bölümler, uygulamanız gereken üç bölümden oluşan bir genel bakış sunar.
 
 > [!NOTE]
-> Odaklanmanıza ve her parça (yukarıda açıklanmıştır) tam olarak test sonraki adımına geçmeden önce önerilir. "Content protection" sisteminizi test etmek için yukarıdaki listede belirtilen araçları kullanın.  
+> Sonraki bölüme geçmeden önce aşağıdaki bölümlerde yer alan her parçayı odaklamanız ve tam olarak sınamanız önerilir. İçerik koruma sisteminizi test etmek için bölümlerde belirtilen araçları kullanın.
+
+### <a name="media-services-code"></a>Media Services kodu
+  
+[DRM örneği](https://github.com/Azure-Samples/media-services-v3-dotnet-tutorials/blob/master/AMSV3Tutorials/EncryptWithDRM/Program.cs) , .net kullanarak Media Services v3 Ile çok DRM sisteminin nasıl uygulanacağını gösterir. Ayrıca, Media Services lisansı/anahtar teslim hizmetinin nasıl kullanılacağını gösterir.
+  
+Her bir varlığı birden fazla şifreleme türü (AES-128, PlayReady, Widevine, FairPlay) ile şifreleyebilirsiniz. Birleştirme açısından anlamlı olduğunu görmek için bkz. [akış protokolleri ve şifreleme türleri](#streaming-protocols-and-encryption-types).
+
+Örnekte nasıl yapılacağı gösterilmektedir:
+
+1. [İçerik anahtar ilkesi](content-key-policy-concept.md)oluşturun ve yapılandırın.
+
+   İçerik anahtarının (varlıklarınıza güvenli erişim sağlayan) son istemcilere teslim edildiğini yapılandırmak için bir içerik anahtarı ilkesi oluşturursunuz:  
+
+   * Lisans teslimi yetkilendirmesi tanımlayın. JSON Web Token (JWT) içindeki talepler temelinde yetkilendirme denetiminin mantığını belirtin.
+   * [PlayReady](playready-license-template-overview.md), [Widevine](widevine-license-template-overview.md)ve/veya [Fairplay](fairplay-license-overview.md) lisanslarını yapılandırın. Şablonlar, her bir DRMs için hakları ve izinleri yapılandırmanızı sağlar.
+
+     ```
+     ContentKeyPolicyPlayReadyConfiguration playReadyConfig = ConfigurePlayReadyLicenseTemplate();
+     ContentKeyPolicyWidevineConfiguration widevineConfig = ConfigureWidevineLicenseTempate();
+     ContentKeyPolicyFairPlayConfiguration fairPlayConfig = ConfigureFairPlayPolicyOptions();
+     ```
+
+2. Şifrelenmiş varlığı akışa almak için yapılandırılmış bir [akış Bulucu](streaming-locators-concept.md) oluşturun.
+  
+   Akış bulucunun bir [akış ilkesiyle](streaming-policy-concept.md)ilişkilendirilmesi vardır. Örnekte, "Predefined_MultiDrmCencStreaming" ilkesine `StreamingLocator.StreamingPolicyName` ayarlayacağız.
+
+   PlayReady ve Widevine şifrelemeleri uygulanır ve anahtar, yapılandırılmış DRM lisanslarına göre kayıttan yürütme istemcisine gönderilir. Akışınızı CIBH (FairPlay) ile şifrelemek isterseniz, "Predefined_MultiDrmStreaming" ilkesini kullanın.
+
+   Akış bulucu, tanımladığınız içerik anahtarı ilkesiyle de ilişkilendirilir.
+
+3. Bir test belirteci oluşturun.
+
+   `GetTokenAsync` yöntemi bir test belirtecinin nasıl oluşturulacağını gösterir.
+4. Akış URL 'sini oluşturun.
+
+   `GetDASHStreamingUrlAsync` yöntemi, akış URL 'sinin nasıl oluşturulacağını gösterir. Bu durumda, URL DASH içeriğini akışlar.
+
+### <a name="player-with-an-aes-or-drm-client"></a>AES veya DRM istemcisiyle oynatıcı
+
+Oynatıcı SDK 'sını temel alan video oynatıcı uygulamasının (yerel veya tarayıcı tabanlı) aşağıdaki gereksinimleri karşılaması gerekir:
+
+* Player SDK 'Sı gereken DRM istemcilerini destekler.
+* Player SDK 'Sı gereken akış protokollerini destekler: Düzgünleştir, TIRE ve/veya HTTP Canlı Akışı (HLS).
+* Oynatıcı SDK, bir lisans alma isteğinde JWT belirteci geçirmeyi işleyebilir.
+
+[Azure MEDIA Player API](https://amp.azure.net/libs/amp/latest/docs/)'sini kullanarak bir oynatıcı oluşturabilirsiniz. Farklı DRM platformlarında hangi DRM teknolojisinin kullanılacağını belirtmek için [Azure Media Player Protectionınfo API](https://amp.azure.net/libs/amp/latest/docs/) 'sini kullanın.
+
+AES veya CENC 'yi (Wıdevine ve/veya PlayReady) şifrelenmiş içeriği test etmek için [Azure Media Player](https://aka.ms/azuremediaplayer)kullanabilirsiniz. **Gelişmiş seçenekleri** seçtiğinizden ve şifreleme seçeneklerinizi kontrol ettiğinizden emin olun.
+
+FairPlay şifreli içeriği test etmek istiyorsanız, [Bu test oynatıcıyı](https://aka.ms/amtest)kullanın. Oynatıcı Widevine, PlayReady ve FairPlay DRMs 'yi, AES-128 şifresiz anahtar şifrelemesi ile birlikte destekler.
+
+Farklı DRMs 'Leri test etmek için doğru tarayıcıyı seçin:
+
+* Widevine için Chrome, Opera veya Firefox.
+* PlayReady için Microsoft Edge veya Internet Explorer 11.
+* FairPlay için macOS üzerinde Safari.
+
+### <a name="security-token-service"></a>Güvenlik belirteci hizmeti
+
+Bir güvenlik belirteci hizmeti (STS), arka uç kaynak erişimi için erişim belirteci olarak JWT yayınlar. Azure Media Services lisans/anahtar teslim hizmetini arka uç kaynağı olarak kullanabilirsiniz. STS aşağıdaki şeyleri tanımlamalıdır:
+
+* Veren ve seyirci (ya da kapsam).
+* Talepler, içerik korumasında iş gereksinimlerine bağımlıdır.
+* İmza doğrulaması için simetrik veya asimetrik doğrulama.
+* Anahtar aktarma desteği (gerekirse).
+
+[Bu STS aracını](https://openidconnectweb.azurewebsites.net/DRMTool/Jwt) kullanarak STS 'yi test edebilirsiniz. Bu üç tür doğrulama anahtarını destekler: simetrik, asimetrik veya Azure Active Directory (Azure AD) anahtar geçişi.
 
 ## <a name="streaming-protocols-and-encryption-types"></a>Akış protokolleri ve şifreleme türleri
 
-Media Services PlayReady, Widevine ve FairPlay kullanarak AES şifresiz anahtarını veya DRM şifreleme ile dinamik olarak şifrelenmiş içeriğinizi teslim etmek için kullanabilirsiniz. Şu anda, HTTP canlı akışı (HLS), MPEG DASH ve kesintisiz akış biçimlerinde şifreleyebilirsiniz. Her protokolü, aşağıdaki şifreleme yöntemlerini destekler:
+Media Services, PlayReady, Widevine veya FairPlay kullanarak, içeriğinizi AES şifresiz anahtar veya DRM şifrelemesi ile dinamik olarak dağıtmak için kullanabilirsiniz. Şu anda, HLS, MPEG DASH ve Kesintisiz Akış biçimlerini şifreleyebilirsiniz. Her protokol aşağıdaki şifreleme yöntemlerini destekler.
 
 ### <a name="hls"></a>HLS
 
-HLS protokolü, şifreleme düzenleri ve aşağıdaki kapsayıcı biçimlerini destekler.
+HLS protokolü aşağıdaki kapsayıcı biçimlerini ve şifreleme düzenlerini destekler:
 
-|Kapsayıcı biçimi|Şifreleme şeması|URL örneği|
+|Kapsayıcı biçimi|Şifreleme düzeni|URL örneği|
 |---|---|---|
 |Tümü|AES|`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-aapl,encryption=cbc)`|
-|TS MPG2 |CBCS (FairPlay) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-aapl,encryption=cbcs-aapl)`|
-|CMAF(fmp4) |CBCS (FairPlay) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-cmaf,encryption=cbcs-aapl)`|
-|TS MPG2 |CENC (PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-aapl,encryption=cenc)`|
-|CMAF(fmp4) |CENC (PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-cmaf,encryption=cenc)`|
+|MPG2-TS |CBCS (FairPlay) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-aapl,encryption=cbcs-aapl)`|
+|CMAF (fmp4) |CBCS (FairPlay) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-cmaf,encryption=cbcs-aapl)`|
+|MPG2-TS |CENC (PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-aapl,encryption=cenc)`|
+|CMAF (fmp4) |CENC (PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=m3u8-cmaf,encryption=cenc)`|
 
-HLS/CMAF + FairPlay (HEVC dahil olmak üzere / H.265) aşağıdaki cihazlarda desteklenir:
+HLS/CMAF + FairPlay (HEVC/H. 265 dahil) aşağıdaki cihazlarda desteklenir:
 
-* iOS v11 veya üzeri 
-* iPhone 8 veya üzeri
-* MacOS high Sierra Intel 7 nesil CPU
+* iOS 11 veya üzeri.
+* iPhone 8 veya üzeri.
+* MacOS High Sierra, Intel 7 nesil CPU.
 
 ### <a name="mpeg-dash"></a>MPEG-DASH
 
-MPEG-DASH protokolü, şifreleme düzenleri ve aşağıdaki kapsayıcı biçimlerini destekler.
+MPEG-DASH protokolü aşağıdaki kapsayıcı biçimlerini ve şifreleme düzenlerini destekler:
 
-|Kapsayıcı biçimi|Şifreleme şeması|URL örnekleri
+|Kapsayıcı biçimi|Şifreleme düzeni|URL örnekleri
 |---|---|---|
 |Tümü|AES|`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=mpd-time-csf,encryption=cbc)`|
-|CSF(fmp4) |CENC (Widevine + PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=mpd-time-csf,encryption=cenc)`|
-|CMAF(fmp4)|CENC (Widevine + PlayReady)|`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=mpd-time-cmaf,encryption=cenc)`|
+|CSF (fmp4) |CENC (Widevine + PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=mpd-time-csf,encryption=cenc)`|
+|CMAF (fmp4)|CENC (Widevine + PlayReady)|`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(format=mpd-time-cmaf,encryption=cenc)`|
 
 ### <a name="smooth-streaming"></a>Kesintisiz Akış
 
-Kesintisiz Akış Protokolü, şifreleme düzenleri ve aşağıdaki kapsayıcı biçimlerini destekler.
+Kesintisiz Akış Protokolü aşağıdaki kapsayıcı biçimlerini ve şifreleme düzenlerini destekler.
 
-|Protocol|Kapsayıcı biçimi|Şifreleme şeması|
+|Protokol|Kapsayıcı biçimi|Şifreleme düzeni|
 |---|---|---|
 |fMP4|AES|`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(encryption=cbc)`|
 |fMP4 | CENC (PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(encryption=cenc)`|
 
-### <a name="browsers"></a>Tarayıcılar
+### <a name="browsers"></a>Tarayıcısında
 
-Ortak tarayıcıları aşağıdaki DRM istemcileri destekler:
+Ortak tarayıcılar aşağıdaki DRM istemcilerini destekler:
 
 |Tarayıcı|Şifreleme|
 |---|---|
 |Chrome|Widevine|
-|Edge, IE 11|PlayReady|
-|Firefox|Widevine|
+|Microsoft Edge, Internet Explorer 11|PlayReady|
+|'U|Widevine|
 |Opera|Widevine|
 |Safari|FairPlay|
 
-## <a name="aes-128-clear-key-vs-drm"></a>AES-128 şifresiz anahtarını vs. DRM
+## <a name="controlling-content-access"></a>İçerik erişimini denetleme
 
-Müşteriler genellikle bunlar AES şifrelemesi veya DRM sistem kullanması gerekip gerekmediğini merak ediyor. İki sistem arasındaki başlıca fark, böylece anahtar Aktarımdaki ancak hiçbir ek şifreleme ("clear") olmadan şifreli AES şifreleme ile içerik anahtarı istemciye TLS üzerinden iletilen olduğunu ' dir. Sonuç olarak, içeriğin şifresini çözmek için kullanılan anahtar istemci Player'da erişilebilir olduğundan ve ağ izleme düz metin içinde bulunan istemciye görüntülenebilir. AES-128 şifresiz anahtar şifrelemesi Görüntüleyicisi (çalışanlar tarafından görüntülenmek üzere şirket içinde dağıtılmış gibi şifreleme şirket videolarınızı) güvenilen taraf olduğu kullanım örnekleri için uygundur.
+İçerik anahtarı ilkesini yapılandırarak içeriğinizi kimlerin erişebileceğini denetleyebilirsiniz. Media Services, anahtar isteğinde bulunan kullanıcıları yetkilendirmenin birden çok yöntemini destekler. Anahtarın istemciye teslim edilebilmesi için önce istemcinin (oynatıcı) ilkeyi karşılaması gerekir. İçerik anahtarı ilkesinde *Açık* veya *belirteç* kısıtlaması olabilir.
 
-DRM sistemleri, PlayReady, Widevine ve FairPlay tüm bir ek düzeyi şifreleme için AES-128 şifresiz anahtar karşılaştırıldığında içeriğin şifresini çözmek için kullanılan anahtarı sağlamak istiyor. İçerik anahtarı DRM çalışma zamanı tarafından korunan bir anahtarı için şifrelenmiş TLS tarafından sağlanan aktarım düzeyinde şifreleme için ek. Ayrıca, şifre çözme, kötü niyetli bir kullanıcı saldırı daha zor olduğu işletim sistemi düzeyinde güvenli bir ortamda ele alınır. DRM burada Görüntüleyicisi güvenilen taraf olmayabilir ve yüksek düzeyde güvenlik gerektiren kullanım durumları için önerilir.
+Bir açık kısıtlanmış içerik anahtarı ilkesi, yetkilendirmesiz herkese lisans vermek istediğinizde kullanılabilir. Örneğin, gelirleriniz ad tabanlıdır ve abonelik temelli değildir.  
 
-## <a name="dynamic-encryption-and-key-delivery-service"></a>Dinamik şifreleme ve anahtar dağıtımı hizmetiyle
+Belirteç kısıtlı içerik anahtar ilkesiyle, içerik anahtarı yalnızca lisans/anahtar isteğinde geçerli bir JWT belirteci veya basit bir Web belirteci (SWT) sunan bir istemciye gönderilir. Bu belirtecin bir STS tarafından verilmesi gerekir.
 
-Media Services v3 sürümünde bir içerik anahtarı akış Bulucu ile ilişkilendirilir (bkz [Bu örnek](protect-with-aes128.md)). Media Services anahtar teslim hizmeti, Azure Media Services, içerik anahtarı sizin için oluşturmasına izin verebilirsiniz. İçerik anahtarı kendiniz, kendi anahtar dağıtımı hizmetiyle kullanıyorsanız veya, iki veri merkezlerinde aynı içerik anahtarı olması gereken bir yüksek kullanılabilirlik senaryonun işlenmesi gerekiyorsa oluşturmanız gerekir.
+Azure AD 'yi STS olarak kullanabilir veya [Özel BIR STS](#using-a-custom-sts)dağıtımı yapabilirsiniz. STS, belirtilen anahtarla imzalanmış bir belirteç oluşturacak ve belirteç kısıtlama yapılandırmasında belirttiğiniz talepler verecek şekilde yapılandırılmalıdır. Media Services lisansı/anahtar teslim hizmeti, bu koşulların her ikisi de varsa, istenen lisansı veya anahtarı istemciye döndürür:
 
-Bir akışa bir oynatıcı tarafından istendiğinde Media Services dinamik olarak içeriğinizi AES şifresiz anahtar veya DRM şifreleme kullanarak şifrelemek için belirtilen anahtar kullanır. Akış şifresini çözmek için Media Services anahtar dağıtımı hizmetiyle veya belirtilen anahtar dağıtımı hizmetiyle anahtar player ister. Kullanıcı anahtarı almak için yetkili olup olmadığına karar vermek için anahtar için belirtilen içerik anahtarı ilkesi hizmet tarafından değerlendirilir.
+* Belirteç geçerli.
+* Belirteçteki talepler, lisans veya anahtar için yapılandırılananlarla eşleşiyor.
 
-Media Services DRM (PlayReady, Widevine, FairPlay) lisansları ve AES anahtarları yetkili istemcilere sunmak için bir anahtar dağıtımı hizmetiyle sağlar. Lisanslar ve anahtarları için yetkilendirme ve kimlik doğrulama ilkelerini yapılandırmak için REST API veya bir Media Services istemci Kitaplığı'nı kullanabilirsiniz.
+Belirteç kısıtlı ilkesini yapılandırırken, birincil doğrulama anahtarını, verenin ve hedef kitle parametrelerini belirtmeniz gerekir. Birincil doğrulama anahtarı, belirtecin imzalandığı anahtarı içerir. Veren, belirteci veren STS 'dir. Bazen kapsam olarak adlandırılan hedef kitle, belirtecin veya belirtecin erişim yetkisi veren kaynağın amacını açıklar. Media Services lisansı/anahtar teslim hizmeti, belirteçteki bu değerlerin şablondaki değerlerle eşleştiğini doğrular.
 
-### <a name="custom-key-and-license-acquisition-url"></a>Özel anahtar ve lisans edinme URL'si
+### <a name="token-replay-prevention"></a>Belirteç yeniden yürütme engellemesi
 
-Bir farklı anahtar ve lisans teslimat hizmeti (değil, Media Services) belirtmek istiyorsanız aşağıdaki şablonları kullanın. Varlık başına akış bir ilke oluşturmak yerine çoğu varlık arasında akış ilkenizi paylaşabileceği şablonları iki değiştirilebilir alanları vardır. 
+*Belirteç yeniden yürütme engellemesi* özelliği, Media Services müşterilerin aynı belirtecin bir anahtar veya lisans istemek için kaç kez kullanılabileceği konusunda bir sınır ayarlamasına olanak tanır. Müşteri, belirteçte `urn:microsoft:azure:mediaservices:maxuses` bir talep ekleyebilir; burada değer, belirtecin bir lisans ya da anahtar almak için kullanılabileceği sayı olan sayıdır. Anahtar teslimine aynı belirtece sahip sonraki tüm istekler, yetkisiz bir yanıt verecektir. Bkz. isteği [DRM örneğine](https://github.com/Azure-Samples/media-services-v3-dotnet-tutorials/blob/master/AMSV3Tutorials/EncryptWithDRM/Program.cs#L601)ekleme.
+ 
+#### <a name="considerations"></a>Dikkat edilmesi gerekenler
 
-* EnvelopeEncryption.CustomKeyAcquisitionUrlTemplate - son kullanıcı oyuncular anahtarları teslim özel hizmet URL'si için şablonu'nu tıklatın. Azure Media Services'ı, anahtar verme kullanırken gerekli değildir. Şablon hizmet isteği özgü değer ile çalışma zamanında güncelleştirecektir değiştirilebilir belirteçleri destekler.  Şu anda desteklenen belirteç {AlternativeMediaId} değerler, değiştirilir StreamingLocatorId.AlternativeMediaId ve {ContentKeyId} değeriyle, istenen anahtarının tanımlayıcısının değeri ile değiştirilir.
-* StreamingPolicyPlayReadyConfiguration.CustomLicenseAcquisitionUrlTemplate - URL oyuncular son kullanıcı lisansları teslim etmek üzere özel hizmet Şablonu'nu tıklatın. Azure Media Services'ı, lisans verme kullanırken gerekli değildir. Şablon hizmet isteği özgü değer ile çalışma zamanında güncelleştirecektir değiştirilebilir belirteçleri destekler. Şu anda desteklenen belirteç {AlternativeMediaId} değerler, değiştirilir StreamingLocatorId.AlternativeMediaId ve {ContentKeyId} değeriyle, istenen anahtarının tanımlayıcısının değeri ile değiştirilir. 
-* StreamingPolicyWidevineConfiguration.CustomLicenseAcquisitionUrlTemplate - yukarıdakiyle aynı, yalnızca Widevine için. 
-* StreamingPolicyFairPlayConfiguration.CustomLicenseAcquisitionUrlTemplate - yukarıdakiyle aynı, yalnızca FairPlay için.  
+* Müşterilerin belirteç oluşturma üzerinde denetimi olmalıdır. Talebin kendisini belirtece yerleştirilmesi gerekir.
+* Bu özellik kullanılırken, zaman aşımı süresi, isteğin alındığı zamandan bir saatten fazla olan istekleri yetkisiz bir Yanıtla reddedilir.
+* Belirteçler, imzaları tarafından benzersiz şekilde tanımlanır. Yükte yapılan herhangi bir değişiklik (örneğin, sona erme saati veya talebin güncelleştirilmesi) belirtecin imzasını değiştirir ve anahtar tesliminin daha önce geldiği yeni bir belirteç olarak sayılır.
+* Belirteç, müşteri tarafından ayarlanan `maxuses` değeri aşarsa kayıttan yürütme başarısız olur.
+* Bu özellik, var olan tüm korumalı içerik (yalnızca verilen belirtecin değiştirilmesi gerekir) için kullanılabilir.
+* Bu özellik hem JWT hem de SWT ile birlikte kullanılabilir.
+
+## <a name="using-a-custom-sts"></a>Özel STS kullanma
+
+Bir müşteri, belirteç sağlamak için özel bir STS kullanmayı tercih edebilir. Nedenler şunlardır:
+
+* Müşteri tarafından kullanılan kimlik sağlayıcısı (ıDP) STS 'yi desteklemez. Bu durumda, özel bir STS bir seçenek olabilir.
+* Müşteri, STS 'nin müşterinin abone faturalandırma sistemiyle tümleştirileceği daha esnek veya daha sıkı bir denetim gerektirebilir.
+
+   Örneğin, bir [Ott](https://en.wikipedia.org/wiki/Over-the-top_media_services) hizmeti operatörü Premium, temel ve spor gibi birden çok abone paketi sunabilir. İşleci, yalnızca belirli bir paketteki içeriklerin kullanılabilir hale getirilmesinden dolayı bir söz konusu belirteçteki talepleri bir abonenin paketiyle eşleştirmek isteyebilir. Bu durumda, özel bir STS gereken esnekliği ve denetimi sağlar.
+
+* Farklı bir DRM lisans parametreleriyle farklı ContentKeyPolicyOptions arasında seçim yapmak üzere belirtece özel talepler eklemek için (bir abonelik lisansı, bir kiralama lisansına karşı).
+* Belirtecin erişim izni verdiği anahtarın içerik anahtar tanımlayıcısını temsil eden bir talep eklemek için.
+
+Özel bir STS kullandığınızda, iki değişikliğin yapılması gerekir:
+
+* Bir varlık için lisans teslim hizmetini yapılandırırken, Azure AD 'den geçerli anahtar yerine özel STS tarafından doğrulama için kullanılan güvenlik anahtarını belirtmeniz gerekir.
+* JTW belirteci oluşturulduğunda, Azure AD 'de geçerli x509 sertifikasının özel anahtarı yerine bir güvenlik anahtarı belirtilir.
+
+İki tür güvenlik anahtarı vardır:
+
+* Simetrik anahtar: bir JWT oluşturmak ve doğrulamak için aynı anahtar kullanılır.
+* Asimetrik anahtar: bir x509 sertifikasında ortak özel anahtar çifti, bir JWT şifrelemek/oluşturmak için özel anahtarla ve belirteci doğrulamak için ortak anahtarla birlikte kullanılır.
+
+Geliştirme platformunuz olarak .NET FrameworkC# /kullanıyorsanız, asimetrik güvenlik anahtarı Için kullanılan x509 sertifikası en az 2048 anahtar uzunluğuna sahip olmalıdır. Bu anahtar uzunluğu .NET Framework içindeki System. IdentityModel. Tokens. X509AsymmetricSecurityKey sınıfının bir gereksinimidir. Aksi takdirde, şu özel durum atılır: IDX10630: imzalama için ' System. IdentityModel. Tokens. X509AsymmetricSecurityKey ', ' 2048 ' bitten küçük olamaz.
+
+## <a name="custom-key-and-license-acquisition-url"></a>Özel anahtar ve lisans alımı URL 'SI
+
+Farklı bir lisans/anahtar teslim hizmeti (Media Services değil) belirtmek istiyorsanız aşağıdaki şablonları kullanın. Şablonlarda iki değiştirilebilir alan mevcuttur. böylece, her varlık için akış ilkesi oluşturmak yerine akış ilkenizi birçok varlık arasında paylaşabilirsiniz. 
+
+* `EnvelopeEncryption.CustomKeyAcquisitionUrlTemplate`: Son Kullanıcı oynatıcılara anahtar sunan özel hizmetin URL 'SI. Anahtar vermek için Azure Media Services kullandığınızda bu gerekli değildir. 
+
+   Şablon, hizmetin çalışma zamanında, isteğe özgü değerle güncelleşeceğini değiştirilebilen belirteçleri destekler.  Şu anda desteklenen belirteç değerleri şunlardır:
+   * `{AlternativeMediaId}`, Streaminglocatorıd. Alternativemediaıd değeriyle değiştirilmiştir.
+   * `{ContentKeyId}`, istenen anahtarın tanımlayıcısının değeriyle değiştirilmiştir.
+* `StreamingPolicyPlayReadyConfiguration.CustomLicenseAcquisitionUrlTemplate`: Son Kullanıcı oynatıcılarına lisans sunan özel hizmetin URL 'SI için şablon. Lisans vermek için Azure Media Services kullandığınızda bu gerekli değildir.
+
+   Şablon, hizmetin çalışma zamanında, isteğe özgü değerle güncelleşeceğini değiştirilebilen belirteçleri destekler. Şu anda desteklenen belirteç değerleri şunlardır:  
+   * `{AlternativeMediaId}`, Streaminglocatorıd. Alternativemediaıd değeriyle değiştirilmiştir.
+   * `{ContentKeyId}`, istenen anahtarın tanımlayıcısının değeriyle değiştirilmiştir. 
+* `StreamingPolicyWidevineConfiguration.CustomLicenseAcquisitionUrlTemplate`: yalnızca Widevine için olan önceki şablonla aynı. 
+* `StreamingPolicyFairPlayConfiguration.CustomLicenseAcquisitionUrlTemplate`: önceki şablonla aynı ancak yalnızca FairPlay için.  
 
 Örneğin:
 
@@ -173,46 +242,25 @@ Bir farklı anahtar ve lisans teslimat hizmeti (değil, Media Services) belirtme
 streamingPolicy.EnvelopEncryption.customKeyAcquisitionUrlTemplate = "https://mykeyserver.hostname.com/envelopekey/{AlternativeMediaId}/{ContentKeyId}";
 ```
 
-`ContentKeyId` İstenen anahtar değerine sahiptir ve `AlternativeMediaId` istek bir varlık, tarafında eşlemek isterseniz kullanılabilir. Örneğin, `AlternativeMediaId` izinlerini Ara yardımcı olmak için kullanılabilir.
+`ContentKeyId` istenen anahtarın bir değeri vardır. İsteği kendi tarafınızda bir varlıkla eşlemek istiyorsanız `AlternativeMediaId` kullanabilirsiniz. Örneğin, `AlternativeMediaId` izinleri bulmanıza yardımcı olması için kullanılabilir.
 
-Özel kullanan diğer örnekler anahtar ve lisans edinme URL'ler için bkz [ilkeleri - akış oluşturma](https://docs.microsoft.com/rest/api/media/streamingpolicies/create)
-
-## <a name="control-content-access"></a>İçerik erişimi denetleme
-
-İçeriğinizi içerik anahtarı ilkesi yapılandırarak kimlerin erişebileceğini kontrol edebilirsiniz. Media Services, anahtar isteğinde bulunan kullanıcıları yetkilendirmenin birden çok yöntemini destekler. İçerik anahtarı İlkesi yapılandırmanız gerekir. Anahtarın istemciye teslim edilebilmesi için istemci (oynatıcı) ilkeyi karşılaması gerekir. İçerik anahtarı ilkeniz olabilir **açın** veya **belirteci** kısıtlama. 
-
-Bir belirteç kısıtlamalı içerik anahtar ilkesiyle, içerik anahtarı, anahtar/lisans istekte geçerli JSON Web Token (JWT) veya basit web belirteci (SWT) sunan bir istemciye gönderilir. Bu belirteci bir güvenlik belirteci hizmeti (STS) tarafından verilmiş olması gerekir. Azure Active Directory STS kullanın veya özel STS dağıtın. STS belirteci kısıtlama yapılandırmasında belirtilen belirtilen anahtarı ve sorunu talepleri ile imzalanmış bir belirteç oluşturmak için yapılandırılmalıdır. Media Services anahtar dağıtımı hizmetiyle belirteç geçerliyse ve belirteçteki talepler için bir anahtar/lisans yapılandırılanlar eşleşen istemci için istenen anahtar/lisans döndürür.
-
-Belirteç kısıtlamalı ilkenin yapılandırdığınızda, birincil doğrulama anahtarı, veren ve İzleyici parametrelerini belirtmeniz gerekir. Birincil doğrulama anahtarı belirteç birlikte imzalandığı anahtarını içerir. Verici belirteci veren güvenli belirteç hizmetidir. Belirtecin amacı kapsam olarak da adlandırılan, hedef kitle açıklayan veya kaynak belirteci erişimini yetkilendirir. Media Services anahtar dağıtımı hizmetiyle belirtecindeki bu değerleri şablon değerleri eşleştiğini doğrular.
-
-Müşteriler özel talepler belirteçte farklı ContentKeyPolicyOptions farklı DRM lisans parametrelerle (kiralama lisans karşı bir abonelik Lisansı) arasında seçim veya içerik anahtarını temsil eden bir talep içerecek şekilde dahil etmek için özel STS genellikle kullanın. erişim belirteci verir anahtar tanımlayıcısı.
- 
-## <a name="storage-side-encryption"></a>Depolama tarafında şifreleme
-
-Bekleyen veri varlıklarınızı korumanın varlıklar tarafından depolama tarafı şifrelemesi şifrelenmelidir. Aşağıdaki tabloda, depolama tarafı şifrelemesi Media Services v3 sürümünde nasıl çalıştığı gösterilmektedir:
-
-|Şifreleme seçeneği|Açıklama|Media Services v3|
-|---|---|---|
-|Media Services'ı depolama şifrelemesi| Media Services tarafından yönetilen AES-256 şifreleme anahtarı|Desteklenmeyen<sup>(1)</sup>|
-|[Bekleyen veriler için depolama hizmeti şifrelemesi](https://docs.microsoft.com/azure/storage/common/storage-service-encryption)|Sunucu tarafı şifrelemesi, Azure Depolama tarafından sunulan anahtarı Azure tarafından veya müşteri tarafından yönetilen|Desteklenen|
-|[Depolama istemci tarafı şifreleme](https://docs.microsoft.com/azure/storage/common/storage-client-side-encryption)|Azure depolama, anahtar Kasası'nda müşteri tarafından yönetilen bir kiracı anahtarı tarafından sunulan istemci tarafı şifreleme|Desteklenmiyor|
-
-<sup>1</sup> , Media Services v3 (AES-256 şifreleme) depolama şifrelemesi, yalnızca varlıklarınızı Media Services v2 ile oluşturulduğunda için geriye dönük uyumluluk desteklenir. Var olan depolama ile v3 çalışır anlamı varlıklar şifreli ancak yenilerini oluşturulmasına izin vermez.
+ Özel lisans/anahtar alma URL 'Leri kullanan REST örnekleri için bkz. [akış ilkeleri-oluştur](https://docs.microsoft.com/rest/api/media/streamingpolicies/create).
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
-Alırsanız `MPE_ENC_ENCRYPTION_NOT_SET_IN_DELIVERY_POLICY` hata, akış uygun ilkeyi belirttiğinizden emin olun.
+`MPE_ENC_ENCRYPTION_NOT_SET_IN_DELIVERY_POLICY` hata alırsanız, uygun akış ilkesini belirttiğinizden emin olun.
 
-İle biten hatalarıyla karşılaşırsanız `_NOT_SPECIFIED_IN_URL`, URL'de şifreleme biçimini belirttiğinizden emin olun. Örneğin, `…/manifest(format=m3u8-cmaf,encryption=cbcs-aapl)`. Bkz: [akış protokolleri ve şifreleme türlerini](#streaming-protocols-and-encryption-types).
+`_NOT_SPECIFIED_IN_URL`ile biten hatalar alırsanız, URL 'de şifreleme biçimini belirttiğinizden emin olun. `…/manifest(format=m3u8-cmaf,encryption=cbcs-aapl)` bunun bir örneğidir. Bkz. [akış protokolleri ve şifreleme türleri](#streaming-protocols-and-encryption-types).
 
-## <a name="ask-questions-give-feedback-get-updates"></a>Soru sorun, görüşlerinizi, güncelleştirmeleri alın
+## <a name="ask-questions-give-feedback-get-updates"></a>Soru sorun, geri bildirimde bulunun, güncelleştirmeleri al
 
-Kullanıma [Azure Media Services topluluğu](media-services-community.md) soru sorun, görüşlerinizi ve medya hizmetleri hakkında güncelleştirmeler almak farklı yollarını görmek için makaleyi.
+Soru sormak, geri bildirimde bulunmak ve Media Services hakkında güncelleştirmeler almak için [Azure Media Services Community](media-services-community.md) makalesine göz atın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [AES şifrelemesi ile koruma](protect-with-aes128.md)
 * [DRM ile koruma](protect-with-drm.md)
-* [Erişim denetimi ile birden çok DRM içerik koruma sistemi tasarlayın](design-multi-drm-system-with-access-control.md)
+* [Access Control ile çoklu DRM içerik koruma sistemi tasarlama](design-multi-drm-system-with-access-control.md)
+* [Depolama tarafı şifrelemesi](storage-account-concept.md#storage-side-encryption)
 * [Sık sorulan sorular](frequently-asked-questions.md)
-
+* [JSON Web Token Işleyicisi](https://docs.microsoft.com/dotnet/framework/security/json-web-token-handler)

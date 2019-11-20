@@ -1,5 +1,5 @@
 ---
-title: 'ExpressRoute ve siteden siteye VPN bağlantıları yapılandırma - bir arada: Klasik: Azure | Microsoft Docs'
+title: 'ExpressRoute ve S2S VPN birlikte var olan bağlantıları yapılandırma: klasik'
 description: Bu makalede klasik dağıtım modeli için bir arada varolabilen ExpressRoute ve bir Siteden Siteye VPN bağlantısını nasıl yapılandıracağınız anlatılmaktadır.
 documentationcenter: na
 services: expressroute
@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.date: 12/06/2018
 ms.author: charwen
 ms.custom: seodec18
-ms.openlocfilehash: 70e7c689acac094890545ac1e65374e9377a0be0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0643ce99ce4ba9328abc3f7a8c8e7061026611b9
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60370432"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74031787"
 ---
 # <a name="configure-expressroute-and-site-to-site-coexisting-connections-classic"></a>Birlikte bulunan ExpressRoute bağlantıları ile Siteden Siteye bağlantıları yapılandırma (klasik)
 > [!div class="op_single_selector"]
@@ -71,7 +71,7 @@ Bir arada var olabilen bağlantılar yapılandırmak için seçebileceğiniz iki
 
 * Bir VNet’im yok ve bir tane oluşturmam gerekiyor.
   
-    Zaten bir sanal ağınız yoksa, bu yordam klasik dağıtım modelini kullanarak yeni bir sanal ağ oluşturmak ve yeni ExpressRoute ve Siteden Siteye VPN bağlantıları oluşturmak için size yol gösterir. Yapılandırmak için, makalenin [Yeni bir sanal ağ ve bir arada varolabilen bağlantılar oluşturmak için](#new) bölümündeki adımları izleyin.
+    Zaten bir sanal ağınız yoksa, bu yordam klasik dağıtım modelini kullanarak yeni bir sanal ağ oluşturmak ve yeni ExpressRoute ve Siteden Siteye VPN bağlantıları oluşturmak için size yol gösterir. Yapılandırmak için, makalenin [Yeni bir sanal ağ ve bir arada var olabilen bağlantılar oluşturmak için](#new) bölümündeki adımları izleyin.
 * Zaten bir klasik dağıtım modeli VNet’im var.
   
     Mevcut bir Siteden Siteye VPN bağlantısı veya ExpressRoute bağlantısına sahip bir sanal ağınız zaten olabilir. Makale bölümünde [zaten var olan bir VNet için bir arada var olabilen bağlantılar yapılandırmak için](#add) ağ geçidini silme ve ardından yeni ExpressRoute ve siteden siteye VPN bağlantıları oluşturma size yol gösterir. Yeni bir bağlantı oluşturulurken adımların belirli bir sırayla tamamlanması gerektiğine dikkat edin. Ağ geçitleriniz ve bağlantılarınızı oluşturmak için diğer makalelerdeki yönergeleri kullanmayın.
@@ -200,7 +200,7 @@ Ağ geçidi alt ağı /27 veya daha büyükse ve sanal ağ ExpressRoute üzerind
         Remove-AzureVNetGateway –VnetName MyAzureVNET
 3. Sanal ağ şemasını dışarı aktarın. Aşağıdaki PowerShell cmdlet’ini değerleri kendi değerlerinizle değiştirerek kullanın.
    
-        Get-AzureVNetConfig –ExportToFile “C:\NetworkConfig.xml”
+        Get-AzureVNetConfig –ExportToFile "C:\NetworkConfig.xml"
 4. Ağ yapılandırma dosyası şemasını ağ geçidi alt ağı /27 veya daha kısa bir önek (örneğin /26 veya /25) olacak şekilde düzenleyin. Aşağıdaki örneğe bakın. 
    
    > [!NOTE]

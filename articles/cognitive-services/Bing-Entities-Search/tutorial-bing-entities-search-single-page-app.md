@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Bing varlık arama tek sayfa web uygulaması'
-titlesuffix: Azure Cognitive Services
+title: 'Öğretici: Tek sayfalı Web uygulaması Bing Varlık Arama'
+titleSuffix: Azure Cognitive Services
 description: Bing Varlık Arama API'sinin tek sayfalı bir Web uygulamasında kullanılmasını gösterir.
 services: cognitive-services
 author: aahill
@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-entity-search
 ms.topic: tutorial
-ms.date: 02/01/2019
+ms.date: 07/15/2019
 ms.author: aahi
-ms.openlocfilehash: 1b8cf36c631755458bc0c531773a6b2aba7f1038
-ms.sourcegitcommit: 6f043a4da4454d5cb673377bb6c4ddd0ed30672d
+ms.openlocfilehash: 5a8276f06207eb69ffec0e21c6d92794973f3b83
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65406370"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68423980"
 ---
 # <a name="tutorial-single-page-web-app"></a>Öğretici: Tek sayfalı web uygulaması
 
@@ -535,7 +535,7 @@ Geliştirme amacıyla, Bing Web Araması API’si isteğini CORS ara sunucusu ar
 
 Sonra, HTML dosyasındaki Bing Web Araması uç noktasını şöyle değiştirin:
 
-    https://localhost:9090/httpss://api.cognitive.microsoft.com/bing/v7.0/search
+    http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search
 
 Son olarak, aşağıdaki komutla CORS ara sunucusunu başlatın:
 

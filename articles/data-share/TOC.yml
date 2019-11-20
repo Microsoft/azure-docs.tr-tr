@@ -1,0 +1,67 @@
+- name: Azure Veri Paylaşımı Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure Veri Paylaşımı nedir?
+      href: overview.md
+    - name: Desteklenen veri depoları
+      href: supported-data-stores.md
+- name: Öğreticiler
+  expanded: true
+  items:
+    - name: Veri paylaşımı
+      href: share-your-data.md
+    - name: Veri kabul etme ve alma
+      href: subscribe-to-data-share.md
+- name: Kavramlar
+  items:
+    - name: Azure Veri Paylaşımı terminolojisi
+      href: terminology.md
+    - name: Roller ve gereksinimler
+      href: concepts-roles-permissions.md
+- name: Örnekler
+  items:
+    - name: Kod örnekleri
+      href: 'https://docs.microsoft.com/samples/browse/?service=data-share/'
+    - name: Azure PowerShell
+      href: samples-powershell.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: İzleme
+      href: how-to-monitor.md
+    - name: Veri kümesi eşlemelerini yapılandırma
+      href: how-to-configure-mapping.md
+    - name: Sorun giderme
+      href: data-share-troubleshoot.md
+    - name: Veri kümeleri ekleme
+      href: how-to-add-datasets.md
+    - name: Alıcı ekleme
+      href: how-to-add-recipients.md
+    - name: Davet silme
+      href: how-to-delete-invitation.md
+    - name: Paylaşım aboneliğini iptal etme
+      href: how-to-revoke-share-subscription.md
+- name: Başvuru
+  items:
+    - name: .NET
+      href: /dotnet/api/overview/azure/datashare
+    - name: Azure PowerShell
+      href: 'https://docs.microsoft.com/powershell/module/az.datashare/?view=azps-2.6.0'
+    - name: REST API
+      href: /rest/api/datashare
+- name: Kaynaklar
+  items:
+    - name: MSDN Forumu
+      href: 'https://social.msdn.microsoft.com/Forums/home?forum=AzureDataShare'
+    - name: Stack Overflow
+      href: 'https://stackoverflow.com/questions/tagged/azure-data-share'
+    - name: Blog
+      href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Share/bg-p/AzureDataShareBlog'
+    - name: Microsoft Teknoloji Topluluğu
+      href: 'https://techcommunity.microsoft.com/'
+    - name: Ürün geri bildirimi
+      href: 'https://feedback.azure.com/forums/922759-azure-data-share-public-preview'
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/data-share/'
+    - name: Hizmet güncelleştirmeleri
+      href: 'https://azure.microsoft.com/updates/?product=data-share'

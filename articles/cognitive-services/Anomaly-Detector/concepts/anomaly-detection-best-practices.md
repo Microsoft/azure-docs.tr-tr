@@ -1,20 +1,21 @@
 ---
 title: Anomali Algılayıcısı API'sini kullanırken en iyi yöntemler
+titleSuffix: Azure Cognitive Services
 description: En iyi yöntemler hakkında Anomali algılayıcısı API'siyle anomalileri tespit edilirken öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/26/2019
 ms.author: aahi
-ms.openlocfilehash: 1ad4a67d7737733e4c910d3495be29860769f27e
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 9407f2fc9375765efb6eb9688b3ebfeef24ba90a
+ms.sourcegitcommit: dad277fbcfe0ed532b555298c9d6bc01fcaa94e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477803"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67721630"
 ---
 # <a name="best-practices-for-using-the-anomaly-detector-api"></a>Anomali algılayıcısı API kullanımı için en iyi uygulamalar
 

@@ -1,38 +1,38 @@
 ---
-title: Yük Dengeleyici için Azure Resource Manager desteği | Microsoft Docs
-description: Azure Resource Manager ile yük dengeleyici için PowerShell kullanma. Yük Dengeleyici için şablonları kullanma
+title: Load Balancer için Azure Resource Manager desteği | Microsoft Docs
+description: Azure Resource Manager Load Balancer için PowerShell 'i kullanma. Yük Dengeleyici için şablonları kullanma
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/25/2017
-ms.author: kumud
-ms.openlocfilehash: 596ac871067886ee3124c0f21beb35cb3b8fe1ae
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: allensu
+ms.openlocfilehash: 839b607b7787d51151401737848a46d7b66229dd
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60889001"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68275483"
 ---
-# <a name="using-azure-resource-manager-support-with-azure-load-balancer"></a>Azure Resource Manager desteği, Azure Load Balancer ile kullanma
+# <a name="using-azure-resource-manager-support-with-azure-load-balancer"></a>Azure Load Balancer Azure Resource Manager desteğini kullanma
 
 
 
-Azure Resource Manager, Azure Hizmetleri için tercih edilen Yönetim çerçevedir. Azure Load Balancer, Azure Resource Manager tabanlı API'ler ve araçlar kullanılarak yönetilebilir.
+Azure Resource Manager, Azure 'daki hizmetler için tercih edilen yönetim çerçevesidir. Azure Load Balancer, Azure Resource Manager tabanlı API 'Ler ve araçlar kullanılarak yönetilebilir.
 
 ## <a name="concepts"></a>Kavramlar
 
-Resource Manager ile Azure Load Balancer aşağıdaki alt kaynakları içerir:
+Kaynak Yöneticisi, Azure Load Balancer aşağıdaki alt kaynakları içerir:
 
-* Ön uç IP yapılandırmasını – yoksa sanal IP (VIP) bilinen bir veya daha fazla ön uç IP adresi bir yük dengeleyici ekleyebilirsiniz. Bu IP adresleri trafik için bir giriş işlevi görür.
-* Arka uç adres havuzu – bunlar ilişkili sanal makine ağ arabirim kartı (yükleme için dağıtılan NIC ile) IP adresleridir.
-* Yük Dengeleme kuralları: bir kural özelliğine belirli ön uç IP ve bağlantı noktası birleşimini bir dizi arka uç IP adresleri ve bağlantı noktası bileşimiyle eşler. Tek bir yük dengeleyici birden çok dengeleme kuralına sahip olabilir. Her kural, bir ön uç IP bağlantı noktası ve arka uç IP ve bağlantı noktası Vm'lerle ilişkilendirilmiş birleşimidir.
-* Araştırmalar – araştırmaları sanal makine örneklerinin durumunu izlemenize olanak sağlar. Durum araştırması başarısız olursa, sanal makine örneğine otomatik olarak döndürme dışına alınır.
-* NAT – gelen NAT kuralları, bir ön uç IP üzerinden gelen trafiği tanımlayan kuralları ve arka uç IP dağıtılır.
+* Ön uç IP yapılandırması – bir yük dengeleyici, sanal IP 'Ler (VIP) olarak da bilinen bir veya daha fazla ön uç IP adresi içerebilir. Bu IP adresleri trafik için bir giriş işlevi görür.
+* Arka uç adres havuzu: Bunlar, yükün dağıtıldığı sanal makine ağ arabirimi kartı (NIC) ile ilişkili IP adresleridir.
+* Yük Dengeleme kuralları – bir kural özelliği, belirli bir ön uç IP ve bağlantı noktası bileşimini bir arka uç IP adresleri ve bağlantı noktası birleşimine eşler. Tek bir yük dengeleyici birden çok dengeleme kuralına sahip olabilir. Her kural, ön uç IP ve bağlantı noktasının ve VM 'lerle ilişkili bağlantı noktasının bir birleşimidir.
+* Yoklamalar – yoklamalar, VM örneklerinin sistem durumunu izlemenize olanak tanır. Bir sistem durumu araştırması başarısız olursa, VM örneği otomatik olarak dönüşten alınır.
+* Gelen NAT kuralları – ön uç IP 'si üzerinden akan ve arka uç IP 'ye dağıtılan gelen trafiği tanımlayan NAT kuralları.
 
 ![](./media/load-balancer-arm/load-balancer-arm.png)
 
@@ -40,31 +40,31 @@ Resource Manager ile Azure Load Balancer aşağıdaki alt kaynakları içerir:
 
 Azure Resource Manager, uygulamalarınızı bildirim temelli bir şablon aracılığıyla sağlamanıza olanak tanır. Tek bir şablonda birden çok hizmeti bağımlılıklarıyla birlikte dağıtabilirsiniz. Uygulama yaşam döngüsünün her aşamasında uygulamanızı tekrar tekrar dağıtmak için aynı şablonu kullanırsınız.
 
-Şablonlar, sanal makineler, sanal ağlar, kullanılabilirlik kümeleri, ağ arabirimlerini (NIC'ler), depolama hesapları, yük Dengeleyiciler, ağ güvenlik grupları ve genel IP'ler için tanımları ekleyebilirsiniz. Şablonlar sayesinde, karmaşık bir uygulama için ihtiyacınız olan her şey oluşturabilirsiniz. Şablon dosyası, sürüm denetimi ve işbirliği için içerik yönetim sistemi olarak denetlenebilir.
+Şablonlar, sanal makineler, sanal ağlar, kullanılabilirlik kümeleri, ağ arabirimleri (NIC), depolama hesapları, yük dengeleyiciler, ağ güvenlik grupları ve genel IP 'Ler için tanımlar içerebilir. Şablonlar sayesinde, karmaşık bir uygulama için ihtiyacınız olan her şeyi oluşturabilirsiniz. Şablon dosyası, sürüm denetimi ve işbirliği için içerik yönetim sistemine denetlenebilir.
 
 [Şablonlar hakkında daha fazla bilgi edinin](../azure-resource-manager/resource-manager-template-walkthrough.md)
 
-[Ağ kaynakları hakkında daha fazla bilgi edinin](../networking/networking-overview.md)
+[Ağ kaynakları hakkında daha fazla bilgi](../networking/networking-overview.md)
 
-Azure Load Balancer'ı kullanarak hızlı başlangıç şablonları için bkz: [GitHub deposu](https://github.com/Azure/azure-quickstart-templates) oluşturulan topluluk şablonları kümesi barındıran.
+Azure Load Balancer kullanan hızlı başlangıç şablonları için, topluluk tarafından oluşturulan şablonlar kümesini barındıran [GitHub deposuna](https://github.com/Azure/azure-quickstart-templates) bakın.
 
-Şablon örneklerini:
+Şablon örnekleri:
 
-* [Load Balancer ve Yük Dengeleme kuralları içinde 2 VM](https://go.microsoft.com/fwlink/?LinkId=544799)
-* [Bir sanal ağ ile bir iç yük dengeleyici ve yük dengeleyici kuralları içinde 2 VM](https://go.microsoft.com/fwlink/?LinkId=544800)
-* [Bir yük dengeleyici içinde 2 VM ve LB'de NAT kurallarını yapılandırma](https://go.microsoft.com/fwlink/?LinkId=544801)
+* [bir Load Balancer ve yük dengeleme kurallarında 2 VM](https://go.microsoft.com/fwlink/?LinkId=544799)
+* [Iç Load Balancer ve Load Balancer kurallarına sahip bir VNET 'te 2 sanal makine](https://go.microsoft.com/fwlink/?LinkId=544800)
+* [bir Load Balancer 2 VM ve LB üzerinde NAT kuralları yapılandırma](https://go.microsoft.com/fwlink/?LinkId=544801)
 
-## <a name="setting-up-azure-load-balancer-with-a-powershell-or-cli"></a>PowerShell veya CLI ile Azure Load Balancer oluşturma
+## <a name="setting-up-azure-load-balancer-with-a-powershell-or-cli"></a>PowerShell veya CLı ile Azure Load Balancer ayarlama
 
-Azure Resource Manager cmdlet'leri, komut satırı araçları ve REST API'lerini kullanmaya başlama
+Azure Resource Manager cmdlet 'leri, komut satırı araçları ve REST API 'Leri ile çalışmaya başlama
 
-* [Azure ağ cmdlet'leri](https://docs.microsoft.com/powershell/module/az.network#networking) yük dengeleyici oluşturmak için kullanılabilir.
-* [Azure Resource Manager'ı kullanarak bir yük dengeleyici oluşturma](load-balancer-get-started-ilb-arm-ps.md)
-* [Azure kaynak yönetimi ile Azure CLI kullanma](../xplat-cli-azure-resource-manager.md)
-* [Yük Dengeleyici REST API'leri](https://msdn.microsoft.com/library/azure/mt163651.aspx)
+* [Azure ağ cmdlet 'leri](https://docs.microsoft.com/powershell/module/az.network#networking) , bir Load Balancer oluşturmak için kullanılabilir.
+* [Azure Resource Manager kullanarak yük dengeleyici oluşturma](load-balancer-get-started-ilb-arm-ps.md)
+* [Azure CLı 'yi Azure Kaynak yönetimi ile kullanma](../xplat-cli-azure-resource-manager.md)
+* [REST API 'Leri Load Balancer](https://msdn.microsoft.com/library/azure/mt163651.aspx)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ayrıca [Internet'e yönelik Yük Dengeleyici oluşturmaya başlama](load-balancer-get-started-internet-arm-ps.md) ve ne tür yapılandırma [dağıtım modunu](load-balancer-distribution-mode.md) belirli yük dengeleyici ağ trafiği davranışı için.
+Ayrıca, [Internet 'e yönelik yük dengeleyici oluşturmaya başlayabilir](load-balancer-get-started-internet-arm-ps.md) ve belirli bir yük dengeleyici ağ trafiği davranışı için hangi tür [Dağıtım modunu](load-balancer-distribution-mode.md) yapılandırabilirsiniz.
 
-Nasıl yöneteceğinizi öğrenin [boşta kalma TCP zaman aşımı ayarları yük dengeleyici](load-balancer-tcp-idle-timeout.md). Bir yük dengeleyici arkasındaki sunucular için bağlantıları canlı uygulamanız gerektiğinde bu önemlidir.
+[Yük Dengeleyici için BOŞTAKI TCP zaman aşımı ayarlarını](load-balancer-tcp-idle-timeout.md)yönetmeyi öğrenin. Bu, uygulamanızın bir yük dengeleyicinin arkasındaki sunucular için bağlantıları canlı tutması gerektiğinde önemlidir.

@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı yönetilen örneği için bir sanal ağ oluşturma | Microsoft Docs
-description: Bu makalede, Azure SQL veritabanı yönetilen örneği dağıtabileceğiniz bir sanal ağ oluşturmayı açıklar.
+title: Yönetilen örnek için bir sanal ağ oluşturma
+description: Bu makalede, Azure SQL veritabanı yönetilen örneğini dağıtabileceğiniz bir sanal ağın nasıl oluşturulacağı açıklanır.
 services: sql-database
 ms.service: sql-database
 ms.subservice: managed-instance
@@ -10,56 +10,58 @@ ms.topic: conceptual
 author: srdan-bozovic-msft
 ms.author: srbozovi
 ms.reviewer: sstein, bonova, carlrab
-manager: craigg
-ms.date: 01/15/2019
-ms.openlocfilehash: 5e8b385d018482d281153f1cf80f9953cb8c7f06
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 09/12/2019
+ms.openlocfilehash: 9f115d51657993562642391a235de79420aa434a
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60700499"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823372"
 ---
-# <a name="create-a-virtual-network-for-azure-sql-database-managed-instance"></a>Azure SQL veritabanı yönetilen örneği için bir sanal ağ oluşturma
+# <a name="create-a-virtual-network-for-azure-sql-database-managed-instance"></a>Azure SQL veritabanı yönetilen örneği için sanal ağ oluşturma
 
-Bu makalede, geçerli sanal ağ ve alt ağ Azure SQL veritabanı yönetilen örneği dağıtabileceğiniz nasıl oluşturulacağı açıklanmaktadır.
+Bu makalede, Azure SQL veritabanı yönetilen örneğini dağıtabileceğiniz geçerli bir sanal ağ ve alt ağ oluşturma açıklanır.
 
-Azure SQL veritabanı yönetilen örneği, bir Azure dağıtılmalıdır [sanal ağ](../virtual-network/virtual-networks-overview.md). Bu dağıtım aşağıdaki senaryolara olanak tanır:
+Azure SQL veritabanı yönetilen örneği bir Azure [sanal ağı](../virtual-network/virtual-networks-overview.md)içinde dağıtılmalıdır. Bu dağıtım, aşağıdaki senaryolara izin vermez:
 
 - Güvenli özel IP adresi
-- Bir şirket içi ağdan doğrudan bir yönetilen örneğe bağlanma
-- Bağlantılı bir sunucu veya başka bir yönetilen örneğe bağlanma veri deposu şirket
-- Azure kaynakları için yönetilen örneğe bağlanma  
+- Yönetilen bir örneğe doğrudan şirket içi ağdan bağlanma
+- Yönetilen bir örneği bağlantılı sunucuya veya başka bir şirket içi veri deposuna bağlama
+- Yönetilen bir örneği Azure kaynaklarına bağlama  
 
 > [!Note]
-> Yapmanız gerekenler [yönetilen örneği için alt ağ boyutunu belirlemek](sql-database-managed-instance-determine-size-vnet-subnet.md) ilk örneği dağıtmadan önce. Kaynakları içine yerleştirdiğiniz sonra alt yeniden boyutlandıramazsınız.
+> İlk örneği dağıtmadan önce, [yönetilen örnek için alt ağın boyutunu belirlemelisiniz](sql-database-managed-instance-determine-size-vnet-subnet.md) . Kaynakları içine koyduktan sonra alt ağı yeniden boyutlandıramazsınız.
 >
-> Mevcut bir sanal ağı kullanmayı planlıyorsanız, yönetilen Örneğinize uyum sağlamak için bu ağ yapılandırmasını değiştirmeniz gerekir. Daha fazla bilgi için [yönetilen örneği için bir sanal ağınız değiştirme](sql-database-managed-instance-configure-vnet-subnet.md).
+> Var olan bir sanal ağı kullanmayı planlıyorsanız, bu ağ yapılandırmasını yönetilen örneğinizi kapsayacak şekilde değiştirmeniz gerekir. Daha fazla bilgi için bkz. [yönetilen örnek için var olan bir sanal ağı değiştirme](sql-database-managed-instance-configure-vnet-subnet.md).
+>
+> Yönetilen bir örnek oluşturulduktan sonra, yönetilen örneği veya VNet 'i başka bir kaynak grubuna veya aboneliğe taşımak desteklenmez.
+
 
 ## <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
-Oluşturma ve bir sanal ağ yapılandırma en kolay yolu, bir Azure Resource Manager dağıtım şablonu kullanmaktır.
+Bir sanal ağ oluşturmanın ve yapılandırmanın en kolay yolu Azure Resource Manager dağıtım şablonu kullanmaktır.
 
 1. Azure Portal’da oturum açın.
 
-2. Seçin **azure'a Dağıt** düğmesi:
+2. **Azure 'A dağıt** düğmesini seçin:
 
    <a target="_blank" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-sql-managed-instance-azure-environment%2Fazuredeploy.json" rel="noopener" data-linktype="external"> <img src="https://azuredeploy.net/deploybutton.png" data-linktype="external"> </a>
 
-   Bu düğme, yönetilen örneği dağıtabileceğiniz ağ ortamını yapılandırmak için kullanabileceğiniz bir formu açılır.
+   Bu düğme, yönetilen örneği dağıtabileceğiniz ağ ortamını yapılandırmak için kullanabileceğiniz bir form açar.
 
    > [!Note]
-   > Bu Azure Resource Manager şablonu bir sanal ağda iki alt ağ dağıtırsınız. Adlı bir alt ağ **ManagedInstances**, yönetilen örneği için ayrılmıştır ve bir önceden yapılandırılmış bir yönlendirme tablosu vardır. Diğer alt, **varsayılan**, yönetilen örneği (örneğin, Azure sanal makineler) erişmeli diğer kaynaklar için kullanılır.
+   > Bu Azure Resource Manager şablonu, iki alt ağa sahip bir sanal ağ dağıtır. **ManagedInstances**adlı bir alt ağ, yönetilen örnek için ayrılmıştır ve önceden yapılandırılmış bir yol tablosuna sahiptir. **Varsayılan**olarak adlandırılan diğer alt ağ, yönetilen örneğe erişmesi gereken diğer kaynaklar için kullanılır (örneğin, Azure sanal makineler).
 
-3. Ağ ortamını yapılandırın. Aşağıdaki formda ağ ortamınızın parametreleri yapılandırabilirsiniz:
+3. Ağ ortamını yapılandırın. Aşağıdaki biçimde, ağ ortamınızın parametrelerini yapılandırabilirsiniz:
 
-   ![Azure ağı yapılandırmak için resource Manager şablonu](./media/sql-database-managed-instance-vnet-configuration/create-mi-network-arm.png)
+   ![Azure ağını yapılandırmak için Kaynak Yöneticisi şablonu](./media/sql-database-managed-instance-vnet-configuration/create-mi-network-arm.png)
 
-   Sanal ağ ve alt ağlar adlarını değiştirmek ve, ağ kaynakları ile ilişkili IP aralıklarını ayarlama. Seçtikten sonra **satın alma** düğmesi, bu form oluşturma ve ortamınızı yapılandırın. İki alt ağa gerekmiyorsa, varsayılan silebilirsiniz.
+   Sanal ağ ve alt ağların adlarını değiştirebilir ve ağ kaynaklarınızla ilişkili IP aralıklarını ayarlayabilirsiniz. **Satın alma** düğmesini seçtikten sonra bu form ortamınızı oluşturur ve yapılandırır. İki alt ağa ihtiyacınız yoksa, varsayılan olanı silebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Genel bakış için bkz. [yönetilen örnek nedir?](sql-database-managed-instance.md).
-- Hakkında bilgi edinin [bağlantı mimarisi yönetilen örneğinde](sql-database-managed-instance-connectivity-architecture.md).
-- Bilgi nasıl [yönetilen örneği için bir sanal ağınız değiştirme](sql-database-managed-instance-configure-vnet-subnet.md).
-- Sanal ağ oluşturma için bir yönetilen örnek oluşturup bir veritabanı bir veritabanı yedeğinden geri gösteren bir öğretici için bkz. [bir Azure SQL veritabanı yönetilen örneği oluşturma](sql-database-managed-instance-get-started.md).
-- DNS sorunları için bkz: [özel DNS yapılandırma](sql-database-managed-instance-custom-dns.md).
+- [Yönetilen örnekteki bağlantı mimarisi](sql-database-managed-instance-connectivity-architecture.md)hakkında bilgi edinin.
+- [Yönetilen örnek için var olan bir sanal ağı değiştirme](sql-database-managed-instance-configure-vnet-subnet.md)hakkında bilgi edinin.
+- Bir sanal ağ oluşturmayı, yönetilen bir örnek oluşturmayı ve bir veritabanını bir veritabanı yedeklemesinden geri yüklemeyi gösteren bir öğretici için bkz. [Azure SQL veritabanı yönetilen örneği oluşturma](sql-database-managed-instance-get-started.md).
+- DNS sorunları için bkz. [Özel BIR DNS yapılandırma](sql-database-managed-instance-custom-dns.md).

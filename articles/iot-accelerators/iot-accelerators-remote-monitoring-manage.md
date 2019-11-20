@@ -1,6 +1,6 @@
 ---
-title: Cihazları yapılandırma bir uzaktan izleme çözümü öğreticide - Azure | Microsoft Docs
-description: Bu öğretici için Uzaktan izleme çözüm Hızlandırıcısını bağlı cihazları yapılandırma gösterilmektedir.
+title: Uzaktan Izleme çözümünde cihazları Yapılandırma-Azure | Microsoft Docs
+description: Bu öğreticide, uzaktan Izleme çözüm hızlandırıcısına bağlı cihazların nasıl yapılandırılacağı gösterilir.
 author: dominicbetts
 manager: timlt
 ms.author: dobett
@@ -9,18 +9,18 @@ services: iot-accelerators
 ms.date: 03/08/2019
 ms.topic: tutorial
 ms.custom: mvc
-ms.openlocfilehash: d23b7c8fa10127094fec67535333ae169f0f38f0
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: e4236952bd41c4955e337813ff6d706263b8ef47
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61453216"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890911"
 ---
-# <a name="tutorial-configure-devices-connected-to-your-monitoring-solution"></a>Öğretici: İzleme çözümünüze bağlı cihazları yapılandırma
+# <a name="tutorial-configure-devices-connected-to-your-monitoring-solution"></a>Öğretici: izleme çözümünüze bağlı cihazları yapılandırma
 
-Bu öğreticide bağlı IoT cihazlarınızı yapılandırmak ve yönetmek için Uzaktan İzleme çözümü hızlandırıcısını kullanacaksınız. Yeni bir cihaz için çözüm Hızlandırıcısını ekleyip cihaz yapılandırabilirsiniz.
+Bu öğreticide bağlı IoT cihazlarınızı yapılandırmak ve yönetmek için Uzaktan İzleme çözümü hızlandırıcısını kullanacaksınız. Çözüm hızlandırıcısına yeni bir cihaz ekler ve cihazı yapılandırırsınız.
 
-Contoso, tesislerinden birini genişletmek için yeni makineler sipariş etmiştir. Yeni makinelerin teslim edilmesini beklerken çözümünüzün davranışını test etme amacıyla bir simülasyon çalıştırmak istiyorsunuz. Simülasyonu çalıştırmak için Uzaktan izleme çözüm hızlandırıcısının ve bu sanal cihazı yapılandırma güncelleştirmeleri doğru şekilde yanıt test için yeni bir sanal altyapı cihaz ekleyin. Bu öğreticide, sanal cihazlar kullanırken, bir cihaz Geliştirici doğrudan yöntemler uygulayabilirler bir [gerçek bir cihaz için Uzaktan izleme çözüm Hızlandırıcısını bağlı](iot-accelerators-connecting-devices.md).
+Contoso, tesislerinden birini genişletmek için yeni makineler sipariş etmiştir. Yeni makinelerin teslim edilmesini beklerken çözümünüzün davranışını test etme amacıyla bir simülasyon çalıştırmak istiyorsunuz. Benzetimi çalıştırmak için, uzaktan Izleme çözüm hızlandırıcısına yeni bir sanal altyapı cihazı eklersiniz ve bu sanal cihazın yapılandırma güncelleştirmelerine doğru şekilde yanıt verdiğini test edersiniz. Bu öğretici sanal cihazları kullanırken, bir cihaz geliştiricisi, [Uzaktan izleme çözüm hızlandırıcısına bağlı gerçek bir cihaza](iot-accelerators-connecting-devices.md)doğrudan Yöntemler uygulayabilir.
 
 Bu öğreticide şunları yaptınız:
 
@@ -36,7 +36,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="add-a-simulated-device"></a>Sanal cihaz ekleme
 
-Gidin **Device Explorer** sayfasında çözümde ve ardından **+ yeni cihaz**:
+Çözümdeki **Device Explorer** sayfasına gidin ve **+ yeni cihaz**:
 
 [![Sanal cihaz sağlama](./media/iot-accelerators-remote-monitoring-manage/devicesprovision-inline.png)](./media/iot-accelerators-remote-monitoring-manage/devicesprovision-expanded.png#lightbox)
 
@@ -46,7 +46,7 @@ Gidin **Device Explorer** sayfasında çözümde ve ardından **+ yeni cihaz**:
 
 ## <a name="test-the-simulated-device"></a>Sanal cihazı test etme
 
-Benzetimli altyapınız test etmek için cihaz telemetrisi ve özellik değerleri, raporlama seçin, cihaz listesinde üzerinde gönderiyor **Device Explorer** sayfası. Motorunuzla ilgili canlı bilgiler **Device Details** (Cihaz Ayrıntıları) panelinde görüntülenir:
+Sanal motor cihazınızı test etmek telemetri ve raporlama özellik değerlerini gönderiyor, **Device Explorer** sayfasındaki cihaz listesinden seçin. Motorunuzla ilgili canlı bilgiler **Device Details** (Cihaz Ayrıntıları) panelinde görüntülenir:
 
 [![Yeni sanal motor cihazını görüntüleme](./media/iot-accelerators-remote-monitoring-manage/devicesviewnew-inline.png)](./media/iot-accelerators-remote-monitoring-manage/devicesviewnew-expanded.png#lightbox)
 
@@ -60,7 +60,7 @@ Ayrıntılı tanılama bilgilerini görüntülemek için **Device Details** (Cih
 
 ## <a name="reconfigure-a-device"></a>Cihazı yeniden yapılandırma
 
-Sınama altyapının yapılandırma özellikleri güncelleştirmek için cihaz listesinde üzerinde seçin **Device Explorer** sayfası. Ardından **işleri**ve ardından **özellikleri**. İşler panelinde seçilen cihaz için güncelleştirilebilecek özellik değerleri gösterilir:
+Altyapıyı, altyapının yapılandırma özelliklerini güncelleştirebilmeniz için **Device Explorer** sayfasındaki cihaz listesinden seçin. Ardından **işler**' e tıklayın ve ardından **Özellikler**' i seçin. İşler panelinde seçilen cihaz için güncelleştirilebilecek özellik değerleri gösterilir:
 
 [![Cihazı yeniden yapılandırma](./media/iot-accelerators-remote-monitoring-manage/devicesreconfigure-inline.png)](./media/iot-accelerators-remote-monitoring-manage/devicesreconfigure-expanded.png#lightbox)
 
@@ -83,7 +83,7 @@ Operatör olarak cihazlarınızı düzenlemeyi ve yönetmeyi kolaylaştırmak i�
 * Smart Vehicle takımı tırları ve prototip cihazlarını yönetmektedir.
 * Smart Building takımı ise soğutucuları, asansörleri ve motorları yönetmektedir.
 
-Tüm cihazlarınızı görüntülemek için gidin **Device Explorer** sayfasında ve **tüm cihazlar** Filtresi:
+Tüm cihazlarınızı göstermek için **Device Explorer** sayfasına gidin ve **tüm cihazlar** filtresini seçin:
 
 [![Tüm cihazları göster](./media/iot-accelerators-remote-monitoring-manage/devicesalldevices-inline.png)](./media/iot-accelerators-remote-monitoring-manage/devicesalldevices-expanded.png#lightbox)
 
@@ -103,7 +103,7 @@ Cihaz sayfasında tüm **Chiller** (Soğutucu), **Elevator** (Asansör) ve **Eng
 
 ### <a name="create-filters"></a>Filtre oluşturma
 
-Artık bu etiket değerlerini kullanarak filtre oluşturabilirsiniz. Üzerinde **Device Explorer** sayfasında **cihaz gruplarını yönetme**:
+Artık bu etiket değerlerini kullanarak filtre oluşturabilirsiniz. **Device Explorer** sayfasında, **cihaz gruplarını yönet**' e tıklayın:
 
 [![Cihaz gruplarını yönetme](./media/iot-accelerators-remote-monitoring-manage/devicesmanagefilters-inline.png)](./media/iot-accelerators-remote-monitoring-manage/devicesmanagefilters-expanded.png#lightbox)
 

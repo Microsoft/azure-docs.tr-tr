@@ -1,35 +1,59 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure AD Cihaz Kimliği Belgeleri
+### YamlMime:Landing
+title: Azure AD cihaz kimliği belgeleri
+summary: Azure AD’de cihaz kimliklerini yapılandırmayı ve yönetmeyi öğrenin.
 metadata:
-  document_id: null
-  title: 'Azure Active Directory Cihaz Kimliği Yönetimi Belgeleri - Öğreticiler, kavramlar, başvurular | Microsoft Docs'
+  title: Azure AD cihaz kimliği belgeleri
   description: Azure AD’de cihaz kimliklerini yapılandırmayı ve yönetmeyi öğrenin.
   services: active-directory
-  ms.subservice: devices
-  author: MicrosoftGuyJFlo
-  manager: daveba
   ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: devices
   ms.topic: landing-page
-  ms.date: 08/14/2018
+  author: MicrosoftGuyJFlo
   ms.author: joflore
-abstract:
-  description: 'Kullanıcılarınız, Azure AD’deki cihazlar aracılığıyla kuruluşunuzun varlıklarına erişir. Bir BT yöneticisi olarak kuruluşunuzun varlıklarını korumak için bu cihaz kimliklerini Azure AD’de yönetmeyi tercih edersiniz. Bu sayede kullanıcılarınızın kaynaklarınıza güvenlik ve uyumluluk standartlarınızı karşılayan cihazlardan erişmesini sağlayabilirsiniz.<br>Cihaz Kimliği yönetimi, cihaz tabanlı Koşullu Erişim senaryolarının da temelini oluşturur. Cihaz tabanlı Koşullu Erişim sayesinde, ortamınızdaki kaynaklara yalnızca yönetilen cihazlar üzerinden erişilebilmesini sağlayabilirsiniz.'
-sections:
-  - title: Adım adım öğreticiler
-    items:
-      - type: paragraph
-        text: Şirket içi AD'ye katılan cihazlarınızı Azure AD ile tümleştirmeyi öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: ./media/index/i_security-management.png
-            text: Yönetilen etki alanları
-            href: hybrid-azuread-join-managed-domains.md
-          - image:
-              src: ./media/index/i_security-management.png
-            text: Federasyon etki alanları
-            href: hybrid-azuread-join-federated-domains.md
+  ms.date: 08/20/2019
+  ms.collection: M365-identity-device-management
+  ms.openlocfilehash: e26be2206ba63fa4721ced7ed1a2f35ddc63a5fd
+  ms.sourcegitcommit: bb8e9f22db4b6f848c7db0ebdfc10e547779cccc
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/20/2019
+  ms.locfileid: "69648935"
+landingContent:
+- title: Cihaz kimliği hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Cihaz kimliği nedir?
+      url: overview.md
+    - text: Enterprise State Roaming nedir?
+      url: enterprise-state-roaming-overview.md
+  - linkListType: concept
+    links:
+    - text: Azure AD kayıtlı cihazlar
+      url: concept-azure-ad-register.md
+    - text: Azure AD’ye katılmış cihazlar
+      url: concept-azure-ad-join.md
+    - text: Hibrit Azure AD’ye katılmış cihazlar
+      url: concept-azure-ad-join-hybrid.md
+    - text: Şirket içi kaynaklarda çoklu oturum açma
+      url: azuread-join-sso.md
+    - text: Birincil Yenileme Belirteçleri
+      url: concept-primary-refresh-token.md
+- title: Azure AD’ye katılmış cihazları yapılandırıp yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD katılımınızı uygulamayı planlama
+      url: azureadjoin-plan.md
+    - text: Azure AD’ye katılmış cihazlarda yerel yöneticiler grubunu yönetme
+      url: assign-local-admin.md
+    - text: Azure AD’de eski cihazları bulup yönetme
+      url: manage-stale-devices.md
+- title: Hibrit Azure AD’ye katılmış cihazları yapılandırıp yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Hibrit Azure AD katılımınızı uygulamayı planlama
+      url: hybrid-azuread-join-plan.md
+    - text: Hibrit Azure AD’ye katılmış cihazlarda sorun giderme
+      url: troubleshoot-hybrid-join-windows-current.md

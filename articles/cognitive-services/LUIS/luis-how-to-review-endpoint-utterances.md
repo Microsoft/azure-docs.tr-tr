@@ -1,95 +1,56 @@
 ---
-title: Kullanıcı konuşma gözden geçirin
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: Etkin öğrenme, uç nokta sorguları yakalar ve emin olan kullanıcının uç nokta konuşma seçer. Bu konuşma hedefini seçin ve bu okuma dünya konuşma için varlıklar işaretlemek için gözden geçirin. Bu değişiklikleri, örnek konuşma kabul, sonra eğitin ve yayımlayın. LUIS ardından konuşma daha doğru bir şekilde tanımlar.
+title: Kullanıcı utslerini gözden geçirme-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Etkin öğrenimi tarafından yakalanan bir şekilde gözden geçirerek, okuma ve varlık kullanımı için varlıkları seçin; değişiklikleri kabul edin, eğitme ve yayımlayın.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 03/25/2019
+ms.topic: conceptual
+ms.date: 11/15/2019
 ms.author: diberry
-ms.openlocfilehash: 8fac360682ef11c438cdec333fac21d6f8cfc117
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 67953f552b5b2bcdd7d13253548227e57dab8548
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60195169"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74132660"
 ---
-# <a name="how-to-review-endpoint-utterances-in-luis-portal-for-active-learning"></a>Etkin öğrenme LUIS Portalı'nda konuşma uç noktası İnceleme
+# <a name="how-to-improve-the-luis-app-by-reviewing-endpoint-utterances"></a>Uç nokta utbotları inceleyerek LUO uygulamasını geliştirme
 
-[Etkin öğrenme](luis-concept-review-endpoint-utterances.md) uç nokta sorguları yakalar ve emin olan kullanıcının uç nokta konuşma seçer. Bu konuşma hedefini seçin ve bu okuma dünya konuşma için varlıklar işaretlemek için gözden geçirin. Bu değişiklikleri, örnek konuşma kabul, sonra eğitin ve yayımlayın. LUIS ardından konuşma daha doğru bir şekilde tanımlar.
+Doğru tahmine yönelik uç nokta dıklarını gözden geçirme işlemi, [etkin öğrenme](luis-concept-review-endpoint-utterances.md)olarak adlandırılır. Etkin öğrenme, uç nokta sorgularını yakalar ve kullanıcının gereken uç nokta utlerini seçer. Bu yazılanları inceleyerek, bu okuma dünyasının amacını seçin ve varlıkları işaretleyin. Bu değişiklikleri örnek söyleyenlerinde kabul edin ve yayımlayın. LUO daha sonra, bir daha doğru şekilde daha doğru şekilde tanımlanır.
 
+Bir LUSıS uygulamasına katkıda bulunan çok sayıda kişi varsa, 
 
-## <a name="enable-active-learning"></a>Etkin öğrenme etkinleştir
+[!INCLUDE [Uses preview portal](includes/uses-portal-preview.md)]
 
-Etkin öğrenme etkinleştirmek için kullanıcı sorgularına oturum açın. Bu ayarı gerçekleştirilir [uç nokta sorgu](luis-get-started-create-app.md#query-the-endpoint-with-a-different-utterance) ile `log=true` querystring parametresi ve değeri.
+## <a name="enable-active-learning"></a>Etkin öğrenmeyi etkinleştir
 
-## <a name="disable-active-learning"></a>Etkin öğrenme devre dışı bırak
+Etkin öğrenmeyi etkinleştirmek için Kullanıcı sorgularını günlüğe yazmanız gerekir. Bu, `log=true` QueryString parametresi ve değeri ile [Endpoint sorgusu](luis-get-started-create-app.md#query-the-v3-api-prediction-endpoint) çağırarak gerçekleştirilir.
 
-Etkin öğrenme devre dışı bırakmak için kullanıcı sorgularına oturum yok. Bu ayarı gerçekleştirilir [uç nokta sorgu](luis-get-started-create-app.md#query-the-endpoint-with-a-different-utterance) ile `log=false` querystring parametresi ve değeri.
-
-## <a name="filter-utterances"></a>Konuşma Filtrele
-
-1. Uygulamanız (örneğin, TravelAgent) adını seçerek açın **uygulamalarım** sayfasında ve ardından **derleme** üst çubuktaki.
-
-1. Altında **uygulama performansını**seçin **gözden geçirin, konuşma uç noktası**.
-
-1. Üzerinde **gözden geçirin, konuşma uç noktası** sayfasında, seçme içinde **filtrenin amacını veya varlık tarafından** metin kutusu. Bu açılan liste altındaki tüm hedefleri içerir **HEDEFLERİ** ve altındaki tüm varlıkları **varlıkları**.
-
-    ![Konuşma Filtrele](./media/label-suggested-utterances/filter.png)
-
-1. Bir kategori (hedefleri veya varlıklar) aşağı açılan listeden seçin ve konuşma gözden geçirin.
-
-    ![Hedefi konuşma](./media/label-suggested-utterances/intent-utterances.png)
-
-## <a name="label-entities"></a>Varlık etiketi
-LUIS varlık adları mavi renkle vurgulandığı varlık belirteçleri (kelimeler) değiştirir. Bir utterance varlıkları etiketlenmemiş değilse, bunları utterance etiketleyin. 
-
-1. Utterance içinde sözcükleri'ı seçin. 
-
-1. Bir varlık listeden seçin.
-
-    ![Varlık etiketi](./media/label-suggested-utterances/label-entity.png)
-
-## <a name="align-single-utterance"></a>Tek utterance Hizala
+## <a name="correct-intent-predictions-to-align-utterances"></a>Söylemeleri hizalamak için amaç tahminleri doğru
 
 Her utterance görüntülenen önerilen bir amacı güdülür; **hedefi hizalı** sütun. 
 
-1. İle bu öneriyi kabul ederseniz üzerinde onay işaretini seçin.
+> [!div class="mx-imgBorder"]
+> [![gözden geçirme uç noktası, LUO 'nun emin olduğu](./media/label-suggested-utterances/review-endpoint-utterances.png)](./media/label-suggested-utterances/review-endpoint-utterances.png#lightbox)
 
-    ![Hizalanmış hedefi tut](./media/label-suggested-utterances/align-intent-check.png)
+Bu amacı kabul ediyorsanız onay işaretini seçin. Öneri katılmıyorum doğru hedefi hizalı hedefi aşağı açılan listeden seçin, sonra hizalanmış amaç sağındaki onay işaretini seçin. Onay işaretini seçtikten sonra, söylenişi hedefe taşınır ve **Gözden geçirme uç noktası uttasları** listesinden kaldırılır. 
 
-1. Öneri katılmıyorum doğru hedefi hizalı hedefi aşağı açılan listeden seçin, sonra hizalanmış amaç sağındaki onay işaretini seçin. 
-
-    ![Hedefi Hizala](./media/label-suggested-utterances/align-intent.png)
-
-1. Utterance üzerinde onay işareti seçtikten sonra listeden kaldırıldı. 
-
-## <a name="align-several-utterances"></a>Çeşitli konuşma Hizala
-
-Çeşitli konuşma hizalamak için konuşma solundaki onay kutusunu işaretleyin ve ardından seçin **seçili** düğmesi. 
-
-![Birkaç align](./media/label-suggested-utterances/add-selected.png)
-
-## <a name="verify-aligned-intent"></a>Hizalanmış hedefi doğrulayın
-
-Utterance hizalı doğru hedefle giderek doğrulayabilirsiniz **hedefleri** sayfasında hedefi adı seçin ve konuşma gözden geçirme. Gelen utterance **gözden geçirin, konuşma uç noktası** listesinde.
+> [!TIP]
+> **Gözden geçirme uç noktası dıklarından** gelen tüm örnek varlık tahminlerini gözden geçirmek ve düzeltmek için amaç ayrıntıları sayfasına gitmeniz önemlidir.
 
 ## <a name="delete-utterance"></a>Utterance Sil
 
 Her utterance gözden geçirme listesinden silinebilir. Silindikten sonra listeden yeniden görünmez. Uç noktasından aynı utterance kullanıcının girdiği olsa bile bu geçerlidir. 
 
-Utterance silmelisiniz konusunda emin değilseniz, ya da hiçbiri hedefi, taşımak veya "diğer" gibi yeni bir hedefi oluşturma ve utterance bu amaç için taşıyın. 
+Söylenişi 'i silmeniz gerekip gerekmediğini bilmiyorsanız, bunu hiçbiri amacına taşıyın veya `miscellaneous` gibi yeni bir amaç oluşturun ve bu amaca göre taşıyın. 
 
-## <a name="delete-several-utterances"></a>Çeşitli konuşma Sil
+## <a name="disable-active-learning"></a>Etkin öğrenmeyi devre dışı bırak
 
-Çeşitli konuşma silmek için her bir öğe seçin ve sağ tarafındaki çöp kutusu seçin **seçili** düğmesi.
-
-![Birkaç Sil](./media/label-suggested-utterances/delete-several.png)
-
+Etkin öğrenmeyi devre dışı bırakmak için Kullanıcı sorgularını günlüğe eklemeyin. Bu, varsayılan değer false olduğu için, `log=false` QueryString parametresi ve değeri ile [Endpoint sorgusu](luis-get-started-create-app.md#query-the-v2-api-prediction-endpoint) ayarlanarak ve QueryString değeri olmadan gerçekleştirilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,63 +1,103 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure üzerinde Jenkins
+### YamlMime:Landing
+title: Azure üzerinde Jenkins belgeleri
+summary: Azure'da sürekli tümleştirmeyi ve sürekli teslimi otomatikleştirmek için Jenkins'i kullanmayı öğrenin.
 metadata:
-  title: 'Azure üzerinde Jenkins belgeleri - Öğreticiler, örnekler, başvuru ve kaynaklar'
-  description: Azure ile Jenkins dağıtma ve tümleştirme
+  title: Azure üzerinde Jenkins belgeleri
+  description: Azure'da sürekli tümleştirmeyi ve sürekli teslimi otomatikleştirmek için Jenkins'i kullanmayı öğrenin.
+  services: azure
   ms.service: jenkins
-  keywords: 'jenkins, azure, devops, öğreticiler, örnekler, başvuru'
-  author: tomarchermsft
-  manager: jeconnoc
-  ms.author: tarcher
   ms.topic: landing-page
-  ms.date: 08/27/2018
-abstract:
-  description: 'Bulutta uygulama oluşturarak Azure’a dağıtmak için açık kaynak Jenkins sunucusunu kullanın. Hızlı başlangıçlar, öğreticiler ve örnek işlem hatları ile Azure üzerinde Jenkins’i yükleme, yapılandırma ve ölçeklendirme ile uygulamalarınız için sürekli tümleştirme (CI) ayarlamayı öğrenin.'
-  aside:
-    image:
-      alt: Jenkins logosu
-      height: 133
-      width: 110
-      src: media/Jenkins.png
-    title: null
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure’da bir Jenkins sistemi oluşturun ve bir uygulama oluşturun.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/azure/virtual-machines/linux/media/index/portal.svg'
-            text: Azure Portal
-            href: 'https://docs.microsoft.com/azure/jenkins/install-jenkins-solution-template'
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Uygulamalarınız için sürekli tümleştirme ayarlayın, bulutta aracıları çalıştırın ve işlerinizde Azure hizmetlerini kullanın.'
-      - type: list
-        style: ordered
-        items:
-          - html: '<a href="/azure/jenkins/java-deploy-webapp-tutorial">Azure App Service</a>, <a href="/azure/container-service/kubernetes/container-service-kubernetes-jenkins">Kubernetes</a> veya bir <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">Linux VM</a> için CI ayarlayın.'
-          - html: <a href="/azure/jenkins/execute-cli-jenkins-pipeline">Bir işlem hattı işinde kaynakları sağlayın</a>.
-          - html: <a href="/azure/jenkins/jenkins-azure-vm-agents">Azure VM aracılarıyla ölçeklendirin</a>.
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: İşlem hatlarınız için örnek betik ve aşamalar.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: '<a href="https://github.com/Azure/azure-devops-utils/tree/master/jenkins">Jenkinsfile aşamaları ve kod parçacıkları</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Eklentiler
-            html: '<p><a href="https://plugins.jenkins.io/azure-vm-agents">Azure VM Aracıları</a><p><a href="https://plugins.jenkins.io/azure-app-service">Azure App Service</a></p><p><a href="https://plugins.jenkins.io/windows-azure-storage">Azure Depolama</a></p><p><a href="https://plugins.jenkins.io/azure-container-agents">Azure Kapsayıcı Aracıları</a><p><a href="https://plugins.jenkins.io/azure-function">Azure İşlev eklentisi</a><p><a href="https://plugins.jenkins.io/azure-acs">Azure Container Service eklentisi</a>'
-  - type: paragraph
-    text: '<h4>Jenkins® Software in the Public Interest, Inc. şirketinin kayıtlı ticari markasıdır. [Jenkins® logosu](https://wiki.jenkins.io/display/JENKINS/Logo) [Jenkins projesinden](https://jenkins.io) [CC BY SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) kapsamında lisanslanmıştır.</h4>'
+  author: TomArcherMsft
+  ms.author: tarcher
+  ms.date: 09/17/2019
+  ms.openlocfilehash: 802be2b69f2a58e39771c7100f30f4ab83f64280
+  ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/24/2019
+  ms.locfileid: "72882055"
+landingContent:
+- title: Azure üzerinde Jenkins hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure üzerinde Jenkins hakkında
+      url: overview.md
+  - linkListType: reference
+    links:
+    - text: Azure için Jenkins Eklentileri
+      url: jenkins-plugins.md
+  - linkListType: architecture
+    links:
+    - text: Jenkins mimarisi
+      url: /azure/architecture/reference-architectures/jenkins/
+- title: Jenkins’i yükleme ve yapılandırma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Jenkins sunucusu oluşturma
+      url: install-jenkins-solution-template.md
+  - linkListType: download
+    links:
+    - text: Örnek işler ve betikler
+      url: https://github.com/azure/jenkins
+- title: Jenkins ve Azure kullanarak ölçeklendirme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure Container Instances ile ölçeklendirme
+      url: /azure/container-instances/container-instances-jenkins?toc=/azure/jenkinstoc.json&bc=/azure/bread/toc.json
+    - text: Azure VM aracılarıyla ölçeklendirme
+      url: jenkins-azure-vm-agents.md
+- title: Azure İşlevleri'ne CI/CD
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure İşlevlerine dağıtma
+      url: jenkins-azure-functions-deploy.md
+- title: AKS'ye CI/CD
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: GitHub’dan AKS'ye dağıtma
+      url: /azure/aks/jenkins-continuous-deployment?toc=/azure/jenkinstoc.json&bc=/azure/bread/toc.json
+    - text: Mavi/yeşil desen kullanarak AKS’ye dağıtma
+      url: jenkins-aks-blue-green-deployment.md
+    - text: Azure Dev Spaces eklentisini kullanarak dağıtma
+      url: tutorial-jenkins-dev-spaces.md
+- title: App Service’e CI/CD
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: İşlem hattı işinde Azure kaynakları oluşturma
+      url: execute-cli-jenkins-pipeline.md
+    - text: GitHub’dan App Service’e dağıtma
+      url: tutorial-jenkins-deploy-web-app-azure-app-service.md
+  - linkListType: how-to-guide
+    links:
+    - text: App Service eklentisini kullanarak dağıtma
+      url: deploy-jenkins-app-service-plugin.md
+- title: Azure DevOps'a CI/CD
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure DevOps Services'i kullanarak Linux VM'sine dağıtma
+      url: /azure/virtual-machines/linux/tutorial-build-deploy-jenkins?toc=/azure/jenkinstoc.json&bc=/azure/bread/toc.json
+- title: Azure Depolama'ya CI/CD
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Jenkins C/I çözümüyle Azure Depolama'yı kullanma
+      url: /azure/storage/storage-java-jenkins-continuous-integration-solution?toc=/azure/jenkinstoc.json&bc=/azure/bread/toc.json
+- title: Linux VM’lere CI/CD
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Linux VM'sinde geliştirme altyapısı oluşturma
+      url: /azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd?toc=/azure/jenkinstoc.json&bc=/azure/bread/toc.json
+- title: CI/CD’den Service Fabric’e
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure Service Fabric uygulaması oluşturma ve dağıtma
+      url: /azure/service-fabric/service-fabric-cicd-your-linux-applications-with-jenkins?toc=/azure/jenkinstoc.json&bc=/azure/bread/toc.json

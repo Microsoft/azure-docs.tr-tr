@@ -1,41 +1,41 @@
 ---
-title: Premium Verizon'dan Azure CDN kural altyapısı koşullu ifadeleri | Microsoft Docs
-description: Azure CDN from Verizon Premium için başvuru belgeleri altyapısı eşleştirme koşulları ve özellikleri kuralları.
+title: Azure CDN-Verizon Premium kuralları altyapısı için Koşullu ifadeler
+description: Verizon Premium kural altyapısından Azure CDN için başvuru belgeleri, koşullar ve özelliklerle eşleşir.
 services: cdn
 author: mdgattuso
-ms.service: cdn
+ms.service: azure-cdn
 ms.topic: article
 ms.date: 05/31/2019
 ms.author: magattus
-ms.openlocfilehash: c6e49e6fbc0c541ce9a8cd903eb313d61413257c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d28bda28894477845c2a050666b3b4dd332b7d50
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66481542"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74082964"
 ---
-# <a name="azure-cdn-from-verizon-premium-rules-engine-conditional-expressions"></a>Azure CDN Verizon Premium kural altyapısı koşullu ifadeleri
+# <a name="azure-cdn-from-verizon-premium-rules-engine-conditional-expressions"></a>Verizon Premium kural altyapısı koşullu ifadelerinden Azure CDN
 
-Bu makalede ayrıntılı açıklamaları Azure Content Delivery Network (CDN) için bir koşullu ifadenin listeler [kurallar altyapısı](cdn-verizon-premium-rules-engine.md).
+Bu makalede, Azure Content Delivery Network (CDN) [kuralları motorunun](cdn-verizon-premium-rules-engine.md)koşullu ifadelerin ayrıntılı açıklamaları listelenmektedir.
 
-İlk kural koşullu ifade parçasıdır.
+Kuralın ilk bölümü koşullu Ifadedir.
 
 Koşullu ifade | Açıklama
 -----------------------|-------------
-EĞER | Eğer ifade her zaman bir kural içindeki ilk deyimde parçasıdır. Tüm diğer koşullu ifadeler gibi bu IF deyimi bir eşleşme ile ilişkilendirilmesi gerekir. Hiçbir ek koşullu ifadeler tanımlanmışsa, bu eşleşen bir istek için bir özellik kümesi uygulanabilir önce karşılanması gereken kriterleri belirler.
-VE | Bir ve eğer ifade yalnızca koşullu ifadeler: IF, ve eğer aşağıdaki türden sonra eklenebilir. Bu, ilk IF deyimi için karşılanması gereken başka bir koşul olduğunu belirtir.
-IF ELSE| IF ELSE deyim özellikleri bu ELSE IF deyimi için belirli bir dizi gerçekleşmeden önce karşılanması gereken alternatif bir koşulu belirtir. ELSE IF deyimi varlığını önceki deyimin sonunu gösterir. ELSE IF deyimi başka bir ELSE IF deyimi sonra yerleştirilmiş olabilir yalnızca koşullu ifade. Bu, başka bir IF deyimi karşılanması tek bir ek koşulu belirtmek için yalnızca kullanılabilir anlamına gelir.
+KULLANDıYSANıZ | Bir If ifadesi her zaman kuraldaki ilk deyimin bir parçasıdır. Diğer tüm koşullu ifadeler gibi, bu IF deyimi bir eşleşme ile ilişkilendirilmelidir. Ek Koşullu ifadeler tanımlanmazsa, bu eşleşme bir istek için bir dizi özellik uygulanmadan önce karşılanması gereken ölçütü belirler.
+VE ISE | Bir ve If ifadesi yalnızca aşağıdaki koşullu ifade türlerinden sonra eklenebilir: Ise ve. İlk IF ifadesinde karşılanması gereken başka bir koşul olduğunu gösterir.
+AKSI TAKDIRDE| Bir ELSE IF ifadesi, bu başka bir durum deyimi gerçekleşmişse, bu özelliğe özgü bir özellik kümesinden önce karşılanması gereken alternatif bir koşulu belirtir. Bir ELSE IF ifadesinin var olması, önceki deyimin sonunu gösterir. Bir ELSE IF deyimi daha sonra yerleştirilebilecek tek koşullu ifade başka bir IF deyimi ise. Bu, başka bir IF ifadesinin yalnızca yerine getirilmesi gereken tek bir ek koşul belirtmek için kullanılabilir olması anlamına gelir.
 
 **Örnek**: ![CDN eşleşme koşulu](./media/cdn-rules-engine-reference/cdn-rules-engine-conditional-expression.png)
 
  > [!TIP]
-   > Bir sonraki kural, bir önceki kuralı tarafından belirtilen eylemleri geçersiz kılabilir.
-   > Örnek: Bir genel kural, tüm istekleri belirteç tabanlı kimlik doğrulaması güvenliğini sağlar. Doğrudan, bir özel durum, belirli türde istekler yapmak için başka bir kural oluşturulabilir.
+   > Sonraki bir kural, önceki bir kural tarafından belirtilen eylemleri geçersiz kılabilir.
+   > Örnek: bir catch-all kuralı, belirteç tabanlı kimlik doğrulama aracılığıyla tüm istekleri korur. Belirli istek türleri için bir özel durum oluşturmak üzere, doğrudan altında başka bir kural oluşturulabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure CDN'ye genel bakış](cdn-overview.md)
+- [Azure CDN genel bakış](cdn-overview.md)
 - [Kural altyapısı başvurusu](cdn-verizon-premium-rules-engine-reference.md)
 - [Kural altyapısı eşleştirme koşulları](cdn-verizon-premium-rules-engine-reference-match-conditions.md)
 - [Kural altyapısı özellikleri](cdn-verizon-premium-rules-engine-reference-features.md)
-- [Kural altyapısı kullanarak varsayılan HTTP davranışı geçersiz kılma](cdn-verizon-premium-rules-engine.md)
+- [Kurallar altyapısını kullanarak varsayılan HTTP davranışını geçersiz kılma](cdn-verizon-premium-rules-engine.md)

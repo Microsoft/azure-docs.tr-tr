@@ -1,6 +1,6 @@
 ---
-title: Gelişmiş istek azaltma ile Azure API Yönetimi
-description: Oluşturma ve esnek kota ve ilkeleri Azure API Management ile hız sınırı uygulama hakkında bilgi edinin.
+title: Azure API Management Gelişmiş istek azaltma
+description: Azure API Management ile esnek kota ve hız sınırlaması ilkeleri oluşturmayı ve uygulamayı öğrenin.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -14,24 +14,28 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/03/2018
 ms.author: apimpm
-ms.openlocfilehash: 22c3987121e2ab3479274c89c359c679f5f1135e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 467d9cee74567fc0d19031773415675ae7c51818
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61087150"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71066762"
 ---
-# <a name="advanced-request-throttling-with-azure-api-management"></a>Gelişmiş istek azaltma ile Azure API Yönetimi
-Gelen istek kısıtlama için Azure API Management'ın önemli bir rol var. Hem istekler veya aktarılan toplam istekler/veri oranı denetleyerek, Azure API yönetimi, API'leri kötüye korumak ve farklı API ürün katmanları için değer oluşturmak API sağlayıcıları sağlar.
+# <a name="advanced-request-throttling-with-azure-api-management"></a>Azure API Management Gelişmiş istek azaltma
+Gelen istekleri kısıtlayamaz, Azure API Management 'nin önemli bir rolü bulunur. İsteklerin oranını veya aktarılan toplam istek/veri sayısını denetleyerek API Management, API sağlayıcılarının API 'Lerini uygunsuz bir şekilde korumasına ve farklı API ürün katmanları için değer oluşturmasına izin verir.
 
 ## <a name="product-based-throttling"></a>Ürün tabanlı azaltma
-Bugüne kadar hızı azaltma özellikleri Azure Portalı'nda tanımlanan belirli bir ürün aboneliği için kapsamı belirlenmiş için sınırlı olmuştur. Bu API'leri kullanmak için kaydolan geliştiriciler sınırları uygulamak API sağlayıcısı için yararlıdır, ancak bu, örneğin, tek tek son kullanıcılar API'si azaltma kullanışlı değildir. Bu, tüm kota kullanmak ve ardından diğer müşterilerin Geliştirici uygulama kullanmanız mümkün olmasını engellemek için kullanıcı uygulamasının geliştiricinin tek için mümkündür. Ayrıca, yüksek hacimli istekleriniz üretebilir çeşitli müşteriler dönemsel kullanıcılar için erişimi sınırlayabilir.
+Tarih olarak, hız azaltma özellikleri Azure portal tanımlı belirli bir ürün aboneliğine kapsama sahip olacak şekilde sınırlandırılmıştır. Bu, API sağlayıcının API 'leri kullanmak üzere kaydolan geliştiriciler üzerinde sınırlar uygulaması için yararlıdır, ancak örneğin, API 'nin bireysel kullanıcılarını azaltmasına yardımcı değildir. Geliştirici uygulamasının tek bir kullanıcısının tüm kotayı tüketmesi ve ardından geliştiricilerin diğer müşterilerinin uygulamayı kullanmasını engellemek mümkündür. Ayrıca, yüksek hacimli talepler üreten birkaç müşteri, zaman zaman kullanıcılarına erişimi sınırlayabilir.
 
 ## <a name="custom-key-based-throttling"></a>Özel anahtar tabanlı azaltma
-Yeni [anahtarı tarafından oran sınırı](/azure/api-management/api-management-access-restriction-policies#LimitCallRateByKey) ve [quota-by-key](/azure/api-management/api-management-access-restriction-policies#SetUsageQuotaByKey) ilkeleri, trafiği denetlemek için daha esnek bir çözüm sağlar. Bu yeni ilkeleri trafik kullanımı izlemek için kullanılan anahtarları tanımlamak için ifadeleri tanımlamanızı sağlar. Bu çalışma biçimini kolay içeren bir örnek gösterilmiştir. 
+
+> [!NOTE]
+> `rate-limit-by-key` Ve`quota-by-key` ilkeleri, Azure API Management tüketim katmanında kullanılabilir değildir. 
+
+Yeni [hız-limit](/azure/api-management/api-management-access-restriction-policies#LimitCallRateByKey) ve [Kota-anahtar](/azure/api-management/api-management-access-restriction-policies#SetUsageQuotaByKey) ilkeleri, trafik denetimine daha esnek bir çözüm sağlar. Bu yeni ilkeler, trafik kullanımını izlemek için kullanılan anahtarları belirlemek için ifadeler tanımlamanızı sağlar. Bu yöntem, bir örnek ile en kolay şekilde gösterilmiştir. 
 
 ## <a name="ip-address-throttling"></a>IP adresi azaltma
-Aşağıdaki ilkeleri tek istemci IP adresi yalnızca 10 çağrıları toplam 1.000.000 çağrıları ve bant genişliği 10.000 kilobayt dakikada kısıtlayın. 
+Aşağıdaki ilkeler tek bir istemci IP adresini her dakikada yalnızca 10 çağrı ile kısıtlar ve ayda toplam 1.000.000 çağrı ve 10.000 kilobayt bant genişliğine sahiptir. 
 
 ```xml
 <rate-limit-by-key  calls="10"
@@ -44,10 +48,10 @@ Aşağıdaki ilkeleri tek istemci IP adresi yalnızca 10 çağrıları toplam 1.
           counter-key="@(context.Request.IpAddress)" />
 ```
 
-Internet üzerindeki tüm istemcilere benzersiz bir IP adresi kullandıysanız, bu kullanıcı tarafından kullanımını sınırlamak için etkili bir yol olabilir. Ancak, birden çok kullanıcı tek bir genel IP adresi bunları bir NAT cihazı üzerinden İnternet'e erişim nedeniyle paylaşıyor olasıdır. Bu, kimliği doğrulanmamış erişime izin API'leri için rağmen `IpAddress` en iyi seçenek olabilir.
+Internet üzerindeki tüm istemciler benzersiz bir IP adresi kullandıysanız, bu, kullanımı kullanıcıya sınırlayan etkili bir yol olabilir. Ancak, bir NAT cihazı aracılığıyla Internet 'e eriştiği için birden çok kullanıcının tek bir genel IP adresini paylaşmaları olasıdır. Buna rağmen, kimliği doğrulanmamış erişime `IpAddress` izin veren API 'ler için en iyi seçenek olabilir.
 
-## <a name="user-identity-throttling"></a>Kullanıcı kimlik azaltma
-Son kullanıcı kimlik doğrulaması gerekiyorsa, azaltma anahtar kullanıcının benzersiz olarak tanımlayan bilgilere göre oluşturulabilir.
+## <a name="user-identity-throttling"></a>Kullanıcı kimliği azaltma
+Bir son kullanıcının kimliği doğrulandıysa, kullanıcıyı benzersiz bir şekilde tanımlayan bilgiler temel alınarak bir daraltma anahtarı oluşturulabilir.
 
 ```xml
 <rate-limit-by-key calls="10"
@@ -55,13 +59,13 @@ Son kullanıcı kimlik doğrulaması gerekiyorsa, azaltma anahtar kullanıcını
     counter-key="@(context.Request.Headers.GetValueOrDefault("Authorization","").AsJwt()?.Subject)" />
 ```
 
-Bu örnekte, yetkilendirme üst Ayıkla, onu şöyle dönüştürün gösterilmektedir `JWT` nesne ve kullanıcıyı tanımlamak ve anahtar sınırlama oranı kullanan için belirteç konusunu kullanın. Kullanıcı kimliği içinde depolanıyorsa `JWT` diğer taleplerinden biri daha sonra bu değeri onun yerine kullanılabilir.
+Bu örnek, yetkilendirme üst bilgisinin nasıl ayıklanacağını, bunu `JWT` nesnesine nasıl dönüştüreceğiniz ve kullanıcı tanımlamak için belirtecin konusunu kullanarak, bunu hız sınırlandırma anahtarı olarak kullanacak şekilde gösterir. Kullanıcı kimliği, `JWT` diğer taleplerden biri olarak ' de depolanıyorsa, bu değer bunun yerine kullanılabilir.
 
-## <a name="combined-policies"></a>Birleşik ilkeleri
-Yeni kısıtlama ilkeleri mevcut kısıtlama ilkeleri daha fazla denetim sağlasa da yine de her iki özelliklerini birleştirmektir değer yoktur. Ürün abonelik anahtarı tarafından azaltma ([abonelik tarafından çağrı hızını sınırla](/azure/api-management/api-management-access-restriction-policies#LimitCallRate) ve [abonelik tarafından kullanım kotası ayarla](/azure/api-management/api-management-access-restriction-policies#SetUsageQuota)) bir API kullanım düzeylerine göre kurumuna markalaştırabilir etkinleştirmek için harika bir yoludur. Kullanıcı tarafından kullanımını azaltmak için daha ayrıntılı denetim tamamlayıcı ve başka bir deneyim düşürmesini gelen bir kullanıcının davranışını önler. 
+## <a name="combined-policies"></a>Birleşik ilkeler
+Yeni kısıtlama ilkeleri var olan daraltma ilkelerinden daha fazla denetim sağlamasına karşın, her iki özelliği de birleştiren bir değer vardır. Ürün abonelik anahtarına göre daraltma ([çağrı hızını aboneliğe göre sınırla](/azure/api-management/api-management-access-restriction-policies#LimitCallRate) ve [kullanım kotasını aboneliğe göre ayarla](/azure/api-management/api-management-access-restriction-policies#SetUsageQuota)), kullanım düzeylerine göre ÜCRETLENDIREREK bir API 'nin iç kullanımını etkinleştirmek için harika bir yoldur. Kullanıcı tarafından kısıtlama sağlayabilmesinin daha ayrıntılı bir denetimi, bir kullanıcının davranışının başka bir deneyim yaşamamasını önler. 
 
-## <a name="client-driven-throttling"></a>İstemci tabanlı azaltma
-Kısıtlama anahtarını kullanarak tanımlandığında bir [ilke ifadesi](/azure/api-management/api-management-policy-expressions), azaltma nasıl kapsamlı seçme API sağlayıcısı kaldırılır. Ancak, bir geliştirici nasıl bunlar kendi hız sınırı denetlemek isteyebilirsiniz müşteriler. Bu API sağlayıcı tarafından bir özel üst bilgi sunarak geliştiricinin istemci uygulaması API anahtarına iletişim kurmasına izin vermek için etkinleştirilemedi.
+## <a name="client-driven-throttling"></a>İstemci odaklı daraltma
+Daraltma anahtarı bir [ilke ifadesi](/azure/api-management/api-management-policy-expressions)kullanılarak tanımlandığında, bu, azaltın kapsamı belirleme ŞEKLINI seçerek API sağlayıcısıdır. Ancak bir geliştirici kendi müşterilerinin nasıl hızlandıradığını denetlemek isteyebilir. Bu, geliştiricinin istemci uygulamasının anahtarı API ile iletişimine olanak tanımak için özel bir üst bilgi sunarak API sağlayıcısı tarafından etkinleştirilebilir.
 
 ```xml
 <rate-limit-by-key calls="100"
@@ -69,11 +73,11 @@ Kısıtlama anahtarını kullanarak tanımlandığında bir [ilke ifadesi](/azur
           counter-key="@(request.Headers.GetValueOrDefault("Rate-Key",""))"/>
 ```
 
-Bu, nasıl bunlar anahtar sınırlama oranı oluşturmak istediğinizi seçmek geliştiricinin istemci uygulaması sağlar. İstemci geliştiriciler, kullanıcılarına anahtarları kümesi ayırma ve anahtar kullanımı döndürme kendi oranı katmanları oluşturabilir.
+Bu, geliştiricinin istemci uygulamasının hız sınırlaması anahtarını nasıl oluşturmak istediğini seçmesini sağlar. İstemci geliştiricileri kullanıcılara anahtar kümeleri ayırarak ve anahtar kullanımını döndürerek kendi hız katmanlarını oluşturabilir.
 
 ## <a name="summary"></a>Özet
-Azure API Management, hızı ve hem koruma hem de API hizmetinizi değeri eklemek için azaltma teklif sağlar. Yeni kısıtlama ilkeleri özel ölçüm kuralları ile müşterilerinize daha iyi uygulamalar oluşturmak etkinleştirmek için bu ilkeleri üzerinde daha ayrıntılı denetim sağlar. Bu makaledeki örneklerde, istemci IP adresleri, kullanıcı kimliğini ve istemci oluşturulan değerleri anahtarlarıyla sınırlama üretim hızı tarafından bu yeni ilkeleri kullanımını gösterir. Ancak, diğer birçok kullanılabilecek kullanıcı aracısı, URL yolu parçaları, ileti boyutu gibi ileti bölümü vardır.
+Azure API Management hem koruma hem de API hizmetinize değer ekleme için fiyat ve teklif azaltma sağlar. Özel kapsam kuralları olan yeni kısıtlama ilkeleri, müşterilerinizin daha iyi uygulamalar oluşturmasını sağlamak için bu ilkeler üzerinde daha ayrıntılı denetim imkanı sağlar. Bu makaledeki örneklerde, istemci IP adresleri, Kullanıcı kimliği ve istemci tarafından oluşturulan değerler ile anahtarları sınırlandırma ile ayırarak bu yeni ilkelerin kullanımı gösterilmektedir. Ancak, iletinin Kullanıcı Aracısı, URL yol parçaları, ileti boyutu gibi kullanılabilecek birçok farklı bölümü vardır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Lütfen yönelik bu konuda Disqus iş parçacığında, geri bildirimde bulunun. Senaryolarınız mantıksal bir seçenek olan diğer olası anahtar değerleri öğrenmek harika olacaktır.
+Lütfen bu konuda bir GitHub sorunu olarak bize geri bildirimde bulunun. Senaryolarınızda mantıklı bir seçenek olan diğer olası anahtar değerlerini öğrenmek harika olacaktır.
 

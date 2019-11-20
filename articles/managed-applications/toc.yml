@@ -11,14 +11,28 @@
       href: publish-managed-app-definition-quickstart.md
     - name: Hizmet kataloğu uygulaması dağıtma
       href: deploy-service-catalog-quickstart.md
+    - name: Özel bir kaynak sağlayıcısı oluşturma
+      href: create-custom-provider.md
 - name: Öğreticiler
   items:
+    - name: özel sağlayıcılar
+      items:
+        - name: Özel sağlayıcıları kullanmaya başlama
+          href: tutorial-custom-providers-101.md
+        - name: Azure İşlevleri’ni ayarlama
+          href: tutorial-custom-providers-function-setup.md
+        - name: Bir RESTful uç noktası yazma
+          href: tutorial-custom-providers-function-authoring.md
+        - name: Özel sağlayıcılar oluşturma ve bunları kullanma
+          href: tutorial-custom-providers-create.md
     - name: Tanım dosyaları oluşturma
       href: publish-service-catalog-app.md
     - name: Market uygulaması yayımlama
       href: publish-marketplace-app.md
-    - name: Özel kaynak sağlayıcısı oluşturma
-      href: create-custom-provider.md
+    - name: Özel sağlayıcı ile yönetilen uygulama oluşturma
+      href: tutorial-create-managed-app-with-custom-provider.md
+    - name: Özel sağlayıcılarla kaynak ekleme
+      href: tutorial-custom-providers-resource-onboarding.md
 - name: Örnekler
   items:
     - name: Azure CLI
@@ -29,13 +43,17 @@
       href: sample-projects.md
 - name: Kavramlar
   items:
-    - name: Azure özel kaynak sağlayıcıları
+    - name: Azure özel sağlayıcılar
       href: custom-providers-overview.md
     - name: Tanım yapıtını görüntüleme
       href: concepts-view-definition.md
+    - name: Rol tanımı yapıtı
+      href: concepts-custom-role-definition.md
+    - name: Kaynak ekleme
+      href: concepts-custom-providers-resourceonboarding.md
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Özel kaynak sağlayıcıları
+    - name: Özel sağlayıcılar
       items:
         - name: Azure'a özel eylemler ekleme
           href: custom-providers-action-endpoint-how-to.md
@@ -57,6 +75,8 @@
           href: key-vault-access.md
         - name: Yönetilen Kimlik ile dağıtma
           href: publish-managed-identity.md
+        - name: Bildirimlerle ilgili dağıtma
+          href: publish-notifications.md
     - name: Tüketiciler
       items:
         - name: Yönetilen uygulamaları izleme
@@ -65,12 +85,22 @@
           href: approve-just-in-time-access.md
 - name: Başvuru
   items:
-    - name: Özel kaynak sağlayıcıları
+    - name: Özel sağlayıcılar
       items:
         - name: Özel kaynak ara sunucu başvurusu
           href: custom-providers-proxy-resource-endpoint-reference.md
         - name: Özel kaynak önbellek başvurusu
           href: custom-providers-proxy-cache-resource-endpoint-reference.md
+        - name: Özel sağlayıcı RESTful uç nokta başvurusu
+          href: reference-custom-providers-csharp-endpoint.md
+    - name: Uygulama yapıtları
+      items:
+        - name: Kullanıcı arabirimi öğeleri
+          href: reference-createuidefinition-artifact.md
+        - name: Dağıtım şablonu
+          href: reference-main-template-artifact.md
+        - name: Tanımı görüntüleme
+          href: reference-view-definition-artifact.md
     - name: Azure CLI
       href: /cli/azure/managedapp
     - name: PowerShell
@@ -96,6 +126,8 @@
               href: microsoft-common-passwordbox.md
             - name: Section
               href: microsoft-common-section.md
+            - name: TagsByResource
+              href: microsoft-common-tagsbyresource.md
             - name: TextBlock
               href: microsoft-common-textblock.md
             - name: TextBox

@@ -1,0 +1,27 @@
+- name: Uç Cihazlar için SQL Veritabanı Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Uç Cihazlar için SQL Veritabanı nedir?
+      href: overview.md
+- name: Hızlı Başlangıçlar
+  expanded: true
+  items:
+    - name: Uç Cihazlar için SQL Veritabanı'nı dağıtma
+      href: deploy-portal.md
+    - name: Uç Cihazlar için SQL Veritabanı'nda ONNX dağıtımı
+      href: deploy-onnx.md
+- name: Öğreticiler
+  items:
+    - name: Azure Data Factory ile verileri eşitleme
+      href: tutorial-sync-data-factory.md
+    - name: SQL Data Sync ile verileri eşitleme
+      href: tutorial-sync-data-sync.md
+- name: Nasıl yapılır
+  items:
+    - name: DAC paketleri ve Stream Analytics işleri
+      href: stream-analytics.md
+- name: Kavramlar
+  items:
+    - name: ONNX ile makine öğrenmesi ve yapay zeka
+      href: onnx-overview.md

@@ -1,100 +1,97 @@
 ---
-title: Kubernetes Azure Kubernetes Service (AKS) ağ yapılandırma
-description: Azure Kubernetes Service (AKS kümesi bir var olan sanal ağı ve alt ağ dağıtmak için AKS) kubernetes (Temel) ağ yapılandırmayı öğrenin.
+title: Azure Kubernetes Service (AKS) ' de Kubernetes kullanan ağını yapılandırma
+description: Azure Kubernetes Service 'te (AKS) Kubernetes kullanan (temel) ağını, var olan bir sanal ağ ve alt ağa bir AKS kümesi dağıtmak için nasıl yapılandıracağınızı öğrenin.
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 06/26/2019
-ms.author: iainfou
+ms.author: mlearned
 ms.reviewer: nieberts, jomore
-ms.openlocfilehash: 269dd670ed82234b77e06c389ae1c9a5c294010c
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: b233c5dd639bb6652f201727748a081f6a8a4c64
+ms.sourcegitcommit: 4f7dce56b6e3e3c901ce91115e0c8b7aab26fb72
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67441963"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71950327"
 ---
-# <a name="use-kubenet-networking-with-your-own-ip-address-ranges-in-azure-kubernetes-service-aks"></a>Kubernetes kendi IP adresi aralıklarını Azure Kubernetes Service (AKS) ile ağ kullanma
+# <a name="use-kubenet-networking-with-your-own-ip-address-ranges-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içinde kendi IP adresi aralıklarınız ile Kubernetes kullanan ağını kullanma
 
-Varsayılan olarak, AKS kümesi kullanım [kubernetes][kubenet], ve sizin için bir Azure sanal ağı ve alt ağ oluşturulur. İle *kubernetes*, düğümler, Azure sanal ağ alt ağından bir IP adresi alın. Pod'ların, düğümler Azure sanal ağ alt ağına mantıksal olarak farklı adres alanından bir IP adresi alır. Ağ adresi çevirisi (NAT), ardından pod'ları Azure sanal ağındaki kaynaklara erişebilmesi için yapılandırılır. Trafiği kaynak IP adresini, NAT düğümün birincil IP başvuracağını ' dir. Bu yaklaşım ağ alanınıza kullanmak pod'ları ayırmanız gerekir IP adresi sayısını önemli ölçüde azaltır.
+Varsayılan olarak, aks kümeleri [Kubernetes kullanan][kubenet]kullanır ve sizin için bir Azure sanal ağı ve alt ağı oluşturulur. *Kubernetes kullanan*ile, düğümler Azure sanal ağ alt ağından bir IP adresi alır. Pods, mantıksal olarak farklı bir adres alanından düğümlerin Azure sanal ağ alt ağına bir IP adresi alır. Ağ adresi çevirisi (NAT), daha sonra, Azure sanal ağındaki kaynaklara ulaşabilmesi için yapılandırılır. Trafiğin kaynak IP adresi NAT ' dır ve düğümün birincil IP adresidir. Bu yaklaşım, Pod 'nin kullanabilmesi için ağ alanınızda ayırmanız gereken IP adresi sayısını önemli ölçüde azaltır.
 
-İle [Azure kapsayıcı ağ arabirimi (CNI)][cni-networking], her pod alt ağdan bir IP adresi alır ve doğrudan erişilebilir. Bu IP adresleri, ağ alanı benzersiz olmalıdır ve önceden hazırlıklı olmak gerekir. Her düğümü destekliyorsa pod'ların sayısı için bir yapılandırma parametresi vardır. Düğüm başına IP adreslerinin sayısı, bu düğüm için önden ayrılmıştır. Bu yaklaşım, daha fazla planlama gerektirir ve genellikle IP adresi tükenmesi veya uygulama arttıkça daha büyük bir alt ağ kümelerini yeniden gereksinimini doğurur.
+[Azure Container ağ arabirimi (CNı)][cni-networking]ile her Pod, alt ağdan bir IP adresi alır ve doğrudan erişilebilir. Bu IP adresleri, ağ alanınızda benzersiz olmalı ve önceden planlanmalıdır. Her düğümün desteklediği en fazla sayıda düğüm için bir yapılandırma parametresi vardır. Düğüm başına düşen IP adresi sayısı, bu düğüm için önde ayrılır. Bu yaklaşım daha fazla planlama gerektirir ve genellikle, uygulamanızın beklentilerine göre daha büyük bir alt ağda küme yeniden oluşturma gereksinimiyle sonuçlanır.
 
-Bu makalede nasıl kullanılacağını gösterir *kubernetes* oluşturmak ve bir AKS kümesi için bir sanal ağ alt ağı kullanmak için ağ. Ağ seçenekleri ve konuları hakkında daha fazla bilgi için bkz. [ağ kavramları Kubernetes ve AKS için][aks-network-concepts].
+Bu makalede, bir aks kümesi için bir sanal ağ alt ağı oluşturmak ve kullanmak için *Kubernetes kullanan* Networking 'in nasıl kullanılacağı gösterilmektedir. Ağ seçenekleri ve konuları hakkında daha fazla bilgi için bkz. [Kubernetes ve AKS Için ağ kavramları][aks-network-concepts].
 
 > [!WARNING]
-> Windows Server düğüm havuzları (şu anda önizlemede aks'deki) kullanmak için Azure CNI kullanmanız gerekir. Windows Server kapsayıcıları için kubernetes kullanımını ağ modeli olarak kullanılamaz.
+> Windows Server düğüm havuzlarını kullanmak için (Şu anda AKS 'de önizlemededir), Azure CNı kullanmanız gerekir. Ağ modeli olarak Kubernetes kullanan kullanımı Windows Server kapsayıcıları için kullanılamaz.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Azure CLI Sürüm 2.0.65 gerekir veya daha sonra yüklü ve yapılandırılmış. Çalıştırma `az --version` sürümü bulmak için. Gerekirse yüklemek veya yükseltmek bkz [Azure CLI yükleme][install-azure-cli].
+Azure CLı sürüm 2.0.65 veya sonraki bir sürümün yüklü ve yapılandırılmış olması gerekir. Sürümü bulmak için @ no__t-0 ' i çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse bkz. [Azure CLI 'Yı yüklemek][install-azure-cli].
 
-## <a name="overview-of-kubenet-networking-with-your-own-subnet"></a>Ağ kendi alt ağ ile kubernetes genel bakış
+## <a name="overview-of-kubenet-networking-with-your-own-subnet"></a>Kendi alt ağınızla Kubernetes kullanan ağlarına genel bakış
 
-Birçok ortamlarda, sanal ağlar ve alt ağa sahip ayrılmış IP adresi aralıkları tanımladınız. Bu sanal ağ kaynakları, birden çok hizmet ve uygulamaları desteklemek için kullanılır. Ağ bağlantısı sağlamak için AKS kümeleri kullanabilirsiniz *kubernetes* (temel ağ iletişimi) veya Azure CNI (*ağ Gelişmiş*).
+Birçok ortamda, ayrılmış IP adresi aralıklarına sahip sanal ağları ve alt ağları tanımladınız. Bu sanal ağ kaynakları, birden çok hizmeti ve uygulamayı desteklemek için kullanılır. Aks kümeleri, ağ bağlantısı sağlamak için *Kubernetes kullanan* (temel ağ) veya Azure CNI (*Gelişmiş ağ*) kullanabilir.
 
-İle *kubernetes*yalnızca düğümler, sanal ağ alt ağında bir IP adresi alır. Pod'ların birbirleriyle doğrudan iletişim kuramaz. Bunun yerine, kullanıcı tanımlı yönlendirme (UDR) ve IP iletme düğümlerde pod'ları arasında bağlantı kurmak için kullanılır. Pod'ların atanan bir IP adresi alan bir hizmeti arkasında da dağıtabilirsiniz ve uygulama için trafik yükü dengeler. Aşağıdaki diyagramda, nasıl AKS düğümleri sanal ağ alt ağı, ancak pod olmayan bir IP adresi alır gösterilmektedir:
+*Kubernetes kullanan*ile yalnızca düğümler sanal ağ alt ağında bir IP adresi alır. Pods birbirleriyle doğrudan iletişim kuramaz. Bunun yerine, düğümler arasında yer alan bağlantı için Kullanıcı tanımlı yönlendirme (UDR) ve IP iletimi kullanılır. Ayrıca, atanan IP adresi alan bir hizmetin arkasında yer alan ve uygulama için Yük Dengeleme trafiği dağıtımını yapabilirsiniz. Aşağıdaki diyagramda, AKS düğümlerinin sanal ağ alt ağında IP adresi alma, ancak bunların olmaması gösterilmektedir:
 
-![Kubernetes AKS kümesi ile ağ modeli](media/use-kubenet/kubenet-overview.png)
+![AKS kümesi ile kubenet ağ modeli](media/use-kubenet/kubenet-overview.png)
 
-Azure, en fazla 400 yolların bir UDR'de destekler, böylece bir AKS kümesi 400 düğümlerinden daha büyük olamaz. AKS özellikleri gibi [sanal düğümü][virtual-nodes] veya ağ ilkeleri ile desteklenmeyen *kubernetes*.
+Azure, bir UDR 'de en fazla 400 yolu destekler, bu nedenle 400 düğümden daha büyük bir AKS kümeniz olamaz. Aks [sanal düğümleri][virtual-nodes] ve Azure ağ ilkeleri, *Kubernetes kullanan*ile desteklenmez.  [Calıco ağ ilkelerini][calico-network-policies], kubenet ile desteklendiği için kullanabilirsiniz.
 
-İle *Azure CNI*, her pod IP alt ağda bir IP adresi alır ve diğer pod'ların ve Hizmetleri ile doğrudan iletişim kurabilir. Kümeleri, belirttiğiniz IP adresi aralığı büyük olabilir. Ancak IP adresi aralığı önceden planlanmalıdır ve tüm IP adreslerini desteklemek pod'ları, maksimum sayısına göre AKS düğümleri tarafından kullanılır. Ağ özelliklerini ve senaryoları gibi gelişmiş [sanal düğümü][virtual-nodes] veya ağ ilkeleri ile desteklenen *Azure CNI*.
+*Azure CNI*ile her Pod, IP alt ağında bir IP adresi alır ve diğer Pod ve hizmetlerle doğrudan iletişim kurabilir. Kümeleriniz, belirttiğiniz IP adresi aralığı kadar büyük olabilir. Bununla birlikte, IP adresi aralığı önceden planlanmalıdır ve tüm IP adresleri AKS düğümleri tarafından destekleyeceği maksimum düğüm sayısına göre tüketilir. *Azure CNI*Ile [sanal düğümler][virtual-nodes] veya ağ ilkeleri (Azure ya da calıco) gibi gelişmiş ağ özellikleri ve senaryolar desteklenir.
 
-### <a name="ip-address-availability-and-exhaustion"></a>IP adresi kullanılabilirlik ve tükendi
+### <a name="ip-address-availability-and-exhaustion"></a>IP adresi kullanılabilirliği ve tükenmesi
 
-İle *Azure CNI*, yaygın bir sorun atanan IP adresi aralığı ölçeğini veya bir küme yükseltmesi sırasında ek düğümler ardından eklemek için çok küçük olduğu. Ağ ekibi Ayrıca, beklenen uygulama taleplerini desteklemek için yeterince büyük bir IP adresi aralığı vermek mümkün olmayabilir.
+*Azure CNI*ile yaygın bir sorun, atanan IP adresi aralığı, bir kümeyi ölçeklendirerek veya yükselttiğinizde ek düğümler ekleyebilmek için çok küçüktür. Ağ ekibi, beklenen uygulama taleplerinizi desteklemek için yeterince büyük bir IP adresi aralığı yayınlamayabilir.
 
-Bir güvenlik ihlali kullanan bir AKS kümesi oluşturabileceğiniz *kubernetes* ve var olan bir sanal ağ alt ağına bağlayın. Bu yaklaşım, çok sayıda IP adresleri Önden, kümede çalışabilecek olası pod'ların tüm ayırmak zorunda kalmadan tanımlanan IP adreslerini almak düğümleri sağlar.
+Bir uzlaşma olması halinde, *Kubernetes kullanan* kullanan bir aks kümesi oluşturabilir ve var olan bir sanal ağ alt ağına bağlanabilirsiniz. Bu yaklaşım, düğüm tanımlı IP adreslerini, kümede çalışabilecek tüm olası düğüm için çok sayıda IP adresi ayırmak zorunda kalmadan bir şekilde almasına olanak tanır.
 
-İle *kubernetes*, bir çok daha küçük IP adresi aralığı kullanın ve büyük kümeleri ve uygulama taleplerini destekleyebilir. Örneğin, hatta ile bir */27* IP adresi aralığı, 20-25 düğümlü bir küme ölçeklendirme veya yükseltmek için yeterli alan ile çalıştırılabilir. Bu küme boyutu en fazla destekleyecektir *2.200 2750* pod'ların (ile 110 pod'ların düğüm başına varsayılan en fazla). Pod'ları ile yapılandırabileceğiniz düğüm başına en fazla sayısını *kubernetes* 110 AKS ise.
+*Kubernetes kullanan*ile çok daha küçük bir IP adresi aralığı kullanabilir ve büyük kümeleri ve uygulama taleplerini destekleyebilirsiniz. Örneğin, */27* IP adres aralığı ile bile, ölçeklendirmek veya yükseltmek için yeterli odaya sahip bir 20-25 düğüm kümesi çalıştırabilirsiniz. Bu küme boyutu, *2200-2750* Pod 'yi (düğüm başına varsayılan en fazla 110 Pod) destekler. Aks 'de *Kubernetes kullanan* ile yapılandırabileceğiniz düğüm başına en fazla düğüm sayısı 110 ' dir.
 
-Aşağıdaki temel hesaplamaları ağ modellerini farkı Karşılaştır:
+Aşağıdaki temel hesaplamalar, ağ modellerindeki farkı karşılaştırın:
 
-- **kubernetes** -basit */24* IP adresi aralığı destekleyebilir *251* (her Azure sanal ağ alt ağı, yönetim işlemleri için ilk üç IP adresini ayırır) kümedeki düğümler
-  - Bu düğüm sayısı kadar destekleyebilir *27,610* pod'ların (varsayılan en fazla 110 pod'ları ile düğüm başına *kubernetes*)
-- **Azure CNI** -o aynı temel */24* alt ağ aralığı en fazla yalnızca Destek *8* kümedeki düğümler
-  - Bu düğüm sayısı kadar yalnızca destekleyebilir *240* pod'ların (varsayılan 30 pod'ları ile düğüm başına en fazla *Azure CNI*)
+- **Kubernetes kullanan** -basit */24* IP adresi aralığı kümede en fazla *251* düğümü destekleyebilir (her Azure sanal ağ alt ağı yönetim işlemleri için ilk üç IP adresini ayırır)
+  - Bu düğüm sayısı en fazla *27.610* Pod destekleyebilir ( *Kubernetes kullanan*ile düğüm başına varsayılan en fazla 110 Pod)
+- **Azure CNI** -aynı temel */24* alt ağ aralığı yalnızca kümede en fazla *8* düğüm destekleyebilir
+  - Bu düğüm sayısı yalnızca en fazla *240* tane ( *Azure CNI*ile düğüm başına en fazla 30 adet) kullanılabilir.
 
 > [!NOTE]
-> Bu sınırları hesabı yükseltmesi alması veya ölçeklendirme işlemlerini kullanmayın. Uygulamada en fazla alt ağ IP adresi aralığı destekleyen düğüm sayısını çalıştıramazsınız. Yükseltme işlemleri sırasında ölçeği kullanım için bazı IP adreslerini bırakmanız gerekir.
+> Bu en fazla UMS, hesap yükseltme veya ölçeklendirme işlemlerine sahip değildir. Uygulamada, alt ağ IP adresi aralığının desteklediği en fazla düğüm sayısını çalıştıramazsınız. Yükseltme işlemlerinin ölçeği sırasında kullanılmak üzere bazı IP adreslerini kullanılabilir bırakmanız gerekir.
 
-### <a name="virtual-network-peering-and-expressroute-connections"></a>Sanal Ağ eşlemesi ve ExpressRoute bağlantıları
+### <a name="virtual-network-peering-and-expressroute-connections"></a>Sanal ağ eşlemesi ve ExpressRoute bağlantıları
 
-Şirket içi bağlantı sağlamak için her ikisi de *kubernetes* ve *Azure CNI* ağ yaklaşımları kullanabilirsiniz [Azure sanal ağ eşlemesi][vnet-peering] or [ExpressRoute connections][express-route]. Çakışma ve yanlış trafiği yönlendirmeyi dikkatli bir şekilde önlemek için IP adresi aralıklarınızı planlama. Örneğin, birçok şirket içi ağları kullanın. bir *10.0.0.0/8* adres ExpressRoute bağlantısı üzerinden tanıtılan aralığı. Bu adres aralığının dışında Azure sanal ağ alt ağları, AKS kümeye gibi oluşturmak için önerilen *172.16.0.0/16*.
+Şirket içi bağlantı sağlamak için hem *Kubernetes kullanan* hem de *Azure-CNI* ağ yaklaşımları, [Azure sanal ağ eşlemesi][vnet-peering] veya [ExpressRoute bağlantılarını][express-route]kullanabilir. Çakışan ve hatalı trafik yönlendirmeyi engellemek için IP adresi aralıklarınızı dikkatle planlayın. Örneğin, birçok şirket içi ağ, ExpressRoute bağlantısı üzerinden tanıtılan bir *10.0.0.0/8* adres aralığı kullanır. AKS kümelerinizi bu adres aralığının dışında ( *172.16.0.0/16*gibi) Azure sanal ağ alt ağlarına oluşturmanız önerilir.
 
-### <a name="choose-a-network-model-to-use"></a>Kullanılacak ağ modeli seçin
+### <a name="choose-a-network-model-to-use"></a>Kullanılacak bir ağ modeli seçin
 
-Seçim, AKS için kullanmak için hangi ağ eklentisi genellikle esneklik ve Gelişmiş Yapılandırma gereksinimleriniz arasında bir denge kümedir. Her ağ modeli en uygun olduğunda aşağıdaki maddeler anahat yardımcı olur.
+AKS kümeniz için hangi ağ eklentisinin kullanılacağını tercih etmek, genellikle esneklik ve gelişmiş yapılandırma gereksinimleriyle ilgili bir dengedir. Aşağıdaki önemli noktalar, her bir ağ modeli en uygun olabilir.
 
-Kullanım *kubernetes* olduğunda:
+Şu durumlarda *Kubernetes kullanan* kullanın:
 
-- IP adres alanı sınırlıdır.
-- Çoğu pod iletişim küme içinde olur.
-- Sanal düğümler ve ağ ilkesi gibi gelişmiş özellikleri gerekmez.
+- Sınırlı IP adresi alanı var.
+- Pod iletişiminin çoğu küme içinde bulunur.
+- Sanal düğümler veya Azure ağ Ilkesi gibi gelişmiş AKS özelliklerine ihtiyacınız yoktur.  [Calıco ağ ilkelerini][calico-network-policies]kullanın.
 
-Kullanım *Azure CNI* olduğunda:
+*Azure CNI* şu durumlarda kullanın:
 
 - Kullanılabilir IP adresi alanı var.
-- Çoğu pod iletişim küme dışındaki kaynak etmektir.
-- Udr'leri yönetmek istemediğiniz.
-- Sanal düğümler ve ağ ilkesi gibi gelişmiş özellikleri ihtiyacınız vardır.
+- Pod iletişiminin çoğu, küme dışındaki kaynaklara göre yapılır.
+- UDRs 'yi yönetmek istemezsiniz.
+- Sanal düğümler veya Azure ağ Ilkesi gibi gelişmiş özelliklere ihtiyacınız vardır.  [Calıco ağ ilkelerini][calico-network-policies]kullanın.
 
-Hangi ağ modeli kullanmaya karar vermenize yardımcı olacak daha fazla bilgi için bkz. [karşılaştırma ağ modelleri ve Destek kapsamlarına][network-comparisons].
-
-> [!NOTE]
-> Kuberouter kubernetes kullanırken, ağ ilkesi sağlamak mümkün kılar ve bir AKS kümesindeki bir daemonset olarak yüklenebilir. Lütfen kube-yönlendirici hala beta sürümünde olan ve hiçbir destek proje için Microsoft tarafından sunulan unutmayın.
+Hangi ağ modelini kullanacağınıza karar vermenize yardımcı olacak daha fazla bilgi için bkz. [ağ modellerini ve bunların destek kapsamını karşılaştırın][network-comparisons].
 
 ## <a name="create-a-virtual-network-and-subnet"></a>Sanal ağ ve alt ağ oluşturma
 
-Kullanmaya başlamak için *kubernetes* ve ilk kullanarak bir kaynak grubu oluşturun, kendi sanal ağ alt [az grubu oluşturma][az-group-create] komutu. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur:
+*Kubernetes kullanan* ve kendi sanal ağ alt ağınızı kullanmaya başlamak için önce [az Group Create][az-group-create] komutunu kullanarak bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
 ```
 
-Bu ağ kaynaklarını kullanarak bir sanal ağınız ve kullanmak için alt ağ yoksa, oluşturma [az ağ sanal ağ oluşturma][az-network-vnet-create] komutu. Aşağıdaki örnekte, sanal ağ olarak adlandırılır *myVnet* adres ön eki ile *192.168.0.0/16*. Bir alt ağ adında oluşturulur *myAKSSubnet* adres ön eki ile *192.168.1.0/24*.
+Kullanmak için mevcut bir sanal ağınız ve alt ağınız yoksa, [az Network VNET Create][az-network-vnet-create] komutunu kullanarak bu ağ kaynaklarını oluşturun. Aşağıdaki örnekte, sanal ağ, *192.168.0.0/16*adres ön ekine sahip *myvnet* olarak adlandırılmıştır. *192.168.1.0/24*adres ön ekine sahip *Myakssubnet* adlı bir alt ağ oluşturulur.
 
 ```azurecli-interactive
 az network vnet create \
@@ -105,15 +102,15 @@ az network vnet create \
     --subnet-prefix 192.168.1.0/24
 ```
 
-## <a name="create-a-service-principal-and-assign-permissions"></a>Hizmet sorumlusu oluşturma ve izinleri atama
+## <a name="create-a-service-principal-and-assign-permissions"></a>Hizmet sorumlusu oluşturma ve izin atama
 
-Bir AKS kümesinin diğer Azure kaynaklarıyla etkileşime geçmesini sağlamak için bir Azure Active Directory hizmet sorumlusu kullanılır. Hizmet sorumlusu AKS düğümleri kullanan bir alt ağ ve sanal ağ'ı yönetmek için izinleri olmalıdır. Bir hizmet sorumlusu oluşturmak için kullanın [az ad sp create-for-rbac][az-ad-sp-create-for-rbac] komutu:
+Bir AKS kümesinin diğer Azure kaynaklarıyla etkileşime geçmesini sağlamak için bir Azure Active Directory hizmet sorumlusu kullanılır. Hizmet sorumlusunun, AKS düğümlerinin kullandığı sanal ağı ve alt ağı yönetmek için izinleri olması gerekir. Hizmet sorumlusu oluşturmak için [az ad SP Create-for-RBAC][az-ad-sp-create-for-rbac] komutunu kullanın:
 
 ```azurecli-interactive
 az ad sp create-for-rbac --skip-assignment
 ```
 
-Aşağıdaki örnek çıktıda, hizmet sorumlusu uygulama kimliği ve parolası gösterir. Bu değerler, hizmet sorumlusuna bir rol atayın ve ardından AKS kümesi oluşturmak için ek adımları kullanılır:
+Aşağıdaki örnek çıktı, hizmet sorumlunuz için uygulama KIMLIĞINI ve parolayı gösterir. Bu değerler, hizmet sorumlusuna bir rol atamak ve ardından AKS kümesini oluşturmak için ek adımlarda kullanılır:
 
 ```console
 $ az ad sp create-for-rbac --skip-assignment
@@ -127,35 +124,35 @@ $ az ad sp create-for-rbac --skip-assignment
 }
 ```
 
-Kalan adımlarda doğru temsilcilerden atama [az ağ vnet show][az-network-vnet-show] and [az network vnet subnet show][az-network-vnet-subnet-show] gerekli kaynak kimliklerini almak için komutları. Bu kaynak kimliklerinin değişkenleri olarak depolanır ve kalan adımları, başvurulan:
+Kalan adımlarda doğru temsilcileri atamak için [az Network VNET Show][az-network-vnet-show] komutunu kullanın, az [Network VNET subnet][az-network-vnet-subnet-show] , gerekli kaynak kimliklerini almak için komutları göster komutlarını kullanın. Bu kaynak kimlikleri, değişkenler olarak depolanır ve kalan adımlarda başvurulur:
 
 ```azurecli-interactive
 VNET_ID=$(az network vnet show --resource-group myResourceGroup --name myAKSVnet --query id -o tsv)
 SUBNET_ID=$(az network vnet subnet show --resource-group myResourceGroup --vnet-name myAKSVnet --name myAKSSubnet --query id -o tsv)
 ```
 
-Hizmet sorumlusu AKS kümenizin atayarak *katkıda bulunan* kullanarak sanal ağ üzerindeki izinleri [az rol ataması oluşturma][az-role-assignment-create] komutu. Kendi sağlamak  *\<AppID >* hizmet sorumlusunu oluşturmak için önceki komutun çıktısında gösterildiği gibi:
+Şimdi, [az role atama Create][az-role-assignment-create] komutunu kullanarak sanal ağ üzerinde aks kümesi *katılımcısı* izinleriniz için hizmet sorumlusu atayın. Hizmet sorumlusunu oluşturmak için önceki komutun çıktısında gösterildiği gibi, kendi *\<Appıd >* sağlayın:
 
 ```azurecli-interactive
 az role assignment create --assignee <appId> --scope $VNET_ID --role Contributor
 ```
 
-## <a name="create-an-aks-cluster-in-the-virtual-network"></a>Sanal ağda bir AKS kümesi oluşturma
+## <a name="create-an-aks-cluster-in-the-virtual-network"></a>Sanal ağda AKS kümesi oluşturma
 
-Artık bir sanal ağ ve alt ağ, oluşturulan ve oluşturduğunuz ve bu ağ kaynakları kullanmak için bir hizmet sorumlusu izinleri atanmış. Artık, sanal ağ ve alt ağ kullanarak AKS kümesi oluşturma [az aks oluşturma][az-aks-create] komutu. Kendi hizmet sorumlusu tanımlama  *\<AppID >* ve  *\<parola >* hizmet sorumlusunu oluşturmak için önceki komutun çıktısında gösterildiği gibi.
+Artık bir sanal ağ ve alt ağ oluşturdunuz ve bu ağ kaynaklarını kullanmak için bir hizmet sorumlusu için oluşturduğunuz ve atanan izinler. Şimdi [az aks Create][az-aks-create] komutunu kullanarak sanal ağınızda ve alt ağınızda bir aks kümesi oluşturun. Hizmet sorumlusu oluşturmak için önceki komutun çıktısında gösterildiği gibi, kendi hizmet sorumlusu *\<Appıd >* ve *\<password >* tanımlayın.
 
-Kümenin parçası oluşturma işlemi aşağıdaki IP adresi aralıklarını da olarak tanımlanır:
+Aşağıdaki IP adresi aralıkları, küme oluşturma işleminin parçası olarak da tanımlanmıştır:
 
-* *--Hizmet CIDR* AKS kümesi iç Hizmetleri'nde bir IP adresi atamak için kullanılır. Bu IP adresi aralığı, ağ ortamınızda başka bir yerde kullanımda olmayan bir adres alanı olmalıdır. Bu, bağlanmak veya Express Route veya siteden siteye VPN bağlantısı kullanarak Azure sanal ağlarınıza bağlanmayı planlıyorsanız hiçbir şirket içi ağ aralığı içerir.
+* *--Service-CIDR* , aks kümesinde iç HIZMETLERI bir IP adresi atamak için kullanılır. Bu IP adresi aralığı, ağ ortamınızda başka bir yerde kullanımda olmayan bir adres alanı olmalıdır. Bu Aralık, Express Route veya siteden siteye VPN bağlantısı kullanarak Azure sanal ağlarınızı bağladığınızda veya bağlanmayı planlıyorsanız şirket içi ağ aralıklarını içerir.
 
-* *--Dns-hizmet-IP* adresi olmalıdır *.10* hizmeti IP adresi aralığınızı adresidir.
+* *--DNS-Service-ip* adresi, hizmet IP adresi aralığınızı *.10* adresi olmalıdır.
 
-* *--Pod CIDR* , ağ ortamınızda başka bir yerde kullanımda olmayan bir geniş adres alanı olmalıdır. Bu, bağlanmak veya Express Route veya siteden siteye VPN bağlantısı kullanarak Azure sanal ağlarınıza bağlanmayı planlıyorsanız hiçbir şirket içi ağ aralığı içerir.
-    * Bu adres aralığı'nın ölçeği beklediğiniz düğüm sayısını tutabilecek kadar büyük olmalıdır. Ek düğümler için daha fazla adres gerekiyorsa, küme dağıtıldıktan sonra bu adres aralığını değiştiremezsiniz.
-    * Pod IP adresi aralığı atamak için kullanılan bir */24* adres alanı her küme düğümünde için. Aşağıdaki örnekte, *--pod CIDR* , *10.244.0.0/16* ilk düğümü atar *10.244.0.0/24*, ikinci düğümü *10.244.1.0/24*ve üçüncü düğüm *10.244.2.0/24*.
-    * Küme ölçek veya yükseltme olarak, Azure platformu pod IP adresi aralığı her yeni düğüme atamak devam eder.
+* *--Pod-CIDR* , ağ ortamınızda başka bir yerde kullanımda olmayan büyük bir adres alanı olmalıdır. Bu Aralık, Express Route veya siteden siteye VPN bağlantısı kullanarak Azure sanal ağlarınızı bağladığınızda veya bağlanmayı planlıyorsanız şirket içi ağ aralıklarını içerir.
+    * Bu adres aralığı, ölçeğini genişletmek istediğiniz düğüm sayısına uyacak kadar büyük olmalıdır. Ek düğümler için daha fazla adrese ihtiyacınız varsa, küme dağıtıldıktan sonra bu adres aralığını değiştiremezsiniz.
+    * Pod IP adresi aralığı, kümedeki her düğüme */24* adres alanı atamak için kullanılır. Aşağıdaki örnekte, *--Pod-CIDR* *10.244.0.0/16* ilk düğümü *10.244.0.0/24*, ikinci düğüm *10.244.1.0/24*ve üçüncü düğüm *10.244.2.0/24*olarak atar.
+    * Küme ölçeklenirken veya yükseltirken, Azure platformu her yeni düğüme bir pod IP adres aralığı atamaya devam eder.
     
-* *--Docker köprü adresi* AKS düğümleri temel alınan yönetim platformu ile iletişim kurmasına olanak tanır. Bu IP adresi kümenizin sanal ağ IP adresi aralığında olmamalıdır ve ağınızda kullanımda başka adres aralıklarıyla çakışıyor olmamalıdır.
+* *--Docker-Bridge-Address* , aks düğümlerinin temel alınan yönetim platformuyla iletişim kurmasına olanak tanır. Bu IP adresi, kümenizin sanal ağ IP adresi aralığı içinde olmamalı ve ağınızda kullanılmakta olan diğer adres aralıklarıyla çakışmamalıdır.
 
 ```azurecli-interactive
 az aks create \
@@ -172,16 +169,35 @@ az aks create \
     --client-secret <password>
 ```
 
-Bir AKS kümesi oluşturduğunuzda, bir ağ güvenlik grubu ve rota tablosu oluşturulur. Bu ağ kaynaklarına, AKS denetim düzlemi tarafından yönetilir. Ağ güvenlik grubu, düğümlerde sanal NIC ile otomatik olarak ilişkilendirilir. Sanal ağ alt ağ ile rota tablosunu otomatik olarak ilişkilendirilir. Ağ güvenlik grubu kuralları ve yol tablolarını ve olan otomatik olarak oluşturur ve hizmetlerini güncelleştirildi.
+> [!Note]
+> Bir AKS kümesini [Calıco ağ ilkesi][calico-network-policies] içerecek şekilde etkinleştirmek istiyorsanız aşağıdaki komutu kullanabilirsiniz.
+
+```azurecli-interactive
+az aks create \
+    --resource-group myResourceGroup \
+    --name myAKSCluster \
+    --node-count 3 \
+    --network-plugin kubenet --network-policy calico \
+    --service-cidr 10.0.0.0/16 \
+    --dns-service-ip 10.0.0.10 \
+    --pod-cidr 10.244.0.0/16 \
+    --docker-bridge-address 172.17.0.1/16 \
+    --vnet-subnet-id $SUBNET_ID \
+    --service-principal <appId> \
+    --client-secret <password>
+```
+
+Bir AKS kümesi oluşturduğunuzda, bir ağ güvenlik grubu ve yol tablosu oluşturulur. Bu ağ kaynakları AKS denetim düzlemi tarafından yönetilir. Ağ güvenlik grubu, düğümlerinizin sanal NIC 'Leri ile otomatik olarak ilişkilendirilir. Yol tablosu, sanal ağ alt ağıyla otomatik olarak ilişkilendirilir. Ağ güvenlik grubu kuralları ve yol tabloları ve hizmetleri oluşturup kullanıma sunabileceğiniz otomatik olarak güncelleştirilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-AKS kümesi, var olan bir sanal ağ alt ağa dağıtılan bir artık küme normal olarak kullanabilirsiniz. Kullanmaya başlama [Azure geliştirme alanları kullanılarak uygulama yazmaya][dev-spaces] or [using Draft][use-draft], veya [Helm kullanarak uygulama dağıtma][kullanım helm].
+Var olan sanal ağ alt ağınıza dağıtılmış bir AKS kümesi ile, artık kümeyi normal olarak kullanabilirsiniz. Azure Dev Spaces veya [taslak][use-draft]kullanarak [uygulama oluşturmaya][dev-spaces] veya [Held kullanarak uygulama dağıtmaya][use-helm]başlayın.
 
 <!-- LINKS - External -->
 [dev-spaces]: https://docs.microsoft.com/azure/dev-spaces/
 [cni-networking]: https://github.com/Azure/azure-container-networking/blob/master/docs/cni.md
 [kubenet]: https://kubernetes.io/docs/concepts/cluster-administration/network-plugins/#kubenet
+[Calico-network-policies]: https://docs.projectcalico.org/v3.9/security/calico-network-policy
 
 <!-- LINKS - Internal -->
 [install-azure-cli]: /cli/azure/install-azure-cli

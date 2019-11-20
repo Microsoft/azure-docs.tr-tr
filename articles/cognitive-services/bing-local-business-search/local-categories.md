@@ -1,88 +1,89 @@
 ---
-title: Bing yerel iş arama API'si için kategorileri arama | Microsoft Docs
+title: Bing yerel Iş Arama API 'SI için kategorileri ara
 titleSuffix: Azure Cognitive Services
-description: Yerel iş Bing arama API'si uç noktası için arama kategorileri belirleme konusunda bilgi edinmek için bu makaleyi kullanın.
+description: Bing yerel Iş Arama API uç noktası için arama kategorilerini belirtme hakkında bilgi edinmek için bu makaleyi kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
-ms.topic: article
+ms.subservice: bing-local-business
+ms.topic: conceptual
 ms.date: 11/01/2018
-ms.author: rosh, v-gedod
-ms.openlocfilehash: 61bd230ffdb79b31390e96179e5beb3646902142
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: rosh
+ms.openlocfilehash: 56b94d66eb0929d2fd0ca74a1a631d229330adfa
+ms.sourcegitcommit: beb34addde46583b6d30c2872478872552af30a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65796739"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69906389"
 ---
-# <a name="search-categories-for-the-bing-local-business-search-api"></a>Bing yerel iş arama API'si için kategorilerde Ara
+# <a name="search-categories-for-the-bing-local-business-search-api"></a>Bing yerel Iş Arama API 'SI için kategorileri ara
 
-Bing yerel iş arama API'si, bir kullanıcının konumuna yakın sonuçları verilen önceliğine sahip kategoriler, çeşitli yerel iş varlıkları için aranacak sağlar. Arama ile birlikte bu aramalar içerebilir `localCircularView` ve `localMapView` [parametreleri](specify-geographic-search.md).
+Bing yerel Iş Arama API 'SI, bir kullanıcının konumunu kapatan sonuçlara göre çok sayıda kategoride yerel iş varlıkları aramanızı sağlar. Bu aramaları, `localCircularView` ve `localMapView` [parametreleriyle](specify-geographic-search.md)birlikte aramalara dahil edebilirsiniz.
 
 
 ## <a name="toplevel-categories"></a>TopLevel kategorileri 
 
-Aşağıdaki türleri arama başlıca birçok kategorisi tanımlar.  Birden fazla kategori, atanan bir virgülle ayrılmış liste kullanılarak belirtilebilir `localCategories` parametresi.  
+Aşağıdaki türler, aramanın ana kategorilerini tanımlar.  `localCategories` Parametreye atanan virgülle ayrılmış bir liste kullanılarak birden fazla kategori belirtilebilir.  
 - EatDrink 
 - SeeDo 
-- Satın alın 
+- Atölye 
 - HotelsAndMotels 
-- BanksAndCreditUnions 
+- Banksandalacaklı tunları 
 - Park 
-- Hastanelerde kalma süresini 
+- Hastaneler 
 
-## <a name="sub-categories"></a>Alt kategoriler
-Alt kategoriler, aynı şekilde geçirilir `localCategories`. Alt kategoriler daha belirli kategorileri şunlardır. Bunlar, aynı virgülle ayrılmış listede C kategorisi ve S alt kategorilerinin birini belirtirseniz, tek başına C olarak belirtilmişse, aynı sonuçları alacağını anlamda bağımlıdır.
+## <a name="sub-categories"></a>Alt Kategoriler
+Alt kategoriler ile `localCategories`aynı şekilde geçirilir. Alt Kategoriler daha belirgin kategorileridir. Bu, bir kategori C ve alt kategorilerinden birini, aynı virgülle ayrılmış listede belirtirseniz, yalnızca C 'yi belirttiklerinde aynı sonuçları elde edersiniz.
 
-### <a name="eat-drink"></a>Yemek içecek 
+### <a name="eat-drink"></a>Kurutink yiyecek 
 |  |  |  |  |
 | - | - | - | - |
-| BreweriesAndBrewPubs | CocktailLounges | AfricanRestaurants |
+| BreweriesAndBrewPubs | Coctasillounges | AfricanRestaurants |
 | AmericanRestaurants | Bagels | BarbecueRestaurants |
-| Taverns | SportsBars | Çubukları |
+| Taverns | Sportsçubuklar | Bu |
 | BarsGrillsAndPubs | BuffetRestaurants| BelgianRestaurants | 
-| BritishRestaurants | CafeRestaurants | CaribbeanRestaurants |
-| ChineseRestaurants | CoffeeAndTea | Delicatessens | 
-| DeliveryService | Diners | DiscountStores | 
-| Donuts | FastFood | FrenchRestaurants | 
-| FrozenYogurt | GermanRestaurants | Alış | 
-| GreekRestaurants | Grocers | HawaiianRestaurants | 
-| HungarianRestaurants | IceCreamAndFrozenDesserts | IndianRestaurants | 
-| ItalianRestaurants | JapaneseRestaurants | Juices | 
-| KoreanRestaurants | LiquorStores | MexicanRestaurants |
+| Britişlolar | Caferestaurlar | Caribbeanrestoranlar |
+| Çineserestalar | CoffeeAndTea | Delicatessens | 
+| DeliveryService | Diners | Discountmağazaları | 
+| Donutlar | Fastyiyecek | Frenchrestoranlar | 
+| FrozenYogurt | Geri Restoran | Süper pazarlar | 
+| Greekrestoranlar | Grocers | Hawaii dili | 
+| HungarianRestaurants | Iecreatofrozendesserts | Indianlotlar | 
+| Ialianrestoranlar | JapaneseRestaurants | Juıces | 
+| KoreanRestaurants | LiquorStores | Mexicanrestoranlar |
 | MiddleEasternRestaurants | Pizza | PolishRestaurants | 
-| PortugueseRestaurants | Pretzels | Restoranlar | 
-| RussianAndUkrainianRestaurants | Sandwiches | SeafoodRestaurants | 
-| SpanishRestaurants | SteakHouseRestaurants | SushiRestaurants | 
-| TakeAway | ThaiRestaurants | TurkishRestaurants | 
-| VegetarianAndVeganRestaurants | VietnameseRestaurants|  |
+| PortugueseRestaurants | Pretzya | Restoranlar | 
+| Russianandukraınrestoranlar | Sandwiches | Deniz ve restoran 'Lar | 
+| Spanrestoranlar | Steakhouserestalarurlar | Sushilotlar | 
+| Ders | Thairestoranlar | Türki Restoranlar | 
+| Vegetarianandveganrestoranlar | VietnameseRestaurants|  |
  
-### <a name="see-do"></a>Bkz: yapın 
+### <a name="see-do"></a>Bkz. do 
 |  |  |  |
 | -- | -- | -- |
-| AmusementParks | İlgi çekici Özellikler | Carnivals |
-| Kumarhanelere | LandmarksAndHistoricalSites | MiniatureGolfCourses |
-| MovieTheaters | Müzelerin | Park |
-| SightseeingTours | TouristInformation | Hayvanat |
+| Amusementpark | Atlamalar | Carniler |
+| Casinos | LandmarksAndHistoricalSites | Mini Aturegolfkurslar |
+| Moviemetreler | Museums | Lular |
+| Sı, Seeingturları | Touristınformation | Buros |
  
-### <a name="shop"></a>Satın alın 
+### <a name="shop"></a>Atölye 
 |  |  |  |
 | -- | -- | -- |
-| AntiqueStores | Kitap mağazalarını | CDAndRecordStores |
-| ChildrensClothingStores | CigarAndTobaccoShops | ComicBookStores |
-| DepartmentStores | DiscountStores | FleaMarketsAndBazaars |
-| FurnitureStores | HomeImprovementStores | JewelryAndWatchesStores |
+| Antisorgtores | Kitap depoları | Cdandrecordmağazaları |
+| Childrensclothingmağazaları | CigarAndTobaccoShops | Comicbookmağazaları |
+| DepartmentStores | Discountmağazaları | FleaMarketsAndBazaars |
+| Mobilyanitugeri Yüklemeler | HomeImprovementStores | JewelryAndWatchesStores |
 | KitchenwareStores | LiquorStores | MallsAndShoppingCenters |
-| MensClothingStores | MusicStores | OutletStores |
-| PetShops | PetSupplyStores | SchoolAndOfficeSupplyStores |
+| Mensclothingmağazaları | Müzik depoları | Outletmağazaları |
+| Petterlar | Petsupplymağazaların | SchoolAndOfficeSupplyStores |
 | ShoeStores | SportingGoodsStores | ToyAndGameStores |
-| VitaminAndSupplementStores | WomensClothingStores |  |
+| Inserminandtakıma Tmağazaları | Womensclothingmağazaları |  |
 
 
-## <a name="examples-of-local-categories-search"></a>Yerel bir kategori örnekleri Ara
+## <a name="examples-of-local-categories-search"></a>Yerel Kategori arama örnekleri
 
-Aşağıdaki örnekler GET sonuçları göre `localCategories` parametresi:
+Aşağıdaki örnekler, `localCategories` parametresine göre sonuçları alır:
 
 `https://api.cognitive.microsoft.com/localbusinesses/v7.0/search?&q=&mkt=en-US&localcategories=HotelsAndMotels`
 
@@ -92,11 +93,11 @@ Aşağıdaki örnekler GET sonuçları göre `localCategories` parametresi:
 
 `https://api.cognitive.microsoft.com/localbusinesses/v7.0/search?&q=&mkt=en-US&localcategories=Hospitals`
 
-Aşağıdaki sorgu, Bing yerel iş arama API öğesinden geri döndürülen ilk üç 'hastane' sonuçları sayısını sınırlayan:
+Aşağıdaki sorgu, Bing yerel Iş Arama API 'sinden ilk üç ' hospte ' sonuç sayısını kısıtlar:
 
 `https://api.cognitive.microsoft.com/localbusinesses/v7.0/search?&q=&mkt=en-US&localCategories=Hospitals&count=3&offset=0`
 
-Aşağıdaki örnek JSON yanıtı üç hastaneler büyük Seattle alanında içerir:
+Aşağıdaki örnek JSON yanıtı, daha büyük Seattle alanında üç hastaneler içerir:
 
 ```json
 BingAPIs-TraceId: 68AFB51807C6485CAB8AAF20E232EFFF
@@ -217,5 +218,5 @@ X-MSEdge-Ref: Ref A: 68AFB51807C6485CAB8AAF20E232EFFF Ref B: CO1EDGE0108 Ref C: 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - [Coğrafi arama sınırları](specify-geographic-search.md)
-- [Sorgulama ve yanıtlama](local-search-query-response.md)
-- [Hızlı başlangıçtaC#](quickstarts/local-quickstart.md)
+- [Sorgu ve yanıt](local-search-query-response.md)
+- [İçindeki hızlı başlangıçC#](quickstarts/local-quickstart.md)

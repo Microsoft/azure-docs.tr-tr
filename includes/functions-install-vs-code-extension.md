@@ -4,20 +4,20 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 11/27/2018
 ms.author: glenga
-ms.openlocfilehash: 880b9f2610117d40251e7d99690889d1356980e5
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 19b754b959a5c78ee2e4b78ced783e81b653b072
+ms.sourcegitcommit: 3877b77e7daae26a5b367a5097b19934eb136350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188170"
+ms.lasthandoff: 07/30/2019
+ms.locfileid: "68669860"
 ---
-## <a name="install-the-azure-function-extension"></a>Azure İşlevi uzantısını yükleme
+## <a name="install-the-azure-functions-extension"></a>Azure Işlevleri uzantısını yükler
 
-Azure İşlevleri uzantısı, işlevleri oluşturmak, test etmek ve Azure’da dağıtmak için kullanılır.
+Azure Işlevleri uzantısını kullanarak işlevler oluşturup test edebilir ve bunları Azure 'a dağıtabilirsiniz.
 
-1. Visual Studio Code’da **Uzantılar**’ı açın ve `azure functions` için arama yapın veya [bu bağlantıyı Visual Studio Code’da açın](vscode:extension/ms-azuretools.vscode-azurefunctions).
+1. Visual Studio Code ' de, **uzantıları** açın ve **Azure işlevleri**' ni arayın veya [Visual Studio Code bu bağlantıyı seçin](vscode:extension/ms-azuretools.vscode-azurefunctions).
 
-1. Uzantıyı Visual Studio Code’a yüklemek için **Yükle**’yi seçin.
+1. Uzantıyı Visual Studio Code yüklemek için **yüklemeyi** seçin:
 
     ![Azure İşlevleri için uzantıyı yükleme](./media/functions-install-vs-code-extension/vscode-install-extension.png)
 

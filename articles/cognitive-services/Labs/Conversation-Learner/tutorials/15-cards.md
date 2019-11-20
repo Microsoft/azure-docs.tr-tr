@@ -1,7 +1,7 @@
 ---
-title: Konuşma Öğrenici modeliyle kartları kullanma hakkında bölüm 1 - Microsoft Bilişsel hizmetler | Microsoft Docs
+title: Conversation Learner modeliyle kartlar kullanma, 1. bölüm-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici modeliyle kartları kullanmayı öğrenin.
+description: Conversation Learner modeliyle kart kullanmayı öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,91 +10,92 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: d0b87597c506aca5c3b4f6f3815f58656203ac3c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 426d7c8de29abeb88833e94962a7291a641702ac
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66389513"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68703756"
 ---
-# <a name="how-to-use-cards-part-1-of-2"></a>Kart (Kısım 1 / 2) kullanma
+# <a name="how-to-use-cards-part-1-of-2"></a>Kartları kullanma (Bölüm 1/2)
 
-Bu öğreticide, ekleyebilir ve basit bir kart botunuzun içinde gösterilir.
+Bu öğreticide, bot 'unuza basit bir kartın nasıl ekleneceğini ve kullanılacağı gösterilmektedir.
 
 > [!NOTE]
-> Konuşma Öğrenici şu anda Bot başlatıldığı dizinde mevcut "kartları" adlı bir dizinde bulunmasını kart tanım dosyalarınızı bekliyor.
+> Conversation Learner Şu anda kart tanım dosyalarınızın, bot 'un başlatıldığı dizinde bulunan "kartlar" adlı bir dizinde bulunmasını bekliyor.
 
 ## <a name="video"></a>Video
 
-[![Kartları öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_Cards_Preview)](https://aka.ms/cl_Tutorial_v3_Cards)
+[![Kartlar öğreticisi önizlemesi](https://aka.ms/cl_Tutorial_v3_Cards_Preview)](https://aka.ms/cl_Tutorial_v3_Cards)
 
 ## <a name="requirements"></a>Gereksinimler
-Bu öğreticide, genel öğretici bot çalışıyor olması gerekir
+Bu öğreticide, genel öğretici bot 'ın çalışıyor olması gerekir
 
     npm run tutorial-general
 
 ## <a name="details"></a>Ayrıntılar
 
-Konuşmada bir seçenek belirlemek kullanıcının olanak tanıyan kullanıcı Arabirimi öğeleri kartlardır. 
+Kartlar, kullanıcının konuşmada bir seçenek seçmesine izin veren kullanıcı ARABIRIMI öğeleridir. 
 
-### <a name="open-the-demo"></a>Tanıtım açın
+### <a name="open-the-demo"></a>Tanıtımı açın
 
-Web kullanıcı Arabirimi "İçeri aktarma eğitimler" tıklayın ve "Öğreticisi-15-kartları" adlı modelini seçin.
+Web Kullanıcı arabiriminde "öğreticileri Içeri aktar" düğmesine tıklayın ve "öğretici-15-kartlar" adlı modeli seçin.
 
 ### <a name="the-card"></a>Kart
 
-Kart tanımıdır şu konumda: C:\<installedpath\>\src\cards\prompt.json.
+Kart tanımı şu konumdadır: C:\<InstallationPath\>\src\cards\prompt,JSON.
 
-Bu "kartları" dizininde kart tanımlarınızı bulmak sistem bekliyor.
+Sistem kart tanımlarınızı bu "kartlar" dizininde bulmayı bekler.
 
 ![](../media/tutorial13_prompt.PNG)
 
 > [!NOTE]
-> "TextBlock" ve "{{Soru}}" yer tutucu metin alanına yazın gövdesi dikkat edin.
-> İki gönderme düğmeler ve her biri için gönderilen metin vardır.
+> Gövde türü "TextBlock" ve "{{soru}}" yer tutucusunu metin alanında görebilirsiniz.
+> İki gönderme düğmesi ve her biri için gönderilen metin vardır.
 
 ### <a name="actions"></a>Eylemler
 
-Üç eylem oluşturduk. Aşağıda görebileceğiniz gibi bir kart olduğunda ilk eylem.
+Üç eylem oluşturduk. Aşağıda gördüğünüz gibi, ilk eylem bir karttır.
 
 ![](../media/tutorial13_actions.PNG)
 
-Diyelim ki kart eylem türünü nasıl oluşturulduğuna bakın:
+Kart eylem türünün nasıl oluşturulduğunu görelim:
 
 ![](../media/tutorial13_cardaction.PNG)
 
 > [!NOTE]
-> Kartta üç farklı parametreler - soru giriş, düğme 1 ve 2 düğmesi bulunur. Bu kart şablonu başvurular soru ve yanıtlarının girebileceğiniz öğeleridir. Ayrıca, başvuru ve varlıkları ya da metin ve varlıkların bir karışımını kullanabilirsiniz.
+> Kart üç farklı parametre içerir-soru girişi, düğme 1 ve düğme 2. Bu öğeler, soruyu ve ilgili yanıtları girdiğiniz karttaki şablon başvurulardır. Ayrıca varlıklara veya metin ve varlıkların bir karışımını ya da kullanabilirsiniz.
 
-Simgelerine kart nasıl göründüğünü gösterir.
+Göz simgesi, kartın nasıl göründüğünü gösterir.
 
-### <a name="practicing-creating-card-actions"></a>Oluşturma kartı eylemleri uygulayan
+### <a name="practicing-creating-card-actions"></a>Kart eylemleri oluşturma
 
-1. Sol panelde, "Eylemler" sonra "Yeni Eylem" düğmesine tıklayın.
-2. "Kart" seçin "Eylem türü."
-3. "Sor", "Şablon" listeden seçin.
-4. "Soru" alanını "sola veya sağa Git" yazın.
-5. "Button1" alanını "sol" yazın
-6. "Sağ" "button2" alanına yazın
-7. "İptal" düğmesine tıklayın.
+1. Sol bölmede, "eylemler" e ve ardından "yeni eylem" düğmesine tıklayın.
+2. "Eylem türü" için "kart" ı seçin.
+3. "Şablon" listesinden "sor" seçeneğini belirleyin.
+4. "Soru" alanına "sol veya sağ git" yazın
+5. "Button1" alanına "left" yazın
+6. "BUTTON2" alanına "Right" yazın
+7. "Iptal" düğmesine tıklayın.
 
-### <a name="train-dialog-using-an-adaptive-card"></a>Uyarlamalı kartlar kullanarak iletişim eğitin
+### <a name="train-dialog-using-an-adaptive-card"></a>Uyarlamalı kart kullanarak Iletişim kutusunu eğitme
 
-1. Sol panelde, "İletişim kutuları eğitme" ve ardından "Yeni Train iletişim kutusu" düğmesine tıklayın.
-2. Burada yazacaktır "Yazın, iletinizi...", sohbet panelinde türü "hi"
-3. "Puan Eylemler" düğmesine tıklayın.
-4. Yanıtı seçin "istemi: Soru: Sola veya sağa Git?"
-    - Simgelerine kart Önizleme için kullanılabilir
-5. Sohbet panelinde işlenmiş istemi "Sol" düğmesine tıklayın.
-6. "Puan Eylemler" düğmesine tıklayın.
-7. Yanıt, "Sol" seçin
+1. Sol bölmede "Iletişim kutularını eğitme" düğmesine ve ardından "yeni eğitme Iletişim kutusu" düğmesine tıklayın.
+2. Sohbet panelinde "iletinizi yazın..." ifadesini yazıp "Merhaba" yazın
+3. "Eylemleri puan" düğmesine tıklayın.
+4. Yanıt "sor: soru: Sola veya sağa git "
+    - Göz simgesi, kartın önizlemesi için kullanılabilir
+5. Sohbet panelinde, işlenen istemde "sol" düğmesine tıklayın.
+6. "Eylemleri puan" düğmesine tıklayın.
+7. "Sol" yanıtını seçin
 8. "Kaydet" düğmesine tıklayın.
-9. Yanıtı seçin "istemi: Soru: Sola veya sağa Git?"
-10. Sohbet panelinde işlenmiş istemi "Sağ" düğmesine tıklayın.
-11. "Puan Eylemler" düğmesine tıklayın.
-12. Yanıt, "Sağ" seçin
+9. Yanıt "sor: soru: Sola veya sağa git "
+10. Sohbet panelinde, işlenen istemde "sağ" düğmesine tıklayın.
+11. "Eylemleri puan" düğmesine tıklayın.
+12. "Sağ" yanıtını seçin
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Karma Botlar](./16-hybrid-bots.md)
+> [Karma botlar](./16-hybrid-bots.md)

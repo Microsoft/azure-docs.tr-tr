@@ -4,16 +4,16 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 05/27/2019
 ms.author: glenga
-ms.openlocfilehash: 8110d0a9d574c6691322df2162ca877b031cbc59
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: d697334fe56fb9133a06cee79067c60bc3a37281
+ms.sourcegitcommit: 3877b77e7daae26a5b367a5097b19934eb136350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67442265"
+ms.lasthandoff: 07/30/2019
+ms.locfileid: "68639156"
 ---
-Bağlama uzantıları yüklemek için en kolay yolu etkinleştirmektir [uzantı paketleri](../articles/azure-functions/functions-bindings-register.md#extension-bundles). Etkin, paketleri ile önceden tanımlanmış bir uzantı paketleri otomatik olarak yüklenir.
+Bağlama uzantılarını yüklemenin en kolay yolu, [uzantı](../articles/azure-functions/functions-bindings-register.md#extension-bundles)paketlerinin etkinleştirilme yöntemidir. Paketleri etkinleştirdiğinizde, önceden tanımlanmış bir uzantı paketleri kümesi otomatik olarak yüklenir.
 
-Uzantı paketleri etkinleştirmek için *host.json* dosya ve içeriğini aşağıdaki kod eşleşecek şekilde güncelleştirin:
+Uzantı paketleri 'ni etkinleştirmek için, Host. json dosyasını açın ve içeriğini aşağıdaki kodla eşleşecek şekilde güncelleştirin:
 
 ```json
 {

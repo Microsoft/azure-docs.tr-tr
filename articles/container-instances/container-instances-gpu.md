@@ -1,77 +1,77 @@
 ---
-title: GPU özellikli Azure container ınstances'a dağıtma
-description: GPU kaynakları üzerinde çalıştırılacak Azure container ınstances'a dağıtmayı öğrenin.
+title: GPU özellikli Azure Container Instances dağıtma
+description: GPU kaynaklarını kullanarak işlem yoğunluklu kapsayıcı uygulamaları çalıştırmak için Azure Container Instances 'ı dağıtmayı öğrenin.
 services: container-instances
 author: dlepow
-manager: jeconnoc
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
 ms.date: 04/17/2019
 ms.author: danlep
-ms.openlocfilehash: 5073b68f6ef3de330671e3ea25056e0cae976360
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 08a3cd8841b6b867a2dd22078fca3543d2067830
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60583851"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74147882"
 ---
-# <a name="deploy-container-instances-that-use-gpu-resources"></a>GPU kaynakları kullanan container Instances'ı dağıtma
+# <a name="deploy-container-instances-that-use-gpu-resources"></a>GPU kaynaklarını kullanan kapsayıcı örneklerini dağıtma
 
-Azure Container Instances hakkında belirli bilgi işlem açısından yoğun iş yüklerini çalıştırmak için dağıtma, [kapsayıcı grupları](container-instances-container-groups.md) ile *GPU kaynakları*. Grubundaki kapsayıcı örnekleri, NVIDIA Tesla Gpu'lar bir veya daha fazla CUDA gibi kapsayıcı iş yükleri ve uygulamalar derin öğrenme erişebilirsiniz.
+Azure Container Instances yoğun işlem yoğunluklu iş yüklerini çalıştırmak için, [kapsayıcı gruplarınızı](container-instances-container-groups.md) *GPU kaynaklarıyla*dağıtın. Gruptaki kapsayıcı örnekleri, CUDA ve derin öğrenme uygulamaları gibi kapsayıcı iş yüklerini çalıştırırken bir veya daha fazla NVıDıA Tesla GPU erişimine erişebilir.
 
-Bu makale kullanarak bir kapsayıcı grubu dağıttığınızda GPU kaynakları eklemek nasıl bir [YAML dosyası](container-instances-multi-container-yaml.md) veya [Resource Manager şablonu](container-instances-multi-container-group.md). Azure portalını kullanarak bir kapsayıcı örneği dağıttığınızda, GPU kaynakları da belirtebilirsiniz.
+Bu makalede, bir [YAML dosyası](container-instances-multi-container-yaml.md) veya [Kaynak Yöneticisi şablonu](container-instances-multi-container-group.md)kullanarak BIR kapsayıcı grubunu dağıtırken GPU kaynaklarının nasıl ekleneceği gösterilmektedir. Ayrıca, Azure portal kullanarak bir kapsayıcı örneği dağıtırken GPU kaynaklarını belirtebilirsiniz.
 
 > [!IMPORTANT]
-> Bu özellik şu anda önizlemededir ve bazı [sınırlamalar uygulanır](#preview-limitations). Önizlemeler, [ek kullanım koşullarını][terms-of-use] kabul etmeniz şartıyla kullanımınıza sunulur. Bu özelliğin bazı yönleri genel kullanıma açılmadan önce değişebilir.
+> Bu özellik şu anda önizleme aşamasındadır ve bazı [sınırlamalar geçerlidir](#preview-limitations). Önizlemeler, [ek kullanım koşullarını][terms-of-use] kabul etmeniz şartıyla kullanımınıza sunulur. Bu özelliğin bazı yönleri genel kullanıma açılmadan önce değişebilir.
 
 ## <a name="preview-limitations"></a>Önizleme sınırlamaları
 
-Önizleme aşamasında olan, GPU kaynakları kapsayıcı grupları kullanılırken aşağıdaki sınırlamalar geçerlidir. 
+Önizleme aşamasında, kapsayıcı gruplarında GPU kaynakları kullanılırken aşağıdaki sınırlamalar geçerlidir. 
 
 [!INCLUDE [container-instances-gpu-regions](../../includes/container-instances-gpu-regions.md)]
 
-Destek zaman içinde için ek bölgeler eklenecektir.
+Destek, zaman içinde ek bölgeler için eklenecektir.
 
-**Desteklenen işletim sistemi türleri**: Yalnızca Linux
+**Desteklenen işletim sistemi türleri**: yalnızca Linux
 
-**Ek sınırlamalar**: GPU kaynakları kullanılamaz, bir kapsayıcı grubuna dağıtırken bir [sanal ağ](container-instances-vnet.md).
+**Ek sınırlamalar**: bir kapsayıcı grubu [sanal bir ağa](container-instances-vnet.md)dağıtıldığında GPU kaynakları kullanılamaz.
 
-## <a name="about-gpu-resources"></a>GPU kaynaklar hakkında
+## <a name="about-gpu-resources"></a>GPU kaynakları hakkında
 
-### <a name="count-and-sku"></a>Sayısı ve SKU
+### <a name="count-and-sku"></a>Sayı ve SKU
 
-GPU'ları bir kapsayıcı örneği içinde kullanmak için belirtin bir *GPU kaynak* aşağıdaki bilgilerle:
+Bir kapsayıcı örneğinde GPU 'ları kullanmak için aşağıdaki bilgileri içeren bir *GPU kaynağı* belirtin:
 
-* **Sayısı** -Gpu'lar sayısı: **1**, **2**, veya **4**.
-* **SKU** -GPU SKU: **K80**, **P100**, veya **V100**. Her SKU tek bir NVIDIA Tesla GPU aşağıdaki Azure GPU etkin sanal makine aileleri eşler:
+* **Sayı** -GPU sayısı: **1**, **2**veya **4**.
+* **SKU** -GPU SKU 'Su: **K80**, **P100**veya **V100**. Her SKU, aşağıdaki Azure GPU etkin VM ailelerinde bulunan NVıDıA Tesla GPU ile eşlenir:
 
   | SKU | VM ailesi |
   | --- | --- |
-  | K80 | [NC](../virtual-machines/linux/sizes-gpu.md#nc-series) |
+  | K80 | [KSK](../virtual-machines/linux/sizes-gpu.md#nc-series) |
   | P100 | [NCv2](../virtual-machines/linux/sizes-gpu.md#ncv2-series) |
   | V100 | [NCv3](../virtual-machines/linux/sizes-gpu.md#ncv3-series) |
 
 [!INCLUDE [container-instances-gpu-limits](../../includes/container-instances-gpu-limits.md)]
 
-CPU ve bellek kaynakları GPU kaynakları dağıtırken, yukarıdaki tabloda gösterilen en yüksek değerleri en fazla iş yükü için uygun olarak ayarlayın. Bu GPU kaynaklar olmadan kapsayıcı gruplarındaki kullanılabilir CPU ve bellek kaynakları şu anda büyük değerler.  
+GPU kaynaklarını dağıttığınızda, önceki tabloda gösterilen en fazla değere kadar iş yüküne uygun CPU ve bellek kaynakları ayarlayın. Bu değerler, GPU kaynakları olmadan kapsayıcı gruplarında kullanılabilir olan CPU ve bellek kaynaklarından daha büyüktür.  
 
-### <a name="things-to-know"></a>Bilmeniz gerekenler
+### <a name="things-to-know"></a>Bilmemiz gerekenler
 
-* **Dağıtım süresini** -GPU kaynakları içeren bir kapsayıcı grubunun oluşturulması alır kadar **8-10 dakika**. Bu, sağlamak ve Azure'daki bir GPU VM yapılandırmak için ek süre kaynaklanır. 
+* **Dağıtım zamanı** -GPU kaynaklarını içeren bir kapsayıcı grubunun oluşturulması **8-10 dakikaya**kadar sürer. Bunun nedeni, Azure 'da bir GPU VM 'si sağlamak ve yapılandırmak için ek süredir. 
 
-* **Fiyatlandırma** - GPU kaynaklar olmadan kapsayıcı grupları, Azure faturaları üzerinde kullanılan kaynaklar için benzer *süresi* GPU kaynaklarla bir kapsayıcı grubunun. Süre kapsayıcı grubunun kapsayıcınızın ilk kapsayıcınızın görüntüsünü çekmek için süreye göre hesaplanır. Kapsayıcı grubu dağıtma süresini içermez.
+* **Fiyatlandırma** -GPU kaynakları olmadan kapsayıcı gruplarına benzer, Azure, GPU kaynaklarıyla bir kapsayıcı grubu *süresince* tüketilen kaynaklar için Azure faturaları. Süre, kapsayıcı grubu sonlanana kadar ilk kapsayıcının görüntüsünü çekme zamanından hesaplanır. Kapsayıcı grubunun dağıtılacağı zaman dahil değildir.
 
-  Bkz: [fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/container-instances/).
+  [Fiyatlandırma ayrıntılarına](https://azure.microsoft.com/pricing/details/container-instances/) bakın.
 
-* **CUDA sürücüleri** - Container Instances GPU kaynaklarla NVIDIA CUDA sürücüleriyle önceden sağlanmış ve kapsayıcı görüntüleri kullanabilmeniz için kapsayıcı çalışma zamanı, geliştirilen için CUDA iş yükleri.
+* **CUDA sürücüleri** -GPU kaynaklarıyla kapsayıcı ÖRNEKLERI, NVıDıA CUDA sürücüleriyle ve kapsayıcı çalışma zamanları ile önceden sağlanmış olduğundan CUDA iş yükleri için geliştirilmiş kapsayıcı görüntülerini kullanabilirsiniz.
 
-  Bu aşamada CUDA 9.0 destekliyoruz. Örneğin, temel görüntü Docker dosyanız için aşağıdaki kullanabilirsiniz:
-  * [nVidia/Cuda:9.0-Base-ubuntu16.04](https://hub.docker.com/r/nvidia/cuda/)
-  * [tensorflow/tensorflow: 1.12.0-gpu-py3](https://hub.docker.com/r/tensorflow/tensorflow)
+  Bu aşamada CUDA 9,0 destekliyoruz. Örneğin, Docker dosyanız için aşağıdaki temel görüntüleri kullanabilirsiniz:
+  * [NVIDIA/CUDA: 9.0-Base-Ubuntu 16.04](https://hub.docker.com/r/nvidia/cuda/)
+  * [TensorFlow/TensorFlow: 1.12.0-GPU-PY3](https://hub.docker.com/r/tensorflow/tensorflow)
     
 ## <a name="yaml-example"></a>YAML örneği
 
-GPU kaynakları eklemek için bir yol olan bir kapsayıcı grubu kullanarak dağıtmak için bir [YAML dosyası](container-instances-multi-container-yaml.md). Adlı yeni bir dosyaya aşağıdaki YAML'ye kopyalayın *gpu dağıtma aci.yaml*, ardından dosyayı kaydedin. Adlı bir kapsayıcı grubu bu YAML oluşturur *gpucontainergroup* K80 GPU ile bir kapsayıcı örneği belirtme. Örneği, örnek CUDA vektör toplama uygulaması çalışır. İş yükü çalıştırmak için yeterli kaynak isteklerdir.
+GPU kaynaklarını eklemenin bir yolu, bir [YAML dosyası](container-instances-multi-container-yaml.md)kullanarak bir kapsayıcı grubu dağıtmaktır. Aşağıdaki YAML 'yi *GPU-Deploy-aci. YAML*adlı yeni bir dosyaya kopyalayın ve ardından dosyayı kaydedin. Bu YAML, K80 GPU ile bir kapsayıcı örneği belirten *gpucontainergroup* adlı bir kapsayıcı grubu oluşturur. Örnek, örnek CUDA vektör ekleme uygulaması çalıştırır. Kaynak istekleri iş yükünü çalıştırmak için yeterlidir.
 
 ```YAML
 additional_properties: {}
@@ -93,13 +93,13 @@ properties:
   restartPolicy: OnFailure
 ```
 
-Kapsayıcı grubu dağıtma [az kapsayıcı oluşturma] [ az-container-create] YAML dosyası adını belirterek komutu `--file` parametresi. Bir kaynak grubu ve kapsayıcı grubu için bir konum adı gibi sağlamanız gereken *eastus* , GPU kaynakları destekler.  
+, `--file` parametresi için YAML dosya adını belirterek, [az Container Create][az-container-create] komutuyla kapsayıcı grubunu dağıtın. Bir kaynak grubunun adını ve *eastus* gibi bir kapsayıcı grubu için GPU kaynaklarını destekleyen bir konum sağlamanız gerekir.  
 
 ```azurecli
 az container create --resource-group myResourceGroup --file gpu-deploy-aci.yaml --location eastus
 ```
 
-Dağıtımın tamamlanması birkaç dakika sürer. Ardından, kapsayıcı başlar ve CUDA vektör toplama işlemi çalıştırır. Çalıştırma [az kapsayıcı günlüklerini] [ az-container-logs] günlük çıktısını görmek için komutu:
+Dağıtımın tamamlanması birkaç dakika sürer. Daha sonra kapsayıcı başlar ve bir CUDA vektör ekleme işlemini çalıştırır. Günlük çıktısını görüntülemek için [az Container logs][az-container-logs] komutunu çalıştırın:
 
 ```azurecli
 az container logs --resource-group myResourceGroup --name gpucontainergroup --container-name gpucontainer
@@ -116,9 +116,9 @@ Test PASSED
 Done
 ```
 
-## <a name="resource-manager-template-example"></a>Resource Manager şablonu örneği
+## <a name="resource-manager-template-example"></a>Kaynak Yöneticisi şablonu örneği
 
-Bir kapsayıcı grubu GPU kaynakları dağıtmak için başka bir yolu kullanmaktır bir [Resource Manager şablonu](container-instances-multi-container-group.md). Adlı bir dosya oluşturarak başlayın `gpudeploy.json`, içine aşağıdaki JSON kopyalayın. Bu örnek, bir kapsayıcı örneği çalıştıran bir V100 GPU dağıtır bir [TensorFlow](https://www.tensorflow.org/versions/r1.1/get_started/mnist/beginners) eğitim işini karşı [MNIST dataset](http://yann.lecun.com/exdb/mnist/). İş yükü çalıştırmak için yeterli kaynak isteklerdir.
+Bir kapsayıcı grubunu GPU kaynaklarıyla dağıtmanın bir başka yolu da [Kaynak Yöneticisi şablonu](container-instances-multi-container-group.md)kullanmaktır. `gpudeploy.json`adlı bir dosya oluşturarak başlayın, ardından aşağıdaki JSON öğesine kopyalayın. Bu örnek, bir V100 GPU ile, bir [TensorFlow](https://www.tensorflow.org/) eğitim işini, veri kümesine göre çalıştıran bir kapsayıcı örneği dağıtır. Kaynak istekleri iş yükünü çalıştırmak için yeterlidir.
 
 ```JSON
 {
@@ -170,13 +170,13 @@ Bir kapsayıcı grubu GPU kaynakları dağıtmak için başka bir yolu kullanmak
 }
 ```
 
-Şablon ile dağıtım [az grubu dağıtım oluşturma] [ az-group-deployment-create] komutu. Gibi bir bölgede oluşturulan bir kaynak grubu adı sağlamanız gereken *eastus* , GPU kaynakları destekler.
+[Az Group Deployment Create][az-group-deployment-create] komutuyla şablonu dağıtın. GPU kaynaklarını destekleyen *eastus* gibi bir bölgede oluşturulan bir kaynak grubunun adını sağlamanız gerekir.
 
 ```azurecli-interactive
 az group deployment create --resource-group myResourceGroup --template-file gpudeploy.json
 ```
 
-Dağıtımın tamamlanması birkaç dakika sürer. Ardından, kapsayıcıyı başlar ve TensorFlow işi çalıştırır. Çalıştırma [az kapsayıcı günlüklerini] [ az-container-logs] günlük çıktısını görmek için komutu:
+Dağıtımın tamamlanması birkaç dakika sürer. Ardından, kapsayıcı başlar ve TensorFlow işini çalıştırır. Günlük çıktısını görüntülemek için [az Container logs][az-container-logs] komutunu çalıştırın:
 
 ```azurecli
 az container logs --resource-group myResourceGroup --name gpucontainergrouprm --container-name gpucontainer
@@ -211,13 +211,13 @@ Adding run metadata for 999
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-GPU kaynakları kullanan pahalı olabileceği için uzun süre boyunca kapsayıcılarınızı beklenmedik bir şekilde çalıştırma emin olun. Azure portalında kapsayıcılarınızı izleyecek veya bir kapsayıcı grubu durumunu [az container show] [ az-container-show] komutu. Örneğin:
+GPU kaynaklarının kullanılması pahalı olabileceğinden, kapsayıcılarınızın uzun süreler boyunca beklenmedik şekilde çalışmadığından emin olun. Azure portal Kapsayıcılarınızı izleyin veya [az Container Show][az-container-show] komutuyla bir kapsayıcı grubunun durumunu denetleyin. Örneğin:
 
 ```azurecli
 az container show --resource-group myResourceGroup --name gpucontainergroup --output table
 ```
 
-İşiniz bittiğinde kapsayıcı örnekleri ile çalışma, oluşturduğunuz ve aşağıdaki komutlarla silin:
+Oluşturduğunuz kapsayıcı örnekleriyle çalışmayı tamamladığınızda, bunları aşağıdaki komutlarla silin:
 
 ```azurecli
 az container delete --resource-group myResourceGroup --name gpucontainergroup -y
@@ -226,8 +226,8 @@ az container delete --resource-group myResourceGroup --name gpucontainergrouprm 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Kullanarak bir kapsayıcı grubu dağıtma hakkında daha fazla bilgi bir [YAML dosyası](container-instances-multi-container-yaml.md) veya [Resource Manager şablonu](container-instances-multi-container-group.md).
-* Daha fazla bilgi edinin [GPU için iyileştirilmiş sanal makine boyutlarını](../virtual-machines/linux/sizes-gpu.md) azure'da.
+* [YAML dosyası](container-instances-multi-container-yaml.md) veya [Kaynak Yöneticisi şablonu](container-instances-multi-container-group.md)kullanarak bir kapsayıcı grubu dağıtma hakkında daha fazla bilgi edinin.
+* Azure 'da [GPU IYILEŞTIRILMIŞ VM boyutları](../virtual-machines/linux/sizes-gpu.md) hakkında daha fazla bilgi edinin.
 
 
 <!-- IMAGES -->

@@ -1,20 +1,16 @@
 ---
-title: Örnek - Depolama dosya şifrelemesi olun
-description: Bu örnek ilke tanımını, bu dosya şifrelemesi depolama hesapları için etkinleştirildi gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-depolama dosya şifrelemesini sağlayın
+description: Bu örnek ilke tanımı, depolama hesapları için dosya şifrelemenin etkinleştirilmesini gerektirir.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 78d1f14132d19b65f78638986661eef78a406734
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 0c0bb16d05b733ca7eabd665eab2ffea77de2b99
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545138"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74070061"
 ---
-# <a name="sample---ensure-storage-file-encryption"></a>Örnek - Depolama dosya şifrelemesi olun
+# <a name="sample---ensure-storage-file-encryption"></a>Örnek-depolama dosya şifrelemesini sağlayın
 
 Bu ilke, depolama hesapları için dosya şifrelemenin etkinleştirilmesini gerektirir.
 
@@ -28,7 +24,7 @@ Bu ilke, depolama hesapları için dosya şifrelemenin etkinleştirilmesini gere
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FStorage%2Fstorage-account-file-encryption%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FStorage%2Fstorage-account-file-encryption%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

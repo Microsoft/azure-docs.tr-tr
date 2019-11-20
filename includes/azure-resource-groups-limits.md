@@ -2,38 +2,38 @@
 author: tfitzmac
 ms.service: azure-resource-manager
 ms.topic: include
-ms.date: 04/19/2019
+ms.date: 08/19/2019
 ms.author: tomfitz
-ms.openlocfilehash: 8bd16378e9c82a011309c12cf241b59d03405a77
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 1190798b234f9c73e02fda41c03ffa296246be63
+ms.sourcegitcommit: 4d177e6d273bba8af03a00e8bb9fe51a447196d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188737"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71975352"
 ---
-| Resource | Varsayılan limit | Üst sınır |
+| Kaynak | Varsayılan sınır | Maksimum sınır |
 | --- | --- | --- |
-| Kaynak başına [kaynak grubu](../articles/azure-resource-manager/resource-group-overview.md#resource-groups), her kaynak türü |800 |Kaynak türü değişir |
-| Her kaynak grubu dağıtım geçmişine dağıtımları |800<sup>1</sup> |800 |
-| Dağıtım başına kaynak |800 |800 |
-| Yönetim kilitlerini benzersiz kapsam başına |20 |20 |
-| Kaynak veya kaynak grubu başına etiket sayısı |15 |15 |
-| Etiket anahtarı uzunluğunu |512 |512 |
-| Etiket değeri uzunluğunu |256 |256 |
+| Kaynak [grubu](../articles/azure-resource-manager/resource-group-overview.md#resource-groups)başına kaynaklar, kaynak türü başına |800 |Bazı kaynak türleri 800 sınırını aşabilir. [Kaynak grubu başına 800 örnek için sınırlı kaynaklara](../articles/azure-resource-manager/resources-without-rg-limit.md)bakın. |
+| Dağıtım geçmişinde kaynak grubu başına dağıtımlar |800<sup>1</sup> |800 |
+| Dağıtım başına kaynaklar |800 |800 |
+| Benzersiz kapsam başına yönetim kilitleri |20 |20 |
+| Kaynak veya kaynak grubu başına etiket sayısı |50 |50 |
+| Etiket anahtarı uzunluğu |512 |512 |
+| Etiket değeri uzunluğu |256 |256 |
 
-<sup>1</sup>800 dağıtımları her kaynak grubu sınırına ulaşırsanız, artık gerekmeyen geçmişinden dağıtımları silin. Dağıtım geçmişinden giriş silme dağıtılan kaynaklar etkilemez. İle geçmişinden girişleri silebilirsiniz [az grubu dağıtımı silin](/cli/azure/group/deployment) için Azure CLI veya [Remove-AzResourceGroupDeployment](/powershell/module/az.resources/remove-azresourcegroupdeployment) PowerShell'de.  Sürekli tümleştirme ve sürekli teslim (CI/CD) senaryo dağıtımları silmek için bir PowerShell otomatikleştiren betik bkz [remove-deployments.ps1](https://gist.github.com/bmoore-msft/ed33fb940dafb09380174b7fca57651f).
+<sup>1</sup> Kaynak grubu başına 800 dağıtım sınırına ulaşırsanız, artık gerekli olmayan geçmişten dağıtımları silin. Dağıtım geçmişinden bir girişin silinmesi dağıtılan kaynakları etkilemez. Daha fazla bilgi için bkz. [dağıtım sayısı 800 ' i aştığında hata çözümleme](../articles/azure-resource-manager/deployment-quota-exceeded.md).
 
 #### <a name="template-limits"></a>Şablon sınırları
 
-| Değer | Varsayılan limit | Üst sınır |
+| Değer | Varsayılan sınır | Maksimum sınır |
 | --- | --- | --- |
-| Parametreler |256 |256 |
-| Değişkenler |256 |256 |
-| Kaynakları (kopya sayısı da dahil olmak üzere) |800 |800 |
-| Çıkışlar |64 |64 |
+| Parametrelere |256 |256 |
+| Değişkenlerinin |256 |256 |
+| Kaynaklar (kopya sayısı dahil) |800 |800 |
+| Çıkışı |64 |64 |
 | Şablon ifadesi |24.576 karakter |24.576 karakter |
-| Dışarı aktarılan şablon kaynakları |200 |200 | 
-| Şablon boyutu |1 MB |1 MB |
+| Aktarılmış şablonlarda kaynaklar |200 |200 | 
+| Şablon boyutu |4 MB |4 MB |
 | Parametre dosyası boyutu |64 KB |64 KB |
 
-İç içe geçmiş bir şablon kullanarak bazı şablonu sınırlar aşabilir. Daha fazla bilgi için [Azure kaynakları dağıtılırken bağlı şablonları kullanma](../articles/azure-resource-manager/resource-group-linked-templates.md). Parametreler, değişkenleri veya çıkış sayısını azaltmak için değerlerden bir nesnesi olarak birleştirebilirsiniz. Daha fazla bilgi için [parametre olarak nesnelerin](../articles/azure-resource-manager/resource-manager-objects-as-parameters.md).
+İç içe geçmiş bir şablon kullanarak bazı şablon sınırlarını aşabilirsiniz. Daha fazla bilgi için bkz. [Azure kaynaklarını dağıtırken bağlı şablonları kullanma](../articles/azure-resource-manager/resource-group-linked-templates.md). Parametre, değişken veya çıkış sayısını azaltmak için, birkaç değeri bir nesne içinde birleştirebilirsiniz. Daha fazla bilgi için bkz. [nesneler parametreler olarak](../articles/azure-resource-manager/resource-manager-objects-as-parameters.md).

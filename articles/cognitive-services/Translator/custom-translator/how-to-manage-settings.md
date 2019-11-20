@@ -1,106 +1,106 @@
 ---
-title: Ayarlarını yönetmek nasıl? -Özel Translator
+title: Ayarları yönetme -Özel Translator
 titleSuffix: Azure Cognitive Services
-description: Ayarlarını yönetme, çalışma alanı oluşturun, çalışma alanı paylaşın ve özel Translator abonelik anahtarını yönetmek nasıl.
+description: Özel çevirmende ayarları yönetme, çalışma alanı oluşturma, çalışma alanı paylaşma ve abonelik anahtarını yönetme.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: d141b5dea8b0b12889559e6c80770379a6afac63
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: f90ada6b6cd1760b3b779010625f252533fa611d
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448351"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68595774"
 ---
 # <a name="how-to-manage-settings"></a>Ayarları yönetme
 
-İçinde özel Translator Ayarları sayfasında, yeni bir çalışma alanı oluşturun, çalışma alanınızda, paylaşma ve ekleyebilir veya Microsoft Translation abonelik anahtarınızı değiştirin.
+Özel çevirici ayarları sayfasında, yeni bir çalışma alanı oluşturabilir, çalışma alanınızı paylaşabilir ve Microsoft çeviri abonelik anahtarınızı ekleyebilir veya değiştirebilirsiniz.
 
 Ayarlar sayfasına erişmek için:
 
-1. Oturum [özel Translator](https://portal.customtranslator.azure.ai/) portalı.
-2. Özel Translator portalında Kenar çubuğunda dişli simgesine tıklayın.
+1. [Özel çevirmen](https://portal.customtranslator.azure.ai/) portalında oturum açın.
+2. Özel çevirmen portalında kenar çubuğundaki dişli simgesine tıklayın.
 
-    ![Bağlantı ayarlama](media/how-to/how-to-settings.png)
+    ![Ayar bağlantısı](media/how-to/how-to-settings.png)
 
-## <a name="associating-microsoft-translator-subscription"></a>Microsoft Translator abonelik ilişkilendirme
+## <a name="associating-microsoft-translator-subscription"></a>Microsoft Translator aboneliğini ilişkilendirme
 
-Microsoft Translator metin çevirisi API'si, eğitmeniz veya dağıtmanız modelleri çalışma alanınızla ilişkili bir abonelik anahtarı olması gerekir.
+Modelleri eğitmek veya dağıtmak için çalışma alanınız ile ilişkili bir Microsoft Translator Metin Çevirisi API'si abonelik anahtarınız olması gerekir.
 
-Bir aboneliğiniz yoksa, aşağıdaki adımları izleyin:
+Aboneliğiniz yoksa, aşağıdaki adımları izleyin:
 
-1. Microsoft Translator metin API'si için abone olun. Bu makalede, Microsoft Translator Text API için abone olunacağı gösterilmektedir.
-2. Translator aboneliğiniz için anahtarı not edin. Key1 ya da Key2 kabul edilir.
-3. Özel Translator portalına gidin.
+1. Microsoft Translator Metin Çevirisi API'si abone olun. Bu makalede, Microsoft Translator Metin Çevirisi API'si nasıl abone olunacağı gösterilmektedir.
+2. Çevirmen aboneliğinizin anahtarını aklınızda edin. KEY1 veya key2 seçeneklerinden biri kabul edilebilir.
+3. Özel çevirmen portalına geri gidin.
 
 ### <a name="add-existing-key"></a>Mevcut anahtarı Ekle
 
-1.  Çalışma alanınız için "Ayarlar" sayfasına gidin.
-2.  Anahtar Ekle seçeneğine tıklayın
+1.  Çalışma alanınızın "Ayarlar" sayfasına gidin.
+2.  Anahtar Ekle 'ye tıklayın
 
     ![Abonelik anahtarı ekleme](media/how-to/how-to-add-subscription-key.png)
 
-3. İletişim kutusunda, translator aboneliğiniz için anahtarı girin ve ardından "Ekle" düğmesine tıklayın.
+3. İletişim kutusunda, Translator aboneliğiniz için anahtarı girin ve ardından "Ekle" düğmesine tıklayın.
 
     ![Abonelik anahtarı ekleme](media/how-to/how-to-add-subscription-key-dialog.png)
-4.  Bir anahtarı ekledikten sonra değiştirmek veya herhangi bir zamanda anahtarı silin.
+4.  Bir anahtar ekledikten sonra, anahtarı dilediğiniz zaman değiştirebilir veya silebilirsiniz.
 
-    ![Abonelik anahtarı Ekle](media/how-to/subscription-key-after-add.png)
+    ![Ekleme sonrasında abonelik anahtarı](media/how-to/subscription-key-after-add.png)
 
-## <a name="manage-your-workspace"></a>Çalışma alanınızı yönetme
+## <a name="manage-your-workspace"></a>Çalışma alanınızı yönetin
 
-Bir çalışma alanı oluşturma ve özel çeviri sisteminizi oluşturmak için bir çalışma alanıdır. Bir çalışma alanı, birden çok proje, modelleri ve belgeleri içerebilir.
+Çalışma alanı, özel çeviri sisteminizi oluşturmaya ve oluşturmaya yönelik bir çalışma alanıdır. Bir çalışma alanı birden fazla proje, model ve belge içerebilir.
 
-Farklı bir iş parçası farklı kişilerle paylaşılması gerekiyorsa, sonra birden çok çalışma alanı oluşturmayı yararlı olabilir.
+Çalışmanızın farklı bir kısmının farklı kişilerle paylaşılması gerekiyorsa, birden çok çalışma alanı oluşturmak yararlı olabilir.
 
 ## <a name="create-a-new-workspace"></a>Yeni bir çalışma alanı oluşturma
 
-1.  Çalışma alanı "Ayarlar" sayfasına gidin.
-2.  "Yeni çalışma alanı" tıklayın "yeni çalışma alanı oluşturma" bölümünde düğmesi.
+1.  Çalışma alanı "ayarları" sayfasına gidin.
+2.  "Yeni çalışma alanı oluştur" bölümünde "yeni çalışma alanı" düğmesine tıklayın.
 
     ![Yeni çalışma alanı oluşturma](media/how-to/create-new-workspace.png)
 
-4.  İletişim kutusunda, yeni bir çalışma alanı adını girin.
+4.  İletişim kutusunda yeni çalışma alanının adını girin.
 5.  "Oluştur" a tıklayın.
 
-    ![Yeni çalışma alanı iletişim kutusu oluşturma](media/how-to/create-new-workspace-dialog.png)
+    ![Yeni çalışma alanı oluştur iletişim kutusu](media/how-to/create-new-workspace-dialog.png)
 
-## <a name="share-your-workspace"></a>Çalışma alanınızda paylaşın
+## <a name="share-your-workspace"></a>Çalışma alanınızı paylaşma
 
-Farklı bir iş parçası farklı kişilerle paylaşılması gerekiyorsa özel Translator, çalışma alanınızı başkalarıyla paylaşabilirsiniz.
+Özel çevirmende, çalışmanızın farklı bir kısmının farklı kişilerle paylaşılması gerekiyorsa, çalışma alanınızı başkalarıyla paylaşabilirsiniz.
 
-1.  Çalışma alanı "Ayarlar" sayfasına gidin.
-2.  "Paylaşımı ayarları" bölümünde "Paylaşım" düğmesine tıklayın.
+1.  Çalışma alanı "ayarları" sayfasına gidin.
+2.  "Paylaşım ayarları" bölümünde "paylaşım" düğmesine tıklayın.
 
-    ![Çalışma alanı paylaşın](media/how-to/share-workspace.png)
+    ![Çalışma alanını paylaşma](media/how-to/share-workspace.png)
 
-3.  İletişim kutusunda şununla paylaşıldı: Bu çalışma alanını istediğiniz e-posta adreslerini virgülle ayrılmış bir listesini girin. Söz konusu kişinin e-posta adresiyle paylaştığınızdan emin olun özel Translator ile oturum açmak için kullanır. Ardından, uygun paylaşım izni düzeyini seçin.
+3.  İletişim kutusunda, bu çalışma alanının paylaşılacağını istediğiniz, virgülle ayrılmış bir e-posta adresi listesi girin. İle özel çevirmende oturum açmak için kişinin kullandığı e-posta adresiyle paylaşımda olduğunuzdan emin olun. Ardından uygun paylaşım düzeyini seçin.
 
-4.  Çalışma alanınızı varsayılan adı "Çalışma Alanım" hala varsa, çalışma alanınızı paylaşmadan önce değiştirmeniz gerekir.
+4.  Çalışma alanınız "My Workspace" varsayılan adına sahipse, çalışma alanınızı paylaşmadan önce değiştirmeniz gerekecektir.
 5.  "Kaydet" e tıklayın.
 
 ## <a name="sharing-permissions"></a>Paylaşım izinleri
 
-1.  **Okuyucu:** Çalışma alanında bir okuyucu çalışma alanındaki tüm bilgileri görüntülemek mümkün olacaktır.
+1.  **Okuyucu** Çalışma alanındaki bir okuyucu, çalışma alanındaki tüm bilgileri görüntüleyebilecektir.
 
-2.  **Düzenleyen:** Çalışma alanında bir düzenleyici belgelere ekleme, modelleri eğitme ve belgeler ve projeler silmek mümkün olacaktır. Bir abonelik anahtarı ekleyebilir ancak olamaz değiştirme ile çalışma alanını paylaşan, çalışma alanını silmek veya çalışma alanı adı değiştirin.
+2.  **Düzenleyen** Çalışma alanındaki bir düzenleyici belge ekleyebilir, modelleri eğitebilir ve belge ve projeleri silebilir. Abonelik anahtarı ekleyebilirler, ancak çalışma alanının kimlerle paylaşıldığını değiştiremezler, çalışma alanını silebilir veya çalışma alanı adını değiştirebilirsiniz.
 
-3.  **Sahibi:** Sahibi, çalışma alanına tam izinleri vardır.
+3.  **İnde** Bir sahibin çalışma alanı üzerinde tam izinleri vardır.
 
-## <a name="change-sharing-permission"></a>Paylaşım izni Değiştir
+## <a name="change-sharing-permission"></a>Paylaşım iznini Değiştir
 
-Bir çalışma alanı paylaşıldığında, bu çalışma alanı paylaşıldığı tüm e-posta adreslerini "Paylaşımı ayarları" bölümünde gösterilir. Çalışma alanına erişim sahibi olması durumunda her e-posta adresi izinlerini paylaşımı mevcut değiştirebilirsiniz.
+Bir çalışma alanı paylaşıldığında, "paylaşım ayarları" bölümü, bu çalışma alanının paylaşıldığı tüm e-posta adreslerini gösterir. Çalışma alanına sahip erişiminiz varsa, her bir e-posta adresi için varolan paylaşım iznini değiştirebilirsiniz.
 
-1.  Her e-posta "Paylaşımı ayarları" bölümünde geçerli bir izin düzeyi bir açılan menü görüntüler.
+1.  Her e-posta için "paylaşım ayarları" bölümünde, bir açılan menü, geçerli izin düzeyini gösterir.
 
-2.  Açılan menüsüne tıklayın ve bu e-posta adresine atamak istediğiniz yeni izin düzeyini seçin.
+2.  Açılır menüye tıklayın ve bu e-posta adresine atamak istediğiniz yeni izin düzeyini seçin.
 
-    ![Paylaşım izni ayarları](media/how-to/sharing-permission-settings.png)
+    ![İzin ayarlarını paylaşma](media/how-to/sharing-permission-settings.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi [çalışma ve projeyi geçirmek nasıl](how-to-migrate.md) gelen [Microsoft Translator Hub](https://hub.microsofttranslator.com)
+- [Çalışma alanınızı ve projenizi](how-to-migrate.md) [Microsoft Translator hub 'ından](https://hub.microsofttranslator.com) nasıl geçirebileceğinizi öğrenin

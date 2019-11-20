@@ -1,7 +1,7 @@
 ---
-title: Video Indexer - Azure markaları modelinde özelleştirme
-titlesuffix: Azure Media Services
-description: Bu makalede, bir Video Indexer markaları modeli nedir ve nasıl özelleştireceğinizi genel bir bakış sağlar.
+title: Video Indexer bir marka modelini özelleştirme-Azure
+titleSuffix: Azure Media Services
+description: Bu makale, Video Indexer bir marka modeli nedir ve özelleştirmeyi özelleştirmek için bir genel bakış sunar.
 services: media-services
 author: anikaz
 manager: johndeu
@@ -10,31 +10,31 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 05/15/2019
 ms.author: anzaman
-ms.openlocfilehash: 863dbd9a6044ee33ae39ac9693a7d4f74382b9c7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ca3d825fb2f4184448cc279d9408f47ad4ad004a
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65799668"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838367"
 ---
-# <a name="customize-a-brands-model-in-video-indexer"></a>Video Indexer markaları modelinde özelleştirme
+# <a name="customize-a-brands-model-in-video-indexer"></a>Video Indexer bir markalar modeli özelleştirme
 
-Video Indexer, video ve ses içeriği ölçeklemek ve dizin oluşturma sırasında markaya algılama konuşma ve görsel metin destekler. Bahsetme ürünleri, hizmetleri, marka algılama özelliğini tanımlar ve şirketler Bing'in markaları veritabanı tarafından önerilen. Örneğin, Microsoft bir video veya ses içeriğini belirtilen veya bir video visual metinde görünür gerekiyorsa, Video Indexer, bir marka içerik olarak algılar. Markaları bağlamını kullanan diğer terimlerden disambiguated.
+Video Indexer, video ve ses içeriğinin dizin oluşturma ve yeniden dizin oluşturma sırasında konuşma ve görsel metinden marka algılamayı destekler. Marka algılama özelliği, Bing 'ün markalar veritabanı tarafından önerilen ürünlerin, hizmetlerin ve şirketlerin bahsetmelerini belirler. Örneğin, Microsoft bir video veya ses içeriğinde bahsedildiğinde veya videoda görsel metin gösteriyorsa, Video Indexer içeriği bir marka olarak algılar. Markalar, bağlamı kullanılarak diğer terimlerden ayırt edilir.
 
-Marka algılama çok çeşitli içeriği Arşiv ve bulma, bağlamsal reklam, sosyal medya analizi gibi iş senaryosu için kullanışlıdır, perakende analizi ve daha birçok rekabet. Video Indexer marka algılama, konuşma ve Bing'e markaları veritabanını kullanarak görsel metin özelleştirme yanı sıra dizin marka bahsetmeleri her Video Indexer hesabınız için özel bir markaları modeli oluşturarak sağlar. Özel markaları model özellik Video Indexer veritabanından Bing markaları hariç engeller markaları algılandı (aslında markaları, bloke liste oluşturmaya) belirli markaları algılar ve parçası olması gereken markaları dahil et kullanılıp kullanılmayacağını seçmenize olanak sağlar, (aslında markaları beyaz listesi oluşturma) Bing'e markaları veritabanında olmayabilir modeli. Oluşturduğunuz özel markaları model yalnızca model oluşturulduğu hesapta kullanılabilir olacak.
+Marka algılama, içerik Arşivi ve bulma, bağlamsal reklam, Sosyal Medya Analizi, perakende rekabet analizi ve çok daha fazlası gibi çok çeşitli iş senaryolarında faydalıdır. Video Indexer marka algılama, Bing 'in markalar veritabanının yanı sıra her bir Video Indexer hesabı için özel bir markalar modeli oluşturarak özelleştirerek marka bahsetmelerini ve görsel metinleri dizmenizi sağlar. Özel markalar modeli özelliği, Bing markalar veritabanından markalar belirleyip algılamadığına, belirli markaların algılanarak dışlanVideo Indexer mayacağını (temel olarak siyah bir marka listesi oluşturarak) ve bir parçası olması gereken markalar dahil etmenize olanak tanır Bing 'ün markalar veritabanında bulunmayabilir (aslında bir markaların beyaz listesini oluşturma). Oluşturduğunuz özel markalar modeli yalnızca modeli oluşturduğunuz hesapta kullanılabilir olacaktır.
 
-## <a name="out-of-the-box-detection-example"></a>Dışında kutusu algılama örneği
+## <a name="out-of-the-box-detection-example"></a>Kullanıma hazır algılama örneği
 
-İçinde [Microsoft Build 2017 2. gün](https://www.videoindexer.ai/media/ed6ede78ad/) sunumunu ve marka "Microsoft Windows" birden çok kez görünür. Bazen transkripti bazen görsel metin ve hiçbir zaman olarak aynen. Video Indexer ile yüksek düzeyde hassasiyet bir terimi aslında marka bağlamı, üzerinde 90 k hazır markaları kapsayan ve sürekli güncelleştirme dayalı olduğunu algılar. 02:25, Video Indexer, konuşma gelen marka algılar ve daha sonra tekrar 02:40 gelen görsel metin, hangi windows logo parçasıdır.
+[Microsoft Build 2017 gün 2](https://www.videoindexer.ai/media/ed6ede78ad/) sunusunda, "Microsoft Windows" markası birden çok kez görünür. Bazen, bazen görsel metin olarak ve hiçbir zaman tam olarak yazılı olarak yazı. Video Indexer, bir terimin bağlam temelinde gerçekten marka halinde olduğunu ve en fazla 90K markalarını ve sürekli olarak güncelleştirilmesini algılar. 02:25 ' de Video Indexer, konuşma ve Windows logosunun bir parçası olan görsel metinden daha sonra yeniden 02:40 ' de bir marka algılar.
 
-![Markaları genel bakış](./media/content-model-customization/brands-overview.png)
+![Markalara genel bakış](./media/content-model-customization/brands-overview.png)
 
-Yapı bağlamında windows hakkında konuşmak bağlamından belirsizliğinin ortadan kaldırılmasını ne yapılacağını bildiğiniz Gelişmiş Machine Learning algoritmaları temel kutu, Apple, Fox, vs. için bir marka ve aynı olarak "Windows" sözcüğü algılamaz. Marka algılaması bizim desteklenen tüm dillerde çalışır. İçin burayı tıklatın [tam Microsoft Build 2017 2. gün açılış konuşması videosu ve dizin](https://www.videoindexer.ai/media/ed6ede78ad/).
+Oluşturma bağlamında Windows hakkında konuşmak, "Windows" sözcüğünü marka olarak algılamaz ve Box, Apple, Fox, vb. için aynı şekilde, bağlamdan nasıl ayırt leyeceğinizi bilen gelişmiş Machine Learning algoritmalarına dayanır. Marka algılama, tüm desteklenen dillerimiz için geçerlidir. [Tam Microsoft Build 2017 gün 2 açılış video ve dizini](https://www.videoindexer.ai/media/ed6ede78ad/)için buraya tıklayın.
 
-Kendi markaları getirmek için sonraki adımları denetleyin.
+Kendi markalarınızı getirmek için sonraki adımlara göz atın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Markaları modeli API'lerini kullanarak özelleştirme](customize-brands-model-with-api.md)
+[API 'Leri kullanarak markalar modelini özelleştirme](customize-brands-model-with-api.md)
 
-[Web sitesini kullanarak markaları modeli özelleştirme](customize-brands-model-with-website.md)
+[Web sitesini kullanarak markalar modelini özelleştirme](customize-brands-model-with-website.md)

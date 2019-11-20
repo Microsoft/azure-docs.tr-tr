@@ -1,6 +1,6 @@
 ---
-title: Cihaz uygulamasında Node.js IOT Hub cihaz akışları (Önizleme) aracılığıyla kullanıcılara | Microsoft Docs
-description: Bu hızlı başlangıçta, bir IOT cihazı ile bir cihaz akış iletişim kuran bir Node.js Hizmet tarafı uygulamalar çalışır.
+title: Azure IoT Hub cihaz akışları ile Node. js ' de cihaz uygulamasıyla iletişim kurma
+description: Bu hızlı başlangıçta, bir cihaz akışı aracılığıyla IoT cihazıyla iletişim kuran bir Node. js hizmet tarafı uygulaması çalıştıracaksınız.
 author: robinsh
 ms.service: iot-hub
 services: iot-hub
@@ -9,32 +9,32 @@ ms.topic: quickstart
 ms.custom: mvc
 ms.date: 03/14/2019
 ms.author: robinsh
-ms.openlocfilehash: 74a9e5e6be326bf9cef3dc6d26594b80491deb3e
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 538e04d7ae4f6528c26762a8efac06d02b4f86bc
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67446056"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083740"
 ---
-# <a name="quickstart-communicate-to-a-device-application-in-nodejs-via-iot-hub-device-streams-preview"></a>Hızlı Başlangıç: Node.js IOT Hub cihaz akışları (Önizleme) ile bir cihaz uygulaması için iletişim
+# <a name="quickstart-communicate-to-a-device-application-in-nodejs-via-iot-hub-device-streams-preview"></a>Hızlı başlangıç: IoT Hub cihaz akışları aracılığıyla Node. js ' de bir cihaz uygulamasıyla Iletişim kurma (Önizleme)
 
 [!INCLUDE [iot-hub-quickstarts-3-selector](../../includes/iot-hub-quickstarts-3-selector.md)]
 
-Microsoft Azure IOT Hub cihaz akışları olarak şu anda destekleyen bir [önizleme özelliği](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Microsoft Azure IoT Hub Şu anda cihaz akışlarını [Önizleme özelliği](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)olarak desteklemektedir.
 
-[IOT Hub cihaz akışları](./iot-hub-device-streams-overview.md) güvenli ve güvenlik duvarı uyumlu bir şekilde iletişim kurmak hizmet ve cihaz uygulamalarınıza izin verin. Genel Önizleme süresince Node.js SDK'sı yalnızca hizmet tarafında cihaz akışlarını destekler. Sonuç olarak, bu hızlı başlangıçta, yalnızca hizmet tarafı uygulamayı çalıştırmak için yönergeleri kapsar. Şu hızlı başlangıçlarda birinden bir eşlik eden cihaz tarafında uygulama çalıştırmalısınız:
+[Cihaz akışları IoT Hub](./iot-hub-device-streams-overview.md) hizmet ve cihaz uygulamalarının güvenli ve güvenlik duvarı kolay bir şekilde iletişim kurmasına olanak tanır. Genel Önizleme sırasında Node. js SDK yalnızca hizmet tarafında cihaz akışlarını destekler. Sonuç olarak, bu hızlı başlangıç yalnızca hizmet tarafı uygulamasını çalıştırma yönergelerini ele alır. Aşağıdaki hızlı başlangıçlardan biri ile birlikte bir cihaz tarafı uygulaması çalıştırmalısınız:
 
-* [C uygulamalarında cihaz IOT Hub cihaz akışları aracılığıyla iletişim kurar](./quickstart-device-streams-echo-c.md)
+* [IoT Hub cihaz akışları aracılığıyla C 'de cihaz uygulamalarıyla iletişim kurma](./quickstart-device-streams-echo-c.md)
 
-* [Cihaz uygulamaları kullanıcılara C# IOT Hub cihaz akışları aracılığıyla](./quickstart-device-streams-echo-csharp.md).
+* [IoT Hub cihaz akışlarındaki C# cihaz uygulamalarıyla iletişim kurun](./quickstart-device-streams-echo-csharp.md).
 
-Bu hızlı başlangıçta Hizmet tarafı Node.js uygulaması aşağıdaki işlevlere sahiptir:
+Bu hızlı başlangıçta hizmet tarafı Node. js uygulaması aşağıdaki işlevlere sahiptir:
 
-* IOT cihaz bir cihaz akış oluşturur.
+* IoT cihazına bir cihaz akışı oluşturur.
 
-* Komut satırından giriş okur ve geri echo cihaz uygulamaya gönderir.
+* Komut satırından girişi okur ve cihaz uygulamasına gönderir ve bunu yeniden yankılendirilecektir.
 
-Kod, veri göndermek ve almak için nasıl kullanılacağını yanı sıra, bir cihaz akış başlatma işlemi gösterilecektir.
+Kod, bir cihaz akışının başlatma işlemini ve veri göndermek ve almak için nasıl kullanılacağını gösterir.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
@@ -42,23 +42,24 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Cihaz akışları şu anda önizlemesidir yalnızca IOT hub'ları aşağıdaki bölgelerde oluşturulan için desteklenir:
+Cihaz akışlarının önizlemesi Şu anda yalnızca şu bölgelerde oluşturulan IoT Hub 'Lar için desteklenir:
 
-*  **Orta ABD**
+  * Orta ABD
+  * EUAP Orta ABD
+  * Kuzey Avrupa
+  * Güneydoğu Asya
 
-*  **Orta ABD EUAP**
+Bu hızlı başlangıçta hizmet tarafı uygulamasını çalıştırmak için, geliştirme makinenizde Node. js ile v10 arasındaki. x. x veya üzeri gerekir.
 
-Bu hızlı başlangıçta Hizmet tarafı uygulamayı çalıştırmak için geliştirme makinenizi Node.js v10.x.x veya sonraki bir sürümü gerekir.
-
-Node.js için birden çok platformdan indirebileceğiniz [Nodejs.org](https://nodejs.org).
+[NodeJS.org](https://nodejs.org)adresinden birden çok platform için Node. js ' ye indirebilirsiniz.
 
 Aşağıdaki komutu kullanarak geliştirme makinenizde geçerli Node.js sürümünü doğrulayabilirsiniz:
 
-```
+```cmd/sh
 node --version
 ```
 
-Microsoft Azure IOT uzantısı için Azure CLI Cloud Shell Örneğinize eklemek için aşağıdaki komutu çalıştırın. IOT uzantısı, Azure CLI için IOT Hub, IOT Edge ve IOT cihaz sağlama hizmeti (DPS) belirli komutları ekler.
+Azure CLı için Microsoft Azure IoT uzantısını Cloud Shell örneğinize eklemek için aşağıdaki komutu çalıştırın. IOT uzantısı, Azure CLı 'ye IoT Hub, IoT Edge ve IoT cihaz sağlama hizmeti (DPS) komutları ekler.
 
 ```azurecli-interactive
 az extension add --name azure-cli-iot-ext
@@ -68,73 +69,73 @@ az extension add --name azure-cli-iot-ext
 
 ## <a name="create-an-iot-hub"></a>IoT hub oluşturma
 
-Önceki tamamladıysanız [hızlı başlangıç: Bir IOT hub'ına bir CİHAZDAN telemetri gönderme](quickstart-send-telemetry-node.md), bu adımı atlayabilirsiniz.
+Önceki [Hızlı Başlangıç: Bir cihazdan IoT hub’a telemetri gönderme](quickstart-send-telemetry-node.md) öğreticisini tamamladıysanız bu adımı atlayabilirsiniz.
 
 [!INCLUDE [iot-hub-include-create-hub-device-streams](../../includes/iot-hub-include-create-hub-device-streams.md)]
 
 ## <a name="register-a-device"></a>Cihaz kaydetme
 
-Önceki tamamladıysanız [hızlı başlangıç: Bir IOT hub'ına bir CİHAZDAN telemetri gönderme](quickstart-send-telemetry-node.md), bu adımı atlayabilirsiniz.
+Önceki [Hızlı Başlangıç: Bir cihazdan IoT hub’a telemetri gönderme](quickstart-send-telemetry-node.md) öğreticisini tamamladıysanız bu adımı atlayabilirsiniz.
 
 Bir cihazın bağlanabilmesi için IoT hub’ınıza kaydedilmesi gerekir. Bu hızlı başlangıçta Azure Cloud Shell kullanarak bir simülasyon cihazı kaydedeceksiniz.
 
-1. Cihaz kimliği oluşturmak için Azure Cloud Shell'de aşağıdaki komutu çalıştırın.
+1. Cihaz kimliğini oluşturmak için Azure Cloud Shell aşağıdaki komutu çalıştırın.
 
-   **YourIoTHubName**: Aşağıda bu yer tutucu IOT hub'ınız için seçtiğiniz adı ile değiştirin.
+   **Youriothubname**: aşağıdaki yer tutucuyu IoT Hub 'ınız için seçtiğiniz adla değiştirin.
 
-   **Cihazım**: Bu, kayıtlı bir cihaz için verilen addır. Cihazım gösterildiği gibi kullanın. Cihazınız için farklı bir ad seçerseniz bu makalenin geri kalan bölümünde aynı adı kullanmanız ve örnek uygulamaları çalıştırmadan önce bunlarda da cihaz adını güncelleştirmeniz gerekir.
+   **Mydevice**: Bu, kaydetmekte olduğunuz cihazın adıdır. Aşağıda gösterildiği gibi **Mydevice** kullanılması önerilir. Cihazınız için farklı bir ad seçerseniz, bu adı da bu makalede kullanmanız gerekir ve bunları çalıştırmadan önce örnek uygulamalarda cihaz adını güncelleştirin.
 
     ```azurecli-interactive
-    az iot hub device-identity create --hub-name YourIoTHubName --device-id MyDevice
+    az iot hub device-identity create --hub-name {YourIoTHubName} --device-id MyDevice
     ```
 
 2. Arka uç uygulamasının IoT hub’ınıza bağlanmasına ve iletileri almasına olanak sağlamak için bir *hizmet bağlantı dizesi* de gerekir. Aşağıdaki komut, IoT hub'ınız için hizmeti bağlantı dizesini alır:
 
-    **YourIoTHubName**: Aşağıda bu yer tutucu IOT hub'ınız için seçtiğiniz adı ile değiştirin.
+    **Youriothubname**: aşağıdaki yer tutucuyu IoT Hub 'ınız için seçtiğiniz adla değiştirin.
 
     ```azurecli-interactive
-    az iot hub show-connection-string --policy-name service --name YourIoTHubName
+    az iot hub show-connection-string --policy-name service --name {YourIoTHubName} --output table
     ```
 
-    Şuna benzer döndürülen değeri not edin:
+    Daha sonra bu hızlı başlangıçta kullanılmak üzere döndürülen hizmet bağlantı dizesine göz önünde edin. Aşağıdaki örneğe benzer şekilde görünür:
 
    `"HostName={YourIoTHubName}.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey={YourSharedAccessKey}"`
 
-## <a name="communicate-between-device-and-service-via-device-streams"></a>Cihaz ve hizmet aracılığıyla cihaz akışları arasında iletişim
+## <a name="communicate-between-device-and-service-via-device-streams"></a>Cihaz akışları aracılığıyla cihaz ve hizmet arasında iletişim kurma
 
-Bu bölümde, hem cihaz tarafında uygulama hem de hizmet tarafı uygulamayı çalıştırın ve ikisi arasındaki iletişim.
+Bu bölümde hem cihaz tarafı uygulamasını hem de hizmet tarafı uygulamasını çalıştırırsınız ve iki arasında iletişim kurabilirsiniz.
 
-### <a name="run-the-device-side-application"></a>Aygıt tarafı uygulamayı çalıştırın
+### <a name="run-the-device-side-application"></a>Cihaz tarafı uygulamayı çalıştırma
 
-Daha önce belirtildiği gibi IOT Hub Node.js SDK'sı hizmet tarafında yalnızca cihaz akışlarını destekler. Aygıt tarafı uygulama için bu hızlı başlangıçlardan birinde eşlik eden cihaz programı kullanın:
+Daha önce belirtildiği gibi, IoT Hub Node. js SDK yalnızca hizmet tarafında cihaz akışlarını destekler. Cihaz tarafı bir uygulama için, bu hızlı başlangıçlarda bulunan cihaz programlarından birini kullanın:
 
-   * [C uygulamalarında cihaz IOT Hub cihaz akışları aracılığıyla iletişim kurar](./quickstart-device-streams-echo-c.md)
+   * [IoT Hub cihaz akışları aracılığıyla C 'de cihaz uygulamalarıyla iletişim kurma](./quickstart-device-streams-echo-c.md)
 
-   * [Cihaz uygulamaları kullanıcılara C# aracılığıyla IOT Hub cihaz akışları](./quickstart-device-streams-echo-csharp.md)
+   * [IoT Hub cihaz akışları C# aracılığıyla cihaz uygulamalarıyla iletişim kurma](./quickstart-device-streams-echo-csharp.md)
 
-Aygıt tarafı uygulamayı sonraki adıma devam etmeden önce çalıştığından emin olun.
+Sonraki adıma geçmeden önce cihaz tarafı uygulamasının çalıştığından emin olun.
 
-### <a name="run-the-service-side-application"></a>Hizmet tarafı uygulamayı çalıştırın
+### <a name="run-the-service-side-application"></a>Hizmet tarafı uygulamasını çalıştırma
 
-Aygıt tarafı uygulamayı çalıştıran varsayıldığında, node.js'de Hizmet tarafı uygulamayı çalıştırmak için aşağıdaki adımları izleyin:
+Cihaz tarafı uygulamasının çalıştığını varsayarsak, Node. js ' de hizmet tarafı uygulamasını çalıştırmak için bir yerel Terminal penceresinde aşağıdaki adımları izleyin:
 
-* Ortam değişkenleri olarak, cihaz kimliği ve hizmet kimlik bilgilerini sağlayın.
+* Hizmet kimlik bilgilerinizi ve cihaz KIMLIĞINIZI ortam değişkenleri olarak sağlayın.
  
-   ```
+   ```cmd/sh
    # In Linux
-   export IOTHUB_CONNECTION_STRING="<provide_your_service_connection_string>"
+   export IOTHUB_CONNECTION_STRING="{ServiceConnectionString}"
    export STREAMING_TARGET_DEVICE="MyDevice"
 
    # In Windows
-   SET IOTHUB_CONNECTION_STRING=<provide_your_service_connection_string>
+   SET IOTHUB_CONNECTION_STRING={ServiceConnectionString}
    SET STREAMING_TARGET_DEVICE=MyDevice
    ```
   
-   Değişiklik `MyDevice` cihazınız için seçtiğiniz cihaz kimliği.
+   ServiceConnectionString yer tutucusunu, hizmet bağlantı dizeniz ile eşleşecek şekilde değiştirin **ve daha** sonra farklı bir ad verırsenız cihaz Kimliğinizle eşleşmesi gerekir.
 
-* Gidin `Quickstarts/device-streams-service` , sıkıştırması, proje klasörü ve düğüm kullanarak örneği çalıştırın.
+* Sıkıştırılmış proje klasörünüzdeki `Quickstarts/device-streams-service` gidin ve düğümü kullanarak örneği çalıştırın.
 
-   ```
+   ```cmd/sh
    cd azure-iot-samples-node-streams-preview/iot-hub/Quickstarts/device-streams-service
     
    # Install the preview service SDK, and other dependencies
@@ -144,11 +145,11 @@ Aygıt tarafı uygulamayı çalıştıran varsayıldığında, node.js'de Hizmet
    node echo.js
    ```
 
-Son adımın sonunda, hizmet tarafı program cihazınıza ve kurulan sonra bir akışı başlatacak bir dize arabelleğine akış üzerinden hizmete gönderin. Bu örnekte, yalnızca hizmet tarafı program okur `stdin` terminal üzerinde ve ardından bunu geri echo cihaza gönderir. Bu, iki uygulama arasındaki başarılı çift yönlü iletişim gösterir.
+Son adımın sonunda, hizmet tarafı programı cihazınıza bir akış başlatır ve oluşturulduktan sonra, hizmete akış üzerinden bir dize arabelleği gönderir. Bu örnekte, hizmet tarafı programı terminaldeki `stdin` okur ve cihazı cihaza gönderir ve ardından onu geri yankıdan alır. Bu, iki uygulama arasındaki başarılı çift yönlü iletişimi gösterir.
 
-![Hizmet tarafı konsol çıktısı](./media/quickstart-device-streams-echo-nodejs/service-console-output.png)
+![Hizmet tarafı konsol çıkışı](./media/quickstart-device-streams-echo-nodejs/service-console-output.png)
 
-Ardından, tuşlarına basarak programı sonlandırabilirsiniz tekrar girin.
+Daha sonra ENTER tuşuna basarak programı sonlandırabilirsiniz.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
@@ -156,9 +157,9 @@ Ardından, tuşlarına basarak programı sonlandırabilirsiniz tekrar girin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, bir IOT hub'ı ayarladınız, kayıtlı bir cihaz, bir cihaz akışını cihazını ve hizmetini tarafında uygulamalar arasında kurulan ve akış uygulamaları arasında sürekli veri göndermek için kullanılan.
+Bu hızlı başlangıçta, bir IoT Hub 'ı ayarlarsınız, cihaz kaydettiniz, cihaz ve hizmet tarafındaki uygulamalar arasında bir cihaz akışı kurdu ve bu akışı, verileri uygulamalar arasında ileri ve geri göndermek için kullandınız.
 
 Cihaz akışları hakkında daha fazla bilgi edinmek için aşağıdaki bağlantıları kullanın:
 
 > [!div class="nextstepaction"]
-> [Cihaz akışları genel bakış](./iot-hub-device-streams-overview.md) 
+> [Cihaz akışlarına genel bakış](./iot-hub-device-streams-overview.md) 

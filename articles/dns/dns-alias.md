@@ -1,80 +1,82 @@
 ---
-title: Azure DNS diğer ad kayıtlarını genel bakış
-description: Microsoft Azure DNS diğer ad kayıtlarını desteği genel bakış.
+title: Azure DNS diğer ad kayıtlarına genel bakış
+description: Microsoft Azure DNS 'de diğer ad kayıtlarına yönelik desteğe genel bakış.
 services: dns
 author: vhorne
 ms.service: dns
 ms.topic: article
-ms.date: 6/7/2019
+ms.date: 08/09/2019
 ms.author: victorh
-ms.openlocfilehash: 5dfc00b1193117c22ba1c763bb0e75d9c4712222
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 9a3cdb846921c2d73dd2cca5d679663c1ba9e192
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67275748"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68946893"
 ---
-# <a name="azure-dns-alias-records-overview"></a>Azure DNS diğer ad kayıtlarını genel bakış
+# <a name="azure-dns-alias-records-overview"></a>Azure DNS diğer ad kayıtlarına genel bakış
 
-Azure DNS diğer ad kayıtlarını DNS kayıt kümesi üzerinde nitelikleri ' dir. Bunlar, diğer Azure kaynaklarından DNS bölgenizi içinde başvurabilirsiniz. Örneğin, bir A kaydı yerine bir Azure genel IP adresine başvuruyor bir diğer ad kayıt kümesi oluşturabilirsiniz. Azure genel IP'LERİNDEN diğer ad kaydı kümesi puanları, hizmet örneği dinamik adres. Sonuç olarak, diğer ad kayıt kümesi sorunsuz bir şekilde kendi DNS çözümlemesi sırasında güncelleştirir.
+Azure DNS diğer ad kayıtları, DNS kayıt kümesindeki niteliklerdir. Bunlar, DNS bölgenizin içinden diğer Azure kaynaklarına başvurabilir. Örneğin, bir kayıt yerine bir Azure genel IP adresine başvuran bir diğer ad kayıt kümesi oluşturabilirsiniz. Diğer ad kayıt kümesi, dinamik olarak bir Azure genel IP adresi hizmeti örneğine işaret eder. Sonuç olarak, diğer ad kayıt kümesi DNS çözümlemesi sırasında kendisini sorunsuz bir şekilde günceller.
 
-Bir diğer ad kayıt kümesi, aşağıdaki kayıt türlerinin bir Azure DNS bölgesindeki desteklenir: 
+Bir Azure DNS bölgesindeki aşağıdaki kayıt türleri için bir diğer ad kayıt kümesi desteklenir: 
 
 - A
 - AAAA
 - CNAME
 
 > [!NOTE]
-> İşaret etmek için bir diğer ad kaydı A veya AAAA kayıt türleri için kullanmak istiyorsanız bir [Azure Traffic Manager profilini](../traffic-manager/quickstart-create-traffic-manager-profile.md) , Traffic Manager profilini yalnızca olduğundan emin olun [dış uç noktalar](../traffic-manager/traffic-manager-endpoint-types.md#external-endpoints). Dış Traffic Manager'da uç noktaları için IPv4 veya IPv6 adresi sağlamanız gerekir. Uç noktaların tam etki alanı adlarını (FQDN) kullanamazsınız. İdeal olarak, statik IP adresleri kullanın.
+> Bir [Azure Traffic Manager profilini](../traffic-manager/quickstart-create-traffic-manager-profile.md) işaret etmek için A veya aaaa kayıt türleri için bir diğer ad kaydı kullanmayı düşünüyorsanız, Traffic Manager profilinin yalnızca [dış uç noktalara](../traffic-manager/traffic-manager-endpoint-types.md#external-endpoints)sahip olduğundan emin olmanız gerekir. Traffic Manager dış uç noktalar için IPv4 veya IPv6 adresi sağlamanız gerekir. Uç noktalarda tam etki alanı adlarını (FQDN) kullanamazsınız. İdeal olarak, statik IP adresleri kullanın.
 
 ## <a name="capabilities"></a>Özellikler
 
-- **Bir genel IP kaynağı için bir DNS A/AAAA kayıt kümesi gelin.** A/AAAA kayıt kümesi oluşturma ve bir genel IP kaynağına işaret edecek bir diğer ad kayıt kümesi kolaylaştırır. Genel IP adresini değiştirir veya DNS kümesi değişiklikleri otomatik olarak kaydedin. silindi. DNS sarkan yanlış IP adreslerine işaret kayıtları engellendi.
+- **DNS A/AAAA kayıt kümesinden ortak bir IP kaynağını işaret edin.** A/AAAA kayıt kümesi oluşturabilir ve bunu bir genel IP kaynağını işaret etmek üzere bir diğer ad kaydı kümesi (Standart veya temel) yapabilirsiniz. Genel IP adresi değişirse veya silinirse DNS kayıt kümesi otomatik olarak değişir. Hatalı IP adreslerine işaret eden, salyaze DNS kayıtları kaçınılmaz.
 
-- **Traffic Manager profili için bir DNS A/AAAA/CNAME kayıt kümesi gelin.** A/AAAA oluşturabilir veya CNAME kaydı kümesi ve bir Traffic Manager profiline işaret etmek için diğer ad kayıtlarını kullanın. Bir bölgenin tepesindeki trafiği yönlendirmek gerektiğinde geleneksel CNAME kayıtları bir bölge tepesinde için desteklenmeyen gibi özellikle yararlıdır. Örneğin, Traffic Manager profilinizin myprofile.trafficmanager.net ve iş DNS bölgenizi contoso.com varsayalım. Tür A/AAAA contoso.com (bölge tepesinde) için bir diğer ad kaydı kümesi oluşturma ve myprofile.trafficmanager.net için gelin.
-- **Bir Azure Content Delivery Network (CDN) uç noktası**. Azure depolama ve Azure CDN kullanarak statik Web sitesi oluşturduğunuzda, bu yararlıdır.
-- **Aynı bölgede başka bir DNS kayıt kümesi gelin.** Diğer ad kayıtları aynı türdeki diğer kayıt kümelerine başvurabilir. Örneğin, bir DNS CNAME kayıt kümesi bir diğer ad başka bir CNAME kaydı kümesi olabilir. Bu düzenleme, diğer adlar olmasını bazı kayıt kümelerini ve bazı diğer olmayan istiyorsanız kullanışlıdır.
+   Kaynak başına 20 diğer ad kaydı kümesi geçerli bir sınırı vardır.
+
+- **DNS A/AAAA/CNAME kayıt kümesinden bir Traffic Manager profile işaret edin.** A/AAAA veya CNAME kayıt kümesi oluşturabilir ve diğer ad kayıtlarını kullanarak bir Traffic Manager profiline işaret edebilirsiniz. Bir bölge tepesinde için geleneksel CNAME kayıtları desteklenmediği için, trafiği bir bölge tepesinde yönlendirmeniz gerektiğinde bu durum özellikle yararlıdır. Örneğin, Traffic Manager profilinizin myprofile.trafficmanager.net olduğunu ve iş DNS bölgenizin contoso.com olduğunu varsayalım. Contoso.com (Zone tepesinde) için A/AAAA türünde bir diğer ad kayıt kümesi oluşturabilir ve myprofile.trafficmanager.net ' ye işaret edebilirsiniz.
+- **Azure Content Delivery Network (CDN) uç noktasını Işaret edin**. Bu, Azure depolama ve Azure CDN kullanarak statik Web siteleri oluşturduğunuzda yararlı olur.
+- **Aynı bölge içindeki başka bir DNS kayıt kümesine işaret edin.** Diğer ad kayıtları aynı türdeki diğer kayıt kümelerine başvurabilir. Örneğin, bir DNS CNAME kayıt kümesi başka bir CNAME kayıt kümesine diğer ad olabilir. Bu düzenleme, bazı kayıt kümelerinin diğer adlar ve diğer ad olmayan adlar olmasını istiyorsanız yararlıdır.
 
 ## <a name="scenarios"></a>Senaryolar
 
-Diğer ad kayıtlarını için bazı yaygın senaryolar vardır.
+Diğer ad kayıtları için birkaç yaygın senaryo vardır.
 
-### <a name="prevent-dangling-dns-records"></a>DNS kayıtlarını Sallantıdaki engelle
+### <a name="prevent-dangling-dns-records"></a>Tehlikeden DNS kayıtlarını önleme
 
-Geleneksel DNS kayıtları ile ortak bir sorunu kayıtları sarkan. IP adresi değişiklikleri yansıtacak şekilde güncelleştirilmedi Örneğin, DNS kayıtları. Özellikle ile bir sorun/AAAA veya CNAME kayıt türleri.
+Geleneksel DNS kayıtlarıyla ilgili yaygın bir sorun, kayıt kayıtlardır. Örneğin, IP adreslerinde yapılan değişiklikleri yansıtacak şekilde güncelleştirilmemiş DNS kayıtları. Sorun özellikle bir/AAAA veya CNAME kayıt türleriyle oluşur.
 
-Hedef IP veya CNAME artık mevcut değilse, geleneksel bir DNS bölgesi kaydıyla ilişkili DNS kaydını el ile güncelleştirilmesi gerekir. Bazı Kurumlarda, el ile güncelleştirme işlemi sorunları nedeniyle zaman veya roller ve ilişkili izin düzeylerini ayrımı gerçekleşebilir değil. Örneğin, bir rol bir uygulamaya ait bir CNAME veya IP adresini silmek yetkisine sahip olabilir. Ancak bu hedefe işaret eden DNS kaydı güncelleştirmek için yeterli yetkiniz yok. DNS kaydını güncelleştirme bir gecikme kesinti kullanıcılar için olası neden olabilir.
+Geleneksel bir DNS bölgesi kaydıyla, hedef IP veya CNAME artık yoksa, onunla ilişkilendirilen DNS kaydı el ile güncelleştirilmeleri gerekir. Bazı kuruluşlarda, işlem sorunları veya rollerin ve ilişkili izin düzeylerinin ayrımı nedeniyle el ile güncelleştirme zamanında gerçekleşmeyebilir. Örneğin bir rol, bir uygulamaya ait bir CNAME veya IP adresini silme yetkisine sahip olabilir. Ancak, bu hedeflere işaret eden DNS kaydını güncelleştirmek için yeterli yetkisi yok. DNS kaydını güncelleştirmede bir gecikme, kullanıcılar için bir kesinti oluşmasına neden olabilir.
 
-Diğer ad kayıtlarını sıkı bir şekilde bir Azure kaynağı ile bir DNS kaydı yaşam döngüsünü eşleyerek Sallantıdaki başvuruları engelleyin. Örneğin, bir diğer ad kaydı bir genel IP adresi veya bir Traffic Manager profili işaret edecek şekilde yetkili bir DNS kaydı göz önünde bulundurun. DNS diğer ad kaydı, temel alınan kaynaklarla silerseniz, boş bir kayıt kümesi haline gelir. Artık, silinen kaynağa başvuruyor.
+Diğer ad kayıtları, bir Azure kaynağı ile bir DNS kaydının yaşam döngüsünü sıkı bir şekilde uzatarak tehlikeden başvuruların oluşmasını önler. Örneğin, bir genel IP adresini veya bir Traffic Manager profilini işaret etmek için bir diğer ad kaydı olarak nitelenen bir DNS kaydını göz önünde bulundurun. Bu temel alınan kaynakları silerseniz, DNS diğer ad kaydı boş bir kayıt kümesi haline gelir. Artık silinen kaynağa başvurmuyor.
 
-### <a name="update-dns-record-set-automatically-when-application-ip-addresses-change"></a>Uygulama IP adresleri değiştiğinde DNS kayıt kümesi otomatik olarak güncelleştir
+### <a name="update-dns-record-set-automatically-when-application-ip-addresses-change"></a>DNS kaydını Güncelleştir-uygulama IP adresleri değiştiğinde otomatik olarak ayarla
 
-Bu senaryo, Öncekine benzer. Belki de bir uygulama taşınır veya temel sanal makine yeniden başlatılır. Bir diğer ad kaydı daha sonra otomatik olarak IP adresi için temel alınan genel IP kaynağı değiştiğinde güncelleştirir. Bu, kullanıcılar eski genel IP adresi atanmış olan başka bir uygulamaya yönlendiren, olası güvenlik risklerini ortadan kaldırır.
+Bu senaryo öncekiyle benzerdir. Belki de bir uygulama taşınmış veya temeldeki sanal makine yeniden başlatıldı. Daha sonra bir diğer ad kaydı, temel alınan genel IP kaynağı için IP adresi değiştiğinde otomatik olarak güncelleştirilir. Bu, kullanıcıları eski genel IP adresine atanmış başka bir uygulamaya yönlendiren olası güvenlik risklerini önler.
 
-### <a name="host-load-balanced-applications-at-the-zone-apex"></a>Konak yük dengeli uygulamalarda bölgenin tepesindeki
+### <a name="host-load-balanced-applications-at-the-zone-apex"></a>Tepesinde bölgesindeki yük dengeli uygulamaları barındırın
 
-DNS protokolü, bölge tepesinde CNAME kayıtları atanmasını engeller. Örneğin; etki alanı contoso.com ise CNAME kayıtlarını somelabel.contoso.com oluşturabilirsiniz; ancak CNAME contoso.com için oluşturamazsınız.
-Bu kısıtlama sahip yük dengeli uygulamalarda uygulama sahipleri için sorun oluşturur ardında [Azure Traffic Manager](../traffic-manager/traffic-manager-overview.md). Bir Traffic Manager profili kullanarak bir CNAME kaydı oluşturulmasını gerektirdiğinden, bölge tepesinde Traffic Manager profilinde işaret etmek mümkün değildir.
+DNS protokolü, CNAME kayıtlarının tepesinde bölgesinde atanmasını engeller. Örneğin, etki alanınız contoso.com ise somelabel.contoso.com için CNAME kayıtları oluşturabilirsiniz; ancak contoso.com kendisi için CNAME oluşturamazsınız.
+Bu kısıtlama, [Azure Traffic Manager](../traffic-manager/traffic-manager-overview.md)arkasındaki yük dengeli uygulamalara sahip olan uygulama sahipleri için bir sorun gösterir. Bir Traffic Manager profilinin kullanılması için CNAME kaydı oluşturulması gerektiğinden, bölge tepesinde profil Traffic Manager profiline işaret etmek mümkün değildir.
 
-Bu sorun, diğer ad kayıtlarını kullanan çözülür. CNAME kayıtları aksine bölgenin tepesinde diğer ad kayıtlarını oluşturulur ve uygulama sahipleri kendi bölge tepesinde kayıt dış uç noktaları olan bir Traffic Manager profiline işaret edecek şekilde kullanabilirsiniz. Uygulama sahibi kendi DNS bölgesi içinde başka bir etki alanı için kullanılan aynı Traffic Manager profilini gelin.
+Bu sorun diğer ad kayıtları kullanılarak çözülebilir. CNAME kayıtlarının aksine, diğer ad kayıtları bölge tepesinde kayıtlarını dış uç noktalara sahip bir Traffic Manager profiline işaret etmek için tepesinde ve uygulama sahipleri tarafından kullanılabilir. Uygulama sahipleri, DNS bölgesi içindeki diğer etki alanı için kullanılan Traffic Manager profile işaret noktasıdır.
 
-Örneğin, contoso.com ve www\.contoso.com aynı Traffic Manager profiline işaret edebilir. Diğer ad kayıtlarını ile Azure Traffic Manager profillerini kullanma hakkında daha fazla bilgi edinmek için sonraki adımlar bölümüne bakın.
+Örneğin, contoso.com ve www\.contoso.com aynı Traffic Manager profilini işaret edebilir. Azure Traffic Manager profilleriyle diğer ad kayıtlarını kullanma hakkında daha fazla bilgi edinmek için sonraki adımlar bölümüne bakın.
 
-### <a name="point-zone-apex-to-azure-cdn-endpoints"></a>Bölge tepesinde Azure CDN uç noktası
+### <a name="point-zone-apex-to-azure-cdn-endpoints"></a>Azure CDN uç noktalarına nokta dilimi tepesinde
 
-Yalnızca bir Traffic Manager profili gibi diğer ad kayıtlarını, DNS bölge tepesinde Azure CDN uç noktası için de kullanabilirsiniz. Azure depolama ve Azure CDN kullanarak statik Web sitesi oluşturduğunuzda, bu yararlıdır. Web sitesi daha sonra DNS adı "www" eklenmesini olmadan da erişebilirsiniz.
+Traffic Manager bir profilde olduğu gibi, DNS bölgenizi Azure CDN tepesinde uç noktalarına göstermek için diğer ad kayıtlarını da kullanabilirsiniz. Bu, Azure depolama ve Azure CDN kullanarak statik Web siteleri oluşturduğunuzda yararlı olur. Daha sonra Web sitesine "www" önlemeden DNS adınızı gönderebilirsiniz.
 
-Örneğin, www.contoso.com, statik Web sitesi ise, kullanıcılarınızın sitenizi gerek kalmadan contoso.com DNS adına www önüne eklediğinizden kullanarak erişebilirsiniz.
+Örneğin, statik Web siteniz www.contoso.com olarak adlandırılmışsa, kullanıcılarınız www 'i DNS adına eklemek zorunda kalmadan contoso.com kullanarak sitenize erişebilirler.
 
-Daha önce açıklandığı gibi bölge tepesinde CNAME kayıtları desteklenmez. Bu nedenle, bir CNAME kaydı, contoso.com CDN uç noktanıza işaret edecek şekilde kullanamazsınız. Bunun yerine, bölge tepesinde doğrudan CDN uç noktası için bir diğer ad kaydı kullanabilirsiniz.
+Daha önce açıklandığı gibi, CNAME kayıtları tepesinde bölgesinde desteklenmez. Bu nedenle, contoso.com 'i CDN uç noktanıza göstermek için bir CNAME kaydı kullanamazsınız. Bunun yerine, bölge tepesinde doğrudan bir CDN uç noktasına göstermek için bir diğer ad kaydı kullanabilirsiniz.
 
 > [!NOTE]
-> Bölge tepesinde için CDN uç noktası için Azure CDN Akamai işaret eden şu anda desteklenmiyor.
+> Akamai 'dan Azure CDN için bir bölge tepesinde, CDN uç noktalarına işaret ediyor, şu anda desteklenmiyor.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Diğer ad kayıtları hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+Diğer ad kayıtları hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
 
-- [Öğretici: Bir Azure genel IP adresini belirtmek için bir diğer ad kaydı yapılandırma](tutorial-alias-pip.md)
-- [Öğretici: Bir diğer ad kaydı Apex etki alanı adları ile Traffic Manager'ı destekleyecek şekilde yapılandırma](tutorial-alias-tm.md)
+- [Öğretici: Azure genel IP adresine başvurmak için bir diğer ad kaydı yapılandırma](tutorial-alias-pip.md)
+- [Öğretici: Traffic Manager ile tepesinde etki alanı adlarını desteklemek için bir diğer ad kaydı yapılandırma](tutorial-alias-tm.md)
 - [DNS SSS](https://docs.microsoft.com/azure/dns/dns-faq#alias-records)

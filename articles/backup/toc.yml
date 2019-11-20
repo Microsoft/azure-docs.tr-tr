@@ -20,6 +20,8 @@
   items:
     - name: Azure VM'lerini ölçeğe göre yedekleme
       href: tutorial-backup-vm-at-scale.md
+    - name: Azure VM’lerini PowerShell ile yedekleme
+      href: tutorial-backup-azure-vm.md
     - name: Diski geri yükleme
       href: tutorial-restore-disk.md
     - name: Dosyaları tek tek geri yükleme
@@ -50,6 +52,16 @@
           href: backup-support-matrix-mabs-dpm.md
         - name: MARS aracısı destek matrisi
           href: backup-support-matrix-mars-agent.md
+    - name: Güvenlik
+      items:
+        - name: Rol Tabanlı Access Control
+          href: backup-rbac-rs-vault.md
+        - name: Bulut iş yükleri için güvenlik
+          href: backup-azure-security-feature-cloud.md
+        - name: Karma yedeklemeler için güvenlik
+          href: backup-azure-security-feature.md
+        - name: Yerleşik güvenlik denetimleri
+          href: backup-security-controls.md
     - name: Sık sorulan sorular (SSS)
       items:
         - name: SSS-Kurtarma Hizmetleri kasası
@@ -62,20 +74,18 @@
           href: backup-azure-files-faq.md
         - name: SSS-Azure VM’lerindeki SQL Server veritabanlarını yedekleme
           href: faq-backup-sql-server.md
+        - name: SSS-Azure Backup Sunucusu ve DPM
+          href: backup-azure-dpm-azure-server-faq.md
+        - name: SSS - Azure Backup izleme uyarısı
+          href: backup-azure-monitor-alert-faq.md
     - name: Backup mimarisi
       href: backup-architecture.md
-    - name: Rol Tabanlı Access Control
-      href: backup-rbac-rs-vault.md
-    - name: Karma yedeklemeler için güvenlik
-      href: backup-azure-security-feature.md
     - name: Çevrimdışı yedeklemeyi yapılandırma
       href: backup-azure-backup-import-export.md
     - name: DPM ve Azure Backup Sunucusu için çevrimdışı yedekleme
       href: backup-azure-backup-server-import-export-.md
     - name: Bant kitaplığınızı değiştirme
       href: backup-azure-backup-cloud-as-tape.md
-    - name: Azure Ortak Güvenlik Öznitelikleri
-      href: backup-security-attributes.md
 - name: Nasıl yapılır
   items:
     - name: Azure Backup Sunucusu
@@ -96,6 +106,8 @@
               href: backup-mabs-unattended-install.md
         - name: İş yüklerini koruma
           items:
+            - name: Hyper-V sanal makinelerini yedekleme
+              href: back-up-hyper-v-virtual-machines-mabs.md
             - name: VMware sunucusu
               href: backup-azure-backup-server-vmware.md
             - name: Exchange
@@ -108,6 +120,8 @@
               href: backup-mabs-system-state-and-bmr.md
         - name: Azure Backup Sunucusu’ndan veri kurtarma
           href: backup-azure-alternate-dpm-server.md
+        - name: VMware VM’lerini Azure Backup Sunucusu ile geri yükleme
+          href: restore-azure-backup-server-vmware.md
     - name: Azure Stack üzerinde Azure Backup Sunucusu
       items:
         - name: Azure Backup Sunucusu’nu yükleme
@@ -162,8 +176,6 @@
           href: backup-azure-reports-data-model.md
         - name: Azure Backup için Log Analytics veri modeli
           href: backup-azure-log-analytics-data-model.md
-        - name: Azure Backup Merkezi Raporlama İçerik Paketini güncelleştirme
-          href: backup-azure-central-reporting-updates.md
     - name: Data Protection Manager
       items:
         - name: Azure portalında DPM iş yükleri hazırlama
@@ -222,6 +234,8 @@
           href: backup-azure-restore-windows-server.md
         - name: Windows Server Sistem Durumunu geri yükleme
           href: backup-azure-restore-system-state.md
+        - name: Windows Server dosya ve klasörleri yedeklemesini yönetme
+          href: backup-azure-manage-mars.md
     - name: Kurtarma Hizmetleri kasası
       items:
         - name: Kurtarma Hizmetleri kasalarına genel bakış

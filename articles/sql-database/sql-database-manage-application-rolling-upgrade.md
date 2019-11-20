@@ -1,6 +1,6 @@
 ---
-title: Uygulama yükseltme - Azure SQL veritabanı rolling | Microsoft Docs
-description: Azure SQL veritabanı coğrafi çoğaltma, bulut uygulamanızın çevrimiçi yükseltmeler desteklemek için kullanmayı öğrenin.
+title: Uygulama yükseltmeleri çalışırken
+description: Bulut uygulamanızın çevrimiçi yükseltmelerini desteklemek için Azure SQL veritabanı coğrafi çoğaltma 'nın nasıl kullanılacağını öğrenin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: high-availability
@@ -10,99 +10,98 @@ ms.topic: conceptual
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mathoma, carlrab
-manager: craigg
 ms.date: 02/13/2019
-ms.openlocfilehash: 47fd6c1e2bb342bc1a31fb16a45a5ebc749dca69
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9c627c3e597fdcd3859ce02ea208fc7a8b5d612b
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60702682"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73822869"
 ---
-# <a name="manage-rolling-upgrades-of-cloud-applications-by-using-sql-database-active-geo-replication"></a>Sıralı yükseltmeler, bulut uygulamalarının SQL veritabanı etkin coğrafi çoğaltma'yı kullanarak yönetme
+# <a name="manage-rolling-upgrades-of-cloud-applications-by-using-sql-database-active-geo-replication"></a>SQL veritabanı etkin coğrafi çoğaltma kullanarak bulut uygulamalarının sıralı yükseltmelerini yönetme
 
-Nasıl kullanacağınızı öğrenin [etkin coğrafi çoğaltma](sql-database-auto-failover-group.md) bulut uygulamanızın sıralı yükseltmelerini etkinleştirmek için Azure SQL veritabanı'nda. Yükseltme işlemleri karışıklığa neden olduğundan, bunlar, iş sürekliliği planlama ve tasarım parçası olmalıdır. Bu makalede, yükseltme işlemini yönetmek için iki farklı yöntem arayın ve avantajlarını ve dezavantajlarını her bir seçeneğin tartışın. Bu makalenin amaçları için tek veritabanı olarak kendi veri katmanına bağlı bir Web sitesi içeren bir uygulama diyoruz. Hedefimiz sürüm 1 (V1) sürüm 2 (V2) kullanıcı deneyimini önemli bir etkisi olmadan uygulamanın yükseltilmesidir.
+Azure SQL veritabanında [etkin Coğrafi çoğaltmayı](sql-database-auto-failover-group.md) kullanarak bulut uygulamanızın çalışırken yükseltmelerini nasıl kullanacağınızı öğrenin. Yükseltmeler kesintiye uğradığı için bunlar iş sürekliliği planlama ve tasarımınızın bir parçası olmalıdır. Bu makalede, yükseltme işlemini düzenleyen iki farklı yönteme bakacağız ve her seçeneğin avantajları ve avantajları tartışıyoruz. Bu makalenin amaçları doğrultusunda, veri katmanı olarak tek bir veritabanına bağlı olan bir Web sitesinden oluşan bir uygulamaya başvurduk. Amacınız, uygulamanın sürüm 1 (v1) sürümünü sürüm 2 ' ye (v2), Kullanıcı deneyimi üzerinde önemli bir etki olmadan yükseltmektir.
 
-Yükseltme seçenekleri değerlendirirken, aşağıdaki etmenleri dikkate alın:
+Yükseltme seçeneklerini değerlendirirken, şu faktörleri göz önünde bulundurun:
 
-* Uygulama kullanılabilirliği gibi uygulama işlevlerini ne kadar süreyle sınırlı veya düşürülmüş yükseltmeleri sırasında etkisi.
-* Geri yükseltme başarısız olursa geri alma olanağı.
-* Güvenlik Açığı yükseltme sırasında ilgisiz, geri dönülemez bir hata oluşursa uygulama.
-* Maliyet toplam dolar. Bu ek veritabanı yedekliliği ve yükseltme işlemi tarafından kullanılan geçici bileşenlerin artımlı maliyetlerini içerir.
+* Uygulama işlevlerinin ne kadar süreyle sınırlı veya düşürülmüş olması gibi yükseltmeler sırasında uygulama kullanılabilirliğine etkisi.
+* Yükseltme başarısız olursa geri alma özelliği.
+* Yükseltme sırasında ilgisiz ve çok zararlı bir hata oluşursa uygulamanın güvenlik açığı.
+* Toplam dolar maliyeti. Bu faktör, yükseltme işlemi tarafından kullanılan geçici bileşenlerin ek veritabanı yedekliliği ve artımlı maliyetlerini içerir.
 
-## <a name="upgrade-applications-that-rely-on-database-backups-for-disaster-recovery"></a>Veritabanı Yedeklemeleri için olağanüstü durum kurtarma kullanan uygulamaları yükseltme
+## <a name="upgrade-applications-that-rely-on-database-backups-for-disaster-recovery"></a>Olağanüstü durum kurtarma için veritabanı yedeklemelerine güvenen uygulamaları yükseltme
 
-Uygulamanız üzerinde otomatik veritabanı yedeklemelerini kullanır ve olağanüstü durum kurtarma için coğrafi geri yükleme kullanır, bunu tek bir Azure bölgesine dağıtılır. Kullanıcı uğramasını azaltmak için bu bölgedeki yükseltmesinde dahil olan tüm uygulama bileşenleri ile bir hazırlık ortamı oluşturun. Yükseltme işlemi önce işletimsel ortamı birinci diyagramda gösterilmektedir. Uç nokta `contoso.azurewebsites.net` bir üretim ortamında web uygulamasının temsil eder. Yükseltmeyi geri yapabilmek için bir hazırlık ortamı ile tam bir eşitleme bir veritabanının kopyasını oluşturmanız gerekir. Yükseltme için bir hazırlık ortamı oluşturmak için aşağıdaki adımları izleyin:
+Uygulamanız otomatik veritabanı yedeklemelerine dayanıyorsa ve olağanüstü durum kurtarma için coğrafi geri yükleme kullanıyorsa, tek bir Azure bölgesine dağıtılır. Kullanıcı kesintisini en aza indirmek için, bu bölgede, yükseltmede yer alan tüm uygulama bileşenlerine sahip bir hazırlama ortamı oluşturun. İlk diyagramda yükseltme işleminden önce işletimsel ortam gösterilmektedir. Uç nokta `contoso.azurewebsites.net` Web uygulamasının üretim ortamını temsil eder. Yükseltmeyi geri almak için veritabanının tamamen eşitlenmiş kopyasıyla bir hazırlama ortamı oluşturmanız gerekir. Yükseltme için bir hazırlama ortamı oluşturmak için aşağıdaki adımları izleyin:
 
-1. Aynı Azure bölgesinde ikinci bir veritabanı oluşturun. Dengeli dağıtım işlemi tamamlandı (1) olup olmadığını görmek için ikincil izleyin.
-2. Web uygulamanız için yeni bir ortam oluşturun ve 'Hazırlama' çağrısı. URL ile Azure DNS'te kaydedilecek `contoso-staging.azurewebsites.net` (2).
-
-> [!NOTE]
-> Tam erişim modda çalışabilir üretim ortamını hazırlama adımları etkilemez.
-
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-1.png)
-
-Hazırlık adımları tamamlandığında, uygulama, gerçek yükseltme için hazır. Yükseltme işleminde yer alan adımların bir sonraki diyagramda gösterilmektedir:
-
-1. Birincil veritabanı salt okunur moda (3) ayarlayın. Bu mod (V1) web uygulamasının üretim ortamına böylece V1 ve V2 veritabanı örnekleri arasında veri Geçitler önleme yükseltme işlemi sırasında salt okunur kalmasını güvence altına alır.
-2. İkincil veritabanı planlı sonlandırma modu (4) kullanılarak bağlantısını kesin. Bu eylem, tam bir eşitleme, bağımsız bir birincil veritabanının kopyasını oluşturur. Bu veritabanı yükseltilir.
-3. İkincil veritabanı için okuma-yazma modunda açın ve yükseltme betiği (5) çalıştırın.
-
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-2.png)
-
-Yükseltme başarıyla tamamlanırsa artık kullanıcılar yükseltilen kopya bir üretim ortamında olur uygulama geçiş yapmak hazırsınız. Geçiş, bir sonraki diyagramda gösterildiği gibi birkaç daha fazla adımları içerir:
-
-1. Üretim ve hazırlık ortamları web uygulamasının (6) arasında bir takas işlemi etkinleştirin. Bu işlem, iki ortam URL'lerini geçer. Artık `contoso.azurewebsites.net` web sitesi ve veritabanı (üretim ortamı) V2 sürümüne işaret eder. 
-2. Hazırlama kopyasını değiştirme işleminden sonra başlarsa, V1 sürümü artık ihtiyacınız kalmadığında, hazırlık ortamı (7) yetkisini alabilirsiniz.
-
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-3.png)
-
-Yükseltme işlemi başarısızsa (örneğin, bir hata nedeniyle yükseltme komut dosyası) tehlikeye üzere hazırlama ortamını göz önünde bulundurun. Uygulama yükseltme öncesi durumuna geri almak için tam erişim için üretim ortamında uygulama döndürün. Geri Al adımlar bir sonraki diyagramda gösterilmiştir:
-
-1. Veritabanı kopyasını (8) okuma-yazma moduna ayarlayın. Bu eylem, üretim kopyalama V1 tam işlevselliğini geri yükler.
-2. Kök neden analizi gerçekleştirin ve hazırlık ortamı (9) yetkisini alma.
-
-Bu noktada, uygulamayı tamamen çalışır durumdadır ve yükseltme adımları tekrarlayabilirsiniz.
+1. Aynı Azure bölgesinde ikincil bir veritabanı oluşturun. Dengeli dağıtım işleminin tamamlanıp tamamlanmamın (1) olup olmadığını görmek için ikincili izleyin.
+2. Web uygulamanız için yeni bir ortam oluşturun ve bunu ' hazırlama ' olarak çağırın. `contoso-staging.azurewebsites.net` URL 'SI ile Azure DNS kaydedilecek (2).
 
 > [!NOTE]
-> Henüz bir değiştirme işlemi gerçekleştirmedi çünkü geri DNS değişiklik yapılması gerekmez.
+> Bu hazırlık adımları üretim ortamını etkilemez ve bu, tam erişim modunda işlev görebilir.
 
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-4.png)
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-1.png)
 
-Bu seçenek, önemli bir avantajı, basit adımları izleyerek uygulamanın tek bir bölgede yükseltebilirsiniz ' dir. Yükseltme dolar maliyeti oldukça düşüktür. 
+Hazırlama adımları tamamlandığında, uygulama gerçek yükseltme için geçerli olur. Sonraki diyagramda, yükseltme işleminde yer alan adımlar gösterilmektedir:
 
-Ana artırabilen yükseltme sırasında bir arıza oluşması durumunda, yükseltme öncesi durumu için kurtarma farklı bir bölgede uygulamanızı ve coğrafi geri yükleme kullanarak veritabanını yedekten geri yükleme, içermesidir. Bu işlem, önemli kapalı kalma süresi sonuçlanır.
+1. Birincil veritabanını salt okuma moduna ayarlayın (3). Bu mod, Web uygulamasının üretim ortamının (v1) yükseltme sırasında salt okunurdur ve bu sayede v1 ve v2 veritabanı örnekleri arasında veri ayırt edilmesini önler.
+2. Planlı sonlandırma modunu (4) kullanarak ikincil veritabanının bağlantısını kesin. Bu eylem, birincil veritabanının tamamen eşitlenmiş, bağımsız bir kopyasını oluşturur. Bu veritabanı yükseltilecek.
+3. İkincil veritabanını okuma yazma moduna açın ve yükseltme betiğini (5) çalıştırın.
 
-## <a name="upgrade-applications-that-rely-on-database-geo-replication-for-disaster-recovery"></a>Veritabanı olağanüstü durum kurtarma için coğrafi çoğaltmayı kullanan uygulamaları yükseltme
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-2.png)
 
-Uygulamanız için iş sürekliliği etkin coğrafi çoğaltma veya otomatik yük devretme grupları kullanıyorsa, en az iki farklı bölgeye dağıtılır. Bir birincil bölgede bir etkin, birincil veritabanı ile salt okunur, ikincil bir veritabanı yedekleme bölgede yoktur. Bu makalenin başında belirtilen Etkenler yanı sıra, yükseltme işlemi ayrıca, garanti etmeniz gerekir:
+Yükseltme başarılı bir şekilde tamamlansa, artık kullanıcıları yükseltilen kopyaya, üretim ortamı haline gelen uygulamaya geçmeye hazırsınız demektir. Geçiş, sonraki diyagramda gösterildiği gibi birkaç adımdan oluşur:
 
-* Uygulama yükseltme işlemi sırasında her zaman yıkıcı arızasına karşı korumalı olarak kalır.
-* Coğrafi olarak yedekli bileşenler uygulamanın etkin bileşenleri ile paralel yükseltilir.
+1. Web uygulamasının üretim ve hazırlama ortamları (6) arasında bir takas işlemini etkinleştirin. Bu işlem, iki ortamın URL 'Lerini değiştirir. Artık `contoso.azurewebsites.net` Web sitesinin v2 sürümüne ve veritabanına (üretim ortamı) işaret eder. 
+2. Artık, değiştirme sonrasında hazırlama kopyası olan v1 sürümüne ihtiyacınız yoksa, hazırlama ortamının yetkisini alabilirsiniz (7).
 
-Web Apps ortamları kullanmanın yanı sıra bu hedeflere ulaşmak için Azure Traffic Manager'ın bir etkin uç noktası ve bir yedekleme uç nokta ile bir yük devretme profilini kullanarak yararlanırsınız. Yükseltme işlemi önce işletimsel ortamı sonraki diyagramda gösterilmektedir. Web siteleri `contoso-1.azurewebsites.net` ve `contoso-dr.azurewebsites.net` bir üretim ortamında uygulamanın tam coğrafi artıklık ile temsil eder. Üretim ortamında aşağıdaki bileşenleri içerir:
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-3.png)
 
-* Web uygulamasını üretim ortamına `contoso-1.azurewebsites.net` birincil bölgede (1)
-* Birincil veritabanı birincil bölgede (2)
-* Bir web uygulamasını yedekleme bölgede (3) bekleme örneği
-* Coğrafi çoğaltmalı ikincil bölgede veritabanı yedekleme (4)
-* Çevrimiçi bir uç nokta Traffic Manager performans profiliyle adlı `contoso-1.azurewebsites.net` ve çevrimdışı bir uç nokta adı `contoso-dr.azurewebsites.net`
+Yükseltme işlemi başarısız olursa (örneğin, yükseltme betiğindeki bir hata nedeniyle), hazırlık ortamını ele almak için göz önünde bulundurun. Uygulamayı yükseltme öncesi durumuna geri almak için, üretim ortamındaki uygulamayı tam erişime geri alın. Sonraki diyagramda yeniden sürüm adımları gösterilmektedir:
 
-Yükseltmeyi geri mümkün hale getirmek için bir hazırlık ortamı ile uygulamanın tam bir eşitleme bir kopyasını oluşturmanız gerekir. Uygulama yükseltme işlemi sırasında bir arıza oluşması durumunda hızlı bir şekilde kurtarabilirsiniz emin olmak gerektiği için hazırlık ortamı da coğrafi olarak yedekli olması gerekir. Aşağıdaki adımlar, yükseltme için bir hazırlık ortamı oluşturmak için gereklidir:
+1. Veritabanı kopyasını okuma-yazma moduna (8) ayarlayın. Bu eylem, üretim kopyasının tüm v1 işlevlerini geri yükler.
+2. Kök nedeni analizini gerçekleştirin ve hazırlama ortamının (9) yetkisini alın.
 
-1. Birincil bölgede (6) web uygulamasının hazırlama ortamına dağıtın.
-2. Bir ikincil veritabanı Birincil Azure bölgesinde (7) oluşturun. Web uygulamasının bağlanmak için hazırlık ortamı yapılandırın. 
-3. Başka bir coğrafi olarak yedekli, ikincil veritabanı, ikincil veritabanı birincil bölgede çoğaltarak yedekleme bölgede oluşturun. (Bu yöntem çağrılır *coğrafi çoğaltma zincirleme*.) (8).
-4. Yedekleme bölgede (9) web uygulaması örneğinin hazırlama ortamına dağıtın ve (8) coğrafi olarak yedekli ikincil veritabanlarından bağlanmak için yapılandırın.
+Bu noktada, uygulama tam işlevseldir ve yükseltme adımlarını yineleyebilirsiniz.
 
 > [!NOTE]
-> Hazırlama adımları uygulamayı üretim ortamında etkilemez. Okuma-yazma modunda tamamen işlevsel kalır.
+> Henüz bir değiştirme işlemi gerçekleştirmediyseniz, geri alma DNS değişiklikleri gerektirmez.
 
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-1.png)
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option1-4.png)
 
-Hazırlık adımları tamamlandığında, yükseltme için hazırlık ortamı hazırdır. Bir sonraki diyagramda yükseltme adımları göstermektedir:
+Bu seçeneğin önemli avantajı, tek bir bölgedeki bir uygulamayı bir dizi basit adımı izleyerek yükseltebilmeniz gerekir. Yükseltmenin dolar maliyeti nispeten düşüktür. 
 
-1. Birincil veritabanı salt okunur moda (10) üretim ortamında ayarlayın. Bu mod, bu nedenle V1 ve V2 veritabanı örnekleri arasında veri Geçitler önleme yükseltme işlemi sırasında üretim veritabanı (V1) değişmez garanti eder.
+Ana zorunluluğunu getirir, yükseltme sırasında çok zararlı bir hata oluşursa, yükseltme öncesi durumuna kurtarma işlemi, uygulamayı farklı bir bölgede yeniden dağıtma ve coğrafi geri yükleme kullanarak veritabanını yedekten geri yükleme içerir. Bu işlem, önemli kapalı kalma süresine neden olur.
+
+## <a name="upgrade-applications-that-rely-on-database-geo-replication-for-disaster-recovery"></a>Olağanüstü durum kurtarma için veritabanı coğrafi çoğaltmasını kullanan uygulamaları yükseltme
+
+Uygulamanız iş sürekliliği için etkin coğrafi çoğaltma veya otomatik yük devretme grupları kullanıyorsa, en az iki farklı bölgeye dağıtılır. Bir birincil bölgede etkin, birincil veritabanı ve bir yedekleme bölgesinde salt okunurdur, ikincil veritabanı var. Bu makalenin başlangıcında bahsedilen faktörlerle birlikte, yükseltme süreci de şunları garanti etmelidir:
+
+* Uygulama, yükseltme işlemi sırasında her zaman çok zararlı hatalardan korunmuş olarak kalır.
+* Uygulamanın coğrafi olarak yedekli bileşenleri, etkin bileşenlerle paralel olarak yükseltilir.
+
+Bu hedeflere ulaşmak için, Web Apps ortamlarını kullanmanın yanı sıra, etkin bir uç nokta ve bir yedekleme uç noktası olan bir yük devretme profili kullanarak Azure Traffic Manager avantajlarından yararlanabilirsiniz. Sonraki diyagramda, yükseltme işleminden önce işletimsel ortam gösterilmektedir. `contoso-1.azurewebsites.net` ve `contoso-dr.azurewebsites.net` Web siteleri, tam coğrafi yedeklilik ile uygulamanın üretim ortamını temsil eder. Üretim ortamı aşağıdaki bileşenleri içerir:
+
+* Web uygulamasının üretim ortamı, birincil bölgedeki `contoso-1.azurewebsites.net` (1)
+* Birincil bölgedeki birincil veritabanı (2)
+* Yedekleme bölgesindeki Web uygulamasının bekleme örneği (3)
+* Yedekleme bölgesindeki coğrafi çoğaltılan ikincil veritabanı (4)
+* `contoso-1.azurewebsites.net` adlı bir çevrimiçi uç noktaya sahip Traffic Manager performans profili ve `contoso-dr.azurewebsites.net` adlı bir çevrimdışı uç nokta.
+
+Yükseltmeyi geri almayı olanaklı kılmak için, uygulamanın tamamen eşitlenmiş kopyasıyla bir hazırlama ortamı oluşturmanız gerekir. Yükseltme işlemi sırasında çok zararlı bir hata oluşması durumunda uygulamanın hızlı bir şekilde kurtarılabileceğinden emin olmanız gerektiğinden, hazırlama ortamının da coğrafi olarak yedekli olması gerekir. Yükseltme için bir hazırlama ortamı oluşturmak için aşağıdaki adımlar gereklidir:
+
+1. Birincil bölgede (6) Web uygulamasının hazırlama ortamını dağıtın.
+2. Birincil Azure bölgesinde (7) ikincil bir veritabanı oluşturun. Web uygulamasının hazırlama ortamını bu sunucuya bağlanacak şekilde yapılandırın. 
+3. Birincil bölgedeki ikincil veritabanını çoğaltarak yedekleme bölgesinde bir coğrafi olarak yedekli, ikincil veritabanı oluşturun. (Bu yöntem *zincirleme coğrafi çoğaltma*olarak adlandırılır.) (8).
+4. Web uygulaması örneğinin hazırlama ortamını yedekleme bölgesinde (9) dağıtın ve (8) konumunda oluşturulan coğrafi olarak yedekli ikincil veritabanına bağlanacak şekilde yapılandırın.
+
+> [!NOTE]
+> Bu hazırlık adımları, uygulamayı üretim ortamında etkilemez. Okuma-yazma modunda tamamen işlevsel olarak kalır.
+
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-1.png)
+
+Hazırlama adımları tamamlandığında, hazırlama ortamı yükseltme için hazırlayın. Sonraki diyagramda bu yükseltme adımları gösterilmektedir:
+
+1. Üretim ortamındaki birincil veritabanını salt okuma moduna ayarlayın (10). Bu mod, yükseltme sırasında üretim veritabanının (v1) değişmeyeceği ve bu sayede v1 ve v2 veritabanı örnekleri arasında verilerin ayırt edilmesini engelleyen bir güvence sağlar.
 
 ```sql
 -- Set the production database to read-only mode
@@ -110,7 +109,7 @@ ALTER DATABASE <Prod_DB>
 SET (ALLOW_CONNECTIONS = NO)
 ```
 
-2. Coğrafi çoğaltma ikincil (11) bağlantısını keserek sonlandırın. Bu eylem, bağımsız ancak tam bir eşitleme bir üretim veritabanının kopyasını oluşturur. Bu veritabanı yükseltilir. Aşağıdaki örnek, Transact-SQL kullanır ancak [PowerShell](/powershell/module/az.sql/remove-azsqldatabasesecondary?view=azps-1.5.0) de kullanılabilir. 
+2. İkincil (11) bağlantısını keserek Coğrafi çoğaltmayı sonlandırın. Bu eylem, üretim veritabanının bağımsız, tamamen eşitlenmiş bir kopyasını oluşturur. Bu veritabanı yükseltilecek. Aşağıdaki örnek Transact-SQL kullanır, ancak [PowerShell](/powershell/module/az.sql/remove-azsqldatabasesecondary?view=azps-1.5.0) de kullanılabilir. 
 
 ```sql
 -- Disconnect the secondary, terminating geo-replication
@@ -118,41 +117,41 @@ ALTER DATABASE <Prod_DB>
 REMOVE SECONDARY ON SERVER <Partner-Server>
 ```
 
-3. Yükseltme betiği karşı çalıştırmak `contoso-1-staging.azurewebsites.net`, `contoso-dr-staging.azurewebsites.net`ve hazırlama birincil veritabanı (12). Veritabanı değişiklikleri otomatik olarak ikincil hazırlama çoğaltılır.
+3. Yükseltme betiğini `contoso-1-staging.azurewebsites.net`, `contoso-dr-staging.azurewebsites.net`ve hazırlama birincil veritabanına (12) karşı çalıştırın. Veritabanı değişiklikleri otomatik olarak hazırlama ikincil öğesine çoğaltılır.
 
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-2.png)
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-2.png)
 
-Yükseltme başarıyla tamamlanırsa artık kullanıcılar V2 uygulama sürümüne geçiş yapmak hazırsınız. Bir sonraki diyagramda yer alan adımların gösterilmektedir:
+Yükseltme başarılı bir şekilde biterse, artık kullanıcıları uygulamanın v2 sürümüne geçmeye hazırsınız demektir. Sonraki diyagramda ilgili adımlar gösterilmektedir:
 
-1. Üretim ve hazırlama ortamları (13) birincil bölgedeki ve yedekleme bölgede (14) web uygulaması arasında bir takas işlemi etkinleştirin. V2 uygulama artık yedekleme bölgede yedekli bir kopyasını içeren bir üretim ortamını olur.
-2. V1 uygulaması (15 ve 16) artık ihtiyacınız kalmadığında, hazırlık ortamı yetkisini alabilir.
+1. Birincil bölgedeki (13) ve yedekleme bölgesindeki (14) Web uygulamasının üretim ve hazırlama ortamları arasında takas işlemini etkinleştirin. Artık uygulamanın v2, yedekleme bölgesinde yedekli bir kopya ile bir üretim ortamı haline gelir.
+2. Artık v1 uygulamasına (15 ve 16) ihtiyacınız yoksa, hazırlama ortamının yetkisini alabilirsiniz.
 
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-3.png)
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-3.png)
 
-Yükseltme işlemi başarısızsa (örneğin, bir hata nedeniyle yükseltme komut dosyası) tutarsız bir durumda olması için hazırlık ortamı göz önünde bulundurun. Uygulama yükseltme öncesi durumuna geri almak için üretim ortamında uygulama V1 kullanmaya döner. Gerekli adımlar, sonraki diyagramda gösterilmiştir:
+Yükseltme işlemi başarısız olursa (örneğin, yükseltme betiğindeki bir hata nedeniyle), hazırlama ortamını tutarsız bir durumda olacak şekilde değerlendirin. Uygulamayı yükseltme öncesi durumuna geri almak için, üretim ortamındaki uygulamanın v1 'yi kullanmaya geri dönün. Gerekli adımlar sonraki diyagramda gösterilmiştir:
 
-1. Birincil veritabanı kopyasını, üretim ortamında okuma-yazma moduna (17) ayarlayın. Bu eylem, üretim ortamında tam V1 işlevselliği geri yükler.
-2. Kök neden analizi ve onarım gerçekleştirin veya hazırlama ortamına (18 ile 19) kaldırın.
+1. Üretim ortamındaki birincil veritabanı kopyasını okuma-yazma moduna (17) ayarlayın. Bu eylem, üretim ortamındaki tam v1 işlevselliğini geri yükler.
+2. Kök nedeni analizini gerçekleştirin ve hazırlama ortamını (18 ve 19) onarın veya kaldırın.
 
-Bu noktada, uygulamayı tamamen çalışır durumdadır ve yükseltme adımları tekrarlayabilirsiniz.
+Bu noktada, uygulama tam işlevseldir ve yükseltme adımlarını yineleyebilirsiniz.
 
 > [!NOTE]
-> Geri alma, DNS değiştirir, bir değiştirme işlemi gerçekleştirmedi çünkü gerektirmez.
+> Bir değiştirme işlemi gerçekleştirmediğinizden geri alma, DNS değişiklikleri gerektirmez.
 
-![Bulutta olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-4.png)
+![Bulut olağanüstü durum kurtarma için SQL veritabanı coğrafi çoğaltma yapılandırması.](media/sql-database-manage-application-rolling-upgrade/option2-4.png)
 
-Bu seçenek, önemli bir avantajı, hem uygulamayı hem de, coğrafi olarak yedekli bir kopyasını paralel yükseltme sırasında iş sürekliliği ödün vermeden yükseltebilirsiniz, ' dir.
+Bu seçeneğin önemli avantajı, yükseltme sırasında iş sürekliliğini tehlikeye atmadan hem uygulamayı hem de coğrafi olarak yedekli kopyayı paralel olarak yükseltebilmeniz gerekir.
 
-Ana artırabilen her uygulama bileşeninin çift yedeklilik gerektirir ve bu nedenle daha yüksek Doları maliyet doğurur ' dir. Ayrıca, daha karmaşık bir iş akışı içerir.
+Ana zorunluluğunu getirir, her uygulama bileşeni için iki artıklık gerektirdiğinden, bu nedenle dolar maliyeti daha yüksektir. Ayrıca, daha karmaşık bir iş akışı da içerir.
 
 ## <a name="summary"></a>Özet
 
-Makalede açıklanan iki yükseltme yöntemi, karmaşıklığı ve maliyeti dolar farklılık gösterir ancak her ikisi de kullanıcının ne kadar süreyle salt okunur işlemler için sınırlı olduğu en aza üzerinde odaklanın. Bu süre doğrudan süresini yükseltme komut dosyası tarafından tanımlanır. Veritabanı boyutu, seçtiğiniz hizmet katmanı, Web sitesi yapılandırması veya kolayca denetleyemezsiniz diğer etkenler bağımlı değildir. Tüm hazırlık adımları yükseltme adımları birbirinden ayrılmıştır ve üretim uygulama etkisi yoktur. Yükseltme betiği verimliliğini yükseltmeler sırasında kullanıcı deneyimini belirleyen önemli bir faktördür. Bu nedenle, bu deneyimi geliştirmek için en iyi yolu çalışmalarınızı yükseltme betiği mümkün olduğunda verimli yapmaya odaklanın sağlamaktır.
+Makalede açıklanan iki yükseltme yöntemi karmaşıklık ve dolar maliyetinde farklılık gösterir, ancak her ikisi de kullanıcının salt okuma işlemlerine ne kadar süreyle sınırlı olduğunu en aza indirir. Bu süre, yükseltme betiği süresince doğrudan tanımlanır. Bu, veritabanı boyutuna, seçtiğiniz hizmet katmanına, Web sitesi yapılandırmasına veya kolayca denetleyemeyen diğer faktörlere bağlı değildir. Tüm hazırlık adımları yükseltme adımlarından ayrılır ve üretim uygulamasını etkilemez. Yükseltme betiğinin verimliliği, yükseltmeler sırasında kullanıcı deneyimini belirleyen bir temel faktördür. Bu nedenle, bu deneyimi geliştirmenin en iyi yolu, yükseltme betiğini mümkün olduğunca verimli hale getirmek için çabalarınızı odaklamaktır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* İş sürekliliğine genel bakış ve senaryolar için bkz: [iş sürekliliğine genel bakış](sql-database-business-continuity.md).
-* Azure SQL veritabanı etkin coğrafi çoğaltma hakkında bilgi edinmek için [etkin coğrafi çoğaltmayı kullanarak okunabilir ikincil veritabanı oluşturma](sql-database-active-geo-replication.md).
-* Azure SQL veritabanı otomatik yük devretme grupları hakkında daha fazla bilgi için bkz: [birden fazla veritabanının saydam ve Eşgüdümlü yük devretmeyi etkinleştirmek için otomatik yük devretme grupları kullanma](sql-database-auto-failover-group.md).
-* Azure App Service'te hazırlık hakkında bilgi edinmek için [Azure App Service ortamlarında hazırlık ayarlama](../app-service/deploy-staging-slots.md).
-* Azure Traffic Manager profilleri hakkında bilgi edinmek için [bir Azure Traffic Manager profilini yönetme](../traffic-manager/traffic-manager-manage-profiles.md).
+* İş sürekliliği için genel bakış ve senaryolar için bkz. [iş sürekliliği genel bakış](sql-database-business-continuity.md).
+* Azure SQL veritabanı etkin coğrafi çoğaltma hakkında bilgi edinmek için bkz. [etkin coğrafi çoğaltma kullanarak okunabilir ikincil veritabanları oluşturma](sql-database-active-geo-replication.md).
+* Azure SQL veritabanı otomatik yük devretme grupları hakkında bilgi edinmek için bkz. [birden çok veritabanının saydam ve eşgüdümlü yük devretmesini etkinleştirmek için otomatik yük devretme gruplarını kullanma](sql-database-auto-failover-group.md).
+* Azure App Service ' deki hazırlama ortamları hakkında bilgi edinmek için bkz. [Azure App Service hazırlama ortamlarını ayarlama](../app-service/deploy-staging-slots.md).
+* Azure Traffic Manager profilleri hakkında bilgi edinmek için bkz. [azure Traffic Manager profilini yönetme](../traffic-manager/traffic-manager-manage-profiles.md).

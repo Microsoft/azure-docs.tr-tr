@@ -1,89 +1,91 @@
 ---
-title: Yaşam süresi ile Azure Cosmos DB'de verileri süresi dolacak
-description: TTL ile Microsoft Azure Cosmos DB sistemden bir süre sonra otomatik olarak temizlenir belgeleriniz olanağı sağlar.
-author: rimman
+title: Azure Cosmos DB yaşam süresi dolan verilerin süresi doluyor
+description: TTL ile, Microsoft Azure Cosmos DB bir süre sonra otomatik olarak sistemden temizlenebilme olanağı sağlar.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/21/2019
-ms.author: rimman
+ms.date: 07/26/2019
 ms.reviewer: sngun
-ms.openlocfilehash: 0b32665b09eb02c337a12ac3cfc2b474fa82711a
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: c504e2f574970142942945de5a0a9fb409bb166b
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447239"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73498309"
 ---
-# <a name="time-to-live-ttl-in-azure-cosmos-db"></a>Azure Cosmos DB süresi (TTL) 
+# <a name="time-to-live-ttl-in-azure-cosmos-db"></a>Azure Cosmos DB yaşam süresi (TTL) 
 
-İle **yaşam süresi** veya TTL, Azure Cosmos DB öğeleri belirli bir zaman aralığına sonra otomatik olarak bir kapsayıcıdan silme olanağı sağlar. Varsayılan olarak, zaman kapsayıcı düzeyinde canlı ve geçersiz kılma değeri öğe başına temelinde ayarlayabilirsiniz. Bir kapsayıcı veya bir öğe düzeyinde TTL ayarladıktan sonra Azure Cosmos DB son değiştirme zamanı beri süre sonra otomatik olarak bu öğeleri kaldırır. Saniye cinsinden yaşam süresi değeri yapılandırılır. TTL yapılandırdığınızda, sistem otomatik olarak TTL değeri, istemci uygulama tarafından açıkça verildiği bir silme işlemi gerek kalmadan temelinde süresi dolan öğeleri silin.
+**Yaşam süresi** veya TTL ile, Azure Cosmos DB belirli bir süre sonra bir kapsayıcıdan otomatik olarak öğe silme olanağı sağlar. Varsayılan olarak, kapsayıcı düzeyinde yaşam süresi ayarlayabilir ve değeri öğe temelinde geçersiz kılabilirsiniz. TTL 'yi bir kapsayıcıda veya bir öğe düzeyinde ayarladıktan sonra, Azure Cosmos DB son değiştirildikleri zamandan beri bu öğeleri otomatik olarak zaman dilimi sonra kaldırır. Yaşam süresi değeri Saniyeler içinde yapılandırılır. TTL 'yi yapılandırdığınızda, sistem, istemci uygulaması tarafından açıkça verilen silme işlemine gerek kalmadan, TTL değerine göre süresi geçen öğeleri otomatik olarak siler.
+
+Süre sonu öğelerin silinmesi, Kullanıcı istekleri tarafından tüketilen Istek birimleri olan, sol taraftaki [Istek birimleri](request-units.md)tüketen bir arka plan görevdir. TTL 'nin süresi dolduktan sonra bile, kapsayıcı isteklerle aşırı yüklenmişse ve yeterli sayıda RU yoksa, veri silme geciktirilir. Silme işlemini gerçekleştirmek için yeterli ru varsa veriler silinir. Veri silme gecikiyor olsa da, TTL süresi dolduktan sonra veriler hiçbir sorgu (herhangi bir API tarafından) tarafından döndürülmez.
 
 ## <a name="time-to-live-for-containers-and-items"></a>Kapsayıcılar ve öğeler için yaşam süresi
 
-Saniye cinsinden yaşam süresi değeri ayarlanır ve bir öğenin son değiştirilme zamanından bir değişim olarak yorumlanır. Bir kapsayıcı veya bir öğe kapsayıcı içindeki yaşam süresi ayarlayabilirsiniz:
+Yaşam süresi değeri saniye cinsinden ayarlanır ve bir öğenin son değiştirilme zamanından Delta olarak yorumlanır. Bir kapsayıcıda veya kapsayıcı içindeki bir öğede yaşam süresi ayarlayabilirsiniz:
 
-1. **Bir kapsayıcıda yaşam süresi** (kullanılarak ayarlanan `DefaultTimeToLive`):
+1. **Kapsayıcıda yaşam süresi** (`DefaultTimeToLive`kullanarak ayarla):
 
-   - Eksikse (veya null olarak ayarlanır) öğeleri olmayan süresi dolmuş otomatik olarak.
+   - Eksik (veya null olarak ayarlandıysa), öğelerin otomatik olarak zaman aşımına ermez.
 
-   - Mevcut ve değeri ayarlandığında, "-1" sonsuza eşittir ve öğeleri varsayılan olarak dolmasın.
+   - Varsa ve değer "-1" olarak ayarlanırsa, sonsuzluk ile eşittir ve varsayılan olarak öğelerin kullanım süreleri dolmaz.
 
-   - Mevcut ve değeri ayarlandığında, bazı sayıya *"n"* – öğeleri sona erecek *"n"* sonra son değiştirme zamanı saniye.
+   - Varsa ve değer bir sayı *"n"* olarak ayarlanırsa, son değiştirilme zamanından sonra öğelerin süresi *"n"* saniye dolacak.
 
-2. **Yaşam süresi bir öğe üzerinde** (kullanılarak ayarlanan `ttl`):
+2. **Bir öğe üzerinde yaşam süresi** (`ttl`kullanarak ayarlayın):
 
-   - Bu özellik geçerli yalnızca `DefaultTimeToLive` mevcut olduğundan ve ayarlı değil için üst kapsayıcı null.
+   - Bu özellik yalnızca `DefaultTimeToLive` varsa ve üst kapsayıcı için null olarak ayarlanmamışsa geçerlidir.
 
-   - Varsa, onu geçersiz kılar `DefaultTimeToLive` üst kapsayıcı değeri.
+   - Varsa, üst kapsayıcının `DefaultTimeToLive` değerini geçersiz kılar.
 
-## <a name="time-to-live-configurations"></a>Canlı yapılandırmaları süresi
+## <a name="time-to-live-configurations"></a>Canlı yapılandırmaların süresi
 
-* TTL ayarlanırsa *"n"* bir kapsayıcı, sonra öğeleri bu kapsayıcı içinde dolacağını *n* saniye.  Canlı için -1 (süresinin sona ermediğinden gösteren) olarak ayarlayın, kendi zamanınız öğe ile aynı kapsayıcıda veya bazı öğeler, farklı bir sayıyla ayar yaşam süresini kıldıysanız, bu öğelerin süresinin üzerinde yapılandırılmış bir TTL değeri kendi temel. 
+* TTL bir kapsayıcıda *"n"* olarak ayarlanırsa, o kapsayıcıdaki öğelerin süresi *n* saniye sonra dolacak.  Aynı kapsayıcıda kendi yaşam süresi olan öğeler varsa,-1 ' e (süresinin dolmadığını gösterir) veya bazı öğelerin farklı bir sayı ile yaşam süresi ayarı geçersiz kılınmışsa, bu öğelerin kendisi kendi yapılandırılmış TTL değerlerine göre sona erer. 
 
-* TTL bir kapsayıcı ayarlanmazsa, bu kapsayıcı içinde bir öğe yaşam süresini etkiye sahip değildir. 
+* TTL bir kapsayıcıda ayarlanmamışsa, bu kapsayıcıdaki bir öğe üzerinde yaşam süresi etkisizdir. 
 
-* Bir kapsayıcı TTL -1 olarak ayarlanırsa, zaman n, Canlı kümesine sahiptir, bu kapsayıcıdaki bir öğe n saniye sonra sona erecek ve kalan öğeleri dolmaz. 
+* Bir kapsayıcıda TTL değeri-1 olarak ayarlandıysa, bu kapsayıcıda yaşam süresi n olarak ayarlanan bir öğe n saniye sonra sona erer ve kalan öğelerin süresi dolmaz. 
 
-TTL temel öğeleri silmek ücretsizdir. Hiçbir ek ücret yoktur (diğer bir deyişle, hiçbir ek RU tüketilir) sonucunda TTL bitiş öğesi silindiğinde.
+TTL tabanlı öğeleri silme ücretsizdir. TTL süre sonu sonucu olarak öğe silindiğinde ek bir ücret (yani başka bir ru tüketilmemiş) yoktur.
 
 ## <a name="examples"></a>Örnekler
 
-Bu bölümde, kapsayıcı ve öğeler için atanan değerler farklı süresi ile ilgili bazı örnekler gösterilmektedir:
+Bu bölümde, kapsayıcıya ve öğelerine atanan canlı değerler için farklı zamana sahip bazı örnekler gösterilmektedir:
 
 ### <a name="example-1"></a>Örnek 1
 
-TTL kapsayıcısı üzerinde ayarlanmış null (DefaultTimeToLive = null)
+Kapsayıcıda TTL null olarak ayarlandı (DefaultTimeToLive = null)
 
-|Öğe TTL| Sonuç|
+|Öğe üzerinde TTL| Sonuç|
 |---|---|
-|TTL = null|    TTL devre dışı bırakıldı. Öğesi (varsayılan) hiçbir zaman sona erecek.|
-|TTL = -1   |TTL devre dışı bırakıldı. Öğesi hiçbir zaman sona erecek.|
-|TTL 2000 = |TTL devre dışı bırakıldı. Öğesi hiçbir zaman sona erecek.|
+|TTL = null|    TTL devre dışı bırakıldı. Öğe hiçbir zaman sona ermez (varsayılan).|
+|TTL =-1   |TTL devre dışı bırakıldı. Öğe hiçbir zaman sona ermez.|
+|TTL = 2000 |TTL devre dışı bırakıldı. Öğe hiçbir zaman sona ermez.|
 
 
 ### <a name="example-2"></a>Örnek 2
 
-Kapsayıcı TTL -1 olarak ayarlayın (DefaultTimeToLive = -1)
+Kapsayıcıda TTL-1 olarak ayarlanır (DefaultTimeToLive =-1)
 
-|Öğe TTL| Sonuç|
+|Öğe üzerinde TTL| Sonuç|
 |---|---|
-|TTL = null |TTL etkinleştirilir. Öğesi (varsayılan) hiçbir zaman sona erecek.|
-|TTL = -1   |TTL etkinleştirilir. Öğesi hiçbir zaman sona erecek.|
-|TTL 2000 = |TTL etkinleştirilir. Öğe, 2000 saniye sonra sona erecek.|
+|TTL = null |TTL etkin. Öğe hiçbir zaman sona ermez (varsayılan).|
+|TTL =-1   |TTL etkin. Öğe hiçbir zaman sona ermez.|
+|TTL = 2000 |TTL etkin. Öğe 2000 saniye sonra dolacak.|
 
 
 ### <a name="example-3"></a>Örnek 3
 
-Kapsayıcı TTL 1000'e ayarlayın (DefaultTimeToLive = 1000)
+Kapsayıcıda TTL 1000 olarak ayarlanır (DefaultTimeToLive = 1000)
 
-|Öğe TTL| Sonuç|
+|Öğe üzerinde TTL| Sonuç|
 |---|---|
-|TTL = null|    TTL etkinleştirilir. Öğesi (varsayılan) 1000 saniye sonra sona erecek.|
-|TTL = -1   |TTL etkinleştirilir. Öğesi hiçbir zaman sona erecek.|
-|TTL 2000 = |TTL etkinleştirilir. Öğe, 2000 saniye sonra sona erecek.|
+|TTL = null|    TTL etkin. Öğenin süresi 1000 saniye (varsayılan) olur.|
+|TTL =-1   |TTL etkin. Öğe hiçbir zaman sona ermez.|
+|TTL = 2000 |TTL etkin. Öğe 2000 saniye sonra dolacak.|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağıdaki makaleler de yaşam süresi yapılandırma işlemleri gerçekleştirmeyi öğreneceksiniz:
+Aşağıdaki makalelerde yaşam süresi yapılandırma hakkında bilgi edinin:
 
-* [Yaşam süresi yapılandırma](how-to-time-to-live.md)
+* [Yaşam süresi nasıl yapılandırılır?](how-to-time-to-live.md)

@@ -1,143 +1,143 @@
 ---
-title: Dil desteği - Content Moderator API'si
+title: Dil desteği-Content Moderator API
 titleSuffix: Azure Cognitive Services
-description: Content Moderator API'si destekleyen doğal dillerin bir listesi budur.
+description: Bu, Azure bilişsel hizmetler Content Moderator API 'nin desteklediği doğal dillerin bir listesidir.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
-ms.topic: article
+ms.topic: conceptual
 ms.date: 01/10/2019
-ms.author: sajagtap
-ms.openlocfilehash: cf1dc352068747ab2f77beec8802407d15699d17
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: pafarley
+ms.openlocfilehash: 9574af31c881589668c462099cae46d9e83b454b
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60607160"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73744370"
 ---
-# <a name="language-support-for-content-moderator-api"></a>Content Moderator API'si için dil desteği
+# <a name="language-support-for-content-moderator-api"></a>Content Moderator API için dil desteği
 
 > [!NOTE]
-> İçin **dil** parametresi, Ata `eng` veya makine destekli görmek için boş bırakın **sınıflandırma** yanıt (Önizleme özelliği). **Bu özellik yalnızca İngilizce destekler**.
+> **Dil** parametresi için, makine yardımlı **Sınıflandırma** yanıtını (Önizleme özelliği) görmek üzere `eng` atayın veya boş bırakın. **Bu özellik yalnızca İngilizce 'yi destekler**.
 >
-> İçin **küfür koşulları** algılama, kullanımı [ISO 639-3 kodu](http://www-01.sil.org/iso639-3/codes.asp) bu konuda listelenen desteklenen dillerin makale veya boş bırakın.
+> **Küfür terimleri** algılama için, bu makalede listelenen desteklenen dillerin [ISO 639-3 kodunu](http://www-01.sil.org/iso639-3/codes.asp) kullanın veya boş bırakın.
 
 
-| Dil algılama | Küfür   | OCR    | Otomatik Düzeltme     | |
-| -------------------- |-------------|--------|---------------------|---|
-| Arapça (Romanized)   | Afrikaner dili   | Arapça   | Arapça | |
-| Bali dili | Arnavutça | Çince (Basitleştirilmiş)    | Danca | |
-| Bengali | Amhara dili | seçenekleri yerine     | Felemenkçe | |
-| Bugi dili | Arapça | Çekçe                     | Türkçe | |
-| Buhid | Ermenice | Danca                     | Fince | |
-| Carian | Assam dili | Felemenkçe                     | Fransızca | |
-| Çince (Basitleştirilmiş) | Azerbaycan | Türkçe  | Yunanca (modern) | |
-| seçenekleri yerine | Bangla - Bangladeş | Fince  | İtalyanca | |
-| Church (Slavca) | Bangla - Hindistan | Fransızca     | Korece | |
-| Koptikleri | Bask dili | Almanca                      | Norveççe | |
-| Çekçe |  Beyaz Rusça | Yunanca (modern)         | Lehçe | |
-| Dhivehi | Boşnakça - Kiril | Macarca      | Portekizce | |
-| Felemenkçe | Boşnakça - Latin | İtalyanca             | Rumence | |
-| Türkçe | (Kreyolu) | Bretonca [GeoPol olmayan] | Japonca  | Rusça |
-| Farsça | Bulgarca | Korece                        | Slovakça | |
-| Fransızca | Katalanca | Norveççe                        | İspanyolca ||
-| Almanca | Orta Kürtçe | Lehçe        | Türkçe | |
-| Yunanca | Çeroki dili | Portekizce | | |
-| Haitian | Çince (Basitleştirilmiş) | Rumence | | |
-| İbranice | Çince (Geleneksel) - Hong Kong ÖİB | Rusça | | |
-| Hintçe | Çince (Geleneksel) - Tayvan | Sırpça Kiril | | |
-| Hmong | Hırvatça | Sırpça Latin | | |
-| Macarca | Çekçe | Slovakça | | |
-| İtalyanca | Danca | İspanyolca | | |
-| Japonca | Dari | İsveççe | | |
-| Korece | Felemenkçe | Türkçe | | |
-| Kurdish (Arabic) | Türkçe | | | |
-| Kürtçe (Latin) | Estonca | | | |
-| Lepça dili | Filipin dili | | | |
-| Limbu dili | Fince | | | |
-| Lu | Fransızca | | | |
-| Lycian | Galiçya dili | | | |
-| Lydian | Gürcüce | | | |
-| Mycenaean (Yunanca) | Almanca | | | |
-| Nko | Yunanca | | | |
-| Norveççe (Bokmal) | Gucerat dili | | | |
-| Norveç dili (Nynorsk) |  Hausa | | | |
-| Eski (Farsça) | İbranice | | | |
-| Pashto | Hintçe | | | |
-| Lehçe | Macarca | | | |
-| Portekizce | İzlanda dili | | | |
-| Pencap dili | İgbo dili | | | |
-| Rejang | Endonezya dili | | | |
-| Rusça | İnuit dili | | | |
-| Santali | İrlanda dili | | | |
-| Sasak | Zosa Dili | | | |
-| Saurashtra | Zulu dili | | | |
-| Sırpça (Kiril) | İtalyanca | | | |
-| Sırpça (Latin) | Japonca | | | |
-| Sinhala | Kannada dili | | | |
-| Slovence | Kazakça | | | |
-| İspanyolca | Khmer | | | |
-| İsveççe | Kiçe dili | | | |
-| Sylheti | Kinyarwanda | | | |
-| Süryanice | Svahili dili | | | |
-| Tagbanwa | Konkani dili | | | |
-| Tai (Nua) | Korece | | | |
-| Tamashek | Kırgızca | | | |
-| Türkçe | Lao dili | | | |
-| Ugaritic | Letonca | | | |
-| Özbekçe (Kiril) | Litvanca | | | |
-| Özbekçe (Latin) | Lüksemburg dili | | | |
-| Vai | Makedonya | | | |
-| Yi | Malay dili | | | |
-| Zhuang, Chuang | Malayalam dili | | | |
-| | Malta dili | | | |
-| | Maori | | | |
-| | Marathi | | | |
-| | Moğolca | | | |
-| | Nepal dili | | | |
-| | Norwegian (Bokmål) | | | |
-| | Norveç dili (Nynorsk) | | | |
-| | Odia | | | |
-| | Pashto | | | |
-| | Farsça | | | |
-| | Lehçe | | | |
-| | Portekizce - Brezilya | | | |
-| | Portekizce - Portekiz | | | |
-| | Pulaar | | | |
-| | Pencap dili | | | |
-| | Punjabi (Pakistan) | | | |
-| | Keçuva dili (Peru) | | | |
-| | Rumence | | | |
-| | Rusça | | | |
-| | Scottish Gaelic | | | |
-| | Sırpça (Kiril) | | | |
-| | Sırpça (Kiril, Bosna ve Hersek) | | | |
-| | Sırpça (Latin) | | | |
-| | Sesotho | | | |
-| | Kuzey Sesotho dili | | | |
-| | Setswana | | | |
-| | Sindhi dili | | | |
-| | Sinhala | | | |
-| | Slovakça | | | |
-| | Slovence | | | |
-| | İspanyolca | | | |
-| | İsveççe | | | |
-| | Tacikçe dili | | | |
-| | Tamil dili | | | |
-| | Tatarca | | | |
-| | Telugu dili | | | |
-| | Tay Dili | | | |
-| | Tigrinya dili | | | |
-| | Türkçe | | | |
-| | Türkmence | | | |
-| | Ukrayna dili | | | |
-| | Urduca | | | |
-| | Uygurca | | | |
-| | Özbekçe | | | |
-| | Valensiyaca | | | |
-| | Vietnam dili | | | |
-| | Gaelce | | | |
-| | Volof dili | | | |
-| | Yoruba | | | |
+| Dil algılama | Uygunsuz   | OCR    | Otomatik Düzeltme     |
+| -------------------- |-------------|--------|---------------------|
+| Arapça (Romanlanmış)   | Afrikaner   | Arapça   | Arapça |
+| Bali | Arnavutça | Çince (Basitleştirilmiş)    | Danca |
+| Bengali | Amhara Dili | Çince (Geleneksel)     | Hollanda dili |
+| Bugi | Arapça | Çekçe                     | Türkçe |
+| Buhid | Ermenice | Danca                     | Fince |
+| Carian dili | Assam | Hollanda dili                     | Fransızca |
+| Çince (Basitleştirilmiş) | Dili | Türkçe  | Yunanca (modern) |
+| Çince (Geleneksel) | Bangla-Bangladeş | Fince  | İtalyanca |
+| Church (Slavcası) | Bangla-Hindistan | Fransızca     | Korece |
+| Kıpti | Bask dili | Almanca                      | Norveççe |
+| Çekçe |  Beyaz Rusça | Yunanca (modern)         | Lehçe |
+| Dhivehi | Boşnakça-Kiril | Macarca      | Portekizce |
+| Hollanda dili | Boşnakça-Latin | İtalyanca             | Rumence |
+| İngilizce (Creole) | Breton [GeoPol] | Japonca  | Rusça |
+| Harfinin | Bulgarca | Korece                        | Slovakça |
+| Fransızca | Katalanca | Norveççe                        | İspanyolca |
+| Almanca | Orta Kürtçe | Lehçe        | Türkçe |
+| Yunanca | Çeroki dili | Portekizce | |
+| Haiti | Çince (Basitleştirilmiş) | Rumence | |
+| İbranice | Çince (Geleneksel)-Hong Kong ÖİB | Rusça | |
+| Hintçe | Çince (Geleneksel)-Tayvan | Sırpça Kiril | |
+| Hmong | Hırvatça | Sırpça Latin | |
+| Macarca | Çekçe | Slovakça | |
+| İtalyanca | Danca | İspanyolca | |
+| Japonca | Dili | İsveççe | |
+| Korece | Hollanda dili | Türkçe | |
+| Kürtçe (Arapça) | Türkçe | | |
+| Kürtçe (Latin) | Estonca | | |
+| LEPCHA | Filipin dili | | |
+| Limbu | Fince | | |
+| Lu | Fransızca | | |
+| Lycian dili | Galiçya lehçesi | | |
+| Lyi dili | Gürcüce | | |
+| Mycenaean (Yunanca) | Almanca | | |
+| Nko | Yunanca | | |
+| Norveççe (Bokmal) | Gucerat dili | | |
+| Norveç dili (Nynorsk) |  Hausa Dili | | |
+| Eski (Farsça) | İbranice | | |
+| Peştuca | Hintçe | | |
+| Lehçe | Macarca | | |
+| Portekizce | İzlanda dili | | |
+| Pencap dili | İgbo Dili | | |
+| Rejang | Endonezya dili | | |
+| Rusça | Dili | | |
+| Santali | İrlanda dili | | |
+| Harfi | Zosa dili | | |
+| Saurashtra | Zulu dili | | |
+| Sırpça (Kiril) | İtalyanca | | |
+| Sırpça (Latin) | Japonca | | |
+| Sinhali | Kannada dili | | |
+| Slovence | Kazakça | | |
+| İspanyolca | Khmer | | |
+| İsveççe | Kiçe dili | | |
+| Sylheti | Kinyarvanda dili | | |
+| Yani | Svahili dili | | |
+| Tagbanwa | Dili | | |
+| Day (Nua) | Korece | | |
+| Tamashek | Kırgızca | | |
+| Türkçe | Laos | | |
+| Ugaritik | Letonca | | |
+| Özbekçe (Kiril) | Litvanca | | |
+| Özbekçe (Latin) | Lüksemburg dili | | |
+| Vai | CA | | |
+| Yi dili | Malay dili | | |
+| Zhuang, Chuang | Malayalam dili | | |
+| | Malta dili | | |
+| | Maori dili | | |
+| | Marathi | | |
+| | Moğolca | | |
+| | Nepal Dili | | |
+| | Norveççe (Bokmål) | | |
+| | Norveç dili (Nynorsk) | | |
+| | Odia | | |
+| | Peştuca | | |
+| | Farsça | | |
+| | Lehçe | | |
+| | Portekizce-Brezilya | | |
+| | Portekizce-Portekiz | | |
+| | Pulaar | | |
+| | Pencap dili | | |
+| | Pencap dili (Pakistan) | | |
+| | Keçuva dili (Peru) | | |
+| | Rumence | | |
+| | Rusça | | |
+| | İskoçya Gaelcesi | | |
+| | Sırpça (Kiril) | | |
+| | Sırpça (Kiril, Bosna-Hersek) | | |
+| | Sırpça (Latin) | | |
+| | Sesotho | | |
+| | Kuzey Sotho dili | | |
+| | Setsvana Dili | | |
+| | Di | | |
+| | Sinhali | | |
+| | Slovakça | | |
+| | Slovence | | |
+| | İspanyolca | | |
+| | İsveççe | | |
+| | İK | | |
+| | Tamil dili | | |
+| | Tatarca | | |
+| | Telugu dili | | |
+| | Tay dili | | |
+| | Tigrinya dili | | |
+| | Türkçe | | |
+| | Türkmence | | |
+| | Ukrayna dili | | |
+| | Urduca | | |
+| | Uygurca | | |
+| | Özbekçe | | |
+| | Valensiyaca | | |
+| | Vietnam dili | | |
+| | Galce | | |
+| | Volof dili | | |
+| | Dili | | |

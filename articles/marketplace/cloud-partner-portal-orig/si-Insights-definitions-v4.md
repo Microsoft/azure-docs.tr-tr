@@ -1,107 +1,108 @@
 ---
-title: Satıcı Insights tanımları
-description: Birçok satıcı Insights'ta bulabilirsiniz terimlerin tanımları sağlar
+title: Satıcı öngörüleri tanımları
+description: ', Satıcı öngörülerinde bulacağınız koşulların birçoğu için tanımlar sağlar'
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 8b3447b8094eb95bd2f61baed7371bf718fdf730
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2571f916f6efc61772b2734119e197996e2ffe3c
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65606915"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73809104"
 ---
-<a name="seller-insights-definitions"></a>Satıcı Insights tanımları
+<a name="seller-insights-definitions"></a>Satıcı öngörüleri tanımları
 =======================
 
-Aşağıdaki tabloda birçok satıcı Insights'ta kullanılan terimler için tanımları sağlar.
+Aşağıdaki tabloda, satıcı öngörülerinde kullanılan birçok terim için tanımlar sağlanmıştır.
 
-|  **Terim**                 |  **Tanım**                                                                                                                              |
+|  **Terimli**                 |  **Tanım**                                                                                                                              |
 |  --------------------------------------------    |  ---------------------------------------------------------------------------------------------------------------------------------           |
-| **Azure lisans türü**                               | Müşterilerin Azure'u satın almak için kullanılan lisans sözleşmesi türü.  Kanal olarak da bilinir.                                                  |
-| **Azure lisans türü: Bulut çözümü sağlayıcısı**      | Azure ve Market teklifinizi kimin satıcınızla davranan, bulut çözümü sağlayıcısı aracılığıyla son müşteri procures.                 |
-| **Azure lisans türü: Enterprise**                   | Azure ve doğrudan Microsoft ile imzalanmış bir kurumsal anlaşması, Market teklifi, son müşteri procures.                  |
-| **Azure lisans türü: Satıcıdan Enterprise**  | Azure ve Market teklifinizi Microsoft ile Kurumsal Anlaşma kolaylaştıran bir satıcı aracılığıyla son müşteri procures.     |
-| **Azure lisans türü: Kullandıkça ödeyin**                | Azure ve Market teklifinizi doğrudan Microsoft ile imzalanmış bir "Kullandıkça Öde" sözleşmesi aracılığıyla son müşteri procures.                |
-| **Ücret tutarı (CC)**                              | Tutar müşteriye ücret *müşteri para birimi* (CC) faturalandırma için.                                                                 |
-| **Ücret tutarı (PC)**                               | Tutar müşteriye ücret *ödeme para birimi* (PC).                                                                      |
-| **Ödeme tarihi**                                      | Müşteri'nin ücreti tarihi (genellikle kullanım dönemi takip) hesaplanır.                                             |
-| **Bulut örneği adı**                              | Bir VM dağıtımı oluştuğu Microsoft Cloud.                                   |
-| **Bulut örneği adı: Azure genel**                | Genel küresel Microsoft bulut.                           |
-| **Bulut örneği adı: Azure kamu**        | Aşağıdaki devlet kurumları, birinin government'a özel Microsoft bulut: Çin, Almanya veya Amerika Birleşik Devletleri.                           |
-| **Toplama durumu**  | Belirli ücreti, faturalandırma ve koleksiyon yaşam döngüsü en son durumu.  Örneğin, durum toplandı, ilerleme, ya da para iadesinin koleksiyonda olabilir.                  |
-| **Çekirdek boyutu**  | Teklif çalıştıran sanal makine tarafından sunulan sanal çekirdek sayısı.               |
-| **Müşteri Şehir**  | Müşteri tarafından sağlanan şehir adı. Bu, bir müşterinin Azure aboneliğini şehirde farklı olabilir.  |
-| **Müşteri iletişim dili**        | İletişim müşteri tarafından tercih edilen dili.                                  |
-| **Müşteri şirket adı**                  | Müşteri tarafından sağlanan şirket adı. Bu, bir müşterinin Azure aboneliğini şehirde farklı olabilir.                                  |
-| **Müşteri Ülke**                       | Müşteri tarafından sağlanan ülke/bölge adı.  Bu, bir müşterinin Azure aboneliğindeki bir ülke/bölge farklı olabilir.                               |
-| **Müşteri para birimi (CC)**                 | Fiyatlandırma ve faturalama için müşteri tarafından tercih edilen para birimi.                            |
-| **Müşteri e-posta**                         | Son müşteri tarafından sağlanan e-posta adresi.  Bu, bir müşterinin Azure aboneliği e-posta adresinden farklı olabilir.                   |
-| **Müşteri adı**                              | Müşteri tarafından sağlanan ilk adı.  Bu, bir müşterinin Azure aboneliğinde sağlanan adından farklı olabilir.                    |
-| **Müşteri Soyadı**                               | Müşteri tarafından sağlanan son adı.  Bu, bir müşterinin Azure aboneliğinde sağlanan adından farklı olabilir.                    |
-| **Müşteri Kimliği**                               | Bir müşteri için atanan benzersiz tanımlayıcısı.  Bir müşteri, sıfır veya daha fazla Azure Market abonelikleri olabilir.                    |
-| **Müşteri ödeme türü**                            | Müşteri tarafından kullanılan ödeme türü.  Örneğin, bu kart, fatura veya elektronik onay olabilir.                             |
-| **Müşteri posta kodu**                             | Müşteri tarafından sağlanan posta kodu.  Bu, bir müşterinin Azure aboneliğinde sağlanan posta kodu farklı olabilir.                                                                 |
-| **Müşteri durumu**                                   | Müşteri tarafından sağlanan durumu (adres).  Bu, bir müşterinin Azure aboneliğinde sağlanan son adından farklı olabilir.                                                                 |
-| **Alım tarihi**                                    | İlk tarih müşteri tarafından yayımladığınız herhangi bir teklif satın.                 |
-| **Kayıp tarihi**                                        | Son tarihi daha önce satın aldığınız tüm teklifleri son müşteri iptal edildi.                                                         |
-| **Tahmini genişletilmiş ücreti (CC)**                   | Tahmini birim kullanım miktarını ücreti (müşterinin para birimi içinde) belirtilen bir SKU için genişletilmiş. Bu değer, yuvarlama veya kesme hataları nedeniyle tam olmayabilir.                            |
-| **Tahmini genişletilmiş ücreti (PC)**                   | Tahmini ücreti Döviz dönüştürme tarihi kullanımına dayalı belirli bir SKU, birimleri kullanımının miktarı için Genişletilmiş (yayımcının para biriminde) hesaplanır. Bu değer, yuvarlama veya kesme hataları nedeniyle tam olmayabilir.                  |
-| **Tahmini ödeme (PC)**                            | Tahmini ödemesini birimlerinin miktarı için kullanım Döviz dönüştürme kullanım (yayımcının para biriminde) hesaplanan bir tarihte göre verilen bir SKU. Bu değer, yuvarlama veya kesme hataları nedeniyle tam olmayabilir.                        |
-| **Tahmini Fiyat (PC)**                             | Tahmini fiyat Döviz dönüştürme tarihi kullanımına göre verilen bir SKU için kullanım biriminin (yayımcının para biriminde) olarak hesaplanır. Bu değer, yuvarlama veya kesme hataları nedeniyle tam olmayabilir.                                             |
-| **Yeni müşteri**                                  | Değer, kullanan veya bir satın alma için yeni bir müşteri olan veya daha fazla, Market'ten sunan ilk kez (veya değil) olanak tanır.  Aynı takvim ayı "Tarih alınan" için ise değer "Evet" olacaktır.  Müşteri tekliflerinizi önce bildirilen Takvim ayı birini satın aldıysa değer "Hayır" olacaktır.                                                       |
-| **Önizleme SKU**                                  | Değer SKU "Önizleme" olarak etiketlenmiş, size sağlayacaktır. Değer "Evet" SKU buna göre etiketlenir ve sizin tarafınızdan yetkili yalnızca Azure abonelikleri dağıtabilir ve bu görüntüyü kullanma olacaktır.  SKU "Önizleme" olarak tanımlanmamış değer "Hayır" olacaktır.                                          |
-| **Promosyon kişi olduğunu kabul etme**                   | Değer, müşteri proaktif olarak promosyon kişiden yayımcılar için kabul durumunda size sağlayacaktır. Biz panoyu arasında "Hayır" belirttiniz. Bu nedenle şu anda şu seçeneği müşterilere sunuyorsanız değil. Bu özellik dağıtıldıktan sonra uygun şekilde güncelleştirilmesi başlayacağız.                                          |
-| **Market lisans türü**                         | Market teklifi fatura yöntemi.                             |
-| **Market lisans türü: Azure üzerinden faturalandırılır**   | Microsoft bu Market teklifi aracınızın ve sizin adınıza müşteriler düzenler. (PAYG kredi kartı veya fatura Kurumsal)       |
-| **Market lisans türü: Kendi lisansını Getir** | VM dağıtmak için müşteri tarafından sağlanan bir lisans anahtarı gerektirir. Microsoft, müşterilerin kendi kullanımı bu Market teklifleri için fatura değil. |
-| **Market lisans türü: Ücretsiz**                   | Market teklifi, tüm kullanıcılara ücretsiz olarak yapılandırılır. Microsoft, müşterilerin bu Market teklifi kendi kullanımı için fatura değil.    |
-| **Market lisans türü: Microsoft satıcı olarak**  | Bu Market teklifi için satıcınızla Microsoft'tur.                               |
-| **Market abonelik şirket adı**  | Azure aboneliklerinde müşteri tarafından sağlanan şirket adı.                           |
-| **Market abonelik kimliği**            | Benzersiz tanımlayıcısı, müşterinin, Market teklifi satın almak için kullanılan Azure aboneliği ile ilişkili.  Önceden, Azure abonelik GUİD'i olan.  Bir SAAS düzeni gibi bazı durumlarda, abonelik gereklidir.           |
-| **Microsoft ücreti (CC)**                               | Microsoft ücreti, müşterinin para hareketi.                              |
-| **Teklif adı**                                | Market teklifi adı.                                                             |
-| **Teklif türü**                                | Microsoft Marketplace Teklif türü.  Örneğin, yönetilen uygulama, sanal makine lisans ya da kapsayıcı olabilir.                           |
-| **Sipariş İptal tarihi**                         | Market siparişi iptal edildiği tarih.                                                       |
-| **Sipariş Kimliği**                                  | Müşteri siparişi Market hizmetiniz için benzersiz tanımlayıcısı.  Sanal makine kullanım tabanlı teklifleri bir sıra ile ilişkili değildir.                 |
-| **Sipariş satın alma tarihi**                       | Market siparişi oluşturulduğu tarih.                                                        |
-| **Sipariş miktarı**                       | Bir Azure aboneliği ile ilişkili aynı SKU için sipariş miktarı.  SAAS siparişlerini sipariş bu örnekle ilişkili bilgisayar lisansı sayısını temsil eder.                                            |
-| **Sipariş durumu**                              | Verilerin son yenilenme zamanı Market sırada durumu.  Örneğin, sipariş etkin veya iptal edilmiş olabilir.             |
-| **Sipariş durumu: Etkin**                           | Müşteri, sipariş satın aldı ve bunların sırası iptal değil.   |
-| **Sipariş durumu: İptal edildi**                        | Müşteri sipariş önceden satın ve daha sonra bunların sırası iptal edildi.        |
-| **Ödeme Tutarı (PC)**                             | Size, tercih edilen ödeme para birimi (PC) içinde ödenen miktar.                                       |
-| **Ödeme para birimi (PC)**                           | Ödeme için kullanılan para birimi.                                                                |
-| **Ödeme tarihi**                                    | Tarih, seçilen finansal Kurumunuz için Microsoft'tan ödeme istek gönderildi.                                                                         |
-| **Ödeme durumu**                                  | Verilerin son yenilenme zaman ödeme durumu.                                   |
-| **Ödeme durumu: Sürüyor**               | İşlem için ödeme hazır değil. (Daha fazla bilgi için bkz: Koleksiyon durumu)                             |
-| **Ödeme durumu: Ödenen**                          | İşlem, bir önceki ödeme hesaplamaya dahil edildi. Pozitif değerler Ücretli ve karşı toplam tutar negatif değerler netted. |
-| **Ödeme durumu: Gelecek ödeme**                   | İşlem için ödeme hazır olduğunda ve bir sonraki kullanılabilir ödeme hesaplamaya dahil edilir.                      |
-| **Fiyat (CC)**                                   | Kullanım (müşterinin para birimi içinde) belirtilen bir SKU için bir birim fiyatı.                                                                  |
-| **Sağlayıcı e-posta**                                 | Son müşteri ile Microsoft arasındaki ilişkiyi katılan sağlayıcısı e-posta adresi. Müşteri kuruluş satıcıdan ise, satıcıya olacaktır.  Bir bulut çözümü sağlayıcısı (CSP) söz konusuysa, CSP olacaktır.                                                                 |
-| **Sağlayıcı adı**                                 | Microsoft ve son müşteri arasındaki ilişkiyi katılan sağlayıcısının adı. Müşteri kuruluş satıcıdan ise, satıcıya olacaktır.  Bir bulut çözümü sağlayıcısı (CSP) söz konusuysa, CSP olacaktır.                                                                 |
-| **Kaynak URI'si**                                  | Dağıtım yapıt dağıtıldığı yolu.                                            |
-| **SKU**                                           | Yayımlama sırasında tanımlanan SKU adı. Bir teklif birçok SKU'ları olabilir, ancak bir SKU yalnızca tek bir Teklifle ilişkili olabilir.              |
-| **SKU faturalama türü**                                 | SKU fatura yöntemi.                                                                                                             |
-| **SKU faturalama türü: Kendi lisansını Getir**         | VM'ye veya hizmete dağıtmak için müşteri tarafından sağlanan bir lisans anahtarı gerektirir. Microsoft, müşterilerin kendi kullanımı bu Market teklifleri için fatura değil.   |
-| **SKU faturalama türü: Microsoft satıcı olarak**          | Bu SKU için satıcınızla Microsoft'tur.   |
-| **SKU faturalama türü: Ücretsiz**                           | SKU, tüm kullanıcılara ücretsiz olarak yapılandırılır. Microsoft, müşterilerin kendi kullanımı bu SKU için fatura değil.                           |
-| **SKU faturalama türü: Ücretli**                           | Microsoft bu SKU için aracısıdır ve sizin adınıza müşteriler düzenler. (PAYG kredi kartı veya fatura Kurumsal)                   |
-| **SKU faturalama türü: Deneme sürümü**                          | Müşteri, deneme süresinde ve Ücretli, bunlar iptal silmeyin veya dönüştürülür.                                         |
-| **Vergi tutarı (CC)**                                  | Müşteri'nin fatura Müşteri para birimi'nda (CC) uygulanan vergiler tutar.                                                               |
-| **İşlem tarihi**                                 | İşlem tarihi raporlama ödeme kaydedilir.                                                                           |
-| **İşlem türü**                               | Bildirildiğinden işlem türü.  Örneğin, bu ücret, geri ödeme veya ödeme ayarlama olabilir.                                                                                        |
-| **Deneme bitiş tarihi**                                 | ' % S'tarih Bu sipariş için deneme süresi sona erer veya sona erdi.                                                                           |
-| **Kullanım tarihi**                                       | Tarih müşteri kullanımını oluştu.                                                                                                             |
-| **Kullanım miktarı**                                       | SKU bildirilen müşteri kullanımı. VM görüntüleri için kullanım kayıtlarını kullanım VM boyutunu ve SKU için bildirilen döneminin temsil eder.                                               |
-| **Kullanım başvurusu**                                       | Bir veya daha fazla günlük müşteri kullanım için ödeme rapordaki bir girişi ile ilişkili belirtilen bir SKU tanımlayıcısı.                                               |
-| **Kullanım türü**                                       | Ölçülen kullanım açıklaması (Normalleştirilmiş kullanımı veya ham kullanımı)                                                              |
-| **Kullanım türü: Normalleştirilmiş kullanımı**                | Kullanım saatlerini normalleştirilmiş VM çekirdek kullanımı ilgili hesaba: [VM sayısı çekirdek] x [saat, ham Usage]. VM'ler, "SHAREDCORE" 1/6 (veya 0.1666) kullanım [VM sayısı çekirdek] çarpanı olarak belirlenmiş.                                        |
-| **Kullanım türü: Ham kullanımı**                        | Kullanım saatlerini, Market'ten sunar.  Bunu, "Takvim" saat açısından sunulur.  Bu zaman sanal makine sayısı çalıştıran olur.                           |
-| **Kullanım birimi**                                   | Belirtilen kullanımı için ölçü birimi. VM'ler her zaman saatlik ölçü birimi cinsinden ölçülür.                               |
-| **VM boyutu**                                       | Azure teklifi ile uyumlu sanal makine donanım boyutu temsil eder. Örnekler `Basic_A0`, `Standard_A11`, `Standard_D12`, ve `Standard_G4`.   |
+| **Azure lisans türü**                               | Müşteriler tarafından Azure satın alma için kullanılan lisans sözleşmesinin türü.  Kanal olarak da bilinir.                                                  |
+| **Azure lisans türü: bulut çözümü sağlayıcısı**      | Azure ve Market procures son müşterisi, bulut çözümü sağlayıcısı aracılığıyla satıcıya göre davranan bir tekliftir.                 |
+| **Azure lisans türü: Kurumsal**                   | Azure procures son müşterisi ve Market, doğrudan Microsoft ile imzalanmış bir Kurumsal Anlaşma aracılığıyla teklif.                  |
+| **Azure lisans türü: satıcı aracılığıyla kurumsal**  | Azure ve Market procures son müşterisi, Microsoft ile Kurumsal Anlaşma kolaylaştıran bir satıcı aracılığıyla teklif sunuyor.     |
+| **Azure lisans türü: Kullandıkça öde**                | Azure procures son müşterisi ve Market, doğrudan Microsoft ile imzalanmış bir "Kullandıkça öde" sözleşmesi aracılığıyla teklif sunuyor.                |
+| **Ücret miktarı (CC)**                              | Fatura Için *müşteri para birimi* (CC) cinsinden müşteriye uygulanan miktar.                                                                 |
+| **Ücret tutarı (PC)**                               | Müşteriye, *ödeme para birimi* (PC) cinsinden ücretlendirilen miktar.                                                                      |
+| **Ücretlendirme tarihi**                                      | Müşterinin ücretinin hesaplandığı Tarih (genellikle kullanım döneminin hemen ardından).                                             |
+| **Bulut örneği adı**                              | Bir VM dağıtımının gerçekleştiği Microsoft Bulut.                                   |
+| **Bulut örneği adı: Azure genel**                | Genel genel Microsoft bulutu.                           |
+| **Bulut örneği adı: Azure Kamu**        | Aşağıdaki hükümetlerden biri için kamu 'ya özgü Microsoft bulutları: Çin, Almanya veya Amerika Birleşik Devletler.                           |
+| **Koleksiyon durumu**  | Belirli bir ücret için, faturalandırma ve toplama yaşam döngüsünün en son durumu.  Örneğin, durum koleksiyon devam ediyor, toplanmış veya para iadesi olabilir.                  |
+| **Çekirdek boyutu**  | Teklifin üzerinde çalıştığı sanal makine tarafından sunulan sanal çekirdek sayısı.               |
+| **Müşteri şehri**  | Müşteri tarafından sunulan şehir adı. Bu, müşterinin Azure aboneliğindeki şehirden farklı olabilir.  |
+| **Müşteri Iletişim dili**        | İletişim için müşterinin tercih ettiği dil.                                  |
+| **Müşteri şirket adı**                  | Müşterinin sunduğu şirket adı. Bu, müşterinin Azure aboneliğindeki şehirden farklı olabilir.                                  |
+| **Müşteri ülkesi**                       | Müşterinin sunduğu ülke/bölge adı.  Bu, müşterinin Azure aboneliğindeki ülke/bölgeden farklı olabilir.                               |
+| **Müşteri para birimi (CC)**                 | Fiyatlandırma ve faturalandırma için müşterinin tercih ettiği para birimi.                            |
+| **Müşteri e-postası**                         | Son müşteri tarafından sunulan e-posta adresi.  Bu, müşterinin Azure aboneliğindeki e-posta adresinden farklı olabilir.                   |
+| **Müşteri adı**                              | Müşterinin ilk adı.  Bu, müşterinin Azure aboneliğinde belirtilen adın dışında olabilir.                    |
+| **Müşterinin soyadını soyadı**                               | Müşterinin sunduğu soyadı.  Bu, müşterinin Azure aboneliğinde belirtilen adın dışında olabilir.                    |
+| **Müşteri KIMLIĞI**                               | Müşteriye atanan benzersiz tanımlayıcı.  Müşterinin sıfır veya daha fazla Azure Market aboneliği olabilir.                    |
+| **Müşteri ödeme türü**                            | Müşteri tarafından kullanılan ödeme aracı türü.  Örneğin, bu kart, fatura veya elektronik denetim olabilir.                             |
+| **Müşteri posta kodu**                             | Müşteri tarafından sunulan posta kodu.  Bu, müşterinin Azure aboneliğinde girilen posta kodundan farklı olabilir.                                                                 |
+| **Müşteri durumu**                                   | Müşteri tarafından sunulan eyalet (adres).  Bu, müşterinin Azure aboneliğinde belirtilen son ad ile farklı olabilir.                                                                 |
+| **Alınma tarihi**                                    | Müşterinin sizin tarafınızdan yayınlanan teklifi satın aldığı ilk tarih.                 |
+| **Kayıp tarihi**                                        | Müşterinin daha önce satın alınan tüm tekliflerden son iptal ettiği son tarih.                                                         |
+| **Tahmini genişletilmiş ücret (CC)**                   | Belirli bir SKU için kullanım birimlerinin miktarı (müşterinin para biriminde) için tahmini genişletilmiş ücret. Bu değer, yuvarlama veya kesme hataları nedeniyle doğru olmayabilir.                            |
+| **Tahmini genişletilmiş ücret (PC)**                   | Belirli bir SKU için kullanım birimi miktarı için, tarih kullanımındaki yabancı Exchange dönüştürmeye göre tahmini genişletilmiş ücret hesaplanır (yayımcının para birimindedir). Bu değer, yuvarlama veya kesme hataları nedeniyle doğru olmayabilir.                  |
+| **Tahmini ödeme (PC)**                            | Belirli bir SKU için kullanım birimi miktarına yönelik tahmini ödeme, kullanım tarihi (yayımcının para biriminde) olarak hesaplanır. Bu değer, yuvarlama veya kesme hataları nedeniyle doğru olmayabilir.                        |
+| **Tahmini fiyat (PC)**                             | Belirli bir SKU için kullanım birimi için tahmini fiyat, tarih kullanımındaki yabancı Exchange dönüştürmeye göre hesaplanır (yayımcının para birimindedir). Bu değer, yuvarlama veya kesme hataları nedeniyle doğru olmayabilir.                                             |
+| **Yeni müşteri**                                  | Değer, bir veya daha fazla Market teklifinizden ilk kez (veya değil) bir veya daha fazla satın alma işlemi mi olduğunu, ister.  "Tarihi alındı" için aynı takvim ayı ise değer "Evet" olacaktır.  Müşteri tekliflerinizin herhangi birini bildirilen takvim aydan önce satın almışsa değer "Hayır" olacaktır.                                                       |
+| **Önizleme SKU 'SU**                                  | Bu değer, SKU 'YU "Önizleme" olarak etiketlediyseniz size bilgi verir. SKU buna uygun şekilde etiketlenmişse değer "Evet" olur ve yalnızca sizin tarafından yetkilendirilen Azure abonelikleri bu görüntüyü dağıtabilir ve kullanabilir.  SKU "Önizleme" olarak tanımlanmamışsa, değer "Hayır" olacaktır.                                          |
+| **Promosyon ekibine katılım kabul ediyor**                   | Bu değer, müşterinin yayımcılardan promosyon kişisini önceden kabul eder olduğunu bilmenizi sağlar. Şu anda, bu seçeneği müşterilere sunuyoruz, bu nedenle Pano genelinde "Hayır" belirtiyoruz. Bu özellik dağıtıldıktan sonra, güncelleştirmeye uygun olarak başlayacağız.                                          |
+| **Market lisans türü**                         | Market teklifinin faturalandırma yöntemi.                             |
+| **Market lisans türü: Azure üzerinden faturalandırılır**   | Microsoft bu Market 'e yönelik aracısıdır ve sizin adınıza müşteri reçeteleri sunun. (PAYG kredi kartı ya da kurumsal fatura)       |
+| **Market lisans türü: kendi lisansınızı getirin** | VM, dağıtım için müşterinin sunduğu bir lisans anahtarı gerektirir. Microsoft, müşterileri bu Market tekliflerinin kullanımı için faturalandırmaz. |
+| **Market lisans türü: ücretsiz**                   | Market teklifi tüm kullanıcılara ücretsiz olacak şekilde yapılandırılmıştır. Microsoft, müşterileri bu Market teklifinin kullanımı için faturalandırmaz.    |
+| **Market lisans türü: satıcı olarak Microsoft**  | Microsoft bu Market teklifinin satıcısına yöneliktir.                               |
+| **Market aboneliği şirket adı**  | Azure aboneliğindeki müşteri tarafından belirtilen şirket adı.                           |
+| **Market abonelik KIMLIĞI**            | Market teklifinizi satın almak için kullanılan müşterinin Azure aboneliğiyle ilişkili benzersiz tanımlayıcı.  Daha önce Azure abonelik GUID 'iydi.  SAAS siparişi gibi bazı durumlarda, abonelik gerekmez.           |
+| **Microsoft ücreti (CC)**                               | Müşterinin para birimindeki işlem üzerindeki Microsoft ücreti.                              |
+| **Teklif adı**                                | Market sunumunun adı.                                                             |
+| **Teklif türü**                                | Microsoft Market teklif türü.  Örneğin, yönetilen uygulama, sanal makine lisansları veya kapsayıcı olabilir.                           |
+| **Sipariş Iptali tarihi**                         | Market siparişinin iptal edildiği tarih.                                                       |
+| **Sipariş KIMLIĞI**                                  | Market hizmetiniz için müşteri siparişinin benzersiz tanımlayıcısı.  Sanal makine kullanımı tabanlı teklifler bir siparişle ilişkili değildir.                 |
+| **Sipariş satın alma tarihi**                       | Market siparişinin oluşturulduğu tarih.                                                        |
+| **Sipariş miktarı**                       | Aynı SKU için bir Azure aboneliğiyle ilişkili siparişlerin miktarı.  SAAS siparişleri için, bir siparişin bu örneğiyle ilişkili olan lisans sayısını temsil eder.                                            |
+| **Sipariş durumu**                              | Verilerin son yenilenme sırasında Market siparişi durumu.  Örneğin, sipariş etkin veya iptal edilebilir.             |
+| **Sipariş durumu: etkin**                           | Müşterinin siparişi satın almış ve siparişi iptal edilmemiş.   |
+| **Sipariş durumu: Iptal edildi**                        | Müşteri daha önce bir siparişi satın almış ve ardından sıralarını iptal etti.        |
+| **Ödeme tutarı (PC)**                             | Tercih ettiğiniz ödeme para biriminde (PC) size ödenen miktar.                                       |
+| **Ödeme para birimi (PC)**                           | Ödemeler için kullanılan para birimi.                                                                |
+| **Ödeme tarihi**                                    | Ödeme isteğinin Microsoft 'tan seçtiğiniz finans kurumunuz için gönderildiği tarih.                                                                         |
+| **Ödeme durumu**                                  | Verilerin son yenilenme sırasında ödeme durumu.                                   |
+| **Ödeme durumu: devam ediyor**               | İşlem ödeme için hazır değil. (Daha fazla bilgi için bkz. koleksiyon durumu)                             |
+| **Ödeme durumu: ödenen**                          | İşlem, geçmişteki bir ödeme hesaplamasına dahil edildi. Pozitif değerler ödenmekte ve negatif değerler toplam tutara göre netleştirilmedi. |
+| **Ödeme durumu: yaklaşan ödeme**                   | İşlem, ödeme için hazırdır ve bir sonraki kullanılabilir ödeme hesaplamasına dahil edilecek.                      |
+| **Fiyat (CC)**                                   | Belirli bir SKU için kullanım birimi fiyatı (müşterinin para birimindedir).                                                                  |
+| **Sağlayıcı e-postası**                                 | Sağlayıcının Microsoft ile son müşteri arasındaki ilişkiye dahil olan e-posta adresi. Müşteri, satıcı üzerinden bir kurumsal ise satıcı olur.  Bir bulut çözümü sağlayıcısı (CSP) dahil edilmişse, CSP olacaktır.                                                                 |
+| **Sağlayıcı adı**                                 | Microsoft ile son müşteri arasındaki ilişkiye katılan sağlayıcının adı. Müşteri, satıcı üzerinden bir kurumsal ise satıcı olur.  Bir bulut çözümü sağlayıcısı (CSP) dahil edilmişse, CSP olacaktır.                                                                 |
+| **Kaynak URI 'SI**                                  | Dağıtım yapıtının dağıtıldığı yol.                                            |
+| **SKU**                                           | Yayımlama sırasında tanımlanan SKU adı. Bir teklifin birçok SKU 'su olabilir, ancak bir SKU yalnızca tek bir teklifle ilişkilendirilebilir.              |
+| **SKU faturalandırma türü**                                 | SKU 'nun faturalandırma yöntemi.                                                                                                             |
+| **SKU faturalandırma türü: kendi lisansınızı getirin**         | VM veya hizmet, müşteri tarafından dağıtım için sağlanmış bir lisans anahtarı gerektirir. Microsoft, müşterileri bu Market tekliflerinin kullanımı için faturalandırmaz.   |
+| **SKU faturalandırma türü: satıcı olarak Microsoft**          | Microsoft bu SKU için satıcınıza yöneliktir.   |
+| **SKU faturalandırma türü: ücretsiz**                           | SKU, tüm kullanıcılar için ücretsiz olacak şekilde yapılandırılmıştır. Microsoft, müşterileri bu SKU 'nun kullanımları için faturalandırmaz.                           |
+| **SKU faturalandırma türü: ücretli**                           | Microsoft bu SKU için aracısıdır ve sizin adınıza müşterileri faturalar. (PAYG kredi kartı ya da kurumsal fatura)                   |
+| **SKU faturalandırma türü: deneme**                          | Müşteri, deneme süresi içinde olup, iptal veya silme yaptıklarında ücretli olarak dönüştürülecek.                                         |
+| **Vergi tutarı (CC)**                                  | Müşterinin faturasına müşteri para biriminde uygulanan vergi tutarı (CC).                                                               |
+| **İşlem tarihi**                                 | Ödeme raporlamadaki kaydedilen işlemin tarihi.                                                                           |
+| **İşlem türü**                               | Bildirilmekte olan işlem türü.  Örneğin, bu bir ücret, geri ödeme veya ödeme ayarı olabilir.                                                                                        |
+| **Deneme bitiş tarihi**                                 | Bu sipariş için deneme döneminin sona erdiği veya sonlandırmış olacağı tarih.                                                                           |
+| **Kullanım tarihi**                                       | Müşterinin kullanım tarihi gerçekleşti.                                                                                                             |
+| **Kullanım miktarı**                                       | SKU 'nun bildirilen müşteri kullanımı. VM görüntüleri için kullanım kayıtları, bu VM boyutu ve SKU 'SU için raporlanan dönem kullanımını temsil eder.                                               |
+| **Kullanım başvurusu**                                       | Ödeme raporundaki bir girişle ilişkili belirli bir SKU için müşteri kullanımının bir veya daha fazla gününe ait tanımlayıcı.                                               |
+| **Kullanım türü**                                       | Ölçülecek kullanımın açıklaması. (Normalleştirilmiş kullanım veya ham kullanım)                                                              |
+| **Kullanım türü: normalleştirilmiş kullanım**                | Kullanım saatleri, kullanımla ilgili olan VM çekirdeklerinin sayısı için normalleştirilmelidir: [VM çekirdeklerinin sayısı] x [saatlik ham kullanım]. "SHAREDCORE" olarak belirlenen VM 'Ler [VM çekirdeklerinin sayısı] çarpanı olarak 1/6 (veya 0,1666) kullanır.                                        |
+| **Kullanım türü: ham kullanım**                        | Market teklifiniz için kullanım saatleri.  "Takvim" saatlerine göre sunulmaktadır.  Bu, sanal makinelerin çalıştığı sürenin sayısıdır.                           |
+| **Kullanım birimleri**                                   | Belirtilen kullanım için ölçüm birimi. VM 'Ler her zaman saatlik ölçü birimleri ile ölçülür.                               |
+| **VM boyutu**                                       | Azure teklifiyle hizalanan sanal makine donanım boyutunu temsil eder. Örnekler arasında `Basic_A0`, `Standard_A11`, `Standard_D12`ve `Standard_G4`sayılabilir.   |
 |  |  |
 
 

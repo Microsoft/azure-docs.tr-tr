@@ -1,72 +1,72 @@
 ---
-title: Pekiştirmeye dayalı öğrenme - Personalizer
+title: Pekiştirmeye dayalı öğrenme-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: Personalizer daha iyi sıralama önerilerde bulunmak için Eylemler ve geçerli bağlam bilgilerini kullanır. Bu eylemler ve bağlamı hakkında bilgi olan öznitelikler veya özellikler adlandırılan özellikleri.
+description: Kişiselleştirici, daha iyi derecelendirme önerileri sağlamak için Eylemler ve geçerli bağlam hakkındaki bilgileri kullanır. Bu eylemler ve bağlamla ilgili bilgiler, özellik olarak adlandırılan öznitelikler veya özelliklerdir.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
+ms.topic: conceptual
 ms.date: 05/07/2019
-ms.author: edjez
-ms.openlocfilehash: b65073c0646db0cd0c27a71005bb4f74b091ae09
-ms.sourcegitcommit: 8fc5f676285020379304e3869f01de0653e39466
+ms.author: diberry
+ms.openlocfilehash: 36071cdee25cfa99fc54b0e5c0c0aa822cb5fe2f
+ms.sourcegitcommit: e3b0fb00b27e6d2696acf0b73c6ba05b74efcd85
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/09/2019
-ms.locfileid: "65506880"
+ms.lasthandoff: 07/30/2019
+ms.locfileid: "68662831"
 ---
-# <a name="what-is-reinforcement-learning"></a>Pekiştirmeye dayalı öğrenme nedir?
+# <a name="what-is-reinforcement-learning"></a>Pekiştirmeye dayalı Learning nedir?
 
-Pekiştirmeye dayalı öğrenme, bunların kullanımından geri bildirim alarak davranışlarını öğrenen makine öğrenimine bir yaklaşımdır.
+Pekiştirmeye dayalı Learning, makine öğrenimine yönelik bir yaklaşım kullanarak, kullanım açısından geri bildirim alarak davranışları öğrenir.
  
-Pekiştirmeye dayalı öğrenme ile çalışır:
+Pekiştirmeye dayalı Learning şu şekilde geçerlidir:
 
-* Bir fırsat veya serbestlik derecesi kararları veya seçimler yapma gibi davranış - geçireceğini sağlama.
-* Seçenek ve ortamı hakkında bağlamsal bilgiler sağlar.
-* Ne kadar iyi belirli bir hedefe davranışı elde hakkında geri bildirim sağlama.
+* Kararlar veya seçimler yapma gibi bir davranışı harekete geçmek için bir fırsat veya serbestlik derecesi sağlama.
+* Ortam ve seçimler hakkında bağlamsal bilgiler sağlama.
+* Davranışın belirli bir amaca ne kadar iyi elde olduğu hakkında geri bildirim sağlama.
 
-Birçok subtypes ve öğrenme pekiştirmeye türlerde olsa bu kavramı Personalizer içinde nasıl çalışır.
+Pekiştirmeye dayalı Learning 'in birçok alt türleri ve stilleri olsa da, kavram kişiselleştirici içinde nasıl çalıştığı aşağıda gösterilmiştir:
 
-* Uygulamanızı içeriğin alternatifleri listesinden bir kısmını görüntülemeyi sağlar.
-* Uygulamanızı her alternatif ve kullanıcı bağlamı hakkında bilgi sağlar.
-* Uygulama hesaplar bir _puanı ödüllendirin_.
+* Uygulamanız, alternatifler listesinden bir içerik parçasını gösterme fırsatı sağlar.
+* Uygulamanız, her bir alternatif ve kullanıcının bağlamı hakkında bilgi sağlar.
+* Uygulamanız bir _ödül puanı_hesaplar.
 
-Öğrenme pekiştirmeye bazı yaklaşımları, bir simülasyon çalışacak şekilde Personalizer gerektirmez. Kendi öğrenme algoritmalarını tepki vermek için bir dış dünya için tasarlanmıştır (karşı denetlemesine) ve her bir veri noktasının anlayarak, zamandan ve paradan tasarruf oluşturmak için maliyet benzersiz bir fırsat olup olmadığını ve değilse sıfır olmayan pişman (olası ödül kaybı) olduğunu öğrenin performansın gerçekleşir.
+Pekiştirmeye dayalı Learning 'teki bazı yaklaşımlardan farklı olarak, kişiselleştirici içinde çalışmak için bir benzetim gerektirmez. Öğrenme algoritmaları, bir dış dünyaya yanıt verecek şekilde tasarlanmıştır (denetimi buna karşı) ve her bir veri noktasından, oluşturulacak maliyet saati ve para ile ilgili benzersiz bir fırsat olduğunu ve bu da sıfır olmayan bir yazık sistemlerimiz (olası Reward kaybı) olduğunu anlamak için tasarlanmıştır. performans performansı oluşur.
 
-## <a name="what-type-of-reinforcement-learning-algorithms-does-personalizer-use"></a>Hangi türde öğrenimi algoritmaları pekiştirmeye Personalizer kullanıyor mu?
+## <a name="what-type-of-reinforcement-learning-algorithms-does-personalizer-use"></a>Kişiselleştirici ne tür bir pekiştirmeye dayalı öğrenme algoritması kullanıyor?
 
-Personalizer geçerli sürümünü kullanan **bağlamsal bandits**, diğer bir deyişle, pekiştirmeye öğrenme bir yaklaşım Çerçeveli kararlar veya belirli bir bağlamda farklı eylemler arasında seçimler yapma geçici bir çözüm.
+Geçerli kişiselleştirici sürümü, belirli bir bağlamda ayrı eylemler arasında kararlar veya seçimler yapma etrafında çerçeveli bir pekiştirmeye dayalı öğrenimine yönelik **bağlamsal Bandits**kullanır.
 
-_Karar bellek_, doğrusal bir model birtakım en iyi olası karar verilen bir bağlamda yakalamak için eğitilen modeli kullanır. Bu iş sonuçları art arda gösterilmesini ve kendini kanıtlamış bir yaklaşım kısmen bunlar gerçek dünyadan çok hızlı bir şekilde çoklu geçiş eğitim gerek kalmadan bilgi edinerek ve kısmen denetimli öğrenme modellerini ve derin sinir tamamlayabilir nedeni Ağ modeller.
+_Karar belleği_, bir bağlam verildiğinde mümkün olan en iyi kararı yakalamak için eğitilen model, doğrusal modeller kümesi kullanır. Bunlar sürekli olarak çok hızlı bir şekilde gösterilen iş sonuçları ve kendini kanıtlamış bir yaklaşım, kısmen de gerçek dünyadan çok hızlı bir şekilde eğitim sağlayabildiğinden ve kısmen denetlenen öğrenme modellerini ve derin sinir ağ modelleri.
 
-Rastgele ayarlamak için keşif yüzdesi aşağıdaki Araştır/yararlanma trafiği ayırma yapılır ve araştırma için varsayılan algoritma epsilon doyumsuz.
+Keşfet/Exploit trafik ayırması, araştırma için ayarlanan yüzdeden sonra rastgele yapılır ve araştırma için varsayılan algoritma Epsilon-Greedy ' dir.
 
 ### <a name="history-of-contextual-bandits"></a>Bağlamsal Bandits geçmişi
 
-John Langford adı bağlamsal pekiştirmeye dayalı öğrenme tractable kümesini tanımlamak için Bandits (Langford ve Zhang [2007]) de ve geliştirmeye ilişkin bu programlamada bilgi edinmek nasıl bir yaklaşık olarak yarım düzine incelemeler çalıştı:
+John Langford, pekiştirmeye dayalı Learning 'in bir tractable alt kümesini anlatmak için bağlamsal Bandits (Langford ve Zasılı [2007]) adını kullandı ve bu paradigma hakkında öğrendiğimiz bir yarı düzine İnceleme üzerinde çalıştı:
 
 * Beygelzimer et al. [2011]
-* Dudík et al. [2011a,b]
+* Dudík et al. [2011A, b]
 * Agarwal et al. [2014, 2012]
 * Beygelzimer ve Langford [2009]
 * Li et al. [2010]
 
-John aynı zamanda birkaç öğreticiler daha önce birleşik tahmin (ICML 2015), bağlamsal Bandit teorik (NIPS 2013), etkin öğrenim (ICML 2009) ve örnek karmaşıklığı sınırları (ICML 2003) gibi konularda verdiği
+John, daha önce Birleşik tahmin (ICML 2015), bağlamsal bandıt teorisi (NıP 2013), etkin öğrenme (ICML 2009) ve örnek karmaşıklık sınırları (ICML 2003) gibi konularda daha fazla öğretici de vermiş.
 
-## <a name="what-machine-learning-frameworks-does-personalizer-use"></a>Hangi makine öğrenimi çerçeveleri Personalizer kullanıyor mu?
+## <a name="what-machine-learning-frameworks-does-personalizer-use"></a>Kişiselleştirici hangi makine öğrenimi çerçeveler kullanır?
 
-Şu anda personalizer kullanır [Vowpal Wabbit](https://github.com/VowpalWabbit/vowpal_wabbit/wiki) machine learning için temel olarak. Bu çerçeve, en fazla aktarım hızı ve düşük kişiselleştirme yapmadan sıralayan zaman gecikme süresi ve tüm olayları modeli eğitmek için sağlar.
+Kişiselleştirici Şu anda makine öğrenimi için temel olarak [Vowpal Wabbit](https://github.com/VowpalWabbit/vowpal_wabbit/wiki) kullanır. Bu çerçeve, kişiselleştirme dereceleri yaparken en yüksek aktarım hızı ve en düşük gecikme süresine izin verir ve modeli tüm etkinliklerle eğitme.
 
-## <a name="references"></a>Başvurular
+## <a name="references"></a>Referanslar
 
-* [Düşük teknik borç ile bağlamsal bir karar almadan](https://arxiv.org/abs/1606.03966)
-* [Bir adil sınıflandırma indirimleri yaklaşımı](https://arxiv.org/abs/1803.02453)
-* [İleti örneği olmayan Dünyaları içinde verimli bağlamsal Bandits](https://arxiv.org/abs/1708.01799)
-* [Kalan kaybı tahmin: Pekiştirmeye: No ile artımlı geribildirim öğrenme](https://openreview.net/pdf?id=HJNMYceCW)
-* [Yönergeler ve görsel gözlemler Eylemler pekiştirmeye dayalı öğrenme ile eşleme](https://arxiv.org/abs/1704.08795)
-* [Arama için daha iyi, Öğretmen öğrenme](https://arxiv.org/abs/1502.02206)
+* [Düşük Teknik borç ile bağlamsal kararlar sağlama](https://arxiv.org/abs/1606.03966)
+* [Dengeli bir sınıflandırmayla bir azaltmada yaklaşım](https://arxiv.org/abs/1803.02453)
+* [Sabit olmayan wordl 'de verimli bağlamsal Bandits](https://arxiv.org/abs/1708.01799)
+* [Kalan kayıp tahmini: Pekiştirmeye dayalı: artımlı geri bildirim olmadan öğrenme](https://openreview.net/pdf?id=HJNMYceCW)
+* [Pekiştirmeye dayalı Learning ile eylemlerle yönergeler ve görsel gözlemleri eşleme](https://arxiv.org/abs/1704.08795)
+* [Öğretmeninize göre daha Iyi arama hakkında bilgi edinme](https://arxiv.org/abs/1502.02206)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

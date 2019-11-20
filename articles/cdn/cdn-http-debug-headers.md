@@ -7,19 +7,19 @@ author: mdgattuso
 manager: danielgi
 editor: ''
 ms.assetid: ''
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 04/12/2018
 ms.author: magattus
-ms.openlocfilehash: e5693e0e191b36aa8d4552824c649a38d2f17b5b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dec753d7c891d226aa2e6d3efa993d8d24adfbaa
+ms.sourcegitcommit: ccb9a7b7da48473362266f20950af190ae88c09b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66475293"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67593832"
 ---
 # <a name="x-ec-debug-http-headers-for-azure-cdn-rules-engine"></a>Azure CDN kurallar altyapısı için X-EC-Debug HTTP üstbilgileri
 Hata ayıklama önbellek istek üstbilgisi `X-EC-Debug`, istenen varlığa uygulanır önbellek İlkesi hakkında ek bilgi sağlar. Bu üst özgü **verizon'dan Azure CDN Premium** ürünleri.
@@ -103,7 +103,7 @@ Bu yanıt üst bilgisi önbelleğe alma gerçekleşen olup olmadığını göste
 
 Yukarıdaki yanıt üst bilgisi sözdiziminde kullanılacak terimi şu şekilde tanımlanır:
 
-Değer  | Açıklama
+Value  | Açıklama
 -------| --------
 EVET    | Talep edilen içeriği önbelleğe almak için uygun olduğunu gösterir.
 NO     | Talep edilen içeriği önbelleğe almak için uygun olduğunu gösterir. Bu durum aşağıdaki nedenlerden biri nedeniyle olabilir: <br /> -Müşteriye özgü yapılandırma: Hesabınıza belirli bir yapılandırma, bir varlık olarak önbelleğe alınan pop sunucuları engelleyebilirsiniz. Örneğin, kural altyapısı, istekleri uygun için önbellek atlama özelliği etkinleştirerek önbelleğe alınmasını bir varlık engelleyebilirsiniz.<br /> -Yanıt üst bilgilerini önbelleğe alır: İstenen varlığın Cache-Control veya Expires başlıklarına POP sunucuları, önbelleğe alınan engelleyebilirsiniz.

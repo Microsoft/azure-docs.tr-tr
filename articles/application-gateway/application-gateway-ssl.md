@@ -1,32 +1,25 @@
 ---
-title: Yapılandırma SSL yük boşaltma - Azure Application Gateway - PowerShell Klasik | Microsoft Docs
-description: Bu makalede Azure Klasik dağıtım modelini kullanarak SSL ile bir uygulama ağ geçidi oluşturma yönergelerini boşaltma sağlar.
-documentationcenter: na
+title: PowerShell kullanarak SSL yük boşaltma-Azure Application Gateway
+description: Bu makalede, Azure klasik dağıtım modelini kullanarak SSL yük boşaltma ile uygulama ağ geçidi oluşturma yönergeleri sağlanır
 services: application-gateway
 author: vhorne
-manager: jpconnock
-editor: tysonn
-ms.assetid: 63f28d96-9c47-410e-97dd-f5ca1ad1b8a4
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 01/23/2017
+ms.date: 11/13/2019
 ms.author: victorh
-ms.openlocfilehash: 89a88d79b6b93a233dbd4f335d0eb449e49d5289
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c456a0856adb0d36349b5f96ba0ab8bab3eec5c9
+ms.sourcegitcommit: b1a8f3ab79c605684336c6e9a45ef2334200844b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62122209"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74047912"
 ---
-# <a name="configure-an-application-gateway-for-ssl-offload-by-using-the-classic-deployment-model"></a>Klasik dağıtım modelini kullanarak SSL yük boşaltımı için uygulama ağ geçidi yapılandırma
+# <a name="configure-an-application-gateway-for-ssl-offload-by-using-the-classic-deployment-model"></a>Klasik dağıtım modelini kullanarak SSL yük boşaltması için uygulama ağ geçidi yapılandırma
 
 > [!div class="op_single_selector"]
-> * [Azure portal](application-gateway-ssl-portal.md)
+> * [Azure Portal](application-gateway-ssl-portal.md)
 > * [Azure Resource Manager PowerShell](application-gateway-ssl-arm.md)
-> * [Azure Klasik PowerShell](application-gateway-ssl.md)
+> * [Azure klasik PowerShell](application-gateway-ssl.md)
 > * [Azure CLI](application-gateway-ssl-cli.md)
 
 Azure Application Gateway, web grubunda maliyetli SSL şifre çözme görevlerinin oluşmasından kaçınmak için Güvenli Yuva Katmanı (SSL) oturumunu sonlandırmak amacıyla yapılandırılabilir. SSL yük boşaltımı ön uç sunucusunun kurulumunu ve web uygulamasının yönetimini de basitleştirir.
@@ -34,29 +27,29 @@ Azure Application Gateway, web grubunda maliyetli SSL şifre çözme görevlerin
 ## <a name="before-you-begin"></a>Başlamadan önce
 
 1. Web Platformu Yükleyicisi’ni kullanarak Azure PowerShell cmdlet’lerin en son sürümünü yükleyin. **İndirmeler sayfası**’ndaki [Windows PowerShell](https://azure.microsoft.com/downloads/) bölümünden en son sürümü indirip yükleyebilirsiniz.
-2. Geçerli bir alt ağla çalışan bir sanal ağa sahip olduğunuzu doğrulayın. Hiçbir sanal makinenin veya bulut dağıtımlarının alt ağı kullanmadığından emin olun. Uygulama ağ geçidi tek başına bir sanal ağ alt ağında olmalıdır.
-3. Uygulama ağ geçidi kullanırken yapılandırdığınız sunucular mevcut veya uç noktaları sanal ağda veya bir genel IP adresi veya atanan sanal IP adresi (VIP) ile oluşturulmuş olması gerekir.
+2. Geçerli bir alt ağla çalışan bir sanal ağa sahip olduğunuzu doğrulayın. Ağ geçidi hiçbir sanal makinenin veya bulut dağıtımının kullanmadığından emin olun. Uygulama ağ geçidi tek başına bir sanal ağ alt ağında olmalıdır.
+3. Application Gateway 'i kullanacak şekilde yapılandırdığınız sunucuların var olması veya sanal ağda veya bir genel IP adresi ya da sanal IP adresi (VIP) atanmış uç noktalarına sahip olması gerekir.
 
-Bir application gateway üzerinde SSL yük boşaltmayı yapılandırmak için aşağıdaki adımları listelendikleri sırada tamamlayın:
+Bir uygulama ağ geçidinde SSL yük boşaltma yapılandırmak için, aşağıdaki adımları listelenen sırayla doldurun:
 
-1. [Bir uygulama ağ geçidi oluşturma](#create-an-application-gateway)
+1. [Uygulama ağ geçidi oluşturma](#create-an-application-gateway)
 2. [SSL sertifikalarını karşıya yükleme](#upload-ssl-certificates)
 3. [Ağ geçidini yapılandırma](#configure-the-gateway)
-4. [Ağ geçidi yapılandırmasını ayarlayın](#set-the-gateway-configuration)
+4. [Ağ Geçidi yapılandırmasını ayarlama](#set-the-gateway-configuration)
 5. [Ağ geçidini başlatma](#start-the-gateway)
-6. [Ağ geçidi durumunu doğrulama](#verify-the-gateway-status)
+6. [Ağ Geçidi durumunu doğrulama](#verify-the-gateway-status)
 
 ## <a name="create-an-application-gateway"></a>Uygulama ağ geçidi oluşturma
 
-Ağ geçidi oluşturmak için girin `New-AzureApplicationGateway` cmdlet'ini değerleri kendi değerlerinizle değiştirin. Ağ geçidinin faturalanması bu aşamada başlamaz. Daha sonra ağ geçidi başarıyla başlatıldığında faturalama da başlar.
+Ağ geçidini oluşturmak için, değerleri kendi değerlerinizle değiştirerek `New-AzureApplicationGateway` cmdlet 'ini girin. Ağ geçidinin faturalanması bu aşamada başlamaz. Daha sonra ağ geçidi başarıyla başlatıldığında faturalama da başlar.
 
 ```powershell
 New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
 ```
 
-Ağ geçidinin oluşturulduğunu, girdiğiniz doğrulamak için `Get-AzureApplicationGateway` cmdlet'i.
+Ağ geçidinin oluşturulduğunu doğrulamak için `Get-AzureApplicationGateway` cmdlet 'ini girebilirsiniz.
 
-Örnekte, **açıklama**, **Instancecount**, ve **GatewaySize** isteğe bağlı parametrelerdir. İçin varsayılan değer **Instancecount** olduğu **2**, maksimum değerini **10**. İçin varsayılan değer **GatewaySize** olduğu **orta**. Küçük ve büyük diğer değerleri kullanılabilir. **Virtualıps** ve **DnsName** ağ geçidi henüz başlatılmamış olduğundan boş olarak gösterilir. Bu değerler, ağ geçidinin çalışır durumda olduktan sonra oluşturulur.
+Örnek, **Açıklama**, **InstanceCount**ve **gatewaysize** isteğe bağlı parametrelerdir. **InstanceCount** için varsayılan değer, en fazla **10**değeri olan **2**' dir. **Gatewaysize** varsayılan değeri **Orta**' dir. Küçük ve büyük diğer kullanılabilir değerlerdir. Ağ Geçidi henüz başlatılmadığından **Virtualıp 'leri** ve **DnsName** boş olarak gösterilir. Bu değerler, ağ geçidi çalışır durumda olduktan sonra oluşturulur.
 
 ```powershell
 Get-AzureApplicationGateway AppGwTest
@@ -64,17 +57,17 @@ Get-AzureApplicationGateway AppGwTest
 
 ## <a name="upload-ssl-certificates"></a>SSL sertifikalarını karşıya yükleme
 
-Girin `Add-AzureApplicationGatewaySslCertificate` uygulama ağ geçidi sunucusu sertifikayı PFX biçiminde yüklenecek. Sertifika adı kullanıcı tarafından seçilen adıdır ve uygulama ağ geçidi içinde benzersiz olmalıdır. Bu sertifikayı tüm sertifika yönetimi işlemleri uygulama ağ geçidi üzerinde bu ada göre adlandırılır.
+Sunucu sertifikasını PFX biçiminde uygulama ağ geçidine yüklemek için `Add-AzureApplicationGatewaySslCertificate` girin. Sertifika adı, Kullanıcı tarafından seçilen bir addır ve uygulama ağ geçidi içinde benzersiz olmalıdır. Bu sertifika, uygulama ağ geçidinde tüm sertifika yönetimi işlemlerinde bu adla adlandırılır.
 
-Aşağıdaki örnek cmdlet gösterir. Örnek değerleri kendi değerlerinizle değiştirin.
+Aşağıdaki örnek cmdlet 'ini gösterir. Örnekteki değerleri kendi değerlerinizle değiştirin.
 
 ```powershell
 Add-AzureApplicationGatewaySslCertificate  -Name AppGwTest -CertificateName GWCert -Password <password> -CertificateFile <full path to pfx file>
 ```
 
-Ardından, sertifika karşıya yüklemeyi doğrulayın. Girin `Get-AzureApplicationGatewayCertificate` cmdlet'i.
+Sonra, sertifika karşıya yüklemeyi doğrulayın. `Get-AzureApplicationGatewayCertificate` cmdlet 'ini girin.
 
-Aşağıdaki örnek cmdlet çıktı tarafından takip ilk satırdaki gösterir:
+Aşağıdaki örnek, ilk satırdaki cmdlet 'ini ve sonra çıktıyı gösterir:
 
 ```powershell
 Get-AzureApplicationGatewaySslCertificate AppGwTest
@@ -91,28 +84,28 @@ State..........: Provisioned
 ```
 
 > [!NOTE]
-> Sertifika parolası, harf veya sayı oluşan 4 ila 12 karakter arasında olmalıdır. Özel karakterler kabul edilmez.
+> Sertifika parolası, harf veya sayıdan oluşan 4 ila 12 karakter arasında olmalıdır. Özel karakterler kabul edilmez.
 
 ## <a name="configure-the-gateway"></a>Ağ geçidini yapılandırma
 
-Bir uygulama ağ geçidi yapılandırması birden çok değerden oluşur. Değerleri bağlı birlikte yapılandırmasını oluşturmak için.
+Uygulama ağ geçidi yapılandırması birden çok değerden oluşur. Yapılandırma oluşturmak için değerler birlikte bağlanabilir.
 
 Değerler şunlardır:
 
-* **Arka uç sunucu havuzu**: Arka uç sunucularının IP adresleri listesi. Listede bulunan IP adresleri, sanal ağ alt ağına ait olmalıdır veya genel bir VIP ve IP adresi olmalıdır.
-* **Arka uç sunucu havuzu ayarları**: Her havuzun bağlantı noktası, protokol ve tanımlama bilgisi temelli benzeşim gibi ayarları vardır. Bu ayarlar bir havuza bağlıdır ve havuzdaki tüm sunuculara uygulanır.
-* **Ön uç bağlantı noktası**: Bu bağlantı noktası uygulama ağ geçidinde açılan genel bağlantı noktasıdır. Bu bağlantı noktasında trafik olursa arka uç sunuculardan birine yönlendirilir.
-* **Dinleyici**: Dinleyicinin sahip bir ön uç bağlantı noktası, bir protokol (Http veya Https; bu değerler büyük/küçük harfe duyarlıdır) ve SSL sertifika adı (yapılandırma bir SSL yük boşaltımı yapılandırılıyorsa).
-* **Kural**: Kural, dinleyiciyi ve arka uç sunucusu havuzunu bağlar ve ne zaman bir Dinleyicide denk gelir trafiği yönlendirmek için hangi arka uç sunucu havuzuna yönlendirileceğini belirler. Şu anda yalnızca *temel* kural desteklenmektedir. *Temel* kural hepsini bir kez deneme yöntemiyle yük dağıtımıdır.
+* **Arka uç sunucu havuzu**: arka uç sunucularının IP adreslerinin listesi. Listelenen IP adresleri, sanal ağ alt ağına ait olmalıdır veya bir genel IP veya VIP adresi olmalıdır.
+* **Arka uç sunucu havuzu ayarları**: her havuzun bağlantı noktası, protokol ve tanımlama bilgisi tabanlı benzeşim gibi ayarları vardır. Bu ayarlar bir havuza bağlıdır ve havuzdaki tüm sunuculara uygulanır.
+* **Ön uç bağlantı noktası**: Bu bağlantı noktası, uygulama ağ geçidinde açılan genel bağlantı noktasıdır. Bu bağlantı noktasında trafik olursa arka uç sunuculardan birine yönlendirilir.
+* **Dinleyici**: dinleyicide bir ön uç bağlantı noktası, bir protokol (http veya https; bu değerler büyük/küçük harfe duyarlıdır) ve SSL sertifika adı (SSL yük boşaltma yapılandırılıyorsa) vardır.
+* **Kural**: kural dinleyiciyi ve arka uç sunucu havuzunu bağlar ve belirli bir dinleyiciye rastlarsa trafiğin hangi arka uç sunucu havuzuna yönlendirileceğini belirtir. Şu anda yalnızca *temel* kural desteklenmektedir. *Temel* kural hepsini bir kez deneme yöntemiyle yük dağıtımıdır.
 
 **Ek yapılandırma notları**
 
-SSL sertifikaları yapılandırmada **HttpListener**’daki protokol **Https** (küçük/büyük harf duyarlı) ile değiştirilmelidir. Ekleme **SslCert** öğesine **HttpListener** kullanılan ile aynı ad ayarlanan değer ile [karşıya SSL sertifikaları](#upload-ssl-certificates) bölümü. Ön uç bağlantı noktasıyla güncelleştirilmelidir **443**.
+SSL sertifikaları yapılandırmada **HttpListener**’daki protokol **Https** (küçük/büyük harf duyarlı) ile değiştirilmelidir. Değer kümesi, [SSL sertifikalarını karşıya yükle](#upload-ssl-certificates) bölümünde kullanılan adla **HttpListener** ' a **sslcert** öğesini ekleyin. Ön uç bağlantı noktası **443**olarak güncellenmelidir.
 
-**Tanımlama bilgisi temelli benzeşimi etkinleştirmek için**: Bir istemci oturumundan gelen bir isteğin web grubunda aynı VM'e her zaman yönlendirildiğinden emin olmak için bir uygulama ağ geçidi yapılandırabilirsiniz. Bunu gerçekleştirmek için ağ geçidinin trafiği uygun bir şekilde yönlendirmesini sağlayacak oturum tanımlama bilgisinin ekleyin. Tanımlama bilgisi temelli benzeşimi etkinleştirmek için, **CookieBasedAffinity**’yi **BackendHttpSetting** öğesindeki **Enabled**’a ayarlayın.
+**Tanımlama bilgisi tabanlı benzeşimi etkinleştirmek için**: bir istemci oturumundan gelen isteğin, her zaman Web GRUBUNDAKI aynı VM 'ye yönlendirildiğinden emin olmak için bir uygulama ağ geçidi yapılandırabilirsiniz. Bunu gerçekleştirmek için, ağ geçidinin trafiği uygun şekilde yönlendirmesine izin veren bir oturum tanımlama bilgisi ekleyin. Tanımlama bilgisi temelli benzeşimi etkinleştirmek için, **CookieBasedAffinity**’yi **BackendHttpSetting** öğesindeki **Enabled**’a ayarlayın.
 
-Yapılandırma, bir yapılandırma nesnesi oluşturma veya yapılandırma XML dosyasını kullanarak oluşturabilirsiniz.
-Bir yapılandırma XML dosyasını kullanarak yapılandırmanızı oluşturmak için aşağıdaki örnek girin:
+Yapılandırmanızı bir yapılandırma nesnesi oluşturarak ya da bir yapılandırma XML dosyası kullanarak oluşturabilirsiniz.
+Yapılandırma XML dosyası kullanarak yapılandırmanızı oluşturmak için aşağıdaki örneği girin:
 
 
 ```xml
@@ -162,9 +155,9 @@ Bir yapılandırma XML dosyasını kullanarak yapılandırmanızı oluşturmak i
 </ApplicationGatewayConfiguration>
 ```
 
-## <a name="set-the-gateway-configuration"></a>Ağ geçidi yapılandırmasını ayarlayın
+## <a name="set-the-gateway-configuration"></a>Ağ Geçidi yapılandırmasını ayarlama
 
-Sonra, uygulama ağ geçidini kurun. Girdiğiniz `Set-AzureApplicationGatewayConfig` cmdlet'i bir yapılandırma nesnesi veya bir yapılandırma XML dosyası.
+Sonra, uygulama ağ geçidini kurun. `Set-AzureApplicationGatewayConfig` cmdlet 'ini ya bir yapılandırma nesnesi ya da bir yapılandırma XML dosyası ile girebilirsiniz.
 
 ```powershell
 Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile D:\config.xml
@@ -172,10 +165,10 @@ Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile D:\config.xml
 
 ## <a name="start-the-gateway"></a>Ağ geçidini başlatma
 
-Ağ geçidi yapılandırıldıktan sonra girin `Start-AzureApplicationGateway` başlatmak için cmdlet. Uygulama ağ geçidinin faturalanması ağ geçidi başarıyla başlatıldıktan sonra başlar.
+Ağ Geçidi yapılandırıldıktan sonra, ağ geçidini başlatmak için `Start-AzureApplicationGateway` cmdlet 'ini girin. Uygulama ağ geçidinin faturalanması ağ geçidi başarıyla başlatıldıktan sonra başlar.
 
 > [!NOTE]
-> `Start-AzureApplicationGateway` Cmdlet'in bitmesi 15-20 dakika sürebilir.
+> `Start-AzureApplicationGateway` cmdlet 'inin tamamlanması 15-20 dakika sürebilir.
 >
 >
 
@@ -185,9 +178,9 @@ Start-AzureApplicationGateway AppGwTest
 
 ## <a name="verify-the-gateway-status"></a>Ağ geçidi durumunu doğrulama
 
-Girin `Get-AzureApplicationGateway` ağ geçidinin durumunu denetlemek için cmdlet'i. Varsa `Start-AzureApplicationGateway` önceki adımda başarılı **durumu** olmalıdır **çalıştıran**ve **Virtualıps** ve **DnsName** gerekir Geçerli girdilere sahip.
+Ağ geçidinin durumunu denetlemek için `Get-AzureApplicationGateway` cmdlet 'ini girin. Önceki adımda başarılı `Start-AzureApplicationGateway`, **durum** **çalışıyor**olmalıdır ve **virtualıp 'leri** ve **DnsName** , geçerli girdilere sahip olmalıdır.
 
-Bu örnek, çalışan ve trafiği almaya hazır olan bir uygulama ağ geçidi gösterir:
+Bu örnek, çalışır durumda olan, çalışan ve trafik almaya yönelik bir uygulama ağ geçidini gösterir:
 
 ```powershell
 Get-AzureApplicationGateway AppGwTest
@@ -207,7 +200,7 @@ DnsName       : appgw-4c960426-d1e6-4aae-8670-81fd7a519a43.cloudapp.net
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yük Dengeleme hakkında daha fazla bilgi için bkz: genel olarak, seçenekleri:
+Genel olarak yük dengeleme seçenekleri hakkında daha fazla bilgi için bkz.:
 
 * [Azure Load Balancer](https://azure.microsoft.com/documentation/services/load-balancer/)
 * [Azure Traffic Manager](https://azure.microsoft.com/documentation/services/traffic-manager/)

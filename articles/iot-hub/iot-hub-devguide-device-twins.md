@@ -1,6 +1,6 @@
 ---
-title: Azure IOT Hub cihaz ikizlerini anlama | Microsoft Docs
-description: Geliştirici Kılavuzu - IOT Hub ve cihazlarınız arasında durum ve yapılandırma verilerini eşitlemek için cihaz ikizlerini kullanma
+title: Azure IoT Hub cihaz TWINS 'i anlama | Microsoft Docs
+description: Geliştirici Kılavuzu-IoT Hub ve cihazlarınız arasında durum ve yapılandırma verilerini eşzamanlı hale getirmek için cihaz ikizlerini kullanın
 author: wesmc7777
 manager: philmea
 ms.author: wesmc
@@ -8,61 +8,61 @@ ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.date: 06/10/2019
-ms.openlocfilehash: fbc68b551db1f68fe253a833ad26c88de1b92f30
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f4db353e3c2f625478df6a547d1b67c5d074d18a
+ms.sourcegitcommit: 3877b77e7daae26a5b367a5097b19934eb136350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67055360"
+ms.lasthandoff: 07/30/2019
+ms.locfileid: "68640620"
 ---
-# <a name="understand-and-use-device-twins-in-iot-hub"></a>Anlama ve IOT Hub'ında cihaz ikizlerini kullanma
+# <a name="understand-and-use-device-twins-in-iot-hub"></a>IoT Hub cihaz ikizlerini anlama ve kullanma
 
-*Cihaz ikizlerini* meta veriler, yapılandırmalar ve koşullar gibi cihaz durumu bilgilerini depolayan JSON belgelerdir. Azure IOT Hub, IOT Hub'ına bağladığınız her cihaz için bir cihaz çifti tutar. 
+*Cihaz TWINS* , meta veriler, konfigürasyonlar ve koşullar dahil olmak üzere cihaz durum BILGILERINI depolayan JSON belgelerdir. Azure IoT Hub, IoT Hub bağlandığınız her cihaz için bir cihaz ikizi tutar. 
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
 Bu makalede açıklanır:
 
-* Cihaz ikizi yapısını: *etiketleri*, *istenen* ve *bildirilen özellikler*.
-* Cihaz uygulamaları ve arka uçları cihaz ikizlerini üzerinde gerçekleştirebileceğiniz işlemler.
+* Cihaz ikizi yapısı: *Etiketler*, *istenen* ve *bildirilen özellikler*.
+* Cihaz uygulamalarının ve arka uçlarından oluşan işlemler cihaz ikikilerinde gerçekleştirilebilir.
 
-Cihaz ikizlerini kullanın:
+Cihaz ikizlerini şu şekilde kullan:
 
-* Cihaza özgü meta veriler bulutta Store. Örneğin, bir satış makinenin dağıtım konumu.
+* Cihaza özel meta verileri bulutta depolayın. Örneğin, bir havalandırma makinesinin dağıtım konumu.
 
-* Rapor geçerli durumu bilgileri kullanılabilir yetenekler ve cihaz uygulamanızı koşulları gibi. Örneğin, bir cihaz IOT hub'ınıza bağlı WiFi veya hücresel üzerinden.
+* Cihaz uygulamanızdan kullanılabilir yetenekler ve koşullar gibi geçerli durum bilgilerini bildirin. Örneğin, bir cihaz hücresel veya WiFi üzerinden IoT Hub 'ınıza bağlanır.
 
-* Cihaz uygulaması ve arka uç uygulaması arasında uzun süre çalışan iş akışları durumunu eşitleyin. Örneğin, çözüm yedeklediğinizde son yüklemek için yeni bellenim sürümünü belirtir ve cihaz uygulamasını güncelleştirme işleminin çeşitli aşamaları boyunca bildirir.
+* Uzun süre çalışan iş akışlarının durumunu cihaz uygulaması ile arka uç uygulaması arasında eşitler. Örneğin, çözüm arka ucu yüklenecek yeni bellenim sürümünü belirttiğinde ve cihaz uygulaması, güncelleştirme işleminin çeşitli aşamalarını raporlar.
 
-* Cihaz meta verilerini, yapılandırma ya da durum sorgulayın.
+* Cihazınızın meta verilerini, yapılandırmasını veya durumunu sorgulayın.
 
-Başvurmak [CİHAZDAN buluta iletişim Kılavuzu](iot-hub-devguide-d2c-guidance.md) bildirilen özellikleri, CİHAZDAN buluta iletileri ya da karşıya dosya yükleme kullanma yönergeleri için.
+Bildirilen özellikleri, cihazdan buluta iletileri veya karşıya dosya yüklemeyi kullanma hakkında rehberlik için [cihazdan buluta iletişim kılavuzuna](iot-hub-devguide-d2c-guidance.md) bakın.
 
-Başvurmak [bulut buluttan cihaza iletişim Kılavuzu](iot-hub-devguide-c2d-guidance.md) istenen özellikler, doğrudan yöntemler ve bulut-cihaz iletilerini kullanma yönergeleri için.
+İstenen özellikleri, doğrudan yöntemleri veya buluttan cihaza iletileri kullanma hakkında rehberlik için [buluttan cihaza iletişim kılavuzuna](iot-hub-devguide-c2d-guidance.md) bakın.
 
-## <a name="device-twins"></a>Cihaz ikizlerini
+## <a name="device-twins"></a>Cihaz ikikesi
 
-Cihaz ikizlerini cihazlarla ilgili bilgileri depolar:
+Cihaz TWINS, cihazla ilgili bilgi depolar:
 
-* Cihaz ve arka ucu, cihaz koşullar ve yapılandırma eşitlemek için kullanabilirsiniz.
+* Cihaz ve arka uçlar cihaz koşullarını ve yapılandırmayı eşitleyebilmek için kullanabilir.
 
-* Çözüm arka ucu, sorgu ve uzun süre çalışan hedef için kullanabileceğiniz işlemleri.
+* Çözüm arka ucu, uzun süre çalışan işlemleri sorgulamak ve hedeflemek için kullanılabilir.
 
-Cihaz ikizi yaşam döngüsü karşılık gelen bağlı [cihaz kimliği](iot-hub-devguide-identity-registry.md). Cihaz ikizlerini örtük olarak oluşturulur ve bir cihaz kimliği oluşturulduğunda veya IOT Hub'ında silinmiş silinir.
+Bir cihaz ikizi yaşam döngüsü, ilgili [cihaz kimliğiyle](iot-hub-devguide-identity-registry.md)bağlantılıdır. IoT Hub ' de bir cihaz kimliği oluşturulduğunda veya silindiğinde, cihaz WINS 'i örtülü olarak oluşturulur ve silinir.
 
-Cihaz ikizi içeren bir JSON belgesidir:
+Bir cihaz ikizi şunları içeren bir JSON belgesidir:
 
-* **Etiketleri**. Çözüm arka ucu, okuma ve yazma JSON belgesinin bölümü. Etiketler cihaz uygulamaları için görünür değildir.
+* **Etiketler**. JSON belgesinin çözüm arka ucunun okuyave yazabilmesi için bir bölümü. Etiketler cihaz uygulamalarına görünür değildir.
 
-* **İstenen özellikleri**. Cihaz yapılandırması veya koşulları eşitlemek için bildirilen özellikleriyle birlikte kullanılır. Cihaz uygulamasını okuyabilirsiniz ve çözüm arka ucu, istenen özellikleri ayarlayabilirsiniz. Cihaz uygulaması, istenen özelliklerinde değişiklik bildirimleri de alabilir.
+* **İstenen özellikler**. Cihaz yapılandırmasını veya koşullarını eşitlemeye yönelik bildirilen özelliklerle birlikte kullanılır. Çözüm arka ucu, istenen özellikleri ayarlayabilir ve cihaz uygulaması bunları okuyabilir. Cihaz uygulaması, istenen özelliklerde yapılan değişikliklere ilişkin bildirimler de alabilir.
 
-* **Bildirilen özellikler**. Cihaz yapılandırması veya koşulları eşitlemek için istenen özellikleri ile birlikte kullanılır. Cihaz uygulaması, bildirilen özellikleri ayarlayabilirsiniz ve çözüm arka ucu okuyun ve bunları sorgulayabilirsiniz.
+* **Bildirilen özellikler**. Cihaz yapılandırması veya koşulları eşitlemesini sağlamak için istenen özelliklerle birlikte kullanılır. Cihaz uygulaması bildirilen özellikleri ayarlayabilir ve çözüm arka ucu bunları okuyabilir ve sorgulayabilir.
 
-* **Cihaz kimlik özelliklerini**. Cihaz ikizi JSON belgesinin kök saklanan karşılık gelen bir cihaz kimliği salt okunur özelliklerini içeren [kimlik kayıt defteri](iot-hub-devguide-identity-registry.md).
+* **Cihaz kimliği özellikleri**. Device ikizi JSON belgesinin kökü, [kimlik kayıt defterinde](iot-hub-devguide-identity-registry.md)depolanan karşılık gelen cihaz kimliğinden salt okunurdur özellikleri içerir.
 
-![Cihaz ikizi özellikleri ekran görüntüsü](./media/iot-hub-devguide-device-twins/twin.png)
+![Cihaz ikizi özelliklerinin ekran görüntüsü](./media/iot-hub-devguide-device-twins/twin.png)
 
-Aşağıdaki örnek, bir cihaz ikizi JSON belgesini gösterir:
+Aşağıdaki örnekte bir Device ikizi JSON belgesi gösterilmektedir:
 
 ```json
 {
@@ -108,20 +108,20 @@ Aşağıdaki örnek, bir cihaz ikizi JSON belgesini gösterir:
 }
 ```
 
-Kapsayıcı nesneleri için ve kök nesne cihaz kimlik özelliklerdir `tags` ve her ikisi de `reported` ve `desired` özellikleri. `properties` Kapsayıcı bazı salt okunur öğeleri içerir (`$metadata`, `$etag`, ve `$version`) açıklanan [cihaz ikizi meta verilerini](iot-hub-devguide-device-twins.md#device-twin-metadata) ve [iyimser eşzamanlılık](iot-hub-devguide-device-twins.md#optimistic-concurrency) bölümler.
+Kök nesnesinde cihaz kimliği özellikleri ve `tags` `desired` hem hem de `reported` özellikleri için kapsayıcı nesneleri bulunur. `$etag``$metadata` `$version` [](iot-hub-devguide-device-twins.md#device-twin-metadata) [](iot-hub-devguide-device-twins.md#optimistic-concurrency) Kapsayıcı, Device ikizi meta verileri ve iyimser eşzamanlılık bölümlerinde açıklanan bazı salt okunurdur (,, ve) öğeleri içerir. `properties`
 
 ### <a name="reported-property-example"></a>Bildirilen özellik örneği
 
-Önceki örnekte, cihaz ikizi içeren bir `batteryLevel` cihaza uygulama tarafından bildirilen özellik. Bu özellik, sorgu ve son bildirilen pil düzeyine bağlı cihazlarda çalıştırmak mümkün kılar. Diğer, cihaz uygulama raporlama cihaz özellikleri veya bağlantı seçenekleri örneklerindendir.
+Önceki örnekte, Device ikizi cihaz uygulaması tarafından bildirilen bir `batteryLevel` özelliği içerir. Bu özellik, en son bildirilen pil düzeyine dayanarak cihazlarda sorgulama ve işlem yapmayı mümkün kılar. Diğer örnekler, cihaz uygulaması raporlama cihaz yeteneklerini veya bağlantı seçeneklerini içerir.
 
 > [!NOTE]
-> Bildirilen özellikler, çözüm arka ucu bir özelliğin son bilinen değer burada ilgilendiği senaryoları basitleştirin. Kullanım [CİHAZDAN buluta iletileri](iot-hub-devguide-messages-d2c.md) cihaz telemetrisi zaman serisi gibi zaman damgalı olaylar dizisini biçiminde işlemek çözüm arka ucu gerekip gerekmediğini.
+> Bildirilen özellikler, çözüm arka ucunun bir özelliğin bilinen son değeri ile ilgilendiği senaryoları basitleştirir. Çözüm arka ucunun, zaman serisi gibi zaman damgası bulunan olayların dizileri biçiminde cihaz telemetrisini işlemesi gerekiyorsa [cihazdan buluta iletileri](iot-hub-devguide-messages-d2c.md) kullanın.
 
 ### <a name="desired-property-example"></a>İstenen özellik örneği
 
-Önceki örnekte, `telemetryConfig` cihaz ikizi istenen ve bildirilen özellikler cihaz uygulamasını ve çözüm arka ucu ile bu cihaz için telemetri yapılandırma eşitlemek için kullanılır. Örneğin:
+Önceki örnekte, `telemetryConfig` cihaz ikizi istenen ve bildirilen özellikler, çözüm arka ucu ve cihaz uygulaması tarafından bu cihaz için telemetri yapılandırmasını eşitleyecek şekilde kullanılır. Örneğin:
 
-1. Çözüm arka ucu, istenen yapılandırma değeri ile istenen özelliği ayarlar. İstenen özellik kümesine sahip bir belge bölümü aşağıda verilmiştir:
+1. Çözüm arka ucu istenen özelliği istenen yapılandırma değeriyle ayarlar. Belge, istenen özellik kümesine sahip olan bölümüdür:
 
    ```json
    "desired": {
@@ -132,7 +132,7 @@ Kapsayıcı nesneleri için ve kök nesne cihaz kimlik özelliklerdir `tags` ve 
    },
    ```
 
-2. Cihaz uygulaması, değişikliği hemen bağlı veya ilk yeniden bildirilir. Cihaz uygulaması daha sonra güncelleştirilmiş yapılandırmayı raporlar (veya bir hata koşulunu kullanarak `status` özelliği). Bildirilen özellikler bölümü aşağıda verilmiştir:
+2. Cihaz uygulamasına, bağlantı kurulduktan sonra veya ilk kez yeniden bağlanıldığında değişiklik yapılır. Daha sonra cihaz uygulaması, güncelleştirilmiş yapılandırmayı (veya `status` özelliğini kullanarak bir hata koşulunu) raporlar. Bildirilen özelliklerin bölümü aşağıda verilmiştir:
 
    ```json
    "reported": {
@@ -144,21 +144,21 @@ Kapsayıcı nesneleri için ve kök nesne cihaz kimlik özelliklerdir `tags` ve 
    }
    ```
 
-3. Çözüm arka ucu tarafından birçok cihaz arasında yapılandırma işlemi sonuçlarını izleyebilir [sorgulama](iot-hub-devguide-query-language.md) cihaz ikizlerini.
+3. Çözüm arka ucu, cihaz TWINS 'i [sorgulayarak](iot-hub-devguide-query-language.md) , yapılandırma işleminin sonuçlarını birçok cihazda izleyebilir.
 
 > [!NOTE]
-> Yukarıdaki örnek, bir cihaz yapılandırması ve durumunu kodlama yollarından biri okunabilirlik için en iyi duruma getirilmiş parçacıklarıdır. Cihaz ikizi istenen ve bildirilen özellikler cihaz çiftleri, IOT hub'ı belirli bir şemaya uygulamaz.
+> Yukarıdaki kod parçacıkları, bir cihaz yapılandırmasını ve durumunu kodlamak için en iyi duruma getirilmiş örneklerdir. IoT Hub, cihaz TWINS 'te istenen ve bildirilen özellikler ikizi cihaz için belirli bir şema uygulamaz.
 > 
 
-Üretici yazılımı güncelleştirmelerini gibi uzun süre çalışan işlemleri eşitlenecek ikizlerini kullanabilirsiniz. Eşitleyebilir ve cihazlar arasında bir uzun süre çalışan işlemin İzleme özelliklerini kullanma hakkında daha fazla bilgi için bkz. [kullanmak istediğiniz cihazları yapılandırmak için Özellikler](tutorial-device-twins.md).
+Üretici yazılımı güncelleştirmeleri gibi uzun süreli işlemleri eşleştirmek için TWINS kullanabilirsiniz. Cihazlarda uzun süren bir işlemi senkronize etmek ve izlemek için özellikleri kullanma hakkında daha fazla bilgi için bkz. [cihazları yapılandırmak için istenen özellikleri kullanma](tutorial-device-twins.md).
 
 ## <a name="back-end-operations"></a>Arka uç işlemleri
 
-Çözüm arka ucu kullanarak HTTPS sunulan aşağıdaki atomik işlemler, cihaz ikizi çalışır:
+Çözüm arka ucu, HTTPS üzerinden sunulan aşağıdaki atomik işlemleri kullanarak cihaz ikizi üzerinde çalışır:
 
-* **Cihaz ikizi Kimliğe göre Al**. Bu işlem, etiketler ve istenen ve bildirilen sistem özellikleri dahil olmak üzere cihaz ikizi belgeyi döndürür.
+* **İkizi CIHAZ kimliğini alın**. Bu işlem, Etiketler ve istenen ve bildirilen sistem özellikleri dahil olmak üzere Device ikizi belgesini döndürür.
 
-* **Cihaz ikizi kısmen güncelleştirmek**. Bu işlem, etiketler veya bir cihaz ikizindeki istenen özellikler kısmen güncelleştirmek çözüm arka ucu sağlar. Kısmi güncelleştirmeyi ekler veya güncelleştirir herhangi bir özelliği bir JSON belgesi olarak ifade edilir. Özelliklerini ayarlamak `null` kaldırılır. Aşağıdaki örnek yeni bir istenen özellik değeriyle oluşturur `{"newProperty": "newValue"}`, mevcut değerini geçersiz kılar `existingProperty` ile `"otherNewValue"`ve kaldırır `otherOldProperty`. Başka bir değişiklik, mevcut istenen özellikleri veya etiketleri oluşturulur:
+* **Cihaz Ikizi kısmen güncelleştirme**. Bu işlem, çözüm arka ucunun, bir cihaz ikizi etiketleri veya istenen özellikleri kısmen güncelleştirmesine olanak sağlar. Kısmi güncelleştirme, herhangi bir özelliği ekleyen veya güncelleştiren bir JSON belgesi olarak ifade edilir. Olarak `null` ayarlanan özellikler kaldırılır. Aşağıdaki örnek, yeni bir `{"newProperty": "newValue"}`istenen özelliği değeri ile oluşturur, var olan `existingProperty` değerinin `"otherNewValue"`üzerine yazar ve kaldırır `otherOldProperty`. İstenen varolan özellikler veya etiketlere başka bir değişiklik yapılmaz:
 
    ```json
    {
@@ -174,31 +174,31 @@ Kapsayıcı nesneleri için ve kök nesne cihaz kimlik özelliklerdir `tags` ve 
    }
    ```
 
-* **İstenen özellikleri değiştirin**. Bu işlemi tamamen mevcut tüm istenen özellikleri üzerine ve yeni bir JSON belgesi için alternatif çözüm arka ucu sağlar `properties/desired`.
+* **İstenen özellikleri değiştirin**. Bu işlem, çözüm arka ucunun, tüm mevcut özellikleri tümüyle üzerine yazmasına ve için `properties/desired`yeni bir JSON belgesi yerine geçecek şekilde olanak sağlar.
 
-* **Etiketleri değiştirin**. Bu işlemi tamamen tüm mevcut etiketlerin üzerine yazarsınız ve yeni bir JSON belgesi için alternatif çözüm arka ucu sağlar `tags`.
+* **Etiketleri değiştirin**. Bu işlem, çözüm arka ucunun tüm mevcut etiketlerin üzerine yazılmasına ve yeni bir JSON belgesini `tags`yerine kullanmasına olanak sağlar.
 
-* **İkiz bildirimlerin**. Bu işlem ikizi değiştirildiğinde bildirim almak çözüm arka ucu sağlar. Bunu yapmak için IOT çözümünüzün yönlendirme oluşturma ve veri kaynağı eşit ayarlamak için gereken *twinChangeEvents*. İkiz bildirim gönderilir varsayılan olarak, bu tür bir yol, önceden mevcut. Değişim oranı çok yüksek olup olmadığını veya iç hatalar gibi diğer nedenlerle, IOT hub'ı tüm değişiklikleri içeren tek bir bildirim gönderebilir. Bu nedenle, uygulamanızın güvenilir denetim ve tüm ara durumlarını günlük gerekiyorsa, CİHAZDAN buluta iletileri kullanmanız gerekir. İkiz bildirim iletisi, özellikleri ve gövdesini içerir.
+* **İkizi bildirimleri alın**. Bu işlem, ikizi değiştirildiğinde çözüm arka ucunun bildirilmesini sağlar. Bunu yapmak için, IoT çözümünüzün bir rota oluşturması ve veri kaynağını *twinChangeEvents*' e eşit olarak ayarlaması gerekir. Varsayılan olarak, bu tür yollar önceden mevcut olmadığından, hiçbir ikizi bildirimi gönderilmez. Değişiklik hızı çok yüksekse veya iç arızalar gibi diğer nedenlerden dolayı IoT Hub tüm değişiklikleri içeren yalnızca bir bildirim gönderebilir. Bu nedenle, uygulamanızın tüm ara durumların güvenilir denetim ve günlüğe kaydetme ihtiyacı varsa cihazdan buluta iletileri kullanmanız gerekir. İkizi bildirim iletisi, özellikleri ve gövdesi içerir.
 
   - Özellikler
 
     | Ad | Değer |
     | --- | --- |
-    $content-type | uygulama/json |
-    $iothub-enqueuedtime |  Bildirim zaman gönderildiği zaman |
-    $iothub-message-kaynak | twinChangeEvents |
-    $content-encoding | UTF-8 |
-    deviceId | Cihaz kimliği |
-    hubName | IOT hub'ı adı |
-    operationTimestamp | [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) işleminin zaman damgası |
-    ıothub ileti şeması | deviceLifecycleNotification |
-    opType | "replaceTwin" veya "updateTwin" |
+    $content türü | uygulama/json |
+    $iothub-enqueuedtime |  Bildirimin gönderildiği zaman |
+    $iothub-ileti-kaynak | twinChangeEvents |
+    $content kodlaması | UTF-8 |
+    deviceId | Cihazın KIMLIĞI |
+    hubName | IoT Hub adı |
+    operationTimestamp | [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) işlem zaman damgası |
+    ıothub-Message-Schema | deviceLifecycleNotification |
+    opType | "yeniden kazan" veya "updateTwin" |
 
-    İleti sistemi özellikleri önekiyle `$` simgesi.
+    İleti sistemi özelliklerine `$` sembol ön eki eklenir.
 
-  - Gövde
+  - Body
         
-    Bu bölüm, JSON biçiminde tüm ikizi değişiklikleri içerir. Bir düzeltme eki aynı biçimi kullanır, farkı olan tüm ikizi bölümleri içerebilir: etiketler, properties.reported, properties.desired ve "$metadata" öğeleri içerir. Örneğin,
+    Bu bölüm bir JSON biçimindeki tüm ikizi değişikliklerini içerir. Bir düzeltme ekiyle aynı biçimi kullanır ve tüm ikizi bölümlerini içerebileceği fark vardır: Etiketler, Özellikler. bildirilen, Özellikler. istenen ve "$metadata" öğelerini içerir. Örneğin,
 
     ```json
     {
@@ -219,37 +219,37 @@ Kapsayıcı nesneleri için ve kök nesne cihaz kimlik özelliklerdir `tags` ve 
     }
     ```
 
-Önceki tüm işlemleri destekleyen [iyimser eşzamanlılık](iot-hub-devguide-device-twins.md#optimistic-concurrency) ve gerekli **ServiceConnect** tanımlandığı gibi izni [IOT hub'a erişimi denetleme](iot-hub-devguide-security.md).
+Önceki tüm işlemler [iyimser eşzamanlılığı](iot-hub-devguide-device-twins.md#optimistic-concurrency) destekler ve [IoT Hub erişimi denetim](iot-hub-devguide-security.md)bölümünde tanımlandığı şekilde **serviceconnect** iznini gerektirir.
 
 Bu işlemlere ek olarak çözüm arka ucu şunları yapabilir:
 
-* SQL benzeri kullanarak cihaz çiftlerini sorgulamak [IOT Hub sorgu dili](iot-hub-devguide-query-language.md).
+* SQL benzeri [IoT Hub sorgu dilini](iot-hub-devguide-query-language.md)kullanarak cihaz TWINS 'i sorgulayın.
 
-* Cihaz ikizlerini kullanarak büyük kümesi işlemleri [işleri](iot-hub-devguide-jobs.md).
+* [İşleri](iot-hub-devguide-jobs.md)kullanan büyük cihaz kümesi kümelerinde işlemler gerçekleştirin.
 
 ## <a name="device-operations"></a>Cihaz işlemleri
 
-Cihaz uygulamasını kullanarak aşağıdaki atomik işlemler üzerinde cihaz ikizini çalışır:
+Cihaz uygulaması, aşağıdaki atomik işlemleri kullanarak cihaz ikizi üzerinde çalışır:
 
-* **Cihaz ikizi almak**. Bu işlem şu anda bağlı bir cihaz için cihaz ikizi belge (etiketler ve istenen ve bildirilen sistem özellikleri dahil) döndürür.
+* **Cihaz Ikizi alma**. Bu işlem, bağlı durumdaki cihaz için cihaz ikizi belgesini (istenen ve bildirilen sistem özellikleri dahil) döndürür. (Etiketler cihaz uygulamalarına görünmez.)
 
-* **Kısmen bildirilen özellikleri güncelleştirmek**. Bu işlem, bağlı durumda cihaz, bildirilen özellikleri kısmi güncelleştirilmesini sağlar. Bu işlem, çözüm istenen özellikler kısmen güncelleştirmek için kullandığı uç geri JSON güncelleştirme biçimini kullanır.
+* **Bildirilen özellikleri kısmen güncelleştirme**. Bu işlem, bağlı durumda olan aygıtın bildirilen özelliklerinin kısmi güncelleştirilmesini mümkün. Bu işlem, çözüm arka ucunun istenen özelliklerin kısmi güncelleştirilmesi için kullandığı JSON güncelleştirme biçimini kullanır.
 
-* **İstenen özellikleri gözlemleyin**. Şu anda bağlı cihaz, İstenen özelliklerde yapılan güncelleştirmelerin gerçekleştiğinde bildirim almak seçebilirsiniz. Cihazın çözüm arka ucu tarafından yürütülen güncelleştirme (kısmi veya tam değiştirme) aynı biçiminde alır.
+* **İstenen özellikleri gözlemleyin**. Şu anda bağlı olan cihaz, ne zaman meydana gelediklerinde istenen özellikler için güncelleştirmeler bildirilmesini seçebilir. Cihaz, çözüm arka ucu tarafından yürütülen aynı güncelleştirme formunu (kısmi veya tam değiştirme) alır.
 
-Önceki tüm işlemleri gerektiren **DeviceConnect** tanımlandığı gibi izni [IOT hub'a erişimi denetleme](iot-hub-devguide-security.md).
+Önceki tüm işlemler, [IoT Hub erişimi denetim](iot-hub-devguide-security.md)bölümünde tanımlandığı gibi **deviceconnect** iznini gerektirir.
 
-[Azure IOT cihaz SDK'ları](iot-hub-devguide-sdks.md) birçok dilleri ve platformları önceki işlemlerle kolaylaştırır. IOT hub'ı temel elemanlar için istenen özellikleri eşitleme ayrıntıları hakkında daha fazla bilgi için bkz. [cihaz yeniden akış](iot-hub-devguide-device-twins.md#device-reconnection-flow).
+[Azure IoT cihaz SDK 'ları](iot-hub-devguide-sdks.md) , önceki işlemleri birçok dil ve platformda kullanmayı kolaylaştırır. İstenen özellikler eşitlemesine yönelik IoT Hub temel elemanların ayrıntıları hakkında daha fazla bilgi için bkz. [cihaz yeniden bağlantı akışı](iot-hub-devguide-device-twins.md#device-reconnection-flow).
 
 ## <a name="tags-and-properties-format"></a>Etiketler ve Özellikler biçimi
 
-Aşağıdaki kısıtlamalarla JSON nesneleri, etiketler ve istenen özellikler bildirilen özellikleri şunlardır:
+Etiketler, istenen özellikler ve bildirilen özellikler, JSON nesneleridir ve aşağıdaki kısıtlamalara sahiptir:
 
-* Tüm JSON nesneleri büyük/küçük harfe 64 baytın UTF-8 UNICODE dizelerini anahtarlarıdır. İzin verilen karakterleri UNICODE denetim karakterlerini (segmentler C0 ve C1) hariç tutmak ve `.`, `$`ve SP.
+* JSON nesnelerindeki tüm anahtarlar büyük/küçük harfe duyarlı 64 bayt UTF-8 UNICODE dizeleridir. İzin verilen karakterler UNICODE denetim karakterlerini (C0 ve C1 kesimleri),, `.`ve `$`SP 'yi hariç tutar.
 
-* JSON nesneleri tüm değerleri aşağıdaki JSON türde olabilir: boolean, sayı, dize, nesne. Diziler izin verilmez. Tamsayılar için maksimum değer 4503599627370495 ve tamsayılar için en düşük değer-4503599627370496.
+* JSON nesnelerindeki tüm değerler şu JSON türlerine sahip olabilir: Boolean, Number, String, Object. Dizilere izin verilmiyor. Tamsayılar için maksimum değer 4503599627370495, tamsayıların en küçük değeri ise-4503599627370496 ' dir.
 
-* Etiketler, istenen ve bildirilen özellikler tüm JSON nesneleri 5 en yüksek derinliği olabilir. Örneğin, aşağıdaki nesne geçerli değil:
+* Etiketler, istenen ve raporlanan özelliklerin tüm JSON nesneleri en fazla 5 derinliğine sahip olabilir. Örneğin, aşağıdaki nesne geçerlidir:
 
    ```json
    {
@@ -271,19 +271,19 @@ Aşağıdaki kısıtlamalarla JSON nesneleri, etiketler ve istenen özellikler b
    }
    ```
 
-* Tüm dize değerleri, en fazla 512 bayt uzunluğunda olabilir.
+* Tüm dize değerleri en fazla 512 bayt uzunluğunda olabilir.
 
 ## <a name="device-twin-size"></a>Cihaz ikizi boyutu
 
-IOT hub'ı zorunlu bir 8 KB'lık boyut sınırlaması ilgili toplam değerlerinin her `tags`, `properties/desired`, ve `properties/reported`, salt okunur öğeleri hariç.
+IoT Hub, ve öğelerinin her biri için, salt okuma öğeleri hariç olmak üzere, `tags` `properties/desired`ve `properties/reported`' nin her bir toplam değeri için 8 KB 'lık boyut sınırlaması uygular.
 
-UNICODE denetim karakterlerini (segmentler C0 ve C1) hariç tüm karakter sayılarak boyutu hesaplanır ve dize sabitleri dışında olan alanları.
+Boyut, UNICODE denetim karakterleri (segment C0 ve C1) ve dize sabitleri dışında kalan boşluklar hariç olmak üzere tüm karakterlerin sayılarak hesaplanır.
 
-IOT Hub ile ilgili bir hata bu belgelerin üst sınırı boyutunu artırır tüm işlemleri reddeder.
+IoT Hub, sınırın üzerinde bu belgelerin boyutunu arttırabilecek tüm işlemleri bir hata ile reddeder.
 
 ## <a name="device-twin-metadata"></a>Cihaz ikizi meta verileri
 
-IOT Hub, zaman damgası son güncelleştirme her JSON nesnesi, cihaz ikizi için istenen ve bildirilen özellikler oluşturur. Zaman damgaları UTC biçiminde ve kodlanmış [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) biçimi `YYYY-MM-DDTHH:MM:SS.mmmZ`.
+IoT Hub, cihazdaki her bir JSON nesnesi için son güncelleştirme zaman damgasını korur, ikizi istenen ve raporlanan Özellikler. Zaman damgaları UTC biçimindedir ve [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) biçiminde `YYYY-MM-DDTHH:MM:SS.mmmZ`kodlanır.
 
 Örneğin:
 
@@ -332,55 +332,55 @@ IOT Hub, zaman damgası son güncelleştirme her JSON nesnesi, cihaz ikizi için
 }
 ```
 
-Bu bilgiler, Nesne anahtarları kaldırma güncelleştirmeleri korumak için her düzeyde (yalnızca JSON yapısı Yapraklar) tutulur.
+Bu bilgiler, nesne anahtarlarını kaldırma güncelleştirmelerini korumak için her düzeyde (yalnızca JSON yapısının değil) tutulur.
 
 ## <a name="optimistic-concurrency"></a>İyimser eşzamanlılık
 
-Etiketler, istenen ve tüm destek iyimser eşzamanlılık bildirilen özellikler.
-Etikete göre bir ETag sahip [RFC7232](https://tools.ietf.org/html/rfc7232), etiketin JSON gösterimi, temsil eder. Tutarlılık sağlamak için Etag'ler çözüm arka ucu koşullu güncelleştirme işlemlerini kullanabilirsiniz.
+Etiketler, istenen ve raporlanan Özellikler iyimser eşzamanlılık desteği.
+Etiketler, etiketin JSON gösterimini temsil eden, [RFC7232](https://tools.ietf.org/html/rfc7232)başına bir ETag öğesine sahiptir. Tutarlılık sağlamak için çözüm arka ucundan koşullu güncelleştirme işlemlerinde ETags kullanabilirsiniz.
 
-Cihaz ikizi istenen ve bildirilen özellikler Etag'ler yoktur, ancak sahip bir `$version` artımlı olması garanti değeri. Benzer şekilde bir ETag öğesine sürümü güncelleştirme tarafça güncelleştirmeleri tutarlılığını zorlamak için kullanılabilir. Örneğin, bir cihaz uygulaması için bildirilen bir özellik veya istenen özelliği için çözüm arka ucu.
+Cihaz ikizi istenen ve bildirilen özelliklerin ETags yoktur, ancak artımlı olması garantilenmiş `$version` bir değer vardır. Bir ETag 'e benzer şekilde, sürüm, güncelleştirmelerin tutarlılığını zorlamak için güncelleştirme partisi tarafından kullanılabilir. Örneğin, bildirilen bir özellik için bir cihaz uygulaması veya istenen bir özellik için çözüm arka ucu.
 
-(Örneğin, cihaz, istenen özellikleri gözleme uygulaması) bir gözlemci aracı alma işleminin sonucu bir güncelleştirme bildirimi arasındaki yarışa hazır mutabık kılmanız gerekir sürümleri de yararlıdır. [Cihaz yeniden akış bölüm](iot-hub-devguide-device-twins.md#device-reconnection-flow) daha fazla bilgi sağlar.
+Sürümler Ayrıca, bir gözlemleme aracısının (örneğin, istenen özellikleri gözlemleme) bir alma işleminin sonucu ve bir güncelleştirme bildirimi arasındaki engelleri bağdaştırılması gerektiğinde de yararlıdır. [Cihaz yeniden bağlantı akışı bölümü](iot-hub-devguide-device-twins.md#device-reconnection-flow) daha fazla bilgi sağlar.
 
-## <a name="device-reconnection-flow"></a>Cihaz yeniden akış
+## <a name="device-reconnection-flow"></a>Cihaz yeniden bağlantı akışı
 
-IOT Hub bağlantısı kesilmiş cihazlar için istenen özellikleri güncelleştirme bildirimlerini korumaz. Bağlanan bir cihaz için güncelleştirme bildirimlerini abone yanı sıra tam istenen özellikler belgenin alması gerekir takip eden. Güncelleştirme bildirimlerini ve tam alma arasında yarışa hazır olasılığını göz önünde bulundurulduğunda, aşağıdaki akış güvence altına gerekir:
+IoT Hub, bağlantısı kesilen cihazlar için istenen özellikleri güncelleştirme bildirimlerini korumaz. Bu, bağlanan bir cihazın, güncelleştirme bildirimleri için abone olmanın yanı sıra, istenen tam Özellikler belgesini alması gerekir. Güncelleştirme bildirimleri ve tam alma arasında KSU olasılığa karşı, aşağıdaki akış, ensred olmalıdır:
 
-1. Cihaz uygulaması, bir IOT hub'ına bağlanır.
-2. Cihaz uygulaması için istenen özellikleri güncelleştirme bildirimlerini abone olur.
-3. Cihaz uygulaması, istenen özellikleri için belgenin tamamını alır.
+1. Cihaz uygulaması bir IoT Hub 'ına bağlanır.
+2. Cihaz uygulaması, istenen özellikler güncelleştirme bildirimleri için abone olur.
+3. Cihaz uygulaması, istenen özellikler için tüm belgeyi alır.
 
-Cihaz uygulaması ile tüm bildirimleri yoksayabilirsiniz `$version` alınan belgenin tamamını sürümünden eşit veya daha küçük. Bu yaklaşım, IOT Hub sürümleri her zaman artırma gönderilmesini sağladığından mümkündür.
+Cihaz uygulaması, tam alınan belgenin sürümünden daha `$version` az veya eşit olan tüm bildirimleri yok sayabilir. IoT Hub sürümlerinin her zaman artmasını sağladığından bu yaklaşım mümkündür.
 
 > [!NOTE]
-> Bu mantık zaten uygulanan [Azure IOT cihaz SDK'ları](iot-hub-devguide-sdks.md). Bu açıklama, yalnızca cihaz uygulamasını herhangi birini Azure IOT cihaz SDK'ları kullanamazsınız ve MQTT arabirimi doğrudan program gerekir yararlı olur.
+> Bu mantık, [Azure IoT cihaz SDK](iot-hub-devguide-sdks.md)'lerinde zaten uygulanmış. Bu açıklama yalnızca cihaz uygulaması Azure IoT cihaz SDK 'larının hiçbirini kullanamaz ve MQTT arabirimini doğrudan program,
 > 
 
-## <a name="additional-reference-material"></a>Ek başvuru malzemesi
+## <a name="additional-reference-material"></a>Ek başvuru malzemeleri
 
-IOT Hub Geliştirici Kılavuzu'nda olan diğer başvuru konularını içerir:
+IoT Hub geliştirici kılavuzundaki diğer başvuru konuları şunları içerir:
 
-* [IOT Hub uç noktaları](iot-hub-devguide-endpoints.md) makale her IOT hub'ı ortaya koyan çalışma zamanı ve yönetim işlemleri için çeşitli uç noktaları açıklar.
+* [IoT Hub uç noktaları](iot-hub-devguide-endpoints.md) makalesinde her bir IoT Hub 'ının çalışma zamanı ve yönetim işlemleri için sunduğu çeşitli uç noktalar açıklanmaktadır.
 
-* [Azaltma ve kotalar](iot-hub-devguide-quotas-throttling.md) makalede IOT Hub hizmeti ve hizmetin kullandığınızda beklenir azaltma davranışını uygulanan kotalar.
+* [Kısıtlama ve Kotalar](iot-hub-devguide-quotas-throttling.md) makalesinde IoT Hub hizmetine uygulanan kotalar ve hizmeti kullandığınızda bekleneceğiniz azaltma davranışı açıklanmaktadır.
 
-* [Azure IOT cihaz ve hizmet SDK'ları](iot-hub-devguide-sdks.md) makalede çeşitli dil IOT hub'ı ile etkileşim kuran hem cihaz hem de hizmet uygulamaları geliştirirken kullanabileceğiniz SDK'ları listeler.
+* [Azure IoT cihaz ve hizmet SDK 'ları](iot-hub-devguide-sdks.md) makalesinde, IoT Hub etkileşimde bulunan cihaz ve hizmet uygulamaları geliştirirken kullanabileceğiniz çeşitli dil SDK 'ları listelenir.
 
-* [Cihaz ikizleri, işler ve ileti yönlendirme için IOT Hub sorgu dili](iot-hub-devguide-query-language.md) makalede IOT Hub'ından, cihaz ikizleri ve işler hakkında bilgi almak için kullanabileceğiniz IOT Hub sorgu dili.
+* [Cihaz TWINS, işler ve ileti yönlendirme makalesinde IoT Hub sorgu dili,](iot-hub-devguide-query-language.md) cihaz ikikinizin ve işleriniz hakkında IoT Hub bilgi almak için kullanabileceğiniz IoT Hub sorgu dilini açıklar.
 
-* [IOT hub'ı MQTT desteği](iot-hub-mqtt-support.md) makale ve MQTT protokolünü IOT hub'ı desteği hakkında daha fazla bilgi sağlar.
+* [Mqtt IoT Hub destek](iot-hub-mqtt-support.md) makalesi, MQTT protokolü için IoT Hub desteği hakkında daha fazla bilgi sağlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Artık öğrendiğiniz cihaz ikizleri hakkında aşağıdaki IOT Hub Geliştirici Kılavuzu konuları ilginizi çekebilir:
+Artık cihaz ikörleriyle ilgili olarak öğrendiğinize göre, aşağıdaki IoT Hub Geliştirici Kılavuzu konularıyla ilgileniyor olabilirsiniz:
 
-* [Anlama ve IOT Hub'ında modül ikizlerini kullanma](iot-hub-devguide-module-twins.md)
+* [IoT Hub modül TWINS 'i anlayın ve kullanın](iot-hub-devguide-module-twins.md)
 * [Bir cihazda doğrudan yöntem çağırma](iot-hub-devguide-direct-methods.md)
 * [Birden fazla cihazda işleri zamanlama](iot-hub-devguide-jobs.md)
 
-Bu makalede açıklanan kavramları bazıları denemek için aşağıdaki öğreticilerde IOT Hub bakın:
+Bu makalede açıklanan kavramların bazılarını denemek için aşağıdaki IoT Hub öğreticileri inceleyin:
 
 * [Cihaz ikizi kullanma](iot-hub-node-node-twin-getstarted.md)
 * [Cihaz ikizi özelliklerini kullanma](tutorial-device-twins.md)
-* [VS Code için Azure IOT araçları ile cihaz Yönetimi](iot-hub-device-management-iot-toolkit.md)
+* [VS Code için Azure IoT araçları ile cihaz yönetimi](iot-hub-device-management-iot-toolkit.md)

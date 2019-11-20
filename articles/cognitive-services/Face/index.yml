@@ -1,98 +1,114 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Yüz Tanıma API'si Belgeleri
+### YamlMime:Landing
+title: Yüz Tanıma belgeleri
+summary: Bulut tabanlı Yüz Tanıma API’si, geliştiriciler için gelişmiş yüz algoritmalarına erişim sağlar. Microsoft Yüz algoritmaları, yüz özniteliği algılama ve yüz tanımayı sağlar. Hızlı başlangıç kılavuzları, öğreticiler ve örneklerle içeriği farklı şekillerde analiz etmeyi öğrenin.
 metadata:
-  title: 'Yüz Tanıma API''si Belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs'
-  description: Yüz Tanıma API'sini kullanarak görüntülerdeki yüzleri algılayıp tanımlama ve yüz bilgileri döndürme hakkında bilgi edinin. Öğreticilerde API kullanan uygulamaların nasıl derleneceği gösterilmektedir.
+  title: Yüz Tanıma API'si Belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs
+  description: Bulut tabanlı Yüz Tanıma API’si, geliştiriciler için gelişmiş yüz algoritmalarına erişim sağlar. Microsoft Yüz algoritmaları, yüz özniteliği algılama ve yüz tanımayı sağlar. Hızlı başlangıç kılavuzları, öğreticiler ve örneklerle içeriği farklı şekillerde analiz etmeyi öğrenin.
   services: cognitive-services
-  author: PatrickFarley
-  manager: cgronlun
   ms.service: cognitive-services
   ms.subservice: face-api
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 12/20/2018
-  ms.author: nitinme
-abstract:
-  description: 'Bulut tabanlı Yüz Tanıma API’si, geliştiriciler için gelişmiş yüz algoritmalarına erişim sağlar. Microsoft Yüz algoritmaları, yüz özniteliği algılama ve yüz tanımayı sağlar. Hızlı başlangıç kılavuzları, öğreticiler ve örneklerle içeriği farklı şekillerde analiz etmeyi öğrenin.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/face/overview
-            html: <p>Yüz Tanıma API'si hakkında bilgi edinin.</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Yüz Tanıma API'si nedir?
-          - href: /azure/cognitive-services/face/face-api-how-to-topics/howtodetectfacesinimage
-            html: <p>Resimdeki yüzleri algılamayı öğrenin.</p>
-            image:
-              src: ../media/index/i_tasks.svg
-            title: Resimlerdeki yüzleri algılama
-          - href: /azure/cognitive-services/face/face-how-to-install-containers
-            html: <p>Yüz Tanıma API'sini kapsayıcılarda kullanmayı öğrenin.</p>
-            image:
-              src: ../media/index/i_tasks.svg
-            title: Yüz Tanıma API'sini kapsayıcılarda kullanma
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Aşağıdakileri kullanarak görüntüleri analiz edin, küçük resimler oluşturun ve bir görüntüdeki metinleri ayıklayın:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/logo_Csharp.svg
-            text: 'C&#35;'
-            href: QuickStarts/CSharp
-          - image:
-              src: media/index/logo_java.svg
-            text: Java
-            href: QuickStarts/Java
-          - image:
-              src: media/index/logo_nodejs.svg
-            text: Node.js
-            href: QuickStarts/node
-          - image:
-              src: media/index/logo_python.svg
-            text: Python
-            href: QuickStarts/Python
-          - image:
-              src: media/index/logo_go.svg
-            text: Başlayın
-            href: QuickStarts/Go
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Yüz Tanıma API''sini kullanarak uygulama geliştirmeyi öğrenin:'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/cognitive-services/Face/Tutorials/FaceAPIinCSharpTutorial">Windows’da bir görüntüdeki yüzleri algılama ve çerçeve içine alma</a></li>
-          - html: <a href="/azure/cognitive-services/Face/Tutorials/FaceAPIinJavaForAndroidTutorial">Android’de bir görüntüdeki yüzleri algılama ve çerçeve içine alma</a></li>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: 'Yüz Tanıma API''siyle ilgili örnekler bulun:'
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://azure.microsoft.com/resources/samples/?service=cognitive-services&term=Face&sort=Relevance">Kod örnekleri</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: API'ler
-            html: <p><a href="APIReference">Yüz Tanıma API’si</a></p>
-          - title: SDK’lar
-            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/face?view=azure-dotnet">.NET</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/faceapi?view=azure-java-stable">Java</a></p> <p><a href="https://docs.microsoft.com/python/api/azure-cognitiveservices-vision-face/?view=azure-python">Python</a></p> <p><a href="https://docs.microsoft.com/javascript/api/azure-cognitiveservices-face/?view=azure-node-latest">Node</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/face">Go</a></p> <p><a href="https://github.com/Microsoft/Cognitive-Face-iOS">iOS</a></p>'
-          - title: PowerShell
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest">Azure CLI</a></p>'
+  author: PatrickFarley
+  ms.author: pafarley
+  ms.date: 10/24/2019
+  ms.openlocfilehash: 438fe3ff0e48eba21acea596f8cbed4498aaca18
+  ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/16/2019
+  ms.locfileid: "74132699"
+landingContent:
+- title: Yüz Tanıma API'si hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Yüz Tanıma API’si nedir?
+      url: Overview.md
+- title: Yüz algılama
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Yüz algılama
+      url: concepts/face-detection.md
+  - linkListType: quickstart
+    links:
+    - text: .NET SDK’sini kullanma
+      url: quickstarts/csharp-sdk.md
+    - text: Python SDK'yı kullanma
+      url: quickstarts/python-sdk.md
+  - linkListType: how-to-guide
+    links:
+    - text: Yüz algılama modeli belirtme
+      url: Face-API-How-to-Topics/specify-detection-model.md
+- title: Yüzleri tanıma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Yüz tanıma
+      url: concepts/face-recognition.md
+  - linkListType: quickstart
+    links:
+    - text: .NET SDK’sini kullanma
+      url: quickstarts/csharp-sdk.md
+    - text: Python SDK'yı kullanma
+      url: quickstarts/python-sdk.md
+  - linkListType: how-to-guide
+    links:
+    - text: Yüz tanıma modeli belirtme
+      url: Face-API-How-to-Topics/specify-recognition-model.md
+- title: Yüz dikdörtgenlerini kullanma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Yüz tanıma verilerini WPF uygulamasında görüntüleme
+      url: Tutorials/FaceAPIinCSharpTutorial.md
+    - text: Yüz tanıma verilerini Android uygulamasında görüntüleme
+      url: Tutorials/FaceAPIinJavaForAndroidTutorial.md
+  - linkListType: how-to-guide
+    links:
+    - text: HeadPose özniteliğini kullanma
+      url: Face-API-How-to-Topics/how-to-use-headpose.md
+- title: Kapsayıcıları kullanma
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Kapsayıcıları yükleme ve çalıştırma
+      url: face-how-to-install-containers.md
+  - linkListType: how-to-guide
+    links:
+    - text: Kapsayıcıları yapılandırma
+      url: face-resource-container-config.md
+  - linkListType: deploy
+    links:
+    - text: Kapsayıcı örnekleri kullanma
+      url: Face-API-How-to-Topics/deploy-face-container-on-container-instances.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Yüz Tanıma API'si v1.0
+      url: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
+    - text: .NET SDK
+      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/faceapi?view=azure-dotnet
+    - text: Python SDK'sı
+      url: https://docs.microsoft.com/python/api/azure-cognitiveservices-vision-face/?view=azure-python
+    - text: Java SDK
+      url: https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/faceapi?view=azure-java-stable
+    - text: Node.js SDK'sı
+      url: https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-face
+    - text: Go SDK'sı
+      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/face
+    - text: iOS SDK
+      url: https://github.com/Microsoft/Cognitive-Face-iOS
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+    - text: Azure Komut Satırı Arabirimi (CLI)
+      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest
+- title: Yardım ve geri bildirim
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: UserVoice
+      url: https://cognitive.uservoice.com/forums/430315-face-api
+    - text: Stack Overflow
+      url: https://stackoverflow.com/questions/tagged/microsoft-cognitive

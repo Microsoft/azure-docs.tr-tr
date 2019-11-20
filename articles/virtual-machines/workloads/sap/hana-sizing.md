@@ -1,39 +1,38 @@
 ---
-title: SAP hana (büyük örnekler) azure'da boyutlandırma | Microsoft Docs
-description: SAP hana (büyük örnekler) azure'da boyutlandırma.
+title: Azure 'da SAP HANA boyutlandırma (büyük örnekler) | Microsoft Docs
+description: Azure 'da SAP HANA boyutlandırma (büyük örnekler).
 services: virtual-machines-linux
 documentationcenter: ''
 author: RicksterCDN
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/04/2018
 ms.author: saghorpa
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 7d403c284eefc1351aabb632977832f2bf11757a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f2540a0f9ea702ff620ccd4b68208cbb2e70aafd
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64715836"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70101137"
 ---
 # <a name="sizing"></a>Boyutlandırma
 
-Boyutlandırma HANA büyük örneği için HANA için genel olarak boyutlandırma değerinden farklı değildir. Mevcut ve taşımak için diğer RDBMS HANA için SAP sağlayan çok sayıda mevcut SAP sistemlerinde çalışan bir rapor istediğiniz sistemlerini dağıtılabilir. Veritabanı için HANA taşınırsa, bu raporlar verileri kontrol edip HANA örneği için bellek gereksinimleri hesaplayın. Bu raporları çalıştırmak ve bunların en son düzeltme eklerinin veya sürümler elde etme hakkında daha fazla bilgi için aşağıdaki SAP notları okuyun:
+HANA büyük örneğinin boyutlandırılması, genel olarak HANA için boyutdan farklı değildir. Diğer RDBMS 'den HANA 'ya taşımak istediğiniz mevcut ve dağıtılan sistemler için SAP, mevcut SAP sistemlerinizde çalışan bir dizi rapor sağlar. Veritabanı HANA 'ya taşınırsa, bu raporlar verileri denetler ve HANA örneği için bellek gereksinimlerini hesaplar. Bu raporları çalıştırma ve en son düzeltme eklerini veya sürümlerini edinme hakkında daha fazla bilgi için aşağıdaki SAP notlarını okuyun:
 
-- [SAP notu #1793345 - SAP Suite on HANA ve boyutlandırma](https://launchpad.support.sap.com/#/notes/1793345)
-- [Not #1872170 - Suite HANA ve s/4 HANA boyutlandırma rapor üzerinde SAP](https://launchpad.support.sap.com/#/notes/1872170)
-- [SAP notu #2121330 - SSS: SAP BW on HANA ve rapor boyutlandırma](https://launchpad.support.sap.com/#/notes/2121330)
-- [SAP BW on HANA ve boyutlandırma raporu #1736976 - Not](https://launchpad.support.sap.com/#/notes/1736976)
-- [SAP notu #2296290 - yeni rapor, BW on HANA ve için boyutlandırma](https://launchpad.support.sap.com/#/notes/2296290)
+- [SAP Note #1793345-HANA 'da SAP Suite için boyutlandırma](https://launchpad.support.sap.com/#/notes/1793345)
+- [SAP Note #1872170 HANA ve S/4 HANA boyutlandırma raporunda Suite](https://launchpad.support.sap.com/#/notes/1872170)
+- [SAP Note #2121330-SSS: HANA boyutlandırma raporunda SAP BW](https://launchpad.support.sap.com/#/notes/2121330)
+- [SAP Note #1736976-HANA 'da siyah beyaz için boyutlandırma raporu](https://launchpad.support.sap.com/#/notes/1736976)
+- [SAP Note #2296290-bit GENIŞLIĞI için HANA 'da yeni boyutlandırma raporu](https://launchpad.support.sap.com/#/notes/2296290)
 
-Yeşil alan uygulamalar için hızlı Boyutlandırıcı SAP HANA SAP yazılımlarını uygulamasını bellek gereksinimlerini hesaplamak kullanılabilir.
+Yeşil alan uygulamaları için SAP Quick sizer, HANA 'nın en üstünde SAP yazılımı uygulamasının bellek gereksinimlerini hesaplamak için kullanılabilir.
 
-Veri hacmi büyüdükçe, HANA için bellek gereksinimleri artırın. Bu gelecekte olacak şekilde neler olduğunu tahmin yardımcı olması için geçerli bellek tüketimi dikkat edin. Bellek gereksinimlerine bağlı olarak, ardından, isteğe bağlı bir HANA büyük örneği için başka bir SKU eşleyebilirsiniz.
+Veri hacmi büyüdükçe, HANA için bellek gereksinimleri artırın. Gelecekte neler olduğunu tahmin etmenize yardımcı olması için geçerli bellek tüketiminizi göz önünde bulundurun. Bellek gereksinimlerine bağlı olarak, talep içeriğinizi HANA büyük örnek SKU 'larından birine eşleyebilirsiniz.
 
 **Sonraki adımlar**
-- Başvuru [ekleme gereksinimleri](hana-onboarding-requirements.md)
+- [Ekleme gereksinimlerini](hana-onboarding-requirements.md) inceleyin

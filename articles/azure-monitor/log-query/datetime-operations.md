@@ -1,77 +1,71 @@
 ---
-title: Azure İzleyici günlük sorguları tarih saat değerleri ile çalışma | Microsoft Docs
-description: Azure İzleyici günlük sorguları tarih ve saat verilerini ile nasıl çalışılacağını açıklar.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici günlük sorgularındaki tarih saat değerleriyle çalışma | Microsoft Docs
+description: Azure Izleyici günlük sorgularında tarih ve saat verileriyle nasıl çalışabileceğinizi açıklar.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 08/16/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 402511ba3c45e8bd12cb7f92ecd54f6084c8ada2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/16/2018
+ms.openlocfilehash: 6ff095d674a11d95ed4fd2d008c3e664dd595fef
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62112366"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72894209"
 ---
-# <a name="working-with-date-time-values-in-azure-monitor-log-queries"></a>Azure İzleyici günlük sorguları tarih saat değerleri ile çalışma
+# <a name="working-with-date-time-values-in-azure-monitor-log-queries"></a>Azure Izleyici günlük sorgularındaki tarih saat değerleriyle çalışma
 
 > [!NOTE]
-> Tamamlamanız gereken [Analytics portalı ile çalışmaya başlama](get-started-portal.md) ve [sorguları ile çalışmaya başlama](get-started-queries.md) dersin tamamlamadan önce.
+> [Analiz portalını kullanmaya başlama](get-started-portal.md) ve bu dersi tamamlamadan önce [sorguları](get-started-queries.md) kullanmaya başlama işlemini tamamlamanız gerekir.
 
 [!INCLUDE [log-analytics-demo-environment](../../../includes/log-analytics-demo-environment.md)]
 
-Bu makalede, Azure İzleyici günlük sorguları tarih ve saat verilerini ile nasıl çalışılacağı açıklanır.
+Bu makalede, Azure Izleyici günlük sorgularında tarih ve saat verileriyle nasıl çalışılacağı açıklanır.
 
 
 ## <a name="date-time-basics"></a>Tarih saat temelleri
-Kusto sorgu dili, tarihler ve saatler ile ilişkili iki ana veri türü vardır: datetime ve TimeSpan değeri. Tüm tarihler UTC cinsinden ifade edilir. Birden fazla tarih/saat biçimleri desteklenir, ancak ISO8601 biçimini tercih edilir. 
+Kusto sorgu dili, tarih ve saatlerle ilişkili iki ana veri türüne sahiptir: DateTime ve TimeSpan. Tüm tarihler UTC olarak ifade edilir. Birden çok DateTime biçimi desteklenirken, ıSO8601 biçimi tercih edilir. 
 
-Timespans zaman birimi tarafından izlenen bir ondalık sayı olarak ifade edilir:
+Timespans bir Decimal ve ardından bir zaman birimi tarafından ifade edilir:
 
-|Toplu özellik   | zaman birimi    |
+|tirme   | zaman birimi    |
 |:---|:---|
-|g           | gün          |
+|TID           | günündeki          |
 |h           | saat         |
-|m           | Dakika       |
-|s           | Saniye       |
-|MS          | Milisaniye  |
+|m           | dakikaya       |
+|s           | İkincisi       |
+|SWM          | milisaniy  |
 |mikrosaniye ölçeğinde | mikrosaniye ölçeğinde  |
-|değer çizgisi        | içerir   |
+|sayaç        | nanosaniyelik   |
 
-Tarih saat dizesi kullanarak atayarak oluşturulabilir `todatetime` işleci. Örneğin, belirli bir zaman çerçevesinde gönderilen VM sinyal gözden geçirmek için kullanın `between` işlecini bir zaman aralığı belirtin.
+DateTimeS, `todatetime` işleci kullanılarak bir dize atama ile oluşturulabilir. Örneğin, belirli bir zaman diliminde gönderilen VM sinyallerini gözden geçirmek için `between` işlecini kullanarak bir zaman aralığı belirtin.
 
 ```Kusto
 Heartbeat
 | where TimeGenerated between(datetime("2018-06-30 22:46:42") .. datetime("2018-07-01 00:57:27"))
 ```
 
-Başka bir yaygın bir senaryo için geçerli bir datetime karşılaştırıyor. Örneğin, son iki dakika boyunca tüm sinyaller görmek için kullanabileceğiniz `now` işleci iki dakika temsil eden bir timespan birlikte:
+Diğer bir yaygın senaryo, bir tarih saat değeri mevcut ile karşılaştırılıyor. Örneğin, son iki dakika boyunca tüm sinyalleri görmek için, `now` işlecini iki dakikayı temsil eden bir TimeSpan ile birlikte kullanabilirsiniz:
 
 ```Kusto
 Heartbeat
 | where TimeGenerated > now() - 2m
 ```
 
-Kısayol, bu işlev için de kullanılabilir:
+Bu işlev için bir kısayol da kullanılabilir:
 ```Kusto
 Heartbeat
 | where TimeGenerated > now(-2m)
 ```
 
-Kısa ve en okunabilir yöntemi ancak kullanarak `ago` işleci:
+En kısa ve en okunabilir yöntem de `ago` işlecini kullanıyor:
 ```Kusto
 Heartbeat
 | where TimeGenerated > ago(2m)
 ```
 
-Başlangıç ve bitiş zamanı bilerek yerine, başlangıç saatini ve süresini bildiğiniz varsayalım. Sorguyu şu şekilde yeniden yazabilirsiniz:
+Başlangıç ve bitiş zamanını bilmenin yanı sıra başlangıç saatini ve süreyi bildiğinizi varsayalım. Sorguyu aşağıdaki gibi yeniden yazabilirsiniz:
 
 ```Kusto
 let startDatetime = todatetime("2018-06-30 20:12:42.9");
@@ -81,8 +75,8 @@ Heartbeat
 | extend timeFromStart = TimeGenerated - startDatetime
 ```
 
-## <a name="converting-time-units"></a>Zaman birimi dönüştürme
-Bir tarih/saat veya timespan varsayılan dışında bir saat birimi içinde express isteyebilirsiniz. Örneğin, ne kadar zaman önce gösteren, son 30 dakika hata olayları gözden geçiriyor olmanız ve hesaplanmış bir sütun gerekiyorsa olayın gerçekleştiği:
+## <a name="converting-time-units"></a>Zaman birimlerini dönüştürme
+Varsayılan değer dışında bir zaman biriminde bir tarih saat veya TimeSpan değeri ifade etmek isteyebilirsiniz. Örneğin, son 30 dakikadan oluşan hata olaylarını gözden geçiriyorsanız ve olayın ne kadar önce oluştuğunu gösteren hesaplanmış bir sütuna ihtiyacınız varsa:
 
 ```Kusto
 Event
@@ -91,7 +85,7 @@ Event
 | extend timeAgo = now() - TimeGenerated 
 ```
 
-`timeAgo` Sütun değerleri aşağıdaki gibi tutar: "hh:mm:ss.fffffff biçimlendirildikten anlamı 00:09:31.5118992". Bu değerleri biçimlendirmek istiyorsanız `numver` başlangıç zamanından itibaren dakika sayısı bu değeri "1 dakika artan" ayırın:
+`timeAgo` sütunu şöyle bir değer barındırır: "00:09:31.5118992", yani hh: mm: ss. fffffff olarak biçimlendirilir. Bu değerleri başlangıç zamanından bu yana dakika `numver` biçimlendirmek istiyorsanız, bu değeri "1 dakika" olarak bölün:
 
 ```Kusto
 Event
@@ -102,10 +96,10 @@ Event
 ```
 
 
-## <a name="aggregations-and-bucketing-by-time-intervals"></a>Toplamalar ve zaman aralıklarına göre benzeyebilir
-Başka bir yaygın bir senaryo belirli süre boyunca belirli bir zaman dilimi içinde istatistikleri elde etmek için gerekli değildir. Bu senaryo için bir `bin` işleci summarıze yan tümcesinin bir parçası olarak kullanılabilir.
+## <a name="aggregations-and-bucketing-by-time-intervals"></a>Zaman aralıklarına göre toplamalar ve demetlenmesidir
+Diğer bir yaygın senaryo, belirli bir zaman dilimi içinde belirli bir zaman diliminde istatistik alma gereksinimdir. Bu senaryo için bir `bin` işleci, özetleme yan tümcesinin bir parçası olarak kullanılabilir.
 
-Son yarım saat boyunca 5 dakikada gerçekleşen olayların sayısını almak için aşağıdaki sorguyu kullanın:
+Son yarım saat boyunca 5 dakikada bir gerçekleşen olay sayısını almak için aşağıdaki sorguyu kullanın:
 
 ```Kusto
 Event
@@ -113,9 +107,9 @@ Event
 | summarize events_count=count() by bin(TimeGenerated, 5m) 
 ```
 
-Aşağıdaki tablo bu sorgu üretir:  
+Bu sorgu aşağıdaki tabloyu üretir:  
 
-|TimeGenerated(UTC)|events_count|
+|TimeGenerated (UTC)|events_count|
 |--|--|
 |2018-08-01T09:30:00.000|54|
 |2018-08-01T09:35:00.000|41|
@@ -124,7 +118,7 @@ Aşağıdaki tablo bu sorgu üretir:
 |2018-08-01T09:50:00.000|41|
 |2018-08-01T09:55:00.000|16|
 
-Demetler sonuçları oluşturmak için başka bir işlevler gibi kullanmaktır `startofday`:
+Sonuç demetlerini oluşturmanın başka bir yolu da `startofday`gibi işlevleri kullanmaktır:
 
 ```Kusto
 Event
@@ -132,19 +126,19 @@ Event
 | summarize events_count=count() by startofday(TimeGenerated) 
 ```
 
-Bu sorgu, aşağıdaki sonuçları üretir:
+Bu sorgu aşağıdaki sonuçları üretir:
 
-|timestamp|count_|
+|timestamp|biriktirme|
 |--|--|
-|2018-07-28T00:00:00.000|7,136|
-|2018-07-29T00:00:00.000|12,315|
-|2018-07-30T00:00:00.000|16,847|
-|2018-07-31T00:00:00.000|12,616|
-|2018-08-01T00:00:00.000|5,416|
+|2018-07-28T00:00:00.000|7\.136|
+|2018-07-29T00:00:00.000|12.315|
+|2018-07-30T00:00:00.000|16.847|
+|2018-07-31T00:00:00.000|12.616|
+|2018-08-01T00:00:00.000|5\.416|
 
 
 ## <a name="time-zones"></a>Saat dilimleri
-Tüm tarih/saat değerleri UTC cinsinden ifade edilir olduğundan, genellikle bu değerlerini yerel saat dilimi dönüştürmek kullanışlıdır. Örneğin, bu hesaplama için PST saatleri UTC dönüştürmek için kullanın:
+Tüm DateTime değerleri UTC 'de gösterildiği için, bu değerleri genellikle yerel saat dilimine dönüştürmek yararlı olur. Örneğin, UTC 'yi PST saatlerine dönüştürmek için bu hesaplamayı kullanın:
 
 ```Kusto
 Event
@@ -155,19 +149,19 @@ Event
 
 | Kategori | İşlev |
 |:---|:---|
-| Veri türlerini dönüştürme | [ToDateTime](/azure/kusto/query/todatetimefunction)[totimespan](/azure/kusto/query/totimespanfunction)  |
-| Yuvarlatılmış değerine gruplama boyutu | [Depo](/azure/kusto/query/binfunction) |
-| Belirli bir tarih veya saat Al | [önce](/azure/kusto/query/agofunction) [artık](/azure/kusto/query/nowfunction)   |
-| Değer bir parçası Al | [datetime_part](/azure/kusto/query/datetime-partfunction) [getmonth](/azure/kusto/query/getmonthfunction) [Yılın ayı](/azure/kusto/query/monthofyearfunction) [getyear](/azure/kusto/query/getyearfunction) [dayofmonth](/azure/kusto/query/dayofmonthfunction) [dayofweek](/azure/kusto/query/dayofweekfunction) [dayofyear](/azure/kusto/query/dayofyearfunction) [weekofyear](/azure/kusto/query/weekofyearfunction) |
-| Göreli tarih değer alma  | [endofday](/azure/kusto/query/endofdayfunction) [endofweek](/azure/kusto/query/endofweekfunction) [endofmonth](/azure/kusto/query/endofmonthfunction) [endofyear](/azure/kusto/query/endofyearfunction) [startofday](/azure/kusto/query/startofdayfunction) [startofweek](/azure/kusto/query/startofweekfunction) [startofmonth](/azure/kusto/query/startofmonthfunction) [startofyear](/azure/kusto/query/startofyearfunction) |
+| Veri türlerini Dönüştür | [totarihsaat](/azure/kusto/query/todatetimefunction)  [ToTimeSpan](/azure/kusto/query/totimespanfunction)  |
+| Değerin boyutunu bin boyutuna yuvarla | [bölme](/azure/kusto/query/binfunction) |
+| Belirli bir tarih veya saat alın | [](/azure/kusto/query/agofunction) [hemen](/azure/kusto/query/nowfunction) önce   |
+| Değerin bir kısmını al | [datetime_part](/azure/kusto/query/datetime-partfunction) [GetMonth](/azure/kusto/query/getmonthfunction) [monthofyear](/azure/kusto/query/monthofyearfunction) [GetYear](/azure/kusto/query/getyearfunction) [dayofmonth](/azure/kusto/query/dayofmonthfunction) [DayOfWeek](/azure/kusto/query/dayofweekfunction) [DayOfYear](/azure/kusto/query/dayofyearfunction) [WeekOfYear](/azure/kusto/query/weekofyearfunction) |
+| Göreli tarih değeri alın  | [endofday](/azure/kusto/query/endofdayfunction) [endofweek](/azure/kusto/query/endofweekfunction) [ENDOFYEAR](/azure/kusto/query/endofmonthfunction) [](/azure/kusto/query/endofyearfunction) [startofday](/azure/kusto/query/startofdayfunction) [startofweek](/azure/kusto/query/startofweekfunction) [STARTOFMONTH](/azure/kusto/query/startofmonthfunction) [STARTOFYEAR](/azure/kusto/query/startofyearfunction) |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Diğer dersler kullanmak için bkz. [Kusto sorgu dili](/azure/kusto/query/) Azure İzleyici ile günlük verilerini:
+Azure Izleyici günlük verileriyle [kusto sorgu dilini](/azure/kusto/query/) kullanmaya yönelik diğer derslere bakın:
 
 - [Dize işlemleri](string-operations.md)
 - [Toplama işlevleri](aggregations.md)
-- [Gelişmiş toplamaları](advanced-aggregations.md)
+- [Gelişmiş toplamalar](advanced-aggregations.md)
 - [JSON ve veri yapıları](json-data-structures.md)
 - [Gelişmiş sorgu yazma](advanced-query-writing.md)
-- [Birleşimler](joins.md)
-- [Grafikler](charts.md)
+- [Birleştirmeler](joins.md)
+- [Grafik](charts.md)

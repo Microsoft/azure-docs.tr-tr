@@ -9,14 +9,14 @@ manager: cgronlund
 ms.custom: include file
 ms.topic: include
 ms.date: 01/25/2019
-ms.openlocfilehash: a882a874574395095e98079cd0f8aa4a4987c749
-ms.sourcegitcommit: 51a7669c2d12609f54509dbd78a30eeb852009ae
+ms.openlocfilehash: 6bddfa048e4cb9cb7728c236417d4672df6f25b3
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66391775"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73476116"
 ---
-1. [Bir Azure Machine Learning hizmeti çalışma alanı oluşturma](../articles/machine-learning/service/setup-create-workspace.md).
+1. [Azure Machine Learning çalışma alanı oluşturun](../articles/machine-learning/service/how-to-manage-workspace.md).
 
 1. [GitHub deposunu](https://aka.ms/aml-notebooks) kopyalayın.
 
@@ -24,13 +24,13 @@ ms.locfileid: "66391775"
     git clone https://github.com/Azure/MachineLearningNotebooks.git
     ```
 
-1. Bir çalışma alanı yapılandırma dosyası, bu yöntemlerden birini kullanarak kopyalanmış dizine ekleyin:
+1. Aşağıdaki yöntemlerden birini kullanarak kopyalanmış dizine bir çalışma alanı yapılandırma dosyası ekleyin:
 
-    * İçinde [Azure portalında](https://ms.portal.azure.com)seçin **config.json indirme** gelen **genel bakış** çalışma alanınızın bir bölümü. 
+    * [Azure Portal](https://ms.portal.azure.com), çalışma alanınızın **genel bakış** bölümünden **config. json dosyasını indir** ' i seçin. 
 
-    ![Config.JSON indirin](./media/aml-dsvm-server/download-config.png)
+    ![Config. json dosyasını indir](./media/aml-dsvm-server/download-config.png)
 
-    * Kod kullanarak yeni bir çalışma alanı oluşturma [configuration.ipynb](https://github.com/Azure/MachineLearningNotebooks/blob/master/configuration.ipynb) kopyalanan dizininizdeki dizüstü bilgisayar.
+    * Klonlanan dizindeki [Configuration. ipynb](https://github.com/Azure/MachineLearningNotebooks/blob/master/configuration.ipynb) not defterindeki kodu kullanarak yeni bir çalışma alanı oluşturun.
 
 1. Kopyaladığınız dizinden notebook sunucusunu başlatın.
 

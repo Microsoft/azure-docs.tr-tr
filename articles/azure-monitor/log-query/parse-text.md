@@ -1,75 +1,71 @@
 ---
-title: Azure İzleyici günlüklerine metin verileri ayrıştırmak | Microsoft Docs
-description: Günlük verilerini Azure İzleyici kayıtlardaki veriler alınır ve her biri için göreli avantajları karşılaştırma sorguda alındığında ayrıştırmak için farklı seçenekler açıklanır.
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: tysonn
-ms.service: log-analytics
+title: Azure Izleyici günlüklerinde metin verilerini ayrıştırma | Microsoft Docs
+description: Verilerin alındığı ve bir sorguda alındığı zaman, her biri için göreli avantajları karşılaştıran Azure Izleyici kayıtlarında günlük verilerinin ayrıştırılmasına yönelik farklı seçenekler açıklanmaktadır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 12/04/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: ad4839a1b9e951a2bb206518254826a066330000
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 12/04/2018
+ms.openlocfilehash: 5a3b6852563955bfac940073bdda7d0afa02e77f
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61426740"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900257"
 ---
-# <a name="parse-text-data-in-azure-monitor-logs"></a>Azure İzleyici günlüklerine metin verileri ayrıştırılamadı
-Bazı günlük verilerini Azure İzleyici tarafından toplanan bilgilerin birden çok parça içinde tek bir özellik içerir. Bu veriler birden çok özelliklerini ayrıştırma kolaylaştıran sorguları kullanın. Bir ortak örnek bir [özel günlük](../../log-analytics/log-analytics-data-sources-custom-logs.md) , tek bir özellikte birden çok değer içeren bir tüm günlük girdisi toplar. Farklı değerleri için ayrı özellikler oluşturarak, arama yapabilirsiniz ve her toplama.
+# <a name="parse-text-data-in-azure-monitor-logs"></a>Azure Izleyici günlüklerinde metin verilerini ayrıştırma
+Azure Izleyici tarafından toplanan bazı günlük verileri, tek bir özellikte birden fazla bilgi parçası içerecektir. Bu verilerin birden çok özelliğe çözümlenmesi, sorgularda kullanmayı kolaylaştırır. Ortak bir örnek, tek bir özellikte birden fazla değeri olan bir günlük girişinin tamamını toplayan [özel bir günlüğlük](../../log-analytics/log-analytics-data-sources-custom-logs.md) örneğidir. Farklı değerler için ayrı özellikler oluşturarak, her biri üzerinde arama ve toplama yapabilirsiniz.
 
-Bu makalede, Azure İzleyici'de günlük verilerini veriler alınır ve her biri için göreli avantajları karşılaştırma sorguda alındığında ayrıştırmak için farklı seçenekler açıklanır.
+Bu makalede, verilerin alındığı ve bir sorguda alındığı zaman, her biri için göreli avantajları karşılaştıran Azure Izleyici 'de günlük verilerinin ayrıştırılmasına yönelik farklı seçenekler açıklanmaktadır.
 
 
 ## <a name="parsing-methods"></a>Yöntemleri ayrıştırma
-Veri toplanması, alım zamanında veya sorgu verilerini ayrıştırabilirsiniz bir sorgu ile verileri analiz edilirken zaman. Aşağıda açıklandığı gibi her stratejinin benzersiz avantajları vardır.
+Verileri bir sorgu ile analiz edilirken veri toplandığında ya da sorgu zamanında veri alma sırasında verileri ayrıştırabilirsiniz. Her strateji aşağıda açıklandığı gibi benzersiz avantajlara sahiptir.
 
-### <a name="parse-data-at-collection-time"></a>Veri toplama zamanında ayrıştırılamıyor
-Veri toplama zamanında ayrıştırılamadı olduğunda, yapılandırdığınız [özel alanlar](../../log-analytics/log-analytics-custom-fields.md) tablosunda yeni özellikler oluşturun. Sorgular, ayrıştırma tüm mantığı içerir ve yalnızca tablodaki herhangi bir alan olarak bu özellikleri kullanmak zorunda değilsiniz.
-
-Bu yöntemin avantajları şunlardır:
-
-- Eklemeniz gerekmez. bu yana toplanan verileri ayrıştırmak sorgu komutlarında sorgu daha kolay.
-- Sorgu beri daha iyi sorgu performansını ayrıştırma gerçekleştirmeniz gerekmez.
- 
-Bu yöntemin dezavantajları şunlardır:
-
-- Önceden tanımlanmış olması gerekir. Zaten toplanmış veriler dahil edemezsiniz.
-- Ayrıştırma mantığı değiştirirseniz, yalnızca yeni verilere uygulanır.
-- Sorgularda kullanılabilenden daha az ayrıştırma seçenekleri.
-- Veri toplamak için gecikme süresi artar.
-- Hataları işlemek zor olabilir.
-
-
-### <a name="parse-data-at-query-time"></a>Sorgu zamanında verileri ayrıştırılamadı
-Sorgu zamanında verileri ayrıştırılamadı olduğunda, verileri birden çok alana ayrıştırmak için sorgunuzu mantığı içerir. Gerçek tablo değiştirilmez.
+### <a name="parse-data-at-collection-time"></a>Toplama sırasında verileri Ayrıştır
+Verileri toplama zamanında ayrıştırdığınızda, tabloda yeni özellikler oluşturan [özel alanları](../../log-analytics/log-analytics-custom-fields.md) yapılandırırsınız. Sorguların herhangi bir ayrıştırma mantığı içermesi gerekmez ve bu özellikleri tablodaki diğer herhangi bir alan olarak kullanmanız yeterlidir.
 
 Bu yöntemin avantajları şunlardır:
 
-- Zaten toplanmış veriler dahil olmak üzere herhangi bir veri geçerlidir.
-- Mantığındaki değişiklikler hemen tüm veriler için uygulanabilir.
-- Ayrıştırma seçeneklerini belirli veri yapıları için önceden tanımlanmış mantığı dahil esnek.
+- Sorguya ayrıştırma komutları dahil etmek zorunda olmadığınızdan toplanan verileri sorgulamak daha kolay.
+- Sorgunun ayrıştırma gerçekleştirmesi gerekli olmadığından daha iyi sorgu performansı.
  
 Bu yöntemin dezavantajları şunlardır:
 
-- Daha karmaşık sorgular gerekir. Bu kullanılarak azaltılabilir [işlevleri bir tabloyu benzetimini yapmak için](#use-function-to-simulate-a-table).
-- Birden çok sorgu ayrıştırma mantığı çoğaltılması gerekir. Mantığa işlevleri aracılığıyla paylaşabilirsiniz.
-- Karmaşık mantık çok büyük kayıt karşı çalışan (kayıtları milyarlarca) belirlediğinde yükü oluşturabilirsiniz.
+- Önceden tanımlanmış olmalıdır. Zaten toplanmış olan veriler dahil olamaz.
+- Ayrıştırma mantığını değiştirirseniz, yalnızca yeni verilere uygulanır.
+- Sorgularda bulunandan daha az ayrıştırma seçeneği var.
+- Verilerin toplanması için gecikme süresini artırır.
+- Hataların işlenmesi zor olabilir.
 
-## <a name="parse-data-as-its-collected"></a>Verileri toplandıktan olarak ayrıştırılamadı
-Bkz: [Azure İzleyici'de özel alanlar oluşturma](../platform/custom-fields.md) toplandıktan gibi veri ayrıştırma ilişkin ayrıntılar için. Bu özel özellikler sorgular gibi diğer herhangi bir özelliği tarafından kullanılan bir tablo oluşturur.
 
-## <a name="parse-data-in-query-using-patterns"></a>Sorgu desenleri kullanarak verileri ayrıştırılamadı
-Ayrıştırılacak istediğiniz verilerin kayıtlarda yinelenen bir desen tarafından belirlenebildiğinde farklı işleçleri kullanabilirsiniz [Kusto sorgu dili](/azure/kusto/query/) bir veya daha fazla yeni özellikler belirli veri parçası ayıklanamadı.
+### <a name="parse-data-at-query-time"></a>Sorgu zamanında verileri Ayrıştır
+Sorgu zamanında verileri ayrıştırdığınızda, verileri birden çok alana ayrıştırmak için sorgunuzun mantığını dahil edersiniz. Gerçek tablo değiştirilmez.
+
+Bu yöntemin avantajları şunlardır:
+
+- Zaten toplanmış olan veriler de dahil olmak üzere tüm veriler için geçerlidir.
+- Mantığdaki değişiklikler tüm verilere hemen uygulanabilir.
+- Belirli veri yapıları için önceden tanımlanmış mantık dahil esnek ayrıştırma seçenekleri.
+ 
+Bu yöntemin dezavantajları şunlardır:
+
+- Daha karmaşık sorgular gerektirir. Bu, [bir tablonun benzetimini yapmak için işlevleri](#use-function-to-simulate-a-table)kullanılarak azaltılabilir.
+- Ayrıştırma mantığı birden çok sorguya çoğaltılmalıdır. İşlevleri aracılığıyla bazı mantık paylaşabilir.
+- , Çok büyük kayıt kümelerinde (milyarlarca kayıt) karmaşık mantık çalıştırırken ek yük oluşturabilir.
+
+## <a name="parse-data-as-its-collected"></a>Toplanan verileri ayrıştırın
+Toplanan verileri ayrıştırma hakkında ayrıntılı bilgi için bkz. [Azure izleyici 'de özel alanlar oluşturma](../platform/custom-fields.md) . Bu, tabloda, diğer herhangi bir özellik gibi sorgular tarafından kullanılabilecek özel özellikler oluşturur.
+
+## <a name="parse-data-in-query-using-patterns"></a>Desenleri kullanarak sorgudaki verileri ayrıştırma
+Ayrıştırmak istediğiniz veriler kayıtlar arasında yinelenen bir Düzenle tanımlanabildiğinde, belirli veri parçasını bir veya daha fazla yeni özelliğe ayıklamak için [kusto sorgu dilinde](/azure/kusto/query/) farklı işleçler kullanabilirsiniz.
 
 ### <a name="simple-text-patterns"></a>Basit metin desenleri
 
-Kullanım [ayrıştırma](/azure/kusto/query/parseoperator) dize ifadesinden ayıklanması gereken bir veya daha fazla özel özellikler oluşturmak için sorgu işleci. Tanımlanması için desen ve adlarını oluşturmak üzere özellikleri belirtin. Benzer şekilde bir form anahtar-değer dizeleri verilerle yararlıdır _anahtar = değer_.
+Bir dize ifadesinden ayıklanabilen bir veya daha fazla özel özellik oluşturmak için sorguınızdan [ayrıştırma](/azure/kusto/query/parseoperator) işlecini kullanın. Tanımlanabilecek kalıbı ve oluşturulacak özelliklerin adlarını belirtirsiniz. Bu, anahtar-değer dizelerine sahip veriler için _anahtar = değere_benzer bir biçimde oldukça yararlıdır.
 
-Verileri aşağıdaki biçimde özel bir günlük göz önünde bulundurun.
+Aşağıdaki biçimdeki verilerle özel bir günlük düşünün.
 
 ```
 Time=2018-03-10 01:34:36 Event Code=207 Status=Success Message=Client 05a26a97-272a-4bc9-8f64-269d154b0e39 connected
@@ -79,7 +75,7 @@ Time=2018-03-10 01:38:22 Event Code=302 Status=Error Message=Application could n
 Time=2018-03-10 01:31:34 Event Code=303 Status=Error Message=Application lost connection to database
 ```
 
-Aşağıdaki sorgu bu verileri ayrı ayrı Özellikler içinde ayrıştırma. Satırla _proje_ yalnızca dönün, hesaplanan özellikler eklenir ve _RawData_, giriş tamamına özel günlük tutan tek özellik.
+Aşağıdaki sorgu, bu verileri tekil özelliklerde ayrıştırır. _Proje_ içeren satır yalnızca hesaplanmış özellikleri döndürmek için _eklenir, bu, tüm_girişi özel günlükte tutan tek özelliktir.
 
 ```Kusto
 MyCustomLog_CL
@@ -87,7 +83,7 @@ MyCustomLog_CL
 | project EventTime, Code, Status, Message
 ```
 
-Kullanıcı adı etki alanınızdaki bir UPN sonu başka bir örnek aşağıdadır _AzureActivity_ tablo.
+Aşağıda, _AzureActivity_ TABLOSUNDAKI bir UPN 'nin Kullanıcı adını kesen bir örnek verilmiştir.
 
 ```Kusto
 AzureActivity
@@ -98,7 +94,7 @@ AzureActivity
 
 
 ### <a name="regular-expressions"></a>Normal ifadeler
-Normal bir ifade ile verilerinizi tanımlanabilir, kullanabileceğiniz [normal ifadeler kullanan işlevler](/azure/kusto/query/re2) bireysel değerlerini ayıklamak için. Aşağıdaki örnekte [ayıklamak](/azure/kusto/query/extractfunction) şekilde _UPN_ alanını _AzureActivity_ kaydeder ve sonra ayrı kullanıcıların dönün.
+Verileriniz bir normal ifadeyle tanımlanabilmelidir, tek tek değerleri ayıklamak için [normal ifadeler kullanan işlevleri](/azure/kusto/query/re2) kullanabilirsiniz. Aşağıdaki örnek, _AzureActivity_ kayıtlarından _UPN_ alanını çıkarmak için [Ayıkla](/azure/kusto/query/extractfunction) kullanır ve sonra farklı kullanıcılar döndürür.
 
 ```Kusto
 AzureActivity
@@ -106,16 +102,16 @@ AzureActivity
 | distinct UPNUserPart, Caller
 ```
 
-Etkinleştirmek için verimli büyük ölçekte, ayrıştırma Azure İzleyici re2 sürümünü normal ifadeler, benzer, ancak bazı diğer normal ifade çeşitler aynı olduğu kullanır. Başvurmak [re2 ifadesi söz dizimi](https://aka.ms/kql_re2syntax) Ayrıntılar için.
+Azure Izleyici, büyük ölçekte verimli bir şekilde ayrıştırma sağlamak için, benzer ancak diğer normal ifade çeşitleriyle aynı olmayan normal Ifadelerin RE2 sürümünü kullanır. Ayrıntılar için [RE2 Expression söz dizimini](https://aka.ms/kql_re2syntax) inceleyin.
 
 
-## <a name="parse-delimited-data-in-a-query"></a>Bir sorgudaki sınırlandırılmış verileri ayrıştırma
-Sınırlı bir veri alanları bir CSV dosyasında virgül gibi ortak bir karakter ile ayırır. Kullanım [bölme](/azure/kusto/query/splitfunction) belirttiğiniz bir sınırlayıcıyı kullanarak sınırlandırılmış verileri ayrıştırmak için işlevi. Bu ile [genişletmek](/azure/kusto/query/extendoperator) verilerdeki tüm alanları döndürür veya çıktısında dahil edilecek her bir alanı belirtmek için işleci.
+## <a name="parse-delimited-data-in-a-query"></a>Sorgudaki sınırlandırılmış verileri ayrıştırma
+Sınırlandırılmış veriler, alanları CSV dosyasında virgül gibi ortak bir karakterle ayırır. Belirlediğiniz sınırlayıcıyı kullanarak sınırlandırılmış verileri ayrıştırmak için [split](/azure/kusto/query/splitfunction) işlevini kullanın. Verilerdeki tüm alanları döndürmek veya çıkışa dahil edilecek ayrı alanları belirtmek için bunu [genişletme](/azure/kusto/query/extendoperator) işleciyle birlikte kullanabilirsiniz.
 
 > [!NOTE]
-> Bölünmüş dinamik bir nesne döndürdüğünden, sonuçları işleçler ve filtreleri kullanılacak dize gibi veri türlerini açıkça başvurusuna gerekebilir.
+> Split dinamik bir nesne döndürdüğünden, sonuçların operatörler ve filtrelerde kullanılacak dize gibi veri türlerine açıkça dönüştürülmesi gerekebilir.
 
-Özel bir günlük aşağıdaki CSV biçiminde verilerle göz önünde bulundurun.
+Aşağıdaki CSV biçimindeki verilerle özel bir günlük düşünün.
 
 ```
 2018-03-10 01:34:36, 207,Success,Client 05a26a97-272a-4bc9-8f64-269d154b0e39 connected
@@ -125,7 +121,7 @@ Sınırlı bir veri alanları bir CSV dosyasında virgül gibi ortak bir karakte
 2018-03-10 01:31:34, 303,Error,Application lost connection to database
 ```
 
-Aşağıdaki sorguda bu verileri ayrıştırmak ve ancak iki hesaplanan özellikleri özetler. İlk satırı böler _RawData_ özelliğine bir dize dizisi. Sonraki satırların her biri ayrı ayrı özellikler için bir ad verir ve uygun veri türüne dönüştürülecek işlevleri'ni kullanarak çıkış ekler.
+Aşağıdaki sorgu, bu verileri ayrıştırarak hesaplanan özelliklerden ikisi tarafından özetlemeye neden olur. İlk satır, _rawData_ özelliğini bir dize dizisine böler. Sonraki satırların her biri, tek tek özelliklere bir ad verir ve bunları uygun veri türüne dönüştürmek için işlevleri kullanarak çıktıya ekler.
 
 ```Kusto
 MyCustomCSVLog_CL
@@ -138,11 +134,11 @@ MyCustomCSVLog_CL
 | summarize count() by Status,Code
 ```
 
-## <a name="parse-predefined-structures-in-a-query"></a>Önceden tanımlanmış bir sorgu yapılarda Ayrıştır
-Verilerinizi bilinen bir yapıda biçimlendirilmişse işlevlerin kullanmayı mümkün olabilir [Kusto sorgu dili](/azure/kusto/query/) önceden tanımlanmış yapıları ayrıştırmak için:
+## <a name="parse-predefined-structures-in-a-query"></a>Sorguda önceden tanımlanmış yapıları ayrıştırma
+Verileriniz bilinen bir yapıda biçimlendirildiyse, önceden tanımlı yapıları ayrıştırmak için [kusto sorgu dilinde](/azure/kusto/query/) işlevlerden birini kullanabilirsiniz:
 
 - [JSON](/azure/kusto/query/parsejsonfunction)
-- [XML](/azure/kusto/query/parse-xmlfunction)
+- ['SINI](/azure/kusto/query/parse-xmlfunction)
 - [IPv4](/azure/kusto/query/parse-ipv4function)
 - [URL](/azure/kusto/query/parseurlfunction)
 - [URL sorgusu](/azure/kusto/query/parseurlqueryfunction)
@@ -150,7 +146,7 @@ Verilerinizi bilinen bir yapıda biçimlendirilmişse işlevlerin kullanmayı m�
 - [Kullanıcı Aracısı](/azure/kusto/query/parse-useragentfunction)
 - [Sürüm dizesi](/azure/kusto/query/parse-versionfunction)
 
-Aşağıdaki örnek sorgu ayrıştırır _özellikleri_ alanını _AzureActivity_ JSON'da yapılandırılmış tablo. Adlı bir dinamik özellik sonuçlarını kaydeder _parsedProp_, kişi adlı bir JSON değeri içerir. Bu değerler, filtreleme ve sorgu sonuçları özetlemek için kullanılır.
+Aşağıdaki örnek sorgu, JSON içinde yapılandırılmış olan _AzureActivity_ tablosunun _Özellikler_ alanını ayrıştırır. Sonuçları, JSON içindeki bağımsız adlandırılmış değeri içeren _Parsedprop_adlı dinamik bir özelliğe kaydeder. Bu değerler sorgu sonuçlarını filtrelemekte ve özetlemekte kullanılır.
 
 ```Kusto
 AzureActivity
@@ -159,9 +155,9 @@ AzureActivity
 | summarize count() by ResourceGroup, tostring(parsedProp.tags.businessowner)
 ```
 
-Sorgunuzu birden çok özelliklerinden biçimlendirilmiş veri kullandığında, kullanılması gereken şekilde ayrıştırma bu işlevler, yoğun işlemci olabilir. Aksi takdirde, işleme basit desen, daha hızlı olacaktır.
+Bu ayrıştırma işlevleri işlemci açısından yoğun olabilir, bu nedenle yalnızca sorgunuz biçimlendirilen verilerden birden çok özellik kullandığında kullanılmalıdır. Aksi takdirde, basit kalıp eşleme işleme daha hızlı olur.
 
-Aşağıdaki örnek, etki TGT ön kimlik doğrulama türü dökümünü gösterir. XML dizesi olan yalnızca EventData alanda türü var, ancak hiçbir diğer veriler bu alan gereklidir. Bu durumda, [ayrıştırma](/azure/kusto/query/parseoperator) gerekli veri parçasını almak için kullanılır.
+Aşağıdaki örnek, etki alanı denetleyicisi TGT ön kimlik doğrulama türünün dökümünü gösterir. Tür yalnızca bir XML dizesi olan EventData alanında bulunur, ancak bu alandan başka bir veri gerekmez. Bu durumda, gereken veri parçasını seçmek için [ayrıştırma](/azure/kusto/query/parseoperator) kullanılır.
 
 ```Kusto
 SecurityEvent
@@ -170,10 +166,10 @@ SecurityEvent
 | summarize count() by PreAuthType
 ```
 
-## <a name="use-function-to-simulate-a-table"></a>İşlev bir tablo benzetimini yapmak için kullanın
-Belirli bir tablonun aynı ayrıştırma gerçekleştirmek birden fazla sorgu gerekebilir. Bu durumda, [bir işlev oluşturma](functions.md) her sorgu ayrıştırma mantık çoğaltmak yerine Ayrıştırılan verileri döndürür. Ardından, diğer sorgulara işlev diğer adı yerine özgün tabloyu kullanabilirsiniz.
+## <a name="use-function-to-simulate-a-table"></a>Bir tablonun benzetimini yapmak için fonksiyonunu kullanın
+Belirli bir tablonun aynı ayrıştırmasını gerçekleştiren birden çok sorgunuz olabilir. Bu durumda, her sorguda ayrıştırma mantığını çoğaltmak yerine ayrıştırılmış verileri döndüren [bir işlev oluşturun](functions.md) . Daha sonra diğer sorgularda özgün tablonun yerine işlev diğer adını kullanabilirsiniz.
 
-Yukarıdaki virgülle ayrılmış özel günlük örneği göz önünde bulundurun. Bunlar Ayrıştırılan verilerde birden çok sorguları kullanmak için aşağıdaki sorguyu kullanarak bir işlev oluşturun ve diğer adla Kaydet _MyCustomCSVLog_.
+Yukarıdaki virgülle ayrılmış özel günlük örneğini göz önünde bulundurun. Ayrıştırılmış verileri birden çok sorguda kullanmak için aşağıdaki sorguyu kullanarak bir işlev oluşturun ve _Mycustomcsvlog_diğer adıyla kaydedin.
 
 ```Kusto
 MyCustomCSVLog_CL
@@ -184,7 +180,7 @@ MyCustomCSVLog_CL
 | extend Message   = tostring(CSVFields[3]) 
 ```
 
-Şimdi diğer kullanabilirsiniz _MyCustomCSVLog_ sorgularda aşağıdaki gibi gerçek tablo adı yerine.
+Artık, aşağıdaki gibi sorgularda gerçek tablo adının yerine _Mycustomcsvlog_ diğer adını kullanabilirsiniz.
 
 ```Kusto
 MyCustomCSVLog
@@ -193,4 +189,4 @@ MyCustomCSVLog
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Hakkında bilgi edinin [oturum sorguları](log-query-overview.md) veri kaynakları ve çözümlerinden toplanan verileri analiz etmek için.
+* Veri kaynaklarından ve çözümlerinden toplanan verileri analiz etmek için [günlük sorguları](log-query-overview.md) hakkında bilgi edinin.

@@ -1,58 +1,55 @@
 ---
-title: Azure Güvenlik Merkezi için IOT Preview kullanarak verilere erişilmesi | Microsoft Docs
-description: IOT için Azure Güvenlik Merkezi'ni kullanarak güvenlik uyarısı ve öneri verilerinizi erişim hakkında bilgi edinin.
+title: IoT için Azure Güvenlik Merkezi 'ni kullanarak verilere erişme | Microsoft Docs
+description: IoT için Azure Güvenlik Merkezi 'ni kullanırken güvenlik uyarısına ve öneri verilerinize erişme hakkında bilgi edinin.
 services: asc-for-iot
-ms.service: ascforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: fbd96ddd-cd9f-48ae-836a-42aa86ca222d
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/25/2019
+ms.date: 07/23/2019
 ms.author: mlottner
-ms.openlocfilehash: 1ec6a174d05f8707bbffcc9fb013a98c2eb9196c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3ddd9b2c8373746a65cd78f0a81b60d097cd9f38
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65200554"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68597186"
 ---
 # <a name="access-your-security-data"></a>Güvenlik verilerinize erişin 
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-(Kaydetmeyi seçerseniz) güvenlik uyarıları, öneriler ve güvenlik ham verileri Log Analytics çalışma alanınızda IOT için azure Güvenlik Merkezi (ASC) depolar.
+IoT için Azure Güvenlik Merkezi, Log Analytics çalışma alanınıza güvenlik uyarılarını, önerileri ve ham güvenlik verilerini (kaydetmeyi seçerseniz) depolar.
 
 ## <a name="log-analytics"></a>Log Analytics
 
-Hangi Log Analytics çalışma alanı kullanılan yapılandırmak için:
+Hangi Log Analytics çalışma alanının kullanıldığını yapılandırmak için:
 
-1. IOT hub'ınızı açın.
-1. Tıklayın **güvenlik**
-2. Tıklayın **ayarları**ve Log Analytics çalışma alanı yapılandırmanızı değiştirin.
+1. IoT Hub 'ınızı açın.
+1. **Güvenlik** bölümünün altındaki **genel bakış** dikey penceresine tıklayın
+2. **Ayarlar**' a tıklayın ve Log Analytics çalışma alanı yapılandırmanızı değiştirin.
 
-Yapılandırmadan sonra Log Analytics çalışma alanınızın erişmek için:
+Yapılandırma sonrasında Log Analytics çalışma alanınızdaki uyarılarınıza ve önerilerinizi erişmek için:
 
-1. Bir uyarı veya öneri artan düzende IOT için seçin. 
-2. Tıklayın **daha fazla araştırma**, ardından **buraya tıklayın ve cihaz kimliği sütunu görüntüleyin, bu uyarıyı hangi cihazların görmek için**.
+1. IoT için Azure Güvenlik Merkezi 'nde bir uyarı veya öneri seçin. 
+2. **Daha fazla araştırma**' ya tıklayın, ardından **Bu uyarıya hangi cihazların olduğunu görmek için tıklayın ve ardından DeviceID sütununu görüntüleyin**.
 
-Log Analytics verilerini sorgulama hakkında daha fazla bilgi için bkz [sorgular, Log Analytics ile çalışmaya başlama](https://docs.microsoft.com//azure/log-analytics/query-language/get-started-queries).
+Log Analytics verileri sorgulama hakkında daha fazla bilgi için bkz. [Log Analytics sorguları kullanmaya başlama](https://docs.microsoft.com//azure/log-analytics/query-language/get-started-queries).
 
 ## <a name="security-alerts"></a>Güvenlik uyarıları
 
-Güvenlik Uyarıları depolanır _AzureSecurityOfThings.SecurityAlert_ ASC IOT çözümü için yapılandırılmış Log Analytics çalışma alanında Tablo.
+Güvenlik uyarıları, IoT çözümü için Azure Güvenlik Merkezi için yapılandırılmış Log Analytics çalışma alanındaki _AzureSecurityOfThings. SecurityAlert_ tablosunda depolanır.
 
-Güvenlik Uyarıları araştırmaya yardımcı olması için yararlı sorguları bir dizi başlama sağlanan yaptıklarımız.
+Güvenlik uyarılarını keşfetmeye başlamanıza yardımcı olacak birkaç faydalı sorgu sunuyoruz.
 
-### <a name="sample-records"></a>Örnek kayıt
+### <a name="sample-records"></a>Örnek kayıtlar
 
-Birkaç rastgele kayıtları seçin
+Birkaç rastgele kayıt seçin
 
 ```
 // Select a few random records
@@ -69,18 +66,18 @@ SecurityAlert
 | take 3
 ```
 
-| TimeGenerated           | IoTHubId                                                                                                       | DeviceId      | AlertSeverity | displayName                           | Açıklama                                             | ExtendedProperties                                                                                                                                                             |
+| TimeGenerated           | Iothubıd                                                                                                       | DeviceId      | AlertSeverity | DisplayName                           | Açıklama                                             | ExtendedProperties                                                                                                                                                             |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|---------------|---------------|---------------------------------------|---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2018-11-18T18:10:29.000 | /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Yüksek          | Başarılı deneme yanılma saldırısı           | Cihazda bir deneme yanılma yoluyla yapılan zorla saldırısı başarılı oldu        |    {"Tam kaynak Address": "[\"10.165.12.18:\"]", "Kullanıcı adlarını": "[\"\"]", "DeviceId": "IOT-cihaz-Linux"}                                                                       |
-| 2018-11-19T12:40:31.000 | /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Yüksek          | Cihazda yerel başarılı oturum açma      | Cihaza başarılı bir yerel oturum algılandı     | {"Uzak adres": "?", "Uzak bağlantı noktası": "", "Yerel bağlantı noktası": "", "Oturum açma kabuğu": "/ bin/su", "Oturum açma işlemi Id": "28207", "kullanıcı adı": "saldırgan", "DeviceId": "IOT-cihaz-Linux"} |
-| 2018-11-19T12:40:31.000 | /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Yüksek          | Cihazda yerel oturum açma denemesi başarısız oldu  | Bir cihazın başarısız yerel oturum açma girişimi algılandı |  {"Uzak adres": "?", "Uzak bağlantı noktası": "", "Yerel bağlantı noktası": "", "Oturum açma kabuğu": "/ bin/su", "Oturum açma işlemi Id": "22644", "kullanıcı adı": "saldırgan", "DeviceId": "IOT-cihaz-Linux"} |
+| 2018-11-18T18:10:29.000 | /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Yüksek          | Deneme yanılma saldırısı başarılı           | Cihaza yönelik bir deneme yanılma saldırısı başarılı oldu        |    {"Tam kaynak adresi": "[\"10.165.12.18:\"]", "Kullanıcı adları": "[\"\"]", "DeviceID": "IoT-Device-Linux"}                                                                       |
+| 2018-11-19T12:40:31.000 | /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Yüksek          | Cihazda başarılı yerel oturum açma      | Cihazda başarılı bir yerel oturum açma algılandı     | {"Uzak adres": "?", "uzak bağlantı noktası": "", "yerel bağlantı noktası": "", "oturum açma kabuğu": "/bin/su", "oturum açma Işlemi kimliği": "28207", "Kullanıcı adı": "saldırgan", "DeviceID": "IoT-Device-Linux"} |
+| 2018-11-19T12:40:31.000 | /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Yüksek          | Cihazda yerel oturum açma denemesi başarısız  | Cihaza başarısız bir yerel oturum açma denemesi algılandı |  {"Uzak adres": "?", "uzak bağlantı noktası": "", "yerel bağlantı noktası": "", "oturum açma kabuğu": "/bin/su", "oturum açma Işlemi kimliği": "22644", "Kullanıcı adı": "saldırgan", "DeviceID": "IoT-Device-Linux"} |
 
-### <a name="device-summary"></a>Cihaz özeti
+### <a name="device-summary"></a>Cihaz Özeti
 
-Geçen hafta, IOT Hub, cihaz, uyarı önem derecesi, uyarı türü tarafından algılanan farklı güvenlik uyarılarını sayısını seçin.
+Son haftada algılanan ve IoT Hub, cihaz, uyarı önem derecesi, uyarı türüne göre gruplandırılan ayrı güvenlik uyarılarının sayısını alın.
 
 ```
-// Select number of distinct security alerts detected last week by 
+// Get the number of distinct security alerts detected in the last week, grouped by 
 //   IoT hub, device, alert severity, alert type
 //
 SecurityAlert
@@ -92,16 +89,16 @@ SecurityAlert
     DisplayName
 ```
 
-| IoTHubId                                                                                                       | DeviceId      | AlertSeverity | displayName                           | Count |
+| Iothubıd                                                                                                       | DeviceId      | AlertSeverity | DisplayName                           | Count |
 |----------------------------------------------------------------------------------------------------------------|---------------|---------------|---------------------------------------|-----|
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Yüksek          | Başarılı deneme yanılma saldırısı           | 9   |   
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Orta        | Cihazda yerel oturum açma denemesi başarısız oldu  | 242 |    
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Yüksek          | Cihazda yerel başarılı oturum açma      | 31  |
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Orta        | Şifreleme para Miner                     | 4   |
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Yüksek          | Deneme yanılma saldırısı başarılı           | 9   |   
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Orta        | Cihazda yerel oturum açma denemesi başarısız  | 242 |    
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Yüksek          | Cihazda başarılı yerel oturum açma      | 31  |
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Orta        | Şifreleme para Miner                     | 4   |
 
-### <a name="iot-hub-summary"></a>IOT hub özeti
+### <a name="iot-hub-summary"></a>IoT Hub Özeti
 
-Bir IOT Hub, uyarı önem derecesi, uyarı türü tarafından son bir hafta içinde uyarıları olan farklı cihaz sayısını seçin
+Son hafta içinde, IoT Hub, uyarı önem derecesine ve uyarı türüne göre uyarı olan ayrı sayıda farklı cihaz seçin
 
 ```
 // Select number of distinct devices which had alerts in the last week, by 
@@ -116,22 +113,22 @@ SecurityAlert
     DisplayName
 ```
 
-| IoTHubId                                                                                                       | AlertSeverity | displayName                           | CntDevices |
+| Iothubıd                                                                                                       | AlertSeverity | DisplayName                           | CntDevices |
 |----------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|------------|
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | Yüksek          | Başarılı deneme yanılma saldırısı           | 1          |    
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | Orta        | Cihazda yerel oturum açma denemesi başarısız oldu  | 1          | 
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | Yüksek          | Cihazda yerel başarılı oturum açma      | 1          |
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | Orta        | Şifreleme para Miner                     | 1          |
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | Yüksek          | Deneme yanılma saldırısı başarılı           | 1\.          |    
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | Orta        | Cihazda yerel oturum açma denemesi başarısız  | 1\.          | 
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | Yüksek          | Cihazda başarılı yerel oturum açma      | 1\.          |
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | Orta        | Şifreleme para Miner                     | 1          |
 
 ## <a name="security-recommendations"></a>Güvenlik önerileri
 
-Güvenlik önerilerini depolanır _AzureSecurityOfThings.SecurityRecommendation_ ASC IOT çözümü için yapılandırılmış Log Analytics çalışma alanında Tablo.
+Güvenlik önerileri, IoT çözümü için Azure Güvenlik Merkezi için yapılandırılmış Log Analytics çalışma alanındaki _AzureSecurityOfThings. Securityöneriyi_ tablosunda depolanır.
 
-Güvenlik önerilerini keşfetmeye başlangıç yapmanıza yardımcı olacak yararlı sorguları bir dizi sağladık.
+Güvenlik önerilerini keşfetmeye başlamanıza yardımcı olacak birkaç faydalı sorgu sağladık.
 
-### <a name="sample-records"></a>Örnek kayıt
+### <a name="sample-records"></a>Örnek kayıtlar
 
-Birkaç rastgele kayıtları seçin
+Birkaç rastgele kayıt seçin
 
 ```
 // Select a few random records
@@ -149,17 +146,17 @@ SecurityRecommendation
 | take 2
 ```
     
-| TimeGenerated | IoTHubId | DeviceId | RecommendationSeverity | RecommendationState | RecommendationDisplayName | Açıklama | RecommendationAdditionalData |
+| TimeGenerated | Iothubıd | DeviceId | RecommendationSeverity | RecommendationState | RecommendationDisplayName | Açıklama | RecommendationAdditionalData |
 |---------------|----------|----------|------------------------|---------------------|---------------------------|-------------|------------------------------|
-| 2019-03-22T10:21:06.060 | /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Orta | Etkin | Giriş zincirindeki izin veren güvenlik duvarı kuralı bulunamadı | Çok çeşitli IP adres veya bağlantı noktası için esnek bir düzen içeren bir güvenlik duvarı kuralında bulundu | {"Kurallar": "[{\"SourceAddress\":\"\",\"KaynakBağlantıNoktası\":\"\",\"DestinationAddress\":\" \" \"Trafficdirection\":\"1337\"}] "} |
-| 2019-03-22T10:50:27.237 | /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Orta | Etkin | Giriş zincirindeki izin veren güvenlik duvarı kuralı bulunamadı | Çok çeşitli IP adres veya bağlantı noktası için esnek bir düzen içeren bir güvenlik duvarı kuralında bulundu | {"Kurallar": "[{\"SourceAddress\":\"\",\"KaynakBağlantıNoktası\":\"\",\"DestinationAddress\":\" \" \"Trafficdirection\":\"1337\"}] "} |
+| 2019-03-22T10:21:06.060 | /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Orta | Etkin | Giriş zincirindeki izin veren güvenlik duvarı kuralı bulundu | Güvenlik duvarında geniş bir IP adresi veya Bağlantı Noktası aralığı için esnek bir desen içeren bir kural bulundu | {"Rules": "[{\"sourceAddress\":\"\",\"sourceport\":\"\",\"DestinationAddress:\" \"\" ,\"Hedef bağlantı\"noktası\":1337\"}] "} |
+| 2019-03-22T10:50:27.237 | /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Orta | Etkin | Giriş zincirindeki izin veren güvenlik duvarı kuralı bulundu | Güvenlik duvarında geniş bir IP adresi veya Bağlantı Noktası aralığı için esnek bir desen içeren bir kural bulundu | {"Rules": "[{\"sourceAddress\":\"\",\"sourceport\":\"\",\"DestinationAddress:\" \"\" ,\"Hedef bağlantı\"noktası\":1337\"}] "} |
 
-### <a name="device-summary"></a>Cihaz özeti
+### <a name="device-summary"></a>Cihaz Özeti
 
-IOT Hub, cihaz, öneri önem derecesi ve türüne göre farklı etkin güvenlik önerileri sayısını seçin.
+IoT Hub, cihaz, öneri önem derecesi ve türe göre gruplandırılan farklı etkin güvenlik önerileri sayısını alın.
 
 ```
-// Select number of distinct active security recommendations by 
+// Get the number of distinct active security recommendations, grouped by by 
 //   IoT hub, device, recommendation severity and type
 //
 SecurityRecommendation
@@ -169,17 +166,17 @@ SecurityRecommendation
 | summarize Cnt=count() by IoTHubId, DeviceId, RecommendationSeverity
 ```
 
-| IoTHubId                                                                                                       | DeviceId      | RecommendationSeverity | Count |
+| Iothubıd                                                                                                       | DeviceId      | RecommendationSeverity | Count |
 |----------------------------------------------------------------------------------------------------------------|---------------|------------------------|-----|
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Yüksek          | 2   |    
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Orta        | 1 |  
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Yüksek          | 1  |
-| /Subscriptions/ < subscription_id > /resourceGroups/ < resource_group > /providers/Microsoft.Devices/IotHubs/ < iot_hub > | < aygıt_adı > | Orta        | 4   |
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Yüksek          | 2   |    
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Orta        | 1\. |  
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Yüksek          | 1\.  |
+| /Subscriptions/< subscription_id >/resourceGroups/< resource_group >/providers/Microsoft.Devices/IotHubs/< iot_hub > | < aygıt_adı > | Orta        | 4   |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- IOT için ASC okuma [genel bakış](overview.md)
-- ASC hakkında bilgi edinmek için IOT [mimarisi](architecture.md)
-- Anlama ve keşfetme [ASC IOT uyarılar için](concept-security-alerts.md)
-- Anlama ve keşfetme [ASC IOT öneri için](concept-recommendations.md)
+- IoT için Azure Güvenlik Merkezi ['Ne genel bakış](overview.md) konusunu okuyun
+- IoT [mimarisi](architecture.md) Için Azure Güvenlik Merkezi hakkında bilgi edinin
+- [IoT uyarıları Için Azure Güvenlik Merkezi 'ni](concept-security-alerts.md) anlama ve araştırma
+- [IoT önerisi Için Azure Güvenlik Merkezi 'ni](concept-recommendations.md) anlayın ve araştırın

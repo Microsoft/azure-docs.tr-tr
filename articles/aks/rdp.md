@@ -1,40 +1,40 @@
 ---
-title: Azure Kubernetes Service (AKS) kümesini Windows Server düğümleri RDP
-description: RDP bağlantısı sorunlarını giderme ve bakım görevleri için Windows Server düğümleri ile Azure Kubernetes Service (AKS) kümesi oluşturmayı öğrenin.
+title: Azure Kubernetes Service (AKS) kümesi Windows Server düğümlerine RDP
+description: Sorun giderme ve bakım görevleri için Azure Kubernetes Service (AKS) kümesi Windows Server düğümleri ile bir RDP bağlantısı oluşturmayı öğrenin.
 services: container-service
-author: tylermsft
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 06/04/2019
-ms.author: twhitney
-ms.openlocfilehash: 11f6869d4d5a2ee0ef2e986ee8268c7a001ea015
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: mlearned
+ms.openlocfilehash: e3a4ea2e81e6c428b51d164336282f8f929d414b
+ms.sourcegitcommit: 36e9cbd767b3f12d3524fadc2b50b281458122dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66688642"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69639801"
 ---
-# <a name="connect-with-rdp-to-azure-kubernetes-service-aks-cluster-windows-server-nodes-for-maintenance-or-troubleshooting"></a>Küme Windows Server düğümleri Bakımı veya sorun giderme için Azure Kubernetes Service (AKS) için RDP ile bağlanma
+# <a name="connect-with-rdp-to-azure-kubernetes-service-aks-cluster-windows-server-nodes-for-maintenance-or-troubleshooting"></a>Azure Kubernetes Service (AKS) kümesi Windows Server düğümlerine bakım veya sorun giderme için RDP ile bağlanma
 
-Azure Kubernetes Service (AKS) kümenizi yaşam döngüsü boyunca, bir AKS Windows Server düğümüne erişmek gerekebilir. Bu erişim, bakım, günlük toplama veya diğer sorun giderme işlemleri için olabilir. RDP kullanarak Windows Server AKS düğümleri erişebilirsiniz. Alternatif olarak, küme oluşturma sırasında kullanılan anahtar çiftinin erişiminiz AKS Windows Server düğümlerine erişmek için SSH kullanmak istediğiniz adımları izleyebilirsiniz [Azure Kubernetes Service (AKS) kümesi düğümleri içine SSH] [ssh-steps]. Güvenlik nedenleriyle, AKS düğümleri internet'e açık değildir.
+Azure Kubernetes Service (AKS) kümenizin yaşam döngüsü boyunca bir AKS Windows Server düğümüne erişmeniz gerekebilir. Bu erişim, bakım, günlük toplama veya diğer sorun giderme işlemleri için olabilir. RDP kullanarak AKS Windows Server düğümlerine erişebilirsiniz. Alternatif olarak, AKS Windows Server düğümlerine erişmek için SSH kullanmak istiyorsanız ve küme oluşturma sırasında kullanılan aynı KeyPair 'e erişiminiz varsa, SSH 'deki adımları [Azure Kubernetes Service (AKS) küme düğümlerine][ssh-steps]uygulayabilirsiniz. Güvenlik nedeniyle AKS düğümleri Internet 'e gösterilmez.
 
-Windows Server düğüm desteği şu anda aks'deki önizlemeye sunulmuştur.
+Windows Server düğüm desteği şu anda AKS 'de önizlemededir.
 
-Bu makalede, özel IP adreslerini kullanarak bir AKS düğümü ile RDP bağlantısı oluşturulacağını gösterir.
+Bu makalede, özel IP adreslerini kullanarak AKS düğümüyle bir RDP bağlantısı oluşturma işlemlerinin nasıl yapılacağı gösterilir.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu makalede, bir Windows Server düğüm ile var olan bir AKS kümesi olduğunu varsayar. Bir AKS kümesi gerekirse makaleye bakın [Azure CLI kullanarak bir Windows kapsayıcısı ile bir AKS kümesi oluşturma][aks-windows-cli]. Sorun giderme için istediğiniz Windows Server düğümü için Windows yönetici kullanıcı adı ve parola gerekir. Ayrıca bir RDP istemcisi aşağıdaki gibi ihtiyacınız [Microsoft Uzak Masaüstü][rdp-mac].
+Bu makalede, bir Windows Server düğümü olan bir AKS kümeniz olduğunu varsaymaktadır. AKS kümesine ihtiyacınız varsa, [Azure CLI kullanarak bir Windows kapsayıcısı Ile AKS kümesi oluşturma][aks-windows-cli]hakkındaki makaleye bakın. Sorun gidermek istediğiniz Windows Server düğümü için Windows Yöneticisi Kullanıcı adı ve parolası gerekir. Ayrıca, [Microsoft Uzak Masaüstü][rdp-mac]gıbı bir RDP istemcisine da ihtiyacınız vardır.
 
-Ayrıca Azure CLI Sürüm 2.0.61 gerekir veya daha sonra yüklü ve yapılandırılmış. Çalıştırma `az --version` sürümü bulmak için. Gerekirse yüklemek veya yükseltmek bkz [Azure CLI yükleme][install-azure-cli].
+Ayrıca Azure CLı sürüm 2.0.61 veya üzeri yüklü ve yapılandırılmış olmalıdır. Sürümü `az --version` bulmak için ' i çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse bkz. [Azure CLI 'Yı yüklemek][install-azure-cli].
 
-## <a name="deploy-a-virtual-machine-to-the-same-subnet-as-your-cluster"></a>Kümeniz aynı alt ağa bir sanal makine dağıtma
+## <a name="deploy-a-virtual-machine-to-the-same-subnet-as-your-cluster"></a>Bir sanal makineyi kümeniz ile aynı alt ağa dağıtma
 
-AKS kümenizin Windows Server düğümler dışarıdan erişilebilir IP adresi yok. Bir RDP bağlantısı için genel olarak erişilebilir bir IP adresine sahip bir sanal makine, Windows Server düğümler aynı alt ağda dağıtabilirsiniz.
+AKS kümenizin Windows Server düğümlerinde dışarıdan erişilebilen IP adresleri yok. RDP bağlantısı kurmak için, genel olarak erişilebilen bir IP adresine sahip bir sanal makineyi Windows Server düğümleriniz ile aynı alt ağa dağıtabilirsiniz.
 
-Aşağıdaki örnekte adlı bir sanal makine oluşturulmaktadır *myVM* içinde *myResourceGroup* kaynak grubu.
+Aşağıdaki örnek, *Myresourcegroup* kaynak grubunda *myvm* adlı bir sanal makine oluşturur.
 
-İlk olarak, Windows Server düğüm havuzu tarafından kullanılan alt ağ alın. Alt ağ kimliğini almak için alt ağın adı gerekir. Alt ağın adını almak için sanal ağ adı gereklidir. Sanal ağ adına, kümeniz için alt ağlar listesi sorgulayarak alın. Küme sorgu adı gerekir. Azure Cloud Shell'de aşağıdaki çalıştırarak bunların hepsini alabilirsiniz:
+İlk olarak, Windows Server düğüm havuzunuz tarafından kullanılan alt ağı alın. Alt ağ kimliğini almak için alt ağın adının olması gerekir. Alt ağın adını almak için VNET 'in adına ihtiyacınız vardır. Kümenizi ağ listesi için sorgulayarak VNET adını alın. Kümeyi sorgulamak için adına ihtiyacınız vardır. Azure Cloud Shell aşağıdakileri çalıştırarak bunların hepsini edinebilirsiniz:
 
 ```azurecli-interactive
 CLUSTER_RG=$(az aks show -g myResourceGroup -n myAKSCluster --query nodeResourceGroup -o tsv)
@@ -43,7 +43,7 @@ SUBNET_NAME=$(az network vnet subnet list -g $CLUSTER_RG --vnet-name $VNET_NAME 
 SUBNET_ID=$(az network vnet subnet show -g $CLUSTER_RG --vnet-name $VNET_NAME --name $SUBNET_NAME --query id -o tsv)
 ```
 
-SUBNET_ID olduğuna göre VM oluşturmak için aynı Azure Cloud Shell penceresinde aşağıdaki komutu çalıştırın:
+Artık SUBNET_ID sahip olduğunuza göre, VM 'yi oluşturmak için aynı Azure Cloud Shell penceresinde aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
 az vm create \
@@ -56,35 +56,56 @@ az vm create \
     --query publicIpAddress -o tsv
 ```
 
-Aşağıdaki örnek çıktı, sanal makine başarıyla oluşturuldu ve sanal makinenin genel IP adresini görüntüler gösterilir.
+Aşağıdaki örnek çıktı, VM 'nin başarıyla oluşturulduğunu gösterir ve sanal makinenin genel IP adresini görüntüler.
 
 ```console
 13.62.204.18
 ```
 
-Sanal makinenin genel IP adresini kaydedin. Daha sonraki bir adımda bu adresi kullanın.
+Sanal makinenin genel IP adresini kaydedin. Bu adresi sonraki bir adımda kullanacaksınız.
 
-## <a name="get-the-node-address"></a>Düğüm adresi alın
+## <a name="allow-access-to-the-virtual-machine"></a>Sanal makineye erişime izin ver
 
-Bir Kubernetes kümesini yönetmek için kullandığınız [kubectl][kubectl], Kubernetes komut satırı istemcisi. Azure Cloud Shell kullanıyorsanız `kubectl` zaten yüklü. Yüklenecek `kubectl` yerel olarak, [az aks yükleme-cli] [ az-aks-install-cli] komutu:
+AKS düğüm havuzu alt ağları varsayılan olarak NSG 'ler (ağ güvenlik grupları) ile korunur. Sanal makineye erişim sağlamak için NSG 'de erişimi etkinleştirmeniz gerekir.
+
+> [!NOTE]
+> NSG 'ler AKS hizmeti tarafından denetlenir. NSG 'de yaptığınız herhangi bir değişikliğin, denetim düzlemi tarafından herhangi bir zamanda üzerine yazılır.
+>
+
+İlk olarak, kuralı eklemek için NSG 'nin kaynak grubunu ve NSG adını alın:
+
+```azurecli-interactive
+CLUSTER_RG=$(az aks show -g myResourceGroup -n myAKSCluster --query nodeResourceGroup -o tsv)
+NSG_NAME=$(az network nsg list -g $CLUSTER_RG --query [].name -o tsv)
+```
+
+Ardından, NSG kuralını oluşturun:
+
+```azurecli-interactive
+az network nsg rule create --name tempRDPAccess --resource-group $CLUSTER_RG --nsg-name $NSG_NAME --priority 100 --destination-port-range 3389 --protocol Tcp --description "Temporary RDP access to Windows nodes"
+```
+
+## <a name="get-the-node-address"></a>Düğüm adresini al
+
+Kubernetes kümesini yönetmek için Kubernetes komut satırı istemcisi olan [kubectl][kubectl]'yi kullanırsınız. Azure Cloud Shell kullanıyorsanız, `kubectl` zaten yüklüdür. Yerel olarak `kubectl` yüklemek için [az aks install-cli][az-aks-install-cli] komutunu kullanın:
     
 ```azurecli-interactive
 az aks install-cli
 ```
 
-`kubectl` istemcisini Kubernetes kümenize bağlanacak şekilde yapılandırmak için [az aks get-credentials][az-aks-get-credentials] komutunu kullanın. Bu komut, kimlik bilgilerini indirir ve Kubernetes CLI'yi bunları kullanacak şekilde yapılandırır.
+Kubernetes kümenize bağlanacak şekilde yapılandırmak `kubectl` için [az aks Get-Credentials][az-aks-get-credentials] komutunu kullanın. Bu komut, kimlik bilgilerini indirir ve Kubernetes CLı 'yi bunları kullanacak şekilde yapılandırır.
 
 ```azurecli-interactive
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
 ```
 
-İç IP adresi kullanarak Windows Server düğümlerinin listesinde [kubectl alma] [ kubectl-get] komutu:
+[Kubectl Get][kubectl-get] komutunu kullanarak Windows Server DÜĞÜMLERININ iç IP adresini listeleyin:
 
 ```console
 kubectl get nodes -o wide
 ```
 
-Aşağıdaki örnek çıktıda Windows Server düğümler dahil olmak üzere, bir kümedeki tüm düğümleri iç IP adreslerini gösterir.
+Aşağıdaki örnek çıktı, Windows Server düğümleri dahil olmak üzere kümedeki tüm düğümlerin iç IP adreslerini gösterir.
 
 ```console
 $ kubectl get nodes -o wide
@@ -93,35 +114,46 @@ aks-nodepool1-42485177-vmss000000   Ready    agent   18h   v1.12.7   10.240.0.4 
 aksnpwin000000                      Ready    agent   13h   v1.12.7   10.240.0.67   <none>        Windows Server Datacenter   10.0.17763.437
 ```
 
-Sorun giderme istediğiniz Windows Server düğümünün iç IP adresini kaydedin. Daha sonraki bir adımda bu adresi kullanın.
+Sorun gidermek istediğiniz Windows Server düğümünün iç IP adresini kaydedin. Bu adresi sonraki bir adımda kullanacaksınız.
 
-## <a name="connect-to-the-virtual-machine-and-node"></a>Sanal makine ve düğümüne bağlanma
+## <a name="connect-to-the-virtual-machine-and-node"></a>Sanal makineye ve düğüme bağlanma
 
-Daha önce bir RDP istemcisi gibi kullanarak oluşturduğunuz sanal makinenin genel IP adresine bağlanın [Microsoft Uzak Masaüstü][rdp-mac].
+Daha önce [Microsoft Uzak Masaüstü][rdp-mac]gıbı bir RDP istemcisi kullanarak oluşturduğunuz sanal makınenın genel IP adresine bağlanın.
 
-![Görüntü bir RDP istemcisi kullanarak sanal makineye bağlanma](media/rdp/vm-rdp.png)
+![RDP istemcisi kullanılarak sanal makineye bağlanma görüntüsü](media/rdp/vm-rdp.png)
 
-Sanal makinenizi sanal makineye bağlandıktan sonra bağlanma *iç IP adresi* , sanal makine içinde bir RDP istemcisi kullanarak sorun giderme istediğiniz Windows Server düğümünün.
+Sanal makinenize bağlandıktan sonra, sanal makinenizin içinden bir RDP istemcisi kullanarak sorunlarını gidermek istediğiniz Windows Server düğümünün *Iç IP adresine* bağlanın.
 
-![Görüntü bir RDP istemcisi kullanarak Windows Server düğümüne bağlanma](media/rdp/node-rdp.png)
+![RDP istemcisi kullanarak Windows Server düğümüne bağlanma görüntüsü](media/rdp/node-rdp.png)
 
-Şimdi, Windows Server düğümüne bağlanır.
+Artık Windows Server düğümıza bağlısınız.
 
-![Windows Server düğümünde cmd penceresinden görüntüsü](media/rdp/node-session.png)
+![Windows Server düğümündeki CMD penceresinin görüntüsü](media/rdp/node-session.png)
 
-Artık herhangi bir sorun giderme komutunu çalıştırabilirsiniz *cmd* penceresi. Windows sunucu düğümlerine Windows Server Core kullandığından, yok tam GUI veya diğer GUI araçları bir Windows Server düğüme RDP bağlandığında.
+Artık *cmd* penceresinde herhangi bir sorun giderme komutunu çalıştırabilirsiniz. Windows Server düğümleri Windows Server Core kullandığından, RDP üzerinden bir Windows Server düğümüne bağlandığınızda tam GUI veya başka bir GUI aracı yoktur.
 
-## <a name="remove-rdp-access"></a>RDP erişimini Kaldır
+## <a name="remove-rdp-access"></a>RDP erişimini kaldırma
 
-İşiniz bittiğinde, RDP bağlantısı için Windows Server düğümünün çıkmak sonra sanal makineye RDP oturumundan çıkın. Her iki RDP oturumları çıktıktan sonra sanal makineyle Sil [az vm delete] [ az-vm-delete] komutu:
+İşiniz bittiğinde, RDP bağlantısından Windows Server düğümüne çıkın ve ardından RDP oturumundan sanal makineye çıkın. Her iki RDP oturumunda de çıktıktan sonra, [az VM Delete][az-vm-delete] komutuyla sanal makineyi silin:
 
 ```azurecli-interactive
 az vm delete --resource-group myResourceGroup --name myVM
 ```
 
+NSG kuralı:
+
+```azurecli-interactive
+CLUSTER_RG=$(az aks show -g myResourceGroup -n myAKSCluster --query nodeResourceGroup -o tsv)
+NSG_NAME=$(az network nsg list -g $CLUSTER_RG --query [].name -o tsv)
+```
+
+```azurecli-interactive
+az network nsg rule delete --resource-group $CLUSTER_RG --nsg-name $NSG_NAME --name tempRDPAccess
+```
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ek sorun giderme verilerini gerekiyorsa [Kubernetes ana düğüm günlüklerini görüntüleyin] [ view-master-logs] veya [Azure İzleyici][azure-monitor-containers].
+Ek sorun giderme verilerine ihtiyacınız varsa [Kubernetes ana düğüm günlüklerini][view-master-logs] veya [Azure izleyicisini][azure-monitor-containers]görüntüleyebilirsiniz.
 
 <!-- EXTERNAL LINKS -->
 [kubectl]: https://kubernetes.io/docs/user-guide/kubectl/

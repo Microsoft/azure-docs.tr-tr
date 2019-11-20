@@ -1,142 +1,172 @@
 ---
-title: Azure Active Directory - parola sıfırlama | Microsoft Docs
-description: Erişebilmek için iş veya Okul kullanıcı hesabı için Self Servis parola sıfırlamayı kullanma
+title: Güvenlik bilgilerini kullanarak parolanızı sıfırlayın-Azure Active Directory | Microsoft Docs
+description: Bilgisayarınızı unutursanız, güvenlik bilgilerinizi ve iki aşamalı doğrulamayı kullanarak kendi parolanızı sıfırlayın.
 services: active-directory
 author: eross-msft
 manager: daveba
 ms.reviewer: sahenry
-ms.assetid: 7ba69b18-317a-4a62-afa3-924c4ea8fb49
 ms.service: active-directory
-ms.subservice: user-help
 ms.workload: identity
+ms.subservice: user-help
 ms.topic: conceptual
-ms.date: 01/11/2018
+ms.date: 07/30/2018
 ms.author: lizross
-ms.custom: end-user
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d16b54df5b8392a294036978e0b917ecdb3ce1ca
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0c0d0fdf4e7df0401692eb026d55fe1a7c9322f1
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60862271"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73160796"
 ---
-# <a name="reset-your-work-or-school-password"></a>İş veya Okul parolanızı sıfırlama
+# <a name="reset-your-work-or-school-password"></a>İş veya okul parolanızı sıfırlayın
 
-Parolanızı mı unuttunuz, hiçbir zaman şirket desteğiniz birinden alınan, hesabınız kilitlenmiş veya değiştirmek istiyorsanız, size yardımcı olabiliriz. Parolanızı biliyorsanız ve değiştirmek yalnızca ihtiyacınız varsa, devam [parolamı Değiştir](#change-my-password) bölümü.
+Parolanızı unuttuysanız, şirketinizin destek ekibi herhangi bir parola göndermediyse veya hesabınız kilitlendiyse güvenlik bilgilerinizi ve mobil cihazınızı kullanarak parolanızı sıfırlayabilirsiniz.
 
-   > [!NOTE]
-   > Öneri Xbox, hotmail.com veya outlook.com gibi kişisel hesabınıza geri dönmek çalışıyorsanız, deneyin [olamaz oturum açtığınızda Microsoft hesabınızı](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant) makalesi.
-   >
+>[!NOTE]
+>Parolanızı biliyorsanız ve yalnızca değiştirmek istiyorsanız, bu makaledeki [parolanızı değiştirme adımlarınız](#how-to-change-your-password) bölümüne gidebilirsiniz.<br><br>
+>Xbox, hotmail.com veya outlook.com gibi bir kişisel hesaba geri dönmek istiyorsanız, [Microsoft hesabı makalesinde oturum](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant) açarken önerilerini deneyin.
 
-## <a name="reset-or-unlock-my-password-for-a-work-or-school-account"></a>İş veya okul hesabımın parolasını sıfırlama veya kilidini açma
+## <a name="how-to-reset-or-unlock-your-password-for-a-work-or-school-account"></a>Bir iş veya okul hesabı için parolanızı sıfırlama veya kilidini açma
 
-Aşağıdaki nedenlerden biri nedeniyle, Azure Active Directory (Azure AD) hesabınıza erişmeniz mümkün olmayabilir:
+Azure Active Directory (Azure AD) Hesabınıza erişemiyorsanız aşağıdakilerden biri olabilir:
 
-* Parolanızı çalışmıyor ve sıfırlamak istediğiniz.
-* Parolanızı biliyorsanız, ancak hesabınız kilitlendi ve kilidini açmak istiyorsunuz.
+- Parolanız çalışmıyor ve sıfırlamak istiyorsunuz veya
 
-Azure AD Self Servis parola sıfırlama (SSPR) erişmek ve hesabınıza dönmek için aşağıdaki adımları kullanın.
+- Parolanızı bilirsiniz, ancak hesabınız kilitlidir ve kilidini açmanız gerekir.
 
-1. Herhangi bir iş veya Okul **oturum açma** sayfasında **hesabınıza erişemiyor?** bağlantısını ve ardından **iş veya Okul hesabı** veya doğrudan [ Parola sıfırlama sayfasına](https://passwordreset.microsoftonline.com/).
+### <a name="to-reset-your-password-and-get-back-into-your-account"></a>Parolanızı sıfırlamak ve hesabınıza geri dönmek için
 
-    ![Hesabınıza erişemiyor musunuz?][Login]
+1. **Parola gir** ekranında **Parolamı unuttum**' ı seçin.
 
-2. İş yeriniz veya okulunuz girin **kullanıcı kimliği**, ekranda görün ve ardından karakterleri girerek robot olmayan kanıtlamak **sonraki**.
+2. **Hesabınızı geri al** ekranında iş veya okul **Kullanıcı Kimliğinizi** (örneğin, e-posta adresiniz) yazın, ekranda gördüğünüz karakterleri girerek bir robot olmadığınızı kanıtlayın ve sonra **İleri**' yi seçin.
 
-   > [!NOTE]
-   > BT personeliniz e-posta veya kendi web portalı yardım etmek üzere, BT personeliniz bu işlevselliği etkinleştirmediyse "yöneticinize başvurun" bağlantısı görüntülenir.
-   >
-   > Hesabınızın kilidini açmak gerekirse bu noktada seçeneğini **miyim parolamı biliyorum ancak oturum açamıyorum.**
-   >
+   ![Hesap ekranınıza geri dönün](media/security-info/security-info-back-into-acct.png)
 
-3. BT personelinizin SSPR'yi nasıl yapılandırdığına bağlı olarak bir veya daha fazla aşağıdaki kimlik doğrulama yöntemlerini görmeniz gerekir. Siz veya BT personeliniz bu bilgilerin bazıları içindeki adımları izleyerek için doldurulmuş [Self Servis parola sıfırlama için kaydolma](active-directory-passwords-reset-register.md) makalesi.
+   >[!NOTE]
+   >Yöneticiniz kendi parolanızı sıfırlamanıza izin vermediyse, **Hesap ekranınıza geri dönmek** yerine yönetici bağlantısı Ile **iletişim kurun** . Bu bağlantı, e-posta veya Web portalı aracılığıyla parolanızı sıfırlama hakkında yöneticinize başvurmanızı sağlar.
 
-   * **Alternatif e-posta adresime gönder**
-   * **Cep telefonuma kısa mesaj gönder**
-   * **Cep telefonumu ara**
-   * **Ofis telefonumu ara**
-   * **Güvenlik sorularımı yanıtla**
+3. Kimliğinizi doğrulamak ve parolanızı değiştirmek için aşağıdaki yöntemlerden birini seçin. Yöneticinizin kuruluşunuzu nasıl ayarladığına bağlı olarak, ikinci bir doğrulama adımı için bilgi ekleyerek bu işleme ikinci kez gitmeniz gerekebilir.
 
-   Bir seçenek belirleyin, doğru yanıtları sağlayın ve ardından **sonraki**.
+    ![Hesabınıza geri dönün, doğrulama adımından yararlanın #1](media/security-info/security-info-back-into-acct2.png)
 
-   ![Kimlik doğrulama verilerinizi doğrulama][Verification]
+    >[!NOTE]
+    >Yöneticinizin kuruluşunuzu nasıl ayarladığına bağlı olarak, bu doğrulama seçeneklerinden bazıları kullanılamayabilir. Bu yöntemlerden en az birini kullanarak, daha önce mobil cihazınızı doğrulama için ayarlamanız gerekir.<br><br>Ayrıca, Yeni parolanızın belirli güç gereksinimlerini karşılaması gerekebilir. Güçlü parolalar genellikle, büyük ve küçük harfler, en az bir sayı ve en az bir özel karakter dahil olmak üzere 8 ile 16 arasında karakter uzunluğunda olabilir.
 
-4. BT personelinizin daha fazla doğrulamaya ihtiyacı ve farklı bir seçimle 3 adımı tekrarlamanız gerekebilir.
-5. Üzerinde **yeni bir parola seçin** sayfasında, yeni bir parola girin, parolanızı onaylayın ve ardından **son**. İş veya Okul parolanızı uymaları gereken belirli gereksinimleri olabilir. 8-16 karakter uzunluğunda olan ve büyük ve küçük harfleri, bir sayı ve bir özel karakter içeren bir parola seçin öneririz.
-6. İleti gördüğünüzde **parolanızı sıfırlama**, yeni parolanızla oturum açabilirsiniz.
+- **Bir e-posta adresi kullanarak parolanızı sıfırlayın.** Daha önce iki adımlı doğrulama veya güvenlik bilgilerinde ayarladığınız e-posta adresine bir e-posta gönderir. Yöneticiniz güvenlik bilgileri deneyimini etkinleştirmiştir, e-posta adresi ayarlama hakkında daha fazla bilgi edinmek [için güvenlik bilgilerini ayarla (Önizleme) makalesini kullanın](security-info-setup-email.md) . Henüz güvenlik bilgilerini kullanmıyorsanız, [iki adımlı doğrulama için hesabımı ayarla](multi-factor-authentication-end-user-first-time.md) ' da bir e-posta adresi ayarlama hakkında daha fazla bilgi edinebilirsiniz. 
 
-    ![Parolanız sıfırlandı][Complete]
+    1. Diğer e- **postam**i seçin ve ardından **e-posta**seçeneğini belirleyin.
 
-Şimdi hesabınıza erişmeniz mümkün olması gerekir. Hesabınızı erişemiyorsanız, kuruluşunuzun başvurmalıdır. daha fazla yardım için BT personelinin.
+    2. E-postadaki doğrulama kodunu kutuya yazın ve ardından **İleri**' yi seçin.
+    
+    3. Yeni parolanızı yazın ve doğrulayın ve ardından **son**' u seçin.
 
-Gibi bir hesaptan gelen bir onay e-postası alabilirsiniz "adına Microsoft \<kuruluşunuz >." Bunun gibi bir e-posta almak ve hesabınıza yeniden erişebilmek için Self Servis parola sıfırlamayı kullanmadıysanız kuruluşunuzun başvurun BT personeli.
+- **Kısa mesaj kullanarak parolanızı sıfırlayın.** Daha önce güvenlik bilgilerinde ayarladığınız telefon numarasına bir kısa mesaj gönderir. Yöneticiniz güvenlik bilgileri deneyimini etkinleştirmiştir, SMS mesajı ayarlama hakkında daha fazla bilgi edinmek [için güvenlik bilgilerini ayarlama (Önizleme) makalesini kullanın](security-info-setup-text-msg.md) . Henüz güvenlik bilgilerini kullanmıyorsanız, [iki adımlı doğrulama için hesabımı ayarla](multi-factor-authentication-end-user-first-time.md) bölümünde metin iletilerini ayarlama hakkında daha fazla bilgi edinebilirsiniz.
 
-## <a name="change-my-password"></a>Parolamı değiştirme
+    1. **Cep telefonumu**seçin, telefon numaranızı yazın ve ardından **metin**' i seçin.
 
-Parolanızı zaten biliyorsanız ve değiştirmek istiyorsanız, aşağıdaki adımları kullanın.
+    2. Metin iletisinden doğrulama kodunu kutuya yazın ve ardından **İleri**' yi seçin.
 
-### <a name="change-your-password-from-the-office-365-portal"></a>Office 365 portalından parolanızı değiştirme
+    3. Yeni parolanızı yazın ve doğrulayın ve ardından **son**' u seçin.
 
-Normalde Office Portalı aracılığıyla uygulamalarınıza erişiyorsanız bu yöntemi kullanın:
+- **Bir telefon numarası kullanarak parolanızı sıfırlayın.** Daha önce güvenlik bilgilerinde ayarladığınız telefon numarasına bir kısa mesaj gönderir. Yöneticiniz güvenlik bilgileri deneyimini kullanıyorsa, bir telefon [araması (Önizleme) kullanmak için güvenlik bilgilerini ayarlama](security-info-setup-phone-number.md) bölümünde bir telefon numarası ayarlama hakkında daha fazla bilgi edinebilirsiniz. Henüz güvenlik bilgilerini kullanmıyorsanız, [iki adımlı doğrulama için hesabımı ayarla](multi-factor-authentication-end-user-first-time.md) makalesinde bir telefon numarası ayarlama hakkında daha fazla bilgi edinebilirsiniz.
 
-1. Oturum açın, [Office 365 hesabı](https://www.office.com) mevcut parolanız ile.
-2. Sağ üst taraftaki profilinize seçin ve ardından **hesabı görüntüle**.
-3. Seçin **güvenlik ve gizlilik** > **parola**.
-4. Eski parolanızı girin, ayarlayın ve yeni parolanızı onaylayın ve ardından **Gönder**.
+    1. **Cep telefonumu çağır**' ı seçin, telefon numaranızı yazın ve ardından **çağır**' ı seçin.
 
-### <a name="change-your-password-from-the-azure-access-panel"></a>Azure Erişim Paneli’nden parolanızı değiştirme
+    2. Telefon görüşmesini yanıtlayın ve kimliğinizi doğrulamak için yönergeleri izleyin ve sonra **İleri**' yi seçin.
 
-Normalde Azure erişim Paneli'nden (MyApps) uygulamalarınıza erişiyorsanız bu yöntemi kullanın:
+    3. Yeni parolanızı yazın ve doğrulayın ve ardından **son**' u seçin.
 
-1. Oturum [Azure erişim paneli](https://myapps.microsoft.com/) mevcut parolanız ile.
-2. Sağ üst taraftaki profilinize seçin ve ardından **profili**.
-3. Seçin **parolasını değiştirme**.
-4. Eski parolanızı girin, ayarlayın ve yeni parolanızı onaylayın ve ardından **Gönder**.
+- **Güvenlik sorularını kullanarak parolanızı sıfırlayın.** Güvenlik bilgilerinde ayarladığınız güvenlik sorularının listesini gösterir. Yöneticiniz güvenlik bilgileri deneyimini etkinleştirmişse güvenlik sorularınızı ayarlama hakkında daha fazla bilgi edinmek [için güvenlik bilgilerini ayarlama bölümünde önceden tanımlı güvenlik soruları (Önizleme) makalesini kullanın](security-info-setup-questions.md) . Henüz güvenlik bilgilerini kullanmıyorsanız, [iki adımlı doğrulama için hesabımı ayarla](multi-factor-authentication-end-user-first-time.md) bölümünde güvenlik sorularını ayarlama hakkında daha fazla bilgi edinebilirsiniz.
 
-## <a name="reset-password-at-sign-in"></a>Oturum açma sırasında parola sıfırlama
+    1. **Güvenlik Sorularımı yanıtla**' yı seçin, soruları yanıtlayın ve sonra **İleri**' yi seçin.
 
-Artık yöneticinize işlevselliğini etkinleştirdiyse, bir bağlantı görebilirsiniz **parolayı Sıfırla** oturum açma, Windows 10 Fall Creators Update ekranında.
+    2. Yeni parolanızı yazın ve doğrulayın ve ardından **son**' u seçin.
 
-![Oturum açma ekranı][LoginScreen]
+- **Kimlik doğrulayıcı uygulamanızdan bir bildirim kullanarak parolanızı sıfırlayın.** Doğrulayıcı uygulamasına bir onay bildirimi gönderir. Yöneticiniz güvenlik bilgileri deneyimini etkinleştirmiştir, [kimlik doğrulama uygulaması (Önizleme) için güvenlik bilgilerini ayarlama](security-info-setup-auth-app.md) makalesine bildirim göndermek üzere bir Authenticator uygulaması ayarlama hakkında daha fazla bilgi bulabilirsiniz. Henüz güvenlik bilgilerini kullanmıyorsanız, [iki adımlı doğrulama için hesabımı ayarla](multi-factor-authentication-end-user-first-time.md) makalesinde bildirim göndermek üzere bir Authenticator uygulaması ayarlama hakkında daha fazla bilgi bulabilirsiniz.
 
-Seçin **parolayı Sıfırla** normal web tabanlı deneyim erişmek oturum açmak zorunda kalmadan parolanızı sıfırlayabileceğinizden emin SSPR deneyiminin oturum açma ekranından açmak için bağlantı.
+    1. **Doğrulayıcı uygulamamda bildirimi Onayla**' yı seçin ve **bildirim gönder**' i seçin.
 
-1. Kullanıcı Kimliğinizi doğrulamak ve seçin **sonraki**.
-2. Seçin ve doğrulama için iletişim yöntemi onaylayın. BT personelinizin daha fazla doğrulamaya ihtiyacı ve farklı bir seçimle bu adımı tekrarlamanız gerekebilir.
+    2. Kimlik doğrulayıcı uygulamanızdan oturum açmayı onaylayın.
 
-   ![İletişim yöntemi][ContactMethod]
+    3. Yeni parolanızı yazın ve doğrulayın ve ardından **son**' u seçin.
 
-3. Üzerinde **yeni bir parola oluşturmasını** sayfasında, yeni bir parola girin, parolanızı onaylayın ve ardından **sonraki**. Parolanız 8-16 karakterden uzun olduğundan ve büyük ve küçük harfler, sayılar ve özel karakterler oluşur öneririz.
+- **Kimlik doğrulayıcı uygulamanızdan bir kod kullanarak parolanızı sıfırlayın.** Kimlik doğrulama uygulamanız tarafından sunulan rastgele bir kodu kabul eder. Yöneticiniz güvenlik bilgileri deneyimini etkinleştirmiştir, [kimlik doğrulama uygulaması (Önizleme) için güvenlik bilgilerini ayarlama](security-info-setup-auth-app.md) bölümünde bir kod sağlamak üzere bir Authenticator uygulaması ayarlama hakkında daha fazla bilgi edinebilirsiniz. Henüz güvenlik bilgilerini kullanmıyorsanız, [iki adımlı doğrulama için hesabımı ayarlama](multi-factor-authentication-end-user-first-time.md) bölümünde bir kod sağlamak üzere bir Authenticator uygulaması ayarlama hakkında daha fazla bilgi edinebilirsiniz.
 
-   ![Parola sıfırlama][ResetPassword]
+  1. **Doğrulayıcı uygulamamda bir kod girin**' i seçin ve **bildirim gönder**' i seçin.
 
-4. İleti gördüğünüzde **parolanızı sıfırlama**seçin **son**.
+  2. Kimlik doğrulayıcı uygulamanızı açın, hesabınıza ait doğrulama kodunu kutuya yazın ve ardından **İleri**' yi seçin.
 
-Şimdi hesabınıza erişmeniz mümkün olması gerekir. Aksi takdirde, kuruluşunuzun başvurun. daha fazla yardım için BT personelinin.
+  3. Yeni parolanızı yazın ve doğrulayın ve ardından **son**' u seçin.
 
-## <a name="common-problems-and-their-solutions"></a>Sık karşılaşılan sorunlar ve çözümleri
+  4. Parolanızın sıfırlandığını söyleyen iletiyi aldıktan sonra, hesabınızda yeni parolanızı kullanarak oturum açabilirsiniz.
+        
+     Hesabınıza hala erişemiyorsanız, daha fazla yardım için kuruluşunuzun yöneticisiyle iletişim kurmanız gerekir.
 
- Bazı yaygın hata durumları ve çözümleri aşağıda verilmiştir:
+Parolanızı sıfırladıktan sonra, "Microsoft 'un adına \<*your_organization*> gibi bir hesaptan gelen bir onay e-postası alabilirsiniz. Benzer bir e-posta alırsanız ancak parolanızı kısa süre önce sıfırlamadıysanız, kuruluşunuzun yöneticisiyle hemen iletişim kurmanız gerekir.
 
-| Bir hata durumu| Hatayı?| Çözüm |
+## <a name="how-to-change-your-password"></a>Parolanızı değiştirme
+
+Parolanızı değiştirmek istiyorsanız, bunu Office 365 Portalı, Azure erişim paneli veya Windows 10 oturum açma sayfası aracılığıyla yapabilirsiniz.
+
+### <a name="to-change-your-password-using-the-office-365-portal"></a>Office 365 portalını kullanarak parolanızı değiştirme
+
+Genellikle uygulamalarınıza Office portalından erişmeniz durumunda bu yöntemi kullanın:
+
+1. Mevcut parolanızı kullanarak [Office 365 hesabınızda](https://portal.office.com)oturum açın.
+
+2. Sağ üst taraftaki profilinizi seçin ve sonra **hesabı görüntüle**' yi seçin.
+
+3. **Güvenlik & gizlilik** > **parolasını**seçin.
+
+4. Eski parolanızı yazın, yeni parolanızı oluşturup onaylayın ve ardından **Gönder**' i seçin.
+
+### <a name="to-change-your-password-from-the-azure-access-panel"></a>Azure erişim panelinden parolanızı değiştirmek için
+
+Uygulamalarınıza genellikle Azure erişim panelinden (Uygps) erişmeniz durumunda bu yöntemi kullanın:
+
+1. Mevcut parolanızı kullanarak [Azure erişim paneli](https://myapps.microsoft.com/)' nde oturum açın.
+
+2. Sağ üst taraftaki profilinizi seçip **profil**' i seçin.
+
+3. **Parolayı Değiştir**' i seçin.
+
+4. Eski parolanızı yazın, yeni parolanızı oluşturup onaylayın ve ardından **Gönder**' i seçin.
+
+### <a name="to-change-your-password-at-windows-sign-in"></a>Windows oturum açma sırasında parolanızı değiştirmek için
+
+Yöneticiniz işlevselliği etkinleştirdiyseniz, Windows 7, Windows 8, Windows 8.1 veya Windows 10 oturum açma ekranında **parola sıfırlama** bağlantısını görebilirsiniz.
+
+1. Normal web tabanlı deneyimi kullanmak zorunda kalmadan parola sıfırlama işlemini başlatmak için **parola sıfırlama** bağlantısını seçin.
+
+2. Kullanıcı KIMLIĞINIZI doğrulayın ve Ileri ' **yi**seçin.
+
+3. Doğrulama için bir iletişim yöntemi seçin ve onaylayın. Gerekirse, gerekli bilgileri doldurarak, önceki bir kaynaktan farklı ikinci bir doğrulama seçeneği belirleyin.
+
+4. **Yeni parola oluştur** sayfasında, yeni parolanızı yazın ve doğrulayın ve ardından **İleri**' yi seçin.
+
+    Güçlü parolalar genellikle, büyük ve küçük harfler, en az bir sayı ve en az bir özel karakter dahil olmak üzere 8 ile 16 arasında karakter uzunluğunda olabilir.
+
+5. Parolanızın sıfırlandığını söyleyen iletiyi aldıktan sonra, **son**' u seçebilirsiniz.
+
+    Hesabınıza hala erişemiyorsanız, daha fazla yardım için kuruluşunuzun yöneticisiyle iletişim kurmanız gerekir.
+
+## <a name="common-problems-and-their-solutions"></a>Yaygın sorunlar ve çözümleri
+
+Aşağıda bazı yaygın hata durumları ve çözümleri verilmiştir:
+
+|Sorun|Açıklama|Çözüm|
 | --- | --- | --- |
-| Parolamı değiştirmeye çalıştığınızda bir hata görüyorum. | Ne yazık ki parolanızı bir sözcük, tümcecik veya parolanızı kolayca tahmin edilebilir olmasını sağlayan yapan deseni içerir. Lütfen farklı bir parola ile yeniden deneyin. | Tahmin edilmesi daha zor bir parola seçin. |
-| Kullanıcı Kimliğimi girdikten sonra bir "Lütfen sistem yöneticinize başvurun" Sayfa alıyorum | Lütfen yöneticinize başvurun. <br> <br> Kullanıcı hesabınızın parolasının, Microsoft tarafından yönetilmiyor algıladık. Sonuç olarak, otomatik olarak parolanızı sıfırlama belirleyemiyoruz. <br> <br> BT personelinizin daha fazla yardım almak için iletişime geçmeniz. | Bu ileti, BT personelinizin şirket içi ortamınızda parolanızı yönettiğinden görüyorsunuz. "Hesabınıza erişemiyor" bağlantıdan parolanızı sıfırlayamazsınız. <br> <br> Parolanızı sıfırlamak için doğrudan Yardım için BT personelinizin başvurun ve bunlar bu özellik, verebilmeniz için parolanızı sıfırlamak istediğiniz bildirin.|
-| Kullanıcı Kimliğimi girdikten sonra bir "hesabınızı parola sıfırlama için etkin değil" hatası alıyorum | Hesabınız parola sıfırlama için etkinleştirilmedi. <br> <br> Özür dileriz, ancak BT personeliniz bu hizmeti kullanmak için hesabınızı ayarlamadı. <br> <br> İsterseniz, biz, parolanızı sıfırlaması için kuruluşunuzdaki yönetici başvurabilirsiniz. | BT personelinizin parolayı Sıfırla "hesabınıza erişemiyor" bağlantıdan kuruluşunuz için etkinleştirilmemiş veya bu özelliği kullanmak için lisanslı taşınmadığından çünkü bu iletisini görüyorsunuz. <br> <br> Parolanızı sıfırlamak için "bir yönetici bağlantısı başvurun" seçin şirketinizin e-posta göndermek için BT personelinin bilgisayarın ve bunlar bu özellik, verebilmeniz için parolanızı sıfırlamak istediğiniz bildirin. |
-| Kullanıcı Kimliğimi girdikten sonra bir "Biz hesabınızı doğrulanamadı" hatası alıyorum | Hesabınızı doğrulayamıyor. <br> <br> İsterseniz, biz, parolanızı sıfırlaması için kuruluşunuzdaki yönetici başvurabilirsiniz. | Bu ileti, parola sıfırlama için etkinleştirildiğinden, ancak hizmeti kullanmaya kaydolmadınız görüyorsunuz. Parola sıfırlama için kaydolmasını gidin https://aka.ms/ssprsetup hesabınıza erişim buldum sonra. <br> <br> Parolanızı sıfırlamak için şirketinizin e-posta göndermek için "bir yöneticisine başvurun" bağlantısını seçin. BT personeli. |
+|Parolamı değiştirmeyi denediğimde bir hata alıyorum. |Parolanız, parolanızı kolayca tahmin eden bir sözcük, tümcecik veya düzene sahiptir.| Daha güçlü bir parola kullanarak yeniden deneyin.|
+|Kullanıcı kimliğimi girdikten sonra, "lütfen yöneticinize başvurun" yazan bir sayfaya gideceğim.|Microsoft, Kullanıcı hesabınızın parolasının şirket içi bir ortamda yönetilip yönetilmediğini belirledi. Sonuç olarak, parolanızı "hesabınıza erişemiyor" bağlantısına sıfırlayamazsınız. |Daha fazla yardım için yöneticinize başvurun.|
+|Kullanıcı kimliğimi girdikten sonra, "hesabınız parola sıfırlama için etkinleştirilmemiş" ifadesini içeren bir hata alıyorum.|Yöneticiniz, kendi parolanızı sıfırlayabilmeniz için hesabınızı kurmadı.|Yöneticiniz, "hesabınıza erişemiyor" bağlantısına sahip kuruluşunuz için parola sıfırlamasını açılmadı veya özelliği kullanmak için size lisanslandırmadı.<br><br> Parolanızı sıfırlamak için şirketinizin yöneticisine bir e-posta göndermek üzere "Yönetici bağlantısına başvurun" seçeneğini belirleyip parolanızı sıfırlamak istediğinizi bilmeleri gerekir.|
+|Kullanıcı kimliğimi girdikten sonra, "hesabınızı doğrulayamadık" ifadesini içeren bir hata alıyorum.|Oturum açma işlemi, hesap bilgilerinizi doğrulayamadı.|Bu iletiyi görmenizin iki nedeni vardır.<br><br>1. yöneticiniz kuruluşunuz için parola sıfırlamasını açtınız, ancak hizmeti kullanmak üzere kaydolmadınız. Parola sıfırlama için kaydolmak üzere, doğrulama yönteminiz temelinde aşağıdaki makalelerden birine bakın: [bir doğrulayıcı uygulaması (Önizleme) kullanmak için güvenlik bilgilerini ayarlama](security-info-setup-auth-app.md), [bir telefon araması kullanmak için güvenlik bilgilerini ayarlama (Önizleme)](security-info-setup-phone-number.md), [kullanılacak güvenlik bilgilerini ayarlama metin mesajlaşma (Önizleme)](security-info-setup-text-msg.md), güvenlik bilgilerini (Önizleme) [kullanmak üzere güvenlik bilgilerini ayarlama](security-info-setup-email.md)veya güvenlik [sorularını kullanmak için güvenlik bilgilerini ayarlama (Önizleme)](security-info-setup-questions.md).<br><br>2. yöneticiniz, kuruluşunuz için parola sıfırlama özelliği açılmadı. Bu durumda, yöneticinize e-posta göndermek için "Yönetici bağlantısına başvurun" seçeneğini seçmeniz ve parolanızı sıfırlamamanız gerekir.|
 
 ## <a name="next-steps"></a>Sonraki adımlar
+- Güvenlik [bilgileri (Önizleme) genel bakış](user-help-security-info-overview.md) makalesindeki güvenlik bilgileri hakkında bilgi edinin.
 
-* [Self servis parola sıfırlamayı kullanmak için kaydolma](active-directory-passwords-reset-register.md)
-* [Parola sıfırlama kayıt sayfası](https://aka.ms/ssprsetup)
-* [Parola sıfırlama portalı](https://passwordreset.microsoftonline.com/)
-* [Microsoft hesabınızla oturum açamıyorsunuz](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant)
+- İki [adımlı doğrulamaya genel bakış](user-help-two-step-verification-overview.md) makalesinde iki adımlı doğrulama hakkında bilgi edinin. 
 
-[Login]: ./media/active-directory-passwords-update-your-own-password/reset-1-login.png "Oturum açma sayfası Hesabınıza erişemiyor musunuz?"
-[Verification]: ./media/active-directory-passwords-update-your-own-password/reset-2-verification.png "Kimlik doğrulama verilerinizi doğrulayın"
-[Change]: ./media/active-directory-passwords-update-your-own-password/reset-3-change.png "Parolanızı değiştirme"
-[Complete]: ./media/active-directory-passwords-update-your-own-password/reset-4-complete.png "Parolanız sıfırlandı"
-[LoginScreen]: ./media/active-directory-passwords-update-your-own-password/login-screen.png "Windows 10 Fall Creators Update oturum açma ekranı sıfırlama parola bağlantısı"
-[ContactMethod]: ./media/active-directory-passwords-update-your-own-password/reset-contact-method-screen.png "Kimlik doğrulama verilerinizi doğrulayın"
-[ResetPassword]: ./media/active-directory-passwords-update-your-own-password/reset-password-screen.png "Parolanızı değiştirme"
+- Parola [sıfırlama portalından](https://passwordreset.microsoftonline.com/) , kaybedildiyseniz veya unuttuysanız parolanızı sıfırlayın
+
+- [Microsoft hesabı makalesinde oturum açma](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant) sorunları için sorun giderme ipuçları ve yardım alın.

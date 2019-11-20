@@ -1,85 +1,85 @@
 ---
-title: Azure veri Kataloğu'nda iş sözlüğünü ayarlama
-description: Kayıtlı veri varlıklarını tanımlama ve etiket için ortak bir iş sözlüğü kullanmak için Azure veri Kataloğu'nda iş sözlüğünü vurgulama nasıl yapılır makalesi.
+title: Azure Veri Kataloğu 'nda iş sözlüğünü ayarlama
+description: Azure Veri Kataloğu 'nda iş sözlüğünü, kayıtlı veri varlıklarını etiketlemek için ortak bir iş sözlüğü tanımlamak ve kullanmak üzere vurgulayan nasıl yapılır makalesi.
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 04/05/2019
-ms.openlocfilehash: 649a842c8c8890713bda938c8e11740c5c8be7aa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/01/2019
+ms.openlocfilehash: 1065abecb1f0ef57eb13b1ec3f194f07ae01eaee
+ms.sourcegitcommit: 62bd5acd62418518d5991b73a16dca61d7430634
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61001926"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68976803"
 ---
-# <a name="set-up-the-business-glossary-for-governed-tagging"></a>İş sözlüğünü yönetilen etiketleme için ayarlama
+# <a name="set-up-the-business-glossary-for-governed-tagging"></a>Yönetilen etiketleme için iş sözlüğünü ayarlama
 
 ## <a name="introduction"></a>Giriş
 
-Kolayca keşfedin ve analiz ve karar vermek için gereken veri kaynaklarını anlama azure veri Kataloğu veri kaynağı bulmayı sağlar. Bu özellikler bulabilir ve çeşitli kullanılabilir veri kaynaklarını anlama en büyük etkiyi olun.
+Azure Veri Kataloğu, veri kaynağı bulmayı mümkün hale getirir; bu sayede analiz yapmak ve kararlar almak için ihtiyaç duyduğunuz veri kaynaklarını kolayca bulabilir ve anlayabilirler. Bu yetenekler, en geniş kullanılabilir veri kaynaklarını bulabilir ve anlayabilmeniz için en büyük etkiyi yapar.
 
-Etiketleme varlıklar veri büyük anlama yükseltir bir veri Kataloğu özelliğini. Etiketleme kullanarak bir varlığı veya varlık arama veya tarama aracılığıyla bulmak daha kolay hale sırayla bir sütun ile anahtar sözcükleri ilişkilendirebilirsiniz. Etiketleme de daha fazla kolayca varlık amacı ve bağlam anlamanıza yardımcı olur.
+Varlıklar verilerinin daha fazla anlaşılmasına yönelik bir veri kataloğu özelliği etiketleniyor. Etiketleme kullanarak, anahtar sözcükleri bir varlıkla veya bir sütunla ilişkilendirebilirsiniz, bu da bir varlık veya göz atma aracılığıyla varlığı bulmayı kolaylaştırır. Etiketleme Ayrıca varlığın bağlamını ve amacını daha kolay anlamanıza yardımcı olur.
 
-Ancak, etiketleme bazen kendi sorunlara neden olabilir. Etiketleme artmasına neden olabilen sorunları bazı örnekleri şunlardır:
+Ancak etiketleme bazen kendi sorunlarına neden olabilir. Etiketlemesinin tanıtılabileceği bazı sorunlar örnekleri şunlardır:
 
-* Bazı varlıklar üzerinde kısaltmalar ve diğerleri üzerinde genişletilmiş metin kullanın. Amaç varlıkları aynı etiketi ile etiketlemek için olmasına rağmen bu tutarsızlığı varlıklar, bulunmasını yavaşlattığını.
-* Bağlama bağlı olarak, yani olası farklılığı. Örneğin, bir etiket olarak adlandırılan *gelir* bir Müşteri geliri müşteri tarafından veri kümesi gelebilir, ancak aynı etiketi üç ayda bir satış veri kümesini şirket için aylık gelir anlamına gelebilir.  
+* Bazı varlıklarda kısaltmaların kullanımı ve başkaları üzerinde genişletilmiş metinler. Bu tutarsızlık, varlıkları aynı etiketle etiketleyebilse bile varlıkların bulunmasını sağlar.
+* İçeriğe bağlı olarak anlamı olan olası Çeşitlemeler. Örneğin, müşteri veri kümesinde *gelir* adlı bir etiket müşteri tarafından gelir anlamına gelebilir, ancak üç aylık satış veri kümesindeki aynı etiket şirket için üç aylık gelir anlamına gelebilir.  
 
-Bunlar ve diğer benzer zorlukları gidermek için veri Kataloğu, bir iş sözlüğü içerir.
+Veri Kataloğu, bu ve diğer benzer zorlukları ele almak için bir iş sözlüğü içerir.
 
-Veri Kataloğu iş sözlüğünü kullanarak, bir kuruluşun temel iş terimlerini ve tanımlarını bir ortak bir iş sözlüğü oluşturmak için belge. Bu idare kuruluş genelinde veri kullanımı tutarlılık sağlar. Bir terimi iş sözlüğü tanımlandıktan sonra bir veri varlığına kataloğunda atanabilir. Bu yaklaşım *etiketleme yönetilen*, etiketleme olarak aynı yaklaşımdır.
+Bir kuruluş, veri kataloğu iş sözlüğünü kullanarak, ortak bir iş sözlüğü oluşturmak için önemli iş şartlarını ve bunların tanımlarını belgeleyerek. Bu idare, kuruluş genelinde veri kullanımında tutarlılığı mümkün bir şekilde sunar. İş sözlükte bir terim tanımlandıktan sonra, bu, katalogdaki bir veri varlığına atanabilir. Bu yaklaşım, etiketlemeyle aynı yaklaşımla, *yönetilen etiketleniyor*.
 
-## <a name="glossary-availability-and-privileges"></a>Sözlük kullanılabilirlik ve ayrıcalıkları
+## <a name="glossary-availability-and-privileges"></a>Sözlük kullanılabilirliği ve ayrıcalıkları
 
-İş sözlüğü, yalnızca, Azure veri Kataloğu standart sürümü içinde kullanılabilir. Ücretsiz sürüm veri Kataloğu'nun bir sözlük içermez ve özellikleri yönetilen etiketleme için sağlamaz.
+İş sözlüğü yalnızca Azure Veri Kataloğu 'nun standart sürümünde kullanılabilir. Veri Kataloğu 'nun ücretsiz sürümü bir sözlük içermez ve bu, yönetilen etiketlemeyle ilgili yetenekler sağlamaz.
 
-İş sözlüğü aracılığıyla erişebileceğiniz **sözlüğü** veri Kataloğu portalının Gezinti menüsündeki seçeneği.  
+Veri Kataloğu portalının gezinti menüsündeki **Sözlük** seçeneği aracılığıyla iş sözlüğü 'ne erişebilirsiniz.  
 
-![İş sözlüğünü erişme](./media/data-catalog-how-to-business-glossary/01-portal-menu.png)
+![Veri Kataloğu-iş sözlüğü 'ne erişin](./media/data-catalog-how-to-business-glossary/01-portal-menu.png)
 
-Veri Kataloğu yöneticilerinin ve sözlük Yöneticileri rolünün üyeleri, oluşturabilir, düzenleme ve iş sözlüğü, sözlük terimleri silin. Tüm veri Kataloğu kullanıcılarının terim tanımları ve etiket varlıklar sözlük terimlerini görüntüleyebilirsiniz.
+Veri Kataloğu yöneticileri ve sözlük yöneticileri rolünün üyeleri iş sözlükte Sözlük terimleri oluşturabilir, düzenleyebilir ve silebilir. Tüm veri kataloğu kullanıcıları terim tanımlarını görüntüleyebilir ve varlıkları sözlük koşullarına göre etiketleyebilir.
 
-![Yeni bir sözlük terimini ekleme](./media/data-catalog-how-to-business-glossary/02-new-term.png)
+![Veri Kataloğu-yeni bir sözlük terimi ekleyin](./media/data-catalog-how-to-business-glossary/02-new-term.png)
 
-## <a name="creating-glossary-terms"></a>Sözlük girişi oluşturma
+## <a name="creating-glossary-terms"></a>Sözlük terimleri oluşturma
 
-Veri Kataloğu yöneticilerinin ve sözlük yöneticileri oluşturabilir sözlük terimleri tıklayarak **yeni terim** düğmesi. Her sözlük terimini aşağıdaki alanları içerir:
+Veri Kataloğu yöneticileri ve sözlük yöneticileri, **Yeni terim** düğmesine tıklayarak Sözlük terimleri oluşturabilir. Her sözlük terimi aşağıdaki alanları içerir:
 
-* Bir iş tanımı bir dönem
-* Varlık veya sütun için iş kuralları ve kullanım amacını yakalayan açıklaması
-* En iyi terim hakkında bilmeniz hissedarlar listesi
-* Hangi terim düzenlenir hiyerarşi tanımlar üst terim
+* Terim için bir iş tanımı
+* Varlık veya sütun için amaçlanan kullanım veya iş kurallarını yakalayan bir açıklama
+* Terimi en iyi şekilde bilen paydaşların listesi
+* Terimin düzenlendiği hiyerarşiyi tanımlayan üst terim
 
-## <a name="glossary-term-hierarchies"></a>Sözlük terimi hiyerarşiler
+## <a name="glossary-term-hierarchies"></a>Sözlük terimi hiyerarşileri
 
-Veri Kataloğu iş sözlüğünü kullanarak, bir kuruluşun kendi iş sözlüğünü terimlerin bir hiyerarşi tanımlayabilir ve kendi iş sınıflandırma daha iyi temsil eden bir sınıflandırma koşulları oluşturabilirsiniz.
+Bir kuruluş, veri kataloğu iş sözlüğünü kullanarak iş sözlüğünü bir terim hiyerarşisi olarak tanımlayabilir ve iş taksonomisini daha iyi temsil eden bir terim sınıflandırması oluşturabilir.
 
-Bir terimi hiyerarşinin belirli bir düzeyde benzersiz olması gerekir. Yinelenen adlara izin verilmez. Bir hiyerarşi düzeylerini sayısına bir sınır yoktur, ancak üç düzeyde veya daha az olduğunda bir hiyerarşi genellikle daha kolay anlaşılır.
+Bir terim, belirli bir hiyerarşi düzeyinde benzersiz olmalıdır. Yinelenen adlara izin verilmez. Bir hiyerarşideki düzey sayısı için bir sınır yoktur, ancak üç düzey veya daha az sayıda olduğunda hiyerarşi daha kolay anlaşılır.
 
-İş sözlüğünü hiyerarşileri kullanımı isteğe bağlıdır. Üst terimler için terimi alan boş bırakarak sözlükteki koşulları (hiyerarşik olmayan) düz bir listesini oluşturur.  
+İş sözlükte hiyerarşilerin kullanımı isteğe bağlıdır. Sözlük terimleri için üst terim alanını boş bırakmak, sözlükte koşulların düz (hiyerarşik olmayan) bir listesini oluşturur.  
 
-## <a name="tagging-assets-with-glossary-terms"></a>Sözlük Terimleri varlıklarla etiketleme
+## <a name="tagging-assets-with-glossary-terms"></a>Varlıkları Sözlük terimleri ile etiketleme
 
-Sözlük Terimleri katalog tanımlandıktan sonra Varlık etiketleme deneyimi sözlüğü bir kullanıcının bir etiket olarak aramak için optimize edilmiştir. Veri Kataloğu portalı eşleşen sözlük terimleri aralarından seçim listesini görüntüler. Kullanıcı, listeden bir sözlük terimini seçerse, terimi için varlık (bir sözlük etiketi olarak da bilinir) bir etiket olarak eklenir. Sözlükte olmayan bir terimi yazarak yeni bir etiket oluşturmak de kullanıcı seçebilir (bir kullanıcı etiketi olarak da bilinir).
+Katalog içinde Sözlük terimleri tanımlandıktan sonra, varlıkların etiketlenmesi deneyimi, bir kullanıcı etiketi yazarken sözlük aramak için en iyi duruma getirilmiştir. Veri Kataloğu portalı, aralarından seçim yapabileceğiniz eşleşen sözlük koşullarının bir listesini görüntüler. Kullanıcı listeden bir sözlük terimi seçerse, terim varlığa bir etiket (sözlük etiketi olarak da adlandırılır) olarak eklenir. Kullanıcı, sözlükte olmayan bir terim (Kullanıcı etiketi olarak da bilinir) yazarak yeni bir etiket oluşturmayı da tercih edebilir.
 
-![Veri varlığı bir kullanıcı etiketi ve iki sözlüğü etiketleri ile etiketlenmiş](./media/data-catalog-how-to-business-glossary/03-tagged-asset.png)
+![Bir Kullanıcı etiketiyle etiketlendirilmiş veri varlığı ve iki sözlük etiketi](./media/data-catalog-how-to-business-glossary/03-tagged-asset.png)
 
 > [!NOTE]
-> Kullanıcı etiketleri yalnızca ücretsiz sürüm, veri Kataloğu'nda desteklenen etiket türüdür.
+> Kullanıcı etiketleri, veri kataloğu 'nun ücretsiz sürümünde desteklenen tek etiket türüdür.
 
-### <a name="hover-behavior-on-tags"></a>Etiket davranışı üzerine gelin
+### <a name="hover-behavior-on-tags"></a>Etiketlerde üzerine gelme davranışı
 
-Veri Kataloğu Portalı'nda, iki etiket görsel olarak farklı ve mevcut farklı vurgulu davranışları türleridir. Bir kullanıcı etiketin üzerine geldiğinizde, etiket metni ve kullanıcı veya etiket eklediğiniz kullanıcıları görebilirsiniz. Bir sözlük etiketin üzerine geldiğinizde, ayrıca sözlük terimini ve terimi tam açıklamasını görüntülemek için iş sözlüğünü açmaya yönelik bir bağlantı tanımına bakın.
+Veri Kataloğu portalında, iki etiket türü görsel olarak farklıdır ve farklı vurgulu davranışlar sunar. Bir Kullanıcı etiketinin üzerine geldiğinizde, etiket metnini ve etiketi eklemiş olan kullanıcı veya kullanıcıları görebilirsiniz. Sözlük etiketinin üzerine geldiğinizde, terimin tam tanımını görüntülemek için sözlük döneminin tanımını ve iş sözlüğü açma bağlantısını da görürsünüz.
 
 ### <a name="search-filters-for-tags"></a>Etiketler için arama filtreleri
 
-Sözlük etiketleri kullanıcı etiketleri hem de aranabilir olması ve arama filtrelerini olarak uygulayabilirsiniz.
+Sözlük etiketleri ve Kullanıcı etiketleri hem aranabilir hem de bir aramada filtre olarak uygulanabilir.
 
 ## <a name="summary"></a>Özet
 
-Azure veri Kataloğu'na ve yönetilen bağlayabileceğinizi etiketleme iş sözlüğünü kullanarak, tanımlayın, yönetmek ve tutarlı bir şekilde veri varlıklarını bulma. İş sözlüğünü kuruluş üyeleri tarafından iş sözlüğü, öğrenme yükseltebilirsiniz. Varlık bulma ve anlama basitleştirir anlamlı meta verileri yakalama sözlüğü da destekler.
+Azure Veri Kataloğu ' nda iş sözlüğü ve bunun desteklediği yönetilen etiketleme kullanarak, veri varlıklarını tutarlı bir şekilde tanımlayabilir, yönetebilir ve keşfedebilirsiniz. İş sözlüğü, kuruluş üyelerine iş sözlüğü öğrenmesini yükseltebilir. Sözlük ayrıca varlık bulmayı ve anlalamayı kolaylaştıran anlamlı meta verileri yakalamayı da destekler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [İş sözlüğü işlemleri için REST API belgeleri](/rest/api/datacatalog/data-catalog-glossary)
+* [İş sözlüğü işlemlerine yönelik REST API belgeleri](/rest/api/datacatalog/data-catalog-glossary)

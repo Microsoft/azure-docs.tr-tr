@@ -1,6 +1,6 @@
 ---
-title: Azure Service Bus Mesajlaşma varlıkları otomatik iletme | Microsoft Docs
-description: Bir Service Bus kuyruğu veya başka bir kuyruk veya konu için abonelik zincir şeklinde nasıl.
+title: Azure Service Bus mesajlaşma varlıklarını otomatik iletme | Microsoft Docs
+description: Service Bus kuyruğu veya aboneliğini başka bir kuyruğa veya konuya nasıl zincirleyebilirsiniz.
 services: service-bus-messaging
 documentationcenter: na
 author: axisc
@@ -14,20 +14,20 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 01/23/2019
 ms.author: aschhab
-ms.openlocfilehash: 86fa7f62230c0ae0530b67ff2384942c876083d4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1d7b76a58a427b687d0dc36d13cfc00f32196853
+ms.sourcegitcommit: 88ae4396fec7ea56011f896a7c7c79af867c90a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64686132"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70390141"
 ---
-# <a name="chaining-service-bus-entities-with-autoforwarding"></a>Hizmet veri yolu varlıkları autoforwarding zincirleme
+# <a name="chaining-service-bus-entities-with-autoforwarding"></a>Oto Service Bus varlıkları tekrar yönlendirme ile zincirle
 
-Service Bus *autoforwarding* özelliği bir kuyruk veya başka bir kuyruk veya aynı ad parçası olan konu için abonelik zincir olanak sağlar. Autoforwarding etkin olduğunda, Service Bus otomatik olarak ilk kuyruk ya da abonelik (kaynak) yerleştirildiğinden iletileri kaldırır ve ikinci kuyruğuna veya konusuna (hedef) geçirir. Hedef varlık, doğrudan bir ileti göndermek yine de mümkündür.
+Service Bus *oto iletme* özelliği, bir kuyruğu veya aboneliği aynı ad alanının parçası olan başka bir kuyruğa veya konuya zincirlemenize olanak sağlar. Otomatik iletme etkinleştirildiğinde Service Bus, ilk sıraya veya aboneliğe (kaynak) yerleştirilmiş iletileri otomatik olarak kaldırır ve bunları ikinci kuyruğa veya konuya (hedef) koyar. Hedef varlığa doğrudan bir ileti göndermek yine de mümkündür.
 
-## <a name="using-autoforwarding"></a>Autoforwarding kullanma
+## <a name="using-autoforwarding"></a>Oto iletmeyi kullanma
 
-Ayarlayarak autoforwarding etkinleştirebilirsiniz [QueueDescription.ForwardTo] [ QueueDescription.ForwardTo] veya [SubscriptionDescription.ForwardTo] [ SubscriptionDescription.ForwardTo] özelliklerde [QueueDescription] [ QueueDescription] veya [SubscriptionDescription] [ SubscriptionDescription] olarak kaynak için nesneleri Aşağıdaki örnekte:
+Queuedescription [. ForwardTo][QueueDescription.ForwardTo] veya [Subscriptiondescription. ForwardTo][SubscriptionDescription.ForwardTo] ayarlarını, kaynak Için [queuedescription][QueueDescription] veya [subscriptiondescription][SubscriptionDescription] nesnelerinde Aşağıdaki örnek:
 
 ```csharp
 SubscriptionDescription srcSubscription = new SubscriptionDescription (srcTopic, srcSubscriptionName);
@@ -35,44 +35,46 @@ srcSubscription.ForwardTo = destTopic;
 namespaceManager.CreateSubscription(srcSubscription));
 ```
 
-Hedef varlık, kaynak varlık oluşturulduğunda mevcut olması gerekir. Hedef varlık yok, Service Bus kaynak varlık oluşturmak için sorulduğunda bir özel durum verir.
+Hedef varlık, kaynak varlığın oluşturulduğu sırada mevcut olmalıdır. Hedef varlık yoksa, Service Bus kaynak varlığı oluşturmanız istendiğinde bir özel durum döndürür.
 
-Tek bir konuyu ölçeklendirme autoforwarding kullanabilirsiniz. Service Bus sınırları [belirli bir konuya abonelik sayısı](service-bus-quotas.md) 2.000 için. İkinci düzey konuları oluşturarak ek abonelikler barındırabilir. Service Bus sınırlama tarafından abonelik sayısına bağlı olmayan olsa da, ikinci düzey konular bir ekleme Konunuza genel verimini artırabilir.
+Tek bir konuyu ölçeklendirmek için, oto iletmeyi kullanabilirsiniz. Service Bus, [belirli bir konudaki aboneliklerin sayısını](service-bus-quotas.md) 2.000 olarak sınırlandırır. İkinci düzey konuları oluşturarak ek aboneliklere uyum sağlayabilirsiniz. Abonelik sayısında Service Bus sınırlaması ile bağlı olmasanız bile, ikinci bir konu seviyesi eklemek, konunun genel verimini iyileştirebilirler.
 
 ![Otomatik iletme senaryosu][0]
 
-Autoforwarding, ileti gönderenler alıcılarından ayrıştırmak için de kullanabilirsiniz. Örneğin, üç modülden oluşur bir ERP sistemi göz önünde bulundurun: sipariş işleme, envanter yönetimi ve müşteri ilişkileri yönetimi. Bu modüllerin her biri, karşılık gelen bir konu içine sıraya alınan iletileri oluşturur. Alice ve Bob, müşterilerine ilişkili tüm iletileri, ilgileniyor satış temsilcilerinin var. Bu iletileri almak için Alice ve Bob kişisel bir kuyruk ve bir abonelik her biri kendi sıra tüm iletileri otomatik olarak iletme ERP konuları üzerinde oluşturun.
+Ayrıca, alıcıların ileti gönderenleri ayırmak için de oto iletmeyi kullanabilirsiniz. Örneğin, üç modülden oluşan bir ERP sistemi düşünün: sipariş işleme, stok yönetimi ve müşteri ilişkileri yönetimi. Bu modüllerin her biri, ilgili bir konuya sıraya alınan iletileri oluşturur. Gamze ve Bob, müşterileri ile ilgili tüm iletilerle ilgilenen satış temsilcilerdir. Bu iletileri almak için, Gamze ve Bob her biri, tüm iletileri kuyruğuna otomatik olarak ileten ERP konularındaki her bir kişisel kuyruk ve bir abonelik oluşturur.
 
 ![Otomatik iletme senaryosu][1]
 
-Alice, tatil kendi kişisel kuyruk, yerine, ERP konu kalırsa, dolar. Bir satış temsilcisi herhangi bir iletisi almadı, çünkü bu senaryoda, ERP konuları hiçbiri hiç olmadığı kadar kota ulaşın.
+Gamze,, ERP konusu yerine kişisel kuyruğu tatilden gittiğinde, doldurur. Bu senaryoda, bir satış temsilcisi herhangi bir ileti almadığı için kotadan hiçbirine hiçbir zaman ulaşmaz.
 
 > [!NOTE]
-> Autoforwarding ayarlandığında, hedef AutoDeleteOnIdle değeri otomatik olarak veri türünün maksimum değerine ayarlanır.
-> Bu, olduğundan her zaman bir hedef iletinin iletileceği emin olmak için gerçekleştirilir.
+> Otomatik iletme ayarı ayarlandığında, **hem kaynak hem de hedef** üzerinde otomatik deleteonıdle değeri otomatik olarak veri türünün en büyük değerine ayarlanır.
+> 
+>   - Kaynak tarafında, oto iletimi bir alma işlemi olarak davranır. Bu nedenle, ileri iletme kurulumuna sahip olan kaynak hiçbir şekilde gerçekten "boşta" değildir.
+>   - Hedef tarafta bu, iletinin iletmekte olduğu her zaman bir hedefin olduğundan emin olmak için yapılır.
 
-## <a name="autoforwarding-considerations"></a>Autoforwarding konuları
+## <a name="autoforwarding-considerations"></a>Oto iletme konuları
 
-Hedef varlık, çok fazla ileti toplanır ve kotasını aşıyor veya hedef varlık devre dışı bırakıldı, kaynak varlık iletileri ekler, [eski ileti sırası](service-bus-dead-letter-queues.md) oluncaya kadar hedef (veya varlık alanı yeniden etkin). Bu iletiler, açıkça almak ve bunları edilemeyen kuyruktan işlemek için teslim edilemeyen kuyrukta Canlı devam edin.
+Hedef varlık çok fazla ileti birikiyor ve kotayı aşarsa ya da hedef varlık devre dışıysa, hedefte alan alana kadar, kaynak varlık iletileri teslim edilemeyen ileti [kuyruğuna](service-bus-dead-letter-queues.md) ekler (veya varlık yeniden etkin olur). Bu iletiler, atılacak ileti kuyruğunda canlı olmaya devam eder, bu nedenle bunları teslim edilemeyen ileti sırasından açıkça alıp işlemeli.
 
-Bileşik bir konuya birden fazla aboneliğin bulunduğu elde etmek için tek tek ilgili konulara birbirine zincirleme zaman birinci düzey konuyu Aboneliklerde ve ikinci düzey konularda daha fazla abonelik normal bir sayıda olması önerilir. Örneğin, her biri bir ikinci düzey konuya 200 abonelikleriyle zincirleme 20 abonelikleri ile birinci düzey konu sağlar bir birinci düzey konu abonelikleriyle 200'den daha yüksek performans için her 20 abonelikleriyle ikinci düzey konu zincirleme.
+Birçok abonelikle Birleşik bir konu almak için bireysel konular ile zincirleme yaparken, birinci düzey konu üzerinde ve ikinci düzey konularda çok sayıda aboneliğe sahip olan orta sayıda aboneliğe sahip olmanız önerilir. Örneğin, her biri 200 abonelik ile ikinci düzey bir konuya zincirleme olan 20 abonelikli ilk düzey bir konu, her biri 20 abonelikle ikinci düzey bir konuya zincirleme olan 200 abonelikleriyle ilk düzey bir konudan daha yüksek aktarım hızı sağlar.
 
-Service Bus yönlendirilmiş her ileti için tek bir işlem düzenler. Birinci düzey abonelikler iletinin bir kopyasını alır. Örneğin, bunları başka bir kuyruk veya konu, Otomatik İlet iletiler için yapılandırılmış her 20 aboneliklerine sahip bir konu başlığına ileti gönderme 21 işlem olarak faturalandırılır.
+Her iletilen ileti için bir işlem Service Bus. Örneğin, 20 abonelikle bir konuya ileti göndermek, her birinin iletileri başka bir kuyruğa veya konuya otomatik olarak iletecek şekilde yapılandırmaları, tüm ilk düzey abonelikler iletinin bir kopyasını alıyorsa 21 işlem olarak faturalandırılır.
 
-Başka bir kuyruğa veya konuya zincirleme bir abonelik oluşturmak için aboneliğin oluşturucusu olmalıdır **Yönet** hem kaynak hem de hedef varlık üzerindeki izinleri. Kaynak konu başlığına ileti gönderme yalnızca gerektirir **Gönder** izinleri kaynak konusunda.
+Başka bir kuyruğa veya konuya zincirleme bir abonelik oluşturmak için, aboneliğin oluşturucusunun hem kaynak hem de hedef varlık üzerinde **yönetme** izinlerine sahip olması gerekir. Kaynak konuya ileti gönderimi yalnızca kaynak konu üzerinde **gönderme** izinleri gerektirir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Autoforwarding hakkında ayrıntılı bilgi için aşağıdaki başvuru konularına bakın:
+Oto iletme hakkında ayrıntılı bilgi için aşağıdaki başvuru konularına bakın:
 
 * [ForwardTo][QueueDescription.ForwardTo]
 * [QueueDescription][QueueDescription]
-* [SubscriptionDescription][SubscriptionDescription]
+* [Abonelik açıklaması][SubscriptionDescription]
 
-Service Bus performans iyileştirmeleri hakkında daha fazla bilgi için bkz: 
+Service Bus performans iyileştirmeleri hakkında daha fazla bilgi edinmek için bkz. 
 
 * [Service Bus Mesajlaşması kullanarak performans geliştirmek için en iyi yöntemler](service-bus-performance-improvements.md)
-* [Bölümlenmiş Mesajlaşma varlıkları][Partitioned messaging entities].
+* [Bölümlenmiş mesajlaşma varlıkları][Partitioned messaging entities].
 
 [QueueDescription.ForwardTo]: /dotnet/api/microsoft.servicebus.messaging.queuedescription.forwardto#Microsoft_ServiceBus_Messaging_QueueDescription_ForwardTo
 [SubscriptionDescription.ForwardTo]: /dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.forwardto#Microsoft_ServiceBus_Messaging_SubscriptionDescription_ForwardTo

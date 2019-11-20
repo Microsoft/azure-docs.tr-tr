@@ -1,53 +1,51 @@
 ---
-title: Azure Active Directory etki alanı hizmetleri devre dışı bırakma | Microsoft Docs
-description: Azure Active Directory etki alanı Azure portalını kullanarak hizmetleri devre dışı bırak
+title: Azure Active Directory Domain Services devre dışı bırak | Microsoft Docs '
+description: Azure portal kullanarak Azure Active Directory Domain Services devre dışı bırakmayı öğrenin
 services: active-directory-ds
-documentationcenter: ''
 author: iainfoulds
 manager: daveba
-editor: curtand
 ms.assetid: 89e407e1-e1e0-49d1-8b89-de11484eee46
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: conceptual
-ms.date: 05/14/2019
+ms.date: 09/04/2019
 ms.author: iainfou
-ms.openlocfilehash: 2f9b7f5342753c27bd8159056c8f162a5a4b78d3
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 05c4e73c56b79c6e313ea15124bd0f3d17b2fc70
+ms.sourcegitcommit: adc1072b3858b84b2d6e4b639ee803b1dda5336a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67473541"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70842601"
 ---
-# <a name="disable-azure-active-directory-domain-services-using-the-azure-portal"></a>Azure Active Directory etki alanı Azure portalını kullanarak hizmetleri devre dışı bırak
-Bu makalede Azure AD dizininiz için Azure Active Directory (AD) etki alanı hizmetleri devre dışı bırakmak için Azure portalını kullanmayı gösterir.
+# <a name="disable-azure-active-directory-domain-services-using-the-azure-portal"></a>Azure portal kullanarak Azure Active Directory Domain Services devre dışı bırak
+
+Artık yönetilen bir etki alanına ihtiyacınız yoksa bir Azure Active Directory Domain Services (Azure AD DS) örneğini silebilirsiniz. Azure AD DS yönetilen bir etki alanını kapatma veya geçici olarak devre dışı bırakma seçeneği yoktur. Azure AD DS yönetilen etki alanını silme, Azure AD kiracısı silmez veya olumsuz yönde etkilemez. Bu makalede, Azure AD DS yönetilen bir etki alanını silmek için Azure portal nasıl kullanılacağı gösterilmektedir.
 
 > [!WARNING]
-> **Silme işlemi kalıcıdır ve geri alınamaz.**
-> Dikkatli olun! Yönetilen etki alanı sildiğinizde:
->   * Yönetilen etki alanı için etki alanı denetleyicilerine XML'deki sağlanan ve sanal ağdan kaldırıldı.
->   * Yönetilen etki alanındaki verileri kalıcı olarak silinir. Bu özel OU'ları, GPO'ları, özel DNS kayıtları, hizmet sorumluları, yönetilen etki alanında oluşturduğunuz Gmsa'lar vb. içerir.
->   * Yönetilen etki alanına katılan makineler kendi güven ilişkisine sahip kaybedebilir ve etki alanına katılmamış olmanız gerekir.
->   * Kurumsal AD kimlik bilgilerini kullanarak bu makinelerde oturum açamazsınız. Yerel yönetici kimlik bilgileri makine için kullanın.
-> Yönetilen etki alanı siliniyor Azure AD dizininizi silmeyin veya dizin olumsuz Aksi takdirde.
+> **Silme kalıcıdır ve geri alınamaz.**
+> Azure AD DS yönetilen bir etki alanını sildiğinizde, aşağıdaki adımlar oluşur:
+>   * Yönetilen etki alanı için etki alanı denetleyicileri, sanal ağdan de sağlanmış ve kaldırılır.
+>   * Yönetilen etki alanındaki veriler kalıcı olarak silinir. Bu veriler, oluşturduğunuz özel OU, GPO 'Lar, özel DNS kayıtları, hizmet sorumluları, GMSAs vb. içerir.
+>   * Yönetilen etki alanına katılmış makineler, etki alanıyla olan güven ilişkilerini kaybeder ve etki alanından katılmaması gerekir.
+>       * Bu makinelerde kurumsal AD kimlik bilgilerini kullanarak oturum açamazsınız. Bunun yerine, makinenin yerel yönetici kimlik bilgilerini kullanmanız gerekir.
 
-Azure AD Domain Services yönetilen etki alanınızı silmek için aşağıdaki adımları gerçekleştirin:
-1. Gidin [Azure AD Domain Services Uzantısı](https://portal.azure.com/#blade/HubsExtension/Resources/resourceType/Microsoft.AAD%2FdomainServices) Azure portalında.
-2. Yönetilen etki alanınıza adına tıklayın.
+## <a name="delete-the-managed-domain"></a>Yönetilen etki alanını sil
 
-    ![Silmek için etki alanı seçin](./media/getting-started/domain-services-delete-select-domain.png)
+Azure AD DS yönetilen bir etki alanını silmek için aşağıdaki adımları izleyin:
 
-3. Üzerinde **genel bakış** sayfasında **Sil** düğmesi.
+1. Azure portal, araması yapın ve **Azure AD Domain Services**seçin.
+1. Azure AD DS yönetilen etki alanının adını (örneğin, *contoso.com*) seçin.
+1. **Genel Bakış** sayfasında **Sil**’i seçin. Silmeyi onaylamak için, yönetilen etki alanının etki alanı adını yeniden yazın ve **Sil**' i seçin.
 
-    ![Etki alanını Sil](./media/getting-started/domain-services-delete-domain.png)
+Azure AD DS yönetilen etki alanını silmek için 15-20 dakika veya daha fazla sürebilir.
 
-4. Silme işlemini onaylamak için yönetilen etki alanı DNS etki alanı adını yazın. Tıklayın **Sil** işiniz bittiğinde düğmesi.
+## <a name="next-steps"></a>Sonraki adımlar
 
-    ![Etki alanı onayını Sil](./media/getting-started/domain-services-delete-domain-confirm.png)
+Azure AD DS 'da görmek istediğiniz özelliklerle ilgili [geri bildirimleri paylaşmayı][feedback] göz önünde bulundurun.
 
-Yönetilen etki alanı yaklaşık 15-20 dakika içinde silinir.
+Azure AD DS 'ı yeniden kullanmaya başlamak istiyorsanız, bkz. [Azure Active Directory Domain Services örneği oluşturma ve yapılandırma][create-instance].
 
-Göz önünde bulundurun [geri bildirim paylaşma](contact-us.md) özellikleri yardımcı olan anlamamıza yardımcı olmak için Azure AD Domain Services'ı gelecekte seçtiniz. Bu geri bildirim hizmetini kullanım örnekleri ve dağıtım gereksinimlerini daha iyi uyacak şekilde yardımcı olur.
+<!-- INTERNAL LINKS -->
+[feedback]: contact-us.md
+[create-instance]: tutorial-create-instance.md

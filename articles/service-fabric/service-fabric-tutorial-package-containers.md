@@ -13,17 +13,17 @@ ms.service: service-fabric
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 01/31/2019
+ms.date: 07/22/2019
 ms.author: suhuruli
 ms.custom: mvc
-ms.openlocfilehash: a54ec7349317fdd8621fecec57cb06ad98f4660b
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: b4931b62aaf04db2ee4ff6f4a5e2b96274b8af88
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66306744"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68385048"
 ---
-# <a name="tutorial-package-and-deploy-containers-as-a-service-fabric-application-using-yeoman"></a>Öğretici: Kapsayıcıları paketleme ve Yeoman kullanarak Service Fabric uygulaması dağıtma
+# <a name="tutorial-package-and-deploy-containers-as-a-service-fabric-application-using-yeoman"></a>Öğretici: Yeumman kullanarak kapsayıcıları Service Fabric uygulama olarak paketleme ve dağıtma
 
 Bu öğretici, bir dizinin ikinci bölümüdür. Bu öğreticide, bir şablon oluşturma aracı (Yeoman) kullanılarak bir Service Fabric uygulaması tanımı oluşturulmaktadır. Daha sonra bu uygulama Service Fabric’e kapsayıcı dağıtmak için kullanılabilir. Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 
@@ -93,7 +93,7 @@ Aşağıda yo komutunu çalıştırmanın girişi ve çıktısı gösterilmekted
 Yeoman kullanılarak oluşturulmuş olan bir uygulamaya başka bir kapsayıcı hizmeti eklemek için aşağıdaki adımları uygulayın:
 
 1. Dizini bir düzey değiştirerek **TestContainer** dizinine gidin. Örnek: *./TestContainer*
-2. `yo azuresfcontainer:AddService` öğesini çalıştırın
+2.           `yo azuresfcontainer:AddService`'i çalıştırın.
 3. Hizmete “azurevoteback” adını verin
 4. Redis için kapsayıcı görüntüsü yolunu sağlayın: “alpine:redis”
 5. Komutlar bölümünü boş bırakmak için Enter tuşuna basın
@@ -227,7 +227,7 @@ r = redis.StrictRedis(host=redis_server, port=6379, db=0)
 
 ## <a name="create-a-service-fabric-cluster"></a>Service Fabric kümesi oluşturma
 
-Uygulamayı Azure'a dağıtmak için, uygulamayı çalıştıracak bir Service Fabric kümesine ihtiyacınız vardır. Aşağıdaki komutlar, Azure'da beş düğümlü bir küme oluşturur.  Komutları da otomatik olarak imzalanan bir sertifika oluşturun, bir anahtar kasasına ekler ve sertifika yerel olarak bir PEM dosyası olarak indirilir. Yeni sertifikayı dağıtır ve istemcilerin kimliğini doğrulamak için kullanılan Küme güvenliğini sağlamak için kullanılır.
+Uygulamayı Azure'a dağıtmak için, uygulamayı çalıştıracak bir Service Fabric kümesine ihtiyacınız vardır. Aşağıdaki komutlar Azure 'da beş düğümlü bir küme oluşturur.  Komutlar Ayrıca kendinden imzalı bir sertifika oluşturur, bunu bir anahtar kasasına ekler ve sertifikayı bir pek dosyası olarak yerel olarak indirir. Yeni sertifika, dağıtıldıktan sonra kümenin güvenliğini sağlamak için kullanılır ve istemcilerin kimliğini doğrulamak için kullanılır.
 
 ```azurecli
 #!/bin/bash
@@ -261,16 +261,16 @@ az sf cluster create --resource-group $ResourceGroupName --location $Location \
 ```
 
 > [!Note]
-> Web ön ucu hizmeti, gelen trafik için 80 numaralı bağlantı noktasını dinlemek üzere yapılandırılmıştır. Varsayılan olarak, kümenizi Vm'leri ve Azure load balancer 80 numaralı bağlantı noktasını açıktır.
+> Web ön ucu hizmeti, gelen trafik için 80 numaralı bağlantı noktasını dinlemek üzere yapılandırılmıştır. Varsayılan olarak, 80 numaralı bağlantı noktası, küme sanal makinelerinizdeki ve Azure Yük dengeleyicisinde açıktır.
 >
 
-Kendi kümenizi oluşturma hakkında daha fazla bilgi için bkz. [Azure'da bir Service Fabric kümesi oluşturma](service-fabric-tutorial-create-vnet-and-linux-cluster.md).
+Kendi kümenizi oluşturma hakkında daha fazla bilgi için bkz. [Azure 'da Service Fabric kümesi oluşturma](service-fabric-tutorial-create-vnet-and-linux-cluster.md).
 
 ## <a name="build-and-deploy-the-application-to-the-cluster"></a>Uygulamayı oluşturup kümeye dağıtma
 
 Uygulamayı, Service Fabric CLI’yi kullanarak Azure kümesine dağıtabilirsiniz. Service Fabric CLI makinenizde yüklü değilse [buradaki](service-fabric-get-started-linux.md#set-up-the-service-fabric-cli) yönergeleri uygulayarak yükleyin.
 
-Azure’daki Service Fabric kümesine bağlanın. Örnek uç noktayı kendi uç noktanız ile değiştirin. Uç nokta, aşağıdaki gibi tam bir URL olmalıdır.  PEM dosyasını daha önce oluşturulan otomatik olarak imzalanan bir sertifikadır.
+Azure’daki Service Fabric kümesine bağlanın. Örnek uç noktayı kendi uç noktanız ile değiştirin. Uç nokta, aşağıdaki gibi tam bir URL olmalıdır.  PED dosyası, önceden oluşturulmuş otomatik olarak imzalanan sertifikadır.
 
 ```bash
 sfctl cluster select --endpoint https://containertestcluster.eastus.cloudapp.azure.com:19080 --pem containertestcluster22019013100.pem --no-verify
@@ -282,11 +282,11 @@ sfctl cluster select --endpoint https://containertestcluster.eastus.cloudapp.azu
 ./install.sh
 ```
 
-Bir tarayıcı açın ve http Service Fabric Explorer'a gidin:\//containertestcluster.eastus.cloudapp.azure.com:19080/Explorer. Uygulamalar düğümünü genişletin ve uygulamanızın türü için bir giriş ve örnek için başka bir giriş olduğuna dikkat edin.
+Bir tarayıcı açın ve http:\//containertestcluster.eastus.cloudapp.Azure.com:19080/Explorer adresinde Service Fabric Explorer gidin. Uygulamalar düğümünü genişletin ve uygulamanızın türü için bir giriş ve örnek için başka bir giriş olduğuna dikkat edin.
 
 ![Service Fabric Explorer][sfx]
 
-Çalışan uygulamaya bağlanmak için bir web tarayıcısı açın ve kümenin URL'sine gidin - örneğin http gidin:\//containertestcluster.eastus.cloudapp.azure.com:80. Web kullanıcı arabiriminde Voting (Oylama) uygulamasını görmeniz gerekir.
+Çalışan uygulamaya bağlanmak için bir Web tarayıcısı açın ve küme URL 'sine gidin-örneğin, http:\//containertestcluster.eastus.cloudapp.Azure.com:80. Web kullanıcı arabiriminde Voting (Oylama) uygulamasını görmeniz gerekir.
 
 ![votingapp][votingapp]
 

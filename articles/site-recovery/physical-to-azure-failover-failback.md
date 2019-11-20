@@ -1,61 +1,62 @@
 ---
-title: Yük devretme ve yeniden fiziksel sunucuları Azure Site Recovery ile olağanüstü durum kurtarma için döndürme | Microsoft Docs
-description: Fiziksel sunucuları azure'a yük devretme ve şirket içi sitede Azure Site Recovery ile olağanüstü durum kurtarma için geri yüklenemedi hakkında bilgi edinin
+title: Site Recovery ile fiziksel sunucular için yük devretme ve yeniden çalışma ayarlama
+description: Fiziksel sunucuların yükünü Azure 'a devretmek ve Azure Site Recovery ile olağanüstü durum kurtarma için şirket içi siteye geri dönme hakkında bilgi edinin
 services: site-recovery
 author: rayne-wiselman
+manager: carmonm
 ms.service: site-recovery
 ms.topic: article
-ms.date: 05/30/2019
+ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: 14fa5822c575f2d2d60a956263cf916ee8f9bb4d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2c0d2e57a34286f65be45a95403a32de42c51908
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66400032"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084563"
 ---
-# <a name="fail-over-and-fail-back-physical-servers-replicated-to-azure"></a>Yük devretme ve yeniden fiziksel sunucuları Azure'a çoğaltılan döndürme
+# <a name="fail-over-and-fail-back-physical-servers-replicated-to-azure"></a>Yük devretme ve geri dönme fiziksel sunucuları Azure 'a çoğaltma
 
-Bu öğreticide, bir fiziksel sunucudan azure'a yük devretme işlemini açıklamaktadır. Yük devrettikten sonra uygun olduğunda şirket içi sitenize geri sunucunun başarısız.
+Bu öğreticide, fiziksel bir sunucunun yükünü Azure 'a nasıl devretmek açıklanmaktadır. Yük devretdikten sonra, kullanılabilir olduğunda sunucuyu şirket içi sitenize geri devreder.
 
 ## <a name="preparing-for-failover-and-failback"></a>Yük devretme ve yeniden çalışma için hazırlanma
 
-Site Recovery kullanılarak Azure'da çoğaltılmış fiziksel sunucularda, VMware Vm'lerini ' yalnızca başarısız olabilir. Yeniden çalışma için bir VMware altyapınız olmalıdır.
+Site Recovery kullanılarak Azure 'a çoğaltılan fiziksel sunucular yalnızca VMware VM 'Leri olarak yeniden çalışabilir. Yeniden yük devredebilmek için bir VMware altyapısına ihtiyacınız vardır.
 
 Yük devretme ve yeniden çalışma dört aşamalıdır:
 
-1. **Azure'a yük devretme**: Makineleri şirket içi siteden Azure'a yük devretme.
-2. **Azure Vm'lerini yeniden koruma**: Böylece geri şirket içi VMware Vm'lerine çoğaltılmaya başlatmaları Azure Vm'lerini yeniden koruyun.
-3. **Şirket içine yük devretme**: Azure'dan yeniden çalışma için bir yük devretme çalıştırın.
-4. **Yeniden koruma şirket içi Vm'leri**: Veri çalıştıktan sonra böylece bunlar Azure'a çoğaltmaya başlamak başlamaları için şirket içi VMware Vm'lerini yeniden koruyun.
+1. **Azure’a yük devretme**: Makineleri şirket içi siteden Azure’a devredin.
+2. **Azure VM 'Lerini yeniden koruma**: Azure VM 'leri yeniden koruyun, böylece şirket Içi VMware VM 'lerine tekrar çoğaltmaya başlar.
+3. **Şirket içine yük devretme**: Azure’dan yeniden çalıştırmak için bir yük devretme işlemi çalıştırın.
+4. Şirket **Içi VM 'Leri yeniden koruma**: veriler yeniden başlatıldıktan sonra, geri aldığınız şirket Içi VMware VM 'lerini yeniden koruyarak Azure 'a çoğaltmaya başlarlar.
 
-## <a name="verify-server-properties"></a>Sunucu özelliklerini doğrulayın
+## <a name="verify-server-properties"></a>Sunucu özelliklerini doğrulama
 
-Sunucu özelliklerini doğrulayın ve ile uyumlu olduğundan emin olun [Azure gereksinimleri](vmware-physical-azure-support-matrix.md#replicated-machines) Azure Vm'leri için.
+Sunucu özelliklerini doğrulayın ve Azure VM 'Leri için [Azure gereksinimleriyle](vmware-physical-azure-support-matrix.md#replicated-machines) uyumlu olduğundan emin olun.
 
-1. İçinde **korunan öğeler**, tıklayın **çoğaltılan öğeler**, makineyi seçin.
+1. **Korunan öğeler**' de **çoğaltılan öğeler**' e tıklayın ve makineyi seçin.
 
-2. İçinde **çoğaltılan öğe** bölmesinde makine bilgileri, sistem durumu özetini yoktur ve son kullanılabilir kurtarma noktası. Daha fazla ayrıntı görüntülemek için **Özellikler**’e tıklayın.
-3. İçinde **işlem ve ağ**, değiştirebileceğiniz Azure ad, kaynak grubunu, hedef boyutunu, [kullanılabilirlik kümesi](../virtual-machines/windows/tutorial-availability-sets.md)ve yönetilen disk ayarlarını
+2. **Çoğaltılan öğe** bölmesinde makine bilgilerinin, sistem durumunun ve en son kullanılabilir kurtarma noktalarının bir özeti vardır. Daha fazla ayrıntı görüntülemek için **Özellikler**’e tıklayın.
+3. **İşlem ve ağ**bölümünde Azure adını, kaynak grubunu, hedef boyutunu, [kullanılabilirlik kümesini](../virtual-machines/windows/tutorial-availability-sets.md)ve yönetilen disk ayarlarını değiştirebilirsiniz
 4. Ağ ayalarını, yük devretmeden sonra Azure VM’nin yerleştirileceği ağ/alt ağ ve VM’ye atanacak IP adresi dahil olmak üzere görüntüleyebilir ve değiştirebilirsiniz.
-5. İçinde **diskleri**, makine işletim sistemi ve veri diskleri hakkında bilgi bulabilirsiniz.
+5. **Diskler**' de makine işletim sistemi ve veri diskleri hakkında bilgi görebilirsiniz.
 
 ## <a name="run-a-failover-to-azure"></a>Azure'a yük devretme işlemini çalıştırma
 
 1. **Ayarlar** > **Çoğaltılan öğeler** bölümünde makine > **Yük devretme**’ye tıklayın.
-2. **Yük devretme**’de yük devretmenin yapılacağı bir **Kurtarma Noktası** seçin. Şu seçeneklerden birini kullanabilirsiniz:
-   - **En son**: Bu seçenek öncelikle Site Recovery'ye gönderilen tüm verileri işler. Yük devretmeden sonra oluşturulan Azure VM, yük devretme tetiklendiğinde Site Recovery’ye çoğaltılan tüm verilere sahip olduğundan en düşük RPO (Kurtarma Noktası Hedefi) sağlanır.
-   - **En son işlenen**: Bu seçeneği, makine Site Recovery tarafından işlenen en son kurtarma noktasına devreder. İşlenmemiş verileri işlemek için zaman harcanmadığından bu seçenekte düşük bir RTO (Kurtarma Süresi Hedefi) sağlanır.
-   - **Uygulamayla tutarlı olan sonuncu**: Bu seçenek makinenin Site Recovery tarafından işlenen en son uygulamayla tutarlı kurtarma noktasına devreder.
+2. **Yük devretme**’de yük devretmenin yapılacağı bir **Kurtarma Noktası** seçin. Aşağıdaki seçeneklerden birini kullanabilirsiniz:
+   - **Varsayılan**: Bu seçenekte öncelikle Site Recovery’ye gönderilen tüm veriler işlenir. Yük devretmeden sonra oluşturulan Azure VM, yük devretme tetiklendiğinde Site Recovery’ye çoğaltılan tüm verilere sahip olduğundan en düşük RPO (Kurtarma Noktası Hedefi) sağlanır.
+   - **En son işlenen**: Bu seçenek makineyi Site Recovery tarafından işlenen en son kurtarma noktasına devreder. İşlenmemiş verileri işlemek için zaman harcanmadığından bu seçenekte düşük bir RTO (Kurtarma Süresi Hedefi) sağlanır.
+   - **En son uygulamayla tutarlı**: Bu seçenek, makineyi Site Recovery tarafından işlenen en son uygulamayla tutarlı kurtarma noktasına devreder.
    - **Özel**: Bir kurtarma noktası belirtin.
 
-3. Seçin **yük devretmeye başlamadan önce makineyi Kapat** Site Recovery, yük devretmeyi tetiklemeden önce kaynak makineyi kapatmanız denemek istiyorsanız. Kapatma işlemi başarısız olsa bile yük devretme devam eder. Yük devretme işlemini **İşler** sayfasında takip edebilirsiniz.
+3. Yük devretmeyi tetiklemeden önce Site Recovery kaynak makineyi kapatmayı denemek istiyorsanız, **yük devretmeye başlamadan önce makineyi Kapat ' ı** seçin. Kapatma işlemi başarısız olsa bile yük devretme devam eder. Yük devretme işlemini **İşler** sayfasında takip edebilirsiniz.
 4. Azure VM’ye bağlanmaya hazırsanız, yük devretmeden sonra VM’yi doğrulamak için bağlanın.
 5. Doğruladıktan sonra yük devretmeyi **Yürütün**. Bu, tüm kullanılabilir kurtarma noktalarını siler.
 
 > [!WARNING]
-> Devam eden bir yük devretme işlemini iptal etmeyin. Yük devretme başlamadan önce makine çoğaltmayı durdurur. Yük devretmeyi iptal ederseniz, onu durdurur, ancak makine yeniden çoğaltılmaz.
-> Fiziksel sunucular için ek yük devretme işlemi, tamamlanması yaklaşık sekiz ila on dakika sürebilir.
+> Devam eden bir yük devretme işlemini iptal etmeyin. Yük devretme başlamadan önce makine çoğaltması durduruluyor. Yük devretmeyi iptal ederseniz, yanıt vermez, ancak makine tekrar çoğaltılmaz.
+> Fiziksel sunucular için ek yük devretme işleminin tamamlanması yaklaşık sekiz ila on dakika sürebilir.
 
 ## <a name="prepare-to-connect-to-azure-vms-after-failover"></a>Yük devretmeden sonra Azure VM'lerine bağlanmak için hazırlık yapma
 
@@ -65,20 +66,20 @@ Yük devretme sonrasında karşılaştığınız bağlantı sorunlarını giderm
 
 ## <a name="create-a-process-server-in-azure"></a>Azure’da bir işlem sunucusu oluşturma
 
-İşlem sunucusu verileri Azure VM’den alır ve şirket içi siteye gönderir. Korumalı makine ve işlem sunucusu arasında düşük gecikmeli bir ağ gereklidir.
+İşlem sunucusu verileri Azure VM’den alır ve şirket içi siteye gönderir. İşlem sunucusu ve korunan makine arasında düşük gecikmeli bir ağ gerekir.
 
 - Bir Azure ExpressRoute bağlantınız varsa test etmek için yapılandırma sunucusuna otomatik olarak kurulan şirket içi işlem sunucusunu kullanabilirsiniz.
 - Bir VPN bağlantınız varsa veya üretim ortamında yeniden çalışma gerçekleştiriyorsanız, yeniden çalışma için Azure tabanlı işlem sunucusu olarak bir Azure VM’si ayarlamanız gerekir.
-- Bölümündeki yönergeleri [bu makalede](vmware-azure-set-up-process-server-azure.md) azure'da bir işlem sunucusu ayarlamak için.
+- Azure 'da bir işlem sunucusu kurmak için [Bu makaledeki](vmware-azure-set-up-process-server-azure.md) yönergeleri izleyin.
 
 ## <a name="configure-the-master-target-server"></a>Ana hedef sunucuyu yapılandırma
 
-Varsayılan olarak, ana hedef sunucusu yeniden çalışma verilerini alır. Bu, şirket içi yapılandırma sunucusu üzerinde çalışır.
+Varsayılan olarak, ana hedef sunucusu yeniden çalışma verileri alır. Şirket içi yapılandırma sunucusunda çalışır.
 
-- İçin yeniden çalışma özelliğini VMware VM VMware vCenter Server tarafından yönetilen bir ESXi ana bilgisayarı üzerindeyse, ana hedef sunucusu çoğaltılan verileri VM disklerine yazmak VM veri deposuna (VMDK) erişiminiz olması gerekir. VM veri deposunun, ana hedefin ana bilgisayarına okuma/yazma erişimi ile bağlı olduğundan emin olun.
-- Site Recovery hizmeti bir vCenter sunucusu tarafından yönetilmeyen bir ESXi konağı yeniden koruma sırasında yeni bir sanal makine oluşturursa. VM VM ana hedefi oluşturduğunuz ESX konağında oluşturulur. VM’nin sabit diski, üzerinde ana hedef sunucunun çalıştığı ana bilgisayar tarafından erişilebilen bir veri deposunda olmalıdır.
-- Yeniden çalışma özelliğini fiziksel makineler için makineyi yeniden korumadan önce üzerinde ana hedef sunucusu, çalıştığı ana bilgisayarı bulma tamamlamanız gerekir.
-- Şirket içi VM yeniden çalışma için zaten varsa, başka bir seçenek, bir yeniden çalışma gerçekleştirmeden önce VM'yi silmektir oluşturmaktır. Yeniden çalışma, ana hedef ESX sunucusu ile aynı ana bilgisayarda yeni bir VM oluşturur. Farklı bir konuma yeniden çalışma gerçekleştirdiğinizde, veriler şirket içi ana hedef sunucu tarafından kullanılan aynı veri deposuna ve aynı ESX ana bilgisayarına kurtarılır.
+- Geri aldığınız VMware VM, VMware vCenter Server tarafından yönetilen bir ESXi ana bilgisayarı üzerinde ise, ana hedef sunucunun, sanal makinenin veri deposuna (VMDK) erişimi olması gerekir ve bu da çoğaltılan verileri VM disklerine yazar. VM veri deposunun, ana hedefin ana bilgisayarına okuma/yazma erişimi ile bağlı olduğundan emin olun.
+- Bir vCenter sunucusu tarafından yönetilmeyen ESXi ana bilgisayarı Site Recovery hizmeti yeniden koruma sırasında yeni bir sanal makine oluşturur. VM, ana hedef VM 'yi oluşturduğunuz ESX konağında oluşturulur. VM’nin sabit diski, üzerinde ana hedef sunucunun çalıştığı ana bilgisayar tarafından erişilebilen bir veri deposunda olmalıdır.
+- Yeniden çalışan fiziksel makineler için, makineyi yeniden koruyabilmeniz için ana hedef sunucunun çalıştığı ana bilgisayarın bulunmasını tamamlamalısınız.
+- Diğer bir seçenek olan şirket içi VM yeniden çalışma için zaten mevcutsa, yeniden çalışma yapmadan önce onu silmektir. Yeniden çalışma, ana hedef ESX sunucusu ile aynı ana bilgisayarda yeni bir VM oluşturur. Farklı bir konuma yeniden çalışma gerçekleştirdiğinizde, veriler şirket içi ana hedef sunucu tarafından kullanılan aynı veri deposuna ve aynı ESX ana bilgisayarına kurtarılır.
 - Ana hedef sunucuda Storage vMotion kullanamazsınız. Kullandığınız takdirde diskler işlem için kullanılabilir olmadığından yeniden çalışma gerçekleştirilemez. Ana hedef sunucuları vMotion listenizin dışında tutun.
 
 ## <a name="reprotect-azure-vms"></a>Azure VM’lerini yeniden koruma

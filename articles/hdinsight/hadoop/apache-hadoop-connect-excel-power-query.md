@@ -1,6 +1,6 @@
 ---
-title: Excel'i Power Query - Azure HDInsight ile Apache hadoop'a bağlama
-description: İş Zekası bileşenleri avantajlarından yararlanın ve HDInsight üzerinde Hadoop depolanan verilere erişmek için Excel için Power Query kullanın hakkında bilgi edinin.
+title: Apache Hadoop Power Query-Azure HDInsight ile Excel 'e bağlanma
+description: İş zekası bileşenlerinden nasıl yararlanacağınızı öğrenin ve HDInsight 'ta Hadoop 'ta depolanan verilere erişmek için Excel için Power Query kullanın.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
@@ -8,75 +8,70 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 05/16/2018
-ms.openlocfilehash: e35e86bee4dfee21d0a98867c3e0d1d7850ed0ec
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e64905cdfeac8d507df1c3dd92c245cb910a79b2
+ms.sourcegitcommit: 0fab4c4f2940e4c7b2ac5a93fcc52d2d5f7ff367
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65762003"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71033566"
 ---
-# <a name="connect-excel-to-apache-hadoop-by-using-power-query"></a>Excel'i Power Query kullanarak Apache Hadoop'a bağlama
-Temel özelliklerinden biri, Microsoft büyük veri çözümü, Azure HDInsight, Apache Hadoop kümelerini Microsoft iş zekası (BI) bileşenleriyle tümleştirmedir. Excel için Excel eklentisi, Microsoft Power Query kullanarak Hadoop kümenizle ilişkili verileri içeren Azure depolama hesabına bağlanma olanağı buna birincil bir örnektir. Bu makalede, ayarlama ve HDInsight ile yönetilen Hadoop kümesi ile ilişkili verileri sorgulamak için Power Query kullanma konusunda yol göstermektedir.
+# <a name="connect-excel-to-apache-hadoop-by-using-power-query"></a>Power Query kullanarak Excel 'i Apache Hadoop bağlama
+Microsoft büyük veri çözümünün bir anahtar özelliği, Microsoft Business Intelligence (BI) bileşenlerinin Azure HDInsight 'ta Apache Hadoop kümeleriyle Tümleştirmesidir. Birincil örnek, Excel için Microsoft Power Query eklentisini kullanarak, Excel 'i Hadoop kümeniz ile ilişkili verileri içeren Azure depolama hesabına bağlama olanağıdır. Bu makalede, HDInsight ile yönetilen bir Hadoop kümesiyle ilişkili verileri sorgulamak için Power Query ayarlama ve kullanma adımları gösterilmektedir.
 
 ### <a name="prerequisites"></a>Önkoşullar
 Bu makaleye başlamadan önce aşağıdaki öğelere sahip olmanız gerekir:
 
-* **Bir HDInsight kümesi**. Bir yapılandırmak için bkz. [Azure HDInsight ile çalışmaya başlama] [hdınsight-get-started].
-* **Bir iş istasyonu** Windows 7, Windows Server 2008 R2 veya sonraki bir işletim sistemini çalıştıran.
-* **Office 2016, Office 2013 Professional Plus, Office 365 ProPlus, Excel 2013 tek başına veya Office 2010 Professional Plus**.
+* **An HDInsight küme**. Bir tane yapılandırmak için bkz. [Azure HDInsight kullanmaya başlama](./apache-hadoop-linux-tutorial-get-started.md).
+* Windows 7, Windows Server 2008 R2 veya sonraki bir işletim sistemini çalıştıran **bir iş istasyonu** .
+* **Office 2016, office 2013 Professional Plus, office 365 ProPlus, Excel 2013 tek başına veya office 2010 Professional Plus**.
 
-## <a name="install-power-query"></a>Power Query yükleme
-Power Query, çıkış veya, bir HDInsight kümesi üzerinde çalışan bir Hadoop işi tarafından üretilmiş olan verileri içeri aktarabilirsiniz.
+## <a name="install-power-query"></a>Power Query yüklensin
+Power Query, çıktı olan veya HDInsight kümesi üzerinde çalışan bir Hadoop işi tarafından oluşturulmuş olan verileri içeri aktarabilir.
 
-Excel 2016'daki Al ve Dönüştür bölümünde veri Şerit halinde Power Query tümleştirilmiştir. Excel için Microsoft Power Query eski Excel sürümleri için indirme [Microsoft Download Center] [ powerquery-download] ve yükleyin.
+Excel 2016 ' de, Power Query & dönüşümü Al bölümünde veri şeridinde tümleştirilmiştir. Eski Excel sürümleri için [Microsoft Indirme merkezi](https://go.microsoft.com/fwlink/?LinkID=286689) ' nden Excel için Microsoft Power Query indirin ve yükleyin.
 
-## <a name="import-hdinsight-data-into-excel"></a>HDInsight verileri Excel'e aktarmak
-Excel için Power Query eklentisini Excel'e burada BI araçları gibi incelemek için PowerPivot ve Power Map kullanılabilir analiz edin ve verileri sunmak HDInsight kümenizden veri almak kolaylaştırır.
+## <a name="import-hdinsight-data-into-excel"></a>HDInsight verilerini Excel 'e aktar
+Excel için Power Query eklentisi, HDInsight kümenizdeki verileri Excel 'e aktarmayı kolaylaştırır; burada PowerPivot ve Power Map gibi BI araçları verileri incelemek, analiz etmek ve sunmak için kullanılabilir.
 
-**Bir HDInsight kümesinden verileri içeri aktarmak için**
+**HDInsight kümesinden verileri içeri aktarmak için**
 
-1. Excel'i açın.
-2. Yeni bir boş çalışma kitabı oluşturun.
-3. Excel sürüme göre aşağıdaki adımları gerçekleştirin:
+1. Excel 'i açın.
+2. Yeni boş bir çalışma kitabı oluşturun.
+3. Excel sürümüne göre aşağıdaki adımları gerçekleştirin:
 
    - Excel 2016
 
-     - Tıklayın **veri** menüsünde tıklayın **Veri Al** gelen **Al ve Dönüştür** Şerit'a tıklayın **Azure**ve ardından**Azure HDInsight(HDFS) gelen**.
+     - **Veri** menüsünü tıklatın, veri al **& Dönüştür veri** şeridinde **verileri al** ' a tıklayın, **Azure 'dan**ve ardından **Azure HDInsight (bir)** ' e tıklayın.
 
-       ![HDI.PowerQuery.SelectHdiSource](./media/apache-hadoop-connect-excel-power-query/hdi.powerquery.selecthdisource.excel2016.png)
+       ![HDI. PowerQuery. SelectHdiSource. 2016](./media/apache-hadoop-connect-excel-power-query/powerquery-selecthdisource-excel2016.png)
 
    - Excel 2013/2010
 
-     - Tıklayın **Power Query** menüsünde tıklatın **Azure**ve ardından **gelen Microsoft Azure HDInsight**.
+     - **Power Query** menüsüne tıklayın, **Azure 'dan**ve ardından **Microsoft Azure HDInsight**' e tıklayın.
    
-       ![HDI.PowerQuery.SelectHdiSource][image-hdi-powerquery-hdi-source]
+       ![HDI. PowerQuery. SelectHdiSource](./media/apache-hadoop-connect-excel-power-query/powerquery-selecthdisource.png)
        
-       **Not:** Görmüyorsanız **Power Query** menü, Git **dosya** > **seçenekleri** > **eklentileri**, seçin **COM eklentileri** açılır listeden **Yönet** sayfanın alt kısmındaki kutusu. Seçin **Git...**  düğmesine tıklayın ve Excel eklentisi için Power Query onay kutusunun seçili olduğunu doğrulayın.
+       **Not:** **Power Query** menüsünü görmüyorsanız, **Dosya** > **seçenekleri** > **eklentileri**' ne gidin ve sayfanın alt kısmındaki aşağı açılan **Yönet** kutusundan **com eklentileri** ' ni seçin. **Git...** düğmesini seçin ve Excel eklentisi için Power Query kutusunun işaretli olduğunu doğrulayın.
        
-       **Not:** Power Query de sayesinde tıklayarak verileri HDFS içeri **diğer kaynaklardan**.
-4. İçin **hesap adı**kümenizle ilişkili Azure Blob Depolama hesabı adını girin ve ardından **Tamam**. Bu hesap, varsayılan depolama hesabını ya da bağlantılı bir depolama hesabı olabilir.  Biçim *https://&lt;StorageAccountName >.blob.core.windows.net/* .
-5. İçin **hesap anahtarı**, Blob Depolama hesabı anahtarını girin ve ardından **Kaydet**. (Bu deposuna erişim hesabı bilgilerini yalnızca uygulamayı ilk zaman girmeniz gerekir.)
-6. İçinde **Gezgin** sorgu Düzenleyicisi'nin, sol bölmede, Blob Depolama kapsayıcısı adı'na çift tıklayın. Varsayılan olarak, kapsayıcı adını küme adıyla aynı addır.
-7. Bulun **HiveSampleData.txt** içinde **adı** sütun (klasör yolu **../hive/warehouse/hivesampletable/ambar**) ve ardından **ikili** sol tarafındaki HiveSampleData.txt. HiveSampleData.txt kümeyle birlikte gelir. İsteğe bağlı olarak, kendi dosyanızı kullanabilirsiniz.
-   
-    ![HDI.PowerQuery.ImportData][image-hdi-powerquery-importdata]
-8. İsterseniz, sütun adlarını yeniden adlandırabilirsiniz. Hazır olduğunuzda tıklayın **Kapat ve Yükle**.  Çalışma kitabınızda veri yüklendi:
-   
-    ![HDI. PowerQuery.ImportedTable][image-hdi-powerquery-imported-table]
+       **Not:** Power Query Ayrıca, **diğer kaynaklardan**tıklatarak, bu sunucudan verileri içeri aktarmanıza izin verir.
+4. **Hesap adı**için, kümenizle Ilişkili Azure Blob depolama hesabının adını girin ve ardından **Tamam**' a tıklayın. Bu hesap, varsayılan depolama hesabı veya bağlı bir depolama hesabı olabilir.  Biçim *https://&lt;storageAccountName >. blob. Core. Windows. net/* olur.
+5. **Hesap anahtarı**Için, BLOB depolama hesabının anahtarını girin ve **Kaydet**' e tıklayın. (Bu mağazaya yalnızca ilk kez eriştiğinizde hesap bilgilerini girmeniz gerekir.)
+6. Sorgu Düzenleyicisi 'nin solundaki **Gezgin** bölmesinde, BLOB depolama kapsayıcısı adına çift tıklayın. Varsayılan olarak, kapsayıcı adı küme adı ile aynı addır.
+7. Bulun **HiveSampleData.txt** içinde **adı** sütun (klasör yolu **../hive/warehouse/hivesampletable/ambar**) ve ardından **ikili** sol tarafındaki HiveSampleData.txt. HiveSampleData. txt tüm kümeyle birlikte gelir. İsteğe bağlı olarak, kendi dosyanızı kullanabilirsiniz.
+
+    ![HDI Excel Power Query verileri içeri aktarma](./media/apache-hadoop-connect-excel-power-query/powerquery-importdata.png)
+
+8. İsterseniz, sütun adlarını yeniden adlandırabilirsiniz. Hazırsanız **& yükle**' ye tıklayın.  Veriler çalışma kitabınıza yüklendi:
+
+    ![HDI Excel Power Query içeri aktarılan tablosu](./media/apache-hadoop-connect-excel-power-query/powerquery-importedtable.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, Power Query veri HDInsight Excel'e almak için nasıl kullanılacağını öğrendiniz. Benzer şekilde, Azure SQL veritabanı'na HDInsight veri alabilirsiniz. HDInsight ile verileri yüklemek mümkündür. Daha fazla bilgi için aşağıdaki makalelere bakın:
+Bu makalede, HDInsight 'tan Excel 'e veri almak için Power Query kullanmayı öğrendiniz. Benzer şekilde, HDInsight 'tan Azure SQL veritabanı 'na veri alabilirsiniz. HDInsight 'a veri yüklemek de mümkündür. Daha fazla bilgi için aşağıdaki makalelere bakın:
 
-* [Azure HDInsight, Microsoft Power BI ile Apache Hive verileri görselleştirme](apache-hadoop-connect-hive-power-bi.md).
-* [Power BI'da Azure HDInsight ile etkileşimli sorgu Hive verilerini görselleştirme](../interactive-query/apache-hadoop-connect-hive-power-bi-directquery.md).
-* [Azure HDInsight Apache Hive sorguları çalıştırmak için Apache Zeppelin kullanma](../interactive-query/hdinsight-connect-hive-zeppelin.md).
-* [Excel'i Microsoft Hive ODBC sürücüsü ile HDInsight bağlama](apache-hadoop-connect-excel-hive-odbc-driver.md).
-* [Azure HDInsight için bağlanın ve Visual Studio için Data Lake Araçları'nı kullanarak Apache Hive sorguları çalıştırma](apache-hadoop-visual-studio-tools-get-started.md).
-* [Visual Studio Code için Azure HDInsight aracını](../hdinsight-for-vscode.md).
-* [HDInsight için verileri karşıya](./../hdinsight-upload-data.md).
-
-[image-hdi-powerquery-hdi-source]: ./media/apache-hadoop-connect-excel-power-query/hdi.powerquery.selecthdisource.png
-[image-hdi-powerquery-importdata]: ./media/apache-hadoop-connect-excel-power-query/hdi.powerquery.importdata.png
-[image-hdi-powerquery-imported-table]: ./media/apache-hadoop-connect-excel-power-query/hdi.powerquery.importedtable.PNG
-
-[powerquery-download]: https://go.microsoft.com/fwlink/?LinkID=286689
+* [Apache Hive verilerini Azure HDInsight 'Ta Microsoft Power BI Ile görselleştirin](apache-hadoop-connect-hive-power-bi.md).
+* [Azure HDInsight 'ta Power BI etkileşimli sorgu Hive verilerini görselleştirin](../interactive-query/apache-hadoop-connect-hive-power-bi-directquery.md).
+* [Azure HDInsight 'ta Apache Hive sorguları çalıştırmak Için Apache Zeppelin kullanın](../interactive-query/hdinsight-connect-hive-zeppelin.md).
+* [Excel 'i Microsoft Hive ODBC sürücüsü Ile HDInsight 'A bağlayın](apache-hadoop-connect-excel-hive-odbc-driver.md).
+* [Azure HDInsight 'A bağlanın ve Visual Studio Data Lake araçları 'nı kullanarak Apache Hive sorguları çalıştırın](apache-hadoop-visual-studio-tools-get-started.md).
+* [Visual Studio Code Için Azure HDInsight aracını kullanın](../hdinsight-for-vscode.md).
+* [HDInsight 'a veri yükleme](./../hdinsight-upload-data.md).

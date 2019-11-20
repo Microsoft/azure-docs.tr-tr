@@ -1,19 +1,18 @@
 ---
-title: Öğretici - Power BI Desktop ile Azure Analysis Services'e bağlanma | Microsoft Docs
+title: Öğretici-Power BI Desktop ile Azure Analysis Services bağlama | Microsoft Docs
 author: minewiskan
-manager: kfile
-description: Azure Analysis Services Power BI Desktop ile bağlanma hakkında bilgi edinin.
+description: Azure portal Analysis Services sunucu adı almayı ve sonra Power BI Desktop kullanarak sunucuya bağlanmayı öğrenin.
 ms.service: azure-analysis-services
 ms.topic: tutorial
-ms.date: 04/25/2019
+ms.date: 10/30/2019
 ms.author: owend
 ms.reviewer: owend
-ms.openlocfilehash: ea2a6612a568d4080a8df2c569f79aaaa283e9c4
-ms.sourcegitcommit: 44a85a2ed288f484cc3cdf71d9b51bc0be64cc33
+ms.openlocfilehash: 4d8c753f06e58fd1cce1c55eca213637cb70e436
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "64702835"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73572328"
 ---
 # <a name="tutorial-connect-with-power-bi-desktop"></a>Öğretici: Power BI Desktop ile bağlanma
 
@@ -24,14 +23,14 @@ Bu öğreticide, Power BI Desktop'u kullanarak sunucunuzdaki örnek adventurewor
 > * Power BI Desktop kullanarak bağlanma
 > * Temel bir rapor oluşturma
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 - Sunucunuza [örnek adventureworks model veritabanını ekleyin](../analysis-services-create-sample-model.md).
 - Örnek adventureworks model veritabanı üzerinde [*okuma*](../analysis-services-server-admins.md) izinlerine sahip olun.
 - [En yeni Power BI Desktop'u yükleyin](https://powerbi.microsoft.com/desktop).
 
 ## <a name="sign-in-to-the-azure-portal"></a>Azure portalında oturum açın
-Bu öğreticide, içinde yalnızca sunucu adını almanız için portalda oturum. Normalde, kullanıcılar sunucu adını sunucu yöneticisinden alabilir.
+Bu öğreticide, yalnızca sunucu adını almak için portalda oturum alacaksınız. Normalde, kullanıcılar sunucu adını sunucu yöneticisinden alabilir.
 
 [Portalda](https://portal.azure.com/) oturum açın.
 
@@ -71,4 +70,4 @@ Power BI Desktop'tan sunucunuza bağlanmak için önce sunucu adını bilmelisin
 Artık ihtiyacınız yoksa raporunuzu kaydetmeyin veya kaydettiyseniz dosyayı silin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu öğreticide, Power BI Desktop kullanarak sunucudaki bir veri modeline bağlanmayı ve temel bir rapor oluşturmayı öğrenin. Bir veri modeli oluşturma konusunda bilgi sahibi değilseniz bkz [Adventure Works Internet satışları tablosal veri modelleme öğreticisinin](https://docs.microsoft.com/sql/analysis-services/tutorial-tabular-1400/as-adventure-works-tutorial) içinde SQL Server Analysis Services belgeleri.
+Bu öğreticide, Power BI Desktop kullanarak sunucudaki bir veri modeline bağlanmayı ve temel bir rapor oluşturmayı öğrenin. Veri modeli oluşturma konusunda bilgi sahibi değilseniz, SQL Server Analysis Services belgelerine [Adventure Works Internet satışları tablo verileri modelleme öğreticisine](https://docs.microsoft.com/analysis-services/tutorial-tabular-1400/as-adventure-works-tutorial) bakın.

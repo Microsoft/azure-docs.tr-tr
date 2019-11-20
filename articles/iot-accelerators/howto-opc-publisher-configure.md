@@ -1,41 +1,41 @@
 ---
-title: OPC Publisher - Azure yapılandırma | Microsoft Docs
-description: OPC Publisher yapılandırma
+title: OPC yayımcısını Yapılandırma-Azure | Microsoft Docs
+description: Bu makalede, OPC yayımcısının, OPC UA düğüm veri değişikliklerini, yayımlanacak OPC UA olaylarını ve ayrıca telemetri biçimini belirtmek üzere nasıl yapılandırılacağı açıklanır.
 author: dominicbetts
 ms.author: dobett
 ms.date: 06/10/2019
 ms.topic: overview
-ms.service: iot-industrialiot
+ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: d262c83b0ae886806b8c4bce2375ffc10ad22c75
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 0db00f670dfcc526d3fc34d41ce731df4c6573ec
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67450761"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824158"
 ---
 # <a name="configure-opc-publisher"></a>OPC Yayımcısını Yapılandırma
 
-OPC Publisher'ı belirtmek için yapılandırabilirsiniz:
+OPC yayımcısını şunları belirtecek şekilde yapılandırabilirsiniz:
 
-- Yayımlanacak OPC UA düğüm veri değişiklikleri.
+- OPC UA düğüm verileri yayımlanacak şekilde değişir.
 - Yayımlanacak OPC UA olayları.
 - Telemetri biçimi.
 
-OPC yapılandırma dosyalarının veya yöntem çağrıları kullanarak yayımcı yapılandırabilirsiniz.
+OPC yayımcısını yapılandırma dosyalarını kullanarak veya yöntem çağrılarını kullanarak yapılandırabilirsiniz.
 
 ## <a name="use-configuration-files"></a>Yapılandırma dosyalarını kullanma
 
-Bu bölümde, OPC UA düğüm yayımlama yapılandırma dosyalarıyla yapılandırma seçenekleri açıklanmaktadır.
+Bu bölümde, Configuration Files ile OPC UA düğümü yayımlamayı yapılandırma seçenekleri açıklanmaktadır.
 
-### <a name="use-a-configuration-file-to-configure-publishing-data-changes"></a>Veri değişikliklerini yayımlama yapılandırmak için bir yapılandırma dosyası kullanın
+### <a name="use-a-configuration-file-to-configure-publishing-data-changes"></a>Yayımlama verileri değişikliklerini yapılandırmak için bir yapılandırma dosyası kullanma
 
-Bir yapılandırma dosyası yayımlanacak OPC UA düğümlerini yapılandırmak için en kolay yoludur. Yapılandırma dosyasının biçimi belgelenen [publishednodes.json](https://github.com/Azure/iot-edge-opc-publisher/blob/master/opcpublisher/publishednodes.json) depodaki.
+OPC UA düğümlerini yayımlanacak şekilde yapılandırmanın en kolay yolu bir yapılandırma dosyasıdır. Yapılandırma dosyası biçimi depodaki [publishednodes. JSON](https://github.com/Azure/iot-edge-opc-publisher/blob/master/opcpublisher/publishednodes.json) dosyasında belgelenmiştir.
 
-Yapılandırma dosyası sözdizimi, zaman içinde değişti. OPC Publisher hala eski biçimleri okumaktadır, ancak yapılandırması devam olduğunda bunları en son biçime dönüştürür.
+Yapılandırma dosyası söz dizimi zaman içinde değiştirildi. OPC yayımcısı hala eski biçimleri okur, ancak yapılandırmayı devam ettirir en son biçime dönüştürür.
 
-Aşağıdaki örnek, yapılandırma dosyasının biçimi gösterir:
+Aşağıdaki örnekte, yapılandırma dosyasının biçimi gösterilmektedir:
 
 ```json
 [
@@ -54,11 +54,11 @@ Aşağıdaki örnek, yapılandırma dosyasının biçimi gösterir:
 ]
 ```
 
-### <a name="use-a-configuration-file-to-configure-publishing-events"></a>Yayımlama olayları yapılandırmak için bir yapılandırma dosyası kullanın
+### <a name="use-a-configuration-file-to-configure-publishing-events"></a>Yayımlama olaylarını yapılandırmak için bir yapılandırma dosyası kullanma
 
-OPC UA olayları yayımlamak için veri değişikliklerini olduğu gibi aynı yapılandırma dosyası kullanın.
+OPC UA olaylarını yayımlamak için, veri değişiklikleri için aynı yapılandırma dosyasını kullanırsınız.
 
-Aşağıdaki örnek, yayımlama tarafından oluşturulan olayları için yapılandırma işlemi gösterilmektedir [SimpleEvents sunucu](https://github.com/OPCFoundation/UA-.NETStandard/tree/master/SampleApplications/Workshop/SimpleEvents/Server). SimpleEvents sunucunun bulunabilir [OPC Fundation depo](https://github.com/OPCFoundation/UA-.NETStandard) olan:
+Aşağıdaki örnek, [Simpleevents sunucusu](https://github.com/OPCFoundation/UA-.NETStandard/tree/master/SampleApplications/Workshop/SimpleEvents/Server)tarafından oluşturulan olaylar için yayımlamanın nasıl yapılandırılacağını gösterir. SimpleEvents sunucusu [OPC Foundation deposunda](https://github.com/OPCFoundation/UA-.NETStandard) bulunabilir:
 
 ```json
 [
@@ -110,43 +110,43 @@ Aşağıdaki örnek, yayımlama tarafından oluşturulan olayları için yapıla
 ]
 ```
 
-## <a name="use-method-calls"></a>Yöntem çağrıları kullanın
+## <a name="use-method-calls"></a>Yöntem çağrılarını kullanma
 
-Bu bölümde, OPC yayımcı yapılandırmak için kullanabileceğiniz yöntem çağrıları açıklar.
+Bu bölümde OPC yayımcısını yapılandırmak için kullanabileceğiniz Yöntem çağrıları açıklanmaktadır.
 
-### <a name="configure-using-opc-ua-method-calls"></a>OPC UA yöntem çağrıları kullanarak yapılandırma
+### <a name="configure-using-opc-ua-method-calls"></a>OPC UA Yöntem çağrılarını kullanarak yapılandırma
 
-OPC Publisher 62222 bağlantı noktasında erişilebilen bir OPC UA sunucusu içerir. Ana bilgisayar ise **yayımcı**, uç nokta ise URI: `opc.tcp://publisher:62222/UA/Publisher`.
+OPC yayımcısı, 62222 numaralı bağlantı noktasından erişilebilen bir OPC UA sunucusu içerir. Ana bilgisayar adı **Yayımcı**ise, uç nokta URI 'si: `opc.tcp://publisher:62222/UA/Publisher`.
 
 Bu uç nokta aşağıdaki dört yöntemi kullanıma sunar:
 
 - PublishNode
 - UnpublishNode
 - GetPublishedNodes
-- IOT HubDirectMethod
+- IoT HubDirectMethod
 
-### <a name="configure-using-iot-hub-direct-method-calls"></a>IOT hub'ı doğrudan yöntem çağrıları kullanarak yapılandırma
+### <a name="configure-using-iot-hub-direct-method-calls"></a>IoT Hub doğrudan Yöntem çağrılarını kullanarak yapılandırma
 
-OPC Publisher, şu IOT hub'ı doğrudan yöntem çağrıları uygular:
+OPC yayımcısı aşağıdaki IoT Hub doğrudan Yöntem çağrılarını uygular:
 
 - PublishNodes
 - UnpublishNodes
 - UnpublishAllNodes
 - GetConfiguredEndpoints
 - GetConfiguredNodesOnEndpoint
-- GetDiagnosticInfo
+- Getdiagnosticınfo
 - GetDiagnosticLog
 - GetDiagnosticStartupLog
-- ExitApplication
+- Exkurpplication
 - GetInfo
 
-JSON yükü yöntemi istek ve yanıtların biçimi tanımlanmış [opcpublisher/HubMethodModel.cs](https://github.com/Azure/iot-edge-opc-publisher/blob/master/opcpublisher/HubMethodModel.cs).
+Yöntem isteği ve yanıtlarının JSON yükünün biçimi [opcpublisher/HubMethodModel. cs](https://github.com/Azure/iot-edge-opc-publisher/blob/master/opcpublisher/HubMethodModel.cs)içinde tanımlanır.
 
-Modülde bilinmeyen bir yöntem çağırırsanız, yöntem uygulanmadı belirten bir dize ile yanıt verir. Modül ping işlemi yapmak için bir yol bilinmeyen bir yöntem çağırabilirsiniz.
+Modülde bilinmeyen bir yöntemi çağırırsanız, yöntemin uygulanmadığını belirten bir dize ile yanıt verir. Modülün ping işlemi için bir yöntem olarak bilinmeyen bir yöntemi çağırabilirsiniz.
 
-### <a name="configure-username-and-password-for-authentication"></a>Kullanıcı adı ve parola kimlik doğrulaması için yapılandırma
+### <a name="configure-username-and-password-for-authentication"></a>Kimlik doğrulaması için Kullanıcı adını ve parolayı yapılandırın
 
-Kimlik doğrulama modu, bir IOT hub'ı aracılığıyla ayarlanabilir doğrudan yöntemini çağırır. Yükü özelliği içermelidir **OpcAuthenticationMode** ve kullanıcı adı ve parola:
+Kimlik doğrulama modu IoT Hub bir doğrudan yöntem çağrısı aracılığıyla ayarlanabilir. Yükün **Opcauthenticationmode** ve username ve Password özelliği bulunmalıdır:
 
 ```csharp
 {
@@ -158,7 +158,7 @@ Kimlik doğrulama modu, bir IOT hub'ı aracılığıyla ayarlanabilir doğrudan 
 }
 ```
 
-Parola IOT hub'ı iş yükü istemci tarafından şifrelenmiş ve yayımcının yapılandırmasında saklanır. Kimlik doğrulama geri anonim olarak değiştirmek için aşağıdaki yük ile yöntemi kullanın:
+Parola, IoT Hub Iş yükü Istemcisiyle şifrelenir ve yayımcının yapılandırmasında depolanır. Kimlik doğrulamasını anonim olarak değiştirmek için aşağıdaki yük ile yöntemi kullanın:
 
 ```csharp
 {
@@ -168,25 +168,25 @@ Parola IOT hub'ı iş yükü istemci tarafından şifrelenmiş ve yayımcının 
 }
 ```
 
-Varsa **OpcAuthenticationMode** yükünde özelliği ayarlanmamış, kimlik doğrulama ayarlarını yapılandırmada değişmeden kalır.
+Yük içinde **Opcauthenticationmode** özelliği ayarlanmamışsa, kimlik doğrulama ayarları yapılandırmada değişmeden kalır.
 
 ## <a name="configure-telemetry-publishing"></a>Telemetri yayımlamayı yapılandırma
 
-OPC Publisher yayımlanan bir düğümünde bir bildirimi bir değeri aldığında, IOT Hub'ına gönderilen JSON biçimlendirilmiş bir ileti oluşturur.
+OPC yayımcısı yayımlanmış bir düğümde bir değer değişikliği bildirimi aldığında, IoT Hub gönderilen JSON biçimli bir ileti oluşturur.
 
-Bir yapılandırma dosyası kullanarak bu JSON biçimli iletisinin içeriği yapılandırabilirsiniz. Herhangi bir yapılandırma dosyası belirtilmediyse `--tc` seçeneği, varsayılan yapılandırma ile uyumlu olan kullanıldığında [bağlı Fabrika Çözüm Hızlandırıcısı](https://github.com/Azure/azure-iot-connected-factory).
+Bu JSON biçimli ileti içeriğini bir yapılandırma dosyası kullanarak yapılandırabilirsiniz. `--tc` seçeneği ile hiçbir yapılandırma dosyası belirtilmemişse, [bağlı Factory Çözüm Hızlandırıcısı](https://github.com/Azure/azure-iot-connected-factory)ile uyumlu olan bir varsayılan yapılandırma kullanılır.
 
-OPC Publisher toplu iletileri için yapılandırıldıysa, bunlar geçerli bir JSON dizisi olarak gönderildiniz.
+OPC yayımcısı Batch iletileri olarak yapılandırıldıysa, geçerli bir JSON dizisi olarak gönderilir.
 
-Telemetri, aşağıdaki kaynaklardan elde edilir:
+Telemetri aşağıdaki kaynaklardan türetilir:
 
-- Düğüm için OPC yayımcısını düğüm yapılandırması
-- **MonitoredItem** OPC yayımcı için bir bildirim alındı OPC UA yığını nesnesi.
-- Veri değeri değişiklik ayrıntıları sağlayan bu bildirim için geçirilen bağımsız değişken.
+- Düğüm için OPC yayımcı düğümü yapılandırması
+- OPC yayımcısı tarafından bir bildirim alınan OPC UA yığınının **MonitoredItem** nesnesi.
+- Veri değeri değişikliğine ilişkin ayrıntılar sağlayan bu bildirime geçilen bağımsız değişken.
 
-JSON biçimli iletiye put telemetri önemli özellikleri, bu nesnelerin bir seçimdir. Daha fazla özellik gerekiyorsa, OPC yayımcı kod tabanı değiştirmeniz gerekir.
+JSON biçimli iletiye yerleştirilen telemetri, bu nesnelerin önemli özelliklerinin seçiminden oluşur. Daha fazla özelliğe ihtiyaç duyuyorsanız OPC yayımcısı kod tabanını değiştirmeniz gerekir.
 
-Yapılandırma dosyasının söz dizimi aşağıdaki gibidir:
+Yapılandırma dosyasının sözdizimi şöyledir:
 
 ```json
 // The configuration settings file consists of two objects:
@@ -380,4 +380,4 @@ Yapılandırma dosyasının söz dizimi aşağıdaki gibidir:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-OPC Publisher yapılandırma öğrendiniz. artık, önerilen sonraki adıma öğrenmektir nasıl [çalıştırma OPC yayımcı](howto-opc-publisher-run.md).
+OPC yayımcısını nasıl yapılandıracağınızı öğrendiniz, önerilen sonraki adım [OPC yayımcısını nasıl çalıştıracağınızı](howto-opc-publisher-run.md)öğrenmektedir.

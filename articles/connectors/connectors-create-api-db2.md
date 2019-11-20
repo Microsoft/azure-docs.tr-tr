@@ -1,374 +1,369 @@
 ---
-title: IBM DB2 - Azure Logic Apps'i bağlama
-description: IBM DB2 REST API'leri ve Azure Logic Apps ile kaynakları yönetme
+title: IBM DB2-Azure Logic Apps bağlanma
+description: IBM DB2 REST API 'Leri ve Azure Logic Apps kaynakları yönetme
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
 author: ecfan
 ms.author: estfan
 ms.reviewer: plarsen, LADocs
-ms.topic: article
+ms.topic: conceptual
 ms.date: 08/23/2018
 tags: connectors
-ms.openlocfilehash: 7785d1788e8d5e9b432a8189345f293ebf05ef7c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a7079115b381d094cec77f96015342b5bc568c27
+ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60314227"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70051027"
 ---
 # <a name="manage-ibm-db2-resources-with-azure-logic-apps"></a>Azure Logic Apps ile IBM DB2 kaynaklarını yönetme
 
-Azure Logic Apps ve IBM DB2 Bağlayıcısı ile otomatik görevler ve iş akışları, DB2 veritabanında depolanan kaynaklara göre oluşturabilirsiniz. İş akışlarınızı veritabanı kaynaklarına bağlanmak, okuma ve, veritabanı tablolarını listelemek, satır ekleme, satır, satır silme ve daha fazlasını değiştirin. Çıkış diğer eylemler için kullanılabilir hale getirmek ve veritabanınızdan yanıtları alma logic apps eylemleri dahil edebilirsiniz.
+Azure Logic Apps ve IBM DB2 Bağlayıcısı sayesinde, DB2 veritabanınızda depolanan kaynaklara göre otomatik görevler ve iş akışları oluşturabilirsiniz. İş akışlarınız veritabanınızdaki kaynaklara bağlanabilir, veritabanı tablolarınızı okuyabilir ve listeleyebilir, satır ekleyebilir, satırları değiştirebilir, satırları silebilir ve daha fazlasını yapabilir. Verilerinize yanıt veren ve çıktıyı diğer eylemler için kullanılabilir hale getirmek için mantıksal uygulamalarınıza eylemler ekleyebilirsiniz.
 
-Bu makalede, çeşitli veritabanı işlemlerini gerçekleştiren bir mantıksal uygulamayı nasıl oluşturacağınızı gösterir. Logic apps kullanmaya yeni başladıysanız gözden [Azure Logic Apps nedir?](../logic-apps/logic-apps-overview.md).
+Bu makalede çeşitli veritabanı işlemlerini gerçekleştiren bir mantıksal uygulama oluşturma işlemi gösterilmektedir. Logic Apps 'e yeni başladıysanız [ne Azure Logic Apps](../logic-apps/logic-apps-overview.md) olduğunu gözden geçirin.
 
-## <a name="supported-platforms-and-versions"></a>Desteklenen platformlara ve sürümlere
+## <a name="supported-platforms-and-versions"></a>Desteklenen platformlar ve sürümler
 
-DB2 Bağlayıcısı DB2 uzak sunucularla iletişim kuran bir TCP/IP ağı üzerinden bir Microsoft client içerir. Bu bağlayıcı, IBM Bluemix dashDB veya Windows çalıştıran Azure sanallaştırma için IBM DB2 gibi bulut veritabanlarında erişmek için kullanabilirsiniz. Aynı zamanda şirket içi DB2 veritabanları sonra erişebilirsiniz [yükleyin ve şirket içi veri ağ geçidi ayarlama](../logic-apps/logic-apps-gateway-connection.md).
+DB2 Bağlayıcısı, bir TCP/IP ağı üzerinde uzak DB2 sunucularıyla iletişim kuran bir Microsoft istemcisi içerir. Bu bağlayıcıyı, Azure Sanallaştırması 'nda çalışan Windows için IBM DB2 gibi bulut veritabanlarına erişmek için kullanabilirsiniz. Şirket içi [veri ağ geçidini yükleyip ayarladıktan](../logic-apps/logic-apps-gateway-connection.md)sonra ŞIRKET içi DB2 veritabanlarına da erişebilirsiniz.
 
-IBM DB2 Bağlayıcısı'nı bu IBM DB2 platformlara ve sürümlere dağıtılmış ilişkisel veritabanı mimarisi (DRDA) SQL Erişim Yöneticisi (SQLAM) sürüm 10 ve 11 desteği IBM DB2 uyumlu ürünler, IBM Bluemix dashDB gibi birlikte destekler:
+IBM DB2 Bağlayıcısı, bu IBM DB2 platformlarını ve sürümlerini, dağıtılmış Ilişkisel veritabanı mimarisi (DRDA) SQL Access Manager (SQLAM) sürüm 10 ve 11 ' i destekleyen IBM DB2 uyumlu ürünlerle birlikte destekler:
 
 | Platform | Version | 
 |----------|---------|
-| IBM DB2 z/OS için | 11.1, 10.1 |
-| IBM DB2 için ediyorum | 7.3, 7.2, 7.1 |
-| IBM DB2 LUW için | 11, 10.5 |
+| Z/ç için IBM DB2 | 11,1, 10,1 |
+| I için IBM DB2 | 7,3, 7,2, 7,1 |
+| LUW için IBM DB2 | 11, 10,5 |
 |||
 
-## <a name="supported-database-operations"></a>Desteklenen bir veritabanı işlemleri
+## <a name="supported-database-operations"></a>Desteklenen veritabanı işlemleri
 
-IBM DB2 Bağlayıcısı bağlayıcı ilgili eylemler için harita veritabanı işlemlerini destekler:
+IBM DB2 Bağlayıcısı, bağlayıcıdaki ilgili eylemlerle eşleşen bu veritabanı işlemlerini destekler:
 
 | Veritabanı işlemi | Bağlayıcı eylemi |
 |--------------------|------------------|
-| Liste veritabanı tabloları | Tabloları Al |
-| SELECT kullanarak bir satırı okuyun | Satırı Al |
-| Tüm Satırları Seç kullanarak okuma | Satırları Al |
-| INSERT kullanarak bir satır Ekle | Satır Ekle |
-| Güncelleştirme kullanarak bir satırı düzenleyin | Satırı güncelleştir |
-| DELETE kullanma bir satırı Kaldır | Satırı Sil |
+| Veritabanı tablolarını listeleme | Tabloları al |
+| Seç kullanarak bir satırı okuma | Satırı al |
+| Seç kullanarak tüm satırları oku | Satırları al |
+| INSERT kullanarak bir satır ekleme | Satır ekle |
+| GÜNCELLEŞTIRME kullanarak bir satırı düzenleme | Satırı güncelleştir |
+| SIL kullanarak bir satırı kaldırma | Satırı sil |
 |||
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure aboneliği. Azure aboneliğiniz yoksa <a href="https://azure.microsoft.com/free/" target="_blank">ücretsiz bir Azure hesabı için kaydolun</a>.
+* Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-* Bir IBM DB2 veritabanı, ya da bulut tabanlı veya şirket içi
+* Bulut tabanlı ya da şirket içi bir IBM DB2 veritabanı
 
-* Hakkında temel bilgilere [mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+* [Mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md) hakkında temel bilgi
 
-* DB2 veritabanınıza erişim sağlamak istediğiniz mantıksal uygulaması. Bu bağlayıcı, bu nedenle, mantıksal uygulamanızı başlatmak için yalnızca eylem seçebilir ayrı bir tetikleyici örneğin sağlar, **yinelenme** tetikleyici.
-Bu örneklerde makale kullanım **yinelenme** tetikleyici.
+* DB2 veritabanınıza erişmek istediğiniz mantıksal uygulama. Bu bağlayıcı yalnızca eylemler sağlar, bu nedenle mantıksal uygulamanızı başlatmak için **yineleme** tetikleyicisi gibi ayrı bir tetikleyici seçin.
+Bu makaledeki örneklerde **yineleme** tetikleyicisi kullanılır.
 
 <a name="add-db2-action"></a>
 
-## <a name="add-db2-action---get-tables"></a>DB2 eylem - Get tabloları Ekle
+## <a name="add-db2-action---get-tables"></a>DB2 eylemi ekleme-tabloları al
 
-1. İçinde [Azure portalında](https://portal.azure.com), mantıksal Uygulama Tasarımcısı'nda mantıksal uygulamanızı açın, açık değilse.
+1. [Azure Portal](https://portal.azure.com), zaten açık değilse mantıksal uygulama Tasarımcısı 'nda mantıksal uygulamanızı açın.
 
-1. Tetikleyici altında seçin **yeni adım**.
+1. Tetikleyici altında **yeni adım**' ı seçin.
 
-1. Arama kutusuna filtreniz olarak "db2" girin. Bu örnekte, eylemler listesi altında şu eylemi seçin: **Tablolar'ı (Önizleme)**
+1. Arama kutusuna filtreniz olarak "DB2" yazın. Bu örnekte, eylemler listesi altında şu eylemi seçin: **Tabloları al (Önizleme)**
 
-   ![Eylem seçin](./media/connectors-create-api-db2/select-db2-action.png)
+   ![Eylem Seç](./media/connectors-create-api-db2/select-db2-action.png)
 
-   Şimdi, DB2 veritabanı bağlantı ayrıntıları sağlayın istenir.
+   Artık DB2 veritabanınız için bağlantı ayrıntıları sağlamanız istenir.
 
-1. İçin bağlantılar oluşturmaya yönelik adımları [bulut veritabanlarını](#cloud-connection) veya [şirket içi veritabanlarını](#on-premises-connection).
+1. [Bulut veritabanları](#cloud-connection) veya [Şirket içi veritabanları](#on-premises-connection)için bağlantı oluşturma adımlarını izleyin.
 
 <a name="cloud-connection"></a>
 
-## <a name="connect-to-cloud-db2"></a>DB2 buluta bağlayın
+## <a name="connect-to-cloud-db2"></a>Cloud DB2 'ye bağlanma
 
-Bağlantınızı kurmak için istendiğinde bu bağlantı ayrıntılarını sağlayın, **Oluştur**ve ardından mantıksal uygulamanızı kaydedin:
+Bağlantınızı ayarlamak için, istendiğinde bu bağlantı ayrıntılarını sağlayın, **Oluştur**' u seçin ve ardından mantıksal uygulamanızı kaydedin:
 
 | Özellik | Gerekli | Açıklama |
 |----------|----------|-------------|
-| **Şirket içi ağ geçidi üzerinden Bağlan** | Hayır | Yalnızca şirket içi bağlantıları için geçerlidir. |
-| **Bağlantı Adı** | Evet | Örneğin, "MyLogicApp-DB2-connection" bağlantınız için bir ad |
-| **Sunucu** | Evet | DB2 sunucunuz, örneğin, "myDB2server.cloudapp.net:50000" için adres veya diğer adı iki nokta üst üste bağlantı noktası numarası <p><p>**Not**: Bu değer bir TCP/IP adresi temsil eden bir dize ya da IPv4 veya IPv6 biçiminde ya da diğer adını ardından bir iki nokta üst üste ve bir TCP/IP bağlantı noktası numarası. |
-| **Veritabanı** | Evet | Veritabanı adı <p><p>**Not**: Bir DRDA ilişkisel veritabanı adı (RDBNAM) temsil eden bir dize değeridir: <p>-DB2 z/OS için burada veritabanı bir "Z/OS için IBM DB2" konumu olarak bilinen bir 16 bayt dizesini kabul eder. <br>-DB2 i burada veritabanı olarak bilinen bir 18 bayt dizesini kabul eder için bir "için IBM DB2 miyim" ilişkisel veritabanı. <br>-LUW DB2 8 baytlık dizisi kabul eder. |
-| **Kullanıcı Adı** | Evet | Veritabanı kullanıcı adı <p><p>**Not**: Bu değer, uzunluğu belirli bir veritabanını temel alan bir dizedir: <p><p>-Z/OS için DB2 8 baytlık dizisi kabul eder. <br>-DB2 için i bir 10 bayt dizesini kabul eder. <br>-Linux veya UNIX için DB2 8 baytlık dizisi kabul eder. <br>-Windows için DB2 30-bayt dizesini kabul eder. |
-| **Parola** | Evet | Veritabanı parolası |
+| **Şirket içi ağ geçidi üzerinden Bağlan** | Hayır | Yalnızca şirket içi bağlantılar için geçerlidir. |
+| **Bağlantı Adı** | Evet | Bağlantınızın adı, örneğin "MyLogicApp-DB2-Connection" |
+| **Sunucu** | Evet | DB2 sunucunuzun adresi veya diğer adı iki nokta üst üste bağlantı noktası numarası (örneğin, "myDB2server.cloudapp.net:50000") <p><p>**Not**: Bu değer, bir TCP/IP adresini veya diğer adı IPv4 veya IPv6 biçiminde, ardından iki nokta üst üste ve TCP/IP bağlantı noktası numarasına göre temsil eden bir dizedir. |
+| **Veritabanı** | Evet | Veritabanınızın adı <p><p>**Not**: Bu değer, bir DRDA Ilişkisel veritabanı adını (RDBNAM) temsil eden bir dizedir: <p>-DB2 for z/OS, veritabanının "z/ç için IBM DB2" konumu olarak bilinen bir 16 baytlık dizeyi kabul eder. <br>-DB2, veritabanının "ı için IBM DB2" ilişkisel veritabanı olarak bilinen bir 18 baytlık dizeyi kabul eder. <br>-LUW için-DB2 8 baytlık bir dizeyi kabul eder. |
+| **Kullanıcı Adı** | Evet | Veritabanı için Kullanıcı adınız <p><p>**Not**: Bu değer, belirli bir veritabanını temel alan bir dizedir: <p><p>-Z/ç için-DB2 8 baytlık bir dizeyi kabul eder. <br>-DB2, 10 baytlık bir dizeyi kabul eder. <br>-Linux veya UNIX için DB2, 8 baytlık bir dizeyi kabul eder. <br>-Windows için-DB2, 30 baytlık bir dizeyi kabul eder. |
+| **Parola** | Evet | Veritabanı için parolanız |
 ||||
 
 Örneğin:
 
-![Bulut tabanlı veritabanı bağlantı ayrıntıları](./media/connectors-create-api-db2/create-db2-cloud-connection.png)
+![Bulut tabanlı veritabanları için bağlantı ayrıntıları](./media/connectors-create-api-db2/create-db2-cloud-connection.png)
 
 <a name="on-premises-connection"></a>
 
-## <a name="connect-to-on-premises-db2"></a>Şirket içi DB2'ye bağlanın
+## <a name="connect-to-on-premises-db2"></a>Şirket içi DB2 'ye bağlanma
 
-Bağlantınızı oluşturmadan önce zaten yüklü, şirket içi veri ağ geçidi olması gerekir. Aksi takdirde, bağlantınızı ayarı tamamlayamıyor. Ağ geçidi yüklemeniz varsa, bu bağlantı ayrıntılarını sağlamaya devam edin ve ardından **Oluştur**.
+Bağlantınızı oluşturmadan önce şirket içi veri ağ geçidiniz zaten yüklü olmalıdır. Aksi takdirde, bağlantınızın kurulumunu tamamlayamıyoruz. Ağ Geçidi yüklemeniz varsa, bu bağlantı ayrıntılarını sağlamaya devam edin ve **Oluştur**' u seçin.
 
 | Özellik | Gerekli | Açıklama |
 |----------|----------|-------------|
-| **Şirket içi ağ geçidi üzerinden Bağlan** | Evet | Bir şirket içi bağlantı istediğinizde uygular ve şirket içi bağlantı özelliklerini gösterir. |
-| **Bağlantı Adı** | Evet | Örneğin, "MyLogicApp-DB2-connection" bağlantınız için bir ad | 
-| **Sunucu** | Evet | DB2 sunucunuz, örneğin, "myDB2server:50000" için adres veya diğer adı iki nokta üst üste bağlantı noktası numarası <p><p>**Not**: Bu değer bir TCP/IP adresi temsil eden bir dize ya da IPv4 veya IPv6 biçiminde ya da diğer adını ardından bir iki nokta üst üste ve bir TCP/IP bağlantı noktası numarası. |
-| **Veritabanı** | Evet | Veritabanı adı <p><p>**Not**: Bir DRDA ilişkisel veritabanı adı (RDBNAM) temsil eden bir dize değeridir: <p>-DB2 z/OS için burada veritabanı bir "Z/OS için IBM DB2" konumu olarak bilinen bir 16 bayt dizesini kabul eder. <br>-DB2 i burada veritabanı olarak bilinen bir 18 bayt dizesini kabul eder için bir "için IBM DB2 miyim" ilişkisel veritabanı. <br>-LUW DB2 8 baytlık dizisi kabul eder. |
-| **Kimlik Doğrulaması** | Evet | Bağlantınız için örneğin, "Temel" kimlik doğrulaması türü <p><p>**Not**: Bu değer, temel veya Windows (Kerberos) içeren listeden seçin. |
-| **Kullanıcı Adı** | Evet | Veritabanı kullanıcı adı <p><p>**Not**: Bu değer, uzunluğu belirli bir veritabanını temel alan bir dizedir: <p><p>-Z/OS için DB2 8 baytlık dizisi kabul eder. <br>-DB2 için i bir 10 bayt dizesini kabul eder. <br>-Linux veya UNIX için DB2 8 baytlık dizisi kabul eder. <br>-Windows için DB2 30-bayt dizesini kabul eder. |
-| **Parola** | Evet | Veritabanı parolası |
-| **Ağ geçidi** | Evet | Yüklü şirket içi veri ağ geçidi adı <p><p>**Not**: Listeden Azure aboneliğinizi ve kaynak grubu içindeki tüm yüklenen veri ağ geçitlerini içerir. Bu değeri seçin. |
+| **Şirket içi ağ geçidi üzerinden Bağlan** | Evet | Şirket içinde bağlantı istediğinizde geçerlidir ve şirket içi bağlantı özelliklerini gösterir. |
+| **Bağlantı Adı** | Evet | Bağlantınızın adı, örneğin "MyLogicApp-DB2-Connection" | 
+| **Sunucu** | Evet | DB2 sunucunuzun adresi veya diğer adı iki nokta üst üste bağlantı noktası numarası, örneğin, "myDB2server: 50000" <p><p>**Not**: Bu değer, bir TCP/IP adresini veya diğer adı IPv4 veya IPv6 biçiminde, ardından iki nokta üst üste ve TCP/IP bağlantı noktası numarasına göre temsil eden bir dizedir. |
+| **Veritabanı** | Evet | Veritabanınızın adı <p><p>**Not**: Bu değer, bir DRDA Ilişkisel veritabanı adını (RDBNAM) temsil eden bir dizedir: <p>-DB2 for z/OS, veritabanının "z/ç için IBM DB2" konumu olarak bilinen bir 16 baytlık dizeyi kabul eder. <br>-DB2, veritabanının "ı için IBM DB2" ilişkisel veritabanı olarak bilinen bir 18 baytlık dizeyi kabul eder. <br>-LUW için-DB2 8 baytlık bir dizeyi kabul eder. |
+| **Kimlik Doğrulaması** | Evet | Bağlantınızın kimlik doğrulama türü, örneğin, "temel" <p><p>**Not**: Bu değeri, temel veya Windows (Kerberos) içeren listeden seçin. |
+| **Kullanıcı Adı** | Evet | Veritabanı için Kullanıcı adınız <p><p>**Not**: Bu değer, belirli bir veritabanını temel alan bir dizedir: <p><p>-Z/ç için-DB2 8 baytlık bir dizeyi kabul eder. <br>-DB2, 10 baytlık bir dizeyi kabul eder. <br>-Linux veya UNIX için DB2, 8 baytlık bir dizeyi kabul eder. <br>-Windows için-DB2, 30 baytlık bir dizeyi kabul eder. |
+| **Parola** | Evet | Veritabanı için parolanız |
+| **Ağ geçidi** | Evet | Yüklü şirket içi veri ağ geçidinizin adı <p><p>**Not**: Azure aboneliğiniz ve kaynak grubunuz içindeki tüm yüklü veri ağ geçitlerini içeren listeden bu değeri seçin. |
 ||||
 
 Örneğin:
 
 ![Şirket içi veritabanları için bağlantı ayrıntıları](./media/connectors-create-api-db2/create-db2-on-premises-connection.png)
 
-### <a name="view-output-tables"></a>Görünüm çıkış tabloları
+### <a name="view-output-tables"></a>Çıkış tablolarını görüntüleme
 
-Mantıksal Uygulama Tasarımcısı araç çubuğunda el ile çalıştırmayı tercih **çalıştırma**. Mantıksal uygulamanızı çalışmayı tamamladıktan sonra çalışma çıktısını görüntüleyebilirsiniz.
+Mantıksal uygulamanızı el ile çalıştırmak için tasarımcı araç çubuğunda **Çalıştır**' ı seçin. Mantıksal uygulamanız çalışmayı bitirdikten sonra, çalıştırmadan çıktıyı görüntüleyebilirsiniz.
 
-1. Mantıksal uygulama menüsünde seçin **genel bakış**.
+1. Mantıksal uygulama menüsünde **genel bakış**' ı seçin.
 
-1. Altında **özeti**, **çalıştırma geçmişi** bölümünde, listedeki ilk öğe en son çalıştırmayı seçin.
+1. **Özet**altında, çalışma **geçmişi** bölümünde, listedeki ilk öğe olan en son çalıştırmayı seçin.
 
    ![Çalıştırma geçmişini görüntüleme](./media/connectors-create-api-db2/run-history.png)
 
-1. Altında **mantıksal uygulama çalıştırması**, durum girdileri, şimdi gözden geçirebilirsiniz ve çıktılar her mantıksal uygulamanızda adım.
-Genişletin **tabloları Al** eylem.
+1. **Mantıksal uygulama çalıştırması**altında artık mantıksal uygulamanızdaki her adımın durumunu, girişlerini ve çıkışlarını gözden geçirebilirsiniz.
+**Tabloları al** eylemini genişletin.
 
-   ![Eylem genişletin](./media/connectors-create-api-db2/expand-action-step.png)
+   ![Eylemi Genişlet](./media/connectors-create-api-db2/expand-action-step.png)
 
-1. Girişleri görüntülemek için seçin **ham girişleri görüntüleyin**.
+1. Girişleri görüntülemek için **Ham girdileri göster**' i seçin.
 
-1. Çıktıları görüntülemek için seçin **ham çıkışları görüntüleyin**.
+1. Çıkışları görüntülemek için **Ham çıkışları göster**' i seçin.
 
-   Çıktıları tabloların bir listesini içerir.
+   Çıkışlar, tabloların bir listesini içerir.
 
-   ![Görünüm çıkış tabloları](./media/connectors-create-api-db2/db2-connector-get-tables-outputs.png)
+   ![Çıkış tablolarını görüntüleme](./media/connectors-create-api-db2/db2-connector-get-tables-outputs.png)
 
-## <a name="get-row"></a>Satırı Al
+## <a name="get-row"></a>Satırı al
 
-Bir DB2 veritabanı tablosundaki tek bir kayıtta getirilecek kullanın **Get satır** mantıksal uygulamanızda eylem. Bu eylem bir DB2 çalıştırır `SELECT WHERE` deyimi, örneğin, `SELECT FROM AREA WHERE AREAID = '99999'`.
+Bir DB2 veritabanı tablosunda bir kayıt getirmek için mantıksal uygulamanızdaki **satırı al** eylemini kullanın. Bu eylem, örneğin, `SELECT WHERE` `SELECT FROM AREA WHERE AREAID = '99999'`bir DB2 ekstresi çalıştırır.
 
-1. Mantıksal uygulamanızda DB2 eylemleri önce hiç kullanmadıysanız adımları gözden [ekleme DB2 eylem - Get tabloları](#add-db2-action) bölümünde, ancak ekleme **Get satır** eylem bunun yerine ve devam etmek için buraya dönün.
+1. Mantıksal uygulamanızda daha önce DB2 eylemleri kullanmadıysanız, [DB2 eylem-tabloları al](#add-db2-action) bölümündeki adımları gözden geçirin, ancak bunun yerine **satırı al** eylemini ekleyin ve ardından devam etmek için buraya dönün.
 
-   Siz ekledikten sonra **Get satır** eylem, örneği mantıksal uygulamanızı nasıl göründüğü aşağıda gösterilmiştir:
+   **Satırı al** eylemini ekledikten sonra örnek mantıksal uygulamanız şöyle görünür:
 
-   ![Satır eylemini Al](./media/connectors-create-api-db2/db2-get-row-action.png)
+   ![Satır al eylemi](./media/connectors-create-api-db2/db2-get-row-action.png)
 
-1. Tüm gerekli özellikleri (*) için değerleri belirtin. Bir tablo seçin sonra eylemi bu tablodaki kayıtlara özel ilgili özellikleri gösterir.
+1. Gerekli tüm özellikler için değerleri belirtin (*). Bir tablo seçtikten sonra, eylem söz konusu tablodaki kayıtlara özgü ilgili özellikleri gösterir.
 
    | Özellik | Gerekli | Açıklama |
    |----------|----------|-------------|
-   | **Tablo adı** | Evet | Kayıt içeren tabloda, bu örnekte "alanı" gibi istediğiniz |
-   | **Alan kimliği** | Evet | Kayıt kimliği, bu örnekte "99999" gibi istediğiniz |
+   | **Tablo adı** | Evet | Bu örnekteki "alan" gibi istediğiniz kayda sahip tablo |
+   | **Alan KIMLIĞI** | Evet | Bu örnekte "99999" gibi istediğiniz kaydın KIMLIĞI |
    ||||
 
    ![Tablo seçin](./media/connectors-create-api-db2/db2-get-row-action-select-table.png)
 
-1. Tasarımcı araç çubuğunda, işiniz bittiğinde seçin **Kaydet**.
+1. İşiniz bittiğinde, Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
-### <a name="view-output-row"></a>Çıkış satır görünümü
+### <a name="view-output-row"></a>Çıkış satırını görüntüle
 
-Mantıksal Uygulama Tasarımcısı araç çubuğunda el ile çalıştırmayı tercih **çalıştırma**. Mantıksal uygulamanızı çalışmayı tamamladıktan sonra çalışma çıktısını görüntüleyebilirsiniz.
+Mantıksal uygulamanızı el ile çalıştırmak için tasarımcı araç çubuğunda **Çalıştır**' ı seçin. Mantıksal uygulamanız çalışmayı bitirdikten sonra, çalıştırmadan çıktıyı görüntüleyebilirsiniz.
 
-1. Mantıksal uygulama menüsünde seçin **genel bakış**.
+1. Mantıksal uygulama menüsünde **genel bakış**' ı seçin.
 
-1. Altında **özeti**, **çalıştırma geçmişi** bölümünde, listedeki ilk öğe en son çalıştırmayı seçin.
+1. **Özet**altında, çalışma **geçmişi** bölümünde, listedeki ilk öğe olan en son çalıştırmayı seçin.
 
-1. Altında **mantıksal uygulama çalıştırması**, durum girdileri, şimdi gözden geçirebilirsiniz ve çıktılar her mantıksal uygulamanızda adım.
-Genişletin **Get satır** eylem.
+1. **Mantıksal uygulama çalıştırması**altında artık mantıksal uygulamanızdaki her adımın durumunu, girişlerini ve çıkışlarını gözden geçirebilirsiniz.
+**Satırı al** eylemini genişletin.
 
-1. Girişleri görüntülemek için seçin **ham girişleri görüntüleyin**.
+1. Girişleri görüntülemek için **Ham girdileri göster**' i seçin.
 
-1. Çıktıları görüntülemek için seçin **ham çıkışları görüntüleyin**.
+1. Çıkışları görüntülemek için **Ham çıkışları göster**' i seçin.
 
-   Çıktıları, belirtilen satır içerir.
+   Çıktılar, belirtilen satırı içerir.
 
-   ![Çıkış satır görünümü](./media/connectors-create-api-db2/db2-connector-get-row-outputs.png)
+   ![Çıkış satırını görüntüle](./media/connectors-create-api-db2/db2-connector-get-row-outputs.png)
 
-## <a name="get-rows"></a>Satırları Al
+## <a name="get-rows"></a>Satırları al
 
-Bir DB2 veritabanı tablosundaki tüm kayıtlar getirilecek kullanın **satırları Al** mantıksal uygulamanızda eylem. Bu eylem bir DB2 çalıştırır `SELECT` deyimi, örneğin, `SELECT * FROM AREA`.
+Bir DB2 veritabanı tablosundaki tüm kayıtları getirmek için mantıksal uygulamanızdaki **satırları al** eylemini kullanın. Bu eylem, örneğin, `SELECT` `SELECT * FROM AREA`bir DB2 ekstresi çalıştırır.
 
-1. Mantıksal uygulamanızda DB2 eylemleri önce hiç kullanmadıysanız adımları gözden [ekleme DB2 eylem - Get tabloları](#add-db2-action) bölümünde, ancak ekleme **satırları Al** eylem bunun yerine ve devam etmek için buraya dönün.
+1. Mantıksal uygulamanızda daha önce DB2 eylemleri kullanmadıysanız, [DB2 eylem-tabloları al](#add-db2-action) bölümündeki adımları gözden geçirin, ancak bunun yerine **satırları al** eylemini ekleyin ve ardından devam etmek için buraya dönün.
 
-   Siz ekledikten sonra **satırları Al** eylem, örneği mantıksal uygulamanızı nasıl göründüğü aşağıda gösterilmiştir:
+   **Satırları al** eylemini ekledikten sonra örnek mantıksal uygulamanız şöyle görünür:
 
-   ![Satırları eylemini Al](./media/connectors-create-api-db2/db2-get-rows-action.png)
+   ![Satırları al eylemi](./media/connectors-create-api-db2/db2-get-rows-action.png)
 
-1. Açık **tablo adı** listelemek ve sonra bu örnekte "Alanı" olan istediğiniz tabloyu seçin:
+1. **Tablo adı** listesini açın ve istediğiniz tabloyu seçin, bu örnekte "alan" olur:
 
    ![Tablo seçin](./media/connectors-create-api-db2/db2-get-rows-action-select-table.png)
 
-1. Bir filtre veya sorgu sonuçları için belirtmek için seçin **Gelişmiş Seçenekleri Göster**.
+1. Sonuçlar için bir filtre veya sorgu belirtmek üzere **Gelişmiş seçenekleri göster**' i seçin.
 
-1. Tasarımcı araç çubuğunda, işiniz bittiğinde seçin **Kaydet**.
+1. İşiniz bittiğinde, Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
-### <a name="view-output-rows"></a>Çıktı satırları görüntüleyin
+### <a name="view-output-rows"></a>Çıktı satırlarını görüntüle
 
-Mantıksal Uygulama Tasarımcısı araç çubuğunda el ile çalıştırmayı tercih **çalıştırma**. Mantıksal uygulamanızı çalışmayı tamamladıktan sonra çalışma çıktısını görüntüleyebilirsiniz.
+Mantıksal uygulamanızı el ile çalıştırmak için tasarımcı araç çubuğunda **Çalıştır**' ı seçin. Mantıksal uygulamanız çalışmayı bitirdikten sonra, çalıştırmadan çıktıyı görüntüleyebilirsiniz.
 
-1. Mantıksal uygulama menüsünde seçin **genel bakış**.
+1. Mantıksal uygulama menüsünde **genel bakış**' ı seçin.
 
-1. Altında **özeti**, **çalıştırma geçmişi** bölümünde, listedeki ilk öğe en son çalıştırmayı seçin.
+1. **Özet**altında, çalışma **geçmişi** bölümünde, listedeki ilk öğe olan en son çalıştırmayı seçin.
 
-1. Altında **mantıksal uygulama çalıştırması**, durum girdileri, şimdi gözden geçirebilirsiniz ve çıktılar her mantıksal uygulamanızda adım.
-Genişletin **satırları Al** eylem.
+1. **Mantıksal uygulama çalıştırması**altında artık mantıksal uygulamanızdaki her adımın durumunu, girişlerini ve çıkışlarını gözden geçirebilirsiniz.
+**Satırları al** eylemini genişletin.
 
-1. Girişleri görüntülemek için seçin **ham girişleri görüntüleyin**.
+1. Girişleri görüntülemek için **Ham girdileri göster**' i seçin.
 
-1. Çıktıları görüntülemek için seçin **ham çıkışları görüntüleyin**.
+1. Çıkışları görüntülemek için **Ham çıkışları göster**' i seçin.
 
-   Çıktı belirtilen tablonuzdaki tüm kayıtları içerir.
+   Çıkışlar, belirtilen tablodaki tüm kayıtları içerir.
 
-   ![Çıktı satırları görüntüleyin](./media/connectors-create-api-db2/db2-connector-get-rows-outputs.png)
+   ![Çıktı satırlarını görüntüle](./media/connectors-create-api-db2/db2-connector-get-rows-outputs.png)
 
-## <a name="insert-row"></a>Satır Ekle
+## <a name="insert-row"></a>Satır ekle
 
-DB2 veritabanından tek bir kayıt eklemek için **Satır Ekle** mantıksal uygulamanızda eylem. Bu eylem bir DB2 çalıştırır `INSERT` deyimi, örneğin, `INSERT INTO AREA (AREAID, AREADESC, REGIONID) VALUES ('99999', 'Area 99999', 102)`.
+Bir DB2 veritabanı tablosuna tek bir kayıt eklemek için mantıksal uygulamanızdaki **satır ekle** eylemini kullanın. Bu eylem, örneğin, `INSERT` `INSERT INTO AREA (AREAID, AREADESC, REGIONID) VALUES ('99999', 'Area 99999', 102)`bir DB2 ekstresi çalıştırır.
 
-1. Mantıksal uygulamanızda DB2 eylemleri önce hiç kullanmadıysanız adımları gözden [ekleme DB2 eylem - Get tabloları](#add-db2-action) bölümünde, ancak ekleme **Satır Ekle** eylem bunun yerine ve devam etmek için buraya dönün.
+1. Mantıksal uygulamanızda daha önce DB2 eylemleri kullanmadıysanız, [DB2 eylem-tabloları al](#add-db2-action) bölümündeki adımları gözden geçirin, ancak bunun yerine **satır ekle** eylemini ekleyin ve ardından devam etmek için buraya dönün.
 
-   Siz ekledikten sonra **Satır Ekle** eylem, örneği mantıksal uygulamanızı nasıl göründüğü aşağıda gösterilmiştir:
+   **Satır ekle** eylemini ekledikten sonra örnek mantıksal uygulamanız şöyle görünür:
 
-   ![Satır Eylemi ekleme](./media/connectors-create-api-db2/db2-insert-row-action.png)
+   ![Satır Ekle eylemi](./media/connectors-create-api-db2/db2-insert-row-action.png)
 
-1. Tüm gerekli özellikleri (*) için değerleri belirtin. Bir tablo seçin sonra eylemi bu tablodaki kayıtlara özel ilgili özellikleri gösterir.
+1. Gerekli tüm özellikler için değerleri belirtin (*). Bir tablo seçtikten sonra, eylem söz konusu tablodaki kayıtlara özgü ilgili özellikleri gösterir.
 
-   Bu örnekte, özellikleri şunlardır:
+   Bu örnek için şu özellikler verilmiştir:
 
    | Özellik | Gerekli | Açıklama |
    |----------|----------|-------------|
-   | **Tablo adı** | Evet | Tablo where "Alanı" gibi bir kayıt eklemek |
-   | **Alan kimliği** | Evet | Eklenecek "gibi 99999" alanı kimliği |
-   | **Alan açıklaması** | Evet | Ekleme, "Area gibi 99999" alanı için açıklama |
-   | **Bölge kodu** | Evet | Eklenecek "gibi 102" bölge kimliği |
+   | **Tablo adı** | Evet | Kaydın ekleneceği tablo, örneğin "alan" |
+   | **Alan KIMLIĞI** | Evet | Eklenecek alanın KIMLIĞI, örneğin "99999" |
+   | **Alan açıklaması** | Evet | Eklenecek alanın açıklaması, örneğin "alan 99999" |
+   | **Bölge KIMLIĞI** | Evet | Eklenecek bölgenin KIMLIĞI, örneğin "102" |
    |||| 
 
    Örneğin:
 
    ![Tablo seçin](./media/connectors-create-api-db2/db2-insert-row-action-select-table.png)
 
-1. Tasarımcı araç çubuğunda, işiniz bittiğinde seçin **Kaydet**.
+1. İşiniz bittiğinde, Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
-### <a name="view-insert-row-outputs"></a>Görünüm satır çıkışları Ekle
+### <a name="view-insert-row-outputs"></a>Satır ekleme çıkışlarını görüntüle
 
-Mantıksal Uygulama Tasarımcısı araç çubuğunda el ile çalıştırmayı tercih **çalıştırma**. Mantıksal uygulamanızı çalışmayı tamamladıktan sonra çalışma çıktısını görüntüleyebilirsiniz.
+Mantıksal uygulamanızı el ile çalıştırmak için tasarımcı araç çubuğunda **Çalıştır**' ı seçin. Mantıksal uygulamanız çalışmayı bitirdikten sonra, çalıştırmadan çıktıyı görüntüleyebilirsiniz.
 
-1. Mantıksal uygulama menüsünde seçin **genel bakış**.
+1. Mantıksal uygulama menüsünde **genel bakış**' ı seçin.
 
-1. Altında **özeti**, **çalıştırma geçmişi** bölümünde, listedeki ilk öğe en son çalıştırmayı seçin.
+1. **Özet**altında, çalışma **geçmişi** bölümünde, listedeki ilk öğe olan en son çalıştırmayı seçin.
 
-1. Altında **mantıksal uygulama çalıştırması**, durum girdileri, şimdi gözden geçirebilirsiniz ve çıktılar her mantıksal uygulamanızda adım.
-Genişletin **Satır Ekle** eylem.
+1. **Mantıksal uygulama çalıştırması**altında artık mantıksal uygulamanızdaki her adımın durumunu, girişlerini ve çıkışlarını gözden geçirebilirsiniz.
+**Satır ekle** eylemini genişletin.
 
-1. Girişleri görüntülemek için seçin **ham girişleri görüntüleyin**.
+1. Girişleri görüntülemek için **Ham girdileri göster**' i seçin.
 
-1. Çıktıları görüntülemek için seçin **ham çıkışları görüntüleyin**.
+1. Çıkışları görüntülemek için **Ham çıkışları göster**' i seçin.
 
-   Çıktıları, belirtilen tabloya eklenen kaydın içerir.
+   Çıkışlar, belirtilen tablonuza eklediğiniz kaydı içerir.
 
-   ![Eklenen satır görünümü çıkış](./media/connectors-create-api-db2/db2-connector-insert-row-outputs.png)
+   ![Ekli satır ile çıktıyı görüntüleme](./media/connectors-create-api-db2/db2-connector-insert-row-outputs.png)
 
 ## <a name="update-row"></a>Satırı güncelleştir
 
-Bir DB2 veritabanı tablosundaki tek bir kaydı güncelleştirmeye **satırı Güncelleştir** mantıksal uygulamanızda eylem. Bu eylem bir DB2 çalıştırır `UPDATE` deyimi, örneğin, `UPDATE AREA SET AREAID = '99999', AREADESC = 'Updated 99999', REGIONID = 102)`.
+Bir DB2 veritabanı tablosundaki tek bir kaydı güncelleştirmek için mantıksal uygulamanızdaki **satırı Güncelleştir** eylemini kullanın. Bu eylem, örneğin, `UPDATE` `UPDATE AREA SET AREAID = '99999', AREADESC = 'Updated 99999', REGIONID = 102)`bir DB2 ekstresi çalıştırır.
 
-1. Mantıksal uygulamanızda DB2 eylemleri önce hiç kullanmadıysanız adımları gözden [ekleme DB2 eylem - Get tabloları](#add-db2-action) bölümünde, ancak ekleme **satırı Güncelleştir** eylem bunun yerine ve devam etmek için buraya dönün.
+1. Mantıksal uygulamanızda daha önce DB2 eylemleri kullanmadıysanız, [DB2 eylem-tabloları al](#add-db2-action) bölümündeki adımları gözden geçirin, ancak bunun yerine **satırı Güncelleştir** eylemini ekleyin ve ardından devam etmek için buraya dönün.
 
-   Siz ekledikten sonra **satırı Güncelleştir** eylem, örneği mantıksal uygulamanızı nasıl göründüğü aşağıda gösterilmiştir:
+   **Satırı Güncelleştir** eylemini ekledikten sonra örnek mantıksal uygulamanız şöyle görünür:
 
-   ![Satır Eylemi güncelleştir](./media/connectors-create-api-db2/db2-update-row-action.png)
+   ![Satırı Güncelleştir eylemi](./media/connectors-create-api-db2/db2-update-row-action.png)
 
-1. Tüm gerekli özellikleri (*) için değerleri belirtin. Bir tablo seçin sonra eylemi bu tablodaki kayıtlara özel ilgili özellikleri gösterir.
+1. Gerekli tüm özellikler için değerleri belirtin (*). Bir tablo seçtikten sonra, eylem söz konusu tablodaki kayıtlara özgü ilgili özellikleri gösterir.
 
-   Bu örnekte, özellikleri şunlardır:
+   Bu örnek için şu özellikler verilmiştir:
 
    | Özellik | Gerekli | Açıklama |
    |----------|----------|-------------|
-   | **Tablo adı** | Evet | Tablo where "Alanı" gibi bir kaydı güncelleştirmek |
-   | **Satır kimliği** | Evet | Güncelleştirilecek "gibi 99999" kayıt kimliği |
-   | **Alan kimliği** | Evet | "99999" gibi yeni alan kimliği |
-   | **Alan açıklaması** | Evet | "Güncelleştirilmiş 99999" gibi yeni alan açıklaması |
-   | **Bölge kodu** | Evet | "102" gibi yeni bölge kimliği |
+   | **Tablo adı** | Evet | Kaydın güncelleştirilmesi gereken tablo, örneğin "alan" |
+   | **Satır KIMLIĞI** | Evet | Güncelleştirilecek kaydın KIMLIĞI, örneğin "99999" |
+   | **Alan KIMLIĞI** | Evet | Yeni alan KIMLIĞI ("99999" gibi) |
+   | **Alan açıklaması** | Evet | Yeni alan açıklaması ("güncelleştirilmiş 99999" gibi) |
+   | **Bölge KIMLIĞI** | Evet | Yeni bölge KIMLIĞI ("102" gibi) |
    ||||
 
    Örneğin:
 
    ![Tablo seçin](./media/connectors-create-api-db2/db2-update-row-action-select-table.png)
 
-1. Tasarımcı araç çubuğunda, işiniz bittiğinde seçin **Kaydet**.
+1. İşiniz bittiğinde, Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
-### <a name="view-update-row-outputs"></a>Görünümü güncelleştirme satırı çıkışı
+### <a name="view-update-row-outputs"></a>Güncelleştirme satırı çıkışlarını görüntüle
 
-Mantıksal Uygulama Tasarımcısı araç çubuğunda el ile çalıştırmayı tercih **çalıştırma**. Mantıksal uygulamanızı çalışmayı tamamladıktan sonra çalışma çıktısını görüntüleyebilirsiniz.
+Mantıksal uygulamanızı el ile çalıştırmak için tasarımcı araç çubuğunda **Çalıştır**' ı seçin. Mantıksal uygulamanız çalışmayı bitirdikten sonra, çalıştırmadan çıktıyı görüntüleyebilirsiniz.
 
-1. Mantıksal uygulama menüsünde seçin **genel bakış**.
+1. Mantıksal uygulama menüsünde **genel bakış**' ı seçin.
 
-1. Altında **özeti**, **çalıştırma geçmişi** bölümünde, listedeki ilk öğe en son çalıştırmayı seçin.
+1. **Özet**altında, çalışma **geçmişi** bölümünde, listedeki ilk öğe olan en son çalıştırmayı seçin.
 
-1. Altında **mantıksal uygulama çalıştırması**, durum girdileri, şimdi gözden geçirebilirsiniz ve çıktılar her mantıksal uygulamanızda adım.
-Genişletin **satırı Güncelleştir** eylem.
+1. **Mantıksal uygulama çalıştırması**altında artık mantıksal uygulamanızdaki her adımın durumunu, girişlerini ve çıkışlarını gözden geçirebilirsiniz.
+**Satırı Güncelleştir** eylemini genişletin.
 
-1. Girişleri görüntülemek için seçin **ham girişleri görüntüleyin**.
+1. Girişleri görüntülemek için **Ham girdileri göster**' i seçin.
 
-1. Çıktıları görüntülemek için seçin **ham çıkışları görüntüleyin**.
+1. Çıkışları görüntülemek için **Ham çıkışları göster**' i seçin.
 
-   Çıktı belirtilen tablonuzda güncelleştirilen kaydı içerir.
+   Çıkışlar, belirtilen tablonuzda güncelleştirdiğiniz kaydı içerir.
 
-   ![Güncelleştirilen satır görünümü çıkış](./media/connectors-create-api-db2/db2-connector-update-row-outputs.png)
+   ![Güncelleştirilmiş satır ile çıktıyı görüntüleme](./media/connectors-create-api-db2/db2-connector-update-row-outputs.png)
 
-## <a name="delete-row"></a>Satırı Sil
+## <a name="delete-row"></a>Satırı sil
 
-DB2 veritabanı tablosundan tek bir kaydı silmek için kullanın **Satır Sil** mantıksal uygulamanızda eylem. Bu eylem bir DB2 çalıştırır `DELETE` deyimi, örneğin, `DELETE FROM AREA WHERE AREAID = '99999'`.
+Bir DB2 veritabanı tablosundan tek bir kaydı silmek için, mantıksal uygulamanızdaki **satırı sil** eylemini kullanın. Bu eylem, örneğin, `DELETE` `DELETE FROM AREA WHERE AREAID = '99999'`bir DB2 ekstresi çalıştırır.
 
-1. Mantıksal uygulamanızda DB2 eylemleri önce hiç kullanmadıysanız adımları gözden [ekleme DB2 eylem - Get tabloları](#add-db2-action) bölümünde, ancak ekleme **Satır Sil** eylem bunun yerine ve devam etmek için buraya dönün.
+1. Mantıksal uygulamanızda daha önce DB2 eylemleri kullanmadıysanız, [DB2 eylem-tabloları al](#add-db2-action) bölümündeki adımları gözden geçirin, ancak bunun yerine **satırı sil** eylemini ekleyin ve ardından devam etmek için buraya dönün.
 
-   Siz ekledikten sonra **Satır Sil** eylem, örneği mantıksal uygulamanızı nasıl göründüğü aşağıda gösterilmiştir:
+   **Satırı sil** eylemini ekledikten sonra örnek mantıksal uygulamanız şöyle görünür:
 
-   ![Satır Eylemi Sil](./media/connectors-create-api-db2/db2-delete-row-action.png)
+   ![Satır silme eylemi](./media/connectors-create-api-db2/db2-delete-row-action.png)
 
-1. Tüm gerekli özellikleri (*) için değerleri belirtin. Bir tablo seçin sonra eylemi bu tablodaki kayıtlara özel ilgili özellikleri gösterir.
+1. Gerekli tüm özellikler için değerleri belirtin (*). Bir tablo seçtikten sonra, eylem söz konusu tablodaki kayıtlara özgü ilgili özellikleri gösterir.
 
-   Bu örnekte, özellikleri şunlardır:
+   Bu örnek için şu özellikler verilmiştir:
 
    | Özellik | Gerekli | Açıklama |
    |----------|----------|-------------|
-   | **Tablo adı** | Evet | Tablo where "Alanı" gibi bir kaydı silmek |
-   | **Satır kimliği** | Evet | Kayıt Kimliği "gibi 99999" silinemedi |
+   | **Tablo adı** | Evet | Kaydın silineceği tablo, örneğin "alan" |
+   | **Satır KIMLIĞI** | Evet | Silinecek kaydın KIMLIĞI, örneğin "99999" |
    ||||
 
    Örneğin:
 
    ![Tablo seçin](./media/connectors-create-api-db2/db2-delete-row-action-select-table.png)
 
-1. Tasarımcı araç çubuğunda, işiniz bittiğinde seçin **Kaydet**.
+1. İşiniz bittiğinde, Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
-### <a name="view-delete-row-outputs"></a>Satır çıkışları görünümünü Sil
+### <a name="view-delete-row-outputs"></a>Satır silme çıkışlarını görüntüle
 
-Mantıksal Uygulama Tasarımcısı araç çubuğunda el ile çalıştırmayı tercih **çalıştırma**. Mantıksal uygulamanızı çalışmayı tamamladıktan sonra çalışma çıktısını görüntüleyebilirsiniz.
+Mantıksal uygulamanızı el ile çalıştırmak için tasarımcı araç çubuğunda **Çalıştır**' ı seçin. Mantıksal uygulamanız çalışmayı bitirdikten sonra, çalıştırmadan çıktıyı görüntüleyebilirsiniz.
 
-1. Mantıksal uygulama menüsünde seçin **genel bakış**.
+1. Mantıksal uygulama menüsünde **genel bakış**' ı seçin.
 
-1. Altında **özeti**, **çalıştırma geçmişi** bölümünde, listedeki ilk öğe en son çalıştırmayı seçin.
+1. **Özet**altında, çalışma **geçmişi** bölümünde, listedeki ilk öğe olan en son çalıştırmayı seçin.
 
-1. Altında **mantıksal uygulama çalıştırması**, durum girdileri, şimdi gözden geçirebilirsiniz ve çıktılar her mantıksal uygulamanızda adım.
-Genişletin **Satır Sil** eylem.
+1. **Mantıksal uygulama çalıştırması**altında artık mantıksal uygulamanızdaki her adımın durumunu, girişlerini ve çıkışlarını gözden geçirebilirsiniz.
+**Satırı sil** eylemini genişletin.
 
-1. Girişleri görüntülemek için seçin **ham girişleri görüntüleyin**.
+1. Girişleri görüntülemek için **Ham girdileri göster**' i seçin.
 
-1. Çıktıları görüntülemek için seçin **ham çıkışları görüntüleyin**.
+1. Çıkışları görüntülemek için **Ham çıkışları göster**' i seçin.
 
-   Çıktı artık, belirtilen tablosundan silinen kaydı içerir.
+   Çıkışlar artık belirtilen tablodan sildiğiniz kaydı içermez.
 
-   ![Silinen satır olmadan görünümü çıkış](./media/connectors-create-api-db2/db2-connector-delete-row-outputs.png)
+   ![Çıktıyı silinen satır olmadan görüntüle](./media/connectors-create-api-db2/db2-connector-delete-row-outputs.png)
 
 ## <a name="connector-reference"></a>Bağlayıcı başvurusu
 
-Tetikleyiciler ve Eylemler sınırları, bağlayıcının Openapı'nin açıklandığı gibi teknik ayrıntılar için (önceki adıyla Swagger) dosyası, bkz: [bağlayıcının başvuru sayfası](/connectors/db2/).
-
-## <a name="get-support"></a>Destek alın
-
-* Sorularınız için [Azure Logic Apps forumunu](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps) ziyaret edin.
-* Özelliklerle ilgili fikirlerinizi göndermek veya gönderilmiş olanları oylamak için [Logic Apps kullanıcı geri bildirimi sitesini](https://aka.ms/logicapps-wish) ziyaret edin.
+Bağlayıcının Openapı (eski adıyla Swagger) dosyasında açıklandığı gibi Tetikleyiciler, Eylemler ve sınırlar gibi teknik ayrıntılar için [bağlayıcının başvuru sayfasına](/connectors/db2/)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Diğer hakkında bilgi edinin [Logic Apps bağlayıcıları](../connectors/apis-list.md)
+* Diğer [Logic Apps bağlayıcıları](../connectors/apis-list.md) hakkında bilgi edinin

@@ -1,26 +1,23 @@
 ---
 title: Azure Hızlı Başlangıç - Tarayıcıda HTML ve JavaScript kullanarak nesne depolamada blob oluşturma
 description: Bir HTML sayfasında JavaScript kullanarak blobları karşıya yüklemek, listelemek ve silmek için bir BlobService örneğini kullanma hakkında bilgi edinin.
-services: storage
 keywords: depolama, javascript, html
 author: mhopkins-msft
-ms.custom: mvc
-ms.service: storage
 ms.author: mhopkins
-ms.reviewer: seguler
-ms.date: 11/14/2018
-ms.topic: quickstart
+ms.date: 08/29/2019
+ms.service: storage
 ms.subservice: blobs
-ms.openlocfilehash: df697ab31875c8f806456c1e60820e7e8d752539
-ms.sourcegitcommit: f6ba5c5a4b1ec4e35c41a4e799fb669ad5099522
+ms.topic: quickstart
+ms.openlocfilehash: 3dbd78f9c233515c675cd511924b3d4600b72fbd
+ms.sourcegitcommit: ee61ec9b09c8c87e7dfc72ef47175d934e6019cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65149570"
+ms.lasthandoff: 08/30/2019
+ms.locfileid: "70173112"
 ---
 <!-- Customer intent: As a web application developer I want to interface with Azure Blob storage entirely on the client so that I can build a SPA application that is able to upload and delete files on blob storage. -->
 
-# <a name="quickstart-upload-list-and-delete-blobs-using-javascripthtml-in-the-browser"></a>Hızlı Başlangıç: Karşıya yükleme, listeleme ve tarayıcıda JavaScript/HTML kullanarak blobları silme
+# <a name="quickstart-upload-list-and-delete-blobs-using-javascripthtml-in-the-browser"></a>Hızlı Başlangıç: Tarayıcıda JavaScript/HTML kullanarak Blobları karşıya yükleme, listeleme ve silme
 
 Bu hızlı başlangıçta, tamamen tarayıcıdan çalıştırılan koddan blobların nasıl yönetileceği gösterilmektedir. Burada kullanılan yaklaşım, blob depolama hesabınıza korumalı erişimi güvence altına almak için gerekli güvenlik önlemlerinin nasıl kullanılacağını göstermektedir. Bu hızlı başlangıcı tamamlamak bir [Azure aboneliğinizin](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) olması gerekir.
 
@@ -53,7 +50,7 @@ Bundan sonra, Azure Cloud Shell hizmetini kullanarak bir güvenlik belirteci olu
 [!INCLUDE [Open the Azure cloud shell](../../../includes/cloud-shell-try-it.md)]
 
 ## <a name="create-a-shared-access-signature"></a>Paylaşılan Erişim İmzası oluşturma
-Paylaşılan erişim imzası (SAS), Blob depolama alanına gönderilen isteklerini yetkilendirmek için tarayıcıda çalışan kod tarafından kullanılır. İstemci, SAS kullanarak hesap erişim anahtarı veya bağlantı dizesi kullanmadan depolama kaynaklarına erişimi yetkilendirebilir. SAS hakkında daha fazla bilgi edinmek için bkz. [Paylaşılan erişim imzaları (SAS) kullanma](../common/storage-dotnet-shared-access-signature-part-1.md).
+Paylaşılan erişim imzası (SAS), Blob depolama alanına gönderilen isteklerini yetkilendirmek için tarayıcıda çalışan kod tarafından kullanılır. İstemci, SAS kullanarak hesap erişim anahtarı veya bağlantı dizesi kullanmadan depolama kaynaklarına erişimi yetkilendirebilir. SAS hakkında daha fazla bilgi edinmek için bkz. [Paylaşılan erişim imzaları (SAS) kullanma](../common/storage-sas-overview.md).
 
 Azure Cloud Shell aracılığıyla veya Azure Depolama Gezgini ile Azure CLI kullanarak bir SAS oluşturabilirsiniz. Aşağıdaki tabloda, CLI ile bir SAS oluşturmak için değer sağlamanız gereken parametreler açıklanmıştır.
 
@@ -79,7 +76,7 @@ az storage account generate-sas
 ```
 Her parametreden sonraki değer serisini biraz şifreli bulabilirsiniz. Bu parametre değerleri, kendi ilgili izninin ilk harfinden alınır. Aşağıdaki tabloda değerlerin nereden geldiği açıklanmıştır: 
 
-| Parametre        | Değer   | Açıklama  |
+| Parametre        | Value   | Açıklama  |
 |------------------|---------|---------|
 | *izinleri*    | racwdl  | Bu SAS *read*, *append*, *create*, *write*, *delete* ve *list* özelliklerine izin verir. |
 | *resource-types* | sco     | SAS’den etkilenen kaynaklar *service*, *container* ve *object* kaynaklarıdır. |
@@ -252,7 +249,7 @@ document.getElementById('delete-button').addEventListener('click', () => {
 > Bu kod örneğinin çalışması için *blobName*’e ilişkin bir dize değeri sağlamanız gerekir.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
-Bu hızlı başlangıç sırasında oluşturulan kaynakları temizlemek için [Azure portalına](https://portal.azure.com) geri dönün ve depolama hesabınızı seçin. Seçildikten sonra şuraya giderek depolama hesabını silebilirsiniz: **Genel Bakış > depolama hesabını Sil**.
+Bu hızlı başlangıç sırasında oluşturulan kaynakları temizlemek için [Azure portalına](https://portal.azure.com) geri dönün ve depolama hesabınızı seçin. Seçildikten sonra, şu hesaba giderek depolama hesabını silebilirsiniz: **> Depolama hesabını silmek Için genel bakış**.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Dosya yüklemeleri sırasında blobları ve rapor ilerleme durumunu indirme hakkında bilgi almak için örnekleri araştırın.

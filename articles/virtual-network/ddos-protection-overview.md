@@ -1,6 +1,6 @@
 ---
-title: Azure DDoS koruması standart genel bakış | Microsoft Docs
-description: Azure DDoS koruması hizmeti hakkında bilgi edinin.
+title: Azure DDoS koruması standardına genel bakış | Microsoft Docs
+description: Azure DDoS Koruması hizmeti hakkında bilgi edinin.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -15,71 +15,83 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/13/2018
 ms.author: kumud
-ms.openlocfilehash: 41e9d88df49d153089e6dc7a12c5873ccc167279
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ef2319f18b6df15fd7f33e9344e8506f853f47e6
+ms.sourcegitcommit: 6eecb9a71f8d69851bc962e2751971fccf29557f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65209454"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72532232"
 ---
-# <a name="azure-ddos-protection-standard-overview"></a>Azure DDoS koruması standart genel bakış
+# <a name="azure-ddos-protection-standard-overview"></a>Azure DDoS koruması standardına genel bakış
 
 Dağıtılmış hizmet engelleme (DDoS) saldırıları, uygulamalarını buluta taşıyan müşterilerin karşılaştığı en büyük kullanılabilirlik ve güvenlik sorunlarından biridir. DDoS saldırıları, bir uygulamanın kaynaklarını tüketerek uygulamanın geçerli kullanıcılar için kullanılamaz duruma gelmesini amaçlar. DDoS saldırıları internet üzerinden genel olarak erişilebilen herhangi bir uç noktasını hedefleyebilir.
 
-Uygulama tasarımı, en iyi ile birlikte, azure DDoS koruması, DDoS saldırılarına karşı koruma sağlayın. Azure DDoS koruması, şu hizmet katmanlarında sağlar:
+Azure DDoS koruması, uygulama tasarımı en iyi uygulamaları ile birlikte, DDoS saldırılarına karşı savunma sağlar. Azure DDoS koruması aşağıdaki hizmet katmanlarını sağlar:
 
-- **Temel**: Azure platformunun bir parçası olarak otomatik olarak etkinleştirilir. Her zaman açık trafik izleme ve gerçek zamanlı azaltma ortak ağ düzeyinde saldırı, Microsoft online services tarafından kullanılan aynı savunmaları sağlar. Tüm ölçek Azure'nın küresel ağı, dağıtmak ve bölgeler arasında saldırı trafiği azaltmak için kullanılabilir. IPv4 ve IPv6 Azure için koruması sağlanan [genel IP adresleri](virtual-network-public-ip-address.md).
-- **Standart**: Azure sanal ağ kaynakları için özel olarak ayarlanmış bir temel hizmet katmanı üzerinden ek risk azaltma özellikleri sağlar. DDoS koruması standart etkinleştirmek, basit ve herhangi bir uygulama değişiklik gerektirmez. Koruma ilkeleri, adanmış trafiğini izleme ve makine öğrenimi algoritmaları ayarlanır. Azure Service Fabric örnekleri, Azure Load Balancer ve Azure Application Gateway gibi sanal ağlara dağıtılan kaynaklara ilişkili genel IP adresleri için ilkeler uygulanır, ancak bu koruma App Service ortamları için geçerli değildir. Gerçek zamanlı telemetri geçmişi yanı sıra, bir saldırı sırasında Azure izleme görünümleri aracılığıyla kullanılabilir. Zengin saldırı azaltma analytics, tanılama ayarları kullanılabilir. Uygulama katmanı koruması aracılığıyla eklenebilir [Azure Application Gateway Web uygulaması güvenlik duvarı](../application-gateway//application-gateway-web-application-firewall-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) veya 3 taraf güvenlik duvarı Azure Market'ten yükleyerek. IPv4 ve IPv6 Azure için koruması sağlanan [genel IP adresleri](virtual-network-public-ip-address.md).
+- **Temel**: Azure platformunun bir parçası olarak otomatik olarak etkinleştirilir. Her zaman açık trafik izleme ve ortak ağ düzeyinde saldırıları gerçek zamanlı azaltma, Microsoft 'un çevrimiçi hizmetler tarafından kullanılan savunmaları sağlar. Azure 'un genel ağının tüm ölçeklendirilmesi, bölgeler arasında saldırı trafiğini dağıtmak ve azaltmak için kullanılabilir. IPv4 ve IPv6 Azure [genel IP adresleri](virtual-network-public-ip-address.md)için koruma sağlanır.
+- **Standart**: Azure sanal ağ kaynakları için özel olarak ayarlanan temel hizmet katmanı üzerinden ek risk azaltma özellikleri sağlar. DDoS koruma standardının etkinleştirilmesi kolaydır ve uygulama değişikliği gerektirmez. Koruma ilkeleri adanmış trafik izleme ve makine öğrenimi algoritmalarıyla ayarlanır. İlkeler, Azure Load Balancer, Azure Application Gateway ve Azure Service Fabric örnekleri gibi sanal ağlarda dağıtılan kaynaklarla ilişkili genel IP adreslerine uygulanır, ancak bu koruma App Service ortamları için uygulanmaz. Gerçek zamanlı telemetri, bir saldırı sırasında Azure Izleyici görünümleri ve geçmiş için kullanılabilir. Tanılama ayarları aracılığıyla zengin saldırı risk azaltma analizlerine ulaşılabilir. Uygulama katmanı koruması, [azure Application Gateway Web uygulaması güvenlik duvarı](../application-gateway//application-gateway-web-application-firewall-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) aracılığıyla veya Azure Marketi 'nden üçüncü taraf güvenlik duvarı yükleyerek eklenebilir. IPv4 ve IPv6 Azure [genel IP adresleri](virtual-network-public-ip-address.md)için koruma sağlanır.
 
-![Azure DDoS koruması temel vs. Standart](./media/ddos-protection-overview/ddoscomparison.png)
+|Özellik                                         |DDoS koruması temel                 |DDoS koruma standardı                      |
+|------------------------------------------------|--------------------------------------|----------------------------------------------|
+|Etkin trafik izleme & her zaman algılama |Yes                                   |Yes                                           |
+|Otomatik saldırı azaltmaları                    |Yes                                   |Yes                                           |
+|Kullanılabilirlik garantisi                          |Azure Bölgesi                          |Uygulama                                   |
+|Risk azaltma ilkeleri                             |Azure trafik bölgesi birimi için ayarlandı |Uygulama trafiği birimi için ayarlanmış          |
+|Ölçümler ve uyarılar                                |Hayır                                    |Azure izleyici ile gerçek zamanlı saldırı ölçümleri & tanılama günlükleri                                 |
+|Risk azaltma raporları                              |Hayır                                    |Saldırı sonrası risk azaltma raporları                |
+|Risk azaltma akış günlükleri                            |Hayır                                    |SıEM tümleştirmesi için NRT günlük akışı           |
+|Geçiş ilkesi özelleştirmeleri                 |Hayır                                    |DDoS uzmanlarına katılın                           |
+|Destek                                         |En iyi çaba                           |Etkin bir saldırı sırasında DDoS uzmanlarına erişim|
+|SLA                                             |Azure Bölgesi                          |Uygulama garantisi & maliyet koruması       |
+|Fiyatlandırma                                         |Ücretsiz                                  |Aylık & kullanımı tabanlı                         |
 
-## <a name="types-of-ddos-attacks-that-ddos-protection-standard-mitigates"></a>DDoS koruması standart azaltır DDoS saldırılarının türleri
+## <a name="types-of-ddos-attacks-that-ddos-protection-standard-mitigates"></a>DDoS koruması standart azaltmalarına sahip DDoS saldırıları türleri
 
-DDoS koruması standart aşağıdaki türdeki saldırıları azaltabilirsiniz:
+DDoS koruma standardı aşağıdaki tür saldırıları hafifletmenize yardımcı olabilir:
 
-- **Volumetric saldırıları**: Saldırı'nın görünüşte yasal trafiği önemli miktarda ağ katmanı doldurmak için hedeftir. Bu, UDP sel, yükseltme sel ve diğer sahte paket sel içerir. DDoS koruması standart azaltırız ve bunları Azure'nın küresel ağı ölçek ile otomatik olarak temizleme bu olası çok gigabayt saldırıları azaltır.
-- **Protokol saldırıları**: Bu tür saldırıları, zayıflıklar Katman 3 olarak ve katman 4 protokol yığınının yararlanarak bir hedef erişilemez, işleyin. İçerdiği SYN baskın saldırılarına, yansıma saldırılarını ve diğer protokol saldırıları. DDoS koruması standart bu saldırıları, istemci ile etkileşim kurma ve kötü amaçlı trafiği engelleyen, kötü amaçlı ve yasal trafiği arasında ayrım azaltır. 
-- **Kaynak (uygulama) katmanı saldırıları**: Bu tür saldırıları, konaklar arasında veri aktarımını kesintiye web uygulama paketleri hedefleyin. HTTP protokolü ihlallerine, SQL ekleme, siteler arası betik ve diğer 7. Katman saldırıları saldırıları içerir. Azure kullanan [Application Gateway web uygulaması güvenlik duvarı](../application-gateway/application-gateway-web-application-firewall-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json), DDoS koruması bu saldırılara karşı koruma sağlamak için standart ile. Kullanılabilir ayrıca üçüncü taraf web uygulaması güvenlik duvarı teklifleri de [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps?page=1&search=web%20application%20firewall).
+- **Volumetric saldırıları**: saldırının hedefi, ağ katmanını önemli miktarda meşru trafik ile taşmaktır. Bu, UDP floods, yükseltme floods ve diğer sahte paket floods içerir. DDoS koruma standardı, bu potansiyel çok gigabaytlık saldırıları, Azure 'un küresel ağ ölçeklendirilmesi ve bunları otomatik olarak yaparak, bu olası çok kiracılı saldırıları azaltır.
+- **Protokol saldırıları**: Bu saldırılar, katman 3 ve katman 4 protokol yığınındaki zayıf bir durumu kötüye vererek bir hedefi işlemez. Bu, SYN taşma saldırıları, yansıma saldırıları ve diğer protokol saldırıları içerir. DDoS koruması standardı, bu saldırıları azaltır, istemciyle etkileşime girerek ve kötü amaçlı trafiği engelleyerek kötü amaçlı ve meşru trafik arasında ayrım gerçekleştirebilir. 
+- **Kaynak (uygulama) katmanı saldırıları**: Bu saldırılar, ana bilgisayarlar arasında veri aktarımını kesintiye uğratan Web uygulaması paketlerini hedeflemelidir. Saldırılara HTTP protokol ihlalleri, SQL ekleme, siteler arası komut dosyası oluşturma ve diğer katman 7 saldırıları dahildir. Bu saldırılara karşı savunma sağlamak için DDoS koruma standardı ile Azure [Application Gateway Web uygulaması güvenlik duvarı](../application-gateway/application-gateway-web-application-firewall-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)'nı kullanın. Ayrıca, [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps?page=1&search=web%20application%20firewall)'nde bulunan üçüncü taraf Web uygulaması güvenlik duvarı teklifleri de mevcuttur.
 
-Standart DDoS koruması, sanal makineler, yük Dengeleyiciler ve uygulama ağ geçitleri ile ilişkili genel IP adresleri de dahil olmak üzere bir sanal ağ içindeki kaynaklarla korur. Application Gateway web uygulaması güvenlik duvarı ile birlikte, DDoS koruması standart tam katman 7 azaltma yeteneği Katman 3 sağlayabilir.
+DDoS koruma standardı sanal makineler, yük dengeleyiciler ve uygulama ağ geçitleri ile ilişkili genel IP adresleri dahil bir sanal ağdaki kaynakları korur. DDoS koruma standardı, Application Gateway Web uygulaması güvenlik duvarı ile birlikte kullanıldığında, katman 7 risk azaltma özelliğine tam katman 3 sağlayabilir.
 
-## <a name="ddos-protection-standard-features"></a>DDoS koruması standart özellikler
+## <a name="ddos-protection-standard-features"></a>DDoS koruması standart özellikleri
 
-![DDoS işlevi](./media/ddos-protection-overview/ddosfeatures.png)
+![DDoS işlevselliği](./media/ddos-protection-overview/ddosfeatures.png)
 
-DDoS koruması standart özellikler şunlardır:
+DDoS koruması standart özellikleri şunlardır:
 
-- **Yerel platform tümleştirme:** Yerel olarak Azure'a entegre. Azure portalı üzerinden yapılandırma içerir. Standart DDoS koruması, kaynaklarınızı ve kaynak yapılandırması farkındadır.
-- **Kullanıma hazır koruma:** DDoS koruması standart etkin olarak Basitleştirilmiş yapılandırma, bir sanal ağ üzerindeki tüm kaynaklar hemen korur. Hiçbir müdahale veya kullanıcı tanımı gereklidir. Bunu algılandığında DDoS koruması standart anında ve otomatik olarak saldırı azaltır.
-- **Her zaman açık trafik izleme:** Uygulama trafiği düzenlerinin, DDoS saldırılarının göstergelerini bakarak haftada 7 gün, günde 24 saat izlenir. Koruma ilkeleri aşıldığında azaltma gerçekleştirilir.
-- **Uyarlamalı ayarlama:** Akıllı trafik profil oluşturma uygulamanızdaki trafiği zamanla öğrenir seçer ve hizmetiniz için en uygun profili güncelleştirir. Trafiği zamanla olan değişimini profilinin ayarlar.
-- **Çok katmanlı koruma:** Tam yığın DDoS koruması, web uygulaması güvenlik duvarı ile kullanıldığında sağlar.
-- **Kapsamlı azaltma Ölçek:** En büyük bilinen DDoS saldırılarına karşı korumaya yönelik genel kapasiteyle 60'tan fazla farklı saldırı türleri azaltılabilir.
-- **Saldırı analizi:** Saldırı sırasında beş dakikalık artışlarla ayrıntılı raporlar ve saldırı sona erdikten sonra eksiksiz bir özet alın. Stream azaltma akış bir çevrimdışı güvenlik bilgileri ve Olay yönetimi (SIEM) sistemi neredeyse gerçek zamanlı bir saldırı sırasında izleme günlükleri.
-- **Saldırı ölçümleri:** Her saldırılara karşı özetlenmiş ölçümler, Azure İzleyici erişilebilir.
-- **Saldırı Uyarı:** Uyarılar, başlatma ve durdurma bir saldırı sırasında yapılandırılabilir ve saldırı'nın süresi boyunca yerleşik saldırı ölçümleri kullanarak. Uyarıları operasyonel yazılımınızı Microsoft Azure İzleyicisi günlükleri, Splunk, Azure depolama, e-posta ve Azure portalı gibi tümleştirin.
-- **Maliyet garantisi:** Veri aktarımı ve uygulama ölçeklendirme hizmet iadeleri belgelenmiş bir DDoS saldırıları için.
+- **Yerel platform tümleştirmesi:** Azure ile yerel olarak tümleşiktir. Azure portal aracılığıyla yapılandırmayı içerir. DDoS koruma standardı, kaynaklarınızı ve kaynak yapılandırmanızı anlamıştır.
+- **Anahtar korumasını aç:** Basitleştirilmiş yapılandırma, DDoS koruma standardı etkin olduğu anda bir sanal ağ üzerindeki tüm kaynakları hemen korur. Müdahale veya Kullanıcı tanımı gerekli değildir. DDoS koruma standardı, algılandıktan sonra hızla ve otomatik olarak saldırıyı azaltır.
+- **Her zaman açık trafik izleme:** Uygulama trafik desenleriniz günde 24 saat, haftada 7 gün, DDoS saldırıları için göstergeler aranıyor. Koruma ilkeleri aşıldığında risk azaltma gerçekleştirilir.
+- **Uyarlamalı ayarlama:** Akıllı trafik profili oluşturma, uygulamanızın zaman içindeki trafiğini öğrenir ve hizmetiniz için en uygun profili seçer ve güncelleştirir. Profil zaman içinde trafik değişikliği olarak ayarlanır.
+- **Çok katmanlı koruma:** Bir Web uygulaması güvenlik duvarıyla birlikte kullanıldığında, tam yığın koruması sağlar.
+- **Kapsamlı risk azaltma ölçeği:** 60 üzerinde farklı saldırı türleri, en büyük bilinen DDoS saldırılarına karşı koruma sağlamak için küresel kapasiteyle birlikte azaltılabilir.
+- **Saldırı Analizi:** Saldırı sırasında beş dakikalık artışlarla ayrıntılı raporlar alın ve saldırı bittikten sonra tam bir Özet yapın. Bir saldırı sırasında neredeyse gerçek zamanlı izleme için, çevrimdışı bir güvenlik bilgileri ve olay yönetimi (SıEM) sistemine akış azaltma günlüğü.
+- **Saldırı ölçümleri:** Her bir saldırıya ait özetlenen ölçümler Azure Izleyici aracılığıyla erişilebilir.
+- **Saldırı uyarısı:** Uyarılar, yerleşik saldırı ölçümleri kullanılarak saldırı başlangıcında ve durdurulduğunda ve saldırının süresi boyunca yapılandırılabilir. Uyarılar, Microsoft Azure Izleme günlükleri, splunk, Azure depolama, e-posta ve Azure portal gibi işletimsel yazılımınızla tümleştirilir.
+- **Maliyet garantisi:** Veri aktarımı ve belgelenmiş DDoS saldırıları için uygulama genişleme hizmeti kredileri.
 
-## <a name="ddos-protection-standard-mitigation"></a>DDoS koruması standart azaltma
+## <a name="ddos-protection-standard-mitigation"></a>DDoS koruması standart risk azaltma
 
-DDoS koruması standart gerçek trafik kullanımını izler ve sürekli DDoS ilkede tanımlanan eşiklere göre karşılaştırır. Trafik eşiği aşıldığında, DDoS saldırılarının otomatik olarak başlatılır. Risk azaltma trafiği eşiğin altında döndüğünde kaldırılır.
+DDoS koruması standart gerçek trafik kullanımını izler ve DDoS Ilkesinde tanımlanan eşiklere göre sürekli olarak karşılaştırır. Trafik eşiği aşıldığında, DDoS risk azaltma otomatik olarak başlatılır. Trafik eşiğin altına döndüğünde, risk azaltma kaldırılır.
 
 ![Risk azaltma](./media/ddos-protection-overview/mitigation.png)
 
-Azaltma, korumalı kaynağa gönderilen trafik DDoS koruması hizmeti tarafından yönlendirilir ve birkaç önleme denetimleri yapıldıktan, aşağıdaki denetimleri gibi:
+Risk azaltma sırasında, korunan kaynağa gönderilen trafik DDoS koruma hizmeti tarafından yeniden yönlendirilir ve aşağıdaki denetimler gibi çeşitli denetimler gerçekleştirilir:
 
-- Paketleri internet belirtimlerine uygun ve hatalı biçimlendirilmiş değil emin olun.
-- Trafik olası sahte bir paket olup olmadığını belirlemek için istemci ile etkileşim kurma (ör.: SYN Auth veya SYN tanımlama bilgisi veya onu kurtarmasını kaynağı için bir paket bırakarak).
-- Hız sınırı paketleri, başka bir zorlama yöntemi varsa gerçekleştirilebilir.
+- Paketlerin internet belirtimlerine uyduğundan ve hatalı biçimlendirilmiş olmadığından emin olun.
+- Trafiğin potansiyel olarak sahte bir paket olup olmadığını (ör: SYN auth veya SYN tanımlama bilgisi) ve yeniden aktarmak için kaynak için bir paket bırakarak istemciyle etkileşime geçin.
+- Başka bir zorlama yöntemi gerçekleştirilmeyen hız limiti paketleri.
 
-DDoS koruması, saldırı trafiği engeller ve amaçlanan hedeflerine kalan trafik iletir. Saldırı algılama birkaç dakika içinde Azure İzleyici ölçümleri kullanarak size bildirilir. DDoS koruması standart telemetrisi üzerinde günlük yapılandırarak, gelecekteki analizler için kullanılabilir seçenekler günlükleri yazabilirsiniz. Standart DDoS koruması için Azure İzleyici ölçüm verileri 30 gün boyunca tutulur.
+DDoS koruması, saldırı trafiğini engeller ve kalan trafiği amaçlanan hedefine iletir. Birkaç dakika içinde saldırı algılama sırasında Azure Izleyici ölçümleri kullanılarak bildirim alırsınız. DDoS koruması standart telemetrisinde günlüğe kaydetmeyi yapılandırarak, gelecekteki analizler için günlükleri kullanılabilir seçeneklere yazabilirsiniz. DDoS koruma standardı için Azure Izleyici 'de ölçüm verileri 30 gün boyunca tutulur.
 
-Microsoft ile kurdu [BreakingPoint Cloud](https://www.ixiacom.com/products/breakingpoint-cloud) burada oluşturun DDoS koruması etkinleştirilmiş genel IP adresleri simülasyonlar için trafiği bir arabirim oluşturmak için. Kesme noktası bulut benzetim yapmanıza olanak sağlar:
+Microsoft, simülasyon için DDoS koruması etkinleştirilmiş genel IP adreslerine karşı trafik oluşturabileceğiniz bir arabirim oluşturmak üzere [BreakingPoint bulutu](https://www.ixiacom.com/products/breakingpoint-cloud) ile işbirliği yaptı. Kesme noktası bulutu benzetimi şunları yapmanıza olanak sağlar:
 
-- Nasıl Microsoft Azure DDoS koruması standart Azure kaynaklarınızı DDoS saldırılarına karşı koruyan doğrula
-- Olay yanıtlama işleminize DDoS saldırıya en iyi duruma getirme
-- Belge DDoS uygunluk
-- Ağ güvenlik gruplarını eğitin
+- DDoS koruması standardının Microsoft Azure DDoS saldırılarına karşı Azure kaynaklarınızı nasıl koruduğunu doğrulayın
+- DDoS saldırısı kapsamındaki olay yanıt sürecinizi iyileştirin
+- DDoS uyumluluğunu belgele
+- Ağ Güvenlik ekiplerinizi eğitme
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

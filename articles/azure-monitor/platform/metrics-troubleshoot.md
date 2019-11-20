@@ -1,6 +1,6 @@
 ---
-title: Azure İzleyici ölçüm grafikleri sorunlarını giderme
-description: Oluşturma, özelleştirme veya ölçüm grafikleri yorumlama sorunlarını giderme
+title: Azure Izleyici ölçüm grafiklerde sorun giderme
+description: Ölçüm grafiklerini oluşturma, özelleştirme veya yorumlama sorunlarını giderme
 author: vgorbenko
 services: azure-monitor
 ms.service: azure-monitor
@@ -8,112 +8,114 @@ ms.topic: conceptual
 ms.date: 04/23/2019
 ms.author: vitalyg
 ms.subservice: metrics
-ms.openlocfilehash: 73ef5cc00b5154dbdbc92911d17740c7d13038ec
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: d31b046bf02893affff84069ee92b3bd7735b904
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67341973"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72243230"
 ---
-# <a name="troubleshooting-metrics-charts"></a>Ölçüm grafikleri sorunlarını giderme
+# <a name="troubleshooting-metrics-charts"></a>Ölçüm grafiklerini sorunlarını giderme
 
-Oluşturma, özelleştirme veya Azure ölçüm Gezgini'nde grafikleri yorumlama konusunda sorun yaşarsanız bu makaleyi kullanın. Ölçümler için yeni başladıysanız, hakkında bilgi edinin [ölçüm Gezgini ile çalışmaya başlama](metrics-getting-started.md) ve [ölçüm Gezgini özelliklerinin Gelişmiş](metrics-charts.md). Ayrıca bkz [örnekler](metric-chart-samples.md) yapılandırılmış ölçüm grafikleri.
+Azure Ölçüm Gezgini 'nde grafik oluşturma, özelleştirme veya yorumlama ile ilgili sorunlar yaşıyorsanız bu makaleyi kullanın. Ölçümlerle ilgili yeni [başladıysanız](metrics-getting-started.md) Ölçüm Gezgini ' [nin ve gelişmiş özellikler](metrics-charts.md)' i kullanmaya başlama hakkında bilgi edinin. Ayrıca, yapılandırılmış ölçüm grafiklerinin [örneklerini](metric-chart-samples.md) de görebilirsiniz.
 
-## <a name="cant-find-your-resource-to-select-it"></a>Seçmek için kaynak bulunamıyor
+## <a name="cant-find-your-resource-to-select-it"></a>Kaynağı seçmek için bulunamıyor
 
-Üzerinde tıkladığınız **bir kaynak seçin** düğmesi, ancak kaynak Seçici iletişim kutusunu kaynağınızda göremiyorum.
+Kaynak **Seç** düğmesine tıkladınız, ancak kaynağı kaynak Seçicisi iletişim kutusunda görmezsiniz.
 
-**Çözüm:** Ölçüm Gezgini kullanılabilir kaynakları listeleme önce Abonelikleriniz ve kaynak gruplarınız seçmenizi gerektirir. Kaynağınızı göremiyorsanız:
+**Çözüm:** Ölçüm Gezgini kullanılabilir kaynakları listelemesi için önce abonelikleri ve kaynak gruplarını seçmenizi gerektirir. Kaynağı görmüyorsanız:
 
-1. Doğru aboneliği seçtiğinizden emin olun **abonelik** açılır. Aboneliğiniz listede yoksa, tıklayarak **dizin + Abonelik ayarları** ve kaynağınız ile bir abonelik ekleyin.
+1. **Abonelik** açılan menüsünde doğru aboneliği seçtiğinizden emin olun. Aboneliğiniz listelenmiyorsa, **Dizin + abonelik ayarları** ' na tıklayın ve kaynağınızın bulunduğu bir abonelik ekleyin.
 
 1. Doğru kaynak grubunu seçtiğinizden emin olun.
     > [!WARNING]
-    > Ölçüm Gezgini, ilk kez açtığınızda en iyi performans için **kaynak grubu** açılan sahip önceden seçilen kaynak grubu yok. Herhangi bir kaynağa görebilmek için önce en az bir grubu seçmeniz gerekir.
+    > En iyi performans için, Ölçüm Gezgini 'ni ilk açışınızda **kaynak grubu** açılır listesinde önceden seçilmiş kaynak grupları yoktur. Herhangi bir kaynağı görebilmeniz için en az bir grup seçmeniz gerekir.
 
-## <a name="chart-shows-no-data"></a>Grafik veri gösterir
+## <a name="chart-shows-no-data"></a>Grafik veri göstermez
 
-Bazen grafikleri, doğru kaynakları ve ölçümleri belirledikten sonra hiçbir veri gösterebilir. Bu davranış, çeşitli nedenlerden kaynaklanabilir:
+Bazı durumlarda, doğru kaynakları ve ölçümleri seçtikten sonra grafiklerde veri gösterilmeyebilir. Bu davranışa aşağıdakilerden biri neden olabilir:
 
-### <a name="microsoftinsights-resource-provider-isnt-registered-for-your-subscription"></a>Microsoft.Insights kaynak sağlayıcısı, aboneliğiniz için kayıtlı değil
+### <a name="microsoftinsights-resource-provider-isnt-registered-for-your-subscription"></a>Aboneliğiniz için Microsoft. Insights kaynak sağlayıcısı kayıtlı değil
 
-Ölçümleri keşfederken gerektirir *Microsoft.Insights* kaynak sağlayıcısının aboneliğinize kayıtlı. Çoğu durumda, (diğer bir deyişle, bir uyarı kuralını yapılandırın, herhangi bir kaynak için tanılama ayarları özelleştirme veya bir otomatik ölçeklendirme kuralını yapılandırın sonra), otomatik olarak kaydedilir. Microsoft.Insights kaynak sağlayıcısı kayıtlı değilse, el ile açıklanan adımları uygulayarak kaydetmelisiniz [Azure kaynak sağlayıcıları ve türleri](../../azure-resource-manager/resource-manager-supported-services.md).
+Ölçümleri keşfetmek için aboneliğinizde kayıtlı *Microsoft. Insights* kaynak sağlayıcısı gerekir. Çoğu durumda, otomatik olarak kaydedilir (yani, bir uyarı kuralını yapılandırdıktan sonra, herhangi bir kaynak için tanılama ayarlarını özelleştirebilir veya bir otomatik ölçeklendirme kuralı yapılandırırsınız). Microsoft. Insights kaynak sağlayıcısı kayıtlı değilse, [Azure kaynak sağlayıcıları ve türleri](../../azure-resource-manager/resource-manager-supported-services.md)bölümünde açıklanan adımları izleyerek el ile kaydetmeniz gerekir.
 
-**Çözüm:** Açık **abonelikleri**, **kaynak sağlayıcıları** sekmesini tıklatıp doğrulayın *Microsoft.Insights* aboneliğiniz için kayıtlı.
+**Çözüm:** **Abonelikler**, **kaynak sağlayıcıları** sekmesini açın ve aboneliğiniz için *Microsoft. Insights* 'ın kaydedildiğini doğrulayın.
 
-### <a name="you-dont-have-sufficient-access-rights-to-your-resource"></a>Kaynağınız için yeterli erişim haklarına sahip değilsiniz
+### <a name="you-dont-have-sufficient-access-rights-to-your-resource"></a>Kaynağınız için yeterli erişim haklarınız yok
 
-Azure'da ölçümlerine erişim tarafından denetlenen [rol tabanlı erişim denetimi (RBAC)](../../role-based-access-control/overview.md). Bir üyesi olmanız gerekir [izleme okuyucusu](../../role-based-access-control/built-in-roles.md#monitoring-reader), [izleme katkıda bulunanı](../../role-based-access-control/built-in-roles.md#monitoring-contributor), veya [katkıda bulunan](../../role-based-access-control/built-in-roles.md#contributor) ölçümleri herhangi bir kaynak için keşfetmek için.
+Azure 'da ölçümlere erişim [rol tabanlı erişim denetimi (RBAC)](../../role-based-access-control/overview.md)tarafından denetlenir. Herhangi bir kaynakla ilgili ölçümleri araştırmak için, [izleme okuyucusu](../../role-based-access-control/built-in-roles.md#monitoring-reader), [katkıda bulunan izleme](../../role-based-access-control/built-in-roles.md#monitoring-contributor)veya [katkıda bulunan](../../role-based-access-control/built-in-roles.md#contributor) bir üye olmanız gerekir.
 
-**Çözüm:** Ölçümleri keşfederken kaynak için yeterli izinleri olduğundan emin olun.
+**Çözüm:** Ölçümleri araştırırken kaynak için yeterli izinlere sahip olduğunuzdan emin olun.
 
-### <a name="your-resource-didnt-emit-metrics-during-the-selected-time-range"></a>Seçilen zaman aralığında kaynak ölçümleri yayma olmadı
+### <a name="your-resource-didnt-emit-metrics-during-the-selected-time-range"></a>Kaynağınız, seçili zaman aralığı sırasında ölçümleri yaymadı
 
-Bazı kaynaklar, sürekli olarak kendi ölçümleri yayma yok. Örneğin, Azure ölçümleri durdurulmuş sanal makineler için toplamaz. Yalnızca bazı koşullar meydana geldiğinde, diğer kaynakları kendi ölçümleri yayabilir. Örneğin, bir hareket işleme zamanı gösteren bir ölçüm en az bir işlem gerektirir. Seçili zaman aralığında hiçbir işlem varsa, grafik doğal olarak boş olur. Ayrıca, azure'da ölçümleri çoğunu dakikada toplanır, ancak bazı kısıtlamalar var. daha az sıklıkta toplanan. Keşfetmeye çalıştığınız ölçümü hakkında daha fazla bilgi almak için ölçüm belgelerine bakın.
+Bazı kaynaklar ölçümleri sürekli olarak göstermiyor. Örneğin, Azure durdurulmuş sanal makineler için ölçümler toplamaz. Diğer kaynaklar, yalnızca bir koşul gerçekleştiğinde ölçümlerini gösterebilir. Örneğin, bir işlemin işlem süresini gösteren bir ölçüm en az bir işlem gerektirir. Seçilen zaman aralığında hiçbir işlem yoksa grafik doğal olarak boş olur. Ayrıca, Azure 'daki ölçümlerin büyük bölümü her dakika toplanırken, daha az miktarda toplanan bazı bazıları vardır. Keşfetmeye çalıştığınız ölçüm hakkında daha fazla ayrıntı edinmek için ölçüm belgelerine bakın.
 
-**Çözüm:** Grafiğin zaman geniş bir değiştirin. "Son 30 güne ait" başlayabilir daha büyük bir zaman ayrıntı düzeyi kullanarak (veya "otomatik zaman ayrıntı düzeyi" seçeneği bağlı olan).
+**Çözüm:** Grafiğin saatini daha geniş bir aralığa çevirin. Daha büyük bir zaman ayrıntı düzeyi kullanarak "son 30 gün" ile başlayabilir (veya "otomatik zaman ayrıntı düzeyi" seçeneğine bağlı olarak).
 
-### <a name="you-picked-a-time-range-greater-than-30-days"></a>30 günden fazla bir zaman aralığı Çekildi
+### <a name="you-picked-a-time-range-greater-than-30-days"></a>30 günden daha uzun bir zaman aralığı seçtiniz
 
-[Azure, çoğu ölçümün 93 gün boyunca saklanır](data-platform-metrics.md#retention-of-metrics). Ancak, yalnızca en fazla 30 gün herhangi tek bir grafiğe verileri için sorgulama yapabilirsiniz. Bu sınırlama geçerli değildir [günlük tabanlı ölçümler](../app/pre-aggregated-metrics-log-metrics.md#log-based-metrics).
+[Azure 'daki ölçümlerin çoğu 93 gün boyunca depolanır](data-platform-metrics.md#retention-of-metrics). Ancak, yalnızca herhangi bir grafik üzerinde en fazla 30 günden fazla veri için sorgulama yapabilirsiniz. Bu sınırlama, [günlük tabanlı ölçümler](../app/pre-aggregated-metrics-log-metrics.md#log-based-metrics)için geçerlidir.
 
-**Çözüm:** Boş bir grafik görürsünüz ya da grafiğiniz yalnızca ölçüm verileri bir parçası görüntüler arasında Başlat - ve son-tarih saat Seçici içinde fark 30 gün aralığı aşmadığını doğrulayın.
+**Çözüm:** Boş bir grafik görürseniz veya grafiğiniz yalnızca ölçüm verilerinin bir kısmını görüntülüyorsa, saat seçicideki başlangıç ve bitiş tarihleri arasındaki farkın 30 günlük aralığı aşmadığını doğrulayın.
 
-### <a name="all-metric-values-were-outside-of-the-locked-y-axis-range"></a>Kilitli y ekseni aralığı dışında tüm ölçüm değerleri olan
+### <a name="all-metric-values-were-outside-of-the-locked-y-axis-range"></a>Tüm ölçüm değerleri kilitli y ekseni aralığının dışındaydı
 
-Tarafından [grafik y ekseni sınırlarını kilitleme](metrics-charts.md#lock-boundaries-of-chart-y-axis), grafik çizgisi gösterme grafik görüntüleme alanını yanlışlıkla yapabilirsiniz. Örneğin, y ekseni aralığı %0 ve % 50 arasında kilitli ve ölçüm % 100 sabit bir değer varsa satırın her zaman grafiğin boş görünür yapmadan görünür alanının dışında işlenir.
+Grafik [y ekseninin sınırlarını kilitleyerek](metrics-charts.md#lock-boundaries-of-chart-y-axis)grafik görüntüleme alanında grafik çizgisini gösterme istenmeden bir şekilde ayarlayabilirsiniz. Örneğin, y ekseni% 0 ile% 50 arasında bir aralığa kilitliyse ve ölçümün% 100 sabit değeri varsa, satır her zaman görünür alanın dışında işlenir ve grafik boş görünür.
 
-**Çözüm:** Grafiğin y ekseni sınırlarını ölçüm değerleri aralığı dışında kilitlenmez doğrulayın. Y ekseni sınırlarını kilitliyse, geçici olarak ölçüm değerleri grafik aralığın dışında kalan yoksa emin olmak için bunları sıfırlamak isteyebilirsiniz. Y ekseni aralığını kilitleme grafiklerle için otomatik ayrıntı düzeyi ile önerilmez **toplam**, **min**, ve **max** toplama değerleri ile değişeceği tarayıcı penceresini yeniden boyutlandırabilir veya başka bir ekran çözünürlüğünü giderek ayrıntı düzeyi. Geçiş ayrıntı düzeyi, grafik boş görüntü alanının bırakabilir.
+**Çözüm:** Grafiğin y ekseni sınırlarının, ölçüm değerleri aralığının dışında kilitlenmediğini doğrulayın. Y ekseni sınırları kilitliyse, ölçüm değerlerinin grafik aralığının dışına düşmemesini sağlamak için bunları geçici olarak sıfırlamak isteyebilirsiniz. **Toplam**, **En düşük**ve **en fazla** toplama özelliklerine sahip grafikler için otomatik ayrıntı düzeyi kullanılması önerilmez, çünkü değerleri tarayıcı penceresini yeniden boyutlandırabilir veya bir ekran çözünürlüğünden geçin başka bir. Ayrıntı düzeyi değiştirme, grafiğinizin görüntü alanının boş kalmasını sağlayabilir.
 
-### <a name="you-are-looking-at-a-guest-os-metric-but-didnt-enable-azure-diagnostic-extension"></a>Bir konuk işletim sistemi ölçüm aranıyor, ancak Azure tanılama uzantısını etkinleştirme fırsatınız
+### <a name="you-are-looking-at-a-guest-os-metric-but-didnt-enable-azure-diagnostic-extension"></a>Konuk işletim sistemi ölçüsüne bakıyorsunuz, ancak Azure tanılama uzantısı 'nı etkinleştirmediniz
 
-Koleksiyonu **konuk işletim sistemi** ölçümleri kullanarak etkinleştirme ya da Azure tanılama uzantısı yapılandırma gerektirir **tanılama ayarları** kaynağınızın paneli.
+**Konuk işletim sistemi** ölçümleri koleksiyonu, Azure tanılama uzantısının yapılandırılmasını veya kaynağınızın **Tanılama ayarları** paneli kullanılarak etkinleştirilmesini gerektirir.
 
-**Çözüm:** Azure tanılama uzantısı etkin ancak ölçümlerinizi bkz hala bulamıyorsanız, konusunda özetlenen adımları izleyin [Azure tanılama uzantısını sorun giderme kılavuzu](diagnostics-extension-troubleshooting.md#metric-data-doesnt-appear-in-the-azure-portal). Ayrıca sorun giderme adımları için bkz: [konuk işletim sistemi ad alanı ve ölçümleri seçemezsiniz](metrics-troubleshoot.md#cannot-pick-guest-os-namespace-and-metrics)
+**Çözüm:** Azure Tanılama uzantısı etkinse ancak ölçümlerinizi göremiyorsanız, [Azure tanılama uzantısı sorun giderme kılavuzunda](diagnostics-extension-troubleshooting.md#metric-data-doesnt-appear-in-the-azure-portal)açıklanan adımları izleyin. Ayrıca bkz. sorun giderme adımları için [Konuk işletim sistemi ad alanı ve ölçümleri](metrics-troubleshoot.md#cannot-pick-guest-os-namespace-and-metrics) seçemezsiniz
 
-## <a name="error-retrieving-data-message-on-dashboard"></a>Panoda "veriler alınırken hata oluştu" iletisi
+## <a name="error-retrieving-data-message-on-dashboard"></a>Panoda "verileri alma hatası" iletisi
 
-Daha sonra kullanım dışı ve Azure'dan kaldırılan ölçülü panonuz oluşturulduğunda bu sorun oluşabilir. Açık durumda olduğunu doğrulamak için **ölçümleri** kaynak ve onay ölçüm Seçici kullanılabilir ölçümleri sekmesi. Ölçüm gösterilmezse, ölçüm Azure'dan kaldırıldı. Genellikle, bir ölçümü kullanım dışı olduğunda, kaynak durumu benzer bir perspektif sağlar, daha yeni bir ölçüm yoktur.
+Bu sorun, panonuz daha sonra kullanım dışı bırakılmış ve Azure 'dan kaldırılan bir ölçümle oluşturulduğunda gerçekleşebilir. Durum olduğunu doğrulamak için kaynağınızın **ölçümler** sekmesini açın ve ölçüm seçicideki kullanılabilir ölçümleri denetleyin. Ölçüm gösterilmezse, ölçüm Azure 'dan kaldırılmıştır. Genellikle, bir ölçüm kullanım dışı olduğunda, kaynak sistem durumu üzerinde benzer bir perspektifle birlikte sağlayan daha yeni bir ölçüm vardır.
 
-**Çözüm:** Başarısız olan kutucuk Panoda grafiğiniz için alternatif bir ölçüm seçerek güncelleştirin. Yapabilecekleriniz [Azure Hizmetleri için kullanılabilir ölçümlerin bir listesini gözden geçirin](metrics-supported.md).
+**Çözüm:** Panodaki grafik için alternatif bir ölçüm seçerek başarısız kutucuğu güncelleştirin. [Azure hizmetleri için kullanılabilir ölçümlerin listesini gözden](metrics-supported.md)geçirebilirsiniz.
 
-## <a name="chart-shows-dashed-line"></a>Kesik çizgi grafik gösterilir
+## <a name="chart-shows-dashed-line"></a>Grafik kesikli çizgiyi gösterir
 
-Azure ölçüm grafikleri kesikli satır türü olduğunu eksik değerlerin (diğer adıyla "null değer") arasında iki bilinen zaman dilimi veri noktaları belirtmek için kullanın. Örneğin, "1 dakika" zaman ayrıntı düzeyi seçtiğiniz zaman seçicide, ancak ölçüm 07:26, 07:27 raporlandı 07:29-07:30 (ikinci ve üçüncü veri noktaları arasındaki dakika boşluk unutmayın), ardından kesikli çizgiye 07:27 ve 07:29 bağlanır ve düz bir çizgi bağlanır diğer tüm veri noktaları. Ölçüm kullandığında sıfıra kesikli çizgiye düşme **sayısı** ve **toplam** toplama. İçin **ortalama**, **min** veya **max** toplamalar, kesikli çizgiye yakın iki bilinen bir veri noktası bağlanır. Ayrıca, veri grafik en sağdaki veya sol tarafta eksik olduğunda kesikli çizgiye eksik veri noktasının yönü genişletir.
-  ![Ölçüm görüntüsü](./media/metrics-troubleshoot/missing-data-point-line-chart.png)
+Azure ölçüm grafikleri, iki bilinen zaman çizgisi veri noktası arasında eksik bir değer ("null değer" olarak da bilinir) olduğunu göstermek için kesikli çizgi stilini kullanır. Örneğin, saat seçicide "1 dakika" zaman ayrıntı düzeyi aldıysanız ancak ölçüm 07:26, 07:27, 07:29 ve 07:30 (ikinci ve üçüncü veri noktaları arasında bir dakika boşluğu) ile bildirilmişse, kesikli bir çizgi, 07:27 ve 07:29 bağlanır ve düz bir çizgi bağlanır Tüm diğer veri noktaları. Ölçüm **sayı** ve **Toplam** toplama kullandığında kesikli çizgi sıfıra düşer. **Ortalama**, **En düşük** veya **en büyük** toplamalar için, kesikli çizgi en yakın bilinen iki veri noktasını bağlar. Ayrıca, grafiğin sağ veya sol tarafındaki veriler eksik olduğunda kesikli çizgi, eksik veri noktasının yönüne genişletilir.
+  ![ölçüm resmi @ no__t-1
 
-**Çözüm:** Bu davranış tasarım gereğidir. Veri noktaları tanımlamak için yararlıdır. Çizgi grafik, yüksek yoğunluklu ölçüm eğilimleri görselleştirmek için üstün bir seçenektir ancak seyrek değerleri Ölçümleriyle için zaman dilimi değerlerle corelating özellikle önemli olduğu durumlarda yorumlamak zor olabilir. Bu grafiklerin okuma kesikli çizgiye kolaylaştırır, ancak grafik hala belirsiz ise farklı bir grafik türü ile kullanarak ölçümleri görüntüleme göz önünde bulundurun. Bir değer olduğunda bir nokta Görselleştirme ve veri atlanıyor tamamen değeri eksik olduğunda noktası yalnızca örneğin, aynı Ölçüm dağınık çizim grafiği açıkça tarafından her zaman çizgisi gösterir: ![ölçüm görüntüsü](./media/metrics-troubleshoot/missing-data-point-scatter-chart.png)
+**Çözüm:** Bu davranış tasarıma göre yapılır. Eksik veri noktalarını belirlemek için faydalıdır. Çizgi grafik, yüksek yoğunluklu ölçümlerin eğilimlerini görselleştirmeye yönelik bir üst seçimdir, ancak özellikle de zaman dilimi ile birlikte bulunan değerler önemli olduğunda, seyrek değerlerle ölçümleri yorumlamak zor olabilir. Kesik çizgi satırı Bu grafiklerin okunmasını kolaylaştırır, ancak grafiğiniz hala net değilse, ölçümlerinizi farklı bir grafik türüyle görüntülemeyi düşünün. Örneğin, aynı ölçüm için dağınık bir çizim grafiği, yalnızca bir değer olduğunda bir noktayı görselleştirerek ve değer eksik olduğunda veri noktasını tamamen atlayarak, her zaman Grey 'i açıkça gösterir: ![metric Image @ no__t-1
 
    > [!NOTE]
-   > Bir çizgi grafik, ölçüm için hala tercih ederseniz, konumda fare işaretçisinin veri noktası vurgulayarak zaman ayrıntı düzeyi değerlendirmek için grafik üzerinde fareyi hareket yardımcı olabilir.
+   > Ölçüm için bir çizgi grafik tercih ediyorsanız, fareyi grafiğe taşımak, fare işaretçisinin konumundaki veri noktasını vurgulayarak zaman parçalı yapısını değerlendirmenize yardımcı olabilir.
 
-## <a name="chart-shows-unexpected-drop-in-values"></a>Grafik beklenmeyen bırakma değerleri gösterir.
+## <a name="chart-shows-unexpected-drop-in-values"></a>Grafik, beklenmeyen değerleri gösterir
 
-Çoğu durumda, bir yanlış anlama grafikte gösterilen veri ölçüm değerleri algılanan düşüş olur. Bir düşüş toplamları tarafından misled ya da son ölçüm veri noktaları henüz alınan veya henüz Azure tarafından işlenen çünkü grafik son dakika zaman gösterir sayar. Ölçümler işlem gecikme süresi, hizmete bağlı olarak birkaç dakika aralığında olabilir. 1 veya 5 dakikalık bir ayrıntı düzeyi ile yeni bir zaman aralığı gösteren grafikler için bir bırakma değerin son birkaç dakikadan daha belirgin hale gelir: ![ölçüm görüntüsü](./media/metrics-troubleshoot/drop-in-values.png)
+Birçok durumda, ölçüm değerlerindeki algılanan bırakma grafikte gösterilen verilerin yanlış anlaşılmasıdır. Son ölçüm veri noktaları henüz Azure tarafından alınamadığından veya işlenemediği için, bir veya daha fazla dakika içinde bir bırakma veya sayımlar halinde bir bırakma ile yanlış olabilir. Hizmete bağlı olarak, ölçüm işleme gecikmesi birkaç dakika aralığında olabilir. 1 veya 5 dakikalık ayrıntı düzeyi içeren son zaman aralığını gösteren grafiklerde, son birkaç dakika içinde değerin bir tanesi daha belirgin hale gelir: ![metrik görüntü @ no__t-1
 
-**Çözüm:** Bu davranış tasarım gereğidir. Bunu aldığımız hemen sonra veriler gösteriliyor olsa bile verileri faydalı olduğunu düşünüyoruz *kısmi* veya *tamamlanmamış*. Bunun yapılması, daha kısa süre içinde önemli sonuç yapmak ve araştırma hemen başlatmak sağlar. Örneğin, hata sayısını gösteren bir ölçüm için bir kısmi değer X görmeye yapıldığını en az bildiren bir verilen dakika hatalarında X. Sorun hemen incelemeye başlayın yerine, tam olarak önemli olmayabilir bu dakika üzerinde gerçekleşen hataları sayısını görmek için bekleyin. Grafik, veri kümesinin tamamını aldığımız ancak o zaman daha yeni bir dakika yeni eksik veri noktalarından gösterebilir sonra güncelleştirilir.
+**Çözüm:** Bu davranış tasarıma göre yapılır. Verilerin *kısmen* veya *eksik*olduğu durumlarda bile yararlı olduğunu düşündükten sonra verileri göstermemiz gerektiğine inandık. Bunun yapılması, önemli bir sonucu daha erken yapmanıza ve araştırmanın hemen başlamasını sağlar. Örneğin, bir kısmi değer gösteren bir ölçüm için, belirli bir dakika boyunca en az X başarısızlık olduğunu bildiren bir X. Bu dakikada gerçekleşen hata sayısını tam olarak görmek için beklemek yerine sorunu hemen incelemeye başlayabilir. Bu, önemli olmayan bir durum olabilir. Tüm veri kümesini aldığımızda grafik güncelleştirilecek, ancak bu süre içinde, daha son dakikadan daha yeni tamamlanmamış veri noktaları da gösterilebilir.
 
 ## <a name="cannot-pick-guest-os-namespace-and-metrics"></a>Konuk işletim sistemi ad alanı ve ölçümleri seçemezsiniz
 
-Sanal makineler ve sanal makine ölçek kümeleri ölçümleri iki kategorisi vardır: **Sanal makine konağı** Azure barındırma ortamı tarafından toplanan Ölçümler ve **konuk işletim sistemi** tarafından toplanan ölçümler [İzleme Aracısı](agents-overview.md) , sanal makineler üzerinde çalışan. İzleme Aracısı'nı etkinleştirerek yükleme [Azure tanılama uzantısı](diagnostics-extension-overview.md).
+Sanal makineler ve sanal makine ölçek kümelerinin iki ölçüm kategorisi vardır: Azure barındırma ortamı tarafından toplanan **sanal makine konak** ölçümleri ve izleme Aracısı tarafından toplanan **Konuk işletim sistemi (klasik)** ölçümleri [ ](agents-overview.md)sanal makinelerinizde çalışıyor. İzleme aracısını [Azure tanılama uzantısı](diagnostics-extension-overview.md)' nı etkinleştirerek yüklersiniz.
 
-Varsayılan olarak, konuk işletim sistemi ölçümleri arasından seçim Azure depolama hesabında depolanan **tanılama ayarları** kaynağınızın sekmesi. Toplanan ölçümler konuk işletim sistemi olmayan veya ölçüm Gezgini bunları erişemez, yalnızca göreceksiniz **sanal makine konağı** ölçüm ad alanı:
+Varsayılan olarak, Konuk işletim sistemi ölçümleri, kaynağınızın **Tanılama ayarları** sekmesinden seçtiğiniz Azure depolama hesabında depolanır. Konuk işletim sistemi ölçümleri toplanmıyorsa veya ölçüm Gezgini bunlara erişemez ise yalnızca **sanal makine konak** ölçümü ad alanını görürsünüz:
 
-![Ölçüm görüntüsü](./media/metrics-troubleshoot/cannot-pick-guest-os-namespace.png)
+![ölçüm resmi](./media/metrics-troubleshoot/cannot-pick-guest-os-namespace.png)
 
-**Çözüm:** Görmüyorsanız **konuk işletim sistemi** ad alanı ve ölçüm Gezgini'nde ölçüm:
+**Çözüm:** Bir **Konuk işletim sistemi (klasik)** ad alanını ve Ölçüm Gezgini 'nde ölçümleri görmüyorsanız:
 
-1. Onaylayın [Azure tanılama uzantısı](diagnostics-extension-overview.md) etkinleştirilmişse ve ölçümleri toplamak üzere yapılandırılmış.
+1. [Azure tanılama uzantısının](diagnostics-extension-overview.md) etkinleştirildiğini ve ölçümleri toplamak üzere yapılandırıldığını doğrulayın.
     > [!WARNING]
-    > Kullanamazsınız [Log Analytics aracısını](agents-overview.md#log-analytics-agent) (Microsoft Monitoring Agent ya da "MMA" da bilinir) göndermek için **konuk işletim sistemi** depolama hesabına.
+    > **Konuk işletim sistemini** bir depolama hesabına göndermek için [Log Analytics Aracısı](agents-overview.md#log-analytics-agent) (Microsoft Monitoring Agent veya "MMA" olarak da bilinir) kullanamazsınız.
 
-1. Depolama hesabı güvenlik duvarı tarafından korunmuyor doğrulayın.
+1. [Aboneliğiniz Için](metrics-troubleshoot.md#microsoftinsights-resource-provider-isnt-registered-for-your-subscription) **Microsoft. Insights** kaynak sağlayıcısının kayıtlı olduğundan emin olun.
 
-1. Kullanım [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) ölçümleri depolama hesabına akar doğrulamak için. Toplanan ölçümler olmayan Eğer [Azure tanılama uzantısını sorun giderme kılavuzu](diagnostics-extension-troubleshooting.md#metric-data-doesnt-appear-in-the-azure-portal).
+1. Depolama hesabının güvenlik duvarı tarafından korunmadığından emin olun. Azure portal, ölçüm verilerinin alınması ve grafiklerin çizilmesi için depolama hesabına erişmesi gerekir.
+
+1. Ölçümlerin depolama hesabına akmasını doğrulamak için [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) 'ni kullanın. Ölçümler toplanmıyorsa [Azure tanılama uzantısı sorun giderme kılavuzunu](diagnostics-extension-troubleshooting.md#metric-data-doesnt-appear-in-the-azure-portal)izleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Ölçüm Gezgini ile çalışmaya başlama hakkında bilgi edinin](metrics-getting-started.md)
-* [Ölçüm Gezgini'nde gelişmiş özellikler hakkında bilgi edinin](metrics-charts.md)
-* [Azure Hizmetleri için kullanılabilir ölçümleri bakın](metrics-supported.md)
-* [Yapılandırılmış grafiklerin örneklerine bakın](metric-chart-samples.md)
+* [Ölçüm Gezgini 'ni kullanmaya başlama hakkında bilgi edinin](metrics-getting-started.md)
+* [Ölçüm Gezgini 'nin gelişmiş özellikleri hakkında bilgi edinin](metrics-charts.md)
+* [Azure hizmetleri için kullanılabilir ölçümlerin listesini görüntüleyin](metrics-supported.md)
+* [Bkz. yapılandırılan grafik örnekleri](metric-chart-samples.md)

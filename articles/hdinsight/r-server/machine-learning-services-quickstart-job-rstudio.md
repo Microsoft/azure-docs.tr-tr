@@ -1,6 +1,6 @@
 ---
-title: 'Hızlı Başlangıç: Bir Azure HDInsight kullanarak RStudio Server ML Hizmetleri kümesinde bir R betiği yürütün.'
-description: Bu hızlı başlangıçta, bir Azure HDInsight kullanarak RStudio Server ML Hizmetleri kümesinde bir R betiği yürütün.
+title: 'Hızlı başlangıç: RStudio Server & R-Azure HDInsight için ML Hizmetleri'
+description: Hızlı başlangıçta, Azure HDInsight 'taki bir ML Hizmetleri kümesinde RStudio sunucusu kullanarak bir R betiği yürütüyoruz.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,40 +8,40 @@ ms.topic: quickstart
 ms.date: 06/19/2019
 ms.author: hrasheed
 ms.custom: mvc
-ms.openlocfilehash: 484763adfa154dcdf226b03f1f591d248532ee35
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 8a6a204ee5080e3acf99c13ecba1e1c7664d68b4
+ms.sourcegitcommit: 3486e2d4eb02d06475f26fbdc321e8f5090a7fac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67450922"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73241892"
 ---
-# <a name="quickstart-execute-an-r-script-on-an-ml-services-cluster-in-azure-hdinsight-using-rstudio-server"></a>Hızlı Başlangıç: Bir Azure HDInsight kullanarak RStudio Server ML Hizmetleri kümesinde bir R betiği yürütün.
+# <a name="quickstart-execute-an-r-script-on-an-ml-services-cluster-in-azure-hdinsight-using-rstudio-server"></a>Hızlı başlangıç: RStudio Server kullanarak Azure HDInsight 'ta bir ML Hizmetleri kümesinde R betiği yürütme
 
-ML Hizmetleri Azure HDInsight üzerinde R betiklerinin dağıtılmış hesaplamaları çalıştırmak için Apache Spark ve Apache Hadoop MapReduce kullanmayı sağlar. ML Hizmetleri işlem bağlamını ayarlayarak çağrıları nasıl yürütülür denetler. Bir küme kenar düğümüne kümeye bağlanın ve, R betikleri çalıştırmak için uygun bir yer sağlar. Bir kenar düğümüne ile çalıştırmanın RevoScaleR uç düğümü sunucusunun çekirdek üzerinde paralel dağıtılmış işlevleri seçeneğiniz vardır. Ayrıca bunları tüm küme düğümlerine RevoScaleR'ın Hadoop Map Reduce kullanarak çalıştırabilirsiniz veya Apache Spark işlem bağlamlarının.
+Azure HDInsight üzerinde ML Hizmetleri, R betiklerinin Apache Spark kullanmasına ve MapReduce Apache Hadoop Dağıtılmış hesaplamalar çalıştırmasına olanak tanır. ML Hizmetleri, işlem bağlamını ayarlayarak çağrıların nasıl yürütüleceğini denetler. Bir kümenin kenar düğümü, kümeye bağlanmak ve R betiklerinizi çalıştırmak için uygun bir yer sağlar. Edge düğümü ile, uç düğüm sunucusunun çekirdekleri arasında geri alınamaz şekilde dağıtılmış işlevleri çalıştırma seçeneğiniz vardır. Ayrıca, Iptal edilebilir ' in Hadoop haritasını azaltma veya Apache Spark işlem bağlamlarını kullanarak bunları kümenin düğümleri arasında çalıştırabilirsiniz.
 
-Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark kullanmayı gösterir RStudio Server ile R betiğini çalıştırmayı öğrenin. Hesaplamaları bir kenar düğümünde yerel olarak gerçekleştirmek için bir işlem bağlamı tanımlar ve HDInsight kümesindeki düğümlere dağıtılmasını yeniden.
+Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark kullanmayı gösteren RStudio Server ile R betiği çalıştırmayı öğreneceksiniz. İşlem bağlamını, bir kenar düğümünde yerel olarak hesaplamalar ve HDInsight kümesindeki düğümlerde yeniden dağıtmak üzere tanımlarsınız.
 
 ## <a name="prerequisite"></a>Önkoşul
 
-HDInsight üzerinde ML Hizmetleri kümesi. Bkz: [Apache Hadoop kümeleri oluşturma Azure portalını kullanarak](../hdinsight-hadoop-create-linux-clusters-portal.md) seçip **ML Hizmetleri** için **küme türü**.
+HDInsight üzerinde bir ML Hizmetleri kümesi. Bkz. [Azure Portal kullanarak Apache Hadoop kümeleri oluşturma](../hdinsight-hadoop-create-linux-clusters-portal.md) ve **küme türü**için **ml Hizmetleri** seçme.
 
 ## <a name="connect-to-rstudio-server"></a>RStudio Server’a bağlanma
 
-Kümenin kenar düğümünde RStudio Server çalışır. Aşağıdaki URL'ye gidin burada `CLUSTERNAME` oluşturduğunuz ML Hizmetleri kümesinin adıdır:
+RStudio sunucusu kümenin Edge düğümünde çalışır. `CLUSTERNAME` oluşturduğunuz ML Hizmetleri kümesinin adı olduğu aşağıdaki URL 'ye gidin:
 
 ```
 https://CLUSTERNAME.azurehdinsight.net/rstudio/
 ```
 
-İlk kez oturum açtığınızda iki kez kimlik doğrulaması gerekir. Küme Yöneticisi oturum açma ve parola ilk kimlik doğrulaması isteminde sağlarsanız, varsayılan `admin`. İkinci kimlik doğrulaması isteminde SSH kullanıcı adı ve parola sağlarsanız, varsayılan `sshuser`. Sonraki oturum açma işlemleri yalnızca SSH kimlik bilgileri gerektirir.
+İlk kez oturum açtığınızda iki kez kimlik doğrulaması yapmanız gerekir. İlk kimlik doğrulama istemi için, Küme Yöneticisi oturum açma bilgilerini ve parolayı belirtin, varsayılan olarak `admin`. İkinci kimlik doğrulama isteminde SSH oturum açma ve parolasını sağlayın, varsayılan `sshuser`. Sonraki oturum açma işlemleri yalnızca SSH kimlik bilgilerini gerektirir.
 
 Bağlandıktan sonra ekranınız aşağıdaki ekran görüntüsüne benzemelidir:
 
-![Küme temel ayrıntıları](./media/ml-services-quickstart-job-rstudio/connect-to-r-studio.png)
+![R Studio web konsoluna genel bakış](./media/ml-services-quickstart-job-rstudio/connect-to-r-studio1.png)
 
 ## <a name="use-a-compute-context"></a>İşlem bağlamı kullanma
 
-1. RStudio Server, HDInsight için varsayılan depolama alanına örnek verileri yüklemek için aşağıdaki kodu kullanın:
+1. RStudio Server 'dan, örnek verileri HDInsight için varsayılan depolamaya yüklemek üzere aşağıdaki kodu kullanın:
 
     ```RStudio
     # Set the HDFS (WASB) location of example data
@@ -76,9 +76,9 @@ Bağlandıktan sonra ekranınız aşağıdaki ekran görüntüsüne benzemelidir
      rxHadoopCopyFromLocal(source, bigDataDirRoot)
     ```
 
-    Bu adımı tamamlamak için yaklaşık 8 dakika sürebilir.
+    Bu adımın tamamlanması 8 dakika sürebilir.
 
-1. Bazı veri bilgileri oluşturup iki veri kaynağı tanımlayabiliriz. RStudio içinde aşağıdaki kodu girin:
+1. Veri bilgilerini oluşturun ve iki veri kaynağı tanımlayın. RStudio 'Ya aşağıdaki kodu girin:
 
     ```RStudio
     # Define the HDFS (WASB) file system
@@ -105,7 +105,7 @@ Bağlandıktan sonra ekranınız aşağıdaki ekran görüntüsüne benzemelidir
      formula = "ARR_DEL15 ~ ORIGIN + DAY_OF_WEEK + DEP_TIME + DEST"
     ```
 
-1. Kullanarak veriler üzerinde Lojistik regresyon çalıştırın **yerel** işlem bağlamında. RStudio içinde aşağıdaki kodu girin:
+1. **Yerel** işlem bağlamını kullanarak, veriler üzerinde lojistik regresyon çalıştırın. RStudio 'Ya aşağıdaki kodu girin:
 
     ```RStudio
     # Set a local compute context
@@ -120,7 +120,7 @@ Bağlandıktan sonra ekranınız aşağıdaki ekran görüntüsüne benzemelidir
      summary(modelLocal)
     ```
 
-    Hesaplamaları yaklaşık 7 dakika içinde tamamlanır. Aşağıdaki kod parçacığına benzer satırlarla sona eren bir çıktı görmeniz gerekir:
+    Hesaplamalar yaklaşık 7 dakika içinde tamamlanmalıdır. Aşağıdaki kod parçacığına benzer satırlarla biten çıktıyı görmeniz gerekir:
 
     ```output
     Data: airOnTimeDataLocal (RxTextData Data Source)
@@ -150,7 +150,7 @@ Bağlandıktan sonra ekranınız aşağıdaki ekran görüntüsüne benzemelidir
       Number of iterations: 7
     ```
 
-1. Kullanarak aynı Lojistik regresyon çalıştırın **Spark** bağlamı. Spark bağlamı, işlemi HDInsight kümesindeki tüm çalışan düğümlerine dağıtır. RStudio içinde aşağıdaki kodu girin:
+1. **Spark** bağlamını kullanarak aynı lojistik regresyonunu çalıştırın. Spark bağlamı, işlemi HDInsight kümesindeki tüm çalışan düğümlerine dağıtır. RStudio 'Ya aşağıdaki kodu girin:
 
     ```RStudio
     # Define the Spark compute context
@@ -168,17 +168,20 @@ Bağlandıktan sonra ekranınız aşağıdaki ekran görüntüsüne benzemelidir
      summary(modelSpark)
     ```
 
-    Hesaplamaları, 5 dakika içinde tamamlanır.
+    Hesaplamalar yaklaşık 5 dakika içinde tamamlanmalıdır.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
 Hızlı başlangıcı tamamladıktan sonra kümeyi silmek isteyebilirsiniz. HDInsight ile, verileriniz Azure Storage’da depolanır, böylece kullanılmadığında bir kümeyi güvenle silebilirsiniz. Ayrıca, kullanılmıyorken dahi HDInsight kümesi için sizden ücret kesilir. Küme ücretleri depolama ücretlerinin birkaç katı olduğundan, kullanılmadığında kümelerin silinmesi mantıklı olandır.
 
-Bir kümeyi silmek için bkz: [tarayıcınız, PowerShell veya Azure CLI kullanarak bir HDInsight kümesi silme](../hdinsight-delete-cluster.md).
+Bir kümeyi silmek için bkz. [tarayıcınızı, PowerShell 'i veya Azure CLI 'yı kullanarak HDInsight kümesini silme](../hdinsight-delete-cluster.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kullanarak gösterilen RStudio Server ile R betiğini çalıştırmayı öğrendiniz.  Görüntülenip görüntülenmeyeceğini ve nasıl yürütme kenar düğümüne veya HDInsight kümesi Çekirdekte paralelleştirildi belirtmek için kullanılabilir seçenekleri öğrenmek için sonraki makaleye ilerleyin.
+Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark kullanmayı gösteren RStudio Server ile R betiği çalıştırmayı öğrendiniz.  Bir sonraki makaleye ilerleyin ve yürütmenin kenar düğümünün veya HDInsight kümesinin çekirdekleri arasında paralel olup olmadığını belirtmek için kullanılabilir seçenekleri öğrenin.
 
 > [!div class="nextstepaction"]
->[İçin işlem bağlamı seçenekleri ML hizmetleri üzerinde HDInsight](./r-server-compute-contexts.md)
+>[HDInsight üzerinde ML Hizmetleri için işlem bağlamı seçenekleri](./r-server-compute-contexts.md)
+
+> [!NOTE]
+> Bu sayfada RStudio yazılımının özellikleri açıklanmaktadır. Microsoft Azure HDInsight RStudio, Inc ile bağlantılı değildir.

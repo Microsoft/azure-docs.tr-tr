@@ -9,32 +9,36 @@ editor: ''
 ms.service: media-services
 ms.workload: ''
 ms.topic: article
-ms.date: 07/02/2019
+ms.date: 08/29/2019
 ms.author: juliako
 ms.custom: seodec18
-ms.openlocfilehash: 1bd9774cf045d9ed7f16a637fcb2eb1378b48686
-ms.sourcegitcommit: d2785f020e134c3680ca1c8500aa2c0211aa1e24
+ms.openlocfilehash: 3dc1866a3c0339bca0c27fb53894a14581e88490
+ms.sourcegitcommit: 88ae4396fec7ea56011f896a7c7c79af867c90a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67565824"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70390490"
 ---
 # <a name="assets"></a>Varlıklar
 
-Azure Media Services, bir [varlık](https://docs.microsoft.com/rest/api/media/assets) (video, ses, görüntüler, küçük resim koleksiyonları, metin parçaları ve kapalı açıklamalı alt yazı dosyaları dahil) Azure Depolama'da depolanan dijital dosyalar hakkındaki bilgileri içerir. 
+Azure Media Services bir [varlık](https://docs.microsoft.com/rest/api/media/assets) , Azure depolama 'da depolanan dijital dosyalarla ilgili bilgiler içerir (video, ses, görüntüler, küçük resim koleksiyonları, metin parçaları ve kapalı açıklamalı altyazı dosyaları dahil). 
 
-Bir varlık, bir blob kapsayıcısını eşlendi [Azure depolama hesabı](storage-account-concept.md) ve varlık içindeki dosyalara kapsayıcıdaki blok blobları olarak depolanır. Media Services hesabı genel amaçlı v2 kullandığında Blob katmanları destekler (GPv2) depolama. GPv2 ile dosyalarını taşıyabilirsiniz [seyrek erişimli veya arşiv depolama](https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers). **Arşiv** depolama (örneğin, bunlar kodlanmış sonra) artık gerekli olmadığında kaynak dosyalarını arşivlemek için uygundur.
+Bir varlık, [Azure depolama hesabındaki](storage-account-concept.md) bir blob kapsayıcısına eşlenir ve varlık içindeki dosyalar bu kapsayıcıda blok Bloblar olarak depolanır. Media Services, hesap genel amaçlı v2 (GPv2) depolaması kullandığında blob katmanlarını destekler. GPv2 ile dosyaları seyrek erişimli [veya arşiv depolamaya](https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers)taşıyabilirsiniz. **Arşiv** depolama, artık gerekli olmadığında (örneğin, kodlandıktan sonra) kaynak dosyalarını arşivlemek için uygundur.
 
-**Arşiv** kodlama iş çıktısı bir çıkış blob kapsayıcısında koyulmuş ve depolama katmanı yalnızca zaten kodlanmış çok büyük kaynak dosyaları için önerilir. Bir varlık ve akış veya içeriğinizi çözümlemek için kullanım ile ilişkilendirmek istediğiniz çıkış kapsayıcıdaki blobları bulunması gereken bir **etkin** veya **seyrek erişimli** depolama katmanı.
+**Arşiv** depolama katmanı yalnızca önceden kodlanmış çok büyük kaynak dosyaları için önerilir ve kodlama iş çıktısı bir çıkış blobu kapsayıcısına konur. Bir varlıkla ilişkilendirmek istediğiniz çıkış kapsayıcısındaki Bloblar ve içeriğinizi akışa almak veya analiz etmek için kullanmak, **sık** **erişimli veya seyrek** erişimli bir depolama katmanında bulunmalıdır.
 
-## <a name="upload-digital-files-into-assets"></a>Dijital dosyalar varlıklarına karşıya yükleme
+### <a name="naming-blobs"></a>Blob 'ları adlandırma
 
-Dijital dosyaları Depolama'ya yükleyip bir varlıkla ilişkilendirilen sonra medya kodlama, akış, içerik iş akışları çözümleme Hizmetleri'nde kullanılabilir. Genel medya Hizmetleri iş akışlarını karşıya yükleme, kodlama ve bir dosya akışı biridir. Bu bölümde, genel adımlar anlatılmaktadır.
+Bir varlık içindeki dosyaların/Blobların adları, hem [BLOB adı gereksinimlerini](https://docs.microsoft.com/rest/api/storageservices/Naming-and-Referencing-Containers--Blobs--and-Metadata) hem de [NTFS ad gereksinimlerini](https://docs.microsoft.com/windows/win32/fileio/naming-a-file)izlemelidir. Bu gereksinimlerin nedeni, dosyaların işlenmek üzere blob depolamadan yerel bir NTFS diskine kopyalanmasını sağlayabilir.
+
+## <a name="upload-digital-files-into-assets"></a>Dijital dosyaları varlıklara yükleme
+
+Dijital dosyalar depolama alanına yüklendikten ve bir varlıkla ilişkilendirildikten sonra, Media Services Encoding, akış, içerik iş akışlarını analiz etmek için kullanılabilir. Ortak Media Services iş akışlarından biri bir dosyayı karşıya yüklemek, kodlamak ve akışa almak. Bu bölümde genel adımlar özetlenmektedir.
 
 > [!TIP]
-> Geliştirmeye başlamadan önce gözden [Media Services v3 API'leri ile geliştirme](media-services-apis-overview.md) (API, adlandırma kurallarını, vb. erişme hakkında bilgi içerir.)
+> Geliştirmeye başlamadan önce, [Media Services v3 API 'leri Ile geliştirmeyi](media-services-apis-overview.md) Inceleyin (API 'lere erişme hakkında bilgi, adlandırma kuralları vb.)
 
-1. Media Services v3 API'sini kullanarak yeni bir "input" Varlığı oluşturun. Bu işlem, Media Services hesabınızla ilişkilendirilen depolama hesabında bir kapsayıcı oluşturur. API, kapsayıcı adı döndürür (örneğin, `"container": "asset-b8d8b68a-2d7f-4d8c-81bb-8c7bbbe67ee4"`).
+1. Media Services v3 API'sini kullanarak yeni bir "input" Varlığı oluşturun. Bu işlem, Media Services hesabınızla ilişkilendirilen depolama hesabında bir kapsayıcı oluşturur. API, kapsayıcı adını döndürür (örneğin, `"container": "asset-b8d8b68a-2d7f-4d8c-81bb-8c7bbbe67ee4"`).
    
     Varlıkla ilişkilendirmek istediğiniz bir blob kapsayıcınız varsa, Varlığı oluştururken ilgili kapsayıcının adını belirtebilirsiniz. Media Services şu anda blobları yalnızca kapsayıcı kökünde destekler ve dosya adında yol kullanılmasını desteklemez. Bu nedenle "input.mp4" gibi bir dosya adına sahip kapsayıcıları kullanabilirsiniz. Ancak "videos/inputs/input.mp4" dosya adına sahip bir kapsayıcıyı kullanamazsınız.
 
@@ -44,16 +48,16 @@ Dijital dosyaları Depolama'ya yükleyip bir varlıkla ilişkilendirilen sonra m
     az storage blob upload -f /path/to/file -c MyContainer -n MyBlob
     ```
 2. Dijital dosyaları Varlık kapsayıcısına yüklemek için kullanmak üzere okuma-yazma izinlerine sahip bir SAS URL'si alın. Media Services API'sini kullanarak [varlık kapsayıcısı URL'lerini listeleyebilirsiniz](https://docs.microsoft.com/rest/api/media/assets/listcontainersas).
-3. Azure Depolama API'lerini veya SDK'larını ([Depolama REST API](../../storage/common/storage-rest-api-auth.md), [JAVA SDK](../../storage/blobs/storage-quickstart-blobs-java-v10.md) veya [.NET SDK](../../storage/blobs/storage-quickstart-blobs-dotnet.md) gibi) kullanarak dosyaları Varlık kapsayıcısına yükleyin. 
+3. Dosyaları varlık kapsayıcısına yüklemek için Azure depolama API 'Lerini veya SDK 'Larını (örneğin, [depolama REST API](../../storage/common/storage-rest-api-auth.md) veya [.NET SDK](../../storage/blobs/storage-quickstart-blobs-dotnet.md)) kullanın. 
 4. Media Services v3 API'lerini kullanarak "input" Varlığınızı işlemek üzere bir Dönüşüm ve bir İş oluşturun. Daha fazla bilgi için [Dönüşümler ve İşler](transform-concept.md) konusuna bakın.
-5. "Çıktı" varlığına içerikten Stream.
+5. "Çıkış" kıymetinin içeriğini akışla.
 
-Gösteren tam bir .NET örneği için nasıl yapılır: varlık oluşturma, depolama kapsayıcısını varlığın yazılabilir bir SAS URL'si almak, SAS URL'sini kullanarak depolama kapsayıcısına dosya karşıya yükleme, bkz [yerel bir dosyadan iş girdisi oluşturma](job-input-from-local-file-how-to.md).
+Nasıl yapılacağını gösteren tam bir .NET örneği için, varlık oluşturma bölümünde varlığın kapsayıcısına yazılabilir SAS URL 'SI alma, SAS URL 'sini kullanarak dosyayı depolama alanındaki kapsayıcıya yükleme, bkz. [yerel bir dosyadan iş girişi oluşturma](job-input-from-local-file-how-to.md).
 
-### <a name="create-a-new-asset"></a>Yeni varlık oluşturma
+### <a name="create-a-new-asset"></a>Yeni varlık oluştur
 
 > [!NOTE]
-> Datetime türündeki varlığın özellikleri her zaman UTC biçimindedir.
+> Varlığın tarih saat türünün özellikleri her zaman UTC biçimindedir.
 
 #### <a name="rest"></a>REST
 
@@ -61,7 +65,7 @@ Gösteren tam bir .NET örneği için nasıl yapılır: varlık oluşturma, depo
 PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{amsAccountName}/assets/{assetName}?api-version=2018-07-01
 ```
 
-REST örnek için bkz: [REST ile bir varlık oluşturun](https://docs.microsoft.com/rest/api/media/assets/createorupdate#examples) örnek.
+REST örneği için bkz. [rest Ile varlık oluşturma](https://docs.microsoft.com/rest/api/media/assets/createorupdate#examples) örneği.
 
 Bu örnekte açıklama, kapsayıcı adı, depolama hesabı ve benzeri gerekli bilgileri belirtebileceğiniz **İstek Gövdesini** oluşturma adımları gösterilmektedir.
 
@@ -85,24 +89,24 @@ curl -X PUT \
  Asset asset = await client.Assets.CreateOrUpdateAsync(resourceGroupName, accountName, assetName, new Asset());
 ```
 
-Tam bir örnek için bkz: [yerel bir dosyadan iş girdisi oluşturma](job-input-from-local-file-how-to.md). Media Services v3 sürümünde bir işin girdisini de HTTPS URL'lerden oluşturulabilir (bkz [bir HTTPS URL'si iş girdisi oluşturma](job-input-from-http-how-to.md)).
+Tam bir örnek için bkz. [yerel bir dosyadan iş girişi oluşturma](job-input-from-local-file-how-to.md). Media Services v3 'de, bir işin girişi HTTPS URL 'Lerinden de oluşturulabilir (bkz. bir [https URL 'sinden iş girişi oluşturma](job-input-from-http-how-to.md)).
 
-## <a name="map-v3-asset-properties-to-v2"></a>V2'ye harita v3 varlık özellikleri
+## <a name="map-v3-asset-properties-to-v2"></a>V3 varlık özelliklerini v2 'ye eşleyin
 
-Aşağıdaki tabloda nasıl [varlık](https://docs.microsoft.com/rest/api/media/assets/createorupdate#asset)'s v3 özelliklerinde eşleme v2'de varlığın özellikleri.
+Aşağıdaki tabloda, [varlıkların](https://docs.microsoft.com/rest/api/media/assets/createorupdate#asset)sürüm 2 ' deki varlık özelliklerinin v2 'de nasıl eşlenme şekli gösterilmektedir.
 
-|V3 özellikleri|v2 Özellikleri|
+|V3 Özellikleri|v2 özellikleri|
 |---|---|
-|Kimliği - (benzersiz) içindeki örneklere bakın tam Azure Resource Manager yolu [varlık](https://docs.microsoft.com/rest/api/media/assets/createorupdate)||
-|ad - (benzersiz) bkz [adlandırma kuralları](media-services-apis-overview.md#naming-conventions) ||
-|alternateId|AlternateId|
-|assetId|(Benzersiz) değeri kimliği - ile başlayan `nb:cid:UUID:` önek.|
-|Oluşturulan|Oluşturuldu|
-|description|Ad|
-|Son değiştirme|Son değiştirme|
+|kimlik-(benzersiz) tam Azure Resource Manager yolu, bkz. [varlık](https://docs.microsoft.com/rest/api/media/assets/createorupdate) içindeki örnekler||
+|ad-(benzersiz) bkz. [adlandırma kuralları](media-services-apis-overview.md#naming-conventions) ||
+|AlternateId|AlternateId|
+|assetId|ID-(unique) değeri `nb:cid:UUID:` önekiyle başlar.|
+|oluşturuldu|Oluşturuldu|
+|description|Name|
+|lastModified|Son değiştirme|
 |storageAccountName|StorageAccountName|
-|storageEncryptionFormat| Seçenekler - oluşturma seçenekleri|
-|türü||
+|storageEncryptionFormat| Seçenekler (oluşturma seçenekleri)|
+|type||
 
 ## <a name="storage-side-encryption"></a>Depolama tarafında şifreleme
 
@@ -120,10 +124,10 @@ Bekleyen veri varlıklarınızı korumanın varlıklar tarafından depolama tara
 
 ## <a name="filtering-ordering-paging"></a>Filtreleme, sıralama, sayfalama
 
-Bkz: [filtreleme, sıralama, Media Services varlıklarının sayfalandırma](entities-overview.md).
+Bkz. [Media Services varlıkların filtrelenmesi, sıralanması, sayfalama](entities-overview.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Bir dosyayı akışa alma](stream-files-dotnet-quickstart.md)
 * [Bulut DVR kullanma](live-event-cloud-dvr.md)
-* [Medya arasındaki farklar Hizmetleri v2 ve v3](migrate-from-v2-to-v3.md)
+* [Media Services V2 ve v3 arasındaki farklar](migrate-from-v2-to-v3.md)

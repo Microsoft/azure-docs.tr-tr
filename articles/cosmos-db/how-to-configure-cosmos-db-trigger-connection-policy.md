@@ -1,29 +1,29 @@
 ---
-title: Azure Cosmos DB tetikleyicisi bağlantı İlkesi
-description: Azure Cosmos DB tetikleyicisi tarafından kullanılan bağlantı ilkesi yapılandırma hakkında bilgi edinin
+title: Cosmos DB bağlantı ilkesi için Azure Işlevleri tetikleyicisi
+description: Cosmos DB için Azure Işlevleri tetikleyicisi tarafından kullanılan bağlantı ilkesini yapılandırma hakkında bilgi edinin
 author: ealsur
 ms.service: cosmos-db
-ms.topic: sample
-ms.date: 06/05/2019
+ms.topic: conceptual
+ms.date: 07/17/2019
 ms.author: maquaran
-ms.openlocfilehash: 584d59884b70d2ee8243216e6f907fc9ec2d8ad4
-ms.sourcegitcommit: 45e4466eac6cfd6a30da9facd8fe6afba64f6f50
+ms.openlocfilehash: 6e4c50e5dcc35450463d02bbed040754ea778e70
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/07/2019
-ms.locfileid: "66755335"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70093612"
 ---
-# <a name="how-to-configure-the-connection-policy-used-by-azure-cosmos-db-trigger"></a>Azure Cosmos DB tetikleyicisi tarafından kullanılan bağlantı ilkesi yapılandırma
+# <a name="how-to-configure-the-connection-policy-used-by-azure-functions-trigger-for-cosmos-db"></a>Cosmos DB için Azure Işlevleri tetikleyicisi tarafından kullanılan bağlantı ilkesini yapılandırma
 
-Bu makalede, Azure Cosmos hesabınıza bağlanmak için Azure Cosmos DB tetikleyicisi kullanırken bağlantı ilkesini nasıl yapılandıracağınız açıklanır.
+Bu makalede, Azure Cosmos hesabınıza bağlanmak üzere Cosmos DB için Azure Işlevleri tetikleyicisi 'ni kullanırken bağlantı ilkesini nasıl yapılandırabileceğiniz açıklanmaktadır.
 
-## <a name="why-is-the-connection-policy-important"></a>Bağlantı İlkesi neden önemlidir?
+## <a name="why-is-the-connection-policy-important"></a>Bağlantı ilkesi neden önemlidir?
 
-İki bağlantı modunu - doğrudan mod ve ağ geçidi vardır. Bu bağlantı modları hakkında daha fazla bilgi için bkz. [performans ipuçları](./performance-tips.md#networking) makalesi. Varsayılan olarak, **ağ geçidi** Azure Cosmos DB tetikleyicisi tüm bağlantıları kurmak için kullanılır. Ancak, performans temelli senaryolar için en iyi seçenek olmayabilir.
+İki bağlantı modu vardır-doğrudan mod ve ağ geçidi modu. Bu bağlantı modları hakkında daha fazla bilgi için bkz. [Performans ipuçları](./performance-tips.md#networking) makalesi. Varsayılan olarak, **ağ geçidi** , Cosmos DB Için Azure işlevleri tetikleyicisinde tüm bağlantıları oluşturmak için kullanılır. Ancak, performans odaklı senaryolar için en iyi seçenek olmayabilir.
 
-## <a name="changing-the-connection-mode-and-protocol"></a>Protokol ve bağlantı modunu değiştirme
+## <a name="changing-the-connection-mode-and-protocol"></a>Bağlantı modunu ve protokolünü değiştirme
 
-İstemci bağlantı İlkesi – yapılandırmak kullanılabilen iki anahtar yapılandırma ayarları vardır **bağlantı modu** ve **bağlantı protokolü**. Azure Cosmos DB tetikleyicisi ve tüm tarafından kullanılan protokolü ve varsayılan bağlantı modu değiştirebilirsiniz [Azure Cosmos DB bağlamaları](../azure-functions/functions-bindings-cosmosdb-v2.md#output)). Varsayılan ayarları değiştirmek için bulunacak gerekir `host.json` , Azure işlevleri projesi ya da Azure işlev uygulaması ve aşağıdakileri ekleyin [ek ayar](../azure-functions/functions-bindings-cosmosdb-v2.md#hostjson-settings):
+İstemci bağlantı ilkesini yapılandırmak için kullanılabilecek iki temel yapılandırma ayarı vardır: **bağlantı modu** ve **bağlantı protokolü**. Cosmos DB için Azure Işlevleri tetikleyicisi tarafından kullanılan varsayılan bağlantı modunu ve protokolünü ve tüm [Azure Cosmos DB bağlamalarını](../azure-functions/functions-bindings-cosmosdb-v2.md#output)değiştirebilirsiniz. Varsayılan ayarları değiştirmek için Azure işlevleri projenizde veya Azure işlevleri uygulamanızda `host.json` dosyayı bulmanız ve aşağıdaki [ek ayarı](../azure-functions/functions-bindings-cosmosdb-v2.md#hostjson-settings)eklemeniz gerekir:
 
 ```js
 {
@@ -34,9 +34,9 @@ Bu makalede, Azure Cosmos hesabınıza bağlanmak için Azure Cosmos DB tetikley
 }
 ```
 
-Burada `connectionMode` istenen bağlantı modu (doğrudan veya ağ geçidi) olmalıdır ve `protocol` istenen bağlantı Protokolü (Tcp veya Https). 
+Burada `connectionMode` istenen bağlantı moduna (doğrudan veya ağ geçidine) ve `protocol` istenen bağlantı protokolüne (TCP veya https) sahip olmanız gerekir. 
 
-Azure işlevleri projenizi Azure işlevleri V1 çalışma zamanı ile çalışıyorsanız yapılandırılmış bir hafif adı fark, kullanmalısınız `documentDB` yerine `cosmosDB`:
+Azure işlevleri projeniz Azure işlevleri v1 çalışma zamanı ile çalışıyorsa, yapılandırmanın küçük bir ad farkı vardır; `documentDB` `cosmosDB`bunun yerine şunu kullanmalısınız:
 
 ```js
 {
@@ -48,10 +48,10 @@ Azure işlevleri projenizi Azure işlevleri V1 çalışma zamanı ile çalışı
 ```
 
 > [!NOTE]
-> Azure işlevleri tüketim planı barındırma planı ile çalışırken, her örneği, koruyabilirsiniz soket bağlantılarının miktarında bir sınırı vardır. Direct ile çalışırken / TCP modunu, tasarım daha fazla bağlantı oluşturulur ve can isabet [tüketim planı sınırı](../azure-functions/manage-connections.md#connection-limit), bu durumda, ağ geçidi modunu kullanabilir veya, Azure işlevleri'ni çalıştırma [App Service modu](../azure-functions/functions-scale.md#app-service-plan).
+> Azure Işlevleri tüketim planı barındırma planı ile çalışırken her örnek, sürdüreme soket bağlantısı miktarına göre bir sınıra sahiptir. Doğrudan/TCP moduyla çalışırken, Tasarım yaparak daha fazla bağlantı oluşturulur ve [Tüketim planı sınırına](../azure-functions/manage-connections.md#connection-limit)ulaşarak, ağ geçidi modunu kullanabilir veya Azure işlevlerinizi [App Service modunda](../azure-functions/functions-scale.md#app-service-plan)çalıştırabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure işlevleri'nde bağlantı sınırları](../azure-functions/manage-connections.md#connection-limit)
+* [Azure Işlevlerinde bağlantı sınırları](../azure-functions/manage-connections.md#connection-limit)
 * [Azure Cosmos DB performans ipuçları](./performance-tips.md)
 * [Kod örnekleri](https://github.com/ealsur/serverless-recipes/tree/master/connectionmode)

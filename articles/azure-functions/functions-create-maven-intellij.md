@@ -1,30 +1,30 @@
 ---
-title: Intellij ile Java ile Azure işlevi oluşturma | Microsoft Docs
-description: Oluşturma ve azure'da Java ve Intellij ile basit bir HTTP tetiklemeli, sunucusuz uygulama yayımlama hakkında bilgi edinin.
+title: Java ve IntelliJ ile bir Azure işlevi oluşturma | Microsoft Docs
+description: Java ve IntelliJ ile Azure 'da basit bir HTTP ile tetiklenen, sunucusuz bir uygulama oluşturmayı ve yayımlamayı öğrenin.
 services: functions
 documentationcenter: na
 author: jeffhollan
 manager: jpconnock
-keywords: Azure işlevleri, İşlevler, olay işleme, işlem, sunucusuz mimari, java
+keywords: Azure işlevleri, işlevler, olay işleme, işlem, sunucusuz mimari, Java
 ms.service: azure-functions
-ms.devlang: java
 ms.topic: conceptual
+ms.devlang: java
 ms.date: 07/01/2018
 ms.author: jehollan
 ms.custom: mvc, devcenter
-ms.openlocfilehash: da93c60b52edf509900adf89fb688a0596d9763b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5aa0763206289305e98960b6e03ad903eb4547ae
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61342246"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70744028"
 ---
-# <a name="create-your-first-azure-function-with-java-and-intellij"></a>Intellij ile Java ile ilk Azure işlevinizi oluşturma
+# <a name="create-your-first-azure-function-with-java-and-intellij"></a>Java ve IntelliJ ile ilk Azure işlevinizi oluşturma
 
-Bu makalede, gösterir:
-- Oluşturma bir [sunucusuz](https://azure.microsoft.com/overview/serverless-computing/) Intellij Idea ve Apache Maven ile işlevi projesi
-- Adımları test ve hata ayıklama kendi bilgisayarınıza tümleşik geliştirme ortamında (IDE) işlevi
-- Azure işlevleri işlev projesi dağıtmak için yönergeler
+Bu makalede şu gösterilir:
+- IntelliJ ıDEA ve Apache Maven ile [sunucusuz](https://azure.microsoft.com/overview/serverless-computing/) bir işlev projesi oluşturma
+- Kendi bilgisayarınızdaki tümleşik geliştirme ortamında (IDE) işlevi test etme ve hata ayıklama adımları
+- İşlev projesini Azure Işlevlerine dağıtmaya yönelik yönergeler
 
 <!-- TODO ![Access a Hello World function from the command line with cURL](media/functions-create-java-maven/hello-azure.png) -->
 
@@ -32,80 +32,80 @@ Bu makalede, gösterir:
 
 ## <a name="set-up-your-development-environment"></a>Geliştirme ortamınızı kurma
 
-Java ve Intellij ile bir işlev geliştirmek için aşağıdaki yazılımları yükleyin:
+Java ve IntelliJ ile bir işlev geliştirmek için aşağıdaki yazılımı yüklemelisiniz:
 
-- [Java Developer Kit](https://www.azul.com/downloads/zulu/) (JDK), sürüm 8
-- [Apache Maven](https://maven.apache.org), sürüm 3.0 veya üstü
-- [Intellij Idea](https://www.jetbrains.com/idea/download), Maven ile topluluk veya Ultimate sürümleri
+- [Java geliştirici seti](https://www.azul.com/downloads/zulu/) (JDK), sürüm 8
+- [Apache Maven](https://maven.apache.org), sürüm 3,0 veya üzeri
+- [IntelliJ fikir](https://www.jetbrains.com/idea/download), Maven ile topluluk veya Ultimate sürümleri
 - [Azure CLI](https://docs.microsoft.com/cli/azure)
 
 > [!IMPORTANT]
-> JAVA_HOME ortam değişkeni JDK'nin yükleme konumu için bu makaledeki adımları tamamlayabilmeniz için ayarlamanız gerekir.
+> Bu makaledeki adımları tamamlayabilmeniz için JAVA_HOME ortam değişkeni JDK 'nin Install konumuna ayarlanmalıdır.
 
- Yüklemenizi öneririz [Azure işlevleri temel araçları, sürüm 2](functions-run-local.md#v2). Yazma, çalıştırma ve Azure işlevlerinde hata ayıklama için bir yerel geliştirme ortamı sağlar.
+ [Azure Functions Core Tools, sürüm 2 ' yi](functions-run-local.md#v2)yüklemenizi öneririz. Azure Işlevleri yazmak, çalıştırmak ve hata ayıklamak için yerel bir geliştirme ortamı sağlar.
 
-## <a name="create-a-functions-project"></a>İşlevler projesi oluşturma
+## <a name="create-a-functions-project"></a>Işlevler projesi oluşturma
 
-1. Intellij Idea içinde seçin **yeni proje oluştur**.  
-1. İçinde **yeni proje** penceresinde **Maven** sol bölmeden.
-1. Seçin **archetype Oluştur** onay kutusunu işaretleyin ve ardından **ekleme Archetype** için [azure işlevleri archetype](https://mvnrepository.com/artifact/com.microsoft.azure/azure-functions-archetype).
-1. İçinde **ekleme Archetype** penceresinde alanları aşağıdaki gibi doldurun:
-    - _GroupId_: com.microsoft.azure
-    - _Artifactıd_: azure işlevleri archetype
-    - _Sürüm_: En son sürümü kullan [merkezi depo](https://mvnrepository.com/artifact/com.microsoft.azure/azure-functions-archetype)
-    ![archetype Intellij Idea içinde bir Maven projesi oluşturun](media/functions-create-first-java-intellij/functions-create-intellij.png)  
-1. Seçin **Tamam**ve ardından **sonraki**.
-1. Geçerli proje için ayrıntılarınızı girin ve seçin **son**.
+1. IntelliJ fıkır bölümünde **Yeni proje oluştur**' u seçin.  
+1. **Yeni proje** penceresinde sol bölmeden **Maven** ' ı seçin.
+1. Arşiv **'Ten oluştur** onay kutusunu seçin ve ardından [Azure-Functions-arşiv ETYPE](https://mvnrepository.com/artifact/com.microsoft.azure/azure-functions-archetype)Için, arşiv **ETYPE Ekle** ' yi seçin.
+1. Arşiv **Ekle** penceresinde, alanları aşağıdaki gibi doldurun:
+    - _GroupID_: com. Microsoft. Azure
+    - _ArtifactId_: Azure-Functions-arşiv Etype
+    - _Sürüm_: [Merkezi depodan](https://mvnrepository.com/artifact/com.microsoft.azure/azure-functions-archetype)
+     en![son sürüm 1,22 ' u kullanarak, IntelliJ ıdeda bir Maven projesi oluşturun.](media/functions-create-first-java-intellij/functions-create-intellij.png)  
+1. **Tamam**' ı ve ardından **İleri**' yi seçin.
+1. Geçerli proje için ayrıntılarınızı girin ve **son**' u seçin.
 
-Maven ile aynı ada sahip yeni bir klasörde proje dosyalarını oluşturur _Artifactıd_ değeri. Projenin oluşturulan kod basit bir [HTTP ile tetiklenen](/azure/azure-functions/functions-bindings-http-webhook) tetikleme HTTP istek gövdesini yankılayan işlevi.
+Maven, proje dosyalarını _ArtifactId_ değeriyle aynı ada sahip yeni bir klasörde oluşturur. Projenin oluşturulan kodu, tetikleme HTTP isteğinin gövdesini yansıtan basit bir [http ile tetiklenen](/azure/azure-functions/functions-bindings-http-webhook) bir işlevdir.
 
-## <a name="run-functions-locally-in-the-ide"></a>İşlevleri IDE içinde yerel olarak çalıştırma
+## <a name="run-functions-locally-in-the-ide"></a>İşlevleri IDE 'de yerel olarak çalıştırma
 
 > [!NOTE]
-> Çalıştırın ve işlevleri yerel olarak hata ayıklama için yüklediğinizden emin olun [Azure işlevleri temel araçları, sürüm 2](functions-run-local.md#v2).
+> İşlevleri yerel olarak çalıştırmak ve hatalarını ayıklamak için [Azure Functions Core Tools, sürüm 2 ' yi](functions-run-local.md#v2)yüklediğinizden emin olun.
 
-1. Etkinleştirmek veya değişiklikleri el ile içeri [otomatik olarak içeri aktarma](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html).
-1. Açık **Maven projeleriyle** araç çubuğu.
-1. Genişletin **yaşam döngüsü**ve ardından açın **paket**. Çözümü oluşturulur ve yeni oluşturulan hedef dizinde paketlenir.
-1. Genişletin **eklentileri** > **azure işlevleri** açın **azure-İşlevler: çalışma** Azure işlevleri yerel çalışma zamanı'nı başlatmak için.  
-  ![Azure işlevleri için maven araç çubuğu](media/functions-create-first-java-intellij/functions-intellij-java-maven-toolbar.png)  
+1. Değişiklikleri el ile içeri aktarın veya [otomatik içeri aktarmayı](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html)etkinleştirin.
+1. **Maven projeleri** araç çubuğunu açın.
+1. **Yaşam döngüsü**' ni genişletin ve ardından **paketi**açın. Çözüm yeni oluşturulan bir hedef dizinde oluşturulup paketlenmiştir.
+1. **Eklentiler** > **Azure-Functions** ' i genişletin ve Azure işlevleri 'ni açın. Azure işlevleri yerel çalışma zamanına başlamak için **çalıştırın** .  
+  ![Azure Işlevleri için Maven araç çubuğu](media/functions-create-first-java-intellij/functions-intellij-java-maven-toolbar.png)  
 
-1. İşiniz bittiğinde Çalıştır iletişim kutusunu kapatın, işlevinizi test etme. İşlevi yalnızca bir ana bilgisayar etkin olduğu ve çalıştırıldığı yerel olarak bir zaman olabilir.
+1. İşlevinizi test etmeyi bitirdiğinizde Çalıştır iletişim kutusunu kapatın. Tek seferde yalnızca bir işlev Konağı etkin ve yerel olarak çalıştırılabilir.
 
-## <a name="debug-the-function-in-intellij"></a>Intellij işlevde hata ayıklama
+## <a name="debug-the-function-in-intellij"></a>IntelliJ 'de işlevde hata ayıkla
 
-1. Ekleme işlevi konak hata ayıklama modunda başlatmak için **- DenableDebug** işlevinizi çalıştırdığınızda bağımsız değişken olarak. Yapılandırmada ya da değiştirebilirsiniz [maven hedefleri](https://www.jetbrains.com/help/idea/maven-support.html#run_goal) veya bir terminal penceresinde aşağıdaki komutu çalıştırın:  
+1. İşlev konağını hata ayıklama modunda başlatmak için, işlevinizi çalıştırdığınızda bağımsız değişken olarak ' **denabledebug** ' ekleyin. [Maven hedeflerde](https://www.jetbrains.com/help/idea/maven-support.html#run_goal) yapılandırmayı değiştirebilir veya bir Terminal penceresinde aşağıdaki komutu çalıştırabilirsiniz:  
 
    ```
    mvn azure-functions:run -DenableDebug
    ```
 
-   Bu komut, 5005 sırasında bir hata ayıklama bağlantı noktasını açmak işlev konak neden olur.
+   Bu komut, işlev ana bilgisayarının 5005 adresinden bir hata ayıklama bağlantı noktası açmasına neden olur.
 
-1. Üzerinde **çalıştırma** menüsünde **yapılandırmalarını Düzenle**.
-1. Seçin **(+)** eklemek için bir **uzak**.
-1. Tamamlamak _adı_ ve _ayarları_ alanları tıklayın ve ardından **Tamam** yapılandırmayı kaydetmek için.
-1. Kurulum sonrasında seçin **< uzak yapılandırma adı > hata ayıklama** veya klavyenizde hata ayıklamayı başlatmak için Shift + F9 tuşuna basın.
+1. **Çalıştır** menüsünde, **konfigürasyonları Düzenle**' yi seçin.
+1. **Uzaktan**eklemek için **(+)** seçeneğini belirleyin.
+1. _Ad_ ve _Ayarlar_ alanlarını doldurun ve ardından yapılandırmayı kaydetmek için **Tamam** ' ı seçin.
+1. Kurulumdan sonra, hata ayıklamayı başlatmak için **< uzak yapılandırma adı > hata ayıkla** ' yı seçin veya klavyenizde SHIFT + F9 tuşlarına basın.
 
-   ![Intellij işlevlerinde hata ayıklama](media/functions-create-first-java-intellij/debug-configuration-intellij.PNG)
+   ![IntelliJ 'de hata ayıklama işlevleri](media/functions-create-first-java-intellij/debug-configuration-intellij.png)
 
-1. İşlemi tamamladığınızda, hata ayıklayıcı ve çalışan işlemi durdurun. İşlevi yalnızca bir ana bilgisayar etkin olduğu ve çalıştırıldığı yerel olarak bir zaman olabilir.
+1. İşiniz bittiğinde, hata ayıklayıcıyı ve çalışan işlemi durdurun. Tek seferde yalnızca bir işlev Konağı etkin ve yerel olarak çalıştırılabilir.
 
 ## <a name="deploy-the-function-to-azure"></a>İşlevi Azure’a dağıtma
 
-1. İşlevinizi Azure'a dağıtmadan önce şunları yapmalısınız [oturum açmak için Azure CLI kullanarak](/cli/azure/authenticate-azure-cli?view=azure-cli-latest).
+1. İşlevinizi Azure 'a dağıtabilmeniz için önce [Azure CLI 'yi kullanarak oturum](/cli/azure/authenticate-azure-cli?view=azure-cli-latest)açmalısınız.
 
    ``` azurecli
    az login
    ```
 
-1. Kullanarak kodunuzu yeni bir işlev dağıtın `azure-functions:deploy` Maven hedefini. Belirleyebilirsiniz **azure işlevleri: dağıtma** Maven projeleriyle penceresinde seçeneği.
+1. `azure-functions:deploy` Maven hedefini kullanarak kodunuzu yeni bir işleve dağıtın. Ayrıca Maven projeleri penceresinde **Azure-Functions: dağıt** seçeneğini de belirleyebilirsiniz.
 
    ```
    mvn azure-functions:deploy
    ```
 
-1. İşlev başarıyla dağıtıldıktan sonra Azure CLI çıktı işleviniz için URL'yi bulun.
+1. İşlev başarıyla dağıtıldıktan sonra, Azure CLı çıktısında işlevinizin URL 'sini bulun.
 
    ``` output
    [INFO] Successfully deployed Function App with package.
@@ -118,4 +118,4 @@ Maven ile aynı ada sahip yeni bir klasörde proje dosyalarını oluşturur _Art
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Java işlevleri geliştirme hakkında daha fazla bilgi edinmek için [Java İşlevleri geliştirici kılavuzunu](functions-reference-java.md) gözden geçirin.
-- Kullanarak projenize farklı tetikleyicilere sahip ek işlevler ekleyin `azure-functions:add` Maven hedefini.
+- `azure-functions:add` Maven hedefini kullanarak projenize farklı tetikleyicilerle ek işlevler ekleyin.

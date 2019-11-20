@@ -108,7 +108,7 @@
 - name: Örnekler
   items:
     - name: Kod örnekleri
-      href: 'https://azure.microsoft.com/resources/samples/?service=service-fabric'
+      href: 'https://docs.microsoft.com/samples/browse/'
     - name: Azure PowerShell
       href: service-fabric-powershell-samples.md
     - name: Service Fabric CLI
@@ -131,8 +131,8 @@
           href: service-fabric-application-and-service-security.md
         - name: Service Fabric Kümesi güvenliği
           href: service-fabric-cluster-security.md
-        - name: Azure Ortak Güvenlik Öznitelikleri
-          href: service-fabric-security-attributes.md
+        - name: Yerleşik güvenlik denetimleri
+          href: service-fabric-security-controls.md
     - name: Terminoloji
       href: service-fabric-technical-overview.md
     - name: Uygulamalar oluşturma
@@ -197,6 +197,8 @@
       items:
         - name: Uygulama modeli
           href: service-fabric-application-model.md
+        - name: Uygulama modeli şablonları oluşturma
+          href: service-fabric-concept-resource-model.md
         - name: Uygulama ve hizmet bildirimleri
           href: service-fabric-application-and-service-manifests.md
         - name: Uygulama ve hizmet bildirimi örnekleri
@@ -274,7 +276,7 @@
           items:
             - name: Azure kümelerine genel bakış
               href: service-fabric-azure-clusters-overview.md
-            - name: Düğüm türleri ve VM Ölçek Kümeleri
+            - name: Düğüm türleri ve sanal makine ölçek kümeleri
               href: service-fabric-cluster-nodetypes.md
             - name: Azure’da kümeleri yükseltme
               href: service-fabric-cluster-upgrade.md
@@ -350,6 +352,12 @@
           href: service-fabric-diagnostics-partners.md
     - name: API Management ile tümleştirme
       href: service-fabric-api-management-overview.md
+    - name: Uygulama Kaynağı modeli
+      href: service-fabric-concept-resource-model.md
+    - name: Yönetilen Kimlik (önizleme)
+      href: concepts-managed-identity.md
+    - name: Kapsayıcı deposu kimlik bilgilerini yapılandırma
+      href: configure-container-repository-credentials.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Geliştirme ortamınızı kurma
@@ -474,11 +482,15 @@
               href: service-fabric-tutorial-deploy-api-management.md
             - name: Uygulama parolalarını yönetme
               href: service-fabric-application-secret-management.md
+            - name: Service Fabric Gizli Dizi Deposunu kullanma
+              href: service-fabric-application-secret-store.md
               items:
                 - name: Windows üzerinde şifreleme sertifikası ayarlama ve gizli dizileri şifreleme
                   href: service-fabric-application-secret-management-windows.md
                 - name: Linux üzerinde şifreleme sertifikası ayarlama ve gizli dizileri şifreleme
                   href: service-fabric-application-secret-management-linux.md
+                - name: Gizli anahtarları KeyVaultReference ile güvenli bir şekilde depolama (önizleme)
+                  href: service-fabric-keyvault-references.md
             - name: Güvenli iletişim için ters proxy ayarlarını yapılandırma
               href: service-fabric-reverseproxy-configure-secure-communication.md
             - name: Yerel kullanıcı veya sistem hesabı olarak bir hizmet başlangıcı komut dosyası çalıştırma
@@ -547,8 +559,8 @@
           href: service-fabric-cloud-services-migration-worker-role-stateless-service.md
         - name: Önerilen uygulamalar
           href: /azure/architecture/service-fabric/migrate-from-cloud-services
-        - name: Geçirilmiş bir uygulamayı yeniden düzenleme
-          href: /azure/architecture/service-fabric/refactor-migrated-app
+        - name: Uygulamalarınızı modernleştirme
+          href: /azure/architecture/service-fabric/modernize-app-azure-service-fabric
     - name: Uygulama yaşam döngüsünü yönetme
       items:
         - name: Uygulamaları paketleme
@@ -741,6 +753,26 @@
           href: service-fabric-reverse-proxy-diagnostics.md
         - name: Yerel kümenizde sorun giderme
           href: service-fabric-troubleshoot-local-cluster-setup.md
+    - name: Service Fabric uygulamaları için Yönetilen Kimlik kullanma (önizleme)
+      items:
+        - name: Küme kurulumu
+          items:
+            - name: Mevcut kümeyi yönetilen kimlikle yapılandırma
+              href: configure-existing-cluster-enable-managed-identity-token-service.md
+            - name: Yeni Azure Service Fabric kümesini yönetilen kimlikle yapılandırma
+              href: configure-new-azure-service-fabric-enable-managed-identity.md
+        - name: Uygulama kurulumu
+          items:
+            - name: Yönetilen kimlikle uygulama dağıtma
+              items:
+                - name: Sistem tarafından atanan bir yönetilen kimlikle uygulama dağıtma
+                  href: how-to-deploy-service-fabric-application-system-assigned-managed-identity.md
+                - name: Kullanıcı tarafından atanan bir yönetilen kimlikle uygulama dağıtma
+                  href: how-to-deploy-service-fabric-application-user-assigned-managed-identity.md
+        - name: Service Fabric uygulama koduyla MITS kullanma
+          href: how-to-managed-identity-service-fabric-app-code.md
+        - name: Diğer Azure kaynaklarına erişim izni verme
+          href: how-to-grant-access-other-resources.md
 - name: Başvuru
   items:
     - name: Azure PowerShell
@@ -846,6 +878,8 @@
       href: service-fabric-common-questions.md
     - name: MSDN Forumu
       href: 'https://social.msdn.microsoft.com/Forums/home?forum=AzureServiceFabric'
+    - name: Azure Resource Manager Dağıtım Korkulukları
+      href: service-fabric-azure-resource-manager-guardrails.md
     - name: Fiyatlandırma
       href: 'https://azure.microsoft.com/pricing/details/service-fabric/'
     - name: Fiyatlandırma hesaplayıcı

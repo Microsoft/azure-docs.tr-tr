@@ -9,37 +9,37 @@ ms.date: 12/13/2018
 ms.author: gwallace
 ms.custom: include file
 ms.openlocfilehash: 2823a33b25812a69ad463433bacd9710655c9176
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 09/18/2019
 ms.locfileid: "67188778"
 ---
 #### <a name="process-automation"></a>Süreç otomasyonu
 
 | Resource | Üst sınır |Notlar|
 | --- | --- |---|
-| Azure Otomasyonu hesabını (nonscheduled işler) her 30 saniyede gönderilen yeni iş sayısı üst sınırını |100 |Bu sınıra ulaşıldığında, bir iş oluşturmak için sonraki istekler başarısız. İstemci bir hata yanıtı alır.|
-| En fazla eş zamanlı çalışan işleri, Otomasyon hesabı (nonscheduled işler) her zaman aynı örneği sayısı |200 |Bu sınıra ulaşıldığında, bir iş oluşturmak için sonraki istekler başarısız. İstemci bir hata yanıtı alır.|
-| En fazla depolama boyutunu çalışırken 30 günlük dönem için iş meta verileri | 10 GB (yaklaşık 4 milyon işler)|Bu sınıra ulaşıldığında, bir iş oluşturmak için sonraki istekler başarısız. |
-| En fazla iş akışı sınırı|1MB|Tek bir akışın 1 MB'den büyük olamaz.|
-| Otomasyon hesabı başına her 30 saniyede aktarılan modülleri sayısı |5 ||
-| Bir modülün en büyük boyutu |100 MB ||
-| İş çalıştırma zamanı, ücretsiz katmanı |Takvim ayı başına abonelik başına 500 dakika ||
-| Disk alanı korumalı alan izin verilen maksimum miktarı<sup>1</sup> |1 GB |Yalnızca Azure sanal için geçerlidir.|
-| Bir korumalı alan için verilen bellek miktarını<sup>1</sup> |400 MB |Yalnızca Azure sanal için geçerlidir.|
-| Korumalı alan izin verilen ağ yuva sayısı<sup>1</sup> |1000 |Yalnızca Azure sanal için geçerlidir.|
-| Runbook izin verilen en uzun çalışma<sup>1</sup> |3 saat |Yalnızca Azure sanal için geçerlidir.|
-| Otomasyon hesapları bir abonelikte en fazla sayısı |Sınırsız ||
-| Karma çalışan grupları Otomasyon hesabı başına en fazla sayısı|4,000||
-|Tek bir karma Runbook çalışanı üzerinde çalıştırılabilir eşzamanlı iş sayısı|50 ||
-| En fazla runbook işi parametre boyutu   | 512 kilobitlik||
-| En fazla runbook parametreleri   | 50|50 parametresi sınıra ulaştıysanız, JSON veya XML dize için bir parametre geçirin ve runbook ayrıştırılamadı.|
-| En fazla Web kancası yükü boyutu |  512 kilobitlik|
-| İş verileri en fazla gün sayısı|30 gün|
-| PowerShell iş akışı durumu üst sınırı |5 MB| PowerShell iş akışı runbook'ları için geçerli olduğunda denetim noktası oluşturma iş akışı.|
+| Her Azure Otomasyonu hesabı (zamanlanmamış iş değil) için her 30 saniyede gönderilen en fazla yeni iş sayısı |100 |Bu sınıra ulaşıldığında, bir iş oluşturmaya yönelik sonraki istekler başarısız olur. İstemci bir hata yanıtı alır.|
+| Otomasyon hesabı başına aynı zamanda aynı anda çalışan iş sayısı üst sınırı (zamanlanmamış iş) |200 |Bu sınıra ulaşıldığında, bir iş oluşturmaya yönelik sonraki istekler başarısız olur. İstemci bir hata yanıtı alır.|
+| 30 günlük bir dönem için iş meta verilerinin maksimum depolama alanı boyutu | 10 GB (yaklaşık 4.000.000 iş)|Bu sınıra ulaşıldığında, bir iş oluşturmaya yönelik sonraki istekler başarısız olur. |
+| En fazla iş akışı sınırı|1 MB|Tek bir akış 1 MB 'den büyük olamaz.|
+| Otomasyon hesabı başına her 30 saniyede bir içeri aktarılabilen en fazla modül sayısı |5 ||
+| Modülün en büyük boyutu |100 MB ||
+| İş çalışma süresi, ücretsiz katman |her takvim ayında abonelik başına 500 dakika ||
+| Sandbox<sup>1</sup> başına izin verilen maksimum disk alanı miktarı |1 GB |Yalnızca Azure korumalı alanlar için geçerlidir.|
+| Bir korumalı alan<sup>1</sup> ' e verilen maksimum bellek miktarı |400 MB |Yalnızca Azure korumalı alanlar için geçerlidir.|
+| Sandbox başına izin verilen en fazla ağ yuvası sayısı<sup>1</sup> |1000 |Yalnızca Azure korumalı alanlar için geçerlidir.|
+| Runbook başına izin verilen en fazla çalışma zamanı<sup>1</sup> |3 saat |Yalnızca Azure korumalı alanlar için geçerlidir.|
+| Bir abonelikteki en fazla Otomasyon hesabı sayısı |Sınır yok ||
+| Otomasyon hesabı başına en fazla karma çalışan grubu sayısı|4,000||
+|Tek bir karma runbook çalışanı üzerinde çalıştırılabilen maksimum eşzamanlı iş sayısı|50 ||
+| Maksimum runbook işi parametre boyutu   | 512 kilobit||
+| En fazla runbook parametreleri   | 50|50 parametre sınırına ulaşırsanız, bir parametreye JSON veya XML dizesi geçirebilir ve runbook ile ayrıştırılabilir.|
+| En fazla Web kancası yükü boyutu |  512 kilobit|
+| İş verilerinin tutulacağı maksimum gün sayısı|30 gün|
+| En yüksek PowerShell iş akışı durum boyutu |5 MB| Checkişaretleme iş akışı sırasında PowerShell iş akışı runbook 'ları için geçerlidir.|
 
-<sup>1</sup>bir korumalı alan birden fazla iş tarafından kullanılan paylaşılan bir ortamdır. Aynı sanal kullanan işleri tarafından korumalı kaynak sınırlamaları bağlıdır.
+<sup>1</sup> Korumalı alan, birden çok iş tarafından kullanılabilen paylaşılan bir ortamdır. Aynı korumalı alanı kullanan işler, korumalı alanın kaynak sınırlamalarına göre bağlanır.
 
 #### <a name="change-tracking-and-inventory"></a>Değişiklik İzleme ve Stok
 
@@ -49,15 +49,15 @@ Aşağıdaki tabloda değişiklik izleme için makine başına izlenen öğe sı
 |---|---|---|
 |Dosya|500||
 |Kayıt defteri|250||
-|Windows yazılım|250|Yazılım güncelleştirmeleri dahil değildir.|
-|Linux paketleri|1,250||
+|Windows yazılımı|250|Yazılım güncelleştirmelerini içermez.|
+|Linux paketleri|1\.250||
 |Hizmetler|250||
-|Daemon|250||
+|Program|250||
 
 #### <a name="update-management"></a>Güncelleştirme Yönetimi
 
-Aşağıdaki tabloda, güncelleştirme yönetimi için sınırlar gösterilmektedir.
+Aşağıdaki tabloda Güncelleştirme Yönetimi sınırları gösterilmektedir.
 
 | **Kaynak** | **Sınırı**| **Notlar** |
 |---|---|---|
-|Makine güncelleştirme dağıtımı sayısı|1000||
+|Güncelleştirme dağıtımı başına makine sayısı|1000||

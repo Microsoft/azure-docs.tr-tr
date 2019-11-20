@@ -1,7 +1,7 @@
 ---
-title: Doğruluk düzenleri ekleyin
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: Language Understanding (LUIS) uygulamalarında tahmin doğruluğunu artırmak için desen şablonları ekleyin.
+title: Desenler doğruluk Ekle-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Language Understanding (LUSıS) uygulamalarında tahmin doğruluğunu artırmak için model şablonları ekleyin.
 services: cognitive-services
 author: diberry
 manager: nitinme
@@ -9,38 +9,43 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 04/01/2019
+ms.date: 11/15/2019
 ms.author: diberry
-ms.openlocfilehash: 202b9632b7a7faaf955874a0300edbe5134b7fa1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 39b56c5e73c8ce85a020402dafb622b90c536a1e
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60196720"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74143872"
 ---
-# <a name="how-to-add-patterns-to-improve-prediction-accuracy"></a>Nasıl tahmin doğruluğunu artırmak için düzenleri ekleyin
-Bir LUIS uygulaması konuşma uç noktası aldıktan sonra kullanmak bir [deseni](luis-concept-patterns.md) sözcük sırasını ve sözcük seçim içindeki bir desenle açığa konuşma için tahmin doğruluğunu artırmak için. Belirli desenleri kullanın [söz dizimi](luis-concept-patterns.md#pattern-syntax) konumunu belirtmek için: [varlıkları](luis-concept-entity-types.md), varlık [rolleri](luis-concept-roles.md)ve isteğe bağlı metin.
+# <a name="how-to-add-patterns-to-improve-prediction-accuracy"></a>Tahmin doğruluğunu artırmak için desenler ekleme
+Bir Lua uygulaması uç nokta dıklılığını aldıktan sonra, sözcük sırası ve Word seçimindeki bir düzeni açığa çıkarmaya yönelik tahmin doğruluğunu artırmak için bir [desen](luis-concept-patterns.md) kullanın. Desenler, konumunu belirtmek için özel [sözdizimini](luis-concept-patterns.md#pattern-syntax) kullanır: [varlıklar](luis-concept-entity-types.md), varlık [rolleri](luis-concept-roles.md)ve isteğe bağlı metin.
+
+[!INCLUDE [Uses preview portal](includes/uses-portal-preview.md)]
 
 ## <a name="add-template-utterance-to-create-pattern"></a>Desen oluşturmak için şablon utterance Ekle
+
 1. Adını seçerek uygulamanızı açın **uygulamalarım** sayfasında ve ardından **desenleri** sol bölmede altında **uygulama performansını**.
 
-    ![Desen listesinin ekran görüntüsü](./media/luis-how-to-model-intent-pattern/patterns-1.png)
+    > [!div class="mx-imgBorder"]
+    > Desenler listesinin ekran görüntüsünü ![](./media/luis-how-to-model-intent-pattern/patterns-1.png)
 
-2. Desen için doğru hedefini seçin. 
+1. Desen için doğru hedefini seçin. 
 
-    ![Hedefi seçin](./media/luis-how-to-model-intent-pattern/patterns-2.png)
+1. Şablon metin şablonu utterance yazın ve Enter'ı seçin. Varlık adı girmek istediğiniz zaman doğru deseni varlık sözdizimini kullanın. Varlık sözdizimi ile başlayan `{`. Varlıklar görüntüler listesi. Doğru varlığı seçin. 
 
-3. Şablon metin şablonu utterance yazın ve Enter'ı seçin. Varlık adı girmek istediğiniz zaman doğru deseni varlık sözdizimini kullanın. Varlık sözdizimi ile başlayan `{`. Varlıklar görüntüler listesi. Doğru varlığı seçin ve ardından Enter'ı seçin. 
+    > [!div class="mx-imgBorder"]
+    > ](./media/luis-how-to-model-intent-pattern/patterns-3.png) deseninin varlık ekran görüntüsünü ![
 
-    ![Varlık deseni için ekran görüntüsü](./media/luis-how-to-model-intent-pattern/patterns-3.png)
+    Varlığınız bir [rol](luis-concept-roles.md)içeriyorsa, `{Location:Origin}`gibi varlık adından sonra `:`tek bir iki nokta üst üste sahip rolü belirtin. Rolleri varlıkların listesini bir liste görüntüler. Rolü seçin ve ardından Enter'ı seçin. 
 
-    Varlık içeriyorsa bir [rol](luis-concept-roles.md), tek bir iki nokta rolüyle belirtmek `:`, varlık adı sonra gibi `{Location:Origin}`. Rolleri varlıkların listesini bir liste görüntüler. Rolü seçin ve ardından Enter'ı seçin. 
-
-    ![Rolü içeren varlığın ekran görüntüsü](./media/luis-how-to-model-intent-pattern/patterns-4.png)
+    > [!div class="mx-imgBorder"]
+    > rol](./media/luis-how-to-model-intent-pattern/patterns-4.png) varlığın ekran görüntüsünü ![
 
     Doğru varlık seçtikten sonra deseni girdikten ve ardından Enter'ı seçin. Girme desenleri, işiniz bittiğinde [eğitme](luis-how-to-train.md) uygulamanızı.
 
-    ![Girilen deseninin her iki türdeki varlık ile ekran görüntüsü](./media/luis-how-to-model-intent-pattern/patterns-5.png)
+    > [!div class="mx-imgBorder"]
+    > Her iki varlık türü ile girilen düzenin ekran görüntüsünü ![](./media/luis-how-to-model-intent-pattern/patterns-5.png)
 
 ## <a name="train-your-app-after-changing-model-with-patterns"></a>Model desenleri ile değiştirdikten sonra uygulamanızı eğitin
 Sonra ekleme, düzenleme, kaldırmak veya bir desen yeniden atama [eğitme](luis-how-to-train.md) ve [yayımlama](luis-how-to-publish-app.md) uygulamanız için uç nokta sorguları etkilemek yaptığınız değişiklikleri. 
@@ -56,22 +61,22 @@ Sonra ekleme, düzenleme, kaldırmak veya bir desen yeniden atama [eğitme](luis
 <a name="remove-entity-or-intent-filter"></a>
 <a name="add-pattern-from-existing-utterance-on-intent-or-entity-page"></a>
 
-## <a name="use-contextual-toolbar"></a>Bağlamsal araç çubuğu kullan
+## <a name="use-contextual-toolbar"></a>Bağlamsal araç çubuğunu kullan
 
-Desenler listenin üstündeki bağlamsal araç sağlar:
+Desenler listesinin üzerindeki bağlamsal araç çubuğu şunları yapmanıza olanak sağlar:
 
-* Desenler arayın
+* Desenler ara
 * Bir desen Düzenle
 * Farklı bir amaç için ayrı ayrı desen yeniden atama
 * Farklı bir hedefi için çeşitli desenlerden yeniden atama
-* Delete a tek deseni
+* Tek-stili Sil
 * Çeşitli desenlerden Sil
 * Varlık tarafından filtre deseni listesi
-* Filtre-deseni-liste-tarafından-hedefi
+* Filtre-ölçütü-ölçütü-Listele
 * Varlık veya hedefi Filtreyi Kaldır
 * Desen hedefi veya varlık sayfasında mevcut utterance ekleyin
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bilgi nasıl [desen yapı](luis-tutorial-pattern.md) bir pattern.any ve bir öğretici rolleriyle.
+* Bir modelle bir model [oluşturma](luis-tutorial-pattern.md) hakkında bilgi edinin.
 * Bilgi nasıl [eğitme](luis-how-to-train.md) uygulamanızı.

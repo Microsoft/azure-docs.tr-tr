@@ -2,18 +2,18 @@
 title: Azure’da Kubernetes öğreticisi - Uygulamayı güncelleştirme
 description: Bu Azure Kubernetes Service (AKS) öğreticisinde var olan bir AKS uygulama dağıtımını uygulama kodunun yeni sürümüyle güncelleştirmeyi öğreneceksiniz.
 services: container-service
-author: tylermsft
+author: mlearned
 ms.service: container-service
 ms.topic: tutorial
 ms.date: 12/19/2018
-ms.author: twhitney
+ms.author: mlearned
 ms.custom: mvc
-ms.openlocfilehash: 05eac7e673ad01e9d3e0fb25f261444fd7bc4e6d
-ms.sourcegitcommit: cababb51721f6ab6b61dda6d18345514f074fb2e
+ms.openlocfilehash: b645fc9f67229d087a5d1655f733e2f3e50d4471
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66475504"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67614388"
 ---
 # <a name="tutorial-update-an-application-in-azure-kubernetes-service-aks"></a>Öğretici: Azure Kubernetes Service (AKS) uygulama güncelleştirme
 
@@ -33,7 +33,7 @@ Bu yedi parçalı öğreticinin altıncı bölümünde, örnek Azure Vote uygula
 
 Bu öğreticide ayrıca uygulama kaynak kodunu içeren bir uygulama deposu da kopyalandı ve önceden oluşturulmuş bir Docker Compose dosyası kullanıldı. Deponun bir kopyasını oluşturduktan ve dizinleri kopyalanmış dizine değiştirdiğinizi doğrulayın. Bu adımları tamamlamadıysanız ve takip etmek istiyorsanız başlayın [öğretici 1 – kapsayıcı görüntüleri oluşturma][aks-tutorial-prepare-app].
 
-Bu öğretici, Azure CLI Sürüm 2.0.53 çalıştırdığınız gerektirir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme][azure-cli-install].
+Bu öğretici, Azure CLI Sürüm 2.0.53 çalıştırdığınız gerektirir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli-install].
 
 ## <a name="update-an-application"></a>Uygulamayı güncelleştirme
 
@@ -57,7 +57,7 @@ Dosyayı kaydedin ve kapatın. İçinde `vi`, kullanın `:wq`.
 
 ## <a name="update-the-container-image"></a>Kapsayıcı görüntüsünü güncelleştirme
 
-Ön uç görüntüsünü yeniden oluşturmak ve güncelleştirilen uygulamayı test etmek için [docker-compose][docker-compose] komutunu kullanın. `--build` bağımsız değişkeni, uygulama görüntüsünü yeniden oluşturmak üzere Docker Compose'a komut vermek için kullanılır:
+Ön uç görüntüsünü yeniden oluşturmak ve güncelleştirilmiş uygulamayı test etmek için kullanın [docker-compose][docker-compose]. `--build` bağımsız değişkeni, uygulama görüntüsünü yeniden oluşturmak üzere Docker Compose'a komut vermek için kullanılır:
 
 ```console
 docker-compose up --build -d
@@ -85,10 +85,10 @@ Görüntüyü etiketlemek için [docker tag][docker-tag]’i kullanın. Aşağı
 docker tag azure-vote-front <acrLoginServer>/azure-vote-front:v2
 ```
 
-Şimdi görüntüyü kayıt defterinize yüklemek için [docker push][docker-push] komutunu kullanın. `<acrLoginServer>` yerine ACR oturum açma sunucunuzun adını yazın.
+Artık [docker itme][docker-push] görüntüyü kayıt defterinize yüklemek için. `<acrLoginServer>` yerine ACR oturum açma sunucunuzun adını yazın.
 
 > [!NOTE]
-> ACR kayıt defterinize giden sorunlarla karşılaşıyorsanız, hala oturum açtığınızdan emin olun. Çalıştırma [az acr oturum açma] [ az-acr-login] komutunu kullanarak, oluşturduğunuz Azure Container Registry'nize adını [bir Azure Container Registry oluşturma](tutorial-kubernetes-prepare-acr.md#create-an-azure-container-registry) adım. Örneğin, `az acr login --name <azure container registry name>`.
+> ACR kayıt defterinize giden sorunlarla karşılaşıyorsanız, hala oturum açtığınızdan emin olun. Çalıştırma [az acr oturum açma][az-acr-login] komutunu kullanarak, oluşturduğunuz Azure Container Registry'nize adını [bir Azure Container Registry oluşturma](tutorial-kubernetes-prepare-acr.md#create-an-azure-container-registry) adım. Örneğin, `az acr login --name <azure container registry name>`.
 
 ```console
 docker push <acrLoginServer>/azure-vote-front:v2
@@ -96,7 +96,7 @@ docker push <acrLoginServer>/azure-vote-front:v2
 
 ## <a name="deploy-the-updated-application"></a>Güncelleştirilmiş uygulamayı dağıtma
 
-En uzun çalışma süresini sağlamak için uygulama podunun birden çok örneğini çalıştırılması gerekir. [kubectl get pods][kubectl-get] komutunu kullanarak çalışan ön uç görüntülerinin sayısını doğrulayın:
+En uzun çalışma süresini sağlamak için uygulama podunun birden çok örneğini çalıştırılması gerekir. Ön uç örnekleri ile çalışan sayısını doğrulayın [kubectl pod'ları alma][kubectl-get] komutu:
 
 ```
 $ kubectl get pods
@@ -163,7 +163,7 @@ Bu öğreticide, bir uygulamayı güncelleştirdiniz ve bu güncelleştirmeyi, A
 Bir AKS kümesini yeni bir Kubernetes sürümüne yükseltmeyi öğrenmek için bir sonraki öğreticiye geçin.
 
 > [!div class="nextstepaction"]
-> [Kubernetes’i yükseltme][aks-tutorial-upgrade]
+> [Kubernetes'i yükseltme][aks-tutorial-upgrade]
 
 <!-- LINKS - external -->
 [docker-compose]: https://docs.docker.com/compose/

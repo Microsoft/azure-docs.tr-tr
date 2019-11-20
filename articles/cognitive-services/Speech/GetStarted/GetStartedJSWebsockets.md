@@ -1,75 +1,75 @@
 ---
-title: Javascript'teki Bing konuşma tanıma API'si ile çalışmaya başlama | Microsoft Docs
+title: JavaScript 'te Bing Konuşma tanıma API 'SI ile çalışmaya başlama | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Bing konuşma tanıma API'si Bilişsel hizmetler, sürekli olarak Konuşmayı metne dönüştürme uygulamalar geliştirmek için kullanın.
+description: Konuşulan sesi sürekli metne dönüştüren uygulamalar geliştirmek için bilişsel hizmetler 'de Bing Konuşma tanıma API 'sini kullanın.
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 17901ad40a48e9ee8d1a8b872b04ad52b75b3a52
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: eef1a4885b77ae94f11d3d5bda5ded9b70ed63a4
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515206"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70965807"
 ---
-# <a name="get-started-with-the-speech-recognition-api-in-javascript"></a>JavaScript içinde konuşma tanıma API'si ile çalışmaya başlama
+# <a name="get-started-with-the-speech-recognition-api-in-javascript"></a>JavaScript 'te konuşma tanıma API 'SI ile çalışmaya başlama
 
 [!INCLUDE [Deprecation note](../../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Konuşma tanıma API'sini kullanarak Konuşmayı metne dönüştürme uygulamaları geliştirebilirsiniz. JavaScript istemci Kitaplığı'nı kullanan [konuşma hizmeti WebSocket Protokolü](../API-Reference-REST/websocketprotocol.md), metin ve konuşma almanızı sağlayan aynı anda transcribed. Bu makalede javascript'teki konuşma tanıma API'si ile çalışmaya başlamanıza yardımcı olur.
+Konuşma tanıma API 'sini kullanarak, konuşulan sesi metne dönüştüren uygulamalar geliştirebilirsiniz. JavaScript istemci kitaplığı, [konuşma hizmeti WebSocket protokolünü](../API-Reference-REST/websocketprotocol.md)kullanır, bu da aynı anda metni konuşmanıza ve almanızı sağlar. Bu makale, JavaScript 'te konuşma tanıma API 'sini kullanmaya başlamanıza yardımcı olur.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-### <a name="subscribe-to-the-speech-recognition-api-and-get-a-free-trial-subscription-key"></a>Konuşma tanıma API'si için abone olur ve ücretsiz deneme aboneliği anahtarını alma
+### <a name="subscribe-to-the-speech-recognition-api-and-get-a-free-trial-subscription-key"></a>Konuşma tanıma API 'sine abone olun ve ücretsiz deneme aboneliği anahtarı alın
 
-Konuşma tanıma API'si, Bilişsel hizmetler bir parçasıdır. Ücretsiz deneme aboneliği anahtarları alabilirsiniz [Bilişsel hizmetler abonelik](https://azure.microsoft.com/try/cognitive-services/) sayfası. Konuşma tanıma API'si belirledikten sonra seçin **API anahtarı alma** anahtarını almak için. Birincil ve ikincil anahtar döndürür. İki anahtarı kullanabilmeniz için her iki anahtarı aynı kotası bağlıdır.
+Konuşma API 'SI bilişsel hizmetlerin bir parçasıdır. Bilişsel [Hizmetler aboneliği](https://azure.microsoft.com/try/cognitive-services/) sayfasından ücretsiz deneme aboneliği anahtarlarına sahip olabilirsiniz. Konuşma API 'sini seçtikten sonra anahtarı almak için **API anahtarı al** ' ı seçin. Birincil ve ikincil anahtar döndürür. Her iki anahtar de aynı kotaya bağlıdır, bu nedenle her iki anahtarı da kullanabilirsiniz.
 
 > [!IMPORTANT]
-> Bir abonelik anahtarı edinirler. Konuşma istemci kitaplıkları kullanabilmeniz için önce olmalıdır bir [abonelik anahtarı](https://azure.microsoft.com/try/cognitive-services/).
+> Abonelik anahtarı alın. Konuşma istemci kitaplıklarını kullanabilmeniz için önce bir [abonelik anahtarınız](https://azure.microsoft.com/try/cognitive-services/)olması gerekir.
 
 ## <a name="get-started"></a>başlarken
 
-Bu bölümde biz, örnek bir HTML sayfası yüklemek için gereken adımlarda size yol gösterir. Örnek bulunan bizim [GitHub deposu](https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript). Yapabilecekleriniz **örnek doğrudan açmak** deposundan veya **örneği yerel bir kopyasından açın** depo.
+Bu bölümde, örnek bir HTML sayfası yüklemek için gerekli adımlarda size yol göstereceğiz. Örnek, [GitHub deponuzda](https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript)bulunur. **Örneği doğrudan depodan açabilir** veya **bir deponun yerel kopyasından örneği açabilirsiniz** .
 
 > [!NOTE]
-> Bazı tarayıcılar dönüştürmesinin güvenliği kaldırılamıyor kaynak mikrofon erişimi engelleyin. Bu nedenle, 'örneği' barındırmak için önerilir / 'uygulamanızı' bunu desteklenen tüm tarayıcılarda çalıştırmak için https.
+> Bazı tarayıcılar güvenli olmayan kaynak üzerinde mikrofon erişimini engeller. Bu nedenle, desteklenen tüm tarayıcılarda çalışmasını sağlamak için ' Sample '/' App ' ' in https üzerinde barındırılmasına önerilir.
 
-### <a name="open-the-sample-directly"></a>Örnek doğrudan açın
+### <a name="open-the-sample-directly"></a>Örneği doğrudan açın
 
-Yukarıda açıklanan şekilde bir abonelik anahtarı edinin. Açılacağını [örnek bağlantı](https://htmlpreview.github.io/? https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript/blob/preview/samples/browser/Sample.html). Bu sayfayı varsayılan tarayıcınızı yükler (kullanılarak oluşturulması [htmlPreview](https://github.com/htmlpreview/htmlpreview.github.com)).
+Yukarıda açıklandığı gibi bir abonelik anahtarı edinin. Ardından, [Örneğin bağlantısını](https://htmlpreview.github.io/?https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript/blob/preview/samples/browser/Sample.html)açın. Bu, sayfayı varsayılan tarayıcınıza yükler ( [Htmlpreview](https://github.com/htmlpreview/htmlpreview.github.com)kullanılarak oluşturulur).
 
-### <a name="open-the-sample-from-a-local-copy"></a>Örneği yerel bir kopyasından açın
+### <a name="open-the-sample-from-a-local-copy"></a>Örneği yerel kopyadan aç
 
-Örnekleri yerel makineye denemek için bu depoyu Kopyala:
+Örneği yerel olarak denemek için bu depoyu kopyalayın:
 
 ```
 git clone https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript
 ```
 
-TypeScript kaynakları Derle ve bunları tek bir JavaScript dosyasına paketleyin ([npm](https://www.npmjs.com/) makinenizde yüklü olması gerekir). Kopyalanan deponun kök ile değiştirebilir ve komutları çalıştırın:
+TypeScript kaynaklarını derleyin ve tek bir JavaScript dosyasına ([NPM](https://www.npmjs.com/) 'nin makinenizde yüklü olması gerekir) paketleyin. Kopyalanmış deponun köküne geçin ve komutları çalıştırın:
 
 ```
 cd SpeechToText-WebSockets-Javascript && npm run bundle
 ```
 
-Açık `samples\browser\Sample.html` sık kullandığınız tarayıcıda.
+En `samples\browser\Sample.html` sevdiğiniz tarayıcınızda açın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-SDK'sı kendi Web eklemek hakkında daha fazla bilgi edinilebilir [burada](https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript).
+SDK 'nın kendi Web sayfanıza eklenmesi hakkında daha fazla bilgiye [buradan](https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript)ulaşabilirsiniz.
 
 ## <a name="remarks"></a>Açıklamalar
 
-- Konuşma tanıma API'si üç destekler [tanıma modları](../concepts.md#recognition-modes). Güncelleştirerek moduna geçebilirsiniz **Setup()** işlevi örnek.HTML dosyasında bulunamadı. Örnek modu ayarlar `Interactive` varsayılan olarak. Parametre modunu değiştirmek için güncelleştirme `SR.RecognitionMode.Interactive` başka bir mod. Örneğin, parametre değiştirme `SR.RecognitionMode.Conversation`.
-- Desteklenen dillerin tam bir listesi için bkz. [desteklenen diller](../API-Reference-REST/supportedlanguages.md).
+- Konuşma tanıma API 'SI üç [tanıma modunu](../concepts.md#recognition-modes)destekler. Sample. HTML dosyasında bulunan **Setup ()** işlevini güncelleştirerek modu değiştirebilirsiniz. Örnek, varsayılan `Interactive` olarak modunu ayarlar. Modu değiştirmek için parametreyi `SR.RecognitionMode.Interactive` başka bir moda güncelleştirin. Örneğin, parametresini olarak `SR.RecognitionMode.Conversation`değiştirin.
+- Desteklenen dillerin tüm listesi için bkz. [desteklenen diller](../API-Reference-REST/supportedlanguages.md).
 
 ## <a name="related-topics"></a>İlgili konular
 
-- [Örnek depoyu JavaScript konuşma tanıma API'si](https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript)
-- [REST API'si ile çalışmaya başlama](GetStartedREST.md)
+- [JavaScript konuşma tanıma API 'SI örnek deposu](https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript)
+- [REST API kullanmaya başlayın](GetStartedREST.md)

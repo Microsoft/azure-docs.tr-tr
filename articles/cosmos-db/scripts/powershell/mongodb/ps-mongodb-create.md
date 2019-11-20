@@ -1,19 +1,20 @@
 ---
-title: Azure PowerShell Betiği - Azure Cosmos DB MongoDB API'si veritabanı ve koleksiyonu oluşturma
-description: Azure PowerShell Betiği - Azure Cosmos DB MongoDB API'si veritabanı ve koleksiyonu oluşturma
+title: Azure PowerShell betiği-Azure Cosmos DB MongoDB API veritabanı ve koleksiyonu oluşturma
+description: Azure PowerShell betiği-Azure Cosmos DB MongoDB API veritabanı ve koleksiyonu oluşturma
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: samples
+ms.subservice: cosmosdb-mongo
+ms.topic: sample
 ms.date: 05/18/2019
 ms.author: mjbrown
-ms.openlocfilehash: 9263df4b803d60fa0bfdf5bdc30f62e732e774b9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 54fd220978a66081979de456568173a7e2784280
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66247462"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71178902"
 ---
-# <a name="create-a-database-and-collection-for-azure-cosmos-db---mongodb-api"></a>Bir veritabanı ve Azure Cosmos DB - MongoDB API'si için koleksiyon oluşturma
+# <a name="create-a-database-and-collection-for-azure-cosmos-db---mongodb-api"></a>Azure Cosmos DB-MongoDB API 'SI için veritabanı ve koleksiyon oluşturma
 
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
@@ -38,8 +39,8 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 |**Azure kaynakları**| |
-| [Yeni AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
-|**Azure kaynak grupları**| |
+| [New-AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
+|**Azure Kaynak grupları**| |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 |||
 

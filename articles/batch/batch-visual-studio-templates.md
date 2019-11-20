@@ -1,134 +1,133 @@
 ---
-title: Visual Studio şablonları - Azure Batch ile çözümler geliştirin | Microsoft Docs
-description: Visual Studio Proje şablonları uygulamak ve Azure Batch'te işlem yoğunluklu iş yüklerinizi çalıştırmak nasıl yardımcı olabileceğini öğrenin.
+title: Visual Studio şablonlarıyla çözüm oluşturma-Azure Batch | Microsoft Docs
+description: Visual Studio proje şablonlarının Azure Batch üzerinde yoğun işlem yoğunluğu olan iş yüklerinizi uygulamanıza ve çalıştırmanıza nasıl yardımcı olabileceğini öğrenin.
 services: batch
 documentationcenter: .net
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: 5e041ae2-25af-4882-a79e-3aa63c4bfb20
 ms.service: batch
-ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 02/27/2017
 ms.author: lahugh
 ms.custom: seodec18
-ms.openlocfilehash: 085bfa582b676f34a02e4c1c5ae7e69c49e5cb4e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 60662e723a55c969fdd4b70e732303c90bbf9e8b
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60550095"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70094352"
 ---
-# <a name="use-visual-studio-project-templates-to-jump-start-batch-solutions"></a>Batch çözümleri oluşturma sürecini hızlandıracak biçimde Visual Studio Proje şablonları kullanın.
+# <a name="use-visual-studio-project-templates-to-jump-start-batch-solutions"></a>Toplu Iş çözümlerini başlatmak için Visual Studio proje şablonlarını kullanın
 
-**İş Yöneticisi** ve **görev işlemci Visual Studio şablonları** toplu işlemi için uygulama ve en az çaba ile toplu işlem yoğunluklu iş yüklerinizi çalıştırmak için yardımcı olması için kod sağlayın. Bu belge, bu şablonları açıklar ve bunların nasıl kullanılacağını yönelik yönergeler sağlanmaktadır.
+Batch için **Iş Yöneticisi** ve **görev işlemcisi Visual Studio şablonları** , işlem için yoğun iş yüklerinizi en az çaba miktarı ile uygulamanıza ve çalıştırmanıza yardımcı olacak kod sağlar. Bu belgede bu şablonlar açıklanmakta ve bunların nasıl kullanılacağına ilişkin yönergeler sağlanmaktadır.
 
 > [!IMPORTANT]
-> Bu makalede, yalnızca bu iki şablonları için geçerli olan bilgiler ele alınmaktadır ve Batch hizmeti ve onunla ilgili temel kavramları hakkında bilgi sahibi olduğunuzu varsayar: havuzlar, işlem düğümleri, işler ve görevler, iş yöneticisi görevleri, ortam değişkenleri ve diğer ilgili bilgiler. Daha fazla bilgi bulabilirsiniz [Azure Batch temel bilgileri](batch-technical-overview.md) ve [Batch özelliğine genel bakış geliştiriciler için](batch-api-basics.md).
+> Bu makalede yalnızca bu iki şablon için geçerli bilgiler ele alınmaktadır ve Batch hizmeti ile bununla ilgili önemli kavramlar hakkında bilgi sahibi olduğunuz varsayılır: havuzlar, işlem düğümleri, işler ve görevler, İş Yöneticisi görevleri, ortam değişkenleri ve diğer ilgili bilgi. [Azure Batch temel](batch-technical-overview.md) bilgileri ve [geliştiriciler için Batch özelliğine genel bakış](batch-api-basics.md)hakkında daha fazla bilgi edinebilirsiniz.
 > 
 > 
 
 ## <a name="high-level-overview"></a>Yüksek düzey genel bakış
-İş Yöneticisi ve görev işlemci şablonları, iki yararlı bileşenler oluşturmak için kullanılabilir:
+Iş Yöneticisi ve görev Işlemcisi şablonları, iki yararlı bileşen oluşturmak için kullanılabilir:
 
-* Bir işi paralel olarak birbirinden bağımsız olarak çalışabilen birden çok görevlere bölebilirsiniz bir işi ayırıcı uygulayan bir iş yöneticisi görevi.
-* Ön işleme ve bir uygulama komut satırı son işlemi gerçekleştirmek için kullanılabilir bir görev işlemci.
+* Bir iş bölümlendiricisini uygulayan ve bağımsız olarak, paralel olarak çalışabilen birden fazla görevde bir işi bozabilecek bir iş Yöneticisi görevi.
+* Uygulama komut satırı etrafında ön işleme ve işlem sonrası işlemleri gerçekleştirmek için kullanılabilen bir görev işlemcisi.
 
-Bir film oluşturma senaryosunda, işi Bölümlendirici tek film iş yüzlerce veya binlerce tek çerçeve ayrı ayrı işlem ayrı görevler ör. Karşılık olarak, görev işlemci işleme uygulaması çağırır ve her işlemek için gereken tüm bağımlı işlemleri çerçeve yanı sıra (örneğin, bir depolama konumuna kareyi kopyalama) ek eylemleri gerçekleştirin.
+Örneğin, bir film işleme senaryosunda, iş bölümlendiricisi tek bir film işini ayrı ayrı çerçeveleri ayrı olarak işleyen yüzlerce veya binlerce ayrı göreve dönüştürür. Görev işlemcisi, işleme uygulamasını ve her çerçeveyi işlemek için gereken tüm bağımlı işlemleri ve ek eylemler gerçekleştirmek (örneğin, işlenen çerçeveyi bir depolama konumuna kopyalamak) için çağırır.
 
 > [!NOTE]
-> İş Yöneticisi ve görev işlemci şablonları birbirinden bağımsız olduğundan hem veya yalnızca bir tanesi gereksinimlerine işlem işinizin ve tercihlerinize bağlı olarak kullanmayı seçebilirsiniz.
+> Iş Yöneticisi ve görev Işlemcisi şablonları birbirinden bağımsızdır, bu sayede işlem işinizin gereksinimlerine ve tercihlerinize göre her ikisini de veya yalnızca birini kullanmayı seçebilirsiniz.
 > 
 > 
 
-Aşağıdaki diyagramda gösterildiği gibi bu şablonları kullanan bir işlem işi üç aşamadan geçer:
+Aşağıdaki diyagramda gösterildiği gibi, bu şablonları kullanan bir işlem işi üç aşamaya geçer:
 
-1. İstemci kodu (örneğin, uygulama, web hizmeti, vb.), bir iş belirten, iş yöneticisi görevi gibi iş Yöneticisi programı azure'da Batch hizmetine gönderir.
-2. Batch hizmeti iş yöneticisi görevi, bir işlem düğümünde çalışır ve birçok gerektiği gibi iş Bölümlendirici koddaki özellikleri ve parametreleri temel bilgi işlem düğümü gibi iş Bölümlendirici üzerinde belirtilen sayıda görev işlemci görevleri başlatır.
-3. Görev işlemci görevler bağımsız olarak, girdi verilerini işlemek, çıktı verileri üretmek için paralel olarak çalıştırın.
+1. İstemci kodu (örn. uygulama, Web hizmeti vb.), Azure 'da Batch hizmetine iş gönderir ve iş Yöneticisi görevi iş Yöneticisi programını belirterek.
+2. Batch hizmeti, iş yöneticisi görevini bir işlem düğümünde çalıştırır ve iş bölümlendiricisi, iş ayırıcı kodundaki parametrelere ve belirtimlere göre gereken sayıda işlem düğümü üzerinde belirtilen sayıda görev işlemcisi görevini başlatır.
+3. Görev işlemcisi görevleri, giriş verilerini işlemek ve çıktı verilerini oluşturmak için bağımsız olarak paralel olarak çalışır.
 
-![İstemci kodu Batch hizmeti ile nasıl etkileştiğini gösteren diyagram][diagram01]
+![İstemci kodunun Batch hizmetiyle nasıl etkileşime gireceğini gösteren diyagram][diagram01]
 
 ## <a name="prerequisites"></a>Önkoşullar
-Batch şablonlarını kullanmak için aşağıdakiler gerekir:
+Batch şablonlarını kullanmak için şunlar gerekir:
 
-* Visual Studio 2015 yüklü bir bilgisayar. Batch şablonlarını şu anda yalnızca Visual Studio 2015 için desteklenir.
-* Kullanılabilir Batch şablonlarını [Visual Studio Galerisi] [ vs_gallery] Visual Studio uzantıları olarak. Şablonları almak için iki yolu vardır:
+* Visual Studio 2015 yüklü bir bilgisayar. Batch şablonları Şu anda yalnızca Visual Studio 2015 için desteklenmektedir.
+* Visual Studio [galerisinden][vs_gallery] Visual Studio uzantıları olarak kullanılabilen Batch şablonları. Şablonları almanın iki yolu vardır:
   
-  * Şablonları kullanarak yükleme **Uzantılar ve güncelleştirmeler** Visual Studio iletişim kutusunda (daha fazla bilgi için [bulma ve Visual Studio uzantılarını kullanarak][vs_find_use_ext]). İçinde **Uzantılar ve güncelleştirmeler** iletişim kutusunda, aramak ve aşağıdaki iki uzantısını indirin:
+  * Şablonları Visual Studio 'daki **Uzantılar ve güncelleştirmeler** iletişim kutusunu kullanarak yüklemeyi (daha fazla bilgi için bkz. [Visual Studio uzantılarını bulma ve kullanma][vs_find_use_ext]). **Uzantılar ve güncelleştirmeler** iletişim kutusunda aşağıdaki iki uzantıyı arayın ve indirin:
     
-    * Azure Batch İş Yöneticisi işi Ayırıcılı
-    * Azure Batch görevi işlemci
-  * Şablonları Visual Studio için çevrimiçi galeriden indirin: [Microsoft Azure Batch proje şablonları][vs_gallery_templates]
-* Kullanmayı planlıyorsanız [uygulama paketleri](batch-application-packages.md) İş Yöneticisi'ni dağıtmak için özellik ve görev işlemci Batch işlem düğümleri, bir depolama hesabını Batch hesabınıza bağlamak gerekir.
+    * İş ayırıcı ile iş Yöneticisi Azure Batch
+    * Azure Batch görev Işlemcisi
+  * Visual Studio Online galerisinden şablonları indirin: [Microsoft Azure Batch proje şablonları][vs_gallery_templates]
+* İş Yöneticisi ve görev işlemcisini Batch işlem düğümlerine dağıtmak için [uygulama paketleri](batch-application-packages.md) özelliğini kullanmayı planlıyorsanız, Batch hesabınıza bir depolama hesabı bağlamanız gerekir.
 
 ## <a name="preparation"></a>Hazırlık
-Bu, İş Yöneticisi ve görev işlemci programlar arasında kod paylaşma daha kolay zorlaştırabilir çünkü görev işlemciniz yanı sıra, İş Yöneticisi içerebilir bir çözüm oluşturmanızı öneririz. Bu çözümü oluşturmak için aşağıdaki adımları izleyin:
+İş yöneticiniz ve görev işlemcisi programları arasında kod paylaşmayı kolaylaştırabileceğinden, iş yöneticinizin yanı sıra görev işlemcinizi içerebilen bir çözüm oluşturmanızı öneririz. Bu çözümü oluşturmak için aşağıdaki adımları izleyin:
 
-1. Visual Studio açıp seçin **dosya** > **yeni** > **proje**.
-2. Altında **şablonları**, genişletme **diğer proje türleri**, tıklayın **Visual Studio çözümleri**ve ardından **boş çözüm**.
-3. Uygulamanız ve bu çözüm (örneğin, "LitwareBatchTaskPrograms") amacını açıklayan bir ad yazın.
-4. Yeni çözümü oluşturmak için tıklayın **Tamam**.
+1. Visual Studio 'yu açın ve **Dosya** > **Yeni** > **Proje**' yi seçin.
+2. **Şablonlar**altında **diğer proje türleri**' ni genişletin, **Visual Studio çözümleri**' ne tıklayın ve ardından **boş çözüm**' ü seçin.
+3. Uygulamanızı açıklayan bir ad yazın (örneğin, "LitwareBatchTaskPrograms").
+4. Yeni çözümü oluşturmak için **Tamam**' a tıklayın.
 
 ## <a name="job-manager-template"></a>İş Yöneticisi şablonu
-İş Yöneticisi şablonu aşağıdaki eylemleri gerçekleştirebileceği bir iş yöneticisi görevi uygulamak için yardımcı olur:
+Iş Yöneticisi şablonu, aşağıdaki eylemleri gerçekleştirebilecek bir iş Yöneticisi görevi uygulamanıza yardımcı olur:
 
-* Bir iş birden çok görevlere bölün.
-* Toplu olarak çalıştırmak için bu görevleri gönderin.
+* İşi birden çok göreve ayırın.
+* Bu görevleri toplu Iş üzerinde çalışacak şekilde gönderebilirsiniz.
 
 > [!NOTE]
-> İş Yöneticisi görevleri hakkında daha fazla bilgi için bkz: [Batch özelliğine genel bakış geliştiriciler için](batch-api-basics.md#job-manager-task).
+> İş Yöneticisi görevleri hakkında daha fazla bilgi için bkz. [geliştiriciler Için Batch özelliğine genel bakış](batch-api-basics.md#job-manager-task).
 > 
 > 
 
-### <a name="create-a-job-manager-using-the-template"></a>Şablon kullanarak bir iş yöneticisi oluşturma
-Bir iş yöneticisi, daha önce oluşturduğunuz çözüme eklemek için aşağıdaki adımları izleyin:
+### <a name="create-a-job-manager-using-the-template"></a>Şablonu kullanarak bir Iş Yöneticisi oluşturma
+Daha önce oluşturduğunuz çözüme bir iş yöneticisi eklemek için aşağıdaki adımları izleyin:
 
-1. Var olan çözümünüzü Visual Studio'da açın.
-2. Çözüm Gezgini'nde çözüme sağ tıklayın, **Ekle** > **yeni proje**.
-3. Altında **Visual C#** , tıklayın **bulut**ve ardından **Azure Batch İş Yöneticisi işi Ayırıcılı**.
-4. Uygulamanızı açıklayan ve bu projeyi İş Yöneticisi (örn.) tanımlayan bir ad yazın "LitwareJobManager").
-5. Projeyi oluşturmak için tıklayın **Tamam**.
-6. Son olarak, tüm başvurulan NuGet paketlerini yükleme ve değiştirmeye başlamadan önce projenin geçerli olduğunu doğrulamak için Visual Studio zorlamak için projeyi derleyin.
+1. Visual Studio 'da mevcut çözümünüzü açın.
+2. Çözüm Gezgini, çözüme sağ tıklayın,**Yeni proje** **Ekle** > ' ye tıklayın.
+3. **C#Görsel**altında **bulut**' a ve ardından iş **ayırıcı ile Azure Batch iş Yöneticisi**' ne tıklayın.
+4. Uygulamanızı açıklayan bir ad yazın ve bu projeyi iş yöneticisi olarak tanımlar (ör. "LitwareJobManager").
+5. Projeyi oluşturmak için **Tamam**' a tıklayın.
+6. Son olarak, Visual Studio 'Yu başvurulan tüm NuGet paketlerini yüklemeye zorlamak ve projeyi değiştirmeye başlamadan önce geçerli olduğunu doğrulamak için projeyi derleyin.
 
-### <a name="job-manager-template-files-and-their-purpose"></a>İş Yöneticisi şablon dosyaları ve amaçları
-İş Yöneticisi şablonunu kullanarak bir proje oluşturduğunuzda, kod dosyası üç grupları oluşturur:
+### <a name="job-manager-template-files-and-their-purpose"></a>İş Yöneticisi Şablon dosyaları ve amaçları
+Iş Yöneticisi şablonunu kullanarak bir proje oluşturduğunuzda, üç kod dosyası grubu oluşturur:
 
-* Ana program dosyasına (Program.cs). Bu programın giriş noktası ve en üst düzey özel durum işlemeyi içerir. Normalde bunu değiştirmek gerekmez.
-* Framework dizin. Bu parametreleri, görev eklemeyi bir Batch işi, vb. açmak İş Yöneticisi program – 'ortak' çalışmanın sorumlu dosyaları içerir. Normalde bu dosyalarda değişiklik gerekmez.
-* İş bölme dosyası (JobSplitter.cs). Bir işi görevlere bölmek için uygulamaya özgü mantığınızı yerleştireceğiniz budur.
+* Ana program dosyası (Program.cs). Bu, program giriş noktasını ve üst düzey özel durum işlemeyi içerir. Normalde bunu değiştirmeniz gerekmez.
+* Çerçeve dizini. Bu, İş Yöneticisi programı tarafından gerçekleştirilen ' demirbaş ' işinden sorumlu olan dosyaları içerir: parametreleri açma, Batch işine görev ekleme vb. Normalde bu dosyaları değiştirmeniz gerekmez.
+* İş Bölümlendirici dosyası (JobSplitter.cs). İşte bir işi görevlere bölmek için uygulamaya özgü mantığınızı koyacaksınız.
 
-Elbette iş mantığı bölme karmaşıklığına bağlı olarak, proje Bölümlendirici kodu desteklemek için gerektiği gibi ek dosyalar ekleyebilirsiniz.
+Elbette, iş ayırma mantığının karmaşıklığına bağlı olarak iş Bölümlendirici kodunuzu desteklemek için gereken ek dosyalar ekleyebilirsiniz.
 
-Şablonu ayrıca bir .csproj dosyasını, app.config, packages.config, vb. gibi standart .NET proje dosyalarını oluşturur.
+Şablon,. csproj dosyası, App. config, Packages. config vb. gibi standart .NET proje dosyaları da oluşturur.
 
-Bu bölümün geri kalanında farklı dosyalar ve kendi kod yapısını ve her sınıf yaptığı açıklanmaktadır.
+Bu bölümün geri kalanı farklı dosyaları ve kod yapılarını açıklar ve her bir sınıfın ne yaptığını açıklar.
 
-![Visual Studio Çözüm Gezgini'nde İş Yöneticisi şablonu çözümü gösteriliyor][solution_explorer01]
+![Visual Studio Çözüm Gezgini Iş Yöneticisi şablonu çözümünü gösterme][solution_explorer01]
 
-**Framework dosyaları**
+**Çerçeve dosyaları**
 
-* `Configuration.cs`: Batch hesabı ayrıntıları, bağlantılı depolama hesabı kimlik bilgileri, iş ve görev bilgileri ve iş parametresi gibi iş yapılandırma verilerini yüklenmesini kapsüller. Ayrıca, (bkz. Batch belgelerinde görevler için ortam ayarları) Batch tarafından tanımlanan ortam değişkenleri Configuration.EnvironmentVariable sınıfı aracılığıyla erişim sağlar.
-* `IConfiguration.cs`: Birim test, proje ayırıcı sahte veya sahte yapılandırma nesnesi kullanarak yapabilirsiniz yapılandırma sınıfın uygulaması soyutlar.
-* `JobManager.cs`: İş Yöneticisi programı bileşenlerinin düzenler. İş bölme çağırma ve görevler için görevi göndereni iş Bölümlendirici tarafından döndürülen gönderme iş Bölümlendirici başlatmak için sorumludur.
-* `JobManagerException.cs`: Sonlandırmak İş Yöneticisi gerektiren bir hatayı temsil eder. JobManagerException 'beklenen' hataları belirli tanılama bilgileri sonlandırma bir parçası olarak nerede sağlanabilir sarmalamak için kullanılır.
-* `TaskSubmitter.cs`: Bu sınıf için toplu iş Bölümlendirici tarafından döndürülen görevlerin eklenmesi sorumludur. JobManager sınıfı toplamlar etkin ancak zamanında ek olarak, iş için toplu görev dizisine ardından çağırır TaskSubmitter.SubmitTasks arka plan iş parçacığında için her toplu işin.
+* `Configuration.cs`: Batch hesabı ayrıntıları, bağlantılı depolama hesabı kimlik bilgileri, iş ve görev bilgileri ve iş parametreleri gibi iş yapılandırma verilerinin yüklenmesini kapsar. Ayrıca Batch tanımlı ortam değişkenlerine erişim sağlar (Batch belgelerindeki görevler için ortam ayarları bölümüne bakın. EnvironmentVariable sınıfı aracılığıyla).
+* `IConfiguration.cs`: Yapılandırma sınıfının uygulamasını soyutlayan, bu sayede iş bölümlendiricinizi sahte veya sahte bir yapılandırma nesnesi kullanarak test edebilirsiniz.
+* `JobManager.cs`: İş Yöneticisi programının bileşenlerini düzenleyin. İş bölümlendiricisini başlatma, iş bölümlendiricisini çağırma ve iş bölümlendiricisi tarafından döndürülen görevleri görev göndericisinden gönderen sorumludur.
+* `JobManagerException.cs`: İş yöneticisinin sonlandırılması gereken bir hatayı temsil eder. JobManagerException, sonlandırma kapsamında belirli tanılama bilgilerinin sağlandığı ' beklenen ' hataları kaydırmak için kullanılır.
+* `TaskSubmitter.cs`: Bu sınıf, iş bölümlendiricisi tarafından döndürülen görevleri Batch işine eklemekten sorumludur. JobManager sınıfı, görev sırasını verimli bir şekilde işler için toplu olarak toplar, ardından her toplu iş için bir arka plan iş parçacığında Taskgönderenin. SubmitTasks öğesini çağırır.
 
-**İş bölme**
+**İş bölümlendiricisi**
 
-`JobSplitter.cs`: Bu sınıf, iş görevlere bölmek için uygulamaya özgü mantığı içerir. Framework yöntem bunları döndürür gibi işe ekler ve görev sırasını edinme JobSplitter.Split yöntemi çağırır. Bu iş mantığını burada ekleyecektir sınıftır. İş bölüm istediğiniz görevleri temsil eden CloudTask örneklerinin bir dizisini döndürmek için Split yöntemini uygulayın.
+`JobSplitter.cs`: Bu sınıf, işi görevlere bölmek için uygulamaya özel mantık içerir. Framework, yöntem tarafından döndürülen bir dizi görevi elde etmek için JobSplitter. Split yöntemini çağırır. Bu, işinizin mantığını ekleyebileceğiniz sınıftır. İşi bölümlemek istediğiniz görevleri temsil eden bir CloudTask örneği dizisi döndürmek için Split yöntemini uygulayın.
 
 **Standart .NET komut satırı proje dosyaları**
 
 * `App.config`: Standart .NET uygulama yapılandırma dosyası.
-* `Packages.config`: Standart NuGet paket bağımlılık dosyası.
-* `Program.cs`: Programın giriş noktası ve en üst düzey özel durum işlemeyi içerir.
+* `Packages.config`: Standart NuGet paket bağımlılığı dosyası.
+* `Program.cs`: Program giriş noktasını ve üst düzey özel durum işlemeyi içerir.
 
-### <a name="implementing-the-job-splitter"></a>İş bölme uygulama
-İş Yöneticisi şablonu projesi açtığınızda, projenin JobSplitter.cs dosyanın varsayılan olarak açık olacaktır. Aşağıdaki Split() yöntemi Göster'i kullanarak iş yükünüzü görevleri bölünmüş mantığını uygulayabilirsiniz:
+### <a name="implementing-the-job-splitter"></a>İş bölümlendiricisini uygulama
+Iş Yöneticisi Şablon projesini açtığınızda, proje varsayılan olarak JobSplitter.cs dosyası açılır. Split () metodunu aşağıda göster ' i kullanarak, iş yükünüze görevler için bölünmüş mantığı uygulayabilirsiniz:
 
 ```csharp
 /// <summary>
@@ -157,56 +156,56 @@ public IEnumerable<CloudTask> Split()
 ```
 
 > [!NOTE]
-> Ek açıklamalı bölümünde `Split()` mantığı ekleyerek değiştirmenizi işlerinizi farklı görevlere bölmek için kullanılmaya İş Yöneticisi şablonu kod yalnızca bölümünün yöntemidir. Şablonu farklı bir bölümünü değiştirmek istiyorsanız, lütfen familiarized nasıl çalıştığını Batch ile olduğundan emin olun ve birkaçını deneyin [Batch kod örnekleri][github_samples].
+> `Split()` Yöntemi içindeki açıklamalı bölüm, işlerinizi farklı görevlere bölmek için mantık ekleyerek değiştirmeniz amaçlanan iş Yöneticisi şablonu kodunun tek bölümüdür. Şablonun farklı bir bölümünü değiştirmek istiyorsanız, lütfen familiarized olduğunuzdan emin olun ve [Batch kodu örneklerinin][github_samples]birkaçını deneyin.
 > 
 > 
 
-Split() uygulamanıza erişebilir:
+Bölünmüş () uygulamanızın erişimi vardır:
 
-* İş parametresi aracılığıyla `_parameters` alan.
-* Aracılığıyla işi temsil eden CloudJob nesnesi `_job` alan.
-* İş Yöneticisi görevi aracılığıyla temsil eden CloudTask nesnesi `_jobManagerTask` alan.
+* `_parameters` Alan aracılığıyla iş parametreleri.
+* `_job` Alanı aracılığıyla işi temsil eden cloudjob nesnesi.
+* `_jobManagerTask` Alan aracılığıyla iş yöneticisi görevini temsil eden cloudtask nesnesi.
 
-`Split()` Uygulama doğrudan işe görev ekleme gerekmez. Bunun yerine, kodunuzu CloudTask nesnelerinin bir dizisi döndürme zorunluluğu ve bu projeye otomatik olarak iş Bölümlendirici çağırma framework sınıfları tarafından eklenir. Yineleyici kullanmak C# için yaygındır (`yield return`) özelliği, bu görevleri hesaplanacak tüm görevlerin tamamlanmasını bekleyen yerine olabildiğince çabuk çalıştırma başlatmak izin verdiği ölçüde iş ayırıcılar uygulamak için.
+`Split()` Uygulamanızın projeye doğrudan görev eklemesi gerekmez. Bunun yerine, kodunuz CloudTask nesnelerinin bir dizisini döndürmelidir ve bunlar iş bölümlendiricisini çağıran çerçeve sınıfları tarafından otomatik olarak işe eklenir. Bu, görevlerin tüm görevlerin C#hesaplanmasını beklemek yerine`yield return`mümkün olan en kısa sürede çalışmaya başlamasını sağlamak üzere iş bölümlendiricileri uygulamak için Yineleyici () özelliği kullanılması yaygındır.
 
-**İş bölme hatası**
+**İş Bölümlendirici hatası**
 
-İş Bölümlendirici hatayla karşılaşılırsa, ya da yapmalısınız:
+İş bölümlendiricinizi bir hatayla karşılaşırsa, aşağıdakilerden biri olmalıdır:
 
-* C# kullanarak dizisi sonlandırmak `yield break` deyimi, hangi durumda İş Yöneticisi işleneceğini başarılı olarak; veya
-* Durumda İş Yöneticisi, bir özel durum throw başarısız olarak kabul edilir ve nasıl istemci bunu yapılandırdığına bağlı olarak gerçekleştirilmesi).
+* Sırayı kullanarak C# `yield break` sırayı sonlandırın, bu durumda iş Yöneticisi başarılı olarak kabul edilir veya
+* Bir özel durum oluşturun, bu durumda iş yöneticisi başarısız olarak kabul edilir ve istemcinin onu nasıl yapılandırdığına bağlı olarak yeniden denenebilir).
 
-Her iki durumda da, zaten proje Bölümlendirici tarafından döndürülen ve toplu işlem için eklenen herhangi bir görevi çalıştırma hakkına sahip olacaktır. Bunun olmasını istemiyorsanız, şunları yapabilirsiniz:
+Her iki durumda da, iş bölümlendiricisi tarafından zaten döndürülen ve Batch işine eklenen tüm görevler çalışmaya uygun olacaktır. Bunun gerçekleşmesini istemiyorsanız, şunları yapabilirsiniz:
 
-* İş Bölümlendiricinin döndürmeden önce işi Sonlandır
-* Döndürmeden önce tüm görev koleksiyonu formüle (diğer bir deyişle dönüş bir `ICollection<CloudTask>` veya `IList<CloudTask>` bir C# yineleyici kullanarak, iş Bölümlendirici uygulamak yerine)
-* Görev bağımlılıkları başarılı olarak tamamlanmasına İş Yöneticisi bağımlı tüm görevler yapma
+* İş bölümlendiricisini döndürmeden önce işi Sonlandır
+* Tüm görev koleksiyonunu döndürmeden önce formüle koyun `ICollection<CloudTask>` C# (yani, bir yineleyici kullanarak iş bölümlendiricisini `IList<CloudTask>` uygulamak yerine bir veya döndürür)
+* Tüm görevlerin iş yöneticisinin başarılı bir şekilde tamamlanmasına bağlı olması için görev bağımlılıklarını kullanın
 
-**İş Yöneticisi'ni yeniden deneme**
+**İş Yöneticisi yeniden denemeleri**
 
-İş Yöneticisi başarısız olursa, istemci yeniden deneme ayarlarına bağlı olarak Batch hizmeti tarafından denenen. Framework işe görevler eklediğinde, zaten mevcut herhangi bir görevi yoksayar. genel olarak, güvenli olmasıdır. Görevleri hesaplama pahalıdır, ancak projeye eklenmiş olan görevleri yeniden hesaplama ücret isteyebilirsiniz değil; yeniden çalıştırma kimlikleri aynı görevi oluşturmak için garanti edilmez, buna karşılık, ardından 'çoğaltmaları Yoksay' davranışı etkili olur değil. Bu gibi durumlarda zaten yapılmıştır ve, örneğin bir CloudJob.ListTasks görevleri yield başlamadan önce gerçekleştirerek yinelememesi çalışmayı algılamak için iş Bölümlendirici tasarlamanız gerekir.
+İş Yöneticisi başarısız olursa, istemci yeniden deneme ayarlarına bağlı olarak Batch hizmeti tarafından yeniden denenebilir. Genel olarak, bu güvenli bir uygulamadır çünkü Framework işe görevler eklediğinde, zaten mevcut olan tüm görevleri yoksayar. Ancak, görevlerin hesaplanması pahalı ise, işe zaten eklenmiş olan yeniden hesaplama görevlerinin maliyetine tabi olmak istemiyor olabilirsiniz. Buna karşılık, yeniden çalıştırmanın aynı görev kimliklerini üretme garantisi yoksa, ' yinelenenleri Yoksay ' davranışı iade etmez. Bu gibi durumlarda, daha önce yapılmış olan ve tekrarlamamış işi tespit etmek için iş bölümlendiricinizi tasarlamanız gerekir, örneğin, görevleri gerçekleştirmeye başlamadan önce CloudJob. ListTasks gerçekleştirerek.
 
-### <a name="exit-codes-and-exceptions-in-the-job-manager-template"></a>Çıkış kodları ve İş Yöneticisi şablonunda özel durumları
-Çıkış kodları ve özel durumlar bir programı çalıştırma sonucunu belirlemek için bir mekanizma sağlar ve bunlar programın yürütülmesini ile herhangi bir sorunu belirlemenize yardımcı olabilir. Bu bölümde açıklanan özel durumlar ve çıkış kodları İş Yöneticisi şablonunu uygular.
+### <a name="exit-codes-and-exceptions-in-the-job-manager-template"></a>Iş Yöneticisi şablonundaki çıkış kodları ve özel durumlar
+Çıkış kodları ve özel durumlar, bir program çalıştırmanın sonucunu belirlemek için bir mekanizma sağlar ve programın yürütülmesiyle ilgili sorunları belirlemenize yardımcı olabilir. Iş Yöneticisi şablonu, bu bölümde açıklanan çıkış kodlarını ve özel durumları uygular.
 
-İş Yöneticisi şablonu ile gerçekleştirilen bir iş yöneticisi görevi üç olası çıkış kodunu döndürebilirsiniz:
+Iş Yöneticisi şablonuyla uygulanan bir iş Yöneticisi görevi olası üç çıkış kodu döndürebilir:
 
 | Kod | Açıklama |
 | --- | --- |
-| 0 |İş Yöneticisi başarıyla tamamlandı. Tamamlanana kadar iş Bölümlendirici kodunuzu çalıştıran ve tüm görevleri projeye eklendi. |
-| 1 |İş Yöneticisi görevi, program 'beklenen' bir parçası olarak bir özel durum ile başarısız oldu. Özel durum için tanılama bilgileri içeren bir JobManagerException çevrilmiştir ve mümkün olan yerlerde, hatayı çözmek için öneriler. |
-| 2 |İş Yöneticisi görevi 'beklenmeyen bir özel durumla başarısız oldu. Standart çıktıya bir özel durum günlüğe kaydedildi, ancak İş Yöneticisi ek tanılama veya düzeltme bilgileri ekleyemedi. |
+| 0 |İş Yöneticisi başarıyla tamamlandı. İş Bölümlendirici kodunuz tamamlanana kadar çalıştırıldı ve işe tüm görevler eklendi. |
+| 1\. |İş Yöneticisi görevi, programın "beklenen" bölümünde bir özel durumla başarısız oldu. Özel durum, tanılama bilgileri ve mümkün olduğunda hatayı çözümlemek için öneriler içeren bir JobManagerException 'a çevrilmiştir. |
+| 2 |İş Yöneticisi görevi ' beklenmeyen ' özel durumuyla başarısız oldu. Özel durum standart çıktıya oturum açtı, ancak iş Yöneticisi herhangi bir ek tanılama veya düzeltme bilgisi ekleyemedi. |
 
-Hatadan önce iş yöneticisi görevi başarısız olması durumunda bazı görevler yine de hizmete eklenmiş olabilir. Bu görevler, normal şekilde çalışır. "İş bölme hatası" Yukarıdaki Bu kod yolunun bir tartışma için bkz.
+İş Yöneticisi görev hatası durumunda, bazı görevler yine de hata yapılmadan önce hizmete eklenmiş olabilir. Bu görevler normal olarak çalışır. Bu kod yolu hakkında tartışmak için yukarıdaki "Iş Bölümlendirici hatası" başlığına bakın.
 
-Özel durumları tarafından döndürülen tüm bilgileri stdout.txt ve stderr.txt dosyalarına yazılır. Daha fazla bilgi için [hata işleme](batch-api-basics.md#error-handling).
+Özel durumlar tarafından döndürülen tüm bilgiler stdout. txt ve stderr. txt dosyalarına yazılır. Daha fazla bilgi için bkz. [hata işleme](batch-api-basics.md#error-handling).
 
 ### <a name="client-considerations"></a>İstemci konuları
-Bu bölümde, bu şablonu temel alan bir iş yöneticisi çağrılırken bazı istemci uygulama gereksinimleri açıklanmaktadır. Bkz: [istemci kodundan parametreleri ve ortam değişkenlerini nasıl](#pass-environment-settings) parametreleri ve ortam ayarlarına geçirerek ilişkin ayrıntılar için.
+Bu bölümde, bu şablona dayalı bir iş Yöneticisi çağrılırken bazı istemci uygulama gereksinimleri açıklanmaktadır. Parametreleri ve ortam ayarlarını geçirme hakkında ayrıntılı bilgi için [istemci kodundan parametreleri ve ortam değişkenlerini](#pass-environment-settings) geçirme konusuna bakın.
 
 **Zorunlu kimlik bilgileri**
 
-Azure Batch işine görev eklemek için iş yöneticisi görevi, Azure Batch hesabı URL'si ve anahtarı gerektirir. Bu ortam değişkenlerini YOUR_BATCH_URL ve YOUR_BATCH_KEY adlı geçmesi gerekir. Bu İş Yöneticisi'ndeki görev ortam ayarlarını ayarlayabilirsiniz. Örneğin, C# istemci olarak:
+Azure Batch işine görev eklemek için, İş Yöneticisi görevi Azure Batch hesap URL 'SI ve anahtarınızı gerektirir. Bunları YOUR_BATCH_URL ve YOUR_BATCH_KEY adlı ortam değişkenlerine geçirmeniz gerekir. Bunları, Iş Yöneticisi görev ortamı ayarlarında ayarlayabilirsiniz. Örneğin, bir C# istemcide:
 
 ```csharp
 job.JobManagerTask.EnvironmentSettings = new [] {
@@ -216,7 +215,7 @@ job.JobManagerTask.EnvironmentSettings = new [] {
 ```
 **Depolama kimlik bilgileri**
 
-Genellikle, istemci (a) çoğu proje yöneticileri açıkça bağlantılı depolama hesabına erişmek zorunda değildir ve (b) bağlantılı bir depolama hesabı genellikle tüm görevleri olarak sağlanan olduğundan iş yöneticisi görevi bağlantılı depolama hesabı kimlik bilgilerini sağlayın gerekmeyen bir İş için ortak ortam ayarı. Ardından ortak ortam ayarları aracılığıyla bağlı depolama hesabındaki sağlamıyorsunuz ve İş Yöneticisi bağlı depolama alanına erişimi gerektirir, bağlantılı depolama kimlik bilgileri gibi vermeniz gerekir:
+Genellikle, istemci, (a) çoğu iş yöneticisinin bağlı depolama hesabına açık bir şekilde erişmesi gerekmeyen ve (b) bağlı depolama hesabı genellikle tüm görevlere bir olarak sağlandığı için, İş Yöneticisi görevine bağlı depolama hesabı kimlik bilgileri sağlaması gerekmez. iş için ortak ortam ayarı. Bağlı depolama hesabını ortak ortam ayarları aracılığıyla sağlamadıysanız ve iş yöneticisinin bağlı depolamaya erişmesi gerekiyorsa, bağlantılı depolama kimlik bilgilerini aşağıdaki gibi sağlamalısınız:
 
 ```csharp
 job.JobManagerTask.EnvironmentSettings = new [] {
@@ -226,83 +225,83 @@ job.JobManagerTask.EnvironmentSettings = new [] {
 };
 ```
 
-**İş Yöneticisi görevi ayarları**
+**İş Yöneticisi görev ayarları**
 
-İstemci iş yöneticisi ayarlamalısınız *killJobOnCompletion* bayrak **false**.
+İstemci, İş Yöneticisi *killJobOnCompletion* bayrağını **false**olarak ayarlamış olmalıdır.
 
-İstemcinin ayarlamak için genellikle güvenlidir *runExclusive* için **false**.
+Genellikle istemcinin *Rundışlamalı* **değerini false**olarak ayarlaması güvenlidir.
 
-İstemcinin kullanması gereken *resourceFiles* veya *applicationPackageReferences* işi koleksiyon işlem düğümüne yüklenecek dağıtılan manager yürütülebilir (ve kendi gerekli bir dll).
+İstemci, iş yöneticisinin yürütülebilir dosyasını (ve gerekli dll 'Leri) işlem düğümüne dağıtmaları için *ResourceFiles* veya *applicationpackagereferler* koleksiyonunu kullanmalıdır.
 
-Başarısız olursa varsayılan olarak, İş Yöneticisi denenen değil. İş Yöneticisi mantığa bağlı olarak istemci aracılığıyla yeniden denemeyi etkinleştir isteyebilirsiniz *kısıtlamaları*/*maxTaskRetryCount*.
+Varsayılan olarak, iş yöneticisi başarısız olursa yeniden denenmeyecektir. İş Yöneticisi mantığınıza bağlı olarak, istemci yeniden denemeleri*maxtaskretrycount*yöntemiyle/etkinleştirmek isteyebilir.
 
-**Proje ayarları**
+**İş ayarları**
 
-İstemci iş Bölümlendirici görevleri bağımlılıkları ile yayar, işin usesTaskDependencies true olarak ayarlamanız gerekir.
+İş Bölümlendirici görevleri bağımlılıklar halinde yayıyorsa, istemci, işin usesTaskDependencies değerini doğru olarak ayarlamış olmalıdır.
 
-İş bölme modelinde, istemcilerin hangi iş bölme oluşturur sağladığımız işleri görevleri eklemek istediğiniz olağan dışı. İstemci bu nedenle normalde işin ayarlamalısınız *onAllTasksComplete* için **terminatejob**.
+İş Bölümlendirici modelinde, istemcilerin iş bölümlendiricisi tarafından oluşturulan ve üzerinde görevlere görev eklemesi olağan dışı bir şeydir. Bu nedenle, istemci normalde işin *onalltaskstamamlamayı* **terminatejob 'un engellenmesi**olarak ayarlamış olmalıdır.
 
-## <a name="task-processor-template"></a>Görev işlemci şablonu
-Bir görev işlemci şablon, aşağıdaki eylemleri gerçekleştirmek bir görev işlemci uygulamak için yardımcı olur:
+## <a name="task-processor-template"></a>Görev Işlemcisi şablonu
+Bir görev Işlemcisi şablonu, aşağıdaki eylemleri gerçekleştirebilecek bir görev işlemcisi uygulamanıza yardımcı olur:
 
-* Her Batch görevinde tarafından çalıştırmak için gerekli bilgilerini ayarlayın.
-* Her Batch görevi tarafından istenen tüm eylemleri çalıştırın.
-* Görev çıkışları kalıcı depolama alanına kaydedin.
+* Her Batch görevinin çalışması için gereken bilgileri ayarlayın.
+* Her Batch görevinin gerektirdiği tüm eylemleri çalıştırın.
+* Görev çıktılarını kalıcı depolamaya kaydedin.
 
-Görev işlemci toplu olarak görevleri çalıştırmak için gerekli olmamasına rağmen görev işlemci kullanımının önemli bir avantajı, tek bir yerde tüm görev yürütme eylemlerini uygulamak için bir sarmalayıcı sağlamasıdır. Örneğin, her görev bağlamında çeşitli uygulamaları çalıştırmak ihtiyacınız varsa veya kopyalamak gerekiyorsa tamamladıktan sonra kalıcı depolama alanına veri her görevi.
+Görev işlemcisinin görevleri toplu Iş üzerinde çalıştırması gerekli olmasa da, bir görev işlemcisi kullanmanın önemli avantajı, tüm görev yürütme eylemlerini tek bir konumda uygulamak için sarmalayıcı sunabilmeleridir. Örneğin, her bir görevin bağlamında birkaç uygulama çalıştırmanız gerekiyorsa veya her görevi tamamladıktan sonra verileri kalıcı depolamaya kopyalamanız gerekiyorsa.
 
-Basit veya karmaşık ve birçok veya olarak yükünüzün gerektirdiği gibi birkaç görev işlemcisi tarafından gerçekleştirilen eylemler olabilir. Ayrıca, bir görev işlemci halinde tüm görev eylemleri uygulayarak, kolayca güncelleştirebilir veya Eylemler, uygulamaları veya iş yükü gereksinimlerini değişikliklere göre ekleyin. Ancak, bazı durumlarda gereksiz karmaşıklık, örneğin hızla basit bir komut satırından başlatılabilir işleri çalıştırırken ekleyebilirsiniz olarak uygulamanız için en uygun çözümü görev işlemci olmayabilir.
+Görev işlemcisi tarafından gerçekleştirilen eylemler, iş yükünüzün gerektirdiği kadar basit veya karmaşık ve çok az sayıda olabilir. Ayrıca, tüm görev eylemlerini tek bir görev işlemcisinde uygulayarak, uygulamalarda veya iş yükü gereksinimlerinde yapılan değişikliklere göre eylemleri kolayca güncelleştirebilir veya ekleyebilirsiniz. Ancak, bazı durumlarda, bir görev işlemcisi uygulamanızın en iyi çözümü olmayabilir, örneğin, basit bir komut satırından hızlı bir şekilde başlatılabilen işleri çalıştırırken.
 
-### <a name="create-a-task-processor-using-the-template"></a>Şablon kullanarak bir görev işlemcisi oluşturmak
-Bir görev işlemci, daha önce oluşturduğunuz çözüme eklemek için aşağıdaki adımları izleyin:
+### <a name="create-a-task-processor-using-the-template"></a>Şablonu kullanarak bir görev Işlemcisi oluşturma
+Daha önce oluşturduğunuz çözüme bir görev işlemcisi eklemek için aşağıdaki adımları izleyin:
 
-1. Var olan çözümünüzü Visual Studio'da açın.
-2. Çözüm Gezgini'nde çözüme sağ tıklayın, **Ekle**ve ardından **yeni proje**.
-3. Altında **Visual C#** , tıklayın **bulut**ve ardından **Azure Batch görevi İşlemci**.
-4. Uygulamanızı açıklayan ve bu projeyi (örn. görev işlemci olarak tanımlayan bir ad yazın "LitwareTaskProcessor").
-5. Projeyi oluşturmak için tıklayın **Tamam**.
-6. Son olarak, tüm başvurulan NuGet paketlerini yükleme ve değiştirmeye başlamadan önce projenin geçerli olduğunu doğrulamak için Visual Studio zorlamak için projeyi derleyin.
+1. Visual Studio 'da mevcut çözümünüzü açın.
+2. Çözüm Gezgini, çözüme sağ tıklayın, **Ekle**' ye tıklayın ve ardından **Yeni proje**' ye tıklayın.
+3. **Görsel C#** altında **bulut**' a ve ardından **Azure Batch görev işlemcisi**' ne tıklayın.
+4. Uygulamanızı açıklayan bir ad yazın ve bu projeyi görev işlemcisi olarak (ör. "LitwareTaskProcessor").
+5. Projeyi oluşturmak için **Tamam**' a tıklayın.
+6. Son olarak, Visual Studio 'Yu başvurulan tüm NuGet paketlerini yüklemeye zorlamak ve projeyi değiştirmeye başlamadan önce geçerli olduğunu doğrulamak için projeyi derleyin.
 
-### <a name="task-processor-template-files-and-their-purpose"></a>Görev işlemci şablon dosyalarını ve amaçları
-Görev işlemci şablonunu kullanarak bir proje oluşturduğunuzda, kod dosyası üç grupları oluşturur:
+### <a name="task-processor-template-files-and-their-purpose"></a>Görev Işlemcisi şablon dosyaları ve amaçları
+Görev işlemcisi şablonunu kullanarak bir proje oluşturduğunuzda, üç kod dosyası grubu oluşturur:
 
-* Ana program dosyasına (Program.cs). Bu programın giriş noktası ve en üst düzey özel durum işlemeyi içerir. Normalde bunu değiştirmek gerekmez.
-* Framework dizin. Bu parametreleri, görev eklemeyi bir Batch işi, vb. açmak İş Yöneticisi program – 'ortak' çalışmanın sorumlu dosyaları içerir. Normalde bu dosyalarda değişiklik gerekmez.
-* Görev işlemci dosyası (TaskProcessor.cs). Bir görev (genellikle çağırarak varolan bir yürütülebilir dosya) yürütmek, uygulamaya özgü mantığınızı yerleştireceğiniz budur. Ayrıca ek veri indirme veya sonuç dosyaları karşıya yükleme gibi ön ve işlem sonrası kodu buraya ekleyin.
+* Ana program dosyası (Program.cs). Bu, program giriş noktasını ve üst düzey özel durum işlemeyi içerir. Normalde bunu değiştirmeniz gerekmez.
+* Çerçeve dizini. Bu, İş Yöneticisi programı tarafından gerçekleştirilen ' demirbaş ' işinden sorumlu olan dosyaları içerir: parametreleri açma, Batch işine görev ekleme vb. Normalde bu dosyaları değiştirmeniz gerekmez.
+* Görev işlemcisi dosyası (TaskProcessor.cs). Bu, bir görevi yürütmek için uygulamaya özgü mantığınızı (genellikle varolan bir yürütülebiliri çağırarak) koyacaksınız. Ek verileri indirme veya sonuç dosyalarını karşıya yükleme gibi ön ve son işleme kodu da buraya gider.
 
-Elbette, iş mantığı bölme karmaşıklığına bağlı olarak, görev işlemci kodu desteklemek için gerekli ek dosyalar ekleyebilirsiniz.
+Tabii ki, iş bölme mantığının karmaşıklığına bağlı olarak, görev işlemcisi kodunuzu desteklemek için gereken ek dosyalar ekleyebilirsiniz.
 
-Şablonu ayrıca bir .csproj dosyasını, app.config, packages.config, vb. gibi standart .NET proje dosyalarını oluşturur.
+Şablon,. csproj dosyası, App. config, Packages. config vb. gibi standart .NET proje dosyaları da oluşturur.
 
-Bu bölümün geri kalanında farklı dosyalar ve kendi kod yapısını ve her sınıf yaptığı açıklanmaktadır.
+Bu bölümün geri kalanı farklı dosyaları ve kod yapılarını açıklar ve her bir sınıfın ne yaptığını açıklar.
 
-![Visual Studio Çözüm Gezgini'nde görev işlemci şablon çözüm gösteriliyor][solution_explorer02]
+![Görev Işlemcisi şablonu çözümünü gösteren Visual Studio Çözüm Gezgini][solution_explorer02]
 
-**Framework dosyaları**
+**Çerçeve dosyaları**
 
-* `Configuration.cs`: Batch hesabı ayrıntıları, bağlantılı depolama hesabı kimlik bilgileri, iş ve görev bilgileri ve iş parametresi gibi iş yapılandırma verilerini yüklenmesini kapsüller. Ayrıca, (bkz. Batch belgelerinde görevler için ortam ayarları) Batch tarafından tanımlanan ortam değişkenleri Configuration.EnvironmentVariable sınıfı aracılığıyla erişim sağlar.
-* `IConfiguration.cs`: Birim test, proje ayırıcı sahte veya sahte yapılandırma nesnesi kullanarak yapabilirsiniz yapılandırma sınıfın uygulaması soyutlar.
-* `TaskProcessorException.cs`: Sonlandırmak İş Yöneticisi gerektiren bir hatayı temsil eder. TaskProcessorException 'beklenen' hataları belirli tanılama bilgileri sonlandırma bir parçası olarak nerede sağlanabilir sarmalamak için kullanılır.
+* `Configuration.cs`: Batch hesabı ayrıntıları, bağlantılı depolama hesabı kimlik bilgileri, iş ve görev bilgileri ve iş parametreleri gibi iş yapılandırma verilerinin yüklenmesini kapsar. Ayrıca Batch tanımlı ortam değişkenlerine erişim sağlar (Batch belgelerindeki görevler için ortam ayarları bölümüne bakın. EnvironmentVariable sınıfı aracılığıyla).
+* `IConfiguration.cs`: Yapılandırma sınıfının uygulamasını soyutlayan, bu sayede iş bölümlendiricinizi sahte veya sahte bir yapılandırma nesnesi kullanarak test edebilirsiniz.
+* `TaskProcessorException.cs`: İş yöneticisinin sonlandırılması gereken bir hatayı temsil eder. TaskProcessorException, belirli tanılama bilgilerinin sonlandırma kapsamında sağlandığı "beklenen" hataları kaydırmak için kullanılır.
 
-**Görev işlemci**
+**Görev Işlemcisi**
 
-* `TaskProcessor.cs`: Görev çalışır. Framework TaskProcessor.Run yöntemi çağırır. Bu göreviniz, uygulamaya özgü mantık burada ekleyecektir sınıftır. Run yöntemi uygular:
-  * Ayrıştırma ve herhangi bir görev parametreleri doğrulayın
-  * Çağırmak için istediğiniz herhangi bir dış programı için komut satırının oluştur
-  * Hata ayıklama amacıyla gerektirebilecek herhangi bir tanılama bilgileri günlüğe kaydetmek
-  * Bu komut satırını kullanarak bir işlem başlatma
-  * İşlemden çıkmak için bekle
-  * Çıkış kodu işlemin başarılı veya başarısız olmadığını belirlemek için yakalama
-  * Kalıcı depolama için tutmak istediğiniz tüm çıktı dosyaları kaydedin
+* `TaskProcessor.cs`: Görevi çalıştırır. Framework TaskProcessor. Run yöntemini çağırır. Bu, görevin uygulamaya özgü mantığını ekleyebileceğiniz sınıftır. Çalıştırma yöntemini şu şekilde uygulayın:
+  * Tüm görev parametrelerini ayrıştırma ve doğrulama
+  * Çağırmak istediğiniz herhangi bir dış program için komut satırını oluşturun
+  * Hata ayıklama amacıyla gerekli olabilecek tüm tanılama bilgilerini günlüğe kaydedin
+  * Bu komut satırını kullanarak bir işlem başlatın
+  * İşlemin çıkış gelmesini bekle
+  * İşlemin başarılı veya başarısız olup olmadığını anlamak için çıkış kodunu yakala
+  * Kalıcı depolamaya devam etmek istediğiniz tüm çıktı dosyalarını kaydedin
 
 **Standart .NET komut satırı proje dosyaları**
 
 * `App.config`: Standart .NET uygulama yapılandırma dosyası.
-* `Packages.config`: Standart NuGet paket bağımlılık dosyası.
-* `Program.cs`: Programın giriş noktası ve en üst düzey özel durum işlemeyi içerir.
+* `Packages.config`: Standart NuGet paket bağımlılığı dosyası.
+* `Program.cs`: Program giriş noktasını ve üst düzey özel durum işlemeyi içerir.
 
-## <a name="implementing-the-task-processor"></a>Görev işlemci uygulama
-Görev işlemci şablonu projesi açtığınızda, projenin TaskProcessor.cs dosyanın varsayılan olarak açık olacaktır. Aşağıda gösterilen uygulamasındaki Run() yönteminde kullanarak iş yükünüzü görevleri çalıştırma mantığını uygulayabilirsiniz:
+## <a name="implementing-the-task-processor"></a>Görev işlemcisini uygulama
+Görev Işlemcisi şablonu projesini açtığınızda, proje varsayılan olarak TaskProcessor.cs dosyası açılır. Aşağıda gösterilen Run () yöntemini kullanarak, iş yükünüze görevler için çalıştırma mantığını uygulayabilirsiniz:
 
 ```csharp
 /// <summary>
@@ -348,44 +347,44 @@ public async Task<int> Run()
 }
 ```
 > [!NOTE]
-> Uygulamasındaki Run() yönteminde açıklamalı bölümünde, iş yükünüzü görevleri çalıştırma mantığını ekleyerek değiştirmeye yönelik görev işlemci şablon kodunu yalnızca bölümüdür. Şablonu farklı bir bölümünü değiştirmek istiyorsanız, Lütfen ilk önce toplu Batch belgelerini gözden geçirerek ve Batch kod örnekleri birkaç çalışırken çalışma şeklinden edinin.
+> Run () yönteminde açıklamalı bölümü, görev Işlemcisi şablon kodunun, iş yükünüze görevlere yönelik çalıştırma mantığı ekleyerek değiştirmeniz amaçlanan tek bölümüdür. Şablonun farklı bir bölümünü değiştirmek istiyorsanız, lütfen toplu iş belgelerini inceleyerek ve toplu Iş kodu örneklerinden birkaçını deneyerek Batch 'in nasıl çalıştığını öğrenin.
 > 
 > 
 
-Uygulamasındaki Run() yönteminde sonuçlarını kaydetme ve son olarak bir çıkış kodu ile döndüren tüm işlemin tamamlanması beklenirken bir veya daha fazla işlemlerini başlatma komut satırı başlatmaktan sorumludur. Uygulamasındaki Run() yönteminde görevleriniz için işleme mantığı uygulamak burada ' dir. Görev işlemci framework uygulamasındaki Run() yönteminde için çağırır; Bunu çağırmanız gerekmez.
+Run () yöntemi, komut satırını başlatma, bir veya daha fazla işlem başlatma, tüm işlemlerin tamamlanmasını bekleme, sonuçları kaydetme ve son olarak bir çıkış kodu ile döndürme işlemlerinden sorumludur. Run () yöntemi, görevleriniz için işleme mantığını uyguladığınız yerdir. Görev işlemcisi çerçevesi, sizin için Run () yöntemini çağırır; kendiniz çağırmanız gerekmez.
 
-Uygulamasındaki Run() uygulamanıza erişebilir:
+Run () uygulamanızın erişimi vardır:
 
-* Görev parametreleri aracılığıyla `_parameters` alan.
-* İş ve görev kimlikleri aracılığıyla `_jobId` ve `_taskId` alanları.
-* Görev yapılandırması aracılığıyla `_configuration` alan.
+* `_parameters` Alan aracılığıyla görev parametreleri.
+* `_jobId` Ve`_taskId` alanları aracılığıyla iş ve görev kimlikleri.
+* `_configuration` Alan aracılığıyla görev yapılandırması.
 
 **Görev hatası**
 
-Başarısız olması durumunda bir özel durum tarafından uygulamasındaki Run() yönteminde çıkabilirsiniz, ancak bu görevin çıkış kodu denetiminde en üst düzey özel durum işleyici ayrılmaz. Çıkış kodu hatası, farklı türlerde tanılama amacıyla örnek ayırabilirsiniz veya geçirilmemelidir ve bazı hata modlarını işlemini sonlandırması gerektiğini denetlemek gerekiyorsa, ardından uygulamasındaki Run() yönteminde döndüren ve sıfır olmayan çıkış çıkış kodu. Bu görevin çıkış kodu olur.
+Hata durumunda, bir özel durum oluşturarak Run () yönteminden çıkabilirsiniz, ancak bu, Görev çıkış kodunun denetiminde en üst düzey özel durum işleyicisini bırakır. Örneğin, tanılama amaçları gibi farklı hata türlerini ayırabilmeniz için çıkış kodunu kontrol etmeniz gerekiyorsa veya bazı başarısızlık modları işi sonlandırmalı ve diğerlerinin olmaması gerektiğinden, sıfır olmayan bir örnek döndürerek Run () yönteminden çıkmanız gerekir çıkış kodu. Bu, Görev çıkış kodu olur.
 
-### <a name="exit-codes-and-exceptions-in-the-task-processor-template"></a>Çıkış kodları ve görev işlemci şablonunda özel durumları
-Çıkış kodları ve özel durumlar bir programı çalıştırma sonucunu belirlemek için bir mekanizma sağlar ve bunlar programın yürütülmesini ile herhangi bir sorunu belirlemenize yardımcı olabilir. Bu bölümde açıklanan özel durumlar ve çıkış kodları görev işlemci şablonunu uygular.
+### <a name="exit-codes-and-exceptions-in-the-task-processor-template"></a>Görev Işlemcisi şablonundaki çıkış kodları ve özel durumlar
+Çıkış kodları ve özel durumlar, bir program çalıştırmanın sonucunu belirlemek için bir mekanizma sağlar ve programın yürütülmesiyle ilgili sorunları belirlemenize yardımcı olabilir. Görev Işlemcisi şablonu, bu bölümde açıklanan çıkış kodlarını ve özel durumları uygular.
 
-Üç olası çıkış kodları görev işlemci şablonun uygulandığı bir işlemci görevi döndürebilir:
+Görev Işlemcisi şablonuyla uygulanan bir görev işlemcisi görevi, olası üç çıkış kodu döndürebilir:
 
 | Kod | Açıklama |
 | --- | --- |
-| [Process.ExitCode][process_exitcode] |Görev işlemci tamamlanana kadar çalıştı. Bu, çağrılan program yalnızca başarılı – olduğunu göstermez Not görev işlemci başarıyla çağrılır ve özel durumlar olmadan sonrası herhangi bir işlem gerçekleştirdi. Anlamı çıkış kodu, çağrılan programa bağlıdır: genellikle çıkış kodu 0 program başarılı ve başarısız programın herhangi bir çıkış kodu anlamına gelir anlamına gelir. |
-| 1 |Görev İşlemci 'beklenen' bir programın parçası olarak bir özel durum ile başarısız oldu. Özel durum için çevrilmiştir bir `TaskProcessorException` tanılama bilgileri ve mümkün olan yerlerde, hatayı çözmek için öneriler. |
-| 2 |Görev İşlemci 'beklenmeyen bir özel durumla başarısız oldu. Standart çıktıya bir özel durum günlüğe kaydedildi, ancak görev işlemci ek tanılama veya düzeltme bilgileri ekleyemedi. |
+| [Process. ExitCode][process_exitcode] |Görev işlemcisi tamamlamaya çalıştı. Bu, çağırılan programın başarılı olduğunu göstermez; yalnızca görev işlemcisinin başarıyla çağırdığına ve özel durumlar olmadan işlem sonrası işlemleri gerçekleştirdiğine unutmayın. Çıkış kodunun anlamı çağrılan programa bağlıdır – genellikle çıkış kodu 0, programın başarılı olduğu ve diğer çıkış kodunun programın başarısız olduğu anlamına gelir. |
+| 1\. |Görev işlemcisi, programın "beklenen" bölümünde bir özel durumla başarısız oldu. Özel durum, tanılama bilgileri ve `TaskProcessorException` mümkün olduğunda hata çözme önerilerini içeren bir öğesine çevrilmiştir. |
+| 2 |Görev işlemcisi ' beklenmeyen ' bir özel durumla başarısız oldu. Özel durum standart çıktıya oturum açtı, ancak görev işlemcisi herhangi bir ek tanılama veya düzeltme bilgisi ekleyemedi. |
 
 > [!NOTE]
-> Ardından görev İşlemci hataları için çıkış kodları 1 ve 2 kullanarak, çağırma program belirli hata modlarını belirtmek için çıkış kodları 1 ve 2 kullanıyorsa, belirsiz. Program.cs dosyasındaki özel durum çalışmaları düzenleyerek farklı çıkış kodları için bu görev işlemci hata kodlarını değiştirebilirsiniz.
+> Çağırmak gerekirse, belirli başarısızlık modlarını göstermek için çıkış kodları 1 ve 2 ' yi kullanıyorsa, 1. ve 2. görev işlemcisi hataları için 2 çıkış kodlarını kullanmak belirsizdir. Bu görev işlemcisi hata kodlarını, Program.cs dosyasındaki özel durum durumlarını düzenleyerek, ayırt edici çıkış kodlarına değiştirebilirsiniz.
 > 
 > 
 
-Özel durumları tarafından döndürülen tüm bilgileri stdout.txt ve stderr.txt dosyalarına yazılır. Daha fazla bilgi için hata işleme, Batch belgelerinde bakın.
+Özel durumlar tarafından döndürülen tüm bilgiler stdout. txt ve stderr. txt dosyalarına yazılır. Daha fazla bilgi için bkz. Batch belgelerindeki hata Işleme.
 
 ### <a name="client-considerations"></a>İstemci konuları
 **Depolama kimlik bilgileri**
 
-Görev işlemci çıktı, örneğin dosya kuralları Yardımcısı kitaplığı kullanarak kalıcı hale getirmek için Azure blob depolama kullanır. ardından erişmesi gereken *ya da* bulut depolama hesabı kimlik bilgilerini *veya* blob paylaşılan erişim imzası (SAS) içeren kapsayıcı URL'si. Şablona genel ortam değişkenlerini aracılığıyla kimlik bilgilerini sağlamak için destek içerir. İstemci depolama kimlik bilgilerini aşağıdaki gibi geçirebilirsiniz:
+Görev işlemciniz çıktıları kalıcı hale getirmek için Azure Blob Storage kullanıyorsa, örneğin dosya kuralları yardımcı kitaplığını kullanarak, bulut depolama hesabı kimlik bilgilerine *veya* paylaşılan erişim IÇEREN bir blob kapsayıcı URL 'sine erişim gerekir imza (SAS). Şablon, ortak ortam değişkenleri aracılığıyla kimlik bilgileri sağlamaya yönelik destek içerir. İstemciniz depolama kimlik bilgilerini aşağıdaki gibi geçirebilir:
 
 ```csharp
 job.CommonEnvironmentSettings = new [] {
@@ -394,50 +393,50 @@ job.CommonEnvironmentSettings = new [] {
 };
 ```
 
-Depolama hesabı TaskProcessor sınıfında kullanılabilir `_configuration.StorageAccount` özelliği.
+Daha sonra depolama hesabı, `_configuration.StorageAccount` özelliği aracılığıyla taskprocessor sınıfında kullanılabilir.
 
-Bir kapsayıcı URL'si ile SAS kullanmak isterseniz, bu da bir iş ortak ortam ayarı aracılığıyla geçirebilirsiniz, ancak görev işlemci şablon şu anda bu için yerleşik destek içermez.
+SAS ile bir kapsayıcı URL 'SI kullanmayı tercih ediyorsanız, bunu bir iş ortak ortamı ayarı aracılığıyla da geçirebilirsiniz, ancak görev işlemcisi şablonu şu anda bunun için yerleşik destek içermez.
 
-**Depolama Kurulumu**
+**Depolama kurulumu**
 
-İstemci veya iş yöneticisi görevi görevler tarafından işe Görev eklemeden önce gerekli tüm kapsayıcıları oluşturmanız önerilir. Bu, bir kapsayıcı URL'si ile SAS kullanırsanız, bu nedenle bir URL kapsayıcıyı oluşturmak için izni buna dahil değildir zorunludur. Depolama hesabı kimlik bilgileri, geçirdiğiniz olsa bile her görev, kapsayıcıdaki CloudBlobContainer.CreateIfNotExistsAsync aramak zorunda kaydedildikçe önerilir.
+Görevleri işe eklemeden önce, istemci veya iş yöneticisi görevinin görevler için gereken kapsayıcıları oluşturması önerilir. Bu, bir URL 'nin kapsayıcıyı oluşturma izni içermediği için SAS içeren bir kapsayıcı URL 'SI kullanırsanız zorunludur. Kapsayıcıda CloudBlobContainer. CreateIfNotExistsAsync çağrısı yapmak zorunda olan her görevi kaydettiği için, depolama hesabı kimlik bilgilerini geçirirseniz bile bu önerilir.
 
-## <a name="pass-parameters-and-environment-variables"></a>Parametreleri ve ortam değişkenleri
-### <a name="pass-environment-settings"></a>Ortam ayarı geçirin
-Bir istemci için ortam ayarları biçiminde iş yöneticisi görevi bilgi geçirebilirsiniz. Bu bilgi işlem işin bir parçası çalışacak görev işlemci görevleri oluştururken iş yöneticisi görevi tarafından sonra kullanılabilir. Ortam ayarları geçirebileceğiniz bilgilerin örnekleri şunlardır:
+## <a name="pass-parameters-and-environment-variables"></a>Parametreleri ve ortam değişkenlerini geçir
+### <a name="pass-environment-settings"></a>Ortam ayarlarını geçir
+İstemci, ortam ayarları biçiminde iş Yöneticisi görevine bilgi geçirebilir. Bu bilgiler daha sonra, işlem işinin bir parçası olarak çalışacak görev işlemcisi görevleri oluştururken iş Yöneticisi görevi tarafından kullanılabilir. Ortam ayarları olarak geçirebilmeniz için bilgilere örnek olarak şunlar verilebilir:
 
-* Depolama hesabı adını ve hesap anahtarları
-* Batch hesabı URL'si
-* Batch hesap anahtarı
+* Depolama hesabı adı ve hesap anahtarları
+* Batch hesabı URL 'SI
+* Batch hesabı anahtarı
 
-Batch hizmetini kullanarak bir iş yöneticisi görevi için ortam ayarlarını geçirmek için basit bir mekanizma vardır `EnvironmentSettings` özelliğinde [Microsoft.Azure.Batch.JobManagerTask][net_jobmanagertask].
+Batch hizmeti, `EnvironmentSettings` [Microsoft. Azure. Batch. jobmanagertask][net_jobmanagertask]özelliğini kullanarak ortam ayarlarını bir iş Yöneticisi görevine geçirmek için basit bir mekanizmaya sahiptir.
 
-Örneğin, almak için `BatchClient` örnek bir Batch hesabı için istemciden gelen ortam değişkenleri Batch hesabı için paylaşılan anahtar kimlik bilgileri ve URL kod olarak geçirebilirsiniz. Benzer şekilde, Batch hesabıyla bağlantılı depolama hesabına erişmek için depolama hesabı adı ve depolama hesabı anahtarını ortam değişkenleri olarak geçirebilirsiniz.
+Örneğin, bir Batch hesabının `BatchClient` örneğini almak için, istemci kodundan ortam değişkenleri olarak, Batch hesabının URL 'sini ve paylaşılan anahtar kimlik bilgilerini aktarabilirsiniz. Benzer şekilde, Batch hesabına bağlı depolama hesabına erişmek için, depolama hesabı adını ve depolama hesabı anahtarını ortam değişkenleri olarak geçirebilirsiniz.
 
-### <a name="pass-parameters-to-the-job-manager-template"></a>İş Yöneticisi şablon parametreleri
-Çoğu durumda, iş yöneticisi görevi, işlem bölme işlemini denetlemek için veya iş için görevleri yapılandırmak için iş başına parametreleri geçirmek kullanışlıdır. İş Yöneticisi görevinin kaynak dosyalarına parameters.json adlı bir JSON dosyası yükleyerek bunu yapabilirsiniz. Parametreleri ardından kullanılabilir hale gelebilir `JobSplitter._parameters` İş Yöneticisi şablonunda alan.
+### <a name="pass-parameters-to-the-job-manager-template"></a>Parametreleri Iş Yöneticisi şablonuna geçirme
+Çoğu durumda, iş ayırma işlemini denetlemek veya iş için görevleri yapılandırmak üzere iş başına parametreleri iş Yöneticisi görevine geçirmek yararlı olur. Bunu, İş Yöneticisi görevi için bir kaynak dosyası olarak Parameters. JSON adlı bir JSON dosyasını karşıya yükleyerek yapabilirsiniz. Parametreler daha sonra iş Yöneticisi şablonundaki `JobSplitter._parameters` alanda kullanılabilir hale gelebilir.
 
 > [!NOTE]
-> Yerleşik parametresini işleyicisi yalnızca dize-dize sözlükleri destekler. Karmaşık JSON değerleri parametre değerlerini geçirmek istiyorsanız, bu dize olarak geçirin ve bunları iş bölme ayrıştırma veya framework'ün değiştirme izni gerekir `Configuration.GetJobParameters` yöntemi.
+> Yerleşik parametre işleyicisi yalnızca dize-dize sözlüklerini destekler. Karmaşık JSON değerlerini parametre değerleri olarak geçirmek istiyorsanız, bunları dizeler olarak iletmeniz ve bunları iş bölümlendiriculaşarak ayrıştırabilmeniz ya da Framework `Configuration.GetJobParameters` metodunu değiştirmeniz gerekir.
 > 
 > 
 
-### <a name="pass-parameters-to-the-task-processor-template"></a>Görev işlemci şablon parametreleri
-Ayrıca, tek tek görevler görev işlemci şablonu kullanılarak uygulanan parametreler geçirebilir. İş Yöneticisi şablonuyla gibi adlı bir kaynak dosyası için görev işlemci şablonu arar
+### <a name="pass-parameters-to-the-task-processor-template"></a>Parametreleri görev Işlemcisi şablonuna geçirme
+Ayrıca, parametreleri görev Işlemcisi şablonu kullanarak uygulanan tek tek görevlere geçirebilirsiniz. İş Yöneticisi şablonunda olduğu gibi, görev işlemcisi şablonu, adlı bir kaynak dosyasını arar
 
-Parameters.JSON ve bulduğu if parametreleri sözlük olarak yükler. Birkaç görev işlemci görevlere parametreleri geçirmek nasıl seçenek vardır:
+Parameters. JSON, ve bulunursa parametre sözlüğü olarak yükler. Parametreleri görev işlemcisi görevlerine geçirmeye yönelik birkaç seçenek vardır:
 
-* İş parametresi JSON yeniden kullanın. Bu da tek parametre iş genelinde (için örnek, bir işleme yükseklik ve genişlik) kaynaklarsa çalışır. İçinde iş bölme bir CloudTask oluştururken, bunu yapmak için iş yöneticisi görevi'nın ResourceFiles parameters.json kaynak dosya nesnesine bir başvuru ekleyin. (`JobSplitter._jobManagerTask.ResourceFiles`) CloudTask'ın ResourceFiles koleksiyonunda için.
-* Oluşturmak bir göreve özel parameters.json belge iş Bölümlendirici yürütme işleminin bir parçası olarak yükleyin ve o görev kaynak dosyaları koleksiyonunu blob başvurusu. Farklı görevler farklı parametreler varsa, bu gereklidir. Çerçeve dizinini göreve bir parametre olarak geçirildiği bir 3B işleme senaryosu örneği olabilir.
+* JSON iş parametrelerini yeniden kullanın. Yalnızca parametreler iş genelinde ise (örneğin, bir işleme yüksekliği ve genişliği), bu işlem iyi bir şekilde gerçekleşir. Bunu yapmak için, iş bölümlendiricbir cloudtask oluştururken, iş yöneticisi görevinin ResourceFiles (`JobSplitter._jobManagerTask.ResourceFiles`) öğesine Parameters. JSON kaynak dosyası nesnesine bir başvuru ekleyin.
+* Göreve özgü parametreler. JSON belgesini iş Bölümlendirici yürütmesinin parçası olarak oluşturup karşıya yükleyin ve görevin kaynak dosyaları koleksiyonunda blob 'a başvurun. Farklı görevler farklı parametrelere sahip ise bu gereklidir. Örnek, çerçeve dizininin bir parametre olarak göreve geçirildiği bir 3B işleme senaryosu olabilir.
 
 > [!NOTE]
-> Yerleşik parametresini işleyicisi yalnızca dize-dize sözlükleri destekler. Karmaşık JSON değerleri parametre değerlerini geçirmek istiyorsanız, bunları dize olarak geçirin ve bunları görev işlemci ayrıştırmak veya framework'ün değiştirmek ihtiyacınız olacak `Configuration.GetTaskParameters` yöntemi.
+> Yerleşik parametre işleyicisi yalnızca dize-dize sözlüklerini destekler. Karmaşık JSON değerlerini parametre değerleri olarak geçirmek istiyorsanız, bunları dizeler olarak iletmeniz ve bunları görev işlemcisinde ayrıştırabilmeniz ya da Framework `Configuration.GetTaskParameters` metodunu değiştirmeniz gerekir.
 > 
 > 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-### <a name="persist-job-and-task-output-to-azure-storage"></a>Azure depolama için iş ve görev çıktılarını kalıcı hale getirme
-Batch çözümü geliştirme başka bir yardımcı araç olan [Azure Batch dosya kuralları][nuget_package]. Bu .NET sınıf kitaplığı (şu anda önizlemede), Batch .NET uygulamalarında kolayca depolayın ve görev çıktıları ve Azure depolama alanından almak için kullanın. [Azure Batch, iş ve görev çıktılarını kalıcı hale getirme](batch-task-output.md) tam bir irdelemesi ve kitaplığa ve kullanımını içerir.
+### <a name="persist-job-and-task-output-to-azure-storage"></a>Azure Storage 'da iş ve görev çıkışını kalıcı hale getirme
+Batch çözüm geliştirmede başka bir yararlı araç [Azure Batch dosya kuralları][nuget_package]. Azure depolama 'ya ve Azure Storage 'a yönelik görev çıkışlarını kolayca depolamak ve almak için Batch .NET uygulamalarınızda bu .NET sınıf kitaplığını (Şu anda önizleme aşamasında) kullanın. [Kalıcı Azure Batch işi ve görev çıktısı](batch-task-output.md) , kitaplığın ve kullanımının tam bir tartışmasını içerir.
 
 
 [net_jobmanagertask]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobmanagertask.aspx

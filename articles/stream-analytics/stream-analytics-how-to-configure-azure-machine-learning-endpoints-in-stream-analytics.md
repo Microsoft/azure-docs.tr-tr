@@ -1,6 +1,6 @@
 ---
-title: Azure Stream Analytics Machine Learning uç noktaları kullanma
-description: Bu makalede, Azure Stream Analytics'te makine dili kullanıcı tanımlı işlevleri kullanmayı açıklar.
+title: Azure Stream Analytics Machine Learning uç noktalarını kullanma
+description: Bu makalede, Azure Stream Analytics ' de makine dili Kullanıcı tanımlı işlevlerinin nasıl kullanılacağı açıklanır.
 services: stream-analytics
 author: jseb225
 ms.author: jeanb
@@ -8,41 +8,41 @@ ms.reviewer: jasonh
 ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 06/11/2019
-ms.openlocfilehash: 0c74c0f85ea1851bc50ee20dbde9336f4f7b757a
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 1adb7d58246ea37fd8322cb6fc6ffd53c5f19efb
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67164383"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73467825"
 ---
-# <a name="azure-machine-learning-studio-integration-in-stream-analytics-preview"></a>Stream Analytics (Önizleme), Azure Machine Learning Studio tümleştirmesi
-Stream Analytics, Azure Machine Learning Studio Uç noktalara çağıran kullanıcı tanımlı işlevleri destekler. Bu özelliği için REST API desteği ayrıntılı olarak [Stream Analytics REST API Kitaplığı](https://msdn.microsoft.com/library/azure/dn835031.aspx). Bu makalede, Stream Analytics bu özelliği başarılı uygulaması için gerekli ek bilgileri sağlar. Bir öğretici de forumumuza gönderildi ve kullanılabilir [burada](stream-analytics-machine-learning-integration-tutorial.md).
+# <a name="azure-machine-learning-studio-classic-integration-in-stream-analytics-preview"></a>Stream Analytics Azure Machine Learning Studio (klasik) Tümleştirmesi (Önizleme)
+Stream Analytics, Azure Machine Learning Studio (klasik) uç noktalarına çağıran kullanıcı tanımlı işlevleri destekler. Bu özellik için REST API desteği [Stream Analytics REST API kitaplığı](https://msdn.microsoft.com/library/azure/dn835031.aspx)'nda ayrıntılı olarak açıklanmıştır. Bu makalede, Stream Analytics bu özelliğin başarılı uygulanması için gereken ek bilgiler sağlanmaktadır. Bir öğretici de gönderildi ve [burada](stream-analytics-machine-learning-integration-tutorial.md)kullanılabilir.
 
-## <a name="overview-azure-machine-learning-studio-terminology"></a>Genel Bakış: Azure Machine Learning Studio terminolojisi
-Microsoft Azure Machine Learning Studio, derleme, test etme ve verilerinizde Tahmine dayalı analiz çözümleri dağıtmak için kullanabileceğiniz bir işbirliğine dayalı, sürükle ve bırak aracı sağlar. Bu aracı adlı *Azure Machine Learning Studio*. Studio, Machine Learning kaynakları ile etkileşim kurar ve kolayca oluşturun, test ve tasarımınızı yinelemek için kullanılır. Bu kaynakları ve bunların tanımlarının aşağıda verilmiştir.
+## <a name="overview-azure-machine-learning-studio-classic-terminology"></a>Genel Bakış: Azure Machine Learning Studio (klasik) terminoloji
+Microsoft Azure Machine Learning Studio (klasik), verilerinizde tahmine dayalı analiz çözümleri oluşturmak, test etmek ve dağıtmak için kullanabileceğiniz işbirliğine dayalı bir sürükle ve bırak aracı sağlar. Bu araca *Azure Machine Learning Studio (klasik)* denir. Studio, Machine Learning kaynaklarla etkileşim kurmak ve tasarımınızda kolayca derlemek, test etmek ve yinelemek için kullanılır. Bu kaynaklar ve tanımları aşağıda verilmiştir.
 
-* **Çalışma alanı**: *Çalışma* birlikte yönetim ve denetim için bir kapsayıcı içindeki diğer tüm Machine Learning kaynakları bir arada tutan bir kapsayıcıdır.
-* **Deneme**: *Denemeleri* veri kümelerini kullanan ve makine öğrenme modeli eğitmek için veri uzmanları tarafından oluşturulur.
-* **Uç nokta**: *Uç noktaları* giriş olarak özelliklerini almak, belirtilen makine öğrenme modeli uygulamak ve puanlanmış çıkışı döndürür için kullanılan Azure Machine Learning Studio nesne.
-* **Puanlama Web hizmeti**: A *Puanlama Web hizmeti* uç noktaları yukarıda da belirtildiği gibi koleksiyonudur.
+* **Çalışma alanı**: *çalışma alanı* , tüm diğer Machine Learning kaynaklarını yönetim ve denetim için bir kapsayıcıda birlikte tutan bir kapsayıcıdır.
+* **Deneme**: *denemeleri* , veri bilimcilerinin veri kümeleri kullanmasını ve makine öğrenimi modeliyle eğmesini sağlar.
+* **Uç nokta**: *uç noktalar* , işlevleri giriş olarak almak için kullanılan Azure Machine Learning Studio (klasik) nesnesidir, belirtilen makine öğrenimi modelini uygular ve puanlanmış çıktıyı döndürür.
+* **Puanlama Web hizmeti**: *Puanlama Web hizmeti* , yukarıda belirtilen bitiş noktaları koleksiyonudur.
 
-Her uç nokta toplu yürütme ve zaman uyumlu yürütme için API vardır. Stream Analytics, zaman uyumlu yürütme kullanır. Hizmete adlı bir [istek/yanıt hizmeti](../machine-learning/studio/consume-web-services.md) Azure Machine Learning Studio'da.
+Her bitiş noktasında toplu yürütme ve zaman uyumlu yürütme için API 'ler vardır. Stream Analytics zaman uyumlu yürütmeyi kullanır. Belirli bir hizmete Azure Machine Learning Studio (klasik) içinde bir [istek/yanıt hizmeti](../machine-learning/studio/consume-web-services.md) adı verilir.
 
-## <a name="machine-learning-resources-needed-for-stream-analytics-jobs"></a>Machine Learning Stream Analytics işleri için gerekli kaynakları
-Stream Analytics amaçları için iş, bir istek/yanıt uç noktası işlenirken bir [apikey](../machine-learning/machine-learning-connect-to-azure-machine-learning-web-service.md), ve bir swagger tanımı başarılı yürütme için tüm gerekli. Stream Analytics, swagger uç nokta URL'sini oluşturur, arabirimi oluşturan arar ve varsayılan UDF tanımı kullanıcıya döndürür. ek bir uç nokta sahiptir.
+## <a name="machine-learning-resources-needed-for-stream-analytics-jobs"></a>Stream Analytics işleri için gereken Machine Learning kaynakları
+Stream Analytics iş işleme amaçları için, başarılı bir yürütme için bir Istek/yanıt uç noktası, [apikey](../machine-learning/machine-learning-connect-to-azure-machine-learning-web-service.md)ve Swagger tanımının tümü gereklidir. Stream Analytics, Swagger uç noktası için URL 'yi oluşturan ek bir uç noktaya sahiptir, arabirimi arar ve kullanıcıya varsayılan bir UDF tanımı döndürür.
 
-## <a name="configure-a-stream-analytics-and-machine-learning-udf-via-rest-api"></a>Bir Stream Analytics ve Machine Learning REST API aracılığıyla UDF yapılandırın
-REST API'lerini kullanarak işinizi Azure makine dil işlevleri çağırmak için yapılandırabilirsiniz. Adımlar aşağıdaki gibidir:
+## <a name="configure-a-stream-analytics-and-machine-learning-udf-via-rest-api"></a>REST API aracılığıyla Stream Analytics ve Machine Learning UDF yapılandırma
+REST API 'Lerini kullanarak, işinizi Azure makine dili işlevlerini çağırmak için yapılandırabilirsiniz. Adımlar aşağıdaki gibidir:
 
 1. Akış Analizi işi oluşturma
-2. Bir girdi tanımlama
-3. Bir çıkış tanımlayın
-4. Bir kullanıcı tanımlı işlev (UDF) oluşturma
-5. UDF çağıran bir Stream Analytics dönüştürme yazma
+2. Giriş tanımlama
+3. Çıkış tanımlama
+4. Kullanıcı tanımlı bir işlev (UDF) oluşturma
+5. UDF 'yi çağıran bir Stream Analytics dönüşümü yazma
 6. İşi başlatma
 
-## <a name="creating-a-udf-with-basic-properties"></a>Temel özelliklere sahip bir UDF oluşturma
-Örneğin, aşağıdaki örnek kod adlı bir skaler UDF oluşturur *newudf* bir Azure Machine Learning Studio uç noktasına bağlanır. Unutmayın *uç nokta* (hizmet URI'si), seçtiğiniz hizmet API Yardım sayfasında bulunabilir ve *apiKey* Services ana sayfasında bulunabilir.
+## <a name="creating-a-udf-with-basic-properties"></a>Temel özelliklerle UDF oluşturma
+Örnek olarak, aşağıdaki örnek kod, Azure Machine Learning Studio (klasik) uç noktasına bağlanan *newudf* adlı BIR skalar UDF oluşturur. *Uç noktanın* (hizmet URI 'si) seçili HIZMET için API Yardım sayfasında bulunkullanılamayacağını ve hizmet ana sayfasında *apikey* ' i bulabilirsiniz.
 
 ```
     PUT : /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.StreamAnalytics/streamingjobs/<streamingjobName>/functions/<udfName>?api-version=<apiVersion>
@@ -68,8 +68,8 @@ REST API'lerini kullanarak işinizi Azure makine dil işlevleri çağırmak içi
     }
 ```
 
-## <a name="call-retrievedefaultdefinition-endpoint-for-default-udf"></a>Varsayılan UDF için RetrieveDefaultDefinition uç noktası çağrısı
-UDF eksiksiz tanımını çatıyı UDF oluşturulduktan sonra gereklidir. RetrieveDefaultDefinition uç nokta bir Azure Machine Learning Studio uç noktasına bağlı bir skaler işlevi için varsayılan tanımını almanıza yardımcı olur. Aşağıdaki yükü, bir Azure Machine Learning uç noktasına bağlı bir skaler işlevi için varsayılan UDF tanımı gerektirir. PUT isteği sırasında zaten sağlandıysa gibi gerçek bir uç noktasını belirtmiyor. Stream Analytics, açıkça sağlanırsa, istekte sağlanan uç nokta çağırır. Aksi takdirde ilk olarak başvurulan bir kullanır. Burada tek bir dize parametresi (bir cümlede) ve döndürür tek bir çıkış türü UDF alır, cümle için "yaklaşım" etiketinin belirten dize.
+## <a name="call-retrievedefaultdefinition-endpoint-for-default-udf"></a>Varsayılan UDF için RetrieveDefaultDefinition uç noktasını çağır
+İskelet UDF oluşturulduktan sonra UDF 'nin tüm tanımı gereklidir. RetrieveDefaultDefinition uç noktası, bir Azure Machine Learning Studio (klasik) uç noktasına bağlanan bir skaler işlevin varsayılan tanımını almanıza yardımcı olur. Aşağıdaki yük, bir Azure Machine Learning uç noktasına bağlanan bir skaler işlev için varsayılan UDF tanımını almanızı gerektirir. PUT isteği sırasında zaten sağlanmış olan gerçek bitiş noktasını belirtmez. Stream Analytics, açıkça sağlanmışsa istekte belirtilen bitiş noktasını çağırır. Aksi takdirde, ilk olarak başvurulan birini kullanır. Burada UDF, tek bir String parametresi (bir cümle) alır ve bu cümle için "yaklaşım" etiketini gösteren dize türünde tek bir çıktı döndürür.
 
 ```
 POST : /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.StreamAnalytics/streamingjobs/<streamingjobName>/functions/<udfName>/RetrieveDefaultDefinition?api-version=<apiVersion>
@@ -87,7 +87,7 @@ POST : /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/
     }
 ```
 
-Bu arama bir şey aşağıda istediğiniz bir örnek çıktı.
+Bunun örnek bir çıktısı aşağıda bir şekilde görünür.
 
 ```json
     {
@@ -127,14 +127,14 @@ Bu arama bir şey aşağıda istediğiniz bir örnek çıktı.
     }
 ```
 
-## <a name="patch-udf-with-the-response"></a>Düzeltme eki UDF yanıt
-Artık UDF ile önceki yanıt, aşağıda gösterildiği gibi Yama gerekir.
+## <a name="patch-udf-with-the-response"></a>Yanıt ile UDF Düzeltme Eki
+Şimdi UDF, aşağıda gösterildiği gibi önceki Yanıtla düzeltme eki uygulanmış olmalıdır.
 
 ```
 PATCH : /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.StreamAnalytics/streamingjobs/<streamingjobName>/functions/<udfName>?api-version=<apiVersion>
 ```
 
-İstek gövdesi (RetrieveDefaultDefinition çıktısını):
+İstek gövdesi (RetrieveDefaultDefinition öğesinden çıkış):
 
 ```json
     {
@@ -174,8 +174,8 @@ PATCH : /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers
     }
 ```
 
-## <a name="implement-stream-analytics-transformation-to-call-the-udf"></a>UDF çağırmak için Stream Analytics Dönüşüm Uygulama
-Artık her giriş olayı için (burada scoreTweet adlı) UDF sorgulayabilir ve bu olay için bir yanıt yazmak için bir çıktı.
+## <a name="implement-stream-analytics-transformation-to-call-the-udf"></a>UDF 'yi çağırmak için Stream Analytics dönüşümünü Uygula
+Artık her giriş olayı için UDF 'yi (burada scoreTweet adlı) sorgulayın ve bir çıkışa bu olay için bir yanıt yazar.
 
 ```json
     {
@@ -192,8 +192,8 @@ Artık her giriş olayı için (burada scoreTweet adlı) UDF sorgulayabilir ve b
 Daha fazla yardım için [Azure Stream Analytics forumumuzu](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics) deneyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Azure Stream analytics'e giriş](stream-analytics-introduction.md)
+* [Azure Stream Analytics giriş](stream-analytics-introduction.md)
 * [Azure Akış Analizi'ni kullanmaya başlama](stream-analytics-real-time-fraud-detection.md)
 * [Azure Akış Analizi işlerini ölçeklendirme](stream-analytics-scale-jobs.md)
-* [Azure Akış Analizi Sorgu Dili Başvurusu](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure Akış Analizi Sorgu Dili Başvurusu](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
 * [Azure Akış Analizi Yönetimi REST API'si Başvurusu](https://msdn.microsoft.com/library/azure/dn835031.aspx)

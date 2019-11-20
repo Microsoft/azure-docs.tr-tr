@@ -1,6 +1,6 @@
 ---
-title: Ekleme veya bir Azure Lab Services paylaşılan görüntü galerisinde ayırma | Microsoft Docs
-description: Azure Lab Services laboratuvarda bir paylaşılan görüntü Galerisine ekleme hakkında bilgi edinin.
+title: Azure Lab Services paylaşılan görüntü galerisini Ekle veya ayır | Microsoft Docs
+description: Azure Lab Services ' de bir laboratuvara paylaşılan görüntü Galerisi 'ni nasıl ekleyeceğinizi öğrenin.
 services: lab-services
 documentationcenter: na
 author: spelluru
@@ -11,84 +11,82 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/07/2019
+ms.date: 09/05/2019
 ms.author: spelluru
-ms.openlocfilehash: de4e9fb4b15f4c346926fe46f23255c668204c2e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4f3f435110f0cba5ea2370f2900d4e7031904067
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65413884"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890322"
 ---
-# <a name="attach-or-detach-a-shared-image-gallery-in-azure-lab-services"></a>Ekleme veya bir Azure Lab Services paylaşılan görüntü galerisinde ayırma
-Öğretmenler/Laboratuvar Yönetimi, bir Azure şablonu VM görüntüsü kaydedebilir [paylaşılan görüntü Galerisi](../../virtual-machines/windows/shared-image-galleries.md) bu başkaları tarafından yeniden kullanılabilir. İlk adım, Laboratuvar Yöneticisi var olan bir paylaşılan görüntü Galerisine Laboratuvar hesabına ekler. Paylaşılan görüntü Galerisi bağlandıktan sonra labs Laboratuvar hesabında oluşturulan görüntüleri paylaşılan görüntü Galerisine kaydedebilirsiniz. Diğer Öğretmenler, bu görüntü, kendi sınıfları için bir şablon oluşturmak için paylaşılan bir görüntü galerisinden seçebilirsiniz. 
+# <a name="attach-or-detach-a-shared-image-gallery-in-azure-lab-services"></a>Azure Lab Services paylaşılan görüntü galerisini bağlama veya ayırma
+Öğretmenler/Laboratuvar Yöneticisi, bir şablon VM görüntüsünü başkalarının tarafından yeniden kullanılabilmesi için Azure [paylaşılan görüntü galerisine](../../virtual-machines/windows/shared-image-galleries.md) kaydedebilir. İlk adım olarak, Laboratuvar Yöneticisi laboratuvar hesabına var olan bir paylaşılan görüntü Galerisi ekler. Paylaşılan görüntü Galerisi eklendikten sonra, laboratuvar hesabında oluşturulan laboratuvarlar paylaşılan görüntü galerisine görüntü kaydedebilir. Diğer öğretmenler bu görüntüyü, sınıfları için bir şablon oluşturmak üzere paylaşılan görüntü galerisinden seçebilir. 
 
-Bu makalede ekleme veya bir laboratuvar hesabı paylaşılan görüntü Galerisine ayırma gösterilmektedir. 
+Bu makalede, paylaşılan bir görüntü galerisinin bir laboratuvar hesabına nasıl ekleneceği veya ayrılabilmesi gösterilmektedir. 
 
-## <a name="configure-at-the-time-of-lab-account-creation"></a>Laboratuvar hesap oluşturma sırasında yapılandırma
-Bir laboratuvar hesabı oluştururken bir paylaşılan görüntü Galerisi Laboratuvar hesabına ekleyebilirsiniz. Aşağı açılan listeden var olan bir paylaşılan görüntü Galerisine seçin veya yeni bir tane oluşturun. Oluşturma ve paylaşılan görüntü Galerisi Laboratuvar hesaba iliştirebilir için **Yeni Oluştur**, Galeri için bir ad girin ve girin **Tamam**. 
+> [!NOTE]
+> Bir görüntü paylaşılan bir görüntü galerisine kaydedildiğinde, Azure Lab Services kaydedilen görüntüyü aynı [Coğrafya](https://azure.microsoft.com/global-infrastructure/geographies/)'da bulunan diğer bölgelere çoğaltır. Görüntünün aynı coğrafya içindeki diğer bölgelerde oluşturulan laboratuvarlarda kullanılabilir olmasını sağlar. Resimleri paylaşılan bir görüntü galerisine kaydetmek, çoğaltılan tüm görüntülerin maliyetini içeren ek bir maliyet doğurur. Bu maliyet Azure Lab Services kullanım maliyetinden ayrıdır. Paylaşılan görüntü Galerisi fiyatlandırması hakkında daha fazla bilgi için bkz. [paylaşılan görüntü Galerisi – faturalandırma]( https://docs.microsoft.com/azure/virtual-machines/windows/shared-image-galleries#billing).
 
-![Paylaşılan görüntü Galerisi Laboratuvar hesap oluşturma sırasında yapılandırma](../media/how-to-use-shared-image-gallery/new-lab-account.png)
 
-## <a name="configure-after-the-lab-account-is-created"></a>Bir laboratuvar hesabı oluşturulduktan sonra yapılandırma
-Bir laboratuvar hesabı oluşturulduktan sonra aşağıdaki görevleri gerçekleştirebilirsiniz:
+## <a name="configure-at-the-time-of-lab-account-creation"></a>Laboratuvar hesabı oluşturma sırasında yapılandırma
+Laboratuvar hesabı oluştururken, laboratuvar hesabına paylaşılan bir görüntü Galerisi ekleyebilirsiniz. Açılan listeden var olan bir paylaşılan görüntü Galerisi seçebilir veya yeni bir tane oluşturabilirsiniz. Laboratuvar hesabına paylaşılan bir görüntü galerisi oluşturup eklemek için **Yeni oluştur**' u seçin, Galeri için bir ad girin ve **Tamam**' ı girin. 
 
-- Oluşturma ve paylaşılan görüntü Galerisine ekleme
-- Paylaşılan görüntü Galerisi Laboratuvar hesaba iliştirebilir.
-- Bir laboratuvar hesabı paylaşılan görüntü galerisinden Ayır
+![Laboratuvar hesabı oluşturma sırasında paylaşılan görüntü galerisini yapılandırma](../media/how-to-use-shared-image-gallery/new-lab-account.png)
 
-## <a name="create-and-attach-a-shared-image-gallery"></a>Oluşturma ve paylaşılan görüntü Galerisine ekleme
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **tüm hizmetleri** sol menüsünde. Seçin **Lab Services** içinde **DEVOPS** bölümü. Yıldız seçerseniz (`*`) yanındaki **Lab Services**, eklenir **Sık Kullanılanlar** sol menüde bölümü. Bir sonraki zamandan ve sonraki sürümlerde, seçtiğiniz **Lab Services** altında **Sık Kullanılanlar**.
+## <a name="configure-after-the-lab-account-is-created"></a>Laboratuvar hesabı oluşturulduktan sonra yapılandırma
+Laboratuvar hesabı oluşturulduktan sonra, aşağıdaki görevleri gerçekleştirebilirsiniz:
 
-    ![Lab Services'i tüm hizmetleri ->](../media/tutorial-setup-lab-account/select-lab-accounts-service.png)
-3. Görmek için laboratuvar hesabınızı seçin **Laboratuvar hesabı** sayfası. 
-4. Seçin **paylaşılan görüntü Galerisi** seçin ve soldaki menüden **+ Oluştur** araç.  
+- Paylaşılan görüntü galerisi oluşturma ve iliştirme
+- Laboratuvar hesabına paylaşılan bir görüntü Galerisi ekleyin
+- Laboratuvar hesabından paylaşılan görüntü galerisini ayır
 
-    ![Paylaşılan görüntü Galerisi düğme oluşturma](../media/how-to-use-shared-image-gallery/new-shared-image-gallery-button.png)
-5. İçinde **Oluştur paylaşılan görüntü Galerisi** penceresinde girin bir **adı** ve galerinin girin **Tamam**. 
+## <a name="create-and-attach-a-shared-image-gallery"></a>Paylaşılan görüntü galerisi oluşturma ve iliştirme
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol taraftaki menüden **tüm hizmetler** ' i seçin. **DevOps** bölümünde **Laboratuvar Hizmetleri** ' ni seçin. **Laboratuvar Hizmetleri**' nin yanında yıldız (`*`) seçeneğini belirlerseniz Sol menüdeki **Sık Kullanılanlar** bölümüne eklenir. Sonraki zamanda, **Sık Kullanılanlar**altında **Laboratuvar Hizmetleri** ' ni seçersiniz.
+
+    ![Tüm Hizmetler-> Laboratuvar Hizmetleri](../media/tutorial-setup-lab-account/select-lab-accounts-service.png)
+3. **Laboratuvar hesabı** sayfasını görmek için laboratuvar hesabınızı seçin. 
+4. Sol menüdeki **paylaşılan görüntü Galerisi** ' ni seçin ve araç çubuğunda **+ Oluştur** ' u seçin.  
+
+    ![Paylaşılan görüntü Galerisi düğmesi oluştur](../media/how-to-use-shared-image-gallery/new-shared-image-gallery-button.png)
+5. **Paylaşılan görüntü Galerisi oluştur** penceresinde, Galeri için bir **ad** girin ve **Tamam**girin. 
 
     ![Paylaşılan görüntü Galerisi penceresi oluştur](../media/how-to-use-shared-image-gallery/create-shared-image-gallery-window.png)
 
-    Azure Lab Services paylaşılan görüntü Galerisi oluşturur ve Laboratuvar hesabınıza bağlı. Bu Laboratuvar hesabında oluşturulan tüm labs ekli paylaşılan görüntü Galerisine erişebilirsiniz. 
+    Azure Lab Services paylaşılan görüntü galerisini oluşturur ve laboratuvar hesabına iliştirilir. Bu laboratuvar hesabında oluşturulan tüm laboratuvarların ekli paylaşılan görüntü galerisine erişimi vardır. 
 
-    ![Eklenen resmin Galerisi](../media/how-to-use-shared-image-gallery/image-gallery-in-list.png)
+    ![Ekli görüntü Galerisi](../media/how-to-use-shared-image-gallery/image-gallery-in-list.png)
 
-    Alt bölmede resimleri paylaşılan görüntü galerisinde bakın. Bu yeni galerisinde resim yok. Galeride görüntü karşıya yüklediğinizde bu sayfasında görebilirsiniz.     
+    Alt bölmede, paylaşılan görüntü galerisinde görüntüler görürsünüz. Bu yeni galeride görüntü yok. Galeriye resim yüklediğinizde, bu sayfada görürsünüz.     
 
-    Ekli paylaşılan görüntü Galerisi'ndaki tüm görüntüler varsayılan olarak etkindir. Etkinleştirebilir veya bunları listeden ve kullanarak seçilen görüntüler devre dışı **seçilen görüntüler etkinleştirme** veya **seçilen görüntüler devre dışı** düğmesi.
+    Ekli paylaşılan görüntü galerisindeki tüm görüntüler varsayılan olarak etkindir. Seçili görüntüleri listede seçerek etkinleştirebilir veya devre dışı bırakabilir ve seçili görüntüleri **Etkinleştir** veya **Seçili görüntüleri devre dışı bırak** düğmesini kullanabilirsiniz.
 
-## <a name="attach-an-existing-shared-image-gallery"></a>Var olan bir paylaşılan görüntü Galerisine ekleme
-Aşağıdaki yordamı, bir laboratuvar hesabı için var olan bir paylaşılan görüntü Galerisine ekleme işlemini göstermektedir. 
+## <a name="attach-an-existing-shared-image-gallery"></a>Var olan bir paylaşılan görüntü galerisini iliştirme
+Aşağıdaki yordamda, var olan bir paylaşılan görüntü galerisinin bir laboratuar hesabına nasıl ekleneceği gösterilmektedir. 
 
-1. Üzerinde **Laboratuvar hesabı** sayfasında **paylaşılan görüntü Galerisi** seçin ve soldaki menüden **iliştirme** araç. 
+1. **Laboratuvar hesabı** sayfasında sol menüdeki **paylaşılan görüntü Galerisi** ' ni seçin ve araç çubuğunda **Ekle** ' yi seçin. 
 
-    ![Paylaşılan görüntü Galerisi - düğmesi ekleme](../media/how-to-use-shared-image-gallery/sig-attach-button.png)
-5. Üzerinde **var olan bir paylaşılan görüntü Galerisine ekleme** seçin sayfasında ve paylaşılan görüntü Galerisi **Tamam**.
+    ![Paylaşılan görüntü Galerisi-ekleme düğmesi](../media/how-to-use-shared-image-gallery/sig-attach-button.png)
+5. **Var olan bir paylaşılan görüntü Galerisi Ekle** sayfasında, paylaşılan görüntü galerinizi seçin ve **Tamam**' ı seçin.
 
-    ![Mevcut bir galeriyi seçin](../media/how-to-use-shared-image-gallery/select-image-gallery.png)
+    ![Mevcut bir galeri seçin](../media/how-to-use-shared-image-gallery/select-image-gallery.png)
 6. Aşağıdaki ekranı görürsünüz: 
 
-    ![Galerim listesinde](../media/how-to-use-shared-image-gallery/my-gallery-in-list.png)
+    ![Listedeki galerim](../media/how-to-use-shared-image-gallery/my-gallery-in-list.png)
     
-    Bu örnekte, vardır hiçbir görüntü paylaşılan görüntü galerisinde henüz.
+    Bu örnekte, paylaşılan görüntü galerisinde henüz görüntü yok.
 
-    Azure Lab Services kimlik laboratuvara bağlı paylaşılan görüntü Galerisine katkıda bulunan olarak eklenir. Bu, Öğretmenler / sanal makine olarak kaydetmek için BT yöneticisi, paylaşılan görüntü Galerisine görüntüler. Bu Laboratuvar hesabında oluşturulan tüm labs ekli paylaşılan görüntü Galerisine erişebilirsiniz. 
+    Azure Lab Services kimlik, laboratuvara eklenmiş paylaşılan görüntü galerisine katkıda bulunan olarak eklenir. Öğretmenler/BT Yöneticisi 'nin sanal makine görüntülerini paylaşılan görüntü galerisine kaydetmesine izin verir. Bu laboratuvar hesabında oluşturulan tüm laboratuvarların ekli paylaşılan görüntü galerisine erişimi vardır. 
 
-    Ekli paylaşılan görüntü Galerisi'ndaki tüm görüntüler varsayılan olarak etkindir. Etkinleştirebilir veya bunları listeden ve kullanarak seçilen görüntüler devre dışı **seçilen görüntüler etkinleştirme** veya **seçilen görüntüler devre dışı** düğmesi. 
+    Ekli paylaşılan görüntü galerisindeki tüm görüntüler varsayılan olarak etkindir. Seçili görüntüleri listede seçerek etkinleştirebilir veya devre dışı bırakabilir ve seçili görüntüleri **Etkinleştir** veya **Seçili görüntüleri devre dışı bırak** düğmesini kullanabilirsiniz. 
 
-## <a name="save-an-image-to-the-shared-image-gallery"></a>Paylaşılan görüntü Galerisine bir görüntüyü kaydedin
-Paylaşılan görüntü Galerisi eklendikten sonra bir laboratuvar hesabı yöneticisi veya bir Öğretmen kaydedebilir veya diğer Öğretmen tarafından yeniden kullanılabilir, böylece paylaşılan görüntü Galerisine bir görüntü yükleyin. Paylaşılan görüntü Galerisine bir görüntü yüklemek için yönergeler için bkz: [paylaşılan görüntü Galerisi genel bakış](../../virtual-machines/windows/shared-images.md). 
+## <a name="detach-a-shared-image-gallery"></a>Paylaşılan görüntü galerisini ayır
+Laboratuvara yalnızca bir paylaşılan görüntü Galerisi eklenebilir. Başka bir paylaşılan görüntü galerisi eklemek isterseniz yenisini eklemeden önce geçerli olanı ayırın. Bir paylaşılan görüntü galerisini laboratuvarınızdan ayırmak için araç çubuğunda **Ayır** ' ı seçin ve ayırma işlemini onaylayın. 
 
-> [!NOTE]
-> Sınıf Laboratuvarlarını kullanıcı arabirimi (UI) curently, paylaşılan bir görüntü Galerisine bir laboratuvar görüntüsü kaydediliyor desteklemiyor. 
-
-## <a name="detach-a-shared-image-gallery"></a>Paylaşılan görüntü Galerisi Ayır
-Tek bir paylaşılan görüntü Galerisi laboratuvara eklenebilir. Başka bir paylaşılan görüntü Galerisi eklemek istiyorsanız, önce yeni bir ekleme geçerli bir ayırma. Laboratuvarınızı paylaşılan görüntü galerisinden ayırmak için seçin **ayırma** araç çubuğunda ve ayırma işlemi onaylayın. 
-
-![Laboratuvar hesabı paylaşılan görüntü galerisinden Ayır](../media/how-to-use-shared-image-gallery/detach.png)
+![Paylaşılan görüntü galerisini laboratuvar hesabından ayırın](../media/how-to-use-shared-image-gallery/detach.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Paylaşılan görüntü Galerisine bir laboratuvar görüntüsünü kaydetmek veya bir VM oluşturmak için paylaşılan bir görüntü galerisinden bir görüntü kullanma hakkında bilgi edinmek için [paylaşılan görüntü Galerisi kullanmayı](how-to-use-shared-image-gallery.md).
+Bir laboratuvar görüntüsünü paylaşılan görüntü galerisine kaydetme veya bir VM oluşturmak için paylaşılan görüntü galerisinden bir görüntü kullanma hakkında bilgi edinmek için bkz. [paylaşılan görüntü Galerisi 'ni kullanma](how-to-use-shared-image-gallery.md).
 
-Resim galerileri genel olarak paylaşılan hakkında daha fazla bilgi için bkz: [paylaşılan görüntü Galerisi](../../virtual-machines/windows/shared-image-galleries.md).
+Paylaşılan görüntü galerileri hakkında genel bilgi için bkz. [paylaşılan görüntü Galerisi](../../virtual-machines/windows/shared-image-galleries.md).

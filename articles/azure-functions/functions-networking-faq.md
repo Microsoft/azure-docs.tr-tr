@@ -1,74 +1,75 @@
 ---
-title: Azure işlevleri'nde ağ hakkında sık sorulan sorular
-description: Bazı yaygın sorular ve Azure işlevleri ile ağ iletişimi senaryoları yanıtlar.
+title: Azure Işlevlerinde ağ hakkında sık sorulan sorular
+description: Azure Işlevleri ile ağ iletişimi için en yaygın soruların ve senaryolardan bazılarına yanıtlar.
 services: functions
 author: alexkarcher-msft
 manager: jeconnoc
 ms.service: azure-functions
 ms.topic: troubleshooting
 ms.date: 4/11/2019
-ms.author: alkarche, glenga
-ms.openlocfilehash: b673e625e1a50c32e3d8580ec442792ed8611703
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: alkarche
+ms.reviewer: glenga
+ms.openlocfilehash: 6f363003dc24509bd0b80922d9e34560250cc7ed
+ms.sourcegitcommit: 6cbf5cc35840a30a6b918cb3630af68f5a2beead
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64572605"
+ms.lasthandoff: 08/05/2019
+ms.locfileid: "68779297"
 ---
-# <a name="frequently-asked-questions-about-networking-in-azure-functions"></a>Azure işlevleri'nde ağ hakkında sık sorulan sorular
+# <a name="frequently-asked-questions-about-networking-in-azure-functions"></a>Azure Işlevlerinde ağ hakkında sık sorulan sorular
 
-Bu makalede, Azure işlevleri'nde ağ hakkında sık sorulan sorular listelenmektedir. Daha kapsamlı bir bakış için bkz: [ağ seçeneklerini işlevleri](functions-networking-options.md).
+Bu makalede, Azure Işlevlerinde ağlarla ilgili sık sorulan sorular listelenmektedir. Daha kapsamlı bir genel bakış için bkz. [işlevler ağ seçenekleri](functions-networking-options.md).
 
-## <a name="how-do-i-set-a-static-ip-in-functions"></a>Statik IP işlevleri nasıl ayarlayabilirim?
+## <a name="how-do-i-set-a-static-ip-in-functions"></a>Işlevlerde statik IP Nasıl yaparım? mı?
 
-Bir App Service ortamında bir işlev dağıtımı şu anda işleviniz için bir statik gelen ve giden IP tek yoludur. Bir App Service ortamını kullanma hakkında daha fazla ayrıntı için makale ile başlayın [oluşturma ve kullanma bir App Service ortamı ile iç yük dengeleyici](../app-service/environment/create-ilb-ase.md).
+Bir App Service Ortamı işlevin dağıtımı, işleviniz için statik gelen ve giden IP 'nin tek yoludur. App Service Ortamı kullanma hakkında ayrıntılı bilgi için, bir [App Service ortamı ile iç yük dengeleyici oluşturma ve kullanma](../app-service/environment/create-ilb-ase.md)makalesini başlatın.
 
-## <a name="how-do-i-restrict-internet-access-to-my-function"></a>My işlevi için internet erişimi nasıl kısıtlarım?
+## <a name="how-do-i-restrict-internet-access-to-my-function"></a>Nasıl yaparım? Internet erişimini işlevme kısıtlamak istiyor musunuz?
 
-Çeşitli şekillerde Internet erişimi kısıtlayabilirsiniz:
+Internet erişimini birkaç yolla kısıtlayabilirsiniz:
 
-* [IP kısıtlamaları](../app-service/app-service-ip-restrictions.md): Gelen trafik için işlev uygulamanızın IP aralığına göre kısıtlayın.
-    * IP kısıtlamaları altında ayrıca yapılandırabilirsiniz [hizmet uç noktaları](../virtual-network/virtual-network-service-endpoints-overview.md), işlevinizi yalnızca belirli bir sanal ağdan gelen trafiği kabul edecek şekilde kısıtlayın.
-* Tüm HTTP Tetikleyicileri kaldırılması. Bazı uygulamalar için yalnızca HTTP Tetikleyicileri önlemek ve işlevinizi tetikleyecek şekilde başka bir olay kaynağı kullanmak için yeterlidir.
+* [IP kısıtlamaları](../app-service/app-service-ip-restrictions.md): İşlev uygulamanıza gelen trafiği IP aralığı ile kısıtlayın.
+    * IP kısıtlamaları ' nın altında, işlevinizi yalnızca belirli bir sanal ağdan gelen trafiği kabul edecek şekilde kısıtlayan [hizmet uç noktalarını](../virtual-network/virtual-network-service-endpoints-overview.md)de yapılandırabileceksiniz.
+* Tüm HTTP Tetikleyicileri kaldırılıyor. Bazı uygulamalarda, yalnızca HTTP tetikleyicilerinin oluşmaması ve işlevinizin tetiklenmesi için başka herhangi bir olay kaynağının kullanılması yeterlidir.
 
-Azure portal Düzenleyicisi çalışan işlevinize doğrudan erişimi gerektiğini aklınızda bulundurun. Herhangi bir kod değişikliği Azure portalı üzerinden kendi IP beyaz listeye sağlamak için portalın göz atmak için kullanmakta olduğunuz cihaz gerektirir. Ancak, platform Özellikleri sekmesi altındaki her şeyi yerinde ağ kısıtlamaları ile kullanmaya devam edebilirsiniz.
+Azure portal düzenleyicisinin çalışan işlevinize doğrudan erişim gerektirdiğini unutmayın. Azure portal üzerinden yapılan herhangi bir kod değişikliği, IP 'nin beyaz listeye alınmasını sağlamak için kullandığınız cihazın portala göz atamasını gerektirir. Ancak, ağ kısıtlamalarına sahip olan platform özellikleri sekmesinde herhangi bir şeyi kullanmaya devam edebilirsiniz.
 
-## <a name="how-do-i-restrict-my-function-app-to-a-virtual-network"></a>Bir sanal ağa işlevi uygulamamı nasıl kısıtlarım?
+## <a name="how-do-i-restrict-my-function-app-to-a-virtual-network"></a>İşlev uygulamamı bir sanal ağ ile kısıtlıyor Nasıl yaparım??
 
-Kısıtlayabileceksiniz **gelen** kullanarak bir sanal ağ için bir işlev uygulaması için trafiği [hizmet uç noktaları](./functions-networking-options.md#private-site-access). Bu yapılandırma İnternet'e giden çağrıları yapmak işlev uygulamasını yine de sağlar.
+[Hizmet uç noktalarını](./functions-networking-options.md#private-site-access)kullanarak bir işlev uygulaması için **gelen** trafiği bir sanal ağ ile kısıtlayabileceksiniz. Bu yapılandırma, işlev uygulamasının internet 'e giden çağrılar yapmasına hala izin verir.
 
-Bir işlev aracılığıyla bir sanal ağ tüm trafik akışları gibi tamamen kısıtlamak için tek yolu, yük dengeli bir App Service ortamı kullanmaktır. Bu seçenek, bir sanal ağ içindeki özel bir altyapı sitenizde dağıtır ve tüm tetikleyiciler ve trafiği sanal ağ üzerinden gönderir. 
+Bir işlevi tamamen kısıtlamak için bir sanal ağ üzerinden akan tüm trafik, dahili yük dengeli bir App Service Ortamı kullanmaktır. Bu seçenek, sitenizi bir sanal ağ içindeki adanmış bir altyapıya dağıtır ve tüm Tetikleyicileri ve trafiği sanal ağ üzerinden gönderir. 
 
-Bir App Service ortamını kullanma hakkında daha fazla ayrıntı için makale ile başlayın [oluşturma ve kullanma bir App Service ortamı ile iç yük dengeleyici](../app-service/environment/create-ilb-ase.md).
+App Service Ortamı kullanma hakkında ayrıntılı bilgi için, bir [App Service ortamı ile iç yük dengeleyici oluşturma ve kullanma](../app-service/environment/create-ilb-ase.md)makalesini başlatın.
 
-## <a name="how-can-i-access-resources-in-a-virtual-network-from-a-function-app"></a>Bir sanal ağ içindeki kaynaklarla bir işlev uygulamasından nasıl erişebilirim?
+## <a name="how-can-i-access-resources-in-a-virtual-network-from-a-function-app"></a>Bir işlev uygulamasından bir sanal ağdaki kaynaklara nasıl erişebilirim?
 
-Sanal ağ Tümleştirmesi'ni kullanarak bir sanal ağ içindeki kaynaklarla çalışan bir işlevden erişebilirsiniz. Daha fazla bilgi için [sanal ağ tümleştirmesi](functions-networking-options.md#virtual-network-integration).
+Sanal ağ tümleştirmesini kullanarak, çalışan bir işlevden bir sanal ağdaki kaynaklara erişebilirsiniz. Daha fazla bilgi için bkz. [sanal ağ tümleştirmesi](functions-networking-options.md#virtual-network-integration).
 
-## <a name="how-do-i-access-resources-protected-by-service-endpoints"></a>Hizmet uç noktaları tarafından korunan kaynaklara nasıl erişim sağlanır?
+## <a name="how-do-i-access-resources-protected-by-service-endpoints"></a>Hizmet uç noktaları tarafından korunan Nasıl yaparım? erişim kaynakları?
 
-(Şu anda Önizleme aşamasında) kullanarak sanal ağ tümleştirmesi, çalışan bir işlevden hizmet uç noktası-güvenlikli kaynaklara erişebilir. Daha fazla bilgi için [sanal ağ tümleştirmesi Önizleme](functions-networking-options.md#preview-version-of-virtual-network-integration).
+Sanal ağ tümleştirmesini kullanarak, çalışan bir işlevden hizmet uç nokta korumalı kaynaklara erişebilirsiniz. Daha fazla bilgi için bkz. [sanal ağ tümleştirmesi](functions-networking-options.md#virtual-network-integration).
 
-## <a name="how-can-i-trigger-a-function-from-a-resource-in-a-virtual-network"></a>Bir kaynağı bir sanal ağdaki bir işlevden nasıl tetiklenebilir mi?
+## <a name="how-can-i-trigger-a-function-from-a-resource-in-a-virtual-network"></a>Sanal ağdaki bir kaynaktan bir işlevi nasıl tetikleyebilirim?
 
-HTTP Tetikleyicileri kullanarak bir sanal ağ çağrılmasına izin vermek için [hizmet uç noktaları](./functions-networking-options.md#private-site-access). 
+[Hizmet uç noktaları](./functions-networking-options.md#private-site-access)kullanılarak sanal BIR ağdan http tetikleyicilerinin çağrılmasına izin verebilirsiniz. 
 
-İşlev uygulamanız için bir App Service ortamı dağıtarak, bir sanal ağdaki bir kaynaktan bir işlev de tetikleyebilirsiniz. Bir App Service ortamını kullanma hakkında daha fazla bilgi için bkz [oluşturma ve kullanma bir App Service ortamı ile iç yük dengeleyici](../app-service/environment/create-ilb-ase.md).
+Ayrıca, işlev uygulamanızı bir App Service Ortamı dağıtarak bir sanal ağdaki kaynaktan bir işlev tetikleyebilirsiniz. App Service Ortamı kullanma hakkında ayrıntılı bilgi için bkz. [App Service ortamı ile iç yük dengeleyici oluşturma ve kullanma](../app-service/environment/create-ilb-ase.md).
 
-Premium ve App Service planı HTTP Tetikleyicileri destekler bir sanal ağ, ancak yalnızca bir App Service ortamı, bir sanal ağ üzerinden tüm diğer işlevi tetikleyici türleri destekler.
+Premium ve App Service planı bir sanal ağdan gelen HTTP tetikleyicilerini destekler, ancak yalnızca bir App Service ortamı, bir sanal ağ üzerinden diğer tüm işlev tetikleyici türlerini destekler.
 
-## <a name="how-can-i-deploy-my-function-app-in-a-virtual-network"></a>İşlev uygulamamı bir sanal ağdaki nasıl dağıtabilir miyim?
+## <a name="how-can-i-deploy-my-function-app-in-a-virtual-network"></a>İşlev uygulamamı sanal bir ağda nasıl dağıtabilirim?
 
-App Service ortamı için dağıtma, sanal ağ içinde tamamen olan bir işlev uygulaması oluşturmak için tek bir yoludur. Bir App Service ortamı ile iç yük dengeleyici kullanma hakkında daha fazla ayrıntı için makale ile başlayın [oluşturma ve kullanma bir App Service ortamı ile iç yük dengeleyici](https://docs.microsoft.com/azure/app-service/environment/create-ilb-ase).
+Bir App Service Ortamı dağıtım, bir sanal ağın içinde bir işlev uygulaması oluşturmanın tek yoludur. Bir App Service Ortamı iç yük dengeleyiciyi kullanma hakkında ayrıntılı bilgi için, bir [App Service ortamı ile iç yük dengeleyici oluşturma ve kullanma](https://docs.microsoft.com/azure/app-service/environment/create-ilb-ase)makalesini başlatın.
 
-Yalnızca tek yönlü erişim için sanal ağ kaynaklarına veya kapsamlı ağ yalıtımı daha az duyduğunuz senaryolara senaryoları için bkz: [ağ bağlantısına genel bakış işlevleri](functions-networking-options.md).
+Sanal ağ kaynaklarına yalnızca tek yönlü erişiminizin olması veya daha az kapsamlı ağ yalıtımı olması gereken senaryolarda, bkz. [işlevlere genel bakış](functions-networking-options.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ağ ve işlevleri hakkında daha fazla bilgi edinmek için: 
+Ağ ve işlevler hakkında daha fazla bilgi için: 
 
-* [Sanal ağ Tümleştirmesi ile çalışmaya başlama hakkında bir öğretici uygulayın](./functions-create-vnet.md)
-* [Azure işlevleri içindeki ağ seçenekleri hakkında daha fazla bilgi edinin](./functions-networking-options.md)
-* [App Service ve işlevler ile sanal ağ tümleştirmesi hakkında daha fazla bilgi edinin](../app-service/web-sites-integrate-with-vnet.md)
-* [Azure'daki sanal ağlar hakkında daha fazla bilgi edinin](../virtual-network/virtual-networks-overview.md)
-* [Daha fazla ağ özellikleri ve App Service ortamları ile denetimi etkinleştir](../app-service/environment/intro.md)
+* [Sanal ağ tümleştirmesiyle çalışmaya başlama öğreticisini izleyin](./functions-create-vnet.md)
+* [Azure Işlevleri 'ndeki ağ seçenekleri hakkında daha fazla bilgi edinin](./functions-networking-options.md)
+* [App Service ve Işlevlerle sanal ağ tümleştirmesi hakkında daha fazla bilgi edinin](../app-service/web-sites-integrate-with-vnet.md)
+* [Azure 'da sanal ağlar hakkında daha fazla bilgi edinin](../virtual-network/virtual-networks-overview.md)
+* [App Service ortamlarla daha fazla ağ özelliği ve denetimi etkinleştirin](../app-service/environment/intro.md)

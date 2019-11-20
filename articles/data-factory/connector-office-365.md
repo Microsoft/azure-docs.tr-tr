@@ -1,6 +1,6 @@
 ---
-title: Office 365 Azure Data Factory kullanarak verileri kopyalama | Microsoft Docs
-description: Desteklenen bir havuz veri depolarına Office 365'ten bir Azure Data Factory işlem hattında kopyalama etkinliği'ni kullanarak veri kopyalama hakkında bilgi edinin.
+title: Azure Data Factory kullanarak Office 365 ' den veri kopyalama
+description: Azure Data Factory bir işlem hattındaki kopyalama etkinliğini kullanarak Office 365 ' den desteklenen havuz veri depolarına veri kopyalamayı öğrenin.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -10,86 +10,86 @@ ms.service: data-factory
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.date: 05/07/2019
+ms.date: 10/20/2019
 ms.author: jingwang
-ms.openlocfilehash: 1a8d622aa280794d9a4d6fe7320ddcc21ac044f4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9bd059d42686a37701af0d42f54335b83c06b752
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66475656"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73680580"
 ---
-# <a name="copy-data-from-office-365-into-azure-using-azure-data-factory"></a>Azure Data Factory kullanarak Azure'a Office 365'ten veri kopyalama
+# <a name="copy-data-from-office-365-into-azure-using-azure-data-factory"></a>Azure Data Factory kullanarak Office 365 ' deki verileri Azure 'a kopyalama
 
-Azure Data Factory ile tümleştirilir [Microsoft Graph verilere](https://docs.microsoft.com/graph/data-connect-concept-overview), kuruluş verilerine, Office 365'te ölçeklenebilir bir şekilde Azure'a Kiracı ve analiz uygulamaları derleme zengin getirmenize olanak sağlayan ve temel içgörüleri ayıklayın Bu değerli veri varlıklarını. Privileged Access Management ile tümleştirme için değerli seçkin verileri Office 365'te güvenli erişim denetimi sağlar.  Lütfen [bu bağlantıyı](https://docs.microsoft.com/graph/data-connect-concept-overview) Microsoft Graph veri çubuğunda genel bir bakış için bağlanmak ve başvurmak [bu bağlantıyı](https://docs.microsoft.com/graph/data-connect-policies#licensing) lisans bilgileri için.
+Azure Data Factory, [Microsoft Graph veri bağlantısı](https://docs.microsoft.com/graph/data-connect-concept-overview)ile tümleşir ve bu değerli verilere dayalı olarak Office 365 kiracınızdaki zengin kurumsal verileri Azure 'a ölçeklenebilir bir şekilde Azure 'a getirip analiz uygulamaları oluşturabilir ve Öngörüler ayıklamanızı sağlar varlıklar. Privileged Access Management tümleştirme, Office 365 ' deki değerli seçkin veriler için güvenli erişim denetimi sağlar.  Lütfen Microsoft Graph veri bağlantısı hakkında genel bakış için [Bu bağlantıya](https://docs.microsoft.com/graph/data-connect-concept-overview) başvurun ve lisans bilgileri için [Bu bağlantıya](https://docs.microsoft.com/graph/data-connect-policies#licensing) başvurun.
 
-Bu makalede, kopyalama etkinliği Azure Data Factory'de Office 365'ten veri kopyalamak için nasıl kullanılacağını özetlenmektedir. Yapılar [kopyalama etkinliği'ne genel bakış](copy-activity-overview.md) kopyalama etkinliği genel bir bakış sunan makalesi.
+Bu makalede, Office 365 ' den veri kopyalamak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı özetlenmektedir. Kopyalama etkinliğine genel bir bakış sunan [kopyalama etkinliğine genel bakış](copy-activity-overview.md) makalesinde oluşturulur.
 
-## <a name="supported-capabilities"></a>Desteklenen özellikler
-ADF Office 365 Bağlayıcısı ve Microsoft Graph veri adres defteri kişileri, Takvim etkinlikleri, e-posta iletileri, kullanıcı bilgilerini, posta kutusu ayarlar dahil olmak üzere Exchange e-posta etkin kutularından etkinleştirir, Ölçek alımı, veri kümeleri farklı türdeki bağlanın ve benzeri.  Başvuru [burada](https://docs.microsoft.com/graph/data-connect-datasets) kullanılabilen veri kümelerini tam listesini görmek için.
+## <a name="supported-capabilities"></a>Desteklenen yetenekler
+ADF Office 365 Bağlayıcısı ve Microsoft Graph veri bağlantısı, Exchange e-posta etkin posta kutularındaki, adres defteri kişileri, takvim olayları, e-posta iletileri, Kullanıcı bilgileri, posta kutusu ayarları ve Bu şekilde devam eder.  Kullanılabilir veri kümelerinin tüm listesini görmek için [buraya](https://docs.microsoft.com/graph/data-connect-datasets) başvurun.
 
-Şimdilik, tek bir kopyalama etkinliği içinde yalnızca yapabilecekleriniz **Office 365'ten veri kopyalama [Azure Blob Depolama](connector-azure-blob-storage.md), [Azure Data Lake depolama Gen1](connector-azure-data-lake-store.md), ve [Azure Data Lake depolama 2. nesil ](connector-azure-data-lake-storage.md) JSON biçiminde** (setOfObjects yazın). Office 365 veri depolarının veya başka biçimlerde diğer türleri yüklemek istiyorsanız, daha fazla veri hiçbirine yüklemek için sonraki kopyalama etkinliği ile ilk kopyalama etkinliği zincirleyebilirsiniz [desteklenen ADF hedef depoları](copy-activity-overview.md#supported-data-stores-and-formats) (bakın" bir havuz olarak desteklenen"tablosundaki"desteklenen veri depoları ve biçimler").
+Şimdilik tek bir kopyalama etkinliği içinde, yalnızca **Office 365 ' den [Azure Blob depolama](connector-azure-blob-storage.md)alanına, [Azure Data Lake Storage 1.](connector-azure-data-lake-store.md)ve [Azure Data Lake Storage 2.](connector-azure-data-lake-storage.md) JSON biçiminde** (setofobjects) veri kopyalayabilirsiniz. Office 365 ' i diğer veri deposu türlerine veya başka biçimlerde yüklemek istiyorsanız, [desteklenen ADF hedef depolarından](copy-activity-overview.md#supported-data-stores-and-formats) herhangi birine veri yüklemek için ilk kopyalama etkinliğini sonraki bir kopyalama etkinliğiyle zincirleyebilirsiniz ("havuz olarak desteklenir" sütununa bakın "desteklenen veri depoları ve biçimleri" tablosunda).
 
 >[!IMPORTANT]
->- Veri fabrikasını ve havuz veri deposu içeren Azure aboneliğinin, Office 365 kiracısı olarak aynı Azure Active Directory (Azure AD) kiracısı altında olması gerekir.
->- Kopyalama etkinliği için kullanılan Azure Integration Runtime bölge sağlamak hem de Office 365 Kiracı kullanıcının posta kutusuna bulunduğu bölgede hedefi olan. Başvuru [burada](concepts-integration-runtime.md#integration-runtime-location) Azure IR konumu nasıl belirlendiğini öğrenmek. Başvurmak [burada tablo](https://docs.microsoft.com/graph/data-connect-datasets#regions) desteklenen Office bölgeleri ve karşılık gelen Azure bölgelerinin listesi için.
->- Hizmet sorumlusu kimlik doğrulaması, hedef deposu olarak Azure Blob Depolama, Azure Data Lake depolama Gen1 ve Azure Data Lake depolama Gen2'ye desteklenen yalnızca kimlik doğrulama mekanizmasıdır.
+>- Data Factory ve havuz veri deposu içeren Azure aboneliğinin, Office 365 kiracısı ile aynı Azure Active Directory (Azure AD) kiracısı altında olması gerekir.
+>- Kopyalama etkinliği için kullanılan Azure Integration Runtime bölgesinin ve hedefin, Office 365 Kiracı kullanıcılarının posta kutusunun bulunduğu bölgede bulunduğundan emin olun. Azure IR konumunun nasıl belirlendiğini anlamak için [buraya](concepts-integration-runtime.md#integration-runtime-location) başvurun. Desteklenen Office bölgelerinin ve ilgili Azure bölgelerinin listesi için [buradaki tabloya](https://docs.microsoft.com/graph/data-connect-datasets#regions) bakın.
+>- Hizmet sorumlusu kimlik doğrulaması, Azure Blob depolama, Azure Data Lake Storage 1. ve Azure Data Lake Storage 2. hedef depoları olarak desteklenen tek kimlik doğrulama mekanizmasıdır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Azure'da Office 365'ten veri kopyalamak için aşağıdaki önkoşul adımlarını tamamlamanız gerekir:
+Office 365 ' deki verileri Azure 'a kopyalamak için aşağıdaki önkoşul adımlarını gerçekleştirmeniz gerekir:
 
-- Office 365 Kiracı yöneticiniz kolaylaşmasına eylemleri açıklandığı gibi tamamlayın [burada](https://docs.microsoft.com/graph/data-connect-get-started).
-- Oluşturun ve Azure Active Directory'de bir Azure AD web uygulaması yapılandırın.  Yönergeler için [bir Azure AD uygulaması oluştur](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application).
-- Office 365 için bağlı hizmetini tanımlamak için kullanacağınız aşağıdaki değerleri not edin:
-    - Kiracı kimliği Yönergeler için [Kiracı kimliği alma](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
-    - Uygulama kimliği ve uygulama anahtarı.  Yönergeler için [uygulama kimliği ve kimlik doğrulama anahtarını Al](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
-- Azure AD web uygulaması sahibi olarak veri erişim isteği yapacak kullanıcı kimliğini ekleyin (Azure AD web uygulaması > Ayarlar > sahipleri > Ekle sahibi). 
-    - Kullanıcı kimliği, içinden verileri alma ve Konuk kullanıcı olmamalıdır Office 365 kuruluşta olması gerekir.
+- Office 365 Kiracı yöneticinizin, [burada](https://docs.microsoft.com/graph/data-connect-get-started)açıklandığı gibi taslak eylemleri tamamlaması gerekir.
+- Azure Active Directory bir Azure AD Web uygulaması oluşturun ve yapılandırın.  Yönergeler için bkz. [Azure AD uygulaması oluşturma](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application).
+- Office 365 için bağlı hizmeti tanımlamak üzere kullanacağınız aşağıdaki değerleri unutmayın:
+    - Kiracı KIMLIĞI. Yönergeler için bkz. [KIRACı kimliği Al](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
+    - Uygulama KIMLIĞI ve uygulama anahtarı.  Yönergeler için bkz. [uygulama kimliği ve kimlik doğrulama anahtarı alın](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
+- Azure AD Web uygulaması 'nın sahibi olarak veri erişim isteği oluşturacak Kullanıcı kimliğini (Azure AD Web uygulamasından > ayarları > Owners > sahip Ekle) ekleyin. 
+    - Kullanıcı kimliği, verileri aldığınız Office 365 kuruluşunda olmalıdır ve Konuk Kullanıcı olmamalıdır.
 
-## <a name="approving-new-data-access-requests"></a>Onaylama yeni veri erişim istekleri
+## <a name="approving-new-data-access-requests"></a>Yeni veri erişim isteklerini onaylama
 
-Bu ilk kez kullanıyorsanız, bu bağlam için verileri isteyen (veri erişimi tablo olmasından, hangi hedef hesap, içine yüklenen verilerdir ve hangi kullanıcı kimliğini veri yapıyor birlikte erişim isteği), kopyalama etkinliği görürsünüz. durumu "Sürüyor" olarak ve yalnızca içine tıkladığınızda ["Details" bağlantı Eylemler altında](copy-activity-overview.md#monitoring) "RequestingConsent" durumu görürsünüz.  Veri erişim onaylayan grubunun bir üyesi, Privileged Access Management istekte veri ayıklama devam etmeden önce onaylamanız gerekir.
+Bu bağlam için ilk kez veri isteğinde bulunduğunuzu (veri tablosunun hangi veri tablosuna erişmekte olduğunu, hangi hedef hesabın içine yüklenmekte olduğunu ve hangi kullanıcı kimliğinin veri erişim isteğini yapmakta olduğunu), kopyalama etkinliğini görürsünüz "sürüyor" olarak durum ve yalnızca [Eylemler altındaki "Ayrıntılar" bağlantısına](copy-activity-overview.md#monitoring) tıkladığınızda durumu "Requestingonay" olarak görürsünüz.  Veri ayıklama işleminin devam edebilmesi için, veri erişimi onaylayan grubunun bir üyesinin Privileged Access Management isteği onaylaması gerekir.
 
-Başvuran [burada](https://docs.microsoft.com/graph/data-connect-tips#approve-pam-requests-via-office-365-admin-portal) onaylayan nasıl onaylayabilirsiniz veri erişim isteği ve başvuru [burada](https://docs.microsoft.com/graph/data-connect-pam) Privileged Access Management genel tümleştirme bir açıklama için verileri ayarlama dahil olmak üzere erişim onaylayan grubu.
+Onaylayanın veri erişim isteğini nasıl onaylayabilmesi için [buraya](https://docs.microsoft.com/graph/data-connect-tips#approve-pam-requests-via-office-365-admin-portal) başvurun ve veri erişimi onaylayan grubunu ayarlama da dahil olmak üzere Privileged Access Management ile genel tümleştirme hakkında açıklama için [buraya](https://docs.microsoft.com/graph/data-connect-pam) bakın.
 
-## <a name="policy-validation"></a>İlke doğrulama
+## <a name="policy-validation"></a>Doğrulamayı yeniden deneme
 
-ADF yönetilen bir uygulamanın bir parçası olarak oluşturulur ve yönetim kaynak grubundaki kaynaklar üzerinde yapılan Azure ilkeleri atamaları, her kopyalama etkinliği çalıştırma, için ilke atamaları uygulandığından emin olmak için ADF denetler. Başvuru [burada](https://docs.microsoft.com/graph/data-connect-policies#policies) desteklenen ilkeleri listesi.
+ADF, yönetilen bir uygulamanın parçası olarak oluşturulduysa ve yönetim kaynak grubundaki kaynaklarda Azure ilkeleri atamaları yapılırsa, her kopyalama etkinliği çalıştırması için ADF, ilke atamalarının zorlandığından emin olmak için kontrol eder. Desteklenen ilkelerin listesi için [buraya](https://docs.microsoft.com/graph/data-connect-policies#policies) bakın.
 
 ## <a name="getting-started"></a>Başlarken
 
 >[!TIP]
->Office 365 Bağlayıcısı kullanarak bir kılavuz için bkz. [Office 365'ten veri yükleme](load-office-365-data.md) makalesi.
+>Office 365 bağlayıcısını kullanma hakkında yönergeler için bkz. [Office 'teki verileri yükleme 365](load-office-365-data.md) makalesi.
 
-SDK'ları ve aşağıdaki araçlardan birini kullanarak kopyalama etkinlikli bir işlem hattı oluşturabilirsiniz. Kopyalama etkinliği ile işlem hattı oluşturmak için adım adım yönergeler içeren bir öğreticiye gitmek için bir bağlantıyı seçin. 
+Aşağıdaki araçlardan veya SDK 'Lardan birini kullanarak kopyalama etkinliğiyle bir işlem hattı oluşturabilirsiniz. Bir kopyalama etkinliği ile işlem hattı oluşturmak için adım adım yönergeler içeren öğreticiye gitmek üzere bir bağlantı seçin. 
 
-- [Azure portal](quickstart-create-data-factory-portal.md)
+- [Azure Portal](quickstart-create-data-factory-portal.md)
 - [.NET SDK](quickstart-create-data-factory-dot-net.md)
 - [Python SDK'sı](quickstart-create-data-factory-python.md)
 - [Azure PowerShell](quickstart-create-data-factory-powershell.md)
 - [REST API](quickstart-create-data-factory-rest-api.md)
 - [Azure Resource Manager şablonu](quickstart-create-data-factory-resource-manager-template.md). 
 
-Aşağıdaki bölümler, Data Factory varlıklarını belirli Office 365 Bağlayıcısı tanımlamak için kullanılan özellikleri hakkında ayrıntılı bilgi sağlar.
+Aşağıdaki bölümlerde, Office 365 bağlayıcısına özgü Data Factory varlıkları tanımlamak için kullanılan özellikler hakkında ayrıntılı bilgi sağlanmaktadır.
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
 
-Office 365 bağlı hizmeti için aşağıdaki özellikleri destekler:
+Aşağıdaki özellikler Office 365 bağlı hizmeti için desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Type özelliği ayarlanmalıdır: **Office365** | Evet |
-| office365TenantId | Office 365 hesabına ait olduğu azure Kiracı kimliği. | Evet |
-| servicePrincipalTenantId | Azure AD web uygulamanızı altında bulunduğu Kiracı bilgilerini belirtin. | Evet |
-| servicePrincipalId | Uygulamanın istemci kimliği belirtin. | Evet |
-| servicePrincipalKey | Uygulama anahtarını belirtin. Bu alan, Data Factory'de güvenle depolamak için bir SecureString olarak işaretleyin. | Evet |
-| connectVia | Veri deposuna bağlanmak için kullanılacak Integration Runtime.  Belirtilmezse, varsayılan Azure Integration Runtime kullanır. | Hayır |
+| type | Type özelliği: **Office365** olarak ayarlanmalıdır | Evet |
+| office365TenantId | Office 365 hesabının ait olduğu Azure kiracı KIMLIĞI. | Evet |
+| Serviceprincipaltenantıd | Azure AD Web uygulamanızın bulunduğu kiracı bilgilerini belirtin. | Evet |
+| Serviceprincipalıd | Uygulamanın istemci KIMLIĞINI belirtin. | Evet |
+| Servicesprincipalkey | Uygulamanın anahtarını belirtin. Bu alanı, Data Factory güvenli bir şekilde depolamak için SecureString olarak işaretleyin. | Evet |
+| connectVia | Veri deposuna bağlanmak için kullanılacak Integration Runtime.  Belirtilmemişse, varsayılan Azure Integration Runtime kullanır. | Hayır |
 
 >[!NOTE]
-> Arasındaki fark **office365TenantId** ve **servicePrincipalTenantId** ve buna karşılık gelen bir değer sağlamak için:
->- Ardından aynı kiracıyı sunmalıdır kendi kuruluşunuzun kullanımına yönelik Office 365 verilerine karşı uygulama geliştirme, kuruluşunuzun AAD Kiracı kimliği her iki özellik için bir kurumsal geliştiriciyseniz, kimliği
->- Müşterinizin office365TenantId sonra müşterileriniz için uygulama geliştirme bir ISV geliştiriciyseniz (uygulama Yükleyici), AAD Kiracı kimliği ve servicePrincipalTenantId şirketinizin AAD Kiracı kimliği olur
+> **Office365TenantId** ve **serviceprincipaltenantıd** ile buna karşılık gelen değer arasındaki fark:
+>- Kendi kuruluşunuzun kullanımı için Office 365 verilerine yönelik bir uygulama geliştiren bir kurumsal geliştiricisiyseniz, kuruluşunuzun AAD kiracı KIMLIĞI olan her iki özellik için de aynı kiracı KIMLIĞINI sağlamanız gerekir.
+>- Müşterileriniz için bir uygulama geliştiren bir ISV geliştiricisiyseniz office365TenantId, müşterinizin (uygulama yükleyicisi) AAD kiracı KIMLIĞI ve Serviceprincipaltenantıd, şirketinizin AAD Kiracı kimliği olacaktır.
 
 **Örnek:**
 
@@ -113,19 +113,16 @@ Office 365 bağlı hizmeti için aşağıdaki özellikleri destekler:
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
 
-Bölümleri ve veri kümeleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [veri kümeleri](concepts-datasets-linked-services.md) makalesi. Bu bölüm, Office 365 veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
+Veri kümelerini tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. [veri kümeleri](concepts-datasets-linked-services.md) makalesi. Bu bölüm, Office 365 veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
 
-Office 365'ten veri kopyalamak için aşağıdaki özellikler desteklenir:
+Office 365 ' den veri kopyalamak için aşağıdaki özellikler desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Dataset öğesinin type özelliği ayarlanmalıdır: **Office365Table** | Evet |
-| tableName | Office 365'ten ayıklamak için veri kümesinin adı. Başvuru [burada](https://docs.microsoft.com/graph/data-connect-datasets#datasets) Office 365 veri kümeleri için ayıklama kullanılabilir listesi. | Evet |
-| allowedGroups | Grup Seçimi koşul.  Kendisi için veriler alınır en fazla 10 kullanıcı gruplarını seçmek için bu özelliği kullanın.  Grup yok belirtilirse, tüm kuruluş için veri döndürülür. | Hayır |
-| userScopeFilterUri | Zaman `allowedGroups` özelliği belirtilmedi, Office 365'ten ayıklamak için belirli satırları filtrelemek için tüm Kiracı üzerinde uygulanan bir koşul ifadesi kullanabilirsiniz. Koşul biçimi Microsoft Graph API'leri, sorgu biçiminin örn eşleşmelidir `https://graph.microsoft.com/v1.0/users?$filter=Department eq 'Finance'`. | Hayır |
-| dateFilterColumn | Tarih/saat filtre sütunu adı. Hangi Office 365 için veri ayıklanan zaman aralığı sınırlamak için bu özelliği kullanın. | Veri kümesi bir veya daha fazla DateTime sütunları varsa, Evet. Başvuru [burada](https://docs.microsoft.com/graph/data-connect-filtering#filtering) bu tarih/saat filtre gerektiren veri kümeleri listesi. |
-| startTime | Filtrelenecek tarih saat değeri başlatın. | Yanıt Evet ise `dateFilterColumn` belirtilir |
-| endTime | Filtrelenecek tarih saat değeri son. | Yanıt Evet ise `dateFilterColumn` belirtilir |
+| type | DataSet 'in Type özelliği: **Office365Table** olarak ayarlanmalıdır | Evet |
+| tableName | Office 365 ' den Ayıklanacak veri kümesinin adı. Ayıklama için kullanılabilen Office 365 veri kümelerinin listesi için [buraya](https://docs.microsoft.com/graph/data-connect-datasets#datasets) bakın. | Evet |
+
+Veri kümesinde `dateFilterColumn`, `startTime`, `endTime`ve `userScopeFilterUri` ayarlıyorsanız, hala olduğu gibi desteklenirken, etkinlik kaynağı ' nda yeni modeli kullanmanız önerilir.
 
 **Örnek**
 
@@ -138,189 +135,9 @@ Office 365'ten veri kopyalamak için aşağıdaki özellikler desteklenir:
             "referenceName": "<Office 365 linked service name>",
             "type": "LinkedServiceReference"
         },
-        "structure": [
-            {
-                "name": "Id",
-                "type": "String",
-                "description": "The unique identifier of the event."
-            },
-            {
-                "name": "CreatedDateTime",
-                "type": "DateTime",
-                "description": "The date and time that the event was created."
-            },
-            {
-                "name": "LastModifiedDateTime",
-                "type": "DateTime",
-                "description": "The date and time that the event was last modified."
-            },
-            {
-                "name": "ChangeKey",
-                "type": "String",
-                "description": "Identifies the version of the event object. Every time the event is changed, ChangeKey changes as well. This allows Exchange to apply changes to the correct version of the object."
-            },
-            {
-                "name": "Categories",
-                "type": "String",
-                "description": "The categories associated with the event. Format: ARRAY<STRING>"
-            },
-            {
-                "name": "OriginalStartTimeZone",
-                "type": "String",
-                "description": "The start time zone that was set when the event was created. See DateTimeTimeZone for a list of valid time zones."
-            },
-            {
-                "name": "OriginalEndTimeZone",
-                "type": "String",
-                "description": "The end time zone that was set when the event was created. See DateTimeTimeZone for a list of valid time zones."
-            },
-            {
-                "name": "ResponseStatus",
-                "type": "String",
-                "description": "Indicates the type of response sent in response to an event message. Format: STRUCT<Response: STRING, Time: STRING>"
-            },
-            {
-                "name": "iCalUId",
-                "type": "String",
-                "description": "A unique identifier that is shared by all instances of an event across different calendars."
-            },
-            {
-                "name": "ReminderMinutesBeforeStart",
-                "type": "Int32",
-                "description": "The number of minutes before the event start time that the reminder alert occurs."
-            },
-            {
-                "name": "IsReminderOn",
-                "type": "Boolean",
-                "description": "Set to true if an alert is set to remind the user of the event."
-            },
-            {
-                "name": "HasAttachments",
-                "type": "Boolean",
-                "description": "Set to true if the event has attachments."
-            },
-            {
-                "name": "Subject",
-                "type": "String",
-                "description": "The text of the event's subject line."
-            },
-            {
-                "name": "Body",
-                "type": "String",
-                "description": "The body of the message associated with the event.Format: STRUCT<ContentType: STRING, Content: STRING>"
-            },
-            {
-                "name": "Importance",
-                "type": "String",
-                "description": "The importance of the event: Low, Normal, High."
-            },
-            {
-                "name": "Sensitivity",
-                "type": "String",
-                "description": "Indicates the level of privacy for the event: Normal, Personal, Private, Confidential."
-            },
-            {
-                "name": "Start",
-                "type": "String",
-                "description": "The start time of the event. Format: STRUCT<DateTime: STRING, TimeZone: STRING>"
-            },
-            {
-                "name": "End",
-                "type": "String",
-                "description": "The date and time that the event ends. Format: STRUCT<DateTime: STRING, TimeZone: STRING>"
-            },
-            {
-                "name": "Location",
-                "type": "String",
-                "description": "Location information of the event. Format: STRUCT<DisplayName: STRING, Address: STRUCT<Street: STRING, City: STRING, State: STRING, CountryOrRegion: STRING, PostalCode: STRING>, Coordinates: STRUCT<Altitude: DOUBLE, Latitude: DOUBLE, Longitude: DOUBLE, Accuracy: DOUBLE, AltitudeAccuracy: DOUBLE>>"
-            },
-            {
-                "name": "IsAllDay",
-                "type": "Boolean",
-                "description": "Set to true if the event lasts all day. Adjusting this property requires adjusting the Start and End properties of the event as well."
-            },
-            {
-                "name": "IsCancelled",
-                "type": "Boolean",
-                "description": "Set to true if the event has been canceled."
-            },
-            {
-                "name": "IsOrganizer",
-                "type": "Boolean",
-                "description": "Set to true if the message sender is also the organizer."
-            },
-            {
-                "name": "Recurrence",
-                "type": "String",
-                "description": "The recurrence pattern for the event. Format: STRUCT<Pattern: STRUCT<Type: STRING, `Interval`: INT, Month: INT, DayOfMonth: INT, DaysOfWeek: ARRAY<STRING>, FirstDayOfWeek: STRING, Index: STRING>, `Range`: STRUCT<Type: STRING, StartDate: STRING, EndDate: STRING, RecurrenceTimeZone: STRING, NumberOfOccurrences: INT>>"
-            },
-            {
-                "name": "ResponseRequested",
-                "type": "Boolean",
-                "description": "Set to true if the sender would like a response when the event is accepted or declined."
-            },
-            {
-                "name": "ShowAs",
-                "type": "String",
-                "description": "The status to show: Free, Tentative, Busy, Oof, WorkingElsewhere, Unknown."
-            },
-            {
-                "name": "Type",
-                "type": "String",
-                "description": "The event type: SingleInstance, Occurrence, Exception, SeriesMaster."
-            },
-            {
-                "name": "Attendees",
-                "type": "String",
-                "description": "The collection of attendees for the event. Format: ARRAY<STRUCT<EmailAddress: STRUCT<Name: STRING, Address: STRING>, Status: STRUCT<Response: STRING, Time: STRING>, Type: STRING>>"
-            },
-            {
-                "name": "Organizer",
-                "type": "String",
-                "description": "The organizer of the event. Format: STRUCT<EmailAddress: STRUCT<Name: STRING, Address: STRING>>"
-            },
-            {
-                "name": "WebLink",
-                "type": "String",
-                "description": "The URL to open the event in Outlook Web App."
-            },
-            {
-                "name": "Attachments",
-                "type": "String",
-                "description": "The FileAttachment and ItemAttachment attachments for the message. Navigation property. Format: ARRAY<STRUCT<LastModifiedDateTime: STRING, Name: STRING, ContentType: STRING, Size: INT, IsInline: BOOLEAN, Id: STRING>>"
-            },
-            {
-                "name": "BodyPreview",
-                "type": "String",
-                "description": "The preview of the message associated with the event. It is in text format."
-            },
-            {
-                "name": "Locations",
-                "type": "String",
-                "description": "The locations where the event is held or attended from. The location and locations properties always correspond with each other. Format:  ARRAY<STRUCT<DisplayName: STRING, Address: STRUCT<Street: STRING, City: STRING, State: STRING, CountryOrRegion: STRING, PostalCode: STRING>, Coordinates: STRUCT<Altitude: DOUBLE, Latitude: DOUBLE, Longitude: DOUBLE, Accuracy: DOUBLE, AltitudeAccuracy: DOUBLE>, LocationEmailAddress: STRING, LocationUri: STRING, LocationType: STRING, UniqueId: STRING, UniqueIdType: STRING>>"
-            },
-            {
-                "name": "OnlineMeetingUrl",
-                "type": "String",
-                "description": "A URL for an online meeting. The property is set only when an organizer specifies an event as an online meeting such as a Skype meeting"
-            },
-            {
-                "name": "OriginalStart",
-                "type": "DateTime",
-                "description": "The start time that was set when the event was created in UTC time."
-            },
-            {
-                "name": "SeriesMasterId",
-                "type": "String",
-                "description": "The ID for the recurring series master item, if this event is part of a recurring series."
-            }
-        ],
+        "schema": [],
         "typeProperties": {
-            "tableName": "BasicDataSet_v0.Event_v1",
-            "dateFilterColumn": "CreatedDateTime",
-            "startTime": "2019-04-28T16:00:00.000Z",
-            "endTime": "2019-05-05T16:00:00.000Z",
-            "userScopeFilterUri": "https://graph.microsoft.com/v1.0/users?$filter=Department eq 'Finance'"
+            "tableName": "BasicDataSet_v0.Event_v1"
         }
     }
 }
@@ -328,11 +145,21 @@ Office 365'ten veri kopyalamak için aşağıdaki özellikler desteklenir:
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
 
-Bölümleri ve etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları](concepts-pipelines-activities.md) makalesi. Bu bölüm, Office 365 kaynak tarafından desteklenen özelliklerin bir listesini sağlar.
+Etkinlikleri tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. işlem [hatları](concepts-pipelines-activities.md) makalesi. Bu bölüm, Office 365 kaynağı tarafından desteklenen özelliklerin bir listesini sağlar.
 
 ### <a name="office-365-as-source"></a>Kaynak olarak Office 365
 
-Office 365'ten veri kopyalamak için kopyalama etkinliği için kaynak türünü ayarlayın. **Office365Source**. Kopyalama etkinliği desteklenen herhangi bir ek özellik **kaynak** bölümü.
+Office 365 ' den veri kopyalamak için aşağıdaki özellikler, etkinlik **kaynağını** kopyalama bölümünde desteklenir:
+
+| Özellik | Açıklama | Gerekli |
+|:--- |:--- |:--- |
+| type | Kopyalama etkinliği kaynağının Type özelliği: **Office365Source** olarak ayarlanmalıdır | Evet |
+| allowedGroups | Grup Seçimi koşulu.  Verilerin alınacağı en fazla 10 kullanıcı grubunu seçmek için bu özelliği kullanın.  Hiçbir grup belirtilmemişse, veriler tüm kuruluş için döndürülür. | Hayır |
+| userScopeFilterUri | `allowedGroups` özelliği belirtilmediğinde, Office 365 ' den Ayıklanacak belirli satırları filtrelemek için kiracının tamamına uygulanan bir koşul ifadesi kullanabilirsiniz. Koşul biçimi Microsoft Graph API 'lerinin sorgu biçimiyle eşleşmelidir, örn. `https://graph.microsoft.com/v1.0/users?$filter=Department eq 'Finance'`. | Hayır |
+| Tarih FilterColumn | Tarih saat filtresi sütununun adı. Office 365 verilerinin ayıklandığı zaman aralığını sınırlamak için bu özelliği kullanın. | Veri kümesinde bir veya daha fazla DateTime sütunu varsa evet. Bu tarih saat filtresini gerektiren veri kümelerinin listesi için [buraya](https://docs.microsoft.com/graph/data-connect-filtering#filtering) bakın. |
+| startTime | Filtrelemek için tarih saat değerini başlatın. | `dateFilterColumn` belirtilmişse Evet |
+| endTime | Filtrelemek için tarih saat değeri sonu. | `dateFilterColumn` belirtilmişse Evet |
+| outputColumns | Havuza kopyalanacak sütunların dizisi. | Hayır |
 
 **Örnek:**
 
@@ -355,7 +182,118 @@ Office 365'ten veri kopyalamak için kopyalama etkinliği için kaynak türünü
         ],
         "typeProperties": {
             "source": {
-                "type": "Office365Source"
+                "type": "Office365Source",
+                "dateFilterColumn": "CreatedDateTime",
+                "startTime": "2019-04-28T16:00:00.000Z",
+                "endTime": "2019-05-05T16:00:00.000Z",
+                "userScopeFilterUri": "https://graph.microsoft.com/v1.0/users?$filter=Department eq 'Finance'",
+                "outputColumns": [
+                    {
+                        "name": "Id"
+                    },
+                    {
+                        "name": "CreatedDateTime"
+                    },
+                    {
+                        "name": "LastModifiedDateTime"
+                    },
+                    {
+                        "name": "ChangeKey"
+                    },
+                    {
+                        "name": "Categories"
+                    },
+                    {
+                        "name": "OriginalStartTimeZone"
+                    },
+                    {
+                        "name": "OriginalEndTimeZone"
+                    },
+                    {
+                        "name": "ResponseStatus"
+                    },
+                    {
+                        "name": "iCalUId"
+                    },
+                    {
+                        "name": "ReminderMinutesBeforeStart"
+                    },
+                    {
+                        "name": "IsReminderOn"
+                    },
+                    {
+                        "name": "HasAttachments"
+                    },
+                    {
+                        "name": "Subject"
+                    },
+                    {
+                        "name": "Body"
+                    },
+                    {
+                        "name": "Importance"
+                    },
+                    {
+                        "name": "Sensitivity"
+                    },
+                    {
+                        "name": "Start"
+                    },
+                    {
+                        "name": "End"
+                    },
+                    {
+                        "name": "Location"
+                    },
+                    {
+                        "name": "IsAllDay"
+                    },
+                    {
+                        "name": "IsCancelled"
+                    },
+                    {
+                        "name": "IsOrganizer"
+                    },
+                    {
+                        "name": "Recurrence"
+                    },
+                    {
+                        "name": "ResponseRequested"
+                    },
+                    {
+                        "name": "ShowAs"
+                    },
+                    {
+                        "name": "Type"
+                    },
+                    {
+                        "name": "Attendees"
+                    },
+                    {
+                        "name": "Organizer"
+                    },
+                    {
+                        "name": "WebLink"
+                    },
+                    {
+                        "name": "Attachments"
+                    },
+                    {
+                        "name": "BodyPreview"
+                    },
+                    {
+                        "name": "Locations"
+                    },
+                    {
+                        "name": "OnlineMeetingUrl"
+                    },
+                    {
+                        "name": "OriginalStart"
+                    },
+                    {
+                        "name": "SeriesMasterId"
+                    }
+                ]
             },
             "sink": {
                 "type": "BlobSink"
@@ -366,4 +304,4 @@ Office 365'ten veri kopyalamak için kopyalama etkinliği için kaynak türünü
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Data Factory kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).
+Azure Data Factory içindeki kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).

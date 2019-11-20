@@ -1,6 +1,6 @@
 ---
-title: Güvenli, Azure tarafından yönetilen iş istasyonları - Azure Active Directory anlama
-description: Güvenli, Azure tarafından yönetilen iş istasyonları hakkında bilgi edinin ve neden önemli anlayın.
+title: Güvenli, Azure tarafından yönetilen iş istasyonlarını anlama-Azure Active Directory
+description: Güvenli, Azure tarafından yönetilen iş istasyonları hakkında bilgi edinin ve neden önemli olduğunu anlayın.
 services: active-directory
 ms.service: active-directory
 ms.subservice: devices
@@ -11,105 +11,105 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: frasim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 02a6ddef294c4872f2d7e50e8940ecbb4b4b7bc4
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
+ms.openlocfilehash: 2abc5434f11bf00c6872775b1336694c04972e95
+ms.sourcegitcommit: fa5ce8924930f56bcac17f6c2a359c1a5b9660c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67491586"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73200224"
 ---
-# <a name="understand-secure-azure-managed-workstations"></a>Güvenli, Azure tarafından yönetilen iş istasyonları anlama
+# <a name="understand-secure-azure-managed-workstations"></a>Güvenli, Azure tarafından yönetilen iş istasyonlarını anlayın
 
-Güvenli, yalıtılmış iş istasyonları, güvenlik yöneticileri, geliştiriciler ve kritik hizmet işleçler gibi hassas rollerinin öneme sahiptir. İstemci iş istasyonu güvenliği tehlikedeyse, çok sayıda güvenlik denetimleri ve Güvenceleri başarısız veya etkisiz.
+Güvenli, yalıtılmış iş istasyonları Yöneticiler, geliştiriciler ve kritik hizmet işleçleri gibi hassas rollerin güvenliği açısından kritik öneme sahiptir. İstemci iş istasyonu güvenliği tehlikeye girerse, pek çok güvenlik denetimi ve güvenme başarısız olabilir veya etkisiz olabilir.
 
-Bu belgede, genellikle bir ayrıcalıklı erişim iş istasyonu (PAW) olarak bilinen güvenli bir iş istasyonu oluşturmak için gerekenler açıklanmaktadır. Makale ayrıca ilk güvenlik denetimlerini'kurmak için ayrıntılı yönergeler içerir. Bu kılavuz nasıl bulut tabanlı teknolojisini açıklar hizmeti yönetebilir. Windows 10RS5, Microsoft Defender Gelişmiş tehdit Koruması (ATP), Azure Active Directory ve Intune sunulan güvenlik özelliklerine güvenir.
+Bu belgede, genellikle ayrıcalıklı erişim iş istasyonu (PAW) olarak bilinen güvenli bir iş istasyonu oluşturmak için gerekenler açıklanmaktadır. Makalede, ilk güvenlik denetimlerini ayarlamaya yönelik ayrıntılı yönergeler de bulunur. Bu kılavuzda, bulut tabanlı teknolojinin hizmeti nasıl yönetebileceğini açıklanmaktadır. Windows 10 RS5, Microsoft Defender Gelişmiş tehdit koruması (ATP), Azure Active Directory ve Intune 'da sunulan güvenlik yeteneklerini kullanır.
 
 > [!NOTE]
-> Bu makalede, güvenli bir iş istasyonu ve önem derecesini kavramını açıklar. Zaten kavramına aşina olan ve dağıtım için atlamak istiyorsanız, ziyaret [güvenli bir iş istasyonu dağıtma](https://docs.microsoft.com/azure/active-directory/devices/howto-azure-managed-workstation).
+> Bu makalede, güvenli bir iş istasyonu kavramı ve önemi açıklanmaktadır. Kavramı zaten biliyor ve dağıtıma atlamak istiyorsanız, [güvenli bir Iş Istasyonu dağıtma](howto-azure-managed-workstation.md)makalesini ziyaret edin.
 
-## <a name="why-secure-workstation-access-is-important"></a>Güvenli bir iş istasyonu erişim neden önemlidir
+## <a name="why-secure-workstation-access-is-important"></a>Güvenli iş istasyonu erişiminin neden önemli olduğu
 
-Bulut Hizmetleri ve her yerden çalışma olanağı hızla benimsenmesini istismarıyla yöntem oluşturdu. Saldırganlar zayıf güvenlik denetimleri nerede Yöneticiler iş cihazlarda yararlanarak ayrıcalıklı kaynaklarına erişim elde edebilirsiniz.
+Bulut hizmetlerini hızlı benimseme ve her yerden çalışma yeteneği yeni bir yararlanma yöntemi oluşturdu. Yöneticilerin çalıştığı cihazlarda zayıf güvenlik denetimlerinden yararlanarak saldırganlar ayrıcalıklı kaynaklara erişim elde edebilir.
 
-Ayrıcalıklı kötüye ve tedarik zinciri saldırıları saldırganlar, kuruluşlar güvenlik ihlali için kullandığınız en çok beş arasında yöntemlerdir. Ayrıca ikinci oldukları en yaygın olarak algılanan taktikleri 2018'e göre bildirilen olaylarda [Verizon tehdit raporu](https://enterprise.verizon.com/resources/reports/dbir/)ve [güvenlik zekası raporu](https://aka.ms/sir).
+Ayrıcalıklı kötüye kullanımı ve tedarik zinciri saldırıları, saldırganların kuruluşları ihlal etmek için kullandığı ilk beş yöntem arasındadır. Bunlar ayrıca, [Verizon tehdit raporuna](https://enterprise.verizon.com/resources/reports/dbir/)ve [güvenlik zekası raporuna](https://aka.ms/sir)göre 2018 ' de raporlanan olaylarda, en yaygın olarak algılanan tackler ' ı da sunuyoruz.
 
-Çoğu saldırganlar, şu adımları izleyin:
+Çoğu saldırganlar şu adımları izler:
 
-1. Keşif yöntemi, genellikle sektör için belirli bulunamadı.
-1. Bilgi toplamak ve düşük değer olarak algılanan bir iş istasyonu sızmaya en iyi yolu belirlemek için analiz.
-1. Kalıcılık taşımak için bir yol için aranacak [riskli](https://en.wikipedia.org/wiki/Network_Lateral_Movement).
-1. Gizli ve hassas veri Sızdırma.
+1. Keşif, genellikle sektöre özgü bir yöntem bulmak için.
+1. Bilgi toplamak ve düşük değer olarak algılanan bir iş istasyonuna giriş yapmanın en iyi yolunu belirlemek için analiz.
+1. [Geçici](https://en.wikipedia.org/wiki/Network_Lateral_Movement)olarak hareket eden bir yolu aramak için kalıcılık.
+1. Gizli ve hassas verilerin çıkarılması.
 
-Keşfi sırasında saldırganlar genellikle düşük risk gibi görünüyor veya takdir edilmediklerini cihazlar sızmaya. Bunlar, yanal hareket fırsatı bulmak ve yönetici kullanıcıları ve cihazları bulmak için bu savunmasız cihazlar kullanır. Bunlar ayrıcalıklı kullanıcı rolleri için erişim elde ettikten sonra saldırganlar bu verileri yüksek değerli veri ve başarıyla sızdırabilir belirleyin.
+Keşif sırasında saldırganlar, düşük riskli veya az değerli olan cihazları sıklıkla taşır. Bu güvenlik açığı bulunan cihazları, yan yana hareket için bir fırsat bulmak ve yönetici kullanıcıları ve cihazları bulmak için kullanırlar. Ayrıcalıklı kullanıcı rollerine erişim kazandıktan sonra saldırganlar yüksek değerli verileri belirler ve bu verileri başarıyla elde edebilir.
 
-![Tipik güvenliğinin aşılmasına deseni](./media/concept-azure-managed-workstation/typical-timeline.png)
+![Tipik bir uzlaşması deseninin](./media/concept-azure-managed-workstation/typical-timeline.png)
 
-Bu belgede, bilgi işlem cihazlarınızın bu tür yanal saldırılara karşı korunmasına yardımcı olabilecek bir çözüm açıklanmaktadır. Çözüm, yönetim ve hassas bulut kaynaklarına erişimi cihaz infiltrated önce zinciri bozucu küçük değerli üretkenlik cihazlardan Hizmetleri yalıtır. Çözüm Microsoft 365 Kurumsal yığınının parçası yerel Azure hizmetlerini kullanır:
+Bu belgede, bilgi işlem cihazlarınızı bu tür yan yana saldırılara karşı korumaya yardımcı olabilecek bir çözüm açıklanmaktadır. Çözüm, daha az değerli üretkenlik cihazlarından yönetim ve Hizmetleri yalıtır ve bu, hassas bulut kaynaklarına erişimi olan cihazdan önce zinciri boztılabilir. Çözüm, Microsoft 365 Kurumsal yığınının parçası olan yerel Azure hizmetlerini kullanır:
 
-* Intune cihaz yönetimi ve güvenli uygulamalar ve URL'ler listesi için
-* AutoPilot cihaz kurulumu, dağıtım ve yenileme
+* Cihaz yönetimi için Intune ve uygulamalar ile URL 'Lerin güvenli listesi
+* Cihaz kurulumu, dağıtım ve yenileme için Autopilot
 * Kullanıcı yönetimi, koşullu erişim ve çok faktörlü kimlik doğrulaması için Azure AD
-* Cihaz sistem durumu kanıtlama ve kullanıcı deneyimi için Windows 10 (geçerli sürüm)
-* Defender ATP bulutta yönetilen bir uç nokta koruması, algılama ve yanıtlama
-* Yetkilendirme ve tam zamanında (JIT) yönetmek için Azure AD PIM ayrıcalıklı kaynaklara erişimi
+* Cihaz sistem durumu kanıtlama ve Kullanıcı deneyimi için Windows 10 (geçerli sürüm)
+* Bulut tarafından yönetilen Endpoint Protection, algılama ve yanıt için Defender ATP
+* Yetkilendirmeyi yönetmek için Azure AD PıM ve kaynaklara yönelik tam zamanında (JıT) ayrıcalıklı erişim
 
-## <a name="who-benefits-from-a-secure-workstation"></a>Kimin bir güvenli iş istasyonundan fayda sağlar?
+## <a name="who-benefits-from-a-secure-workstation"></a>Güvenli bir iş istasyonundan kimler yarar?
 
-Tüm kullanıcılar ve işleçler güvenli bir iş istasyonu kullanırken yararlanır. Bir bilgisayarı veya cihazı etkilediğinde bir saldırgan, önbellekte saklanan tüm hesapları bürünebilir. Cihaza oturum açtıktan sonra bunlar ayrıca kimlik bilgileri ve belirteçleri kullanabilirsiniz. Bu riski önemli yönetim hakları dahil olmak üzere ayrıcalıklı roller için kullanılan güvenli cihazlara kolaylaştırır. Ayrıcalıklı hesaplar cihazlarla yanal hareket ve ayrıcalık yükseltme saldırılarını hedeflerdir. Bu hesaplar gibi çeşitli varlıklar için kullanılabilir:
+Tüm kullanıcılar ve işleçler, güvenli bir iş istasyonu kullanırken faydalanır. Bir BILGISAYARı veya cihazı kapatan bir saldırgan, önbelleğe alınmış tüm hesapların kimliğine bürünebilir. Cihazda oturum açıldığında, kimlik bilgilerini ve belirteçleri de kullanabilirler. Bu risk, yönetim hakları dahil olmak üzere ayrıcalıklı roller için kullanılan cihazların güvenliğini sağlamayı önemli hale getirir. Ayrıcalıklı hesaplara sahip cihazlar, yan yana taşıma ve ayrıcalık yükseltme saldırıları için hedeflerdir. Bu hesaplar, aşağıdaki gibi çeşitli varlıklar için kullanılabilir:
 
-* Şirket içi veya bulut tabanlı sistemleri Yöneticisi
-* Kritik sistemleri için geliştirici iş istasyonu
-* Sosyal medya hesap yöneticisine yüksek Etkilenme
-* Bir terminal SWIFT ödeme gibi son derece hassas iş istasyonu
-* İş istasyonu işleme ticari sırlar
+* Şirket içi veya bulut tabanlı sistemlerin Yöneticisi
+* Kritik sistemler için geliştirici iş istasyonu
+* Yüksek pozlama ile sosyal medya hesabı Yöneticisi
+* SWIFT ödeme terminali gibi son derece hassas iş istasyonu
+* İş istasyonu ticari gizli dizileri işliyor
 
-Riski azaltmak için bu hesapları olun ayrıcalıklı iş istasyonları kullanmak için yükseltilmiş güvenlik denetimleri uygulamalıdır. Daha fazla bilgi için [Azure Active Directory özelliği Dağıtım Kılavuzu](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-deployment-checklist-p2), [Office 365 yol haritası](https://aka.ms/o365secroadmap), ve [ayrıcalıklı erişim güvenliğini sağlama yol haritası](https://aka.ms/sparoadmap)).
+Riski azaltmak için, bu hesapları kullanan ayrıcalıklı iş istasyonları için yükseltilmiş güvenlik denetimleri uygulamalısınız. Daha fazla bilgi için bkz. [Azure Active Directory özelliği dağıtım kılavuzu](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-deployment-checklist-p2), [Office 365 yol haritası](https://aka.ms/o365secroadmap)ve [ayrıcalıklı erişim yol haritasını güvenlik](https://aka.ms/sparoadmap).
 
-## <a name="why-use-dedicated-workstations"></a>Özel iş istasyonları neden kullanmalısınız?
+## <a name="why-use-dedicated-workstations"></a>Adanmış iş istasyonlarını neden kullanmalısınız?
 
-Güvenlik için mevcut bir cihazın eklenmesi mümkün olsa da, güvenli bir temel ile başlatmak daha iyidir. Kuruluşunuz bir yüksek güvenlik düzeyi sağlamak için en iyi konumu koymak için güvenli olduğunu bildiğiniz bir cihazı ile başlatın ve bir dizi güvenlik denetimi uygulayın.
+Mevcut bir cihaza güvenlik eklemek mümkün olsa da, güvenli bir temel ile başlamak daha iyidir. Kuruluşunuzun yüksek bir güvenlik düzeyini korumak için en iyi konuma koymak üzere güvenli olduğunu bildiğiniz bir cihazla başlayın ve bilinen bir güvenlik denetimi kümesi uygulayın.
 
-Giderek artan sayıda saldırı vektörlerinin e-posta ve Web'e göz atma üzerinden giderek bir cihaz güvenilirliğinden emin olmak zorlaştırır. Bu kılavuz, ayrı bir iş istasyonu standart üretkenlik, göz atma ve e-posta yalıtılmış olduğu varsayılır. Üretkenlik, Web'e göz atma ve e-posta bir CİHAZDAN kaldırılmasını üretkenliğine negatif bir etkiye sahip olabilir. Ancak, bu koruma genellikle iş görevleri açıkça zorunlu olmayan ve bir güvenlik olayı riskini yüksek olduğu yerde senaryoları için kabul edilebilir.
+E-posta ve Web 'e göz atma aracılığıyla büyüyen çok sayıda saldırı vektörü, bir cihazın güvenilir olmasını zorlaştırır. Bu kılavuzda, adanmış bir iş istasyonunun standart üretkenlik, göz atma ve e-posta ile yalıtılmış olduğu varsayılır. Bir cihazdan üretkenlik, Web 'e göz atma ve e-postaların kaldırılması üretkenlik üzerinde olumsuz bir etkiye sahip olabilir. Bununla birlikte, bu koruma genellikle iş görevlerinin açıkça gerektirmeyen senaryolar için kabul edilebilir ve güvenlik olayının riski yüksek olur.
 
 > [!NOTE]
-> Burada gözatmayı yüksek riskli etkinlik olabilecek isteğe bağlı Web siteleri'ne genel erişim ifade eder. Bu tarama, iyi bilinen Yönetim Web sitelerinden Hizmetleri gibi Azure, Office 365, diğer bulut sağlayıcıları ve SaaS uygulamaları için az sayıda erişmek için bir web tarayıcısı kullanarak sonuçlanmaz farklıdır.
+> Burada Web 'e göz atma, yüksek riskli bir etkinlik olabilen rastgele Web sitelerine genel erişime başvurur. Bu tür göz atma, Azure, Office 365, diğer bulut sağlayıcıları ve SaaS uygulamaları gibi hizmetler için çok sayıda iyi bilinen Yönetim Web sitesine erişmek üzere bir Web tarayıcısı kullanmaktan oldukça farklıdır.
 
-Kapsama stratejileri sayısını ve türünü bir saldırganın hassas varlıklara erişmesini önüne geçilmesine denetimlerin artırarak güvenliğini sıkıştırabilir. Bu makalede açıklanan modeli, bir katmanlı ayrıcalık tasarım kullanır ve yönetici ayrıcalıkları belirli cihazlara kısıtlar.
+Kapsama stratejileri, bir saldırganın hassas varlıklara erişim sağlamasını yapan denetimlerin sayısını ve türünü artırarak güvenliği güçlendir. Bu makalede açıklanan model katmanlı ayrıcalık tasarımını kullanır ve yönetim ayrıcalıklarını belirli cihazlarla kısıtlar.
 
 ## <a name="supply-chain-management"></a>Tedarik zinciri yönetimi
 
-Tedarik zinciri çözüm, 'root' güven adlı güvenilir bir iş istasyonu kullandığınız için güvenli bir iş istasyonu gereklidir. Bu çözüm için güven köküne kullanan [Microsoft Autopilot](https://docs.microsoft.com/windows/deployment/windows-autopilot/windows-autopilot) teknoloji. Bir iş istasyonu güvenliğini sağlamak için Autopilot Microsoft OEM için iyileştirilmiş, Windows 10 cihazları yararlanmanıza olanak tanır. Bu cihazlar, üretici tarafından bilinen iyi bir durumda gelir. Autopilot, güvensiz olabilecek bir cihazı yeniden görüntü yerine bir "çalışma ortamına hazır" duruma Windows cihaz dönüştürebilirsiniz. Ayarları ve ilkeleri uygular, uygulamaları yükler ve bile Windows 10 sürümü değiştirir. Gelişmiş özellikleri kullanabilmesi için örneğin, Autopilot bir cihazın Windows yükleme Windows 10 Pro ' Windows 10 Enterprise için değişebilir.
+Güvenli bir iş istasyonu için temel, ' güven kökü ' adlı güvenilir bir iş istasyonu kullandığınız bir tedarik zinciri çözümüdür. Bu çözüm için, güven kökü [Microsoft Autopilot](https://docs.microsoft.com/windows/deployment/windows-autopilot/windows-autopilot) teknolojisini kullanır. Bir iş istasyonunun güvenliğini sağlamak için, Autopilot Microsoft OEM ile iyileştirilmiş Windows 10 cihazlarından yararlanmanızı sağlar. Bu cihazlar, üreticiden bilinen iyi bir durumda gelir. Autopilot, güvenli olmayabilecek bir cihazı yeniden Imaging yerine bir Windows cihazını "iş için kullanılabilir" durumuna dönüştürebilir. Ayarlar ve ilkeler uygular, uygulamalar yüklenir ve hatta Windows 10 sürümünü değiştirir. Örneğin, Autopilot, bir cihazın Windows yüklemesini Windows 10 Pro 'dan Windows 10 Enterprise 'a değiştirerek gelişmiş özellikleri kullanabilir.
 
-![Güvenli bir iş istasyonu düzeyleri](./media/concept-azure-managed-workstation/supplychain.png)
+![Güvenli iş istasyonu düzeyleri](./media/concept-azure-managed-workstation/supplychain.png)
 
-## <a name="device-roles-and-profiles"></a>Cihaz roller ve Profiller
+## <a name="device-roles-and-profiles"></a>Cihaz rolleri ve profilleri
 
-Bu kılavuz çeşitli güvenlik profilleri atıfta bulunan ve yardımcı olabilecek rolleri kullanıcılar, geliştiriciler ve BT personeli için daha güvenli çözümler oluşturun. Bu profiller, kullanılabilirlik ve riskleri bir güvenli veya Gelişmiş iş istasyonundan yararlanabilir genel kullanıcılar için dengeleyin. Burada sağlanan yapılandırmaları kabul endüstri standartlarına göre temel ayarları. Bu kılavuz, Windows 10 sağlamlaştırmak ve cihaz veya kullanıcı güvenlik aşılması ile ilişkili riskleri azaltmak gösterilmektedir. Bunu güvenlik özellikleri ve riskleri yönetilmesine yardımcı olmak için ilke ve teknoloji kullanarak yapar.
-![Güvenli bir iş istasyonu düzeyleri](./media/concept-azure-managed-workstation/seccon-levels.png)
+Bu kılavuzda, kullanıcılar, geliştiriciler ve BT personeli için daha güvenli çözümler oluşturmanıza yardımcı olabilecek birkaç güvenlik profili ve rolü başvuruyordur. Bu profiller, gelişmiş veya güvenli bir iş istasyonundan faydalanabilecek ortak kullanıcılara yönelik kullanılabilirliği ve riskleri dengeleyebilir. Burada sunulan ayarların yapılandırması, sektörde kabul edilen standartları temel alır. Bu kılavuzda, Windows 10 ' un nasıl zor yapılacağı ve cihaz ya da Kullanıcı güvenliğinin aşılmasına ilişkin riskleri azaltma gösterilmektedir. Bu, güvenlik özelliklerinin ve risklerinin yönetilmesine yardımcı olmak üzere ilke ve teknolojiyi kullanarak bunu yapar.
+Güvenli iş istasyonu seviyelerini ![](./media/concept-azure-managed-workstation/seccon-levels.png)
 
-* **Düşük güvenlik** – yönetilen, standart bir iş istasyonu çoğu ev ve küçük Kurumsal kullanım için iyi bir başlangıç noktası sağlar. Bu cihazları Azure AD'de kayıtlı ve Intune ile yönetilen. Bu profil, kullanıcıların tüm uygulamalarını çalıştırın ve herhangi bir Web sitesine Gözat izin verir. Kötü amaçlı yazılımdan koruma çözümünü ister [Microsoft Defender](https://www.microsoft.com/windows/comprehensive-security) etkinleştirilmelidir.
+* **Düşük güvenlik** – yönetilen, standart bir iş istasyonu çoğu ev ve küçük işletme kullanımı için iyi bir başlangıç noktası sağlar. Bu cihazlar Azure AD 'ye kaydedilir ve Intune ile yönetilir. Bu profil kullanıcıların herhangi bir uygulamayı çalıştırmasına ve herhangi bir Web sitesine gözatmasına izin verir. [Microsoft Defender](https://www.microsoft.com/windows/comprehensive-security) gibi kötü amaçlı yazılımdan koruma çözümü etkinleştirilmelidir.
 
-* **Gelişmiş Güvenlik** – bu giriş düzeyi korumalı Ev kullanıcıları, küçük işletme kullanıcılarının ve genel geliştiriciler için iyi bir çözümdür.
+* **Gelişmiş güvenlik** – bu giriş düzeyi, korunan çözüm ev kullanıcıları, küçük işletme kullanıcıları ve genel geliştiriciler için uygundur.
 
-   Gelişmiş iş istasyonu düşük güvenlik profilini güvenliğini artırmak için bir ilke tabanlı yoludur. Bu e-posta ve Web'e göz atma gibi üretkenlik araçları kullanırken de müşteri verilerle çalışmak için güvenli bir yol sağlar. Denetim ilkeleri ve Intune kullanıcı davranışı ve profil kullanımı için Gelişmiş bir iş istasyonu izlemek için kullanabilirsiniz. Windows 10 (1809) betiği ile Gelişmiş iş istasyonu profili dağıttığınızda ve Gelişmiş kötü amaçlı yazılım koruması kullanmanın avantajı sürer [Gelişmiş tehdit Koruması (ATP)](https://docs.microsoft.com/office365/securitycompliance/office-365-atp).
+   Gelişmiş iş istasyonu, düşük Güvenlik profilinin güvenliğini artırmanın ilke tabanlı bir yoludur. Ayrıca, e-posta ve Web 'e göz atma gibi üretkenlik araçlarını kullanırken müşteri verileriyle çalışmak için güvenli bir yol sunar. Kullanıcı davranışı ve profil kullanımı için gelişmiş bir iş istasyonunu izlemek üzere denetim ilkelerini ve Intune 'U kullanabilirsiniz. Geliştirilmiş iş istasyonu profilini Windows10 (1809) betiğine dağıtırsınız ve gelişmiş [tehdit koruması (ATP)](https://docs.microsoft.com/windows/security/threat-protection/microsoft-defender-atp/microsoft-defender-advanced-threat-protection)kullanan gelişmiş kötü amaçlı yazılımdan koruma özelliğinden yararlanır.
 
-* **Yüksek güvenlik** – bir iş istasyonu saldırı yüzeyini azaltmak için en etkili yöntem, iş istasyonu self-administer olanağı kaldırmaktır. Yerel yönetici hakları kaldırılıyor, güvenliği artıran bir adım, ancak yanlış uygulanırsa, üretkenliğini etkileyebilir. Yüksek güvenlik profilini Gelişmiş Güvenlik profili ile önemli ölçüde değişiklik geliştirir: yerel yönetici kaldırma Bu profili yüksek profili kullanıcılar için tasarlanmıştır: Yöneticiler, bordro ve kullanıcıların hassas verileri, hizmetleri ve işlemleri için onaylayan.
+* **Yüksek güvenlik** : bir iş istasyonunun saldırı yüzeyini azaltmanın en etkili yolu, iş istasyonunun kendini yönetme özelliğini kaldırmaktır. Yerel yönetim haklarının kaldırılması güvenliği artıran bir adımdır, ancak yanlış uygulanırsa üretkenliği etkileyebilir. Yüksek güvenlik profili, gelişmiş güvenlik profilinde önemli bir değişiklik ile oluşturulur: yerel yöneticinin kaldırılması. Bu profil, yüksek profilli kullanıcılar için tasarlanmıştır: Yöneticiler, bordro ve hassas veri kullanıcıları, hizmet ve süreçlerle ilgili onaylayanlar.
 
-   Yüksek güvenlik kullanıcı daha denetimli bir ortamda hala e-posta ve Web'e Gözatmayı bir basit kullanımı deneyimi gibi etkinlikler gerçekleştirebilirsiniz olmanın yanı sıra ihtiyaç duyar. Kullanıcılar tanımlama bilgilerini, Sık Kullanılanlar ve diğer kısayolları çalışmaya gibi özellikleri bekler. Ancak, bu kullanıcıların cihazlarını hata ayıklama veya değiştirme olanağı gereksinim duymayabilirsiniz. Bunlar ayrıca sürücüleri yüklemeniz gerekmez. Yüksek güvenlik profilini, yüksek güvenlik - Windows 10 (1809) betiği kullanılarak dağıtılır.
+   Yüksek güvenlik kullanıcısı, kullanımı kolay bir deneyimde e-posta ve Web 'e göz atma gibi etkinlikleri yapabilirken daha denetimli bir ortam talep eder. Kullanıcılar tanımlama bilgileri, Sık Kullanılanlar ve diğer kısayolların çalışması gibi özellikler bekler. Ancak, bu kullanıcılar cihazlarını değiştirme veya hatalarını ayıklama özelliği gerektirmez. Ayrıca, sürücü yüklemesi gerekmez. Yüksek güvenlik profili, High Security-Windows10 (1809) betiği kullanılarak dağıtılır.
 
-* **Özelleştirilmiş** – saldırganlar, geliştiriciler ve BT yöneticileri, saldırganların ilgisini sistemleri değiştirebilirsiniz çünkü hedefler. Özel iş istasyonu, yerel uygulamaları yönetme ve Web siteleri sınırlama ilkeleri yüksek güvenlik iş istasyonunun genişletir. Ayrıca, ActiveX, Java, tarayıcı eklentileri ve diğer Windows denetimlerini gibi yüksek riskli üretkenlik özellikleri kısıtlar. Bu profille DeviceConfiguration_NCSC - Windows 10 (1803) SecurityBaseline betik dağıtın.
+* **Özel** – saldırganlar, SALDıRGANLAR ve BT yöneticileri, saldırganların ilgisini çeken sistemleri değiştirebilecek şekilde hedefleyebilir. Özelleştirilmiş iş istasyonu, yerel uygulamaları yöneterek ve Web sitelerini sınırlayarak yüksek güvenlik iş istasyonunun ilkelerine genişletilir. Ayrıca, ActiveX, Java, tarayıcı eklentileri ve diğer Windows denetimleri gibi yüksek riskli üretkenlik yeteneklerini de kısıtlar. Bu profili DeviceConfiguration_NCSC-Windows10 (1803) SecurityBaseline betiği ile dağıtabilirsiniz.
 
-* **Güvenli** – bir yönetici hesabı etkilediğinde bir saldırgan önemli iş zarar veri hırsızlığına, veri değişikliği veya hizmet kesintisi. Sağlamlaştırılmış bu durumda, tüm güvenlik denetimleri ve yerel uygulama yönetiminin doğrudan denetim kısıtlama ilkeleri iş istasyonu sağlar. Üretkenlik araçları olmadan güvenli bir iş istasyonu serileştirilmesini cihaz tehlikeye daha zor. Kimlik avı saldırıları için en yaygın saldırı engeller: e-posta ve sosyal medya.  İş istasyonu güvenli - Windows 10 (1809) SecurityBaseline betik güvenli iş istasyonu dağıtılabilir.
+* **Güvenli** – bir yönetim hesabını kapatan bir saldırgan, veri hırsızlığı, veri değişikliği veya hizmet kesintisi nedeniyle önemli ölçüde iş hasarı oluşmasına neden olabilir. Bu sağlamlaştırılmış durumda, iş istasyonu yerel uygulama yönetiminin doğrudan denetimini kısıtlayan tüm güvenlik denetimlerini ve ilkelerini sunar. Güvenli bir iş istasyonunun üretkenlik araçları yoktur, bu nedenle Cihazın güvenliğinin aşılmasına daha zordur. Sızdırma saldırıları için en yaygın vektörü engeller: e-posta ve sosyal medya.  Güvenli iş istasyonu, Secure Workstation-Windows10 (1809) SecurityBaseline betiği ile dağıtılabilir.
 
-   ![Güvenli bir iş istasyonu](./media/concept-azure-managed-workstation/secure-workstation.png)
+   ![Güvenli iş istasyonu](./media/concept-azure-managed-workstation/secure-workstation.png)
 
-   Güvenli bir iş istasyonunda, yönetici NET uygulama denetimi ve application guard sağlamlaştırılmış iş istasyonu ile sağlar. İş istasyonu kötü amaçlı bir davranış ana bilgisayarı korumak için credential guard, device guard ve exploit guard'ı kullanır. Tüm yerel diskler de BitLocker ile şifrelenir.
+   Güvenli bir iş istasyonu, açık uygulama denetimi ve Application Guard 'ı olan sağlamlaştırılmış bir iş istasyonu sunan bir yönetici sağlar. İş istasyonu, konak kötü davranışından korumak için Credential Guard, Device Guard ve Exploit Guard kullanır. Tüm yerel diskler de BitLocker ile şifrelenir.
 
-* **Yalıtılmış** – bu özel, çevrimdışı senaryoda spektrumun aşırı sonunu temsil eder. Yükleme komut dosyası, bu durum için sağlanır. Desteklenmeyen veya yüklenmemiş eski işletim sistemi gerektiren bir iş açısından kritik işlevi yönetmeniz gerekebilir. Örneğin, bir yüksek değerli üretim hattı veya yaşam – destek sistemi. Güvenlik kritik öneme sahiptir ve bulut hizmetleri kullanılamıyor çünkü yönetin ve bu bilgisayarları el ile veya yalıtılmış bir Active Directory orman mimarisi gibi gelişmiş güvenlik yönetim ortamı (ESAE) ile güncelleştirin. Bu durumlarda, temel Intune ve ATP sistem durumu denetimleri dışındaki tüm erişimi kaldırmayı düşünün.
+* **Yalıtılmış** – bu özel, çevrimdışı senaryo, tayfın aşırı sonunu temsil eder. Bu durum için yükleme betikleri sağlanmaz. Desteklenmeyen veya yüklenmemiş eski bir işletim sistemi gerektiren, iş açısından kritik bir işlevi yönetmeniz gerekebilir. Örneğin, yüksek değerli bir üretim satırı veya yaşam destek sistemi. Güvenlik kritik ve bulut hizmetleri kullanılamadığından, bu bilgisayarları el ile veya Gelişmiş Güvenlik yönetici ortamı (ESAE) gibi yalıtılmış bir Active Directory orman mimarisiyle yönetebilir ve güncelleştirebilirsiniz. Bu koşullarda, temel Intune ve ATP sistem durumu denetimleri hariç tüm erişimi kaldırmayı göz önünde bulundurun.
 
-  * [Intune ağ iletişimi gereksinimleri](https://docs.microsoft.com/intune/network-bandwidth-use)
-  * [ATP ağ iletişimi gereksinimleri](https://docs.microsoft.com/azure-advanced-threat-protection/configure-proxy)
+  * [Intune ağ iletişimleri gereksinimi](https://docs.microsoft.com/intune/network-bandwidth-use)
+  * [ATP ağ iletişimleri gereksinimi](https://docs.microsoft.com/azure-advanced-threat-protection/configure-proxy)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Azure tarafından yönetilen güvenli iş istasyonunu dağıtma](howto-azure-managed-workstation.md).
+[Güvenli bir Azure tarafından yönetilen iş Istasyonu dağıtın](howto-azure-managed-workstation.md).

@@ -8,31 +8,31 @@ ms.topic: include
 ms.date: 12/11/2018
 ms.author: cherylmc
 ms.openlocfilehash: 31ccf14c82f6248c74d6af932fe9e338d26d2747
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: e0e6663a2d6672a9d916d64d14d63633934d2952
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 10/21/2019
 ms.locfileid: "67188233"
 ---
-Noktadan siteye bağlantı ile sanal ağdan sanal ağa bağlanan her istemci bilgisayara bir istemci sertifikası yüklü olmalıdır. Kök sertifikadan oluşturur ve her istemci bilgisayara yükleyin. Geçerli bir istemci sertifikası yüklemezseniz, istemci sanal ağa bağlanmaya çalıştığında, kimlik doğrulaması başarısız olur.
+Noktadan siteye bağlantısı olan bir VNet 'e bağlandığınız her istemci bilgisayarda bir istemci sertifikası yüklü olmalıdır. Bunu kök sertifikadan oluşturup her bir istemci bilgisayara yüklersiniz. Geçerli bir istemci sertifikası yüklemezseniz, istemci VNet 'e bağlanmayı denediğinde kimlik doğrulaması başarısız olur.
 
-Her istemci için benzersiz bir sertifika oluşturabileceğiniz gibi, birden çok istemci için aynı sertifikayı da kullanabilirsiniz. Benzersiz istemci sertifikaları oluşturmanın avantajı, tek bir sertifikayı iptal edebiliyor olmanızdır. Aksi takdirde, kimliğini doğrulamak için birden çok istemci aynı istemci sertifikasını kullanmak ve sertifikayı iptal, oluşturmanız ve bu sertifikayı kullanan her istemci için yeni sertifikalar yüklemeniz gerekir.
+Her istemci için benzersiz bir sertifika oluşturabileceğiniz gibi, birden çok istemci için aynı sertifikayı da kullanabilirsiniz. Benzersiz istemci sertifikaları oluşturmanın avantajı, tek bir sertifikayı iptal edebiliyor olmanızdır. Aksi halde, birden fazla istemci kimlik doğrulaması için aynı istemci sertifikasını kullanıyorsa ve iptal ederseniz, bu sertifikayı kullanan tüm istemciler için yeni sertifikalar oluşturmanız ve yüklemeniz gerekir.
 
 Aşağıdaki yöntemleri kullanarak istemci sertifikaları oluşturabilirsiniz:
 
 - **Kurumsal sertifika:**
 
-  - Kurumsal bir sertifika çözümü kullanıyorsanız, ortak ad değer biçimiyle bir istemci sertifikası oluşturma *adı\@yourdomain.com*. Yerine bu biçimi kullanmak *etki alanı adı\kullanıcı adı* biçimi.
-  - İstemci sertifikasına sahip bir kullanıcı sertifikası şablonunu temel emin *istemci kimlik doğrulaması* kullanıcı listesindeki ilk öğe olarak listelenir. Çift ve görüntüleyerek sertifikayı işaretleyin **Gelişmiş anahtar kullanımı** içinde **ayrıntıları** sekmesi.
+  - Kurumsal bir sertifika çözümü kullanıyorsanız, ortak ad değer biçimi *adı \@yourdomain. com*olan bir istemci sertifikası oluşturun. *Etkialanı \ Kullanıcı adı* biçimi yerine bu biçimi kullanın.
+  - İstemci sertifikasının, Kullanıcı listesindeki ilk öğe olarak listelenmiş *Istemci kimlik doğrulaması* olan bir Kullanıcı sertifika şablonunu temel alan bir kullanıcı sertifikası şablonuna dayandığınızdan emin olun. Sertifikayı çift tıklayarak ve **Ayrıntılar** sekmesinde **Gelişmiş anahtar kullanımı** ' nı görüntüleyerek denetleyin.
 
-- **Otomatik olarak imzalanan kök sertifika:** Oluşturduğunuz istemci sertifikaları, P2S bağlantılarıyla uyumlu olacak şekilde aşağıdaki P2S sertifika makalelerinde bulunan adımları izleyin. Aşağıdaki makalelerdeki adımlarla uyumlu bir istemci sertifikası oluşturabilirsiniz: 
+- **Otomatik olarak imzalanan kök sertifika:** Oluşturduğunuz istemci sertifikalarının P2S bağlantılarınız ile uyumlu olması için aşağıdaki P2S sertifika makalelerinden birindeki adımları izleyin. Bu makalelerdeki adımlar uyumlu bir istemci sertifikası oluşturur: 
 
-  * [Windows 10 PowerShell yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site.md#clientcert): Bu yönergeler, sertifikalarını oluşturmak Windows 10 ve PowerShell gerektirir. Oluşturulan sertifikalar tüm desteklenen P2S istemcilere yüklenebilir.
-  * [MakeCert yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-makecert.md): Sertifikaları oluşturmak için bir Windows 10 bilgisayarına erişim yoksa MakeCert kullanın. MakeCert kullanım dışı bırakılmış olsa da, bu sertifikaları oluşturmak için kullanmaya devam edebilirsiniz. Oluşturulan sertifikalar tüm desteklenen P2S istemcilere yükleyebilirsiniz.
+  * [Windows 10 PowerShell yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site.md#clientcert): Bu yönergeler, sertifika oluşturmak için Windows 10 ve PowerShell gerektirir. Oluşturulan sertifikalar, desteklenen herhangi bir P2S istemcisine yüklenebilir.
+  * [MakeCert yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-makecert.md): sertifikaları oluşturmak Için bir Windows 10 bilgisayarına erişiminiz yoksa MakeCert kullanın. MakeCert kullanım dışı olsa da, sertifika oluşturmak için kullanmaya devam edebilirsiniz. Oluşturulan sertifikaları desteklenen herhangi bir P2S istemcisine yükleyebilirsiniz.
   * [Linux yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-linux.md)
 
-  Otomatik olarak imzalanan kök sertifikadan istemci sertifikası oluşturma, sertifikayı oluşturmak için kullandığınız bilgisayara otomatik olarak yüklenir. Bir istemci sertifikasını başka bir istemci bilgisayara yüklemek istiyorsanız, tüm sertifika zinciriyle birlikte .pfx dosyası olarak dışarı aktarın. Bir .pfx dosyası oluşturur, bunun yapılması, istemcinin kimliğini doğrulamak için gerekli kök sertifika bilgileri içerir. 
+  Otomatik olarak imzalanan kök sertifikadan bir istemci sertifikası oluşturduğunuzda, bu, onu oluşturmak için kullandığınız bilgisayara otomatik olarak yüklenir. İstemci sertifikasını başka bir istemci bilgisayara yüklemek istiyorsanız, tüm sertifika zinciriyle birlikte bir. pfx dosyası olarak dışarı aktarın. Bunun yapılması, istemcinin kimliğini doğrulamak için gereken kök sertifika bilgilerini içeren bir. pfx dosyası oluşturur. 
 
 **Sertifikayı dışarı aktarmak için**
 
-Sertifikayı dışarı aktarma adımları için bkz. [noktadan siteye sertifikaları oluşturma ve dışarı aktarma PowerShell kullanarak](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site.md#clientexport).
+Sertifikayı dışarı aktarma adımları için bkz. [PowerShell kullanarak noktadan siteye sertifika oluşturma ve dışarı aktarma](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site.md#clientexport).

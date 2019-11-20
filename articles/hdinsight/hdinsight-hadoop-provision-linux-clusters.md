@@ -1,38 +1,39 @@
 ---
-title: Apache Hadoop, Apache Spark, Apache Kafka, Apache HBase ve R Server - Azure HDInsight için Kurulum küme
-description: Hadoop, Kafka, Spark, HBase, R Server veya Storm kümeleri HDInsight için bir tarayıcı, Klasik Azure CLI, Azure PowerShell, REST veya SDK'sı ayarlayın.
-keywords: hadoop kümesi kurulumu, kafka küme kurulum hadoop kümesi nedir, spark kümesi Kurulumu
+title: Azure HDInsight 'ta Apache ve R Server için küme kurulumu
+description: HDInsight için Hadoop, Kafka, Spark, HBase, R Server veya fırtınası kümelerini tarayıcıdan, klasik Azure CLı, Azure PowerShell, REST veya SDK 'dan ayarlayın.
+keywords: Hadoop kümesi kurulumu, Kafka küme kurulumu, Spark kümesi kurulumu, Hadoop 'da küme nedir?
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017,seodec18
 ms.topic: conceptual
-ms.date: 05/28/2019
-ms.openlocfilehash: 351b6a8e056d22fa8f2d695a2722b39b9771c8b0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/27/2019
+ms.openlocfilehash: 0b977cb9fe2df1627ad9a2e07b00ffb0e749ed39
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66299382"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73498252"
 ---
-# <a name="set-up-clusters-in-hdinsight-with-apache-hadoop-apache-spark-apache-kafka-and-more"></a>Apache Hadoop, Apache Spark, Apache Kafka ve daha fazlasıyla HDInsight kümelerinde ayarlama
+# <a name="set-up-clusters-in-hdinsight-with-apache-hadoop-apache-spark-apache-kafka-and-more"></a>HDInsight 'ta Apache Hadoop, Apache Spark, Apache Kafka ve daha fazlasını içeren kümeler ayarlayın
 
 [!INCLUDE [selector](../../includes/hdinsight-create-linux-cluster-selector.md)]
 
-Ayarlama ve Apache Hadoop, Apache Spark, Apache Kafka, Interactive Query, Apache HBase, ML Hizmetleri veya Apache Storm ile HDInsight kümelerini yapılandırma konusunda bilgi edinin. Ayrıca, kümelerini özelleştirin ve bir etki alanına katılarak güvenlik ekleme konusunda bilgi edinin.
+HDInsight 'ta Apache Hadoop, Apache Spark, Apache Kafka, etkileşimli sorgu, Apache HBase, ML Hizmetleri veya Apache Storm ile küme ayarlamayı ve yapılandırmayı öğrenin. Ayrıca, kümeleri özelleştirmeyi ve bir etki alanına katılarak güvenlik eklemeyi öğrenin.
 
-Bir Hadoop kümesi çeşitli görevleri dağıtılmış işlem için kullanılan sanal makinelerin (düğümler) oluşur. Azure HDInsight, uygulama ayrıntılarını yükleme ve yapılandırma tek tek düğümlerin yalnızca genel yapılandırma bilgilerini zorunda işler.
+Hadoop kümesi, görevlerin dağıtılmış işlemesi için kullanılan birkaç sanal makineden (düğümden) oluşur. Azure HDInsight, tek tek düğümlerin yüklenmesi ve yapılandırılmasına ilişkin uygulama ayrıntılarını işler, bu nedenle yalnızca genel yapılandırma bilgilerini sağlamanız gerekir.
 
 > [!IMPORTANT]  
-> HDInsight kümesi faturalandırması küme oluşturulduğunda başlar ve küme silindiğinde sona erer. Fatura dakikalara eşit olarak dağıtıldığından, kullanılmayan kümelerinizi mutlaka silmelisiniz. Bilgi edinmek için nasıl [küme silme.](hdinsight-delete-cluster.md)
+> HDInsight kümesi faturalandırması küme oluşturulduğunda başlar ve küme silindiğinde sona erer. Fatura dakikalara eşit olarak dağıtıldığından, kullanılmayan kümelerinizi mutlaka silmelisiniz. [Bir kümeyi silmeyi öğrenin.](hdinsight-delete-cluster.md)
 
-## <a name="cluster-setup-methods"></a>Küme kurulumu yöntemleri
-Aşağıdaki tabloda, bir HDInsight kümesini ayarlamak için kullanabileceğiniz farklı yöntemler gösterilmektedir.
+## <a name="cluster-setup-methods"></a>Küme kurulum yöntemleri
 
-| İle oluşturulmuş kümeleri | Web tarayıcısı | Komut satırı | REST API | SDK | 
+Aşağıdaki tabloda, bir HDInsight kümesi kurmak için kullanabileceğiniz farklı yöntemler gösterilmektedir.
+
+| İle oluşturulan kümeler | Web tarayıcısı | Komut satırı | REST API | SDK |
 | --- |:---:|:---:|:---:|:---:|
-| [Azure portal](hdinsight-hadoop-create-linux-clusters-portal.md) |✔ |&nbsp; |&nbsp; |&nbsp; |
+| [Azure Portal](hdinsight-hadoop-create-linux-clusters-portal.md) |✔ |&nbsp; |&nbsp; |&nbsp; |
 | [Azure Data Factory](hdinsight-hadoop-create-linux-clusters-adf.md) |✔ |✔ |✔ |✔ |
 | [Azure CLI](hdinsight-hadoop-create-linux-clusters-azure-cli.md) |&nbsp; |✔ |&nbsp; |&nbsp; |
 | [Azure PowerShell](hdinsight-hadoop-create-linux-clusters-azure-powershell.md) |&nbsp; |✔ |&nbsp; |&nbsp; |
@@ -40,202 +41,240 @@ Aşağıdaki tabloda, bir HDInsight kümesini ayarlamak için kullanabileceğini
 | [.NET SDK](hdinsight-hadoop-create-linux-clusters-dotnet-sdk.md) |&nbsp; |&nbsp; |&nbsp; |✔ |
 | [Azure Resource Manager şablonları](hdinsight-hadoop-create-linux-clusters-arm-templates.md) |&nbsp; |✔ |&nbsp; |&nbsp; |
 
-## <a name="quick-create-basic-cluster-setup"></a>Hızlı oluştur: Temel Küme kurulumu
-Bu makale, kurulumda size [Azure portalında](https://portal.azure.com)kullanarak bir HDInsight kümesi oluşturabileceğiniz *hızlı oluşturma* veya *özel*. 
+## <a name="basic-cluster-setup"></a>Temel küme kurulumu
 
-![hdınsight oluşturma özel Hızlı oluşturma seçenekleri](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-creation-options.png)
+Bu makalede, varsayılan görünümü veya *Klasik*' i kullanarak bir HDInsight kümesi oluşturabileceğiniz [Azure Portal](https://portal.azure.com)kurulum işlemi adım adım açıklanmaktadır.
 
-Temel Küme kurulumu için ekrandaki yönergeleri izleyin. Ayrıntılar için aşağıda verilmiştir:
+![HDInsight oluşturma seçenekleri özel hızlı oluşturma](./media/hdinsight-hadoop-provision-linux-clusters/azure-portal-cluster-basics-blank-fs.png)
+
+Ekrandaki yönergeleri izleyin. Ayrıntılar aşağıda verilmiştir:
 
 * [Kaynak grubu adı](#resource-group-name)
-* [Küme türleri ve yapılandırma](#cluster-types) 
-* Küme oturum açma ve SSH kullanıcı adı
+* [Küme türleri ve yapılandırma](#cluster-types)
+* [Küme adı](#cluster-name)
+* [Küme oturum açma ve SSH Kullanıcı adı](#cluster-login-and-ssh-username)
 * [Konum](#location)
 
 ## <a name="resource-group-name"></a>Kaynak grubu adı
 
-[Azure Resource Manager](../azure-resource-manager/resource-group-overview.md) kaynaklarla bir grup olarak uygulamanızdaki yardımcı bir Azure kaynak grubu için denir. Dağıtma, güncelleştirme, izleme veya tek bir Eşgüdümlü işlemle uygulamanıza yönelik tüm kaynakları silin.
+[Azure Resource Manager](../azure-resource-manager/resource-group-overview.md) , Azure Kaynak grubu olarak adlandırılan, uygulamanızdaki kaynaklarla bir grup olarak çalışmanıza yardımcı olur. Uygulamanıza yönelik tüm kaynakları tek bir eşgüdümlü işlemle dağıtabilir, güncelleştirebilir, izleyebilir veya silebilirsiniz.
 
-## <a name="cluster-types"></a> Küme türleri ve yapılandırma
-Azure HDInsight, şu anda aşağıdaki küme türlerinden her biri belirli işlevleri sağlamak için bileşenler kümesi sağlar.
+## <a name="cluster-types"></a>Küme türleri ve yapılandırma
+
+Azure HDInsight Şu anda, her biri belirli işlevleri sağlamak üzere bir bileşen kümesi olan aşağıdaki küme türlerini sağlamaktadır.
 
 > [!IMPORTANT]  
-> HDInsight kümeleri, her bir tek iş yükü veya teknoloji için çeşitli türlerde kullanılabilir. Bir küme üzerinde Storm ve HBase gibi birden birleştiren bir küme oluşturmak için desteklenen bir yöntem yoktur. Çözümünüz birden çok HDInsight küme türleri arasında yayılır teknolojileri gerektiriyorsa bir [Azure sanal ağı](https://docs.microsoft.com/azure/virtual-network) gerekli küme türleri bağlanabilirsiniz. 
+> HDInsight kümeleri, her biri tek bir iş yükü veya teknoloji için çeşitli türlerde kullanılabilir. Bir kümede fırtınası ve HBase gibi birden çok türü birleştiren bir küme oluşturmak için desteklenen bir yöntem yoktur. Çözümünüz birden çok HDInsight kümesi türüne yayılan teknolojiler gerektiriyorsa, bir [Azure sanal ağı](https://docs.microsoft.com/azure/virtual-network) gerekli küme türlerini bağlanabilir.
 
-| Küme türü | İşlevi |
+| Küme türü | İşlev |
 | --- | --- |
-| [Hadoop](hadoop/apache-hadoop-introduction.md) |Toplu işlem sorguları ve depolanan verilerin analizi |
-| [HBase](hbase/apache-hbase-overview.md) |Büyük miktarlarda şemasız, NoSQL verileri için işleme |
-| [Etkileşimli sorgu](./interactive-query/apache-interactive-query-get-started.md) |Etkileşimli ve daha hızlı Hive sorguları için bellek içi caching |
-| [Kafka](kafka/apache-kafka-introduction.md) | Gerçek Zamanlı Akış verisi işlem hatları ve uygulamaları oluşturmak için kullanılan dağıtılan bir akış platformu |
-| [ML Hizmetleri](r-server/r-server-overview.md) |Çeşitli büyük veri istatistikleri, Tahmine dayalı modelleme ve makine öğrenimi özellikleri |
-| [Spark](spark/apache-spark-overview.md) |Bellek içi işleme, etkileşimli sorgular, akış mikro toplu işleme |
-| [Storm](storm/apache-storm-overview.md) |Gerçek zamanlı olay işleme |
-
+| [Hadoop](hadoop/apache-hadoop-introduction.md) |Depolanan verilerin toplu sorgu ve Analizi |
+| [HBase](hbase/apache-hbase-overview.md) |Büyük miktarlarda çok sayıda şemaya daha, NoSQL verisi işleme |
+| [Etkileşimli sorgu](./interactive-query/apache-interactive-query-get-started.md) |Etkileşimli ve daha hızlı Hive sorguları için bellek içi önbelleğe alma |
+| [Kafka](kafka/apache-kafka-introduction.md) | Gerçek zamanlı akış veri işlem hatları ve uygulamaları oluşturmak için kullanılabilen bir dağıtılmış akış platformu |
+| [ML Hizmetleri](r-server/r-server-overview.md) |Çeşitli büyük veri istatistikleri, tahmine dayalı modelleme ve makine öğrenimi özellikleri |
+| [Spark](spark/apache-spark-overview.md) |Bellek içi işleme, etkileşimli sorgular, mikro-Batch akış işleme |
+| [Ina](storm/apache-storm-overview.md) |Gerçek zamanlı olay işleme |
 
 ### <a name="hdinsight-version"></a>HDInsight sürümü
-Bu küme için HDInsight'ın sürümünü seçin. Daha fazla bilgi için [HDInsight desteklenen sürümleri](hdinsight-component-versioning.md#supported-hdinsight-versions).
 
+Bu küme için HDInsight sürümünü seçin. Daha fazla bilgi için bkz. [desteklenen HDInsight sürümleri](hdinsight-component-versioning.md#supported-hdinsight-versions).
 
-## <a name="cluster-login-and-ssh-username"></a>Küme oturum açma ve SSH kullanıcı adı
-HDInsight kümeleri ile küme oluşturma sırasında iki kullanıcı hesaplarını yapılandırabilirsiniz:
+## <a name="cluster-name"></a>Küme adı
 
-* HTTP kullanıcısı: Varsayılan kullanıcı adı *admin* şeklindedir. Azure portalında temel yapılandırmayı kullanır. Bazen "kullanıcı küme" adlandırılır
-* SSH kullanıcısı: SSH üzerinden kümeye bağlanmak için kullanılır. Daha fazla bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md).
+HDInsight kümesi adları aşağıdaki kısıtlamalara sahiptir:
 
-Kurumsal güvenlik paketi, HDInsight Apache ranger'ın Active Directory ile tümleştirmenize olanak tanır. Birden çok kullanıcı Kurumsal güvenlik paketi kullanılarak oluşturulabilir.
+* İzin verilen karakterler: a-z, 0-9, A-Z
+* En fazla uzunluk: 59
+* Ayrılmış adlar: uygulamalar
+* Tüm abonelikler genelinde tüm Azure için küme adlandırma kapsamı. Bu nedenle, küme adı Dünya genelinde benzersiz olmalıdır.
+* İlk altı karakter bir sanal ağ içinde benzersiz olmalıdır
 
-## <a name="location"></a>Kümeleri ve depolama için konum (bölge)
+## <a name="cluster-login-and-ssh-username"></a>Küme oturum açma ve SSH Kullanıcı adı
 
-Küme konumu açıkça belirtmeniz gerekmez: Varsayılan depolama alanı ile aynı konumda bir kümedir. Desteklenen bölgelerin bir listesi için tıklatın **bölge** aşağı açılan listede [HDInsight fiyatlandırma](https://go.microsoft.com/fwLink/?LinkID=282635&clcid=0x409).
+HDInsight kümeleri ile, küme oluşturma sırasında iki kullanıcı hesabını yapılandırabilirsiniz:
+
+* HTTP kullanıcısı: Varsayılan Kullanıcı adı *admin*' dir. Azure portal temel yapılandırmayı kullanır. Bazen "küme kullanıcısı" olarak adlandırılır.
+* SSH kullanıcısı: kümeye SSH aracılığıyla bağlanmak için kullanılır. Daha fazla bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md).
+
+HTTP Kullanıcı adı aşağıdaki kısıtlamalara sahiptir:
+
+* İzin verilen özel karakterler: _ ve @
+* Karakterlere izin verilmiyor: #;. "',\/: '! *? $ (){}[] < > | &--= +% ~ ^ boşluk
+* En fazla uzunluk: 20
+
+SSH Kullanıcı adı aşağıdaki kısıtlamalara sahiptir:
+
+* İzin verilen özel karakterler: _ ve @
+* Karakterlere izin verilmiyor: #;. "',\/: '! *? $ (){}[] < > | &--= +% ~ ^ boşluk
+* En fazla uzunluk: 64
+* Ayrılmış adlar: Hadoop, kullanıcılar, Oozie, Hive, mapred, ambarı-qa, Zookeeper, tez, Ise, Sqoop, Yarn, hcat, AMS, HBase, fırtınası, yönetici, yönetici, Kullanıcı, Kullanıcı1, test, kullanıcı2, test1, User3, admin1, 1, 123, a, ACTUser, adm, Admin2, ASPNET, Backup, Console, David, Konuk, John, Owner, root, Server, SQL, support, SUPPORT_388945a0, sys, test2, test3, User4, user5, Spark
+
+Kurumsal güvenlik paketi, HDInsight 'ı Active Directory ve Apache Ranger ile tümleştirmenize olanak tanır. Kurumsal güvenlik paketi kullanılarak birden çok Kullanıcı oluşturulabilir.
+
+## <a name="location"></a>Kümeler ve depolama için konum (bölgeler)
+
+Küme konumunu açık bir şekilde belirtmeniz gerekmez: küme, varsayılan depolamayla aynı konumda. Desteklenen bölgelerin listesi için [HDInsight fiyatlandırması](https://go.microsoft.com/fwLink/?LinkID=282635&clcid=0x409)üzerindeki **bölge** açılan listesine tıklayın.
 
 ## <a name="storage-endpoints-for-clusters"></a>Kümeler için depolama uç noktaları
 
-Bulutta Hadoop şirket içi yüklemesini kümede depolama için Hadoop dağıtılmış dosya sistemi (HDFS) kullansa da, kümeye bağlı depolama uç noktaları kullanın. HDInsight kümeleri kullanın ya da [Azure Data Lake Storage](hdinsight-hadoop-use-data-lake-store.md) veya [Azure Depolama'daki blobları](hdinsight-hadoop-use-blob-storage.md). Azure Depolama'da veya Data Lake Storage kullanarak yine de verilerinizi korurken hesaplama için kullanılan HDInsight kümelerinin silebileceğiniz anlamına gelir. 
+Hadoop 'un Şirket içi yüklemesi kümedeki depolama için Hadoop Dağıtılmış Dosya Sistemi (bir) kullanıyor olsa da bulutta, kümeye bağlı depolama uç noktaları kullanılır. Bulut depolama kullanmak, verileri korurken hesaplama için kullanılan HDInsight kümelerini güvenle silebilmeniz anlamına gelir.
+
+HDInsight kümeleri aşağıdaki depolama seçeneklerini kullanabilir:
+
+* Azure Data Lake Storage Gen2
+* Azure Data Lake Storage Gen1
+* Azure Depolama Genel Amaçlı v2
+* Azure Depolama Genel Amaçlı v1
+* Azure Storage Blok Blobu (**yalnızca ikincil depolama olarak desteklenir**)
+
+HDInsight ile depolama seçenekleri hakkında daha fazla bilgi için bkz. [Azure HDInsight kümeleri ile kullanım için depolama seçeneklerini karşılaştırma](hdinsight-hadoop-compare-storage-options.md).
 
 > [!WARNING]  
-> HDInsight kümesinden farklı bir konumda ek depolama hesabı kullanma desteklenmiyor.
+> HDInsight kümesinden farklı bir konumda ek depolama hesabı kullanılması desteklenmez.
 
-Yapılandırma sırasında varsayılan depolama uç noktası için bir Azure depolama hesabı veya Data Lake Storage bir blob kapsayıcısını belirtin. Uygulama ve sistem varsayılan depolama alanı içeren günlükleri. İsteğe bağlı olarak, ek bağlı Azure Storage hesaplarını ve kümeye erişmek Data Lake Storage hesaplarını belirtebilirsiniz. HDInsight kümesi ve bağımlı depolama hesapları aynı Azure konumunda olmalıdır.
+Yapılandırma sırasında, varsayılan depolama uç noktası için bir Azure depolama hesabının veya Data Lake Storage blob kapsayıcısını belirtirsiniz. Varsayılan depolama, uygulama ve sistem günlükleri içerir. İsteğe bağlı olarak, ek bağlı Azure depolama hesapları ve kümenin erişebileceği Data Lake Storage hesapları belirtebilirsiniz. HDInsight kümesi ve bağımlı depolama hesapları aynı Azure konumunda olmalıdır.
 
-![Küme depolama ayarları: HDFS uyumlu depolama uç noktaları](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-cluster-creation-storage.png)
+![Küme depolama ayarları:,, uyumlu depolama uç noktaları](./media/hdinsight-hadoop-provision-linux-clusters/azure-portal-cluster-storage-blank.png)
 
 [!INCLUDE [secure-transfer-enabled-storage-account](../../includes/hdinsight-secure-transfer.md)]
 
-
 ### <a name="optional-metastores"></a>İsteğe bağlı meta depolar
-İsteğe bağlı Hive veya Apache Oozie meta depolar oluşturabilirsiniz. Ancak, tüm küme türleri meta depolar destek ve Azure SQL veri ambarı meta depolar ile uyumlu değil. 
 
-Daha fazla bilgi için [Azure HDInsight, harici meta veri depolarını kullanma](./hdinsight-use-external-metadata-stores.md).
+İsteğe bağlı Hive veya Apache Oozie metastores oluşturabilirsiniz. Ancak, tüm küme türleri metastores 'yi desteklemez ve Azure SQL veri ambarı, metastores ile uyumlu değildir.
+
+Daha fazla bilgi için bkz. [Azure HDInsight 'ta dış meta veri depoları kullanma](./hdinsight-use-external-metadata-stores.md).
 
 > [!IMPORTANT]  
-> Özel bir meta veri deposu oluşturduğunuzda, kısa çizgi, kısa çizgi veya veritabanı adı boşluk kullanmayın. Bu, küme oluşturma işlemi başarısız olmasına neden olabilir.
+> Özel bir meta veri deposu oluşturduğunuzda, veritabanı adında tireler, tireler veya boşluk kullanmayın. Bu, küme oluşturma işleminin başarısız olmasına neden olabilir.
 
 ### <a name="use-hiveoozie-metastore"></a>Hive meta veri deposu
 
-Bir HDInsight kümesi silindikten sonra Hive tablolarını korumak istiyorsanız, özel bir meta veri deposu kullanın. Ardından, meta veri deposu başka bir HDInsight kümesine ekleyebilirsiniz.
+Bir HDInsight kümesini sildikten sonra Hive tablolarınızı sürdürmek isterseniz, özel bir meta veri deposu kullanın. Daha sonra, meta veri deposunu başka bir HDInsight kümesine ekleyebilirsiniz.
 
-Bir HDInsight kümesi sürüm oluşturulan bir HDInsight meta veri deposu farklı HDInsight küme sürümleri arasında paylaşılamaz. HDInsight sürümleri listesi için bkz. [HDInsight desteklenen sürümleri](hdinsight-component-versioning.md#supported-hdinsight-versions).
+Bir HDInsight küme sürümü için oluşturulan An HDInsight meta veri, farklı HDInsight küme sürümleri arasında paylaşılamaz. HDInsight sürümlerinin listesi için bkz. [desteklenen HDInsight sürümleri](hdinsight-component-versioning.md#supported-hdinsight-versions).
 
 ### <a name="oozie-metastore"></a>Oozie meta veri deposu
 
-Oozie kullanırken performansı artırmak için özel bir meta veri deposu kullanın. Kümenizi sildikten sonra bir meta veri deposu Oozie iş verilerine erişim de sağlayabilirsiniz. 
+Oozie kullanırken performansı artırmak için özel bir meta veri deposu kullanın. Bir meta veri deposu, kümenizi sildikten sonra Oozie iş verilerine erişim de sağlayabilir.
 
 > [!IMPORTANT]  
-> Özel Oozie meta veri deposu yeniden kullanamazsınız. Özel Oozie meta veri deposu kullanmak için HDInsight kümesi oluştururken boş bir Azure SQL veritabanı sağlamanız gerekir.
+> Özel bir Oozie meta veri deposunu yeniden kullanamazsınız. Özel bir Oozie meta veri deposu kullanmak için, HDInsight kümesini oluştururken boş bir Azure SQL veritabanı sağlamanız gerekir.
 
-
-## <a name="custom-cluster-setup"></a>Özel küme Kurulumu
-Hızlı Kurulum derlemelerinde özel küme ayarlarını oluşturun ve aşağıdaki seçenekleri ekler:
-- [Kurumsal güvenlik paketi](#enterprise-security-package)
-- [HDInsight uygulamaları](#install-hdinsight-applications-on-clusters)
-- [Küme boyutu](#configure-cluster-size)
-- [Betik eylemleri](#advanced-settings-script-actions)
-- [Sanal ağ](#advanced-settings-extend-clusters-with-a-virtual-network)
- 
 ## <a name="enterprise-security-package"></a>Kurumsal güvenlik paketi
 
-Hadoop, Spark, HBase, Kafka ve etkileşimli sorgu kümesi türleri için etkinleştirmeyi seçebilirsiniz **Kurumsal güvenlik paketi**. Bu paket, Azure Active Directory ile tümleştirme ve Apache Ranger'ı kullanarak daha güvenli bir Küme kurulumu için seçeneği sağlar. Daha fazla bilgi için [Azure HDInsight, Kurumsal güvenlik paketi](./domain-joined/apache-domain-joined-introduction.md).
+Hadoop, Spark, HBase, Kafka ve etkileşimli sorgu kümesi türleri için **Kurumsal güvenlik paketi**etkinleştirmeyi seçebilirsiniz. Bu paket, Apache Ranger kullanarak ve Azure Active Directory tümleştirerek daha güvenli bir küme kurulumuna sahip olmak için seçenek sağlar. Daha fazla bilgi için bkz. [Azure HDInsight 'ta Kurumsal güvenliğe genel bakış](./domain-joined/hdinsight-security-overview.md).
 
-![hdınsight oluşturma seçenekleri Kurumsal güvenlik paketi seçin](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-creation-enterprise-security-package.png)
+![HDInsight oluşturma seçenekleri kurumsal güvenlik paketini seçin](./media/hdinsight-hadoop-provision-linux-clusters/azure-portal-cluster-security-networking-esp.png)
 
-Küme etki alanına katılmış HDInsight oluşturma hakkında daha fazla bilgi için bkz: [Oluştur etki alanına katılmış HDInsight korumalı ortamda](./domain-joined/apache-domain-joined-configure.md). 
+Etki alanına katılmış HDInsight kümesi oluşturma hakkında daha fazla bilgi için bkz. [etki alanına katılmış HDInsight Sandbox ortamı oluşturma](./domain-joined/apache-domain-joined-configure.md).
 
-## <a name="install-hdinsight-applications-on-clusters"></a>Kümelere HDInsight uygulamaları yükleme
+## <a name="extend-clusters-with-a-virtual-network"></a>Kümeleri bir sanal ağ ile genişletme
 
-HDInsight uygulaması kullanıcıların Linux tabanlı HDInsight kümesine yükleyebileceği bir uygulamadır. Microsoft, üçüncü tarafların veya, kendinizi geliştirin sağlanan uygulamaları kullanabilir. Daha fazla bilgi için [Azure HDInsight üzerinde üçüncü taraf Apache Hadoop uygulamaları yükleme](hdinsight-apps-install-applications.md).
+Çözümünüz birden çok HDInsight kümesi türüne yayılan teknolojiler gerektiriyorsa, bir [Azure sanal ağı](https://docs.microsoft.com/azure/virtual-network) gerekli küme türlerini bağlanabilir. Bu yapılandırma, kümelerin ve bunlara dağıttığınız tüm kodların birbirleriyle doğrudan iletişim kurmasına olanak tanır.
 
-HDInsight uygulamaları çoğu bir boş kenar düğümüne yüklenir.  Aynı istemci araçları yüklü ve yapılandırılmış olduğu gibi baş düğüm ile Linux sanal makinesi bir boş kenar düğümüdür. Kümeye erişen istemci uygulamalarınızı test etme ve istemci uygulamalarınızı barındırmak için kenar düğümünü kullanabilirsiniz. Daha fazla bilgi için [HDInsight içinde boş kenar düğümlerini kullanma](hdinsight-apps-use-edge-node.md).
+HDInsight ile Azure sanal ağını kullanma hakkında daha fazla bilgi için bkz. [HDInsight için bir sanal ağ planlayın](hdinsight-plan-virtual-network-deployment.md).
 
-## <a name="configure-cluster-size"></a>Küme boyutu yapılandırın
+Bir Azure sanal ağı içinde iki küme türü kullanmanın bir örneği için, bkz. [Apache Kafka Apache Spark yapısal akış kullanma](hdinsight-apache-kafka-spark-structured-streaming.md). Sanal ağ için belirli yapılandırma gereksinimleri dahil olmak üzere bir sanal ağla HDInsight kullanma hakkında daha fazla bilgi için bkz. [HDInsight için bir sanal ağ planlayın](hdinsight-plan-virtual-network-deployment.md).
 
-Kümenin var olduğu sürece düğüm kullanım için faturalandırılırsınız. Faturalandırma küme oluşturulduğunda ve küme silindiğinde sona erer başlar. Kümeleri edilemez veya beklemeye alınamaz.
+## <a name="configure-cluster-size"></a>Küme boyutunu Yapılandır
+
+Küme mevcut olduğu sürece düğüm kullanımı için faturalandırılırsınız. Faturalandırma, küme oluşturulduğunda başlar ve küme silindiğinde duraklar. Kümeler serbest olarak ayrılamaz veya beklemeye alınamaz.
 
 ### <a name="number-of-nodes-for-each-cluster-type"></a>Her küme türü için düğüm sayısı
-Her küme türü kendi sayısı düğüm, düğümleri ve varsayılan VM boyutu için terimler vardır. Aşağıdaki tabloda, parantez içinde her düğüm türü için düğümler sayısıdır.
+
+Her küme türünün kendi düğüm sayısı, düğüm terminolojisi ve varsayılan VM boyutu vardır. Aşağıdaki tabloda, her düğüm türü için düğümlerin sayısı parantez içinde bulunur.
 
 | Tür | Düğümler | Diyagram |
 | --- | --- | --- |
-| Hadoop |Baş düğüm (2) çalışan düğümü (1 +) |![HDInsight Hadoop küme düğümleri](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-hadoop-cluster-type-nodes.png) |
-| HBase |HEAD sunucu (2), bölge sunucusu (1 +), master/ZooKeeper düğümü (3) |![HDInsight HBase küme düğümleri](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-hbase-cluster-type-setup.png) |
-| Storm |Nimbus düğümü (2), gözetmen sunucusu (1 +), ZooKeeper düğümü (3) |![HDInsight Storm küme düğümleri](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-storm-cluster-type-setup.png) |
-| Spark |Baş düğüm (2) çalışan düğümü (1 +), ZooKeeper düğümü (3) (A1 ZooKeeper VM boyutu için ücretsiz) |![HDInsight Spark küme düğümleri](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-spark-cluster-type-setup.png) |
+| Hadoop |Baş düğüm (2), çalışan düğümü (1 +) |![HDInsight Hadoop küme düğümleri](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-hadoop-cluster-type-nodes.png) |
+| HBase |Baş sunucu (2), bölge sunucusu (1 +), ana/ZooKeeper düğüm (3) |![HDInsight HBase küme türü kurulumu](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-hbase-cluster-type-setup.png) |
+| Storm |Nimbus node (2), gözetmen sunucusu (1 +), ZooKeeper node (3) |![HDInsight fırtınası küme türü kurulumu](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-storm-cluster-type-setup.png) |
+| Spark |Baş düğüm (2), çalışan düğümü (1 +), ZooKeeper node (3) (a1 ZooKeeper VM boyutu için ücretsiz) |![HDInsight Spark küme türü kurulumu](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-spark-cluster-type-setup.png) |
 
-Daha fazla bilgi için [varsayılan küme düğümü yapılandırması ve sanal makine boyutları](hdinsight-component-versioning.md#default-node-configuration-and-virtual-machine-sizes-for-clusters) "Hadoop bileşenleri ve HDInsight sürümlerinde nelerdir?",
+Daha fazla bilgi için bkz. "HDInsight 'ta Hadoop bileşenleri ve sürümleri nelerdir?" içindeki [kümeler Için varsayılan düğüm yapılandırması ve sanal makine boyutları](hdinsight-component-versioning.md#default-node-configuration-and-virtual-machine-sizes-for-clusters) .
 
-HDInsight kümeleri maliyetini düğümlerin ve düğümler için sanal makine boyutları sayısına göre belirlenir. 
+HDInsight kümelerinin maliyeti düğüm sayısına ve düğümlerin sanal makine boyutlarına göre belirlenir.
 
-Farklı küme türü farklı bir düğüme türlerinin sayıda düğüm ve düğüm boyutları vardır:
-* Hadoop küme türü varsayılan: 
-    * İki *baş düğümlerine*  
-    * Dört *çalışan düğümleri*
-* Storm küme türü varsayılan: 
-    * İki *Nimbus düğümleri*
-    * Üç *ZooKeeper düğümleri*
-    * Dört *gözetmen düğümleri* 
+Farklı küme türlerinde farklı düğüm türleri, düğüm sayıları ve düğüm boyutları vardır:
+* Hadoop kümesi türü varsayılanı:
+    * İki *baş düğüm*  
+    * Dört *çalışan düğümü*
+* Fırtınası kümesi türü varsayılanı:
+    * İki *Nimbus düğümü*
+    * Üç *ZooKeeper düğümü*
+    * Dört *Gözetmen düğümü*
 
-HDInsight yalnızca deniyorsanız, bir çalışan düğümü kullanmanızı öneririz. HDInsight fiyatlandırma hakkında daha fazla bilgi için bkz. [HDInsight fiyatlandırma](https://go.microsoft.com/fwLink/?LinkID=282635&clcid=0x409).
+HDInsight 'ı yeni deneiyorsanız, bir çalışan düğümü kullanmanızı öneririz. HDInsight fiyatlandırması hakkında daha fazla bilgi için bkz. [HDInsight fiyatlandırması](https://go.microsoft.com/fwLink/?LinkID=282635&clcid=0x409).
 
 > [!NOTE]  
-> Küme boyutu sınırı, Azure abonelikleri arasında değişiklik gösterir. İlgili kişi [Azure fatura desteğine](https://docs.microsoft.com/azure/azure-supportability/how-to-create-azure-support-request) sınırını artırın.
+> Küme boyutu sınırı, Azure abonelikleri arasında farklılık gösterir. Limiti artırmak için [Azure Faturalandırma desteği](https://docs.microsoft.com/azure/azure-supportability/how-to-create-azure-support-request) 'ne başvurun.
 
-Küme yapılandırmak için Azure portalı kullandığınızda, düğüm boyutunu aracılığıyla **düğüm fiyatlandırma katmanları** dikey penceresi. Portalda farklı düğümü boyutları ile ilişkili maliyeti de görebilirsiniz. 
+Kümeyi yapılandırmak için Azure portal kullandığınızda, düğüm boyutu **yapılandırma + fiyatlandırma** sekmesinden kullanılabilir. Portalda, farklı düğüm boyutlarıyla ilişkili maliyeti de görebilirsiniz.
 
-![HDInsight VM düğümü boyutları](./media/hdinsight-hadoop-provision-linux-clusters/hdinsight-node-sizes.png)
+![HDInsight düğüm boyutunuzu seçin](./media/hdinsight-hadoop-provision-linux-clusters/azure-portal-cluster-configuration-pricing-hadoop.png)
 
-### <a name="virtual-machine-sizes"></a>Sanal makine boyutları 
-Kümeleri dağıtırken dağıtmayı planladığınız çözüme göre işlem kaynaklarını seçin. Aşağıdaki sanal makineleri, HDInsight kümeleri için kullanılır:
-* Ve A serisi VM'ler D1-4: [Genel amaçlı bir Linux VM boyutları](https://docs.microsoft.com/azure/virtual-machines/linux/sizes-general)
-* D11-14 serisi VM: [Bellek için iyileştirilmiş bir Linux VM boyutları](https://docs.microsoft.com/azure/virtual-machines/linux/sizes-memory)
+### <a name="virtual-machine-sizes"></a>Sanal makine boyutları
 
-Değer dışarı bulmak için farklı SDK'larını kullanarak bir küme oluştururken bir VM boyutu veya Azure PowerShell kullanırken kullanmalısınız [HDInsight kümeleri için kullanılacak VM boyutları](../cloud-services/cloud-services-sizes-specs.md#size-tables). Bu bağlantılı makalesinden değeri kullandığınızdan **boyutu** tabloların sütun.
+Kümeleri dağıtırken, dağıtmayı planladığınız çözüme göre işlem kaynakları ' nı seçin. HDInsight kümeleri için aşağıdaki VM 'Ler kullanılır:
+
+* A ve D1-4 Serisi VM 'Ler: [genel amaçlı LINUX VM boyutları](https://docs.microsoft.com/azure/virtual-machines/linux/sizes-general)
+* D11-14 serisi VM: [bellek için Iyileştirilmiş LINUX VM boyutları](https://docs.microsoft.com/azure/virtual-machines/linux/sizes-memory)
+
+Farklı SDK 'Ları kullanarak bir küme oluştururken veya Azure PowerShell kullanırken VM boyutunu belirtmek için hangi değeri kullanmanız gerektiğini öğrenmek için bkz. [HDInsight kümeleri için kullanılacak VM boyutları](../cloud-services/cloud-services-sizes-specs.md#size-tables). Bu bağlantılı makalede, tabloların **Boyut** sütunundaki değeri kullanın.
 
 > [!IMPORTANT]  
-> Bir kümedeki 32'den fazla alt düğüme ihtiyacınız varsa, bir baş düğüm boyutu en az 8 çekirdek ve 14 GB RAM ile seçmeniz gerekir.
+> Bir kümede 32 ' den fazla çalışan düğümüne ihtiyacınız varsa, en az 8 çekirdek ve 14 GB RAM içeren bir baş düğüm boyutu seçmeniz gerekir.
 
-Daha fazla bilgi için [sanal makine boyutları](../virtual-machines/windows/sizes.md). Çeşitli boyutlardaki fiyatlandırması hakkında daha fazla bilgi için bkz: [HDInsight fiyatlandırma](https://azure.microsoft.com/pricing/details/hdinsight).   
+Daha fazla bilgi için bkz. [sanal makineler Için boyutlar](../virtual-machines/windows/sizes.md). Çeşitli boyutlardaki fiyatlar hakkında daha fazla bilgi için bkz. [HDInsight fiyatlandırması](https://azure.microsoft.com/pricing/details/hdinsight).
 
-## <a name="advanced-settings-script-actions"></a>Gelişmiş ayarlar: Betik eylemleri
+## <a name="classic-cluster-setup"></a>Klasik küme kurulumu
 
-Ek bileşenleri yüklemek veya oluşturma sırasında komut dosyalarını kullanarak küme yapılandırmasını özelleştirebilirsiniz. Bu betikler aracılığıyla çağrılan **betik eylemi**, Azure portalı, HDInsight Windows PowerShell cmdlet'leri veya HDInsight .NET SDK'sı kullanılabilir bir yapılandırma seçeneği olan. Daha fazla bilgi için [betik eylemi kullanarak özelleştirme HDInsight küme](hdinsight-hadoop-customize-cluster-linux.md).
+Klasik küme kurulumu varsayılan oluşturma ayarlarını oluşturur ve aşağıdaki seçenekleri ekler:
 
-Apache Mahout ve basamaklama, gibi yerel bazı Java bileşenlerini kümesinde Java arşiv (JAR) dosyaları olarak çalıştırabilirsiniz. Bu JAR dosyaları Azure depolama alanına dağıtılmış ve HDInsight kümelerine Hadoop işi gönderme mekanizmaları ile gönderildi. Daha fazla bilgi için [gönderme Apache Hadoop işlerini program aracılığıyla](hadoop/submit-apache-hadoop-jobs-programmatically.md).
+* [HDInsight uygulamaları](#install-hdinsight-applications-on-clusters)
+* [Betik eylemleri](#advanced-settings-script-actions)
+
+## <a name="install-hdinsight-applications-on-clusters"></a>Kümelere HDInsight uygulamaları yükleme
+
+HDInsight uygulaması kullanıcıların Linux tabanlı HDInsight kümesine yükleyebileceği bir uygulamadır. Microsoft, üçüncü taraflar tarafından sunulan veya kendi kendinize Geliştirdiğiniz uygulamaları kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure HDInsight 'ta üçüncü taraf Apache Hadoop uygulamaları yüklemeyi](hdinsight-apps-install-applications.md).
+
+HDInsight uygulamalarının çoğu boş bir kenar düğümüne yüklenir.  Boş bir Edge düğümü, aynı istemci araçları yüklü ve baş düğümde olarak yapılandırılmış bir Linux sanal makinedir. Küme erişimi, istemci uygulamalarınızı test etmek ve istemci uygulamalarınızı barındırmak için kenar düğümünü kullanabilirsiniz. Daha fazla bilgi için bkz. [HDInsight 'ta boş kenar düğümlerini kullanma](hdinsight-apps-use-edge-node.md).
+
+## <a name="advanced-settings-script-actions"></a>Gelişmiş ayarlar: betik eylemleri
+
+Oluşturma sırasında betikleri kullanarak ek bileşenler yükleyebilir veya küme yapılandırmasını özelleştirebilirsiniz. Bu tür betikler, Azure portal, HDInsight Windows PowerShell cmdlet 'leri veya HDInsight .NET SDK 'dan kullanılabilen bir yapılandırma seçeneği olan **betik eylemi**aracılığıyla çağrılır. Daha fazla bilgi için bkz. [betik eylemini kullanarak HDInsight kümesini özelleştirme](hdinsight-hadoop-customize-cluster-linux.md).
+
+Apache Mahout ve basamaklı gibi bazı yerel Java bileşenleri, küme üzerinde Java Arşivi (JAR) dosyaları olarak çalıştırılabilir. Bu JAR dosyaları Azure depolama 'ya dağıtılabilir ve Hadoop iş gönderim mekanizmalarıyla HDInsight kümelerine gönderilebilir. Daha fazla bilgi için bkz. [Apache Hadoop işleri programlı olarak gönderme](hadoop/submit-apache-hadoop-jobs-programmatically.md).
 
 > [!NOTE]  
-> Sorunları JAR dosyalarını HDInsight kümelerine dağıtma veya HDInsight kümelerinde JAR dosyaları ile iletişime geçin [Microsoft Support](https://azure.microsoft.com/support/options/).
+> JAR dosyalarını HDInsight kümelerine dağıtmaya veya HDInsight kümelerinde JAR dosyalarını çağırmaya sorunlarınız varsa [Microsoft desteği](https://azure.microsoft.com/support/options/)başvurun.
 >
-> Geçişli HDInsight tarafından desteklenmiyor ve Microsoft Support uygun değil. Desteklenen bileşenlerin listesi için bkz. [HDInsight tarafından sağlanan küme sürümlerindeki yenilikler](hdinsight-component-versioning.md).
+> HDInsight, HDInsight tarafından desteklenmez ve Microsoft Desteği için uygun değildir. Desteklenen bileşenlerin listesi için bkz. [HDInsight tarafından sunulan küme sürümlerindeki](hdinsight-component-versioning.md)yenilikler.
 
-Bazı durumlarda, aşağıdaki yapılandırma dosyalarını oluşturma işlemi sırasında yapılandırmak istiyorsanız:
+Bazen, oluşturma işlemi sırasında aşağıdaki yapılandırma dosyalarını yapılandırmak isteyebilirsiniz:
 
-* clusterIdentity.xml
-* Core-site.xml
-* Gateway.XML
-* hbase env.xml
-* hbase-site.xml
-* hdfs-site.xml
-* Hive env.xml
-* Hive-site.xml
+* Clusterıdentity. xml
+* Core-site. xml
+* Gateway. xml
+* HBase-env. xml
+* HBase-site. xml
+* HDFS-site. xml
+* Hive-env. xml
+* Hive-site. xml
 * mapred-site
-* oozie-site.xml
-* oozie-env.xml
-* storm-site.xml
-* tez-site.xml
-* webhcat-site.xml
-* yarn-site.xml
+* Oozie-site. xml
+* Oozie-env. xml
+* Storm-site. xml
+* Tez-site. xml
+* webhcat-site. xml
+* Yarn-site. xml
 
-Daha fazla bilgi için [özelleştirme HDInsight kümeleri Bootstrap ile](hdinsight-hadoop-customize-cluster-bootstrap.md).
-
-## <a name="advanced-settings-extend-clusters-with-a-virtual-network"></a>Gelişmiş ayarlar: Bir sanal ağ ile kümeleri genişletme
-Çözümünüz birden çok HDInsight küme türleri arasında yayılır teknolojileri gerektiriyorsa bir [Azure sanal ağı](https://docs.microsoft.com/azure/virtual-network) gerekli küme türleri bağlanabilirsiniz. Bu yapılandırma, kümeler ve doğrudan birbirleri ile iletişim kurmak için bunlara dağıttığınız herhangi bir kod sağlar.
-
-HDInsight ile bir Azure sanal ağı kullanma hakkında daha fazla bilgi için bkz. [genişletmek HDInsight ile Azure sanal ağları](hdinsight-extend-hadoop-virtual-network.md).
-
-Bir Azure sanal ağ içindeki iki küme türleri kullanma örneği için bkz: [kullanın Apache Spark yapılandırılmış akışı ile Apache Kafka](hdinsight-apache-kafka-spark-structured-streaming.md). Sanal ağ için belirli yapılandırma gereksinimlerine de dahil olmak üzere bir sanal ağda HDInsight'ı kullanma hakkında daha fazla bilgi için bkz. [kullanarak Azure sanal ağ genişletme HDInsight özellikleri](hdinsight-extend-hadoop-virtual-network.md).
-
+Daha fazla bilgi için bkz. [önyükleme kullanarak HDInsight kümelerini özelleştirme](hdinsight-hadoop-customize-cluster-bootstrap.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [HDInsight, Apache Hadoop ekosistemindeki ve Hadoop kümeleri nedir?](hadoop/apache-hadoop-introduction.md)
-- [HDInsight Apache Hadoop kullanmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md)
-- [Bir Windows PC ile gelen HDInsight üzerinde Apache Hadoop çalışma](hdinsight-hadoop-windows-tools.md)
+* [Azure HDInsight ile küme oluşturma hatalarıyla ilgili sorunları giderme](./hadoop/hdinsight-troubleshoot-cluster-creation-fails.md)
+* [HDInsight nedir, Apache Hadoop ekosistemi ve Hadoop kümeleri nedir?](hadoop/apache-hadoop-introduction.md)
+* [HDInsight 'ta Apache Hadoop kullanmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md)
+* [Windows BILGISAYARDAN HDInsight üzerinde Apache Hadoop çalışma](hdinsight-hadoop-windows-tools.md)

@@ -1,6 +1,6 @@
 ---
-title: Akıllı İçgörüler - Azure SQL veritabanı ile veritabanı performansını izleme | Microsoft Docs
-description: Azure SQL veritabanı Intelligent Insights yerleşik zeka, yapay zeka veritabanı kullanımını sürekli olarak izleyip kötü performansa neden aksatıcı olayları algılayacak kullanır.
+title: Akıllı İçgörüler ile veritabanı performansını izleme
+description: Azure SQL veritabanı Akıllı İçgörüler, yapay zeka aracılığıyla veritabanı kullanımını sürekli olarak izlemek ve zayıf performansa neden olan olayları saptamak için yerleşik zekayı kullanır.
 services: sql-database
 ms.service: sql-database
 ms.subservice: performance
@@ -10,174 +10,184 @@ ms.topic: conceptual
 author: danimir
 ms.author: danil
 ms.reviewer: jrasnik, carlrab
-manager: craigg
 ms.date: 12/19/2018
-ms.openlocfilehash: 15154844c954e53ca1add5d3fbaa3e9d02152ad2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f17c588d28d0904041970eee8e9aa2201f905836
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60703226"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74151422"
 ---
-# <a name="intelligent-insights-using-ai-to-monitor-and-troubleshoot-database-performance"></a>Veritabanı performansı izleme ve sorun giderme için yapay ZEKA kullanarak akıllı Öngörüler
+# <a name="intelligent-insights-using-ai-to-monitor-and-troubleshoot-database-performance"></a>Veritabanı performansını izlemek ve sorunlarını gidermek için AI kullanarak Akıllı İçgörüler
 
-Azure SQL veritabanı akıllı Öngörüler, SQL veritabanı ve yönetilen örneği veritabanınızın performansı ile neler olduğunu bilmenizi sağlar.
+Azure SQL veritabanı Akıllı İçgörüler, SQL veritabanınız ve yönetilen örnek veritabanı performansında neler olduğunu bilmenizi sağlar.
 
-Akıllı Öngörüler, yapay zeka veritabanı kullanımını sürekli olarak izleyip kötü performansa neden aksatıcı olayları algılayacak yerleşik zeka kullanır. Ayrıntılı bir analiz algılandığında bir sorunun akıllı değerlendirme ile tanılama günlüğü oluşturan gerçekleştirilir. Bu değerlendirme kök neden Analizi veritabanı performans sorununun oluşur ve mümkün olduğunda performans geliştirme önerileri.
+Akıllı İçgörüler, yapay zeka aracılığıyla veritabanı kullanımını sürekli olarak izlemek ve zayıf performansa neden olan olayları saptamak için yerleşik zeka kullanır. Algılandıktan sonra, sorunun akıllı değerlendirmesi ile tanılama günlüğü oluşturan ayrıntılı bir analiz gerçekleştirilir. Bu değerlendirme, veritabanı performans sorununun bir kök neden analizinden oluşur ve mümkün olduğunda performans iyileştirmeleri için öneriler içerir.
 
-## <a name="what-can-intelligent-insights-do-for-you"></a>Akıllı İçgörüler sizin için neler
+## <a name="what-can-intelligent-insights-do-for-you"></a>Sizin için Akıllı İçgörüler yapabilecekleriniz
 
-Akıllı İçgörüler sağlayan aşağıdaki değeri Azure yerleşik zekası, benzersiz bir özellik şöyledir:
+Akıllı İçgörüler, Azure yerleşik zekanın aşağıdaki değeri sağlayan benzersiz bir özelliğidir:
 
-- Öngörülebilir izleme
-- Özel olarak uyarlanmış performans öngörüleri
-- Veritabanı performans düşüşü erkenden algılanması
-- Kök neden analizini algılanan sorunlar
-- Performans İyileştirme önerileri
-- Yüz binlerce veritabanını yeteneğini ölçeği genişletme
-- Olumlu etkiyi DevOps kaynaklara ve toplam sahip olma maliyeti
+- Proaktif izleme
+- Özel performans öngörüleri
+- Veritabanı performansı performansında erken algılama
+- Algılanan sorunların kök neden analizi
+- Performans geliştirme önerileri
+- Yüzlerce binlerce veritabanında ölçeği genişletme özelliği
+- DevOps kaynaklarına yönelik olumlu etki ve toplam sahip olma maliyeti
 
-## <a name="how-does-intelligent-insights-work"></a>Akıllı Öngörüler nasıl çalışır
+## <a name="how-does-intelligent-insights-work"></a>Akıllı İçgörüler nasıl çalışır?
 
-Akıllı Öngörüler veritabanı iş yükünden son bir saat son yedi gün temel iş yükü ile karşılaştırarak veritabanı performansı çözümler. Veritabanı iş yükü sorguları en yinelenen ve en büyük sorgular gibi veritabanı performans için en önemli belirlenen oluşur. Her veritabanı alt yapısı, veri, kullanımı ve uygulama göre benzersiz olduğu için oluşturulan her bir iş yükü taban çizgisi tek bir örneği için benzersiz ve özel. Akıllı Öngörüler, iş yükü taban, bağımsız mutlak işletimsel eşikleri izler ve aşırı bekleme süresini, kritik özel durumları ve performansı etkileyebilir sorgu parameterizations sorunları ile ilgili sorunları algılar.
+Akıllı İçgörüler, son yedi günlük temel iş yüküyle veritabanı iş yükünü son saatten karşılaştırarak veritabanı performansını analiz eder. Veritabanı iş yükü, en çok yinelenen ve en büyük sorgular gibi veritabanı performansı için en önemli değer olarak belirlenen sorgulardan oluşur. Her veritabanı yapısına, verilerine, kullanımına ve uygulamasına göre benzersiz olduğundan, oluşturulan her iş yükü temeli tek bir örneğe özeldir ve benzersizdir. Akıllı İçgörüler, iş yükü taban çizgisinden bağımsız olarak, mutlak işlemsel eşikleri de izler ve çok fazla bekleme süresi, kritik özel durum ve performansı etkileyebilecek sorgu parametrelerinin sorunları ile ilgili sorunları algılar.
 
-Bir performans düşüşü sorunu yapay zeka kullanarak birden çok gözlemlenen ölçümlerinden algılanmadığında, analiz gerçekleştirilir. Veritabanınız ile neler üzerinde bir akıllı Öngörüler tanılama günlüğü oluşturulur. Akıllı İçgörüler veritabanı performans sorunu çözülene kadar ilk görünümünü izleme kolaylaştırır. Her algılandı. sorunu yaşam döngüsü ile ilk sorunu algılama ve performans iyileştirme doğrulama tamamlanmasını için izlenir.
+Yapay zeka kullanılarak birden çok gözlemlenen ölçümden performans düşüşü sorunu algılanırsa, analiz gerçekleştirilir. Tanılama günlüğü, veritabanınızda neler olduğunu gösteren akıllı bir öngörü ile oluşturulur. Akıllı İçgörüler, çözümleme yapılıncaya kadar veritabanı performans sorununu ilk görünüşünden izlemeyi kolaylaştırır. Algılanan her sorun, ilk sorun algılamadaki yaşam döngüsü boyunca ve performans iyileştirmesinin tamamlanmasına yönelik doğrulaması aracılığıyla izlenir.
 
-![Veritabanı Performans Analizi iş akışı](./media/sql-database-intelligent-insights/intelligent-insights-concept.png)
+![Veritabanı performans analizi iş akışı](./media/sql-database-intelligent-insights/intelligent-insights-concept.png)
 
-Ölçümleri ölçme ve veritabanı performans sorunlarını algılamak için kullanılan sorgu süresi, istek zaman aşımı, aşırı bekleme süresini ve dönemdeki hatalı istek temel alır. Ölçümler hakkında daha fazla bilgi için bkz. [algılama ölçümleri](sql-database-intelligent-insights.md#detection-metrics) bu belgenin bölüm.
+Veritabanı performans sorunlarını ölçmek ve algılamak için kullanılan ölçümler sorgu süresini, zaman aşımı isteklerini, aşırı bekleme süresini ve hatalı istekleri temel alır. Ölçümler hakkında daha fazla bilgi için bu belgenin [algılama ölçümleri](sql-database-intelligent-insights.md#detection-metrics) bölümüne bakın.
 
-SQL veritabanı performans performansındaki düşüşleri aşağıdaki özellikleri içerir, akıllı girişlerle tanılama günlüğüne kaydedilir tanımlanan:
+Tanımlı SQL veritabanı performansı azaltılmaları, tanılama günlüğüne aşağıdaki özelliklerden oluşan akıllı girdilerle kaydedilir:
 
 | Özellik             | Ayrıntılar              |
 | :------------------- | ------------------- |
-| veritabanı bilgileri | Bir veritabanı üzerinde bir öngörü, Kaynak URI gibi algılandığı hakkındaki meta verileri. |
-| Gözlemlenen zaman aralığı | Algılanan Insight aralığının başlangıç ve bitiş zamanı. |
-| Etkilenen ölçümleri | Bir öngörü oluşturulmasına neden ölçümleri: <ul><li>Sorgu süresini uzatarak [saniye].</li><li>Aşırı bekleniyor [saniye].</li><li>[Yüzdesi] istekleri zaman aşımına uğradı.</li><li>Kapanan istekleri [yüzdesi].</li></ul>|
-| Etkisi değeri | Ölçüm değeri ölçülür. |
-| Etkilenen sorgular ve hata kodları | Karma ya da hata kodunu sorgulayın. Bu, etkilenen sorgular için kolayca ilişkilendirmek için kullanılabilir. Sorgu süresini artırmak, bekleme süresi, zaman aşımı sayıları veya hata kodları oluşur ölçümleri sağlanır. |
-| Algılamalar | Bir olayın olduğu süre boyunca veritabanında tanımlanan algılama. 15 algılama desenleri vardır. Daha fazla bilgi için [veritabanı Intelligent Insights ile performans sorunlarını giderme](sql-database-intelligent-insights-troubleshoot-performance.md). |
-| Kök neden analizi | Kök neden analizini okunabilir bir biçimde tanımlanan sorun. Bazı Öngörüler, mümkün olduğunda performans iyileştirme önerisi içeriyor olabilir. |
+| Veritabanı bilgileri | Bir öngörü algılanan ve kaynak URI gibi bir veritabanıyla ilgili meta veriler. |
+| Gözlenen zaman aralığı | Algılanan öngörü dönemi için başlangıç ve bitiş zamanı. |
+| Etkilenen ölçümler | Öngörü oluşturulmasına neden olan ölçümler: <ul><li>Sorgu süresi [saniye] değerini artırır.</li><li>Aşırı bekleyen [saniye].</li><li>Zaman aşımı istekleri [yüzde].</li><li>Hatalı istekler [Percentage].</li></ul>|
+| Etki değeri | Ölçülen ölçüm değeri. |
+| Etkilenen sorgular ve hata kodları | Sorgu karması veya hata kodu. Bunlar, etkilenen sorgularla kolayca ilişki kurmak için kullanılabilir. Sorgu süresi artışını, bekleme süresini, zaman aşımı sayılarını veya hata kodlarını içeren ölçümler sağlanır. |
+| Durumunda | Bir olay sırasında veritabanında tanımlanan algılama. 15 algılama deseni vardır. Daha fazla bilgi için bkz. [akıllı içgörüler veritabanı performans sorunlarını giderme](sql-database-intelligent-insights-troubleshoot-performance.md). |
+| Kök neden analizi | İnsan tarafından okunabilen bir biçimde tanımlanan sorunun kök neden analizi. Bazı içgörüler, mümkün olduğunda bir performans geliştirme önerisi içerebilir. |
 |||
 
-Azure SQL Analytics ile akıllı İçgörüler kullanarak uygulamalı bir genel bakış ve tipik kullanım senaryoları için katıştırılmış video bakın:
+Azure SQL Analytics ve tipik kullanım senaryolarında Akıllı İçgörüler kullanmaya yönelik uygulamalı bir genel bakış için bkz. gömülü video:
 
 > [!VIDEO https://channel9.msdn.com/Shows/Azure-Friday/Get-Intelligent-Insights-for-Improving-Azure-SQL-Database-Performance/player]
 >
 
-Akıllı Öngörüler keşfetmek ve SQL veritabanı performans sorunlarını ortaya çıkar. SQL veritabanı ve yönetilen örnek veritabanı performans sorunlarını gidermek için Intelligent Insights'ı kullanmak için bkz: [akıllı Öngörüler ile ilgili sorunları giderme Azure SQL veritabanı performans sorunlarını](sql-database-intelligent-insights-troubleshoot-performance.md).
+SQL veritabanı performans sorunlarını keşfetme ve sorun giderme Akıllı İçgörüler. SQL veritabanı ve yönetilen örnek veritabanı performans sorunlarını gidermek için Akıllı İçgörüler kullanmak için bkz. [akıllı içgörüler Azure SQL veritabanı performans sorunlarını giderme](sql-database-intelligent-insights-troubleshoot-performance.md).
 
-## <a name="configure-intelligent-insights"></a>Intelligent ınsights'ı yapılandırma
+## <a name="intelligent-insights-options"></a>Akıllı İçgörüler seçenekleri
 
-Akıllı İçgörüler çıktısını bir akıllı Performans Tanılama Günlüğü ' dir. Bu günlük, Azure SQL Analytics, Azure Event Hubs'a ve Azure depolama için akış aracılığıyla çeşitli şekillerde - tüketilebilir veya bir üçüncü taraf ürün.
+Azure SQL veritabanı 'nda kullanılabilir Akıllı İçgörüler seçenekleri şunlardır:
 
-- Ürün ile birlikte kullanmak [Azure SQL Analytics](https://docs.microsoft.com/azure/log-analytics/log-analytics-azure-sql) Azure portalı kullanıcı arabirimi aracılığıyla öngörülerini görüntülemek için. Tümleşik Azure çözüm ve öngörülerini görüntülemek için en tipik yöntemi budur.
-- Ürün geliştirme için özel izleme ve uyarı senaryoları biri Azure Event Hubs ile kullanma
-- Ürün özel uygulama geliştirme için Azure depolama ile kullanın, örneğin özel raporlama, uzun süreli veri arşivleme ve benzeri gibi sunulur.
+| Akıllı İçgörüler seçeneği | Tek veritabanı ve havuza alınmış veritabanı desteği | Örnek veritabanı desteği |
+| :----------------------------- | ----- | ----- |
+| **Akıllı içgörüler yapılandırma** -veritabanlarınız için akıllı içgörüler analizini yapılandırın. | Yes | Yes | 
+| Azure SQL veritabanı için Azure SQL Analytics izleme çözümüne akış öngörülerini **Azure SQL Analytics** . | Yes | Yes | 
+| Daha fazla özel Tümleştirmeler için Event Hubs, **Olay Hub 'ına** akış öngörüleri alın. | Yes | Yes | 
+| **Azure depolama** hakkında bilgi edinin-daha fazla analiz ve uzun süreli arşivleme Için Azure depolama ile akış öngörüleri. | Yes | Yes |
 
-Akıllı İçgörüler diğer ürünlerle Azure SQL Analytics, Azure olay hub'ı, Azure depolama veya üçüncü taraf ürünleri için tüketim tümleştirilmesi ilk etkinleştirme akıllı günlük Insights'ta ("SQLInsights" günlüğü) tanı aracılığıyla gerçekleştirilir ayarlar dikey penceresinden bir veritabanı ve Intelligent Insights'ı yapılandırma verilerini bu ürünlerden birine akışla oturum açın.
+## <a name="configure-intelligent-insights"></a>Akıllı İçgörüler Yapılandır
 
-Akıllı İçgörüler günlük kaydını etkinleştirmek ve alıcı ürüne akışını günlüğü verilerini yapılandırmak için nasıl hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı ölçümleri ve tanılama günlüğünü](sql-database-metrics-diag-logging.md).
+Akıllı İçgörüler çıkışı, akıllı bir performans tanılama günlüğü. Bu günlük, Azure SQL Analytics, Azure Event Hubs ve Azure depolama ya da üçüncü taraf ürünü için akış yapmak üzere çeşitli yollarla tüketilebilir.
 
-### <a name="set-up-with-azure-sql-analytics"></a>Azure SQL Analytics ile ayarlama
+- Azure portal kullanıcı arabiriminden öngörüleri görüntülemek için [Azure SQL Analytics](https://docs.microsoft.com/azure/log-analytics/log-analytics-azure-sql) ürünü kullanın. Bu, tümleşik Azure çözümüdür ve öngörüleri görüntülemenin en yaygın yoludur.
+- Özel izleme ve uyarı senaryoları geliştirmek için ürünü Azure Event Hubs kullanın
+- Özel uygulama geliştirme için (örneğin, özel raporlama, uzun vadeli veri arşivleme vb.) ürünü Azure Storage ile birlikte kullanın.
 
-Azure SQL Analytics çözümünü grafik kullanıcı arabirimi, raporlama ve uyarı verme özellikleri veritabanı performansını sağlar, yanı sıra akıllı Öngörüler tanılama verilerini günlüğe kaydedebilirsiniz.
+Akıllı İçgörüler diğer ürünlerle Azure SQL Analytics, Azure Olay Hub 'ı, Azure depolama alanı veya üçüncü taraf ürünleri, tüketim için ilk olarak Akıllı İçgörüler günlüğe kaydetme ("Sqlinsıghts" günlüğü) kullanılarak yapılır. bir veritabanının ayarlar dikey penceresi ve sonra bu ürünlerden birine akışa eklenecek Akıllı İçgörüler günlük verilerini yapılandırma.
+
+Akıllı İçgörüler günlüğe kaydetme özelliğini etkinleştirme ve günlük verilerinin bir tüketen ürüne akışını yapılandırma hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı ölçümleri ve tanılama günlüğü](sql-database-metrics-diag-logging.md).
+
+### <a name="set-up-with-azure-sql-analytics"></a>Azure SQL Analytics ayarla
+
+Azure SQL Analytics çözüm, veritabanı performansına ilişkin grafik kullanıcı arabirimi, raporlama ve uyarı özelliklerini Akıllı İçgörüler tanılama günlük verileriyle birlikte sağlar.
 
 > [!TIP]
-> Hızlı Başlangıç: Veritabanı performans sorunlarını grafik kullanıcı arabirimi sağlayan Azure SQL Analytics ile birlikte kullanmak için Intelligent Insights'ı kullanarak hızlı bir başlangıç kapalı almak için en kolay yolu olan. Azure SQL Analytics çözümünü marketten ekleyin, bu çözüm içindeki bir çalışma alanı oluşturun ve üzerinde Intelligent Insights'ı etkinleştirmek istediğiniz her veritabanı için bir veritabanı için tanılama ayarları dikey penceresindeki "SQLInsights" günlük akışını yapılandırın Azure SQL Analytics çalışma alanı.
+> Hızlı başlangıç: Akıllı İçgörüler kullanarak baştan sona almanın en kolay yolu, veritabanı performans sorunlarına bir grafik kullanıcı arabirimi sağlayan Azure SQL Analytics birlikte kullanmaktır. Market 'ten Azure SQL Analytics çözüm ekleyin, bu çözüm içinde bir çalışma alanı oluşturun ve Akıllı İçgörüler etkinleştirmek istediğiniz her veritabanı için bir veritabanının Tanılama ayarları dikey penceresinde "Sqlinsıghts" günlüğünün akışını yapılandırın Azure SQL Analytics çalışma alanı.
 >
 
-Ön gereksinim olan Azure SQL Analytics marketten Azure portalı panonuza eklenir ve bir çalışma alanı oluşturmak için bkz. [Azure SQL Analytics yapılandırın](../azure-monitor/insights/azure-sql.md#configuration)
+Ön gereksinim, Market 'ten Azure portal panonuza Azure SQL Analytics eklenir ve bir çalışma alanı oluşturmak için bkz. [yapılandırma Azure SQL Analytics](../azure-monitor/insights/azure-sql.md#configuration)
 
-Akıllı İçgörüler Azure SQL Analytics ile kullanmak için önceki adımda oluşturduğunuz Azure SQL Analytics çalışma alanına akışını Intelligent Insights günlük verilerini yapılandırma Bkz [Azure SQL veritabanı ölçümleri ve tanılama günlüğü](sql-database-metrics-diag-logging.md).
+Azure SQL Analytics Akıllı İçgörüler kullanmak için, önceki adımda oluşturduğunuz Azure SQL Analytics çalışma alanına akışa almak üzere Akıllı İçgörüler günlük verilerini yapılandırmak için bkz. [Azure SQL veritabanı ölçümleri ve tanılama günlüğü](sql-database-metrics-diag-logging.md).
 
-Aşağıdaki örnek, Azure SQL Analytics bir akıllı Öngörüler görüntülenen gösterir:
+Aşağıdaki örnek, Azure SQL Analytics ile görüntülenen bir Akıllı İçgörüler gösterir:
 
 ![Akıllı İçgörüler raporu](./media/sql-database-intelligent-insights/intelligent-insights-azure-sql-analytics.png)
 
-### <a name="set-up-with-event-hubs"></a>Event Hubs ile ayarlama
+### <a name="set-up-with-event-hubs"></a>Event Hubs ayarla
 
-Event Hubs ile akıllı İçgörüler kullanmak için Event Hubs'a akışını görmek için günlük verilerini akıllı İçgörüler yapılandırma [Stream Azure tanılama günlüklerinin Event Hubs'a](../azure-monitor/platform/diagnostic-logs-stream-event-hubs.md).
+Event Hubs Akıllı İçgörüler kullanmak için Akıllı İçgörüler günlük verilerini Event Hubs akışa almak üzere yapılandırın, bkz. [Event Hubs Için Azure tanılama günlüklerini akış](../azure-monitor/platform/resource-logs-stream-event-hubs.md).
 
-Özel İzleme ve uyarı kurmak için Event Hubs'ı kullanmak için bkz: [ölçümleri ve tanılama özellikli yapmanız gerekenler günlüklerini, olay hub'ları](sql-database-metrics-diag-logging.md#what-to-do-with-metrics-and-diagnostics-logs-in-event-hubs).
+Özel izleme ve uyarı ayarlamak için Event Hubs kullanmak için, bkz. [Event Hubs ' de ölçümler ve tanılama günlükleri Ile neler yapılır](sql-database-metrics-diag-logging.md#what-to-do-with-metrics-and-diagnostics-logs-in-event-hubs).
 
-### <a name="set-up-with-azure-storage"></a>Azure Depolama'yı ayarlama
+### <a name="set-up-with-azure-storage"></a>Azure depolama ile ayarlama
 
-Akıllı İçgörüler depolama ile kullanmak için Intelligent Insights günlük verileri depolama alanına akışla öğrenmek için yapılandırma [Stream Azure Depolama'ya](sql-database-metrics-diag-logging.md#stream-into-storage).
+Depolama ile Akıllı İçgörüler kullanmak için Akıllı İçgörüler günlük verilerinin depolama alanına akışını yapılandırın, bkz. [Azure Storage 'Da akış](sql-database-metrics-diag-logging.md#stream-into-storage).
 
-### <a name="custom-integrations-of-intelligent-insights-log"></a>Akıllı Öngörüler günlüğü, özel tümleştirmeler
+### <a name="custom-integrations-of-intelligent-insights-log"></a>Akıllı İçgörüler günlüğü için özel tümleştirmeler
 
-Üçüncü taraf araçlarla veya birleştirilerek özel uyarılar ve geliştirme izleme Intelligent ınsights'ı kullanmak için bkz [Intelligent Insights veritabanı performans tanılama günlük kullanım](sql-database-intelligent-insights-use-diagnostics-log.md).
+Üçüncü taraf araçlarla Akıllı İçgörüler kullanmak veya özel uyarı ve izleme geliştirmesi için, bkz. [akıllı içgörüler veritabanı performansı tanılama günlüğünü kullanma](sql-database-intelligent-insights-use-diagnostics-log.md).
 
 ## <a name="detection-metrics"></a>Algılama ölçümleri
 
-Akıllı Öngörüler oluşturmak olan algılama modelleri için kullanılan ölçümleri izleme temel alan:
+Akıllı İçgörüler üreten algılama modelleri için kullanılan ölçümler izlemeye dayalıdır:
 
 - Sorgu süresi
 - Zaman aşımı istekleri
 - Aşırı bekleme süresi
-- İstek hata verme
+- Hatalı istekler
 
-Sorgu süre ve zaman aşımı istekleri, birincil veritabanı iş yükü performansı ile ilgili sorunlar algılanıyor modelleri olarak kullanılır. Bunlar iş yükü neler doğrudan ölçmek için kullanılırlar. Performans düşüşü, aşırı iş yükü performansını tüm olası durumları algılamaya süre bekleyin ve kapanan istekleri ek modelleri iş yükü performansını etkileyen sorunları belirtmek için kullanılır.
+Sorgu süresi ve zaman aşımı istekleri, veritabanı iş yükü performansıyla ilgili sorunları tespit eden birincil modeller olarak kullanılır. Bunlar, iş yüküyle neler olduğunu doğrudan ölçdiklerinden kullanılır. İş yükü performansının azalmasına ilişkin tüm olası durumları algılamak için, aşırı bekleme süresi ve hatalı çıkış istekleri, iş yükü performansını etkileyen sorunları göstermek için ek modeller olarak kullanılır.
 
-Sistem otomatik olarak iş yükü değişiklikleri göz önünde bulundurur ve veritabanı için dinamik olarak yapılan sorgu isteği sayısı değişiklikleri normal ve çıkış sıradan veritabanı performans eşikleri belirleyin.
+Sistem, otomatik olarak iş yükündeki değişiklikleri ve normal ve sıradan veritabanı performans eşiklerini dinamik olarak belirlemede veritabanına yapılan sorgu isteklerinin sayısını göz önünde bulundurur.
 
-Tüm ölçümler birlikte algılanan her bir performans sorunu kategorilere ayıran bir scientifically türetilmiş veri modeli aracılığıyla çeşitli ilişkileri olarak kabul edilir. Bir akıllı Öngörüler sağlanan bilgileri içerir:
+Tüm ölçümler, algılanan her bir performans sorununu kategorilere ayırır scientifically türetilen bir veri modeli aracılığıyla çeşitli ilişkilerde birlikte değerlendirilir. Akıllı bir öngörü ile sunulan bilgiler şunları içerir:
 
-- Algılanan performans sorunu ayrıntıları.
-- Kök neden analizi bir sorun algılandı.
-- Mümkün olduğunda izlenen SQL veritabanının performansını geliştirmeye yönelik öneriler.
+- Algılanan performans sorununun ayrıntıları.
+- Algılanan sorunun kök neden analizi.
+- Mümkün olduğunda izlenen SQL veritabanının performansının nasıl geliştirileceğine ilişkin öneriler.
 
 ## <a name="query-duration"></a>Sorgu süresi
 
-Sorgu süresi düşüşü modelini bireysel sorguya analiz eder ve artırma derlenip performans taban çizgisine göre bir sorgu yürütme süresini de algılar.
+Sorgu süresi performansında azalma modeli, tek tek sorguları analiz eder ve performans temeline kıyasla bir sorgu derlemek ve yürütmek için geçen sürede artışı algılar.
 
-Derleme sorgu veya sorgu yürütme süresi, iş yükü performansını etkileyen SQL veritabanı'nın yerleşik zekası önemli bir artış algılarsa, bu sorguları sorgu süresi işaretlenmiş performans düşüşü sorunlarını.
+SQL veritabanı yerleşik zeka, sorgu derleme veya sorgu yürütme süresinde iş yükü performansını etkileyen önemli bir artış algılarsa, bu sorgular sorgu süresi performansında azalma sorunları olarak işaretlenir.
 
-Akıllı Öngörüler Tanılama Günlüğü performansı düşürülmüş sorguyu sorgu karması çıkarır. Sorgu karması, gelen performans azalmasını hangi sorgu süresini artan sorgu derleme ya da yürütme süresi artırmak için ilgili olup olmadığını gösterir.
+Akıllı İçgörüler tanılama günlüğü, sorgunun sorgu karmasının performans düşüklüğü olduğunu çıktı. Sorgu karması, sorgu süresi süresini arttığı sorgu derleme veya yürütme süresi artışla ilgili performans düşüşünün olup olmadığını gösterir.
 
 ## <a name="timeout-requests"></a>Zaman aşımı istekleri
 
-Zaman aşımı istekleri performans düşüşü modeli, her sorgu analiz eder ve sorgu yürütme düzeyinde zaman aşımları ve genel istek zaman aşımı ve veritabanı düzeyinde performans taban çizgisi döneme göre herhangi bir artış algılar.
+Zaman aşımı isteklerinin performansında azalma modeli, tek tek sorguları analiz eder ve sorgu yürütme düzeyindeki zaman aşımlarındaki artışların yanı sıra performans temeli dönemine kıyasla veritabanı düzeyinde genel istek zaman aşımlarını algılar.
 
-Yürütme aşaması bile ulaşmadan önce bazı sorgular zaman aşımına uğrayabilir. Durdurulan çalışan istekleri ve araçlarla, SQL veritabanı'nın yerleşik zekası, ölçer ve yürütme aşamasına veya var olup olmadığını veritabanı sınırına tüm sorguları analiz eder.
+Bazı sorgular, yürütme aşamasına ulaşmadan önce bile zaman aşımına uğrar. Durdurulan çalışanların ve isteklerin yanı sıra SQL veritabanı yerleşik zeka ölçüleri ve yürütme aşamasına sahip olup olmadıklarında veritabanına ulaşan tüm sorguları analiz eder.
 
-Yürütülen sorgulara ilişkin zaman aşımlarını sayısı veya iptal edilen istek çalışanların sayısını sistem yönetilen eşiği aştığında sonra ile akıllı Öngörüler Tanılama Günlüğü doldurulur.
+Yürütülen sorgular için zaman aşımı sayısı veya durdurulan istek çalışanlarının sayısı sistem tarafından yönetilen eşikten kesişdikten sonra, akıllı Öngörüler ile bir tanılama günlüğü doldurulur.
 
-Oluşturulan ınsights zaman aşımına uğrayan istek sayısı ve zaman aşımına uğradı sorguların sayısını içerir. Genel veritabanı düzeyi sağlanan veya performans düşüşü göstergesi yürütme aşamasında zaman aşımı artış ile ilgilidir. Zaman aşımları artış veritabanı performans için önemli kabul edilir, bu sorguları zaman aşımı performans düşüşü sorunlarını işaretlenir.
+Oluşturulan Öngörüler, zaman aşımına uğrayan isteklerin sayısını ve zaman aşımına uğrayan sorguların sayısını içerir. Performans düşüşünün, yürütme aşamasında zaman aşımı artışla ilgili göstergesi veya genel veritabanı düzeyi verilmiştir. Zaman aşımları içindeki artış veritabanı performansı açısından önemli kabul edildiğinde, bu sorgular zaman aşımı performansı performansında azalma sorunları olarak işaretlenir.
 
-## <a name="excessive-wait-times"></a>Aşırı bekleme süreleri
+## <a name="excessive-wait-times"></a>Aşırı bekleme süresi
 
-Tek veritabanı sorguları aşırı bekleme zaman modeli izler. Bu, sistem tarafından yönetilen mutlak eşiklerin aşıldığı olağandışı ölçüde yüksek sorgu bekleme istatistikleri algılar. Aşağıdaki sorgu, aşırı bekleme süresi ölçümleri, Query Store bekleme istatistikleri (sys.query_store_wait_stats) yeni SQL Server özelliğini kullanarak uyulması gereken:
+Aşırı bekleme süresi modeli, tek veritabanı sorgularını izler. Sistem tarafından yönetilen mutlak eşikleri engelleyen olağandışı yüksek sorgu bekleme istatistiklerini algılar. Aşağıdaki sorgu çok fazla bekleme süresi ölçümleri yeni SQL Server özelliği kullanılarak gözlemlenir, sorgu deposu bekleme Istatistikleri (sys. query_store_wait_stats):
 
-- Kaynak sınırlarını ulaşma
-- Elastik havuz kaynak sınırlarını ulaşma
-- Aşırı sayıda çalışan veya oturumu iş parçacıkları
+- Kaynak sınırlarına ulaşma
+- Elastik havuz kaynağı sınırlarına ulaşma
+- Aşırı sayıda çalışan veya oturum iş parçacığı
 - Aşırı veritabanı kilitleme
 - Bellek baskısı
 - Diğer bekleme istatistikleri
 
-Kaynak sınırlarını ulaşma veya elastik havuz kaynak sınırları üzerinde bir abonelik veya esnek havuzdaki kullanılabilir kaynakların tüketimini mutlak eşikler aşıldığında gösterir. İstatistiklerine iş yükü performans düşüşü gösterir. Çalışan veya oturumu iş parçacıklarının aşırı sayıda içinde çalışan iş parçacıkları veya başlatılan oturumları sayısını mutlak eşiklerin aşıldığı bir durumu gösterir. İstatistiklerine iş yükü performans düşüşü gösterir.
+Kaynak sınırlarına veya elastik havuz kaynağı sınırlarına ulaşıldığında, bir abonelikte veya elastik havuzda bulunan kullanılabilir kaynakların tüketimi, mutlak eşiklerin çapraz olduğunu gösterir. Bu istatistikler iş yükü performansının azalmasına işaret ediyor. Aşırı sayıda çalışan veya oturum iş parçacığı, çok sayıda çalışan iş parçacığı veya oturum sayısının çapraz mutlak eşiklerinin başlatıldığını gösterir. Bu istatistikler iş yükü performansının azalmasına işaret ediyor.
 
-Aşırı veritabanı kilitleme, bir veritabanında kilit sayısı mutlak eşikler aşıldığında bir koşul gösterir. Bu durum, iş yükü performans düşüşü gösterir. Bellek baskısı bellek isteyen iş parçacığı sayısını veren bir koşul mutlak bir eşiği aşıldı. Bu durum, iş yükü performans düşüşü gösterir.
+Aşırı veritabanı kilitlemesi, bir veritabanındaki kilit sayısının çapraz mutlak eşiklere sahip olduğu bir koşulu belirtir. Bu stat bir iş yükü performansında düşme olduğunu gösterir. Bellek baskısı, bellek isteyen iş parçacığı sayısının mutlak bir eşiğe eşit olarak geçmediğini belirten bir durumdur. Bu stat bir iş yükü performansında düşme olduğunu gösterir.
 
-Diğer bekleme istatistikleri algılama, Query Store bekleyin istatistikleri ölçülür çeşitli ölçümleri mutlak bir eşiği aşıldığında bir koşulu belirtir. İstatistiklerine iş yükü performans düşüşü gösterir.
+Diğer bekleme istatistikleri algılama, çeşitli ölçümlerin sorgu deposu bekleme Istatistikleri ile mutlak bir eşiğe geçtiğini belirten bir koşul gösterir. Bu istatistikler iş yükü performansının azalmasına işaret ediyor.
 
-Aşırı bekleme süresini algılandığında, kullanılabilir verileri bağlı olarak sonra Akıllı Öngörüler tanılama performans, beklenecek sorguları, yürütme neden ölçümleri ayrıntılarını düşürülmüş etkileyen ve etkilenen sorgularının çıktıları karmaları oturum ve ölçülen bekleme süresi.
+Çok fazla bekleme süresi algılandıktan sonra, kullanılabilir verilere bağlı olarak, Akıllı İçgörüler tanılama günlüğü, etkilenen ve etkilenen sorguların karma değerlerini performans, sorguların yürütülmeyi beklemesine neden olan ölçümlerin ayrıntılarını verir ve ölçülen bekleme süresi.
 
-## <a name="errored-requests"></a>Dönemdeki hatalı istek
+## <a name="errored-requests"></a>Hatalı istekler
 
-İzleyiciler tek sorgular ve hata verme temel dönemindeki karşılaştırıldığında, sorgu sayısında artış algılar dönemdeki hatalı istek performans düşüşü modeli. Bu model, SQL veritabanı yerleşik zekası ile yönetilen mutlak eşiklerin aşıldığı kritik özel durumlar da izler. Sistem veritabanı ve iş yükü değişiklikleri hesaplar izlenen dönem içinde yapılan sorgu isteği sayısı otomatik olarak değerlendirir.
+Hatalı istek performansında azalma modeli, tek tek sorguları izler ve temel noktayla karşılaştırıldığında hatalı sorgu sayısında artış algılar. Bu model, SQL Database yerleşik zeka tarafından yönetilen mutlak eşiklerin çapraz olduğu önemli özel durumları da izler. Sistem, veritabanında yapılan sorgu isteklerinin sayısını ve izlenen dönemdeki herhangi bir iş yükü değişikliği için hesapları otomatik olarak değerlendirir.
 
-Ölçülen artış dönemdeki hatalı istek yapılan istekleri, toplam sayısına göre iş yükü performansının önemli kabul edilir, etkilenen sorgular dönemdeki hatalı istek performans düşüşü sorunlarını işaretlenir.
+Yapılan isteklerin genel sayısına göre hatalı isteklerindeki ölçülen artış, iş yükü performansı açısından önemli kabul edildiğinde, etkilenen sorgular hatalı istekleri performans performansında azalma sorunları olarak işaretlenir.
 
-Akıllı İçgörüler günlük dönemdeki hatalı istek sayısı çıkarır. Bu, gelen performans azalmasını dönemdeki hatalı istek artış veya izlenen kritik özel durum eşiği ve performans düşüşü ölçülen süresi geçmeden ilgili gösterir.
+Akıllı İçgörüler günlüğü hatalı isteklerin sayısını verir. Performans düşüşünün hatalı isteklerindeki artışla mi yoksa izlenen kritik özel durum eşiğini ve performans düşüşünün ölçüldüğü ile ilgili olduğunu gösterir.
 
-İzlenen kritik özel durumlar sistem tarafından yönetilen mutlak eşikleri arası bir akıllı Öngörüler kritik özel durum ayrıntıları ile oluşturulur.
+İzlenen kritik özel durumlar sistem tarafından yönetilen mutlak eşiklerden fazla olursa, kritik özel durum ayrıntılarıyla bir akıllı öngörü oluşturulur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi edinmek için nasıl [akıllı Öngörüler ile SQL veritabanı performans sorunlarını giderme](sql-database-intelligent-insights-troubleshoot-performance.md).
-- Kullanım [Intelligent Insights SQL veritabanı performans tanılama günlüğü](sql-database-intelligent-insights-use-diagnostics-log.md).
-- Bilgi edinmek için nasıl [SQL Analytics kullanarak SQL veritabanını İzle](../azure-monitor/insights/azure-sql.md).
-- Bilgi edinmek için nasıl [toplamak ve Azure kaynaklarınızdan günlük verilerini kullanma](../azure-monitor/platform/diagnostic-logs-overview.md).
+- [Akıllı içgörüler Ile SQL veritabanı performans sorunlarını giderme](sql-database-intelligent-insights-troubleshoot-performance.md)hakkında bilgi edinin.
+- [SQL veritabanı performans tanılama günlüğünü akıllı içgörüler](sql-database-intelligent-insights-use-diagnostics-log.md)kullanın.
+- SQL Analytics 'i [kullanarak SQL veritabanı izleme](../azure-monitor/insights/azure-sql.md)hakkında bilgi edinin.
+- [Azure kaynaklarınızdan günlük verilerini nasıl toplayacağınızı ve](../azure-monitor/platform/resource-logs-overview.md)kullanacağınızı öğrenin.

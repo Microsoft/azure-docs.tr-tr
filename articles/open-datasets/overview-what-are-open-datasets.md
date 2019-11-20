@@ -1,61 +1,61 @@
 ---
 title: Açık veri kümeleri nelerdir? Seçkin ortak veri kümeleri
-titleSuffix: Azure Open Datasets (preview)
-description: Azure açık veri kümeleri (Önizleme), machine learning ve analytics çözümleri kullanıma hazır olan seçkin veri kümeleri ortak etki alanından hakkında bilgi edinin. Veri kümeleri, hava durumu, görselleştirmenizdeki, tatiller ve Tahmine dayalı çözüm zenginleştirin yardımcı olması için konum gibi genel verileri içerir.
+titleSuffix: Azure Open Datasets
+description: Tahmine dayalı çözümlerin zenginleştirildiği Azure açık veri kümeleri, hava durumu, Census, tatiller ve konum gibi genel etki alanından seçkin veri kümeleri hakkında bilgi edinin.
 ms.service: open-datasets
 ms.topic: overview
 author: cjgronlund
 ms.author: cgronlun
-ms.date: 05/02/2019
-ms.openlocfilehash: b01ad5a4fd8808c1e841ba2fb47ea06ece011010
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/04/2019
+ms.openlocfilehash: fd5697f9c325dc4ad866c333ce1b20e008ebfa24
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67051053"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606168"
 ---
-# <a name="what-are-azure-open-datasets-preview-and-how-can-you-use-them"></a>Azure açık veri kümeleri (Önizleme) nedir ve bunları nasıl kullanabileceğiniz?
+# <a name="what-are-azure-open-datasets-and-how-can-you-use-them"></a>Azure açık veri kümeleri nedir ve bunları nasıl kullanabilirsiniz?
 
-[Azure açık veri kümeleri](https://azure.microsoft.com/services/open-datasets/) seçkin daha doğru modeller için makine öğrenimi çözümleri senaryoya özgü özellikler eklemek için kullanabileceğiniz ortak veri kümelerinin olduğunu. Açık veri kümeleri, Microsoft Azure bulutta bulunan ve Azure Databricks, Machine Learning hizmeti ve Machine Learning Studio kullanıma hazırdır. Ayrıca, veri kümeleri API'leri aracılığıyla erişmesini ve bunları Power BI ve Azure Data Factory gibi diğer ürünleri de kullanabilirsiniz.
+[Azure açık veri](https://azure.microsoft.com/services/open-datasets/) kümeleri, daha doğru modeller için makine öğrenimi çözümlerine senaryoya özgü özellikler eklemek için kullanabileceğiniz, seçkin ortak veri kümeleridir. Açık veri kümeleri bulutta Microsoft Azure ve Azure Machine Learning tümleşiktir ve Azure Databricks ve Machine Learning Studio (klasik) ile kolayca kullanılabilir. Ayrıca, veri kümelerine API 'Ler aracılığıyla erişebilir ve bunları Power BI ve Azure Data Factory gibi diğer ürünlerde kullanabilirsiniz.
 
-Genel etki alanı veri hava durumu, görselleştirmenizdeki, tatil, kamu güvenliği için veri kümeleri içerir ve yardımcı konumu makine öğrenimi modellerini eğitmenize ve Tahmine dayalı çözüm zenginleştirin. Ayrıca, açık veri kümeleri Azure üzerinde genel veri kümelerinizi paylaşabilirsiniz. 
+Veri kümeleri, makine öğrenimi modellerini ve zenginleştirme çözümlerini eğitmenize yardımcı olan hava durumu, Census, tatiller, genel güvenlik ve konum için genel etki alanı verilerini içerir. Ayrıca, Azure açık veri kümelerinde ortak veri kümelerinizi de paylaşabilirsiniz. 
 
-![Azure açık veri kümeleri bileşenleri](./media/overview-what-are-open-datasets/open-datasets-components.png)
+![Azure açık veri kümesi bileşenleri](./media/overview-what-are-open-datasets/open-datasets-components.png)
 
-## <a name="curated-prepared-datasets"></a>Seçkin, hazır veri kümeleri
-Seçkin açık genel veri kümeleri Azure kümelerindeki açın, machine learning iş akışlarında tüketim için iyileştirilmiştir. 
+## <a name="curated-prepared-datasets"></a>Seçkin, hazırlanan veri kümeleri
+Azure açık veri kümelerinde seçkin açık genel veri kümeleri, makine öğrenimi iş akışlarında tüketim için iyileştirilmiştir. 
 
-Veri bilimcileri, temizleme ve Gelişmiş analiz için verileri hazırlama zamanlarının çoğunu genellikle ayırın. Açık veri kümeleri Azure bulutuna kopyalanır ve size zaman kazandırmak için önceden işlenmiş. Düzenli aralıklarla veri kaynaklarından gibi bir FTP bağlantısı tarafından Ulusal Okyanus ve Atmosfer Yönetimi (NOAA), yapılandırılmış bir biçime ayrıştırılmış çekilen ve ardından posta kodu veya konumu gibi özellikler ile uygun şekilde zenginleştirilmiş en yakın hava durumu istasyonu.
+Veri bilimcileri, genellikle gelişmiş analizler için verileri temizleme ve hazırlama zamanının çoğunu harcamaktadır. Açık veri kümeleri Azure bulutuna kopyalanır ve zamandan tasarruf etmek için önceden işlenir. Düzenli aralıklarla veriler, Ulusal Okyanus ve atmosfer yönetimine (NOAA) FTP bağlantısı gibi kaynaklardan alınır. Ardından, veriler yapılandırılmış bir biçimde ayrıştırılır ve ardından ZIP kodu veya en yakın hava durumu istasyonun konumu gibi özelliklerle uygun şekilde zenginleştirir.
 
-Veri kümeleri, Azure yapmayı erişim ve daha kolay işleme ile bulut işlem cohosted.  
+Veri kümeleri, Azure 'da erişim ve düzenleme daha kolay hale getirerek bulut işlem ile birlikte barındırılır.  
 
-Veri kümeleri kullanılabilir örnekleri aşağıda verilmiştir. 
+Aşağıda, kullanılabilir veri kümeleri örnekleri verilmiştir. 
 
 ### <a name="weather-data"></a>Hava durumu verileri
  
 |Veri kümesi         | Notebooks     | Açıklama                                    |
 |----------------|---------------|------------------------------------------------|
-|[Tümleşik NOAA yüzey veri (ISD)](https://azure.microsoft.com/services/open-datasets/catalog/noaa-integrated-surface-data/) | [Azure Notebooks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-integrated-surface-data/?tab=data-access#AzureNotebooks) <br> [Azure Databricks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-integrated-surface-data/?tab=data-access#AzureDatabricks) | Dünya çapında saatlik hava durumu verileri NOAA Kuzey Amerika, Avrupa, Avustralya ve Asya bölümleri içinde uzamsal en iyi kapsamına sahip. Her gün güncelleştirilir. |
-|[NOAA genel sistem (GFS) tahmin](https://azure.microsoft.com/services/open-datasets/catalog/noaa-global-forecast-system/) | [Azure Notebooks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-global-forecast-system/?tab=data-access#AzureNotebooks) <br> [Azure Databricks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-global-forecast-system/?tab=data-access#AzureDatabricks) | 15 günlük ABD saatlik hava durumu tahminini verilerden NOAA. Her gün güncelleştirilir. |
+|[NOAA tümleşik yüzey verileri (ıSD)](https://azure.microsoft.com/services/open-datasets/catalog/noaa-integrated-surface-data/) | [Azure Notebooks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-integrated-surface-data/?tab=data-access#AzureNotebooks) <br> [Azure Databricks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-integrated-surface-data/?tab=data-access#AzureDatabricks) | Kuzey Amerika, Avrupa, Avustralya ve Asya parçaları için en iyi uzamsal kapsama sahip NOAA 'den dünya çapındaki saatlik hava durumu verileri. Günlük olarak güncelleştirilir. |
+|[NOAA küresel tahmin sistemi (GFS)](https://azure.microsoft.com/services/open-datasets/catalog/noaa-global-forecast-system/) | [Azure Notebooks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-global-forecast-system/?tab=data-access#AzureNotebooks) <br> [Azure Databricks](https://azure.microsoft.com/services/open-datasets/catalog/noaa-global-forecast-system/?tab=data-access#AzureDatabricks) | NOAA 'den 15 günlük ABD/saat hava durumu tahmin verileri. Günlük olarak güncelleştirilir. |
 
 ### <a name="calendar-data"></a>Takvim verileri
 
 |Veri kümesi         | Notebooks     | Açıklama                                    |
 |----------------|---------------|------------------------------------------------|
-|[Genel tatiller](https://azure.microsoft.com/services/open-datasets/catalog/public-holidays/) | [Azure Notebooks](https://azure.microsoft.com/services/open-datasets/catalog/public-holidays/?tab=data-access#AzureNotebooks) <br> [Azure Databricks](https://azure.microsoft.com/services/open-datasets/catalog/public-holidays/?tab=data-access#AzureDatabricks) | 41 ülkeler ya da 1970 bölgelerden 2099 için kapsayan, dünya çapında genel tatil verileri. Ülke ve çoğu kişi olup olmadığı zaman ödemesi içerir. |
+|[Ortak tatiller](https://azure.microsoft.com/services/open-datasets/catalog/public-holidays/) | [Azure Notebooks](https://azure.microsoft.com/services/open-datasets/catalog/public-holidays/?tab=data-access#AzureNotebooks) <br> [Azure Databricks](https://azure.microsoft.com/services/open-datasets/catalog/public-holidays/?tab=data-access#AzureDatabricks) | 41 ülke veya bölge ile 2099 1970 arasındaki dünya çapında ortak tatil verileri. Ülke ve insanların büyük bir süre kapalı olup olmadığını içerir. |
 
 ## <a name="access-to-datasets"></a>Veri kümelerine erişim  
-Bir Azure hesabı, açık veri kümeleri kullanılarak kod erişebilir veya arabirimi Azure hizmet. Azure bulut işlem kaynaklarının kullanılmak üzere makine öğrenimi çözüm ile birlikte verilerdir.  
+Azure hesabıyla, kod kullanarak veya Azure hizmet arabirimi aracılığıyla açık veri kümelerine erişebilirsiniz. Veriler, Machine Learning çözümünüzde kullanılmak üzere Azure bulut işlem kaynaklarıyla birlikte bulunur.  
 
-Açık veri kümeleri, verileri Azure Databricks ve Azure Machine Learning hizmeti ile bağlanmak için kullanabileceğiniz Azure not defterleri ve Azure Databricks not defterleri sağlar. Veri kümeleri, bir Python SDK'sı da erişilebilir. 
+Açık veri kümeleri Azure Machine Learning kullanıcı arabirimi ve SDK aracılığıyla kullanılabilir. Açık veri kümeleri Ayrıca, Azure Machine Learning ve Azure Databricks veri bağlamak için kullanabileceğiniz Azure Notebooks ve Azure Databricks Not defterleri de sağlar. Veri kümelerine bir Python SDK üzerinden de erişilebilir. 
 
-Bununla birlikte, açık veri kümelerine erişim için bir Azure hesabınızın gerek yoktur; herhangi bir Python ortamından olmadan veya Spark olmadan erişebilir.
+Ancak açık veri kümelerine erişmeniz için bir Azure hesabınızın olması gerekmez; Bunlarla veya Spark olmadan herhangi bir Python ortamından erişebilirsiniz.
 
-## <a name="request-or-contribute-datasets"></a>İstek veya katkıda bulunan veri kümeleri
+## <a name="request-or-contribute-datasets"></a>Veri kümeleri isteme veya katkıda bulunma
 
-Verileri bulamazsanız, bize e-posta istediğiniz [bir veri kümesi istek](mailto:aod@microsoft.com?Subject=Request%20dataset%3A%20%3Creplace%20with%20dataset%20name%3E&Body=%0AYour%20name%20and%20institution%3A%20%0A%0ADataset%20name%3A%0A%20%0ADataset%20description%3A%20%0A%3Cfill%20in%20a%20brief%20description%20and%20share%20any%20web%20links%20of%20the%20dataset%3E%20%0A%0ADataset%20size%3A%20%0A%3Chow%20much%20space%20does%20the%20dataset%20need%20today%20and%20how%20much%20is%20it%20expected%20to%20grow%20each%20year%3E%20%0A%0ADataset%20file%20formats%3A%20%0A%3Ccurrent%20dataset%20file%20formats%2C%20and%20optionally%2C%20any%20formats%20that%20the%20dataset%20must%20be%20transformed%20to%20for%20easy%20access%3E%0A%0ALicense%3A%20%0A%3Cwhat%20is%20the%20license%20or%20terms%20and%20conditions%20governing%20the%20distribution%20of%20this%20dataset%3E%0A%0AUse%20cases%3A%20%0A%3CExplain%20some%20common%20use%20of%20the%20dataset.%20E.g.%20weather%20dataset%20can%20be%20useful%20in%20demand%20forecasting%20and%20predictive%20maintenance%20scenarios%3E%20%0A%0AAny%20additional%20information%20you%20want%20us%20to%20know%3A%0A) veya [bir veri kümesi katkıda](mailto:aod@microsoft.com?Subject=Contribute%20dataset%3A%20%3Creplace%20with%20dataset%20name%3E&Body=%0AYour%20name%20and%20institution%3A%20%0A%0ADataset%20name%3A%0A%20%0ADataset%20description%3A%20%0A%3Cfill%20in%20a%20brief%20description%20and%20share%20any%20web%20links%20of%20the%20dataset%3E%20%0A%0ADataset%20size%3A%20%0A%3Chow%20much%20space%20does%20the%20dataset%20need%20today%20and%20how%20much%20is%20it%20expected%20to%20grow%20each%20year%3E%20%0A%0ADataset%20file%20formats%3A%20%0A%3Ccurrent%20dataset%20file%20formats%2C%20and%20optionally%2C%20any%20formats%20that%20the%20dataset%20must%20be%20transformed%20to%20for%20easy%20access%3E%0A%0ALicense%3A%20%0A%3Cwhat%20is%20the%20license%20or%20terms%20and%20conditions%20governing%20the%20distribution%20of%20this%20dataset%3E%0A%0AUse%20cases%3A%20%0A%3CExplain%20some%20common%20use%20of%20the%20dataset.%20E.g.%20weather%20dataset%20can%20be%20useful%20in%20demand%20forecasting%20and%20predictive%20maintenance%20scenarios%3E%20%0A%0AAny%20additional%20information%20you%20want%20us%20to%20know%3A%0A). 
+İstediğiniz verileri bulamazsanız, bir veri kümesi [istemek](mailto:aod@microsoft.com?Subject=Request%20dataset%3A%20%3Creplace%20with%20dataset%20name%3E&Body=%0AYour%20name%20and%20institution%3A%20%0A%0ADataset%20name%3A%0A%20%0ADataset%20description%3A%20%0A%3Cfill%20in%20a%20brief%20description%20and%20share%20any%20web%20links%20of%20the%20dataset%3E%20%0A%0ADataset%20size%3A%20%0A%3Chow%20much%20space%20does%20the%20dataset%20need%20today%20and%20how%20much%20is%20it%20expected%20to%20grow%20each%20year%3E%20%0A%0ADataset%20file%20formats%3A%20%0A%3Ccurrent%20dataset%20file%20formats%2C%20and%20optionally%2C%20any%20formats%20that%20the%20dataset%20must%20be%20transformed%20to%20for%20easy%20access%3E%0A%0ALicense%3A%20%0A%3Cwhat%20is%20the%20license%20or%20terms%20and%20conditions%20governing%20the%20distribution%20of%20this%20dataset%3E%0A%0AUse%20cases%3A%20%0A%3CExplain%20some%20common%20use%20of%20the%20dataset.%20E.g.%20weather%20dataset%20can%20be%20useful%20in%20demand%20forecasting%20and%20predictive%20maintenance%20scenarios%3E%20%0A%0AAny%20additional%20information%20you%20want%20us%20to%20know%3A%0A) veya [bir veri kümesi ile katkıda](mailto:aod@microsoft.com?Subject=Contribute%20dataset%3A%20%3Creplace%20with%20dataset%20name%3E&Body=%0AYour%20name%20and%20institution%3A%20%0A%0ADataset%20name%3A%0A%20%0ADataset%20description%3A%20%0A%3Cfill%20in%20a%20brief%20description%20and%20share%20any%20web%20links%20of%20the%20dataset%3E%20%0A%0ADataset%20size%3A%20%0A%3Chow%20much%20space%20does%20the%20dataset%20need%20today%20and%20how%20much%20is%20it%20expected%20to%20grow%20each%20year%3E%20%0A%0ADataset%20file%20formats%3A%20%0A%3Ccurrent%20dataset%20file%20formats%2C%20and%20optionally%2C%20any%20formats%20that%20the%20dataset%20must%20be%20transformed%20to%20for%20easy%20access%3E%0A%0ALicense%3A%20%0A%3Cwhat%20is%20the%20license%20or%20terms%20and%20conditions%20governing%20the%20distribution%20of%20this%20dataset%3E%0A%0AUse%20cases%3A%20%0A%3CExplain%20some%20common%20use%20of%20the%20dataset.%20E.g.%20weather%20dataset%20can%20be%20useful%20in%20demand%20forecasting%20and%20predictive%20maintenance%20scenarios%3E%20%0A%0AAny%20additional%20information%20you%20want%20us%20to%20know%3A%0A)bulunmak için bize e-posta gönderin. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Örnek Not Defteri](samples.md)
-* [Öğretici: Regresyon NY ile taksi verileri modelleme](tutorial-opendatasets-automl.md)
-* [Açık veri kümeleri için Python SDK](https://aka.ms/open-datasets-api)
+* [Örnek Not defteri](samples.md)
+* [Öğretici: NY TAXI verileriyle gerileme modelleme](/azure/machine-learning/service/tutorial-auto-train-models?context=azure/open-datasets/context/open-datasets-context)
+* [Açık veri kümeleri için Python SDK](/python/api/azureml-opendatasets/?view=azure-ml-py)

@@ -1,102 +1,108 @@
 ---
-title: Azure depolama blobları için geçici silme | Microsoft Docs
-description: Azure Storage şimdi blob nesneler için geçici silme sunar, böylece, yanlışlıkla değişiklik veya bir uygulama veya başka bir depolama hesabı kullanıcı tarafından silinmiş verilerinizi daha kolay geri yükleyebilirsiniz.
+title: Azure depolama Blobları için geçici silme | Microsoft Docs
+description: Azure Storage artık BLOB nesnelerine geçici silme olanağı sunarak, verileri yanlışlıkla değiştirildiğinde veya bir uygulama ya da başka bir depolama hesabı kullanıcısı tarafından daha kolay bir şekilde kurtarabilmeniz için daha kolay bir şekilde silinebilir.
 services: storage
 author: tamram
 ms.service: storage
-ms.topic: article
-ms.date: 04/23/2019
+ms.topic: conceptual
+ms.date: 10/22/2019
 ms.author: tamram
 ms.subservice: blobs
-ms.openlocfilehash: f1c6f8074dab19b18f695763b160e4aeffe3ac44
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 6f6aa90553f3a69d2d287c7d59e166884a1a8f66
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67204844"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113738"
 ---
-# <a name="soft-delete-for-azure-storage-blobs"></a>Azure depolama BLOB'ları için geçici silme
-Azure Storage şimdi blob nesneler için geçici silme sunar, böylece, yanlışlıkla değişiklik veya bir uygulama veya başka bir depolama hesabı kullanıcı tarafından silinmiş verilerinizi daha kolay geri yükleyebilirsiniz.
+# <a name="soft-delete-for-azure-storage-blobs"></a>Azure depolama Blobları için geçici silme
 
-## <a name="how-does-it-work"></a>Nasıl çalışır?
-Etkinleştirildiğinde, geçici silme kaydedin ve BLOB'ları veya blob anlık görüntüleri silindiğinde verilerinizi kurtarmanıza olanak sağlar. Bu koruma, üzerine yazma sonucu olarak silinmesi blob verilerine genişletir.
+Azure Storage artık BLOB nesnelerine geçici silme olanağı sunarak, verileri yanlışlıkla değiştirildiğinde veya bir uygulama ya da başka bir depolama hesabı kullanıcısı tarafından daha kolay bir şekilde kurtarabilmeniz için daha kolay bir şekilde silinebilir.
 
-Veri silindiğinde, kalıcı olarak silinmiş yerine geçici silinen duruma geçer. Geçici silme açıktır ve verilerin üzerine verilerin üzerine yazılması durumunu kaydetmek için geçici silinen bir anlık görüntü üretilir. Geçici silinen nesneleri açıkça listelenen sürece görünmez. Geçici olarak silinen verileri kalıcı olarak süresinin dolması kurtarılabilir süresini yapılandırabilirsiniz.
+## <a name="how-soft-delete-works"></a>Geçici silmenin çalışması
 
-Geçici silme geriye dönük uyumludur; Bu özellik ortaya koymaktadır korumaları yararlanmak için uygulamalarınızı herhangi bir değişiklik gerekmez. Ancak, [veri kurtarma](#recovery) yeni kullanıma sunuyor **Blob silme işlemi geri** API.
+Etkin olduğunda, geçici silme, Bloblar veya blob anlık görüntüleri silindiğinde verilerinizi kaydetmenizi ve kurtarmanızı sağlar. Bu koruma, bir üzerine yazma sonucu olarak silinen blob verilerini genişletir.
+
+Veriler silindiğinde, kalıcı olarak silinmesi yerine geçici olarak silinen bir duruma geçer. Geçici silme açık olduğunda ve verilerin üzerine yazdığınızda, üzerine yazılan verilerin durumunu kaydetmek için geçici olarak silinen bir anlık görüntü oluşturulur. Geçici olarak listelenmediği takdirde geçici olarak silinen nesneler görünmez. Geçici silinen verilerin kullanım süresi kalıcı olarak sonlanmadan önce verilerin kaç kere kurtarılabileceğini yapılandırabilirsiniz.
+
+Geçici silme, geriye dönük olarak uyumludur, bu sayede bu özelliğin korumalarının avantajlarından yararlanmak için uygulamalarınızda herhangi bir değişiklik yapmanız gerekmez. Ancak, [veri kurtarma](#recovery) yeni bir **geri alma blob** API 'si sunar.
 
 ### <a name="configuration-settings"></a>Yapılandırma ayarları
-Yeni bir hesap oluşturduğunuzda, geçici silme varsayılan olarak kapalıdır. Geçici silme ayrıca var olan depolama hesapları için varsayılan olarak kapalıdır. Bir depolama hesabı kullanım ömrü boyunca herhangi bir zamanda açıp özellik geçiş yapabilirsiniz.
 
-Erişebilir ve bu özelliği devre dışı olduğunda geçici olarak silinen verileri kurtarmak varsayarak özelliği daha önce açıldı, geçici olarak silinen verileri kaydedildi. Geçici silme üzerinde etkinleştirdiğinizde, ayrıca saklama süresi yapılandırmanız gerekir.
+Yeni bir hesap oluşturduğunuzda, geçici silme varsayılan olarak kapalıdır. Geçici silme, var olan depolama hesapları için de varsayılan olarak kapalıdır. Bir depolama hesabının ömrü boyunca dilediğiniz zaman özelliği açık ve kapalı yapabilirsiniz.
 
-Saklama dönemi, geçici olarak silinen verileri depolanan ve kurtarma için kullanılabilir olduğu süre miktarını gösterir. Veriler silindiğinde blobları ve açıkça silinir blob anlık görüntüleri için bekletme süresini başlatır saat. Anlık görüntü oluşturulduğunda verilerin üzerine zaman geçici silme özelliği tarafından oluşturulan geçici silinen anlık görüntüleri için saati başlar. Şu anda 1-365 gün arasında için geçici olarak silinen verileri koruyabilirsiniz.
+Özellik devre dışı bırakıldığında geçici olarak silinen verilere erişebilir ve bunları kurtarabilirsiniz, ancak özellik önceden açıldığında geçici olarak silinen verilerin kaydedildiğini kabul edebilirsiniz. Geçici silme özelliğini etkinleştirdiğinizde, saklama süresini de yapılandırmanız gerekir.
 
-Geçici silme saklama süresini istediğiniz zaman değiştirebilirsiniz. Güncelleştirilmiş Bekletme dönemi yalnızca yeni Silinen veriler için geçerlidir. Önceden silinen veriler göre verileri silindiğinde yapılandırdığınız saklama süresi dolacak. Geçici olarak silinmiş bir nesneyi silmeye çalışırsanız, süre sonu etkilemez.
+Saklama süresi, geçici olarak silinen verilerin saklanacağı ve kurtarılmasına uygun olan süreyi gösterir. Açıkça silinen Bloblar ve BLOB anlık görüntüleri için, veri silindiğinde Bekletme dönemi saati başlar. Verilerin üzerine yazıldığında geçici silme özelliği tarafından oluşturulan geçici olarak silinen anlık görüntüler için, bu saat, anlık görüntü oluşturulduğunda başlar. Şu anda, 1 ila 365 gün boyunca geçici olarak silinen verileri tutabilirsiniz.
 
-### <a name="saving-deleted-data"></a>Silinen verileri kaydetme
-Geçici silme burada bloblar veya blob anlık görüntüleri üzerine veya silinirse, çoğu durumda, verilerinizi korur.
+Geçici silme bekletme süresini istediğiniz zaman değiştirebilirsiniz. Güncelleştirilmiş bir saklama süresi, yalnızca yeni silinen veriler için geçerlidir. Daha önce silinen veriler, verilerin silindiği zaman yapılandırılan bekletme dönemine göre sona erer. Geçici olarak silinen bir nesneyi silmeye çalışmak, süre sonu süresini etkilemez.
 
-Kullanarak bir blobun üzerine yazıldığında **Put Blob**, **blok yerleştirme**, **Put Engellenenler listesi** veya **kopya blob'u** öncesinde blobun durumunun bir anlık görüntüsü yazma işlemi otomatik olarak oluşturulur. Bu anlık görüntü geçici silinen bir anlık görüntü, Geçici silinen nesneleri açıkça listelenen sürece görünmez durumdadır. Bkz: [kurtarma](#recovery) bölümü geçici silinen nesneleri listesinde öğrenin.
+### <a name="saving-deleted-data"></a>Silinen veriler kaydediliyor
+
+Geçici silme, Blobların veya blob anlık görüntülerinin silindiği veya üzerine yazıldığı birçok durumda verilerinizi korur.
+
+Blob **'u koy,** **PUT bloğu**, put **bloğu listesi**veya **kopyalama** blobu kullanılarak bir blob üzerine yazıldığında, yazma işlemi öncesinde blob 'un durumunun bir anlık görüntüsü otomatik olarak oluşturulur. Bu anlık görüntü, geçici olarak silinmiş bir anlık görüntüdür; geçici olarak silinen nesneler açıkça listelenmediyse görünmez. Geçici silinen nesneleri nasıl listeleyeceğinizi öğrenmek için [Kurtarma](#recovery) bölümüne bakın.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-overwrite.png)
 
-*Etkin veri mavi modundayken geçici olarak silinen verileri gri, olur. Daha kısa süre önce yazılmış veri eski verileri altında görünür. Geçici silinen anlık görüntüsünü B0 B0 ile B1 üzerine yazıldığında oluşturulur. Geçici silinen anlık görüntüsünü B1, B1 B2 ile üzerine yazıldığında oluşturulur.*
+*Geçici olarak silinen veriler gri, etkin veriler mavi olur. Daha eski veriler altında daha yeni yazılmış veriler görüntülenir. B1 ile B0 'ın üzerine yazıldığında, B0 'nin geçici olarak silinmiş bir anlık görüntüsü oluşturulur. B2 ile B1 üzerine yazıldığında, B1 'nin geçici olarak silinen bir anlık görüntüsü oluşturulur.*
 
 > [!NOTE]  
-> Geçici silme yalnızca ortaya koymaktadır hedef blob hesabı için açıldığı zaman kopyalama işlemleri için koruma üzerine yaz.
+> Geçici silme yalnızca hedef Blobun hesabı için açık olan kopyalama işlemleri için korumayı geçersiz kılar.
 
 > [!NOTE]  
-> Geçici silme göze değil arşiv katmanındaki bloblar için koruma üzerine yazın. Yeni bir blob içinde herhangi bir katmanı ile bir blob arşiv üzerine yazıldıysa üzerine blob kalıcı olarak süresi doldu.
+> Geçici silme, arşiv katmanındaki Bloblar için korumanın üzerine yazmaz. Arşivdeki bir Blobun herhangi bir katmanda yeni bir blob ile üzerine yazılırsa, üzerine yazılan Blobun kalıcı olarak zaman aşımına uğradı.
 
-Zaman **Blob silme** çağrılır, anlık görüntü üzerinde anlık görüntü, geçici olarak işaretlenmiş silindi. Yeni bir anlık görüntü oluşturulmadı.
+Bir anlık görüntüde **silme blobu** çağrıldığında, bu anlık görüntü geçici olarak silinmiş olarak işaretlenir. Yeni bir anlık görüntü oluşturulmaz.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-explicit-delete-snapshot.png)
 
-*Etkin veri mavi modundayken geçici olarak silinen verileri gri, olur. Daha kısa süre önce yazılmış veri eski verileri altında görünür. Zaman **anlık görüntü Blob** adlı B0 bir anlık görüntü haline gelir ve B1 ise blob etkin durumu. B0 anlık görüntüsü silinir, geçici olarak işaretlenmiş silindi.*
+*Geçici olarak silinen veriler gri, etkin veriler mavi olur. Daha eski veriler altında daha yeni yazılmış veriler görüntülenir. **Anlık görüntü blobu** çağrıldığında, B0 bir anlık görüntü haline gelir ve B1, Blobun etkin durumudur. B0 anlık görüntüsü silindiğinde, geçici olarak silinmiş olarak işaretlenir.*
 
-Zaman **Blob silme** (tüm blob diğer bir deyişle kendisi bir anlık görüntü) temel blob üzerinde çağrılır, blob olarak geçici olarak işaretlenmiş silindi. Önceki davranışı ile tutarlı çağırma **Blob silme** etkin anlık görüntülerine sahip bir blob üzerinde bir hata döndürür. Çağırma **Blob silme** geçici silinen anlık görüntüleri olan üzerinde bir hata döndürmez. Geçici silme açık olduğunda, bir blob ve tek işlemde tüm anlık görüntüleri yine de silebilirsiniz. Bunun yapılması temel blob işaretler ve anlık görüntüleri geçici olarak silinmiş.
+**BLOB silme** bir temel blob 'da (kendi anlık görüntü olmayan herhangi bir BLOB) çağrıldığında, bu blob geçici olarak silindi olarak işaretlenir. Önceki davranışla tutarlı, etkin anlık görüntülere sahip bir bloba **silme blobu** çağırma bir hata döndürüyor. Geçici olarak silinen anlık görüntülerle blob üzerinde **silme blobu** çağırma bir hata döndürmez. Geçici silme açıkken bir blobu ve tüm anlık görüntülerini tek işlemle silebilirsiniz. Bunu yaptığınızda temel blob ve anlık görüntüler geçici olarak silinir.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-explicit-include.png)
 
-*Etkin veri mavi modundayken geçici olarak silinen verileri gri, olur. Daha kısa süre önce yazılmış veri eski verileri altında görünür. Burada bir **Blob silme** B2 ve ilişkili tüm anlık görüntüleri silmek için çağrı yapılır. Etkin blob, B2 ve ilişkili tüm anlık görüntüleri olarak geçici olarak işaretlenmiş silindi.*
+*Geçici olarak silinen veriler gri, etkin veriler mavi olur. Daha eski veriler altında daha yeni yazılmış veriler görüntülenir. Burada, B2 ve ilişkili tüm anlık görüntüleri silmek için bir **silme blobu** çağrısı yapılır. Etkin blob, B2 ve tüm ilişkili anlık görüntüler, geçici olarak silinmiş olarak işaretlenir.*
 
 > [!NOTE]  
-> Geçici silinen bir blob üzerine yazma işlemi öncesinde blobun durumu geçici silinen anlık görüntüsünü otomatik olarak oluşturulur. Yeni blob, üzerine blobun katmanını devralır.
+> Geçici olarak silinen bir Blobun üzerine yazıldığında, yazma işleminden önce blob 'un durumunun geçici olarak silinmiş bir anlık görüntüsü otomatik olarak oluşturulur. Yeni blob, üzerine yazılan Blobun katmanını devralır.
 
-Geçici silme değil kapsayıcı ya da hesabı silme durumunda verilerinizi kaydetmek ya da zaman meta verileri blob ve blob özelliklerini üzerine yazılır. Bir depolama hesabı hatalı silinmeye karşı korumak için Azure Resource Manager kullanarak kilit yapılandırabilirsiniz. Lütfen Azure Resource Manager makalesine bakın [beklenmeyen değişiklikleri önlemek için kaynakları kilitleme](../../azure-resource-manager/resource-group-lock-resources.md) daha fazla bilgi için.
+Geçici silme, verileri kapsayıcı veya hesap silme durumlarında veya blob meta verilerinin ve BLOB özelliklerinin üzerine yazıldığında kaydetmez. Bir depolama hesabını hatalı silinmeye karşı korumak için Azure Resource Manager kullanarak bir kilit yapılandırabilirsiniz. Daha fazla bilgi edinmek için lütfen [beklenmeyen değişikliklerin oluşmasını engellemek üzere kaynakları kilitle](../../azure-resource-manager/resource-group-lock-resources.md) Azure Resource Manager makalesine bakın.
 
-Geçici silme açıldığında Beklenen davranış aşağıdaki tabloda Ayrıntılar:
+Aşağıdaki tabloda, geçici silme açıkken beklenen davranışın ayrıntıları verilmiştir:
 
-| REST API işlemi | Kaynak türü | Açıklama | Davranışını değiştirme |
+| REST API işlemi | Kaynak türü | Açıklama | Davranış değişikliği |
 |--------------------|---------------|-------------|--------------------|
-| [Silme](/rest/api/storagerp/StorageAccounts/Delete) | Hesap | Tüm kapsayıcı ve içerdiği blobların dahil, bir depolama hesabını siler.                           | Değişiklik yok. Kapsayıcılar ve bloblar silinen hesabı olarak kurtarılabilir değildir. |
-| [Kapsayıcıyı Sil](/rest/api/storageservices/delete-container) | Kapsayıcı | İçerdiği tüm blobları dahil olmak üzere kapsayıcı siler. | Değişiklik yok. Silinen kapsayıcıdaki blobları kurtarılabilir değildir. |
-| [Put Blob](/rest/api/storageservices/put-blob) | Bloğu ekleme ve sayfa Blobları | Yeni bir blob oluşturur veya mevcut bir bloba bir kapsayıcı içindeki değiştirir | Mevcut bir bloba değiştirmek için kullanılan çağrıdan önce blobun durumunun bir anlık görüntüsünü otomatik olarak oluşturulur. Blob (blok, ekleme veya sayfa) aynı tür tarafından değiştirilir ve yalnızca, bu daha önce geçici silinen blob için de geçerlidir. Farklı türde bir blob tarafından değiştirilirse, tüm var olan geçici olarak silinen verileri kalıcı olarak sona erecektir. |
-| [Delete Blob](/rest/api/storageservices/delete-blob) | Bloğu ekleme ve sayfa Blobları | Bir blobu veya blob anlık görüntüsü silme işlemi için işaretler. Çöp toplama sırasında blob veya anlık görüntü daha sonra silinir | Blob anlık görüntüsü, bu anlık görüntü olarak geçici olarak işaretlenmiş silme için kullandıysanız silindi. Bir blobun silinmesi için kullandıysanız, bu blob olarak geçici olarak işaretlenmiş silindi. |
-| [Kopya blob'u](/rest/api/storageservices/copy-blob) | Bloğu ekleme ve sayfa Blobları | Kaynak blob bir hedef blob aynı depolama hesabındaki veya başka bir depolama hesabına kopyalar. | Mevcut bir bloba değiştirmek için kullanılan çağrıdan önce blobun durumunun bir anlık görüntüsünü otomatik olarak oluşturulur. Blob (blok, ekleme veya sayfa) aynı tür tarafından değiştirilir ve yalnızca, bu daha önce geçici silinen blob için de geçerlidir. Farklı türde bir blob tarafından değiştirilirse, tüm var olan geçici olarak silinen verileri kalıcı olarak sona erecektir. |
-| [Blok yerleştirme](/rest/api/storageservices/put-block) | Blok Blobları | Bir blok blobu türünde bir parçası olarak kabul edilebilmesi için yeni bir blok oluşturur. | Etkin olan bir blob için bir blok uygulamak için kullanılan bir değişiklik yoktur. Geçici silinen bir blob için bir blok tamamlamaya kullandıysanız, yeni bir blob oluşturulur ve bir anlık görüntü geçici silinen blob durumunu yakalamak için otomatik olarak oluşturulur. |
-| [Engelleme listesi yerleştirin](/rest/api/storageservices/put-block-list) | Blok Blobları | Bir blobun blok blok blobu oluşturan kimlikleri kümesi belirterek kaydeder. | Mevcut bir bloba değiştirmek için kullanılan çağrıdan önce blobun durumunun bir anlık görüntüsünü otomatik olarak oluşturulur. Bir blok blobu olduğu ve yalnızca, bu daha önce geçici silinen blob için de geçerlidir. Farklı türde bir blob tarafından değiştirilirse, tüm var olan geçici olarak silinen verileri kalıcı olarak sona erecektir. |
-| [Sayfa yerleştirin](/rest/api/storageservices/put-page) | Sayfa Blobları | Sayfa aralığı bir sayfa Blob olarak yazar. | Değişiklik yok. Üzerine yazılır veya bu işlemi kullanarak seçili sayfa blobu veri kaydedilmez ve kurtarılamaz. |
-| [Blok ekleme](/rest/api/storageservices/append-block) | Ekleme Blobları | Bir ekleme blobu sonuna bir veri bloğu yazma | Değişiklik yok. |
-| [Blob özelliklerini ayarlama](/rest/api/storageservices/set-blob-properties) | Bloğu ekleme ve sayfa Blobları | Bir blob için tanımlanan sistem özellikleri için değerleri ayarlar. | Değişiklik yok. Üzerine blob özelliklerini kurtarılabilir değildir. |
-| [BLOB meta verileri ayarlama](/rest/api/storageservices/set-blob-metadata) | Bloğu ekleme ve sayfa Blobları | Kümeleri kullanıcı tanımlı meta veriler bir veya daha fazla ad-değer çiftleri olarak belirtilen blob. | Değişiklik yok. Üzerine blob meta verilerini kurtarılabilir değil. |
+| [Delete](/rest/api/storagerp/StorageAccounts/Delete) | Hesap | İçerdiği tüm kapsayıcılar ve BLOB 'lar dahil olmak üzere depolama hesabını siler.                           | Değişiklik yok. Silinen hesaptaki kapsayıcılar ve Bloblar kurtarılamaz. |
+| [Kapsayıcıyı sil](/rest/api/storageservices/delete-container) | Kapsayıcı | Kapsayıcı, içerdiği tüm Bloblar dahil olmak üzere siler. | Değişiklik yok. Silinen kapsayıcıdaki Bloblar kurtarılamaz. |
+| [Blobu koy](/rest/api/storageservices/put-blob) | Blok, ekleme ve sayfa Blobları | Yeni bir blob oluşturur veya bir kapsayıcı içinde var olan bir blobu değiştirir | Var olan bir Blobun değiştirmek için kullanılırsa, çağrıdan önce blob 'un durumunun bir anlık görüntüsü otomatik olarak oluşturulur. Bu, daha önce ve yalnızca aynı türdeki bir blob (blok, ekleme veya sayfa) ile değiştiriliyorsa, daha önce geçici olarak silinen bir blob için de geçerlidir. Farklı türdeki bir Blobun değiştirildiyse, var olan tüm geçici silinen verilerin geçerliliği kalıcı olarak dolacak. |
+| [Blobu Sil](/rest/api/storageservices/delete-blob) | Blok, ekleme ve sayfa Blobları | Silinmek üzere bir blob veya blob anlık görüntüsü işaretler. Çöp toplama sırasında blob veya anlık görüntü daha sonra silinir | Blob anlık görüntüsünü silmek için kullanılırsa, bu anlık görüntü geçici olarak silinmiş olarak işaretlenir. Bir blobu silmek için kullanılırsa, bu blob geçici olarak silindi olarak işaretlenir. |
+| [Blobu Kopyala](/rest/api/storageservices/copy-blob) | Blok, ekleme ve sayfa Blobları | Kaynak blobu, aynı depolama hesabındaki veya başka bir depolama hesabındaki bir hedef bloba kopyalar. | Var olan bir Blobun değiştirmek için kullanılırsa, çağrıdan önce blob 'un durumunun bir anlık görüntüsü otomatik olarak oluşturulur. Bu, daha önce ve yalnızca aynı türdeki bir blob (blok, ekleme veya sayfa) ile değiştiriliyorsa, daha önce geçici olarak silinen bir blob için de geçerlidir. Farklı türdeki bir Blobun değiştirildiyse, var olan tüm geçici silinen verilerin geçerliliği kalıcı olarak dolacak. |
+| [Yerleştirme bloğu](/rest/api/storageservices/put-block) | Blok Blobları | Bir blok blobunun parçası olarak kaydedilecek yeni bir blok oluşturur. | Etkin olan bir Blobun blok yürütmek için kullanılırsa değişiklik yapılmaz. Geçici olarak silinen bir Blobun blok yürütmek için kullanılırsa, yeni bir blob oluşturulur ve geçici olarak silinen Blobun durumunu yakalamak için bir anlık görüntü oluşturulur. |
+| [Öbek listesini yerleştirme](/rest/api/storageservices/put-block-list) | Blok Blobları | Blok Blobu oluşturan blok kimlikleri kümesini belirterek bir blobu kaydeder. | Var olan bir Blobun değiştirmek için kullanılırsa, çağrıdan önce blob 'un durumunun bir anlık görüntüsü otomatik olarak oluşturulur. Bu, daha önce ve yalnızca Blok Blobu ise, daha önce geçici olarak silinmiş bir blob için de geçerlidir. Farklı türdeki bir Blobun değiştirildiyse, var olan tüm geçici silinen verilerin geçerliliği kalıcı olarak dolacak. |
+| [Yerleştirme sayfası](/rest/api/storageservices/put-page) | Sayfa Blobları | Sayfa Blobuna bir sayfa aralığı yazar. | Değişiklik yok. Bu işlem kullanılarak üzerine yazılan veya temizlenmemiş Sayfa Blobu verileri kaydedilmez ve kurtarılamaz. |
+| [Ekleme bloğu](/rest/api/storageservices/append-block) | Blob ekleme | Bir ekleme Blobunun sonuna bir veri bloğu Yazar | Değişiklik yok. |
+| [Blob özelliklerini ayarla](/rest/api/storageservices/set-blob-properties) | Blok, ekleme ve sayfa Blobları | Blob için tanımlanan sistem özellikleri için değerleri ayarlar. | Değişiklik yok. Üzerine yazılan blob özellikleri kurtarılabilir değil. |
+| [Blob meta verilerini ayarla](/rest/api/storageservices/set-blob-metadata) | Blok, ekleme ve sayfa Blobları | Belirtilen blob için Kullanıcı tanımlı meta verileri bir veya daha fazla ad-değer çifti olarak ayarlar. | Değişiklik yok. Üzerine yazılan blob meta verileri kurtarılamaz. |
 
-"Sayfası üzerine veya bir sayfa blob'u aralıklarını temizlemek için Put" çağırma otomatik anlık görüntüleri oluşturmaz, dikkat edin önemlidir. Sanal makine diskleri sayfa Blobları tarafından yedeklenir ve kullanmak **Put sayfası** veri yazmak için.
+Bir sayfa Blobun aralıklarının üzerine yazmak veya onları temizlemek için "yerleştirme sayfası" çağırmanın otomatik olarak anlık görüntü üretmeyecek olduğunu fark etmek önemlidir. Sanal makine diskleri sayfa Blobları tarafından desteklenir ve veri yazmak için **PUT sayfasını** kullanır.
 
 ### <a name="recovery"></a>Kurtarma
-Silinen verileri kurtarmak kolay hale getirmek için yeni bir "Blob silmeyi geri al" API ekledik. Geçici silinen temel blob üzerinde silmeyi geri alma API'sini çağırma yükler ve ilişkili tüm etkin olarak geçici silinen anlık görüntüleri. Silmeyi geri alma API'sini, tüm geri yüklemeler üzerinde etkin bir temel blob çağırma geçici silinen anlık görüntüleri etkin olarak ilişkilendirilmiş. Etkin olarak anlık görüntü geri yüklendiğinde, kullanıcı tarafından oluşturulan anlık görüntüleri gibi görünürler; temel blobun üzerine yazmayın.
 
-Bir blob çağırabilirsiniz belirli bir geçici silinen anlık görüntüye geri yüklemek için **Blob silme işlemi geri** temel blob üzerinde. Ardından, şimdi etkin blobu anlık görüntü kopyalayabilirsiniz. Ayrıca, anlık görüntü için yeni bir blob kopyalayabilirsiniz.
+Geçici olarak silinen bir temel blob üzerinde [geri alma blobu](/rest/api/storageservices/undelete-blob) işleminin çağrılması, onu ve ilişkili tüm yazılımla silinen anlık görüntüleri etkin olarak geri yükler. Etkin bir temel blob üzerinde `Undelete Blob` işlemini çağırmak, tüm ilişkili geçici silinen anlık görüntüleri etkin olarak geri yükler. Anlık görüntüler etkin olarak geri yüklendiğinde, Kullanıcı tarafından oluşturulan anlık görüntüler gibi görünür. Bunlar temel Blobun üzerine yazmaz.
+
+Bir blobu belirli bir geçici silinen anlık görüntüye geri yüklemek için, temel bloba `Undelete Blob` çağırabilirsiniz. Ardından, anlık görüntüyü şimdi etkin Blobun üzerine kopyalayabilirsiniz. Ayrıca, anlık görüntüyü yeni bir bloba kopyalayabilirsiniz.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-recover.png)
 
-*Etkin veri mavi modundayken geçici olarak silinen verileri gri, olur. Daha kısa süre önce yazılmış veri eski verileri altında görünür. Burada, **Blob silme işlemi geri** B, böylece temel blob, B1 ve ilişkili tüm anlık görüntüler, burada geri blob üzerinde etkin olarak yalnızca B0 çağrılır. İkinci adımda, temel blobu B0 kopyalanır. Bu kopyalama işlemi, B1 geçici silinen anlık görüntüsünü oluşturur.*
+*Geçici olarak silinen veriler gri, etkin veriler mavi olur. Daha eski veriler altında daha yeni yazılmış veriler görüntülenir. Burada, blob B üzerinde **geri alma blobu** çağrılır, böylece temel blob, B1 ve tüm ilişkili anlık görüntüler, burada yalnızca B0 etkin olarak geri yüklenir. İkinci adımda, B0 temel blob üzerinden kopyalanır. Bu kopyalama işlemi B1 'nin geçici olarak silinmiş bir anlık görüntüsünü oluşturur.*
 
-Geçici silinen blobları görüntüleyin ve blob anlık görüntüleri silinen verilerin dahil edileceği seçebileceğiniz **Blobları listeleme**. Yalnızca geçici silinen temel bloblarını görüntülemek veya geçici silinen bir blob anlık görüntülerini de içerecek şekilde seçebilirsiniz. Tüm geçici olarak silinen verileri için verileri kalıcı olarak süresi dolacak önce geçen gün sayısını yanı sıra veri ne zaman silinmiş zaman görüntüleyebilirsiniz.
+Geçici silinen Blobları ve BLOB anlık görüntülerini görüntülemek için, silinen verileri **liste bloblarına**dahil etme seçeneğini belirleyebilirsiniz. Yalnızca geçici olarak silinen temel Blobları görüntülemeyi veya Ayrıca, geçici olarak silinen blob anlık görüntülerini da dahil etmek seçebilirsiniz. Tüm geçici silinen veriler için, verilerin ne zaman silindiğini ve verilerin kalıcı olarak süresi dolmadan önce geçen gün sayısını görüntüleyebilirsiniz.
 
 ### <a name="example"></a>Örnek
-Yükler, üzerine yazar .NET betiğini, anlık görüntüler, siler, konsol çıktısı verilmiştir ve geçici olduğunda "HelloWorld" adlı bir blobun silinmesi geri yüklemeler açıktır:
+
+Aşağıda, yumuşak silme açıkken *HelloWorld* adlı bir blobu karşıya yükleyen, üzerine yazan, anlık görüntülerle, silen ve geri yükleyen bir .net betiğinin konsol çıktısı verilmiştir:
 
 ```bash
 Upload:
@@ -128,65 +134,71 @@ Copy a snapshot over the base blob:
 - HelloWorld (is soft deleted: False, is snapshot: False)
 ```
 
-Bkz: [sonraki adımlar](#next-steps) bölümü bu çıkışı üreten uygulamaya işaretçisi.
+Bu çıktıyı üreten uygulamanın işaretçisi için [sonraki adımlar](#next-steps) bölümüne bakın.
 
 ## <a name="pricing-and-billing"></a>Fiyatlandırma ve Faturalama
-Tüm geçici olarak silinen verileri etkin veri olarak aynı oranda faturalandırılır. Yapılandırılmış saklama döneminden sonra kalıcı olarak silinen verileri için ücretlendirilmez. Anlık görüntüler ve bunların nasıl ücretler tahakkuk daha ayrıntılı bilgi edinmek için lütfen bkz [nasıl anlık görüntüleri ücretler tahakkuk anlama](storage-blob-snapshots.md).
 
-Otomatik anlık görüntüleri ile ilgili işlemler için faturalandırılmazsınız. İçin faturalandırılırsınız **Blob silme işlemi geri** işlemler "Yazma işlemleri" fiyatı.
+Tüm geçici silinen veriler, etkin verilerle aynı hızda faturalandırılır. Yapılandırılan saklama süresinden sonra kalıcı olarak silinen veriler için ücretlendirilmeyecektir. Anlık görüntülere ve bunların nasıl tahakkuk ettikleri hakkında daha ayrıntılı bilgi için lütfen bkz. [anlık görüntülerin nasıl tahakkuk ettirildiğini anlama](storage-blob-snapshots.md).
 
-Genel olarak Azure Blob Depolama fiyatlarında daha fazla ayrıntı için kullanıma [Azure Blob Depolama fiyatlandırması sayfasını](https://azure.microsoft.com/pricing/details/storage/blobs/).
+Otomatik anlık görüntü oluşturma ile ilgili işlemler için faturalandırılmaz. Yazma işlemleri için geri alma **BLOB** işlemleri için faturalandırılırsınız.
 
-Geçici silme üzerinde ilk kez açtığınızda, bir küçük saklama süresi özelliği faturanızı nasıl etkileyeceğini daha iyi anlamak için kullanmanızı öneririz.
+Genel olarak Azure Blob depolama fiyatları hakkında daha fazla ayrıntı için [Azure Blob depolama fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/storage/blobs/)göz atın.
 
-## <a name="quickstart"></a>Hızlı Başlangıç
-### <a name="azure-portal"></a>Azure portal
-Geçici silme etkinleştirmek için gidin **geçici silme** altındaki **Blob hizmeti**. Ardından **etkin** ve geçici olarak silinen verileri elde tutmak istediğiniz gün sayısını girin.
+Geçici silme özelliğini ilk kez açtığınızda, özelliğin faturanızı nasıl etkileyeceğini daha iyi anlamak için küçük bir bekletme süresi kullanmanızı öneririz.
+
+## <a name="get-started"></a>Başlarken
+
+Aşağıdaki adımlarda, geçici silme ile çalışmaya başlama gösterilmektedir.
+
+# <a name="portaltabazure-portal"></a>[Portal](#tab/azure-portal)
+
+Geçici silme özelliğini etkinleştirmek için **BLOB hizmeti**altındaki **geçici silme** seçeneğine gidin. Ardından **etkin** ' e tıklayın ve geçici olarak silinen verileri sürdürmek istediğiniz gün sayısını girin.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-portal-configuration.png)
 
-Geçici silinen blobları görüntülemek için seçin **silinen blobları Göster** onay kutusu.
+Geçici silinen Blobları görüntülemek için **silinen Blobları göster** onay kutusunu seçin.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-portal-view-soft-deleted.png)
 
-Belirli bir blobun geçici silinen anlık görüntülerini görüntülemek için blobu seçin sonra **anlık görüntüleri görüntüle**.
+Belirli bir blob için geçici olarak silinen anlık görüntüleri görüntülemek için, blobu seçin ve **anlık görüntüleri görüntüle**' ye tıklayın.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-portal-view-soft-deleted-snapshots.png)
 
-Emin **silinen anlık görüntüleri Göster** onay kutusunun seçili.
+**Silinen anlık görüntüleri göster** onay kutusunun seçili olduğundan emin olun.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-portal-view-soft-deleted-snapshots-check.png)
 
-Bir geçici silinen bir blob veya anlık görüntüsünü tıkladığınızda, yeni blob özelliklere dikkat edin. Bunlar, nesne silindikten sonra ve blob veya blob anlık görüntüsü kadar kaç gün kaldığını kalıcı olarak süresi gösterir. Geçici silinen nesnenin bir anlık görüntü değilse, da, silmeyi geri alma seçeneğine sahip olursunuz.
+Geçici olarak silinen bir blob veya anlık görüntüye tıkladığınızda, yeni blob özelliklerine dikkat edin. Bu, nesnenin ne zaman silindiğini ve BLOB ya da blob anlık görüntüsünün kalıcı olarak zaman aşımına erene kadar kaç gün kaldığını gösterir. Geçici olarak silinen nesne bir anlık görüntü değilse, geri alma seçeneğiniz de olur.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-portal-properties.png)
 
-Silinen bir blob ayrıca tüm ilişkili anlık görüntüyü silme işlemi olduğunu unutmayın. Etkin bir blob için geçici silinen anlık görüntüyü silme işlemi için blob seçin tıklayın ve **tüm anlık görüntüleri silmeyi geri alma**.
+Bir Blobun silinmesinin, ilişkili tüm anlık görüntüleri de silmeyi unutmayın. Etkin bir blob için geçici olarak silinen anlık görüntüleri geri almak için bloba tıklayın ve **tüm anlık görüntüleri geri al**seçeneğini belirleyin.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-portal-undelete-all-snapshots.png)
 
-Bir blobun anlık görüntüyü silme işlemi sonra tıklayabilirsiniz **Yükselt** böylece blob anlık görüntüye geri yükleme kök blob üzerinde anlık görüntü kopyalanacak.
+Bir Blobun anlık görüntülerini geri aldıktan sonra, bir anlık görüntüyü kök Blobun üzerine kopyalamak için **Yükselt** ' e tıklayabilir ve böylece blobu anlık görüntüye geri yükleyebilirsiniz.
 
 ![](media/storage-blob-soft-delete/storage-blob-soft-delete-portal-promote-snapshot.png)
 
-### <a name="powershell"></a>PowerShell
+# <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Geçici silme etkinleştirmek için bir blob istemcinin hizmet özellikleri güncelleştirin. Aşağıdaki örnek, bir Abonelikteki hesapların bir alt kümesi için geçici silme sağlar:
+Geçici silme özelliğini etkinleştirmek için bir blob istemcisinin hizmet özelliklerini güncelleştirin. Aşağıdaki örnek, bir abonelikteki hesapların bir alt kümesi için geçici silme imkanı sunar:
 
 ```powershell
 Set-AzContext -Subscription "<subscription-name>"
 $MatchingAccounts = Get-AzStorageAccount | where-object{$_.StorageAccountName -match "<matching-regex>"}
 $MatchingAccounts | Enable-AzStorageDeleteRetentionPolicy -RetentionDays 7
 ```
-Aşağıdaki komutu kullanarak bu geçici silme açıldı doğrulayabilirsiniz:
+Aşağıdaki komutu kullanarak geçici silmenin açık olduğunu doğrulayabilirsiniz:
 
 ```powershell
 $MatchingAccounts | Get-AzStorageServiceProperty -ServiceType Blob
 ```
 
-Yanlışlıkla silinen blobları kurtarmak için bu bloblarda silmeyi geri al'ı çağırın. Çağırmanın unutmayın **Blob silme işlemi geri**, hem de etkin ve geçici silinen blobları etkin olarak ilişkili tüm geçici silinen anlık geri. Aşağıdaki örnek bir kapsayıcıdaki tüm geçici silinen ve etkin blobları silme işlemini geri alma çağırır:
+Yanlışlıkla silinen Blobları kurtarmak için, bu bloblarda geri alma işlemini çağırın. **Geri alma blobu**çağırma, hem etkin hem de geçici olarak silinen bloblarda, ilişkili tüm yazılımla silinen anlık görüntüleri etkin olarak geri yükleyeceğini unutmayın. Aşağıdaki örnek, bir kapsayıcıdaki tüm geçici silinen ve etkin bloblarda geri alma işlemini çağırır:
+
 ```powershell
 # Create a context by specifying storage account name and key
 $ctx = New-AzStorageContext -StorageAccountName $StorageAccountName -StorageAccountKey $StorageAccountKey
@@ -205,21 +217,23 @@ Geçerli geçici silme bekletme ilkesini bulmak için aşağıdaki komutu kullan
    Get-AzStorageServiceProperty -ServiceType Blob -Context $account.Context
 ```
 
-### <a name="azure-cli"></a>Azure CLI 
-Geçici silme etkinleştirmek için bir blob istemcinin hizmet özellikleri güncelleştirin:
+# <a name="clitabazure-cli"></a>[CLI](#tab/azure-CLI)
+
+Geçici silme özelliğini etkinleştirmek için bir blob istemcisinin hizmet özelliklerini güncelleştirin:
 
 ```azurecli-interactive
 az storage blob service-properties delete-policy update --days-retained 7  --account-name mystorageaccount --enable true
 ```
 
-Yumuşak doğrulamak için delete açıktır, aşağıdaki komutu kullanın: 
+Geçici silme özelliğinin açık olduğunu doğrulamak için aşağıdaki komutu kullanın: 
 
 ```azurecli-interactive
 az storage blob service-properties delete-policy show --account-name mystorageaccount 
 ```
 
-### <a name="python-client-library"></a>Python istemci kitaplığı
-Geçici silme etkinleştirmek için bir blob istemcinin hizmet özellikleri güncelleştirin:
+# <a name="pythontabpython"></a>[Python](#tab/python)
+
+Geçici silme özelliğini etkinleştirmek için bir blob istemcisinin hizmet özelliklerini güncelleştirin:
 
 ```python
 # Make the requisite imports
@@ -227,14 +241,17 @@ from azure.storage.blob import BlockBlobService
 from azure.storage.common.models import DeleteRetentionPolicy
 
 # Initialize a block blob service
-block_blob_service = BlockBlobService(account_name='<enter your storage account name>', account_key='<enter your storage account key>')
+block_blob_service = BlockBlobService(
+    account_name='<enter your storage account name>', account_key='<enter your storage account key>')
 
 # Set the blob client's service property settings to enable soft delete
-block_blob_service.set_blob_service_properties(delete_retention_policy = DeleteRetentionPolicy(enabled = True, days = 7))
+block_blob_service.set_blob_service_properties(
+    delete_retention_policy=DeleteRetentionPolicy(enabled=True, days=7))
 ```
 
-### <a name="net-client-library"></a>.NET istemci kitaplığı
-Geçici silme etkinleştirmek için bir blob istemcinin hizmet özellikleri güncelleştirin:
+# <a name="nettabnet"></a>[.NET](#tab/net)
+
+Geçici silme özelliğini etkinleştirmek için bir blob istemcisinin hizmet özelliklerini güncelleştirin:
 
 ```csharp
 // Get the blob client's service property settings
@@ -248,7 +265,7 @@ serviceProperties.DeleteRetentionPolicy.RetentionDays = RetentionDays;
 blobClient.SetServiceProperties(serviceProperties);
 ```
 
-Yanlışlıkla silinen blobları kurtarmak için bu bloblarda silmeyi geri al'ı çağırın. Çağırmanın unutmayın **Blob silme işlemi geri**, hem de etkin ve geçici silinen blobları etkin olarak ilişkili tüm geçici silinen anlık geri. Aşağıdaki örnek bir kapsayıcıdaki tüm geçici silinen ve etkin blobları silme işlemini geri alma çağırır:
+Yanlışlıkla silinen Blobları kurtarmak için, bu bloblarda geri alma işlemini çağırın. **Geri alma blobu**çağırma, hem etkin hem de geçici olarak silinen bloblarda, ilişkili tüm yazılımla silinen anlık görüntüleri etkin olarak geri yükleyeceğini unutmayın. Aşağıdaki örnek, bir kapsayıcıdaki tüm geçici silinen ve etkin bloblarda geri alma işlemini çağırır:
 
 ```csharp
 // Recover all blobs in a container
@@ -258,7 +275,7 @@ foreach (CloudBlob blob in container.ListBlobs(useFlatBlobListing: true, blobLis
 }
 ```
 
-Bir bloba sürüme kurtarmak için blob üzerinde silme işlemini geri alma çağırın, sonra istenen anlık görüntü blobu kopyalayın. Aşağıdaki örnek, en son oluşturulan anlık görüntüsü bir blok blobuna kurtarır:
+Belirli bir blob sürümüne kurtarmak için, ilk olarak bir Blobun çağrısını geri alın ve ardından istenen anlık görüntüyü blob üzerinden kopyalayın. Aşağıdaki örnek, Blok Blobu en son oluşturulan anlık görüntüye kurtarır:
 
 ```csharp
 // Undelete
@@ -274,52 +291,72 @@ CloudBlockBlob copySource = allBlobVersions.First(version => ((CloudBlockBlob)ve
 blockBlob.StartCopy(copySource);
 ```
 
-## <a name="are-there-any-special-considerations-for-using-soft-delete"></a>Geçici silmeyi kullanma tüm özel durumlar var mı?
-Verilerinizi yanlışlıkla değişiklik veya bir uygulama veya başka bir depolama hesabı kullanıcı tarafından silinmiş bir fırsat varsa, üzerinde geçici silme kapatma öneririz. Etkinleştirme geçici silme sık üzerine yazılan veriler için daha yüksek depolama kapasitesi ücretler ve daha yüksek gecikme süresiyle blobları listelerken neden olabilir. Bu, ayrı bir depolama hesabında geçici silme ile devre dışı sık üzerine veri depolayarak azaltabilirsiniz. 
+---
+
+## <a name="special-considerations"></a>Özel durumlar
+
+Verilerinizin yanlışlıkla değiştirilmesi veya bir uygulama ya da başka bir depolama hesabı kullanıcısı tarafından silinmesi olasılığı varsa, geçici silme özelliğini açmak önerilir. Sık sık üzerine yazılan veriler için geçici silme özelliğinin etkinleştirilmesi, depolama kapasitesi ücretlerine neden olabilir ve Bloblar listelenirken gecikme süresini artırabilir. Sık kullanılan verileri, geçici olarak silmenin devre dışı bırakıldığı ayrı bir depolama hesabında depolayarak bu ek maliyeti ve gecikmeyi azaltabilirsiniz. 
 
 ## <a name="faq"></a>SSS
-**Geçici silme için hangi depolama türlerini kullanabilirim?**  
-Geçici silme şu anda yalnızca blob (nesne) depolama olarak kullanılabilir.
 
-**Geçici silme tüm depolama hesap türleri için kullanılabilir mi?**  
-Evet, geçici silme de blob depolama hesapları bloblar genel amaçlı, olduğu gibi kullanılabilir depolama hesaplarını (GPv1 ve GPv2). Bu, standart ve premium hesaplarına uygulanır. Geçici silme, yönetilen diskler için kullanılamıyor.
+### <a name="for-which-storage-services-can-i-use-soft-delete"></a>Hangi depolama hizmetleri için geçici silme kullanabilirim?
 
-**Geçici silme tüm depolama katmanları için kullanılabilir mi?**  
-Evet, tüm depolama katmanları dahil olmak üzere sık erişimli, seyrek erişimli ve Arşiv geçici silme kullanılabilir. Geçici silme değil ancak göze arşiv katmanındaki bloblar için koruma üzerine yazın.
+Şu anda, geçici silme yalnızca blob (nesne) depolaması için kullanılabilir.
 
-**Geçici silinen anlık görüntüleri ile BLOB katmanı için Blob katmanı API kümesini kullanabilir miyim?**  
-Evet. Geçici silinen anlık görüntüleri özgün katmanda kalır, ancak temel blob yeni katmanına taşınacaktır. 
+### <a name="is-soft-delete-available-for-all-storage-account-types"></a>Tüm depolama hesabı türleri için geçici silme kullanılabilir mi?
 
-**Premium depolama hesaplarına sahip bir blob anlık görüntü sınırı 100 başına. Geçici silinen anlık görüntüleri, bu sınırında sayılır mı?**  
-Hayır, geçici olarak silinen anlık görüntüleri bu sınırında sayısı değil.
+Evet, geçici silme, BLOB depolama hesapları için ve genel amaçlı (GPv1 ve GPv2) depolama hesaplarındaki Bloblar için kullanılabilir. Hem standart hem de Premium hesap türleri desteklenir. Geçici silme, kapsamakta olan sayfa Blobları olan yönetilmeyen diskler için kullanılabilir. Geçici silme, yönetilen diskler için kullanılamaz.
 
-**Mevcut depolama hesapları için geçici silme üzerinde kapatabilir miyim?**  
-Evet, mevcut ve yeni depolama hesapları için geçici silme yapılandırılabilirdir.
+### <a name="is-soft-delete-available-for-all-storage-tiers"></a>Tüm depolama katmanları için geçici silme kullanılabilir mi?
 
-**Tüm ilişkili blobları, tüm hesap ya da kapsayıcı açık olarak geçici silme ile silersem, kaydedilecek?**  
-Hayır, tüm hesap ya da kapsayıcı silerseniz, tüm ilişkili blobları kalıcı olarak silinecek. Bir depolama hesabını yanlışlıkla silmeleri koruma konusunda bilgi edinmek için lütfen Azure Resource Manager makalesine bakın [beklenmeyen değişiklikleri önlemek için kaynakları kilitleme](../../azure-resource-manager/resource-group-lock-resources.md).
+Evet, geçici silme, sık erişimli, seyrek erişimli ve arşiv dahil tüm depolama katmanları için kullanılabilir. Ancak, geçici silme arşiv katmanındaki Bloblar için korumayı geçersiz kılamaz.
 
-**Silinen veriler için kapasite ölçümlerini görüntüleyebilirim?**  
-Geçici olarak silinen verileri, toplam depolama hesabı kapasitesi bir parçası olarak dahil edilir. İzleme ve depolama kapasitesi izleme hakkında daha fazla bilgi için lütfen bkz [depolama analizi](../common/storage-analytics.md) makalesi.
+### <a name="can-i-use-the-set-blob-tier-api-to-tier-blobs-with-soft-deleted-snapshots"></a>Blob katmanı API 'sini, geçici olarak silinen anlık görüntülerle katman Blobları olarak kullanabilir miyim?
 
-**Geçici silme açarsam miyim geçici olarak silinen verileri erişmeye devam edebilir?**  
-Evet, erişebilir ve geçici silmeyi devre dışı bırakıldığında, süresi dolmamış geçici olarak silinen verileri kurtarma devam edersiniz.
+Evet. Geçici olarak silinen anlık görüntüler orijinal katmanda kalır, ancak temel blob yeni katmana taşınır. 
 
-**Okuma ve miyim geçici silinen anlık görüntülerini my blob kopyalama?**  
-Evet, ancak ilk bloba Undelete çağırmalıdır.
+### <a name="premium-storage-accounts-have-a-per-blob-snapshot-limit-of-100-do-soft-deleted-snapshots-count-toward-this-limit"></a>Premium Depolama hesaplarında 100 blob anlık görüntü sınırı vardır. Geçici olarak silinen anlık görüntü sayısı bu sınıra doğru mı?
 
-**Tüm türleri blob için geçici silme kullanılabilir mi?**  
-Evet, geçici silme blok Blobları, ekleme Blobları ve sayfa Blobları için kullanılabilir.
+Hayır, geçici olarak silinen anlık görüntüler bu sınıra doğru sayılmaz.
 
-**Geçici silme, sanal makine diskleri için kullanılabilir mi?**  
-Geçici silme, premium ve standart yönetilmeyen diskler için kullanılabilir. Geçici silme yalnızca yardımcı olacak olarak silinen verileri kurtarmak **Blob silme**, **Put Blob**, **Put Engellenenler listesi**, **blok yerleştirme** ve **Blob kopyalama**. Bir çağrı tarafından üzerine veri **Put sayfa** kurtarılamaz.
+### <a name="can-i-turn-on-soft-delete-for-existing-storage-accounts"></a>Mevcut depolama hesapları için geçici silmeyi açabilir miyim?
 
-**Geçici silme kullanmak için mevcut uygulamalarımı değiştirmem gerekiyor mu?**  
-Kullanmakta olduğunuz API sürümünden bağımsız olarak geçici silme yararlanmak mümkündür. Ancak, liste ve geçici silinen blobları ve blob anlık görüntüleri kurtarmak için 2017-07-29 sürümünü kullanmanız gerekir [Storage Services REST API](https://docs.microsoft.com/rest/api/storageservices/Versioning-for-the-Azure-Storage-Services) veya büyük. Genel olarak, her zaman bu özelliği kullanmanıza bakılmaksızın en son sürümünü kullanmanızı öneririz.
+Evet, geçici silme, hem mevcut hem de yeni depolama hesapları için yapılandırılabilir.
+
+### <a name="if-i-delete-an-entire-account-or-container-with-soft-delete-turned-on-will-all-associated-blobs-be-saved"></a>Geçici silme özelliği açık olan bir hesabın tamamını veya kapsayıcıyı silersem, ilişkili tüm Bloblar kaydedilecek mi?
+
+Hayır, tüm bir hesabı veya kapsayıcıyı silerseniz, ilişkili tüm Bloblar kalıcı olarak silinir. Bir depolama hesabını yanlışlıkla silmelerden koruma hakkında daha fazla bilgi için bkz. [kaynakları kilitleme, beklenmeyen değişiklikleri önleme](../../azure-resource-manager/resource-group-lock-resources.md).
+
+### <a name="can-i-view-capacity-metrics-for-deleted-data"></a>Silinen veriler için kapasite ölçümlerini görüntüleyebilir miyim?
+
+Geçici olarak silinen veriler, toplam depolama hesabı kapasitenizin bir parçası olarak dahil edilmiştir. Depolama kapasitesini izleme ve izleme hakkında daha fazla bilgi için bkz. [depolama Analizi](../common/storage-analytics.md).
+
+### <a name="if-i-turn-off-soft-delete-will-i-still-be-able-to-access-soft-deleted-data"></a>Geçici silme özelliğini devre dışı bırakırsanız, yine de geçici olarak silinen verilere erişebilecek mıyım?
+
+Evet, geçici silme devre dışı bırakıldığında, hala olmayan geçici olarak silinen verilere erişebilir ve bunları kurtarabilirsiniz.
+
+### <a name="can-i-read-and-copy-out-soft-deleted-snapshots-of-my-blob"></a>Blobun geçici olarak silinen anlık görüntülerini okuyabilir ve kopyalayabilir miyim?  
+
+Evet, ancak önce blob üzerinde geri alma işlemini çağırmanız gerekir.
+
+### <a name="is-soft-delete-available-for-all-blob-types"></a>Tüm blob türleri için geçici silme kullanılabilir mi?
+
+Evet, blok Blobları, ekleme Blobları ve sayfa Blobları için geçici silme kullanılabilir.
+
+### <a name="is-soft-delete-available-for-virtual-machine-disks"></a>Sanal makine diskleri için geçici silme kullanılabilir mi?  
+
+Hafif silme, hem Premium hem de standart yönetilmeyen diskler için kullanılabilir ve bu, kapakların altındaki sayfa Blobları olur. Geçici **silme, yalnızca** **BLOB silme**, **BLOB koyma**, **öbek listeleme**, yerleştirme ve **kopyalama blobu** işlemleri ile silinen verileri kurtarmanıza yardımcı olur. **PUT sayfasına** yapılan bir çağrı ile üzerine yazılan veriler kurtarılamaz.
+
+Azure sanal makinesi, **yerleştirme**için çağrılar kullanılarak yönetilmeyen bir diske yazar. bu nedenle, Azure VM 'den yönetilmeyen bir diske yazma işlemini geri almak için geçici silme kullanmak desteklenen bir senaryo değildir.
+
+### <a name="do-i-need-to-change-my-existing-applications-to-use-soft-delete"></a>Geçici silme kullanmak için mevcut uygulamalarımı değiştirmem gerekiyor mu?
+
+Kullanmakta olduğunuz API sürümüne bakılmaksızın geçici silme avantajından yararlanmak mümkündür. Ancak, geçici olarak silinen blob 'ları ve BLOB anlık görüntülerini listelemek ve kurtarmak için REST API veya daha büyük [Depolama Hizmetleri](https://docs.microsoft.com/rest/api/storageservices/Versioning-for-the-Azure-Storage-Services) sürüm 2017-07-29 ' i kullanmanız gerekir. Microsoft, her zaman Azure Storage API 'sinin en son sürümünü kullanmasını önerir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
+
 * [.NET örnek kodu](https://github.com/Azure-Samples/storage-dotnet-blob-soft-delete)
-* [BLOB hizmeti REST API'si](/rest/api/storageservices/blob-service-rest-api)
+* [Blob hizmeti REST API](/rest/api/storageservices/blob-service-rest-api)
 * [Azure depolama çoğaltma](../common/storage-redundancy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
-* [RA-GRS'yi kullanarak yüksek kullanılabilirliğe sahip uygulamalar tasarlama](../common/storage-designing-ha-apps-with-ragrs.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
-* [Olağanüstü durum kurtarma ve depolama hesabı yük devretme (Önizleme) Azure Depolama'daki](../common/storage-disaster-recovery-guidance.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+* [RA-GRS kullanarak yüksek oranda kullanılabilir uygulamalar tasarlama](../common/storage-designing-ha-apps-with-ragrs.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+* [Azure Storage 'da olağanüstü durum kurtarma ve depolama hesabı yük devretme (Önizleme)](../common/storage-disaster-recovery-guidance.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)

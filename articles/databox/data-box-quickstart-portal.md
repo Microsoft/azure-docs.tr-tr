@@ -6,22 +6,45 @@ author: alkohli
 ms.service: databox
 ms.subservice: pod
 ms.topic: quickstart
-ms.date: 03/12/2019
+ms.date: 09/03/2019
 ms.author: alkohli
-ms.openlocfilehash: bd591ff30755fd68bb2dc673899d0ac993215e68
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
-ms.translationtype: MT
+ms.localizationpriority: high
+ms.openlocfilehash: 26578e277a9f6747063ee377e72845b599a0301b
+ms.sourcegitcommit: a4b5d31b113f520fcd43624dd57be677d10fc1c0
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60405562"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70772740"
 ---
+::: zone target="docs"
+
 # <a name="quickstart-deploy-azure-data-box-using-the-azure-portal"></a>Hızlı Başlangıç: Azure portalını kullanarak Azure Data Box'ı dağıtma
+
+::: zone-end
+
+::: zone target="chromeless"
+
+# <a name="get-started-with-azure-data-box"></a>Azure Data Box’ı kullanmaya başlayın 
+
+::: zone-end
+
+::: zone target="docs"
 
 Bu hızlı başlangıçta Azure portalı kullanarak Azure Data Box'ı dağıtma adımları anlatılmaktadır. Adımlar kablolama, yapılandırma ve Azure'a yükleyebilmesi için verileri Data Box'a kopyalama işlemlerinden oluşur. Hızlı başlangıç Azure portalında ve cihazın yerel web kullanıcı arabiriminde gerçekleştirilir.
 
-Ayrıntılı adım adım dağıtım ve izleme yönergeleri için Git [Öğreticisi: Azure Data Box'ı sırası](data-box-deploy-ordered.md)
+Ayrıntılı adım adım dağıtım ve izleme yönergeleri için, [Öğretici: Azure Data Box sipariş etme](data-box-deploy-ordered.md) bölümüne gidin
 
-## <a name="prerequisites"></a>Önkoşullar
+::: zone-end 
+
+::: zone target="chromeless"
+
+Bu kılavuzda Azure portalı kullanarak Azure Data Box'ı dağıtma adımları anlatılmaktadır. Bu adımlar önkoşulları gözden geçirmeyi, kablo bağlantısını yapıp cihazınıza bağlanmayı ve verilerinizi Azure'a yükleyebilmek için cihazınıza kopyalamayı içerir.
+
+::: zone-end
+
+::: zone target="docs"
+ 
+## <a name="prerequisites"></a>Ön koşullar
 
 Başlamadan önce:
 
@@ -41,6 +64,27 @@ Başlamadan önce:
     - Bir RJ-45 CAT 6 ağ kablosu (MGMT ağ arabirimi ile kullanın)
     - Bir RJ-45 CAT 6A VEYA bir RJ-45 CAT 6 ağ kablosu (sırasıyla 10 Gb/sn veya 1 Gb/sn olarak yapılandırılmış DATA 3 ağ arabirimi ile birlikte kullanın)
 
+::: zone-end 
+
+::: zone target="chromeless"
+
+## <a name="prerequisites"></a>Ön koşullar
+
+Başlamadan önce aşağıdakileri yaptığınızdan emin olun:
+
+1. [Öğretici: Azure Data Box sipariş etme](data-box-deploy-ordered.md) bölümünü tamamladınız.
+2. Data Box’ı teslim aldınız ve portaldaki sipariş durumu **Teslim Edildi** oldu. 
+3. [Data Box güvenlik yönergelerini](data-box-safety.md) gözden geçirdiniz.
+4. 100 TB depolama cihazınızla birlikte kullanılacak bir topraklanmış güç kablosu aldınız.
+5. Data Box üzerinden kopyalamak istediğiniz verileri içeren bir ana bilgisayara erişiminiz var. Ana bilgisayarınız:
+    - [Desteklenen bir işletim sistemi](data-box-system-requirements.md) çalıştırılmalıdır.
+    - Yüksek hızlı ağa bağlısınız. En az bir adet 10 GbE bağlantınızın olması önemle tavsiye edilir. 10 GbE bağlantı yoksa, 1 GbE veri bağlantısı kullanılabilir ancak kopyalama hızı etkilenir. 
+6. Data Box’ı yerleştirmek için düz bir yüzeye erişiminiz var. Cihazı standart bir rafa dik ya da düz bir şekilde yerleştirmek istiyorsanız, rafınızda bir 7U yuvası olmalıdır.
+
+::: zone-end
+
+::: zone target="docs"
+
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
 [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
@@ -55,6 +99,8 @@ Bu adım yaklaşık 5 dakika sürer.
 4. Sipariş ayrıntılarını ve sevkiyat bilgilerini girin. Hizmet bölgenizde kullanılabilir durumdaysa bildirim e-posta adreslerini girin, özeti gözden geçirin ve siparişi oluşturun.
 
 Sipariş oluşturulduktan sonra cihaz gönderilmek üzere hazırlanır.
+
+
 
 ## <a name="cable"></a>Kablo 
 
@@ -132,5 +178,7 @@ Bu hızlı başlangıçta Azure'a veri aktarımı konusunda yardım almak için 
 
 > [!div class="nextstepaction"]
 > [Azure portalını kullanarak Data Box'ı yönetme](data-box-portal-admin.md)
+
+::: zone-end
 
 

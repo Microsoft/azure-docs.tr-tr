@@ -1,11 +1,11 @@
 ---
-title: Azure Notification Hubs ve Google Firebase Cloud Messaging kullanarak belirli Android cihazlarına anında iletme bildirimleri gönderme | Microsoft Docs
-description: Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) kullanarak anında iletme bildirimleri belirli Android cihazları için Notification hubs'ı kullanmayı öğrenin.
+title: Azure Notification Hubs ve Google Firebase Cloud Messaging kullanarak belirli Android cihazlarına anında iletme bildirimleri gönderin | Microsoft Docs
+description: Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) kullanarak belirli Android cihazlara bildirim göndermek için Notification Hubs nasıl kullanacağınızı öğrenin.
 services: notification-hubs
 documentationcenter: android
-author: jwargo
-manager: patniko
-editor: spelluru'
+author: sethmanheim
+manager: femila
+editor: jwargo
 ms.assetid: 3c23cb80-9d35-4dde-b26d-a7bfd4cb8f81
 ms.service: notification-hubs
 ms.workload: mobile
@@ -14,15 +14,17 @@ ms.devlang: java
 ms.topic: tutorial
 ms.custom: mvc
 ms.date: 04/30/2019
-ms.author: jowargo
-ms.openlocfilehash: f4a0da5d3ef0dd2d5ae04a2cc1b07ddb0a649bef
-ms.sourcegitcommit: 0568c7aefd67185fd8e1400aed84c5af4f1597f9
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 04/30/2019
+ms.openlocfilehash: 1d0825fcfbcf10aaebc320a5c7cbbf2dd8c13856
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65205387"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71213344"
 ---
-# <a name="tutorial-push-notifications-to-specific-android-devices-using-azure-notification-hubs-and-google-firebase-cloud-messaging-fcm"></a>Öğretici: Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) kullanarak belirli Android cihazlarına anında iletme bildirimleri gönderme
+# <a name="tutorial-push-notifications-to-specific-android-devices-using-azure-notification-hubs-and-google-firebase-cloud-messaging-fcm"></a>Öğretici: Azure Notification Hubs ve Google Firebase Cloud Messaging (FCM) kullanarak belirli Android cihazlara anında iletme bildirimleri gönderme
 
 [!INCLUDE [notification-hubs-selector-breaking-news](../../includes/notification-hubs-selector-breaking-news.md)]
 
@@ -36,19 +38,19 @@ Bu öğreticide, aşağıdaki eylemleri gerçekleştireceksiniz:
 
 > [!div class="checklist"]
 > * Mobil uygulamaya kategori seçimi ekleme.
-> * Etiketler ile bildirimleri için kayıtlı.
+> * Etiketlerle bildirimler için kaydedilir.
 > * Etiketli bildirimler gönderme.
 > * Uygulamayı test etme
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticide oluşturduğunuz uygulamayı geliştirir [Öğreticisi: Android cihazlar için Azure Notification Hubs ve Firebase Cloud Messaging kullanarak anında iletme bildirimleri](notification-hubs-android-push-notification-google-fcm-get-started.md). Bu öğreticiye başlamadan önce tamamlamanız [Öğreticisi: Android cihazlar için Azure Notification Hubs ve Firebase Cloud Messaging kullanarak anında iletme bildirimleri](notification-hubs-android-push-notification-google-fcm-get-started.md).
+Bu öğretici, [öğreticide oluşturduğunuz uygulamayı oluşturur: Azure Notification Hubs ve Firebase Cloud Messaging](notification-hubs-android-push-notification-google-fcm-get-started.md)kullanarak Android cihazlarına anında iletme bildirimleri gönderin. Bu öğreticiye başlamadan önce [öğreticiyi doldurun: Azure Notification Hubs ve Firebase Cloud Messaging](notification-hubs-android-push-notification-google-fcm-get-started.md)kullanarak Android cihazlarına anında iletme bildirimleri gönderin.
 
 ## <a name="add-category-selection-to-the-app"></a>Uygulamaya kategori seçimi ekleme
 
 İlk adım, mevcut ana etkinliğinize kullanıcının kaydolunacak kategorileri seçmesini sağlayan UI öğeleri eklemektir. Bir kullanıcı tarafından seçilen kategoriler cihazda depolanır. Uygulama başlatıldığında, etiketler olarak seçilen kategorilerle bildirim hub’ınızda bir cihaz kaydı oluşturulur.
 
-1. Açık `res/layout/activity_main.xml file`ve içeriği aşağıdakiyle değiştirin:
+1. `res/layout/activity_main.xml file`Öğesini açın ve içeriği aşağıdaki ile değiştirin:
 
     ```xml
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -101,7 +103,7 @@ Bu öğreticide oluşturduğunuz uygulamayı geliştirir [Öğreticisi: Android 
             />
     </LinearLayout>
     ```
-2. Açık `res/values/strings.xml` dosyasını açıp aşağıdaki satırları ekleyin:
+2. `res/values/strings.xml` Dosyasını açın ve aşağıdaki satırları ekleyin:
 
     ```xml
     <string name="button_subscribe">Subscribe</string>
@@ -113,10 +115,10 @@ Bu öğreticide oluşturduğunuz uygulamayı geliştirir [Öğreticisi: Android 
     <string name="label_sports">Sports</string>
     ```
 
-    `main_activity.xml` Grafik Düzen görünmelidir gibi aşağıdaki görüntüde:
+    `main_activity.xml` Grafik düzeniniz aşağıdaki görüntüde şöyle görünmelidir:
 
     ![][A1]
-3. Bir sınıf oluşturmanız `Notifications` aynı pakette, `MainActivity` sınıfı.
+3. Sınıfınız ile aynı `Notifications` pakette bir sınıf oluşturun. `MainActivity`
 
     ```java
     import java.util.HashSet;
@@ -202,12 +204,12 @@ Bu öğreticide oluşturduğunuz uygulamayı geliştirir [Öğreticisi: Android 
     ```
 
     Bu sınıf, bu cihazın alması gereken haber kategorilerini depolamak için yerel depolamayı kullanır. Ayrıca, bu kategoriler için kaydolma yöntemlerini içerir.
-4. İçinde `MainActivity` sınıfı, bir alan eklemek için `Notifications`:
+4. Sınıfınıza `MainActivity` için `Notifications`bir alan ekleyin:
 
     ```java
     private Notifications notifications;
     ```
-5. Daha sonra güncelleştirme `onCreate` aşağıdaki kodda gösterildiği gibi yöntemi. Notification hubs'ı kaydolmalı **subscribeToCategories** yöntemi **bildirimleri** sınıfı. 
+5. Ardından, aşağıdaki kodda `onCreate` gösterildiği gibi yöntemini güncelleştirin. **Bildirim** sınıfının **subscribeToCategories** yönteminde Notification Hubs kayıt yaptırın. 
 
     ```java
     @Override
@@ -217,7 +219,7 @@ Bu öğreticide oluşturduğunuz uygulamayı geliştirir [Öğreticisi: Android 
 
         mainActivity = this;
 
-        MyHandler.createChannelAndHandleNotifications(getApplicationContext());
+        FirebaseService.createChannelAndHandleNotifications(getApplicationContext());
         notifications = new Notifications(this, NotificationSettings.HubName, NotificationSettings.HubListenConnectionString);
         notifications.subscribeToCategories(notifications.retrieveCategories());
     }
@@ -265,7 +267,7 @@ Bu öğreticide oluşturduğunuz uygulamayı geliştirir [Öğreticisi: Android 
     }
     ```
 
-    Bu yöntem kategoriler kullanır ve bir liste oluşturur `Notifications` sınıf listesi yerel depolama alanında depolayın ve karşılık gelen kaydetmek için bildirim hub'ınızla etiketler. Kategoriler değiştirildiğinde kayıt yeni kategorilerle yeniden oluşturulur.
+    Bu yöntem, kategorilerin bir listesini oluşturur ve bu `Notifications` sınıfı kullanarak listeyi yerel depoda depolar ve Bildirim Hub 'ınızla ilgili etiketleri kaydeder. Kategoriler değiştirildiğinde kayıt yeni kategorilerle yeniden oluşturulur.
 
 Uygulamalarınız artık bir kategori kümesini cihazdaki yerel depolama alanında depolayabilir ve kullanıcının kategori seçimini her değiştirmesinde bildirim hub’ına kaydolabilir.
 
@@ -273,7 +275,7 @@ Uygulamalarınız artık bir kategori kümesini cihazdaki yerel depolama alanın
 
 Bu adımlar, yerel depolama alanında depolanan kategorileri kullanarak başlatma sırasında bildirim hub’ına kaydolur.
 
-1. Aşağıdaki kod sonunda olup olmadığını onaylamak `onCreate` yönteminde `MainActivity` sınıfı:
+1. Aşağıdaki kodun, `onCreate` `MainActivity` sınıfındaki yönteminin sonunda olduğunu doğrulayın:
 
     ```java
     notifications.subscribeToCategories(notifications.retrieveCategories());
@@ -329,7 +331,7 @@ Uygulama artık tamamlanmıştır ve kullanıcının kategori seçimini her değ
 Bu öğreticide, kategorilere kaydolmuş belirli Android cihazlara yayın bildirimleri gönderdiniz. Belirli kullanıcılara nasıl anında iletme bildirimleri gönderileceğini öğrenmek için aşağıdaki öğreticiye ilerleyin:
 
 > [!div class="nextstepaction"]
->[Belirli kullanıcılara anında iletme bildirimleri gönderme](notification-hubs-aspnet-backend-gcm-android-push-to-user-google-notification.md)
+>[Belirli kullanıcılara anında iletme bildirimleri gönderme](push-notifications-android-specific-users-firebase-cloud-messaging.md)
 
 <!-- Images. -->
 [A1]: ./media/notification-hubs-aspnet-backend-android-breaking-news/android-breaking-news1.PNG

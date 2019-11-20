@@ -3,18 +3,18 @@ title: Azure Red Hat OpenShift için Azure Active Directory Tümleştirmesi | Mi
 description: Microsoft Azure Red Hat OpenShift kümenizdeki uygulamaları test etmek için bir Azure AD güvenlik grubu ve kullanıcı oluşturmayı öğrenin.
 author: jimzim
 ms.author: jzim
-ms.service: openshift
+ms.service: container-service
 manager: jeconnoc
 ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 05/13/2019
-ms.openlocfilehash: b79efa6ee1f4c052a0037a971fc36d8a9ae0ce58
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.openlocfilehash: 00609905d09f8d414660c21805c6efca5eb30843
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67458711"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67669393"
 ---
 # <a name="azure-active-directory-integration-for-azure-red-hat-openshift"></a>Azure Red Hat OpenShift için Azure Active Directory Tümleştirmesi
 
@@ -33,7 +33,7 @@ Azure Red Hat OpenShift kümenize oturum açmak için yeni bir Azure Active Dire
 1. Git [kullanıcıların tüm kullanıcılar](https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/AllUsers) dikey penceresi.
 2. Tıklayın **+ yeni kullanıcı** açmak için **kullanıcı** bölmesi.
 3. Girin bir **adı** bu kullanıcı için.
-4. Oluşturma bir **kullanıcı adı** oluşturduğunuz Kiracı adını temel alarak ile `.onmicrosoft.com` sonuna eklenir. Örneğin, `yourUserName@yourTenantName.onmicrosoft.com`. Bu kullanıcı adı yazın. Kümeniz için oturum açmanız gerekir.
+4. Oluşturma bir **kullanıcı adı** oluşturduğunuz Kiracı adını temel alarak ile `.onmicrosoft.com` sonuna eklenir. Örneğin: `yourUserName@yourTenantName.onmicrosoft.com`. Bu kullanıcı adı yazın. Kümeniz için oturum açmanız gerekir.
 5. Tıklayın **dizin rolü** dizin rolü bölmesini açın ve **genel yönetici** ve ardından **Tamam** bölmesinin alt kısmındaki.
 6. İçinde **kullanıcı** bölmesinde tıklayın **Göster parola** ve geçici parolasını kaydedin. İlk kez oturum sonra sıfırlayın istenir.
 7. Bölmenin altında tıklatın **Oluştur** kullanıcı oluşturmak için.

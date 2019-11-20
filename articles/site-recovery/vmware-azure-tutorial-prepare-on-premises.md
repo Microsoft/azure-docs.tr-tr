@@ -1,24 +1,23 @@
 ---
-title: Şirket içi VMware sunucularını VMware VM’lerinden Azure’a olağanüstü durum kurtarmaya hazırlama| Microsoft Docs
+title: Azure Site Recovery ile VMware VM olağanüstü durum kurtarma için hazırlanma
 description: Azure Site Recovery hizmetini kullanarak şirket içi VMware sunucularını Azure’a olağanüstü durum kurtarmaya hazırlamayı öğrenin.
-services: site-recovery
 author: rayne-wiselman
 manager: carmonm
 ms.service: site-recovery
 ms.topic: tutorial
-ms.date: 05/30/2019
+ms.date: 11/12/2019
 ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: 7a61edc01a87be8996b4d7dd5093f9d3554e6585
-ms.sourcegitcommit: c05618a257787af6f9a2751c549c9a3634832c90
+ms.openlocfilehash: c82f8130340dfc3848159a6f88db0a304a3ab149
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66417760"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73953740"
 ---
 # <a name="prepare-on-premises-vmware-servers-for-disaster-recovery-to-azure"></a>Şirket içi VMware sunucularını Azure’a olağanüstü durum kurtarmaya hazırlama
 
-Bu makalede şirket içi VMware sunucularını kullanılarak Azure'a olağanüstü durum kurtarma için hazırlamak üzere nasıl [Azure Site Recovery](site-recovery-overview.md) Hizmetleri. 
+Bu makalede, şirket içi VMware sunucularının [Azure Site Recovery](site-recovery-overview.md) Hizmetleri kullanılarak Azure 'a olağanüstü durum kurtarma için nasıl hazırlanacağı açıklanmaktadır. 
 
 Bu, şirket içi VMware sanal makineleri için Azure’da olağanüstü durum kurtarmanın nasıl ayarlanacağını gösteren serideki ikinci öğreticidir. Birinci öğreticide, VMware olağanüstü durum kurtarma için gerekli [Azure bileşenlerini ayarladık](tutorial-prepare-azure.md).
 
@@ -26,17 +25,17 @@ Bu, şirket içi VMware sanal makineleri için Azure’da olağanüstü durum ku
 Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
-> * VM bulmayı otomatikleştirmek için vCenter sunucusunda veya vSphere ESXi konağına, bir hesap hazırlayın.
-> * VMware vm'lerinde Mobility hizmetini otomatik olarak yüklemek için bir hesap hazırlama.
-> * VMware sunucusu ve sanal makine gereksinimleri ve desteğini gözden geçirin.
-> * Yük devretmeden sonra Azure Vm'lerine bağlanmak hazırlayın.
+> * VM bulmayı otomatikleştirmek için vCenter sunucusunda veya vSphere ESXi konağında bir hesap hazırlayın.
+> * VMware VM 'lerinde Mobility hizmetinin otomatik olarak yüklenmesine yönelik bir hesap hazırlayın.
+> * VMware sunucusu ve VM gereksinimlerini ve desteğini gözden geçirin.
+> * Yük devretmeden sonra Azure VM 'lerine bağlanmayı hazırlayın.
 
 > [!NOTE]
-> Öğreticiler bir senaryo için en basit dağıtım yolu gösterir. Mümkün olduğunca varsayılan seçenekleri kullanır ve tüm olası ayarları ve yolları göstermez. Ayrıntılı yönergeler için Site Recovery İçindekiler bölümünde nasıl yapılır makalesine gözden geçirin.
+> Öğreticiler, bir senaryo için en basit dağıtım yolunu gösterir. Mümkün olduğunca varsayılan seçenekleri kullanır ve tüm olası ayarları ve yolları göstermez. Ayrıntılı yönergeler için Site Recovery Içindekiler tablosunun nasıl yapılır bölümündeki makaleyi gözden geçirin.
 
 ## <a name="before-you-start"></a>Başlamadan önce
 
-Emin hazırladığınız Azure açıklandığı [bu serideki ilk öğreticide](tutorial-prepare-azure.md).
+[Bu serinin ilk öğreticisinde](tutorial-prepare-azure.md)açıklandığı gibi Azure 'ı hazırladığınızdan emin olun.
 
 ## <a name="prepare-an-account-for-automatic-discovery"></a>Otomatik bulma için bir hesap hazırlama
 
@@ -69,8 +68,8 @@ Hesabı aşağıdaki gibi hazırlayın:
 
 VM üzerinde yükleme izinleri ile bir etki alanı veya yerel hesap hazırlayın.
 
-- **Windows Vm'leri**: Bir etki alanı hesabı kullanmıyorsanız Windows Vm'lerinde yüklemek için yerel makinede uzak kullanıcı erişim denetimini devre dışı bırakın. Bunu yapmak için kayıt defterinde > **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System** altında **LocalAccountTokenFilterPolicy** adlı DWORD girişini 1 değeriyle ekleyin.
-- **Linux Vm'leri**: Linux VM üzerinde yüklemek için, kaynak Linux sunucusunda bir kök hesabı hazırlayın.
+- **Windows VM'leri**: Windows VM'lerine yüklemek için, bir etki alanı hesabı kullanmıyorsanız yerel makinede Uzak Kullanıcı Erişim denetimini devre dışı bırakın. Bunu yapmak için kayıt defterinde > **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System** altında **LocalAccountTokenFilterPolicy** adlı DWORD girişini 1 değeriyle ekleyin.
+- **Linux VM'leri**: Linux VM'lerine yüklemek için, kaynak Linux sunucusunda bir kök hesabı hazırlayın.
 
 
 ## <a name="check-vmware-requirements"></a>VMware gereksinimlerini denetleme
@@ -82,7 +81,7 @@ VMware sunucularının ve sanal makinelerin gereksinimlerle uyumlu olduğundan e
 3. Şirket içi [ağ](vmware-physical-azure-support-matrix.md#network) ve [depolama](vmware-physical-azure-support-matrix.md#storage) desteğini denetleyin. 
 4. Yük devretmenin ardından [Azure ağ](vmware-physical-azure-support-matrix.md#azure-vm-network-after-failover), [depolama](vmware-physical-azure-support-matrix.md#azure-storage) ve [işlem](vmware-physical-azure-support-matrix.md#azure-compute) için nelerin desteklendiğini denetleyin.
 5. Azure’a çoğalttığınız şirket içi sanal makineleriniz, [Azure sanal makinesi gereksinimleri](vmware-physical-azure-support-matrix.md#azure-vm-requirements) ile uyumlu olmalıdır.
-6. Linux sanal makinelerinin, cihaz adı veya bağlama noktası adı benzersiz olmalıdır. Hiçbir iki cihazları/bağlama noktaları aynı ada sahip olduğundan emin olun. Bu ad büyük küçük harfe duyarlı olmayan unutmayın. Örneğin, aynı VM için iki cihazı adlandırma _cihaz1_ ve _cihaz1_ izin verilmiyor.
+6. Linux sanal makinelerinde, cihaz adı veya bağlama noktası adı benzersiz olmalıdır. İki cihaz/bağlama noktasının aynı ada sahip olmadığından emin olun. Adın büyük/küçük harfe duyarlı olmadığına unutmayın. Örneğin, _Device1_ ve _DEVICE1_ ile aynı VM için iki cihazın adlandırılmasına izin verilmez.
 
 
 ## <a name="prepare-to-connect-to-azure-vms-after-failover"></a>Yük devretmeden sonra Azure VM'lerine bağlanmak için hazırlık yapma
@@ -94,9 +93,9 @@ Yük devretmeden sonra RDP kullanarak Windows VM’lerine bağlanmak için aşa�
 - **İnternet erişimi**. Yük devretmeden önce, yük devretmeden önce şirket içi VM’de RDP’yi etkinleştirin. TCP ve UDP kurallarının **Ortak** profil için eklendiğinden ve tüm profillerde **Windows Güvenlik Duvarı** > **İzin Verilen Uygulamalar** içinde RDP’ye izin verildiğinden emin olun.
 - **Konumdan konuma VPN erişimi**:
     - Yük devretmeden önce, şirket içi makinede RDP’yi etkinleştirin.
-    - **Etki Alanı ve Özel** ağlar için **Windows Güvenlik Duvarı** -> **İzin verilen uygulama ve özellikler içinde** RDP’ye izin verilmelidir.
+    - **Etki Alanı ve Özel** ağlar için  -> Windows Güvenlik Duvarı**İzin verilen uygulama ve özellikler içinde** RDP’ye izin verilmelidir.
     - İşletim sisteminin SAN ilkesinin **OnlineAll** olarak ayarlandığından emin olun. [Daha fazla bilgi edinin](https://support.microsoft.com/kb/3031135).
-- Bir yük devretme tetiklediğinizde VM’de bekleyen Windows güncelleştirmelerinin olmaması gerekir. Varsa, güncelleştirme tamamlanana kadar sanal makinede oturum açmanız mümkün olmayacaktır.
+- Bir yük devretme tetiklediğinizde VM’de bekleyen Windows güncelleştirmelerinin olmaması gerekir. Varsa, güncelleştirme tamamlanana kadar sanal makinede oturum açamazsınız.
 - Yük devretmeden sonra Windows Azure VM’sinde, VM’nin bir ekran görüntüsünü görmek için **Önyükleme tanılaması**’nı kontrol edin. Bağlanamıyorsanız, VM’nin çalıştığından emin olun ve şu [sorun giderme ipuçlarını](https://social.technet.microsoft.com/wiki/contents/articles/31666.troubleshooting-remote-desktop-connection-after-failover-using-asr.aspx) gözden geçirin.
 
 Yük devretmeden sonra SSH kullanarak Linux VM’lerine bağlanmak için aşağıdakileri yapın:
@@ -109,13 +108,13 @@ Yük devretmeden sonra SSH kullanarak Linux VM’lerine bağlanmak için aşağ�
 
 
 ## <a name="failback-requirements"></a>Yeniden çalışma gereksinimleri
-Şirket içi sitede yeniden çalıştırmak planlıyorsanız, bir dizi vardır [yeniden çalışma için Önkoşullar](vmware-azure-reprotect.md##before-you-begin). Bunlar artık hazırlayabilirsiniz, ancak gerek yoktur. Azure'a yük devretme sonra hazırlayabilirsiniz.
+Şirket içi sitenize geri dönmeyi planlıyorsanız, yeniden [çalışma için](vmware-azure-reprotect.md##before-you-begin)bir dizi önkoşul vardır. Bunları şimdi hazırlayabilirsiniz, ancak bunu yapmanız gerekmez. Azure 'a yük devreden sonra hazırlanabilirsiniz.
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Olağanüstü durum kurtarmayı ayarlayın. Birden çok VM'yi çoğaltıyorsanız, kapasite planlama.
+Olağanüstü durum kurtarmayı ayarlayın. Birden çok VM 'yi çoğaltırken kapasiteyi planlayın.
 > [!div class="nextstepaction"]
-> [VMware Vm'leri için Azure'da olağanüstü durum kurtarma ayarlama](vmware-azure-tutorial.md)
-> [kapasite planlaması gerçekleştirmek](site-recovery-deployment-planner.md).
+> [VMware VM 'leri Için Azure 'da olağanüstü durum kurtarmayı ayarlayın](vmware-azure-tutorial.md)
+> [Kapasite planlaması yapın](site-recovery-deployment-planner.md).

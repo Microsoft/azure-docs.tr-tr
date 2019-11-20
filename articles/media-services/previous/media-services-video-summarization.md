@@ -1,6 +1,6 @@
 ---
-title: Video özetleme oluşturmak için Azure medya Video küçük resimleri kullanmak | Microsoft Docs
-description: Video özetleme otomatik olarak kaynak videodaki ilginç parçacıkları'i seçerek uzun videoların özetlerini oluşturmanıza yardımcı olabilir. Uzun bir videoda beklenmesi gerekenler hızlı bir bakış sağlamak istediğinizde bu kullanışlıdır.
+title: Video özeti oluşturmak için Azure Media Video Thumbnails kullanma | Microsoft Docs
+description: Video özetleme, kaynak videodan ilgi çekici parçacıkları otomatik olarak seçerek uzun videoların özetlerini oluşturmanıza yardımcı olabilir. Bu, uzun bir videoda beklendiklere ilişkin hızlı bir genel bakış sağlamak istediğinizde yararlıdır.
 services: media-services
 documentationcenter: ''
 author: juliako
@@ -13,37 +13,40 @@ ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 03/20/2019
-ms.author: milanga;juliako;
-ms.openlocfilehash: 0fcacf68f4b41ed8945a6a40d7da125aef499947
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: juliako
+ms.reviewer: milanga
+ms.openlocfilehash: da397c180b6ccaf91084a0ec22210c7bcc88a5dc
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60825566"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084811"
 ---
-# <a name="use-azure-media-video-thumbnails-to-create-a-video-summarization"></a>Video özetleme oluşturmak için Azure medya Video küçük resimleri kullanma  
+# <a name="use-azure-media-video-thumbnails-to-create-a-video-summarization"></a>Video özeti oluşturmak için Azure Media Video Thumbnails kullanma  
+ 
 ## <a name="overview"></a>Genel Bakış
-**Azure medya Video küçük resimleri** medya işlemci (MP) uzun bir video özeti Önizleme isteyen müşteriler için kullanışlı bir video özeti oluşturmanıza olanak sağlar. Örneğin, müşteriler kısa bir "video Özeti" görmek isteyebilirsiniz bir küçük resmin üzerinde üzerine gelin, bunlar. Parametrelerinin ince ayar yapma tarafından **Azure medya Video küçük resimleri** bir yapılandırma hazır MP'nin güçlü kare algılama ve birleştirme teknoloji algorithmically açıklayıcı bir alt klip oluşturmak için kullanabilirsiniz.  
 
-**Azure medya Video küçük resmi** MP şu anda Önizleme aşamasındadır.
+**Azure Media video Thumbnails** medya IŞLEMCISI (MP), yalnızca uzun bir videonun özetini önizlemek isteyen müşteriler için yararlı olan bir videonun özetini oluşturmanızı sağlar. Örneğin, müşteriler bir küçük resmin üzerine gelindiğinde kısa bir "Özet videosu" görmek isteyebilir. Bir yapılandırma ön ayarı aracılığıyla **Azure Media video Thumbnails** parametrelerini ayırarak, açıklayıcı bir alt klip oluşturmak ALGORITHMICALLY için MP 'nin güçlü görüntü algılama ve birleştirme teknolojisini kullanabilirsiniz.  
 
-Bu makalede, ilgili ayrıntıları verir. **Azure medya Video küçük resmi** ve .NET için Media Services SDK ile kullanma işlemi gösterilmektedir.
+**Azure Media video küçük resim** MP, şu anda önizleme aşamasındadır.
+
+Bu makale, **Azure Media video küçük resmindeki** ayrıntıları sağlar ve .net IÇIN Media Services SDK ile nasıl kullanacağınızı gösterir.
 
 ## <a name="limitations"></a>Sınırlamalar
 
-Bazı durumlarda, çıktı farklı perde, videonuzu oluşan değil, tek bir görüntüsü yalnızca olacaktır.
+Bazı durumlarda, videonuzun farklı sahnelerin olmaması durumunda çıkış yalnızca tek bir görüntü olacaktır.
 
-## <a name="video-summary-example"></a>Video Özet örnek
-Azure medya Video küçük resimleri medya işleyicisini neler yapabileceğinizi bazı örnekleri aşağıda verilmiştir:
+## <a name="video-summary-example"></a>Video Özeti örneği
+Azure Media Video Thumbnails medya işlemcisinin yapabilecekleri bazı örnekler aşağıda verilmiştir:
 
-### <a name="original-video"></a>Özgün videoyu
-[Özgün videoyu](https://ampdemo.azureedge.net/azuremediaplayer.html?url=httpss%3A%2F%2Fnimbuscdn-nimbuspm.streaming.mediaservices.windows.net%2Faed33834-ec2d-4788-88b5-a4505b3d032c%2FMicrosoft%27s%20HoloLens%20Live%20Demonstration.ism%2Fmanifest)
+### <a name="original-video"></a>Özgün video
+[Özgün video](https://ampdemo.azureedge.net/azuremediaplayer.html?url=httpss%3A%2F%2Fnimbuscdn-nimbuspm.streaming.mediaservices.windows.net%2Faed33834-ec2d-4788-88b5-a4505b3d032c%2FMicrosoft%27s%20HoloLens%20Live%20Demonstration.ism%2Fmanifest)
 
-### <a name="video-thumbnail-result"></a>Video küçük resim sonucu
-[Video küçük resim sonucu](https://ampdemo.azureedge.net/azuremediaplayer.html?url=https%3A%2F%2Fnimbuscdn-nimbuspm.streaming.mediaservices.windows.net%2Ff5c91052-4232-41d4-b531-062e07b6a9ae%2FHololens%2520Demo_VideoThumbnails_MotionThumbnail.mp4)
+### <a name="video-thumbnail-result"></a>Video küçük resmi sonucu
+[Video küçük resmi sonucu](https://ampdemo.azureedge.net/azuremediaplayer.html?url=https%3A%2F%2Fnimbuscdn-nimbuspm.streaming.mediaservices.windows.net%2Ff5c91052-4232-41d4-b531-062e07b6a9ae%2FHololens%2520Demo_VideoThumbnails_MotionThumbnail.mp4)
 
-## <a name="task-configuration-preset"></a>Görev yapılandırması (hazır)
-Video küçük resim görevle oluştururken **Azure medya Video küçük resimleri**, yapılandırma hazır belirtmeniz gerekir. Küçük resim Yukarıdaki örnek aşağıdaki temel JSON yapılandırma ile oluşturulmuştur:
+## <a name="task-configuration-preset"></a>Görev yapılandırması (önceden ayarlanmış)
+**Azure Media video Thumbnails**bir video küçük resim görevi oluştururken, bir yapılandırma önayarı belirtmeniz gerekir. Yukarıdaki küçük resim örneği aşağıdaki temel JSON yapılandırmasıyla oluşturulmuştur:
 
 ```json
     {
@@ -51,22 +54,22 @@ Video küçük resim görevle oluştururken **Azure medya Video küçük resimle
     }
 ```
 
-Şu anda, aşağıdaki parametreleri değiştirebilirsiniz:
+Şu anda aşağıdaki parametreleri değiştirebilirsiniz:
 
 | param | Açıklama |
 | --- | --- |
-| outputAudio |Sonuç video, ses içerip içermeyeceğini belirtir. <br/>İzin verilen değerler şunlardır: TRUE veya False. Varsayılan değer True'dur. |
-| fadeInFadeOut |Belirtir olup olmadığını fade geçişleri ayrı hareket küçük resimleri arasında kullanılır.  <br/>İzin verilen değerler şunlardır: TRUE veya False.  Varsayılan değer True'dur. |
-| maxMotionThumbnailDurationInSecs |Ne kadar tüm sonuç video olmayacağını belirten bir tamsayı.  Varsayılan, özgün video süresine bağlıdır. |
+| outputAudio |Sonuç videonun herhangi bir ses içerip içermediğini belirtir. <br/>İzin verilen değerler: true veya false. Varsayılan değer true 'dur. |
+| fadeInFadeOut |Ayrı hareket küçük resimleri arasında Soldur geçişlerinin kullanılıp kullanılmayacağını belirtir.  <br/>İzin verilen değerler: true veya false.  Varsayılan değer true 'dur. |
+| maxMotionThumbnailDurationInSecs |Elde edilen videonun tamamının ne kadar süreyle olması gerektiğini belirten tamsayı.  Varsayılan değer özgün video süresine bağlıdır. |
 
-Varsayılan süre aşağıdaki tabloda açıklanmaktadır, **maxMotionThumbnailInSecs** kullanılmaz.
+Aşağıdaki tabloda, **maxMotionThumbnailInSecs** kullanılmazsa varsayılan süre açıklanmaktadır.
 
 |  |  |  |
 | --- | --- | --- |
 | Video süresi |d < 3 dk |3 dk < d < 15 dk |
-| Küçük resim süresi |15 saniye (2-3 Sahne) |30 saniye (3-5 Sahne) |
+| Küçük resim süresi |15 sn (2-3 sahne) |30 sn (3-5 sahne) |
 
-Kullanılabilir parametrelerin aşağıdaki JSON ayarlar.
+Aşağıdaki JSON, kullanılabilir parametreleri ayarlar.
 
 ```json
     {
@@ -81,10 +84,10 @@ Kullanılabilir parametrelerin aşağıdaki JSON ayarlar.
 
 ## <a name="net-sample-code"></a>.NET örnek kodu
 
-Aşağıdaki program gösterir nasıl yapılır:
+Aşağıdaki program, aşağıdakilerin nasıl yapılacağını göstermektedir:
 
-1. Bir varlık oluşturun ve varlığa bir medya dosyası yükleyin.
-2. Aşağıdaki json hazır içeren bir yapılandırma dosyasını temel alan bir video küçük resim görevini içeren bir iş oluşturur: 
+1. Bir varlık oluşturun ve kıymete bir medya dosyası yükleyin.
+2. Aşağıdaki JSON ön ayarını içeren bir yapılandırma dosyasını temel alan video küçük resmi görevi ile bir iş oluşturur: 
     
     ```json
             {                
@@ -275,17 +278,17 @@ Geliştirme ortamınızı kurun ve app.config dosyanızı [.NET ile Media Servic
     }
 ```
 
-### <a name="video-thumbnail-output"></a>Video küçük resim çıkışı
-[Video küçük resim çıkışı](https://ampdemo.azureedge.net/azuremediaplayer.html?url=https%3A%2F%2Fnimbuscdn-nimbuspm.streaming.mediaservices.windows.net%2Fd06f24dc-bc81-488e-a8d0-348b7dc41b56%2FHololens%2520Demo_VideoThumbnails_MotionThumbnail.mp4)
+### <a name="video-thumbnail-output"></a>Video küçük resmi çıkışı
+[Video küçük resmi çıkışı](https://ampdemo.azureedge.net/azuremediaplayer.html?url=https%3A%2F%2Fnimbuscdn-nimbuspm.streaming.mediaservices.windows.net%2Fd06f24dc-bc81-488e-a8d0-348b7dc41b56%2FHololens%2520Demo_VideoThumbnails_MotionThumbnail.mp4)
 
-## <a name="media-services-learning-paths"></a>Media Services’i öğrenme yolları
+## <a name="media-services-learning-paths"></a>Media Services öğrenme yolları
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
 
 ## <a name="provide-feedback"></a>Geri bildirimde bulunma
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
 
 ## <a name="related-links"></a>İlgili bağlantılar
-[Azure Media Services Analizi'ne genel bakış](media-services-analytics-overview.md)
+[Azure Media Services Analytics genel bakışı](media-services-analytics-overview.md)
 
-[Azure medya analizi tanıtımları](https://azuremedialabs.azurewebsites.net/demos/Analytics.html)
+[Azure Media Analytics gösterileri](https://azuremedialabs.azurewebsites.net/demos/Analytics.html)
 

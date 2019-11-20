@@ -5,30 +5,34 @@
   items:
     - name: Faturanızı anlama
       href: billing-understand-your-bill.md
-    - name: EA faturanızı anlama
-      href: billing-understand-your-bill-ea.md
-    - name: Faturanızı anlama - yalnızca Microsoft Müşteri Sözleşmesi
+    - name: Faturanızı anlama - Microsoft Müşteri Sözleşmesi
       href: billing-mca-understand-your-bill.md
+    - name: Faturanızı anlama - Microsoft İş Ortağı Sözleşmesi
+      href: billing-mpa-understand-your-bill.md
     - name: Microsoft Azure faturanızı görüntüleme ve indirme
       href: billing-download-azure-invoice.md
     - name: Microsoft Azure kullanımınızı ve ücretleri görüntüleme ve indirme
       href: billing-download-azure-daily-usage.md
-    - name: Microsoft Müşteri Sözleşmeniz için vergi belgelerini görüntüleme ve indirme
+    - name: Vergi belgelerini görüntüleme ve indirme
       href: billing-mca-download-tax-document.md
     - name: Üçüncü taraf hizmet değişiklikleri
       href: billing-understand-your-azure-marketplace-charges.md
     - name: Kullanım koşulları açıklandı
       href: billing-understand-your-usage.md
-    - name: Kullanım koşulları açıklandı - yalnızca Microsoft Müşteri Sözleşmesi
+    - name: Kullanım koşulları açıklandı - Microsoft Müşteri Sözleşmesi
       href: billing-mca-understand-your-usage.md
     - name: Fatura koşulları açıklandı
       href: billing-understand-your-invoice.md
-    - name: Fatura koşulları açıklandı - yalnızca Microsoft Müşteri Sözleşmesi
+    - name: Fatura koşulları açıklandı - Microsoft Müşteri Sözleşmesi
       href: billing-mca-understand-your-invoice.md
-    - name: Faturanızı ödeme - yalnızca Microsoft Müşteri Sözleşmesi
+    - name: Fatura koşulları açıklandı - Microsoft İş Ortağı Sözleşmesi
+      href: billing-mpa-invoice-terms-explained.md
+    - name: Faturanızı ödeme - Microsoft Müşteri Sözleşmesi
       href: billing-how-to-pay-bill.md
     - name: Microsoft Müşteri Sözleşmesi için ödeme hesapları
       href: billing-mca-overview.md
+    - name: Microsoft İş Ortağı Sözleşmesi için ödeme hesapları
+      href: mpa-overview.md
 - name: Maliyetleri yönetme
   items:
     - name: Beklenmeyen maliyetleri engelleme
@@ -61,29 +65,55 @@
               href: billing-prepay-sql-data-warehouse-charges-with-reserved-capacity.md
             - name: Sanal makine
               href: ../virtual-machines/windows/prepay-reserved-vm-instances.md?toc=/azure/billing/TOC.json
+            - name: Azure Storage
+              href: ../storage/blobs/storage-blob-reserved-capacity.md?toc=/azure/billing/TOC.json
             - name: Cosmos DB
               href: ../cosmos-db/cosmos-db-reserved-capacity.md?toc=/azure/billing/TOC.json
             - name: SQL Veritabanı
               href: ../sql-database/sql-database-reserved-capacity.md?toc=/azure/billing/TOC.json
+            - name: Azure Veri Gezgini
+              href: ../data-explorer/pricing-reserved-capacity.md?toc=/azure/billing/TOC.json
+            - name: Azure Databricks
+              href: billing-prepay-databricks-reserved-capacity.md
+            - name: App Service
+              href: billing-prepay-app-service-isolated-stamp.md
             - name: Azure yazılım planları
               href: ../virtual-machines/linux/prepay-suse-software-charges.md?toc=/azure/billing/TOC.json
+            - name: Aylık ödemeler içeren bir rezervasyon satın alma
+              href: billing-monthly-payments-reservations.md
+            - name: Rezervasyonları yenileme
+              href: billing-reservation-renew.md
         - name: İndirim nasıl uygulanır?
           items:
             - name: Ayrılmış VM Örnekleri
               href: billing-understand-vm-reservation-charges.md
+            - name: Azure Depolama ayrılmış kapasitesi
+              href: billing-understand-storage-charges.md
             - name: Cosmos DB ayrılmış kapasitesi
               href: billing-understand-cosmosdb-reservation-charges.md
             - name: SQL Veritabanı ayrılmış kapasitesi
               href: billing-understand-reservation-charges.md
             - name: SQL Veri Ambarı
               href: billing-how-reservation-discount-is-applied-to-azure-sql-dw.md
+            - name: Azure Veri Gezgini
+              href: billing-understand-kusto-azuredataexplorer-reservation-charges.md
+            - name: Azure Databricks
+              href: billing-reservation-discount-databricks.md
+            - name: MySQL için Azure Veritabanı
+              href: billing-understand-reservation-charges-mysql.md
+            - name: PostgreSQL için Azure Veritabanı
+              href: billing-understand-reservation-charges-postgresql.md
+            - name: MariaDB için Azure Veritabanı
+              href: billing-understand-reservation-charges-mariadb.md
+            - name: App Service
+              href: billing-reservation-discount-app-service-isolated-stamp.md
             - name: Azure yazılım planları
               href: billing-understand-suse-reservation-charges.md
-        - name: Yazılım maliyetleri dahil değil
+        - name: Windows ve SQL maliyetleri dahil değil
           href: billing-reserved-instance-windows-software-costs.md
-        - name: Bireysel abonelikler için kullanım
+        - name: Bireysel aboneliklere yönelik kullanım verileri
           href: billing-understand-reserved-instance-usage.md
-        - name: Kurumsal için kullanım
+        - name: Kurumsal müşterilere yönelik kullanım verileri
           href: billing-understand-reserved-instance-usage-ea.md
         - name: Rezervasyon değişiklikleri ve para iadeleri
           href: billing-azure-reservations-self-service-exchange-and-refund.md
@@ -103,16 +133,16 @@
           href: billing-avoid-charges-free-account.md
         - name: Kullanımı denetleme
           href: billing-check-free-service-usage.md
-        - name: Aboneliği yükseltme
+        - name: Hesabı yükseltme
           href: billing-upgrade-azure-subscription.md
-        - name: Ölçüm eşleştirmeyi anlama
-          href: billing-understand-free-service-meter-mapping.md
     - name: Profili düzenleme
       href: billing-how-to-change-azure-account-profile.md
+    - name: Bankacılık ve güçlü müşteri kimlik doğrulamasını açma
+      href: billing-open-banking-strong-customer-authentication.md
+    - name: Vadesi geçmiş bakiye sorunlarını çözme
+      href: billing-azure-subscription-past-due-balance.md
     - name: Faturalandırmaya erişim izni verme
       href: billing-manage-access.md
-    - name: Azure'da EA rolleri
-      href: billing-understand-ea-roles.md
     - name: Azure’da Microsoft Müşteri Sözleşmesi rolleri
       href: billing-understand-mca-roles.md
     - name: İş ortağı kimliğini bağlama
@@ -123,22 +153,46 @@
       href: billing-mca-section-invoice.md
     - name: Microsoft Müşteri Sözleşmesi’ndeki EA görevleri
       href: billing-mca-enterprise-operations.md
-    - name: Vadesi geçmiş bakiye sorunlarını çözme
-      href: billing-azure-subscription-past-due-balance.md
+    - name: EA yönetimi
+      items:
+        - name: Azure EA portalını kullanmaya başlama
+          href: billing-ea-portal-get-started.md
+        - name: EA faturanızı anlama
+          href: billing-understand-your-bill-ea.md
+        - name: Azure'da EA rolleri
+          href: billing-understand-ea-roles.md
+        - name: Azure EA portalı yönetimi
+          href: billing-ea-portal-administration.md
+        - name: Azure EA sözleşmeleri ve düzeltmeleri
+          href: billing-ea-portal-agreements.md
+        - name: Kurumsal kayıt faturaları
+          href: billing-ea-portal-enrollment-invoices.md
+        - name: Azure Kurumsal REST API'leri
+          href: billing-ea-portal-rest-apis.md
+        - name: Azure EA VM ayrılmış örnekleri
+          href: billing-ea-portal-vm-reservations.md
+        - name: Azure EA portalı erişim sorunlarını giderme
+          href: billing-ea-portal-troubleshoot.md
+        - name: Microsoft Müşteri Sözleşmesi’ndeki EA görevleri
+          href: billing-mca-enterprise-operations.md
     - name: Microsoft Müşteri Sözleşmesi için ödeme hesabı ayarlama
-      href: billing-mca-setup-account.md
+      href: mca-setup-account.md
     - name: Office 365 hesabıyla kaydolma
       href: billing-use-existing-office-365-account-azure-subscription.md
     - name: Azure hesabı ile Office 365 için kaydolma
       href: billing-use-existing-azure-account-for-office-365-subscription.md
 - name: Aboneliği yönetme
   items:
+    - name: Abonelik durumları
+      href: billing-azure-subscription-states.md
     - name: Aboneliği yeniden etkinleştirme
       href: billing-subscription-become-disable.md
     - name: Sahipliği devretme
       href: billing-subscription-transfer.md
     - name: Sahiplik isteme - Microsoft Müşteri Sözleşmesi
       href: billing-mca-request-billing-ownership.md
+    - name: Sahiplik isteme - Microsoft İş Ortağı Sözleşmesi
+      href: mpa-request-ownership.md
     - name: Aboneliği iptal etme
       href: billing-how-to-cancel-azure-subscription.md
     - name: Kredi kartını değiştirme
@@ -155,8 +209,6 @@
       href: ../azure-resource-manager/resource-group-move-resources.md?toc=/azure/billing/TOC.json
     - name: Ek abonelik oluşturma
       href: billing-create-subscription.md
-    - name: Ek abonelik oluşturma - Microsoft Müşteri Sözleşmesi
-      href: billing-mca-create-subscription.md
     - name: Program aracılığıyla Kurumsal abonelikler oluşturma
       href: ../azure-resource-manager/programmatically-create-subscription.md?toc=/azure/billing/TOC.json
     - name: Abonelik bilgilerini dışarı aktarma
@@ -169,12 +221,14 @@
   items:
     - name: Abonelik bulunamadı
       href: billing-no-subscriptions-found.md
+    - name: Ödeme sorunları
+      href: billing-troubleshoot-azure-payment-issues.md
     - name: Reddedilen kart
-      href: 'https://support.microsoft.com/en-us/help/4042960'
+      href: billing-troubleshoot-declined-card.md
     - name: Kaydolma sorunları
-      href: 'https://support.microsoft.com/en-us/help/4042959'
-    - name: Oturum açma sorunları
-      href: 'https://support.microsoft.com/en-us/help/4042961'
+      href: billing-troubleshoot-azure-sign-up.md
+    - name: Abonelik oturum açma sorunları
+      href: billing-troubleshoot-sign-in-issue.md
     - name: Kurumsal maliyet görünümü devre dışı
       href: billing-enterprise-mgmt-grp-troubleshoot-cost-view.md
     - name: Desteğe başvurun

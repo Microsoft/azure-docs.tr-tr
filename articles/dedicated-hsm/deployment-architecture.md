@@ -1,37 +1,38 @@
 ---
-title: Dağıtım mimarisi - Azure ayrılmış HSM | Microsoft Docs
-description: Azure ayrılmış HSM uygulama mimarisinin bir parçası olarak kullanırken, temel tasarım konuları
+title: Dağıtım mimarisi-Azure ayrılmış HSM | Microsoft Docs
+description: Uygulama mimarisinin bir parçası olarak Azure ayrılmış HSM kullanırken temel tasarım konuları
 services: dedicated-hsm
-author: barclayn
-manager: barbkess
+author: msmbaldwin
+manager: rkarlin
 ms.custom: mvc, seodec18
 ms.service: key-vault
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 03/27/2019
-ms.author: barclayn
-ms.openlocfilehash: f078df7677e771d131f15056ac4a54a58a3134bd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/11/2019
+ms.author: mbaldwin
+ms.openlocfilehash: ff86c25de006495e3536f2ff907e1cf40a216f8e
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60912304"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73927856"
 ---
-# <a name="azure-dedicated-hsm-deployment-architecture"></a>Azure ayrılmış HSM dağıtım mimarisi
+# <a name="azure-dedicated-hsm-deployment-architecture"></a>Azure Ayrılmış HSM dağıtım mimarisi
 
-Azure ayrılmış HSM azure'da şifreleme anahtar depolama alanı sağlar. Bu, katı güvenlik gereksinimleri karşılar. Müşteriler, Azure ayrılmış HSM kullanarak yararlanacaktır bunlar:
+Azure adanmış HSM, Azure 'da şifreleme anahtar depolaması sağlar. Sıkı güvenlik gereksinimlerini karşılar. Müşteriler, şu durumlarda Azure ayrılmış HSM 'yi kullanmaya yarar olacaktır:
 
-* FIPS 140-2 Düzey 3 sertifika karşılamalıdır
-* HSM özel erişime sahip olmasını gerektirir
-* tüm cihazları tam denetime sahip olmalıdır
+* FIPS 140-2 düzey 3 sertifikalarıyla Buluşmalıdır
+* HSM 'ye özel erişime sahip olmaları gerekir
+* cihazların tamamen denetimine sahip olması gerekir
 
-HSM'ler, Microsoft veri merkezleri arasında dağıtılan ve yüksek oranda kullanılabilir bir çözümün temel olarak bir cihaz çifti olarak kolayca sağlanabilir. Bir olağanüstü durum dayanıklı çözümü için bölgede de dağıtılabilir. Şu anda kullanılabilir, ayrılmış HSM ile bölgeleri şunlardır:
+HSM 'ler, Microsoft 'un veri merkezlerinde dağıtılır ve yüksek oranda kullanılabilir bir çözümün temeli olarak kolayca bir cihaz çifti olarak sağlanabilir. Ayrıca, olağanüstü durum dayanıklı bir çözüm için bölgeler arasında da dağıtılabilir. Ayrılmış HSM 'ye sahip bölgeler Şu anda kullanılabilir:
 
 * Doğu ABD
 * Doğu ABD 2
 * Batı ABD
+* Batı ABD 2
 * Orta Güney ABD
 * Güneydoğu Asya
 * Doğu Asya
@@ -44,29 +45,29 @@ HSM'ler, Microsoft veri merkezleri arasında dağıtılan ve yüksek oranda kull
 * Avustralya Doğu
 * Avustralya Güneydoğu
 
-Bu bölgeler her iki bağımsız veri merkezine veya en az iki bağımsız kullanılabilirlik alanları dağıtılmış HSM raflar sahiptir. Güney Doğu Asya üç kullanılabilirlik ve Doğu ABD 2 iki sahiptir. Avrupa, Asya ve ayrılmış HSM hizmeti sunan ABD toplam sekiz bölgede yoktur. Resmi Azure bölgeleri hakkında daha fazla bilgi için bkz. [Azure bölgeleri bilgi](https://azure.microsoft.com/global-infrastructure/regions/).
-Ayrılmış HSM tabanlı herhangi bir çözüm için bazı tasarım etkenleri konum/gecikme, yüksek kullanılabilirliği olan ve diğer dağıtılmış uygulamalar için destek.
+Bu bölgelerin her birinde, iki bağımsız veri merkezinde veya en az iki bağımsız kullanılabilirlik bölgesinde dağıtılan HSM rafları vardır. Güney Doğu Asya üç kullanılabilirlik bölgesine sahiptir ve Doğu ABD 2 iki tane vardır. Avrupa, Asya ve ABD 'de adanmış HSM hizmeti sunan toplam sekiz bölge vardır. Azure bölgeleri hakkında daha fazla bilgi için bkz. resmi [Azure bölgeleri bilgileri](https://azure.microsoft.com/global-infrastructure/regions/).
+Tüm özel HSM tabanlı çözümler için bazı tasarım faktörleri konum/gecikme, yüksek kullanılabilirlik ve diğer dağıtılmış uygulamalar için destek.
 
 ## <a name="device-location"></a>Cihaz konumu
 
-En iyi HSM cihaz şifreleme işlemleri gerçekleştiren uygulamalar için en yakın olmasa konumdur. Bölge gecikme süresi, tek basamaklı milisaniye olması beklenir. Bölgeler arası gecikme bundan 5 ila 10 kat daha yüksek olabilir.
+En iyi HSM cihaz konumu, şifreleme işlemleri gerçekleştiren uygulamalara en yakın yakındır. Bölge içi gecikme süresinin tek basamaklı milisaniye olması beklenir. Çapraz bölge gecikmesi bundan daha yüksek 5 ila 10 kat olabilir.
 
 ## <a name="high-availability"></a>Yüksek kullanılabilirlik
 
-Yüksek kullanılabilirlik elde etmek için bir müşteri yüksek kullanılabilirlik çiftinde Gemalto yazılımını kullanarak yapılandırılan iki HSM cihazlarına bir bölgede kullanmanız gerekir. Bu dağıtım türü, tek bir cihaz anahtar işlemleri işlemesini önleyen bir sorunla karşılaşırsa anahtarları kullanılabilirliğini sağlar. Ayrıca önemli ölçüde risk güç kaynağı değiştirme gibi arıza/tamir bakımın gerçekleştirildiği sırada azaltır. Bölgesel düzeyinde hata herhangi bir türden için hesap bir tasarım önemlidir. Deprem kasırgalar veya sel gibi doğal afetler olduğunda bölgesel düzeyindeki hatalar oluşabilir. HSM cihazlarına başka bir bölgede sağlayarak bu tür olaylar azaltılması. Başka bir bölgede dağıtılan cihazları birlikte Gemalto yazılım yapılandırma ile eşleştirilmiş. En az bir dağıtım için yüksek oranda kullanılabilir ve olağanüstü durum yani dayanıklı çözümüdür dört HSM cihazlar arasında iki bölgeleri. Yerel yedeklilik ve bölgeler arası yedeklilik HSM cihaz dağıtımları gecikme süresi, kapasite desteklemek için veya diğer uygulamaya özgü gereksinimlerini karşılamak üzere daha eklemek için temel olarak kullanılabilir.
+Yüksek kullanılabilirlik elde etmek için bir müşterinin yüksek kullanılabilirlik çifti olarak Gemalto Software kullanılarak yapılandırılmış bir bölgede iki HSM cihazı kullanması gerekir. Bu dağıtım türü, tek bir cihaz, anahtar işlemlerini işlemesini önlemek için bir sorun yaşadığında anahtarların kullanılabilirliğini sağlar. Ayrıca güç kaynağı değişikliği gibi onarım/çözme bakım işlemi gerçekleştirirken riski önemli ölçüde azaltır. Her türlü bölgesel düzey hata için bir tasarımın hesaba göre olması önemlidir. Bölgesel düzey arızalar, acericanes, floods veya deprem gibi doğal felaketler olduğunda meydana gelebilir. Bu tür olaylar, başka bir bölgedeki HSM cihazları sağlanarak azaltılmalıdır. Başka bir bölgede dağıtılan cihazlar, Gemalto yazılım yapılandırması aracılığıyla birlikte eşleştirilebilir. Bu, yüksek oranda kullanılabilir ve olağanüstü durum dayanıklı bir çözüm için en düşük dağıtımın iki bölgede dört HSM cihazı olduğu anlamına gelir. Bölgeler arasında yerel artıklığı ve artıklık, gecikme süresi, kapasiteyi desteklemek veya uygulamaya özel diğer gereksinimleri karşılamak için başka bir HSM cihaz dağıtımı eklemek için temel olarak kullanılabilir.
 
 ## <a name="distributed-application-support"></a>Dağıtılmış uygulama desteği
 
-Ayrılmış HSM cihazlar genellikle desteklemek üzere anahtar deposu ve anahtar alma işlemleri gerçekleştirmek için gereken uygulamalar olarak dağıtılır. Ayrılmış HSM cihazlarına bağımsız uygulama desteği için 10 bölüme sahip. Cihaz konumu hizmetini kullanmak için gereken tüm uygulamalar bütüncül bir görünümü temel almalıdır.
+Adanmış HSM cihazları genellikle anahtar depolama ve anahtar alma işlemleri gerçekleştirmesi gereken uygulamalar desteğiyle dağıtılır. Adanmış HSM cihazlarının bağımsız uygulama desteği için 10 bölümü vardır. Cihaz konumu, hizmeti kullanması gereken tüm uygulamaların bütünsel görünümünü temel almalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Dağıtım mimarisi belirlendikten sonra o mimaride uygulamak için çoğu yapılandırma etkinlikleri Gemalto tarafından sağlanır. Bu cihaz yapılandırması ve bunun yanı sıra uygulama içerir tümleştirme senaryoları. Daha fazla bilgi için [Gemalto müşteri desteği](https://supportportal.gemalto.com/csm/) portalı ve indirme yönetim ve yapılandırma kılavuzları. Microsoft iş ortağı site tümleştirme kılavuzlarını çeşitli sahiptir.
-Yüksek kullanılabilirlik ve güvenlik gibi hizmete tüm temel kavramlarını gibi iyi cihaz sağlama veya uygulama tasarım ve dağıtım önce anlaşıldığından önerilir.
-Daha fazla kavramı düzey konular:
+Dağıtım mimarisi belirlendikten sonra, bu mimariyi uygulamak için gereken yapılandırma etkinliklerinin çoğu, Gemalto tarafından sağlanacaktır. Buna cihaz yapılandırması ve uygulama tümleştirme senaryoları da dahildir. Daha fazla bilgi için, [Gemalto müşteri destek](https://supportportal.gemalto.com/csm/) portalını kullanın ve yönetim ve yapılandırma kılavuzlarını indirin. Microsoft iş ortağı sitesinin çeşitli Tümleştirme kılavuzu vardır.
+Hizmetin yüksek kullanılabilirlik ve güvenlik gibi tüm temel kavramlarının cihaz sağlama veya uygulama tasarımı ve dağıtımdan önce iyi anlaşıldığından emin olmanız önerilir.
+Daha fazla kavram düzeyi konuları:
 
 * [Yüksek kullanılabilirlik](high-availability.md)
 * [Fiziksel güvenlik](physical-security.md)
 * [Ağ](networking.md)
-* [Desteklenebilirliği](supportability.md)
+* [Desteklenebilirlik](supportability.md)
 * [İzleme](monitoring.md)

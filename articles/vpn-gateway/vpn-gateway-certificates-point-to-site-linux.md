@@ -1,26 +1,31 @@
 ---
-title: 'Oluşturma ve noktadan siteye için sertifikalar verme: Linux: CLI: Azure | Microsoft Docs'
-description: Otomatik olarak imzalanan kök sertifika oluşturma, ortak anahtarını dışarı aktarmak ve Linux (strongSwan) CLI kullanarak istemci sertifikalarını oluşturmak.
+title: 'Noktadan siteye sertifikaları oluşturma ve dışarı aktarma: Linux: CLI Azure | Microsoft Docs'
+description: Otomatik olarak imzalanan bir kök sertifika oluşturun, ortak anahtarı dışarı aktarın ve Linux (Strongswa) CLı kullanarak istemci sertifikaları oluşturun.
 services: vpn-gateway
-author: cherylmc
+author: anzaman
 ms.service: vpn-gateway
 ms.topic: article
-ms.date: 01/31/2019
-ms.author: cherylmc
-ms.openlocfilehash: b673be47d4951adab08f04efc56410095f549356
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/14/2019
+ms.author: alzam
+ms.openlocfilehash: 2544df920580745e42aee1fc5e681d40bd1e74f9
+ms.sourcegitcommit: 18061d0ea18ce2c2ac10652685323c6728fe8d5f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60766183"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69036014"
 ---
-# <a name="generate-and-export-certificates"></a>Oluşturma ve sertifika dışarı aktarma
+# <a name="generate-and-export-certificates"></a>Sertifikaları oluşturma ve dışarı aktarma
 
-Noktadan siteye bağlantılar, kimlik doğrulaması için sertifikaları kullanır. Bu makalede Linux CLI ve strongSwan kullanarak istemci sertifikalarını oluşturmak ve otomatik olarak imzalanan kök sertifika oluşturma gösterilmektedir. Farklı bir sertifika yönergeler arıyorsanız bkz [Powershell](vpn-gateway-certificates-point-to-site.md) veya [MakeCert](vpn-gateway-certificates-point-to-site-makecert.md) makaleler. Adımları yerine CLI GUI kullanarak strongSwan yükleme hakkında daha fazla bilgi için bkz. [istemci yapılandırması](point-to-site-vpn-client-configuration-azure-cert.md#install) makalesi.
+Noktadan siteye bağlantılar kimlik doğrulaması için sertifikaları kullanır. Bu makalede, otomatik olarak imzalanan bir kök sertifika oluşturma ve Linux CLı ve Strongswa kullanarak istemci sertifikaları oluşturma işlemlerinin nasıl yapılacağı gösterilir. Farklı sertifika yönergeleri arıyorsanız, [PowerShell](vpn-gateway-certificates-point-to-site.md) veya [MakeCert](vpn-gateway-certificates-point-to-site-makecert.md) makalelerine bakın. CLı yerine GUI 'yi kullanarak Strongswa 'nın nasıl yükleneceği hakkında bilgi için [istemci yapılandırma](point-to-site-vpn-client-configuration-azure-cert.md#install) makalesindeki adımlara bakın.
 
-## <a name="generate-and-export"></a>Oluşturma ve dışarı aktarma
+## <a name="install-strongswan"></a>Strongswa 'yi yükler
+
+[!INCLUDE [strongSwan Install](../../includes/vpn-gateway-strongswan-install-include.md)]
+
+## <a name="generate-and-export-certificates"></a>Sertifikaları oluşturma ve dışarı aktarma
+
 [!INCLUDE [strongSwan certificates](../../includes/vpn-gateway-strongswan-certificates-include.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Noktadan siteye yapılandırmanızı devam [VPN istemcisi yapılandırma dosyalarını oluşturma ve yükleme](point-to-site-vpn-client-configuration-azure-cert.md#linuxinstallcli).
+[VPN istemci yapılandırma dosyalarını oluşturmak ve yüklemek](point-to-site-vpn-client-configuration-azure-cert.md#linuxinstallcli)Için Noktadan siteye yapılandırmanızla devam edin.

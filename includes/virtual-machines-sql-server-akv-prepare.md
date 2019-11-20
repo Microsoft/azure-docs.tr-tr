@@ -13,12 +13,12 @@ ms.workload: iaas-sql-server
 ms.date: 04/30/2018
 ms.author: jroth
 ms.custom: include file
-ms.openlocfilehash: 1e96431af575533566786341750e17e7a7f446e0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c1a6a53e6db883c63164a6367012faf32ed75519
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67075999"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67673560"
 ---
 ## <a name="prepare-for-akv-integration"></a>AKV tümleştirme için hazırlama
 SQL Server VM'nize yapılandırmak için Azure anahtar kasası tümleştirmeyi kullanmak için birkaç önkoşul vardır: 
@@ -38,7 +38,7 @@ En son Azure PowerShell modülü yüklediğinizden emin olun. Daha fazla bilgi i
 
 İlk olarak, ihtiyacınız bir [Azure Active Directory](https://azure.microsoft.com/trial/get-started-active-directory/) (AAD), aboneliğinizdeki. Birçok avantaj arasında anahtar kasanız belirli kullanıcılar ve uygulamalar için izin vermenizi sağlar.
 
-Ardından, bir uygulamayı AAD'ye kaydetme. Bu, sanal Makinenizin gerekir, anahtar kasası erişimi olan bir hizmet sorumlusu hesabı verecektir. Bu adımlarda Azure Key Vault makalesinde bulabilirsiniz [bir uygulamayı Azure Active Directory'ye kaydetme](../articles/key-vault/key-vault-manage-with-cli2.md#registering-an-application-with-azure-active-directory) bölüm veya ekran görüntülerinde adımlarla görebilirsiniz **bir kimlik almak için uygulama bölümüne**  , [bu blog gönderisini](http://blogs.technet.com/b/kv/archive/2015/01/09/azure-key-vault-step-by-step.aspx). Bu adımları gerçekleştirmeden önce SQL sanal makinenizde Azure anahtar kasası tümleştirmeyi etkinleştirdiğinizde, daha sonra gerekli bu kayıt sırasında aşağıdaki bilgi toplamanız gerekir.
+Ardından, bir uygulamayı AAD'ye kaydetme. Bu, sanal Makinenizin gerekir, anahtar kasası erişimi olan bir hizmet sorumlusu hesabı verecektir. Bu adımlarda Azure Key Vault makalesinde bulabilirsiniz [bir uygulamayı Azure Active Directory'ye kaydetme](../articles/key-vault/key-vault-manage-with-cli2.md#registering-an-application-with-azure-active-directory) bölüm veya ekran görüntülerinde adımlarla görebilirsiniz **bir kimlik almak için uygulama bölümüne**  , [bu blog gönderisini](https://blogs.technet.com/b/kv/archive/2015/01/09/azure-key-vault-step-by-step.aspx). Bu adımları gerçekleştirmeden önce SQL sanal makinenizde Azure anahtar kasası tümleştirmeyi etkinleştirdiğinizde, daha sonra gerekli bu kayıt sırasında aşağıdaki bilgi toplamanız gerekir.
 
 * Uygulama eklendikten sonra bulma **uygulama kimliği** üzerinde **kayıtlı uygulama** dikey penceresi.
     Uygulama Kimliği daha sonra atanan **$spName** Azure anahtar kasası tümleştirmeyi etkinleştirmek için PowerShell betiğini parametresinde (hizmet asıl adı).

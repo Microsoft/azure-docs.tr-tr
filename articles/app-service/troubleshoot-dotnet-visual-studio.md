@@ -1,6 +1,6 @@
 ---
-title: Visual Studio - Azure App Service'ı kullanarak uygulama sorunlarını giderme
-description: Uzaktan hata ayıklama, izleme ve Visual Studio 2013 için yerleşik olarak bulunan günlük Araçları'nı kullanarak bir App Service uygulaması sorunlarını gidermeyi öğrenin.
+title: Visual Studio ile uygulama sorunlarını giderme-Azure App Service
+description: Visual Studio 2013 ' de yerleşik olarak bulunan uzaktan hata ayıklama, izleme ve günlük araçlarını kullanarak App Service bir uygulamayla ilgili sorunları nasıl giderebileceğinizi öğrenin.
 services: app-service
 documentationcenter: .net
 author: cephalin
@@ -15,469 +15,469 @@ ms.topic: article
 ms.date: 08/29/2016
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: cbf6a44f1a3210906ec7ab0d04eecb997bc2c470
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 13ba1ced2d14ed22c89e7df594f3b2a44eea983f
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65412827"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68359962"
 ---
-# <a name="troubleshoot-an-app-in-azure-app-service-using-visual-studio"></a>Visual Studio kullanarak Azure App Service'te uygulama sorunlarını giderme
+# <a name="troubleshoot-an-app-in-azure-app-service-using-visual-studio"></a>Visual Studio 'Yu kullanarak Azure App Service uygulama sorunlarını giderme
 ## <a name="overview"></a>Genel Bakış
-Bu öğreticide, bir uygulamada hata ayıklama yardımcı olmak için Visual Studio araçlarını kullanma gösterilmektedir [App Service](https://go.microsoft.com/fwlink/?LinkId=529714), çalıştırarak [hata ayıklama modu](https://docs.microsoft.com/visualstudio/debugger/) uzaktan veya uygulama günlükleri ve web sunucusu günlüklerini görüntüleyerek.
+Bu öğreticide, [hata ayıklama modunda](https://docs.microsoft.com/visualstudio/debugger/) uzaktan veya uygulama günlüklerini ve Web sunucusu günlüklerini görüntüleyerek [App Service](https://go.microsoft.com/fwlink/?LinkId=529714)içindeki bir uygulamada hata ayıklamaya yardımcı olmak için Visual Studio Araçları 'nın nasıl kullanılacağı gösterilmektedir.
 
 Şunları öğreneceksiniz:
 
-* Uygulama yönetim işlevleri, Visual Studio'da kullanılabilir.
-* Uzak bir uygulamada hızlı değişiklikler yapmak için Visual Studio uzak görünümü kullanma
-* Bir proje sırasında uzaktan hata ayıklama modunda çalıştırmak nasıl Azure'da, hem uygulama hem de bir Web işi için çalışıyor.
-* Uygulama izleme günlükleri oluşturma ve bunları görüntülemek uygulama çalışırken, bunları oluşturuyor.
-* Görüntüleme dahil olmak üzere, web sunucusu günlükleri, ayrıntılı hata iletileri ve başarısız istek izlemeyi.
-* Tanılama günlükleri için bir Azure depolama hesabı ve bunları görüntülemek göndermek nasıl.
+* Visual Studio 'da hangi uygulama yönetimi işlevleri kullanılabilir.
+* Uzak bir uygulamada hızlı değişiklikler yapmak için Visual Studio uzaktan görünümünü kullanma.
+* Bir proje Azure 'da çalışırken hata ayıklama modunu uzaktan çalıştırma, hem uygulama hem de WebJob için.
+* Uygulama izleme günlükleri oluşturma ve uygulama onları oluştururken görüntüleme.
+* Ayrıntılı hata iletileri ve başarısız istek izleme dahil olmak üzere Web sunucusu günlüklerini görüntüleme.
+* Tanılama günlüklerini bir Azure depolama hesabına gönderme ve burada görüntüleme.
 
-Visual Studio Ultimate varsa, ayrıca kullanabileceğiniz [IntelliTrace](/visualstudio/debugger/intellitrace) hata ayıklama. Bu öğreticide IntelliTrace kapsamında değildir.
+Visual Studio Ultimate sahipseniz, hata ayıklama için [IntelliTrace](/visualstudio/debugger/intellitrace) de kullanabilirsiniz. Bu öğreticide IntelliTrace kapsamında değildir.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu öğretici geliştirme ortamı, web projesi ve içinde ayarladığınız App Service uygulaması çalışır [Azure App Service'te bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md). WebJobs bölümleri için içinde oluşturduğunuz uygulamayı gerekir [Azure WebJobs SDK ile çalışmaya başlama][GetStartedWJ].
+Bu öğretici, [Azure App Service bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md)bölümünde ayarladığınız geliştirme ortamı, Web projesi ve App Service uygulamayla birlikte çalışır. WebJobs bölümleri için, [Azure Web İşleri SDK 'Sını kullanmaya başlama][GetStartedWJ]bölümünde oluşturduğunuz uygulamanın olması gerekir.
 
-Bu öğreticide gösterilen kod örnekleri bir C# MVC web uygulaması içindir, ancak sorun giderme yordamlarını Visual Basic ve Web Forms uygulamaları için aynıdır.
+Bu öğreticide gösterilen kod örnekleri bir C# MVC web uygulaması içindir, ancak sorun giderme yordamları Visual Basic ve Web Forms uygulamalar için aynıdır.
 
-Bu öğreticide, Visual Studio 2019 kullanmakta olduğunuz varsayılır. 
+Öğretici, Visual Studio 2019 kullandığınızı varsayar. 
 
-Akış günlükleri yalnızca .NET Framework 4 veya sonraki sürümlerini hedefleyen uygulamalar için çalışır özellik.
+Akış günlükleri özelliği yalnızca .NET Framework 4 veya sonraki sürümlerini hedefleyen uygulamalar için geçerlidir.
 
-## <a name="sitemanagement"></a>Uygulama Yapılandırması ve Yönetimi
-Visual Studio bulunan yapılandırma ayarlarını ve uygulama yönetimi işlevleri bir alt kümesine erişim sağlar [Azure portalında](https://go.microsoft.com/fwlink/?LinkId=529715). Bu bölümde, ne kullanılarak kullanılabilir görürsünüz **Sunucu Gezgini**. En son Azure tümleştirme özellikleri görmek için denemenin **Cloud Explorer** de. Her iki windows açabileceğiniz **görünümü** menüsü.
+## <a name="sitemanagement"></a>Uygulama yapılandırması ve yönetimi
+Visual Studio, [Azure Portal](https://go.microsoft.com/fwlink/?LinkId=529715)bulunan uygulama yönetimi işlevlerinin ve yapılandırma ayarlarının bir alt kümesine erişim sağlar. Bu bölümde **Sunucu Gezgini**kullanarak nelerin kullanılabildiğini göreceksiniz. En son Azure tümleştirme özelliklerini görmek için **Cloud Explorer 'ı** da deneyin. **Görünüm** menüsünden her iki pencere de açabilirsiniz.
 
-1. Zaten Visual Studio'da Azure oturumu açmadıysanız, sağ **Azure** Bağlan seçip **Microsoft Azure aboneliği** içinde **Sunucu Gezgini**.
+1. Visual Studio 'da zaten Azure 'da oturum açmadıysanız **Azure** ' a sağ tıklayın ve **Sunucu Gezgini** **Microsoft Azure aboneliğine** Bağlan ' ı seçin.
 
-    Hesabınıza erişimi sağlayan bir yönetim sertifikası yüklemek için kullanılan bir alternatiftir. Bir sertifika yüklemeyi seçerseniz, sağ **Azure** düğümünde **Sunucu Gezgini**ve ardından **yönetin ve filtre abonelikleri** bağlam menüsünde. İçinde **Microsoft Azure abonelikleri yönetme** iletişim kutusu, tıklayın **sertifikaları** sekmesine ve ardından **alma**. İndirmek ve ardından bir abonelik dosyası içeri aktarmak için yönergeleri izleyin (olarak da adlandırılan bir *.publishsettings* dosya) Azure hesabınız için.
+    Alternatif olarak, hesabınıza erişim sağlayan bir yönetim sertifikası yüklemektir. Bir sertifika yüklemeyi tercih ederseniz, **Sunucu Gezgini**' de **Azure** düğümüne sağ tıklayın ve bağlam menüsünde **abonelikleri Yönet ve filtrele** ' yi seçin. **Microsoft Azure Aboneliklerini Yönet** iletişim kutusunda, **Sertifikalar** sekmesine tıklayın ve ardından **içeri aktar**' a tıklayın. Azure hesabınız için bir abonelik dosyasını ( *. publishsettings* dosyası olarak da bilinir) indirmek ve içeri aktarmak için yönergeleri izleyin.
 
    > [!NOTE]
-   > Bir abonelik dosyası yüklerseniz, kaynak kodu dizinlerinizi (örneğin, indirme klasöründe) dışında bir klasöre kaydedin ve içeri aktarma tamamlandıktan sonra silin. Abonelik dosyasına erişim kazanır kötü niyetli bir kullanıcı düzenleyin, oluşturun ve Azure hizmetlerinizi silin.
+   > Bir abonelik dosyası indirdiğinizde, dosyayı kaynak kodu dizinlerinizin dışında bir klasöre kaydedin (örneğin, Indirmeler klasöründe) ve içeri aktarma tamamlandıktan sonra silin. Abonelik dosyasına erişim sağlayan kötü niyetli bir Kullanıcı, Azure hizmetlerinizi düzenleyebilir, oluşturabilir ve silebilir.
    >
    >
 
-    Visual Studio'dan Azure kaynaklarına bağlama hakkında daha fazla bilgi için bkz. [hesaplarını yönetme, abonelikleri ve yönetici rollerini](https://go.microsoft.com/fwlink/?LinkId=324796#BKMK_AccountVCert).
-2. İçinde **Sunucu Gezgini**, genişletme **Azure** genişletin **App Service**.
-3. Oluşturduğunuz uygulamayı içeren kaynak grubunu genişletin [Azure App Service'te bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md)ve ardından uygulama düğümüne sağ tıklatıp **görünüm ayarlarını**.
+    Visual Studio 'dan Azure kaynaklarına bağlanma hakkında daha fazla bilgi için bkz. [hesapları, abonelikleri ve yönetici rollerini yönetme](https://go.microsoft.com/fwlink/?LinkId=324796#BKMK_AccountVCert).
+2. **Sunucu Gezgini**' de **Azure** ' u genişletin ve **App Service**' ı genişletin.
+3. [Azure App Service ' de ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md)bölümünde oluşturduğunuz uygulamayı içeren kaynak grubunu genişletin ve ardından uygulama düğümüne sağ tıklayıp **ayarları görüntüle**' ye tıklayın.
 
-    ![Sunucu Gezgini'nde ayarlarını görüntüle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-viewsettings.png)
+    ![Sunucu Gezgini ayarları görüntüle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-viewsettings.png)
 
-    **Azure Web uygulaması** sekmesi görünür ve Visual Studio içinde kullanılabilir uygulama yönetimi ve yapılandırma görevlerini burada görebilirsiniz.
+    **Azure Web App** sekmesi görüntülenir ve Visual Studio 'da bulunan uygulama yönetimi ve yapılandırma görevlerinin bulunduğunu görebilirsiniz.
 
     ![Azure Web uygulaması penceresi](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-configtab.png)
 
-    Bu öğreticide, günlüğe kaydetme ve izleme açılan listeler kullanacaksınız. Uzaktan hata ayıklama kullanacaksınız ancak bunu etkinleştirmek için farklı bir yöntem kullanmanız gerekir.
+    Bu öğreticide, günlüğe kaydetme ve izleme açılan listelerini kullanacaksınız. Uzaktan hata ayıklamayı da kullanacaksınız, ancak bunu etkinleştirmek için farklı bir yöntem kullanacaksınız.
 
-    Bu pencerede uygulama ayarlarının ve bağlantı dizelerinin kutuları hakkında daha fazla bilgi için bkz: [Azure App Service: Nasıl uygulama dizeleri ve bağlantı dizeleri çalışma](https://azure.microsoft.com/blog/windows-azure-web-sites-how-application-strings-and-connection-strings-work/).
+    Bu penceredeki uygulama ayarları ve bağlantı dizeleri kutuları hakkında daha fazla bilgi için bkz [. Azure App Service: Uygulama dizeleri ve bağlantı dizeleri nasıl çalışır](https://azure.microsoft.com/blog/windows-azure-web-sites-how-application-strings-and-connection-strings-work/)?
 
-    Bu pencerede yapılamaz bir uygulama yönetim görevi gerçekleştirmek isterseniz **Yönetim Portalı'nda açmak** Azure portalında bir tarayıcı penceresi açın.
+    Bu pencerede yapılamıyorum bir uygulama yönetimi görevi gerçekleştirmek istiyorsanız, Azure portal bir tarayıcı penceresi açmak için **Yönetim Portalı aç** ' a tıklayın.
 
-## <a name="remoteview"></a>Sunucu Gezgini'nde erişim uygulama dosyaları
-Genellikle bir web projesi ile dağıttığınız `customErrors` bayrağı ayarlayın Web.config dosyasında `On` veya `RemoteOnly`, yanlış giden anlamına gelen bir yararlı hata iletisi bir şey olduğunda elde etmezsiniz. Birçok hataları size olan aşağıdaki sorguyu biri gibi bir sayfası:
+## <a name="remoteview"></a>Sunucu Gezgini 'de uygulama dosyalarına erişme
+Genellikle, Web. config dosyası olarak `customErrors` `On` ayarlanan bayrağıyla bir Web projesi dağıtın veya `RemoteOnly`bir sorun olduğunda faydalı bir hata iletisi almanız gerekmez. Birçok hata için, her şey aşağıdakilerden biri gibi bir sayfasıdır:
 
 **'/' Uygulamasında sunucu hatası:**
 
-![Faydasız hata sayfası](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror.png)
+![Faydalı olmayan hata sayfası](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror.png)
 
 **Bir hata oluştu:**
 
-![Faydasız hata sayfası](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror1.png)
+![Faydalı olmayan hata sayfası](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror1.png)
 
-**Web sitesi sayfayı görüntüleyemiyor.**
+**Web sitesi sayfayı görüntüleyemiyor**
 
-![Faydasız hata sayfası](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror2.png)
+![Faydalı olmayan hata sayfası](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror2.png)
 
-Sık en kolay yolu, hatanın nedenini bulmak için yukarıdaki ekran görüntüleri ilk yapmak nasıl yapıldığını açıklayan ayrıntılı hata iletileri etkinleştirmektir. Dağıtılmış Web.config dosyasında değişiklik gerektirir. Düzen *Web.config* dosya projede ve projeyi yeniden dağıtın veya oluşturma bir [Web.config dönüşümü](https://www.asp.net/mvc/tutorials/deployment/visual-studio-web-deployment/web-config-transformations) ve hata ayıklama derlemesi dağıtmak, ancak daha hızlı bir yolu yoktur: içinde **Çözüm Gezgini** , doğrudan görüntüleyebilir ve kullanarak uzak uygulama dosyalarında düzenlemek *uzak görünümü* özelliği.
+Genellikle hatanın nedenini bulmanın en kolay yolu, önceki ekran görüntülerinin ilk olarak nasıl yapılacağını açıklayan ayrıntılı hata iletilerini etkinleştirmektir. Bu, dağıtılan Web. config dosyasında bir değişiklik yapılmasını gerektirir. Projedeki *Web. config* dosyasını düzenleyebilir ve projeyi yeniden dağıtabilir ya da bir [Web. config dönüşümü](https://www.asp.net/mvc/tutorials/deployment/visual-studio-web-deployment/web-config-transformations) oluşturabilir ve bir hata ayıklama derlemesi dağıtabilirsiniz, ancak daha hızlı bir şekilde, dosyaları uzak uygulamadaki doğrudan görüntüleyebilir ve düzenleyebilirsiniz. **Çözüm Gezgini** *Uzaktan görünüm* özelliğini kullanarak.
 
-1. İçinde **Sunucu Gezgini**, genişletme **Azure**, genişletme **App Service**uygulamanızı bulunan kaynak grubunu genişletin ve ardından uygulamanızı düğümünü genişletin.
+1. **Sunucu Gezgini**' de **Azure**' ı genişletin, **App Service**' ı genişletin, uygulamanızın bulunduğu kaynak grubunu genişletin ve ardından uygulamanızın düğümünü genişletin.
 
-    Uygulamanın içerik dosyalarını ve günlük dosyalarını erişmenizi düğümleri görürsünüz.
-2. Genişletin **dosyaları** düğüm ve çift *Web.config* dosya.
+    Uygulamanın içerik dosyalarına ve günlük dosyalarına erişim sağlayan düğümleri görürsünüz.
+2. **Dosyalar** düğümünü genişletin ve *Web. config* dosyasına çift tıklayın.
 
-    ![Web.config dosyasını açın](./media/web-sites-dotnet-troubleshoot-visual-studio/webconfig.png)
+    ![Web. config dosyasını aç](./media/web-sites-dotnet-troubleshoot-visual-studio/webconfig.png)
 
-    Visual Studio uzak uygulamadan Web.config dosyasını açar ve başlık çubuğunda dosya adının yanında [uzak] gösterir.
-3. Aşağıdaki satırı ekleyin `system.web` öğesi:
+    Visual Studio, uzak uygulamadaki Web. config dosyasını açar ve başlık çubuğunda dosya adının yanında [uzak] öğesini gösterir.
+3. Aşağıdaki satırı `system.web` öğesine ekleyin:
 
     `<customErrors mode="Off"></customErrors>`
 
-    ![Edit Web.config](./media/web-sites-dotnet-troubleshoot-visual-studio/webconfigedit.png)
-4. Faydasız hata iletisini gösteren tarayıcıyı yenileyin ve artık aşağıdaki gibi bir ayrıntılı hata iletisi alırsınız:
+    ![Web. config dosyasını Düzenle](./media/web-sites-dotnet-troubleshoot-visual-studio/webconfigedit.png)
+4. Faydalı olmayan hata iletisini gösteren Tarayıcıyı yenileyin ve artık aşağıdaki örnek gibi ayrıntılı bir hata iletisi alırsınız:
 
     ![Ayrıntılı hata iletisi](./media/web-sites-dotnet-troubleshoot-visual-studio/detailederror.png)
 
-    (Kırmızı gösterilen satırı ekleyerek gösterilen hata oluşturuldu *Views\Home\Index.cshtml*.)
+    (Gösterilen hata, kırmızı renkle *Views\home\ındex.cshtml*'ye eklenerek oluşturulmuştur.)
 
-Web.config dosyasını düzenleme, okuma ve App Service uygulamanızı dosyalarda düzenleme özelliği yapmak daha kolay sorun giderme senaryoları yalnızca bir örneği var.
+Web. config dosyasını düzenlemek, App Service uygulamanızdaki dosyaları okuma ve düzenleme yeteneğinin sorun gidermeyi daha kolay hale getirmek için yalnızca bir örnek senaryolar örneğidir.
 
 ## <a name="remotedebug"></a>Uzaktan hata ayıklama uygulamaları
-Ayrıntılı hata iletisini yeterli bilgi sağlamaz ve yerel olarak hata yeniden oluşturulamıyor, sorunlarını gidermek için başka bir uzaktan hata ayıklama modunda çalıştırmak için yoludur. Kesme noktaları ayarlayın, belleği doğrudan düzenlemezsiniz, kodda adım adım ve hatta kod yolu değiştirebilirsiniz.
+Ayrıntılı hata iletisi yeterli bilgi sağlamıyorsa ve hatayı yerel olarak yeniden oluşturamıyoruz, sorun gidermeye yönelik başka bir yol hata ayıklama modunda uzaktan çalıştırılmalıdır. Kesme noktaları ayarlayabilir, belleği doğrudan işleyebilir, koddaki adımları görebilir ve hatta kod yolunu değiştirebilirsiniz.
 
-Uzaktan hata ayıklama Visual Studio'nun Express sürümlerinde çalışmaz.
+Uzaktan hata ayıklama, Visual Studio 'nun Express sürümlerinde çalışmaz.
 
-Bu bölümde, oluşturduğunuz projenin kullanarak uzaktan hata ayıklamak gösterilmektedir [Azure App Service'te bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md).
+Bu bölümde [, Azure App Service ' de bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md)bölümünde oluşturduğunuz projeyi kullanarak uzaktan nasıl hata ayıklaması yapılacağı gösterilmektedir.
 
-1. Oluşturduğunuz web projesi açmak [Azure App Service'te bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md).
+1. [Azure App Service bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md)bölümünde oluşturduğunuz Web projesini açın.
 
-2. Açık *Controllers\HomeController.cs*.
+1. *Controllers\homecontroller.cs*dosyasını açın.
 
-3. Silme `About()` aşağıdaki kodu yerine yöntemi ve ekleme.
+1. `About()` Yöntemi silin ve yerine aşağıdaki kodu ekleyin.
 
-``` c#
-public ActionResult About()
-{
-    string currentTime = DateTime.Now.ToLongTimeString();
-    ViewBag.Message = "The current time is " + currentTime;
-    return View();
-}
-```
+    ```csharp
+    public ActionResult About()
+    {
+        string currentTime = DateTime.Now.ToLongTimeString();
+        ViewBag.Message = "The current time is " + currentTime;
+        return View();
+    }
+    ```
 
-1. [Bir kesme noktası ayarlamak](https://docs.microsoft.com/visualstudio/debugger/) üzerinde `ViewBag.Message` satır.
+1. `ViewBag.Message` Satırda [bir kesme noktası ayarlayın](https://docs.microsoft.com/visualstudio/debugger/) .
 
-1. İçinde **Çözüm Gezgini**, projeye sağ tıklayın ve **Yayımla**.
+1. **Çözüm Gezgini**, projeye sağ tıklayın ve **Yayımla**' ya tıklayın.
 
-1. İçinde **profili** aynı profili, kullanılan aşağı açılan listesinden [Azure App Service'te bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md). Ardından, Ayarlar'ı tıklatın.
+1. **Profil** açılır listesinde, [Azure App Service içinde bir ASP.NET uygulaması oluşturma](app-service-web-get-started-dotnet-framework.md)bölümünde kullandığınız profili seçin. Ardından Ayarlar ' a tıklayın.
 
-1. İçinde **Yayımla** iletişim kutusunda, tıklayın **ayarları** sekmesine ve ardından değiştirmek **yapılandırma** için **hata ayıklama**ve ardından  **Kaydet**.
+1. **Yayımla** Iletişim kutusunda **Ayarlar** sekmesine tıklayın ve ardından **yapılandırmayı** **Hata Ayıkla**olarak değiştirin ve ardından **Kaydet**' e tıklayın.
 
-    ![Hata ayıklama modunda yayımlama](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-publishdebug.png)
+    ![Hata ayıklama modunda Yayımla](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-publishdebug.png)
 
-1. Tıklayın **yayımlama**. Dağıtım tamamlandıktan sonra tarayıcı açılır uygulamanızın Azure URL'sine Tarayıcıyı kapatın.
+1. Tıklayın **yayımlama**. Dağıtım tamamlandıktan sonra ve tarayıcınız uygulamanızın Azure URL 'SI için açıldıktan sonra tarayıcıyı kapatın.
 
-1. İçinde **Sunucu Gezgini**uygulamanıza sağ tıklayın ve ardından **hata ayıklayıcı iliştirmek**.
+1. **Sunucu Gezgini**, uygulamanıza sağ tıklayın ve ardından **hata ayıklayıcı Ekle**' ye tıklayın.
 
-    ![Hata ayıklayıcının](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-attachdebugger.png)
+    ![Hata ayıklayıcı Ekle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-attachdebugger.png)
 
-    Tarayıcı, Azure'da çalışan ana sayfanıza otomatik olarak açılır. Azure hata ayıklama sunucusu ayarlar 20 saniye bekleyin gerekebilir. Bu gecikme, yalnızca ilk kez bir 48 saatlik süre içinde bir uygulama üzerinde hata ayıklama modunda çalıştırdığınızda gerçekleşir. Yeniden aynı dönemi içinde hata ayıklamaya başladığınızda, gecikme yoktur.
+    Tarayıcı, Azure 'da çalışan giriş sayfanıza otomatik olarak açılır. Azure sunucuyu hata ayıklama için ayarlarken 20 saniye beklemeniz gerekebilir. Bu gecikme yalnızca, 48 saatlik bir dönemde bir uygulamada hata ayıklama modunda ilk kez çalıştırdığınızda gerçekleşir. Aynı dönemde hata ayıklamaya yeniden başladığınızda bir gecikme yoktur.
 
     > [!NOTE] 
-    > Hata ayıklayıcı başlatılıyor herhangi bir sorun varsa, bunu kullanarak yapmaya **Cloud Explorer** yerine **Sunucu Gezgini**.
+    > Hata ayıklayıcıyı başlatırken sorun yaşarsanız **Sunucu Gezgini**yerine **Cloud Explorer** 'ı kullanarak bunu yapmayı deneyin.
     >
 
-1. Tıklayın **hakkında** menüsünde.
+1. Menüde **hakkında** ' ya tıklayın.
 
-    Visual Studio kesme noktasına durdurur ve kodu değil, yerel bilgisayarınızda Azure üzerinde çalışıyor.
+    Visual Studio kesme noktasında durmaktadır ve kod, yerel bilgisayarınızda değil, Azure 'da çalışır.
 
-1. Üzerine `currentTime` zaman değeri görmek için değişkeni.
+1. Zaman değerini görmek `currentTime` için değişkenin üzerine gelin.
 
-    ![Azure'da çalışan hata ayıklama modunda görünümü değişkeni](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-debugviewinwa.png)
+    ![Azure 'da çalışan hata ayıklama modunda değişkeni görüntüle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-debugviewinwa.png)
 
-    Gördüğünüzde, yerel bilgisayardan farklı bir saat dilimindeki olabilir Azure sunucusu zamandır.
+    Gördüğünüz zaman, yerel bilgisayarınızdan farklı bir saat diliminde olabilecek Azure Server saati ' dir.
 
-1. İçin yeni bir değer girin `currentTime` "Artık Azure'da çalışıyor" gibi değişken.
+1. `currentTime` Değişken için "Azure 'da çalışıyor" gibi yeni bir değer girin.
 
-1. Çalışmaya devam edebilmesi için F5 tuşuna basın.
+1. Çalışmaya devam etmek için F5 tuşuna basın.
 
-     Azure'da çalışan hakkında sayfası currentTime değişkene girdiğiniz yeni değeri görüntüler.
+     Azure 'da çalışan hakkında sayfası, currentTime değişkenine girdiğiniz yeni değeri görüntüler.
 
-     ![Yeni değerle sayfası hakkında](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-debugchangeinwa.png)
+     ![Yeni değer içeren sayfa hakkında](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-debugchangeinwa.png)
 
-## <a name="remotedebugwj"></a> Uzaktan hata ayıklama WebJobs
-Bu bölümde proje ve oluşturduğunuz uygulamanın kullanarak uzaktan hata ayıklama işlemini gösterir [Azure WebJobs SDK ile çalışmaya başlama](https://github.com/Azure/azure-webjobs-sdk/wiki).
+## <a name="remotedebugwj"></a>Web Işlerine uzaktan hata ayıklama
+Bu bölümde [, Azure WebJobs SDK Ile çalışmaya başlama](https://github.com/Azure/azure-webjobs-sdk/wiki)bölümünde oluşturduğunuz proje ve uygulamayı kullanarak uzaktan hata ayıklama işlemi gösterilmektedir.
 
-Bu bölümde gösterilen özellikler, yalnızca Visual Studio 2013 Update 4 veya daha sonra kullanılabilir.
+Bu bölümde gösterilen özellikler yalnızca güncelleştirme 4 veya sonraki sürümlerde Visual Studio 2013 kullanılabilir.
 
-Uzaktan hata ayıklama yalnızca sürekli WebJobs ile çalışır. Zamanlanmış ve isteğe bağlı Web işleri, hata ayıklamayı desteklemez.
+Uzaktan hata ayıklama yalnızca sürekli WebJobs ile kullanılabilir. Zamanlanmış ve isteğe bağlı Web Işleri hata ayıklamayı desteklemez.
 
-1. Oluşturduğunuz web projesi açmak [Azure WebJobs SDK ile çalışmaya başlama][GetStartedWJ].
+1. [Azure Web İşleri SDK 'Sını kullanmaya başlama][GetStartedWJ]bölümünde oluşturduğunuz Web projesini açın.
 
-2. ContosoAdsWebJob projeyi *Functions.cs*.
+2. ContosoAdsWebJob projesinde *Functions.cs*öğesini açın.
 
-3. [Bir kesme noktası ayarlamak](https://docs.microsoft.com/visualstudio/debugger/) ilk deyimde üzerinde `GnerateThumbnail` yöntemi.
+3. `GnerateThumbnail` Yöntemdeki ilk ifadede [bir kesme noktası ayarlayın](https://docs.microsoft.com/visualstudio/debugger/) .
 
-    ![kesme noktası Ayarla](./media/web-sites-dotnet-troubleshoot-visual-studio/wjbreakpoint.png)
+    ![Kesme noktası ayarla](./media/web-sites-dotnet-troubleshoot-visual-studio/wjbreakpoint.png)
 
-4. İçinde **Çözüm Gezgini**, web projesinin (WebJob proje değil) sağ tıklayın ve **Yayımla**.
+4. **Çözüm Gezgini**, web projesine (WebJob projesi değil) sağ tıklayın ve **Yayımla**' ya tıklayın.
 
-5. İçinde **profili** aynı profili, kullanılan aşağı açılan listesinden [Azure WebJobs SDK ile çalışmaya başlama](https://github.com/Azure/azure-webjobs-sdk/wiki).
+5. **Profil** açılan listesinde, [Azure WebJobs SDK ile çalışmaya başlama](https://github.com/Azure/azure-webjobs-sdk/wiki)bölümünde kullandığınız profili seçin.
 
-6. Tıklayın **ayarları** sekmesini tıklatıp değiştirme **yapılandırma** için **hata ayıklama**ve ardından **Yayımla**.
+6. **Ayarlar** sekmesine tıklayın ve **yapılandırmayı** **Hata Ayıkla**olarak değiştirin ve ardından **Yayımla**' ya tıklayın.
 
-    Visual Studio WebJob projeleri ve web dağıtır ve uygulamanız için Azure URL'sini tarayıcınızı açar.
+    Visual Studio Web ve WebJob projelerini dağıtır ve tarayıcınız, uygulamanızın Azure URL 'SI olarak açılır.
 
-7. İçinde **Sunucu Gezgini**, genişletme **Azure > App Service > kaynak grubunuzun > uygulamanızı > WebJobs > sürekli**ve ardından sağ tıklayarak **ContosoAdsWebJob**.
+7. **Sunucu Gezgini**, **Azure > App Service > kaynak grubunuzu uygulamanızı > Web İşleri > sürekli**ve sonra **contosoadswebjob**öğesine sağ tıklayın.
 
-8. Tıklayın **hata ayıklayıcının**.
+8. **Hata ayıklayıcı Ekle**' ye tıklayın.
 
-    ![Hata ayıklayıcının](./media/web-sites-dotnet-troubleshoot-visual-studio/wjattach.png)
+    ![Hata ayıklayıcı Ekle](./media/web-sites-dotnet-troubleshoot-visual-studio/wjattach.png)
 
-    Tarayıcı, Azure'da çalışan ana sayfanıza otomatik olarak açılır. Azure hata ayıklama sunucusu ayarlar 20 saniye bekleyin gerekebilir. Bu gecikme, yalnızca ilk kez bir 48 saatlik süre içinde bir uygulama üzerinde hata ayıklama modunda çalıştırdığınızda gerçekleşir. Yeniden aynı dönemi içinde hata ayıklamaya başladığınızda, gecikme yoktur.
+    Tarayıcı, Azure 'da çalışan giriş sayfanıza otomatik olarak açılır. Azure sunucuyu hata ayıklama için ayarlarken 20 saniye beklemeniz gerekebilir. Bu gecikme yalnızca, 48 saatlik bir dönemde bir uygulamada hata ayıklama modunda ilk kez çalıştırdığınızda gerçekleşir. Aynı dönemde hata ayıklamaya yeniden başladığınızda bir gecikme yoktur.
 
-9. Contoso Ads giriş sayfasına açılan web tarayıcısında, yeni bir ad oluşturun.
+9. Contoso ads giriş sayfasına açılan Web tarayıcısında yeni bir ad oluşturun.
 
-    Oluşturma bir ad, webjob'ı tarafından teslim alındı ve işlenen oluşturulması bir kuyruk iletisi neden olur. Ne zaman Web işleri SDK'sı, kesme noktasına kod isabet kuyruk iletisini işlemek için işlevini çağırır.
+    Bir ad oluşturmak bir kuyruk iletisinin oluşturulmasına neden olur, bu, WebJob tarafından alınır ve işlenir. WebJobs SDK, kuyruk iletisini işlemek için işlevi çağırdığında, kod kesme noktasına rastlama.
 
-10. Hata ayıklayıcı, kesme noktasında kesildiğinde inceleyin ve bulut program çalışırken değişken değerleri değiştirin. Aşağıdaki çizimde, hata ayıklayıcı geçildi blobInfo nesnenin içeriğini gösterir. `GenerateThumbnail` yöntemi.
+10. Hata ayıklayıcı kesme noktasına kesildiğinde, program bulutu çalıştırırken değişken değerlerini inceleyebilir ve değiştirebilirsiniz. Aşağıdaki çizimde, hata ayıklayıcı `GenerateThumbnail` metoduna geçirilen bloınfo nesnesinin içeriğini gösterir.
 
-     ![hata ayıklayıcı blobInfo nesnesi](./media/web-sites-dotnet-troubleshoot-visual-studio/blobinfo.png)
+     ![hata ayıklayıcıda Bloınfo nesnesi](./media/web-sites-dotnet-troubleshoot-visual-studio/blobinfo.png)
 
-11. Çalışmaya devam edebilmesi için F5 tuşuna basın.
+11. Çalışmaya devam etmek için F5 tuşuna basın.
 
-     `GenerateThumbnail` Yöntemi, küçük resim oluşturma işlemi tamamlandığında.
+     Yöntemi `GenerateThumbnail` , küçük resim oluşturmayı sonlandırır.
 
-12. Tarayıcıda, dizin sayfasını yenileyin ve küçük resim görürsünüz.
+12. Tarayıcıda, Dizin sayfasını yenileyin ve küçük resmi görürsünüz.
 
-13. Visual Studio'da hata ayıklamayı durdurmak için SHIFT + F5 tuşlarına basın.
+13. Visual Studio 'da, hata ayıklamayı durdurmak için SHIFT + F5 tuşlarına basın.
 
-14. İçinde **Sunucu Gezgini**ContosoAdsWebJob düğümüne sağ tıklayın ve tıklayın **panoyu görüntüle**.
+14. **Sunucu Gezgini**, ContosoAdsWebJob düğümüne sağ tıklayın ve **panoyu görüntüle**' ye tıklayın.
 
-15. Azure kimlik bilgilerinizle oturum açın ve ardından WebJob adı, WebJob'ınıza sayfasına gitmek için tıklayın.
+15. Azure kimlik bilgilerinizle oturum açın ve WebJob 'larınızın sayfasına gitmek için WebJob adına tıklayın.
 
-     ![ContosoAdsWebJob tıklayın](./media/web-sites-dotnet-troubleshoot-visual-studio/clickcaw.png)
+     ![ContosoAdsWebJob öğesine tıklayın](./media/web-sites-dotnet-troubleshoot-visual-studio/clickcaw.png)
 
-     Gösteren panoyu `GenerateThumbnail` yakın zamanda yürütülen işlevi.
+     Panoda `GenerateThumbnail` işlevin yakın zamanda yürütüldüğü gösterilmektedir.
 
-     ('ı sonraki açışınızda **panoyu görüntüle**oturum açmasına gerek yoktur ve tarayıcı WebJob'ınıza doğrudan sayfasına geçer.)
+     ( **Panoyu görüntüle**' yi bir daha tıkladığınızda, oturum açmanız gerekmez ve tarayıcı doğrudan WebJob 'larınızın sayfasına gider.)
 
-16. İşlev yürütme ayrıntılarını görmek için işlev adına tıklayın.
+16. İşlev yürütmeye ilişkin ayrıntıları görmek için işlev adına tıklayın.
 
      ![İşlev ayrıntıları](./media/web-sites-dotnet-troubleshoot-visual-studio/funcdetails.png)
 
-İşlevinizi [günlükleri yazdı](https://github.com/Azure/azure-webjobs-sdk/wiki), tıkladığınız **ToggleOutput** bunları görmek için.
+İşleviniz [günlükleri yazsa](https://github.com/Azure/azure-webjobs-sdk/wiki), bunları görmek Için **toggleoutput** ' a tıklayabilirsiniz.
 
 ## <a name="notes-about-remote-debugging"></a>Uzaktan hata ayıklama hakkında notlar
 
-* Üretim aşamasında hata ayıklama modunda çalıştırılması önerilmez. Üretim uygulamanızı kullanıma için birden çok sunucu örneği değil ölçeklenirse, hata ayıklama, diğer isteklerine yanıt vermesini web sunucusu engeller. Hata ayıklayıcıyı iliştirmek birden çok web sunucusu örneğine sahip, rastgele bir örneğini almak ve sonraki tarayıcı isteklerini aynı örneğine gittiğinden emin olmak için yolu yoktur. Ayrıca, hata ayıklama derlemesi için üretim genellikle dağıtmanıza gerek yoktur ve sürüm yapıları için derleyici iyileştirmeleri imkansız satır, kaynak kodunda neler olduğunu göstermek yapabileceğiniz. Üretim sorunlarını gidermeye yönelik en iyi kaynak uygulamasıdır izleme ve web sunucusu günlüklerini.
-* Uzun kesme noktaları uzak durur önlemek hata ayıklama. Azure, yanıt vermeyen bir işlem olarak birkaç dakikadan fazla durdurulur ve nasıl kapanıyorsa öyle kapanır işlem değerlendirir.
-* Hata ayıklarken, sunucu, bant genişliği ücretleri etkileyebilecek Visual Studio için veri gönderiyor. Bant genişliği ücretleri hakkında daha fazla bilgi için bkz. [Azure fiyatlandırma](https://azure.microsoft.com/pricing/calculator/).
-* Emin olun `debug` özniteliği `compilation` öğesinde *Web.config* dosya ayarlanmışsa true. Ayarlanmış bir hata ayıklama yapısı yapılandırması yayımladığınızda, varsayılan olarak true.
+* Üretimde hata ayıklama modunda çalıştırılması önerilmez. Üretim uygulamanız birden çok sunucu örneğine ölçeklenmez, hata ayıklama Web sunucusunun diğer isteklere yanıt vermesini engeller. Birden çok Web sunucusu örneğiniz varsa, hata ayıklayıcıya eklediğinizde rastgele bir örnek alır ve sonraki tarayıcı isteklerinin aynı örneğe gitmesini sağlamanın bir yolu yoktur. Ayrıca, genellikle üretim için bir hata ayıklama derlemesi dağıtmazsınız ve yayın yapıları için derleyici iyileştirmeleri, kaynak kodunuzda satıra göre oluşan satırı gösterme imkansızmasına neden olabilir. Üretim sorunlarını gidermek için en iyi kaynağınız, uygulama izleme ve Web sunucusu günlüklerinin bulunduğu bir uygulamadır.
+* Uzun kesme noktaları uzak durur önlemek hata ayıklama. Azure, yanıt vermeyen bir işlem olarak birkaç dakikadan daha uzun süre durdurulan bir işlemi değerlendirir ve kapatır.
+* Hata ayıklarken, sunucu Visual Studio 'ya veri gönderiyor ve bu da bant genişliği ücretlerini etkileyebilir. Bant genişliği ücretleri hakkında daha fazla bilgi için bkz. [Azure fiyatlandırması](https://azure.microsoft.com/pricing/calculator/).
+* *Web. config* dosyasındaki `debug` `compilation` öğesinin özniteliğinin true olarak ayarlandığından emin olun. Bir hata ayıklama yapı yapılandırması yayımladığınızda varsayılan olarak true olarak ayarlanır.
 
-``` xml
-<system.web>
-  <compilation debug="true" targetFramework="4.5" />
-  <httpRuntime targetFramework="4.5" />
-</system.web>
-```
-* Hata ayıklayıcının hata ayıklamak istediğiniz kodda ilerleyebilmeniz değil olduğunu fark ederseniz, yalnızca kendi kodum ayarı değiştirmeniz gerekebilir.  Daha fazla bilgi için [yalnızca kendi kodum, Visual Studio kullanarak kullanıcı kodunda hata ayıklama Artırılmayacağını](https://docs.microsoft.com/visualstudio/debugger/just-my-code).
-* Uzaktan hata ayıklama özelliği etkinleştirmeniz ve 48 saat sonra özelliği otomatik olarak devre dışı Zamanlayıcı sunucuda başlar. Bu 48 saatlik sınırın, güvenlik ve Performans nedeniyle meydana gelir. Bu gibi durumlarda, özellik kolayca istediğiniz geri çok defa kapatabilirsiniz. Değil etkin bir şekilde ayıklarken devre dışı bırakılması önerilir.
-* Bu gibi durumlarda, hata ayıklayıcı el ile herhangi bir işlem için yalnızca uygulama işlemi (w3wp.exe) ekleyebilirsiniz. Visual Studio'da hata ayıklama modu kullanma hakkında daha fazla bilgi için bkz. [Visual Studio'da hata ayıklama](/visualstudio/debugger/debugging-in-visual-studio).
+    ```xml
+    <system.web>
+      <compilation debug="true" targetFramework="4.5" />
+      <httpRuntime targetFramework="4.5" />
+    </system.web>
+    ```
+* Hata ayıklayıcının hata ayıklamak istediğiniz kodda yer almamasına fark ederseniz Yalnızca kendi kodum ayarını değiştirmeniz gerekebilir.  Daha fazla bilgi için bkz. [Visual Studio 'da yalnızca kendi kodum kullanarak yalnızca kullanıcı kodunda hata ayıklama yapılıp yapılmayacağını belirtme](https://docs.microsoft.com/visualstudio/debugger/just-my-code).
+* Uzaktan hata ayıklama özelliğini etkinleştirdiğinizde ve 48 saat sonra özelliğin otomatik olarak kapatılması durumunda bir Zamanlayıcı başlatılır. Bu 48 saatlik sınır güvenlik ve performans nedenleriyle yapılır. Özelliği dilediğiniz zaman kolayca tekrar açabilirsiniz. Etkin bir şekilde hata ayıkladığınızda devre dışı bırakmanızı öneririz.
+* Hata ayıklayıcıyı yalnızca uygulama işlemini değil, herhangi bir işleme el ile ekleyebilirsiniz (W3wp. exe). Visual Studio 'da hata ayıklama modunun nasıl kullanılacağı hakkında daha fazla bilgi için bkz. [Visual Studio 'Da hata ayıklama](/visualstudio/debugger/debugging-in-visual-studio).
 
 ## <a name="logsoverview"></a>Tanılama günlüklerine genel bakış
-Bir App Service uygulamasında çalışan bir ASP.NET uygulama günlükleri aşağıdaki türlerini oluşturabilirsiniz:
+App Service bir uygulamada çalışan bir ASP.NET uygulaması aşağıdaki günlük türlerini oluşturabilir:
 
 * **Uygulama izleme günlükleri**<br/>
-  Yöntemleri çağırarak bu günlükleri uygulamanın oluşturur [System.Diagnostics.Trace](/dotnet/api/system.diagnostics.trace) sınıfı.
+  Uygulama, [System. Diagnostics. Trace](/dotnet/api/system.diagnostics.trace) sınıfının yöntemlerini çağırarak bu günlükleri oluşturur.
 * **Web sunucusu günlükleri**<br/>
-  Web sunucusu, uygulamayı her HTTP isteği için bir günlük girişi oluşturur.
+  Web sunucusu, uygulamaya her HTTP isteği için bir günlük girişi oluşturur.
 * **Ayrıntılı hata iletisi günlükleri**<br/>
-  Web sunucusu, bazı ek bilgiler başarısız HTTP isteklerini (durum kodu 400 veya üzeri neden istek) ile bir HTML sayfası oluşturur.
+  Web sunucusu, başarısız HTTP istekleri için bazı ek bilgiler (400 veya üzeri durum koduna neden olan istekler) içeren bir HTML sayfası oluşturur.
 * **Başarısız istek izleme günlükleri**<br/>
-  Web sunucusu, ayrıntılı izleme bilgilerini başarısız olan HTTP istekleri için bir XML dosyası oluşturur. Web sunucusu, bir tarayıcıda XML biçimlendirme için XSL dosyası da sağlar.
+  Web sunucusu, başarısız HTTP istekleri için ayrıntılı izleme bilgileri içeren bir XML dosyası oluşturur. Web sunucusu Ayrıca bir tarayıcıdaki XML 'yi biçimlendirmek için bir XSL dosyası sağlar.
 
-Uygulama performansı etkiler günlüğü, bu nedenle Azure, etkinleştirme veya günlük her türünü gerektiği gibi devre dışı bırakma olanağı sunar. Uygulama günlükleri için yalnızca belirli bir önem düzeyi yukarıda günlükleri yazılması gerektiğini belirtebilirsiniz. Yeni bir uygulama varsayılan olarak tüm günlük oluşturduğunuzda, devre dışı bırakıldı.
+Günlüğe kaydetme uygulama performansını etkiler, bu nedenle Azure, her türden günlüğü gerektiğinde etkinleştirebilir veya devre dışı bırakabilme olanağı sağlar. Uygulama günlükleri için yalnızca belirli bir önem düzeyi düzeyinin üzerindeki Günlüklerin yazılması gerektiğini belirtebilirsiniz. Yeni bir uygulama oluşturduğunuzda, varsayılan olarak tüm günlüğe kaydetme devre dışıdır.
 
-Günlük dosyalarına yazılır bir *LogFiles* klasör dosya sistemindeki Uygulama ve FTP aracılığıyla erişilebilir durumdadır. Ayrıca Azure depolama hesabınız için Web sunucusu günlüklerini ve uygulama günlüklerini yazılabilir. Günlükleri bir depolama hesabında dosya sisteminde mümkün olandan daha büyük bir hacmi tutabilirsiniz. Dosya sistemi kullandığınızda en fazla 100 megabaytlık günlükleri sınırlı. (Dosya sistemi yalnızca kısa vadeli bekletme için günlüklerdir. Azure sınıra ulaşıldıktan sonra yenilerini yer açmak için eski günlük dosyaları siler.)  
+Günlükler, uygulamanızın dosya sistemindeki *LogFiles* klasöründeki dosyalara YAZıLıR ve FTP aracılığıyla erişilebilir. Web sunucusu günlükleri ve uygulama günlükleri de bir Azure depolama hesabına yazılabilir. Dosya sisteminde mümkün olandan daha fazla bir depolama hesabında günlük hacimlerinizi koruyabilirsiniz. Dosya sistemini kullandığınızda en fazla 100 megabayt günlük ile sınırlı olursunuz. (Dosya sistemi günlükleri yalnızca kısa süreli saklama içindir. Azure, sınıra ulaşıldıktan sonra yeni olanlar için yer açmak üzere eski günlük dosyalarını siler.)  
 
-## <a name="apptracelogs"></a>Oluşturun ve uygulama izleme günlükleri görüntüleyin
-Bu bölümde, aşağıdaki görevleri yapın:
+## <a name="apptracelogs"></a>Uygulama izleme günlükleri oluşturma ve görüntüleme
+Bu bölümde, aşağıdaki görevleri gerçekleştirebilirsiniz:
 
-* Oluşturduğunuz web projesi izleme deyimleri ekleme [Azure ve ASP.NET kullanmaya başlama](app-service-web-get-started-dotnet-framework.md).
-* Projeyi yerel olarak çalıştırdığınızda günlüklerini görüntüleyin.
-* Azure'da çalışan uygulama tarafından oluşturulan günlükleri görüntüleyin.
+* [Azure ve ASP.NET kullanmaya başlama](app-service-web-get-started-dotnet-framework.md)bölümünde oluşturduğunuz Web projesine izleme deyimleri ekleyin.
+* Projeyi yerel olarak çalıştırdığınızda günlükleri görüntüleyin.
+* Azure 'da çalışan uygulama tarafından oluşturulan günlükleri görüntüleyin.
 
-Web işleri günlüklerini nasıl uygulama oluşturulacağı hakkında daha fazla bilgi için bkz. [Azure kuyruk depolama ile çalışmaya nasıl günlükleri yazmak nasıl Web işleri SDK'sı - kullanarak](https://github.com/Azure/azure-webjobs-sdk/wiki). Günlükleri görüntüleme ve Azure'da nasıl depolandıkları denetlemek için aşağıdaki yönergeler, Web işleri tarafından oluşturulan uygulama günlükleri için de geçerlidir.
+WebJobs 'larda uygulama günlükleri oluşturma hakkında daha fazla bilgi için bkz. [WEBJOBS SDK kullanarak Azure kuyruk depolama ile çalışma-günlükleri yazma](https://github.com/Azure/azure-webjobs-sdk/wiki). Günlükleri görüntülemek ve bunların Azure 'da nasıl depolandığını denetlemek için aşağıdaki yönergeler, WebJobs tarafından oluşturulan uygulama günlüklerine de uygulanır.
 
-### <a name="add-tracing-statements-to-the-application"></a>Uygulamayı izleme deyimleri ekleme
-1. Açık *Controllers\HomeController.cs*, değiştirin `Index`, `About`, ve `Contact` yöntemleri eklemek için aşağıdaki kod ile `Trace` deyimleri ve `using` for deyimi `System.Diagnostics`:
+### <a name="add-tracing-statements-to-the-application"></a>Uygulamaya izleme deyimleri ekleme
+1. *Controllers\homecontroller.cs*' yi açın ve `Index`,, `About`ve `Contact` yöntemlerini, için `System.Diagnostics`deyimler ve bir `using` deyim eklemek `Trace` üzere aşağıdaki kodla değiştirin:
 
-```c#
-public ActionResult Index()
-{
-    Trace.WriteLine("Entering Index method");
-    ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-    Trace.TraceInformation("Displaying the Index page at " + DateTime.Now.ToLongTimeString());
-    Trace.WriteLine("Leaving Index method");
-    return View();
-}
+    ```csharp
+    public ActionResult Index()
+    {
+        Trace.WriteLine("Entering Index method");
+        ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+        Trace.TraceInformation("Displaying the Index page at " + DateTime.Now.ToLongTimeString());
+        Trace.WriteLine("Leaving Index method");
+        return View();
+    }
+    
+    public ActionResult About()
+    {
+        Trace.WriteLine("Entering About method");
+        ViewBag.Message = "Your app description page.";
+        Trace.TraceWarning("Transient error on the About page at " + DateTime.Now.ToShortTimeString());
+        Trace.WriteLine("Leaving About method");
+        return View();
+    }
+    
+    public ActionResult Contact()
+    {
+        Trace.WriteLine("Entering Contact method");
+        ViewBag.Message = "Your contact page.";
+        Trace.TraceError("Fatal error on the Contact page at " + DateTime.Now.ToLongTimeString());
+        Trace.WriteLine("Leaving Contact method");
+        return View();
+    }        
+    ```
 
-public ActionResult About()
-{
-    Trace.WriteLine("Entering About method");
-    ViewBag.Message = "Your app description page.";
-    Trace.TraceWarning("Transient error on the About page at " + DateTime.Now.ToShortTimeString());
-    Trace.WriteLine("Leaving About method");
-    return View();
-}
+1. Dosyanın üst `using System.Diagnostics;` kısmına bir ifade ekleyin.
 
-public ActionResult Contact()
-{
-    Trace.WriteLine("Entering Contact method");
-    ViewBag.Message = "Your contact page.";
-    Trace.TraceError("Fatal error on the Contact page at " + DateTime.Now.ToLongTimeString());
-    Trace.WriteLine("Leaving Contact method");
-    return View();
-}        
-```
-
-1. Ekleme bir `using System.Diagnostics;` deyimini dosyanın en üstüne.
-
-### <a name="view-the-tracing-output-locally"></a>Yerel olarak izleme çıkışını görüntüleyin
+### <a name="view-the-tracing-output-locally"></a>İzleme çıkışını yerel olarak görüntüleme
 1. Uygulamayı hata ayıklama modunda çalıştırmak için F5 tuşuna basın.
 
-    Varsayılan izleme dinleyicisi tüm izleme çıktısına Yazar **çıkış** diğer hata ayıklama çıkış penceresi. Aşağıdaki çizim, eklenen izleme deyimleri çıktısında `Index` yöntemi.
+    Varsayılan izleme dinleyicisi tüm izleme çıkışını **Çıkış** penceresine yazar ve diğer hata ayıklama çıktılarıyla birlikte. Aşağıdaki çizimde `Index` yöntemine eklediğiniz Trace deyimlerinin çıktısı gösterilmektedir.
 
     ![Hata ayıklama penceresinde izleme](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-debugtracing.png)
 
-    Aşağıdaki adımlarda, hata ayıklama modunda derleme olmadan bir web sayfasında izleme çıkışını görüntülemek gösterilmektedir.
-2. Uygulamanın Web.config dosyasını (bir proje klasöründe bulunur) açın ve eklemek bir `<system.diagnostics>` yalnızca kapatmadan önce dosyanın sonuna öğe `</configuration>` öğesi:
+    Aşağıdaki adımlarda, izleme çıkışının hata ayıklama modunda derlenmeksizin bir Web sayfasında nasıl görüntüleneceği gösterilmektedir.
+1. Uygulama Web. config dosyasını açın (proje klasöründe bulunan) ve kapanış `<system.diagnostics>` `</configuration>` öğesinden hemen önce dosyanın sonuna bir öğe ekleyin:
 
-``` xml
-<system.diagnostics>
-<trace>
-  <listeners>
-    <add name="WebPageTraceListener"
-        type="System.Web.WebPageTraceListener,
-        System.Web,
-        Version=4.0.0.0,
-        Culture=neutral,
-        PublicKeyToken=b03f5f7f11d50a3a" />
-  </listeners>
-</trace>
-</system.diagnostics>
-```
+    ``` xml
+    <system.diagnostics>
+    <trace>
+      <listeners>
+        <add name="WebPageTraceListener"
+            type="System.Web.WebPageTraceListener,
+            System.Web,
+            Version=4.0.0.0,
+            Culture=neutral,
+            PublicKeyToken=b03f5f7f11d50a3a" />
+      </listeners>
+    </trace>
+    </system.diagnostics>
+    ```
 
-`WebPageTraceListener` Görüntülemenizi sağlar izleme çıkış göz atarak `/trace.axd`.
-1. Ekleme bir <a href="https://msdn.microsoft.com/library/vstudio/6915t83k(v=vs.100).aspx">trace ögesi</a> altında `<system.web>` Web.config dosyasında, aşağıdaki örnek gibi:
+, `WebPageTraceListener` ' A `/trace.axd`göz atarak izleme çıkışını görüntülemenize izin verir.
+1. Web. config dosyasında aşağıdaki `<system.web>` örnek gibi bir <a href="https://msdn.microsoft.com/library/vstudio/6915t83k(v=vs.100).aspx">Trace öğesi</a> ekleyin:
 
-``` xml
-<trace enabled="true" writeToDiagnosticsTrace="true" mostRecent="true" pageOutput="false" />
-```       
+    ``` xml
+    <trace enabled="true" writeToDiagnosticsTrace="true" mostRecent="true" pageOutput="false" />
+    ```
 
 1. Uygulamayı çalıştırmak için CTRL+F5'e basın.
-1. Tarayıcının adres çubuğuna ekleyin *trace.axd* URL'si ve Enter tuşuna basın (URL benzer `http://localhost:53370/trace.axd`).
-1. Üzerinde **uygulama izleme** sayfasında **ayrıntıları** ilk satırdaki (BrowserLink satır değil).
+1. Tarayıcı penceresinin Adres çubuğunda, URL 'ye *Trace. axd* ekleyin ve ardından ENTER tuşuna basın (URL şuna benzer `http://localhost:53370/trace.axd`).
+1. **Uygulama izleme** sayfasında, Ilk satırdaki **Ayrıntıları görüntüle** ' ye tıklayın (browserlink satırına değil).
 
-    ![Trace.axd](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd1.png)
+    ![Trace. axd](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd1.png)
 
-    **İstek ayrıntıları** sayfası görüntülenirse hem de **izleme bilgilerini** bölümüne eklediğiniz izleme deyimleri çıktısını görürsünüz `Index` yöntemi.
+    **İstek ayrıntıları** sayfası görüntülenir ve **izleme bilgileri** bölümünde, `Index` yöntemine eklediğiniz izleme deyimlerinin çıktısını görürsünüz.
 
-    ![Trace.axd](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd2.png)
+    ![Trace. axd](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd2.png)
 
-    Varsayılan olarak, `trace.axd` yalnızca yerel olarak kullanılabilir. Bir uzak uygulamasından kullanılabilir hale getirmek isteseydiniz, ekleyebilirsiniz `localOnly="false"` için `trace` öğesinde *Web.config* aşağıdaki örnekte gösterildiği gibi dosya:
+    Varsayılan `trace.axd` olarak yalnızca yerel olarak kullanılabilir. Bir uzak uygulamadan kullanılabilir hale getirmek isterseniz, aşağıdaki örnekte gösterildiği gibi `localOnly="false"` *Web. config* dosyasındaki `trace` öğesine ekleyebilirsiniz:
 
         <trace enabled="true" writeToDiagnosticsTrace="true" localOnly="false" mostRecent="true" pageOutput="false" />
 
-    Ancak, etkinleştirme `trace.axd` bir üretim ortamında uygulama, güvenlik nedenleriyle önerilmez. Aşağıdaki bölümlerde, App Service uygulama izleme günlükleri okumak için daha kolay bir yolu görürsünüz.
+    Ancak, bir `trace.axd` üretim uygulamasında etkinleştirme, güvenlik nedenleriyle önerilmez. Aşağıdaki bölümlerde, App Service uygulamasında izleme günlüklerini okumak için daha kolay bir yol görürsünüz.
 
-### <a name="view-the-tracing-output-in-azure"></a>Azure'da izleme çıkışını görüntüleyin
-1. İçinde **Çözüm Gezgini**, web projesini sağ tıklatıp **Yayımla**.
-2. İçinde **Web'i Yayımla** iletişim kutusu, tıklayın **Yayımla**.
+### <a name="view-the-tracing-output-in-azure"></a>Azure 'da izleme çıkışını görüntüleme
+1. **Çözüm Gezgini**, web projesine sağ tıklayın ve **Yayımla**' ya tıklayın.
+2. Web 'i **Yayımla** Iletişim kutusunda **Yayımla**' ya tıklayın.
 
-    Visual Studio güncelleştirme yayımlar sonra ana sayfanıza bir tarayıcı penceresi açılır (yaramadı Temizle varsayılarak **hedef URL** üzerinde **bağlantı** sekmesi).
-3. İçinde **Sunucu Gezgini**, uygulamanıza sağ tıklayıp **akış günlüklerini görüntüle**.
+    Visual Studio, güncelleştirmenizi yayımladıktan sonra, giriş sayfanız için bir tarayıcı penceresi açar ( **bağlantı** SEKMESINDE **hedef URL** 'yi temizlemediğiniz varsayılır).
+3. **Sunucu Gezgini**, uygulamanıza sağ tıklayın ve **akış günlüklerini görüntüle**' yi seçin.
 
-    ![Bağlam menüsündeki akış günlüklerini görüntüle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-viewlogsmenu.png)
+    ![Akış günlüklerini bağlam menüsünde görüntüle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-viewlogsmenu.png)
 
-    **Çıkış** penceresi günlük akışı hizmetine bağlandınız ve görüntülemek için bir günlük giden her dakika bildirim satırı ekler gösterir.
+    **Çıkış** penceresi, günlük akış hizmetine bağlı olduğunu gösterir ve bir günlük görüntülemesi gerekmeden her dakikada bir bildirim satırı ekler.
 
-    ![Bağlam menüsündeki akış günlüklerini görüntüle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-nologsyet.png)
-4. Uygulama giriş sayfası gösteren tarayıcı penceresinde tıklayın **kişi**.
+    ![Akış günlüklerini bağlam menüsünde görüntüle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-nologsyet.png)
+4. Uygulama giriş sayfanızı gösteren tarayıcı penceresinde, **iletişim**' e tıklayın.
 
-    Birkaç saniye içinde hata düzeyi işlevinin İzleme çıktısı eklediğiniz `Contact` yöntemi görünür **çıkış** penceresi.
+    Birkaç saniye içinde, `Contact` yönteme eklediğiniz hata düzeyi izlemenin çıktısı **Çıkış** penceresinde görüntülenir.
 
-    ![Çıktı penceresinde izleme hatası](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-errortrace.png)
+    ![Çıkış penceresinde hata izleme](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-errortrace.png)
 
-    Hizmet izleme günlüğü etkinleştirdiğinizde, varsayılan ayarı olduğu için visual Studio hata düzeyi izlemeleri yalnızca göstermez. Yeni bir App Service uygulaması oluşturduğunuzda, önceki ayarlar sayfasını açtığınızda gördüğünüz gibi tüm günlük varsayılan olarak devre dışı bırakılır:
+    Visual Studio yalnızca hata düzeyi izlemeleri gösterir çünkü bu, günlük izleme hizmetini etkinleştirdiğinizde varsayılan ayardır. Yeni bir App Service uygulaması oluşturduğunuzda, daha önce ayarlar sayfasını açtığınızda gördüğünüz gibi tüm günlük kaydı varsayılan olarak devre dışıdır:
 
-    ![Uygulama oturum kapatma](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-apploggingoff.png)
+    ![Uygulama oturumu kapatma](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-apploggingoff.png)
 
-    Seçiliyken ancak **akış günlüklerini görüntüle**, Visual Studio değiştirmiştir **uygulama Logging(File System)** için **hata**, hata düzeyi günlükleri anlamına gelir Rapor. Tüm izleme günlüklerinizi görmek için bu ayarı değiştirebilirsiniz **ayrıntılı**. Hata düşük bir önem derecesini seçtiğinizde, daha yüksek önem derecesi düzeyleri için tüm günlükleri de raporlanır. Ayrıntılı seçtiğinizde, bu nedenle, aynı zamanda bilgi, uyarı ve Hata günlüklerini görürsünüz.  
+    Ancak, **akış günlüklerini görüntüle**' yi seçtiğinizde, Visual Studio **uygulama günlüğü 'Nü (dosya sistemi)** otomatik olarak **hata**olarak değiştirdi, bu da hata düzeyi günlüklerin raporlandığı anlamına gelir. Tüm izleme günlüklerinizi görmek için bu ayarı **verbose**olarak değiştirebilirsiniz. Hatadan daha düşük bir önem düzeyi seçtiğinizde, daha yüksek önem düzeyleri için tüm Günlükler de raporlanır. Ayrıntılı ' i seçtiğinizde bilgi, uyarı ve hata günlüklerini de görürsünüz.  
 
-5. İçinde **Sunucu Gezgini**uygulamaya sağ tıklayın ve ardından **görünüm ayarlarını** daha önce yaptığınız gibi.
-6. Değişiklik **uygulama günlüğü (dosya sistemi)** için **ayrıntılı**ve ardından **Kaydet**.
+5. **Sunucu Gezgini**, uygulamaya sağ tıklayın ve ardından daha önce yaptığınız gibi **ayarları görüntüle** ' ye tıklayın.
+6. **Uygulama günlüğünü (dosya sistemi)** **ayrıntılı**olarak değiştirin ve ardından **Kaydet**' e tıklayın.
 
-    ![İzleme düzeyini ayrıntılı olarak ayarlama](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-applogverbose.png)
-7. Artık gösteren tarayıcı penceresinde, **kişi** sayfasında **giriş**, ardından **hakkında**ve ardından **kişi**.
+    ![İzleme düzeyi Verbose olarak ayarlanıyor](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-applogverbose.png)
+7. Şimdi **iletişim** sayfanızı gösteren tarayıcı penceresinde, **giriş**' e ve ardından **hakkında**' ya ve ardından **iletişim**' e tıklayın.
 
-    Birkaç saniye içinde **çıkış** pencere tüm izleme çıkış gösterir.
+    Birkaç saniye içinde, **Çıkış** penceresi tüm izleme çıktılarınızı gösterir.
 
     ![Ayrıntılı izleme çıkışı](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-verbosetraces.png)
 
-    Bu bölümde, etkin ve uygulama ayarlarını kullanarak günlüğe yazma devre dışı. Etkinleştirebilir ve Web.config dosyasını değiştirerek izleme dinleyicilerine devre dışı bırakın. Ancak, Web.config dosyasını değiştirme sırasında uygulama yapılandırması yoluyla günlüğe kaydetmeyi etkinleştirme bunu değil, geri dönüştürmek uygulama etki alanı neden olur. Sorunu yeniden oluşturmak için bir uzun sürerse veya aralıklı, uygulama etki alanı geri dönüştürme "Düzelt" ve yeniden oluşuncaya kadar beklenecek belirlemeye zorlayabilir. Azure'da tanılamayı etkinleştirme, uygulama etki alanı geri dönüştürme olmadan hemen hata bilgilerini yakalama başlatmanıza olanak tanır.
+    Bu bölümde, uygulama ayarlarını kullanarak günlüğü etkinleyerek ve devre dışı bırakmış olursunuz. Ayrıca, Web. config dosyasını değiştirerek izleme dinleyicilerini etkinleştirebilir ve devre dışı bırakabilirsiniz. Ancak, Web. config dosyasının değiştirilmesi, uygulama etki alanının geri dönüşüm yapmasına neden olur, ancak uygulama yapılandırması aracılığıyla günlüğü etkinleştirmek bunu yapmaz. Sorunun yeniden oluşturulması uzun sürmesi veya aralıklı olması halinde, uygulama etki alanını geri dönüştürme işlemi "düzeltir" ve yeniden gerçekleşene kadar beklemeniz zorunlu olabilir. Azure 'da tanılamayı etkinleştirmek, uygulama etki alanını geri dönüşüme gerek kalmadan hata bilgilerini hemen yakalamaya başlayabilmenizi sağlar.
 
 ### <a name="output-window-features"></a>Çıkış penceresi özellikleri
-**Microsoft Azure günlükleri** sekmesinde **çıkış** penceresinin birkaç düğme ve metin kutusu vardır:
+**Çıkış** penceresinin **Microsoft Azure logs** sekmesinde birkaç düğme ve bir metin kutusu vardır:
 
-![Düğmeler günlükleri sekmesi](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-icons.png)
+![Günlükler sekmesi düğmeleri](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-icons.png)
 
-Bu, aşağıdaki işlevleri gerçekleştirir:
+Bunlar aşağıdaki işlevleri gerçekleştirir:
 
-* NET **çıkış** penceresi.
-* Etkinleştirmek veya sözcük kaydırmayı devre dışı bırakın.
-* Başlatın veya günlüklerini İzlemeyi Durdur.
-* Hangi günlüklerinin izleneceğini belirt
+* **Çıkış** penceresini temizleyin.
+* Sözcük kaydırmayı etkinleştirin veya devre dışı bırakın.
+* İzleme günlüklerini başlatın veya durdurun.
+* Hangi günlüklerin izleneceğini belirtin.
 * Günlükleri indirin.
-* Günlükleri bir arama dizesi veya normal bir ifade göre filtreleyin.
-* Kapat **çıkış** penceresi.
+* Günlükleri bir arama dizesine veya normal ifadeye göre filtreleyin.
+* **Çıkış** penceresini kapatın.
 
-Visual Studio, bir arama dizesi veya normal ifade girerseniz, istemci günlük bilgileri filtreler. Günlükleri görüntülenecek sonra ölçütleri girebilirsiniz anlamına **çıkış** penceresi değiştirebilirsiniz filtreleme ölçütlerini günlükleri yeniden oluşturmak zorunda kalmadan.
+Arama dizesi veya normal ifade girerseniz, Visual Studio bilgileri istemcide günlüğe kaydetme bilgilerini filtreler. Bu, Günlükler **Çıkış** penceresinde görüntülendikten sonra ölçütleri girebileceğiniz ve günlükleri yeniden oluşturmak zorunda kalmadan filtre ölçütlerini değiştirebileceðiniz anlamına gelir.
 
 ## <a name="webserverlogs"></a>Web sunucusu günlüklerini görüntüle
-Web sunucusu günlükleri, uygulama için tüm HTTP etkinliğini kaydeder. Bunları görmek için **çıkış** penceresinde, uygulama için bunları etkinleştirmeli ve bunları izlemek istediğiniz Visual Studio söyleyin.
+Web sunucusu günlükleri, uygulamanın tüm HTTP etkinliklerini kaydeder. Bunları **Çıkış** penceresinde görmek için bunları uygulama için etkinleştirmeniz ve Visual Studio 'yu izlemek istediğiniz söylemelisiniz.
 
-1. İçinde **Azure Web App yapılandırmasını** gelen açılan sekmesinde **Sunucu Gezgini**, Web sunucusu günlüğü için değiştirme **üzerinde**ve ardından **Kaydet**.
+1. **Sunucu Gezgini**açtığınız **Azure Web uygulaması yapılandırması** sekmesinde, Web sunucusu günlük kaydını **Açık**olarak değiştirin ve ardından **Kaydet**' e tıklayın.
 
-    ![Web sunucusu günlüğü etkinleştir](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-webserverloggingon.png)
-2. İçinde **çıkış** penceresinde tıklayın **, Microsoft Azure günlüklerinin izleneceğini belirt** düğmesi.
+    ![Web sunucusu günlüğünü etkinleştir](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-webserverloggingon.png)
+2. **Çıkış** penceresinde, **izlenecek Microsoft Azure günlüğe kaydedileceği** ' ı seçin.
 
     ![Hangi Azure günlüklerinin izleneceğini belirtin](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-specifylogs.png)
-3. İçinde **Microsoft Azure günlük seçenekleri** iletişim kutusunda **Web sunucu günlükleri**ve ardından **Tamam**.
+3. **Microsoft Azure günlük seçenekleri** iletişim kutusunda, **Web sunucusu günlükleri**' ni seçin ve ardından **Tamam**' a tıklayın.
 
-    ![Web sunucusu günlüklerini izleyin](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-monitorwslogson.png)
-4. Uygulamayı gösteren tarayıcı penceresinde tıklayın **giriş**, ardından **hakkında**ve ardından **kişi**.
+    ![Web sunucusu günlüklerini izleme](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-monitorwslogson.png)
+4. Uygulamayı gösteren tarayıcı penceresinde, **giriş**' e ve ardından **hakkında**' ya ve ardından **iletişim**' e tıklayın.
 
-    Uygulama günlükleri genellikle tarafından web sunucusu günlüklerini izleyen ilk görünür. Günlükleri görüntülenecek bir süre beklemeniz gerekebilir.
+    Uygulama günlükleri genellikle önce ve ardından Web sunucusu günlükleri görünür. Günlüklerin görünmesi için bir süre beklemeniz gerekebilir.
 
     ![Çıkış penceresinde Web sunucusu günlükleri](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-wslogs.png)
 
-Visual Studio kullanarak ilk web sunucusu günlüklerini etkinleştirdiğinizde varsayılan olarak, Azure dosya sistemine günlükler yazar. Alternatif olarak, web sunucusu günlükleri bir depolama hesabındaki blob kapsayıcısına yazılması gerektiğini belirtmek için Azure portalını kullanabilirsiniz.
+Varsayılan olarak, Visual Studio 'Yu kullanarak Web sunucusu günlüklerini ilk kez etkinleştirdiğinizde, Azure günlükleri dosya sistemine yazar. Alternatif olarak, bir depolama hesabındaki bir blob kapsayıcısına Web sunucusu günlüklerinin yazılması gerektiğini belirtmek için Azure portal kullanabilirsiniz.
 
-Yeniden etkinleştirdiğinizde Visual Studio'da günlüğe kaydetme, Visual Studio'da, günlüğe kaydetme, web sunucusu için bir Azure depolama hesabı günlüğü etkinleştirmek için portal'ı kullanın ve ardından devre dışı bırakın, depolama hesabı ayarlarını geri yüklenir.
+Portalı kullanarak bir Azure depolama hesabına Web sunucusu günlüğünü etkinleştirebilir ve sonra Visual Studio 'da günlüğü devre dışı bıraktığınızda, Visual Studio 'da günlüğü yeniden etkinleştirdiğinizde depolama hesabınızın ayarları geri yüklenir.
 
-## <a name="detailederrorlogs"></a>Ayrıntılı hata iletisi günlüklerini görüntüleme
-Ayrıntılı hata günlükleri hata yanıt kodları (400 veya üzeri) neden HTTP istekleriyle ilgili bazı ek bilgiler sağlar. Bunları görmek için **çıkış** penceresinde sahip olduğunuz uygulama için bunları etkinleştirmek ve bunları izlemek istediğiniz Visual Studio.
+## <a name="detailederrorlogs"></a>Ayrıntılı hata iletisi günlüklerini görüntüle
+Ayrıntılı hata günlükleri hata yanıt kodlarına (400 veya üzeri) neden olan HTTP istekleri hakkında bazı ek bilgiler sağlar. Bunları **Çıkış** penceresinde görmek için bunları uygulama için etkinleştirmeniz ve Visual Studio 'yu izlemek istediğiniz söylemelisiniz.
 
-1. İçinde **Azure Web App yapılandırmasını** gelen açılan sekmesinde **Sunucu Gezgini**, değiştirme **ayrıntılı hata iletileri** için **üzerinde**ve ardından tıklayın **Kaydet**.
+1. **Sunucu Gezgini**açtığınız **Azure Web uygulaması yapılandırması** sekmesinde, **ayrıntılı hata iletilerini** **Açık**olarak değiştirin ve ardından **Kaydet**' e tıklayın.
 
     ![Ayrıntılı hata iletilerini etkinleştir](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-detailedlogson.png)
 
-2. İçinde **çıkış** penceresinde tıklayın **, Microsoft Azure günlüklerinin izleneceğini belirt** düğmesi.
+2. **Çıkış** penceresinde, **izlenecek Microsoft Azure günlüğe kaydedileceği** ' ı seçin.
 
-3. İçinde **Microsoft Azure günlük seçenekleri** iletişim kutusu, tıklayın **tüm günlükler**ve ardından **Tamam**.
+3. **Microsoft Azure günlük seçenekleri** iletişim kutusunda, **Tüm Günlükler**' e ve ardından **Tamam**' a tıklayın.
 
-    ![Tüm günlüklerini izleyin](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-monitorall.png)
+    ![Tüm günlükleri izle](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-monitorall.png)
 
-4. Tarayıcının adres çubuğunda bir ek karakter bir 404 hatası neden URL'sine ekleyin (örneğin, `http://localhost:53370/Home/Contactx`), ve Enter tuşuna basın.
+4. Tarayıcı penceresinin Adres çubuğunda, URL 'ye bir 404 hatasına (örneğin, `http://localhost:53370/Home/Contactx`) neden olacak ek bir karakter ekleyin ve ENTER tuşuna basın.
 
-    Birkaç saniye sonra ayrıntılı hata günlüğünün Visual Studio'da görünür **çıkış** penceresi.
+    Birkaç saniye sonra, ayrıntılı hata günlüğü Visual Studio **çıktı** penceresinde görüntülenir.
 
-    ![Ayrıntılı hata günlüğü - çıkış penceresi](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-detailederrorlog.png)
+    ![Ayrıntılı hata günlüğü-çıkış penceresi](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-detailederrorlog.png)
 
-    Control + tarayıcıda biçimlendirilmiş günlük çıktısını görmek için bağlantıya tıklayın:
+    Denetim + bir tarayıcıda biçimlendirilen günlük çıktısını görmek için bağlantıya tıklayın:
 
-    ![Ayrıntılı hata günlüğü - tarayıcı penceresi](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-detailederrorloginbrowser.png)
+    ![Ayrıntılı hata günlüğü-tarayıcı penceresi](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-detailederrorloginbrowser.png)
 
-## <a name="downloadlogs"></a>Dosya sistemi günlükleri indir
-İçinde izleyebilirsiniz herhangi bir günlük **çıkış** penceresi de indirilebilir olarak bir *.zip* dosya.
+## <a name="downloadlogs"></a>Dosya sistemi günlüklerini indir
+**Çıkış** penceresinde izleyebilmeniz gereken Günlükler de bir *. zip* dosyası olarak indirilebilir.
 
-1. İçinde **çıkış** penceresinde tıklayın **akış günlüklerini indir**.
+1. **Çıkış** penceresinde, **akış günlüklerini indir**' e tıklayın.
 
-    ![Düğmeler günlükleri sekmesi](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadicon.png)
+    ![Günlükler sekmesi düğmeleri](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadicon.png)
 
-    Dosya Gezgini açılır, *indirir* seçilen indirilen dosya klasörü.
+    Dosya Gezgini, indirilen dosya seçiliyken *indirmeler* klasörünüze açılır.
 
-    ![İndirilen Dosya](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadedfile.png)
-2. Ayıklama *.zip* dosya ve aşağıdaki klasör yapısına bakın:
+    ![İndirilen dosya](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadedfile.png)
+2. *. Zip* dosyasını ayıklayın ve aşağıdaki klasör yapısını görürsünüz:
 
-    ![İndirilen Dosya](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-logfilefolders.png)
+    ![İndirilen dosya](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-logfilefolders.png)
 
-   * Uygulama izleme günlükleri bulunduğunuz *.txt* dosyalar *LogFiles\Application* klasör.
-   * Web sunucusu günlüklerini bulunduğunuz *.log* dosyalar *LogFiles\http\RawLogs* klasör. Gibi bir araç kullanın [günlük ayrıştırıcısı](https://www.microsoft.com/download/details.aspx?displaylang=en&id=24659) görüntülemek ve bu dosyaları işlemek için.
-   * Ayrıntılı hata iletisi günlüklerin içinde *.html* dosyalar *LogFiles\DetailedErrors* klasör.
+   * Uygulama izleme günlükleri, *logfiles\application* klasöründeki *. txt* dosyalarıdır.
+   * Web sunucusu günlükleri, *Logfiles\http\rawlogs* klasöründeki *. log* dosyalarıdır. Bu dosyaları görüntülemek ve işlemek için [günlük ayrıştırıcısı](https://www.microsoft.com/download/details.aspx?displaylang=en&id=24659) gibi bir araç kullanabilirsiniz.
+   * Ayrıntılı hata iletisi günlükleri, *Logfiles\detailederrors* klasöründeki *. html* dosyalarıdır.
 
-     ( *Dağıtımları* klasördür yayımlama; kaynak denetimi tarafından oluşturulan dosyaları için Visual Studio yayımlama ile ilgili herhangi bir şey yok. *Git* klasördür kaynak denetimine ilgili izlemeleri için yayımlama ve günlük dosyası akış hizmeti.)  
+     ( *Dağıtımlar* klasörü, kaynak denetimi yayımlama tarafından oluşturulan dosyalara yöneliktir; Visual Studio yayımlamayla ilgili hiçbir şey yoktur. *Git* klasörü, kaynak denetimi yayımlama ve günlük dosyası akış hizmeti ile ilgili izlemeler içindir.)  
 
 <!-- ## <a name="storagelogs"></a>View storage logs
 Application tracing logs can also be sent to an Azure storage account, and you can view them in Visual Studio. To do that you'll create a storage account, enable storage logs in the Azure portal, and view them in the **Logs** tab of the **Azure Web App** window.
@@ -558,140 +558,140 @@ Storage accounts offer more storage and longer-lasting retention for logs compar
 
      ![Trace table in Server Explorer](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-tracetablerow.png)
  -->
-## <a name="failedrequestlogs"></a>Başarısız istek izleme günlüklerini görüntüleme
-Başarısız istek izleme günlükleri, IIS URL yeniden yazma veya kimlik doğrulama sorunları gibi senaryolarda bir HTTP isteği nasıl işleme ayrıntılarını anlamak ihtiyacınız olduğunda yararlıdır.
+## <a name="failedrequestlogs"></a>Başarısız istek izleme günlüklerini görüntüle
+Başarısız istek izleme günlükleri, URL yeniden yazma veya kimlik doğrulama sorunları gibi senaryolarda IIS 'nin bir HTTP isteğini nasıl ele aldığı hakkındaki ayrıntıları anlamanız gerektiğinde kullanışlıdır.
 
-App Service uygulamaları, IIS 7.0 kullanılabilir ve sonraki başarısız istek izleme işlevselliği kullanır. Hangi hataların, ancak günlüğe yapılandırmak için IIS ayarlarını için erişiminiz yok. Başarısız istek izlemeyi etkinleştirdiğinizde, tüm hatalar yakalanır.
+App Service uygulamalar, IIS 7,0 ve üzeri sürümlerde bulunan başarısız istek izleme işlevini kullanır. Ancak hangi hataların günlüğe alınacağını yapılandıran IIS ayarlarına erişiminiz yok. Başarısız istek izlemeyi etkinleştirdiğinizde, tüm hatalar yakalanır.
 
-Visual Studio kullanarak başarısız istek izlemeyi etkinleştirebilirsiniz, ancak Visual Studio'da görüntüleyemezsiniz. Bu günlükler, XML dosyalarıdır. Akış günlüğü hizmeti yalnızca düz metin modunda okunabilir sayılan dosyaları izler: *.txt*, *.html*, ve *.log* dosyaları.
+Visual Studio 'Yu kullanarak başarısız istek izlemeyi etkinleştirebilirsiniz, ancak bunları Visual Studio 'da görüntüleyemezsiniz. Bu Günlükler XML dosyalarıdır. Akış günlüğü hizmeti yalnızca düz metin modu: *. txt*, *. html*ve *. log* dosyalarında okunabilir kabul edilen dosyaları izler.
 
-FTP aracılığıyla doğrudan veya bunları yerel bilgisayarınıza indirmek için bir FTP aracını kullanarak yerel olarak sonra bir tarayıcıda, başarısız istek izleme günlükleri görüntüleyebilirsiniz. Bu bölümde, bir tarayıcıda doğrudan görüntüleyebilirsiniz.
+Başarısız istek izleme günlüklerini bir tarayıcıda doğrudan FTP aracılığıyla veya yerel bilgisayarınıza indirmek için FTP aracını kullanarak yerel olarak görüntüleyebilirsiniz. Bu bölümde, bunları doğrudan bir tarayıcıda görüntüleyebilirsiniz.
 
-1. İçinde **yapılandırma** sekmesinde **Azure Web uygulaması** den açılan pencere **Sunucu Gezgini**, değiştirme **başarısız istek izleme** için **Üzerinde**ve ardından **Kaydet**.
+1. **Sunucu Gezgini**açtığınız **Azure Web uygulaması** penceresinin **yapılandırma** sekmesinde, **başarısız Istek izlemeyi** **Açık**olarak değiştirin ve ardından **Kaydet**' e tıklayın.
 
     ![Başarısız istek izlemeyi etkinleştir](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-failedrequeston.png)
-2. Adres çubuğunda uygulamayı gösteren tarayıcı penceresinin bir ek karakter URL'ye ekleyin ve bir 404 hatası neden için ENTER'a basın.
+2. Uygulamayı gösteren tarayıcı penceresinin Adres çubuğunda, URL 'ye fazladan bir karakter ekleyin ve 404 hatasına yol açabilecek şekilde ENTER ' a tıklayın.
 
-    Bu oluşturulacak bir başarısız istek izleme günlük neden olur ve aşağıdaki adımları nasıl görüntüleyeceğinizi veya günlüğünü indir gösterin.
+    Bu, bir başarısız istek izleme günlüğünün oluşturulmasına neden olur ve aşağıdaki adımlarda günlüğün nasıl görüntüleneceği veya indirileceği gösterilmektedir.
 
-3. Visual Studio içinde **yapılandırma** sekmesinde **Azure Web uygulaması** penceresinde tıklayın **açık Yönetim Portalı'nda**.
+3. Visual Studio 'da, **Azure Web uygulaması** penceresinin **yapılandırma** sekmesinde **Yönetim Portalı aç**' a tıklayın.
 
-4. İçinde [Azure portalında](https://portal.azure.com) **ayarları** sayfasında uygulamanız için **dağıtım kimlik bilgileri**ve ardından yeni bir kullanıcı adı ve parolayı girin.
+4. Uygulamanızın [Azure Portal](https://portal.azure.com) **ayarları** sayfasında, **dağıtım kimlik bilgileri**' ne tıklayın ve ardından yeni bir Kullanıcı adı ve parola girin.
 
-    ![Yeni FTP kullanıcı adı ve parola](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-enterftpcredentials.png)
+    ![Yeni FTP Kullanıcı adı ve parolası](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-enterftpcredentials.png)
 
     > [!NOTE]
-    > Oturum açtığınızda, tam kullanıcı adı için önek olarak kullanılan uygulama adıyla kullanmak zorunda. Örneğin, bir kullanıcı adı olarak "myId" girin ve "Örneğin" ifadesini site ise, "myexample\myid" oturum açın.
+    > Oturum açtığınızda, tam Kullanıcı adını, ön eki olan uygulama adıyla birlikte kullanmanız gerekir. Örneğin, Kullanıcı adı olarak "MyID" girerseniz ve site "myExample" ise, "myexample\myıd" olarak oturum açın.
     >
 
-5. Yeni bir tarayıcı penceresinde altında gösterilen URL'yi Git **FTP konak adı** veya **FTPS konak adı** içinde **genel bakış** uygulamanız için sayfa.
+5. Yeni bir tarayıcı penceresinde, uygulamanızın **genel bakış** sayfasında **FTP konak** adı veya **FTPS ana bilgisayar adı** altında gösterilen URL 'ye gidin.
 
-6. Daha önce (dahil olmak üzere uygulama adı ön eki için kullanıcı adı) oluşturduğunuz FTP kimlik bilgilerini kullanarak oturum açın.
+6. Daha önce oluşturduğunuz FTP kimlik bilgilerini (Kullanıcı adı için uygulama adı öneki dahil) kullanarak oturum açın.
 
-    Tarayıcı, uygulama kök klasörünü gösterir.
+    Tarayıcı, uygulamanın kök klasörünü gösterir.
 
-7. Açık *LogFiles* klasör.
+7. *LogFiles* klasörünü açın.
 
-    ![LogFiles klasörü aç](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-logfilesfolder.png)
+    ![LogFiles klasörünü aç](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-logfilesfolder.png)
 
-8. W3SVC artı bir sayısal değer adlı klasörü açın.
+8. W3SVC ve bir sayısal değer adlı klasörü açın.
 
-    ![W3SVC klasörü aç](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-w3svcfolder.png)
+    ![W3SVC klasörünü aç](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-w3svcfolder.png)
 
-    Başarısız istek izleme etkinleştirdikten sonra günlüğe kaydedilmiş hataları için XML dosyalarını ve XML biçimlendirmek için bir tarayıcı kullanabileceğiniz XSL dosyası klasör içeriyor.
+    Klasörü, başarısız istek izlemeyi etkinleştirdikten sonra günlüğe kaydedilen hatalar için XML dosyalarını ve bir tarayıcının XML 'yi biçimlendirmek için kullanabileceği bir XSL dosyasını içerir.
 
     ![W3SVC klasörü](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-w3svcfoldercontents.png)
 
-9. XML dosyası için izleme bilgilerini görmek istediğiniz başarısız istekleri için tıklayın.
+9. İzleme bilgilerini görmek istediğiniz başarısız isteğin XML dosyasına tıklayın.
 
-    Aşağıdaki çizim bir örnek hata izleme bilgilerini parçası gösterir.
+    Aşağıdaki çizimde bir örnek hata için izleme bilgilerinin bir kısmı gösterilmektedir.
 
-    ![Başarısız istek izlemeyi tarayıcıda](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-failedrequestinbrowser.png)
+    ![Tarayıcıda başarısız istek izleme](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-failedrequestinbrowser.png)
 
 ## <a name="nextsteps"></a>Sonraki Adımlar
-Nasıl Visual Studio, bir App Service uygulaması tarafından oluşturulan günlükleri görüntülemek kolaylaştırır gördünüz. Aşağıdaki bölümler, ilgili konular hakkında daha fazla kaynakların bağlantılarını sağlar:
+Visual Studio 'Nun bir App Service uygulaması tarafından oluşturulan günlükleri görüntülemeyi nasıl kolaylaştırdığını gördünüz. Aşağıdaki bölümler ilgili konularda daha fazla kaynağa bağlantılar sağlar:
 
-* App Service'nın sorunlarını giderme
+* App Service sorunlarını giderme
 * Visual Studio'da Hata Ayıklama
-* Uzaktan Azure'da hata ayıklama
+* Azure 'da uzaktan hata ayıklama
 * ASP.NET uygulamalarında izleme
-* Web sunucusu günlüklerini analiz etme
-* Başarısız istek izleme günlükleri çözümleme
-* Bulut hizmetlerinde hata ayıklama
+* Web sunucusu günlüklerini çözümleme
+* Başarısız istek izleme günlükleri çözümleniyor
+* Hata ayıklama Cloud Services
 
-### <a name="app-service-troubleshooting"></a>App Service'nın sorunlarını giderme
-Azure App Service'te uygulama sorunlarını giderme hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+### <a name="app-service-troubleshooting"></a>App Service sorunlarını giderme
+Azure App Service uygulamalarla ilgili sorun giderme hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
 * [Uygulamaları izleme](web-sites-monitor.md)
-* [Visual Studio 2013 ile Azure App Service'te bellek sızıntılarını araştırma](https://blogs.msdn.com/b/visualstudioalm/archive/2013/12/20/investigating-memory-leaks-in-azure-web-sites-with-visual-studio-2013.aspx). Yönetilen bellek sorunlarını analiz etmek için Visual Studio özellikleri hakkında Microsoft ALM blog gönderisi.
-* [Bilmeniz gereken azure App Service çevrimiçi araçları](https://azure.microsoft.com/blog/2014/03/28/windows-azure-websites-online-tools-you-should-know-about-2/). Blog gönderisi Amit Apple tarafından.
+* [Visual Studio 2013 ile Azure App Service bellek sızıntılarını araştırma](https://blogs.msdn.com/b/visualstudioalm/archive/2013/12/20/investigating-memory-leaks-in-azure-web-sites-with-visual-studio-2013.aspx). Yönetilen bellek sorunlarını analiz etmek için Visual Studio ile ilgili Microsoft ALM blog gönderisi özellikleri.
+* [Bilmeniz gereken çevrimiçi araçları Azure App Service](https://azure.microsoft.com/blog/2014/03/28/windows-azure-websites-online-tools-you-should-know-about-2/). Amit Apple tarafından blog gönderisi.
 
-Belirli bir sorun giderme sorunuz konusunda yardım için şu forumlarından birinde bir iş parçacığı başlatın:
+Belirli bir sorun giderme sorusu hakkında yardım için aşağıdaki forumlardan birinde bir iş parçacığı başlatın:
 
-* [Azure Forumu ASP.NET sitesinde](https://forums.asp.net/1247.aspx/1?Azure+and+ASP+NET).
-* [MSDN'deki Azure Forumu](https://social.msdn.microsoft.com/Forums/windowsazure/).
+* [ASP.NET sitesindeki Azure Forumu](https://forums.asp.net/1247.aspx/1?Azure+and+ASP+NET).
+* [MSDN 'Deki Azure Forumu](https://social.msdn.microsoft.com/Forums/windowsazure/).
 * [StackOverflow.com](https://www.stackoverflow.com).
 
 ### <a name="debugging-in-visual-studio"></a>Visual Studio'da Hata Ayıklama
-Visual Studio'da hata ayıklama modu kullanma hakkında daha fazla bilgi için bkz. [Visual Studio'da hata ayıklama](/visualstudio/debugger/debugging-in-visual-studio) ve [Visual Studio 2010 ile hata ayıklama ipuçları](https://weblogs.asp.net/scottgu/archive/2010/08/18/debugging-tips-with-visual-studio-2010.aspx).
+Visual Studio 'da hata ayıklama modunun nasıl kullanılacağı hakkında daha fazla bilgi için bkz. Visual [Studio 'Da hata](/visualstudio/debugger/debugging-in-visual-studio) ayıklama ve [Visual Studio 2010 Ile hata ayıklama ipuçları](https://weblogs.asp.net/scottgu/archive/2010/08/18/debugging-tips-with-visual-studio-2010.aspx).
 
-### <a name="remote-debugging-in-azure"></a>Uzaktan Azure'da hata ayıklama
-App Service uygulamaları ve WebJobs için uzaktan hata ayıklama hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+### <a name="remote-debugging-in-azure"></a>Azure 'da uzaktan hata ayıklama
+App Service uygulamalar ve Web Işleri için uzaktan hata ayıklama hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
-* [Uzaktan hata ayıklama Azure App Service'e Giriş](https://azure.microsoft.com/blog/2014/05/06/introduction-to-remote-debugging-on-azure-web-sites/).
-* [Uzaktan hata ayıklama içinde uzaktan hata ayıklama Azure App Service bölüm 2 - giriş](https://azure.microsoft.com/blog/2014/05/07/introduction-to-remote-debugging-azure-web-sites-part-2-inside-remote-debugging/)
-* [Azure App Service bölüm 3 - çok örnekli ortamına ve GIT üzerinde uzaktan hata ayıklama için giriş](https://azure.microsoft.com/blog/2014/05/08/introduction-to-remote-debugging-on-azure-web-sites-part-3-multi-instance-environment-and-git/)
-* [WebJobs hata ayıklama (video)](https://www.youtube.com/watch?v=ncQm9q5ZFZs&list=UU_SjTh-ZltPmTYzAybypB-g&index=1)
+* [Uzaktan hata ayıklama Azure App Service giriş](https://azure.microsoft.com/blog/2014/05/06/introduction-to-remote-debugging-on-azure-web-sites/).
+* [Uzaktan hata ayıklama Azure App Service Bölüm 2 ' ye giriş-uzak hata ayıklama Içinde](https://azure.microsoft.com/blog/2014/05/07/introduction-to-remote-debugging-azure-web-sites-part-2-inside-remote-debugging/)
+* [Azure App Service Bölüm 3 ' te uzaktan hata ayıklamaya giriş-çok örnekli ortam ve GIT](https://azure.microsoft.com/blog/2014/05/08/introduction-to-remote-debugging-on-azure-web-sites-part-3-multi-instance-environment-and-git/)
+* [Web Işleri hata ayıklaması (video)](https://www.youtube.com/watch?v=ncQm9q5ZFZs&list=UU_SjTh-ZltPmTYzAybypB-g&index=1)
 
-Bir Azure Web API'si veya Mobile Services arka uç uygulamanızın kullandığı ve gerekiyorsa, hata ayıklamak için bkz: [Visual Studio'da .NET arka ucu hata ayıklama](https://blogs.msdn.com/b/azuremobile/archive/2014/03/14/debugging-net-backend-in-visual-studio.aspx).
+Uygulamanız bir Azure Web API 'SI veya arka uç Mobile Services kullanıyorsa ve hata ayıklaması yapmanız gerekiyorsa, bkz. [Visual Studio 'da .net arka uca hata ayıklama](https://blogs.msdn.com/b/azuremobile/archive/2014/03/14/debugging-net-backend-in-visual-studio.aspx).
 
 ### <a name="tracing-in-aspnet-applications"></a>ASP.NET uygulamalarında izleme
-Internet'te ASP.NET izleme için hiçbir eksiksiz ve güncel tanıtımları vardır. Yapabileceğiniz en iyi olduğu ile çalışmaya başlama MVC yaramadı henüz mevcut ve yeni blog ile ek, Web Forms belirli sorunları odaklanan yazıları için yazılmış eski giriş materyalleri. Aşağıdaki kaynaklar başlatmak için iyi yerler şunlardır:
+ASP.NET izlemeye yönelik kapsamlı ve güncel tanıtımları Internet 'te bulunabilir. En iyi yöntem, MVC henüz olmadığı için Web Forms yazılmış eski giriş malzemeleri ile çalışmaya başlayın ve bu, belirli sorunlara odaklanarak daha yeni blog gönderileriyle birlikte ek niteliğindedir. Başlamak için bazı iyi konumlar aşağıdaki kaynaklardır:
 
-* [İzleme ve Telemetri (Azure'la gerçek hayatta kullanılan bulut uygulamaları oluşturma)](https://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).<br>
-  E-kitap bölümü Azure bulut uygulamalarında izleme önerileri sunulur.
-* [ASP.NET izleme](/previous-versions/dotnet/articles/ms972204(v=msdn.10))<br/>
-  Eski ancak yine de konuya temel bir giriş için iyi bir kaynaktır.
+* [İzleme ve telemetri (Azure Ile gerçek hayatta bulut uygulamaları oluşturma)](https://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).<br>
+  Azure bulut uygulamalarında izlemeye yönelik önerilere sahip E-kitap bölümü.
+* [ASP.NET Izleme](/previous-versions/dotnet/articles/ms972204(v=msdn.10))<br/>
+  Konunun temel tanıtımı için eski ancak hala iyi bir kaynak.
 * [İzleme dinleyicileri](/dotnet/framework/debug-trace-profile/trace-listeners)<br/>
-  İzleme dinleyicileri hakkında bilgi ancak bahsetmek değil [WebPageTraceListener](/dotnet/api/system.web.webpagetracelistener).
-* [İzlenecek yol: ASP.NET izleme System.Diagnostics izleme ile tümleştirme](/previous-versions/b0ectfxd(v=vs.140))<br/>
-  Bu makalede ayrıca eski, ancak tanıtım makalede ele alınmamıştır bazı ek bilgiler içerir.
-* [ASP.NET MVC Razor görünümleri izleme](https://blogs.msdn.com/b/webdev/archive/2013/07/16/tracing-in-asp-net-mvc-razor-views.aspx)<br/>
-  Razor görünümleri izleme yanı sıra, post, ayrıca bir MVC uygulamasındaki tüm işlenmeyen özel durumları günlüğe kaydetmek için bir hata filtre oluşturmak nasıl açıklar. Tüm işlenmemiş özel bir Web Forms uygulaması'nda oturum hakkında daha fazla bilgi için Global.asax örneğe bakın [tam bir örnek için hata işleyicilerini](/previous-versions/bb397417(v=vs.140)) MSDN'de. MVC veya Web Forms etkinleştirilmesi için işleme de varsayılan çerçeve sağlar ancak belirli özel durumları günlüğe kaydetmek istiyorsanız, catch ve aşağıdaki örnekte olduğu gibi yeniden oluşturma:
+  İzleme dinleyicileri hakkında bilgiler, ancak [Webpagetkıcelistener](/dotnet/api/system.web.webpagetracelistener)'tan bahsetmez.
+* [Gidiş System. Diagnostics Izleme ile ASP.NET Izlemesini tümleştirme](/previous-versions/b0ectfxd(v=vs.140))<br/>
+  Bu makale de Eskiler, ancak giriş makalesinin kapsamadığında bazı ek bilgiler içerir.
+* [ASP.NET MVC Razor görünümlerinde izleme](https://blogs.msdn.com/b/webdev/archive/2013/07/16/tracing-in-asp-net-mvc-razor-views.aspx)<br/>
+  Razor görünümlerinde izlemenin yanı sıra, bu gönderi bir MVC uygulamasında işlenmeyen tüm özel durumları günlüğe kaydetmek için bir hata filtresi oluşturmayı da açıklar. Web Forms uygulamasındaki tüm işlenmemiş özel durumların nasıl günlüğe kaydedilecek hakkında daha fazla bilgi için, MSDN 'de [hata işleyicileri için](/previous-versions/bb397417(v=vs.140)) bkz. Global. asax örneği. MVC veya Web Forms, bazı özel durumları günlüğe kaydetmek, ancak varsayılan çerçeve işleme için geçerli olmasını sağlamak istiyorsanız, aşağıdaki örnekte olduğu gibi yakalayabilir ve yeniden oluşturabilirsiniz:
 
-``` c#
-try
-{
-   // Your code that might cause an exception to be thrown.
-}
-catch (Exception ex)
-{
-    Trace.TraceError("Exception: " + ex.ToString());
-    throw;
-}
-```
+    ```csharp
+    try
+    {
+       // Your code that might cause an exception to be thrown.
+    }
+    catch (Exception ex)
+    {
+        Trace.TraceError("Exception: " + ex.ToString());
+        throw;
+    }
+    ```
 
-* [Azure komut satırı (artı Glimpse!) günlüğe kaydetme akış Tanılama izleme](https://www.hanselman.com/blog/StreamingDiagnosticsTraceLoggingFromTheAzureCommandLinePlusGlimpse.aspx)<br/>
-  Visual Studio'da nasıl hangi Bu öğreticiyi uygulamak için komut satırını kullanmayı gösterir. [Glimpse](https://www.hanselman.com/blog/IfYoureNotUsingGlimpseWithASPNETForDebuggingAndProfilingYoureMissingOut.aspx) ASP.NET uygulamalarında hata ayıklama için bir araçtır.
-* [Web Apps günlüğe kaydetme ve tanılama - David Ebbo ile kullanarak](https://azure.microsoft.com/documentation/videos/azure-web-site-logging-and-diagnostics/) ve [günlükleri - David Ebbo ile Web uygulamalarından akış](https://azure.microsoft.com/documentation/videos/log-streaming-with-azure-web-sites/)<br>
-  Scott Hanselman ve David Ebbo videosu.
+* [Azure komut satırından akış tanılama Izleme günlüğü (ek olarak, göz at!)](https://www.hanselman.com/blog/StreamingDiagnosticsTraceLoggingFromTheAzureCommandLinePlusGlimpse.aspx)<br/>
+  Bu öğreticinin Visual Studio 'da nasıl yapılacağını gösteren komut satırını kullanma. [Göz at](https://www.hanselman.com/blog/IfYoureNotUsingGlimpseWithASPNETForDebuggingAndProfilingYoureMissingOut.aspx) ASP.NET uygulamalarında hata ayıklamak için bir araçtır.
+* David Ebbo ile [Web Apps ve akış günlükleri](https://azure.microsoft.com/documentation/videos/log-streaming-with-azure-web-sites/) [Ile Web Apps günlüğe kaydetme ve tanılama kullanma](https://azure.microsoft.com/documentation/videos/azure-web-site-logging-and-diagnostics/)<br>
+  Scott Hanselman ve David Ebbo tarafından videolar.
 
-Hata günlüğü için kendi izleme kodu yazmak için alternatif bir açık kaynak günlüğe kaydetme çerçevesi gibi kullanmaktır [ELMAH](https://nuget.org/packages/elmah/). Daha fazla bilgi için [Scott Hanselman'ın blog yazılarını ELMAH hakkında](https://www.hanselman.com/blog/NuGetPackageOfTheWeek7ELMAHErrorLoggingModulesAndHandlersWithSQLServerCompact.aspx).
+Hata günlüğü için, kendi izleme kodunuzu yazmanın alternatifi, [ELMAH](https://nuget.org/packages/elmah/)gibi açık kaynaklı bir günlük çerçevesini kullanmaktır. Daha fazla bilgi için bkz. [Scott Hanselman 'ıN ELMAH hakkındaki blog gönderileri](https://www.hanselman.com/blog/NuGetPackageOfTheWeek7ELMAHErrorLoggingModulesAndHandlersWithSQLServerCompact.aspx).
 
-Ayrıca, ASP.NET kullanmanız gerekmez veya `System.Diagnostics` akış izleme Azure'dan günlüğe kaydeder. Akış günlüğü hizmeti App Service uygulaması tüm akışları *.txt*, *.html*, veya *.log* içinde bulduğu dosya *LogFiles* klasör. Bu nedenle, uygulamanın dosya sistemine yazma kendi günlük sisteminin oluşturabilir ve dosyanızı otomatik olarak akış ve indirildi. Tek yapmanız gereken dosyaları oluşturan yazma uygulama kodu olan *d:\home\logfiles* klasör.
+Ayrıca, Azure 'dan akış günlükleri almak için ASP.net `System.Diagnostics` veya izleme kullanmanıza gerek yoktur. App Service uygulama akış günlüğü hizmeti, *LogFiles* klasöründe bulduğu tüm *. txt*, *. html*veya *. log* dosyalarını akışlar. Bu nedenle, uygulamanın dosya sistemine yazan kendi günlük sisteminizi oluşturabilirsiniz ve dosyanız otomatik olarak akışa ve indirilir. Tüm yapmanız gereken, *d:\home\logfiles* klasöründe dosya oluşturan bir uygulama kodu yazmak.
 
-### <a name="analyzing-web-server-logs"></a>Web sunucusu günlüklerini analiz etme
-Web sunucusu günlüklerini analiz etme hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+### <a name="analyzing-web-server-logs"></a>Web sunucusu günlüklerini çözümleme
+Web sunucusu günlüklerinin çözümlenmesi hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
 * [LogParser](https://www.microsoft.com/download/details.aspx?id=24659)<br/>
-  Web sunucusu günlüklerini verilerini görüntülemek için bir aracı ( *.log* dosyaları).
-* [IIS performans sorunu veya uygulama LogParser kullanarak hataları giderme](https://www.iis.net/learn/troubleshoot/performance-issues/troubleshooting-iis-performance-issues-or-application-errors-using-logparser)<br/>
-  Web sunucusu günlükleri analiz etmek için kullanabileceğiniz günlük ayrıştırıcısı aracı giriş.
-* [LogParser kullanarak Robert McMurray'tarafından blog gönderileri](https://blogs.msdn.com/b/robert_mcmurray/archive/tags/logparser/)<br/>
-* [IIS 7.0, IIS 7.5 ve IIS 8.0 HTTP durum kodu](https://support.microsoft.com/kb/943891)
+  Web sunucusu günlüklerinde ( *. log* dosyaları) veri görüntülemeye yönelik bir araç.
+* [LogParser kullanarak IIS performans sorunlarını veya uygulama hatalarını giderme](https://www.iis.net/learn/troubleshoot/performance-issues/troubleshooting-iis-performance-issues-or-application-errors-using-logparser)<br/>
+  Web sunucusu günlüklerini çözümlemek için kullanabileceğiniz, Günlük ayrıştırıcı aracına giriş.
+* [LogParser kullanarak Robert McMurray tarafından blog gönderileri](https://blogs.msdn.com/b/robert_mcmurray/archive/tags/logparser/)<br/>
+* [IIS 7,0, IIS 7,5 ve IIS 8,0 'deki HTTP durum kodu](https://support.microsoft.com/kb/943891)
 
-### <a name="analyzing-failed-request-tracing-logs"></a>Başarısız istek izleme günlükleri çözümleme
-Microsoft TechNet Web içeren bir [kullanarak başarısız istek izleme](https://www.iis.net/learn/troubleshoot/using-failed-request-tracing) bölümünde, bu günlükleri kullanmayı anlamak için yararlı olabilir. Ancak, bu belge esas olarak başarısız istek izleme Azure App Service'te yapamayacağınız IIS Yöneticisi'nde yapılandırma üzerinde durulmaktadır.
+### <a name="analyzing-failed-request-tracing-logs"></a>Başarısız istek izleme günlükleri çözümleniyor
+Microsoft TechNet Web sitesi, bu günlüklerin nasıl kullanılacağını anlamak için faydalı olabilecek bir [başarısız Istek izleme](https://www.iis.net/learn/troubleshoot/using-failed-request-tracing) bölümü içerir. Ancak, bu belge temel olarak, Azure App Service ' de yapamıyorsanız, IIS 'de başarısız istek izlemeyi yapılandırmaya odaklanmaktadır.
 
 [GetStarted]: app-service-web-get-started-dotnet.md
 [GetStartedWJ]: https://github.com/Azure/azure-webjobs-sdk/wiki

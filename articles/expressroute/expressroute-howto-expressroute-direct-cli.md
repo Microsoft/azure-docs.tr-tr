@@ -1,21 +1,20 @@
 ---
-title: ExpressRoute doğrudan - Azure CLI yapılandırma | Microsoft Docs
-description: Bu makale Azure CLI kullanarak ExpressRoute doğrudan yapılandırmanıza yardımcı olur
+title: "Azure ExpressRoute: ExpressRoute Direct 'i yapılandırma: CLı"
+description: Bu makale, Azure CLı kullanarak ExpressRoute Direct 'i yapılandırmanıza yardımcı olur
 services: expressroute
 author: cherylmc
 ms.service: expressroute
 ms.topic: conceptual
 ms.date: 05/20/2019
 ms.author: cherylmc
-ms.custom: seodec18
-ms.openlocfilehash: ebfe3db43de87e67ad05ed8cb9f5812b5ded04e0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6a17570a62728d5b4f9c99e3c4c939b5c77cb3df
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65965911"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74080224"
 ---
-# <a name="configure-expressroute-direct-by-using-the-azure-cli"></a>Azure CLI kullanarak ExpressRoute doğrudan yapılandırın
+# <a name="configure-expressroute-direct-by-using-the-azure-cli"></a>Azure CLı kullanarak ExpressRoute Direct 'i yapılandırma
 
 Microsoft'un küresel ağı dünya genelindeki stratejik dağıtılmış eşleme konumlarda doğrudan bağlanmak için Azure ExpressRoute doğrudan kullanabilirsiniz. Daha fazla bilgi için [hakkında ExpressRoute doğrudan bağlanma](expressroute-erdirect-about.md).
 
@@ -272,7 +271,7 @@ Bu işlem, bir katman 1 test gerçekleştirmek için kullanın. Her bir çapraz 
    }
    ```
 
-   Bağlantı noktalarını kullanarak aşağı için aynı yordamı kullanın `AdminState = “Disabled”`.
+   Bağlantı noktalarını kullanarak aşağı için aynı yordamı kullanın `AdminState = "Disabled"`.
 
 ## <a name="circuit"></a>Bir bağlantı hattı oluşturma
 
@@ -280,9 +279,9 @@ Varsayılan olarak, ExpressRoute doğrudan kaynağı içeren abonelik 10 bağlan
 
 Yalnızca Burada özetlenen senaryoları desteklemek için ExpressRoute doğrudan üzerinde ek bağlantı hattı bant genişlikleri kullanabilirsiniz. 40 GB/sn ve 100 GB/sn bant genişlikleri var.
 
-**SkuTier** yerel, standart veya Premium olabilir.
+**Skutier** yerel, standart veya Premium olabilir.
 
-**SkuFamily** MeteredData yalnızca sınırsız olarak olmalıdır ExpressRoute doğrudan üzerinde desteklenmiyor.
+**Skufamily** , doğrudan ExpressRoute Direct üzerinde desteklenmediği için MeteredData olmalıdır.
 ExpressRoute doğrudan kaynak üzerinde bir bağlantı hattı oluşturun:
 
   ```azurecli

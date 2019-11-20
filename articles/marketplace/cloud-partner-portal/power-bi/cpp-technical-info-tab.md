@@ -1,39 +1,40 @@
 ---
-title: Teknik bilgiler için Power BI uygulaması teklif | Azure Market
-description: Power BI uygulaması teklif için teknik bilgisi alanları için Microsoft AppSource Marketplace yapılandırın.
+title: Power BI uygulama teklifi için teknik bilgiler | Azure Marketi
+description: Microsoft AppSource Market için Power BI uygulama teklifi için teknik bilgi alanlarını yapılandırın.
 services: Azure, AppSource, Marketplace, Cloud Partner Portal, Power BI
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/24/2019
 ms.author: pabutler
-ms.openlocfilehash: 15f4e2a76724a70c15411dea767cc9bc433e4d4a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 02c98e38f26fff73d02dc4c2b838ad3428cd2996
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943225"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819041"
 ---
-# <a name="power-bi-apps-technical-info-tab"></a>Power BI Apps Technical Info tab
+# <a name="power-bi-apps-technical-info-tab"></a>Power BI Apps Teknik bilgi sekmesi
 
-Üzerinde **yeni teklif** sayfasında **teknik bilgi** Power BI yükleyici paket URL'si ve yeni teklif doğrulamak ihtiyacınız olan diğer bilgileri sağlamak için sekmesinde.  İlk yayın için tüm Power BI uygulamaları ücretsizdir ve AppSource kaynağından indirilebilir. Bu nedenle, bu Teklif türü için stok tutma birimi (SKU) tanımlayamazsınız.
+**Yeni teklif** sayfasında, Power BI Installer paketi URL 'sini ve yeni teklifi doğrulamak için ihtiyaç duyduğunuz diğer bilgileri sağlamak Için **Teknik bilgiler** sekmesini kullanın.  İlk sürüm için tüm Power BI uygulamalar ücretsizdir ve AppSource 'tan indirilebilir. Bu nedenle, bu teklif türü için stok tutma birimleri (SKU 'Lar) tanımlayamazsınız.
 
 ![Teknik bilgi sekmesi](./media/technical-info-tab.png)
 
 
 ## <a name="technical-info-fields"></a>Teknik bilgi alanları 
 
-Üzerinde **teknik bilgi** sekmesinde, aşağıdaki tabloda açıklanan alanları doldurun. Bir alanın etiketini sonunda bir yıldız işareti (*) alanın gerekli olduğunu gösterir.
+**Teknik bilgi** sekmesinde, aşağıdaki tabloda açıklanan alanları doldurun. Alan etiketinin sonundaki bir yıldız işareti (*) alanın gerekli olduğu anlamına gelir.
 
 |        Alan          |  Açıklama                                                                 |
 |    ---------------    |  ----------------------------------------------------------------------------|
-| **Yükleyici URL'si\***     | Power BI, uygulamayı yayımlayın ve üretim hazırlığına bu URL oluşturur.  Daha fazla bilgi için [Power BI'da panolar ve raporlar ile uygulama yayımlama](https://docs.microsoft.com/power-bi/service-create-distribute-apps).  |
-|  **Doğrulama yönergeleri**  |  İsterseniz, yapılandırma, bağlama ve uygulamanızı test Microsoft doğrulama ekibi yardımcı olmak için yönergeleri (3.000 karakter) ekleyin. Tipik yapılandırma ayarları, hesaplar, parametreleri veya veri bağlanma seçeneği test etmek için kullanılabilecek diğer bilgileri içerir. Bu bilgiler yalnızca doğrulama ekibine görülebilir ve yalnızca doğrulama amacıyla kullanılır.  |
-| **Bu uygulama bir Power BI içerik paketi oluşturulur?** | Şu anda, bu alan yalnızca dahili olarak kullanılır. Varsayılan ayarını bırakın **Hayır**. Ayarı değiştirirseniz **Evet**, yayımlama işlemi durdurabilir.  |  
+| **Yükleyici URL 'SI\***     | Power BI, uygulamayı yayımladığınızda ve üretime yükselttiğinizde Bu URL 'YI oluşturur.  Daha fazla bilgi için bkz. [Power BI içindeki panoları ve raporları kullanarak uygulama yayımlama](https://docs.microsoft.com/power-bi/service-create-distribute-apps).  |
+|  **Doğrulama yönergeleri**  |  İsterseniz, Microsoft doğrulama ekibinin uygulamanızı yapılandırmasına, bağlanmasına ve test etmenize yardımcı olmak için yönergeler (en fazla 3.000 karakter) ekleyin. Verileri bağla seçeneğini test etmek için kullanılabilecek tipik yapılandırma ayarlarını, hesapları, parametreleri veya diğer bilgileri ekleyin. Bu bilgiler yalnızca doğrulama ekibi tarafından görülebilir ve yalnızca doğrulama amaçlarıyla kullanılır.  |
+| **Bu uygulama Power BI bir içerik paketi olarak oluşturuldu mu?** | Şu anda bu alan yalnızca dahili olarak kullanılır. **Hayır**varsayılan ayarını bırakın. Ayarı **Evet**olarak değiştirirseniz, Yayımlama sürecini durdurabilirsiniz.  |  
 |  |  |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Üzerinde [mağaza ayrıntıları](./cpp-storefront-details-tab.md) sekmesinde, uygulamanızı pazarlama ve yasal bilgiler sağlar.
+[Storefront Ayrıntılar](./cpp-storefront-details-tab.md) sekmesinde, uygulamanız için pazarlama ve yasal bilgiler sağlayın.
 

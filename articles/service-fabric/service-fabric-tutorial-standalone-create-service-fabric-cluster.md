@@ -12,19 +12,19 @@ ms.devlang: dotNet
 ms.topic: tutorial
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 05/11/2018
+ms.date: 07/22/2019
 ms.author: dekapur
 ms.custom: mvc
-ms.openlocfilehash: f978087a935bcf6ac78760fee5842573eb3a326e
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 82358f4d5548464f1304d77a846d71863ed9efa1
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67274104"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68385007"
 ---
-# <a name="tutorial-install-and-create-service-fabric-cluster"></a>Öğretici: Yükleme ve Service Fabric kümesi oluşturma
+# <a name="tutorial-install-and-create-service-fabric-cluster"></a>Öğretici: Service Fabric kümesi yükleyip oluşturma
 
-Service Fabric tek başına kümeleri, kendi ortamınızı seçme ve Service Fabric’in benimsediği "her işletim sistemi, her bulut" yaklaşımının bir parçası olarak bir küme oluşturma seçeneği sunar. Bu öğretici serisine AWS ya da Azure üzerinde barındırılan tek başına küme oluşturma ve bir uygulama içine yükleyin.
+Service Fabric tek başına kümeleri, kendi ortamınızı seçme ve Service Fabric’in benimsediği "her işletim sistemi, her bulut" yaklaşımının bir parçası olarak bir küme oluşturma seçeneği sunar. Bu öğretici serisinde, AWS veya Azure üzerinde barındırılan bir tek başına küme oluşturur ve bu kümeye bir uygulama yüklersiniz.
 
 Bu öğretici, bir dizinin ikinci bölümüdür. Bu öğreticide, tek başına Service Fabric kümesi oluşturma adımları gösterilmektedir.
 
@@ -37,7 +37,7 @@ Serinin ikinci bölümünde şunları öğrenirsiniz:
 
 ## <a name="download-the-service-fabric-for-windows-server-package"></a>Windows Server paketi için Service Fabric indirme
 
-Service Fabric, tek başına Service Fabric kümeleri oluşturmak için bir kurulum paketi sağlar.  Yerel bilgisayarınıza [kurulum paketini indirin](https://go.microsoft.com/fwlink/?LinkId=730690).  Başarıyla İndirildikten sonra sanal makinenize yönelik RDP bağlantısı üzerinden kopyalayın ve masaüstünde yapıştırın.
+Service Fabric, tek başına Service Fabric kümeleri oluşturmak için bir kurulum paketi sağlar.  Yerel bilgisayarınıza [kurulum paketini indirin](https://go.microsoft.com/fwlink/?LinkId=730690).  Başarıyla indirildiğinde, sanal makinenize RDP bağlantısı üzerinden kopyalayın ve masaüstüne yapıştırın.
 
 Zip dosyasını seçip bağlam menüsünü açın ve **Tümünü Ayıkla** > **Ayıkla**’yı seçin.  Dosyaları ayıkladığınızda, masaüstünde zip dosya adı ile aynı olan bir klasör oluşturursunuz.
 
@@ -129,7 +129,7 @@ Your cluster is successfully created! You can connect and manage your cluster us
 
 ### <a name="bring-up-service-fabric-explorer"></a>Service Fabric Explorer’ı getirme
 
-Service Fabric Explorer ile küme bağlanabilirsiniz artık http makinelerle birinden doğrudan ya da:\//localhost:19080/Explorer/index.html veya http ile uzaktan:\/ /<  *IPAddressofaMachine*>: 19080/Explorer/index.html.
+Artık\/, http:/localhost:19080/Explorer/index.html veya uzaktan http:\//<ipaddressofamach> ine ile bir makineden yalnızca Service Fabric Explorer ile kümeye bağlanabilirsiniz. : 19080/Explorer/index.html.
 
 ## <a name="add-and-remove-nodes"></a>Düğüm ekleme ve kaldırma
 

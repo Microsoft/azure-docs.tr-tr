@@ -25,14 +25,26 @@
       items:
         - name: ASP.NET Çekirdeği
           href: quickstart-feature-flag-aspnet-core.md
+        - name: .NET Framework
+          href: quickstart-feature-flag-dotnet.md
+        - name: Java Spring
+          href: quickstart-feature-flag-spring-boot.md
 - name: Öğreticiler
   items:
     - name: ASP.NET Core'da dinamik yapılandırmayı etkinleştirme
       href: enable-dynamic-configuration-aspnet-core.md
+    - name: .NET Core uygulamasında dinamik yapılandırmayı etkinleştirme
+      href: enable-dynamic-configuration-dotnet-core.md
+    - name: .NET Framework'te dinamik yapılandırmayı etkinleştirme
+      href: enable-dynamic-configuration-dotnet.md
     - name: .NET Core uygulamasında özellik bayraklarını kullanma
       href: use-feature-flags-dotnet-core.md
+    - name: Spring Boot uygulamasında özellik bayraklarını kullanma
+      href: use-feature-flags-spring-boot.md
     - name: Özellik bayraklarını yönetme
       href: manage-feature-flags.md
+    - name: ASP.NET Core'da Key Vault başvurularını kullanma
+      href: use-key-vault-references-dotnet-core.md
     - name: CI/CD işlem hattıyla tümleştirme
       href: integrate-ci-cd-pipeline.md
 - name: Örnekler
@@ -73,10 +85,16 @@
           href: 'https://go.microsoft.com/fwlink/?linkid=2074664'
         - name: .NET Framework derleyicisi
           href: 'https://go.microsoft.com/fwlink/?linkid=2074663'
-        - name: Java Spring sağlayıcısı
-          href: 'https://go.microsoft.com/fwlink/?linkid=2074659'
         - name: .NET Azure SDK
           href: 'https://go.microsoft.com/fwlink/?linkid=2092056'
+        - name: Java Spring sağlayıcısı
+          href: 'https://go.microsoft.com/fwlink/?linkid=2074659'
+        - name: Java Azure SDK
+          href: 'https://go.microsoft.com/fwlink/?linkid=2098196'
+        - name: Python Azure SDK
+          href: 'https://go.microsoft.com/fwlink/?linkid=2103727'
+        - name: JavaScript Azure SDK
+          href: 'https://go.microsoft.com/fwlink/?linkid=2103664'
         - name: REST
           href: 'https://go.microsoft.com/fwlink/?linkid=2078296'
     - name: Özellik yönetimi
@@ -87,11 +105,17 @@
           href: 'https://go.microsoft.com/fwlink/?linkid=2091601'
 - name: Kaynaklar
   items:
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/app-configuration/'
     - name: Videolar
       items:
         - name: Başlarken
           href: 'https://channel9.msdn.com/Shows/Azure-Friday/Getting-started-with-Azure-App-Configuration'
         - name: Özellik yönetimi
           href: 'https://channel9.msdn.com/Shows/NET-Community-Standups/ASPNET-Community-Standup-May-21st-2019-Introducing-MicrosoftFeatureManagement'
+        - name: Merkezi yapılandırmayı kolay hale getirme
+          href: 'https://channel9.msdn.com/Events/dotnetConf/NET-Conf-2019/B210'
+        - name: Cloud Native Show üzerinde Azure Uygulama Yapılandırması
+          href: 'https://www.youtube.com/watch?v=DJqmA5PcfzE'
     - name: Ürün geri bildirimi sağlama
       href: 'https://github.com/Azure/AppConfiguration/issues'

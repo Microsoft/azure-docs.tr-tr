@@ -1,118 +1,117 @@
 ---
-title: Azure Blob Depolama, dosya sistemi olarak Linux üzerinde bağlama nasıl | Microsoft Docs
-description: Linux üzerinde Azure Blob Depolama kapsayıcısına FUSE ile bağlama
-services: storage
-author: normesta
+title: Linux 'ta bir dosya sistemi olarak Azure Blob depolamayı bağlama | Microsoft Docs
+description: Linux üzerinde SIGORTASı ile bir Azure Blob depolama kapsayıcısı bağlama
+author: rishabpoh
 ms.service: storage
-ms.topic: article
+ms.topic: conceptual
 ms.date: 2/1/2019
-ms.author: normesta
-ms.reviewer: seguler
-ms.openlocfilehash: d5077b75ff9e760917e9d5d02bea49dc4967a08b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: ripohane
+ms.reviewer: dineshm
+ms.openlocfilehash: 35a4313d10231aec74685069a67d803ea32e68b1
+ms.sourcegitcommit: 16c5374d7bcb086e417802b72d9383f8e65b24a7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66473455"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73847554"
 ---
-# <a name="how-to-mount-blob-storage-as-a-file-system-with-blobfuse"></a>BLOB Depolama blobfuse ile bir dosya sistemi olarak takmak nasıl
+# <a name="how-to-mount-blob-storage-as-a-file-system-with-blobfuse"></a>Blob depolamayı blobsigortası ile dosya sistemi olarak bağlama
 
 ## <a name="overview"></a>Genel Bakış
-[Blobfuse](https://github.com/Azure/azure-storage-fuse) bir Azure Blob Depolama için sanal dosya sistemi sürücüsüdür. Blobfuse Linux dosya sistemi üzerinden mevcut blok blobu verileriniz depolama hesabınızda erişmenize olanak sağlar. Blobfuse sanal dizin şeması sınırlayıcı olarak '/' ile ileri eğik çizgi kullanır.  
+[Blobsigortası](https://github.com/Azure/azure-storage-fuse) , Azure Blob depolama için bir sanal dosya sistemi sürücüsüdür. Blobsigortası, Linux dosya sistemi aracılığıyla Depolama hesabınızdaki mevcut Blok Blobu verilerinize erişmenizi sağlar. Blobsigortası, bir sınırlayıcı olarak eğik çizgiyle '/' olan sanal dizin düzenini kullanır.  
 
-Bu kılavuzda blobfuse kullanın ve Blob Depolama kapsayıcısı üzerinde Linux ve verilere bağlama gösterilmektedir. Blobfuse hakkında daha fazla bilgi edinmek için Ayrıntılar oku [blobfuse depo](https://github.com/Azure/azure-storage-fuse).
+Bu kılavuzda, blobsigortası kullanma ve Linux üzerinde bir BLOB depolama kapsayıcısı bağlama ve verilere erişme işlemlerinin nasıl yapılacağı gösterilir. Blobsigortası hakkında daha fazla bilgi edinmek için, [blobsigortası deposundaki](https://github.com/Azure/azure-storage-fuse)ayrıntıları okuyun.
 
 > [!WARNING]
-> Yalnızca isteklerine çevirir, Blobfuse % 100 POSIX uyumluluğu garanti etmez [Blob REST API'leri](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api). Örneğin, yeniden adlandırma işlemleri POSIX ancak içinde olmayan blobfuse atomiktir.
-> Bir yerel dosya sistemi ve blobfuse arasındaki farklar tam listesi için ziyaret [blobfuse kaynak kodu deposu](https://github.com/azure/azure-storage-fuse).
+> Blobsigortası yalnızca istekleri [BLOB REST API 'lerine](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)çevirdiğinden %100 POSIX uyumluluğunu garanti etmez. Örneğin, yeniden adlandırma işlemleri POSIX içinde atomik, ancak blobsigortası içinde değildir.
+> Yerel dosya sistemi ve blobsigortası arasındaki farkların tam listesi için [blobsigortası kaynak kodu deposunu](https://github.com/azure/azure-storage-fuse)ziyaret edin.
 > 
 
-## <a name="install-blobfuse-on-linux"></a>Linux'ta blobfuse yükleme
-Blobfuse ikili dosyaları, üzerinde kullanılabilir [Linux için Microsoft yazılım depoları](https://docs.microsoft.com/windows-server/administration/Linux-Package-Repository-for-Microsoft-Software) Ubuntu ve RHEL'de dağıtımlar için. Bu dağıtımlarında blobfuse yüklemek için listenin depolarından birini yapılandırın. Ayrıca, kaynak kodu aşağıdaki ikili dosyaları oluşturabilirsiniz [Azure Depolama'ya yükleme adımlarını](https://github.com/Azure/azure-storage-fuse/wiki/1.-Installation#option-2---build-from-source) varsa hiçbir ikili dosyaları, dağıtım için kullanılabilir.
+## <a name="install-blobfuse-on-linux"></a>Linux 'ta blobsigortası 'yi yükler
+Blobsigortası ikilileri, Ubuntu ve RHEL dağıtımları için [Linux Için Microsoft yazılım depoları](https://docs.microsoft.com/windows-server/administration/Linux-Package-Repository-for-Microsoft-Software) 'nda bulunur. Bu dağıtımlara blobsigortası yüklemek için, listeden depolardan birini yapılandırın. Ayrıca, dağıtım için bir ikili dosya yoksa, [Azure depolama yükleme adımlarını](https://github.com/Azure/azure-storage-fuse/wiki/1.-Installation#option-2---build-from-source) izleyerek kaynak koddan ikili dosyaları da oluşturabilirsiniz.
 
-Blobfuse Ubuntu 14.04 ve 16.04 18.04 yüklemeyi destekler. Dağıtılan bu sürümlerden biri olduğundan emin olmak için şu komutu çalıştırın:
+Blobsigortası, Ubuntu 14,04, 16,04 ve 18,04 üzerine yüklemeyi destekler. Dağıtılan sürümlerden birine sahip olduğunuzdan emin olmak için bu komutu çalıştırın:
 ```
 lsb_release -a
 ```
 
-### <a name="configure-the-microsoft-package-repository"></a>Microsoft Paket Deposu yapılandırın
-Yapılandırma [Microsoft ürünleri için Linux Paket Deposu](https://docs.microsoft.com/windows-server/administration/Linux-Package-Repository-for-Microsoft-Software).
+### <a name="configure-the-microsoft-package-repository"></a>Microsoft paket deposunu yapılandırma
+[Linux paket deposunu Microsoft ürünleri için](https://docs.microsoft.com/windows-server/administration/Linux-Package-Repository-for-Microsoft-Software)yapılandırın.
 
-Örneğin, bir Enterprise Linux 6 dağıtım:
+Örnek olarak, bir Enterprise Linux 6 dağıtımında:
 ```bash
 sudo rpm -Uvh https://packages.microsoft.com/config/rhel/6/packages-microsoft-prod.rpm
 ```
 
-Benzer şekilde, URL değiştirme `.../rhel/7/...` bir Enterprise Linux 7 dağıtımına işaret edecek şekilde.
+Benzer şekilde, bir Kurumsal Linux 7 dağıtımına işaret etmek için URL 'YI `.../rhel/7/...` değiştirin.
 
-Başka bir örnek bir Ubuntu 14.04 dağıtım:
+Ubuntu 14,04 dağıtımında başka bir örnek:
 ```bash
 wget https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get update
 ```
 
-Benzer şekilde, URL değiştirme `.../ubuntu/16.04/...` veya `.../ubuntu/18.04/...` başka bir Ubuntu sürümüne başvurmak için.
+Benzer şekilde, URL 'YI `.../ubuntu/16.04/...` veya `.../ubuntu/18.04/...` başka bir Ubuntu sürümüne başvuracak şekilde değiştirin.
 
-### <a name="install-blobfuse"></a>Blobfuse yükleyin
+### <a name="install-blobfuse"></a>Blobsigortası 'yi yükler
 
-Bir Ubuntu/Debian dağıtımı:
+Ubuntu/debir dağıtım üzerinde:
 ```bash
 sudo apt-get install blobfuse
 ```
 
-Bir Enterprise Linux dağıtımı:
+Enterprise Linux dağıtımında:
 ```bash    
 sudo yum install blobfuse
 ```
 
-## <a name="prepare-for-mounting"></a>Bağlama için hazırlama
-Blobfuse, arabellek ve önbelleğe açık dosyaları dosya sistemindeki bir geçici yol gerektirerek yerel benzer performans sağlar. Bu geçici bir yol için en yüksek performanslı disk seçin veya bir ramdisk en iyi performans için kullanın. 
+## <a name="prepare-for-mounting"></a>Bağlama için hazırlanma
+Blobsigortası, dosya sistemindeki geçici bir yolun arabelleğe girmesini ve açık dosyaları önbelleğe almak için yerel benzeri performans sağlar. Bu geçici yol için en iyi performansa sahip diski seçin veya en iyi performansı elde etmek için bir Ramdisk kullanın. 
 
 > [!NOTE]
-> Blobfuse geçici yolu tüm açık dosya içeriğini depolar. Tüm açık dosyaları yerleştirmek için yeterli alanı olduğundan emin olun. 
+> Blobsigortası tüm açık dosya içeriğini geçici yolda depolar. Tüm açık dosyaları barındırmak için yeterli alana sahip olduğunuzdan emin olun. 
 > 
 
-### <a name="optional-use-a-ramdisk-for-the-temporary-path"></a>(İsteğe bağlı) Geçici yol için bir ramdisk kullanın
-Aşağıdaki örnek, bir ramdisk 16 GB ve blobfuse için bir dizin oluşturur. Gereksinimlerinize göre boyutu seçin. Bu ramdisk için blobfuse sağlayan açık dosyaları en fazla 16 GB cinsinden boyutu. 
+### <a name="optional-use-a-ramdisk-for-the-temporary-path"></a>Seçim Geçici yol için bir Ramdisk kullanın
+Aşağıdaki örnek, bir Ramdisk 16 GB ve blobsigortası için bir dizin oluşturur. Gereksinimlerinize göre boyutu seçin. Bu Ramdisk, blobsigortası 'nin boyut olarak 16 GB 'a kadar dosya açmasına olanak sağlar. 
 ```bash
 sudo mount -t tmpfs -o size=16g tmpfs /mnt/ramdisk
 sudo mkdir /mnt/ramdisk/blobfusetmp
 sudo chown <youruser> /mnt/ramdisk/blobfusetmp
 ```
 
-### <a name="use-an-ssd-as-a-temporary-path"></a>Geçici bir yolu olarak bir SSD kullanma
-Azure'da blobfuse için düşük gecikmeli bir arabelleği sağlamak için sanal makinelerinizde geçici diskler (SSD) kullanabilirsiniz. Ubuntu dağıtımları bu kısa ömürlü disk üzerinde takılı ' / mnt'. Red Hat ve CentOS dağıtımları, disk üzerinde takılı ' / mnt/kaynak /'.
+### <a name="use-an-ssd-as-a-temporary-path"></a>Geçici yol olarak SSD kullanma
+Azure 'da, blobsigortası için düşük gecikmeli bir arabellek sağlamak üzere sanal makinelerinizdeki kullanılabilir kısa ömürlü diskleri (SSD) kullanabilirsiniz. Ubuntu dağıtımları içinde bu kısa ömürlü disk '/mnt ' üzerine bağlanır. Red Hat ve CentOS dağıtımları ' nda disk '/mnt/Resource/' üzerine bağlanır.
 
-Geçici yol, kullanıcı erişiminin emin olun:
+Kullanıcının geçici yola erişimi olduğundan emin olun:
 ```bash
 sudo mkdir /mnt/resource/blobfusetmp -p
 sudo chown <youruser> /mnt/resource/blobfusetmp
 ```
 
-### <a name="configure-your-storage-account-credentials"></a>Depolama hesabı kimlik bilgilerinizi yapılandırın
-Aşağıdaki biçimde bir metin dosyasında saklanan kimlik bilgilerinizi Blobfuse gerektirir: 
+### <a name="configure-your-storage-account-credentials"></a>Depolama hesabı kimlik bilgilerinizi yapılandırma
+Blobsigortası, kimlik bilgilerinizin bir metin dosyasında aşağıdaki biçimde depolanmasını gerektirir: 
 
 ```
 accountName myaccount
 accountKey storageaccesskey
 containerName mycontainer
 ```
-`accountName` Depolama hesabınızın - tam URL önekidir.
+`accountName`, tam URL değil, depolama hesabınızın ön ekidir.
 
-Bu dosya kullanarak oluşturun:
+Bu dosyayı kullanarak oluşturun:
 
 ```
 touch ~/fuse_connection.cfg
 ```
 
-Oluşturulur ve bu dosyayı düzenleyen sonra başka hiçbir kullanıcı okuyabilmesi için erişimi kısıtlamak emin olun.
+Bu dosyayı oluşturup düzenledikten sonra diğer kullanıcıların okuyamaması için erişimi kısıtladığınızdan emin olun.
 ```bash
 chmod 600 fuse_connection.cfg
 ```
 
 > [!NOTE]
-> Windows üzerindeki yapılandırma dosyasını oluşturduysanız çalıştırıldığından emin olun `dos2unix` temizleyin ve dosya UNIX biçimine dönüştürün. 
+> Yapılandırma dosyasını Windows üzerinde oluşturduysanız, dosyayı temizleme ve UNIX biçimine dönüştürmek için `dos2unix` çalıştırdığınızdan emin olun. 
 >
 
 ### <a name="create-an-empty-directory-for-mounting"></a>Bağlama için boş bir dizin oluşturun
@@ -123,16 +122,16 @@ mkdir ~/mycontainer
 ## <a name="mount"></a>Bağlama
 
 > [!NOTE]
-> Bağlama seçeneklerinin tam listesi için kontrol [blobfuse depo](https://github.com/Azure/azure-storage-fuse#mount-options).  
+> Bağlama seçeneklerinin tam listesi için [blobsigortası deposuna](https://github.com/Azure/azure-storage-fuse#mount-options)bakın.  
 > 
 
-Bağlama blobfuse için kullanıcı ile aşağıdaki komutu çalıştırın. Bu komut belirtilen kapsayıcı bağlar ' / path/to/fuse_connection.cfg' konumu üzerine ' / mycontainer'.
+Blobsigortası bağlamak için, Kullanıcı ile aşağıdaki komutu çalıştırın. Bu komut '/Path/to/fuse_connection. cfg ' içinde belirtilen kapsayıcıyı '/myContainer ' konumuna bağlar.
 
 ```bash
 sudo blobfuse ~/mycontainer --tmp-path=/mnt/resource/blobfusetmp  --config-file=/path/to/fuse_connection.cfg -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120
 ```
 
-Şimdi, normal dosya sistemi API'leri üzerinden, blok blobları için erişimi olmalıdır. Dizin bağlar, erişim güvenliğini sağlar. varsayılan olarak erişebilen tek kişi kullanıcıdır. Tüm kullanıcılar erişime izin vermek için seçeneği bağlayabilir ```-o allow_other```. 
+Artık, normal dosya sistemi API 'Leri aracılığıyla blok bloblarınıza erişiminizin olması gerekir. Dizini oluşturan kullanıcı, varsayılan olarak erişime güvenlik altına alan tek kişidir. Tüm kullanıcılara erişim izni vermek için ```-o allow_other```seçeneğini kullanarak bağlayabilirsiniz. 
 
 ```bash
 cd ~/mycontainer
@@ -142,6 +141,6 @@ echo "hello world" > test/blob.txt
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Blobfuse giriş sayfası](https://github.com/Azure/azure-storage-fuse#blobfuse)
-* [Rapor blobfuse sorunları](https://github.com/Azure/azure-storage-fuse/issues) 
+* [Blobsigortası giriş sayfası](https://github.com/Azure/azure-storage-fuse#blobfuse)
+* [Blobsigortası sorunlarını raporla](https://github.com/Azure/azure-storage-fuse/issues) 
 

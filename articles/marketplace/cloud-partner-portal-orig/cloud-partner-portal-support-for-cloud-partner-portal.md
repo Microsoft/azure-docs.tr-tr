@@ -1,60 +1,61 @@
 ---
-title: Bulut iş ortağı portalı için desteği | Azure Market
-description: Bulut iş ortağı Portalı'nda destek alın.
+title: Bulut İş Ortağı Portalı için destek | Azure Marketi
+description: Bulut İş Ortağı Portalı destek alın.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/17/2018
 ms.author: pabutler
-ms.openlocfilehash: 35a5a4c4cfdbfa26ea00f0f4d76f91f9f76a1ca5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 30fc0ea4a8baba4f0677c9cceb12a7887d205f21
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935367"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827665"
 ---
-# <a name="get-support-for-cloud-partner-portal"></a>Bulut iş ortağı portalı için destek alma
+# <a name="get-support-for-cloud-partner-portal"></a>Bulut İş Ortağı Portalı için destek alın
 
-Microsoft, çok çeşitli ürünleri ve Hizmetleri için destek sağlar.
-Sorgunuzu doğru destek ekibin bulduğu sağlayarak, ilgili ve güncel bir yanıt vermek önemlidir. Sorgunuzu yönlendirmek için uygun takım yardımcı olması aşağıdaki senaryoları göz önünde bulundurun:
+Microsoft, çok çeşitli ürün ve hizmetler için destek sağlar.
+Sorgunuzun doğru destek ekibinin bulmasını sağlamak, uygun ve zamanında bir yanıt sağlamak açısından önemlidir. Sorgunuzu uygun ekibe yönlendirmenize yardımcı olması gereken aşağıdaki senaryoları göz önünde bulundurun:
 
--   Bir yayımcı yapıyorsanız ve bir müşterinin bir sorunuz varsa destek bağlantıları kullanarak destek istemek için müşterinizin isteyin [Azure portalı](https://portal.azure.com/)
+-   Bir yayımınız varsa ve bir müşterimiz varsa, müşterinizin [Azure portalındaki](https://portal.azure.com/) destek bağlantılarını kullanarak destek istemesini isteyin
 
--   Bir yayımcı yapıyorsanız ve uygulamanız veya hizmetiniz için ilgili bir sorunuz varsa, bir destek bileti açmak için aşağıdaki adımları gözden geçirin.
+-   Bir yayımsanız ve uygulamanız veya hizmetiniz ile ilgili sorularınız varsa, bir destek bileti açmak için aşağıdaki adımları gözden geçirin.
 
 ## <a name="to-open-a-support-ticket"></a>Bir destek bileti açmak için
 
-1. Git [bulut iş ortağı portalı](https://cloudpartner.azure.com/) ve iş veya Okul hesabınızla oturum açın.
+1.  [Bulut iş ortağı portalı](https://cloudpartner.azure.com/) gidin ve iş veya okul hesabınızla oturum açın.
 
-2. Üst sayfanın sağ tarafındaki menüde **yardımcı** simgesine ve ardından **Destek**.
+2. Sayfanın sağ tarafındaki menüde, **Yardım** simgesi ' ni seçin ve ardından **destek**' i seçin.
 
 ![support1](./media/cloud-partner-portal-support-for-cloud-partner-portal/support1.png)
 
 
-1. Üzerinde **bir olay**, tanımlamak **sorun türü** ve **kategori**.
+1. **Olay oluştur**sayfasında, **sorun türünü** ve **kategorisini**tanımla.
 
 
 ![support2](./media/cloud-partner-portal-support-for-cloud-partner-portal/support2.png)
 
 
-1. Seçin **başlatma isteği**.
+1. **Isteği Başlat**' ı seçin.
 
-1. Kişi bilgilerini sağlayın ve sorunu açıklayın. Tam olarak yaptığınız gibi sorunu açıklayın. Sorununuzu gidermeye yardımcı olabilecek tüm dosyalar (örneğin, Ekran yakalamalarını, hata açıklamalarını veya ağ izlerini) sağlar.
+1. İletişim bilgilerini sağlayın ve sorunu tanıtın. Sorunu, olabildiğince tamamen tanıtın. Sorununuzu çözmenize yardımcı olabilecek tüm dosyaları (örneğin, ekran yakalamaları, hata açıklamaları veya ağ izlemeleri) sağlayın.
 
 ![support3](./media/cloud-partner-portal-support-for-cloud-partner-portal/support3.png)
 
-1. Seçin **Gönder** bileti oluşturmak için.
+1. Bileti oluşturmak için **Gönder** ' i seçin.
 
 ### <a name="support-followup"></a>İzleme desteği
 
-Biz, 24 saat içinde bilet alındığını onaylamak ve sorununuzu bir öncelik ve önem derecesi atayın. Bizim Destek Mühendisleri ekibi, bizim hizmet düzeyi sözleşmesi yanıt sürelerine göre çözünürlüğünü yardımcı olur. 
+Bu anahtarın 24 saat içinde alındığını öğreneceğiz ve sorununuzu bir öncelik ve önem derecesi olarak atayacağız. Destek mühendislerinin adanmış takımımız, Hizmet Düzeyi Sözleşmesi yanıt sürelerimize göre çözümlenmesine yardımcı olur. 
 
-Sonraki ekran görüntüsü yakalamayı olarak Microsoft Desteği'nden onay alırsınız olay bilgileri gösterir.
+Sonraki ekran yakalama, Microsoft destek ' ten onay olarak alacağınız olay bilgilerini gösterir.
 
 ![support4](./media/cloud-partner-portal-support-for-cloud-partner-portal/support4.png)
 
 
--   Sorununuzla olarak bizimle iletişime geçin gerekiyorsa, e-posta için destek zaman aldı ve biz konuşmak saate zamanlayabilirsiniz yanıtlayın.
+-   Sorununuz hakkında bizimle iletişim etmeniz gerekiyorsa, destek süresi için aldığınız e-postayı yanıtlayın ve size konuşmak için zaman zamanlayamazsınız.
 
--   Sorununuzu herhangi ilerleme durumunu görüntüleyebilirsiniz saat ile seçilen **çevrimiçi görünümü olayı** önceki ekran görüntüsünde gösterilen bağlantı.
+-   Bir önceki ekran yakalamada gösterilen **olay çevrimiçi görünüm** bağlantısını seçerek istediğiniz zaman sorunu izleyebilirsiniz.

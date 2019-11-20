@@ -1,5 +1,5 @@
 ---
-title: 'Hızlı Başlangıç: Proje yanıt arama, Python'
+title: 'Hızlı Başlangıç: Proje yanıtı araması, Python'
 titlesuffix: Azure Cognitive Services
 description: Yanıt Arama Projesini kullanmaya başlamak için Python örneği.
 services: cognitive-services
@@ -10,12 +10,13 @@ ms.subservice: answer-search
 ms.topic: quickstart
 ms.date: 04/13/2018
 ms.author: rosh
-ms.openlocfilehash: 2eaf07e041998efade1091861144a2dc4d78c56d
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ROBOTS: NOINDEX
+ms.openlocfilehash: c35bf9649a0a22f3488c45d1f4f8729e211e0ddb
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60721547"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707075"
 ---
 # <a name="quickstart-project-answer-search-with-python"></a>Hızlı başlangıç: Python ile Yanıt Arama Projesi
 
@@ -23,7 +24,7 @@ Aşağıdaki Python örneği "Rock of Gibraltar" hakkında bilgi almak için bir
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-[Bilişsel Hizmetler Laboratuvarları](https://aka.ms/answersearchsubscription) ücretsiz denemesi için erişim anahtarı alın
+[Bilişsel Hizmetler Laboratuvarları](https://labs.cognitive.microsoft.com/en-us/project-answer-search) ücretsiz denemesi için erişim anahtarı alın
 
 Bu örnekte Python 3.6.4 kullanılmıştır
 

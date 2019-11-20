@@ -1,184 +1,175 @@
 ---
-title: Grup tabanlı lisanslama ek senaryoları - Azure Active Directory | Microsoft Docs
+title: Grup tabanlı lisanslama ek senaryolar-Azure AD | Microsoft Docs
 description: Azure Active Directory grup tabanlı lisanslama için daha fazla senaryo
 services: active-directory
 keywords: Azure AD lisanslama
 documentationcenter: ''
 author: curtand
-manager: mtillman
+manager: daveba
 ms.service: active-directory
 ms.topic: article
 ms.workload: identity
 ms.subservice: users-groups-roles
-ms.date: 01/31/2019
+ms.date: 11/08/2019
 ms.author: curtand
 ms.reviewer: sumitp
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 24bf8e7cf103d583cf6604e0c529ad4ea267ce84
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 139d7e0cf2b57cc466dc97370b90a599257ce755
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60471905"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74025957"
 ---
-# <a name="scenarios-limitations-and-known-issues-using-groups-to-manage-licensing-in-azure-active-directory"></a>Senaryoları, sınırlamalar ve bilinen sorunlar Azure Active Directory'de lisanslama yönetmek için grupları kullanma
+# <a name="scenarios-limitations-and-known-issues-using-groups-to-manage-licensing-in-azure-active-directory"></a>Azure Active Directory 'de lisanslamayı yönetmek için grupları kullanarak senaryolar, sınırlamalar ve bilinen sorunlar
 
-Azure Active Directory (Azure AD), Grup tabanlı lisanslama daha gelişmiş anlamak için aşağıdaki bilgi ve örnekler'i kullanın.
+Azure Active Directory (Azure AD) grup tabanlı lisanslama hakkında daha gelişmiş bir bilgi edinmek için aşağıdaki bilgileri ve örnekleri kullanın.
 
 ## <a name="usage-location"></a>Kullanım konumu
 
-Bazı Microsoft hizmetleri tüm konumlarda kullanılamaz. Yönetici bir kullanıcıya lisans atanabilmesi için önce belirtmesi gerekir **kullanım konumu** kullanıcı özelliği. İçinde [Azure portalında](https://portal.azure.com), belirleyebilirsiniz **kullanıcı** &gt; **profili** &gt; **ayarları**.
+Bazı Microsoft hizmetleri tüm konumlarda kullanılamaz. Bir lisansın bir kullanıcıya atanabilmesi için önce yönetici kullanıcı üzerinde **Kullanım konumu** özelliğini belirtmelidir. [Azure Portal](https://portal.azure.com), **kullanıcı** &gt; **profil** &gt; **ayarları**' nda kullanım konumu belirtebilirsiniz.
 
-Grup lisansı atama için kullanım konumu belirtilmemiş olmadan herhangi bir kullanıcı dizin konumunu devralır. Birden fazla konumda kullanıcılarınız varsa, lisans gruplarına kullanıcıları eklemeden önce kullanıcı, nesneyi doğru bir şekilde yansıtan emin olun.
+Grup lisansı ataması için, kullanım konumu belirtilmemiş tüm kullanıcılar dizinin konumunu alır. Birden çok konumdaki kullanıcılarınız varsa, lisanslarına Kullanıcı eklemeden önce Kullanıcı kaynaklarınıza doğru şekilde yansıtıdığınızdan emin olun.
 
 > [!NOTE]
-> Grup lisansı atama hiçbir zaman bir kullanıcının varolan bir kullanım konumu değeri değiştirir. Lisans ataması sonucu garanti eder (örneğin aracılığıyla yapılandırması) AAD Connect - Azure AD'de kullanıcı oluşturma akışınızı parçası her zaman doğru olduğu kullanım konumu her zaman ayarlayın ve kullanıcıların izin verilmeyen konumlarda Hizmetleri almazsınız öneririz.
+> Grup lisans ataması, bir kullanıcının mevcut kullanım konumu değerini hiçbir şekilde değiştirmez. Kullanım konumunu, Azure AD 'de Kullanıcı oluşturma akışınız kapsamında (ör. AAD Connect yapılandırması aracılığıyla) ayarlamanızı öneririz. Bu, lisans atamasının sonucunun her zaman doğru olmasını ve kullanıcıların izin verilmeyen konumlarda hizmet almamalarını güvence altına alır.
 
-## <a name="use-group-based-licensing-with-dynamic-groups"></a>Grup tabanlı lisanslama ile dinamik grupları kullanma
+## <a name="use-group-based-licensing-with-dynamic-groups"></a>Dinamik gruplarla grup tabanlı lisanslama kullanma
 
-Azure AD dinamik grupları ile birleştirilmesi yani herhangi bir güvenlik grubuyla grup tabanlı lisanslama kullanabilirsiniz. Dinamik gruplar kuralları otomatik olarak ekleyin ve kullanıcılar gruptan kaldırmak için nesne öznitelikleri karşı kullanıcı çalıştırın.
+Grup tabanlı lisanslamayı herhangi bir güvenlik grubuyla birlikte kullanabilirsiniz. Bu, Azure AD dinamik gruplarıyla birleştirilebilecek anlamına gelir. Dinamik Gruplar, kullanıcıları gruplara otomatik olarak eklemek ve gruplara kaldırmak için Kullanıcı kaynak özniteliklerine karşı kuralları çalıştırır.
 
-Örneğin, bazı kullanıcılara atamak istediğiniz ürünleri kümesi için dinamik bir grup oluşturabilirsiniz. Her grup, kullanıcı tarafından özniteliklerini ekleme kuralı tarafından doldurulur ve her grup, almak istediğiniz lisans atanır. Şirket özniteliği atamak ve Azure AD ile eşitleme veya doğrudan bulutta öznitelik yönetebilirsiniz.
+Örneğin, kullanıcılara atamak istediğiniz bazı ürün kümesi için dinamik bir grup oluşturabilirsiniz. Her grup, öznitelikleri tarafından Kullanıcı ekleyen bir kuralla doldurulur ve her gruba, almasını istediğiniz lisanslar atanır. Özniteliği şirket içinde atayabilir ve Azure AD ile eşitleyebilir ya da özniteliği doğrudan bulutta yönetebilirsiniz.
 
-Kısa bir süre sonra gruba eklendikten sonra kullanıcıya lisans atandı. Öznitelik değiştirildiğinde, kullanıcı grupları bırakır ve lisansları kaldırılır.
+Lisanslar, gruba eklendikten sonra kullanıcıya atanır. Öznitelik değiştirildiğinde, Kullanıcı gruplardan kalır ve lisanslar kaldırılır.
 
 ### <a name="example"></a>Örnek
 
-Hangi kullanıcıların Microsoft web hizmetlerine erişimi karar bir şirket içi kimlik yönetimi çözümü örneği göz önünde bulundurun. Kullandığı **extensionAttribute1** kullanıcı olmalıdır lisansları temsil eden bir dize değeri depolamak için. Azure AD Connect, Azure AD ile eşitler.
+Hangi kullanıcıların Microsoft Web Hizmetleri 'ne erişiminin olması gerektiğine karar veren bir şirket içi kimlik yönetimi çözümü örneğini göz önünde bulundurun. Kullanıcının sahip olması gereken lisansları temsil eden bir dize değeri depolamak için **extensionAttribute1** kullanır. Azure AD Connect Azure AD ile eşitler.
 
-Kullanıcılar bir gerekebilir ancak değil başka bir lisans ya da her ikisine birden ihtiyacınız. İçinde dağıtıyorsanız Office 365 Kurumsal E5 ve Enterprise Mobility + Security (EMS) lisansı gruplardaki kullanıcılara, bir örnek aşağıda verilmiştir:
+Kullanıcılar bir lisansa sahip olsa da bir lisansa gerek duyar veya her ikisine de ihtiyaç duyar. Burada, Office 365 Kurumsal E5 ve Enterprise Mobility + Security (EMS) lisanslarını gruplardaki kullanıcılara dağıttığınız bir örnek verilmiştir:
 
-#### <a name="office-365-enterprise-e5-base-services"></a>Office 365 Kurumsal E5: temel Hizmetleri
+#### <a name="office-365-enterprise-e5-base-services"></a>Office 365 Kurumsal E5: temel hizmetler
 
-![Ekran Office 365 Kurumsal E5 temel Hizmetleri](./media/licensing-group-advanced/o365-e5-base-services.png)
+![Office 365 Enterprise E5 temel hizmetlerinin ekran görüntüsü](./media/licensing-group-advanced/o365-e5-base-services.png)
 
 #### <a name="enterprise-mobility--security-licensed-users"></a>Enterprise Mobility + Security: lisanslı kullanıcılar
 
-![Ekran görüntüsü, Enterprise Mobility + Security, kullanıcıların lisansına sahip](./media/licensing-group-advanced/o365-e5-licensed-users.png)
+![Enterprise Mobility + Security lisanslı kullanıcıların ekran görüntüsü](./media/licensing-group-advanced/o365-e5-licensed-users.png)
 
-Bu örnekte, bir kullanıcıyı değiştirmek ve kendi extensionAttribute1 değerine ayarlanmasından `EMS;E5_baseservices;` kullanıcının her iki lisans sahip olmasını istiyorsanız. Bu değişikliği yapmak şirket içi. Değişiklik bulutla eşitler sonra kullanıcı her iki grubuna otomatik olarak eklenir ve atanmış lisansların.
+Bu örnekte, kullanıcının her iki lisansa de sahip olmasını istiyorsanız, bir kullanıcıyı değiştirin ve extensionAttribute1 değerini `EMS;E5_baseservices;` değerine ayarlayın. Bu değişikliği şirket içinde yapabilirsiniz. Değişiklik bulutla eşitlendikten sonra, Kullanıcı her iki gruba da otomatik olarak eklenir ve lisanslar atanır.
 
-![Kullanıcının extensionAttribute1 ayarlama işlemini gösteren ekran görüntüsü](./media/licensing-group-advanced/user-set-extensionAttribute1.png)
+![Kullanıcının extensionAttribute1 nasıl ayarlanacağını gösteren ekran görüntüsü](./media/licensing-group-advanced/user-set-extensionAttribute1.png)
 
 > [!WARNING]
-> Mevcut bir grubun üyelik kuralı değiştirirken dikkatli olun. Bir kural değiştirildiğinde, grubun üyeliğini yeniden değerlendirileceğini ve artık yeni kural eşleşen kullanıcılar (yeni kural, bu işlem sırasında etkilenmez eşleşme hala kaldırılan kullanıcılar) olacaktır. Bu kullanıcıların hizmet kaybı veya bazı durumlarda, neden olabilir işlemi sırasında veri kaybı kaldırılan kullanıcıların lisansları gerekir.
+> Mevcut bir grubun üyelik kuralını değiştirirken dikkatli olun. Bir kural değiştirildiğinde, grubun üyeliği yeniden değerlendirilir ve yeni kuralla eşleşmeyen kullanıcılar kaldırılır (Bu işlem sırasında yeni kuralla eşleşen kullanıcılar bundan etkilenmez). Bu kullanıcıların lisansları, hizmet kaybına veya bazı durumlarda veri kaybına neden olabilen işlem sırasında kaldırılır.
 > 
-> Lisans ataması için bağımlı bir büyük dinamik grubu varsa, ana gruba uygulamadan önce herhangi bir önemli değişiklik daha küçük bir test grubu doğrulanıyor göz önünde bulundurun.
+> Lisans atamasına bağlı olan büyük bir dinamik grubunuz varsa, bunları ana gruba uygulamadan önce daha küçük bir test grubundaki önemli değişiklikleri doğrulamayı düşünün.
 
 ## <a name="multiple-groups-and-multiple-licenses"></a>Birden çok grup ve birden çok lisans
 
-Bir kullanıcı birden fazla lisans grubu üyesi olabilir. Dikkat etmeniz gerekenler şunlardır:
+Kullanıcı, lisanslarla birden çok grubun üyesi olabilir. Göz önünde bulundurmanız gereken bazı noktalar şunlardır:
 
-- Aynı ürün için birden çok lisans binebilir ve kullanıcıya uygulanan tüm etkin hizmetler sonuçlanır. Aşağıdaki örnek, iki lisans grupları gösterir: *E3 temel Hizmetleri* ilk olarak, tüm kullanıcılara dağıtmak için foundation hizmetleri içerir. Ve *Hizmetleri genişletilmiş E3* (Sway ve Planner) yalnızca bazı kullanıcılara dağıtmak için ek hizmetleri içerir. Bu örnekte, kullanıcı her iki grubuna eklendi:
+- Aynı ürün için birden fazla lisans çakışabilir ve bu kişiler, kullanıcıya tüm etkin hizmetlerin uygulanmasına neden olabilir. Aşağıdaki örnekte iki lisans grubu gösterilmektedir: *E3 Base Services* , önce dağıtılacak olan Foundation hizmetlerini tüm kullanıcılara içerir. Ve *E3 Extended Services* yalnızca bazı kullanıcılara dağıtılacak ek hizmetler (Sway ve Planner) içerir. Bu örnekte, Kullanıcı her iki gruba de eklenmiştir:
 
-  ![Etkin hizmetler ekran görüntüsü](./media/licensing-group-advanced/view-enabled-services.png)
+  ![Etkin hizmetlerin ekran görüntüsü](./media/licensing-group-advanced/view-enabled-services.png)
 
-  Sonuç olarak, kullanıcının etkin, yalnızca bir lisans bu ürün için kullanırken ürünü 7 Hizmetler 12 vardır.
+  Sonuç olarak, Kullanıcı bu ürün için yalnızca bir lisans kullanırken, ürünün etkin olduğu 12 hizmetten 7 ' ye sahiptir.
 
-- Seçme *E3* lisans grupları hakkında nedeni ne Hizmetleri kullanıcı için etkin için bilgiler dahil olmak üzere daha fazla ayrıntı gösterilmektedir.
+- *E3* lisansının seçilmesi, Kullanıcı için hangi hizmetlerin etkin olduğunu grup lisans ataması ile ilgili bilgiler de dahil olmak üzere daha fazla ayrıntı gösterir.
 
-  ![Gruba göre etkin hizmetler ekran görüntüsü](./media/licensing-group-advanced/view-enabled-service-by-group.png)
+## <a name="direct-licenses-coexist-with-group-licenses"></a>Doğrudan lisanslar grup lisanslarıyla birlikte
 
-## <a name="direct-licenses-coexist-with-group-licenses"></a>Grup lisansları ile doğrudan lisansları bir arada var
+Bir Kullanıcı bir gruptan lisans devralırsa, bu lisans atamasını Kullanıcı özelliklerinde doğrudan kaldıramaz veya değiştiremezsiniz. Değişikliklerin grupta yapılması ve sonra tüm kullanıcılara yayılması gerekir.
 
-Bir kullanıcı bir lisans bir gruptan devraldığında doğrudan kaldıramaz veya kullanıcının özelliklerini bu lisans atamasını değiştirin. Değişiklikleri grubunda yapılan ve tüm kullanıcılar'ı yayılır.
+Ancak, devralınan lisansın yanı sıra aynı ürün lisansını doğrudan kullanıcıya atamak mümkündür. Diğer kullanıcıları etkilemeden, üründen yalnızca bir kullanıcı için ek hizmetler etkinleştirebilirsiniz.
 
-Ancak, aynı ürün lisanslarını doğrudan, devralınmış lisans yanı sıra kullanıcı atamak için mümkündür. Diğer kullanıcıları etkilemeden yalnızca bir kullanıcı için ek hizmetler ürünün etkinleştirebilirsiniz.
+Doğrudan atanan lisanslar kaldırılabilir ve devralınmış lisansları etkilemez. Bir gruptan Office 365 Kurumsal E3 lisansı devralan kullanıcıyı göz önünde bulundurun.
 
-Atanan lisansları kaldırılabilir ve etkilemeyen doğrudan lisansları devralındı. Bir Office 365 Kurumsal E3 lisans bir gruptan devralınan kullanıcı göz önünde bulundurun.
+Başlangıçta, kullanıcı lisansı yalnızca dört hizmet planını sağlayan *E3 temel hizmetler* grubundan devralır.
 
-1. Kullanıcı lisansı yalnızca başlangıçta devralır *E3 temel Hizmetleri* gösterildiği gibi dört hizmet planları, sağlayan Grup:
+1. Kullanıcıya doğrudan bir E3 lisansı atamak için **ata** ' yı seçin. Bu durumda, Yammer Enterprise dışında tüm hizmet planlarını devre dışı bırakacağız.
 
-   ![Ekran görüntüsü, E3 etkin bir grup Hizmetleri](./media/licensing-group-advanced/e3-group-enabled-services.png)
+    Sonuç olarak, Kullanıcı E3 ürününün yalnızca bir lisansını kullanır. Ancak doğrudan atama, yalnızca bu kullanıcı için Yammer Kurumsal hizmetini mümkün bir şekilde sunar. Grup üyeliği tarafından hangi hizmetlerin etkinleştirildiğini doğrudan atamaya karşı görebilirsiniz.
 
-2. Seçebileceğiniz **atama** doğrudan kullanıcıya bir E3 lisansı atamak için. Bu durumda, Yammer kuruluş dışındaki tüm hizmet planları devre dışı bırakmak için yükleyeceksiniz:
+1. Doğrudan atamayı kullandığınızda, aşağıdaki işlemlere izin verilir:
 
-   ![Bir kullanıcıya lisans atamak nasıl ekran görüntüsü](./media/licensing-group-advanced/assign-license-to-user.png)
+   - Yammer Enterprise, Kullanıcı kaynağında doğrudan kapatılabilir. Çizimdeki **açık/kapalı** geçişi, diğer hizmetin aksine bu hizmet için etkinleştirildi. Hizmet doğrudan kullanıcı üzerinde etkinleştirildiğinden, değiştirilebilir.
+   - Ek hizmetler, doğrudan atanan lisansın parçası olarak da etkinleştirilebilir.
+   - **Kaldır** düğmesi, kullanıcıdan doğrudan lisansı kaldırmak için kullanılabilir. Kullanıcının şimdi yalnızca devralınan grup lisansına sahip olduğunu ve yalnızca özgün hizmetlerin etkin kalacağını görebilirsiniz:
 
-3. Sonuç olarak, kullanıcı hala E3 ürünün yalnızca bir lisans kullanır. Ancak yalnızca söz konusu kullanıcı için Kurumsal Yammer service doğrudan atanmasına olanak tanır. Grup üyeliği doğrudan atama ile hangi hizmetler etkinleştirilir görebilirsiniz:
+## <a name="managing-new-services-added-to-products"></a>Ürünlere eklenen yeni hizmetleri yönetme
 
-   ![Ekran görüntüsü doğrudan atama devralındı](./media/licensing-group-advanced/direct-vs-inherited-assignment.png)
+Microsoft bir ürün lisans planına yeni bir hizmet eklediğinde, ürün lisansını atadığınız tüm gruplarda varsayılan olarak etkinleştirilir. Kiracınızdaki ürün değişiklikleriyle ilgili bildirimlere abone olan kullanıcılar, yaklaşan hizmet eklemeleri hakkında bilgilendirmeye devam eden e-postaları alacaktır.
 
-4. Doğrudan atamayı kullandığınızda, aşağıdaki işlemleri izin verilir:
+Yönetici olarak, her grupta yeni hizmeti devre dışı bırakmak gibi değişiklik ve eylem eylemini etkileyen tüm grupları gözden geçirebilirsiniz. Örneğin, yalnızca dağıtım için belirli hizmetleri hedefleyen gruplar oluşturduysanız, bu grupları yeniden ziyaret edebilir ve yeni eklenen hizmetlerin devre dışı bırakıldığından emin olabilirsiniz.
 
-   - Yammer Kurumsal kullanıcı nesnesindeki doğrudan kapatılabilir. **Açık/kapalı** geçiş çizimde, bir hizmeti değiştirir aksine bu hizmet için etkinleştirildi. Hizmet kullanıcı doğrudan etkinleştirilmiş olduğundan, değiştirilebilir.
-   - Ek hizmetler de, doğrudan atanan lisans bir parçası olarak etkinleştirilebilir.
-   - **Kaldır** düğmesi, kullanıcıdan doğrudan lisans kaldırmak için kullanılabilir. Kullanıcı artık yalnızca devralınan Grup lisansı sahiptir ve yalnızca özgün Hizmetleri etkin kalmaya devam görebilirsiniz:
+Bu işlemin nasıl görünebileceklerini aşağıda görebilirsiniz:
 
-     ![Doğrudan atamayı kaldırma konusunda gösteren ekran görüntüsü](./media/licensing-group-advanced/remove-direct-license.png)
+1. İlk olarak, *Office 365 Enterprise E5* ürününü birkaç gruba atamış olursunuz. *O365 E5-Exchange* olarak adlandırılan gruplardan biri yalnızca üyeleri Için *Exchange Online (plan 2)* hizmetini etkinleştirmek üzere tasarlanmıştır.
 
-## <a name="managing-new-services-added-to-products"></a>Ürünler için eklenen yeni hizmetler yönetme
-Microsoft, yeni bir hizmet için bir ürün eklediğinde, ürün lisansı atadığınız tüm gruplar halinde varsayılan olarak etkinleştirilir. İçin ürün değişikliklerle ilgili Bildirimlere abone kiracınızdaki kullanıcılar önceden gelecek hizmet eklemeleri hakkında bildiren e-posta alırsınız.
+2. Microsoft 'un, E5 ürününün yeni bir hizmet *Microsoft Stream*uzatılmayacak bir bildirim aldınız. Hizmet kiracınızda kullanılabilir hale geldiğinde, şunları yapabilirsiniz:
 
-Yönetici olarak, değişiklikten etkilenen tüm gruplarını gözden geçirin ve her gruptaki yeni hizmeti devre dışı bırakma gibi bir işlemi. Örneğin, yalnızca belirli hizmetleri dağıtımı için hedef grupları oluşturduysanız, bu grupları yeniden ziyaret ve tüm hizmetleri devre dışı bırakıldığında eklenen emin emin olun.
+3. [**Tüm ürünler dikey penceresinde Azure Active Directory > > lisanslar**](https://portal.azure.com/#blade/Microsoft_AAD_IAM/LicensesMenuBlade/Products) ' a gidin ve *Office 365 Kurumsal E5*' i seçin, sonra da bu ürüne sahip tüm grupların bir listesini görüntülemek için **lisanslı gruplar** ' ı seçin.
 
-Bu işlem aşağıdaki gibi görünebilir bir örnek aşağıda verilmiştir:
-
-1. İlk olarak, size atanan *Office 365 Kurumsal E5* ürün için çeşitli gruplar. Olarak adlandırılan, bu gruplardan birini *O365 E5 - yalnızca Exchange* yalnızca sağlamak için tasarlanmıştır *Exchange Online (Plan 2)* üyeleri için hizmet.
-
-2. Yeni bir hizmetle - E5 ürün genişletilir Microsoft'tan bir bildirim aldı *Microsoft Stream*. Hizmet kiracınızda kullanıma sunulduğunda, aşağıdakileri yapabilirsiniz:
-
-3. Git [ **Azure Active Directory > lisansları > tüm ürünler** ](https://portal.azure.com/#blade/Microsoft_AAD_IAM/LicensesMenuBlade/Products) dikey penceresinde ve seçin *Office 365 Kurumsal E5*, ardından **lisanslı gruplar** Bu ürünle birlikte tüm grupların listesini görüntülemek için.
-
-4. Gözden geçirmek istediğiniz grubun tıklayın (Bu durumda, *O365 E5 - yalnızca Exchange*). Bu açılır **lisansları** sekmesi. E5 lisansı tıklandığında, tüm etkin hizmetler listeleyen bir dikey pencere açılır.
+4. Gözden geçirmek istediğiniz gruba (Bu durumda *O365 E5-Exchange*) tıklayın. Bu, **lisanslar** sekmesini açar. E5 Lisansı ' na tıkladığınızda, tüm etkin hizmetler listelenerek bir dikey pencere açılır.
    > [!NOTE]
-   > *Microsoft Stream* hizmeti olduğundan otomatik olarak eklenir ve ek olarak bu grup, etkin *Exchange Online* hizmeti:
+   > *Microsoft Stream* hizmeti, *Exchange Online* hizmetine ek olarak bu gruba otomatik olarak eklendi ve etkinleştirildi:
 
-   ![Grup lisansı eklenen yeni hizmet ekran görüntüsü](./media/licensing-group-advanced/manage-new-services.png)
+   ![Bir grup lisansına eklenen yeni hizmetin ekran görüntüsü](./media/licensing-group-advanced/manage-new-services.png)
 
-5. Bu gruba yeni hizmeti devre dışı bırakmak isterseniz **açık/kapalı** geçiş hizmeti yanındaki ve tıklayın **Kaydet** Değişikliğini Onayla düğmesine. Azure AD değişikliği uygulamak için gruptaki tüm kullanıcılar artık işleyecektir; gruba eklenen tüm yeni kullanıcılar olmayacaktır *Microsoft Stream* hizmeti etkinleştirildi.
+5. Bu gruptaki yeni hizmeti devre dışı bırakmak istiyorsanız, hizmetin yanındaki Aç **/Kapat** düğmesine tıklayın ve değişikliği onaylamak için **Kaydet** düğmesine tıklayın. Artık Azure AD, değişikliği uygulamak için gruptaki tüm kullanıcıları işleyecek; gruba eklenen tüm yeni kullanıcılar *Microsoft Stream* hizmeti etkin olmaz.
 
    > [!NOTE]
-   > Kullanıcılar yine de bazı diğer lisans Ataması (başka bir grubu üyeleri veya doğrudan lisans ataması olmaları) etkin hizmet olabilir.
+   > Kullanıcılar yine de hizmetin başka bir lisans ataması (üyesi oldukları başka bir grup veya bir doğrudan lisans ataması) aracılığıyla etkinleştirilmeye devam edebilir.
 
-6. Gerekirse aynı adımları diğer gruplar için atanan bu ürünle gerçekleştirin.
+6. Gerekirse, bu ürünün atandığı diğer gruplar için aynı adımları gerçekleştirin.
 
-## <a name="use-powershell-to-see-who-has-inherited-and-direct-licenses"></a>Kimin devralmıştır ve doğrudan lisansları görmek için PowerShell kullanma
-Kullanıcıların doğrudan atanan veya bir gruptan devralınan bir lisans olup olmadığını denetlemek için bir PowerShell Betiği kullanabilirsiniz.
+## <a name="use-powershell-to-see-who-has-inherited-and-direct-licenses"></a>Kimin devralınan ve doğrudan lisanslarına sahip olduğunu görmek için PowerShell 'i kullanın
+Kullanıcıların doğrudan atanmış veya gruptan devralınan bir lisansa sahip olup olmadığını denetlemek için bir PowerShell betiği kullanabilirsiniz.
 
-1. Çalıştırma `connect-msolservice` kimlik doğrulaması ve kiracınıza bağlamak için cmdlet'i.
+1. Kimlik doğrulaması yapmak ve kiracınızda bağlantı kurmak için `connect-msolservice` cmdlet 'ini çalıştırın.
 
-2. `Get-MsolAccountSku` kiracıdaki tüm sağlanan ürün lisansları bulmak için kullanılabilir.
+2. `Get-MsolAccountSku`, Kiracıdaki tüm sağlanan Ürün lisanslarını saptamak için kullanılabilir.
 
-   ![Get-Msolaccountsku cmdlet'inin ekran görüntüsü](./media/licensing-group-advanced/get-msolaccountsku-cmdlet.png)
+   ![Get-Msolaccountsku cmdlet 'inin ekran görüntüsü](./media/licensing-group-advanced/get-msolaccountsku-cmdlet.png)
 
-3. Kullanım *AccountSkuId* değeri ile ilgilenen lisans [bu PowerShell Betiği](licensing-ps-examples.md#check-if-user-license-is-assigned-directly-or-inherited-from-a-group). Bu lisans nasıl atanacağını hakkında bilgileri içeren bu lisansına sahip kullanıcıları içeren bir liste oluşturur.
+3. [Bu PowerShell betiği](licensing-ps-examples.md#check-if-user-license-is-assigned-directly-or-inherited-from-a-group)ile ilgilendiğiniz lisans Için *accountskuid* değerini kullanın. Bu, lisansın atanma şekli hakkında bilgi ile bu lisansa sahip kullanıcıların bir listesini oluşturur.
 
-## <a name="use-audit-logs-to-monitor-group-based-licensing-activity"></a>Grup tabanlı lisanslama etkinliğini izlemek için denetim günlüklerini kullanın.
+## <a name="use-audit-logs-to-monitor-group-based-licensing-activity"></a>Grup tabanlı lisanslama etkinliğini izlemek için Denetim günlüklerini kullanma
 
-Kullanabileceğiniz [Azure AD denetim günlükleri](../reports-monitoring/concept-audit-logs.md#audit-logs) tüm etkinlik görmek için ilgili grup tabanlı lisanslama için de dahil olmak üzere:
-- kimin gruplardaki lisansları değişti
-- sistem Grup lisans değişikliği işlem başlatıldığında ve bittiğinde,
-- Grup lisansı atama sonucu olarak bir kullanıcıya hangi lisans değişiklikler yapıldı.
+Aşağıdakiler de dahil olmak üzere, grup tabanlı lisanslamayla ilgili tüm etkinlikleri görmek için [Azure AD denetim günlüklerini](../reports-monitoring/concept-audit-logs.md#audit-logs) kullanabilirsiniz:
+- gruplardaki lisansları kim değiştirdi
+- Sistem bir grup lisansı değişikliğini işlemeye başladığında ve tamamlandığında
+- bir grup lisansı atamasının sonucu olarak bir kullanıcıya yapılan lisans değişiklikleri.
 
 >[!NOTE]
-> Denetim günlükleri çoğu dikey pencereleri portalı Azure Active Directory bölümünde kullanılabilir. Bunları eriştiğinize bağlı olarak, filtre yalnızca etkinlik dikey penceresinin içeriği ilgili gösterecek şekilde önceden uygulanmış olabilir. Beklediğiniz sonuçları görmediğinizden, inceleyin [filtreleme seçenekleri](../reports-monitoring/concept-audit-logs.md#filtering-audit-logs) veya altında filtrelenmemiş denetim günlüklerine erişmek [ **Azure Active Directory > etkinlik > Denetim günlükleri** ](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Audit).
+> Denetim günlükleri, portalın Azure Active Directory bölümünde çoğu Blade üzerinde kullanılabilir. Bunlara nereden eriştiğinize bağlı olarak, filtreler yalnızca dikey pencerenin bağlamı ile ilgili etkinliği göstermek için önceden uygulanmış olabilir. Tahmin ettiğiniz sonuçları görmüyorsanız, [filtreleme seçeneklerini](../reports-monitoring/concept-audit-logs.md#filtering-audit-logs) inceleyin veya [**Azure Active Directory > etkinlik > Denetim günlükleri**](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Audit)altındaki filtrelenmemiş denetim günlüklerine erişin.
 
-### <a name="find-out-who-modified-a-group-license"></a>Grup lisansı kimin değiştirdiğini kullanıma Bul
+### <a name="find-out-who-modified-a-group-license"></a>Bir grup lisansını kimin değiştirildiğini öğrenin
 
-1. Ayarlama **etkinlik** filtre *Grup lisansı ayarlama* tıklatıp **Uygula**.
-2. Sonuçlar ayarlamak veya değiştirilmiş grup üzerinde lisansları tüm örneklerini içerir.
+1. **Etkinlik** filtresini *Grup lisansı ayarlamak* için ayarlayın ve **Uygula**' ya tıklayın.
+2. Sonuçlar, bazı lisansların grup üzerinde ayarlanan veya değiştirilen tüm durumlarını içerir.
    >[!TIP]
-   > Grup içinde adını da yazabilirsiniz *hedef* sonuçları kapsamını belirlemek için filtre.
+   > Sonuçların kapsamını atamak için *hedef* filtreye grubun adını da yazabilirsiniz.
 
-3. Nelerin değiştiğini ayrıntılarını görmek için liste görünümünde bir öğeye tıklayın. Altında *değiştirilmiş özellikleri* lisans ataması için eski ve yeni değerler listelenmiştir.
+3. Nelerin değiştiğini görmek için listeden bir öğe seçin. *Değiştirilen özellikler* altında, lisans atamasının hem eski hem de yeni değerleri listelenir.
 
-Son Grup lisans değişikliklerinin ayrıntıları içeren bir örnek aşağıda verilmiştir:
+Ayrıntıları içeren son grup lisansı değişikliklerinin bir örneği aşağıda verilmiştir:
 
-![Ekran grubu lisans değişiklikleri](./media/licensing-group-advanced/audit-group-license-change.png)
+![Ekran görüntüsü grup lisansı değişiklikleri](./media/licensing-group-advanced/audit-group-license-change.png)
 
-### <a name="find-out-when-group-changes-started-and-finished-processing"></a>Grup değişikliklerini başlatıldığında ve işleme tamamlandı öğrenin
+### <a name="find-out-when-group-changes-started-and-finished-processing"></a>Grup değişikliklerinin ne zaman başlatıldığını ve işlemin tamamlandığını öğrenin
 
-Bir gruba lisans değişiklikleri Azure AD değişiklikleri tüm kullanıcılara uygulama başlar.
+Bir grup üzerinde bir lisans değiştiğinde Azure AD, değişiklikleri tüm kullanıcılara uygulamaya başlayacaktır.
 
-1. Grupları işlem başlatıldığında görmek için ayarlanmış **etkinlik** filtre *kullanıcılara grup tabanlı lisans uygulama Başlat*. İşlem için aktör olduğuna dikkat edin *Microsoft Azure AD grup tabanlı lisanslama* -tüm Grup lisans değişiklikleri yürütmek için kullanılan bir sistem hesabı.
+1. Grupların işlemeye ne zaman başlatıldığını görmek için, **etkinlik** filtresini *kullanıcılara grup tabanlı lisans uygulamaya başlayacak*şekilde ayarlayın. İşlemin aktör, Grup *tabanlı lisanslama Microsoft Azure AD* olduğunu ve tüm grup lisansı değişikliklerini yürütmek için kullanılan bir sistem hesabı olduğunu unutmayın.
    >[!TIP]
-   > Görmek için listedeki bir öğeye tıklayın *değiştirilmiş özellikleri* alan - işleme için çekilen lisans değişiklikleri gösterir. Bu, bir grup için birden çok değişiklik ve hangisinin işlendiği emin değilseniz yararlı olur.
+   > *Değiştirilen özellikler* alanını görmek için listedeki bir öğeye tıklayın-işlenmek üzere çekilen lisans değişikliklerini gösterir. Bu, bir grupta birden fazla değişiklik yaptıysanız ve hangisinin işlendiğinden emin değilseniz yararlıdır.
 
-2. Benzer şekilde, grupları işleme bittiğinde görmek için filtre değeri kullanın. *kullanıcılara grup tabanlı lisans uygulamayı sonlandırma*.
+2. Benzer şekilde, grupların işlemenin ne zaman tamamlandığını görmek için, *kullanıcılara grup tabanlı lisans uygulamayı tamamlama*filtre değerini kullanın.
    > [!TIP]
-   > Bu durumda, *değiştirilmiş özellikleri* sonuçlarının bir özetini içeren alan - bu işleme herhangi bir hata ile sonuçlandı, hızlı bir şekilde denetlemek yararlıdır. Örnek çıktı:
+   > Bu durumda, *değiştirilen özellikler* alanı sonuçların bir özetini içerir. işlemin hatalara neden olup olmadığını hızlı bir şekilde denetlemek için kullanışlıdır. Örnek çıktı:
    > ```
    > Modified Properties
    > ...
@@ -187,52 +178,52 @@ Bir gruba lisans değişiklikleri Azure AD değişiklikleri tüm kullanıcılara
    > New Value : [Users successfully assigned licenses: 6, Users for whom license assignment failed: 0.];
    > ```
 
-3. Nasıl bir grup, tüm kullanıcı değişikliklerini de dahil olmak üzere işlendiği için günlüğün tamamını görmek için aşağıdaki filtreleri ayarlayın:
-   - **Başlatan (aktör)** : "Microsoft Azure AD grup tabanlı Lisanslama"
-   - **Tarih aralığı** (isteğe bağlı): belirli bir grup bildiğinizde özel aralığını kullanmaya ve işlem tamamlandı
+3. Tüm Kullanıcı değişiklikleri dahil olmak üzere bir grubun nasıl işlendiği hakkındaki günlüğün tamamını görmek için aşağıdaki filtreleri ayarlayın:
+   - **Başlatan (aktör)** : "grup tabanlı lisanslama Microsoft Azure AD"
+   - **Tarih aralığı** (isteğe bağlı): belirli bir grubun başlatıldığını ve tamamlandığını bilmeniz için özel Aralık
 
-Bu örnek çıkışa işlemi, sonuçlanan tüm kullanıcı değişiklikler ve işleme bitiş başlangıcını gösterir.
+Bu örnek çıktı, işleme başlangıcını, tüm ortaya çıkan Kullanıcı değişikliklerini ve işleme bitişini gösterir.
 
-![Ekran grubu lisans değişiklikleri](./media/licensing-group-advanced/audit-group-processing-log.png)
+![Ekran görüntüsü grup lisansı değişiklikleri](./media/licensing-group-advanced/audit-group-processing-log.png)
 
 >[!TIP]
-> İlgili öğeleri tıklayarak *kullanıcı lisansını değiştirme* her kullanıcıya uygulanan lisans değişikliklerinin ayrıntılarını gösterir.
+> *Kullanıcı lisansıyla* ilgili öğelere tıkladığınızda, her kullanıcıya uygulanan lisans değişikliklerinin ayrıntıları gösterilir.
 
-## <a name="deleting-a-group-with-an-assigned-license"></a>Atanmış bir lisansı olan bir grubu siliniyor
+## <a name="deleting-a-group-with-an-assigned-license"></a>Atanmış lisansa sahip bir grubu silme
 
-Atanan etkin bir lisansa sahip bir grubu silmek mümkün değildir. Yönetici kullanıcılardan - silinebilmesi için önce ilk olarak, gruptan kaldırılacak herhangi bir lisans isteriz. Bu nedenle kaldırılacak lisansları neden fark değil bir grup silinemedi.
+Etkin bir lisansın atandığı bir grubu silmek mümkün değildir. Bir yönetici, lisansların kullanıcılardan kaldırılmasına neden olacağını belirten bir grubu silebilir. bu nedenle, silinmeden önce herhangi bir lisansın önce gruptan kaldırılmasını gerektiririz.
 
-Azure portalında bir grubu silmek çalışırken bir hata bildirimi bu gibi görebilirsiniz: ![Ekran grubu silme işlemi başarısız oldu](./media/licensing-group-advanced/groupdeletionfailed.png)
+Azure portal bir grubu silmeye çalışırken şu şekilde bir hata bildirimi görebilirsiniz: ![ekran görüntüsü grubu silme başarısız](./media/licensing-group-advanced/groupdeletionfailed.png)
 
-Git **lisansları** sekme grubunda ve tüm lisansları atanmış olup olmadığını. Yanıt Evet ise, bu lisansları kaldırın ve grubu yeniden silmeyi deneyin.
+Gruptaki **lisanslar** sekmesine gidin ve atanmış herhangi bir lisans olup olmadığını görün. Yanıt Evet ise, bu lisansları kaldırın ve grubu silmeyi yeniden deneyin.
 
-PowerShell veya Graph API'si ile bir grubu silmek çalışırken, benzer hatalar görebilirsiniz. Şirket içi ad'nizden eşitlenmiş bir grubu kullanıyorsanız, Azure AD'de grubu silmek başarısız olduysa Azure AD Connect'i ayrıca hatalar bildirebilir. Böyle durumlarda grubuna atanmış herhangi bir lisans olup olmadığını kontrol ettiğinizden emin olun ve önce kaldırın.
+Grubu PowerShell veya Graph API ile silmeye çalışırken benzer hatalar görebilirsiniz. Şirket içinden eşitlenmiş bir grup kullanıyorsanız Azure AD Connect, Azure AD 'de grubu silmemek durumunda da hataları bildirebilir. Bu gibi durumlarda, gruba atanmış bir lisans olup olmadığını kontrol ettiğinizden emin olun ve önce bunları kaldırın.
 
 ## <a name="limitations-and-known-issues"></a>Sınırlamalar ve bilinen sorunlar
 
-Grup tabanlı lisanslama kullanıyorsanız, aşağıdaki sınırlamalar ve bilinen sorunların listesi ile tanımak için iyi bir fikirdir.
+Grup tabanlı lisanslama kullanıyorsanız, aşağıdaki sınırlamalar ve bilinen sorunlar listesini öğrenmek iyi bir fikirdir.
 
-- Şu anda grup tabanlı lisanslama diğer gruplar (iç içe geçmiş gruplar) içeren gruplar desteklemez. İçine yerleştirilmiş başka bir grup olan bir gruba lisans uyguladığınızda yalnızca grubun birinci düzeyindeki üyelerine lisans atanır.
+- Grup tabanlı lisanslama Şu anda diğer grupları (iç içe gruplar) içeren grupları desteklemez. İçine yerleştirilmiş başka bir grup olan bir gruba lisans uyguladığınızda yalnızca grubun birinci düzeyindeki üyelerine lisans atanır.
 
-- Bu özellik, yalnızca güvenlik grupları ve securityEnabled olan Office 365 grupları ile kullanılabilir = TRUE.
+- Özelliği yalnızca güvenlik grupları ve securityEnabled = TRUE olan Office 365 grupları ile birlikte kullanılabilir.
 
-- [Microsoft 365 Yönetim merkezini](https://admin.microsoft.com) grup tabanlı lisanslama şu anda desteklemiyor. Bir kullanıcı bir lisans bir gruptan devralınır. Bu lisans normal kullanıcı lisansı olarak Office Yönetim Portalı'nda görüntülenir. Lisans değiştirmek ya da lisans kaldırmaya denerseniz, portal bir hata iletisi döndürür. Devralınan Grup lisansları bir kullanıcı doğrudan değiştirilemez.
+- [Microsoft 365 Yönetim Merkezi](https://admin.microsoft.com) Şu anda grup tabanlı lisanslamayı desteklemez. Bir Kullanıcı bir gruptan lisans devralırsa, bu lisans Office Yönetim Portalı 'nda normal bir kullanıcı lisansı olarak görüntülenir. Bu lisansı değiştirmeye veya lisansı kaldırmaya çalışırsanız, Portal bir hata mesajı döndürür. Devralınan grup lisansları doğrudan bir kullanıcı üzerinde değiştirilemez.
 
-- Lisansları atanmış veya büyük bir grup (örneğin, 100.000 kullanıcı) için değiştirilmiş, performans olumsuz etkilenebilir. Özellikle, Azure AD Otomasyonu tarafından oluşturulan değişiklik hacmini, Azure AD arasında dizin eşitlemesi performansını olumsuz etkileyebilir ve şirket içi sistemler.
+- Lisanslar büyük bir grup (örneğin, 100.000 Kullanıcı) için atandığında veya değiştirildiğinde performansı etkileyebilir. Özellikle, Azure AD Otomasyonu tarafından oluşturulan değişiklikler hacmi, Azure AD ile şirket içi sistemler arasında Dizin eşitlemesinin performansını olumsuz yönde etkileyebilir.
 
-- Kullanıcılarınızın üyeliklerini yönetmek için dinamik grupları kullanıyorsanız kullanıcının grubun bir parçası olduğunu doğrulayın. Bu durum lisans atama için gereklidir. Aksi takdirde dinamik grubun [üyelik kuralı işleme durumunu denetleyin](https://docs.microsoft.com/azure/active-directory/users-groups-roles/groups-create-rule). 
+- Kullanıcılarınızın üyeliklerini yönetmek için dinamik grupları kullanıyorsanız kullanıcının grubun bir parçası olduğunu doğrulayın. Bu durum lisans atama için gereklidir. Aksi takdirde dinamik grubun [üyelik kuralı işleme durumunu denetleyin](https://docs.microsoft.com/azure/active-directory/users-groups-roles/groups-create-rule).
 
-- Belirli yüksek yük durumlarda bu grup için lisans değişiklikleri veya var olan lisans gruplarına üyelik değişiklikleri işlemek için bir uzun zaman alabilir. Görürseniz değişikliklerinizi grubu boyutu 60 K kullanıcılar veya less, lütfen işlemek için birden fazla 24 saat sürebilir. [bir destek bileti açın](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/supportRequest) araştırmak bize izin vermek için. 
+- Bazı yüksek yük durumlarında, mevcut lisanslarla gruplar veya üyelik değişiklikleri için lisans değişikliklerinin işlenmesi uzun zaman alabilir. Değişikliklerinizin, 60K kullanıcıları veya daha az grup boyutunu işlemek için 24 saatten uzun sürmek istiyorsanız lütfen araştırmamızı sağlamak için [bir destek bileti açın](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/supportRequest) . 
 
-- Lisans Yönetimi Otomasyonu otomatik olarak her türlü ortamda değişikliği için tepki vermez. Örneğin, lisans, bir hata durumunda bazı kullanıcıların neden çalıştırdığınız. İçin kullanılabilir lisans sayısı, boş, bazı doğrudan atanan lisansları diğer kullanıcılardan kaldırabilirsiniz. Ancak, sistem otomatik olarak bu değişiklik react ve hata durumundaki kullanıcıların düzeltin.
+- Lisans Yönetimi Otomasyonu, ortamdaki tüm değişiklik türlerine otomatik olarak tepki vermez. Örneğin, lisanslarınızın tükenmesine ve bazı kullanıcıların hata durumunda olmasına neden olabilirsiniz. Kullanılabilir bilgisayar sayısını boşaltmak için, diğer kullanıcılardan doğrudan atanmış bazı lisansları kaldırabilirsiniz. Ancak, sistem bu değişikliğe otomatik olarak tepki vermez ve bu hata durumundaki kullanıcıları düzeltir.
 
-  Sınırlamalar bu türde bir geçici çözüm olarak, gidebilirsiniz **grubu** dikey penceresinde Azure AD'de tıklatıp **suretiyle**. Bu komut, bu gruptaki tüm kullanıcılar işler ve hata durumları mümkünse giderir.
+  Bu tür sınırlamalar için geçici bir çözüm olarak, Azure AD 'de **Grup** dikey penceresine gidebilir ve **yeniden işle**' ye tıklayabilirsiniz. Bu komut, bu gruptaki tüm kullanıcıları işler ve mümkünse hata durumlarını çözer.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Grup tabanlı lisanslama aracılığıyla lisans yönetimine yönelik diğer senaryolar hakkında daha fazla bilgi edinmek için bkz:
 
-* [Grup tabanlı Azure Active Directory lisansı nedir?](../fundamentals/active-directory-licensing-whatis-azure-portal.md)
+* [Azure Active Directory 'de grup tabanlı lisanslama nedir?](../fundamentals/active-directory-licensing-whatis-azure-portal.md)
 * [Azure Active Directory'de gruba lisans atama](licensing-groups-assign.md)
 * [Azure Active Directory'de grubun lisans sorunlarını tanımlama ve çözme](licensing-groups-resolve-problems.md)
 * [Azure Active Directory'de tek tek lisanslı kullanıcıları grup tabanlı lisanslamaya geçirme](licensing-groups-migrate-users.md)

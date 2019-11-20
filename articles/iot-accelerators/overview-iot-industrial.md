@@ -1,53 +1,53 @@
 ---
-title: Azure endüstriyel IOT genel bakış | Microsoft Docs
-description: Endüstriyel IOT genel bakış
+title: Azure endüstriyel IoT 'ye Genel Bakış | Microsoft Docs
+description: Bu makalede endüstriyel IoT 'ye genel bakış sunulmaktadır. IIoT 'deki bağlı fabrika, fabrika tabanı bağlantısı ve güvenlik bileşenlerini açıklar.
 author: dominicbetts
 ms.author: dobett
 ms.date: 11/26/2018
 ms.topic: overview
-ms.service: iot-industrialiot
+ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: bda40470e3ccf3a5d7b23dca38b21090e864b16a
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: c5d70e5a8784e88d3f2906d500768735dced1ee0
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60888490"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73828139"
 ---
-# <a name="what-is-industrial-iot-iiot"></a>Endüstriyel IOT (Iıot) nedir
+# <a name="what-is-industrial-iot-iiot"></a>Endüstriyel IoT nedir (IIoT)
 
-Iıot endüstriyel nesnelerin interneti ' dir. Iıot aracılığıyla IOT uygulamayı üretim sektöründe endüstriyel verimliliği artırır. 
+IIoT, endüstriyel Nesnelerin İnterneti. IIoT, üretim sektöründe IoT uygulaması aracılığıyla endüstriyel verimlilik düzeyini geliştirir. 
 
-## <a name="improve-industrial-efficiencies"></a>Endüstriyel verimliliği artırın
+## <a name="improve-industrial-efficiencies"></a>Endüstriyel verimliliği artırmak
 
-Bağlı Fabrika çözüm Hızlandırıcı ile operasyonel verimliliğinizi ve Karlılığınızı artırın. Fabrika katında çalışmakta olan makineleriniz dahil olmak üzere endüstriyel ekipmanlarınızı ve cihazlarınızı bulutta bağlayıp izleyin. IoT verilerinizi analiz ederek tüm fabrika katının performansını artırmanıza yardımcı olacak içgörüler edinin.
+Bağlı bir fabrika çözümü hızlandırıcısı ile operasyonel üretkenliğinizi ve karlılığını geliştirin. Fabrika katında çalışmakta olan makineleriniz dahil olmak üzere endüstriyel ekipmanlarınızı ve cihazlarınızı bulutta bağlayıp izleyin. IoT verilerinizi analiz ederek tüm fabrika katının performansını artırmanıza yardımcı olacak içgörüler edinin.
 
-Zaman alan bir işlem Fabrika katı OPC İkizi makinelerle erişme azaltmak ve zamanınızı Iıot çözümler oluşturmaya odaklanın. Sertifika yönetimi ve OPC Vault tümleştirmesiyle endüstriyel varlık kolaylaştırın ve varlık bağlantı sağlandığını kalacağından. Bir REST benzeri API üstünde Bu mikro hizmetler sağlamak [Azure endüstriyel IOT bileşenleri](https://github.com/Azure/azure-iiot-opc-ua). Hizmet API'si size edge modül işlevlerin denetimi. 
+OPC Ikizi ile fabrika katı makinelere erişmenin zaman alan sürecini azaltın ve IIoT çözümleri oluşturmaya zamandan odaklayın. OPC kasası ile sertifika yönetimi ve endüstriyel varlık tümleştirmesini kolaylaştırın ve varlık bağlantısının güvenli hale getirilmesinden emin olabilirsiniz. Bu mikro hizmetler, [Azure endüstriyel IoT bileşenlerinin](https://github.com/Azure/azure-iiot-opc-ua)üzerine REST API 'si sağlar. Hizmet API 'SI, Edge modülü işlevlerini denetlemenize olanak tanır. 
 
-![Endüstriyel IOT genel bakış](media/overview-iot-industrial/overview.png)
+![Endüstriyel IoT genel bakış](media/overview-iot-industrial/overview.png)
 
 > [!NOTE]
-> Azure endüstriyel IOT hizmetleri hakkında daha fazla bilgi için bkz. GitHub [depo](https://github.com/Azure/azure-iiot-services).
-Azure IOT Edge modüllerinin nasıl çalıştığı ile bilmiyorsanız, aşağıdaki makaleleri ile başlayın:
+> Azure endüstriyel IoT hizmetleri hakkında daha fazla bilgi için bkz. GitHub [deposu](https://github.com/Azure/azure-iiot-services).
+Azure IoT Edge modüllerinin nasıl çalıştığını bilmediğiniz bir sorun yaşıyorsanız, aşağıdaki makalelerle başlayın:
 - [Azure IoT Edge hakkında](../iot-edge/about-iot-edge.md)
-- [Azure IOT Edge modülleri](../iot-edge/iot-edge-modules.md)
+- [Azure IoT Edge modüller](../iot-edge/iot-edge-modules.md)
 
 ## <a name="connected-factory"></a>Bağlı fabrika
 
-[Bağlı Fabrika](../iot-accelerators/iot-accelerators-connected-factory-features.md) özel iş gereksinimlerinizi karşılayacak şekilde özelleştirilebilir Microsoft'un Azure endüstriyel IOT başvuru mimarisi uygulamasıdır. Tam çözüm kod, açık kaynaklı ve bağlı Fabrika çözüm Hızlandırıcı GitHub deposuna kullanılabilir. Ticari bir ürün için başlangıç noktası olarak kullanabilir ve Azure aboneliğinize dakikalar içinde önceden oluşturulmuş bir çözüm dağıtabilirsiniz. 
+[Bağlı fabrika](../iot-accelerators/iot-accelerators-connected-factory-features.md) , Microsoft 'un belirli iş gereksinimlerini karşılayacak şekilde özelleştirilebilen Azure endüstriyel IoT başvuru mimarisinin bir uygulamasıdır. Tam çözüm kodu açık kaynaktır ve bağlı Factory Çözüm Hızlandırıcısı GitHub deposunda kullanılabilir. Ticari bir ürün için başlangıç noktası olarak kullanabilir ve Azure aboneliğinize dakikalar içinde önceden oluşturulmuş bir çözüm dağıtabilirsiniz. 
 
-## <a name="factory-floor-connectivity"></a>Fabrika katı bağlantısı
+## <a name="factory-floor-connectivity"></a>Fabrika tabanı bağlantısı
 
-OPC İkizi cihaz bulma ve kayıt otomatikleştirir ve REST API'ler aracılığıyla endüstriyel cihazlara uzaktan denetimini sunar Iıot bileşendir. OPC İkizi, Azure IOT Edge ve IOT hub'ı bulutta ve Fabrika ağ bağlanmak için kullanır. OPC İkizi Iıot geliştiricilerin güvenli bir şekilde şirket içi makinelerin erişme hakkında endişelenmeden Iıot uygulamaları derlemeye odaklanmasını sağlar.
+OPC Ikizi, cihaz bulmayı ve kaydını otomatikleştiren ve REST API 'Ler aracılığıyla endüstriyel cihazların uzaktan denetimini sunan bir IIoT bileşenidir. OPC Ikizi, bulutu ve fabrika ağını bağlamak için Azure IoT Edge ve IoT Hub kullanır. OPC Ikizi, IIoT geliştiricilerinin şirket içi makinelere güvenli bir şekilde erişme konusunda endişelenmeden IIoT uygulamalarına odaklanmasına olanak tanır.
 
 ## <a name="security"></a>Güvenlik
 
-OPC kasa, OPC UA genel bulma sunucusu (yapılandırma, kaydetme ve sertifika yaşam döngüsü OPC UA sunucusu ve istemci uygulamalarını bulutta yönetme GDS) uygulamasıdır. OPC kasa uygulaması ve endüstriyel alanında güvenli varlık bağlantı bakımını kolaylaştırır. Sertifika yönetimi otomatik hale getirerek OPC kasa bağlantısı ve sertifika yönetimi ile ilişkilendirilmiş el ile ve karmaşık işlemlerden Fabrika işleçleri serbest bırakır.
+OPC Kasası, buluttaki OPC UA sunucusu ve istemci uygulamaları için sertifika yaşam döngüsünü yapılandırabileceğiniz, kaydedebildiğiniz ve yönetebilen OPC UA küresel bulma sunucusu 'nun (GDS) bir uygulamasıdır. OPC Kasası, endüstriyel alanda güvenli varlık bağlantısının uygulanmasını ve bakımını kolaylaştırır. Sertifika yönetimini otomatikleştirerek OPC Kasası, bağlantı ve sertifika yönetimiyle ilişkili el ile ve karmaşık işlemlerden fabrika işleçlerini serbest bırakır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Endüstriyel IOT ve bileşenlerine giriş vardı, önerilen sonraki adım aşağıda verilmiştir:
+Artık endüstriyel IoT ve bileşenlerine giriş yapmış olduğunuza göre, önerilen sonraki adım aşağıda verilmiştir:
 
 > [!div class="nextstepaction"]
-> [OPC İkizi nedir](overview-opc-twin.md)
+> [OPC Ikizi nedir?](overview-opc-twin.md)

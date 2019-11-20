@@ -1,28 +1,27 @@
 ---
-title: SAP ASCS/SCS örneği paylaşılan disk azure'da Windows Server Yük Devretme Kümelemesi ve yüksek kullanılabilirlikle çoklu SID | Microsoft Docs
-description: Windows Server Yük Devretme Kümelemesi ve Azure üzerinde paylaşılan disk ile SAP ASCS/SCS örneği için yüksek kullanılabilirlik çoklu SID
+title: SAP ASCS/SCS örneği Windows Server Yük Devretme Kümelemesi ve Azure 'da paylaşılan disk ile çok düzeyli yüksek kullanılabilirlik | Microsoft Docs
+description: Azure 'da Windows Server Yük Devretme Kümelemesi ve paylaşılan disk ile SAP ASCS/SCS örneği için çoklu SID yüksek kullanılabilirlik
 services: virtual-machines-windows,virtual-network,storage
 documentationcenter: saponazure
 author: goraco
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.assetid: cbf18abe-41cb-44f7-bdec-966f32c89325
 ms.service: virtual-machines-windows
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 05/05/2017
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: dbc21922be66c793e76882cbd145f19681684252
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: fada16b3ca5307a28eebca4dfe97dc96ba389212
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66143279"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098688"
 ---
 [1928533]:https://launchpad.support.sap.com/#/notes/1928533
 [1999351]:https://launchpad.support.sap.com/#/notes/1999351
@@ -204,100 +203,100 @@ ms.locfileid: "66143279"
 
 [virtual-machines-manage-availability]:../../virtual-machines-windows-manage-availability.md
 
-# <a name="sap-ascsscs-instance-multi-sid-high-availability-with-windows-server-failover-clustering-and-shared-disk-on-azure"></a>Paylaşılan disk azure'da Windows Server Yük Devretme Kümelemesi ve yüksek kullanılabilirlikle çoklu SID SAP ASCS/SCS örneği
+# <a name="sap-ascsscs-instance-multi-sid-high-availability-with-windows-server-failover-clustering-and-shared-disk-on-azure"></a>SAP ASCS/SCS örneği Windows Server Yük Devretme Kümelemesi ve paylaşılan disk ile Azure üzerinde çok düzeyli yüksek kullanılabilirlik
 
 > ![Windows][Logo_Windows] Windows
 >
 
-Eylül 2016'da, Microsoft yönetebileceğiniz birden çok sanal IP adresi kullanarak bir özelliği yayımlanan bir [Azure iç yük dengeleyici][load-balancer-multivip-overview]. Bu işlev Azure dış yük dengeleyicide zaten var. 
+Microsoft, Eylül 2016 ' de bir [Azure iç yük dengeleyici][load-balancer-multivip-overview]kullanarak birden çok sanal IP adresini yönetebileceğiniz bir özellik yayımladı. Bu işlevsellik Azure dış yük dengeleyicisinde zaten var. 
 
-SAP dağıtımınızı varsa, Windows Küme yapılandırması için SAP Central Services'in (ASCS/SCS) örnekleri oluşturmak için iç yük dengeleyici kullanmanız gerekir.
+SAP dağıtımınız varsa, SAP Merkezi Hizmetleri (yoks/SCS) örnekleri için bir Windows küme yapılandırması oluşturmak üzere iç yük dengeleyici kullanmanız gerekir.
 
-Bu makalede, paylaşılan disk ile bir Windows Server Yük Devretme Kümelemesi (WSFC) kümesine ek SAP ASCS/SCS kümelenmiş örneklerini yükleyerek tek bir ASCS/SCS yüklemesinden bir SAP çoklu SID yapılandırmasına taşıma odaklanır. Bu işlem tamamlandığında, bir SAP çoklu SID kümesini yapılandırdınız.
+Bu makalede, paylaşılan disk ile var olan bir Windows Server Yük Devretme Kümelemesi (WSFC) kümesine ek SAP ASCS/SCS kümelenmiş örnekleri yükleyerek tek bir ASCS/SCS yüklemesinden SAP çoklu SID yapılandırmasına nasıl geçiş yapılacağı ele alınmaktadır. Bu işlem tamamlandığında, SAP çoklu SID kümesi yapılandırdınız.
 
 > [!NOTE]
 > Bu özellik yalnızca Azure Resource Manager dağıtım modelinde kullanılabilir.
 >
->Her Azure iç yük dengeleyici için özel ön uç IP sayısı bir sınırlama yoktur.
+>Her bir Azure iç yük dengeleyici için özel ön uç IP sayısı sınırı vardır.
 >
->SAP ASCS/SCS örneği bir WSFC kümesinde en fazla sayısını özel ön uç IP'ler için her bir Azure iç Yük Dengeleyiciyi maksimum sayısına eşittir.
+>Bir WSFC kümesindeki en fazla SAP ASCS/SCS örneği sayısı, her bir Azure iç yük dengeleyici için en fazla özel ön uç IP sayısına eşittir.
 >
 
-Yük Dengeleyici sınırları hakkında daha fazla bilgi için bkz: "Yük Dengeleyici başına özel ön uç IP" bölümünde [ağ Limitleri: Azure Resource Manager][networking-limits-azure-resource-manager].
+Yük dengeleyici sınırları hakkında daha fazla bilgi için ağ sınırları içindeki ["yük dengeleyici başına özel ön uç IP" bölümüne bakın: Azure Resource Manager][networking-limits-azure-resource-manager].
 
 [!INCLUDE [updated-for-az](../../../../includes/updated-for-az.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Kullanarak bir SAP ASCS/SCS örneği için kullanılacak bir WSFC kümesi zaten yapılandırmış olmanız **dosya paylaşımı**Bu diyagramda gösterildiği gibi.
+Bu diyagramda gösterildiği gibi, **dosya paylaşma**kullanarak BIR SAP ascs/SCS örneği için kullanılacak bir wsfc kümesini zaten yapılandırdınız.
 
-![Yüksek kullanılabilirlik SAP ASCS/SCS örneği][sap-ha-guide-figure-6001]
+![Yüksek kullanılabilirliğe sahip SAP yoks/SCS örneği][sap-ha-guide-figure-6001]
 
 > [!IMPORTANT]
-> Kurulum, aşağıdaki koşulları karşılaması gerekir:
-> * SAP ASCS/SCS örneği aynı WSFC kümesi paylaşmanız gerekir.
-> * Her veritabanı yönetim sistemi (DBMS) SID, kendi özel WSFC kümesine sahip olmalıdır.
-> * Bir SAP sistemine SID ait SAP uygulama sunucuları, kendi özel VM'ler olması gerekir.
+> Kurulumun aşağıdaki koşullara uyması gerekir:
+> * SAP ASCS/SCS örnekleri aynı WSFC kümesini paylaşmalıdır.
+> * Her veritabanı yönetim sistemi (DBMS) SID 'sinin kendi adanmış WSFC kümesi olmalıdır.
+> * Bir SAP sistem SID 'sine ait SAP uygulama sunucularının kendi ayrılmış VM 'lerine sahip olması gerekir.
 
 ## <a name="sap-ascsscs-multi-sid-architecture-with-shared-disk"></a>Paylaşılan disk ile SAP ASCS/SCS çoklu SID mimarisi
 
-Hedef birden çok SAP ABAP ASCS yüklemektir veya SAP Java SCS örneği aynı WSFC kümesinde, Resimli olarak burada kümelenmiş:
+Amaç, burada gösterildiği gibi birden çok SAP ABAP yoks veya SAP Java SCS kümelenmiş örneğini aynı WSFC kümesine yüklemektir:
 
-![Azure'da birden çok SAP ASCS/SCS kümelenmiş örneği][sap-ha-guide-figure-6002]
+![Azure 'da birden çok SAP ASCS/SCS kümelenmiş örneği][sap-ha-guide-figure-6002]
 
-Yük Dengeleyici sınırları hakkında daha fazla bilgi için bkz: "Yük Dengeleyici başına özel ön uç IP" bölümünde [ağ Limitleri: Azure Resource Manager][networking-limits-azure-resource-manager].
+Yük dengeleyici sınırları hakkında daha fazla bilgi için ağ sınırları içindeki ["yük dengeleyici başına özel ön uç IP" bölümüne bakın: Azure Resource Manager][networking-limits-azure-resource-manager].
 
-İki yüksek kullanılabilirlik SAP sistemlerini ile tam yatay şöyle görünür:
+İki yüksek kullanılabilirliğe sahip SAP sistemiyle tam yatay şöyle görünür:
 
-![SAP çoklu SID yüksek kullanılabilirlik Kurulum iki SAP sistemiyle SID][sap-ha-guide-figure-6003]
+![İki SAP sistem SID ile SAP yüksek kullanılabilirliğe sahip çok düzeyli kurulum][sap-ha-guide-figure-6003]
 
-## <a name="25e358f8-92e5-4e8d-a1e5-df7580a39cb0"></a> Bir SAP çoklu SID senaryosu için altyapıyı hazırlama
+## <a name="25e358f8-92e5-4e8d-a1e5-df7580a39cb0"></a>Altyapıyı SAP çoklu SID senaryosu için hazırlama
 
-Altyapınızı hazırlamak için aşağıdaki parametrelerle bir ek SAP ASCS/SCS örneği yükleyebilirsiniz:
+Altyapınızı hazırlamak için aşağıdaki parametrelerle ek bir SAP ASCS/SCS örneği yükleyebilirsiniz:
 
-| Parametre adı | Değer |
+| Parametre adı | Value |
 | --- | --- |
-| SAP ASCS/SCS SID |pr1 lb ascs |
+| SAP YOKS/SCS SID 'SI |PR1-lb-yoks |
 | SAP DBMS iç yük dengeleyici | PR5 |
-| SAP sanal ana bilgisayar adı | pr5 sap Temizle |
+| SAP sanal ana bilgisayar adı | PR5-SAP-CL |
 | SAP ASCS/SCS sanal ana bilgisayar IP adresi (ek Azure yük dengeleyici IP adresi) | 10.0.0.50 |
-| SAP ASCS/SCS örneği sayısı | 50 |
-| ILB araştırma bağlantı noktası ek SAP ASCS/SCS örneği için | 62350 |
+| SAP ASCS/SCS örnek numarası | 50 |
+| Ek SAP yoks/SCS örneği için ıLB araştırma bağlantı noktası | 62350 |
 
 > [!NOTE]
-> SAP ASCS/SCS kümesi örnekleri için benzersiz bir araştırma bağlantı noktası her IP adresi gerektirir. Örneğin, herhangi bir IP adresi, yük dengeleyicideki bir Azure iç yük dengeleyici üzerindeki bir IP adresi, yoklama bağlantı noktası 62300 kullanıyorsa, yoklama bağlantı noktası 62300 kullanabilirsiniz.
+> SAP ASCS/SCS küme örnekleri için her IP adresi için benzersiz bir yoklama bağlantı noktası gerekir. Örneğin, bir Azure iç yük dengeleyicideki bir IP adresi araştırma bağlantı noktası 62300 kullanıyorsa, bu yük dengeleyicide başka bir IP adresi araştırma bağlantı noktası 62300 ' i kullanabilir.
 >
->Araştırma bağlantı noktası 62300 zaten ayrılmış olduğundan, amaçlarımız doğrultusunda, yoklama bağlantı noktası 62350 kullanıyoruz.
+>Araştırma bağlantı noktası 62300 zaten ayrıldığından, bizim için araştırma bağlantı noktası 62350 ' i kullanıyoruz.
 
-Ek SAP ASCS/SCS örnekleri, mevcut WSFC kümesinde iki düğüm ile yükleyebilirsiniz:
+Mevcut WSFC kümesine iki düğüm ile ek SAP yoks/SCS örneği yükleyebilirsiniz:
 
 | Sanal makine rolü | Sanal makine konak adı | Statik IP adresi |
 | --- | --- | --- |
-| İlk küme düğümüne ASCS/SCS örneği için |pr1 ascs 0 |10.0.0.10 |
-| ASCS/SCS örneği için ikinci küme düğümü |pr1 ascs 1 |10.0.0.9 |
+| ASCS/SCS örneği için ilk küme düğümü |PR1-ascs-0 |10.0.0.10 |
+| ASCS/SCS örneği için ikinci küme düğümü |PR1-ascs-1 |10.0.0.9 |
 
-### <a name="create-a-virtual-host-name-for-the-clustered-sap-ascsscs-instance-on-the-dns-server"></a>Kümelenmiş SAP ASCS/SCS örneği için bir sanal ana bilgisayar adı DNS sunucusunda oluşturma
+### <a name="create-a-virtual-host-name-for-the-clustered-sap-ascsscs-instance-on-the-dns-server"></a>DNS sunucusunda kümelenmiş SAP Ass/SCS örneği için bir sanal konak adı oluşturun
 
-Aşağıdaki parametreleri kullanarak sanal ana bilgisayar adı ASCS/SCS örneği için bir DNS girişi oluşturabilirsiniz:
+Aşağıdaki parametreleri kullanarak, ASCS/SCS örneğinin sanal ana bilgisayar adı için bir DNS girişi oluşturabilirsiniz:
 
-| Yeni SAP ASCS/SCS sanal ana bilgisayar adı | İlişkili IP adresi |
+| Yeni SAP yoks/SCS sanal ana bilgisayar adı | İlişkili IP adresi |
 | --- | --- |
-|pr5 sap Temizle |10.0.0.50 |
+|PR5-SAP-CL |10.0.0.50 |
 
-Yeni ana bilgisayar adı ve IP adresi DNS Yöneticisi'nde, aşağıdaki ekran görüntüsünde gösterildiği gibi görüntülenir:
+Yeni ana bilgisayar adı ve IP adresi, aşağıdaki ekran görüntüsünde gösterildiği gibi DNS Yöneticisi 'nde görüntülenir:
 
-![Küme sanal adı ve TCP/IP adresi DNS Yöneticisi listesi tanımlanmış DNS girişini yeni SAP ASCS/SCS için vurgulama][sap-ha-guide-figure-6004]
+![Yeni SAP yoks/SCS kümesi sanal adı ve TCP/IP adresi için tanımlı DNS girişini vurgulayan DNS Yöneticisi listesi][sap-ha-guide-figure-6004]
 
 > [!NOTE]
-> Sanal ana bilgisayar adını ek ASCS/SCS örneği için atadığınız yeni IP adresini SAP Azure yük dengeleyiciye atanan yeni IP adresiyle aynı olmalıdır.
+> Ek ASCS/SCS örneğinin sanal ana bilgisayar adına atadığınız yeni IP adresi, SAP Azure yük dengeleyicisine atadığınız yeni IP adresiyle aynı olmalıdır.
 >
->Senaryomuzdaki ise 10.0.0.50 IP adresidir.
+>Senaryomızda, IP adresi 10.0.0.50 ' dir.
 
-### <a name="add-an-ip-address-to-an-existing-azure-internal-load-balancer-by-using-powershell"></a>PowerShell kullanarak bir IP adresi için var olan bir Azure iç yük dengeleyici Ekle
+### <a name="add-an-ip-address-to-an-existing-azure-internal-load-balancer-by-using-powershell"></a>PowerShell kullanarak var olan bir Azure iç yük dengeleyicisine bir IP adresi ekleme
 
-Birden fazla SAP ASCS/SCS örneği aynı WSFC kümesinde oluşturmak için bir IP adresi için var olan bir Azure iç yük dengeleyici eklemek için PowerShell kullanın. Her IP adresi, kendi Yük Dengeleme kuralları, araştırma bağlantı noktasını, ön uç IP havuzu ve arka uç havuzu gerektirir.
+Aynı WSFC kümesinde birden fazla SAP ASCS/SCS örneği oluşturmak için, PowerShell kullanarak var olan bir Azure iç yük dengeleyicisine bir IP adresi ekleyin. Her IP adresi kendi yük dengeleme kurallarını, araştırma bağlantı noktasını, ön uç IP havuzunu ve arka uç havuzunu gerektirir.
 
-Aşağıdaki komut dosyasını yeni bir IP adresi için var olan bir yük dengeleyici ekler. PowerShell benzeri değişkenleri ortamınız için güncelleştirin. Betik, tüm gerekli Yük Dengeleme kuralları tüm SAP ASCS/SCS bağlantı noktaları oluşturur.
+Aşağıdaki betik var olan bir yük dengeleyiciye yeni bir IP adresi ekler. Ortamınız için PowerShell değişkenlerini güncelleştirin. Betik tüm SAP yoks/SCS bağlantı noktaları için gereken tüm yük dengeleme kurallarını oluşturur.
 
 ```powershell
 
@@ -377,65 +376,65 @@ $ILB | Set-AzLoadBalancer
 Write-Host "Successfully added new IP '$ILBIP' to the internal load balancer '$ILBName'!" -ForegroundColor Green
 
 ```
-Betiği çalıştırdıktan sonra sonuçları aşağıdaki ekran görüntüsünde gösterildiği gibi Azure Portalı'nda görüntülenir:
+Komut dosyası çalıştırıldıktan sonra, aşağıdaki ekran görüntüsünde gösterildiği gibi sonuçlar Azure portal görüntülenir:
 
-![Azure portalında yeni ön uç IP havuzu][sap-ha-guide-figure-6005]
+![Azure portal yeni ön uç IP Havuzu][sap-ha-guide-figure-6005]
 
-### <a name="add-disks-to-cluster-machines-and-configure-the-sios-cluster-share-disk"></a>Küme makinelere disk ekleyin ve SIOS Küme Paylaşımı disk yapılandırma
+### <a name="add-disks-to-cluster-machines-and-configure-the-sios-cluster-share-disk"></a>Küme makinelerine disk ekleme ve SIOS küme paylaşma diskini yapılandırma
 
-Her ek SAP ASCS/SCS örneği için yeni bir küme paylaşımı disk eklemeniz gerekir. Windows Server 2012 R2 için WSFC Küme Paylaşımı disk şu anda kullanımda SIOS DataKeeper yazılım çözümüdür.
+Her ek SAP ASCS/SCS örneği için yeni bir küme paylaşma diski eklemeniz gerekir. Windows Server 2012 R2 için şu anda kullanılmakta olan WSFC küme paylaşma diski, SIOS Verilerman yazılım çözümüdür.
 
 Şunları yapın:
-1. Ek bir disk veya diskler (gereken stripe) aynı boyutta, her küme düğümlerine ekleyin ve biçimlendirir.
-2. Depolama çoğaltma, SIOS DataKeeper ile yapılandırın.
+1. Küme düğümlerinin her birine aynı boyuttaki (Stripe için gereklidir) ek bir disk veya disk ekleyin ve bunları biçimlendirin.
+2. SIOS Dataman ile depolama çoğaltmasını yapılandırın.
 
-Bu yordam WSFC küme makinelerde SIOS DataKeeper zaten yüklediğinizi varsayar. Yüklediyseniz, çoğaltma makineler arasında şimdi yapılandırmanız gerekir. İşlem, ayrıntılı olarak açıklanan [SAP ASCS/SCS Küme Paylaşımı diski için SIOS DataKeeper Cluster Edition][sap-high-availability-infrastructure-wsfc-shared-disk-install-sios].  
+Bu yordamda, WSFC küme makinelerine zaten SIOS Dataman yüklediğinizi varsayılmaktadır. Uygulamayı yüklediyseniz, artık makineler arasında çoğaltmayı yapılandırmanız gerekir. İşlem [SAP ASCS/SCS küme paylaşma diski IÇIN SIOS Dataman küme sürümü][sap-high-availability-infrastructure-wsfc-shared-disk-install-sios]' nde ayrıntılı olarak açıklanır.  
 
-![Yeni SAP ASCS/SCS disk paylaşmak için yansıtma zaman uyumlu DataKeeper][sap-ha-guide-figure-6006]
+![Yeni SAP Ass/SCS paylaşma diski için Dataman zaman uyumlu yansıtma][sap-ha-guide-figure-6006]
 
-### <a name="deploy-vms-for-sap-application-servers-and-the-dbms-cluster"></a>SAP uygulama sunucuları ve DBMS küme için Vm'leri dağıtma
+### <a name="deploy-vms-for-sap-application-servers-and-the-dbms-cluster"></a>SAP uygulama sunucuları ve DBMS kümesi için VM 'Leri dağıtma
 
-İkinci SAP sistemine altyapı hazırlığı tamamlamak için aşağıdakileri yapın:
+İkinci SAP sistemine yönelik altyapı hazırlığını gerçekleştirmek için aşağıdakileri yapın:
 
-1. SAP uygulama sunucuları için ayrılmış Vm'leri dağıtma ve kendi özel kullanılabilirlik grubundaki her yerleştirin.
-2. DBMS küme için ayrılmış Vm'leri dağıtma ve kendi özel kullanılabilirlik grubundaki her yerleştirin.
+1. SAP uygulama sunucuları için adanmış VM 'Ler dağıtın ve her birinin kendi adanmış kullanılabilirlik grubuna yerleştirin.
+2. DBMS kümesi için adanmış VM 'Ler dağıtın ve her bir kendisini kendi adanmış kullanılabilirlik grubuna yerleştirin.
 
-## <a name="install-an-sap-netweaver-multi-sid-system"></a>Bir SAP NetWeaver çoklu SID sistemi yükleyin
+## <a name="install-an-sap-netweaver-multi-sid-system"></a>SAP NetWeaver çoklu SID sistemi yüklemesi
 
-Tam ikinci bir SAP SID2 sistemi yükleme işleminin bir açıklaması için bkz. [Windows Yük devretme kümesi ve bir SAP ASCS/SCS örneği için paylaşılan disk üzerinde SAP NetWeaver HA yükleme][sap-high-availability-installation-wsfc-shared-disk].
+İkinci bir SAP SID2 sistemi yükleme işleminin bir açıklaması için, bkz. sap [NETWEAVER ha yüklemesi Windows Yük devretme kümesi ve paylaşılan disk, SAP ASCS/SCS örneği için][sap-high-availability-installation-wsfc-shared-disk].
 
 Üst düzey yordam aşağıdaki gibidir:
 
-1. [Bir yüksek kullanılabilirlik ASCS/SCS örneği ile SAP yükleme][sap-high-availability-installation-wsfc-shared-disk-install-ascs].  
- Bu adımda, mevcut WSFC küme düğümü 1 üzerindeki bir yüksek kullanılabilirlik ASCS/SCS örneğiyle SAP yüklüyorsunuz.
+1. [Yüksek kullanılabilirliğe sahip BIR ASCS/SCS ÖRNEĞIYLE SAP 'Yi yükler][sap-high-availability-installation-wsfc-shared-disk-install-ascs].  
+ Bu adımda, mevcut WSFC küme düğümü 1 üzerinde yüksek kullanılabilirliğe sahip bir ASCS/SCS örneğiyle SAP 'yi yüklüyorsunuz.
 
-2. [SAP ASCS/SCS örneği profilini değiştirmek][sap-high-availability-installation-wsfc-shared-disk-modify-ascs-profile].
+2. [ASCS/SCS ÖRNEĞININ SAP profilini değiştirin][sap-high-availability-installation-wsfc-shared-disk-modify-ascs-profile].
 
-3. [Bir araştırma bağlantı noktasını yapılandırma][sap-high-availability-installation-wsfc-shared-disk-add-probe-port].  
- Bu adımda, PowerShell kullanarak SAP küme kaynağı SAP SID2 IP araştırma bağlantı noktası yapılandırmış olursunuz. Bu yapılandırma, SAP ASCS/SCS küme düğümlerinden biri üzerinde çalıştırın.
+3. [Bir araştırma bağlantı noktası yapılandırın][sap-high-availability-installation-wsfc-shared-disk-add-probe-port].  
+ Bu adımda, PowerShell kullanarak SAP küme kaynağı SAP-SID2-IP araştırma bağlantı noktasını yapılandırıyorsunuz. Bu yapılandırmayı SAP ASCS/SCS küme düğümlerinden birinde yürütün.
 
-4. Veritabanı örneğini yükleyin.  
- İkinci küme yüklemek için SAP Yükleme Kılavuzu'ndaki adımları izleyin.
+4. Veritabanı örneğini yükler.  
+ İkinci kümeyi yüklemek için SAP yükleme kılavuzundaki adımları izleyin.
 
-5. İkinci küme düğümüne yükleyin.  
- Bu adımda, bir yüksek kullanılabilirlik ASCS/SCS örneği mevcut WSFC küme düğümünde 2 ile SAP yüklüyorsunuz. İkinci küme yüklemek için SAP Yükleme Kılavuzu'ndaki adımları izleyin.
+5. İkinci küme düğümünü yükler.  
+ Bu adımda, mevcut WSFC küme düğümü 2 ' de yüksek kullanılabilirliğe sahip bir ASCS/SCS örneği ile SAP 'yi yüklüyorsunuz. İkinci kümeyi yüklemek için SAP yükleme kılavuzundaki adımları izleyin.
 
-6. SAP ASCS/SCS örneği ve araştırma bağlantı noktası için Windows Güvenlik Duvarı bağlantı noktalarını açın.  
-    SAP ASCS/SCS örneği için kullanılan her iki küme düğümleri üzerinde SAP ASCS/SCS tarafından kullanılan tüm Windows Güvenlik Duvarı bağlantı noktaları açıyoruz. SAP ASCS/SCS örneği bu bağlantı noktaları bölümde listelenen [SAP ASCS / SCS bağlantı noktaları][sap-net-weaver-ports-ascs-scs-ports].
+6. SAP ASCS/SCS örneği ve yoklama bağlantı noktası için Windows Güvenlik Duvarı bağlantı noktalarını açın.  
+    SAP ASCS/SCS örnekleri için kullanılan her iki küme düğümünde de SAP Ass/SCS tarafından kullanılan tüm Windows Güvenlik Duvarı bağlantı noktalarını açıyor olursunuz. Bu SAP yoks/SCS örnek bağlantı noktaları, bölüm [SAP yoks/SCS bağlantı][sap-net-weaver-ports-ascs-scs-ports]noktalarında listelenmiştir.
 
-    Diğer tüm SAP bağlantı listesi için bkz. [TCP/IP bağlantı noktaları tüm SAP ürünleri][sap-net-weaver-ports].  
+    Diğer tüm SAP bağlantı noktalarının listesi için bkz. [Tüm sap ürünlerinin TCP/IP bağlantı noktaları][sap-net-weaver-ports].  
 
-    Ayrıca senaryomuzdaki 62350 olan Azure iç yük dengeleyici araştırma bağlantı noktasını açın. Açıklanmıştır [bu makaledeki][sap-high-availability-installation-wsfc-shared-disk-win-firewall-probe-port].
+    Ayrıca, Senaryomuzda 62350 olan Azure iç yük dengeleyici araştırma bağlantı noktasını açın. [Bu makalede][sap-high-availability-installation-wsfc-shared-disk-win-firewall-probe-port]açıklanmaktadır.
 
-7. [Değerlendirilen SAP giriş kapatma (Ağıranlar) Windows hizmet örneği başlangıç türünü değiştirme][sap-high-availability-installation-wsfc-shared-disk-change-ers-service-startup-type].
+7. [SAP tarafından değerlendirilen giriş kapatması (ERS) Windows hizmeti örneğinin başlangıç türünü değiştirin][sap-high-availability-installation-wsfc-shared-disk-change-ers-service-startup-type].
 
-8. SAP birincil uygulama sunucusunda yeni adanmış VM'de SAP Yükleme Kılavuzu'nda açıklandığı gibi yükleyin.  
+8. SAP birincil uygulama sunucusunu, SAP yükleme kılavuzunda açıklandığı şekilde, yeni adanmış VM 'ye yükler.  
 
-9. SAP ek uygulama sunucusu yeni adanmış VM'de SAP Yükleme Kılavuzu'nda açıklandığı gibi yükleyin.
+9. SAP yükleme kılavuzunda açıklandığı şekilde SAP ek uygulama sunucusunu yeni adanmış VM 'ye yükleme.
 
-10. [SIOS çoğaltma ve SAP ASCS/SCS örneği yük devretme testi][sap-high-availability-installation-wsfc-shared-disk-test-ascs-failover-and-sios-repl].
+10. [SAP ASCS/SCS örneği yük devretme ve SIOS çoğaltmasını test][sap-high-availability-installation-wsfc-shared-disk-test-ascs-failover-and-sios-repl]edin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Ağ Limitleri: Azure Resource Manager][networking-limits-azure-resource-manager]
-- [Azure için birden çok Vıp'de yük dengeleyici][load-balancer-multivip-overview]
+- [Ağ sınırları: Azure Resource Manager][networking-limits-azure-resource-manager]
+- [Azure Load Balancer için birden çok VIP][load-balancer-multivip-overview]

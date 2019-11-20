@@ -1,19 +1,20 @@
 ---
-title: Azure PowerShell Betiği - Azure Cosmos DB Cassandra API anahtar alanı ve tablo oluşturma
-description: Azure PowerShell Betiği - Azure Cosmos DB Cassandra API anahtar alanı ve tablo oluşturma
+title: Azure PowerShell betik-Azure Cosmos DB oluştur Cassandra API anahtar alanı ve tablo
+description: Azure PowerShell betik-Azure Cosmos DB oluştur Cassandra API anahtar alanı ve tablo
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: samples
+ms.subservice: cosmosdb-cassandra
+ms.topic: sample
 ms.date: 05/18/2019
 ms.author: mjbrown
-ms.openlocfilehash: ab654699fb040b5e3f966b3514f97436c27ca6e2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 52b65b6d9be4220b5d7078fc28e78ae4d764a988
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66247027"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71179045"
 ---
-# <a name="create-a-keyspace-and-table-for-azure-cosmos-db---cassandra-api"></a>Azure Cosmos DB - Cassandra API'si için bir anahtar alanı ve tablo oluşturma
+# <a name="create-a-keyspace-and-table-for-azure-cosmos-db---cassandra-api"></a>Azure Cosmos DB Cassandra API için bir anahtar uzayı ve tablo oluşturma
 
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
@@ -38,8 +39,8 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 |**Azure kaynakları**| |
-| [Yeni AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
-|**Azure kaynak grupları**| |
+| [New-AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
+|**Azure Kaynak grupları**| |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 |||
 

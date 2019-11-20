@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 58e3254d499e013dc686bf6b7d53f919a457c901
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 9adf083f8e4c8c269b895dac87b4e4613ec1b023
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60414078"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73474385"
 ---
 # <a name="quickstart-self-service-password-reset"></a>Hızlı Başlangıç: Self servis parola sıfırlama
 
@@ -26,31 +26,31 @@ Bu hızlı başlangıçta BT uzmanlarının kullanıcılara parolalarını sıf�
 
 * En az deneme sürümü lisansı etkinleştirilmiş çalışan bir Azure AD kiracısına erişim.
 * Genel Yönetici ayrıcalıklarına sahip olan bir hesap.
-* Bildiğiniz bir kullanıcı bakın makale oluşturmanız gerekiyorsa bir parola ile bir yönetici olmayan test kullanıcısı [hızlı başlangıç: Azure Active Directory'ye yeni kullanıcı ekleme](../add-users-azure-active-directory.md).
+* Test için kullanacağınız yönetici olmayan bir kullanıcı adı ve parola. Kullanıcı oluşturmanız gerekiyorsa [Hızlı başlangıç: Azure Active Directory'ye yeni kullanıcı ekleme](../add-users-azure-active-directory.md) makalesine bakın.
 * Bu yönetici olmayan test kullanıcısının üyesi olduğu pilot grup. Grup oluşturmanız gerekiyorsa [Azure Active Directory'de grup oluşturma ve üye ekleme](../active-directory-groups-create-azure-portal.md) makalesine bakın.
 
 ## <a name="enable-self-service-password-reset"></a>Kendi kendine parola sıfırlamayı etkinleştirme
 
-> [!VIDEO https://www.youtube.com/embed/Pa0eyqjEjvQ]
+[Bu işlemi YouTube 'da video olarak görüntüleyin](https://youtu.be/Pa0eyqjEjvQ)
 
-1. Mevcut Azure AD kiracınızdan, **Azure Active Directory** altında **Azure portal** üzerinde **Parola sıfırlama**’yı seçin.
+1. Mevcut Azure AD kiracınızdan, Azure portal menüsünden veya **giriş** sayfasından **Azure Active Directory**' i seçin. Ardından, **parola sıfırlama**' yı seçin.
 
 2. **Özellikler** sayfasında, **Self servis parola sıfırlama etkinleştirildi** seçeneğinin altında **Seçili**'yi seçin.
     * **Grup seçin** bölümünde bu makalenin ön koşullar bölümünde oluşturduğunuz pilot grubunuzu seçin.
-    * **Kaydet**’e tıklayın.
+    * **Kaydet** düğmesine tıklayın.
 
 3. **Kimlik doğrulama yöntemleri** sayfasında aşağıdaki seçimleri yapın:
-   * Sıfırlama için gereken yöntem sayısı: **1**
+   * Sıfırlama için gereken yöntemlerin sayısı: **1**
    * Kullanıcıların yararlanabileceği yöntemler:
       * **E-posta**
       * **Mobil uygulama kodu (Önizleme)**
-   * **Kaydet**’e tıklayın.
+   * **Kaydet** düğmesine tıklayın.
 
-     ![SSPR için kimlik doğrulama yöntemi seçme][Authentication]
+     ![SSPR için kimlik doğrulama yöntemlerini seçme][Authentication]
 
 4. **Kayıt** sayfasında aşağıdaki seçimleri yapın:
-   * Oturum açarken kaydolmalarını iste: **Evet**
-   * Kullanıcıların kendi kimlik doğrulama bilgilerini yeniden onaylamasını istemeden önce geçen gün sayısını ayarlayın: **365**
+   * Kullanıcılardan oturum açarken kaydolmalarını isteme: **Evet**
+   * Kullanıcıların kimlik doğrulaması bilgilerini yeniden onaylamasını istemeden önce geçen gün sayısını ayarlama: **365**
 
 ## <a name="test-self-service-password-reset"></a>Self servis parola sıfırlamayı test etme
 
@@ -65,7 +65,7 @@ Bu hızlı başlangıçta BT uzmanlarının kullanıcılara parolalarını sıf�
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Self servis parola sıfırlama kolayca devre dışı bırakılabilir. Azure AD kiracınızı açın ve gidin **özellikleri** > **parola sıfırlama**ve ardından **hiçbiri** altında **Self Servis parola sıfırlama Etkin**.
+Self servis parola sıfırlama kolayca devre dışı bırakılabilir. Azure AD kiracınızı açın ve **özellikler** > **parola sıfırlama**' ya gidin ve ardından **self servis parola sıfırlama etkin**' in altından **hiçbiri** ' ni seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

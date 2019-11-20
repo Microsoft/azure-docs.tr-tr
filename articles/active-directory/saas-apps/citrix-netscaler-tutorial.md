@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Citrix Netscaler ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve Citrix Netscaler arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Citrix NetScaler ile Azure Active Directory Tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve Citrix NetScaler arasında çoklu oturum açmayı yapılandırmayı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -15,20 +15,20 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/14/2019
 ms.author: jeedes
-ms.openlocfilehash: cc32f464044149e263db60fc2de237b473da5ab2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 64dd67680626857db7f39fa7fd721b28a02d1561
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67105491"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68276896"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-citrix-netscaler"></a>Öğretici: Citrix Netscaler ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-citrix-netscaler"></a>Öğretici: Citrix NetScaler ile Azure Active Directory Tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Citrix Netscaler tümleştirme konusunda bilgi edinin.
-Citrix Netscaler'ı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Azure Active Directory (Azure AD) ile Citrix NetScaler tümleştirme konusunda bilgi edinin.
+Citrix NetScaler'ı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
 
-* Citrix Netscaler erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) için Citrix Netscaler oturum açmış, kullanıcıların etkinleştirebilirsiniz.
+* Citrix NetScaler erişimi, Azure AD'de kontrol edebilirsiniz.
+* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) için Citrix NetScaler oturum açmış, kullanıcıların etkinleştirebilirsiniz.
 * Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
 
 Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
@@ -36,24 +36,24 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](htt
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile Citrix Netscaler yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD Tümleştirmesi ile Citrix NetScaler yapılandırmak için aşağıdaki öğeler gerekir:
 
 * Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Citrix Netscaler çoklu oturum açma abonelik etkin.
+* Citrix NetScaler çoklu oturum açma abonelik etkin.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
 Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
 
-* Citrix Netscaler destekler **SP** tarafından başlatılan
+* Citrix NetScaler destekler **SP** tarafından başlatılan
 
-* Citrix Netscaler destekler **zamanında** kullanıcı sağlama
+* Citrix NetScaler destekler **zamanında** kullanıcı sağlama
 
-## <a name="adding-citrix-netscaler-from-the-gallery"></a>Citrix Netscaler galeri ekleme
+## <a name="adding-citrix-netscaler-from-the-gallery"></a>Citrix NetScaler galeri ekleme
 
-Azure AD'de Citrix Netscaler tümleştirmesini yapılandırmak için Citrix Netscaler Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Azure AD'de Citrix NetScaler tümleştirmesini yapılandırmak için Citrix NetScaler Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Citrix Netscaler Galeriden eklemek için aşağıdaki adımları gerçekleştirin:**
+**Citrix NetScaler Galeriden eklemek için aşağıdaki adımları gerçekleştirin:**
 
 1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
 
@@ -67,31 +67,31 @@ Azure AD'de Citrix Netscaler tümleştirmesini yapılandırmak için Citrix Nets
 
     ![Yeni Uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **Citrix Netscaler**seçin **Citrix Netscaler** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **Citrix NetScaler**seçin **Citrix NetScaler** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
 
-     ![Sonuç listesinde Citrix Netscaler](common/search-new-app.png)
+     ![Sonuç listesinde Citrix NetScaler](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırmanız ve Citrix Netscaler ile Azure AD çoklu oturum açmayı test adlı bir test kullanıcı tabanlı **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve Citrix Netscaler ilgili kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, yapılandırmanız ve Citrix NetScaler ile Azure AD çoklu oturum açmayı test adlı bir test kullanıcı tabanlı **Britta Simon**.
+Tek iş için oturum açma için bir Azure AD kullanıcısı ve Citrix NetScaler ilgili kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma Citrix Netscaler ile'test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Yapılandırma ve Azure AD çoklu oturum açma Citrix NetScaler ile'test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
 
 1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Citrix Netscaler çoklu oturum açmayı yapılandırma](#configure-citrix-netscaler-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+2. **[Citrix NetScaler çoklu oturum açmayı yapılandırma](#configure-citrix-netscaler-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
 3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
 4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Citrix Netscaler test kullanıcısı oluşturma](#create-citrix-netscaler-test-user)**  - kullanıcı Azure AD gösterimini bağlı Citrix Netscaler Britta simon'un bir karşılığı vardır.
+5. **[Citrix NetScaler test kullanıcısı oluşturma](#create-citrix-netscaler-test-user)**  - kullanıcı Azure AD gösterimini bağlı Citrix NetScaler Britta simon'un bir karşılığı vardır.
 6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
 
 Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
 
-Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açma ile Citrix NetScaler yapılandırmak için aşağıdaki adımları gerçekleştirin:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **Citrix Netscaler** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. İçinde [Azure portalında](https://portal.azure.com/), **Citrix NetScaler** uygulama tümleştirme sayfasında **çoklu oturum açma**.
 
     ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
 
@@ -105,7 +105,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
 4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
 
-    ![Citrix Netscaler etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier-reply.png)
+    ![Citrix NetScaler etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier-reply.png)
 
     a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<<Your FQDN>>/CitrixAuthService/AuthService.asmx`
     
@@ -114,7 +114,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
     c. İçinde **yanıt URL'si (onay belgesi tüketici hizmeti URL'si)** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<<Your FQDN>>/CitrixAuthService/AuthService.asmx`
     
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL ve tanımlayıcıdır ile güncelleştirin. İlgili kişi [Citrix Netscaler istemci Destek ekibine](https://www.citrix.com/contact/technical-support.html) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL ve tanımlayıcıdır ile güncelleştirin. İlgili kişi [Citrix NetScaler istemci Destek ekibine](https://www.citrix.com/contact/technical-support.html) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
 
     > [!NOTE]
     > SSO çalışmaya başlamak için bu URL'ler genel sitelerden erişilebilir olması gerekir. Güvenlik Duvarı veya diğer güvenlik ayarları Netscaler tarafında enble belirtecin yapılandırılmış ACS URL'SİNDE göndermek için Azure AD için etkinleştirmeniz gerekir.
@@ -123,7 +123,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-6. Üzerinde **Citrix Netscaler ' ayarlamak** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. Üzerinde **Citrix NetScaler ' ayarlamak** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
 
     ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
 
@@ -133,9 +133,9 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     c. Oturum Kapatma URL'si
 
-### <a name="configure-citrix-netscaler-single-sign-on"></a>Citrix Netscaler çoklu oturum açmayı yapılandırın
+### <a name="configure-citrix-netscaler-single-sign-on"></a>Citrix NetScaler çoklu oturum açmayı yapılandırın
 
-1. Farklı bir web tarayıcı penceresinde Citrix Netscaler kiracınıza yönetici olarak oturum.
+1. Farklı bir web tarayıcı penceresinde Citrix NetScaler kiracınıza yönetici olarak oturum.
 
 2. Emin olun **NetScaler üretici yazılımı sürümü NS12.1 =: 48.13.NC yapı**.
 
@@ -181,7 +181,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     i. Denetleme **kullanıcıadı zorunlu**.
 
-    j. **Tamam**’a tıklayın.
+    j.           **Tamam**’a tıklayın.
 
 6. Yapılandırmak için **oturumu profili**, aşağıdaki adımları gerçekleştirin:
 
@@ -241,7 +241,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     b. Seçin **NetScaler gateway'den doğrudan**.
 
-    c. **Tamam** düğmesine tıklayın.
+    c.           **Tamam**'ı tıklatın.
 
 14. Üzerinde **güvenilen etki alanlarını yapılandırma** açılır penceresinde, aşağıdaki adımları gerçekleştirin:
 
@@ -255,7 +255,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     d. Seçin **oturum açma sayfasını göster etki alanları listesinde**.
 
-    e. **Tamam**'ı tıklatın.
+    e.           **Tamam**'ı tıklatın.
 
 15. Üzerinde **NetScaler ağ geçitlerini Yönet** açılır penceresinde, aşağıdaki adımları gerçekleştirin:
 
@@ -275,7 +275,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     c. Seçin **kullanımı veya rol** olarak **kimlik doğrulaması ve HDX yönlendirme**.
 
-    d. **Tamam**'ı tıklatın.
+    d. **Tamam** düğmesine tıklayın.
 
 17. Üzerinde **mağaza güvenli bilet yetkilisi** sekmesinde, aşağıdaki adımları gerçekleştirin:
 
@@ -297,7 +297,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     c. Girin, **geri çağırma URL'si**.
 
-    d. **Tamam**'ı tıklatın.
+    d.           **Tamam**'ı tıklatın.
 
 19. Üzerinde **mağaza dağıtma Citrix alıcı** sekmesinde, aşağıdaki adımları gerçekleştirin:
 
@@ -305,7 +305,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     a. Seçin **dağıtım seçeneği** olarak **yerel alıcı kullanılamıyorsa, HTML5 için kullanım alıcı**.
 
-    b. **Tamam**'ı tıklatın.
+    b.           **Tamam**'ı tıklatın.
 
 20. Üzerinde **yönetme işaretleri** açılır penceresinde, aşağıdaki adımları gerçekleştirin:
 
@@ -315,7 +315,7 @@ Azure AD çoklu oturum açma ile Citrix Netscaler yapılandırmak için aşağı
 
     b. Tıklayın **Ekle** , URL'nin olarak eklemek için **dış işaretleri** metin.
 
-    c. **Tamam** düğmesine tıklayın.
+    c.           **Tamam**'ı tıklatın.
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
 
@@ -340,19 +340,19 @@ Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcıs
 
     c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’a tıklayın.
+    d.           **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için Citrix Netscaler erişim vererek Britta Simon etkinleştirin.
+Bu bölümde, Azure çoklu oturum açma kullanmak için Citrix NetScaler erişim vererek Britta Simon etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **Citrix Netscaler**.
+1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **Citrix NetScaler**.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **Citrix Netscaler**.
+2. Uygulamalar listesinde **Citrix NetScaler**.
 
-    ![Uygulamalar listesini Citrix Netscaler bağlantıdaki](common/all-applications.png)
+    ![Uygulamalar listesini Citrix NetScaler bağlantıdaki](common/all-applications.png)
 
 3. Soldaki menüde **kullanıcılar ve gruplar**.
 
@@ -368,18 +368,18 @@ Bu bölümde, Azure çoklu oturum açma kullanmak için Citrix Netscaler erişim
 
 7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
 
-### <a name="create-citrix-netscaler-test-user"></a>Citrix Netscaler test kullanıcısı oluşturma
+### <a name="create-citrix-netscaler-test-user"></a>Citrix NetScaler test kullanıcısı oluşturma
 
-Bu bölümde, Britta Simon adlı bir kullanıcı Citrix Netscaler oluşturulur. Citrix Netscaler just-ın-time kullanıcı hazırlama, varsayılan olarak etkin olduğu destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Citrix Netscaler bir kullanıcı zaten mevcut değilse yeni bir kimlik doğrulamasından sonra oluşturulur.
+Bu bölümde, Britta Simon adlı bir kullanıcı Citrix NetScaler oluşturulur. Citrix NetScaler just-ın-time kullanıcı hazırlama, varsayılan olarak etkin olduğu destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Citrix NetScaler bir kullanıcı zaten mevcut değilse yeni bir kimlik doğrulamasından sonra oluşturulur.
 
 >[!NOTE]
->Bir kullanıcı el ile oluşturmanız gerekiyorsa, iletişime geçmeniz [Citrix Netscaler istemci Destek ekibine](https://www.citrix.com/contact/technical-support.html).
+>Bir kullanıcı el ile oluşturmanız gerekiyorsa, iletişime geçmeniz [Citrix NetScaler istemci Destek ekibine](https://www.citrix.com/contact/technical-support.html).
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli Citrix Netscaler kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama Citrix Netscaler için'oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim paneli Citrix NetScaler kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama Citrix NetScaler için'oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 

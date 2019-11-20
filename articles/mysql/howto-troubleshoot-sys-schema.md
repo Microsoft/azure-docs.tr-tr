@@ -1,83 +1,83 @@
 ---
-title: Performans ayarlama ve MySQL için Azure veritabanı'nda veritabanı bakımı için kullanım sys_schema nasıl
-description: Bu makalede, performans sorunlarını bulun ve MySQL için Azure veritabanı sürdürmek için sys_schema kullanmayı açıklar.
+title: Sys_schema kullanarak, performansı ayarlama ve MySQL için Azure veritabanı 'nı sürdürme
+description: Sys_schema kullanarak, performans sorunlarını nasıl bulacağınızı ve MySQL için Azure veritabanı 'nda veritabanını nasıl koruyacağınızı öğrenin.
 author: ajlam
 ms.author: andrela
 ms.service: mysql
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 08/01/2018
-ms.openlocfilehash: 993c77056c09c1dc21d5317ddbfe8e937341718d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7dc6b4744c74c56803127f63a8a6f29ca5a15090
+ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61422385"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71972785"
 ---
-# <a name="how-to-use-sysschema-for-performance-tuning-and-database-maintenance-in-azure-database-for-mysql"></a>MySQL için Azure veritabanı performans ayarlama ve veritabanı bakımı için sys_schema kullanma
+# <a name="how-to-use-sys_schema-for-performance-tuning-and-database-maintenance-in-azure-database-for-mysql"></a>MySQL için Azure veritabanı 'nda performans ayarlama ve veritabanı bakımı için sys_schema kullanma
 
-MySQL performance_schema, ilk MySQL 5. 5'da, kullanılabilir bellek ayırma, saklı programlar, kilitleme, vb. meta veri gibi çok sayıda önemli sunucu kaynakları için izleme sağlar. Ancak, performance_schema 80'den fazla tabloları içeren ve çoğunlukla gerekli bilgileri alınıyor information_schema tablolardan yanı sıra performance_schema tabloları birleştirme gerektirir. Performance_schema hem information_schema oluşturmak, sys_schema güçlü bir koleksiyonunu sağlayan [kullanıcı dostu görünümleri](https://dev.mysql.com/doc/refman/5.7/en/sys-schema-views.html) salt okunur bir veritabanında ve sürüm 5.7 MySQL için Azure veritabanı'nda tam olarak etkinleştirilir.
+MySQL 5,5 ' de ilk olarak bulunan MySQL performance_schema, bellek ayırma, saklı programlar, meta veri kilitleme gibi birçok önemli sunucu kaynağı için izleme sağlar. Ancak, performance_schema 80 'den fazla tablo içerir ve gerekli bilgilerin alınması genellikle performance_schema içindeki tabloların yanı sıra information_schema içindeki tabloların katılmasını gerektirir. Hem performance_schema hem de information_schema üzerinde derleme yapmak için sys_schema, salt okunur bir veritabanında kolay bir şekilde [Kullanıcı dostu görünümler](https://dev.mysql.com/doc/refman/5.7/en/sys-schema-views.html) koleksiyonu sağlar ve MySQL Için Azure veritabanı sürüm 5,7 ' de tam olarak etkinleştirilmiştir.
 
 ![sys_schema görünümleri](./media/howto-troubleshoot-sys-schema/sys-schema-views.png)
 
-İçinde sys_schema 52 görünüm vardır ve her görünüm aşağıdaki ön ekleri birine sahiptir:
+Sys_schema 'de 52 görünüm vardır ve her görünüm aşağıdaki öneklerden birine sahiptir:
 
-- Host_summary veya GÇ: G/ç gecikme süreleriyle ilgili.
-- Innodb: Innodb arabellek durumu ve kilitler.
-- Bellek: Kullanıcılar ve ana bilgisayar bellek kullanımı.
-- Şema: Şema ile ilgili bilgiler için otomatik artırma, dizinler, vb. gibi.
-- deyimi: SQL deyimleri bilgiler; Bu, tam bir tablo taraması veya uzun sorgu süresi sonuçlanan ifade olabilir.
-- Kullanıcı: Tüketilen ve kullanıcılara göre gruplandırılmış kaynaklar. Dosya g/ç, bağlantılar ve bellek verilebilir.
-- Bekleme süresi: Ana bilgisayar veya kullanıcı tarafından gruplandırılmış olay bekleyin.
+- Host_summary veya GÇ: g/ç ile ilgili gecikme süreleri.
+- InnoDB: InnoDB buffer durum ve kilitler.
+- Bellek: konak ve kullanıcılar tarafından bellek kullanımı.
+- Şema: otomatik artış, dizinler vb. gibi şemaya ilişkin bilgiler
+- Deyim: SQL deyimleriyle ilgili bilgiler; Bu, tam tablo taramasına veya uzun sorgu zamanına neden olan bir ifade olabilir.
+- Kullanıcı: kullanıcılara göre tüketilen ve gruplandırılan kaynaklar. Dosya g/ç, bağlantı ve bellek örnekleri örnektir.
+- Wait: bekleme olayları ana bilgisayara veya kullanıcıya göre gruplandırılır.
 
-Artık sys_schema bazı ortak kullanım desenleri bakalım. Başlangıç olarak, biz kullanım düzenlerine iki kategoride Grup: **Performans ayarlama** ve **veritabanı bakım**.
+Şimdi sys_schema 'in bazı yaygın kullanım düzenlerine göz atalım. Kullanmaya başlamak için kullanım desenlerini iki kategoride gruplarız: **performans ayarlama** ve **Veritabanı Bakımı**.
 
-## <a name="performance-tuning"></a>Performans ayarlama
+## <a name="performance-tuning"></a>Performans ayarı
 
-### <a name="sysusersummarybyfileio"></a>*sys.user_summary_by_file_io*
+### <a name="sysuser_summary_by_file_io"></a>*sys. user_summary_by_file_io*
 
-GÇ veritabanında en pahalı bir işlemdir. İçin ortalama g/ç gecikme süresi sorgulayarak bulabiliriz *sys.user_summary_by_file_io* görünümü. Varsayılan 125 GB sağlanan depolama alanı, my g/ç gecikme süresi yaklaşık 15 saniyedir.
+GÇ, veritabanında en pahalı bir işlemdir. *Sys. user_summary_by_file_io* görünümünü SORGULAYARAK ortalama GÇ gecikme süresini bulabiliriz. Varsayılan 125 GB sağlanmış depolama alanı ile GÇ gecikme süresi yaklaşık 15 saniyedir.
 
 ![GÇ gecikmesi: 125 GB](./media/howto-troubleshoot-sys-schema/io-latency-125GB.png)
 
-MySQL için Azure veritabanı, 1 TB'ye kadar sağlanan depolama artırma sonra depolama göre g/ç ölçeklendirilir çünkü 571 ms ile my g/ç gecikme süresini azaltır.
+MySQL için Azure veritabanı, depolama 'ya göre GÇ 'yi ölçeklendirdikten sonra, sağlanan depolama alanını 1 TB olarak artırdıktan sonra, GÇ gecikmesi 571 MS olarak azalır.
 
 ![GÇ gecikmesi: 1TB](./media/howto-troubleshoot-sys-schema/io-latency-1TB.png)
 
-### <a name="sysschematableswithfulltablescans"></a>*sys.schema_tables_with_full_table_scans*
+### <a name="sysschema_tables_with_full_table_scans"></a>*sys. schema_tables_with_full_table_scans*
 
-Çok sayıda sorgu, dikkatli planlama rağmen yine de tam tablo taramaya sonuçlanabilir. Dizinler ve bunları en iyi duruma getirme türleri hakkında ek bilgi için bu makalede başvurabilir: [Sorgu performansı sorunlarını giderme](./howto-troubleshoot-query-performance.md). Tam tablo taramasından kaynak kullanımı yoğun ve veritabanınızın performansı düşürebilir. En hızlı yolu tam tablo taraması tablolarla bulmak için sorgu *sys.schema_tables_with_full_table_scans* görünümü.
+Dikkatli bir planlamaya rağmen çok sayıda sorgu yine de tam tablo taramasına neden olabilir. Dizinlerin türleri ve bunların nasıl iyileştirileceği hakkında ek bilgiler için, bu makaleye başvurabilirsiniz: [sorgu performansı sorunlarını giderme](./howto-troubleshoot-query-performance.md). Tam tablo taramaları Kaynak yoğunluklu ve veritabanı performanslarını düşürür. Tam tablo taraması olan tabloları bulmanın en hızlı yolu, *sys. schema_tables_with_full_table_scans* görünümünü sorgulamanızı sağlar.
 
-![tam tablo tarama](./media/howto-troubleshoot-sys-schema/full-table-scans.png)
+![tam tablo taramaları](./media/howto-troubleshoot-sys-schema/full-table-scans.png)
 
-### <a name="sysusersummarybystatementtype"></a>*sys.user_summary_by_statement_type*
+### <a name="sysuser_summary_by_statement_type"></a>*sys. user_summary_by_statement_type*
 
-Veritabanı performans sorunlarını gidermek için veritabanınızın içinde gerçekleşen işlemleri ve kullanarak olayları tanımlamak avantajlı olabilir *sys.user_summary_by_statement_type* görünümü ux'in yalnızca yapabilir.
+Veritabanı performans sorunlarını gidermek için, veritabanınızın içinde gerçekleşen olayları belirlemek yararlı olabilir ve *sys. user_summary_by_statement_type* görünümünün kullanılması yalnızca eli olabilir.
 
-![deyimi tarafından özeti](./media/howto-troubleshoot-sys-schema/summary-by-statement.png)
+![deyime göre Özet](./media/howto-troubleshoot-sys-schema/summary-by-statement.png)
 
-Bu örnekte MySQL için Azure veritabanı 53 44579 kez slog sorgu günlüğü temizleme dakika ayırıyor. Uzun ve çok sayıda IOs olmasıdır. Bu etkinlik tarafından ya da devre dışı bırakma, yavaş sorgu günlüğü azaltmak veya yavaş sorgu, Azure portalında oturum açma sıklığını azaltın.
+Bu örnekte, MySQL için Azure veritabanı, slog sorgu günlüğü 44579 kez temizlenme 53 dakika harcamıştır. Bu uzun süredir ve çok sayıda IOs. Yavaş sorgu günlüğliğinizi devre dışı bırakarak veya yavaş sorgu oturum açma Azure portal sıklığını azaltabilmeniz için bu etkinliği azaltabilirsiniz.
 
-## <a name="database-maintenance"></a>Veritabanı bakımı
+## <a name="database-maintenance"></a>Veritabanı Bakımı
 
-### <a name="sysinnodbbufferstatsbytable"></a>*sys.innodb_buffer_stats_by_table*
+### <a name="sysinnodb_buffer_stats_by_table"></a>*sys. innodb_buffer_stats_by_table*
 
-Innodb arabellek havuzu bellekte yer alıyor ve DBMS ve depolama alanı arasındaki ana önbellek mekanizmadır. Innodb arabellek havuzunun boyutunu, performans katmanına bağlıdır ve farklı bir ürünü SKU seçilir sürece değiştirilemez. Bellekte gibi işletim sistemi ile eski sayfaları kullanıma sahip olabileceksiniz veri yer açmak için değiştirilir. Innodb arabellek havuzu bellek birçok tabloları kullanma kullanıma bulmak için bunları sorgulayabilirsiniz *sys.innodb_buffer_stats_by_table* görünümü.
+InnoDB arabellek havuzu bellekte bulunur ve DBMS ile depolama arasındaki ana önbellek mekanizmasıdır. InnoDB arabellek havuzunun boyutu performans katmanına bağlıdır ve farklı bir Ürün SKU 'SU seçilmediği takdirde değiştirilemez. İşletim Sisteminizdeki bellekte olduğu gibi, fresher verileri için yer açmak üzere eski sayfalar takas edilir. En fazla InnoDB arabellek havuzu belleği tükettiği tabloları bulmak için *sys. innodb_buffer_stats_by_table* görünümünü sorgulayabilirsiniz.
 
-![Innodb arabellek durumu](./media/howto-troubleshoot-sys-schema/innodb-buffer-status.png)
+![InnoDB arabellek durumu](./media/howto-troubleshoot-sys-schema/innodb-buffer-status.png)
 
-Yukarıdaki grafikte Sistem tabloları ve görünümleri, her mysqldatabase033 veritabanı tablosunda dışında WordPress sitelerimi barındıran, 16 KB veya bellek veri 1 sayfa kapladığı olduğunu açıktır.
+Yukarıdaki grafikte, sistem tabloları ve görünümleri dışında, WordPress Sitelerimin birini barındıran mysqldatabase033 veritabanındaki her tablo, bellekteki verilerin 16 KB veya 1 sayfa üzerinde kapladığı şekilde görünür.
 
-### <a name="sysschemaunusedindexes--sysschemaredundantindexes"></a>*Sys.schema_unused_indexes* & *sys.schema_redundant_indexes*
+### <a name="sysschema_unused_indexes--sysschema_redundant_indexes"></a>*Sys. schema_unused_indexes* & *sys. schema_redundant_indexes*
 
-Dizinler için okuma performansını artırmak için harika Araçlar olsa da, bunlar ekler ve depolama için ek ücret yansıtılmaz. *Sys.schema_unused_indexes* ve *sys.schema_redundant_indexes* kullanılmayan veya yinelenen dizin hakkında ayrıntılı bilgiler sağlar.
+Dizinler, okuma performansını artırmaya yönelik harika araçlardır, ancak eklemeler ve depolama için ek maliyetler doğurur. *Sys. schema_unused_indexes* ve *sys. schema_redundant_indexes* , kullanılmayan veya yinelenen dizinler hakkında öngörüler sağlar.
 
-![kullanılmayan dizin](./media/howto-troubleshoot-sys-schema/unused-indexes.png)
+![kullanılmayan dizinler](./media/howto-troubleshoot-sys-schema/unused-indexes.png)
 
-![yedekli dizinleri](./media/howto-troubleshoot-sys-schema/redundant-indexes.png)
+![Yedekli dizinler](./media/howto-troubleshoot-sys-schema/redundant-indexes.png)
 
 ## <a name="conclusion"></a>Sonuç
 
-Özet olarak, sys_schema hem performans ayarlama ve veritabanı bakımı için harika bir araçtır. MySQL için Azure veritabanı'nda bu özelliğin avantajlarından aldığınızdan emin olun. 
+Özet olarak sys_schema, hem performans ayarlaması hem de veritabanı bakımı için harika bir araçtır. MySQL için Azure veritabanı 'nda bu özellikten faydalantığınızdan emin olun. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Eş en ilgili sorularınıza yanıt bulun veya yeni bir soru/yanıt post için şurayı ziyaret edin [MSDN Forumu](https://social.msdn.microsoft.com/forums/security/en-US/home?forum=AzureDatabaseforMySQL) veya [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-database-mysql).
+- En çok ilgili sorularınızın eş yanıtlarını bulmak veya yeni bir soru/cevap göndermek için [MSDN Forumu](https://social.msdn.microsoft.com/forums/security/en-US/home?forum=AzureDatabaseforMySQL) veya [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-database-mysql)sitesini ziyaret edin.

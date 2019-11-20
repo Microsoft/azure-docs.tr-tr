@@ -5,6 +5,7 @@
     - name: Azure Haritalar nedir?
       href: about-azure-maps.md
 - name: Hızlı Başlangıçlar
+  expanded: true
   items:
     - name: Web uygulaması oluşturma
       href: quick-demo-map-app.md
@@ -24,6 +25,10 @@
       items:
         - name: Bölge sınırı ayarlama
           href: tutorial-geofence.md
+        - name: Uzamsal analiz
+          href: tutorial-iot-hub-maps.md
+        - name: Azure Notebooks kullanarak EV yönlendirme (Python)
+          href: tutorial-ev-routing.md
 - name: Kavramlar
   items:
     - name: Azure Haritalar ile kimlik doğrulaması
@@ -48,8 +53,6 @@
       href: supported-languages.md
     - name: Desteklenen eşleme stilleri
       href: supported-map-styles.md
-    - name: Web SDK destekleyen tarayıcılar
-      href: supported-browsers.md
     - name: Yakınlaştırma düzeyleri ve kutucuk kılavuzu
       href: zoom-levels-and-tile-grid.md
     - name: Ulaşım Hizmeti veri yapısı
@@ -90,21 +93,29 @@
               href: choose-map-style.md
             - name: Haritaya denetim ekleme
               href: map-add-controls.md
+            - name: Veri kaynağı oluşturma
+              href: create-data-source-web-sdk.md
             - name: Sembol katmanı ekleme
               href: map-add-pin.md
-            - name: Açılır pencere ekleme
-              href: map-add-popup.md
             - name: Baloncuk katmanı ekleme
               href: map-add-bubble-layer.md
-            - name: Şekil ekleme
+            - name: Çizgi katmanı ekleme
+              href: map-add-line-layer.md
+            - name: Çokgen katmanı ekleme
               href: map-add-shape.md
+            - name: Derinleştirme çokgen katmanı ekleme
+              href: map-extruded-polygon.md
             - name: Isı haritası katmanı ekleme
               href: map-add-heat-map-layer.md
+            - name: Açılır pencere ekleme
+              href: map-add-popup.md
             - name: Küme noktası verileri
               href: clustering-point-data-web-sdk.md
             - name: Veri temelli stil ifadeleri kullanma
               href: data-driven-style-expressions-web-sdk.md
-            - name: Resme katman ekleme
+            - name: Görüntü şablonlarını kullanma
+              href: how-to-use-image-templates-web-sdk.md
+            - name: Görüntü katmanı ekleme
               href: map-add-image-layer.md
             - name: Kutucuk katmanları ekleme
               href: map-add-tile-layer.md
@@ -116,6 +127,14 @@
               href: map-events.md
             - name: Uygulamanızın erişilebilir olmasını sağlama
               href: map-accessibility.md
+        - name: Çizim araçları
+          items:
+            - name: Çizim araç çubuğu ekleme
+              href: map-add-drawing-toolbar.md
+            - name: Çizim seçeneklerini ayarlama
+              href: set-drawing-options.md
+            - name: Şekil verilerini alma
+              href: map-get-shape-data.md
         - name: Hizmetler modülü
           items:
             - name: Hizmetler modülünü kullanma
@@ -126,16 +145,24 @@
               href: map-get-information-from-coordinate.md
             - name: A'dan B'ye yönleri gösterme
               href: map-route.md
+        - name: Web SDK destekleyen tarayıcılar
+          href: supported-browsers.md
     - name: Android SDK ile geliştirme
       items:
         - name: Android harita denetimini kullanmaya başlama
           href: how-to-use-android-map-control-library.md
+        - name: Haritanın stilini değiştirme
+          href: set-android-map-styles.md
         - name: Sembol katmanı ekleme
           href: how-to-add-symbol-to-android-map.md
         - name: Şekil ekleme
           href: how-to-add-shapes-to-android-map.md
-        - name: Haritanın stilini değiştirme
-          href: set-android-map-styles.md
+        - name: Özellik bilgilerini görüntüleme
+          href: display-feature-information-android.md
+        - name: Kutucuk katmanı ekleme
+          href: how-to-add-tile-layer-android-map.md
+    - name: Verilerle ilgili geri bildirim sağlama
+      href: how-to-use-feedback-tool.md
 - name: Başvuru
   items:
     - name: API ve parametre uzantıları
@@ -183,8 +210,8 @@
 - name: Kaynaklar
   items:
     - name: Azure Haritalar kullanım koşulları
-      href: 'https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=31'
-    - name: Azure Haritalar Fiyatlandırması
+      href: 'https://azure.microsoft.com/support/legal/'
+    - name: Azure Haritalar fiyatlandırması
       href: 'https://azure.microsoft.com/pricing/details/azure-maps'
     - name: Fiyatlandırma hesaplayıcı
       href: 'https://azure.microsoft.com/pricing/calculator/'
@@ -192,9 +219,11 @@
       href: 'https://stackoverflow.com/questions/tagged/azure-maps'
     - name: MSDN forumu
       href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=azurelbs'
-    - name: Azure Haritalar Videoları
+    - name: Azure Haritalar videoları
       href: 'https://aka.ms/AzureMapsVideos'
-    - name: Azure Haritalar Sözlüğü
+    - name: Azure Haritalar örnek olay incelemeleri
+      href: 'https://aka.ms/AzureMapsCaseStudies'
+    - name: Azure Haritalar sözlüğü
       href: glossary.md
     - name: Hizmet güncelleştirmeleri
       href: 'https://azure.microsoft.com/updates'
@@ -218,6 +247,8 @@
       items:
         - name: IoT Hub
           href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
         - name: IoT Hub Cihazı Sağlama Hizmeti
           href: /azure/iot-dps
         - name: Haritalar

@@ -1,6 +1,6 @@
 ---
-title: "Azure Databricks'ten farklı veri kaynaklarına bağlanın "
-description: Azure Databricks'ten farklı veri kaynaklarına bağlanmayı öğreneceksiniz.
+title: 'Azure Databricks farklı veri kaynaklarına bağlanma '
+description: Azure Databricks Azure SQL veritabanı, Azure Data Lake Store, BLOB depolama, Cosmos DB, Event Hubs ve Azure SQL veri ambarı 'na nasıl bağlanacağınızı öğrenin.
 services: azure-databricks
 author: mamccrea
 ms.reviewer: jasonh
@@ -9,51 +9,51 @@ ms.workload: big-data
 ms.topic: conceptual
 ms.date: 03/21/2018
 ms.author: mamccrea
-ms.openlocfilehash: f2b7136ec21416e31c2af658974577023a4494de
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 80ec9b2bbf10d8f500e7f9e0369faca3b9663633
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60240343"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74129394"
 ---
-# <a name="connect-to-data-sources-from-azure-databricks"></a>Azure Databricks'ten veri kaynaklarına bağlanın
+# <a name="connect-to-data-sources-from-azure-databricks"></a>Azure Databricks veri kaynaklarına bağlanma
 
-Bu makalede, azure'da Azure Databricks bağlı tüm farklı veri kaynaklarına bağlantılar sağlar. Örnek verileri Azure veri kaynaklarından (örneğin, Azure Blob Depolama, Azure Event Hubs, vb.) bir Azure Databricks kümesine ayıklamak için bu bağlantıları izleyin ve analiz işleri üzerinde çalıştırın. 
+Bu makalede, Azure 'daki Azure Databricks bağlı olabilecek tüm farklı veri kaynaklarına bağlantılar sağlanmaktadır. Bu bağlantılardaki örnekleri izleyerek Azure veri kaynaklarından (örneğin, Azure Blob depolama, Azure Event Hubs, vb.) verileri bir Azure Databricks kümesine ayıklayın ve analitik işleri bunlar üzerinde çalıştırın. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Bir Azure Databricks çalışma alanı ve bir Spark kümesi olması gerekir. Konumundaki yönergeleri [Azure Databricks ile çalışmaya başlama](quickstart-create-databricks-workspace-portal.md).
+* Bir Azure Databricks çalışma alanınız ve Spark kümeniz olmalıdır. [Azure Databricks kullanmaya başlama](quickstart-create-databricks-workspace-portal.md)yönergelerini izleyin.
 
 ## <a name="data-sources-for-azure-databricks"></a>Azure Databricks için veri kaynakları
 
-Aşağıdaki liste, Azure Databricks ile kullanabileceğiniz bir Azure veri kaynakları sağlar. Azure Databricks ile kullanılabilecek veri kaynaklarını tam bir listesi için bkz. [veri kaynakları için Azure Databricks](https://docs.azuredatabricks.net/spark/latest/data-sources/index.html).
+Aşağıdaki liste, Azure Databricks ile kullanabileceğiniz Azure 'daki veri kaynaklarını sağlar. Azure Databricks ile kullanılabilecek veri kaynaklarının tamamen listesi için bkz. [Azure Databricks Için veri kaynakları](/azure/databricks/data/data-sources/index).
 
-- [Azure SQL veritabanı](https://docs.azuredatabricks.net/spark/latest/data-sources/sql-databases.html)
+- [Azure SQL veritabanı](/azure/databricks/data/data-sources/sql-databases)
 
-    Bu bağlantı, JDBC ve paralellik okumalar JDBC arabirimi üzerinden denetleme kullanarak SQL veritabanlarına bağlanmak için veri çerçevesi API sağlar. Bu konu ile kısaltılmış Python Scala API'yi kullanarak ayrıntılı örnekler ve sonunda Spark SQL örnekleri sağlar.
-- [Azure Data Lake Store](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/azure-datalake-gen2.html)
+    Bu bağlantı, JDBC kullanarak SQL veritabanlarına bağlanmak için veri çerçevesi API 'sini ve JDBC arabirimi aracılığıyla okumaların paralelliğini denetleme olanağı sağlar. Bu konu, sonunda kısaltılmış Python ve Spark SQL örnekleri ile Scala API 'sini kullanarak ayrıntılı örnekler sağlar.
+- [Azure Data Lake Storage](/azure/databricks/data/data-sources/azure/azure-datalake-gen2)
 
-    Bu bağlantı, Azure Active Directory Hizmet sorumlusu, Data Lake Store ile kimlik doğrulaması için kullanma hakkında örnekler sağlar. Ayrıca Azure Databricks'ten Data Lake Store verilere erişim hakkında yönergeler açıklanmaktadır.
+    Bu bağlantı, Azure Data Lake Storage kimlik doğrulamak için Azure Active Directory hizmet sorumlusunu kullanma hakkında örnekler sağlar. Ayrıca, Azure Databricks Azure Data Lake Storage verilere nasıl erişileceğini gösteren yönergeler de sağlar.
 
-- [Azure Blob Depolama](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/azure-storage.html)
+- [Azure Blob Depolama](/azure/databricks/data/data-sources/azure/azure-storage)
 
-    Bu bağlantı için belirli bir kapsayıcı erişim anahtarı veya SAS kullanarak doğrudan Azure Databricks'ten Azure Blob depolamaya erişmek nasıl örnekler sağlar. Bağlantıyı da bilgileri Azure Databricks'ten Azure Blob depolamaya erişmek nasıl RDD API'sini kullanarak sağlar.
+    Bu bağlantı, belirli bir kapsayıcı için erişim anahtarını veya SAS 'yi kullanarak Azure Databricks Azure Blob depolamaya doğrudan erişme hakkında örnekler sağlar. Bağlantı Ayrıca, RDD API kullanarak Azure Databricks Azure Blob depolamaya nasıl erişeceğimiz hakkında bilgi de sağlar.
 
-- [Azure Cosmos DB](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/cosmosdb-connector.html)
+- [Azure Cosmos DB](/azure/databricks/data/data-sources/azure/cosmosdb-connector)
 
-    Bu bağlantının nasıl kullanılacağı hakkında yönergeler sağlar. [Azure Cosmos DB Spark Bağlayıcısı](https://github.com/Azure/azure-cosmosdb-spark) gelen Azure Databricks, Azure Cosmos DB'de verilere erişme.
+    Bu bağlantı, Azure Cosmos DB verilere erişmek için Azure Databricks [Azure Cosmos DB Spark bağlayıcısının](https://github.com/Azure/azure-cosmosdb-spark) nasıl kullanılacağına ilişkin yönergeler sağlar.
 
-- [Azure Event Hubs](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/eventhubs-connector.html)
+- [Azure Event Hubs](/azure/event-hubs/event-hubs-spark-connector)
 
-    Bu bağlantının nasıl kullanılacağı hakkında yönergeler sağlar. [Azure olay hub'ları Spark Bağlayıcısı](https://github.com/Azure/azure-event-hubs-spark) gelen Azure Databricks, Azure Event Hubs verilerine erişim için.
+    Bu bağlantı, Azure Event Hubs 'deki verilere erişmek için Azure Databricks [azure Event Hubs Spark bağlayıcısının](https://github.com/Azure/azure-event-hubs-spark) nasıl kullanılacağına ilişkin yönergeler sağlar.
 
-- [Azure SQL Veri Ambarı](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/sql-data-warehouse.html)
+- [Azure SQL Veri Ambarı](/azure/databricks/data/data-sources/azure/sql-data-warehouse)
 
-    Bu bağlantı, Azure Databricks'ten bağlanmak için Azure SQL veri ambarı Bağlayıcısı'nı kullanmak hakkında yönergeler açıklanmaktadır.
+    Bu bağlantı, Azure Databricks bağlantı kurmak için Azure SQL veri ambarı bağlayıcısının nasıl kullanılacağına ilişkin yönergeler sağlar.
     
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Burada Azure Databricks'e verileri içeri aktarabilirsiniz kaynaklardan hakkında bilgi edinmek için bkz. [veri kaynakları için Azure Databricks](https://docs.azuredatabricks.net/spark/latest/data-sources/index.html#).
+Azure Databricks verileri içeri aktarabileceğiniz kaynaklar hakkında bilgi edinmek için bkz. [Azure Databricks Için veri kaynakları](/azure/databricks/data/data-sources/index).
 
 

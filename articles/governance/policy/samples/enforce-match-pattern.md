@@ -1,20 +1,16 @@
 ---
-title: Örnek - zorunlu eşleşme deseni
-description: Bu örnek ilke tanımını kaynakları adlandırma kuralları için eşleşme deseni karşıladığını gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-eşleşme eşleştirme deseninin
+description: Bu örnek ilke tanımı, kaynakların adlandırma kuralları için eşleşme modelini karşılaması gerekir.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 34ee1d5520200dacca6ddac8e4740610ae0953f1
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: d5112a55e19b2481d5f453cf23d65c80862fb58e
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545783"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74070419"
 ---
-# <a name="sample---enforce-match-pattern-for-naming-conventions"></a>Örnek - zorunlu adlandırma kuralları için eşleşme deseni
+# <a name="sample---enforce-match-pattern-for-naming-conventions"></a>Adlandırma kuralları için örnek-eşleşme düzenlerini zorla
 
 Kaynak adlarının adlandırma kuralları için benzer bir desenle eşleşmesini zorunlu tutun. İzin verilen eşleşme desenini parametre olarak belirtin.
 
@@ -28,7 +24,7 @@ Kaynak adlarının adlandırma kuralları için benzer bir desenle eşleşmesini
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FTextPatterns%2Fenforce-match-pattern%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FTextPatterns%2Fenforce-match-pattern%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

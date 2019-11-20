@@ -1,6 +1,6 @@
 ---
-title: Birden çok Azure İzleyici Application Insights kaynaklarını birleştirin | Microsoft Docs
-description: Bu makalede, bir işlevi Azure İzleyici günlüklerine birden fazla Application Insights kaynaklarını sorgulama ve bu verileri görselleştirmek için kullanılacağı hakkında ayrıntılar sağlar.
+title: Birden çok Azure Izleyici Application Insights kaynağını bütünleştirme | Microsoft Docs
+description: Bu makalede, Azure Izleyici günlüklerinde bir işlevi kullanarak birden çok Application Insights kaynağını sorgulama ve bu verileri görselleştirme hakkında ayrıntılar verilmektedir.
 services: azure-monitor
 documentationcenter: ''
 author: mgoedtel
@@ -12,27 +12,34 @@ ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 02/19/2019
 ms.author: magoedte
-ms.openlocfilehash: 190b7f15a8ae0a5b9472188129f7116050fc831f
-ms.sourcegitcommit: c63e5031aed4992d5adf45639addcef07c166224
+ms.openlocfilehash: d441b72b34da6146eba523563a09c2908cdcbbf4
+ms.sourcegitcommit: bb8e9f22db4b6f848c7db0ebdfc10e547779cccc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67466829"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69650130"
 ---
-# <a name="unify-multiple-azure-monitor-application-insights-resources"></a>Birden çok Azure İzleyici Application Insights kaynaklarını birleştirin 
-Bu makalede, sorgu ve farklı Azure aboneliklerinde Application Insights Bağlayıcısı kullanımdan bir ardılı olarak olduklarında bile tüm Application Insights uygulama günlük verilerini tek bir yerde görüntüleyin açıklar. 100 olarak kaynakları tek bir sorgu ekleyebilirsiniz, Application Insights kaynakları sayısı sınırlıdır.  
+# <a name="unify-multiple-azure-monitor-application-insights-resources"></a>Birden çok Azure Izleyici Application Insights kaynağını bütünleştirme 
+Bu makalede, Application Insights Bağlayıcısı kullanım dışı bırakma işleminin yerine, farklı Azure aboneliklerinde olsalar bile, tüm Application Insights günlük verilerinizi tek bir yerde sorgulama ve görüntüleme açıklanmaktadır. Tek bir sorguya dahil edebilirsiniz Application Insights kaynak sayısı 100 ile sınırlıdır.
 
-## <a name="recommended-approach-to-query-multiple-application-insights-resources"></a>Önerilen yaklaşım, birden fazla Application Insights kaynaklarını sorgulama 
-Bir sorguda birden fazla Application Insights kaynakları listeleme hantal ve sürdürülmesi zor olabilir. Bunun yerine, sorgu mantığının kapsamı uygulamalardan ayırmak için işlev yararlanabilirsiniz.  
+## <a name="recommended-approach-to-query-multiple-application-insights-resources"></a>Birden çok Application Insights kaynağını sorgulamak için önerilen yaklaşım 
+Bir sorgudaki birden çok Application Insights kaynağın listelenmesi, bakımını yapmak ve sürdürmek zor olabilir. Bunun yerine, uygulama kapsamı 'ndan sorgu mantığını ayırmak için işlevinden yararlanabilirsiniz.  
 
-Bu örnek nasıl birden fazla Application Insights kaynaklarını izleyebilir ve uygulama adına göre başarısız istek sayısını görselleştirmek gösterir. Başlamadan önce bağlı uygulamalar listesini almak için Application Insights kaynağı bağlı çalışma alanında bu sorguyu çalıştırın: 
+Bu örnek, birden çok Application Insights kaynağını nasıl izleyebileceğinizi ve başarısız isteklerin sayısını uygulama adına göre görselleştirmenizi gösterir. Başlamadan önce, bağlı uygulamaların listesini almak için bu sorguyu Application Insights kaynaklara bağlı çalışma alanında çalıştırın: 
 
 ```
 ApplicationInsights
 | summarize by ApplicationName
 ```
 
-Uygulamaların listesini birleşim işleci kullanarak bir işlev oluşturun ve ardından sorguyu işlev diğer adı ile çalışma alanınızda Kaydet *applicationsScoping*.  
+Uygulama listesiyle birlikte UNION işlecini kullanarak bir işlev oluşturun, sonra sorguyu çalışma alanınıza, *Applicationsscoping*diğer adı ile işlev olarak kaydedin. 
+
+Çalışma alanınızda sorgu Gezgini ' ne gidip, Düzenle ve sonra kaydetme işlevini seçerek veya `SavedSearch` PowerShell cmdlet 'ini kullanarak, listelenen uygulamaları portalda dilediğiniz zaman değiştirebilirsiniz. 
+
+>[!NOTE]
+>Çalışma alanları ve uygulamalar dahil olmak üzere uyarı kuralı kaynaklarının erişim doğrulaması uyarı oluşturma sırasında gerçekleştirildiğinden, bu yöntem günlük uyarıları ile kullanılamaz. Uyarı oluşturulduktan sonra işleve yeni kaynaklar eklemek desteklenmez. Günlük uyarılarında kaynak kapsamı için işlev kullanmayı tercih ederseniz, kapsamdaki kaynakları güncelleştirmek için portalda veya bir Kaynak Yöneticisi şablonuyla uyarı kuralını düzenlemeniz gerekir. Alternatif olarak, günlük uyarısı sorgusuna kaynak listesini de ekleyebilirsiniz.
+
+`withsource= SourceApp` Komut, günlüğü gönderen uygulamayı atayan sonuçlara bir sütun ekler. Parse işleci Bu örnekte isteğe bağlıdır ve SourceApp özelliğinden uygulama adını ayıklamak için kullanır. 
 
 ```
 union withsource=SourceApp 
@@ -44,14 +51,7 @@ app('Contoso-app5').requests
 | parse SourceApp with * "('" applicationName "')" *  
 ```
 
->[!NOTE]
->Listelenen uygulamalar portalında herhangi bir zamanda çalışma alanınızdaki sorgu Gezgini giderek ve düzenleme ve ardından kaydetme ya da kullanarak işlevi seçerek değiştirebileceğiniz `SavedSearch` PowerShell cmdlet'i. `withsource= SourceApp` Komutu sonuçları uygulama belirten bir sütuna gönderilen günlük ekler. 
->
->Application Insights veri yapısı applicationsScoping işlevi döndürdüğünden çalışma alanında sorgu yürütülür, ancak sorgu Application Insights şema kullanılır. 
->
->Ayrıştırma işleci Bu örnekte, isteğe bağlı, uygulama adı SourceApp özelliğinden ayıklar. 
-
-Kaynaklar arası sorgu applicationsScoping işlevi kullanmak artık hazırsınız:  
+Artık çapraz kaynak sorgusunda applicationsScoping işlevini kullanmaya hazırsınız:  
 
 ```
 applicationsScoping 
@@ -62,17 +62,17 @@ applicationsScoping
 | render timechart
 ```
 
-İşlev diğer adı, tanımlanan tüm uygulamalardan istekleri birleşimini döndürür. Sorgu daha sonra başarısız olan istekleri için filtreler ve uygulama tarafından eğilimleri görselleştirir.
+Sorgu Application Insights şeması kullanır, ancak applicationsScoping işlevi Application Insights veri yapısını döndürdüğünden sorgu çalışma alanında yürütülür. İşlev diğer adı, tüm tanımlanmış uygulamalardan gelen isteklerin birleşimini döndürür. Sorgu daha sonra başarısız isteklere filtre uygular ve eğilimleri uygulamaya göre görselleştirir.
 
-![Çapraz-sorgu sonuçlarını örneği](media/unify-app-resource-data/app-insights-query-results.png)
+![Çapraz sorgu sonuçları örneği](media/unify-app-resource-data/app-insights-query-results.png)
 
-## <a name="query-across-application-insights-resources-and-workspace-data"></a>Application Insights kaynaklarını ve çalışma alanı veri sorgulama 
-Bağlayıcı ve Application Insights veri saklama (90 gün) tarafından kırpılmış bir zaman aralığı boyunca sorguları gerçekleştirmek için ihtiyaç durdurduğunuzda, gerçekleştirmeniz gereken [kaynaklar arası sorgular](../../azure-monitor/log-query/cross-workspace-query.md) çalışma ve Application Insights bir ara dönem için kaynaklar. Yukarıda belirtilen yeni Application Insights veri saklama başına uygulama verilerinize biriktirir kadar budur. Application Insights ve çalışma alanı şemalarda farklı olduğundan sorgu bazı işlemeleri gerektirir. Daha sonra şema farklılıkları vurgulama bu bölümdeki tabloya bakın. 
+## <a name="query-across-application-insights-resources-and-workspace-data"></a>Application Insights kaynaklar ve çalışma alanı verileri genelinde sorgulama 
+Bağlayıcıyı durdurduğunuzda ve Application Insights veri saklama (90 gün) tarafından kırpılan bir zaman aralığı üzerinde sorgular gerçekleştirmeniz gerektiğinde, çalışma alanında [çapraz kaynak sorgular](../../azure-monitor/log-query/cross-workspace-query.md) gerçekleştirmeniz ve bir ara için kaynakları Application Insights gerekir dönemini. Bu, yukarıda bahsedilen yeni Application Insights veri bekletme için uygulama verilerinize göre biriktirene kadar olur. Application Insights ve çalışma alanındaki şemalar farklı olduğundan sorgu bazı düzenlemeler gerektiriyor. Bu bölümün ilerleyen kısımlarında şema farklarını vurgulayan tabloya bakın. 
 
 >[!NOTE]
->[Kaynaklar arası sorgu](../log-query/cross-workspace-query.md) günlüğünde uyarı desteklenen yeni [scheduledQueryRules API](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules). Varsayılan olarak, Azure İzleyici kullanır [eski Log Analytics uyarı API](../platform/api-alerts.md) gelen geçiş yapmadığınız sürece, yeni günlük uyarı kuralları Azure portalından oluşturmak için [eski günlük uyarıları API](../platform/alerts-log-api-switch.md#process-of-switching-from-legacy-log-alerts-api). Anahtardan sonra yeni API, Azure portalında yeni uyarı kuralları için varsayılan olur ve kaynaklar arası sorgu günlük uyarı kuralları oluşturmanıza olanak tanır. Oluşturabileceğiniz [kaynaklar arası sorgu](../log-query/cross-workspace-query.md) günlük uyarısı kuralları kullanarak geçiş yapmaya gerek olmadan [scheduledQueryRules API için ARM şablonu](../platform/alerts-log.md#log-alert-with-cross-resource-query-using-azure-resource-template) – ancak yine de bu uyarı kuralı yönetilebilir [ API scheduledQueryRules](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules) ve Azure Portal'da değil.
+>Log uyarılarındaki [çapraz kaynak sorgusu](../log-query/cross-workspace-query.md) , yeni [SCHEDULEDQUERYRULES API](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules)'sinde desteklenir. Azure Izleyici, [eski günlük uyarıları API](../platform/alerts-log-api-switch.md#process-of-switching-from-legacy-log-alerts-api)'sinden geçiş yapmadığınız takdirde, varsayılan olarak, Azure Portal ' dan yeni günlük uyarı kuralları oluşturmak için [eskı Log Analytics uyarı API](../platform/api-alerts.md) 'sini kullanır. Anahtar sonrasında, yeni API Azure portal yeni uyarı kuralları için varsayılan olur ve çapraz kaynak sorgu günlüğü uyarı kuralları oluşturmanıza olanak sağlar. [Scheduledqueryrules API 'si Için ARM şablonunu](../platform/alerts-log.md#log-alert-with-cross-resource-query-using-azure-resource-template) kullanarak anahtarı yapmadan [çapraz kaynak sorgu](../log-query/cross-workspace-query.md) günlüğü uyarı kuralları oluşturabilirsiniz, ancak bu uyarı kuralı Azure Portal değil, [scheduledqueryrules API 'si](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules) ile yönetilebilir.
 
-Örneğin, bağlayıcı, Application Insights kaynaklarını ve uygulamaların veri çalışma boyunca günlükleri sorguladığınızda, 2018-11-01 üzerinde çalışmayı durdurdu, sorgunuzu aşağıdaki örnekteki gibi oluşturulması:
+Örneğin, bağlayıcı 2018-11-01 üzerinde çalışmayı durdurulmuşsa, çalışma alanındaki Application Insights kaynak ve uygulama verileri arasında Günlükler sorgulayıp, sorgunuz aşağıdaki örnekte olduğu gibi oluşturulur:
 
 ```
 applicationsScoping //this brings data from Application Insights resources 
@@ -94,9 +94,9 @@ applicationsScoping //this brings data from Application Insights resources
 ```
 
 ## <a name="application-insights-and-log-analytics-workspace-schema-differences"></a>Application Insights ve Log Analytics çalışma alanı şema farklılıkları
-Aşağıdaki tabloda, Log Analytics ve Application Insights şema farklılıkları gösterir.  
+Aşağıdaki tabloda Log Analytics ve Application Insights arasındaki şema farklılıkları gösterilmektedir.  
 
-| Günlük analizi çalışma alanı özellikleri| Application Insights kaynak özellikleri|
+| Log Analytics çalışma alanı özellikleri| Application Insights kaynak özellikleri|
 |------------|------------| 
 | AnonUserId | user_id|
 | ApplicationId | appId|
@@ -129,7 +129,7 @@ Aşağıdaki tabloda, Log Analytics ve Application Insights şema farklılıklar
 | PageViewCount | itemCount |
 | PageViewDuration | duration | 
 | PageViewName | name | 
-| ParentOperationID | operation_id | 
+| ParentOperationID | operation_Id | 
 | RequestCount | itemCount | 
 | RequestDuration | duration | 
 | RequestID | id | 
@@ -142,7 +142,7 @@ Aşağıdaki tabloda, Log Analytics ve Application Insights şema farklılıklar
 | SourceSystem | operation_SyntheticSource |
 | TelemetryTYpe | type |
 | URL | url |
-| UserAccountId | user_AccountId |
+| Useraccountıd | user_AccountId |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

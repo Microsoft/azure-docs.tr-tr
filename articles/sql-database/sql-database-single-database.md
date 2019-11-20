@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı tek veritabanı nedir | Microsoft Docs
-description: Azure SQL veritabanı tek veritabanı hakkında bilgi edinin
+title: Tek bir veritabanı nedir?
+description: Azure SQL veritabanı 'nda tek veritabanı hakkında bilgi edinin
 services: sql-database
 ms.service: sql-database
 ms.subservice: single-database
@@ -10,56 +10,55 @@ ms.topic: conceptual
 author: stevestein
 ms.author: sstein
 ms.reviewer: ''
-manager: craigg
 ms.date: 04/08/2019
-ms.openlocfilehash: 36b1fb96ac1dd89375588a65063ce729f6ac825d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7b084954cb53d19739a0f633661e0c76fa82dd13
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65794401"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820932"
 ---
-# <a name="what-is-a-single-database-in-azure-sql-database"></a>Azure SQL veritabanı'nda tek bir veritabanı nedir
+# <a name="what-is-a-single-database-in-azure-sql-database"></a>Azure SQL veritabanı 'nda tek bir veritabanı nedir?
 
-Tek veritabanı dağıtım seçeneği, kendi kaynak kümesi ile Azure SQL veritabanında bir veritabanı oluşturur ve SQL veritabanı sunucusu yönetilir. Tek bir veritabanı ile her veritabanı birbirine ve taşınabilir, her biri kendi hizmet katmanı içinde yalıtılmış [DTU tabanlı satın alma modeli](sql-database-service-tiers-dtu.md) veya [sanal çekirdek tabanlı satın alma modeli](sql-database-service-tiers-vcore.md) ve bir kesin boyutu işlem.
+Tek veritabanı dağıtım seçeneği, Azure SQL veritabanı 'nda kendi kaynak kümesiyle bir veritabanı oluşturur ve bir SQL veritabanı sunucusu üzerinden yönetilir. Tek bir veritabanı ile, her veritabanı birbirleriyle ve taşınabilir, her biri [DTU tabanlı satın alma modeli](sql-database-service-tiers-dtu.md) veya [sanal çekirdek tabanlı satın alma modeli](sql-database-service-tiers-vcore.md) ve garantili bir işlem boyutu içindeki kendi hizmet katmanına sahip ve taşınabilir.
 
 > [!IMPORTANT]
-> Tek veritabanı, Azure SQL veritabanı için üç dağıtım seçenekleri biridir. Diğer iki olan [elastik havuzlar](sql-database-elastic-pool.md) ve [yönetilen örnek](sql-database-managed-instance.md).
+> Tek veritabanı, Azure SQL veritabanı 'nın üç dağıtım seçeneğinden biridir. Diğer ikisi [elastik havuzlardır](sql-database-elastic-pool.md) ve [yönetilen örneğidir](sql-database-managed-instance.md).
 > [!NOTE]
-> Bir Azure SQL veritabanı'nda terimler sözlüğü için bkz: [SQL veritabanı terimler sözlüğü](sql-database-glossary-terms.md)
+> Azure SQL veritabanı 'nda terimler sözlüğü için bkz. [SQL veritabanı terimleri sözlüğü](sql-database-glossary-terms.md)
 
 ## <a name="dynamic-scalability"></a>Dinamik ölçeklenebilirlik
 
-Düşük maliyet (Önizleme) sunucusuz bilgi işlem Katmanı'nı veya sağlanan işlem katmanında bir küçük bilgi işlem boyutu küçük, tek bir veritabanı üzerinde ilk uygulamanızı oluşturabilirsiniz. Değiştirdiğiniz [işlem veya hizmet katmanı](sql-database-single-database-scale.md) el ile veya programlama yoluyla, çözümünüzün gereksinimlerini karşılamak için herhangi bir zamanda. Performansı uygulamanız veya müşterileriniz kesinti yaşamadan ayarlayabilirsiniz. Dinamik ölçeklenebilirlik, veritabanınızın hızla değişen kaynak gereksinimlerine hızlı şekilde yanıt vermesini ve yalnızca ihtiyaç duyduğunuz kaynaklara ve ihtiyaç duyduğunuz süre boyunca ödeme yapmanızı sağlar.
+İlk uygulamanızı sunucusuz işlem katmanında düşük maliyetli küçük, tek bir veritabanında veya sağlanan işlem katmanındaki küçük bir işlem boyutu üzerinde oluşturabilirsiniz. [İşlem veya hizmet katmanını](sql-database-single-database-scale.md) , çözümünüzün ihtiyaçlarını karşılamak üzere dilediğiniz zaman el ile veya programlama yoluyla değiştirirsiniz. Performansı uygulamanız veya müşterileriniz kesinti yaşamadan ayarlayabilirsiniz. Dinamik ölçeklenebilirlik, veritabanınızın hızla değişen kaynak gereksinimlerine hızlı şekilde yanıt vermesini ve yalnızca ihtiyaç duyduğunuz kaynaklara ve ihtiyaç duyduğunuz süre boyunca ödeme yapmanızı sağlar.
 
 ## <a name="single-databases-and-elastic-pools"></a>Tek veritabanları ve elastik havuzlar
 
-Tek bir veritabanı içinde veya dışında taşınabilir bir [elastik havuz](sql-database-elastic-pool.md) kaynak paylaşımı. Tek veritabanı oluşturabilmek ve veritabanı performansını isteğe göre yükseltip düşürebilmek, özellikle kullanım biçimlerinin nispeten tahmin edilebilir olduğu durumlarda birçok işletme ve uygulama için yeterlidir. Ancak tahmin edilemeyen kullanım biçimlerine sahipseniz bu durum maliyetlerin ve iş modelinizin yönetimini zorlaştırabilir. Elastik havuzlar, bu sorunu çözmek için tasarlanmıştır. Esnek havuzların işleyiş mantığı gayet basittir. Performans kaynaklarını tek bir veritabanı yerine bir havuz ayırmak ve tek veritabanı performansı yerine havuzun toplu performansı kaynakları için ödeme yaparsınız.
+Tek bir veritabanı, kaynak paylaşımı için [elastik havuzun](sql-database-elastic-pool.md) içine veya dışına taşınabilir. Tek veritabanı oluşturabilmek ve veritabanı performansını isteğe göre yükseltip düşürebilmek, özellikle kullanım biçimlerinin nispeten tahmin edilebilir olduğu durumlarda birçok işletme ve uygulama için yeterlidir. Ancak tahmin edilemeyen kullanım biçimlerine sahipseniz bu durum maliyetlerin ve iş modelinizin yönetimini zorlaştırabilir. Elastik havuzlar, bu sorunu çözmek için tasarlanmıştır. Esnek havuzların işleyiş mantığı gayet basittir. Performans kaynaklarını tek bir veritabanı yerine bir havuza ayırır ve tek veritabanı performansı yerine havuzun ortak performans kaynakları için ödeme yaparsınız.
 
 ## <a name="monitoring-and-alerting"></a>İzleme ve uyarı
 
-Yerleşik kullandığınız [performansı izleme](sql-database-performance.md) ve [uyarı araçlarının yanı sıra](sql-database-insights-alerts-portal.md), performans değerlendirmeleriyle birlikte birleştirilmiş. Bu araçları kullanarak geçerli veya projeye özgü performans ihtiyaçlarınıza göre ölçek büyütme veya küçültme işlemlerinin etkisini hızlı bir şekilde değerlendirebilirsiniz. SQL Veritabanı ayrıca izlemeyi kolaylaştırmak için [ölçümler ve tanılama günlükleri oluşturabilir](sql-database-metrics-diag-logging.md).
+Yerleşik [performans izleme](sql-database-performance.md) ve [Uyarı araçlarını](sql-database-insights-alerts-portal.md), performans derecelendirmeleri ile birlikte kullanırsınız. Bu araçları kullanarak geçerli veya projeye özgü performans ihtiyaçlarınıza göre ölçek büyütme veya küçültme işlemlerinin etkisini hızlı bir şekilde değerlendirebilirsiniz. SQL Veritabanı ayrıca izlemeyi kolaylaştırmak için [ölçümler ve tanılama günlükleri oluşturabilir](sql-database-metrics-diag-logging.md).
 
 ## <a name="availability-capabilities"></a>Kullanılabilirlik özellikleri
 
-Tek veritabanları, elastik havuzlar ve yönetilen örnekleri birçok kullanılabilirlik özelliklerini sağlar. Bilgi için [kullanılabilirlik özelliklerini](sql-database-technical-overview.md#availability-capabilities).
+Tek veritabanları, elastik havuzlar ve yönetilen örnekler hepsi birçok kullanılabilirlik özelliği sağlar. Bilgi için bkz. [kullanılabilirlik özellikleri](sql-database-technical-overview.md#availability-capabilities).
 
 ## <a name="transact-sql-differences"></a>Transact-SQL farklılıkları
 
-Uygulamaları kullanan Transact-SQL özelliklerinin çoğu hem Microsoft SQL Server hem de Azure SQL veritabanı olarak tam olarak desteklenir. Örneğin, SQL Server ve SQL veritabanı veri türleri, işleçler, dize, aritmetik, mantıksal ve imleç işlevleri gibi temel SQL bileşenleri aynı şekilde çalışır. Vardır, ancak bazı T-SQL farklılıkları (veri tanımlama dili) DDL ve DML (veri işleme dili) öğeleri T-SQL deyimlerini ve kısmen desteklenen sorgular (Bu makalenin sonraki bölümlerinde ele).
-Ayrıca, bazı özellikleri ve Azure SQL veritabanı özellikleri ana veritabanında ve işletim sistemi bağımlılıklardan yalıtmak için tasarlandığından, tüm desteklenmeyen söz dizimi vardır. Bu nedenle, çoğu sunucu düzeyi etkinlik, SQL veritabanı için uygun değildir. Sunucu düzeyi seçenekleri, işletim sistemi bileşenlerini yapılandırın veya dosya sistemi yapılandırmasını belirten T-SQL deyimlerini ve seçenekler kullanılamaz. Bu gibi özellikler gerekli olduğunda, uygun bir alternatif genellikle başka bir şekilde kullanılabilir SQL veritabanı veya başka bir Azure özelliği ya da hizmeti.
+Uygulamaların kullandığı çoğu Transact-SQL özelliği hem Microsoft SQL Server hem de Azure SQL veritabanı 'nda tam olarak desteklenmektedir. Örneğin, veri türleri, işleçler, dize, aritmetik, mantıksal ve imleç işlevleri gibi çekirdek SQL bileşenleri, SQL Server ve SQL veritabanı 'nda aynı şekilde çalışır. Bununla birlikte, DDL (veri tanımlama dili) ve DML (veri işleme dili) öğelerinde yalnızca kısmen desteklenen (Bu makalede daha sonra tartıştığımız) bir T-SQL farkı vardır.
+Bunlara ek olarak, Azure SQL veritabanı, ana veritabanı ve işletim sistemi bağımlılıklarındaki özellikleri yalıtmak üzere tasarlandığından, hiçbir şekilde desteklenmeyen bazı özellikler ve söz dizimi vardır. Bu nedenle, çoğu sunucu düzeyi etkinlik SQL veritabanı için uygun değildir. T-SQL deyimleri ve seçenekleri, sunucu düzeyindeki seçenekleri, işletim sistemi bileşenlerini yapılandırıp veya dosya sistemi yapılandırması belirttiğinizde kullanılamaz. Bu tür özellikler gerektiğinde, SQL veritabanından veya başka bir Azure özelliğinden ya da hizmetinden başka bir şekilde, uygun bir alternatif vardır.
 
-Daha fazla bilgi için [Transact-SQL farklılıklarını çözümleme SQL veritabanına geçiş sırasında](sql-database-transact-sql-information.md).
+Daha fazla bilgi için bkz. [SQL veritabanına geçiş sırasında Transact-SQL farklılıklarını çözümleme](sql-database-transact-sql-information.md).
 
 ## <a name="security"></a>Güvenlik
 
-SQL veritabanı sağlayan bir dizi [yerleşik güvenlik ve Uyumluluk](sql-database-security-overview.md) uygulamanızın çeşitli güvenlik ve uyumluluk gereksinimlerine yardımcı olacak özellikler.
+SQL veritabanı, uygulamanızın çeşitli güvenlik ve uyumluluk gereksinimlerini karşılamasına yardımcı olmak için bir dizi [yerleşik güvenlik ve uyumluluk](sql-database-security-overview.md) özelliği sağlar.
 
 > [!IMPORTANT]
-> Azure SQL veritabanı (tüm dağıtım seçeneklerini) sertifikalıdır bir dizi uyumluluk standardı karşı. Daha fazla bilgi için [Microsoft Azure Trust Center](https://gallery.technet.microsoft.com/Overview-of-Azure-c1be3942) burada bulabilirsiniz SQL veritabanı uyumluluk sertifikaları en güncel listesi.
+> Azure SQL veritabanı (tüm dağıtım seçenekleri), bir dizi uyumluluk standartlarına karşı sertifikalandırilmiştir. Daha fazla bilgi için SQL veritabanı uyumluluk sertifikalarının en güncel listesini bulabileceğiniz [Microsoft Azure Güven Merkezi](https://gallery.technet.microsoft.com/Overview-of-Azure-c1be3942) ' ne bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- İle hızlı bir şekilde tek bir veritabanı ile çalışmaya başlamak için Başlat [veritabanı hızlı başlangıç guide.md tek](sql-database-single-database-quickstart-guide.md).
-- Bir SQL Server veritabanını Azure'a geçirme hakkında bilgi edinmek için [Azure SQL veritabanına geçirme](sql-database-single-database-migrate.md).
+- Tek bir veritabanını hızlıca kullanmaya başlamak için [tek veritabanı hızlı başlangıç kılavuzu](sql-database-single-database-quickstart-guide.md)ile başlayın.
+- SQL Server bir veritabanını Azure 'a geçirme hakkında bilgi edinmek için bkz. [Azure SQL veritabanı 'Na geçiş](sql-database-single-database-migrate.md).
 - Desteklenen özellikler hakkında bilgi edinmek için bkz. [Özellikler](sql-database-features.md).

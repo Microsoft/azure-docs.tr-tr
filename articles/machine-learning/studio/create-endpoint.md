@@ -1,7 +1,7 @@
 ---
-title: Web Hizmeti uç noktaları oluşturma
-titleSuffix: Azure Machine Learning Studio
-description: Web Hizmeti uç noktaları, Azure Machine Learning Studio'da oluşturun. Her web hizmeti uç noktasını ayrı ayrı ele, kısıtlanan yönetilen ve.
+title: Web hizmeti uç noktaları oluşturma
+titleSuffix: ML Studio (classic) - Azure
+description: Azure Machine Learning Studio (klasik) Web hizmeti uç noktaları oluşturun. Web hizmetindeki her bir uç nokta bağımsız olarak karşılanır, kısıtlandı ve yönetilir.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,45 +10,45 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: seodec18
 ms.date: 02/15/2019
-ms.openlocfilehash: ac434a696f6e77e5ce61b430232166e7727eda38
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 891f680485ec3ee65c0bef102eb7f52cea0611c6
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60751187"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73839640"
 ---
-# <a name="create-endpoints-for-deployed-azure-machine-learning-studio-web-services"></a>Dağıtılan Azure Machine Learning Studio web hizmetleri için uç noktası oluşturma
+# <a name="create-endpoints-for-deployed-azure-machine-learning-studio-classic-web-services"></a>Dağıtılan Azure Machine Learning Studio (klasik) Web Hizmetleri için uç noktalar oluşturma
 
 > [!NOTE]
-> Bu konu, uygulanabilir teknikleri açıklar bir **Klasik** Machine Learning web hizmeti.
+> Bu konu, **Klasik** bir Machine Learning Web hizmeti için geçerli olan teknikleri açıklamaktadır.
 
-Bir web hizmeti dağıtıldıktan sonra, bu hizmet için varsayılan bir uç noktası oluşturulur. Varsayılan uç noktası, API anahtarı kullanılarak çağrılabilir. Web Hizmetleri portalından, kendi anahtarlarına sahip ek uç noktalar ekleyebilirsiniz.
-Her web hizmeti uç noktasını ayrı ayrı ele, kısıtlanan yönetilen ve. Her uç nokta, müşterileriniz için dağıtabileceğiniz bir yetkilendirme anahtarına sahip benzersiz bir URL'dir.
+Bir web hizmeti dağıtıldıktan sonra, bu hizmet için varsayılan bir uç noktası oluşturulur. Varsayılan uç noktası, API anahtarı kullanılarak çağrılabilir. Web Hizmetleri portalından kendi anahtarlarıyla daha fazla uç nokta ekleyebilirsiniz.
+Web hizmetindeki her bir uç nokta bağımsız olarak karşılanır, kısıtlandı ve yönetilir. Her uç nokta, müşterilerinize dağıtabileceğiniz bir yetkilendirme anahtarına sahip benzersiz bir URL 'dir.
 
-## <a name="add-endpoints-to-a-web-service"></a>Bir web hizmeti için uç noktaları Ekle
+## <a name="add-endpoints-to-a-web-service"></a>Web hizmetine uç noktalar ekleme
 
-Azure Machine Learning Web Hizmetleri portalını kullanarak bir web hizmeti için bir uç nokta ekleyebilirsiniz. Uç nokta oluşturulduktan sonra zaman uyumlu API'leri aracılığıyla, batch API'leri, kullanma ve excel çalışma sayfaları.
+Web hizmetine Azure Machine Learning Web Hizmetleri portalını kullanarak bir uç nokta ekleyebilirsiniz. Uç nokta oluşturulduktan sonra, bunu zaman uyumlu API 'ler, Batch API 'Leri ve Excel çalışma sayfaları aracılığıyla kullanabilirsiniz.
 
 > [!NOTE]
-> Web hizmetine ek uç noktalar eklediyseniz, varsayılan uç nokta nelze odstranit.
+> Web hizmetine ek uç noktalar eklediyseniz, varsayılan uç noktayı silemezsiniz.
 
-1. Machine Learning Studio'da, sol gezinti sütununda, Web Hizmetleri.
-2. Web hizmeti Pano altındaki tıklatın **uç noktalarını yönetme**. Azure Machine Learning Web Hizmetleri portalında web hizmeti uç noktaları sayfası açılır.
+1. Machine Learning Studio (klasik) ' de, sol gezinti sütununda Web Hizmetleri ' ne tıklayın.
+2. Web hizmeti panosunun alt kısmındaki **uç noktaları Yönet**' e tıklayın. Web Hizmetleri portalı Azure Machine Learning Web hizmeti için uç noktalar sayfasına açılır.
 3. **Yeni**’ye tıklayın.
-4. Bir ad ve yeni uç nokta için bir açıklama yazın. Uç nokta adları 24 karakter veya uzunluğunda olmalıdır ve küçük harfler veya sayıdan bayraklardan gerekir. Günlüğe kaydetme düzeyini ve örnek veriler etkin olup olmadığını seçin. Günlüğe kaydetme hakkında daha fazla bilgi için bkz. [Machine Learning web hizmetleri için günlüğe kaydetmeyi etkinleştirme](web-services-logging.md).
+4. Yeni uç nokta için bir ad ve açıklama yazın. Uç nokta adları 24 karakter uzunluğunda veya daha az olmalıdır ve küçük harfli harfler veya rakamlardan oluşur. Günlüğe kaydetme düzeyini ve örnek verilerin etkinleştirilip etkinleştirilmeyeceğini seçin. Günlüğe kaydetme hakkında daha fazla bilgi için bkz. [Machine Learning Web Hizmetleri için günlüğü etkinleştirme](web-services-logging.md).
 
-## <a id="scaling"></a> Ek uç noktaları ekleyerek bir web hizmetini ölçeklendirme
+## <a id="scaling"></a>Ek uç noktalar ekleyerek bir Web hizmetini ölçeklendirin
 
-Varsayılan olarak, yayımlanan web hizmeti her 20 eş zamanlı istek destekleyecek şekilde yapılandırıldığından ve 200 eş zamanlı istekleri olarak yüksek olabilir. Azure Machine Learning Studio web hizmeti için en iyi performansı sağlamak için ayarı otomatik olarak iyileştirilir ve portal değer yoksayılır.
+Varsayılan olarak, yayımlanan her Web hizmeti 20 eşzamanlı isteği destekleyecek şekilde yapılandırılır ve 200 eşzamanlı istek kadar yüksek olabilir. Azure Machine Learning Studio klasik sürümü, Web hizmetiniz için en iyi performansı sağlamak üzere ayarı otomatik olarak iyileştirir ve Portal değeri yok sayılır.
 
-200 en fazla eş zamanlı çağrılar değerden daha yüksek bir yük ile API'sini çağırmak için plan destekleyecekse aynı web hizmetini birden fazla uç noktası oluşturmanız gerekir. Ardından rastgele yük tümünün arasında dağıtabilirsiniz.
+API 'yi, en fazla eşzamanlı çağrı değeri olan 200 ' den daha yüksek bir yük ile çağırmayı planlıyorsanız, aynı Web hizmetinde birden fazla uç nokta oluşturmanız gerekir. Daha sonra yüklerinizi tüm bunlar arasında rastgele dağıtabilirsiniz.
 
-Bir web hizmeti ölçeklendirme genel bir görevdir. Ölçeklendirmek için bazı nedenler, 200'den fazla eşzamanlı isteği destekler, birden fazla uç nokta üzerinden kullanılabilirliğini artırmak veya web hizmeti için ayrı bir uç noktaları vermek üzeresiniz. Aynı web hizmeti aracılığıyla ek uç noktalar ekleyerek ölçeği artırabilir [Azure Machine Learning Web hizmetini](https://services.azureml.net/) portalı.
+Bir Web hizmetinin ölçeklendirilmesi ortak bir görevdir. Ölçeklendirmenin bazı nedenleri 200 'den fazla eşzamanlı isteği desteklemek, birden fazla uç nokta aracılığıyla kullanılabilirliği artırmanız veya Web hizmeti için ayrı uç noktalar sağlamaktır. [Azure Machine Learning Web hizmeti](https://services.azureml.net/) portalı aracılığıyla aynı Web hizmeti için ek uç noktalar ekleyerek ölçeği artırabilirsiniz.
 
-Yüksek eşzamanlılık sayısı kullanarak gelenlere yüksek oranda bir API arıyoruz değil, verebilirliğinde göz önünde bulundurun. Yüksek yük için yapılandırılmış bir API nispeten düşük yüke yerleştirirseniz, ara sıra zaman aşımları ve/veya ani gecikme süresindeki görebilirsiniz.
+API 'YI karşılık gelen yüksek bir ücret ile çağırmadan, yüksek eşzamanlılık sayısı kullanmanın, en fazla bir tutarlılık olabileceğini aklınızda bulundurun. Yüksek yük için yapılandırılmış bir API 'ye görece düşük bir yük yerleştirmeniz durumunda, tek tek zaman aşımları ve/veya gecikmede ani artışlar görebilirsiniz.
 
-Zaman uyumlu API, genellikle düşük gecikme süreli olduğu istenen durumlarda kullanılır. Burada gecikme süresi, bir isteğin tamamlanması için API alır ve herhangi bir ağ gecikmeleri için hesap olmayan zaman anlamına gelir. Bir API 50 MS'den az gecikme süresiyle sahip varsayalım. Kullanılabilir kapasite azaltma düzeyi yüksek ve en fazla eş zamanlı çağrılar tam olarak kullanmak için 20 = 20 * 1000 Bu API'yi çağırmak gereken / saniye başına 50 = 400 saatleri. Bu daha da genişleterek, en fazla eş zamanlı çağrılar 200, saniyede bir 50 MS'den az gecikme süresiyle varsayılarak API 4000 kez çağrılması olanak tanır.
+Zaman uyumlu API 'Ler genellikle düşük bir gecikme süresinin istendiği durumlarda kullanılır. Burada gecikme süresi, API 'nin bir isteği tamamlaması için geçen süreyi gösterir ve herhangi bir ağ gecikmesi için hesap yapmaz. Bir API 'nin 50-ms gecikme süresine sahip olduğunu varsayalım. Sınır düzeyi yüksek ve en fazla eşzamanlı aramalar = 20 olan kullanılabilir kapasiteyi tam olarak kullanmak için, bu API 20 * 1000/50 = 400 kez saniye başına çağırmanız gerekir. Bu daha fazla genişlemekle, en fazla eşzamanlı 200 çağrısı, dakikada bir API 4000 kez çağrı yapmanıza olanak sağlar. Bu, 50-MS gecikmesini kabul ediyor.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Bir Azure Machine Learning web hizmetini kullanma](consume-web-services.md).
+[Azure Machine Learning Web hizmeti kullanma](consume-web-services.md).

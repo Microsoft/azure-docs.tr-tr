@@ -1,88 +1,93 @@
 ---
-title: 'Veri içeri aktarın: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Verileri içeri aktarma modülü Azure Machine Learning hizmetinde bir machine learning denemesi mevcut bulut veri hizmetlerinden verileri yüklemek için nasıl kullanılacağını öğrenin.
+title: 'İçeri aktarma verileri: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Mevcut bulut veri hizmetlerinden bir makine öğrenimi ardışık düzenine veri yüklemek için Azure Machine Learning veri alma modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: ed51c4e7b6c7d226c7827d1ba00bc96a7be1e6b0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 5fa8d3984c758d0bf95372864f3bffeb6f302c83
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65028313"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73497805"
 ---
-# <a name="import-data-module"></a>Veri modülünü içeri aktarın
+# <a name="import-data-module"></a>Veri modülünü içeri aktarma
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Bir machine learning denemesi mevcut bulut veri hizmetlerinden verileri yüklemek için bu modülü kullanın.  
-Modülü şimdi depolama seçeneğini belirleyin ve hızlı bir şekilde tüm seçeneklerini yapılandırmak için mevcut abonelik ve hesaplar arasından seçin yardımcı olacak bir sihirbaz içerir. Var olan bir veri bağlantısını düzenlemeniz gerekir? Hiç sorun değil; sıfırdan yeniden başlatmak zorunda kalmazsınız tüm önceki yapılandırma ayrıntılarını Sihirbazı'nı yükler. 
-  
-Veri kaynağına bağlanmak ve istediğiniz tanımladıktan sonra [verileri içeri aktarma](./import-data.md) içerir ve verileri Azure Machine Learning çalışma alanınıza yükler değerlere göre her bir sütunun veri türünü çıkarsar. Çıkışı [verileri içeri aktarma](./import-data.md) herhangi bir deneme ile kullanılabilecek bir veri kümesidir.
+Mevcut bulut veri hizmetlerinden bir makine öğrenimi ardışık düzenine veri yüklemek için bu modülü kullanın. 
 
-  
-Kaynak verilerinizin değişmesi halinde veri kümesini yenileyin ve yeniden çalıştırarak yeni veri ekleme [verileri içeri aktarma](./import-data.md). Ancak, yeniden denemeyi her çalıştırdığınızda kaynaktan okumaya istemiyorsanız seçin **kullanın, sonuçları önbelleğe** seçeneği true. Bu seçenek belirlendiğinde, modül denemeyi daha önce aynı kaynak hem de aynı giriş seçenekleri kullanarak dolmadığını denetler. Bir önceki çalıştırma bulunursa varsa, önbellekteki verilerin kullanılır, kaynak verilerin yeniden yüklenmesini yerine.
- 
+> [!Note]
+> Bu modül tarafından sunulan tüm işlevler, çalışma alanı giriş sayfasında **veri deposu** ve **veri kümeleri** tarafından yapılabilir. Veri izleme gibi ek özellikler içeren veri **deposu** ve veri **kümesi** kullanmanızı öneririz. Daha fazla bilgi edinmek için bkz. [verilere erişme ve veri](../service/how-to-access-data.md) [kümelerini kaydetme](../service/how-to-create-register-datasets.md) makalesi.
+> Bir veri kümesini kaydettikten sonra, tasarımcı arabirimindeki veri **kümeleri kategorim** -> **veri** kümelerinde bulabilirsiniz. Bu modül, tanıdık bir deneyim için Studio (klasik) kullanıcıları için ayrılmıştır. 
+>
 
-## <a name="data-sources"></a>Veri kaynakları
+İlk olarak, okuduğunuz kaynağı seçin ve ek ayarları sona erdirin. **Veri Içeri aktarma** modülü aşağıdaki kaynaklardan gelen verileri oku destekler:
 
-Verileri içeri aktarma modülü aşağıdaki veri kaynaklarını destekler. Ayrıntılı yönergeler ve her bir veri kaynağı kullanma örnekleri için bağlantıları tıklatın. 
- 
-Verilerinizi nasıl veya ne nerede depolamanız gerekir emin değilseniz, veri bilimi işlemi ortak veri senaryolarda bu kılavuza bakın:  [Azure Machine learning'de Gelişmiş analiz senaryoları](https://docs.microsoft.com/azure/machine-learning/machine-learning-data-science-plan-sample-scenarios). 
+- HTTP aracılığıyla URL
+- Azure bulut, [**veri depoları**](../service/how-to-access-data.md)üzerinden depolar)
+    - Azure Blob kapsayıcısı
+    - Azure Dosya Paylaşımı
+    - Azure Data Lake
+    - Azure Data Lake Gen2
+    - Azure SQL Veritabanı
+    - Azure PostgreSQL    
 
+Bulut depolama 'yı kullanmadan önce, Azure Machine Learning çalışma alanınıza önce bir veri deposu kaydetmeniz gerekir. Daha fazla bilgi için bkz. [verilere erişme](../service/how-to-access-data.md). 
 
-|Veri kaynağı| İle kullanma|
-|-----------|-----------|  
-|[HTTP üzerinden Web URL'si](./import-from-web-url-via-http.md)|HTTP kullanan ve CSV, TSV, ARFF'ye veya SvmLight biçimlerde sağlanan bir web URL'si üzerinde barındırılan veri alma|  
-|[Azure Blob depolama alanından içeri aktarma](./import-from-azure-blob-storage.md) |Azure blob hizmetinde depolanan veri alma|  
+İstediğiniz verileri tanımladıktan ve kaynağa bağlandıktan sonra, **[verileri Içeri aktarın](./import-data.md)** her bir sütunun veri türünü içerdiği değerlere göre alır ve verileri Tasarımcı işlem hattınızla yükler. **Içeri aktarma verilerinin** çıktısı, herhangi bir tasarımcı işlem hattı ile kullanılabilen bir veri kümesidir.
 
-## <a name="how-to-use-import-data"></a>Verileri İçeri Aktar'ı kullanma
- 
-1. Ekleme **verileri içeri aktarma** denemenizi modülü. Bu modülde bulabilirsiniz **veri giriş ve çıkış** arabiriminde kategorisi.
+Kaynak verileriniz değişirse, [verileri Içeri aktar](./import-data.md)' ı yeniden çalıştırarak veri kümesini yenileyebilir ve yeni veri ekleyebilirsiniz. Ancak, işlem hattını her çalıştırdığınızda kaynaktan yeniden okumak istemiyorsanız, **önbelleğe alınmış sonuçları kullan** seçeneğini true olarak ayarlayın. Bu seçenek belirlendiğinde modül, işlem hattının, aynı kaynak ve aynı giriş seçeneklerini kullanarak daha önce çalıştırılıp çalıştırılmadığını denetler. Önceki bir çalıştırma bulunursa, verileri kaynaktan yeniden yükleme yerine önbellekteki veriler kullanılır.
 
-2. Tıklayın **veri içeri aktarma Sihirbazı'nı başlatma** bir Sihirbazı kullanarak veri kaynağına yapılandırmak için.
+## <a name="how-to-configure-import-data"></a>Içeri aktarma verilerini yapılandırma
 
-    Sihirbaz, hesap adını ve kimlik bilgilerini ve diğer seçenekleri yapılandırma Yardım alır. Mevcut bir yapılandırmayı düzenliyorsanız, öncelikle geçerli değerleri yükler.
+1. **Veri alım** modülünü işlem hattınızı ekleyin. Bu modülü, tasarımcıda **veri girişi ve çıkış** kategorisinde bulabilirsiniz.
 
-3. Sihirbazı kullanmak istemiyorsanız tıklayın **veri kaynağı**, bulut tabanlı depolama, okumasını türünü seçin. 
+1. Sihirbaz kullanarak veri kaynağını yapılandırmak için **veri alma Sihirbazı 'Nı Başlat** ' a tıklayın.
 
-    Ek ayarlar seçtiğiniz depolama türüne göre değişir ve depolama veya sağlanır. Hesap adı, dosya türü veya kimlik bilgilerini sağlamanız gerekebilir. Bazı kaynakları kimlik doğrulaması gerektirmez; diğerleri için hesap adı, bir anahtar veya kapsayıcı adı bilmeniz gerekebilir.
+    Sihirbaz hesap adını ve kimlik bilgilerini alır ve diğer seçenekleri yapılandırmanıza yardımcı olur. Var olan bir yapılandırmayı düzenliyorsanız, önce geçerli değerleri yükler.
 
-4. Seçin **kullanın, sonuçları önbelleğe** art arda gelen çalıştırmaları yeniden kullanmak üzere bir veri kümesi önbelleğe almak istiyorsanız seçeneği.
+1. **Veri kaynağı**' nı seçin ve veri kaynağı türünü seçin. HTTP veya veri deposu olabilir.
 
-    Modül parametrelerini başka hiçbir değişikliğe olduğunu varsayarsak, denemeyi modülü çalıştırılır ve bundan sonra veri kümesinin önbelleğe alınmış bir sürümü kullanan veri yalnızca ilk zaman yükler.
+    Veri deposu ' nu seçerseniz, Azure Machine Learning çalışma alanınıza zaten kayıtlı olan mevcut veri depolarını seçebilirsiniz veya yeni bir veri deposu oluşturabilirsiniz. Ardından veri deposuna aktarılacak verilerin yolunu tanımlayın. **Yolu ![içeri** aktarma-veri yolu](media/module/import-data-path.png) ' ne tıklayarak yola kolayca gözatamazsınız
 
-    Verileri yeniden denemeyi her çalıştırdığınızda gerekiyorsa, bu seçeneğin işaretini kaldırın.
+1. Dahil etmek istediğiniz sütunları filtrelemek için Önizleme şemasını seçin. Ayrıca, ayrıştırma seçeneklerinde sınırlayıcı gibi gelişmiş ayarları tanımlayabilirsiniz.
 
-5. Denemeyi çalıştırın.
+    ![İçeri aktarma-veri önizleme](media/module/import-data.png)
 
-    Verileri içeri aktarma arabirimine veri yüklediğinde, içerdiği değerlerine göre her bir sütunun veri türünü çıkarsar. sayısal veya kategorik.
+1. Veri kümesini art arda çalışma sırasında yeniden kullanmak üzere önbelleğe almak istiyorsanız **önbelleğe alınmış sonuçları kullan** seçeneğini belirleyin.
 
-    - Bir üstbilgi varsa, üst bilgi çıkış veri kümesi sütunları adlandırmak için kullanılır.
+    Modül parametrelerinde başka değişiklik olmadığı varsayılarak, işlem hattı yalnızca modülün ilk kez çalıştırıldığı sırada verileri yükler ve bundan sonra veri kümesinin önbelleğe alınmış bir sürümünü kullanır.
 
-    - Verileri var olan bir sütun üst bilgileri varsa, yeni sütun adlarının biçimi Sütun1, Sütun2 kullanılarak oluşturulmuş... , coln *.
+    İşlem hattını her çalıştırdığınızda verileri yeniden yüklemeniz gerekiyorsa bu seçeneğin işaretini kaldırın.
+
+1. İşlem hattını çalıştırma.
+
+    Veri Içeri aktarma verileri tasarımcıya yüklerken, her bir sütunun veri türünü, sayısal veya kategorik, içerdiği değerlere göre alır.
+
+    Bir üst bilgi varsa, çıkış veri kümesinin sütunlarını adlandırmak için üst bilgi kullanılır.
+
+    Verilerde mevcut sütun başlıkları yoksa, yeni sütun adları Sütun1, col2 biçimi kullanılarak üretilir,... , Coln *.
 
 ## <a name="results"></a>Sonuçlar
 
-İçeri aktarma işlemi tamamlandığında, çıkış veri kümesi tıklayıp **Görselleştir** verileri başarıyla içeri aktarıldı görmek için.
+İçeri aktarma tamamlandığında, çıktı veri kümesine tıklayın ve verilerin başarıyla içeri aktarılmadığını görmek için **Görselleştir** ' i seçin.
 
-Yeniden kullanmak için verileri kaydetmek istiyorsanız, deneme çalıştığı her saat yeni bir veri kümesini içeri aktarma yerine, çıkışı sağ tıklayıp **veri kümesi olarak Kaydet**. Veri kümesi için bir ad seçin. Kaydedilmiş veri kümesi verileri kaydetmeden sırasındaki korur ve denemeyi yeniden denemeyi kümesinde değişse bile veri güncelleştirilmez. Bu, veri anlık görüntülerini almak için kullanışlı olabilir.
+İşlem hattı her çalıştırıldığında yeni bir veri kümesi almak yerine yeniden kullanım için verileri kaydetmek istiyorsanız, çıkışa sağ tıklayın ve veri **kümesi olarak kaydet**' i seçin. Veri kümesi için bir ad seçin. Kaydedilen veri kümesi verileri kaydetme sırasında korur ve işlem hattında veri kümesi değişse bile, ardışık düzen yeniden çalıştırıldığında veriler güncellenmez. Bu, verilerin anlık görüntülerini almak için yararlı olabilir.
 
-Verileri içeri aktardıktan sonra modelleme ve analiz için bazı ek hazırlıklar ihtiyaç duyabilirsiniz:
+Verileri içeri aktardıktan sonra, modelleme ve analiz için bazı ek hazırlıklar gerekebilir:
 
+- Sütun adlarını değiştirmek, bir sütunu farklı bir veri türü olarak işlemek veya bazı sütunların Etiketler ya da Özellikler olduğunu göstermek için [meta verileri Düzenle](./edit-metadata.md) ' yi kullanın.
 
-- Kullanım [meta verileri Düzenle](./edit-metadata.md) sütun adlarını, sütun farklı veri türü olarak işlemek için veya bazı sütunları etiketleri veya özellikleri olduğunuzu gösterecek şekilde değiştirmek için.
+- Modelde dönüştürülecek veya kullanılacak sütunların bir alt kümesini seçmek için [veri kümesindeki sütunları seç '](./select-columns-in-dataset.md) i kullanın. Dönüştürülen veya kaldırılan sütunlar, [sütun Ekle](./add-columns.md) modülü kullanılarak, özgün veri kümesine kolayca yeniden katılabilir.  
 
-- Kullanma [kümesindeki sütunları seçme](./select-columns-in-dataset.md) modelleme dönüştürmek veya sütunların bir alt kümesini seçin. Dönüştürülen veya kaldırılan sütunlar kolayca özgün veri kümesine kullanarak katılmak [Sütun Ekle](./add-columns.md) modülü.  
-
-- Kullanım [bölüm ve örnek](./partition-and-sample.md) veri kümesini ayırmak, örnekleme gerçekleştirmek veya üst n satırları Al.
+- Veri kümesini bölmek, örnekleme gerçekleştirmek veya ilk n satırı almak için [bölüm ve örnek](./partition-and-sample.md) kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

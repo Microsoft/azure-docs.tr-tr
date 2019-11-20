@@ -42,8 +42,8 @@
           href: ../networking/connectivty-interoperability-control-plane.md?toc=%2fazure%2fvpn-gateway%2ftoc.json
         - name: Veri Düzlemi Analizi
           href: ../networking/connectivty-interoperability-data-plane.md?toc=%2fazure%2fvpn-gateway%2ftoc.json
-    - name: Güvenlik öznitelikleri
-      href: vpn-gateway-security-attributes.md
+    - name: Yerleşik güvenlik denetimleri
+      href: vpn-gateway-security-controls.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: VPN ağ geçidi oluşturma ve yönetme
@@ -124,6 +124,8 @@
               href: point-to-site-how-to-vpn-client-install-azure-cert.md
             - name: VPN istemcisi yapılandırma dosyalarını oluşturma ve yükleme
               href: point-to-site-vpn-client-configuration-azure-cert.md
+            - name: İstemci VPN profili indirme dosyası hakkında
+              href: about-vpn-profile-download.md
         - name: Radius kimlik doğrulaması
           items:
             - name: P2S VPN yapılandırma
@@ -131,7 +133,15 @@
             - name: VPN istemcisi yapılandırma dosyalarını oluşturma ve yükleme
               href: point-to-site-vpn-client-configuration-radius.md
             - name: P2S VPN RADIUS kimlik doğrulamasını NPS sunucusu ile tümleştirme
-              href: vpn-gateway-radiuis-mfa-nsp.md
+              href: vpn-gateway-radius-mfa-nsp.md
+        - name: Azure AD kimlik doğrulaması
+          items:
+            - name: Kiracı yapılandırma
+              href: openvpn-azure-ad-tenant.md
+            - name: Multi-Factor Authentication’ı (MFA) yapılandırma
+              href: openvpn-azure-ad-mfa.md
+            - name: VPN istemcisi yapılandırma
+              href: openvpn-azure-ad-client.md
         - name: OpenVPN
           items:
             - name: Noktadan siteye bağlantılar için OpenVPN yapılandırması
@@ -140,6 +150,12 @@
               href: vpn-gateway-howto-openvpn-clients.md
         - name: P2S için genel CA ağ geçidi sertifikasına geçiş
           href: vpn-gateway-point-to-site-gateway-public-ca.md
+        - name: Always On VPN cihazı tüneli yapılandırma
+          href: vpn-gateway-howto-always-on-device-tunnel.md
+        - name: Always On VPN kullanıcı tüneli yapılandırma
+          href: vpn-gateway-howto-always-on-user-tunnel.md
+        - name: Özel yolları P2S istemcilere tanıtma
+          href: vpn-gateway-p2s-advertise-custom-routes.md
     - name: Azure Kullanılabilirlik Alanları arasında yedekli VNet ağ geçidi oluşturma
       href: create-zone-redundant-vnet-gateway.md
     - name: Bağlantılarda IPsec/IKE ilkelerini yapılandırma
@@ -184,6 +200,8 @@
           href: vpn-gateway-howto-setup-alerts-virtual-network-gateway-metric.md
         - name: Tanılama günlüğüne dayalı uyarılar ayarlama
           href: vpn-gateway-howto-setup-alerts-virtual-network-gateway-log.md
+    - name: Paket yakalamalarını yapılandırma
+      href: packet-capture.md
     - name: Sorun giderme
       href: vpn-gateway-troubleshoot.md
       items:
@@ -199,6 +217,8 @@
               href: vpn-gateway-troubleshoot-vpn-point-to-site-connection-problems.md
             - name: Noktadan Siteye bağlantı sorunları - Mac OS X VPN istemcisi
               href: vpn-gateway-troubleshoot-point-to-site-osx-ikev2.md
+            - name: Noktadan Siteye - Azure AD kimlik doğrulaması
+              href: troubleshoot-ad-vpn-client.md
         - name: Siteden Siteye bağlantı sorunları
           items:
             - name: Siteden siteye bağlantılar

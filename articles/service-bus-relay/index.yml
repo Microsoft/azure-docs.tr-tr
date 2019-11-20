@@ -1,57 +1,65 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Service Bus Relay Belgeleri
+### YamlMime:Landing
+title: Azure Relay belgeleri
+summary: Azure Relay hizmetinin kurumsal ağınızda çalışan hizmetleri nasıl güvenli bir şekilde genel bulutta kullanıma sunmanıza olanak sağladığını öğrenin.
 metadata:
-  title: Azure Service Bus Relay Belgeleri
-  meta.description: 'Learn how the Azure Relay service work in a hybrid cloud and on-premises environment, complete with how to, Tutorials, videos, API references, and more.'
+  title: Azure Relay belgeleri
+  description: Azure Relay hizmetinin kurumsal ağınızda çalışan hizmetleri nasıl güvenli bir şekilde genel bulutta kullanıma sunmanıza olanak sağladığını öğrenin.
   services: service-bus-relay
-  author: spelluru
-  manager: femila
   ms.service: service-bus-relay
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: 
   ms.topic: landing-page
-  ms.date: 08/21/2018
+  ms.collection: collection
+  author: spelluru
   ms.author: spelluru
-abstract:
-  description: 'Azure Geçiş hizmeti, bir güvenlik duvarı bağlantısı açmak ya da kurumsal ağ altyapısına müdahale eden değişiklikler yapmak zorunda kalmadan kurumsal işletme ağı ile genel buluttaki şirket içi ve bulut ortamları arasında karma uygulamaları kolaylaştırır.'
-sections:
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: '<b>Karma Bağlantılar:</b>'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/service-bus-relay/relay-hybrid-connections-dotnet-get-started">İleti alma ve gönderme - .NET Web Yuvaları</a>
-          - html: <a href="/azure/service-bus-relay/relay-hybrid-connections-http-requests-dotnet-get-started">İleti alma ve gönderme - .NET HTTP</a>
-          - html: <a href="/azure/service-bus-relay/relay-hybrid-connections-node-get-started">İleti alma ve gönderme - Node.js Web Yuvaları</a>
-          - html: <a href="/azure/service-bus-relay/relay-hybrid-connections-http-requests-node-get-started">İleti alma ve gönderme - Node.js HTTP</a>
-      - type: paragraph
-        text: '<b>Windows Communication Foundation (WCF) Geçişi:</b>'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/service-bus-relay/service-bus-dotnet-hybrid-app-using-service-bus-relay">Bir şirket içi WCF hizmetini buluttaki bir web uygulamasının kullanımına sunma</a>
-          - html: <a href="/azure/service-bus-relay/service-bus-relay-tutorial">Bir şirket içi WCF hizmetini ağınızın dışındaki bir WCF istemcisinin kullanımına sunma</a>
-          - html: <a href="/azure/service-bus-relay/service-bus-relay-rest-tutorial">Bir şirket içi WCF hizmetini ağınızın dışındaki bir uygulamanın kullanımına sunma</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: GitHub’daki örnekler
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: '<a href="https://github.com/Azure/azure-relay/tree/master/samples/hybrid-connections">Karma Bağlantılar</a>'
-          - html: '<a href="https://github.com/Azure/azure-relay/tree/master/samples/wcf-relay">Windows Communication Foundation (WCF)</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Diller
-            html: <p><a href="/dotnet/api/microsoft.azure.relay?view=azure-dotnet">.NET Framework</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/servicebus/">REST API başvurusu</a></p>
+  ms.date: 09/06/2019
+  ms.openlocfilehash: f4d186169998aad628dc8efa4781dc55f457edd4
+  ms.sourcegitcommit: a4b5d31b113f520fcd43624dd57be677d10fc1c0
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/06/2019
+  ms.locfileid: "70770425"
+landingContent:
+- title: Azure Relay hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Geçiş nedir?
+      url: relay-what-is-it.md
+- title: Karma bağlantılar
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Web Yuvalarını kullanarak ileti alma ve gönderme - .NET
+      url: relay-hybrid-connections-dotnet-get-started.md
+    - text: HTTP kullanarak ileti alma ve gönderme - .NET
+      url: relay-hybrid-connections-http-requests-dotnet-get-started.md
+    - text: Web Yuvalarını kullanarak ileti alma ve gönderme - Node.js
+      url: relay-hybrid-connections-node-get-started.md
+    - text: HTTP kullanarak ileti alma ve gönderme - Node.js
+      url: relay-hybrid-connections-http-requests-node-get-started.md
+  - linkListType: download
+    links:
+    - text: GitHub’daki örnekler
+      url: https://github.com/Azure/azure-relay/tree/master/samples/hybrid-connections
+- title: WCF Geçişi
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Bir şirket içi WCF hizmetini buluttaki bir web uygulamasının kullanımına sunma
+      url: service-bus-dotnet-hybrid-app-using-service-bus-relay.md
+    - text: Bir şirket içi WCF hizmetini ağınızın dışındaki bir WCF hizmetinin kullanımına sunma
+      url: service-bus-relay-tutorial.md
+    - text: Bir şirket içi WCF REST hizmetini ağınızın dışındaki bir istemcinin kullanımına sunma
+      url: service-bus-relay-rest-tutorial.md
+  - linkListType: download
+    links:
+    - text: GitHub’daki örnekler
+      url: https://github.com/Azure/azure-relay/tree/master/samples/wcf-relay
+- title: API başvuruları
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: .NET
+      url: /dotnet/api/microsoft.azure.relay?view=azure-dotnet
+    - text: REST
+      url: /rest/api/relay/

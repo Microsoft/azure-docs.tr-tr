@@ -1,17 +1,18 @@
 ---
 title: 'Azure HDInsight: Python örnekleri'
-description: Python örnekler, Python için HDInsight SDK'sını kullanarak ortak görevleri için Github'da bulabilirsiniz.
+description: Python için HDInsight SDK 'sını kullanan ortak görevler için GitHub 'da Python örnekleri bulun.
 author: hrasheed-msft
+ms.author: hrasheed
+ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: sample
-ms.date: 04/15/2019
-ms.author: hrasheed
-ms.openlocfilehash: e8e5afa0a29136dd4f266f4356f082365c3f6c22
-ms.sourcegitcommit: 44a85a2ed288f484cc3cdf71d9b51bc0be64cc33
+ms.date: 11/08/2019
+ms.openlocfilehash: 14d7c6c6352528207a20071908c31ea684dde19d
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "64712603"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73903632"
 ---
 # <a name="azure-hdinsight-python-samples"></a>Azure HDInsight: Python örnekleri
 
@@ -21,27 +22,26 @@ ms.locfileid: "64712603"
 > * [Java Örnekleri](hdinsight-sdk-java-samples.md)
 <!-- * [Go Examples](hdinsight-sdk-go-samples.md)-->
 
-
 Bu makalede aşağıdakiler sunulmaktadır:
 
 * Küme oluşturma görevleri için örneklere bağlantılar.
-* Diğer yönetim görevleri için başvuru içeriği bağlar.
-
-## <a name="prerequisites"></a>Önkoşullar
+* Diğer yönetim görevleri için başvuru içeriğine bağlantılar.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-- [Python için Azure HDInsight SDK](https://docs.microsoft.com/python/api/overview/azure/hdinsight#sdk-installation)
+## <a name="prerequisites"></a>Önkoşullar
 
-## <a name="cluster-management---creation"></a>Küme yönetimi - oluşturma
+[Python için Azure HDInsight SDK](https://docs.microsoft.com/python/api/overview/azure/hdinsight#sdk-installation)
 
-* [Kafka kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_kafka_cluster_sample.py)
-* [Spark kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_spark_cluster_sample.py)
-* [Azure Data Lake depolama 2. nesil ile bir Spark kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_hadoop_cluster_with_adls_gen2_sample.py)
-* [Kurumsal güvenlik paketi (ESP) ile bir Spark kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_esp_cluster_sample.py)
+## <a name="cluster-management---creation"></a>Küme yönetimi-oluşturma
 
-Python için bu örnekleri kopyalayarak alabilirsiniz [hdınsight-python-sdk-samples](https://github.com/Azure-Samples/hdinsight-python-sdk-samples) GitHub deposu.
+* [Apache Kafka kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_kafka_cluster_sample.py)
+* [Apache Spark kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_spark_cluster_sample.py)
+* [Azure Data Lake Storage 2. ile Apache Spark kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_hadoop_cluster_with_adls_gen2_sample.py)
+* [Kurumsal Güvenlik Paketi (ESP) ile Apache Spark kümesi oluşturma](https://github.com/Azure-Samples/hdinsight-python-sdk-samples/blob/master/samples/create_esp_cluster_sample.py)
+
+[HDInsight-Python-SDK-Samples](https://github.com/Azure-Samples/hdinsight-python-sdk-samples) GitHub deposunu kopyalayarak bu örnekleri Python için edinebilirsiniz.
 
 [!INCLUDE [hdinsight-sdk-additional-functionality](../../includes/hdinsight-sdk-additional-functionality.md)]
 
-Bu ek SDK işlev bulunabilir için kod parçacıkları [Python için HDInsight SDK başvuru belgeleri](https://docs.microsoft.com/python/api/overview/azure/hdinsight?view=azure-python).
+Bu ek SDK işlevselliği için kod parçacıkları, [Python Için HDıNSIGHT SDK başvuru belgelerinde](https://docs.microsoft.com/python/api/overview/azure/hdinsight?view=azure-python)bulunabilir.

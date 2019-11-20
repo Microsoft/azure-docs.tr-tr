@@ -1,47 +1,57 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Güvenlik Duvarı Belgeleri
+### YamlMime:Landing
+title: Azure Güvenlik Duvarı belgeleri
+summary: Bulut tabanlı bir ağ güvenlik hizmeti olan Azure Güvenlik Duvarı'nı dağıtmayı öğrenin.
 metadata:
-  title: 'Azure Güvenlik Duvarı Belgeleri - Öğreticiler, API Başvurusu'
-  meta.description: 'Learn how to create Azure Firewalls. Documentation helps you plan, deploy, and manage web traffic to your Azure resources.'
+  title: Azure Güvenlik Duvarı belgeleri
+  description: Bulut tabanlı bir ağ güvenlik hizmeti olan Azure Güvenlik Duvarı'nı dağıtmayı öğrenin.
   services: firewall
-  author: vhorne
   ms.service: firewall
   ms.topic: landing-page
-  ms.date: 9/24/2018
+  author: vhorne
   ms.author: victorh
-abstract:
-  description: 'Bulut tabanlı bir ağ güvenlik hizmeti olan Azure Güvenlik Duvarı''nı dağıtmayı öğrenin. Öğreticiler, API başvuruları ve diğer belgeler, Azure sanal ağ kaynaklarınızı korumaya yönelik uygulama düzeyi ve ağ düzeyi ilkelerin nasıl ayarlanacağını gösterir.'
-sections:
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Azure Güvenlik Duvarı'nı dağıtmayı öğrenin
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/firewall/tutorial-firewall-deploy-portal">Azure portalını kullanarak Azure Güvenlik Duvarı'nı dağıtma ve yapılandırma</a>
-          - html: <a href="/azure/firewall/tutorial-hybrid-ps">Hibrit ağda dağıtma</a>
-          - html: <a href="/azure/firewall/tutorial-firewall-dnat">DNAT ile gelen trafiği filtreleme</a>
-          - html: <a href="/azure/firewall/tutorial-diagnostics">Azure Güvenlik Duvarı günlüklerini izleme</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Sık kullanılan görevler için betik örnekleri.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/firewall/sample-powershell">Azure PowerShell</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/module/az.network/new-azfirewall">Azure PowerShell</a></p><p><a href="/cli/azure/ext/azure-firewall/network/firewall">Azure CLI</a></p>
-          - title: Diller
-            html: <p><a href="/dotnet/api">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.network">Java</a></p>
-          - title: REST
-            html: '<p><a href="https://docs.microsoft.com/rest/api/firewall/">İşlem REST API’si Başvurusu</a></p>'
+  ms.date: 08/30/2019
+  ms.openlocfilehash: aba20908401cba2c1b740570f62593b5afb92dc5
+  ms.sourcegitcommit: aaa82f3797d548c324f375b5aad5d54cb03c7288
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/29/2019
+  ms.locfileid: "70147309"
+landingContent:
+- title: Azure Güvenlik Duvarı hakkında bilgi edinin
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Güvenlik Duvarı nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Azure Güvenlik Duvarı kural işleme mantığı
+      url: rule-processing.md
+    - text: Sık sorulan sorular
+      url: firewall-faq.md
+- title: Azure Güvenlik Duvarı dağıtma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure portalı kullanarak dağıtma
+      url: tutorial-firewall-deploy-portal.md
+    - text: Hibrit ağda dağıtma
+      url: tutorial-hybrid-portal.md
+    - text: Gelen trafiği filtreleme
+      url: tutorial-firewall-dnat.md
+- title: Load Balancer ile tümleştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Güvenlik Duvarı’nı Azure Standart Load Balancer ile tümleştirme
+      url: integrate-lb.md
+- title: Azure Güvenlik Duvarı’nı izleme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Azure Güvenlik Duvarı günlükleri ve ölçümleri
+      url: logs-and-metrics.md
+  - linkListType: tutorial
+    links:
+    - text: Azure Güvenlik Duvarı günlüklerini ve ölçümlerini izleme
+      url: tutorial-diagnostics.md

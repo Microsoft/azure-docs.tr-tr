@@ -1,22 +1,22 @@
 ---
-title: Yük dengeli IoT Hub'larında cihazları sağlamak için Azure IoT Hub Cihazı Sağlama Hizmeti'ni kullanma | Microsoft Docs
-description: Azure Portal'da yük dengeli IoT Hub'larında Cihaz Sağlama Hizmeti ile otomatik cihaz sağlama
+title: "Öğretici: yük dengeli IoT Hub 'larda cihaz sağlamak için Azure IoT Hub cihaz sağlama hizmeti 'Ni kullanma"
+description: "Öğretici: cihaz sağlama hizmeti Azure portalındaki yük dengeli IoT Hub 'ları genelinde otomatik cihaz sağlama"
 author: sethmanheim
 ms.author: sethm
-ms.date: 09/05/2017
+ms.date: 11/12/2019
 ms.topic: tutorial
 ms.service: iot-dps
 services: iot-dps
 manager: timlt
 ms.custom: mvc
-ms.openlocfilehash: 887bda92a1165a3dd17e9105e921a5df9e0c5534
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 6cd5dcb1fd96ac0fda75bf89dcf7259695cf971d
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61248173"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74112771"
 ---
-# <a name="provision-devices-across-load-balanced-iot-hubs"></a>Yük dengeli IoT Hub'larında cihazları sağlama
+# <a name="tutorial-provision-devices-across-load-balanced-iot-hubs"></a>Öğretici: yük dengeli IoT Hub 'larda cihaz sağlama
 
 Bu öğreticide, Cihaz Sağlama Hizmeti kullanılarak birden çok yük dengeli IoT Hub'ı için cihazları sağlama işlemi gösterilir. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
@@ -48,9 +48,9 @@ Kayıt listesi Cihaz Sağlama Hizmeti'ne cihazla hangi kanıtlama yöntemini (ci
 
 Ayırma ilkesi, bir IoT hub’a cihazların nasıl atandığını belirleyen bir Cihaz Sağlama Hizmeti ayarıdır. Desteklenen üç ayırma ilkesi vardır: 
 
-1. **En düşük gecikme**: Cihazlar hub'ında cihaz için en düşük gecikme ile temel bir IOT hub sağlanır.
-2. **Eşit ağırlıklı dağılım** (varsayılan): Bağlı IOT hub'lara cihaz sağlanma olasılığı. Bu varsayılan ayardır. Yalnızca bir IoT hub'a aygıtları sağlıyorsanız bu ayarı değiştirmeyebilirsiniz. 
-3. **Kayıt listesi aracılığıyla statik yapılandırma**: Kayıt listesindeki istenen IOT hub'ın belirtimi, cihaz sağlama hizmeti düzeyindeki ayırma ilkesinden önceliklidir önceliklidir.
+1. **En düşük gecikme**: Cihaza yönelik en düşük gecikme ile hub’a dayalı bir IoT hub’a cihazlar sağlanabilir.
+2. **Eşit ağırlıklı dağılım** (varsayılan): Bağlı IoT hub’lara cihaz sağlanma olasılığı eşittir. Bu varsayılan ayardır. Yalnızca bir IoT hub'a aygıtları sağlıyorsanız bu ayarı değiştirmeyebilirsiniz. 
+3. **Kayıt listesi aracılığıyla statik yapılandırma**: Kayıt listesindeki istenen IoT hub’ın belirtimi, Cihaz Sağlama Hizmeti düzeyindeki ayırma ilkesinden önceliklidir.
 
 Ayırma ilkesini ayarlamak için şu adımları izleyin:
 
@@ -81,5 +81,5 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 <!-- Advance to the next tutorial to learn how to 
  Replace this .md
 > [!div class="nextstepaction"]
-> [Bind an existing custom SSL certificate to Azure Web Apps](app-service-web-tutorial-custom-ssl.md)
+> [Bind an existing custom SSL certificate to Azure Web Apps]()
 -->

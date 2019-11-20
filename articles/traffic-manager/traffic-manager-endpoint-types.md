@@ -1,6 +1,6 @@
 ---
-title: Traffic Manager uç nokta türleri | Microsoft Docs
-description: Bu makalede, Azure Traffic Manager ile kullanılan uç noktalarını farklı türleri açıklanmaktadır.
+title: Traffic Manager uç noktası türleri | Microsoft Docs
+description: Bu makalede, Azure Traffic Manager ile kullanılabilecek farklı uç nokta türleri açıklanmaktadır
 services: traffic-manager
 documentationcenter: ''
 author: asudbring
@@ -12,88 +12,99 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/29/2017
 ms.author: allensu
-ms.openlocfilehash: 469b6543b380cb6b3b10c3def8484bed944f8556
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 9de5b161c6bb1897058898dddd620ad093f148be
+ms.sourcegitcommit: 6d2a147a7e729f05d65ea4735b880c005f62530f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67071198"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69981065"
 ---
 # <a name="traffic-manager-endpoints"></a>Traffic Manager uç noktaları
 
-Microsoft Azure Traffic Manager, farklı veri merkezlerinde çalışan uygulama dağıtımları için ağ trafiğini nasıl dağıtıldığını denetlemenize olanak sağlar. Trafik Yöneticisi'nde ' de her uygulama dağıtımı 'endpoint' olarak yapılandırın. Traffic Manager DNS isteği aldığında, DNS yanıtında döndürmek için kullanılabilir uç nokta seçer. Traffic manager, geçerli uç nokta durumu ve trafik yönlendirme yöntemi seçimi alır. Daha fazla bilgi için [Traffic Manager nasıl çalışır](traffic-manager-how-it-works.md).
+Microsoft Azure Traffic Manager, ağ trafiğinin farklı veri merkezlerinde çalışan uygulama dağıtımlarına nasıl dağıtıldığını denetlemenize olanak tanır. Her uygulama dağıtımını Traffic Manager ' uç nokta ' olarak yapılandırırsınız. Traffic Manager bir DNS isteği aldığında, DNS yanıtında geri dönmek için kullanılabilir bir uç nokta seçer. Traffic Manager, geçerli uç nokta durumu ve trafik yönlendirme yöntemi üzerinde seçimi temel alır. Daha fazla bilgi için bkz. [Traffic Manager nasıl kullanılır](traffic-manager-how-it-works.md).
 
-Uç nokta Traffic Manager tarafından desteklenen üç tür vardır:
+Traffic Manager tarafından desteklenen üç uç nokta türü vardır:
 
-* **Azure uç noktalarını** Azure'da barındırılan hizmetler için kullanılır.
-* **Dış uç noktalar** ya da şirket içi olabilir Azure dışında veya farklı bir barındırma sağlayıcısıyla barındırılan hizmetler veya FQDN, IPv4/IPv6 adresleri için kullanılır.
-* **İç içe uç noktalar** daha büyük, daha karmaşık dağıtımlar gereksinimlerini desteklemek için daha esnek trafik yönlendirme düzenleri oluşturmak için Traffic Manager profillerini birleştirmek için kullanılır.
+* Azure **uç noktaları** , Azure 'da barındırılan hizmetler için kullanılır.
+* **Dış uç noktalar** , şirket içinde ya da farklı bir barındırma sağlayıcısı ile Azure dışında barındırılan IPv4/IPv6 adresleri, FQDN 'ler veya hizmetler için kullanılır.
+* **Iç Içe geçmiş uç noktalar** , daha büyük ve daha karmaşık dağıtımlar ihtiyaçlarını desteklemek için daha esnek trafik yönlendirme şemaları oluşturmak üzere Traffic Manager profillerini birleştirmek için kullanılır.
 
-Uç noktaları farklı türdeki tek bir Traffic Manager profilinde nasıl birleştirilir hiçbir sınırlama yoktur. Her profil, uç nokta türlerinin bir karışımını içerebilir.
+Farklı türlerin uç noktalarının tek bir Traffic Manager profilinde nasıl birleştirileceği konusunda bir kısıtlama yoktur. Her profil, uç nokta türlerinin herhangi bir karışımını içerebilir.
 
-Aşağıdaki bölümlerde her uç nokta türü daha derinlemesine açıklanmaktadır.
+Aşağıdaki bölümlerde her bir uç nokta türü daha ayrıntılı olarak açıklanır.
 
 ## <a name="azure-endpoints"></a>Azure uç noktaları
 
-Azure uç noktaları, Azure tabanlı Hizmetleri Traffic Manager'da için kullanılır. Aşağıdaki Azure kaynak türleri desteklenir:
+Azure uç noktaları, Traffic Manager Azure tabanlı hizmetler için kullanılır. Aşağıdaki Azure Kaynak türleri desteklenir:
 
-* PaaS bulut Hizmetleri.
+* PaaS bulut hizmetleri.
 * Web Apps
-* Web uygulaması yuvaları
-* PublicIPAddress kaynaklarını (hangi bağlanabilir Vm'lere doğrudan ya da Azure Load Balancer üzerinden). Publicıpaddress bir Traffic Manager profilinde kullanılmak üzere atanmış bir DNS adı olmalıdır.
+* Web uygulaması Yuvaları
+* Publicıpaddress kaynakları (doğrudan ya da bir Azure Load Balancer aracılığıyla VM 'lere bağlanabilir). Publicıpaddress, bir Traffic Manager profilinde kullanılmak üzere atanmış bir DNS adına sahip olmalıdır.
 
-PublicIPAddress kaynaklarını Azure Resource Manager kaynaklarıdır. Klasik dağıtım modelinde bulunmaz. Bu nedenle yalnızca desteklenen Traffic Manager'ın Azure Resource Manager deneyimleri değildirler. Bir uç nokta türleri, Resource Manager ve klasik dağıtım modeli desteklenir.
+Publicıpaddress kaynakları Azure Resource Manager kaynaklardır. Klasik dağıtım modelinde mevcut değildir. Bu nedenle, yalnızca Traffic Manager Azure Resource Manager deneyimlerinde desteklenir. Diğer uç nokta türleri hem Kaynak Yöneticisi hem de klasik dağıtım modeli aracılığıyla desteklenir.
 
-Bir Web uygulaması durduruldu ve başlatılan Azure uç noktaları kullanırken, Traffic Manager algılar. Bu durum uç nokta durumu yansıtılır. Bkz: [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md#endpoint-and-profile-status) Ayrıntılar için. Temel alınan hizmet durdurulduğunda, Traffic Manager uç nokta durum denetimlerinin veya doğrudan trafiği uç noktasına gerçekleştirmez. Traffic Manager faturalama olayı yok, durdurulan bir örnek için oluşur. Hizmet yeniden başlatıldığında, faturalandırma devam eder ve uç nokta trafiği almak uygun. Bu algılama yöntemi, Publicıpaddress uç noktaları için geçerli değildir.
+Azure uç noktaları kullanılırken, Traffic Manager bir Web uygulamasının durdurulup başlatıldığını algılar. Bu durum uç nokta durumuna yansıtılır. Ayrıntılar için [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md#endpoint-and-profile-status) bölümüne bakın. Temel alınan hizmet durdurulduğunda Traffic Manager uç nokta sistem durumu denetimleri gerçekleştirmez veya uç noktaya doğrudan trafik vermez. Durdurulan örnek için Traffic Manager faturalandırma olayı gerçekleşmez. Hizmet yeniden başlatıldığında faturalandırma devam eder ve uç nokta trafik almaya uygun olur. Bu algılama, Publicıpaddress uç noktaları için geçerlidir.
 
-## <a name="external-endpoints"></a>Dış uç noktaları
+## <a name="external-endpoints"></a>Dış uç noktalar
 
-Dış uç noktalar Azure dışındaki hizmetleri veya FQDN, ya da IPv4/IPv6 adresleri için kullanılır. IPv4/IPv6 adresi uç noktalarını traffic manager, bunlar için bir DNS adı gerek kalmadan uç noktaları durumunu denetlemek izin verir. Sonuç olarak, Traffic Manager A/AAAA kayıt sorgularla uç noktanın yanıt olarak döndürürken yanıt verebilir. Azure dışındaki hizmetleri, bir barındırılan hizmet şirket içi içerebilir veya farklı bir sağlayıcı. Dış uç noktalar ayrı ayrı kullanılabilir veya dış uç noktalar yalnızca olabilen IPv4 veya IPv6 adresleri olarak belirtilen uç noktaları dışında aynı Traffic Manager profilindeki Azure uç noktaları ile birlikte. Azure uç noktalarını dış uç noktaları ile birleştirerek, çeşitli senaryolara olanak tanır:
+Dış uç noktalar IPv4/IPv6 adresleri, FQDN 'Ler veya Azure dışındaki hizmetler için kullanılır. IPv4/IPv6 adres uç noktalarının kullanımı, Traffic Manager 'ın bir DNS adı olması gerekmeden uç noktaların sistem durumunu denetlemesini sağlar. Sonuç olarak, bu uç noktayı bir yanıtta döndürürken Traffic Manager bir/AAAA kaydı olan sorgulara yanıt verebilir. Azure dışındaki hizmetler, şirket içinde veya farklı bir sağlayıcı ile barındırılan bir hizmet içerebilir. Dış uç noktalar, yalnızca dış uç noktalar olabilen IPv4 veya IPv6 adresleri olarak belirtilen uç noktalar dışında aynı Traffic Manager profilinde Azure Uç Noktaları ile birlikte kullanılabilir. Azure uç noktalarını dış uç noktalarla birleştirmek çeşitli senaryolara izin vermez:
 
-* Artıklığı ya da mevcut bir şirket içi uygulama için Azure'ı kullanarak bir aktif-aktif veya Aktif-Pasif yük devretme modeli sağlar. 
-* İlişkili bir DNS adı olmayan uç noktaları için trafiği yönlendirme. Döndürülen bir DNS adı bir IP adresini almak için ikinci bir DNS sorgusu çalıştırmak amacıyla gereksinimini ortadan kaldırarak Ayrıca, Genel DNS Arama gecikme süresini azaltın.
-* Dünyanın dört bir yanındaki kullanıcılara uygulama gecikme süresini azaltmak, mevcut şirket içi uygulamaya ek coğrafi konumlarda Azure'ı genişletin. Daha fazla bilgi için ['Performans' Traffic Manager trafik yönlendirme](traffic-manager-routing-methods.md#performance).
-* Ek kapasite için mevcut bir uygulama, sürekli olarak veya bir 'patlama buluta' çözümü bir ani değişiklik Azure'ı kullanarak isteğe bağlı olarak şirket içinde sağlayın.
+* Azure kullanarak etkin-etkin veya etkin-Pasif yük devretme modelinde mevcut bir şirket içi uygulama için daha fazla artıklık sağlayın. 
+* Trafiği kendileriyle ilişkili bir DNS adı olmayan uç noktalara yönlendirin. Ayrıca, döndürülen bir DNS adının IP adresini almak için ikinci bir DNS sorgusu çalıştırma gereksinimini ortadan kaldırarak genel DNS arama gecikmesini azaltın.
+* Dünyanın dört bir yanındaki kullanıcılar için uygulama gecikmesini azaltın, mevcut şirket içi bir uygulamayı Azure 'da ek coğrafi konumlara genişletin. Daha fazla bilgi için bkz. [Traffic Manager ' performans ' trafiği yönlendirme](traffic-manager-routing-methods.md#performance).
+* Azure kullanarak isteğe bağlı bir ani artış karşılamak için, mevcut bir şirket içi uygulama için sürekli olarak veya ' patlama-buluta ' çözümü olarak ek kapasite sağlayın.
 
-Bazı durumlarda, dış uç noktalar Azure Hizmetleri başvurmak yararlı olur (örnekler için bkz [SSS](traffic-manager-faqs.md#traffic-manager-endpoints)). Bu durumda, sistem durumu denetimleri, dış uç noktaları oranı Azure uç noktalarını ücreti üzerinden faturalandırılır. Ancak, Azure uç noktası, durdurmak veya silmek, temel alınan hizmete sistem durumunu denetleyin faturalandırma devre dışı bırakın veya Traffic Manager'da uç noktasını silmek kadar devam eder.
+Bazı durumlarda, Azure hizmetlerine başvurmak için dış uç noktalar kullanmak yararlı olur (örnekler için bkz. [SSS](traffic-manager-faqs.md#traffic-manager-endpoints)). Bu durumda, durum denetimleri dış bitiş noktaları fiyatı değil, Azure bitiş noktaları ücretine göre faturalandırılır. Bununla birlikte, Azure uç noktalarından farklı olarak, temeldeki hizmeti durdurur veya silerseniz, Traffic Manager uç noktasını devre dışı bırakana veya silme tamamlanana kadar sistem durumu denetimi faturalandırmaya devam edersiniz.
 
-## <a name="nested-endpoints"></a>İç içe uç noktaları
+## <a name="nested-endpoints"></a>İç içe geçmiş uç noktalar
 
-İç içe uç noktalar esnek trafik yönlendirme planları oluşturun ve daha büyük ve karmaşık dağıtımları gereksinimlerini desteklemek için birden çok Traffic Manager profili birleştirin. İç içe uç noktaları ile 'alt' profili, 'parent' profiline bir uç noktası olarak eklenir. Diğer iç içe profiller de dahil olmak üzere herhangi bir tür diğer uç noktalar alt ve üst profilleri içerebilir. Daha fazla bilgi için [iç içe Traffic Manager profillerini](traffic-manager-nested-profiles.md).
+İç içe geçmiş uç noktalar esnek trafik yönlendirme şemaları oluşturmak ve daha büyük, karmaşık dağıtımlar ihtiyaçlarını desteklemek için birden çok Traffic Manager profilini birleştirir. Iç Içe geçmiş uç noktalar ile ' alt ' profili bir uç nokta olarak ' Parent ' profiline eklenir. Alt ve üst profiller, diğer iç içe profiller de dahil olmak üzere herhangi bir türde diğer uç noktaları içerebilir. Daha fazla bilgi için bkz. [iç içe Traffic Manager profilleri](traffic-manager-nested-profiles.md).
 
-## <a name="web-apps-as-endpoints"></a>Web Apps uç noktalar olarak
+## <a name="web-apps-as-endpoints"></a>Uç noktalar olarak Web Apps
 
-Web Apps, Traffic Manager'da uç noktalar olarak yapılandırırken bazı ek hususlar geçerlidir:
+Traffic Manager Web Apps bitiş noktaları olarak yapılandırılırken bazı ek konular geçerlidir:
 
-1. Yalnızca 'Standart' SKU veya üzeri Web Apps, Traffic Manager ile kullanım için uygundur. Daha düşük bir SKU'ya sahip Web App ekleme girişimleri başarısız olur. Mevcut bir Web App'in SKU eski sürüme düşürme, Traffic artık bu Web App'e trafik gönderen Manager'da sonuçlanır. Desteklenen planları hakkında daha fazla bilgi için bkz [App Service planları](https://azure.microsoft.com/pricing/details/app-service/plans/)
-2. Bir uç nokta bir HTTP isteği aldığında, istekteki 'host' üst bilgisi belirlemek için hangi Web uygulaması isteğin karşılanması kullanır. Barındırma üst bilgisi, örneğin 'contosoapp.azurewebsites.net' isteği başlatmak için kullanılan DNS adını içerir. Farklı bir DNS adı ile Web uygulamanızı kullanmak için DNS adını uygulama için bir özel etki alanı adı olarak kaydedilmesi gerekir. Bir Web uygulaması uç noktası Azure uç noktası eklerken, Traffic Manager profili DNS adı uygulama için otomatik olarak kaydedilir. Bu kayıt, uç nokta silindiğinde otomatik olarak kaldırılır.
-3. Her bir Traffic Manager profili, her bir Azure bölgesinden en fazla bir Web uygulaması uç nokta olabilir. Bu kısıtlama için geçici olarak çözmek için bir Web uygulaması bir dış uç noktası olarak yapılandırabilirsiniz. Daha fazla bilgi için [SSS](traffic-manager-faqs.md#traffic-manager-endpoints).
+1. Yalnızca ' standart ' SKU 'sunda veya yukarıdaki Web Apps Traffic Manager kullanım için uygundur. Daha düşük bir SKU 'nun Web uygulamasını ekleme girişimleri başarısız olur. Mevcut bir Web uygulamasının SKU 'SU eski sürüme düşürüyor Traffic Manager, bu Web uygulamasına artık trafik göndermemek için oluşur. Desteklenen planlar hakkında daha fazla bilgi için [App Service planlarına](https://azure.microsoft.com/pricing/details/app-service/plans/) bakın
+2. Bir uç nokta bir HTTP isteği aldığında, isteği hangi Web uygulamasının hizmet etmesi gerektiğini belirleyen istekteki ' host ' üst bilgisini kullanır. Ana bilgisayar üst bilgisi, isteği başlatmak için kullanılan DNS adını içerir, örneğin ' contosoapp.azurewebsites.net '. Web uygulamanızla farklı bir DNS adı kullanmak için, DNS adının uygulama için özel bir etki alanı adı olarak kaydedilmesi gerekir. Bir Web uygulaması uç noktasını Azure uç noktası olarak eklerken, uygulama için Traffic Manager profili DNS adı otomatik olarak kaydedilir. Uç nokta silindiğinde bu kayıt otomatik olarak kaldırılır.
+3. Her bir Traffic Manager profili, her bir Azure bölgesinden en fazla bir Web uygulaması uç noktasına sahip olabilir. Bu kısıtlamayı geçici olarak çözmek için bir Web uygulamasını dış uç nokta olarak yapılandırabilirsiniz. Daha fazla bilgi için bkz. [SSS](traffic-manager-faqs.md#traffic-manager-endpoints).
 
-## <a name="enabling-and-disabling-endpoints"></a>Uç noktaları devre dışı bırakma ve etkinleştirme
+## <a name="enabling-and-disabling-endpoints"></a>Uç noktaları etkinleştirme ve devre dışı bırakma
 
-Bir uç nokta Traffic Manager'da devre dışı bırakma, Bakım modunda veya yeniden dağıtılmakta olan bir uç noktanın geçici olarak trafik kaldırmak yararlı olabilir. Uç nokta yeniden çalışır duruma geçtikten sonra yeniden etkinleştirilebilir.
+Traffic Manager bir uç noktanın devre dışı bırakılması, trafiği bakım modunda veya yeniden dağıtılmakta olan bir uç noktadan geçici olarak kaldırmak için yararlı olabilir. Uç nokta yeniden çalışmaya başladıktan sonra yeniden etkinleştirilebilir.
 
-Uç noktaları etkinleştirilmiş ve PowerShell, CLI veya REST API'yi Traffic Manager portal devre dışı.
+Uç noktalar Traffic Manager portalı, PowerShell, CLı veya REST API aracılığıyla etkinleştirilebilir ve devre dışı bırakılabilir.
 
 > [!NOTE]
-> Bir Azure uç noktası devre dışı bırakma, azure'daki dağıtım durumu ile yapmak için hiçbir şey vardır. Bir Azure hizmeti (gibi bir VM veya Web uygulaması çalıştıran ve Traffic Manager'da devre dışı bırakıldığında bile trafik alabilir kalır. Trafik Traffic Manager profili DNS adı aracılığıyla değil, doğrudan hizmet örneği için çözülebilir. Daha fazla bilgi için [Traffic Manager nasıl çalışır](traffic-manager-how-it-works.md).
+> Azure uç noktasının devre dışı bırakılması, Azure 'daki dağıtım durumuyla ilgili hiçbir şey yapmaz. Bir Azure hizmeti (örneğin, bir VM veya Web uygulaması gibi) çalışır durumda kalır ve Traffic Manager devre dışı bırakıldığında bile trafiği alabilecektir. Trafik, Traffic Manager profili DNS adı üzerinden değil, doğrudan hizmet örneğine bağlanabilir. Daha fazla bilgi için bkz. [Traffic Manager nasıl kullanılır](traffic-manager-how-it-works.md).
 
-Trafiği almak için her uç noktanın geçerli uygunluk aşağıdaki etkenlere bağlıdır:
+Trafiği almak için her uç noktanın geçerli uygunluğu aşağıdaki etkenlere bağlıdır:
 
 * Profil durumu (etkin/devre dışı)
 * Uç nokta durumu (etkin/devre dışı)
-* Sistem sonuçları için bu endpoint denetler
+* Bu uç nokta için durum denetimlerinin sonuçları
 
-Ayrıntılar için bkz [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md#endpoint-and-profile-status).
+Ayrıntılar için bkz. [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md#endpoint-and-profile-status).
 
 > [!NOTE]
-> Traffic Manager DNS düzeyinde çalışır olduğundan, herhangi bir uç nokta için varolan bağlantılar etkilemek silemiyor. Bir uç nokta kullanılamadığında, Traffic Manager kullanılabilir başka bir uç nokta için yeni bağlantılar yönlendirir. Ancak, konak devre dışı bırakılmış veya iyi durumda olmayan uç noktayı arkasında bu oturum sonlandırılana kadar mevcut bağlantıları üzerinden trafiği almak devam edebilir. Uygulamalar, mevcut bağlantılardan boşaltma trafiğe izin verecek şekilde oturum süresi sınırlamanız gerekir.
+> Traffic Manager DNS düzeyinde çalıştığından, herhangi bir uç noktaya ait varolan bağlantıları etkilemez. Bir uç nokta kullanılamadığında Traffic Manager yeni bağlantıları kullanılabilir başka bir uç noktaya yönlendirir. Ancak, devre dışı veya sağlıksız uç noktanın arkasındaki konak, Bu oturumlar sonlandırılana kadar mevcut bağlantılar aracılığıyla trafik almaya devam edebilir. Uygulamalar, trafiğin mevcut bağlantılardan boşalmaya izin vermek için oturum süresini sınırlımalıdır.
 
-Bir profildeki tüm uç noktalar devre dışıysa veya profili devre dışı bırakılırsa Traffic Manager bir 'NXDOMAIN' yanıt olarak yeni bir DNS sorgusu gönderir.
+Bir profildeki tüm uç noktalar devre dışıysa veya profil devre dışıysa, Traffic Manager yeni bir DNS sorgusuna ' NXDOMAIN ' yanıtı gönderir.
 
+## <a name="faqs"></a>SSS
+
+* [Birden çok abonelikteki uç noktalarla Traffic Manager kullanabilir miyim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#can-i-use-traffic-manager-with-endpoints-from-multiple-subscriptions)
+
+* [Bulut hizmeti ' hazırlama ' yuvaları ile Traffic Manager kullanabilir miyim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#can-i-use-traffic-manager-with-cloud-service-staging-slots)
+
+* [Traffic Manager IPv6 uç noktalarını destekliyor mu?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#does-traffic-manager-support-ipv6-endpoints)
+
+* [Aynı bölgede birden fazla Web uygulamasıyla Traffic Manager kullanabilir miyim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#can-i-use-traffic-manager-with-more-than-one-web-app-in-the-same-region)
+
+* [Traffic Manager profillerinin Azure uç noktalarını farklı bir kaynak grubuna taşımak Nasıl yaparım??](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-do-i-move-my-traffic-manager-profiles-azure-endpoints-to-a-different-resource-group-or-subscription)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bilgi [Traffic Manager nasıl çalışır](traffic-manager-how-it-works.md).
-* Traffic Manager hakkında bilgi edinin [uç nokta izleme ve otomatik yük devretme](traffic-manager-monitoring.md).
-* Traffic Manager hakkında bilgi edinin [trafik yönlendirme yöntemlerini](traffic-manager-routing-methods.md).
+* [Traffic Manager nasıl çalıştığını](traffic-manager-how-it-works.md)öğrenin.
+* Traffic Manager [uç nokta izleme ve otomatik yük devretme](traffic-manager-monitoring.md)hakkında bilgi edinin.
+* Traffic Manager [trafik yönlendirme yöntemleri](traffic-manager-routing-methods.md)hakkında bilgi edinin.

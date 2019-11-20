@@ -1,30 +1,30 @@
 ---
 author: PatrickFarley
 ms.service: cognitive-services
-ms.subservice: form-recognizer
+ms.subservice: forms-recognizer
 ms.topic: include
 ms.date: 06/27/2019
 ms.author: pafarley
-ms.openlocfilehash: 690219347782aad2140b0a1b0541590c5426c568
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.openlocfilehash: 4079b0cab0126a9750bbb91ca7046aa18dbe9ece
+ms.sourcegitcommit: 36e9cbd767b3f12d3524fadc2b50b281458122dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67459740"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69657890"
 ---
-Form tanıyıcı bu gereksinimleri karşılayan giriş belgeler üzerinde çalışır:
+Form tanıyıcı, bu gereksinimleri karşılayan giriş belgelerinde çalışmaktadır:
 
-* JPG, PNG veya PDF biçiminde olmalıdır (metin veya taranan). Metin katıştırılmış PDF karakter ayıklama ve konumda hata kaybetme riski olduğu için idealdir.
-* Dosya boyutu küçüktür 4 megabayt (MB) olmalıdır.
-* Görüntüler için boyutları 4200 x 4200 piksel ve 50 x 50 piksel arasında olmalıdır.
-* Kağıt belgelerden taranan forms yüksek kaliteli taramalar olması gerekir.
-* Metin Latin alfabesi (İngilizce karakterler) kullanmanız gerekir.
-* Veri (değil resimlerdeki el yazısı) yazdırılan gerekir.
-* Veri anahtarları ve değerleri içermesi gerekir.
-* Anahtarları yukarıda veya değerlerin ancak değil aşağıda sola veya sağa görünür.
+* Biçim JPG, PNG veya PDF olmalıdır (metin veya taranan). Metin katıştırılmış PDF 'Ler en iyisidir çünkü karakter ayıklama ve konumunda hata olasılığı yoktur.
+* PDF 'niz parola kilitliyse, göndermeden önce kilidi kaldırmanız gerekir.
+* Dosya boyutu 4 MB 'tan az olmalıdır.
+* Görüntüler için Boyutlar 600 x 100 piksel ve 4200 x 4200 piksel arasında olmalıdır.
+* Kağıt belgelerinden tarandığında, formlar yüksek kaliteli taramalar olmalıdır.
+* Metin Latin alfabesini (Ingilizce karakterler) kullanmalıdır.
+* Veriler, anahtar ve değer içermelidir.
+* Anahtarlar, değerlerin solunda veya solunda görünebilir, ancak aşağıdan veya sağında yer alabilir.
 
-Form tanıyıcı şu anda bu giriş veri türlerini desteklemez:
+Form tanıyıcı Şu anda bu tür giriş verilerini desteklemez:
 
-* Karmaşık tablolar (iç içe yerleştirilmiş tablolar, birleştirilen üstbilgi veya hücre vb.).
-* Onay kutusu veya radyo düğmeleri.
-* PDF belgeleri 50 sayfaları uzun.
+* Karmaşık tablolar (iç içe tablolar, birleştirilmiş üstbilgiler veya hücreler vb.).
+* Onay kutuları veya radyo düğmeleri.
+* 50 sayfadan daha uzun PDF belgeleri.

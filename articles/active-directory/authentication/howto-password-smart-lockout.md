@@ -1,86 +1,88 @@
 ---
-title: Azure AD kullanarak önleme deneme yanılma saldırıları akıllı kilitleme - Azure Active Directory
-description: Azure Active Directory akıllı kilitleme Kuruluşunuz parolalar tahmin etmeye çalışırken deneme yanılma saldırılarına karşı korumaya yardımcı olur.
+title: Azure AD akıllı kilitleme-Azure Active Directory kullanarak deneme yanılma saldırıları engelleniyor
+description: Azure Active Directory akıllı kilitleme, parolaların tahmin edilmeye çalıştığı deneme yanılma saldırılarına karşı kuruluşunuzun korunmasına yardımcı olur
 services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 06/28/2019
+ms.date: 07/25/2019
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 150ecbdfcc21ee7ec0bf54fd5b824bc93e0c76ce
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: a762009a7aaf1a965333ac573efe55d792c3f04b
+ms.sourcegitcommit: 07700392dd52071f31f0571ec847925e467d6795
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67483315"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70125013"
 ---
-# <a name="azure-active-directory-smart-lockout"></a>Azure Active Directory akıllı kilitleme
+# <a name="azure-active-directory-smart-lockout"></a>Akıllı kilitleme Azure Active Directory
 
-Akıllı kilitleme, kullanıcılarınızın parolaları tahmin veya almak için deneme yanılma yöntemleri kullanmak için çalışan bir kötü aktörleri kilitleme yardımcı olur. Bu geçerli kullanıcılardan gelen oturum açma tanıyabilir ve bunları farklı olanları saldırganlar ve bilinmeyen diğer kaynakları ele almanız. Akıllı kilitleme saldırganlar, izin vermek, kullanıcılarınızın hesaplarına erişmek ve üretken devam ederken kullanıma kilitler.
+Akıllı kilitleme, kullanıcılarınızın parolalarını tahmin etmeye çalışan kötü aktörlerin kilitlenmesini sağlar veya almak için deneme yanılma yöntemlerini kullanır. Geçerli kullanıcılardan gelen oturum açma işlemlerini algılayabilir ve bunları saldırganlar ve diğer bilinmeyen kaynaklardan farklı şekilde ele alabilir. Akıllı kilitleme saldırganları kilitler, böylece kullanıcılarınız hesaplarına erişmeye devam eder ve üretken olabilirler.
 
-Varsayılan olarak, akıllı kilitleme oturum açma denemeleri başarısız olan 10 denemeden sonra bir dakika hesabından kilitler. Sonraki başarısız oturum açma girişimleri, ilk ve sonraki denemeler de daha uzun bir dakika sonra yeniden hesabı kilitler.
+Varsayılan olarak, akıllı kilitleme, hesabı 10 başarısız girişimden bir dakika sonra oturum açma denemelerinde kilitler. Sonraki denemelerde ilk ve daha uzun bir süre sonra, hesap, sonraki başarısız oturum açma denemesinden sonra bir dakika sonra kilitlenir.
 
-Akıllı kilitleme aynı parola kilidi açma sayacı artıyor olmasını önlemek için son üç hatalı parola karmaları izler. Birisi birden çok kez aynı yanlış parola girerse, bu davranış, hesap kilitleme için neden olmaz.
+Akıllı kilitleme, aynı parolanın kilitleme sayacını arttırmaktan kaçınmak için son üç hatalı parola karmalarını izler. Birisi aynı hatalı parolayı birden çok kez girerse, bu davranış hesabın kilitlenmesine neden olmaz.
 
  > [!NOTE]
- > İzleme işlevi karma kimlik doğrulaması, şirket içinde ve bulutta olduğu sürece etkin geçişli kimlik doğrulaması ile müşteriler için kullanılabilir değil.
+ > Karma izleme işlevselliği, kimlik doğrulama etkin olan müşteriler için, bulutta olmayan şirket içi bir işlem olduğu için kullanılamaz.
 
-Akıllı kilitleme her zaman doğru karışımını güvenlik ve kullanılabilirlik sunan bu varsayılan ayarları olan tüm Azure AD müşterileri için açıktır. Akıllı kilitleme ayarları, kuruluşunuza özgü değerlerle özelleştirmesini kullanıcılarınız için Azure AD temel veya daha yüksek lisansı gerektirir.
+AD FS 2016 ve AF FS 2019 kullanan Federasyon dağıtımları, [AD FS Extranet kilitleme ve extranet akıllı kilitleme](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/configure-ad-fs-extranet-smart-lockout-protection)kullanarak benzer avantajları etkinleştirebilir.
 
-Akıllı kilitleme kullanarak orijinal bir kullanıcı hiçbir zaman kilitlenir garanti etmez. Bir kullanıcı hesabı akıllı kilitleme kilitler biz kilitleme orijinal kullanıcı için elimizden geleni deneyin. Kötü aktörleri orijinal kullanıcı hesabı için erişim sağlayamadığı emin olmak kilitleme hizmeti çalışır.  
+Akıllı kilitleme, güvenlik ve kullanışlılığın doğru karışımını sunan bu varsayılan ayarlarla tüm Azure AD müşterileri için her zaman açıktır. Akıllı kilitleme ayarlarının kuruluşunuza özgü değerlerle özelleştirilmesi, kullanıcılarınız için ücretli Azure AD lisanslarına ihtiyaç duyar.
 
-* Her Azure Active Directory veri merkezi kilitleme bağımsız olarak izler. Kullanıcı (threshold_limit * datacenter_count) kullanıcı, her veri merkezi değerse deneme sayısı.
-* Akıllı kilitleme tanıdık vs bilinmeyen konum kötü bir aktör ve orijinal kullanıcı arasında ayırt etmek için kullanır. Tanınmayan ve tanıdık konumları ayrı kilitleme sayaçları sahip olur.
+Akıllı kilitleme kullanmak, orijinal bir kullanıcının hiçbir şekilde kilitlenmeyeceğini garanti etmez. Akıllı kilitleme bir kullanıcı hesabını kilitlediğinde, orijinal kullanıcıyı kilitlemeleri için en iyi şekilde deneme yaptık. Kilitleme hizmeti, kötü aktörlerin orijinal bir kullanıcı hesabına erişmesini sağlamaya çalışır.  
 
-Akıllı kilitleme, saldırganlar tarafından kilitli şirket içi Active Directory hesapları korumak için parola karması eşitleme veya doğrudan kimlik doğrulaması'nı kullanarak, karma dağıtımlar ile tümleştirilebilir. Şirket içi Active Directory ulaşmadan önce akıllı kilitleme ilkeleri Azure AD'de uygun şekilde ayarlayarak saldırıları filtrelenebilen.
+* Her Azure Active Directory veri merkezi, kilitlemeyi bağımsız olarak izler. Kullanıcı her veri merkezini ziyaret eden bir Kullanıcı (threshold_limit * datacenter_count) deneme sayısına sahip olacaktır.
+* Akıllı kilitleme, kötü bir aktör ve orijinal kullanıcı arasında ayrım yapmak için tanıdık konum ve bilinmeyen konum kullanır. Bilmediğiniz ve tanıdık konumların her ikisi de ayrı kilitleme sayaçlarına sahip olur.
 
-Kullanırken [geçişli kimlik doğrulaması](../hybrid/how-to-connect-pta.md), emin olmanız gerekir:
+Akıllı kilitleme karma dağıtımlarla tümleştirilebilir, şirket içi Active Directory hesapların saldırganlar tarafından kilitlenmesini sağlamak için Parola karması eşitlemesi veya geçişli kimlik doğrulaması kullanılarak tümleştirilir. Azure AD 'de akıllı kilitleme ilkelerini uygun şekilde ayarlayarak, saldırılar şirket içi Active Directory erişmeden önce bu saldırıları filtrelenebilir.
 
-* Azure AD kilitleme eşiği **daha az** Active Directory hesap kilitleme eşik değerinden. Böylece Active Directory hesap kilitleme eşiği en az iki veya üç kez Azure AD kilitleme eşik değerinden daha uzun değerleri ayarlayın. 
-* Azure AD kilitleme süresi, Active Directory süreden sonra hesap kilitleme sayacını sıfırla daha uzun olarak ayarlanmalıdır. Azure AD süresi saniye olarak ayarlanır, AD süresi dakika cinsinden ayarlanır unutmayın. 
+[Doğrudan kimlik doğrulaması](../hybrid/how-to-connect-pta.md)kullanırken şunları yaptığınızdan emin olun:
 
-Örneğin, Azure AD sayacı AD yüksek olmasını istiyorsanız, Azure AD AD (60 saniye) 1 dakika olarak ayarlanır, şirket içi sırasında 120 saniye (2 dakika) olacaktır.
+* Azure AD kilitleme eşiği Active Directory hesap kilitleme eşiğinden **daha azdır** . Active Directory hesap kilitleme eşiği, Azure AD kilitleme eşiğinden en az iki veya üç kat daha uzun olacak şekilde değerleri ayarlayın. 
+* Azure AD kilitleme süresi, süreden sonra hesap kilitleme sayacını Active Directory daha uzun bir süre önce ayarlanmalıdır. AD süresi dakika cinsinden ayarlandığında Azure AD süresinin saniye cinsinden ayarlandığını unutmayın. 
+
+Örneğin, Azure AD Sayacınızı AD 'den daha yüksek olmasını istiyorsanız, şirket içi AD 'niz 1 dakikaya (60 saniye) ayarlandığında Azure AD 120 saniye (2 dakika) olacaktır.
 
 > [!IMPORTANT]
-> Şu anda bunlar akıllı kilitleme özelliğini tarafından kilitlenmiş, bir yönetici kullanıcıların bulut hesapları kilidi açılamıyor. Yönetici, kilitleme süresi dolmak üzere beklemeniz gerekir.
+> Şu anda, bir yönetici akıllı kilitleme özelliği tarafından kilitlenmişse kullanıcıların bulut hesaplarının kilidini açamaz. Yöneticinin kilitleme süresinin dolmasını beklemesi gerekir. Ancak Kullanıcı, güvenilen bir cihazdan veya konumdan self servis parola sıfırlama (SSPR) kullanarak kilidini açabilir.
 
-## <a name="verify-on-premises-account-lockout-policy"></a>Şirket içi hesap kilitleme ilkesi doğrulayın
+## <a name="verify-on-premises-account-lockout-policy"></a>Şirket içi hesap kilitleme ilkesini doğrulama
 
-Şirket içi Active Directory hesap kilitleme ilkesi doğrulamak için aşağıdaki yönergeleri kullanın:
+Şirket içi Active Directory hesabı kilitleme ilkenizi doğrulamak için aşağıdaki yönergeleri kullanın:
 
-1. Grup İlkesi Yönetimi Aracı'nı açın.
-2. Örneğin, kuruluşunuzun hesap kilitleme ilkesi içeren bir Grup İlkesi düzenleme **varsayılan etki alanı ilkesi**.
-3. Gözat **Bilgisayar Yapılandırması** > **ilkeleri** > **Windows ayarları** > **güvenlik ayarları**   >  **Hesap ilkeleri** > **hesap kilitleme ilkesi**.
-4. Doğrulayın, **hesap kilitleme eşiği** ve **sonra hesap kilitleme sayacını sıfırla** değerleri.
+1. Grup ilkesi yönetim aracını açın.
+2. Kuruluşunuzun hesap kilitleme ilkesini (örneğin, **varsayılan etki alanı ilkesi**) içeren Grup ilkesini düzenleyin.
+3. **Bilgisayar yapılandırma** > **ilkelerine** **gidin Windows ayarları** **güvenlik ayarları** **Hesap**ilkeleriHesap > kilitleme >  >  >  **İlke**.
+4. **Hesap kilitleme eşikinizi** doğrulayın ve değerlerden **sonra hesap kilitleme sayacını sıfırlayın** .
 
-![Şirket içi Active Directory hesap kilitleme ilkesi](./media/howto-password-smart-lockout/active-directory-on-premises-account-lockout-policy.png)
+![Şirket içi Active Directory hesabı kilitleme ilkesini değiştirme](./media/howto-password-smart-lockout/active-directory-on-premises-account-lockout-policy.png)
 
-## <a name="manage-azure-ad-smart-lockout-values"></a>Azure AD akıllı kilitleme değerleri yönetme
+## <a name="manage-azure-ad-smart-lockout-values"></a>Azure AD akıllı kilitleme değerlerini yönetme
 
-Kuruluş gereksinimlerinize bağlı olarak, akıllı kilitleme değerleri özelleştirilmiş gerekebilir. Akıllı kilitleme ayarları, kuruluşunuza özgü değerlerle özelleştirmesini kullanıcılarınız için Azure AD temel veya daha yüksek lisansı gerektirir.
+Kuruluş gereksinimlerinize bağlı olarak, akıllı kilitleme değerlerinin özelleştirilmesi gerekebilir. Akıllı kilitleme ayarlarının kuruluşunuza özgü değerlerle özelleştirilmesi, kullanıcılarınız için ücretli Azure AD lisanslarına ihtiyaç duyar.
 
-Denetleyin veya kuruluşunuz için akıllı kilitleme değerleri değiştirmek için aşağıdaki adımları kullanın:
+Kuruluşunuzun akıllı kilitleme değerlerini denetlemek veya değiştirmek için aşağıdaki adımları kullanın:
 
-1. Oturum [Azure portalında](https://portal.azure.com), tıklayın **Azure Active Directory**, ardından **kimlik doğrulama yöntemleri**.
-1. Ayarlama **kilitleme eşiği**bağlı olarak kaç başarısız oturum açma hesabınız, ilk kilitlenmeden önce izin verilir. Varsayılan değer 10'dur.
-1. Ayarlama **kilitleme süresini saniye cinsinden**, her kilitleme saniye cinsinden uzunluğu. 60 saniye (bir dakika) varsayılandır.
+1. [Azure Portal](https://portal.azure.com) oturum açın ve **Azure Active Directory** > **kimlik doğrulama yöntemleri** > **parola koruması**' na gidin.
+1. İlk kilitlenmeden önce bir hesapta kaç tane başarısız oturum açma izni verileceğini temel alarak **kilitleme eşiğini**ayarlayın. Varsayılan değer 10 ' dur.
+1. **Kilitleme süresini saniye cinsinden**, her kilitin saniye cinsinden uzunluğu olarak ayarlayın. Varsayılan değer 60 saniyedir (bir dakika).
 
 > [!NOTE]
-> İlk kilitleme ayrıca başarısız olduktan sonra oturum, hesabı yeniden kilitler durumunda. Bir hesabın tekrar tekrar kilitler, kilitleme süresi artar.
+> Kilitleme sonrasında ilk oturum açma işlemi başarısız olursa, hesap yeniden kilitlenir. Bir hesap sürekli olarak kilitlense, kilitleme süresi artar.
 
-![Azure portalında Azure AD akıllı kilitleme ilkesi özelleştirme](./media/howto-password-smart-lockout/azure-active-directory-custom-smart-lockout-policy.png)
+![Azure portal Azure AD akıllı kilitleme ilkesini özelleştirme](./media/howto-password-smart-lockout/azure-active-directory-custom-smart-lockout-policy.png)
 
-## <a name="how-to-determine-if-the-smart-lockout-feature-is-working-or-not"></a>Akıllı kilitleme özelliğini veya çalışıp çalışmadığını belirleme
+## <a name="how-to-determine-if-the-smart-lockout-feature-is-working-or-not"></a>Akıllı kilitleme özelliğinin çalışıp çalışmadığını belirleme
 
 Akıllı kilitleme eşiği tetiklendiğinde, hesap kilitliyken şu iletiyi alırsınız:
 
-**Hesabınız yetkisiz kullanımı önlemek için geçici olarak kilitlendi. Daha sonra yeniden deneyin ve sorun devam ederse yöneticinizle iletişime geçin**
+**Hesabınız yetkisiz kullanımı engellemek için geçici olarak kilitlidir. Daha sonra tekrar deneyin ve sorun yaşamaya devam ediyorsanız yöneticinizle iletişime geçin.**
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure AD kullanarak kuruluşunuzdaki yanlış parolalar yasaklamak öğrenin.](howto-password-ban-bad.md)
-* [Self Servis parola sıfırlamayı kullanıcılara kendi hesaplarının kilidini açmak izin verecek şekilde yapılandırın.](quickstart-sspr.md)
+* [Azure AD kullanarak kuruluşunuzda hatalı parolaların nasıl yapılacağını öğrenin.](howto-password-ban-bad.md)
+* [Kullanıcıların kendi hesaplarının kilidini açmalarına izin vermek için self servis parola sıfırlamayı yapılandırın.](quickstart-sspr.md)

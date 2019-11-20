@@ -1,84 +1,93 @@
 ---
-title: 'Hızlı Başlangıç: Azure Time Series Insights Gezgini | Microsoft Docs'
-description: Bu hızlı başlangıçta, büyük hacimlerdeki IOT verilerini görselleştirmek için Azure Time Series Insights Gezgini ile web tarayıcınızda başlama işlemini göstermektedir. Bir tanıtım ortamında temel özelliklere göz atın.
+title: 'Hızlı başlangıç: Azure Time Series Insights Explorer-Azure Time Series Insights | Microsoft Docs'
+description: Azure Time Series Insights Gezginini kullanmaya nasıl başlaleyeceğinizi öğrenin. Büyük hacimli IoT verilerini görselleştirin ve ortamınızın önemli özelliklerini görselleştirin.
 ms.service: time-series-insights
 services: time-series-insights
-author: ashannon7
+author: deepakpalled
 ms.author: dpalled
 manager: cshankar
-ms.reviewer: v-mamcge, jasonh, kfile
 ms.topic: quickstart
 ms.workload: big-data
 ms.custom: mvc seodec18
-ms.date: 04/22/2019
-ms.openlocfilehash: 415ce28a7cab77c538a7dfb8f387900ff515dd0e
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.date: 11/15/2019
+ms.openlocfilehash: 7bccc75b4a70e98f069d1ffb86909368105b9a32
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67164558"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74167666"
 ---
-# <a name="quickstart-explore-azure-time-series-insights"></a>Hızlı Başlangıç: Azure Time Series Insights’ı keşfedin
+# <a name="quickstart-explore-azure-time-series-insights"></a>Hızlı Başlangıç: Azure Time Series Insights’ı Keşfedin
 
-Bu hızlı başlangıçta Azure Time Series Insights Gezgini ücretsiz bir tanıtım ortamında Time Series Insights ile çalışmaya başlamanıza yardımcı olur. Artık genel kullanıma sunulmuş olan IOT verilerini ve turu anahtar özelliklerini büyük hacimli görselleştirmek için web tarayıcınızı kullanmayı öğrenin.
+Bu Azure Time Series Insights gezgin hızlı başlangıcı, ücretsiz bir tanıtım ortamında Time Series Insights kullanmaya başlamanıza yardımcı olur. Bu hızlı başlangıçta, Web tarayıcınızı kullanarak büyük hacimlerinizde çok sayıda IoT verisi ve genel kullanıma sunulan turu temel özellikleri görselleştirme hakkında bilgi edineceksiniz.
 
-Azure Time Series Insights keşfedin ve milyarlarca IOT olayını aynı anda keşfedip Analiz işlemini kolaylaştıran tam olarak yönetilen bir analiz, depolama ve görselleştirme hizmeti olan. Böylece hızla IOT çözümünüzü doğrulamanıza ve görev açısından kritik cihazlarda, kapalı kalma kaçının, verilerinize ilişkin genel bir görünüm sağlar. Azure Time Series Insights, gizli eğilimleri anormallikleri keşfetmenize ve neredeyse gerçek zamanlı olarak kök neden analizleri gerçekleştirebilir yardımcı olur.
+Azure Time Series Insights, milyarlarca IoT olayını aynı anda keşfedip analiz etmeyi kolaylaştıran tam olarak yönetilen bir analiz, depolama ve görselleştirme hizmetidir. IoT çözümünüzü hızla doğrulayabilmeniz ve görev açısından kritik cihazlara maliyetli kapalı kalma süresi oluşmasını önlemek için verilerinizin genel bir görünümünü sunar. Azure Time Series Insights, gizli eğilimleri keşfetmenize, anormallikleri belirlemenize ve neredeyse gerçek zamanlı olarak kök neden analizleri yürütmenize yardımcı olur.
 
-Daha fazla esneklik için kendi güçlü üzerinden önceden var olan bir uygulama için Azure Time Series Insights ekleyebilirsiniz [REST API'leri](./time-series-insights-update-tsq.md) ve [istemci SDK'sı](./tutorial-create-tsi-sample-spa.md). API'leri, sorgu, depolayın ve tercih ettiğiniz bir istemci uygulamasında zaman serisi verilerini kullanmak için kullanabilirsiniz. İstemci SDK'sı, kullanıcı Arabirimi bileşenleri, varolan bir uygulamaya eklemek için de kullanabilirsiniz.
+Daha fazla esneklik için, güçlü [REST API 'leri](./time-series-insights-update-tsq.md) ve [istemci SDK 'sı](https://github.com/microsoft/tsiclient)aracılığıyla önceden var olan bir uygulamaya Azure Time Series Insights ekleyebilirsiniz. API 'Leri, zaman serisi verilerini depolamak, sorgulamak ve tercih ettiğiniz bir istemci uygulamasında kullanmak için kullanabilirsiniz. Ayrıca, mevcut uygulamanıza Kullanıcı arabirimi bileşenleri eklemek için istemci SDK 'sını de kullanabilirsiniz.
 
-Bu hızlı başlangıçta Time Series Insights Gezgini, artık genel kullanıma sunulmuş olan özellikler için Kılavuzlu bir turu sunar.
+Bu Time Series Insights gezgin hızlı başlangıcı, genel kullanıma sunulan özelliklerin Kılavuzlu turuna sahiptir.
 
-## <a name="prepare-the-demo-environment"></a>Tanıtım ortamı hazırlama
+> [!IMPORTANT]
+> Henüz bir tane oluşturmadıysanız, [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) oluşturun.
 
-1. Oluşturma bir [ücretsiz Azure hesabı](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) , bir henüz oluşturmadıysanız.
+## <a name="prepare-the-demo-environment"></a>Tanıtım ortamını hazırlama
 
-1. Tarayıcınızda, Git [genel kullanılabilirlik tanıtım](https://insights.timeseries.azure.com/demo).
+1. Tarayıcınızda [genel kullanılabilirlik tanıtımı](https://insights.timeseries.azure.com/demo)' na gidin.
 
-1. İstenirse, Time Series Insights Gezgini Azure hesabı kimlik bilgilerinizi kullanarak oturum açın.
+1. İstenirse, Azure hesabı kimlik bilgilerinizi kullanarak Time Series Insights Gezgininde oturum açın.
 
-1. Time Series Insights Hızlı Tur sayfası görüntülenir. Seçin **sonraki** hızlı turu başlatmak için.
+1. Time Series Insights hızlı tur sayfası görüntülenir. Hızlı tura başlamak için **İleri ' yi** seçin.
 
-   [![İleri'yi seçin](media/quickstart/quickstart1.png)](media/quickstart/quickstart1.png#lightbox)
+   [Hızlı başlangıç ![hoş geldiniz-Ileri Seç](media/quickstart/quickstart-welcome.png)](media/quickstart/quickstart-welcome.png#lightbox)
 
-## <a name="explore-the-demo-environment"></a>Tanıtım ortamı keşfedin
+## <a name="explore-the-demo-environment"></a>Tanıtım ortamını keşfet
 
-1. **Zaman seçimi paneline** görüntüler. Görselleştirilecek zaman aralığını seçmek için bu paneli kullanın.
+1. **Zaman seçim paneli** görüntülenir. Görselleştirilecek zaman aralığını seçmek için bu paneli kullanın.
 
-   [![Zaman seçimi paneli](media/quickstart/quickstart2.png)](media/quickstart/quickstart2.png#lightbox)
+   [![zaman seçimi paneli](media/quickstart/quickstart-time-selection-panel.png)](media/quickstart/quickstart-time-selection-panel.png#lightbox)
 
-1. Bir zaman aralığı seçin ve bölgede sürükleyin. Ardından **arama**.
+1. Bir zaman dilimi seçin ve bölgeye sürükleyin. Ardından **Ara**' yı seçin.
 
-   [![Bir zaman aralığı seçin](media/quickstart/quickstart3.png)](media/quickstart/quickstart3.png#lightbox)
+   [zaman dilimi ![seçin](media/quickstart/quickstart-select-time.png)](media/quickstart/quickstart-select-time.png#lightbox)
 
-   Time Series Insights, belirttiğiniz zaman aralığı için bir grafik görselleştirmesi görüntüler. Bunu, çizgi grafik çeşitli eylemler gerçekleştirebilirsiniz. Örneğin, filtreleme, sabitleme, sıralama yığın ve.
+   Time Series Insights, belirttiğiniz zaman aralığı için bir grafik görselleştirmesi görüntüler. Çizgi grafik içinde çeşitli eylemler gerçekleştirebilirsiniz. Örneğin, filtreleyebilir, sabitleyebilir, sıralayabilir ve yığın oluşturabilirsiniz.
 
-   Geri dönmek için **zaman seçimi paneline**, gösterildiği gibi aşağı oku seçin:
+   **Zaman seçimi paneline**dönmek için gösterilen aşağı oku seçin:
 
-   [![Grafik](media/quickstart/quickstart4.png)](media/quickstart/quickstart4.png#lightbox)
+   [Grafik ![](media/quickstart/quickstart-select-down-arrow.png)](media/quickstart/quickstart-select-down-arrow.png#lightbox)
 
-1. Seçin **Ekle** içinde **terimler paneli** yeni bir arama terimi eklemek için.
+1. Yeni bir arama terimi eklemek için **terimler panelinde** **Ekle** ' yi seçin.
 
-   [![Öğe Ekle](media/quickstart/quickstart5.png)](media/quickstart/quickstart5.png#lightbox)
+   [![arama terimleri bölmesi Ekle](media/quickstart/quickstart-add-terms.png)](media/quickstart/quickstart-add-terms.png#lightbox)
 
 1. Grafikte bir bölgeyi seçip bölgeye sağ tıklayabilir ve **Olayları Keşfet**’i seçebilirsiniz.
 
-   [![Olayları keşfet](media/quickstart/quickstart6.png)](media/quickstart/quickstart6.png#lightbox)
+   [Olayları araştırmak ![](media/quickstart/quickstart-explore-events.png)](media/quickstart/quickstart-explore-events.png#lightbox)
 
-   Ham verileriniz bir ızgara, araştırırken, bölgeden görüntüler.
+   Ham verilerinizin bir Kılavuzu, araştırırken bulunan bölgeden görüntülenir.
 
-   [![Izgara Görünümü](media/quickstart/quickstart7.png)](media/quickstart/quickstart7.png#lightbox)
+   [![araştırma-kılavuz veri görünümü](media/quickstart/quickstart-explore-events-grid-data.png)](media/quickstart/quickstart-explore-events-grid-data.png#lightbox)
 
-## <a name="select-and-filter-data"></a>Seçin ve verileri filtreleme
+## <a name="select-and-filter-data"></a>Verileri seçme ve filtreleme
 
-1. Grafikteki değerleri değiştirmek için terimlerinizi düzenleyin. Karşılıklı çapraz-farklı türde değerler olarak ilişkilendirmek için başka bir terim ekleyin.
+1. Grafikteki değerleri değiştirmek için koşullarınızı düzenleyin. Farklı değer türlerini çapraz ilişkilendirmek için başka bir terim ekleyin.
 
-   [![Terim ekleme](media/quickstart/quickstart8.png)](media/quickstart/quickstart8.png#lightbox)
+   [Terim eklemek ![](media/quickstart/quickstart-add-a-term.png)](media/quickstart/quickstart-add-a-term.png#lightbox)
 
-1. Bir filtreleme terimi girin **filtre serisi** improvised seri filtreleme kutusu. Bu hızlı başlangıçta, bir istasyona ait sıcaklığı ve basıncı karşılıklı olarak ilişkilendirmek için **Station5** terimini girin.
+1. Seçili tüm arama terimlerini görmek veya improvised serisi filtreleme için **filtre serisi** kutusuna bir filtre terimi girmek Için, **filtre serisi** kutusunu boş bırakın.
 
-   [![Seriyi Filtrele](media/quickstart/quickstart9.png)](media/quickstart/quickstart9.png#lightbox)
+   [![filtresi serisi](media/quickstart/quickstart-filter-series.png)](media/quickstart/quickstart-filter-series.png#lightbox)
+
+   Bu hızlı başlangıçta, bir istasyona ait sıcaklığı ve basıncı karşılıklı olarak ilişkilendirmek için **Station5** terimini girin.
 
 Hızlı başlangıcı bitirdikten sonra örnek veri kümesiyle deneme yaparak farklı görselleştirmeler oluşturabilirsiniz.
+
+## <a name="clean-up-resources"></a>Kaynakları temizleme
+
+Öğreticiyi tamamladığınıza göre, oluşturduğunuz kaynakları temizleyin:
+
+1. [Azure Portal](https://portal.azure.com)sol menüden **tüm kaynaklar**' ı seçin, Azure Time Series Insights kaynak grubunuzu bulun.
+1. Her kaynağı ayrı ayrı **Sil** veya Kaldır ' a tıklayarak kaynak grubunun tamamını (ve içinde yer alan tüm kaynakları) silin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

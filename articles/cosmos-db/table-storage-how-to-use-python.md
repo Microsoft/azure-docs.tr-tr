@@ -1,6 +1,6 @@
 ---
 title: Python kullanarak Azure Tablo depolamayı ve Azure Cosmos DB Tablo API’sini kullanmaya başlama
-description: Azure Tablo Depolama veya Azure Cosmos DB Tablo API’sini kullanarak yapılandırılmış verileri bulutta depolayın.
+description: Azure Tablo Depolama veya Azure Cosmos DB Tablo API’sini kullanarak bulutta yapılandırılmış veri depolayın.
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.devlang: python
@@ -9,12 +9,12 @@ ms.date: 04/05/2018
 author: wmengmsft
 ms.author: wmeng
 ms.reviewer: sngun
-ms.openlocfilehash: 11b47483eaf39e7445ece8b9e38d81a6a2404cc6
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: 883965d1d59e5523527a6aab1e83521d7491bf82
+ms.sourcegitcommit: 9a4296c56beca63430fcc8f92e453b2ab068cc62
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62130489"
+ms.lasthandoff: 10/20/2019
+ms.locfileid: "72675707"
 ---
 # <a name="get-started-with-azure-table-storage-and-the-azure-cosmos-db-table-api-using-python"></a>Python kullanarak Azure Tablo depolamayı ve Azure Cosmos DB Tablo API’sini kullanmaya başlama
 
@@ -56,7 +56,7 @@ Bir Depolama hesabı oluşturduktan sonraki adımınız [Python için Microsoft 
 
 ## <a name="import-the-tableservice-and-entity-classes"></a>TableService ve Entity sınıflarını içeri aktarma
 
-Python'da Azure Tablo Depolama’daki varlıklarla çalışmak için [TableService][py_TableService] ve [Entity][py_Entity] sınıflarını kullanırsınız. Bunların ikisini de içeri aktarmak için şu kodu Python dosyanızın başına ekleyin:
+Python 'da Azure Tablo hizmetindeki varlıklarla çalışmak için, [Tableservice][py_TableService] ve [varlık][py_Entity] sınıflarını kullanırsınız. Bunların ikisini de içeri aktarmak için şu kodu Python dosyanızın başına ekleyin:
 
 ```python
 from azure.cosmosdb.table.tableservice import TableService
@@ -73,15 +73,15 @@ table_service = TableService(account_name='myaccount', account_key='mykey')
 
 ## <a name="connect-to-azure-cosmos-db"></a>Azure Cosmos DB’ye bağlanma
 
-Azure Cosmos DB'ye bağlanmak için, Azure portaldan birincil bağlantı dizenizi kopyalayın ve kopyaladığınız bağlantı dizesini kullanarak bir [TableService][py_TableService] nesnesi oluşturun:
+Azure Cosmos DB'ye bağlanmak için, Azure portalından birincil bağlantı dizenizi kopyalayın ve kopyaladığınız bağlantı dizesini kullanarak bir [TableService][py_TableService] nesnesi oluşturun:
 
 ```python
-table_service = TableService(connection_string='DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=mykey;TableEndpoint=myendpoint;)
+table_service = TableService(connection_string='DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=mykey;TableEndpoint=myendpoint;')
 ```
 
 ## <a name="create-a-table"></a>Bir tablo oluşturma
 
-Tabloyu oluşturmak için [create_table][py_create_table] işlevini çağırın.
+Tabloyu oluşturmak için [create_table][py_create_table] çağırın.
 
 ```python
 table_service.create_table('tasktable')
@@ -89,16 +89,17 @@ table_service.create_table('tasktable')
 
 ## <a name="add-an-entity-to-a-table"></a>Tabloya bir varlık ekleme
 
-Bir varlık eklemek için önce varlığınızı temsil eden bir nesne oluşturur, sonra bu nesneyi [TableService.insert_entity yöntemine][py_TableService] geçersiniz. Varlık nesnesi bir sözlük veya [Entity][py_Entity] türünde bir nesne olabilir ve varlığınızın özellik adlarını ve değerlerini tanımlar. Her varlık, tanımladığınız diğer özelliklere ek olarak zorunlu [PartitionKey ve RowKey](#partitionkey-and-rowkey) özelliklerini de içermelidir.
+Bir varlık eklemek için öncelikle varlığınızı temsil eden bir nesne oluşturun ve sonra nesneyi [Tableservice. insert_entity yöntemine][py_TableService]geçirin. Varlık nesnesi bir sözlük veya [varlık][py_Entity]türünde bir nesne olabilir ve varlığınızın özellik adlarını ve değerlerini tanımlar. Her varlık, tanımladığınız diğer özelliklere ek olarak zorunlu [PartitionKey ve RowKey](#partitionkey-and-rowkey) özelliklerini de içermelidir.
 
-Bu örnek, bir varlığı temsil eden bir sözlük oluşturmakta, sonra bunu, tabloya eklemek amacıyla [insert_entity][py_insert_entity] yöntemine geçmektedir:
+Bu örnek, bir varlığı temsil eden bir sözlük nesnesi oluşturur, sonra bunu tabloya eklemek için [insert_entity][py_insert_entity] yöntemine geçirir:
 
 ```python
-task = {'PartitionKey': 'tasksSeattle', 'RowKey': '001', 'description' : 'Take out the trash', 'priority' : 200}
+task = {'PartitionKey': 'tasksSeattle', 'RowKey': '001',
+        'description': 'Take out the trash', 'priority': 200}
 table_service.insert_entity('tasktable', task)
 ```
 
-Bu örnek bir [Entity][py_Entity] nesnesi oluşturmakta, sonra bunu, tabloya eklemek amacıyla [insert_entity][py_insert_entity] yöntemine geçmektedir:
+Bu örnek bir [varlık][py_Entity] nesnesi oluşturur ve bunu tabloya eklemek için [insert_entity][py_insert_entity] yöntemine geçirir:
 
 ```python
 task = Entity()
@@ -117,39 +118,44 @@ Table hizmeti, tablo varlıklarını depolama düğümlerine akıllıca dağıtm
 
 ## <a name="update-an-entity"></a>Varlığı güncelleştirme
 
-Bir varlığın tüm özellik değerlerini güncelleştirmek için, [update_entity][py_update_entity] yöntemini çağırın. Bu örnek, mevcut bir varlığın güncelleştirilmiş bir sürümle değiştirilmesini göstermektedir:
+Bir varlığın özellik değerlerini güncelleştirmek için [update_entity][py_update_entity] yöntemini çağırın. Bu örnek, mevcut bir varlığın güncelleştirilmiş bir sürümle değiştirilmesini göstermektedir:
 
 ```python
-task = {'PartitionKey': 'tasksSeattle', 'RowKey': '001', 'description' : 'Take out the garbage', 'priority' : 250}
+task = {'PartitionKey': 'tasksSeattle', 'RowKey': '001',
+        'description': 'Take out the garbage', 'priority': 250}
 table_service.update_entity('tasktable', task)
 ```
 
-Güncelleştirilen varlık zaten mevcut değilse, güncelleştirme işlemi başarısız olur. Bir varlığı mevcut olsun veya olmasın depolamak istiyorsanız, [insert_or_replace_entity][py_insert_or_replace_entity] kullanın. Aşağıdaki örnekte ilk çağrı mevcut varlığı başkasıyla değiştirmektedir. İkinci çağrı, belirtilen PartitionKey ve RowKey değerlerine sahip bir varlık tabloda olmadığından, yeni bir varlık eklemektedir.
+Güncelleştirilen varlık zaten mevcut değilse, güncelleştirme işlemi başarısız olur. Var olup olmadığına bakılmaksızın bir varlığı depolamak istiyorsanız, [insert_or_replace_entity][py_insert_or_replace_entity]kullanın. Aşağıdaki örnekte ilk çağrı mevcut varlığı başkasıyla değiştirmektedir. İkinci çağrı, belirtilen PartitionKey ve RowKey değerlerine sahip bir varlık tabloda olmadığından, yeni bir varlık eklemektedir.
 
 ```python
 # Replace the entity created earlier
-task = {'PartitionKey': 'tasksSeattle', 'RowKey': '001', 'description' : 'Take out the garbage again', 'priority' : 250}
+task = {'PartitionKey': 'tasksSeattle', 'RowKey': '001',
+        'description': 'Take out the garbage again', 'priority': 250}
 table_service.insert_or_replace_entity('tasktable', task)
 
 # Insert a new entity
-task = {'PartitionKey': 'tasksSeattle', 'RowKey': '003', 'description' : 'Buy detergent', 'priority' : 300}
+task = {'PartitionKey': 'tasksSeattle', 'RowKey': '003',
+        'description': 'Buy detergent', 'priority': 300}
 table_service.insert_or_replace_entity('tasktable', task)
 ```
 
 > [!TIP]
-> [update_entity][py_update_entity] yöntemi mevcut bir varlığın tüm özellik ve değerlerini başkalarıyla değiştirir ve mevcut bir varlıktan özellik kaldırma için de kullanılabilir. [merge_entity][py_merge_entity] yöntemini mevcut bir varlığı başkasıyla değiştirmeden yeni veya değiştirilmiş değerler ile güncelleştirmek için kullanabilirsiniz.
+> [Update_entity][py_update_entity] yöntemi var olan bir varlığın tüm özelliklerini ve değerlerini değiştirir ve bu, mevcut bir varlıktan özellikleri kaldırmak için de kullanabilirsiniz. Varlığı tamamen değiştirmeden, var olan bir varlığı yeni veya değiştirilmiş özellik değerleriyle güncelleştirmek için [merge_entity][py_merge_entity] yöntemini kullanabilirsiniz.
 
 ## <a name="modify-multiple-entities"></a>Birden çok varlığı değiştirme
 
-Bir isteğin Table hizmeti tarafından atomik olarak işlendiğinden emin olmak için, birden çok işlemi toplu iş olarak gönderebilirsiniz. Önce birden çok işlemi tek bir toplu işe eklemek için [TableBatch][py_TableBatch] sınıfını kullanın. Ardından, işlemleri atomik bir işlemle göndermek için [TableService][py_TableService].[commit_batch][py_commit_batch] yöntemini çağırın. Toplu bir işlem ile değiştirilecek tüm varlıklar aynı bölümde olmalıdır.
+Bir isteğin Table hizmeti tarafından atomik olarak işlendiğinden emin olmak için, birden çok işlemi toplu iş olarak gönderebilirsiniz. İlk olarak, tek bir toplu iş için birden çok işlem eklemek üzere [Tablebatch][py_TableBatch] sınıfını kullanın. Sonra, [tableservice][py_TableService]'i çağırın. işlemleri atomik bir işlemde göndermek için [commit_batch][py_commit_batch] . Toplu bir işlem ile değiştirilecek tüm varlıklar aynı bölümde olmalıdır.
 
 Bu örnek iki varlığı tek bir toplu işe eklemektedir:
 
 ```python
 from azure.cosmosdb.table.tablebatch import TableBatch
 batch = TableBatch()
-task004 = {'PartitionKey': 'tasksSeattle', 'RowKey': '004', 'description' : 'Go grocery shopping', 'priority' : 400}
-task005 = {'PartitionKey': 'tasksSeattle', 'RowKey': '005', 'description' : 'Clean the bathroom', 'priority' : 100}
+task004 = {'PartitionKey': 'tasksSeattle', 'RowKey': '004',
+           'description': 'Go grocery shopping', 'priority': 400}
+task005 = {'PartitionKey': 'tasksSeattle', 'RowKey': '005',
+           'description': 'Clean the bathroom', 'priority': 100}
 batch.insert_entity(task004)
 batch.insert_entity(task005)
 table_service.commit_batch('tasktable', batch)
@@ -158,8 +164,10 @@ table_service.commit_batch('tasktable', batch)
 Toplu işler bağlam yöneticisi söz dizimiyle de kullanılabilir:
 
 ```python
-task006 = {'PartitionKey': 'tasksSeattle', 'RowKey': '006', 'description' : 'Go grocery shopping', 'priority' : 400}
-task007 = {'PartitionKey': 'tasksSeattle', 'RowKey': '007', 'description' : 'Clean the bathroom', 'priority' : 100}
+task006 = {'PartitionKey': 'tasksSeattle', 'RowKey': '006',
+           'description': 'Go grocery shopping', 'priority': 400}
+task007 = {'PartitionKey': 'tasksSeattle', 'RowKey': '007',
+           'description': 'Clean the bathroom', 'priority': 100}
 
 with table_service.batch('tasktable') as batch:
     batch.insert_entity(task006)
@@ -168,7 +176,7 @@ with table_service.batch('tasktable') as batch:
 
 ## <a name="query-for-an-entity"></a>Varlık sorgulama
 
-Bir tablodaki bir varlığı sorgulamak için, varlığın PartitionKey ve RowKey değerlerini [TableService][py_TableService].[get_entity][py_get_entity] yöntemine geçin.
+Bir tablodaki varlığı sorgulamak için, PartitionKey ve RowKey ' i [Tableservice][py_TableService]'e geçirin. [get_entity][py_get_entity] yöntemi.
 
 ```python
 task = table_service.get_entity('tasktable', 'tasksSeattle', '001')
@@ -176,12 +184,13 @@ print(task.description)
 print(task.priority)
 ```
 
-## <a name="query-a-set-of-entities"></a>Varlık kümesi sorgulama
+## <a name="query-a-set-of-entities"></a>Varlık kümesini sorgulama
 
 Bir varlık kümesini **filter** parametresiyle bir filtre dizesi sağlayarak sorgulayabilirsiniz. Bu örnekte PartitionKey değerine bir filtre uygulanarak Seattle'daki tüm görevler bulunmaktadır:
 
 ```python
-tasks = table_service.query_entities('tasktable', filter="PartitionKey eq 'tasksSeattle'")
+tasks = table_service.query_entities(
+    'tasktable', filter="PartitionKey eq 'tasksSeattle'")
 for task in tasks:
     print(task.description)
     print(task.priority)
@@ -197,14 +206,15 @@ Aşağıdaki kodda yer alan sorgu, tablodaki varlıkların yalnızca açıklamal
 > Aşağıdaki kod parçacığı yalnızca Azure Depolama üzerinde çalışır. Depolama öykünücüsü tarafından desteklenmez.
 
 ```python
-tasks = table_service.query_entities('tasktable', filter="PartitionKey eq 'tasksSeattle'", select='description')
+tasks = table_service.query_entities(
+    'tasktable', filter="PartitionKey eq 'tasksSeattle'", select='description')
 for task in tasks:
     print(task.description)
 ```
 
 ## <a name="delete-an-entity"></a>Bir varlığı silme
 
-Bir varlığı silmek için **PartitionKey** ve **RowKey** değerlerini [delete_entity][py_delete_entity] yöntemine geçin.
+Bir varlığı, **partitionkey** ve **rowkey** değerini [delete_entity][py_delete_entity] yöntemine geçirerek silin.
 
 ```python
 table_service.delete_entity('tasktable', 'tasksSeattle', '001')
@@ -212,7 +222,7 @@ table_service.delete_entity('tasktable', 'tasksSeattle', '001')
 
 ## <a name="delete-a-table"></a>Bir tablo silme
 
-Bir tabloya veya tablodaki varlıklara artık ihtiyacınız yoksa, tabloyu Azure Depolama'dan kalıcı olarak silmek için [delete_table][py_delete_table] yöntemini çağırın.
+Artık bir tabloya veya içindeki varlıklara ihtiyacınız yoksa, tabloyu Azure Storage 'dan kalıcı olarak silmek için [delete_table][py_delete_table] yöntemini çağırın.
 
 ```python
 table_service.delete_table('tasktable')
@@ -223,7 +233,7 @@ table_service.delete_table('tasktable')
 * [SSS - Tablo API'siyle geliştirme](https://docs.microsoft.com/azure/cosmos-db/faq)
 * [Python API'si için Azure Cosmos DB SDK'sı belgeleri](https://docs.microsoft.com/python/api/overview/azure/cosmosdb?view=azure-python)
 * [Python Geliştirici Merkezi](https://azure.microsoft.com/develop/python/)
-* [Microsoft Azure Depolama Gezgini](../vs-azure-tools-storage-manage-with-storage-explorer.md): Windows, macOS ve Linux'ta Azure depolama verileriyle görsel olarak çalışmak için ücretsiz, platformlar arası uygulama.
+* [Microsoft Azure Depolama Gezgini](../vs-azure-tools-storage-manage-with-storage-explorer.md): Windows'da, macOS'te ve Linux'ta Azure Depolama verileriyle görsel olarak çalışmak için ücretsiz, platformlar arası bir uygulama.
 * [Visual Studio'da (Windows) Python ile çalışma](https://docs.microsoft.com/visualstudio/python/overview-of-python-tools-for-visual-studio)
 
 

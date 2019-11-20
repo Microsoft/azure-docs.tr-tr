@@ -6,16 +6,16 @@ author: alkohli
 ms.service: databox
 ms.subservice: gateway
 ms.topic: overview
-ms.date: 04/08/2019
+ms.date: 08/21/2019
 ms.author: alkohli
-ms.openlocfilehash: 2905cae6d5d97062d5a2fc1da41d55290d89fb4a
-ms.sourcegitcommit: 2028fc790f1d265dc96cf12d1ee9f1437955ad87
+ms.openlocfilehash: b8c6b4085f56bc12b67bf87177ba33b82c6a6db9
+ms.sourcegitcommit: d3dced0ff3ba8e78d003060d9dafb56763184d69
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/30/2019
-ms.locfileid: "64924518"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69900581"
 ---
-# <a name="what-is-azure-data-box-gateway"></a>Azure veri kutusu ağ geçidi nedir?
+# <a name="what-is-azure-data-box-gateway"></a>Azure Data Box Gateway nedir?
 
 Azure Data Box Gateway, Azure rahatça veri göndermenize olanak tanıyan bir depolama çözümüdür. Bu makalede Azure Data Box Gateway çözümüne, avantajlarına, önemli özelliklerine ve bu cihazı dağıtabileceğiniz senaryolara genel bir bakış sağlanır.
 
@@ -27,11 +27,11 @@ Bulutta arşivleme, olağanüstü durum kurtarma gibi durumlarda veya verilerini
 
 - **Bulutta arşivleme** - Data Box Gateway'i kullanarak güvenli ve verimli bir yöntemle yüzlerce terabaytlık veriyi Azure depolamaya kopyalayın. Arşivleme senaryoları için veriler tek seferlik veya sürekli olarak alınabilir.
 
-- **Sürekli veri alımı** -sürekli olarak veri boyutundan bağımsız olarak bulut kopyalamak için bir aygıt halinde veri alma. Veri ağ geçidi cihazı için yazıldıkça cihaz verileri Azure Depolama'ya yükler.  
+- **Sürekli veri** alımı-veri boyutundan bağımsız olarak buluta kopyalamak için cihaza verileri sürekli alma. Veri ağ geçidi cihazına yazıldığı için cihaz, verileri Azure depolama 'ya yükler.  
 
-- **İlk toplu aktarımı Artımlı aktarım tarafından izlenen** -toplu kullanım Data Box'a ağ üzerinden bir çevrimdışı moda (ilk çekirdek) ve veri kutusu ağ geçidi artımlı aktarımları (devam eden akış) için aktarın.
+- **İlk toplu aktarım sonrasında artımlı aktarım** , bir çevrimdışı modda (ilk çekirdek) toplu aktarım için Data Box kullanın ve ağ üzerinden artımlı aktarımlar (devam eden akış) için Data Box Gateway.
 
-Daha fazla bilgi için Git [Azure veri kutusu ağ geçidi kullanım örnekleri](data-box-gateway-use-cases.md).
+Daha fazla bilgi için [Azure Data Box Gateway kullanım örneklerine](data-box-gateway-use-cases.md)gidin.
 
 ## <a name="benefits"></a>Avantajlar
 
@@ -39,9 +39,9 @@ Data Box Gateway'in şöyle avantajları vardır:
 
 - **Kolay veri aktarımı**- Verileri Azure depolamasında içeri ve dışarı taşımayı, yerel ağ paylaşımıyla çalışma kadar kolay hale getirir.  
 - **Yüksek performanslı** - Azure'a ve Azure'dan yüksek performanslı aktarımlarla ağda veri taşıma yükünü ortadan kaldırır.
-- **Hızlı erişim ve yüksek veri alımı ücretlerine iş saatlerinde** -veri kutusu ağ geçidi sanal cihaz sağlandığında, yerel kapasite boyutu tanımlayan bir yerel önbellek vardır. Veri disk boyutu olarak başına belirtilmelidir [sanal cihaz en düşük gereksinimler](data-box-gateway-system-requirements.md#specifications-for-the-virtual-device). Yerel önbellek aşağıdaki avantajları sağlar:
-    - Yerel önbellek, yüksek hızda veri alımı sağlar. Yüksek veri miktarı en yüksek çalışma saatleri sırasında alınır, önbellek verileri tutmak ve buluta yükleyin.
-    - Yerel önbellek, belirli bir eşiği kadar hızlı okuma erişimi verir. Cihaz 50-%60 olana kadar tam, CİHAZDAN tüm okuma Hızlı hale getirecek önbellekten da erişilir. Cihaz üzerindeki kullanılan alanın bu eşiğin üzerinde giden sonra cihaz, yerel dosyaları kaldırmak başlar.
+- **İş saatlerinde hızlı erişim ve yüksek veri alma fiyatları** -Data Box Gateway, sanal cihaz sağlandığında yerel kapasite boyutu olarak tanımladığınız yerel bir önbelleğe sahiptir. Veri diski boyutu, [sanal cihaz en düşük gereksinimlerine](data-box-gateway-system-requirements.md#specifications-for-the-virtual-device)göre belirtilmelidir. Yerel önbellek aşağıdaki avantajları sağlar:
+    - Yerel önbellek, yüksek bir hızda veri alımı sağlar. Yoğun iş saatlerinde yüksek miktarda veri yapıldığında, önbellek verileri tutabilir ve buluta yükleyebilir.
+    - Yerel önbellek, belirli bir eşiğe kadar hızlı okuma erişimine izin verir. Cihaz% 50-60 dolu olana kadar cihazdan tüm okuma işlemlerini daha hızlı hale getiren önbellekten erişilir. Cihazdaki kullanılan alan bu eşiğin üzerine gittiğinde, cihaz yerel dosyaları kaldırmaya başlar.
  
 - **Sınırlı bant genişliği kullanımı** - Yoğun iş saatlerinde kullanımı sınırlandırmak amacıyla ağ kısıtlandığında bile veriler Azure'a yazılabilir.  
 
@@ -53,11 +53,10 @@ Data Box Gateway'in şöyle özellikleri vardır:
 |---------|---------|
 |Hız     | Tümüyle otomatik ve son derece iyileştirilmiş veri aktarımı ve bant genişliği.|
 |Desteklenen protokoller     | Veri alımında standart SMB ve NFS protokolleri için destek. <br> Desteklenen sürümler hakkında daha fazla bilgi için bkz. [Data Box Gateway sistem gereksinimleri](data-box-gateway-system-requirements.md).|
-|Veri erişimi     | Cihaz tarafından gönderilen verileri bulutta olduğunda, daha fazla bulut API'lerini doğrudan erişerek değiştirilebilir.|
+|Veri erişimi     | Cihaz tarafından gönderilen veriler bulutta olduğunda, bulut API 'Lerine doğrudan erişerek daha fazla değişiklik yapılabilir.|
 |Hızlı erişim     | En son kullanılan dosyalara hızlı erişim için cihazda yerel önbellek.|
 |Çevrimdışı karşıya yükleme     | Bağlantısız mod, çevrimdışı karşıya yükleme senaryolarını destekler.|
 |Veri yenileme     | Yerel dosyaları buluttaki en son sürümle yenileme olanağı.|
-|Şifreleme    | Verileri yerel olarak şifrelemek ve *https* üzerinden buluta veri aktarımının güvenliğini sağlamak için BitLocker desteği       |
 |Dayanıklılık     | Yerleşik ağ dayanıklılığı        |
 
 
@@ -70,7 +69,7 @@ Data Box Gateway sanal cihazının belirtimleri şöyledir:
 | Sanal işlemciler (çekirdekler)   | En az 4 |
 | Bellek  |En az 8 GB|
 | Kullanılabilirlik|Tek düğüm|
-| Diskler|İşletim sistemi diski: 250 GB <br> Veri diski: 2 TB en, ölçülü kaynak sağlanan ve SSD'ler ile desteklenir|
+| Diskler|İşletim sistemi diski: 250 GB <br> Veri diski: 2 TB en düşük, ölçülü kaynak ve SSD 'Ler tarafından desteklenen olmalıdır|
 | Ağ arabirimleri |1 veya daha çok sanal ağ arabirimi|
 | Yerel dosya paylaşımı protokolleri|SMB ve NFS  |
 | Güvenlik|Cihaza ve verilere erişimin kilidini açmak için kimlik doğrulaması <br> Kullanım halindeki veriler AES-256 bit şifrelemesi kullanılarak şifrelenir|
@@ -82,20 +81,15 @@ Data Box Gateway çözümü Data Box Gateway kaynağından, Data Box Gateway san
 
 - **Data Box Gateway sanal cihazı** - Sanallaştırılmış ortamınızda veya hiper yöneticinizde sağlanan sanal makineye dayalı olan ve Azure'a veri göndermenizi sağlayan cihaz.
     
-- **Data Box Gateway kaynağı** – Azure portalında, farklı coğrafi konumlardan erişebildiğiniz bir web arabiriminde Data Box Gateway cihazını yönetmenize olanak tanıyan bir kaynak. Veri kutusu ağ geçidi kaynağı, cihaz, paylaşımları, kullanıcılar ve Uyarıları görüntülemek ve yönetmek için kullanın. Daha fazla bilgi için bkz. nasıl [Azure portalını kullanarak yönetme](data-box-gateway-manage-shares.md).
+- **Data Box Gateway kaynağı** – Azure portalında, farklı coğrafi konumlardan erişebildiğiniz bir web arabiriminde Data Box Gateway cihazını yönetmenize olanak tanıyan bir kaynak. Cihaz, paylaşım, Kullanıcı ve uyarıları görüntülemek ve yönetmek için Data Box Gateway kaynağını kullanın. Daha fazla bilgi için bkz. [Azure Portal kullanarak yönetme](data-box-gateway-manage-shares.md).
 
-- **Veri kutusu yerel web kullanıcı Arabirimi** - tanılama Çalıştır, kapatma ve cihazı yeniden başlatmak, bir destek paketi oluşturmak için yerel web kullanıcı arabirimini kullanın veya bir hizmet isteği için Microsoft Support başvurun. Daha fazla bilgi için bkz. nasıl [yerel web kullanıcı arabirimini kullanarak yönetme](data-box-gateway-manage-access-power-connectivity-mode.md).
+- **Yerel Web Kullanıcı arabirimini Data Box** -tanılamayı çalıştırmak için yerel Web Kullanıcı arabirimini kullanın, cihazı kapatın ve yeniden başlatın, bir destek paketi oluşturun veya bir hizmet isteği dosyası için Microsoft desteği başvurun. Daha fazla bilgi için bkz. [Yerel Web Kullanıcı arabirimini kullanarak yönetme](data-box-gateway-manage-access-power-connectivity-mode.md).
 
 ## <a name="region-availability"></a>Bölge kullanılabilirliği
 
-Veri kutusu ağ geçidi fiziksel cihazı, Azure kaynak ve hedef depolama hesabına veri aktarımı tümü aynı bölgede olması gerekir.
+Verilerin aktarılacağı fiziksel cihaz, Azure kaynağı ve hedef depolama hesabının tümünün aynı bölgede olması gerekmez. Data Box Gateway
 
-- **Kaynak kullanılabilirliği** -bu sürüm için veri kutusu ağ geçidi kaynak genel bulut desteği aşağıdaki bölgelerde kullanılabilir:
-    - **Amerika Birleşik Devletleri** -Doğu ABD
-    - **Avrupa Birliği** - Batı Avrupa
-    - **Asya Pasifik** -Güney Doğu Asya
-
-    Veri kutusu ağ geçidi de Azure kamu bulutunda dağıtılabilir. Daha fazla bilgi için [Azure Government nedir?](https://docs.microsoft.com/azure/azure-government/documentation-government-welcome).
+- **Kaynak kullanılabilirliği** -Data Box Edge kaynağın kullanılabildiği tüm bölgelerin listesi için, [bölgeye göre kullanılabilir Azure ürünlerine](https://azure.microsoft.com/global-infrastructure/services/?regions=all&products=databox)gidin. Data Box Gateway, Azure Kamu Bulutu 'nda da dağıtılabilir. Daha fazla bilgi için bkz. [Azure Kamu nedir?](https://docs.microsoft.com/azure/azure-government/documentation-government-welcome).
 
 - **Hedef Depolama hesapları**: Verilerin depolandığı depolama hesapları, tüm Azure bölgelerinde sağlanır.
 

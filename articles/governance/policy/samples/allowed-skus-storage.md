@@ -1,20 +1,16 @@
 ---
-title: Örnek - SKU'ları depolama hesapları ve sanal makineler için izin verilir.
-description: Bu örnek ilke tanımı, depolama hesapları ve sanal makineler onaylı SKU'ları kullanmanızı gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-Izin verilen depolama hesabı ve VM SKU 'Ları
+description: Bu örnek ilke tanımı, depolama hesaplarının ve sanal makinelerin onaylanan SKU 'Ları kullanmasını gerektirir.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 088dd8414c93b609326e7cd72828426dcb00fc28
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: fa66dde7c8b6656bb78a7b27ab72cad157029d3b
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61333521"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74071832"
 ---
-# <a name="sample---allowed-skus-for-storage-accounts-and-virtual-machines"></a>Örnek - SKU'ları depolama hesapları ve sanal makineler için izin verilir.
+# <a name="sample---allowed-skus-for-storage-accounts-and-virtual-machines"></a>Depolama hesapları ve sanal makineler için örnek olarak Izin verilen SKU 'Lar
 
 Bu ilke, depolama hesapları ve sanal makinelerin onaylı SKU’lar kullanmasını gerektirir. Onaylı SKU’ları güvence altına almak için yerleşik ilkeleri kullanır. Onaylı bir sanal makine SKU’su dizisi ve onaylı bir depolama hesabı SKU’su dizisi belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke, depolama hesapları ve sanal makinelerin onaylı SKU’lar kullanmasın
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://aka.ms/getpolicy)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://aka.ms/getpolicy)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

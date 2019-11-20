@@ -1,53 +1,47 @@
 ---
-title: Azure coğrafi yapay zeka veri bilimi sanal makinesi - kullanarak | Microsoft Docs
+title: Coğrafi AI kullanma
+titleSuffix: Azure Data Science Virtual Machine
 description: Coğrafi AI veri bilimi sanal makinesi verilerini çözümleme ve Jeo-uzamsal verileri temel alan modelleri oluşturmak için kullanmayı öğrenin.
 keywords: derin öğrenme yapay ZEKA, veri bilimi araçları, veri bilimi sanal makinesi, Jeo-uzamsal analiz
 services: machine-learning
-documentationcenter: ''
-author: gopitk
-manager: cgronlun
-ms.custom: seodec18
-ms.assetid: ''
 ms.service: machine-learning
 ms.subservice: data-science-vm
-ms.workload: data-services
-ms.tgt_pltfrm: na
-ms.devlang: na
+author: vijetajo
+ms.author: vijetaj
 ms.topic: conceptual
 ms.date: 03/05/2018
-ms.author: gokuma
-ms.openlocfilehash: 6e6737e928ece820ea9119d8dfe1d7cf22477646
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 2d7532c51e2963c0dc9f8d02e7a0e32864e80f92
+ms.sourcegitcommit: 32242bf7144c98a7d357712e75b1aefcf93a40cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60406579"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70278427"
 ---
 # <a name="using-the-geo-artificial-intelligence-data-science-virtual-machine"></a>Coğrafi yapay zeka veri bilimi sanal makinesi kullanma
 
-Coğrafi AI veri bilimi sanal makinesi, Jeo-uzamsal bilgi kullanan yapay ZEKA uygulamaları için model derleme analiz için veri alma ve veri denetimi gerçekleştirmek için kullanın. Coğrafi AI veri bilimi sanal makinesi hazırladıktan ve Arcgıs Pro Arcgıs hesabınızla oturum sonra çevrimiçi Arcgıs Arcgıs masaüstü ile etkileşim kurma başlatabilirsiniz. Python arabirimleri ve coğrafi veri bilimi sanal makinesi üzerinde önceden yapılandırılmış bir R dili köprüsü Arcgıs da erişebilirsiniz. Zengin yapay ZEKA uygulamaları oluşturmak için makine öğrenimi ve derin öğrenme çerçeveleri ve diğer veri bilimi sanal makinesi üzerinde kullanılabilir olan veri bilimi yazılım ile birleştirin.  
+Coğrafi AI veri bilimi sanal makinesi, Jeo-uzamsal bilgi kullanan yapay ZEKA uygulamaları için model derleme analiz için veri alma ve veri denetimi gerçekleştirmek için kullanın. Coğrafi AI Veri Bilimi VM'si hazırladıktan ve argıs hesabınızda argıs 'ye oturum açmış olduktan sonra, ArcGIS Desktop ve ArcGIS Online ile etkileşime başlayabilirsiniz. Ayrıca, Python arabirimlerinden ve coğrafi Veri Bilimi VM'si önceden yapılandırılmış bir R dil köprüden argıs 'ye erişebilirsiniz. Zengin yapay zeka uygulamaları oluşturmak için, coğrafi Veri Bilimi VM'si Machine Learning ve derin öğrenme çerçeveleri ve üzerinde kullanılabilen diğer veri bilimi yazılımlarıyla birleştirin.  
 
 
 ## <a name="configuration-details"></a>Yapılandırma ayrıntıları
 
-Python Kitaplığı [arcpy](https://pro.arcgis.com/en/pro-app/arcpy/main/arcgis-pro-arcpy-reference.htm), alışkın olduğu Arcgıs arabirimiyle bulunduğu veri bilimi sanal makinesi genel kök conda ortamının yüklü ```c:\anaconda```. 
+Argıs ile arabirim için kullanılan bir Python kitaplığı olan [arcpy](https://pro.arcgis.com/en/pro-app/arcpy/main/arcgis-pro-arcpy-reference.htm), ' de bulunan ```c:\anaconda```veri bilimi VM'si genel kök Conda ortamına yüklenir.
 
-- Python'ı komut istemi'nde çalıştırıyorsanız, çalıştırma ```activate``` conda kök Python ortamına etkinleştirmek için. 
-- Bir IDE ya da Jupyter Not Defteri kullanıyorsanız, ortam veya doğru conda ortamında olduğundan emin olmak için çekirdek seçebilirsiniz. 
+- Bir komut isteminde Python çalıştırıyorsanız, Conda kök Python ortamında ```activate``` etkinleştirmek için komutunu çalıştırın.
+- IDE veya Jupyter Not Defteri kullanıyorsanız, doğru Conda ortamında olduğunuzdan emin olmak için ortamı veya çekirdeği seçebilirsiniz.
 
-Arcgıs R köprüsüne adlı bir R kitaplık olarak yüklü [arcgisbinding](https://github.com/R-ArcGIS/r-bridge) ana Microsoft r server tek başına örneğini bulunan ```C:\Program Files\Microsoft\ML Server\R_SERVER```. Visual Studio, RStudio ve Jupyter zaten bu R ortam kullanmak üzere önceden yapılandırılmış ve erişimi ```arcgisbinding``` R kitaplığı. 
+R Köprüsü, ' de bulunan ```C:\Program Files\Microsoft\ML Server\R_SERVER```ana Microsoft Machine Learning Server tek başına örneğinde [arcgisbinding](https://github.com/R-ArcGIS/r-bridge) adlı bir R kitaplığı olarak yüklenir. Visual Studio, rstudio ve Jupiter, bu r ortamını kullanmak üzere önceden yapılandırılmıştır ve ```arcgisbinding``` r kitaplığına erişim sahibi olur. 
 
 
 ## <a name="geo-ai-data-science-vm-samples"></a>Coğrafi AI veri bilimi VM örnekleri
 
-ML ve derin öğrenme temel veri bilimi sanal makinesi örneklerini framework tabanlı ek olarak, Jeo-uzamsal örnekler kümesi de coğrafi AI veri bilimi sanal makinesi bir parçası olarak sağlanır. Bu örnekler, Jeo-uzamsal veri ile Arcgıs yazılım yapay ZEKA uygulamaları geliştirme hemen başlayabileceğiniz yardımcı olabilir. 
+Temel Veri Bilimi VM'si makine öğrenimi ve derin öğrenme çerçevesi tabanlı örneklere ek olarak, coğrafi AI Veri Bilimi VM'si bir parçası olarak bir jeo-uzamsal örnek kümesi de sağlanır. Bu örnekler, Jeo-uzamsal verileri ve argıs yazılımlarını kullanarak AI uygulamalarının geliştirilmesine hızlı bir başlangıç yapmanıza yardımcı olabilir:
 
 
-1. [Python ile Jeo-uzamsal analiz ile belirtilen](https://github.com/Azure/DataScienceVM/blob/master/Notebooks/ArcGIS/Python%20walkthrough%20ArcGIS%20Data%20analysis%20and%20ML.ipynb): Tarafından sağlanan Arcgıs Python arabirimi kullanarak Jeo-uzamsal veri ile nasıl çalışılacağını gösteren bir tanıtıcı örnek [arcpy](https://pro.arcgis.com/en/pro-app/arcpy/main/arcgis-pro-arcpy-reference.htm) kitaplığı. Ayrıca, geleneksel makine öğrenimi Jeo-uzamsal verilerle birleştirmek ve içinde Arcgıs harita üzerinde sonucun görselleştirilmesi nasıl gösterir. 
+1. [Python ile Jeo-uzamsal analizler ile çalışmaya](https://github.com/Azure/DataScienceVM/blob/master/Notebooks/ArcGIS/Python%20walkthrough%20ArcGIS%20Data%20analysis%20and%20ML.ipynb)başlama: ArcGIS için Python arabirimi aracılığıyla Jeo uzamsal verilerle çalışmayı gösteren bir giriş örneği, [arcpy](https://pro.arcgis.com/en/pro-app/arcpy/main/arcgis-pro-arcpy-reference.htm) kitaplığı tarafından sağlanır. Ayrıca, geleneksel makine öğrenimini Jeo-uzamsal verilerle birleştirmeyi ve sonra da bu sonuçları ArcGIS 'deki bir haritada görselleştirmeyi gösterir.
 
-2. [R ile Jeo-uzamsal analiz ile belirtilen](https://github.com/Azure/DataScienceVM/blob/master/Notebooks/ArcGIS/R%20walkthrough%20ArcGIS%20Data%20analysis%20and%20ML.ipynb): R tarafından sağlanan Arcgıs arabirimi kullanarak Jeo-uzamsal veri ile nasıl çalışılacağını gösteren bir tanıtım örnek [arcgisbinding](https://github.com/R-ArcGIS/r-bridge) kitaplığı. 
+2. [R ile Jeo-uzamsal analizler ile çalışmaya](https://github.com/Azure/DataScienceVM/blob/master/Notebooks/ArcGIS/R%20walkthrough%20ArcGIS%20Data%20analysis%20and%20ML.ipynb)başlama: [Arcgisbinding](https://github.com/R-ArcGIS/r-bridge) kitaplığı tarafından sağlanan ArcGIS için R arabirimini kullanarak Jeo-uzamsal verilerle çalışmayı gösteren bir giriş örneği. 
 
-3. [Piksel düzeyinde land kullanmak sınıflandırma](https://github.com/Azure/pixel_level_land_classification): Havadan bir girdi olarak kabul edip land kapak etiketi döndürür derin sinir ağı modelinin nasıl oluşturulacağını gösteren öğretici. "Forested" veya "su" örnekler land kapak etiketleri Model görüntüdeki gibi her piksel etiketini döndürür. Microsoft'un açık kaynaklı kullanarak oluşturulmuş model [Cognitive Toolkit (CNTK)](https://www.microsoft.com/en-us/cognitive-toolkit/) derin öğrenme. 
+3. [Piksel düzeyinde Land kullanım sınıflandırması](https://github.com/Azure/pixel_level_land_classification): Giriş olarak havadan oluşan bir görüntüyü kabul eden ve bir Land Kapla etiketi döndüren derin bir sinir ağ modelinin nasıl oluşturulacağını gösteren bir öğretici. Kara-kapak etiketlerinin örnekleri *, ve* *su*. Model görüntüdeki gibi her piksel etiketini döndürür. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
@@ -55,4 +49,3 @@ ML ve derin öğrenme temel veri bilimi sanal makinesi örneklerini framework ta
 Veri bilimi sanal makinesi kullanan ek örnekleri şuradan ulaşılabilir:
 
 * [Örnekler](dsvm-samples-and-walkthroughs.md)
-

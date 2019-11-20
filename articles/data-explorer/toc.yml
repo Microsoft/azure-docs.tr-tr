@@ -15,7 +15,13 @@
       href: web-query-data.md
 - name: Öğreticiler
   items:
-    - name: Kod kullanmadan verileri alma
+    - name: E2E program aracılığıyla Blob alma
+      items:
+        - name: 'C#'
+          href: end-to-end-csharp.md
+        - name: Python
+          href: end-to-end-python.md
+    - name: İzleme verilerini alma ve sorgulama
       href: ingest-data-no-code.md
     - name: Power BI’da verileri görselleştirme
       href: visualize-power-bi.md
@@ -38,12 +44,38 @@
           href: create-cluster-database-csharp.md
         - name: Python
           href: create-cluster-database-python.md
+        - name: Azure Resource Manager şablonu
+          href: create-cluster-database-resource-manager.md
     - name: Veriyi çekme
       items:
         - name: Olay Hub'ı
-          href: ingest-data-event-hub.md
+          items:
+            - name: Azure portal
+              href: ingest-data-event-hub.md
+            - name: python
+              href: data-connection-event-hub-python.md
+            - name: 'C#'
+              href: data-connection-event-hub-csharp.md
         - name: Event Grid
-          href: ingest-data-event-grid.md
+          items:
+            - name: Azure portal
+              href: ingest-data-event-grid.md
+            - name: python
+              href: data-connection-event-grid-python.md
+            - name: 'C#'
+              href: data-connection-event-grid-csharp.md
+        - name: IoT Hub
+          items:
+            - name: Azure portal
+              href: ingest-data-iot-hub.md
+            - name: python
+              href: data-connection-iot-hub-python.md
+            - name: 'C#'
+              href: data-connection-iot-hub-csharp.md
+        - name: Tek tıklamayla veri alımı
+          href: ingest-data-one-click.md
+        - name: Akış alımı
+          href: ingest-data-streaming.md
         - name: Kafka
           href: ingest-data-kafka.md
         - name: Python
@@ -56,16 +88,14 @@
           href: ingest-data-logstash.md
         - name: Azure Data Factory kullanarak veri kopyalama
           href: data-factory-load-data.md
-    - name: Dağıtma
-      items:
-        - name: DevOps görevi
-          href: devops.md
     - name: Verileri sorgulama
       items:
         - name: Sorgu yazma
           href: write-queries.md
         - name: Azure Data Lake’te verileri sorgulama
           href: data-lake-query-data.md
+        - name: Azure İzleyici’de verileri sorgulama
+          href: query-monitor-data.md
         - name: Python
           href: python-query-data.md
         - name: Zaman Serisi Analizi ve Makine Öğrenmesi
@@ -80,12 +110,20 @@
       items:
         - name: Power BI
           items:
+            - name: En iyi uygulamalar
+              href: power-bi-best-practices.md
             - name: bağlayıcı
               href: power-bi-connector.md
             - name: içeri aktarılan sorgu
               href: power-bi-imported-query.md
             - name: SQL sorgusu
               href: power-bi-sql-query.md
+        - name: Excel
+          items:
+            - name: bağlayıcı
+              href: excel-connector.md
+            - name: boş sorgu
+              href: excel-blank-query.md
         - name: Grafana
           href: grafana.md
         - name: ODBC bağlayıcısı
@@ -94,32 +132,68 @@
           href: tableau.md
         - name: Sisense
           href: sisense.md
+        - name: Redash
+          href: redash.md
     - name: Yönetme
       items:
-        - name: Veritabanı izinlerini yönetme
-          href: manage-database-permissions.md
-        - name: Küme durumunu denetleme
-          href: check-cluster-health.md
-        - name: Küme ölçeği genişlemesini yönetme
-          href: manage-cluster-scale-out.md
-        - name: Küme ölçeği artmasını yönetme
-          href: manage-cluster-scale-up.md
-        - name: Verileri silme
-          href: delete-data.md
-        - name: Yinelenen verilerle ilgilenme
-          href: dealing-with-duplicates.md
+        - name: Küme
+          items:
+            - name: Küme VM SKU’su seçme
+              href: manage-cluster-choose-sku.md
+            - name: Kümelerin yatay ölçeklemesini yönetme
+              href: manage-cluster-horizontal-scaling.md
+            - name: Kümelerin dikey ölçeklemesini yönetme
+              href: manage-cluster-vertical-scaling.md
+            - name: Küme güvenliğini yönetme
+              href: manage-cluster-security.md
+            - name: Küme durumunu denetleme
+              href: check-cluster-health.md
+        - name: Database
+          items:
+            - name: Takipçi veritabanları
+              href: follower.md
+            - name: Veritabanı izinlerini yönetme
+              href: manage-database-permissions.md
+            - name: İlkeler
+              items:
+                - name: 'C#'
+                  href: database-table-policies-csharp.md
+                - name: Python
+                  href: database-table-policies-python.md
+        - name: Veriler
+          items:
+            - name: Verileri silme
+              href: delete-data.md
+            - name: Yinelenen verilerle ilgilenme
+              href: dealing-with-duplicates.md
+    - name: Dağıtma
+      items:
+        - name: Kümenizi sanal ağınızda dağıtma
+          href: vnet-deployment.md
     - name: İzleme
       items:
+        - name: Veri alımını izlemek için tanılama günlüklerini kullanma
+          href: using-diagnostic-logs.md
         - name: Kümelerin sistem durumunu izlemek için ölçümleri kullanma
           href: using-metrics.md
     - name: Diğer araçlarla tümleştirme
       items:
+        - name: Azure Data Factory
+          items:
+            - name: Data Factory ile tümleştirme
+              href: data-factory-integration.md
+            - name: Azure Data Factory kullanarak toplu veri kopyalama
+              href: data-factory-template.md
+            - name: Azure Data Factory kullanarak denetim komutlarını çalıştırma
+              href: data-factory-command-activity.md
         - name: Apache Spark Bağlayıcısı
           href: spark-connector.md
         - name: Python kullanarak Databricks'ten bağlanma
           href: connect-from-databricks.md
         - name: Jupyter Notebook ve Kqlmagic’te verileri analiz etme
           href: kqlmagic.md
+        - name: Azure Pipelines
+          href: devops.md
     - name: Sorun giderme
       items:
         - name: Küme oluşturma
@@ -154,9 +228,13 @@
           href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureKusto'
     - name: Ürün geri bildirimi
       href: 'https://aka.ms/adefeedback'
-    - name: Fiyatlandırma
-      href: 'https://azure.microsoft.com/pricing/details/data-explorer/'
-    - name: Maliyet Tahmin Aracı
-      href: 'https://aka.ms/adecostestimator'
+    - name: Fiyatlandırma ve faturalandırma
+      items:
+        - name: Fiyatlandırma sayfası
+          href: 'https://azure.microsoft.com/pricing/details/data-explorer/'
+        - name: Maliyet tahmin aracı
+          href: 'https://aka.ms/adecostestimator'
+        - name: Ayrılmış kapasite
+          href: pricing-reserved-capacity.md
     - name: Hizmet güncelleştirmeleri
       href: 'https://azure.microsoft.com/updates/?product=data-explorer'

@@ -1,5 +1,5 @@
 ---
-title: Azure PowerShell Betiği Örneği - Aynı veya farklı abonelikteki bir depolama hesabında VHD dosyasından yönetilen disk oluşturma | Microsoft Docs
+title: Azure PowerShell Betiği Örneği - Aynı veya farklı abonelikteki bir depolama hesabında VHD dosyasından yönetilen disk oluşturma
 description: Azure PowerShell Betiği Örneği - Aynı veya farklı abonelikteki bir depolama hesabında VHD dosyasından yönetilen disk oluşturma
 services: virtual-machines-windows
 documentationcenter: storage
@@ -9,18 +9,17 @@ editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 06/05/2017
 ms.author: ramankum
-ms.openlocfilehash: 4ddfd7ac0ce17115d3e2852cefeec5a5fc2068e4
-ms.sourcegitcommit: 1aefdf876c95bf6c07b12eb8c5fab98e92948000
+ms.openlocfilehash: 69d6a938be6b1a9902289b3731342440c6c5aea5
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66728011"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037131"
 ---
 # <a name="create-a-managed-disk-from-a-vhd-file-in-a-storage-account-in-same-or-different-subscription-with-powershell"></a>PowerShell kullanarak aynı veya farklı abonelikteki bir depolama hesabında VHD dosyasından yönetilen disk oluşturma
 
@@ -30,9 +29,8 @@ Kısa sürede bir VHD dosyasından birden fazla aynı yönetilen disk oluşturma
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
 ## <a name="sample-script"></a>Örnek betik
 
@@ -45,8 +43,8 @@ Bu betik, farklı abonelikteki bir VHD’den yönetilen disk oluşturmak için a
 
 | Komut | Notlar |
 |---|---|
-| [Yeni AzDiskConfig](https://docs.microsoft.com/powershell/module/az.compute/New-AzDiskConfig) | Disk oluşturmak için kullanılan disk yapılandırmasını oluşturur. Üst VHD’nin depolandığı depolama hesabının depolama türünü, konumunu, kaynak kimliğini ve üst VHD’nin VHD URI’sini içerir. |
-| [Yeni AzDisk](https://docs.microsoft.com/powershell/module/az.compute/New-AzDisk) | Parametre olarak geçirilen disk yapılandırmasını, disk adını ve kaynak grubu adını kullanarak bir disk oluşturur. |
+| [New-AzDiskConfig](https://docs.microsoft.com/powershell/module/az.compute/New-AzDiskConfig) | Disk oluşturmak için kullanılan disk yapılandırmasını oluşturur. Üst VHD’nin depolandığı depolama hesabının depolama türünü, konumunu, kaynak kimliğini ve üst VHD’nin VHD URI’sini içerir. |
+| [New-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/New-AzDisk) | Parametre olarak geçirilen disk yapılandırmasını, disk adını ve kaynak grubu adını kullanarak bir disk oluşturur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

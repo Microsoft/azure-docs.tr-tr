@@ -1,36 +1,36 @@
 ---
-title: Yük devretme ve Azure Site Recovery hizmeti ile olağanüstü durum kurtarma için ikincil Azure bölgesine çoğaltılmış Azure Vm'lerini yeniden koruyun.
-description: Yük devretme ve Azure Site Recovery hizmeti ile olağanüstü durum kurtarma için ikincil Azure bölgesine çoğaltılmış Azure Vm'lerini yeniden koruma hakkında bilgi edinin.
+title: Azure Site Recovery hizmeti ile olağanüstü durum kurtarma için ikincil bir Azure bölgesine çoğaltılan Azure VM 'lerinin yükünü devretmek ve yeniden koruyun.
+description: Azure Site Recovery hizmeti ile olağanüstü durum kurtarma için ikincil bir Azure bölgesine çoğaltılan Azure VM 'lerinin yükünü devretme ve yeniden koruma hakkında bilgi edinin.
 services: site-recovery
 author: rayne-wiselman
 manager: carmonm
 ms.service: site-recovery
 ms.topic: tutorial
-ms.date: 07/01/2019
+ms.date: 08/05/2019
 ms.author: raynew
 ms.custom: mvc
-ms.openlocfilehash: 836b6bb76ff608fed0f34e40fe450d593fec540a
-ms.sourcegitcommit: 6cb4dd784dd5a6c72edaff56cf6bcdcd8c579ee7
+ms.openlocfilehash: 9bc0d25e19ad3412e62eb3386b0faf3ae5d2a444
+ms.sourcegitcommit: f7998db5e6ba35cbf2a133174027dc8ccf8ce957
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67514165"
+ms.lasthandoff: 08/05/2019
+ms.locfileid: "68782585"
 ---
-# <a name="fail-over-and-reprotect-azure-vms-between-regions"></a>Yük devretme ve bölgeleri arasında Azure Vm'lerini yeniden koruma
+# <a name="fail-over-and-reprotect-azure-vms-between-regions"></a>Bölgeler arasında Azure VM 'Leri yük devretme ve yeniden koruma
 
-Bu öğreticide bir Azure sanal makine (VM) üzerinden yük devredebilir ile ikincil bir Azure bölgesine açıklar [Azure Site Recovery](site-recovery-overview.md) hizmeti. Yük devrettikten sonra VM'yi yeniden koruyun. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide, Azure sanal makinesi 'nin (VM) [Azure Site Recovery](site-recovery-overview.md) hizmeti ile Ikincil bir Azure bölgesine yük devretme işlemi açıklanmaktadır. Yük devretdikten sonra, sanal makineyi yeniden koruyabilirsiniz. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Azure VM’ye yük devretme
-> * Birincil bölgeye çoğaltır, böylece ikincil Azure VM'yi yeniden koruyun.
+> * İkincil Azure VM 'sini birincil bölgeye çoğaltan şekilde yeniden koruyun.
 
 > [!NOTE]
-> Bu öğreticide, varsayılan ayarlar ve en az özelleştirme en basit yolu içerir. Daha karmaşık senaryolarda, Azure Vm'leri için 'Nasıl yapılır' altında makaleleri kullanın.
+> Bu öğretici, varsayılan ayarlara ve en düşük özelleştirmeye sahip en basit yolu içerir. Daha karmaşık senaryolar için, Azure VM 'Leri için ' nasıl yapılır ' altındaki makaleleri kullanın.
 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Başlamadan önce gözden [sık sorulan sorular](site-recovery-faq.md#failover) yük devretme hakkında.
+- Başlamadan önce, yük devretme hakkında [sık sorulan soruları](site-recovery-faq.md#failover) gözden geçirin.
 - Her şeyin beklenildiği gibi çalışıp çalışmadığını denetlemek için bir [olağanüstü durum kurtarma tatbikatını](azure-to-azure-tutorial-dr-drill.md) tamamladığınızdan emin olun.
 - Yük devretme testini çalıştırmadan önce VM özelliklerini doğrulayın. VM, [Azure gereksinimlerine](azure-to-azure-support-matrix.md#replicated-machine-operating-systems) uymalıdır.
 
@@ -38,25 +38,25 @@ Bu öğreticide bir Azure sanal makine (VM) üzerinden yük devredebilir ile iki
 
 1. **Çoğaltılmış öğeler** bölümünde, yük devretmek istediğiniz VM’yi seçin > **Yük devretme**
 
-   ![Yük devretme](./media/azure-to-azure-tutorial-failover-failback/failover.png)
+   ![Yük devret](./media/azure-to-azure-tutorial-failover-failback/failover.png)
 
 2. **Yük devretme** kısmında, yük devredeceğiniz bir **Kurtarma Noktası** seçin. Şu seçeneklerden birini kullanabilirsiniz:
 
-   * **En son** (varsayılan): Site Recovery hizmetindeki tüm verileri işler ve en düşük kurtarma noktası hedefi (RPO) sağlar.
-   * **En son işlenen**: Site Recovery hizmeti tarafından işlenen en son kurtarma noktasını sanal makineye geri döner.
-   * **Özel**: Belirli kurtarma noktasına devreder. Bu seçenek, bir yük devretme testi gerçekleştirmek için faydalıdır.
+   * **En son** (varsayılan): Site Recovery hizmetindeki tüm verileri işler ve en düşük kurtarma noktası hedefini (RPO) sağlar.
+   * **En son işlenen**: Sanal makineyi Site Recovery hizmeti tarafından işlenen en son kurtarma noktasına geri döndürür.
+   * **Özel**: Belirli bir kurtarma noktasına yük devreder. Bu seçenek, bir yük devretme testi gerçekleştirmek için faydalıdır.
 
-3. Seçin **yük devretmeye başlamadan önce makineyi Kapat** Site Recovery, yük devretmeyi tetiklemeden önce kaynak sanal makineleri kapatmayı denemek istiyorsanız. Kapatma, veri kaybı olmadan sağlamaya yardımcı olur. Kapatma işlemi başarısız olsa bile yük devretme devam eder. Site Recovery temiz kaynak yük devretme sonrasında yukarı değil.
+3. Yük devretmeyi tetiklemeden önce Site Recovery kaynak VM 'Leri kapatmayı denemek istiyorsanız, **yük devretmeye başlamadan önce makineyi Kapat ' ı** seçin. Kapalı, veri kaybı olmamasını sağlamaya yardımcı olur. Kapatma işlemi başarısız olsa bile yük devretme devam eder. Site Recovery yük devretmeden sonra kaynağı temizlemez.
 
 4. Yük devretme ilerleme durumunu **İşler** sayfasından takip edin.
 
 5. Yük devretmeden sonra, sanal makineyi doğrulamak için makinede oturum açın. Sanal makine için başka bir kurtarma noktasına gitmek istiyorsanız, **Kurtarma noktasını değiştir** seçeneğini kullanabilirsiniz.
 
 6. Yük devredilmiş sanal makineden memnun kaldığınızda, yük devretmeyi **Yürütebilirsiniz**.
-   Yürütme işlemi, hizmette kullanılabilir olan tüm kurtarma noktalarını siler. Artık kurtarma noktasını değiştirmesi mümkün olmayacaktır.
+   Yürütme işlemi, hizmette kullanılabilir olan tüm kurtarma noktalarını siler. Artık kurtarma noktasını değiştiremeyeceksiniz.
 
 > [!NOTE]
-> Sanal makine için çoğaltmayı etkinleştirdikten sonra bir disk eklemeniz VM yük devretme, çoğaltma noktaları kurtarma için kullanılabilir olan diskler gösterir. Örneğin, bir sanal makine tek bir diske sahiptir ve yeni bir tane ekleyin, disk eklemeden önce oluşturulan çoğaltma noktaları "2 disk 1" çoğaltma noktası içerdiğini gösterir.
+> VM için çoğaltmayı etkinleştirdikten sonra disk ekleyeceğiniz bir VM 'nin yükünü devretmek, çoğaltma noktaları, kurtarma için kullanılabilen diskleri gösterir. Örneğin, bir VM 'nin tek bir diski varsa ve yeni bir tane eklerseniz, diski eklemeden önce oluşturulan çoğaltma noktaları, çoğaltma noktasının "1/2 diskten" oluştuğunu gösterir.
 
 ![Eklenen bir disk ile yük devretme](./media/azure-to-azure-tutorial-failover-failback/failover-added.png)
 
@@ -69,10 +69,10 @@ VM’nin yük devretmesinden sonra, birincil bölgeye geri çoğaltması için V
 
    ![Yeniden korumaya sağ tıklayın](./media/azure-to-azure-tutorial-failover-failback/reprotect.png)
 
-2. Koruma, birincil bölgeden yönünü zaten seçili olduğunu doğrulayın.
-3. **Kaynak grubu, Ağ, Depolama ve Kullanılabilirlik kümeleri** bilgilerini gözden geçirin. Yeni olarak işaretli tüm kaynaklar yeniden koruma işleminin bir parçası olarak oluşturulur.
+2. Birincil bölgeye kadar olan koruma yönünün zaten seçili olduğunu doğrulayın.
+3. **Kaynak grubu, Ağ, Depolama ve Kullanılabilirlik kümeleri** bilgilerini gözden geçirin. Yeni olarak işaretlenen tüm kaynaklar yeniden koruma işleminin bir parçası olarak oluşturulur.
 4. Yeniden koruma işini tetiklemek için **Tamam**’a tıklayın. Bu iş, hedef siteye en son verileri sağlar. Ardından, deltaları birincil bölgeye çoğaltır. VM artık korunan bir durumdadır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Yeniden korunuyor sonra [öğrenin nasıl](azure-to-azure-tutorial-failback.md) uygun olduğunda birincil bölgeye geri başarısız.
-- [Daha fazla bilgi edinin](azure-to-azure-how-to-reprotect.md#what-happens-during-reprotection) yeniden koruma akışla ilgili.
+- Yeniden koruma altına aldıktan sonra, kullanılabilir olduğunda birincil bölgeye nasıl yeniden yük [devredebileceğinizi öğrenin](azure-to-azure-tutorial-failback.md) .
+- Yeniden koruma akışı hakkında [daha fazla bilgi edinin](azure-to-azure-how-to-reprotect.md#what-happens-during-reprotection) .

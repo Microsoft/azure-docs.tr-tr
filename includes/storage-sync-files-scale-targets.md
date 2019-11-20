@@ -2,33 +2,33 @@
 title: include dosyası
 description: include dosyası
 services: storage
-author: wmgries
+author: roygara
 ms.service: storage
 ms.topic: include
 ms.date: 05/05/2019
-ms.author: wgries
+ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: 2614c9290bf31813d59ee753a31622bccf0682b8
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: c04875f92ee58c24567fbb4d73d8d01697810f99
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188578"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72391813"
 ---
-| Resource | Hedef | Sabit sınırı |
+| Kaynak | Hedefleyin | Sabit sınır |
 |----------|--------------|------------|
-| Bölge başına depolama Eşitleme Hizmetleri | 20 depolama Eşitleme Hizmetleri | Evet |
-| Depolama eşitleme hizmeti başına eşitleme grupları | 100 eşitleme grupları | Evet |
-| Depolama eşitleme hizmeti başına kayıtlı sunucular | 99 sunucuları | Evet |
-| Bulut uç noktaları her eşitleme grubu | 1 bulut uç noktası | Evet |
-| Sunucu uç noktaları her eşitleme grubu | 50 sunucu uç noktaları | Hayır |
-| Sunucu başına sunucu uç noktaları | 30 sunucu uç noktaları | Evet |
-| Dosya sistemi nesneleri (dizinler ve dosyalar) her bir eşitleme grubu | 25 milyon nesneleri | Hayır |
-| Dosya sistemi nesneleri (dizinleri ve dosyaları) bir dizinde en fazla sayısı | 1 milyon nesneleri | Evet |
-| En büyük nesne (dizinler ve dosyalar) güvenlik tanımlayıcısı boyutu | 64 KiB | Evet |
+| Bölge başına depolama Eşitleme Hizmetleri | 20 depolama eşitleme hizmeti | Yes |
+| Depolama eşitleme hizmeti başına eşitleme grupları | 100 eşitleme grupları | Yes |
+| Depolama eşitleme hizmeti başına kayıtlı sunucular | 99 sunucu | Yes |
+| Eşitleme grubu başına bulut uç noktaları | 1 bulut uç noktası | Yes |
+| Eşitleme grubu başına sunucu uç noktaları | 50 sunucu uç noktaları | Hayır |
+| Sunucu başına sunucu uç noktaları | 30 sunucu uç noktası | Yes |
+| Eşitleme grubu başına dosya sistemi nesneleri (dizinler ve dosyalar) | 50.000.000 nesneleri | Hayır |
+| Bir dizindeki en fazla dosya sistemi nesnesi (Dizin ve dosya) sayısı | 5\.000.000 nesneleri | Yes |
+| En fazla nesne (dizinler ve dosyalar) güvenlik tanımlayıcısı boyutu | 64 KiB | Yes |
 | Dosya boyutu | 100 GiB | Hayır |
-| Katmanlanmış bir dosyanın en küçük dosya boyutu | 64 KiB | Evet |
-| Eşzamanlı bir eşitleme oturumları | V4 aracı ve daha sonra: Kullanılabilir sistem kaynaklarına göre değişiklik gösterir. <BR> V3 aracı: İşlemci veya en fazla sunucu başına sekiz etkin eşitleme oturumu başına iki active sync oturum. | Evet
+| Katman oluşturulacak bir dosya için en küçük dosya boyutu | 64 KiB | Yes |
+| Eşzamanlı eşitleme oturumları | V4 Aracısı ve üzeri: sınır, kullanılabilir sistem kaynaklarına göre farklılık gösterir. <BR> V3 Aracısı: işlemci başına Iki etkin eşitleme oturumu veya sunucu başına en fazla sekiz etkin eşitleme oturumu. | Yes
 
 > [!Note]  
-> Bir Azure dosya eşitleme uç noktası için bir Azure dosya paylaşımı boyutunu ölçeklendirebilirsiniz. Azure dosya paylaşımı boyutu sınırına ulaşıldığında, eşitleme çalışılacak mümkün olmayacaktır.
+> Azure Dosya Eşitleme uç noktası, bir Azure dosya paylaşımının boyutuna kadar ölçeklendirilebilir. Azure dosya paylaşımının boyut sınırına ulaşıldığında, eşitleme çalışamayacak.

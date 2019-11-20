@@ -1,230 +1,231 @@
 ---
 title: 'Öğretici: Mitel Connect ile Azure Active Directory Tümleştirmesi | Microsoft Docs'
-description: Azure Active Directory ve Mitel bağlanmak arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+description: Azure Active Directory ve Mitel Connect arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
 manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 204f540b-09f1-452b-a52f-78143710ef76
-ms.service: Azure-Active-Directory
+ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
 ms.date: 05/03/2019
 ms.author: jeedes
-ms.openlocfilehash: aa3548a71e403728cbec4b8df2b0dce1cf6abde7
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 30a4dcbd15d8a47d99b3a61879a7e61938d3b133
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67164469"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73160542"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-mitel-micloud-connect"></a>Öğretici: Mitel MiCloud Connect ile Azure Active Directory Tümleştirmesi
+# <a name="tutorial-azure-active-directory-integration-with-mitel-micloud-connect"></a>Öğretici: Mitel Micyüksek Connect ile Azure Active Directory tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile tümleştirme Mitel MiCloud bağlanmak öğreneceksiniz. Azure AD ile tümleştirme MiCloud bağlanma ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Mitel Micyüksek Connect 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. Micyüksek Connect 'i Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* MiCloud, bağlandığınız uygulamaların, Kurumsal kimlik bilgilerini kullanarak erişebilir, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) MiCloud bağlanmak için oturum açmış olarak hesabınızdaki kullanıcılar etkinleştirebilirsiniz.
+* Azure AD 'de, kurumsal kimlik bilgilerini kullanarak Micyüksek Connect uygulamalarına erişimi olan denetim yapabilirsiniz.
+* Hesabınızdaki kullanıcıların Azure AD hesaplarıyla (çoklu oturum açma) otomatik olarak oturum açmasını sağlayabilirsiniz.
 
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesi MiCloud bağlantı ile yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini, Micyüksek Connect ile yapılandırmak için aşağıdaki öğelere ihtiyacınız vardır:
 
 * Azure AD aboneliği
 
-  Bir Azure AD ortamını yoksa alabileceğiniz bir [ücretsiz hesap](https://azure.microsoft.com/free/)
-* Bir Mitel MiCloud bağlanmak hesabı
+  Bir Azure AD ortamınız yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/) alabilirsiniz
+* Bir Mitel Micyüksek Connect hesabı
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma (SSO) test edin.
+Bu öğreticide Azure AD çoklu oturum açma 'yı (SSO) yapılandırıp test edeceksiniz.
 
-* Mitel bağlanmak destekler **SP** tarafından başlatılan
+* Mitel Connect, **SP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-mitel-connect-from-the-gallery"></a>Galeriden Mitel bağlama ekleme
+## <a name="adding-mitel-connect-from-the-gallery"></a>Galeriden Mitel Connect ekleme
 
-Azure AD Connect Mitel tümleştirme yapılandırmak için Mitel bağlanmak Galeriden yönetilen SaaS uygulamaları, Azure portalında listesine eklemeniz gerekir.
+Mitel Connect 'in Azure AD 'ye tümleştirilmesini yapılandırmak için galerideki Mitel Connect 'i Azure portal yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**Galeriden Ekle Mitel bağlanmak için aşağıdaki adımları uygulayın:**
+**Galeriden Mitel Connect eklemek için aşağıdaki adımları uygulayın:**
 
 1. **[Azure portalda](https://portal.azure.com)** sol taraftaki gezinti panelinden **Azure Active Directory**’ye tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Tıklayın **kurumsal uygulamalar** ve ardından **tüm uygulamaları**.
+2. **Kurumsal uygulamalar** ' a ve ardından **tüm uygulamalar**' a tıklayın.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Tıklayın **yeni uygulama**.
+3. **Yeni uygulama**' ya tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Tür **Mitel bağlanmak** arama alanını tıklatın **Mitel bağlanmak** sonuçlar paneli ve ardından **Ekle**.
+4. Arama alanına **Mitel Connect** yazın, sonuçlar panelinden **Mitel Connect** ' e tıklayın ve ardından **Ekle**' ye tıklayın.
 
-     ![Sonuç listesinde Mitel bağlanma](common/search-new-app.png)
+     ![Sonuç listesinde Mitel bağlantısı](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırın ve MiCloud Connect ile Azure AD çoklu oturum açmayı test adlı bir test kullanıcı tabanlı **Britta Simon**. Tek iş için oturum açma için bir Azure AD kullanıcısı ile ilgili MiCloud bağlama kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, **Britta Simon**adlı bir test kullanıcısına göre Micyüksek Connect Ile Azure AD çoklu oturum açmayı yapılandırıp test edeceksiniz. Çoklu oturum açma için, bir Azure AD kullanıcısı ile ilgili kullanıcının, Micı Connect 'te bir bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma MiCloud Connect ile test etme için aşağıdaki adımları tamamlamanız gerekir:
+Azure AD çoklu oturum açmayı, Micyüksek Connect ile yapılandırmak ve test etmek için aşağıdaki adımları gerçekleştirmeniz gerekir:
 
-1. **[Azure AD ile SSO için MiCloud Bağlan'ı yapılandırma](#configure-micloud-connect-for-sso-with-azure-ad)**  - kullanıcılarınız bu özelliği kullanmak için ve uygulama tarafında SSO ayarlarını yapılandırmaya yönelik etkinleştirmek için.
-2. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-3. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-4. **[Mitel MiCloud bağlanmak test kullanıcısı oluşturma](#create-a-mitel-micloud-connect-test-user)**  - kullanıcı Azure AD gösterimini bağlı MiCloud bağlanmak hesabınızda Britta simon'un bir karşılığı vardır.
-5. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. Kullanıcılarınızın bu özelliği kullanmasını sağlamak ve uygulama tarafında SSO ayarlarını yapılandırmak için **[Azure AD Ile SSO Için Micyüksek Connect 'ı yapılandırın](#configure-micloud-connect-for-sso-with-azure-ad)** .
+2. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+3. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+4. Kullanıcının Azure AD gösterimine bağlı olan, Mictta SIG Connect hesabınızda Britta Simon 'ın bir karşılığı olacak şekilde **[bir Mitel Micyüksek Connect test kullanıcısı oluşturun](#create-a-mitel-micloud-connect-test-user)** .
+5. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-micloud-connect-for-sso-with-azure-ad"></a>MiCloud yapılandırmak için Azure AD ile SSO bağlama
+### <a name="configure-micloud-connect-for-sso-with-azure-ad"></a>Azure AD ile SSO için Micyüksek Connect 'i yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma MiCloud bağlanmak için Azure portalında etkinleştirin ve MiCloud bağlanmak hesabınızı Azure AD kullanarak SSO izin verecek şekilde yapılandırın.
+Bu bölümde, Azure portal Micyüksek Connect için Azure AD çoklu oturum açma 'yı etkinleştireceksiniz ve Azure AD 'yi kullanarak, Micyüksek Connect hesabınızı SSO 'ya izin verecek şekilde yapılandıracaksınız.
 
-MiCloud bağlanmak için Azure AD SSO ile yapılandırmak için Azure portalı ve yan yana Mitel hesap Portalı'nı açmak en kolay yoldur. Bazı bilgiler Mitel hesap portalı ve bazı Mitel hesap portalından Azure portalında Azure portalından kopyalayın gerekecektir.
+Azure AD için aynı SSO ile Micyüksek Connect 'i yapılandırmak için Azure portal ve Mitel hesabı portalını yan yana açmak en kolay yoldur. Azure portal bazı bilgileri Mitel Hesap portalına ve bir kısmını Mitel hesap portalından Azure portal kopyalamanız gerekir.
 
 
-1. Yapılandırma sayfasını açmak için [Azure portalında](https://portal.azure.com/), aşağıdakileri yapın:
+1. [Azure Portal](https://portal.azure.com/)yapılandırma sayfasını açmak için aşağıdakileri yapın:
 
-    a. Üzerinde **Mitel bağlanma** uygulama tümleştirme sayfasını tıklatın **çoklu oturum açma**.
+    a. **Mitel Connect** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' ya tıklayın.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-    b. İçinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, tıklayın **SAML**.
+    b. **Çoklu oturum açma yöntemi seç** Iletişim kutusunda **SAML**' ye tıklayın.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
     
     SAML tabanlı oturum açma sayfası görüntülenir.
 
-2. Yapılandırma iletişim kutusu Mitel hesap Portalı'nda açmak için aşağıdakileri yapın:
+2. Mitel hesap portalında yapılandırma iletişim kutusunu açmak için aşağıdakileri yapın:
 
-    a. Üzerinde **telefon sistemi** menüsünü tıklatın **eklenti özellikleri**.
+    a. **Telefon sistemi** menüsünde, **eklenti özellikleri**' ne tıklayın.
 
-    b. Sağındaki **çoklu oturum açma**, tıklayın **etkinleştirme** veya **ayarları**.
+    b. **Çoklu oturum açma**'Nın sağında **Etkinleştir** veya **Ayarlar**' a tıklayın.
     
-    Connect çoklu oturum açma ayarları iletişim kutusu görüntülenir.
+    Çoklu oturum açma ayarlarını bağla iletişim kutusu görüntülenir.
     
-3. Seçin **etkinleştirme çoklu oturum açma** onay kutusu.
-    ![Görüntü](./media/mitel-connect-tutorial/Mitel_Connect_Enable.png)
+3. **Çoklu oturum açmayı etkinleştir** onay kutusunu seçin.
+    ![resim](./media/mitel-connect-tutorial/Mitel_Connect_Enable.png)
 
 
-4. Azure portalında **Düzenle** simgesini **temel SAML yapılandırma** bölümü.
-    ![Görüntü](common/edit-urls.png)
+4. Azure portal, **temel SAML yapılandırması** bölümündeki **Düzenle** simgesine tıklayın.
+    ![resim](common/edit-urls.png)
 
-    Temel bir SAML yapılandırma iletişim kutusu görüntülenir.
+    Temel SAML yapılandırması iletişim kutusu görüntülenir.
 
-5.  URL'den kopyalama **Mitel tanımlayıcı (varlık kimliği)** yapıştırın ve alan Mitel hesap Portalı'nda **tanımlayıcı (varlık kimliği)** Azure portalında alan.
+5.  Mitel hesap portalındaki **Mitel tanımlayıcı (VARLıK kimliği)** alanından URL 'yi kopyalayın ve Azure Portal ' de **tanımlayıcı (varlık kimliği)** alanına yapıştırın.
 
-6. URL'den kopyalama **yanıt URL'si (onay belgesi tüketici hizmeti URL'si)** yapıştırın ve alan Mitel hesap Portalı'nda **yanıt URL'si (onay belgesi tüketici hizmeti URL'si)** Azure portalında alan.  
-   ![Görüntü](./media/mitel-connect-tutorial/Mitel_Azure_BasicConfig.png)
+6. URL 'YI, Mitel hesap portalındaki **yanıt URL 'si (onaylama Işlemi tüketici hizmeti URL 'si)** alanından kopyalayın ve Azure Portal, **yanıt URL 'Si (onaylama tüketici hizmeti URL 'si)** alanına yapıştırın.  
+   ![resim](./media/mitel-connect-tutorial/Mitel_Azure_BasicConfig.png)
 
-7. İçinde **oturum açma URL'si** metin kutusunda, aşağıdaki URL'lerden birini yazın:
+7. **Oturum açma URL 'si** metin kutusunda, aşağıdaki URL 'lerden birini yazın:
 
-    * **https://portal.shoretelsky.com** -Varsayılan Mitel uygulamanızı Mitel hesap portalı kullanmak için
-    * **https://teamwork.shoretel.com** -Teamwork varsayılan Mitel uygulamanızı kullanmak için
+    * **https://portal.shoretelsky.com** -Mitel hesabı portalını varsayılan Mitel uygulamanız olarak kullanmak için
+    * **https://teamwork.shoretel.com** -takım Işini varsayılan Mitel uygulamanız olarak kullanmak için
 
-    **NOT**: Varsayılan Mitel uygulama erişim panelinde Mitel bağlanma kutucuğuna kullanıcı tıkladığında erişilen uygulamasıdır. Bu da bir test ayarı, Azure AD'den yaparken erişilen uygulamasıdır.
+    **Note**: varsayılan Mitel uygulaması, bir Kullanıcı erişim panelinde Mitel Connect kutucuğuna tıkladığında erişilen uygulamadır. Bu Ayrıca, Azure AD 'den bir test kurulumu gerçekleştirirken erişilen uygulamadır.
 
-8. Tıklayın **Kaydet** içinde **temel SAML yapılandırma** Azure portalında iletişim kutusu.
+8. Azure portal **temel SAML yapılandırması** Iletişim kutusunda **Kaydet** ' e tıklayın.
 
-9. İçinde **SAML imzalama sertifikası** bölümünde **SAML tabanlı oturum açma** sayfasında Azure Portalı'nda, **indirme** yanındaki **sertifika (Base64)** indirmek için **imzalama sertifikası** ve bilgisayarınıza kaydedin.
-    ![Görüntü](./media/mitel-connect-tutorial/Azure_SigningCert.png)
+9. Azure portal SAML **tabanlı oturum açma** sayfasındaki SAML **imzalama sertifikası** bölümünde, **imzalama sertifikasını** indirmek ve bilgisayarınıza kaydetmek Için **sertifika (base64)** yanındaki **İndir** ' e tıklayın.
+    ![resim](./media/mitel-connect-tutorial/Azure_SigningCert.png)
 
-10. İmzalama sertifikası dosyasını bir metin düzenleyicisinde açın, tüm veri dosyasına kopyalayın ve verileri yapıştırın **imzalama sertifikası** Mitel hesap portalındaki alan. 
-    ![Görüntü](./media/mitel-connect-tutorial/Mitel_Connect_SigningCert.png)
+10. Imza sertifikası dosyasını bir metin düzenleyicisinde açın, dosyadaki tüm verileri kopyalayın ve ardından Mitel hesabı portalındaki **Imza sertifikası** alanından verileri yapıştırın. 
+    ![resim](./media/mitel-connect-tutorial/Mitel_Connect_SigningCert.png)
 
-11. İçinde **Kurulum Mitel bağlantı** bölümünde **SAML tabanlı oturum açma** sayfa Azure portalı, aşağıdakileri yapın:
+11. Azure portal **SAML tabanlı oturum açma** sayfasının **Setup Mitel Connect** bölümünde aşağıdakileri yapın:
 
-    a. URL'den kopyalama **oturum açma URL'si** yapıştırın ve alan **oturum açma URL'si** Mitel hesap portalındaki alan.
+    a. **Oturum açma URL** 'si alanından URL 'yi kopyalayın ve Mitel hesabı portalındaki **oturum açma URL 'si** alanına yapıştırın.
 
-    b. URL'den kopyalama **Azure AD tanımlayıcısı** yapıştırın ve alan **varlık kimliği** Mitel hesap portalındaki alan.
-    ![Görüntü](./media/mitel-connect-tutorial/Mitel_Azure_SetupConnect.png)
+    b. **Azure AD tanımlayıcı** alanından URL 'yi kopyalayın ve Mitel hesabı PORTALıNDAKI **varlık kimliği** alanına yapıştırın.
+    ![resim](./media/mitel-connect-tutorial/Mitel_Azure_SetupConnect.png)
 
-12. Tıklayın **Kaydet** üzerinde **Connect çoklu oturum açma ayarları** Mitel hesap portalı iletişim kutusu.
+12. Mitel hesap portalındaki **Çoklu oturum açma ayarlarını bağla** Iletişim kutusunda **Kaydet** ' e tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Bu bölümde, Azure portalında Britta Simon adlı bir test kullanıcısı oluşturacaksınız.
+Bu bölümde, Azure portal Britta Simon adlı bir test kullanıcısı oluşturacaksınız.
 
-1. Azure portalında, sol bölmede, tıklayın **Azure Active Directory**, tıklayın **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal sol bölmedeki **Azure Active Directory**' e, **Kullanıcılar**' a ve ardından **tüm kullanıcılar**' a tıklayın.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Tıklayın **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' ya tıklayın.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
 3. Kullanıcı Özellikleri iletişim kutusunda, aşağıdaki adımları uygulayın:
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alanına **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**yazın.
   
-    b. İçinde **kullanıcı adı** alanında, @ brittasimon yazın\<yourcompanydomain\>.\< Uzantı\>.  
+    b. **Kullanıcı adı** alanına brittasıon @\<yourcompanydomain\>yazın.\<uzantısı\>.  
 Örneğin, BrittaSimon@contoso.com.
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma Mitel bağlanmak için erişim izni verme kullanmak Britta Simon tıklatmalarını sağlarsınız.
+Bu bölümde, Mitel Connect 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştireceksiniz.
 
-1. Azure portalında **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
+1. Azure portal **Kurumsal uygulamalar**' a ve ardından **tüm uygulamalar**' a tıklayın.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **Mitel bağlanma**.
+2. Uygulamalar listesinde **Mitel Connect**' e tıklayın.
 
-    ![Uygulamalar listesinde Mitel bağlanın bağlantısı](common/all-applications.png)
+    ![Uygulamalar listesindeki Mitel Connect bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' a tıklayın.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle**, ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle**' ye tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' a tıklayın.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** içinde **kullanıcılar** listesinde'a tıklayın **seçin** ekranın alt kısmındaki.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda **Kullanıcılar** listesinden **Britta Simon** ' ı seçin ve ardından ekranın alt kısmında **Seç** ' e tıklayın.
 
-6. Listeden herhangi bir rolü değer SAML onayı bekleniyor, kullanıcı için uygun rolü seçin **rolü Seç** iletişim ve ardından **seçin** ekranın alt kısmındaki.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmında **Seç** ' e tıklayın.
 
-7. İçinde **atama Ekle** iletişim kutusunda, tıklayın **atama**.
+7. **Atama Ekle** Iletişim kutusunda **ata**' ya tıklayın.
 
-### <a name="create-a-mitel-micloud-connect-test-user"></a>Mitel MiCloud bağlanmak test kullanıcısı oluşturma
+### <a name="create-a-mitel-micloud-connect-test-user"></a>Mitel Micyüksek Connect test kullanıcısı oluşturma
 
-Bu bölümde, Britta Simon MiCloud bağlanmak hesabınızdaki adlı bir kullanıcı oluşturun. Kullanıcılar oluşturulan ve çoklu oturum açma kullanılarak önce etkinleştirilmesi gerekir.
+Bu bölümde, Mictta Simon adlı bir kullanıcıyı, Micyüksek bağlantı hesabınızda oluşturursunuz. Çoklu oturum açma kullanılmadan önce kullanıcıların oluşturulması ve etkinleştirilmesi gerekir.
 
-Mitel hesap Portalı'nda kullanıcı ekleme hakkında daha fazla ayrıntı için bkz. [kullanıcı ekleme](https://docs.shoretel.com/connectcloud/Account/Users/AddUser) Mitel Bilgi Bankası makalesine.
+Mitel Hesap portalına Kullanıcı ekleme hakkında daha fazla bilgi için Mitel Bilgi Bankası 'nda [Kullanıcı ekleme](https://docs.shoretel.com/connectcloud/Account/Users/AddUser) makalesine bakın.
 
-Bir kullanıcı MiCloud bağlanmak hesabınızda aşağıdaki ayrıntılarla oluşturun:
+Aşağıdaki ayrıntılarla, Micyüksek Connect hesabınızda bir kullanıcı oluşturun:
 
-  * **Adı:** Britta Simon
+  * **Ad:** Britta Simon
 
-* **İş e-posta adresi:** `brittasimon@<yourcompanydomain>.<extension>`   
-(Örnek: [ brittasimon@contoso.com ](mailto:brittasimon@contoso.com))
+* **Iş e-posta adresi:** `brittasimon@<yourcompanydomain>.<extension>`   
+(Örnek: [brittasimon@contoso.com](mailto:brittasimon@contoso.com))
 
 * **Kullanıcı adı:** `brittasimon@<yourcompanydomain>.<extension>`  
-(Örnek: [ brittasimon@contoso.com ](mailto:brittasimon@contoso.com); kullanıcının kullanıcı adı genellikle kullanıcının iş e-posta adresi ile aynıdır)
+(Örnek: [brittasimon@contoso.com](mailto:brittasimon@contoso.com); kullanıcının Kullanıcı adı genellikle kullanıcının iş e-posta adresiyle aynıdır)
 
-**NOT:** Kullanıcının MiCloud bağlama kullanıcı adı, kullanıcının e-posta adresine azure'da aynı olmalıdır.
+**Note:** Kullanıcının Micyüksek Connect Kullanıcı adı, kullanıcının Azure 'daki e-posta adresiyle aynı olmalıdır.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
-Bu bölümde, erişim panelini kullanarak, Azure AD çoklu oturum açma yapılandırması test edeceğiz.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edeceksiniz.
 
-Erişim paneli Mitel bağlanma kutucuğa tıkladığınızda, otomatik olarak varsayılan olarak yapılandırılmış MiCloud Connect uygulama oturum açmak için yeniden yönlendirilmesi gereken **oturum açma URL'si** alan. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde Mitel Connect kutucuğuna tıkladığınızda, **URL oturum açma** alanında varsayılan olarak yapılandırdığınız Micyüksek Connect uygulamasında oturum açmak için otomatik olarak yeniden yönlendirilmelisiniz. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

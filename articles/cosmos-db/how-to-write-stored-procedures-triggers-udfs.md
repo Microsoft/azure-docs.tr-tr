@@ -1,34 +1,37 @@
 ---
-title: Azure Cosmos DB'de saklı yordamlar, tetikleyiciler ve kullanıcı tanımlı işlevler yazma
-description: Saklı yordamlar, tetikleyiciler ve kullanıcı tanımlı işlevler, Azure Cosmos DB'de tanımlamayı öğrenin
+title: Saklı yordamları, Tetikleyicileri ve Kullanıcı tanımlı işlevleri Azure Cosmos DB yazma
+description: Saklı yordamları, Tetikleyicileri ve Kullanıcı tanımlı işlevleri Azure Cosmos DB nasıl tanımlayacağınızı öğrenin
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: sample
-ms.date: 05/21/2019
+ms.topic: conceptual
+ms.date: 10/31/2019
 ms.author: mjbrown
-ms.openlocfilehash: 66e0a7e13df9eddcd722492c9c894721517af5f9
-ms.sourcegitcommit: e9a46b4d22113655181a3e219d16397367e8492d
+ms.openlocfilehash: cdac8321ec4ac7b2e13c5545a2483527118daae3
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65968926"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606270"
 ---
-# <a name="how-to-write-stored-procedures-triggers-and-user-defined-functions-in-azure-cosmos-db"></a>Azure Cosmos DB'de saklı yordamlar, tetikleyiciler ve kullanıcı tanımlı işlevler yazma
+# <a name="how-to-write-stored-procedures-triggers-and-user-defined-functions-in-azure-cosmos-db"></a>Saklı yordamları, Tetikleyicileri ve Kullanıcı tanımlı işlevleri Azure Cosmos DB yazma
 
-Azure Cosmos DB sağlar yazmanızı sağlayan bir JavaScript dil ile tümleşik, işlem yürütme **saklı yordamlar**, **Tetikleyicileri**, ve **kullanıcı tanımlı işlevler (UDF'ler)**. Azure Cosmos DB SQL API'sini kullanarak, saklı yordamlar, tetikleyiciler ve UDF'ler JavaScript dilinde tanımlayabilirsiniz. JavaScript'te, mantığınızı yazmanıza ve veritabanı altyapısının içinden yürütün. Oluşturabilir ve tetikleyicileri, saklı yordamlar ve UDF'ler kullanarak yürütme [Azure portalında](https://portal.azure.com/), [JavaScript dil tümleşik Azure Cosmos DB'de sorgu API'si](javascript-query-api.md) ve [Cosmos DB SQL API istemcisi SDK'ları](sql-api-dotnet-samples.md). 
+Azure Cosmos DB, **saklı yordamlar**, **Tetikleyiciler**ve **Kullanıcı tanımlı işlevler (UDF 'Ler)** yazmanıza olanak tanıyan JavaScript 'in dil ile tümleşik, işlemsel yürütmesini sağlar. Azure Cosmos DB içinde SQL API 'sini kullanırken, JavaScript dilinde saklı yordamları, Tetikleyicileri ve UDF 'Leri tanımlayabilirsiniz. Mantığınızı JavaScript 'te yazabilir ve veritabanı altyapısının içinde yürütebilirsiniz. Azure Cosmos DB ve [Cosmos db SQL API Istemci SDK](sql-api-dotnet-samples.md)'larının [Azure Portal](https://portal.azure.com/), [JavaScript Dil tümleşik sorgu API 'sini](javascript-query-api.md) kullanarak Tetikleyiciler, saklı yordamlar ve UDF 'ler oluşturabilir ve bunları çalıştırabilirsiniz. 
 
-Bir saklı yordam, tetikleyici ve kullanıcı tanımlı işlevi çağırmak için onu kaydetmeniz gerekir. Daha fazla bilgi için [saklı yordamlar, Tetikleyiciler, Azure Cosmos DB'de kullanıcı tanımlı işlevleri ile çalışmaya nasıl](how-to-use-stored-procedures-triggers-udfs.md).
+Saklı yordam, tetikleyici ve Kullanıcı tanımlı işlevi çağırmak için kaydetmeniz gerekir. Daha fazla bilgi için bkz. [Azure Cosmos DB saklı yordamlar, Tetikleyiciler, Kullanıcı tanımlı işlevlerle çalışma](how-to-use-stored-procedures-triggers-udfs.md).
 
 > [!NOTE]
-> Bir saklı yordamı yürütülürken bölümlenmiş kapsayıcılar için bir bölüm anahtarı değeri istek seçenekleri sağlanmalıdır. Saklı yordamlar, her zaman bir bölüm anahtarı için kapsama eklenir. Farklı bir bölüm anahtarı değerine sahip öğeleri saklı yordam için görünür olmaz. Bu da Tetikleyiciler için de geçerli.
+> Bölümlenmiş kapsayıcılar için, saklı bir yordam yürütürken, istek seçeneklerinde bir bölüm anahtarı değeri belirtilmelidir. Saklı yordamlar her zaman bir bölüm anahtarına göre kapsamlandırılır. Farklı bir bölüm anahtarı değerine sahip öğeler, saklı yordama görünür olmayacaktır. Bu ayrıca tetikleyicilere de uygulanır.
 
-## <a id="stored-procedures"></a>Saklı yordamlar yazma
+> [!Tip]
+> Cosmos, saklı yordamlar, Tetikleyiciler ve Kullanıcı tanımlı işlevlerle kapsayıcıları dağıtmaya destekler. Daha fazla bilgi için bkz [. sunucu tarafı işlevleriyle Azure Cosmos DB kapsayıcısı oluşturma.](manage-sql-with-resource-manager.md#create-sproc)
 
-Saklı yordamlar, JavaScript kullanarak yazılır, bunlar oluşturabilir, güncelleştirme, okuma, sorgulama ve bir Azure Cosmos kapsayıcı içindeki öğeleri silin. Saklı yordamlar, koleksiyon kaydedilir ve herhangi bir belge veya koleksiyonda mevcut bir ek çalışabilir.
+## <a id="stored-procedures"></a>Saklı yordamları yazma
+
+Saklı yordamlar JavaScript kullanılarak yazılır, Azure Cosmos kapsayıcısı içinde öğeleri oluşturabilir, güncelleştirebilir, okuyabilir, sorgulayabilir ve silebilir. Saklı yordamlar her koleksiyon için kaydedilir ve bu koleksiyonda bulunan herhangi bir belge veya ek üzerinde çalışabilir.
 
 **Örnek**
 
-"Hello World" yanıt döndüren basit bir saklı yordam aşağıda verilmiştir.
+Bir "Merhaba Dünya" yanıtı döndüren basit bir saklı yordam aşağıda verilmiştir.
 
 ```javascript
 var helloWorldStoredProc = {
@@ -42,17 +45,17 @@ var helloWorldStoredProc = {
 }
 ```
 
-Bağlam nesnesi, Azure Cosmos DB içinde gerçekleştirilen tüm işlemler erişimin yanı sıra, istek ve yanıt nesnelere erişimi sağlar. Bu durumda, istemciye geri gönderilecek yanıt gövdesinin ayarlamak için yanıt nesnesini kullanın.
+Bağlam nesnesi Azure Cosmos DB ' de gerçekleştirilebilecek tüm işlemlere erişim sağlar ve istek ve yanıt nesnelerine erişim sağlar. Bu durumda, istemciye geri gönderilecek yanıtın gövdesini ayarlamak için Response nesnesini kullanırsınız.
 
-Yazıldıktan sonra saklı yordamı bir koleksiyon ile kayıtlı olması gerekir. Daha fazla bilgi için bkz. [Azure Cosmos DB'de saklı yordamlar kullanma](how-to-use-stored-procedures-triggers-udfs.md#stored-procedures) makalesi.
+Yazıldıktan sonra, saklı yordamın bir koleksiyonla kayıtlı olması gerekir. Daha fazla bilgi için bkz. [Azure Cosmos DB 'da saklı yordamları kullanma](how-to-use-stored-procedures-triggers-udfs.md#stored-procedures) .
 
-### <a id="create-an-item"></a>Saklı yordamı kullanarak bir öğe oluşturun
+### <a id="create-an-item"></a>Saklı yordam kullanarak bir öğe oluşturma
 
-Saklı yordamı kullanarak bir öğe oluşturduğunuzda, öğe Azure Cosmos DB kapsayıcıya eklenir ve yeni oluşturulan öğeyi kimliği döndürülür. Öğe oluşturmaya, zaman uyumsuz bir işlemdir ve JavaScript geri çağırma işlevlere bağlıdır. Geri çağırma işlevi iki parametre - bir işlemin başarısız olması durumunda hata nesnesi ve bir dönüş değeri için başka; yine de sahip istiyor musunuz? Bu durumda, oluşturulan nesnesi. Geri çağırma içinde özel durumu işlemek veya bir hata oluşturur. Azure Cosmos DB çalışma zamanı, bir geri çağırma sağlanmadı ve bir hata durumunda, bir hata atar. 
+Saklı yordam kullanarak bir öğe oluşturduğunuzda, öğe Azure Cosmos kapsayıcısına eklenir ve yeni oluşturulan öğe için bir KIMLIK döndürülür. Öğe oluşturma zaman uyumsuz bir işlemdir ve JavaScript geri çağırma işlevlerine bağımlıdır. Geri çağırma işlevinin iki parametresi vardır-bir işlem başarısız olması ve bir dönüş değeri için başka bir hata olması durumunda hata nesnesi için bir tane. Bu durumda, oluşturulan nesne. Geri çağırma içinde, özel durumu işleyebilir veya bir hata oluşturabilirsiniz. Bir geri çağırma sağlanmamışsa ve bir hata varsa Azure Cosmos DB çalışma zamanı bir hata oluşturur. 
 
-Saklı yordamı da açıklama ayarlamak için bir parametre içerir, bir Boole değeri. Parametre ayarlandığında true ve tanımı eksik, saklı yordamı bir özel durum oluşturur. Aksi takdirde, saklı yordamın geri kalanını çalışmaya devam eder.
+Saklı yordam ayrıca açıklamayı ayarlamak için bir parametre içerir, bu da bir Boole değeridir. Parametresi true olarak ayarlandığında ve açıklama eksik olduğunda, saklı yordam bir özel durum oluşturur. Aksi takdirde, saklı yordamın geri kalanı çalışmaya devam eder.
 
-Aşağıdaki örnek depolanan yordamı, yeni bir Azure Cosmos DB öğe girdi olarak alır, Azure Cosmos DB kapsayıcıya ekler ve yeni oluşturulan öğesinin kimliğini döndürür. Bu örnekte biz ToDoList örnekten yararlanıyor [.NET SQL API'si hızlı başlangıç](create-sql-api-dotnet.md)
+Aşağıdaki örnek saklı yordam, giriş olarak yeni bir Azure Cosmos öğesi alır, bunu Azure Cosmos kapsayıcısına ekler ve yeni oluşturulan öğenin KIMLIĞINI döndürür. Bu örnekte, [hızlı başlangıç .NET SQL API](create-sql-api-dotnet.md) 'sindeki ToDoList örneğini geliştirdik.
 
 ```javascript
 function createToDoItem(itemToCreate) {
@@ -70,9 +73,9 @@ function createToDoItem(itemToCreate) {
 }
 ```
 
-### <a name="arrays-as-input-parameters-for-stored-procedures"></a>Saklı yordamlar için giriş parametrelerini olarak diziler 
+### <a name="arrays-as-input-parameters-for-stored-procedures"></a>Saklı yordamlar için giriş parametreleri olarak diziler 
 
-Azure portalında bir saklı yordam tanımlarken, giriş parametreleri için saklı yordam her zaman bir dize olarak gönderilir. Dizelerden oluşan bir dizi girdi olarak geçirdiğiniz olsa bile, dizi dizeye dönüştürülür ve saklı yordamı gönderilir. Bu sorunu çözmek için bir işlev bir dize dizisi olarak ayrıştırılacak, saklı yordam içinde tanımlayabilirsiniz. Aşağıdaki kod, bir dize giriş parametresi olarak bir dizi ayrıştırılacak gösterilmektedir:
+Azure portal ' de bir saklı yordam tanımlarken, giriş parametreleri her zaman saklı yordama bir dize olarak gönderilir. Bir dizi dizeyi girdi olarak iletseniz bile, dizi dizeye dönüştürülür ve saklı yordama gönderilir. Bu sorunu geçici olarak çözmek için, saklı yordamınız içinde dizeyi bir dizi olarak ayrıştırarak bir işlev tanımlayabilirsiniz. Aşağıdaki kod, bir dize giriş parametresinin dizi olarak nasıl ayrıştıralınacağını gösterir:
 
 ```javascript
 function sample(arr) {
@@ -85,9 +88,9 @@ function sample(arr) {
 }
 ```
 
-### <a id="transactions"></a>Saklı yordamlar işlemleri
+### <a id="transactions"></a>Saklı yordamlar içindeki işlemler
 
-Bir saklı yordamı kullanarak bir kapsayıcı içindeki öğeleri üzerinde işlem uygulayabilirsiniz. Aşağıdaki örnek, fantezi futbol oyun uygulaması tek bir işlemde iki ekipler arasında ticari oyuncu için işlemleri kullanır. Saklı yordam bağımsız değişken olarak geçirilen player kimlikleri için karşılık gelen her iki Azure Cosmos DB öğeleri okuma girişiminde bulunur. Her iki oyuncuların bulunamazsa, saklı yordam ekiplerinin değiştirerek öğeleri güncelleştirir. Saklı yordam, süreç boyunca herhangi bir hatayla karşılaşılmazsa, örtük olarak işlem durdurur bir JavaScript özel durumu oluşturur.
+Saklı yordam kullanarak bir kapsayıcı içindeki öğelere işlem uygulayabilirsiniz. Aşağıdaki örnek, tek bir işlemde iki ekip arasında oyuncu ticareti için bir fantetin oyun uygulaması içindeki işlemleri kullanır. Saklı yordam, her biri bağımsız değişken olarak geçirilen Player kimliklerine karşılık gelen iki Azure Cosmos öğesini okumaya çalışır. Her iki oyuncu de bulunursa, saklı yordam, takımlarını değiştirerek öğeleri günceller. Bu şekilde herhangi bir hatayla karşılaşılırsa, saklı yordam, işlemi örtük olarak iptal eden bir JavaScript özel durumu oluşturur.
 
 ```javascript
 // JavaScript source code
@@ -153,9 +156,9 @@ function tradePlayers(playerId1, playerId2) {
 }
 ```
 
-### <a id="bounded-execution"></a>Saklı yordam içinde sınırlanmış yürütme
+### <a id="bounded-execution"></a>Saklı yordamlar içinde sınırlı yürütme
 
-Toplu-öğeleri bir Azure Cosmos kapsayıcıya almalar bir saklı yordam örneği verilmiştir. Saklı yordam sınırlanmış yürütme Boole dönüş değerini kontrol ederek işleme `createDocument`ve ardından izlemek ve arasında toplu ilerleme durumunu sürdürmek için saklı yordamın her çağrı eklenen öğe sayısını kullanır.
+Aşağıda, öğeleri bir Azure Cosmos kapsayıcısına toplu olarak içeri aktaran saklı yordamın bir örneği verilmiştir. Saklı yordam, `createDocument`Boole dönüş değerini denetleyerek ve sonra toplu işlerin ilerlemesini izlemek ve devam ettirmek için saklı yordamın her bir çağrısında yerleştirilen öğe sayısını kullanır.
 
 ```javascript
 function bulkImport(items) {
@@ -208,13 +211,13 @@ function bulkImport(items) {
 }
 ```
 
-## <a id="triggers"></a>Tetikleyiciler yazma
+## <a id="triggers"></a>Tetikleyicileri yazma
 
-Azure Cosmos DB Tetikleyicileri öncesi ve sonrası Tetikleyicileri destekler. Öncesi tetikleyiciler, bir veritabanı öğesini değiştirmeden önce yürütülür ve sonrası Tetikleyicileri veritabanı öğesi değiştirdikten sonra yürütülür.
+Azure Cosmos DB ön Tetikleyicileri ve Tetikleyicileri destekler. Ön Tetikleyiciler, bir veritabanı öğesi değiştirilmeden önce yürütülür ve bir veritabanı öğesi değiştirildikten sonra Tetikleyiciler yürütülür.
 
-### <a id="pre-triggers"></a>Öncesi Tetikleyicileri
+### <a id="pre-triggers"></a>Ön Tetikleyiciler
 
-Aşağıdaki örnek, bir ön tetikleyici oluşturulmakta olan bir Azure Cosmos DB öğesinin özelliklerini doğrulamak için nasıl kullanıldığını gösterir. Bu örnekte biz ToDoList örnekten yararlanıyor [.NET SQL API'si Hızlı Başlangıç](create-sql-api-dotnet.md), bir tane içermiyorsa, bir zaman damgası özelliği için yeni eklenen bir öğe eklemek için.
+Aşağıdaki örnek, oluşturulmakta olan bir Azure Cosmos öğesinin özelliklerini doğrulamak için bir ön tetikleyicisinin nasıl kullanıldığını gösterir. Bu örnekte, yeni eklenen bir öğeye bir zaman damgası özelliği eklemek için [hızlı başlangıç .NET SQL API](create-sql-api-dotnet.md)'sindeki ToDoList örneğini geliştirdik.
 
 ```javascript
 function validateToDoItemTimestamp() {
@@ -235,15 +238,15 @@ function validateToDoItemTimestamp() {
 }
 ```
 
-Öncesi tetikleyici, giriş parametreleri bulunamaz. İstek nesnesi tetikleyicisinin işlemle ilişkilendirilen istek iletisi işlemek için kullanılır. Önceki örnekte, bir Azure Cosmos DB öğesi oluşturulurken öncesi tetikleyici çalıştırılır ve istek iletisi gövdesi JSON biçiminde oluşturulacak öğesi içeriyor.
+Ön tetikleyicilerinin herhangi bir giriş parametresi olamaz. Tetikleyicide istek nesnesi, işlemle ilişkili istek iletisini işlemek için kullanılır. Önceki örnekte, ön tetikleyici bir Azure Cosmos öğesi oluştururken çalıştırılır ve istek iletisi gövdesi JSON biçiminde oluşturulacak öğeyi içerir.
 
-Tetikleyiciler kaydettiğinizde, birlikte çalışabilen işlemleri belirtebilirsiniz. Bu tetikleyici ile oluşturulması gereken bir `TriggerOperation` değerini `TriggerOperation.Create`, tetikleyici aşağıdaki kodda gösterildiği gibi bir değiştirme işlemi kullanılarak verilmez anlamına gelir.
+Tetikleyiciler kaydedildikten sonra, birlikte çalışacağı işlemleri belirtebilirsiniz. Bu tetikleyici, aşağıdaki kodda gösterildiği gibi bir değiştirme işleminde tetikleyicinin kullanılmasına izin verilmeyen bir `TriggerOperation` `TriggerOperation.Create`ile oluşturulmalıdır.
 
-Kaydolun ve öncesi bir tetikleyici çağırmak nasıl bir örnekleri için bkz: [öncesi Tetikleyicileri](how-to-use-stored-procedures-triggers-udfs.md#pre-triggers) ve [sonrası Tetikleyicileri](how-to-use-stored-procedures-triggers-udfs.md#post-triggers) makaleler. 
+Ön tetikleyiciyi kaydetme ve çağırma örnekleri için bkz. [Tetikleyiciler](how-to-use-stored-procedures-triggers-udfs.md#pre-triggers) ve [Tetikleyiciler sonrası](how-to-use-stored-procedures-triggers-udfs.md#post-triggers) makaleler. 
 
-### <a id="post-triggers"></a>Sonrası Tetikleyicileri
+### <a id="post-triggers"></a>Tetikleyiciler sonrası
 
-Aşağıdaki örnek, bir sonrası tetikleyici gösterir. Bu tetikleyici, meta veri öğesi için sorgular ve yeni oluşturulan öğeyi ilişkin ayrıntılarla güncelleştirir.
+Aşağıdaki örnek, bir tetikleme sonrası göstermektedir. Bu tetikleyici, meta veri öğesi için sorgular ve yeni oluşturulan öğe hakkındaki ayrıntılarla günceller.
 
 
 ```javascript
@@ -279,13 +282,13 @@ function updateMetadataCallback(err, items, responseOptions) {
 }
 ```
 
-Dikkat edilecek önemli olan bir Azure Cosmos DB Tetikleyicileri işlem tabanlı olarak yürütülmesi şeydir. Temel alınan öğe için aynı işlemin bir parçası olarak sonrası tetikleyici çalıştırır. Tüm işlem sonrası tetikleyici yürütme sırasında bir özel durumla başarısız olur. Herhangi bir şey kabul edilen geri alınacak ve bir özel durum döndürdü.
+Dikkat edilmesi gereken tek şey, Azure Cosmos DB tetikleyicilerin işlem yürütmesinin önemli bir örneğidir. Son tetikleyici, temeldeki öğenin kendisi için aynı işlemin bir parçası olarak çalışır. Tetikleyici sonrası yürütme işlemi sırasında tüm işlem başarısız olur. Yürütülen her şey geri alınacaktır ve bir özel durum döndürülür.
 
-Kaydolun ve öncesi bir tetikleyici çağırmak nasıl bir örnekleri için bkz: [öncesi Tetikleyicileri](how-to-use-stored-procedures-triggers-udfs.md#pre-triggers) ve [sonrası Tetikleyicileri](how-to-use-stored-procedures-triggers-udfs.md#post-triggers) makaleler. 
+Ön tetikleyiciyi kaydetme ve çağırma örnekleri için bkz. [Tetikleyiciler](how-to-use-stored-procedures-triggers-udfs.md#pre-triggers) ve [Tetikleyiciler sonrası](how-to-use-stored-procedures-triggers-udfs.md#post-triggers) makaleler. 
 
-## <a id="udfs"></a>Kullanıcı tanımlı işlevler yazma
+## <a id="udfs"></a>Kullanıcı tanımlı işlevleri yazma
 
-Aşağıdaki örnek, çeşitli gelir köşeli ayraçlar için gelir vergi hesaplamak için bir UDF oluşturur. Bu kullanıcı tanımlı işlev sonra bir sorgu içinde kullanılabilir. Bu örneğin amacı doğrultusunda, "Yüksek" gibi özelliklerle adlı bir kapsayıcı olduğu varsayılır:
+Aşağıdaki örnek, çeşitli gelir ayraçları için gelir vergisini hesaplamak üzere bir UDF oluşturur. Daha sonra bu kullanıcı tanımlı işlev bir sorgu içinde kullanılır. Bu örneğin amaçları doğrultusunda, özelliklerle birlikte "ıngelir" adlı bir kapsayıcı olduğunu varsayar:
 
 ```json
 {
@@ -295,7 +298,7 @@ Aşağıdaki örnek, çeşitli gelir köşeli ayraçlar için gelir vergi hesapl
 }
 ```
 
-Çeşitli gelir köşeli ayraçlar için gelir vergi hesaplamak için işlev tanımı aşağıda verilmiştir:
+Aşağıdakiler, çeşitli gelir ayraçları için gelir vergisini hesaplamak üzere bir işlev tanımıdır:
 
 ```javascript
 function tax(income) {
@@ -312,16 +315,16 @@ function tax(income) {
     }
 ```
 
-Kaydolun ve bir kullanıcı tanımlı işlev kullanma örnekleri için bkz. [Azure Cosmos DB'de kullanıcı tanımlı işlevler kullanma](how-to-use-stored-procedures-triggers-udfs.md#udfs) makalesi.
+Kullanıcı tanımlı bir işlevi kaydetme ve kullanma örnekleri için, bkz. [Azure Cosmos DB makalesinde Kullanıcı tanımlı işlevleri kullanma](how-to-use-stored-procedures-triggers-udfs.md#udfs) .
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kavramları ve nasıl yapılır yazma daha fazla bilgi edinin veya saklı yordamlar, tetikleyiciler ve kullanıcı tanımlı işlevler, Azure Cosmos DB'de kullanın:
+Azure Cosmos DB saklı yordamları, Tetikleyicileri ve Kullanıcı tanımlı işlevleri yazma veya kullanma hakkında daha fazla bilgi edinin:
 
-* [Kaydetme ve kullanma hakkında yordamlar, tetikleyiciler ve kullanıcı tanımlı işlevleri Azure Cosmos DB'de depolanan](how-to-use-stored-procedures-triggers-udfs.md)
+* [Azure Cosmos DB saklı yordamları, Tetikleyicileri ve Kullanıcı tanımlı işlevleri kaydetme ve kullanma](how-to-use-stored-procedures-triggers-udfs.md)
 
-* [Saklı yordamları ve Tetikleyicileri Javascript sorgu API'si kullanarak Azure Cosmos DB'de yazma](how-to-write-javascript-query-api.md)
+* [Azure Cosmos DB içinde JavaScript sorgu API 'sini kullanarak saklı yordamları ve Tetikleyicileri yazma](how-to-write-javascript-query-api.md)
 
-* [Yordamlar, tetikleyiciler ve kullanıcı tanımlı işlevleri Azure Cosmos DB'de depolanan Azure Cosmos DB ile çalışma](stored-procedures-triggers-udfs.md)
+* [Azure Cosmos DB içinde Azure Cosmos DB saklı yordamlar, Tetikleyiciler ve Kullanıcı tanımlı işlevlerle çalışma](stored-procedures-triggers-udfs.md)
 
-* [Azure Cosmos DB'de sorgu API'si çalışma JavaScript dil ile tümleşik](javascript-query-api.md)
+* [Azure Cosmos DB 'de JavaScript Dil tümleşik sorgu API 'SI ile çalışma](javascript-query-api.md)

@@ -1,61 +1,104 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: IoT için Azure Güvenlik Merkezi Önizleme Belgeleri
+### YamlMime:Landing
+title: IoT için Azure Güvenlik Merkezi belgeleri
+summary: IoT için Azure Güvenlik Merkezi IoT cihazları için tehditlere karşı kapsamlı koruma sağlayan Azure tabanlı bir bulut güvenliği hizmetidir.
 metadata:
-  title: 'IoT için Azure Güvenlik Merkezi Önizleme Belgeleri - Öğreticiler, Hızlı Başlangıçlar | Microsoft Docs'
-  meta.description: Azure Security Center for IoT unifies your security management and enables advanced threat protection across your IoT solution.
-  services: asc-for-iot
-  author: mlottner
-  manager: rkarlin
-  ms.service: ascforiot
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  title: IoT için Azure Güvenlik Merkezi belgeleri
+  description: IoT için Azure Güvenlik Merkezi IoT cihazları için tehditlere karşı kapsamlı koruma sağlayan Azure tabanlı bir bulut güvenliği hizmetidir.
+  services: service
+  ms.service: asc-for-iot
   ms.topic: landing-page
-  ms.date: 03/26/19
-  ms.author: rkarlin
-abstract:
-  description: "IoT için Azure Güvenlik Merkezi (ASC) Önizleme sürümünü kullanarak, siber güvenliğe yönelik mevcut görüntüleme olanaklarınızı IoT çözümünüzün tamamını kapsayacak biçimde genişletin. Azure ile ilişkili tüm kaynaklarınızın güvenliğine panoramik bir bakış elde edin. Hızlı dağıtım seçenekleri ve IoT Hub modül ikizleriyle eksiksiz tümleştirme olanakları sayesinde geniş özelleştirme seçenekleri elde edersiniz ve mevcut cihaz yönetimi araçlarınızla kolayca tümleştirebilirsiniz.\_"
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'IoT Hub’ınızı IoT için ASC ile birlikte kullanmayı, IoT için ASC aracılarını yüklemeyi, verilerinize ve olası tehditlere yönelik görünürlük elde etmeyi öğrenin.'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/deploy.svg
-            text: IoT için ASC’yi etkinleştirme
-            href: /azure/asc-for-iot/quickstart-onboard-iot-hub
-          - image:
-              src: media/index/get-started.svg
-            text: IoT için ASC’yi kullanmaya başlama
-            href: /azure/asc-for-iot/getting-started
-  - title: Nasıl yapılır kılavuzları
-    items:
-      - type: paragraph
-        text: 'Güvenlik ilkelerini tanımlamayı, cihazlarınızı kötü amaçlı etkinliklere karşı korumayı ve güvenlik uyarıları ile olaylara yanıt vermeyi öğrenin.'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/asc-for-iot/how-to-investigate-device">IoT için ASC ile tehdit algılama</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure'da güvenliğe giriş
-            href: 'https://docs.microsoft.com/learn/azure'
-            image:
-              src: media/index/tutorial.svg
-              href: 'https://docs.microsoft.com/learn/azure'
-      - type: paragraph
-        text: <a href="/learn/browse/?term=security">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - html: '<a href="https://azure.microsoft.com/updates/?product=iotsecurity">Hizmet güncelleştirmeleri</a>'
+  ms.collection: M365-security-compliance
+  author: mlottner
+  ms.author: mlottner
+  ms.date: 09/23/2019
+  ms.openlocfilehash: aea4daa48bc0587d998b87ede0151def21f121b9
+  ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/08/2019
+  ms.locfileid: "73827389"
+landingContent:
+- title: IoT için Azure Güvenlik Merkezi hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: IoT için Azure Güvenlik Merkezi nedir?
+      url: overview.md
+    - text: Çözümünüzü planlama
+      url: service-prerequisites.md
+  - linkListType: architecture
+    links:
+    - text: IoT için Azure Güvenlik Merkezi mimarisini anlama
+      url: architecture.md
+    - text: IoT için Azure Güvenlik Merkezi Aracıları
+      url: security-agent-architecture.md
+    - text: Microsoft Edge güvenlik modülü
+      url: security-edge-architecture.md
+- title: IoT için Azure Güvenlik Merkezi’ni IoT Hub'a ekleme
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: IoT için Azure Güvenlik Merkezi’ni kullanmaya başlama
+      url: getting-started.md
+    - text: IoT Hub
+      url: iot-hub-integration.md
+    - text: Güvenlik aracıları
+      url: security-agents.md
+- title: Çözümünüzü yapılandırma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: IoT Hub’da IoT için Azure Güvenlik Merkezi’ni etkinleştirme
+      url: quickstart-onboard-iot-hub.md
+    - text: Çözümünüzü yapılandırma
+      url: quickstart-configure-your-solution.md
+    - text: IoT için Azure Güvenlik Merkezi’nin modül ikizini oluşturma
+      url: quickstart-create-security-twin.md
+    - text: Özel güvenlik uyarıları oluşturma
+      url: quickstart-create-custom-alerts.md
+- title: Çözümünüzü özelleştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Aracı seçme
+      url: how-to-deploy-agent.md
+    - text: Windows için IoT için Azure Güvenlik Merkezi C# tabanlı güvenlik aracısını dağıtma
+      url: how-to-deploy-windows-cs.md
+    - text: Linux için IoT için Azure Güvenlik Merkezi C# tabanlı güvenlik aracısını dağıtma
+      url: how-to-deploy-linux-cs.md
+    - text: Linux için IoT için Azure Güvenlik Merkezi C tabanlı güvenlik aracısını dağıtma
+      url: how-to-deploy-linux-c.md
+    - text: Microsoft Edge güvenlik modülünü dağıtma
+      url: how-to-deploy-edge.md
+    - text: Güvenlik aracılarını yapılandırma
+      url: how-to-agent-configuration.md
+    - text: Kendi güvenlik iletilerinizi gönderme
+      url: how-to-send-security-messages.md
+    - text: Ham güvenlik verilerine erişme
+      url: how-to-security-data-access.md
+    - text: Cihazı araştırma
+      url: how-to-investigate-device.md
+- title: Güvenlik aracısında sorun giderme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Güvenlik aracısı sorun giderme kılavuzu (Linux)
+      url: troubleshoot-agent.md
+    - text: LocalConfiguration.json dosyasını anlama - C aracısı
+      url: azure-iot-security-local-configuration-c.md
+    - text: Yerel yapılandırma dosyasını anlama - C# aracısı
+      url: azure-iot-security-local-configuration-csharp.md
+- title: IoT için Azure Güvenlik Merkezi çözümü kaynakları
+  linkLists:
+  - linkListType: video
+    links:
+    - text: IoT için Azure Güvenlik Merkezi nedir?
+      url: https://youtu.be/pq5uSp9u_x0
+    - text: IoT için Azure Güvenlik Merkezi’ni anlama
+      url: https://www.youtube.com/watch?time_continue=5&v=YOqkahQsKek
+  - linkListType: reference
+    links:
+    - text: Sık sorulan sorular
+      url: resources-frequently-asked-questions.md
+    - text: Fiyatlandırma ve ilişkili maliyetler
+      url: concept-pricing.md

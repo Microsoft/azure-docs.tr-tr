@@ -1,89 +1,86 @@
 ---
-title: Azure portalını kullanarak azure'da SQL Server Vm'leri yönetme | Microsoft Docs
-description: Azure üzerinde barındırılan SQL Server VM için Azure portalında SQL sanal makine kaynağı erişmeyi öğrenin.
+title: Azure portal kullanarak Azure 'da SQL Server VM 'Leri yönetme | Microsoft Docs
+description: Azure 'da barındırılan bir SQL Server VM için Azure portal SQL sanal makine kaynağına erişmeyi öğrenin.
 services: virtual-machines-windows
 documentationcenter: na
 author: MashaMSFT
 manager: craigg
 tags: azure-resource-manager
 ms.service: virtual-machines-sql
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 05/13/2019
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: e2a807bbd6baeb2f14a6d36f5d98a28d48725449
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 244ad7d079fd7baf25f8079557576c42d25ca785
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67082722"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70102058"
 ---
-# <a name="manage-sql-server-vms-in-azure-using-the-azure-portal"></a>Azure portalını kullanarak azure'da SQL Server Vm'leri yönetme
+# <a name="manage-sql-server-vms-in-azure-by-using-the-azure-portal"></a>Azure 'da SQL Server VM 'Leri Azure portal kullanarak yönetin
 
-Kullanarak Azure üzerinde SQL Server VM'nize yönetmek için yeni bir erişim noktası [Azure portalında](https://portal.azure.com). 
+[Azure Portal](https://portal.azure.com), **SQL sanal makineler** kaynağı bağımsız bir yönetim hizmetidir. Bunu, tüm SQL Server sanal makinelerinizi aynı anda görüntülemek ve SQL Server adanmış ayarları değiştirmek için kullanabilirsiniz: 
 
-**SQL sanal makineleri** kaynak, artık tüm, SQL Server Vm'leri eşzamanlı olarak görüntüleyin ve adanmış SQL Server ayarlarını değiştirmenize olanak sağlayan bir bağımsız Yönetim Hizmeti: 
-
-![SQL sanal makine kaynağı](media/virtual-machines-windows-sql-manage-portal/sql-vm-manage.png)
+![SQL sanal makineler kaynağı](media/virtual-machines-windows-sql-manage-portal/sql-vm-manage.png)
 
 
 ## <a name="remarks"></a>Açıklamalar
 
-- **SQL sanal makineleri** görüntüleyin ve yönetin, SQL Server Vm'leri için önerilen yöntem bir kaynaktır. Ancak, şu anda **SQL sanal makineleri** kaynak yönetimini desteklemez [(EOS) destek sonu](virtual-machines-windows-sql-server-2008-eos-extend-support.md) SQL Server Vm'leri. SQL Server sanal makineleriniz EOS ayarlarını yönetmek için kullanım dışı kullanın [SQL Server yapılandırma sekmesinde](#access-sql-server-configuration-tab) yerine. 
-- **SQL sanal makineleri** kaynak, yalnızca SQL Server Vm'leri için olan kullanılabilir [SQL VM kaynak sağlayıcısına kayıtlı](virtual-machines-windows-sql-ahb.md#register-sql-server-vm-with-the-sql-vm-resource-provider). 
+- Azure 'da SQL Server VM 'lerinizi görüntülemek ve yönetmek için **SQL sanal makineler** kaynağını kullanmanızı öneririz. Ancak şu anda **SQL sanal makineler** kaynağı, [destek sonu](virtual-machines-windows-sql-server-2008-eos-extend-support.md) SQL Server VM 'lerinin yönetimini desteklemez. Destek sonu SQL Server sanal makinelerinizin ayarlarını yönetmek için, bunun yerine kullanım dışı [SQL Server Yapılandırma sekmesini](#access-the-sql-server-configuration-tab) kullanın. 
+- **SQL sanal makineler** kaynağı yalnızca [SQL VM kaynak sağlayıcısına kayıtlı](virtual-machines-windows-sql-register-with-resource-provider.md)SQL Server VM 'ler için kullanılabilir. 
 
 
-## <a name="access-sql-virtual-machine-resource"></a>Erişim SQL sanal makine kaynağı
-SQL sanal makineleri kaynağa erişmek için aşağıdakileri yapın:
-
-1. [Azure portalı](https://portal.azure.com) açın. 
-1. Seçin **tüm hizmetleri**. 
-1. Tür `SQL virtual machines` arama kutusuna.
-1. (İsteğe bağlı): Yanındaki yıldızı seçin **SQL sanal makineleri** , Sık Kullanılanlar menüsü için bu seçeneği eklenecek. 
-1. Seçin **SQL sanal makineleri**. 
-
-   ![SQL VM, sanal makineleri tüm hizmetlerin bulun.](media/virtual-machines-windows-sql-manage-portal/sql-vm-search.png)
-
-1. Bu abonelik içinde kullanılabilir tüm SQL Server Vm'leri listeler. Başlatmak yönetmek istediğiniz seçmek **SQL sanal makineleri** kaynak. SQL Server VM'nize kolayca görünür değilse, arama kutusunu kullanın. 
-
-![Tüm kullanılabilir SQL VM'ler](media/virtual-machines-windows-sql-manage-portal/all-sql-vms.png)
-
-SQL Server VM'nize seçme açılır **SQL sanal makineleri** kaynak: 
-
-
-![SQL sanal makine kaynağı](media/virtual-machines-windows-sql-manage-portal/sql-vm-resource.png)
-
-  > [!TIP]
-  > **SQL sanal makineleri** adanmış SQL Server ayarlarını bir kaynaktır. VM adını seçin **sanal makine** alan belirli VM, ancak SQL Server için özel ayarları'na gidin. 
-
-## <a name="access-sql-server-configuration-tab"></a>Erişim SQL Server yapılandırma sekmesi
-SQL Server yapılandırma sekmesinde kullanım dışıdır. İsteğe bağlı olarak şu anda yönetmek için tek yöntem olan [(EOS) destek sonu](virtual-machines-windows-sql-server-2008-eos-extend-support.md) SQL Server Vm'leri ve olmayan bir SQL Server Vm'leri [SQL VM kaynak sağlayıcısına kayıtlı](virtual-machines-windows-sql-ahb.md#register-sql-server-vm-with-the-sql-vm-resource-provider).
-
-Kullanım dışı SQL server yapılandırma sekmesine erişmek için giderek gerekecektir **sanal makineler** kaynak. Bunu yapmak için aşağıdakileri yapın:
+## <a name="access-the-sql-virtual-machines-resource"></a>SQL sanal makineler kaynağına erişin
+**SQL sanal makineler** kaynağına erişmek için aşağıdakileri yapın:
 
 1. [Azure portalı](https://portal.azure.com) açın. 
-1. Seçin **tüm hizmetleri**. 
-1. Tür `virtual machines` arama kutusuna.
-1. (İsteğe bağlı): Yanındaki yıldızı seçin **sanal makineler** , Sık Kullanılanlar menüsü için bu seçeneği eklenecek. 
+1. **Tüm hizmetler**' i seçin. 
+1. Arama kutusuna **SQL sanal makinelerini** girin.
+1. (İsteğe bağlı): Bu seçeneği **Sık Kullanılanlar** menünüzde eklemek için **SQL sanal makineler** ' in yanındaki yıldızı seçin. 
+1. **SQL sanal makinelerini**seçin. 
+
+   ![Tüm hizmetlerde SQL Server sanal makineler bulun](media/virtual-machines-windows-sql-manage-portal/sql-vm-search.png)
+
+1. Portal, abonelik içinde kullanılabilir olan tüm SQL Server VM 'Leri listeler. **SQL sanal makineler** kaynağını açmak için yönetmek istediğiniz birini seçin. SQL Server VM görünmediğinde arama kutusunu kullanın. 
+
+   ![Tüm kullanılabilir SQL Server VM 'Leri](media/virtual-machines-windows-sql-manage-portal/all-sql-vms.png)
+
+   SQL Server VM seçtiğinizde **SQL sanal makineler** kaynağı açılır: 
+
+
+   ![SQL sanal makineler kaynağı](media/virtual-machines-windows-sql-manage-portal/sql-vm-resource.png)
+
+> [!TIP]
+> **SQL sanal makineler** kaynağı adanmış SQL Server ayarları içindir. **Sanal makine** kutusunda VM 'nin adını seçerek VM 'ye özgü ayarları açın, ancak SQL Server dışlamalı. 
+
+## <a name="access-the-sql-server-configuration-tab"></a>SQL Server yapılandırma sekmesine erişin
+**SQL Server yapılandırma** sekmesi kullanım dışı bırakıldı. Şu anda, [destek sonu](virtual-machines-windows-sql-server-2008-eos-extend-support.md) SQL Server vm 'leri SQL Server ve [SQL VM kaynak sağlayıcısına kayıtlı](virtual-machines-windows-sql-register-with-resource-provider.md)olmayan VM 'leri yönetmeye yönelik tek yöntem budur.
+
+Kullanım dışı **SQL Server yapılandırma** sekmesine erişmek için **sanal makineler** kaynağına gidin. Aşağıdaki adımları kullanın:
+
+1. [Azure portalı](https://portal.azure.com) açın. 
+1. **Tüm hizmetler**' i seçin. 
+1. Arama kutusuna **sanal makineler** girin.
+1. (İsteğe bağlı): Bu seçeneği **Sık Kullanılanlar** menünüzde eklemek için **sanal makineler** ' in yanındaki yıldızı seçin. 
 1. Seçin **sanal makineler**. 
 
-   ![Sanal makineler için arama](media/virtual-machines-windows-sql-manage-portal/vm-search.png)
+   ![Sanal makineleri ara](media/virtual-machines-windows-sql-manage-portal/vm-search.png)
 
-1. Bu Abonelikteki tüm sanal makineleri listeler. Başlatmak yönetmek istediğiniz seçmek **sanal makine** kaynak. SQL Server VM'nize kolayca görünür değilse, arama kutusunu kullanın. 
-1. Seçin **SQL Server Yapılandırması** içinde **ayarları** bölmesinde SQL sunucunuzu yönetmek için. 
+1. Portal, abonelikteki tüm sanal makineleri listeler. **Sanal makineler** kaynağını açmak için yönetmek istediğiniz birini seçin. SQL Server VM görünmediğinde arama kutusunu kullanın. 
+1. SQL Server VM yönetmek için **Ayarlar** bölmesinde **SQL Server yapılandırma** ' yı seçin. 
 
-![SQL Server yapılandırması](media/virtual-machines-windows-sql-manage-portal/sql-vm-configuration.png)
+   ![SQL Server yapılandırması](media/virtual-machines-windows-sql-manage-portal/sql-vm-configuration.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Daha fazla bilgi için aşağıdaki makalelere bakın: 
 
-* [Bir Windows VM üzerinde SQL Server'a genel bakış](virtual-machines-windows-sql-server-iaas-overview.md)
-* [SQL Server üzerindeki bir Windows VM ile ilgili SSS](virtual-machines-windows-sql-server-iaas-faq.md)
-* [Fiyatlandırma Kılavuzu bir Windows VM'de SQL Server](virtual-machines-windows-sql-server-pricing-guidance.md)
-* [SQL Server Windows VM sürüm notları](virtual-machines-windows-sql-server-iaas-release-notes.md)
+* [Windows VM 'de SQL Server genel bakış](virtual-machines-windows-sql-server-iaas-overview.md)
+* [Windows VM 'de SQL Server hakkında SSS](virtual-machines-windows-sql-server-iaas-faq.md)
+* [Windows VM üzerinde SQL Server için fiyatlandırma Kılavuzu](virtual-machines-windows-sql-server-pricing-guidance.md)
+* [Windows VM 'de SQL Server için sürüm notları](virtual-machines-windows-sql-server-iaas-release-notes.md)
 
 

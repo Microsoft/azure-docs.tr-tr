@@ -1,48 +1,57 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Active Directory raporları ve izlemesi
+### YamlMime:Landing
+title: Azure Active Directory raporları ve izlemesi belgeleri
+summary: Azure AD’de raporların nasıl kullanılacağını öğrenin.
 metadata:
-  document_id: null
-  title: 'Azure Active Directory raporları ve izleme belgeleri - Öğreticiler, hızlı başlangıçlar, kavramlar | Microsoft Docs'
-  description: Azure Active Directory raporları ve izleme çözümlerini yapılandırmayı ve test etmeyi öğrenin
+  title: Azure Active Directory raporları ve izlemesi belgeleri
+  description: Azure AD’de raporların ve izlemenin nasıl kullanılacağını öğrenin.
   services: active-directory
-  ms.subservice: report-monitor
-  author: priyamohanram
-  manager: daveba
   ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: devices
   ms.topic: landing-page
-  ms.date: 08/14/2018
-  ms.author: priyamo
-abstract:
-  description: 'Ortamınıza ilişkin güvenlik ve denetim raporlarını görüntüleme veya kullanım desenleri hakkında fikirler edinmek için bunları zaman içinde izlemeyi öğrenin. Azure Active Directory (Azure AD) raporları ile ortamınızdaki güvenlik ve kullanım desenleri hakkında fikirler edinebilirsiniz. Örneğin aşağıdaki soruları yanıtlayabilirsiniz:<ul><li>Uygulamalar veya hizmetler kullanıcılar tarafından nasıl kullanılıyor?</li><li>Ortamınızın durumunu etkileyebilecek olası riskler nelerdir?</li><li>Kullanıcılarınızın işlerini yapmalarını engelleyen sorunları giderme</li>'
-sections:
-  - title: 5 dakikalık hızlı başlangıçlar
-    items:
-      - type: paragraph
-        text: Etkinlik raporlarını indirmeyi ve günlüklerinizi Azure depolama hesabına yönlendirmeyi öğrenin
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/reports-monitoring/quickstart-download-sign-in-report">Oturum açma raporunu indirme</a>
-          - html: <a href="/azure/active-directory/reports-monitoring/quickstart-download-audit-report">Denetim raporunu indirme</a>
-          - html: <a href="/azure/active-directory/reports-monitoring/quickstart-install-power-bi-content-pack">Raporlar için Power BI içerik paketini yükleme</a>
-          - html: <a href="/azure/active-directory/reports-monitoring/quickstart-azure-monitor-route-logs-to-storage-account">Günlükleri depolama hesabına yönlendirme</a>
-  - title: Adım adım öğreticiler
-    items:
-      - type: paragraph
-        text: Raporlarınıza erişmeyi ve etkinlik günlüklerini dilediğiniz izleme sistemine aktarmayı öğrenin
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/reports-monitoring/tutorial-access-api-with-certificates">Sertifikalar kullanarak raporlama API’sine programlamayla erişme</a>
-          - html: <a href="/azure/active-directory/reports-monitoring/tutorial-azure-monitor-stream-logs-to-event-hub">Etkinlik günlüklerini olay hub'ına aktarma</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/reports-monitoring/reference-sign-ins-error-codes">Oturum açma hata kodları</a>
-          - html: <a href="/azure/active-directory/reports-monitoring/reference-azure-monitor-audit-log-schema">Azure İzleyici’de Azure AD denetim günlüğü şeması</a>
-          - html: <a href="/azure/active-directory/reports-monitoring/reference-azure-monitor-sign-ins-log-schema">Azure İzleyici’de Azure AD oturum açma şeması</a>
+  author: MarkusVi
+  ms.author: markvi
+  ms.date: 08/29/2019
+  ms.collection: M365-identity-device-management
+  ms.openlocfilehash: 2b29aaf88f0a7659fd3ceb58ddf3b762ee7646d3
+  ms.sourcegitcommit: 19a821fc95da830437873d9d8e6626ffc5e0e9d6
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/29/2019
+  ms.locfileid: "70162495"
+landingContent:
+- title: Azure Active Directory raporları ve izlemesi hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Active Directory izleme nedir?
+      url: overview-monitoring.md
+  - linkListType: concept
+    links:
+    - text: Denetim günlükleri
+      url: concept-audit-logs.md
+    - text: Oturum açma günlükleri
+      url: concept-sign-ins.md
+    - text: Riskli oturum açma günlükleri
+      url: concept-risky-sign-ins.md
+    - text: Riskli oldukları belirlenen kullanıcılar günlükleri
+      url: concept-user-at-risk.md
+    - text: Sağlama günlükleri
+      url: concept-provisioning-logs.md
+- title: Azure AD’de raporları kullanma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Etkinlik raporlarını bulma
+      url: howto-find-activity-reports.md
+    - text: Riskli olduğu belirlenen kullanıcıları düzeltme
+      url: howto-remediate-users-flagged-for-risk.md
+    - text: Azure AD çalışma kitaplarını kullanma
+      url: howto-use-azure-monitor-workbooks.md
+- title: Azure AD’de izlemeyi kullanma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure İzleyici günlüklerindeki etkinlik günlüklerini analiz etme
+      url: howto-analyze-activity-logs-log-analytics.md
+    - text: Azure AD için Log Analytics görünümlerini yükleme ve kullanma
+      url: howto-install-use-log-analytics-views.md

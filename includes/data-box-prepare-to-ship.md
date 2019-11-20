@@ -5,38 +5,38 @@ ms.topic: include
 ms.date: 04/25/2019
 ms.author: alkohli
 ms.openlocfilehash: 1d52117440028c75b249f469f2b3576c2ab1c5c5
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
-ms.translationtype: MT
+ms.sourcegitcommit: 49c4b9c797c09c92632d7cedfec0ac1cf783631b
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 09/05/2019
 ms.locfileid: "67189035"
 ---
-Son adım cihazı göndermeye hazırlamaktır. Bu adımda tüm cihaz paylaşımları çevrimdışı duruma getirilir. Bu işlemi başlattıktan sonra paylaşımları erişilemez.
+Son adım cihazı göndermeye hazırlamaktır. Bu adımda tüm cihaz paylaşımları çevrimdışı duruma getirilir. Bu işlem başlatıldıktan sonra paylaşımlara erişilemez.
 
 > [!IMPORTANT]
-> Göndermeye hazırlama Azure adlandırma kurallarına uymuyor veri bayrakları olarak gereklidir. Bu adımı atlarsanız olası veri sonucunda hatalar nedeniyle veri DSCP karşıya yüklenemedi.
+> Azure adlandırma kurallarıyla uyumlu olmayan verileri işaretlediği için göndermeye hazırlama adımı gereklidir. Bu adımın atlanması, uyumsuz veriler nedeniyle olası karşıya veri yükleme hatalarıyla sonuçlanabilir.
 
-1. **Göndermeye hazırlama** sayfasına gidip **Hazırlamayı başlat**'a tıklayın. Veriler kopyalanırken sırasında varsayılan olarak, sağlama toplamları hesaplanır. Göndermeye hazırlama sağlama toplamı hesaplama tamamlar ve dosyaların listesini oluşturur ( *- BOM dosyaları*). Sağlama toplamı hesaplaması, verilerinizin boyutuna bağlı olarak gün saat sürebilir. 
+1. **Göndermeye hazırlama** sayfasına gidip **Hazırlamayı başlat**'a tıklayın. Varsayılan olarak, veriler kopyalanırken sağlama toplamları hesaplanır. Göndermeye hazırlama işlemi, sağlama toplamı hesaplamasını tamamlar ve dosya listesini ( *-BOM dosyaları*) oluşturur. Sağlama toplamı hesaplaması, verilerinizin boyutuna bağlı olarak birkaç saat veya birkaç gün sürebilir. 
    
     ![Göndermeye hazırlama 1](media/data-box-prepare-to-ship/prepare-to-ship1.png)
 
-    Herhangi bir nedenden dolayı cihaz hazırlığı durdurmak istiyorsanız, tıklayın **hazırlığı Durdur**. Daha sonra göndermeye hazırlama devam edebilir.
+    Herhangi bir nedenle cihaz hazırlamayı durdurmak isterseniz **Hazırlamayı durdur**'a tıklayın. Daha sonra göndermeye hazırlama işlemine kaldığınız yerden devam edebilirsiniz.
         
-    ![2 göndermeye hazırlama](media/data-box-prepare-to-ship/prepare-to-ship2.png)
+    ![Göndermeye hazırlama 2](media/data-box-prepare-to-ship/prepare-to-ship2.png)
     
-2. Göndermeye hazırlama başlatılır ve cihaz paylaşımları çevrimdışı. Cihazın hazır olduktan sonra iade sevkiyat etiketini indirmek için bir anımsatıcı görürsünüz.
+2. Göndermeye hazırlama işlemi başlar ve cihaz paylaşımları çevrimdışı olur. Cihaz hazır olduktan sonra gönderim etiketini indirmek için bir anımsatıcı görürsünüz.
 
-    ![Sevkiyat Etiketi anımsatıcı indirin](media/data-box-prepare-to-ship/download-shipping-label-reminder.png)
+    ![Gönderim etiketi indirme anımsatıcısı](media/data-box-prepare-to-ship/download-shipping-label-reminder.png)
 
-3. Cihaz durumu güncelleştirmeleri *gönderilmeye hazır* ve cihaz hazırlığı tamamlandıktan sonra cihaz kilitlenir.
+3. Cihaz hazırlığı tamamlandıktan sonra cihaz durumu *Göndermeye hazır* olarak değişir ve cihaz kilitlenir.
         
-    ![3 göndermeye hazırlama](media/data-box-prepare-to-ship/prepare-to-ship3.png)
+    ![Göndermeye hazırlama 3](media/data-box-prepare-to-ship/prepare-to-ship3.png)
 
-    Cihaza daha fazla veri kopyalamak istiyorsanız, cihazın kilidini açmak, daha fazla veri kopyalama ve çalıştırma hazırlama yeniden dağıtmayı.
+    Cihaza daha fazla veri kopyalamak istiyorsanız cihazın kilidini açabilir, daha fazla veri kopyalayabilir ve göndermeye hazırlamayı tekrar çalıştırabilirsiniz.
 
-    Bu adımda bir hata varsa, hata günlüğü indir ve hataları çözmek gerekir. Hataları çözümlendikten sonra Çalıştır **göndermeye hazırlama**.
+    Bu adımda hatalar oluşursa, hata günlüğünü indirmeniz ve hataları çözmeniz gerekecektir. Hatalar çözümlendikten sonra **Göndermeye hazırlama** işlemini çalıştırın.
 
-4. Göndermeye hazırlama (hatasız) başarıyla tamamlandıktan sonra bu işlemde kopyalanan dosyaların (bildirim olarak da bilinir) listesini indirin. Daha sonra bu listeyi kullanarak Azure'a yüklenen dosyaları doğrulayabilirsiniz. Daha fazla bilgi için [İnceleme BOM dosyaları göndermeye hazırlama sırasında](../articles/databox/data-box-logs.md#inspect-bom-during-prepare-to-ship).
+4. Göndermeye hazırlama işlemi başarıyla tamamlandıktan sonra (hata olmadan), bu işlemde kopyalanan dosyaların listesini (bildirim olarak da bilinir) indirin. Daha sonra bu listeyi kullanarak Azure'a yüklenen dosyaları doğrulayabilirsiniz. Daha fazla bilgi için bkz. [Göndermeye hazırlama sırasında BOM dosyalarını inceleme](../articles/databox/data-box-logs.md#inspect-bom-during-prepare-to-ship).
         
     ![Göndermeye hazırlama 1](media/data-box-prepare-to-ship/prepare-to-ship4.png)
 

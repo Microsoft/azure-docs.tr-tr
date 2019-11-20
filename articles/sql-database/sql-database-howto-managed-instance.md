@@ -1,6 +1,6 @@
 ---
-title: Yapılandırma Azure SQL veritabanı yönetilen örneği | Microsoft Docs
-description: Yapılandırma ve Azure SQL veritabanı yönetilen örneği yönetme hakkında bilgi edinin.
+title: Yönetilen örnek yapılandırma
+description: Azure SQL veritabanı yönetilen örneğini yapılandırma ve yönetme hakkında bilgi edinin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: managed-instance
@@ -10,41 +10,40 @@ ms.topic: conceptual
 author: jovanpop-msft
 ms.author: jovanpop
 ms.reviewer: sstein, carlr
-manager: craigg
 ms.date: 04/16/2019
-ms.openlocfilehash: 886f06e8640891ac09d1e4624335a7bfebcd3def
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 906ae2a970ce1d5b82302d0277ca45bd93c23011
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60340800"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73811191"
 ---
-# <a name="how-to-use-a-managed-instance-in-azure-sql-database"></a>Azure SQL veritabanı'nda bir yönetilen örnek kullanma
+# <a name="how-to-use-a-managed-instance-in-azure-sql-database"></a>Azure SQL veritabanı 'nda yönetilen örnek kullanma
 
-Bu makalede çeşitli kılavuzları, betikler ve yönetmek ve yönetilen Örneğinize yapılandırmanıza yardımcı olacak bir açıklama bulabilirsiniz.
+Bu makalede, yönetilen örneğinizi yönetmenize ve yapılandırmanıza yardımcı olabilecek çeşitli kılavuzlar, betikler ve açıklamalar bulabilirsiniz.
 
 ## <a name="migration"></a>Geçiş
 
-- [Bir yönetilen örneğe geçiş](sql-database-managed-instance-migrate.md) – yönetilen örneğe geçiş araçları ve önerilen geçiş işlemi hakkında bilgi edinin.
+- [Yönetilen bir örneğe](sql-database-managed-instance-migrate.md) geçiş: yönetilen bir örneğe geçiş için önerilen geçiş işlemi ve araçları hakkında bilgi edinin.
 
-- [TDE cert bir yönetilen örneğe geçiş](sql-database-managed-instance-migrate-tde-certificate.md) – SQL Server veritabanınıza saydam veri şifrelemesi (TDE) ile korunuyorsa, yönetilen örnek Azure'da geri yüklemek istediğiniz yedekleme şifresini çözmek için kullanabileceğiniz bir sertifika geçirmek gerekir.
+- [TDE sertifikayı yönetilen örneğe geçirme](sql-database-managed-instance-migrate-tde-certificate.md) – SQL Server veritabanınız saydam veri şifrelemesi (tde) ile korunuyorsa, yönetilen bir örneğin Azure 'da geri yüklemek istediğiniz yedeğin şifresini çözmek için kullanabileceği sertifikayı geçirmeniz gerekir.
 
 ## <a name="network-configuration"></a>Ağ yapılandırması
 
-- [Yönetilen örnek alt ağı boyutunu belirlemek](sql-database-managed-instance-determine-size-vnet-subnet.md) – yönetilen örnek yerleştirilir, kaynakları içine ekledikten sonra yeniden boyutlandırılamaz alt görüntülemeye ayırır. Bu nedenle, hangi IP adresleri aralığı sayısını ve türlerini alt ağdaki dağıtmak istediğiniz örnek bağlı olarak alt ağ için gerekli olacak hesaplamak gerekir.
-- [Yeni VNet ve alt ağ için bir yönetilen örnek oluşturma](sql-database-managed-instance-create-vnet-subnet.md) – göre Azure VNet ve alt ağı, yönetilen örneklerinizi dağıtmak istediğiniz yapılandırılmalıdır [ağ burada açıklanan gereksinimleri](sql-database-managed-instance-connectivity-architecture.md#network-requirements). Bu kılavuzda, yeni VNet ve düzgün bir şekilde yönetilen örnekleri için yapılandırılmış olan alt ağ oluşturmak için en kolay yolu bulabilirsiniz.
-- [Mevcut bir VNet ve alt ağ için bir yönetilen örnek yapılandırma](sql-database-managed-instance-configure-vnet-subnet.md) –, mevcut bir VNet ve alt ağ içinde yönetilen örnek dağıtmak için yapılandırmak istiyorsanız, denetleyen betiğin burada bulabilirsiniz [ağ gereksinimleri](sql-database-managed-instance-connectivity-architecture.md#network-requirements) ve olun, alt ağ gereksinimlerine göre yapılandırır.
-- [Özel DNS yapılandırma](sql-database-managed-instance-custom-dns.md) – yönetilen örneğiniz db e-posta profilleri bağlı sunucu aracılığıyla özel etki alanları üzerindeki dış kaynaklara erişmek istiyorsanız, özel DNS yapılandırmanız gerekir.
-- [Eşitleme ağı yapılandırması](sql-database-managed-instance-sync-network-configuration.md) -Bu, olsa da gerçekleşebilir, [uygulamanızı bir Azure sanal ağı ile tümleşik](../app-service/web-sites-integrate-with-vnet.md), şunları yapabilirsiniz&#39;t bir yönetilen örnek bağlantı kurun. Ağ yapılandırması, hizmet planınız için bir şey deneyebilirsiniz yenilemektir.
-- [Yönetim uç noktası IP adresini bulmak](sql-database-managed-instance-find-management-endpoint-ip-address.md) – yönetilen örnek genel uç nokta yönetim amacıyla kullanır. Burada açıklanan betiğini kullanarak yönetim uç noktasının IP adresini belirleyebilirsiniz.
-- [Yerleşik güvenlik duvarı koruması doğrulayın](sql-database-managed-instance-management-endpoint-verify-built-in-firewall.md) – yönetilen örneği, yalnızca gerekli bağlantı noktalarında trafiğe izin veren yerleşik güvenlik duvarı ile korunur. Denetleyin ve bu kılavuzda açıklanan betiğini kullanarak yerleşik bir güvenlik duvarı kurallarını doğrulayın.
-- [Uygulamaları bağlama](sql-database-managed-instance-connect-app.md) – yönetilen örnek, kendi özel Azure sanal ağ özel IP adresiyle yerleştirilir. Uygulamaları yönetilen Örneğinize bağlanmak için farklı yaklaşımlar hakkında bilgi edinin.
+- [Yönetilen örnek alt ağının boyutunu belirleme](sql-database-managed-instance-determine-size-vnet-subnet.md) – yönetilen örnek, içindeki kaynakları ekledikten sonra yeniden boyutlandırılanamaz alt ağa göre yerleştirilir. Bu nedenle, alt ağda dağıtmak istediğiniz örnek sayısına ve türlerine bağlı olarak alt ağ için hangi IP adresi aralığının gerekli olacağını hesaplamanız gerekir.
+- [Yönetilen bir örnek için yeni VNET ve alt ağ oluşturma](sql-database-managed-instance-create-vnet-subnet.md) – yönetilen örneklerinizi dağıtmak Istediğiniz Azure sanal ağı ve alt ağı [burada açıklanan ağ gereksinimlerine](sql-database-managed-instance-connectivity-architecture.md#network-requirements)göre yapılandırılmalıdır. Bu kılavuzda, yeni VNet ve alt ağını, yönetilen örnekler için doğru şekilde oluşturmanın en kolay yolunu bulabilirsiniz.
+- [Mevcut VNET ve alt ağı yönetilen bir örnek Için yapılandırma](sql-database-managed-instance-configure-vnet-subnet.md) – mevcut VNET ve alt ağınızı içinde yönetilen örnekleri dağıtmak üzere yapılandırmak istiyorsanız, [ağ gereksinimlerini](sql-database-managed-instance-connectivity-architecture.md#network-requirements) denetleyen betiği bulabilir ve şunları yapılandırabilirsiniz: gereksinimlere göre alt ağ.
+- [Özel DNS yapılandırma](sql-database-managed-instance-custom-dns.md) – özel etki alanlarındaki dış kaynaklara, DB posta profillerinin bağlı sunucusu aracılığıyla yönetilen örneğinizden erişmek ISTIYORSANıZ özel DNS 'yi yapılandırmanız gerekir.
+- [Eşitleme ağ yapılandırması](sql-database-managed-instance-sync-network-configuration.md) - [uygulamanızı bir Azure sanal ağı ile tümleştirseniz](../app-service/web-sites-integrate-with-vnet.md)de,&#39;yönetilen bir örneğe bağlantı kurabilirsiniz. Deneyebileceğiniz bir şey, hizmet planınız için ağ yapılandırmasını yenilememiz olabilir.
+- [Yönetim uç noktası IP adresini bul](sql-database-managed-instance-find-management-endpoint-ip-address.md) – yönetilen örnek, yönetim amaçlarıyla genel uç noktasını kullanır. Yönetim uç noktasının IP adresini burada açıklanan betiği kullanarak belirleyebilirsiniz.
+- [Yerleşik güvenlik duvarı korumasını doğrulama](sql-database-managed-instance-management-endpoint-verify-built-in-firewall.md) – yönetilen örnek, yalnızca gerekli bağlantı noktalarında trafiğe izin veren yerleşik güvenlik duvarıyla korunmaktadır. Bu kılavuzda açıklanan betiği kullanarak yerleşik güvenlik duvarı kurallarını denetleyebilir ve doğrulayabilirsiniz.
+- [Uygulamaları bağlama](sql-database-managed-instance-connect-app.md) – yönetilen örnek, özel IP adresi ile kendi özel Azure sanal ağınıza yerleştirilir. Yönetilen örneğiniz için uygulamaları bağlamak üzere farklı desenler hakkında bilgi edinin.
 
-## <a name="feature-configuration"></a>Özelliği yapılandırması
+## <a name="feature-configuration"></a>Özellik yapılandırması
 
-- [İşlem çoğaltma](replication-with-sql-database-managed-instance.md) verilerinizi şirket içi SQL Server'dan bir yönetilen örnek veya yönetilen örnekleri arasında çoğaltmanıza olanak sağlar ve bunun tersi de geçerlidir. Daha fazla bilgi kullanın ve bu kılavuzdaki işlem çoğaltma yapılandırma bulun.
-- [Tehdit algılamayı yapılandırma](sql-database-managed-instance-threat-detection.md) – [tehdit algılama](sql-database-threat-detection-overview.md) SQL ekleme veya şüpheli konumlardan erişim gibi çeşitli olası saldırıları algılayan yerleşik bir Azure SQL veritabanı özelliğidir. Bu kılavuzda etkinleştirmek ve yapılandırmak nasıl edinebilirsiniz [tehdit algılama](sql-database-threat-detection-overview.md) yönetilen örnek için.
+- [İşlemsel çoğaltma](replication-with-sql-database-managed-instance.md) , verilerinizi yönetilen örnekler arasında veya şirket içi SQL Server yönetilen bir örneğe çoğaltmanıza olanak sağlar ve tam tersi de geçerlidir. Bu kılavuzda işlem çoğaltmasını kullanma ve yapılandırma hakkında daha fazla bilgi edinin.
+- [Tehdit algılamayı yapılandırma](sql-database-managed-instance-threat-detection.md) – [TEHDIT algılama](sql-database-threat-detection-overview.md) , SQL ekleme veya şüpheli konumlardan erişim gibi çeşitli olası saldırıları ALGıLAYAN yerleşik bir Azure SQL veritabanı özelliğidir. Bu kılavuzda, yönetilen bir örnek için [tehdit algılamayı](sql-database-threat-detection-overview.md) etkinleştirme ve yapılandırma hakkında bilgi edinebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [tek veritabanları için nasıl yapılır kılavuzları](sql-database-howto-single-database.md)
+- [Tek veritabanları Için nasıl yapılır kılavuzlarından](sql-database-howto-single-database.md) daha fazla bilgi edinin

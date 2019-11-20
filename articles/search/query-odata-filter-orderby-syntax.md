@@ -1,13 +1,13 @@
 ---
-title: OData dil genel bakış - Azure Search
-description: OData dil genel bakış için filtreleri seçin ve Azure arama sorguları için sipariş tarafından.
-ms.date: 06/13/2019
-services: search
-ms.service: search
-ms.topic: conceptual
-author: Brjohnstmsft
+title: OData diline genel bakış
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama sorguları için filtreler, seçme ve sıralama ölçütü için OData diline genel bakış.
+manager: nitinme
+author: brjohnstmsft
 ms.author: brjohnst
-ms.manager: cgronlun
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
 translation.priority.mt:
 - de-de
 - es-es
@@ -19,34 +19,34 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: 166c23088fe0388199ca51efde05153bb5697e38
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e0db41098287ff011416932a0d44a1cb9f76127d
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67063694"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72786152"
 ---
-# <a name="odata-language-overview-for-filter-orderby-and-select-in-azure-search"></a>OData dil genel bakış için `$filter`, `$orderby`, ve `$select` Azure Search'te
+# <a name="odata-language-overview-for-filter-orderby-and-select-in-azure-cognitive-search"></a>Azure 'da `$filter`, `$orderby`ve `$select` için OData diline genel bakış Bilişsel Arama
 
-Azure Search'ü destekleyen bir alt kümesi için OData ifadesi söz dizimi **$filter**, **$orderby**, ve **$select** ifadeler. Filtre ifadeleri ayrıştırma, belirli alanlarında arama sınırlamak veya dizin taramaları sırasında kullanılan eşleştirme ölçütü ekleme sorgusu sırasında değerlendirilir. Order by ifadeleri bir sonuç döndürülür belgelere sıralanacak kümesi üzerinde bir sonradan işleme adımı uygulanır. Seç ifadeleri sonuç kümesinde hangi belge alanların ekleneceğini belirler. Bu ifadelerin söz dizimi kodundan [basit](query-simple-syntax.md) veya [tam](query-lucene-syntax.md) sorgu kullanılan söz dizimi **arama** parametresi sözdizimi, bazı çakışma olsa alanlara başvuran.
+Azure Bilişsel Arama, **$Filter**, **$OrderBy**ve **$Select** ifadelerine yönelik OData ifade sözdiziminin bir alt kümesini destekler. Filtre ifadeleri sorgu ayrıştırma sırasında değerlendirilir, aramayı belirli alanlara kısıtlama veya dizin taramaları sırasında kullanılan eşleşme ölçütlerini ekleme. Sıra ifadeleri, döndürülen belgeleri sıralamak için bir sonuç kümesi üzerinde bir işleme sonrası adımı olarak uygulanır. Sonuç kümesinde hangi belge alanlarının ekleneceğini belirleyen ifadeleri seçin. Bu ifadelerin sözdizimi, **arama** parametresinde kullanılan [basit](query-simple-syntax.md) veya [tam](query-lucene-syntax.md) sorgu sözdiziminden farklıdır, ancak başvuru alanlarına yönelik sözdiziminde bir çakışma olabilir.
 
-Bu makalede, filtreler, order by ve select deyimleri içinde kullanılan OData ifade dili genel bir bakış sağlar. Dil "aşağıdan yukarıya", en temel öğeleri ile başlayan ve bunlar üzerinde oluşturmaya sunulur. Üst düzey sözdizimi her parametre için ayrı bir makalede açıklanmıştır:
+Bu makalede, filtrelerde, sıralamada ve Select ifadelerinde kullanılan OData ifade diline ilişkin bir genel bakış sunulmaktadır. Dil, en temel öğelerle başlayarak ve üzerinde oluşturma için "aşağıdan yukarıya" sunulmuştur. Her parametre için en üst düzey sözdizimi ayrı bir makalede açıklanmıştır:
 
 - [$filter sözdizimi](search-query-odata-filter.md)
-- [$orderby söz dizimi](search-query-odata-orderby.md)
-- [$select söz dizimi](search-query-odata-select.md)
+- [$orderby sözdizimi](search-query-odata-orderby.md)
+- [$select sözdizimi](search-query-odata-select.md)
 
-Ortak öğeler için son derece karmaşık ifadeler aralığı OData basit, ancak tüm paylaşın. Azure Search'te bir OData ifadenin en temel bölümleri şunlardır:
+OData ifadeleri basit ve çok karmaşık olarak değişir, ancak bunların hepsi ortak öğeleri paylaşır. Azure Bilişsel Arama 'de bir OData ifadesinin en temel kısımları şunlardır:
 
-- **Alan yolları**, dizininizin belirli alanlarına bakın.
-- **Sabitler**, belirli bir veri türünün değişmez değerler olduğu.
+- Dizininizdeki belirli alanlara başvuran **alan yolları**.
+- Belirli bir veri türünün değişmez değeri olan **sabitler**.
 
 > [!NOTE]
-> Azure Search terminolojisinde farklıdır [OData standardı](https://www.odata.org/documentation/) birkaç yolla. Dediğimiz bir **alan** Azure Search'te adlı bir **özelliği** odata'da ve benzer şekilde **alan yolu** karşı **özellik yolu**. Bir **dizin** içeren **belgeleri** Azure Search'te daha genel odata'da başvurulan bir **varlık kümesi** içeren **varlıkları**. Azure arama terimleri, bu başvuru kullanılır.
+> Azure Bilişsel Arama terminoloji, [OData standbundan](https://www.odata.org/documentation/) birkaç yolla farklıdır. Azure Bilişsel Arama bir **alanı** çağırdığımız OData içinde **özellik** olarak adlandırılır ve benzer şekilde **alan yolu** ve **özellik yolu**için. Azure Bilişsel Arama 'de **belge** içeren bir **Dizin** , OData içinde **varlıkları**içeren bir **varlık kümesi** olarak daha genel olarak adlandırılır. Azure Bilişsel Arama terimleri bu başvuru boyunca kullanılır.
 
 ## <a name="field-paths"></a>Alan yolları
 
-Aşağıdaki EBNF ([genişletilmiş Backus-Naur Form](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)) alan yolları dilbilgisi tanımlar.
+Aşağıdaki EBNF ([Genişletilmiş Backus-Naur formu](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)) alan yollarının dilbilgisini tanımlar.
 
 <!-- Upload this EBNF using https://bottlecaps.de/rr/ui to create a downloadable railroad diagram. -->
 
@@ -56,62 +56,62 @@ field_path ::= identifier('/'identifier)*
 identifier ::= [a-zA-Z_][a-zA-Z_0-9]*
 ```
 
-Bir etkileşimli söz dizim diyagramı görülmektedir de kullanılabilir:
+Etkileşimli bir sözdizimi diyagramı da kullanılabilir:
 
 > [!div class="nextstepaction"]
-> [Azure Search için OData söz dizimini diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#field_path)
+> [Azure Bilişsel Arama için OData sözdizimi diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#field_path)
 
 > [!NOTE]
-> Bkz: [OData ifadesi söz dizimi başvurusu için Azure Search](search-query-odata-syntax-reference.md) tam EBNF için.
+> Tüm EBNF için bkz. [Azure bilişsel arama Için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md) .
 
-Bir alan yolu bir veya daha fazla oluşur **tanımlayıcıları** eğik çizgiyle ayrılmış. Her bir tanımlayıcının bir ASCII harf veya alt çizgi ile başlamalı ve yalnızca ASCII harf, rakam veya alt çizgi içeren bir karakter dizisi ' dir. Büyük veya küçük harf olabilir.
+Alan yolu, eğik çizgi ile ayrılmış bir veya daha fazla **tanımlayıcıdan** oluşur. Her tanımlayıcı, ASCII harf veya alt çizgi ile başlaması gereken bir karakter dizisidir ve yalnızca ASCII harfleri, rakamları veya alt çizgileri içermelidir. Harfler büyük veya küçük harf olabilir.
 
-Bir tanımlayıcı ya da bir alanın veya için adına başvurabilir bir **aralık değişkeni** bağlamında bir [koleksiyon ifadesi](search-query-odata-collection-operators.md) (`any` veya `all`) bir filtrede. Geçerli öğe koleksiyonunun temsil eden bir döngü değişkeni gibi bir aralık değişkendir. Karmaşık koleksiyonlar için değişkenin alt alanlara başvurmak için alan yollarını kullanabilirsiniz neden olan bir nesne, bu değişkeni temsil eder. Bu, çok sayıda programlama dilinde nokta gösterimi için benzerdir.
+Bir tanımlayıcı, bir alanın adına veya bir filtre içindeki bir [koleksiyon ifadesinin](search-query-odata-collection-operators.md) (`any` ya da `all`) bağlamındaki bir **Aralık değişkenine** başvurabilir. Aralık değişkeni, koleksiyonun geçerli öğesini temsil eden bir döngü değişkeni gibidir. Karmaşık koleksiyonlar için, bu değişken, değişkenin alt alanlarına başvurmak için alan yollarını kullanmanın neden olduğu bir nesneyi temsil eder. Bu, birçok programlama dilinde nokta gösterimine benzerdir.
 
-Aşağıdaki tabloda yer alan yollarının örnekler gösterilmektedir:
+Alan yollarının örnekleri aşağıdaki tabloda gösterilmiştir:
 
 | Alan yolu | Açıklama |
 | --- | --- |
-| `HotelName` | Dizinin en üst düzey bir alana başvuruyor |
-| `Address/City` | Başvurduğu `City` alt dizindeki; karmaşık bir alanın alan `Address` türünde `Edm.ComplexType` Bu örnekte |
-| `Rooms/Type` | Başvurduğu `Type` ; dizini bir karmaşık koleksiyonu alanında alt alanı `Rooms` türünde `Collection(Edm.ComplexType)` Bu örnekte |
-| `Stores/Address/Country` | Başvurduğu `Country` alt alanı `Address` ; dizini bir karmaşık koleksiyonu alanında alt alanı `Stores` türünde `Collection(Edm.ComplexType)` ve `Address` türünde `Edm.ComplexType` Bu örnekte |
-| `room/Type` | Başvurduğu `Type` alt alanı `room` örneğin filtre ifadesinde aralık değişkeni `Rooms/any(room: room/Type eq 'deluxe')` |
-| `store/Address/Country` | Başvurduğu `Country` alt alanı `Address` alt alanı `store` örneğin filtre ifadesinde aralık değişkeni `Stores/any(store: store/Address/Country eq 'Canada')` |
+| `HotelName` | Dizinin en üst düzey alanını ifade eder |
+| `Address/City` | Dizindeki bir karmaşık alanın `City` alt alanına başvurur; Bu örnekte `Edm.ComplexType` türü `Address` |
+| `Rooms/Type` | Dizindeki bir karmaşık koleksiyon alanının `Type` alt alanına başvurur; Bu örnekte `Collection(Edm.ComplexType)` türü `Rooms` |
+| `Stores/Address/Country` | Dizindeki bir karmaşık koleksiyon alanının `Address` alt alanının `Country` alt alanına başvurur; `Stores` türü `Collection(Edm.ComplexType)` ve `Address` bu örnekteki `Edm.ComplexType` türündedir |
+| `room/Type` | `room` Range değişkeninin `Type` alt alanına, örneğin, filtre ifadesinde başvurur `Rooms/any(room: room/Type eq 'deluxe')` |
+| `store/Address/Country` | `store` Range değişkeninin `Address` alt alanının `Country` alt alanına başvurur; Örneğin, filtre ifadesi `Stores/any(store: store/Address/Country eq 'Canada')` |
 
-Bir alan yolu anlamını bağlama bağlı olarak farklılık gösterir. Filtreleri, bir alan yolu değerine başvuran bir *tek örnek* geçerli belgedeki bir alanın. Diğer bağlamlarda gibi **$orderby**, **$select**, veya [fielded Search'te Lucene tamamını](query-lucene-syntax.md#bkmk_fields), alan için bir alan yolu gösterir. Bu fark, alan yolları filtreleri nasıl kullanacağınız için bazı sonuçları vardır.
+Bir alan yolunun anlamı, bağlama göre farklılık gösterir. Filtrelerdeki bir alan yolu, geçerli belgedeki bir alanın tek bir *örneğinin* değerini ifade eder. **$OrderBy**, **$Select**gibi diğer bağlamlarda veya [tam Lucene sözdiziminde ara](query-lucene-syntax.md#bkmk_fields)alanları, alan yolu alanın kendisini ifade eder. Bu fark, filtrelerdeki alan yollarını nasıl kullandığınız hakkında bazı sonuçlar içerir.
 
-Alan yolu göz önünde bulundurun `Address/City`. Bir filtre, bu geçerli belgede, "San Francisco" gibi tek bir şehri ifade eder. Buna karşılık, `Rooms/Type` başvurduğu `Type` ("standart", "ikinci odası vb. için deluxe" ilk odası için gibi) birçok odaları alt alan. Bu yana `Rooms/Type` anlamına gelmez bir *tek örnek* alt alan `Type`, doğrudan bir filtre kullanılamaz. Bunun yerine, yer türüne filtrelemek için kullanacağınız bir [lambda ifadesi](search-query-odata-collection-operators.md) böyle bir aralık değişkeni ile:
+Alan yolunu `Address/City`göz önünde bulundurun. Filtre içinde, bu, "San Francisco" gibi geçerli belge için tek bir şehir anlamına gelir. Buna karşılık `Rooms/Type`, birçok Oda için `Type` alt alanı anlamına gelir (ilk odadaki "standart", ikinci Oda için "Deluxe" gibi). `Rooms/Type` alt alan `Type`tek bir *örneğine* başvurmadığından, bu, doğrudan bir filtrede kullanılamaz. Bunun yerine, Oda türünü filtrelemek için, bir Aralık değişkeni ile bir [lambda ifadesi](search-query-odata-collection-operators.md) kullanırsınız, örneğin:
 
     Rooms/any(room: room/Type eq 'deluxe')
 
-Bu örnekte, aralık değişkeni `room` görünür `room/Type` alan yolu. Bu şekilde `room/Type` geçerli belge geçerli odada türünü ifade eder. Tek bir örneğini budur `Type` doğrudan filtrede kullanılabilmesi için alt alan.
+Bu örnekte, Aralık değişkeni `room` `room/Type` alan yolunda görüntülenir. Bu şekilde, `room/Type` geçerli belgedeki geçerli odanın türü anlamına gelir. Bu, `Type` alt alanının tek bir örneğidir, bu nedenle doğrudan filtrede kullanılabilir.
 
-### <a name="using-field-paths"></a>Alan yolları kullanma
+### <a name="using-field-paths"></a>Alan yollarını kullanma
 
-Alan yolları birçok parametrelerinde kullanılan [Azure Search API](https://docs.microsoft.com/rest/api/searchservice/). Aşağıdaki tabloda, burada kullanılabilirler her yerde yanı sıra, bunların kullanımını herhangi bir kısıtlama listelenmektedir:
+Alan yolları [Azure BILIŞSEL arama REST API](https://docs.microsoft.com/rest/api/searchservice/)'lerinin birçok parametresi için kullanılır. Aşağıdaki tabloda, kullanılabilecekleri tüm konumlar ve kullanımları üzerinde kısıtlamalar listelenmiştir:
 
-| API | Parametre adı | Kısıtlamalar |
+| eklentisi | Parametre adı | Kısıtlamalar |
 | --- | --- | --- |
-| [Oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-index) veya [güncelleştirme](https://docs.microsoft.com/rest/api/searchservice/update-index) dizini | `suggesters/sourceFields` | None |
-| [Oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-index) veya [güncelleştirme](https://docs.microsoft.com/rest/api/searchservice/update-index) dizini | `scoringProfiles/text/weights` | Yalnızca başvurabilir **aranabilir** alanları |
-| [Oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-index) veya [güncelleştirme](https://docs.microsoft.com/rest/api/searchservice/update-index) dizini | `scoringProfiles/functions/fieldName` | Yalnızca başvurabilir **filtrelenebilir** alanları |
-| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `search` zaman `queryType` olduğu `full` | Yalnızca başvurabilir **aranabilir** alanları |
-| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `facet` | Yalnızca başvurabilir **modellenebilir** alanları |
-| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `highlight` | Yalnızca başvurabilir **aranabilir** alanları |
-| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `searchFields` | Yalnızca başvurabilir **aranabilir** alanları |
-| [Öner](https://docs.microsoft.com/rest/api/searchservice/suggestions) ve [otomatik tamamlama](https://docs.microsoft.com/rest/api/searchservice/autocomplete) | `searchFields` | Yalnızca bir parçası olan alanlara başvurabilir bir [öneri aracı](index-add-suggesters.md) |
-| [Arama](https://docs.microsoft.com/rest/api/searchservice/search-documents), [Öner](https://docs.microsoft.com/rest/api/searchservice/suggestions), ve [otomatik tamamlama](https://docs.microsoft.com/rest/api/searchservice/autocomplete) | `$filter` | Yalnızca başvurabilir **filtrelenebilir** alanları |
-| [Arama](https://docs.microsoft.com/rest/api/searchservice/search-documents) ve [önerin](https://docs.microsoft.com/rest/api/searchservice/suggestions) | `$orderby` | Yalnızca başvurabilir **sıralanabilir** alanları |
-| [Arama](https://docs.microsoft.com/rest/api/searchservice/search-documents), [Öner](https://docs.microsoft.com/rest/api/searchservice/suggestions), ve [arama](https://docs.microsoft.com/rest/api/searchservice/lookup-document) | `$select` | Yalnızca başvurabilir **alınabilir** alanları |
+| Dizin [Oluştur](https://docs.microsoft.com/rest/api/searchservice/create-index) veya [Güncelleştir](https://docs.microsoft.com/rest/api/searchservice/update-index) | `suggesters/sourceFields` | Hiçbiri |
+| Dizin [Oluştur](https://docs.microsoft.com/rest/api/searchservice/create-index) veya [Güncelleştir](https://docs.microsoft.com/rest/api/searchservice/update-index) | `scoringProfiles/text/weights` | Yalnızca **aranabilir** alanlara başvurabilir |
+| Dizin [Oluştur](https://docs.microsoft.com/rest/api/searchservice/create-index) veya [Güncelleştir](https://docs.microsoft.com/rest/api/searchservice/update-index) | `scoringProfiles/functions/fieldName` | Yalnızca **filtrelenebilir** alanlara başvurabilir |
+| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `queryType` ne zaman `search` `full` | Yalnızca **aranabilir** alanlara başvurabilir |
+| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `facet` | Yalnızca çok **yönlü tablo** alanlarına başvurabilir |
+| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `highlight` | Yalnızca **aranabilir** alanlara başvurabilir |
+| [Search](https://docs.microsoft.com/rest/api/searchservice/search-documents) | `searchFields` | Yalnızca **aranabilir** alanlara başvurabilir |
+| [Öner](https://docs.microsoft.com/rest/api/searchservice/suggestions) ve [AutoComplete](https://docs.microsoft.com/rest/api/searchservice/autocomplete) | `searchFields` | Yalnızca bir [öneri aracı](index-add-suggesters.md) parçası olan alanlara başvurabilir |
+| [Arama](https://docs.microsoft.com/rest/api/searchservice/search-documents), [önerme](https://docs.microsoft.com/rest/api/searchservice/suggestions)ve [otomatik tamamlama](https://docs.microsoft.com/rest/api/searchservice/autocomplete) | `$filter` | Yalnızca **filtrelenebilir** alanlara başvurabilir |
+| [Arama](https://docs.microsoft.com/rest/api/searchservice/search-documents) ve [önerme](https://docs.microsoft.com/rest/api/searchservice/suggestions) | `$orderby` | Yalnızca **sıralanabilir** alanlara başvurabilir |
+| [Arama](https://docs.microsoft.com/rest/api/searchservice/search-documents), [önerme](https://docs.microsoft.com/rest/api/searchservice/suggestions)ve [arama](https://docs.microsoft.com/rest/api/searchservice/lookup-document) | `$select` | Yalnızca **alınabilir** alanlara başvurabilir |
 
-## <a name="constants"></a>Sabitleri
+## <a name="constants"></a>Lerde
 
-OData sabitlerle değişmez değerleri olan bir verilen [varlık veri modeli](https://docs.microsoft.com/dotnet/framework/data/adonet/entity-data-model) (EDM) türü. Bkz: [desteklenen veri türleri](https://docs.microsoft.com/rest/api/searchservice/supported-data-types) Azure Search'te desteklenen türleri listesi. Sabit koleksiyon türleri desteklenmez.
+OData içindeki sabitler, belirli bir [varlık veri modeli](https://docs.microsoft.com/dotnet/framework/data/adonet/entity-data-model) (EDM) türünün sabit değerlerdir. Azure Bilişsel Arama desteklenen türlerin listesi için bkz. [desteklenen veri türleri](https://docs.microsoft.com/rest/api/searchservice/supported-data-types) . Koleksiyon türü sabitleri desteklenmez.
 
-Aşağıdaki tabloda, her bir Azure Search tarafından desteklenen veri türleri için sabitleri örneklerini gösterir:
+Aşağıdaki tabloda, Azure Bilişsel Arama tarafından desteklenen her bir veri türü için sabitler örnekleri gösterilmektedir:
 
-| Veri türü | Örnek sabitleri |
+| Veri türü | Örnek sabitler |
 | --- | --- |
 | `Edm.Boolean` | `true`, `false` |
 | `Edm.DateTimeOffset` | `2019-05-06T12:30:05.451Z` |
@@ -122,7 +122,7 @@ Aşağıdaki tabloda, her bir Azure Search tarafından desteklenen veri türleri
 | `Edm.Int64` | `283032927235` |
 | `Edm.String` | `'hello'` |
 
-Aşağıdaki EBNF ([genişletilmiş Backus-Naur Form](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)) yukarıdaki tabloda gösterilen sabitleri çoğu için dilbilgisine tanımlar. Jeo-uzamsal türlerinin dilbilgisi bulunabilir [OData Jeo-uzamsal işlevleri Azure Search'te](search-query-odata-geo-spatial-functions.md).
+Aşağıdaki EBNF ([Genişletilmiş Backus-Naur formu](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)), yukarıdaki tabloda gösterilen sabitler için dilbilgisini tanımlar. Coğrafi uzamsal türler için dilbilgisi, [Azure bilişsel arama 'Da OData coğrafi uzamsal işlevlerde](search-query-odata-geo-spatial-functions.md)bulunabilir.
 
 <!-- Upload this EBNF using https://bottlecaps.de/rr/ui to create a downloadable railroad diagram. -->
 
@@ -184,21 +184,21 @@ exponent ::= 'e' sign? integer_literal
 boolean_literal ::= 'true' | 'false'
 ```
 
-Bir etkileşimli söz dizim diyagramı görülmektedir de kullanılabilir:
+Etkileşimli bir sözdizimi diyagramı da kullanılabilir:
 
 > [!div class="nextstepaction"]
-> [Azure Search için OData söz dizimini diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#constant)
+> [Azure Bilişsel Arama için OData sözdizimi diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#constant)
 
 > [!NOTE]
-> Bkz: [OData ifadesi söz dizimi başvurusu için Azure Search](search-query-odata-syntax-reference.md) tam EBNF için.
+> Tüm EBNF için bkz. [Azure bilişsel arama Için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md) .
 
-## <a name="building-expressions-from-field-paths-and-constants"></a>Alan yolları ve sabitleri ifade derleme
+## <a name="building-expressions-from-field-paths-and-constants"></a>Alan yollarından ve sabitlerden ifadeler oluşturma
 
-Alan yolları ve sabitler en temel bir OData ifadesiyle parçasıdır, ancak zaten tam ifadeler kendilerini oldukları. Aslında, **$select** parametresi Azure Search'te, alan yolları virgülle ayrılmış bir listesini ancak hiçbir şey ve **$orderby** çok daha karmaşık değil **$select**. Türünde bir alan seçerseniz `Edm.Boolean` dizininizdeki, yalnızca bu alan yolu olan bir filtre da yazabilirsiniz. Sabitler `true` ve `false` benzer şekilde geçerli filtrelerdir.
+Alan yolları ve sabitler, bir OData ifadesinin en temel kısmıdır, ancak bunlar zaten tam ifadelerdir. Aslında, Azure Bilişsel Arama **$Select** parametresi Nothing, ancak alan yollarının virgülle ayrılmış bir listesidir ve **$OrderBy** **$Select**kıyasla daha karmaşık değildir. Dizininizdeki `Edm.Boolean` türünde bir alanınız varsa, bu alanın yolu ancak hiçbir şey olmayan bir filtre de yazabilirsiniz. `true` ve `false` sabitleri aynı şekilde geçerli filtrelerdir.
 
-Ancak, çoğu zaman birden fazla alan ve sabiti bakın daha karmaşık ifadeler gerekir. Bu ifadeler, parametre bağlı olarak farklı şekillerde oluşturulur.
+Ancak, çoğu zaman birden fazla alana ve sabitine başvuran daha karmaşık deyimler gerekecektir. Bu ifadeler parametreye bağlı olarak farklı şekillerde oluşturulmuştur.
 
-Aşağıdaki EBNF ([genişletilmiş Backus-Naur Form](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)) için dilbilgisine tanımlar **$filter**, **$orderby**, ve **$select** parametreleri. Bu alan yolları ve sabitleri bakın daha basit ifadeler oluşturulur:
+Aşağıdaki EBNF ([Genişletilmiş Backus-Naur formu](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)) **$Filter**, **$OrderBy**ve **$Select** parametreleri için dilbilgisini tanımlar. Bunlar alan yollarına ve sabitlere başvuran daha basit ifadelerden oluşturulmuştur:
 
 <!-- Upload this EBNF using https://bottlecaps.de/rr/ui to create a downloadable railroad diagram. -->
 
@@ -210,26 +210,26 @@ order_by_expression ::= order_by_clause(',' order_by_clause)*
 select_expression ::= '*' | field_path(',' field_path)*
 ```
 
-Bir etkileşimli söz dizim diyagramı görülmektedir de kullanılabilir:
+Etkileşimli bir sözdizimi diyagramı da kullanılabilir:
 
 > [!div class="nextstepaction"]
-> [Azure Search için OData söz dizimini diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#filter_expression)
+> [Azure Bilişsel Arama için OData sözdizimi diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#filter_expression)
 
 > [!NOTE]
-> Bkz: [OData ifadesi söz dizimi başvurusu için Azure Search](search-query-odata-syntax-reference.md) tam EBNF için.
+> Tüm EBNF için bkz. [Azure bilişsel arama Için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md) .
 
-**$Orderby** ve **$select** parametrelerdir hem daha basit ifadeler virgülle ayrılmış listesi. **$Filter** oluşan bir Boole ifadesi daha basit bir alt ifade bir parametredir. Bu alt ifadeler gibi mantıksal işleçleri kullanılarak birleştirilir [ `and`, `or`, ve `not` ](search-query-odata-logical-operators.md), Karşılaştırma işleçleri gibi [ `eq`, `lt`, `gt`ve benzeri](search-query-odata-comparison-operators.md)ve koleksiyon işleçler gibi [ `any` ve `all` ](search-query-odata-collection-operators.md).
+**$OrderBy** ve **$Select** parametreleri, daha basit ifadelerin virgülle ayrılmış listeleridir. **$Filter** parametresi, daha basit alt ifadelerden oluşan bir Boolean ifadedir. Bu alt ifadeler [`and`, `or`ve `not`](search-query-odata-logical-operators.md)gibi mantıksal işleçler, [`eq`, `lt`, `gt`, vb](search-query-odata-comparison-operators.md). gibi karşılaştırma işleçleri ve [`any` ve @no__t_10 gibi koleksiyon işleçleri kullanılarak birleştirilir _ ](search-query-odata-collection-operators.md).
 
-**$Filter**, **$orderby**, ve **$select** parametreleri incelediniz daha ayrıntılı için aşağıdaki makalelere bakın:
+**$Filter**, **$OrderBy**ve **$Select** parametreleri aşağıdaki makalelerde daha ayrıntılı bir şekilde araştırılabilir:
 
-- [Azure Search'te $filter OData söz dizimi](search-query-odata-filter.md)
-- [Azure Search'te $orderby OData söz dizimi](search-query-odata-orderby.md)
-- [Azure Search'te OData $select söz dizimi](search-query-odata-select.md)
+- [Azure Bilişsel Arama 'de OData $filter söz dizimi](search-query-odata-filter.md)
+- [Azure Bilişsel Arama 'de OData $orderby söz dizimi](search-query-odata-orderby.md)
+- [Azure Bilişsel Arama 'de OData $select söz dizimi](search-query-odata-select.md)
 
 ## <a name="see-also"></a>Ayrıca bkz.  
 
-- [Azure Arama'da çok yönlü navigasyon](search-faceted-navigation.md)
-- [Azure Search'te filtreler](search-filters.md)
-- [Search belgeleri &#40;Azure arama hizmeti REST API'si&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Azure Bilişsel Arama çok yönlü gezinme](search-faceted-navigation.md)
+- [Azure Bilişsel Arama filtreler](search-filters.md)
+- [Belgeleri &#40;Azure Bilişsel Arama ara REST API&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
 - [Lucene sorgu söz dizimi](query-lucene-syntax.md)
-- [Azure Search'te Basit Sorgu söz dizimi](query-simple-syntax.md)
+- [Azure Bilişsel Arama basit sorgu söz dizimi](query-simple-syntax.md)

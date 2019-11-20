@@ -3,9 +3,8 @@ title: Azure Güvenlik Merkezi Hazırlığı Yol Haritası | Microsoft Docs
 description: Bu belge, Azure Güvenlik Merkezi'nde kullanılacak bir hazırlık yol haritası sağlar.
 services: security-center
 documentationcenter: na
-author: rkarlin
-manager: ndicola
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: fece670cc-df70-445d-9773-b32cbaba8d4a
 ms.service: security-center
 ms.devlang: na
@@ -14,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/03/2018
 ms.author: yurid
-ms.openlocfilehash: 7de085766ae700b5c76d9eca49c1127aabdddb9b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ea029e62ac1273d9796e52edc3f7a46868964d2a
+ms.sourcegitcommit: 3f8017692169bd75483eefa96c225d45cd497f06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60703413"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73520749"
 ---
 # <a name="azure-security-center-readiness-roadmap"></a>Azure Güvenlik Merkezi Hazırlığı Yol Haritası
 Bu belge, Azure Güvenlik Merkezi ile çalışmaya başlamanıza yardımcı olacak bir hazırlık yol haritası sağlar.
@@ -67,9 +66,8 @@ Güvenlik uyarılarını yönetmenize ve kaynaklarınızı korumanıza yardımc�
 
 Makaleler    
 * [Azure Güvenlik Merkezi'nde güvenlik durumunu izleme](https://docs.microsoft.com/azure/security-center/security-center-monitoring)
-* [Azure Güvenlik Merkezi'nde sanal makinelerinizi koruma](https://docs.microsoft.com/azure/security-center/security-center-virtual-machine-recommendations)
+* [Azure Güvenlik Merkezi'nde makinelerinizi ve uygulamalarınızı koruma](security-center-virtual-machine-protection.md)
 * [Azure Güvenlik Merkezi'nde ağınızı koruma](https://docs.microsoft.com/azure/security-center/security-center-network-recommendations)
-* [Azure Güvenlik Merkezi'nde uygulamalarınızı koruma](https://docs.microsoft.com/azure/security-center/security-center-application-recommendations)
 * [Azure Güvenlik Merkezi'nde Azure SQL hizmetini ve verilerini koruma](https://docs.microsoft.com/azure/security-center/security-center-sql-service-recommendations)
 
 
@@ -91,16 +89,16 @@ Makaleler
 
 ## <a name="advanced-cloud-defense"></a>Gelişmiş bulut savunması
 
-Azure VM'ler, Güvenlik Merkezi’ndeki gelişmiş bulut savunma özelliklerinden yararlanabilir. Bu özellikler zamanında sanal makine (VM) erişimi ve uyarlamalı uygulama denetimlerini içerir.
+Azure VM'ler, Güvenlik Merkezi’ndeki gelişmiş bulut savunma özelliklerinden yararlanabilir. Bu yetenekler, tam zamanında sanal makine (VM) erişimi ve Uyarlamalı uygulama denetimleri içerir.
 
 Bu özelliklerin Güvenlik Merkezi’nde nasıl kullanılacağını öğrenmek için aşağıdaki kaynakları kullanın.
 
 Videolar  
-* [Azure Güvenlik Merkezi – Zamanında VM Erişimi](https://youtu.be/UOQb2FcdQnU)
+* [Azure Güvenlik Merkezi – tam zamanında VM erişimi](https://youtu.be/UOQb2FcdQnU)
 * [Azure Güvenlik Merkezi - Uyarlamalı Uygulama Denetimleri](https://youtu.be/wWWekI1Y9ck)
 
 Makaleler    
-* [Tam zamanında özelliğini kullanarak sanal makine erişimini yönetme](https://docs.microsoft.com/azure/security-center/security-center-just-in-time)
+* [Tam zamanında sanal makine erişimini yönetme](https://docs.microsoft.com/azure/security-center/security-center-just-in-time)
 * [Azure Güvenlik Merkezi'ndeki Uyarlamalı Uygulama Denetimleri](https://docs.microsoft.com/azure/security-center/security-center-adaptive-application)
 
 ## <a name="hands-on-activities"></a>Uygulamalı etkinlikler
@@ -114,11 +112,11 @@ Makaleler
 * [Güvenlik Merkezi REST API’si Belgeleri Sayfası](https://msdn.microsoft.com/library/mt704034.aspx)
 * [Azure Güvenlik Merkezi hakkında sık sorulan sorular (SSS)](https://docs.microsoft.com/azure/security-center/security-center-faq)
 * [Güvenlik Merkezi Fiyatlandırma Sayfası](https://azure.microsoft.com/pricing/details/security-center/)
-* [Kimlik güvenliği için en iyi uygulamalar](https://docs.microsoft.com/azure/security/azure-security-identity-management-best-practices)
-* [Ağ güvenliği için en iyi uygulamalar](https://docs.microsoft.com/azure/security/azure-security-network-security-best-practices)
+* [Kimlik güvenliği için en iyi uygulamalar](https://docs.microsoft.com/azure/security/fundamentals/identity-management-best-practices)
+* [Ağ güvenliği için en iyi uygulamalar](https://docs.microsoft.com/azure/security/fundamentals/network-best-practices)
 * [PaaS önerileri](https://docs.microsoft.com/azure/security/security-paas-deployments)
-* [Uyumluluk](https://www.microsoft.com/en-us/trustcenter/compliance/due-diligence-checklist)
-* [Log analytics müşterileri artık karma bulut iş yüklerini korumak için Azure Güvenlik Merkezi kullanabilirsiniz](https://blogs.technet.microsoft.com/msoms/2017/09/25/oms-customers-can-now-use-azure-security-center-to-protect-their-hybrid-cloud-workloads/)
+* [Uyumluluk](https://www.microsoft.com/trustcenter/compliance/due-diligence-checklist)
+* [Log Analytics müşterileri artık, karma bulut iş yüklerini korumak için Azure Güvenlik Merkezi 'ni kullanabilir](https://blogs.technet.microsoft.com/msoms/2017/09/25/oms-customers-can-now-use-azure-security-center-to-protect-their-hybrid-cloud-workloads/)
 
 ## <a name="community-resources"></a>Topluluk Kaynakları
 

@@ -1,56 +1,59 @@
 ---
-title: Gözcü Azure Önizleme için Office 365 verilerine bağlanın | Microsoft Docs
-description: Azure Gözcü için Office 365 verilerine bağlanmayı öğreneceksiniz.
+title: Office 365 verilerini Azure Sentinel 'e bağlama | Microsoft Docs
+description: Office 365 verilerini Azure Sentinel 'e bağlamayı öğrenin.
 services: sentinel
 documentationcenter: na
 author: rkarlin
 manager: rkarlin
 editor: ''
-ms.assetid: ff7c862e-2e23-4a28-bd18-f2924a30899d
-ms.service: sentinel
+ms.service: azure-sentinel
+ms.subservice: azure-sentinel
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/07/2019
+ms.date: 09/23/2019
 ms.author: rkarlin
-ms.openlocfilehash: 6b1e167d26b5848238dd51bf9792f8316c33a385
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 481acfdccb54077f18c1f4bf0375c0dc66e66007
+ms.sourcegitcommit: 992e070a9f10bf43333c66a608428fcf9bddc130
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65205559"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71240656"
 ---
 # <a name="connect-data-from-office-365-logs"></a>Office 365 günlüklerinden veri bağlama
 
+
+
+Denetim günlüklerini [Office 365](https://docs.microsoft.com/office365/admin/admin-home?view=o365-worldwide) ' den Azure Sentinel 'e tek bir tıklama ile akışla aktarabilirsiniz. Azure Sentinel 'de, birden çok kiracıdan gelen denetim günlüklerini tek bir çalışma alanına akışla aktarabilirsiniz. Office 365 etkinlik günlüğü Bağlayıcısı, devam eden kullanıcı etkinlikleri hakkında öngörüler sağlar. Office 365 ' den çeşitli Kullanıcı, yönetici, sistem ve ilke eylemleri ve olayları hakkında bilgi alacaksınız. Office 365 günlüklerini Azure Sentinel 'e bağlayarak panoları görüntülemek, özel uyarılar oluşturmak ve araştırma işleminizi geliştirmek için bu verileri kullanabilirsiniz.
+
 > [!IMPORTANT]
-> Azure Sentinel şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-Denetim günlükleri akışını [Office 365](https://docs.microsoft.com/office365/admin/admin-home?view=o365-worldwide) Azure Gözcü tek bir tıklamayla içine. Azure Gözcü içinde tek bir çalışma alanı için denetim günlüklerini birden çok kiracıdan gelen akışını yapabilirsiniz. Office 365 etkinlik günlüğü Bağlayıcısı, devam eden kullanıcı etkinlikleri hakkında Öngörüler sağlar. Office 365'ten çeşitli kullanıcı, yönetici, sistem ve ilke Eylemler ve olaylar hakkında bilgi alırsınız. Office 365 günlüklerini Azure Gözcü bağlanarak, panoları görüntülemesine, özel uyarıları oluşturma ve araştırma süreci iyileştirmek için bu verileri kullanabilirsiniz.
-
+> E3 lisansınız varsa, Office 365 yönetimi etkinlik API 'SI üzerinden verilere erişebilmek için önce Office 365 kuruluşunuz için Birleşik denetim günlüğünü etkinleştirmeniz gerekir. Bunu, Office 365 denetim günlüğünü açarak yapabilirsiniz. Yönergeler için bkz. [Office 365 denetim günlüğü aramasını açma veya kapatma](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off). Daha fazla bilgi için bkz. [Office 365 Yönetim ETKINLIĞI API başvurusu](https://docs.microsoft.com/office/office-365-management-api/office-365-management-activity-api-reference).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Kiracınızda genel yönetici veya güvenlik yöneticisi olmanız gerekir
-- Bilgisayarınızda, bağlantı oluşturmak için Azure Gözcü oturum bağlantı noktası 4433 web trafiği için açık olduğundan emin olun.
+- Bağlantı oluşturmak için Azure Sentinel 'de oturum açtığınız bilgisayarınızda, bağlantı noktası 4433 ' nin Web trafiğine açık olduğundan emin olun. Bağlantı başarıyla yapıldıktan sonra bu bağlantı noktası yeniden kapatılabilir.
+- Kiracınızda Office 365 E3 veya Office 365 E5 lisansı yoksa, bu işlemlerden birini kullanarak kiracınızda Birleşik denetimi etkinleştirmeniz gerekir:
+    - [Set-AdminAuditLogConfig cmdlet 'Ini kullanarak](https://docs.microsoft.com/powershell/module/exchange/policy-and-compliance-audit/set-adminauditlogconfig?view=exchange-ps) "UnifiedAuditLogIngestionEnabled" parametresini etkinleştirin.
+    - [Veya güvenlik ve Uyumluluk Merkezi Kullanıcı arabirimini kullanma](https://docs.microsoft.com/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#before-you-begin).
 
 ## <a name="connect-to-office-365"></a>Office 365’e bağlanın
 
-1. Azure Gözcü içinde seçin **veri bağlayıcıları** ve ardından **Office 365** Döşe.
+1. Azure Sentinel 'de, **veri bağlayıcıları** ' nı seçin ve ardından **Office 365** kutucuğuna tıklayın.
 
-2. Zaten, altında değil etkinleştirdiyseniz **bağlantı** kullanın **etkinleştirme** Office 365 çözümü etkinleştirmek için düğme. Zaten etkinleştirilmişse, bağlantı ekranın etkinleştirilmiş olarak tanımlanır.
-1. Office 365 Azure Gözcü için birden çok kiracıdan gelen akış verileri olanak tanır. Bağlanmak istediğiniz her Kiracı için kiracısı altında ekleme **kiracılar bağlanmak için Azure Gözcü**. 
-1. Bir Active Directory ekranı açılır. Her Kiracı için Azure Gözcü bağlamak ve Azure Gözcü onun günlüklerini okumak için gerekli izinleri sağlamanız için istediğiniz bir genel yönetici kullanıcı kimlik doğrulaması istenir. 
-5. Stream Office 365 etkinlik günlükleri altında tıklayın **seçin** Azure Gözcü için akış gerçekleştirmek istediğiniz günlük türlerini seçmek için. Şu anda Azure Gözcü Exchange ve SharePoint'i desteklemektedir.
+2. Henüz etkinleştirmediyseniz, **bağlantı** altında Office 365 çözümünü etkinleştirmek için **Etkinleştir** düğmesini kullanın. Zaten etkinse, bağlantı ekranında zaten etkinleştirilmiş olarak belirtilir.
+1. Office 365, birden çok kiracıdan Azure Sentinel 'e veri akışı yapmanızı sağlar. Bağlanmak istediğiniz her kiracı için kiracıların **bağlantısını Azure Sentinel 'e**ekleyin. 
+1. Active Directory bir ekran açılır. Azure Sentinel 'e bağlanmak istediğiniz her kiracı üzerinde bir genel yönetici kullanıcıyla kimlik doğrulaması yapmanız istenir ve günlüklerini okumak için Azure Sentinel 'e izinler sağlayabilirsiniz. 
+5. Stream Office 365 etkinlik günlükleri altında, Azure Sentinel 'e hangi günlük türlerini aktarmak istediğinizi seçmek için **Seç** ' e tıklayın. Şu anda Azure Sentinel, Exchange ve SharePoint 'i destekliyor.
 
-4. Tıklayın **Değişiklikleri Uygula**.
+4. **Değişiklikleri Uygula**' ya tıklayın.
 
-3. İlgili şema için Office 365 günlükleri Log Analytics'te kullanmak için arama **OfficeActivity**.
+3. Office 365 günlükleri için Log Analytics ilgili şemayı kullanmak için **Officeactivity**' yi arayın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu belgede, Azure Gözcü için Office 365'i bağlama öğrendiniz. Azure Gözcü hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
-- Bilgi nasıl [görünürlük almak, veri ve olası tehditleri](quickstart-get-visibility.md).
-- Başlama [Azure Gözcü kullanarak tehditleri algılama](tutorial-detect-threats.md).
+Bu belgede Office 365 ' i Azure Sentinel 'e bağlamayı öğrendiniz. Azure Sentinel hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+- [Verilerinize nasıl görünürlük alabileceğinizi ve olası tehditleri](quickstart-get-visibility.md)öğrenin.
+- [Azure Sentinel ile tehditleri algılamaya](tutorial-detect-threats-built-in.md)başlayın.
 

@@ -1,27 +1,28 @@
 ---
-title: Hızlı Başlangıç - Azure - Azure portalı özel bir Docker kayıt defteri oluşturma
-description: Azure portalıyla hızlıca özel bir Docker kapsayıcısı kayıt defteri oluşturmayı öğrenin.
+title: Hızlı başlangıç-portalda kayıt defteri oluşturma-Azure Container Registry
+description: Azure portal Azure Container Registry içinde özel bir Docker kayıt defteri oluşturmayı hızlı bir şekilde öğrenin.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: quickstart
 ms.date: 01/22/2019
 ms.author: danlep
 ms.custom: seodec18, mvc
-ms.openlocfilehash: f41d51981c4da9ee089282da8b8d4cc5f37a4aed
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: bcf0874266aa83a4b4b932670557854c4688d400
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60827631"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73931641"
 ---
-# <a name="quickstart-create-a-private-container-registry-using-the-azure-portal"></a>Hızlı Başlangıç: Azure portalını kullanarak bir özel kapsayıcı kayıt defteri oluşturma
+# <a name="quickstart-create-a-private-container-registry-using-the-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak özel kapsayıcı kayıt defteri oluşturma
 
-Azure kapsayıcı kayıt defteri, Azure’da özel Docker kapsayıcısı görüntülerinizi depolayıp yönetebileceğiniz özel bir Docker kayıt defteridir. Bu hızlı başlangıçta, Azure portalıyla bir kapsayıcı kayıt defteri oluşturursunuz. Sonra kayıt defterine bir kapsayıcı görüntüsü göndermeye Docker komutlarını kullanın ve son olarak çekmek ve görüntüyü kayıt defterinizden çalıştırın.
+Azure kapsayıcı kayıt defteri, Azure’da özel Docker kapsayıcısı görüntülerinizi depolayıp yönetebileceğiniz özel bir Docker kayıt defteridir. Bu hızlı başlangıçta, Azure portalıyla bir kapsayıcı kayıt defteri oluşturursunuz. Ardından, Docker komutlarını kullanarak kayıt defterine bir kapsayıcı görüntüsü gönderin ve son olarak görüntüyü Kayıt defterinizden çekin ve çalıştırın.
 
-Kapsayıcı görüntüleri ile çalışmak için kayıt defterinde oturum açmak için bu hızlı başlangıçta Azure CLI'yı çalıştıran gerektirir (2.0.55 sürümü veya üzeri önerilir). Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme][azure-cli].
+Bu hızlı başlangıç, kapsayıcı görüntülerle çalışmak üzere kayıt defterinde oturum açmak için Azure CLı 'yi (sürüm 2.0.55 veya üzeri önerilir) çalıştırıyor olmanızı gerektirir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli].
 
-Ayrıca sisteminizde yerel olarak Docker yüklü olması gerekir. Docker [Mac][docker-mac], [Windows][docker-windows] veya [Linux][docker-linux]'ta Docker'ı kolayca yapılandırmanızı sağlayan paketler sağlar.
+Ayrıca sisteminizde yerel olarak Docker yüklü olması gerekir. Docker, [Mac][docker-mac], [Windows][docker-windows] veya [Linux][docker-linux]’ta Docker’ı kolayca yapılandırmanızı sağlayan paketler sağlar.
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
@@ -35,19 +36,19 @@ https://portal.azure.com adresinden Azure portalında oturum açın.
 
 **Kaynak Defteri Adı** ve **Kaynak grubu** değerlerini girin. Kaynak defteri adı Azure’da benzersiz olmalı ve 5-50 arası alfasayısal karakter içermelidir. Bu hızlı başlangıçta `West US` konumunda `myResourceGroup` adlı yeni bir kaynak grubu oluşturun ve **SKU** olarak ‘Temel’ seçeneğini belirleyin. **Oluştur**’u seçerek ACR örneğini dağıtın.
 
-![Azure portalında kapsayıcı kayıt defteri oluşturma][qs-portal-03]
+![Azure portal kapsayıcı kayıt defteri oluşturma][qs-portal-03]
 
-Bu hızlı başlangıçta oluşturduğunuz bir *temel* maliyet açısından iyileştirilmiş bir seçenek Azure Container Registry hakkında öğrenme geliştiriciler için kayıt defteri. Kullanılabilir hizmet katmanları hakkında daha fazla bilgi için bkz: [kapsayıcı kayıt defteri SKU'ları][container-registry-skus].
+Bu hızlı başlangıçta, Azure Container Registry hakkında bilgi edinmek için uygun maliyetli bir seçenek olan *temel* bir kayıt defteri oluşturursunuz. Kullanılabilir hizmet katmanları hakkında daha fazla bilgi için bkz. [kapsayıcı kayıt defteri SKU 'ları][container-registry-skus].
 
-Zaman **dağıtım başarılı** iletisi göründüğünde, portalda kapsayıcı kayıt defteri seçin. 
+**Dağıtım başarılı** iletisi göründüğünde, portalda kapsayıcı kayıt defteri ' ni seçin. 
 
-![Azure portalındaki kapsayıcı kayıt defteri genel bakış][qs-portal-05]
+![Azure portal kapsayıcı kayıt defterine genel bakış][qs-portal-05]
 
-Değerini not **oturum açma sunucusu**. Aşağıdaki adımlarda Azure CLI ve Docker ile kayıt defteriniz üzerinde çalışırken bu değeri kullanın.
+**Oturum açma sunucusunun**değerini bir yere göz atın. Bu değeri, Azure CLı ve Docker ile kayıt defteriyle çalışırken aşağıdaki adımlarda kullanırsınız.
 
 ## <a name="log-in-to-registry"></a>Kayıt defterinde oturum açma
 
-Kapsayıcı görüntülerini gönderip çekmeden önce ACR örneğinde oturum açmalısınız. İşletim sisteminizde bir komut kabuğunu açın ve kullanmak [az acr oturum açma] [ az-acr-login] Azure CLI komutu.
+Kapsayıcı görüntülerini gönderip çekmeden önce ACR örneğinde oturum açmalısınız. İşletim sisteminizde bir komut kabuğu açın ve Azure CLı 'de [az ACR Login][az-acr-login] komutunu kullanın.
 
 ```azurecli
 az acr login --name <acrName>
@@ -59,23 +60,23 @@ Bu komut tamamlandığında `Login Succeeded` döndürülür.
 
 ## <a name="list-container-images"></a>Kapsayıcı görüntülerini listeleme
 
-Kayıt defterinizde seçin ve portal gidin, kayıt defterindeki görüntüleri listelemek için **depoları**, ardından ile oluşturduğunuz depoyu seçin `docker push`.
+Kayıt defterinizin görüntülerini listelemek için portalda Kayıt defterinize gidin ve **depolar**' ı seçin ve ardından `docker push`oluşturduğunuz depoyu seçin.
 
-Bu örnekte, seçiyoruz **Merhaba-Dünya** depo ve biz görebilirsiniz `v1`-Etiketli Resim altında **ETİKETLERİ**.
+Bu örnekte, **Merhaba-Dünya** deposunu seçtik ve **Etiketler**altında `v1`etiketli görüntüyü görebiliriz.
 
-![Azure portalında kapsayıcı görüntülerini listeleme][qs-portal-09]
+![Azure portal kapsayıcı görüntülerini listeleme][qs-portal-09]
 
 [!INCLUDE [container-registry-quickstart-docker-pull](../../includes/container-registry-quickstart-docker-pull.md)]
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Kaynaklarınızı temizlemek için gidin **myResourceGroup** portalında kaynak grubu. Kaynak grubu yüklendikten sonra tıklayarak **kaynak grubunu Sil** kaynak grubunu, kapsayıcı kayıt defteri ve kapsayıcı görüntülerini kaldırmak için depolanan vardır.
+Kaynaklarınızı temizlemek için portalda **Myresourcegroup** kaynak grubuna gidin. Kaynak grubu yüklendikten sonra, kaynak grubunu, kapsayıcı kayıt defterini ve orada depolanan kapsayıcı görüntülerini kaldırmak için **kaynak grubunu sil** ' e tıklayın.
 
 ![Azure portalında kaynak grubunu silme][qs-portal-08]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, Azure portalı ile bir Azure Container Registry oluşturdunuz, bir kapsayıcı görüntüsü gönderdiniz çekilir ve kayıt defterinden görüntü çalıştı. ACR derin göz atmak için Azure Container Registry öğreticilere geçin.
+Bu hızlı başlangıçta, Azure portal bir Azure Container Registry oluşturdunuz, kapsayıcı görüntüsünü gönderdi ve görüntüyü kayıt defterinden çekmiş ve çalıştırdınız. ACR 'ye daha ayrıntılı bir bakış için Azure Container Registry öğreticilerine geçin.
 
 > [!div class="nextstepaction"]
 > [Azure Container Registry öğreticileri][container-registry-tutorial-quick-task]

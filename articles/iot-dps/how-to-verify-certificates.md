@@ -1,79 +1,78 @@
 ---
-title: Kavram, elinde Azure IOT Hub cihazı sağlama hizmeti ile X.509 CA sertifikalarının nasıl | Microsoft Docs
-description: Cihaz sağlama hizmeti ile X.509 CA sertifikalarını doğrulama
+title: Azure IoT Hub cihaz sağlama hizmeti ile X. 509.440 CA sertifikaları için birlikte kullanma
+description: Azure IoT Hub cihaz sağlama hizmeti ile X. 509.440 CA sertifikaları için birlikte kullanma
 author: wesmc7777
 ms.author: wesmc
 ms.date: 02/26/2018
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-manager: timlt
-ms.openlocfilehash: afa4b3861e9fb7f91fd9f5d540353c5fad23efe0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e762a1ab307bdc5ca9369c3f2e424cf6fd35f163
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "54913623"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890639"
 ---
-# <a name="how-to-do-proof-of-possession-for-x509-ca-certificates-with-your-device-provisioning-service"></a>Kavram, elinde cihaz sağlama hizmeti ile X.509 CA sertifikalarının nasıl
+# <a name="how-to-do-proof-of-possession-for-x509-ca-certificates-with-your-device-provisioning-service"></a>Cihaz sağlama hizmeti ile X. 509.440 CA sertifikaları için birlikte kullanma
 
-Bir doğrulanmış X.509 sertifika yetkilisi (sertifikadır yüklenmiş ve sağlama, kayıtlı bir CA sertifikası CA), hizmet ve kavram, elinde Service aracılığıyla duruma geçti. 
+Doğrulanmış bir X. 509.440 sertifika yetkilisi (CA) sertifikası, karşıya yüklenen ve sağlama hizmetinize kaydedilen ve hizmetle birlikte bulunan bir CA sertifikasıdır. 
 
-Elinde kavram aşağıdaki adımları içerir:
-1. X.509 CA sertifikanız için sağlama hizmeti tarafından oluşturulan benzersiz bir doğrulama kodu alın. Bu işlemi Azure portalından yapabilirsiniz.
-2. Kendi konu olarak doğrulama kodunu içeren bir X.509 doğrulama sertifikası oluşturun ve X.509 CA sertifikanızla ilişkili özel anahtara sahip sertifika imzalayın.
-3. Hizmete imzalı doğrulama sertifikası yükleyin. Hizmet, bu nedenle, CA sertifikanın özel anahtarı elinde olduğunuzu kanıtlama doğrulanması için CA sertifikasının ortak kısmını kullanarak doğrulama sertifikasını doğrular.
+Sahip olma kanıtı aşağıdaki adımları içerir:
+1. X. 509.440 CA sertifikanız için sağlama hizmeti tarafından oluşturulan benzersiz bir doğrulama kodu alın. Bunu Azure portal yapabilirsiniz.
+2. Onaylama kodu olan bir X. 509.952 doğrulama sertifikası oluşturun ve sertifikayı X. 509.440 CA sertifikanız ile ilişkili özel anahtarla imzalayın.
+3. İmzalı doğrulama sertifikasını hizmete yükleyin. Hizmet, CA sertifikasının doğrulanması için ortak kısmını kullanarak doğrulama sertifikasını doğrular ve bu nedenle CA sertifikasının özel anahtarını elinde bulabilirsiniz.
 
-Doğrulanmış sertifikalar, kayıt grupları kullanılırken önemli bir rol oynar. Sertifika sahipliğini doğrulayarak, sertifikanın uploader sertifikanın özel anahtarı elinde sağlayarak bir ek güvenlik katmanı sağlar. Doğrulama cihazlarınızı etkili bir şekilde ele geçirme bir ara sertifika ayıklanırken ve kendi sağlama hizmetinde bir kayıt grubu oluşturmak için bu sertifikayı kullanarak trafiğinizi algılaması kötü amaçlı bir aktör engeller. Kök veya Ara Sertifika bir Sertifika zincirindeki sahipliğini doğrulayan tarafından yaprak sertifikalar, kayıt grubunun bir parçası olarak kayıt cihazları için oluşturma iznine sahip kanıtlama. Bu nedenle, kök veya Ara Sertifika bir kayıt grubunda yapılandırılmış ya da doğrulanmış bir sertifika olmalıdır veya gerekir hizmetiyle doğruladığında bir cihaz Sertifika zincirindeki doğrulanmış bir sertifika hangilerine sunar. Kayıt grupları hakkında daha fazla bilgi için bkz: [X.509 sertifikaları](concepts-security.md#x509-certificates) ve [X.509 sertifikalarıyla sağlama hizmetine cihaz erişimini denetleme](concepts-security.md#controlling-device-access-to-the-provisioning-service-with-x509-certificates).
+Doğrulanan sertifikalar, kayıt grupları kullanılırken önemli bir rol oynar. Sertifika sahipliğinin doğrulanması, sertifikanın yükleyici 'nin sertifikanın özel anahtarıyla aynı olduğundan emin olarak ek bir güvenlik katmanı sağlar. Doğrulama kötü niyetli bir aktörün bir ara sertifikayı ayıklamasını ve bu sertifikayı kullanarak kendi sağlama hizmetinde bir kayıt grubu oluşturmasını ve cihazlarınızı etkili bir şekilde ele almasını engeller. Bir sertifika zincirindeki kök veya ara sertifikanın sahipliğini seçerek, bu kayıt grubunun bir parçası olarak kaydedilecek cihazlar için yaprak sertifikaları oluşturma izninizin olduğunu size sunuyoruz. Bu nedenle, bir kayıt grubunda yapılandırılan kök veya ara sertifikanın doğrulanmış bir sertifika olması veya bir cihazın hizmet ile kimliğini doğruladığında sunduğu sertifika zincirindeki doğrulanmış bir sertifikaya toplaması gerekir. Kayıt grupları hakkında daha fazla bilgi edinmek için bkz. [x. 509.440 sertifikaları](concepts-security.md#x509-certificates) ve [x. 509.440 sertifikalarıyla sağlama hizmetine cihaz erişimini denetleme](concepts-security.md#controlling-device-access-to-the-provisioning-service-with-x509-certificates).
 
-## <a name="register-the-public-part-of-an-x509-certificate-and-get-a-verification-code"></a>X.509 sertifikasının ortak bölümünü kaydolun ve bir doğrulama kodu alın
+## <a name="register-the-public-part-of-an-x509-certificate-and-get-a-verification-code"></a>Bir X. 509.952 sertifikasının ortak bölümünü kaydedin ve doğrulama kodu alın
 
-Bir CA sertifikası, sağlama hizmetinizle kaydetmek ve kavram, elinde sırasında kullanabileceğiniz doğrulama kodunu almak için aşağıdaki adımları izleyin. 
+Sağlama hizmetinize bir CA sertifikası kaydetmek ve sahip olma sürecinde kullanabileceğiniz bir doğrulama kodu almak için aşağıdaki adımları izleyin. 
 
-1. Azure portalında sağlama hizmetinize gidin ve açmak **sertifikaları** sol taraftaki menüden. 
-2. Tıklayın **Ekle** yeni bir sertifika eklemek için.
-3. Sertifikanız için bir kolay görünen ad girin. X.509 sertifikasının ortak bölümünü temsil eden .cer veya .pem dosyasına göz atın. **Karşıya Yükle**'ye tıklayın.
-4. Sertifikanızı başarıyla karşıya yüklendiğini bir bildirim alırsınız bitince **Kaydet**.
+1. Azure portal, sağlama hizmetinize gidin ve sol taraftaki menüden **Sertifikalar** ' ı açın. 
+2. Yeni bir sertifika eklemek için **Ekle** ' ye tıklayın.
+3. Sertifikanız için kolay bir görünen ad girin. X. 509.440 sertifikanızın ortak bölümünü temsil eden. cer veya. ped dosyasına gidin. **Karşıya Yükle**'ye tıklayın.
+4. Sertifikanızın başarıyla karşıya yüklendiğini belirten bir bildirim aldıktan sonra **Kaydet**' e tıklayın.
 
     ![Sertifikayı karşıya yükleme](./media/how-to-verify-certificates/add-new-cert.png)  
 
-   Sertifikanızı kategoride görüneceğini **sertifika Gezgini** listesi. Unutmayın **durumu** Bu sertifika *doğrulanmamış*.
+   Sertifikanız, **sertifika Gezgini** listesinde gösterilir. Bu sertifikanın **durumunun** *doğrulanmamış*olduğunu unutmayın.
 
-5. Önceki adımda eklediğiniz sertifika tıklayın.
+5. Önceki adımda eklediğiniz sertifikaya tıklayın.
 
-6. İçinde **sertifika ayrıntıları**, tıklayın **doğrulama kodu oluştur**.
+6. **Sertifika ayrıntıları**' nda **doğrulama kodu oluştur**' a tıklayın.
 
-7. Sağlama hizmeti oluşturur bir **doğrulama kodu** sertifika sahipliği doğrulamak için kullanabilirsiniz. Kodunu panonuza kopyalayın. 
+7. Sağlama Hizmeti, sertifika sahipliğini doğrulamak için kullanabileceğiniz bir **doğrulama kodu** oluşturur. Kodu panonuza kopyalayın. 
 
-   ![Sertifika doğrulama](./media/how-to-verify-certificates/verify-cert.png)  
+   ![Sertifikayı doğrula](./media/how-to-verify-certificates/verify-cert.png)  
 
-## <a name="digitally-sign-the-verification-code-to-create-a-verification-certificate"></a>Doğrulama sertifikası oluşturmak için doğrulama kodu imzala
+## <a name="digitally-sign-the-verification-code-to-create-a-verification-certificate"></a>Doğrulama sertifikası oluşturmak için doğrulama kodunu dijital olarak imzala
 
-Şimdi, oturum açmanız gerekir *doğrulama kodu* X.509 CA sertifikanızla ilişkili özel anahtara sahip bir imza oluşturduğu. Bu olarak bilinir [kanıtını](https://tools.ietf.org/html/rfc5280#section-3.1) ve imzalı doğrulama sertifikasını sonuçlanır.
+Şimdi, *doğrulama kodunu* , bir Imza üreten X. 509.440 CA sertifikanız ile ilişkili özel anahtarla imzalamanız gerekir. Bu, sahip olma [kanıtı](https://tools.ietf.org/html/rfc5280#section-3.1) ve imzalı doğrulama sertifikası sonuçları olarak bilinir.
 
-Microsoft araçları sağlar ve yardımcı olabilecek örneklerini imzalı doğrulama sertifikası oluşturun: 
+Microsoft, imzalı doğrulama sertifikası oluşturmanıza yardımcı olabilecek araçlar ve örnekler sağlar: 
 
-- **Azure IOT Hub C SDK'sı** geliştirme için CA ve yaprak sertifikaları oluşturmanıza yardımcı olacak ve elinde kavram doğrulama kodunu kullanarak gerçekleştirmek için (Windows) PowerShell ve Bash (Linux) komut dosyaları sağlar. İndirebilirsiniz [dosyaları](https://github.com/Azure/azure-iot-sdk-c/tree/master/tools/CACertificates) ilgili bir çalışma klasörü sisteminize ve yönergeleri izleyin [yönetme CA sertifikaları Benioku](https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md) üzerinde bir CA sertifikası elinde kavram gerçekleştirilecek. 
-- **Azure IOT Hub C# SDK'sı** içeren [Grup sertifikası doğrulama örneği](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/provisioning/Samples/service/GroupCertificateVerificationSample), hangi elinde kavram yapmak için kullanabilirsiniz.
+- **Azure IoT Hub C SDK** 'sı, geliştirme için CA ve yaprak sertifikaları oluşturmanıza ve bir doğrulama kodu kullanarak sahip olma kanıtını gerçekleştirmenize yardımcı olmak için PowerShell (Windows) ve Bash (Linux) betikleri sağlar. Sisteminizle ilgili [dosyaları](https://github.com/Azure/azure-iot-sdk-c/tree/master/tools/CACertificates) çalışan bir klasöre indirebilir ve CA [sertifikalarını yönetme Benioku](https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md) dosyasındaki yönergeleri izleyerek CA sertifikasına sahip olma işlemini gerçekleştirebilirsiniz. 
+- **Azure IoT Hub C# SDK 'sı** , sahip olma kanıtını yapmak Için kullanabileceğiniz [Grup sertifikası doğrulama örneğini](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/provisioning/Samples/service/GroupCertificateVerificationSample)içerir.
  
 > [!IMPORTANT]
-> Elinde kavram gerçekleştirmenin yanı sıra daha önce bahsedilen ayrıca PowerShell ve Bash betikleri kök sertifikaları ve ara sertifika kimlik doğrulaması ve cihazları sağlamak için kullanılan bir yaprak sertifikalar oluşturmanıza imkan tanır. Bu sertifikalar yalnızca geliştirme için kullanılması gerekir. Bir üretim ortamında hiçbir zaman kullanılmamalıdır. 
+> Aynı zamanda, sahip olma sağlamasını gerçekleştirmeye ek olarak, daha önce alıntı yapılan PowerShell ve Bash betikleri, cihazların kimliğini doğrulamak ve sağlamak için kullanılabilecek kök sertifikalar, ara sertifikalar ve yaprak sertifikalar oluşturmanıza de olanak tanır. Bu sertifikalar yalnızca geliştirme için kullanılmalıdır. Bunlar bir üretim ortamında asla kullanılmamalıdır. 
 
-Belgeler ve SDK'ları sağlanan PowerShell ve Bash betiklerini kullanan [OpenSSL](https://www.openssl.org/). Elinde kavram bunu yapmanıza yardımcı olmak için OpenSSL veya diğer üçüncü taraf araçları da kullanabilirsiniz. SDK'ları ile sağlanan araçları hakkında daha fazla bilgi için bkz: [SDK sağlanan araçları nasıl kullanacağınızı](how-to-use-sdk-tools.md). 
+Belgelerde ve SDK 'larda verilen PowerShell ve Bash betikleri [OpenSSL](https://www.openssl.org/)'e dayanır. Ayrıca, aynı zamanda OpenSSL veya diğer üçüncü taraf araçları da kullanabilirsiniz. SDK 'lar ile birlikte sunulan araç hakkında daha fazla bilgi için bkz. [SDK 'larda sunulan araçları kullanma](how-to-use-sdk-tools.md). 
 
 
 ## <a name="upload-the-signed-verification-certificate"></a>İmzalı doğrulama sertifikasını karşıya yükle
 
-1. Sonuçta elde edilen imza portalında sağlama hizmetinize doğrulama sertifikası olarak karşıya yükleyin. İçinde **sertifika ayrıntıları** Azure portalını _dosya Gezgini_ yanındaki simge **doğrulama sertifikası .pem veya .cer dosyası** alan imzalı karşıya yüklemek için sisteminizi sertifikadan doğrulama.
+1. Sonuç olarak verilen imzayı, portaldaki sağlama hizmetinize doğrulama sertifikası olarak yükleyin. Azure portal **sertifika ayrıntıları** ' nda, imzalı doğrulama sertifikasını sisteminizden karşıya yüklemek Için **doğrulama sertifikası. pek veya. cer dosya** alanının yanındaki _Dosya Gezgini_ simgesini kullanın.
 
-2. Sertifika başarıyla karşıya yüklendikten sonra tıklayın **doğrulama**. **Durumu** sertifika değişikliklerinizin **_doğrulandı_** içinde **sertifika Gezgini** listesi. Tıklayın **Yenile** varsa otomatik olarak güncelleştirilmez.
+2. Sertifika başarıyla karşıya yüklendikten sonra **Doğrula**' ya tıklayın. Sertifika **Gezgini** listesinde sertifikanızın **durumu** **_doğrulandı_** olarak değişir. Otomatik olarak güncelleştirmezse **Yenile** ' ye tıklayın.
 
-   ![Karşıya sertifika doğrulama](./media/how-to-verify-certificates/upload-cert-verification.png)  
+   ![Sertifika doğrulamasını karşıya yükle](./media/how-to-verify-certificates/upload-cert-verification.png)  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kayıt grubu oluşturmak için portalı kullanma hakkında bilgi edinmek için [Azure portalı ile cihaz kayıtlarını yönetme](how-to-manage-enrollments.md).
-- Kayıt grubu oluşturmak için hizmet SDK'ları kullanma hakkında bilgi edinmek için [hizmet Sdk'leri ile cihaz kayıtlarını yönetme](how-to-manage-enrollments-sdks.md).
+- Portal 'ın bir kayıt grubu oluşturmak üzere nasıl kullanılacağı hakkında bilgi edinmek için bkz. [Azure Portal cihaz kayıtlarını yönetme](how-to-manage-enrollments.md).
+- Hizmet SDK 'larının bir kayıt grubu oluşturmak için nasıl kullanılacağı hakkında bilgi edinmek için bkz. [cihaz kayıtlarını hizmet SDK 'ları Ile yönetme](how-to-manage-enrollments-sdks.md).
 
 
 

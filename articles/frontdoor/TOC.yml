@@ -48,16 +48,6 @@
       href: front-door-url-rewrite.md
     - name: URL yeniden yönlendirme
       href: front-door-url-redirect.md
-    - name: WAF
-      items:
-        - name: Genel Bakış
-          href: waf-overview.md
-        - name: Özel kurallar
-          href: waf-front-door-custom-rules.md
-        - name: İlke ayarları
-          href: waf-front-door-policy-settings.md
-        - name: İzleme ve günlüğe kaydetme
-          href: waf-front-door-monitor.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Trafiği yeniden yönlendirme
@@ -74,26 +64,10 @@
           href: front-door-troubleshoot-routing.md
         - name: İzin verilen sertifika yetkilileri
           href: front-door-troubleshoot-allowed-ca.md
-    - name: WAF’ı yapılandırma
-      items:
-        - name: WAF ilkesi yapılandırma - portal
-          href: waf-front-door-create-portal.md
-        - name: WAF ilkesini yapılandırma - Azure PowerShell
-          href: waf-front-door-custom-rules-powershell.md
-        - name: Bot korumasını yapılandırma
-          href: waf-front-door-policy-configure-bot-protection.md
-        - name: Özel yanıt kodunu yapılandırma
-          href: waf-front-door-configure-custom-response-code.md
-        - name: IP kısıtlamalarını yapılandırma
-          href: waf-front-door-configure-ip-restriction.md
-        - name: Oran sınırını yapılandırma - Azure PowerShell
-          href: waf-front-door-rate-limit-powershell.md
 - name: SSS
   items:
     - name: Front Door hakkında SSS
       href: front-door-faq.md
-    - name: WAF hakkında SSS
-      href: waf-faq.md
 - name: Başvuru
   items:
     - name: Azure CLI

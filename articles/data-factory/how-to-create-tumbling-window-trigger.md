@@ -1,37 +1,39 @@
 ---
-title: Azure Data Factory'de atlayan pencere Tetikleyicileri oluşturma | Microsoft Docs
-description: Azure Data factory'de bir atlayan pencere üzerinde bir işlem hattı çalıştırmalarını, tetikleyici oluşturmayı öğrenin.
+title: Azure Data Factory içinde atlayan pencere Tetikleyicileri oluşturma
+description: Bir ardışık düzen penceresinde bir işlem hattı çalıştıran Azure Data Factory tetikleyici oluşturmayı öğrenin.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-editor: ''
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.date: 12/14/2018
-ms.author: shlo
-ms.openlocfilehash: 6fbdee71ab1123c258a5191a78e38f51eb41cbab
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/11/2019
+ms.openlocfilehash: f9e31b8f0fce1af8408b80afb1049dae8c8ecf1c
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66152926"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73673704"
 ---
-# <a name="create-a-trigger-that-runs-a-pipeline-on-a-tumbling-window"></a>Bir atlayan pencere üzerinde bir işlem hattı çalıştırmalarını tetiği oluşturma
-Bu makalede, oluşturmak, başlatmak ve bir atlayan pencere tetikleyicisi izlemek için adımları sağlar. Tetikleyiciler ve desteklenen türler hakkında genel bilgi için bkz. [işlem hattı yürütme ve Tetikleyicileri](concepts-pipeline-execution-triggers.md).
+# <a name="create-a-trigger-that-runs-a-pipeline-on-a-tumbling-window"></a>Atlayan bir pencerede işlem hattı çalıştıran bir tetikleyici oluşturma
+Bu makalede, bir atlayan pencere tetikleyicisi oluşturma, başlatma ve izlemeye yönelik adımlar sağlanmaktadır. Tetikleyiciler ve desteklenen türler hakkında genel bilgi için bkz. işlem [hattı yürütme ve Tetikleyiciler](concepts-pipeline-execution-triggers.md).
 
-Atlayan pencere tetikleyicileri, durumu korurken belirtilen bir başlangıç zamanından itibaren periyodik bir zaman aralığında başlatılan bir tetikleyici türüdür. Atlayan pencereler sabit boyutlu, çakışmayan ve bitişik zaman aralıkları dizisidir. Atlayan pencere tetikleyicisi, işlem hattı ile bire bir ilişkisi vardır ve yalnızca tek bir işlem hattı başvurabilir.
+Atlayan pencere tetikleyicileri, durumu korurken belirtilen bir başlangıç zamanından itibaren periyodik bir zaman aralığında başlatılan bir tetikleyici türüdür. Atlayan pencereler sabit boyutlu, çakışmayan ve bitişik zaman aralıkları dizisidir. Atlayan pencere tetikleyicisinin bir işlem hattı ile bire bir ilişkisi vardır ve yalnızca tekil bir işlem hattına başvurabilir.
 
 ## <a name="data-factory-ui"></a>Data Factory Kullanıcı Arabirimi (UI)
 
-Azure portalında bir atlayan pencere tetikleyicisi oluşturmak için seçin **Tetikleyici > atlayan Pencere > sonraki**ve ardından atlayan pencere tanımlayan özellikleri yapılandırın.
+1. Data Factory Kullanıcı arabiriminde bir atlayan pencere tetikleyicisi oluşturmak için **Tetikleyiciler** sekmesini seçin ve ardından **Yeni**' yi seçin. 
+1. Tetikleyici yapılandırma bölmesi açıldıktan sonra, atlayan **pencere penceresi**' ni seçin ve ardından, çıkış penceresi tetikleyicisi özelliklerini tanımlayın. 
+1. İşiniz bittiğinde **Kaydet**'i seçin.
 
-![Azure portalında bir atlayan pencere tetikleyicisi oluşturma](media/how-to-create-tumbling-window-trigger/create-tumbling-window-trigger.png)
+![Azure portal bir atlayan pencere tetikleyicisi oluşturun](media/how-to-create-tumbling-window-trigger/create-tumbling-window-trigger.png)
 
-## <a name="tumbling-window-trigger-type-properties"></a>Atlayan pencere tetikleyicisi türü özellikleri
-Bir atlayan pencere aşağıdaki tetikleyici türü özellikleri vardır:
+## <a name="tumbling-window-trigger-type-properties"></a>Atlayan pencere tetikleyicisi tür özellikleri
+
+Atlayan bir pencere aşağıdaki tetikleyici türü özelliklerine sahiptir:
 
 ```
 {
@@ -40,16 +42,32 @@ Bir atlayan pencere aşağıdaki tetikleyici türü özellikleri vardır:
         "type": "TumblingWindowTrigger",
         "runtimeState": "<<Started/Stopped/Disabled - readonly>>",
         "typeProperties": {
-            "frequency": "<<Minute/Hour>>",
+            "frequency": <<Minute/Hour>>,
             "interval": <<int>>,
             "startTime": "<<datetime>>",
-            "endTime: "<<datetime – optional>>"",
-            "delay": "<<timespan – optional>>",
-            “maxConcurrency”: <<int>> (required, max allowed: 50),
+            "endTime: <<datetime – optional>>,
+            "delay": <<timespan – optional>>,
+            "maxConcurrency": <<int>> (required, max allowed: 50),
             "retryPolicy": {
                 "count": <<int - optional, default: 0>>,
-                “intervalInSeconds”: <<int>>,
-            }
+                "intervalInSeconds": <<int>>,
+            },
+            "dependsOn": [
+                {
+                    "type": "TumblingWindowTriggerDependencyReference",
+                    "size": <<timespan – optional>>,
+                    "offset": <<timespan – optional>>,
+                    "referenceTrigger": {
+                        "referenceName": "MyTumblingWindowDependency1",
+                        "type": "TriggerReference"
+                    }
+                },
+                {
+                    "type": "SelfDependencyTumblingWindowTriggerReference",
+                    "size": <<timespan – optional>>,
+                    "offset": <<timespan>>
+                }
+            ]
         },
         "pipeline": {
             "pipelineReference": {
@@ -72,24 +90,27 @@ Bir atlayan pencere aşağıdaki tetikleyici türü özellikleri vardır:
 }
 ```
 
-Aşağıdaki tabloda, ilgili yinelenmesi ve zamanlanmasıyla atlayan pencere tetikleyicisi olan ana JSON öğeleri üst düzey bir genel bakış sağlar:
+Aşağıdaki tabloda, atlayan bir pencere tetikleyicisinin yinelenme ve zamanlama ile ilgili büyük JSON öğelerine yönelik üst düzey bir genel bakış sunulmaktadır:
 
 | JSON öğesi | Açıklama | Tür | İzin verilen değerler | Gerekli |
 |:--- |:--- |:--- |:--- |:--- |
-| **type** | Tetikleyici türü. Sabit değer "TumblingWindowTrigger." türüdür | String | "TumblingWindowTrigger" | Evet |
-| **runtimeState** | Çalışma zamanı tetikleyicisinin geçerli durumu.<br/>**Not**: Bu öğe \<salt okunur >. | String | "Started" "Stopped" "Disabled" | Evet |
-| **frequency** | Tetikleyicinin yineleneceği sıklık birimi (dakika veya saat) temsil eden bir dize. Varsa **startTime** tarih değerleri daha ayrıntılı **sıklığı** değeri **startTime** tarih, zaman penceresi sınırları hesaplanır değerlendirilir. Örneğin, varsa **sıklığı** değerdir, saatlik ve **startTime** değerdir 2017-09-01T10:10:10Z, ilk penceredir (2017-09-01T10:10:10Z, 2017-09-01T11:10:10Z). | String | "minute", "hour"  | Evet |
-| **interval** | Tetikleyicinin çalışma sıklığını belirten **frequency** değerinin aralığını gösteren bir pozitif tamsayı. Örneğin, varsa **aralığı** 3'tür ve **sıklığı** "hour" olup tetikleyici 3 saatte bir yinelenir. | Integer | Pozitif bir tamsayı. | Evet |
-| **startTime**| Geçmişte olabilen ilk örneğin. İlk tetikleyici aralığı (**startTime**, **startTime** + **aralığı**). | DateTime | Bir tarih saat değeri. | Evet |
-| **endTime**| Geçmişte olabilen son a geçişi. | DateTime | Bir tarih saat değeri. | Evet |
-| **gecikme** | Pencere için veri işleme, başlangıcı geciktirmek üzere süre miktarı. Beklenen yürütme süresi ve miktarını sonra işlem hattı çalıştırması başlatıldığında **gecikme**. **Gecikme** tetikleyici yeni bir çalıştırma tetiklemeden önce son süresini geçen bekleyeceği süreyi tanımlar. **Gecikme** penceresi değiştirmez **startTime**. Örneğin, bir **gecikme** 00:10:00 değerini 10 dakikalık bir gecikme anlamına gelir. | Timespan<br/>(ss)  | Varsayılan değer 00:00:00 olduğu bir timespan değeri. | Hayır |
-| **maxConcurrency** | Windows için hazır olan tetikleyen eş zamanlı tetikleyici çalıştırmaları sayısı. Örneğin, arka dolgusu için 24 Windows dün sonuçları için saatlik çalıştırılır. Varsa **maxConcurrency** = 10, tetikleyici yalnızca ilk 10 windows için olay harekete geçirildi (00:00-01:00 - 09:00-10:00). İlk 10 tetiklenen işlem hattı çalıştırması tamamlandıktan sonra tetikleyici çalıştırmaları sonraki 10 windows (10:00-11:00-19:00-20:00) tetiklenir. Bu örnek ile devam etmeden **maxConcurrency** 10 windows 10 toplam işlem hattı çalıştırma hazır olduğunda, 10 =. Yoktur, yalnızca 1 penceresi hazır da yalnızca 1 işlem hattı çalıştırması yok. | Integer | 1 ile 50 arasında bir tamsayı. | Evet |
-| **retryPolicy: Sayısı** | "Başarısız" işaretlenmiş işlem hattı çalıştırmasını önce yeniden deneme sayısı  | Integer | Varsayılan değer 0 (yeniden deneme yok) olduğu bir tamsayı. | Hayır |
-| **retryPolicy: İntervalınseconds** | Saniye cinsinden belirtilen yeniden deneme girişimleri arasındaki gecikme. | Integer | Varsayılan değer 30 olduğu saniye sayısı. | Hayır |
+| **type** | Tetikleyicinin türü. Tür, "TumblingWindowTrigger" sabit değeridir. | Dize | "TumblingWindowTrigger" | Evet |
+| **runtimeState** | Tetikleyici çalışma zamanının geçerli durumu.<br/>**Note**: Bu öğe salt okunur > \<. | Dize | "Başlatıldı," "durduruldu," "devre dışı" | Evet |
+| **frequency** | Tetikleyicinin yineleneceği sıklık birimini (dakika veya saat) temsil eden bir dize. **StartTime** tarih değerleri **Sıklık** değerinden daha ayrıntılı ise, pencere sınırları hesaplandıktan sonra **StartTime** tarihleri kabul edilir. Örneğin **Sıklık** değeri saat Ise ve **StartTime** değeri 2017-09-01T10:10:10z ise, ilk pencere (2017-09-01T10:10:10z, 2017-09-01T11:10:10z). | Dize | "dakika", "saat"  | Evet |
+| **interval** | Tetikleyicinin çalışma sıklığını belirten **frequency** değerinin aralığını gösteren bir pozitif tamsayı. Örneğin, **Aralık** 3, **Sıklık** ise "saat" ise, tetikleyici her 3 saatte bir yinelenir. <br/>**Note**: en düşük pencere aralığı 15 dakikadır. | Tamsayı | Pozitif bir tamsayı. | Evet |
+| **startTime**| Geçmişte olabilecek ilk oluşum. İlk tetikleyici aralığı (**StartTime**, **StartTime** + **Interval**). | DateTime | Bir tarih saat değeri. | Evet |
+| **endTime**| Geçmişte olabilecek son oluşum. | DateTime | Bir tarih saat değeri. | Evet |
+| **ilir** | Pencere için veri işleme başlangıcını geciktirmek için geçen süre. İşlem hattı çalıştırması beklenen yürütme süresi artı **gecikme**miktarı ile başlatılır. **Gecikme** , tetikleyicinin yeni bir çalıştırmayı tetiklemeden önce geçen süreyi ne kadar bekleyeceğini tanımlar. **Gecikme** , pencerenin **StartTime**öğesini değiştirmez. Örneğin, 00:10:00 **gecikme** değeri 10 dakikalık bir gecikme anlamına gelir. | Timespan<br/>(SS: DD: SS)  | Varsayılan değer 00:00:00 olan bir TimeSpan değeri. | Hayır |
+| **maxConcurrency** | Kullanılabilir olan Windows için tetiklenen eşzamanlı tetikleyici çalışmalarının sayısı. Örneğin, saat başı için saatlik çalıştırmaları, 24 Windows ile sonuçlarınıza geri dönmek için. **MaxConcurrency** = 10 ise, tetikleyici olayları yalnızca ilk 10 pencere için tetiklenir (00:00-01:00-09:00-10:00). İlk 10 tetiklenen işlem hattı çalıştıktan sonra, sonraki 10 Windows için tetikleyici çalıştırmaları tetiklenir (10:00-11:00-19:00-20:00). **MaxConcurrency** = 10 ' un bu örneğine devam ederseniz, 10 Windows varsa, toplam 10 işlem hattı çalıştırması vardır. Yalnızca 1 pencere hazırlandıysanız yalnızca 1 işlem hattı çalıştırması vardır. | Tamsayı | 1 ile 50 arasında bir tamsayı. | Evet |
+| **retryPolicy: Count** | İşlem hattı çalıştırılmadan önceki yeniden deneme sayısı "başarısız" olarak işaretlenmemiştir.  | Tamsayı | Varsayılan değer 0 olan (yeniden deneme yok) bir tamsayı. | Hayır |
+| **retryPolicy: ıntervalınseconds** | Saniyeler içinde belirtilen yeniden deneme girişimleri arasındaki gecikme. | Tamsayı | Saniye sayısı, varsayılan değer 30 ' dur. | Hayır |
+| **dependsOn: type** | TumblingWindowTriggerReference türü. Bir bağımlılık ayarlandıysa gereklidir. | Dize |  "TumblingWindowTriggerDependencyReference", "SelfDependencyTumblingWindowTriggerReference" | Hayır |
+| **dependsOn: size** | Bağımlılık penceresinin boyutu. | Timespan<br/>(SS: DD: SS)  | Varsayılan değeri, alt tetikleyicisinin pencere boyutu olan pozitif bir TimeSpan değeri  | Hayır |
+| **dependsOn: offset** | Bağımlılık tetikleyicisinin boşluğu. | Timespan<br/>(SS: DD: SS) |  Kendinden bağımlılıkta negatif olması gereken bir TimeSpan değeri. Değer belirtilmemişse pencere, tetikleyiciyle aynı olur. | Kendinden bağımlılık: Evet<br/>Diğer: Hayır  |
 
 ### <a name="windowstart-and-windowend-system-variables"></a>WindowStart ve WindowEnd sistem değişkenleri
 
-Kullanabileceğiniz **WindowStart** ve **WindowEnd** atlayan pencere tetikleyicisi sistem değişkenlerinin, **işlem hattı** tanımı (diğer bir deyişle, bir sorgunun parçası için). Sistem değişkenleri parametre olarak, işlem hattınızda geçirmek **tetikleyici** tanımı. Aşağıdaki örnek bu değişkenleri parametreler gösterilmektedir:
+İşlem **hattı** tanımınızda (bir sorgunun parçası olarak), dönerek pencere tetikleyicisinin **Windowstart** ve **windowend** sistem değişkenlerini kullanabilirsiniz. Sistem değişkenlerini **tetikleyici** tanımında işlem hattınıza parametre olarak geçirin. Aşağıdaki örnekte, bu değişkenlerin parametre olarak nasıl geçirileceğini gösterilmektedir:
 
 ```
 {
@@ -117,27 +138,31 @@ Kullanabileceğiniz **WindowStart** ve **WindowEnd** atlayan pencere tetikleyici
 }
 ```
 
-Kullanılacak **WindowStart** ve **WindowEnd** sistem değişken değerleri işlem hattı tanımındaki "MyWindowStart" ve "MyWindowEnd" parametreleri uygun şekilde kullanın.
+İşlem hattı tanımında **Windowstart** ve **windowend** sistem değişkeni değerlerini kullanmak için, buna uygun olarak "mywindowstart" ve "mywindowend" parametrelerinizi kullanın.
 
-### <a name="execution-order-of-windows-in-a-backfill-scenario"></a>Windows doldurma senaryoda yürütme sırası
-Yürütme (özellikle bir doldurma senaryosunda) için birden çok windows olduğunda, windows için yürütme sırasını Yeniye aralıkları belirleyici,. Şu anda bu davranışın değiştirilmesi mümkün değildir.
+### <a name="execution-order-of-windows-in-a-backfill-scenario"></a>Arka doldurma senaryosunda Windows 'un yürütme sırası
+Yürütme için birden çok pencere (özellikle bir geri doldurma senaryosunda) olduğunda, Windows için yürütme sırası en eskiyi en eskiye ve en yeni aralıklara göre belirleyici olur. Şu anda bu davranışın değiştirilmesi mümkün değildir.
 
-### <a name="existing-triggerresource-elements"></a>Varolan TriggerResource öğeleri
-Aşağıdaki noktaları varolan uygulama **TriggerResource** öğeleri:
+### <a name="existing-triggerresource-elements"></a>Mevcut TriggerResource öğeleri
+Aşağıdaki noktaları var olan **Triggerresource** öğeleri için geçerlidir:
 
-* Varsa değerini **sıklığı** öğenin (veya pencere boyutu) tetikleyici değişikliklerin, önceden işlenmiş windows durumudur *değil* sıfırlayın. Tetikleyici yeni pencere boyutunu kullanarak yürütülen son penceresinden Windows ateşlenmesine devam eder.
-* Varsa değerini **endTime** zaten işlendi (eklenmiş veya güncelleştirilmiştir) tetikleyici değişikliklerin, Windows'un durumunu öğesidir *değil* sıfırlayın. Tetikleyici yeni geliştirir **endTime** değeri. Varsa yeni **endTime** değerdir zaten çalıştırılan windows önce tetikleyici durdurur. Aksi takdirde, tetikleyici olmadığında duruyor yeni **endTime** değer ile karşılaştı.
+* Tetikleyicinin **Sıklık** öğesi (veya pencere boyutu) değeri değişirse, zaten işlenmiş olan pencerelerin *durumu sıfırlanmaz.* Tetikleyici, yeni pencere boyutunu kullanarak yürütüldüğü son pencereden Windows için çalışmaya devam eder.
+* Tetikleyicinin **bitişi** öğesi için değer değişirse (eklenmiş veya güncelleştirilmiş), zaten işlenmiş olan pencerelerin *durumu sıfırlanmaz.* Tetikleyici, yeni **bitişsaati** değerini verir. Yeni bir **bitişsaati** değeri zaten yürütülmüş olan pencerelerin önünde ise, tetikleyici duraklar. Aksi takdirde tetikleyici, yeni **bitişsaati** değerine rastlana kadar duraklar.
 
-## <a name="sample-for-azure-powershell"></a>Azure PowerShell ile ilgili örnek
+### <a name="tumbling-window-trigger-dependency"></a>Atlayan pencere tetikleme bağımlılığı
+
+Bir atlayan pencere tetikleyicisinin yalnızca, veri fabrikasında başka bir dönüştürme penceresi tetikleyicisi başarıyla yürütüldükten sonra yürütüldüğünden emin olmak istiyorsanız, atlayan [bir pencere tetikleme bağımlılığı oluşturun](tumbling-window-trigger-dependency.md). 
+
+## <a name="sample-for-azure-powershell"></a>Azure PowerShell için örnek
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Bu bölüm oluşturmak için başlatın ve bir tetikleyici izlemek için Azure PowerShell kullanmayı gösterir.
+Bu bölümde, bir tetikleyiciyi oluşturmak, başlatmak ve izlemek için Azure PowerShell nasıl kullanılacağı gösterilmektedir.
 
-1. Adlı bir JSON dosyası oluşturun **MyTrigger.json** C:\ADFv2QuickStartPSH\ klasöründe aşağıdaki içeriğe sahip:
+1. C:\ADFv2QuickStartPSH\ klasöründe aşağıdaki içeriğe sahip **Mytrigger. JSON** ADLı bir JSON dosyası oluşturun:
 
     > [!IMPORTANT]
-    > JSON dosyasını kaydetmeden önce ayarlayın **startTime** geçerli UTC saati için öğesi. Değerini **endTime** geçerli UTC saatine son bir saat için öğesi.
+    > JSON dosyasını kaydetmeden önce, **StartTime** öğesinin DEĞERINI geçerli UTC saatine ayarlayın. **BitişZamanı** öğesinin DEĞERINI geçerli UTC saatinden bir saat olarak ayarlayın.
 
     ```json
     {
@@ -170,37 +195,39 @@ Bu bölüm oluşturmak için başlatın ve bir tetikleyici izlemek için Azure P
     }
     ```
 
-2. Bir tetikleyici kullanarak oluşturma **kümesi AzDataFactoryV2Trigger** cmdlet:
+2. **Set-AzDataFactoryV2Trigger** cmdlet 'ini kullanarak bir tetikleyici oluşturun:
 
     ```powershell
     Set-AzDataFactoryV2Trigger -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -Name "MyTrigger" -DefinitionFile "C:\ADFv2QuickStartPSH\MyTrigger.json"
     ```
     
-3. Tetikleyici durumunu olduğundan emin olun **durduruldu** kullanarak **Get-AzDataFactoryV2Trigger** cmdlet:
+3. Tetikleyici durumunun **Get-AzDataFactoryV2Trigger** cmdlet 'ı kullanılarak **durdurulduğunu** doğrulayın:
 
     ```powershell
     Get-AzDataFactoryV2Trigger -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -Name "MyTrigger"
     ```
 
-4. Kullanarak tetikleyiciyi başlatın **başlangıç AzDataFactoryV2Trigger** cmdlet:
+4. **Start-AzDataFactoryV2Trigger** cmdlet 'ini kullanarak tetikleyiciyi başlatın:
 
     ```powershell
     Start-AzDataFactoryV2Trigger -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -Name "MyTrigger"
     ```
 
-5. Tetikleyici durumunu olduğundan emin olun **başlatıldı** kullanarak **Get-AzDataFactoryV2Trigger** cmdlet:
+5. Tetikleyici durumunun **Get-AzDataFactoryV2Trigger** cmdlet 'ı kullanılarak **başlatıldığını** onaylayın:
 
     ```powershell
     Get-AzDataFactoryV2Trigger -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -Name "MyTrigger"
     ```
 
-6. Tetikleyici çalıştırmaları Azure PowerShell kullanarak get **Get-AzDataFactoryV2TriggerRun** cmdlet'i. Tetikleyici çalıştırmaları hakkında bilgi almak için düzenli aralıklarla aşağıdaki komutu yürütün. Güncelleştirme **TriggerRunStartedAfter** ve **TriggerRunStartedBefore** değerleri, tetikleyici tanımında eşleştirmek için değerler:
+6. **Get-AzDataFactoryV2TriggerRun** cmdlet 'ini kullanarak Azure PowerShell tetikleyici çalıştırmalarını alın. Tetikleyici çalıştırmaları hakkında bilgi almak için aşağıdaki komutu düzenli aralıklarla yürütün. **Triggerrunstartedadfter** ve **Triggerrunstartedbefore** değerlerini tetikleyici tanımınızdaki değerlerle eşleşecek şekilde güncelleştirin:
 
     ```powershell
     Get-AzDataFactoryV2TriggerRun -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -TriggerName "MyTrigger" -TriggerRunStartedAfter "2017-12-08T00:00:00" -TriggerRunStartedBefore "2017-12-08T01:00:00"
     ```
     
-Tetikleyici çalıştırmaları ve işlem hattı izlemek için Azure portalında çalışır, bkz: [işlem hattı çalıştırmalarını izleme](quickstart-create-data-factory-resource-manager-template.md#monitor-the-pipeline).
+Tetikleyici çalıştırmalarını izlemek ve Azure portal işlem hattı çalıştırmalarını izlemek için bkz. işlem [hattı çalıştırmalarını izleme](quickstart-create-data-factory-resource-manager-template.md#monitor-the-pipeline).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Tetikleyiciler hakkında ayrıntılı bilgi için bkz. [işlem hattı yürütme ve Tetikleyicileri](concepts-pipeline-execution-triggers.md#triggers).
+
+* Tetikleyiciler hakkında ayrıntılı bilgi için bkz. işlem [hattı yürütme ve Tetikleyiciler](concepts-pipeline-execution-triggers.md#triggers).
+* [Atlayan pencere tetikleme bağımlılığı oluşturma](tumbling-window-trigger-dependency.md)

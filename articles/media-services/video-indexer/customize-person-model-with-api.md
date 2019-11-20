@@ -1,7 +1,7 @@
 ---
-title: Video Indexer API kişi modeli - Azure'ı özelleştirmek için kullanın
-titlesuffix: Azure Media Services
-description: Bu makalede, Video Indexer API ile bir kişi modeli özelleştirme gösterilmektedir.
+title: Bir kişi modelini özelleştirmek için Video Indexer API 'sini kullanma-Azure
+titleSuffix: Azure Media Services
+description: Bu makalede, bir kişi modelinin Video Indexer API ile nasıl özelleştirileceği gösterilmektedir.
 services: media-services
 author: anikaz
 manager: johndeu
@@ -10,65 +10,65 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 05/15/2019
 ms.author: anzaman
-ms.openlocfilehash: 6c4980536eddd0226fac422ae17ddb717e34630d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 44f97e3d9af9daac8d62ae42be76bd73dedbd453
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65799465"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838257"
 ---
-# <a name="customize-a-person-model-with-the-video-indexer-api"></a>Video Indexer API ile bir kişi modeli özelleştirme
+# <a name="customize-a-person-model-with-the-video-indexer-api"></a>Video Indexer API ile bir kişi modelini özelleştirme
 
-Video Indexer, video içeriği için yüz algılama ve ünlü tanıma destekler. Ünlü tanıma özelliği, yaklaşık IMDB Wikipedia ve üst LinkedIn öğrenilenler gibi sık istenen bir veri kaynağına göre bir milyon yüzleri kapsar. Ünlü tanıma özelliği tarafından tanınmayan yüz algılandı; Ancak, sol adlandırılmamış. Görüntü, Video Indexer için karşıya yükleme ve sonuçları geri alma sonra geri dönün ve değil tanındı yüzleri adlandırın. Bir ada sahip bir yüz etiket sonra adı ve yüz hesabınızın kişi modele eklenir. Video Indexer, ardından bu yüz gelecekteki videoları ve son videolar algılar.
+Video Indexer, video içeriği için yüz algılamayı ve ünlüy tanımayı destekler. Ünlüçilerin tanınma özelliği, ıMDB, Viveze ve en popüler LinkedIn etkileyen, sık istenen veri kaynağına göre yaklaşık 1.000.000 yüz içerir. Ünlüğlik tanıma özelliği tarafından tanınmayan yüzler algılanır; Ancak, bunlar adlandırılmazlar. Video Indexer videoyu karşıya yükledikten ve sonuçları geri aldıktan sonra, geri dönüp tanınmamış yüzleri adı verebilirsiniz. Bir yüzü adı ile etiketledikten sonra, yüz ve ad hesabınızın kişi modeline eklenir. Video Indexer gelecekteki videolarınızdaki ve geçmiş videolarınızdaki bu yüzü tanıyacak.
 
-Video Indexer API, bu konuda açıklandığı bir video, algılanan yüzeylere düzenlemek için kullanabilirsiniz. Video Indexer Web sitesinde açıklandığı gibi kullanabilirsiniz [özelleştirme kişi modeli Video Indexer Web sitesini kullanarak](customize-person-model-with-api.md).
+Bu konuda açıklandığı gibi, videoda algılanan yüzeyleri düzenlemek için Video Indexer API 'sini kullanabilirsiniz. [Video Indexer Web sitesini kullanarak kişi modelini özelleştirme](customize-person-model-with-api.md)bölümünde açıklandığı gibi video Indexer Web sitesini de kullanabilirsiniz.
 
-## <a name="managing-multiple-person-models"></a>Birden çok kişi modeli yönetme 
+## <a name="managing-multiple-person-models"></a>Birden çok kişi modelini yönetme 
 
-Video Indexer, hesap başına birden çok kişi modelleri destekler. Bu özellik şu anda yalnızca Video Indexer API kullanılabilir.
+Video Indexer hesap başına birden çok kişi modelini destekler. Bu özellik şu anda yalnızca Video Indexer API 'Leri üzerinden kullanılabilir.
 
-Farklı kullanım örneği senaryoları için hesabınızı oluşturabilmesine olanak sağlar, hesap başına birden çok kişi modeller oluşturmak isteyebilirsiniz. Örneğin, içeriğiniz için Spor ilişkili ise, ardından her bir spor (futbol, Basketbol, futbol, vb.) için ayrı bir kişi modeli oluşturabilirsiniz. 
+Hesabınız farklı kullanım örneği senaryolarına karşı, hesap başına birden fazla kişi modeli oluşturmak isteyebilirsiniz. Örneğin, içeriğiniz spor ile ilgiliyse, her spor (futbol, basketbol, futbol, vb.) için ayrı bir kişi modeli oluşturabilirsiniz. 
 
-Bir model oluşturulduktan sonra karşıya yükleme/dizin ya da bir video ölçeklemek belirli bir kişi modelin model kimliği sağlayarak kullanabilirsiniz. Video için yeni bir yüz eğitim videosu ile ilişkilendirildi belirli özel model güncelleştirir.
+Bir model oluşturulduktan sonra, bir videoyu karşıya yüklerken/dizinleme yaparken veya yeniden dizinlerken belirli bir kişi modelinin model KIMLIĞINI sağlayarak onu kullanabilirsiniz. Video için yeni bir yüz eğitimi, videonun ilişkilendirildiği özel modeli günceller.
 
-Her hesap 50 kişi modelleri sınırı vardır. Birden çok kişi modeli desteği gerekmiyorsa, bir kişinin karşıya yükleme/dizin oluşturma veya yeniden dizin oluşturmaya videonuza model kimliği atamayın. Bu durumda, Video Indexer, hesabınızdaki varsayılan özel kişi modelini kullanır.
+Her hesabın 50 kişi modeli sınırlaması vardır. Birden çok kişi modeli desteği gerekmiyorsa, karşıya yükleme/dizinleme veya yeniden dizin oluşturma sırasında videonuza bir kişi modeli KIMLIĞI atamayın. Bu durumda, Video Indexer hesabınızda varsayılan özel kişi modelini kullanır.
 
-## <a name="create-a-new-person-model"></a>Yeni bir kişi model oluşturma
+## <a name="create-a-new-person-model"></a>Yeni bir kişi modeli oluşturun
 
-Yeni bir kişi modeli belirtilen hesabı oluşturun. 
+Belirtilen hesapta yeni bir kişi modeli oluşturun. 
 
 ### <a name="request-url"></a>İstek URL'si
 
-Bir POST isteği budur.
+Bu bir POST isteğidir.
 
 ```
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/PersonModels?name={name}&accessToken={accessToken}
 ```
 
-Curl istekte aşağıda verilmiştir.
+Aşağıda, istek kıvrımlı.
 
 ```curl
 curl -v -X POST "https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/PersonModels?name={name}&accessToken={accessToken}"
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Create-Person-Model?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Create-Person-Model?).
 
 ### <a name="request-parameters"></a>İstek parametreleri 
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|name|string|Evet|Kişi model adı|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|ad|string|Evet|Kişi modelinin adı|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
-Oluşturulan model kişinin Kimliğini ve adını, yeni oluşturduğunuz aşağıdaki örnekte biçimi aşağıdaki model isteğin yanıtını verir.
+Yanıt, aşağıdaki örnek biçimini izleyerek yeni oluşturduğunuz kişi modelinin adı ve oluşturulan model KIMLIĞINI sağlar.
 
 ```json
 {
@@ -77,13 +77,13 @@ Oluşturulan model kişinin Kimliğini ve adını, yeni oluşturduğunuz aşağ�
 }
 ```
 
-Ardından kullanmalısınız **kimliği** değerini **personModelId** parametre olduğunda [dizinine bir video karşıya](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) veya [video ölçeklemek](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?).
+Daha sonra, bir videoyu dizine veya [yeniden dizin oluşturmaya](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?) [bir video yüklerken](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) , **personmodelıd** parametresinin **kimlik** değerini kullanmanız gerekir.
 
-## <a name="delete-a-person-model"></a>Bir kişi modeli Sil
+## <a name="delete-a-person-model"></a>Kişi modelini silme
 
-Özel bir kişi model belirtilen hesaptan silin. 
+Belirtilen hesaptan özel bir kişi modelini silin. 
 
-Kişi model başarıyla silinirse, silinen modeli kullandığınız videolarınızı geçerli dizini bunları yeniden kadar değişmeden kalır. Ancak temel silinen modelde adlandırılmıştı yüzleri Video Indexer tarafından geçerli videolarınızı bu modeli kullanarak sıralanan tanınmayacak; Ancak, yine de bu yüzeyleri algılanır. Silinen modelini kullanarak sıralanan videolarınızı geçerli artık hesabınıza ait varsayılan Kişi modeli kullanır. Silinen modelinden yüzleri hesabınızın varsayılan modelinde olarak da adlandırılır, bu yüzeyleri videoları tanınması devam eder.
+Kişi modeli başarıyla silindikten sonra, silinen modeli kullanan geçerli videolarınızın dizini yeniden dizinleyene kadar değişmeden kalır. Yeniden dizin oluşturma sırasında, silinen modelde adlandırılmış yüzler, geçerli videolarınızdaki Video Indexer tarafından tanınmaz; bu model kullanılarak dizine alınmış. Ancak, bu yüzler yine de algılanacaktır. Silinen model kullanılarak dizini oluşturulmuş geçerli videolarınız artık hesabınızın varsayılan kişi modelini kullanacaktır. Silinen modeldeki yüzler aynı zamanda hesabınızın varsayılan modelinde da adlandırılmışsa, bu yüzlerin videolarda tanınabilmesi devam edecektir.
 
 ### <a name="request-url"></a>İstek URL'si
 
@@ -91,65 +91,65 @@ Kişi model başarıyla silinirse, silinen modeli kullandığınız videoların�
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/PersonModels/{id}?accessToken={accessToken}
 ```
 
-Curl istekte aşağıda verilmiştir.
+Aşağıda, istek kıvrımlı.
 ```curl
 curl -v -X DELETE "https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/PersonModels/{id}?accessToken={accessToken}"
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Person-Model?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Person-Model?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|id|string|Evet|Kişi model kimliği (kişi modeli oluşturduğunuzda oluşturulur)|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|id|string|Evet|Kişi modeli kimliği (kişi modeli oluşturulduğunda oluşturulur)|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
-Kişi model başarıyla silindiğinde döndürülen içerik yok.
+Kişi modeli başarıyla silindiğinde döndürülen içerik yok.
 
-## <a name="get-all-person-models"></a>Tüm kişi modelleri Al
+## <a name="get-all-person-models"></a>Tüm kişi modellerini al
 
-Tüm kişi modelleri belirtilen hesapta alın. 
+Belirtilen hesaptaki tüm kişi modellerini al. 
 
-### <a name="request-call"></a>İstek araması
+### <a name="request-call"></a>İstek çağrısı
 
-Bir GET isteği budur.
+Bu bir GET isteğidir.
 
 ```
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/PersonModels?accessToken={accessToken}
 ```
 
-Curl istekte aşağıda verilmiştir.
+Aşağıda, istek kıvrımlı.
 
 ```curl
 curl -v -X GET "https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/PersonModels?accessToken={accessToken}"
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Person-Models?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Person-Models?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
-Yanıt kişi modelleri (varsayılan Kişi modeli belirtilen hesapta dahil), hesabınızdaki tüm ve her biri kendi adları ve aşağıdaki örnekte biçimi aşağıdaki kimlikleri listesini sağlar.
+Yanıt, hesabınızdaki tüm kişi modellerinin (belirtilen hesaptaki varsayılan kişi modeli dahil) ve adlarının ve kimliklerinin her birinin aşağıdaki örnekte yer aldığı bir listesini sağlar.
 
 ```json
 [
@@ -164,53 +164,53 @@ Yanıt kişi modelleri (varsayılan Kişi modeli belirtilen hesapta dahil), hesa
 ]
 ```
 
-Hangi modeli kullanarak bir video için kullanmak istediğiniz seçebilirsiniz **kimliği** için kişi model değerini **personModelId** parametre olduğunda [dizinine bir video karşıya](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) veya [video ölçeklemek](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?).
+Videoyu dizine ekleme veya [yeniden dizin oluşturma](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?) [amacıyla bir video yüklerken](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) , **Personmodelıd** parametresi için kişi modelinin **kimlik** değerini kullanarak bir video için kullanmak istediğiniz modeli seçebilirsiniz.
 
-## <a name="update-a-face"></a>Bir yüzü güncelleştir
+## <a name="update-a-face"></a>Yüz güncelleştirme
 
-Bu komut, videoda bir yüzün videonun kimliği ve yüz Kimliğini kullanarak bir ad ile güncelleştirmenizi sağlar. Bu videoyu karşıya yükleme/dizin oluşturma veya yeniden dizin oluşturmaya ilişkili kişi model güncelleştirir. Hiçbir kişi modeli atanmışsa, hesabın varsayılan Kişi modelini güncelleştirir. 
+Bu komut, videonun KIMLIĞINI ve yüzün kimliğini kullanarak Videonuzdaki bir yüzü bir ad ile güncelleştirmenize olanak tanır. Bu, daha sonra videonun karşıya yükleme/dizinleme veya yeniden dizin oluşturma sırasında ilişkilendirildiği kişi modelini güncelleştirir. Hiçbir kişi modeli atanmamışsa, hesabın varsayılan kişi modelini güncelleştirir. 
 
-Bu gerçekleştikten sonra aynı yüz aynı kişi modeli paylaşan diğer geçerli videolarınızı, oluşumunu tanır. Diğer geçerli videolarınızı bir yüz tanıma, bir toplu işlem olarak etkili olması için biraz zaman alabilir.
+Bu durumda, aynı yüzün aynı yüzü, aynı kişi modelini paylaşan diğer geçerli videolarınızdaki tekrarlarını tanır. Diğer geçerli videolarınızdaki yüzün tanınabilmesi, bu bir toplu işlem olduğu için biraz zaman alabilir.
 
-Video Indexer, yeni bir adla bir ünlü tanınan bir yazıtipi güncelleştirebilirsiniz. Size yeni bir ad yerleşik ünlü tanıma öncelikli olur.
+Ünlüklik olarak tanınan Video Indexer bir yüzü yeni bir adla güncelleştirebilirsiniz. Verdiğiniz yeni ad, yerleşik ünlüğünün tanınmasına göre öncelikli olacaktır.
 
-### <a name="request-call"></a>İstek araması
+### <a name="request-call"></a>İstek çağrısı
 
-Bir POST isteği budur.
+Bu bir POST isteğidir.
 
 ```
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Videos/{videoId}/Index/Faces/{faceId}?accessToken={accessToken}&newName={newName}
 ```
 
-Curl istekte aşağıda verilmiştir.
+Aşağıda, istek kıvrımlı.
 
 ```curl
 curl -v -X PUT "https://api.videoindexer.ai/{location}/Accounts/{accountId}/Videos/{videoId}/Index/Faces/{faceId}?accessToken={accessToken}&newName={newName}"
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Video-Face?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Video-Face?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|videoId|string|Evet|Güncelleştirmek istediğiniz yüzü göründüğü videonun kimliği. Bu video karşıya yüklendi ve dizini oluşturulur.|
-|Faceıd|integer|Evet|Güncelleştirilecek yüz kimliği. Video dizinden Faceıd alabilirsiniz|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
-|name|string|Evet|Yüz tanıma güncelleştirmek için yeni adı.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|VideoID|string|Evet|Güncelleştirmek istediğiniz yüzün göründüğü videonun kimliği. Bu, video karşıya yüklendiğinde ve dizine eklendiğinde oluşturulur.|
+|FaceID|integer|Evet|Güncellenen yüzün kimliği. Video dizininden çok yönlü kimliği alabilirsiniz|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
+|ad|string|Evet|Yüzü güncelleştiren yeni ad.|
 
-İki farklı verirseniz aynı kişinin yüzlerini aynı modellemek için adları kişi modelleri için benzersiz **adı** parametre değeri, Video Indexer'ın aynı kişi yüzleri görünümleri ve videonuzu yeniden sonra bunları uygun sonuç verir. 
+Adlar kişi modelleri için benzersizdir. bu nedenle, aynı kişi modelinde aynı **ad** parametre değerini iki farklı yüz olarak verirseniz, video Indexer yüzeyleri aynı kişi olarak görüntüler ve videonuzu yeniden atadıktan sonra bu kullanıcılara dönüştürülebilmenizi sağlar. 
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
-Yüz tanıma başarıyla güncelleştirildiğinde döndürülen içerik yok.
+Yüz başarıyla güncelleştirildiği zaman döndürülen içerik yok.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Video Indexer Web sitesini kullanarak kişi modeli özelleştirme](customize-person-model-with-website.md)
+[Video Indexer Web sitesini kullanarak kişi modelini özelleştirme](customize-person-model-with-website.md)

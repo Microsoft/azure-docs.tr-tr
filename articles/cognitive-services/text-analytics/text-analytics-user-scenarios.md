@@ -1,7 +1,7 @@
 ---
-title: Metin analizi API'si için örnek kullanıcı senaryoları
+title: Metin Analizi API'si için örnek kullanıcı senaryoları
 titleSuffix: Azure Cognitive Services
-description: Metin analizi API'si hizmetlerinizi ve süreçlerini tümleştirmeye yönelik bazı yaygın senaryolar görmek için bu makaleyi kullanın.
+description: Metin Analizi API'si hizmetlerinizle ve süreçlerinizle tümleştirmeyle ilgili bazı yaygın senaryoları görmek için bu makaleyi kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,42 +10,42 @@ ms.subservice: text-analytics
 ms.topic: overview
 ms.date: 04/04/2019
 ms.author: aahi
-ms.openlocfilehash: d8d2aed16b5af60c44501e6d72332783a164ff91
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 19421788eea59ea250efbaa656266da49dc3b42f
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67478383"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73742740"
 ---
-# <a name="example-user-scenarios-for-the-text-analytics-api"></a>Metin analizi API'si için örnek kullanıcı senaryoları
+# <a name="example-user-scenarios-for-the-text-analytics-api"></a>Metin Analizi API'si için örnek kullanıcı senaryoları
 
-Metin analizi API'si metin üzerinde Gelişmiş doğal dil işleme sağlayan bir bulut tabanlı bir hizmettir. Bu makalede, API işlemlerini ve iş çözümleri ile tümleştirmeye yönelik bazı örnek kullanım durumları açıklanmaktadır. 
+Metin Analizi API'si, metin üzerinde gelişmiş doğal dil işleme sağlayan bulut tabanlı bir hizmettir. Bu makalede, API 'YI iş çözümlerinizi ve süreçlerinizle tümleştirmek için bazı örnek kullanım durumları açıklanmaktadır. 
 
-## <a name="analyze-survey-results"></a>Anket sonuçlarını analiz etme
+## <a name="analyze-survey-results"></a>Anket sonuçlarını çözümle
 
-Insights, müşterilerin ve çalışanların anketlerin sonuçlarını yaklaşım analizi kullanarak ham metin yanıtlarını işleyerek çizin. Bulguları analiz toplama takip ve angajmanları yönlendiren.
+Yaklaşım Analizi kullanarak ham metin yanıtlarını işleyerek müşteri ve çalışan anketi sonuçlarından Öngörüler çizin. Analiz için bulguları toplayın, izleyin ve görüşmeleri yapın.
 
-![Müşterilerin ve çalışanların anketine yaklaşım analizi gerçekleştirme açıklayan bir görüntü.](media/use-cases/survey-results.svg)
+![Müşteri ve çalışan anketlerde yaklaşım analizinin nasıl gerçekleştirileceğini açıklayan bir görüntü.](media/use-cases/survey-results.svg)
 
-## <a name="analyze-recorded-inbound-customer-calls"></a>Kaydedilen gelen müşteri çağrılarını çözümleyin
+## <a name="analyze-recorded-inbound-customer-calls"></a>Kayıtlı gelen müşteri çağrılarını çözümle
 
-Metin okuma, yaklaşım analizi ve anahtar ifade ayıklama kullanarak müşteri hizmetleri çağrılarından içgörüleri ayıklayın. Sonuçlar, Power BI panosunu veya daha iyi müşteriler anlamak, müşteri hizmeti eğilimleri ve müşteri katılım vurgulamak için bir portal görüntüler. API istekleri için raporlama veya toplu olarak müdahale için gerçek zamanlı gönderin. Bkz: [örnek kod](https://github.com/rlagh2/callcenteranalytics).
+Metin Okuma, Yaklaşım Analizi ve Anahtar İfade Ayıklama kullanarak müşteri hizmetleri çağrılarından Öngörüler ayıklayın. Müşterileri daha iyi anlamak, müşteri hizmeti eğilimlerini vurgulamak ve müşteri katılımı sağlamak için Power BI panoda veya portalda sonuçları görüntüleyin. API isteklerini raporlama için bir toplu iş olarak veya müdahale için gerçek zamanlı olarak gönderin. [Örnek koda](https://github.com/rlagh2/callcenteranalytics)bakın.
 
-![Yaklaşım analizi kullanarak nasıl otomatik hale getirme ınsights müşteri hizmetinden açıklayan bir görüntü çağırır.](media/use-cases/azure-inbound.svg)
+![Yaklaşım analizini kullanarak müşteri hizmetleri çağrılarından Öngörüler elde etme işlemini otomatik hale getirmeyi açıklayan bir görüntü](media/use-cases/azure-inbound.svg)
 
-## <a name="process-and-categorize-support-incidents"></a>İşlem ve destek olayları kategorilere ayırma
+## <a name="process-and-categorize-support-incidents"></a>Destek olaylarını işleme ve kategorilere ayırma
 
-Anahtar ifade ayıklama ve varlık tanıma yapılandırılmamış metin biçiminde destek istekleri işlemek için kullanır. Kaynak planlama ve eğilim analizi için yapılan isteklerinin kategorilere ayırmak için ayıklanan ifadeleri ve varlıkları kullanın.
+Yapılandırılmamış metinsel biçimde gönderilen destek isteklerini işlemek için Anahtar İfade Ayıklama ve varlık tanıma özelliğini kullanın. Kaynak planlama ve eğilim analizi isteklerini sınıflandırmak için ayıklanan tümcecikleri ve varlıkları kullanın.
 
-![Anahtar ifade ayıklama ve varlık tanıma olay raporları ve eğilimleri sınıflandırmak için nasıl kullanılacağını açıklayan bir görüntü](media/use-cases/support-incidents.svg)
+![Olay raporlarını ve eğilimleri kategorilere ayırmak için anahtar tümceciği ayıklama ve varlık tanımayı nasıl kullanacağınızı açıklayan bir görüntü](media/use-cases/support-incidents.svg)
 
-## <a name="monitor-your-products-social-media-feeds"></a>Sosyal medya akışlarından, ürününüzün izleyin
+## <a name="monitor-your-products-social-media-feeds"></a>Ürününüzün sosyal medya akışlarını izleyin
 
-Kullanıcı ürün geribildirim, ürününüzün twitter veya Facebook sayfasında izleyin. Verileri yeni ürünleri başlatır doğru müşteri yaklaşımı çözümlemek, gelişmelerden özellikler ve özellik istekleri veya adresi Müşteri şikayetlerinin hakkında anahtar tümcecikleri ayıklayın kullanın.
+Ürününüzün Twitter veya Facebook sayfasında Kullanıcı ürün geri bildirimini izleyin. Yeni ürünlere yönelik müşteri yaklaşımını çözümlemek, Özellikler ve özellik istekleri hakkında önemli tümceleri ayıklamak veya müşteri şikayetlerini olduğu gibi çözmek için verileri kullanın.
 
-![Anahtar ifade ayıklama kullanarak sosyal medya, ürün ve şirket geribildirim izleme açıklayan bir görüntü](media/use-cases/social-feed.svg)
+![Anahtar tümceciği ayıklama kullanarak ürün ve şirket geri bildiriminizi sosyal medya hakkında nasıl izleyeceğinizi açıklayan bir görüntü](media/use-cases/social-feed.svg)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Metin analizi API'si nedir?](overview.md)
-* [Metin analizi API'sini kullanarak bir istek gönderinC#](quickstarts/csharp.md)
+* [Metin Analizi API'si nedir?](overview.md)
+* [İstemci kitaplığını kullanarak Metin Analizi API'si istek gönderme](quickstarts/text-analytics-sdk.md)

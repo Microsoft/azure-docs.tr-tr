@@ -1,6 +1,6 @@
 ---
 title: Azure Otomasyonu Linux Karma Runbook Çalışanı
-description: Bu makalede, Linux tabanlı bilgisayarlarda yerel veri merkezinde veya Bulut ortamında runbook'ları çalıştırmak için bir Azure Otomasyonu karma Runbook çalışanı yükleme hakkında bilgi sağlar.
+description: Bu makalede, Azure Otomasyonu karma Runbook Worker yükleme hakkında bilgi sağlanır. böylece, runbook 'ları yerel veri merkezinizdeki veya bulut ortamınızda Linux tabanlı bilgisayarlarda çalıştırabilirsiniz.
 services: automation
 ms.service: automation
 ms.subservice: process-automation
@@ -9,36 +9,36 @@ ms.author: robreed
 ms.date: 06/28/2018
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 94d34c8a9a3480032a79d100af883a85868d327e
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 8e497d18e39a199f34ff76b11b0e6c2c213f35fb
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67478480"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74129840"
 ---
-# <a name="deploy-a-linux-hybrid-runbook-worker"></a>Bir Linux karma Runbook çalışanı dağıtma
+# <a name="deploy-a-linux-hybrid-runbook-worker"></a>Linux karma runbook çalışanı dağıtma
 
-Runbook'ları doğrudan rolünü barındıran bilgisayarda ve ortamınızda bu yerel kaynakları yönetmek için kaynakların karşı çalıştırmak için Azure Otomasyon karma Runbook çalışanı özelliğini kullanabilirsiniz. Linux karma Runbook çalışanı runbook'ları yükseltme gereken komutları çalıştırmak için yükseltilmiş özel bir kullanıcı olarak yürütür. Runbook'ları tutulur ve yönetilen Azure Otomasyonu'nda ve sonra bir veya daha fazla atanmış bilgisayarlara teslim.
+Runbook 'u doğrudan rolü barındıran bilgisayarda ve bu yerel kaynakları yönetmek için ortamdaki kaynaklara karşı çalıştırmak için Azure Otomasyonu 'nun karma Runbook Worker özelliğini kullanabilirsiniz. Linux hibrit Runbook Worker, runbook 'ları, yükseltme gerektiren komutları çalıştırmak için yükseltilebilir özel bir kullanıcı olarak yürütür. Runbook 'lar Azure Otomasyonu 'nda depolanır ve yönetilir ve ardından bir veya daha fazla belirlenen bilgisayara gönderilir.
 
-Bu makalede, karma Runbook çalışanı bir Linux makineye yüklemek açıklar.
+Bu makalede karma Runbook Worker 'ın bir Linux makinesine nasıl yükleneceği açıklanır.
 
 ## <a name="supported-linux-operating-systems"></a>Desteklenen Linux işletim sistemleri
 
-Karma Runbook çalışanı özelliğini aşağıdaki dağıtımlarını destekler:
+Karma Runbook Worker özelliği aşağıdaki dağıtımları destekler:
 
-* Amazon Linux için 2015.09 2012.09 (x86/x64)
+* Amazon Linux 2012,09-2015,09 (x86/x64)
 * CentOS Linux 5, 6 ve 7 (x86/x64)
 * Oracle Linux 5, 6 ve 7 (x86/x64)
 * Red Hat Enterprise Linux Server 5, 6 ve 7 (x86/x64)
-* Debian GNU/Linux 6, 7 ve 8 (x86/x64)
-* Ubuntu 12.04 LTS, 14.04 LTS ve 16.04 LTS (x86/x64)
+* De, GNU/Linux 6, 7 ve 8 (x86/x64)
+* Ubuntu 12,04 LTS, 14,04 LTS ve 16,04 LTS (x86/x64)
 * SUSE Linux Enterprise Server 11 ve 12 (x86/x64)
 
-## <a name="installing-a-linux-hybrid-runbook-worker"></a>Bir Linux karma Runbook çalışanı'nı yükleme
+## <a name="installing-a-linux-hybrid-runbook-worker"></a>Linux karma Runbook Worker yükleme
 
-Yükleme ve Linux bilgisayarınızda bir karma Runbook Worker'ı yapılandırmak için el ile rolünü yüklemek ve yapılandırmak için basit bir işlem uygulayın. Etkinleştirme gerektirir **Otomasyon karma çalışanı** Azure Log Analytics çalışma alanınızı ve ardından bilgisayarı bir çalışanı olarak kaydedin ve gruba eklemek için komut kümesini çalıştırarak çözümde.
+Linux bilgisayarınızda bir karma runbook çalışanı yüklemek ve yapılandırmak için, rolü el ile yüklemek ve yapılandırmak üzere kolay bir işlem takip edersiniz. Azure Log Analytics çalışma alanınızda **Otomasyon karma çalışanı** çözümünün etkinleştirilmesini ve sonra bilgisayarı bir çalışan olarak kaydetmek ve bir gruba eklemek için bir komut kümesi çalıştırmayı gerektirir.
 
-Bir Linux karma Runbook çalışanı için en düşük gereksinimler şunlardır:
+Linux karma Runbook Worker için en düşük gereksinimler şunlardır:
 
 * İki çekirdek
 * 4 GB RAM
@@ -48,49 +48,49 @@ Bir Linux karma Runbook çalışanı için en düşük gereksinimler şunlardır
 
 | **Gerekli paket** | **Açıklama** | **En düşük sürüm**|
 |--------------------- | --------------------- | -------------------|
-|Glibc |GNU C Kitaplığı| 2.5-12 |
-|Openssl| OpenSSL kitaplıkları | 1.0 (TLS 1.1 ve TLS 1.2 desteklenir|
-|Curl | cURL web istemcisi | 7.15.5|
-|Python-ctypes | |
-|PAM | Eklenebilir kimlik doğrulaması modülleri|
-| **İsteğe bağlı paketi** | **Açıklama** | **En düşük sürüm**|
-| PowerShell Core | PowerShell runbook'ları çalıştırmak için PowerShell gereksinimleri yüklenmesi için bkz. [Linux'ta PowerShell Core yükleme](/powershell/scripting/setup/installing-powershell-core-on-linux) yükleneceği hakkında bilgi edinmek için.  | 6.0.0 |
+|GLIBC |GNU C Kitaplığı| 2.5-12 |
+|Openssl| OpenSSL kitaplıkları | 1,0 (TLS 1,1 ve TLS 1,2 desteklenir|
+|Kıvr | Web istemcisini kıvır | 7.15.5|
+|Python-ctypes | Python 2. x gereklidir |
+|KULLANıCıSı | Takılabilir kimlik doğrulama modülleri|
+| **İsteğe bağlı paket** | **Açıklama** | **En düşük sürüm**|
+| PowerShell Core | PowerShell runbook 'larını çalıştırmak için PowerShell 'in yüklenmesi gerekir, bkz. yükleme hakkında bilgi edinmek için [Linux 'Ta PowerShell Core 'U yükleme](/powershell/scripting/install/installing-powershell-core-on-linux) .  | 6.0.0 |
 
 ### <a name="installation"></a>Yükleme
 
-Devam etmeden önce bunları Otomasyon hesabınıza bağlı Log Analytics çalışma alanı unutmayın. Ayrıca, Automation hesabınız için birincil anahtarı unutmayın. Hem Azure portalından Otomasyon seçerek hesabı, seçerek bulabilirsiniz **çalışma** çalışma alanı kimliği ve seçerek **anahtarları** birincil anahtar. Bağlantı noktaları ve karma Runbook çalışanı için gereksinim duyduğunuz adresleri hakkında daha fazla bilgi için bkz: [ağınıza yapılandırma](automation-hybrid-runbook-worker.md#network-planning).
+Devam etmeden önce Otomasyon hesabınızın bağlı olduğu Log Analytics çalışma alanını unutmayın. Ayrıca Otomasyon hesabınızın birincil anahtarını da aklınızda bulabilirsiniz. Hem Otomasyon hesabınızı seçip, çalışma alanı KIMLIĞI için **çalışma alanı** ' nı seçip birincil anahtar için **anahtarlar** ' ı seçerek Azure Portal her ikisini de bulabilirsiniz. Karma Runbook Worker için ihtiyaç duyduğunuz bağlantı noktaları ve adresler hakkında daha fazla bilgi için bkz. [ağınızı yapılandırma](automation-hybrid-runbook-worker.md#network-planning).
 
-1. Etkinleştirme **Otomasyon karma çalışanı** Azure çözümde aşağıdaki yöntemlerden birini kullanarak:
+1. Aşağıdaki yöntemlerden birini kullanarak Azure 'da **Otomasyon karma çalışanı** çözümü etkinleştirin:
 
-   * Ekle **Otomasyon karma çalışanı** çözüm yordamı kullanarak aboneliğinize [Azure İzleyici'yi eklemek, çalışma alanınıza çözümleri günlükleri](../log-analytics/log-analytics-add-solutions.md).
+   * [Çalışma alanınıza Azure izleyici günlükleri ekleme çözümlerini ekleme](../log-analytics/log-analytics-add-solutions.md)yordamını kullanarak **Otomasyon karma çalışanı** çözümünü aboneliğinize ekleyin.
    * Aşağıdaki cmdlet'i çalıştırın:
 
         ```azurepowershell-interactive
          Set-AzureRmOperationalInsightsIntelligencePack -ResourceGroupName  <ResourceGroupName> -WorkspaceName <WorkspaceName> -IntelligencePackName  "AzureAutomation" -Enabled $true
         ```
 
-1. Aşağıdaki komutu çalıştırarak Linux için Log Analytics aracısını yükleyin. Değiştirin \<Workspaceıd\> ve \<WorkspaceKey\> çalışma alanınızdan uygun değerlerle.
+1. Aşağıdaki komutu çalıştırarak Linux için Log Analytics aracısını yükler. \<çalışma alanı kimliği\> ve \<WorkspaceKey\> çalışma alanınızdan uygun değerlerle değiştirin.
 
-   [!INCLUDE [log-analytics-agent-note](../../includes/log-analytics-agent-note.md)] 
+   [!INCLUDE [log-analytics-agent-note](../../includes/log-analytics-agent-note.md)]
 
    ```bash
    wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w <WorkspaceID> -s <WorkspaceKey>
    ```
 
-1. Parametreler için değerleri değiştirerek aşağıdaki komutu çalıştırın *-w*, *-k*, *-g*, ve *-e*. İçin *-g* parametresi değeri yeni Linux karma Runbook çalışanı katılması gereken karma Runbook çalışanı grubunun adıyla değiştirin. Otomasyon hesabınızda adı yoksa, bu ada sahip yeni bir karma Runbook çalışanı grubuna yapılır.
+1. *-W*, *-k*, *-g*ve *-e*parametrelerinin değerlerini değiştirerek aşağıdaki komutu çalıştırın. *-G* parametresi için, değeri, yeni Linux hibrit Runbook Worker 'ın katılması gereken karma Runbook Worker grubunun adıyla değiştirin. Otomasyon hesabınızda ad yoksa, bu adla yeni bir karma Runbook Worker grubu oluşturulur.
 
    ```bash
    sudo python /opt/microsoft/omsconfig/modules/nxOMSAutomationWorker/DSCResources/MSFT_nxOMSAutomationWorkerResource/automationworker/scripts/onboarding.py --register -w <LogAnalyticsworkspaceId> -k <AutomationSharedKey> -g <hybridgroupname> -e <automationendpoint>
    ```
 
-1. Komut tamamlandıktan sonra **karma çalışan grupları** sayfası Azure portalında yeni bir grup ve üye sayısı gösterir. Bu, varolan bir grubu ise, üye sayısı artar. Grup listesinden seçebilirsiniz **karma çalışan grupları** sayfasından seçim yapıp **karma çalışanları** Döşe. Üzerinde **karma çalışanları** sayfasında listelenen bir grubun her üyesi görürsünüz.
+1. Komut tamamlandıktan sonra, Azure portal **karma çalışan grupları** sayfasında yeni grup ve üye sayısı gösterilir. Bu, var olan bir gruptur, üye sayısı artırılır. **Karma çalışan grupları** sayfasında listeden grubu seçebilir ve **hibrit çalışanlar** kutucuğunu seçebilirsiniz. **Karma çalışanlar** sayfasında, grubun her bir üyesini listede görürsünüz.
 
 > [!NOTE]
-> Bir Azure VM için Linux için Azure İzleyici sanal makine uzantısı kullanıyorsanız ayarı öneririz `autoUpgradeMinorVersion` otomatik olarak false sürümlerini yükseltme sorunlarını karma Runbook çalışanı neden olabilir. Uzantıyı el ile yükseltme öğrenmek için bkz. [Azure CLI dağıtım ](../virtual-machines/extensions/oms-linux.md#azure-cli-deployment).
+> Bir Azure VM için Linux için Azure Izleyici sanal makine uzantısı ' nı kullanıyorsanız, otomatik yükseltme sürümleri karma Runbook Worker 'a neden olabileceği için `autoUpgradeMinorVersion` false olarak ayarlamayı öneririz. Uzantıyı el ile yükseltme hakkında bilgi edinmek için bkz. [Azure CLI dağıtımı ](../virtual-machines/extensions/oms-linux.md#azure-cli-deployment).
 
-## <a name="turning-off-signature-validation"></a>İmza doğrulaması kapatma
+## <a name="turning-off-signature-validation"></a>İmza doğrulamasını kapatma
 
-Varsayılan olarak, Linux karma Runbook çalışanları imza doğrulaması gerektirir. Bir çalışan karşı imzasız bir runbook Çalıştırma "imza doğrulaması başarısız oldu." diyen bir hata görürsünüz İmza doğrulaması devre dışı bırakmak için aşağıdaki komutu çalıştırın. İkinci parametre, log analytics çalışma alanı kimliği ile değiştirin.
+Varsayılan olarak, Linux karma runbook çalışanları imza doğrulaması gerektirir. Bir çalışana karşı işaretsiz bir runbook çalıştırırsanız, "Imza doğrulama başarısız oldu" ifadesini bildiren bir hata görürsünüz. İmza doğrulamasını devre dışı bırakmak için aşağıdaki komutu çalıştırın. İkinci parametreyi Log Analytics çalışma alanınızın KIMLIĞI ile değiştirin.
 
  ```bash
  sudo python /opt/microsoft/omsconfig/modules/nxOMSAutomationWorker/DSCResources/MSFT_nxOMSAutomationWorkerResource/automationworker/scripts/require_runbook_signature.py --false <LogAnalyticsworkspaceId>
@@ -98,24 +98,24 @@ Varsayılan olarak, Linux karma Runbook çalışanları imza doğrulaması gerek
 
 ## <a name="supported-runbook-types"></a>Desteklenen runbook türleri
 
-Linux karma Runbook çalışanları, Azure Otomasyonu'nda runbook türleri kümesini desteklemez.
+Linux hibrit runbook çalışanları, Azure Automation 'da runbook türlerinin tam kümesini desteklemez.
 
-Aşağıdaki runbook türleri, bir Linux karma çalışanı üzerinde çalışır:
+Aşağıdaki runbook türleri bir Linux karma çalışanı üzerinde çalışır:
 
 * Python 2
 * PowerShell
 
   > [!NOTE]
-  > PowerShell runbook'ları, PowerShell Core, Linux makinesinde yüklü olmasını gerektirir. Bkz: [Linux'ta PowerShell Core yükleme](/powershell/scripting/setup/installing-powershell-core-on-linux) yükleneceği hakkında bilgi edinmek için.
+  > PowerShell runbook 'ları, Linux makinesinde PowerShell Core 'un yüklü olmasını gerektirir. Yükleme hakkında bilgi edinmek için bkz. [Linux üzerinde PowerShell Core yükleme](/powershell/scripting/install/installing-powershell-core-on-linux) .
 
-Aşağıdaki runbook türleri, bir Linux karma çalışanı üzerinde çalışmıyor:
+Aşağıdaki runbook türleri bir Linux karma çalışanı üzerinde çalışmıyor:
 
 * PowerShell iş akışı
-* Grafik
-* Grafik PowerShell iş akışı
+* Grafikli
+* Grafik PowerShell Iş akışı
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Şirket içi veri merkezinizde veya diğer bulut ortamı işlemlerini otomatikleştirmek için runbook'larınızı yapılandırma konusunda bilgi için bkz: [bir karma Runbook çalışanı üzerinde runbook çalıştırma](automation-hrw-run-runbooks.md).
-* Karma Runbook çalışanlarını kaldırma yönergeleri için bkz: [Azure Otomasyon karma Runbook çalışanlarını kaldırma](automation-hybrid-runbook-worker.md#remove-a-hybrid-runbook-worker).
-* Sorun giderme, karma Runbook çalışanları öğrenmek için bkz [Linux karma Runbook çalışanları sorunlarını giderme](troubleshoot/hybrid-runbook-worker.md#linux)
+* Runbook 'larınızı şirket içi veri merkezinizde veya diğer bulut ortamınızda otomatik hale getirmek üzere nasıl yapılandıracağınızı öğrenmek için bkz. [runbook 'Ları karma Runbook Worker üzerinde çalıştırma](automation-hrw-run-runbooks.md).
+* Karma runbook çalışanları kaldırma hakkında yönergeler için bkz. [Azure Otomasyonu karma runbook çalışanlarını kaldırma](automation-hybrid-runbook-worker.md#remove-a-hybrid-runbook-worker).
+* Karma runbook çalışanlarınızın sorunlarını giderme hakkında bilgi edinmek için bkz. [Linux karma runbook çalışanları sorunlarını giderme](troubleshoot/hybrid-runbook-worker.md#linux)

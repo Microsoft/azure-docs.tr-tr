@@ -1,72 +1,69 @@
 ---
-title: Bir özel Uyandırma word - konuşma hizmetleri oluşturma
+title: Özel anahtar sözcük okuma hizmeti oluşturma
 titleSuffix: Azure Cognitive Services
-description: Cihazınız, her zaman bir Uyanma sözcük (veya tümceciği) dinliyor. Uyandırma word kullanıcı diyor, kullanıcının dikte durdurur kadar cihaz buluta tüm sonraki ses gönderir. Uyandırma Word'ün özelleştirme, Cihazınızı ayırt ve marka bilgilerinizi güçlendirmek için etkili bir yoludur.
+description: Cihazınız her zaman bir anahtar sözcüğü (veya tümceciği) dinler. Kullanıcı anahtar sözcüğünü söyyorsa, cihaz sonraki tüm sesleri buluta gönderir ve Kullanıcı konuşmayı durduruncaya kadar. Anahtar keliinizi özelleştirmek, cihazınızı ayırt etmenin ve markanızı güçlendirmenin etkili bir yoludur.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 05/02/2019
+ms.date: 07/05/2019
 ms.author: erhopf
-ms.custom: seodec18
-ms.openlocfilehash: 2280af4bf37fdb3cd12482da855f979a9180f0ec
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bf9afb66163532b4095e0d30b1167010320abbf8
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65020537"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490951"
 ---
-# <a name="create-a-custom-wake-word-by-using-the-speech-service"></a>Konuşma hizmeti kullanarak bir özel Uyandırma sözcük oluşturma
+# <a name="create-a-custom-keyword-by-using-the-speech-service"></a>Konuşma hizmetini kullanarak özel anahtar sözcük oluşturma
 
-Cihazınız, her zaman bir Uyanma sözcük (veya tümceciği) dinliyor. Örneğin, "Hey Cortana" Cortana Yardımcısı için bir Uyanma sözcüktür. Uyandırma word kullanıcı diyor, kullanıcının dikte durdurur kadar cihaz buluta tüm sonraki ses gönderir. Uyandırma Word'ün özelleştirme, Cihazınızı ayırt ve marka bilgilerinizi güçlendirmek için etkili bir yoludur.
+Cihazınız her zaman bir anahtar sözcüğü (veya tümceciği) dinler. Örneğin, "Hey Cortana", Cortana yardımcısı için bir anahtar sözcüktür. Kullanıcı anahtar sözcüğünü söyyorsa, cihaz sonraki tüm sesleri buluta gönderir ve Kullanıcı konuşmayı durduruncaya kadar. Anahtar keliinizi özelleştirmek, cihazınızı ayırt etmenin ve markanızı güçlendirmenin etkili bir yoludur.
 
-Bu makalede, özel Uyandırma word cihazınız için nasıl oluşturulduğunu öğrenin.
+Bu makalede, cihazınız için özel bir anahtar sözcük oluşturmayı öğreneceksiniz.
 
-## <a name="choose-an-effective-wake-word"></a>Etkili Uyandırma word seçin
+## <a name="choose-an-effective-keyword"></a>Etkin bir anahtar sözcük seçin
 
-Uyandırma word seçtiğinizde aşağıdaki yönergeleri göz önünde bulundurun:
+Bir anahtar sözcük seçerken aşağıdaki yönergeleri göz önünde bulundurun:
 
-* Uyandırma Word'ün İngilizce bir sözcük veya ifade olmalıdır. Söyleyin iki saniyeden daha uzun sürer.
+* Anahtar kelimelisiniz Ingilizce bir sözcük veya tümcecik olmalıdır. İki saniyeden daha uzun sürmemelidir.
 
-* 4 ila 7 hece sözcükleri en iyi çalışır. Örneğin, "Hey, bilgisayar" bir iyi Uyandırma sözcüktür. Yalnızca "Merhaba" zayıf bir paroladır.
+* 4 ile 7 hece hecelere en iyi şekilde çalışan sözcükler. Örneğin, "Hey, Computer" iyi bir anahtar sözcüktür. Yalnızca "Hey" kötü bir alışkanlıktır.
 
-* Uyandırma sözcükleri ortak İngilizce telaffuz kurallarını izlemelidir.
+* Anahtar sözcükler, yaygın Ingilizce Söyleniş kurallarını izlemelidir.
 
-* Benzersiz bir veya daha yaygın İngilizce telaffuz kurallarını izleyen made-up sözcük hatalı pozitif sonuçları azaltmak. Örneğin, "computerama" iyi Uyandırma word olabilir.
+* Yaygın Ingilizce telaffuz kuralları takip eden, benzersiz veya hatta oluşturulmuş bir sözcük, hatalı pozitif sonuçları düşürebilir. Örneğin, "computerama" iyi bir anahtar sözcük olabilir.
 
-* Ortak bir sözcük seçmeyin. Örneğin, "yemek" ve "kişiler sık sıradan konuşmada söyleyin sözcükler Git". Bunlar, cihazınız için false Tetikleyiciler olabilir.
+* Ortak bir sözcük seçemezsiniz. Örneğin, "yemek" ve "Go", insanların normal konuşmada sıkça söyledikleri sözcüklerdir. Cihazınız için yanlış Tetikleyiciler olabilir.
 
-* Söyleyiş olabilir bir Uyanma sözcük kullanmaktan kaçının. Kullanıcılar, cihazlarını yanıt almak için "doğru" telaffuz bilmesi gerekir. Örneğin, "509" "beş sıfır dokuz" bildirilebilir "beş oh dokuz," veya "beş yüz ve dokuz." "R.E.I." "r-e-i" veya "ışın" bildirilebilir "Canlı" "/līv/" veya "/liv/" bildirilebilir.
+* Alternatif söylenişleri olabilecek bir anahtar sözcük kullanmaktan kaçının. Kullanıcıların, cihazlarını yanıt vermesini sağlamak için "sağ" söylenişini bilmeleri gerekir. Örneğin, "509", "5 0 9", "5 0 9" veya "509" olarak kullanılabilir. "R.E.I." "r-e-i" veya "Ray" olarak kullanılabilir. "Canlı", "/līv/" veya "/Liv/" ile yapılabilir.
 
-* Özel karakterler, simgeler veya basamak kullanmayın. Örneğin, "Git #" ve "20 + kediler" iyi Uyandırma sözcükleri olmaz. Ancak, "NET Git" veya "yirmi kediler artı" işe yarayabilir. Yine de, marka simgeleri kullanın ve uygun telaffuz güçlendirmek için pazarlama ve belgeleri kullanın.
+* Özel karakterler, semboller veya basamaklar kullanmayın. Örneğin, "Go #" ve "20 + kediler" iyi anahtar kelimelerdir. Bununla birlikte, "keskin" veya "yirmi Plus kediler" işe devam edebilir. Markanızdaki sembolleri kullanmaya devam edebilir ve uygun telaffuz zorlamak için pazarlama ve belgeleri kullanabilirsiniz.
 
 > [!NOTE]
-> Bir ticari marka olarak kaydettirilmiş sözcük Uyandırma word'olarak seçerseniz, bu ticari marka olduğunuz veya ticari marka sahibinin Word'ü kullanma iznine sahip emin olun. Microsoft, Uyandırma word'ün seçiminize göre ortaya yasal sorunları sorumlu değildir.
+> Anahtar kelime olarak bir trademarked sözcüğü seçerseniz, bu ticari marka sahibi olduğunuzdan veya ticari marka sahibinden, kelimeyi kullanmak için izninizin olduğundan emin olun. Microsoft, sizin tercih ettiğiniz anahtar kelimeden çıkabilecek herhangi bir yasal sorun için tabi değildir.
 
-## <a name="create-your-wake-word"></a>Uyandırma Word'ün oluşturma
+## <a name="create-your-keyword"></a>Anahtar keliinizi oluşturma
 
-Cihazınızda bir özel Uyandırma sözcük kullanabilmeniz için önce Microsoft özel Uyandırma Word oluşturma hizmeti ile bir Uyanma word oluşturmak gerekir. Bir dosya hizmeti oluşturan bir Uyanma sözcük sağladıktan sonra Uyandırma word Cihazınızda etkinleştirmek için Geliştirme Seti dağıtın.
+Aygıtınızla özel bir anahtar sözcük kullanabilmeniz için, Microsoft özel anahtar sözcük oluşturma hizmeti ile bir anahtar sözcük oluşturmanız gerekir. Bir anahtar sözcük belirledikten sonra, hizmet cihazınızda anahtar sözcüğü etkinleştirmek için geliştirme setinizi dağıttığınız bir dosya oluşturur.
 
-1. Git [özel konuşma hizmeti portalı](https://aka.ms/sdsdk-speechportal) ve **oturum** ya da seçin bir konuşma abonelik yoksa [ **bir abonelik oluşturun**](https://go.microsoft.com/fwlink/?linkid=2086754)
+1. [Konuşma Studio](https://aka.ms/sdsdk-speechportal) 'ya gidin ve **oturum açın** veya henüz bir konuşma aboneliğiniz yoksa, [**abonelik oluştur**](https://go.microsoft.com/fwlink/?linkid=2086754)' u seçin.
 
-    ![Özel konuşma hizmeti portalı](media/speech-devices-sdk/wake-word-4.png)
+1. [Özel anahtar sözcük](https://aka.ms/sdsdk-wakewordportal) sayfasında, istediğiniz anahtar sözcüğü yazın ve **anahtar sözcük ekle**' ye tıklayın. Etkin bir anahtar sözcük seçmenize yardımcı olmak için bazı [kılavuzlardır](#choose-an-effective-keyword) . Destek şu anda en-US diliyle sınırlıdır.
 
-1. Konumunda [özel Uyandırma Word](https://aka.ms/sdsdk-wakewordportal) sayfa türü Uyandırma Word seçim ve tıklatın **Uyandırma sözcük Ekle**. Bazı sahip olduğumuz [yönergeleri](#choose-an-effective-wake-word) etkili bir anahtar sözcüğü seçmenizi sağlayacak. Şu anda yalnızca en-US dil destekliyoruz.
+    ![Anahtar keliinizi girin](media/speech-devices-sdk/custom-kws-portal-enter-keyword.png)
 
-    ![Uyandırma sözcük girin](media/speech-devices-sdk/wake-word-5.png)
+1. Portal şimdi anahtar kelimeden aday söylenişleri oluşturacak. Oynat düğmelerine tıklayarak her bir adayı dinleyin ve yanlış olan herhangi bir söylenin yanındaki denetimleri kaldırın. Yalnızca güzel Söylenişler denetlendikten sonra, anahtar sözcüğünü oluşturmaya başlamak için **Gönder** ' i seçin. Anahtar sözcüğünü değiştirmek istiyorsanız, ilk olarak var olanı, üzerine gelindiğinde satırın sağ tarafında görüntülenen Sil düğmesine tıklayarak kaldırın.
 
-1. Uyandırma Word'ün üç Söyleyiş oluşturulur. İstediğiniz tüm Söyleniş seçebilirsiniz. Ardından **Gönder** Uyandırma word oluşturulacak. Söyleniş satırında geldiğinizde Uyandırma word Lütfen Kaldır var olan bir ilk olarak, değiştirmek istediğiniz Sil simgesini görünür.
+    ![Anahtar keliinizi gözden geçirin](media/speech-devices-sdk/custom-kws-portal-review-keyword.png)
 
-    ![Uyandırma Word'ün gözden geçirin](media/speech-devices-sdk/wake-word-6.png)
+1. Modelin oluşturulması bir dakika kadar sürebilir. Bundan sonra dosyayı indirmeniz istenir.
 
-1. Bu model oluşturulacağını belirtmek için en fazla bir dakika sürebilir. Dosyayı karşıdan yüklemeniz istenir.
+    ![Anahtar keliinizi indirin](media/speech-devices-sdk/custom-kws-portal-download-keyword.png)
 
-    ![Uyandırma Word'ün indirin](media/speech-devices-sdk/wake-word-7.png)
-
-1. .Zip dosyasını bilgisayarınıza kaydedin. Bu dosya, özel Uyandırma word geliştirme setine dağıtmak için ihtiyacınız olacak.
+1. . Zip dosyasını bilgisayarınıza kaydedin. Özel anahtar sözcüðünü geliştirme paketine dağıtmak için bu dosyaya ihtiyacınız olacaktır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kendi özel Uyandırma word ile test [konuşma cihaz SDK'sı hızlı](https://aka.ms/sdsdk-quickstart).
+[Konuşma CIHAZLARı SDK hızlı başlangıç](https://aka.ms/sdsdk-quickstart)ile özel anahtar keliinizi test edin.

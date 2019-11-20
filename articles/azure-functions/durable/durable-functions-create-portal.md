@@ -1,70 +1,70 @@
 ---
-title: Dayanıklı işlevler Azure portalını kullanarak oluşturma
-description: Dayanıklı işlevler uzantısını portal geliştirme için Azure işlevleri için yüklemeyi öğrenin.
+title: Azure portal kullanarak Dayanıklı İşlevler oluşturun
+description: Portal geliştirme için Azure Işlevleri Dayanıklı İşlevler uzantısını yüklemeyi öğrenin.
 services: functions
 author: ggailey777
 manager: jeconnoc
 keywords: ''
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
 ms.date: 10/23/2018
-ms.author: azfuncdf, glenga
-ms.openlocfilehash: 705a43f1ef35f953d1b87c7c44bbc45fcb4334be
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: glenga
+ms.reviewer: azfuncdf
+ms.openlocfilehash: 238969b320608c08491c3d3e85870d57f41c1589
+ms.sourcegitcommit: b2fb32ae73b12cf2d180e6e4ffffa13a31aa4c6f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65872856"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73614972"
 ---
-# <a name="create-durable-functions-using-the-azure-portal"></a>Dayanıklı işlevler Azure portalını kullanarak oluşturma
+# <a name="create-durable-functions-using-the-azure-portal"></a>Azure portal kullanarak Dayanıklı İşlevler oluşturun
 
-[Dayanıklı işlevler](durable-functions-overview.md) uzantısı Azure işlevleri için NuGet paketi sağlanan [Microsoft.Azure.WebJobs.Extensions.DurableTask](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask). İşlev uygulamanızda bu uzantı yüklü olmalıdır. Bu makalede, Azure portalında dayanıklı işlevler geliştirilebilmesi için bu paketi yüklemek gösterilmektedir.
+Azure Işlevleri için [dayanıklı işlevler](durable-functions-overview.md) uzantısı, [Microsoft. Azure. WebJobs. Extensions. durabletask](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask)NuGet paketinde sunulmaktadır. Bu uzantının işlev uygulamanızda yüklü olması gerekir. Bu makalede, Azure portal dayanıklı işlevler geliştirebilmeniz için bu paketin nasıl yükleneceği gösterilmektedir.
 
 > [!NOTE]
 > 
-> * Dayanıklı işlevler geliştiriyorsanız C#, bunun yerine dikkate almanız gereken [Visual Studio 2019 geliştirme](durable-functions-create-first-csharp.md).
-> * Dayanıklı işlevler javascript'teki geliştiriyorsanız bunun yerine dikkate almanız gereken [Visual Studio Code geliştirme](./quickstart-js-vscode.md).
+> * ' De C#dayanıklı işlevler geliştiriyorsanız, bunun yerine [Visual Studio 2019 geliştirmeyi](durable-functions-create-first-csharp.md)göz önünde bulundurmanız gerekir.
+> * JavaScript 'te dayanıklı işlevler geliştiriyorsanız bunun yerine [Visual Studio Code geliştirmeyi](./quickstart-js-vscode.md)göz önünde bulundurmanız gerekir.
 
 ## <a name="create-a-function-app"></a>İşlev uygulaması oluşturma
 
-Herhangi bir işlevin yürütülmesini barındıran bir işlev uygulamasına sahip olmalıdır. Bir işlev uygulaması, işlevlerinizin daha kolay yönetilmesi, dağıtım ve kaynakların paylaşımı için bir mantıksal birim olarak grubu sağlar. Bir .NET veya JavaScript uygulaması oluşturabilirsiniz.
+Herhangi bir işlevin yürütülmesini barındırmak için bir işlev uygulamasına sahip olmanız gerekir. İşlev uygulaması, kaynakların daha kolay yönetilmesi, dağıtılması ve paylaşılması için işlevlerinizi bir mantıksal birim olarak gruplandırmanıza olanak tanır. .NET veya JavaScript uygulaması oluşturabilirsiniz.
 
 [!INCLUDE [Create function app Azure portal](../../../includes/functions-create-function-app-portal.md)]
 
-Varsayılan olarak, oluşturulan işlev uygulaması sürümünü kullanır. Azure işlevleri çalışma zamanı 2.x. Dayanıklı işlevler uzantısını her iki sürümlerinde çalışır 1.x ve 2.x'i Azure işlevleri çalışma zamanı içinde C#ve sürüm 2.x JavaScript içinde. Ancak, şablonları yalnızca sürüm hedeflenirken kullanılabilir 2.x çalışma zamanı seçtiğiniz dili ne olursa olsun.
+Oluşturulan işlev uygulaması, varsayılan olarak Azure Işlevleri çalışma zamanının 2. x sürümünü kullanır. Dayanıklı İşlevler uzantısı, içindeki C#Azure işlevleri çalışma zamanının 1. x ve 2. x sürümlerinde ve JavaScript 'te sürüm 2. x üzerinde çalışır. Ancak, şablonlar yalnızca seçili dilden bağımsız olarak çalışma zamanının 2. x 'i hedeflenirken kullanılabilir.
 
-## <a name="install-the-durable-functions-npm-package-javascript-only"></a>Dayanıklı işlevler npm paketini (yalnızca JavaScript) yükleme
+## <a name="install-the-durable-functions-npm-package-javascript-only"></a>Dayanıklı işlevler NPM paketini (yalnızca JavaScript) yükler
 
-Dayanıklı işlevler JavaScript oluşturuyorsanız yüklemeniz gerekir [ `durable-functions` npm paket](https://www.npmjs.com/package/durable-functions).
+JavaScript Dayanıklı İşlevler oluşturuyorsanız, [`durable-functions` NPM paketini](https://www.npmjs.com/package/durable-functions)yüklemeniz gerekecektir.
 
-1. Ardından, işlev uygulamanızın adını seçin **Platform özellikleri**, ardından **Gelişmiş araçlar (Kudu)** .
+1. İşlev uygulamanızın adını, ardından **platform özelliklerini**ve **Gelişmiş Araçlar 'ı (kudu)** seçin.
 
-   ![Kudu işlevleri platform özellikleri seçin](./media/durable-functions-create-portal/function-app-platform-features-choose-kudu.png)
+   ![İşlevler platform özellikleri kudu seçme](./media/durable-functions-create-portal/function-app-platform-features-choose-kudu.png)
 
-2. Kudu konsolu içinde seçin **hata ayıklama konsoluna** ardından **CMD**.
+2. Kudu konsolunun içinde **Hata Ayıkla Konsolu** sonra **cmd**' yi seçin.
 
-   ![Kudu hata ayıklama konsoluna](./media/durable-functions-create-portal/kudu-choose-debug-console.png)
+   ![Kudu hata ayıklama konsolu](./media/durable-functions-create-portal/kudu-choose-debug-console.png)
 
-3. İşlev uygulamanızın dosya dizin yapısının görüntülemelidir. `site/wwwroot` klasörüne gidin. Burada, yüklediğiniz bir `package.json` dosya dizini penceresine bırakarak dosya. Bir örnek `package.json` aşağıda verilmiştir:
+3. İşlev uygulamanızın dosya dizini yapısı görüntülenmelidir. `site/wwwroot` klasörüne gidin. Buradan dosya dizini penceresine sürükleyip bırakarak bir `package.json` dosyasını karşıya yükleyebilirsiniz. Örnek bir `package.json` aşağıda verilmiştir:
 
     ```json
     {
       "dependencies": {
-        "durable-functions": "^1.1.2"
+        "durable-functions": "^1.3.1"
       }
     }
     ```
 
-   ![Kudu package.json karşıya yükleme](./media/durable-functions-create-portal/kudu-choose-debug-console.png)
+   ![Kudu yükleme paketi. JSON](./media/durable-functions-create-portal/kudu-choose-debug-console.png)
 
-4. Bir kez, `package.json` yüklenir, çalıştırma `npm install` Kudu uzak yürütme konsolundan komutu.
+4. `package.json` karşıya yüklendikten sonra, kudu uzaktan yürütme konsolundan `npm install` komutunu çalıştırın.
 
-   ![Kudu npm yükleme çalıştırma](./media/durable-functions-create-portal/kudu-npm-install.png)
+   ![Kudu çalıştırma NPM yüklemesi](./media/durable-functions-create-portal/kudu-npm-install.png)
 
-## <a name="create-an-orchestrator-function"></a>Bir düzenleyici işlevi oluşturma
+## <a name="create-an-orchestrator-function"></a>Orchestrator işlevi oluşturma
 
-1. İşlev uygulamanızı genişletin ve **İşlevler**'in yanındaki **+** düğmesine tıklayın. Bu, işlev uygulamanızdaki ilk işlevse **Portalda**'yı ve ardından **Devam**'ı seçin. Aksi takdirde üçüncü adıma geçin.
+1. İşlev uygulamanızı genişletin ve **İşlevler+'in yanındaki**  düğmesine tıklayın. Bu, işlev uygulamanızdaki ilk işlevse **Portalda**'yı ve ardından **Devam**'ı seçin. Aksi takdirde üçüncü adıma geçin.
 
    ![Azure portalındaki İşlevler hızlı başlangıç sayfası](./media/durable-functions-create-portal/function-app-quickstart-choose-portal.png)
 
@@ -72,29 +72,29 @@ Dayanıklı işlevler JavaScript oluşturuyorsanız yüklemeniz gerekir [ `durab
 
     ![İşlevler hızlı başlangıcı diğer şablonlar](./media/durable-functions-create-portal/add-first-function.png)
 
-1. Arama alanına yazın `durable` seçip **dayanıklı işlevler HTTP Başlatıcısı** şablonu.
+1. Arama alanına `durable` yazın ve ardından **DAYANıKLı işlevler http başlangıç** şablonunu seçin.
 
-1. Sorulduğunda, **yükleme** Azure DurableTask uzantısı işlev uygulamasına tüm bağımlılıkları yüklemek üzere. Yalnızca uzantısı verin işlev uygulaması için bir kez yüklemeniz gerekir. Yükleme başarılı olduktan sonra **Devam**'ı seçin.
+1. İstendiğinde, Azure DurableTask uzantısını işlev uygulamasına herhangi bir bağımlılığı **yüklemek için,** ' ı seçin. Bir verme işlevi uygulaması için uzantıyı yalnızca bir kez yüklemeniz gerekir. Yükleme başarılı olduktan sonra **Devam**'ı seçin.
 
     ![Bağlama uzantılarını yükleme](./media/durable-functions-create-portal/install-durabletask-extension.png)
 
-1. Yükleme tamamlandıktan sonra yeni işlev adı `HttpStart` ve **Oluştur**. Oluşturulan işleve, orchestration başlatmak için kullanılır.
+1. Yükleme tamamlandıktan sonra, yeni işlevi `HttpStart` adlandırın ve **Oluştur**' u seçin. Oluşturulan işlev Düzenleme başlatmak için kullanılır.
 
-1. Başka bir işlevi kullanarak şu işlev uygulamasında oluşturma **dayanıklı işlevler Düzenleyicisi** şablonu. Yeni düzenleme işlevinizi adlandırın `HelloSequence`.
+1. İşlev uygulamasında, bu kez **dayanıklı işlevler Orchestrator** şablonunu kullanarak başka bir işlev oluşturun. Yeni düzenleme işlevinizi `HelloSequence`olarak adlandırın.
 
-1. Adlı üçüncü bir işlev oluşturma `Hello` kullanarak **dayanıklı işlevler etkinliği** şablonu.
+1. **Dayanıklı işlevler etkinlik** şablonunu kullanarak `Hello` adlı üçüncü bir işlev oluşturun.
 
-## <a name="test-the-durable-function-orchestration"></a>Test dayanıklı işlevi düzenleme
+## <a name="test-the-durable-function-orchestration"></a>Dayanıklı işlev düzenlemesini test etme
 
-1. Geri Git **HttpStart** işlev öğesini **<> / işlev URL'sini Al** ve **kopyalama** URL. Başlamak için bu URL'yi kullanın **HelloSequence** işlevi.
+1. **Httpstart** işlevine geri dönün **</> Işlev URL 'sini al** ' ı seçin ve URL 'yi **kopyalayın** . **Merhaba sıra** işlevini başlatmak IÇIN bu URL 'yi kullanın.
 
-1. Kopyaladığınız URL'ye bir POST isteği göndermek için bir Postman veya cURL gibi HTTP aracını kullanın. Aşağıdaki örnek, bir POST isteği gönderir dayanıklı işleve bir cURL komutu:
+1. Kopyaladığınız URL 'ye bir POST isteği göndermek için Postman veya kıvrık gibi bir HTTP aracını kullanın. Aşağıdaki örnek, dayanıklı işleve POST isteği gönderen bir kıvrımlı komuttur:
 
     ```bash
     curl -X POST https://{your-function-app-name}.azurewebsites.net/api/orchestrators/HelloSequence
     ```
 
-    Bu örnekte, `{your-function-app-name}` , işlev uygulamanızın adı olduğu etki alanıdır. Yanıt iletisi, aşağıdaki örnekteki gibi görünür yürütme yönetmek ve izlemek için kullanabileceğiniz bir URI uç noktaları kümesini içerir:
+    Bu örnekte, `{your-function-app-name}` işlev uygulamanızın adı olan etki alanıdır. Yanıt iletisi, yürütmeyi izlemek ve yönetmek için kullanabileceğiniz bir dizi URI uç noktası içerir ve aşağıdaki örnekte olduğu gibi görünür:
 
     ```json
     {  
@@ -106,7 +106,7 @@ Dayanıklı işlevler JavaScript oluşturuyorsanız yüklemeniz gerekir [ `durab
     }
     ```
 
-1. Çağrı `statusQueryGetUri` uç noktası URI'si ve bakın şu örnekteki gibi görünebilir dayanıklı işlev geçerli durumu:
+1. `statusQueryGetUri` uç noktası URI 'sini çağırın ve dayanıklı işlevin geçerli durumunu görürsünüz ve bu örnek aşağıdaki gibi görünebilir:
 
     ```json
         {
@@ -118,7 +118,7 @@ Dayanıklı işlevler JavaScript oluşturuyorsanız yüklemeniz gerekir [ `durab
         }
     ```
 
-1. Arama devam `statusQueryGetUri` durum olana kadar uç nokta **tamamlandı**, aşağıdaki örneğe benzer bir yanıt görürsünüz:
+1. Durum **tamamlanana**kadar `statusQueryGetUri` uç noktasını çağırmaya devam edin ve aşağıdaki örnekte olduğu gibi bir yanıt görürsünüz:
 
     ```json
     {
@@ -134,9 +134,9 @@ Dayanıklı işlevler JavaScript oluşturuyorsanız yüklemeniz gerekir [ `durab
         }
     ```
 
-Dayanıklı ilk işlevinizi Azure'da artık hazır ve çalışır olduğu.
+İlk dayanıklı işleviniz artık Azure 'da çalışıyor ve çalışıyor.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Ortak dayanıklı işlevi desenler hakkında bilgi edinin](durable-functions-concepts.md)
+> [Ortak dayanıklı işlev desenleri hakkında bilgi edinin](durable-functions-overview.md#application-patterns)

@@ -1,89 +1,96 @@
 ---
-title: Azure ve şirket içi ortamlar için ExpressRoute bağlantıları oluşturmak için Azure sanal WAN'ı kullanma | Microsoft Docs
-description: Bu öğreticide, Azure sanal WAN Azure ve şirket içi ortamlar için ExpressRoute bağlantıları oluşturmak için kullanmayı öğrenin.
+title: 'Azure sanal WAN: ExpressRoute bağlantıları oluşturma'
+description: Bu öğreticide Azure sanal WAN kullanarak Azure ve şirket içi ortamlara ExpressRoute bağlantıları oluşturma hakkında bilgi edinin.
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: tutorial
-ms.date: 06/10/2019
+ms.date: 10/24/2019
 ms.author: cherylmc
 Customer intent: As someone with a networking background, I want to connect my corporate on-premises network(s) to my VNets using Virtual WAN and ExpressRoute.
-ms.openlocfilehash: edf5e04b7cf9b5c79666c54fbeca49858cf21079
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 5a394f93c5cc606c26ffa1cc64bf1d61617b05b8
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67077535"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014937"
 ---
-# <a name="tutorial-create-an-expressroute-association-using-azure-virtual-wan-preview"></a>Öğretici: Azure sanal WAN (Önizleme) kullanarak ExpressRoute ilişkilendirme oluşturma
+# <a name="tutorial-create-an-expressroute-association-using-azure-virtual-wan"></a>Öğretici: Azure sanal WAN kullanarak bir ExpressRoute ilişkilendirmesi oluşturma
 
-Bu öğreticide Sanal WAN kullanarak Azure'daki kaynaklarınıza bir ExpressRoute bağlantı hattı ve ilişkisi kullanarak bağlanmayı öğreneceksiniz. Sanal WAN hakkında daha fazla bilgi için bkz. [Sanal WAN'a Genel Bakış](virtual-wan-about.md)
+Bu öğreticide, Azure 'daki kaynaklarınıza bir ExpressRoute bağlantı hattı üzerinden bağlanmak için sanal WAN 'ın nasıl kullanılacağı gösterilmektedir. Sanal WAN ve sanal WAN kaynakları hakkında daha fazla bilgi için bkz. [sanal WAN 'A genel bakış](virtual-wan-about.md).
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * vWAN oluşturma
-> * Hub oluşturma
-> * Bağlantı hattı bulun ve hub ile ilişkilendirin
-> * Bağlantı hattını hub’lar ile ilişkilendirin
+> * Sanal WAN oluşturma
+> * Hub ve ağ geçidi oluşturma
 > * Bir sanal ağı bir hub'a bağlama
-> * Sanal WAN'ınızı görüntüleme
-> * Kaynak durumunu görüntüleme
-> * Bir bağlantıyı izleme
-
-> [!IMPORTANT]
-> Bu genel önizleme bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılmamalıdır. Belirli özellikler desteklenmiyor olabilir, kısıtlı yeteneklere sahip olabilir veya tüm Azure konumlarında mevcut olmayabilir. Ayrıntılar için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
->
+> * Bir bağlantı merkezini hub ağ geçidine bağlama
+> * Bağlantıyı test etme
+> * Ağ Geçidi boyutunu değiştirme
+> * Varsayılan bir yol tanıtma
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+Yapılandırmanıza başlamadan önce aşağıdaki ölçütleri karşıladığınızı doğrulayın:
 
-[!INCLUDE [Before you begin](../../includes/virtual-wan-tutorial-vwan-before-include.md)]
+* Bağlanmak istediğiniz bir sanal ağınız var. Şirket içi ağlarınızın alt ağlarının hiçbirinin, bağlanmak istediğiniz sanal ağlarla çakışmadığından emin olun. Azure portal bir sanal ağ oluşturmak için [hızlı](../virtual-network/quick-create-portal.md)başlangıca bakın.
 
-## <a name="register"></a>Bu özelliği kaydedin
+* Sanal ağınızda sanal ağ geçidi yok. Sanal ağınızda bir ağ geçidi (VPN veya ExpressRoute) varsa, tüm ağ geçitlerini kaldırmanız gerekir. Bu yapılandırma, sanal ağın bunun yerine sanal WAN hub ağ geçidine bağlanmasını gerektirir.
 
-Sanal WAN yapılandırabilmeniz için önce aboneliğinizi Önizleme'ye kaydetmeniz gerekir. Aksi halde portalda Sanal WAN ile çalışamazsınız. Kaydetmek için bir e-posta Gönder **azurevirtualwan\@microsoft.com** abonelik kimliğinizi Aboneliğiniz kaydedildiğinde siz de bir e-posta alırsınız.
+* Hub bölgenizden bir IP adresi aralığı edinin. Hub, sanal WAN tarafından oluşturulan ve kullanılan bir sanal ağ. Hub için belirttiğiniz adres aralığı, bağlandığınız mevcut sanal ağlarınızla çakışamaz. Ayrıca bağlandığınız şirket içi adres aralıklarıyla da çakışamaz. Şirket içi ağ yapılandırmanızda bulunan IP adresi aralıklarını tanımıyorsanız, sizin için bu ayrıntıları sağlayabilecek biriyle koordine edebilirsiniz.
 
-**Önizlemede Dikkat Edilmesi Gerekenler:**
+* Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
-  * ExpressRoute bağlantı hattı, bir ülke/destekleyen bölge içinde etkinleştirilmelidir [ExpressRoute Global erişim](https://docs.microsoft.com/azure/expressroute/expressroute-faqs#where-is-expressroute-global-reach-supported).
-  * ExpressRoute bağlantı hattına sanal WAN hub'ına bağlanmak için bir Premium devresi olması gerekir. 
+## <a name="openvwan"></a>Sanal WAN oluşturma
 
-## <a name="vnet"></a>1. Sanal ağ oluşturma
+Bir tarayıcıdan [Azure portalına](https://portal.azure.com) gidin ve Azure hesabınızla oturum açın.
 
-[!INCLUDE [Create a virtual network](../../includes/virtual-wan-tutorial-vnet-include.md)]
+1. Sanal WAN sayfasına gidin. Portalda **+Kaynak oluştur**’a tıklayın. Arama kutusuna **sanal WAN** yazın ve ENTER ' u seçin.
+2. Sonuçlardan **sanal WAN** ' ı seçin. Sanal WAN sayfasında, **Oluştur** ' a tıklayarak WAN sayfası oluştur sayfasını açın.
+3. **WAN oluştur** sayfasında, **temel bilgiler** sekmesinde aşağıdaki alanları girin:
 
-## <a name="openvwan"></a>2. Sanal WAN oluşturma
+   ![WAN oluşturma](./media/virtual-wan-expressroute-portal/createwan.png)
 
-Bir tarayıcıdan [Azure portala (önizleme)](https://aka.ms/azurevirtualwanpreviewfeatures) gidin ve Azure hesabınızla oturum açın.
+   * **Abonelik**: Kullanmak istediğiniz aboneliği seçin.
+   * **Kaynak Grubu**: Yeni oluşturun veya var olanı kullanın.
+   * **Kaynak grubu konumu** -açılan listeden bir kaynak konumu seçin. WAN, global bir kaynaktır ve belirli bir bölgeyle sınırlı değildir. Ancak oluşturduğunuz WAN kaynağını daha kolay yönetmek ve bulmak için bir bölge seçmeniz gerekir.
+   * **Ad** -WAN 'nizi çağırmak istediğiniz adı yazın.
+   * **Tür** seçin **Standart**. Temel SKU 'YU kullanarak bir ExpressRoute ağ geçidi oluşturamazsınız.
+4. Alanları doldurmayı tamamladıktan sonra, **gözden geçir + oluştur**' u seçin.
+5. Doğrulama başarılı olduktan sonra, sanal WAN oluşturmak için **Oluştur** ' u seçin.
 
-[!INCLUDE [Create a virtual WAN](../../includes/virtual-wan-tutorial-vwan-include.md)]
+## <a name="hub"></a>Sanal hub ve ağ geçidi oluşturma
 
-### <a name="getting-started-page"></a>Başlarken sayfası
+Sanal hub, sanal WAN tarafından oluşturulan ve kullanılan sanal bir ağ. VPN ve ExpressRoute gibi çeşitli ağ geçitleri içerebilir. Bu bölümde, sanal hub 'ınız için bir ExpressRoute ağ geçidi oluşturacaksınız. [Yeni bir sanal hub oluştururken](#newhub)ağ geçidini oluşturabilir ya da onu düzenleyerek [mevcut bir hub](#existinghub) 'da ağ geçidini oluşturabilirsiniz. 
 
-[!INCLUDE [Create a virtual WAN](../../includes/virtual-wan-tutorial-gettingstarted-include.md)]
+ExpressRoute ağ geçitleri 2 Gbps biriminde sağlanır. 1 ölçek birimi = 2 Gbps, en fazla 10 ölçek birimi destekler = 20 Gbps. Bir sanal hub ve ağ geçidinin tam olarak oluşturulması yaklaşık 30 dakika sürer.
 
-## <a name="hub"></a>3. Hub oluşturma
+### <a name="newhub"></a>Yeni bir sanal hub ve bir ağ geçidi oluşturmak için
 
-[!INCLUDE [Create a virtual WAN](../../includes/virtual-wan-tutorial-hub-include.md)]
+Yeni bir sanal hub oluşturun. Bir hub oluşturulduktan sonra herhangi bir site iliştiremeseniz bile Hub için ücret ödersiniz.
 
-## <a name="hub"></a>4. Bağlantı hattı bulun ve hub ile ilişkilendirin
+[!INCLUDE [Create a hub](../../includes/virtual-wan-tutorial-er-hub-include.md)]
 
-1. VWAN seçin ve altındaki **sanal WAN mimarisi**seçin **ExpressRoute devreleri**.
-1. ExpressRoute bağlantı hattı, vWAN ile aynı abonelikte tıklayarak **seçin ExpressRoute bağlantı hattı** Abonelikleriniz öğesinden. 
-1. Aşağı açılır kullanarak hub'a ilişkilendirmek istiyorsanız, ExpressRoute'ı seçin.
-1. ExpressRoute bağlantı hattı, aynı abonelikte değilse veya size sağlanan [yetkilendirme anahtar ve Eş Kimliği](../expressroute/expressroute-howto-linkvnet-portal-resource-manager.md)seçin **yetkilendirme anahtarını kullanırken bir devreyi Bul**
-1. Şu ayrıntıları girin:
-1. **Yetkilendirme anahtarı** - Yukarıda açıklandığı gibi bağlantı hattı sahibinden tarafından oluşturulur
-1. **Eş bağlantı hattı URI’si** - Bağlantı hattının sahibi tarafından oluşturulan ve hattın benzersiz tanımlayıcısı olan bağlantı hattı URI’si
-1. **Yönlendirme ağırlığı** - [yönlendirme ağırlığı](../expressroute/expressroute-optimize-routing.md) eşleme farklı konumlardaki birden çok bağlantı hattına aynı hub'ına bağlandığında, belirli yollarını tercih etmesini sağlar
-1. Tıklayın **bulma devre** ve bağlantı hattı seçin bulunamadı.
-1. Aşağı açılan listeden 1 veya daha fazla hub'ı seçin ve tıklayın **Kaydet**.
+### <a name="existinghub"></a>Mevcut bir hub 'da ağ geçidi oluşturmak için
 
-## <a name="vnet"></a>5. Sanal ağınızı bir hub'a bağlama
+Ayrıca, var olan bir hub 'da düzenleyerek bir ağ geçidi oluşturabilirsiniz.
 
-Bu adımda hub'ınızla bir sanal ağ arasında eşleme bağlantısı oluşturacaksınız. Bu adımları bağlanmak istediğiniz tüm sanal ağlar için tekrarlayın.
+1. Düzenlemek istediğiniz sanal hub 'a gidin ve seçin.
+2. **Sanal hub 'ı Düzenle** sayfasında **ExpressRoute ağ geçidini dahil et**onay kutusunu işaretleyin.
+3. Değişikliklerinizi onaylamak için **Onayla** ' yı seçin. Hub ve hub kaynaklarının tam olarak oluşturulması yaklaşık 30 dakika sürer.
+
+   ![Mevcut hub](./media/virtual-wan-expressroute-portal/edithub.png "Hub 'ı düzenleme")
+
+### <a name="to-view-a-gateway"></a>Bir ağ geçidini görüntülemek için
+
+Bir ExpressRoute ağ geçidi oluşturduktan sonra, ağ geçidi ayrıntılarını görüntüleyebilirsiniz. Hub 'a gidin, **ExpressRoute**' ı seçin ve ağ geçidini görüntüleyin.
+
+![Ağ geçidini görüntüle](./media/virtual-wan-expressroute-portal/viewgw.png "ağ geçidini görüntüle")
+
+## <a name="connectvnet"></a>VNet 'iniz hub 'a bağlanır
+
+Bu bölümde, hub 'ınız ile VNet arasında eşleme bağlantısı oluşturursunuz. Bu adımları bağlanmak istediğiniz tüm sanal ağlar için tekrarlayın.
 
 1. Sanal WAN'ınızın sayfasında **Sanal ağ bağlantısı**'na tıklayın.
 2. Sanal ağ bağlantısı sayfasında **+Bağlantı ekle**'ye tıklayın.
@@ -92,44 +99,58 @@ Bu adımda hub'ınızla bir sanal ağ arasında eşleme bağlantısı oluşturac
     * **Bağlantı adı**: Bağlantınıza bir ad verin.
     * **Hub'lar**: Bu bağlantıyla ilişkilendirmek istediğiniz hub'ı seçin.
     * **Abonelik**: Aboneliği doğrulayın.
-    * **Sanal ağ**: Bu hub'a bağlamak istediğiniz sanal ağı seçin. Sanal ağda önceden var olan bir sanal ağ geçidi bulunamaz.
+    * **Sanal ağ**: Bu hub'a bağlamak istediğiniz sanal ağı seçin. Sanal ağda zaten var olan bir sanal ağ geçidi (VPN ya da ExpressRoute) olamaz.
 
+## <a name="connectcircuit"></a>Devrenizi hub Gateway 'e bağlama
 
-## <a name="viewwan"></a>6. Sanal WAN'ınızı görüntüleme
+Ağ Geçidi oluşturulduktan sonra, bir [ExpressRoute devresini](../expressroute/expressroute-howto-circuit-portal-resource-manager.md) buna bağlayabilirsiniz. ExpressRoute Global Reach tarafından desteklenen konumlardaki ExpressRoute Premium devrelerinin bir sanal WAN ExpressRoute Gateway 'e bağlanabildiğini unutmayın.
 
-1. Sanal WAN'a gidin.
-2. Genel bakış sayfasında haritadaki her bir nokta bir hub'ı temsil eder. Hub sistem durumu özetini görüntülemek için noktalardan birinin üzerine gidin.
-3. Hub'lar ve bağlantılar bölümünde herhangi bir hub'ın durumunu, sitesini, bölgesini, VPN bağlantısı durumunu ve gelen/giden baytları görüntüleyebilirsiniz.
+### <a name="to-connect-the-circuit-to-the-hub-gateway"></a>Devresine hub Gateway 'e bağlamak için
 
-## <a name="viewhealth"></a>7. Kaynak durumunu görüntüleme
+Portalda **sanal hub-> bağlantısı-> ExpressRoute** sayfasına gidin. Aboneliğinizde bir ExpressRoute devresine erişiminiz varsa, devre listesinde kullanmak istediğiniz devreyi görürsünüz. Herhangi bir bağlantı görmüyorsanız, ancak bir yetkilendirme anahtarı ve eş devre URI 'SI ile sağlanmışsa, bir bağlantı hattı kullanabilir ve bağlayabilirsiniz. [Yetkilendirme anahtarını benimsemek için](#authkey)bkz. bağlanma.
 
-1. WAN'ınıza gidin.
-2. WAN sayfanızın **Destek ve sorun giderme** bölümünde **Sistem durumu**'na tıklayın ve kaynağınızı görüntüleyin.
+1. Devresini seçin.
+2. **Bağlantı devresini**seçin.
 
-## <a name="connectmon"></a>8. Bir bağlantıyı izleme
+   ![bağlantı devreleri](./media/virtual-wan-expressroute-portal/cktconnect.png "bağlantı devreleri")
 
-Bir Azure sanal makinesi ile uzak site arasındaki iletişimi izlemek için bir bağlantı oluşturun. Bağlantı izleyici oluşturma hakkında bilgi almak için bkz. [Ağ iletişimini izleme](~/articles/network-watcher/connection-monitor.md). Kaynak alan Azure'daki sanal makinenin IP adresi, hedef IP ise Sitenin IP adresidir.
+### <a name="authkey"></a>Yetkilendirme anahtarını benimsemek yoluyla bağlanmak için
 
-## <a name="cleanup"></a>9. Kaynakları temizleme
+Bağlanmak için verdiğiniz yetkilendirme anahtarını ve devre URI 'sini kullanın.
 
-Bu kaynaklara artık ihtiyacınız olmadığında, kullanabileceğiniz [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) kaynak grubunu ve içerdiği tüm kaynakları kaldırmak için. "myResourceGroup" yerine kaynak grubunuzun adını yazın ve aşağıdaki PowerShell komutunu çalıştırın:
+1. ExpressRoute sayfasında **+ kullan yetkilendirme anahtarı** ' na tıklayın.
 
-```azurepowershell-interactive
-Remove-AzResourceGroup -Name myResourceGroup -Force
-```
+   ![dınız](./media/virtual-wan-expressroute-portal/redeem.png "dınız")
+2. Kullanma yetkilendirme anahtarı sayfasında, değerleri girin.
+
+   ![anahtar değerlerini kullanma](./media/virtual-wan-expressroute-portal/redeemkey2.png "anahtar değerlerini kullanma")
+3. Anahtarı eklemek için **Ekle** ' yi seçin.
+4. Devresini görüntüleyin. Kullanılan bir devre, kullanıcının adı (tür, sağlayıcı ve diğer bilgiler olmadan) yalnızca Kullanıcı tarafından farklı bir abonelikte olduğu için bu adı gösterir.
+
+## <a name="to-test-connectivity"></a>Bağlantıyı sınamak için
+
+Bağlantı hattı bağlantısı kurulduktan sonra, hub bağlantı durumu ' Bu hub ' olarak gösterilir. Bu, bağlantının Merkez ExpressRoute ağ geçidine göre kuruladığını gösterir. ExpressRoute bağlantı hattının arkasındaki bir istemciden bağlantıyı test etmeden önce yaklaşık 5 dakika bekleyin. Örneğin, daha önce oluşturduğunuz VNet 'teki bir VM.
+
+ExpressRoute ağ geçidiyle aynı hub 'daki bir sanal WAN VPN Gateway 'e bağlı olan siteleriniz varsa VPN ve ExpressRoute uç noktaları arasında çift yönlü bağlantıya sahip olabilirsiniz. Dinamik yönlendirme (BGP) destekleniyor. Hub 'daki ağ geçitlerinin ASN 'si düzeltildi ve şu an düzenlenemiyor.
+
+## <a name="to-change-the-size-of-a-gateway"></a>Bir ağ geçidinin boyutunu değiştirmek için
+
+ExpressRoute ağ geçidinizin boyutunu değiştirmek istiyorsanız, hub 'ın içindeki ExpressRoute ağ geçidini bulun ve açılan listeden ölçek birimlerini seçin. Değişiklerinizi kaydedin. Hub Gateway 'in güncelleştirilmesi yaklaşık 30 dakika sürer.
+
+![Ağ Geçidi boyutunu değiştir](./media/virtual-wan-expressroute-portal/changescale.png "Ağ Geçidi boyutunu değiştir")
+
+## <a name="to-advertise-default-route-00000-to-endpoints"></a>Varsayılan 0.0.0.0/0 yolunu uç noktalara tanıtmak için
+
+Azure sanal hub 'ının varsayılan yolu olan 0.0.0.0/0 yolunu ExpressRoute bitiş noktalarına tanıtmasını istiyorsanız, ' Varsayılan rotayı yay ' seçeneğini etkinleştirmeniz gerekir.
+
+1. **Devre dışı >...-> Bağlantıyı Düzenle**' yi seçin.
+
+   ![Bağlantıyı Düzenle](./media/virtual-wan-expressroute-portal/defaultroute1.png "Bağlantıyı Düzenle")
+
+2. Varsayılan yolu yaymak için **Etkinleştir** ' i seçin.
+
+   ![Varsayılan yolu yay](./media/virtual-wan-expressroute-portal/defaultroute2.png "Varsayılan yolu yay")
 
 ## <a name="next-steps"></a>Sonraki adımlar
-
-Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
-
-> [!div class="checklist"]
-> * vWAN oluşturma
-> * Hub oluşturma
-> * Bağlantı hattı bulun ve hub ile ilişkilendirin
-> * Bağlantı hattını hub’lar ile ilişkilendirin
-> * Bir sanal ağı bir hub'a bağlama
-> * Sanal WAN'ınızı görüntüleme
-> * Kaynak durumunu görüntüleme
-> * Bir bağlantıyı izleme
 
 Sanal WAN hakkında daha fazla bilgi için [Sanal WAN'a Genel Bakış](virtual-wan-about.md) sayfasına bakın.

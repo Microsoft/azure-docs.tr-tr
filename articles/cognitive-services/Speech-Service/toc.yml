@@ -1,188 +1,285 @@
 # displayName: additional text for filtering down the ToC in meaningful way.
-- name: Konuşma Tanıma Hizmetleri Belgeleri
-  href: index.yml
+- name: Konuşma hizmeti belgeleri
+  href: index.md
 - name: Genel Bakış
-  expanded: true
+  expanded: false
   items:
-    - name: Konuşma Tanıma Hizmetleri nelerdir?
+    - name: Konuşma tanıma hizmeti nedir?
       href: overview.md
+    - name: Dil ve bölge desteği
+      href: language-support.md
+- name: Konuşmayı metne dönüştürme
+  expanded: false
+  items:
+    - name: Genel Bakış
+      items:
+        - name: Konuşmayı metne dönüştürme nedir?
+          href: speech-to-text.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Ses dosyasından alınan konuşmayı tanıma
+          href: quickstarts/speech-to-text-from-file.md
+        - name: Mikrofon girişiyle yapılan konuşmayı tanıma
+          href: quickstarts/speech-to-text-from-microphone.md
+        - name: Blob depolama alanında depolanan konuşmayı tanıma
+          href: quickstarts/from-blob.md
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Konuşmayı tanıma için kaynak dili değiştirme
+          href: how-to-specify-source-language.md
+        - name: Özel Konuşma ile doğruluğu geliştirme
+          href: how-to-custom-speech.md
+        - name: Tümcecik listeleriyle doğruluğu geliştirme
+          href: how-to-phrase-lists.md
+        - name: Kiracı Modelleriyle doğruluğu geliştirme
+          href: tutorial-tenant-model.md
+        - name: Belirli bir mikrofon giriş cihazı seçme
+          href: how-to-select-audio-input-devices.md
+        - name: Otomatik kaynak dili algılamayı kullanma
+          href: how-to-automatic-language-detection.md
+        - name: Sıkıştırılmış ses giriş biçimlerini kullanma
+          href: how-to-use-codec-compressed-audio-input-streams.md
+        - name: Sıkıştırılmış ses giriş biçimlerini kullanma (iOS)
+          href: how-to-use-codec-compressed-audio-input-streams-ios.md
+        - name: Sıkıştırılmış ses giriş biçimlerini kullanma (Android)
+          href: how-to-use-codec-compressed-audio-input-streams-android.md
+        - name: Docker kapsayıcılarıyla konuşma tanıma özelliğini kullanma
+          href: speech-container-howto.md?tabs=stt
+    - name: Başvuru
+      items:
+        - name: Konuşma SDK'sı API'leri
+          items:
+            - name: C++
+              href: 'https://aka.ms/csspeech/cppref'
+            - name: 'C#'
+              href: 'https://aka.ms/csspeech/csharpref'
+            - name: Java
+              href: 'https://aka.ms/csspeech/javaref'
+            - name: JavaScript
+              href: 'https://aka.ms/csspeech/javascriptref'
+            - name: Objective-C
+              href: 'https://aka.ms/csspeech/objectivecref'
+            - name: Python
+              href: 'https://aka.ms/csspeech/pythonref'
+            - name: Sürüm notları
+              href: releasenotes.md
+        - name: REST API'leri
+          items:
+            - name: Konuşmayı metne dönüştürme REST API'si
+              href: rest-speech-to-text.md
+            - name: Toplu transkripsiyon REST API'leri
+              href: batch-transcription.md
+    - name: Kaynaklar
+      items:
+        - name: Konuşmayı metne dönüştürme hakkında SSS
+          href: faq-stt.md
+- name: Metin okuma
+  exanded: false
+  items:
+    - name: Genel Bakış
+      items:
+        - name: Metin okuma nedir?
+          href: text-to-speech.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Konuşmayı ses dosyasına sentezleme
+          href: quickstarts/text-to-speech-audio-file.md
+        - name: Konuşmayı hoparlöre sentezleme
+          href: quickstarts/text-to-speech.md
+        - name: Uzun ses için zaman uyumsuz sentez
+          href: quickstarts/text-to-speech/async-synthesis-long-form-audio.md
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: SSML ile çıkışı geliştirme
+          href: speech-synthesis-markup.md
+        - name: Özel Seslerle çıkışı geliştirme
+          href: how-to-custom-voice.md
+        - name: Uzun Ses API'siyle konuşmayı sentezleme
+          href: long-audio-api.md
+        - name: Docker kapsayıcılarıyla konuşma sentezi özelliğini kullanma
+          href: speech-container-howto.md?tabs=tts
+    - name: Başvuru
+      items:
+        - name: Konuşma SDK'sı
+          items:
+            - name: C++
+              href: 'https://aka.ms/csspeech/cppref'
+            - name: 'C#'
+              href: 'https://aka.ms/csspeech/csharpref'
+            - name: Java
+              href: 'https://aka.ms/csspeech/javaref'
+            - name: JavaScript
+              href: 'https://aka.ms/csspeech/javascriptref'
+            - name: Objective-C
+              href: 'https://aka.ms/csspeech/objectivecref'
+            - name: Python
+              href: 'https://aka.ms/csspeech/pythonref'
+            - name: Sürüm notları
+              href: releasenotes.md
+        - name: REST API'leri
+          items:
+            - name: Metin okuma REST API'si
+              href: rest-text-to-speech.md
+    - name: Kaynaklar
+      items:
+        - name: Metin okuma hakkında SSS
+          href: faq-text-to-speech.md
+- name: Amaç tanıma
+  exanded: false
+  items:
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: 'Konuşmayı, amaçları ve varlıkları tanıma'
+          href: quickstarts/intent-recognition.md
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: 'LUIS ile konuşma amaçlarını tanıma, C#'
+          href: how-to-recognize-intents-from-speech-csharp.md
+    - name: Başvuru
+      items:
+        - name: Konuşma SDK'sı
+          items:
+            - name: C++
+              href: 'https://aka.ms/csspeech/cppref'
+            - name: 'C#'
+              href: 'https://aka.ms/csspeech/csharpref'
+            - name: Java
+              href: 'https://aka.ms/csspeech/javaref'
+            - name: JavaScript
+              href: 'https://aka.ms/csspeech/javascriptref'
+            - name: Objective-C
+              href: 'https://aka.ms/csspeech/objectivecref'
+            - name: Python
+              href: 'https://aka.ms/csspeech/pythonref'
+            - name: Sürüm notları
+              href: releasenotes.md
+        - name: LUIS Hizmeti
+          items:
+            - name: LUIS Geliştirici Kaynakları
+              href: 'https://docs.microsoft.com/azure/cognitive-services/luis/developer-reference-resource'
+- name: Konuşma çevirisi
+  exanded: false
+  items:
+    - name: Genel Bakış
+      items:
+        - name: Konuşma çevirisi nedir?
+          href: speech-translation.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Konuşmayı metne çevirme
+          href: quickstarts/translate-speech-to-text.md
+        - name: Konuşmayı birden fazla hedef dile çevirme
+          href: quickstarts/translate-speech-to-text-multiple-languages.md
+        - name: Konuşmayı konuşmaya çevirme
+          href: quickstarts/translate-speech-to-speech.md
+    - name: Öğreticiler
+      items:
+        - name: Metin ve REST çevirmek ve sentezlemek için bir Flask uygulama oluşturma
+          href: ../translator/tutorial-build-flask-app-translation-synthesis.md?toc=%2fazure%2fcognitive-services%2fspeech-service%2ftoc.json&bc=%2fazure%2fcognitive-services%2fspeech-service%2fbreadcrumb%2ftoc.json
+    - name: Başvuru
+      items:
+        - name: Konuşma SDK'sı
+          items:
+            - name: C++
+              href: 'https://aka.ms/csspeech/cppref'
+            - name: 'C#'
+              href: 'https://aka.ms/csspeech/csharpref'
+            - name: Java
+              href: 'https://aka.ms/csspeech/javaref'
+            - name: JavaScript
+              href: 'https://aka.ms/csspeech/javascriptref'
+            - name: Objective-C
+              href: 'https://aka.ms/csspeech/objectivecref'
+            - name: Python
+              href: 'https://aka.ms/csspeech/pythonref'
+            - name: Sürüm notları
+              href: releasenotes.md
+    - name: Kaynaklar
+      items:
+        - name: Konuşma çevirisi hakkında SSS
+          href: 'https://www.microsoft.com/translator/faq.aspx'
+- name: Konuşma transkripsiyonu
+  expanded: false
+  items:
+    - name: Genel Bakış
+      items:
+        - name: Konuşma transkripsiyonu nedir?
+          href: conversation-transcription.md
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Gerçek zamanlı Konuşma Transkripsiyonu
+          href: how-to-use-conversation-transcription.md
+        - name: Zaman uyumsuz Konuşma Transkripsiyonu
+          href: how-to-async-conversation-transcription.md
+    - name: Başvuru
+      items:
+        - name: Konuşma SDK'sı
+          items:
+            - name: C++
+              href: 'https://aka.ms/csspeech/cppref'
+            - name: 'C#'
+              href: 'https://aka.ms/csspeech/csharpref'
+            - name: Java
+              href: 'https://aka.ms/csspeech/javaref'
+            - name: JavaScript
+              href: 'https://aka.ms/csspeech/javascriptref'
+            - name: Objective-C
+              href: 'https://aka.ms/csspeech/objectivecref'
+            - name: Python
+              href: 'https://aka.ms/csspeech/pythonref'
+            - name: Sürüm notları
+              href: releasenotes.md
+        - name: REST API'leri
+          items:
+            - name: Konuşma transkripsiyonu REST API'leri
+              href: 'https://signature.centralus.cts.speech.microsoft.com/UI/index.html'
+- name: Ses yardımcıları
+  expanded: false
+  items:
+    - name: Genel Bakış
+      items:
+        - name: Ses yardımcısı nedir?
+          href: voice-assistants.md
+    - name: Yardımcınızı oluşturma
+      items:
+        - name: Özel Komutlar (Önizleme)
+          href: custom-commands.md
+        - name: Direct Line Speech
+          href: direct-line-speech.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: 'C# (UWP)'
+          href: quickstart-voice-assistant-csharp-uwp.md
+        - name: 'Java (Windows, macOS, Linux)'
+          href: quickstart-voice-assistant-java-jre.md
+        - name: Java (Android)
+          href: quickstart-voice-assistant-java-android.md
+        - name: Özel Komut oluşturma (Önizleme)
+          href: quickstart-custom-speech-commands-create-new.md
+        - name: Parametreler içeren Özel Komut oluşturma (Önizleme)
+          href: quickstart-custom-speech-commands-create-parameters.md
+        - name: Konuşma SDK'sı ile Özel Komutları kullanma (Önizleme)
+          href: quickstart-custom-speech-commands-speech-sdk.md
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Konuşma SDK'sı ile Özel Komutları uygulama
+          href: how-to-custom-speech-commands-fulfill-sdk.md
+        - name: Özel Komutlara parametre doğrulaması ekleme
+          href: how-to-custom-speech-commands-validations.md
+    - name: Öğreticiler
+      items:
+        - name: Konuşma SDK’sı ile botunuzu ses ile etkinleştirme
+          href: tutorial-voice-enable-your-bot-speech-sdk.md
+    - name: Kaynaklar
+      items:
+        - name: Ses yardımcıları hakkında SSS
+          href: faq-voice-assistants.md
+- name: Özelleştirme
+  exanded: false
+  items:
     - name: Konuşmayı metne dönüştürme
-      href: speech-to-text.md
-      displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-    - name: Metin okuma
-      href: text-to-speech.md
-      displayName: 'synthesize speech, speech synthesis, text-to-speech, tts'
-    - name: Konuşma çevirisi
-      href: speech-translation.md
-      displayName: 'translate speech, speech translation, translator, s2s, speech to speech'
-    - name: Ses öncelikli sanal yardımcılar Önizlemesi
-      href: voice-first-virtual-assistants.md
-      displayName: 'virtual assistants, speech-enabled bots, conversational agents'
-- name: Hızlı Başlangıçlar
-  items:
-    - name: Konuşma SDK'sı
       items:
-        - name: Konuşmayı metne dönüştürme
-          items:
-            - name: 'C# (.NET Framework Windows)'
-              href: quickstart-csharp-dotnet-windows.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-            - name: 'C# (.NET Core Windows)'
-              href: quickstart-csharp-dotnetcore-windows.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-            - name: 'C# (UWP)'
-              href: quickstart-csharp-uwp.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt, universal windows platform'
-            - name: 'C# (Unity)'
-              href: quickstart-csharp-unity.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt, unity 3d, windows, android, universal windows platform, uwp'
-            - name: C++ (Windows)
-              href: quickstart-cpp-windows.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-            - name: C++ (Linux)
-              href: quickstart-cpp-linux.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-            - name: C++ (macOS)
-              href: quickstart-cpp-macos.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-            - name: Java (Android)
-              href: quickstart-java-android.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-            - name: 'Java (Windows, macOS, Linux)'
-              href: quickstart-java-jre.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt, jre, jvm'
-            - name: JavaScript (Tarayıcı)
-              href: quickstart-js-browser.md
-            - name: JavaScript (Node.js)
-              href: quickstart-js-node.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-            - name: Objective-C (iOS)
-              href: quickstart-objectivec-ios.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt, xcode'
-            - name: Objective-C (macOS)
-              href: quickstart-objective-c-macos.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt, xcode'
-            - name: Swift (iOS)
-              href: quickstart-swift-ios.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt, xcode'
-            - name: Swift (macOS)
-              href: quickstart-swift-macos.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt, xcode'
-            - name: Python
-              href: quickstart-python.md
-              displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-        - name: Konuşmayı çevirme
-          items:
-            - name: 'C# (.NET Core Windows)'
-              href: quickstart-translate-speech-dotnetcore-windows.md
-              displayName: 'translate speech, speech translation, translator, s2s, speech to speech'
-            - name: 'C# (.NET Framework Windows)'
-              href: quickstart-translate-speech-dotnetframework-windows.md
-              displayName: 'translate speech, speech translation, translator, s2s, speech to speech'
-            - name: 'C# (UWP)'
-              href: quickstart-translate-speech-uwp.md
-              displayName: 'translate speech, speech translation, translator, s2s, speech to speech, universal windows platform'
-            - name: C++ (Windows)
-              href: quickstart-translate-speech-cpp-windows.md
-              displayName: 'translate speech, speech translation, translator, s2s, speech to speech'
-            - name: 'Java (Windows, macOS, Linux)'
-              href: quickstart-translate-speech-java-jre.md
-              displayName: 'translate speech, speech translation, translator, s2s, speech to speech'
-        - name: Metin okuma
-          items:
-            - name: 'C# (.NET Framework Windows)'
-              href: quickstart-text-to-speech-dotnet-windows.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts'
-            - name: 'C# (.NET Core Windows)'
-              href: quickstart-text-to-speech-dotnetcore.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts'
-            - name: 'C# (UWP)'
-              href: quickstart-text-to-speech-csharp-uwp.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts, universal windows platform'
-            - name: 'C# (Unity)'
-              href: quickstart-text-to-speech-csharp-unity.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts, unity 3d, windows, android, universal windows platform, uwp'
-            - name: C++ (Windows)
-              href: quickstart-text-to-speech-cpp-windows.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts'
-            - name: C++ (Linux)
-              href: quickstart-text-to-speech-cpp-linux.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts'
-        - name: Ses öncelikli sanal yardımcılar (Önizleme)
-          items:
-            - name: 'C# (UWP)'
-              href: quickstart-virtual-assistant-csharp-uwp.md
-              displayName: 'virtual assistant, speech-enabled bot, conversational agent, universal windows platform'
-            - name: 'Java (Windows, macOS, Linux)'
-              href: quickstart-virtual-assistant-java-jre.md
-              displayName: 'virtual assistant, speech-enabled bot, conversational agent'
-            - name: Java (Android)
-              href: quickstart-virtual-assistant-java-android.md
-              displayName: 'virtual assistant, speech-enabled bot, conversational agent'
-    - name: REST API'leri
-      items:
-        - name: Bölgelere göre desteklenen sesleri listeleme
-          items:
-            - name: Node.js
-              href: quickstart-nodejs-get-text-to-speech-voices.md
-              displayName: 'voices, synthesize speech, speech synthesis, text-to-speech, tts, rest'
-            - name: Python
-              href: quickstart-python-get-text-to-speech-voices.md
-              displayName: 'voices, synthesize speech, speech synthesis, text-to-speech, tts, rest'
-        - name: Metin okumayı dönüştürme
-          items:
-            - name: 'C# (.NET Core)'
-              href: quickstart-dotnet-text-to-speech.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts, rest'
-            - name: Node.js
-              href: quickstart-nodejs-text-to-speech.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts, rest'
-            - name: Python
-              href: quickstart-python-text-to-speech.md
-              displayName: 'synthesize speech, speech synthesis, text-to-speech, tts, rest'
-    - name: Konuşma Cihazları SDK’sı
-      href: speech-devices-sdk-android-quickstart.md
-      displayName: 'roobo, speech devices sdk'
-- name: Öğreticiler
-  items:
-    - name: 'LUIS ile konuşma amaçlarını tanıma, C#'
-      href: how-to-recognize-intents-from-speech-csharp.md
-      displayName: 'recognize intent, intent recognition, language understanding service, luis'
-    - name: Metin ve REST çevirmek ve sentezlemek için bir Flask uygulama oluşturma
-      href: ../translator/tutorial-build-flask-app-translation-synthesis.md?toc=%2fazure%2fcognitive-services%2fspeech-service%2ftoc.json&bc=%2fazure%2fcognitive-services%2fspeech-service%2fbreadcrumb%2ftoc.json
-- name: Kavramlar
-  items:
-    - name: Konuşma Transkripsiyonu
-      href: conversation-transcription-service.md
-    - name: Çağrı merkezi Transkripsiyonu
-      href: call-center-transcription.md
-- name: Nasıl yapılır kılavuzları
-  items:
-    - name: Konuşma Tanıma Hizmetlerine kaydolma
-      href: get-started.md
-    - name: Toplu iş transkripsiyonu (REST)
-      href: batch-transcription.md
-      displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-    - name: Ses giriş akışlarını tüketme (SDK)
-      href: how-to-use-audio-input-streams.md
-    - name: Codec sıkıştırılmış ses giriş akışlarını tüketme (SDK)
-      href: how-to-use-codec-compressed-audio-input-streams.md
-      displayName: 'mp3, opus, ogg, flac'
-    - name: Ses giriş cihazını seçme (SDK)
-      href: how-to-select-audio-input-devices.md
-      displayName: 'audio, microphone, input, device'
-    - name: Günlüğü etkinleştirme (SDK)
-      href: how-to-use-logging.md
-      displayName: 'debug, log, logging'
-    - name: Tümcecik Listeleri ile tanıma özelliğini geliştirme
-      href: how-to-phrase-lists.md
-      displayname: 'phrase lists, phrase, list, recognition accuracy'
-    - name: Konuşmaları yazıya dökme (SDK)
-      href: how-to-use-conversation-transcription-service.md
-      displayName: 'conversation, transcription, speech recognition'
-    - name: Özelleştirme
-      items:
-        - name: Konuşmayı metne dönüştürme
+        - name: Özel Konuşma portalı
           items:
             - name: Özel Konuşma kullanmaya başlama
               href: how-to-custom-speech.md
@@ -198,7 +295,27 @@
               href: how-to-custom-speech-deploy-model.md
             - name: Kılavuz İnsan etiketli transkripsiyonlar oluşturma
               href: how-to-custom-speech-human-labeled-transcriptions.md
-        - name: Metin okuma
+        - name: Kiracı Modelleri
+          items:
+            - name: 'Modeli oluşturma, yayımlama ve kullanma'
+              href: tutorial-tenant-model.md
+    - name: Metin okuma
+      items:
+        - name: Sorumlu dağıtım
+          items:
+            - name: Özel Ses geçişi
+              href: concepts-gating-overview.md
+            - name: Sentetik teknoloji dağıtımı
+              href: concepts-guidelines-responsible-deployment-synthetic.md
+            - name: Seslendiren kişinin açıklaması
+              href: 'https://aka.ms/disclosure-voice-talent'
+            - name: Tasarım yönergelerini açıklama
+              href: concepts-disclosure-guidelines.md
+            - name: Tasarım desenlerini açıklama
+              href: concepts-disclosure-patterns.md
+            - name: Kullanım Kuralları
+              href: 'https://aka.ms/custom-neural-code-of-conduct'
+        - name: Özel Ses portalı
           items:
             - name: Özel Ses’i kullanmaya başlama
               href: how-to-custom-voice.md
@@ -208,136 +325,120 @@
               href: how-to-custom-voice-create-voice.md
             - name: Ses örnekleri kaydetme
               href: record-custom-voice-samples.md
-            - name: Metin okuma çıkışı için hassas ayar yapma
-              href: how-to-voice-tuning.md
-        - name: Özel uyandırma sözcüğü oluşturma (anahtar sözcük bulma)
-          href: speech-devices-sdk-create-kws.md
-          displayName: 'roobo, speech devices sdk, wake word, keyword spotting, kws'
-    - name: Geçiş
-      items:
-        - name: Bing Konuşma’dan
-          href: how-to-migrate-from-bing-speech.md
-        - name: Özel Konuşma Tanıma Hizmeti’nden
-          href: how-to-migrate-from-custom-speech-service.md
-        - name: Translator Konuşma Çevirisi API’sinden
-          href: how-to-migrate-from-translator-speech-api.md
-    - name: Kapsayıcıları kullanma
-      items:
-        - name: Kapsayıcıları yükleme ve çalıştırma
-          displayName: 'docker, container, package, packaged app, swagger, open api, openapi, train, publish, az, acr, cli, tps, core, curl, try it now, import, pull, on-premises'
-          href: speech-container-howto.md
-        - name: Kapsayıcıları yapılandırma
-          href: speech-container-configuration.md
-          displayName: 'docker, container, billing, apikey, pull, logging, on-premises'
-- name: Örnekler
+        - name: Ses İçeriği Oluşturma
+          items:
+            - name: 'Nasıl yapılır: Ses İçeriği Oluşturma'
+              href: how-to-audio-content-creation.md
+    - name: Özel anahtar sözcük belirleme
+      href: speech-devices-sdk-create-kws.md
+- name: Konuşma Hizmeti
+  expanded: false
   items:
-    - name: Konuşma SDK'sı
-      href: 'https://github.com/Azure-Samples/cognitive-services-speech-sdk'
-    - name: Konuşma Cihazları SDK’sı
-      href: 'https://github.com/Azure-Samples/Cognitive-Services-Speech-Devices-SDK'
-    - name: Metin okuma (REST)
-      href: 'https://github.com/Azure-Samples/Cognitive-Speech-TTS'
-    - name: Toplu iş transkripsiyonu (REST)
-      href: 'https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/batch'
-- name: Başvuru
-  items:
-    - name: Konuşma SDK'sı
+    - name: Senaryolar
       items:
-        - name: Genel Bakış
+        - name: Çağrı merkezleri
+          href: get-started.md
+          displayName: 'IVRs, IVR, Telephony Data, Transcription for Telephony Data, Real-time Transcription for Call Centers'
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Konuşma Hizmetini ücretsiz olarak deneme
+          href: get-started.md
+        - name: Konuşma Hizmeti Kaynağı Oluşturma
+          href: 'get-started.md#create-a-speech-resource-in-azure'
+        - name: Kapsayıcılar
+          exanded: false
+          items:
+            - name: Kapsayıcıları yükleme ve çalıştırma
+              href: speech-container-howto.md
+            - name: Kapsayıcıları yapılandırma
+              href: speech-container-configuration.md
+            - name: Kubernetes ve Helm
+              href: speech-container-howto-on-premises.md
+            - name: Azure Container Instances
+              href: deploy-speech-on-container-instances.md
+    - name: Örnekler
+      items:
+        - name: Metin okuma REST örnekleri
+          href: 'https://github.com/Azure-Samples/Cognitive-Speech-TTS'
+        - name: Toplu transkripsiyon REST örnekleri
+          href: 'https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/batch'
+    - name: Başvuru
+      items:
+        - name: REST API'leri
+          items:
+            - name: Toplu transkripsiyon ve özelleştirme REST API'si
+              href: 'https://westus.cris.ai/swagger/ui/index'
+            - name: Konuşma Transkripsiyonu REST API'si
+              href: 'https://signature.centralus.cts.speech.microsoft.com/UI/index.html'
+            - name: Konuşmayı metne dönüştürme REST API'si
+              href: rest-speech-to-text.md
+            - name: Metin okuma REST API'si
+              href: rest-text-to-speech.md
+            - name: Web Kancaları REST API'si
+              href: webhooks.md
+        - name: Swagger belgeleri
+          href: swagger-documentation.md
+- name: Konuşma SDK'sı
+  expanded: false
+  items:
+    - name: Genel Bakış
+      items:
+        - name: Konuşma SDK'sı hakkında
           href: speech-sdk.md
-          displayName: 'C#, C++, Java, .NET, .NET Core, UWP, Android, Linux, Windows'
         - name: Senaryo kullanılabilirliği
           href: scenario-availability.md
-        - name: Uygulama teslim etme
-          href: ship-application.md
-        - name: Sürüm notları
-          href: releasenotes.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Proje oluşturma
+          href: quickstarts/create-project.md
+        - name: 'C# ile Konuşma SDK''sını Ayarlama'
+          href: quickstarts/setup-platform.md?pivots=programming-language-csharp
+        - name: C++ ile Konuşma SDK'sını Ayarlama
+          href: quickstarts/setup-platform.md?pivots=programming-language-cpp
+        - name: Java ile Konuşma SDK'sını Ayarlama
+          href: quickstarts/setup-platform.md?pivots=programming-language-java
+        - name: Python ile Konuşma SDK'sını Ayarlama
+          href: quickstarts/setup-platform.md?pivots=programming-language-python
+        - name: Diğer Platformlarla Konuşma SDK'sını Ayarlama
+          href: quickstarts/setup-platform.md?pivots=programming-language-more
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Günlü kaydını etkinleştir
+          href: how-to-use-logging.md
+    - name: Örnekler
+      items:
+        - name: Konuşma SDK’sı Örnekleri (GitHub)
+          href: 'https://github.com/Azure-Samples/cognitive-services-speech-sdk'
+        - name: Konuşma Cihazı SDK’sı Örnekleri (GitHub)
+          href: 'https://github.com/Azure-Samples/Cognitive-Services-Speech-Devices-SDK'
+    - name: Başvuru
+      items:
         - name: C++
           href: 'https://aka.ms/csspeech/cppref'
         - name: 'C#'
           href: 'https://aka.ms/csspeech/csharpref'
-        - name: Java/Android
+        - name: Java
           href: 'https://aka.ms/csspeech/javaref'
-        - name: JavaScript/Node.js
+        - name: JavaScript
           href: 'https://aka.ms/csspeech/javascriptref'
         - name: Objective-C
           href: 'https://aka.ms/csspeech/objectivecref'
         - name: Python
           href: 'https://aka.ms/csspeech/pythonref'
-    - name: Konuşma Cihazları SDK’sı
-      items:
-        - name: Konuşma Cihazları SDK’sını edinme
-          href: get-speech-devices-sdk.md
-        - name: Sürüm notları
-          href: devices-sdk-release-notes.md
-        - name: Roobo v1 ayrıntıları
-          href: speech-devices-sdk-roobo-v1.md
-        - name: Mikrofon belirtimi
-          href: speech-devices-sdk-microphone.md
-    - name: REST API'leri
-      items:
-        - name: Konuşmayı metne dönüştürme
-          href: rest-speech-to-text.md
-          displayName: 'recognize speech, speech recognition, speech-to-text, stt, rest'
-        - name: Metin okuma
-          href: rest-text-to-speech.md
-          displayName: 'synthesize speech, speech synthesis, text-to-speech, tts, rest'
-        - name: Toplu iş transkripsiyonu ve özelleştirmesi
-          href: 'https://westus.cris.ai/swagger/ui/index'
-          displayName: 'batch transcription, transcription, custom models, customization, model management, rest'
-        - name: Konuşma transkripsiyonu
-          href: 'https://signature.centralus.cts.speech.microsoft.com/UI/index.html'
-          displayName: 'Conversation transcription, signature generation'
-        - name: Web Kancaları
-          href: webhooks.md
-    - name: Swagger belgeleri
-      href: swagger-documentation.md
-    - name: Konuşma Sentezi Biçimlendirme Dili (SSML)
-      href: speech-synthesis-markup.md
-    - name: PowerShell
-      href: 'https://aka.ms/azure-powershell-cognitiveservices'
-    - name: Azure CLI
-      href: 'https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az_cognitiveservices_list'
-    - name: Dil desteği
-      href: language-support.md
-    - name: Bölgeler
-      href: regions.md
-- name: Kaynaklar
+        - name: Konuşma SDK’sı sürüm notları
+          href: releasenotes.md
+- name: Geçiş
+  exanded: false
   items:
-    - name: SSS
-      items:
-        - name: Konuşmayı metne dönüştürme
-          href: faq-stt.md
-          displayName: 'recognize speech, speech recognition, speech-to-text, stt'
-        - name: Metin okuma
-          href: faq-text-to-speech.md
-          displayName: 'synthesize speech, speech synthesis, text-to-speech, tts'
-        - name: Konuşma çevirisi
-          href: 'https://www.microsoft.com/translator/faq.aspx'
-          displayName: 'translate speech, speech translation, translator, s2s, speech to speech'
-        - name: Ses öncelikli sanal yardımcılar (Önizleme)
-          href: faq-voice-first-virtual-assistants.md
-    - name: Konuşma SDK'sı lisansları
-      items:
-        - name: Lisans
-          href: 'https://aka.ms/csspeech/license201809'
-        - name: Üçüncü taraf bildirimleri
-          href: 'https://aka.ms/csspeech/toctpn'
-    - name: Konuşma Cihazları SDK’sı
-      items:
-        - name: Hakkında
-          href: speech-devices-sdk.md
-          displayName: 'roobo, speech devices sdk'
-        - name: Lisans
-          href: 'https://aka.ms/sdsdk-license'
-          displayName: 'roobo, speech devices sdk'
-        - name: Üçüncü taraf bildirimleri
-          href: 'https://aka.ms/sdsdk-toctpn'
-          displayName: 'roobo, speech devices sdk'
-    - name: Konuşma SDK’sı sorunlarını giderme
-      href: troubleshooting.md
-    - name: Konuşma Cihazları SDK’sında sorun giderme
-      href: speech-devices-sdk-troubleshooting.md
+    - name: Bing Konuşma’dan
+      href: how-to-migrate-from-bing-speech.md
+    - name: Özel Konuşma Tanıma Hizmeti’nden
+      href: how-to-migrate-from-custom-speech-service.md
+    - name: Translator Konuşma Çevirisi API’sinden
+      href: how-to-migrate-from-translator-speech-api.md
+- name: Kaynaklar
+  exanded: false
+  items:
     - name: Destek
       href: support.md
     - name: Fiyatlandırma ve limitler

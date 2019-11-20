@@ -1,6 +1,6 @@
 ---
-title: Azure Site Recovery hizmetini kullanarak Azure Iaas Vm'leri için başka bir Azure bölgesine Taşı | Microsoft Docs
-description: Azure Iaas Vm'leri bir Azure bölgesinden diğerine taşımak için Azure Site RECOVERY'yi kullanın.
+title: Azure Site Recovery ile Azure VM 'lerini başka bir bölgeye taşıma
+description: Azure IaaS VM 'lerini bir Azure bölgesinden diğerine taşımak için Azure Site Recovery kullanın.
 services: site-recovery
 author: rajani-janaki-ram
 ms.service: site-recovery
@@ -8,145 +8,141 @@ ms.topic: tutorial
 ms.date: 01/28/2019
 ms.author: rajanaki
 ms.custom: MVC
-ms.openlocfilehash: 0d446be664d695af946d46abc48389d4f7be92cd
-ms.sourcegitcommit: 36c50860e75d86f0d0e2be9e3213ffa9a06f4150
+ms.openlocfilehash: 00fc836f098f3c03afc9adebe2450f00750eb5ff
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/16/2019
-ms.locfileid: "65791031"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954097"
 ---
 # <a name="move-azure-vms-to-another-region"></a>Azure VM’lerini başka bir bölgeye taşıma
 
-Mevcut Azure Iaas sanal makinelerinizi (VM) taşımak istediğiniz çeşitli senaryolar vardır bir bölgeden diğerine. Örneğin, güvenilirlik ve yönetilebilirlik iyileştirmek veya idare nedenlerle taşımak için mevcut Vm'lerinizin kullanılabilirliğini artırmak isteyebilirsiniz. Daha fazla bilgi için [Azure VM'yi taşıma genel bakış](azure-to-azure-move-overview.md). 
+Mevcut Azure IaaS sanal makinelerinizi (VM) bir bölgeden diğerine taşımak istediğiniz çeşitli senaryolar vardır. Örneğin, mevcut sanal makinelerinizin güvenilirliğini ve kullanılabilirliğini artırmak, yönetilebilirlik düzeyini artırmak veya idare nedenleriyle taşımak isteyebilirsiniz. Daha fazla bilgi için bkz. [Azure VM taşımaya genel bakış](azure-to-azure-move-overview.md). 
 
-Kullanabileceğiniz [Azure Site Recovery](site-recovery-overview.md) iş sürekliliği ve olağanüstü durum kurtarma (BCDR) için şirket içi makinelerin ve Azure Vm'lerinde olağanüstü durum kurtarmayı yönetmek ve düzenlemek için hizmet. Site Recovery, Azure sanal makinelerinin ikincil bir bölgeye taşıma yönetmek için de kullanabilirsiniz.
+İş sürekliliği ve olağanüstü durum kurtarma (BCDR) için şirket içi makinelerin ve Azure VM 'lerinin olağanüstü durum kurtarma işlemlerini yönetmek ve düzenlemek için [Azure Site Recovery](site-recovery-overview.md) hizmetini kullanabilirsiniz. Azure VM 'lerinin ikincil bir bölgeye taşınmasını yönetmek için Site Recovery de kullanabilirsiniz.
 
 Bu öğreticide şunları yapacaksınız:
 
 > [!div class="checklist"]
 > 
-> * Taşıma için önkoşulları doğrulayın
-> * Kaynak VM'lerin ve hedef bölge hazırlama
-> * Verileri kopyalayın ve çoğaltmayı etkinleştirin
-> * Taşımayı gerçekleştirmek ve test yapılandırması
-> * Kaynak bölgedeki kaynakları silme
+> * Taşıma için önkoşulları doğrulama
+> * Kaynak VM 'Leri ve hedef bölgeyi hazırlama
+> * Verileri kopyalama ve çoğaltmayı etkinleştirme
+> * Yapılandırmayı test edin ve taşıma işlemini gerçekleştirin
+> * Kaynak bölgedeki kaynakları Sil
 > 
 > [!NOTE]
-> Bu öğreticide, Azure Vm'leri bir bölgeden diğerine olduğundan taşıma işlemini göstermektedir. Bir kullanılabilirlik kümesine sanal makinelerin taşınmasında kullanılabilirliği geliştirmek ihtiyacınız varsa, bölgeye sabitlenmiş farklı bir bölgedeki Vm'leri, bkz: [kullanılabilirlik öğretici Azure Vm'leri taşıma](move-azure-vms-avset-azone.md).
+> Bu öğreticide, Azure sanal makinelerini bir bölgeden diğerine nasıl taşıyacağınız gösterilmektedir. Bir kullanılabilirlik kümesindeki VM 'Leri farklı bir bölgedeki bölge sabitlenmiş VM 'lere taşıyarak kullanılabilirliği iyileştirmenize gerek varsa bkz. [Azure sanal makinelerini kullanılabilirlik alanları öğreticisine taşıma](move-azure-vms-avset-azone.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Azure sanal makineleri taşımak istediğiniz Azure bölgesinde olduğundan emin olun.
-- Doğrulayın tercih ettiğiniz [kaynak bölge - hedef bölge birleşimi desteklenir](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-support-matrix#region-support)ve hedef bölge hakkında konusunda bilinçli bir karar.
+- Azure VM 'lerinin, taşımak istediğiniz Azure bölgesinde olduğundan emin olun.
+- [Kaynak bölgesi hedef bölgesi bileşiminin desteklendiğinden](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-support-matrix#region-support)emin olun ve hedef bölge hakkında bilinçli bir karar alın.
 - [Senaryo mimarisini ve bileşenlerini ](azure-to-azure-architecture.md) anladığınızdan emin olun.
 - [Destek sınırlamaları ve gereksinimleri](azure-to-azure-support-matrix.md) konusunu inceleyin.
-- Hesap izinlerini doğrulayın. Ücretsiz Azure hesabınızı oluşturduysanız aboneliğinizin Yöneticisi olursunuz. Abonelik Yöneticisi değilseniz, ihtiyaç duyduğunuz izinleri atamak için yöneticiyle birlikte çalışın. Bir sanal Makineye yönelik çoğaltmayı etkinleştirmek ve temelde Azure Site Recovery kullanarak veri kopyalama için şunlara sahip olmalısınız:
+- Hesap izinlerini doğrulayın. Ücretsiz Azure hesabınızı oluşturduysanız aboneliğinizin yöneticisi olursunuz. Abonelik yöneticisi değilseniz, ihtiyaç duyduğunuz izinleri atamak için yöneticiyle birlikte çalışın. Bir VM için çoğaltmayı etkinleştirmek ve temel olarak Azure Site Recovery kullanarak verileri kopyalamak için, şunları yapmanız gerekir:
 
-    * Azure kaynaklarında sanal makine oluşturma izinleri. Sanal makine Katılımcısı yerleşik rolü kapsayan şu izinlere sahiptir:
-        - Seçilen kaynak grubunda sanal makine oluşturma izni
-        - Seçilen sanal ağda sanal makine oluşturma izni
-        - Seçilen depolama hesabına yazma izni
-
-    * Azure Site Recovery işlemlerini yönetmek için izinler. Site Recovery katkıda bulunanı rolü, Kurtarma Hizmetleri kasasındaki Site Recovery işlemlerini yönetmek için gereken tüm izinlere sahiptir.
-
-## <a name="prepare-the-source-vms"></a>Kaynak Vm'leri hazırlama
-
-1. En son kök sertifikalar taşımak istediğiniz Azure Vm'leri üzerinde olduğundan emin olun. Sanal makinede en son kök sertifikalar mevcut değilse güvenlik kısıtlamaları veri kopyalama için hedef bölgede engeller.
-
-    - Windows VM’ler için, güvenilir kök sertifikaların tamamı makinede mevcut olacak şekilde sanal makineye en son Windows güncelleştirmelerinin tümünü yükleyin. Bağlantısı kesilmiş bir ortamda, kuruluşunuz için standart Windows Update ve sertifika güncelleştirme işlemlerini uygulayın.
-    - Linux VM'ler için sanal makinede en son güvenilir kök sertifikaları ve sertifika iptal listesini almak için Linux dağıtıcınız tarafından sağlanan yönergeleri izleyin.
-1. Taşımak istediğiniz sanal makineler için ağ bağlantısını denetlemek için bir kimlik doğrulaması Ara sunucusu kullanmadığınızdan emin olun.
-1. Taşımaya çalışıyorsunuz VM internet erişimi yok ya da giden erişimi denetlemek için bir güvenlik duvarı proxy kullandığı [gereksinimleri kontrol](azure-to-azure-tutorial-enable-replication.md#set-up-outbound-network-connectivity-for-vms).
-1. Kaynak ağ düzeni ve şu anda kullanmakta olduğunuz tüm kaynakları belirleyin. Bu içerir, ancak yük Dengeleyiciler, ağ güvenlik grupları (Nsg'ler) için sınırlı değildir ve genel IP'ler.
-
-## <a name="prepare-the-target-region"></a>Hedef bölge hazırlama
-
-1. Azure aboneliğinizin, olağanüstü durum kurtarma için kullanılan hedef bölgede VM'ler oluşturmanıza olanak verdiğini doğrulayın. Gerekli kotayı sağlamak için desteğe başvurun.
-
-1. Aboneliğinizin kaynak VM'lerin eşleşen boyutları ile Vm'leri desteklemek için yeterli kaynaklara sahip olduğunu doğrulayın. Site Recovery, hedef veri kopyalamak için Site Recovery kullanıyorsanız, aynı boyutta veya hedef sanal makine için olası en yakın boyutu seçer.
-
-1. Kaynak ağ düzeninde tanımlanan her bileşeni için bir hedef kaynak oluşturduğunuzdan emin olun. Bu adım, sanal makineleriniz kaynak bölgede olan hedef bölgedeki tüm işlevleri ve özellikleri sahip olmasını sağlamak önemlidir.
-
-    > [!NOTE]
-    > Azure Site Recovery otomatik olarak bulur ve kaynak VM için çoğaltmayı etkinleştirdiğinizde, bir sanal ağ oluşturur. Ayrıca, bir ağı önceden oluşturun ve VM için çoğaltmayı etkinleştirme kullanıcı akışında atayın. Daha sonra belirtildiği gibi diğer tüm kaynakları hedef bölgede el ile oluşturmanız gerekir.
-
-     Kaynak VM yapılandırmasına bağlı olarak, ilgili ağ kaynakları en yaygın olarak oluşturmak için kullanılan, aşağıdaki belgelere bakın:
-
-   - [Ağ güvenlik grupları](https://docs.microsoft.com/azure/virtual-network/manage-network-security-group)
-   - [Yük dengeleyiciler](https://docs.microsoft.com/azure/load-balancer/#step-by-step-tutorials)
-   - [Genel IP](../virtual-network/virtual-network-public-ip-address.md)
+    - Azure kaynaklarında sanal makine oluşturma izinleri. Sanal makine katılımcısı yerleşik rolü bu izinlere sahiptir ve şunları içerir:
+    - Seçilen kaynak grubunda sanal makine oluşturma izni
+    - Seçilen sanal ağda sanal makine oluşturma izni
+    - Seçilen depolama hesabına yazma izni
     
-     Tüm diğer ağ bileşenleri için bkz: [belgeleri ağ](https://docs.microsoft.com/azure/#pivot=products&panel=network).
+    - Azure Site Recovery işlemlerini yönetme izinleri. Site Recovery katkıda bulunan rolü, bir kurtarma hizmetleri kasasındaki Site Recovery işlemlerini yönetmek için gereken tüm izinlere sahiptir.
 
-1. El ile [üretim dışı ağ oluşturma](https://docs.microsoft.com/azure/virtual-network/quick-create-portal) istediğinizde son taşımak için hedef bölgede gerçekleştirmeden önce test yapılandırması hedef bölgede. Üretim ağ ile en az bir girişim sağlar çünkü bu adımı öneririz.
+- En son kök sertifikaların, taşımak istediğiniz Azure sanal makinelerinde bulunduğundan emin olun. En son kök sertifikalar VM 'de değilse, güvenlik kısıtlamaları hedef bölgeye veri kopyalamayı engeller.
 
-## <a name="copy-data-to-the-target-region"></a>Hedef bölge için veri kopyalama
-Aşağıdaki adımlar hedef bölgeye veri kopyalamak için Azure Site Recovery kullanmayı gösterir.
+- Windows VM’ler için, güvenilir kök sertifikaların tamamı makinede mevcut olacak şekilde sanal makineye en son Windows güncelleştirmelerinin tümünü yükleyin. Bağlantısı kesilmiş bir ortamda, kuruluşunuz için standart Windows Update ve sertifika güncelleştirme işlemlerini uygulayın.
+    
+- Linux sanal makineleri için, VM 'deki en son güvenilen kök sertifikaları ve sertifika iptal listesini almak için Linux dağıtıcısının sunduğu yönergeleri izleyin.
+- Taşımak istediğiniz VM 'Ler için ağ bağlantısını denetlemek üzere bir kimlik doğrulama proxy 'si kullanmadığınız emin olun.
 
-### <a name="create-the-vault-in-any-region-except-the-source-region"></a>Kaynak bölgesi dışında herhangi bir bölgede kasa oluşturun
+- Taşımaya çalıştığınız sanal makinenin internet erişimi yoksa veya giden erişimi denetlemek için bir güvenlik duvarı ara sunucusu kullanıyorsa, [gereksinimleri kontrol](azure-to-azure-tutorial-enable-replication.md#set-up-outbound-network-connectivity-for-vms)edin.
+
+- Kaynak ağ düzeni ve şu anda kullanmakta olduğunuz tüm kaynakları belirler. Bu, yük dengeleyiciler, ağ güvenlik grupları (NSG 'Ler) ve genel IP 'Leri içerir ancak bunlarla sınırlı değildir.
+
+- Azure aboneliğinizin, olağanüstü durum kurtarma için kullanılan hedef bölgede VM 'Ler oluşturmanıza izin verdiğini doğrulayın. Gerekli kotayı sağlamak için desteğe başvurun.
+
+- Aboneliğinizin, kaynak VM 'larınızla eşleşen boyutlarda VM 'Leri desteklemek için yeterli kaynağa sahip olduğundan emin olun. Verileri hedefe kopyalamak için Site Recovery kullanıyorsanız, Site Recovery hedef VM için aynı boyutu veya mümkün olan en yakın boyutu seçer.
+
+- Kaynak ağ düzeninde tanımlanan her bileşen için bir hedef kaynak oluşturduğunuzdan emin olun. Bu adım, sanal makinelerinizin kaynak bölgede sahip olduğunuz hedef bölgedeki tüm işlevsellik ve özelliklere sahip olduğundan emin olmak için önemlidir.
+
+     > [!NOTE] 
+     > Azure Site Recovery, kaynak VM için çoğaltmayı etkinleştirdiğinizde otomatik olarak bir sanal ağ bulur ve oluşturur. Ayrıca, çoğaltmayı etkinleştirmek için bir ağı önceden oluşturup Kullanıcı akışındaki sanal makineye atayabilirsiniz. Daha sonra bahsedildiği gibi, hedef bölgede diğer kaynakları el ile oluşturmanız gerekir.
+
+    Kaynak VM yapılandırmasına bağlı olarak sizin için uygun olan en sık kullanılan ağ kaynaklarını oluşturmak için aşağıdaki belgelere bakın:
+    - [Ağ güvenlik grupları](https://docs.microsoft.com/azure/virtual-network/manage-network-security-group)
+    - [Yük dengeleyiciler](https://docs.microsoft.com/azure/load-balancer)
+    -  [Genel IP](../virtual-network/virtual-network-public-ip-address.md)
+    - Diğer ağ bileşenleri için [ağ belgelerine](https://docs.microsoft.com/azure/#pivot=products&panel=network)bakın.
+
+
+
+## <a name="prepare"></a>Hazırlama
+Aşağıdaki adımlarda, bir çözüm olarak Azure Site Recovery kullanarak sanal makinenin taşıma için nasıl hazırlanacağı gösterilmektedir. 
+
+### <a name="create-the-vault-in-any-region-except-the-source-region"></a>Kaynak bölgesi dışında herhangi bir bölgede kasa oluşturma
 
 1. [Azure Portal](https://portal.azure.com) > **Kurtarma Hizmetleri**’nde oturum açın.
-1. Seçin **kaynak Oluştur** > **Yönetim Araçları** > **Backup ve Site Recovery**.
+1. **Yedekleme ve Site Recovery** > **Yönetim Araçları** > **kaynak oluştur** ' u seçin.
 1. **Ad** bölümünde **ContosoVMVault** kolay adını belirtin. Birden fazla aboneliğiniz varsa uygun olanı seçin.
-1. Kaynak grubunu oluşturma **ContosoRG**.
-1. Bir Azure bölgesi belirtin. Desteklenen bölgeleri kontrol etmek için coğrafi kullanılabilirlik kısmına bakın [Azure Site kurtarma fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/site-recovery/).
-1. İçinde **kurtarma Hizmetleri kasaları**seçin **genel bakış** > **ContosoVMVault** > **+ Çoğalt**.
+1. **ContosoRG**kaynak grubunu oluşturun.
+1. Bir Azure bölgesi belirtin. Desteklenen bölgeleri denetlemek için [Azure Site Recovery fiyatlandırma ayrıntılarında](https://azure.microsoft.com/pricing/details/site-recovery/)coğrafi kullanılabilirlik bölümüne bakın.
+1. **Kurtarma Hizmetleri kasalarında** **genel bakış** > **Contosovmkasa > ** **+ Çoğalt**' ı seçin.
 1. **Kaynak** bölümünde **Azure** seçeneğini belirleyin.
 1. **Kaynak konumu**’nda, VM’lerinizin çalışmakta olduğu kaynak Azure bölgesini seçin.
-1. Kaynak Yöneticisi dağıtım modelini seçin. Ardından **kaynak abonelik** ve **kaynak kaynak grubu**.
-1. Seçin **Tamam** ayarları kaydetmek için.
+1. Kaynak Yöneticisi dağıtım modelini seçin. Ardından **kaynak aboneliği** ve **kaynak kaynak grubunu**seçin.
+1. Ayarları kaydetmek için **Tamam ' ı** seçin.
 
-### <a name="enable-replication-for-azure-vms-and-start-copying-the-data"></a>Azure Vm'leri için çoğaltmayı etkinleştirin ve veri kopyalamaya başla
+### <a name="enable-replication-for-azure-vms-and-start-copying-the-data"></a>Azure VM 'Leri için çoğaltmayı etkinleştirme ve verileri kopyalamaya başlama
 
-Site Recovery abonelik ve kaynak grubu ile ilişkili VM'lerin listesini alır.
+Site Recovery, abonelikle ve kaynak grubuyla ilişkili VM 'lerin listesini alır.
 
-1. Sonraki adımda, taşıma ve ardından istediğiniz VM'yi seçin **Tamam**.
-1. İçinde **ayarları**seçin **olağanüstü durum kurtarma**.
-1. İçinde **olağanüstü durumdan kurtarma yapılandırma** > **hedef bölge**, kendisine, çoğaltma yapacağınız hedef bölgeyi seçin.
+1. Sonraki adımda, taşımak istediğiniz VM 'yi seçin ve ardından **Tamam**' ı seçin.
+1. **Ayarlar**' da, **olağanüstü durum kurtarma**' yı seçin.
+1. **Olağanüstü durumdan kurtarma yapılandırma** > **Hedef bölge** bölümünde, çoğaltma yapacağınız hedef bölgeyi seçin.
 1. Bu öğretici için diğer varsayılan ayarları kabul edin.
-1. Seçin **çoğaltmayı etkinleştir**. Bu adım, sanal Makineye yönelik çoğaltmayı etkinleştirmek için bir iş başlatır.
+1. **Çoğaltmayı etkinleştir** seçeneğini belirleyin. Bu adım VM için çoğaltmayı etkinleştirmek üzere bir iş başlatır.
 
     ![Çoğaltmayı etkinleştirme](media/tutorial-migrate-azure-to-azure/settings.png)
 
-## <a name="test-the-configuration"></a>Test yapılandırması
+## <a name="move"></a>Taşı
 
-1. Kasası'na gidin. İçinde **ayarları** > **çoğaltılan öğeler**, taşımak için hedef bölgeyi ve ardından istediğiniz VM'yi seçin **+ yük devretme testi**.
-1. İçinde **yük devretme testi**, yük devretme için kullanılacak bir kurtarma noktası seçin:
+Aşağıdaki adımlarda, hedef bölgeye taşımanın nasıl gerçekleştirileceği gösterilmektedir.
 
-   - **En son işlenen**: VM'nin Site Recovery hizmeti tarafından işlenen en son kurtarma noktasına devreder. Zaman damgası gösterilir. Bu seçenekle bir düşük kurtarma süresi hedefi (RTO) sağlanılır veri işlemeye zaman harcanmadığından.
-   - **Uygulamayla tutarlı olan sonuncu**: Bu seçenek tüm sanal makineler en son uygulamayla tutarlı kurtarma noktasına devreder. Zaman damgası gösterilir.
-   - **Özel**: Herhangi bir kurtarma noktasını seçin.
+1. Kasaya gidin. **Yinelenen öğeleri** > **Ayarlar** ' da, VM ' yi seçin ve ardından **Yük devretme**' yı seçin.
+2. **Yük devretme** bölümünde **En geç** seçeneğini belirleyin.
+3. **Yük devretmeyi başlatmadan önce makineyi kapatın** seçeneğini belirleyin. Site Recovery, yük devretmeyi tetiklemeden önce kaynak sanal makineyi kapatmaya çalışır. Kapatma işlemi başarısız olsa bile yük devretme devam eder. Yük devretme işlemini **İşler** sayfasında takip edebilirsiniz.
+4. İş bittikten sonra, sanal makinenin hedef Azure bölgesinde beklenen şekilde göründüğünden emin olun.
 
-1. ' % S'hedef Azure seçin yapılandırmasını test etmek için Azure Vm'lerini taşımak istediğiniz sanal ağ.
-    > [!IMPORTANT]
-    > Test yük devretmesi için ayrı bir Azure VM ağını kullanmanızı öneririz. Çoğaltma ve sonunda Vm'lerinizi içine taşımak istediğiniz etkinleştirildiğinde ayarlandığı üretim ağı kullanmayın.
-1. Taşıma testi başlatmak için tıklatın **Tamam**. İlerleme durumunu izlemek için, VM’ye tıklayarak özelliklerini açın. Ya da kasa adı > **Ayarlar** > **İşler** > **Site Recovery işleri** bölümünde **Yük Devretme Testi** işine tıklayabilirsiniz.
-1. Yük devretme bittikten sonra, çoğaltma Azure VM, Azure portalı > **Sanal Makineler** bölümünde görünür. VM'nin çalıştığından, uygun şekilde boyutlandırıldığından ve uygun ağa bağlı olduğundan emin olun.
-1. Silmek istediğiniz VM tha taşıma testin bir parçası olarak oluşturulmuş, tıklayın **yük devretme testini Temizle** çoğaltılan öğe üzerinde. İçinde **notları**testiyle ilişkili gözlemlerinizi kaydetmek ve kaydedin.
 
-## <a name="perform-the-move-to-the-target-region-and-confirm"></a>Hedef bölgeye taşımayı gerçekleştirmek ve onaylayın
+## <a name="discard"></a>Mı 
 
-1. Kasası'na gidin. İçinde **ayarları** > **çoğaltılan öğeler**VM'yi seçin ve ardından **yük devretme**.
-1. **Yük devretme** bölümünde **En geç** seçeneğini belirleyin.
-1. **Yük devretmeyi başlatmadan önce makineyi kapatın** seçeneğini belirleyin. Site Recovery, yük devretmeyi tetiklemeden önce kaynak sanal makineyi kapatmaya çalışır. Kapatma işlemi başarısız olsa bile yük devretme devam eder. Yük devretme işleminin ilerleme durumunu **İşler** sayfasında takip edebilirsiniz.
-1. İş tamamlandıktan sonra sanal Makinenin hedef Azure bölgeniz beklendiği gibi görüntülenip görüntülenmediğini denetleyin.
-1. İçinde **çoğaltılan öğeler**, VM'yi sağ tıklayarak seçin > **işleme**. Bu adım, hedef bölge için taşıma işlemi tamamlanır. İşleme işi tamamlanana kadar bekleyin.
+Taşınan VM 'yi denetlediyseniz ve yük devretme noktası olarak değiştirilmesi veya önceki bir noktaya geri dönmek istiyorsanız, **çoğaltılan öğelerde**VM 'yi sağ seçin > **kurtarma noktasını değiştirin**. Bu adım size, farklı bir kurtarma noktası ve bunun için yük devretme belirtme seçeneği sağlar. 
 
-## <a name="delete-the-resource-in-the-source-region"></a>Kaynak bölgedeki kaynak silme
 
-Sanal Makineye gidin. Seçin **çoğaltma devre dışı bırakma**. Bu adım verileri kopyalama sanal makine için gelen işlemi durdurur.
+## <a name="commit"></a>İşleme 
 
-> [!IMPORTANT]
-> Azure Site Recovery çoğaltması için ücretlendirildiğiniz önlemek için bu adımı gerçekleştirmek önemlidir.
+Taşınan sanal makineyi denetledikten ve değişikliği kaydetmeye hazırladıktan sonra, **çoğaltılan öğelerde**, VM > **Kaydet**' i sağ seçin. Bu adım, hedef bölgeye taşıma işlemini tamamlar. Tamamlama işi bitene kadar bekleyin.
 
-Kaynak kaynaklardan herhangi birini yeniden kullanmak için herhangi bir plan varsa, bu adımları izleyin:
+## <a name="clean-up"></a>Temizleme
 
-1. 4 adımda bir parçası olarak kullanıma listelenen kaynak bölgedeki tüm ilgili ağ kaynakları silmek [kaynak Vm'leri hazırlama](#prepare-the-source-vms).
-1. Karşılık gelen bir depolama hesabı kaynak bölgede silin.
+Aşağıdaki adımlar, kaynak bölgenin ve taşıma için kullanılan ilgili kaynakların nasıl temizleyene kılavuzluk eder.
+
+Taşıma için kullanılan tüm kaynaklar için:
+
+- VM 'ye gidin. **Çoğaltmayı devre dışı bırak**seçeneğini belirleyin. Bu adım, VM 'nin verileri kopyalama işlemini sonlandırır.
+
+   > [!IMPORTANT]
+   > Azure Site Recovery çoğaltma için ücretlendirilmeden kaçınmak için bu adımın yerine getirmeniz önemlidir.
+
+Kaynak kaynaklarından herhangi birini yeniden kullanmak için herhangi bir planınız yoksa, şu ek adımları uygulayın:
+
+1. [Ön](#prerequisites)koşullarda tanımladığınız kaynak bölgedeki tüm ilgili ağ kaynaklarını silin.
+1. Kaynak bölgedeki karşılık gelen depolama hesabını silin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Azure VM'deki farklı bir Azure bölgesine taşındı. Şimdi, taşınan sanal makine için olağanüstü durum kurtarmayı yapılandırabilirsiniz.
+Bu öğreticide, bir Azure VM 'yi farklı bir Azure bölgesine taşıdınız. Artık taşıdığınız VM için olağanüstü durum kurtarmayı yapılandırabilirsiniz.
 
 > [!div class="nextstepaction"]
 > [Geçişten sonra olağanüstü durum kurtarmayı ayarlama](azure-to-azure-quickstart.md)

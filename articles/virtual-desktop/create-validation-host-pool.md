@@ -1,55 +1,59 @@
 ---
-title: Hizmet güncelleştirmeleri - Azure doğrulamak için bir Windows sanal masaüstü Önizleme konak havuzu oluşturma
-description: Hizmet güncelleştirmeleri üretim için güncelleştirmeleri çalışırken önce izlemek için bir doğrulama konak havuzu oluşturma
+title: Windows sanal masaüstü konak havuzu hizmet güncelleştirmeleri-Azure
+description: Üretime yönelik güncelleştirmeleri kullanıma almadan önce hizmet güncelleştirmelerini izlemek için bir doğrulama ana bilgisayarı havuzu oluşturma.
 services: virtual-desktop
-author: ChJenk
+author: Heidilohr
 ms.service: virtual-desktop
 ms.topic: tutorial
-ms.date: 05/08/2019
-ms.author: v-chjenk
-ms.openlocfilehash: c9b2a593a6943fe2e9577acc61b1d5a7bcd98607
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 08/29/2019
+ms.author: helohr
+ms.openlocfilehash: fd8be170f0f4388ee711881dde16923b9547f21f
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67070658"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606926"
 ---
-# <a name="tutorial-create-a-host-pool-to-validate-service-updates"></a>Öğretici: Hizmet güncelleştirmelerini doğrulamak için konak havuzu oluşturma
+# <a name="tutorial-create-a-host-pool-to-validate-service-updates"></a>Öğretici: hizmet güncelleştirmelerini doğrulamak için bir konak havuzu oluşturma
 
-Ana bilgisayar havuzları, Windows sanal masaüstü Önizleme Kiracı ortamlar içinde bir veya daha fazla aynı sanal makinelerden oluşan bir koleksiyondur. Ana bilgisayar havuzları üretim ortamınıza dağıtmadan önce doğrulama konak havuz oluşturma önemle öneririz. Güncelleştirmelerin ilk doğrulama konak havuzları, hizmet güncelleştirmeleri üretim ortamınıza sunulmadan önce izleyin belirtmenize izin vererek uygulanır. Doğrulama konak havuzu, üretim ortamınızdaki kullanıcılar kapalı kalma süresine neden hatalara neden değişiklikleri keşfedebilir değil.
+Konak havuzları, Windows sanal masaüstü kiracı ortamlarında bir veya daha fazla özdeş sanal makine koleksiyonudur. Ana bilgisayar havuzlarını üretim ortamınıza dağıtılmadan önce, bir doğrulama ana bilgisayar havuzu oluşturmanızı kesinlikle öneririz. Güncelleştirmeler önce doğrulama ana bilgisayar havuzlarına uygulanır, böylece üretim ortamınıza göndermeden önce hizmet güncelleştirmelerini izlemenizi sağlar. Doğrulama ana bilgisayar havuzu olmadan, hata oluşturan değişiklikleri bulamamanıza neden olabilir ve bu da üretim ortamınızdaki kullanıcılar için kapalı kalma süresine yol açabilir.
 
-En son güncelleştirmeleri içeren uygulamalar iş emin olmak için doğrulama konak havuzu konak havuzlarına üretim ortamınızda mümkün olduğunca benzer olmalıdır. Üretim ana havuzuna yapmasını kullanıcıların sık doğrulama ana havuzuna bağlanmanız gerekir. Konak havuzunuz test otomatik, otomatikleştirilmiş test doğrulama konak havuzunda içermelidir.
+Uygulamalarınızın en son güncelleştirmelerle çalışmasını sağlamak için, doğrulama ana bilgisayar havuzu, üretim ortamınızda mümkün olduğunca ana bilgisayar havuzlarına benzer olmalıdır. Kullanıcıların, üretim ana bilgisayar havuzunda çalıştıkları şekilde doğrulama ana bilgisayar havuzuna sık olarak bağlanması gerekir. Konak havuzunuzdaki otomatik test testiniz varsa, doğrulama ana bilgisayar havuzuna otomatik test eklemeniz gerekir.
 
-Ya da doğrulama konak havuz sorunların hatalarını ayıklayabilir [Tanılama özelliğini](diagnostics-role-service.md) veya [sorun giderme makaleleri Windows Sanal Masaüstü](https://docs.microsoft.com/Azure/virtual-desktop/troubleshoot-set-up-overview).
+[Tanılama özelliğiyle](diagnostics-role-service.md) veya [Windows sanal masaüstü sorunlarını giderme makaleleriyle](https://docs.microsoft.com/Azure/virtual-desktop/troubleshoot-set-up-overview)doğrulama konak havuzundaki sorunları ayıklayabilirsiniz.
 
 >[!NOTE]
-> Doğrulama konak havuzunun gelecekteki tüm güncelleştirmeler test yerinde bırakın öneririz.
+> Sonraki tüm güncelleştirmeleri test etmek için doğrulama ana bilgisayar havuzunu yerinde bırakmanız önerilir.
 
-Başlamadan önce [indirin ve Windows sanal masaüstü PowerShell modülünü içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview), henüz yapmadıysanız.
+Başlamadan önce, henüz yapmadıysanız [Windows sanal masaüstü PowerShell modülünü indirip içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview). Bundan sonra hesabınızda oturum açmak için aşağıdaki cmdlet 'i çalıştırın:
 
-## <a name="create-your-host-pool"></a>Konak havuzunuz oluşturma
+```powershell
+Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
+```
 
-Bir konak havuzu şu makalelerden herhangi birine yönergeleri izleyerek oluşturabilirsiniz:
-- [Öğretici: Azure Marketi ile konak havuz oluşturma](create-host-pools-azure-marketplace.md)
-- [Bir Azure Resource Manager şablonu ile bir ana makine havuzu oluşturma](create-host-pools-arm-template.md)
-- [PowerShell ile bir ana makine havuzu oluşturma](create-host-pools-powershell.md)
+## <a name="create-your-host-pool"></a>Konak havuzunuzu oluşturma
 
-## <a name="define-your-host-pool-as-a-validation-host-pool"></a>Konak havuzunuz doğrulama konak havuz tanımlayın
+Aşağıdaki makalelerdeki yönergeleri izleyerek bir konak havuzu oluşturabilirsiniz:
+- [Öğretici: Azure Marketi ile bir konak havuzu oluşturma](create-host-pools-azure-marketplace.md)
+- [Azure Resource Manager şablonuyla konak havuzu oluşturma](create-host-pools-arm-template.md)
+- [PowerShell ile bir konak havuzu oluşturma](create-host-pools-powershell.md)
 
-Yeni konak havuzu doğrulama konak havuzu tanımlamak için aşağıdaki PowerShell cmdlet'lerini çalıştırın. Tırnak işaretleri değerleri oturumunuza uygun değerlerle değiştirin:
+## <a name="define-your-host-pool-as-a-validation-host-pool"></a>Konak havuzunuzu doğrulama ana bilgisayar havuzu olarak tanımlama
+
+Yeni konak havuzunu doğrulama konak havuzu olarak tanımlamak için aşağıdaki PowerShell cmdlet 'lerini çalıştırın. Tekliflerdeki değerleri oturumunuzla ilgili değerlere göre değiştirin:
 
 ```powershell
 Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
 Set-RdsHostPool -TenantName $myTenantName -Name "contosoHostPool" -ValidationEnv $true
 ```
 
-Doğrulama özelliği ayarlanmış olduğunu onaylamak için aşağıdaki PowerShell cmdlet'ini çalıştırın. Tırnak işaretleri değerleri oturumunuza uygun değerlerle değiştirin.
+Doğrulama özelliğinin ayarlandığını onaylamak için aşağıdaki PowerShell cmdlet 'ini çalıştırın. Tekliflerdeki değerleri oturumunuzla ilgili değerlerle değiştirin.
 
 ```powershell
-Get-RdsHostPool -TenantName $myTenantName -Name "contosoHostPool" -ValidationEnv $true
+Get-RdsHostPool -TenantName $myTenantName -Name "contosoHostPool"
 ```
 
-Cmdlet'i sonuçları bu çıktıya benzer görünmelidir:
+Cmdlet 'inin sonuçları şu çıkışa benzer görünmelidir:
 
 ```
     TenantName          : contoso 
@@ -65,13 +69,13 @@ Cmdlet'i sonuçları bu çıktıya benzer görünmelidir:
     Ring                :
 ```
 
-## <a name="update-schedule"></a>Zamanlamayı güncelleştir
+## <a name="update-schedule"></a>Zamanlamayı Güncelleştir
 
-Önizleme'de, hizmet güncelleştirmeleri yaklaşık aylık bir tempoyla oluşur. Önemli bir sorun varsa, kritik güncelleştirmeler daha sık bir tempoyla sağlanacaktır.
+Hizmet güncelleştirmeleri ayda bir gerçekleşir. Önemli sorunlar varsa, kritik güncelleştirmeler daha sık bir hızda sağlanacaktır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Doğrulama konak havuzunu oluşturduğunuza göre dağıtma ve Microsoft sanal masaüstü kaynaklarını yönetmek için bir yönetim aracı bağlanma hakkında bilgi edinebilirsiniz.
+Bir doğrulama ana bilgisayar havuzu oluşturduğunuza göre, Microsoft sanal masaüstü kaynaklarını yönetmek için bir yönetim aracının nasıl dağıtılacağını ve bağlanacağını öğrenebilirsiniz.
 
 > [!div class="nextstepaction"]
-> [Bir yönetim aracı öğretici dağıtma](./manage-resources-using-ui.md)
+> [Yönetim Aracı öğreticisini dağıtma](./manage-resources-using-ui.md)

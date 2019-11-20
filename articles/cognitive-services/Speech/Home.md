@@ -1,64 +1,64 @@
 ---
-title: Microsoft Bing konuşma hizmeti | Microsoft Docs
+title: Microsoft Bing Konuşma hizmeti | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Microsoft konuşma tanıma API'si, kullanıcıların gerçek zamanlı etkileşime dahil olmak üzere uygulamalarınıza sesle yönetilen işlemler eklemek için kullanın.
+description: Kullanıcılarınıza gerçek zamanlı etkileşim de dahil olmak üzere, uygulamalarınıza konuşma odaklı eylemler eklemek için Microsoft konuşma API 'sini kullanın.
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: d2c7211831658a18e65e04aa753607f4eb22dac8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ff9de2557583eecd5ddb2acd97b445a93abc5fb6
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515081"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70966641"
 ---
-# <a name="what-is-bing-speech"></a>Bing konuşma tanıma nedir?
+# <a name="what-is-bing-speech"></a>Bing Konuşma nedir?
 
 [!INCLUDE [Deprecation note](../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Bulut tabanlı Microsoft Bing konuşma tanıma API'si, geliştiricilerin uygulamalarında, sesli komut denetimi, doğal konuşma konuşma ve konuşma transkripsiyonu ve dikte kullanarak kullanıcı iletişim gibi konuşma tanıma özellikli güçlü özellikler oluşturmak için kolay bir yol sağlar. Microsoft konuşma tanıma API'si her ikisini de destekler *Konuşmayı metne dönüştürme* ve *metin okuma* dönüştürme.
+Bulut tabanlı Microsoft Bing Konuşma API'si geliştiricilere, uygulamalarında sesli komut denetimi, doğal konuşma konuşması kullanan kullanıcı iletişim kutusu, konuşma dökümü ve dikte etme gibi güçlü konuşma özellikli Özellikler oluşturmanın kolay bir yolunu sunar. Microsoft konuşma API 'SI, hem *metin* hem de *metin okuma* dönüştürmeyi destekler.
 
-- **Konuşmayı metne dönüştürme** API İnsan konuşma uygulamanızı denetlemek için komutları veya girdi kullanılabilir metne dönüştürür.
-- **Metin okuma** API uygulamanızın kullanıcıya çalınabilecek ses akışları metin dönüştürür.
+- **Konuşmayı metne** dönüştürme API, insan konuşmanızı, uygulamanızı denetlemek için giriş veya komut olarak kullanılabilecek metne dönüştürür.
+- **Metin okuma** API, metni uygulamanızın kullanıcısına oynatılabilecek ses akışlarına dönüştürür.
 
-## <a name="speech-to-text-speech-recognition"></a>Konuşmadan metne (konuşma tanıma)
+## <a name="speech-to-text-speech-recognition"></a>Konuşmayı metne dönüştürme (konuşma tanıma)
 
-Microsoft konuşma tanıma API'si *dönüştürür* uygulamanızı görüntülemek için kullanıcı veya olarak alacak bir metne ses akışları giriş komutu. Bu, geliştiricilerin kendi uygulamalarına Konuşma ekleme iki yol sunar: REST API'leri **veya** Websocket tabanlı istemci kitaplıkları.
+Microsoft konuşma *tanıma API 'si* , uygulamanızın kullanıcıya görüntüleyebilen veya komut girişi olarak üzerinde işlem yapması için ses akışlarını metne dönüştürür. Geliştiricilerin uygulamalarına konuşma eklemesi için iki yol sunar: REST API 'Leri **veya** WebSocket tabanlı istemci kitaplıkları.
 
-- [REST API'leri](GetStarted/GetStartedREST.md): Geliştiriciler, konuşma tanıma hizmeti uygulamalarını HTTP çağrıları kullanabilir.
-- [İstemci kitaplıkları](GetStarted/GetStartedClientLibraries.md): Gelişmiş özellikler için geliştiriciler Microsoft Speech istemci kitaplıklarını indirin ve kendi uygulamalarınızda bağlantı.  İstemci kitaplıkları (C#, Java, JavaScript, ObjectiveC) farklı dilleri kullanan çeşitli platformlarda (Windows, Android, iOS) kullanılabilir. REST API'ler farklı olarak, istemci kitaplıkları Websocket tabanlı protokolü kullanır.
+- [REST API 'leri](GetStarted/GetStartedREST.md): Geliştiriciler, konuşma tanıma için uygulamalarından gelen HTTP çağrılarını kullanabilirler.
+- [İstemci kitaplıkları](GetStarted/GetStartedClientLibraries.md): Geliştiriciler, gelişmiş özellikler için Microsoft konuşma istemci kitaplıklarını indirebilir ve uygulamalarına bağlanabilir.  İstemci kitaplıkları, farklı diller (C#, Java, JavaScript, ObjectiveC) kullanan çeşitli platformlarda (Windows, Android, iOS) kullanılabilir. REST API 'Lerinin aksine, istemci kitaplıkları WebSocket tabanlı protokolü kullanır.
 
 | Uygulama alanları | [REST API'ler](GetStarted/GetStartedREST.md) | [İstemci kitaplıkları](GetStarted/GetStartedClientLibraries.md) |
 |-----|-----|-----|
-| Dönüştürme kısa konuşmada geçen bir ses (ses uzunluğu < 15 s) geçiş sonuçları gibi komutları. | Evet | Evet |
-| Uzun bir ses (> 15 s) dönüştürme | Hayır | Evet |
-| İstenen Ara sonuçlarla Stream ses | Hayır | Evet |
-| LUIS kullanarak seslerden Dönüştürülen metin anlama | Hayır | Evet |
+| Kısa bir konuşulan sesi (örneğin, ses uzunluğu < 15 s) ara sonuçlar olmadan Dönüştür | Evet | Evet |
+| Uzun bir sesi dönüştürme (> 15 s) | Hayır | Evet |
+| Ara sonuçlarla istenen ses akışını | Hayır | Evet |
+| LUSıS kullanarak sesten dönüştürülen metni anlayın | Hayır | Evet |
 
-Hangi yaklaşımın geliştiriciler (REST API veya istemci kitaplıkları) seçin, Microsoft konuşma hizmeti aşağıdakileri destekler:
+Geliştiricilerin hangi yaklaşım tarafından seçtiğine (REST API 'Leri veya istemci kitaplıkları), Microsoft konuşma hizmeti aşağıdakileri destekler:
 
-- Konuşma tanıma teknolojileri Cortana, dikte Office, Office Translator ve diğer Microsoft ürünleri tarafından kullanılan Microsoft tarafından sunulan Gelişmiş.
-- Gerçek zamanlı sürekli tanıma. Konuşma tanıma API'si, kullanıcıların gerçek zamanlı ve destekler şimdiye tanınan bir kelimelerin Ara sonuçlar almak için metne ses özelliği sağlar. Konuşma hizmeti, konuşma uç algılama da destekler. Ayrıca, kullanıcılar, büyük/küçük harf ve noktalama işaretleri ve maskeleme küfür metin normalleştirme gibi ek biçimlendirme özellikleri seçebilirsiniz.
-- Destekler, konuşma tanıma sonuçları için iyileştirilmiş *etkileşimli*, *konuşma*, ve *dikte* senaryoları. Özel dil modelleri ve akustik modeller gerektiren kullanıcı senaryoları için [özel konuşma hizmeti](../custom-speech-service/cognitive-services-custom-speech-home.md) uygulamanız ve kullanıcılarınız için uyarlanmış konuşma modelleri oluşturmanıza olanak sağlar.
-- Birçok konuşulan dili içinde birden çok diyalektleri destekler. Her tanıma modunda desteklenen dillerin tam listesi için bkz. [tanıma diller](api-reference-rest/supportedlanguages.md).
-- Language understanding ile tümleştirme. Giriş Sesi metne dönüştürme yanı sıra *Konuşmayı metne dönüştürme* uygulamaları metin ne anlama geldiğini anlamak için ek bir özellik sağlar. Kullandığı [Language Understanding Intelligent Service(LUIS)](../LUIS/what-is-luis.md) amaç ve varlıkları tanınan ından cümleler ayıklamak için.
-
-### <a name="next-steps"></a>Sonraki adımlar
-
-- Microsoft konuşma tanıma hizmeti ile kullanmaya başlama [REST API'leri](GetStarted/GetStartedREST.md) veya [istemci kitaplıkları](GetStarted/GetStartedClientLibraries.md).
-- Kullanıma [örnek uygulamalar](samples.md) tercih ettiğiniz programlama dili.
-- Bulunacak başvuru bölümüne Git [Microsoft konuşma Protokolü](API-Reference-REST/websocketprotocol.md) ayrıntıları ve API başvuruları.
-
-## <a name="text-to-speech-speech-synthesis"></a>Metin okuma (konuşma sentezi)
-
-*Metin okuma* API'lerini yapılandırılmış metin bir ses akışına dönüştürmek için REST kullanma. API'leri, çeşitli seslerle ve dilleri hızlı metinleri konuşmaya dönüştürme sağlar. Ayrıca kullanıcılar da telaffuz, birim, aralık vb. gibi ses özelliklerini değiştirmek için sahipsiniz. SSML'yi kullanarak etiketler.
+- Cortana, Office dikte, Office Translator ve diğer Microsoft ürünleri tarafından kullanılan Microsoft 'un gelişmiş konuşma tanıma teknolojileri.
+- Gerçek zamanlı sürekli tanıma. Konuşma tanıma API 'SI, kullanıcıların sesi gerçek zamanlı olarak metne almasını sağlar ve şimdiye kadar tanınan sözcüklerin ara sonuçlarını almak için destekler. Konuşma hizmeti, konuşma sonu algılamayı de destekler. Ayrıca kullanıcılar, büyük harfler, noktalama, bir küfür ve metin normalleştirmesi gibi ek biçimlendirme özellikleri seçebilirler.
+- *Etkileşimli*, *konuşma*ve *dikte* senaryoları için iyileştirilmiş konuşma tanıma sonuçlarını destekler. [Özel konuşma tanıma hizmeti](../custom-speech-service/cognitive-services-custom-speech-home.md) , özelleştirilmiş dil modelleri ve akustik modeller gerektiren Kullanıcı senaryolarında, uygulamanız ve kullanıcılarınız için uygun konuşma modelleri oluşturmanızı sağlar.
+- Birden çok diatadaki birçok konuşulan dili destekler. Her tanınma modundaki desteklenen dillerin tam listesi için bkz. [tanıma dilleri](api-reference-rest/supportedlanguages.md).
+- Dil anlama ile tümleştirme. Giriş sesini metne dönüştürmenin yanı sıra *konuşmayı metne* dönüştürme, uygulamanın metnin ne anlama geldiğini anlamak için ek bir yetenek sağlar. Tanınan metinden amaçları ve varlıkları ayıklamak için [Language Understanding Intelligent Service (Luo)](../LUIS/what-is-luis.md) kullanır.
 
 ### <a name="next-steps"></a>Sonraki adımlar
 
-- Microsoft metin okuma hizmetini kullanmaya başlayın: [Metin okuma API Başvurusu](api-reference-rest/bingvoiceoutput.md). Diller ve seslerle metin okuma tarafından desteklenen tam listesi için bkz: [desteklenen yerel ayarlar ve ses tiplerini](api-reference-rest/bingvoiceoutput.md#SupLocales).
+- Microsoft konuşma tanıma hizmetini [REST API 'leri](GetStarted/GetStartedREST.md) veya [istemci kitaplıkları](GetStarted/GetStartedClientLibraries.md)ile kullanmaya başlayın.
+- Tercih ettiğiniz programlama dilindeki [örnek uygulamalara](samples.md) göz atın.
+- [Microsoft Speech protokol](API-Reference-REST/websocketprotocol.md) AYRıNTıLARıNı ve API başvurularını bulmak için başvuru bölümüne gidin.
+
+## <a name="text-to-speech-speech-synthesis"></a>Metinden konuşmaya (konuşma senşi)
+
+*Metin okuma* API 'Ler, yapılandırılmış metni bir ses akışına dönüştürmek için REST kullanır. API 'Ler, çeşitli sesler ve dillerde konuşma dönüştürmeye hızlı metin sağlar. Ayrıca kullanıcılar ayrıca, telaffuz, hacim, sıklık gibi ses özelliklerini değiştirme olanağına sahiptir. SSML etiketlerini kullanma.
+
+### <a name="next-steps"></a>Sonraki adımlar
+
+- Microsoft Text to konuşma hizmetini kullanmaya başlayın: [Metin okuma API'si Başvurusu](api-reference-rest/bingvoiceoutput.md). Metin Okuma tarafından desteklenen dillerin ve seslerin tam listesi için bkz. [desteklenen yerel ayarlar ve ses yazı tipleri](api-reference-rest/bingvoiceoutput.md#SupLocales).

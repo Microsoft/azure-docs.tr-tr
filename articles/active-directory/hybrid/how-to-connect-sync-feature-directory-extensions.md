@@ -1,6 +1,6 @@
 ---
-title: 'Azure AD Connect eşitleme: Dizin genişletmeleri | Microsoft Docs'
-description: Bu konu, Azure AD CONNECT'te dizin uzantıları özelliğini açıklar.
+title: 'Azure AD Connect eşitleme: Dizin uzantıları | Microsoft Docs'
+description: Bu konuda Azure AD Connect içindeki dizin uzantıları özelliği açıklanmaktadır.
 services: active-directory
 documentationcenter: ''
 author: billmath
@@ -16,57 +16,57 @@ ms.date: 10/05/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ff0fd4d01eab739b79685c1de67cb8fe28873961
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 88fdfce58bdd8e13637e77d01d4b6c0ab21f696a
+ms.sourcegitcommit: 6cff17b02b65388ac90ef3757bf04c6d8ed3db03
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60348000"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68607644"
 ---
 # <a name="azure-ad-connect-sync-directory-extensions"></a>Azure AD Connect eşitleme: Dizin genişletmeleri
-Dizin genişletmeleri kendi şirket içi Active Directory öznitelikleri ile Azure Active Directory'de (Azure AD) şemayı genişletmek için kullanabilirsiniz. Bu özellik, şirket içi yönetmeye devam öznitelikleri kullanma tarafından LOB uygulamaları oluşturmanıza olanak sağlar. Bu öznitelikler aracılığıyla tüketilebilir [Azure AD Graph API'si dizin genişletmeleri](https://msdn.microsoft.com/Library/Azure/Ad/Graph/howto/azure-ad-graph-api-directory-schema-extensions) veya [Microsoft Graph](https://developer.microsoft.com/graph/). Kullanılabilir öznitelikler kullanarak gördüğünüz [Azure AD Graph Gezgini](https://graphexplorer.azurewebsites.net/) ve [Microsoft Graph Gezgini](https://developer.microsoft.com/graph/graph-explorer)sırasıyla.
+Azure Active Directory (Azure AD) içindeki şemayı şirket içi Active Directory kendi nitelikleriyle genişletmek için Dizin uzantıları 'nı kullanabilirsiniz. Bu özellik, şirket içinde yönetmeye devam ettiğiniz öznitelikleri kullanıp LOB uygulamaları oluşturmanıza olanak sağlar. Bu öznitelikler [Azure AD Graph API Directory uzantıları](https://msdn.microsoft.com/Library/Azure/Ad/Graph/howto/azure-ad-graph-api-directory-schema-extensions) veya [Microsoft Graph](https://developer.microsoft.com/graph/)üzerinden kullanılabilir. Kullanılabilir öznitelikleri sırasıyla [Azure AD Graph Explorer](https://graphexplorer.azurewebsites.net/) ve [Microsoft Graph Explorer](https://developer.microsoft.com/graph/graph-explorer)' ı kullanarak görebilirsiniz.
 
-Şu anda hiçbir Office 365 iş yükü bu öznitelikleri kullanır.
+Mevcut olduğunda, Office 365 iş yükü bu öznitelikleri kullanır.
 
-Size, Yükleme Sihirbazı'nda özel ayarları yolunda eşitlemek istediğiniz hangi ek öznitelikleri yapılandırabilirsiniz.
+Yükleme sihirbazındaki özel ayarlar yolunda hangi ek özniteliklerin eşitlenmesini istediğinizi yapılandırırsınız.
 
 >[!NOTE]
->Kullanılabilir öznitelikler kutunun büyük/küçük harfe duyarlıdır.
+>Kullanılabilir öznitelikler kutusu, büyük/küçük harfe duyarlıdır.
 
 ![Şema uzantısı Sihirbazı](./media/how-to-connect-sync-feature-directory-extensions/extension2.png)  
 
-Yükleme, geçerli adaylar olan aşağıdaki öznitelikler gösterir:
+Yükleme, geçerli adaylar olan aşağıdaki öznitelikleri gösterir:
 
 * Kullanıcı ve grup nesne türleri
-* Tek değerli öznitelikleri: Dize, Boolean, tamsayı, ikili
-* Birden çok değerli öznitelikler: Dize, ikili
+* Tek değerli öznitelikler: Dize, Boole, tamsayı, Ikili
+* Çoklu değerli öznitelikler: Dize, Ikili
 
 
 >[!NOTE]
-> Azure AD Connect destekleyen birden çok değerli bir Active Directory eşitleme öznitelikleri olsa da birden çok değerli dizin genişletmeleri olarak Azure ad, şu anda içinde birden çok değerli dizin genişletme öznitelikleriyle karşıya veri alma/kullanma olanağı vardır.
+> Azure AD Connect, çok değerli Active Directory özniteliklerinin Azure AD 'ye çok değerli Dizin uzantıları olarak eşitlenmesini desteklediğinden, ancak şu anda çok değerli dizin uzantısı özniteliklerinde karşıya yüklenen verileri almanın/kullanmanın bir yolu yoktur.
 
-Azure AD Connect yüklemesi sırasında oluşturulan şema önbelleğinden özniteliklerinin listesini okuyun. Ek öznitelikler ile Active Directory şemasını genişlettiyseniz gerekir [şemayı yenilemeniz](how-to-connect-installation-wizard.md#refresh-directory-schema) önce bu yeni öznitelikler görünür.
+Öznitelik listesi, Azure AD Connect yüklemesi sırasında oluşturulan şema önbelleğinden okunurdur. Active Directory şemasını ek özniteliklerle genişlettiyseniz, bu yeni özniteliklerin görünebilmesi [için şemayı yenilemeniz](how-to-connect-installation-wizard.md#refresh-directory-schema) gerekir.
 
-Dizin genişletmeleri için en fazla 100 öznitelikler Azure AD'de bir nesne olabilir. En fazla 250 karakterdir. Bir öznitelik değeri uzunsa, eşitleme altyapısı, keser.
+Azure AD 'deki bir nesne dizin uzantıları için en fazla 100 özniteliğe sahip olabilir. En fazla 250 karakter uzunluğunda olur. Bir öznitelik değeri daha uzunsa, eşitleme altyapısı onu keser.
 
-Azure AD Connect yüklemesi sırasında bu öznitelikler kullanılabilir olduğu bir uygulama kaydedilir. Azure portalında bu uygulamayı görüntüleyebilirsiniz.
+Azure AD Connect yüklenmesi sırasında, bu özniteliklerin kullanılabildiği bir uygulama kaydedilir. Bu uygulamayı Azure portal görebilirsiniz.
 
-![Şema uzantısı uygulama](./media/how-to-connect-sync-feature-directory-extensions/extension3new.png)
+![Şema uzantısı uygulaması](./media/how-to-connect-sync-feature-directory-extensions/extension3new.png)
 
-Öznitelikleri uzantısıyla ön ekli \_{AppClientId}\_. AppClientId, Azure AD kiracınızda tüm öznitelikler için aynı değere sahiptir.
+Özniteliklere {appclientıd} \_\_uzantısı ön eki eklenir. Appclientıd, Azure AD kiracınızdaki tüm öznitelikler için aynı değere sahip.
 
-Bu öznitelikler, artık Azure AD Graph API aracılığıyla kullanılabilir. Bunları kullanarak sorgulama [Azure AD Graph Gezgini](https://graphexplorer.azurewebsites.net/).
+Bu öznitelikler artık Azure AD Graph API aracılığıyla kullanılabilir. [Azure AD Graph Explorer](https://graphexplorer.azurewebsites.net/)kullanarak bunları sorgulayabilirsiniz.
 
 ![Azure AD Graph Gezgini](./media/how-to-connect-sync-feature-directory-extensions/extension4.png)
 
-Ya da Microsoft Graph API aracılığıyla öznitelikleri kullanarak sorgulayabilirsiniz [Microsoft Graph Gezgini](https://developer.microsoft.com/graph/graph-explorer#).
+İsterseniz, [Microsoft Graph Gezgini](https://developer.microsoft.com/graph/graph-explorer#)'ni kullanarak Microsoft Graph API aracılığıyla öznitelikleri sorgulayabilirsiniz.
 
 >[!NOTE]
-> Döndürülecek öznitelikleri için sormanız gerekir. Açıkça bu gibi öznitelikleri seçin: https://graph.microsoft.com/beta/users/abbie.spencer@fabrikamonline.com? $select extension_9d98ed114c4840d298fad781915f27e4_employeeID, extension_9d98ed114c4840d298fad781915f27e4_division =. 
+> Özniteliklerin döndürülmesini isteyebilirsiniz. Şunun gibi öznitelikleri açıkça seçin: https\://graph.microsoft.com/beta/users/abbie.spencer@fabrikamonline.com? $Select = extension_9d98ed114c4840d298fad781915f27e4_employeeID, extension_9d98ed114c4840d298fad781915f27e4_division. 
 >
-> Daha fazla bilgi için [Microsoft Graph: Sorgu parametreleri kullanmak](https://developer.microsoft.com/graph/docs/concepts/query_parameters#select-parameter).
+> Daha fazla bilgi için bkz [. Microsoft Graph: Sorgu parametrelerini](https://developer.microsoft.com/graph/docs/concepts/query_parameters#select-parameter)kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Daha fazla bilgi edinin [Azure AD Connect eşitleme](how-to-connect-sync-whatis.md) yapılandırma.
+[Azure AD Connect eşitleme](how-to-connect-sync-whatis.md) yapılandırması hakkında daha fazla bilgi edinin.
 
 [Şirket içi kimliklerinizi Azure Active Directory ile tümleştirme](whatis-hybrid-identity.md) hakkında daha fazla bilgi edinin.

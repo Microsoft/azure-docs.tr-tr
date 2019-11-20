@@ -1,47 +1,41 @@
 ---
-title: Azure'da Terraform ile merkez sanal ağ oluşturma
-description: Azure'da diğer ağlar arasında ortak bir bağlantı noktası gibi davranan bir merkez sanal ağı oluşturmak nasıl bulunacağını gösteren öğretici.
-services: terraform
-ms.service: azure
-keywords: terraform, hub ve bağlı bileşen, ağlar, hibrit ağlar, devops, sanal makine, azure, sanal ağ eşleme, merkez-uç, hub.
-author: VaijanathB
-manager: jeconnoc
-ms.author: vaangadi
+title: Öğretici-Terrayform kullanarak Azure 'da hub sanal ağı oluşturma
+description: Azure 'da diğer ağlar arasında ortak bağlantı noktası görevi gören bir hub sanal ağı oluşturmayı gösteren öğretici
 ms.topic: tutorial
-ms.date: 03/01/2019
-ms.openlocfilehash: 5f8d9119ea9caeb598946a384f321fa6f7e14def
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 10/26/2019
+ms.openlocfilehash: 6669e90c3d12fcf55bcb1ad69c3b275c5117a8fc
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60884699"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159052"
 ---
-# <a name="tutorial-create-a-hub-virtual-network-with-terraform-in-azure"></a>Öğretici: Azure'da Terraform ile merkez sanal ağ oluşturma
+# <a name="tutorial-create-a-hub-virtual-network-in-azure-by-using-terraform"></a>Öğretici: Terrayform kullanarak Azure 'da hub sanal ağı oluşturma
 
-Hub sanal ağı (VNet), şirket içi ağ bağlantısı yönetim noktası olarak görev yapar. VNet konakları paylaşılan uç sanal ağlarında barındırılan iş yükleri tarafından kullanılan hizmetler. Tanıtım amacıyla, bu öğreticide paylaşılan hizmet uygulanır.
+Hub sanal ağı, şirket içi ağa merkezi bağlantı noktası görevi görür. Sanal ağ, bağlı olan sanal ağlarda barındırılan iş yükleri tarafından tüketilen paylaşılan hizmetleri barındırır. Tanıtım amacıyla, bu öğreticide hiçbir paylaşılan hizmet uygulanmaz.
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
 > [!div class="checklist"]
-> * Merkez-uç topolojisinde merkez sanal ağa uygulamak için HCL (HashiCorp dili) kullanın
-> * Hub'ı atlama kutusunu sanal makine oluşturmak için Terraform'u kullanın
-> * Hub sanal özel ağ geçidi oluşturmak için Terraform'u kullanın
-> * Hub ve şirket içi ağ geçidi bağlantılar oluşturmak için Terraform'u kullanın
+> * Hub ve bağlı bileşen topolojisinde hub sanal ağını uygulamak için HashiCorp yapılandırma dilini (HCL) kullanın.
+> * Bir hub sıçrama kutusu sanal makinesi oluşturmak için terrayform 'u kullanın.
+> * Bir hub sanal özel ağ geçidi oluşturmak için Terrayform 'u kullanın.
+> * Hub ve şirket içi ağ geçidi bağlantıları oluşturmak için Terrayform 'u kullanın.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-1. [Bir hub'ı oluşturup azure'da Terraform ile karma ağ topolojisi](./terraform-hub-spoke-introduction.md).
-1. [Azure'da Terraform ile şirket içi sanal ağ oluşturma](./terraform-hub-spoke-on-prem.md).
+1. [Azure 'Da Terrayform ile hub ve bağlı bileşen karma ağ topolojisi oluşturun](./terraform-hub-spoke-introduction.md).
+1. [Azure 'Da Terrayform ile şirket içi sanal ağ oluşturun](./terraform-hub-spoke-on-prem.md).
 
 ## <a name="create-the-directory-structure"></a>Dizin yapısını oluşturma
 
-Hub'ı ağ aşağıdaki bileşenlerden oluşur:
+Hub ağı aşağıdaki bileşenlerden oluşur:
 
-- Merkez sanal ağ
-- Merkez sanal ağ geçidi
+- Hub sanal ağı
+- Hub sanal ağ geçidi
 - Hub ağ geçidi bağlantıları 
 
-Aşağıdaki Terraform yapılandırma dosyası kaynakları tanımlar:
+Aşağıdaki Terrayform yapılandırma dosyası kaynakları tanımlar:
 
 1. [Azure portala](https://portal.azure.com) gidin.
 
@@ -55,15 +49,15 @@ Aşağıdaki Terraform yapılandırma dosyası kaynakları tanımlar:
     cd clouddrive
     ```
 
-1. Dizinleri yeni dizinle değiştirin:
+1. Dizinleri yeni dizinle değiştirin.
 
     ```bash
     cd hub-spoke
     ```
 
-## <a name="declare-the-hub-vnet"></a>Merkez sanal ağa bildirme
+## <a name="declare-the-hub-virtual-network"></a>Hub sanal ağını bildirme
 
-Hub sanal ağındaki bildirir Terraform yapılandırma dosyası oluşturun.
+Hub sanal ağını bildiren Terrayform yapılandırma dosyasını oluşturun.
 
 1. Cloud Shell'de `hub-vnet.tf` adlı bir dosya oluşturun.
 
@@ -73,7 +67,7 @@ Hub sanal ağındaki bildirir Terraform yapılandırma dosyası oluşturun.
 
 1. Aşağıdaki kodu düzenleyiciye yapıştırın:
 
-    ```JSON
+    ```hcl
     locals {
       prefix-hub         = "hub"
       hub-location       = "CentralUS"
@@ -82,14 +76,14 @@ Hub sanal ağındaki bildirir Terraform yapılandırma dosyası oluşturun.
     }
 
     resource "azurerm_resource_group" "hub-vnet-rg" {
-      name     = "${local.hub-resource-group}"
-      location = "${local.hub-location}"
+      name     = local.hub-resource-group
+      location = local.hub-location
     }
 
     resource "azurerm_virtual_network" "hub-vnet" {
       name                = "${local.prefix-hub}-vnet"
-      location            = "${azurerm_resource_group.hub-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.hub-vnet-rg.name}"
+      location            = azurerm_resource_group.hub-vnet-rg.location
+      resource_group_name = azurerm_resource_group.hub-vnet-rg.name
       address_space       = ["10.0.0.0/16"]
 
       tags {
@@ -99,49 +93,49 @@ Hub sanal ağındaki bildirir Terraform yapılandırma dosyası oluşturun.
 
     resource "azurerm_subnet" "hub-gateway-subnet" {
       name                 = "GatewaySubnet"
-      resource_group_name  = "${azurerm_resource_group.hub-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+      resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.hub-vnet.name
       address_prefix       = "10.0.255.224/27"
     }
 
     resource "azurerm_subnet" "hub-mgmt" {
       name                 = "mgmt"
-      resource_group_name  = "${azurerm_resource_group.hub-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+      resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.hub-vnet.name
       address_prefix       = "10.0.0.64/27"
     }
 
     resource "azurerm_subnet" "hub-dmz" {
       name                 = "dmz"
-      resource_group_name  = "${azurerm_resource_group.hub-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+      resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.hub-vnet.name
       address_prefix       = "10.0.0.32/27"
     }
 
     resource "azurerm_network_interface" "hub-nic" {
       name                 = "${local.prefix-hub}-nic"
-      location             = "${azurerm_resource_group.hub-vnet-rg.location}"
-      resource_group_name  = "${azurerm_resource_group.hub-vnet-rg.name}"
+      location             = azurerm_resource_group.hub-vnet-rg.location
+      resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
       enable_ip_forwarding = true
 
       ip_configuration {
-        name                          = "${local.prefix-hub}"
-        subnet_id                     = "${azurerm_subnet.hub-mgmt.id}"
+        name                          = local.prefix-hub
+        subnet_id                     = azurerm_subnet.hub-mgmt.id
         private_ip_address_allocation = "Dynamic"
       }
 
       tags {
-        environment = "${local.prefix-hub}"
+        environment = local.prefix-hub
       }
     }
 
     #Virtual Machine
     resource "azurerm_virtual_machine" "hub-vm" {
       name                  = "${local.prefix-hub}-vm"
-      location              = "${azurerm_resource_group.hub-vnet-rg.location}"
-      resource_group_name   = "${azurerm_resource_group.hub-vnet-rg.name}"
-      network_interface_ids = ["${azurerm_network_interface.hub-nic.id}"]
-      vm_size               = "${var.vmsize}"
+      location              = azurerm_resource_group.hub-vnet-rg.location
+      resource_group_name   = azurerm_resource_group.hub-vnet-rg.name
+      network_interface_ids = [azurerm_network_interface.hub-nic.id]
+      vm_size               = var.vmsize
 
       storage_image_reference {
         publisher = "Canonical"
@@ -159,8 +153,8 @@ Hub sanal ağındaki bildirir Terraform yapılandırma dosyası oluşturun.
 
       os_profile {
         computer_name  = "${local.prefix-hub}-vm"
-        admin_username = "${var.username}"
-        admin_password = "${var.password}"
+        admin_username = var.username
+        admin_password = var.password
       }
 
       os_profile_linux_config {
@@ -168,23 +162,23 @@ Hub sanal ağındaki bildirir Terraform yapılandırma dosyası oluşturun.
       }
 
       tags {
-        environment = "${local.prefix-hub}"
+        environment = local.prefix-hub
       }
     }
 
     # Virtual Network Gateway
     resource "azurerm_public_ip" "hub-vpn-gateway1-pip" {
       name                = "hub-vpn-gateway1-pip"
-      location            = "${azurerm_resource_group.hub-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.hub-vnet-rg.name}"
+      location            = azurerm_resource_group.hub-vnet-rg.location
+      resource_group_name = azurerm_resource_group.hub-vnet-rg.name
 
       allocation_method = "Dynamic"
     }
 
     resource "azurerm_virtual_network_gateway" "hub-vnet-gateway" {
       name                = "hub-vpn-gateway1"
-      location            = "${azurerm_resource_group.hub-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.hub-vnet-rg.name}"
+      location            = azurerm_resource_group.hub-vnet-rg.location
+      resource_group_name = azurerm_resource_group.hub-vnet-rg.name
 
       type     = "Vpn"
       vpn_type = "RouteBased"
@@ -195,43 +189,43 @@ Hub sanal ağındaki bildirir Terraform yapılandırma dosyası oluşturun.
 
       ip_configuration {
         name                          = "vnetGatewayConfig"
-        public_ip_address_id          = "${azurerm_public_ip.hub-vpn-gateway1-pip.id}"
+        public_ip_address_id          = azurerm_public_ip.hub-vpn-gateway1-pip.id
         private_ip_address_allocation = "Dynamic"
-        subnet_id                     = "${azurerm_subnet.hub-gateway-subnet.id}"
+        subnet_id                     = azurerm_subnet.hub-gateway-subnet.id
       }
       depends_on = ["azurerm_public_ip.hub-vpn-gateway1-pip"]
     }
 
     resource "azurerm_virtual_network_gateway_connection" "hub-onprem-conn" {
       name                = "hub-onprem-conn"
-      location            = "${azurerm_resource_group.hub-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.hub-vnet-rg.name}"
+      location            = azurerm_resource_group.hub-vnet-rg.location
+      resource_group_name = azurerm_resource_group.hub-vnet-rg.name
 
       type           = "Vnet2Vnet"
       routing_weight = 1
 
-      virtual_network_gateway_id      = "${azurerm_virtual_network_gateway.hub-vnet-gateway.id}"
-      peer_virtual_network_gateway_id = "${azurerm_virtual_network_gateway.onprem-vpn-gateway.id}"
+      virtual_network_gateway_id      = azurerm_virtual_network_gateway.hub-vnet-gateway.id
+      peer_virtual_network_gateway_id = azurerm_virtual_network_gateway.onprem-vpn-gateway.id
 
-      shared_key = "${local.shared-key}"
+      shared_key = local.shared-key
     }
 
     resource "azurerm_virtual_network_gateway_connection" "onprem-hub-conn" {
       name                = "onprem-hub-conn"
-      location            = "${azurerm_resource_group.onprem-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.onprem-vnet-rg.name}"
+      location            = azurerm_resource_group.onprem-vnet-rg.location
+      resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
       type                            = "Vnet2Vnet"
       routing_weight = 1
-      virtual_network_gateway_id      = "${azurerm_virtual_network_gateway.onprem-vpn-gateway.id}"
-      peer_virtual_network_gateway_id = "${azurerm_virtual_network_gateway.hub-vnet-gateway.id}"
+      virtual_network_gateway_id      = azurerm_virtual_network_gateway.onprem-vpn-gateway.id
+      peer_virtual_network_gateway_id = azurerm_virtual_network_gateway.hub-vnet-gateway.id
 
-      shared_key = "${local.shared-key}"
+      shared_key = local.shared-key
     }
     ```
     
-1. Dosyayı kaydedin ve düzenleyiciden çıkın.
+3. Dosyayı kaydedin ve düzenleyiciden çıkın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"] 
-> [Azure'da Terraform ile merkez sanal ağ Gereci oluşturma](./terraform-hub-spoke-hub-nva.md))
+> [Azure 'da Terrayform ile bir hub sanal ağ gereci oluşturma](./terraform-hub-spoke-hub-nva.md)

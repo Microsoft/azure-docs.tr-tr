@@ -13,6 +13,8 @@
       href: create-member-cli.md
     - name: İşlem düğümüne bağlanma
       items:
+        - name: VS Code'u kullanma
+          href: connect-vscode.md
         - name: MetaMask kullanma
           href: connect-metamask.md
         - name: Geth kullanma
@@ -21,7 +23,7 @@
           href: connect-truffle.md
 - name: Öğreticiler
   items:
-    - name: İşlem gönderme
+    - name: Akıllı anlaşmaları kullanma
       href: send-transaction.md
 - name: Kavramlar
   items:
@@ -45,6 +47,18 @@
       href: manage-cli.md
     - name: PowerShell kullanarak konsorsiyum yönetme
       href: manage-consortium-powershell.md
+    - name: Logic Apps kullanma
+      href: ethereum-logic-app.md
+- name: Blok Zinciri Veri Yöneticisi
+  items:
+    - name: Veri yöneticisine genel bakış
+      href: data-manager.md
+    - name: Veri Yöneticisi'ni Yapılandırma - Portal
+      href: data-manager-portal.md
+    - name: Veri Yöneticisi'ni Yapılandırma - CLI
+      href: data-manager-cli.md
+    - name: Verileri Cosmos DB’ye yayımlama
+      href: data-manager-cosmosdb.md
 - name: Kaynaklar
   items:
     - name: Blok Zinciri REST API

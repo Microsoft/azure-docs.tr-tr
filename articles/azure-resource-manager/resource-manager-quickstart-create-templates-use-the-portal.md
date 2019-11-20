@@ -1,51 +1,47 @@
 ---
-title: Azure portalı kullanarak Azure Resource Manager şablonu oluşturma ve dağıtma | Microsoft Docs
+title: Şablon dağıtma-Azure portal
 description: Azure portalı kullanarak ilk Azure Resource Manager şablonunuzu oluşturmayı ve dağıtmayı öğrenin.
-services: azure-resource-manager
-documentationcenter: ''
 author: mumian
-manager: dougeby
-editor: tysonn
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 06/12/2019
 ms.topic: quickstart
 ms.author: jgao
-ms.openlocfilehash: d5deedb12afb1b766255ad0a9f247594ed70acaa
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 9a747dbdda4b822c70edaa5a08c30db80328c321
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67069296"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150546"
 ---
-# <a name="quickstart-create-and-deploy-azure-resource-manager-templates-by-using-the-azure-portal"></a>Hızlı Başlangıç: Oluşturma ve Azure portalını kullanarak Azure Resource Manager şablonlarını dağıtma
+# <a name="quickstart-create-and-deploy-azure-resource-manager-templates-by-using-the-azure-portal"></a>Hızlı başlangıç: Azure portalı kullanarak Azure Resource Manager şablonu oluşturma ve dağıtma
 
-Azure portalı ve düzenleme ve portal şablondan dağıtma işlemini bir Resource Manager şablonu oluşturma hakkında bilgi edinin. Resource Manager şablonları, çözümünüz için dağıtmanız gereken kaynakları tanımlayan JSON dosyalarıdır. Azure çözümlerinizi dağıtma ve yönetmeyle ilgili kavramları anlamak için bkz. [Azure Resource Manager’a genel bakış](resource-group-overview.md).
+Azure portal kullanarak bir Kaynak Yöneticisi şablonu oluşturmayı ve portaldan şablonu düzenlemenin ve dağıtmanın işlemini öğrenin. Resource Manager şablonları, çözümünüz için dağıtmanız gereken kaynakları tanımlayan JSON dosyalarıdır. Azure çözümlerinizi dağıtma ve yönetmeyle ilgili kavramları anlamak için bkz. [Azure Resource Manager’a genel bakış](resource-group-overview.md).
 
-![Resource manager şablonu Hızlı Başlangıç portalı diyagramı](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-export-deploy-template-portal.png)
+![Kaynak Yöneticisi şablonu hızlı başlangıç portalı diyagramı](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-export-deploy-template-portal.png)
 
-Öğreticiyi tamamladıktan sonra bir Azure depolama hesabı dağıtın. Aynı işlem, diğer Azure kaynakları dağıtmak için kullanılabilir.
+Öğreticiyi tamamladıktan sonra bir Azure depolama hesabı dağıtırsınız. Aynı işlem, diğer Azure kaynaklarını dağıtmak için de kullanılabilir.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
 ## <a name="generate-a-template-using-the-portal"></a>Portalı kullanarak şablon oluşturma
 
-Sıfırdan bir Resource Manager şablonu oluşturarak bir kolayca görev özellikle Azure dağıtımı için yenidir ve JSON biçimiyle ilgili bilgi sahibi değilseniz değildir. Azure portalını kullanarak, bir kaynak, örneğin bir Azure depolama hesabı yapılandırabilirsiniz. Kaynak dağıtmadan önce bir Resource Manager şablonuyla yapılandırmanızı dışarı aktarabilirsiniz. Şablonu kaydedebilir ve daha sonra yeniden kullanabilirsiniz.
+Sıfırdan bir Kaynak Yöneticisi şablonu oluşturmak, özellikle de Azure dağıtımı için yeni bir işlemdir ve JSON biçimi hakkında bilgi sahibi değilseniz kolay bir görev değildir. Azure portal kullanarak bir kaynağı (örneğin, bir Azure Storage hesabı) yapılandırabilirsiniz. Kaynağı dağıtmadan önce, yapılandırmanızı bir Kaynak Yöneticisi şablonuna dışarı aktarabilirsiniz. Şablonu kaydedebilir ve daha sonra yeniden kullanabilirsiniz.
 
-Pek çok deneyimli şablon Geliştirici ile tanıdık olmayan Azure kaynaklarını dağıtın çalıştıklarında şablonları oluşturmak için bu yöntemi kullanın. Portalı kullanarak şablonları dışarı aktarma hakkında daha fazla bilgi için bkz. [kaynak grupları için şablonları dışarı aktarma](./manage-resource-groups-portal.md#export-resource-groups-to-templates). Bir çalışma şablonu bulmak için diğer bir yolu [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/).
+Birçok deneyimli şablon geliştiricisi, bu yöntemi, alışık oldukları Azure kaynaklarını dağıtmaya çalıştıklarında şablonlar oluşturmak için kullanır. Portalı kullanarak şablonları dışarı aktarma hakkında daha fazla bilgi için bkz. [kaynak gruplarını şablonlara dışarı aktarma](./manage-resource-groups-portal.md#export-resource-groups-to-templates). Çalışma şablonu bulmanın diğer yolu [Azure hızlı başlangıç şablonlarından](https://azure.microsoft.com/resources/templates/)de bulunur.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. **Kaynak oluştur** > **Depolama** > **Depolama hesabı - blob, dosya, tablo, sorgu**'yu seçin.
+1. Bir Web tarayıcısında [Azure Portal](https://portal.azure.com) gidin ve oturum açın.
+2. Azure portal menüsünde **kaynak oluştur**' u seçin.
 
-    ![Azure portalı kullanarak Azure depolama hesabı oluşturma](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-create-storage-account-portal.png)
-3. Aşağıdaki bilgileri girin:
+    ![Azure portal menüsünden kaynak oluştur ' u seçin](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-create-a-resource.png)
+
+3. **Depolama** > **depolama hesabı**' nı seçin.
+
+    ![Azure Storage hesabı oluşturma](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-create-storage-account-portal.png)
+1. Aşağıdaki bilgileri girin:
 
     |Ad|Değer|
     |----|----|
-    |**Kaynak grubu**|Seçin **Yeni Oluştur**, tercih ettiğiniz bir kaynak grubu adı belirtin. Ekran görüntüsünde kaynak grubu adı *mystorage1016rg* olarak belirtilmiştir. Kaynak grubu, Azure kaynakları için bir kapsayıcıdır. Kaynak grubu, Azure kaynaklarını yönetmek kolaylaştırır. |
-    |**Ad**|Depolama hesabınızın benzersiz bir ad verin. Depolama hesabı adı tüm Azure genelinde benzersiz olmalıdır ve yalnızca küçük harflerden ve rakamlardan içerdiği. Ad 3 ile 24 karakter arasında olmalıdır. "'Mystorage1016' depolama hesabı adı zaten alınmış" diyen bir hata mesajı alırsanız kullanmayı deneyin  **&lt;adınız > depolama&lt;MMDD bugünün tarihi >** , örneğin  **johndolestorage1016**. Daha fazla bilgi için [adlandırma kuralları ve kısıtlamalar](/azure/architecture/best-practices/naming-conventions#naming-rules-and-restrictions).|
+    |**Kaynak grubu**|**Yeni oluştur**' u seçin ve tercih ettiğiniz bir kaynak grubu adı belirtin. Ekran görüntüsünde kaynak grubu adı *mystorage1016rg* olarak belirtilmiştir. Kaynak grubu, Azure kaynakları için bir kapsayıcıdır. Kaynak grubu, Azure kaynaklarını yönetmeyi kolaylaştırır. |
+    |**Adı**|Depolama hesabınıza benzersiz bir ad verin. Depolama hesabı adı tüm Azure genelinde benzersiz olmalıdır ve yalnızca küçük harf ve rakam içermelidir. Ad 3 ile 24 karakter arasında olmalıdır. "Depolama hesabı adı ' mystorage1016 ' zaten alınmış" olarak bir hata iletisi alırsanız, **adınızı&lt;> depolama alanını&lt;>** , örneğin **johndolestorage1016**) kullanmayı deneyin. Daha fazla bilgi için bkz. [adlandırma kuralları ve kısıtlamaları](/azure/architecture/best-practices/resource-naming).|
 
     Diğer özellikler için varsayılan değerleri kullanabilirsiniz.
 
@@ -54,47 +50,47 @@ Pek çok deneyimli şablon Geliştirici ile tanıdık olmayan Azure kaynakların
     > [!NOTE]
     > Dışarı aktarılan şablonların bazılarını kullanabilmeniz için yapmanız gereken düzenlemeler vardır.
 
-4. Ekranın alt tarafından **Gözden geçir + oluştur**'u seçin. Seçmeyin **Oluştur** sonraki adımda.
-5. Ekranın alt tarafından **Otomasyon için bir şablon indir**'i seçin. Portalda oluşturulan şablon gösterilir:
+5. Ekranın alt tarafından **Gözden geçir + oluştur**'u seçin. Sonraki adımda **Oluştur** ' u seçmeyin.
+6. Ekranın alt tarafından **Otomasyon için bir şablon indir**'i seçin. Portalda oluşturulan şablon gösterilir:
 
     ![Portaldan şablon oluşturma](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-create-storage-account-template.png)
 
-    Şablon ana bölmede gösterilir. Altı - üst düzey öğeleri içeren bir JSON dosyası olduğu `schema`, `contentVersion`, `parameters`, `variables`, `resources`, ve `output`. Daha fazla bilgi için bkz. [Azure Resource Manager şablonlarının yapısını ve söz dizimini anlama](./resource-group-authoring-templates.md)
+    Şablon ana bölmede gösterilir. Altı üst düzey öğe içeren bir JSON dosyasıdır; `schema`, `contentVersion`, `parameters`, `variables`, `resources`ve `output`. Daha fazla bilgi için bkz. [Azure Resource Manager şablonlarının yapısını ve söz dizimini anlama](./resource-group-authoring-templates.md)
 
-    Tanımlı altı parametre bulunur. Bunlardan biri **storageAccountName** olarak adlandırılmıştır. Önceki ekran görüntüsünde vurgulanan ikinci bölümün şablonu bu parametrede yapmayı gösterir. Sonraki bölümde şablonu düzenleyerek depolama hesabı için oluşturulan bir adı kullanacaksınız.
+    Tanımlı altı parametre bulunur. Bunlardan biri **storageAccountName** olarak adlandırılmıştır. Önceki ekran görüntüsünde vurgulanan ikinci bölüm, şablondaki bu parametreye nasıl başvurulacağını gösterir. Sonraki bölümde şablonu düzenleyerek depolama hesabı için oluşturulan bir adı kullanacaksınız.
 
-    Şablonda bir Azure kaynağı tanımlanmıştır. Türü `Microsoft.Storage/storageAccounts`. Kaynak nasıl tanımlanır, bir görünüm ve tanım yapısı yararlanın.
-6. Seçin **indirme** ekranın üst.
-7. İndirilen ZIP dosyasını açın ve ardından kaydedin **template.json** bilgisayarınıza. Sonraki bölümde bir şablon dağıtım aracı kullanarak şablonu düzenleyeceksiniz.
-8. Parametre için sağladığınız değerleri görmek üzere **Parametre** sekmesini seçin. Bu değerleri not alın. Bir sonraki bölümde şablonu dağıtırken ihtiyacınız olacak.
+    Şablonda bir Azure kaynağı tanımlanmıştır. Tür `Microsoft.Storage/storageAccounts`. Kaynağın nasıl tanımlandığını ve tanım yapısını göz atın.
+7. Ekranın üstünden **İndir** ' i seçin.
+8. İndirilen ZIP dosyasını açın ve ardından **Template. JSON** ' u bilgisayarınıza kaydedin. Sonraki bölümde bir şablon dağıtım aracı kullanarak şablonu düzenleyeceksiniz.
+9. Parametre için sağladığınız değerleri görmek üzere **Parametre** sekmesini seçin. Bu değerleri not alın. Bir sonraki bölümde şablonu dağıtırken ihtiyacınız olacak.
 
     ![Portaldan şablon oluşturma](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-create-storage-account-template-parameters.png)
 
-    Şablon dosyası hem parametre dosyasını kullanarak, bir kaynak, bu öğreticide, Azure depolama hesabı oluşturabilirsiniz.
+    Hem şablon dosyası hem de parametreler dosyasını kullanarak bir Azure depolama hesabı olan bu öğreticide bir kaynak oluşturabilirsiniz.
 
 ## <a name="edit-and-deploy-the-template"></a>Şablonu düzenleme ve dağıtma
 
-Basit şablon düzenleme işlemleri için Azure portalı kullanabilirsiniz. Bu hızlı başlangıçta *Şablon Dağıtımı* adlı bir portal aracını kullanacaksınız. *Şablon dağıtımı* tek bir arabirim - Azure portalını kullanarak tüm öğreticiyi tamamlamak için Bu öğreticide kullanılır. Daha karmaşık bir şablonu düzenlemek için kullanmayı [Visual Studio Code](./resource-manager-quickstart-create-templates-use-visual-studio-code.md), daha zengin düzenleme işlevleri sağlar.
+Basit şablon düzenleme işlemleri için Azure portalı kullanabilirsiniz. Bu hızlı başlangıçta *Şablon Dağıtımı* adlı bir portal aracını kullanacaksınız. Bu öğreticide *şablon dağıtımı* , tek bir arabirim kullanarak tüm öğreticiyi tamamlayabilmeniz için kullanılır-Azure Portal. Daha karmaşık bir şablonu düzenlemek için, daha zengin düzenleme işlevleri sağlayan [Visual Studio Code](./resource-manager-quickstart-create-templates-use-visual-studio-code.md)kullanmayı düşünün.
 
 > [!IMPORTANT]
-> Şablon dağıtımı olan basit şablonlarla test etmek için bir arabirim sağlar. Üretim ortamında bu özelliği kullanmak için önerilmez. Bunun yerine, bir Azure depolama hesabı veya GitHub gibi kaynak kodu deposu Şablonlarınızı depolayın.
+> Şablon dağıtımı, basit şablonları test etmek için bir arabirim sağlar. Bu özelliğin üretimde kullanılması önerilmez. Bunun yerine, şablonlarınızı bir Azure depolama hesabında veya GitHub gibi bir kaynak kod deposunda saklayın.
 
-Azure'daki her Azure hizmetinin adının benzersiz olması gerekir. Zaten bir depolama hesabı adı girerseniz, dağıtım başarısız. Bu sorunu önlemek için bir şablon işlevi çağrısı için kullanılacak şablon değiştirme `uniquestring()` benzersiz depolama hesabı adı oluşturmak için.
+Azure'daki her Azure hizmetinin adının benzersiz olması gerekir. Zaten var olan bir depolama hesabı adı girdiyseniz dağıtım başarısız olabilir. Bu sorundan kaçınmak için şablonu, bir şablon işlevi çağrısı `uniquestring()` kullanılacak şekilde değiştirerek benzersiz bir depolama hesabı adı oluşturur.
 
-1. Azure portalda **Kaynak oluştur**’u seçin.
+1. Azure portal menüsünden veya **giriş** sayfasından **kaynak oluştur**' u seçin.
 2. **Market içinde ara** alanına **şablon dağıtımı** yazın ve **ENTER** tuşuna basın.
 3. **Şablon dağıtımı**'nı seçin.
 
     ![Azure Resource Manager şablon kitaplığı](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-library.png)
-4. **Oluştur**’u seçin.
+4. **Oluştur**'u seçin.
 5. **Düzenleyicide kendi şablonunuzu oluşturun**'u seçin.
 6. **Dosya yükle**'yi seçin ve ardından yönergeleri izleyerek önceki bölümde indirdiğiniz template.json dosyasını yükleyin.
-7. Aşağıdaki üç değişiklikleri yapın:
+7. Şablonda aşağıdaki üç değişikliği yapın:
 
     ![Azure Resource Manager şablonları](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-edit-storage-account-template-revised.png)
 
-   - Kaldırma **storageAccountName** önceki ekran görüntüsünde gösterildiği gibi parametre.
-   - Adlı bir değişken ekleyin **storageAccountName** önceki ekran görüntüsünde gösterildiği gibi:
+   - **StorageAccountName** parametresini önceki ekran görüntüsünde gösterildiği gibi kaldırın.
+   - Önceki ekran görüntüsünde gösterildiği gibi **storageAccountName** adlı bir değişken ekleyin:
 
        ```json
        "storageAccountName": "[concat(uniqueString(subscription().subscriptionId), 'storage')]"
@@ -158,20 +154,20 @@ Azure'daki her Azure hizmetinin adının benzersiz olması gerekir. Zaten bir de
 
     |Ad|Değer|
     |----|----|
-    |**Kaynak grubu**|Son bölümde oluşturduğunuz kaynak grubu adı seçin. |
+    |**Kaynak grubu**|Son bölümde oluşturduğunuz kaynak grubu adını seçin. |
     |**Konum**|Depolama hesabı için bir konum seçin. Örneğin, **Orta ABD**. |
-    |**Hesap türü**|Girin **Standard_LRS** Bu Hızlı Başlangıç için. |
-    |**tür**|Girin **StorageV2** Bu Hızlı Başlangıç için. |
-    |**Erişim katmanı**|Girin **etkin** Bu Hızlı Başlangıç için. |
-    |**HTTPS trafiği yalnızca etkin**| Bu hızlı başlangıç için **true** değerini seçin. |
-    |**Hüküm ve koşulları yukarıda belirtilen kabul ediyorum**|(seçim)|
+    |**Hesap türü**|Bu hızlı başlangıç için **Standard_LRS** girin. |
+    |**Denetlenmesi**|Bu hızlı başlangıç için **StorageV2** girin. |
+    |**Erişim katmanı**|Bu hızlı başlangıç için **sık** erişimli girin. |
+    |**Yalnızca HTTPS trafiği etkin**| Bu hızlı başlangıç için **true** değerini seçin. |
+    |**Yukarıda belirtilen hüküm ve koşulları kabul ediyorum**|seçin|
 
     Örnek bir dağıtımın ekran görüntüsü:
 
     ![Azure Resource Manager şablonlarını dağıtma](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-deploy.png)
 
 10. **Satın al**'ı seçin.
-11. Dağıtım durumunu görmek için ekranın en üstündeki zil simgesini (bildirimler) seçin. Göreceksiniz **dağıtım sürüyor**. Dağıtım tamamlanana kadar bekleyin.
+11. Dağıtım durumunu görmek için ekranın en üstündeki zil simgesini (bildirimler) seçin. **Dağıtım devam ediyor**görürsünüz. Dağıtım tamamlanana kadar bekleyin.
 
     ![Azure Resource Manager şablonlarını dağıtma bildirimi](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-portal-notification.png)
 
@@ -179,7 +175,7 @@ Azure'daki her Azure hizmetinin adının benzersiz olması gerekir. Zaten bir de
 
     ![Azure Resource Manager şablonlarını dağıtma kaynak grubu](./media/resource-manager-quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-portal-deployment-resource-group.png)
 
-    Dağıtım durumunun başarılı olduğunu ve kaynak grubunda yalnızca bir depolama hesabı olduğunu görebilirsiniz. Depolama hesabı adı, şablon tarafından oluşturulan benzersiz bir dizedir. Azure depolama hesapları kullanma hakkında daha fazla bilgi edinmek için [hızlı başlangıç: Karşıya yükleme, indirme ve Azure portalını kullanarak blobları listeleme](../storage/blobs/storage-quickstart-blobs-portal.md).
+    Dağıtım durumunun başarılı olduğunu ve kaynak grubunda yalnızca bir depolama hesabı olduğunu görebilirsiniz. Depolama hesabı adı, şablon tarafından oluşturulan benzersiz bir dizedir. Azure depolama hesaplarını kullanma hakkında daha fazla bilgi edinmek için bkz. [Hızlı başlangıç: Azure portalı kullanarak blobları yükleme, indirme ve listeleme](../storage/blobs/storage-quickstart-blobs-portal.md).
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
@@ -192,7 +188,7 @@ Artık Azure kaynakları gerekli değilse, kaynak grubunu silerek dağıttığı
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Azure portaldan şablon oluşturmayı ve portalı kullanarak şablonu dağıtmayı öğrendiniz. Bu Hızlı Başlangıçta kullanılan şablon, tek bir Azure kaynağına sahip basit bir şablondur. Şablon karmaşık olduğunda geliştirme için Visual Studio Code veya Visual Studio uygulamasını kullanmak daha kolaydır. Sonraki öğreticide Azure PowerShell ve Azure Komut Satırı Arabirimi (CLI) kullanarak nasıl şablon dağıtacağınız da gösterilmektedir.
+Bu öğreticide, Azure portaldan şablon oluşturmayı ve portalı kullanarak şablonu dağıtmayı öğrendiniz. Bu Hızlı Başlangıçta kullanılan şablon, tek bir Azure kaynağına sahip basit bir şablondur. Şablon karmaşık olduğunda geliştirme için Visual Studio Code veya Visual Studio uygulamasını kullanmak daha kolaydır. Şablon geliştirme hakkında daha fazla bilgi edinmek için bkz. Yeni Başlangıç Öğreticisi serisi:
 
 > [!div class="nextstepaction"]
-> [Visual Studio Code kullanarak şablon oluşturma](./resource-manager-quickstart-create-templates-use-visual-studio-code.md)
+> [Başlangıç öğreticileri](./template-tutorial-create-first-template.md)

@@ -41,8 +41,8 @@
 - name: Kaynaklar
   items:
     - name: Bilişsel Hizmetler’i deneyin
-      href: 'https://azure.microsoft.com/en-us/try/cognitive-services/?api=bing-web-search-api'
+      href: 'https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api'
     - name: Fiyatlandırma bilgileri
-      href: 'https://azure.microsoft.com/en-us/pricing/details/cognitive-services/search-api/'
+      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/search-api/'
     - name: Uyumluluk
       href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'

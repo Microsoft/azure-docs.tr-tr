@@ -1,72 +1,65 @@
 ---
-title: Azure önbelleği için Redis örnekleri | Microsoft Docs
+title: Redis için Azure Önbelleği örnekleri
 description: Redis için Azure Cache’i kullanmayı öğrenin
-services: cache
-documentationcenter: ''
 author: yegu-ms
-manager: jhubbard
-editor: ''
-ms.assetid: 1f8d210c-ee09-4fe2-b63f-1e69246a27d8
 ms.service: cache
-ms.workload: tbd
-ms.tgt_pltfrm: cache
 ms.devlang: multiple
-ms.topic: article
+ms.topic: conceptual
 ms.date: 01/23/2017
 ms.author: yegu
-ms.openlocfilehash: 73c771ab18d1cc2944298818c1cab90eb2f277ff
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9097a25c0223faebd91fe3c01ff3edea6c4e6f9f
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60829812"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74122607"
 ---
 # <a name="azure-cache-for-redis-samples"></a>Redis için Azure Önbelleği örnekleri
-Bu konu, önbellek, okuma ve yazma verileri azure'a veya önbellekten bağlanma ve ASP.NET Azure önbelleği için Redis sağlayıcıları kullanan gibi senaryoları kapsayan, Redis örnekleri için Azure önbellek listesini sağlar. Örneklerden bazıları indirilebilir projelerdir ve bazı adım adım rehberlik ve kod parçacıkları içerir ancak indirilebilir bir projeye bağlamayın.
+Bu konu, Redsıs örnekleri için Azure önbelleğinin bir listesini, bir önbelleğe bağlanma, önbelleğe veri okuma ve önbellekten veri yazma ve Redsıs sağlayıcıları için ASP.NET Azure önbelleğini kullanma gibi senaryoları kapsayan bir liste sağlar. Bazı örnekler indirilebilir projelerdir ve bazıları adım adım rehberlik sağlar ve kod parçacıkları içerir ancak indirilebilir bir projeye bağlantı vermez.
 
-## <a name="hello-world-samples"></a>Hello world örnekleri
-Bu bölümdeki örnekler, bir Azure önbelleği için Redis örneği bağlama ve okuma ve çeşitli dillerde kullanarak önbelleğe veri yazma temel bilgileri gösterir ve Redis istemcileri.
+## <a name="hello-world-samples"></a>Merhaba dünya örnekleri
+Bu bölümdeki örneklerde, Redsıs örneği için bir Azure önbelleğine bağlanma ve çeşitli diller ve Redo istemcileri kullanılarak önbelleğe veri okuma ve yazma temelleri gösterilmektedir.
 
-[Merhaba Dünya](https://github.com/rustd/RedisSamples/tree/master/HelloWorld) örnek gösterir kullanarak çeşitli önbellek işlemleri gerçekleştirme [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis) .NET istemcisi.
+[Merhaba Dünya](https://github.com/rustd/RedisSamples/tree/master/HelloWorld) örneği, [StackExchange. redsıs](https://github.com/StackExchange/StackExchange.Redis) .NET istemcisi kullanılarak çeşitli önbellek işlemlerinin nasıl gerçekleştirileceğini gösterir.
 
-Bu örnek, gösterir nasıl yapılır:
+Bu örnekte nasıl yapılacağı gösterilmektedir:
 
-* Çeşitli bağlantı seçenekleri kullanın
-* Okuma ve yazma için ve zaman uyumlu ve zaman uyumsuz işlemler kullanarak önbellekten nesneleri
-* Belirtilen anahtar değer döndürmek için Redis MGET/MSET komutları kullanın.
-* Redis işlem işlemleri
-* Redis listeler ve sıralanmış kümeleri ile çalışma
-* Store .NET nesneleri kullanarak JsonConvert seri hale getiricileri genişletme
-* Redis kümesi etiketleme uygulamak için kullanma
-* Redis küme ile çalışmanıza
+* Çeşitli bağlantı seçeneklerini kullanın
+* Zaman uyumlu ve zaman uyumsuz işlemler kullanarak önbelleğe ve önbellekten nesneleri okuma ve yazma
+* Belirtilen anahtarların değerlerini döndürmek için Redsıs MGET/MSET komutlarını kullanın
+* Redsıs işlem işlemlerini gerçekleştirme
+* Redi listeleriyle ve sıralanmış kümeleriyle çalışma
+* JsonConvert serileştiricileri kullanarak .NET nesnelerini depolayın
+* Etiketleme uygulamak için Redsıs kümelerini kullanma
+* Redsıs kümesiyle çalışma
 
-Daha fazla bilgi için [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis) GitHub ve daha fazla kullanım senaryoları için belgelere bakın [StackExchange.Redis.Tests](https://github.com/StackExchange/StackExchange.Redis/tree/master/tests) birim testleri.
+Daha fazla bilgi için GitHub 'daki [StackExchange. redthe](https://github.com/StackExchange/StackExchange.Redis) belgelerine bakın ve daha fazla kullanım senaryosunda, [StackExchange. redsıs. Tests](https://github.com/StackExchange/StackExchange.Redis/tree/master/tests) birim testlerini inceleyin.
 
-[Azure Cache, Redis Python ile kullanılmak üzere nasıl](cache-python-get-started.md) Python kullanarak Redis için Azure Cache kullanmaya başlama işlemini gösterir ve [redis-py](https://github.com/andymccurdy/redis-py) istemci.
+[Azure önbelleğini redsıs için kullanma Python ile](cache-python-get-started.md) , Python ve [redin-Kopyala](https://github.com/andymccurdy/redis-py) istemcisi kullanılarak redin için Azure önbelleği kullanmaya nasıl başlacağınız gösterilmektedir.
 
-[Önbellekte .NET nesneleriyle çalışma](cache-dotnet-how-to-use-azure-redis-cache.md#work-with-net-objects-in-the-cache) yazmanıza izin ve bir Azure önbelleği için Redis örneğinden okuyabilir .NET nesneleri serileştirmek için bir yol gösterir. 
+[Önbellekte .NET nesneleriyle çalışma](cache-dotnet-how-to-use-azure-redis-cache.md#work-with-net-objects-in-the-cache) , .net nesnelerini yazmanız ve bunları redsıs örneği Için bir Azure önbelleğinden okuyabilmeniz için bir yol gösterir. 
 
-## <a name="use-azure-cache-for-redis-as-a-scale-out-backplane-for-aspnet-signalr"></a>Azure Cache için Redis genişletme devre kartına ASP.NET SignalR için kullanın
-[Kullanan Azure Cache için ASP.NET SignalR genişletme devre kartı olarak Redis için](https://github.com/rustd/RedisSamples/tree/master/RedisAsSignalRBackplane) örneği, nasıl Azure önbelleği için Redis bir SignalR devre kartı olarak kullanabileceğinizi gösterir. Devre kartına hakkında daha fazla bilgi için bkz: [Redis ile SignalR ölçeğini genişletme](https://www.asp.net/signalr/overview/performance/scaleout-with-redis).
+## <a name="use-azure-cache-for-redis-as-a-scale-out-backplane-for-aspnet-signalr"></a>Red, ASP.NET SignalR için genişleme geri düzlemi olarak redsıs için Azure önbelleğini kullanma
+[Redin Için Azure önbelleğini, ASP.NET SignalR örneği için bir genişleme geri düzlemi olarak kullanın](https://github.com/rustd/RedisSamples/tree/master/RedisAsSignalRBackplane) örnek Için Azure önbelleğini bir SignalR geri düzlemi olarak nasıl kullanabileceğinizi gösterir. Geri düzlemi hakkında daha fazla bilgi için bkz. [redsıs Ile SignalR ölçeği](https://www.asp.net/signalr/overview/performance/scaleout-with-redis).
 
-## <a name="azure-cache-for-redis-customer-query-sample"></a>Azure önbelleği için Redis müşteri sorgu örneği
-Bu örnek, bir önbelleğe alınan verilere ve verilere erişim kalıcı depolama alanından arasında karşılaştırır performans gösterir. Bu örnek, iki proje yok.
+## <a name="azure-cache-for-redis-customer-query-sample"></a>Redsıs müşterisi için Azure önbelleği sorgu örneği
+Bu örnek, bir önbellekteki verilere erişme ve kalıcılık depolamadaki verilere erişme arasındaki performansı karşılaştırır. Bu örnekte iki proje vardır.
 
-* [Azure önbelleği için Redis performans verileri önbelleğe alarak nasıl geliştireceğiniz gösteri](https://github.com/rustd/RedisSamples/tree/master/RedisCacheCustomerQuerySample)
-* [Tanıtım için çekirdek önbellek ve veritabanı](https://github.com/rustd/RedisSamples/tree/master/SeedCacheForCustomerQuerySample)
+* [Redin için Azure önbelleğinin, verileri önbelleğe alarak performansı nasıl iyileştirebileceğimizi gösteren tanıtım](https://github.com/rustd/RedisSamples/tree/master/RedisCacheCustomerQuerySample)
+* [Demo için veritabanını ve önbelleği çekirdek yapın](https://github.com/rustd/RedisSamples/tree/master/SeedCacheForCustomerQuerySample)
 
 ## <a name="aspnet-session-state-and-output-caching"></a>ASP.NET oturum durumu ve çıktı önbelleği
-[Kullanan Azure Cache için ASP.NET SessionState ve OutputCache depolamak Redis](https://github.com/rustd/RedisSamples/tree/master/SessionState_OutputCaching) örnek gösterir nasıl ASP.NET oturumunu ve çıkış SessionState ve OutputCache sağlayıcıları kullanarak Redis önbelleği depolamak için Azure önbelleği için Redis kullanmak için .
+[Redsıs Için Azure önbelleği kullan ASP.net sessionState ve OutputCache](https://github.com/rustd/RedisSamples/tree/master/SessionState_OutputCaching) örneği, Redsıs için sessionState ve OutputCache sağlayıcıları kullanılarak ASP.NET oturumu ve çıktı önbelleğini depolamak üzere Redsıs Için Azure önbelleğini nasıl kullanacağınızı gösterir.
 
-## <a name="manage-azure-cache-for-redis-with-maml"></a>Azure önbelleği için Redis MAML ile yönetme
-[Yönetilen Azure önbelleği için Azure yönetim kitaplıkları'nı kullanarak Redis](https://github.com/rustd/RedisSamples/tree/master/ManageCacheUsingMAML) örneği, nasıl, Azure yönetim kitaplıkları yönetmek için kullanabilirsiniz - gösterir (oluşturma / güncelleştirme / silme) önbelleğinizi. 
+## <a name="manage-azure-cache-for-redis-with-maml"></a>MAML ile Redsıs için Azure önbelleğini yönetme
+Azure [Yönetim kitaplıkları kullanılarak redsıs Için Azure önbelleğini yönetme](https://github.com/rustd/RedisSamples/tree/master/ManageCacheUsingMAML) örneği, önbelleğinizi yönetmek Için Azure Yönetim kitaplıklarını nasıl kullanabileceğinizi gösterir (oluşturma/güncelleştirme/silme). 
 
-## <a name="custom-monitoring-sample"></a>Özel İzleme örneği
-[Erişim Azure önbelleği için Redis izleme verilerini](https://github.com/rustd/RedisSamples/tree/master/CustomMonitoring) örnek, izleme verilerini, Azure önbelleği için Redis dışında Azure portalı için nasıl erişebileceğinizi gösterir.
+## <a name="custom-monitoring-sample"></a>Özel izleme örneği
+[Redsıs izleme verileri Için Azure önbellek erişimi](https://github.com/rustd/RedisSamples/tree/master/CustomMonitoring) örneği, Azure önbelleğiniz için Izleme verilerine Azure portalının dışından nasıl erişebileceğinizi gösterir.
 
-## <a name="a-twitter-style-clone-written-using-php-and-redis"></a>PHP Redis ile yazılan bir Twitter tarzı kopyalama
-[Retwis](https://github.com/SyntaxC4-MSFT/retwis) Redis Hello World örnek verilmiştir. Redis ve PHP kullanılarak yazılmış en az bir Twitter tarzı sosyal ağ kopya olduğunu kullanarak [Predis](https://github.com/nrk/predis) istemci. Kaynak kodu, çok basit ve farklı göstermek için aynı anda Redis veri yapıları için tasarlanmıştır.
+## <a name="a-twitter-style-clone-written-using-php-and-redis"></a>PHP ve Redsıs kullanılarak yazılan Twitter stili bir kopya
+[Retwa](https://github.com/SyntaxC4-MSFT/retwis) örneği, reddir Merhaba dünya. Bu, [Predıs](https://github.com/nrk/predis) Istemcisi kullanılarak REDSıS ve php kullanılarak yazılmış, en az bir Twitter stili sosyal ağ kopyalamadır. Kaynak kodu, farklı redin veri yapılarını göstermek için çok basittir ve aynı anda tasarlanmıştır.
 
 ## <a name="bandwidth-monitor"></a>Bant genişliği İzleyicisi
-[Bant genişliği İzleyici](https://github.com/JonCole/SampleCode/tree/master/BandWidthMonitor) örnek, istemcide kullanılan bant genişliğini izlemenize olanak sağlar. Bant genişliği ölçmek için örneği önbellek istemci makinede çalıştırmak, önbellek çağrı yapmak ve bant genişliği İzleyici örnek tarafından bildirilen bant genişliği gözlemleyin.
+[Bant genişliği izleyici](https://github.com/JonCole/SampleCode/tree/master/BandWidthMonitor) örneği, istemcide kullanılan bant genişliğini izlemenize olanak sağlar. Bant genişliğini ölçmek için, örneği önbellek istemci makinesinde çalıştırın, önbelleğe çağrılar yapın ve bant genişliği izleyici örneği tarafından raporlanan bant genişliğini gözlemleyin.
 

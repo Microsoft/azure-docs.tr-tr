@@ -1,95 +1,97 @@
 ---
-title: Azure Cosmos DB kaynak maliyeti ile ayrılmış kapasite en iyi duruma getirme
-description: Hesaplama maliyetlerinizden kaydetmek için Azure Cosmos DB ayrılmış kapasite satın alma konusunda bilgi edinin.
+title: Ayrılmış kapasiteye sahip Azure Cosmos DB kaynaklarının maliyetini iyileştirin
+description: İşlem maliyetlerinizi kaydetmek için Azure Cosmos DB ayrılmış kapasiteyi satın almayı öğrenin.
 author: bandersmsft
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 07/01/2019
-ms.author: rimman
+ms.date: 08/29/2019
+ms.author: banders
 ms.reviewer: sngun
-ms.openlocfilehash: b74fcc2e08f02be7adeeab4cfee5f36d5194392c
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: 0ee43fe0996c05f4e59f6107ba52fac19b83cdef
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508654"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72756947"
 ---
-# <a name="optimize-cost-with-reserved-capacity-in-azure-cosmos-db"></a>Azure Cosmos DB'de ayrılmış bir kapasiteyle maliyeti iyileştirin
+# <a name="optimize-cost-with-reserved-capacity-in-azure-cosmos-db"></a>Azure Cosmos DB ' de ayrılmış kapasiteyle maliyeti iyileştirin
 
-Azure Cosmos DB için Azure Cosmos DB kaynaklarını bir yıl veya üç yıl için önceden ödeme yaparak tasarruf kapasite yardımcı saklıdır. Azure Cosmos DB ayrılmış kapasite ile Cosmos DB kaynaklarını için sağlanan aktarım hızı bir indirim alabilirsiniz. Kaynak veritabanları ve kapsayıcıları (tablolar, koleksiyonlar ve graflar) verilebilir.
+Azure Cosmos DB ayrılmış kapasite, bir yıl veya üç yıl boyunca Azure Cosmos DB kaynakları için bir ayırmaya ayırarak paradan tasarruf etmenize yardımcı olur. Azure Cosmos DB ayrılmış kapasiteyle, Cosmos DB kaynaklar için sağlanan aktarım hızına ilişkin bir indirim elde edebilirsiniz. Kaynak örnekleri veritabanları ve kapsayıcılardır (tablolar, koleksiyonlar ve grafikler).
 
-Azure Cosmos DB ayrılmış kapasite, Cosmos DB maliyetlerinizi önemli ölçüde azaltabilirsiniz&mdash;bir yıllık veya üç yıllık ön taahhüt ile normal fiyatlarında yüzde 65'e varan. Ayrılmış kapasite bir fatura oranında indirim sağlar ve Azure Cosmos DB kaynaklarınızın çalışma zamanı durumunu etkilemez.
+Azure Cosmos DB ayrılmış kapasite, bir yıllık veya üç yıllık ön taahhüt ile normal fiyatlarla 65 &mdash;up Cosmos DB maliyetlerinizi önemli ölçüde azaltabilir. Ayrılmış kapasite bir faturalandırma indirimi sağlar ve Azure Cosmos DB kaynaklarınızın çalışma zamanı durumunu etkilemez.
 
-Azure Cosmos DB ayrılmış kapasite kaynaklarınız için sağlanan aktarım hızı kapsar. Depolama ve ağ ücretleri ele alınmamıştır. Rezervasyon satın alma hemen sonra öznitelikler artık ödeme-olarak-ödersiniz ayırma eşleşen aktarım hızı ücretleri oranları gidin. Rezervasyonlar hakkında daha fazla bilgi için bkz. [Azure ayırmaları](../billing/billing-save-compute-costs-reservations.md) makalesi.
+Azure Cosmos DB ayrılmış kapasite, kaynaklarınız için sağlanan aktarım hızını içerir. Depolama ve ağ ücretlerini kapsamaz. Bir rezervasyon satın alarak, rezervasyon öznitelikleriyle eşleşen aktarım hızı ücretleri artık Kullandıkça Öde tarifelerine göre ücretlendirilir. Ayırmalar hakkında daha fazla bilgi için bkz. [Azure ayırmaları](../billing/billing-save-compute-costs-reservations.md) makalesi.
 
-Azure Cosmos DB ayrılmış kapasite satın alabilirsiniz [Azure portalında](https://portal.azure.com). Ayrılmış kapasite satın almak için:
+[Azure portal](https://portal.azure.com)Azure Cosmos DB ayrılmış kapasiteyi satın alabilirsiniz. [Peşin olarak veya aylık ödemelerle](../billing/billing-monthly-payments-reservations.md) rezervasyon ödemesi yapın. Ayrılmış kapasite satın almak için:
 
-* En az bir kuruluş veya Kullandıkça Öde tarifesine göre tek tek abonelikle sahip rolünün olması gerekir.  
-* Kurumsal abonelikler için **ayrılmış örnekleri ekleme** içinde etkinleştirilmelidir [EA portal](https://ea.azure.com). Veya bu ayarı devre dışıysa, aboneliğini bir EA yönetici olması gerekir.
-* Yalnızca yönetim aracıları veya satış aracılar için bulut çözümü sağlayıcısı (CSP) programı, Azure Cosmos DB ayrılmış kapasite satın alabilirsiniz.
+* Kullandıkça Öde tarifesine sahip en az bir kuruluş veya ayrı bir abonelik için sahip rolünde olmanız gerekir.  
+* Kurumsal abonelikler için, [EA portal](https://ea.azure.com)’da **Ayrılmış Örnek Ekle** seçeneği etkinleştirilmelidir. Ya da bu ayar devre dışı bırakılırsa, abonelikte bir EA yöneticisi olmanız gerekir.
+* Bulut çözümü sağlayıcısı (CSP) programı için, yalnızca yönetici aracıları veya satış aracıları Azure Cosmos DB ayrılmış kapasiteyi satın alabilir.
 
-## <a name="determine-the-required-throughput-before-purchase"></a>Satın almadan önce gerekli aktarım hızı belirleme
+## <a name="determine-the-required-throughput-before-purchase"></a>Satın almadan önce gereken aktarım hızını belirleme
 
-Rezervasyon boyutu toplam mevcut veya yakında-için--dağıtılması Azure Cosmos DB kaynaklarını kullanan aktarım hızı miktarına bağlı olmalıdır. Aşağıdaki yollarla gerekli aktarım hızını belirleyebilirsiniz:
+Ayırma boyutu, mevcut veya hemen dağıtılmış Azure Cosmos DB kaynakların kullanacağı toplam aktarım hızı miktarına bağlı olmalıdır. Gerekli aktarım hızını aşağıdaki yollarla belirleyebilirsiniz:
 
-* Geçmiş verileri arasında Azure Cosmos DB hesapları, site veritabanları ve koleksiyonlar için sağlanan aktarım tüm bölgelerde alın. Örneğin, günlük kullanım deyimden indirerek günlük ortalama sağlanan aktarım hızı değerlendirilmesi için `https://account.azure.com`.
+* Tüm bölgelerde Azure Cosmos DB hesaplarınız, veritabanları ve Koleksiyonlarınızda sağlanan toplam verimlilik için geçmiş verileri alın. Örneğin, günlük kullanım deyiminizi `https://account.azure.com` 'ten indirerek günlük ortalama sağlanan aktarım hızını değerlendirebilirsiniz.
 
-* Bir Kurumsal Anlaşma (EA) müşterisiyseniz, Azure Cosmos DB üretilen iş ayrıntılarını almak için kullanım dosyanıza indirebilirsiniz. Başvurmak **hizmet türü** değerini **ek bilgi** kullanım dosyasının bölümü.
+* Bir Kurumsal Anlaşma (EA) müşterisiyseniz, Azure Cosmos DB üretilen iş ayrıntılarını almak için kullanım dosyanızı indirebilirsiniz. Kullanım dosyasının **ek bilgi** bölümündeki **hizmet türü** değerine bakın.
 
-* Azure Cosmos DB hesaplarınızın sonraki bir veya üç yıl boyunca çalıştırmak için beklediğiniz tüm iş yükleri için ortalama aktarım hızı toplayamaz. Ardından, bu miktar için ayırma kullanabilirsiniz.
+* Azure Cosmos DB hesaplarınızdaki tüm iş yükleri için, bir sonraki bir veya üç yılda çalıştırmayı düşündüğünüz ortalama aktarım hızını belirleyebilirsiniz. Daha sonra bu miktarı rezervasyon için kullanabilirsiniz.
 
-## <a name="buy-azure-cosmos-db-reserved-capacity"></a>Azure Cosmos DB ayrılmış kapasite satın alın
+## <a name="buy-azure-cosmos-db-reserved-capacity"></a>Ayrılmış Azure Cosmos DB kapasitesi satın alın
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.  
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.  
 
-2. Seçin **tüm hizmetleri** > **ayırmaları** > **Ekle**.  
+2. **Ekle** >  **tüm hizmetler**  > **ayırmalar** ' ı seçin.  
 
-3. Gelen **rezervasyon satın** bölmesinde seçin **Azure Cosmos DB** yeni bir rezervasyon satın alma.  
+3. **Satın alma rezervasyonları** bölmesinden yeni bir ayırma satın almak için **Azure Cosmos DB** seçin.  
 
-4. Aşağıdaki tabloda açıklandığı gibi gerekli alanları doldurun:
+4. Gerekli alanları aşağıdaki tabloda açıklandığı gibi girin:
 
-   ![Ayrılmış kapasite formu doldurun](./media/cosmos-db-reserved-capacity/fill-reserved-capacity-form.png)
+   ![Ayrılmış kapasite formunu doldur](./media/cosmos-db-reserved-capacity/fill-reserved-capacity-form.png)
 
    |Alan  |Açıklama  |
    |---------|---------|
-   |`Scope`   |   Kaç aboneliğe ayırma ile ilişkili faturalandırma avantajından yararlanabilirsiniz denetimleri seçeneği. Ayırma belirli abonelikler için nasıl uygulanacağını denetler. <br/><br/>  Seçerseniz **paylaşılan**, ayırma indirimini herhangi bir abonelik, fatura bağlamı içinde çalışan Azure Cosmos DB örneklerine uygulanır. Fatura bağlamı için Azure kaydolan nasıl dayanır. Kurumsal müşteriler için Paylaşılan kapsam kayıt ve kayıt içinde tüm abonelikleri içerir. Kullandıkça Öde müşterileri için paylaşılan Hesap Yöneticisi tarafından oluşturulan Kullandıkça Öde tarifesine göre tek tek tüm aboneliklere kapsamdır.  <br/><br/>  Seçerseniz **tek abonelik**, ayırma indirimini seçili Abonelikteki Azure Cosmos DB örneklerine uygulanır. <br/><br/> Seçerseniz **tek bir kaynak grubu**, ayırma indirimini seçili abonelik ve seçilen kaynak grubunda bu Abonelikteki Azure Cosmos DB örneklerine uygulanır. <br/><br/> Ayırma kapsamı ayrılmış kapasite satın sonra değiştirebilirsiniz.  |
-   |Abonelik  |   Azure Cosmos DB için ödeme yapmak üzere kullanılan abonelik kapasite saklıdır. Seçili abonelikte ödeme yöntemini, ön maliyet şarj içinde kullanılır. Abonelik türü aşağıdakilerden biri olmalıdır: <br/><br/>  Kurumsal Anlaşma (sayılar sunar: MS-AZR-0017P veya MS-AZR - 0148 P): Kurumsal aboneliğiniz için ücretler kayıt ait parasal taahhüt bakiyeden kesilen veya kapasite aşımı olarak ücretlendirilir. <br/><br/> Kullandıkça Öde tarifesine göre tek tek abonelikle (sayılar sunar: MS-AZR-0003P veya MS-AZR - 0023 P): Kullandıkça Öde tarifesine göre tek tek bir aboneliği için ücretleri, aboneliğinizin kredi kartı veya fatura ödeme yöntemi için faturalandırılır.    |
-   | Kaynak Grubu | Kaynak grubu için ayrılmış kapasite indirim uygulanır. |
-   |Terim  |   Bir yıl veya üç yıl.   |
-   |Aktarım Türü   |  Üretilen iş istek birimi sağlanır. Her iki kurulumları için-sağlanan aktarım hızı için bir ayırma satın alabilir tek bölge de olarak birden çok bölgeye yazma yazar. Aktarım türü, aralarından seçim yapabileceğiniz iki değere sahiptir: 100 RU/sn başına saat ve 100 çok yöneticili RU/sn / saat.|
-   | Ayrılmış kapasite birimleri| Ayırmak istediğiniz üretilen iş miktarı. Bölge başına aktarım hızı, Cosmos DB için tüm kaynakları (örneğin, veritabanları veya kapsayıcıları) gerekli belirleyerek bu değeri hesaplayabilirsiniz. Ardından bu Cosmos DB veritabanınıza ile ilişkilendireceksiniz bölge sayısı ile çarpın. Örneğin: Beş bölge 1 milyon RU/sn ile her bölgede varsa, 5 milyon RU/sn rezervasyon kapasitesi satın alma için seçin. |
- 
+   |Kapsam   |   Ayırma ile ilişkili fatura avantajını kaç tane aboneliğin kullanabileceğinizi denetleyen seçenektir. Ayrıca, rezervasyonun belirli aboneliklere nasıl uygulanacağını de denetler. <br/><br/>  **Paylaşılan**' i seçerseniz, rezervasyon indirimi faturalandırma bağlamınızın içindeki herhangi bir abonelikte çalışan Azure Cosmos DB örneklerine uygulanır. Faturalandırma bağlamı, Azure 'a kaydolmanızı temel alır. Kurumsal müşteriler için, paylaşılan kapsam kayıt içindedir ve kayıt dahilindeki tüm abonelikleri içerir. Kullandıkça Öde müşterileri için, paylaşılan kapsam, hesap yöneticisi tarafından oluşturulan Kullandıkça Öde tarifesine sahip bireysel aboneliklerdir.  <br/><br/>  **Tek abonelik**' ı seçerseniz, rezervasyon indirimi seçili abonelikteki Azure Cosmos DB örneklerine uygulanır. <br/><br/> **Tek kaynak grubu**' nu seçerseniz, rezervasyon indirimi seçili abonelikteki Azure Cosmos DB örneklerine ve bu abonelikte seçilen kaynak grubuna uygulanır. <br/><br/> Ayrılan kapasiteyi satın aldıktan sonra rezervasyon kapsamını değiştirebilirsiniz.  |
+   |Abonelik  |   Azure Cosmos DB ayrılmış kapasite için ödeme yapmak üzere kullanılan abonelik. Seçili abonelikteki ödeme yöntemi, maliyetleri borçlandırmak üzere kullanılır. Abonelik aşağıdaki türlerden biri olmalıdır: <br/><br/>  Kurumsal Anlaşma (teklif numaraları: MS-AZR-0017P veya MS-AZR-0148P): kurumsal bir abonelik Için ücretler, kayıt parasal taahhüt bakiyesinden düşülür veya fazla kullanım olarak ücretlendirilir. <br/><br/> Kullandıkça Öde tarifesine sahip tek tek abonelik (teklif numaraları: MS-AZR-0003P veya MS-AZR-0023P): Kullandıkça Öde tarifesine sahip bireysel bir abonelik Için ücretler, abonelik üzerindeki kredi kartına veya fatura ödeme yöntemine faturalandırılır.    |
+   | Kaynak Grubu | Ayrılmış kapasite iskontosunun uygulandığı kaynak grubu. |
+   |Sözleşme Dönemi  |   Bir yıl veya üç yıl.   |
+   |Aktarım hızı türü   |  Aktarım hızı, istek birimleri olarak sağlanır. Her iki kurulum-tek bölge yazma işlemlerinin yanı sıra birden çok bölgeye yazma için sağlanan aktarım hızı için bir rezervasyon satın alabilirsiniz. Verimlilik türü arasından seçim yapabileceğiniz iki değer vardır: Saat başına 100 RU/sn ve saat başına 100 Multi-Master RU/s.|
+   | Ayrılmış Kapasite birimleri| Ayırmak istediğiniz üretilen iş miktarı. Bölge başına tüm Cosmos DB kaynaklarınız (örneğin, veritabanları veya kapsayıcılar) için gereken aktarım hızını belirleyerek bu değeri hesaplayabilirsiniz. Daha sonra Cosmos veritabanınızla ilişkilendirdiğiniz bölge sayısına göre çarpmanız gerekir. Örneğin: her bölgede 1.000.000 RU/sn ile beş bölge varsa, rezervasyon kapasitesi satın alma için 5.000.000 RU/sn seçeneğini belirleyin. |
 
-5. Formu doldurduktan sonra ayrılmış bir kapasite satın almanız için gereken fiyat hesaplanır. Çıkış Ayrıca seçili seçeneklerle alma indirim yüzdesi gösterilir. İleri'yi **seçin**
 
-6. İçinde **rezervasyon satın** bölmesinde, indirim ve fiyat rezervasyon gözden geçirin. Bu rezervasyon fiyat, tüm bölgelerde sağlanan aktarım hızı ile Azure Cosmos DB kaynakları için geçerlidir.  
+5. Formu doldurduktan sonra, ayrılan kapasiteyi satın almak için gereken fiyat hesaplanır. Çıktı Ayrıca, seçilen seçeneklerle aldığınız indirimin yüzdesini gösterir. Sonra **Seç** ' e tıklayın
 
-   ![Ayrılmış kapasite özeti](./media/cosmos-db-reserved-capacity/reserved-capacity-summary.png)
+6. **Satın alma rezervasyonları** bölmesinde, rezervasyonun iskontosunu ve fiyatını gözden geçirin. Bu rezervasyon fiyatı, tüm bölgelerde sağlanan aktarım hızına sahip Azure Cosmos DB kaynakları için geçerlidir.  
 
-7. Seçin **gözden geçir + satın alma** ardından **hemen satın alın**. Satın alma başarılı olduğunda aşağıdaki sayfayı görürsünüz:
+   ![Ayrılmış kapasite Özeti](./media/cosmos-db-reserved-capacity/reserved-capacity-summary.png)
 
-Rezervasyon satın alma sonra Rezervasyon terimleriyle eşleşen tüm mevcut Azure Cosmos DB kaynaklarına hemen uygulanır. Mevcut Azure Cosmos DB kaynaklar yoksa, ayırma koşullarını karşılayan yeni bir Cosmos DB örneğine dağıttığınızda ayırmanın geçerli olur. Her iki durumda da, ayırma dönemi bir başarılı satın alma işleminden hemen başlar.
+7. **Gözden geçir + satın al** ' ı seçin ve **Şimdi satın alın**. Satın alma işlemi başarılı olduğunda aşağıdaki sayfayı görürsünüz:
 
-Rezervasyonunuz süresi dolduğunda, Azure Cosmos DB örneklerinizin çalışmaya devam eder ve normal Kullandıkça Öde fiyatları üzerinden faturalandırılır.
+Bir ayırma satın aldıktan sonra, rezervasyon koşullarına uyan mevcut Azure Cosmos DB kaynaklarına hemen uygulanır. Mevcut Azure Cosmos DB kaynağınız yoksa, rezervasyon koşullarına uyan yeni bir Cosmos DB örneği dağıttığınızda rezervasyon uygulanır. Her iki durumda da rezervasyon dönemi, başarılı bir satın alma işleminden hemen sonra başlar.
 
-## <a name="cancellation-and-exchanges"></a>İptal ve değişimler
+Rezervasyonunuzun süresi dolmuşsa Azure Cosmos DB örneklerinizin çalıştırılması devam eder ve normal Kullandıkça Öde tarifesine göre faturalandırılır.
 
-Şu ayrılmış Kapasite tanımlama konusunda yardım için bkz: [ayırma indirimi, Azure Cosmos DB'ye nasıl uygulandığını anlamanız](../billing/billing-understand-cosmosdb-reservation-charges.md). İhtiyacınız olursa iptal etmek veya bir Azure Cosmos DB ayırması exchange görmek [ayırma değişimleri ve para iadesi](../billing/billing-azure-reservations-self-service-exchange-and-refund.md).
+## <a name="cancel-exchange-or-refund-reservations"></a>Rezervasyonları iptal etme, değiştirme veya para iadesi alma
+
+Doğru ayrılmış kapasiteyi tanımlamaya yönelik yardım için bkz. [rezervasyon iskontosunun Azure Cosmos DB nasıl uygulanacağını anlayın](../billing/billing-understand-cosmosdb-reservation-charges.md).
+
+Belirli sınırlamalarla rezervasyonları iptal edebilir, değiştirebilir veya para iadesi alabilirsiniz. Daha fazla bilgi için bkz. [Azure Ayrılmış Sanal Makine Örnekleri için self servis değişimler ve para iadeleri](../billing/billing-azure-reservations-self-service-exchange-and-refund.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ayırma indirimi, öznitelikleri ve ayırma kapsamı eşleşen Azure Cosmos DB kaynaklarını otomatik olarak uygulanır. Azure portalı, PowerShell, Azure CLI veya API üzerinden rezervasyon kapsamı güncelleştirebilirsiniz.
+Rezervasyon indirimi, ayırma kapsamı ve öznitelikleriyle eşleşen Azure Cosmos DB kaynaklarına otomatik olarak uygulanır. Azure portal, PowerShell, Azure CLı veya API aracılığıyla rezervasyon kapsamını güncelleştirebilirsiniz.
 
-*  Nasıl ayrılmış kapasite indirimleri, Azure Cosmos DB'ye uygulandığını öğrenmek için bkz [Azure ayırma indirimi anlama](../billing/billing-understand-cosmosdb-reservation-charges.md).
+*  Ayrılmış kapasite iskontolarının Azure Cosmos DB nasıl uygulanacağını öğrenmek için bkz. [Azure rezervasyon ıskontosunu anlama](../billing/billing-understand-cosmosdb-reservation-charges.md).
 
-* Azure ayırmaları hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+* Azure rezervasyonları hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
 
    * [Azure ayırmaları nelerdir?](../billing/billing-save-compute-costs-reservations.md)  
    * [Azure ayırmalarını yönetme](../billing/billing-manage-reserved-vm-instance.md)  
-   * [Kurumsal kayıt için ayırma kullanımını anlama](../billing/billing-understand-reserved-instance-usage-ea.md)  
-   * [Kullandıkça Öde aboneliğinizi için ayırma kullanımını anlama](../billing/billing-understand-reserved-instance-usage.md)
-   * [Azure iş ortağı merkezi CSP programı ayırmalarını](https://docs.microsoft.com/partner-center/azure-reservations)
+   * [Kurumsal kaydınız için rezervasyon kullanımını anlama](../billing/billing-understand-reserved-instance-usage-ea.md)  
+   * [Kullandıkça Öde aboneliğiniz için rezervasyon kullanımını anlama](../billing/billing-understand-reserved-instance-usage.md)
+   * [Iş Ortağı Merkezi CSP programında Azure ayırmaları](https://docs.microsoft.com/partner-center/azure-reservations)
 
 ## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun.
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest).
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest).

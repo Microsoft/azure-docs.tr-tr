@@ -172,7 +172,7 @@ Veri nesnesi, içeriğini, her olay yayımcısı için farklıdır.
 
 | Özellik | Tür | Açıklama |
 | -------- | ---- | ----------- |
-| Modül kimliği | string | Modülün benzersiz tanımlayıcısı. Çıkış Modülü cihazlar için yalnızca alandır. Bu büyük küçük harfe duyarlı dize en fazla 128 karakter uzunluğunda olabilir ve ASCII 7 bit alfasayısal karakterlerin yanı sıra şu özel karakterleri destekler: `- : . + % _ # * ? ! ( ) , = @ ; $ '`. |
+| moduleId | string | Modülün benzersiz tanımlayıcısı. Çıkış Modülü cihazlar için yalnızca alandır. Bu büyük küçük harfe duyarlı dize en fazla 128 karakter uzunluğunda olabilir ve ASCII 7 bit alfasayısal karakterlerin yanı sıra şu özel karakterleri destekler: `- : . + % _ # * ? ! ( ) , = @ ; $ '`. |
 | deviceConnectionStateEventInfo | object | Cihaz bağlantı durumu olay bilgilerini
 | sequenceNumber | string | Yardımcı olan bağlı cihaz veya cihaz sırasını belirten bir sayı olayları bağlantısı kesildi. En son olay, bir sıra numarası olacaktır, önceki olay daha yüksek. Bu sayı tarafından 1'den fazla değiştirebilir, ancak kesin olarak artmaktadır. Bkz: [sıra numarası kullanmayı](../iot-hub/iot-hub-how-to-order-connection-state-events.md). |
 
@@ -180,9 +180,9 @@ Veri nesnesi, içeriğini, her olay yayımcısı için farklıdır.
 
 | Özellik | Tür | Açıklama |
 | -------- | ---- | ----------- |
-| Gövde | string | Bir CİHAZDAN ileti içeriği. |
+| body | string | Bir CİHAZDAN ileti içeriği. |
 | properties | string | Uygulama özellikleri iletiye eklenen kullanıcı tanımlı dizelerdir. Bu alanlar isteğe bağlıdır. |
-| Sistem Özellikleri | string | [Sistem Özellikleri](../iot-hub/iot-hub-devguide-routing-query-syntax.md#system-properties) içeriği ve iletilerin kaynak tanımlamanıza yardımcı olacaktır. Cihazın telemetri iletileriyle, JSON ve UTF-8'e ayarlayın ileti sistemi özelliklerinde contentEncoding contentType ile geçerli bir JSON biçiminde olmalıdır. Bu ayarlanmazsa, IOT Hub iletilerini taban 64 kodlanmış biçimde yazılacaktır.  |
+| system properties | string | [Sistem Özellikleri](../iot-hub/iot-hub-devguide-routing-query-syntax.md#system-properties) içeriği ve iletilerin kaynak tanımlamanıza yardımcı olacaktır. Cihazın telemetri iletileriyle, JSON ve UTF-8'e ayarlayın ileti sistemi özelliklerinde contentEncoding contentType ile geçerli bir JSON biçiminde olmalıdır. Bu ayarlanmazsa, IOT Hub iletilerini taban 64 kodlanmış biçimde yazılacaktır.  |
 
 İçin **cihaz oluşturulan** ve **cihaz silinmiş** IOT Hub olayları, veri nesnesi, aşağıdaki özellikleri içerir:
 

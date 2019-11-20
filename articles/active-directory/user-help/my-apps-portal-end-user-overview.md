@@ -1,6 +1,6 @@
 ---
 title: Uygulamaların portalına genel bakış - Azure Active Directory | Microsoft Docs
-description: Bir üst düzey genel bakış ve uygulamalarım portalında ve özellikleri hakkında daha fazla bilgi için bağlantılar.
+description: Üst düzey bir genel bakış ve uygulamalar portalı ve özellikleri hakkında daha fazla bilgi için bağlantılar.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -13,30 +13,30 @@ ms.date: 05/08/2019
 ms.author: lizross
 ms.custom: user-help
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e8948040ac338a855c55e2ff44536c900adea7f6
-ms.sourcegitcommit: 399db0671f58c879c1a729230254f12bc4ebff59
+ms.openlocfilehash: a8827119d591ee1e3f12d0e8d8dcfc7ab88ce987
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/09/2019
-ms.locfileid: "65470705"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68383046"
 ---
 # <a name="what-is-the-my-apps-portal"></a>Uygulamalarım portalı nedir?
 
-Web tabanlı iş veya Okul hesabınızı kullanabilirsiniz **uygulamalarım** görüntülemek ve bazı görmek için profili ve hesabı bilgilerinizi güncelleştirmek için kuruluşunuzun bulut tabanlı uygulamalar, birçoğu başlatmak için portal, **grupları** bilgi edinmek ve gerçekleştirmek için **erişim gözden geçirmeleriyle** grupları ve uygulamaları için. Erişiminiz yoksa, **uygulamalarım** portal, Yardım masanız için izni başvurmanız gerekir.
+İş veya okul hesabınızı Web tabanlı **My Apps** portalından kullanarak kuruluşunuzun bulut tabanlı uygulamalarının çoğunu görüntüleyip başlatabilir, profil ve hesap bilgilerinizin bazılarını güncelleştirebilir, **gruplarınızın** bilgilerini görebilir ve şunları yapabilirsiniz Uygulamalarınız ve gruplarınız için erişim gözden geçirmeleri. **Uygulamalarım** portalına erişiminiz yoksa, Izin Için yardım masanızla iletişime geçin.
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-end-user-my-apps-portal.md)]
 
 >[!Important]
->Bu içerik kullanıcılara yöneliktir. Yöneticiyseniz, bulut tabanlı uygulamalarınızı yönetin ve ayarlama hakkında daha fazla bilgi bulabilirsiniz [uygulama yönetimi belgeleri](https://docs.microsoft.com/azure/active-directory/manage-apps).
+>Bu içerik kullanıcılara yöneliktir. Yöneticiyseniz, [uygulama yönetimi belgelerinde](https://docs.microsoft.com/azure/active-directory/manage-apps)bulut tabanlı uygulamalarınızın nasıl ayarlanacağı ve yönetileceği hakkında daha fazla bilgi edinebilirsiniz.
 
-## <a name="my-apps-portal-articles"></a>My Apps portal makaleleri
+## <a name="my-apps-portal-articles"></a>Uygulamalarım portalı makaleleri
 
-Ayrıntılı bilgi ve kullanılabilir sunulanlar hakkında yönergeler için **uygulamalarım** portalı, aşağıdaki makalelere bakın:
+**Uygulamalarım** portalından nelerin kullanılabildiği hakkında ayrıntılı bilgi ve yönergeler için aşağıdaki makalelere bakın:
 
 |Makale |Açıklama |
 |------|------------|
-|[Uygulamalarım portalına erişme ve portalı kullanma](my-apps-portal-end-user-access.md)|Erişimi ve kullanımı hakkında yönergeler **uygulamalarım** görüntülemek ve cihaza göre kuruluşunuzun bulut tabanlı uygulamaları başlatmak için web portalı.|
-|[Profil ve hesap bilgilerinizi güncelleştirme](my-apps-portal-end-user-update-profile.md)|Görünür kişisel bilgilerinizi güncelleştirmek hakkında yönergeler **profili** sayfasının **uygulamalarım** portalı.|
-|[Grupları bilgilerinizi güncelleştirin](my-apps-portal-end-user-groups.md)|Görüntülemek ve üzerinde grupları ile ilgili bilgilerinizi yönetmek hakkında yönergeler **grupları** sayfasının **uygulamalarım** portalı.|
-|[Kendi erişim gözden geçirmelerinizi gerçekleştirme](my-apps-portal-end-user-access-reviews.md)|Görüntüleme ve gerçekleştirme hakkında yönergeler **erişim gözden geçirmeleriyle** izin verme veya kuruluşunuzun uygulamaları için kullanıcı veya grup erişimi engelle **erişim gözden geçirmeleri** sayfasının **uygulamalarım** Portalı.|
-|[Uygulamalarım portal sorunlarını giderme](my-apps-portal-end-user-troubleshoot.md)|İle ilgili sorunlar için bazı sorun giderme önerilerini gözden **uygulamalarım** portal, önce Yardım için Yardım Masanızla iletişime geçin.|
+| [Uygulamalarım portalına erişme ve portalı kullanma](my-apps-portal-end-user-access.md) | Cihaza bağlı olarak, kuruluşunuzun bulut tabanlı uygulamalarını görüntülemek ve başlatmak için **My Apps** Web portalına erişme ve kullanma yönergeleri. |
+| [Profil ve hesap bilgilerinizi güncelleştirme](my-apps-portal-end-user-update-profile.md) |**Uygulamalarım** portalının **profil** sayfasında görüntülenen kişisel bilgilerinizi güncelleştirme yönergeleri. |
+| [Gruplarınızın bilgilerini güncelleştirme](my-apps-portal-end-user-groups.md)|Gruplarla ilgili bilgilerinizin, **uygulamalar** portalının **gruplar** sayfasında nasıl görüntüleneceği ve yönetileceği ile ilgili yönergeler. |
+| [Kendi erişim gözden geçirmelerinizi gerçekleştirme](my-apps-portal-end-user-access-reviews.md) |**Uygulamalarım** portalındaki **erişim İncelemeleri** sayfasında, kuruluşunuzun uygulamalarına Kullanıcı veya grup erişimine izin vermek veya erişimi reddetmek için **erişim incelemelerini** görüntüleme ve gerçekleştirmeye yönelik yönergeler. |
+| [Uygulamalarım portalından sorun giderme](my-apps-portal-end-user-troubleshoot.md) |Yardım için yardım masanızla iletişime geçmeden önce **uygulamalarım** portalındaki sorunlar için bazı sorun giderme önerilerini gözden geçirin. |

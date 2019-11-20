@@ -1,116 +1,120 @@
 ---
-title: Kurumsal güvenlik Enterprise - Azure HDInsight kümelerini yönetme
-description: Kurumsal güvenlik paketi ile HDInsight kümelerini nasıl yöneteceğinizi öğrenin.
+title: Kurumsal Güvenlik Paketi kümelerini yönetme-Azure HDInsight
+description: Azure HDInsight kümelerini Kurumsal Güvenlik Paketi ile yönetmeyi öğrenin.
 ms.service: hdinsight
 author: omidm1
 ms.author: omidm
-ms.reviewer: mamccrea
+ms.reviewer: jasonh
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 08/24/2018
-ms.openlocfilehash: 951bd74c67c77c944a17e41646c4fe49ef46b33f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 35accc587fe197da751a8695e3ec0b21ea9fbbd4
+ms.sourcegitcommit: 38251963cf3b8c9373929e071b50fd9049942b37
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64725682"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73044912"
 ---
-# <a name="manage-hdinsight-clusters-with-enterprise-security-package"></a>Kurumsal güvenlik paketi ile HDInsight kümelerini yönetme
-Kullanıcılar ve roller HDInsight Kurumsal güvenlik paketi (ESP) ve ESP kümelerini nasıl yöneteceğinizi öğrenin.
+# <a name="manage-hdinsight-clusters-with-enterprise-security-package"></a>HDInsight kümelerini Kurumsal Güvenlik Paketi ile yönetme
+HDInsight 'daki kullanıcıları ve rolleri Kurumsal Güvenlik Paketi (ESP) ve ESP kümelerinin nasıl yönetileceğini öğrenin.
 
 ## <a name="use-vscode-to-link-to-domain-joined-cluster"></a>Etki alanına katılmış kümeye bağlamak için VSCode kullanma
 
-Yönetilen Apache Ambari kullanıcı adı kullanarak normal bir küme bağlantısını, ayrıca etki alanı kullanıcı adı kullanarak bir güvenlik Apache Hadoop kümesi bağlantı (örneğin: user1@contoso.com).
-1. Seçerek komut paletini açın **CTRL + SHIFT + P**yazıp enter **HDInsight: Küme bağlantı**.
+Apache ambarı yönetilen Kullanıcı adı ' nı kullanarak normal kümeyi bağlayabilir, ayrıca etki alanı Kullanıcı adı (örneğin: `user1@contoso.com`) kullanarak bir güvenlik Apache Hadoop kümesi de bağlayabilirsiniz.
 
-   ![bağlantı kümesi komutu](./media/apache-domain-joined-manage/link-cluster-command.png)
+1. **CTRL + SHIFT + P**tuşlarına basarak komut paletini açın ve ardından **HDInsight: bir kümeyi bağla**' yı girin.
 
-2. HDInsight girin küme URL'si, kullanıcı adı -> giriş -> giriş parola seçin -> küme türü -> bunu gösterir başarı bilgisi doğrulama geçirilmiş.
-   
-   ![bağlantı kümesi iletişim kutusu](./media/apache-domain-joined-manage/link-cluster-process.png)
+   ![komut paleti, bir kümeyi bağlama](./media/apache-domain-joined-manage/link-cluster-command.png)
+
+2. HDInsight kümesi URL 'sini girin-> girişi Kullanıcı adı-> giriş parolası-> küme türünü seçin-> doğrulama başarılı olursa başarı bilgilerini gösterir.
+
+   ![bağlama kümesi işlem adımları iletişim kutusu](./media/apache-domain-joined-manage/link-cluster-process.png)
 
    > [!NOTE]  
-   > Küme hem Azure aboneliğinizde oturum ve bir kümeye bağlı bağlı kullanıcı adı ve parola kullanılır. 
-   
-3. Komutunu kullanarak bir bağlı küme görebilirsiniz **listesi küme**. Artık bağlantılı bu küme için bir komut gönderebilirsiniz.
+   > Küme hem Azure abonelikte hem de bir kümeye bağlandığında, bağlantılı Kullanıcı adı ve parola kullanılır.
 
-   ![bağlı küme](./media/apache-domain-joined-manage/linked-cluster.png)
+3. Komut **listesi kümesi**kullanarak bağlantılı bir küme görebilirsiniz. Artık bu bağlantılı kümeye bir komut dosyası gönderebilirsiniz.
 
-4. Ayrıca, girişini yaparak tarafından bir küme kesebilir **HDInsight: Bir küme bağlantısını** komut paletinden.
+   ![küme listeleme komut çıktısı doğrulaması](./media/apache-domain-joined-manage/hdinsight-linked-cluster.png "bağlı küme")
+
+4. Ayrıca HDInsight 'a giriş yaparak bir kümenin bağlantısını kaldırabilirsiniz **: bir kümenin bağlantısını** komut paleti.
 
 ## <a name="use-intellij-to-link-to-domain-joined-cluster"></a>Etki alanına katılmış kümeye bağlamak için IntelliJ kullanma
 
-Ambari yönetilen kullanıcı adı kullanarak normal bir küme bağlantısını, ayrıca etki alanı kullanıcı adı kullanarak bir güvenlik hadoop kümesini bağlamak (örneğin: user1@contoso.com). 
-1. Tıklayın **küme bağlantı** gelen **Azure Gezgini**.
+Ambarı yönetilen Kullanıcı adı ' nı kullanarak normal kümeyi bağlayabilir, ayrıca etki alanı Kullanıcı adı ' nı kullanarak bir güvenlik Hadoop kümesini bağlayabilirsiniz (örneğin: `user1@contoso.com`).
 
-   ![bağlantı kümesi bağlam menüsü](./media/apache-domain-joined-manage/link-a-cluster-context-menu.png)
+1. **Azure Explorer**'dan **bir kümeyi bağla** ' yı tıklatın.
 
-2. Girin **küme adı**, **kullanıcı adı** ve **parola**. Kullanıcı adı ve parola kimlik doğrulama hatası geldiyseniz denetlemek gerekir. İsteğe bağlı olarak, depolama hesabı depolama anahtarı ekleyin ardından depolama kapsayıcısından bir kapsayıcıyı seçin. Depolama Gezgini'nde soldaki ağaçtan depolama bilgilerini içindir
-   
-   ![bağlantı kümesi iletişim kutusu](./media/apache-domain-joined-manage/link-a-cluster-dialog.png)
+   ![bağlama kümesi bağlam menüsü IntelliJ](./media/apache-domain-joined-manage/link-a-cluster-context-menu.png)
+
+2. **Küme adı**, **Kullanıcı adı** ve **parola**girin. Kimlik doğrulama hatası varsa Kullanıcı adını ve parolayı denetlemeniz gerekir. İsteğe bağlı olarak, depolama hesabı, depolama anahtarı ekleyin ve depolama kapsayıcısından bir kapsayıcı seçin. Depolama bilgileri, sol ağaçta Depolama Gezgini içindir
+
+   ![Azure Explorer bağlantı kümesi iletişim kutusu IntelliJ](./media/apache-domain-joined-manage/link-a-cluster-dialog.png)
 
    > [!NOTE]  
-   > Küme hem Azure aboneliğinizde oturum ve bir kümeye bağlı bağlantılı depolama anahtarı, kullanıcı adı ve parola kullanın.
-   > ![Depolama Gezgini'nde Intellij](./media/apache-domain-joined-manage/storage-explorer-in-IntelliJ.png)
+   > Küme hem Azure abonelikte hem de bir kümeye bağlandığında bağlı depolama anahtarını, Kullanıcı adını ve parolayı kullanırız.
+   > 
+   > ![IntelliJ 'de Azure Gezgini depolama hesabı](./media/apache-domain-joined-manage/storage-explorer-in-IntelliJ.png)
 
-   
-3. Bağlı küme gördüğünüz **HDInsight** giriş bilgileri doğru olması durumunda düğümü. Artık bağlantılı bu kümeye bir uygulama gönderebilir.
+3. Giriş bilgileri doğru ise, **HDInsight** düğümünde bağlantılı bir küme görebilirsiniz. Artık, bu bağlantılı kümeye bir uygulama gönderebilirsiniz.
 
-   ![bağlı küme](./media/apache-domain-joined-manage/linked-cluster-intellij.png)
+   ![Azure Explorer bağlantılı küme IntelliJ](./media/apache-domain-joined-manage/linked-cluster-intellij.png "bağlı küme IntelliJ]")
 
-4. Ayrıca, bir kümeden kesebilir **Azure Gezgini**.
-   
-   ![bağlantısız küme](./media/apache-domain-joined-manage/unlink.png)
+4. Ayrıca bir kümenin bağlantısını **Azure Explorer**'da kaldırabilirsiniz.
+
+   ![Azure Explorer bağlantısı olmayan küme IntelliJ](./media/apache-domain-joined-manage/hdinsight-unlink-cluster.png)
 
 ## <a name="use-eclipse-to-link-to-domain-joined-cluster"></a>Etki alanına katılmış kümeye bağlamak için Eclipse kullanma
 
-Ambari yönetilen kullanıcı adı kullanarak normal bir küme bağlantısını, ayrıca etki alanı kullanıcı adı kullanarak bir güvenlik hadoop kümesini bağlamak (örneğin: user1@contoso.com).
-1. Tıklayın **küme bağlantı** gelen **Azure Gezgini**.
+Ambarı yönetilen Kullanıcı adı ' nı kullanarak normal kümeyi bağlayabilir, ayrıca etki alanı Kullanıcı adı ' nı kullanarak bir güvenlik Hadoop kümesini bağlayabilirsiniz (örneğin: `user1@contoso.com`).
 
-   ![bağlantı kümesi bağlam menüsü](./media/apache-domain-joined-manage/link-a-cluster-context-menu.png)
+1. **Azure Explorer**'dan **bir kümeyi bağla** ' yı tıklatın.
 
-2. Girin **küme adı**, **kullanıcı adı** ve **parola**, ardından kümesini bağlamak için Tamam düğmesine tıklayın. İsteğe bağlı olarak, depolama hesabı, depolama anahtarını girin ve sonra soldaki ağaç görünümünde çalışmak Depolama Gezgini'ni depolama kapsayıcısı seçin
-   
-   ![bağlantı kümesi iletişim kutusu](./media/apache-domain-joined-manage/link-cluster-dialog.png)
-   
+   ![bağlama kümesi bağlam menüsü tutulma](./media/apache-domain-joined-manage/link-a-cluster-context-menu.png)
+
+2. Küme **adı**, **Kullanıcı adı** ve **parola**girin, ardından kümeyi bağlamak için Tamam düğmesine tıklayın. İsteğe bağlı olarak, depolama hesabı, depolama anahtarı girin ve ardından Depolama Gezgini 'nin sol ağaç görünümünde çalışması için depolama kapsayıcısını seçin
+
+   ![Azure Gezgini bağlantı kümesi iletişim kutusu tutulma](./media/apache-domain-joined-manage/link-cluster-dialog1.png)
+
    > [!NOTE]  
-   > Küme hem Azure aboneliğinizde oturum ve bir kümeye bağlı bağlantılı depolama anahtarı, kullanıcı adı ve parola kullanın.
-   > ![Depolama Gezgini'nde Eclipse](./media/apache-domain-joined-manage/storage-explorer-in-Eclipse.png)
+   > Küme hem Azure abonelikte hem de bir kümeye bağlandığında bağlı depolama anahtarını, Kullanıcı adını ve parolayı kullanırız.
+   > 
+   > ![Azure Explorer depolama hesabı, tutulma 'da](./media/apache-domain-joined-manage/storage-explorer-in-Eclipse.png)
 
-3. Bağlı küme gördüğünüz **HDInsight** giriş bilgileri doğru olması durumunda Tamam düğmesine tıklandıktan sonra düğüm. Artık bağlantılı bu kümeye bir uygulama gönderebilir.
+3. Giriş bilgileri doğru ise, Tamam düğmesine tıkladıktan sonra **HDInsight** düğümünde bağlantılı bir küme görebilirsiniz. Artık, bu bağlantılı kümeye bir uygulama gönderebilirsiniz.
 
-   ![bağlı küme](./media/apache-domain-joined-manage/linked-cluster-intellij.png)
+   ![Azure Explorer bağlantılı küme tutulma](./media/apache-domain-joined-manage/linked-cluster-intellij.png)
 
-4. Ayrıca, bir kümeden kesebilir **Azure Gezgini**.
+4. Ayrıca bir kümenin bağlantısını **Azure Explorer**'da kaldırabilirsiniz.
    
-   ![bağlantısız küme](./media/apache-domain-joined-manage/unlink.png)
+   ![Azure Explorer bağlantısı olmayan küme tutulma](./media/apache-domain-joined-manage/hdinsight-unlink-cluster.png)
 
-## <a name="access-the-clusters-with-enterprise-security-package"></a>Kurumsal güvenlik paketi kümeleriyle erişin.
+## <a name="access-the-clusters-with-enterprise-security-package"></a>Kümelere Kurumsal Güvenlik Paketi erişin.
 
-Kurumsal güvenlik paketi (daha önce HDInsight Premium da bilinir), burada kimlik doğrulaması Active Directory ve Apache Ranger'ı ve depolama ACL'leri (ADLS ACL'ler) tarafından yetkilendirme gerçekleştirilir kümedeki birden çok kullanıcı erişim sağlar. Yetkilendirme, birden çok kullanıcı arasında güvenli sınırları sağlar ve yalnızca ayrıcalıklı kullanıcıların yetkilendirme ilkelerine bağlı olarak veri erişimi sağlar.
+Kurumsal Güvenlik Paketi (önceki adı HDInsight Premium), kümeye çok kullanıcılı erişim sağlar ve bu kimlik doğrulaması, Apache Ranger ve depolama ACL 'Leri (ADLS ACL 'Ler) tarafından Active Directory ve yetkilendirmeyle yapılır. Yetkilendirme, birden çok kullanıcı arasında güvenli sınırlar sağlar ve yalnızca ayrıcalıklı kullanıcıların yetkilendirme ilkelerine göre verilere erişmesine izin verir.
 
-Güvenlik ve kullanıcı yalıtımı Kurumsal güvenlik paketi ile bir HDInsight kümesi için önemlidir. Bu gereksinimleri karşılamak için Kurumsal güvenlik paketi şu cmdlet'le kümeye SSH erişimi engellenir. Aşağıdaki tabloda, her küme türü için önerilen erişim yöntemleri gösterilmektedir:
+Güvenlik ve Kullanıcı yalıtımı, Kurumsal Güvenlik Paketi bir HDInsight kümesi için önemlidir. Bu gereksinimleri karşılamak için Kurumsal Güvenlik Paketi ile kümeye SSH erişimi engellenir. Aşağıdaki tabloda her küme türü için önerilen erişim yöntemleri gösterilmektedir:
 
 |İş yükü|Senaryo|Erişim yöntemi|
 |--------|--------|-------------|
-|Apache Hadoop|Hive – etkileşimli iş/sorgular  |<ul><li>[Beeline](#beeline)</li><li>[Hive görünümü](../hadoop/apache-hadoop-use-hive-ambari-view.md)</li><li>[ODBC/JDBC – Power BI](../hadoop/apache-hadoop-connect-hive-power-bi.md)</li><li>[Visual Studio Araçları](../hadoop/apache-hadoop-visual-studio-tools-get-started.md)</li></ul>|
-|Apache Spark|Etkileşimli iş/sorgular, PySpark etkileşimli|<ul><li>[Beeline](#beeline)</li><li>[Livy ile Zeppelin](../spark/apache-spark-zeppelin-notebook.md)</li><li>[Hive görünümü](../hadoop/apache-hadoop-use-hive-ambari-view.md)</li><li>[ODBC/JDBC – Power BI](../hadoop/apache-hadoop-connect-hive-power-bi.md)</li><li>[Visual Studio Araçları](../hadoop/apache-hadoop-visual-studio-tools-get-started.md)</li></ul>|
-|Apache Spark|Spark gönderme, PySpark batch senaryoları|<ul><li>[Livy](../spark/apache-spark-livy-rest-interface.md)</li></ul>|
+|Apache Hadoop|Hive – etkileşimli Işler/sorgular  |<ul><li>[Beeline](#beeline)</li><li>[Hive görünümü](../hadoop/apache-hadoop-use-hive-ambari-view.md)</li><li>[ODBC/JDBC – Power BI](../hadoop/apache-hadoop-connect-hive-power-bi.md)</li><li>[Visual Studio Araçları](../hadoop/apache-hadoop-visual-studio-tools-get-started.md)</li></ul>|
+|Apache Spark|Etkileşimli Işler/sorgular, PySpark etkileşimli|<ul><li>[Beeline](#beeline)</li><li>[Livy ile Zeppelin](../spark/apache-spark-zeppelin-notebook.md)</li><li>[Hive görünümü](../hadoop/apache-hadoop-use-hive-ambari-view.md)</li><li>[ODBC/JDBC – Power BI](../hadoop/apache-hadoop-connect-hive-power-bi.md)</li><li>[Visual Studio Araçları](../hadoop/apache-hadoop-visual-studio-tools-get-started.md)</li></ul>|
+|Apache Spark|Batch senaryoları – Spark gönderme, PySpark|<ul><li>[Livy](../spark/apache-spark-livy-rest-interface.md)</li></ul>|
 |Etkileşimli sorgu (LLAP)|Etkileşimli|<ul><li>[Beeline](#beeline)</li><li>[Hive görünümü](../hadoop/apache-hadoop-use-hive-ambari-view.md)</li><li>[ODBC/JDBC – Power BI](../hadoop/apache-hadoop-connect-hive-power-bi.md)</li><li>[Visual Studio Araçları](../hadoop/apache-hadoop-visual-studio-tools-get-started.md)</li></ul>|
-|Tüm|Özel uygulama yükleme|<ul><li>[Betik eylemleri](../hdinsight-hadoop-customize-cluster-linux.md)</li></ul>|
+|Herhangi biri|Özel uygulama yüklemesi|<ul><li>[Betik eylemleri](../hdinsight-hadoop-customize-cluster-linux.md)</li></ul>|
 
    > [!NOTE]  
-   > Jupyter yüklü/desteklenir Kurumsal güvenlik paketi değil.
+   > Jupyıter Kurumsal Güvenlik Paketi ' de yüklü değil/desteklenmiyor.
 
-Standart API'lerini kullanarak, güvenlik açısından yardımcı olur. Ayrıca, aşağıdaki avantajlardan yararlanabilirsiniz:
+Standart API 'Lerin kullanılması güvenlik açısından yardımcı olur. Ayrıca, aşağıdaki avantajları elde edersiniz:
 
-1.  **Yönetim** – kodunuzu yönetmenizi ve standart API'lerini kullanarak işleri otomatik hale getirin – Livy vb. HS2.
-2.  **Denetim** – SSH ile denetlemek için hangi kullanıcıların SSH bir yolu yoktur kümeye vardı. Standart uç noktaları aracılığıyla işleri oluşturulduğunda kullanıcı bağlamında yürütülen gibi bu durum gideremezsiniz. 
+- **Yönetim** : Standart API 'ler, HS2 vb. kullanarak kodunuzu yönetebilir ve işleri otomatikleştirebilirsiniz.
+- **Denetim** – SSH ile, KULLANıCıLARıN kümeye SSH 'yi denetlemesi için bir yol yoktur. Bu durum, işler kullanıcı bağlamında yürütülene kadar standart uç noktalar aracılığıyla oluşturulduğunda bu durum değildir. 
 
 
 
 ### <a name="beeline"></a>Beeline kullanma 
-Beeline makinenizde yükleyin ve genel internet üzerinden bağlanma, aşağıdaki parametreleri kullanın: 
+Makinenize Beeline yükleyip genel İnternet üzerinden bağlanın ve aşağıdaki parametreleri kullanın: 
 
 ```
 - Connection string: -u 'jdbc:hive2://<clustername>.azurehdinsight.net:443/;ssl=true;transportMode=http;httpPath=/hive2'
@@ -118,13 +122,13 @@ Beeline makinenizde yükleyin ve genel internet üzerinden bağlanma, aşağıda
 - Cluster login password -p 'password'
 ```
 
-Beeline yerel olarak yüklü olması ve bir Azure sanal ağ üzerinden bağlanma, aşağıdaki parametreleri kullanın: 
+Yerel olarak yüklü olan ve bir Azure sanal ağı üzerinden bağlantı varsa, aşağıdaki parametreleri kullanın: 
 
 ```
 - Connection string: -u 'jdbc:hive2://<headnode-FQDN>:10001/;transportMode=http'
 ```
 
-Bir baş düğüm tam etki alanı adını bulmak için yönetme belgenin Ambari REST API'yi kullanarak HDInsight bilgileri kullanın.
+Bir headnode 'un tam etki alanı adını bulmak için, ambarı REST API belgelerini kullanarak HDInsight 'ı yönetme bölümündeki bilgileri kullanın.
 
 
 
@@ -139,87 +143,87 @@ Bir baş düğüm tam etki alanı adını bulmak için yönetme belgenin Ambari 
 
 
 
-## <a name="users-of-hdinsight-clusters-with-esp"></a>ESP HDInsight kümeleriyle kullanıcıları
-ESP HDInsight küme, küme oluşturma sırasında oluşturulan iki kullanıcı hesapları vardır:
+## <a name="users-of-hdinsight-clusters-with-esp"></a>ESP ile HDInsight kümelerinin kullanıcıları
+ESP olmayan bir HDInsight kümesi, küme oluşturma sırasında oluşturulan iki kullanıcı hesabına sahiptir:
 
-* **Ambari Yöneticisi**: Bu hesap olarak da bilinir, *Hadoop kullanıcısıyla* veya *HTTP kullanıcısı*. Bu hesap için Ambari https:// oturum açmak için kullanılan&lt;clustername >. azurehdinsight.net. Ayrıca, Hive ODBC sürücüsünü ve BI Araçları (örneğin, Excel, Power BI veya Tableau) kimlik doğrulama Ambari görünümleri sorguları çalıştırmak ve dış Araçlar (örneğin, PowerShell, templeton da, Visual Studio) aracılığıyla işleri yürütmek için de kullanılabilir.
+* **Ambarı Yöneticisi**: Bu hesap *Hadoop kullanıcısı* veya *http kullanıcısı*olarak da bilinir. Bu hesap, https://&lt;clustername >. azurehdinsight. net konumundaki ambarı 'nda oturum açmak için kullanılabilir. Ayrıca, ambarı görünümlerinde sorguları çalıştırmak, dış araçlarla (örneğin, PowerShell, Temptaton, Visual Studio) işleri yürütmek ve Hive ODBC sürücüsü ve BI araçları (örneğin, Excel, Power BI veya Tableau) ile kimlik doğrulaması yapmak için de kullanılabilir.
 
-Bir HDInsight kümesi ile ESP Ambari Yöneticisi ek olarak üç yeni kullanıcıları içeren
+ESP içeren bir HDInsight kümesinde, ambarı yöneticisine ek olarak üç yeni kullanıcı vardır.
 
-* **Ranger yönetici**:  Bu hesap yerel Apache Ranger yönetici hesabıdır. Bir active directory etki alanı kullanıcısı değil. Bu hesap ilkeleri ayarlayın ve (söz konusu kullanıcıların ilkeleri yönetebilmeniz için) diğer kullanıcılara yönetici veya yönetici temsilcileri yapmak için kullanılabilir. Varsayılan olarak, kullanıcı adı: *yönetici* ve parola Ambari Yöneticisi parolasını ile aynıdır. Parola ayarları sayfasından Ranger güncelleştirilebilir.
-* **Küme Yöneticisi etki alanı kullanıcısı**: Ambari ve Ranger gibi Hadoop Küme Yöneticisi olarak atanmış bir active directory etki alanı kullanıcı hesabıdır. Küme oluşturma sırasında bu kullanıcının kimlik bilgilerini sağlamanız gerekir. Bu kullanıcıya aşağıdaki ayrıcalıklara sahiptir:
+* **Ranger Yöneticisi**: Bu hesap, yerel Apache Ranger yönetici hesabıdır. Active Directory etki alanı kullanıcısı değil. Bu hesap, ilkeleri kurmak ve diğer kullanıcılar için yönetici veya yönetici temsilcisi (bu kullanıcıların ilkeleri yönetebilmeleri için) oluşturmak için kullanılabilir. Varsayılan olarak, Kullanıcı adı *admin* ' dir ve parola, ambarı yönetici parolasıyla aynıdır. Parola, Ranger içindeki ayarlar sayfasından güncelleştirilir.
+* **Küme Yöneticisi etki alanı kullanıcısı**: Bu hesap, ambarı ve Ranger dahil olmak üzere Hadoop kümesi Yöneticisi olarak atanan bir Active Directory etki alanı kullanıcısı. Küme oluşturma sırasında bu kullanıcının kimlik bilgilerini sağlamanız gerekir. Bu Kullanıcı aşağıdaki ayrıcalıklara sahiptir:
 
-  * Makine etki alanına ve küme oluşturma sırasında belirttiğiniz OU içinde yerleştirin.
-  * Küme oluşturma sırasında belirttiğiniz OU içinde hizmet sorumluları oluşturma.
-  * Ters DNS girişleri oluşturma.
+  * Makineleri etki alanına ekleyin ve küme oluşturma sırasında belirttiğiniz OU içine yerleştirin.
+  * Küme oluşturma sırasında belirttiğiniz OU içinde hizmet sorumluları oluşturun.
+  * Ters DNS girişleri oluşturun.
 
-    Diğer AD kullanıcılar da bu ayrıcalıklara sahip olmadığını unutmayın.
+    Diğer AD kullanıcılarının da bu ayrıcalıklara sahip olduğunu aklınızda bulabilirsiniz.
 
-    Ranger tarafından yönetilmez ve bu nedenle güvenli olmayan bazı uç noktalar (örneğin, templeton olarak da) kümesi içinde vardır. Bu uç noktaları, Küme Yöneticisi etki alanı kullanıcısı dışındaki tüm kullanıcılar için kilitlendiğini.
-* **Normal**: Küme oluşturma sırasında birden çok active directory grupları sağlayabilirsiniz. Bu gruplardaki kullanıcılar için Ranger'ı ve Ambari eşitlenir. Bu kullanıcılar, etki alanı kullanıcıları olan ve yalnızca Ranger yönetilen uç noktalar (örneğin, Hiveserver2) erişebilir. RBAC ilkelerini ve bu kullanıcılar için uygun denetim sağlar.
+    Küme içinde, Ranger tarafından yönetilmeyen bazı uç noktaları vardır ve bu nedenle güvenli değildir. Bu uç noktaları, Küme Yöneticisi etki alanı kullanıcısı hariç tüm kullanıcılar için kilitlenir.
+* **Normal**: küme oluşturma sırasında, birden çok Active Directory grubu sağlayabilirsiniz. Bu gruplardaki kullanıcılar Ranger ve ambarı ile eşitlenir. Bu kullanıcılar etki alanı kullanıcılardır ve yalnızca Ranger tarafından yönetilen uç noktalara erişime sahiptir (örneğin, Hiveserver2). Tüm RBAC ilkeleri ve denetimleri bu kullanıcılar için geçerli olacaktır.
 
-## <a name="roles-of-hdinsight-clusters-with-esp"></a>HDInsight kümeleri ESP ile roller
-Kurumsal güvenlik paketi HDInsight aşağıdaki roller vardır:
+## <a name="roles-of-hdinsight-clusters-with-esp"></a>ESP ile HDInsight kümelerinin rolleri
+HDInsight Kurumsal Güvenlik Paketi aşağıdaki rollere sahiptir:
 
 * Küme Yöneticisi
-* Küme işleci
+* Küme Işleci
 * Hizmet Yöneticisi
-* Hizmet işleci
+* Hizmet operatörü
 * Küme kullanıcısı
 
-**Bu rollerden izinler görmek için**
+**Bu rollerin izinlerini görmek için**
 
-1. Ambari Yönetimi kullanıcı arabirimini açın.  Bkz: [Ambari UI Yönetimi](#open-the-ambari-management-ui).
-2. Sol menüden **rolleri**.
-3. Mavi soru işareti ' izinleri görmek için tıklayın:
+1. Ambarı yönetimi Kullanıcı arabirimini açın.  Bkz. [ambarı yönetimi Kullanıcı arabirimini açma](#open-the-ambari-management-ui).
+2. Sol menüden **Roller**' e tıklayın.
+3. İzinleri görmek için mavi soru işaretine tıklayın:
 
     ![ESP HDInsight rol izinleri](./media/apache-domain-joined-manage/hdinsight-domain-joined-roles-permissions.png)
 
-## <a name="open-the-ambari-management-ui"></a>Ambari Yönetimi kullanıcı arabirimini açın
+## <a name="open-the-ambari-management-ui"></a>Ambarı yönetimi Kullanıcı arabirimini açın
 
 1. [Azure portalı](https://portal.azure.com) üzerinde oturum açın.
 2. HDInsight kümenizi açın.
-3. Tıklayın **Pano** Ambari'yi açmak için üstteki menüden.
-4. İçin Ambari Küme Yöneticisi etki alanı kullanıcı adı ve parola kullanarak oturum açın.
-5. Tıklayın **yönetici** açılan menüsünde, üst, sağ üst köşedeki ve ardından **yönetme Ambari**.
+3. Ambarı açmak için üstteki menüden **Pano** ' ya tıklayın.
+4. Küme Yöneticisi etki alanı Kullanıcı adı ve parolasını kullanarak, ambarı 'nda oturum açın.
+5. Sağ üst köşedeki **yönetici** açılan menüsüne tıklayın ve ardından **ambarı Yönet**' e tıklayın.
 
-    ![ESP HDInsight Ambari yönetme](./media/apache-domain-joined-manage/hdinsight-domain-joined-manage-ambari.png)
+    ![ESP HDInsight Apache ambarı 'nı yönetme](./media/apache-domain-joined-manage/hdinsight-domain-joined-manage-ambari.png)
 
-    Kullanıcı arabirimini şuna benzer:
+    Kullanıcı arabirimi şöyle görünür:
 
-    ![ESP HDInsight Ambari Yönetimi kullanıcı Arabirimi](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui.png)
+    ![ESP HDInsight Apache ambarı yönetim kullanıcı arabirimi](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui.png)
 
-## <a name="list-the-domain-users-synchronized-from-your-active-directory"></a>Active Directory'nizden eşitlenen etki alanı kullanıcıları listeleyin
-1. Ambari Yönetimi kullanıcı arabirimini açın.  Bkz: [Ambari UI Yönetimi](#open-the-ambari-management-ui).
-2. Sol menüden **kullanıcılar**. HDInsight kümesi için Active Directory'nizden eşitlenen tüm kullanıcıları görürsünüz.
+## <a name="list-the-domain-users-synchronized-from-your-active-directory"></a>Active Directory eşitlenen etki alanı kullanıcılarını listeleyin
+1. Ambarı yönetimi Kullanıcı arabirimini açın.  Bkz. [ambarı yönetimi Kullanıcı arabirimini açma](#open-the-ambari-management-ui).
+2. Sol menüden **Kullanıcılar**' a tıklayın. Active Directory HDInsight kümesine eşitlenmiş tüm kullanıcıları görürsünüz.
 
-    ![ESP HDInsight Ambari yönetim kullanıcı Arabirimi kullanıcıları listeleme](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-users.png)
+    ![ESP HDInsight ambarı yönetimi Kullanıcı arabirimi listesi kullanıcıları](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-users.png)
 
-## <a name="list-the-domain-groups-synchronized-from-your-active-directory"></a>Active Directory'nizden eşitlenen etki alanı grupları listeleme
-1. Ambari Yönetimi kullanıcı arabirimini açın.  Bkz: [Ambari UI Yönetimi](#open-the-ambari-management-ui).
-2. Sol menüden **grupları**. HDInsight kümesi için Active Directory'nizden eşitlenen tüm grupları göreceksiniz.
+## <a name="list-the-domain-groups-synchronized-from-your-active-directory"></a>Active Directory eşitlenen etki alanı gruplarını listeleyin
+1. Ambarı yönetimi Kullanıcı arabirimini açın.  Bkz. [ambarı yönetimi Kullanıcı arabirimini açma](#open-the-ambari-management-ui).
+2. Sol menüden **gruplar**' a tıklayın. Active Directory HDInsight kümesine eşitlenmiş tüm grupları görürsünüz.
 
-    ![ESP HDInsight Ambari yönetim kullanıcı Arabirimi grupları Listele](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-groups.png)
+    ![ESP HDInsight ambarı yönetimi Kullanıcı arabirimi liste grupları](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-groups.png)
 
-## <a name="configure-hive-views-permissions"></a>Hive görünümleri izinlerini yapılandırma
-1. Ambari Yönetimi kullanıcı arabirimini açın.  Bkz: [Ambari UI Yönetimi](#open-the-ambari-management-ui).
-2. Sol menüden **görünümleri**.
-3. Tıklayın **HIVE** ayrıntıları göstermek için.
+## <a name="configure-hive-views-permissions"></a>Hive görünümlerini yapılandırma izinleri
+1. Ambarı yönetimi Kullanıcı arabirimini açın.  Bkz. [ambarı yönetimi Kullanıcı arabirimini açma](#open-the-ambari-management-ui).
+2. Sol menüden, **Görünümler**' e tıklayın.
+3. Ayrıntıları göstermek için **HIVE** ' e tıklayın.
 
-    ![ESP HDInsight Ambari yönetim kullanıcı Arabirimi Hive görünümleri](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-hive-views.png)
-4. Tıklayın **Hive görünümü** Hive Görüşnümleri yapılandırmak için bağlantı.
-5. Ekranı aşağı kaydırarak **izinleri** bölümü.
+    ![ESP HDInsight ambarı yönetimi UI Hive görünümleri](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-hive-views.png)
+4. Hive görünümlerini yapılandırmak için **Hive görünümü** bağlantısına tıklayın.
+5. Aşağı kaydırarak **izinler** bölümüne gidin.
 
-    ![ESP HDInsight Ambari Yönetimi kullanıcı Arabirimi Hive görünümleri izinlerini yapılandırma](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-hive-views-permissions.png)
-6. Tıklayın **Kullanıcı Ekle** veya **Grup Ekle**ve ardından kullanıcıları veya Hive görünümleri kullanabileceğiniz grupları belirtin.
+    ![ESP HDInsight ambarı yönetimi UI Hive görünümleri izinleri yapılandırma](./media/apache-domain-joined-manage/hdinsight-domain-joined-ambari-management-ui-hive-views-permissions.png)
+6. **Kullanıcı Ekle** veya **Grup Ekle**' ye tıklayın ve ardından Hive görünümlerini kullanabileceği kullanıcıları veya grupları belirtin.
 
-## <a name="configure-users-for-the-roles"></a>Kullanıcı rolleri için yapılandırma
- Rolleri ve izinlerini listesini görmek için ESP ile roller, HDInsight kümeleri bakın.
+## <a name="configure-users-for-the-roles"></a>Rolleri için kullanıcıları yapılandırma
+ Rollerin ve izinlerinin listesini görmek için bkz. ESP ile HDInsight kümelerinin rolleri.
 
-1. Ambari Yönetimi kullanıcı arabirimini açın.  Bkz: [Ambari UI Yönetimi](#open-the-ambari-management-ui).
-2. Sol menüden **rolleri**.
-3. Tıklayın **Kullanıcı Ekle** veya **Grup Ekle** kullanıcılar ve gruplar farklı rollere atamak için.
+1. Ambarı yönetimi Kullanıcı arabirimini açın.  Bkz. [ambarı yönetimi Kullanıcı arabirimini açma](#open-the-ambari-management-ui).
+2. Sol menüden **Roller**' e tıklayın.
+3. Kullanıcıları ve grupları farklı rollere atamak için **Kullanıcı Ekle** veya **Grup Ekle** ' ye tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kurumsal güvenlik paketi ile bir HDInsight kümesi yapılandırmak için bkz: [yapılandırma HDInsight kümeleri ile ESP](apache-domain-joined-configure.md).
-* Hive ilkelerini ve Hive sorgularını çalıştırmak için bkz [HDInsight için Apache Hive ilkelerini kümeleri ile ESP](apache-domain-joined-run-hive.md).
+* HDInsight kümesini Kurumsal Güvenlik Paketi ile yapılandırmak için bkz. [HDInsight KÜMELERINI ESP Ile yapılandırma](apache-domain-joined-configure.md).
+* Hive ilkelerini yapılandırmak ve Hive sorgularını çalıştırmak için bkz. [HDInsight kümeleri için Apache Hive ILKELERINI ESP Ile yapılandırma](apache-domain-joined-run-hive.md).

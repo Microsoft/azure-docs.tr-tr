@@ -1,6 +1,6 @@
 ---
-title: Azure Sanal Makine Ölçek Kümelerine Genel Bakış | Microsoft Docs
-description: Azure sanal makine ölçek kümeleri ve uygulamalarınızın otomatik olarak nasıl ölçeklendirildiği hakkında bilgi edinin
+title: Azure sanal makine ölçek kümelerine genel bakış | Microsoft Docs
+description: Azure sanal makine ölçek kümeleri ve uygulamalarınızın otomatik olarak ölçeklendirilmesi hakkında bilgi edinin
 services: virtual-machine-scale-sets
 documentationcenter: ''
 author: mayanknayar
@@ -14,57 +14,62 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: overview
 ms.custom: mvc
-ms.date: 05/21/2018
+ms.date: 09/26/2019
 ms.author: manayar
-ms.openlocfilehash: 98c183d65a18c186b515df8ec02ba26b8c2c4143
-ms.sourcegitcommit: 25a60179840b30706429c397991157f27de9e886
+ms.openlocfilehash: 73580814dcfe8f967684aca4ce433a40e7bbedc0
+ms.sourcegitcommit: 5f0f1accf4b03629fcb5a371d9355a99d54c5a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/28/2019
-ms.locfileid: "66258299"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71679380"
 ---
-# <a name="what-are-virtual-machine-scale-sets"></a>Sanal makine ölçek kümeleri nedir?
-Azure sanal makine ölçek kümeleri sayesinde bir grup özdeş, yük dengeli sanal makineler oluşturup yönetebilirsiniz. Tanımlı bir zamanlamaya veya talebe yanıt olarak sanal makine örneği sayısı otomatik olarak artabilir ya da azalabilir. Ölçek kümeleri, uygulamalarınıza yönelik yüksek düzeyde kullanılabilirlik sağlar ve çok sayıda sanal makineyi merkezi olarak yönetmenize, yapılandırmanıza ve güncelleştirmenize imkan tanır. Sanal makine ölçek kümeleri ile, işlem, büyük veri ve kapsayıcı iş yükleri gibi alanlar için büyük ölçekli hizmetler derleyebilirsiniz.
+# <a name="what-are-virtual-machine-scale-sets"></a>Sanal Makine Ölçek Kümeleri nedir?
+Azure sanal makine ölçek kümeleri, bir özdeş, yük dengeli VM 'Ler grubu oluşturmanıza ve yönetmenize olanak sağlar. Sanal makine örneklerinin sayısı isteğe yanıt olarak veya tanımlı bir zamanlamaya göre otomatik olarak artabilir veya azalmış olabilir. Ölçek Kümeleri, uygulamalarınız için yüksek kullanılabilirlik sağlar ve çok sayıda VM 'yi merkezi olarak yönetmenize, yapılandırmanıza ve güncelleştirmenize olanak tanır. Sanal makine ölçek kümeleri ile işlem, büyük veri ve kapsayıcı iş yükleri gibi alanlarda büyük ölçekli hizmetler oluşturabilirsiniz.
 
 
-## <a name="why-use-virtual-machine-scale-sets"></a>Sanal makine ölçek kümeleri neden kullanılmalıdır?
-Yedekleme ve gelişmiş performans sağlamak için uygulamalar genellikle birden çok örnek arasında dağıtılır. Müşteriler, uygulama örneklerinden birine istekleri dağıtan bir yük dengeleyici aracılığıyla uygulamanıza erişebilir. Bakım gerçekleştirmeniz veya bir uygulama örneğini güncelleştirmeniz gerekirse müşterileriniz başka bir kullanılabilir uygulama örneğine dağıtılmalıdır. Ek müşteri talebine yanıt vermek için, uygulamanızı çalıştıran uygulama örneği sayısını artırmanız gerekebilir.
+## <a name="why-use-virtual-machine-scale-sets"></a>Sanal Makine Ölçek Kümeleri neden kullanılmalıdır?
+Yedeklilik ve gelişmiş performans sağlamak için uygulamalar genellikle birden çok örneğe dağıtılır. Müşteriler, uygulama örneklerinden birine istek dağıtan bir yük dengeleyici aracılığıyla uygulamanıza erişebilir. Bakım yapmanız veya bir uygulama örneğini güncelleştirmeniz gerekiyorsa, müşterilerinizin başka bir kullanılabilir uygulama örneğine dağıtılması gerekir. Ek müşteri talebi ile devam etmek için, uygulamanızı çalıştıran uygulama örneklerinin sayısını artırmanız gerekebilir.
 
-Azure sanal makine ölçek kümeleri, birçok sanal makinede çalıştırılan uygulamalar için yönetim yeteneklerini, [kaynakların otomatik ölçeklendirmesini](virtual-machine-scale-sets-autoscale-overview.md) ve trafiğin yük dengelemesini sağlar. Ölçek kümeleri aşağıdaki temel avantajları sağlar:
+Azure sanal makine ölçek kümeleri, birçok VM genelinde çalışan uygulamalar için yönetim özellikleri, [kaynakların otomatik ölçeklendirilmesi](virtual-machine-scale-sets-autoscale-overview.md)ve trafiğin yük dengelemesi sağlar. Ölçek Kümeleri aşağıdaki önemli avantajları sağlar:
 
-- **Birden çok sanal makine oluşturma ve yönetme kolaylığı**
-    - Uygulamanızı çalıştıran birçok sanal makineniz olduğunda, ortamınızda tutarlı bir yapılandırmanın tutulması önemlidir. Uygulamanızın güvenilir performansı için, sanal makine boyutu, disk yapılandırması ve uygulama yüklemeleri, tüm sanal makineler arasında eşleşmelidir.
-    - Ölçek kümeleri ile tüm sanal makine örnekleri, aynı temel işletim sistemi görüntüsü ve yapılandırmasından oluşturulur. Bu yaklaşım, ek yapılandırma görevi veya ağ yönetimi olmadan yüzlerce sanal makineyi kolayca yönetmenize olanak sağlar.
-    - Ölçek kümeleri, temel katman 4 trafik dağıtımı için [Azure yük dengeleyici](../load-balancer/load-balancer-overview.md) ve daha gelişmiş katman 7 trafik dağıtımı ve SSL sonlandırması için [Azure Application Gateway](../application-gateway/application-gateway-introduction.md) kullanımını destekler.
+- **Birden çok VM oluşturmak ve yönetmek kolay**
+    - Uygulamanızı çalıştıran çok sayıda sanal makine varsa, ortamınızda tutarlı bir yapılandırmanın korunması önemlidir. Uygulamanızın güvenilir performansı için VM boyutu, disk yapılandırması ve uygulama yüklemeleri tüm VM 'lerde eşleşmelidir.
+    - Ölçek kümeleri ile, tüm VM örnekleri aynı temel işletim sistemi görüntüsünden ve yapılandırmadan oluşturulur. Bu yaklaşım ek yapılandırma görevleri veya ağ yönetimi olmadan yüzlerce VM 'yi kolayca yönetmenize olanak sağlar.
+    - Ölçek Kümeleri, temel katman 4 trafik dağıtımı için [Azure Yük dengeleyicinin](../load-balancer/load-balancer-overview.md) kullanımını ve daha fazla gelişmiş katman 7 trafik DAĞıTıMı ve SSL sonlandırma için [Azure Application Gateway](../application-gateway/application-gateway-introduction.md) kullanımını destekler.
 
 - **Yüksek kullanılabilirlik ve uygulama dayanıklılığı sağlar**
-    - Ölçek kümeleri, uygulamanızın birden çok örneğini çalıştırmak için kullanılır. Bu sanal makine örneklerinden birinde sorun varsa müşteriler minimum kesintiyle diğer sanal makine örneğinden biri üzerinden uygulamanıza erişmeye devam eder.
-    - Ek kullanılabilirlik için, [Kullanılabilirlik Alanları](../availability-zones/az-overview.md)’nı kullanarak tek bir veri merkezinde veya birden çok veri merkezinde bulunan bir ölçek kümesinde sanal makine örneklerini otomatik olarak dağıtabilirsiniz.
+    - Ölçek Kümeleri, uygulamanızın birden çok örneğini çalıştırmak için kullanılır. Bu sanal makine örneklerinden birinde sorun varsa, müşteriler en az kesintiye uğramıştır ve diğer sanal makine örneklerinden biri aracılığıyla uygulamanıza erişmeye devam eder.
+    - Ek kullanılabilirlik için, tek bir veri merkezinde veya birden çok veri merkezinde bulunan bir ölçek kümesindeki sanal makine örneklerini otomatik olarak dağıtmak üzere [kullanılabilirlik alanları](../availability-zones/az-overview.md) kullanabilirsiniz.
 
-- **Kaynak talebi değiştikçe, uygulamanızın otomatik olarak ölçeklendirme yapmasını sağlar**
-    - Uygulamanıza yönelik müşteri talebi gün veya hafta boyunca değişebilir. Uygulama talebi arttıkça ölçek kümeleri, müşteri talebini eşleştirmek için sanal makine örneği sayısını otomatik olarak artırabilir ve sonra talep azaldıkça sanal makine örneği sayısını azaltabilir.
-    - Bir yandan otomatik ölçeklendirme, talep düşükken uygulamanızı çalıştıran gereksiz sanal makine örneği sayısını en aza indirirken, diğer yandan da talep arttıkça müşteriler kabul edilebilir performans düzeyi elde etmeye devam eder ve otomatik olarak ek sanal makine örnekleri eklenir. Bu yetenek gerektiğinde maliyetlerin düşürülmesine ve etkili şekilde Azure kaynakları oluşturulmasına yardımcı olur.
+- **Uygulamanızın, kaynak talebi değişiklikleri olarak otomatik olarak ölçeklendirilmesine izin verir**
+    - Uygulamanız için müşteri talebi, gün veya hafta boyunca değişebilir. Müşteri talebini eşleştirmek için ölçek kümeleri, uygulama talebi arttıkça sanal makine örneklerinin sayısını otomatik olarak artırabilir, ardından talep azaldıkça sanal makine örneklerinin sayısını azaltır.
+    - Otomatik ölçeklendirme, talep azaldıkça uygulamanızı çalıştıran gereksiz sanal makine örneklerinin sayısını da en aza indirir, müşteriler talep büyüdükçe, kabul edilebilir bir performans düzeyi almaya devam eder ve ek VM örnekleri otomatik olarak eklenir. Bu özellik, maliyetleri azaltmaya ve gerektiğinde Azure kaynaklarını verimli bir şekilde oluşturmanıza yardımcı olur.
 
-- **Büyük ölçekte çalışma**
-    - Ölçek kümeleri, 1000 adede kadar sanal makine örneğini destekler. Oluşturun ve kendi özel VM görüntülerini karşıya yükleme, 600 sanal makine örneği sınırını olur.
-    - Üretim iş yükleri ile en iyi performans için kullanmak [Azure yönetilen diskler](../virtual-machines/windows/managed-disks-overview.md).
+- **Büyük ölçekli çalışma**
+    - Ölçek Kümeleri 1.000 adede kadar VM örneğini destekler. Kendi özel VM görüntülerinizi oluşturur ve karşıya yüklerseniz, sınır 600 sanal makine örnekleridir.
+    - Üretim iş yükleri ile en iyi performansı elde etmek için [Azure yönetilen diskleri](../virtual-machines/windows/managed-disks-overview.md)kullanın.
 
 
-## <a name="differences-between-virtual-machines-and-scale-sets"></a>Sanal makineler ile ölçek kümeleri arasındaki farklar
-Ölçek kümeleri, sanal makinelerden derlenir. Ölçek kümeleri ile, uygulamalarınızı çalıştırmak ve ölçeklendirmek için yönetim ve otomasyon katmanları sağlanır. Bunun yerine tek tek sanal makineleri el ile oluşturup yönetebilir veya benzer bir otomasyon düzeyi derlemek için mevcut araçları tümleştirebilirsiniz. Aşağıdaki tabloda, ölçek kümelerinin birden çok sanal makine örneğinin el ile yönetilmesine kıyasla avantajları açıklanmaktadır.
+## <a name="differences-between-virtual-machines-and-scale-sets"></a>Sanal makineler ve ölçek kümeleri arasındaki farklılıklar
+Ölçek Kümeleri sanal makinelerden oluşturulur. Ölçek kümeleriyle, uygulamalarınızı çalıştırmak ve ölçeklendirmek için yönetim ve otomasyon katmanları sağlanır. Bunun yerine, tek tek VM 'Leri el ile oluşturup yönetebilir veya benzer bir otomasyon düzeyi oluşturmak için mevcut araçları tümleştirebilirsiniz. Aşağıdaki tabloda, birden fazla sanal makine örneğinin el ile yönetilmesine kıyasla ölçek kümelerinin avantajları özetlenmektedir.
 
-| Senaryo                           | Sanal makinelerin el ile gruplanması                                                                    | Sanal makine ölçek kümesi |
+| Senaryo                           | Sanal makinelerin el ile grubu                                                                    | Sanal makine ölçek kümesi |
 |------------------------------------|----------------------------------------------------------------------------------------|---------------------------|
-| Ek sanal makine örnekleri ekleme        | El ile oluşturma, yapılandırma ve uyumluluk sağlama işlemi                             | Merkezi yapılandırmadan otomatik olarak oluşturma |
-| Trafik dengeleme ve dağıtımı | El ile Azure yük dengeleyici veya Application Gateway ve yapılandırma işlemi      | Otomatik olarak Azure yük dengeleyici veya Application Gateway oluşturabilir ve bunlarla tümleştirilebilir |
-| Yüksek düzeyde kullanılabilirlik ve yedekleme   | El ile Kullanılabilirlik Kümesi oluşturma veya Kullanılabilirlik Bölgelerinde sanal makineleri dağıtma ve izleme | Kullanılabilirlik Bölgelerinde veya Kullanılabilirlik Kümelerinde sanal makine örneklerinin otomatik dağıtımı |
-| Sanal makinelerin ölçeklendirmesi                     | El ile izleme ve Azure Otomasyonu                                                 | Ana bilgisayar ölçümlerine, konuk ölçümlerine, Application Insights’a veya zamanlamaya dayalı otomatik ölçeklendirme |
+| Ek VM örnekleri ekleme        | El ile oluşturma, yapılandırma ve uyumluluk sağlamaya yönelik işlem                             | Merkezi yapılandırmadan otomatik olarak oluştur |
+| Trafik Dengeleme ve dağıtım | Azure yük dengeleyici veya Application Gateway oluşturma ve yapılandırma ile el ile işlem      | Otomatik olarak Azure yük dengeleyici veya Application Gateway oluşturabilir ve tümleştirilebilir |
+| Yüksek kullanılabilirlik ve artıklık   | Kullanılabilirlik kümesini el ile oluşturun veya Kullanılabilirlik Alanları genelinde VM 'Leri dağıtın ve izleyin | Kullanılabilirlik Alanları veya kullanılabilirlik kümeleri arasında sanal makine örneklerinin otomatik dağıtımı |
+| VM 'lerin ölçeklendirilmesi                     | El ile izleme ve Azure Otomasyonu                                                 | Konak ölçümleri, Konuk içi ölçümler, Application Insights veya zamanlamaya göre otomatik ölçeklendirme |
 
-Ölçek kümelerine yönelik ek bir maliyet yoktur. Yalnızca sanal makine örnekleri, yük dengeleyici veya Yönetilen Disk depolama alanı gibi temel işlem kaynakları için ödeme yaparsınız. Otomatik ölçeklendirme ve yedekleme gibi yönetim ve otomasyon özellikleri, sanal makineler kullanıldığında ek ücrete yol açmaz.
+Ölçek kümelerine ek ücret alınmaz. Yalnızca VM örnekleri, yük dengeleyici veya yönetilen disk depolaması gibi temel işlem kaynakları için ödeme yaparsınız. Otomatik ölçeklendirme ve artıklık gibi yönetim ve otomasyon özellikleri, VM 'lerin kullanımı üzerinde ek ücret vermez.
 
+## <a name="how-to-monitor-your-scale-sets"></a>Ölçek kümelerinizi izleme
+
+Basit bir ekleme işlemine sahip [VM'ler için Azure izleyici](../azure-monitor/insights/vminsights-overview.md)kullanın ve ölçek kümesindeki VM 'LERDEN önemli CPU, bellek, disk ve ağ performans sayaçları koleksiyonunu otomatikleştirin. Ayrıca, ölçek kümelerinizin kullanılabilirliği ve performansına odaklanmaya yardımcı olan ek izleme özellikleri ve önceden tanımlanmış görselleştirmeler de içerir.
+
+Sayfa görünümleri, uygulama istekleri ve özel durumlar dahil olmak üzere uygulamanız hakkında ayrıntılı bilgi toplamak için Application Insights ile [sanal makine ölçek kümesi uygulamanız](../azure-monitor/app/azure-vm-vmss-apps.md) için izlemeyi etkinleştirin. Kullanıcı trafiğinin benzetimini yapmak için bir [Kullanılabilirlik testi](../azure-monitor/app/monitor-web-app-availability.md) yapılandırarak uygulamanızın kullanılabilirliğini daha da doğrulayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Başlamak için, Azure portalında ilk sanal makine ölçek kümenizi oluşturun.
+Başlamak için Azure portal ilk sanal makine ölçek kümesini oluşturun.
 
 > [!div class="nextstepaction"]
-> [Azure portalında ölçek kümesi oluşturma](quick-create-portal.md)
+> [Azure portal ölçek kümesi oluşturma](quick-create-portal.md)

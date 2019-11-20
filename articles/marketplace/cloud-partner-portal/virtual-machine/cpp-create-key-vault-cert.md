@@ -1,44 +1,45 @@
 ---
-title: Bir Azure Key Vault sertifikası oluşturun | Azure Market
-description: Azure ile dağıtılan bir VHD'den VM kaydedileceği açıklanmaktadır.
+title: Azure Key Vault sertifikası oluşturma | Azure Marketi
+description: Azure tarafından dağıtılan bir VHD 'den bir sanal makinenin nasıl kaydedileceği açıklanmaktadır.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 11/29/2018
 ms.author: pabutler
-ms.openlocfilehash: 5163aa0a9195aa712fa333667b3f7ccf227469be
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4adc6f716050e2d792e0a5c022972e4340d2846a
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938398"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823122"
 ---
-# <a name="create-certificates-for-azure-key-vault"></a>Azure anahtar kasası için sertifikaları oluşturma
+# <a name="create-certificates-for-azure-key-vault"></a>Azure Key Vault için sertifikalar oluşturma
 
-Bu makalede, Azure'da barındırılan sanal makine'de (VM) bir Windows Uzaktan Yönetim (WinRM) bağlantı kurmak için gereken otomatik olarak imzalanan sertifikalar açıklanmaktadır. Bu işlemi üç adımdan oluşur:
+Bu makalede, Azure 'da barındırılan bir sanal makineye (VM) bir Windows Uzaktan Yönetimi (WinRM) bağlantısı kurmak için gereken kendinden imzalı sertifikaların nasıl sağlanacağı açıklanmaktadır. Bu işlem üç adımdan oluşur:
 
 1.  Güvenlik sertifikası oluşturun. 
-2.  Bu sertifika deposu için Azure Key Vault oluşturacaksınız. 
-3.  Bu anahtar kasasına sertifikaları Store. 
+2.  Bu sertifikayı depolamak için Azure Key Vault oluşturun. 
+3.  Bu anahtar kasasında sertifikaları depolayın. 
 
-Bu iş için yeni veya mevcut bir Azure kaynak grubunu kullanabilirsiniz.  Eski yaklaşım, aşağıdaki açıklamada kullanılır.
+Bu iş için yeni veya var olan bir Azure Kaynak grubu kullanabilirsiniz.  Aşağıdaki açıklamada, önceki yaklaşım kullanılır.
 
 
 
 [!INCLUDE [updated-for-az](../../../../includes/updated-for-az.md)]
 
-## <a name="create-the-certificate"></a>Sertifika oluşturma
+## <a name="create-the-certificate"></a>Sertifikayı oluşturma
 
-Düzenleme ve yerel bir klasörde sertifika dosyasını (.pfx) oluşturmak için aşağıdaki Azure Powershell betiği çalıştırın.  Aşağıdaki parametreler için değerleri değiştirmeniz gerekir:
+Sertifika dosyasını (. pfx) yerel bir klasörde oluşturmak için aşağıdaki Azure PowerShell betiğini düzenleyin ve çalıştırın.  Aşağıdaki parametrelerin değerlerini değiştirmeniz gerekir:
 
-|  **Parametre**        |   **Açıklama**                                                               |
+|  **Parametresinin**        |   **Açıklama**                                                               |
 |  -------------        |   ---------------                                                               |
-| `$certroopath` | .Pfx dosyasına kaydetmek için yerel klasör  |
-| `$location`    | Azure standart coğrafi konumlardan birine  |
-| `$vmName`      | Planlı Azure sanal makine adı   |
-| `$certname`    | Sertifika adı; Planlanan bir VM tam etki alanı adı ile eşleşmelidir  |
-| `$certpassword` | Sertifikalar için parola planlanan bir VM için kullanılan parola aynı olmalıdır  |
+| `$certroopath` | . Pfx dosyasının kaydedileceği yerel klasör  |
+| `$location`    | Azure Standart coğrafi konumlarından biri  |
+| `$vmName`      | Planlı Azure sanal makinesinin adı   |
+| `$certname`    | Sertifikanın adı; planlı VM 'nin tam etki alanı adıyla eşleşmelidir  |
+| `$certpassword` | Sertifikalar için parola, planlanan VM için kullanılan parolayla aynı olmalıdır  |
 |  |  |
 
 ```powershell
@@ -68,23 +69,23 @@ Düzenleme ve yerel bir klasörde sertifika dosyasını (.pfx) oluşturmak için
 
 ```
 > [!TIP]
-> Böylece, çeşitli parametrelerin değerleri korunur aynı PowerShell konsol oturumuna adımları sırasında etkin tutabilirsiniz.
+> Farklı parametrelerin değerlerinin korunabilmesi için, bu adımlar sırasında aynı PowerShell konsolu oturumunu etkin tutun.
 
 > [!WARNING]
-> Bu komut dosyasını kaydederseniz, güvenlik bilgilerini (parola) içerdiği için yalnızca güvenli bir konumda depolayın.
+> Bu betiği kaydederseniz, güvenlik bilgileri (parola) içerdiğinden yalnızca güvenli bir konumda saklayın.
 
 
-## <a name="create-the-key-vault"></a>Anahtar kasası oluşturma
+## <a name="create-the-key-vault"></a>Anahtar Kasası oluşturma
 
-İçeriğini kopyalayın [anahtar kasası dağıtım şablonu](./cpp-key-vault-deploy-template.md) yerel makinenizde bir dosyaya. (Aşağıdaki örnek komut dosyasında bu kaynaktır `C:\certLocation\keyvault.json`.)  Düzenleyin ve bir Azure Key Vault örneği ile ilişkili kaynak grubu oluşturmak için aşağıdaki Azure Powershell betiğini çalıştırın.  Aşağıdaki parametreler için değerleri değiştirmeniz gerekir:
+[Anahtar Kasası dağıtım şablonunun](./cpp-key-vault-deploy-template.md) içeriğini yerel makinenizde bir dosyaya kopyalayın. (Aşağıdaki örnek betikte bu kaynak `C:\certLocation\keyvault.json`.)  Bir Azure Key Vault örneği ve ilişkili kaynak grubu oluşturmak için aşağıdaki Azure PowerShell betiğini düzenleyin ve çalıştırın.  Aşağıdaki parametrelerin değerlerini değiştirmeniz gerekir:
 
-|  **Parametre**        |   **Açıklama**                                                               |
+|  **Parametresinin**        |   **Açıklama**                                                               |
 |  -------------        |   ---------------                                                               |
-| `$postfix`            | Dağıtım tanımlayıcıları için isteğe bağlı bir sayısal dize                     |
-| `$rgName`             | Azure kaynak grubu (RG) adı oluşturmak için                                        |
-|  `$location`          | Azure standart coğrafi konumlardan birine                                  |
-| `$kvTemplateJson`     | Anahtar kasası Resource Manager şablonu içeren dosyanın (keyvault.json) yolu |
-| `$kvname`             | Yeni key vault adı                                                       |
+| `$postfix`            | Dağıtım tanımlayıcılarına eklenen rastgele sayısal dize                     |
+| `$rgName`             | Oluşturulacak Azure Kaynak grubu (RG) adı                                        |
+|  `$location`          | Azure Standart coğrafi konumlarından biri                                  |
+| `$kvTemplateJson`     | Anahtar Kasası için Kaynak Yöneticisi şablonu içeren dosyanın yolu (keykasa. JSON) |
+| `$kvname`             | Yeni anahtar kasasının adı                                                       |
 |  |  |
 
 ```powershell
@@ -183,9 +184,9 @@ Düzenleme ve yerel bir klasörde sertifika dosyasını (.pfx) oluşturmak için
         
 ```
 
-## <a name="store-the-certificate"></a>Sertifika Store
+## <a name="store-the-certificate"></a>Sertifikayı depolayın
 
-Artık aşağıdaki betiği çalıştırarak, yeni anahtar kasasına .pfx dosyasında yer alan sertifikaları depolayabilirsiniz. 
+Artık,. pfx dosyasında yer alan sertifikaları aşağıdaki betiği çalıştırarak yeni anahtar kasasına kaydedebilirsiniz. 
 
 ```powershell
     #push certificate to key vault secret
@@ -201,11 +202,11 @@ Artık aşağıdaki betiği çalıştırarak, yeni anahtar kasasına .pfx dosyas
     "dataType" :"pfx",
     "password": "$certpassword"
     }
-    "@
+"@
             echo $certpassword
             $jsonObjectBytes = [System.Text.Encoding]::UTF8.GetBytes($jsonObject)
             $jsonEncoded = [System.Convert]::ToBase64String($jsonObjectBytes)
-            $secret = ConvertTo-SecureString -String $jsonEncoded -AsPlainText –Force
+            $secret = ConvertTo-SecureString -String $jsonEncoded -AsPlainText -Force
             $objAzureKeyVaultSecret=Set-AzureKeyVaultSecret -VaultName $kvname -Name "ISVSecret$postfix" -SecretValue $secret
             echo $objAzureKeyVaultSecret.Id 
     
@@ -214,4 +215,4 @@ Artık aşağıdaki betiği çalıştırarak, yeni anahtar kasasına .pfx dosyas
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ardından şunları yapacaksınız [kullanıcı VM görüntüsünden VM dağıtma](./cpp-deploy-vm-user-image.md).
+Ardından, [Kullanıcı VM görüntüsünden BIR VM dağıtacaksınız](./cpp-deploy-vm-user-image.md).

@@ -10,12 +10,12 @@ ms.topic: article
 ms.date: 09/04/2017
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 31c6c1258b6d20eb2d2802cf23244cb59df682c0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8ad5c4cb4d17443144febd716391803064ccdad1
+ms.sourcegitcommit: c0419208061b2b5579f6e16f78d9d45513bb7bbc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61428739"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67626370"
 ---
 # <a name="platforms-and-tools-for-data-science-projects"></a>Platformlar ve araçlar için veri bilimi projeleri
 
@@ -48,7 +48,7 @@ Ayrıca **ML ve AI Araçları** xgboost, mxnet ve Vowpal Wabbit gibi.
 
 Şu anda DSVM kullanılabilir **Windows** ve **Linux CentOS** işletim sistemleri. Üzerinde yürütmek için planlama veri bilimi projeleri gereksinimlerine göre DSVM (CPU çekirdek sayısı) ve bellek boyutunu seçin. 
 
-Windows DSVM sürümü hakkında daha fazla bilgi için bkz. [Microsoft Veri bilimi sanal makinesi](https://azure.microsoft.com/marketplace/partners/microsoft-ads/standard-data-science-vm/) Azure Marketi'nde. DSVM'nin Linux sürümü için bkz: [Linux veri bilimi sanal makinesi](https://azure.microsoft.com/marketplace/partners/microsoft-ads/linux-data-science-vm/).
+Windows DSVM sürümü hakkında daha fazla bilgi için bkz. [Microsoft Veri bilimi sanal makinesi](https://azuremarketplace.microsoft.com/marketplace/apps/microsoft-dsvm.dsvm-windows) Azure Marketi'nde. DSVM'nin Linux sürümü için bkz: [Linux veri bilimi sanal makinesi](https://azure.microsoft.com/marketplace/partners/microsoft-ads/linux-data-science-vm/).
 
 Bazı genel veri bilimi görevlerini verimli bir şekilde DSVM üzerinde çalıştırma hakkında bilgi edinmek için bkz: [veri bilimi sanal makinesi üzerinde yapabileceğiniz on işlem](../data-science-virtual-machine/vm-do-ten-things.md)
 

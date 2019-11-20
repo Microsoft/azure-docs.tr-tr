@@ -1,120 +1,118 @@
 ---
-title: Vmm'de Hyper-V Vm'lerinin olağanüstü durum kurtarması için destek matrisi bulut Azure Site Recovery ile ikincil bir siteye | Microsoft Docs
-description: Azure Site Recovery ile ikincil bir siteye VMM bulutlarındaki Hyper-V VM çoğaltması için desteği özetler.
-services: site-recovery
+title: Azure Site Recovery ile ikincil bir VMM sitesine Hyper-V olağanüstü durum kurtarma desteği matrisi
+description: VMM bulutlarındaki Hyper-V VM çoğaltma desteğini Azure Site Recovery olan ikincil bir siteye özetler.
 author: rayne-wiselman
 manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 05/30/2019
+ms.date: 11/06/2019
 ms.author: raynew
-ms.openlocfilehash: e8b8f9856fe7e0fa591ceb42aab97e92642b6098
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1126a85ed22ee17879767a93ca75dc76dd04b747
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66399359"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74132953"
 ---
-# <a name="support-matrix-for-disaster-recovery-of-hyper-v-vms-to-a-secondary-site"></a>Hyper-V Vm'lerini ikincil bir siteye olağanüstü durum kurtarması için destek matrisi
+# <a name="support-matrix-for-disaster-recovery-of-hyper-v-vms-to-a-secondary-site"></a>Hyper-V VM 'lerinin ikincil bir siteye olağanüstü durum kurtarması için destek matrisi
 
-Bu makalede, kullandığınız zaman desteklenen özellikler özetlenmektedir [Azure Site Recovery](site-recovery-overview.md) Hyper-V Vm'lerini çoğaltmak için hizmet ikincil bir siteyi System Center Virtual Machine Manager (VMM) bulutlarında yönetilen. Hyper-V Vm'lerini Azure'a çoğaltmak istiyorsanız, gözden [Bu destek matrisi](hyper-v-azure-support-matrix.md).
+Bu makalede, System Center Virtual Machine Manager (VMM) bulutlarında yönetilen Hyper-V VM 'lerini ikincil bir siteye çoğaltmak için [Azure Site Recovery](site-recovery-overview.md) hizmetini kullandığınızda desteklenmekte olan özellikler özetlenmektedir. Hyper-V VM 'lerini Azure 'a çoğaltmak istiyorsanız [Bu destek matrisini](hyper-v-azure-support-matrix.md)gözden geçirin.
 
 > [!NOTE]
-> Hyper-V konaklarınız VMM bulutlarında yönetilen yalnızca ikincil bir siteye çoğaltabilirsiniz.
+> Yalnızca Hyper-V konaklarınız VMM bulutlarında yönetilmiyorsa ikincil bir siteye çoğaltabilirsiniz.
 
-  
 
 ## <a name="host-servers"></a>Ana bilgisayar sunucuları
 
 **İşletim sistemi** | **Ayrıntılar**
 --- | ---
-Windows Server 2012 R2 | Sunucularının, en son güncelleştirmeleri çalıştırıyor olması gerekir.
-Windows Server 2016 |  VMM 2016'yı Windows Server 2016 ve 2012 R2 konaklarının bir karışımını bulutlarıyla şu anda desteklenmemektedir.<br/><br/> System Center 2012 R2 VMM 2012 R2'den System Center 2016 için yükseltme dağıtımı şu anda desteklenmemektedir.
+Windows Server 2012 R2 | Sunucular en son güncelleştirmeleri çalıştırıyor olmalıdır.
+Windows Server 2016 |  Windows Server 2016 ve 2012 R2 ana bilgisayarlarının karışımından oluşan VMM 2016 bulutları şu anda desteklenmemektedir.<br/><br/> System Center 2012 R2 VMM 2012 R2 'den System Center 2016 'e yükseltilen dağıtımlar Şu anda desteklenmemektedir.
 
 
 ## <a name="replicated-vm-support"></a>Çoğaltılan VM desteği
 
-Aşağıdaki tabloda, Site Recovery'ye çoğaltılan makineler için işletim sistemi desteği özetler. Tüm iş yüklerini desteklenen bir işletim sisteminde çalışıyor olabilir.
+Aşağıdaki tabloda, Site Recovery ile çoğaltılan makineler için işletim sistemi desteği özetlenmektedir. Desteklenen işletim sisteminde herhangi bir iş yükü çalışıyor olabilir.
 
 **Windows sürümü** | **Hyper-V (VMM ile)**
 --- | ---
-Windows Server 2016 | Tüm konuk işletim sistemi [Hyper-V tarafından desteklenen](https://docs.microsoft.com/windows-server/virtualization/hyper-v/Supported-Windows-guest-operating-systems-for-Hyper-V-on-Windows) Windows Server 2016 
-Windows Server 2012 R2 | Tüm konuk işletim sistemi [Hyper-V tarafından desteklenen](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn792027%28v%3dws.11%29) Windows Server 2012 R2
+Windows Server 2016 | Windows Server 2016 üzerinde [Hyper-V tarafından desteklenen](https://docs.microsoft.com/windows-server/virtualization/hyper-v/Supported-Windows-guest-operating-systems-for-Hyper-V-on-Windows) tüm konuk işletim sistemleri 
+Windows Server 2012 R2 | Windows Server 2012 R2 üzerinde [Hyper-V tarafından desteklenen](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn792027%28v%3dws.11%29) tüm konuk işletim sistemleri
 
-## <a name="linux-machine-storage"></a>Linux makine depolama
+## <a name="linux-machine-storage"></a>Linux makine depolaması
 
-Yalnızca Linux makineleri aşağıdaki depolama ile çoğaltılmış olabilir:
+Yalnızca aşağıdaki depolama alanına sahip Linux makineleri çoğaltılabiliyor:
 
 - Dosya sistemi (EXT3, ETX4, ReiserFS, XFS).
-- Çok yollu yazılım cihaz Eşleştirici.
+- Çok yollu yazılım-cihaz Eşleyici.
 - Birim Yöneticisi (LVM2).
-- HP CCISS denetleyicisi depolama ile fiziksel sunucuları desteklenmez.
-- ReiserFS dosya sistemi yalnızca SUSE Linux Enterprise Server 11 SP3 üzerinde desteklenir.
+- HP CCıS denetleyici depolaması olan fiziksel sunucular desteklenmez.
+- Reıfs dosya sistemi yalnızca SUSE Linux Enterprise Server 11 SP3'TE desteklenir.
 
-## <a name="network-configuration---hostguest-vm"></a>Ağ yapılandırması - konak/Konuk VM
+## <a name="network-configuration---hostguest-vm"></a>Ağ yapılandırması-Konak/Konuk VM
 
 **Yapılandırma** | **Destekleniyor**  
 --- | --- 
--Konak NIC ekibi oluşturma | Evet 
-Host - VLAN | Evet 
-Ana bilgisayar - IPv4 | Evet 
-Ana bilgisayar - IPv6 | Hayır 
-Konuk VM - NIC grubu oluşturma | Hayır
-Konuk VM - IPv4 | Evet
-Konuk VM - IPv6 | Hayır
-Konuk VM Windows/Linux - statik IP adresi | Evet
-Konuk VM - Multi-NIC | Evet
+Konak-NIC Grubu oluşturma | Yes 
+Konak-VLAN | Yes 
+Ana bilgisayar-IPv4 | Yes 
+Ana bilgisayar-IPv6 | Hayır 
+Konuk VM-NIC ekibi oluşturma | Hayır
+Konuk VM-IPv4 | Yes
+Konuk VM-IPv6 | Hayır
+Konuk VM-Windows/Linux-statik IP adresi | Yes
+Konuk VM-çoklu NIC | Yes
 
 
 ## <a name="storage"></a>Depolama
 
-### <a name="host-storage"></a>Konak depolama alanı
+### <a name="host-storage"></a>Konak depolaması
 
-**Depolama (ana bilgisayarı)** | **Destekleniyor**
+**Depolama (ana bilgisayar)** | **Destekleniyor**
 --- | --- 
 NFS | Yok
-SMB 3.0 |  Evet
-SAN (İSCSI) | Evet
-Çok yollu (MPIO) | Evet
+SMB 3.0 |  Yes
+SAN (ISCSı) | Yes
+Çoklu yol (MPIO) | Yes
 
-### <a name="guest-or-physical-server-storage"></a>Konuk veya fiziksel sunucu depolama
+### <a name="guest-or-physical-server-storage"></a>Konuk veya fiziksel sunucu depolaması
 
 **Yapılandırma** | **Destekleniyor**
 --- | --- | 
 VMDK |  Yok
-VHD/VHDX | Evet (en fazla 16 disk)
-Gen 2 VM | Evet
-Küme diski paylaşılan | Hayır
-Şifrelenmiş diski | Hayır
+VHD/VHDX | Evet (16 diske kadar)
+Gen 2 VM | Yes
+Paylaşılan küme diski | Hayır
+Şifrelenmiş disk | Hayır
 UEFI| Yok
 NFS | Hayır
 SMB 3.0 | Hayır
 RDM | Yok
-Disk > 1 TB | Evet
-Bölüştürülmüş bir disk > 1 TB birim<br/><br/> LVM | Evet
-Depolama alanları | Evet
-Sık erişimli Ekle/Kaldır disk | Hayır
-Diski hariç tutma | Evet
-Çok yollu (MPIO) | Evet
+Disk > 1 TB | Yes
+Dizili disk > 1 TB olan birim<br/><br/> LVM | Yes
+Depolama alanları | Yes
+Dinamik disk Ekle/Kaldır | Hayır
+Diski hariç tutma | Yes
+Çoklu yol (MPIO) | Yes
 
 ## <a name="vaults"></a>Kasalar
 
 **Eylem** | **Destekleniyor**
 --- | --- 
-Kasa (içinde veya abonelikler arasında) kaynak grupları arasında taşıma |  Hayır
-Depolama, ağ, Azure Vm'leri (içinde veya abonelikler arasında) kaynak grupları arasında taşıma | Hayır
+Kasalarını kaynak grupları arasında taşıma (veya abonelikler arasında) |  Hayır
+Depolama, ağ ve Azure VM 'lerini kaynak grupları arasında taşıma (abonelikler içinde veya abonelikler arasında) | Hayır
 
-## <a name="azure-site-recovery-provider"></a>Azure Site Recovery sağlayıcısı
+## <a name="azure-site-recovery-provider"></a>Azure Site Recovery sağlayıcı
 
-Sağlayıcı, VMM sunucuları arasındaki iletişimi düzenler. 
+Sağlayıcı, VMM sunucuları arasındaki iletişimleri koordine eder. 
 
-**en son** | **Güncelleştirmeler**
+**Sürümü** | **Güncelleştirmeler**
 --- | --- 
-5.1.19 ([portalında kullanılabilir](https://aka.ms/downloaddra) | [En son özellikler ve düzeltmeler](https://support.microsoft.com/kb/3155002)
+5.1.19 ([portaldan kullanılabilir](https://aka.ms/downloaddra) | [En son özellikler ve düzeltmeler](https://support.microsoft.com/kb/3155002)
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[VMM bulutlarındaki Hyper-V Vm'lerini ikincil bir siteye çoğaltma](tutorial-vmm-to-vmm.md)
+[VMM bulutlarındaki Hyper-V VM 'lerini ikincil bir siteye çoğaltma](tutorial-vmm-to-vmm.md)
 

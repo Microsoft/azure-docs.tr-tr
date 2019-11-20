@@ -1,30 +1,28 @@
 ---
-title: Linux'ta - Microsoft Azure VM diskleri için ölçeklenebilirlik ve performans hedefleri | Microsoft Docs
-description: Linux çalıştıran sanal makinelere bağlı sanal makine diskleri için ölçeklenebilirlik ve performans hedefleri hakkında bilgi edinin.
-services: virtual-machines-linux,storage
+title: Linux 'ta VM diskleri için ölçeklenebilirlik ve performans hedefleri-Microsoft Azure
+description: Linux çalıştıran VM 'lere bağlı sanal makine diskleri için ölçeklenebilirlik ve performans hedefleri hakkında bilgi edinin.
 author: roygara
 ms.author: rogarana
 ms.date: 11/15/2017
-ms.topic: article
+ms.topic: conceptual
 ms.service: virtual-machines-linux
-ms.tgt_pltfrm: linux
 ms.subservice: disks
-ms.openlocfilehash: 39e0a36b50a9e222e6016140967336ccda167514
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8bc355c4658ae3f410fb8852008752cf4497751d
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60771643"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036330"
 ---
 # <a name="scalability-and-performance-targets-for-vm-disks-on-linux"></a>Linux üzerinde VM diskleri için ölçeklenebilirlik ve performans hedefleri
 
 [!INCLUDE [azure-storage-limits-vm-disks](../../../includes/azure-storage-limits-vm-disks.md)]
 
-Bkz: [Linux VM boyutları](../../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) bakın.
+Daha fazla bilgi için bkz. [LINUX VM boyutları](../../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) .
 
 ## <a name="managed-virtual-machine-disks"></a>Yönetilen sanal makine diskleri
 
-Bir yıldız işaretiyle gösterilen boyutları şu anda Önizleme aşamasındadır. Bkz. bizim [SSS](faq-for-disks.md#new-disk-sizes-managed-and-unmanaged) bulunan hangi bölgelerde öğrenin.
+Yıldız işaretiyle belirtilen boyutlar Şu anda önizlemededir. Hangi bölgelere kullanılabildiğini öğrenmek için bkz. [SSS](faq-for-disks.md#new-disk-sizes-managed-and-unmanaged) .
 
 [!INCLUDE [azure-storage-limits-vm-disks-managed](../../../includes/azure-storage-limits-vm-disks-managed.md)]
 

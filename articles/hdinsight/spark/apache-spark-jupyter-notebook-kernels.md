@@ -1,100 +1,101 @@
 ---
-title: Azure HDInsight Spark kümeleri Jupyter not defteri için çekirdekler
-description: Azure HDInsight Spark kümelerinde kullanılabilen Jupyter notebook için PySpark PySpark3 ve Spark çekirdekler hakkında bilgi edinin.
-keywords: spark, jupyter, spark üzerinde jupyter notebook
+title: Azure HDInsight 'ta Spark kümelerinde Jupyter Not defteri için kernels
+description: Azure HDInsight 'ta Spark kümeleriyle kullanılabilen Jupyter Not defteri için pyspark, PySpark3 ve Spark çekirdekler hakkında bilgi edinin.
+keywords: Spark 'ta Jupyter Not defteri, Jupyter Spark
 author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.topic: conceptual
 ms.date: 05/27/2019
-ms.author: hrasheed
-ms.openlocfilehash: b2ae24c0449b009db6fcecdd8a1366ea5154629a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 44089ea4b997e06cb7654fc6665a1a9a59ae2658
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66257812"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494117"
 ---
-# <a name="kernels-for-jupyter-notebook-on-apache-spark-clusters-in-azure-hdinsight"></a>Azure HDInsight, Apache Spark kümeleri Jupyter not defteri için çekirdekler 
+# <a name="kernels-for-jupyter-notebook-on-apache-spark-clusters-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache Spark kümelerinde Jupyter Not defteri için kernels
 
-HDInsight Spark kümeleri Jupyter not defteri ile kullanabileceğiniz çekirdekler sağlar [Apache Spark](https://spark.apache.org/) uygulamalarınızı test etmek için. Bir çekirdek, çalışan ve kodunuzu yorumlar bir programdır. Üç çekirdek şunlardır:
+HDInsight Spark kümeleri, uygulamalarınızı test etmek için [Apache Spark](https://spark.apache.org/) üzerinde Jupyter Not defteri ile kullanabileceğiniz çekirdekler 'leri sağlar. Çekirdek, kodunuzu çalıştıran ve yorumlayan bir programdır. Üç keresi şunlardır:
 
-- **PySpark** - Python2 içinde yazılmış uygulamalar için.
-- **PySpark3** - Python3 dilinde yazılmış uygulamalar için.
-- **Spark** - Scala içinde yazılmış uygulamalar için.
+- **Pyspark** -Python2 dilinde yazılmış uygulamalar için.
+- **PySpark3** -Python3 dilinde yazılmış uygulamalar için.
+- **Spark** -Scala 'da yazılmış uygulamalar için.
 
-Bu makalede, bu çekirdekler ve bunları kullanmanın avantajları nasıl kullanılacağını öğrenin.
+Bu makalede, bu çekirdekleri kullanmayı ve bunların nasıl kullanıldığını öğrenirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-HDInsight, Apache Spark kümesi. Yönergeler için bkz. [Azure HDInsight'ta Apache Spark kümeleri oluşturma](apache-spark-jupyter-spark-sql.md).
+HDInsight 'ta bir Apache Spark kümesi. Yönergeler için bkz. [Azure HDInsight'ta Apache Spark kümeleri oluşturma](apache-spark-jupyter-spark-sql.md).
 
-## <a name="create-a-jupyter-notebook-on-spark-hdinsight"></a>Spark HDInsight üzerinde bir Jupyter not defteri oluşturma
+## <a name="create-a-jupyter-notebook-on-spark-hdinsight"></a>Spark HDInsight 'ta Jupyter Not defteri oluşturma
 
-1. Gelen [Azure portalında](https://portal.azure.com/), Spark kümenizi seçin.  Bkz: [kümeleri Listele ve Göster](../hdinsight-administer-use-portal-linux.md#showClusters) yönergeler için. **Genel bakış** görüntülemek açar.
+1. [Azure Portal](https://portal.azure.com/)Spark kümenizi seçin.  Yönergeler için bkz. [liste ve kümeleri gösterme](../hdinsight-administer-use-portal-linux.md#showClusters) . **Genel bakış** görünümü açılır.
 
-2. Gelen **genel bakış** görünümünde **küme panoları** kutusunda **Jupyter not defteri**. İstenirse, küme için yönetici kimlik bilgilerini girin.
+2. **Genel bakış** görünümünden **küme panoları** kutusunda **Jupyter Not defteri**' ni seçin. İstenirse, küme için yönetici kimlik bilgilerini girin.
 
-    ![Spark üzerinde Jupyter notebook](./media/apache-spark-jupyter-notebook-kernels/hdinsight-spark-open-jupyter-interactive-spark-sql-query.png "Spark üzerinde Jupyter notebook") 
+    ![Apache Spark Jupyter Not defteri](./media/apache-spark-jupyter-notebook-kernels/hdinsight-spark-open-jupyter-interactive-spark-sql-query.png "Spark üzerinde Jupyter Not defteri")
   
    > [!NOTE]  
-   > Spark kümesinde Jupyter not defterine aşağıdaki URL'yi tarayıcınızda açarak da ulaşabilir. **CLUSTERNAME** değerini kümenizin adıyla değiştirin:
+   > Ayrıca, tarayıcınızda aşağıdaki URL 'YI açarak Spark kümesinde Jupyter Not defteri 'ne ulaşabilirsiniz. **CLUSTERNAME** değerini kümenizin adıyla değiştirin:
    >
    > `https://CLUSTERNAME.azurehdinsight.net/jupyter`
 
-3. Seçin **yeni**ve ardından ya da **Pyspark**, **PySpark3**, veya **Spark** bir not defteri oluşturmak için. Spark Scala uygulamaları çekirdeğe, PySpark çekirdeği Python2 uygulamalar ve PySpark3 çekirdek Python3 uygulamalar için kullanın.
-   
-    ![Spark üzerinde Jupyter notebook için çekirdekler](./media/apache-spark-jupyter-notebook-kernels/kernel-jupyter-notebook-on-spark.png "için Spark üzerinde Jupyter not defteri çekirdekleri") 
+3. **Yeni**' yi seçin ve ardından bir not defteri oluşturmak Için **pyspark**, **PySpark3**veya **Spark** ' ı seçin. Scala uygulamaları için Spark çekirdeğini, Python2 uygulamaları için PySpark çekirdeği ve Python3 uygulamaları için PySpark3 çekirdeğini kullanın.
 
-4. Bir not defteri seçtiğiniz çekirdek ile açılır.
+    ![Spark 'ta Jupyter Not defteri için kernels](./media/apache-spark-jupyter-notebook-kernels/kernel-jupyter-notebook-on-spark.png "Spark 'ta Jupyter Not defteri için kernels")
+
+4. Seçtiğiniz çekirdekle bir not defteri açılır.
 
 ## <a name="benefits-of-using-the-kernels"></a>Çekirdekler kullanmanın avantajları
 
-HDInsight Spark kümeleri Jupyter not defteri ile yeni çekirdekler kullanmanın bazı avantajları şunlardır.
+İşte, Spark HDInsight kümelerinde Jupyter Not defteri ile yeni çekirdekler 'ları kullanmanın bazı avantajları aşağıda verilmiştir.
 
-- **Önceden ayarlanmış Bağlamlar**. İle **PySpark**, **PySpark3**, veya **Spark** çekirdekleri gerektirmeyen, uygulamalarla çalışmaya başlamadan önce Spark veya Hive bağlamları açıkça ayarlamak. Bunlar, varsayılan olarak kullanılabilir. Şu bağlamlarda şunlardır:
-   
-  * **sc** - Spark bağlamı için
-  * **sqlContext** - Hive bağlamı için
-   
-    Bu nedenle, gibi içerikler için aşağıdaki deyimleri çalıştırın gerekmez:
-   
+- **Önceden ayarlanmış bağlamlar**. **Pyspark**, **PySpark3**veya **Spark** kernels Ile, uygulamalarınızla çalışmaya başlamadan önce Spark veya Hive bağlamlarını açıkça ayarlamanız gerekmez. Bunlar varsayılan olarak kullanılabilir. Bu bağlamlar şunlardır:
+
+  - **sc** -Spark bağlamı için
+  - **SqlContext** -Hive bağlamı için
+
+    Bu nedenle, bağlamları ayarlamak için aşağıdaki gibi deyimler çalıştırmanız gerekmez:
+
          sc = SparkContext('yarn-client')
          sqlContext = HiveContext(sc)
-   
-    Bunun yerine, önceden ayarlanmış Bağlamlar doğrudan uygulamanızda kullanabilirsiniz.
 
-- **Hücre işlevlerini**. PySpark çekirdeği bazı önceden tanımlanmış "işlevlerini" ile çağırabileceğiniz özel komutlar olduğu sağlar `%%` (örneğin, `%%MAGIC` `<args>`). Sihirli komutu bir kod hücresi içinde ilk sözcük ve içeriği birden fazla satır için izin gerekir. Sihirli word hücredeki ilk sözcük olmalıdır. Magic bile açıklamalar önce herhangi bir şey ekleme, bir hataya neden olur.     İşlevlerini hakkında daha fazla bilgi için bkz. [burada](https://ipython.readthedocs.org/en/stable/interactive/magics.html).
-   
-    Aşağıdaki tabloda, çekirdekler kullanılabilen farklı işlevlerini listeler.
+    Bunun yerine, uygulamanızda önceden ayarlanmış bağlamlarını doğrudan kullanabilirsiniz.
+
+- **Hücre Mıknatıresikleri**. PySpark çekirdeği, `%%` (örneğin, `%%MAGIC` `<args>`) çağırabilmeniz için özel komutlar olan önceden tanımlanmış bazı "mıknatıcs" sağlar. MAGIC komutu bir kod hücresindeki ilk sözcük olmalıdır ve birden çok içerik satırı için izin verir. Sihirli sözcük, hücredeki ilk sözcük olmalıdır. Sihirli, hatta yorumlarla önce herhangi bir şey eklemek hataya neden olur.     Mıknatıcs hakkında daha fazla bilgi için [buraya](https://ipython.readthedocs.org/en/stable/interactive/magics.html)bakın.
+
+    Aşağıdaki tabloda kernels aracılığıyla kullanılabilen farklı mıknatıler listelenmiştir.
 
    | Magic | Örnek | Açıklama |
    | --- | --- | --- |
-   | Yardım |`%%help` |Örnek ve açıklaması ile kullanılabilir tüm işlevlerini bir tablo oluşturur |
-   | info |`%%info` |Çıkışlar oturum bilgilerini geçerli Livy uç noktası |
-   | Yapılandırma |`%%configure -f`<br>`{"executorMemory": "1000M"`,<br>`"executorCores": 4`} |Oturum oluşturmak için parametreler yapılandırır. Force bayrağını (-f) bir oturum zaten, oturum bırakılan ve yeniden sağlayan oluşturulduysa zorunludur. Bakmak [Livy'nın POST /sessions istek gövdesi](https://github.com/cloudera/livy#request-body) için geçerli parametrelerin bir listesi. Parametreler, içinde bir JSON dizesi geçirilmelidir ve sonraki satırda Sihirli sonra örnek sütununda gösterildiği gibi olması gerekir. |
-   | SQL |`%%sql -o <variable name>`<br> `SHOW TABLES` |Bir Hive sorgusu sqlContext karşı yürütür. Varsa `-o` parametresi geçirilir, sorgu sonucu kalıcı hale getirilir %% yerel Python bağlamı olarak bir [Pandas](https://pandas.pydata.org/) veri çerçevesi. |
-   | Yerel |`%%local`<br>`a=1` |Sonraki satırların tüm kodu yerel olarak yürütülür. Kod bile kullandığınız çekirdek bağımsız olarak geçerli Python2 kodu olmalıdır. Bu nedenle, seçtiyseniz, **PySpark3** veya **Spark** kullanırsanız, Not defterini oluşturulurken çekirdekler `%%local` Sihirli bir hücre, söz konusu hücrenin yalnızca geçerli Python2 kodunuz olmalıdır. |
-   | logs |`%%logs` |Geçerli oturumda Livy günlükleri çıkarır. |
-   | delete |`%%delete -f -s <session number>` |Belirli bir oturum geçerli Livy uç noktasının siler. Başlatılan oturum çekirdek için silinemiyor. |
-   | temizle |`%%cleanup -f` |Bu not defterinin oturumunu de dahil olmak üzere geçerli Livy uç noktası için tüm oturumları siler. Force bayrağını -f zorunludur. |
+   | Yardım |`%%help` |Örnek ve açıklama ile tüm kullanılabilir mıknatıc 'nin bir tablosunu oluşturur |
+   | Bilgisine |`%%info` |Geçerli Livy uç noktası için oturum bilgilerini çıkışlar |
+   | Yapılandırma |`%%configure -f`<br>`{"executorMemory": "1000M"`,<br>`"executorCores": 4`} |Oturum oluşturmak için parametreleri yapılandırır. Oturumun bırakılmış ve yeniden oluşturulmasını sağlayan bir oturum zaten oluşturulduysa zorla bayrağı (-f) zorunludur. Geçerli parametrelerin listesi için [Livy 'ın/Sessions Istek gövdesine](https://github.com/cloudera/livy#request-body) bakın. Parametrelerin, örnek sütununda gösterildiği gibi, bir JSON dizesi olarak geçirilmesi ve bir sonraki satırda olması gerekir. |
+   | SQL |`%%sql -o <variable name>`<br> `SHOW TABLES` |SqlContext 'e karşı bir Hive sorgusu yürütür. `-o` parametresi geçirilirse, sorgunun sonucu%% yerel Python bağlamında [Pandas](https://pandas.pydata.org/) dataframe olarak kalıcı hale getirilir. |
+   | Yerel |`%%local`<br>`a=1` |Sonraki satırlardaki tüm kodlar yerel olarak yürütülür. Kod, kullanmakta olduğunuz çekirdekten bağımsız olarak geçerli Python2 Code olmalıdır. Bu nedenle, Not defterini oluştururken **PySpark3** veya **Spark** çekirdekler ' ı seçmiş olsanız bile, bir hücrede `%%local` Magic kullanırsanız, bu hücrede yalnızca geçerli Python2 kodu olmalıdır. |
+   | günlükler |`%%logs` |Geçerli Livy oturumunun günlüklerini çıkış. |
+   | delete |`%%delete -f -s <session number>` |Geçerli Livy uç noktasının belirli bir oturumunu siler. Çekirdek için başlatılan oturumu silemezsiniz. |
+   | temizle |`%%cleanup -f` |Bu not defteri 'nin oturumu dahil olmak üzere, geçerli Livy uç noktası için tüm oturumları siler. Zorla bayrağı-f zorunludur. |
 
    > [!NOTE]  
-   > De kullanabilirsiniz işlevlerini yanı sıra PySpark çekirdeği tarafından eklenen [yerleşik Ipython işlevlerini](https://ipython.org/ipython-doc/3/interactive/magics.html#cell-magics)de dahil olmak üzere `%%sh`. Kullanabileceğiniz `%%sh` kümesi baş düğümünde betikleri ve kod bloğunu çalıştırmak için magic.
+   > PySpark çekirdeği tarafından eklenen mıknatıb 'ye ek olarak, `%%sh`dahil [yerleşik IPython mıknatıı](https://ipython.org/ipython-doc/3/interactive/magics.html#cell-magics)'leri de kullanabilirsiniz. Küme yayın düğümündeki betikleri ve kod bloğunu çalıştırmak için `%%sh` Magic ' i kullanabilirsiniz.
 
-- **Otomatik görselleştirme**. Pyspark çekirdeği otomatik olarak Hive ve SQL sorgusu çıkışını görselleştirir. Birkaç farklı türde görselleştirmeler içeren tablo, pasta, çizgi, alan, çubuğu arasında seçim yapabilirsiniz.
+- **Otomatik görselleştirme**. Pyspark çekirdeği, Hive ve SQL sorgularının çıkışını otomatik olarak görselleştirir. Tablo, pasta, çizgi, alan, çubuk gibi birçok farklı görselleştirme türü arasından seçim yapabilirsiniz.
 
-## <a name="parameters-supported-with-the-sql-magic"></a>Parametreler ile desteklenen %% sql Sihri
-`%%sql` Sihirli sorguları çalıştırdığınızda, aldığınız çıktı türünü denetlemek için kullanabileceğiniz farklı parametreleri destekler. Aşağıdaki tabloda çıkış listeler.
+## <a name="parameters-supported-with-the-sql-magic"></a>%% SQL Magic ile desteklenen parametreler
+
+`%%sql` Magic, sorguları çalıştırdığınızda aldığınız çıkışın türünü denetlemek için kullanabileceğiniz farklı parametreleri destekler. Aşağıdaki tabloda çıkış listelenmiştir.
 
 | Parametre | Örnek | Açıklama |
 | --- | --- | --- |
-| -o |`-o <VARIABLE NAME>` |Sorgu sonucu sızmak için bu parametreyi kullanın %% yerel Python bağlamı olarak bir [Pandas](https://pandas.pydata.org/) veri çerçevesi. Belirttiğiniz bir değişken adı dataframe değişkenin adıdır. |
-| -q |`-q` |Görselleştirmeler hücre için devre dışı bırakmak için bunu kullanın. Bir hücrenin içeriğinin autovisualize için istediğiniz yoksa ve yalnızca bir veri çerçevesi yakalamak istiyorsanız, bu, `-q -o <VARIABLE>`. Sonuçları yakalama olmadan görselleştirmeler etkinleştirmek istiyorsanız (örneğin, bir SQL sorgusu gibi çalışan bir `CREATE TABLE` deyimi), kullanın `-q` belirtmeden bir `-o` bağımsız değişken. |
-| -m |`-m <METHOD>` |Burada **yöntemi** ya da **ele** veya **örnek** (varsayılan değer **ele**). Yöntem ise **ele**, çekirdek MAXROWS (daha sonra bu tabloda açıklanmıştır) tarafından belirtilen sonuç veri kümesini üst öğelerinden seçer. Yöntem ise **örnek**, çekirdek rastgele öğeler göre veri kümesinin örnekleri `-r` parametresi, ardından bu tabloda açıklanır. |
-| -r |`-r <FRACTION>` |Burada **KESİR** 0,0 ile 1,0 arasında kayan noktalı bir sayıdır. SQL sorgusu için örnek yöntem ise `sample`, çekirdek için ayarladığınız sonucun öğelerin belirtilen kesir rastgele örnekler sonra. Örneğin, bir SQL sorgusu bağımsız değişkenleriyle Çalıştır `-m sample -r 0.01`, %1 sonucu satırların rastgele Örneklendi ve sonra. |
-| -n |`-n <MAXROWS>` |**MAXROWS** bir tamsayı değeri. Çekirdek çıkış satır sayısını sınırlayan **MAXROWS**. Varsa **MAXROWS** negatif bir sayı olduğu gibi **-1**, sonuç kümesinde satır sayısı sınırlı değildir. |
+| -o |`-o <VARIABLE NAME>` |Sorgunun sonucunu%% yerel Python bağlamında [Pandas](https://pandas.pydata.org/) dataframe olarak kalıcı hale getirmek için bu parametreyi kullanın. Dataframe değişkeninin adı belirttiğiniz değişken adıdır. |
+| -q |`-q` |Hücrenin görselleştirmeleri devre dışı bırakmak için bunu kullanın. Bir hücrenin içeriğini görselleştirmeyi ve yalnızca bir veri çerçevesi olarak yakalamak istemiyorsanız, `-q -o <VARIABLE>`kullanın. Sonuçları yakalamadan görselleştirmeleri devre dışı bırakmak istiyorsanız (örneğin, bir SQL sorgusunu bir `CREATE TABLE` bildiri gibi), bir `-o` bağımsız değişkeni belirtmeden `-q` kullanın. |
+| -a |`-m <METHOD>` |Burada **yöntemi** **Al** veya **Sample** (varsayılan olarak **Al**). Yöntemi **Al**ise, çekırdek, MaxRows tarafından belirtilen sonuç veri kümesinin üst kısmından (Bu tabloda daha sonra açıklanmıştır) öğeleri seçer. Yöntem **örnek**ise, çekirdek, bu tabloda daha sonra açıklanan `-r` parametresine göre veri kümesi öğelerini rasgele örnekler. |
+| -r |`-r <FRACTION>` |Burada **kesir** , 0,0 ile 1,0 arasında bir kayan noktalı sayıdır. SQL sorgusunun örnek yöntemi `sample`ise, çekirdek, sonuç kümesi öğelerinin belirtilen kesirini sizin için rasgele şekilde örnekleyebilirsiniz. Örneğin, `-m sample -r 0.01`bağımsız değişkenlerle bir SQL sorgusu çalıştırırsanız, sonuç satırlarının %1 ' i rastgele örneklenir. |
+| -n |`-n <MAXROWS>` |**MaxRows** bir tamsayı değeridir. Çekirdek, çıkış satırı sayısını **MaxRows**olarak sınırlandırır. **MaxRows** , **-1**gibi negatif bir sayı ise, sonuç kümesindeki satır sayısı sınırlı değildir. |
 
 **Örnek:**
 
@@ -103,58 +104,63 @@ HDInsight Spark kümeleri Jupyter not defteri ile yeni çekirdekler kullanmanın
 
 Yukarıdaki ifade şunları yapar:
 
-* Tüm kayıtları seçer **hivesampletable**.
-* -Q, kullandığımızdan autovisualization devre dışı bırakır.
-* Kullandığımızdan `-m sample -r 0.1 -n 500` rastgele %10 hivesampletable satırların örnekleri ve sonuç için 500 satır kümesi boyutunu sınırlar.
-* Son olarak, kullandık çünkü `-o query2` de adlı dataframe'e çıktıyı kaydeder **sorgu2**.
+- **Hivesampletable**içindeki tüm kayıtları seçer.
+- -Q ' ı kullandığımızda, oto görselleştirmeyi devre dışı bırakır.
+- `-m sample -r 0.1 -n 500` kullandığımızda, hivesampletable içindeki satırların %10 ' un rastgele örneklerinin yanı sıra sonuç kümesinin boyutunu 500 satır olarak sınırlandırır.
+- Son olarak `-o query2` kullandığımızda, çıktıyı **query2**adlı bir veri çerçevesine de kaydeder.
 
-## <a name="considerations-while-using-the-new-kernels"></a>Yeni çekirdekler kullanırken dikkat edilmesi gerekenler
+## <a name="considerations-while-using-the-new-kernels"></a>Yeni çekirdekler kullanırken dikkat edilecek noktalar
 
-Kullandığınız hangi çekirdek çalıştıran not defterlerini bırakarak küme kaynaklarını tüketir.  Bu çekirdekleri ile bağlamları hazır olduğundan, basitçe not defterlerini çıkmadan bağlamı sonlandırmaz ve küme kaynaklarını kullanımda bu nedenle devam eder. İyi bir uygulama kullanmaktır **Kapat ve Durdur** not defterinin seçeneğinden **dosya** bağlam sonlandırır ve not defteri çıkar Not Defteri kullanarak tamamladığınızda menüsü.
+Hangi çekirdeğin kullanıldığı, çalışan not defterlerini çalıştıran küme kaynakları tüketir.  Bu çekirdekler sayesinde, bağlamlar önceden ayarlanmış olduğundan, not defterlerinden çıkmak bağlamı sonlandırmaz ve bu nedenle küme kaynakları kullanımda olmaya devam eder. Not defteri 'ni kullanmayı bitirdiğinizde Not defteri 'nin **Dosya** menüsünden **Kapat ve Durdur** seçeneğini kullanmak iyi bir uygulamadır. Bu, bağlamı sonlandırır ve sonra Not defterinden çıkar.
 
-## <a name="where-are-the-notebooks-stored"></a>Not defterlerini nerede depolanır?
+## <a name="where-are-the-notebooks-stored"></a>Not defterleri nerede depolanır?
 
-Kümenizi Azure depolama varsayılan depolama hesabı olarak kullanıyorsa, Jupyter not defterleri altında depolama hesabına kaydedilir **/HdiNotebooks** klasör.  Not defterleri, metin dosyalarını ve Jupyter içinde oluşturduğunuz klasörler, depolama hesabından erişilebilir.  Örneğin, bir klasör oluşturmak için Jupyter kullanırsanız **Klasörüm'ün** ve bir not defteri **myfolder/mynotebook.ipynb**, bu not defteri adresindeki erişebileceğiniz `/HdiNotebooks/myfolder/mynotebook.ipynb` depolama hesabında.  Depolama hesabınıza doğrudan bir not defteri yüklerseniz tersi de diğer bir deyişle, true ise `/HdiNotebooks/mynotebook1.ipynb`, Jupyter not defterini de görülebilir.  Hatta kümesi silindikten sonra not defterleri depolama hesabında kalır.
+Kümeniz varsayılan depolama hesabı olarak Azure Storage kullanıyorsa, jupi Not defterleri **/HdiNotebooks** klasörünün altında depolama hesabına kaydedilir.  Jupi içinden oluşturduğunuz Not defterleri, metin dosyaları ve klasörlere depolama hesabından erişilebilir.  Örneğin, Jupyter kullanarak **bir klasör klasörü ve** **myFolder/mynot defteri. ipynb**oluşturmak için bu not defterine depolama hesabı içinde `/HdiNotebooks/myfolder/mynotebook.ipynb` erişebilirsiniz.  Tersi de geçerlidir; diğer bir deyişle, `/HdiNotebooks/mynotebook1.ipynb`bir not defterini doğrudan depolama hesabınıza yüklerseniz, Not defteri Jupyter 'dan da görünür.  Not defterleri, küme silindikten sonra bile depolama hesabında kalır.
 
 > [!NOTE]  
-> Varsayılan depolama alanı olarak Azure Data Lake Store ile HDInsight kümeleri, not defterlerini ilişkili depolama alanında depolamayın.
+> Varsayılan depolama alanı olarak Azure Data Lake Storage HDInsight kümeleri, not defterlerini ilişkili depolamada depolamaz.
 
-Not defterleri, depolama hesabına kaydedilir şekilde uyumludur [Apache Hadoop HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html). Bu nedenle, aşağıdaki kod parçacığında gösterildiği gibi kullanabileceğiniz kümesine SSH yönetimi komutları dosya:
+Not defterlerini depolama hesabına kaydetme yöntemi [Apache Hadoop](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html)Le uyumludur. Bu nedenle, kümeye SSH yaparsanız, aşağıdaki kod parçacığında gösterildiği gibi dosya yönetimi komutlarını kullanabilirsiniz:
 
     hdfs dfs -ls /HdiNotebooks                            # List everything at the root directory – everything in this directory is visible to Jupyter from the home page
     hdfs dfs –copyToLocal /HdiNotebooks                   # Download the contents of the HdiNotebooks folder
     hdfs dfs –copyFromLocal example.ipynb /HdiNotebooks   # Upload a notebook example.ipynb to the root folder so it’s visible from Jupyter
 
-Olup küme Azure Depolama'da veya Azure Data Lake Storage varsayılan depolama hesabı olarak kullanan bağımsız olarak not defterleri de küme baş düğümüne kaydedilir `/var/lib/jupyter`.
+Kümenin Azure Storage ' ı veya varsayılan depolama hesabı olarak Azure Data Lake Storage kullanıp kullanmadığını bağımsız olarak, Not defterleri de `/var/lib/jupyter`küme yayın düğümüne kaydedilir.
 
 ## <a name="supported-browser"></a>Desteklenen tarayıcı
 
-HDInsight Spark kümeleri Jupyter not defterleri yalnızca Google Chrome üzerinde desteklenir.
+Spark HDInsight kümelerinde jupyıter Not defterleri yalnızca Google Chrome 'da desteklenir.
 
 ## <a name="feedback"></a>Geri Bildirim
 
-Yeni çekirdekler aşama gelişen içinde olan ve zaman içinde yetişkin. Bu da bu çekirdekler yetişkin olarak API'leri değişebilir gelebilir. Bu yeni çekirdekler kullanırken sahip olduğunuz herhangi bir Geri bildiriminiz veriyoruz. Bu, bu çekirdekler'ın son sürümünde şekillendirmeye kullanışlıdır. Yorumlar/Görüşleriniz altında bırakabilirsiniz **geri bildirim** bu makalenin alt kısmındaki bölümde.
+Yeni kerler gelişen aşamada ve zaman içinde yer alacak. Bu da API 'Lerin bu çekirdekler gibi değiştirebileceği anlamına da gelebilir. Bu yeni çekirdekleri kullanırken sahip olduğunuz tüm geri bildirimleri umuruz. Bu kernels 'lerin son sürümünü şekillendirmeye yardımcı olur. Açıklamalarınızı/geri bildiriminizi bu makalenin altındaki **geri bildirim** bölümünde bırakabilirsiniz.
 
 ## <a name="seealso"></a>Ayrıca bkz.
-* [Genel Bakış: Azure HDInsight üzerinde Apache Spark](apache-spark-overview.md)
+
+- [Genel Bakış: Azure HDInsight’ta Apache Spark](apache-spark-overview.md)
 
 ### <a name="scenarios"></a>Senaryolar
-* [Apache Spark ile BI: BI araçları ile HDInsight Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](apache-spark-use-bi-tools.md)
-* [Apache Spark Machine Learning ile: HVAC verilerini kullanarak bina sıcaklığını çözümlemek için HDInsight içindeki Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
-* [Apache Spark Machine Learning ile: Gıda denetimi sonuçlarını tahmin etmek için HDInsight içindeki Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
-* [HDInsight Apache Spark'ı kullanarak Web sitesi günlüğü çözümlemesi](apache-spark-custom-library-website-log-analysis.md)
+
+- [BI ile Apache Spark: bı araçlarıyla HDInsight 'ta Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](apache-spark-use-bi-tools.md)
+- [Machine Learning ile Apache Spark: HVAC verilerini kullanarak oluşturma sıcaklığını çözümlemek için HDInsight 'ta Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
+- [Machine Learning Apache Spark: yemek İnceleme sonuçlarını tahmin etmek için HDInsight 'ta Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
+- [HDInsight 'ta Apache Spark kullanarak Web sitesi günlüğü Analizi](apache-spark-custom-library-website-log-analysis.md)
 
 ### <a name="create-and-run-applications"></a>Uygulamaları oluşturma ve çalıştırma
-* [Scala kullanarak tek başına uygulama oluşturma](apache-spark-create-standalone-application.md)
-* [Apache Livy kullanarak bir Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
+
+- [Scala kullanarak tek başına uygulama oluşturma](apache-spark-create-standalone-application.md)
+- [Apache Livy kullanarak Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
 
 ### <a name="tools-and-extensions"></a>Araçlar ve uzantılar
-* [Spark Scala uygulamaları oluşturmak ve göndermek amacıyla IntelliJ IDEA için HDInsight Araçları Eklentisini kullanma](apache-spark-intellij-tool-plugin.md)
-* [Apache Spark uygulamalarında uzaktan hata ayıklamak amacıyla Intellij Idea için HDInsight araçları eklentisi kullanma](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
-* [HDInsight üzerinde Apache Spark kümesi ile Apache Zeppelin not defterlerini kullanma](apache-spark-zeppelin-notebook.md)
-* [Jupyter not defterleri ile dış paketleri kullanma](apache-spark-jupyter-notebook-use-external-packages.md)
-* [Jupyter’i bilgisayarınıza yükleme ve bir HDInsight Spark kümesine bağlanma](apache-spark-jupyter-notebook-install-locally.md)
+
+- [Spark Scala uygulamaları oluşturmak ve göndermek amacıyla IntelliJ IDEA için HDInsight Araçları Eklentisini kullanma](apache-spark-intellij-tool-plugin.md)
+- [Apache Spark uygulamalarında uzaktan hata ayıklama için IntelliJ fıkır için HDInsight Araçları eklentisini kullanın](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
+- [HDInsight 'ta Apache Spark kümesiyle Apache Zeppelin not defterlerini kullanma](apache-spark-zeppelin-notebook.md)
+- [Jupyter not defterleri ile dış paketleri kullanma](apache-spark-jupyter-notebook-use-external-packages.md)
+- [Jupyter’i bilgisayarınıza yükleme ve bir HDInsight Spark kümesine bağlanma](apache-spark-jupyter-notebook-install-locally.md)
 
 ### <a name="manage-resources"></a>Kaynakları yönetme
-* [Azure HDInsight’ta Apache Spark kümesi kaynaklarını yönetme](apache-spark-resource-manager.md)
-* [HDInsight’ta bir Apache Spark kümesinde çalışan işleri izleme ve hata ayıklama](apache-spark-job-debugging.md)
+
+- [Azure HDInsight’ta Apache Spark kümesi kaynaklarını yönetme](apache-spark-resource-manager.md)
+- [HDInsight’ta bir Apache Spark kümesinde çalışan işleri izleme ve hata ayıklama](apache-spark-job-debugging.md)

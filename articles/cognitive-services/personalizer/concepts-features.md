@@ -1,83 +1,87 @@
 ---
-title: 'Özellikler: Eylem ve bağlam - Personalizer'
+title: 'Özellikler: eylem ve bağlam kişiselleştirici'
 titleSuffix: Azure Cognitive Services
-description: Personalizer özellikleri, Eylemler ve içeriği hakkındaki bilgileri daha iyi sıralama önerilerde bulunmak için kullanır. Özellikler, çok genel ya da belirli bir öğe için kullanılabilir.
+description: Kişiselleştirici, daha iyi derecelendirme önerileri sağlamak için özellikleri, Eylemler ve bağlam hakkındaki bilgileri kullanır. Özellikler çok genel veya bir öğeye özgü olabilir.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: concept
-ms.date: 06/24/2019
-ms.author: edjez
-ms.openlocfilehash: 2353b8c735602aff0386f44cc29d2be5eb9f90c4
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.topic: conceptual
+ms.date: 10/14/2019
+ms.author: diberry
+ms.openlocfilehash: 9a7599cd71c087201b54c594954a6fff377b3e45
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67340881"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490771"
 ---
-# <a name="features-are-information-about-actions-and-context"></a>Eylemler ve bağlamı hakkında bilgi özellikleridir
+# <a name="features-are-information-about-actions-and-context"></a>Özellikler, Eylemler ve bağlamla ilgili bilgiler
 
-Uygulamanızı kullanıcılara verilen bir bağlamda göstermelidir öğrenerek Personalizer hizmeti çalışır.
+Kişiselleştirici hizmeti, uygulamanızın belirli bir bağlamdaki kullanıcılara ne göstermesi gerektiğini öğrenerek işe yarar.
 
-Personalizer kullanan **özellikleri**, hakkında bilgi olan **geçerli bağlam** en iyi şekilde seçmenizi **eylem**. Özellikler, daha yüksek bir ödül elde etmek için kişiselleştirme yardımcı olabilecek düşündüğünüz tüm bilgileri temsil eder. Özellikler, çok genel ya da belirli bir öğe için kullanılabilir. 
+Kişiselleştirici, en iyi **eylemi**seçmek için **geçerli bağlamla** ilgili bilgiler olan **özellikleri**kullanır. Özellikler, daha yüksek ödüller elde etmek için kişiselleştirmenize yardımcı olabilecek tüm bilgileri temsil eder. Özellikler çok genel veya bir öğeye özgü olabilir. 
 
-Örneğin, olabilir bir **özellik** hakkında:
+Örneğin, şu **özelliklere** sahip olabilirsiniz:
 
-* _Kullanıcı_ gibi bir `UserID`. 
-* _İçeriği_ video olması gibi bir `Documentary`, `Movie`, veya bir `TV Series`, veya bir perakende öğesi mağazada kullanıma sunulan olup olmadığı.
-* _Geçerli_ haftanın günü gibi olduğu süreyi dönem.
+* `Sports_Shopper`gibi _Kullanıcı_ . Bu, tek bir kullanıcı KIMLIĞI olmamalıdır. 
+* Bir video `Documentary`, bir `Movie`veya `TV Series`ya da bir perakende öğesinin mağazada kullanılabilir olup olmadığı gibi _içerikler_ .
+* Haftanın günün saati gibi _geçerli_ süre.
 
-Personalizer belgenizdeki değil, sınırlandıracak ya da düzeltme eylemleri ve bağlam için gönderebilirsiniz hangi özellikler:
+Kişiselleştirici, Eylemler ve bağlam için göndereceğiniz özellikleri etkilemez, sınırlamaz veya düzelmez:
 
-* Bunlara sahip değilseniz, bazı özellikler için diğer ve bazı eylemler için gönderebilirsiniz. Örneğin, TV dizisi filmler yoksa öznitelikleri olabilir.
-* Yalnızca bazı kez kullanılabilen bazı özellikler olabilir. Örneğin, bir mobil uygulama bir web sayfasında daha fazla bilgi sağlayabilir. 
-* Zaman içinde ekleyin ve bağlam ve özellikleri Kaldır. Personalizer mevcut olan bilgileri öğrenmeye devam eder.
-* Bağlam için en az bir özellik olması gerekir. Boş bir bağlamda personalizer desteklemez. Her seferinde yalnızca bir sabit bağlamı gönderirseniz, Personalizer özellikleri ile ilgili eylemler yalnızca sıralamasına eylemi seçer. 
-* En iyi herhangi bir zamanda herkes için eylemleri seçin personalizer çalışacaktır.
+* Bazı eylemler için bazı özellikler gönderebilirsiniz, bunlar yoksa diğerleri için değildir. Örneğin, TV serisinde filmlerin olmayan öznitelikleri olabilir.
+* Bazı özelliklerinizin yalnızca birkaç kez kullanılabilir olması olabilir. Örneğin, bir mobil uygulama bir Web sayfasından daha fazla bilgi sağlayabilir. 
+* Zamanla, bağlam ve eylemler hakkında özellikler ekleyebilir ve kaldırabilirsiniz. Kişiselleştirici, kullanılabilir bilgilerden öğrenmeye devam ediyor.
+* Bağlam için en az bir özellik olmalıdır. Kişiselleştirici boş bir bağlamı desteklemiyor. Her seferinde yalnızca sabit bir bağlam gönderirseniz, kişiselleştirici yalnızca eylemlerdeki özelliklerle ilgili olarak, derecelendiriciye yönelik eylemi seçer.
+* Kategorik özellikler için olası değerleri tanımlamanız gerekmez ve sayısal değerler için aralıkları önceden tanımlamanız gerekmez.
 
 ## <a name="supported-feature-types"></a>Desteklenen özellik türleri
 
-Personalizer dize, sayısal ve boolean türleri özelliklerini destekler.
+Kişiselleştirici dize, sayısal ve Boole türlerinin özelliklerini destekler.
 
-### <a name="how-choice-of-feature-type-affects-machine-learning-in-personalizer"></a>Özellik türü seçimi Personalizer Machine Learning'de nasıl etkiler?
+### <a name="how-choice-of-feature-type-affects-machine-learning-in-personalizer"></a>Özellik türü seçimi, kişiselleştirici içinde Machine Learning nasıl etkiler
 
-* **Dizeleri**: Dize türleri için her bir anahtar ve değer birleşimi yeni ağırlıkları Personalizer machine learning modeli oluşturur. 
-* **Sayısal**: Sayı orantılı olarak kişiselleştirme sonucu etkiler, sayısal değerleri kullanmanız gerekir. Bu çok bağımlı bir senaryodur. Basitleştirilmiş örnekte örneğin ne zaman bir perakende kişiselleştirme deneyimi NumberOfPetsOwned iki kez veya thrice olarak 1 evcil hayvan sahip kişiselleştirme sonucu etkilemek için 2 veya 3 Evcil Hayvanlar kişilerle isteyebileceğinizden sayısal özelliğini olabilir. Dizeler ve özellik kalite genellikle aralıkları kullanılarak geliştirilebilir gibi sayısal birimlerde temel alır, ancak burada anlamı yaş, sıcaklık veya kişi Height - gibi doğrusal - olmayan özellikler en iyi kodlanır. Örneğin, yaş "Yaş" kodlanmış: "0-5", "Yaş": "6-10", vs.
-* **Boole** gibi bunlar hiç gönderilen yüklediniz, "false" Yasası değeriyle gönderilen değerler.
+* **Dizeler**: dize türleri için, her anahtar ve değerin birleşimi, kişiselleştirici makine öğrenimi modelinde yeni ağırlıklar oluşturur. 
+* **Sayısal**: sayı, kişiselleştirme sonucunu orantılı bir şekilde etkiliyorsa sayısal değerleri kullanmanız gerekir. Bu, çok senaryoya bağımlıdır. Basitleştirilmiş bir örnekte, örneğin, bir perakende deneyimini kişiselleştirmek için, 2 veya 3 pelleri olan kişilerin kişiselleştirme sonucunu iki kez etkilemesini veya 1 Evcil hayvan 'yı büyük ölçüde etkilemesini isteyebileceğiniz için sayısal olan bir özellik olabilir. Sayısal birimleri temel alan, ancak anlamı yaş, sıcaklık veya kişi yüksekliği gibi doğrusal olmayan, en iyi dize olarak kodlanan ve özellik kalitesi genellikle aralıklar kullanılarak iyileştirilen özelliklerdir. Örneğin, Yaş "Age" olarak kodlanıp: "0-5", "Age": "6-10", vb.
+* "False" değeri ile gönderilen **Boole** değerleri, hiç gönderilmemiş gibi davranır.
 
-Mevcut olmayan özellikleri istekten atlanmış olabilir. Gönderme özellikleri null bir değerle kaçının, çünkü, varolan olarak ve "null" değerini içeren modeli eğitimindeki işlenir.
+Mevcut olmayan özellikler istekten atlanmalıdır. Model eğitimi yaparken, bir null değeri olan ve bir "null" değeri ile işlenen özellikler göndermekten kaçının.
 
-## <a name="categorize-features-with-namespaces"></a>Ad alanları özelliklerle kategorilere ayırma
+## <a name="categorize-features-with-namespaces"></a>Özellikleri ad alanları ile kategorilere ayırma
 
-Ad alanları olarak düzenlenmiş özellikler personalizer alır. Ad kullandıysanız, uygulamanızın ve bunların ne olması gerektiğini belirler. Ad alanları, özellikleri benzer bir konu hakkında veya belirli bir kaynaktan geliyor özellikleri gruplandırmak için kullanılır.
+Kişiselleştirici, ad alanları halinde düzenlenmiş özellikleri alır. Uygulamanızda, ad alanları kullanılıyorsa ve bunların ne olması gerektiğini belirlersiniz. Ad alanları, benzer bir konuyla ilgili özellikleri veya belirli bir kaynaktan gelen özellikleri gruplandırmak için kullanılır.
 
-Uygulamaları tarafından kullanılan özellik ad alanları örnekleri aşağıda verilmiştir:
+Uygulamalar tarafından kullanılan özellik ad alanı örnekleri aşağıda verilmiştir:
 
 * User_Profile_from_CRM
 * Zaman
 * Mobile_Device_Info
 * http_user_agent
 * VideoResolution
-* UserDeviceInfo
+* Userdeviceınfo
 * Hava durumu
 * Product_Recommendation_Ratings
 * current_time
 * NewsArticle_TextAnalytics
 
-Geçerli JSON anahtarlarını oldukları sürece kendi kurallarına özellik ad alanı adı ekleyebilirsiniz.
+Özellik ad alanlarını, geçerli JSON anahtarları oldukları sürece kendi kurallarınızı izleyerek adlandırın. Ad alanları, özellikleri farklı kümeler halinde düzenlemek ve benzer adlarla özellikleri ortadan kaldırmak için kullanılır. Ad alanlarını, özellik adlarına eklenen bir ' önek ' olarak düşünebilirsiniz. Ad alanları iç içe olamaz.
 
-Aşağıdaki json'da `user`, `state`, ve `device` özellik adları.
 
-JSON nesneleri, iç içe geçmiş JSON nesneleri ve basit özellik değerlerini içerebilir. Yalnızca sayılar dizi öğeleri, bir dizi dahil edilebilir. 
+Aşağıdaki JSON 'da, `user`, `state`ve `device` Özellik ad uzaylardır. 
+
+> [!Note]
+> Şu anda UTF-8 tabanlı özellik ad alanları için adların kullanılması ve farklı harfler ile başlaması önemle önerilir. Örneğin, `user`, `state`ve `device` `u`, `s`ve `d`ile başlayın. Şu anda aynı ilk karakterlerle ad alanları olması makine öğreniminde kullanılan dizinlerde çakışmaları ortaya çıkmasına neden olabilir.
+
+JSON nesneleri, iç içe geçmiş JSON nesnelerini ve basit özellik/değerleri içerebilir. Bir dizi yalnızca dizi öğeleri sayı ise dahil edilebilir. 
 
 ```JSON
 {
     "contextFeatures": [
         { 
             "user": {
-                "name":"Doug",
+                "profileType":"AnonymousUser",
                 "latlong": [47.6, -122.1]
             }
         },
@@ -97,109 +101,116 @@ JSON nesneleri, iç içe geçmiş JSON nesneleri ve basit özellik değerlerini 
 }
 ```
 
-## <a name="how-to-make-feature-sets-more-effective-for-personalizer"></a>Özellik yapma daha etkili Personalizer için ayarlar.
+### <a name="restrictions-in-character-sets-for-namespaces"></a>Ad alanları için karakter kümelerinde kısıtlamalar
 
-İyi özellik kümesini Personalizer yüksek ödül artıracak eylemi tahmin etme hakkında bilgi edinin yardımcı olur. 
+Ad alanını adlandırırken kullandığınız dize bazı kısıtlamalara uymalıdır: 
+* Unicode olamaz.
+* Ad alanı adları için < 256 kodlu bazı yazdırılabilir sembolleri kullanabilirsiniz. 
+* Sembolleri < 32 (yazdırılamaz), 32 (boşluk), 58 (iki nokta), 124 (pipe) ve 126 – 140 kodlarla kullanamazsınız.
 
-Bu önerilere uyun Personalizer derece API gönderme özellikleri göz önünde bulundurun:
+## <a name="how-to-make-feature-sets-more-effective-for-personalizer"></a>Özellik kümelerini kişiselleştirici için nasıl daha etkili hale getirme
 
-* Sürücü kişiselleştirme yeterli özellikler mevcuttur. Daha fazla içerik olması gerekiyor tam olarak hedeflenen, daha fazla özellik gereklidir.
+İyi bir özellik kümesi, kişiselleştirmenin, en yüksek ödül sağlayacak eylemi nasıl önleyeceğinizi öğrenmenize yardımcı olur. 
 
-* Yeterli özelliklerini farklı vardır *densities*. Bir özellik *yoğun* birçok öğe, birkaç demet gruplanması durumunda. Örneğin, "Uzun" videoları binlerce sınıflandırılabilir (uzun üzerinde 5 dakika) ve "Kısa" (uzun altında 5 dakika). Bu bir *çok yoğun* özelliği. Öte yandan, öğeler aynı binlerce neredeyse hiç bir öğe diğerine aynı değer gerekir "Title" adlı bir öznitelik olabilir. Bir çok olmayan yoğun budur veya *seyrek* özelliği.  
+Aşağıdaki önerileri takip eden, kişiselleştirici derecelendirme API 'sine Özellikler göndermeyi göz önünde bulundurun:
 
-Yüksek yoğunluklu özelliklerine sahip bir öğesinden öğrenme tahmin Personalizer yardımcı olur. Ancak, yalnızca birkaç özellik vardır ve bunlar çok yoğun Personalizer tam olarak seçilecek yalnızca birkaç demet ile içerik hedef çalışacaktır.
+* Sürücü kişiselleştirmesi için yeterli özellik vardır. İçeriğin daha kesin bir şekilde hedeflenmiş olması gerekir, daha fazla özellik gereklidir.
 
-### <a name="improve-feature-sets"></a>Özellik kümeleri geliştirin 
+* Çeşitli *siteler*için yeterli özellikler vardır. Birçok öğe birkaç demette gruplandırılmışsa özellik *yoğun* olur. Örneğin, binlerce video "Long" (5 dakikadan fazla) ve "Short" (5 dakikalık bir süre altında) olarak sınıflandırılabilirler. Bu *çok yoğun* bir özelliktir. Diğer taraftan, aynı değere sahip olan binlerce öğe "title" adlı bir özniteliğe sahip olabilir, bu da neredeyse hiçbir şekilde bir öğeden diğerine benzer. Bu çok yoğun olmayan veya *seyrek* bir özelliktir.  
 
-Çevrimdışı değerlendirme yaparak kullanıcı davranışı çözümleyebilir. Bu, hangi özellikleri yoğun olarak daha az katkıda bulunuyorsanız ve pozitif ödül katkıda bulunduğunuz görmek için geçmiş veri bakmak sağlar. Hem de daha iyi özellikleri bulmak için uygulamanızın kadar sonuçlarını daha da geliştirmek için Personalizer göndermeye olacaktır ve özellikleri yardımcı olduğumuz görebilirsiniz.
+Yüksek yoğunluklu özelliklerin olması, kişiselleştirmeye en geç öğrenmeyi bir öğeden diğerine kadar ortadan kaldırmanıza yardımcı olur. Ancak, yalnızca birkaç özellik varsa ve bunlar çok yoğun ise, kişiselleştirici, içeriği yalnızca birkaç demetle tam olarak hedeflemek üzere çalışır.
 
-Aşağıdaki bölümlerde bu özellikler için Personalizer gönderilen artırmak için ortak yöntemleridir.
+### <a name="improve-feature-sets"></a>Özellik kümelerini geliştirme 
 
-#### <a name="make-features-more-dense"></a>Özellikler daha yoğun bir hale getirir
+Çevrimdışı bir değerlendirme gerçekleştirerek Kullanıcı davranışını çözümleyin. Bu, ne kadar çok daha fazla katkıda bulunanlara göre olumlu bir ölçüde daha fazla katkı olduğunu görmek için geçmiş verileri görmenizi sağlar. Hangi özelliklerin yardımcı olduğunu görebilirsiniz ve daha da çok daha fazla bilgi edinmek için kişiselleştirmeye gönderilmek üzere daha iyi özellikler bulabilirsiniz.
 
-Daha büyük ve daha fazla veya daha az yoğun yapmak için bunları düzenleyerek, özellik kümeleri artırmak mümkündür.
+Aşağıdaki bölümler, Kişiselleştiriciye gönderilen özellikleri iyileştirmeye yönelik yaygın uygulamalardan oluşur.
 
-Örneğin, bir zaman damgası saniye kadar çok seyrek bir özelliğidir. Bunu daha fazla yoğun (etkin) kez sınıflandırma "sabah", "öğle saati", "öğleden sonra", vb. tarafından yapılamadı.
+#### <a name="make-features-more-dense"></a>Özellikleri daha yoğun hale getirme
+
+Özellik kümelerinizi daha büyük ve daha fazla veya daha az yoğun hale getirmek üzere düzenleyerek geliştirmek mümkündür.
+
+Örneğin, ikincisine doğru bir zaman damgası çok seyrek bir özelliktir. Süreleri "sabah", "Orta gün", "öğleden sonra" vb. sınıflandırarak daha yoğun (etkili) hale getirilebilir.
 
 
-#### <a name="expand-feature-sets-with-extrapolated-information"></a>Özellik kümeleri ortaya çıkabilecek bilgilerle genişletin
+#### <a name="expand-feature-sets-with-extrapolated-information"></a>Extrapotildi Information ile özellik kümelerini Genişlet
 
-Ayrıca, zaten sahip olduğunuz bilgilerinden türetilen keşfedilmemiş özniteliklerin düşünerek daha fazla özellik elde edebilirsiniz. Örneğin, bir kurgusal film listesi kişiselleştirmeyi, olası, bir hafta sonu vs haftanın günü, kullanıcıların farklı bir davranış verilmesini sağlar nedir? "Hafta" veya "iş günü" özniteliği için zaman genişletilemiyor. İlgiyi belirli film türleri kültürel Ulusal tatilleri yönlendiriyor? Örneğin, "Cadılar Bayramı" özniteliği ilgili olduğu yerde yararlı olur. Rainy hava durumu, tercih ettiğiniz bir filmi üzerinde önemli bir etkisi çoğu kişi için döndürmüş olabilir mi? Zaman ve yerde, hava durumu hizmetine bilgi ve bunu ek bir özellik olarak ekleyebilirsiniz sağlayabilir. 
+Ayrıca, zaten sahip olduğunuz bilgilerden türetilebilen keşfedilmemiş öznitelikleri düşünerek daha fazla özellik elde edebilirsiniz. Örneğin, kurgusal bir film listesi kişiselleştirmesi sırasında, bir hafta içi iş gününe ait farklı bir çalışma gününe ait farklı bir davranış olabilir mi? Saat, "hafta sonu" veya "hafta içi" özniteliğine sahip olacak şekilde genişletilebilir. Ulusal kültürel Uluslararası tatiller, belirli film türlerine göre ilgilensin mi? Örneğin, "Cadılar Bayramı" özniteliği ilgili olduğu yerlerde faydalıdır. Rainy Hava durumu, birçok kişiye ait bir film seçimine önemli bir etkiye sahip olabilir mi? Zaman ve yerde, bir hava durumu hizmeti bu bilgileri sağlayabilir ve ek bir özellik olarak ekleyebilirsiniz. 
 
-#### <a name="expand-feature-sets-with-artificial-intelligence-and-cognitive-services"></a>Özellik kümeleri yapay zeka ve bilişsel hizmetler ile genişletin
+#### <a name="expand-feature-sets-with-artificial-intelligence-and-cognitive-services"></a>Yapay zeka ve bilişsel hizmetler ile özellik kümelerini genişletme
 
-Yapay zeka ve Bilişsel hizmetler çalıştırılmaya hazır Personalizer çok güçlü bir eklemedir olabilir. 
+Yapay zeka ve çalıştırmaya hazırlanma bilişsel hizmetler, Kişiselleştiriciye çok güçlü bir ekleme olabilir. 
 
-Yapay zeka hizmetlerini kullanarak öğelerinizi ön işleme, büyük olasılıkla kişiselleştirme için ilgili bilgileri otomatik olarak ayıklayabilirsiniz.
+Yapay zeka hizmetlerini kullanarak öğelerinizi ön işlemden yararlanarak, kişiselleştirmeyle ilgili olabilecek olası bilgileri otomatik olarak ayıklayabilirsiniz.
 
 Örneğin:
 
-* Bir film dosyası aracılığıyla çalıştırabileceğiniz [Video Indexer](https://azure.microsoft.com/services/media-services/video-indexer/) Sahne öğeleri, metin, yaklaşımını ve diğer birçok öznitelikleri ayıklamak için. Bu öznitelikler daha sonra özgün öğe meta verisi yoktu özellikleri yansıtacak şekilde daha yoğun yapılabilir. 
-* Görüntüleri nesne algılama, yaklaşım, vs. yüzleri aracılığıyla çalıştırabilirsiniz.
-* Metin bilgileri varlıkları, Bing bilgi grafiğine vb. varlıklarla genişletme yaklaşım, ayıklayarak genişletilmiş.
+* Sahne öğelerini, metni, yaklaşımı ve diğer birçok özniteliği ayıklamak için [video Indexer](https://azure.microsoft.com/services/media-services/video-indexer/) aracılığıyla bir film dosyası çalıştırabilirsiniz. Bu öznitelikler daha sonra, özgün öğe meta verilerinde bulunmayan özellikleri yansıtacak şekilde daha yoğun hale getirilebilir. 
+* Görüntüler, nesne algılama, yaklaşım, yüz ve benzeri işlemler aracılığıyla çalıştırılabilir.
+* Metindeki bilgiler, varlıklar ayıklanarak, yaklaşım, Bing bilgi Graf ile varlıkları genişleterek, vb. genişletilebilir.
 
-Birkaç diğer kullanabileceğiniz [Azure Bilişsel Hizmetler](https://www.microsoft.com/cognitive-services)gibi
+Gibi diğer birçok Azure bilişsel [hizmeti](https://www.microsoft.com/cognitive-services)kullanabilirsiniz.
 
 * [Varlık bağlama](../entitylinking/home.md)
 * [Metin Analizi](../text-analytics/overview.md)
 * [Duygu tanıma](../emotion/home.md)
 * [Görüntü İşleme](../computer-vision/home.md)
 
-## <a name="actions-represent-a-list-of-options"></a>Eylemlerini temsil eden bir seçenek listesi
+## <a name="actions-represent-a-list-of-options"></a>Eylemler bir seçenek listesini temsil eder
 
 Her eylem:
 
-* Bir kimliği vardır.
-* Özelliklerin bir listesi vardır.
-* (Yüzlerce) büyük özelliklerin listesi olabilir ancak ödül alma için katkıda bulunan olmayan funkce odebrat özellik verimliliğini değerlendirme öneririz. 
-* Özellikleri **eylemleri** olabilir veya herhangi bir ilişki özellikleriyle olmayabilir **bağlam** Personalizer tarafından kullanılır.
-* Bazı eylemler ve diğer eylemler için özellikleri bulunmayabilir. 
-* Belirli bir eylem kimliği özellikleri kullanılabilir bir gün olabilir ancak daha sonra kullanılamaz duruma gelir. 
+* _Olay_ kimliği vardır. Zaten bir olay KIMLIĞINIZ varsa, bunu göndermeniz gerekir. Bir olay KIMLIĞINIZ yoksa, bir tane göndermeyin, kişiselleştirici sizin için bir tane oluşturur ve bu dosyayı sıralama isteğinin yanıtında döndürür. KIMLIK, Kullanıcı değil, sıralama olayı ile ilişkilendirilir. Bir KIMLIK oluşturursanız, bir GUID en iyi şekilde kullanılır. 
+* Özelliklerin bir listesini içerir.
+* Özellikler listesi büyük (yüzlerce) olabilir, ancak bir yandan elde etmeyen özellikleri kaldırmak için özellik verimliliğini değerlendirmeyi öneririz. 
+* **Eylemlerdeki** özellikler, kişiselleştirici tarafından kullanılan **bağlamdaki** özelliklerle bağıntılı olabilir veya olmayabilir.
+* Eylemler için özellikler bazı eylemlerde bulunabilir ve başkaları tarafından kullanılamaz. 
+* Belirli bir eylem KIMLIĞI için özellikler bir gün kullanılabilir, ancak daha sonra kullanılamaz hale gelir. 
 
-Personalizer'ın makine öğrenimi algoritması, tutarlı özellik kümesi vardır, ancak özellik değişiklikleri zaman içinde ayarlarsanız derece çağrıları başarısız değil daha iyi sonuç verecektir.
+Kararlı özellik kümeleri olduğunda, kişiselleştirici 'ın makine öğrenimi algoritmaları daha iyi gerçekleştirilir, ancak özellik kümesi zaman içinde değişirse derecelendirme çağrıları başarısız olur.
 
-50'den fazla eylemleri sıralaması zaman göndermez eylemler. Bunlar her zaman aynı 50 eylemler olabilir veya bunlar değişebilir. Bir e-ticaret uygulaması için 10.000 öğelerinin bir ürün kataloğu varsa, örneğin, öneri veya filtreleme altyapısı müşteri ister ve Personalizer çoğu ödül (örneğin oluşturacağı bulmak için üst 40 belirlemek için kullanabilirsiniz kullanıcının sepete ekler) için geçerli bağlam.
+İşlemleri derecelendirme sırasında 50 ' den fazla eylem gönderme. Bunlar her seferinde aynı 50 eylem olabilir, ya da değişebilir. Örneğin, bir e-ticaret uygulaması için 10.000 öğe kataloğuna ait bir Ürün kataloğunuz varsa, bir müşterinin en iyi 40 ' i belirleyebilmek için bir öneri veya filtreleme motoru kullanabilir ve en iyi şekilde ilgilenmek için kişiselleştirici kullanabilirsiniz (örneğin, , Kullanıcı, geçerli bağlam için sepete eklenecektir).
 
 
 ### <a name="examples-of-actions"></a>Eylem örnekleri
 
-Derece API'sine gönderdiğiniz Eylemler ne kişiselleştirmek çalışıyorsunuz bağlıdır.
+Derecelendirme API 'sine göndereceğiniz eylemler, kişiselleştirmeye çalıştığınız işlemlere göre değişir.
 
-Bazı örnekler şunlardır:
+İşte bazı örnekler:
 
 |Amaç|Eylem|
 |--|--|
-|Hangi makale haber Web sitesinde vurgulanır kişiselleştirin.|Her eylem bir olası bir haber makaledir.|
-|Bir Web sitesinde ad yerleştirme iyileştirin.|Her eylem bir düzen veya reklam (örneğin, en üstte, sağ, küçük resimler büyük görüntüleri üzerinde) için bir düzen oluşturmak için kuralları olacaktır.|
-|Önerilen öğeler kişiselleştirilmiş sıralamasını bir alışveriş Web sitesinde görüntüler.|Her bir eylemin belirli bir üründür.|
-|Belirli bir fotoğraf uygulanacak filtreler gibi kullanıcı arabirimi öğeleri önerin.|Her eylem, başka bir filtre olabilir.|
-|Kullanıcının amacını açıklamak veya bir eylem önermek için bir sohbet Robotu kişinin yanıt'ı seçin.|Her eylem, nasıl yanıt yorumlamak için kullanılan bir seçenektir.|
-|Neyin arama sonuçlarının bir listenin en üstünde göstermek seçin|Her eylem üst birkaç arama sonuçlarını biridir.|
+|Bir haber web sitesinde vurgulanan makaleyi kişiselleştirin.|Her eylem olası bir haber makalelidir.|
+|Web sitesinde ad yerleşimini iyileştirin.|Her eylem, reklamlar için bir düzen (örneğin, en üstte, küçük görüntüler, büyük görüntüler) oluşturmak için bir düzen veya kurallar olacaktır.|
+|Bir alışveriş web sitesinde önerilen öğelerin kişiselleştirilmiş sıralamasını görüntüleyin.|Her eylem, belirli bir üründür.|
+|Belirli bir fotoğrafta uygulanacak filtreler gibi kullanıcı arabirimi öğelerini önerin.|Her eylem farklı bir filtre olabilir.|
+|Kullanıcı amacını açıklamak veya bir eylem önermek için bir sohbet bot 'un yanıtını seçin.|Her eylem, yanıtın nasıl yorumlanacağı konusunda bir seçenektir.|
+|Arama sonuçları listesinin en üstünde neyin gösterileceğini seçin|Her eylem, en çok birkaç arama sonuçlarından biridir.|
 
 
-### <a name="examples-of-features-for-actions"></a>Eylemler için özellikleri örnekleri
+### <a name="examples-of-features-for-actions"></a>Eylemlere yönelik özellik örnekleri
 
-Eylemler için özellikler iyi örnekleri şunlardır: Bu, her bir uygulama üzerinde çok bağlıdır.
+Eylemler için özelliklerin iyi örnekleri aşağıda verilmiştir. Bunlar her bir uygulamaya göre değişir.
 
-* Özellikler eylemlerin özelliklere sahip. Örneğin, film veya tv dizisi mi?
-* Özellikler, hakkında nasıl kullanıcıların geçmişte Bu eylemle kurulabilen. Örneğin, bu film çoğunlukla olan demografisi A veya B kişiler tarafından görülen, tipik olarak yürütülen birden fazla vakit geldi.
-* Özellikler hakkında nasıl özelliklerini kullanıcı *görür* eylemleri. Örneğin, posteri Küçük Resim Ekle yüzler, arabalarda veya ortamlarını gösterilen film için mu?
+* Eylemlerin özelliklerine sahip özellikler. Örneğin, bu bir film ya da TV serisi mi?
+* Kullanıcıların geçmişte bu eylemle nasıl etkileşim albileceğini gösteren Özellikler. Örneğin, bu film çoğu zaman demografik A veya B 'deki kişiler tarafından görülebildiğinden, genellikle birden fazla kez yürütüyordur.
+* Kullanıcının eylemleri nasıl *gördüğü* özellikleriyle ilgili özellikler. Örneğin, küçük resimde gösterilen filmin posterleri yüz, araba veya landscapes içeriyor mu?
 
-### <a name="load-actions-from-the-client-application"></a>İstemci uygulamasından eylemleri yüklenemiyor
+### <a name="load-actions-from-the-client-application"></a>İstemci uygulamasından eylemleri yükleme
 
-Eylemler özelliklerinden genellikle içerik yönetim sistemleri, katalog ve öneren sistemlerinden gelebilir. Uygulamanız, eylemler hakkında bilgi yüklemek için ilgili veritabanları ve sahip olduğunuz sistemlerinden sorumludur. Eylemlerinizi değiştirmeyin veya yüklü alamazsınız her zaman bir gereksiz performans üzerinde etkisi vardır, bu bilgileri önbelleğe almak için uygulamanızda mantığı ekleyebilirsiniz.
+Eylemlerden özellikler genellikle içerik yönetim sistemlerinden, kataloglarından ve öneren sistemlerinden gelebilir. Uygulamanız, sahip olduğunuz ilgili veritabanlarından ve sistemlerden eylemlerle ilgili bilgileri yüklemekten sorumludur. Eylemleriniz, performans üzerinde gereksiz bir etkiye sahip olmak üzere değişiklik veya yüklenmeme durumunda bu bilgileri önbelleğe almak için uygulamanıza Logic ekleyebilirsiniz.
 
-### <a name="prevent-actions-from-being-ranked"></a>Sıralanmış gelen eylemleri engelleme
+### <a name="prevent-actions-from-being-ranked"></a>Eylemlerin derecelendirmasını önleme
 
-Bazı durumlarda, kullanıcılara görüntülenmesini istemediğiniz eylemler vardır. En üstteki olarak sıralanmış bir eylemin önlemek için en iyi yolu, sıra API için eylem listesinden ilk başta değil eklemektir.
+Bazı durumlarda, kullanıcılara görüntülenmesini istemediğiniz eylemler vardır. Bir eylemin en üst olarak derecelendirmasını önlemenin en iyi yolu, bunu ilk yerde bulunan işlem API 'sine eylem listesine dahil etmez.
 
-Bazı durumlarda, yalnızca iş mantığınıza daha sonra bir sonuç ise belirlenemez _eylem_ derece API'si, bir kullanıcıya gösterilecek çağrıdır. Bu durumlarda, kullanmanız gereken _etkin olmayan olaylar_.
+Bazı durumlarda, yalnızca bir derecelendirme API çağrısının sonuç _eylemi_ bir kullanıcıya gösteriliyorsa, iş mantığınızdaki daha sonra belirlenebilir. Bu gibi durumlarda, _etkin olmayan olayları_kullanmanız gerekir.
 
 ## <a name="json-format-for-actions"></a>Eylemler için JSON biçimi
 
-Derece çağrılırken, aralarından seçim yapabileceğiniz birden fazla eylem gönderir:
+Derece çağrılırken, aralarından seçim yapabileceğiniz birden çok eylem gönderirsiniz:
 
-JSON nesneleri, iç içe geçmiş JSON nesneleri ve basit özellik değerlerini içerebilir. Yalnızca sayılar dizi öğeleri, bir dizi dahil edilebilir. 
+JSON nesneleri, iç içe geçmiş JSON nesnelerini ve basit özellik/değerleri içerebilir. Bir dizi yalnızca dizi öğeleri sayı ise dahil edilebilir. 
 
 ```json
 {
@@ -264,23 +275,23 @@ JSON nesneleri, iç içe geçmiş JSON nesneleri ve basit özellik değerlerini 
 }
 ```
 
-## <a name="examples-of-context-information"></a>Bağlam bilgilerini örnekleri
+## <a name="examples-of-context-information"></a>Bağlam bilgileri örnekleri
 
-Bilgi için _bağlam_ her uygulama ve kullanım durumunu temel bağlıdır ancak bilgileri gibi tipik dahil:
+_Bağlam_ bilgisi her bir uygulamaya ve kullanım örneğine bağlıdır, ancak genellikle aşağıdakiler gibi bilgiler içerebilir:
 
-* Kullanıcı ile ilgili demografik ve profil bilgileri.
-* Kullanıcı Aracısı gibi HTTP üstbilgileri ayıklanan veya IP adreslerine göre geriye doğru coğrafi arama gibi HTTP bilgilerinden türetilen bilgileri.
-* Hafta sonu veya değil, sabah veya öğleden sonra mağazalarımızdaki ürünler haftanın günü gibi geçerli saati hakkında bilgi veya değil, vb.
-* Mobil uygulamaları, konum, taşıma veya pil düzeyi gibi ayıklanan bilgileri.
-* Kullanıcı - film türleri nelerdir gibi davranış geçmiş toplamları bu kullanıcı en çok görüntülenen.
+* Kullanıcı hakkındaki demografik ve profil bilgileri.
+* Kullanıcı Aracısı gibi HTTP başlıklarından ayıklanan veya IP adreslerine göre ters coğrafi aramalar gibi HTTP bilgilerinden türetilmiş bilgiler.
+* Geçerli saat hakkında, haftanın günü, hafta sonu veya Not, sabah veya öğleden sonra tatil sezi vb. gibi bilgiler.
+* Konum, taşıma veya pil düzeyi gibi mobil uygulamalardan ayıklanan bilgiler.
+* Bu kullanıcının en çok görüntüledikleri film tarzları gibi Kullanıcı davranışının geçmiş toplamaları.
 
-Uygulamanızın bağlamı hakkında bilgi yüklemek için ilgili veritabanları, algılayıcılar ve sistemleri etkinleştirmiş olabilirsiniz sorumludur. Bağlam bilgilerinizi değişmiyorsa, sıra API için göndermeden önce bu bilgileri önbelleğe almak için uygulamanızda mantığı ekleyebilirsiniz.
+Uygulamanız, sahip olduğunuz ilgili veritabanlarından, sensörlerden ve sistemlerden bağlam hakkındaki bilgileri yüklemekten sorumludur. Bağlam bilgileriniz değişmezse, bu bilgileri derecelendirme API 'sine göndermeden önce önbelleğe almak için uygulamanıza Logic ekleyebilirsiniz.
 
-## <a name="json-format-for-context"></a>Bağlamı için JSON biçimi 
+## <a name="json-format-for-context"></a>Bağlam için JSON biçimi 
 
-Bağlam derece API'ye gönderilen bir JSON nesnesi olarak ifade edilir:
+Bağlam, derecelendirme API 'sine gönderilen bir JSON nesnesi olarak ifade edilir:
 
-JSON nesneleri, iç içe geçmiş JSON nesneleri ve basit özellik değerlerini içerebilir. Yalnızca sayılar dizi öğeleri, bir dizi dahil edilebilir. 
+JSON nesneleri, iç içe geçmiş JSON nesnelerini ve basit özellik/değerleri içerebilir. Bir dizi yalnızca dizi öğeleri sayı ise dahil edilebilir. 
 
 ```JSON
 {

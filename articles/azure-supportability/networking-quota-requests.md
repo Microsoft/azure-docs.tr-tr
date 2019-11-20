@@ -1,84 +1,87 @@
 ---
-title: Sınır artışı ağ | Microsoft Docs
-description: Ağ sınırını artırın
+title: Ağ sınırı artışı | Microsoft Docs
+description: Ağ sınırını artırma
 author: anavinahar
 ms.author: anavin
 ms.date: 06/19/2019
 ms.topic: article
-ms.service: azure
+ms.service: azure-supportability
 ms.assetid: ce37c848-ddd9-46ab-978e-6a1445728a3b
-ms.openlocfilehash: 48d7e9cc4a3034e149901931f2addbc7df78e2bc
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.openlocfilehash: 5cadd0479a6ddc97cc7ee7d9b5aee1bbffba02bb
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67297302"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74120974"
 ---
-# <a name="networking-limit-increase"></a>Ağ sınırını artırın
+# <a name="networking-limit-increase"></a>Ağ sınırını artırma
 
-Geçerli ağ kullanımınızı ve kota görüntülemek için ziyaret edebilirsiniz **kullanımları + kota** Azure portalındaki dikey penceresinde. Kullanım kullanabilirsiniz [CLI](https://docs.microsoft.com//cli/azure/network?view=azure-cli-latest#az-network-list-usages), [PowerShell](https://docs.microsoft.com/powershell/module/azurerm.network/get-azurermnetworkusage?view=azurermps-6.13.0) veya [ağ kullanım API'si](https://docs.microsoft.com/rest/api/virtualnetwork/virtualnetworks/listusage) sınırları ve ağ kullanımını görüntülemek için.
+Geçerli ağ kullanımınızı ve kotayı görüntülemek için Azure portal **kullanımları + kota** dikey penceresini ziyaret edebilirsiniz. Ağ kullanımınızı ve limitlerinizi görüntülemek için kullanım [CLI](https://docs.microsoft.com//cli/azure/network?view=azure-cli-latest#az-network-list-usages), [PowerShell](https://docs.microsoft.com/powershell/module/azurerm.network/get-azurermnetworkusage?view=azurermps-6.13.0) veya [ağ kullanımı API](https://docs.microsoft.com/rest/api/virtualnetwork/virtualnetworks/listusage) 'sini de kullanabilirsiniz.
 
-Aracılığıyla artışı isteyebilir **Yardım + Destek** dikey veya **kullanımları + kota** portaldaki dikey pencere.
+**Yardım + Destek** dikey penceresinde veya portalda **kullanımlar + kota** dikey penceresinde artış isteyebilirsiniz.
 
-## <a name="request-networking-quota-increase-at-subscription-level-using-the-help--support-blade"></a>Abonelik düzeyi kullanarak ağ kota artışı isteği **Yardım + Destek** dikey penceresi
+> [!Note]
+> Genel IP ön ekinin varsayılan boyutunu değiştirmek için, açılan listeden "En düşük genel IP ağlar arası önek uzunluğu" seçeneğini belirleyin.
 
-Azure'nın 'Yardım + Destek' dikey penceresinde Azure portalında kullanılabilir üzerinden destek isteği oluşturmak için aşağıdaki yönergeleri izleyin. 
+## <a name="request-networking-quota-increase-at-subscription-level-using-the-help--support-blade"></a>**Yardım + Destek** dikey penceresini kullanarak abonelik düzeyinde istek ağ kotası artışı
 
-1. Gelen https://portal.azure.com seçin **Yardım + Destek**.
+Azure portal Azure 'un ' yardım + destek ' dikey penceresi aracılığıyla bir destek isteği oluşturmak için aşağıdaki yönergeleri izleyin. 
 
-    ![Yardım + destek](./media/resource-manager-core-quotas-request/helpsupport.png)
+1. https://portal.azure.com, **Yardım + Destek**' i seçin.
+
+    ![Yardım ve destek](./media/resource-manager-core-quotas-request/helpsupport.png)
  
 2.  **Yeni destek isteği**’ni seçin. 
 
     ![Yeni destek isteği](./media/resource-manager-core-quotas-request/newsupportrequest.png)
 
-3. Sorun türü açılır listesinde seçin **hizmet ve abonelik sınırlarını (kotalar)** .
+3. Sorun türü açılır listesinde **hizmet ve abonelik limitleri (kotalar)** öğesini seçin.
 
     ![Sorun türü açılan kutusu](./media/resource-manager-core-quotas-request/issuetypedropdown.png)
 
 4. Kotasını artırmanız gereken aboneliği seçin.
 
-    ![Abonelik newSR seçin](./media/resource-manager-core-quotas-request/select-subscription-sr.png)
+    ![Abonelik newSR 'yi seçin](./media/resource-manager-core-quotas-request/select-subscription-sr.png)
    
-5. Seçin **ağ** içinde **kota türü** açılır. 
+5. **Kota türü** açılan listesinde **ağ** ' ı seçin. 
 
-    ![Kota türü seçin](./media/networking-quota-request/select-quota-type-network.png)
+    ![Kota türünü seçin](./media/networking-quota-request/select-quota-type-network.png)
 
-6. İçinde **sorun ayrıntıları**, tıklayarak isteğiniz işlem yardımcı olacak ek bilgiler sağlayın **ayrıntıları sağlayın**.
+6. **Sorun ayrıntıları**' nda, **Ayrıntılar sağla**' ya tıklayarak isteğinizi işlemeye yardımcı olacak ek bilgiler sağlayın.
 
-    ![Ayrıntıları sağlayın](./media/resource-manager-core-quotas-request/provide-details.png)
+    ![Ayrıntıları belirtin](./media/resource-manager-core-quotas-request/provide-details.png)
 
-7. İçinde **kota ayrıntıları** panelinde, dağıtım modeli, bir konum ve artış istemek için istediğiniz kaynakları seçin.
+7. **Kota ayrıntıları** panelinde, dağıtım modeli, bir konum ve artış Istemek istediğiniz kaynaklar ' ı seçin.
 
     ![Kota ayrıntıları DM](./media/networking-quota-request/quota-details-network.png)
 
-8.  İstediğiniz yeni sınırları, abonelik üzerinde girin. Bir satırı kaldırmak için kaynak grubundan kaynak açılan seçeneğinin işaretini kaldırın veya atma "x" simgesini tıklatın. Her kaynak için istenen kotayı girdikten sonra tıklayın **Kaydet ve devam et** ile destek isteği oluşturma devam etmek için kota Ayrıntılar paneli üzerinde.
+8.  Abonelikte istediğiniz yeni limitleri girin. Bir satırı kaldırmak için kaynak açılan menüsünden kaynağın işaretini kaldırın veya atma "x" simgesine tıklayın. Her kaynak için istenen kotayı girdikten sonra, destek isteği oluşturmaya devam etmek için kota ayrıntıları panelinde Kaydet ' e tıklayın **ve devam edin** .
 
     ![Yeni sınırlar](./media/networking-quota-request/network-new-limits.png)
 
 
-## <a name="request-networking-quota-increase-at-subscription-level-using-usages--quota-blade"></a>Abonelik düzeyi kullanarak ağ kota artışı isteği **kullanımları + kota** dikey penceresi
+## <a name="request-networking-quota-increase-at-subscription-level-using-usages--quota-blade"></a>**Kullanımlar + kota** dikey penceresini kullanarak abonelik düzeyinde ağ kotası artışı iste
 
-Azure'nın 'kullanımı + kota' aracılığıyla bir destek isteği oluşturmak için aşağıdaki yönergeleri izleyin dikey penceresinde Azure portalında kullanılabilir. 
+Azure 'un ' kullanım + kota ' dikey penceresi aracılığıyla Azure portal kullanılabilir bir destek isteği oluşturmak için aşağıdaki yönergeleri izleyin. 
 
-1. Gelen https://portal.azure.com seçin **abonelikleri**.
+1. https://portal.azure.com, **abonelikler**' i seçin.
 
-    ![Subscriptions](./media/resource-manager-core-quotas-request/subscriptions.png)
+    ![Abonelikler](./media/resource-manager-core-quotas-request/subscriptions.png)
 
 2. Kotasını artırmanız gereken aboneliği seçin.
 
     ![Abonelik seçme](./media/resource-manager-core-quotas-request/select-subscription.png)
 
-3. Seçin **kullanım ve kotalar**
+3. **Kullanım + kotalar** ' ı seçin
 
-    ![Kullanım ve kotalar seçin](./media/resource-manager-core-quotas-request/select-usage-quotas.png)
+    ![Kullanım ve kotaları seçin](./media/resource-manager-core-quotas-request/select-usage-quotas.png)
 
-4. Sağ üst köşedeki seçin **istek artışı**.
+4. Sağ üst köşede **istek artışı**' nı seçin.
 
     ![İstek artışı](./media/resource-manager-core-quotas-request/request-increase.png)
 
-5. 3\. adımından başlayarak adımları *abonelik düzeyinde kota artışı isteği ağ* kullanma bölümünde **Yardım + Destek** dikey bölümde
+5. **Yardım + Destek** dikey penceresini kullanarak *abonelik düzeyindeki istek ağı kota artışı* bölümünde bulunan adım 3 ' ten başlayarak adımları izleyin.
 
-## <a name="about-networking-limits"></a>Ağ limitleri hakkında
+## <a name="about-networking-limits"></a>Ağ sınırları hakkında
 
-Ağ limitleri hakkında daha fazla bilgi için bkz: [ağ bölümü](../azure-subscription-service-limits.md#networking-limits) sınırları sayfasının veya ağ sınırları SSS bölümümüzü
+Ağ sınırları hakkında daha fazla bilgi edinmek için sınırlar sayfasının [ağ bölümüne](../azure-subscription-service-limits.md#networking-limits) veya ağ SıNıRLARıMıZıN SSS bölümüne bakın

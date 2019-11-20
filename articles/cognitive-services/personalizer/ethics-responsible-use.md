@@ -1,203 +1,204 @@
 ---
-title: Etik kurallara ve sorumlu kullanın - Personalizer
+title: ETCS ve sorumlu kullanımı-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: Bu yönergeler, kişiselleştirme şirket ve hizmet oluşturmanıza yardımcı olan bir şekilde uygulamak için yardımcı en amaçlanmıştır. Araştırma için Duraklat, öğrenin ve insanların hayatını kişiselleştirmesini etkisini üzerinde deliberate emin olun. Şüpheye düştüğünüzde kılavuzunu isteyin.
+description: Bu yönergeler, şirketinizde ve hizmetinizde güven oluşturmanıza yardımcı olacak bir şekilde kişiselleştirme uygulamanıza yardımcı olmaya yönelik olarak tasarlanmıştır. Araştırmayı durakladığınızdan emin olun, insanların yaşamına yönelik olarak kişiselleştirmenin etkisini öğrenin ve bilinçli edin. Şüpheli, Arama Kılavuzu.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
+ms.topic: conceptual
 ms.date: 06/12/2019
-ms.author: edjez
-ms.openlocfilehash: 783bfcd5ad9e114a5329892449f35f6ed8316948
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.author: diberry
+ms.openlocfilehash: 11b626c0033814f0886ac76fff0c5d4087a80554
+ms.sourcegitcommit: a19f4b35a0123256e76f2789cd5083921ac73daf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67428442"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71720232"
 ---
-# <a name="guidelines-for-responsible-implementation-of-personalizer"></a>Personalizer sorumlu uygulaması için yönergeler
+# <a name="guidelines-for-responsible-implementation-of-personalizer"></a>Kişiselleştirici sorumlu uygulamasına ilişkin yönergeler
 
-Kişiler ve society AI tam potansiyelini ortaya çıkarmak, uygulamaları bunlar güveninizi Bu yapay ZEKA uygulamalarına ekleme ve uygulama kullanıcılarının yapay ZEKA ile oluşturulmuş bir şekilde tasarlanmış olması gerekir. Bu yönergeleri Personalizer şirket ve hizmet oluşturmanıza yardımcı olan bir şekilde uygulamak için yardımcı adresindeki amaçlanmıştır. Araştırma için Duraklat, öğrenin ve insanların hayatını kişiselleştirmesini etkisini üzerinde deliberate emin olun. Şüpheye düştüğünüzde kılavuzunu isteyin.
+Kişiler ve topluluğu 'ın AI 'nin tüm potansiyelini karşılamalarını sağlamak için, uygulamaların uygulamalara AI ekledikleri güvenlerini ve AI ile derlenen uygulamaların kullanıcılarını elde ettikleri şekilde tasarlanmaları gerekir. Bu yönergeler, şirketinizde ve hizmetinizde güven oluşturmanıza yardımcı olacak bir şekilde kişiselleştirici uygulamanıza yardımcı olmaya yönelik olarak tasarlanmıştır. Araştırmayı durakladığınızdan emin olun, insanların yaşamına yönelik olarak kişiselleştirmenin etkisini öğrenin ve bilinçli edin. Şüpheli, Arama Kılavuzu.
 
-Bu yönergeleri yasal öneri amaçlanmamıştır ve hızlı ve bol demo'lu gelişmeler ile uygulamanızı yasaların bu alandaki ve, kesimdeki uyumlu ayrı olarak emin olun.
+Bu yönergeler yasal öneri olarak düşünülmemiştir ve uygulamanızın bu alandaki ve sektörün yasaların hızlı ilerlekiyle uyumlu olması için ayrı olarak emin olmanız gerekir.
 
-Ayrıca, Personalizer kullanarak uygulamanızı tasarlarken, çok sayıda ethics, gizlilik, güvenlik, güvenilirlik, ekleme, saydamlık ve Sorumluluk dahil olmak üzere tüm veri merkezli yapay ZEKA sistemi geliştirirken sahip sorumlulukları düşünmelisiniz. Daha fazla bilgiyi bu hakkında [önerilen okumalar](#recommended-reading) bölümü.
+Ayrıca, kişiselleştirici kullanarak uygulamanızı tasarlarken, her türlü veri merkezli AI sistemi geliştirirken, etklilik, gizlilik, güvenlik, güvenlik, içerme, saydamlık ve sorumluluk dahil olmak üzere sahip olduğunuz çok sayıda sorumluluğu göz önünde bulundurmanız gerekir. [Önerilen okuma](#recommended-reading) bölümünde bunlar hakkında daha fazla bilgi edinebilirsiniz.
 
-Aşağıdaki içeriğe başlangıç denetim listesi kullanın ve özelleştirebilir ve senaryonuz için İyileştir. Bu belge, iki ana bölümü vardır: İlk senaryo, özellikler ve ödüller için Personalizer seçerken sorumlu kullanım konuları vurgulama için ayrılır. İkinci sınav zamanı, Microsoft düşündüğü bir dizi yapay ZEKA sistemleri oluşturmayı göz önünde bulundurulması ve eyleme dönüştürülebilir öneriler ve riskleri Personalizer kullanımınız bunları nasıl etkileyeceğini üzerinde sağlar. 
-
-
-## <a name="your-responsibility"></a>Sizin sorumluluğunuzdadır
-
-Geliştiriciler ve Personalizer kullanan işletmeler sorumlu ve bu algoritmalar society kullanmanın etkileri sorumlu foundation sorumlu uygulama için tüm kuralları oluşturun. Kuruluşunuzda dağıtacağınız bir uygulama geliştiriyorsanız rol ve sorumluluk, işlemi ve kişiler etkilemesi için tanıması gerekir. Dağıtılacak bir uygulama tasarlarken, üçüncü bir şahıs, uygulamanın davranışını sorumlu kim, kendileriyle paylaşılan bir anlayış için gelen ve bu anlama belgeleyin.
-
-Güven karşılanan taahhütleri kavramına yerleşik olarak bulunur - kullanıcılarınızın, society ve sahip olabilir, açık ve örtük taahhütleri tanımlamak için uygulamalarınızı çalışır, yasal çerçeve göz önünde bulundurun.
-
-Microsoft, araçları ve aşağıdaki sorumluluklara göre hareket yardımcı olacak belgeler çaba sürekli olarak koyuyor. [Microsoft'a geri bildirimde](mailto:cogsvcs-RL-feedback@microsoft.com?subject%3DPersonalizer%20Responsible%20Use%20Feedback&body%3D%5BPlease%20share%20any%20question%2C%20idea%20or%20concern%5D) ek araçlar düşünüyorsanız, ürün özellikleri ve belgeleri Personalizer kullanmak için aşağıdaki yönergeleri uygulamak yardımcı.
+Aşağıdaki içeriği bir başlatıcı denetim listesi olarak kullanabilir ve senaryonuza özelleştirip geliştirebilirsiniz. Bu belgenin iki ana bölümü vardır: ilki, Kişiselleştiriciye yönelik senaryolar, Özellikler ve ödüller seçerken sorumlu kullanım konularını vurgulamak için ayrılmıştır. İkincisi, Microsoft 'un AI sistemleri derlerken göz önünde bulundurulması gereken bir değer kümesi alır ve kişiselleştirici kullanım kullanmanın bunları nasıl etkilediği hakkında eylem yapılabilir öneriler ve riskler sağlar. 
 
 
-## <a name="factors-for-responsibly-implementing-personalizer"></a>Faktörleri depoladığımız Personalizer uygulamak için
+## <a name="your-responsibility"></a>Sorumluluğu
 
-Personalizer uygulama kullanıcılarınızın ve işletmenizin için mükemmel bir değer olabilir. Aşağıdaki yönergeleri göz önünde bulundurularak Personalizer depoladığımız uygulamak için başlangıç zaman:
+Sorumlu uygulamaya yönelik tüm yönergeler, bu algoritmaları Topluluğu ' de kullanmanın etkileri açısından, geliştiricilerin ve işletmelerin kişiselleştirici ve sorumlu olduğunu temel alır. Kuruluşunuzun dağıtabolacağı bir uygulama geliştiriyorsanız, işlemi için rol ve sorumluluğun yanı sıra kişileri nasıl etkileyeceğini de bilmelisiniz. Üçüncü taraf tarafından dağıtılacak bir uygulama tasarladıysanız, uygulamanın davranışından sorumlu olan ve öğrenmiş olan belge ile paylaşılan bir anlama gelin.
 
-* Kişiselleştirme uygulamak için kullanım örnekleri seçme.
-* Derleme [ödüllendirin işlevleri](https://github.com/Azure/personalization-rl/blob/master/docs/concepts-rewards.md).
-* Seçme [özellikleri](https://github.com/Azure/personalization-rl/blob/master/docs/concepts-features.md) kişiselleştirme için kullanacağınız bağlamını ve olası eylemler hakkında.
+Güven, karşılamış taahhütler kavramı üzerine kurulmuştur. kullanıcılarınızı, topluluğu ve uygulamalarınızın üzerinde çalıştıkları geçerli çatıyı, sahip oldukları açık ve örtük taahhütlerini belirlemek için göz önünde bulundurun.
 
-
-## <a name="choosing-use-cases-for-personalizer"></a>Kullanım örnekleri için Personalizer seçme
-
-İçeriği ve kullanıcı arabirimleri kişiselleştirmek için öğrenir bir hizmeti kullanarak yararlı olur. Yol kişiselleştirme negatif yan etkileri gerçek dünyada, kullanıcılar içerik kişiselleştirme farkında değilseniz, dahil olmak üzere oluşturması halinde, ayrıca misapplied. 
-
-Yazımı olası ile Personalizer kullanımları örnekleri negatif yan etkileri ya da saydamlık eksikliği eklemek için burada "ödül" bağlıdır üzerinde çok uzun vadeli karmaşık senaryoları Etkenler, zaman içine aşırı Basitleştirilmiş hemen bir ödül unfavorable olabilir kişiler için sonuçları. Bu "neticede oluşan" seçenekleri ya da zarar riskini ilgili seçenekleri değerlendirilmesi eğilimindedir. Örneğin: 
+Microsoft, bu sorumluluklar üzerinde işlem yapmanıza yardımcı olmak için sürekli olarak kendi araçlarına ve belgelerine bir çaba yerleştiriliyor. Ek araçlara inanıyorsanız, ürün özellikleri ve belgelerinin kişiselleştirici kullanımı için bu yönergeleri uygulamanıza yardımcı olacağını [Microsoft 'a geri bildirim sağlayın](mailto:cogsvcs-RL-feedback@microsoft.com?subject%3DPersonalizer%20Responsible%20Use%20Feedback&body%3D%5BPlease%20share%20any%20question%2C%20idea%20or%20concern%5D) .
 
 
-* **Finans**: Kişiselleştirme kredisi Finans ve sigorta ürünler, burada risk faktörleri verilerine dayalı kişilerin bilgi sahibi olmadığınız, elde edemez veya dispute olamaz sunar. 
-* **Eğitim**: Okul kurslar ve eğitim kurumları önerileri burada ve sapmaları yaymak diğer seçenekleri kullanıcıların farkındalık azaltmak için sıralamalara sahip kişiselleştirme.
-* **Demokrasi ve Vatandaşlık katılım**: Neticede oluşan ve manipulative konularında fikirlerini amacı sahip olan kullanıcıların içerik kişiselleştirme.
-* **Üçüncü taraf ödül değerlendirme**: Ödül üzerinde ikinci bir 3 temel burada öğeleri kişiselleştirme kullanıcının kendi davranış tarafından oluşturulan bir ödül yerine kullanıcı taraf değerlendirmesi.
-* **Araştırma için intolerance**: Tüm durumlarda zarar Personalizer araştırma davranışını burada neden olabilir.
+## <a name="factors-for-responsibly-implementing-personalizer"></a>Kişiselleştirici uygulayan bir sorumlu için etken
 
-Kullanım örnekleri için Personalizer seçerken:
+Kişiselleştirici uygulama, kullanıcılarınız ve işletmeniz için harika bir değer olabilir. Kişiselleştirici sorumlu uygulamak için aşağıdaki yönergeleri göz önünde bulundurarak başlatın:
 
-* Kişiselleştirme kullanıcılarınıza nasıl yardımcı olduğunu düşünüyor tasarım işlemi başlatın.
-* Bazı öğeler kişiselleştirme desenleri veya araştırma nedeniyle kullanıcıların derecelendirdiyseniz değil gerçek dünyada olumsuz etkileri göz önünde bulundurun.
-* Kendi kendine Paskalya prophecy döngüler göz önünde bulundurun. Daha sonra başka işlemler, böylece kişiselleştirme ödül bir modeli eğitir durumunda bu sorun demografik grubu ilgili içeriklere erişmekten hariç. Örneğin, çoğu kişi low-income Komşuları içinde premium sigorta teklif elde yok ve yavaş Komşuları içinde hiç kimse hiç teklifi görüntülemek üzere eğilimlidir.
-* Personalizer gelecekte yeniden oluşturmak için gerekli olması durumunda modelleri ve öğrenme ilkeleri bir kopyasını kaydedin. Düzenli aralıklarla veya her model yenileme süresi bunu yapabilirsiniz.
-* Araştırma düzeyini yeterli alan ve "Yankı odasına" etkilerini hafifletmek için bir araç olarak kullanmak için göz önünde bulundurun.
+* Kişiselleştirmeyi uygulamak için kullanım durumlarını seçme.
+* [Ödül işlevleri](https://github.com/Azure/personalization-rl/blob/master/docs/concepts-rewards.md)oluşturma.
+* Bağlam ve kişiselleştirme için kullanacağınız olası eylemlerle ilgili [özellikleri](https://github.com/Azure/personalization-rl/blob/master/docs/concepts-features.md) seçme.
 
 
-## <a name="selecting-features-for-personalizer"></a>Personalizer için özellikler seçme
+## <a name="choosing-use-cases-for-personalizer"></a>Kişiselleştirici için kullanım örneklerini seçme
 
-İçeriğin kişiselleştirilmesini içeriği ve kullanıcı hakkında yararlı bilgiler bağlıdır. Bazı uygulamalar ve sektörlerde, özelliklerin doğrudan veya dolaylı olarak discriminatory ve potansiyel olarak geçersiz olarak kabul edilebilir bazı kullanıcı unutmayın.
+İçeriği ve kullanıcı arabirimlerini kişiselleştirmek için öğrenmiş bir hizmet kullanmak faydalıdır. Bu, kişiselleştirmenin gerçek dünyada negatif yan etkileri oluşturmasının, kullanıcılar içerik kişiselleştirmenin farkında olup olmadığı da dahil olmak üzere, yanlış bir şekilde uygulanabilir. 
 
-Bu özellikler etkisini göz önünde bulundurun:
-
-* **Kullanıcı demografisi**: Seks, cinsiyet, yaş, yarış, Din ilgili özellikler: Bu özellik bazı uygulamalarda Yasal nedenlerle verilmez ve kişiselleştirme genelleştirmesi ve sapma yayar çünkü etrafında kişiselleştirmek etik olmayabilir. Bu fark yayma elderly veya cinsiyet tabanlı kitlelere gösterilen değil Mühendisliği için gönderen bir iş örneğidir.
-* **Yerel ayar bilgilerinin**: Dünyanın birçok yerde konum bilgilerini (örneğin, bir posta kodu, posta kodu veya Komşuları adı) yüksek oranda gelir, yarış ve Din ile ilişkili olabilir.
-* **Kullanıcı algısı eşitliği**: Burada, uygulamanızın doğru kararlar yapıyor durumlarda bile kullanıcıların uygulama değişikliklerinizi discriminatory olan özelliklerle ilişkili olabilir görünmesine şekilde görüntülenen içeriğin perceiving etkisini göz önünde bulundurun.
-* **Özellikler istenmeyen sapması**:  Yalnızca bir alt kümesini bir popülasyon etkileyen özellikleri kullanarak sunulan sapmaları tür vardır. Özellikleri algorithmically oluşturuluyor, bu çok dikkat gerektirir, ne zaman kullanarak görüntü gibi analiz ayıklamak için bir resim veya metin metin varlıkları bulmak için analiz öğeleri. Kendinizi bu özellikler oluşturmak için kullandığınız hizmetlerin özelliklerini farkında olun.
-
-Bağlamları ve Eylemler için Personalizer göndermek için özellikler seçerken aşağıdaki yöntemleri uygulayın:
-
-* Bazı uygulamalar için belirli özellikleri kullanarak, etik kurallara ve yasal göz önünde bulundurun ve zararsız görünümlü özellikleri diğerleri için proxy'leri olabilir, istediğiniz veya kaçınmanız gerekir,
-* Kullanıcılar için saydam olarak göreceği seçenekler kişiselleştirmek için algoritmalar ve veri analizi kullanıldığını.
-* Kendinize sorun: Kullanıcılarımın dikkat edin ve miyim içeriği kişiselleştirmek için bu bilgileri kullandıysanız mutlu? Ben kararı belirli öğeleri gizlemek veya vurgulamak için nasıl yapıldı gösteren hissedene?
-* Diğer özelliklerine göre sınıflandırma veya Segment veri yerine davranış kullanın. Demografik bilgiler geleneksel olarak kullanılan Perakendeciler tarafından – demografik öznitelikler görünen toplamak ve dijital Çağ önce üzerinde işlem yapmak basit - geçmiş nedeniyle ancak soru ne gerçek etkileşim olduğunda ilgili demografik bilgileri kullanıcıların kimliğini ve tercihleri daha yakından ilgili bağlamsal ve geçmiş verileri.
-* 'Kandırılan gelen' özellikleri engelleme Personalizer kullanılamıyor.%n%nÇözüm kesintiye, utandırmaktan ve kullanıcıların, belirli sınıfların taciz yolları yanıltıcı de eğitim için çok sayıda kullanılırsa açabilir kötü amaçlı kullanıcılar tarafından göz önünde bulundurun. 
-* Uygun ve uygun olduğunda, kullanıcılarınızın kabul et veya kullanılan kişisel belirli özelliklere sahip dışında iyileştirilmiş sağlamak için uygulamanızı tasarlayın. Bu, "Konum bilgileri gibi", "Cihaz bilgileri", "Geçmiş satın alma geçmişi" vb. gruplandırılır.
+Negatif yan etkileri veya "ödül" de daha fazla basitleştirilmesi gereken çok uzun süreli karmaşık faktörlere bağlı olan ve "ödül" de saydamlık ekleme senaryolarına bağlı olan kişiselleştirici kullanımları örnekleri bireyler için sonuçlar. Bu, "SONUÇSAL" seçimler veya bir zarar riski içeren seçimler olarak değerlendirilir. Örnek: 
 
 
-## <a name="computing-rewards-for-personalizer"></a>Ödül Personalizer için bilgi işlem
+* **Finans**: kredi, mali ve sigorta ürünlerinin tekliflerini kişiselleştirmek, risk faktörleri kişilerin bilgi sahibi olmadığı, bu bilgileri edinemediğini veya itiraz etmediğini öğrenmez. 
+* **Eğitim**: önerilerin okullara ve eğitim kurumlarına yönelik dereceleri kişiselleştirilmesi ve bunların diğer seçeneklere yönelik kullanıcıların farkında olabileceğini tahmin etmek.
+* **Democracy ve Cıvic katılımı**: Kullanıcı için içerik kişiselleştirilmesi, etkili bir şekilde opvaons
+* **Üçüncü taraf ödül değerlendirmesi**: kullanıcının kendi davranışından bir değerlendirme yapmak yerine, kullanıcının bir ikinci üçüncü taraf değerlendirmesini temel alan öğelerin kişiselleştirilmesi.
+* **Araştırmayla Ilgili toleranslı**: kişiselleştiriciye ait araştırma davranışının zararlı olmasına neden olabilecek herhangi bir durum.
 
-Uygulamanızın iş mantığı tarafından sağlanan ödül puan göre ödül için hangi eylemin seçimi geliştirmek personalizer içindedir.
+Kişiselleştirici için kullanım durumları seçerken:
 
-İyi oluşturulmuş ödül puanı, bir kuruluşun görev için bağlı olmayan bir iş hedef kısa süreli bir proxy olarak görür.
+* Kişiselleştirmenin kullanıcılarınıza nasıl yardımcı olduğunu göz önünde bulundurarak tasarım sürecini başlatın.
+* Kişiselleştirme desenleri veya araştırması nedeniyle bazı öğeler kullanıcılar için derecelendirilmemişse gerçek dünyada olumsuz sonuçları göz önünde bulundurun.
+* Kullanım durumlarınızın otomatik işleme oluşturduğunu, [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679) article 22 veya diğer yasalar kapsamında düzenlenen veri konularını önemli ölçüde etkilediği konusunda düşünün.
+* Kendi kendini karşılayan Prophecy döngülerini düşünün. Bu durum, bir kişiselleştirmenin bir modeli daha sonra ilgili içeriğe erişimini daha sonra daha sonra dışlanmasını sağlamak için meydana gelebilir. Örneğin, düşük bir gelir alanındaki kişilerin çoğu Premium bir sigorta teklifi elde etmeyin ve komşulardan hiç kimse, yeterince araştırma olmaması durumunda teklifi bir bütün olarak görebilir.
+* Daha sonra kişiselleştirici yeniden oluşturulması gereken durumlarda modellerin ve öğrenme ilkelerinin kopyalarını kaydedin. Bu işlemi düzenli aralıklarla veya her model yenileme döneminde yapabilirsiniz.
+* Alan için araştırma düzeyini göz önünde bulundurun ve "yankı oluklığı" efektlerini azaltmak için bunu bir araç olarak nasıl kullanacağınızı düşünün.
 
-Örneğin, ne tıklandığında, dikkat dağıtıcı ya da bir iş sonucu için bağlı olsa bile tıklar ödüllendiriyoruz başka her şey çoğaltamaz Personalizer hizmet arama tıklama hale getirir.
 
-Karşıt bir örnek olarak, bir haber site tıkladığında, gibi çok daha anlamlı bağlı ödül "kullanıcı içeriğini okumak için yeterli zaman ayırın muydunuz?" ayarlamak isteyebilirsiniz "Bunların ilgili makaleler veya başvurular üzerinde tıklayın?". Personalizer ile yakından ödül ölçümlerini bağlamak kolaydır. Ancak iyi sonuçlar ile kısa vadeli kullanıcı etkileşimini confound değil dikkatli olun.
+## <a name="selecting-features-for-personalizer"></a>Kişiselleştirici için özellikleri seçme
 
-### <a name="unintended-consequences-from-reward-scores"></a>Ödül puanları gelen istenmeyen sonuçları
-Ödül puanları amaçları en iyi şekilde oluşturulmuş, ancak hala beklenmeyen sonuçlarıyla veya istenmeyen sonuçları Personalizer içeriği nasıl sıralayan oluşturabilirsiniz. 
+İçeriği kişiselleştirmek, içerik ve Kullanıcı hakkında faydalı bilgiler olmasına bağlıdır. Bazı uygulamalar ve sektörler için bazı kullanıcı özelliklerinin doğrudan veya dolaylı olarak Discriminatory ve potansiyel olarak kabul edilebilir olduğunu aklınızda bulundurun.
 
-Aşağıdaki örnekleri dikkate alın:
+Bu özelliklerin etkisini göz önünde bulundurun:
 
-* İzlenen video uzunluğu yüzdesine video içerik kişiselleştirme ödüllendiriyoruz derece kısa videolar için büyük olasılıkla eğilimli.
-* Yaklaşım analizi nasıl paylaşılacağını veya içeriğin kendisini olmadan, sosyal medya paylaşımları ödüllendiriyoruz "katılım" çok fazla yummaz eğilimindedir, ancak küçük değer kazandıran rahatsız edici, yönetilmeyen veya tahrik edici içerik derecelendirme için neden olabilir.
-* Tahmin edilebilirliğini burada düğmeleri yayımladım konumu veya bu belirli daha zor hale uyarmadan amaçlı değiştirmekte olduğunuz kullanıcı arabirimi ve kullanılabilirlik ile değiştirmek için kullanıcıların beklemiyoruz kullanıcı arabirimi öğeleri eylemini ödüllendiriyoruz etkileyebilir üretken kalabilmek için kullanıcı gruplarına.
+* **Kullanıcı demograflarına**yönelik özellikler: cinsel, cinsiyet, yaş, Yarış, dini ile ilgili Özellikler: Bu özelliklere, yasal nedenlerle belirli uygulamalarda izin verilmiyor olabilir ve kişiselleştirmenin yaydığı için bu özelliklere, bu özelliklerin çevresinde kişiselleştirilmesi istenebilir genelleştirmeler ve sapma. Bu sapma yayılmaya bir örnek, Mühendislik için, ELDERLY veya cinsiyet tabanlı hedef kitlelere gösterilmeyecek bir iş postadır.
+* **Yerel ayar bilgileri**: dünyanın birçok yerinde, konum bilgileri (örneğin, bir posta kodu, posta kodu veya komşuları adı) gelir, yarış ve dini ile yüksek bir şekilde bağıntılı olabilir.
+* **Eşitliği 'ın Kullanıcı tarafından algılanma sayısı**: Uygulamanızın ses kararları aldığı durumlarda bile, uygulamanızda görüntülenen içeriğin, uygulama değişiklikleri olan özellikler ile bağıntılı bir şekilde değişiklikler olduğunu göz önünde bulundurun. discriminatory.
+* **Özelliklerde ISTENMEDEN sapma**: yalnızca popülasyonun bir alt kümesini etkileyen özellikler kullanılarak tanıtılamayabilir. Bu, bir resim veya metin analizinde metin halinde varlıkları saptamak için görüntü analizini kullanırken olduğu gibi, Özellikler oluşturulduysa, daha fazla dikkat gerektirir. Bu özellikleri oluşturmak için kullandığınız hizmetlerin özelliklerinden haberdar olun.
+
+İçerik ve eylemlerde, Kişiselleştiriciye göndermek için özellikler seçerken aşağıdaki uygulamaları uygulayın:
+
+* Bazı uygulamalar için belirli özellikleri kullanmanın yasallığını ve ahiteyi göz önünde bulundurun ve masum görünümlü özelliklerin,
+* Algoritmaların ve veri analizinin göreceği seçenekleri kişiselleştirmek için kullanıldığı kullanıcılara saydam olun.
+* Kendinize sorun: kullanıcılarınızın içeriği kişiselleştirmek için bu bilgileri kullandım. Belirli öğeleri vurgulamak veya gizlemek için kararının nasıl yapıldığını rahatlıkla göstermem gerekir mi?
+* Diğer özelliklere göre sınıflandırma veya segmentasyon verileri yerine davranış kullanın. Demografik bilgileri, geçmiş nedenlerle perakendeciler tarafından, bir dijital çağdan önce toplanması ve üzerinde işlem yapması basit olan, ancak ilgili demografik bilgilerinin gerçek etkileşime sahip olduğunuzda nasıl olduğunu sorulandı. bağlamsal veriler ve kullanıcı kimliğine daha yakından ilişki kuran geçmiş verileri.
+* Özelliklerin kötü amaçlı kullanıcılar tarafından ' sahte ' olarak nasıl önlenebildiğini, büyük sayılarda yararlanılması durumunda eğitim kişiselleştirmesine, emtibss ve belirli kullanıcı sınıflarının tacklerini yanıltmak için bir yanılmmaya yol açabilecek şekilde nasıl engelleyebileceğiniz göz önünde bulundurun. 
+* Uygun ve uygun olduğunda, kullanıcılarınızın belirli kişisel özelliklerine sahip olmaya izin vermek veya bu özellikleri kabul etmek için uygulamanızı tasarlayın. Bunlar, "konum bilgileri", "cihaz bilgileri", "geçmiş satın alma geçmişi" vb. gibi gruplandırılabilir.
+
+
+## <a name="computing-rewards-for-personalizer"></a>Kişiselleştirici için yeniden ödüller hesaplanıyor
+
+Kişiselleştirici, uygulama iş mantığınızın verdiği ödül puanına göre hangi eylemin yeniden ele alınacağı seçimini geliştirmek için çaba harcar.
+
+İyi oluşturulmuş bir ödül puanı, bir kuruluşun görevi için bağlı olan bir iş hedefine yönelik kısa süreli bir ara sunucu olarak görev görür.
+
+Örneğin, tıklatmalar üzerinde yeniden çarpıtma,, tıklanmış veya bir iş sonucuna bağlı olmadığı durumlarda bile, diğer her şeyin masrafına, kişiselleştirici hizmet arama tıklamasını sağlar.
+
+Benzer bir örnek olarak, bir haber sitesi, "kullanıcının içeriği okumak için yeterli zaman harcadığı" gibi, her şeyin daha anlamlı bir şeye bağlı olmasını isteyebilir. "İlgili makalelere veya başvurulara tıkladık mi?". Kişiselleştirici ile ölçümleri birbirine yakından bağlamak çok kolay. Ancak iyi sonuçlar ile kısa süreli kullanıcı etkileşimini onaylamamaya dikkat edin.
+
+### <a name="unintended-consequences-from-reward-scores"></a>Ödül Puanlarından gelen istenmeyen sonuçlar
+Reward puanları, en iyi şekilde oluşturulabilir, ancak kişiselleştirici içeriği nasıl derecelendirildiği konusunda beklenmedik sonuçlarla veya istemeden sonuçlar oluşturabilir. 
+
+Aşağıdaki örnekleri göz önünde bulundurun:
+
+* Video içeriğinin kişiselleştirilmesini video uzunluğu oranında izlemek, büyük olasılıkla daha kısa videolar sıralama eğilimi gösterir.
+* Sosyal medya paylaşımlarını, nasıl paylaşıldığını veya içeriğin kendisini analiz etmeden daha iyi hale getirme, çok sayıda "katılım" de kapsayan ve çok az değer ekleyen rahatsız edici, aracılı veya ınflammatory içeriğini derecelendirmeye neden olabilir.
+* Kullanıcıların değişiklik yapması beklendikleri Kullanıcı arabirimi öğelerinde eylemi yeniden çarpıtmak, Kullanıcı arabiriminin kullanılabilirliğini ve tahmin edilebilirliğini etkileyebilir; burada düğmeler, uyarı olmadan konum veya amaca göre değişiklik gösterir ve bu da daha zor hale gelir üretken kalmak için Kullanıcı grupları.
 
 Bu en iyi yöntemleri uygulayın:
 
-* Çevrimdışı denemeleri sisteminizle etkisi ve yan etkileri anlamak için farklı bir ödül yaklaşımları kullanarak çalıştırın.
-* Ödül işlevlerinizi değerlendirin ve kendinize sorun nasıl bir son derece naïve kişi yorumlanması Kıvrım ve onunla istenmeyen sonuçlar ulaşın.
+* Etki ve yan etkileri anlamak için farklı ödül yaklaşımlarını kullanarak sisteminizdeki çevrimdışı denemeleri çalıştırın.
+* Ödül işlevlerinizi değerlendirin ve size son derece Naïve bir kişinin yorumu ile nasıl eğmekte olduğunu ve bununla istenmeyen sonuçlara nasıl ulaşabilmesini isteyin.
 
 
 ## <a name="responsible-design-considerations"></a>Sorumlu tasarım konuları
 
-Sorumlu yapay ZEKA uygulamaları için tasarım alanları şunlardır: Bu framework sonlandıran daha fazla bilgi edinin [gelecek dönemlere](https://news.microsoft.com/futurecomputed/).
+Aşağıda AI 'nin sorumlu uygulamalarına ilişkin tasarımın alanları verilmiştir. [Gelecekte hesaplanan](https://news.microsoft.com/futurecomputed/)bu çerçeveyi daha fazla öğrenin.
 
-![Hesaplanan gelecekteki değerlerinden yapay ZEKA](media/ethics-and-responsible-use/ai-values-future-computed.png)
+![Gelecekte hesaplanan AI değerleri](media/ethics-and-responsible-use/ai-values-future-computed.png)
 
-### <a name="accountability"></a>Sorumluluk
-*Tasarım ve yapay ZEKA sistemlerini dağıtma kişiler sistemlerini nasıl çalışması için sorumlu olmalıdır*. 
+### <a name="accountability"></a>Altına
+*AI sistemlerini tasarlayan ve dağıtan kişilerin, sistemlerinin nasıl çalıştığı konusunda sorumlu olması gerekir*. 
 
-* İç oluşturma Personalizer, gerçekleştirme yönergeleri belge ve takım, Yöneticiler ve tedarikçileri iletişim.
-* Ödül puanları nasıl hesaplanır, düzenli aralıklarla gözden geçirmeleri gerçekleştirmek, hangi özellikler Personalizer etkileşimimiz görmek için çevrimdışı değerlendirme gerçekleştirmek ve sonuçları gereksiz ve gereksiz özelliklerini ortadan kaldırmak için kullanın.
-* Açıkça kullanıcılarınıza nasıl Personalizer, hangi amacı ve hangi verilerin ile kullanılan iletişim kurar.
-* Bilgi ve varlıklar - modelleri ve öğrenme ilkeleri Personalizer çalışması için sonuçları yeniden kullanabilmek için kullandığı diğer veriler - gibi arşivleyebilirsiniz.
+* Kişiselleştirici, belge oluşturma ve bunları ekibiniz, Yöneticiler ve tedarikçilerle iletişim kurma hakkında iç yönergeler oluşturun.
+* Yeniden puanlarının nasıl hesaplandığı hakkında düzenli incelemeler yapın, hangi özelliklerin kişiselleştirmeyi etkilediğini görmek için çevrimdışı değerlendirmeler gerçekleştirin ve gereksiz ve gereksiz özellikleri ortadan kaldırmak için sonuçları kullanın.
+* Kişiselleştirici 'ın nasıl kullanıldığı, ne amaçla ve hangi verileri içeren kullanıcılarınız için net bir şekilde iletişim kurun.
+* Kişiselleştirici tarafından sonuçları yeniden oluşturmak için kullanılan modeller, öğrenme ilkeleri ve diğer veriler gibi arşiv bilgileri ve varlıklar.
 
 ### <a name="transparency"></a>Saydamlık
-*Yapay ZEKA sistemleri olması Understandable*. Personalizer ile:
+*AI sistemleri*anlaşılabilir olmalıdır. Kişiselleştirici ile:
 
-* *Kullanıcılara nasıl içerik kişiselleştirilmiş hakkında bilgi verin.* Örneğin, kullanıcılarınız etiketli bir düğme gösterebilirsiniz `Why These Suggestions?` kullanıcı eylemleri ve en iyi hangi özellikler bir rol Personalizer sonuçlarında yürütülen gösteriliyor.
-* Kullanım oluşturma deneyimini kişiselleştirmek için kullanıcılar ve davranışları hakkında bilgi kullanacağınız bahsetmek koşullarınızın emin olun.
+* *Kullanıcılara içeriğin nasıl kişiselleştirilme hakkında bilgi verin.* Örneğin, kullanıcılarınızı, Kullanıcı ve eylemlerin kişiselleştirici sonuçlarında bir rol oynadığı `Why These Suggestions?` etiketli bir düğme gösterebilirsiniz.
+* Kullanım koşullarınızın, deneyimi kişiselleştirmek için kullanıcılar ve davranışları hakkında bilgi kullanacağınızı söylediğinizden emin olun.
 
 ### <a name="fairness"></a>Eşitliği
-*Yapay ZEKA sistemleri kabul tüm kişileri oldukça*.
+*AI sistemleri tüm kişileri oldukça kabul etmelidir*.
 
-* Personalizer olduğu sonuçlarını uzun vadeli, arızi ya da gerçek zarar ilgili kullanım durumları için kullanmayın.
-* İçerikle kişiselleştirmek uygun olmayan veya istenmeyen sapmaları yaymak yarayabilir özellikler kullanmayın. Örneğin, finansal benzer koşullarda kimseyle finansal ürünler için aynı kişiselleştirilmiş öneriler görmeniz gerekir.
-* Düzenleyiciler, algoritmik araçları veya kullanıcılar kendileri kaynaklanan özellikleri bulunabilir sapmaları anlayın.
+* Sonuçların uzun süreli, sonuçsal veya gerçek bir zarar olduğu durumlarda kullanım durumları için kişiselleştirici kullanmayın.
+* İçeriği kişiselleştirmek için uygun olmayan veya istenmeyen bir iki özelliği yaymaya yardımcı olabilecek özellikleri kullanmayın. Örneğin, benzer finansal koşullara sahip herkes, mali ürünlere yönelik kişiselleştirilmiş önerilerin aynısını görmelidir.
+* Düzenleyicilerde, algoritmik araçlarından veya kullanıcılardan kaynaklanan özelliklerde mevcut olabilecek iki özelliği anlayın.
 
-### <a name="reliability-and-safety"></a>Güvenilirlik ve güvenliği
-*Yapay ZEKA sistemleri, güvenilir ve güvenli bir şekilde yükleyebildiğiniz*. Personalizer için:
+### <a name="reliability-and-safety"></a>Güvenilirlik ve güvenlik
+*AI sistemleri güvenilir ve güvenli bir şekilde gerçekleştirmelidir*. Kişiselleştirici için:
 
-* *Eylemler, seçilen olmamalıdır Personalizer sağlamayan*. Örneğin, uygunsuz bir şekilde filmler için anonim bir öneri veya eksik yaş kullanıcı yapma, kişiselleştirmek için Eylemler dışında filtrelenmelidir.
-* *Bir iş varlığı Personalizer modelinizi yönetme*.  Aksi takdirde bir önemli iş varlığı kabul et ve sıklıkla kaydedin ve model ve ilkeleri Personalizer döngünüzü arkasında öğrenme yedeklemek nasıl düşünün. Sonuçları yeniden Self denetim ve ölçüm geliştirme için önemlidir.
-* *Kullanıcıların doğrudan geri bildirim almak için kanal sağlamak*. Emin olmak için güvenlik denetimleri kodlama yanı sıra kullanıcılar şaşırtıcı veya rahatsız edici olabilecek rapor içeriği için geri bildirim için bir mekanizma sağlar, doğru içeriği doğru hedef kitlelere bakın. İçeriğinizi, kullanıcılar veya 3. taraflara özellikle gelen gözden geçirmek ve içerikleri doğrulamak için Microsoft Content Moderator veya ek araçları kullanmayı düşünün.
-* *Sık çevrimdışı değerlendirme gerçekleştirmek*. Bu, eğilimleri izlemeniz ve verimliliğini bilinen emin olun yardımcı olur.
-* *Bir işlem Algıla ve kötü amaçlı işleme üzerinde işlem yapma kurmak*. Makine öğrenimi ve yapay ZEKA sistemleri hedeflerine doğru sonucu kaydırılacak ortamlarında uzmanlardan olanağı faydalanması aktör vardır. Personalizer kullanımınız önemli seçenekleri etkilemek için bir konum varsa, algılama ve saldırıları, uygun durumlarda insan tarafından İnceleme de dahil olmak üzere bu sınıfların azaltmak için uygun bir yola sahip emin olun.
+* *Seçilmemesi gereken Kişiselleştiriciye eylem sağlamamalıdır*. Örneğin, anonim veya yaşı olmayan bir kullanıcı için öneri oluşturmak üzere uygun olmayan filmlerde, kişiselleştirilmesi gereken eylemler filtrelenmelidir.
+* *Kişiselleştirici modelinizi bir iş varlığı olarak yönetin*.  Model ve öğrenimi ilkelerinin ne sıklıkla kaydedilip yedeklendiğinin ve bunu önemli bir iş varlığı olarak kabul etmeyi düşünün. Geçmiş sonuçları çoğaltma, kendi kendine denetim ve ölçüm geliştirmesi için önemlidir.
+* *Kullanıcılardan doğrudan geri bildirim almak için kanallar sağlayın*. Yalnızca doğru seyircilerin doğru içeriği görmesini sağlamak için güvenlik denetimlerini kodlamaya ek olarak, kullanıcıların şaşırtıcı veya rahatsız edici içerikleri raporlamalarına yönelik bir geri bildirim mekanizması sağlayın. Özellikle içeriğiniz kullanıcılardan veya 3. taraflardan geliyorsa, içeriği gözden geçirmek ve doğrulamak için Microsoft Content Moderator veya ek araçlar kullanmayı düşünün.
+* *Sık sık çevrimdışı değerlendirmeler gerçekleştirin*. Bu, eğilimleri izlemenize ve verimliliğinden emin olmanıza yardımcı olur.
+* *Kötü amaçlı işlemeyi tespit etmek ve üzerinde işlem yapmak için bir Işlem oluşturun*. Makine öğrenimi ve AI sistemlerinin ortamlarından yararlanarak, sonucu hedeflerine doğru kaydırmak için ortamından öğrenme imkanına sahip olacak aktörler vardır. Kişiselleştirici kullanımı önemli seçimleri etkilemek için bir pozisyontaklarca, uygun koşullarda insan incelemesi dahil olmak üzere bu saldırı sınıflarını tespit etmek ve azaltmak için uygun bir yol olduğundan emin olun.
 
 ### <a name="security-and-privacy"></a>Güvenlik ve gizlilik
-*Yapay ZEKA sistemleri güvenli ve gizliliğine saygı*. Personalizer kullanırken:
+*AI sistemleri güvende ve gizliliğe güvenmelidir*. Kişiselleştirici kullanılırken:
 
-* *Kullanıcılar Önden toplanan veriler hakkında ve nasıl kullanıldığını bildiren ve kendi onayı önceden almak*, yerel ve sektörel düzenlemelere izleyerek.
-* *Gizliliğinizi korumaya kullanıcı denetimleri sağlar.* Kişisel bilgi depolayan uygulamalar için bir kolayca Bul butonuna gibi işlevler için sağlama göz önünde bulundurun: 
+* *Kullanıcıları, toplanan veriler ve bu verilerin nasıl kullanıldığı hakkında öne*, yerel ve sektör düzenlemelerinizi izleyerek önceden onayı elde edin.
+* *Gizlilik Koruması Kullanıcı denetimleri sağlar.* Kişisel bilgileri depolayan uygulamalar için, şu gibi işlevler için kolay bir bulma düğmesi sağlamayı düşünün: 
    * `Show me all you know about me`    
    * `Forget my last interaction` 
    * `Delete all you know about me`
 
-Bazı durumlarda, bu yasal olarak gerekli olabilir. Silinen verileri izlemeleri içermeyen için düzenli aralıklarla modelleri yeniden eğitme de ödün göz önünde bulundurun.
+Bazı durumlarda, bunlar yasal olarak gerekli olabilir. Yeniden eğitim modellerindeki avantajları, silinen verilerin izlemelerini içermediğinden düzenli aralıklarla değerlendirin.
 
-### <a name="inclusiveness"></a>İnclusiveness
-*Geniş bir insan gereksinimlerini ve deneyimler adres*.
-* *Erişilebilirlik özellikli arabirimler için kişiselleştirilmiş deneyimler sağlar.* Engelli kişiler için özellikle yararlı iyi kişiselleştirme - çaba, taşıma ve etkileşimleri can tekrarından miktarını azaltmak için uygulanan geldiği verimliliği.
-* *Bağlam için uygulama davranışını ayarlama*. Personalizer hedefleri, örneğin, bir sohbet Robotu arasında ayırt etmek için kullanabileceğiniz doğru yorumu bağlamsal olabilir ve bir boyutu değil uygun tüm gibi. 
-
-
-## <a name="proactive-readiness-for-increased-data-protection-and-governance"></a>Artan veri korumayı ve idare proaktif hazırlığı
-
-Yasal bağlamları belirli değişiklikleri tahmin etmek zordur, ancak genel olarak, kişisel verilerin kullanımı saygılı sağlama ve saydamlık ve algoritmik karar için ilgili seçeneğe sağlayarak en düşük yasal çerçeve ötesine geçip yararınıza olacaktır.
+### <a name="inclusiveness"></a>Her ikisi de
+*Çok çeşitli insan ihtiyaçlarını ve deneyimlerini ele*edin.
+* *Erişilebilirlik etkin arabirimler için kişiselleştirilmiş deneyimler sağlar.* Etkileşimlerde efor, taşıma ve gereksiz tekrarların miktarını azaltmak için iyi kişiselleştirmeden gelen verimlilik, özellikle Engelli kişiler için yararlı olabilir.
+* *Uygulama davranışını bağlam olarak ayarlayın*. Bir sohbet bot içindeki amaçlar arasında belirsizliği ortadan kaldırmak için kişiselleştirici kullanabilirsiniz; Örneğin, doğru yorum bağlamsal olabilir ve bir boyut tümüne uygun olmayabilir. 
 
 
-* Burada yeni kısıtlamalar kişilerden gelen toplanan veriler üzerinde olabilir ve gerekir bir durum planlama göz önünde bulundurun nasıl kararları vermek için kullanılan gösterilecek.
-* Burada kullanıcıları marginalized savunmasız ortalamaya, alt, ekonomik güvenlik açığı kullanıcılar veya kullanıcı aksi içerebilir ek hazırlık algoritmik işleme etkilemek için maruz göz önünde bulundurun.
-* Yaygın memnuniyetsizliğine göz önünde bulundurun nasıl İzleyici hedefleme ve İzleyici etkileyen veri koleksiyonuyla programlar ve algoritmaları oynayıp ve kendini kanıtlamış stratejik hatalarını önlemek nasıl.
+## <a name="proactive-readiness-for-increased-data-protection-and-governance"></a>Daha fazla veri koruma ve idare için öngörülü hazırlık
+
+Mevzuata bağlamlarda belirli değişiklikleri tahmin etmek zordur, ancak genel olarak, kişisel verilerin daha etkili bir şekilde kullanımını sağlamak ve algoritmik karar verme ile ilgili saydamlık ve seçim sağlamak için en düşük yasal Framework 'ün ötesine geçecekti.
 
 
-## <a name="proactive-assessments-during-your-project-lifecycle"></a>Projenizin yaşam döngünüzü sırasında proaktif değerlendirmeleri
+* Kişilerden toplanan veriler üzerinde yeni kısıtlamalar olabileceği ve kararlar almak için nasıl kullanıldığını göstermek için bir sorun olması gereken bir duruma planlamayı düşünün.
+* Kullanıcıların, bu güvenlik açığı bulunan popülasyonu, çocukları, ekonomik güvenlik açığı olan kullanıcıları ya da kullanıcıların algoritmik düzenlemesini etkilemesine izin verebilecek daha fazla hazır olma durumu göz önünde bulundurun.
+* Veri toplama programlarının ve algoritmaların nasıl çalındığını ve kendini kanıtlamış stratejik hatalardan kaçının.
 
-Takım üyeleri, kullanıcılar ve sorumlu kullanımı ile ilgili ve bunların çözümü önceliklendirir ve retaliation engelleyen bir işlemi oluşturma rapor endişeleriniz için işletme sahipleri için yöntemleri oluşturmayı düşünün.
 
-Herhangi bir teknolojinin kullanımının yan etkileri hakkında düşünmek herhangi bir kişi tarafından Perspektif ve yaşam deneyimlerini sınırlıdır. Takımlar, kullanıcılar veya danışmanlık panoları daha farklı sesler taşıyarak düşünceleri son derece kullanılabilir aralığını genişletin; Örneğin, olası ve bunları konuşmak için önerilir. Eğitim ve malzemelerin daha da bu etki alanında takım bilgisini genişletin ve karmaşık ve önemli konulara tartışmak için özelliği eklemek için göz önünde bulundurun.
+## <a name="proactive-assessments-during-your-project-lifecycle"></a>Proje yaşam döngünüz sırasında öngörülü değerlendirmeler
 
-Kullanıcıyla ilişkili görevleri deneyimi, güvenlik veya gibi devops uygulama yaşam döngüsü gibi diğer crosscutting görevleri sorumlu kullanımıyla ilgili görevleri değerlendirmesini göz önünde bulundurun. Bu görevleri ve bunların gereksinimleriyle akla olamaz. Sorumlu kullanımı ele alınan ve uygulama yaşam döngüsü boyunca doğrulandı.
+Ekip üyeleri, kullanıcılar ve iş sahipleri için, sorumlu kullanımlarla ilgili sorunları bildirme ve çözümlenmesini önceliklendiren ve yeniden dengeyi önleyen bir işlem oluşturan Yöntemler oluşturmayı düşünün.
+
+Herhangi bir teknolojinin kullanmanın yan etkileri hakkında düşünce olan herhangi bir kişi, perspektiflerinin ve yaşam deneyimleriyle sınırlıdır. Ekipleriniz, kullanıcılarınız veya danışmanlık panolarınıza daha fazla sayıda ses vererek kullanılabilir olan oplarons aralığını genişletin; Bu şekilde, mümkün olduğunca konuşmaları önerilir. Bu etki alanındaki ekip bilgisini daha fazla genişletmek ve karmaşık ve hassas konuları tartışmak için yetenek eklemek amacıyla eğitim ve öğrenme malzemelerini değerlendirin.
+
+Uygulama yaşam döngüsünde, Kullanıcı deneyimi, güvenlik veya DevOps ile ilgili görevler gibi diğer çapraz uygulamalar gibi, sorumlu görevlerle ilgili görevleri kabul etmeyi düşünün. Bu görevler ve gereksinimleri düşündüler olamaz. Sorumlu kullanım, uygulama yaşam döngüsü boyunca ele alınmalıdır ve doğrulanmalıdır.
  
 ## <a name="questions-and-feedback"></a>Sorular ve geri bildirim
 
-Microsoft araçları ve aşağıdaki sorumluluklara göre hareket yardımcı olacak belgeler çaba sürekli olarak koyuyor. Ekibimiz, davet [Microsoft'a geri bildirimde](mailto:cogsvcs-RL-feedback@microsoft.com?subject%3DPersonalizer%20Responsible%20Use%20Feedback&body%3D%5BPlease%20share%20any%20question%2C%20idea%20or%20concern%5D) ek araçlar, ürün özellikleri düşünüyorsanız ve belgeler Personalizer kullanmak için bu yönergeleri uygulamanıza yardımcı.
+Microsoft, bu sorumluluklar üzerinde işlem yapmanıza yardımcı olmak için sürekli olarak araçlara ve belgelere çaba yerleştiriliyor. Takımınız, ek araçlara, ürün özelliklerine ve belgelere, kişiselleştirici kullanımı için bu yönergeleri uygulamanıza yardımcı olduğunu düşünüyorsanız, [Microsoft 'a geri bildirim sağlamak](mailto:cogsvcs-RL-feedback@microsoft.com?subject%3DPersonalizer%20Responsible%20Use%20Feedback&body%3D%5BPlease%20share%20any%20question%2C%20idea%20or%20concern%5D) için sizi davet eder.
 
-## <a name="recommended-reading"></a>Önerilen okumalar
+## <a name="recommended-reading"></a>Önerilen okuma
 
-* Microsoft'un altı ilkelerine yapay ZEKA Ocak 2018'den kitap yayımlanan sorumlu geliştirmek için bkz. [gelecek dönemlere](https://news.microsoft.com/futurecomputed/)
-* [Gelecek Kime ait? ](https://www.goodreads.com/book/show/15802693-who-owns-the-future) Jaron Lanier tarafından.
-* [Matematik yok etme Silah](https://www.goodreads.com/book/show/28186015-weapons-of-math-destruction) tarafından - Cathy O'Neil
-* [Etik kurallara ve veri bilimi](https://www.oreilly.com/library/view/ethics-and-data/9781492043898/) DJ Patil, Hilary Mason Mike Loukides tarafından.
-* [ACM kodunu Ethics](https://www.acm.org/code-of-ethics)
-* [Genetik bilgi Nondiscrimination Act - GINA](https://en.wikipedia.org/wiki/Genetic_Information_Nondiscrimination_Act)
-* [Sorumlu algoritmaları için FATML ilkeleri](https://www.fatml.org/resources/principles-for-accountable-algorithms)
+* Microsoft 'un, Ocak 2018 defterinde yayımlanan AI 'nin sorumlu geliştirmesi için, [gelecekte hesaplanan](https://news.microsoft.com/futurecomputed/)
+* [Geleceğe kim sahip?](https://www.goodreads.com/book/show/15802693-who-owns-the-future) Jaron Lanier.
+* [Matematik ve matematiksel bir şekilde Yıkıcıkları](https://www.goodreads.com/book/show/28186015-weapons-of-math-destruction)
+* DJ Patil, Hietmason, Mike Loukides tarafından [ETCS ve veri bilimi](https://www.oreilly.com/library/view/ethics-and-data/9781492043898/) .
+* [ACM, Etics kodu](https://www.acm.org/code-of-ethics)
+* [Genesel bilgiler ayırt edici olmayan bir Işlem-GINA](https://en.wikipedia.org/wiki/Genetic_Information_Nondiscrimination_Act)
+* [Accountable algoritmaları için FATML Ilkeleri](https://www.fatml.org/resources/principles-for-accountable-algorithms)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

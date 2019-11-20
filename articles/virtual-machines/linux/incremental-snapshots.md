@@ -1,6 +1,6 @@
 ---
-title: Artımlı anlık yedekleme ve kurtarma yönetilmeyen Azure Linux VM diskleri için kullanın. | Microsoft Docs
-description: Yedekleme ve kurtarma Azure Linux sanal makine disklerinizi artımlı anlık görüntülerini kullanarak özel bir çözüm oluşturun.
+title: Yönetilmeyen Azure Linux VM disklerinin yedeklenmesi ve kurtarılması için Artımlı anlık görüntü kullanma
+description: Artımlı anlık görüntüleri kullanarak Azure Linux sanal makine disklerinizin yedeklenmesi ve kurtarılması için özel bir çözüm oluşturun.
 services: virtual-machines-linux
 documentationcenter: na
 author: aungoo-msft
@@ -10,16 +10,16 @@ ms.assetid: 3524b987-bd65-4e35-83e7-fbc2136643e5
 ms.service: virtual-machines-linux
 ms.workload: storage
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: aungoo
 ms.subservice: disks
-ms.openlocfilehash: 06b0e8a16dc112728c9a69450cf88a399a27ed13
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 67e17aba2f2068ebcff50e37489d4528fb52d89a
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60543808"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036078"
 ---
+# <a name="back-up-azure-unmanaged-vm-disks-with-incremental-snapshots"></a>Artımlı anlık görüntülerle Azure yönetilmeyen VM disklerini yedekleme
 [!INCLUDE [virtual-machines-incremental-snapshots](../../../includes/virtual-machines-incremental-snapshots.md)]

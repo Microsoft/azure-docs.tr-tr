@@ -1,6 +1,6 @@
 ---
 title: Azure Media Services v3 sürüm notları | Microsoft Docs
-description: İle en son gelişmeleri güncel kalmak için bu makalede, Azure Media Services v3 en yeni güncelleştirmeleri sağlar.
+description: En son gelişmelerden haberdar olmak için bu makalede, Azure Media Services v3 hakkında en son güncelleştirmeler sunulmaktadır.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -9,20 +9,20 @@ editor: ''
 ms.service: media-services
 ms.workload: na
 ms.topic: article
-ms.date: 06/07/2019
+ms.date: 10/07/2019
 ms.author: juliako
-ms.openlocfilehash: b3e772ebb05f79abb70e58e63a93c3336a413e38
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: 34d68974366eb17704b4ea1291bd1d29a0eea95a
+ms.sourcegitcommit: aef6040b1321881a7eb21348b4fd5cd6a5a1e8d8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67542543"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72168626"
 ---
 # <a name="azure-media-services-v3-release-notes"></a>Azure Media Services v3 sürüm notları
 
-İle en son gelişmeleri güncel kalmak için bu makalede, ile hakkında bilgi sağlar:
+En son gelişmelerden haberdar olmak için, bu makalede hakkında bilgi verilmektedir:
 
-* En son sürümleri
+* En son yayınlar
 * Bilinen sorunlar
 * Hata düzeltmeleri
 * Kullanım dışı işlev
@@ -30,229 +30,272 @@ ms.locfileid: "67542543"
 ## <a name="known-issues"></a>Bilinen sorunlar
 
 > [!NOTE]
-> Şu anda, v3 kaynaklarını yönetmek için Azure portalını kullanamıyorsunuz. Kullanım [REST API](https://aka.ms/ams-v3-rest-sdk), CLI, desteklenen Sdk'lardan birini veya.
+> Şu anda, v3 kaynaklarını yönetmek için Azure portalını kullanamıyorsunuz. [REST API](https://aka.ms/ams-v3-rest-sdk), CLI veya desteklenen SDK 'lardan birini kullanın.
 
-Daha fazla bilgi için [Media Services v2'den v3 taşımak için geçiş kılavuzunu](migrate-from-v2-to-v3.md#known-issues).
+Daha fazla bilgi için bkz. [Media Services V2 'den v3 'e geçiş Için geçiş kılavuzu](migrate-from-v2-to-v3.md#known-issues).
+
+## <a name="september-2019"></a>Eylül 2019
+
+###  <a name="media-services-v3"></a>Media Services v3  
+
+#### <a name="live-linear-encoding-of-live-events"></a>Canlı olayların canlı doğrusal kodlaması
+
+Media Services v3, canlı etkinliklerin canlı doğrusal kodlamasının 24 saat x 365 gün önizlemesini duyuruyor.
+
+###  <a name="media-services-v2"></a>Media Services v2  
+
+#### <a name="deprecation-of-media-processors"></a>Medya işlemcilerinin kullanımdan kaldırılması
+
+*Azure Media Indexer* ve *Azure Media Indexer 2 Preview*kullanım dışı olarak duyuruluyoruz. [Azure Media Indexer](../previous/media-services-index-content.md) medya işlemcisi, 1 Ekim 2020 ' de kullanımdan kaldırılacaktır. [Azure Media Indexer 2 Preview](../previous/media-services-process-content-with-indexer2.md) medya Işlemcileri 1 Ocak 2020 tarihinde kullanımdan kaldırılacaktır. [Azure Media Services video Indexer](https://docs.microsoft.com/azure/media-services/video-indexer/) bu eski medya işlemcilerinin yerini alır.
+
+Daha fazla bilgi için [Azure Media Indexer ve Azure Media Indexer 2 ' den Azure Media Services video Indexer geçiş](../previous/migrate-indexer-v1-v2.md)konusuna bakın.
+
+## <a name="august-2019"></a>Ağustos 2019
+
+###  <a name="media-services-v3"></a>Media Services v3  
+
+#### <a name="south-africa-regional-pair-is-open-for-media-services"></a>Güney Afrika bölgesel çifti Media Services için açık 
+
+Media Services artık Güney Afrika Kuzey ve Güney Afrika Batı bölgelerinde kullanılabilir.
+
+Daha fazla bilgi için bkz. [Media Services v3 'nin bulunduğu bulutlar ve bölgeler](azure-clouds-regions.md).
+
+###  <a name="media-services-v2"></a>Media Services v2  
+
+#### <a name="deprecation-of-media-processors"></a>Medya işlemcilerinin kullanımdan kaldırılması
+
+30 Kasım 2019 ' de devre dışı bırakılmakta olan *Windows Azure Medya Kodlayıcısı* (WAME) ve *Azure Media Encoder* (AME) medya işlemcilerinin kullanımdan kaldırılması duyuruluyor.
+
+Ayrıntılar için bkz. [WAME 'i Media Encoder Standard geçirin](https://go.microsoft.com/fwlink/?LinkId=2101334) ve [adı Media Encoder Standard geçirin](https://go.microsoft.com/fwlink/?LinkId=2101335).
+ 
+## <a name="july-2019"></a>2019 Temmuz
+
+### <a name="content-protection"></a>Content Protection
+
+Belirteç kısıtlamasıyla korunan içerik akışı yaparken, son kullanıcılar anahtar teslim isteğinin bir parçası olarak gönderilen bir belirteç elde etmeniz gerekir. *Belirteç yeniden yürütme engellemesi* özelliği, Media Services müşterilerin aynı belirtecin bir anahtar veya lisans istemek için kaç kez kullanılabileceği konusunda bir sınır ayarlamasına olanak tanır. Daha fazla bilgi için bkz. [belirteç yeniden yürütme engellemesi](content-protection-overview.md#token-replay-prevention).
+
+Bu özellik şu anda ABD Orta ve ABD Orta Batı kullanılabilir.
 
 ## <a name="june-2019"></a>Haziran 2019
 
-### <a name="video-subclipping"></a>Video klip
+### <a name="video-subclipping"></a>Video alt kırpması
 
-Artık kesme veya bir video kullanarak kodlama, alt klip bir [iş](https://docs.microsoft.com/rest/api/media/jobs). 
+Artık bir [işi](https://docs.microsoft.com/rest/api/media/jobs)kullanarak kodlarken videoyu kırpabilir veya alt kırpabilirsiniz. 
 
-Bu işlev ile çalışır [dönüştürme](https://docs.microsoft.com/rest/api/media/transforms) kullanarak oluşturulan [BuiltInStandardEncoderPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#builtinstandardencoderpreset) hazır veya [StandardEncoderPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#standardencoderpreset) hazır. 
+Bu işlev, [Builtınstandardencoderönayar](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#builtinstandardencoderpreset) ön ayarları veya [Standardencoderönayar](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#standardencoderpreset) önayarları kullanılarak oluşturulan [dönüşümlerle](https://docs.microsoft.com/rest/api/media/transforms) birlikte kullanılır. 
 
 Örneklere bakın:
 
-* [Alt klip .NET ile video](subclip-video-dotnet-howto.md)
-* [Alt klip REST ile bir video](subclip-video-rest-howto.md)
+* [.NET ile videoyu alt kırpın](subclip-video-dotnet-howto.md)
+* [REST ile videoyu alt kırpın](subclip-video-rest-howto.md)
 
 ## <a name="may-2019"></a>Mayıs 2019
 
-### <a name="azure-monitor-support-for-media-services-diagnostic-logs-and-metrics"></a>Media Services tanılama günlükleri ve ölçümler için Azure İzleyici desteği
+### <a name="azure-monitor-support-for-media-services-diagnostic-logs-and-metrics"></a>Azure Izleyici Media Services tanılama günlükleri ve ölçümleri desteği
 
-Telemetri verileri emmited Media Services tarafından görüntülemek için artık Azure İzleyicisi'ni kullanabilirsiniz.
+Azure Izleyici 'yi artık Media Services tarafından kullanılabilen telemetri verilerini görüntülemek için kullanabilirsiniz.
 
-* Media Services anahtar teslim uç noktası tarafından gönderilen istekleri izlemek için Azure İzleyici tanılama günlükleri'ni kullanın. 
-* Media Services tarafından yayılan ölçümleri izleyebilir [akış uç noktalarını](streaming-endpoint-concept.md).   
+* Media Services anahtar teslim uç noktası tarafından gönderilen istekleri izlemek için Azure Izleyici tanılama günlüklerini kullanın. 
+* Media Services [akış uç noktaları](streaming-endpoint-concept.md)tarafından yayılan ölçümleri izleyin.   
 
-Ayrıntılar için bkz [İzleyici Media Services ölçümleri ve tanılama günlüklerini](media-services-metrics-diagnostic-logs.md).
+Ayrıntılar için bkz. [Media Services ölçümleri ve tanılama günlüklerini izleme](media-services-metrics-diagnostic-logs.md).
 
-### <a name="multi-audio-tracks-support-in-dynamic-packaging"></a>Dinamik paketleme birden çok ses parçaları desteği 
+### <a name="multi-audio-tracks-support-in-dynamic-packaging"></a>Dinamik paketlemeyle çoklu ses izleme desteği 
 
-Birden çok codec bileşenleri ve dilleri ile birden çok ses parçaları sahip varlıklar akışı yapılırken [dinamik paketleme](dynamic-packaging-overview.md) çoklu ses parçaları HLS çıktısı için artık desteklemektedir (sürüm 4 veya üzeri).
+Birden çok codec ve dilde birden çok ses izi bulunan varlıklar akışı yaparken, [dinamik paketleme](dynamic-packaging-overview.md) artık HLS çıkışı (sürüm 4 veya üzeri) için birden çok ses parçasını desteklemektedir.
 
-### <a name="korea-regional-pair-is-open-for-media-services"></a>Medya Hizmetleri için bölgesel çift Kore açıktır 
+### <a name="korea-regional-pair-is-open-for-media-services"></a>Kore bölgesel çifti Media Services için açık 
 
-Media Services Kore Orta ve Kore Güney bölgelerinde kullanıma sunuldu. 
+Media Services artık Kore Orta ve Kore Güney bölgelerinde kullanılabilir. 
 
-Daha fazla bilgi için [Bulutlar ve hangi Media Services v3 mevcut bölgeleri](azure-clouds-regions.md).
+Daha fazla bilgi için bkz. [Media Services v3 'nin bulunduğu bulutlar ve bölgeler](azure-clouds-regions.md).
 
 ### <a name="performance-improvements"></a>Performans iyileştirmeleri
 
-Media Services performans geliştirmeleri eklendi güncelleştirmeler.
+Media Services performans iyileştirmeleri içeren güncelleştirmeler eklendi.
 
-* İşleme için desteklenen en büyük dosya boyutu güncelleştirildi. Bkz, [kotaları ve sınırlamaları](limits-quotas-constraints.md).
-* [Kodlama hızlarını geliştirmeleri](media-reserved-units-cli-how-to.md#choosing-between-different-reserved-unit-types).
+* İşleme için desteklenen en büyük dosya boyutu güncelleştirildi. Bkz., [Kotalar ve sınırlamalar](limits-quotas-constraints.md).
+* [Kodlama hızı iyileştirmeleri](media-reserved-units-cli-how-to.md#choosing-between-different-reserved-unit-types).
 
-## <a name="april-2019"></a>Nisan 2019
+## <a name="april-2019"></a>2019 Nisan
 
-### <a name="new-presets"></a>Yeni hazır
+### <a name="new-presets"></a>Yeni Önayarlar
 
-* [FaceDetectorPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#facedetectorpreset) için yerleşik Çözümleyicisi hazır eklendi.
-* [ContentAwareEncodingExperimental](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#encodernamedpreset) için yerleşik Kodlayıcı hazır eklendi. Daha fazla bilgi için [içeriğe duyarlı kodlama](cae-experimental.md). 
+* [Facedetectorönayar](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#facedetectorpreset) yerleşik çözümleyici önayarlarına eklendi.
+* [ContentAwareEncodingExperimental](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#encodernamedpreset) , yerleşik kodlayıcı önayarlarına eklendi. Daha fazla bilgi için bkz. [içeriğe duyarlı kodlama](cae-experimental.md). 
 
 ## <a name="march-2019"></a>Mart 2019
 
-Dinamik paketleme artık Dolby Atmos. destekler Daha fazla bilgi için [dinamik paketleme tarafından desteklenen ses codec bileşenleri](dynamic-packaging-overview.md#audio-codecs).
+Dinamik paketleme artık Dolby Atmos 'ı destekliyor. Daha fazla bilgi için bkz. [dinamik paketleme tarafından desteklenen ses codec bileşenleri](dynamic-packaging-overview.md#audio-codecs).
 
-Artık, akış Bulucu için uygulamak varlık veya hesap filtrelerin listesini belirtebilirsiniz. Daha fazla bilgi için [filtreleri ile akış Bulucu ilişkilendirmek](filters-concept.md#associating-filters-with-streaming-locator).
+Artık akış bulucusu için uygulanacak varlık veya hesap filtrelerinin bir listesini belirtebilirsiniz. Daha fazla bilgi için bkz. [akış bulucu ile filtreleri ilişkilendirme](filters-concept.md#associating-filters-with-streaming-locator).
 
 ## <a name="february-2019"></a>Şubat 2019
 
-Media Services v3 Ulusal Azure bulutlarında artık desteklenmektedir. Tüm özellikler tüm bulutlara henüz kullanılabilir. Ayrıntılar için bkz [Bulutlar ve hangi Azure Media Services v3 mevcut bölgeleri](azure-clouds-regions.md).
+Media Services v3 artık Azure Ulusal bulutlarında desteklenmektedir. Tüm özellikler henüz tüm bulutlarda kullanılamaz. Ayrıntılar için bkz. [Azure Media Services v3 'nin bulunduğu bulutlar ve bölgeler](azure-clouds-regions.md).
 
-[Microsoft.Media.JobOutputProgress](media-services-event-schemas.md#monitoring-job-output-progress) olay, medya Hizmetleri için Azure Event Grid şemaları için eklendi.
+Media Services için Azure Event Grid şemalarına [Microsoft. Media. Joi Putprogress](media-services-event-schemas.md#monitoring-job-output-progress) olayı eklendi.
 
 ## <a name="january-2019"></a>Ocak 2019
 
-### <a name="media-encoder-standard-and-mpi-files"></a>Media Encoder Standard ve MPI dosyaları 
+### <a name="media-encoder-standard-and-mpi-files"></a>Media Encoder Standard ve MPı dosyaları 
 
-Medya Kodlayıcısı MP4 dosyaları üretmek için standart ile kodlarken .mpi yeni bir dosya oluşturulur ve çıktıyı eklenen varlık. Bu MPI dosya performansını artırmak için kullanılmaya [dinamik paketleme](dynamic-packaging-overview.md) ve senaryoları akış.
+MP4 dosyaları üretmek için Media Encoder Standard ile kodlarken, yeni bir. MPI dosyası oluşturulur ve çıkış varlığına eklenir. Bu MPı dosyası, [dinamik paketleme](dynamic-packaging-overview.md) ve akış senaryoları için performansı iyileştirmeye yöneliktir.
 
-Değiştirme veya MPI dosyayı kaldırmak veya gerekir (veya etkinleştirmezsiniz) varlığını hizmetinizdeki herhangi bir bağımlılık olması, böyle bir dosya.
+MPı dosyasını değiştirmemelisiniz veya kaldırmamalıdır ya da bu tür bir dosyanın var olan (veya olmayan) hizmetinize herhangi bir bağımlılığı almalısınız.
 
 ## <a name="december-2018"></a>Aralık 2018
 
-GA sürümündeki V3 API'yi güncelleştirmeleri içerir:
+V3 API 'sinin GA sürümündeki güncelleştirmeler şunlardır:
        
-* **PresentationTimeRange** özellikleri gereklidir artık ' için ' **varlık filtreleri** ve **hesap filtreleri**. 
-* $Top ve $skip sorgu seçeneklerini **işleri** ve **dönüştüren** kaldırıldı ve $orderby eklendi. Yeni sipariş işlevselliği ekleme bir parçası olarak uygulanan değil olsa da $top ve $skip seçeneklerini yanlışlıkla daha önce açığa bulundu.
-* Numaralandırma genişletilebilirliği tekrar etkinleştirilecektir. Bu özellik SDK preview sürümleri etkinleştirildikten ve yanlışlıkla GA sürümünde devre dışı.
-* Önceden tanımlanmış iki akış ilke yeniden adlandırıldı. **SecureStreaming** artık **MultiDrmCencStreaming**. **SecureStreamingWithFairPlay** artık **Predefined_MultiDrmStreaming**.
+* **Varlık filtreleri** ve **hesap filtreleri**için **presentationtimerange** özellikleri artık ' gerekli ' değildir. 
+* **İşler** ve **dönüşümler** için $top ve $Skip sorgu seçenekleri kaldırılmıştır ve $OrderBy eklenmiştir. Yeni sıralama işlevinin eklenmesinin bir parçası olarak, $top ve $skip seçeneklerinin, uygulanmamasına rağmen daha önce daha önce açığa çıkmıştı.
+* Numaralandırma genişletilebilirliği yeniden etkinleştirildi. Bu özellik SDK 'nın önizleme sürümlerinde etkinleştirilmiştir ve GA sürümünde yanlışlıkla devre dışı bırakıldı.
+* Önceden tanımlanmış iki akış ilkesi yeniden adlandırıldı. **Securestreaming** artık **Multidrmcencstreaming**. **SecureStreamingWithFairPlay** şimdi **Predefined_MultiDrmStreaming**.
 
-## <a name="november-2018"></a>Kasım 2018
+## <a name="november-2018"></a>2018 Kasım
 
-CLI 2.0 modülü için kullanıma sunuldu [Azure Media Services v3 GA](https://docs.microsoft.com/cli/azure/ams?view=azure-cli-latest) – v 2.0.50.
+CLı 2,0 modülü artık [Azure Media Services v3 GA](https://docs.microsoft.com/cli/azure/ams?view=azure-cli-latest) – v 2.0.50 için kullanılabilir.
 
 ### <a name="new-commands"></a>Yeni komutlar
 
-- [ams hesabı az](https://docs.microsoft.com/cli/azure/ams/account?view=azure-cli-latest)
-- [az ams hesabına filtreleme](https://docs.microsoft.com/cli/azure/ams/account-filter?view=azure-cli-latest)
-- [az ams varlığı](https://docs.microsoft.com/cli/azure/ams/asset?view=azure-cli-latest)
-- [az ams varlığı filtreleme](https://docs.microsoft.com/cli/azure/ams/asset-filter?view=azure-cli-latest)
-- [az ams içeriğini-key-policy](https://docs.microsoft.com/cli/azure/ams/content-key-policy?view=azure-cli-latest)
-- [az ams işi](https://docs.microsoft.com/cli/azure/ams/job?view=azure-cli-latest)
-- [az ams canlı olay](https://docs.microsoft.com/cli/azure/ams/live-event?view=azure-cli-latest)
-- [az ams Canlı çıkış](https://docs.microsoft.com/cli/azure/ams/live-output?view=azure-cli-latest)
-- [az ams akış uç noktası](https://docs.microsoft.com/cli/azure/ams/streaming-endpoint?view=azure-cli-latest)
-- [Akış az ams-Bulucu](https://docs.microsoft.com/cli/azure/ams/streaming-locator?view=azure-cli-latest)
-- [az ams hesabınızı mru](https://docs.microsoft.com/cli/azure/ams/account/mru?view=azure-cli-latest) -medya ayrılmış birimi yönetmenizi sağlar. Daha fazla bilgi için [ölçek medya ayrılmış birimi](media-reserved-units-cli-how-to.md).
+- [az AMS hesabı](https://docs.microsoft.com/cli/azure/ams/account?view=azure-cli-latest)
+- [az AMS Account-Filter](https://docs.microsoft.com/cli/azure/ams/account-filter?view=azure-cli-latest)
+- [az AMS varlık](https://docs.microsoft.com/cli/azure/ams/asset?view=azure-cli-latest)
+- [az AMS varlık-filtre](https://docs.microsoft.com/cli/azure/ams/asset-filter?view=azure-cli-latest)
+- [az AMS Content-Key-Policy](https://docs.microsoft.com/cli/azure/ams/content-key-policy?view=azure-cli-latest)
+- [az AMS Job](https://docs.microsoft.com/cli/azure/ams/job?view=azure-cli-latest)
+- [az AMS canlı-olay](https://docs.microsoft.com/cli/azure/ams/live-event?view=azure-cli-latest)
+- [az AMS Live-Output](https://docs.microsoft.com/cli/azure/ams/live-output?view=azure-cli-latest)
+- [az AMS streaming-Endpoint](https://docs.microsoft.com/cli/azure/ams/streaming-endpoint?view=azure-cli-latest)
+- [az AMS streaming-Locator](https://docs.microsoft.com/cli/azure/ams/streaming-locator?view=azure-cli-latest)
+- [az AMS Account MRU](https://docs.microsoft.com/cli/azure/ams/account/mru?view=azure-cli-latest) -medya ayrılmış birimlerini yönetmenizi sağlar. Daha fazla bilgi için bkz. [Ölçek medya ayrılmış birimleri](media-reserved-units-cli-how-to.md).
 
-### <a name="new-features-and-breaking-changes"></a>Yeni özellikler ve bozucu değişiklikler
+### <a name="new-features-and-breaking-changes"></a>Yeni özellikler ve son değişiklikler
 
 #### <a name="asset-commands"></a>Varlık komutları
 
 - ```--storage-account``` ve ```--container``` bağımsız değişkenleri eklendi.
-- Varsayılan değerleri (şimdi + 23 h) süre sonu ve izinleri (okuma) için ```az ams asset get-sas-url``` eklenen komutu.
+- @No__t-0 komutunda, sona erme saati (şimdi + 23h) ve izinler (okuma) için varsayılan değerler eklendi.
 
 #### <a name="job-commands"></a>İş komutları
 
 - ```--correlation-data``` ve ```--label``` bağımsız değişkenleri eklendi
-- ```--output-asset-names``` olarak yeniden adlandırıldı ```--output-assets```. Varlıklar, boşlukla ayrılmış listesini kabul artık ' assetName label =' biçimi. Bir varlık etiketi olmadan şöyle gönderilebilir: ' assetName ='.
+- ```--output-asset-names``` ```--output-assets``` olarak yeniden adlandırıldı. Şimdi, ' assetName = Label ' biçiminde varlıkların boşlukla ayrılmış bir listesini kabul eder. Etiketi olmayan bir varlık şu şekilde gönderilebilir: ' assetName = '.
 
-#### <a name="streaming-locator-commands"></a>Akış Bulucusu komutları
+#### <a name="streaming-locator-commands"></a>Akış Bulucu komutları
 
-- ```az ams streaming locator``` temel komutu yerine ```az ams streaming-locator```.
+- ```az ams streaming locator``` taban komutu ```az ams streaming-locator``` ile değiştirilmiştir.
 - ```--streaming-locator-id``` ve ```--alternative-media-id support``` bağımsız değişkenleri eklendi.
-- ```--content-keys argument``` bağımsız değişken güncelleştirildi.
-- ```--content-policy-name``` olarak yeniden adlandırıldı ```--content-key-policy-name```.
+- ```--content-keys argument``` bağımsız değişkeni güncelleştirildi.
+- ```--content-policy-name``` ```--content-key-policy-name``` olarak yeniden adlandırıldı.
 
-#### <a name="streaming-policy-commands"></a>Akış ilke komutları
+#### <a name="streaming-policy-commands"></a>Akış Ilkesi komutları
 
-- ```az ams streaming policy``` temel komutu yerine ```az ams streaming-policy```.
-- Şifreleme parametreleri, destek ```az ams streaming-policy create``` eklendi.
+- ```az ams streaming policy``` taban komutu ```az ams streaming-policy``` ile değiştirilmiştir.
+- @No__t-0 ' da şifreleme parametreleri desteği eklendi.
 
-#### <a name="transform-commands"></a>Komutları dönüştürme
+#### <a name="transform-commands"></a>Dönüşüm komutları
 
-- ```--preset-names``` bağımsız değişken yerine ```--preset```. Artık yalnızca 1 çıkış/ön ayarı teker teker ayarlayabilirsiniz (daha fazla çalıştırmak için sahip olduğunuz eklemek için ```az ams transform output add```). Ayrıca, özel JSON yolunu geçirerek özel StandardEncoderPreset ayarlayabilirsiniz.
-- ```az ams transform output remove``` kaldırmak için çıkış dizinini geçirerek gerçekleştirilebilir.
-- ```--relative-priority, --on-error, --audio-language and --insights-to-extract``` eklenen bağımsız değişkenleri ```az ams transform create``` ve ```az ams transform output add``` komutları.
+- ```--preset-names``` bağımsız değişkeni ```--preset``` ile değiştirilmiştir. Artık tek seferde yalnızca 1 çıkış/ön ayar ayarlayabilirsiniz (daha fazlasını eklemek için ```az ams transform output add```). Ayrıca, yolu özel JSON 'unuza geçirerek özel Standardencoderönayar ayarlayabilirsiniz.
+- ```az ams transform output remove```, kaldırılacak çıkış dizini geçirerek gerçekleştirilebilir.
+- ```az ams transform create``` ve ```az ams transform output add``` komutlarında @no__t 0 bağımsız değişken eklendi.
 
-## <a name="october-2018---ga"></a>Ekim 2018 - GA
+## <a name="october-2018---ga"></a>Ekim 2018-GA
 
-Bu bölümde, Azure Media Services (AMS) Ekim güncelleştirmeleri açıklanmaktadır.
+Bu bölümde Azure Media Services (AMS) Ekim güncelleştirmeleri açıklanmaktadır.
 
 ### <a name="rest-v3-ga-release"></a>REST v3 GA sürümü
 
-[REST v3 GA sürümü](https://github.com/Azure/azure-rest-api-specs/tree/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01) Canlı için daha fazla API'ları içeren hesabı/varlık düzeyi bildirim filtresi ve DRM desteği.
+[Rest v3 GA sürümü](https://github.com/Azure/azure-rest-api-specs/tree/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01) , canlı, hesap/varlık düzeyi bildirim FILTRELERI ve DRM desteği için daha fazla API içerir.
 
-#### <a name="azure-resource-management"></a>Azure kaynak yönetimi 
+#### <a name="azure-resource-management"></a>Azure Kaynak Yönetimi 
 
-Azure kaynak yönetimi için destek, birleşik yönetim ve işlemler (artık her şeyi tek bir yerde) API sağlar.
+Azure Kaynak yönetimi desteği, birleştirilmiş yönetim ve işlemler API 'SI (artık tek bir yerde) sunar.
 
-Bu sürüm ile başlayarak, Canlı olaylar oluşturmak için Resource Manager şablonlarını kullanabilirsiniz.
+Bu sürümden itibaren, canlı olaylar oluşturmak için Kaynak Yöneticisi şablonları kullanabilirsiniz.
 
-#### <a name="improvement-of-asset-operations"></a>Varlık işlemleri iyileştirme 
+#### <a name="improvement-of-asset-operations"></a>Varlık işlemlerinin geliştirilmesi 
 
-Aşağıdaki geliştirmeleri kullanıma sunulan:
+Aşağıdaki geliştirmeler sunulmuştur:
 
-- Http (s) URL'leri ya da Azure Blob Depolama SAS URL'lerini alın.
-- Varlıklar için kendi kapsayıcı adları belirt 
-- Azure işlevleri ile özel iş akışları oluşturmak için daha kolay çıkış desteği.
+- HTTP (s) URL 'Leri veya Azure Blob Storage SAS URL 'Lerinden alma.
+- Varlıklar için kendi kapsayıcı adlarından istediğinizi belirtin. 
+- Azure Işlevleri ile özel iş akışları oluşturmak için daha kolay çıkış desteği.
 
 #### <a name="new-transform-object"></a>Yeni dönüştürme nesnesi
 
-Yeni **dönüştürme** kodlama model nesnesi basitleştirir. Yeni nesne oluşturma ve kodlama Resource Manager şablonları ve hazır paylaşma daha kolay hale getirir. 
+Yeni **dönüşüm** nesnesi kodlama modelini basitleştirir. Yeni nesne, kodlama Kaynak Yöneticisi şablonları ve hazır ayarları oluşturmayı ve paylaşmayı kolaylaştırır. 
 
 #### <a name="azure-active-directory-authentication-and-rbac"></a>Azure Active Directory kimlik doğrulaması ve RBAC
 
-Azure AD kimlik doğrulaması ve rol tabanlı Access Control (RBAC) güvenli dönüşümleri, LiveEvents, içerik anahtarı ilkeleri veya rol veya kullanıcılar tarafından varlıklar Azure AD'de etkinleştirin.
+Azure AD kimlik doğrulaması ve rol tabanlı Access Control (RBAC), Azure AD 'de role veya kullanıcılara göre güvenli dönüşümler, canlı olaylar, Içerik anahtar Ilkeleri veya varlıklar sağlar.
 
 #### <a name="client-sdks"></a>İstemci SDK'ları  
 
-Media Services v3 sürümünde desteklenen diller: .NET Core, Java, Node.js, Ruby, Typescript, Python, Go.
+Media Services v3 sürümünde desteklenen diller: .NET Core, Java, Node. js, Ruby, TypeScript, Python, go.
 
-#### <a name="live-encoding-updates"></a>Canlı kodlama güncelleştirmeler
+#### <a name="live-encoding-updates"></a>Canlı kodlama güncelleştirmeleri
 
-Aşağıdaki Canlı kodlama güncelleştirmeler yapılmıştır:
+Aşağıdaki canlı kodlama güncelleştirmeleri sunulmuştur:
 
-- Yeni düşük gecikme süresi modu için Canlı (10 saniye için uçtan uca).
-- Geliştirilmiş RTMP desteği (daha fazla kararlılık ve daha fazla kaynak Kodlayıcı desteği).
-- Güvenli RTMPS alın.
+- Canlı için yeni düşük gecikme modu (10 saniyelik uçtan uca).
+- İyileştirilmiş RTMP desteği (artan kararlılık ve daha fazla kaynak Kodlayıcısı desteği).
+- RTMPS güvenli alma.
 
-    Canlı bir olay oluşturduğunuzda, artık 4 alma URL'leri alma. 4 alma URL'leri neredeyse aynıdır, yalnızca bir bağlantı noktası numarası bölümü farklı aynı akış belirteci (AppID) sahip. URL'lerin ikisinin, birincil ve yedek RTMPS için. 
-- 24 saatlik biçim dönüştürme desteği. 
-- RTMP SCTE35 aracılığıyla ad sinyal desteği geliştirildi.
+    Canlı bir olay oluşturduğunuzda, artık 4 alma URL 'Si alırsınız. 4 içe alınan URL 'Ler neredeyse aynıdır, aynı akış belirtecine (AppID) sahiptir, yalnızca bağlantı noktası numarası bölümü farklıdır. URL 'Lerden ikisi, RTMPS için birincil ve yedeğdir. 
+- 24 saat kodlamayı kodlama desteği. 
+- SCTE35 aracılığıyla RTMP 'de geliştirilmiş ad sinyali desteği.
 
-#### <a name="improved-event-grid-support"></a>Event Grid için geliştirilmiş destek
+#### <a name="improved-event-grid-support"></a>İyileştirilmiş Event Grid desteği
 
-İyileştirmeleri desteği aşağıdaki Event Grid görebilirsiniz:
+Aşağıdaki Event Grid destek geliştirmelerini görebilirsiniz:
 
-- Logic Apps ve Azure işlevleri ile daha kolay geliştirme için Azure Event Grid tümleştirmesi. 
-- Olayları kodlama, Canlı Kanallar ve daha fazlası için abone olun.
+- Logic Apps ve Azure Işlevleriyle daha kolay geliştirme için Azure Event Grid tümleştirme. 
+- Kodlama, Canlı Kanallar ve daha fazlası için olaylar için abone olun.
 
 ### <a name="cmaf-support"></a>CMAF desteği
 
-(İOS 11 +) Apple HLS ve MPEG-DASH için CMAF ve 'cbcs' şifreleme desteği CMAF destekleyen oynatıcılar.
+Apple HLS (iOS 11 +) için CMAF ve ' CBCS ' şifreleme desteği ve CMAF 'yi destekleyen MPEG-DASH çalarlar.
 
-### <a name="video-indexer"></a>Video Indexer
+### <a name="video-indexer"></a>Video Dizinleyici
 
-Video Indexer GA sürümü Ağustos'ta Duyuruldu. Yeni şu anda desteklenen özellikler hakkında bilgi için [Video Indexer nedir](../../cognitive-services/video-indexer/video-indexer-overview.md?toc=/azure/media-services/video-indexer/toc.json&bc=/azure/media-services/video-indexer/breadcrumb/toc.json). 
+Video Indexer GA yayını Ağustos ayında duyuruldu. Şu anda desteklenen özellikler hakkında daha fazla bilgi için bkz. [video Indexer nedir](../../cognitive-services/video-indexer/video-indexer-overview.md?toc=/azure/media-services/video-indexer/toc.json&bc=/azure/media-services/video-indexer/breadcrumb/toc.json). 
 
-### <a name="plans-for-changes"></a>Değişiklikleri planları
+### <a name="plans-for-changes"></a>Değişiklik planları
 
 #### <a name="azure-cli-20"></a>Azure CLI 2.0
  
-İşlemler (Live, içerik anahtar ilkeleri, hesabı/varlık filtreleri, akış ilkeleri dahil) tüm özellikler dahildir Azure CLI 2.0 modülü yakında kullanıma sunulacaktır. 
+Tüm özelliklerle (canlı, Içerik anahtarı Ilkeleri, hesap/varlık filtreleri, akış Ilkeleri dahil) işlemler içeren Azure CLı 2,0 modülü yakında kullanıma sunulacak. 
 
 ### <a name="known-issues"></a>Bilinen sorunlar
 
-API Önizleme varlık veya AccountFilters için kullanılan müşteriler aşağıdaki sorunundan etkilendiğinizi.
+Yalnızca varlık veya AccountFilters için Önizleme API 'sini kullanan müşteriler aşağıdaki sorundan etkilenir.
 
-Varlıklar veya hesap filtreleri 09/28 ile 10 arasında oluşturduğunuz, / 12 ile Media Services v3 CLI veya API'leri, gereken tüm varlık ve AccountFilters kaldırın ve bunları sürüm çakışması nedeniyle yeniden oluşturun. 
+Media Services v3 CLı veya API 'Leri ile 09/28 ve 10/12 arasında varlıklar veya hesap filtreleri oluşturduysanız, tüm varlık ve AccountFilters değerlerini kaldırmalı ve sürüm çakışması nedeniyle bunları yeniden oluşturmanız gerekir. 
 
-## <a name="may-2018---preview"></a>Mayıs 2018 - Önizleme
+## <a name="may-2018---preview"></a>Mayıs 2018-Önizleme
 
 ### <a name="net-sdk"></a>.NET SDK
 
-.NET SDK'yı aşağıdaki özellikler mevcuttur:
+.NET SDK 'da aşağıdaki özellikler mevcuttur:
 
-* **Dönüşümler** ve **işleri** kodlayın veya medya içeriği çözümlemek için. Örnekler için bkz [Stream dosyaları](stream-files-tutorial-with-api.md) ve [Çözümle](analyze-videos-tutorial-with-api.md).
-* **Akış bulucuları** yayımlama ve son kullanıcı cihazlarına içerik akışı yapmak için
-* **İlkeleri akış** ve **içeriği anahtar ilkeleri** içerik sunarken anahtar teslim ve content protection (DRM) yapılandırmak için.
-* **Canlı olayları** ve **Canlı çıkışları** alma ve canlı akış içeriğini arşivleme yapılandırmak için.
-* **Varlıklar** depolamak ve Azure Depolama'da medya içeriği yayımlamak için. 
-* **Akış uç noktaları** yapılandırmak ve dinamik paketleme, şifreleme ve canlı ve isteğe bağlı medya içeriği akışı ölçeklendirin.
+* Medya içeriğini kodlamak veya çözümlemek için **dönüşümler** ve **işler** . Örnekler için bkz. [akış dosyaları](stream-files-tutorial-with-api.md) ve [Çözümleme](analyze-videos-tutorial-with-api.md).
+* Son Kullanıcı cihazlarındaki yayımlama ve akış içeriği için **akış Konumlandırıcı**
+* İçerik teslim edilirken anahtar teslimi ve içerik korumayı (DRM) yapılandırmak için **akış ilkeleri** ve **içerik anahtarı ilkeleri** .
+* Canlı akış içeriğini alma ve arşivlemeyi yapılandırmak için **canlı olaylar** ve **canlı çıktılar** .
+* Azure depolama 'da medya içeriğini depolamak ve yayımlamak için **varlıklar** . 
+* Canlı ve isteğe bağlı medya içeriği için dinamik paketleme, şifreleme ve akışı yapılandırmak ve ölçeklendirmek için **akış uç noktaları** .
 
 ### <a name="known-issues"></a>Bilinen sorunlar
 
-* Bir iş gönderirken HTTPS URL'leri, SAS URL'lerini veya yolları kullanarak dosyaları Azure Blob Depolama alanında bulunan kaynak videonuzu içe almak için belirtebilirsiniz. AMS v3 şu anda HTTPS URL'leri üzerinden yığın halinde aktarım kodlamasını desteklememektedir.
+* Bir iş gönderilirken, HTTPS URL 'Leri, SAS URL 'Leri veya Azure Blob depolama alanında bulunan dosyalara yollar kullanarak kaynak videonuzu almak istediğinizi belirtebilirsiniz. AMS v3 şu anda HTTPS URL'leri üzerinden yığın halinde aktarım kodlamasını desteklememektedir.
 
-## <a name="ask-questions-give-feedback-get-updates"></a>Soru sorun, görüşlerinizi, güncelleştirmeleri alın
+## <a name="ask-questions-give-feedback-get-updates"></a>Soru sorun, geri bildirimde bulunun, güncelleştirmeleri al
 
-Kullanıma [Azure Media Services topluluğu](media-services-community.md) soru sorun, görüşlerinizi ve medya hizmetleri hakkında güncelleştirmeler almak farklı yollarını görmek için makaleyi.
+Soru sormak, geri bildirimde bulunmak ve Media Services hakkında güncelleştirmeler almak için [Azure Media Services Community](media-services-community.md) makalesine göz atın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Genel bakış](media-services-overview.md)
+- [Genel Bakış](media-services-overview.md)
+- [Media Services V2 sürüm notları](../previous/media-services-release-notes.md)

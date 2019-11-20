@@ -1,47 +1,183 @@
 ---
-title: Azure Bilişsel Hizmetler'in sunduğu metin analizi kullanarak yaklaşım analizi | Microsoft Docs
-description: Metin Analizi REST API’sini kullanarak yaklaşımın nasıl algılanacağını öğrenin.
+title: Metin Analizi REST API ile yaklaşım analizini gerçekleştirme
+titleSuffix: Azure Cognitive Services
+description: Bu makalede, Azure bilişsel hizmetler Metin Analizi REST API metinle ilgili yaklaşım hakkında nasıl algılanacağı gösterilir.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: sample
-ms.date: 02/26/2019
+ms.date: 09/23/2019
 ms.author: aahi
-ms.openlocfilehash: d4269a99a8e535692e4897630a7edd9b27347d41
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: f7a62d1d2b695726421ba990d0f118eb3ae199da
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67304027"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74031455"
 ---
-# <a name="example-how-to-detect-sentiment-with-text-analytics"></a>Örnek: Metin Analizi ile yaklaşımı algılama
+# <a name="example-detect-sentiment-with-text-analytics"></a>Örnek: Metin Analizi ile yaklaşımı Algıla
 
-[Yaklaşım Analizi API’si](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9), metin girişini değerlendirir ve her belge için 0 (negatif) - 1 (pozitif) aralığında bir yaklaşım döndürür.
+[Azure yaklaşım Analizi API 'si](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9) metin girişi değerlendirir ve her belge için bir yaklaşım puanı döndürür. 0 (negatif) ile 1 (pozitif) arasında puan alır.
 
-Bu yetenek; sosyal medya, müşteri incelemeleri ve tartışma forumlarında pozitif ve negatif yaklaşımları algılamak için kullanışlıdır. İçerik sizin tarafınızdan sağlanır; modeller ve eğitim verileri hizmet tarafından sağlanır.
+Bu yetenek; sosyal medya, müşteri incelemeleri ve tartışma forumlarında pozitif ve negatif yaklaşımları algılamak için kullanışlıdır. İçerik sizin tarafınızdan sağlanır. Modeller ve eğitim verileri hizmet tarafından sağlanır.
 
-Şu anda Yaklaşım Analizi, İngilizce, Almanca, İspanyolca ve Fransızca dillerini destekler. Diğer diller önizleme aşamasındadır. Daha fazla bilgi için bkz. [Desteklenen diller](../text-analytics-supported-languages.md).
+Şu anda Yaklaşım Analizi API, Ingilizce, Almanca, Ispanyolca ve Fransızca 'yı destekler. Diğer diller önizleme aşamasındadır. Daha fazla bilgi için bkz. [Desteklenen diller](../text-analytics-supported-languages.md).
 
 > [!TIP]
-> Metin analizi de sağlar Linux tabanlı bir Docker kapsayıcı görüntüsü yaklaşım analizi için böylece [yükleyin ve metin analizi kapsayıcı çalıştırın](text-analytics-how-to-install-containers.md) verilerinizi yakın.
+> Azure Metin Analizi API'si, yaklaşım analizi için Linux tabanlı bir Docker kapsayıcı görüntüsü sağlar, böylece Metin Analizi kapsayıcısını verilerinize yakın şekilde [yükleyebilir ve çalıştırabilirsiniz](text-analytics-how-to-install-containers.md) .
 
 ## <a name="concepts"></a>Kavramlar
 
-Metin Analizi, 0 ile 1 arasında bir yaklaşım puanı oluşturmak için makine öğrenmesi sınıflandırma algoritması kullanır. 1’e yakın puanlar pozitif yaklaşımı, 0’a yakın puanlar ise negatif yaklaşımı gösterir. Model, yaklaşım ilişkilendirmeleri ile kapsamlı bir metin gövdesi kullanılarak önceden eğitilir. Şu anda kendi eğitim verilerinizi sağlamanız mümkün değildir. Model, metin analizi sırasında metin işleme, sözcük türü analizi, sözcük yerleştirme ve sözcük ilişkilendirmeleri de dahil olmak üzere, birçok tekniğin birleşimini kullanır. Algoritma hakkında daha fazla bilgi için bkz. [Metin Analizi Tanıtımı](https://blogs.technet.microsoft.com/machinelearning/2015/04/08/introducing-text-analytics-in-the-azure-ml-marketplace/).
+Metin Analizi, 0 ile 1 arasında bir yaklaşım puanı oluşturmak için makine öğrenmesi sınıflandırma algoritması kullanır. 1’e yakın puanlar pozitif yaklaşımı, 0’a yakın puanlar ise negatif yaklaşımı gösterir. Model, yaklaşım ilişkilendirmeleri ile kapsamlı bir metin gövdesi kullanılarak önceden eğitilir. Şu anda kendi eğitim verilerinizi sağlamak mümkün değildir. Model, metin analizi sırasında tekniklerin birleşimini kullanır. Teknik işleme, konuşma bölümü analizi, sözcük yerleşimi ve Word ilişkilendirmelerini içeren teknikler. Algoritma hakkında daha fazla bilgi için bkz. [Metin Analizi Tanıtımı](https://blogs.technet.microsoft.com/machinelearning/2015/04/08/introducing-text-analytics-in-the-azure-ml-marketplace/).
 
-Metindeki belirli bir varlık için yaklaşımı ayıklamanın tersine yaklaşım analizi, belgenin tamamında gerçekleştirilir. Uygulamada, belgeler büyük bir metin bloğu yerine bir veya iki cümle içerdiğinde puanlama doğruluğu artış gösterme eğilimindedir. Nesnellik değerlendirmesi aşamasında model, belgenin tamamının nesnel mi olduğunu yoksa yaklaşım mı içerdiğini belirler. Çoğunlukla nesnel olan bir belge, yaklaşım algılama aşamasına ilerlemez ve daha fazla işlem olmadan 0,5 puanla sonuçlanır. İşlem hattında ilerleyen belgeler için bir sonraki aşama, belgede algılanan yaklaşım derecesine bağlı olarak 0,5 üzerinde veya altında bir puan oluşturur.
+Metindeki belirli bir varlık için yaklaşımı ayıklamanın tersine yaklaşım analizi, belgenin tamamında gerçekleştirilir. Uygulamada, büyük bir metin bloğu yerine bir ya da iki cümle içerdiğinde, gelişmenin doğruluğu için kullanım eğilimi vardır. Nesnellik değerlendirmesi aşamasında model, belgenin tamamının nesnel mi olduğunu yoksa yaklaşım mı içerdiğini belirler. Genellikle hedefi olan bir belge, daha fazla işlem olmadan 0,50 puanı ile sonuçlanan yaklaşım algılama aşamasına ileretmez. Ardışık düzende devam eden belgeler için, sonraki aşama 0,50 veya üzeri bir puan üretir. Puan, belgede algılanan yaklaşım derecesine bağlıdır.
+
+## <a name="sentiment-analysis-v3-public-preview"></a>Yaklaşım Analizi v3 genel önizleme
+
+[Yaklaşım Analizi sonraki sürümü](https://cognitiveusw2ppe.portal.azure-api.net/docs/services/TextAnalytics-v3-0-Preview-1/operations/Sentiment) artık genel önizlemeye sunuldu. API 'nin metin kategorisi ve Puanlama açısından doğruluk ve ayrıntı açısından önemli geliştirmeler sağlar.
+
+> [!NOTE]
+> * Yaklaşım Analizi v3 istek biçimi ve [veri sınırları](../overview.md#data-limits) , önceki sürümle aynıdır.
+> * Şu anda v3 Yaklaşım Analizi:
+>    * Şu anda Ingilizce (`en`), Japonca (`ja`), Çince Basitleştirilmiş (`zh-Hans`), geleneksel Çince (`zh-Hant`), Fransızca (`fr`), Italyanca (`it`), Ispanyolca (`es`), Felemenkçe (`nl`), Portekizce (`pt`) ve Almanca (`de`) dilleri.
+>    * Şu bölgelerde kullanılabilir: `Australia East`, `Central Canada`, `Central US`, `East Asia`, `East US`, `East US 2`, `North Europe`, `Southeast Asia`, `South Central US`, `UK South`, `West Europe`ve `West US 2`.
+
+|Özellik |Açıklama  |
+|---------|---------|
+|İyileştirilmiş doğruluk     | Metin belgelerinde olumlu, nötr, olumsuz ve karışık yaklaşımların algılanması konusunda önceki sürümlere göre ciddi bir iyileştirme sağlandı.           |
+|Belge ve tümce düzeyinde yaklaşım puanı     | Hem belgenin hem belgedeki tek tek cümlelerin yaklaşımını algılayabilirsiniz. Belgede birden fazla cümle varsa her cümleye de ayrı bir yaklaşım puanı verilir.         |
+|Yaklaşım etiketleme ve Puanlama     | API artık, bir yaklaşım puanına ek olarak metin için yaklaşım kategorileri döndürüyor. Kategoriler `positive`, `negative`, `neutral`ve `mixed`.       |
+| Geliştirilmiş çıkış | Yaklaşım Analizi artık metin belgesinin tamamı ve tek tek cümleleri için bilgi döndürüyor. |
+| Model-sürümü parametresi | Verilerinizde Metin Analizi modelinin hangi sürümünün kullanıldığını seçmek için isteğe bağlı bir parametre. |
+
+### <a name="sentiment-labeling"></a>Yaklaşım etiketleme
+
+Yaklaşım Analizi v3, bir tümce ve belge düzeyinde puanlar ve Etiketler döndürebilir. Puanlar ve Etiketler `positive`, `negative`ve `neutral`. Belge düzeyinde `mixed` yaklaşım etiketi (puan değil) de döndürülebilir. Belgenin yaklaşımı, Tümcelerin puanlarını toplayarak belirlenir.
+
+| Tümce yaklaşımı                                                        | Döndürülen belge etiketi |
+|---------------------------------------------------------------------------|----------------|
+| En az bir pozitif tümce ve Tümcelerin geri kalanı tarafsız. | `positive`     |
+| En az bir negatif tümce ve Tümcelerin geri kalanı tarafsız.  | `negative`     |
+| En az bir negatif tümce ve en az bir pozitif tümce.         | `mixed`        |
+| Tüm tümceler tarafsız.                                                 | `neutral`      |
+
+### <a name="model-versioning"></a>Model sürümü oluşturma
+
+> [!NOTE]
+> Yaklaşım analizi için model sürümü oluşturma, sürüm `v3.0-preview.1`başlayarak kullanılabilir.
+
+[!INCLUDE [v3-model-versioning](../includes/model-versioning.md)]
+
+### <a name="sentiment-analysis-v3-example-request"></a>Yaklaşım Analizi v3 örnek isteği
+
+Aşağıdaki JSON Yaklaşım Analizi yeni sürümüne yapılan bir isteğin örneğidir. İstek biçimlendirmesi, önceki sürümle aynıdır:
+
+```json
+    {
+        "documents": [
+        {
+            "language": "en",
+            "id": "1",
+            "text": "Hello world. This is some input text that I love."
+        },
+        {
+            "language": "en",
+            "id": "2",
+            "text": "It's incredibly sunny outside! I'm so happy."
+        }
+        ],
+    }
+```
+
+### <a name="sentiment-analysis-v3-example-response"></a>Yaklaşım Analizi v3 örnek yanıtı
+
+İstek biçimi önceki sürümle aynı olsa da, yanıt biçimi değişmiştir. Aşağıdaki JSON, API 'nin yeni sürümünden bir örnek yanıt örneğidir:
+
+```json
+    {
+        "documents": [
+            {
+                "id": "1",
+                "sentiment": "positive",
+                "documentScores": {
+                    "positive": 0.98570585250854492,
+                    "neutral": 0.0001625834556762,
+                    "negative": 0.0141316400840878
+                },
+                "sentences": [
+                    {
+                        "sentiment": "neutral",
+                        "sentenceScores": {
+                            "positive": 0.0785155147314072,
+                            "neutral": 0.89702343940734863,
+                            "negative": 0.0244610067456961
+                        },
+                        "offset": 0,
+                        "length": 12
+                    },
+                    {
+                        "sentiment": "positive",
+                        "sentenceScores": {
+                            "positive": 0.98570585250854492,
+                            "neutral": 0.0001625834556762,
+                            "negative": 0.0141316400840878
+                        },
+                        "offset": 13,
+                        "length": 36
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "sentiment": "positive",
+                "documentScores": {
+                    "positive": 0.89198976755142212,
+                    "neutral": 0.103382371366024,
+                    "negative": 0.0046278294175863
+                },
+                "sentences": [
+                    {
+                        "sentiment": "positive",
+                        "sentenceScores": {
+                            "positive": 0.78401315212249756,
+                            "neutral": 0.2067587077617645,
+                            "negative": 0.0092281140387058
+                        },
+                        "offset": 0,
+                        "length": 30
+                    },
+                    {
+                        "sentiment": "positive",
+                        "sentenceScores": {
+                            "positive": 0.99996638298034668,
+                            "neutral": 0.0000060341349126,
+                            "negative": 0.0000275444017461
+                        },
+                        "offset": 31,
+                        "length": 13
+                    }
+                ]
+            }
+        ],
+        "errors": []
+    }
+```
+
+### <a name="example-c-code"></a>Örnek C# kod
+
+[GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/tree/master/dotnet/Language/SentimentV3.cs)üzerinde yaklaşım analizi bu sürümünü C# çağıran örnek bir uygulama bulabilirsiniz.
 
 ## <a name="preparation"></a>Hazırlık
 
-Yaklaşım analizi, üzerinde çalışılacak küçük metin öbekleri sunduğunuzda daha yüksek kaliteli bir sonuç üretir. Bu, büyük metin öbekleri üzerinde daha iyi performans gösteren anahtar ifade ayıklamasının tersidir. Her iki işlemden de en iyi sonuçları elde etmek için girişleri uygun şekilde yeniden yapılandırın.
+Yaklaşım analizi, daha küçük metin öbeklerini üzerinde çalışmaya verdiğiniz zaman daha yüksek kaliteli bir sonuç üretir. Bu, büyük metin öbekleri üzerinde daha iyi performans gösteren anahtar ifade ayıklamasının tersidir. Her iki işlemden de en iyi sonuçları elde etmek için girişleri uygun şekilde yeniden yapılandırın.
 
-JSON belgelerini şu biçimde olmalıdır: Metin, dil kimliği
+Bu biçimde JSON belgelerinize sahip olmanız gerekir: KIMLIK, metin ve dil.
 
-Belge boyutuna, belge başına altında 5.120 karakter uzunluğunda olmalıdır ve en fazla 1.000 olabilir koleksiyon başına öğe sayısı (Kimlikler). Koleksiyon, istek gövdesinde gönderilir. Aşağıda, yaklaşım analizi için gönderebileceğiniz bir içerik örneği verilmiştir.
+Belge boyutunun belge başına 5.120 karakter altında olması gerekir. Koleksiyon başına en fazla 1.000 öğe (kimlik) kullanabilirsiniz. Koleksiyon, istek gövdesinde gönderilir. Aşağıdaki örnek, yaklaşım analizi için gönderebilecek içeriklere bir örnektir:
 
-```
+```json
     {
         "documents": [
             {
@@ -63,7 +199,7 @@ Belge boyutuna, belge başına altında 5.120 karakter uzunluğunda olmalıdır 
                 "language": "en",
                 "id": "4",
                 "text": "It was foggy so we missed the spectacular views, but the trail was ok. Worth checking out if you are in the area."
-            },                
+            },
             {
                 "language": "en",
                 "id": "5",
@@ -73,78 +209,77 @@ Belge boyutuna, belge başına altında 5.120 karakter uzunluğunda olmalıdır 
     }
 ```
 
-## <a name="step-1-structure-the-request"></a>1\. adım: Yapı isteği
+## <a name="step-1-structure-the-request"></a>1\. Adım: İsteği yapılandırma
 
-İstek tanımıyla ilgili ayrıntılara [Metin Analizi API’sini çağırma](text-analytics-how-to-call-api.md) bölümünden erişilebilir. Kolaylık olması için aşağıdaki noktalar yeniden belirtilmektedir:
+İstek tanımı hakkında daha fazla bilgi için bkz. [Metin Analizi API'si çağırma](text-analytics-how-to-call-api.md). Kolaylık olması için aşağıdaki noktalar yeniden belirtilmektedir:
 
-+ Bir **POST** isteği oluşturun. Bu istek için API belgelerini gözden geçirin: [Yaklaşım analizi API'si](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9)
++ POST isteği oluşturun. Bu isteğin API belgelerini gözden geçirmek için [YAKLAŞıM ANALIZI API](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9)'sine bakın.
 
-+ Yaklaşım analizi, Azure veya bir örneklenmiş bir metin analizi kaynak kullanarak HTTP uç noktasına ayarlayın [metin analizi kapsayıcı](text-analytics-how-to-install-containers.md). `/sentiment` kaynağını içermelidir: `https://westus.api.cognitive.microsoft.com/text/analytics/v2.1/sentiment`
++ Azure 'da bir Metin Analizi kaynağı veya bir örneklenmiş [metin analizi kapsayıcısı](text-analytics-how-to-install-containers.md)kullanarak yaklaşım ANALIZI için HTTP uç noktasını ayarlayın. URL 'ye `/text/analytics/v2.1/sentiment` dahil etmeniz gerekir. Örneğin: `https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics/v2.1/sentiment`.
 
-+ Metin Analizi işlemlerine yönelik erişim anahtarını dahil etmek için bir istek üst bilgisi ayarlayın. Daha fazla bilgi için bkz. [Uç noktaları ve erişim anahtarlarını bulma](text-analytics-how-to-access-key.md).
++ Metin Analizi işlemler için [erişim anahtarı](../../cognitive-services-apis-create-account.md#get-the-keys-for-your-resource) eklemek üzere bir istek üst bilgisi ayarlayın.
 
 + İstek gövdesinde, bu analiz için hazırladığınız JSON belgeleri koleksiyonunu sağlayın.
 
 > [!Tip]
-> İsteği yapılandırmak ve hizmete GÖNDERMEK için [Postman](text-analytics-how-to-call-api.md) kullanın veya [belgelerdeki](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9) **API testi konsolu**’nu açın.
+> İsteği yapılandırmak ve hizmete göndermek için [Postman](text-analytics-how-to-call-api.md) 'ı kullanın veya [belgelerde](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9) **API test konsolunu** açın.
 
-## <a name="step-2-post-the-request"></a>2\. adım: POST isteği
+## <a name="step-2-post-the-request"></a>2\. Adım: İsteği gönderme
 
-İstek alındığında analiz gerçekleştirilir. Bkz: [veri sınırları](../overview.md#data-limits) dakika başına gönderin ve ikinci istek sayısı ve boyutu hakkında bilgi için genel bakış bölümünde.
+İstek alındığında analiz gerçekleştirilir. Dakika ve saniye başına gönderebilmeniz için istek boyutu ve sayısı hakkında bilgi için genel bakış konusunun [veri sınırları](../overview.md#data-limits) bölümüne bakın.
 
 Hizmetin durum bilgisi olmadığını unutmayın. Hesabınızda bir veri depolanmaz. Sonuçlar hemen yanıtta döndürülür.
 
 
-## <a name="step-3-view-results"></a>3\. adım: Sonuçları görüntüleme
+## <a name="step-3-view-the-results"></a>3\. Adım: sonuçları görüntüleme
 
-Yaklaşım çözümleyicisi, 0 ile 1 aralığında bir puan atayarak metni baskın şekilde pozitif veya negatif olarak sınıflandırır. 0,5’e yakın değerler nötr veya belirsizdir. 0,5 puanı, nötr olma durumunu belirtir. Bir dizenin yaklaşım analizi yapılamadığında veya bir yaklaşımı olmadığında puan her zaman tam olarak 0,5’tir. Örneğin, İngilizce dil koduyla İspanyolca bir dize geçirirseniz puan 0,5 olur.
+Yaklaşım Çözümleyicisi, metni ağırlıklı pozitif veya negatif olarak sınıflandırır. 0 ile 1 arasında bir puan atar. 0,5’e yakın değerler nötr veya belirsizdir. 0,5 puanı, nötr olma durumunu belirtir. Bir dize yaklaşım için çözümlenememesi veya yaklaşım yoksa, puan her zaman 0,5 ' dir. Örneğin, İngilizce dil koduyla İspanyolca bir dize geçirirseniz puan 0,5 olur.
 
-Hemen çıktı döndürülür. Sonuçları, JSON kabul eden bir uygulamada akışa alabilir veya çıktıyı yerel sistemde bir dosyaya kaydedebilir, sonra da verileri sıralamanıza, aramanıza ve işlemenize olanak sağlayan bir uygulamaya içeri aktarabilirsiniz.
+Hemen çıktı döndürülür. Sonuçları JSON kabul eden bir uygulamaya veya çıktıyı yerel sistemdeki bir dosyaya kaydedebilirsiniz. Sonra çıktıyı, verileri sıralamak, aramak ve işlemek için kullanabileceğiniz bir uygulamaya içeri aktarın.
 
-Aşağıdaki örnekte, bu makaledeki belge koleksiyonu için yanıt gösterilmektedir.
+Aşağıdaki örnekte, bu makaledeki belge koleksiyonu yanıtı gösterilmektedir:
 
-```
-{
-    "documents": [
-        {
-            "score": 0.9999237060546875,
-            "id": "1"
-        },
-        {
-            "score": 0.0000540316104888916,
-            "id": "2"
-        },
-        {
-            "score": 0.99990355968475342,
-            "id": "3"
-        },
-        {
-            "score": 0.980544924736023,
-            "id": "4"
-        },
-        {
-            "score": 0.99996328353881836,
-            "id": "5"
-        }
-    ],
-    "errors": []
-}
+```json
+    {
+        "documents": [
+            {
+                "score": 0.9999237060546875,
+                "id": "1"
+            },
+            {
+                "score": 0.0000540316104888916,
+                "id": "2"
+            },
+            {
+                "score": 0.99990355968475342,
+                "id": "3"
+            },
+            {
+                "score": 0.980544924736023,
+                "id": "4"
+            },
+            {
+                "score": 0.99996328353881836,
+                "id": "5"
+            }
+        ],
+        "errors": []
+    }
 ```
 
 ## <a name="summary"></a>Özet
 
-Bu makalede, Bilişsel Hizmetler’de Metin Analizi’ni kullanarak yaklaşım analizi için kavramları ve iş akışını öğrendiniz. Özet:
+Bu makalede, Azure bilişsel hizmetler 'de Metin Analizi kullanarak yaklaşım analizine yönelik kavramların ve iş akışının öğrenmiş olursunuz. Özet:
 
-+ [Yaklaşım analizi API’si](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9), seçili diller için kullanılabilir.
-+ İstek gövdesindeki JSON belgelerini bir kimliği, metin ve dil kodu içerir.
-+ POST isteği, aboneliğiniz için geçerli olan kişiselleştirilmiş bir [erişim anahtarı ve uç nokta](text-analytics-how-to-access-key.md) kullanılarak `/sentiment` uç noktasına yapılır.
-+ Her belge kimliği için bir yaklaşım puanından oluşan yanıt çıktısı, Excel ve Power BI da dahil olmak üzere JSON kabul eden tüm uygulamalarda akışa alınabilir.
++ [Yaklaşım Analizi API 'si](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9) seçili diller için kullanılabilir.
++ İstek gövdesindeki JSON belgeleri bir KIMLIK, metin ve dil kodu içerir.
++ POST isteği, kişiselleştirilmiş bir [erişim anahtarı ve](../../cognitive-services-apis-create-account.md#get-the-keys-for-your-resource) aboneliğiniz için geçerli olan bir uç nokta kullanılarak `/sentiment` uç noktasıdır.
++ Her belge KIMLIĞI için bir yaklaşım puanından oluşan yanıt çıkışı, JSON kabul eden herhangi bir uygulamaya akışla eklenebilir. Örnek uygulamalar, birkaç kez ad vermek için Excel ve Power BI içerir.
 
-## <a name="see-also"></a>Ayrıca bkz. 
+## <a name="see-also"></a>Ayrıca bkz.
 
- [Metin Analizine genel bakış](../overview.md)  
- [Sık sorulan sorular (SSS)](../text-analytics-resource-faq.md)</br>
- [Metin Analizi ürün sayfası](//go.microsoft.com/fwlink/?LinkID=759712) 
+ [Metin analizi genel bakış](../overview.md) hakkında [sık sorulan sorular (SSS)](../text-analytics-resource-faq.md)</br>
+ [Metin Analizi ürün sayfası](//go.microsoft.com/fwlink/?LinkID=759712)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

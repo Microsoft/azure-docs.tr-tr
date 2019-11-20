@@ -1,7 +1,7 @@
 ---
-title: Azure Video Indexer markaları modelini özelleştirmek için kullanın
-titlesuffix: Azure Media Services
-description: Bu makalede, Azure Video Indexer markaları modelini özelleştirmek için nasıl kullanılacağı gösterilmektedir.
+title: Markalar modelini özelleştirmek için Azure Video Indexer kullanma
+titleSuffix: Azure Media Services
+description: Bu makalede, Azure Video Indexer markaların modelini özelleştirmek için nasıl kullanılacağı gösterilmektedir.
 services: media-services
 author: anikaz
 manager: johndeu
@@ -10,24 +10,24 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 05/15/2019
 ms.author: anzaman
-ms.openlocfilehash: 8d0806bc0262cd45a49e4f97ea629683ac239aa8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4289c592644d7570ff0dd9ce6aed0cd77f51f25e
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65799634"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838328"
 ---
-# <a name="customize-a-brands-model-with-the-video-indexer-api"></a>Video Indexer API markaları modeliyle özelleştirme
+# <a name="customize-a-brands-model-with-the-video-indexer-api"></a>Video Indexer API ile bir markalar modeli özelleştirme
 
-Video Indexer, video ve ses içeriği ölçeklemek ve dizin oluşturma sırasında markaya algılama konuşma ve görsel metin destekler. Bahsetme ürünleri, hizmetleri, marka algılama özelliğini tanımlar ve şirketler Bing'in markaları veritabanı tarafından önerilen. Örneğin, Microsoft bir video veya ses içeriğini belirtilen veya bir video visual metinde görünür gerekiyorsa, Video Indexer, bir marka içerik olarak algılar. Özel bir markaları model tespit belirli markaları hariç ve Bing'e markaları veritabanında olmayabilir modelinizin bir parçası olması gereken markaları dahil et sağlar.
+Video Indexer, video ve ses içeriğinin dizin oluşturma ve yeniden dizin oluşturma sırasında konuşma ve görsel metinden marka algılamayı destekler. Marka algılama özelliği, Bing 'ün markalar veritabanı tarafından önerilen ürünlerin, hizmetlerin ve şirketlerin bahsetmelerini belirler. Örneğin, Microsoft bir video veya ses içeriğinde bahsedildiğinde veya videoda görsel metin gösteriyorsa, Video Indexer içeriği bir marka olarak algılar. Özel bir markalar modeli, belirli markaların algılanmadan dışlanmasını ve kuruluşunuzun markalar veritabanında bulunmayabilir, modelinizin bir parçası olması gereken markalar dahil etmenizi sağlar.
 
 Ayrıntılı bir genel bakış için bkz. [genel bakış](customize-brands-model-overview.md).
 
-Video Indexer API'ları oluşturun, kullanın ve bu konuda açıklandığı gibi bir videoda, algılanan özel markaları modelleri düzenlemek için kullanabilirsiniz. Video Indexer Web sitesinde açıklandığı gibi kullanabilirsiniz [markaları özelleştirin modeli Video Indexer Web sitesini kullanarak](customize-brands-model-with-api.md).
+Bu konuda açıklandığı gibi, videoda algılanan özel markalar modellerini oluşturmak, kullanmak ve düzenlemek için Video Indexer API 'Lerini kullanabilirsiniz. Ayrıca, [video Indexer Web sitesini kullanarak markalar modelini özelleştirme](customize-brands-model-with-api.md)bölümünde açıklandığı gibi video Indexer Web sitesini de kullanabilirsiniz.
 
-## <a name="create-a-brand"></a>Bir marka oluşturma
+## <a name="create-a-brand"></a>Marka oluşturma
 
-Bu, yeni bir özel marka oluşturur ve belirtilen hesabın özel markaları model ekler.
+Bu, yeni bir özel marka oluşturur ve belirtilen hesap için özel markalar modeline ekler.
 
 ### <a name="request-url"></a>İstek URL'si
 
@@ -35,19 +35,19 @@ Bu, yeni bir özel marka oluşturur ve belirtilen hesabın özel markaları mode
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/Brands?accessToken={accessToken}
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Create-Brand).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Create-Brand).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-Bu parametrelerin yanı sıra, aşağıdaki örnekte biçimi aşağıdaki yeni marka hakkında bilgi sağlayan bir istek gövdesi JSON nesnesi sağlamanız gerekir.
+Bu parametrelere ek olarak, aşağıdaki örnekte yer alan yeni marka hakkında bilgi sağlayan bir istek gövdesi JSON nesnesi sağlamanız gerekir.
 
 ```json
 {
@@ -59,15 +59,15 @@ Bu parametrelerin yanı sıra, aşağıdaki örnekte biçimi aşağıdaki yeni m
 }
 ```
 
-Ayarı **etkin** doğru koyar için marka *INCLUDE* Video Indexer'ın algılamak için listesi. Ayarı **etkin** marka false olarak yerleştirir *hariç* listelemek için Video Indexer algılamaz.
+True **olarak ayarlandığında** , markası video Indexer için *ekleme* listesine koyar. **Enabled** özelliği false olarak ayarlandığında, markayı *dışlama* listesine koyar, bu nedenle video Indexer algılamamasını sağlar.
 
-**ReferenceUrl** değeri başvurusu Web sitelerine, Wikipedia sayfasında bir bağlantı gibi bir marka için olabilir.
+**Referenceurl** değeri, bir markasının visela sayfasına yönelik bağlantı gibi herhangi bir başvuru Web sitesi olabilir.
 
-**Etiketleri** değeri marka etiketleri listesi verilmiştir. Bu markasını 's gösterilir *kategori* Video Indexer Web sitesi kodu. Örneğin, "Azure" marka etiketli veya "Bulut" olarak sınıflandırılmış.
+**Etiketler** değeri, markala ilgili etiketlerin bir listesidir. Bu, Video Indexer Web sitesindeki marka 'in *Kategori* alanında görüntülenir. Örneğin, "Azure" markası, "Cloud" olarak etiketlenebilir veya kategorilere ayrılmıştır.
 
 ### <a name="response"></a>Yanıt
 
-Yanıt, aşağıdaki örnekte biçimi oluşturduğunuz marka hakkında bilgiler sağlar.
+Yanıt, yeni oluşturduğunuz markada aşağıdaki örnekte yer alan bilgileri sağlar.
 
 ```json
 {
@@ -87,9 +87,9 @@ Yanıt, aşağıdaki örnekte biçimi oluşturduğunuz marka hakkında bilgiler 
 }
 ```
 
-## <a name="delete-a-brand"></a>Bir marka Sil
+## <a name="delete-a-brand"></a>Marka silme
 
-Belirtilen hesabın özel markaları model bir marka kaldırır. Belirtilen hesabın **AccountID** parametresi. Başarıyla çağrıldığında, marka artık olacak *INCLUDE* veya *hariç* markalar listeler.
+Belirtilen hesap için özel markalar modelinden bir marka kaldırır. Hesap **AccountID** parametresinde belirtilir. Başarılı bir şekilde çağrıldıktan sonra, marka artık markalar *ekleme* veya *hariç tutma* listelerinde yer alır.
 
 ### <a name="request-url"></a>İstek URL'si
 
@@ -97,28 +97,28 @@ Belirtilen hesabın özel markaları model bir marka kaldırır. Belirtilen hesa
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/Brands/{id}?accessToken={accessToken}
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Brand?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Brand?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|id|integer|Evet|(Marka oluştururken oluşturulan) marka kimliği|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|id|integer|Evet|Marka kimliği (marka oluşturulduğunda oluşturulur)|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
 Marka başarıyla silindiğinde döndürülen içerik yok.
 
-## <a name="get-a-specific-brand"></a>Belirli bir marka Al
+## <a name="get-a-specific-brand"></a>Belirli bir marka al
 
-Bu bir marka özel markaları modelinde marka kimliği kullanarak belirtilen hesabın ayrıntılarını aramanıza olanak sağlar.
+Bu, marka kimliğini kullanarak belirtilen hesap için özel markalar modelinde bir markaların ayrıntılarını aramanıza olanak tanır.
 
 ### <a name="request-url"></a>İstek URL'si
 
@@ -126,24 +126,24 @@ Bu bir marka özel markaları modelinde marka kimliği kullanarak belirtilen hes
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/Brands?accessToken={accessToken}
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brand?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brand?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|id|integer|Evet|(Marka oluştururken oluşturulan) marka kimliği|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|id|integer|Evet|Marka KIMLIĞI (marka oluşturulduğunda oluşturulur)|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
-Şirket markası bilgileri (marka kimliği kullanarak) aranan isteğin yanıtını verir aşağıdaki örnekte biçimi aşağıdaki.
+Yanıt, aşağıdaki örnekte belirtilen biçimde, aradığınız markada (marka KIMLIĞI kullanarak) ilgili bilgiler sağlar.
 
 ```json
 {
@@ -164,11 +164,11 @@ https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/Brands
 ```
 
 > [!NOTE]
-> **Etkin** ayarlamak **true** marka alanında olduğunu gösterir *INCLUDE* Video Indexer'ın algılamak listesini ve **etkin** gösterir false olan marka olan *hariç* listelemek için Video Indexer algılamaz.
+> **true** olarak **ayarlanmakta olan** marka, markasının tespit edilecek video Indexer için *dahil* olduğunu ve yanlış olarak **etkinleştirildiğini** , markasının *hariç tutma* listesinde olduğunu belirtir ve video Indexer bunu algılamaz.
 
-## <a name="update-a-specific-brand"></a>Güncelleştirme belirli bir marka
+## <a name="update-a-specific-brand"></a>Belirli bir marka güncelleştirme
 
-Bu bir marka özel markaları modelinde marka kimliğini kullanarak belirtilen hesabın ayrıntılarını aramanıza olanak tanır
+Bu, marka KIMLIĞINI kullanarak belirtilen hesap için özel markalar modelinde bir markaların ayrıntılarını aramanıza olanak tanır.
 
 ### <a name="request-url"></a>İstek URL'si
 
@@ -176,20 +176,20 @@ Bu bir marka özel markaları modelinde marka kimliğini kullanarak belirtilen h
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/Brands/{id}?accessToken={accessToken}
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Brand?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Brand?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|id|integer|Evet|(Marka oluştururken oluşturulan) marka kimliği|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|id|integer|Evet|Marka KIMLIĞI (marka oluşturulduğunda oluşturulur)|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-Bu parametrelerin yanı sıra, aşağıdaki örnekte biçimi güncelleştirmek istediğiniz marka hakkında bilgi sağlayan bir istek gövdesi JSON nesne güncelleştirilmiş sağlamanız gerekir.
+Bu parametrelere ek olarak, aşağıdaki örnek biçimini izleyerek güncelleştirmek istediğiniz marka üzerinde güncelleştirilmiş bilgiler sağlayan bir istek gövdesi JSON nesnesi sağlamanız gerekir.
 
 ```json
 {
@@ -205,11 +205,11 @@ Bu parametrelerin yanı sıra, aşağıdaki örnekte biçimi güncelleştirmek i
 ```
 
 > [!NOTE]
-> Bu örnekte örnek istek gövdesinde oluşturulduğu marka **bir marka oluşturma** bölüm güncelleştiriliyor burada yeni etiket ve yeni bir açıklama ile. **Etkin** değeri de değiştirildi talimatı false *hariç* listesi.
+> Bu örnekte, **marka oluştur** bölümünde örnek istek gövdesinde oluşturulan marka, burada yeni bir etiket ve yeni açıklama ile güncelleştiriliyor. **Etkin** değer aynı zamanda, *hariç tutma* listesine koymak için false olarak değiştirilmiştir.
 
 ### <a name="response"></a>Yanıt
 
-Yanıt aşağıdaki örnek biçimi güncelleştirilmiş marka güncelleştirilmiş bilgileri sağlar.
+Yanıt, aşağıdaki örnek biçimini izleyerek güncelleştirdiğiniz marka hakkındaki güncelleştirilmiş bilgileri sağlar.
 
 ```json
 {
@@ -229,9 +229,9 @@ Yanıt aşağıdaki örnek biçimi güncelleştirilmiş marka güncelleştirilmi
 }
 ```
 
-## <a name="get-all-of-the-brands"></a>Tüm markalar
+## <a name="get-all-of-the-brands"></a>Tüm markalar alın
 
-Özel markaları modelinde marka olup olması amaçlanmıştır bakılmaksızın belirtilen hesabın bu tüm markalar döndürür *INCLUDE* veya *hariç* markaları listesi.
+Bu, markaların *dahil etme* veya *hariç tutma* listesinde olup olmamasından bağımsız olarak, belirtilen hesap için özel markalar modelindeki tüm markalar döndürür.
 
 ### <a name="request-url"></a>İstek URL'si
 
@@ -239,23 +239,23 @@ Yanıt aşağıdaki örnek biçimi güncelleştirilmiş marka güncelleştirilmi
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/Brands?accessToken={accessToken}
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brands?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brands?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
-Tüm markalar hesabınızdaki ve her biri aşağıdaki örnekte biçimi aşağıdaki ayrıntılarının listesi isteğin yanıtını verir.
+Yanıt, hesabınızdaki tüm markaların bir listesini ve aşağıdaki örnekte belirtilen biçimdeki ayrıntıları sağlar.
 
 ```json
 [
@@ -287,11 +287,11 @@ Tüm markalar hesabınızdaki ve her biri aşağıdaki örnekte biçimi aşağı
 ```
 
 > [!NOTE]
-> Adlı marka *örnek* bulunduğu *INCLUDE* Video Indexer'ın algılamak ve adlı bir marka için listesi *örnek2* bulunduğu *hariç* listesi , böylece Video Indexer algılamaz.
+> Marka adlı *örnek* , algılamak Için video Indexer *Içerme* listesinde ve *example2* adlı marka, *hariç tutma* listesinde yer alır, bu nedenle video Indexer bunu algılamaz.
 
-## <a name="get-brands-model-settings"></a>Markaları modeli ayarlarını alma
+## <a name="get-brands-model-settings"></a>Markalar model ayarlarını al
 
-Bu, belirtilen hesapta markaları modeli ayarlarını döndürür. Algılama Bing markaları veritabanından veya etkin olup olmadığını markaları modeli ayarlarını temsil eder. Bing markaları etkinleştirilmezse, Video Indexer yalnızca belirtilen hesabın özel markaları modelinden markaları algılar.
+Bu, belirtilen hesaptaki markalar model ayarlarını döndürür. Markalar model ayarları, Bing markalar veritabanı 'nın etkin olup olmadığını temsil eder. Bing markalar etkinleştirilmemişse, Video Indexer yalnızca belirtilen hesabın özel markalar modelinden markalar algılar.
 
 ### <a name="request-url"></a>İstek URL'si
 
@@ -299,23 +299,23 @@ Bu, belirtilen hesapta markaları modeli ayarlarını döndürür. Algılama Bin
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/Brands?accessToken={accessToken}
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brands).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brands).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-İstek gövdesi bu çağrı için gerekli başka yoktur.
+Bu çağrı için gereken başka bir istek gövdesi yok.
 
 ### <a name="response"></a>Yanıt
 
-Yanıt aşağıdaki örnek biçimi aşağıdaki Bing markaları etkinleştirilip etkinleştirilmediğini gösterir.
+Yanıt, Bing markaların aşağıdaki örnekte belirtilen biçimde etkinleştirilip etkinleştirilmediğini gösterir.
 
 ```json
 {
@@ -325,30 +325,30 @@ Yanıt aşağıdaki örnek biçimi aşağıdaki Bing markaları etkinleştirilip
 ```
 
 > [!NOTE]
-> **useBuiltIn** etkin olması için doğru temsil eder, Bing markaları ayarlayın. Varsa *useBuiltin* olan false, Bing markaları devre dışıdır. **Durumu** değeri yoksayılan olarak kullanım dışı.
+> doğru olarak ayarlanan **Usebuiltin** , Bing markaların etkinleştirildiğini temsil eder. *Usebuiltin* false Ise, Bing markalar devre dışı bırakılır. **Durum** değeri kullanım dışı olduğu için yok sayılabilir.
 
-## <a name="update-brands-model-settings"></a>Markaları modeli ayarlarını güncelleştirme
+## <a name="update-brands-model-settings"></a>Markalar model ayarlarını Güncelleştir
 
-Bu belirtilen hesapta markaları modeli ayarlarını güncelleştirir. Algılama Bing markaları veritabanından veya etkin olup olmadığını markaları modeli ayarlarını temsil eder. Bing markaları etkinleştirilmezse, Video Indexer yalnızca belirtilen hesabın özel markaları modelinden markaları algılar.
+Bu, belirtilen hesaptaki markalar modeli ayarlarını güncelleştirir. Markalar model ayarları, Bing markalar veritabanı 'nın etkin olup olmadığını temsil eder. Bing markalar etkinleştirilmemişse, Video Indexer yalnızca belirtilen hesabın özel markalar modelinden markalar algılar.
 
-### <a name="request-url"></a>İstek URL'si:
+### <a name="request-url"></a>İstek URL 'SI:
 ```
 https://api.videoindexer.ai/{location}/Accounts/{accountId}/Customization/BrandsModelSettings?accessToken={accessToken}
 ```
 
-[Gerekli Parametreler bakın ve test Video Indexer Geliştirici portalını kullanarak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Brands-Model-Settings?).
+[Video Indexer geliştirici portalını kullanarak gerekli parametrelere bakın ve test edin](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Brands-Model-Settings?).
 
 ### <a name="request-parameters"></a>İstek parametreleri
 
 |**Ad**|**Tür**|**Gerekli**|**Açıklama**|
 |---|---|---|---|
-|location|string|Evet|Çağrı yönlendirileceğini Azure bölgesi. Daha fazla bilgi için [Azure bölgeleri ve Video Indexer](regions.md).|
-|Hesap Kimliği|string|Evet|Hesap için genel benzersiz tanıtıcısı|
-|accessToken|string|Evet|Erişim belirteci (kapsamı olmalıdır [hesap erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)) karşı çağrı kimliğini doğrulamak için. Erişim belirteci 1 saat içinde süresi dolar.|
+|location|string|Evet|Çağrının yönlendirileceği Azure bölgesi. Daha fazla bilgi için bkz. [Azure bölgeleri ve video Indexer](regions.md).|
+|Accoun|string|Evet|Hesap için genel benzersiz tanımlayıcı|
+|accessToken|string|Evet|Çağrıya göre kimlik doğrulaması için erişim belirteci (kapsam [hesabı erişim belirteci](https://api-portal.videoindexer.ai/docs/services/authorization/operations/Get-Account-Access-Token?)olmalıdır). Erişim belirteçlerinin süresi 1 saat içinde doluyor.|
 
 ### <a name="request-body"></a>İstek gövdesi
 
-Bu parametrelerin yanı sıra, aşağıdaki örnekte biçimi aşağıdaki yeni marka hakkında bilgi sağlayan bir istek gövdesi JSON nesnesi sağlamanız gerekir.
+Bu parametrelere ek olarak, aşağıdaki örnekte yer alan yeni marka hakkında bilgi sağlayan bir istek gövdesi JSON nesnesi sağlamanız gerekir.
 
 ```json
 {
@@ -357,12 +357,12 @@ Bu parametrelerin yanı sıra, aşağıdaki örnekte biçimi aşağıdaki yeni m
 ```
 
 > [!NOTE]
-> **useBuiltIn** etkin olması için doğru temsil eder, Bing markaları ayarlayın. Varsa *useBuiltin* olan false, Bing markaları devre dışıdır.
+> doğru olarak ayarlanan **Usebuiltin** , Bing markaların etkinleştirildiğini temsil eder. *Usebuiltin* false Ise, Bing markalar devre dışı bırakılır.
 
 ### <a name="response"></a>Yanıt
 
-Markaları modeli ayarı başarıyla güncelleştirildiğinde döndürülen içerik yok.
+Markalar model ayarı başarıyla güncelleştirildiği zaman döndürülen içerik yok.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Web sitesini kullanarak markaları modeli özelleştirme](customize-brands-model-with-website.md)
+[Web sitesi kullanarak markalar modelini özelleştirme](customize-brands-model-with-website.md)

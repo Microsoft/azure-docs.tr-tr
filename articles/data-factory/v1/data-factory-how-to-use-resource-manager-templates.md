@@ -1,62 +1,59 @@
 ---
-title: Resource Manager şablonlarını kullanma Data factory'de | Microsoft Docs
-description: Oluşturmak ve Data Factory varlıkları oluşturmak için Azure Resource Manager şablonlarını kullanma hakkında bilgi edinin.
+title: Data Factory Kaynak Yöneticisi şablonları kullanma
+description: Data Factory varlıkları oluşturmak için Azure Resource Manager şablonlarını oluşturma ve kullanma hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-editor: ''
-ms.assetid: 37724021-f55f-4e85-9206-6d4a48bda3d8
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.author: shlo
-robots: noindex
-ms.openlocfilehash: ca8b3930b9d9f708d83dc760be3ee89737b074dc
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: d9ee060b7d1f7a443357c7116c01e8aaf972e666
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60583375"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73682529"
 ---
 # <a name="use-templates-to-create-azure-data-factory-entities"></a>Azure Data Factory varlıkları oluşturmak için şablonları kullanma
 > [!NOTE]
 > Bu makale, Data Factory’nin 1. sürümü için geçerlidir. 
 
 ## <a name="overview"></a>Genel Bakış
-Azure Data Factory veri tümleştirme gereksinimleriniz için kullanılırken kendinizi bulabilirsiniz farklı ortamlar veya aynı çözüm içinde art arda aynı görevi uygulama genelinde aynı düzeni yeniden kullanılıyor. Şablonları uygulamak ve bu senaryolar kolay bir şekilde yönetmenize yardımcı olur. Azure Data factory'de şablonları çalışmalarında ve yineleme gerektiren senaryolar için idealdir.
+Veri tümleştirme gereksinimleriniz için Azure Data Factory kullanırken, kendinizi farklı ortamlarda aynı kalıbı yeniden kullanmayı veya aynı çözüm içinde aynı görev kaldı uygulamayı de bulabilirsiniz. Şablonlar, bu senaryoları kolay bir şekilde uygulamanıza ve yönetmenize yardımcı olur. Azure Data Factory şablonlar, yeniden kullanılabilirlik ve yineleme gerektiren senaryolar için idealdir.
 
-Bir kuruluş dünya genelindeki 10 üretim tesisleri sahip olduğu durum göz önünde bulundurun. Her tesis günlüklerinden ayrı şirket içi SQL Server veritabanında depolanır. Geçici analiz için bulutta bir tek veri ambarı oluşturmak şirket istemektedir. Ayrıca aynı mantığı ancak geliştirme, test ve üretim ortamları için farklı yapılandırmalara sahip olmasını istiyor.
+Bir kuruluşun dünya genelinde 10 üretim bitkiler olduğu durumu göz önünde bulundurun. Her bir bitki günlüğü ayrı bir şirket içi SQL Server veritabanında depolanır. Şirket, geçici analiz için bulutta tek bir veri ambarı oluşturmak istiyor. Ayrıca, geliştirme, test ve üretim ortamları için aynı mantığa ancak farklı yapılandırmalara sahip olmak istiyor.
 
-Bu durumda, bir görev aynı ortamdaki ancak farklı değerlerle her üretim tesisindeki için 10 veri fabrikaları üzerinde yinelenmesi gerekir. Aslında, **yineleme** mevcuttur. Şablon oluşturma, bu genel akış (aynı etkinlikler bölümünde her veri fabrikasının sahip başka bir deyişle, işlem hatları) soyutlamasıdır sağlar, ancak her üretim tesisindeki için ayrı bir parametre dosyası kullanılmaktadır.
+Bu durumda, bir görevin aynı ortamda tekrarlanması gerekir, ancak her bir üretim tesisi için 10 veri fabrikasının içinde farklı değerler vardır. Aslında, **yineleme** vardır. Şablon oluşturma, bu genel akışın soyutlamasını (yani, her veri fabrikasında aynı etkinliklere sahip olan işlem hatları) sağlar, ancak her üretim tesisi için ayrı bir parametre dosyası kullanır.
 
-Bu 10 veri fabrikaları farklı ortamlarda birden çok kez dağıtmak kuruluş istediği gibi Ayrıca, şablon bu kullanabileceğiniz **çalışmalarında** yararlanarak geliştirme için ayrı parametre dosyaları tarafından test edin ve Üretim ortamları.
+Ayrıca, kuruluş bu 10 veri fabrikalarını farklı ortamlarda birden çok kez dağıtmak istediğinde, Şablonlar geliştirme, test ve üretim ortamları için ayrı parametre dosyalarından yararlanarak bu **yeniden kullanılabilirliği** kullanabilir.
 
-## <a name="templating-with-azure-resource-manager"></a>Azure Resource Manager şablonu oluşturma
-[Azure Resource Manager şablonları](../../azure-resource-manager/resource-group-overview.md#template-deployment) şablon Azure Data factory'de elde etmek için harika bir yoludur. Resource Manager şablonları, bir JSON dosyası altyapısını ve yapılandırmasını kullanarak Azure çözümünüzün tanımlayın. Azure Resource Manager şablonları tüm/çoğu Azure hizmetleriyle çalıştığından, kolayca Azure varlıklarınızı tüm kaynakları yönetmek için yaygın olarak kullanılabilmesi için. Bkz: [Azure Resource Manager şablonları yazma](../../azure-resource-manager/resource-group-authoring-templates.md) Resource Manager şablonları hakkında daha fazla genel bilgi edinmek için.
+## <a name="templating-with-azure-resource-manager"></a>Azure Resource Manager ile şablon oluşturma
+[Azure Resource Manager şablonlar](../../azure-resource-manager/template-deployment-overview.md) , Azure Data Factory şablon oluşturma elde etmenin harika bir yoludur. Kaynak Yöneticisi şablonları bir JSON dosyası aracılığıyla Azure çözümünüzün altyapısını ve yapılandırmasını tanımlar. Azure Resource Manager şablonlar tüm/Azure hizmetleriyle çalıştığı için, Azure varlıklarınızın tüm kaynaklarını kolayca yönetmek için yaygın olarak kullanılabilir. Genel olarak Kaynak Yöneticisi şablonları hakkında daha fazla bilgi edinmek için bkz. [Azure Resource Manager şablonları yazma](../../azure-resource-manager/resource-group-authoring-templates.md) .
 
 ## <a name="tutorials"></a>Öğreticiler
-Resource Manager şablonları kullanarak Data Factory varlıkları oluşturmak adım adım yönergeler için aşağıdaki öğreticilere bakın:
+Kaynak Yöneticisi şablonları kullanarak Data Factory varlıkları oluşturmaya yönelik adım adım yönergeler için aşağıdaki öğreticilere bakın:
 
-* [Öğretici: Azure Resource Manager şablonu kullanarak veri kopyalamak için bir işlem hattı oluşturma](data-factory-copy-activity-tutorial-using-azure-resource-manager-template.md)
+* [Öğretici: Azure Resource Manager şablonu kullanarak verileri kopyalamak için bir işlem hattı oluşturma](data-factory-copy-activity-tutorial-using-azure-resource-manager-template.md)
 * [Öğretici: Azure Resource Manager şablonu kullanarak verileri işlemek için bir işlem hattı oluşturma](data-factory-build-your-first-pipeline.md)
 
-## <a name="data-factory-templates-on-github"></a>Veri Fabrikası şablonlarını github'da
-Aşağıdaki Azure hızlı başlangıç şablonları GitHub üzerinde göz atın:
+## <a name="data-factory-templates-on-github"></a>GitHub 'da Data Factory şablonları
+GitHub 'da aşağıdaki Azure hızlı başlangıç şablonlarına göz atın:
 
-* [Verileri Azure Blob depolama alanından Azure SQL veritabanı'na kopyalamak için bir veri fabrikası oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/101-data-factory-blob-to-sql-copy)
+* [Azure Blob depolamadan Azure SQL veritabanı 'na veri kopyalamak için bir veri fabrikası oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/101-data-factory-blob-to-sql-copy)
 * [Azure HDInsight kümesinde Hive etkinliği ile bir veri fabrikası oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/101-data-factory-hive-transformation)
-* [Verileri Azure BLOB'ları için Salesforce kopyalamak için bir veri fabrikası oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/101-data-factory-salesforce-to-blob-copy)
-* [Zincir etkinlikler veri fabrikası oluşturma: verileri Azure BLOB'ları için bir FTP sunucusundan kopyalar, verileri dönüştürmek için isteğe bağlı HDInsight kümesinde bir hive betiği çağırır ve sonucu Azure SQL veritabanı'na kopyalar](https://github.com/Azure/azure-quickstart-templates/tree/master/201-data-factory-ftp-hive-blob)
+* [Salesforce 'tan Azure Bloblarına veri kopyalamak için bir veri fabrikası oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/101-data-factory-salesforce-to-blob-copy)
+* [Etkinlikleri zincirlendirmek için bir veri fabrikası oluşturun: bir FTP sunucusundan Azure Blob 'larına veri kopyalar, verileri dönüştürmek için isteğe bağlı HDInsight kümesinde bir Hive betiği çağırır ve sonucu Azure SQL veritabanı 'na kopyalar](https://github.com/Azure/azure-quickstart-templates/tree/master/201-data-factory-ftp-hive-blob)
 
-Azure Data Factory şablonlarınızı paylaşmak çekinmeyin [Azure Hızlı Başlangıç](https://azure.microsoft.com/documentation/templates/). Başvurmak [katkıda bulunma Kılavuzu](https://github.com/Azure/azure-quickstart-templates/tree/master/1-CONTRIBUTION-GUIDE) bu depo paylaşılabilir bir şablon geliştirme sırasında.
+Azure Data Factory şablonlarınızı [Azure hızlı başlangıç](https://azure.microsoft.com/documentation/templates/)aşamasında paylaşabilirsiniz. Bu depo aracılığıyla paylaşılabilen şablonlar geliştirirken [katkı kılavuzuna](https://github.com/Azure/azure-quickstart-templates/tree/master/1-CONTRIBUTION-GUIDE) bakın.
 
-Aşağıdaki bölümler, Data Factory kaynakları Resource Manager şablonunda tanımlama hakkında ayrıntılı bilgi sağlar.
+Aşağıdaki bölümlerde, Kaynak Yöneticisi şablonunda Data Factory kaynaklarını tanımlama hakkında ayrıntılar sağlanmaktadır.
 
-## <a name="defining-data-factory-resources-in-templates"></a>Data Factory kaynaklarını tanımlama
-Bir veri fabrikasını tanımlamaya yönelik üst düzey şablon şöyledir:
+## <a name="defining-data-factory-resources-in-templates"></a>Şablonlarda Data Factory kaynaklarını tanımlama
+Veri Fabrikası tanımlamak için en üst düzey şablon:
 
 ```JSON
 "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -96,13 +93,13 @@ Resource Manager şablonunda bir veri fabrikasını aşağıdaki örnekte göste
     "location": "East US"
 }
 ```
-DataFactoryName "değişkenler" olarak tanımlanır:
+DataFactoryName şu şekilde "değişkenler" içinde tanımlanmıştır:
 
 ```JSON
 "dataFactoryName": "[concat('<myDataFactoryName>', uniqueString(resourceGroup().id))]",
 ```
 
-### <a name="define-linked-services"></a>Bağlı hizmetler tanımlar
+### <a name="define-linked-services"></a>Bağlı Hizmetleri tanımlama
 
 ```JSON
 "type": "linkedservices",
@@ -114,9 +111,9 @@ DataFactoryName "değişkenler" olarak tanımlanır:
 }
 ```
 
-Bkz: [depolama bağlı hizmeti](data-factory-azure-blob-connector.md#azure-storage-linked-service) veya [işlem bağlı Hizmetleri](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) dağıtmak istediğiniz belirli bir bağlı hizmet JSON özellikleri hakkında ayrıntılar için. "DependsOn" parametresi, ilgili veri fabrikasının adını belirtir. Azure depolama için bağlı hizmet tanımlama örneği aşağıdaki JSON tanımında gösterilmektedir:
+Dağıtmak istediğiniz belirli bağlı hizmetin JSON özellikleri hakkında ayrıntılı bilgi için bkz. [depolama bağlı hizmeti](data-factory-azure-blob-connector.md#azure-storage-linked-service) veya [işlem bağlantılı hizmetleri](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) . "Bağımlıdson" parametresi karşılık gelen veri fabrikasının adını belirtir. Azure depolama için bağlı bir hizmet tanımlama örneği aşağıdaki JSON tanımında gösterilmektedir:
 
-### <a name="define-datasets"></a>Veri kümeleri tanımlayın
+### <a name="define-datasets"></a>Veri kümelerini tanımlama
 
 ```JSON
 "type": "datasets",
@@ -130,7 +127,7 @@ Bkz: [depolama bağlı hizmeti](data-factory-azure-blob-connector.md#azure-stora
     ...
 }
 ```
-Başvurmak [desteklenen veri depoları](data-factory-data-movement-activities.md#supported-data-stores-and-formats) dağıtmak istediğiniz belirli bir veri kümesi türü için JSON özellikleri hakkında ayrıntılar için. Bağlı hizmeti Not "dependsOn" parametresi, depolama ve karşılık gelen bir veri fabrikası adını belirtir. Aşağıdaki JSON tanımında Azure blob depolama, veri kümesi türü tanımlayan bir örnek gösterilir:
+Dağıtmak istediğiniz belirli veri kümesi türünün JSON özellikleri hakkındaki ayrıntılar için [desteklenen veri depoları](data-factory-data-movement-activities.md#supported-data-stores-and-formats) ' na bakın. "Bağımlıdson" parametresi karşılık gelen veri fabrikası ve depolama bağlı hizmetinin adını belirtir. Azure Blob Storage 'ın veri kümesi türünü tanımlama örneği aşağıdaki JSON tanımında gösterilmektedir:
 
 ```JSON
 "type": "datasets",
@@ -156,7 +153,7 @@ Başvurmak [desteklenen veri depoları](data-factory-data-movement-activities.md
 }
 ```
 
-### <a name="define-pipelines"></a>İşlem hatları tanımlayın
+### <a name="define-pipelines"></a>İşlem hatlarını tanımlama
 
 ```JSON
 "type": "dataPipelines",
@@ -176,7 +173,7 @@ Başvurmak [desteklenen veri depoları](data-factory-data-movement-activities.md
 }
 ```
 
-Başvurmak [işlem hatları tanımlama](data-factory-create-pipelines.md#pipeline-json) dağıtmak istediğiniz etkinlikleri ve belirli bir işlem hattı tanımlamak için JSON özellikleri hakkında ayrıntılar için. "DependsOn" parametresi veri fabrikasının adını belirtir ve varsa buna karşılık gelen Hizmetleri ya da veri kümeleri bağlı unutmayın. Aşağıdaki JSON kod parçacığında Azure Blob depolama alanından Azure SQL veritabanına veri kopyalayan bir işlem hattının bir örnek gösterilir:
+Dağıtmak istediğiniz belirli işlem hattını ve etkinlikleri tanımlamaya yönelik JSON özellikleriyle ilgili ayrıntılar için işlem [hatlarını tanımlama](data-factory-create-pipelines.md#pipeline-json) bölümüne bakın. "Bağımlıdson" parametresi, veri fabrikasının adını ve buna karşılık gelen bağlı hizmetleri ya da veri kümelerini belirtir. Azure Blob depolama alanından Azure SQL veritabanına veri kopyalayan bir işlem hattı örneği aşağıdaki JSON kod parçacığında gösterilmektedir:
 
 ```JSON
 "type": "datapipelines",
@@ -230,13 +227,13 @@ Başvurmak [işlem hatları tanımlama](data-factory-create-pipelines.md#pipelin
     "end": "2016-10-04T00:00:00Z"
 }
 ```
-## <a name="parameterizing-data-factory-template"></a>Data Factory şablon kümesini parametreleştirme
-Kümesini parametreleştirme en iyi uygulamalar için bkz: [Azure Resource Manager şablonları oluşturmaya yönelik en iyi uygulamalar](../../azure-resource-manager/resource-manager-template-best-practices.md). Özellikle değişkenler yerine kullanılabilir, genel olarak, parametre kullanımı, küçültülmesine. Yalnızca aşağıdaki senaryolarda parametreleri belirtin:
+## <a name="parameterizing-data-factory-template"></a>Data Factory şablonu parametrize etme
+Parametreleştirmede en iyi uygulamalar için bkz. [Azure Resource Manager şablonları oluşturmak Için en iyi uygulamalar](../../azure-resource-manager/resource-manager-template-best-practices.md). Genellikle, bunun yerine değişkenlerin kullanılabilmesi için parametre kullanımı simge durumuna küçültülmüş olmalıdır. Yalnızca aşağıdaki senaryolarda parametreleri sağlayın:
 
-* Ayarları ortamı tarafından farklılık gösterir (örnek: geliştirme, test ve üretim)
-* Gizli anahtarları (parolalar gibi)
+* Ayarlar ortama göre farklılık gösterir (örnek: geliştirme, test ve üretim)
+* Gizli dizileri (parolalar gibi)
 
-Gizli diziler çekme gerekiyorsa [Azure anahtar kasası](../../key-vault/key-vault-overview.md) şablonları kullanarak Azure Data Factory varlıklarını dağıtırken belirtin **anahtar kasası** ve **gizli dizi adı** gösterildiği gibi Aşağıdaki örnekte:
+Şablonları kullanarak Azure Data Factory varlıkları dağıttığınızda [Azure Key Vault](../../key-vault/key-vault-overview.md) gizli dizileri çekmeniz gerekiyorsa, aşağıdaki örnekte gösterildiği gibi **Anahtar Kasası** ve **gizli adı** belirtin:
 
 ```JSON
 "parameters": {
@@ -253,6 +250,6 @@ Gizli diziler çekme gerekiyorsa [Azure anahtar kasası](../../key-vault/key-vau
 ```
 
 > [!NOTE]
-> Var olan veri fabrikaları şablonları dışarı aktarma şu anda henüz desteklenmiyor olsa da, çalışması devam ediyor.
+> Mevcut veri fabrikaları için şablonları dışarı aktarma işlemi henüz desteklenmediğinden, bu, çalışıyor.
 >
 >

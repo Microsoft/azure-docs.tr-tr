@@ -1,24 +1,25 @@
 ---
-title: API işlemi iptal | Azure Market
-description: İşlemleri iptal edin.
+title: İşlem API 'sini iptal et | Azure Marketi
+description: İşlemleri iptal et.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 70ffd13be4ba934b423e3bb5344eea0a9c36886c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 374425dbd2abacb2114b5792d7476bc341fa353a
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935557"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819778"
 ---
 # <a name="cancel-operation"></a>İşlemi iptal et 
 
-Bu API, öneri şu anda devam eden bir işlem iptal eder. Kullanım [almak operations API'si](./cloud-partner-portal-api-retrieve-operations.md) almak için bir `operationId` bu API'ye geçirilecek. Mevcut bir iptal etmek için yeni bir işlem karmaşık bazı senaryolarda gerekebilir ancak iptal genellikle eşzamanlı bir işlem var. Bu durumda, HTTP yanıt gövdesi durumunu sorgulamak için kullanılması gereken işlem konumunu içerir.
+Bu API, teklifte sürmekte olan bir işlemi iptal eder. Bu API 'ye geçirilecek bir `operationId` almak için [OPERATIONS API 'Sini alma işlemini](./cloud-partner-portal-api-retrieve-operations.md) kullanın. İptali genellikle zaman uyumlu bir işlemdir, ancak bazı karmaşık senaryolarda var olan bir işlemin iptal edilmesi için yeni bir işlem gerekebilir. Bu durumda, HTTP yanıt gövdesi, durumu sorgulamak için kullanılması gereken işlemin konumunu içerir.
 
-İstekle e-posta adreslerini virgülle ayrılmış bir listesini sağlayabilir ve API bu adresleri işlemi ilerleme durumu hakkında bilgilendirir.
+İsteğe ait bir e-posta adresi listesi sağlayabilirsiniz ve API, işlemin ilerleme durumuyla ilgili olarak bu adresleri bilgilendirir.
 
   `POST https://cloudpartner.azure.com/api/publishers/<publisherId>/offers/<offerId>/cancel?api-version=2017-10-31`
 
@@ -27,19 +28,19 @@ Bu API, öneri şu anda devam eden bir işlem iptal eder. Kullanım [almak opera
 
 |  **Ad**    |      **Açıklama**                                  |    **Veri türü**  |
 | ------------ |     ----------------                                  |     -----------   |
-| publisherId  |  Yayıncı tanımlayıcısını, örneğin, `contoso`         |   String          |
-| OfferId      |  Teklif tanımlayıcısı                                     |   String          |
-| API sürümü  |  Geçerli API sürümü                               |    Tarih           |
+| PublisherId  |  Yayımcı tanımlayıcısı, örneğin, `contoso`         |   Dize          |
+| OfferId      |  Teklif tanımlayıcısı                                     |   Dize          |
+| api sürümü  |  Geçerli API sürümü                               |    Tarih           |
 |  |  |  |
 
 
-<a name="header"></a>Üstbilgi
+<a name="header"></a>Üst bilgi
 ------
 
 |  **Ad**              |  **Değer**         |
 |  ---------             |  ----------        |
 |  İçerik türü          |  uygulama/json  |
-|  Yetkilendirme         |  Taşıyıcı YOUR BELİRTEÇ |
+|  Yetkilendirme         |  BELIRTECINIZI taşıyıcı |
 |  |  |
 
 
@@ -60,7 +61,7 @@ Bu API, öneri şu anda devam eden bir işlem iptal eder. Kullanım [almak opera
 
 |  **Ad**                |  **Açıklama**                                               |
 |  --------                |  ---------------                                               |
-|  bildirim e-postaları     | Virgülle ayrılmış bir e-posta yayımlama işleminin ilerleme durumunu almak kimlikleri listesi. |
+|  bildirim-e-postalar     | Yayımlama işleminin ilerleme durumunun bildirilmesi için e-posta kimliklerinin virgülle ayrılmış listesi. |
 |  |  |
 
 
@@ -73,17 +74,17 @@ Bu API, öneri şu anda devam eden bir işlem iptal eder. Kullanım [almak opera
 
 |  **Ad**             |    **Değer**                       |
 |  ---------            |    ----------                      |
-| İşlem konumu    | URL, geçerli işlemin durumunu belirlemek için sorgulanabilir. |
+| İşlem-konum    | İşlemin geçerli durumunu öğrenmek için sorgulanabilen URL. |
 |  |  |
 
 
 ### <a name="response-status-codes"></a>Yanıt durum kodları
 
-| **Kod**  |  **Açıklama**                                                                       |
+| **Kodudur**  |  **Açıklama**                                                                       |
 |  ------   |  ------------------------------------------------------------------------               |
-|  200      | Tamam. İstek başarıyla işlendi ve işlem zaman uyumlu olarak iptal edilir. |
-|  202      | Kabul edildi. İstek başarıyla işlendi ve iptal sürecinde işlemdir. İptal işlemi konumunu yanıt üst bilgisinde döndürülür. |
-|  400      | Bozuk/Excel'de hatalı biçimlendirilmiş istek. Hata yanıt gövdesi, daha fazla bilgi sağlayabilir.  |
-|  403      | Erişim yasaklandı. İstemci isteğinde belirtilen ad alanına erişimi yok. |
+|  200      | Tamam. İstek başarıyla işlendi ve işlem zaman uyumlu olarak iptal edildi. |
+|  202      | Eden. İstek başarıyla işlendi ve işlem iptal ediliyor sürecinde. İptal işleminin konumu yanıt üst bilgisinde döndürülür. |
+|  400      | Hatalı/hatalı biçimlendirilmiş istek. Hata yanıtı gövdesi daha fazla bilgi sağlayabilir.  |
+|  403      | Erişim yasak. İstemcinin istekte belirtilen ad alanına erişimi yok. |
 |  404      | Bulunamadı. Belirtilen varlık yok. |
 |  |  |

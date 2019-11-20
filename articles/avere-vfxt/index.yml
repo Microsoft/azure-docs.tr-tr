@@ -8,10 +8,10 @@ metadata:
   author: ekpgh
   ms.service: avere-vfxt
   ms.topic: landing-page
-  ms.date: 10/31/2018
-  ms.author: v-erkell
+  ms.date: 10/09/2019
+  ms.author: rohogue
 abstract:
-  description: 'Azure için Avere vFXT yoğun veri kullanan yüksek performanslı bilgi işlem (HPC) görevlerinde bulut tabanlı bir önbellek katmanı sağlar. Avere vFXT dosyaları bilgi işlem düğümlerinizin yakınında önbelleğe alarak okuma sürelerini kısaltır ve en yoğun yükte bile sorunsuz çalışmanıza olanak tanır. Avere vFXT, en iyi 1.000 ile 40.000 istemci çekirdeği olan sistemlerde çalışır. <p>Avere vFXT mevcut şirket içi veri depolamanızla birlikte çalışarak, Azure tabanlı bilgi işlem kaynaklarının veri merkezinizde uzun dönem için depolanmış olan etkin dosyalara yerel olarak erişmesini sağlayabilir.'
+  description: 'Azure için Avere vFXT yoğun veri kullanan yüksek performanslı bilgi işlem (HPC) görevlerinde bulut tabanlı bir önbellek katmanı sağlar. Avere vFXT dosyaları bilgi işlem düğümlerinizin yakınında önbelleğe alarak okuma sürelerini kısaltır ve en yoğun yükte bile sorunsuz çalışmanıza olanak tanır. Avere vFXT, en iyi 1.000 ile 40.000 istemci çekirdeği olan sistemlerde çalışır. <p>Avere vFXT, dosyaları Azure tabanlı bilgi işlem kaynaklarına yakın hale getirmek için mevcut veri depolamanızla birlikte çalışır. Etkin dosyalar, hala veri merkezinizde uzun vadeli olarak saklanır.'
 sections:
   - title: Azure için Avere vFXT ile çalışmaya başlama
     items:

@@ -1,87 +1,88 @@
 ---
-title: Azure işlevleri için sürekli dağıtım | Microsoft Docs
-description: Azure App Service'in sürekli dağıtım özellikleri, işlevlerinizin yayımlamak için kullanın.
-services: functions
-documentationcenter: na
+title: Azure İşlevleri için sürekli dağıtım
+description: İşlevlerinizi yayımlamak için Azure App Service sürekli dağıtım özelliklerini kullanın.
 author: ggailey777
-manager: jeconnoc
+manager: gwallace
 ms.assetid: 361daf37-598c-4703-8d78-c77dbef91643
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
-ms.date: 09/25/2016
+ms.date: 09/25/2019
 ms.author: glenga
-ms.openlocfilehash: 2dc5fab0966c2ead0276cd8b23ea764bd4f9ef59
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.openlocfilehash: dae75153cffbf2f0e836e1a28b78a9f05f54e6e0
+ms.sourcegitcommit: a170b69b592e6e7e5cc816dabc0246f97897cb0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67190471"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74091175"
 ---
 # <a name="continuous-deployment-for-azure-functions"></a>Azure İşlevleri için sürekli dağıtım
 
-Azure işlevleri, kodunuzu ile sürekli olarak dağıtmanızı sağlar [kaynak denetimi tümleştirmesi](functions-deployment-technologies.md#source-control). Bu bir iş akışı tetikleyici kod güncelleştirmeleri nerede sağlar Azure'a dağıtılacak. Azure işlevleri'ne yeniyseniz, kullanmaya başlama [Azure işlevlerine genel bakış](functions-overview.md).
+[Kaynak denetimi tümleştirmesini](functions-deployment-technologies.md#source-control)kullanarak kodunuzu sürekli olarak dağıtmak Için Azure işlevleri 'ni kullanabilirsiniz. Kaynak denetimi tümleştirmesi, bir kod güncelleştirmesinin Azure 'a dağıtımı tetiklediği bir iş akışını sağlar. Azure Işlevleri 'ne yeni başladıysanız, [Azure işlevlerine genel bakış](functions-overview.md)' ı inceleyerek başlayın.
 
-Sürekli dağıtım, birden çok burada tümleştiriyorsanız projeler için mükemmel bir seçenektir ve sık sık katkıda. Ayrıca, tek bir işlev kodu doğru kaynağı korumak sağlar. Aşağıdaki kaynak kodu konumlardan Azure işlevleri'nde sürekli dağıtım yapılandırabilirsiniz:
+Sürekli dağıtım, birden çok ve sık katkılarınızı tümleştiren projeler için iyi bir seçenektir. Sürekli dağıtım kullandığınızda, kodunuz için tek bir Truth kaynağı tuttuğunuz için ekiplerin kolayca işbirliği yapmasına olanak tanır. Azure Işlevlerinde sürekli dağıtımı aşağıdaki kaynak kodu konumlarından yapılandırabilirsiniz:
 
-* [Azure depoları](https://azure.microsoft.com/services/devops/repos/)
+* [Azure Repos](https://azure.microsoft.com/services/devops/repos/)
 * [GitHub](https://github.com)
 * [Bitbucket](https://bitbucket.org/)
 
-İşlev uygulaması Azure işlevleri için dağıtım birimidir. Başka bir deyişle, bir işlev uygulamasında tüm işlevleri aynı anda dağıtılır. Sürekli dağıtım etkinleştirildikten sonra Azure portalında işlev kodunu erişimi yapılandırılmış *salt okunur*, gerçekte kaynağı başka bir yerde olacak şekilde ayarlanmış olduğundan.
+Azure 'daki işlevlerin dağıtım birimi, işlev uygulamasıdır. Bir işlev uygulamasındaki tüm işlevler aynı zamanda dağıtılır. Sürekli dağıtımı etkinleştirdikten sonra, Azure portal işlev koduna erişim salt *okunurdur* , çünkü gerçeği kaynağı başka bir yerde olacak şekilde ayarlanmıştır.
 
-## <a name="requirements-for-continuous-deployment"></a>Sürekli dağıtım için gereksinimleri
+## <a name="requirements-for-continuous-deployment"></a>Sürekli dağıtım için gereksinimler
 
-Başarılı olması sürekli dağıtım için dizin yapısını Azure işlevleri beklediği aşağıdaki temel klasör yapısı ile uyumlu olması gerekir:
+Sürekli dağıtımın başarılı olması için dizin yapınız, Azure Işlevlerinin beklediği temel klasör yapısıyla uyumlu olmalıdır.
 
 [!INCLUDE [functions-folder-structure](../../includes/functions-folder-structure.md)]
 
-## <a name="credentials"></a>Sürekli dağıtım ayarlama
+>[!NOTE]  
+> Sürekli dağıtım henüz bir tüketim planında çalışan Linux uygulamaları için desteklenmemektedir. 
 
-Var olan bir işlev uygulaması için sürekli dağıtımını yapılandırmak için bu yordamı kullanın. Bir GitHub deposu ile tümleştirme adımları gösterir, ancak Azure depoları veya diğer kaynak kodu depoları için benzer adımları uygulayın.
+## <a name="credentials"></a>Sürekli dağıtımı ayarlama
 
-1. İşlev uygulamanıza [Azure portalında](https://portal.azure.com)seçin **Platform özellikleri** > **Dağıtım Merkezi**.
+Mevcut bir işlev uygulaması için sürekli dağıtımı yapılandırmak üzere, bu adımları izleyin. Adımlarda bir GitHub deposu ile tümleştirme gösterilmektedir, ancak Azure Repos veya diğer kaynak kodu depoları için de benzer adımlar geçerlidir.
 
-    ![Dağıtım Merkezi açma](./media/functions-continuous-deployment/platform-features.png)
+1. [Azure Portal](https://portal.azure.com)işlev uygulamanızda, **Dağıtım Merkezi** > **platform özellikleri** ' ni seçin.
 
-2. İçinde **Dağıtım Merkezi**seçin **GitHub**ve ardından **Authorize**. Veya zaten GitHub yetki verdiğiniz, seçin **devam**. 
+    ![Dağıtım merkezini aç](./media/functions-continuous-deployment/platform-features.png)
 
-    ![Dağıtım Merkezi](./media/functions-continuous-deployment/github.png)
+2. **Dağıtım Merkezi**'nde **GitHub**' ı seçin ve ardından **Yetkilendir**' i seçin. GitHub yetkiniz zaten varsa **devam**' ı seçin. 
 
-3. Github'da seçin **yetkilendirmek AzureAppService**. 
+    ![Azure App Service dağıtım merkezi](./media/functions-continuous-deployment/github.png)
 
-    ![Yetkilendirme](./media/functions-continuous-deployment/authorize.png)
+3. GitHub 'da **Yetkilendir azureuygulamahizmeti** düğmesini seçin. 
+
+    ![Azure App Service yetkilendir](./media/functions-continuous-deployment/authorize.png)
     
-    Azure portalında **Dağıtım Merkezi**seçin **devam**.
+    Azure portal **Dağıtım Merkezi** 'nde **devam**' ı seçin.
 
-4. Aşağıdaki yapı sağlayıcılardan birini seçin:
+4. Aşağıdaki derleme sağlayıcılarından birini seçin:
 
-    * **App Service derleme hizmeti** - en iyi bir yapı ihtiyacınız kalmadığında, veya genel derleme gerekiyorsa.
-    * **Azure işlem hatları (Önizleme)** - derleme hakkında daha fazla denetime ihtiyacınız olduğunda en iyi. Bu sağlayıcı şu anda Önizleme aşamasındadır.
+    * **App Service derleme hizmeti**: bir yapıya ihtiyacınız olmadığında veya genel bir yapıya ihtiyacınız varsa en iyi seçenektir.
+    * **Azure Pipelines (Önizleme)** : yapı üzerinde daha fazla denetime ihtiyacınız olduğunda en iyi seçenektir. Bu sağlayıcı Şu anda önizlemededir.
 
-    ![Bir oluşturma sağlayıcısını seçme](./media/functions-continuous-deployment/build.png)
+    ![Yapı sağlayıcısı seçin](./media/functions-continuous-deployment/build.png)
 
-5. Belirtilen kaynak denetim seçeneği belirli bilgileri yapılandırın. GitHub için sağlamanız gereken **kuruluş**, **depo**, ve **dal** kodunuzu nerede yaşıyor. Ardından, **devam**.
+5. Belirttiğiniz kaynak denetimi seçeneğine özgü bilgileri yapılandırın. GitHub için **kuruluş**, **Depo**ve **dal**değerlerini girmeniz veya seçmeniz gerekir. Değerler, kodunuzun konumunu temel alır. Sonra **devam**' ı seçin.
 
-    ![GitHub'ı yapılandırma](./media/functions-continuous-deployment/github-specifics.png)
+    ![GitHub 'ı yapılandırma](./media/functions-continuous-deployment/github-specifics.png)
 
-6. Son olarak, tüm ayrıntılarını gözden geçirin ve seçin **son** dağıtım yapılandırmayı tamamlamak için.
+6. Tüm ayrıntıları gözden geçirin ve ardından **son** ' u seçerek dağıtım yapılandırmanızı doldurun.
 
     ![Özet](./media/functions-continuous-deployment/summary.png)
 
-İşlem tamamlandığında, tüm belirtilen kaynak koddan uygulamanıza dağıtılır. Bu noktada, dağıtım kaynağı değişiklikleri Azure işlev uygulamanızda bu değişiklikleri, bir dağıtım tetikleyin.
+İşlem tamamlandığında, belirtilen kaynaktaki tüm kodlar uygulamanıza dağıtılır. Bu noktada, dağıtım kaynağındaki değişiklikler Azure 'daki işlev uygulamanızda bu değişikliklerin dağıtımını tetikler.
 
 ## <a name="deployment-scenarios"></a>Dağıtım senaryoları
 
 <a name="existing"></a>
-### <a name="move-existing-functions-to-continuous-deployment"></a>Mevcut işlevleri için sürekli dağıtım Taşı
 
-İşlevleri önceden yazılmış [Azure portalında](https://portal.azure.com) ve uygulamanızın içeriğini sürekli dağıtım geçmeden önce indirmek istiyorsanız, gitmek **genel bakış** işlevinizin sekmesi Uygulama seçeneğine tıklayıp **uygulama içeriği karşıdan** düğmesi.
+### <a name="move-existing-functions-to-continuous-deployment"></a>Mevcut işlevleri sürekli dağıtıma taşı
 
-![Uygulama içeriği indiriliyor](./media/functions-continuous-deployment/download.png)
+[Azure Portal](https://portal.azure.com) işlevleri zaten yazdıysanız ve sürekli dağıtıma geçiş yapmadan önce uygulamanızın içeriğini indirmek istiyorsanız, Işlev uygulamanızın **genel bakış** sekmesine gidin. **Uygulama Içeriğini indir** düğmesini seçin.
+
+![Uygulama içeriğini indir](./media/functions-continuous-deployment/download.png)
 
 > [!NOTE]
-> Sürekli tümleştirmeyi yapılandırdıktan sonra kaynak dosyalarınızda işlevler portalına artık düzenleyebilirsiniz.
+> Sürekli tümleştirmeyi yapılandırdıktan sonra, kaynak dosyalarınızı artık Işlevler portalında düzenleyemezsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

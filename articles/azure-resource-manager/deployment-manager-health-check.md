@@ -1,50 +1,47 @@
 ---
-title: Azure Deployment Manager için sistem tümleştirme piyasaya tanıtmak
+title: Durum tümleştirme dağıtımı-Azure Dağıtım Yöneticisi
 description: Azure Deployment Manager ile pek çok bölge üzerinde bir hizmet dağıtmayı açıklar. Bu, tüm bölgelere sunulmadan önce dağıtımınızı kararlılığını doğrulamak için güvenli dağıtım uygulamalarını gösterir.
-services: azure-resource-manager
-documentationcenter: na
 author: mumian
-ms.service: azure-resource-manager
 ms.topic: conceptual
-ms.date: 05/08/19
+ms.date: 05/08/2019
 ms.author: jgao
-ms.openlocfilehash: 4c2c38754b2051a4f61249f623f60f21e9690f5e
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 6cc21837ff08822a9eae6ae7c326142ca873df74
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67206618"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149971"
 ---
-# <a name="introduce-health-integration-rollout-to-azure-deployment-manager-public-preview"></a>Azure Deployment Manager (genel Önizleme) için sistem tümleştirme piyasaya tanıtmak
+# <a name="introduce-health-integration-rollout-to-azure-deployment-manager-public-preview"></a>Azure Dağıtım Yöneticisi durum tümleştirmesi dağıtımını tanıtma (Genel Önizleme)
 
-[Azure Deployment Manager](./deployment-manager-overview.md) Azure Resource Manager kaynakların aşamalı piyasaya çıkarma yapmanıza olanak tanır. Kaynak bölge bölgeye göre sıralı bir şekilde dağıtılır. Sorun giderme ve etkisi ölçek azaltma tümleşik sistem durumu denetimi Azure Deployment Manager'ın piyasaya çıkarma ve otomatik olarak durdurma sorunlu piyasaya çıkarma izleyebilirsiniz. Bu özellik güncelleştirmeleri depoda gerilemeyi nedeni hizmet kullanılamazlık azaltabilir.
+[Azure dağıtım Yöneticisi](./deployment-manager-overview.md) , Azure Resource Manager kaynakları hazırlanan piyasaya çıkarma kaynaklarını gerçekleştirmenize olanak tanır. Kaynaklar bölge tarafından bölgeye göre düzenli bir biçimde dağıtılır. Azure Dağıtım Yöneticisi tümleşik sistem durumu denetimi piyasaya çıkarma izleyebilir ve sorun gidermek ve etki alanının ölçeğini azaltmak için sorunlu piyasaya çıkarma 'yi otomatik olarak durdurabilir. Bu özellik, güncelleştirmelerde gerilemeler nedeniyle oluşan hizmet kullanılamamasını azaltabilir.
 
 ## <a name="health-monitoring-providers"></a>Sistem durumu izleme sağlayıcıları
 
-Sistem durumu tümleştirme mümkün olduğunca kolaylaştırmak için Microsoft bazı şirketler, sistem durumu denetimleri ile dağıtımlarınızı tümleştirmek için bir basit kopyala/yapıştır çözümü sağlamak için izleme üst hizmet durumu ile çalışmaktadır. Bir sistem durumu İzleyicisi zaten kullanıyorsanız, bunlar harika çözümleri ile başlaması ve:
+Sistem durumu tümleştirmesini mümkün olduğunca kolay hale getirmek için, Microsoft, en önemli hizmet durumu izleme şirketleriyle birlikte çalışarak dağıtımlarınızla durum denetimlerini tümleştirmek üzere basit bir kopyalama/yapıştırma çözümü sağlar. Zaten bir sistem durumu İzleyicisi kullanmıyorsanız, bunlar şu şekilde başlamak için harika bir çözümdür:
 
-| ![Azure deployment manager sistem durumu İzleyici sağlayıcısı datadog](./media/deployment-manager-health-check/azure-deployment-manager-health-monitor-provider-datadog.svg) | ![Azure deployment manager sistem durumu İzleyici sağlayıcısı site24x7](./media/deployment-manager-health-check/azure-deployment-manager-health-monitor-provider-site24x7.svg) | ![Azure dağıtım manager sistem durumu İzleyicisi sağlayıcı wavefront](./media/deployment-manager-health-check/azure-deployment-manager-health-monitor-provider-wavefront.svg) |
+| ![Azure Deployment Manager sistem durumu İzleyicisi sağlayıcısı veri köpek](./media/deployment-manager-health-check/azure-deployment-manager-health-monitor-provider-datadog.svg) | ![Azure Deployment Manager sistem durumu İzleyicisi sağlayıcısı site24x7](./media/deployment-manager-health-check/azure-deployment-manager-health-monitor-provider-site24x7.svg) | ![Azure Deployment Manager sistem durumu İzleyicisi sağlayıcısı dalga ön](./media/deployment-manager-health-check/azure-deployment-manager-health-monitor-provider-wavefront.svg) |
 |-----|------|------|
-|Datadog, önde gelen izleme ve analiz platformu modern bulut ortamları için. Bkz: [Datadog Azure Deployment Manager ile nasıl tümleştirildiğini](https://www.datadoghq.com/azure-deployment-manager/).|Site24x7, izleme çözümü hepsi bir arada özel ve genel bulut Hizmetleri. Bkz: [Site24x7 Azure Deployment Manager ile nasıl tümleştirildiğini](https://www.site24x7.com/azure/adm.html).| Wavefront, çoklu bulut uygulama ortamları için izleme ve analiz platformu. Bkz: [Wavefront Azure Deployment Manager ile nasıl tümleştirildiğini](https://go.wavefront.com/wavefront-adm/).|
+|Modern bulut ortamları için önde gelen izleme ve analiz platformu olan dataköpek. [Dataköpek 'Nın Azure dağıtım Yöneticisi ile nasıl tümleştiğini](https://www.datadoghq.com/azure-deployment-manager/)görün.|Site24x7, hepsi bir arada özel ve genel bulut hizmetleri izleme çözümü. [Site24x7 'In Azure dağıtım Yöneticisi ile nasıl tümleştiğini](https://www.site24x7.com/azure/adm.html)görün.| Dalga ön, çok bulut uygulama ortamları için izleme ve analiz platformu. [Wavefront 'ın Azure dağıtım Yöneticisi ile nasıl tümleştiğini](https://go.wavefront.com/wavefront-adm/)görün.|
 
-## <a name="how-service-health-is-determined"></a>Hizmet durumu belirleme
+## <a name="how-service-health-is-determined"></a>Hizmet durumu nasıl belirlenir
 
-[Sistem durumu izleme sağlayıcılarını](#health-monitoring-providers) Hizmetleri izleme ve uyarı, hizmet sistem durumu sorunları için çeşitli mekanizmalar sunar. [Azure İzleyici](../azure-monitor/overview.md) söz konusu teklifle bir örneğidir. Azure İzleyici, belirli eşikleri aştığında uyarılar oluşturmak için kullanılabilir. Örneğin, hizmetiniz için yeni bir güncelleştirme dağıttığınızda, bellek ve CPU kullanımı beklenen düzeyleri dışında sağlayabilirsiniz. Bildirildiğinde, düzeltici eylemleri gerçekleştirebilirsiniz.
+[Sistem durumu izleme sağlayıcıları](#health-monitoring-providers) Hizmetleri izlemek için çeşitli mekanizmalar sunar ve hizmet durumu sorunlarından dolayı sizi uyarır. [Azure izleyici](../azure-monitor/overview.md) , bu tür bir teklife bir örnektir. Azure Izleyici, belirli eşikler aşıldığında uyarı oluşturmak için kullanılabilir. Örneğin, hizmetinize yeni bir güncelleştirme dağıttığınızda bellek ve CPU kullanımı beklenen düzeylerin ötesine geçmiş. Bildirim geldiğinde, düzeltici eylemler gerçekleştirebilirsiniz.
 
-Bu sistem durumu sağlayıcıları, genellikle hizmetinizin İzleyici durumunu programlı bir şekilde incelenmesi böylece REST API'leri sunar. REST API ya da geri (HTTP yanıt koduna göre belirlenir) basit ve sorunsuz ve düzgün çalışmayan bir sinyali ve/veya sinyaller hakkında ayrıntılı bilgileri iletiyi almasını dönebilirsiniz.
+Bu sistem durumu sağlayıcıları genellikle REST API 'Leri sunar, böylece hizmet izleyicilerinin durumu programlı bir şekilde incelenebilir. REST API 'Leri, basit bir sağlıklı/sağlıksız sinyalle (HTTP yanıt kodu tarafından belirlenir) ve/veya aldığı sinyallerle ilgili ayrıntılı bilgilerle geri dönebilir.
 
-Yeni *healthCheck* adım Azure Dağıtım Yöneticisi'nde, sistem durumu hizmetini gösteren HTTP kodları bildirmek izin verir veya daha karmaşık REST sonuçlar için hatta eşleşiyorlarsa gösteren, sağlıklı bir normal ifadeler belirtebilirsiniz yanıt.
+Azure Dağıtım Yöneticisi 'daki yeni *Healthcheck* adımı, sağlıklı bir HIZMETI gösteren http kodları bildirmenize veya daha karmaşık Rest sonuçları için, eşleşseler, sağlıklı bir yanıt olduğunu belirten normal ifadeleri de belirtebilirsiniz.
 
-Azure Deployment Manager sistem durumu denetimleri ile Kurulum başlangıç akışı:
+Azure Dağıtım Yöneticisi durum denetimleri ile kurulum alma akışı:
 
-1. Tercih ettiğiniz bir sistem durumu hizmeti sağlayıcısı aracılığıyla, sistem durumu izleyicileri oluşturun.
-1. Azure Deployment Manager dağıtımınız bir parçası olarak bir veya daha fazla healthCheck adımları oluşturun. HealthCheck adımları aşağıdaki bilgilerle doldurun:
+1. İstediğiniz bir sistem sağlığı hizmeti sağlayıcısı aracılığıyla sistem durumu izleyicilerini oluşturun.
+1. Azure Dağıtım Yöneticisi dağıtım kapsamında bir veya daha fazla healthCheck adımı oluşturun. HealthCheck adımlarını aşağıdaki bilgilerle doldurun:
 
-    1. (Sistem durumu hizmet sağlayıcınız tarafından tanımlanan şekilde), sistem durumu izleyicileri için REST API için URI.
-    1. Kimlik doğrulama bilgileri. Şu anda yalnızca API anahtarını stili kimlik doğrulaması desteklenir.
-    1. [HTTP durum kodları](https://www.wikipedia.org/wiki/List_of_HTTP_status_codes) veya iyi bir yanıt tanımlama normal ifadeler. Normal ifadeler, hangi tüm gereken sağlıklı olarak değerlendirilmesi için yanıt veya eşleşme ifadeleri herhangi yanıt sağlıklı olarak değerlendirilmesi hangi eşleşmelidir sağlayabilir sağlayabileceğiniz unutmayın. Her iki yöntem desteklenir.
+    1. Sistem sağlığı izleyiclarınız için REST API URI 'SI (sistem sağlığı hizmeti sağlayıcınız tarafından tanımlanan şekilde).
+    1. Kimlik doğrulama bilgileri. Şu anda yalnızca API anahtar stili kimlik doğrulaması destekleniyor.
+    1. Sağlıklı bir yanıt tanımlayan [http durum kodları](https://www.wikipedia.org/wiki/List_of_HTTP_status_codes) veya normal ifadeler. Yanıtın sağlıklı olarak değerlendirilmesi için her birinin eşleşmesi gereken normal ifadeler sağlayabilir veya yanıtın sağlıklı olarak kabul edilmesi için herhangi birinin eşleşmesi gereken ifadeler sağlayabilirsiniz. Her iki yöntem de desteklenir.
 
-    Aşağıdaki Json örneği verilmiştir:
+    Aşağıdaki JSON bir örnektir:
 
     ```json
     {
@@ -93,7 +90,7 @@ Azure Deployment Manager sistem durumu denetimleri ile Kurulum başlangıç akı
     },
     ```
 
-1. Azure Deployment Manager dağıtımınız içinde uygun zamanda healthCheck adımları çağırın. Aşağıdaki örnekte, bir sistem durumu denetimi adım çağrılması **postDeploymentSteps** , **stepGroup2**.
+1. HealthCheck adımlarını Azure Dağıtım Yöneticisi dağıtımı için uygun zamanda çağırın. Aşağıdaki örnekte, **stepGroup2**'In **postdeploymentsteps** içinde bir sistem durumu denetimi adımı çağırılır.
 
     ```json
     "stepGroups": [
@@ -131,33 +128,33 @@ Azure Deployment Manager sistem durumu denetimleri ile Kurulum başlangıç akı
     ]
     ```
 
-Bir örnek üzerinde yürütmek için bkz [Öğreticisi: Azure Dağıtım Yöneticisi'nde sistem durumu denetimi kullanın](./deployment-manager-health-check.md).
+Örnek adım adım yönergeler için bkz. [öğretici: Azure dağıtım Yöneticisi sistem durumu denetimi kullanma](./deployment-manager-health-check.md).
 
-## <a name="phases-of-a-health-check"></a>Sistem durumu denetimi aşamaları
+## <a name="phases-of-a-health-check"></a>Bir sistem durumu denetiminin aşamaları
 
-Bu noktada Azure Deployment Manager sistem durumu hizmeti ve bunu yapmak için kullanıma sunma ne aşamaları sorgulamak nasıl bilir. Ancak, Azure Deployment Manager da bu denetimleri zamanlamasını ayrıntılı yapılandırılmasını sağlar. Tüm yapılandırılabilir süreler 3 sıralı aşamalarında healthCheck adım çalıştırılır: 
+Bu noktada Azure Dağıtım Yöneticisi, hizmetinizin sistem durumunu ve hangi aşamalarda bunu yapmak için nasıl sorgu yapılacağını bilir. Ancak Azure Dağıtım Yöneticisi, bu denetimlerin zamanlamasını ayrıntılı olarak yapılandırmaya de olanak tanır. Bir healthCheck adımı, hepsi yapılandırılabilir süreleri olan 3 sıralı aşamada yürütülür: 
 
 1. Wait
 
-    1. Dağıtım işlemi tamamlandıktan sonra Vm'leri yeniden başlatma, yeniden yeni veriler veya hatta ilk kez başlatıldı göre. Ayrıca, sistem durumu sinyal sağlayıcısı bir şeye yararlı izleme sistem tarafından toplanacak yayma başlatmak hizmetler zaman alır. Tumultuous bu işlem sırasında hizmet durumu için güncelleştirme henüz kararlı bir duruma ulaştı değil beri denetlemek için anlamlı olmayabilir. Aslında, kaynakları kapatma gibi hizmet sağlıklı ve sağlıksız durumlar arasında oscillating. 
-    1. Bekleme aşamasında, hizmet durumu izlemesi yapılmaz. Bu, dağıtılan kaynaklar izin vermek için kullanılır sistem durumu onay işlemine başlamadan önce hazırlama süresi. 
+    1. Bir dağıtım işlemi tamamlandıktan sonra, VM 'Ler yeniden başlatılabilir, yeni verilere göre yeniden yapılandırılabilir, hatta ilk kez başlatılmış olabilir. Ayrıca, hizmetlerin sistem durumu izleme sağlayıcısı tarafından, yararlı bir şeye toplanacak durum sinyallerini yayarak başlatılması zaman alır. Bu döner işlem sırasında, güncelleştirme henüz sabit bir duruma ulaşmadığından hizmet durumunu denetlemek mantıklı olmayabilir. Gerçekte, hizmet, kaynaklar tarafından beklendiği gibi sağlıklı ve sağlıksız durumlar arasında salını olabilir. 
+    1. Bekleme aşamasında, hizmet durumu izlenmiyor. Bu, dağıtılan kaynaklara sistem durumu denetimi işlemine başlamadan önce bakma süresi vermek için kullanılır. 
 1. Esnek
 
-    1. Her durumda ne kadar bilmek olanaksızdır olduğundan kaynaklar kaynakları potansiyel olarak kararsız olduğunda arasında esnek süre boyunca esnek aşaması sağlayan kararlı, haline gelmeden önce ve sağlam bir kararlı korumak için gerekli olduğunda hazırlama yönlendirilirsiniz durumu.
-    1. Esnek aşaması başladığında, Deployment Manager'ı Azure hizmet durumu için sağlanan REST uç noktasını düzenli aralıklarla yoklama başlar. Yoklama aralığı yapılandırılabilir. 
-    1. Gösteren iyi durumda olmayan bir hizmettir, bu sinyaller göz ardı edilir, genel Durum izleyicisini geri sinyalleri geliyorsa, elastik aşamaya devam eder ve yoklama devam eder. 
-    1. Genel Durum izleyicisini hizmetin iyi durumda olduğunu belirten bir sinyal ile gelir hemen sonra esnek aşaması sona erer ve HealthyState aşaması başlar. 
-    1. Bu nedenle, elastik bir aşama için belirtilen iyi bir yanıt zorunlu olarak kabul edilmeden önce Hizmet durumu için yoklama için harcanabilecek en uzun süreyi süresidir. 
-1. HealthyState
+    1. Kaynakların kararlı hale gelmeden önce bakmasına ne kadar süreceğine ilişkin tüm durumlarda, esnek aşama, kaynakların potansiyel olarak kararsız olması ve sağlıklı bir şekilde kararlı olması gerektiğinde esnek bir zaman aralığı sağlar durumunda.
+    1. Elastik aşama başladığında Azure Dağıtım Yöneticisi, hizmet durumu için belirtilen REST uç noktasını düzenli aralıklarla yoklamaya başlar. Yoklama aralığı yapılandırılabilir. 
+    1. Sistem durumu İzleyicisi, hizmetin sağlıksız olduğunu belirten sinyallerle geri dönerse, bu sinyaller yok sayılır, elastik aşama devam eder ve yoklamaya devam eder. 
+    1. Sistem durumu İzleyicisi, hizmetin sağlıklı olduğunu belirten sinyallerle birlikte geldiğinde, elastik aşama sonlanır ve Healthi durum aşaması başlar. 
+    1. Bu nedenle, elastik bir yanıt zorunlu kabul edilmeden önce hizmet durumunu yoklamaya harcanan en uzun süre (esnek aşama için belirtilen süre). 
+1. Healthyıstate
 
-    1. HealthyState aşamasında, hizmet durumunu sürekli olarak elastik aşaması ile aynı aralıkta sorguladı. 
-    1. Hizmet sistem durumu izleme sağlayıcısından sağlıklı sinyalleri belirtilen sürenin tamamı boyunca korumak için bekleniyor. 
-    1. Sağlıksız bir yanıt herhangi bir noktada algılanırsa, Azure Deployment Manager tüm dağıtım durur ve iyi durumda olmayan hizmet sinyaller taşıyan REST yanıtı döndürür.
-    1. HealthyState süresi sona erdikten sonra healthCheck tamamlandıktan ve dağıtım sonraki adıma devam eder.
+    1. Healthi durum aşamasında, hizmet durumu sürekli olarak esnek aşamayla aynı aralığa göre yoklanır. 
+    1. Hizmetin, belirtilen sürenin tamamına yönelik sistem durumu izleme sağlayıcısından sağlıklı sinyalleri tutması beklenir. 
+    1. Herhangi bir noktada sağlıksız bir yanıt algılanırsa Azure Dağıtım Yöneticisi, tüm dağıtımı durdurur ve sağlıksız hizmet sinyallerini taşıyan REST yanıtını döndürür.
+    1. Healthı durumu süresi sona erdikten sonra, healthCheck tamamlanmıştır ve dağıtım bir sonraki adımla devam eder.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, Azure Dağıtım Yöneticisi'nde sistem durumu izleme tümleştirme hakkında bilgi edindiniz. Deployment Manager ile dağıtma hakkında bilgi edinmek için sonraki makaleye geçin.
+Bu makalede, Azure Dağıtım Yöneticisi sistem durumu izlemenin nasıl tümleştirileceğini öğrendiniz. Deployment Manager ile dağıtma hakkında bilgi edinmek için sonraki makaleye geçin.
 
 > [!div class="nextstepaction"]
-> [Öğretici: Azure Dağıtım Yöneticisi'nde sistem durumu denetimini tümleştirin](./deployment-manager-tutorial-health-check.md)
+> [Öğretici: Azure Dağıtım Yöneticisi sistem durumu denetimini tümleştirin](./deployment-manager-tutorial-health-check.md)

@@ -1,46 +1,44 @@
 ---
-title: C++ - Azure nesne (Blob) depolama kullanma nasıl | Microsoft Docs
-description: Azure Blob (nesne) depolama ile bulutta yapılandırılmamış veri Store.
-services: storage
+title: Azure 'dan C++ nesne (blob) depolaması kullanma | Microsoft Docs
+description: Yapılandırılmamış verileri bulutta Azure Blob (nesne) depolaması ile depolayın.
 author: mhopkins-msft
-ms.service: storage
-ms.topic: conceptual
-ms.date: 03/21/2018
 ms.author: mhopkins
-ms.reviewer: seguler
+ms.date: 03/21/2018
+ms.service: storage
 ms.subservice: blobs
-ms.openlocfilehash: 32601fc15e6b6a25a1005b6d95499d4aae4fb0d2
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.topic: conceptual
+ms.openlocfilehash: f64856d5b0140d529e939d92d4be61b074928d6e
+ms.sourcegitcommit: 85b3973b104111f536dc5eccf8026749084d8789
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67461173"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68726421"
 ---
-# <a name="how-to-use-blob-storage-from-c"></a>BLOB depolama alanından C++ kullanma
+# <a name="how-to-use-blob-storage-from-c"></a>Öğesinden blob depolamayı kullanmaC++
 
-Bu kılavuz, yaygın senaryoları Azure Blob depolamayı kullanarak nasıl gerçekleştireceğinizi gösterir. Örnekleri karşıya yükleme, listesinde, indirmek ve blobları silme işlemini göstermektedir. Örnekler C++ dilinde yazılmıştır ve [C++ için Azure Depolama İstemci Kitaplığı](https://github.com/Azure/azure-storage-cpp/blob/master/README.md)’nı kullanır.   
+Bu kılavuzda, Azure Blob depolamayı kullanarak yaygın senaryoların nasıl gerçekleştirileceği gösterilmektedir. Örneklerde Blobları karşıya yükleme, listeleme, indirme ve silme işlemlerinin nasıl yapılacağı gösterilmektedir. Örnekler C++ dilinde yazılmıştır ve [C++ için Azure Depolama İstemci Kitaplığı](https://github.com/Azure/azure-storage-cpp/blob/master/README.md)’nı kullanır.   
 
-Blob Depolama hakkında daha fazla bilgi için bkz: [Azure Blob depolamaya giriş](storage-blobs-introduction.md).
+BLOB depolama hakkında daha fazla bilgi için bkz. [Azure Blob depolamaya giriş](storage-blobs-introduction.md).
 
 > [!NOTE]
-> Bu kılavuz C++ için Azure Depolama İstemci Kitaplığı sürüm 1.0.0 ve üzerini hedefler. Microsoft öneriyor aracılığıyla kullanılabilir olan C++ için depolama istemci Kitaplığı'nın en son sürümünü kullanarak [NuGet](https://www.nuget.org/packages/wastorage) veya [GitHub](https://github.com/Azure/azure-storage-cpp).
+> Bu kılavuz C++ için Azure Depolama İstemci Kitaplığı sürüm 1.0.0 ve üzerini hedefler. Microsoft, C++ [NuGet](https://www.nuget.org/packages/wastorage) veya [GitHub](https://github.com/Azure/azure-storage-cpp)aracılığıyla kullanılabilen için depolama istemci kitaplığı 'nın en son sürümünü kullanmanızı önerir.
 
 [!INCLUDE [storage-create-account-include](../../../includes/storage-create-account-include.md)]
 
 ## <a name="create-a-c-application"></a>C++ uygulaması oluşturma
-Bu kılavuzda, bir C++ uygulaması içinde çalışabilen depolama özelliklerini kullanır.  
+Bu kılavuzda, bir C++ uygulama içinde çalıştırılabilen depolama özelliklerini kullanacaksınız.  
 
 Bunu yapmak için, C++ için Azure Depolama İstemci Kitaplığı’nı yüklemeniz ve Azure aboneliğinizde bir Azure depolama hesabı oluşturmanız gerekir.   
 
 C++ için Azure Depolama İstemci Kitaplığı’nı aşağıdaki yöntemleri kullanarak yükleyebilirsiniz:
 
-* **Linux:** Verilen yönergeleri izleyerek [C++ Benioku için Azure depolama istemci Kitaplığı](https://github.com/Azure/azure-storage-cpp/blob/master/README.md) sayfası.  
-* **Windows:** Visual Studio'da, **Araçlar > NuGet Paket Yöneticisi > Paket Yöneticisi Konsolu**’na tıklayın. Aşağıdaki komutu yazın [NuGet Paket Yöneticisi Konsolu](https://docs.nuget.org/docs/start-here/using-the-package-manager-console) basın **ENTER**.  
+* **'Un** [Benioku Için C++ Azure Storage istemci kitaplığı](https://github.com/Azure/azure-storage-cpp/blob/master/README.md) sayfasında verilen yönergeleri izleyin.  
+* **Windows:** Visual Studio'da, **Araçlar > NuGet Paket Yöneticisi > Paket Yöneticisi Konsolu**’na tıklayın. [NuGet Paket Yöneticisi konsoluna](https://docs.nuget.org/docs/start-here/using-the-package-manager-console) aşağıdaki komutu yazın ve **ENTER**tuşuna basın.  
   
      Install-Package wastorage
 
-## <a name="configure-your-application-to-access-blob-storage"></a>BLOB depolama alanına erişmek için uygulamanızı yapılandırma
-Bloblara erişmek için Azure depolama API'leri kullanmak istediğiniz C++ dosyasının en üstüne deyimleriyle şunlardır ekleyin:  
+## <a name="configure-your-application-to-access-blob-storage"></a>Uygulamanızı blob depolamaya erişecek şekilde yapılandırma
+Bloblara erişmek için Azure depolama API 'Lerini kullanmak istediğiniz C++ dosyanın en üstüne aşağıdaki Include deyimlerini ekleyin:  
 
 ```cpp
 #include <was/storage_account.h>
@@ -49,34 +47,34 @@ Bloblara erişmek için Azure depolama API'leri kullanmak istediğiniz C++ dosya
 #include <cpprest/containerstream.h> 
 ```
 
-## <a name="setup-an-azure-storage-connection-string"></a>Bir Azure depolama bağlantı dizesi ayarlama
-Azure depolama istemcisi, veri yönetimi hizmetlerine erişmek üzere uç noktaları ve kimlik bilgilerini depolamak için bir depolama bağlantı dizesi kullanır. Bir istemci uygulamasında çalışırken, listelenen depolama hesabı için depolama hesabınızın ve depolama erişim anahtarı adını kullanarak depolama bağlantı dizesi şu biçimde sağlamanız gereken [Azure portalı](https://portal.azure.com) için *AccountName* ve *AccountKey* değerleri. Depolama hesapları ve erişim anahtarları hakkında daha fazla bilgi için bkz. [Azure Storage hesapları hakkında](../common/storage-create-storage-account.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json). Bu örnekte bağlantı dizesini tutmak için nasıl statik bir alan bildirebileceğiniz gösterilmektedir:  
+## <a name="setup-an-azure-storage-connection-string"></a>Azure depolama bağlantı dizesi ayarlama
+Azure depolama istemcisi, veri yönetimi hizmetlerine erişmek üzere uç noktaları ve kimlik bilgilerini depolamak için bir depolama bağlantı dizesi kullanır. Bir istemci uygulamasında çalışırken, depolama hesabınızın adını ve *AccountName* Için [Azure portalında](https://portal.azure.com) listelenen depolama hesabı için depolama erişim anahtarını kullanarak depolama bağlantı dizesini aşağıdaki biçimde sağlamanız gerekir ve *Accountkey* değerleri. Depolama hesapları ve erişim anahtarları hakkında daha fazla bilgi için bkz. [Azure depolama hesapları hakkında](../common/storage-create-storage-account.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json). Bu örnekte bağlantı dizesini tutmak için nasıl statik bir alan bildirebileceğiniz gösterilmektedir:  
 
 ```cpp
 // Define the connection-string with your values.
 const utility::string_t storage_connection_string(U("DefaultEndpointsProtocol=https;AccountName=your_storage_account;AccountKey=your_storage_account_key"));
 ```
 
-Yerel Windows bilgisayarınızda uygulamanızı test etmek için Microsoft Azure kullanabilirsiniz [depolama öykünücüsü](../storage-use-emulator.md) ile yüklenen [Azure SDK'sı](https://azure.microsoft.com/downloads/). Depolama öykünücüsü, yerel geliştirme makinenizde Azure'da kullanıma sunulan Blob, kuyruk ve Tablo Hizmetleri taklit eden bir yardımcı programdır. Aşağıdaki örnekte bağlantı dizesini yerel depolama öykünücünüzde tutmak için nasıl statik bir alan bildirebileceğiniz gösterilmektedir:
+Uygulamanızı yerel Windows bilgisayarınızda test etmek için [Azure SDK](https://azure.microsoft.com/downloads/)ile birlikte yüklenen Microsoft Azure [depolama öykünücüsünü](../storage-use-emulator.md) kullanabilirsiniz. Depolama öykünücüsü, yerel geliştirme makinenizde Azure 'da bulunan BLOB, kuyruk ve tablo hizmetlerini taklit eden bir yardımcı programdır. Aşağıdaki örnekte bağlantı dizesini yerel depolama öykünücünüzde tutmak için nasıl statik bir alan bildirebileceğiniz gösterilmektedir:
 
 ```cpp
 // Define the connection-string with Azure Storage Emulator.
 const utility::string_t storage_connection_string(U("UseDevelopmentStorage=true;"));  
 ```
 
-Azure depolama öykünücüsü'nü başlatmak için **Başlat** düğme veya basın **Windows** anahtarı. Yazmaya başlayın **Azure Storage öykünücüsü**seçip **Microsoft Azure depolama öykünücüsü** uygulamalar listesinden.  
+Azure Storage öykünücüsü 'nü başlatmak için **Başlat** düğmesini seçin veya **Windows** tuşuna basın. **Azure Storage öykünücüsü**yazmaya başlayın ve uygulamalar listesinden **Microsoft Azure depolama öykünücüsü** ' yi seçin.  
 
 Aşağıdaki örnekler, depolama bağlantı dizesini almak için bu iki yöntemden birini kullandığınızı varsayar.  
 
-## <a name="retrieve-your-storage-account"></a>Depolama hesabınızı alın
-Kullanabileceğiniz **cloud_storage_account** , depolama hesabı bilgileri temsil eden sınıf. Depolama bağlantı dizesinden depolama hesabı bilgilerini almak için **parse** yöntemini kullanabilirsiniz.  
+## <a name="retrieve-your-storage-account"></a>Depolama hesabınızı alma
+Depolama hesabı bilgilerinizi temsil etmek için **cloud_storage_account** sınıfını kullanabilirsiniz. Depolama bağlantı dizesinden depolama hesabı bilgilerini almak için **parse** yöntemini kullanabilirsiniz.  
 
 ```cpp
 // Retrieve storage account from connection string.
 azure::storage::cloud_storage_account storage_account = azure::storage::cloud_storage_account::parse(storage_connection_string);
 ```
 
-Ardından, bir başvuru almak bir **cloud_blob_client** kapsayıcılar ve bloblar Blob Depolama içinde depolanan temsil eden nesneleri almak sağladığından sınıfı. Aşağıdaki kod oluşturur bir **cloud_blob_client** biz alınan yukarıda depolama hesabı nesnesini kullanarak nesne:  
+Sonra, BLOB depolama alanında depolanan kapsayıcıları ve Blobları temsil eden nesneleri almanızı sağlayan bir **cloud_blob_client** sınıfına bir başvuru alın. Aşağıdaki kod, yukarıda elde ettiğimiz depolama hesabı nesnesini kullanarak bir **cloud_blob_client** nesnesi oluşturur:  
 
 ```cpp
 // Create the blob client.
@@ -109,7 +107,7 @@ catch (const std::exception& e)
 }  
 ```
 
-Varsayılan olarak yeni kapsayıcı özeldir ve Bu kapsayıcıdan BLOB indirmek için depolama erişim anahtarınızı belirtmeniz gerekir. ' % S'dosya (BLOB) kapsayıcı içinde herkes tarafından kullanılabilmesini sağlamak istiyorsanız, kapsayıcı aşağıdaki kodu kullanarak genel olarak ayarlayabilirsiniz:  
+Varsayılan olarak, yeni kapsayıcı özeldir ve bu kapsayıcıdan blob 'ları indirmek için depolama erişim anahtarınızı belirtmeniz gerekir. Kapsayıcı içindeki dosyaları (Blobları) herkese açık hale getirmek istiyorsanız, kapsayıcıyı aşağıdaki kodu kullanarak genel olacak şekilde ayarlayabilirsiniz:  
 
 ```cpp
 // Make the blob container publicly accessible.
@@ -118,12 +116,12 @@ permissions.set_public_access(azure::storage::blob_container_public_access_type:
 container.upload_permissions(permissions);  
 ```
 
-Internet'teki herkes ortak bir kapsayıcıdaki blobları görebilir ancak değiştirdiğinizde ya da yalnızca uygun erişim anahtarınız varsa bunları silin.  
+Internet 'teki herkes blob 'ları ortak bir kapsayıcıda görebilir, ancak yalnızca uygun erişim anahtarınız varsa bunları değiştirebilir veya silebilirsiniz.  
 
 ## <a name="how-to-upload-a-blob-into-a-container"></a>Nasıl yapılır: Bir kapsayıcıya bir blob yükleme
-Azure Blob Depolama destekler, blobları ve sayfa blobları engelleyin. Çoğu durumda kullanılması önerilen blob türü blok blobudur.  
+Azure Blob depolama, blok bloblarını ve sayfa bloblarını destekler. Çoğu durumda kullanılması önerilen blob türü blok blobudur.  
 
-Bir dosyayı bir blok blobuna yüklemek için bir kapsayıcı başvurusu alın ve blok blob başvurusu almak için kullanın. Bir blob başvurusunu aldıktan sonra herhangi bir veri akışı için çağırarak yükleyebilirsiniz **upload_from_stream** yöntemi. Bu işlemle, eğer önceden oluşturulmadıysa bir blob oluşturulacaktır, aksi takdirde üzerine yazılacaktır. Aşağıdaki örnek kapsayıcının önceden oluşturulduğunu varsayarak bir blobun bir kapsayıcıya nasıl yükleneceğini gösterir.  
+Bir dosyayı bir blok blobuna yüklemek için bir kapsayıcı başvurusu alın ve blok blob başvurusu almak için kullanın. Blob başvurunuz olduktan sonra, **upload_from_stream** yöntemini çağırarak herhangi bir veri akışını bu akışa yükleyebilirsiniz. Bu işlemle, eğer önceden oluşturulmadıysa bir blob oluşturulacaktır, aksi takdirde üzerine yazılacaktır. Aşağıdaki örnek kapsayıcının önceden oluşturulduğunu varsayarak bir blobun bir kapsayıcıya nasıl yükleneceğini gösterir.  
 
 ```cpp
 // Retrieve storage account from connection string.
@@ -153,10 +151,10 @@ azure::storage::cloud_block_blob blob3 = container.get_block_blob_reference(U("m
 blob3.upload_text(U("other text"));  
 ```
 
-Alternatif olarak, **upload_from_file** bir dosyayı bir blok blobuna yüklemek için yöntemi.
+Alternatif olarak, bir dosyayı blok blobuna yüklemek için **upload_from_file** yöntemini kullanabilirsiniz.
 
 ## <a name="how-to-list-the-blobs-in-a-container"></a>Nasıl yapılır: Blob’ları bir kapsayıcıda listeleme
-Blob’ları bir kapsayıcıda listelemek için ilk olarak bir kapsayıcı başvurusu edinin. Daha sonra kapsayıcının kullanabilirsiniz **list_blobs** blobları ve/veya dizinleri içine almak için yöntemi. Zengin özellik ve yöntem dönen erişmeye **list_blob_item**, çağırmalısınız **list_blob_item.as_blob** almak için yöntemi bir **cloud_blob** nesnesi veya **list_blob.as_directory** cloud_blob_directory nesne almak için yöntemi. Aşağıdaki kod, almak ve her nesnenin URI çıkış gösterilmiştir **örnek kapsayıcı my** kapsayıcı:
+Blob’ları bir kapsayıcıda listelemek için ilk olarak bir kapsayıcı başvurusu edinin. Daha sonra kapsayıcının **list_blobs** yöntemini kullanarak Blobları ve/veya dizinleri elde edebilirsiniz. Döndürülen bir **list_blob_item**için zengin özellik ve Yöntem kümesine erişmek için, bir **cloud_blob** nesnesi almak üzere **list_blob_item. as _blob** yöntemini veya bir cloud_blob_ almak için **list_blob. as _directory** metodunu çağırmanız gerekir Dizin nesnesi. Aşağıdaki kod, **My-Sample-Container** kapsayıcısındaki her BIR öğenin URI 'sini nasıl alacağınızı ve çıktısını gösterir:
 
 ```cpp
 // Retrieve storage account from connection string.
@@ -183,10 +181,10 @@ for (auto it = container.list_blobs(); it != end_of_results; ++it)
 }
 ```
 
-İşlemlerini listeleyen hakkında ayrıntılı bilgi için bkz: [listesi Azure depolama kaynaklarını C++ dilinde](../storage-c-plus-plus-enumeration.md).
+Listeleme işlemleri hakkında daha fazla bilgi için bkz. [Azure depolama kaynaklarını C++listeleme ](../storage-c-plus-plus-enumeration.md).
 
 ## <a name="how-to-download-blobs"></a>Nasıl yapılır: Blob’ları indirme
-Blobları indirmek için önce bir blob başvurusu alın ve sonra çağrı **download_to_stream** yöntemi. Aşağıdaki örnekte **download_to_stream** blob içeriklerini, ardından yerel bir dosyaya kalıcı bir akış nesnesine aktarmak için yöntemi.  
+Blob 'ları indirmek için önce bir blob başvurusu alın ve ardından **download_to_stream** yöntemini çağırın. Aşağıdaki örnek, blob içeriğini bir Stream nesnesine aktarmak için **download_to_stream** yöntemini kullanır ve böylece yerel bir dosyaya devam edebilirsiniz.  
 
 ```cpp
 // Retrieve storage account from connection string.
@@ -213,8 +211,8 @@ outfile.write((char *)&data[0], buffer.size());
 outfile.close();  
 ```
 
-Alternatif olarak, **download_to_file** bir dosyaya bir blobun içeriklerini indirmek için yöntemi.
-Ayrıca, ayrıca kullanabileceğiniz **download_text** bir metin dizesi olarak bir blobun içeriklerini indirmek için yöntemi.  
+Alternatif olarak, bir Blobun içeriğini bir dosyaya indirmek için **download_to_file** yöntemini kullanabilirsiniz.
+Ayrıca, bir Blobun içeriğini bir metin dizesi olarak indirmek için **download_text** yöntemini de kullanabilirsiniz.  
 
 ```cpp
 // Retrieve storage account from connection string.
@@ -234,7 +232,7 @@ utility::string_t text = text_blob.download_text();
 ```
 
 ## <a name="how-to-delete-blobs"></a>Nasıl yapılır: Blob’ları silme
-Bir blobu silmek için önce bir blob başvurusu alın ve sonra çağrı **delete_blob** yöntemini.  
+Bir blobu silmek için önce bir blob başvurusu alın ve ardından **delete_blob** yöntemini çağırın.  
 
 ```cpp
 // Retrieve storage account from connection string.
@@ -254,12 +252,12 @@ blockBlob.delete_blob();
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Blob storage'nın temellerini öğrendiğinize göre Azure depolama hakkında daha fazla bilgi için bu bağlantıları izleyin.  
+BLOB depolama hakkında temel bilgileri öğrendiğinize göre, Azure depolama hakkında daha fazla bilgi edinmek için bu bağlantıları izleyin.  
 
-* [Kuyruk Depolama'yı C++ kullanma](../storage-c-plus-plus-how-to-use-queues.md)
-* [Tablo depolama'yı C++ kullanma](../../cosmos-db/table-storage-how-to-use-c-plus.md)
-* [Liste Azure depolama kaynaklarını C++ dilinde](../storage-c-plus-plus-enumeration.md)
-* [C++ başvurusu için depolama istemcisi kitaplığı](https://azure.github.io/azure-storage-cpp)
+* [Kuyruk depolamayı kullanmaC++](../storage-c-plus-plus-how-to-use-queues.md)
+* [Öğesinden Tablo Depolamayı kullanmaC++](../../cosmos-db/table-storage-how-to-use-c-plus.md)
+* [Azure depolama kaynaklarını listelemeC++](../storage-c-plus-plus-enumeration.md)
+* [Başvuru için C++ depolama istemci kitaplığı](https://azure.github.io/azure-storage-cpp)
 * [Azure Depolama Belgeleri](https://azure.microsoft.com/documentation/services/storage/)
 * [AzCopy komut satırı yardımcı programı ile veri aktarımı](../storage-use-azcopy.md)
 

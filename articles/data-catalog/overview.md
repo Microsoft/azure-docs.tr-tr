@@ -1,21 +1,21 @@
 ---
-title: Azure veri Kataloğu'na giriş
+title: Azure Veri Kataloğu 'na giriş
 description: Bu makalede, Microsoft Azure Veri Kataloğu özelliklerinin ve giderdiği sorunların yanı sıra bu hizmete genel bir bakış sunulmaktadır. Veri Kataloğu, herhangi bir kullanıcının veri kaynaklarına kaydolmasına; bunları bulmasına, anlamasına ve tüketmesine imkan sağlar.
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: overview
-ms.date: 04/05/2019
-ms.openlocfilehash: 87c86ddeaa24693d393d250e1dc699b9a15ea84b
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.date: 08/01/2019
+ms.openlocfilehash: 9b7a5d5ca6cbad897839c8e28c9e3efd1eeabaf0
+ms.sourcegitcommit: c662440cf854139b72c998f854a0b9adcd7158bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "60861252"
+ms.lasthandoff: 08/02/2019
+ms.locfileid: "68736990"
 ---
 # <a name="what-is-azure-data-catalog"></a>Azure Veri Kataloğu nedir?
 
-Azure veri Kataloğu, bir tam olarak yönetilen bir bulut hizmetidir. Veri bulma olanağı bunlar gerekir ve veri kaynaklarını anlama kaynakları bulun. Bunun yanı sıra, Veri Kataloğu kuruluşların mevcut yatırımlarından daha fazla değer elde etmesine yardımcı olur.
+Azure Veri Kataloğu, tam olarak yönetilen bir bulut hizmetidir. Kullanıcıların gereksinim duydukları veri kaynaklarını bulmasına ve bulduğu veri kaynaklarını anlamasına imkan sağlar. Bunun yanı sıra, Veri Kataloğu kuruluşların mevcut yatırımlarından daha fazla değer elde etmesine yardımcı olur.
 
 Veri Kataloğu sayesinde, tüm kullanıcılar (analist, veri bilim insanı veya geliştirici) veri kaynaklarını bulabilir, anlayabilir ve tüketebilir. Veri Kataloğu, meta veriler ve ek açıklamalar için bir kitle kaynağı modelini içerir. Bir kuruluştaki tüm kullanıcıların bilgileriyle katkıda bulunması ve veri odaklı bir topluluk ve kültür oluşturması için tek, merkezi bir yerdir.
 
@@ -23,10 +23,10 @@ Veri Kataloğu sayesinde, tüm kullanıcılar (analist, veri bilim insanı veya 
 
 Geleneksel olarak, kurumsal veri kaynaklarının bulunması grupsal bilgilere dayanan organik bir süreç olmuştur. Bu yaklaşım, bilgi varlıklarından en yüksek değeri elde etmek isteyen şirketler için çeşitli zorluklar teşkil etmektedir:
 
-* Kullanıcılar, başka bir işlemin parçası olarak into contact with geldikleri sürece bir veri kaynağının mevcut etmeyebilirsiniz. Veri kaynaklarının kayıtlı olduğu merkezi bir konum yoktur.
+* Kullanıcılar, başka bir işlemin parçası olarak sizinle iletişime gelmedikleri sürece bir veri kaynağının mevcut olduğunu bilmez. Veri kaynaklarının kayıtlı olduğu merkezi bir konum yoktur.
 * Kullanıcılar bir veri kaynağının konumunu bilmediği sürece bir istemci uygulaması kullanarak verilere bağlanamaz. Veri tüketimi deneyimleri, kullanıcıların bağlantı dizesini veya yolu bilmesini gerektirir.
 * Kullanıcılar bir veri kaynağına ait belgelerin yerini bilmediği sürece bu verilerin hangi amaca yönelik olduğunu anlayamaz. Veri kaynakları ve belgeler çeşitli yerlerde bulunabilir ve çeşitli deneyimler aracılığıyla tüketilebilir.
-* Kullanıcıların bir bilgi varlığıyla ilgili soruları varsa, verilerden sorumlu olan uzmanı veya ekibi bulması ve bunlarla çevrimdışı etkileşim kurması gerekir. Veri ve Perspektifler, kullanımda olan uzmanlar arasında açık bir bağlantı yoktur.
+* Kullanıcıların bir bilgi varlığıyla ilgili soruları varsa, verilerden sorumlu olan uzmanı veya ekibi bulması ve bunlarla çevrimdışı etkileşim kurması gerekir. Veriler ile kullanımı üzerinde perspektifi olan uzmanlar arasında açık bir bağlantı yoktur.
 * Kullanıcılar veri kaynağına erişim isteme işlemini anlamadığı sürece, veri kaynağının ve belgelerin bulunması bile verilere erişime yardımcı olmaz.
 
 ## <a name="discovery-challenges-for-data-producers"></a>Veri üreticileri için bulma zorlukları
@@ -34,7 +34,7 @@ Geleneksel olarak, kurumsal veri kaynaklarının bulunması grupsal bilgilere da
 Veri tüketicileri daha önce sözü geçen sorunlarla karşılaşırken, bilgi varlıkları oluşturmaktan ve bunların bakımını yapmaktan sorumlu kullanıcılar da kendilerine özgü zorluklarla yüz yüze gelmektedir:
 
 * Veri kaynaklarına açıklayıcı meta verilerle ek açıklama ekleme, genellikle sonuç vermeyen bir işlemdir. İstemci uygulamaları genellikle veri kaynağında depolanan açıklamaları yok sayar.
-* Veri kaynakları için belge oluşturma genellikle sonuç vermeyen bir işlemdir. Belgeleri veri kaynaklarıyla eşitlenmiş kalmasını devam eden bir sorumluluğundadır. Kullanıcılar eski olduğu eski olduğunu belgelere güvenmez.
+* Veri kaynakları için belge oluşturma genellikle sonuç vermeyen bir işlemdir. Belgelerin veri kaynaklarıyla eşitlenmiş şekilde tutulması sürekli bir sorumluluktur. Kullanıcılar, güncel olmadığı algılanan belgelerde güven altına alabilir.
 * Veri kaynaklarına yönelik belgelerin oluşturulması ve bakımının yapılması karmaşık ve zaman alan işlemlerdir. Bu belgelerin, veri kaynağını kullanan herkesin erişimine hazır hale getirilmesi ise daha da zordur.
 * Veri kaynaklarına erişimin kısıtlanması ve veri tüketicilerinin nasıl erişim isteneceğini bilmesinin sağlanması sürekli karşılaşılan bir zorluktur.
 
@@ -46,7 +46,7 @@ Veri Kataloğu, bu sorunları gidermek ve kuruluşların mevcut bilgi varlıklar
 
 Veri Kataloğu, veri kaynağının kaydedilebileceği bulut tabanlı bir hizmet sağlar. Veriler mevcut konumunda kalırken, bunların meta verileri ve veri kaynağı konumuna yönelik bir başvuru Veri Kataloğu'na eklenir. Bu meta veriler ayrıca her bir veri kaynağının arama ile kolayca bulunabilmesini ve bunları bulan kullanıcılar tarafından anlaşılabilmesini sağlamak üzere dizine alınır.
 
-Bir veri kaynağı kaydedildikten sonra meta verilerini ardından zenginleştirilebilir. Meta veriler, kayıtlı kullanıcı veya kuruluştaki diğer kullanıcılar tarafından eklenebilir. Herhangi bir kullanıcı, açıklama, etiket veya veri kaynağı erişimi istemeye yönelik belge ve işlemler gibi diğer meta verileri sağlayarak bir veri kaynağına açıklama ekleyebilir. Bu tanımlayıcı meta veriler, veri kaynağından kaydedilen yapısal meta verilere (sütun adları ve veri türleri gibi) ek niteliğindedir.
+Bir veri kaynağı kaydedildikten sonra, meta verileri daha sonra zenginleştirilebilir. Meta veriler, kendisini kaydeden Kullanıcı veya kuruluştaki diğer kullanıcılar tarafından eklenebilir. Herhangi bir kullanıcı, açıklama, etiket veya veri kaynağı erişimi istemeye yönelik belge ve işlemler gibi diğer meta verileri sağlayarak bir veri kaynağına açıklama ekleyebilir. Bu tanımlayıcı meta veriler, veri kaynağından kaydedilen yapısal meta verilere (sütun adları ve veri türleri gibi) ek niteliğindedir.
 
 Veri kaynaklarını ve bunların kullanımını bulup anlamak, kaynakların kaydedilmesindeki birincil amaçtır. Kurumsal kullanıcıların iş zekası, uygulama geliştirme, veri bilimi veya doğru verilerin gerektiği başka herhangi bir görevde verilere ihtiyacı olabilir. Bu kullanıcılar, ihtiyaçlarıyla eşleşen verileri hızla bulmak, verileri anlayarak bunların amaca uygunluğunu değerlendirmek ve veri kaynağını kendi tercih ettikleri araçta açarak verileri tüketmek için Veri Kataloğu’nun bulma deneyimini kullanabilir. 
 
@@ -70,7 +70,7 @@ Veri Kataloğu'nun özellikleri hakkında daha fazla bilgi edinmek için bkz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Veri Kataloğu ile çalışmaya başlamak için:
+Veri Kataloğu 'Nu kullanmaya başlamak için:
 
-* [Hızlı Başlangıç: Bir Azure veri Kataloğu oluşturma](data-catalog-get-started.md)
-* [Azure veri kataloğunuz açın](https://www.azuredatacatalog.com)
+* [Hızlı Başlangıç: Azure Veri Kataloğu oluşturma](data-catalog-get-started.md)
+* [Azure veri kataloğunuzu açın](https://www.azuredatacatalog.com)

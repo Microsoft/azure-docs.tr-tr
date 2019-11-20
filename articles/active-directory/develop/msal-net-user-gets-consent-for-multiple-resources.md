@@ -1,9 +1,10 @@
 ---
-title: Çeşitli kaynaklar (Microsoft kimlik doğrulama kitaplığı .NET için) için onay alın | Azure
-description: Bir kullanıcı için Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanarak çeşitli kaynaklar öncesi onayı nasıl edinebildiğini öğrenin.
+title: Birkaç kaynak için izin alma (.NET için Microsoft kimlik doğrulama kitaplığı)
+titleSuffix: Microsoft identity platform
+description: Bir kullanıcının .NET için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL.NET) kullanarak birkaç kaynak için ön onay alma hakkında bilgi edinin.
 services: active-directory
 documentationcenter: dev-center-name
-author: rwike77
+author: TylerMSFT
 manager: CelesteDG
 editor: ''
 ms.service: active-directory
@@ -13,29 +14,29 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 04/30/2019
-ms.author: ryanwi
+ms.author: twhitney
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e8bd9a86d5ec0d39a7f1c26adac52f41e6420283
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c3a3d50e94f76341dc349eda997d6e25ca96dec0
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66121981"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72802695"
 ---
-# <a name="user-gets-consent-for-several-resources-using-msalnet"></a>Kullanıcı onayı MSAL.NET kullanarak çeşitli kaynaklar için alır.
-Microsoft kimlik platformu uç noktası için çeşitli kaynaklar tek seferde bir belirteç almak üzere izin vermez. Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanırken, kapsamları parametreyi alma belirteci yöntemi yalnızca tek bir kaynak için kapsamları içermelidir. Ancak, ön maliyet bazı kaynakları kullanarak ek kapsamlarla belirterek önceden onaylayabileceğini `.WithExtraScopeToConsent` Oluşturucu yöntemi.
+# <a name="user-gets-consent-for-several-resources-using-msalnet"></a>Kullanıcı MSAL.NET kullanarak birkaç kaynak için onay alır
+Microsoft Identity platform uç noktası aynı anda birkaç kaynak için bir belirteç almanıza izin vermez. .NET için Microsoft kimlik doğrulama kitaplığı (MSAL.NET) kullanılırken, belirteç alma yöntemindeki kapsamlar parametresi yalnızca tek bir kaynak için kapsam içermelidir. Ancak, `.WithExtraScopeToConsent` Builder metodunu kullanarak ek kapsamlar belirterek, daha önce birkaç kaynağa ön onay sağlayabilirsiniz.
 
 > [!NOTE]
-> Microsoft kimlik platformu, ancak Azure AD B2C için çeşitli kaynakları Works izninizi almadan. Azure AD B2C kullanıcı onayı yalnızca yönetici onayı destekler.
+> Birkaç kaynağa onay alınması Microsoft Identity platform için geçerlidir, ancak Azure AD B2C için değildir. Azure AD B2C, Kullanıcı onayını değil yalnızca yönetici onayını destekler.
 
-Örneğin, sahip iki kaynaklarınız varsa 2 her kapsamları:
+Örneğin, her biri 2 kapsam içeren iki kaynağınız varsa:
 
-- https:\//mytenant.onmicrosoft.com/customerapi (2 kapsamlı `customer.read` ve `customer.write`)
-- https:\//mytenant.onmicrosoft.com/vendorapi (2 kapsamlı `vendor.read` ve `vendor.write`)
+- https:\//mytenant.onmicrosoft.com/customerapi (2 kapsam `customer.read` ve `customer.write`)
+- https:\//mytenant.onmicrosoft.com/vendorapi (2 kapsam `vendor.read` ve `vendor.write`)
 
-Kullanmanız gereken `.WithExtraScopeToConsent` olan değiştirici *extraScopesToConsent* aşağıdaki örnekte gösterildiği gibi parametre:
+Aşağıdaki örnekte gösterildiği gibi, *Extrascopestoonay* parametresine sahip `.WithExtraScopeToConsent` değiştiricisini kullanmanız gerekir:
 
 ```csharp
 string[] scopesForCustomerApi = new string[]
@@ -56,7 +57,7 @@ var result = await app.AcquireTokenInteractive(scopesForCustomerApi)
                      .ExecuteAsync();
 ```
 
-Bu ilk web API'si için bir erişim belirteci alırsınız. Ardından, ikinci bir web API'sine erişim gerektiğinde belirteç önbellekten belirteç sessizce elde edebilirsiniz:
+Bu, ilk Web API 'SI için bir erişim belirteci alır. Daha sonra, ikinci Web API 'sine erişmeniz gerektiğinde belirteci belirteç önbelleğinden sessizce edinebilirsiniz:
 
 ```csharp
 AcquireTokenSilent(scopesForVendorApi, accounts.FirstOrDefault()).ExecuteAsync();

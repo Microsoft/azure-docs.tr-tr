@@ -1,57 +1,56 @@
 ---
-title: Azure Blob dizin oluşturucu için tam metin arama - Azure Search dizini belgelerden dizini BLOB'ları içeren birden çok arama
-description: Azure Search Blob Dizin Oluşturucu kullanarak metin içeriği için Azure BLOB'ları gezinin. Her blob bir veya daha fazla Azure Search dizini belge içerebilir.
-ms.date: 05/02/2019
+title: Birden çok belge içeren dizin blob 'ları
+titleSuffix: Azure Cognitive Search
+description: Her Blobun bir veya daha fazla arama dizini belgesi sağlayabildiği Azure Congitive arama blobu Dizin oluşturucuyu kullanarak, Azure bloblarını metin içeriğine göre gezin.
+manager: nitinme
 author: arv100kri
-manager: briansmi
 ms.author: arjagann
-services: search
-ms.service: search
 ms.devlang: rest-api
+ms.service: cognitive-search
 ms.topic: conceptual
-ms.custom: seofeb2018
-ms.openlocfilehash: 628ced069c9d32c6e874c2e36a1e3b752c476003
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/04/2019
+ms.openlocfilehash: 1840bda0ecc9462a5d8f796b616d728d0bb412f7
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65024658"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74112274"
 ---
-# <a name="indexing-blobs-producing-multiple-search-documents"></a>Birden çok arama belge üretme bloblarını dizine ekleme
-Varsayılan olarak, bir blob dizin oluşturucu, bir blobun içeriklerini tek arama belgesi olarak değerlendirir. Belirli **parsingMode** değerleri tek tek bir blob birden çok arama belgeleri neden olduğu senaryoları destekler. Farklı türde **parsingMode** izin veren bir blobdan bir arama belge birden çok bir ayıklamak için dizin oluşturucu şunlardır:
+# <a name="indexing-blobs-to-produce-multiple-search-documents"></a>Birden çok arama belgesi üretmek için Blobları dizinleme
+Varsayılan olarak, bir blob Dizin Oluşturucu bir Blobun içeriğini tek bir arama belgesi olarak değerlendirir. Belirli **Parsingmode** değerleri, tek bir Blobun birden çok arama belgesi ile sonuçlanabileceğinden senaryolar destekler. Bir dizin oluşturucunun bir Blobun birden fazla arama belgesi ayıklamasına izin veren farklı türde **Parsingmode** 'lar şunlardır:
 + `delimitedText`
 + `jsonArray`
 + `jsonLines`
 
 ## <a name="one-to-many-document-key"></a>Bire çok belge anahtarı
-Azure Search dizini içinde gösterilir her belge benzersiz bir belge anahtar tarafından tanımlanır. 
+Bir Azure Bilişsel Arama dizininde görüntülenen her belge, bir belge anahtarı tarafından benzersiz şekilde tanımlanır. 
 
-Ayrıştırma modu yok belirtildiğinde ve hiçbir açık temel alan Azure Search dizini için otomatik olarak eşlemesi varsa [eşler](search-indexer-field-mappings.md) `metadata_storage_path` anahtar özelliği. Bu eşleme, her blobun benzersiz arama belgesi olarak analizinde görünmesini sağlar.
+Hiçbir ayrıştırma modu belirtilmediğinde ve Azure Bilişsel Arama dizindeki anahtar alanı için açık eşleme yoksa, `metadata_storage_path` özelliğini anahtar olarak otomatik olarak [eşler](search-indexer-field-mappings.md) . Bu eşleme, her Blobun ayrı bir arama belgesi olarak görünmesini sağlar.
 
-Yukarıda listelenen ayrıştırma modun herhangi birinde kullanırken, bir blob yalnızca blob meta verilerini uygun olmayan temel bir belge anahtarını yapma "many" arama belgeleri eşlenir. Bu kısıtlamayı çözmek için Azure Search bir blobun ayıklanan tek tek her varlık için bir "bir-çok" belge anahtarını oluşturma yeteneğine sahiptir. Bu özellik adlı `AzureSearch_DocumentKey` ve blob ayıklanan tek tek her varlık eklenir. Bu özelliğin değeri her bir varlık için benzersiz olması garanti _bloblar arasında_ ve varlıklar ayrı arama belgeleri olarak görüntülenir.
+Yukarıda listelenen ayrıştırma modlarından herhangi birini kullanırken, bir blob "birçok" arama belgesiyle eşlenir ve bir belge anahtarı yalnızca blob meta verilerini uygun olmayan şekilde temel alır. Azure Bilişsel Arama, bu kısıtlamayı aşmak için bir bloba ayıklanan her bir varlık için "bire çok" belge anahtarı oluşturma yeteneğine sahiptir. Bu özellik `AzureSearch_DocumentKey` olarak adlandırılır ve bloba ayıklanan her bir varlığa eklenir. Bu özelliğin değeri, _Bloblar genelinde_ her bir varlık için benzersiz olarak garanti edilir ve varlıklar ayrı arama belgeleri olarak görünür.
 
-Anahtar dizini alan için açık alan eşlemeleri belirtilmediğinde, varsayılan olarak `AzureSearch_DocumentKey` kullanarak, eşlenmiş `base64Encode` alan eşlemesi işlevi.
+Varsayılan olarak, anahtar dizin alanı için hiçbir açık alan eşlemesi belirtilmediğinde `AzureSearch_DocumentKey`, `base64Encode` alan eşleme işlevi kullanılarak onunla eşleştirilir.
 
 ## <a name="example"></a>Örnek
-Bir dizin tanımı şu alanlara sahip olduğunuz varsayılmaktadır:
+Aşağıdaki alanlarla bir dizin tanımı olduğunu varsayalım:
 + `id`
 + `temperature`
 + `pressure`
 + `timestamp`
 
-Ve aşağıdaki yapıya sahip BLOB'lar, blob kapsayıcı vardır:
+Blob kabınızda aşağıdaki yapıyla blob 'lar vardır:
 
-_Blob1.json_
+_Blob1. JSON_
 
     { "temperature": 100, "pressure": 100, "timestamp": "2019-02-13T00:00:00Z" }
     { "temperature" : 33, "pressure" : 30, "timestamp": "2019-02-14T00:00:00Z" }
 
-_Blob2.json_
+_Blob2. JSON_
 
     { "temperature": 1, "pressure": 1, "timestamp": "2018-01-12T00:00:00Z" }
     { "temperature" : 120, "pressure" : 3, "timestamp": "2013-05-11T00:00:00Z" }
 
-Bir dizin oluşturucu oluşturduğunuzda ve **parsingMode** için `jsonLines` - herhangi bir açık eşlemeleri temel alan aşağıdaki eşleme için örtük olarak uygulanacak alan belirtmeden
+Bir Dizin Oluşturucu oluşturup, anahtar alanı için herhangi bir açık alan eşlemelerini belirtmeden `jsonLines` **-olarak ayarladığınızda** , aşağıdaki eşleme örtük olarak uygulanır
     
     {
         "sourceFieldName" : "AzureSearch_DocumentKey",
@@ -59,51 +58,49 @@ Bir dizin oluşturucu oluşturduğunuzda ve **parsingMode** için `jsonLines` - 
         "mappingFunction": { "name" : "base64Encode" }
     }
 
-Bu kurulum (base64 kodlu kimliği uzatmamak için kısaltılmış) aşağıdaki bilgileri içeren bir Azure Search dizini neden olur
+Bu kurulum, aşağıdaki bilgileri içeren Azure Bilişsel Arama dizinine neden olur (breçekimi için Base64 kodlamalı kimlik kısaltıldı)
 
 | id | sıcaklık | basınç | timestamp |
 |----|-------------|----------|-----------|
-| aHR0... YjEuanNvbjsx | 100 | 100 | 2019-02-13T00:00:00Z |
-| aHR0... YjEuanNvbjsy | 33 | 30 | 2019-02-14T00:00:00Z |
-| aHR0... YjIuanNvbjsx | 1 | 1 | 2018-01-12T00:00:00Z |
-| aHR0... YjIuanNvbjsy | 120 | 3 | 2013-05-11T00:00:00Z |
+| aHR0 ... Yıljeuannvbjsx | 100 | 100 | 2019-02-13T00:00:00Z |
+| aHR0 ... Yıljeuannvbjsy | 33 | 30 | 2019-02-14T00:00:00Z |
+| aHR0 ... Yıljluayla Annvbjsx | 1 | 1 | 2018-01-12T00:00:00Z |
+| aHR0 ... Yıljluayla Annvbjsy | 120 | 3 | 2013-05-11T00:00:00Z |
 
-## <a name="custom-field-mapping-for-index-key-field"></a>Özel alan eşlemesi için dizin anahtar alanı
+## <a name="custom-field-mapping-for-index-key-field"></a>Dizin anahtarı alanı için özel alan eşleme
 
-Önceki örnek olarak aynı dizin tanımını varsayıldığında, BLOB'ları aşağıdaki yapıya sahip blob kapsayıcınızın olduğunu düşünelim:
+Önceki örnekle aynı dizin tanımının olduğunu varsayarsak, blob kapsayıcınızda aşağıdaki yapıya sahip Bloblar olduğunu varsayalım:
 
-_Blob1.json_
+_Blob1. JSON_
 
     recordid, temperature, pressure, timestamp
     1, 100, 100,"2019-02-13T00:00:00Z" 
     2, 33, 30,"2019-02-14T00:00:00Z" 
 
-_Blob2.json_
+_Blob2. JSON_
 
     recordid, temperature, pressure, timestamp
     1, 1, 1,"2018-01-12T00:00:00Z" 
     2, 120, 3,"2013-05-11T00:00:00Z" 
 
-Bir dizin oluşturucu ile oluşturduğunuzda `delimitedText` **parsingMode**, anahtar alanının alan eşlemesi işlevine aşağıdaki şekilde ayarlamak için doğal ilerlediğini düşünebilirsiniz:
+`delimitedText` **Parsingmode**ile bir Dizin Oluşturucu oluşturduğunuzda, anahtar alana aşağıdaki şekilde bir alan eşleme işlevi ayarlamak doğal olabilir:
 
     {
         "sourceFieldName" : "recordid",
         "targetFieldName": "id"
     }
 
-Ancak, bu eşlemeyi olacak _değil_ neden 4 belge dizinde görünmeye çünkü `recordid` alan benzersiz değil _bloblar arasında_. Yapmanızı öneririz bu nedenle, uygulamayı örtük alan eşlemeyi kullanım `AzureSearch_DocumentKey` "bir-çok" ayrıştırma modları için anahtar dizini alanına özelliği.
+Ancak, `recordid` alanı _bloblarda_benzersiz olmadığından, bu eşleme dizinde gösterilen 4 belge ile _sonuçlanmaz_ . Bu nedenle, `AzureSearch_DocumentKey` özelliğinden uygulanan örtük alan eşlemesini "bire çok" ayrıştırma modları için anahtar Dizin alanına kullanmanızı öneririz.
 
-Bir açık alan eşlemesini ayarlamak istiyorsanız, emin _sourceField_ tek tek her varlık için farklıdır **tüm BLOB'ları arasında**.
+Açık alan eşlemesi ayarlamak istiyorsanız, _SourceField_ 'ın **Tüm Bloblar genelinde**her bir varlık için benzersiz olduğundan emin olun.
 
 > [!NOTE]
-> Tarafından kullanılan yaklaşım `AzureSearch_DocumentKey` sağlama ayıklanan varlık başına benzersiz olup değişikliğe tabidir ve bu nedenle, uygulamanızın ihtiyaçları için değerinin güvenmemelisiniz.
+> Ayıklanan varlık başına benzersizlik sağlamak `AzureSearch_DocumentKey` tarafından kullanılan yaklaşım değişikliğe tabidir ve bu nedenle uygulamanızın gereksinimlerine göre bu değere dayanmamalıdır.
 
-## <a name="see-also"></a>Ayrıca bkz.
+## <a name="next-steps"></a>Sonraki adımlar
 
-+ [Azure Search'te dizin oluşturucular](search-indexer-overview.md)
-+ [Azure arama ile Azure Blob Depolama dizini oluşturma](search-howto-index-json-blobs.md)
-+ [Azure Search blob dizin oluşturucu ile CSV bloblarını dizine ekleme](search-howto-index-csv-blobs.md)
-+ [Azure Search blob dizin oluşturucu ile JSON bloblarını dizine ekleme](search-howto-index-json-blobs.md)
+Blob dizin oluşturma işleminin temel yapısı ve iş akışı hakkında bilgi sahibi değilseniz, önce Azure Bilişsel Arama Azure [BLOB Storage 'ı kullanarak dizin oluşturmayı](search-howto-index-json-blobs.md) gözden geçirmeniz gerekir. Farklı blob içerik türleri için ayrıştırma modları hakkında daha fazla bilgi için aşağıdaki makaleleri gözden geçirin.
 
-## <a name="NextSteps"></a>Sonraki adımlar
-* Azure arama hakkında daha fazla bilgi edinmek için [arama hizmeti sayfasını](https://azure.microsoft.com/services/search/).
+> [!div class="nextstepaction"]
+> [JSON Bloblarını dizine](search-howto-index-json-blobs.md) alma
+> [CSV Blobları](search-howto-index-csv-blobs.md)

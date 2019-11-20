@@ -2,50 +2,79 @@
 author: erhopf
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 2/20/2019
+ms.date: 08/21/2019
 ms.author: erhopf
-ms.openlocfilehash: 27fcf32a9a268488da318567d3edc55d23bd8967
-ms.sourcegitcommit: cababb51721f6ab6b61dda6d18345514f074fb2e
+ms.openlocfilehash: 942636a6ff6dcfe74a04a66d67a4490224b4538e
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66482381"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72391812"
 ---
-1. Visual Studio 2019 başlatın.
+Masaüstü geliştirme için C++ bir Visual Studio projesi oluşturmak üzere Visual Studio geliştirme seçeneklerini ayarlamanız, projeyi oluşturmanız, hedef mimariyi seçmeniz ve konuşma SDK 'sını yüklemeniz gerekir. 
 
-1. **C++ ile masaüstü geliştirme** iş yükünün kullanılabilir olduğundan emin olun. Visual Studio yükleyicisini açmak için Visual Studio menü çubuğundan **Araçlar** > **Araçları ve Özellikleri Al**'ı seçin. Bu iş yükü zaten etkinse sonraki adıma atlayın.
+### <a name="set-up-visual-studio-development-options"></a>Visual Studio geliştirme seçeneklerini ayarlama
 
-    ![Visual Studio İş Yükleri’nin ekran görüntüsü](../articles/cognitive-services/Speech-Service/media/sdk/vs-enable-cpp-workload.png)
+Başlamak için, masaüstü geliştirme için C++ Visual Studio 'da doğru şekilde ayarlandığından emin olun:
 
-    Aksi takdirde, **C++ ile masaüstü geliştirme**’nin yanındaki kutuyu işaretleyin.
+1. **Başlangıç** penceresini göstermek Için Visual Studio 2019 ' i açın.
 
-1. **NuGet paket yöneticisi** bileşeninin kullanılabilir olduğundan emin olun. Visual Studio yükleyicisi iletişim kutusunun **Bağımsız bileşenler** sekmesine geçin ve etkin değilse **NuGet paket yöneticisi**’ni seçin.
+   ![Başlangıç penceresi-Visual Studio](../articles/cognitive-services/Speech-Service/media/sdk/vs-start-window.png) 
 
-      ![Visual Studio Bağımsız bileşenler sekmesinin ekran görüntüsü](../articles/cognitive-services/Speech-Service/media/sdk/vs-enable-nuget-package-manager.png)
+1. Visual Studio IDE 'ye gitmek için **kod olmadan devam et** ' i seçin.
 
-1. C++ iş yükünü veya NuGet’i etkinleştirmeniz gerekiyorsa, **Değiştir**’i seçin (iletişim kutusunun sağ alt köşesinde). Yeni özelliklerin yüklenmesi bir dakika sürer. Her iki özellik de zaten etkinse, iletişim kutusunu kapatmanız yeterlidir.
+1. Visual Studio menü çubuğunda **araçlar** >  ' i seçerek Visual Studio yükleyicisi**açın ve** **değiştirme** iletişim kutusunu görüntüleyin.
 
-1. Yeni bir Visual C++ Windows Masaüstü Windows Konsol Uygulaması oluşturun. İlk olarak, menüden **Dosya** > **Yeni** > **Proje** seçeneğini belirleyin. **Yeni Proje** iletişim kutusunda, sol bölmeden **Yüklü** > **Visual C++**  > **Windows Masaüstü**'nü genişletin. Ardından **Windows Konsol Uygulaması**’nı seçin. Proje adı olarak *helloworld* girin.
+   ![İş yükleri sekmesi, değiştirme iletişim kutusu, Visual Studio Yükleyicisi](../articles/cognitive-services/Speech-Service/media/sdk/vs-enable-cpp-workload.png)
 
-    ![Yeni Proje iletişim kutusunun ekran görüntüsü](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-01-new-console-app.png)
+1. **İş yükleri** sekmesinde, **Windows**altında iş yüküyle **Masaüstü C++ geliştirmeyi** bulun. Bu iş yükünün yanındaki onay kutusu zaten seçili değilse, bunu seçin.
 
-1. 64 bit Windows işletim sistemini kullanıyorsanız, Visual Studio araç çubuğundaki açılan menüyü kullanarak yapı platformunuzu `x64` işletim sistemine geçirebilirsiniz. (Windows’un 64 bit sürümleri 32 bit uygulamaları çalıştırabildiğinden bu bir gereksinim değildir.)
+1. **Ayrı bileşenler** sekmesinde, **NuGet Paket Yöneticisi** onay kutusunu bulun. Onay kutusu zaten seçili değilse, bunu seçin.
 
-    ![x64 seçeneğinin vurgulandığı Visual Studio araç çubuğunun ekran görüntüsü](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-02-switch-to-x64.png)
+1. Köşede **Kapat** veya **Değiştir**etiketli düğmeyi seçin. (Düğme adı, yükleme için herhangi bir özellik seçtiğinizden bağımsız olarak değişir.) **Değiştir**' i seçerseniz yükleme başlar ve bu işlem biraz zaman alabilir.
 
-1. Çözüm Gezgini'nde çözüme sağ tıklayın ve **Çözüm için NuGet Paketlerini Yönet**'i seçin.
+1. Visual Studio Yükleyicisi kapatın.
 
-    ![Çözüm Gezgini'nin, Çözüm için NuGet Paketlerini Yönet seçeneğinin vurgulandığı ekran görüntüsü](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-03-manage-nuget-packages.png)
+### <a name="create-the-project-and-select-the-target-architecture"></a>Projeyi oluşturma ve hedef mimarisini seçme
 
-1. Sağ üst köşede, **Paket Kaynağı** alanında **nuget.org**'u seçin. `Microsoft.CognitiveServices.Speech` paketini arayın ve **helloworld** projesine yükleyin.
+Sonra, projenizi oluşturun:
 
-    ![Çözüm için Paketleri Yönet iletişim kutusunun ekran görüntüsü](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-04-nuget-install-1.0.0.png)
+1. Visual Studio menü çubuğunda **dosya** > **Yeni** > **Proje** ' yi seçerek **Yeni proje oluştur** penceresini görüntüleyin.
 
-    > [!NOTE]
-    > Bilişsel Hizmetler Konuşma SDK'sının geçerli sürümü: `1.5.0`.
+   ![Yeni proje oluşturma, C++ -Visual Studio](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-01-new-console-app.png)
 
-1. NuGet paketinin yükleme işlemini başlatmak için görüntülenen lisansı kabul edin.
+1. **Konsol uygulaması**bulun ve seçin. Bu proje türünün ( C++ C# veya Visual Basic aksine) sürümünü seçtiğinizden emin olun.
 
-    ![Lisans Kabulü iletişim kutusunun ekran görüntüsü](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-05-nuget-license.png)
+1. **Yeni projeyi Yapılandır** ekranınızı göstermek için **İleri ' yi** seçin.
 
-Paket yüklendikten sonra Paket Yöneticisi konsolunda bir onay görünür.
+   ![Yeni projenizi yapılandırın, C++ -Visual Studio](../articles/cognitive-services/Speech-Service/media/sdk/vs-enable-cpp-configure-your-new-project.png)
+
+1. **Proje adı**' nda `helloworld` girin.
+
+1. **Konum**' a gidin ve projenizi kaydetmek için klasörü seçin veya oluşturun.
+
+Şimdi hedef platform mimarinizi seçin. Visual Studio araç çubuğunda, **çözüm platformları** açılan kutusunu bulun. (Bunu görmüyorsanız, **çözüm platformlarını**içeren araç çubuğunu görüntülemek için  > **araç çubuklarını** **görüntüle** > **standardı** ' nı seçin.) 64 bit Windows çalıştırıyorsanız, açılan kutuda **x64** ' ü seçin. 64 bit Windows ayrıca 32 bit uygulamalar çalıştırabilir, bu sayede isterseniz **x86** seçeneğini belirleyebilirsiniz.
+
+### <a name="install-the-speech-sdk"></a>Konuşma SDK 'sını yükler
+
+Son olarak, [konuşma SDK 'Sı NuGet paketini](https://aka.ms/csspeech/nuget)yükleyip projenizde konuşma SDK 'sına başvurun:
+
+1. **Çözüm Gezgini**, çözümünüze sağ tıklayın ve **çözüm Için NuGet Paketlerini Yönet** ' i seçerek **NuGet-çözüm** penceresine gidin.
+
+1. **Gözat**’ı seçin.
+
+   ![NuGet-çözüm sekmesi, Visual Studio](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-03-manage-nuget-packages.png)
+
+1. **Paket kaynağı**' nda **NuGet.org**' yi seçin.
+
+1. **Arama** kutusuna `Microsoft.CognitiveServices.Speech` girin ve sonra arama sonuçlarında göründükten sonra bu paketi seçin.
+
+   ![Microsoft. Biliveservices. Speech C++ paketi yüklemesi-Visual Studio](../articles/cognitive-services/Speech-Service/media/sdk/qs-cpp-windows-04-nuget-install-1.0.0.png)
+
+1. Arama sonuçlarının yanındaki paket durumu bölmesinde **HelloWorld** projenizi seçin.
+
+1. **Yükle**’yi seçin.
+
+1. **Değişiklikleri Önizle** Iletişim kutusunda **Tamam**' ı seçin.
+
+1. **Lisans kabulü** iletişim kutusunda, lisansı görüntüleyin ve **kabul ediyorum**' u seçin. Paket yüklemesi başlar ve yükleme tamamlandığında, **Çıkış** bölmesinde şu metne benzer bir ileti görüntülenir: `Successfully installed 'Microsoft.CognitiveServices.Speech 1.7.0' to helloworld`. 

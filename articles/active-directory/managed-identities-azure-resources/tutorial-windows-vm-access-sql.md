@@ -1,5 +1,5 @@
 ---
-title: Azure SQL'e erişmek için bir Windows VM sistem tarafından atanan yönetilen kimliği kullanma
+title: Azure SQL 'e erişmek için Windows VM sistem tarafından atanan yönetilen kimlik kullanma
 description: Windows VM üzerinde bir sistem tarafından atanmış yönetilen kimlik kullanarak Azure SQL hizmetine erişme işleminde size yol gösteren bir öğretici.
 services: active-directory
 documentationcenter: ''
@@ -12,17 +12,17 @@ ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 11/07/2018
+ms.date: 10/16/2019
 ms.author: markvi
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b6d5452f23e830ca7a9ffe5ca5ed3d4aa12fb717
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: a11c5489c97e1050e525c0b83c160c1360119b60
+ms.sourcegitcommit: 77bfc067c8cdc856f0ee4bfde9f84437c73a6141
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66236052"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72433162"
 ---
-# <a name="tutorial-use-a-windows-vm-system-assigned-managed-identity-to-access-azure-sql"></a>Öğretici: Azure SQL'e erişmek için bir Windows VM sistem tarafından atanan yönetilen kimliği kullanma
+# <a name="tutorial-use-a-windows-vm-system-assigned-managed-identity-to-access-azure-sql"></a>Öğretici: Azure SQL hizmetine erişmek için Windows VM sistem tarafından atanan yönetilen kimlik kullanma
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
 
@@ -65,7 +65,7 @@ Bu sonraki adım için, [Microsoft SQL Server Management Studio](https://docs.mi
 - [SQL Veritabanı ve SQL Veri Ambarı ile Evrensel Kimlik Doğrulaması (MFA için SSMS desteği)](/azure/sql-database/sql-database-ssms-mfa-authentication)
 - [SQL Veritabanı veya SQL Veri Ambarı ile Azure Active Directory kimlik doğrulamasını yapılandırma ve yönetme](/azure/sql-database/sql-database-aad-authentication-configure)
 
-SQL DB benzersiz AAD görünen adları gerektirir. Bu, kullanıcılara, gruplara veya hizmet sorumlularını (uygulamalar) gibi AAD hesaplarının ve yönetilen kimlik için etkin bir sanal makine adı benzersiz olarak AAD'de görünen adları tanımlanmalıdır. SQL DB denetler: Bu kullanıcılar T-SQL oluşturma sırasında AAD görünen adı ve benzersiz değilse, belirtilen hesap için benzersiz bir AAD görünen ad sağlamak isteyen komutu başarısız olur.
+SQL DB, benzersiz AAD görünen adları gerektirir. Bu şekilde, yönetilen kimlik için etkinleştirilen kullanıcılar, gruplar ve hizmet sorumluları (uygulamalar) ve VM adları gibi AAD hesaplarının, görünen adlarıyla ilgili AAD 'de benzersiz olarak tanımlanması gerekir. SQL DB, bu tür kullanıcıların T-SQL oluşturma işlemi sırasında AAD görünen adını denetler ve benzersiz değilse, komut belirli bir hesap için benzersiz bir AAD görünen adı sağlaması isteğinde bulunur.
 
 1. SQL Server Management Studio’yu başlatın.
 2. **Sunucuya Bağlan** iletişim kutusunda, **Sunucu adı** alanına SQL sunucu adınızı girin.
@@ -103,7 +103,7 @@ VM'de çalıştırılan kod şimdi sistem tarafından atanan yönetilen kimliği
 
 Azure SQL, Azure AD kimlik doğrulamasını yerel olarak desteklediğinden Azure kaynakları için yönetilen kimlikler kullanılarak alınan erişim belirteçlerini doğrudan kabul eder. SQL bağlantısı oluştururken **erişim belirteci** yöntemini kullanırsınız. Bu, Azure SQL’in Azure AD tümleştirmesi kapsamındadır ve bağlantı dizesinde kimlik bilgileri sağlama işleminden farklıdır.
 
-Erişim belirteci kullanarak SQL bağlantı açma bir .NET kod örneği aşağıda verilmiştir. Bu kodun, VM’nin sistem tarafından atanan yönetilen kimliğinin uç noktasına erişebilmesi için VM üzerinde çalıştırılması gerekir. **.NET framework 4.6** ya da daha yüksek erişim belirteci yöntemini kullanmak için gereklidir. AZURE-SQL-SERVERNAME ve DATABASE değerlerini uygun şekilde değiştirin. Azure SQL için kaynak Kimliğini Not `https://database.windows.net/`.
+Aşağıda, bir erişim belirteci kullanarak SQL bağlantısı açmak için bir .NET kod örneği verilmiştir. Bu kodun, VM’nin sistem tarafından atanan yönetilen kimliğinin uç noktasına erişebilmesi için VM üzerinde çalıştırılması gerekir. **.NET Framework 4,6** veya üzeri ya da **.NET Core 2,2** veya üzeri, erişim belirteci metodunu kullanmak için gereklidir. AZURE-SQL-SERVERNAME ve DATABASE değerlerini uygun şekilde değiştirin. Azure SQL için kaynak KIMLIĞI `https://database.windows.net/` ' dır.
 
 ```csharp
 using System.Net;

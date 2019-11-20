@@ -1,5 +1,5 @@
 ---
-title: SQL Veritabanı için Azure PowerShell betik örnekleri | Microsoft Docs
+title: Azure PowerShell betik örnekleri
 description: Azure SQL Veritabanı sunucuları, elastik havuzlar, veritabanları ve güvenlik duvarları oluşturmanıza ve yönetmenize yardımcı olacak Azure PowerShell betik örnekleri.
 services: sql-database
 ms.service: sql-database
@@ -10,40 +10,41 @@ ms.topic: sample
 author: stevestein
 ms.author: sstein
 ms.reviewer: ''
-manager: craigg
 ms.date: 03/25/2019
-ms.openlocfilehash: 03bec71cca445d580605c1b0f4705e619933000a
-ms.sourcegitcommit: 1aefdf876c95bf6c07b12eb8c5fab98e92948000
+ms.openlocfilehash: dd16753a9b057e441884b0a6a019701766aaa321
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66729128"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821392"
 ---
 # <a name="azure-powershell-samples-for-azure-sql-database"></a>Azure SQL Veritabanı için Azure PowerShell örnekleri
 
-Azure SQL veritabanı, veritabanı, örnekleri ve Azure PowerShell kullanarak havuzları yapılandırmanızı sağlar.
+Azure SQL veritabanı, Azure PowerShell kullanarak veritabanlarınızı, örneklerinizi ve havuzlarınızı yapılandırmanızı sağlar.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-PowerShell'i yerel olarak yükleyip kullanmayı tercih ederseniz Bu öğretici AZ PowerShell 1.4.0 gerektirir veya üzeri. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). PowerShell'i yerel olarak çalıştırıyorsanız Azure bağlantısı oluşturmak için `Connect-AzAccount` komutunu da çalıştırmanız gerekir.
+PowerShell 'i yerel olarak yükleyip kullanmayı tercih ederseniz bu öğretici AZ PowerShell 1.4.0 veya üstünü gerektirir. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). PowerShell'i yerel olarak çalıştırıyorsanız Azure bağlantısı oluşturmak için `Connect-AzAccount` komutunu da çalıştırmanız gerekir.
 
-## <a name="single-database-and-elastic-pools"></a>Tek veritabanı ve elastik havuzlar
+## <a name="single-database-and-elastic-poolstabsingle-database"></a>[Tek Veritabanı ve elastik havuzlar](#tab/single-database)
 
 Aşağıdaki tablo, Azure SQL Veritabanı’na yönelik örnek Azure PowerShell betiklerinin bağlantılarını içerir.
 
 | |  |
 |---|---|
 |**Tek veritabanları ve elastik havuzlar oluşturma ve yapılandırma**||
-| [Tek veritabanı oluşturma ve bir veritabanı sunucusu güvenlik duvarı kuralı yapılandırma](scripts/sql-database-create-and-configure-database-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, tek bir Azure SQL veritabanı oluşturur ve sunucu düzeyinde güvenlik duvarı kuralı yapılandırır. |
+| [Tek bir veritabanı oluşturma ve veritabanı sunucusu güvenlik duvarı kuralını yapılandırma](scripts/sql-database-create-and-configure-database-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, tek bir Azure SQL veritabanı oluşturur ve sunucu düzeyinde güvenlik duvarı kuralı yapılandırır. |
 | [Elastik havuzlar oluşturma ve havuza alınan veritabanlarını taşıma](scripts/sql-database-move-database-between-pools-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, Azure SQL Veritabanı elastik havuzları oluşturur, havuza alınmış veritabanlarını taşır ve işlem boyutlarını değiştirir.|
 |**Coğrafi çoğaltmayı ve yük devretmeyi yapılandırma**||
 | [Etkin coğrafi çoğaltmayı kullanarak tek bir veritabanını yapılandırma ve tek bir veritabanının yükünü devretme](scripts/sql-database-setup-geodr-and-failover-database-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, tek bir Azure SQL veritabanı için etkin coğrafi çoğaltmayı yapılandırır ve ikincil bir çoğaltmaya yük devreder. |
 | [Etkin coğrafi çoğaltmayı kullanarak havuza alınan veritabanını yapılandırma ve havuza alınmış veritabanının yükünü devretme](scripts/sql-database-setup-geodr-and-failover-pool-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, SQL elastik havuzundaki bir Azure SQL veritabanı için etkin coğrafi çoğaltmayı yapılandırır ve ikincil bir çoğaltmaya yük devreder. |
-| [Tek bir veritabanı için bir yük devretme grubunu yapılandırma ve yük devretme grubunun yükünü devretme](scripts/sql-database-setup-geodr-failover-database-failover-group-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, Azure SQL Veritabanı sunucu örneği için bir yük devretme grubu yapılandırır, yük devretme grubuna bir veritabanı ekler ve ikincil sunucuya yük devreder |
+|**Yük devretme grubu yapılandırma**||
+| [Tek bir veritabanı için yük devretme grubu yapılandırma](scripts/sql-database-add-single-db-to-failover-group-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği bir veritabanı ve bir yük devretme grubu oluşturur, veritabanını yük devretme grubuna ekler ve ikincil sunucuya yük devretmeyi sınar. | 
+| [Elastik havuz için bir yük devretme grubu yapılandırma](scripts/sql-database-add-elastic-pool-to-failover-group-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği bir veritabanı oluşturur, bir elastik havuza ekler, elastik havuzu yük devretme grubuna ekler ve ikincil sunucuya yük devretmeyi sınar. | 
 |**Tek bir veritabanını ve elastik havuzu ölçekleme**||
 | [Tek bir veritabanını ölçekleme](scripts/sql-database-monitor-and-scale-database-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, Azure SQL veritabanının performans ölçümlerini izler, veritabanını daha yüksek bir işlem boyutuna ölçekler ve performans ölçümlerinden birinde bir uyarı kuralı oluşturur. |
-| [Elastik havuzu ölçekleme](scripts/sql-database-monitor-and-scale-pool-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, Azure SQL Veritabanı elastik havuzu performans ölçümlerini izler, veritabanını daha yüksek bir işlem boyutuna ölçekler ve performans ölçümlerinden birinde bir uyarı kuralı oluşturur.  |
+| [Elastik havuzu ölçekleme](scripts/sql-database-monitor-and-scale-pool-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, Azure SQL Veritabanı elastik havuzu performans ölçümlerini izler, veritabanını daha yüksek bir işlem boyutuna ölçekler ve performans ölçümlerinden birinde bir uyarı kuralı oluşturur. |
 | **Denetim ve tehdit algılama** |
 | [Denetim ve tehdit algılamayı yapılandırma](scripts/sql-database-auditing-and-threat-detection-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, Azure SQL veritabanı için denetim ve tehdit algılama ilkelerini yapılandırır. |
 | **Veritabanını geri yükleme, kopyalama ve içeri aktarma**||
@@ -56,23 +57,28 @@ Aşağıdaki tablo, Azure SQL Veritabanı’na yönelik örnek Azure PowerShell 
 | [SQL Data Sync için eşitleme şemasını güncelleştirme](scripts/sql-database-sync-update-schema.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, Veri Eşitleme için eşitleme şemasından öğeler ekler veya öğeleri kaldırır. |
 |||
 
-Daha fazla bilgi edinin [tek veritabanı Azure PowerShell API'si](sql-database-single-databases-manage.md#powershell-manage-sql-database-servers-and-single-databases).
+[Tek Veritabanı Azure PowerShell API 'si](sql-database-single-databases-manage.md#powershell-manage-sql-database-servers-and-single-databases)hakkında daha fazla bilgi edinin.
 
-## <a name="managed-instance"></a>Yönetilen Örnek
+## <a name="managed-instancetabmanaged-instance"></a>[Yönetilen örnek](#tab/managed-instance)
 
-Aşağıdaki tabloda, Azure SQL veritabanı - yönetilen örnek için örnek Azure PowerShell betiklerinin bağlantılarını içerir.
+Aşağıdaki tabloda, Azure SQL veritabanı yönetilen örneği için örnek Azure PowerShell betiklerin bağlantıları yer almaktadır.
 
 | |  |
 |---|---|
-|**Oluşturma ve yönetilen örnekleri yapılandırma**||
+|**Yönetilen örnekleri oluşturma ve yapılandırma**||
 | [Yönetilen Örnek oluşturma ve yönetme](scripts/sql-database-create-configure-managed-instance-powershell.md) | Bu PowerShell betiği, Azure PowerShell kullanarak Yönetilen Örnek oluşturmayı ve yönetmeyi göstermektedir |
-| [Oluşturma ve Azure Resource Manager şablonu kullanarak bir yönetilen örnek yönetme](scripts/sql-managed-instance-create-powershell-azure-resource-manager-template.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell Betiği oluşturma ve yönetme Azure PowerShell ve Azure Resource Manager şablonu kullanarak bir yönetilen örnek gösterilmektedir.|
-| **Saydam veri şifrelemesi (TDE) yapılandırma**||
-| [Saydam veri şifrelemesi kullanarak kendi anahtarınızı Azure anahtar Kasası'ndaki bir yönetilen örneğinde yönetme](scripts/transparent-data-encryption-byok-sql-managed-instance-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell Betiği kullanarak Azure SQL yönetilen Azure Key vault'tan bir anahtar örneği, kendi anahtarını Getir senaryosunda saydam veri şifrelemesi (TDE) yapılandırır|
+| [Azure Resource Manager şablonu kullanarak yönetilen bir örnek oluşturma ve yönetme](scripts/sql-managed-instance-create-powershell-azure-resource-manager-template.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, Azure PowerShell ve Azure Resource Manager şablonunu kullanarak yönetilen bir örnek oluşturmayı ve yönetmeyi gösterir.|
+| [Veritabanını başka bir coğrafi bölgede yönetilen bir örneğe geri yükleme](scripts/sql-managed-instance-restore-geo-backup.md) | Bu PowerShell betiği, bir veritabanının yedeğini almak ve başka bir bölgeye geri yüklemektir. Bu, coğrafi geri yükleme olağanüstü durum kurtarma senaryosu olarak bilinir. |
+| **Saydam Veri Şifrelemesi yapılandırma (TDE)**||
+| [Yönetilen bir örnekteki Saydam Veri Şifrelemesi, Azure Key Vault kendi anahtarınızı kullanarak yönetin](scripts/transparent-data-encryption-byok-sql-managed-instance-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, Azure Key Vault bir anahtar kullanarak Azure SQL yönetilen örneği için Kendi Anahtarını Getir senaryosunda Saydam Veri Şifrelemesi (TDE) yapılandırır|
+|**Yük devretme grubu yapılandırma**||
+| [Yönetilen örnek için bir yük devretme grubu yapılandırma](scripts/sql-database-add-managed-instance-to-failover-group-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json) | Bu PowerShell betiği, iki yönetilen örnek oluşturur, bunları bir yük devretme grubuna ekler ve ardından birincil yönetilen örnekten yük devretmeyi ikinci yönetilen örneğe sınar. | 
 |||
 
-Daha fazla bilgi edinin [yönetilen örnek Azure PowerShell API'si](sql-database-managed-instance-create-manage.md#powershell-create-and-manage-managed-instances).
+[Yönetilen örnek Azure PowerShell API 'si](sql-database-managed-instance-create-manage.md#powershell-create-and-manage-managed-instances)hakkında daha fazla bilgi edinin.
+
+---
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-Örnekler, bu sayfa kullanımda listelenen [Azure SQL veritabanı cmdlet'leri](/powershell/module/az.sql/) oluşturma ve Azure SQL kaynaklarını yönetme. Sorguları çalıştıran ve çok sayıda veritabanı görevlerini gerçekleştirmek için ek cmdlet yerleştirilir [sqlserver](/powershell/module/sqlserver/) modülü. Daha fazla bilgi için [SQL Server PowerShell](/sql/powershell/sql-server-powershell/).
+Bu sayfada listelenen örneklerde Azure SQL kaynaklarını oluşturmak ve yönetmek için [Azure SQL veritabanı cmdlet 'leri](/powershell/module/az.sql/) kullanılır. Sorgu çalıştırmaya yönelik ek cmdlet 'ler ve birçok veritabanı görevinin gerçekleştirilmesi [SqlServer](/powershell/module/sqlserver/) modülünde bulunur. Daha fazla bilgi için bkz. [PowerShell SQL Server](/sql/powershell/sql-server-powershell/).

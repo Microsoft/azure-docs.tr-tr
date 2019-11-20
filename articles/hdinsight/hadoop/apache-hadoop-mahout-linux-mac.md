@@ -1,6 +1,6 @@
 ---
-title: Apache Mahout HDInsight (SSH) - Azure ile öneriler oluşturma
-description: Apache Mahout machine learning kitaplığı HDInsight (Hadoop) ile film önerileri oluşturma için kullanmayı öğrenin.
+title: Azure HDInsight 'ta Apache Mahout kullanarak öneriler oluşturma
+description: HDInsight (Hadoop) ile film önerileri oluşturmak için Apache Mahout Machine Learning kitaplığını nasıl kullanacağınızı öğrenin.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
@@ -8,50 +8,50 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 04/24/2019
-ms.openlocfilehash: d566b57ae12520b9eee26334a67d2e10c05f8040
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3923abd10fc3a64773d561b1f375f9e2f00a7e56
+ms.sourcegitcommit: 38251963cf3b8c9373929e071b50fd9049942b37
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64709088"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73044558"
 ---
-# <a name="generate-movie-recommendations-by-using-apache-mahout-with-linux-based-apache-hadoop-in-hdinsight-ssh"></a>Apache Hadoop Linux tabanlı HDInsight (SSH) ile Apache Mahout kullanarak film önerileri oluşturma
+# <a name="generate-movie-recommendations-using-apache-mahout-with-apache-hadoop-in-hdinsight-ssh"></a>HDInsight 'ta Apache Hadoop ile Apache Mahout kullanarak film önerileri oluşturma (SSH)
 
 [!INCLUDE [mahout-selector](../../../includes/hdinsight-selector-mahout.md)]
 
-Nasıl kullanacağınızı öğrenin [Apache Mahout](https://mahout.apache.org) makine öğrenimi kitaplığı olan Azure HDInsight'ın Film önerileri oluşturma.
+Azure HDInsight ile [Apache Mahout](https://mahout.apache.org) Machine Learning kitaplığı 'nı kullanarak film önerileri oluşturma hakkında bilgi edinin.
 
-Mahout olduğu bir [makine öğrenimi](https://en.wikipedia.org/wiki/Machine_learning) Apache Hadoop için kitaplığı. Mahout, filtreleme, Sınıflandırma ve kümelendirme gibi verileri işlemek için algoritmalar içerir. Bu makalede, arkadaşlarınızın gördünüz filmler tabanlı film önerileri oluşturma için bir öneri altyapısını kullanın.
+Mahout, Apache Hadoop için bir [makine öğrenme](https://en.wikipedia.org/wiki/Machine_learning) kitaplığıdır. Mahout, filtreleme, sınıflandırma ve kümeleme gibi verileri işlemeye yönelik algoritmalar içerir. Bu makalede, arkadaşlarınızın gördük filmlerini temel alan film önerileri oluşturmak için bir öneri altyapısı kullanırsınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* HDInsight üzerinde Apache Hadoop kümesi. Bkz: [Linux'ta HDInsight kullanmaya başlama](./apache-hadoop-linux-tutorial-get-started.md).
+* HDInsight üzerinde bir Apache Hadoop kümesi. Bkz. [Linux 'Ta HDInsight kullanmaya başlama](./apache-hadoop-linux-tutorial-get-started.md).
 
-* Bir SSH istemcisi. Daha fazla bilgi için [SSH kullanarak HDInsight (Apache Hadoop) bağlanma](../hdinsight-hadoop-linux-use-ssh-unix.md).
+* Bir SSH istemcisi. Daha fazla bilgi için bkz. [SSH kullanarak HDInsight 'A bağlanma (Apache Hadoop)](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-## <a name="apache-mahout-versioning"></a>Apache Mahout sürüm oluşturma
+## <a name="apache-mahout-versioning"></a>Apache Mahout sürümü oluşturma
 
-HDInsight içinde Mahout sürümü hakkında daha fazla bilgi için bkz. [HDInsight sürümleri ve Apache Hadoop bileşenleri](../hdinsight-component-versioning.md).
+HDInsight 'ta Mahout sürümü hakkında daha fazla bilgi için bkz. [HDInsight sürümleri ve Apache Hadoop bileşenleri](../hdinsight-component-versioning.md).
 
-## <a name="recommendations"></a>Önerilerini anlama
+## <a name="recommendations"></a>Önerileri anlama
 
-Mahout tarafından sağlanan işlevlerden birini bir öneri altyapısıdır. Bu altyapı, veri biçimi kabul `userID`, `itemId`, ve `prefValue` (tercih öğesi için). Mahout ardından belirlemek için ortak oluşum analiz gerçekleştirin: *mutfağından hiçbir öğeyi sahip kullanıcılar diğer öğeleri bu mutfağından de*. Mahout sonra öneriler yapmak için kullanılan benzer öğe tercihleri, kullanıcılarla belirler.
+Mahout tarafından sunulan işlevlerden biri bir öneri altyapısıdır. Bu altyapı, `userID`, `itemId`ve `prefValue` (öğe için tercih) biçimindeki verileri kabul eder. Mahout daha sonra şunları tespit etmek için ortak yineleme Analizi gerçekleştirebilir: *bir öğe için bir tercihi olan kullanıcılar aynı zamanda bu diğer öğeler için bir tercihe sahiptir*. Mahout daha sonra, tercih etmek için kullanılabilecek, LIKE öğesi tercihleri olan kullanıcıları belirler.
 
-Aşağıdaki iş akışı film verileri kullanan basitleştirilmiş bir örnektir:
+Aşağıdaki iş akışı, film verileri kullanan Basitleştirilmiş bir örnektir:
 
-* **Ortak oluşum**: ALi, Alice ve Bob tüm bağlanan *Star Wars*, *geri Empire durumda*, ve *Jedi dönüşü*. Ayrıca bu filmler herhangi biri gibi kullanıcılar diğer iki ister mahout belirler.
+* **Ortak yinelenme**: ali, Gamze ve Bob tüm beğenilen *yıldız çatışmaları*, *Empire geri* *dönerek JEDI 'nın geri dönmesi*. Mahout, bu filmlerde herhangi birini beğenen, diğer iki de gibi kullanıcıları belirler.
 
-* **Ortak oluşum**: Bob ve Gamze ayrıca beğenmediğinizi *hayali İstilası*, *kopyaları saldırısını*, ve *Sith, Revenge*. Önceki üç filmler ayrıca beğenmediğinizi kullanıcılar bu üç filmler ister mahout belirler.
+* **Ortak olay**: Bob ve Gamze, *hayalet Menace*, *klonların saldırıları*ve *Revenge 'in*de beğenilmiş. Mahout, önceki üç film de bu üç film gibi beğenilen kullanıcıları belirler.
 
-* **Benzerlik öneri**: Ali'nin ilk üç filmler beğenmediğinizi çünkü Mahout filmleri beğenmediğinizi benzer tercihleri, başkalarıyla görünür, ancak Joe (beğenmediğinizi/derecelendirilmiş) izlenen değil. Bu durumda, Mahout önerir *hayali İstilası*, *kopyaları saldırısını*, ve *Sith, Revenge*.
+* **Benzerlik önerisi**: ali, ilk üç film Beğentiğinden, Mahout, benzer tercihleri beğenen, ancak ali 'nin (beğenilmiş/derecelendirmediği) diğer filmlere bakar. Bu durumda Mahout, *hayali Menace*, *klonların saldırıları*ve *SITH Revenge*için önerilir.
 
 ### <a name="understanding-the-data"></a>Verileri anlama
 
-Rahat, [GroupLens araştırma](https://grouplens.org/datasets/movielens/) Mahout ile uyumlu bir biçimde film derecelendirmesi veri sağlar. Bu veriler, kümenin varsayılan depolama alanı üzerinde kullanılabilir `/HdiSamples/HdiSamples/MahoutMovieData`.
+Kolay bir şekilde [Grouplens araştırması](https://grouplens.org/datasets/movielens/) , filmler Için Mahout ile uyumlu bir biçimde derecelendirme verileri sağlar. Bu veriler, kümenizin varsayılan depolama alanı `/HdiSamples/HdiSamples/MahoutMovieData`' de bulunur.
 
-İki dosya vardır `moviedb.txt` ve `user-ratings.txt`. `user-ratings.txt` Analiz sırasında kullanılır. `moviedb.txt` Sonuçlarını görüntülerken kullanıcı dostu metin bilgi sağlamak için kullanılır.
+`moviedb.txt` ve `user-ratings.txt`iki dosya vardır. `user-ratings.txt` dosyası analiz sırasında kullanılır. `moviedb.txt`, sonuçları görüntülerken Kullanıcı dostu metin bilgilerini sağlamak için kullanılır.
 
-Kullanıcı-ratings.txt içerdiği veri yapısını sahip `userID`, `movieID`, `userRating`, ve `timestamp`, her kullanıcı bir filmi nasıl yüksek dereceli gösterir. Verilerin bir örnek aşağıda verilmiştir:
+User-Ratings. txt ' de yer alan veriler `userID`, `movieID`, `userRating`ve `timestamp`bir yapısına sahiptir ve her kullanıcının bir filmi derecelendirdiğini gösterir. Verilerin bir örneği aşağıda verilmiştir:
 
     196    242    3    881250949
     186    302    3    891717742
@@ -59,20 +59,20 @@ Kullanıcı-ratings.txt içerdiği veri yapısını sahip `userID`, `movieID`, `
     244    51     2    880606923
     166    346    1    886397596
 
-## <a name="run-the-analysis"></a>Analizini Çalıştır
+## <a name="run-the-analysis"></a>Analizi Çalıştırma
 
-Kümeye SSH bağlantısından, öneri işi çalıştırmak için aşağıdaki komutu kullanın:
+Kümeye bir SSH bağlantısından, öneri işini çalıştırmak için aşağıdaki komutu kullanın:
 
 ```bash
 mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/MahoutMovieData/user-ratings.txt -o /example/data/mahoutout --tempDir /temp/mahouttemp
 ```
 
 > [!NOTE]  
-> İşin tamamlanması birkaç dakika sürebilir ve birden çok MapReduce işleri çalıştırabilirsiniz.
+> İşin tamamlanması birkaç dakika sürebilir ve birden çok MapReduce işi çalıştırılabilir.
 
-## <a name="view-the-output"></a>Çıkışı görüntülemek
+## <a name="view-the-output"></a>Çıktıyı görüntüleme
 
-1. İş tamamlandıktan sonra oluşturulan çıktı görüntülemek için aşağıdaki komutu kullanın:
+1. İş tamamlandıktan sonra, oluşturulan çıktıyı görüntülemek için aşağıdaki komutu kullanın:
 
     ```bash
     hdfs dfs -text /example/data/mahoutout/part-r-00000
@@ -85,24 +85,24 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
         3    [284:5.0,285:4.828125,508:4.7543354,845:4.75,319:4.705128,124:4.7045455,150:4.6938777,311:4.6769233,248:4.65625,272:4.649266]
         4    [690:5.0,12:5.0,234:5.0,275:5.0,121:5.0,255:5.0,237:5.0,895:5.0,282:5.0,117:5.0]
 
-    İlk sütun `userID`. Bulunan değerler ' [' ve ']' olan `movieId`:`recommendationScore`.
+    İlk sütun `userID`. ' [' Ve '] ' içinde yer alan değerler `movieId`:`recommendationScore`.
 
-2. Öneriler hakkında daha fazla bilgi sağlamak için çıktıyı moviedb.txt birlikte kullanabilirsiniz. İlk olarak, aşağıdaki komutları kullanarak yerel olarak kopyalayın:
+2. Öneriler hakkında daha fazla bilgi sağlamak için, çıktıyı moviedb. txt ile birlikte kullanabilirsiniz. İlk olarak, aşağıdaki komutları kullanarak dosyaları yerel olarak kopyalayın:
 
     ```bash
     hdfs dfs -get /example/data/mahoutout/part-r-00000 recommendations.txt
     hdfs dfs -get /HdiSamples/HdiSamples/MahoutMovieData/* .
     ```
 
-    Bu komut, çıktı verilerini adlı bir dosyaya kopyalar **recommendations.txt** film veri dosyalarının yanı sıra geçerli dizin.
+    Bu komut, çıktı verilerini geçerli dizinde, film veri dosyalarıyla birlikte **öneriler. txt** adlı bir dosyaya kopyalar.
 
-3. Öneriler çıktı verileri için film adlarını arar bir Python betiği oluşturmak için aşağıdaki komutu kullanın:
+3. Öneri çıktısındaki verilerin film adlarını gösteren bir Python betiği oluşturmak için aşağıdaki komutu kullanın:
 
     ```bash
     nano show_recommendations.py
     ```
 
-    Düzenleyici açıldığında, dosyanın içeriğini aşağıdaki metni kullanın:
+    Düzenleyici açıldığında, dosyanın içeriği olarak aşağıdaki metni kullanın:
 
    ```python
    #!/usr/bin/env python
@@ -156,44 +156,44 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
    print "------------------------"
    ```
 
-    Tuşuna **Ctrl-X**, **Y**ve son olarak **Enter** verileri kaydetmek için.
+    Verileri kaydetmek için **CTRL + X**, **Y**ve son olarak **ENTER** tuşlarına basın.
 
-4. Python betiğini çalıştırın. Aşağıdaki komut, tüm dosyaları indirdiğiniz dizine olduğunu varsayar:
+4. Python betiğini çalıştırın. Aşağıdaki komut, tüm dosyaların indirileceği dizinde olduğunuzu varsayar:
 
     ```bash
     python show_recommendations.py 4 user-ratings.txt moviedb.txt recommendations.txt
     ```
 
-    Bu komut, kullanıcı kimliği 4 için oluşturulan öneriler bakar.
+    Bu komut, Kullanıcı KIMLIĞI 4 için oluşturulan önerilere bakar.
 
-   * **Kullanıcı ratings.txt** derecelendirilmiş olmasa filmler almak için kullanılır.
+   * **User-Ratings. txt** dosyası, derecelendirildi filmleri almak için kullanılır.
 
-   * **Moviedb.txt** filmler adlarını almak için kullanılır.
+   * **Moviedb. txt** dosyası, filmlerin adlarını almak için kullanılır.
 
-   * **Recommendations.txt** bu kullanıcı için film önerileri almak için kullanılır.
+   * **Öneriler. txt** , bu kullanıcıya ait film önerilerini almak için kullanılır.
 
-     Bu komutun çıktısı şu metne benzer:
+     Bu komutun çıktısı aşağıdaki metne benzer:
 
-       Yedi yıl içinde (1997) Tibet puan 5.0 = Indiana Jones ve son Crusade (1989), puan 5.0 = Jaws (1975) puan 5.0 = algılama ve Sensibility (1995), puan 5.0 = bağımsızlığı gün (ıd4) (1996) puanı My en iyi arkadaşınızın 5.0 = (1997'den) Düğün puan 5.0 = Jerry Maguire (1996) puan 5.0 = Scream 2 (1997), puan = 5.0, sonlandırma süresi bir (1996), puan 5.0 =
+       Tibet içinde yedi yıl (1997), Score = 5.0 Indiana Jones ve son Kırade (1989), Score = 5.0 JAWS (1975), Score = 5.0 Sense ve Senbilimi (1995), Score = 5.0 bağımsızlık günü (ıD4) (1996), Score = 5.0 En Iyi arkadaşınızın evlilik (1997), Score = 5.0 Jraz Maguire (1996), Score = 5.0 Skre2 (1997), Score = 5.0 sonlandırma süresi, A (1996), Score = 5.0
 
-## <a name="delete-temporary-data"></a>Geçici verileri silme
+## <a name="delete-temporary-data"></a>Geçici verileri Sil
 
-Mahout işleri iş işlenirken oluşan geçici veri kaldırmayın. `--tempDir` Kolay silinmek belirli bir yolu içine geçici dosyalar yalıtmak için örnek işteki belirtilen parametre. Geçici dosyaları kaldırmak için aşağıdaki komutu kullanın:
+Mahout işleri, iş işlenirken oluşturulan geçici verileri kaldırmaz. `--tempDir` parametresi, geçici dosyaları kolay bir şekilde silinmek üzere belirli bir yola yalıtmak için örnek işte belirtilir. Geçici dosyaları kaldırmak için aşağıdaki komutu kullanın:
 
 ```bash
 hdfs dfs -rm -f -r /temp/mahouttemp
 ```
 
 > [!WARNING]  
-> Komut yeniden çalıştırmak istiyorsanız, çıkış dizinine da silmeniz gerekir. Bu dizini silmek için aşağıdakileri kullanın:
+> Komutu yeniden çalıştırmak istiyorsanız, çıkış dizinini de silmelisiniz. Bu dizini silmek için aşağıdakileri kullanın:
 >
 > `hdfs dfs -rm -f -r /example/data/mahoutout`
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Mahout kullanmayı öğrendiniz, HDInsight üzerinde verilerle çalışma için diğer yöntemler keşfedin:
+Mahout 'u nasıl kullanacağınızı öğrendiğinize göre, HDInsight 'ta verilerle çalışmanın diğer yollarını buldığınıza göre:
 
-* [Apache Hive ile HDInsight](hdinsight-use-hive.md)
+* [HDInsight ile Apache Hive](hdinsight-use-hive.md)
 * [HDInsight ile Apache Pig](hdinsight-use-pig.md)
 * [HDInsight ile MapReduce](hdinsight-use-mapreduce.md)

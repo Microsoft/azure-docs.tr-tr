@@ -1,113 +1,113 @@
 ---
-title: İstemciler Microsoft Azure FXT Edge dosyalayıcı kümede bağlama
-description: NFS istemci makineleri Azure FXT Edge dosyalayıcı karma depolama önbelleği nasıl bağlayabilir
+title: Microsoft Azure FXT Edge Filer kümesinde istemcileri bağlama
+description: NFS istemci makinelerinin Azure FXT Edge Filer karma depolama önbelleğini nasıl bağlayabilirler
 author: ekpgh
 ms.service: fxt-edge-filer
 ms.topic: tutorial
 ms.date: 06/20/2019
-ms.author: v-erkell
-ms.openlocfilehash: b48d8d74843947c3e40dc80234560b0147be6eea
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.author: rohogue
+ms.openlocfilehash: ac1263b352e7fdde57dfee6515a8b22400f22b06
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67542989"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72256033"
 ---
-# <a name="tutorial-mount-the-cluster"></a>Öğretici: Küme bağlama
+# <a name="tutorial-mount-the-cluster"></a>Öğretici: kümeyi bağlama
 
-Bu öğreticide Azure FXT Edge dosyalayıcı kümeye NFS istemcilerinin bağlama öğretir. İstemciler, arka uç depolama eklendiğinde size atanan sanal ad alanı yollar bağlayın. 
+Bu öğreticide, NFS istemcilerini Azure FXT Edge Filer kümesine bağlama öğretilir. İstemciler, arka uç depolama eklediğinizde atadığınız sanal ad alanı yollarını bağlayabilir. 
 
 Bu öğretici öğretir: 
 
 > [!div class="checklist"]
-> * Stratejileri istemciye yönelik IP adresleri aralığı karşı istemcileri yükleme
-> * İstemciye yönelik IP adresi ve ad alanı birleşim bağlama yolundan oluşturmak nasıl
-> * Bir bağlama komutu kullanmak için hangi bağımsız değişkenleri
+> * İstemciye yönelik IP adresleri aralığı genelinde Yük Dengeleme istemcilerinin stratejileri
+> * İstemciye yönelik bir IP adresinden ve ad alanı birleşimden bir bağlama yolu oluşturma
+> * Bağlama komutunda kullanılacak bağımsız değişkenler
 
-Bu öğreticinin tamamlanması yaklaşık 45 dakika sürer.
+Bu öğreticinin tamamlanabilmesi yaklaşık 45 dakika sürer.
 
-## <a name="steps-to-mount-the-cluster"></a>Kümeye bağlanacak adımları
+## <a name="steps-to-mount-the-cluster"></a>Kümeyi bağlama adımları
 
-İstemci makineler Azure FXT Edge dosyalayıcı kümenize bağlanmak için aşağıdaki adımları izleyin.
+İstemci makinelerini Azure FXT Edge Filer kümenize bağlamak için aşağıdaki adımları izleyin.
 
-1. Karar, küme düğümleri arasında istemci trafik yükünü dengele öğreneceksiniz. Okuma [istemci Yük Dengeleme](#balance-client-load), aşağıdaki Ayrıntılar için. 
-1. Bağlama için küme IP adresi ve bağlantı yolunu belirleyin.
-1. İstemciye yönelik bağlama yolunu belirleyin.
-1. Sorunu [bağlama komutu](#use-recommended-mount-command-options), uygun bağımsız değişkenlerle.
+1. İstemci trafiğinin Küme düğümleriniz arasında nasıl yük dengelenmesi gerektiğine karar verin. Ayrıntılar için, aşağıda [istemci yükünü](#balance-client-load)okuyun. 
+1. Takılacak küme IP adresini ve birleşim yolunu belirler.
+1. Bağlama için istemciye yönelik yolu saptayın.
+1. [Bağlama komutunu](#use-recommended-mount-command-options)uygun bağımsız değişkenlerle verin.
 
-## <a name="balance-client-load"></a>İstemci Yük Dengeleme
+## <a name="balance-client-load"></a>İstemci yükünü dengeleme
 
-Dengeleme istemci isteklerini kümedeki tüm düğümler arasında yardımcı olmak için tam istemci'e dönük IP adresleri aralığını istemcilere bağlamak. Bu görevi otomatik hale getirmek için birkaç yolu vardır.
+İstemci isteklerinin kümedeki tüm düğümler arasında dengelenmesi için, istemcileri istemciye yönelik tüm IP adreslerinin tam aralığına bağlamanız gerekir. Bu görevi otomatikleştirmek için birkaç yol vardır.
 
-Hepsini bir kez deneme DNS Yük Dengeleme için kümesi hakkında bilgi edinmek için [Azure FXT Edge dosyalayıcı kümesi için DNS yapılandırma](fxt-configure-network.md#configure-dns-for-load-balancing). Bu yöntemi kullanmak için aşağıdaki makalelerde açıklanan olmayan bir DNS sunucusu sürdürmeniz gerekir.
+Küme için hepsini bir kez deneme DNS Yük Dengelemesi hakkında bilgi edinmek için [Azure FXT Edge Filer kümesi IÇIN DNS yapılandırma](fxt-configure-network.md#configure-dns-for-load-balancing)konusunu okuyun. Bu yöntemi kullanmak için, bu makalelerde açıklanamayan bir DNS sunucusu korumanız gerekir.
 
-Küçük yüklemeleri için daha basit bir yöntem istemci bağlama zaman aralığı boyunca IP adresleri atamak için bir komut dosyası kullanmaktır. 
+Küçük yüklemeler için daha basit bir yöntem, IP adreslerini istemci takma süresi içinde aralığa atamak için bir komut dosyası kullanmaktır. 
 
-Diğer Yük Dengeleme yöntemleriyle büyük veya karmaşık sistemleri için uygun olabilir. Microsoft temsilcinize başvurun veya Yardım için bir destek isteği açın. (Şu anda azure Load Balancer *desteklenmiyor* ile Azure FXT Edge dosyalayıcı.)
+Diğer yük dengeleme yöntemleri büyük veya karmaşık sistemler için uygun olabilir. Microsoft temsilcinize başvurun veya yardım almak için bir [destek isteği](fxt-support-ticket.md) açın. (Azure Load Balancer Şu anda Azure FXT Edge Filsi ile *desteklenmiyor* .)
 
-## <a name="create-the-mount-command"></a>Bağlama komutu oluştur 
+## <a name="create-the-mount-command"></a>Bağlama komutunu oluşturma 
 
-İstemcisinden ``mount`` komutu, yerel dosya sisteminde bir yolu Azure FXT Edge dosyalayıcı kümedeki sanal sunucu (vserver) eşler. 
+@No__t-0 komutu, Azure FXT Edge Filer kümesindeki sanal sunucuyu (vServer) yerel dosya sistemindeki bir yola eşler. 
 
-Biçimi ``mount <FXT cluster path> <local path> {options}``
+Biçim ``mount <FXT cluster path> <local path> {options}``
 
-Bağlama komut üç öğe vardır: 
+Bağlama komutunda üç öğe vardır: 
 
-* Küme yol - aşağıda açıklanan IP adresi ve ad alanı birleşim yolu birleşimi
-* Yerel yol - istemci üzerindeki yol 
-* komut seçenekleri - bağlama (listelenen [kullanmak önerilen bağlama komut seçeneklerini](#use-recommended-mount-command-options))
+* küme yolu-aşağıda açıklanan IP adresi ve ad alanı birleşim yolu birleşimi
+* Yerel yol-istemcideki yol 
+* bağlama komutu seçenekleri-( [Önerilen bağlama komut seçeneklerini kullan](#use-recommended-mount-command-options)bölümünde listelenmiştir)
 
-### <a name="create-the-cluster-path"></a>Küme yol oluşturma
+### <a name="create-the-cluster-path"></a>Küme yolunu oluşturma
 
-Küme yolu vserver birleşimidir *IP adresi* yolu artı bir *ad alanı birleşim*. Ad alanı birleşim ne zaman tanımlanan sanal bir yol olduğunu, [depolama sistemi eklenen](fxt-add-storage.md#create-a-junction).
+Küme yolu, vServer *IP adresinin* bir birleşimidir ve bir *ad alanı birleşiminin*yoludur. Ad alanı birleşimi, [depolama sistemini](fxt-add-storage.md#create-a-junction)eklediğinizde tanımladığınız bir sanal yoldur.
 
-Örneğin, kullandıysanız ``/fxt/files`` , ad alanı yolu, istemcilerinizin bağlaması *IP*: / fxt/dosyalarını kendi yerel bağlama noktasına. 
+Örneğin, ad alanı yolunuzda ``/fxt/files`` ' ı kullandıysanız, istemcileriniz *IPI*:/FXT/Files öğesini yerel bağlama noktasına bağlayabilir. 
 
-!["Yeni birleşim Ekle" iletişim/avere/dosyalarıyla ad alanı yolu alanı](media/fxt-mount/fxt-junction-example.png)
+![Ad alanı yolu alanındaki/avere/Files ile "yeni birleşim Ekle" iletişim kutusu](media/fxt-mount/fxt-junction-example.png)
 
-IP adresini istemciye yönelik IP adresleri için vserver tanımlı biridir. Denetim Masası kümesindeki iki yerde IP'ler istemciye yönelik çeşitli bulabilirsiniz:
+IP adresi, vServer için tanımlanan istemciye yönelik IP adreslerinden biridir. İstemci ile karşılıklı IP aralığını küme denetim masasında iki yerde bulabilirsiniz:
 
-* **VServers** tablo (Pano sekmesi) - 
+* **Vservers** tablosu (Pano sekmesi)- 
 
-  ![Daire içinde VServer sekmesi, graf ve IP adresi bölümü altında veri tablosundaki seçili Denetim Masası Pano sekmesi](media/fxt-mount/fxt-ip-addresses-dashboard.png)
+  ![Grafik altındaki veri tablosunda seçili olan VServer sekmesi ile Denetim Masası 'nın Pano sekmesi ve IP adresi bölümü daire içinde](media/fxt-mount/fxt-ip-addresses-dashboard.png)
 
-* **İstemci'e yönelik ağ** Ayarları sayfası - 
+* **Istemciye yönelik ağ** ayarları sayfası- 
 
-  ![Ayarlar > VServer > Tablo belirli vserver için adres aralığı bölümünü etrafında bir daire ile istemci bakan ağ yapılandırma sayfası](media/fxt-mount/fxt-ip-addresses-settings.png)
+  ![Belirli bir vServer için tablonun adres aralığı bölümünün etrafında bir daire olan sanal sunucu > Istemciye yönelik ağ yapılandırması sayfası > Ayarlar](media/fxt-mount/fxt-ip-addresses-settings.png)
 
-IP adresi ve bağlama komutu için küme yolu oluşturmak için ad alanı yolu birleştirin. 
+Bağlama komutunun küme yolunu oluşturmak için IP adresini ve ad alanı yolunu birleştirin. 
 
 Örnek istemci bağlama komutu: ``mount 10.0.0.12:/sd-access /mnt/fxt {options}``
 
-### <a name="create-the-local-path"></a>Yerel yol oluşturma
+### <a name="create-the-local-path"></a>Yerel yolu oluşturma
 
-Bağlama komutu için yerel yol size bağlıdır. Yol yapısını istediğiniz sanal ad alanı bir parçası olarak ayarlayabilirsiniz. Ad alanı ve istemci iş akışınız için uygun olan yerel yolu tasarlayın. 
+Bağlama komutunun yerel yolu size yöneliktir. Sanal ad alanının bir parçası olarak istediğiniz herhangi bir yol yapısını ayarlayabilirsiniz. İstemci iş akışınız için uygun bir ad alanı ve yerel yol tasarlayın. 
 
-İstemciye yönelik ad alanı hakkında daha fazla bilgi için küme yapılandırması kılavuz okuma [ad alanı genel bakış](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gns_overview.html).
+İstemciye yönelik ad alanı hakkında daha fazla bilgi için, küme yapılandırma kılavuzunun [ad alanına genel bakış](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gns_overview.html)' ı okuyun.
 
-Yol yanı sıra eklemeyi [bağlama komut seçenekleri](#use-recommended-mount-command-options) her istemci bağlarken aşağıda açıklanmıştır.
+Yollara ek olarak, her bir istemciyi bağlamak için aşağıda açıklanan [bağlama komutu seçeneklerini](#use-recommended-mount-command-options) dahil edin.
 
 ### <a name="use-recommended-mount-command-options"></a>Önerilen bağlama komut seçeneklerini kullanın
 
-Sorunsuz istemci bağlama emin olmak için bu ayarları ve bağımsız değişkenler, bağlama komutu geçirin: 
+Sorunsuz bir istemci bağlama sağlamak için, bu ayarları ve bağımsız değişkenleri bağlama komutunuz geçirin: 
 
 ``mount -o hard,nointr,proto=tcp,mountproto=tcp,retry=30 ${VSERVER_IP_ADDRESS}:/${NAMESPACE_PATH} ${LOCAL_FILESYSTEM_MOUNT_POINT}``
 
-| Gerekli ayarları | |
+| Gerekli ayarlar | |
 --- | --- 
-``hard`` | Yazılım takar Azure FXT Edge dosyalayıcı kümeye uygulama hatalarına ve olası veri kaybı ile ilişkilidir. 
-``proto=netid`` | Bu seçenek NFS ağ hataları uygun olarak işlenmesini destekler.
-``mountproto=netid`` | Bu seçenek, bağlama işlemleri için uygun ağ hatalarının işlenmesini destekler.
-``retry=n`` | Ayarlama ``retry=30`` geçici bağlama hatalarını önlemek için. (Farklı bir değer ön plan takar önerilir.)
+``hard`` | Azure FXT Edge Filer kümesine yönelik hafif bağlar, uygulama hatalarıyla ve olası veri kaybı ile ilişkilendirilir. 
+``proto=netid`` | Bu seçenek NFS ağ hatalarının uygun işlenmesini destekler.
+``mountproto=netid`` | Bu seçenek, bağlama işlemleri için ağ hatalarının uygun işlenmesini destekler.
+``retry=n`` | Geçici bağlama hatalarından kaçınmak için ``retry=30`` olarak ayarlayın. (Ön plan takmaları farklı bir değer önerilir.)
 
-| Tercih edilen ayarları  | |
+| Tercih edilen ayarlar  | |
 --- | --- 
-``nointr``            | İstemcilerinize bu seçeneği desteklemek daha eski işletim sistemi çekirdek (2008'den önceki Nisan) kullanıyorsanız, bunu kullanın. ' % S'seçeneği "Giriş" varsayılandır.
+``nointr``            | İstemcileriniz, bu seçeneği destekleyen eski işletim sistemi çekirdekler (2008 Nisan 'tan önce) kullanıyorsa, bunu kullanın. "INTR" seçeneği varsayılandır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-İstemciler bağladınız sonra iş akışınızı test edebilir ve kümenizle kullanmaya başlayın.
+İstemcileri bağladıktan sonra, iş akışınızı test edebilir ve kümeniz ile çalışmaya başlayın.
 
-Paralel verileri kullanarak önbellek yapısı avantajlarından verileri taşımak için yeni bir bulut çekirdek dosyalayıcı gerekiyorsa ele alın. Bazı stratejiler açıklanmıştır [vFXT kümeye veri taşıma](https://docs.microsoft.com/azure/avere-vfxt/avere-vfxt-data-ingest). (Azure Avere vFXT Azure FXT Edge gösterecek şekilde çok benzer önbelleğe alma teknolojisini kullanan bulut tabanlı bir ürün var.)
+Verileri yeni bir bulut çekirdeği filine taşımanız gerekiyorsa, paralel veri alma kullanarak önbellek yapısından yararlanın. Bazı stratejiler, [verileri bir vFXT kümesine taşıma](https://docs.microsoft.com/azure/avere-vfxt/avere-vfxt-data-ingest)bölümünde açıklanmaktadır. (Azure için avere vFXT, Azure FXT Edge filine benzer şekilde önbelleğe alma teknolojisini kullanan bulut tabanlı bir üründür.)
 
-Okuma [İzleyici Azure FXT Edge dosyalayıcı donanım durumunu](fxt-monitor.md) donanım sorunları gidermek gerekiyorsa. 
+Tüm donanım sorunlarını gidermeniz gerekiyorsa, [Izleme Azure FXT Edge filigran donanım durumunu](fxt-monitor.md) okuyun. 

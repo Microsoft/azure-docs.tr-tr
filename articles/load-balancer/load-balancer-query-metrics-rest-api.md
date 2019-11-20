@@ -1,32 +1,32 @@
 ---
-title: REST API'si ile ölçümleri alma
+title: REST API ölçümleri alma
 titlesuffix: Azure Load Balancer
-description: Belirli bir saat ve tarih aralığının yük dengeleyici için sistem durumu ve kullanım ölçümleri toplamaya Azure REST API'lerini kullanın.
+description: Belirli bir zaman ve tarih aralığı için Load Balancer sistem durumu ve kullanım ölçümleri toplamak üzere Azure REST API 'Lerini kullanın.
 services: sql-database
-author: KumudD
+author: asudbring
 ms.reviewer: routlaw
 manager: jeconnoc
 ms.service: load-balancer
 ms.custom: REST, seodec18
 ms.topic: article
 ms.date: 06/06/2017
-ms.author: KumudD
-ms.openlocfilehash: 9f5206ef5348ee8fd7b3fe981a9cfe4afc1367fb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: allensu
+ms.openlocfilehash: 0d12dc04aff58dd6273d8d29d422bdbd9e7c886b
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60734550"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68274537"
 ---
-# <a name="get-load-balancer-utilization-metrics-using-the-rest-api"></a>REST API kullanarak yük dengeleyici kullanım ölçümlerini Al
+# <a name="get-load-balancer-utilization-metrics-using-the-rest-api"></a>REST API kullanarak Load Balancer kullanım ölçümleri alın
 
-Bu yöntem tarafından işlenen bayt sayısını Topla gösterilmektedir bir [Standard Load Balancer](/azure/load-balancer/load-balancer-standard-overview) zaman kullanmanın bir aralığı [Azure REST API'si](/rest/api/azure/).
+Bu nasıl yapılır, [Azure REST API](/rest/api/azure/)kullanarak bir zaman aralığı için [Standart Load Balancer](/azure/load-balancer/load-balancer-standard-overview) işlenen bayt sayısını nasıl toplayacağınızı gösterir.
 
-Eksiksiz başvuru belgeleri ve REST API için ek örneklerini bulunan [Azure İzleyici REST başvurusu](/rest/api/monitor). 
+Tüm başvuru belgelerini ve REST API için ek örnekleri [Azure IZLEYICI Rest başvurusunda](/rest/api/monitor)bulabilirsiniz. 
 
 ## <a name="build-the-request"></a>Derleme isteği
 
-Aşağıdaki GET isteği toplamak için kullan [ByteCount ölçüm](/azure/load-balancer/load-balancer-standard-diagnostics#multi-dimensional-metrics) bir standart yük dengeleyiciden. 
+Bir Standart Load Balancer [ByteCount ölçümünü](/azure/load-balancer/load-balancer-standard-diagnostics#multi-dimensional-metrics) toplamak IÇIN aşağıdaki get isteğini kullanın. 
 
 ```http
 GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/providers/microsoft.insights/metrics?api-version=2018-01-01&metricnames=ByteCount&timespan=2018-06-05T03:00:00Z/2018-06-07T03:00:00Z
@@ -34,32 +34,32 @@ GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{
 
 ### <a name="request-headers"></a>İstek üst bilgileri
 
-Aşağıdaki üst bilgiler gereklidir: 
+Aşağıdaki üstbilgiler gereklidir: 
 
-|İstek üstbilgisi|Açıklama|  
+|İstek üst bilgisi|Açıklama|  
 |--------------------|-----------------|  
-|*Content-Type:*|Gereklidir. Kümesine `application/json`.|  
-|*Authorization:*|Gereklidir. Geçerli bir kümesi `Bearer` [erişim belirteci](/rest/api/azure/#authorization-code-grant-interactive-clients). |  
+|*Content-Type:*|Gerekli. Olarak `application/json`ayarlayın.|  
+|*Authorization:*|Gerekli. Geçerli `Bearer` bir [erişim belirtecine](/rest/api/azure/#authorization-code-grant-interactive-clients)ayarlayın. |  
 
 ### <a name="uri-parameters"></a>URI parametreleri
 
 | Ad | Açıklama |
 | :--- | :---------- |
-| subscriptionId | Bir Azure aboneliği tanımlayan abonelik kimliği. Birden fazla aboneliğiniz varsa, bkz. [birden çok abonelik ile çalışma](https://docs.microsoft.com/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest). |
-| resourceGroupName | Kaynağın bulunduğu kaynak grubunun adı. Bu değer, Azure Resource Manager API'si, CLI veya portalı edinebilirsiniz. |
+| subscriptionId | Bir Azure aboneliğini tanımlayan abonelik KIMLIĞI. Birden çok aboneliğiniz varsa bkz. [birden çok abonelikle çalışma](https://docs.microsoft.com/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest). |
+| resourceGroupName | Kaynağı içeren kaynak grubunun adı. Bu değeri Azure Resource Manager API, CLı veya portaldan elde edebilirsiniz. |
 | loadBalancerName | Azure Load Balancer adı. |
-| metricnames | Virgülle ayrılmış listesi geçerli [Load Balancer ölçümleri](/azure/load-balancer/load-balancer-standard-diagnostics). |
-| API sürümü | İstek için kullanılacak API sürümü.<br /><br /> Api sürümü bu belgede ele alınmaktadır `2018-01-01`, yukarıdaki URL'deki yer.  |
-| TimeSpan | Sorgu zaman aralığı. Bu bir dizedir aşağıdaki biçimde `startDateTime_ISO/endDateTime_ISO`. Örnekte, bir günün değerinde veri döndürmek için bu isteğe bağlı parametreyi ayarlayın. |
+| metricnames | Geçerli [Load Balancer ölçümlerinin](/azure/load-balancer/load-balancer-standard-diagnostics)virgülle ayrılmış listesi. |
+| API sürümü | İstek için kullanılacak API sürümü.<br /><br /> Bu belge, yukarıdaki URL 'ye `2018-01-01`dahil edilen api sürümünü içerir.  |
+| TimeSpan | Sorgunun TimeSpan değeri. Aşağıdaki biçimde `startDateTime_ISO/endDateTime_ISO`bir dizedir. Bu isteğe bağlı parametre, örnekteki verilerin bir gününü döndürecek şekilde ayarlanır. |
 | &nbsp; | &nbsp; |
 
 ### <a name="request-body"></a>İstek gövdesi
 
-Hiçbir istek gövdesi, bu işlem için gereklidir.
+Bu işlem için istek gövdesi gerekli değil.
 
 ## <a name="handle-the-response"></a>Yanıtı işleme
 
-Ölçüm değerleri listesi başarıyla döndürüldüğünde 200 durum kodu döndürülür. Hata kodlarının tam listesini kullanılabilir [başvuru belgeleri](/rest/api/monitor/metrics/list#errorresponse).
+200 durum kodu, ölçüm değerleri listesi başarıyla döndürüldüğünde döndürülür. [Başvuru belgelerinde](/rest/api/monitor/metrics/list#errorresponse)hata kodlarının tam bir listesi bulunur.
 
 ## <a name="example-response"></a>Örnek yanıt 
 

@@ -1,24 +1,24 @@
 ---
-title: Sanal makine boyutu esneklik-Azure ayrılmış VM örnekleri | Microsoft Docs
-description: Ayırma indirimi geçerlidir ne zaman hangi boyutu serisi öğrenin, ayrılmış VM örneği tarafından.
+title: Sanal makine boyutu esnekliği-Azure ayrılmış VM örnekleri
+description: Ayrılmış bir sanal makine örneği tarafından sizin tarafınızdan bir rezervasyon iskontosunun için geçerli olan boyut serisini öğrenin.
 services: virtual-machines-windows
 documentationcenter: ''
 author: yashar
 manager: bandersmsft
 editor: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 08/03/2018
 ms.author: yashar
-ms.openlocfilehash: 7d503d77d51c2abe06485ed33060653e47b00f53
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 329f5642313847a8d36e7fa9414a396f770877a9
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60251168"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073403"
 ---
+# <a name="virtual-machine-size-flexibility-with-reserved-vm-instances"></a>Ayrılmış VM örnekleriyle sanal makine boyutu esnekliği
 [!INCLUDE [virtual-machines-common-reserved-vm-instance-size-flexibility](../../../includes/virtual-machines-common-reserved-vm-instance-size-flexibility.md)]
 

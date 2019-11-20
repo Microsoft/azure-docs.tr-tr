@@ -1,26 +1,26 @@
 ---
-title: Azure sanal makinelerinde ekli VHD'ler ile VM'lerin beklenmeyen yeniden başlatmaları sorunlarını giderme | Microsoft Docs
-description: VM'lerin beklenmeyen yeniden başlatmaları giderilir.
-keywords: SSH bağlantısını reddetti, ssh hatası, azure, SSH bağlantısı başarısız ssh
+title: Azure VM 'lerinde bağlı VHD 'Ler ile VM 'lerin beklenmedik şekilde yeniden başlatmaları için sorun giderme Microsoft Docs
+description: VM 'lerin beklenmedik şekilde yeniden başlatılmasıyla ilgili sorunları giderme.
+keywords: SSH bağlantısı reddedildi, SSH hatası, Azure SSH, SSH bağlantısı başarısız oldu
 services: virtual-machines
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 tags: top-support-issue,azure-service-management,azure-resource-manager
 ms.service: virtual-machines
 ms.topic: article
 ms.date: 11/01/2018
 ms.author: genli
-ms.openlocfilehash: 6273087e28be8b784168d5808918d04d0e4cf303
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: d3b54941d38424e71ac800d2e750ac9bbc96cde9
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60443730"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71086879"
 ---
-# <a name="troubleshoot-unexpected-reboots-of-vms-with-attached-vhds"></a>Ekli VHD'ler ile VM'lerin beklenmeyen yeniden başlatmaları sorunlarını giderme
+# <a name="troubleshoot-unexpected-reboots-of-vms-with-attached-vhds"></a>Bağlı VHD 'lerle VM 'lerin beklenmedik şekilde yeniden başlatmaları için sorun giderme
 
-Azure sanal makinesi (VM) çok sayıda aynı depolama hesabında bulunan ekli VHD'lerde varsa, VM beklenmedik şekilde yeniden başlatılmasına neden ayrı bir depolama hesabınız için ölçeklenebilirlik hedefleri aşabilir. Depolama hesabı için dakika ölçümlerini denetleyin (**TotalRequests**/**Totalıngress**/**TotalEgress**) aşan ani artışlar için bir depolama hesabı için ölçeklenebilirlik hedefleri. Bkz: [ölçümler Percentthrottlingerror'da artış artış gösteriyor](../../storage/common/storage-monitoring-diagnosing-troubleshooting.md#metrics-show-an-increase-in-PercentThrottlingError) azaltma, depolama hesabınızda gerçekleşip gerçekleşmediğini belirleme konusunda yardım almak için.
+Bir Azure sanal makinesi (VM), aynı depolama hesabında bulunan çok sayıda bağlı VHD 'ye sahipse, tek bir depolama hesabı için ölçeklenebilirlik hedeflerini aşabilirsiniz, bu da VM 'nin beklenmedik şekilde yeniden başlatılmasına neden olabilir. Depolama hesabı için ölçeklenebilirlik hedeflerini aşan ani artışlar için depolama hesabının (**totalrequests**/**totalınress**/**TotalEgress**) dakika ölçümlerini denetleyin. Depolama hesabınızda azaltma yapılıp yapılmayacağını belirlemede yardım için bkz. [ölçümler, Percentkısıtıngerror 'da artış gösterir](../../storage/common/storage-monitoring-diagnosing-troubleshooting.md#metrics-show-an-increase-in-PercentThrottlingError) .
 
-Genel olarak, her tek giriş veya çıkış işlem bir VHD'den sanal makine üzerinde çevrilir **Al sayfasında** veya **Put sayfa** temel sayfa blob işlemleri. Bu nedenle, ortamınız için tahmini IOPS kaç VHD'ler, uygulamanızın özel bir davranış tek bir depolama hesabında tabanlı ayarlamak için kullanabilirsiniz. Microsoft, tek bir depolama hesabında 40 ya da daha az disklerine sahip önerir. Bkz: [Azure Storage ölçeklenebilirlik ve performans hedefleri](../../storage/common/storage-scalability-targets.md) depolama hesapları için ölçeklenebilirlik hedefleri hakkında daha fazla ayrıntı için özellikle toplam istek hızı ve depolama hesabı türü için toplam bant genişliği kullanıyorsunuz.
+Genel olarak, bir sanal makineden bir VHD üzerindeki her tek giriş veya çıkış işlemi, temel alınan sayfa blobuna **sayfa al** veya **sayfa yerleştirme** işlemleri yapar. Bu nedenle, uygulamanızın belirli davranışına göre tek bir depolama hesabında kaç VHD 'nin olduğunu ayarlamak için ortamınız için tahmini ıOPS 'yi kullanabilirsiniz. Microsoft, tek bir depolama hesabında 40 veya daha az disk olmasını önerir. Depolama hesaplarının ölçeklenebilirlik hedefleri hakkındaki ayrıntılar için bkz. [Azure Storage ölçeklenebilirlik ve performans hedefleri](../../storage/common/storage-scalability-targets.md) , özellikle de kullandığınız depolama hesabı türü için toplam istek oranı ve toplam bant genişliği.
 
-Depolama hesabınız için ölçeklenebilirlik hedefleri aşıyorsa ayrı ayrı her hesap etkinliğinde azaltmak için birden çok depolama hesabında Vhd'lerinizi yerleştirin.
+Depolama hesabınız için ölçeklenebilirlik hedeflerini aşmanız durumunda, her bir hesaptaki etkinliği azaltmak için VHD 'nizi birden fazla depolama hesabına yerleştirin.

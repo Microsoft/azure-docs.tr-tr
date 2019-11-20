@@ -1,6 +1,6 @@
 ---
-title: Yedekleme hedefi NetBackup ile StorSimple 8000 serisi | Microsoft Docs
-description: Veritas NetBackup ile StorSimple yedekleme hedefi yapılandırmayı açıklar.
+title: NetBackup ile bir yedekleme hedefi olarak StorSimple 8000 serisi | Microsoft Docs
+description: VERITAS NetBackup ile StorSimple yedekleme hedefi yapılandırmasını açıklar.
 services: storsimple
 documentationcenter: ''
 author: harshakirank
@@ -13,486 +13,486 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/15/2017
-ms.author: hkanna
-ms.openlocfilehash: 17428405a0be45854a2eaaef831864f529ed145a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: matd
+ms.openlocfilehash: 957fff73f2406e0e057a7c978dd76a6bd9c156b7
+ms.sourcegitcommit: 13d5eb9657adf1c69cc8df12486470e66361224e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60725371"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "67876200"
 ---
-# <a name="storsimple-as-a-backup-target-with-netbackup"></a>Yedekleme hedefi olarak StorSimple NetBackup ile
+# <a name="storsimple-as-a-backup-target-with-netbackup"></a>NetBackup ile bir yedekleme hedefi olarak StorSimple
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure StorSimple bir Microsoft karma bulut depolama çözümüdür. StorSimple şirket içi çözümün bir uzantısı olarak Azure depolama hesabı kullanarak ve şirket içi depolama ve bulut depolama alanı üzerinden veri otomatik katmanlama üstel veri büyümesi karmaşıklığını ele alır.
+Azure StorSimple, Microsoft 'un sunduğu bir karma bulut depolama çözümüdür. StorSimple, şirket içi çözümün uzantısı olarak bir Azure depolama hesabı kullanarak üstel veri artışına ilişkin karmaşıklıkları giderir ve şirket içi depolama ve bulut depolaması genelinde verileri otomatik olarak katmanlama.
 
-Bu makalede, StorSimple tümleştirmesiyle Veritas NetBackup ve her iki çözüm de tümleştirmeye yönelik en iyi uygulamalar ele alır. Biz de en iyi StorSimple ile tümleştirmek için Veritas NetBackup konusunda önerilerde. Veritas en iyi yöntemleri, yedekleme mimarlar ve Yöneticiler için ayrı ayrı yedekleme gereksinimlerini ve hizmet düzeyi sözleşmelerine (SLA) karşılamak üzere Veritas NetBackup ayarlamak en iyi yolu erteleyin.
+Bu makalede, VERITAS NetBackup ile StorSimple tümleştirmesini ve her iki çözümü tümleştirmek için en iyi uygulamaları tartıştık. Ayrıca, Veritas NetBackup 'ı StorSimple ile en iyi tümleşecek şekilde ayarlamaya yönelik öneriler de sunuyoruz. Tek tek yedekleme gereksinimlerini ve hizmet düzeyi sözleşmelerini (SLA 'Lar) karşılamak üzere VERITAS NetBackup 'ı ayarlamaya yönelik en iyi yol için VERITAS en iyi uygulamaları, yedekleme mimarları ve yöneticileri erteliyoruz.
 
-Biz yapılandırma adımları ve temel kavramları göstermek olsa da, bu makalede göre Hayır olmadığı bir adım adım yapılandırma veya yükleme kılavuzudur. Temel bileşenlere ve altyapılara çalışma sırası ve açıklanmaktadır kavramları desteklemeye hazır olduğunu varsayıyoruz.
+Yapılandırma adımlarını ve temel kavramları gösterdiğimiz halde bu makalede, adım adım bir yapılandırma veya Yükleme Kılavuzu olması gerekir. Temel bileşenlerin ve altyapının çalışma sırasında olduğunu ve tanımladığımız kavramları desteklemeye hazırlandığını varsayalım.
 
-### <a name="who-should-read-this"></a>Bu kimler içindir?
+### <a name="who-should-read-this"></a>Bunu kimler okumalı?
 
-Bu makaledeki bilgiler, yedekleme yöneticilerinin, depolama yöneticilerinin ve depolama, Windows Server 2012 R2, Ethernet, bulut Hizmetleri ve Veritas NetBackup bilgisine sahip depolama mimarları için en faydalı olacaktır.
+Bu makaledeki bilgiler, depolama, Windows Server 2012 R2, Ethernet, Cloud Services ve VERITAS NetBackup hakkında bilgi sahibi olan yedekleme yöneticileri, depolama yöneticileri ve depolama mimarları için en yararlı olacaktır.
 
 ### <a name="supported-versions"></a>Desteklenen sürümler
 
--   NetBackup 7.7.x ve sonraki sürümler
--   [StorSimple güncelleştirme 3 ve sonraki sürümler](storsimple-overview.md#storsimple-workload-summary)
+-   NetBackup 7.7. x ve üzeri sürümleri
+-   [StorSimple güncelleştirme 3 ve sonraki sürümleri](storsimple-overview.md#storsimple-workload-summary)
 
 
 ## <a name="why-storsimple-as-a-backup-target"></a>Neden bir yedekleme hedefi olarak StorSimple?
 
-StorSimple yedekleme hedefi için iyi bir seçimdir çünkü:
+StorSimple, yedekleme hedefi için iyi bir seçimdir çünkü:
 
--   Bu, herhangi bir değişiklik yapmadan bir hızlı yedekleme hedefi olarak kullanmak üzere yedekleme uygulamaları için standart, yerel depolama sağlar. StorSimple, son yedeklemelerin hızlı geri yükleme için de kullanabilirsiniz.
--   Bulut katmanlaması Hesaplı Azure depolama kullanmak için bir Azure bulut depolama hesabıyla sorunsuz bir şekilde tümleşiktir.
--   Otomatik olarak site dışında depolama için olağanüstü durum kurtarma sağlar.
+-   Yedekleme uygulamaları için, hiçbir değişiklik yapılmadan hızlı yedekleme hedefi olarak kullanılacak standart, yerel depolama alanı sağlar. Ayrıca, son yedeklemelerin hızlı bir şekilde geri yüklenmesi için StorSimple 'ı kullanabilirsiniz.
+-   Bulut katmanlaması, uygun maliyetli Azure depolama alanı kullanmak için bir Azure bulut depolama hesabıyla sorunsuzca tümleşiktir.
+-   Olağanüstü durum kurtarma için otomatik olarak şirket dışı depolama sağlar.
 
 ## <a name="key-concepts"></a>Önemli kavramlar
 
-Bir depolama çözümü olarak, çözümün depolama performansını SLA'lar, dikkatli bir değerlendirme ile değiştirin ve kapasite büyüme ihtiyacını başarısı için kritik hızıdır. Buradaki ana fikir, erişim zamanları ve aktarım hızı bulut play kullanılabilmesi için StorSimple yeteneklerini temel bir rol, bir bulut katmanı sunarak olmasıdır.
+Herhangi bir depolama çözümünde olduğu gibi, çözümün depolama performansına, SLA 'Lara, değişiklik hızına ve kapasite büyüme ihtiyaçlarına yönelik dikkatli bir değerlendirme, başarılı olması için kritik öneme sahiptir. Ana fikir, bir bulut katmanı ile tanışın, erişim zamanlarınız ve işlerinizin buluta, işini yapmak için StorSimple özelliği sayesinde temel bir rol oynar.
 
-StorSimple, verilerin (sık erişimli veriler) iyi tanımlanmış çalışma kümesinde çalışan uygulamalar için depolama sağlamak için tasarlanmıştır. Bu modelde, veri çalışma kümesini yerel katmanlarda depolanır ve kalan çalışma dışı/soğuk/arşivlenen veri kümesi, buluta katmanlı. Bu model aşağıdaki şekilde temsil edilir. Neredeyse Düz yeşil çizginin StorSimple cihaz yerel katmanlarda üzerinde depolanan verileri temsil eder. Kırmızı çizgi, tüm katmanlarda StorSimple çözümünde depolanan verilerin toplam miktarı temsil eder. Düz yeşil çizginin üssel kırmızı bir eğri arasındaki boşluk, bulutta depolanan verilerin toplam miktarı temsil eder.
+StorSimple, iyi tanımlanmış bir çalışma verileri kümesi (sık kullanılan veriler) üzerinde çalışan uygulamalara depolama sağlamak için tasarlanmıştır. Bu modelde, çalışma verileri yerel katmanlara depolanır ve kalan çalışma dışı/soğuk/arşivlenmiş veri kümesi buluta katmanlı. Bu model aşağıdaki şekilde temsil edilir. Neredeyse düz yeşil çizgi, StorSimple cihazının yerel katmanlarında depolanan verileri temsil eder. Kırmızı çizgi, tüm katmanlar genelinde StorSimple çözümünde depolanan toplam veri miktarını temsil eder. Düz yeşil çizgi ile üstel kırmızı eğri arasındaki boşluk, bulutta depolanan toplam veri miktarını temsil eder.
 
 **StorSimple katmanlama**
 ![StorSimple katmanlama diyagramı](./media/storsimple-configure-backup-target-using-netbackup/image1.jpg)
 
-Bu mimari ile StorSimple yedekleme hedefi çalışmak için idealdir olduğunu bulabilirsiniz. StorSimple için kullanabilirsiniz:
--   En sık rastlanan yüklemeleriniz, verileri yerel çalışma kümesinden gerçekleştirin.
--   Bulut, geri yükleme işlemleri daha az sıklıkta olduğu site dışı olağanüstü durum kurtarma ve daha eski verileri için kullanın.
+Bu mimari göz önünde bulundurularak, StorSimple 'ın yedekleme hedefi olarak çalışacak şekilde uygun olduğunu fark edersiniz. StorSimple kullanarak şunları yapabilirsiniz:
+-   Yerel çalışma kümesinden en sık geri yükleme işlemini gerçekleştirin.
+-   Şirket dışı olağanüstü durum kurtarma ve daha eski veriler için bulutu kullanarak geri yüklemeler daha sık sık kullanılır.
 
 ## <a name="storsimple-benefits"></a>StorSimple avantajları
 
-StorSimple, şirket içi sorunsuz erişim avantajlarından yararlanarak Microsoft Azure ile sorunsuz bir şekilde tümleştirilmiş bir şirket içi çözümü sağlar ve bulut depolama.
+StorSimple, şirket içi ve bulut depolamaya sorunsuz erişimin avantajlarından yararlanarak Microsoft Azure ile sorunsuz bir şekilde tümleştirilmiş şirket içi bir çözüm sunar.
 
-StorSimple, otomatik katmanlama (SSD) katı hal cihaz ve seri ekli SCSI (SAS) depolama olan şirket içi cihaz ve Azure depolama kullanır. Otomatik katmanlama sık erişilen verileri SSD ve SAS katmanlarda yerel tutar. Bu, nadiren erişilen veriler Azure depolama alanına taşınır.
+StorSimple, katı hal cihazı (SSD) ve seri ekli SCSI (SAS) depolama alanı ve Azure depolama ile şirket içi cihaz arasında otomatik katmanlama kullanır. Otomatik katmanlama, SSD ve SAS katmanlarında sık erişilen verileri yerel olarak korur. Seyrek erişilen verileri Azure depolama 'ya taşıdığından.
 
-StorSimple, bu avantajlar sunar:
+StorSimple şu avantajları sunar:
 
--   Eşi görülmemiş bir yinelenen verileri kaldırma seviyelerine ulaşmasını sağlamak için bulut kullanan benzersiz yinelenenleri kaldırma ve sıkıştırma algoritmaları
+-   Yinelenenleri kaldırma düzeyleri elde etmek için bulutu kullanan benzersiz yinelenenleri kaldırma ve sıkıştırma algoritmaları
 -   Yüksek kullanılabilirlik
 -   Azure coğrafi çoğaltma kullanarak coğrafi çoğaltma
--   Azure tümleştirme
+-   Azure tümleştirmesi
 -   Bulutta veri şifreleme
--   Geliştirilmiş olağanüstü durum kurtarma ve uyumluluk
+-   İyileştirilmiş olağanüstü durum kurtarma ve uyumluluk
 
-StorSimple temelde iki ana dağıtım senaryoları (birincil yedekleme hedefi ve ikincil yedekleme hedefi) gösterir, ama düz, blok depolama cihazı vardır. StorSimple sıkıştırma yapar ve yinelenenleri kaldırma. Sorunsuz bir şekilde gönderir ve bulut uygulama ve dosya sistemi arasındaki verileri alır.
+StorSimple, temelde iki ana dağıtım senaryosu (birincil yedekleme hedefi ve ikincil yedekleme hedefi) sunmakla birlikte, düz, blok depolama cihazından oluşan bir Işlemdir. StorSimple, tüm sıkıştırma ve yinelenenleri kaldırma işlemi yapar. Bulut ile uygulama ve dosya sistemi arasında sorunsuz bir şekilde veri gönderir ve alır.
 
-StorSimple hakkında daha fazla bilgi için bkz: [StorSimple 8000 serisi: Hibrit bulut depolaması çözümü](storsimple-overview.md). Ayrıca, gözden geçirebilirsiniz [teknik StorSimple 8000 serisi özellikleri](storsimple-technical-specifications-and-compliance.md).
+StorSimple hakkında daha fazla bilgi için bkz [. StorSimple 8000 serisi: Karma bulut depolama çözümü](storsimple-overview.md). Ayrıca, [Teknik StorSimple 8000 serisi belirtimlerini](storsimple-technical-specifications-and-compliance.md)inceleyebilirsiniz.
 
 > [!IMPORTANT]
-> Bir StorSimple kullanarak cihaz yedekleme hedefi olarak yalnızca StorSimple 8000 güncelleştirme 3 ve sonraki sürümlerinde desteklenir.
+> Bir StorSimple cihazının yedekleme hedefi olarak kullanılması yalnızca StorSimple 8000 güncelleştirme 3 ve sonraki sürümlerinde desteklenir.
 
 ## <a name="architecture-overview"></a>Mimariye genel bakış
 
-Aşağıdaki tablolar, cihaz modeli mimarisi başlangıç düzeyi bir kılavuz gösterir.
+Aşağıdaki tablolarda cihaz modelden mimari ilk kılavuz gösterilmektedir.
 
-**Yerel için StorSimple kapasiteler ve bulut depolama**
+**Yerel ve bulut depolama için StorSimple kapasiteleri**
 
 | Depolama kapasitesi       | 8100          | 8600            |
 |------------------------|---------------|-----------------|
-| Yerel depolama kapasitesi | &lt; 10 TiB\*  | &lt; 20 TiB\*  |
-| Bulut depolama kapasitesi | &gt; 200 TiB\* | &gt; 500 TiB\* |
+| Yerel depolama kapasitesi | &lt;10 TiB\*  | &lt;20 TiB\*  |
+| Bulut depolama kapasitesi | &gt;200 TiB\* | &gt;500 TiB\* |
 
-\* Depolama boyutu, yinelenenleri kaldırma ya da sıkıştırma varsayar.
+\*Depolama boyutu, yinelenenleri kaldırma veya sıkıştırma olmadığını varsayar.
 
-**Birincil ve ikincil yedeklemeleri için StorSimple kapasiteler**
+**Birincil ve ikincil yedeklemeler için StorSimple kapasiteleri**
 
 | Yedekleme senaryosu  | Yerel depolama kapasitesi  | Bulut depolama kapasitesi  |
 |---|---|---|
-| Birincil yedekleme  | Kurtarma noktası hedefi (RPO) karşılayacak şekilde son yedeklemelerin Hızlı Kurtarma için yerel depolamada depolanan | Yedekleme geçmişi (RPO) en uygun bulut kapasite |
-| İkincil yedekleme | İkincil kopya yedekleme verilerinin bulut kapasite depolanabilir.  | Yok  |
+| Birincil yedekleme  | Kurtarma noktası hedefini (RPO) karşılamak üzere hızlı kurtarma için yerel depolama alanında depolanan son yedeklemeler | Yedekleme geçmişi (RPO) bulut kapasitesine uyar |
+| İkincil yedekleme | Yedekleme verilerinin ikincil kopyası, bulut kapasitesinde depolanabilir  | Yok  |
 
 ## <a name="storsimple-as-a-primary-backup-target"></a>Birincil yedekleme hedefi olarak StorSimple
 
-Bu senaryoda, StorSimple birimlerini yedekleme uygulamasına yedeklemeler için tek depo olarak sunulur. Aşağıdaki şekil içinde tüm yedeklemeler kullanım StorSimple katmanlı birimleri yedekleme ve geri yüklemeler için bir çözüm mimarisini göstermektedir.
+Bu senaryoda, StorSimple birimleri yedekleme uygulamasına yedeklemeler için tek depo olarak sunulur. Aşağıdaki şekilde, tüm yedeklemelerin yedeklemeler ve geri yüklemeler için StorSimple katmanlı birimler kullanıldığı bir çözüm mimarisi gösterilmektedir.
 
-![Mantıksal Diyagram birincil yedekleme hedefi olarak StorSimple](./media/storsimple-configure-backup-target-using-netbackup/primarybackuptargetlogicaldiagram.png)
+![Birincil yedekleme hedefi mantıksal diyagramı olarak StorSimple](./media/storsimple-configure-backup-target-using-netbackup/primarybackuptargetlogicaldiagram.png)
 
-### <a name="primary-target-backup-logical-steps"></a>Birincil hedef yedekleme mantıksal adımlara
+### <a name="primary-target-backup-logical-steps"></a>Birincil hedef yedekleme mantıksal adımları
 
-1.  Hedef Yedekleme aracısı yedekleme sunucusu ile iletişim kurar ve yedekleme aracısını veri yedekleme sunucusuna iletir.
-2.  StorSimple için verileri yedekleme sunucusuna Yazar katmanlı birimler.
-3.  Yedekleme sunucusuna katalog veritabanını güncelleştirir ve ardından yedekleme işi tamamlandıktan.
-4.  Anlık görüntü betik StorSimple anlık görüntü Yöneticisi (başlatma veya silme) tetiklenir.
-5.  Yedekleme sunucusuna bir bekletme ilkesi temel alınarak süresi dolmuş yedeklemeleri siler.
+1.  Yedekleme sunucusu hedef yedekleme aracısıyla iletişim kurar ve yedekleme Aracısı verileri yedekleme sunucusuna iletir.
+2.  Yedekleme sunucusu StorSimple katmanlı birimlere veri yazar.
+3.  Yedekleme sunucusu, katalog veritabanını güncelleştirir ve ardından yedekleme işini sonlandırır.
+4.  Anlık görüntü betiği StorSimple Snapshot Manager 'ı tetikler (Başlat veya Sil).
+5.  Yedekleme sunucusu, bir bekletme ilkesine göre süresi biten yedeklemeleri siler.
 
-### <a name="primary-target-restore-logical-steps"></a>Birincil hedef geri yükleme mantıksal adımlara
+### <a name="primary-target-restore-logical-steps"></a>Birincil hedef geri yükleme mantıksal adımları
 
-1.  Yedek sunucu uygun verileri depolama depodan geri başlatır.
-2.  Yedekleme aracısı yedekleme sunucusundan verileri alır.
-3.  Yedekleme sunucusuna geri yükleme işi tamamlar.
+1.  Yedekleme sunucusu, depolama deposundan uygun verileri geri yüklemeye başlar.
+2.  Yedekleme aracısı, yedekleme sunucusundan verileri alır.
+3.  Yedekleme sunucusu geri yükleme işini sonlandırır.
 
 ## <a name="storsimple-as-a-secondary-backup-target"></a>İkincil yedekleme hedefi olarak StorSimple
 
-Bu senaryoda, StorSimple birimlerini öncelikli olarak uzun süreli saklama veya arşivleme için kullanılır.
+Bu senaryoda, StorSimple birimleri öncelikle uzun süreli saklama veya arşivleme için kullanılır.
 
-Aşağıdaki şekil, ilk hangi yedeklemelerde bir mimari gösterilir ve yüksek performanslı hedef birim geri yükler. Bu yedeklemeler kopyalanır ve arşivlenmiş bir StorSimple için katmanlı birim üzerinde ayarlanmış bir planlamada.
+Aşağıdaki şekilde, ilk yedeklemelerin ve geri yüklemeler için yüksek performanslı bir birimin hedeflemesini gösteren bir mimari gösterilmektedir. Bu yedeklemeler, küme zamanlamasında bir StorSimple katmanlı birime kopyalanır ve arşivlenir.
 
-Bekletme İlkesi kapasite ve performans gereksinimlerinizi işleyebilmeniz yüksek performanslı toplu boyutlandırmak önemlidir.
+En yüksek performanslı haciminizi, bekletme ilkesi kapasitenizi ve performans gereksinimlerinizi işleyebilecek şekilde boyutlandırmak önemlidir.
 
-![Mantıksal Diyagram ikincil yedekleme hedefi olarak StorSimple](./media/storsimple-configure-backup-target-using-netbackup/secondarybackuptargetlogicaldiagram.png)
+![İkincil yedekleme hedefi mantıksal diyagramı olarak StorSimple](./media/storsimple-configure-backup-target-using-netbackup/secondarybackuptargetlogicaldiagram.png)
 
-### <a name="secondary-target-backup-logical-steps"></a>İkincil hedef yedekleme mantıksal adımlara
+### <a name="secondary-target-backup-logical-steps"></a>İkincil hedef yedekleme mantıksal adımları
 
-1.  Hedef Yedekleme aracısı yedekleme sunucusu ile iletişim kurar ve yedekleme aracısını veri yedekleme sunucusuna iletir.
-2.  Backup sunucusu, yüksek performanslı depolama alanına verileri yazar.
-3.  Yedekleme sunucusuna katalog veritabanını güncelleştirir ve ardından yedekleme işi tamamlandıktan.
-4.  Backup sunucusu yedekleme bekletme ilkesi temel alınarak StorSimple kopyalar.
-5.  Anlık görüntü betik StorSimple anlık görüntü Yöneticisi (başlatma veya silme) tetiklenir.
-6.  Yedekleme sunucusuna bir bekletme ilkesi temel alınarak süresi dolmuş yedeklemeler siler.
+1.  Yedekleme sunucusu hedef yedekleme aracısıyla iletişim kurar ve yedekleme Aracısı verileri yedekleme sunucusuna iletir.
+2.  Yedekleme sunucusu, verileri yüksek performanslı depolamaya yazar.
+3.  Yedekleme sunucusu, katalog veritabanını güncelleştirir ve ardından yedekleme işini sonlandırır.
+4.  Yedekleme sunucusu yedeklemeleri bir bekletme ilkesine göre StorSimple 'a kopyalar.
+5.  Anlık görüntü betiği StorSimple Snapshot Manager 'ı tetikler (Başlat veya Sil).
+6.  Yedekleme sunucusu, süresi biten yedeklemeleri bir bekletme ilkesine göre siler.
 
-### <a name="secondary-target-restore-logical-steps"></a>İkincil hedef geri yükleme mantıksal adımlara
+### <a name="secondary-target-restore-logical-steps"></a>İkincil hedef geri yükleme mantıksal adımları
 
-1.  Yedek sunucu uygun verileri depolama depodan geri başlatır.
-2.  Yedekleme aracısı yedekleme sunucusundan verileri alır.
-3.  Yedekleme sunucusuna geri yükleme işi tamamlar.
+1.  Yedekleme sunucusu, depolama deposundan uygun verileri geri yüklemeye başlar.
+2.  Yedekleme aracısı, yedekleme sunucusundan verileri alır.
+3.  Yedekleme sunucusu geri yükleme işini sonlandırır.
 
 ## <a name="deploy-the-solution"></a>Çözümü dağıtma
 
-Bu çözümü dağıtmak için üç adımı gerektirir:
+Bu çözümü dağıtmak için üç adım gerekir:
 1. Ağ altyapısını hazırlayın.
-2. Bir yedekleme hedefi olarak StorSimple Cihazınızı dağıtma.
-3. Veritas NetBackup dağıtın.
+2. StorSimple cihazınızı bir yedekleme hedefi olarak dağıtın.
+3. VERITAS NetBackup 'ı dağıtın.
 
-Her adım, aşağıdaki bölümlerde ayrıntılı olarak ele alınmıştır.
+Her adım aşağıdaki bölümlerde ayrıntılı olarak ele alınmıştır.
 
 ### <a name="set-up-the-network"></a>Ağı ayarlama
 
-StorSimple, StorSimple Azure bulutla tümleşik bir çözüm olduğundan, bir etkin ve Azure bulut çalışan bağlantısı gerektirir. Katmanı için eski, daha az erişilen verileri Azure bulut depolama ve bu bağlantı, bulut anlık görüntüleri, veri yönetimi ve meta veri aktarımı gibi işlemleri için kullanılır.
+StorSimple, Azure bulutu ile tümleştirilmiş bir çözüm olduğundan, StorSimple, Azure bulutuna etkin ve çalışır bir bağlantı gerektirir. Bu bağlantı, bulut anlık görüntüleri, veri yönetimi ve meta veri aktarımı gibi işlemler için kullanılır ve daha eski, daha az erişilen verileri Azure bulut depolama alanına göre katmanlanır.
 
-Çözüm göstermesi bu ağ en iyi uygulamaları izlemenizi öneririz:
+Çözümün en iyi şekilde gerçekleştirilebilmesi için, bu ağ en iyi yöntemlerini izlemenizi öneririz:
 
--   Katmanlama StorSimple Azure'a bağlanan bağlantı, bant genişliği gereksinimlerini karşılaması gerekir. Bunu başarmak için altyapınız için doğru hizmet kalitesi (QoS) düzeyi geçerli RPO ve kurtarma eşleştirilecek anahtarları süresi hedefi (RTO) SLA'lar.
+-   StorSimple katmanlamayı Azure 'a bağlayan bağlantı, bant genişliği gereksinimlerinize uymalıdır. Bunu başarmak için, RPO ve kurtarma süresi hedefi (RTO) SLA 'larınızı eşleştirmek üzere altyapı anahtarlarınızda uygun hizmet kalitesi (QoS) düzeyini uygulayın.
 
--   Maksimum Azure Blob Depolama erişim gecikmeleri yaklaşık 80 ms olmalıdır.
+-   Maksimum Azure Blob depolama erişim gecikmeleri 80 MS 'de olmalıdır.
 
-### <a name="deploy-storsimple"></a>StorSimple'ı dağıtma
+### <a name="deploy-storsimple"></a>StorSimple dağıtma
 
-Adım adım StorSimple dağıtım yönergeleri için bkz. [şirket içi StorSimple Cihazınızı dağıtma](storsimple-deployment-walkthrough-u2.md).
+Adım adım StorSimple dağıtım kılavuzu için bkz. Şirket [Içi StorSimple cihazınızı dağıtma](storsimple-deployment-walkthrough-u2.md).
 
-### <a name="deploy-netbackup"></a>NetBackup dağıtma
+### <a name="deploy-netbackup"></a>NetBackup dağıt
 
-Adım adım NetBackup 7.7.x dağıtım yönergeleri için bkz. [NetBackup 7.7.x belgeleri](http://www.veritas.com/docs/000094423).
+Adım adım NetBackup 7.7. x dağıtım kılavuzu için bkz. [NetBackup 7.7. x belgeleri](http://www.veritas.com/docs/000094423).
 
 ## <a name="set-up-the-solution"></a>Çözümü ayarlama
 
-Bu bölümde, bazı yapılandırma örneği gösterilmektedir. Aşağıdaki örnekler ve öneriler, en temel ve temel uygulama gösterilmektedir. Bu uygulama, doğrudan belirli yedekleme gereksinimlerinizi için geçerli olmayabilir.
+Bu bölümde bazı yapılandırma örnekleri gösterilmektedir. Aşağıdaki örneklerde ve önerilerle en temel ve temel uygulama gösterilmektedir. Bu uygulama, özel yedekleme gereksinimlerinize doğrudan uygulanmayabilir.
 
-### <a name="set-up-storsimple"></a>StorSimple ' ayarlayın
+### <a name="set-up-storsimple"></a>StorSimple 'ı ayarlama
 
-| StorSimple dağıtım görevleri  | Ek Açıklamalar |
+| StorSimple dağıtım görevleri  | Ek açıklamalar |
 |---|---|
-| Şirket içi StorSimple Cihazınızı dağıtın. | Desteklenen sürümler: Güncelleştirme 3 ve sonraki sürümler. |
-| Yedekleme hedefi üzerinde açın. | Yedekleme hedefi modunu devre dışı bırakmak veya etkinleştirmek ve durumu almak için şu komutları kullanın. Daha fazla bilgi için [bir StorSimple cihazı uzaktan bağlanma](storsimple-remote-connect.md).</br> Yedekleme modunu açmak için: `Set-HCSBackupApplianceMode -enable`. </br> Yedekleme modunu devre dışı bırakmak için: `Set-HCSBackupApplianceMode -disable`. </br> Yedekleme modu ayarları geçerli durumunu almak için: `Get-HCSBackupApplianceMode`. |
-| Yedekleme verilerini depolayan biriminiz için ortak bir birim kapsayıcısı oluşturun. Bir birim kapsayıcısındaki tüm veriler yinelenen verileri kaldırma işlemi. | StorSimple birim kapsayıcıları, yinelenenleri kaldırma etki alanlarını tanımlayın.  |
-| StorSimple birimler oluşturun. | Birim boyutu bulut anlık görüntü süresini etkilediğinden birimler öngörülen kullanımınıza yakın boyutlarıyla mümkün olduğunca oluşturun. Bir birimi boyutu hakkında daha fazla bilgi için okuyun [bekletme ilkeleri](#retention-policies).</br> </br> StorSimple kullanın, katmanlı birimleri ve seçin **bu birimi daha az sıklıkta erişilen arşiv verileri için kullanın** onay kutusu. </br> Yerel olarak sabitlenmiş birimler yalnızca kullanılması desteklenmiyor. |
-| Tüm yedekleme hedefi birimler için benzersiz bir StorSimple yedekleme ilkesi oluşturun. | Bir StorSimple yedekleme ilkesine birim tutarlılık grubu tanımlar. |
-| Anlık görüntülerin süresi dolduğundan zamanlama devre dışı bırakın. | Anlık bir işlem sonrası bir işlem olarak tetiklenir. |
+| Şirket içi StorSimple cihazınızı dağıtın. | Desteklenen sürümler: Güncelleştirme 3 ve sonraki sürümleri. |
+| Yedekleme hedefini açın. | Yedekleme hedefi modunu açmak veya kapatmak ve durum almak için bu komutları kullanın. Daha fazla bilgi için bkz. [StorSimple cihazına uzaktan bağlanma](storsimple-remote-connect.md).</br> Yedekleme modunu açmak için: `Set-HCSBackupApplianceMode -enable`. </br> Yedekleme modunu devre dışı bırakmak için `Set-HCSBackupApplianceMode -disable`:. </br> Yedekleme modu ayarlarının geçerli durumunu almak için: `Get-HCSBackupApplianceMode`. |
+| Yedekleme verilerini depolayan biriminiz için ortak bir birim kapsayıcısı oluşturun. Bir birim kapsayıcısındaki tüm veriler yinelenenleri kaldırılmış. | StorSimple birim kapsayıcıları yinelenenleri kaldırma etki alanlarını tanımlar.  |
+| StorSimple birimleri oluşturun. | Birim boyutu bulut anlık görüntü süresi süresini etkilediğinden, boyutları beklenen kullanım için yakın olan birimler oluşturun. Bir birimin nasıl boyutlandıralınacağını öğrenmek için [bekletme ilkeleri](#retention-policies)hakkında bilgi edinin.</br> </br> StorSimple katmanlı birimleri kullanın ve **Bu birimi daha az sıklıkta erişilen arşiv verileri Için kullan** onay kutusunu seçin. </br> Yalnızca yerel olarak sabitlenmiş birimlerin kullanılması desteklenmez. |
+| Tüm yedekleme hedefi birimleri için benzersiz bir StorSimple yedekleme ilkesi oluşturun. | Bir StorSimple yedekleme ilkesi, birim tutarlılığı grubunu tanımlar. |
+| Anlık görüntülerin süre dolduğunda zamanlamayı devre dışı bırakın. | Anlık görüntüler, işlem sonrası bir işlem olarak tetiklenir. |
 
-### <a name="set-up-the-host-backup-server-storage"></a>Konak sunucu yedekleme depolama alanı ayarlama
+### <a name="set-up-the-host-backup-server-storage"></a>Konak yedekleme sunucusu depolamayı ayarlama
 
-Bu yönergelere göre konak yedek sunucu depolama ayarlayın:  
+Konak yedekleme sunucusu depolamayı şu yönergelere göre ayarlayın:  
 
-- Dağıtılmış birimler (Windows Disk Management tarafından oluşturulan); kullanmayın Dağıtılmış birimler desteklenmez.
-- Boyutu 64 KB ayırma NTFS kullanılarak, birimleri biçimlendirin.
-- StorSimple birimlerini NetBackup sunucunun doğrudan eşleyin.
-    - Fiziksel sunucuları için iSCSI kullanın.
-    - Geçiş disklerini sanal sunucular için kullanın.
+- Yayılmış birimleri kullanmayın (Windows disk yönetimi tarafından oluşturulan); yayılmış birimler desteklenmez.
+- Hacimlerinizi, 64 KB 'lik ayırma boyutuyla NTFS kullanarak biçimlendirin.
+- StorSimple birimlerini doğrudan NetBackup sunucusuna eşleyin.
+    - Fiziksel sunucular için Iscsı kullanın.
+    - Sanal sunucular için geçiş disklerini kullanın.
 
 
 ## <a name="best-practices-for-storsimple-and-netbackup"></a>StorSimple ve NetBackup için en iyi uygulamalar
 
-Çözümünüzü aşağıdaki yönergelere göre ayarlama birkaç bölümler.
+Çözümünüzü aşağıdaki birkaç bölümde bulunan yönergelere göre ayarlayın.
 
-### <a name="operating-system-best-practices"></a>İşletim sistemi en iyi uygulamalar
+### <a name="operating-system-best-practices"></a>İşletim sistemi en iyi uygulamaları
 
-- Windows Server şifreleme ve yinelenenleri kaldırma NTFS dosya sistemi devre dışı bırakın.
-- Windows Server birleştirme StorSimple birimlerde devre dışı bırakın.
-- Windows Server StorSimple birimlerde dizin oluşturmayı devre dışı bırakın.
-- Kaynak ana bilgisayar (değil karşı StorSimple birimlerini) bir virüsten koruma taraması çalıştırın.
-- Varsayılan devre dışı kapatma [Windows Server bakım](https://msdn.microsoft.com/library/windows/desktop/hh848037.aspx) Görev Yöneticisi'nde. Bu aşağıdaki yollardan birini yapın:
-  - Windows Görev Zamanlayıcısı'nda bakım configurator devre dışı bırakın.
-  - İndirme [PsExec](https://technet.microsoft.com/sysinternals/bb897553.aspx) Windows SysInternals öğesinden. PsExec indirdikten sonra Windows PowerShell bir Yöneticiyseniz ve türü çalıştırın:
+- NTFS dosya sistemi için Windows Server şifrelemesini ve Yinelenenleri kaldırmayı devre dışı bırakın.
+- StorSimple birimlerinde Windows Server birleştirmesini devre dışı bırakın.
+- StorSimple birimlerinde Windows Server dizinlemeyi devre dışı bırakın.
+- Kaynak konakta (StorSimple birimlerine karşı değil) bir virüsten koruma taraması çalıştırın.
+- Görev Yöneticisi 'nde varsayılan [Windows Server bakımını](https://msdn.microsoft.com/library/windows/desktop/hh848037.aspx) devre dışı bırakın. Bunu aşağıdaki yollarla yapın:
+  - Windows Görev Zamanlayıcı 'de bakım yapılandırıcısını kapatın.
+  - Windows Sysinternals 'dan [PsExec](https://technet.microsoft.com/sysinternals/bb897553.aspx) 'yi indirin. PsExec indirdikten sonra, Windows PowerShell 'i yönetici olarak çalıştırın ve şunu yazın:
     ```powershell
     psexec \\%computername% -s schtasks /change /tn “MicrosoftWindowsTaskSchedulerMaintenance Configurator" /disable
     ```
 
-### <a name="storsimple-best-practices"></a>StorSimple en iyi uygulamalar
+### <a name="storsimple-best-practices"></a>StorSimple en iyi uygulamaları
 
--   StorSimple cihazı için güncelleştirildiğinden emin olun [güncelleştirme 3 veya üzeri](storsimple-install-update-3.md).
--   Yalıtım iSCSI ve bulut trafiği. StorSimple ve backup sunucusu arasındaki trafiği adanmış iSCSI bağlantıları kullanın.
--   StorSimple Cihazınızı adanmış bir yedekleme hedefi olduğundan emin olun. RTO ve RPO etkilediğinden, karma iş yükleri desteklenmez.
+-   StorSimple cihazının [güncelleştirme 3 veya sonraki bir sürüme](storsimple-install-update-3.md)güncelleştirildiğinden emin olun.
+-   Iscsı ve bulut trafiğini yalıtın. StorSimple ve Backup sunucusu arasındaki trafik için adanmış Iscsı bağlantıları kullanın.
+-   StorSimple cihazınızın ayrılmış bir yedekleme hedefi olduğundan emin olun. RTO ve RPO 'larınızı etkilediği için karışık iş yükleri desteklenmez.
 
-### <a name="netbackup-best-practices"></a>NetBackup en iyi uygulamalar
+### <a name="netbackup-best-practices"></a>NetBackup en iyi uygulamaları
 
--   NetBackup veritabanı, yerel sunucuya ve bir StorSimple biriminde değil.
--   Olağanüstü durum kurtarma için bir StorSimple birimde NetBackup veritabanını yedekleyin.
--   Bu çözüm için (aynı zamanda artımlı yedekleri, NetBackup olarak adlandırılır) NetBackup tam ve artımlı yedeklemeler destekliyoruz. Yapay ve toplu artımlı yedeklemeler kullanmamanızı öneririz.
--   Yedek veri dosyaları, yalnızca belirli bir işin verileri içermelidir. Örneğin, arasında medya ekler farklı işleri izin verilir.
+-   NetBackup veritabanının sunucuda yerel olması ve StorSimple biriminde yer olmaması gerekir.
+-   Olağanüstü durum kurtarma için, NetBackup veritabanını bir StorSimple biriminde yedekleyin.
+-   Bu çözüm için NetBackup tam ve artımlı yedeklemeleri (NetBackup 'ta değişiklik artımlı yedeklemeleri olarak da bilinir) destekliyoruz. Yapay ve birikimli artımlı yedeklemeler kullanmanızı öneririz.
+-   Yedekleme veri dosyaları yalnızca belirli bir iş için verileri içermelidir. Örneğin, farklı işlere hiçbir medya ekleme yapılmasına izin verilmez.
 
-Bu gereksinimleri uygulamak için en iyi ve en son NetBackup ayarları görmek için NetBackup belgelerine [www.veritas.com](https://www.veritas.com).
+Bu gereksinimleri uygulamak için en son NetBackup ayarları ve en iyi uygulamalar için [www.Veritas.com](https://www.veritas.com)adresindeki NetBackup belgelerine bakın.
 
 
 ## <a name="retention-policies"></a>Elde tutma ilkeleri
 
-Yaygın yedekleme bekletme ilkesi türlerinden birini Dedenizin Baba ve Son (GFS) bir ilkedir. GFS ilkesinde artımlı yedekleme günlük gerçekleştirilir ve tam yedekleme haftalık ve aylık olarak gerçekleştirilir. Bu ilke sonuçlarda altı StorSimple katmanlı birimler: bir birimin içerdiğini haftalık, aylık ve yıllık tam yedekleme; diğer beş birimleri günlük artımlı yedeklemeleri depolar.
+En yaygın yedekleme bekletme ilkesi türlerinden biri, bir en babalar, babalar ve son (GFS) ilkesidir. Bir GFS ilkesinde, her gün artımlı bir yedekleme gerçekleştirilir ve tam yedeklemeler haftalık ve aylık yapılır. Bu ilke altı StorSimple katmanlı hacime neden olur: bir birim haftalık, aylık ve yıllık tam yedeklemeleri içerir; diğer beş birim günlük artımlı yedeklemeleri depolar.
 
-Aşağıdaki örnekte, bir GFS döndürme kullanırız. Aşağıdaki örnekte varsayılır:
+Aşağıdaki örnekte, GFS dönüşü kullanıyoruz. Örnek aşağıdaki gibi kabul eder:
 
--   Yinelenenleri kaldırılan olmayan veya sıkıştırılmış veriler kullanılır.
--   Tam yedeklemeler her biri 1 TiB ' dir.
--   Günlük artımlı yedeklemeleri her biri 500 GiB ' dir.
--   Dört haftalık yedeklemeler için bir ay tutulur.
--   On iki aylık yedeklemeler, bir yıl boyunca tutulur.
--   Bir yıllık yedekleme için 10 yıl tutulur.
+-   Yinelenenleri kaldırılmış veya sıkıştırılmış veriler kullanılır.
+-   Tam yedeklemeler her biri 1 TiB.
+-   Günlük artımlı yedeklemeler, her biri 500 GiB.
+-   Ayda dört haftalık yedekleme tutulur.
+-   Yılda iki aylık yedekleme tutulur.
+-   10 yıl boyunca bir yıllık yedekleme tutulur.
 
-Önceki varsayımları temel alarak 26 TiB oluşturma StorSimple aylık ve yıllık tam yedekleme için birim katmanlı. 5 TiB oluşturma StorSimple katmanlı birim her artımlı günlük yedeklemeleri için.
+Yukarıdaki varsayımlar temelinde, aylık ve yıllık tam yedeklemeler için 26-TiB StorSimple katmanlı bir birim oluşturun. Her bir artımlı günlük yedeklemelerin her biri için 5-TiB StorSimple katmanlı bir birim oluşturun.
 
-| Yedekleme türü bekletme | Boyut (TiB) | GFS çarpanı\* | Toplam Kapasite (TiB)  |
+| Yedekleme türü tutma | Boyut (TiB) | GFS çarpanı\* | Toplam Kapasite (TiB)  |
 |---|---|---|---|
-| Haftalık tam | 1 | 4  | 4 |
-| Günlük artımlı | 0,5 | 20 (döngüleri eşit sayıda hafta / ay) | 12 (2 ek kota için) |
-| Aylık tam | 1 | 12 | 12 |
-| Yıllık tam | 1  | 10 | 10 |
+| Haftalık tam | 1\. | 4  | 4 |
+| Günlük artımlı | 0,5 | 20 (ayda eşit sayıda hafta döngüsü) | 12 (ek kota için 2) |
+| Aylık tam | 1\. | 12 | 12 |
+| Yıllık tam | 1\.  | 10 | 10 |
 | GFS gereksinimi |   | 38 |   |
-| Ek kota  | 4  |   | 42 toplam GFS gereksinimi  |
+| Ek kota  | 4  |   | Toplam 42 GFS gereksinimi  |
 
-\* GFS çarpan koruma ve yedekleme İlkesi gereksinimlerinizi karşılayacak şekilde korumak için ihtiyaç duyduğunuz kopya sayısıdır.
+\*GFS çarpanı, yedekleme ilkesi gereksinimlerinizi karşılamak için korumanız ve korumanız gereken kopya sayısıdır.
 
-## <a name="set-up-netbackup-storage"></a>NetBackup depolamayı ayarlama
+## <a name="set-up-netbackup-storage"></a>NetBackup depolaması ayarlama
 
-### <a name="to-set-up-netbackup-storage"></a>NetBackup depolama alanı ayarlama için
+### <a name="to-set-up-netbackup-storage"></a>NetBackup depolaması ayarlamak için
 
-1.  NetBackup yönetim konsolunda seçin **medya ve cihaz Yönetimi** > **cihazları** > **Disk havuzları**. Disk havuzu Yapılandırma Sihirbazı'nda depolama sunucu türü seçin **AdvancedDisk**ve ardından **sonraki**.
+1.  NetBackup yönetim konsolunda **medya ve cihaz yönetim** > **aygıtları** > **disk havuzları**' nı seçin. Disk havuzu yapılandırma sihirbazında, **Advanceddisk**depolama sunucusu türünü seçin ve ardından **İleri**' yi seçin.
 
-    ![NetBackup yönetim konsolunda, Disk havuzu Yapılandırma Sihirbazı](./media/storsimple-configure-backup-target-using-netbackup/nbimage1.png)
+    ![NetBackup Yönetim Konsolu, disk havuzu yapılandırma Sihirbazı](./media/storsimple-configure-backup-target-using-netbackup/nbimage1.png)
 
-2.  Sunucunuzu seçin ve ardından **sonraki**.
+2.  Sunucunuzu seçin ve ardından **İleri**' yi seçin.
 
-    ![NetBackup Yönetim Konsolu sunucusunu seçin](./media/storsimple-configure-backup-target-using-netbackup/nbimage2.png)
+    ![NetBackup Yönetim Konsolu, sunucuyu seçin](./media/storsimple-configure-backup-target-using-netbackup/nbimage2.png)
 
-3.  StorSimple toplu seçin.
+3.  StorSimple biriminizi seçin.
 
-    ![NetBackup yönetim konsolunda, StorSimple birim diskini seçin](./media/storsimple-configure-backup-target-using-netbackup/nbimage3.png)
+    ![NetBackup Yönetim Konsolu, StorSimple birim diskini seçin](./media/storsimple-configure-backup-target-using-netbackup/nbimage3.png)
 
-4.  Yedekleme hedefi için bir ad girin ve ardından **sonraki** > **sonraki** Sihirbazı tamamlamak için.
+4.  Yedekleme hedefi için bir ad girin ve ardından **İleri** > ' yi seçerek Sihirbazı sona erdirin.
 
-5.  Ayarları gözden geçirin ve ardından **son**.
+5.  Ayarları gözden geçirin ve ardından **son**' u seçin.
 
-6.  Her birim atama sonunda, bu önerilen ile eşleşen depolama cihaz ayarlarını değiştirmek [en iyi uygulamalar için StorSimple ve NetBackup](#best-practices-for-storsimple-and-netbackup).
+6.  Her birim atamasının sonunda, depolama cihazı ayarlarını [StorSimple ve NetBackup Için en iyi yöntemler için](#best-practices-for-storsimple-and-netbackup)önerilen yöntemlerle eşleşecek şekilde değiştirin.
 
-7. StorSimple birimlerinizi atama tamamlandı olana kadar 1-6. adımları tekrarlayın.
+7. StorSimple birimlerinizi atamayı tamamlayana kadar 1-6 arasındaki adımları yineleyin.
 
-    ![NetBackup yönetim konsolunda, disk yapılandırması](./media/storsimple-configure-backup-target-using-netbackup/nbimage5.png)
+    ![NetBackup Yönetim Konsolu, disk yapılandırması](./media/storsimple-configure-backup-target-using-netbackup/nbimage5.png)
 
-## <a name="set-up-storsimple-as-a-primary-backup-target"></a>Birincil bir yedekleme hedefi olarak StorSimple ayarlama
+## <a name="set-up-storsimple-as-a-primary-backup-target"></a>Birincil yedekleme hedefi olarak StorSimple 'ı ayarlama
 
 > [!NOTE]
-> Bulut hızlarında buluta katmanlanmış bir yedekten verileri geri yüklemeler oluşur.
+> Buluta katmanlı bir yedekten veri geri yüklemeleri bulut hızlarından oluşur.
 
-Aşağıdaki şekilde, bir yedekleme işi için tipik bir birimin eşlemeyi gösterir. Bu durumda, haftalık yedekleri Cumartesi tam disk eşleyin ve artımlı yedeklemeler Pazartesi-Cuma artımlı disklere eşleyin. Tüm yedekleme ve geri yüklemeler Storsimple'dan verileri, birim katmanlı.
+Aşağıdaki şekilde, tipik bir birimin bir yedekleme işine eşlenmesi gösterilmektedir. Bu durumda, tüm haftalık yedeklemeler Cumartesi tam diskine eşlenir ve artımlı yedeklemeler Pazartesi-Cuma artımlı disklere eşlenir. Tüm yedeklemeler ve geri yüklemeler StorSimple katmanlı bir birimdir.
 
 ![Birincil yedekleme hedefi yapılandırma mantıksal diyagramı](./media/storsimple-configure-backup-target-using-netbackup/primarybackuptargetdiagram.png)
 
-### <a name="storsimple-as-a-primary-backup-target-gfs-schedule-example"></a>Birincil GFS yedekleme hedefi olarak StorSimple örnek zamanlama
+### <a name="storsimple-as-a-primary-backup-target-gfs-schedule-example"></a>Birincil yedekleme hedefi GFS zamanlama örneği olarak StorSimple
 
-Dört hafta, aylık ve yıllık GFS döndürme tablosunun bir örnek aşağıda verilmiştir:
+Dört hafta, aylık ve yıllık için bir GFS döndürme zamanlaması örneği aşağıda verilmiştir:
 
-| Sıklığı/yedekleme türü | Tam | Artımlı (gün 1-5)  |   
+| Sıklık/yedekleme türü | Tam | Artımlı (gün 1-5)  |   
 |---|---|---|
 | Haftalık (hafta 1-4) | Cumartesi | Pazartesi-Cuma |
 | Aylık  | Cumartesi  |   |
-| Yıllık yedekleme | Cumartesi  |   |
+| Yıllık | Cumartesi  |   |
 
-## <a name="assigning-storsimple-volumes-to-a-netbackup-backup-job"></a>StorSimple birimlerini NetBackup yedekleme işi için atama
+## <a name="assigning-storsimple-volumes-to-a-netbackup-backup-job"></a>Bir NetBackup yedekleme işine StorSimple birimleri atama
 
-Aşağıdaki sırayı NetBackup aracı yönergelerine uygun olarak NetBackup ve hedef ana bilgisayarın yapılandırıldığını varsayar.
+Aşağıdaki sıra, NetBackup 'ın ve hedef konağın NetBackup Aracısı yönergelerine uygun olarak yapılandırıldığını varsayar.
 
-### <a name="to-assign-storsimple-volumes-to-a-netbackup-backup-job"></a>NetBackup yedekleme işi için StorSimple birim atamak için
+### <a name="to-assign-storsimple-volumes-to-a-netbackup-backup-job"></a>Bir NetBackup yedekleme işine StorSimple birimleri atamak için
 
-1. NetBackup yönetim konsolunda seçin **NetBackup Yönetim**, sağ **ilkeleri**ve ardından **yeni ilke**.
+1. NetBackup yönetim konsolunda, **NetBackup Management**' ı seçin, **ilkeler**' e sağ tıklayın ve ardından **Yeni ilke**' yi seçin.
 
-   ![NetBackup yönetim konsolunda, yeni bir ilke oluşturun](./media/storsimple-configure-backup-target-using-netbackup/nbimage6.png)
+   ![NetBackup Yönetim Konsolu, yeni bir ilke oluşturun](./media/storsimple-configure-backup-target-using-netbackup/nbimage6.png)
 
-2. İçinde **yeni ilke Ekle** iletişim kutusu, ilke için bir ad girin ve ardından **kullanım ilkesi Yapılandırma Sihirbazı'nı** onay kutusu. **Tamam**’ı seçin.
+2. **Yeni Ilke Ekle** iletişim kutusunda, ilke için bir ad girin ve ardından **Ilke Yapılandırma Sihirbazı 'nı kullan** onay kutusunu seçin. **Tamam**’ı seçin.
 
-   ![NetBackup yönetim konsolunda, yeni ilke iletişim kutusu Ekle](./media/storsimple-configure-backup-target-using-netbackup/nbimage7.png)
+   ![NetBackup Yönetim Konsolu, yeni bir Ilke Ekle iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage7.png)
 
-3. Yedekleme türü ve ardından yedekleme ilkesini Yapılandırma Sihirbazı'nda seçmediğiniz **sonraki**.
+3. Yedekleme Ilkesi Yapılandırma sihirbazında, istediğiniz yedekleme türünü seçin ve ardından **İleri**' yi seçin.
 
-   ![NetBackup yönetim konsolunda, select yedekleme türü](./media/storsimple-configure-backup-target-using-netbackup/nbimage8.png)
+   ![NetBackup Yönetim Konsolu, yedekleme türü seçin](./media/storsimple-configure-backup-target-using-netbackup/nbimage8.png)
 
-4. İlke türü ayarlamak için seçin **standart**ve ardından **sonraki**.
+4. İlke türünü ayarlamak için **Standart**' ı seçin ve ardından **İleri**' yi seçin.
 
-   ![NetBackup yönetim konsolunda, select ilke türü](./media/storsimple-configure-backup-target-using-netbackup/nbimage9.png)
+   ![NetBackup Yönetim Konsolu, ilke türü seçin](./media/storsimple-configure-backup-target-using-netbackup/nbimage9.png)
 
-5. Konağınız seçin, **istemci işletim sistemini algılar** onay kutusunu işaretleyin ve ardından **Ekle**. **İleri**’yi seçin.
+5. Ana bilgisayarınızı seçin, **istemci işletim sistemini Algıla** onay kutusunu seçin ve ardından **Ekle**' yi seçin. **İleri**’yi seçin.
 
-   ![NetBackup yönetim konsolunda, yeni bir ilke listesi istemcileri](./media/storsimple-configure-backup-target-using-netbackup/nbimage10.png)
+   ![NetBackup Yönetim Konsolu, istemcileri yeni bir ilkede listeleme](./media/storsimple-configure-backup-target-using-netbackup/nbimage10.png)
 
 6. Yedeklemek istediğiniz sürücüleri seçin.
 
-   ![NetBackup yönetim konsolunda, yeni bir ilke için yedekleme seçimleri](./media/storsimple-configure-backup-target-using-netbackup/nbimage11.png)
+   ![NetBackup Yönetim Konsolu, yeni bir ilke için yedekleme seçimleri](./media/storsimple-configure-backup-target-using-netbackup/nbimage11.png)
 
-7. Dönüşümlü yedekleme gereksinimlerinizi karşılayacak sıklığı ve bekletme değerleri seçin.
+7. Yedekleme döndürme gereksinimlerinizi karşılayan sıklığı ve bekletme değerlerini seçin.
 
-   ![NetBackup yönetim konsolunda, yedekleme sıklığı ve döndürme için yeni bir ilke](./media/storsimple-configure-backup-target-using-netbackup/nbimage12.png)
+   ![NetBackup Yönetim Konsolu, yeni bir ilke için yedekleme sıklığı ve döndürme](./media/storsimple-configure-backup-target-using-netbackup/nbimage12.png)
 
-8. Seçin **sonraki** > **sonraki** > **son**.  İlke oluşturulduktan sonra zamanlamasını değiştirebilirsiniz.
+8. **Sonraki** > sonrakison > **bitiş**' i seçin.  Zamanlamayı, ilke oluşturulduktan sonra değiştirebilirsiniz.
 
-9. Oluşturulan yeni ilke genişletin ve ardından seçmek için Seç **zamanlamaları**.
+9. Yeni oluşturduğunuz ilkeyi genişletmeyi seçin ve ardından **zamanlamalar**' ı seçin.
 
-   ![NetBackup yönetim konsolunda, yeni bir ilke için zamanlamaları](./media/storsimple-configure-backup-target-using-netbackup/nbimage13.png)
+   ![NetBackup Yönetim Konsolu, yeni bir ilke için zamanlamalar](./media/storsimple-configure-backup-target-using-netbackup/nbimage13.png)
 
-10. Sağ **fark dahil edilen**seçin **yeni kopyalayın**ve ardından **Tamam**.
+10. **Fark-Inc**' e sağ tıklayın, **Yeni ' ye Kopyala**' yı seçin ve **Tamam**' ı seçin.
 
-    ![NetBackup yönetim konsolunda, Yeni ilkeye kopyalama zamanlaması](./media/storsimple-configure-backup-target-using-netbackup/nbimage14.png)
+    ![NetBackup Yönetim Konsolu, zamanlamayı yeni bir ilkeye Kopyala](./media/storsimple-configure-backup-target-using-netbackup/nbimage14.png)
 
-11. Yeni oluşturulan zamanlama sağ tıklayın ve ardından **değişiklik**.
+11. Yeni oluşturulan zamanlamaya sağ tıklayın ve ardından **Değiştir**' i seçin.
 
-12. Üzerinde **öznitelikleri** sekmesinde **ilkesi depolama seçimi geçersiz kılma** onay kutusunu işaretleyin ve ardından Pazartesi artımlı yedeklemeler nereye birimi seçin.
+12. **Öznitelikler** sekmesinde, **Ilke depolama seçimini geçersiz kıl** onay kutusunu seçin ve ardından Pazartesi artımlı yedeklemelerin bulunduğu hacmi seçin.
 
-    ![NetBackup Yönetim Konsolu'nda zamanlamasını değiştirme](./media/storsimple-configure-backup-target-using-netbackup/nbimage15.png)
+    ![NetBackup Yönetim Konsolu, Zamanlamayı Değiştir](./media/storsimple-configure-backup-target-using-netbackup/nbimage15.png)
 
-13. Üzerinde **başlangıç penceresi** sekmesinde, zaman penceresi yedeklemeleriniz için seçin.
+13. **Başlangıç penceresi** sekmesinde yedeklemelerinizin zaman penceresini seçin.
 
-    ![NetBackup yönetim konsolunda, değişiklik başlangıç penceresi](./media/storsimple-configure-backup-target-using-netbackup/nbimage16.png)
+    ![NetBackup Yönetim Konsolu, başlangıç penceresini Değiştir](./media/storsimple-configure-backup-target-using-netbackup/nbimage16.png)
 
 14. **Tamam**’ı seçin.
 
-15. İçin her bir artımlı yedekleme 10-14 adımları yineleyin. Oluşturduğunuz her bir yedekleme zamanlaması ve uygun birimi seçin.
+15. Her artımlı yedekleme için 10-14 adımlarını yineleyin. Oluşturduğunuz her yedekleme için uygun birimi ve zamanlamayı seçin.
 
-16. Sağ **fark dahil edilen** zamanlayın ve silin.
+16. **Fark-Inc** zamanlamasını sağ tıklatın ve silin.
 
-17. Yedekleme gereksinimlerinizi karşılamak için tam zamanlamanızı değiştirin.
+17. Tam zamanlamanızı, yedekleme gereksinimlerinizi karşılayacak şekilde değiştirin.
 
-    ![NetBackup yönetim konsolunda, tam zamanlamasını değiştirme](./media/storsimple-configure-backup-target-using-netbackup/nbimage17.png)
+    ![NetBackup Yönetim Konsolu, tam Zamanlamayı Değiştir](./media/storsimple-configure-backup-target-using-netbackup/nbimage17.png)
 
-18. Başlangıç penceresi değiştirin.
+18. Başlangıç penceresini değiştirin.
 
-    ![NetBackup Yönetim Konsolu'nda değiştirme başlangıç penceresi](./media/storsimple-configure-backup-target-using-netbackup/nbimage18.png)
+    ![NetBackup Yönetim Konsolu, başlangıç penceresini değiştirme](./media/storsimple-configure-backup-target-using-netbackup/nbimage18.png)
 
 19. Son zamanlama şöyle görünür:
 
     ![NetBackup Yönetim Konsolu, son zamanlama](./media/storsimple-configure-backup-target-using-netbackup/nbimage19.png)
 
-## <a name="set-up-storsimple-as-a-secondary-backup-target"></a>İkincil bir yedekleme hedefi olarak StorSimple ayarlama
+## <a name="set-up-storsimple-as-a-secondary-backup-target"></a>İkincil yedekleme hedefi olarak StorSimple 'ı ayarlama
 
 > [!NOTE]
->Bulut hızlarında buluta katmanlanmış bir yedekten verileri geri yüklemeler oluşur.
+>Buluta katmanlı bir yedekten veri geri yüklemeleri bulut hızlarından oluşur.
 
-Bu modelde, geçici bir önbellek olarak görev yapacak bir depolama medyasına (dışında StorSimple) olmalıdır. Örneğin, boşluk, giriş/çıkış (g/ç) ve bant genişliği uyum sağlamak için yedek birim bağımsız diskler (RAID) dizisi kullanabilirsiniz. RAID 5, 50 ve 10 kullanmanızı öneririz.
+Bu modelde, geçici önbellek olarak kullanılacak bir depolama medyası (StorSimple dışında) olmalıdır. Örneğin, boşluk, giriş/çıkış (g/ç) ve bant genişliğini karşılamak için yedekli bir bağımsız diskler dizisi (RAID) birimi kullanabilirsiniz. RAID 5, 50 ve 10 kullanmanızı öneririz.
 
-Aşağıdaki şekilde normal kısa vadeli bekletme yerel (sunucu) birimleri gösterir ve uzun süreli saklama birimleri arşivler. Bu senaryoda, tüm yedeklemeler (sunucu) yerel RAID birimine çalıştırın. Bu yedeklemeler düzenli aralıklarla yinelenen ve bir arşivleri birimine arşivlenir. Kısa vadeli bekletme kapasite ve performans gereksinimlerinizi işleyebilmeniz yerel (sunucu) RAID toplu boyutlandırmak önemlidir.
+Aşağıdaki şekilde, tipik kısa süreli bekletme yerel (sunucu) birimleri ve uzun süreli bekletme Arşivi birimleri gösterilmektedir. Bu senaryoda, tüm yedeklemeler yerel (sunucu) RAID birimi üzerinde çalışır. Bu yedeklemeler düzenli aralıklarla çoğaltılır ve bir arşiv birimine arşivlenir. Kısa vadeli saklama kapasitesini ve performans gereksinimlerinizi işleyebilmesi için yerel (sunucu) RAID birimine göre boyutlandırmamak önemlidir.
 
-### <a name="storsimple-as-a-secondary-backup-target-gfs-example"></a>İkincil yedekleme hedefi GFS örnek olarak StorSimple
+### <a name="storsimple-as-a-secondary-backup-target-gfs-example"></a>İkincil yedekleme hedefi GFS olarak StorSimple örneği
 
-![Mantıksal Diyagram ikincil yedekleme hedefi olarak StorSimple](./media/storsimple-configure-backup-target-using-netbackup/secondarybackuptargetdiagram.png)
+![İkincil yedekleme hedefi mantıksal diyagramı olarak StorSimple](./media/storsimple-configure-backup-target-using-netbackup/secondarybackuptargetdiagram.png)
 
-Aşağıdaki tabloda, yedekler yerel ve StorSimple diskler üzerinde çalıştırmak için ayarlama işlemi gösterilmektedir. Bu, tek tek ve toplam kapasite gereksinimlerini içerir.
+Aşağıdaki tabloda, yerel ve StorSimple disklerinde çalışacak yedeklemelerin nasıl ayarlanacağı gösterilmektedir. Bireysel ve toplam kapasite gereksinimlerini içerir.
 
-### <a name="backup-configuration-and-capacity-requirements"></a>Yedekleme Yapılandırması ve kapasite gereksinimleri
+### <a name="backup-configuration-and-capacity-requirements"></a>Yedekleme yapılandırması ve kapasite gereksinimleri
 
-| Yedekleme türü ve saklama | Yapılandırılmış depolama | Boyut (TiB) | GFS çarpanı | Toplam Kapasite\* (TiB) |
+| Yedekleme türü ve bekletme | Yapılandırılan depolama alanı | Boyut (TiB) | GFS çarpanı | Toplam kapasite\* (Tib) |
 |---|---|---|---|---|
-| Hafta 1 (tam ve artımlı) |Yerel disk (kısa vadeli)| 1 | 1\. | 1 |
-| StorSimple hafta 2-4 |StorSimple disk (uzun süreli) | 1 | 4 | 4 |
-| Aylık tam |StorSimple disk (uzun süreli) | 1 | 12 | 12 |
-| Yıllık tam |StorSimple disk (uzun süreli) | 1 | 1\. | 1 |
-|GFS birim boyutu gereksinimini |  |  |  | 18*|
+| Hafta 1 (tam ve artımlı) |Yerel disk (kısa vadeli)| 1\. | 1\. | 1\. |
+| StorSimple hafta 2-4 |StorSimple diski (uzun vadeli) | 1\. | 4 | 4 |
+| Aylık tam |StorSimple diski (uzun vadeli) | 1\. | 12 | 12 |
+| Yıllık tam |StorSimple diski (uzun vadeli) | 1\. | 1\. | 1\. |
+|GFS birimleri boyut gereksinimi |  |  |  | 18*|
 
-\* Toplam Kapasite 17 TiB StorSimple'nın, diskler ve yerel RAID birimi 1 TiB içerir.
+\*Toplam kapasite, StorSimple disklerinin 17 TiB ve yerel RAID birimi 'nin 1 TiB 'leri içerir.
 
 
-### <a name="gfs-example-schedule-gfs-rotation-weekly-monthly-and-yearly-schedule"></a>GFS örnek zamanlaması: GFS döndürme haftalık, aylık ve yıllık zamanlama
+### <a name="gfs-example-schedule-gfs-rotation-weekly-monthly-and-yearly-schedule"></a>GFS örnek zamanlaması: GFS haftalık, aylık ve yıllık zamanlama
 
-| Hafta | Tam | Artımlı günlük 1 | Artımlı günlük 2 | Artımlı günlük 3 | Artımlı günlük 4 | Artımlı günlük 5 |
+| Hafta | Tam | Artımlı gün 1 | Artımlı gün 2 | Artımlı gün 3 | Artımlı gün 4 | Artımlı gün 5 |
 |---|---|---|---|---|---|---|
-| 1 hafta | Yerel RAID birimi  | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi |
-| 2 hafta | StorSimple hafta 2-4 |   |   |   |   |   |
-| 3 hafta | StorSimple hafta 2-4 |   |   |   |   |   |
-| 4 hafta | StorSimple hafta 2-4 |   |   |   |   |   |
+| Hafta 1 | Yerel RAID birimi  | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi |
+| Hafta 2 | StorSimple hafta 2-4 |   |   |   |   |   |
+| Hafta 3 | StorSimple hafta 2-4 |   |   |   |   |   |
+| Hafta 4 | StorSimple hafta 2-4 |   |   |   |   |   |
 | Aylık | StorSimple aylık |   |   |   |   |   |
-| Yıllık yedekleme | Yıllık StorSimple  |   |   |   |   |   |
+| Yıllık | StorSimple yıllık  |   |   |   |   |   |
 
 
-## <a name="assign-storsimple-volumes-to-a-netbackup-archive-and-duplication-job"></a>StorSimple birim atamak NetBackup Arşiv ve çoğaltma işi
+## <a name="assign-storsimple-volumes-to-a-netbackup-archive-and-duplication-job"></a>Bir NetBackup arşivine ve yineleme işine StorSimple birimleri atama
 
-Çok çeşitli depolama ve medya yönetimi için seçenekleri NetBackup sağladığından, Veritas veya depolama yaşam döngüsü ilkesi (SLP'den) gereksinimleriniz düzgün bir şekilde değerlendirmek için NetBackup Mimarı ile başvurun öneririz.
+NetBackup, depolama ve medya yönetimi için çok çeşitli seçenekler sağladığından, depolama yaşam döngüsü ilkesi (SLP) gereksinimlerinizi doğru şekilde değerlendirmek için VERITAS veya NetBackup mimariyle ilgili bir sorun yaşamanız önerilir.
 
-İlk disk havuzları tanımladıktan sonra toplam dört İlkesi üç ek depolama yaşam döngüsü ilkeleri tanımlar gerekir:
-* LocalRAIDVolume
+İlk disk havuzlarını tanımladıktan sonra, toplam dört ilke için üç ek depolama yaşam döngüsü ilkesi tanımlamanız gerekir:
+* Localkıdvolume
 * StorSimpleWeek2-4
 * StorSimpleMonthlyFulls
 * StorSimpleYearlyFulls
 
-### <a name="to-assign-storsimple-volumes-to-a-netbackup-archive-and-duplication-job"></a>StorSimple birim NetBackup Arşiv ve çoğaltma işi atamak için
+### <a name="to-assign-storsimple-volumes-to-a-netbackup-archive-and-duplication-job"></a>Bir NetBackup arşivine ve yineleme işine StorSimple birimleri atamak için
 
-1. NetBackup yönetim konsolunda seçin **depolama** > **depolama yaşam döngüsü ilkeleri** > **yeni depolama yaşam döngüsü ilkesi**.
+1. NetBackup yönetim konsolunda, **depolama** > **alanı yaşam döngüsü ilkeleri** > **Yeni depolama yaşam döngüsü ilkesi**' ni seçin.
 
-   ![NetBackup yönetim konsolunda, yeni depolama yaşam döngüsü ilkesi](./media/storsimple-configure-backup-target-using-netbackup/nbimage20.png)
+   ![NetBackup Yönetim Konsolu, yeni depolama yaşam döngüsü ilkesi](./media/storsimple-configure-backup-target-using-netbackup/nbimage20.png)
 
-2. Anlık görüntü için bir ad girin ve ardından **Ekle**.
+2. Anlık görüntü için bir ad girin ve ardından **Ekle**' yi seçin.
 
-3. İçinde **yeni işlem** iletişim kutusundaki **özellikleri** sekmesinde için **işlemi**seçin **yedekleme**. İstediğiniz değerleri seçin **hedef depolama**, **saklama türü**, ve **saklama süresi**. **Tamam**’ı seçin.
+3. **Yeni işlem** iletişim kutusunda, **Özellikler** sekmesinde, **işlem**için **Yedekle**' yi seçin. **Hedef depolama**, **bekletme türü**ve **Bekletme dönemi**için istediğiniz değerleri seçin. **Tamam**’ı seçin.
 
-   ![NetBackup yönetim konsolunda, yeni işlem iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage22.png)
+   ![NetBackup Yönetim Konsolu, yeni Işlem iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage22.png)
 
-   Bu ilk yedekleme işlemi ve depo tanımlar.
+   Bu, ilk yedekleme işlemini ve depoyu tanımlar.
 
-4. Önceki işlem vurgulayın ve ardından seçmek için Seç **Ekle**. İçinde **değiştirme depolama işlemi** iletişim kutusunda, istediğiniz değerleri seçin **hedef depolama**, **saklama türü**, ve **saklamasüresi**.
+4. Önceki işlemi vurgulamak için seçin ve ardından **Ekle**' yi seçin. **Depolama Işlemini Değiştir** iletişim kutusunda, **hedef depolama**, **bekletme türü**ve **Bekletme dönemi**için istediğiniz değerleri seçin.
 
-   ![NetBackup yönetim konsolunda, depolama işlemi Değiştir iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage23.png)
+   ![NetBackup Yönetim Konsolu, depolama Işlemini değiştirme iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage23.png)
 
-5. Önceki işlem vurgulayın ve ardından seçmek için Seç **Ekle**. İçinde **yeni depolama yaşam döngüsü ilkesi** iletişim kutusunda, bir yıl boyunca aylık yedeklemeler ekleyin.
+5. Önceki işlemi vurgulamak için seçin ve ardından **Ekle**' yi seçin. **Yeni depolama yaşam döngüsü ilkesi** iletişim kutusunda bir yıl boyunca aylık yedeklemeler ekleyin.
 
-   ![NetBackup yönetim konsolunda, yeni depolama yaşam döngüsü ilkesi iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage24.png)
+   ![NetBackup Yönetim Konsolu, yeni depolama yaşam döngüsü Ilkesi iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage24.png)
 
-6. Gereksinim duyduğunuz kapsamlı SLP'den bekletme ilkesi oluşturuncaya kadar 4-5 adımlarını tekrarlayın.
+6. İhtiyacınız olan kapsamlı SLP bekletme ilkesini oluşturup 4-5 arasındaki adımları yineleyin.
 
-   ![NetBackup yönetim konsolunda, yeni depolama yaşam döngüsü ilkesi iletişim kutusu ilkelerini Ekle](./media/storsimple-configure-backup-target-using-netbackup/nbimage25.png)
+   ![NetBackup Yönetim Konsolu, yeni depolama yaşam döngüsü Ilkesi iletişim kutusuna ilke Ekle](./media/storsimple-configure-backup-target-using-netbackup/nbimage25.png)
 
-7. İşiniz bittiğinde, SLP'den bekletme ilkesi altında tanımlama **ilke**, ayrıntılı adımları izleyerek bir yedekleme ilkesi tanımlama [NetBackup yedekleme işi için atama StorSimple birimlerini](#assigning-storsimple-volumes-to-a-netbackup-backup-job).
+7. SLP bekletme ilkenizi tanımlamayı tamamladığınızda, **ilke**bölümünde, bir [NetBackup yedekleme işine StorSimple birimleri atama](#assigning-storsimple-volumes-to-a-netbackup-backup-job)konusunda ayrıntılı adımları izleyerek bir yedekleme ilkesi tanımlayın.
 
-8. Altında **zamanlamaları**, **zamanlamasını değiştirme** iletişim kutusunda sağ **tam**ve ardından **değişiklik**.
+8. **Zamanlamalar**' ın altında, **Zamanlamayı Değiştir** iletişim kutusunda, **tam**öğesine sağ tıklayın ve ardından **Değiştir**' i seçin.
 
-   ![NetBackup yönetim konsolunda, zamanlamayı Değiştir iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage26.png)
+   ![NetBackup Yönetim Konsolu, Zamanlamayı Değiştir iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage26.png)
 
-9. Seçin **ilkesi depolama seçimi geçersiz kılma** onay kutusunu işaretleyin ve ardından 1-6. adımda oluşturduğunuz SLP'den bekletme ilkesi seçin.
+9. **İlke depolama seçimini geçersiz kıl** onay kutusunu seçin ve ardından 1-6 ADıMLARıNDA oluşturduğunuz SLP bekletme ilkesini seçin.
 
-   ![NetBackup yönetim konsolunda, geçersiz kılma ilkesi depolama seçimi](./media/storsimple-configure-backup-target-using-netbackup/nbimage27.png)
+   ![NetBackup Yönetim Konsolu, ilke depolama seçimini geçersiz kıl](./media/storsimple-configure-backup-target-using-netbackup/nbimage27.png)
 
-10. Seçin **Tamam**ve artımlı yedekleme zamanlaması için yineleyin.
+10. **Tamam**' ı seçin ve ardından artımlı yedekleme zamanlaması için tekrarlayın.
 
-    ![NetBackup yönetim konsolunda, artımlı yedeklemeler için zamanlamayı Değiştir iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage28.png)
+    ![NetBackup Yönetim Konsolu, artımlı yedeklemeler için Zamanlamayı Değiştir iletişim kutusu](./media/storsimple-configure-backup-target-using-netbackup/nbimage28.png)
 
 
-| Yedekleme türü bekletme | Boyut (TiB) | GFS çarpanı\* | Toplam Kapasite (TiB)  |
+| Yedekleme türü tutma | Boyut (TiB) | GFS çarpanı\* | Toplam Kapasite (TiB)  |
 |---|---|---|---|
-| Haftalık tam |  1  |  4 | 4  |
-| Günlük artımlı  | 0,5  | 20 (döngüleri hafta / ay sayısı eşittir) | 12 (2 ek kota için) |
-| Aylık tam  | 1 | 12 | 12 |
-| Yıllık tam | 1  | 10 | 10 |
+| Haftalık tam |  1\.  |  4 | 4  |
+| Günlük artımlı  | 0,5  | 20 (döngü, ay başına hafta sayısına eşittir) | 12 (ek kota için 2) |
+| Aylık tam  | 1\. | 12 | 12 |
+| Yıllık tam | 1\.  | 10 | 10 |
 | GFS gereksinimi  |     |     | 38 |
-| Ek kota  | 4  |    | 42 toplam GFS gereksinimi |
+| Ek kota  | 4  |    | Toplam 42 GFS gereksinimi |
 
-\* GFS çarpan koruma ve yedekleme İlkesi gereksinimlerinizi karşılayacak şekilde korumak için ihtiyaç duyduğunuz kopya sayısıdır.
+\*GFS çarpanı, yedekleme ilkesi gereksinimlerinizi karşılamak için korumanız ve korumanız gereken kopya sayısıdır.
 
 ## <a name="storsimple-cloud-snapshots"></a>StorSimple bulut anlık görüntüleri
 
-StorSimple bulut anlık görüntüleri, StorSimple Cihazınızı bulunan verileri koruyun. Bir bulut anlık görüntüsü oluşturma, bir şirket dışı özelliği için yerel yedekleme bantlarının sevkiyat için eşdeğerdir. Azure coğrafi olarak yedekli depolamayı kullanıyorsanız, bir bulut anlık görüntüsü oluşturma için birden çok site için yedekleme bantlarının sevkiyat eşdeğerdir. Bir cihaz bir olağanüstü durumdan sonra geri yüklemeniz gerekirse, başka bir StorSimple cihazı çevrimiçi duruma getirin ve yük devri gerçekleştirmeden. Yük devretmeden sonra en son bulut anlık görüntüden (bulut hızlarında) verilere erişmek mümkün olacaktır.
+StorSimple bulut anlık görüntüleri, StorSimple cihazınızda bulunan verileri korur. Bulut anlık görüntüsü oluşturmak, yerel yedekleme bantlarını site dışı bir tesise aktarma ile eşdeğerdir. Azure coğrafi olarak yedekli depolama kullanırsanız, bir bulut anlık görüntüsü oluşturmak, yedekleme bantlarını birden çok siteye aktarmanın eşdeğeridir. Bir olağanüstü durum sonrasında bir cihazı geri yüklemeniz gerekiyorsa, başka bir StorSimple cihazını çevrimiçi duruma getirebilir ve yük devretme yapabilirsiniz. Yük devretmeden sonra, verilere (bulut hızlarından) en son bulut anlık görüntüsünden erişebilirsiniz.
 
-Aşağıdaki bölümde, başlatın ve yedekleme sonrası işleme sırasında StorSimple bulut anlık görüntüleri silmek için kısa bir komut dosyası oluşturmayı açıklar.
-
-> [!NOTE]
-> El ile veya programlama yoluyla oluşturulan anlık görüntüler, StorSimple anlık görüntü süre sonu ilkesi izlemeyin. El ile veya programlama yoluyla bu anlık görüntülerin silinmesi gerekir.
-
-### <a name="start-and-delete-cloud-snapshots-by-using-a-script"></a>Bir komut dosyası kullanarak bulut anlık görüntüleri silin ve başlatın
+Aşağıdaki bölümde, yedekleme sonrası işlem sırasında StorSimple bulut anlık görüntülerini başlatmak ve silmek için kısa bir komut dosyasının nasıl oluşturulacağı açıklanmaktadır.
 
 > [!NOTE]
-> StorSimple anlık görüntü silmeden önce uyumluluk ve veri saklama varsa dikkatlice değerlendirin. Bir yedekleme sonrası betik çalıştırma hakkında daha fazla bilgi için bkz. [NetBackup belgeleri](http://www.veritas.com/docs/000094423).
+> El ile veya program aracılığıyla oluşturulan anlık görüntüler StorSimple anlık görüntü süre sonu ilkesini takip etmez. Bu anlık görüntülerin el ile veya program aracılığıyla silinmesi gerekir.
+
+### <a name="start-and-delete-cloud-snapshots-by-using-a-script"></a>Betik kullanarak bulut anlık görüntülerini başlatma ve silme
+
+> [!NOTE]
+> Bir StorSimple anlık görüntüsünü silmeden önce uyumluluk ve veri saklama repercuslarını dikkatle değerlendirin. Yedekleme sonrası betiği çalıştırma hakkında daha fazla bilgi için bkz. [NetBackup belgeleri](http://www.veritas.com/docs/000094423).
 
 ### <a name="backup-lifecycle"></a>Yedekleme yaşam döngüsü
 
@@ -500,51 +500,51 @@ Aşağıdaki bölümde, başlatın ve yedekleme sonrası işleme sırasında Sto
 
 ### <a name="requirements"></a>Gereksinimler
 
--   Betik çalıştıran sunucuda, Azure bulut kaynaklarını erişiminiz olması gerekir.
+-   Betiği çalıştıran sunucunun Azure bulut kaynaklarına erişimi olmalıdır.
 -   Kullanıcı hesabı gerekli izinlere sahip olmalıdır.
--   Bir StorSimple yedekleme İlkesi ile ilişkili StorSimple birimlerini ayarlanmış ancak açık değil.
--   Gerekir StorSimple kaynak adı, kayıt anahtarı, cihaz adını ve yedekleme ilkesi kimliği.
+-   İlişkili StorSimple birimlerine sahip bir StorSimple yedekleme ilkesi ayarlanmalıdır, ancak açılmamalıdır.
+-   StorSimple kaynak adı, kayıt anahtarı, cihaz adı ve yedekleme ilkesi KIMLIĞI gerekir.
 
-### <a name="to-start-or-delete-a-cloud-snapshot"></a>Başlatın veya bir bulut anlık görüntüsünü silmek için
+### <a name="to-start-or-delete-a-cloud-snapshot"></a>Bir bulut anlık görüntüsünü başlatmak veya silmek için
 
 1. [Azure PowerShell'i yükleme](/powershell/azure/overview).
-2. Karşıdan yükleme ve Kurulum [Yönet CloudSnapshots.ps1](https://github.com/anoobbacker/storsimpledevicemgmttools/blob/master/Manage-CloudSnapshots.ps1) PowerShell Betiği.
-3. Betik çalıştıran sunucuda PowerShell'i yönetici olarak çalıştırın. Komut dosyasını çalıştırdığınızdan emin olun `-WhatIf $true` hangi kodun değiştiğini görmek için yapar. Doğrulama tamamlandıktan sonra geçmesi `-WhatIf $false`. Çalıştırma aşağıdaki komutu:
+2. [Manage-CloudSnapshots. ps1](https://github.com/anoobbacker/storsimpledevicemgmttools/blob/master/Manage-CloudSnapshots.ps1) PowerShell betiğini indirip kurun.
+3. Betiği çalıştıran sunucuda PowerShell 'i yönetici olarak çalıştırın. Betiğin hangi değişiklikleri yaptığını görmek için betiği `-WhatIf $true` ile çalıştırtığınızdan emin olun. Doğrulama tamamlandıktan sonra Pass `-WhatIf $false`. Aşağıdaki komutu çalıştırın:
    ```powershell
    .\Manage-CloudSnapshots.ps1 -SubscriptionId [Subscription Id] -TenantId [Tenant ID] -ResourceGroupName [Resource Group Name] -ManagerName [StorSimple Device Manager Name] -DeviceName [device name] -BackupPolicyName [backup policyname] -RetentionInDays [Retention days] -WhatIf [$true or $false]
    ```
-4. Yedekleme işi, NetBackup komut dosyası ekleyin. Bunu yapmak için ön işleme ve sonrası Komutlar işleme NetBackup proje seçenekleri düzenleyin.
+4. NetBackup 'taki yedekleme işinize betiği ekleyin. Bunu yapmak için, ' ön işleme ve işlem sonrası komutları NetBackup iş seçenekleriniz ' ni düzenleyin.
 
 > [!NOTE]
-> Günlük yedekleme işi sonunda işlem sonrası bir betik olarak StorSimple bulut anlık görüntü yedekleme ilkenizi çalıştırmanızı öneririz. RTO ve RPO karşılamanıza yardımcı olmak için yedekleme Uygulama ortamınızı geri hakkında daha fazla bilgi için lütfen ile yedekleme, Mimarı başvurun.
+> StorSimple bulut anlık görüntü yedekleme ilkenizi, günlük yedekleme işinizin sonunda bir işlem sonrası betiği olarak çalıştırmanızı öneririz. RPO ve RTO 'larınızı karşılamanıza yardımcı olmak için yedekleme uygulaması ortamınızı yedekleme ve geri yükleme hakkında daha fazla bilgi için lütfen yedekleme mimarinize başvurun.
 
 ## <a name="storsimple-as-a-restore-source"></a>Geri yükleme kaynağı olarak StorSimple
 
-StorSimple cihaz iş herhangi bir blok depolama CİHAZDAN geri yüklemeler gibi geri yükler. Geri yüklemeler buluta katmanlanmış verileri bulut hızlarda gerçekleşir. Yerel veri için cihaz yerel disk hızında geri yüklemeler oluşur. Bir geri yükleme gerçekleştirme hakkında daha fazla bilgi için bkz: [NetBackup belgeleri](http://www.veritas.com/docs/000094423). NetBackup geri yükleme en iyi uygulamalar için uygun öneririz.
+Bir StorSimple cihazından geri yükleme, herhangi bir blok depolama cihazından geri yükleme gibi çalışır. Buluta katmanlı verilerin geri yüklemeleri bulut hızlarında oluşur. Yerel veriler için geri yükleme, cihazın yerel disk hızında oluşur. Geri yükleme gerçekleştirme hakkında daha fazla bilgi için bkz. [NetBackup belgeleri](http://www.veritas.com/docs/000094423). NetBackup geri yükleme en iyi uygulamalarına uymalarını öneririz.
 
 ## <a name="storsimple-failover-and-disaster-recovery"></a>StorSimple yük devretme ve olağanüstü durum kurtarma
 
 > [!NOTE]
-> Yedekleme hedefi senaryoları için bir geri yükleme hedefi olarak StorSimple Cloud Appliance desteklenmiyor.
+> Yedekleme hedefi senaryolarında StorSimple Cloud Appliance, geri yükleme hedefi olarak desteklenmez.
 
-Olağanüstü bir durum tarafından çeşitli etkenler neden olabilir. Aşağıdaki tabloda olağanüstü durum kurtarma senaryoları listelenmektedir.
+Olağanüstü bir durum, çeşitli faktörlerden kaynaklanıyor olabilir. Aşağıdaki tabloda, yaygın olağanüstü durum kurtarma senaryoları listelenmektedir.
 
 | Senaryo | Etkisi | Kurtarma | Notlar |
 |---|---|---|---|
-| StorSimple cihaz arızası | Yedekleme ve geri yükleme işlemlerini kesintiye uğramaz. | Başarısız aygıt değiştirin ve gerçekleştirme [StorSimple yük devretme ve olağanüstü durum kurtarma](storsimple-device-failover-disaster-recovery.md). | Bir geri yüklemeden sonra cihaz kurtarma gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri için yeni cihaz buluttan alınır. Bulut hızlarda tüm işlemlerdir. Dizin ve işlemi yeniden tarama işlemi katalog taranır ve zaman alan bir işlem olabilir yerel cihaz katmanı için bulut katmanı çekilen tüm yedekleme kümelerini neden olabilir. |
-| NetBackup sunucu hatası | Yedekleme ve geri yükleme işlemlerini kesintiye uğramaz. | Yedekleme sunucusuna yeniden oluşturun ve veritabanı geri yükleme gerçekleştirin. | Yeniden oluşturmanız veya olağanüstü durum kurtarma siteniz NetBackup sunucuda geri gerekir. Veritabanını geri yüklemek için en son noktası. Geri yüklenen NetBackup veritabanını en son yedekleme işleriniz ile eşitlenmiş durumda değilse, dizin oluşturma ve Katalog gereklidir. Bu dizin ve işlemi yeniden tarama işlemi katalog taranır ve yerel cihaz katmana bulut katmandan oluşan bir derleme tüm yedekleme kümelerini neden olabilir. Bu, daha fazla zaman yoğun kolaylaştırır. |
-| Backup sunucusu ve StorSimple kaybı ile sonuçlanır site hatası | Yedekleme ve geri yükleme işlemlerini kesintiye uğramaz. | StorSimple önce geri ve ardından NetBackup geri yükleyin. | StorSimple önce geri ve ardından NetBackup geri yükleyin. Bir geri yüklemeden sonra cihaz kurtarma gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri için yeni cihaz buluttan alınır. Bulut hızlarda tüm işlemlerdir. |
+| StorSimple cihaz hatası | Yedekleme ve geri yükleme işlemleri kesintiye uğrar. | Başarısız olan cihazı değiştirin ve [StorSimple yük devretme ve olağanüstü durum kurtarma](storsimple-device-failover-disaster-recovery.md)gerçekleştirin. | Cihaz kurtarmasından sonra geri yükleme gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri buluttan yeni cihaza alınır. Tüm işlemler bulut hızlardır. Dizin ve Katalog yeniden tarama işlemi, tüm yedekleme kümelerinin bulut katmanından yerel cihaz katmanına taranmasını ve çekilmesine neden olabilir ve bu da zaman alan bir işlemdir. |
+| NetBackup sunucusu hatası | Yedekleme ve geri yükleme işlemleri kesintiye uğrar. | Yedekleme sunucusunu yeniden oluşturun ve veritabanı geri yükleme işlemini gerçekleştirin. | NetBackup sunucusunu olağanüstü durum kurtarma sitesinde yeniden oluşturmanız veya geri yüklemeniz gerekir. Veritabanını en son noktaya geri yükleyin. Geri yüklenen NetBackup veritabanı en son yedekleme işleriniz ile eşitlenmediğinde, dizin oluşturma ve kataloglama gereklidir. Bu dizin ve Katalog yeniden tarama işlemi, tüm yedekleme kümelerinin bulut katmanından yerel cihaz katmanına taranmasını ve çekilmesine neden olabilir. Bu, daha fazla zaman yoğunluğu sağlar. |
+| Hem yedekleme sunucusu hem de StorSimple kaybına neden olan site hatası | Yedekleme ve geri yükleme işlemleri kesintiye uğrar. | Önce StorSimple 'ı geri yükleyin ve ardından NetBackup 'ı geri yükleyin. | Önce StorSimple 'ı geri yükleyin ve ardından NetBackup 'ı geri yükleyin. Cihazın kurtarmasından sonra geri yükleme gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri buluttan yeni cihaza alınır. Tüm işlemler bulut hızlardır. |
 
-## <a name="references"></a>Başvurular
+## <a name="references"></a>Referanslar
 
-Aşağıdaki belgeler, bu makale için başvurulan:
+Bu makale için aşağıdaki belgelere başvuruldu:
 
-- [StorSimple çok yollu g/ç Kurulumu](storsimple-configure-mpio-windows-server.md)
+- [StorSimple çok yollu g/ç kurulumu](storsimple-configure-mpio-windows-server.md)
 - [Depolama senaryoları: Ölçülü kaynak sağlama](https://msdn.microsoft.com/library/windows/hardware/dn265487.aspx)
-- [GPT kullanarak sürücüleri](https://msdn.microsoft.com/windows/hardware/gg463524.aspx#EHD)
+- [GPT sürücüleri kullanma](https://msdn.microsoft.com/windows/hardware/gg463524.aspx#EHD)
 - [Paylaşılan klasörler için gölge kopyaları ayarlama](https://technet.microsoft.com/library/cc771893.aspx)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kullanma hakkında daha fazla bilgi edinin [bir yedekleme kümesinden geri yükleme](storsimple-restore-from-backup-set-u2.md).
-- Nasıl gerçekleştirileceği hakkında daha fazla bilgi [cihaz yük devretme ve olağanüstü durum kurtarma](storsimple-device-failover-disaster-recovery.md).
+- [Bir yedekleme kümesinden geri yükleme](storsimple-restore-from-backup-set-u2.md)hakkında daha fazla bilgi edinin.
+- [Cihaz yük devretmesini ve olağanüstü durum kurtarmayı](storsimple-device-failover-disaster-recovery.md)gerçekleştirme hakkında daha fazla bilgi edinin.

@@ -1,40 +1,39 @@
 ---
-title: Azure CLI kullanarak bir VM için takas işletim sistemi diski | Microsoft Docs
-description: CLI kullanarak Azure sanal makinesi tarafından kullanılan işletim sistemi diski olarak değiştirin.
+title: CLı kullanarak bir Azure VM için işletim sistemi diskini değiştirme
+description: CLı kullanarak bir Azure sanal makinesi tarafından kullanılan işletim sistemi diskini değiştirin.
 services: virtual-machines-linux
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 04/24/2018
 ms.author: cynthn
-ms.openlocfilehash: b17647a09c88491e2486046b1ca99ee277f0cc28
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bfbe47fb68ffe7cee1ee2f9f7b94b418d8da2a1d
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61473901"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74035340"
 ---
-# <a name="change-the-os-disk-used-by-an-azure-vm-using-the-cli"></a>Azure CLI kullanarak bir VM tarafından kullanılan işletim sistemi diskini değiştirme
+# <a name="change-the-os-disk-used-by-an-azure-vm-using-the-cli"></a>CLı kullanarak bir Azure VM tarafından kullanılan işletim sistemi diskini değiştirme
 
 
-Mevcut bir VM'ye sahip, ancak Yedekleme diski veya başka bir işletim sistemi diski için disk takas etmek istediğiniz işletim sistemi diskleri takas etmek için Azure CLI'yı kullanabilirsiniz. VM'yi silip yeniden yükleme gerekmez. Zaten kullanımda olmadığı sürece, başka bir kaynak grubunda bile yönetilen disk kullanabilirsiniz.
+Var olan bir VM varsa, ancak diski bir yedekleme diski veya başka bir işletim sistemi diski için değiştirmek istiyorsanız, işletim sistemi disklerini değiştirmek için Azure CLı 'yi kullanabilirsiniz. VM 'yi silip yeniden oluşturmanız gerekmez. Zaten kullanımda olmadığı sürece, başka bir kaynak grubunda yönetilen bir disk de kullanabilirsiniz.
 
-VM, stopped\deallocated olmasına gerek yoktur ve sonra yönetilen diskin kaynak kimliği farklı bir yönetilen diskin kaynak kimliği ile değiştirilebilir. 
+VM 'nin stopped\serbest bırakılmış olması gerekir, ardından yönetilen diskin kaynak KIMLIĞI, farklı bir yönetilen diskin kaynak KIMLIĞI ile değiştirilebilir. 
 
-VM boyutu ile depolama türü eklemek için kullanmak istediğiniz disk ile uyumlu olduğundan emin olun. Kullanmak istediğiniz disk bir Premium depolama ise, örneğin, sonra VM (DS serisi boyutu gibi) Premium depolama özelliğine sahip olması gerekir.
+VM boyutunun ve depolama türünün iliştirmek istediğiniz diskle uyumlu olduğundan emin olun. Örneğin, kullanmak istediğiniz disk Premium depolamada ise, VM 'nin Premium depolama alanı (DS serisi boyutu gibi) olması gerekir.
 
-Bu makalede Azure CLI 2.0.25 sürüm gerektirir veya büyük. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme]( /cli/azure/install-azure-cli). 
+Bu makale, Azure CLı sürüm 2.0.25 veya üstünü gerektirir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme]( /cli/azure/install-azure-cli). 
 
 
-Kullanım [az disk listesi](/cli/azure/disk) kaynak grubunuzda disklerin listesini almak için.
+Kaynak grubunuzdaki disklerin listesini almak için [az disk List](/cli/azure/disk) kullanın.
 
 ```azurecli-interactive
 az disk list \
@@ -44,7 +43,7 @@ az disk list \
 ```
 
 
-Kullanım [az vm stop](/cli/azure/vm) stop\deallocate diskleri geçirmeden önce VM için.
+Diskleri değiştirmeden önce VM 'yi [durdurmak için az VM stop](/cli/azure/vm) komutunu kullanın.
 
 ```azurecli-interactive
 az vm stop \
@@ -53,7 +52,7 @@ az vm stop \
 ```
 
 
-Kullanım [az vm update](/cli/azure/vm#az-vm-update) yeni disk için tam kaynak kimliği `--osdisk` parametresi 
+`--osdisk` parametresi için yeni diskin tam kaynak KIMLIĞIYLE [az VM Update](/cli/azure/vm#az-vm-update) kullanın 
 
 ```azurecli-interactive 
 az vm update \
@@ -62,7 +61,7 @@ az vm update \
    --os-disk /subscriptions/<subscription ID>/resourceGroups/swap/providers/Microsoft.Compute/disks/myDisk 
    ```
    
-Kullanarak VM'yi yeniden [az vm start](/cli/azure/vm).
+[Az VM start](/cli/azure/vm)kullanarak VM 'yi yeniden başlatın.
 
 ```azurecli-interactive
 az vm start \
@@ -73,4 +72,4 @@ az vm start \
    
 **Sonraki adımlar**
 
-Bir diski bir kopyasını oluşturmak için bkz: [bir diskin anlık görüntüsünü alma](snapshot-copy-managed-disk.md).
+Bir diskin kopyasını oluşturmak için bkz. [disk anlık görüntüsü](snapshot-copy-managed-disk.md).

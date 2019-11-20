@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - DSC kullanarak IIS ile Windows Server 2016 VM oluşturma | Microsoft Docs
+title: Azure CLI Betik Örneği - DSC kullanarak IIS ile Windows Server 2016 VM oluşturma
 description: Azure CLI Betik Örneği - DSC kullanarak IIS ile Windows Server 2016 VM oluşturma
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: ''
 ms.assetid: ''
@@ -16,12 +16,12 @@ ms.workload: infrastructure
 ms.date: 02/23/2017
 ms.author: rclaus
 ms.custom: mvc
-ms.openlocfilehash: 3c818a7459a54b01cfdaa7315aff8e4194d3849c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 60f4447015e43d02048afd19504be0e758a56e86
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61475635"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74040068"
 ---
 # <a name="create-a-vm-with-iis-using-dsc"></a>DSC kullanarak IIS ile VM oluşturma
 

@@ -1,6 +1,6 @@
 ---
-title: App Service ortamı yönetim adresleri - Azure
-description: App Service ortamı komutu için kullanılan yönetim adresleri listeler
+title: App Service Ortamı Yönetim adresleri-Azure
+description: Bir App Service Ortamı komut için kullanılan yönetim adreslerini listeler
 services: app-service
 documentationcenter: na
 author: ccompy
@@ -9,99 +9,63 @@ ms.assetid: a7738a24-89ef-43d3-bff1-77f43d5a3952
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 04/03/2019
+ms.date: 11/13/2019
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: f76dd423cb3f7fbae6cc88d064e49dc2d56f1a1c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 80841988b997bd4caa776191bf9b8468e95a977d
+ms.sourcegitcommit: a170b69b592e6e7e5cc816dabc0246f97897cb0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60766062"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74089489"
 ---
-# <a name="app-service-environment-management-addresses"></a>App Service ortamı yönetim adresleri
+# <a name="app-service-environment-management-addresses"></a>Yönetim adreslerini App Service Ortamı
 
-App Service ortamı (ASE), Azure sanal ağı (VNet) içinde çalışan Azure App Service, tek kiracılı dağıtımıdır.  ASE ağınızda çalıştırırken, bu da hala hizmetini yönetmek için Azure App Service tarafından kullanılan ayrılmış IP adresleri arasında bir sayı erişilebilir olmalıdır.  Bir ASE söz konusu olduğunda, kullanıcı tarafından denetlenen ağ yönetim trafiğini erişir. Bu trafiğin engellendiği veya misrouted, ASE askıya alınır. ASE ağ bağımlılıklar hakkında daha fazla bilgi için okuma [önemli noktalar ve App Service ortamı ağ][networking]. İle başlayabilirsiniz ASE ile ilgili genel bilgiler için [App Service ortamı giriş][intro].
+App Service Ortamı (ASE), Azure sanal ağınızda (VNet) çalışan Azure App Service tek bir kiracı dağıtımsıdır.  ASE, VNet 'iniz üzerinde çalışırken, hizmeti yönetmek için Azure App Service tarafından kullanılan bir dizi ayrılmış IP adreslerinden yine de erişilebilir olmalıdır.  Ao söz konusu olduğunda, yönetim trafiği Kullanıcı denetimli ağdan geçer. Bu trafik engellenmişse veya hatalı yönlendiriliyorsa Ao, askıya alınır. Ao ağ bağımlılıkları hakkında daha fazla bilgi için, bkz. [ağ konularını ve App Service ortamı][networking]okuyun. Ao hakkında genel bilgi için, [App Service ortamı giriş][intro]ile başlayabilirsiniz.
 
-Tüm Ase'ler hangi yönetim trafiğini salesforce'taki genel bir VIP vardır. Bu adreslerden gelen yönetim trafiği 454 ve 455 bağlantı noktalarına ASE'nizi üzerindeki genel VIP geldiği. Bu belge, yönetim trafiği ASE için App Service kaynak adreslerini listeler. Bu ayrıca IP hizmet etiketi AppServiceManagement adlı adresleridir.
+Tüm ASE 'lerin yönetim trafiğinin geldiği ortak bir VIP 'si vardır. Bu adreslerden gelen yönetim trafiği, Ao 'un genel VIP 'si üzerinde 454 ve 455 bağlantı noktalarına gönderilir. Bu belge, Ao 'ya yönetim trafiği için App Service kaynak adreslerini listeler. Bu adresler, AppServiceManagement adlı IP hizmeti etiketinde de bulunur.
 
-Yönetim trafiğini asimetrik yönlendirme sorunlarını önlemek için bir yol tablosundaki adresleri aşağıda belirtildiği yapılandırılabilir. Yollar IP düzeyinde trafiği üzerinde işlem yapacağı ve trafik yönü'nın bir tanıma sahip değil veya trafiği TCP bir yanıt iletisi bir parçasıdır. TCP istek için yanıt adresi için gönderildi adresinden farklı ise bir asimetrik yönlendirme sorununu gerekir. ASE yönetim trafiğiniz asimetrik yönlendirme sorunlarını önlemek için geri için gönderildiği aynı adresten yanıt gönderildiğinden emin olmak gerekir. Burada giden trafik gönderilir şirket içi bir ortamda çalışmak üzere ASE'nizi yapılandırma hakkında daha fazla ayrıntı için okuma [zorlamalı tünel ile ASE'nizi yapılandırma][forcedtunnel]
+Aşağıda belirtilen adresler, yönetim trafiğiyle asimetrik yönlendirme sorunlarını önlemek için bir yol tablosunda yapılandırılabilir. Yollar, IP düzeyindeki trafik üzerinde çalışır ve trafik yönündeki bir tanıma sahip değildir veya trafik TCP yanıt iletisinin bir parçası olur. Bir TCP isteğinin yanıt adresi, gönderildiği adresten farklıysa, asimetrik bir yönlendirme sorununa sahip olursunuz. Ao yönetim trafiğiyle asimetrik yönlendirme sorunlarından kaçınmak için yanıtların gönderildiği adresten geri gönderilmesini güvence altına almanız gerekir. ASE 'nizi şirket içinde giden trafiğin gönderildiği bir ortamda çalışacak şekilde yapılandırma hakkında ayrıntılı bilgi için, [Zorlamalı tünel Ile ASE 'Nizi yapılandırma][forcedtunnel] makalesini okuyun
 
 ## <a name="list-of-management-addresses"></a>Yönetim adresleri listesi ##
 
 | Bölge | Adresler |
 |--------|-----------|
-| Tüm genel bölgelerde | 13.64.115.203, 13.75.127.117, 13.94.141.115, 13.94.143.126, 13.94.149.179, 23.102.135.246, 23.102.188.65, 40.83.120.64, 40.83.121.56, 40.83.125.161, 40.124.47.188, 52.151.25.45, 52.165.152.214, 52.165.153.122, 52.165.154.193, 52.165.158.140, 52.174.22.21, 52.178.177.147, 52.178.184.149, 52.178.190.65, 52.178.195.197, 52.187.56.50, 52.187.59.251, 52.187.63.19, 52.187.63.37, 52.224.105.172, 52.225.177.153, 65.52.14.230, 65.52.172.237, 65.52.193.203, 70.37.57.58, 70.37.89.222, 104.44.129.141, 104.44.129.243, 104.44.129.255, 104.44.134.255, 104.208.54.11, 157.55.176.93, 157.55.208.185, 191.236.154.88 |
-| Microsoft Azure Kamu | 23.97.29.209, 13.72.53.37, 13.72.180.105, 23.97.0.17, 23.97.16.184 |
+| Tüm ortak bölgeler | 13.64.115.203, 13.66.140.0, 13.67.8.128, 13.69.64.128, 13.69.227.128, 13.70.73.128, 13.71.170.64, 13.71.194.129, 13.75.34.192, 13.75.127.117, 13.77.50.128, 13.78.109.0, 13.89.171.0, 13.94.141.115, 13.94.143.126, 13.94.149.179, 20.36.106.128, 20.36.114.64, 23.100.226.236, 23.102.135.246, 23.102.188.65, 40.69.106.128, 40.70.146.128, 40.71.13.64, 40.74.100.64, 40.78.194.128, 40.79.130.64, 40.79.178.128, 40.83.120.64, 40.83.121.56, 40.83.125.161, 40.90.240.166, 40.91.126.196, 40.112.242.192, 40.119.4.111, 40.124.47.188, 51.140.146.64, 51.140.210.128, 52.151.25.45, 52.162.80.89, 52.162.106.192, 52.165.152.214, 52.165.153.122, 52.165.154.193, 52.165.158.140, 52.174.22.21, 52.178.177.147, 52.178.184.149, 52.178.190.65, 52.178.195.197, 52.187.56.50, 52.187.59.251, 52.187.63.19, 52.187.63.37, 52.224.105.172, 52.225.177.153, 52.231.18.64, 52.231.146.128, 65.52.14.230, 65.52.172.237, 65.52.193.203, 70.37.57.58, 70.37.89.222, 104.43.242.137, 104.44.129.141, 104.44.129.243, 104.44.129.255, 104.44.134.255, 104.208.54.11, 104.211.81.64, 104.211.146.128, 104.214.49.0, 157.55.176.93, 157.55.208.185, 191.233.203.64, 191.236.154.88 |
+| Microsoft Azure Government | 23.97.29.209, 13.72.53.37, 13.72.180.105, 23.97.0.17, 23.97.16.184 |
 
-## <a name="configuring-a-network-security-group"></a>Bir ağ güvenlik grubu yapılandırma
+## <a name="configuring-a-network-security-group"></a>Ağ güvenlik grubu yapılandırma
 
-Ağ güvenlik grupları ile tek tek adreslerini ya da kendi yapılandırma bakımını yapma konusunda endişelenmeniz gerekmez. Tüm adresleri ile güncel tutulduğu AppServiceManagement adlı bir IP hizmet etiketi yoktur. Bu IP hizmet etiketi, NSG'de kullanmak için portala gidin ve ağ güvenlik grupları kullanıcı Arabirimi açın gelen güvenlik kuralları'nı seçin. Gelen yönetim trafiği için önceden mevcut bir kuralı varsa, bunu düzenleyin. Bu NSG ile ASE'nizi oluşturulmamışsa ya da tüm yeni ise seçip **Ekle**. Kaynak açılan altında seçin **hizmet etiketi**.  Seçin ve kaynak hizmet etiketi altında **AppServiceManagement**. Kaynak bağlantı noktası aralıkları kümesine \*, hedefe **herhangi**, hedef bağlantı noktası aralıkları için **454 455**, protokol **TCP**ve eyleme **izin ver** . Kural yapıyorsanız önceliğini ayarlamak gerekir. 
+Ağ güvenlik grupları ile, bireysel adresler veya kendi yapılandırmanızın saklanması konusunda endişelenmeniz gerekmez. AppServiceManagement adlı ve tüm adreslerle güncel tutulan bir IP hizmeti etiketi vardır. NSG 'unuzda bu IP hizmeti etiketini kullanmak için portala gidin, ağ güvenlik grupları kullanıcı arabirimini açın ve gelen güvenlik kuralları ' nı seçin. Gelen yönetim trafiği için önceden var olan bir kuralınız varsa, bunu düzenleyin. Bu NSG, Ao 'iyle oluşturulmadıysa veya tümü yeni ise **Ekle**' yi seçin. Kaynak açılan bölümünde **hizmet etiketi**' ni seçin.  Kaynak hizmet etiketi altında **Appservicemanagement**' ı seçin. Kaynak bağlantı noktası aralıklarını **\*, hedefe hedefle, hedef**bağlantı noktası aralıklarını **454-455**, **TCP**protokolüne ve **izin**verilecek eyleme ayarlayın. Kuralı yapıyorsanız önceliğini ayarlamanız gerekir. 
 
-![Hizmet etiketi ile bir NSG oluşturma][1]
+![hizmet etiketiyle NSG oluşturma][1]
 
-## <a name="configuring-a-route-table"></a>Bir yol tablosu yapılandırma
+## <a name="configuring-a-route-table"></a>Rota tablosu yapılandırma
 
-Yönetim adreslerini bir sonraki internet atlaması olan tüm gelen yönetim trafiğinin aynı yol ile geri dönmek erişebildiğinden emin olmak için bir rota tablosuyla yerleştirilebilir. Yapılandırma zorlamalı tünel, bu yollar gereklidir. Yol tablosu oluşturmak için portalı, PowerShell veya Azure CLI'yı kullanabilirsiniz.  Bir PowerShell isteminden Azure CLI kullanarak bir yönlendirme tablosu oluşturmak için komutları aşağıda verilmiştir. 
+Tüm gelen yönetim trafiğinin aynı yoldan geri gidebilmesini sağlamak için, yönetim adresleri bir sonraki Internet atlaması ile bir yol tablosuna yerleştirilebilir. Zorlamalı tünel yapılandırılırken bu yollar gereklidir. Yol tablosu oluşturmak için Portal, PowerShell veya Azure CLı kullanabilirsiniz.  Bir PowerShell isteminden Azure CLı kullanarak bir rota tablosu oluşturma komutları aşağıda verilmiştir. 
 
     $rg = "resource group name"
     $rt = "route table name"
     $location = "azure location"
+    $managementAddresses = "13.64.115.203", "13.66.140.0", "13.67.8.128", "13.69.64.128", "13.69.227.128", "13.70.73.128", "13.71.170.64", "13.71.194.129", "13.75.34.192", "13.75.127.117", "13.77.50.128", "13.78.109.0", "13.89.171.0", "13.94.141.115", "13.94.143.126", "13.94.149.179", "20.36.106.128", "20.36.114.64", "23.100.226.236", "23.102.135.246", "23.102.188.65", "40.69.106.128", "40.70.146.128", "40.71.13.64", "40.74.100.64", "40.78.194.128", "40.79.130.64", "40.79.178.128", "40.83.120.64", "40.83.121.56", "40.83.125.161", "40.90.240.166", "40.91.126.196", "40.112.242.192", "40.119.4.111", "40.124.47.188", "51.140.146.64", "51.140.210.128", "52.151.25.45", "52.162.80.89", "52.162.106.192", "52.165.152.214", "52.165.153.122", "52.165.154.193", "52.165.158.140", "52.174.22.21", "52.178.177.147", "52.178.184.149", "52.178.190.65", "52.178.195.197", "52.187.56.50", "52.187.59.251", "52.187.63.19", "52.187.63.37", "52.224.105.172", "52.225.177.153", "52.231.18.64", "52.231.146.128", "65.52.14.230", "65.52.172.237", "65.52.193.203", "70.37.57.58", "70.37.89.222", "104.43.242.137", "104.44.129.141", "104.44.129.243", "104.44.129.255", "104.44.134.255", "104.208.54.11", "104.211.81.64", "104.211.146.128", "104.214.49.0", "157.55.176.93", "157.55.208.185", "191.233.203.64", "191.236.154.88"
+
     az network route-table create --name $rt --resource-group $rg --location $location
-    az network route-table route create -g $rg --route-table-name $rt -n 13.64.115.203 --next-hop-type Internet --address-prefix 13.64.115.203/32
-    az network route-table route create -g $rg --route-table-name $rt -n 13.75.127.117 --next-hop-type Internet --address-prefix 13.75.127.117/32
-    az network route-table route create -g $rg --route-table-name $rt -n 13.94.141.115 --next-hop-type Internet --address-prefix 13.94.141.115/32
-    az network route-table route create -g $rg --route-table-name $rt -n 13.94.143.126 --next-hop-type Internet --address-prefix 13.94.143.126/32
-    az network route-table route create -g $rg --route-table-name $rt -n 13.94.149.179 --next-hop-type Internet --address-prefix 13.94.149.179/32
-    az network route-table route create -g $rg --route-table-name $rt -n 23.102.135.246 --next-hop-type Internet --address-prefix 23.102.135.246/32
-    az network route-table route create -g $rg --route-table-name $rt -n 23.102.188.65 --next-hop-type Internet --address-prefix 23.102.188.65/32
-    az network route-table route create -g $rg --route-table-name $rt -n 40.83.120.64 --next-hop-type Internet --address-prefix 40.83.120.64/32
-    az network route-table route create -g $rg --route-table-name $rt -n 40.83.121.56 --next-hop-type Internet --address-prefix 40.83.121.56/32
-    az network route-table route create -g $rg --route-table-name $rt -n 40.83.125.161 --next-hop-type Internet --address-prefix 40.83.125.161/32
-    az network route-table route create -g $rg --route-table-name $rt -n 40.124.47.188 --next-hop-type Internet --address-prefix 40.124.47.188/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.151.25.45 --next-hop-type Internet --address-prefix 52.151.25.45/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.165.152.214 --next-hop-type Internet --address-prefix 52.165.152.214/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.165.153.122 --next-hop-type Internet --address-prefix 52.165.153.122/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.165.154.193 --next-hop-type Internet --address-prefix 52.165.154.193/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.165.158.140 --next-hop-type Internet --address-prefix 52.165.158.140/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.174.22.21 --next-hop-type Internet --address-prefix 52.174.22.21/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.178.177.147 --next-hop-type Internet --address-prefix 52.178.177.147/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.178.184.149 --next-hop-type Internet --address-prefix 52.178.184.149/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.178.190.65 --next-hop-type Internet --address-prefix 52.178.190.65/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.178.195.197 --next-hop-type Internet --address-prefix 52.178.195.197/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.187.56.50 --next-hop-type Internet --address-prefix 52.187.56.50/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.187.59.251 --next-hop-type Internet --address-prefix 52.187.59.251/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.187.63.19 --next-hop-type Internet --address-prefix 52.187.63.19/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.187.63.37 --next-hop-type Internet --address-prefix 52.187.63.37/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.224.105.172 --next-hop-type Internet --address-prefix 52.224.105.172/32
-    az network route-table route create -g $rg --route-table-name $rt -n 52.225.177.153 --next-hop-type Internet --address-prefix 52.225.177.153/32
-    az network route-table route create -g $rg --route-table-name $rt -n 65.52.14.230 --next-hop-type Internet --address-prefix 65.52.14.230/32
-    az network route-table route create -g $rg --route-table-name $rt -n 65.52.172.237 --next-hop-type Internet --address-prefix 65.52.172.237/32
-    az network route-table route create -g $rg --route-table-name $rt -n 65.52.193.203 --next-hop-type Internet --address-prefix 65.52.193.203/32
-    az network route-table route create -g $rg --route-table-name $rt -n 70.37.57.58 --next-hop-type Internet --address-prefix 70.37.57.58/32
-    az network route-table route create -g $rg --route-table-name $rt -n 70.37.89.222 --next-hop-type Internet --address-prefix 70.37.89.222/32
-    az network route-table route create -g $rg --route-table-name $rt -n 104.44.129.141 --next-hop-type Internet --address-prefix 104.44.129.141/32
-    az network route-table route create -g $rg --route-table-name $rt -n 104.44.129.243 --next-hop-type Internet --address-prefix 104.44.129.243/32
-    az network route-table route create -g $rg --route-table-name $rt -n 104.44.129.255 --next-hop-type Internet --address-prefix 104.44.129.255/32
-    az network route-table route create -g $rg --route-table-name $rt -n 104.44.134.255 --next-hop-type Internet --address-prefix 104.44.134.255/32
-    az network route-table route create -g $rg --route-table-name $rt -n 104.208.54.11 --next-hop-type Internet --address-prefix 104.208.54.11/32
-    az network route-table route create -g $rg --route-table-name $rt -n 157.55.176.93 --next-hop-type Internet --address-prefix 157.55.176.93/32
-    az network route-table route create -g $rg --route-table-name $rt -n 157.55.208.185 --next-hop-type Internet --address-prefix 157.55.208.185/32
-    az network route-table route create -g $rg --route-table-name $rt -n 191.236.154.88 --next-hop-type Internet --address-prefix 191.236.154.88/32
+    foreach ($ip in $managementAddresses) {
+        az network route-table route create -g $rg --route-table-name $rt -n $ip --next-hop-type Internet --address-prefix ($ip + "/32")
+    }
 
-Yol tablosu oluşturulduktan sonra ASE alt ağınız ayarlamanız gerekir.  
+Rota tablonuz oluşturulduktan sonra, Ao alt ağınızda ayarlamanız gerekir.  
 
-## <a name="get-your-management-addresses-from-api"></a>API Yönetimi adreslerinizi Al ##
+## <a name="get-your-management-addresses-from-api"></a>API 'den yönetim adreslerinizi alın ##
 
-Aşağıdaki API çağrısı ile ASE'nizi için eşleşen yönetim adreslerine listeleyebilirsiniz.
+Aşağıdaki API çağrısıyla, ATıCı ile eşleşen yönetim adreslerini listeleyebilirsiniz.
 
     get /subscriptions/<subscription ID>/resourceGroups/<resource group>/providers/Microsoft.Web/hostingEnvironments/<ASE Name>/inboundnetworkdependenciesendpoints?api-version=2016-09-01
 
-API, tüm gelen adreslerini ASE'NİZİN içeren bir JSON belgesini döndürür. Adresleri listesi, ASE'nizi ve ASE alt ağ adres aralığı kendisi tarafından kullanılan VIP yönetim adresleri içerir.  
+API, ASE 'nizin tüm gelen adreslerini içeren bir JSON belgesi döndürür. Adres listesi, AX 'niz ve Ao alt ağı adres aralığının kendisi tarafından kullanılan VIP 'yi, yönetim adreslerini içerir.  
 
-API ile çağrılacak [armclient](https://github.com/projectkudu/ARMClient) aşağıdaki komutları kullanırsınız, ancak, abonelik kimliği, kaynak grubu ve ASE adını değiştirin.  
+[Armistemcisiyle](https://github.com/projectkudu/ARMClient) API 'yi çağırmak için aşağıdaki komutları kullanın, ancak abonelik kimliğiniz, kaynak GRUBUNUZ ve Ao adı ' nı değiştirin.  
 
     armclient login
     armclient get /subscriptions/<subscription ID>/resourceGroups/<resource group>/providers/Microsoft.Web/hostingEnvironments/<ASE Name>/inboundnetworkdependenciesendpoints?api-version=2016-09-01

@@ -1,141 +1,140 @@
 ---
-title: Çok kiracılı bir SaaS uygulamasında Azure SQL veritabanını geri yükleme | Microsoft Docs
-description: Verileri yanlışlıkla sildikten sonra tek bir kiracının SQL veritabanını geri yükleme hakkında bilgi edinin
+title: Çok kiracılı bir SaaS uygulamasında bir veritabanını geri yükleme
+description: Verileri yanlışlıkla sildikten sonra tek bir kiracının SQL veritabanını geri yüklemeyi öğrenin
 services: sql-database
 ms.service: sql-database
 ms.subservice: scenario
-ms.custom: ''
+ms.custom: seo-lt-2019
 ms.devlang: ''
 ms.topic: conceptual
 author: stevestein
 ms.author: sstein
 ms.reviewer: billgib
-manager: craigg
 ms.date: 12/04/2018
-ms.openlocfilehash: 4059b0f979e7e6856905f1759129167d62d7b5f5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a54e8e5629f6f8ad688b6fe11bbf50fc038095bf
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60326365"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818521"
 ---
-# <a name="restore-a-single-tenant-with-a-database-per-tenant-saas-application"></a>Bir kiracı başına veritabanı SaaS uygulaması ile tek bir kiracıyı geri yükleme
+# <a name="restore-a-single-tenant-with-a-database-per-tenant-saas-application"></a>Tek bir kiracıyı kiracı başına veritabanı SaaS uygulamasıyla geri yükleme
 
-Kiracı başına veritabanı modeli, tek bir kiracının diğer kiracılara etkilemeden önceki bir noktaya zamanında geri kolaylaştırır.
+Kiracı başına veritabanı modeli, tek bir kiracıyı diğer kiracıları etkilemeden önceki bir zaman noktasına geri yüklemeyi kolaylaştırır.
 
-Bu öğreticide, iki veri kurtarma desenleri öğrenin:
+Bu öğreticide, iki veri kurtarma deseni öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Bir veritabanını (yan yana) paralel bir veritabanına geri yükleyin.
-> * Varolan bir veritabanını değiştirme bir yerde bir veritabanını geri yükleyin.
+> * Bir veritabanını bir paralel veritabanına geri yükleme (yan yana).
+> * Var olan veritabanını değiştirerek bir veritabanını yerinde geri yükleyin.
 
 |||
 |:--|:--|
-| Paralel bir veritabanına geri yükleme | Bu düzen inceleme, Denetim ve uyumluluk gibi görevler için daha önceki bir noktaya verilerden incelemek bir kiracı izin vermek için kullanılabilir. Kiracının geçerli veritabanı, çevrimiçi ve değişmeden kalır. |
-| Yerinde geri yükleme | Bu düzen, genellikle bir kiracı yanlışlıkla siler veya veri bozarsa sonra bir kiracı daha önceki bir noktaya kurtarmak için kullanılır. Özgün veritabanını çevrimdışı geçen ve geri yüklenen veritabanıyla değiştirildi. |
+| Paralel veritabanına geri yükleme | Bu model, bir kiracının verilerini önceki bir noktadan incelemeye izin vermek için İnceleme, denetim ve uyumluluk gibi görevler için kullanılabilir. Kiracının geçerli veritabanı çevrimiçi ve değişmemiş durumda kalır. |
+| Yerinde geri yükleme | Bu model genellikle, bir kiracı yanlışlıkla verileri sildikten veya bozduktan sonra bir kiracıyı daha önceki bir noktaya kurtarmak için kullanılır. Özgün veritabanı satır dışı alınır ve geri yüklenen veritabanıyla değiştirilmiştir. |
 |||
 
 Bu öğreticiyi tamamlamak için aşağıdaki ön koşulların karşılandığından emin olun:
 
-* Wingtip SaaS uygulaması dağıtılır. Beş dakikadan kısa bir süre içinde dağıtmak için bkz. [dağıtma ve keşfetme Wingtip SaaS uygulaması](saas-dbpertenant-get-started-deploy.md).
-* Azure PowerShell’in yüklendiğinden. Ayrıntılar için bkz [Azure PowerShell'i kullanmaya başlama](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Wingtip SaaS uygulaması dağıtıldı. Beş dakikadan kısa bir süre içinde dağıtmak için bkz. [Wingtip SaaS uygulamasını dağıtma ve araştırma](saas-dbpertenant-get-started-deploy.md).
+* Azure PowerShell’in yüklendiğinden. Ayrıntılar için bkz. [Azure PowerShell kullanmaya başlama](https://docs.microsoft.com/powershell/azure/get-started-azureps).
 
-## <a name="introduction-to-the-saas-tenant-restore-patterns"></a>SaaS Kiracı geri yükleme düzenlerine giriş
+## <a name="introduction-to-the-saas-tenant-restore-patterns"></a>SaaS kiracısı geri yükleme desenlerine giriş
 
-Tek bir kiracının verileri geri yükleme için iki basit Düzen vardır. Kiracı veritabanlarını birbirinden yalıtılmış olduğundan, bir kiracı geri herhangi diğer kiracının verileri herhangi bir etkisi yoktur. Azure SQL veritabanı noktası içinde belirli bir geri yükleme (PITR) özelliği, hem desenler kullanılır. PITR her zaman yeni bir veritabanı oluşturur.
+Tek bir kiracının verilerini geri yüklemek için iki basit desen vardır. Kiracı veritabanları birbirinden yalıtılmış olduğundan, bir kiracının geri yüklenmesi diğer kiracının verilerini etkilemez. Azure SQL veritabanı 'nın zaman içinde geri yükleme (ıNR) özelliği her iki desende kullanılır. SÜR her zaman yeni bir veritabanı oluşturur.
 
-* **Paralel olarak geri**: İlk desen, kiracının geçerli veritabanı yanı sıra yeni paralel veritabanı oluşturulur. Kiracı, daha sonra geri yüklenen veritabanına yalnızca okuma erişimi verilir. Geri yüklenen verileri gözden geçirdi ve potansiyel olarak geçerli veri değerlerini üzerine yazmak için kullanılır. Bunu nasıl Kiracı geri yüklenen veritabanına erişir ve kurtarma için hangi seçenekler sunulur belirlemek için Uygulama Tasarımcısı aittir. Yalnızca önceki bir noktada verilerini gözden geçirmek Kiracı izin vererek, bazı senaryolarda gerekli olabilir.
+* **Paralel olarak geri yükle**: ilk düzende, kiracının geçerli veritabanı ile birlikte yeni bir paralel veritabanı oluşturulur. Daha sonra kiracıya geri yüklenen veritabanına salt okuma erişimi verilir. Geri yüklenen veriler incelenebilir ve geçerli veri değerlerinin üzerine yazmak için kullanılır. Bu, kiracının geri yüklenen veritabanına nasıl eriştiğini ve kurtarmaya yönelik seçeneklerin nasıl sağlandığını belirlemek için uygulama tasarımcısına sahiptir. Daha önceki bir noktada, kiracının verilerini incelemeye izin vermek, bazı senaryolarda gerekli olan tek bir işlem olabilir.
 
-* **Yerinde geri**: İkinci desen, veriler kaybolursa veya bozulursa ve Kiracı için daha önceki bir noktaya geri isterse yararlı olur. Veritabanı geri sırasında Kiracı çevrimdışı alınır. Özgün veritabanına silinir ve geri yüklenen veritabanının yeniden adlandırılır. Veritabanı önceki bir noktaya süre içinde gerekirse geri yükleyebilmeniz için özgün veritabanının yedekleme zinciri silindikten sonra erişilebilir kalır.
+* **Yerinde geri yükleme**: ikinci model, verilerin kaybolması veya bozulması ve kiracının önceki bir noktaya geri dönmesi istiyorsa kullanışlıdır. Veritabanı geri yüklenirken kiracı, satır dışı alınır. Özgün veritabanı silinir ve geri yüklenen veritabanı yeniden adlandırılır. Özgün veritabanının yedekleme zinciri silme işleminden sonra erişilebilir kalır, bu nedenle veritabanını gerekirse daha önceki bir noktaya geri yükleyebilirsiniz.
 
-Veritabanı kullanıyorsa, [etkin coğrafi çoğaltma](sql-database-active-geo-replication.md) ve paralel olarak geri yükleme, gerekli tüm verileri özgün veritabanına geri yüklenen kopyadan kopyalamak önerilir. Özgün veritabanını geri yüklenen veritabanıyla değiştirmeniz halinde yeniden yapılandırın ve coğrafi çoğaltmayı yeniden eşitlemek gerekir.
+Veritabanı [etkin coğrafi çoğaltma](sql-database-active-geo-replication.md) kullanıyorsa ve paralel olarak geri yüklenirse, geri yüklenen kopyadan gerekli verileri özgün veritabanına kopyalamanızı öneririz. Özgün veritabanını geri yüklenen veritabanıyla değiştirirseniz, Coğrafi çoğaltmayı yeniden yapılandırmanız ve yeniden eşitlenmesi gerekir.
 
-## <a name="get-the-wingtip-tickets-saas-database-per-tenant-application-scripts"></a>Wingtip bilet SaaS Kiracı başına veritabanı uygulama betiklerini alma
+## <a name="get-the-wingtip-tickets-saas-database-per-tenant-application-scripts"></a>Her kiracı uygulama komut dosyası için Wingtip bilet SaaS veritabanı 'nı alın
 
-Wingtip bilet SaaS çok Kiracılı veritabanı betikleri ve uygulama kaynak kodunu [WingtipTicketsSaaS DbPerTenant](https://github.com/Microsoft/WingtipTicketsSaaS-DbPerTenant) GitHub deposu. Wingtip bilet SaaS betikleri engellemesini indirip adımları için bkz [genel rehberlik](saas-tenancy-wingtip-app-guidance-tips.md).
+Wingtip biletleri SaaS Multitenant veritabanı betikleri ve uygulama kaynak kodu [Wingtipbilet ssaas-DbPerTenant](https://github.com/Microsoft/WingtipTicketsSaaS-DbPerTenant) GitHub deposunda mevcuttur. Wingtip bilet SaaS betikleri indirme ve engellemesini kaldırma adımları için bkz. [genel rehberlik](saas-tenancy-wingtip-app-guidance-tips.md).
 
 ## <a name="before-you-start"></a>Başlamadan önce
 
-Bir veritabanı oluşturulduğunda, uygulamanın ilk tam yedekleme, geri yükleme kullanılabilir olmadan önce 10-15 dakika sürebilir. Yalnızca uygulama yüklü değilse, bu senaryo denemeden önce birkaç dakika beklemeniz gerekebilir.
+Bir veritabanı oluşturulduğunda, ilk tam yedeklemenin içinden geri yükleme için kullanılabilir hale gelmesi 10 ila 15 dakika sürebilir. Uygulamayı yeni yüklediyseniz, bu senaryoyu denemeden önce birkaç dakika beklemeniz gerekebilir.
 
-## <a name="simulate-a-tenant-accidentally-deleting-data"></a>Bir kiracının verileri yanlışlıkla silme benzetimi
+## <a name="simulate-a-tenant-accidentally-deleting-data"></a>Yanlışlıkla verileri silerek kiracının benzetimini yapın
 
-Bu kurtarma senaryoları göstermek için "yanlışlıkla" Kiracı veritabanlarını bir olayda silin. 
+Bu kurtarma senaryolarını göstermek için, ilk olarak "yanlışlıkla" Kiracı veritabanlarından birindeki bir olayı silin. 
 
-### <a name="open-the-events-app-to-review-the-current-events"></a>Geçerli olayları gözden geçirmek için olayları uygulama açma
+### <a name="open-the-events-app-to-review-the-current-events"></a>Geçerli olayları gözden geçirmek için olaylar uygulamasını açın
 
-1. Olay hub'ı açın (http://events.wtp.&lt; kullanıcı&gt;. trafficmanager.net) seçip **Contoso Konser Salonu**.
+1. Olay Hub 'ını (http://events.wtp.&lt; User&gt;. trafficmanager.net) açın ve **contoso Concert Salı**' yi seçin.
 
-   ![Olay hub'ı](media/saas-dbpertenant-restore-single-tenant/events-hub.png)
+   ![Olay Hub 'ı](media/saas-dbpertenant-restore-single-tenant/events-hub.png)
 
-2. Olayların listesini kaydırın ve listede son olayın not edin.
+2. Olay listesini kaydırın ve listedeki son olayı bir yere iade edin.
 
    ![Son olay görünür](media/saas-dbpertenant-restore-single-tenant/last-event.png)
 
-### <a name="accidentally-delete-the-last-event"></a>"Yanlışlıkla" son olayı Sil
+### <a name="accidentally-delete-the-last-event"></a>Son olayı "yanlışlıkla" Sil
 
-1. PowerShell ISE'de Aç... \\Öğrenme modülleri\\iş sürekliliği ve olağanüstü durum kurtarma\\RestoreTenant\\*tanıtım RestoreTenant.ps1*ve aşağıdaki değeri ayarlayın:
+1. PowerShell ıSE 'de,...\\öğrenme modüllerini\\Iş sürekliliği ve olağanüstü durum kurtarma\\RestoreTenant\\*demo-RestoreTenant. ps1*' i açın ve aşağıdaki değeri ayarlayın:
 
-   * **$DemoScenario** = **1**, *silme son olayı (ile hiçbir bilet satışı)* .
-2. Betiği çalıştırın ve son olay silmek için F5 tuşuna basın. Aşağıdaki onay mesajı görünür:
+   * **$DemoScenario** = **1**, *son olayı Sil (Bilet satışları olmadan)* .
+2. Betiği çalıştırmak için F5 tuşuna basın ve son olayı silin. Aşağıdaki onay iletisi görüntülenir:
 
    ```Console
    Deleting last unsold event from Contoso Concert Hall ...
    Deleted event 'Seriously Strauss' from Contoso Concert Hall venue.
    ```
 
-3. Contoso olayları sayfası açılır. Aşağı kaydırın ve olay gitmiş olduğundan emin olun. Olayın yine de listede yer alıyorsa, seçin **Yenile** ve onu geçtiğini doğrulayın.
-   ![Son olay kaldırıldı](media/saas-dbpertenant-restore-single-tenant/last-event-deleted.png)
+3. Contoso olayları sayfası açılır. Aşağı kaydırın ve olayın kaybolduğunu doğrulayın. Olay hala listede ise, **Yenile** ' yi seçin ve onun devam ettiğini doğrulayın.
+   ![son olay kaldırıldı](media/saas-dbpertenant-restore-single-tenant/last-event-deleted.png)
 
-## <a name="restore-a-tenant-database-in-parallel-with-the-production-database"></a>Üretim veritabanı ile paralel bir kiracı veritabanı geri yükleme
+## <a name="restore-a-tenant-database-in-parallel-with-the-production-database"></a>Bir kiracı veritabanını üretim veritabanıyla paralel olarak geri yükleme
 
-Bu alıştırmada Contoso Konser Salonu veritabanı olay silinmeden önceki zaman içinde bir noktaya geri yükler. Bu senaryo, silinen verileri paralel bir veritabanındaki gözden geçirmek istediğiniz varsayar.
+Bu alıştırma, contoso Concert Salı veritabanını, olay silinmeden önceki bir zamana geri yükler. Bu senaryo, bir paralel veritabanında silinen verileri gözden geçirmek istediğinizi varsayar.
 
- *Geri yükleme-TenantInParallel.ps1* betik oluşturur adlı bir paralel Kiracı veritabanı *ContosoConcertHall\_eski*, paralel bir katalog girişi ile. Bu düzen geri yükleme küçük veri kaybından kurtarma için idealdir. Bu düzen, uyumluluk veya yapılacak denetim verilerini gözden geçirmek istiyorsanız de kullanabilirsiniz. Kullandığınızda, önerilen yaklaşımdır [etkin coğrafi çoğaltma](sql-database-active-geo-replication.md).
+ *Restore-TenantInParallel. ps1* betiği, paralel bir katalog girişi ile *ContosoConcertHall\_Old*adlı bir paralel Kiracı veritabanı oluşturur. Bu geri yükleme deseninin küçük bir veri kaybını kurtarmak için idealdir. Bu kalıbı, uyumluluk veya denetim amaçlarıyla verileri gözden geçirmeniz gerekiyorsa de kullanabilirsiniz. [Etkin coğrafi çoğaltma](sql-database-active-geo-replication.md)kullandığınızda önerilen yaklaşım önerilir.
 
-1. Tamamlamak [verileri yanlışlıkla silme Kiracı benzetimini](#simulate-a-tenant-accidentally-deleting-data) bölümü.
-2. PowerShell ISE'de Aç... \\Öğrenme modülleri\\iş sürekliliği ve olağanüstü durum kurtarma\\RestoreTenant\\_tanıtım RestoreTenant.ps1_.
-3. Ayarlama **$DemoScenario** = **2**, *paralel geri yükleme Kiracı*.
+1. [Yanlışlıkla verileri silme bir kiracının benzetimini](#simulate-a-tenant-accidentally-deleting-data) gerçekleştirin bölümü.
+2. PowerShell ıSE 'de,...\\öğrenme modüllerini\\Iş sürekliliği ve olağanüstü durum kurtarma\\RestoreTenant\\_demo-RestoreTenant. ps1_.
+3. **$DemoScenario** = **2**' i ayarlayın, *kiracıyı paralel olarak geri yükleyin*.
 4. Betiği çalıştırmak için F5 tuşuna basın.
 
-Betik Kiracı veritabanı olay silmeden önce zaman içinde bir noktaya geri yükler. Adlı yeni bir veritabanı için veritabanı geri yüklendikten _ContosoConcertHall\_eski_. Bu geri yüklenen veritabanında var olan katalog meta veriler silinir ve oluşturulan bir anahtar kullanılarak veritabanı kataloğa ardından eklenir *ContosoConcertHall\_eski* adı.
+Betik, olayı silmeden önce, kiracı veritabanını zaman içinde bir noktaya geri yükler. Veritabanı, _ContosoConcertHall\_eski_adlı yeni bir veritabanına geri yüklendi. Bu geri yüklenen veritabanında bulunan katalog meta verileri silinir ve sonra *ContosoConcertHall\_eski* adından oluşturulan bir anahtar kullanılarak veritabanı kataloğa eklenir.
 
-Tanıtım betiğini bu yeni bir kiracı veritabanı için olayları sayfası tarayıcınızda açılır. URL'den Not ```http://events.wingtip-dpt.&lt;user&gt;.trafficmanager.net/contosoconcerthall_old``` bu sayfa geri yüklenen veritabanından veri gösterir burada *_old* adına eklenir.
+Demo betiği, tarayıcınızdaki bu yeni kiracı veritabanının Olaylar sayfasını açar. URL 'den, bu sayfanın *_old* adına eklendiği geri yüklenen veritabanından verileri gösterdiğine ```http://events.wingtip-dpt.&lt;user&gt;.trafficmanager.net/contosoconcerthall_old```.
 
-Silinen önceki bölümde olay geri yüklendiğini doğrulamak için tarayıcıda listelenen olaylar kaydırın.
+Önceki bölümde silinen olayın geri yüklendiğini doğrulamak için tarayıcıda listelenen olayları kaydırın.
 
-Geri yüklenen bir kiracı kendi olayları uygulama ile bir ek Kiracı olarak gösterme olması, geri yüklenen veriler için bir kiracı erişimi nasıl sağladığını beklenmez. Geri yükleme düzeni göstermek için kullanılır. Genellikle, eski verilere yalnızca okuma erişimi verin ve tanımlanan bir süre için geri yüklenen veritabanı korur. Bu örnekte çalıştırarak tamamlandı sonra geri yüklenen Kiracı giriş silebilirsiniz _Kaldır geri Kiracı_ senaryo.
+Geri yüklenen kiracıyı, kendi olay uygulamasıyla ek bir kiracı olarak ortaya çıkarmak, geri yüklenen verilere kiracı erişimi sağlama olasılığının düşüktür. Geri yükleme modelini göstermek için kullanılır. Genellikle, eski verilere salt okuma erişimi verirsiniz ve geri yüklenen veritabanını tanımlı bir süre için koruyabilirsiniz. Örnekte, _geri yüklenen kiracıyı kaldır_ senaryosunu çalıştırarak, geri yüklenen kiracı girişini silebilirsiniz.
 
-1. Ayarlama **$DemoScenario** = **4**, *Kaldır geri Kiracı*.
+1. **$DemoScenario** = **4**' ü ayarlayın, *geri yüklenen kiracıyı kaldırın*.
 2. Betiği çalıştırmak için F5 tuşuna basın.
-3. *ContosoConcertHall\_eski* girişi artık katalogdan silindi. Tarayıcınızda bu Kiracı için etkinlikler sayfasını kapatın.
+3. *ContosoConcertHall\_eski* girdisi artık katalogdan silinir. Tarayıcınızda bu kiracının Olaylar sayfasını kapatın.
 
-## <a name="restore-a-tenant-in-place-replacing-the-existing-tenant-database"></a>Var olan bir kiracı veritabanı değiştirme, yerinde bir kiracıyı geri yükleme
+## <a name="restore-a-tenant-in-place-replacing-the-existing-tenant-database"></a>Bir kiracıyı yerinde geri yükleyin, var olan kiracı veritabanını değiştirin
 
-Bu alıştırmada Contoso Konser Salonu Kiracı olay silinmeden önceki bir noktaya geri yükler. *Geri yükleme-TenantInPlace* komut bir kiracı veritabanı, yeni bir veritabanına geri yükler ve özgün siler. Bu geri yükleme düzeni ciddi veri bozulmasından kurtarmak için idealdir ve Kiracı önemli veri kaybı uyum sağlamak olabilir.
+Bu alıştırma, contoso Concert salonu kiracısını olay silinmeden önceki bir noktaya geri yükler. *Restore-TenantInPlace* betiği, bir kiracı veritabanını yeni bir veritabanına geri yükler ve orijinali siler. Bu geri yükleme düzeninin önemli verilerin bozulmasını kurtarmak için idealdir ve kiracının önemli veri kaybına uyum sağlaması gerekebilir.
 
-1. PowerShell ISE'de açın **tanıtım RestoreTenant.ps1** dosya.
-2. Ayarlama **$DemoScenario** = **5**, *geri yükleme Kiracı yerinde*.
+1. PowerShell ıSE 'de, **demo-RestoreTenant. ps1** dosyasını açın.
+2. **$DemoScenario** = **5**' i ayarlayın, *kiracı 'yı yerinde geri yükleyin*.
 3. Betiği çalıştırmak için F5 tuşuna basın.
 
-Betik Kiracı veritabanı olay silinmeden önceki bir noktaya geri yükler. Önce güncelleştirmeleri ileriki işlemleri önlemek için Contoso Konser Salonu Kiracı çevrimdışı alır. Ardından, paralel bir veritabanını geri yükleme noktasından geri yükleyerek oluşturulur. Geri yüklenen veritabanının, veritabanı adı, varolan bir kiracı veritabanı adı ile çakışmadığından emin olmak için bir zaman damgası ile adlandırılır. Ardından, eski Kiracı veritabanı silinir ve geri yüklenen veritabanı özgün veritabanı adıyla yeniden adlandırılır. Son olarak, Contoso Konser Salonu geri yüklenen veritabanı uygulama erişmesine izin vermek için çevrimiçi duruma getirildikten.
+Betik, kiracı veritabanını olay silinmeden önceki bir noktaya geri yükler. Daha fazla güncelleştirme yapılmasını engellemek için ilk olarak contoso Concert salonu kiracıyı bir satır alır. Ardından, geri yükleme noktasından geri yükleyerek paralel bir veritabanı oluşturulur. Geri yüklenen veritabanı, veritabanı adının mevcut Kiracı veritabanı adıyla çakışmayacağından emin olmak için zaman damgasıyla adlandırılır. Ardından, eski kiracı veritabanı silinir ve geri yüklenen veritabanı özgün veritabanı adı olarak yeniden adlandırılır. Son olarak, contoso Concert salonu, uygulamanın geri yüklenen veritabanına erişmesine izin verecek şekilde çevrimiçi hale getirilir.
 
-Başarıyla veritabanını olay silinmeden önceki zaman içinde bir noktaya geri. Zaman **olayları** sayfası açıldıktan sonra son olayın geri yüklendiğini doğrulayın.
+Veritabanını, olay silinmeden önceki bir zaman noktasına başarıyla geri yükledi. **Olaylar** sayfası açıldığında, son olayın geri yüklendiğini onaylayın.
 
-Veritabanını geri yükledikten sonra ilk tam yedeklemede öğesinden yeniden geri yüklemek kullanılabilir olmadan önce başka bir 10-15 dakika sürer.
+Veritabanını geri yükledikten sonra, ilk tam yedeklemenin yeniden geri yükleme için kullanılabilir hale gelmeden önce bir 10 ila 15 dakika sürer.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 
 > [!div class="checklist"]
-> * Bir veritabanını (yan yana) paralel bir veritabanına geri yükleyin.
-> * Yerinde bir veritabanını geri yükleyin.
+> * Bir veritabanını bir paralel veritabanına geri yükleme (yan yana).
+> * Bir veritabanını yerinde geri yükleyin.
 
-Deneyin [Yönet Kiracı veritabanı şemasını](saas-tenancy-schema-management.md) öğretici.
+[Kiracı veritabanı şemasını yönet](saas-tenancy-schema-management.md) öğreticisini deneyin.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Wingtip SaaS uygulaması üzerinde geliştirecek ek öğreticilerden](saas-dbpertenant-wingtip-app-overview.md#sql-database-wingtip-saas-tutorials)
-* [Azure SQL veritabanı'nda iş sürekliliğine genel bakış](sql-database-business-continuity.md)
+* [Wingtip SaaS uygulaması üzerinde derleme yapan ek öğreticiler](saas-dbpertenant-wingtip-app-overview.md#sql-database-wingtip-saas-tutorials)
+* [Azure SQL veritabanı ile iş sürekliliği 'ne genel bakış](sql-database-business-continuity.md)
 * [SQL veritabanı yedeklemeleri hakkında bilgi edinin](sql-database-automated-backups.md)

@@ -1,39 +1,39 @@
 ---
-title: Bing konuşma kullanma örnekleri | Microsoft Docs
+title: Bing Konuşma kullanma örnekleri | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Konuşmayı metne dönüştürür, Microsoft konuşma hizmeti kullanım örneklerini içerir.
+description: Konuşma sesini metne dönüştüren Microsoft konuşma hizmetini kullanma örnekleri.
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 4db95bdc5e83badef0170bfb3b1c52bb8610c655
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 6f2e5d46063397d401a426662c86b175e9706bea
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60514945"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70966467"
 ---
-# <a name="bing-speech-client-samples"></a>Bing konuşma istemci örnekleri
+# <a name="bing-speech-client-samples"></a>Bing Konuşma istemci örnekleri
 
 [!INCLUDE [Deprecation note](../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Bing konuşma farklı kullanım örnekleri, örnek komut tanıma, sürekli tanıma ve hedefi olan algılama göstermek için uçtan uca örnekler sağlar. Tüm örnekler Github'da kullanılabilir ve şu bağlantılardan indirebilirsiniz: Her depoda README.md yanı sıra [istemci kitaplıkları](GetStarted/GetStartedClientLibraries.md) sayfası oluşturup örneklerini çalıştırma hakkında ayrıntılı bilgi sağlar.
+Bing Konuşma, farklı kullanım durumlarını (örneğin, komut tanıma, sürekli tanıma ve amaç algılama) göstermek için uçtan uca örnekler sağlar. Tüm örnekler GitHub 'da kullanılabilir ve aşağıdaki bağlantılar tarafından indirilebilir: Her depodaki README.md ve [istemci kitaplıkları](GetStarted/GetStartedClientLibraries.md) sayfasında örnekleri oluşturma ve çalıştırma hakkında ayrıntılı bilgi sağlanır.
 
 - [REST API örnekleri](https://github.com/Azure-Samples/SpeechToText-REST)
 
 - [JavaScript örnekleri](https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript)
 
-- [C# Masaüstü istemci örnekleri](https://github.com/Azure-Samples/Cognitive-Speech-STT-Windows)
+- [C#Masaüstü istemci örnekleri](https://github.com/Azure-Samples/Cognitive-Speech-STT-Windows)
 
-- [C# hizmeti örnekleri](https://github.com/Azure-Samples/Cognitive-Speech-STT-ServiceLibrary)
+- [C#hizmet örnekleri](https://github.com/Azure-Samples/Cognitive-Speech-STT-ServiceLibrary)
 
-- [Android örnekleri üzerinde Java](https://github.com/Azure-Samples/Cognitive-Speech-STT-Android)
+- [Android 'de Java örnekleri](https://github.com/Azure-Samples/Cognitive-Speech-STT-Android)
 
 - [İOS örnekleri üzerinde ObjectiveC](https://github.com/Azure-Samples/Cognitive-Speech-STT-iOS)
 
-Tüm Microsoft Bilişsel Hizmetler SDK'ları ve örnekler, MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için [lisans](https://github.com/Azure-Samples/SpeechToText-REST/blob/master/LICENSE).
+Tüm Microsoft Bilişsel Hizmetler SDK'ları ve örnekler, MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için bkz. [Lisans](https://github.com/Azure-Samples/SpeechToText-REST/blob/master/LICENSE).

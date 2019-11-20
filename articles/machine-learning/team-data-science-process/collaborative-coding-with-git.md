@@ -7,110 +7,114 @@ editor: cgronlun
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 11/28/2017
+ms.date: 08/23/2019
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 551d0cd149c4d1555a40ccf0d7baeff97c6809c2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3b57621fcec654f11c8e9a68e4568f332dbf9ac6
+ms.sourcegitcommit: 532335f703ac7f6e1d2cc1b155c69fc258816ede
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60336375"
+ms.lasthandoff: 08/30/2019
+ms.locfileid: "70195517"
 ---
 # <a name="collaborative-coding-with-git"></a>Git ile işbirliği içinde kodlama
 
-Bu makalede, biz paylaşılan kod geliştirme çerçevesi Git kullanarak veri bilimi projeleri için işbirliğine dayalı kod geliştirme yapmak nasıl açıklar. Bu etkinlikler için planlanan çalışmayı kodlama bağlama kapsayan [Çevik Geliştirme](agile-development.md) ve kod incelemesi öğrenin.
+Bu makalede, veri bilimi projeleri için işbirliğine dayalı kod geliştirme çerçevesi olarak git 'in nasıl kullanılacağı açıklanır. Makale, Azure Repos Azure Boards [çevik geliştirme](agile-development.md) iş öğelerine, kod incelemelerinin nasıl yapılacağını ve değişiklikler için çekme istekleri oluşturma ve birleştirme hakkında nasıl bağlantı yapılacağını ele alır.
 
+## <a name='Linkaworkitemwithagitbranch-1'></a>Bir iş öğesini Azure Repos dalına bağlama 
 
-## 1. <a name='Linkaworkitemwithagitbranch-1'></a>Git dal ile bir çalışma öğesiyle bağlantılandırmak 
+Azure DevOps, bir Azure Boards Kullanıcı hikayesine veya görev iş öğesini Azure Repos git deposu dalına bağlamak için kullanışlı bir yol sağlar. Kullanıcı hikayenizi veya görevinizi, doğrudan onunla ilişkili koda bağlayabilirsiniz. 
 
-Azure DevOps hizmetleriyle Git dalı ile bir iş öğesi (bir hikaye veya görev) bağlanmak için kullanışlı bir yol sağlar. Bu, doğrudan ilişkili kod hikayesi veya görev bağlamanıza olanak sağlar. 
+Bir iş öğesini yeni bir dala bağlamak için, iş öğesinin yanındaki **Eylemler** üç nokta ( **...** ) simgesini seçin ve bağlam menüsünde, ' ye kaydırın ve **yeni dal**' ı seçin.  
 
-Bir iş öğesi için yeni bir dal bağlanmak için bir iş öğesi'ne çift tıklayın ve açılır pencerede **yeni dal Oluştur** altında **+ Ekle bağlantısını**.  
+![1\.](./media/collaborative-coding-with-git/1-sprint-board-view.png)
 
-![1](./media/collaborative-coding-with-git/1-sprint-board-view.png)
-
-Dal adı temel Git deposu ve dalı gibi bu yeni dal için bilgileri sağlayın. Seçilen Git deposu depo iş öğesinin ait olduğu projenin altında olması gerekir. Ana dal, ana dalı veya mevcut bazı bir dal olabilir.
+**Dal oluştur** iletişim kutusunda yeni dal adını ve temel Azure Repos git deposu ve dalını sağlayın. Temel Depo, iş öğesiyle aynı Azure DevOps projesinde olmalıdır. Temel dal, ana dal veya var olan başka bir dal olabilir. **Dal oluştur**' u seçin. 
 
 ![2](./media/collaborative-coding-with-git/2-create-a-branch.png)
 
-Her hikayesi iş öğesi için bir Git dal oluşturmak iyi bir uygulamadır. Ardından, her görev çalışma öğesi için hikaye dala göre bir dal oluşturun. Aynı projeye farklı hikayelerdeki çalışan birden çok kişinin kullandığınız ya da aynı hikayeyi farklı görevler üzerinde çalışan birden çok kişinin sahip hikaye görev ilişkilerini karşılık gelen hiyerarşik bu şekilde dalları düzenlemek yararlıdır. Her ekip üyesi farklı bir dal ve her üye bir dal paylaşırken farklı kodlarını veya diğer yapıları üzerinde çalışsa çalışırken çakışmaları en aza indirilebilir. 
+Ayrıca, Windows veya Linux 'ta aşağıdaki git Bash komutunu kullanarak yeni bir dal oluşturabilirsiniz:
 
-Aşağıdaki resimde TDSP için önerilen dallanma stratejisi gösterilmektedir. Özellikle yalnızca biri varsa burada gösterilen şekilde veya aynı proje üzerinde çalışan iki kişinin çoğu dallar veya yalnızca bir kişinin bir hikaye tüm görevler üzerinde çalıştığı gerekmeyebilir. Ancak, ana daldan geliştirme dalına ayırarak her zaman iyi bir uygulamadır. Bu yayın dalı geliştirme etkinlikleri tarafından kesintiye önlemeye yardımcı olabilir. Git dal modeli daha ayrıntılı açıklama bulunabilir [bir başarılı Git dallanma modeli](https://nvie.com/posts/a-successful-git-branching-model/).
+```bash
+git checkout -b <new branch name> <base branch name>
+
+```
+> Bir \<temel dal adı belirtmezseniz, yeni dal temel alır `master`. 
+
+Çalışma dalınıza geçiş yapmak için aşağıdaki komutu çalıştırın: 
+
+```bash
+git checkout <working branch name>
+```
+
+Çalışma dalına geçiş yaptıktan sonra, iş öğesini tamamlamaya yönelik kod veya belge yapıtları geliştirmeye başlayabilirsiniz. Çalışan `git checkout master` anahtarlar, `master` dala geri döner.
+
+Her Kullanıcı hikayesi iş öğesi için bir git dalı oluşturmak iyi bir uygulamadır. Ardından, her görev iş öğesi için Kullanıcı hikayesi dalını temel alan bir dal oluşturabilirsiniz. Aynı proje için farklı Kullanıcı hikayeleri üzerinde çalışan birden fazla kişiye veya aynı kullanıcı hikayesine yönelik farklı görevlere sahip olduğunuzda, dalları Kullanıcı hikayesi-görev ilişkisine karşılık gelen bir hiyerarşide düzenleyin. Her bir takım üyesinin farklı bir dalda veya bir dalı paylaşırken farklı bir kodda ya da diğer yapıtlarda çalışmasını sağlayarak çakışmaları en aza indirmenize neden olabilirsiniz. 
+
+Aşağıdaki diyagramda, TDSP için önerilen dallanma stratejisi gösterilmektedir. Özellikle bir proje üzerinde yalnızca bir veya iki kişi çalışırken ya da bir kullanıcı hikayesinin tüm görevlerinde yalnızca bir kişi çalıştığı zaman, burada gösterildiği gibi birçok dala gerek duymayabilir. Ancak, geliştirme dalını ana daldan ayırmak her zaman iyi bir uygulamadır ve yayın dalının geliştirme etkinlikleri tarafından kesintiye uğratılmasını önlemeye yardımcı olabilir. Git dal modelinin tamamının açıklaması için, bkz. [başarılı git dallanma modeli](https://nvie.com/posts/a-successful-git-branching-model/).
 
 ![3](./media/collaborative-coding-with-git/3-git-branches.png)
 
-Üzerinde çalışmak istediğiniz dala geçmek için kabuk komut (Windows veya Linux) aşağıdaki komutu çalıştırın. 
-
-    git checkout <branch name>
-
-Değiştirme *< dal adı\>*  için **ana** anahtarları yedeklemek için **ana** dal. Çalışma dalı geçtikten sonra bu iş öğesi üzerinde çalışma, öğesini tamamlamak için gereken kodu veya belgeleri yapıtları geliştirmeye başlayabilirsiniz. 
-
-Ayrıca, bir iş öğesi var olan bir dala bağlayabilirsiniz. İçinde **ayrıntı** tıklamak yerine, bir iş öğesi sayfa **yeni dal Oluştur**, tıkladığınız **+ Bağlantı Ekle**. Ardından, çalışma öğesine bağlamak istediğiniz dalı seçin. 
+Ayrıca, bir iş öğesi var olan bir dala bağlayabilirsiniz. Bir iş öğesinin **ayrıntı** sayfasında **bağlantı ekle**' yi seçin. Ardından, iş öğesini bağlamak için mevcut bir dalı seçin ve **Tamam**' ı seçin. 
 
 ![4](./media/collaborative-coding-with-git/4-link-to-an-existing-branch.png)
 
-Ayrıca, Git Bash komutları yeni bir dal oluşturabilirsiniz. < Ana dal adı\> eksik, < yeni dal adı\> dayanır _ana_ dal. 
-    
-    git checkout -b <new branch name> <base branch name>
+## <a name='WorkonaBranchandCommittheChanges-2'></a>Dalda çalışma ve değişiklikleri yapma 
 
+Yerel makinenizin `script` dalına bir R betik dosyası eklemek gibi iş öğesi için bir değişiklik yaptıktan sonra, aşağıdaki git Bash komutlarını kullanarak yerel dalınızdan değişikliği yukarı akış çalışma dalına kaydedebilirsiniz:
 
-## 2. <a name='WorkonaBranchandCommittheChanges-2'></a>Bir dalda çalışmak ve değişiklikleri 
-
-Şimdi, bazı değişiklik varsayalım *veri\_alımı* dal için yerel makinenizde dalın bir R dosyası ekleme gibi iş öğesi. Aşağıdaki Git komutlarını kullanarak Git kabuğunuzda dalında Gerçekleştirdiğim olması koşuluyla bu iş öğesi için dala eklenen R dosya onaylayabilirsiniz:
-
-    git status
-    git add .
-    git commit -m"added a R scripts"
-    git push origin data_ingestion
+```bash
+git status
+git add .
+git commit -m "added an R script file"
+git push origin script
+```
 
 ![5](./media/collaborative-coding-with-git/5-sprint-push-to-branch.png)
 
-## 3. <a name='CreateapullrequestonVSTS-3'></a>Azure DevOps Services'de bir çekme isteği oluşturun 
+## <a name='CreateapullrequestonVSTS-3'></a>Çekme isteği oluşturma
 
-Birkaç işlemeler ve bildirim sonra hazır olduğunuzda geçerli dal, ana dal ile birleştirmek için gönderebilmek için bir **çekme isteği** Azure DevOps Hizmetleri. 
+Bir veya daha fazla işleme ve gönderim sonrasında, geçerli çalışma dalınızı temel dalına birleştirmeye hazırsanız, Azure Repos bir *çekme isteği* oluşturabilir ve gönderebilirsiniz. 
 
-Projenizin ana sayfasına gidin ve tıklayın **kod**. Birleştirilecek dalı ve dal ile birleştirmek istediğiniz Git depo adı seçin. Ardından **çekme istekleri**, tıklayın **yeni çekme isteği** çalışma dalı, ana dala birleştirilmeden önce bir çekme isteği gözden geçirme oluşturmak için.
+Azure DevOps projenizin ana sayfasından, sol gezinti bölmesinde bulunan **Repos** > **çekme istekleri** ' ni işaret edin. Ardından **Yeni çekme isteği** düğmelerinden birini veya **çekme isteği oluştur** bağlantısını seçin.
 
 ![6](./media/collaborative-coding-with-git/6-spring-create-pull-request.png)
 
-Bu çekme isteği hakkında bir açıklama girin, gözden geçirenler ekleme ve bunu gönderin.
+**Yeni çekme isteği** ekranında, gerekirse Değişikliklerinizi birleştirmek istediğiniz git deposuna ve dalına gidin. İstediğiniz diğer bilgileri ekleyin veya değiştirin. **Gözden geçirenler**altında, değişikliklerinizi gözden geçirmek için ihtiyacınız olan adların adlarını ekleyin ve ardından **Oluştur**' u seçin. 
 
 ![7](./media/collaborative-coding-with-git/7-spring-send-pull-request.png)
 
-## 4. <a name='ReviewandMerge-4'></a>Gözden geçirme ve birleştirme 
+## <a name='ReviewandMerge-4'></a>Gözden geçirme ve birleştirme
 
-Çekme isteği oluşturulurken, gözden geçirenler çekme isteklerini gözden geçirmek için bir e-posta bildirimi alın. Gözden geçirenler değişiklikleri veya çalışma ve istekte bulunan taraf ile değişiklikleri mümkünse test etmek gerekir. Gözden geçirenler, kendi değerlendirmesini temel alan, onaylayın veya çekme isteği reddedin. 
+Çekme isteğini oluşturduktan sonra, gözden geçirenler çekme isteğini gözden geçirmek için bir e-posta bildirimi alır. Gözden geçirenler değişikliklerin çalışıp çalışmadığını test edin ve mümkünse değişiklikleri istek sahibine göre kontrol edin. Gözden geçirenler yorum yapabilir, değişiklikler yapabilir ve değerlendirmesi temelinde çekme isteğini onaylayabilir veya reddedebilir. 
 
 ![8](./media/collaborative-coding-with-git/8-add_comments.png)
 
-![9](./media/collaborative-coding-with-git/9-spring-approve-pullrequest.png)
-
-Gözden geçirme tamamlandıktan sonra çalışma dalı, ana dala tıklayarak birleştirilir **tam** düğmesi. Birleştirilmiş olmadığı sonra çalışma dalı silmek isteyebilirsiniz. 
+Gözden geçirenler değişiklikleri onayladıktan sonra, sizin veya birleştirme izinlerine sahip başka bir kişi çalışma dalını kendi temel dalına birleştirebilirler. **Tamam**' ı seçin ve ardından **çekme isteği Tamam** iletişim kutusunda **birleştirmeyi Tamam** ' ı seçin. Çalışma dalını birleştirdikten sonra silmeyi tercih edebilirsiniz. 
 
 ![10](./media/collaborative-coding-with-git/10-spring-complete-pullrequest.png)
 
-İstek olarak işaretlenmiş sol üst köşedeki doğrulayın **tamamlandı**. 
+İsteğin **tamamlandı**olarak işaretlendiğinden emin olun. 
 
 ![11](./media/collaborative-coding-with-git/11-spring-merge-pullrequest.png)
 
-Ne zaman, geri giderek depoya altında **kod**, ana dala değiştirmiş söyledik.
+Sol gezinmede yer alan **depoya** geri döndüğünüzde, `script` dal silindiğinden Ana dala geçtiniz görürsünüz.
 
 ![12](./media/collaborative-coding-with-git/12-spring-branch-deleted.png)
 
-Ayrıca, çalışma dalınızı kendi ana dalına birleştirmek ve çalışma dalı Birleştirmeden sonra silmek için aşağıdaki Git komutlarını da kullanabilirsiniz:
+Ayrıca, `script` çalışma dalını temel dalında birleştirmek ve Birleştirmeden sonra çalışma dalını silmek için aşağıdaki git Bash komutlarını da kullanabilirsiniz:
 
-    git checkout master
-    git merge data_ingestion
-    git branch -d data_ingestion
+```bash
+git checkout master
+git merge script
+git branch -d script
+```
 
 ![13](./media/collaborative-coding-with-git/13-spring-branch-deleted-commandline.png)
 
-
- 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Veri bilimi görevleri yürütme](execute-data-science-tasks.md) etkileşimli veri keşfi, veri analizi, raporlama ve modeli oluşturma gibi çeşitli genel veri bilimi görevlerini tamamlamak için yardımcı programlar kullanmayı gösterir.
+[Veri bilimi görevleri yürütme](execute-data-science-tasks.md) , etkileşimli veri araştırması, veri analizi, raporlama ve model oluşturma gibi çeşitli yaygın veri bilimi görevlerini tamamlamaya yönelik yardımcı programları nasıl kullanacağınızı gösterir.
 
-İşlem için tüm adımları gösteren talimatlara **belirli senaryoları** de sağlanır. Listelenen ve küçük resim açıklamasında ile bağlantılı [örnek izlenecek yollar](walkthroughs.md) makalesi. Bunlar, bulut, şirket içi araçları ve Hizmetleri, bir iş akışı veya akıllı bir uygulama oluşturmak için işlem hattı birleştirme işlemini göstermektedir. 
+[Örnek izlenecek yollar](walkthroughs.md) , bağlantılar ve küçük resim açıklamalarıyla belirli senaryolara yönelik izlenecek yolları listeler. Bağlantılı senaryolar, akıllı uygulamalar oluşturmak için bulut ve şirket içi araçların ve hizmetlerin iş akışları veya işlem hatları halinde nasıl birleştirileceğini gösterir. 
 

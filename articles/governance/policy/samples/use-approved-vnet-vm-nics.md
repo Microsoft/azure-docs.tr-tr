@@ -1,20 +1,16 @@
 ---
-title: Örnek - sanal makine ağ arabirimleri için sanal ağ kullanım Onaylandı
-description: Bu örnek ilke tanımı, ağ arabirimleri onaylı bir sanal ağı kullanmanız gerekir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-VM ağı arabirimleri için listelenen vNet 'i kullanın
+description: Bu örnek ilke tanımı, ağ arabirimlerinin onaylanan bir sanal ağ kullanmasını gerektirir.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 39ecfacae8c5d5260384182eba55443b3c928c14
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 64414f3c52da0c1368898abb5d032b3a728b2bda
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60394475"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076134"
 ---
-# <a name="sample---use-approved-vnet-for-vm-network-interfaces"></a>Örnek - sanal makine ağ arabirimleri için sanal ağ kullanım Onaylandı
+# <a name="sample---use-approved-vnet-for-vm-network-interfaces"></a>Örnek-VM ağı arabirimleri için onaylanmış vNet kullanın
 
 Bu ilke, ağ arabirimlerinin onaylı bir sanal ağ kullanmasını gerektirir. Onaylanan sanal ağın kimliğini belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke, ağ arabirimlerinin onaylı bir sanal ağ kullanmasını gerektirir. On
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fvm-creation-in-approved-vnet%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fvm-creation-in-approved-vnet%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

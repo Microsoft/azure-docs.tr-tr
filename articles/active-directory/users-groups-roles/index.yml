@@ -1,46 +1,83 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Kurumsal kullanıcı yönetimi belgeleri - Azure Active Directory
+### YamlMime:Landing
+title: Kurumsal kullanıcı yönetimi belgeleri - Azure AD
+summary: Gruplar ve yönetici rolü atamaları gibi Azure AD kullanıcı yönetimi hizmetleri, önemli görevleri hızlı bir şekilde gerçekleştirmenize yardımcı olur. Lisans atayın, gruplara veya kullanıcılara uygulama erişimi atayın ya da kimlik yönetimi görevlerini dağıtmak için izin temsilcisi seçin.
 metadata:
-  document_id: null
-  title: 'Azure Active Directory kullanıcıları, grupları, rolleri ve lisanslarıyla ilgili belgeler'
-  description: 'Kiracınızdaki Azure bulut hizmetlerinde kimlik doğrulamasını yönetmek için kullanıcıları, grupları, rolleri ve lisansları kullanmayı öğrenin.'
+  title: Azure Active Directory kullanıcıları, grupları, rolleri ve lisanslarıyla ilgili belgeler
+  description: Kuruluşunuzdaki Azure bulut hizmetlerinde kimlik doğrulamasını yönetmek için kullanıcıları, grupları, rolleri ve lisansları kullanmayı öğrenin.
   services: active-directory
-  ms.subservice: users-groups-roles
-  author: curtand
-  manager: mtillman
   ms.service: active-directory
+  ms.subservice: users-groups-roles
+  manager: daveba
   ms.topic: landing-page
-  ms.date: 01/31/2019
+  ms.date: 11/08/2019
+  author: curtand
   ms.author: curtand
-abstract:
-  description: 'Gruplar ve yönetici rolü atamaları gibi Azure AD kullanıcı yönetimi araçları, önemli görevleri daha hızlı bir şekilde gerçekleştirmenize ve büyüme odaklı planlar yapmanıza yardımcı olur. Lisansları veya erişimi kişiler yerine SaaS uygulamaları atayabilir veya izinleri devrederek Azure AD kimlik yönetimi yükünü diğer kullanıcılara dağıtabilirsiniz.'
-sections:
-  - title: 5 dakikalık hızlı başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure Active Directory'deki yönetim araçlarını kullanmayı öğrenin
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/fundamentals/add-users-azure-active-directory">Kullanıcıları Azure AD’ye ekleme</a>
-          - html: <a href="/azure/active-directory/fundamentals/license-users-groups">Kullanıcılara lisans atama</a>
-          - html: <a href="/azure/active-directory/fundamentals/active-directory-get-started-premium">Azure AD Premium’a kaydolun</a>
-          - html: <a href="/azure/active-directory/users-groups-roles/groups-quickstart-expiration">Kullanıcı tarafından oluşturulan gruplar için süre sonunu ayarlama</a>
-          - html: <a href="/azure/active-directory/users-groups-roles/groups-quickstart-naming-policy">Kullanıcı tarafından oluşturulan gruplar için adlandırma ilkesini ayarlama</a>
-  - title: Adım adım öğreticiler
-    items:
-      - type: paragraph
-        text: Azure Active Directory'deki grupları dinamik olarak doldurmayı öğrenin
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/users-groups-roles/groups-dynamic-tutorial">Dinamik olarak doldurulan grup oluşturma</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Başvuru bağlantıları
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/azuread/?view=azureadps-2.0">Azure AD PowerShell cmdlet''leri</a></p>'
+  ms.openlocfilehash: 2e7a21395059a73047678aa02ff8119511597b74
+  ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/13/2019
+  ms.locfileid: "74026404"
+landingContent:
+- title: Kullanıcılar, gruplar, roller ve lisanslar hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Büyük kuruluşlar için kullanıcılar, gruplar, lisanslama ve roller
+      url: directory-overview-user-model.md
+    - text: Özel rollere genel bakış
+      url: roles-custom-overview.md
+  - linkListType: concept
+    links:
+    - text: Temsilci yönetimi
+      url: roles-concept-delegation.md
+    - text: Azure RBAC rolleri ile Azure AD yönetici rollerini karşılaştırma
+      url: https://docs.microsoft.com/azure/role-based-access-control/rbac-and-directory-admin-roles?context=azure/active-directory/users-groups-roles/context/ugr-context
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Kullanıcı ekleme
+      url: https://review.docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory?context=azure/active-directory/users-groups-roles/context/ugr-context
+    - text: Gruplar için sona erme ilkesini ayarlama
+      url: groups-quickstart-expiration.md
+    - text: Kullanıcılara lisans atama
+      url: https://docs.microsoft.com/azure/active-directory/fundamentals/license-users-groups?context=azure/active-directory/users-groups-roles/context/ugr-context
+- title: Azure AD yönetici rolleri atama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: PowerShell kullanarak rol atama
+      url: roles-assign-powershell.md
+    - text: Graph API kullanarak rol atama
+      url: roles-assign-graph.md
+    - text: Rollere, göreve göre temsilci seçme
+      url: roles-delegate-by-task.md
+    - text: Uygulama yönetimi için temsilci seçme
+      url: roles-delegate-app-roles.md
+- title: Lisans atama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Kullanıcı grubunu lisanslama
+      url: licensing-groups-assign.md
+    - text: PowerShell örneklerini lisanslama
+      url: licensing-ps-examples.md
+- title: Grupları yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Dinamik grup oluşturma
+      url: groups-create-rule.md
+    - text: PowerShell’de grup ayarları
+      url: groups-settings-v2-cmdlets.md
+    - text: Gruplar için bir adlandırma ilkesi ayarlama
+      url: groups-naming-policy.md
+- title: Etki alanı ekleme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Özel bir etki alanı adı ekleme
+      url: https://docs.microsoft.com/azure/active-directory/fundamentals/add-custom-domain?context=azure/active-directory/users-groups-roles/context/ugr-context
+    - text: Özel etki alanı adlarını yönetme
+      url: domains-manage.md

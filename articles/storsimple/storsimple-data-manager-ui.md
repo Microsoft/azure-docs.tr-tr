@@ -1,6 +1,6 @@
 ---
-title: Microsoft Azure StorSimple veri Yöneticisi kullanıcı Arabirimi | Microsoft Docs
-description: StorSimple veri Yöneticisi hizmeti UI'si kullanmayı açıklar
+title: Microsoft Azure StorSimple Veri Yöneticisi Kullanıcı arabirimi | Microsoft Docs
+description: StorSimple Veri Yöneticisi hizmeti kullanıcı arabirimini kullanmayı açıklar
 services: storsimple
 documentationcenter: NA
 author: alkohli
@@ -14,152 +14,152 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 01/16/2018
 ms.author: alkohli
-ms.openlocfilehash: fa897b4b77f7f5869eab2ba2e7db9afbd84febfa
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3a87b4c07d2e961d9876fb44c6584f37ad9246df
+ms.sourcegitcommit: 018e3b40e212915ed7a77258ac2a8e3a660aaef8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60631503"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73796655"
 ---
-# <a name="manage-the-storsimple-data-manager-service-in-azure-portal"></a>Azure portalında StorSimple veri Yöneticisi hizmeti yönetme
+# <a name="manage-the-storsimple-data-manager-service-in-azure-portal"></a>StorSimple Veri Yöneticisi hizmetini Azure portal yönetme
 
-Bu makalede, StorSimple 8000 serisi cihazlarda bulunan veriler dönüştürmek için StorSimple Data Manager kullanıcı arabirimini nasıl kullanabileceğinizi açıklar. Dönüştürülmüş verileri Azure Media Services, Azure HDInsight, Azure Machine Learning ve Azure Search gibi diğer Azure Hizmetleri tarafından ardından tarafından kullanılabilir.
+Bu makalede, StorSimple 8000 serisi cihazlarda bulunan verileri dönüştürmek için StorSimple Veri Yöneticisi Kullanıcı arabirimini nasıl kullanabileceğiniz açıklanmaktadır. Dönüştürülen veriler daha sonra Azure Media Services, Azure HDInsight, Azure Machine Learning ve Azure Bilişsel Arama gibi diğer Azure hizmetleri tarafından tüketilebilir.
 
 
-## <a name="use-storsimple-data-transformation"></a>StorSimple veri dönüştürme kullanın
+## <a name="use-storsimple-data-transformation"></a>StorSimple veri dönüşümünü kullanın
 
-StorSimple veri Yöneticisi'ni hangi verileri dönüştürme örneği bir kaynaktır. Veri dönüştürme hizmeti, StorSimple biçiminden verileri yerel biçiminde blobları veya Azure dosyaları için dönüştürme sağlar. StorSimple yerel biçim verileri dönüştürmek için StorSimple 8000 serisi Cihazınızı ve veri dönüştürmek istediğiniz ilgi ayrıntılarını belirtmeniz gerekir.
+StorSimple Veri Yöneticisi, veri dönüşümünün örneklendiği kaynaktır. Veri dönüştürme hizmeti, StorSimple biçimindeki verileri bloblarda veya Azure dosyalarında yerel biçime dönüştürmenizi sağlar. StorSimple yerel biçim verilerini dönüştürmek için, StorSimple 8000 serisi cihazlarınızın ayrıntılarını ve dönüştürmek istediğiniz ilgilendiğiniz verileri belirtmeniz gerekir.
 
-### <a name="create-a-storsimple-data-manager-service"></a>StorSimple veri Yöneticisi hizmeti oluşturma
+### <a name="create-a-storsimple-data-manager-service"></a>StorSimple Veri Yöneticisi hizmeti oluşturma
 
-Bir StorSimple veri Yöneticisi hizmeti oluşturmak için aşağıdaki adımları gerçekleştirin.
+StorSimple Veri Yöneticisi bir hizmet oluşturmak için aşağıdaki adımları gerçekleştirin.
 
 1. [Azure portalda](https://portal.azure.com/) oturum açmak için Microsoft hesabınızın kimlik bilgilerini kullanın.
 
-2. Tıklayın **+ kaynak Oluştur** ve arama için StorSimple veri Yöneticisi.
+2. **+ Kaynak oluştur ' a** tıklayın ve StorSimple veri Yöneticisi arayın.
 
-    ![1 bir StorSimple veri Yöneticisi hizmeti oluşturma](./media/storsimple-data-manager-ui/create-service-1.png)
+    ![StorSimple Veri Yöneticisi hizmeti oluşturma 1](./media/storsimple-data-manager-ui/create-service-1.png)
 
-3. StorSimple veri Yöneticisi'ni tıklatın ve ardından **Oluştur**.
+3. StorSimple Veri Yöneticisi ' a ve ardından **Oluştur**' a tıklayın.
     
-    ![2 bir StorSimple veri Yöneticisi hizmeti oluşturma](./media/storsimple-data-manager-ui/create-service-3.png)
+    ![StorSimple Veri Yöneticisi hizmeti oluşturma 2](./media/storsimple-data-manager-ui/create-service-3.png)
 
-3. İçin yeni hizmet, aşağıdakileri belirtin:
+3. Yeni hizmet için aşağıdakileri belirtin:
 
-   1. Benzersiz bir sağlamak **hizmet adı** için StorSimple veri Yöneticisi. Hizmetinizi tanımlayabilmek için kullanılan kolay bir addır. Ad harf, rakam ve tirelerden oluşan 3-24 karakter arası uzunlukta olabilir. Ad bir harf veya sayıyla başlamalı ve bitmelidir.
+   1. StorSimple Veri Yöneticisi için benzersiz bir **hizmet adı** sağlayın. Hizmetinizi tanımlayabilmek için kullanılan kolay bir addır. Ad harf, rakam ve tirelerden oluşan 3-24 karakter arası uzunlukta olabilir. Ad bir harf veya sayıyla başlamalı ve bitmelidir.
 
-   2. Seçin bir **abonelik** aşağı açılan listeden. Abonelik fatura hesabınıza bağlıdır. Bu alan otomatik olarak doldurulmuş (ve seçilebilir değil) yalnızca bir aboneliğiniz varsa.
+   2. Açılan listeden bir **abonelik** seçin. Abonelik fatura hesabınıza bağlıdır. Yalnızca bir aboneliğiniz varsa, bu alan otomatik olarak doldurulur (ve seçilemez).
 
-   3. Mevcut bir kaynak grubunu seçin veya yeni bir grup oluşturun. Daha fazla bilgi edinmek için bkz. [Azure kaynak grupları](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-infrastructure-resource-groups-guidelines/).
+   3. Var olan bir kaynak grubunu seçin veya yeni bir grup oluşturun. Daha fazla bilgi edinmek için bkz. [Azure kaynak grupları](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-infrastructure-resource-groups-guidelines/).
 
-   4. Belirtin **konumu** depolama hesaplarınızı ve StorSimple veri Yöneticisi hizmetinizin barındırıldığı hizmetiniz için. StorSimple cihaz Yöneticisi hizmetine veri Yöneticisi hizmeti ve ilişkili depolama hesabı tüm desteklenen bölgelerde olmalıdır.
+   4. Hizmetinizin depolama hesaplarınızın ve StorSimple Veri Yöneticisi hizmetinizin barındırıldığı **konumu** belirtin. StorSimple Aygıt Yöneticisi hizmetiniz, Veri Yöneticisi hizmetiniz ve ilişkili depolama hesabı, tümünün desteklenen bölgelerde olması gerekir.
     
-   5. Panonuzda bu hizmetin bağlantısını ulaşmak için **panoya Sabitle**.
+   5. Panonuzda bu hizmetin bağlantısını almak için **panoya sabitle**' yi seçin.
     
-   6. **Oluştur**’a tıklayın.
+   6. **Oluştur**'a tıklayın.
 
-      ![StorSimple veri Yöneticisi hizmeti 3 oluşturma](./media/storsimple-data-manager-ui/create-service-4.png)
+      ![StorSimple Veri Yöneticisi hizmeti oluşturma 3](./media/storsimple-data-manager-ui/create-service-4.png)
 
-Hizmetin oluşturulması birkaç dakika sürer. Hizmet başarıyla oluşturulduktan sonra yeni hizmet görüntülenen bir bildirim görür.
+Hizmetin oluşturulması birkaç dakika sürer. Hizmet başarıyla oluşturulduktan ve yeni hizmet görüntülendikten sonra bir bildirim görürsünüz.
 
-### <a name="create-a-data-transformation-job-definition"></a>Bir veri dönüşüm işi tanımı oluşturun
+### <a name="create-a-data-transformation-job-definition"></a>Veri dönüştürme işi tanımı oluşturma
 
-Bir StorSimple veri Yöneticisi hizmetinde bir veri dönüşüm işi tanımını oluşturmanız gerekir. Bir iş tanımı yerel biçiminde bir depolama hesabına taşıma ilgilendiğiniz StorSimple veri ayrıntılarını belirtir. Bir iş tanımı oluşturduğunuzda, daha sonra bu iş yeniden farklı çalışma zamanı ayarları ile çalıştırabilirsiniz.
+Bir StorSimple Veri Yöneticisi hizmeti içinde, bir veri dönüştürme işi tanımı oluşturmanız gerekir. Bir iş tanımı, yerel biçimdeki bir depolama hesabına geçmeyi ilgilendiğiniz StorSimple verilerinin ayrıntılarını belirtir. Bir iş tanımı oluşturduktan sonra, bu işi farklı çalışma zamanı ayarlarıyla yeniden çalıştırabilirsiniz.
 
 Bir iş tanımı oluşturmak için aşağıdaki adımları gerçekleştirin.
 
-1. Oluşturduğunuz hizmetine gidin. Git **Yönetim > iş tanımları**.
+1. Oluşturduğunuz hizmete gidin. **Yönetim > iş tanımları**' na gidin.
 
-2. Tıklayın **+ iş tanımı**.
+2. **+ İş tanımı**' na tıklayın.
 
-    ![Tıklama + iş tanımı](./media/storsimple-data-manager-ui/create-job-definition-1.png)
+    ![\+ Iş tanımı ' na tıklayın](./media/storsimple-data-manager-ui/create-job-definition-1.png)
 
-3. İş tanımınızın için bir ad belirtin. Ad 3 ila 63 karakter uzunluğunda olabilir. Ad, büyük ve küçük harfler, sayılar ve kısa çizgi içerebilir.
+3. İş tanımınız için bir ad girin. Ad 3 ila 63 karakter arasında olabilir. Ad, büyük harf, küçük harf, sayı ve kısa çizgi içerebilir.
 
-4. İşinizin çalıştığı bir konum belirtin. Bu konum hizmeti dağıtıldığı konumdan farklı olabilir.
+4. İşinizin çalıştığı bir konum belirtin. Bu konum, Hizmetin dağıtıldığı konumdan farklı olabilir.
 
-5. Tıklayın **kaynak** kaynak veri deposu belirtmek için.
+5. Kaynak veri deposunu belirtmek için **kaynak** ' a tıklayın.
 
-    ![Kaynak veri deposunu Yapılandır](./media/storsimple-data-manager-ui/create-job-definition-2.png)
+    ![Kaynak veri deposundan yapılandırma](./media/storsimple-data-manager-ui/create-job-definition-2.png)
 
-6. Bu yeni bir veri Yöneticisi hizmeti olduğundan, hiçbir veri depoları yapılandırılır. İçinde **yapılandırma veri kaynağı**, StorSimple 8000 serisi Cihazınızı ayrıntılarını ve istediğiniz verileri belirtin.
+6. Bu yeni bir Veri Yöneticisi hizmeti olduğundan, veri depoları yapılandırılmadı. **Veri kaynağını Yapılandır**bölümünde, storsimple 8000 serisi cihazınızın ayrıntılarını ve ilgilendiğiniz verileri belirtin.
 
-   Bir veri deposu olarak StorSimple cihaz Yöneticisi eklemek için tıklatın **yeni Ekle** veri deposu açılır ve ardından **veri deposu ekleme**.
+   StorSimple Aygıt Yöneticisi veri deposu olarak eklemek için, veri deposu açılan menüsünde **Yeni Ekle** ' ye tıklayın ve sonra **veri deposu Ekle**' ye tıklayın.
 
-    ![Yeni veri deposu ekleme](./media/storsimple-data-manager-ui/create-job-definition-3.png)
+    ![Yeni veri deposu Ekle](./media/storsimple-data-manager-ui/create-job-definition-3.png)
   
-   1. Seçin **StorSimple 8000 serisi Manager** veri deposu türü.
+   1. Veri deposu türü olarak **StorSimple 8000 Series Manager** ' ı seçin.
     
-   2. Kaynak veri deponuz için bir kolay ad girin.
+   2. Kaynak veri havuzunuz için kolay bir ad girin.
     
-   3. Açılan listeden, StorSimple cihaz Yöneticisi hizmetiniz ile ilişkili bir abonelik seçin.
+   3. Açılan listeden, StorSimple Aygıt Yöneticisi hizmetinize ilişkin bir abonelik seçin.
     
-   4. ' % S'adı için StorSimple cihaz Yöneticisi'nin sağlamak **kaynak**.
+   4. **Kaynak**Için storsimple Aygıt Yöneticisi adını sağlayın.
 
-   5. Girin **hizmet verileri şifreleme** StorSimple cihaz Yöneticisi hizmeti için anahtar. 
+   5. StorSimple Aygıt Yöneticisi hizmeti için **hizmet veri şifreleme** anahtarını girin. 
 
-      ![Kaynak veri deposu 1 yapılandırın](./media/storsimple-data-manager-ui/create-job-definition-4.png)
+      ![Kaynak veri deposu yapılandırma 1](./media/storsimple-data-manager-ui/create-job-definition-4.png)
 
-      Tıklayın **Tamam** işiniz bittiğinde. Bu, veri deposuna kaydeder. Bu StorSimple cihaz Yöneticisi'nde diğer iş tanımlarını, bu parametreleri yeniden girmeye gerek kalmadan yeniden kullanın. Tıkladıktan sonra birkaç saniye sürer **Tamam** açılan listede gösterilecek yeni oluşturulan kaynak veri deposu için.
+      Bittiğinde **Tamam** ' a tıklayın. Bu, veri deponuzu kaydeder. Bu StorSimple Aygıt Yöneticisi, bu parametreleri tekrar girmeden diğer iş tanımlarında yeniden kullanın. Yeni oluşturulan kaynak veri deposunun açılan menüde görünmesi için **Tamam** ' a tıkladıktan sonra birkaç saniye sürer.
 
-7. İçin aşağı açılan listeden **veri deposu**, oluşturduğunuz veri deposu seçin. 
+7. **Veri deposunun**açılan listesinden, oluşturduğunuz veri deposunu seçin. 
 
-   1. İstediğiniz verileri içeren StorSimple 8000 serisi cihaz adını girin.
+   1. İlgilendiğiniz verileri içeren StorSimple 8000 serisi cihazının adını girin.
 
-   2. Verilerinizin ilgi StorSimple cihazında bulunan birim adını belirtin.
+   2. İlgilendiğiniz verilerinizi içeren StorSimple cihazında bulunan birimin adını belirtin.
 
-   3. İçinde **filtre** ayrıntılarının, ilgilendiğiniz verilerinizi içeren kök dizinini girin _\MyRootDirectory\Data_ biçimi. Sürücü harflerini gibi _\C:\Data_ desteklenmez. Tüm dosya filtreleri de ekleyebilirsiniz.
+   3. **Filtre** alt bölümünde, _\Myrootdirectory\data_ biçiminde ilgilendiğiniz verilerinizi içeren kök dizini girin. _\C: \Data_ gibi sürücü harfleri desteklenmez. Ayrıca, buraya dosya filtresi ekleyebilirsiniz.
 
-   4. Veri dönüşümü hizmetini, anlık görüntüler Azure'a gönderilir veriler üzerinde çalışır. Bu işlemi çalıştırdığınızda (iş üzerindeki en son veriler için) bu işin komutunu her çalıştırdığınızda yedekleyin seçebilirsiniz veya (bazı arşivlenmiş veriler üzerinde çalışıyorsanız), bulutta son mevcut yedekleme kullanın.
+   4. Veri dönüştürme hizmeti, anlık görüntüler aracılığıyla Azure 'a gönderilen verilerde çalışır. Bu işi çalıştırdığınızda, bu iş her çalıştırıldığında (en son veriler üzerinde çalışmak üzere) bir yedekleme işlemi gerçekleştirebilir veya buluttaki son mevcut yedeklemeyi (bazı arşivlenmiş veriler üzerinde çalışıyorsanız) kullanabilirsiniz.
 
-   5. **Tamam**'ı tıklatın.
+   5. **Tamam** düğmesine tıklayın.
 
-      ![Kaynak veri deposu 2 yapılandırın](./media/storsimple-data-manager-ui/create-job-definition-8.png)
+      ![Kaynak veri deposu yapılandırma 2](./media/storsimple-data-manager-ui/create-job-definition-8.png)
 
-8. Ardından, hedef veri deposu yapılandırılması gerekir. Depolama hesapları, hesaptaki bloblar dosyaları yerleştirmenin seçin. Açılır menüden seçin **yeni Ekle** ardından **ayarlarını yapılandırma**.
+8. Sonra, hedef veri deposunun yapılandırılması gerekir. Dosyaları bu hesaptaki bloblara koymak için depolama hesapları ' nı seçin. Açılan menüde **Yeni Ekle** ' yi ve ardından **Ayarları Yapılandır**' ı seçin.
 
-9. Eklemek istediğiniz hedef depo ve depoyla ilişkili diğer parametreler türünü seçin.
+9. Eklemek istediğiniz hedef depo türünü ve depo ile ilişkili diğer parametreleri seçin.
 
-    Bir depolama hesabı türü hedef seçerseniz, abonelik bir kolay ad belirtebilirsiniz (belirleyin, hizmet veya diğer aynı) ve depolama hesabı.
-        ![Hedef veri deposu 1 yapılandırın](./media/storsimple-data-manager-ui/create-job-definition-10.png)
+    Bir depolama hesabı türü hedefi seçerseniz, kolay bir ad, abonelik (hizmet veya diğer ile aynı seçimi seçin) ve bir depolama hesabı belirtebilirsiniz.
+        ![hedef veri deposu yapılandırma 1](./media/storsimple-data-manager-ui/create-job-definition-10.png)
 
     İş çalıştırıldığında bir depolama kuyruğu oluşturulur. Bu kuyruk, hazır olduğunda dönüştürülen bloblar hakkında iletilerle doldurulur. Bu kuyruğun adı, iş tanımının adıyla aynıdır.
     
-10. Veri deposu ekledikten sonra birkaç dakika bekleyin.
+10. Veri deposunu ekledikten sonra birkaç dakika bekleyin.
     
-    1. Açılan listeden hedefi olarak oluşturduğunuz depoyu seçin **hedef hesap adı**.
+    1. Hedef **Hesap adındaki**açılan listeden hedef olarak oluşturduğunuz depoyu seçin.
 
-    2. Depolama türü, BLOB veya dosyalar seçin. Dönüştürülen verilerin bulunduğu depolama kapsayıcısının adını belirtin. **Tamam**'ı tıklatın.
+    2. Depolama türünü blob 'lar veya dosyalar olarak seçin. Dönüştürülen verilerin bulunduğu depolama kapsayıcısının adını belirtin. **Tamam** düğmesine tıklayın.
 
-        ![Hedef veri deposu depolama hesabı yapılandırın](./media/storsimple-data-manager-ui/create-job-definition-16.png)
+        ![Hedef veri deposu depolama hesabını yapılandırma](./media/storsimple-data-manager-ui/create-job-definition-16.png)
 
-11. Ayrıca, bir işi çalıştırmadan önce iş süresi tahmini sunmak için seçeneği de denetleyebilirsiniz. Tıklayın **Tamam** iş tanımı oluşturmak için. İş tanımınızın tamamlanmıştır. Bu iş tanımı birden çok kez aracılığıyla kullanıcı Arabirimi ile farklı çalışma zamanı ayarlarını kullanabilirsiniz.
+11. İşi çalıştırmadan önce iş süresi tahminini sunma seçeneğini de denetleyebilirsiniz. İş tanımını oluşturmak için **Tamam** ' ı tıklatın. İş tanımınız artık tamamlanmış. Bu iş tanımını farklı çalışma zamanı ayarlarına sahip kullanıcı arabirimi aracılığıyla birden çok kez kullanabilirsiniz.
 
-    ![Tam iş tanımı](./media/storsimple-data-manager-ui/create-job-definition-13.png)
+    ![Tamamlanan iş tanımı](./media/storsimple-data-manager-ui/create-job-definition-13.png)
 
-    Yeni oluşturulan iş tanımını, bu hizmet için iş tanımlarını listesine eklenir.
+    Yeni oluşturulan iş tanımı, bu hizmet için iş tanımları listesine eklenir.
 
-### <a name="run-the-job-definition"></a>İş tanımını Çalıştır
+### <a name="run-the-job-definition"></a>İş tanımını çalıştırma
 
-İş tanımında belirtilen depolama hesabına Storsimple'dan verileri taşımak ihtiyaç duyduğunuzda çalıştırmanız gerekir. Çalışma zamanında, bazı parametreler farklı belirtilebilir. Adımlar aşağıdaki gibidir:
+StorSimple 'tan iş tanımında belirttiğiniz depolama hesabına veri taşımanız gerektiğinde onu çalıştırmanız gerekir. Çalışma zamanında bazı parametreler farklı şekilde belirlenebilir. Adımlar aşağıdaki gibidir:
 
-1. StorSimple veri Yöneticisi'ni hizmetinizi seçin ve Git **Yönetim > iş tanımları**. Çalıştırmak istediğiniz iş tanımı tıklatıp seçin.
+1. StorSimple Veri Yöneticisi hizmetinizi seçin ve **yönetim > iş tanımları**' na gidin. Çalıştırmak istediğiniz iş tanımını seçin ve tıklayın.
      
-     ![Başlangıç işi 1 çalıştırın](./media/storsimple-data-manager-ui/start-job-run1.png)
+     ![İşi Başlat Çalıştır 1](./media/storsimple-data-manager-ui/start-job-run1.png)
 
-2. Tıklayın **Şimdi Çalıştır**.
+2. **Şimdi Çalıştır**' a tıklayın.
      
-     ![Başlangıç işi 2 çalıştırma](./media/storsimple-data-manager-ui/start-job-run2.png)
+     ![İşi Başlat Çalıştır 2](./media/storsimple-data-manager-ui/start-job-run2.png)
 
-3. Tıklayın **çalıştırma ayarları** bu proje için değiştirmek isteyebileceğiniz herhangi bir ayarı değiştirmek için. Tıklayın **Tamam** ve ardından **çalıştırma** işinizi başlatmak için.
+3. Bu iş çalıştırmasında değiştirmek isteyebileceğiniz ayarları değiştirmek için **Ayarları Çalıştır** ' a tıklayın. **Tamam** ' a ve ardından **Çalıştır** ' a tıklayarak işinizi başlatın.
 
-    ![Başlangıç işi 3 çalıştırın](./media/storsimple-data-manager-ui/start-job-run3.png)
+    ![İş çalıştırmasını Başlat 3](./media/storsimple-data-manager-ui/start-job-run3.png)
 
-4. Bu işi izlemek için Git **işleri** , StorSimple veri Yöneticisi'nde. İzleme yanı sıra **işleri** dikey penceresinde, de dinlemesi burada bir ileti eklendiğinde bir dosya depolama hesabına Storsimple'dan taşınır her zaman depolama kuyruğu.
+4. Bu işi izlemek için StorSimple Veri Yöneticisi **işlere** gidin. **İşler** dikey penceresinde izlemeye ek olarak, bir dosya StorSimple 'tan depolama hesabına taşındığında bir iletinin eklendiği depolama kuyruğu üzerinde de dinleme yapabilirsiniz.
 
-    ![Başlangıç işi 4 çalıştırın](./media/storsimple-data-manager-ui/start-job-run4.png)
+    ![İşi Başlat Çalıştır 4](./media/storsimple-data-manager-ui/start-job-run4.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[StorSimple veri Yöneticisi işleri başlatmak için .NET SDK'sını kullanma](storsimple-data-manager-dotnet-jobs.md).
+[StorSimple veri Yöneticisi işleri başlatmak için .NET SDK 'Yı kullanın](storsimple-data-manager-dotnet-jobs.md).

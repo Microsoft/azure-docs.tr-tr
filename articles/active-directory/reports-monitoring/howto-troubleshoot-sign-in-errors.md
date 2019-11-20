@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory raporlarını kullanarak oturum açma hataları nasıl giderilir | Microsoft Docs
-description: Azure portalında Azure Active Directory raporlarını kullanarak oturum açma hatalarında sorun giderme hakkında bilgi edinin
+title: Oturum açma hataları raporları sorunlarını giderme | Microsoft Docs
+description: Azure portal Azure Active Directory raporlarını kullanarak oturum açma hatalarıyla ilgili sorunları giderme hakkında bilgi edinin
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -14,54 +14,54 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: db68ad2a29dcaa53d219b679b9e0f24a50a6f576
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ec5fe7f62e8537a7f687202d365eb37d43b48b78
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60286569"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74008052"
 ---
 # <a name="how-to-troubleshoot-sign-in-errors-using-azure-active-directory-reports"></a>Nasıl yapılır: Azure Active Directory raporlarını kullanarak oturum açma hatalarında sorun giderme
 
-[Oturum açma işlemleri raporu](concept-sign-ins.md) Azure'da Active Directory (Azure AD), kuruluşunuzda uygulama erişimini yönetme etrafında soruların yanıtlarını bulmanızı sağlar dahil olmak üzere:
+Azure Active Directory (Azure AD) içinde [oturum açma işlemleri raporu](concept-sign-ins.md) , kuruluşunuzda bulunan uygulamalara erişimi yönetme konusunda sorularınızın yanıtlarını bulmanıza olanak sağlar; örneğin:
 
 - Belirli bir kullanıcının oturum açma düzeni nedir?
 - Bir hafta içerisinde kaç adet kullanıcı oturum açtı?
 - Bu açılan oturumların durumu nedir?
 
 
-Ayrıca, oturum açma işlemleri raporu da kuruluşunuzdaki kullanıcılar için oturum açma hatası gidermenize yardımcı olabilir. Bu kılavuzda, oturum açma başarısız oturum açma işlemleri raporu yalıtmak ve hatasının kök nedenini anlamak için kullanma konusunda bilgi edinin.
+Ayrıca, oturum açma işlemleri raporu, kuruluşunuzdaki kullanıcılar için oturum açma hatalarıyla ilgili sorunları gidermenize de yardımcı olabilir. Bu kılavuzda, oturum açma başarısızlığının oturum açma raporundan nasıl yalıtılacağı ve hatanın kök nedenini anlamak için nasıl kullanılacağı hakkında bilgi edineceksiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Gerekenler:
 
-* Azure AD kiracısı (ö1/ö2) premium lisansına sahip. Bkz: [Azure Active Directory Premium ile çalışmaya başlama](../fundamentals/active-directory-get-started-premium.md) , Azure Active Directory sürümünü yükseltmek için.
-* İçinde olan bir kullanıcı **genel yönetici**, **Güvenlik Yöneticisi**, **güvenlik okuyucusu**, veya **rapor okuyucu** kiracının rol. Ayrıca, herhangi bir kullanıcı kendi oturum açma etkinliklerine erişebilir. 
+* Premium (P1/P2) lisansına sahip bir Azure AD kiracısı. Azure Active Directory sürümünüzü yükseltmek için bkz. [Azure Active Directory Premium kullanmaya](../fundamentals/active-directory-get-started-premium.md) başlama.
+* Kiracı için **genel yönetici**, **Güvenlik Yöneticisi**, **güvenlik okuyucusu**veya **rapor okuyucu** rolünde olan bir kullanıcı. Ayrıca, herhangi bir Kullanıcı kendi oturum açma işlemleri için de erişebilir. 
 
-## <a name="troubleshoot-sign-in-errors-using-the-sign-ins-report"></a>Oturum açma işlemleri raporu kullanarak oturum açma hatalarında sorun giderme
+## <a name="troubleshoot-sign-in-errors-using-the-sign-ins-report"></a>Oturum açma hatalarıyla ilgili sorun giderme raporu
 
-1. Gidin [Azure portalında](https://portal.azure.com) ve dizininizi seçin.
-2. Seçin **Azure Active Directory** seçip **oturum açma işlemleri** gelen **izleme** bölümü. 
-3. Kullanıcı adı veya nesne tanımlayıcısı, uygulama adı veya tarih hatası daraltmak için sağlanan filtreleri kullanın. Ayrıca, seçin **hatası** gelen **durumu** yalnızca başarısız oturum açma işlemlerini görüntülemek için açılan. 
+1. [Azure Portal](https://portal.azure.com) gidin ve dizininizi seçin.
+2. **Azure Active Directory** ' yi seçin ve **Izleme** bölümünde **oturum açma** işlemlerini seçin. 
+3. Kullanıcı adı ya da nesne tanımlayıcısı, uygulama adı veya tarih ile hatayı daraltmak için, belirtilen filtreleri kullanın. Ayrıca, yalnızca başarısız oturum açma işlemlerini göstermek için **durum** açılan listesinden **hata** ' ı seçin. 
 
     ![Sonuçları filtreleme](./media/howto-troubleshoot-sign-in-errors/filters.png)
         
-4. Başarısız araştırmak istediğiniz oturum belirleyin. Başarısız oturum açma hakkında daha fazla bilgi içeren ek ayrıntıları penceresini açmak için seçin. Not **oturum açma hata kodu** ve **hata nedeni**. 
+4. Araştırmak istediğiniz başarısız oturum açma kimliğini belirler. Başarısız oturum açma hakkında daha fazla bilgi içeren ek ayrıntılar penceresini açmak için bunu seçin. **Oturum açma hata kodunu** ve **hata nedenini**göz önünde edin. 
 
-    ![Kaydı seçin](./media/howto-troubleshoot-sign-in-errors/sign-in-failures.png)
+    ![Kayıt Seç](./media/howto-troubleshoot-sign-in-errors/sign-in-failures.png)
         
-5. Bu bilgiler de bulabilirsiniz **sorun giderme ve Destek** Ayrıntıları penceresinde sekmesi.
+5. Bu bilgileri, Ayrıntılar penceresindeki **sorun giderme ve destek** sekmesinde de bulabilirsiniz.
 
     ![Sorun giderme ve destek](./media/howto-troubleshoot-sign-in-errors/troubleshooting-and-support.png)
 
-6. Hatanın nedenini hata açıklar. Örneğin, yukarıdaki senaryoda başarısızlık nedeni **geçersiz kullanıcı adı veya parola ya da geçersiz şirket içi kullanıcı adı veya parola**. İçin yalnızca oturum açma doğru kullanıcı adı ve parola ile yeniden açıklanmıştır.
+6. Hata nedeni hatayı açıklar. Örneğin, yukarıdaki senaryoda hata nedeni **Geçersiz Kullanıcı adı veya parola ya da şirket içi Kullanıcı adı veya parola geçersiz**. Düzeltme, doğru Kullanıcı adı ve parolayla yeniden oturum açmanız yeterlidir.
 
-7. Düzeltme için hata kodu için arama yaparak dahil olmak üzere ek bilgiler alabilirsiniz **50126** Bu örnekte, [oturum açma hata kodları başvurusu](reference-sign-ins-error-codes.md). 
+7. Hata kodunu arayarak düzeltme fikirleri de dahil olmak üzere ek bilgiler alabilirsiniz. Bu örnekte, [oturum açma hata kodları başvurusunda](reference-sign-ins-error-codes.md) **50126** . 
 
-8. Tüm denemeler başarısız olursa veya eylemin önerilen kursu alma rağmen sorun devam ederse [bir destek bileti açın](../fundamentals/active-directory-troubleshooting-support-howto.md) yer alan adımları uygulayarak **sorun giderme ve Destek** sekmesi. 
+8. Tüm diğerleri başarısız olursa veya önerilen eylem kursu gerçekleşse de sorun devam ederse, **sorun giderme ve destek** sekmesindeki adımları izleyerek [bir destek bileti açın](../fundamentals/active-directory-troubleshooting-support-howto.md) . 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Oturum açma hata kodları başvurusu](reference-sign-ins-error-codes.md)
-* [Oturum açma işlemleri raporu genel bakış](concept-sign-ins.md)
+* [Oturum açma işlemleri hata kodları başvurusu](reference-sign-ins-error-codes.md)
+* [Oturum açma raporuna genel bakış](concept-sign-ins.md)

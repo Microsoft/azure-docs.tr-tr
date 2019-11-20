@@ -1,82 +1,67 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Mürekkep Tanıma Belgeleri
+### YamlMime:Landing
+title: Mürekkep Tanıma API belgeleri
+summary: Uygulama ve hizmetlerinizde dijital mürekkep tanımayı sunmak için mürekkep tanıma API’sini nasıl kullanacağınızı öğrenin. API, herhangi bir bağlamdaki el yazısı şekillerini ve metinleri tanımak için makine öğrenimi kullanan bulut tabanlı bir hizmettir.
 metadata:
-  title: 'Mürekkep Tanıma Belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs'
-  description: Metinleri birden fazla dile çevirmek için Translator Metin Çevirisi’ni kullanmayı öğrenin.
+  title: Mürekkep Tanıma API'si - Öğreticiler, Hızlı başlangıçlar, API başvurusu
+  titleSuffix: Azure Cognitive Services
+  description: Dijital mürekkep oluşturma, el yazısı ve çizim gibi girdilerin dijital sunumunun yapılmasını sağlayan teknolojilere başvurur. Cihazlar zengin dijital mürekkep oluşturma deneyimleri sunmaya devam ederken yapay zeka ve makine öğrenimi, yazılı metin ve şekillerin tüm bağlamlarda tanınmasını sağlar. Mürekkep Tanıma API’si, mürekkep vuruşları göndermenizi ve bunlar hakkında ayrıntılı bilgi almanızı sağlayan bulut tabanlı bir hizmettir.
   services: cognitive-services
-  author: erhopf
+  author: aahill
   manager: nitinme
+  layout: LandingPage
   ms.service: cognitive-services
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: ink-recognizer
   ms.topic: landing-page
-  ms.date: 05/02/2019
-  ms.author: erhopf
-abstract:
-  description: 'Dijital mürekkep oluşturma, el yazısı ve çizim gibi girdilerin dijital sunumunun yapılmasını sağlayan teknolojilere başvurur. Cihazlar zengin dijital mürekkep oluşturma deneyimleri sunmaya devam ederken yapay zeka ve makine öğrenimi, yazılı metin ve şekillerin tüm bağlamlarda tanınmasını sağlar. Mürekkep Tanıma API’si, mürekkep vuruşları göndermenizi ve bunlar hakkında ayrıntılı bilgi almanızı sağlayan bulut tabanlı bir hizmettir.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/ink-recognizer/overview
-            html: <p>Mürekkep Tanıma ve bu özelliğin ürünlerinizle tümleştirilmesi hakkında bilgi edinme</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Mürekkep Tanıma API’si nedir?
-          - href: concepts/send-ink-data.md
-            html: <p>API’yi kullanırken önerilen çağrı desenleri hakkında bilgi edinme</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Mürekkep Tanıma API’sine mürekkep verisi gönderme
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Mürekkep Tanıma API''sini kullanmaya başlayın:'
-      - type: table
-        style: dataMatrix
-        columns:
-          - image:
-              src: media/index/logo-csharp.svg
-            title: 'C#'
-          - image:
-              src: media/index/logo-java.svg
-            title: Java
-          - image:
-              src: media/index/logo-js.svg
-            title: Javascript
-        rows:
-          - title: Dijital mürekkep vuruşlarını tanıma
-            values:
-              - href: quickstarts/csharp.md
-              - href: quickstarts/java.md
-              - href: quickstarts/javascript.md
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: 'Mürekkep Tanıma API’sini uygulamalarınızla nasıl tümleştirebileceğinizi görmek için bu örnek programları kullanın:'
-      - type: paragraph
-        text: '<a href="https://go.microsoft.com/fwlink/?linkid=2089803">C# ve Evrensel Windows Platformu (UWP)</a>'
-      - type: paragraph
-        text: '<a href="https://go.microsoft.com/fwlink/?linkid=2089804">C# ve Windows Presentation Foundation (WPF)</a>'
-      - type: paragraph
-        text: '<a href="https://go.microsoft.com/fwlink/?linkid=2089908">JavaScript web tarayıcı uygulaması</a>'
-      - type: paragraph
-        text: '<a href="https://go.microsoft.com/fwlink/?linkid=2089906">Java ve Android mobil uygulaması</a>'
-      - type: paragraph
-        text: '<a href="https://go.microsoft.com/fwlink/?linkid=2089805">Swift ve iOS mobil uygulaması</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: REST API
-            html: '<p><a href="https://go.microsoft.com/fwlink/?linkid=2089907">REST API başvurusu </a></p>'
-          - title: PowerShell
-            html: '<p><a href=https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices">Azure CLI</a></p>'
+  ms.date: 09/23/2019
+  ms.author: aahi
+  ms.openlocfilehash: 7aee03f6f82c6c07e3af51a19344ba7716c66a23
+  ms.sourcegitcommit: 7c2dba9bd9ef700b1ea4799260f0ad7ee919ff3b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/02/2019
+  ms.locfileid: "71827862"
+landingContent:
+- title: Mürekkep Tanıma API’si hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Mürekkep Tanıma API’si nedir?
+      url: overview.md
+- title: Dijital mürekkep vuruşlarını tanıma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: C# kullanma
+      url: quickstarts/csharp.md
+    - text: Java'yı kullanma
+      url: quickstarts/java.md
+    - text: JavaScript kullanma
+      url: quickstarts/javascript.md
+  - linkListType: concept
+    links:
+    - text: API’ye mürekkep vuruşu verilerini gönderme
+      url: concepts/send-ink-data.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: REST API
+      url: https://go.microsoft.com/fwlink/?linkid=2089907
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+    - text: Azure CLI
+      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az-cognitiveservices-list
+- title: Örnekler
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: C# ve Evrensel Windows Platformu (UWP)
+      url: https://go.microsoft.com/fwlink/?linkid=2089803
+    - text: C# ve Windows Presentation Foundation (WPF)
+      url: https://go.microsoft.com/fwlink/?linkid=2089804
+    - text: JavaScript web tarayıcı uygulaması
+      url: https://go.microsoft.com/fwlink/?linkid=2089908
+    - text: Java ve Android mobil uygulama
+      url: https://go.microsoft.com/fwlink/?linkid=2089906
+    - text: Swift ve iOS mobil uygulama
+      url: https://go.microsoft.com/fwlink/?linkid=2089805

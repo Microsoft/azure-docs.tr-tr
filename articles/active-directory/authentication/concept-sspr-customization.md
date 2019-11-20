@@ -1,84 +1,92 @@
 ---
-title: Özelleştirme Azure AD Self Servis parola sıfırlama - Azure Active Directory
-description: Özelleştirme seçenekleri için Azure AD Self Servis parola sıfırlama
+title: Azure AD self servis parola sıfırlama-Azure Active Directory özelleştirme
+description: Azure AD self servis parola sıfırlama için özelleştirme seçenekleri
 services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 07/11/2018
+ms.date: 07/30/2019
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d38d93a1c9716cc3a71d904b7b1a46fb8b1c2ee0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 527dd99f122ec70cc47305947a5cbce3207b9664
+ms.sourcegitcommit: fecb6bae3f29633c222f0b2680475f8f7d7a8885
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60415684"
+ms.lasthandoff: 07/30/2019
+ms.locfileid: "68666310"
 ---
-# <a name="customize-the-azure-ad-functionality-for-self-service-password-reset"></a>Azure AD Self Servis parola sıfırlama işlevselliği özelleştirme
+# <a name="customize-the-azure-ad-functionality-for-self-service-password-reset"></a>Self servis parola sıfırlama için Azure AD işlevselliğini özelleştirme
 
-Self Servis parola sıfırlama (SSPR) dağıtmak için Azure Active directory (Azure AD) isteyen BT uzmanları, kullanıcıların ihtiyaçlarını karşılamak amacıyla deneyimi özelleştirebilirsiniz.
+Azure Active Directory 'de (Azure AD) self servis parola sıfırlama (SSPR) dağıtmak isteyen BT uzmanları, deneyimini kullanıcıların gereksinimleriyle eşleşecek şekilde özelleştirebilir.
 
-## <a name="customize-the-contact-your-administrator-link"></a>"Yöneticinize başvurun" bağlantısını özelleştirin
+## <a name="customize-the-contact-your-administrator-link"></a>"Yöneticinize başvurun" bağlantısını özelleştirme
 
-SSPR etkin değilse, kullanıcılar sıfırlama portalı parola bir "Yöneticinize başvurun" bağlantısını çözümlenmedi. Bir kullanıcı bu bağlantıyı seçerse, ya da:
+Self servis parola sıfırlama kullanıcıları, parola sıfırlama portalında kendilerine sunulan "yöneticinize başvurun" bağlantısına sahip olabilir. Bir Kullanıcı bu bağlantıyı seçerse, iki işlemlerden birini yapar:
 
-* Yöneticiler e-posta gönderir ve kullanıcının parolasını değiştirme konusunda yardım almak için ister.
-* Kullanıcılarınızı, Yardım için belirttiğiniz URL gönderir.
+* Varsayılan durumda bırakılırsa:
+   * E-posta, yöneticilerinize gönderilir ve kullanıcının parolasını değiştirme konusunda yardım sağlamasını ister. Aşağıdaki [örnek e-postaya](#sample-email) bakın.
+* Özelleştirildiyse:
+   * Kullanıcıyı, yardım için yönetici tarafından belirtilen bir Web sayfasına veya e-posta adresine gönderir.
 
-Bu kişi için kullanıcılarınızın destek soruları için zaten kullandığı bir e-posta adresi veya Web sitesine ayarlamanızı öneririz.
+> [!TIP]
+> Bunu özelleştirirseniz, bunu, kullanıcıların destek için zaten alışık olduğu bir şey olarak ayarlamamız önerilir
 
-![Yöneticisine gönderilen e-posta sıfırlamak için örnek istek][Contact]
+> [!WARNING]
+> Bu ayarı, parola sıfırlama gerektiren bir e-posta adresi ve hesap ile özelleştirirseniz, Kullanıcı yardım istememeyebilir.
 
-Aşağıdaki sırayla şu alıcılara iletişim e-posta gönderilir:
+### <a name="sample-email"></a>Örnek e-posta
 
-1. Varsa **parola Yöneticisi** Yöneticiler bu role sahip bildirim, rol atanır.
-2. Parola yönetici yok atanmış ise, ardından yöneticilerine **Kullanıcı Yöneticisi** rolü bildirilir.
-3. Önceki rollerin hiçbiri atanırsa, ardından **genel Yöneticiler** bildirilir.
+![Yöneticiye gönderilen e-postayı sıfırlamaya yönelik örnek istek][Contact]
 
-Her durumda en fazla 100 alıcılara bildirim.
+İletişim e-postası aşağıdaki alıcılara aşağıdaki sırayla gönderilir:
 
-Farklı yönetici rolleri ve bunların atama hakkında daha fazla bilgi için bkz: [Azure Active Directory'de yönetici rolleri atama](../users-groups-roles/directory-assign-admin-roles.md).
+1. **Parola yönetici** rolü atanmışsa, bu role sahip yöneticiler bilgilendirilir.
+2. Parola Yöneticisi atanmamışsa, **Kullanıcı Yöneticisi** rolüne sahip yöneticilere bildirilir.
+3. Önceki rollerden hiçbiri atanmadıysa, **Genel Yöneticiler** bilgilendirilir.
 
-### <a name="disable-contact-your-administrator-emails"></a>E-postaları "yöneticinize başvurun" devre dışı bırak
+Her durumda, en fazla 100 alıcı bilgilendirilir.
 
-Kuruluşunuz, istekleri yöneticilere parola sıfırlama bildirmek istemezse, aşağıdaki yapılandırma etkinleştirebilirsiniz:
+Farklı yönetici rolleri ve bunların nasıl atanacağı hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory yönetici rolleri atama](../users-groups-roles/directory-assign-admin-roles.md).
 
-* Tüm son kullanıcılar için Self Servis parola sıfırlamayı etkinleştirin. Bu seçenek altında **parola sıfırlama** > **özellikleri**. Kullanıcıların kendi parolalarını sıfırlamasına olmasını istemezseniz, boş bir gruba erişim kapsamını belirleyebilirsiniz. *Bu seçenek önerilmemektedir.*
-* Web URL veya mailto sağlamak için Yardım Masası bağlantısını Özelleştir: kullanıcılar, ilgili Yardım almak için kullanabileceği adresi. Bu seçenek altında **parola sıfırlama** > **özelleştirme** > **özel Yardım Masası e-posta veya URL**.
+### <a name="disable-contact-your-administrator-emails"></a>"Yöneticinize başvurun" e-postaları devre dışı bırakın
+
+Kuruluşunuz yöneticileri parola sıfırlama istekleri hakkında bilgilendirmek istemiyor, aşağıdaki yapılandırmayı etkinleştirebilirsiniz:
+
+* Tüm son kullanıcılar için self servis parola sıfırlamayı etkinleştirin. Bu seçenek **parola sıfırlama** > **özellikleri**' nin altındadır. Kullanıcıların kendi parolalarını sıfırlamalarını istemiyorsanız boş bir gruba erişim kapsamını atayabilirsiniz. *Bu seçeneği önermiyoruz.*
+* Kullanıcıların yardım almak için kullanabileceği bir Web URL 'SI veya mailto: adresi sağlamak için yardım masası bağlantısını özelleştirin. Bu seçenek **parola sıfırlama** > **özelleştirmesi** > **özel yardım masası e-postası veya URL 'si**altındadır.
 
 ## <a name="customize-the-ad-fs-sign-in-page-for-sspr"></a>SSPR için AD FS oturum açma sayfasını özelleştirme
 
-Active Directory Federasyon Hizmetleri (AD FS) yöneticileri ekleyebileceğiniz bir bağlantı kendi oturum açma sayfasında bulunan yönergeleri kullanarak [Ekle oturum açma sayfası açıklaması](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/add-sign-in-page-description) makalesi.
+Active Directory Federasyon Hizmetleri (AD FS) (AD FS) yöneticileri, oturum açma sayfası [açıklaması ekle](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/add-sign-in-page-description) makalesinde bulunan Kılavuzu kullanarak oturum açma sayfasına bir bağlantı ekleyebilir.
 
-AD FS oturum açma sayfasına bir bağlantı eklemek için AD FS sunucusunda aşağıdaki komutu kullanın. Kullanıcıların SSPR iş akışı girmek için bu sayfayı kullanabilirsiniz.
+AD FS oturum açma sayfasına bağlantı eklemek için AD FS sunucunuzda aşağıdaki komutu kullanın. Kullanıcılar bu sayfayı kullanarak SSPR iş akışını girebilirler.
 
 ``` powershell
 Set-ADFSGlobalWebContent -SigninPageDescriptionText "<p><A href='https://passwordreset.microsoftonline.com' target='_blank'>Can’t access your account?</A></p>"
 ```
 
-## <a name="customize-the-sign-in-page-and-access-panel-look-and-feel"></a>Oturum açma sayfasında ve erişim paneli görünümünü özelleştirme
+## <a name="customize-the-sign-in-page-and-access-panel-look-and-feel"></a>Oturum açma sayfası ve erişim paneli görünüm görünümünü özelleştirme
 
-Oturum açma sayfasını özelleştirebilirsiniz. Şirket markanızı uygun görüntüyü birlikte görüntülenen bir logo ekleyebilirsiniz.
+Oturum açma sayfasını özelleştirebilirsiniz. Şirket markasına uyan görüntüyle birlikte görünen bir logo ekleyebilirsiniz.
 
-Seçtiğiniz grafikler aşağıdaki durumlarda gösterilir:
+Seçtiğiniz grafikler aşağıdaki durumlarda gösterilmektedir:
 
-* Bir kullanıcı, kullanıcı adlarını girdikten sonra
-* Kullanıcı özelleştirilmiş URL'ye erişirse:
-   * Geçirerek `whr` parametre parola sıfırlama sayfasına, gibi `https://login.microsoftonline.com/?whr=contoso.com`
-   * Geçirerek `username` parametre parola sıfırlama sayfasına, gibi `https://login.microsoftonline.com/?username=admin@contoso.com`
+* Kullanıcı Kullanıcı adını girdikten sonra
+* Kullanıcı özelleştirilmiş URL 'ye eriştiğinde:
+   * `whr` Parametresini parola sıfırlama sayfasına geçirerek, örneğin`https://login.microsoftonline.com/?whr=contoso.com`
+   * `username` Parametresini parola sıfırlama sayfasına geçirerek, örneğin`https://login.microsoftonline.com/?username=admin@contoso.com`
 
-Şirket markası makalesinde yapılandırma konusunda bilgi [şirket Azure AD'de oturum açma sayfanız için markası ekleme](../fundamentals/customize-branding.md).
+[Azure AD 'de oturum açma sayfanıza Şirket markası ekleme](../fundamentals/customize-branding.md)makalesindeki şirket markasının nasıl yapılandırılacağı hakkında ayrıntılı bilgi edinin.
 
 ### <a name="directory-name"></a>Dizin adı
 
-Dizin adı özniteliği altında değiştirebilirsiniz **Azure Active Directory** > **özellikleri**. Portalda ve otomatik iletişim görülür bir kolay kuruluş adı gösterebilirsiniz. Bu seçenek en otomatik e-postalarda gösterilen formları içinde görülebilir:
+**Azure Active Directory** > **özellikleri**altında dizin adı özniteliğini değiştirebilirsiniz. Portalda ve otomatik iletişimde görülen kolay bir kuruluş adı gösterebilirsiniz. Bu seçenek, aşağıdaki formlardaki otomatik e-postalarda en iyi şekilde görülebilir:
 
-* E-posta, örneğin "Microsoft CONTOSO tanıtım adına" kolay adı
-* Örneğin "CONTOSO tanıtım hesap e-posta doğrulama kodu" e-postadaki konu satırı
+* E-postadaki kolay ad (örneğin, "CONTOSO tanıtımı adına Microsoft")
+* E-postadaki konu satırı, örneğin "CONTOSO demo hesabı e-posta doğrulama kodu"
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -95,4 +103,4 @@ Dizin adı özniteliği altında değiştirebilirsiniz **Azure Active Directory*
 * [Bir arıza olduğunu düşünüyorum. SSPR’de nasıl sorun giderebilirim?](active-directory-passwords-troubleshoot.md)
 * [Başka bir yerde ele alınmayan bir sorum var](active-directory-passwords-faq.md)
 
-[Contact]: ./media/concept-sspr-customization/sspr-contact-admin.png "E-posta örnek parola sıfırlama Yardım için yöneticinize başvurun"
+[Contact]: ./media/concept-sspr-customization/sspr-contact-admin.png "Parola e-posta dosyanızı sıfırlamaya yönelik yardım için yöneticinize başvurun"

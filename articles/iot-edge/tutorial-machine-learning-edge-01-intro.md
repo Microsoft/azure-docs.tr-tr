@@ -1,109 +1,109 @@
 ---
-title: Machine Learning, Azure IOT Edge üzerinde ayrıntılı kılavuz | Microsoft Docs
-description: Bir uçtan uca makine öğrenimi edge senaryoyu oluşturmak gereken çeşitli görevleri kılavuzluk üst düzey bir öğretici.
+title: 'Öğretici: Azure IoT Edge Machine Learning ayrıntılı yolu'
+description: Uç senaryosunda uçtan uca bir makine öğrenimi oluşturmak için gereken çeşitli görevleri adım adım gösteren üst düzey bir öğretici.
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 06/13/2019
+ms.date: 11/11/2019
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 916e48752431be41ff150c2ac84e66eb1e98e81f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 965c420fa29c4cf82517148c01e17d6d7dd6ea97
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67057753"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74106499"
 ---
-# <a name="tutorial-an-end-to-end-solution-using-azure-machine-learning-and-iot-edge"></a>Öğretici: Azure Machine Learning ve IOT Edge kullanarak bir uçtan uca çözüm
+# <a name="tutorial-an-end-to-end-solution-using-azure-machine-learning-and-iot-edge"></a>Öğretici: Azure Machine Learning ve IoT Edge kullanarak uçtan uca bir çözüm
 
-Genellikle, IOT uygulamaları akıllı bir Bulutu ve akıllı bir ucu yararlanmak istiyorsanız. Bu öğreticide, biz bir machine learning modeli bulutta IOT cihazlarından toplanan verilerle eğitim aracılığıyla IOT Edge, bakımını yapma ve model düzenli olarak iyileştirme için bu modeli dağıtma konusunda rehberlik.
+IoT uygulamaları, genellikle akıllı buluttan ve akıllı kenarından faydalanmak istiyor. Bu öğreticide, bulutta IoT cihazlarından toplanan verilerle bir makine öğrenimi modeline eğitim vererek, bu modeli IoT Edge için dağıtmakta ve modeli düzenli aralıklarla koruyup iyileştirirken size kılavuzluk ederiz.
 
-Birincil amacı, Bu öğretici, machine learning, özellikle uçta ile IOT verilerini işleme tanıtmak sağlamaktır. Biz genel makine öğrenme iş akışı birçok yönden dokunma, ancak bu öğreticide ayrıntılı bir giriş makine öğrenimi kullanılmaya yönelik değildir. Bir durumda giriş noktası olarak biz kullanım örneği için yüksek oranda iyileştirilmiş bir model oluşturmak çalışmayın – yalnızca oluşturma ve IOT veri işleme için uygun bir modeli kullanma işlemini göstermek için yeterli desteklemiyoruz.
+Bu öğreticinin birincil amacı, özellikle de kenarda, Machine Learning ile IoT verilerinin işlenmesini tanıtmaktadır. Genel makine öğrenimi iş akışının pek çok yönüyle iletişime geçtiğimiz için, bu öğretici Machine Learning 'e derinlemesine bir giriş olarak tasarlanmamıştır. Bu noktada, kullanım örneği için yüksek düzeyde iyileştirilmiş bir model oluşturmaya çalışıyoruz; IoT veri işleme için uygun bir model oluşturma ve kullanma sürecini göstermek için yeterlidir.
 
-## <a name="target-audience-and-roles"></a>Hedef kitle ve rolleri
+## <a name="target-audience-and-roles"></a>Hedef kitle ve roller
 
-Bu makaleler kümesini IOT geliştirme veya machine learning'de bir deneyiminiz olmaksızın geliştiricilere yöneliktir. Dağıtma makine öğrenimi ucuna bağlanmak çok çeşitli teknolojiler konusunda bilgi gerektirir. Bu nedenle, Bu öğretici, bu teknolojiler birlikte bir IOT çözümü için birleştirme bir şekilde göstermek için tüm uçtan uca senaryo kapsar. Gerçek bir ortamda, bu görevler birkaç kişiyle farklı uzmanlıklar arasında dağıtılmış olabilir. Örneğin, veri bilimcileri analiz modelleri tasarlanmış olmasına rağmen geliştiricilerin kod, cihaz veya Bulut üzerinde odaklanın. Bu öğreticiyi başarıyla tamamlamak bir geliştirici etkinleştirmek için ek yönergeler öngörülerle sağladık ve umuyoruz daha fazla bilgi için bağlantılar ne, neden yanı sıra yapılması anlamak yeterlidir.
+Bu makale kümesi, IoT geliştirme veya makine öğrenimi konusunda önceki deneyim olmadan geliştiricilere yöneliktir. Makine öğrenimini kenarda dağıtmak, çok çeşitli teknolojilerin nasıl bağlanabilmesinin bilgisini gerektirir. Bu nedenle, bu öğreticide bir IoT çözümü için bu teknolojilerin bir araya katılmasını gösteren bir uçtan uca senaryonun tamamı ele alınmaktadır. Gerçek dünyada bir ortamda, bu görevler farklı uzmanlık özelliklerine sahip birkaç kişi arasında dağıtılabilir. Örneğin, geliştiriciler, cihaz veya bulut koduna odaklanarak veri bilimcileri analiz modellerini tasarlamıştır. Bireysel bir geliştiricinin bu öğreticiyi tamamlamasını sağlamak için öngörülerle birlikte ek rehberlik ve ne olduğunu ve ne olduğunu öğrenmemiz gereken daha fazla bilgi için bağlantıları sunuyoruz.
 
-Alternatif olarak, işlenmesi için tam uzmanlığınızı getirme öğreticiyi birlikte uygulamak için iş arkadaşlarınızla farklı rolleri güçlerini birleştirdi ve bir takım olarak öğelerin birbirine nasıl uyduğunu öğrenin.
+Alternatif olarak, Öğreticiyi bir şekilde izlemek, tam uzmanlığınızı bir araya getirmek ve işlerin nasıl bir araya getireceğinizi öğrenmek için farklı rollerin iş arkadaşlarınızla ekip oluşturabilirsiniz.
 
-Her iki durumda da, kullanıcılar yönlendirmenize yardımcı olmak için bu öğreticideki her bir makaleyi kullanıcı rolünü belirtir. Bu rolleri şunlardır:
+Her iki durumda da, okuyucu (ler) i yönlendirmek için bu öğreticideki her makale kullanıcının rolünü gösterir. Bu roller şunları içerir:
 
-* Bulut geliştirme (DevOps kapasitede çalışan bir bulut Geliştirici dahil)
+* Bulut geliştirme (DevOps kapasitesinde çalışan bir bulut geliştiricisi dahil)
 * Veri analizi
 
-## <a name="use-case-predictive-maintenance"></a>Kullanım örneği: Tahmine dayalı bakım
+## <a name="use-case-predictive-maintenance"></a>Kullanım örneği: tahmine dayalı bakım
 
-Biz bu senaryo ve konferansta Prognostics ve sistem durumu yönetimi (PHM08) 2008'de sunulan bir kullanım örneği temel. Kalan faydalı ömrü (RUL) tahmin turbofan uçak motorları birtakım olmaktır. Bu veriler, C-MAPSS MAPSS (modüler Aero Propulsion sistemi benzetimi) yazılımının ticari sürümü kullanılarak oluşturuldu. Bu yazılım rahatça durumu, Denetim ve altyapısı parametreleri benzetimini yapmak için esnek turbofan engine benzetimi ortamı sağlar.
+Bu senaryoyu, 2008 'deki Prognostics ve Sağlık Yönetimi (PHM08) üzerinde konferansta sunulan kullanım örneğine dayandırdık. Amaç, bir dizi türbofan uçak altyapısının kalan faydalı ömrünü (RUL) tahmin etmek için kullanılır. Bu veriler, MAPSS 'nin ticari sürümü (modüler Aero-Prodarbelerte sistem simülasyonu) yazılımının C-MAPSS kullanılarak oluşturulmuştur. Bu yazılım, sistem durumu, denetim ve altyapı parametrelerinin kolay benzetimini yapmak için esnek bir Turban altyapı simülasyonu ortamı sağlar.
 
-Bu öğreticide kullanılan veri alınır [Turbofan engine performans düşüşü simülasyonu veri kümesi](https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#turbofan).
+Bu öğreticide kullanılan veriler, [turbofan altyapısının düşme simülasyonu veri kümesinden](https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#turbofan)alınmıştır.
 
-Benioku dosyası:
+Benioku dosyasından:
 
-***Deneysel senaryosu***
+***Deneysel senaryo***
 
-*Veri kümeleri birden fazla çok değişkenli zaman serisi oluşur. Her bir veri kümesi, eğitim ve test altkümelere, daha fazla ayrılmıştır. Her zaman serisi farklı altyapısından – yani, verilerin aynı türde altyapıları filosundan olması kabul edilebilir. Her motor ilk wear ve kullanıcıya bilinmeyen değişim üretim farklı derece başlar. Bu giyim ve Varyasyon olarak kabul edilir normal, yani, bir hata koşulu sayılmaz. Altyapısı performansı üzerinde önemli bir etkiye sahip üç işletimsel ayarları vardır. Bu ayarlar, verileri de dahil edilir. Veri ile algılayıcı gürültü contaminated.*
+*Veri kümeleri birden fazla çok değişkenli zaman serisinden oluşur. Her veri kümesi, eğitim ve test alt kümelerine bölünmüştür. Her bir serinin farklı bir altyapıdan olması, yani verilerin aynı türdeki bir çok sayıda altyapıdan olduğu kabul edilebilir. Her motor, Kullanıcı tarafından bilinmeyen, farklı ilk aşınma ve üretim çeşitlemesi ile başlar. Bu giyme ve değişim normal olarak değerlendirilir, yani bir hata koşulu olarak kabul edilmez. Altyapı performansına önemli bir etkisi olan üç işlemsel ayar vardır. Bu ayarlar verilere da dahildir. Veriler sensörle gürültü ile ayrılmış.*
 
-*Altyapısı, her zaman serisi başlangıcında normal olarak çalışıyor ve belirli bir noktada bir arıza sırasında serisi geliştirir. Eğitim kümesine hata boyutları sistem hatası kadar büyür. Test kümesinde sistem hatasından önce biraz zaman zaman serisi sona erer. Yarışma amacı, test kümedeki başka bir deyişle, altyapı çalışmaya devam edeceği son döngüsünden sonra işletimsel döngüsü sayısını hatasından önce sitede kalan işletimsel döngüsü sayısını tahmin etmektir. Ayrıca test verilerini gerçek kalan kullanım ömrü (RUL) değerlerle oluşan bir vektörü sağlanır.*
+*Motor her bir zaman serisinin başlangıcında normal şekilde çalışır ve seri sırasında bir noktada bir hata geliştirir. Eğitim kümesinde hata, sistem hatasına kadar büyüklüğü artar. Test kümesinde, zaman serisi sistem hatasından önce bir süre sona erer. Yarışmanın amacı, test kümesinde hatadan önce kalan işlem döngülerinin sayısını tahmin etmek, yani, altyapının çalışmaya devam etmesi için son döngüden sonra işlem döngüsü sayısı. Ayrıca, test verileri için doğru kalan kullanım ömrü (RUL) değerlerinin vektörünün sağlanması.*
 
-Verileri bir yarışmaya yayımlanan olduğundan, makine öğrenimi modelleri türetmek için çeşitli yaklaşımlar bağımsız olarak yayımlandı. Örnekler üzerinde çalışmak için süreci anlamak ve belirli bir makine öğrenme modelinin oluşturmada yer alan akıl faydalı olduğunu bulduk. Örneğin bakın:
+Veriler bir yarışma yönelik yayımlandığından, makine öğrenimi modellerini türetmeye yönelik birkaç yaklaşım bağımsız olarak yayımlandı. Bu örnek, belirli bir makine öğrenimi modelinin oluşturulmasına dahil olan işlem ve nedenlerinizi anlamak için yararlı olduğunu bulduk. Bkz. Örneğin:
 
-[Uçak motoru hatası tahmin modeli](https://github.com/jancervenka/turbofan_failure) GitHub kullanıcı jancervenka tarafından.
+[Uçak altyapısı hata tahmin modeli](https://github.com/jancervenka/turbofan_failure) GitHub kullanıcısı, occervenka.
 
-[Turbofan engine düşüşü](https://github.com/hankroark/Turbofan-Engine-Degradation) GitHub kullanıcı hankroark tarafından.
+GitHub kullanıcısı hankroark tarafından oluşan [turbofan altyapısı](https://github.com/hankroark/Turbofan-Engine-Degradation) .
 
-## <a name="process"></a>Process
+## <a name="process"></a>İşleme
 
-Aşağıdaki resimde, biz Bu öğreticide izleyin kaba adımları göstermektedir:
+Aşağıdaki resimde, bu öğreticide izlediğimiz kaba adımlar gösterilmektedir:
 
-![İşlem adımları için Mimari diyagramı](media/tutorial-machine-learning-edge-01-intro/tutorial-steps-overview.png)
+![İşlem adımları için mimari diyagramı](media/tutorial-machine-learning-edge-01-intro/tutorial-steps-overview.png)
 
-1. **Eğitim verileri toplama**: Eğitim verileri toplayarak işlemi başlar. Bazı durumlarda, veri zaten toplanmış ve bir veritabanı veya veri dosyalarının form bulunur. IOT senaryoları için özellikle diğer durumlarda, verilerin IOT cihazlardan ve sensörlerden toplanan ve bulutta depolanmış gerekir.
+1. **Eğitim verilerini toplayın**: süreç eğitim verileri toplanarak başlar. Bazı durumlarda veriler zaten toplanmıştır ve bir veritabanında ya da veri dosyası biçiminde kullanılabilir. Diğer durumlarda, özellikle IoT senaryolarında verilerin IoT cihazlarından ve sensörlerinden toplanması ve bulutta depolanması gerekir.
 
-   Proje dosyalarını NASA cihaz verileri buluta gönderiyor bir basit cihaz simülatörü eklemek için turbofan altyapıları koleksiyonunu yoksa varsayıyoruz.
+   Türbofan altyapılarının bir koleksiyonu olmadığı varsayıyoruz. proje dosyaları, NASA cihaz verilerini buluta gönderen basit bir cihaz simülatörü içerir.
 
-1. **Veri hazırlama**. Çoğu durumda, ham veriler cihazlardan ve sensörlerden toplanan olarak makine öğrenimi için hazırlık gerektirir. Bu adım veri temizleme, veri biçimlendirme içerebilir veya ek bilgi makine öğrenimi eklemesine ön işleme kapalı anahtarını.
+1. **Verileri hazırlayın**. Çoğu durumda, cihazlardan ve sensörlerden toplanan ham verilerin makine öğrenimine hazırlanması gerekir. Bu adım, veri temizleme, veri yeniden biçimlendirme ya da daha fazla bilgi eklemek için bir ön işleme içerebilir.
 
-   Uçak motoru makine, verilerimiz için veriler üzerinde gerçek gözlemler göre örnek her veri noktasına açık zamanı hatası saatleri hesaplama veri hazırlığı kapsar. Makine öğrenme algoritmasına gerçek algılayıcı veri desenleri ve Tahmini kalan yaşam süresi altyapısı arasındaki bağlantıları bulmak için bu bilgileri sağlar. Yüksek oranda etki alanına özgü adımdır.
+   Uçak motoru makine verilerimiz için veri hazırlama, verilerdeki gerçek gözlemlere bağlı olarak örnekteki her veri noktası için açık arıza süresi sürelerinin hesaplanmasını içerir. Bu bilgiler, makine öğrenimi algoritmasının gerçek algılayıcı veri desenleri ve altyapının beklenen kalan yaşam süresi arasındaki bağıntıları bulmasına olanak tanır. Bu adım son derece etki alanına özgüdür.
 
-1. **Machine learning modeli derlemeyi**. Hazırlanan verileri temel alan, biz artık farklı makine öğrenimi algoritmaları ve modelleri eğitme ve birbirine sonuçları karşılaştırmak için parameterizations denemeler yapabilirsiniz.
+1. **Machine Learning modeli oluşturun**. Hazırlanan verileri temel alarak, modelleri eğmek ve sonuçları birbiriyle karşılaştırmak için farklı makine öğrenimi algoritmalarından ve parametreetmelere artık denemeler yapabilirsiniz.
 
-   Bu durumda, test etmek için biz altyapıları birtakım gözlemlenen gerçek sonucu model tarafından hesaplanan tahmin edilen sonucu karşılaştırın. Azure Machine Learning'de biz modeli kayıt defterinde oluştururuz modellerinin farklı yinelemeleri yönetebilirsiniz.
+   Bu durumda, test için, model tarafından hesaplanan tahmini sonucu, bir altyapı kümesi üzerinde gözlemlendi gerçek sonucuyla karşılaştırıyoruz. Azure Machine Learning, bir model kayıt defterinde oluşturduğumuz modellerden farklı yinelemeleri yönetebiliriz.
 
-1. **Modeli dağıtma**. Size sunduğumuz başarı ölçütleri karşılayan bir modeli oluşturduktan sonra dağıtım için geçebiliriz. Bu REST çağrılarını kullanarak verilerle iletilir ve analiz sonuçları döndüren web service uygulamanıza modeli sarmalayıp içerir. Web hizmeti uygulaması, ardından sırayla bulutta veya IOT Edge modülü olarak dağıtılabilir bir docker kapsayıcısına paketlenmiştir. Bu örnekte, IOT Edge dağıtımı odaklanıyoruz.
+1. **Modeli dağıtın**. Başarı ölçütlerinizi karşılayan bir modelimiz varsa dağıtıma taşıyabiliriz. Bu, modeli REST çağrıları ve geri dönüş analizi sonuçları kullanılarak verilerle beslenebilir bir Web hizmeti uygulamasına sarmalamayı içerir. Web hizmeti uygulaması daha sonra bir Docker kapsayıcısına paketlenir, bu da bulutta veya bir IoT Edge modülü olarak dağıtılabilir. Bu örnekte, IoT Edge dağıtıma odaklanıyoruz.
 
-1. **Model iyileştirmek ve korumak**. Model dağıtıldıktan sonra işimizi yapılmaz. Çoğu durumda, düzenli aralıklarla bu verileri buluta yükleyin ve veri toplamaya devam etmek istiyoruz. Ardından bu verileri yeniden eğitme ve biz sonra IOT Edge için yeniden dağıtım yapabileceklerini modelimizi geliştirmek için kullanabiliriz.
+1. **Modeli koruyun ve daraltın**. Model dağıtıldıktan sonra çalışmamız yapılmaz. Birçok durumda, verileri toplamaya ve verileri düzenli aralıklarla buluta yüklemeye devam etmek istiyoruz. Daha sonra bu verileri, modelimizi yeniden eğitmek ve iyileştirmek için kullanabiliriz. daha sonra IoT Edge için yeniden dağıtırsınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticiyi tamamlamak için kaynaklar oluşturma hakları olan bir Azure aboneliğine erişiminiz gerekir. Bu öğreticide kullanılan hizmetlerden bazıları Azure ücret uygulanabilir. Azure aboneliğiniz zaten yoksa, kullanmaya başlamak mümkün olabilir bir [Azure ücretsiz hesabı](https://azure.microsoft.com/offers/ms-azr-0044p/).
+Öğreticiyi tamamlayabilmeniz için, kaynak oluşturma haklarınız olan bir Azure aboneliğine erişmeniz gerekir. Bu öğreticide kullanılan hizmetlerden bazıları Azure ücretlerine tabi olacaktır. Henüz bir Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı](https://azure.microsoft.com/offers/ms-azr-0044p/)kullanmaya başlamanızı sağlayabilirsiniz.
 
-Ayrıca burada oluşturan bir Azure sanal makinesi, geliştirme makinenize olarak ayarlamak için komut dosyalarını çalıştırabileceğiniz yüklü PowerShell ile bir makine gerekir.
+Ayrıca, geliştirme makineniz olarak bir Azure sanal makinesini kurmak üzere betikleri çalıştırabileceğiniz PowerShell yüklü bir makineye ihtiyacınız vardır.
 
-Bu belgede, biz aşağıdaki araçları kullanın:
+Bu belgede, aşağıdaki araç kümesini kullanırız:
 
-* Bir Azure IOT hub verilerini yakalama için
+* Veri yakalama için bir Azure IoT Hub 'ı
 
-* Azure not defterleri bizim veri hazırlama ve machine learning denemesi için ana ön ucu olarak. Python kodu bir not defteri örnek verilerinin bir alt kümesi üzerinde çalışan, veri hazırlama sırasında hızlı yinelemeli ve etkileşimli bir döngü almak için harika bir yoludur. Jupyter not defterleri, uygun ölçekte işlem arka betiklerin hazırlamak için de kullanılabilir.
+* Veri hazırlama ve makine öğrenimi deneme için ana ön uçmız olarak Azure Notebooks. Örnek verilerin bir alt kümesindeki bir not defterinde Python kodu çalıştırmak, veri hazırlama sırasında hızla yinelemeli ve etkileşimli bir şekilde yük açmak için harika bir yoldur. Jupi Not defterleri, komut dosyalarını bir işlem arka ucunda ölçeklendirerek çalışacak şekilde hazırlamak için de kullanılabilir.
 
-* Azure Machine Learning için uygun ölçekte makine öğrenimi ve makine öğrenimi görüntü oluşturma için bir arka uç olarak. Biz, Jupyter not defterlerinde test ve hazırlanmış betikler kullanarak Azure Machine Learning arka uç sürücü.
+* Makine öğrenimi için ölçek ve makine öğrenimi görüntü oluşturma için arka uç olarak Azure Machine Learning. Jupi not defterlerinde hazırlanan ve test edilen betikleri kullanarak Azure Machine Learning arka ucunu sunuyoruz.
 
-* Machine learning görüntüsünün kapalı bulut uygulaması için Azure IOT Edge
+* Makine öğrenimi görüntüsünün bulut dışı uygulaması için Azure IoT Edge
 
-Kuşkusuz, diğer seçeneği vardır. Bazı senaryolarda, örneğin, IOT Central bir kod içermeyen alternatif olarak IOT cihazlarından ilk eğitim verilerini yakalamak için kullanılabilir.
+Açıktır, başka seçenekler de mevcuttur. Örneğin, IoT Central, IoT cihazlarından ilk eğitim verilerini yakalamaya yönelik kod olmayan bir alternatif olarak kullanılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, aşağıdaki bölümlere ayrılmıştır:
+Bu öğretici aşağıdaki bölümlere ayrılmıştır:
 
-1. Geliştirme makineniz ve Azure Hizmetleri ayarlayın.
-2. Eğitim verileri makine öğrenme modülü için oluşturur.
-3. Eğitim ve makine öğrenme modülü dağıtın.
-4. Saydam bir ağ geçidi olarak görev yapacak bir IOT Edge cihazı yapılandırın.
-5. Oluşturun ve IOT Edge modüllerini dağıtmak.
-6. IOT Edge cihazınıza veri gönderin.
+1. Geliştirme makinenizi ve Azure hizmetlerini ayarlayın.
+2. Machine Learning modülü için eğitim verileri oluşturun.
+3. Machine Learning modülünü eğitme ve dağıtma.
+4. Bir IoT Edge cihazı, saydam bir ağ geçidi olarak davranacak şekilde yapılandırın.
+5. IoT Edge modülleri oluşturun ve dağıtın.
+6. IoT Edge cihazınıza veri gönderme.
 
-Bir geliştirme makinesi kurmak ve Azure kaynaklarınızı sağlamak için sonraki makaleye geçin.
+Bir geliştirme makinesi kurmak ve Azure kaynakları sağlamak için bir sonraki makaleye geçin.
 
 > [!div class="nextstepaction"]
-> [Machine learning IOT Edge üzerinde için bir ortamı ayarlama](tutorial-machine-learning-edge-02-prepare-environment.md)
+> [IoT Edge makine öğrenimi için bir ortam ayarlama](tutorial-machine-learning-edge-02-prepare-environment.md)

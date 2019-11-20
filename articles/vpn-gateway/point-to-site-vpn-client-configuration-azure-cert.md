@@ -1,27 +1,28 @@
 ---
-title: 'Oluşturma ve Azure sertifika doğrulaması P2S VPN istemci yapılandırma dosyalarını yükleyin: Azure'
-description: Oluşturun ve P2S sertifika kimlik doğrulaması için Windows, Linux, (strongSwan) Linux ve Mac OS X VPN istemcisi yapılandırma dosyalarını yükleyin.
+title: 'P2S VPN istemci yapılandırma dosyaları oluşturun & install: sertifika kimlik doğrulaması'
+titleSuffix: Azure VPN Gateway
+description: P2S sertifikası kimlik doğrulaması için Windows, Linux, Linux (Strongswa) ve Mac OS X VPN istemci yapılandırma dosyaları oluşturun ve bunları yükler.
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: article
-ms.date: 03/20/2019
+ms.date: 09/12/2019
 ms.author: cherylmc
-ms.openlocfilehash: b590dabbe4b2c6526f2c602aeed64667348eefa9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ad6e912f976095ae7d8fd5276b0f1365566c181a
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66114044"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74143784"
 ---
-# <a name="create-and-install-vpn-client-configuration-files-for-native-azure-certificate-authentication-p2s-configurations"></a>Oluşturma ve yerel Azure sertifika doğrulaması P2S yapılandırmaları için VPN istemcisi yapılandırma dosyalarını yükleme
+# <a name="create-and-install-vpn-client-configuration-files-for-native-azure-certificate-authentication-p2s-configurations"></a>Yerel Azure sertifikası kimlik doğrulaması P2S yapılandırmaları için VPN istemcisi yapılandırma dosyalarını oluşturma ve yapılandırma
 
-VPN istemcisi yapılandırma dosyalarını bir zip dosyası içinde yer alır. Yapılandırma dosyaları, yerel Azure sertifika kimlik doğrulaması kullanan noktadan siteye bağlantılar üzerinden bir sanal ağa bağlanmak yerel bir Windows, Mac Ikev2 VPN ya da Linux istemcileri için gerekli olan ayarları sağlayın.
+VPN istemcisi yapılandırma dosyaları bir ZIP dosyasında bulunur. Yapılandırma dosyaları, yerel bir Windows, Mac IKEv2 VPN veya Linux istemcilerinin yerel Azure sertifika kimlik doğrulaması kullanan Noktadan siteye bağlantılar üzerinden bir sanal ağa bağlanması için gereken ayarları sağlar.
 
-İstemci yapılandırma dosyalarını, sanal ağ için VPN yapılandırması özgüdür. Herhangi bir değişiklik varsa noktadan siteye VPN yapılandırması için VPN Protokolü türü veya kimlik doğrulama türü gibi bir VPN istemcisi yapılandırma dosyalarını oluşturduktan sonra kullanıcı cihazları için yeni VPN istemcisi yapılandırma dosyalarını oluşturma emin olun. 
+İstemci yapılandırma dosyaları, sanal ağın VPN yapılandırmasına özeldir. VPN protokolü türü veya kimlik doğrulama türü gibi VPN istemcisi yapılandırma dosyalarını oluşturduktan sonra Noktadan siteye VPN yapılandırmasında herhangi bir değişiklik varsa, Kullanıcı cihazlarınız için yeni VPN istemci yapılandırma dosyaları üretdiğinizden emin olun. 
 
 * Noktadan Siteye bağlantılar hakkında daha fazla bilgi edinmek için bkz. [Noktadan Siteye VPN hakkında](point-to-site-about.md).
-* OpenVPN yönergeler için bkz: [yapılandırma OpenVPN P2S için](vpn-gateway-howto-openvpn.md) ve [yapılandırma OpenVPN istemciler](vpn-gateway-howto-openvpn-clients.md).
+* OpenVPN yönergeleri için bkz. [P2S Için OpenVPN yapılandırma](vpn-gateway-howto-openvpn.md) ve [OpenVPN istemcilerini yapılandırma](vpn-gateway-howto-openvpn-clients.md).
 
 >[!IMPORTANT]
 >[!INCLUDE [TLS](../../includes/vpn-gateway-tls-change.md)]
@@ -29,39 +30,39 @@ VPN istemcisi yapılandırma dosyalarını bir zip dosyası içinde yer alır. Y
 
 ## <a name="generate"></a>VPN istemcisi yapılandırma dosyalarını oluştur
 
-Başlamadan önce tüm bağlanan kullanıcıların kullanıcı cihazında yüklü geçerli bir sertifika olduğundan emin olun. Bir istemci sertifikası yükleme hakkında daha fazla bilgi için bkz. [bir istemci sertifikasını yükleme](point-to-site-how-to-vpn-client-install-azure-cert.md).
+Başlamadan önce, tüm bağlanan kullanıcıların, kullanıcının cihazında geçerli bir sertifika yüklü olduğundan emin olun. İstemci sertifikası yükleme hakkında daha fazla bilgi için bkz. [istemci sertifikası yükleme](point-to-site-how-to-vpn-client-install-azure-cert.md).
 
-PowerShell'i kullanarak istemci yapılandırma dosyaları oluşturabilir veya Azure portalını kullanarak. Her iki yöntem aynı zip dosyasını döndürür. Aşağıdaki klasörlerin görüntülemek için dosyanın sıkıştırmasını açın:
+PowerShell kullanarak veya Azure portal kullanarak istemci yapılandırma dosyaları oluşturabilirsiniz. Her iki yöntem de aynı ZIP dosyasını döndürür. Aşağıdaki klasörleri görüntülemek için dosyayı sıkıştırmayı açın:
 
-  * **WindowsAmd64** ve **WindowsX86**, sırasıyla Windows 32-bit ve 64-bit yükleyici paketleri içerir. **WindowsAmd64** Yükleyici paketi, tüm desteklenen 64 bit Windows istemcileri, yalnızca Amd için.
-  * **Genel**, kendi VPN istemci yapılandırması oluşturmak için kullanılan genel bilgiler içerir. Genel klasörü, Ikev2 veya SSTP + Ikev2 ağ geçidi yapılandırılmışsa sağlanır. Yalnızca SSTP yapılandırılmışsa, genel klasörü mevcut değil.
+  * Sırasıyla Windows 32-bit ve 64-bit yükleyici paketlerini içeren **WindowsAmd64** ve **WindowsX86**. **WindowsAmd64** Installer paketi yalnızca AMD değil, desteklenen tüm 64-bit Windows istemcilerine yöneliktir.
+  * **Genel**, kendi VPN istemci yapılandırmanızı oluşturmak için kullanılan genel bilgileri içerir. Ağ geçidinde Ikev2 veya SSTP + Ikev2 yapılandırılmışsa genel klasör sağlanır. Yalnızca SSTP yapılandırılmışsa, genel klasör mevcut değildir.
 
-### <a name="zipportal"></a>Azure portalını kullanarak dosyaları oluştur
+### <a name="zipportal"></a>Azure portal kullanarak dosya oluşturma
 
-1. Azure portalında, bağlanmak istediğiniz sanal ağı için sanal ağ geçidine gidin.
-2. Sanal ağ geçidi sayfasında tıklayın **noktadan siteye yapılandırma**.
-3. Noktadan siteye yapılandırma sayfanın üst kısmında tıklayın **VPN istemcisini indir**. İşlem birkaç dakika için istemci yapılandırma paketini oluşturmak için alır.
-4. Tarayıcınız, bir istemci yapılandırma zip dosyası kullanılabilir olduğunu gösterir. Bu, aynı adı taşıyan ağ geçidi olarak adlandırılır. Klasörleri görüntülemek için dosyanın sıkıştırmasını açın.
+1. Azure portal, bağlanmak istediğiniz sanal ağ için sanal ağ geçidine gidin.
+2. Sanal ağ geçidi sayfasında, **Noktadan siteye yapılandırma**' ya tıklayın.
+3. Noktadan siteye yapılandırma sayfasının en üstünde **VPN Istemcisini indir**' e tıklayın. İstemci yapılandırma paketinin oluşturması birkaç dakika sürer.
+4. Tarayıcınız, bir istemci yapılandırması ZIP dosyasının kullanılabilir olduğunu gösterir. Bu, ağ geçidiniz ile aynı adı taşır. Klasörleri görüntülemek için dosyayı sıkıştırmayı açın.
 
-### <a name="zipps"></a>PowerShell kullanarak dosyaları oluştur
+### <a name="zipps"></a>PowerShell kullanarak dosyalar oluşturma
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-1. Ne zaman oluşturma VPN istemci yapılandırması dosyaları, değeri '-AuthenticationMethod' olan 'EapTls'. Aşağıdaki komutu kullanarak VPN istemcisi yapılandırma dosyalarını oluştur:
+1. VPN istemci yapılandırma dosyalarını oluştururken, '-AuthenticationMethod ' değeri ' EapTls ' olur. Aşağıdaki komutu kullanarak VPN istemci yapılandırma dosyalarını oluşturun:
 
    ```azurepowershell-interactive
    $profile=New-AzVpnClientConfiguration -ResourceGroupName "TestRG" -Name "VNet1GW" -AuthenticationMethod "EapTls"
 
    $profile.VPNProfileSASUrl
    ```
-2. Zip dosyasını indirmek için tarayıcınızı URL'yi kopyalayın, sonra klasörleri görüntülemek için dosyanın sıkıştırmasını açın.
+2. Zip dosyasını indirmek için URL 'YI tarayıcınıza kopyalayın ve ardından klasörleri görüntülemek için dosyayı açın.
 
-## <a name="installwin"></a>Windows
+## <a name="installwin"></a>Pencerelerin
 
-İçin istemci sürümünün eşleşmesi sürece her Windows istemci bilgisayarda aynı VPN istemcisi yapılandırma paketini kullanabilirsiniz. Desteklenen istemci işletim sistemlerinin listesi için noktadan siteye bölümüne bakın. [VPN Gateway SSS](vpn-gateway-vpn-faq.md#P2S).
+Sürüm istemcinin mimarisiyle eşleştiği sürece, her bir Windows istemci bilgisayarında aynı VPN istemcisi yapılandırma paketini kullanabilirsiniz. Desteklenen istemci işletim sistemlerinin listesi için [VPN Gateway SSS](vpn-gateway-vpn-faq.md#P2S)konusunun Noktadan siteye bölümüne bakın.
 
 >[!NOTE]
->Bağlanmak istediğiniz Windows istemci bilgisayarda yönetici haklarına sahip olmalıdır.
+>Bağlanmak istediğiniz Windows istemci bilgisayarında yönetici haklarına sahip olmanız gerekir.
 >
 >
 
@@ -70,128 +71,123 @@ Sertifika kimlik doğrulaması için yerel Windows VPN istemcisini yapılandırm
 1. Windows bilgisayarın mimarisine karşılık gelen VPN istemcisi yapılandırma dosyalarını seçin. 64 bit işlemci mimarisi için 'VpnClientSetupAmd64' yükleyici paketini seçin. 32 bit işlemci mimarisi için 'VpnClientSetupX86' yükleyici paketini seçin. 
 2. Yüklemek için pakete çift tıklayın. Bir SmartScreen açılır penceresi görürseniz **Daha fazla bilgi**’ye ve ardından **Yine de çalıştır**’a tıklayın.
 3. İstemci bilgisayarda **Ağ Ayarları**’na gidin ve **VPN** öğesine tıklayın. VPN bağlantısı, bağlandığı sanal ağın adını gösterir. 
-4. Bağlanmayı denemeden önce, istemci bilgisayara bir istemci sertifikası yüklediğinizi doğrulayın. Yerel Azure sertifika kimlik doğrulaması türü kullanılırken kimlik doğrulaması için bir istemci sertifikası gereklidir. Sertifikaları oluşturma hakkında daha fazla bilgi için bkz. [sertifikaları oluşturmak](vpn-gateway-howto-point-to-site-resource-manager-portal.md#generatecert). Bir istemci sertifikası yükleme hakkında daha fazla bilgi için bkz: [bir istemci sertifikasını yükleme](point-to-site-how-to-vpn-client-install-azure-cert.md).
+4. Bağlanmayı denemeden önce, istemci bilgisayara bir istemci sertifikası yüklediğinizi doğrulayın. Yerel Azure sertifika kimlik doğrulaması türü kullanılırken kimlik doğrulaması için bir istemci sertifikası gereklidir. Sertifika oluşturma hakkında daha fazla bilgi için bkz. [sertifika oluşturma](vpn-gateway-howto-point-to-site-resource-manager-portal.md#generatecert). İstemci sertifikasını nasıl yükleyeceğiniz hakkında bilgi için bkz. [istemci sertifikası yüklemesi](point-to-site-how-to-vpn-client-install-azure-cert.md).
 
 ## <a name="installmac"></a>Mac (OS X)
 
- Yerel IKEv2 VPN istemcisini Azure’a bağlanacak her Mac cihazda el ile yapılandırmanız gerekir. Azure, yerel Azure sertifika kimlik doğrulaması için mobileconfig dosyası sağlamaz. **Genel** yapılandırması için gereken bilgilerin tümünü içerir. İndirdiğiniz pakette Genel klasörünü görmüyorsanız, tünel türü olarak IKEv2 seçilmemiş olabilir. Ikev2 VPN ağ geçidi temel SKU desteklemediğini unutmayın. IKEv2 seçildikten sonra zip dosyasını tekrar oluşturarak Genel klasörünü alın.<br>Genel klasörü aşağıdaki dosyaları içerir:
+ Yerel IKEv2 VPN istemcisini Azure’a bağlanacak her Mac cihazda el ile yapılandırmanız gerekir. Azure, yerel Azure sertifika kimlik doğrulaması için mobileconfig dosyası sağlamaz. **Genel** , yapılandırma için ihtiyaç duyduğunuz tüm bilgileri içerir. İndirdiğiniz pakette Genel klasörünü görmüyorsanız, tünel türü olarak IKEv2 seçilmemiş olabilir. VPN Gateway temel SKU 'sunun Ikev2 'yi desteklemediğini unutmayın. IKEv2 seçildikten sonra zip dosyasını tekrar oluşturarak Genel klasörünü alın.<br>Genel klasörü aşağıdaki dosyaları içerir:
 
-* **VpnSettings.xml**, sunucu adresi ve tünel türü gibi önemli ayarları içerir. 
-* **VpnServerRoot.cer**, P2S bağlantısı Kurulum sırasında Azure VPN Gateway doğrulamak için gerekli kök sertifika içerir.
+* Sunucu adresi ve tünel türü gibi önemli ayarları içeren **Vpnsettings. xml**. 
+* P2S bağlantı kurulumu sırasında Azure VPN Gateway doğrulamak için gereken kök sertifikayı içeren **Vpnserverroot. cer**.
 
-Yerel VPN istemcisini Mac üzerinde sertifika kimlik doğrulaması için yapılandırmak için aşağıdaki adımları kullanın. Azure'a bağlanan her Mac üzerinde aşağıdaki adımları tamamlamanız gerekir:
+Mac 'te sertifika kimlik doğrulaması için yerel VPN istemcisini yapılandırmak üzere aşağıdaki adımları kullanın. Azure 'a bağlanacak her Mac üzerinde bu adımları gerçekleştirmeniz gerekir:
 
-1. İçeri aktarma **VpnServerRoot** Mac'iniz için kök sertifika Bu dosya üzerinde Mac'inize kopyalayarak ve çift yapılabilir. Tıklayın **Ekle** içeri aktarmak için.
+1. **Vpnserverroot** kök sertifikasını Mac 'e aktarın. Bu işlem, dosyanın Mac 'nize kopyalanarak ve çift tıklanarak yapılabilir. İçeri aktarmak için **Ekle** ' ye tıklayın.
 
-   ![Sertifika Ekle](./media/point-to-site-vpn-client-configuration-azure-cert/addcert.png)
+   ![sertifika ekle](./media/point-to-site-vpn-client-configuration-azure-cert/addcert.png)
   
     >[!NOTE]
-    >Sertifikayı çift görüntülenmeyebilir **Ekle** iletişim, ancak sertifika doğru depoya yüklenir. Sertifikaları kategorisi altında oturum açma Anahtarlıkta sertifikayı denetleyebilirsiniz.
+    >Sertifikaya çift tıkladığınızda **Ekle** iletişim kutusu görüntülenmeyebilir, ancak sertifika doğru depoya yüklenmiş olabilir. Sertifika kategorisi altındaki oturum açma anahtarlığınızdan sertifikayı kontrol edebilirsiniz.
     >
   
-2. P2S ayarlarını yapılandırdığınız zaman Azure'a yüklediğiniz kök sertifika tarafından verilmiş bir istemci sertifikası yüklü olduğunu doğrulayın. Bu, önceki adımda yüklediğiniz VPNServerRoot farklıdır. İstemci sertifikası kimlik doğrulaması için kullanılır ve gereklidir. Sertifikaları oluşturma hakkında daha fazla bilgi için bkz. [sertifikaları oluşturmak](vpn-gateway-howto-point-to-site-resource-manager-portal.md#generatecert). Bir istemci sertifikası yükleme hakkında daha fazla bilgi için bkz: [bir istemci sertifikasını yükleme](point-to-site-how-to-vpn-client-install-azure-cert.md).
-3. Açık **ağ** iletişim altında **ağ tercihlerini** tıklatıp **'+'** P2S bağlantısı Azure sanal ağ için yeni bir VPN istemci bağlantı profili oluşturmak için.
+2. P2S ayarlarını yapılandırdığınız zaman Azure 'a yüklediğiniz kök sertifika tarafından verilen bir istemci sertifikası yüklediğinizi doğrulayın. Bu, önceki adımda yüklediğiniz VPNServerRoot öğesinden farklıdır. İstemci sertifikası kimlik doğrulaması için kullanılır ve gereklidir. Sertifika oluşturma hakkında daha fazla bilgi için bkz. [sertifika oluşturma](vpn-gateway-howto-point-to-site-resource-manager-portal.md#generatecert). İstemci sertifikasını nasıl yükleyeceğiniz hakkında bilgi için bkz. [istemci sertifikası yüklemesi](point-to-site-how-to-vpn-client-install-azure-cert.md).
+3. **Ağ tercihleri** altında **ağ** Iletişim kutusunu açın ve Azure VNET 'e P2S BAĞLANTıSı için yeni bir VPN istemci bağlantı profili oluşturmak üzere **' + '** seçeneğine tıklayın.
 
-   **Arabirimi** 'VPN' değeridir ve **VPN türü** 'IKEv2' değeridir. Profili için bir ad belirtin **hizmet adı** alan ve ardından tıklayın **Oluştur** VPN istemci bağlantı profili oluşturmak için.
+   **Arabirim** DEĞERI ' VPN ' ve **VPN türü** değeri ' Ikev2 '. **Hizmet adı** alanında profil için bir ad belirtin ve ardından **Oluştur** ' a tıklayarak VPN istemci bağlantı profilini oluşturun.
 
-   ![Ağ](./media/point-to-site-vpn-client-configuration-azure-cert/network.png)
-4. İçinde **genel** klasörü, gelen **VpnSettings.xml** dosyası, kopya **VpnServer** etiket değeri. Bu değeri yapıştırın **sunucu adresi** ve **Uzak Kimliği** profilinin alanları.
+   ![Network](./media/point-to-site-vpn-client-configuration-azure-cert/network.png)
+4. **Genel** klasöründe, **vpnsettings. xml** dosyasından **VPNServer** etiket değerini kopyalayın. Bu değeri, profilin **sunucu adresine** ve **uzak kimlik** alanlarına yapıştırın.
 
-   ![Sunucu bilgisi](./media/point-to-site-vpn-client-configuration-azure-cert/server.png)
-5. Tıklayın **kimlik doğrulama ayarları** seçip **sertifika**. 
+   ![sunucu bilgileri](./media/point-to-site-vpn-client-configuration-azure-cert/server.png)
+5. **Kimlik doğrulama ayarları** ' na tıklayıp **sertifika**' yı seçin. 
 
    ![kimlik doğrulama ayarları](./media/point-to-site-vpn-client-configuration-azure-cert/authsettings.png)
-6. Tıklayın **seçin...** kimlik doğrulaması için kullanmak istediğiniz istemci sertifikasını seçmek için. Bu adım 2'de yüklü olan sertifikadır.
+6. **Seç...** öğesine tıklayın kimlik doğrulaması için kullanmak istediğiniz istemci sertifikasını seçmek için. Bu, adım 2 ' de yüklediğiniz sertifikadır.
 
    ![sertifika](./media/point-to-site-vpn-client-configuration-azure-cert/certificate.png)
-7. **Bir kimlik seçin** sertifikaları için öncelikle repairshop listesini görüntüler. Sunucunun doğru sertifikayı seçin ve sonra tıklatın **devam**.
+7. **Bir kimlik seçin seçim** yapabileceğiniz sertifikaların listesini görüntüler. Doğru sertifikayı seçip **devam**' a tıklayın.
 
    ![identity](./media/point-to-site-vpn-client-configuration-azure-cert/identity.png)
-8. İçinde **yerel kimliği** alanında, (6. adım)'deki Sertifika adını belirtin. Bu örnekte, "ikev2Client.com" dir. ' A tıklayarak **Uygula** değişiklikleri kaydetmek için düğme.
+8. **Yerel kimlik** alanında, sertifikanın (adım 6 ' dan) adını belirtin. Bu örnekte, "ikev2Client.com" olur. Ardından, değişiklikleri kaydetmek için **Uygula** düğmesine tıklayın.
 
-   ![Uygula](./media/point-to-site-vpn-client-configuration-azure-cert/applyconnect.png)
-9. Üzerinde **ağ** iletişim kutusunda, tıklayın **Uygula** tüm değişiklikleri kaydedin. ' A tıklayarak **Connect** Azure vnet'e P2S bağlantısı başlatılamadı.
+   ![uygulayabilirsiniz](./media/point-to-site-vpn-client-configuration-azure-cert/applyconnect.png)
+9. Tüm değişiklikleri kaydetmek için **ağ** Iletişim kutusunda **Uygula** ' ya tıklayın. Sonra, P2S bağlantısını Azure VNet 'e başlatmak için **Bağlan** ' a tıklayın.
 
-## <a name="linuxgui"></a>Linux (strongSwan GUI)
+## <a name="linuxgui"></a>Linux (Strongswa GUI)
 
-### <a name="extract-the-key-and-certificate"></a>Anahtarı ve sertifikayı ayıklayın
+### <a name="installstrongswan"></a>Strongswa 'yi yükler
 
-StrongSwan için istemci sertifikası (.pfx dosyası) anahtarı ve sertifikayı ayıklayın ve bunları tek tek .pem dosyasına kaydetmek gerekir.
-Aşağıdaki adımları izleyin:
+[!INCLUDE [install strongSwan](../../includes/vpn-gateway-strongswan-install-include.md)]
 
-1. OpenSSL yükleyip [OpenSSL](https://www.openssl.org/source/).
-2. Bir komut satırı penceresi açın ve yüklediğiniz OpenSSL, örneğin dizinine ' c:\OpenSLL-Win64\bin\'.
-3. Özel anahtarınızı ayıklamanız ve istemci sertifikanızın 'privatekey.pem' adlı yeni bir dosyaya kaydetmek için aşağıdaki komutu çalıştırın:
+### <a name="genlinuxcerts"></a>Sertifika oluşturma
 
-   ```
-   C:\ OpenSLL-Win64\bin> openssl pkcs12 -in clientcert.pfx -nocerts -out privatekey.pem -nodes
-   ```
-4. Artık ortak sertifikayı ayıklayın ve yeni bir dosyaya kaydetmek için aşağıdaki komutu çalıştırın:
+Önceden sertifika oluşturduysanız aşağıdaki adımları kullanın:
 
-   ```
-   C:\ OpenSLL-Win64\bin> openssl pkcs12 -in clientcert.pfx -nokeys -out publiccert.pem -nodes
-   ```
+[!INCLUDE [strongSwan certificates](../../includes/vpn-gateway-strongswan-certificates-include.md)]
 
-### <a name="install"></a>Yükleme ve yapılandırma
+### <a name="install"></a>Yükleyip yapılandırın
 
-Aşağıdaki yönergeler, ubuntu'da 17.0.4 strongSwan 5.5.1 aracılığıyla oluşturuldu. Ubuntu 16.0.10 strongSwan GUI desteklemez. Ubuntu 16.0.10 kullanmak istiyorsanız, kullanması gerekir [komut satırı](#linuxinstallcli). Aşağıdaki örnekler, Linux ve strongSwan sürümünüze bağlı olarak gördüğü ekranlar eşleşmeyebilir.
+Ubuntu 18.0.4 üzerinde aşağıdaki yönergeler oluşturulmuştur. Ubuntu 16.0.10, Strongswa GUI 'yi desteklemez. Ubuntu 16.0.10 kullanmak istiyorsanız, [komut satırını](#linuxinstallcli)kullanmanız gerekir. Aşağıdaki örnekler, Linux sürümünüze ve Strongswa sürümüne bağlı olarak gördüğünüz ekranlarla eşleşmeyebilir.
 
-1. Açık **Terminal** yüklemek için **strongSwan** ve örnekte komutu çalıştırarak, Ağ Yöneticisi. İlgili bir hata alırsanız *libcharon ek eklentiler*, 'strongswan-plugin-eap-mschapv2 ile' değiştirin.
+1. Örnekteki komutu çalıştırarak **Strongswa** ve Ağ yöneticisini yüklemek için **terminali** açın.
 
    ```
-   sudo apt-get install strongswan libcharon-extra-plugins moreutils iptables-persistent network-manager-strongswan
+   sudo apt install network-manager-strongswan
    ```
-2. Seçin **Ağ Yöneticisi** simgesi (yukarı-oku/aşağı oka), ardından **düzenleme bağlantıları**.
+2. **Ayarlar** ' ı ve ardından **ağ**' ı seçin.
 
-   ![Bağlantıları Düzenle](./media/point-to-site-vpn-client-configuration-azure-cert/editconnections.png)
-3. Tıklayın **Ekle** yeni bir bağlantı oluşturmak için.
+   ![bağlantıları Düzenle](./media/point-to-site-vpn-client-configuration-azure-cert/editconnections.png)
+3. Yeni bir bağlantı oluşturmak için **+** düğmesine tıklayın.
 
-   ![Bağlantı Ekle](./media/point-to-site-vpn-client-configuration-azure-cert/addconnection.png)
-4. Seçin **IPSec/Ikev2 (strongswan)** açılan menüsünü ve ardından **Oluştur**. Bu adımda, bağlantınızı yeniden adlandırabilirsiniz.
+   ![bağlantı ekleme](./media/point-to-site-vpn-client-configuration-azure-cert/addconnection.png)
+4. Menüden **IPSec/Ikev2 (Strongswa)** öğesini seçin ve çift tıklayın. Bu adımda, bağlantınızın adını verebilirsiniz.
 
    ![bir bağlantı türü seçin](./media/point-to-site-vpn-client-configuration-azure-cert/choosetype.png)
-5. Açık **VpnSettings.xml** dosya **genel** indirilen istemci yapılandırma dosyalarında bulunan klasör. Adlı Etiket Bul **VpnServer** ve adını 'azuregateway' ile başlayan ve ile biten kopyalama '. cloudapp.net'.
+5. İndirilen istemci yapılandırma dosyalarında bulunan **genel** klasörden **vpnsettings. xml** dosyasını açın. **VPNServer** adlı etiketi bulun ve ' azuregateway ' ile başlayıp '. cloudapp.net ' ile biten adı kopyalayın.
 
    ![adı Kopyala](./media/point-to-site-vpn-client-configuration-azure-cert/vpnserver.png)
-6. Bu ad alanının içine yapıştırın **adresi** yeni VPN bağlantınızın alan **ağ geçidi** bölümü. Ardından, sonunda, klasör simgesini seçerek **sertifika** göz atın, alan **genel** klasörünü açın ve seçin **VpnServerRoot** dosya.
-7. İçinde **istemci** bağlantı bölümünü için **kimlik doğrulaması**seçin **sertifika/özel anahtar**. İçin **sertifika** ve **özel anahtarı**, sertifika ve daha önce oluşturulan özel anahtarı seçin. İçinde **seçenekleri**seçin **iç IP adresi isteme**. ' A tıklayarak **Ekle**.
+6. Bu adı, **ağ geçidi** bölümünde yer alan yeni VPN bağlantınızın **Adres** alanına yapıştırın. Sonra, **sertifika** alanının sonundaki klasör simgesini seçin, **genel** klasöre gidin ve **vpnserverroot** dosyasını seçin.
+7. Bağlantının **istemci** bölümünde, **kimlik doğrulaması**için **sertifika/özel anahtar**' ı seçin. **Sertifika** ve **özel anahtar**için, daha önce oluşturulmuş sertifikayı ve özel anahtarı seçin. **Seçenekler**' de, **Iç IP adresi iste**' yi seçin. ' A tıklayarak **Ekle**.
 
-   ![İstek bir iç IP adresi](./media/point-to-site-vpn-client-configuration-azure-cert/inneripreq.png)
-8. Tıklayın **Ağ Yöneticisi** simgesi (yukarı-oku/aşağı ok) ve üzerine geldiğinizde **VPN bağlantıları**. Oluşturduğunuz VPN bağlantısını görürsünüz. Bağlantıyı başlatmak için tıklayın.
+   ![iç IP adresi iste](./media/point-to-site-vpn-client-configuration-azure-cert/turnon.png)
+8. **Bağlantıyı açın**.
 
-## <a name="linuxinstallcli"></a>Linux (strongSwan CLI)
+## <a name="linuxinstallcli"></a>Linux (strongSwan CLı)
 
-### <a name="install-strongswan"></a>StrongSwan yükleyin
+### <a name="install-strongswan"></a>Strongswa 'yi yükler
 
-Aşağıdaki CLI komutları kullanın veya strongSwan adımlarda [GUI](#install) strongSwan yüklemek için.
+[!INCLUDE [install strongSwan](../../includes/vpn-gateway-strongswan-install-include.md)]
 
-1. `apt-get install strongswan-ikev2 strongswan-plugin-eap-tls`
-2. `apt-get install libstrongswan-standard-plugins`
+### <a name="generate-certificates"></a>İstemci sertifikaları oluşturma
+
+Önceden sertifika oluşturduysanız aşağıdaki adımları kullanın:
+
+[!INCLUDE [strongSwan certificates](../../includes/vpn-gateway-strongswan-certificates-include.md)]
 
 ### <a name="install-and-configure"></a>Yükleme ve yapılandırma
 
-1. Bir VPNClient paketi, Azure Portalı'ndan indirin.
+1. Azure portal adresinden VPNClient paketini indirin.
 2. Dosyayı ayıklayın.
-3. Gelen **genel** klasör kopyalayın veya VpnServerRoot.cer /etc/ipsec.d/cacerts için taşıyın.
-4. Kopyalayın veya /etc/ipsec.d/private/ için cp client.p12 taşıyın. Azure VPN ağ geçidi için istemci sertifikası dosyasıdır.
-5. Açık VpnSettings.xml dosya ve kopyalama `<VpnServer>` değeri. Bu değer sonraki adımda kullanır.
-6. Aşağıdaki örnekte gösterilen değerleri ayarlayın ve ardından örnek /etc/ipsec.conf yapılandırmasına ekleyin.
+3. **Genel** klasöründen, VpnServerRoot. cer dosyasını/etc/IPSec.exe dizinine kopyalayın veya taşıyın.
+4. CP Client. p12 öğesini/etc/IPSec.exe dizinine kopyalayın veya taşıyın. Bu dosya, Azure VPN Gateway için istemci sertifikasıdır.
+5. VpnSettings. xml dosyasını açın ve `<VpnServer>` değerini kopyalayın. Bu değeri bir sonraki adımda kullanacaksınız.
+6. Aşağıdaki örnekteki değerleri ayarlayın ve ardından/etc/IPSec.exe yapılandırmasına örnek ekleyin.
   
    ```
    conn azure
-   keyexchange=ikev2
-   type=tunnel
-   leftfirewall=yes
-   left=%any
-   leftauth=eap-tls
-   leftid=%client # use the DNS alternative name prefixed with the %
-   right= Enter the VPN Server value here# Azure VPN gateway address
-   rightid=% # Enter the VPN Server value here# Azure VPN gateway FQDN with %
-   rightsubnet=0.0.0.0/0
-   leftsourceip=%config
-   auto=add
+         keyexchange=ikev2
+         type=tunnel
+         leftfirewall=yes
+         left=%any
+         leftauth=eap-tls
+         leftid=%client # use the DNS alternative name prefixed with the %
+         right= Enter the VPN Server value here# Azure VPN gateway address
+         rightid=% # Enter the VPN Server value here# Azure VPN gateway FQDN with %
+         rightsubnet=0.0.0.0/0
+         leftsourceip=%config
+         auto=add
    ```
-6. Ekleyin */etc/ipsec.secrets*.
+6. */Etc/IPSec.exe*öğesine aşağıdakileri ekleyin.
 
    ```
    : P12 client.p12 'password' # key filename inside /etc/ipsec.d/private directory
@@ -206,9 +202,9 @@ Aşağıdaki CLI komutları kullanın veya strongSwan adımlarda [GUI](#install)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Makaleye dönün [P2S yapılandırmanızı tamamlamak](vpn-gateway-howto-point-to-site-rm-ps.md).
+[P2S yapılandırmanızı tamamlamaya](vpn-gateway-howto-point-to-site-rm-ps.md)yönelik makaleye geri dönün.
 
-P2S bağlantılarının sorunlarını gidermek için aşağıdaki makalelere bakın:
+P2S bağlantılarında sorun gidermek için aşağıdaki makalelere bakın:
 
-  * [Azure noktadan siteye bağlantı sorunlarını giderme](vpn-gateway-troubleshoot-vpn-point-to-site-connection-problems.md)
-  * [Mac OS X VPN istemcisinden VPN bağlantı sorunlarını giderme](vpn-gateway-troubleshoot-point-to-site-osx-ikev2.md)
+  * [Azure Noktadan siteye bağlantıları sorunlarını giderme](vpn-gateway-troubleshoot-vpn-point-to-site-connection-problems.md)
+  * [Mac OS X VPN istemcilerinden VPN bağlantıları sorunlarını giderme](vpn-gateway-troubleshoot-point-to-site-osx-ikev2.md)

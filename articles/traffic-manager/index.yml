@@ -1,91 +1,90 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Traffic Manager
+### YamlMime:Landing
+title: Traffic Manager belgeleri
+summary: Azure Traffic Manager’ı kullanmayı öğrenin. Hızlı başlangıçlar, öğreticiler, örnekler ve çok daha fazlası sayesinde gelen trafiği en iyi uygulama performansını sağlamayacak şekilde yönetmeyi ve trafiği Azure’a veya dış hizmet uç noktalarına dağıtmayı öğrenirsiniz.
 metadata:
-  document_id: null
-  title: Traffic Manager
-  meta.description: 'Learn how to use Traffic Manager to route incoming traffic for optimal application performance and reliability. Quickstarts, tutorials, samples, and more, show how to manage traffic to Azure or external service endpoints.'
+  title: Traffic Manager belgeleri
+  description: En uygun uygulama performansı ve güvenilirliği için Traffic Manager’ı kullanarak gelen trafiği nasıl yönlendirebileceğinizi öğrenin. Hızlı başlangıçlar, öğreticiler, örnekler ve daha fazlası, Azure veya harici hizmet uç noktalarına giden trafiğin nasıl yönetildiğini gösterir.
   services: traffic-manager
-  author: asudbring
-  manager: twooley
-  layout: LandingPage
   ms.service: traffic-manager
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 02/28/2019
+  ms.collection: collection
+  author: asudbring
   ms.author: allensu
-abstract:
-  description: 'Azure Traffic Manager’ı kullanmayı öğrenin. Hızlı başlangıçlar, öğreticiler, örnekler ve çok daha fazlası sayesinde gelen trafiği en iyi uygulama performansını sağlamayacak şekilde yönetmeyi ve trafiği Azure’a veya dış hizmet uç noktalarına dağıtmayı öğrenirsiniz.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Traffic Manager’ı kullanarak web trafiğini hizmet uç noktalarınıza uygun şekilde yönetmeyi öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_portal.svg'
-            text: Azure portal
-            href: /azure/traffic-manager/quickstart-create-traffic-manager-profile
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_powershell.svg'
-            text: Azure PowerShell
-            href: /azure/traffic-manager/quickstart-create-traffic-manager-profile-powershell
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Traffic Manager’daki farklı yönlendirme yöntemlerini temel alarak trafiği yönlendirmeyi öğrenin.
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/traffic-manager/traffic-manager-configure-geographic-routing-method">Uç noktanın coğrafi konumunu temel alarak trafiği yönlendirme</a>
-          - html: <a href="/azure/traffic-manager/tutorial-traffic-manager-improve-website-response">Düşük gecikme süresi için trafiği yönlendirme</a>
-          - html: <a href="/azure/traffic-manager/traffic-manager-configure-weighted-routing-method">Trafiği bir uç nokta kümesine dağıtma</a>
-          - html: <a href="/azure/traffic-manager/traffic-manager-configure-priority-routing-method">Trafiği bir öncelik uç noktasına yönlendirme</a>
-          - html: <a href="/azure/traffic-manager/tutorial-traffic-manager-weighted-endpoint-routing">Ağırlıklı uç noktalarla trafiği yönetme</a>
-          - html: <a href="/azure/traffic-manager/tutorial-traffic-manager-subnet-routing">Kullanıcının alt ağına göre trafik yönlendirme</a>
-  - title: Ücretsiz Pluralsight Video Eğitimi
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Yöneticisi
-            href: 'https://go.microsoft.com/fwlink/?linkid=2012827'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://go.microsoft.com/fwlink/?linkid=2012827'
-          - title: Azure Çözüm Mimarı
-            href: 'https://go.microsoft.com/fwlink/?linkid=2012824'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://go.microsoft.com/fwlink/?linkid=2012824'
-          - title: AWS Yöneticileri için Azure Yönetimi
-            href: 'https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents'
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Sık kullanılan görevler için betik örnekleri.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/traffic-manager/cli-samples">Azure CLI</a>
-          - html: <a href="/azure/traffic-manager/powershell-samples">PowerShell</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/az.trafficmanager/#traffic_manager">PowerShell</a></p><p><a href="/cli/azure/network/traffic-manager">Azure CLI</a></p>'
-          - title: Diller
-            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/virtual-network?view=azure-dotnet">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.trafficmanager">Java</a></p><p><a href="https://azure.github.io/azure-sdk-for-node/azure-arm-trafficmanager/latest/">Node.js</a></p><p><a href="https://docs.microsoft.com/python/api/overview/azure/traffic-manager">Python</a></p>'
-          - title: REST
-            html: <p><a href="/rest/api/trafficmanager/">REST API başvurusu</a></p>
+  ms.date: 08/19/2019
+  ms.openlocfilehash: e0990e15a10d18d836daddc1d5fba83af95948d8
+  ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/27/2019
+  ms.locfileid: "70051972"
+landingContent:
+- title: Traffic Manager hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Traffic Manager nedir?
+      url: traffic-manager-overview.md
+  - linkListType: concept
+    links:
+    - text: Traffic Manager yönlendirme yöntemleri
+      url: traffic-manager-routing-methods.md
+  - linkListType: learn
+    links:
+    - text: Hizmetlerinizin kullanılabilirliğini ve veri yerelliğinizi geliştirin
+      url: https://docs.microsoft.com/learn/modules/distribute-load-with-traffic-manager/
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure portalını kullanarak bir Traffic Manager profili oluşturma
+      url: quickstart-create-traffic-manager-profile.md
+  - linkListType: tutorial
+    links:
+    - text: Web sitesi yanıtını geliştirme
+      url: tutorial-traffic-manager-improve-website-response.md
+    - text: Coğrafi trafik yönlendirme yöntemini yapılandırma
+      url: traffic-manager-configure-geographic-routing-method.md
+    - text: Ağırlıklı trafik yönlendirme yöntemini yapılandırma
+      url: traffic-manager-configure-weighted-routing-method.md
+    - text: Öncelikli trafik yönlendirme yöntemini yapılandırma
+      url: traffic-manager-configure-priority-routing-method.md
+    - text: Kullanıcı alt ağını temel alarak trafiği belirli uç noktalara yönlendirme
+      url: tutorial-traffic-manager-subnet-routing.md
+- title: Yönetme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: İç İçe Traffic Manager profilleri
+      url: traffic-manager-nested-profiles.md
+    - text: Traffic Manager uç noktaları
+      url: traffic-manager-endpoint-types.md
+    - text: Traffic Manager uç nokta izleme
+      url: traffic-manager-monitoring.md
+  - linkListType: how-to-guide
+    links:
+    - text: Uç noktaları ekleme, devre dışı bırakma, etkinleştirme veya silme
+      url: traffic-manager-manage-endpoints.md
+    - text: Traffic Manager profilini yönetme
+      url: traffic-manager-manage-profiles.md
+    - text: Azure’daki yük dengeleme hizmetlerini kullanma
+      url: traffic-manager-load-balancing-azure.md
+    - text: Bir şirketin İnternet etki alanını Azure Traffic Manager etki alanına yönlendirme
+      url: traffic-manager-point-internet-domain.md
+    - text: Performansla ilgili önemli noktalar
+      url: traffic-manager-performance-considerations.md
+- title: Sorun giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Tanılama günlüğünü etkinleştirme
+      url: traffic-manager-diagnostic-logs.md
+    - text: Düşürülmüş durumda sorun giderme
+      url: traffic-manager-troubleshooting-degraded.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.trafficmanager/?view=azps-2.5.0
+    - text: Azure CLI
+      url: https://docs.microsoft.com/cli/azure/network/traffic-manager?view=azure-cli-latest

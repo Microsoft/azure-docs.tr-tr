@@ -1,9 +1,9 @@
 ---
-title: Android - Microsoft kimlik platformu ile çalışmaya başlama | Azure
-description: Nasıl bir Android uygulamasına erişim belirteci almak ve Microsoft Graph API'si veya Microsoft kimlik platformu erişim belirteçlerini gerektiren API çağrısı.
+title: Android ile çalışmaya başlama-Microsoft Identity platform | Mavisi
+description: Android uygulaması, bir erişim belirteci alabilir ve Microsoft Identity platform 'dan erişim belirteçleri gerektiren API 'Leri veya API 'Leri çağırabilir Microsoft Graph.
 services: active-directory
 documentationcenter: dev-center-name
-author: danieldobalian
+author: tylermsft
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
@@ -11,86 +11,92 @@ ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 04/26/2019
+ms.date: 10/10/2019
 ms.author: jmprieur
 ms.reviwer: brandwe
-ms.custom: aaddev
+ms.custom: aaddev, identityplatformtop40
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d8f8c8e98a7a99fc1b94bd5ae84062843ebabbc1
-ms.sourcegitcommit: 978e1b8cac3da254f9d6309e0195c45b38c24eb5
+ms.openlocfilehash: 5417c29b62414468064338a67b188c7b7f832ac5
+ms.sourcegitcommit: 3486e2d4eb02d06475f26fbdc321e8f5090a7fac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67550585"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73242208"
 ---
-# <a name="sign-in-users-and-call-the-microsoft-graph-from-an-android-app"></a>Bir Android uygulamasından Microsoft Graph'i çağırmaya ve kullanıcılarının oturumunu
+# <a name="tutorial-sign-in-users-and-call-the-microsoft-graph-from-an-android-app"></a>Öğretici: kullanıcılarda oturum açın ve Android uygulamasından Microsoft Graph çağırın
 
-Bu öğreticide, bir Android uygulaması Microsoft kimlik platformuyla tümleştirebilir öğreneceksiniz. Özellikle, uygulamanızı bir kullanıcının oturumunu, Microsoft Graph API'sini çağırmak için erişim belirteci almak ve Microsoft Graph API için bir istek oluşturun.  
+> [!NOTE]
+> Bu öğretici henüz MSAL for Android sürüm 1,0 kitaplığı ile çalışacak şekilde güncelleştirilmedi. Bu öğreticide yapılandırıldığı gibi önceki bir sürümle birlikte çalışmaktadır.
 
-Kılavuzu tamamladıktan sonra uygulamanızın oturum açma işlemleri kişisel Microsoft hesabı (outlook.com, live.com ve diğerleri dahil) kabul eder ve herhangi bir şirket veya Azure Active Directory kullanan kuruluş iş veya Okul hesapları.
+Bu öğreticide, bir Android uygulamasını Microsoft Identity platformu ile tümleştirmeyi öğreneceksiniz. Uygulamanız bir kullanıcıya oturum açacaktır, Microsoft Graph API 'sini çağırmak için bir erişim belirteci alır ve Microsoft Graph API 'sine bir istek yapar.  
 
-## <a name="how-this-tutorial-works"></a>Bu öğreticide nasıl çalışır?
+> [!div class="checklist"]
+> * Android uygulamasını Microsoft Identity platformu ile tümleştirme
+> * Kullanıcı oturumu açma
+> * Microsoft Graph API 'sini çağırmak için bir erişim belirteci alın
+> * Microsoft Graph API 'sini çağırın.  
 
-![Bu öğretici tarafından oluşturulan örnek uygulamasını nasıl çalıştığını gösterir](../../../includes/media/active-directory-develop-guidedsetup-android-intro/android-intro.svg)
+Bu öğreticiyi tamamladığınızda, uygulamanız kişisel Microsoft hesaplarının (outlook.com, live.com ve diğerleri dahil) oturum açma işlemlerinin yanı sıra Azure Active Directory kullanan herhangi bir şirketten veya kuruluştan iş veya okul hesabı kabul eder.
 
-Bu örnek uygulamasında kullanıcılarının oturumunu ve onların adına veri alın.  Bu veriler, yetkilendirme gerektiren bir korumalı API aracılığıyla (Bu durumda Microsoft Graph API) erişilir.
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
+
+## <a name="how-this-tutorial-works"></a>Bu öğreticinin nasıl çalıştığı
+
+![Bu öğretici tarafından oluşturulan örnek uygulamanın nasıl çalıştığını gösterir](../../../includes/media/active-directory-develop-guidedsetup-android-intro/android-intro.svg)
+
+Bu öğreticideki uygulama, kullanıcıların oturum açmasını ve adına veri almasını sağlayacaktır.  Bu verilere, yetkilendirme gerektiren ve Microsoft Identity platform tarafından korunan korumalı bir API (Microsoft Graph API) üzerinden erişilir.
 
 Daha ayrıntılı belirtmek gerekirse:
 
-* Uygulamanızı bir tarayıcı veya Microsoft Authenticator ve Intune Şirket portalı yoluyla kullanıcının oturum açmasını.
-* Son kullanıcının, uygulamanın istediği izinleri kabul eder. 
-* Uygulamanızı Microsoft Graph API'si için bir erişim belirteci verilir.
-* HTTP isteği Web API'sine erişim belirtecinin dahil edilir.
-* Microsoft Graph yanıta işler.
+* Uygulamanız kullanıcı tarafından bir tarayıcı veya Microsoft Authenticator ile Intune Şirket Portalı oturum açacaktır.
+* Son Kullanıcı, uygulamanızın istediği izinleri kabul eder.
+* Uygulamanıza Microsoft Graph API 'SI için bir erişim belirteci verilmeyecektir.
+* Erişim belirteci, Web API 'sine HTTP isteğine dahil edilir.
+* Microsoft Graph yanıtını işleyin.
 
-Bu örnek, kimlik doğrulaması uygulamak için Microsoft Authentication kitaplığı için Android (MSAL) kullanır. MSAL otomatik olarak yenileme belirteçleri, cihazdaki diğer uygulamalar arasında SSO sunun ve hesapları yönetin.
+Bu örnek, kimlik doğrulamasını uygulamak için Android için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL) kullanır: [com. Microsoft. Identity. Client](https://javadoc.io/doc/com.microsoft.identity.client/msal).
+
+ MSAL, belirteçleri otomatik olarak yenileyecek, cihazdaki diğer uygulamalar arasında çoklu oturum açma (SSO) sunacaktır ve hesapları yönetir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Bu Kılavuzlu Kurulum Android Studio kullanır.
-* Android 16 veya üzeri gereklidir (19 + önerilir).
+* Bu öğretici Android Studio sürüm 3,5 gerektirir.
 
-## <a name="library"></a>Kitaplık
+## <a name="create-a-project"></a>Proje oluşturma
 
-Bu kılavuz, aşağıdaki kimlik doğrulama kitaplığı kullanır:
+Bu öğretici, yeni bir proje oluşturur. Bunun yerine tamamlanan öğreticiyi indirmek isterseniz [kodu indirin](https://github.com/Azure-Samples/ms-identity-android-java/archive/master.zip).
 
-|Kitaplık|Açıklama|
-|---|---|
-|[com.microsoft.identity.client](https://javadoc.io/doc/com.microsoft.identity.client/msal)|Microsoft Authentication Library (MSAL)|
-
-## <a name="set-up-your-project"></a>Projenizi ayarlama
-
-Bu öğreticide, yeni bir proje oluşturur. Tamamlanan öğretici bunun yerine, karşıdan yüklemek isterseniz [kodu indirmek](https://github.com/Azure-Samples/active-directory-android-native-v2/archive/master.zip).
-
-### <a name="create-a-new-project"></a>Yeni bir proje oluşturma
-
-1. Android Studio'yu açın ve seçin **yeni bir Android Studio projesi Başlat**.
-    - Android Studio açıksa seçin **dosya** > **yeni** > **yeni proje**.
-2. Bırakın **boş etkinlik** olduğu gibi seçin **sonraki**.
-3. Uygulamanızı adlandırın, Ayarla `Minimum API level` için **19 ya da daha yeni bir API**, isabet **son**.
-5. İçinde `app/build.gradle`ayarlayın `targetedSdkVersion` 27 için. 
+1. Android Studio açın ve **Yeni bir Android Studio projesi Başlat**' ı seçin.
+2. **Temel etkinlik** ' i seçin ve **İleri ' yi**seçin.
+3. Uygulamanızı adlandırın.
+4. Paket adını kaydedin. Daha sonra Azure portal buraya girersiniz.
+5. **Kotlin** dilini **Java**ile değiştirin.
+6. **En düşük API düzeyini** **api 19** veya üzeri olarak ayarlayın ve **son**' a tıklayın.
+7. Proje görünümünde, açılan listeden **Proje** ' yi seçerek kaynak ve kaynak olmayan proje dosyalarını görüntüleyin, **App/Build. Gradle** dosyasını açın ve `targetSdkVersion` `28`olarak ayarlayın.
 
 ## <a name="register-your-application"></a>Uygulamanızı kaydetme
 
-Uygulamanızı iki yoldan biriyle sonraki iki bölümde açıklandığı gibi kaydedebilirsiniz.
+1. [Azure Portal](https://aka.ms/MobileAppReg) gidin.
+2. [Uygulama kayıtları dikey penceresini](https://ms.portal.azure.com/?feature.broker=true#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredAppsPreview) açın ve **+ Yeni kayıt**' ye tıklayın.
+3. Uygulamanız için bir **ad** girin ve yeniden yönlendirme URI 'Sini ayarlamadan **Kaydet**' e tıklayın.
+4. Görüntülenen bölmenin **Yönet** bölümünde **kimlik doğrulama** >  **+ bir platform** > **Android**ekleyin ' i seçin. (Bu bölümü görmek için dikey pencerenin üst kısmındaki "yeni deneyime geç" seçeneğini seçmeniz gerekebilir.
+5. Projenizin paket adını girin. Kodu indirdiyseniz, bu değer `com.azuresamples.msalandroidapp`.
+6. **Android uygulamanızı yapılandırma** sayfanızın **imza karması** bölümünde, **bir geliştirme imza karması oluşturma** ' ya tıklayın. ve platformunuz için kullanmak üzere KeyTool komutunu kopyalayın.
 
-### <a name="register-your-app"></a>Uygulamanızı kaydetme
+   > [!Note]
+   > KeyTool. exe, Java Development Kit 'in (JDK) bir parçası olarak yüklenir. Ayrıca, KeyTool komutunu yürütmek için OpenSSL aracını da yüklemelisiniz.
 
-1. Git [Azure portalında](https://aka.ms/MobileAppReg) > seçin `New registration`. 
-2. Girin bir **adı** uygulamanızın > `Register`. **Bu aşamada bir yeniden yönlendirme URI'si ayarlamayın**. 
-3. İçinde `Manage` bölümüne gidin `Authentication` > `Add a platform` > `Android`
-    - Proje paket adı girin. Kod indirdiyseniz, bu değer, `com.azuresamples.msalandroidapp`. 
-    - Uygulamanızı hata ayıklama/geliştirme imza karması girin. KeyTool komutu portalda imza karma oluşturmak için kullanın. 
-4. İsabet `Configure` ve depolamak ***MSAL yapılandırma*** için daha sonra. 
+7. KeyTool tarafından oluşturulan **imza karmasını** girin.
+8. `Configure` ' a tıklayın ve **Android yapılandırma** sayfasında görüntülenen **msal yapılandırmasını** kaydederek uygulamanızı daha sonra yapılandırdığınızda girebilmenizi sağlayabilirsiniz.  **Bitti**’ye tıklayın.
 
 ## <a name="build-your-app"></a>Uygulamanızı oluşturun
 
-### <a name="configure-your-android-app"></a>Android uygulamanızı yapılandırın
+### <a name="add-your-app-registration"></a>Uygulama kaydınızı ekleyin
 
-1. Sağ tıklayın **res** > **yeni** > **klasör** > **ham kaynak klasör**
-2. İçinde **uygulama** > **res** > **ham**, adlı yeni bir JSON dosyası oluşturun `auth_config.json` yapıştırın, ***MSALyapılandırma***. Bkz: [daha fazla bilgi için MSAL yapılandırma](https://github.com/AzureAD/microsoft-authentication-library-for-android/wiki/Configuring-your-app).
-   <!-- Workaround for Docs conversion bug -->
-3. İçinde **uygulama** > **bildirimlerini** > **AndroidManifest.xml**, ekleme `BrowserTabActivity` aşağıdaki etkinlik. Bu giriş, Microsoft'un kimlik doğrulaması tamamlandıktan sonra uygulamanıza geri arama sağlar:
+1. Android Studio projesi bölmesinde **app\src\mainres dizinine**gidin.
+2. **Kay** ' a sağ tıklayın ve **Yeni** > **Dizin**' i seçin. Yeni dizin adı olarak `raw` girin ve **Tamam**' a tıklayın.
+3. **App** > **src** > **ana** > **res** > **RAW**' da, `auth_config.json` ADLı yeni bir JSON dosyası oluşturun ve daha önce kaydettiğiniz msal yapılandırmasını yapıştırın. [Daha fazla bilgi için bkz. msal Configuration](https://github.com/AzureAD/microsoft-authentication-library-for-android/wiki/Configuring-your-app).
+4. **App** > **src** > **Main** > **AndroidManifest. xml**' de, aşağıdaki `BrowserTabActivity` etkinliğini uygulama gövdesine ekleyin. Bu giriş, Microsoft 'un, kimlik doğrulamasını tamamladıktan sonra uygulamanıza geri çağırmasını sağlar:
 
     ```xml
     <!--Intent filter to capture System Browser or Authenticator calling back to our app after sign-in-->
@@ -107,23 +113,22 @@ Uygulamanızı iki yoldan biriyle sonraki iki bölümde açıklandığı gibi ka
     </activity>
     ```
 
-    Unutmayın, kullanılan imza karma URL olarak kodlanmış olmamalıdır **AndroidManifest.xml**. 
+    `android:host=` değer için Azure portal kaydettiğiniz paket adını değiştirin.
+    `android:path=` değer için Azure portal kaydettiğiniz anahtar karmasını değiştirin. Imza karması URL kodlamalı olmamalıdır.
 
-4. İçinde **AndroidManifest.xml** ve hemen üzerinde `<application>` etiketi, aşağıdaki izinleri ekleyin:
+5. **AndroidManifest. xml**içinde, `<application>` etiketinin hemen üzerinde aşağıdaki izinleri ekleyin:
 
     ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     ```
 
-5. İçinde `BrowserTabActivity`, değiştirin ***paket adı*** ve ***imza karma*** Azure Portalı'nda kayıtlı değerlere sahip.
+### <a name="create-the-apps-ui"></a>Uygulamanın kullanıcı arabirimini oluşturma
 
-### <a name="create-the-apps-ui"></a>Uygulamanın kullanıcı Arabirimi oluşturma
-
-1. Git **res** > **Düzen**ve ardından açın **activity_main.xml**.
-2. Etkinlik düzenden değiştirme `android.support.constraint.ConstraintLayout` veya için diğer `LinearLayout`.
-3. Ekleme `android:orientation="vertical"` özelliğini `LinearLayout` düğümü.
-4. Aşağıdaki kodu yapıştırın `LinearLayout` düğümünün geçerli içerik değiştirme:
+1. Android Studio proje penceresinde, **uygulama** > **src** > **ana** > **res** > **düzeni** ' ne gidin ve **activity_main. xml** ' i açın ve **metin** görünümünü açın.
+2. Etkinlik yerleşimini değiştirin, örneğin: `<androidx.coordinatorlayout.widget.CoordinatorLayout` `<androidx.coordinatorlayout.widget.DrawerLayout`. 
+3. `LinearLayout` düğümüne `android:orientation="vertical"` özelliğini ekleyin.
+4. Aşağıdaki kodu `LinearLayout` düğümüne yapıştırın ve geçerli içeriği değiştirin:
 
     ```xml
     <TextView
@@ -176,23 +181,24 @@ Uygulamanızı iki yoldan biriyle sonraki iki bölümde açıklandığı gibi ka
     </LinearLayout>
     ```
 
-### <a name="add-msal-to-your-project"></a>MSAL projenize ekleyin.
+### <a name="add-msal-to-your-project"></a>Projenize MSAL ekleyin
 
-1. Android Studio'da **Gradle betiklerini** > **build.gradle (modül: uygulama)** .
-2. Altında **bağımlılıkları**, aşağıdaki kodu yapıştırın:
+1. Android Studio projesi penceresinde, **app** > **src** > **Build. Gradle**' a gidin.
+2. **Bağımlılıklar**altında aşağıdakileri yapıştırın:
 
     ```gradle  
     implementation 'com.android.volley:volley:1.1.1'
-    implementation 'com.microsoft.identity.client:msal:0.3.+'
+    implementation 'com.microsoft.identity.client:msal:0.3+'
     ```
 
-### <a name="use-msal"></a>MSAL kullanın 
+### <a name="use-msal"></a>MSAL kullanma
 
-Sonraki birkaç bölümler içindeki değişiklikler yapacak `MainAcitivty.java`. Biz aracılığıyla ekleyin ve MSAL uygulamanızda kullanmak için gereken her adım anlatarak.
+Şimdi uygulamanızda MSAL eklemek ve kullanmak için `MainActivity.java` içinde değişiklikler yapın.
+Android Studio projesi penceresinde, **ana** > **Java** > com. example > **App** > **src** gidin **. ( uygulamanız)** ve `MainActivity.java`açın.
 
-#### <a name="required-imports"></a>Gerekli içeri aktarmaları
+#### <a name="required-imports"></a>Gerekli içeri aktarmalar
 
-Projenize aşağıdaki içeri aktarmaları ekleyin: 
+`MainActivity.java`üst kısmına aşağıdaki içeri aktarmaları ekleyin:
 
 ```java
 import android.app.Activity;
@@ -213,11 +219,11 @@ import com.microsoft.identity.client.*;
 import com.microsoft.identity.client.exception.*;
 ```
 
-#### <a name="instantiating-msal"></a>MSAL örnekleme 
+#### <a name="instantiate-msal"></a>MSAL örneği oluştur
 
-İçinde `MainActivity` sınıfı, gereken MSAL örneklemek hangi hakkında birkaç yapılandırmalarını uygulama kapsamlar dahil olmak üzere yapın ve web API'sine erişmek için istiyoruz. 
+`MainActivity` sınıfında, erişim sağlamak istediğimiz kapsamları ve Web API 'sini de içerecek şekilde, uygulamanın ne yapacaklarıyla ilgili birkaç yapılandırmaya sahip MSAL örneği oluşturmanız gerekir.
 
-İçine aşağıdaki değişkenleri kopyalayın `MainActivity`:
+Aşağıdaki değişkenleri `MainActivity` sınıfı içine kopyalayın:
 
 ```java
 final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
@@ -233,7 +239,7 @@ private PublicClientApplication sampleApp;
 private IAuthenticationResult authResult;
 ```
 
-Artık MSAL oluşturmak için aşağıdaki kodu kopyalayın `onCreate(...)` yöntemi:
+MSAL örneğini oluşturmak için `onCreate()` içeriğini aşağıdaki kodla değiştirin:
 
 ```java
 super.onCreate(savedInstanceState);
@@ -273,19 +279,19 @@ sampleApp.getAccounts(new PublicClientApplication.AccountsLoadedCallback() {
 });
 ```
 
-Yukarıdaki kod bloğunu uygulamanız aracılığıyla açtıklarında sessizce kullanıcılarının oturumunu dener `getAccounts(...)` ve başarılı olursa, `acquireTokenSilentAsync(...)`.  Sonraki birkaç bölümde var. çalışması için oturum açmış olan hesap yok size geri çağırma işleyiciyi uygulayacaksınız. 
+Yukarıdaki kod, uygulamanızı `getAccounts()` aracılığıyla açtıklarında sessizce oturum açmaya çalışır ve başarılı olursa `acquireTokenSilentAsync()`.  Sonraki birkaç bölümde, oturum açmış bir hesap olmadığı için geri çağırma işleyicisini uygulayacağız.
 
-#### <a name="use-msal-to-get-tokens"></a>MSAL belirteçlerini almak için kullanın
+#### <a name="use-msal-to-get-tokens"></a>Belirteçleri almak için MSAL kullanma
 
-Şimdi biz uygulamanın UI işleme mantığı ve belirteçleri MSAL etkileşimli olarak alma uygulayabilirsiniz. 
+Şimdi, MSAL aracılığıyla uygulamanın kullanıcı arabirimi işleme mantığını uygulayabilir ve belirteçleri etkileşimli olarak elde edebilirsiniz.
 
-MSAL, belirteç almaya yönelik başlıca iki yöntem sunar: `acquireTokenSilentAsync` ve `acquireToken`.  
+MSAL belirteçleri almak için iki birincil yöntem sunar: `acquireTokenSilentAsync()` ve `acquireToken()`.  
 
-`acquireTokenSilentAsync` bir kullanıcı ve get belirteçleri hesabınız varsa herhangi bir kullanıcı etkileşimi olmadan oturum açtığında. MSAL başarılı olursa, bu başarısız olursa, uygulama belirteçleri üretir iletimli olacak bir `MsalUiRequiredException`.  Bu özel durum oluşturulur veya kullanıcı deneyimi (kimlik bilgileri, mfa veya diğer koşullu ilkeleri olabilir veya gerekli olmayabilir erişim) etkileşimli bir oturum için isterseniz daha sonra kullanabileceğiniz `acquireToken`.  
+bir hesap varsa Kullanıcı etkileşimi olmadan bir kullanıcının oturumunu `acquireTokenSilentAsync()` ve belirteçleri alırlar. Başarılı olursa, MSAL belirteçleri uygulamanıza iletilecektir, bu işlem başarısız olursa, bir `MsalUiRequiredException`oluşturur.  Bu özel durum oluşturulursa veya kullanıcının etkileşimli oturum açma deneyimine sahip olmasını istiyorsanız (kimlik bilgileri, MFA veya diğer koşullu erişim ilkeleri olabilir veya gerekli olmayabilir), `acquireToken()`kullanın.  
 
-`acquireToken` her zaman kullanıcı Arabirimi, kullanıcının oturum açmasını ve belirteçleri almak çalışırken gösterilir; Ancak, bu tarayıcıda oturum tanımlama bilgileri veya Microsoft authenticator hesap etkileşimli SSO bir deneyim sunmak için kullanabilirsiniz. 
+`acquireToken()` Kullanıcı oturum açmaya çalışırken ve belirteçleri alırken Kullanıcı ARABIRIMINI görüntüler. Ancak etkileşimli-SSO deneyimi sağlamak için tarayıcıda oturum tanımlama bilgilerini veya Microsoft Authenticator içindeki bir hesabı kullanabilir.
 
-Başlamak için aşağıdaki üç kullanıcı Arabirimi yöntemi içinde oluşturmanız `MainActivity` sınıfı:
+`MainActivity` sınıfı içinde aşağıdaki üç UI yöntemini oluşturun:
 
 ```java
 /* Set the UI for successful token acquisition data */
@@ -318,7 +324,7 @@ private void onCallGraphClicked() {
 }
 ```
 
-Ardından, geçerli etkinliği almak ve sessiz & etkileşimli geri çağırmaları işlemek için bir yöntem ekleyin:
+Geçerli etkinliği almak ve sessiz & etkileşimli geri çağırmaları işlemek için aşağıdaki yöntemleri ekleyin:
 
 ```java
 public Activity getActivity() {
@@ -412,13 +418,14 @@ private AuthenticationCallback getAuthInteractiveCallback() {
 }
 ```
 
-#### <a name="use-msal-for-sign-out"></a>Kullanmak için MSAL oturum kapatma
+#### <a name="use-msal-for-sign-out"></a>Oturumu kapatma için MSAL kullanma
 
-Ardından, için destek ekleyeceğiz uygulamamız için oturum kapatma. 
+Ardından, oturum kapatma desteği ekleyin.
 
-Unutmayın, oturum kapatma MSAL ile bir kullanıcı ile ilgili tüm bilinen bilgileri bu uygulamadan kaldırır, ancak kullanıcı kendi cihazında hala etkin bir oturuma sahip önemlidir. Kullanıcının oturum açmak çalışırsa yeniden bunlar etkileşim görebilirsiniz, ancak etkin cihaz oturumu nedeniyle kimlik bilgilerini yeniden girmeniz gerekmez. 
+> [!Important]
+> MSAL ile oturum açmak, bir kullanıcıyla ilgili tüm bilinen bilgileri uygulamadan kaldırır, ancak kullanıcının cihazında etkin bir oturumu olmaya devam edecektir. Kullanıcı yeniden oturum açmayı denerse, oturum açma kullanıcı arabirimini görebilir, ancak cihaz oturumu hala etkin olduğundan kimlik bilgilerini yeniden girmeniz gerekebilir.
 
-Oturum kapatma ekleme, tüm hesapları arasında geçiş yapar ve bunları kaldırır uygulamanıza aşağıdaki yöntemi kopyalayın:
+Oturum kapatma özelliği eklemek için, `MainActivity` sınıfının içine aşağıdaki yöntemi ekleyin. Bu yöntem tüm hesaplar boyunca geçiş yapar ve bunları kaldırır:
 
 ```java
 /* Clears an account's tokens from the cache.
@@ -459,18 +466,18 @@ private void onSignOutClicked() {
 }
 ```
 
-#### <a name="call-the-microsoft-graph-api"></a>Microsoft Graph API çağırma
+#### <a name="call-the-microsoft-graph-api"></a>Microsoft Graph API 'sini çağırma
 
-Biz bir belirteç başarıyla edindiğiniz sonra Microsoft Graph API için bir istek yapabiliyoruz. Erişim belirteci içinde olacak `AuthenticationResult` kimlik doğrulama geri çağırma 's içinde `onSuccess(...)` yöntemi. Uygulamanızı, yetkili bir isteği oluşturmak için HTTP üst bilgisi için erişim belirteci eklemeniz gerekir:
+Bir belirteç aldıktan sonra, [MICROSOFT Graph API](https://graph.microsoft.com) 'sine bir istek yapabiliriz. erişim belirteci, kimlik doğrulama geri çağrısının `onSuccess()` yöntemi içindeki `AuthenticationResult` içinde olacaktır. Yetkilendirilmiş bir istek oluşturmak için, uygulamanızın erişim belirtecini HTTP üstbilgisine eklemesi gerekir:
 
-| Üstbilgi anahtarı    | value                 |
+| üst bilgi anahtarı    | değer                 |
 | ------------- | --------------------- |
-| Authorization | Taşıyıcı \<erişim belirteci > |
+| Yetkilendirme | Taşıyıcı \<erişim-belirteç > |
 
-Kod içinde bunun için uygulamanızın çağrı grafı ve kullanıcı arabirimini güncelleştirmek için aşağıdaki iki yöntemi ekleyin: 
+Grafiği çağırmak ve Kullanıcı arabirimini güncelleştirmek için `MainActivity` sınıfının içine aşağıdaki iki yöntemi ekleyin:
 
 ```java
-    /* Use Volley to make an HTTP request to the /me endpoint from MS Graph using an access token */
+/* Use Volley to make an HTTP request to the /me endpoint from MS Graph using an access token */
 private void callGraphAPI() {
     Log.d(TAG, "Starting volley request to graph");
 
@@ -524,24 +531,31 @@ private void updateGraphUI(JSONObject graphResponse) {
 }
 ```
 
-Daha fazla bilgi edinin [Microsoft Graph API](https://graph.microsoft.com)!
+#### <a name="multi-account-applications"></a>Çoklu hesap uygulamaları
 
-#### <a name="multi-account-applications"></a>Birden çok hesap uygulamalar
-
-Bu uygulama, tek bir hesap senaryo için oluşturulmuştur. MSAL birden çok hesap senaryoları destekler, ancak bazı ek işleri uygulamalardan gerektirir. Belirteçleri gerektiren her eylem için kullanmak istediğiniz hesabı seçin kullanıcının yardımcı olmak için kullanıcı Arabirimi oluşturmanız gerekir. Alternatif olarak, uygulamanızı aracılığıyla kullanacağınız hesabı seçmek için bir buluşsal yöntem uygulayabilirsiniz `getAccounts(...)` yöntemi. 
+Bu uygulama, tek bir hesap senaryosu için oluşturulmuştur. MSAL ayrıca çoklu hesap senaryolarını destekler, ancak uygulamalardan bazı ek işler gerektirir. Kullanıcının belirteç gerektiren her eylem için hangi hesabı kullanmak istediğini belirlemek için kullanıcı ARABIRIMI oluşturmanız gerekir. Alternatif olarak, uygulamanız `getAccounts()` yöntemi aracılığıyla kullanılacak hesabı seçmek için buluşsal yöntem uygulayabilir.
 
 ## <a name="test-your-app"></a>Uygulamanızı test etme
 
 ### <a name="run-locally"></a>Yerel olarak çalıştırma
 
-Yukarıdaki kod izlediyseniz, bir test cihaz veya öykünücü uygulaması derleyecek ve deneyin. Oturum açmak ve belirteçleri almak için Azure AD veya kişisel olmalıdır Microsoft hesapları! Oturum açma kullanıcı sonra bu uygulamanın Microsoft Graph'teki döndürülen veriler görüntüler `/me` uç noktası. 
+Uygulamayı derleyin ve bir test cihazında veya öykünücüsünde dağıtın. Azure AD veya kişisel Microsoft hesapları için oturum açabiliyor ve belirteçleri alabilmesi gerekir.
 
-Herhangi bir sorun varsa, bu belge veya MSAL kitaplığında bir sorun açın ve bunu bize bildirin çekinmeyin. 
+Oturum açtıktan sonra, uygulama Microsoft Graph `/me` uç noktasından döndürülen verileri görüntüler.
 
-### <a name="consent-to-your-app"></a>Uygulamanıza onay
+### <a name="consent"></a>İzniniz
 
-Herhangi bir kullanıcı oturum açtığında, uygulamanıza ilk kez bunlar Microsoft kimlik tarafından istenen izinleri kabul istenir.  Çoğu kullanıcı tümleştirip özelliğine sahip olsa da, bazı Azure AD kiracılarıyla yöneticilerin tüm kullanıcılar adına onay vermesini gerektiren kullanıcı onayı - devre dışı bırakıldı.  Bu senaryoyu desteklemek için Azure Portal'da uygulamanızın kapsamlarını kaydetmek emin olun.
+Herhangi bir Kullanıcı uygulamanızda ilk kez oturum açtığında, bu kullanıcılara istenen izinleri onaylaması için Microsoft kimliği sorulur.  Birçok kullanıcı kabul etme yeteneğine sahip olsa da, bazı Azure AD kiracılar, yöneticilerin tüm kullanıcılar adına onay vermesini gerektiren Kullanıcı onayını devre dışı bırakmış olur. Bu senaryoyu desteklemek için, uygulamanızın kapsamlarını Azure portal kaydedin.
 
-## <a name="help-and-support"></a>Yardım ve Destek
+## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu öğreticide veya Microsoft kimlik platformu ile herhangi bir sorun oluştu.? Bkz: [Yardım ve Destek](https://docs.microsoft.com/azure/active-directory/develop/developer-support-help-options)
+Artık gerekli değilse, [Uygulamanızı kaydetme](#register-your-application) adımındaki oluşturduğunuz uygulama nesnesini silin.
+
+## <a name="get-help"></a>Yardım alın
+
+Bu öğreticiyle veya Microsoft Identity platformu ile ilgili sorun yaşıyorsanız [Yardım ve destek](https://docs.microsoft.com/azure/active-directory/develop/developer-support-help-options) bölümünü ziyaret edin.
+
+Microsoft Identity platformunu geliştirmemize yardımcı olun. Kısa bir iki sorulık anketi tamamlayarak düşüncelerinizi bize söyleyin.
+
+> [!div class="nextstepaction"]
+> [Microsoft Identity platform Anketi](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRyKrNDMV_xBIiPGgSvnbQZdUQjFIUUFGUE1SMEVFTkdaVU5YT0EyOEtJVi4u)

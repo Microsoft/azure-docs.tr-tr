@@ -40,6 +40,8 @@
       items:
         - name: Portal
           href: role-assignments-portal.md
+        - name: Portal - konuk kullanıcılar
+          href: role-assignments-external-users.md
         - name: PowerShell
           href: role-assignments-powershell.md
         - name: Azure CLI
@@ -72,8 +74,6 @@
       href: change-history-report.md
     - name: Tüm abonelikleri yönetmek için erişimi yükseltme
       href: elevate-access-global-admin.md
-    - name: Dış kullanıcıların erişimini yönetme
-      href: role-assignments-external-users.md
     - name: Klasik yöneticiler
       href: classic-administrators.md
     - name: Sorun giderme

@@ -1,6 +1,6 @@
 ---
-title: Microsoft Authenticator uygulamasına - Azure Active Directory hesapları ekleme hakkında genel bakış | Microsoft Docs
-description: İki aşamalı doğrulama için Microsoft Authenticator uygulaması, iş ve kişisel hesapları ekleme hakkında genel bakış.
+title: Kimlik doğrulayıcı uygulamasına hesap ekleme hakkında genel bakış-Azure AD
+description: İki öğeli doğrulama için iş ve kişisel hesaplarınızı Microsoft Authenticator uygulamasına nasıl ekleyeceğiniz hakkındaki içeriklere yönelik bağlantılar.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -12,45 +12,42 @@ ms.topic: overview
 ms.date: 01/24/2019
 ms.author: lizross
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 34455cac61dd3b1f1251d4bc2003bd8b029de031
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 16244be7dee9faaa15105f9dc0ac6c074230d243
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60474051"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820271"
 ---
-# <a name="overview-about-adding-accounts-to-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasına hesapları ekleme hakkında genel bakış
+# <a name="overview-about-adding-accounts-to-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasına hesap ekleme hakkında genel bakış
 
-Microsoft Authenticator uygulamasını hesaplarınıza iki aşamalı doğrulama kullanırsanız oturum yardımcı olur. İki Faktörlü doğrulama özellikle hassas bilgileri görüntülerken hesaplarınızı daha güvenli bir şekilde erişmenize yardımcı olur. Parolaları bu nedenle Unutulan, çalınması veya ele geçirilen, iki Faktörlü doğrulama kesmek diğer kişiler için daha zor hale getirerek hesabınızın korunmasına yardımcı olan bir ek güvenlik adımdır.
+Microsoft Authenticator uygulaması, iki öğeli doğrulama kullanırsanız hesaplarınızda oturum açmanıza yardımcı olur. İki öğeli doğrulama, özellikle de hassas bilgileri görüntülerken hesaplarınıza güvenli bir şekilde erişmenize yardımcı olur. Parolaların unutulabileceği, çalındığı veya güvenliği aşılmış olabileceğinden, iki öğeli doğrulama, diğer kişilerin kesintiye uğraması için hesabınızı korumanıza yardımcı olan ek bir güvenlik adımıdır.
 
 > [!Important]
-> Microsoft Authenticator uygulamasını iki aşamalı doğrulama kullanan tüm uygulamalarda ve zamana bağlı bir kerelik parola (TOTP) standartlarını destekleyen herhangi bir hesabı ile çalışır.
-> 
+> Microsoft Authenticator uygulaması, iki öğeli doğrulama kullanan tüm uygulamalar ve zaman tabanlı bir kerelik parola (TOTP) standartlarını destekleyen herhangi bir hesap ile birlikte kullanılabilir.
+>
 > Bu içerik kullanıcılara yöneliktir. Yöneticiyseniz, Azure Active Directory (Azure AD) ortamınızı ayarlama ve yönetme hakkında daha fazla bilgi için [Azure Active Directory Belgelerine](https://docs.microsoft.com/azure/active-directory) bakabilirsiniz.
 
-Microsoft Authenticator uygulamasını birden çok yolla kullanabilirsiniz:
+Microsoft Authenticator uygulamasını, aşağıdakiler dahil olmak üzere birden çok şekilde kullanabilirsiniz:
 
-- Sonra kullanıcı adı ve parolanızla oturum ikinci bir doğrulama yöntemi için bir istem sağlama.
+- Kullanıcı adınız ve parolanızla oturum açtıktan sonra ikinci bir doğrulama yöntemi istemi sağlama.
 
-- Oturum açma olmadan parola gerektirme, parmak izi, yüz tanıma veya PIN kullanıcı adınızı ve mobil Cihazınızı kullanarak sağlama.
+- Kullanıcı adınızı ve mobil cihazınızı parmak izi, yüz veya PIN 'iniz ile kullanarak oturum açmaya gerek kalmadan oturum açma olanağı sağlama.
 
-## <a name="what-account-types-can-i-add"></a>Hangi hesap türleri ekleyebilirim
-Her gün kullandığınız birçok hesap için iki aşamalı doğrulamayı etkinleştirebilirsiniz dahil olmak üzere:
+## <a name="what-account-types-can-i-add"></a>Hangi hesap türlerini ekleyebilirim?
 
-|Hesap türü|Açıklama|
-|------------|-----------|
-|İş veya okul hesapları|Hesabın iş veya Okul kuruluşunuz, örneğin verdiğiniz alain@contoso.com.|
-|Kişisel hesaplar|Microsoft ve Microsoft olmayan hesapların, kişisel açılır, Outlook.com, Xbox LIVE, Google, Facebook ve daha fazlası gibi.|
+Her gün kullandığınız birçok hesap için iki öğeli doğrulamayı açabilirsiniz, örneğin:
 
-## <a name="in-this-section"></a>Bu bölümde
+| Hesap türü | Açıklama |
+| ------------ | ----------- |
+| İş veya okul hesapları | İş veya okul kuruluşunuzun size verdiği hesap, örneğin alain@contoso.com. |
+| Kişisel hesaplar | Outlook.com, Xbox LIVE, Google, Facebook ve daha fazlası gibi kişisel olarak açtığınız Microsoft ve Microsoft olmayan hesaplar. |
 
-|Makale |Açıklama |
-|------|------------|
-|[İş veya Okul hesabınızı ekleyin](user-help-auth-app-add-work-school-account.md)|İki aşamalı doğrulama için Microsoft Authenticator uygulaması için iş veya Okul hesabınızı eklemek açıklar.|
-|[Kişisel Microsoft hesabınızı ekleyin](user-help-auth-app-add-personal-ms-account.md)|Microsoft Kişisel hesaplarınız için iki aşamalı doğrulama ve telefonla oturum açma (diğer adıyla parolasız oturum açma) eklemeyi açıklar.|
-|[Microsoft olmayan hesabınızı ekleyin](user-help-auth-app-add-non-ms-account.md)|Microsoft olmayan kişisel hesaplarınız için iki aşamalı doğrulama eklemeyi açıklar.|
-|[El ile hesabınızı ekleyin](user-help-auth-app-add-account-manual.md)|Kameranız QR kodunu yakalarsanız el ile hesabınızı Microsoft Authenticator uygulamasına nasıl ekleneceğini açıklar.|
+## <a name="articles-about-how-to-add-different-accounts"></a>Farklı hesap ekleme makaleleri
 
-
-
-
+| Makale |Açıklama |
+| ------|------------|
+| [İş veya okul hesabınızı ekleyin](user-help-auth-app-add-work-school-account.md) | İki öğeli doğrulama için iş veya okul hesabınızın Microsoft Authenticator uygulamasına nasıl ekleneceğini açıklar. |
+| [Kişisel Microsoft hesabı ekleyin](user-help-auth-app-add-personal-ms-account.md) | İki öğeli doğrulama ve telefon oturum açma (passwordless oturum açma olarak da bilinir) için Microsoft kişisel hesaplarınızın nasıl ekleneceğini açıklar. |
+| [Microsoft hesabı olmayan bir eklenti ekleyin](user-help-auth-app-add-non-ms-account.md) | Microsoft dışı kişisel hesaplarınızın iki öğeli doğrulama için nasıl ekleneceğini açıklar. |
+| [Hesabınızı el ile ekleyin](user-help-auth-app-add-account-manual.md) | Kameranızın QR kodunu yakalayamaz durumunda hesabınızın Microsoft Authenticator uygulamasına el ile nasıl ekleneceğini açıklar. |

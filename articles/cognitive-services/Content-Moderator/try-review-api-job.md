@@ -1,67 +1,67 @@
 ---
-title: REST API Konsolu - Content Moderator denetimi işleri kullanma
-titlesuffix: Azure Cognitive Services
-description: Azure Content Moderator, görüntü veya metin içeriği için uçtan uca içerik denetleme işleri başlatmak için gözden geçirme API iş işlemlerini kullanın.
+title: REST API konsolu ile denetleme işlerini kullanın Content Moderator
+titleSuffix: Azure Cognitive Services
+description: Azure Content Moderator 'de görüntü veya metin içeriğine yönelik uçtan uca içerik denetleme işleri başlatmak için API 'nin iş işlemlerini gözden geçir ' i kullanın.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
-ms.topic: article
-ms.date: 03/18/2019
-ms.author: sajagtap
-ms.openlocfilehash: 7827cee2af2dfc0c1fddc407c1d146dc9a66c514
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.topic: conceptual
+ms.date: 10/24/2019
+ms.author: pafarley
+ms.openlocfilehash: 83ee8e0c0583cba72da8702e196f0f38128f8d8a
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60607637"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72935963"
 ---
-# <a name="define-and-use-moderation-jobs-rest"></a>Tanımlama ve denetleme işleri (REST) kullanma
+# <a name="define-and-use-moderation-jobs-rest"></a>Denetleme işlerini tanımlama ve kullanma (REST)
 
-İçerik denetleme, iş akışları ve incelemeleri işlevsellik için sarmalayıcı türü bir denetimi iş görür. Bu kılavuzda başlatmak ve içerik denetleme işleri denetlemek için iş REST API'lerini kullanmayı gösterir. API'leri yapısını anladığınızda, herhangi bir REST uyumlu platform çağrıları kolayca bağlantı noktası.
+Bir denetleme işi, içerik denetleme, iş akışları ve İncelemeler işlevleri için bir sarmalayıcı türü görevi görür. Bu kılavuzda, içerik denetleme işlerini başlatmak ve denetlemek için iş REST API 'Lerinin nasıl kullanılacağı gösterilmektedir. API 'lerin yapısını anladıktan sonra, bu çağrıları REST ile uyumlu herhangi bir platforma kolayca bağlayabilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Oturum açma veya hesap üzerinde Content Moderator oluşturmak [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/) site.
-- (İsteğe bağlı) [Özel bir iş akışını tanımlayan](./Review-Tool-User-Guide/Workflows.md) ; işinizi ile kullanılacak varsayılan iş akışı kullanabilirsiniz.
+- Content Moderator [İnceleme aracı](https://contentmoderator.cognitive.microsoft.com/) sitesinde oturum açın veya hesap oluşturun.
+- Seçim İşle birlikte kullanılacak [özel bir iş akışı tanımlayın](./Review-Tool-User-Guide/Workflows.md) ; Varsayılan iş akışını da kullanabilirsiniz.
 
 ## <a name="create-a-job"></a>Bir iş oluşturma
 
-Bir denetimi işi oluşturmak için Git [iş - oluşturma](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) API başvuru sayfası ve anahtar bölgenize ilişkin düğmeyi seçin (Bu uç nokta URL'sini bulabileceğiniz **kimlik bilgilerini** sayfasının [gözden geçirme Aracı](https://contentmoderator.cognitive.microsoft.com/)). Bu, kolayca oluşturun ve REST API çağrılarının API Konsolu başlatır.
+Bir denetleme işi oluşturmak için, [iş-](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) API başvurusu Oluştur sayfasına gidin ve abonelik bölgeniz için düğmeyi seçin ( [Gözden geçirme aracının](https://contentmoderator.cognitive.microsoft.com/) **kimlik BILGILERI** sayfasında bunu uç nokta URL 'sinde bulabilirsiniz). Bu, REST API çağrılarını kolayca oluşturabileceğiniz ve çalıştırabileceğiniz API konsolunu başlatır.
 
-![İş - kayıt seçimi sayfası oluşturma](images/test-drive-job-1.png)
+![İş-sayfa bölgesi seçimi oluştur](images/test-drive-job-1.png)
 
-### <a name="enter-rest-call-parameters"></a>REST çağrısı parametreler girin
+### <a name="enter-rest-call-parameters"></a>REST çağrı parametrelerini girin
 
-REST araması oluşturmak için aşağıdaki değerleri girin:
+REST çağrısını oluşturmak için aşağıdaki değerleri girin:
 
-- **teamName**: Ayarlarken oluşturduğunuz takım kimliği, [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/) hesabı (bulunan **kimliği** gözden geçirme aracının kimlik bilgilerini ekranda alan).
-- **ContentType**: Bu, "Image", "Metin" veya "Görüntü" olabilir.
-- **ContentID**: Bir özel kimlik dizesi. Bu dize API için geçirilen ve geri döndürdü. İç tanımlayıcılar veya meta veri denetimi iş sonuçları ile ilişkilendirmek için kullanışlıdır.
-- **workflowname**: İş akışı, daha önce oluşturduğunuz (veya varsayılan iş akışı için "varsayılan") adı.
-- **CallbackEndpoint**: (İsteğe bağlı) Gözden Geçirme tamamlandığında, geri çağırma bilgilerini almak için URL.
-- **Ocp-Apim-Subscription-Key**: Content Moderator anahtar. Bunu şirket bulabilirsiniz **ayarları** sekmesinde [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com).
+- **TeamName**: [İnceleme aracı](https://contentmoderator.cognitive.microsoft.com/) hesabınızı ayarlarken oluşturduğunuz takım kimliği (gözden geçirme aracınızın **kimlik bilgileri ekranındaki kimlik alanında bulunur** ).
+- **ContentType**: Bu "görüntü", "metin" veya "video" olabilir.
+- **ContentID**: özel bir tanımlayıcı dizesi. Bu dize, API 'ye geçirilir ve geri çağırma yoluyla döndürülür. Bir denetleme işinin sonuçlarıyla iç tanımlayıcıları veya meta verileri ilişkilendirmek için faydalıdır.
+- **Workflowname**: daha önce oluşturduğunuz iş akışının adı (veya varsayılan iş akışı için "varsayılan").
+- **Callbackendpoint**: (isteğe bağlı) Gözden geçirme tamamlandığında geri çağırma BILGILERINI alacak URL.
+- **OCP-apim-Subscription-Key**: Content moderator anahtarınız. Bunu [İnceleme aracının](https://contentmoderator.cognitive.microsoft.com) **Ayarlar** sekmesinde bulabilirsiniz.
 
-### <a name="fill-in-the-request-body"></a>İstek gövdesinde doldurun
+### <a name="fill-in-the-request-body"></a>İstek gövdesini doldur
 
-Bir alan, REST çağrısı gövdesi içerir **ContentValue**. Metin yönetme, ham metin içeriği yapıştırın veya görüntü/video yönetme bir resim veya video URL'si girin. Aşağıdaki örnek resim URL'si kullanabilirsiniz: [https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg](https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg)
+REST çağrınızın gövdesi bir alan, **Contentvalue**içeriyor. Metni moderorsanız ham metin içeriğine yapıştırın veya görüntü/video oluşturuyorsanız bir görüntü veya video URL 'SI girin. Aşağıdaki örnek görüntü URL 'sini kullanabilirsiniz: [https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg](https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg)
 
-![Proje - konsol sorgu parametreleri, üst bilgileri ve istek gövdesi kutusu oluşturma](images/job-api-console-inputs.PNG)
+![İş-konsol sorgu parametrelerini, üstbilgilerini ve Istek gövdesi kutusunu oluşturma](images/job-api-console-inputs.PNG)
 
-### <a name="submit-your-request"></a>İsteğinizi gönderin
+### <a name="submit-your-request"></a>İsteğinizi gönderme
 
-**Gönder**’i seçin. İşlem başarılı olursa **yanıt durumu** olduğu `200 OK`ve **yanıt içeriği** kutusu iş Kimliğini görüntüler. Aşağıdaki adımlarda kullanmak için bu kimliği kopyalayın.
+**Gönder**’i seçin. İşlem başarılı olursa, **yanıt durumu** `200 OK`olur ve **yanıt içeriği** kutusunda iş için bir kimlik görüntülenir. Aşağıdaki adımlarda kullanmak için bu KIMLIĞI kopyalayın.
 
-![Gözden geçirme - Konsolu yanıt içerik kutusu İnceleme Kimliğini görüntüler oluşturma](images/test-drive-job-3.PNG)
+![İnceleme-konsol yanıt içeriği oluştur kutusu İnceleme KIMLIĞINI görüntüler](images/test-drive-job-3.PNG)
 
-## <a name="get-job-status"></a>İş durumunu Al
+## <a name="get-job-status"></a>İş durumunu al
 
-Çalışan veya tamamlanmış bir işin ayrıntılarını ve durumunu almak için Git [iş - Al](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c3) API başvuru sayfası ve bölgenize ilişkin düğmeyi seçin (anahtarınızı yönetilir bölge).
+Çalışan veya tamamlanmış bir işin durumunu ve ayrıntılarını almak için, [iş-](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c3) API başvurusunu Al sayfasına gidin ve bölgenizin (anahtarınızın yönettiği bölge) düğmesini seçin.
 
-![İş - Get kayıt seçimi](images/test-drive-region.png)
+![İş-bölge seçimini al](images/test-drive-region.png)
 
-Yukarıdaki bölümde olduğu gibi REST çağrısı parametrelerini girin. Bu adım için **JobId** , işi oluştururken aldığınız benzersiz kimliği dizesi. **Gönder**’i seçin. İşlem başarılı olursa **yanıt durumu** olduğu `200 OK`ve **yanıt içeriği** kutusu işi aşağıdaki gibi bir JSON biçiminde görüntüler:
+REST çağrı parametrelerini yukarıdaki bölümde olduğu gibi girin. Bu adım için iş **kimliği, işi** oluştururken aldığınız benzersiz kimlik dizesidir. **Gönder**’i seçin. İşlem başarılı olursa, **yanıt durumu** `200 OK`olur ve **yanıt içeriği** kutusu, işi aşağıdaki gibi JSON biçiminde görüntüler:
 
 ```json
 {  
@@ -111,12 +111,12 @@ Yukarıdaki bölümde olduğu gibi REST çağrısı parametrelerini girin. Bu ad
 }
 ```
 
-![Proje: REST çağrısı yanıt alma](images/test-drive-job-5.png)
+![İş-REST çağrısı yanıtını al](images/test-drive-job-5.png)
 
-### <a name="examine-the-new-reviews"></a>Yeni review(s) inceleyin
+### <a name="examine-the-new-reviews"></a>Yeni Gözden geçirme (ler) i inceleyin
 
-İçerik işinizi İnceleme oluşturulmasında oluştuysa, içinde görüntüleyebilirsiniz [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com). Seçin **gözden geçirme** > **görüntü**/**metin**/**Video** (bağlı olarak, içerik kullanılır). İçerik görünmelidir, insan tarafından İnceleme için hazır. İnsan moderatör otomatik olarak atanan etiketleri ve tahmin verilerini gözden geçirmeleri ve son denetimi karar gönderdikten sonra işleri API tüm bu bilgileri atanan geri çağırma uç noktası uç noktasına gönderir.
+İçerik işiniz bir gözden geçirme oluşturma işlemi ile sonuçlanmasıyla, [Gözden geçirme aracında](https://contentmoderator.cognitive.microsoft.com)görüntüleyebilirsiniz.  > **görüntüsünü** **gözden geçir**/**metin**/**video** (kullandığınız içeriğe göre) seçeneğini belirleyin. İçerik, insan gözden geçirmesi için hazırlanmalıdır. İnsan aracı otomatik olarak atanan etiketleri ve tahmin verilerini gözden geçirdikten ve son bir denetleme kararı gönderdikten sonra, işler API 'SI tüm bu bilgileri belirtilen geri çağırma uç noktası uç noktasına gönderir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu kılavuzda, oluşturma ve içerik denetleme işleri REST API kullanarak sorgulama hakkında bilgi edindiniz. Ardından, işleri gibi bir denetimi uçtan uca senaryo tümleştirme [E-ticaret denetimi](./ecommerce-retail-catalog-moderation.md) öğretici.
+Bu kılavuzda, REST API kullanarak içerik denetleme işleri oluşturmayı ve sorgulamayı öğrendiniz. Ardından, işleri [E-ticaret denetleme](./ecommerce-retail-catalog-moderation.md) öğreticisi gibi uçtan uca bir denetleme senaryosuna tümleştirin.

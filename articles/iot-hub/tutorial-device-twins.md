@@ -1,28 +1,24 @@
 ---
 title: Azure IoT Hub’dan cihaz durumunu eşitleme | Microsoft Docs
-description: Cihaz ikizlerini kullanarak cihazlarınız ile IoT hub’ınız arasında durumu eşitleme
+description: Cihazlarınızı buluttan yapılandırmak ve cihazlarınızdan durum ve uyumluluk verileri almak için cihaz ikizlerini nasıl kullanacağınızı öğrenin.
 services: iot-hub
-documentationcenter: ''
 author: wesmc7777
-manager: philmea
 ms.author: wesmc
 ms.service: iot-hub
 ms.devlang: dotnet
 ms.topic: tutorial
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 06/21/2019
 ms.custom: mvc
-ms.openlocfilehash: 4ad3013f6914abbf4c75676e7423848dff9d5e9a
-ms.sourcegitcommit: 08138eab740c12bf68c787062b101a4333292075
+ms.openlocfilehash: 647182389ec0ad4cb2b80a0676812961cb9be770
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/22/2019
-ms.locfileid: "67330367"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890428"
 ---
 <!-- **TODO** Update publish config with repo paths before publishing! -->
 
-# <a name="tutorial-configure-your-devices-from-a-back-end-service"></a>Öğretici: Bir arka uç hizmetinden cihazlarınızı yapılandırmak
+# <a name="tutorial-configure-your-devices-from-a-back-end-service"></a>Öğretici: Bir arka uç hizmetinden cihazlarınızı yapılandırma
 
 Cihazlarınızdan telemetri almanın yanı sıra cihazlarınızı arka uç hizmetinizden yapılandırmak isteyebilirsiniz. Cihazlarınıza bir istenen yapılandırma gönderdiğinizde bu cihazlardan durum ve uyumluluk güncelleştirmeleri almak da isteyebilirsiniz. Örneğin, bir cihaz için hedef çalışma sıcaklığı aralığı ayarlayabilir veya cihazlarınızdan üretici yazılımı sürüm bilgileri toplayabilirsiniz.
 
@@ -41,9 +37,9 @@ Bu öğreticide, aşağıdaki görevleri gerçekleştireceksiniz:
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Bu hızlı başlangıçta çalıştırdığınız iki örnek uygulama, Node.js kullanılarak yazılır. Geliştirme makinenize Node.js v10.x.x veya sonraki bir sürümü gerekir.
+Bu hızlı başlangıçta çalıştırdığınız iki örnek uygulama, Node.js kullanılarak yazılır. Geliştirme makinenizde Node. js ile v10 arasındaki. x. x veya üzeri gerekir.
 
 [nodejs.org](https://nodejs.org) adresinden birden fazla platform için Node.js’yi indirebilirsiniz.
 
@@ -53,13 +49,13 @@ Aşağıdaki komutu kullanarak geliştirme makinenizde geçerli Node.js sürüm�
 node --version
 ```
 
-[https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip](https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip ) adresinden örnek Node.js projesini indirin ve ZIP arşivini ayıklayın.
+https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip adresinden örnek Node.js projesini indirin ve ZIP arşivini ayıklayın.
 
 ## <a name="set-up-azure-resources"></a>Azure kaynakları ayarlama
 
 Bu öğreticiyi tamamlayabilmeniz için Azure aboneliğinizin cihaz kimliği kayıt defterine cihaz eklenmiş bir IOT hub içermesi gerekir. Cihaz kimliği kayıt defterindeki giriş, bu öğreticide çalıştırdığınız simülasyon cihazının hub’ınıza bağlanmasına imkan tanır.
 
-Aboneliğinizde ayarlanmış bir IOT hub'ı zaten sahip değilseniz, birini aşağıdaki CLI betiği ile ayarlayabilirsiniz. Bu betikte IoT hub için **tutorial-iot-hub** adı kullanılır ve betiği çalıştırırken bu adı kendi benzersiz adınızla değiştirmeniz gerekir. Betik, kaynak grubunu ve hub’ı **Orta ABD** bölgesinde oluşturur ve bunu size daha yakın bir konum olacak şekilde değiştirebilirsiniz. Betik, IoT hub hizmetinizin arka uç örneğinde IoT hub’ınıza bağlanmak için kullanacağınız bağlantı dizesini döndürür:
+Aboneliğinizde zaten bir IoT Hub 'ı ayarlanmamışsa, aşağıdaki CLı betiği ile bir tane ayarlayabilirsiniz. Bu betikte IoT hub için **tutorial-iot-hub** adı kullanılır ve betiği çalıştırırken bu adı kendi benzersiz adınızla değiştirmeniz gerekir. Betik, kaynak grubunu ve hub’ı **Orta ABD** bölgesinde oluşturur ve bunu size daha yakın bir konum olacak şekilde değiştirebilirsiniz. Betik, IoT hub hizmetinizin arka uç örneğinde IoT hub’ınıza bağlanmak için kullanacağınız bağlantı dizesini döndürür:
 
 ```azurecli-interactive
 hubname=tutorial-iot-hub
@@ -240,7 +236,7 @@ Aşağıdaki ekran görüntüsünde simülasyon cihazı uygulamasından alınan 
 
 ![Sanal cihaz](./media/tutorial-device-twins/SimulatedDevice2.png)
 
-Aşağıdaki ekran görüntüsünde, arka uç uygulaması çıktısını gösterir ve nasıl alır ve bir CİHAZDAN bir bildirilen özellik güncelleştirme işler vurgular:
+Aşağıdaki ekran görüntüsünde, arka uç uygulamasından alınan çıkış gösterilmektedir ve bir cihazdan bildirilen bir özellik güncelleştirmesi 'nin nasıl aldığı ve işlediği vurgulanmıştır:
 
 ![Arka uç uygulaması](./media/tutorial-device-twins/BackEnd2.png)
 

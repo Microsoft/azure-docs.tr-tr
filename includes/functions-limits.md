@@ -4,35 +4,35 @@ ms.service: billing
 ms.topic: include
 ms.date: 05/09/2019
 ms.author: glenga
-ms.openlocfilehash: f2470f937d2d812bf79cea3c23d89a50717a5a92
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: ad87964216db72cfef447a18d4cd05b8a976491b
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67277502"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73476932"
 ---
-| Resource | [Tüketim planı](../articles/azure-functions/functions-scale.md#consumption-plan) | [Premium planı](../articles/azure-functions/functions-scale.md#premium-plan) | [App Service planı](../articles/azure-functions/functions-scale.md#app-service-plan)<sup>1</sup> |
+| Kaynak | [Tüketim planı](../articles/azure-functions/functions-scale.md#consumption-plan) | [Premium plan](../articles/azure-functions/functions-scale.md#premium-plan) | [App Service planı](../articles/azure-functions/functions-scale.md#app-service-plan)<sup>1</sup> |
 | --- | --- | --- | --- |
-| Ölçeği genişletme | Aktivita typu EventDriven | Aktivita typu EventDriven | [El ile/otomatik ölçeklendirme](../articles/app-service/web-sites-scale.md) | 
+| Ölçeği genişletme | Olay odaklı | Olay odaklı | [El ile/otomatik ölçeklendirme](../articles/app-service/manage-scale-up.md) | 
 | En fazla örnek sayısı | 200 | 20 | 10-20 |
-|Varsayılan [zaman aşımı süresi](../articles/azure-functions/functions-scale.md#timeout) (min) |5 | 30 |30<sup>2</sup> |
-|En fazla [zaman aşımı süresi](../articles/azure-functions/functions-scale.md#timeout) (min) |10 | sınırsız | Sınırsız<sup>3</sup> |
-| En fazla giden bağlantı (örnek başına) | 600 etkin (1200 toplam) | sınırsız | sınırsız |
+|Varsayılan [zaman aşımı süresi](../articles/azure-functions/functions-scale.md#timeout) (dk) |5 | 30 |30<sup>2</sup> |
+|Maksimum [zaman aşımı süresi](../articles/azure-functions/functions-scale.md#timeout) (dk) |10 | unbounded | sınırsız<sup>3</sup> |
+| En fazla giden bağlantı (örnek başına) | 600 etkin (1200 toplam) | unbounded | unbounded |
 | En fazla istek boyutu (MB)<sup>4</sup> | 100 | 100 | 100 |
-| Maksimum sorgu dizesi uzunluğu<sup>4</sup> | 4096 | 4096 | 4096 |
+| En fazla sorgu dizesi uzunluğu<sup>4</sup> | 4096 | 4096 | 4096 |
 | En fazla istek URL uzunluğu<sup>4</sup> | 8192 | 8192 | 8192 |
-| [ACU](../articles/virtual-machines/windows/acu.md) örnek başına | 100 | 210-840 | 100-840 |
-| En fazla bellek (GB başına örneği) | 1.5 | 3.5-14 | 1.75-14 |
-| Plan başına işlev uygulamaları |100 |100 |Sınırsız<sup>5</sup> |
-| [App Service planları](../articles/app-service/overview-hosting-plans.md) | başına 100 [bölge](https://azure.microsoft.com/global-infrastructure/regions/) |kaynak grubu başına 100 |kaynak grubu başına 100 |
+| Örnek başına [acu](../articles/virtual-machines/windows/acu.md) | 100 | 210-840 | 100-840 |
+| Maksimum bellek (örnek başına GB) | 1,5 | 3,5-14 | 1,75-14 |
+| Plan başına işlev uygulamaları |100 |100 |sınırsız<sup>5</sup> |
+| [App Service planları](../articles/app-service/overview-hosting-plans.md) | [bölge](https://azure.microsoft.com/global-infrastructure/regions/) başına 100 |kaynak grubu başına 100 |kaynak grubu başına 100 |
 | Depolama<sup>6</sup> |1 GB |250 GB |50-1000 GB |
 | Uygulama başına özel etki alanları</a> |500<sup>7</sup> |500 |500 |
-| Özel etki alanı [SSL desteği](../articles/app-service/app-service-web-tutorial-custom-ssl.md) |Sınırsız SNI SSL bağlantısı dahil | Sınırsız SNI SSL ve 1 IP SSL bağlantıları dahildir |Sınırsız SNI SSL ve 1 IP SSL bağlantıları dahildir | 
+| Özel etki alanı [SSL desteği](../articles/app-service/configure-ssl-bindings.md) |sınırsız SNI SSL bağlantısı dahildir | sınırsız SNI SSL ve 1 IP SSL bağlantı dahildir |sınırsız SNI SSL ve 1 IP SSL bağlantı dahildir | 
 
-<sup>1</sup> çeşitli App Service planı seçenekleri için belirli sınırları için bkz: [App Service planı sınırları](../articles/azure-subscription-service-limits.md#app-service-limits).  
-<sup>2</sup> varsayılan olarak, App Service planı işlevler 1.x çalışma zamanı için zaman aşımını sınırsızdır.  
-<sup>3</sup> App Service planı ayarlanması gerekir [Always On](../articles/azure-functions/functions-scale.md#always-on). Standart ödeme [oranları](https://azure.microsoft.com/pricing/details/app-service/).  
-<sup>4</sup> bu limitleri [konak kümesi](https://github.com/Azure/azure-functions-host/blob/dev/src/WebJobs.Script.WebHost/web.config).  
-<sup>5</sup> etkinlik uygulamaları, makine örnekleri ve karşılık gelen kaynak kullanımı, barındırabilirsiniz işlev uygulamaları gerçek sayısına bağlıdır.
-<sup>6</sup> depolama sınırı toplam içerik boyutu geçici bir depolama tüm uygulamalar arasında aynı App Service planında alanıdır. Tüketim planı, Azure dosyaları için geçici depolama kullanır.  
-<sup>7</sup> , işlev uygulamanızı barındırılan bir [tüketim planı](../articles/azure-functions/functions-scale.md#consumption-plan), yalnızca CNAME seçeneği desteklenmiyor. İşlev uygulamaları için bir [Premium planı](../articles/azure-functions/functions-scale.md#premium-plan) veya [App Service planı](../articles/azure-functions/functions-scale.md#app-service-plan), bir CNAME ya da bir A kaydı kullanarak özel bir etki alanını eşleyebilirsiniz.
+<sup>1</sup> çeşitli App Service planı seçeneklerine yönelik belirli sınırlar için, [App Service plan sınırlarına](../articles/azure-subscription-service-limits.md#app-service-limits)bakın.  
+<sup>2</sup> varsayılan olarak, bir App Service planındaki işlev 1. x çalışma zamanının zaman aşımı değeri sınırsız olur.  
+<sup>3</sup> App Service planının [her zaman açık](../articles/azure-functions/functions-scale.md#always-on)olarak ayarlanmasını gerektirir. Standart [oranlarda](https://azure.microsoft.com/pricing/details/app-service/)ödeyin.  
+<sup>4</sup> bu sınırlar [konakta ayarlanır](https://github.com/Azure/azure-functions-host/blob/dev/src/WebJobs.Script.WebHost/web.config).  
+<sup>5</sup> barındırabilmeniz gereken işlev uygulamalarının gerçek sayısı, uygulamaların etkinliğine, makine örneklerinin boyutuna ve karşılık gelen kaynak kullanımına göre değişir.  
+<sup>6</sup> depolama sınırı, aynı App Service planındaki tüm uygulamalarda geçici depolamadaki toplam içerik boyutudur. Tüketim planı, geçici depolama için Azure dosyalarını kullanır.  
+<sup>7</sup> işlev uygulamanız bir [Tüketim PLANıNDA](../articles/azure-functions/functions-scale.md#consumption-plan)barındırılıyorsa yalnızca CNAME seçeneği desteklenir. Bir [Premium planındaki](../articles/azure-functions/functions-scale.md#premium-plan) veya bir [App Service planındaki](../articles/azure-functions/functions-scale.md#app-service-plan)işlev UYGULAMALARı için, bir CNAME veya a kaydı kullanarak özel bir etki alanını eşleyebilirsiniz.

@@ -1,72 +1,125 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure İlkesi hizmeti belgeleri
+### YamlMime:Landing
+title: Azure İlkesi belgeleri
+summary: Azure İlkesi, kaynaklarınıza yönelik kuralları ve etkileri zorunlu kılan ilke tanımları ile BT sorunlarını yönetip önlemenize yardımcı olur.
 metadata:
-  title: 'Azure İlkesi Belgeleri - Öğreticiler, API Başvurusu'
-  description: 'Azure İlkesi, kaynaklarınıza yönelik kuralları ve etkileri zorunlu kılan ilke tanımları ile BT sorunlarını yönetip önlemenize yardımcı olur. Azure İlkesi kullandığınızda kaynaklarınız, kurumsal standartlarınız ve hizmet düzeyi sözleşmeleriniz ile uyumlu kalır.'
-  author: DCtheGeek
-  manager: carmonm
+  title: Azure İlkesi belgeleri
+  description: Azure İlkesi, kaynaklarınıza yönelik kuralları ve etkileri zorunlu kılan ilke tanımları ile BT sorunlarını yönetip önlemenize yardımcı olur.
   ms.service: azure-policy
   ms.topic: landing-page
-  ms.date: 03/16/2019
+  ms.collection: collection
+  author: DCtheGeek
   ms.author: dacoulte
-abstract:
-  description: 'Azure İlkesi, kaynaklarınıza yönelik kuralları ve etkileri zorunlu kılan ilke tanımları ile BT sorunlarını yönetip önlemenize yardımcı olur. Azure İlkesi kullandığınızda kaynaklarınız, kurumsal standartlarınız ve hizmet düzeyi sözleşmeleriniz ile uyumlu kalır.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Azure’da ilke tanımları oluşturma, atama ve yönetmeyi öğrenin.'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              alt: Azure Portal
-              src: 'https://docs.microsoft.com/media/common/i_portal.svg'
-            text: Azure Portal
-            href: ./assign-policy-portal
-          - image:
-              alt: Azure PowerShell
-              src: ./media/powershell.svg
-            text: Azure PowerShell
-            href: ./assign-policy-powershell
-          - image:
-              alt: Azure CLI
-              src: ./media/cli.svg
-            text: Azure CLI
-            href: ./assign-policy-azurecli
-          - image:
-              alt: Resource Manager şablonu
-              src: 'https://docs.microsoft.com/media/logos/logo_vs-code.svg'
-            text: Resource Manager şablonu
-            href: ./assign-policy-template
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure’da ilke tanımları oluşturma, atama ve yönetmeyi öğrenin.'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/governance/policy/tutorials/create-and-manage">Azure İlkesi oluşturma ve yönetme</a>
-          - html: <a href="/azure/governance/policy/tutorials/create-custom-policy-definition">Özel ilke tanımı oluşturma</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Azure’da ilke tanımları oluşturmanıza yardımcı olmak için sağlanan örnekleri gözden geçirin.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/governance/policy/samples/index">Örnek dizini</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: '<p><a href="/cli/azure/policy">Azure CLI</a></p><p><a href="/powershell/module/az.resources/#policies">Azure PowerShell (İlke)</a></p><p><a href="/powershell/module/az.policyinsights#policy_insights">Azure PowerShell (İlke İçgörüleri)</a></p><p><a href="https://www.powershellgallery.com/packages/Az.GuestConfiguration">Azure PowerShell (Konuk Yapılandırması)</a></p>'
-          - title: Resource Manager şablonları
-            html: <p><a href="/azure/templates/microsoft.authorization/policyassignments">Atamalar</a></p><p><a href="/azure/templates/microsoft.authorization/policydefinitions">İlke Tanımları</a></p><p><a href="/azure/templates/microsoft.authorization/policysetdefinitions">Girişim Tanımları</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/policy-insights/policyevents">Olaylar</a></p><p><a href="/rest/api/policy-insights/policystates">Durumlar</a></p><p><a href="/rest/api/resources/policyassignments">Atamalar</a></p><p><a href="/rest/api/resources/policydefinitions">İlke Tanımları</a></p><p><a href="/rest/api/resources/policysetdefinitions">Girişim Tanımları</a></p><p><a href="/rest/api/policy-insights/policytrackedresources">İlke Tarafından İzlenen Kaynaklar</a></p><p><a href="/rest/api/policy-insights/remediations">Düzeltmeler</a></p><p><a href="/rest/api/guestconfiguration/">Konuk Yapılandırması</a></p>
+  ms.date: 11/04/2019
+  ms.openlocfilehash: 1a91f7fe63753ddc7c8b88d487064b15206fcfe3
+  ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73494350"
+landingContent:
+- title: Azure İlkesi hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure İlkesi nedir?
+      url: ./overview.md
+    - text: İlkenin etkileri
+      url: ./concepts/effects.md
+    - text: Tanım yapısı
+      url: ./concepts/definition-structure.md
+    - text: Atama yapısı
+      url: ./concepts/assignment-structure.md
+  - linkListType: video
+    links:
+    - text: 2018 Derlemesinde Azure İlkesi
+      url: https://channel9.msdn.com/events/Build/2018/THR2030
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: İlke atama (portal)
+      url: ./assign-policy-portal.md
+    - text: İlke atama (PowerShell)
+      url: ./assign-policy-powershell.md
+    - text: İlke atama (Azure CLI)
+      url: ./assign-policy-azurecli.md
+    - text: İlke atama (şablon)
+      url: ./assign-policy-template.md
+  - linkListType: tutorial
+    links:
+    - text: İlke oluşturma ve yönetme
+      url: ./tutorials/create-and-manage.md
+    - text: VS Code uzantısı kullanma
+      url: ./how-to/extension-for-vscode.md
+    - text: İlkeyi Kod iş akışları olarak tasarklama
+      url: ./concepts/policy-as-code.md
+  - linkListType: deploy
+    links:
+    - text: İlke örnekleri dizini
+      url: ./samples/index.md
+- title: İlkeleri yazma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Özel ilke oluşturma
+      url: ./tutorials/create-custom-policy-definition.md
+    - text: Etiket idaresini yönetme
+      url: ./tutorials/govern-tags.md
+  - linkListType: how-to-guide
+    links:
+    - text: SDK ile ilke oluşturma
+      url: ./how-to/programmatically-create.md
+    - text: Diziler için ilkeleri yazma
+      url: ./how-to/author-policies-for-arrays.md
+  - linkListType: concept
+    links:
+    - text: AKS için İlke
+      url: ./concepts/rego-for-aks.md
+    - text: AKS Altyapısı için İlke
+      url: ./concepts/aks-engine.md
+    - text: VM'ler için İlke
+      url: ./concepts/guest-configuration.md
+- title: Kaynakları gözden geçirme ve düzeltme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Uyumluluk verilerini alma
+      url: ./how-to/get-compliance-data.md
+    - text: Uyumsuzluk nedenlerini belirleme
+      url: ./how-to/determine-non-compliance.md
+    - text: Uyumlu olmayan kaynakları düzeltme
+      url: ./how-to/remediate-resources.md
+- title: Dahil olun
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Azure İdaresi YouTube Kanalı
+      url: https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ
+    - text: Ürün özelliği isteyin
+      url: https://feedback.azure.com/forums/915958-azure-governance
+    - text: Azure İdaresi için Teknoloji Topluluğu
+      url: https://techcommunity.microsoft.com/t5/Azure-Governance/bd-p/AzureGovernance
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure CLI
+      url: /cli/azure/policy
+    - text: Azure PowerShell (İlke)
+      url: /powershell/module/az.resources/#policies
+    - text: Azure PowerShell (İlke İçgörüleri)
+      url: /powershell/module/az.policyinsights#policy_insights
+    - text: .NET için Azure SDK (Atamalar)
+      url: /dotnet/api/microsoft.azure.management.resourcemanager.models.policyassignment
+    - text: .NET için Azure SDK (İlke Tanımları)
+      url: /dotnet/api/microsoft.azure.management.resourcemanager.models.policydefinition
+    - text: REST (İlke İçgörüleri)
+      url: /rest/api/policy-insights/
+    - text: REST (Atamalar)
+      url: /rest/api/resources/policyassignments
+    - text: REST (Tanımlar)
+      url: /rest/api/resources/policydefinitions
+    - text: REST (Girişimler)
+      url: /rest/api/resources/policysetdefinitions
+    - text: Resource Manager şablonları
+      url: /azure/templates/microsoft.authorization/allversions

@@ -1,57 +1,56 @@
 ---
-title: Azure Analysis Services modellerine yönelik zaman uyumsuz yenileme | Microsoft Docs
-description: REST API kullanarak zaman uyumsuz yenileme kod öğrenin.
+title: Azure Analysis Services modelleri için zaman uyumsuz yenileme | Microsoft Docs
+description: Model verilerinin zaman uyumsuz yenilemesini kodlemek için Azure Analysis Services REST API nasıl kullanılacağını açıklar.
 author: minewiskan
-manager: kfile
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 05/09/2019
+ms.date: 10/28/2019
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 63b64df457af5b7d3d2bd5901f73d89ccd3c913a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7c6fba10264939335cdef26f288973f8217f340b
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65506965"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73573389"
 ---
 # <a name="asynchronous-refresh-with-the-rest-api"></a>REST API ile zaman uyumsuz yenileme
 
-REST çağrılarını destekleyen herhangi bir programlama dilini kullanarak, Azure Analysis Services tablosal Modellerinizi zaman uyumsuz veri yenileme işlemleri gerçekleştirebilirsiniz. Bu, eşitleme için sorgu genişleme salt okunur çoğaltmaların içerir. 
+REST çağrılarını destekleyen herhangi bir programlama dilini kullanarak Azure Analysis Services tablolu modellerinizde zaman uyumsuz veri yenileme işlemleri gerçekleştirebilirsiniz. Bu, sorgu ölçeği için salt okuma çoğaltmalarının eşitlenmesini içerir. 
 
-Veri yenileme işlemleri, veri hacmi, bölümler, vb. kullanarak iyileştirmesi düzeyi dahil olmak üzere bir dizi etkene bağlı olarak biraz zaman alabilir. Bu işlem geleneksel olarak kullanma gibi mevcut yöntemleri ile çağrılabilir [TOM](https://docs.microsoft.com/sql/analysis-services/tabular-model-programming-compatibility-level-1200/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo) (tablolu nesne modeli) [PowerShell](https://docs.microsoft.com/sql/analysis-services/powershell/analysis-services-powershell-reference) cmdlet'lerini veya [TMSL](https://docs.microsoft.com/sql/analysis-services/tabular-model-scripting-language-tmsl-reference) (Tablosal Model Komut dosyası dili). Ancak, bu yöntemler genellikle güvenilir olmayan, uzun süren HTTP bağlantıları gerektirebilir.
+Veri hacmi, bölümler kullanılarak en iyi duruma getirme düzeyi vb. gibi bir dizi etkene bağlı olarak veri yenileme işlemleri biraz zaman alabilir. Bu işlemler, genellikle [Tom](https://docs.microsoft.com/bi-reference/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo) (tablolu nesne modeli), [PowerShell](https://docs.microsoft.com/analysis-services/powershell/analysis-services-powershell-reference) cmdlet 'leri veya [Tmsl](https://docs.microsoft.com/bi-reference/tmsl/tabular-model-scripting-language-tmsl-reference) (tablosal model betik dili) gibi mevcut yöntemlerle çağırılır. Ancak, bu yöntemler genellikle güvenilir olmayan, uzun süre çalışan HTTP bağlantılarına gerek duyar.
 
-Azure Analysis Services için REST API zaman uyumsuz olarak gerçekleştirilebilmesi veri yenileme işlemleri sağlar. REST API kullanarak istemci uygulamalarından uzun süren HTTP bağlantıları gerekli değildir. Güvenilirlik, otomatik yeniden denemeler ve toplu işleme gibi diğer yerleşik özellikler vardır.
+Azure Analysis Services REST API, veri yenileme işlemlerinin zaman uyumsuz olarak gerçekleştirilmesini sağlar. REST API kullanarak, istemci uygulamalarından uzun süre çalışan HTTP bağlantıları gerekli değildir. Güvenilirlik için otomatik yeniden denemeler ve toplu işlemeler gibi diğer yerleşik özellikler de vardır.
 
-## <a name="base-url"></a>Temel URL
+## <a name="base-url"></a>Taban URL 'SI
 
-Temel URL'si şu biçimdedir:
+Temel URL şu biçimdedir:
 
 ```
 https://<rollout>.asazure.windows.net/servers/<serverName>/models/<resource>/
 ```
 
-Örneğin, adlı myserver, Batı ABD Azure bölgesinde bulunan bir sunucuda AdventureWorks adlı bir model göz önünde bulundurun. Sunucu adı şöyledir:
+Örneğin, Batı ABD Azure bölgesinde bulunan sunucum adlı sunucuda AdventureWorks adlı bir model düşünün. Sunucu adı:
 
 ```
 asazure://westus.asazure.windows.net/myserver 
 ```
 
-Bu sunucu adı temel URL'si şudur:
+Bu sunucu adının temel URL 'SI:
 
 ```
 https://westus.asazure.windows.net/servers/myserver/models/AdventureWorks/ 
 ```
 
-Temel URL'ı kullanarak, kaynak ve işlem aşağıdaki parametreleri temel alarak eklenerek: 
+Temel URL 'yi kullanarak kaynaklar ve işlemler aşağıdaki parametrelere göre eklenebilir: 
 
 ![Zaman uyumsuz yenileme](./media/analysis-services-async-refresh/aas-async-refresh-flow.png)
 
-- İle biten bir şey **s** koleksiyonudur.
-- İle biten herhangi bir şey **()** bir işlevdir.
-- Başka bir kaynak/nesnesidir.
+- **' De sonlanan her şey** bir koleksiyondur.
+- **()** İle biten her şey bir işlevdir.
+- Diğer her şey bir kaynak/nesnedir.
 
-Örneğin, bir yenileme işlemi gerçekleştirmeye yenilemeleri koleksiyonunda POST edimi kullanabilirsiniz:
+Örneğin, yenileme işlemini gerçekleştirmek için yenilemeler koleksiyonundaki POST fiilini kullanabilirsiniz:
 
 ```
 https://westus.asazure.windows.net/servers/myserver/models/AdventureWorks/refreshes
@@ -59,20 +58,20 @@ https://westus.asazure.windows.net/servers/myserver/models/AdventureWorks/refres
 
 ## <a name="authentication"></a>Kimlik Doğrulaması
 
-Tüm çağrıları ile geçerli bir Azure Active Directory (OAuth 2) belirteci yetkilendirme üst bilgisinde kimliğinin doğrulanması gerekir ve aşağıdaki gereksinimleri karşılaması gerekir:
+Tüm çağrıların yetkilendirme üstbilgisinde geçerli bir Azure Active Directory (OAuth 2) belirteciyle doğrulanması ve aşağıdaki gereksinimleri karşılaması gerekir:
 
-- Belirteç, bir kullanıcı belirteci ya da bir uygulama hizmet sorumlusu olması gerekir.
-- Belirteç kümesine doğru hedef kitleye olmalıdır `https://*.asazure.windows.net`.
-- Kullanıcı veya uygulama istenen çağrı yapmak için yeterli izinleri sunucu veya model olmalıdır. İzin düzeyi rolleri model veya sunucu üzerindeki yönetim grubu tarafından belirlenir.
+- Belirtecin bir kullanıcı belirteci ya da bir uygulama hizmeti sorumlusu olması gerekir.
+- Belirtecin `https://*.asazure.windows.net`için doğru hedef kitlesi ayarlanmış olması gerekir.
+- Kullanıcı veya uygulamanın, istenen çağrıyı yapmak için sunucu veya modelde yeterli izinlere sahip olması gerekir. İzin düzeyi, modeldeki roller veya sunucudaki yönetim grubu tarafından belirlenir.
 
     > [!IMPORTANT]
     > Şu anda **Sunucu Yöneticisi** rolü izinleri gereklidir.
 
-## <a name="post-refreshes"></a>POST /refreshes
+## <a name="post-refreshes"></a>GÖNDERI/yenilemeler
 
-Bir yenileme işlemi gerçekleştirmek için yeni bir yenileme öğe koleksiyona eklemek için /refreshes koleksiyonunda POST edimi kullanın. Yanıt Location üst bilgisini yenileme kimliğini içerir İstemci uygulama, kesin ve durumunu zaman uyumsuz olduğundan gerekirse daha sonra denetleyin.
+Yenileme işlemi gerçekleştirmek için, koleksiyona yeni bir yenileme öğesi eklemek için/Refresh koleksiyonundaki POST fiilini kullanın. Yanıttaki konum üst bilgisi yenileme KIMLIĞINI içerir. İstemci uygulaması, zaman uyumsuz olduğu için gerekirse bağlantıyı kesebilir ve durumu kontrol edebilir.
 
-Bir model için bir kerede yalnızca bir yenileme işlemi kabul edilir. Varsa geçerli çalışan bir yenileme işlemi ve başka gönderilen 409 çakışma HTTP durum kodu döndürülür.
+Bir model için tek seferde yalnızca bir yenileme işlemi kabul edilir. Çalışan geçerli bir yenileme işlemi varsa ve diğeri gönderiliyorsa, 409 çakışma HTTP durum kodu döndürülür.
 
 Gövde aşağıdakine benzeyebilir:
 
@@ -96,24 +95,24 @@ Gövde aşağıdakine benzeyebilir:
 
 ### <a name="parameters"></a>Parametreler
 
-Parametreleri belirterek, gerekli değildir. Varsayılan olarak uygulanır.
+Parametrelerin belirtilmesi gerekli değildir. Varsayılan değer uygulanır.
 
 | Ad             | Tür  | Açıklama  |Varsayılan  |
 |------------------|-------|--------------|---------|
-| `Type`           | Enum  | İşlem türü. Türleri ile TMSL hizalanır [Yenile komut](https://docs.microsoft.com/sql/analysis-services/tabular-models-scripting-language-commands/refresh-command-tmsl) türleri: tam, clearValues, dataOnly, otomatik, hesaplama ve birleştirin. Ekleme türü desteklenmiyor.      |   Otomatik      |
-| `CommitMode`     | Enum  | Nesneleri yalnızca tamamlandığında veya toplu kaydedilmiş olup olmayacağını belirler. Modları içerir: varsayılan, işlem partialBatch.  |  işlem       |
-| `MaxParallelism` | Int   | Bu değer, iş parçacıkları, paralel olarak işleme komutları çalıştırmak en fazla sayısını belirler. Bu değer hizalı TMSL ayarlanabilir MaxParallelism özelliği ile [Sequence komutu](https://docs.microsoft.com/sql/analysis-services/tabular-models-scripting-language-commands/sequence-command-tmsl) veya diğer yöntemleri kullanarak.       | 10        |
-| `RetryCount`     | Int   | İşlem başarısız olmadan önce yeniden denenme sayısını gösterir.      |     0    |
-| `Objects`        | Array | İşlenecek nesne dizisi. Her bir nesne içerir: "Tablo" tüm tablo ya da "Tablo" ve "Bölüm" bölümü işlenirken işlerken. Nesne yok belirtilirse, modelin tamamını yenilenir. |   İşlem tüm modeli      |
+| `Type`           | Sabit Listesi  | Gerçekleştirilecek işleme türü. Türler TMSL [yenileme komut](https://docs.microsoft.com/bi-reference/tmsl/refresh-command-tmsl) türleriyle hizalanır: Full, clearvalues, Calculate, dataonly, Automatic ve birleştirme. Tür ekleme desteklenmiyor.      |   Otomatik      |
+| `CommitMode`     | Sabit Listesi  | Nesnelerin toplu işlemlere mi yoksa yalnızca tamamlandığında mi uygulanacağını belirler. Modlar şunlardır: Default, işlemsel, partialBatch.  |  işlem       |
+| `MaxParallelism` | 'Tir   | Bu değer, işlem komutlarının paralel olarak çalıştırılacağı en fazla iş parçacığı sayısını belirler. Bu değer, TMSL [Sequence komutunda](https://docs.microsoft.com/bi-reference/tmsl/sequence-command-tmsl) veya diğer yöntemleri kullanarak ayarlanabir Maxparallelilik özelliği ile hizalanır.       | 10        |
+| `RetryCount`     | 'Tir   | İşlemin başarısız olmadan önce kaç kez yeniden deneneceğini gösterir.      |     0    |
+| `Objects`        | Dizi | İşlenecek nesne dizisi. Her nesne şunları içerir: bir bölümü işlerken tüm tablo veya "Tablo" ve "Bölüm" işlemlerini işlerken "Table". Hiçbir nesne belirtilmemişse, modelin tamamı yenilenir. |   Modelin tamamını işle      |
 
-CommitMode partialBatch için eşittir. Büyük veri kümelerinin ilk bir yük, bunu saat kadar sürebilir olduğunda kullanılır. Bir veya daha fazla toplu uyguladıktan sonra yenileme işlemi başarısız olursa, başarılı bir şekilde kaydedilmiş toplu kaydedilmiş kalır (bunu başarıyla kaydedilmiş toplu geri döner değil).
+CommitMode, partialBatch 'e eşittir. Saat süretabilecek büyük veri kümelerinin ilk yüklemesi yapılırken kullanılır. Yenileme işlemi bir veya daha fazla toplu işlem başarıyla gerçekleştirildikten sonra başarısız olursa, başarıyla kaydedilmiş toplu işler tamamlandı olarak kalır (başarıyla işlenen toplu işleri geri almaz).
 
 > [!NOTE]
-> Yazma sırasında toplu iş boyutu MaxParallelism değerdir, ancak bu değeri değiştirebilirsiniz.
+> Yazma sırasında, toplu iş boyutu Maxparalellik değeridir, ancak bu değer değişebilir.
 
-## <a name="get-refreshesrefreshid"></a>GET /refreshes/\<refreshId >
+## <a name="get-refreshesrefreshid"></a>/Refreshes/\<refreshId > Al
 
-Bir yenileme işlemi durumunu denetlemek için yenileme kimliğini temel GET fiili kullanın Yanıt gövdesi bir örnek aşağıda verilmiştir. İşlem devam ediyor, olursa **Inprogress** durumu döndürülür.
+Yenileme işleminin durumunu denetlemek için yenileme KIMLIĞI üzerinde GET fiilini kullanın. Yanıt gövdesine bir örnek aşağıda verilmiştir. İşlem devam ediyorsa, **sürüyor** durumu döndürülür.
 
 ```
 {
@@ -137,12 +136,12 @@ Bir yenileme işlemi durumunu denetlemek için yenileme kimliğini temel GET fii
 }
 ```
 
-## <a name="get-refreshes"></a>/Refreshes Al
+## <a name="get-refreshes"></a>/Yenilemeler al
 
-Bir model için geçmiş yenileme işlemleri bir listesini almak için GET fiili /refreshes koleksiyonunda kullanın. Yanıt gövdesi bir örnek aşağıda verilmiştir. 
+Bir model için geçmiş yenileme işlemlerinin bir listesini almak için/yenilemeler koleksiyonundaki GET fiilini kullanın. Yanıt gövdesine bir örnek aşağıda verilmiştir. 
 
 > [!NOTE]
-> Yazma sırasında son 30 gün yenileme işlemleri depolanan ve döndürdü, ancak bu sayıyı değiştirebilirsiniz.
+> Yazma sırasında, yenileme işlemlerinin son 30 günü saklanır ve döndürülür, ancak bu numara değişebilir.
 
 ```
 [
@@ -161,17 +160,17 @@ Bir model için geçmiş yenileme işlemleri bir listesini almak için GET fiili
 ]
 ```
 
-## <a name="delete-refreshesrefreshid"></a>DELETE /refreshes/\<refreshId >
+## <a name="delete-refreshesrefreshid"></a>/Refreshes/\<refreshId > SIL
 
-Devam eden yenileme işlemi iptal etmek için yenileme kimliğini temel silme fiili kullanın
+Devam eden yenileme işlemini iptal etmek için yenileme KIMLIĞI üzerindeki DELETE fiilini kullanın.
 
-## <a name="post-sync"></a>POST Sync
+## <a name="post-sync"></a>/Sync SONRASı
 
-Yenileme işlemlerini gerçekleştirilecek yinelemeler için sorgu ölçeği genişletme ile yeni verileri eşitlemek gerekli olabilir. Bir model için bir eşitleme işlemi gerçekleştirmek için POST edimi Sync işlevini kullanın. Yanıt Location üst bilgisini eşitleme işlemi kimliğini içerir
+Yenileme işlemleri gerçekleştirdiyseniz, sorgu ölçeği genişletme için çoğaltmalarla yeni verileri eşitlemeniz gerekebilir. Bir model için eşitleme işlemi gerçekleştirmek için/Sync işlevindeki POST fiilini kullanın. Yanıttaki konum üst bilgisi eşitleme işlemi KIMLIĞINI içerir.
 
-## <a name="get-sync-status"></a>Sync durumunu Al
+## <a name="get-sync-status"></a>/Sync durumunu al
 
-Eşitleme işlemi durumunu denetlemek için işlem kimliği bir parametre olarak geçirerek GET fiili kullanın. Yanıt gövdesi bir örnek aşağıda verilmiştir:
+Bir eşitleme işleminin durumunu denetlemek için, işlem KIMLIĞINI parametre olarak geçirerek GET fiilini kullanın. Yanıt gövdesine bir örnek aşağıda verilmiştir:
 
 ```
 {
@@ -184,31 +183,31 @@ Eşitleme işlemi durumunu denetlemek için işlem kimliği bir parametre olarak
 }
 ```
 
-Değerleri `syncstate`:
+`syncstate`değerleri:
 
-- 0: Çoğaltılıyor. Veritabanı dosyaları hedef klasöre çoğaltılır.
-- 1: Dolduruluyor. Veritabanı salt okunur server örnekleri üzerinde rehydrated.
-- 2: Tamamlandı. Eşitleme işlemi başarıyla tamamlandı.
-- 3: Başarısız oldu. Eşitleme işlemi başarısız oldu.
-- 4: Sonlandırılıyor. Eşitleme işlemi tamamlandı ancak temizleme adımları gerçekleştiriyor.
+- 0: çoğaltılıyor. Veritabanı dosyaları bir hedef klasöre çoğaltılıyor.
+- 1: yeniden doldurma. Veritabanı, salt okunurdur ve sunucu örnekleri üzerinde yeniden doldurma işlemi uygulanıyor.
+- 2: tamamlandı. Eşitleme işlemi başarıyla tamamlandı.
+- 3: başarısız oldu. Eşitleme işlemi başarısız oldu.
+- 4: sonlandırılıyor. Eşitleme işlemi tamamlandı ancak temizleme adımları gerçekleştiriliyor.
 
 ## <a name="code-sample"></a>Kod örneği
 
-İşte başlamanıza yardımcı olur, C# kod örneği [github'da RestApiSample](https://github.com/Microsoft/Analysis-Services/tree/master/RestApiSample).
+C# [GitHub üzerinde RestApiSample](https://github.com/Microsoft/Analysis-Services/tree/master/RestApiSample), başlamanıza olanak sağlamak için bir kod örneği aşağıda verilmiştir.
 
-### <a name="to-use-the-code-sample"></a>Kod örneği kullanmak için
+### <a name="to-use-the-code-sample"></a>Kod örneğini kullanmak için
 
-1.  Kopyalayın veya depo indirin. RestApiSample çözümü açın.
-2.  Satırı bulun **istemci. BaseAddress =...** ve belirtin, [ana URL](#base-url).
+1.  Depoyu kopyalayın veya indirin. RestApiSample çözümünü açın.
+2.  Satır istemcisini bulun **. BaseAddress =..** . ve [temel URL](#base-url)'nizi sağlayın.
 
-Kod örneği kullanır [hizmet sorumlusu](#service-principal) kimlik doğrulaması.
+Kod örneği [hizmet sorumlusu](#service-principal) kimlik doğrulamasını kullanır.
 
 ### <a name="service-principal"></a>Hizmet sorumlusu
 
-Bkz: [hizmet sorumlusu - Azure portal'ı oluşturma](../active-directory/develop/howto-create-service-principal-portal.md) ve [sunucu yöneticisi rolüne hizmet sorumlusu ekleme](analysis-services-addservprinc-admins.md) bir hizmet sorumlusu ayarlamak ve Azure AS gerekli izinler atama hakkında daha fazla bilgi . Adımları tamamladıktan sonra aşağıdaki ek adımları tamamlayın:
+Hizmet sorumlusunu ayarlama hakkında daha fazla bilgi için bkz. [hizmet sorumlusu oluşturma-Azure Portal](../active-directory/develop/howto-create-service-principal-portal.md) ve [Sunucu Yöneticisi rolüne hizmet sorumlusu ekleme](analysis-services-addservprinc-admins.md) ve Azure 'da gerekli izinleri atama hakkında daha fazla bilgi için. Adımları tamamladıktan sonra aşağıdaki ek adımları uygulayın:
 
-1.  Kod örneğinde, bulma **dize yetkilisi =...** , değiştirin **ortak** kuruluşunuzun ile Kiracı kimliği.
-2.  Yorum ClientCredential sınıf kimlik bilgileri nesnesinin örneğini oluşturmak için kullanılan şekilde açıklamasını kaldırın. Olun \<uygulama kimliği > ve \<uygulama anahtarı > değerleri güvenli bir şekilde erişilebilir veya sertifika tabanlı kimlik doğrulaması için hizmet sorumluları kullanın.
+1.  Kod örneğinde, **dize yetkilisini bulun =...** , KURULUŞUNUZUN kiracı kimliğiyle **ortak** olarak değiştirin.
+2.  Kimlik bilgileri nesnesinin örneğini oluşturmak için ClientCredential sınıfının kullanılması için açıklama/açıklama açıklama ekleyin. \<uygulama KIMLIĞI > ve \<uygulama anahtarı > değerlerine güvenli bir şekilde erişildiği veya hizmet sorumluları için sertifika tabanlı kimlik doğrulaması kullandığından emin olun.
 3.  Örnek uygulamayı çalıştırın.
 
 

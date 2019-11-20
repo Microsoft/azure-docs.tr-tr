@@ -1,37 +1,30 @@
 ---
-title: Azure depolama Gezgini'nde Azure Data Lake depolama Gen1 kaynaklarını yönetme
-description: Erişim ve verilerinizi Azure Data Lake depolama Gen1 ve Azure depolama Gezgini'nde kaynakları yönetme hakkında bilgi edinin
-Keywords: Azure Data Lake Store, Azure Depolama Gezgini
-services: Data Lake Store
-documentationcenter: ''
+title: Data Lake Storage 1. kaynaklarını yönetme-Azure Depolama Gezgini
+description: Azure Depolama Gezgini ' de Azure Data Lake Storage 1. verilerinize ve kaynaklarınıza erişme ve bunları yönetme hakkında bilgi edinin
 author: jejiang
-manager: DJ
-editor: Jenny Jiang
-ms.assetid: ''
 ms.service: data-lake-store
-ms.custom: Azure Data Lake Store
-ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.date: 02/05/2018
 ms.author: jejiang
-ms.openlocfilehash: 18ef1f182611a9c8fbf24cd08026633f5449bbe9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a5117f72f933e1e48dc471a75624a8d3921f55af
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60613542"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73832272"
 ---
-# <a name="manage-azure-data-lake-storage-gen1-resources-by-using-storage-explorer"></a>Depolama Gezgini'ni kullanarak Azure Data Lake depolama Gen1 kaynaklarını yönetme
+# <a name="manage-azure-data-lake-storage-gen1-resources-by-using-storage-explorer"></a>Depolama Gezgini kullanarak Azure Data Lake Storage 1. kaynaklarını yönetme
 
-[Azure Data Lake depolama Gen1](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview) büyük miktarlarda metin veya ikili veriler gibi yapılandırılmamış verileri depolamak için bir hizmettir. HTTP veya HTTPS aracılığıyla verilere herhangi bir yerden erişebilirsiniz. Depolama Gezgini'nde Azure Data Lake depolama Gen1 erişmesine ve Data Lake depolama Gen1 verilerine ve kaynaklarına, blobları ve kuyrukları gibi diğer Azure varlıklarının yanı sıra yönetmesine olanak sağlar. Artık farklı Azure varlıklarını aynı aracı kullanarak tek bir yerde yönetebilirsiniz.
+[Azure Data Lake Storage 1.](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview) , metin veya ikili veriler gibi büyük miktarda yapılandırılmamış veriyi depolamaya yönelik bir hizmettir. HTTP veya HTTPS aracılığıyla verilere herhangi bir yerden erişebilirsiniz. Azure Depolama Gezgini Data Lake Storage 1., blob ve kuyruklar gibi diğer Azure varlıklarıyla birlikte Data Lake Storage 1. verilerine ve kaynaklara erişmenize ve bunları yönetmenize olanak sağlar. Artık farklı Azure varlıklarını aynı aracı kullanarak tek bir yerde yönetebilirsiniz.
 
-Başka bir avantajı, Data Lake depolama Gen1 verileri yönetmek için abonelik izninie sahip olmasının gerekmemesidir. Depolama Gezgini'nde, Data Lake depolama Gen1 yolunu ekleyebilirsiniz **yerel ve eklenmiş** düğüm birisi izin verdiği sürece.
+Başka bir avantaj de Data Lake Storage 1. verilerini yönetmek için abonelik iznine sahip olmanız gerekmez. Depolama Gezgini, bir kullanıcı izin verdiği sürece, Data Lake Storage 1. yolunu **yerel ve bağlı** düğüme ekleyebilirsiniz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
+
 Bu makaledeki adımları tamamlayabilmeniz için şu önkoşullar gereklidir:
 
-*   Azure aboneliği. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/pricing/free-trial).
-*   Bir Data Lake depolama Gen1 hesabı. Bir oluşturma hakkında yönergeler için bkz: [Azure Data Lake depolama Gen1 ile çalışmaya başlama](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-portal).
+* Azure aboneliği. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/pricing/free-trial).
+* Data Lake Storage 1. hesabı. Bir oluşturma hakkında yönergeler için bkz. Azure Data Lake Storage 1. kullanmaya [başlama](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-portal).
 
 ## <a name="install-storage-explorer"></a>Depolama Gezgini’ni yükleme
 
@@ -40,18 +33,18 @@ Bu makaledeki adımları tamamlayabilmeniz için şu önkoşullar gereklidir:
 ## <a name="connect-to-an-azure-subscription"></a>Bir Azure aboneliğine Bağlanma
 
 1. Depolama Gezgini’nde soldaki eklenti simgesini seçin.
-       
+
    ![Eklenti simgesi](./media/data-lake-store-in-storage-explorer/plug-in-icon.png)
- 
-2. **Azure Hesabı Ekle**’yi seçip **Oturum açın**’a tıklayın.
+
+1. **Azure Hesabı Ekle**’yi seçip **Oturum açın**’a tıklayın.
 
    !["Azure Depolama’ya Bağlan" iletişim kutusu](./media/data-lake-store-in-storage-explorer/connect-to-azure-subscription.png)
 
-2. **Hesabınızda oturum açın** iletişim kutusuna Azure kimlik bilgilerinizi girin.
+1. **Hesabınızda oturum açın** iletişim kutusuna Azure kimlik bilgilerinizi girin.
 
     ![Azure oturum açma İletişim Kutusu](./media/data-lake-store-in-storage-explorer/sign-in.png)
 
-3. Listeden aboneliğinizi seçip **Uygula**’yı seçin.
+1. Listeden aboneliğinizi seçip **Uygula**’yı seçin.
 
     ![Abonelik bilgileri ve "Uygula" düğmesi](./media/data-lake-store-in-storage-explorer/apply-subscription.png)
 
@@ -59,10 +52,12 @@ Bu makaledeki adımları tamamlayabilmeniz için şu önkoşullar gereklidir:
 
     ![Hesap listesi](./media/data-lake-store-in-storage-explorer/account-list.png)
 
-Data Lake depolama Gen1 Azure aboneliğinize başarıyla bağlandınız.
+Data Lake Storage 1. Azure aboneliğinize başarıyla bağladınız.
 
-## <a name="connect-to-data-lake-storage-gen1"></a>Bağlanmak için Data Lake depolama Gen1
-Birisi kaynakların URI’sini size verirse aboneliğinizde mevcut olmayan kaynaklara erişebilirsiniz. Ardından, oturum açtıktan sonra URI'yi kullanarak Data Lake depolama Gen1 için bağlanabilirsiniz.
+## <a name="connect-to-data-lake-storage-gen1"></a>Data Lake Storage 1. Bağlan
+
+Birisi kaynakların URI’sini size verirse aboneliğinizde mevcut olmayan kaynaklara erişebilirsiniz. Ardından, oturum açtıktan sonra URI 'yi kullanarak Data Lake Storage 1. bağlayabilirsiniz.
+
 1. Depolama Gezgini'ni açın.
 2. Sol bölmede, **Yerel ve Ekli** öğesini genişletin.
 3. **Data Lake Store**’a sağ tıklayıp **Data Lake Store’a bağlan** seçeneğini belirleyin.
@@ -73,48 +68,51 @@ Birisi kaynakların URI’sini size verirse aboneliğinizde mevcut olmayan kayna
 
       ![URI’yi girmek için metin kutusuyla birlikte "Data Lake Store’a bağlan" iletişim kutusu](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-uri-attach-dialog.png)
 
-      ![Data Lake depolama Gen1 için bağlanma sonucu](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-attach-finish.png)
+      ![Data Lake Storage 1. bağlanma sonucu](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-attach-finish.png)
 
-## <a name="view-a-data-lake-storage-gen1-accounts-contents"></a>Bir Data Lake depolama Gen1 hesabının içeriklerini görüntüleme
-Bir Data Lake depolama Gen1 hesabının kaynakları klasörler ve dosyaları içerir.
+## <a name="view-a-data-lake-storage-gen1-accounts-contents"></a>Data Lake Storage 1. hesabının içeriğini görüntüleme
 
-Aşağıdaki adımlar, depolama Gezgini'ndeki bir Data Lake depolama Gen1 hesabının içeriğini görüntüleme işlemini göstermektedir:
+Data Lake Storage 1. hesabın kaynakları klasörler ve dosyalar içerir.
+
+Aşağıdaki adımlarda, Depolama Gezgini içinde Data Lake Storage 1. hesabının içeriğini görüntüleme gösterilmektedir:
 
 1. Depolama Gezgini'ni açın.
-2. Sol bölmede, görüntülemek istediğiniz Data Lake depolama Gen1 hesabını içeren aboneliği genişletin.
+2. Sol bölmede, görüntülemek istediğiniz Data Lake Storage 1. hesabını içeren aboneliği genişletin.
 3. **Data Lake Store**’u genişletin.
-4. Görüntüleyin ve ardından istediğiniz Data Lake depolama Gen1 hesabı düğümüne sağ tıklayın **açık**. Ayrıca, Data Lake depolama Gen1 hesabı açmak için çift tıklayabilirsiniz. 
-   
-   Ana bölme, Data Lake depolama Gen1 hesabının içeriklerini gösterir.
+4. Görüntülemek istediğiniz Data Lake Storage 1. hesabı düğümüne sağ tıklayın ve sonra **Aç**' ı seçin. Ayrıca, Data Lake Storage 1. hesabına çift tıklayarak da açabilirsiniz.
 
-   ![Klasörler listesini içeren ana bölme](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-toolbar-mainpane.png) 
+   Ana bölmede Data Lake Storage 1. hesabının içeriği görüntülenir.
 
-## <a name="manage-resources-in-data-lake-storage-gen1"></a>Data Lake depolama Gen1 kaynakları yönetme
+   ![Klasörler listesini içeren ana bölme](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-toolbar-mainpane.png)
 
-Data Lake depolama Gen1 kaynakları aşağıdaki işlemleri gerçekleştirerek yönetebilirsiniz:
-*   Data Lake depolama Gen1 kaynaklarında birden fazla Data Lake depolama Gen1 hesabında göz atın.  
-*   Bağlanmak ve Data Lake depolama Gen1 doğrudan yönetmek için bir bağlantı dizesi kullanın. 
-*   Bölümündeki bir ACL üzerinden diğer kullanıcılar tarafından paylaşılan Data Lake depolama Gen1 kaynakları görüntülemek **yerel ve eklenmiş**.
-*   Dosya ve klasör CRUD işlemlerini gerçekleştirin: özyinelemeli klasör ve çoklu seçimli dosya desteği. 
-*   En son konumlara hızlıca erişmek için bir klasörü sürükleyip bırakma ve ekleme. Bu işlem, masaüstü Dosya Gezgini deneyimini yansıtır. 
-*   Kopyalama ve Data Lake depolama Gen1 köprü depolama Gezgini'nde bir tıklamayla açın. 
-*   Etkinlik durumunu görüntülemek için sağ alt bölmede Etkinlik Günlüğünü görüntüleme.
-*   Klasör istatistiklerini ve dosya özelliklerini görüntüleme.
+## <a name="manage-resources-in-data-lake-storage-gen1"></a>Data Lake Storage 1. kaynaklarını yönetme
+
+Aşağıdaki işlemleri yaparak Data Lake Storage 1. kaynaklarını yönetebilirsiniz:
+
+* Birden çok Data Lake Storage 1. hesabı genelinde Data Lake Storage 1. kaynaklara göz atabilirsiniz.  
+* Data Lake Storage 1. doğrudan bağlanmak ve yönetmek için bir bağlantı dizesi kullanın.
+* **Yerel ve bağlı**bir ACL aracılığıyla başkaları tarafından paylaşılan Data Lake Storage 1. kaynaklarını görüntüleyin.
+* Dosya ve klasör CRUD işlemlerini gerçekleştirin: özyinelemeli klasör ve çoklu seçimli dosya desteği.
+* En son konumlara hızlıca erişmek için bir klasörü sürükleyip bırakma ve ekleme. Bu işlem, masaüstü Dosya Gezgini deneyimini yansıtır.
+* Depolama Gezgini bir Data Lake Storage 1. köprüsünü tek tıklamayla kopyalayın ve açın.
+* Etkinlik durumunu görüntülemek için sağ alt bölmede Etkinlik Günlüğünü görüntüleme.
+* Klasör istatistiklerini ve dosya özelliklerini görüntüleme.
 
 ## <a name="manage-resources-in-azure-storage-explorer"></a>Azure Depolama Gezgini’nde kaynakları yönetme
-Bir Data Lake depolama Gen1 hesabı oluşturduktan sonra şunları yapabilirsiniz:
+
+Data Lake Storage 1. hesap oluşturduktan sonra şunları yapabilirsiniz:
 
 * Klasörleri ve dosyaları karşıya yükleme, klasörleri ve dosyaları indirme ve kaynakları yerel bilgisayarınızda açma.
 * **Hızlı Erişim**’e sabitleme, yeni bir klasör oluşturma, bir URL’yi kopyalama ve tümünü seçme.
 * Kopyalayıp yapıştırma, yeniden adlandırma, silme, klasör istatistikleri alma ve yenileme.
 
-Aşağıdaki öğeler, bir Data Lake depolama Gen1 hesabında kaynakları nasıl yönetileceği gösterilmektedir. Gerçekleştirmek istediğiniz görev için adımları izleyin.
+Aşağıdaki öğeler Data Lake Storage 1. hesap içindeki kaynakların nasıl yönetileceğini göstermektedir. Gerçekleştirmek istediğiniz görev için adımları izleyin.
 
 ### <a name="upload-files"></a>Dosyaları karşıya yükleme
 
 1. Ana bölmedeki araç çubuğunda **Karşıya Yükle** öğesini ve ardından açılan menüdeki **Dosyaları Karşıya Yükle** öğesini seçin.
 
-   !["Dosyaları Karşıya Yükle" menü öğesi](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-files-menu.png) 
+   !["Dosyaları Karşıya Yükle" menü öğesi](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-files-menu.png)
 
 2. **Karşıya yüklenecek dosyaları seçin** iletişim kutusunda, karşıya yüklemek istediğiniz dosyaları seçin.
 
@@ -126,19 +124,19 @@ Aşağıdaki öğeler, bir Data Lake depolama Gen1 hesabında kaynakları nasıl
 
 1. Ana bölmedeki araç çubuğunda **Karşıya Yükle** öğesini ve ardından açılan menüdeki **Dosyaları Karşıya Yükle** öğesini seçin.
 
-   !["Klasörü Karşıya Yükle" menü öğesi](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-folder-menu.png) 
-     
+   !["Klasörü Karşıya Yükle" menü öğesi](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-folder-menu.png)
+
 2. **Karşıya yüklenecek klasörü seçin** iletişim kutusunda, karşıya yüklemek istediğiniz bir klasörü seçin. Ardından **Klasör Seç**’e tıklayın.
 
-   ![Klasörleri karşıya yükleme iletişim kutusu](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-folder-dialog.png)      
+   ![Klasörleri karşıya yükleme iletişim kutusu](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-folder-dialog.png)
 
    Karşıya yükleme başlatılır.
 
-   ![Karşıya yükleme devam ederken iletişim kutusu](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-folder-drag.png) 
+   ![Karşıya yükleme devam ederken iletişim kutusu](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-upload-folder-drag.png)
 
 > [!NOTE]
-> Karşıya yüklemeyi başlatmak için doğrudan yerel bilgisayarda klasör ve dosyaları sürükleyebilirsiniz. 
-       
+> Karşıya yüklemeyi başlatmak için doğrudan yerel bilgisayarda klasör ve dosyaları sürükleyebilirsiniz.
+
 ### <a name="download-folders-or-files-to-your-local-computer"></a>Klasörleri veya dosyaları yerel bilgisayarınıza indirme
 
 1. İndirmek istediğiniz klasörleri veya dosyaları seçin.
@@ -153,20 +151,20 @@ Aşağıdaki öğeler, bir Data Lake depolama Gen1 hesabında kaynakları nasıl
 
 Dosya indirilir ve temel alınan dosya türü ile ilişkili uygulama kullanılarak açılır. Alternatif olarak, klasör ana bölmede açılır.
 
-![Açılan dosya](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-open.png) 
+![Açılan dosya](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-open.png)
 
 ### <a name="copy-folders-or-files-to-the-clipboard"></a>Dosya veya klasörleri panoya kopyalama
 
 1. Kopyalamak istediğiniz klasörleri veya dosyaları seçin.
 2. Ana bölmedeki araç çubuğunda **Kopyala**’yı seçin. Veya seçilen klasörlere ya da dosyalara sağ tıklayıp kısayol menüsünden **Kopyala**’yı seçin.
-3. Sol bölmede başka bir Data Lake depolama Gen1 hesabına gidin ve ana bölmede görüntülemek için çift tıklayın.
+3. Sol bölmede başka bir Data Lake Storage 1. hesabına gidin ve ana bölmede görüntülemek için çift tıklayın.
 4. Ana bölmedeki araç çubuğunda **Yapıştır**’ı seçerek bir kopyasını oluşturun. Veya hedefin kısayol menüsünden **Yapıştır**’ı seçin.
 
 ![Klasörü kopyalama seçimleri](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-copy-paste.png)
 
 > [!NOTE]
-> Depolama türleri arasında kopyalama/yapıştırma işlemleri desteklenmez. Data Lake depolama Gen1 klasörleri veya dosyaları kopyalayabilir ve bunları başka bir Data Lake depolama Gen1 hesabına yapıştırabilirsiniz. Ancak *olamaz* Data Lake depolama Gen1 klasörleri veya dosyaları kopyalayın ve Azure Blob Depolama veya tersine yapıştırın.
-> 
+> Depolama türleri arasında kopyalama/yapıştırma işlemleri desteklenmez. Data Lake Storage 1. klasörleri veya dosyaları kopyalayabilir ve başka bir Data Lake Storage 1. hesabına yapıştırabilirsiniz. Ancak, Data Lake Storage 1. klasörleri veya *dosyaları kopyalayamaz ve* bunları Azure Blob depolamaya veya başka bir şekilde yapıştıramazsınız.
+>
 > Kopyalama/yapıştırma işlemi, klasör ve dosyaları yerel bilgisayara indirip ardından hedef konuma yükleyerek çalışır. Araç, eylemi arka uçta *gerçekleştirmez*. Büyük dosyalarda kopyalama/yapıştırma işlemi yavaştır. Yüksek performanslı dosya kopyalama/taşıma iyileştirmeleri devam ediyor.
 
 ### <a name="delete-folders-or-files"></a>Klasörleri veya dosyaları silme
@@ -189,14 +187,15 @@ Dosya indirilir ve temel alınan dosya türü ile ilişkili uygulama kullanılar
 Bir klasörü **Hızlı Erişim** düğümüne sabitledikten sonra kolayca kaynaklara erişebilirsiniz.
 
 ### <a name="use-deep-links"></a>Ayrıntılı bağlantıları kullanma
+
 Bir URL’niz varsa, URL’yi Dosya Gezgini’nde veya tarayıcıda adres yoluna girebilirsiniz. Daha sonra URL’nin konumuna gitmek için Storage Explorer.exe otomatik olarak çalıştırılır.
 
 ![Dosya Gezgininde ayrıntılı bağlantı](./media/data-lake-store-in-storage-explorer/storageexplorer-adls-deep-link.png)
 
-
 ## <a name="next-steps"></a>Sonraki adımlar
+
 * [En son Depolama Gezgini yayın notlarını ve videolarını](https://www.storageexplorer.com) görüntüleyin.
 * [Azure Depolama Gezgini’nde Azure Cosmos DB’yi yönetmeyi](https://docs.microsoft.com/azure/cosmos-db/storage-explorer) öğrenin.
 * [Depolama Gezgini ile çalışmaya başlayın](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
-* [Azure Data Lake depolama Gen1 ile çalışmaya başlama](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview).
+* [Azure Data Lake Storage 1. kullanmaya başlayın](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview).
 * [Azure Depolama Gezgini’nde Azure Cosmos DB’yi kullanma hakkındaki YouTube videosunu](https://www.youtube.com/watch?v=iNIbg1DLgWo&feature=youtu.be) izleyin.

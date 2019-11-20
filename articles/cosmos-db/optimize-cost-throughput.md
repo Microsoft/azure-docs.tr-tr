@@ -1,71 +1,71 @@
 ---
-title: Azure Cosmos DB'de aktarım hızı maliyeti en iyi duruma getirme
-description: Bu makalede, Azure Cosmos DB'de depolanan veriler için aktarım hızını iyileştirmek açıklanmaktadır.
-author: rimman
+title: Azure Cosmos DB aktarım hızını en iyi duruma getirme
+description: Bu makalede, Azure Cosmos DB depolanan veriler için üretilen iş maliyetlerinin nasıl iyileştirileceği açıklanır.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/21/2019
-ms.author: rimman
-ms.openlocfilehash: ddbec882675dba4724406ad1ea8079df377c34fc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/26/2019
+ms.openlocfilehash: 4bdf842ae24d90850280a5a19038dbd00168ff2c
+ms.sourcegitcommit: 87efc325493b1cae546e4cc4b89d9a5e3df94d31
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65967311"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73053359"
 ---
-# <a name="optimize-provisioned-throughput-cost-in-azure-cosmos-db"></a>Azure Cosmos DB'de sağlanan aktarım hızı maliyeti iyileştirin
+# <a name="optimize-provisioned-throughput-cost-in-azure-cosmos-db"></a>Azure Cosmos DB sağlanan üretilen iş maliyetini iyileştirin
 
-Azure Cosmos DB, sağlanan aktarım hızı modeli sunarak, herhangi bir ölçekte öngörülebilir performans sunar. Ayırma veya önceden işleme sağlama "gürültülü komşu", performansa etkisini ortadan kaldırır. İhtiyacınız olan aktarım hızı miktarda belirtin ve SLA ile desteklenen yapılandırılmış aktarım hızı, Azure Cosmos DB garanti eder.
+Sağlanan aktarım hızı modeli sunarak Azure Cosmos DB, herhangi bir ölçekte tahmin edilebilir performans sağlar. Zaman ayırarak üretilen iş hacmi, performansınızda "gürültülü komşu" etkisini ortadan kaldırır. İhtiyacınız olan aktarım hızını tam olarak belirtirsiniz ve Azure Cosmos DB, SLA tarafından desteklenen, yapılandırılan üretilen işi garanti eder.
 
-Bir en az 400 RU/sn aktarım hızı ile başlayın ve en fazla on milyonlarca istek başına saniye veya daha da fazla ölçeklendirin. Azure Cosmos kapsayıcı ya da Okuma isteği, yazma isteği, sorgu isteği, saklı yordamlar gibi veritabanına karşı dağıttığınız her istek, sağlanan aktarım hızınızı çıkarılır karşılık gelen bir maliyeti vardır. 400 RU/sn sağlamak ve 40 RU maliyetleri bir sorgu sorunu, saniyede 10 sorgularını vermek mümkün olacaktır. Ötesinde herhangi bir istek oranı sınırlı alırsınız ve isteği yeniden denemeniz gerekir. İstemci sürücüleri kullanıyorsanız, bunlar otomatik yeniden deneme mantığı destekler.
+En az 400 RU/sn aktarım hızı ile başlayabilir ve saniyede on milyonlarca istek ve daha fazlasını ölçeklendirebilirsiniz. Azure Cosmos kapsayıcınızda veya bir okuma isteği, yazma isteği, sorgu isteği, saklı yordamların, sizin sağladığınız iş maliyetinizden kesilen karşılık gelen bir maliyeti olan her bir istek için sorun. 400 RU/sn temin edebilir ve maliyeti 40 RU olan bir sorgu verirseniz, saniye başına 10 tür sorgu gönderebilirsiniz. Bundan sonraki tüm istekler hız sınırlı alır ve isteği yeniden denemeniz gerekir. İstemci sürücüleri kullanıyorsanız, otomatik yeniden deneme mantığını destekler.
 
-Aktarım hızı veritabanlarında sağlayabilir veya kapsayıcıları ve her stratejinin senaryoya bağlı olarak maliyetlerinden tasarruf etmenize yardımcı olabilir.
+Veritabanları veya kapsayıcılar üzerinde üretilen iş sağlayabilirsiniz ve her strateji, senaryoya bağlı olarak maliyetlerde tasarruf etmenize yardımcı olabilir.
 
-## <a name="optimize-by-provisioning-throughput-at-different-levels"></a>Aktarım hızı farklı düzeylerde sağlayarak en iyi duruma getirme
+## <a name="optimize-by-provisioning-throughput-at-different-levels"></a>Farklı düzeylerde sağlama verimini sağlayarak iyileştirin
 
-* Örneğin tüm kapsayıcılar, bir veritabanı aktarım hızını sağlarsanız koleksiyonları/tablolar/grafik veritabanı içinde yüke bağlı işleme paylaşabilirsiniz. Veritabanı düzeyinde ayrılan aktarım hızı eşit olmayan şekilde, kapsayıcıları belirli bir dizi iş yüküne bağlı olarak paylaşılır.
+* Bir veritabanında üretilen iş temin ediyorsanız, bu veritabanındaki koleksiyonlar/tablolar/grafikler için tüm kapsayıcılar yük temelinde aktarım hızını paylaşabilir. Veritabanı düzeyinde ayrılan aktarım hızı, belirli bir kapsayıcı kümesindeki iş yüküne bağlı olarak eşit olarak paylaşılır.
 
-* Bir kapsayıcısında aktarım hızını sağlarsanız, SLA ile desteklenen, bu kapsayıcı için aktarım hızı kesin. Mantıksal bölüm anahtarı seçimi tüm mantıksal bölümler kapsayıcısının yükünü barındırabilmesi için önemlidir. Bkz: [bölümleme](partitioning-overview.md) ve [yatay ölçeklendirme](partition-data.md) makaleleri daha fazla ayrıntı için.
+* Bir kapsayıcıda üretilen iş temin ediyorsanız, bu kapsayıcı için SLA tarafından desteklenen verimlilik garanti edilir. Mantıksal bölüm anahtarı seçimi, bir kapsayıcının tüm mantıksal bölümlerinde yük dağıtımı için çok önemlidir. Daha fazla ayrıntı için bkz. [bölümlendirme](partitioning-overview.md) ve [yatay ölçeklendirme](partition-data.md) makaleleri.
 
-Sağlanan aktarım hızı stratejisi olarak karar vermek için bazı yönergeler aşağıda verilmiştir:
+Aşağıda, sağlanan bir verimlilik stratejisine karar vermek için bazı yönergeler verilmiştir:
 
-**Aktarım hızı (kapsayıcılar kümesini içeren) bir Azure Cosmos DB veritabanı sağlama düşünün**:
+Şu **durumlarda bir Azure Cosmos veritabanında (bir kapsayıcı kümesi içeren) üretilen iş sağlamayı düşünün**:
 
-1. Birkaç düzine Azure Cosmos kapsayıcılar içerir ve aktarım hızı bazılarını veya tümünü arasında paylaşmak istiyorsunuz. 
+1. Birkaç düzine Azure Cosmos Kapsayıcınız var ve bunların bazıları veya tümünde üretilen işi paylaşmak istiyorsunuz. 
 
-2. Iaas tarafından barındırılan sanal makineleri veya şirket içinde NoSQL veya Azure Cosmos DB için ilişkisel veritabanları gibi çalışması için tasarlanmış tek kiracılı veritabanı geçiriliyor. Veri modelinizi değişiklik yapmak birçok tabloları/koleksiyon/graflar ve, varsa istemezsiniz. Unutmayın, veri modelinizi bir şirket içi veritabanından geçirilirken değil güncelleştiriyorsanız, Azure Cosmos DB tarafından sunulan avantajlardan bazıları tehlikeye gerekebilir. Veri modelinizi performans açısından en iyi şekilde yararlanmak ve maliyetleri iyileştirmek için her zaman reaccess önerilir. 
+2. IaaS barındırılan VM 'lerde veya şirket içinde çalışacak şekilde tasarlanan tek kiracılı bir veritabanından geçiş yapıyorsanız, örneğin, NoSQL veya ilişkisel veritabanları Azure Cosmos DB. Birden çok koleksiyon/tablo/grafik varsa ve veri modelinizde herhangi bir değişiklik yapmak istemiyorsanız. Şirket içi bir veritabanından geçiş yaparken veri modelinizi güncelleştirmeiyorsanız Azure Cosmos DB tarafından sunulan avantajlardan bazılarının güvenliğini tehlikeye atabilir. Performans açısından en iyi şekilde yararlanmak ve ayrıca maliyetleri iyileştirmek için veri modelinize her zaman yeniden erişmeniz önerilir. 
 
-3. Planlanmamış iş yükleri ve veritabanı düzeyinde iş yükünde beklenmeyen depo için tabi havuza alınmış aktarım hızı da artış devralarak istiyorsunuz. 
+3. İş yüklerindeki planlanmamış ani artışları artışlarını devralarak, veritabanı düzeyinde tabi üretilen iş yükünü, iş yükünde beklenmedik şekilde ani bir biçimde sanallaştırarak etmek istiyorsunuz. 
 
-4. Ayar belirli aktarım hızını yerine tek tek kapsayıcılar, kapsayıcı veritabanı içinde bir dizi toplam aktarım hızı alma hakkında dikkatli olun.
+4. Tek tek kapsayıcılarda belirli aktarım hızı ayarlamak yerine, veritabanının içindeki bir kapsayıcı kümesi boyunca toplam aktarım hızını alma konusunda dikkatli olursunuz.
 
-**Bir kapsayıcının aktarım hızını, sağlamayı göz önünde bulundurun:**
+**Şu durumlarda tek bir kapsayıcıda üretilen işi sağlamayı düşünün:**
 
-1. Birkaç Azure Cosmos kapsayıcılar var. Azure Cosmos DB, şemadan olduğundan, bir kapsayıcı heterojen şemasına sahip ve birden çok kapsayıcı türü, her varlık için bir tane oluşturmak müşterilerin gerektirmez öğelerini içerebilir. Her zaman bir seçenek gruplandırma ayrı 10-20 kapsayıcıları tek bir kapsayıcıya derseniz dikkate alınması gereken mantıklı olur. Bir 400 RU ile kapsayıcılar için en düşük, tüm 10-20 kapsayıcıları bir havuzu daha uygun maliyetli olabilir. 
+1. Birkaç Azure Cosmos Kapsayıcınız vardır. Azure Cosmos DB şema belirsiz olduğundan, bir kapsayıcı heterojen şemaları olan öğeleri içerebilir ve müşterilerin her varlık için bir tane olmak üzere birden çok kapsayıcı türü oluşturmasını gerektirmez. Bu her zaman göz önünde bulundurmanız 10-20 gereken tek bir seçenektir. Kapsayıcılar için en az 400 ru ile, tüm 10-20 kapsayıcıları tek bir havuza, daha uygun maliyetli olabilir. 
 
-2. Belirli bir kapsayıcısında aktarım hızını denetleyebilir ve garantili aktarım hızı belirli bir kapsayıcıdaki SLA ile desteklenen alın istiyorsunuz.
+2. Belirli bir kapsayıcıdaki aktarım hızını denetlemek ve SLA tarafından desteklenen belirli bir kapsayıcıda garantili aktarım hızını almak istiyorsunuz.
 
-**Yukarıdaki iki stratejiler karma göz önünde bulundurun:**
+**Yukarıdaki iki stratejinin karma öğesini düşünün:**
 
-1. Daha önce belirtildiği gibi Azure Cosmos DB, karıştırıp artık Azure Cosmos veritabanı, veritabanı yanı sıra, aynı veritabanındaki bazı kapsayıcıları üzerinde sağlanan aktarım hızı paylaşabiliriz bazı kapsayıcılara olması için yukarıdaki iki stratejileri eşleştirmenize olanak sağlar , hangi adanmış miktarda sağlanan aktarım hızı. 
+1. Daha önce belirtildiği gibi Azure Cosmos DB, yukarıdaki iki stratejiyi karıştırabileceğiniz ve eşleştirecek ve artık Azure Cosmos veritabanı dahilinde bazı kapsayıcılara sahip olabilirsiniz. bu sayede, veritabanında sağlanan aktarım hızını ve ayrıca aynı veritabanı içindeki bazı kapsayıcıları paylaşabilir , özel olarak sağlanan üretilen iş miktarlarına sahip olabilir. 
 
-2. Her iki veritabanı düzeyinde sağlanan aktarım hızı adanmış aktarım hızı bazı kapsayıcılar ile sahip olduğunuz bir karma yapılandırmasıyla görünmesi yukarıdaki stratejileri uygulayabilirsiniz.
+2. Yukarıdaki stratejileri, bir karma yapılandırma ile birlikte çalışmak için uygulayabilirsiniz. burada, belirli bir iş hacmi olan bazı kapsayıcılarda veritabanı düzeyinde sağlanan aktarım hızına sahip olursunuz.
 
-API, seçimi bağlı olarak aşağıdaki tabloda gösterildiği gibi aktarım hızını farklı ayrıntı düzeylerinde sağlayabilirsiniz.
+Aşağıdaki tabloda gösterildiği gibi, API seçimine bağlı olarak, farklı bir ayırluluya aktarım hızı sağlayabilirsiniz.
 
-|API|İçin **paylaşılan** aktarım hızı, yapılandırma |İçin **adanmış** aktarım hızı, yapılandırma |
+|eklentisi|**Paylaşılan** verimlilik için yapılandırma |**Adanmış** aktarım hızı için yapılandırma |
 |----|----|----|
 |SQL API’si|Database|Kapsayıcı|
 |MongoDB için Azure Cosmos DB API'si|Database|Koleksiyon|
-|Cassandra API’si|Keyspace|Tablo|
-|Gremlin API|Veritabanı hesabı|Graf|
+|Cassandra API’si|anahtar alanı|Tablo|
+|Gremlin API|Veritabanı hesabı|Graph|
 |Tablo API’si|Veritabanı hesabı|Tablo|
 
-Farklı düzeylerde sağlama aktarım hızı ile maliyetlerinizi iş yükü özelliklerine dayanan iyileştirebilirsiniz. Daha önce bahsedildiği gibi program aracılığıyla ve herhangi bir zaman artış yapabilir veya ya da tek tek kapsayıcı veya toplu bir dizi kapsayıcıları sağladığınız aktarım azaltabilirsiniz. Aktarım hızı, iş yükü değiştikçe esnek ölçeklendirme tarafından yalnızca yapılandırdığınız aktarım hızı için ödeme yaparsınız. Birden çok bölgede kapsayıcınızı veya kapsayıcıları kümesi dağıtılırsa, sonra kapsayıcıdaki yapılandırmanız aktarım hızı veya bir dizi kapsayıcıları tüm bölgelerde kullanılabilir olmasını garanti edilir.
+Farklı düzeylerde üretilen iş yükünü sağlarken, iş yükünüzün özelliklerine göre maliyetlerinizi iyileştirebilirsiniz. Daha önce belirtildiği gibi, programlama yoluyla ve herhangi bir zamanda tek tek kapsayıcılar veya bir kapsayıcı kümesi genelinde sağlanan aktarım hızını artırabilir ya da azaltabilirsiniz. İş yükünüz değiştikçe ölçek işleme esnek göre yalnızca yapılandırdığınız aktarım hızı için ödeme yaparsınız. Kapsayıcınız veya bir kapsayıcı kümesi birden çok bölgeye dağıtılmışsa, kapsayıcıda yapılandırdığınız üretilen iş veya bir kapsayıcı kümesi tüm bölgelerde kullanılabilir hale getirilir.
 
-## <a name="optimize-with-rate-limiting-your-requests"></a>Hız isteklerinizi sınırlama ile en iyi duruma getirme
+## <a name="optimize-with-rate-limiting-your-requests"></a>İsteklerin hız sınırlaması ile en iyileştirin
 
-Gecikme süresi için hassas olmayan iş yükleri için daha az aktarım hızına ve sağlanan aktarım hızı gerçek aktarım hızı aştığında, hız sınırlama işlemek uygulamanın sağlar. Sunucu sıd'lerde istek RequestRateTooLarge (HTTP durum kodu 429) ile bitemez ve dönüş `x-ms-retry-after-ms` Kullanıcı isteği yeniden denemeden önce beklemesi gereken milisaniye cinsinden süre miktarını belirten başlığı. 
+Gecikme süresine duyarlı olmayan iş yükleri için daha az üretilen iş sağlayabilir ve gerçek aktarım hızı sağlanan aktarım hızını aştığında uygulamanın hız sınırlaması olmasını sağlayabilirsiniz. Sunucu, isteği `RequestRateTooLarge` (HTTP durum kodu 429) ile sona erpreemptively ve kullanıcının isteği yeniden denemeden önce beklemesi gereken süreyi milisaniye olarak belirten `x-ms-retry-after-ms` üst bilgisini döndürür. 
 
 ```html
 HTTP Status 429, 
@@ -73,116 +73,114 @@ HTTP Status 429,
  x-ms-retry-after-ms :100
 ```
 
-### <a name="retry-logic-in-sdks"></a>Yeniden deneme mantığı, SDK'ları 
+### <a name="retry-logic-in-sdks"></a>SDK 'larda yeniden deneme mantığı 
 
-Yerel SDK'ları (.NET/.NET Core, Java, Node.js ve Python) örtük olarak bu yanıt catch, sunucu tarafından belirtilen retry-after üst bilgisi saygı ve isteği yeniden deneyin. Hesabınızda aynı anda birden çok istemci tarafından erişilen sürece sonraki yeniden deneme işlemi başarılı olur.
+Yerel SDK 'lar (.NET/.NET Core, Java, Node. js ve Python), bu yanıtı dolaylı olarak yakalayıp sunucu tarafından belirtilen yeniden deneme üst bilgisine göre yakalar ve isteği yeniden dener. Hesabınız birden çok istemci tarafından aynı anda erişilmediği takdirde, sonraki yeniden deneme başarılı olur.
 
-Üst üste istek hızı tutarlı bir şekilde çalışan birden fazla istemciniz varsa, 9'a ayarlanmış olan varsayılan yeniden deneme sayısı şu anda yeterli olmayabilir. Böyle bir durumda, istemci oluşturur bir `DocumentClientException` 429 uygulama durumuyla kod. Varsayılan yeniden deneme sayısını ayarlayarak değiştirilebilir `RetryOptions` ConnectionPolicy örneğinde. İstek, istek hızı üzerinde çalışmaya devam ederse varsayılan olarak, durum kodu 429 DocumentClientException 30 saniye sonra bir toplam bekleme süresi döndürülür. Bu geçerli bir yeniden deneme sayısı en fazla yeniden deneme sayısından daha az olduğunda bile oluşur, varsayılan 9 veya kullanıcı tanımlı bir değer olmalıdır. 
+İstek hızının sürekli olarak birden fazla istemciniz varsa, o anda 9 ' a ayarlanmış olan varsayılan yeniden deneme sayısı yeterli olmayabilir. Bu gibi durumlarda, istemci uygulamaya 429 durum kodu ile bir `RequestRateTooLargeException` oluşturur. Varsayılan yeniden deneme sayısı, ConnectionPolicy örneğindeki `RetryOptions` ayarlanarak değiştirilebilir. Varsayılan olarak, istek hızının üzerinde çalışmaya devam ederse, 429 durum koduna sahip `RequestRateTooLargeException`, 30 saniyelik birikmeli bir bekleme süresi dolduktan sonra döndürülür. Bu durum, geçerli yeniden deneme sayısı en fazla yeniden deneme sayısından az olduğunda bile, varsayılan olarak 9 veya Kullanıcı tanımlı bir değer olmalıdır. 
 
-[MaxRetryAttemptsOnThrottledRequests](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.retryoptions.maxretryattemptsonthrottledrequests?view=azure-dotnet) ayarlanır 3'e kadar bu durumda, bir istek işlemi tarafından ayrılmış aktarım hızı koleksiyon aşan sınırlı oranı ise istek işlemini yeniden deneme üç kez atamadan önce uygulamaya özel durum.  [MaxRetryWaitTimeInSeconds](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.retryoptions.maxretrywaittimeinseconds?view=azure-dotnet#Microsoft_Azure_Documents_Client_RetryOptions_MaxRetryWaitTimeInSeconds) 60 olarak ayarlanır, bu durumda toplam yeniden deneme zaman bekliyorsa saniye ilk 60 saniyede istek aşıyor, özel durum oluşturulur.
+[MaxRetryAttemptsOnThrottledRequests](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.retryoptions.maxretryattemptsonthrottledrequests?view=azure-dotnet) 3 olarak ayarlanır. bu nedenle, bir istek işlemi, kapsayıcının ayrılmış aktarım hızını aşarak sınırlı olursa istek işlemi, uygulamaya özel durumu oluşturmadan önce üç kez yeniden dener. [Maxretrywaittimeınseconds](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.retryoptions.maxretrywaittimeinseconds?view=azure-dotnet#Microsoft_Azure_Documents_Client_RetryOptions_MaxRetryWaitTimeInSeconds) 60 olarak ayarlanır. bu nedenle, ilk istek 60 saniye değerini aştığından kümülatif yeniden deneme bekleme süresi saniye cinsinden, özel durum atılır.
 
 ```csharp
 ConnectionPolicy connectionPolicy = new ConnectionPolicy(); 
-
 connectionPolicy.RetryOptions.MaxRetryAttemptsOnThrottledRequests = 3; 
-
 connectionPolicy.RetryOptions.MaxRetryWaitTimeInSeconds = 60;
 ```
 
-## <a name="partitioning-strategy-and-provisioned-throughput-costs"></a>Bölümleme stratejisi ve sağlanan aktarım hızı maliyetleri
+## <a name="partitioning-strategy-and-provisioned-throughput-costs"></a>Bölümlendirme stratejisi ve sağlanan üretilen iş maliyetleri
 
-Azure Cosmos DB'de maliyetleri iyileştirmek iyi bir bölümleme stratejisi önemlidir. Olduğunu depolama ölçümleri sunulan bölümlerin, eğme emin olun. Olduğunu verimlilik metriklerini ile kullanıma sunulan bir bölüm için aktarım hızının eğriltme emin olun. Olduğunu belirli bölüm anahtarları Hayır eğriltme emin olun. Baskın anahtarları depolama ölçümleri sunulur ancak anahtar, uygulama erişim desen bağımlı olacaktır. Şu mantıksal bölüm anahtarı hakkında düşünmek idealdir. İyi bir bölüm anahtarı, aşağıdaki özelliklere sahip olması beklenir:
+Azure Cosmos DB maliyetleri iyileştirmek için iyi bölümleme stratejisi önemlidir. Depolama ölçümleri aracılığıyla sunulan bölümlerin eğriliği olmadığından emin olun. Üretilen iş ölçümleriyle birlikte sunulan bir bölüm için işleme eğriliği olmadığından emin olun. Belirli bölüm anahtarlarını doğru bir şekilde eğmek olmadığından emin olun. Depolama alanındaki baskın anahtarlar ölçümler aracılığıyla sunulur ancak anahtar, uygulama erişim öründile göre değişir. Doğru mantıksal bölüm anahtarı hakkında düşünmek en iyisidir. İyi bir bölüm anahtarının aşağıdaki özelliklere sahip olması beklenir:
 
-* Tüm bölümler arasında ve eşit olarak zaman içinde iş yükü eşit olarak yayılır bir bölüm anahtarı seçin. Diğer bir deyişle, veriler ve daha az veya hiç veri bazı anahtarlarla çoğunluğu ile bazı anahtarlarına sahip olmamalıdır. 
+* İş yükünü tüm bölümler arasında eşit olarak ve zaman içinde eşit olarak yayılan bir bölüm anahtarı seçin. Diğer bir deyişle, verilerin büyük çoğunluğuna ve bazı anahtarlara sahip olmayan bir anahtara sahip olmanız gerekmez. 
 
-* Etkinleştirir erişim desenlerini mantıksal bölümler arasında eşit oranda yaymak için bir bölüm anahtarı seçin. Makul bile tüm anahtarları arasında iş yüküdür. Diğer bir deyişle, iş yükü çoğunu birkaç belirli anahtarlar üzerinde odaklı olmamalıdır. 
+* Erişim desenlerinin mantıksal bölümler arasında eşit olarak yayılmasını sağlayan bir bölüm anahtarı seçin. İş yükü tüm anahtarlar arasında eşit olarak kabul edilir. Diğer bir deyişle, iş yükünün çoğu belirli bir anahtara odaklanmamalıdır. 
 
-* Çok çeşitli değerleri olan bir bölüm anahtarı seçin. 
+* Geniş bir değer aralığına sahip bir bölüm anahtarı seçin. 
 
-Böylece bu kaynaklara veri depolama ve aktarım hızı için mantıksal bölümler arasında dağıtılabilir temel veriler ve etkinliğin kapsayıcınızda mantıksal bölümler kümesi arasında yaymak için olur. Bölüm anahtarları için aday sık sorgularınızı filtre olarak görüntülenen özelliklerini içerebilir. Sorguları içinde filtre koşulu bölüm anahtarını dahil ederek, verimli bir şekilde yeniden yönlendirilebilir. Böyle bir bölümleme stratejisi, sağlanan aktarım hızını en iyi duruma getirme çok daha kolay olacaktır. 
+Temel düşünce, veri depolama ve aktarım kaynakları için kaynakların mantıksal bölümler arasında dağıtılabilecek şekilde, verileri ve etkinliklerinizi kapsayıcıda mantıksal bölümler kümesi genelinde yaymaya yöneliktir. Bölüm anahtarları adayları, sorgularda filtre olarak sık görüntülenen özellikleri içerebilir. Filtre koşuluna bölüm anahtarı eklenerek sorgular etkin bir şekilde yönlendirilebilir. Bu tür bir bölümleme stratejisiyle sağlanan üretilen işi iyileştirmek çok daha kolay olacaktır. 
 
-### <a name="design-smaller-items-for-higher-throughput"></a>Daha küçük öğe daha yüksek performans için tasarlama 
+### <a name="design-smaller-items-for-higher-throughput"></a>Daha yüksek aktarım hızı için daha küçük öğeler tasarlama 
 
-İstek yükü veya belirli bir işlemi istek işleme maliyeti doğrudan öğesi boyutunu ilişkilendirilir. Büyük öğeler üzerinde işlemler birden çok küçük öğeler üzerinde işlemler maliyetlidir. 
+Belirli bir işlemin istek ücreti veya istek işleme maliyeti, öğenin boyutuyla doğrudan bağıntılı olur. Büyük öğelerdeki işlemler, daha küçük öğeler üzerinde işlemlerden daha fazlasını ücretlendirilecektir. 
 
-## <a name="data-access-patterns"></a>Veri erişim desenleri 
+## <a name="data-access-patterns"></a>Veri erişimi desenleri 
 
-Mantıksal olarak ne sıklıkta veri erişim tabanlı mantıksal kategoriler halinde verilerinizi ayırmak için her zaman iyi bir uygulamadır. Sık erişimli, Orta veya soğuk verileri olarak gruplayarak kullanılan depolama alanına ve gerekli performansa hassas ayarlamalar yapabilirsiniz. Erişim sıklığına bağlı olarak, verileri ayrı kapsayıcılarına (örneğin, tablolar, grafikler ve koleksiyonları) koyun ve bunları veri kesiminin ihtiyaçlarını karşılamak için sağlanan aktarım hızını ince ayar yapma. 
+Verilere ne sıklıkla erişdiklerinizi temel alarak verilerinizi mantıksal kategoriler halinde mantıksal olarak ayırmak her zaman iyi bir uygulamadır. Sık erişimli, orta veya soğuk veriler olarak kategorilere ayırarak, tüketilen depolamayı ve gereken aktarım hızını hassas bir şekilde ayarlayabilirsiniz. Erişim sıklığına bağlı olarak, verileri ayrı kapsayıcılara (örneğin, tablolar, grafikler ve koleksiyonlar) yerleştirebilir ve bu veri segmentinin ihtiyaçlarına uyum sağlamak için bunların üzerinde sağlanan aktarım hızını hassas bir şekilde ayarlayabilirsiniz. 
 
-Ayrıca, Azure Cosmos DB kullanıyorsanız ve belirli veri değerlerine göre aramak için yapmayacağınız veya bunları nadiren erişecek bildiğiniz sıkıştırılmış değerleri bu özniteliklerin depolamanız gerekir. Bu yöntem ile depolama alanı, dizin alan ve sağlanan aktarım hızı kaydedin ve düşük maliyetlerden de neden.
+Ayrıca, Azure Cosmos DB kullanıyorsanız ve belirli veri değerlerine göre arama yapabildiğinizi veya nadiren erişebileceğinizi biliyorsanız, bu özniteliklerin sıkıştırılmış değerlerini depolamanız gerekir. Bu yöntemle depolama alanı, Dizin alanı ve sağlanan aktarım hızı ile tasarruf edersiniz ve daha düşük maliyetlerle sonuçlanır.
 
-## <a name="optimize-by-changing-indexing-policy"></a>Dizin oluşturma ilkesini değiştirerek en iyi duruma getirme 
+## <a name="optimize-by-changing-indexing-policy"></a>Dizin oluşturma ilkesini değiştirerek iyileştirin 
 
-Varsayılan olarak, Azure Cosmos DB her kaydın her özelliğin otomatik olarak dizinini oluşturur. Bu, geliştirme sürecini kolaylaştırır ve birçok farklı türde geçici sorgular arasında mükemmel bir performans sağlamak için tasarlanmıştır. Özellikleri binlerce büyük kaydınız varsa, her özelliğin dizin oluşturma için aktarım hızı maliyeti ödeme özellikle, yalnızca 10 veya bu özellikleri 20 karşı sorgularsanız yararlı olmayabilir. Belirli iş yükünüze dayalı bir tanıtıcı tamamlanmasında yakınlaşın, kılavuzumuzu dizin ilkenizi ayarlamak için aynıdır. Azure Cosmos DB, dizin oluşturma ilkesi ilgili tüm ayrıntılara bulunabilir [burada](indexing-policies.md). 
+Varsayılan olarak, Azure Cosmos DB her kaydın her bir özelliğini otomatik olarak dizine ekler. Bu, geliştirmeyi kolaylaştırmak ve birçok farklı türde geçici sorgu üzerinde mükemmel performans sağlamak için tasarlanmıştır. Binlerce özellik içeren büyük kayıtlarınız varsa, özellikle bu özelliklerden yalnızca 10 veya 20 ' ye göre sorgulama yaparsanız, her özelliğin dizinleme için üretilen iş maliyetini ödemesine yardımcı olabilirsiniz. Belirli iş yükünüze yönelik bir tanıtıcı elde etmeniz daha da sonra, kılavuzumuz Dizin ilkenizi ayarlamanıza yardımcı olur. Azure Cosmos DB Dizin oluşturma ilkesi hakkında tam Ayrıntılar [burada](indexing-policies.md)bulunabilir. 
 
-## <a name="monitoring-provisioned-and-consumed-throughput"></a>İzleme ve sağlanan aktarım hızı tüketilen 
+## <a name="monitoring-provisioned-and-consumed-throughput"></a>Sağlanan ve tüketilen verimlilik izleniyor 
 
-Azure portalında tükettiniz RU sayısını yanı sıra toplam RU sayısı, oranı sınırlı istek sayısı izleyebilirsiniz. Aşağıdaki görüntüde bir örnek kullanım ölçümü gösterilmektedir:
+Sağlanan toplam RUs sayısını, hız sınırlı isteklerin sayısını ve Azure portal kullandığınız ru sayısını izleyebilirsiniz. Aşağıdaki görüntüde örnek kullanım ölçümü gösterilmektedir:
 
-![Azure portalında izleme istek birimleri](./media/optimize-cost-throughput/monitoring.png)
+![Azure portal istek birimlerini izleme](./media/optimize-cost-throughput/monitoring.png)
 
-Oranı sınırlı isteklerinin sayısı belirli bir eşiği aşıp aşmadığını denetlemek için uyarıları da ayarlayabilirsiniz. Bkz: [Azure Cosmos DB izleme](use-metrics.md) makale daha fazla ayrıntı için. Bu uyarılar, hesap yöneticilerine bir e-posta gönderin ya da otomatik olarak sağlanan aktarım hızı artırmak için özel bir HTTP Web kancası veya bir Azure işlevi çağırabilir. 
+Ayrıca, hız sınırlı isteklerin sayısının belirli bir eşiği aşıp aşmadığını denetlemek için uyarılar da ayarlayabilirsiniz. Daha fazla bilgi için bkz. [Azure Cosmos DB makalesini izleme](use-metrics.md) . Bu uyarılar, sağlanan aktarım hızını otomatik olarak artırmak için hesap yöneticilerine e-posta gönderebilir veya özel bir HTTP Web kancası veya bir Azure Işlevi çağırabilir. 
 
-## <a name="scale-your-throughput-elastically-and-on-demand"></a>Esnek bir biçimde aktarım hızınızı ölçeklendirebileceğiniz ve isteğe bağlı 
+## <a name="scale-your-throughput-elastically-and-on-demand"></a>Aktarım hızını esnek ve isteğe bağlı olarak ölçeklendirin 
 
-Sağlanan aktarım hızı için faturalandırılırsınız olduğundan, sağlanan aktarım hızı gereksinimlerinizi için eşleşen, kullanılmayan aktarım hızı ücretleri önlemenize yardımcı olabilir. Gerektiğinde, her zaman aşağı veya yukarı, sağlanan aktarım hızı ölçeklendirebilirsiniz.  
+Sağlanan aktarım hızı için faturalandırılırsınız, sağlanan aktarım hızını gereksinimlerinize göre eşleştirmek, kullanılmayan aktarım hızına karşı ücretlendirmeden kaçınmanıza yardımcı olabilir. Sağlanan aktarım hızını dilediğiniz zaman gerektiği gibi ölçeklendirebilir veya azaltabilirsiniz.  
 
-* İzleme, RU kullanımını ve oranı sınırlı istekleri oranını gün veya hafta boyunca sabiti boyunca sağlanan tutmak gerekmez gösterilmesine neden olabilir. Geceleri veya hafta sırasında daha az trafik alabilirsiniz. Azure portal veya Azure Cosmos DB yerel SDK veya REST API'sini kullanarak, sağladığınız aktarım herhangi bir zamanda ölçeklendirebilirsiniz. Azure Cosmos DB'nin REST API uç noktaları, program aracılığıyla zamana bağlı olarak gün veya haftanın günü kodunuzdan aktarım hızını ayarlamak basit hale getirme kapsayıcılarınızı performans düzeyini güncelleştirmek için sağlar. İşlem, kapalı kalma süresi gerçekleştirilen ve genellikle bir dakika içinde etkinleşir. 
+* Ru 'nizin tüketimini izlemek ve hız sınırlı isteklerin oranı, her gün veya hafta boyunca sağlanan sabitten haberdar olmanız gerekmediğini açığa çıkabilir. Gece veya hafta sonu sırasında daha az trafik alabilirsiniz. Azure portal veya Azure Cosmos DB yerel SDK 'Ları veya REST API kullanarak, sağlanan aktarım hızını dilediğiniz zaman ölçeklendirebilirsiniz. Azure Cosmos DB REST API, kapsayıcılarınızın performans düzeyini programlı bir şekilde güncelleştirmek için uç noktalar sağlar. bu sayede, bir günün saatine veya haftanın gününe bağlı olarak kodunuzda üretilen işi ayarlayabilirsiniz. İşlem herhangi bir kesinti olmadan gerçekleştirilir ve genellikle bir dakikadan kısa bir süre içinde devreye girer. 
 
-* Bir ölçeği alanları, Azure Cosmos DB'ye, örneğin, veri geçişi sırasında alabilen aktarım hızı andır. Geçişi tamamladıktan sonra sağlanan aktarım hızı çözümün kararlı bir duruma işlemek için ölçeği azaltabilirsiniz.  
+* Aktarım hızını ölçeklendirmeniz gereken alanlardan biri, örneğin veri geçişi sırasında Azure Cosmos DB veri alma. Geçişi tamamladıktan sonra çözümün kararlı durumunu işlemek için sağlanan aktarım hızını azaltabilirsiniz.  
 
-* Faturalandırma, sağlanan aktarım hızı anda bir saat daha sık değiştirirseniz paranın kaydedilmeyecektir bir saatlik ayrıntı düzeyinde olduğundan unutmayın.
+* Faturalandırma, bir saatten fazla ayrıntı düzeyinde olduğundan, sağlanan aktarım hızını aynı anda bir saatten fazla sıklıkta değiştirirseniz herhangi bir para kazanmayacaksınız.
 
-## <a name="determine-the-throughput-needed-for-a-new-workload"></a>Yeni bir iş yükü için gereken aktarım hızı belirleme 
+## <a name="determine-the-throughput-needed-for-a-new-workload"></a>Yeni bir iş yükü için gereken aktarım hızını belirleme 
 
-Yeni bir iş yükü için sağlanan aktarım hızı belirlemek için aşağıdaki adımları kullanabilirsiniz: 
+Yeni bir iş yükünün sağlanan verimini öğrenmek için aşağıdaki adımları kullanabilirsiniz: 
 
-1. Kapasite Planlayıcı'ı kullanarak ilk, kaba değerlendirme gerçekleştirmek ve Azure portalında Azure Cosmos Explorer'ın yardımıyla tahminlerinizi ayarlayın. 
+1. Kapasite planlayıcısını kullanarak ilk ve kaba bir değerlendirme gerçekleştirin ve Azure portal Azure Cosmos Explorer yardımıyla tahminlerinizi ayarlayın. 
 
-2. Beklenenden daha yüksek verim ve daha sonra gerektiğinde ölçeği de kapsayıcı oluşturmak için önerilir. 
+2. Kapsayıcıları beklenenden daha yüksek aktarım hızı ile oluşturmanız ve ardından gerektikçe ölçeklendirilmesi önerilir. 
 
-3. Otomatik yeniden denemeler gelen istekleri oranı sınırlı aldığınızda yararlanmak için yerel Azure Cosmos DB Sdk'lardan birini kullanmanız önerilir. Desteklenmeyen bir platform üzerinde çalışıyoruz ve Cosmos DB'nin REST API kullanıyorsanız, kendi yeniden deneme ilkesini kullanarak uygulama `x-ms-retry-after-ms` başlığı. 
+3. İsteklerin hız sınırlı olduğunda otomatik yeniden denemelerden yararlanmak için yerel Azure Cosmos DB SDK 'Lardan birini kullanmanız önerilir. Desteklenmeyen bir platformda çalışıyorsanız Cosmos DB REST API kullanın `x-ms-retry-after-ms` üst bilgisini kullanarak kendi yeniden deneme ilkenizi uygulayın. 
 
-4. Tüm yeniden deneme işlemleri başarısız olduğunda, uygulama kodunuzun düzgün bir şekilde çalışması desteklediğinden emin olun. 
+4. Tüm yeniden denemeler başarısız olduğunda uygulama kodunuzun düzgün şekilde desteklediğinden emin olun. 
 
-5. Oran sınırlandırma için bildirim almak için Azure portalında uyarıları yapılandırabilirsiniz. Gerçek kullanımınızı şekil sonra son 15 dakika ile daha istekli kuralları anahtara üzerinden 10 oranı sınırlı istekleri gibi koruyucu sınırlarıyla başlatabilirsiniz. Bazen oran sınırları güzel, ayarladığınız ve tam olarak ne yapmak istiyorsunuz olan sınırsız çalan göster. 
+5. Fiyat sınırlama bildirimleri almak için Azure portal uyarıları yapılandırabilirsiniz. Son 15 dakika boyunca 10 oranlık sınırlı istek gibi koruyucu limitlerle başlayabilir ve gerçek tüketiminizi belirledikten sonra daha fazla Eager kuralına geçiş yapabilirsiniz. Zaman zaman hız limitlerinin hassas olması, ayarlamış olduğunuz limitlerle oynadığınızı ve tam olarak ne yapmak istediğinizi gösterir. 
 
-6. İzleme, trafik desenini dinamik olarak bir hafta veya gün aktarım hızı sağlamanız ayarlamak için gereken değerlendirebilmesi anlamak için kullanın. 
+6. Trafik modelinizi anlamak için izlemeyi kullanın. bu sayede, gün veya hafta boyunca aktarım hızını dinamik olarak ayarlama ihtiyacını göz önünde bulundurmanız yeterlidir. 
 
-7. Düzenli olarak en fazla kapsayıcılar ve veritabanları gereken sayıda sağlanan değil emin olmak için kullanılan aktarım hızını oranı karşılaştırması, sağlanan izleyin. Biraz sağlanan aktarım hızına sahip bir iyi güvenliği olup olmadığını denetler.  
+7. Gereken sayıda kapsayıcı ve veritabanından daha fazla kaynak sağladığınızdan emin olmak için, sağlanan ve tüketilen üretilen iş oranını düzenli olarak izleyin. Daha fazla sağlanmış verimlilik olması iyi bir güvenlik denetimi olur.  
 
 ### <a name="best-practices-to-optimize-provisioned-throughput"></a>Sağlanan aktarım hızını iyileştirmek için en iyi uygulamalar 
 
-Aşağıdaki adımlar çözümlerinizi yüksek oranda ölçeklenebilir ve ekonomik Azure Cosmos DB kullanarak yapmaya yardımcı olur.  
+Aşağıdaki adımlar Azure Cosmos DB kullanırken çözümlerinizi yüksek düzeyde ölçeklenebilir ve ekonomik hale getirmenize yardımcı olur.  
 
-1. Önemli ölçüde sağlanan aktarım hızı kapsayıcılar ve veritabanları arasında varsa, RU sağlanan ve tüketilen RU gözden geçirin ve iş yükleri üzerinde ince ayar gerekir.  
+1. Kapsayıcılar ve veritabanları genelinde sağlanan aktarım hızına önemli ölçüde sahipseniz, RUs ile sağlanan ru 'ları gözden geçirmeniz ve iş yüklerini ince ayar yapmanız gerekir.  
 
-2. Temsili bir Azure Cosmos kapsayıcı veya uygulamanız tarafından kullanılan veritabanı karşı tipik işlemlerin çalıştırmayla ilgili istek birimi RU ücreti kaydettiğinizden ayrılmış aktarım hızı uygulamanız için gereken miktarı tahmin etmek için bir yöntem olduğundan ve ardından her saniye gerçekleştirmek için tahmin işlemlerin sayısını tahmin edin. Ölçün ve tipik sorguları ve bunların kullanımını da emin olun. Sorguların RU maliyetleri programlı olarak tahmin etme veya portal bakın kullanarak öğrenmek [sorguları maliyetini en iyi duruma getirme](online-backup-and-restore.md). 
+2. Uygulamanız için gerekli olan ayrılmış aktarım hızı miktarını tahmin etmek için bir yöntem, tipik işlemleri çalıştıran, uygulamanız tarafından kullanılan bir Azure Cosmos kapsayıcısına veya veritabanına karşı normal işlemlerle ilişkili istek birimi RU ücreti kaydetme yöntemidir. ardından, her saniye gerçekleştirmeyi tahmin ettiğiniz işlem sayısını tahmin edin. Tipik sorguları ve bunların kullanımlarını de ölçdiğinizden ve dahil ettiğinizden emin olun. Program aracılığıyla veya Portal kullanarak sorguların RU maliyetlerini nasıl tahmin edebileceğiniz hakkında bilgi edinmek için bkz. [sorguların maliyetini En Iyi duruma getirme](online-backup-and-restore.md). 
 
-3. İşlemler ve bunların maliyetini düşük RU almak için başka bir işlem/süresi ve istek ücreti dökümünü erişmenizi sağlayan Azure İzleyici günlüklerine sağlayarak yoludur. Her işlem ücretine geri yanıttan depolanan ve ardından analizi için kullanılan azure Cosmos DB her işlem için istek ücretsiz olarak sağlar. 
+3. İşlem/süre ve istek ücreti dökümünü sunan Azure Izleyici günlüklerini etkinleştirerek, işlemleri ve bunların maliyetlerini bir diğer şekilde almanın bir başka yolu da vardır. Azure Cosmos DB her işlem için istek ücreti sağlar, bu nedenle her işlem ücreti yanıttan geri depolanabilir ve daha sonra analiz için kullanılır. 
 
-4. İş yükü gereksinimlerinizi karşılamak ihtiyaç sağlanan aktarım hızına göre esnek olarak ölçeklendirebilirsiniz. 
+4. İş yükünüzün gereksinimlerine uyum sağlamak için gereken üretilen iş verimini esnek ölçeği artırma ve azaltma sağlayabilirsiniz. 
 
-5. Ekleme ve kaldırma gerekir ve maliyetleri denetim gibi Azure Cosmos hesabıyla ilişkili bölge. 
+5. İhtiyacınız olduğu için Azure Cosmos hesabınızla ilişkili bölgeler ekleyebilir ve kaldırabilirsiniz. 
 
-6. Kapsayıcılarınızı mantıksal bölümler arasında eşit dağıtım verileri ve iş yükleri olduğundan emin olun. Düzensiz bölüm dağıtım varsa, bu aktarım hızı yüksek miktarda gereken değerden sağlamak için neden olabilir. Dengesiz dağılımı olduğunu belirlerseniz, biz iş yükü bölümler arasında eşit olarak dağıtma önerilir veya verilerin yeniden bölümlenip. 
+6. Kapsayıcılarınızın mantıksal bölümlerinde verilerin ve iş yüklerinin eşit bir şekilde dağıtılmasını sağlayın. Düzensiz bölüm dağıtımı varsa, bu, gereken değerden daha yüksek miktarda aktarım hızı sağlamaya neden olabilir. Çarpıtılmış bir dağıtıma sahip olup olmadığını belirlerseniz, iş yükünü bölümler arasında eşit olarak yeniden dağıtmalarını veya verileri yeniden bölümlendirmenizi öneririz. 
 
-7. Çok sayıda kapsayıcı varsa ve bu kapsayıcıların SLA gerektirmeyen durumlarda veritabanı tabanlı teklif kullanabilirsiniz. burada kapsayıcının aktarım hızını SLA uygulanmaz. Hangi veritabanı düzeyi aktarım hızını geçirmek istediğiniz Azure Cosmos kapsayıcılar sunar ve değişiklik akışı tabanlı bir çözüm kullanarak geçirmenize tanımlamanız gerekir. 
+7. Çok sayıda kapsayıcınız varsa ve bu kapsayıcılar SLA 'Lar gerektirmiyorsa, veritabanı tabanlı teklifi kapsayıcı üretilen iş başına SLA 'ların uygulanamadığı durumlar için kullanabilirsiniz. Veritabanı düzeyinde aktarım hızı için hangi Azure Cosmos kapsayıcılarından hangilerinin geçiş yapmak istediğinizi belirlemeniz ve ardından bunları bir değişiklik akışı tabanlı çözüm kullanarak geçirmeniz gerekir. 
 
-8. Geliştirme/test senaryoları için "Cosmos DB ücretsiz katmanı" (bir yıl boyunca ücretsiz), Cosmos DB deneyin (en fazla üç bölgeleri için) veya indirilebilir Cosmos DB öykünücüsü'nü kullanmayı düşünün. Test-geliştirme için bu seçenekleri kullanarak, maliyetlerinizi önemli ölçüde düşürebilirsiniz.  
+8. "Cosmos DB ücretsiz katmanı" (bir yıl boyunca ücretsiz) kullanmayı düşünün, geliştirme ve test senaryoları için Cosmos DB (en fazla üç bölgeye kadar) veya indirilebilir Cosmos DB öykünücüyü deneyin. Test-dev için bu seçenekleri kullanarak maliyetlerinizi önemli ölçüde düşürebilirsiniz.  
 
-9. Daha fazla iş yüküne özgü maliyet iyileştirmelerini – Örneğin, birden çok bölgede toplu iş boyutu, Yük Dengeleme okuma artırma ve XML'deki varsa, veri çoğaltma işlemlerini gerçekleştirebilirsiniz.
+9. Daha fazla iş yüküne özgü maliyet iyileştirmeleri gerçekleştirebilirsiniz. Örneğin, toplu iş boyutu, Yük Dengeleme okuma işlemlerini birden çok bölgede artırma ve varsa verileri çoğaltma.
 
-10. Azure Cosmos DB ayrılmış kapasite ile üç yıl boyunca en fazla % 65'e için önemli ölçüde indirimler alabilirsiniz. Azure Cosmos DB ayrılmış kapasite modeli olduğundan bir ön taahhüt zamanla Birimi'nin ister. Daha fazla istek birimleri uzun bir döneme kullandığınız şekilde indirimleri katmanlı halde bulunan daha fazla, indirim olacaktır. Bu indirimler hemen uygulanır. Sağlanan değerlerinizi kullanılan herhangi bir RU ayrılmamış kapasite maliyeti üzerinden ücretlendirilir. Bkz: [Cosmos DB ayrılan kapasite](cosmos-db-reserved-capacity.md)) daha fazla ayrıntı için. Düşük sağlanan üretilen iş maliyetlerinizi ilerletmek için ayrılmış bir kapasite satın alma göz önünde bulundurun.  
+10. Azure Cosmos DB ayrılmış kapasite sayesinde, üç yıl boyunca %65 ' e kadar önemli iskontolar elde edebilirsiniz. Azure Cosmos DB ayrılmış kapasite modeli, zaman içinde gereken istek birimleri hakkında ön taahhüt niteliğinde bir taahhütdir. İskontolar, daha uzun bir süre boyunca kullandığınız istek birimleri arttıkça, indiriminiz daha fazla olacaktır. Bu indirimler hemen uygulanır. Sağlanan değerlerinizin üzerinde kullanılan tüm ru 'lar, ayrılmamış kapasite maliyetine göre ücretlendirilir. Daha fazla ayrıntı için bkz. [Cosmos DB ayrılmış kapasite](cosmos-db-reserved-capacity.md)). Sağlanan verimlilik maliyetlerinizi daha düşük bir düzeye düşürmek için ayrılmış kapasite satın almayı düşünün.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağıdaki makalelerde Azure Cosmos DB'de maliyet iyileştirmesi hakkında daha fazla bilgi edinmek için sonraki geçebilirsiniz:
+Daha sonra, aşağıdaki makalelerle Azure Cosmos DB maliyet iyileştirmesi hakkında daha fazla bilgi edinebilirsiniz:
 
-* Daha fazla bilgi edinin [en iyi duruma getirme için geliştirme ve test etme](optimize-dev-test.md)
-* Daha fazla bilgi edinin [Azure Cosmos DB faturanızı anlama](understand-your-bill.md)
-* Daha fazla bilgi edinin [depolama maliyetini en iyi duruma getirme](optimize-cost-storage.md)
-* Daha fazla bilgi edinin [okuma ve yazma işlemleri maliyetini en iyi duruma getirme](optimize-cost-reads-writes.md)
-* Daha fazla bilgi edinin [sorguları maliyetini en iyi duruma getirme](optimize-cost-queries.md)
-* Daha fazla bilgi edinin [çok bölgeli Azure Cosmos hesapları maliyetini en iyi duruma getirme](optimize-cost-regions.md)
+* [Geliştirme ve test Için iyileştirme](optimize-dev-test.md) hakkında daha fazla bilgi edinin
+* [Azure Cosmos DB Faturanızı Anlama](understand-your-bill.md) hakkında daha fazla bilgi edinin
+* [Depolama maliyetini iyileştirme](optimize-cost-storage.md) hakkında daha fazla bilgi edinin
+* [Okuma ve yazma maliyetlerini iyileştirme](optimize-cost-reads-writes.md) hakkında daha fazla bilgi edinin
+* [Sorguların maliyetini En Iyi duruma getirme](optimize-cost-queries.md) hakkında daha fazla bilgi edinin
+* [Çok bölgeli Azure Cosmos hesaplarının maliyetini En Iyi duruma getirme](optimize-cost-regions.md) hakkında daha fazla bilgi edinin
 

@@ -1,7 +1,7 @@
 ---
-title: Docker kapsayıcı ayarları
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: LUIS kapsayıcı çalışma zamanı ortamı kullanılarak yapılandırılan `docker run` komut bağımsız değişkenleri. LUIS birkaç isteğe bağlı ayarları ile birlikte gerekli birkaç ayar vardır.
+title: Docker kapsayıcı ayarları-LUSıS
+titleSuffix: Azure Cognitive Services
+description: LUSıS kapsayıcı çalışma zamanı ortamı, `docker run` komutu bağımsız değişkenleri kullanılarak yapılandırılır. LUO 'NUN birkaç isteğe bağlı ayarı ve birkaç isteğe bağlı ayarı vardır.
 services: cognitive-services
 author: IEvangelist
 manager: nitinme
@@ -9,74 +9,70 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 06/11/2019
+ms.date: 11/07/2019
 ms.author: dapine
-ms.openlocfilehash: 4a9f7762b7960c74acad8203f70bc1e7c7cbd90f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a30fcd0ec7e53c78876596baf787639e81c638db
+ms.sourcegitcommit: 018e3b40e212915ed7a77258ac2a8e3a660aaef8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67063229"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73795018"
 ---
-# <a name="configure-language-understanding-docker-containers"></a>Dil anlama Docker kapsayıcıları yapılandırın 
+# <a name="configure-language-understanding-docker-containers"></a>Language Understanding Docker kapsayıcılarını yapılandırma 
 
-**Language Understanding** (LUIS) kapsayıcı çalışma zamanı ortamı kullanarak yapılandırılmış `docker run` komut bağımsız değişkenleri. LUIS birkaç isteğe bağlı ayarları ile birlikte gerekli birkaç ayar vardır. Birkaç [örnekler](#example-docker-run-commands) komutu kullanılabilir. Giriş kapsayıcısı özgü ayarlar şunlardır [bağlama ayarları](#mount-settings) ve fatura ayarlar. 
+**Language Understanding** (lusıs) kapsayıcı çalışma zamanı ortamı `docker run` komut bağımsız değişkenleri kullanılarak yapılandırılır. LUO 'NUN birkaç isteğe bağlı ayarı ve birkaç isteğe bağlı ayarı vardır. Birkaç komuta [örnek](#example-docker-run-commands) vardır. Kapsayıcıya özgü ayarlar giriş [bağlama ayarları](#mount-settings) ve faturalandırma ayarlardır. 
 
 ## <a name="configuration-settings"></a>Yapılandırma ayarları
 
-Bu kapsayıcı, aşağıdaki yapılandırma ayarları vardır:
+Bu kapsayıcı aşağıdaki yapılandırma ayarlarına sahiptir:
 
 |Gerekli|Ayar|Amaç|
 |--|--|--|
-|Evet|[ApiKey](#apikey-setting)|Fatura bilgileri izlemek için kullanılır.|
-|Hayır|[ApplicationInsights](#applicationinsights-setting)|Eklemenizi sağlayan [Azure Application Insights](https://docs.microsoft.com/azure/application-insights) kapsayıcınızı telemetri desteği.|
-|Evet|[Billing](#billing-setting)|Azure'daki hizmet kaynağının uç nokta URI'sini belirtir.|
-|Evet|[Eula](#eula-setting)| Kapsayıcı lisansını kabul ettiğinizi gösterir.|
-|Hayır|[Fluentd](#fluentd-settings)|Günlük yazma ve isteğe bağlı olarak ölçüm verileri Fluentd sunucusuna.|
-|Hayır|[HTTP Ara sunucusu](#http-proxy-credentials-settings)|Bir HTTP Proxy'si Giden istekleri yapmak için yapılandırın.|
-|Hayır|[Logging](#logging-settings)|Kapsayıcınız için ASP.NET Core günlük kaydı desteği sunar. |
-|Evet|[Mounts](#mount-settings)|Ana bilgisayardaki verileri okuyup kapsayıcıya, kapsayıcıdaki verileri okuyup ana bilgisayara yazar.|
+|Evet|[ApiKey](#apikey-setting)|Faturalandırma bilgilerini izlemek için kullanılır.|
+|Hayır|[ApplicationInsights](#applicationinsights-setting)|, Kapsayıcınıza [Azure Application Insights](https://docs.microsoft.com/azure/application-insights) telemetri desteği eklemenize olanak tanır.|
+|Evet|[Faturalandırma](#billing-setting)|Azure üzerindeki hizmet kaynağının uç nokta URI 'sini belirtir.|
+|Evet|[Sözleşmesi](#eula-setting)| Kapsayıcının lisansını kabul ettiğinizi gösterir.|
+|Hayır|[Fluentd](#fluentd-settings)|Günlük ve isteğe bağlı olarak ölçüm verilerini Floentd sunucusuna yazın.|
+|Hayır|[Http proxy 'Si](#http-proxy-credentials-settings)|Giden istekler oluşturmak için bir HTTP proxy 'si yapılandırın.|
+|Hayır|[Açmak](#logging-settings)|, Kapsayıcınız için ASP.NET Core günlük desteği sağlar. |
+|Evet|[Bağlar](#mount-settings)|Ana bilgisayardan kapsayıcıya ve kapsayıcıdan, ana bilgisayara geri veri okuma ve yazma.|
 
 > [!IMPORTANT]
-> [ `ApiKey` ](#apikey-setting), [ `Billing` ](#billing-setting), Ve [ `Eula` ](#eula-setting) ayarları birlikte kullanılır ve bunları; Aksi takdirde, tüm üç için geçerli değerler sağlamanız gerekir kapsayıcınızı başlatılamıyor. Bir kapsayıcı örneği oluşturmak için bu yapılandırma ayarlarını kullanma hakkında daha fazla bilgi için bkz. [faturalama](luis-container-howto.md#billing).
+> [`ApiKey`](#apikey-setting), [`Billing`](#billing-setting)ve [`Eula`](#eula-setting) ayarları birlikte kullanılır ve üç tane için de geçerli değerler sağlamanız gerekir; Aksi takdirde Kapsayıcınız başlatılmaz. Bir kapsayıcı oluşturmak için bu yapılandırma ayarlarını kullanma hakkında daha fazla bilgi için bkz. [faturalandırma](luis-container-howto.md#billing).
 
 ## <a name="apikey-setting"></a>ApiKey ayarı
 
-`ApiKey` Ayar kapsayıcısı için fatura bilgileri izlemek için kullanılan Azure kaynak anahtarını belirtir. ApiKey için bir değer belirtmeniz gerekir ve değer için geçerli bir anahtar olmalıdır _Bilişsel Hizmetler_ için belirtilen kaynak [ `Billing` ](#billing-setting) yapılandırma ayarı.
+`ApiKey` ayarı, kapsayıcının fatura bilgilerini izlemek için kullanılan Azure Kaynak anahtarını belirtir. ApiKey için bir değer belirtmeniz gerekir ve değerin [`Billing`](#billing-setting) yapılandırma ayarı için belirtilen bilişsel _Hizmetler_ kaynağı için geçerli bir anahtar olması gerekir.
 
-Bu ayar, aşağıdaki konumlarda bulunabilir:
+Bu ayar aşağıdaki konumlarda bulunabilir:
 
-* Azure portalı: **Bilişsel Hizmetler** kaynak yönetimi altında **anahtarları**
-* LUIS portalı: **Anahtarları ve uç nokta ayarları** sayfası. 
+* Azure portal: bilişsel **Hizmetler** kaynak yönetimi, **anahtarlar** altında
+* LUO Portalı: **anahtarlar ve uç nokta ayarları** sayfası. 
 
-Başlangıç veya geliştirme tuşuna kullanmayın. 
+Başlangıç anahtarını veya yazma anahtarını kullanmayın. 
 
-## <a name="applicationinsights-setting"></a>Applicationınsights ayarı
+## <a name="applicationinsights-setting"></a>ApplicationInsights ayarı
 
 [!INCLUDE [Container shared configuration ApplicationInsights settings](../../../includes/cognitive-services-containers-configuration-shared-settings-application-insights.md)]
 
 ## <a name="billing-setting"></a>Faturalandırma ayarı
 
-`Billing` Ayar uç noktası URI'si belirtir, _Bilişsel Hizmetler_ azure'da kaynak kapsayıcısı için fatura bilgileri ölçmek için kullanılır. Bu yapılandırma ayarı için bir değer belirtmeniz gerekir ve değeri geçerli bir uç noktası URI'si olmalıdır için bir _Bilişsel Hizmetler_ azure'da kaynak. Kapsayıcı yaklaşık her 10 ila 15 dakika kullanım raporları.
+`Billing` ayarı, Azure üzerinde bulunan bilişsel _Hizmetler_ kaynağının, kapsayıcının fatura bilgilerini ölçmek için kullanılan uç nokta URI 'sini belirtir. Bu yapılandırma ayarı için bir değer belirtmeniz gerekir ve Azure 'daki bilişsel _Hizmetler_ kaynağı için değer geçerli bir uç nokta URI 'si olmalıdır. Kapsayıcı her 10 ila 15 dakikada bir kullanım raporu sağlar.
 
-Bu ayar, aşağıdaki konumlarda bulunabilir:
+Bu ayar aşağıdaki konumlarda bulunabilir:
 
-* Azure portalı: **Bilişsel Hizmetler** etiketli genel bakış `Endpoint`
-* LUIS portalı: **Anahtarları ve uç nokta ayarları** URI uç noktasının bir parçası olarak bir sayfa.
+* Azure portal: bilişsel **hizmetlere** genel bakış, `Endpoint` etiketli
+* LUO Portalı: uç nokta URI 'sinin bir parçası olarak **anahtarlar ve uç nokta ayarları** sayfası.
 
-Dahil etmeyi unutmayın `luis/v2.0` aşağıdaki tabloda gösterildiği gibi URL yönlendirme:
+| Gerekli | Ad | Veri türü | Açıklama |
+|----------|------|-----------|-------------|
+| Evet      | `Billing` | string | Faturalama uç noktası URI 'SI. Faturalandırma URI 'sini alma hakkında daha fazla bilgi için bkz. [gerekli parametreleri toplama](luis-container-howto.md#gathering-required-parameters). Daha fazla bilgi ve bölgesel uç noktaların tamamen listesi için bkz. bilişsel [Hizmetler Için özel alt etki alanı adları](../cognitive-services-custom-subdomains.md). |
 
-
-|Gerekli| Ad | Veri türü | Açıklama |
-|--|------|-----------|-------------|
-|Evet| `Billing` | Dize | Faturalandırma uç noktası URI'si<br><br>Örnek:<br>`Billing=https://westus.api.cognitive.microsoft.com/luis/v2.0` |
-
-## <a name="eula-setting"></a>EULA'yı ayarlama
+## <a name="eula-setting"></a>EULA ayarı
 
 [!INCLUDE [Container shared configuration eula settings](../../../includes/cognitive-services-containers-configuration-shared-settings-eula.md)]
 
-## <a name="fluentd-settings"></a>Fluentd ayarları
-
+## <a name="fluentd-settings"></a>Akışkan entd ayarları
 
 [!INCLUDE [Container shared configuration fluentd settings](../../../includes/cognitive-services-containers-configuration-shared-settings-fluentd.md)]
 
@@ -84,50 +80,49 @@ Dahil etmeyi unutmayın `luis/v2.0` aşağıdaki tabloda gösterildiği gibi URL
 
 [!INCLUDE [Container shared configuration fluentd settings](../../../includes/cognitive-services-containers-configuration-shared-settings-http-proxy.md)]
 
-## <a name="logging-settings"></a>Günlük ayarları
+## <a name="logging-settings"></a>Günlük kaydı ayarları
  
 [!INCLUDE [Container shared configuration logging settings](../../../includes/cognitive-services-containers-configuration-shared-settings-logging.md)]
 
-
 ## <a name="mount-settings"></a>Bağlama ayarları
 
-Kullanım bağlama okumak ve kapsayıcı gelen ve giden veri yazmak için bağlar. Bir giriş bağlama belirtin veya çıkış bağlama belirterek `--mount` seçeneğini [docker run](https://docs.docker.com/engine/reference/commandline/run/) komutu. 
+Kapsayıcıya ve kapsayıcılardan veri okumak ve buradan veri yazmak için BIND bağlama kullanın. [Docker Run](https://docs.docker.com/engine/reference/commandline/run/) komutunda `--mount` seçeneğini belirterek bir giriş bağlama veya çıkış bağlama belirtebilirsiniz. 
 
-LUIS kapsayıcı giriş kullanmaz ya da eğitim veya hizmeti verilerini depolamak için çıkış bağlar. 
+LUSıS kapsayıcısı, eğitim veya hizmet verilerini depolamak için giriş veya çıkış takar. 
 
-Konak bağlama konumu söz dizimi konak işletim sistemine göre değişir. Ayrıca, [ana bilgisayar](luis-container-howto.md#the-host-computer)'s bağlama konumu docker hizmet hesabı tarafından kullanılan izinler arasında bir çakışma nedeniyle erişilebilir olmayabilir ve konak yeri izinleri bağlayın. 
+Konak bağlama konumunun tam sözdizimi, ana bilgisayar işletim sistemine bağlı olarak değişir. Ayrıca, Docker hizmeti hesabı ve konak bağlama konumu izinleri tarafından kullanılan izinler arasındaki bir çakışma nedeniyle [ana bilgisayarın](luis-container-howto.md#the-host-computer)bağlama konumu erişilebilir olmayabilir. 
 
-Aşağıdaki tabloda, desteklenen ayarları açıklanmaktadır.
+Aşağıdaki tabloda desteklenen ayarlar açıklanmaktadır.
 
 |Gerekli| Ad | Veri türü | Açıklama |
 |-------|------|-----------|-------------|
-|Evet| `Input` | Dize | Giriş bağlama hedefi. Varsayılan değer `/input` şeklindedir. LUIS paket dosyalarının konumunu budur. <br><br>Örnek:<br>`--mount type=bind,src=c:\input,target=/input`|
-|Hayır| `Output` | Dize | Çıkış bağlama hedefi. Varsayılan değer `/output` şeklindedir. Bu günlükler konumdur. Bu, LUIS sorgu ve kapsayıcı günlükleri içerir. <br><br>Örnek:<br>`--mount type=bind,src=c:\output,target=/output`|
+|Evet| `Input` | Dize | Giriş bağlama hedefi. Varsayılan değer `/input` ' dır. Bu, LUSıS paket dosyalarının konumudur. <br><br>Örnek:<br>`--mount type=bind,src=c:\input,target=/input`|
+|Hayır| `Output` | Dize | Çıkış bağlama hedefi. Varsayılan değer `/output` ' dır. Bu, günlüklerin konumudur. Bu, LUSıS sorgu günlüklerini ve kapsayıcı günlüklerini içerir. <br><br>Örnek:<br>`--mount type=bind,src=c:\output,target=/output`|
 
-## <a name="example-docker-run-commands"></a>Örnek docker komutlarını çalıştırın
+## <a name="example-docker-run-commands"></a>Örnek Docker Run komutları
 
-Aşağıdaki örnekler, yazma ve kullanma göstermek için yapılandırma ayarlarını kullanır. `docker run` komutları.  Kapsayıcıyı çalıştıran sonra dek çalıştırmaya devam [Durdur](luis-container-howto.md#stop-the-container) bu.
+Aşağıdaki örnekler `docker run` komutlarının nasıl yazılacağını ve kullanılacağını göstermek için yapılandırma ayarlarını kullanır.  Çalışan bir kez, kapsayıcıyı [durduruncaya](luis-container-howto.md#stop-the-container) kadar çalışmaya devam eder.
 
-* Bu örnekler, devre dışı dizini kullanın. `c:` sürücü Windows üzerinde hiçbir izni çakışmalarını önlemek için. Giriş dizini belirli bir dizini kullanmak istiyorsanız, docker vermeniz gerekebilir hizmet izni. 
-* Docker kapsayıcıları ile çok iyi bilmiyorsanız, bağımsız değişkenlerin sırası değiştirmeyin.
-* Farklı bir işletim sistemi kullanıyorsanız, başlatmalar ve satır devamı karakteri sisteminiz için doğru konsol/terminal, klasörü söz dizimi kullanın. Bu örnekler bir satır devamı karakteri ile bir Windows konsol varsayar `^`. Kapsayıcı bir Linux işletim sistemi olduğundan, hedef bağlama bir Linux stili klasör sözdizimini kullanır.
+* Bu örnekler, Windows 'da herhangi bir izin çakışmasını önlemek için `C:` sürücüdeki dizini kullanır. Giriş dizini olarak belirli bir dizin kullanmanız gerekiyorsa, Docker hizmeti iznini vermeniz gerekebilir. 
+* Docker Kapsayıcıları hakkında bilginiz yoksa bağımsız değişkenlerin sırasını değiştirmeyin.
+* Farklı bir işletim sistemi kullanıyorsanız, sistem için doğru konsol/Terminal, bağlama için klasör söz dizimi ve satır devamlılık karakteri kullanın. Bu örneklerde, bir Windows konsolunun satır devamlılık karakteri `^`olduğunu varsaymaktadır. Kapsayıcı bir Linux işletim sistemi olduğundan, hedef bağlama bir Linux stili klasör söz dizimini kullanır.
 
-Dahil etmeyi unutmayın `luis/v2.0` aşağıdaki tabloda gösterildiği gibi URL yönlendirme.
-
-Yerine {_argument_name_} kendi değerlerinizle:
+{_Argument_name_} değerini kendi değerlerinizle değiştirin:
 
 | Yer tutucu | Değer | Biçim veya örnek |
 |-------------|-------|---|
-|{ENDPOINT_KEY} | Eğitilen LUIS uygulama uç noktası anahtarı. |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
-|{BILLING_ENDPOINT} | Azure'da faturalandırma uç nokta değerinde kullanılabilir `Cognitive Services` genel bakış sayfası. |https://westus.api.cognitive.microsoft.com/luis/v2.0|
+| **{API_KEY}** | Azure `LUIS` Keys sayfasında `LUIS` kaynağının bitiş noktası anahtarı. | `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` |
+| **{ENDPOINT_URI}** | Faturalandırma uç noktası değeri, Azure `LUIS` Genel Bakış sayfasında bulunur.| Açık örnekler için [gerekli parametreleri toplama](luis-container-howto.md#gathering-required-parameters) konusuna bakın. |
+
+[!INCLUDE [subdomains-note](../../../includes/cognitive-services-custom-subdomains-note.md)]
 
 > [!IMPORTANT]
-> `Eula`, `Billing`, Ve `ApiKey` kapsayıcıyı çalıştırmak için seçenekler belirtilmelidir; Aksi takdirde, kapsayıcı başlatılamıyor.  Daha fazla bilgi için [faturalama](luis-container-howto.md#billing).
-> ApiKey değer **anahtarı** anahtarları ve uç noktaları sayfasında LUIS portalda ve Azure üzerinde kullanılabilir `Cognitive Services` kaynak anahtarlar sayfasında. 
+> Kapsayıcıyı çalıştırmak için `Eula`, `Billing`ve `ApiKey` seçenekleri belirtilmelidir; Aksi takdirde, kapsayıcı başlatılmaz. Daha fazla bilgi için bkz. [faturalandırma](luis-container-howto.md#billing).
+> ApiKey **değeri,** Lua portalındaki anahtarlar ve uç noktalar sayfasından ve Azure `Cognitive Services` kaynak anahtarları sayfasında da kullanılabilir. 
 
 ### <a name="basic-example"></a>Temel örnek
 
-Aşağıdaki örnek, kapsayıcıyı çalıştırmak olası en az sayıda bağımsız değişkenlere sahiptir:
+Aşağıdaki örnek, kapsayıcıyı çalıştırmak için mümkün olan en az bağımsız değişkenlere sahiptir:
 
 ```console
 docker run --rm -it -p 5000:5000 --memory 4g --cpus 2 ^
@@ -135,13 +130,13 @@ docker run --rm -it -p 5000:5000 --memory 4g --cpus 2 ^
 --mount type=bind,src=c:\output,target=/output ^
 mcr.microsoft.com/azure-cognitive-services/luis:latest ^
 Eula=accept ^
-Billing={BILLING_ENDPOINT} ^
-ApiKey={ENDPOINT_KEY}
+Billing={ENDPOINT_URL} ^
+ApiKey={API_KEY}
 ```
 
-### <a name="applicationinsights-example"></a>Applicationınsights örneği
+### <a name="applicationinsights-example"></a>ApplicationInsights örneği
 
-Aşağıdaki örnek, kapsayıcıyı çalışırken Application Insights'a telemetri göndermek Applicationınsights bağımsız değişken ayarlar:
+Aşağıdaki örnek, kapsayıcı çalışırken Application Insights telemetri göndermek için ApplicationInsights bağımsız değişkenini ayarlar:
 
 ```console
 docker run --rm -it -p 5000:5000 --memory 6g --cpus 2 ^
@@ -149,14 +144,14 @@ docker run --rm -it -p 5000:5000 --memory 6g --cpus 2 ^
 --mount type=bind,src=c:\output,target=/output ^
 mcr.microsoft.com/azure-cognitive-services/luis:latest ^
 Eula=accept ^
-Billing={BILLING_ENDPOINT} ^
-ApiKey={ENDPOINT_KEY} ^
+Billing={ENDPOINT_URL} ^
+ApiKey={API_KEY} ^
 InstrumentationKey={INSTRUMENTATION_KEY}
 ```
 
-### <a name="logging-example"></a>Günlük örnek 
+### <a name="logging-example"></a>Günlüğe kaydetme örneği 
 
-Aşağıdaki komut günlüğe kaydetme düzeyini ayarlar `Logging:Console:LogLevel`, günlüğe kaydetme düzeyini yapılandırmak için [ `Information` ](https://msdn.microsoft.com). 
+Aşağıdaki komut, `Logging:Console:LogLevel`, günlük düzeyini [`Information`](https://msdn.microsoft.com)olarak yapılandırmak için günlüğe kaydetme düzeyini ayarlar. 
 
 ```console
 docker run --rm -it -p 5000:5000 --memory 6g --cpus 2 ^
@@ -164,13 +159,13 @@ docker run --rm -it -p 5000:5000 --memory 6g --cpus 2 ^
 --mount type=bind,src=c:\output,target=/output ^
 mcr.microsoft.com/azure-cognitive-services/luis:latest ^
 Eula=accept ^
-Billing={BILLING_ENDPOINT} ^
-ApiKey={ENDPOINT_KEY} ^
+Billing={ENDPOINT_URL} ^
+ApiKey={API_KEY} ^
 Logging:Console:LogLevel:Default=Information
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Gözden geçirme [yükleme ve kapsayıcıları çalıştırın](luis-container-howto.md)
-* Başvurmak [sorun giderme](troubleshooting.md) LUIS işlevselliği ile ilgili sorunları gidermek için.
-* Daha fazla kullanmanız [Bilişsel Hizmetleri kapsayıcıları](../cognitive-services-container-support.md)
+* [Kapsayıcıları yüklemeyi ve çalıştırmayı](luis-container-howto.md) inceleyin
+* LUSıS işlevleriyle ilgili sorunları çözmek için [sorun giderme](troubleshooting.md) bölümüne bakın.
+* Daha fazla bilişsel [Hizmetler kapsayıcısı](../cognitive-services-container-support.md) kullanın

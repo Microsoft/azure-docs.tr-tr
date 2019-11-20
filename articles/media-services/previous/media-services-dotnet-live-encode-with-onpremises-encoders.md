@@ -1,6 +1,6 @@
 ---
 title: .NET kullanarak şirket içi kodlayıcılarla canlı akış gerçekleştirme | Microsoft Docs
-description: Bu konuda, .NET şirket içi kodlayıcılarla live encoding özelliğinin kullanımı gösterilmektedir.
+description: Bu konuda, şirket içi kodlayıcılarla gerçek zamanlı kodlama gerçekleştirmek için .NET kullanımı gösterilmektedir.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -12,13 +12,13 @@ ms.tgt_pltfrm: na
 ms.devlang: ne
 ms.topic: article
 ms.date: 03/18/2019
-ms.author: cenkdin;juliako
-ms.openlocfilehash: 8baff356e1a4916bcc21b28f422a6e98342c0d34
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: juliako
+ms.openlocfilehash: bc7c8a059e1e17b7b280a7061206b10ed6c530aa
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64869470"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "69015832"
 ---
 # <a name="how-to-perform-live-streaming-with-on-premises-encoders-using-net"></a>.NET kullanarak şirket içi kodlayıcılarla canlı akış gerçekleştirme
 > [!div class="op_single_selector"]
@@ -29,9 +29,9 @@ ms.locfileid: "64869470"
 > 
 
 > [!NOTE]
-> Media Services v2’ye herhangi bir yeni özellik veya işlevsellik eklenmemektedir. <br/>En son sürüm olan [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/)’ü inceleyin. Ayrıca bkz [geçiş kılavuzuna v2'den v3](../latest/migrate-from-v2-to-v3.md)
+> Media Services v2’ye herhangi bir yeni özellik veya işlevsellik eklenmemektedir. <br/>En son sürüm olan [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/)’ü inceleyin. Ayrıca bkz. [v2 'den v3 'e geçiş kılavuzu](../latest/migrate-from-v2-to-v3.md)
 
-Bu öğreticide, Azure Media Services .NET SDK kullanarak oluşturma adımları açıklanmaktadır bir **kanal** doğrudan teslimat için yapılandırılmış. 
+Bu öğretici, bir doğrudan dağıtım için yapılandırılmış bir **Kanal** oluşturmak için Azure Media Services .NET SDK 'sını kullanma adımlarında size yol gösterir. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 Öğreticiyi tamamlamak için aşağıdakiler gereklidir:
@@ -39,10 +39,10 @@ Bu öğreticide, Azure Media Services .NET SDK kullanarak oluşturma adımları 
 * Bir Azure hesabı.
 * Bir Media Services hesabı. Bir Media Services hesabı oluşturmak için bkz. [Media Services hesabı oluşturma](media-services-portal-create-account.md).
 * İçerik akışı yapmak istediğiniz akış uç noktasının **Çalışıyor** durumunda olduğundan emin olun. 
-* Geliştirme ortamınızı ayarlayın. Daha fazla bilgi için [ortamınızı ayarlama](media-services-set-up-computer.md).
+* Geliştirme ortamınızı ayarlayın. Daha fazla bilgi için bkz. [ortamınızı ayarlama](media-services-set-up-computer.md).
 * Bir Web kamerası. Örneğin, [Telestream Wirecast kodlayıcı](https://www.telestream.net/wirecast/overview.htm).
 
-Aşağıdaki makaleleri gözden geçirmeniz için önerilir:
+Aşağıdaki makaleleri gözden geçirmeniz önerilir:
 
 * [Azure Media Services RTMP Desteği ve Gerçek Zamanlı Kodlayıcılar](https://azure.microsoft.com/blog/2014/09/18/azure-media-services-rtmp-support-and-live-encoders/)
 * [Çoklu bit hızı akışları oluşturan şirket içi kodlayıcılarla canlı akış](media-services-live-streaming-with-onprem-encoders.md)
@@ -53,23 +53,23 @@ Geliştirme ortamınızı kurun ve app.config dosyanızı [.NET ile Media Servic
 
 ## <a name="example"></a>Örnek
 
-Aşağıdaki kod örneği, aşağıdaki görevleri elde etmek gösterilmektedir:
+Aşağıdaki kod örneği aşağıdaki görevlerin nasıl elde alınacağını gösterir:
 
 * Media Services’e bağlanmak
 * Kanal oluşturma
-* Güncelleştirme kanalı
-* Kanalın giriş uç noktasını alın. Giriş uç noktası, şirket içi gerçek zamanlı kodlayıcıya sağlanmalıdır. Kanalın giriş gönderilen akışlara kameradan gerçek zamanlı Kodlayıcı dönüştürür sinyaller (uç noktasını alın).
-* Kanal Önizleme uç noktası alma
-* Oluşturma ve bir program başlatma
-* Program erişmek için gerekli bir Bulucu oluşturma
-* Oluşturma ve bir StreamingEndpoint başlatma
-* Akış uç noktası güncellenemedi
-* Kapatma kaynakları
+* Kanalı güncelleştirme
+* Kanalın giriş uç noktasını alın. Giriş uç noktası, şirket içi Live Encoder 'a sağlanmalıdır. Live Encoder, kameradaki sinyalleri, kanalın giriş (alma) uç noktasına gönderilen akışlara dönüştürür.
+* Kanalın önizleme uç noktasını alma
+* Program oluşturma ve başlatma
+* Programa erişmek için gereken bir bulucu oluşturma
+* Streammingendpoint oluşturma ve başlatma
+* Akış uç noktasını güncelleştirme
+* Kaynakları kapatma
     
 >[!NOTE]
 >Farklı AMS ilkeleri için sınır 1.000.000 ilkedir (örneğin, Bulucu ilkesi veya ContentKeyAuthorizationPolicy için). Uzun süre boyunca kullanılmak için oluşturulan bulucu ilkeleri gibi aynı günleri / erişim izinlerini sürekli olarak kullanıyorsanız, aynı ilke kimliğini kullanmalısınız (karşıya yükleme olmayan ilkeler için). Daha fazla bilgi için [bu makaleye](media-services-dotnet-manage-entities.md#limit-access-policies) bakın.
 
-Gerçek zamanlı bir kodlayıcı yapılandırma hakkında daha fazla bilgi için bkz: [Azure Media Services RTMP desteği ve gerçek zamanlı kodlayıcılar](https://azure.microsoft.com/blog/2014/09/18/azure-media-services-rtmp-support-and-live-encoders/).
+Canlı kodlayıcının nasıl yapılandırılacağı hakkında bilgi için bkz. [Azure MEDIA SERVICES RTMP desteği ve canlı kodlayıcılar](https://azure.microsoft.com/blog/2014/09/18/azure-media-services-rtmp-support-and-live-encoders/).
 
 ```csharp
 using System;

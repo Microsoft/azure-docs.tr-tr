@@ -2,17 +2,17 @@
 title: İşleç en iyi uygulamalar - Azure Kubernetes Hizmetleri (AKS) kimlik
 description: Kimlik doğrulamasını yönetmek nasıl küme işleci en iyi yöntemler ve kümeler Azure Kubernetes Service (AKS) için yetkilendirme öğrenin
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: conceptual
 ms.date: 04/24/2019
-ms.author: iainfou
-ms.openlocfilehash: f98e38556458b8d8a675d1e3f985aacfca022082
-ms.sourcegitcommit: 1289f956f897786090166982a8b66f708c9deea1
+ms.author: mlearned
+ms.openlocfilehash: 82bf59dddeecab0addf00a935f55be8d1d7952d3
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "65074159"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67614788"
 ---
 # <a name="best-practices-for-authentication-and-authorization-in-azure-kubernetes-service-aks"></a>Kimlik doğrulama ve yetkilendirme Azure Kubernetes Service (AKS) için en iyi uygulamalar
 
@@ -48,7 +48,7 @@ Azure AD kullanan bir AKS kümesi oluşturmak için bkz [Azure Active Directory 
 
 **En iyi uygulama kılavuzunu** -küme içindeki kaynaklara kullanıcıları veya grupları sahip izinleri tanımlamak için kullanmak Kubernetes RBAC. Roller ve en az miktarda gerekli izinleri atamanız bağlamaları oluşturun. Kullanıcı durumu veya grup üyeliği herhangi bir değişiklik otomatik olarak güncelleştirilir ve küme kaynaklarında erişim geçerli olan Azure AD ile tümleştirin.
 
-Kubernetes'te, küme kaynaklarında erişim ayrıntılı denetim sağlar. İzinleri küme seviyesinde veya belirli ad alanlarına tanımlanabilir. Hangi kaynakların yönetilebilir, tanımlamak ve hangi izinlere sahip. Bu roller kullanıcılara veya gruplara bir bağlama ile uygulanmış olan. Hakkında daha fazla bilgi için *rolleri*, *ClusterRoles*, ve *bağlamaları*, bkz: [erişim ve kimlik seçeneklerini Azure Kubernetes Service (AKS)] [aks-concepts-identity].
+Kubernetes'te, küme kaynaklarında erişim ayrıntılı denetim sağlar. İzinleri küme seviyesinde veya belirli ad alanlarına tanımlanabilir. Hangi kaynakların yönetilebilir, tanımlamak ve hangi izinlere sahip. Bu roller kullanıcılara veya gruplara bir bağlama ile uygulanmış olan. Hakkında daha fazla bilgi için *rolleri*, *ClusterRoles*, ve *bağlamaları*, bkz: [erişim ve kimlik seçeneklerini Azure Kubernetes Service (AKS)][aks-concepts-identity].
 
 Örnek olarak, kaynakları adlı ad alanındaki tam erişim veren bir rol oluşturabilirsiniz *Finans uygulama*aşağıdaki örnek YAML bildirimde gösterildiği gibi:
 
@@ -84,7 +84,7 @@ roleRef:
 
 Zaman *developer1\@contoso.com* kimlik doğrulaması kaynakları için tam izinlere sahiptirler AKS kümesi karşı *Finans uygulama* ad alanı. Bu şekilde, mantıksal olarak ayrı ve denetim kaynaklara erişin. Kubernetes RBAC, Azure ile birlikte kullanılmalıdır AD-tümleştirmesi, önceki bölümde anlatıldığı gibidir.
 
-RBAC kullanarak Kubernetes kaynaklarına erişimi denetlemek için Azure AD grupları kullanma hakkında bilgi için bkz: [AKS rol tabanlı erişim denetimlerine ve Azure Active Directory kimlikleri kullanarak küme kaynaklarında erişim denetimi] [ azure-ad-rbac].
+RBAC kullanarak Kubernetes kaynaklarına erişimi denetlemek için Azure AD grupları kullanma hakkında bilgi için bkz: [AKS rol tabanlı erişim denetimlerine ve Azure Active Directory kimlikleri kullanarak küme kaynaklarında erişim denetimi][azure-ad-rbac].
 
 ## <a name="use-pod-identities"></a>Pod kimlikler kullanın
 

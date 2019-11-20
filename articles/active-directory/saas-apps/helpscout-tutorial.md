@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Scout yardımcı olan Azure Active Directory Tümleştirmesi | Microsoft Docs'
-description: Azure Active Directory ve Yardım Scout arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: yardım Scout ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve yardım Scout arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,230 +8,230 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 0aad9910-0bc1-4394-9f73-267cf39973ab
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 02/15/2019
+ms.date: 10/24/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3625a6bbf22a2d51546a91e8a5f7c58b7fbb264f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b71ccbc6cfdb9d3d37fc46b0e932fa98eee2fb43
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67101184"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73159098"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-help-scout"></a>Öğretici: Scout yardımcı olan Azure Active Directory Tümleştirmesi
+# <a name="tutorial-azure-active-directory-integration-with-help-scout"></a>Öğretici: yardım Scout ile Azure Active Directory tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Scout yardımcı tümleştirme konusunda bilgi edinin.
-Scout yardımcı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, yardım Scout 'ı Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Yardım scout with Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Scout yardımcı erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) Yardım Scout için oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Yardım scout 'a erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla Scout (çoklu oturum açma) yardımcı olması için otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Scout yardımcı Azure AD tümleştirmesini yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini yardım Scout ile yapılandırmak için aşağıdaki öğelere ihtiyacınız vardır:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Yardım Scout çoklu oturum açmayı abonelik etkin.
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Yardım scout çoklu oturum açma etkin abonelik
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Yardım Scout destekler **SP ve IDP** tarafından başlatılan
-* Yardım Scout destekler **zamanında** kullanıcı sağlama
+* Yardım scout **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler
+* Yardım scout **, tam zamanında** Kullanıcı sağlamayı destekler
 
-## <a name="adding-help-scout-from-the-gallery"></a>Scout yardımcı galeri ekleme
+## <a name="adding-help-scout-from-the-gallery"></a>Galeri 'den yardım Scout ekleme
 
-Azure AD'ye yardımcı Scout tümleştirmesini yapılandırmak için Yardım Scout Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Yardım scout 'ın Azure AD 'ye tümleştirilmesini yapılandırmak için Galeriden yardım Scout 'ı yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**Galeriden yardımcı Scout eklemek için aşağıdaki adımları gerçekleştirin:**
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **Yardım scout** yazın.
+1. Sonuçlar panelinden **Yardım scout** ' ı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-    ![Azure Active Directory düğmesi](common/select-azuread.png)
+Bu bölümde, **B. Simon**adlı bir test kullanıcısına dayalı yardım Scout Ile Azure AD çoklu oturum açmayı yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve yardım Scout içindeki ilgili Kullanıcı arasındaki bağlantı ilişkisinin oluşturulması gerekir.
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+Azure AD çoklu oturum açmayı, yardım Scout ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    * Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    * Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Yardım scout SSO 'Yu yapılandırın](#configure-help-scout-sso)** .
+    * Kullanıcının Azure AD gösterimine bağlı olan yardım Scout 'da B. Simon 'a sahip olmak için **[Yardım scout test kullanıcısı oluşturun](#create-help-scout-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-4. Arama kutusuna **yardımcı Scout**seçin **yardımcı Scout** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+Azure AD çoklu oturum açmayı yardım Scout ile birlikte yapılandırmak için aşağıdaki adımları uygulayın:
 
-     ![Sonuçlar listesinde Scout Yardım](common/search-new-app.png)
+1. [Azure Portal](https://portal.azure.com/), **Yardım scout** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma Yardımı adlı bir test kullanıcı tabanlı Scout test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ile ilgili Yardım Scout kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+1. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-Yapılandırma ve Azure AD çoklu oturum açma Yardımı Scout ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Yardım Scout çoklu oturum açmayı yapılandırma](#configure-help-scout-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Scout yardımcı test kullanıcısı oluşturma](#create-help-scout-test-user)**  - yardımcı kullanıcı Azure AD gösterimini bağlı Scout Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
-
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
-
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
-
-Azure AD çoklu oturum açma Yardımı Scout ile yapılandırmak için aşağıdaki adımları gerçekleştirin:
-
-1. İçinde [Azure portalında](https://portal.azure.com/), **yardımcı Scout** uygulama tümleştirme sayfasında **çoklu oturum açma**.
-
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
-
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
-
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
-
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** başlatılan modu, aşağıdaki adımları gerçekleştirin:
+1. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımları uygulayın:
 
-    ![Scout etki alanı ve URL'ler tek oturum açma bilgileri Yardım](common/idp-intiated.png)
+    ![Yardım scout etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-intiated.png)
 
-    a. **Tanımlayıcı** olduğu **hedef kitle URİ'si (hizmet sağlayıcı varlık kimliği)** yardımcı Scout ' başlar `urn:`
+    a. **Tanımlayıcı** , yardım Scout 'Dan başlayan **hedef kitle URI 'Si (HIZMET sağlayıcısı varlık kimliği)** `urn:`
 
-    b. **Yanıt URL'si** olduğu **sonrası arka URL (onay belgesi tüketici hizmeti URL'si)** yardımcı Scout ' başlar `https://` 
+    b. **Yanıt URL** 'Si, yardım Scout 'dan başlayan **geri gönderme URL 'Sidir (onaylama tüketici hizmeti url 'si)** `https://` 
 
     > [!NOTE]
-    > Bu URL'ler gösterimi için değerler. Bu değerler gerçek yanıt URL'si ve tanımlayıcı güncelleştirmeniz gerekir. Bu değerleri almak **çoklu oturum açma** sekmesi altında kimlik doğrulaması bölümünde, öğreticinin ilerleyen bölümlerinde açıklanmıştır.
+    > Bu URL 'Lerdeki değerler yalnızca tanıtım amaçlıdır. Bu değerleri gerçek yanıt URL 'SI ve tanımlayıcısından güncelleştirmeniz gerekir. Bu değerleri, Öğreticinin ilerleyen kısımlarında açıklanan kimlik doğrulama bölümü altındaki **Çoklu oturum açma** sekmesinden alırsınız.
 
-5. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+1. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    ![Scout etki alanı ve URL'ler tek oturum açma bilgileri Yardım](common/metadata-upload-additional-signon.png)
+    ![Yardım scout etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/metadata-upload-additional-signon.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna bir URL: `https://secure.helpscout.net/members/login/`
+    **Oturum açma URL 'si** metin kutusuna şu şekılde bir URL yazın: `https://secure.helpscout.net/members/login/`
 
-6. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-7. Üzerinde **yardımcı Scout kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+1. **Yardım scout ayarla** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-help-scout-single-sign-on"></a>Yardım Scout çoklu oturum açmayı yapılandırın
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-1. Farklı bir web tarayıcı penceresinde Yardım Scout şirketinizin sitesi için bir yönetici olarak oturum açın.
+Bu bölümün amacı, B. Simon adlı Azure portal bir test kullanıcısı oluşturmaktır.
 
-2. Tıklayarak **Yönet** seçin ve üstteki menüden **şirket** açılan menüden.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/helpscout-tutorial/settings1.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-3. Seçin **kimlik doğrulaması** sol gezinti bölmesinden.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/helpscout-tutorial/settings2.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-4. Bu SAML ayarları bölümüne alır ve aşağıdaki adımları gerçekleştirin:
-
-    ![Çoklu oturum açmayı yapılandırın](./media/helpscout-tutorial/settings3.png)
-
-    a. Kopyalama **sonrası arka URL (onay belgesi tüketici hizmeti URL'si)** değeri ve değer yapıştırın **yanıt URL'si** metin kutusu **temel SAML yapılandırma** Azure bölümünde Portalı.
-
-    b. Kopyalama **hedef kitle URİ'si (hizmet sağlayıcı varlık kimliği)** değeri ve değer yapıştırın **tanımlayıcı** metin kutusu **temel SAML yapılandırma** bölümünde Azure portalında.
-
-5. İki durumlu **etkinleştirme SAML** üzerinde ve aşağıdaki adımları gerçekleştirin:
-
-    ![Çoklu oturum açmayı yapılandırın](./media/helpscout-tutorial/settings4.png)
-
-    a. İçinde **çoklu oturum açma URL'si** metin değerini yapıştırın **oturum açma URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
-
-    b. Tıklayın **sertifikasını karşıya yükle** yüklenecek **Certificate(Base64)** Azure portalından indirdiğiniz.
-
-    c. Kuruluşunuzun e-posta etki alanları ör - enter `contoso.com` içinde **e-posta etki alanları** metin. Birden çok etki alanı virgülle ayırabilirsiniz. Dilediğiniz zaman yardımcı Scout kullanıcı veya belirli bir etki alanı girer üzerinde yönetici [yardımcı Scout oturum açma sayfası](https://secure.helpscout.net/members/login/) kendi kimlik bilgileriyle kimlik doğrulaması için kimlik sağlayıcısına yeniden yönlendirilir.
-
-    d. Son olarak, geçiş **zorla SAML oturum açma** yalnızca Scout yardımcı olmak için bu yöntemle oturum açmasını istiyorsanız. Yine de bunları kendi Yardım Scout kimlik bilgileriyle oturum seçeneğini bırakın istiyorsanız, açılıp devre dışı bırakılabilir. Bu etkin olsa bile, bir hesap sahibi her zaman Scout yardımcı olmak için hesap parolalarını oturum açamaz olur.
-
-    e. **Kaydet**’e tıklayın.
-
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
-
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
-
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
-
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
-
-2. Seçin **yeni kullanıcı** ekranın üstünde.
-
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
-
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **B. Simon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
-    Örneğin, BrittaSimon@contoso.com
+    b. **Kullanıcı adı** alanında, **B. Simon\@yourcompanydomain. Extension** yazın  
+    Örneğin, B.Simon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Scout yardımcı olmak için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Bu bölümde, yardım Scout 'a erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'ı etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **yardımcı Scout**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **Yardım scout**' u seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **yardımcı Scout**.
+2. Uygulamalar listesinde **Yardım scout**' ı seçin.
 
-    ![Uygulamalar listesinde Scout Yardım bağlantısı](common/all-applications.png)
+    ![Uygulamalar listesindeki yardım Scout bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. Kullanıcılar **ve gruplar** iletişim kutusunda, kullanıcılar listesinde **B. Simon** öğesini seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-help-scout-test-user"></a>Scout yardımcı test kullanıcısı oluşturma
+## <a name="configure-help-scout-sso"></a>Yardım scout SSO 'yu yapılandırma
 
-Bu bölümde, Britta Simon adlı bir kullanıcı Yardımı Scout içinde oluşturulur. Yardım Scout just-ın-time kullanıcı hazırlama, varsayılan olarak etkin olduğu destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Kullanıcı Yardım Scout içinde zaten mevcut değilse yeni bir kimlik doğrulamasından sonra oluşturulur.
+1. Yardım scout içindeki yapılandırmayı otomatikleştirmek için, **uzantıyı yüklemeniz**' ne tıklayarak **uygulamalarım güvenli oturum açma tarayıcı uzantısını** yüklemeniz gerekir.
 
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
+    ![Uygulamalarım uzantısı](common/install-myappssecure-extension.png)
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+1. Tarayıcıya Uzantı eklendikten sonra, **Kurulum Yardım scout** ' a tıklayarak sizi yardım Scout uygulamasına yönlendirirsiniz. Buradan yardım Scout 'da oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı, uygulamayı sizin için otomatik olarak yapılandırır ve 3-7 adımlarını otomatikleştirecektir.
 
-Erişim paneli yardımcı Scout kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama Scout yardımcı olmak için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+    ![Kurulum yapılandırması](common/setup-sso.png)
+
+1. Yardım scout 'i el ile kurmak istiyorsanız, yeni bir Web tarayıcısı penceresi açın ve yardım Scout şirket sitenizde yönetici olarak oturum açın ve aşağıdaki adımları gerçekleştirin:
+
+1. Üst menüden **Yönet** ' e tıklayın ve ardından açılan menüden **Şirket** ' i seçin.
+
+    ![Çoklu oturum açmayı yapılandırma](./media/helpscout-tutorial/settings1.png)
+
+1. Sol gezinti bölmesinden **kimlik doğrulaması** ' nı seçin.
+
+    ![Çoklu oturum açmayı yapılandırma](./media/helpscout-tutorial/settings2.png)
+
+1. Bu, sizi SAML ayarları bölümüne götürür ve aşağıdaki adımları gerçekleştirir:
+
+    ![Çoklu oturum açmayı yapılandırma](./media/helpscout-tutorial/settings3.png)
+
+    a. **Geri gönderme URL 'si (onaylama tüketici hizmeti URL 'si)** değerini kopyalayın ve değeri Azure Portal **temel SAML yapılandırması** bölümündeki **yanıt URL 'si** metin kutusuna yapıştırın.
+
+    b. **Hedef kitle URI 'si (hizmet sağlayıcısı VARLıK kimliği)** değerini kopyalayın ve değeri Azure Portal **temel SAML yapılandırması** bölümündeki **tanımlayıcı** metin kutusuna yapıştırın.
+
+1. **SAML etkinleştir** ' i açın ve aşağıdaki adımları gerçekleştirin:
+
+    ![Çoklu oturum açmayı yapılandırma](./media/helpscout-tutorial/settings4.png)
+
+    a. **Çoklu oturum açma URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si**değerini yapıştırın.
+
+    b. Azure portal 'ten indirilen **sertifikayı (base64)** karşıya yüklemek Için **sertifikayı karşıya yükle** ' ye tıklayın.
+
+    c. **E-posta etki alanları** metin kutusuna kuruluşunuzun e-posta etki alanlarını (s) e.x.-`contoso.com` girin. Birden çok etki alanını virgülle ayırarak ayırabilirsiniz. [Yardım scout oturum açma sayfasında](https://secure.helpscout.net/members/login/) belirli bir etki alanını giren bir yardım Scout kullanıcısı veya Yöneticisi, kimlik bilgileriyle kimlik doğrulaması yapmak Için kimlik sağlayıcısına yönlendirilir.
+
+    d. Son olarak, kullanıcıların bu yöntemden yalnızca bir yardım almak için oturum açmasını istiyorsanız **SAML oturum açmayı zorla** ' ya geçiş yapabilirsiniz. Hala, yardım Scout kimlik bilgileriyle oturum açmak için bu seçeneği bırakmak istiyorsanız, devre dışı bırakabilirsiniz. Bu etkin olsa bile, hesap sahibi, hesap parolasıyla Scout 'a yardımcı olmak için her zaman oturum açabilir.
+
+    e. **Kaydet** düğmesine tıklayın.
+
+### <a name="create-help-scout-test-user"></a>Yardım scout test kullanıcısı oluşturma
+
+Bu bölümde, yardım Scout 'da B. Simon adlı bir Kullanıcı oluşturulur. Yardım scout, varsayılan olarak etkinleştirilen tam zamanında Kullanıcı sağlamayı destekler. Bu bölümde sizin için herhangi bir eylem öğesi yok. Yardım scout 'ta bir kullanıcı zaten mevcut değilse, kimlik doğrulamasından sonra yeni bir tane oluşturulur.
+
+### <a name="test-sso"></a>Test SSO 'SU
+
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
+
+Erişim panelinde yardım Scout kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız yardım Scout 'da otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+
+- [Azure AD ile yardım Scout 'ı deneyin](https://aad.portal.azure.com/)

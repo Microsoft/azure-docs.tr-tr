@@ -1,125 +1,120 @@
 ---
-title: Derleme ve Azure Cloud Services için bir Node.js Express uygulaması dağıtma
-description: Derleme ve Azure Cloud Services için bir Node.js, Express.js uygulaması dağıtma
+title: Azure Cloud Services bir Node. js Express uygulaması oluşturma ve dağıtma
+description: Node. js ' de Azure Cloud Services Express. js uygulaması oluşturma ve dağıtma
 services: cloud-services
 documentationcenter: nodejs
-author: jpconnock
-manager: timlt
-editor: ''
-ms.assetid: 24f8e7ef-e90d-4554-9b1e-a9b31d5824e5
+author: georgewallace
 ms.service: cloud-services
-ms.workload: tbd
-ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
 ms.date: 08/17/2017
-ms.author: jeconnoc
-ms.openlocfilehash: b212eaffb977846d40270a5f2abc76192aee4c0d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: gwallace
+ms.openlocfilehash: 080ec61df2042a4cf2eac9d5175c4681f98fd9df
+ms.sourcegitcommit: f176e5bb926476ec8f9e2a2829bda48d510fbed7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60528150"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70306784"
 ---
-# <a name="build-and-deploy-a-nodejs-web-application-using-express-on-an-azure-cloud-services"></a>Express kullanarak bir Azure bulut Hizmetleri'nde bir Node.js web uygulaması derleme ve dağıtma
+# <a name="build-and-deploy-a-nodejs-web-application-using-express-on-an-azure-cloud-services"></a>Azure Cloud Services Express kullanarak Node. js web uygulaması oluşturma ve dağıtma
 
-Node.js core çalışma zamanı'nda en az bir dizi işlev içerir.
-Geliştiriciler genellikle bir Node.js uygulaması geliştirilirken ek işlevler sağlamasına olanak 3. taraf modüllerini kullanın. Bu öğreticide kullanarak yeni bir uygulama oluşturacaksınız [Express](https://github.com/expressjs/express) modülü Node.js web uygulamaları oluşturmaya yönelik MVC çerçevesini sağlar.
+Node. js, çekirdek çalışma zamanındaki en az bir işlev kümesi içerir.
+Geliştiriciler, genellikle bir Node. js uygulaması geliştirirken ek işlevsellik sağlamak için 3. taraf modüllerini kullanır. Bu öğreticide, Node. js web uygulamaları oluşturmak için bir MVC çerçevesi sağlayan [Express](https://github.com/expressjs/express) modülünü kullanarak yeni bir uygulama oluşturacaksınız.
 
-Tamamlanmış uygulamanın bir ekran görüntüsü aşağıda verilmiştir:
+Tamamlanan uygulamanın ekran görüntüsü aşağıda verilmiştir:
 
-![Azure'da Express Karşılama görüntüleyen bir web tarayıcısı](./media/cloud-services-nodejs-develop-deploy-express-app/node36.png)
+![Azure 'da Express 'e hoş geldiniz görüntüleyen bir Web tarayıcısı](./media/cloud-services-nodejs-develop-deploy-express-app/node36.png)
 
-## <a name="create-a-cloud-service-project"></a>Bir bulut hizmeti projesi oluşturma
+## <a name="create-a-cloud-service-project"></a>Bulut hizmeti projesi oluşturma
 [!INCLUDE [install-dev-tools](../../includes/install-dev-tools.md)]
 
-'Expressapp' adlı yeni bir bulut hizmeti projesi oluşturmak için aşağıdaki adımları gerçekleştirin:
+' İfade Sapp ' adlı yeni bir bulut hizmeti projesi oluşturmak için aşağıdaki adımları gerçekleştirin:
 
-1. Gelen **Başlat menüsü** veya **Başlangıç ekranına**, arama **Windows PowerShell**. Son olarak, sağ **Windows PowerShell** seçip **yönetici olarak çalıştır**.
+1. **Başlat menüsünde** veya **Başlat ekranında**, **Windows PowerShell**' i arayın. Son olarak, **Windows PowerShell** ' e sağ tıklayın ve **yönetici olarak çalıştır**' ı seçin.
    
     ![Azure PowerShell simgesi](./media/cloud-services-nodejs-develop-deploy-express-app/azure-powershell-start.png)
-2. Dizinleri **c:\\düğüm** dizin adlı yeni bir çözüm oluşturmak için aşağıdaki komutları girin **expressapp** ve adlı bir web rolü **WebRole1**:
+2. Dizinleri **c:\\node** diziniyle değiştirin ve ardından, **WebRole1**adlı bir Web rolü olan **ifade** eden yeni bir çözüm oluşturmak için aşağıdaki komutları girin:
    
         PS C:\node> New-AzureServiceProject expressapp
         PS C:\Node\expressapp> Add-AzureNodeWebRole
         PS C:\Node\expressapp> Set-AzureServiceProjectRole WebRole1 Node 0.10.21
    
     > [!NOTE]
-    > Varsayılan olarak, **Add-AzureNodeWebRole** Node.js daha eski bir sürümünü kullanır. **Kümesi AzureServiceProjectRole** deyimi yukarıdaki v0.10.21 düğümünün kullanmak için Azure bildirir.  Parametreler büyük/küçük harfe duyarlıdır unutmayın.  Node.js doğru sürümünü denetleyerek seçilmiş doğrulayabilirsiniz **altyapıları** özelliğinde **WebRole1\package.json**.
+    > Varsayılan olarak **Add-AzureNodeWebRole** , Node. js ' nin eski bir sürümünü kullanır. Yukarıdaki **set-AzureServiceProjectRole** Ifadesinde, Azure 'un bir Node v 0.10.21 kullanmasını söyler.  Parametreler büyük/küçük harfe duyarlıdır.  **WebRole1\package.JSON**içindeki **Engines** özelliğini denetleyerek Node. js ' nin doğru sürümünün seçildiğini doğrulayabilirsiniz.
     > 
     > 
 
-## <a name="install-express"></a>Express yükle
-1. Hızlı Oluşturucu, aşağıdaki komutu göndererek yükleyin:
+## <a name="install-express"></a>Express 'ı yükler
+1. Aşağıdaki komutu yayımlayarak hızlı oluşturucuyu yükler:
    
         PS C:\node\expressapp> npm install express-generator -g
    
-    Npm komutu çıkışını sonuç aşağıdaki gibi görünmelidir. 
+    NPM komutunun çıktısı aşağıdaki sonuca benzer görünmelidir. 
    
-    ![Npm çıktısını gösteren Windows PowerShell yükleme hızlı komutu.](./media/cloud-services-nodejs-develop-deploy-express-app/express-g.png)
-2. Dizinleri **WebRole1** dizin ve yeni bir uygulama oluşturmak için hızlı komutunu kullanın:
+    ![NPM Install Express komutunun çıkışını görüntüleyen Windows PowerShell.](./media/cloud-services-nodejs-develop-deploy-express-app/express-g.png)
+2. Dizinleri **WebRole1** diziniyle değiştirin ve yeni bir uygulama oluşturmak için Express komutunu kullanın:
    
         PS C:\node\expressapp\WebRole1> express
    
-    Uygulamanızı önceki üzerine istenir. Girin **y** veya **Evet** devam etmek için. Express app.js dosyasındaki ve uygulamanızı oluşturmak için bir klasör yapısı oluşturur.
+    Önceki uygulamanızın üzerine yazmanız istenir. Devam etmek için **y** veya **Evet** girin. Express, App. js dosyası ve uygulamanızı oluşturmak için bir klasör yapısı oluşturur.
    
-    ![Hızlı komut çıktısı](./media/cloud-services-nodejs-develop-deploy-express-app/node23.png)
-3. Package.json dosyasında tanımlı Ek Bağımlılıklar'ı yüklemek için aşağıdaki komutu girin:
+    ![Hızlı komutun çıkışı](./media/cloud-services-nodejs-develop-deploy-express-app/node23.png)
+3. Package. json dosyasında tanımlı ek bağımlılıklar yüklemek için aşağıdaki komutu girin:
    
        PS C:\node\expressapp\WebRole1> npm install
    
-   ![Çıkış npm yükleme komutu](./media/cloud-services-nodejs-develop-deploy-express-app/node26.png)
-4. Kopyalamak için aşağıdaki komutu kullanın **bin/www** dosyasını **server.js**. Bulut hizmeti, bu uygulama için giriş noktası bulabilmesi için budur.
+   ![NPM install komutunun çıktısı](./media/cloud-services-nodejs-develop-deploy-express-app/node26.png)
+4. **Bin/www** dosyasını **Server. js**' ye kopyalamak için aşağıdaki komutu kullanın. Bu, bulut hizmetinin bu uygulama için giriş noktasını bulabilmesini sağlayacak.
    
        PS C:\node\expressapp\WebRole1> copy bin/www server.js
    
-   Bu komut tamamlandıktan sonra olmalıdır bir **server.js** WebRole1 dizindeki dosya.
-5. Değiştirme **server.js** birini kaldırmak için '.' karakteri aşağıdaki satırı.
+   Bu komut tamamlandıktan sonra, WebRole1 dizininde bir **Server. js** dosyası olmalıdır.
+5. '. ' Karakterlerinden birini aşağıdaki satırdan kaldırmak için **Server. js** ' i değiştirin.
    
        var app = require('../app');
    
-   Bu değişikliği yaptıktan sonra satırı aşağıdaki gibi görünmelidir.
+   Bu değişikliği yaptıktan sonra satır aşağıdaki gibi görünmelidir.
    
        var app = require('./app');
    
-   Dosya geçtiğimizi olduğundan bu değişikliği gerekli değildir (eski adıyla **bin/www**,) için gerekli uygulama dosyası ile aynı dizinde. Bu değişikliği yaptıktan sonra Kaydet **server.js** dosya.
+   Dosyayı (eski adıyla **bin/www**), gereken uygulama dosyası ile aynı dizine taşıdığımızdan bu değişiklik zorunludur. Bu değişikliği yaptıktan sonra, **Server. js** dosyasını kaydedin.
 6. Azure öykünücüsünde uygulamayı çalıştırmak için aşağıdaki komutu kullanın:
    
        PS C:\node\expressapp\WebRole1> Start-AzureEmulator -launch
    
-    ![Express Hoş Geldiniz içeren bir web sayfası.](./media/cloud-services-nodejs-develop-deploy-express-app/node28.png)
+    ![Express 'e hoş geldiniz içeren bir Web sayfası.](./media/cloud-services-nodejs-develop-deploy-express-app/node28.png)
 
 ## <a name="modifying-the-view"></a>Görünümü değiştirme
-Artık "Hoş Geldiniz için Express içinde Azure" iletisini görüntülemek için görünümü değiştirin.
+Şimdi görünümü, "Azure 'da Express 'e hoş geldiniz" iletisini görüntüleyecek şekilde değiştirin.
 
-1. İndex.jade dosyayı açmak için aşağıdaki komutu girin:
+1. İndex. Jade dosyasını açmak için aşağıdaki komutu girin:
    
        PS C:\node\expressapp\WebRole1> notepad views/index.jade
    
-   ![İndex.jade dosyasının içeriği.](./media/cloud-services-nodejs-develop-deploy-express-app/getting-started-19.png)
+   ![İndex. Jade dosyasının içeriği.](./media/cloud-services-nodejs-develop-deploy-express-app/getting-started-19.png)
    
-   Jade Express uygulamaları tarafından kullanılan varsayılan görünüm altyapısıdır. Jade görünüm altyapısı hakkında daha fazla bilgi için bkz. [ http://jade-lang.com ] [ http://jade-lang.com].
-2. Son metin satırının ekleyerek değiştirme **azure'da**.
+   Jade, Express uygulamaları tarafından kullanılan varsayılan görünüm altyapısıdır. Jade Görünüm altyapısı hakkında daha fazla bilgi için bkz [http://jade-lang.com][http://jade-lang.com].
+2. Metnin son satırını **Azure**'a ekleyerek değiştirin.
    
-   ![Son satırı index.jade dosyasını okur: p Hoş Geldiniz için \#{title} Azure'da](./media/cloud-services-nodejs-develop-deploy-express-app/node31.png)
-3. Dosyayı kaydedin ve Not Defteri'nden çıkın.
-4. Tarayıcınızı yenileyin ve değişikliklerinizi görürsünüz.
+   ![İndex. Jade dosyası, son satır okur: p Azure 'da {title \#} uygulamasına hoş geldiniz](./media/cloud-services-nodejs-develop-deploy-express-app/node31.png)
+3. Dosyayı kaydedin ve Not defteri 'nden çıkın.
+4. Tarayıcınızı yenileyin, değişikliklerinizi görürsünüz.
    
-   ![Bir tarayıcı penceresi sayfasına Hoş Geldiniz Azure Express içerir.](./media/cloud-services-nodejs-develop-deploy-express-app/node32.png)
+   ![Bir tarayıcı penceresi olan sayfa, Azure 'da Express 'e hoş geldiniz 'i içerir](./media/cloud-services-nodejs-develop-deploy-express-app/node32.png)
 
-Uygulamayı test etmek sonra **Stop-AzureEmulator** öykünücüsü'nü durdurmak için cmdlet.
+Uygulamayı test ettikten sonra, öykünücüyü durdurmak için **stop-AzureEmulator** cmdlet 'ini kullanın.
 
-## <a name="publishing-the-application-to-azure"></a>Uygulamayı azure'a yayımlama
-Azure PowerShell penceresinde **Publish-AzureServiceProject** cmdlet'i bir bulut hizmeti uygulamayı dağıtmak için
+## <a name="publishing-the-application-to-azure"></a>Uygulamayı Azure 'da yayımlama
+Azure PowerShell penceresinde, uygulamayı bir bulut hizmetine dağıtmak için **Publish-AzureServiceProject** cmdlet 'ini kullanın
 
     PS C:\node\expressapp\WebRole1> Publish-AzureServiceProject -ServiceName myexpressapp -Location "East US" -Launch
 
-Dağıtım işlemi tamamlandıktan sonra tarayıcınızı açın ve web sayfasını görüntüleyin.
+Dağıtım işlemi tamamlandıktan sonra tarayıcınız Web sayfasını açar ve görüntüler.
 
-![Express sayfasını gösteren bir web tarayıcısı. URL, artık Azure'da barındırıldığını gösterir.](./media/cloud-services-nodejs-develop-deploy-express-app/node36.png)
+![Express sayfasını görüntüleyen bir Web tarayıcısı. URL, şu anda Azure üzerinde barındırılıyor demektir.](./media/cloud-services-nodejs-develop-deploy-express-app/node36.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Daha fazla bilgi için bkz. [Node.js Geliştirici Merkezi](https://docs.microsoft.com/javascript/azure/?view=azure-node-latest).
+Daha fazla bilgi için bkz. [Node.js Geliştirici Merkezi](https://docs.microsoft.com/azure/javascript/).
 
 [Node.js Web Application]: https://www.windowsazure.com/develop/nodejs/tutorials/getting-started/
 [Express]: https://expressjs.com/

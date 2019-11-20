@@ -1,24 +1,18 @@
 ---
-title: Terraform modüllerini kullanarak Azure'da VM kümesi oluşturma
+title: Öğretici-modül kayıt defterini kullanarak Terrayform ile Azure VM kümesi oluşturma
 description: Terraform modüllerini kullanarak Azure'da Windows sanal makine kümesi oluşturmayı öğrenin
-services: terraform
-ms.service: azure
-keywords: terraform, devops, sanal makine, ağ, modüller
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.topic: tutorial
-ms.date: 10/19/2017
-ms.openlocfilehash: c6aa780b04c85b8156463011c2b90da2da4541f6
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
-ms.translationtype: MT
+ms.date: 10/26/2019
+ms.openlocfilehash: 939c34eae63b89108102ed8f766a4260ce2f24bd
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60885021"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159058"
 ---
-# <a name="create-a-vm-cluster-with-terraform-using-the-module-registry"></a>Modül Kayıt Defterini kullanarak Terraform ile VM kümesi oluşturma
+# <a name="tutorial-create-an-azure-vm-cluster-with-terraform-using-the-module-registry"></a>Öğretici: modül kayıt defterini kullanarak Terrayform ile Azure VM kümesi oluşturma
 
-Bu makalede Terraform [Azure işlem modülü](https://registry.terraform.io/modules/Azure/compute/azurerm/1.0.2) ile küçük bir VM kümesi oluşturma adımları gösterilmektedir. Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz: 
+Bu makalede Terraform [Azure işlem modülü](https://registry.terraform.io/modules/Azure/compute/azurerm/1.0.2) ile küçük bir VM kümesi oluşturma adımları gösterilmektedir. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz: 
 
 > [!div class="checklist"]
 > * Azure ile kimlik doğrulamasını ayarlama
@@ -35,7 +29,7 @@ Terraform hakkında daha fazla bilgi için [Terraform belgelerini](https://www.t
 
  Azure hizmet sorumlusu oluşturmak için [Terraform'u yükleyin ve Azure erişimini yapılandırın](/azure/virtual-machines/linux/terraform-install-configure) sayfasını inceleyin. Aşağıdaki kodla boş bir dizinde yeni bir `azureProviderAndCreds.tf` dosyası oluşturmak için bu hizmet sorumlusunu kullanın:
 
-```tf
+```hcl
 variable subscription_id {}
 variable tenant_id {}
 variable client_id {}
@@ -53,7 +47,7 @@ provider "azurerm" {
 
 Aşağıdaki kodu kullanarak `main.tf` adlı yeni bir Terraform şablonu oluşturun:
 
-```tf
+```hcl
 module mycompute {
     source = "Azure/compute/azurerm"
     resource_group_name = "myResourceGroup"
@@ -63,7 +57,7 @@ module mycompute {
     remote_port = "3389"
     nb_instances = 2
     public_ip_dns = ["unique_dns_name"]
-    vnet_subnet_id = "${module.network.vnet_subnets[0]}"
+    vnet_subnet_id = module.network.vnet_subnets[0]
 }
 
 module "network" {
@@ -73,15 +67,15 @@ module "network" {
 }
 
 output "vm_public_name" {
-    value = "${module.mycompute.public_ip_dns_name}"
+    value = module.mycompute.public_ip_dns_name
 }
 
 output "vm_public_ip" {
-    value = "${module.mycompute.public_ip_address}"
+    value = module.mycompute.public_ip_address
 }
 
 output "vm_private_ips" {
-    value = "${module.mycompute.network_interface_private_ip}"
+    value = module.mycompute.network_interface_private_ip
 }
 ```
 
@@ -104,5 +98,5 @@ VM'leri Azure'da sağlamak için `terraform apply` komutunu çalıştırın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Terraform modülleri](https://registry.terraform.io/modules/Azure) listesine göz atma
-- [Terraform ile sanal makine ölçek kümesi](terraform-create-vm-scaleset-network-disks-hcl.md) oluşturma
+> [!div class="nextstepaction"] 
+> [Azure Terrayform modülleri listesine gözatıp](https://registry.terraform.io/modules/Azure)

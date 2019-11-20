@@ -15,20 +15,20 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 02/06/2019
 ms.author: shvija
-ms.openlocfilehash: 9108c52529319288fba48dbad3c6f8aa6cb5f725
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 18dea8e8e4cfcabec63e35dd302f6a5259721a8a
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60822525"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68320303"
 ---
-# <a name="enable-capturing-of-events-streaming-through-azure-event-hubs"></a>Olayları Azure Event Hubs ile akış yakalamayı etkinleştirme
+# <a name="enable-capturing-of-events-streaming-through-azure-event-hubs"></a>Azure Event Hubs ile olayların akışını yakalamayı etkinleştirme
 
-Azure [Event Hubs Yakalama][capture-overview] özelliği, Event Hubs’dan akış verilerini seçtiğiniz [Azure Blob depolama](https://azure.microsoft.com/services/storage/blobs/) alanına veya [Azure Data Lake Store](https://azure.microsoft.com/services/data-lake-store/) hesabına otomatik olarak iletmenizi sağlar.
+Azure [Event Hubs yakalama][capture-overview] , akış verilerini Event Hubs bir [Azure Blob depolama alanına](https://azure.microsoft.com/services/storage/blobs/) veya seçtiğiniz [Azure Data Lake Store](https://azure.microsoft.com/services/data-lake-store/) hesabına otomatik olarak göndermenizi sağlar.
 
 [Azure portalını](https://portal.azure.com) kullanarak olay hub'ı oluşturma sırasında Yakalama özelliğini yapılandırabilirsiniz. Verileri bir Azure [Blob depolama](https://azure.microsoft.com/services/storage/blobs/) kapsayıcısına veya bir [Azure Data Lake Store](https://azure.microsoft.com/services/data-lake-store/) hesabına alabilirsiniz.
 
-Daha fazla bilgi için bkz. [Event Hubs Capture'a genel bakış][capture-overview].
+Daha fazla bilgi için [Event Hubs yakalamaya genel bakış][capture-overview]bölümüne bakın.
 
 ## <a name="capture-data-to-an-azure-storage-account"></a>Azure Depolama hesabına veri alma  
 
@@ -39,7 +39,7 @@ Zaman penceresi varsayılan olarak 5 dakikadır. En düşük değer 1, en yükse
 ![Zaman penceresi için yakalama][1]
 
 > [!NOTE]
-> Etkinleştirmek veya yakalama penceresi sırasında hiçbir olaylar meydana geldiğinde boş dosyaları yayma devre dışı bırakabilirsiniz. 
+> Yakalama penceresi sırasında hiçbir olay gerçekleşmeyecek boş dosyaları yaymayı etkinleştirebilir veya devre dışı bırakabilirsiniz. 
 
 ## <a name="capture-data-to-an-azure-data-lake-store-account"></a>Azure Data Lake Store hesabına veri alma
 
@@ -47,10 +47,8 @@ Azure Data Lake Store'a veri almak için bir Data Lake Store hesabı ve bir olay
 
 ### <a name="create-an-azure-data-lake-store-account-and-folders"></a>Azure Data Lake Store hesabı ve klasörleri oluşturma
 
-> [!NOTE]
-> Şu anda yalnızca Gen 1, Azure Data Lake Store, Gen 2 Event Hubs yakalama özelliğini destekler. 
 
-1. Bölümündeki yönergeleri izleyerek bir Data Lake Store Gen 1 hesap oluşturma [Azure Data Lake Azure portalını kullanarak Store ile çalışmaya başlama](../data-lake-store/data-lake-store-get-started-portal.md).
+1. [Azure Portal'ı kullanarak Azure Data Lake Store ile çalışmaya başlama](../data-lake-store/data-lake-store-get-started-portal.md) bölümündeki yönergeleri uygulayarak bir Data Lake Store hesabı oluşturun.
 2. Event Hubs verilerini almak ve Data Lake Store hesabınıza veri yazabilmesi için Event Hubs'a izin atamak istediğiniz Data Lake Stora hesabı içinde bir klasör oluşturmak için [Event Hubs'a izin atama](../data-lake-store/data-lake-store-archive-eventhub-capture.md#assign-permissions-to-event-hubs) bölümündeki yönergeleri uygulayın.  
 
 
@@ -81,7 +79,7 @@ Event Hubs ad alanlarında mevcut olan olay hub'ları üzerinde Yakalama özelli
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Olay hub’larını yakalama hakkında daha fazla bilgi için bkz. [Event Hubs Yakalama özelliğine genel bakış][capture-overview].
+- Event Hubs yakalama hakkında daha fazla bilgi edinmek için [Event Hubs yakalamaya genel bakış][capture-overview]makalesini okuyun.
 - Dilerseniz Azure Resource Manager şablonlarını kullanarak da Event Hubs Yakalama özelliğini yapılandırabilirsiniz. Daha fazla bilgi için bkz. [Azure Resource Manager şablonu kullanarak Yakalama özelliğini etkinleştirme](event-hubs-resource-manager-namespace-event-hub-enable-capture.md).
 - [Kaynağı Event Hubs ad alanı olarak bir Azure Event Grid aboneliği oluşturmayı öğrenin](store-captured-data-data-warehouse.md)
 - [Azure portalı kullanarak Azure Data Lake Store ile çalışmaya başlama](../data-lake-store/data-lake-store-get-started-portal.md)

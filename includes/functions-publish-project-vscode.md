@@ -4,46 +4,46 @@ description: include dosyası
 services: functions
 author: ggailey777
 manager: jeconnoc
-ms.service: functions
+ms.service: azure-functions
 ms.topic: include
 ms.date: 04/16/2019
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 4f3d31fa25ea5781bc3af7297719b77723597e17
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: abb8b6bed6766ff0ea85eab1434014a057af4ca3
+ms.sourcegitcommit: bc3a153d79b7e398581d3bcfadbb7403551aa536
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67444638"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68843354"
 ---
 ## <a name="publish-the-project-to-azure"></a>Projeyi Azure'da yayımlama
 
 Visual Studio Code, işlevler projenizi doğrudan Azure’da dağıtmanıza olanak sağlar. Süreç kapsamında, Azure abonelik bir işlev uygulaması ve ilgili kaynakları oluşturursunuz. İşlev uygulaması, işlevlerinize ilişkin bir yürütme bağlamı sağlar. Proje, Azure aboneliğinizdeki yeni işlev uygulamasında paketlenir ve dağıtılır.
 
-Varsayılan olarak, Visual Studio tüm işlev uygulamanızı oluşturmak için gereken Azure kaynakları oluşturur. Bu kaynakların adlarını seçtiğiniz işlev uygulamasının adı temel alır. Oluşturulan kaynakların tam denetim gerekiyorsa, bunun yerine yapabilecekleriniz [Gelişmiş seçenekleri kullanarak yayımlama](../articles/azure-functions/functions-develop-vs-code.md#enabled-publishing-with-advanced-create-options).
+Visual Studio Code, varsayılan olarak, işlev uygulamanızı oluşturmak için gereken tüm Azure kaynaklarını oluşturur. Bu kaynakların adları, seçtiğiniz işlev uygulaması adına göre yapılır. Oluşturulan kaynaklar üzerinde tam denetime sahip olmanız gerekiyorsa, bunun yerine [Gelişmiş seçenekleri kullanarak yayımlayabilirsiniz](../articles/azure-functions/functions-develop-vs-code.md#enable-publishing-with-advanced-create-options).
 
-Bu bölümde, Azure'da yeni bir işlev uygulaması oluşturduğunuzu varsayar.
+Bu bölümde, Azure 'da yeni bir işlev uygulaması oluşturduğunuzu varsayılmaktadır.
 
 > [!IMPORTANT]
 > Varolan bir işlev uygulamasına yayımladığınızda Azure’daki uygulamanın içeriğinin üzerine yazılır.
 
-1. Visual Studio Code'da komut paletini açın için F1 tuşuna basın. Arayın ve seçin komut Paleti'nde `Azure Functions: Deploy to function app...`.
+1. Visual Studio Code ' de, F1 tuşuna basarak komut paletini açın. Komut paletinde, araması yapın ve seçin `Azure Functions: Deploy to function app...`.
 
-1. Değil oturum açma, siz istenirse **Azure'da oturum aç**. Ayrıca **ücretsiz bir Azure hesabı oluşturun**. Tarayıcıdan sonra başarılı oturum açma, Visual Studio Code için geri dönün. 
+1. Oturum açmadıysanız, **Azure 'Da oturum açmanız**istenir. Ayrıca, **ücretsiz bir Azure hesabı da oluşturabilirsiniz**. Tarayıcıdan başarıyla oturum açtıktan sonra, Visual Studio Code ' ye geri dönün. 
 
-1. Birden fazla aboneliğiniz varsa **bir abonelik seçin** seçin işlev uygulaması için **+ oluştur yeni işlev uygulamanızı Azure'a**.
+1. Birden çok aboneliğiniz varsa, işlev uygulaması için **bir abonelik seçin** ve sonra da **Azure 'Da yeni işlev uygulaması oluştur**' u seçin.
 
 1. İşlev uygulamanızı tanımlayan bir genelde benzersiz olan bir ad yazın ve Enter tuşuna basın. İşlev uygulaması adına ilişkin geçerli karakterler `a-z`, `0-9` ve `-` işaretidir.
 
-    Aşağıdaki Azure kaynakları, Enter tuşuna bastığınızda, aboneliğinizde oluşturulur:
+    ENTER tuşuna bastığınızda, aboneliğinizde aşağıdaki Azure kaynakları oluşturulur:
 
-    * **[Kaynak grubu](../articles/azure-resource-manager/resource-group-overview.md)** : Tüm oluşturulan Azure kaynaklarını içerir. Ad, işlev uygulamanızın adı üzerinde temel alır.
-    * **[Depolama hesabı](../articles/storage/common/storage-quickstart-create-account.md)** : İşlev uygulamanızın adı alan benzersiz bir ada sahip bir standart depolama hesabı oluşturulur.
-    * **[Barındırma planı](../articles/azure-functions/functions-scale.md)** : Tüketim planı, Batı ABD bölgesinde, sunucusuz bir işlev uygulamanızı barındırmak için oluşturulur.
-    * **İşlev uygulaması**: Projenizi dağıtılır ve bu yeni işlev uygulamasında çalıştırır.
+    * **[Kaynak grubu](../articles/azure-resource-manager/resource-group-overview.md)** : Oluşturulan tüm Azure kaynaklarını içerir. Ad, işlev uygulamanızın adını temel alır.
+    * **[Depolama hesabı](../articles/storage/common/storage-quickstart-create-account.md)** : İşlev uygulamanızın adını temel alan benzersiz bir adla standart bir depolama hesabı oluşturulur.
+    * **[Barındırma planı](../articles/azure-functions/functions-scale.md)** : Sunucusuz işlev uygulamanızı barındırmak için Batı ABD bölgede bir tüketim planı oluşturulur.
+    * **İşlev uygulaması**: Projeniz bu yeni işlev uygulamasında dağıtılır ve çalışır.
 
-    İşlev uygulamanız oluşturulduktan sonra bir bildirim görüntülenir ve dağıtım paketi uygulanır. Seçin **görünümü çıkış** oluşturduğunuz Azure kaynaklarını oluşturma ve dağıtım sonuçlarını görüntülemek için bu bildirimi dahil olmak üzere.
+    İşlev uygulamanız oluşturulduktan sonra bir bildirim görüntülenir ve dağıtım paketi uygulanır. Oluşturduğunuz Azure kaynakları dahil olmak üzere oluşturma ve dağıtım sonuçlarını görüntülemek için bu bildirimde **çıktıyı görüntüle** ' yi seçin.
 
-1. Geri **Azure: İşlevleri** alanında, aboneliğiniz kapsamındaki yeni işlev uygulaması'nı genişletin. Genişletin **işlevleri**, sağ **HttpTrigger**ve ardından **işlev URL'sini kopyalama**.
+1. **Azure 'a geri dönün: İşlevler** alanında, aboneliğinizdeki yeni işlev uygulamasını genişletin. **İşlevler**' i genişletin, **httptrigger**öğesine sağ tıklayın ve ardından **işlev URL 'sini Kopyala**' yı seçin.
 
-    ![Yeni HTTP tetikleyici işlevi URL'sini Kopyala](./media/functions-publish-project-vscode/function-copy-endpoint-url.png)
+    ![Yeni HTTP tetikleyicisinin işlev URL 'sini kopyalayın](./media/functions-publish-project-vscode/function-copy-endpoint-url.png)

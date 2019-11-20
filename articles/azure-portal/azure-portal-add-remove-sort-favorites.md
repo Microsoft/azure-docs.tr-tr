@@ -1,59 +1,69 @@
 ---
-title: Ekleme, kaldırma ve sıralama Azure portalındaki Sık Kullanılanlar | Microsoft Docs
-description: Ekleme veya öğeleri Sık Kullanılanlar listesinden kaldırmak ve öğeleri sıralama hakkında bilgi edinin
+title: Azure portal sık kullanılanları ekleme, kaldırma ve sıralama | Microsoft Docs
+description: Sık Kullanılanlar listesine öğe eklemeyi veya kaldırmayı ve öğelerin sırasını sıralamayı öğrenin
 services: azure-portal
-keywords: Sık Kullanılanlar
+keywords: Larını
 author: kfollis
 ms.author: kfollis
-ms.date: 04/03/2019
+ms.date: 11/01/2019
 ms.topic: conceptual
 ms.service: azure-portal
 ms.custom: ''
 manager: mtillman
-ms.openlocfilehash: ff3549ce77a2b691dcaaa94b6a59e9c011ff6e21
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 51228f4a28b5c6e19bf341b5576540d36bcaae64
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60690721"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73579508"
 ---
 # <a name="add-remove-and-sort-favorites"></a>Ekleme, kaldırma ve sık kullanılanları sıralama
 
-Ekleme veya öğeleri kaldırma, **Sık Kullanılanlar** böylece en sık kullandığınız hizmetlere hızlıca gidebilirsiniz listesi. Bazı sık kullanılan hizmetler için önceden ekledik, **Sık Kullanılanlar** listesi, ancak büyük olasılıkla özelleştirebilir olmak isteyeceksiniz. Yaptığınız değişiklikler gördüğü tek işiniz **Sık Kullanılanlar**.
+En sık kullandığınız hizmetlere hızla gidebilmeniz için **Sık Kullanılanlar** listenizden öğe ekleyin veya kaldırın. **Sık Kullanılanlar** listenize bazı yaygın Hizmetleri zaten ekledik, ancak büyük olasılıkla özelleştirmek isteyeceksiniz. **Sık Kullanılanlar**'da yaptığınız değişiklikleri görecek tek bir siz olursunuz.
 
-## <a name="add-or-remove-a-favorite"></a>Sık kullanılan Ekle Kaldır
+## <a name="add-a-favorite"></a>Sık kullanılan ekleme
 
-Altında listelenen öğelerin **Sık Kullanılanlar** gelen seçili **tüm hizmetleri**. Yıldız simgesiyle ![sarı yıldız simgesini](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-star.png) yanındaki her bir hizmet öğesi listede görünüp görünmeyeceğini gösterir. Bir hizmetten ekleyip yıldız simgesini seçerek **Sık Kullanılanlar** listesi.
+**Sık Kullanılanlar** altında listelenen öğeler **tüm hizmetlerden**seçilir. Hizmetle ilgili bilgi ve kaynakları göstermek için bir hizmet adının üzerine gelin. Doldurulmuş bir yıldız simgesi ![doldurulmuş yıldız simgesi](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-graystar.png) hizmet adının yanında, öğenin **Sık Kullanılanlar** listesinde göründüğünü gösterir. **Sık Kullanılanlar** listesine bir hizmet eklemek için yıldız simgesini seçin.
 
-### <a name="add-cost-management--billing-to-favorites"></a>Maliyet Yönetimi + faturalandırma Sık Kullanılanlara Ekle
+### <a name="add-cost-management--billing-to-favorites"></a>Maliyet yönetimi ve sık kullanılanlara faturalama ekleme
 
-1. Seçin **tüm hizmetleri** kenar çubuğunun üst bölümünden.
+1. Azure portal menüsünde **tüm hizmetler** ' i seçin.
 
-    ![Seçili tüm hizmetleri gösteren ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-all-services.png)
+    ![Tüm hizmetlerin seçili olduğunu gösteren ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-new-all-services.png)
 
-1. Arama alanına "Maliyet" sözcüğünü girin. "Başlığında Maliyet" veya "bir anahtar sözcük gösterildiği Maliyet" yalnızca hizmetler.
+1. Arama alanına "Cost" sözcüğünü girin. Başlığında "Cost" olan veya anahtar sözcük olarak "Cost" olan hizmetler gösteriliyor.
 
-   ![Tüm hizmetler gösteren arama ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-search.png)
+   ![Tüm hizmetlerde aramayı gösteren ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-find-service.png)
 
-1. Yıldız simgesini seçin.
+1. **Maliyet yönetimi + faturalandırma** bilgileri kartını göstermek için hizmet adının üzerine gelin. Yıldız simgesini seçin.
 
-   ![Maliyet Yönetimi yanındaki yıldız gösteren + faturalama seçili ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-add.png)
+   ![Maliyet yönetimi + faturalandırma seçeneğinin yanındaki yıldızı gösteren ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-add.png)
 
-1. **Maliyet Yönetimi + faturalandırma** artık son öğesi olarak eklenir, **Sık Kullanılanlar** listesi.
+1. **Maliyet yönetimi + faturalandırma** artık **Sık Kullanılanlar** listenize son öğe olarak eklendi.
 
-## <a name="sort-favorites"></a>Sık kullanılanları sıralama
+## <a name="remove-an-item-from-favorites"></a>Sık kullanılanlardan öğe kaldırma
 
-Sık kullanılan hizmetler listelenir sırasını değiştirebilirsiniz. Yalnızca sürükleyip menü öğesi altında başka bir konuma **Sık Kullanılanlar**.
+Artık bir öğeyi doğrudan **Sık Kullanılanlar** listesinden kaldırabilirsiniz.
 
-### <a name="move-cost-management--billing-to-the-top-of-favorites"></a>Maliyet Yönetimi + faturalandırma Sık Kullanılanlar üstüne Taşı
+1. Portal menüsünün **Sık Kullanılanlar** bölümünde, kaldırmak istediğiniz hizmetin adının üzerine gelin.
 
-1. Seçin ve basılı **maliyet Yönetimi + faturalandırma** girişinde **Sık Kullanılanlar** listesi.
+   ![Sık Kullanılanlar 'da üzerine gelme davranışını gösteren ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-remove.png)
 
-   ![Maliyet Yönetimi + faturalandırma seçili gösteren ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-sort.png)
+2. Bilgi kartında, doldurulacak ve doldurulmamış olarak değiştiği için yıldızı seçin. Hizmet, **Sık Kullanılanlar** listesinden kaldırılır.
 
-1. Tutmaya devam ederken, öğenin üstüne sürükleyin **Sık Kullanılanlar** ve serbest bırakın.
+## <a name="sort-favorites"></a>Sık kullanılanları Sırala
+
+En sevdiğiniz hizmetlerin listelenme sırasını değiştirebilirsiniz. Menü öğesini yalnızca **Sık Kullanılanlar**altındaki başka bir konuma sürükleyip bırakın.
+
+### <a name="move-cost-management--billing-to-the-top-of-favorites"></a>Maliyet yönetimi + faturalandırmayı sık kullanılanları yukarı taşı
+
+1. **Sık Kullanılanlar** listesinde **maliyet yönetimi + faturalandırma** girişi ' ni seçin ve tutun.
+
+   ![Maliyet yönetimi + faturalandırma seçiliyken ekran görüntüsü](./media/azure-portal-add-remove-sort-favorites/azure-portal-favorites-sort.png)
+
+1. Tutmaya devam ederken, öğeyi **Sık Kullanılanlar** ' ın en üstüne sürükleyin ve sonra bırakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Proje odaklı bir çalışma alanı oluşturmak için bkz: [Azure portalında panolarını oluşturma ve paylaşma](../azure-portal/azure-portal-dashboards.md)
-* Daha fazla nasıl çalışabileceğinizi-için kullanıcının [Azure portalı ile ilgili nasıl yapılır video serisi](https://www.youtube.com/playlist?list=PLLasX02E8BPBKgXP4oflOL29TtqTzwhxR)
+* Proje odaklı bir çalışma alanı oluşturmak için, bkz [. Azure Portal panoları oluşturma ve paylaşma](../azure-portal/azure-portal-dashboards.md)
+* [Azure Portal nasıl yapılır video serisi](https://www.youtube.com/playlist?list=PLLasX02E8BPBKgXP4oflOL29TtqTzwhxR) 'nde daha fazla bilgi bulun

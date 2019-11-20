@@ -1,6 +1,6 @@
 ---
-title: Azure Ağ İzleyicisi güvenlik grubu görünümü ile NSG denetim otomatik hale getirin | Microsoft Docs
-description: Bu sayfa bir ağ güvenlik grubuna denetimi yapılandırma hakkında yönergeler sağlar.
+title: Azure ağ Izleyicisi güvenlik grubu görünümü ile NSG denetimini otomatikleştirin | Microsoft Docs
+description: Bu sayfa bir ağ güvenlik grubu denetiminin nasıl yapılandırılacağı hakkında yönergeler sağlar
 services: network-watcher
 documentationcenter: na
 author: KumudD
@@ -14,42 +14,42 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: kumud
-ms.openlocfilehash: 016d68de90088314250fef1fcfdb57d7f155ef79
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8e0eddd07fc0c473e4777d9dd90d0b2c64145e34
+ms.sourcegitcommit: 19a821fc95da830437873d9d8e6626ffc5e0e9d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64707152"
+ms.lasthandoff: 08/29/2019
+ms.locfileid: "70165133"
 ---
-# <a name="automate-nsg-auditing-with-azure-network-watcher-security-group-view"></a>Azure Ağ İzleyicisi güvenlik grubu görünümü ile NSG denetim otomatikleştirin
+# <a name="automate-nsg-auditing-with-azure-network-watcher-security-group-view"></a>Azure ağ Izleyicisi güvenlik grubu görünümü ile NSG denetimini otomatikleştirin
 
-Müşteriler, yaptıkları altyapı güvenlik duruşunu doğrulama sınama ile genellikle kalmaktadır. Bu sorunu, Azure Vm'leri için farklı değildir. Uygulanan ağ güvenlik grubu (NSG) kurallara göre benzer güvenlik profili olması önemlidir. Güvenlik grubu görünümünü kullanarak, artık bir VM bir NSG içinde uygulanan kurallar listesini alabilirsiniz. Altın bir NSG güvenlik profili tanımlamak ve haftalık temposu üzerinde güvenlik grubu görünümünü başlatmak ve altın profil çıkışı karşılaştırın ve rapor oluşturma. Bu şekilde önceden belirlenmiş güvenlik profiline uygun olmayan tüm sanal makineleri kolayca tanımlayabilirsiniz.
+Müşteriler genellikle altyapısının güvenlik duruşunu doğrulamaya yönelik zorluk gösterir. Bu zorluk, Azure 'daki VM 'Ler için farklı değildir. Uygulanan ağ güvenlik grubu (NSG) kurallarını temel alan benzer bir güvenlik profiline sahip olmak önemlidir. Güvenlik grubu görünümünü kullanarak, artık NSG içindeki bir VM 'ye uygulanan kuralların listesini alabilirsiniz. Bir altın NSG güvenlik profili tanımlayabilir ve bir haftalık temposunda güvenlik grubu görünümünü başlatabilir ve çıktıyı altın profille karşılaştırabilir ve bir rapor oluşturabilirsiniz. Bu şekilde, önceden tanımlanmış güvenlik profiliyle uyumlu olmayan tüm VM 'Leri kolay bir şekilde belirleyebilirsiniz.
 
-Ağ güvenlik gruplarıyla alışkın değilseniz bkz [ağ güvenliğine genel bakış](../virtual-network/security-overview.md).
+Ağ güvenlik grupları hakkında bilginiz varsa bkz. [ağ güvenliğine genel bakış](../virtual-network/security-overview.md).
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu senaryoda, bilinen bir iyi temel bir sanal makine için döndürülen güvenlik grubu görünümü sonuçlarını karşılaştırın.
+Bu senaryoda, bilinen iyi bir taban çizgisini, bir sanal makine için döndürülen güvenlik grubu görünümü sonuçlarıyla karşılaştırırsınız.
 
-Bu senaryo, zaten uyguladığınız adımları varsayar [Ağ İzleyicisi oluşturma](network-watcher-create.md) Ağ İzleyicisi oluşturmak için. Senaryo da kullanılacak geçerli bir sanal makine ile bir kaynak grubu var olduğunu varsayar.
+Bu senaryo, ağ Izleyicisi oluşturmak için [ağ Izleyicisi oluşturma](network-watcher-create.md) bölümündeki adımları zaten izlediğinizi varsayar. Senaryo Ayrıca, geçerli bir sanal makineye sahip bir kaynak grubunun kullanılabilir olduğunu varsayar.
 
 ## <a name="scenario"></a>Senaryo
 
 Bu makalede ele alınan senaryo, bir sanal makine için güvenlik grubu görünümünü alır.
 
-Bu senaryoda, şunları yapacaksınız:
+Bu senaryoda şunları yapmanız gerekir:
 
-- Bir bilinen iyi kural kümesi Al
-- Bir sanal makine Rest API ile Al
-- Sanal makine için güvenlik grubu görünümünü Al
-- Yanıt değerlendir
+- Bilinen iyi bir kural kümesini alma
+- REST API ile sanal makine alma
+- Sanal makine için güvenlik grubu görünümü al
+- Yanıtı değerlendir
 
-## <a name="retrieve-rule-set"></a>Kural kümesi Al
+## <a name="retrieve-rule-set"></a>Kural kümesini al
 
-Bu örnekte ilk adımda var olan bir taban çizgisi ile çalışmaktır. Aşağıdaki örnek, var olan bir kullanarak ağ güvenlik grubu ayıklanan bazı json `Get-AzNetworkSecurityGroup` Bu örnek için taban çizgisi olarak kullanılan cmdlet'i.
+Bu örnekteki ilk adım, var olan bir taban çizgisiyle çalışır. Aşağıdaki örnek, bu örnek için taban çizgisi olarak kullanılan `Get-AzNetworkSecurityGroup` cmdlet 'ini kullanarak var olan bir ağ güvenlik grubundan ayıklanan bir JSON örneğidir.
 
 ```json
 [
@@ -116,44 +116,43 @@ Bu örnekte ilk adımda var olan bir taban çizgisi ile çalışmaktır. Aşağ�
 ]
 ```
 
-## <a name="convert-rule-set-to-powershell-objects"></a>Kural kümesi PowerShell nesnelerine dönüştürebilirsiniz.
+## <a name="convert-rule-set-to-powershell-objects"></a>Kural kümesini PowerShell nesnelerine Dönüştür
 
-Bu adımda, biz daha önce bu örneği için ağ güvenlik grubu olması beklenen kurallar ile oluşturulmuş bir json dosyası okur.
+Bu adımda, bu örnek için ağ güvenlik grubunda olması beklenen kurallarla daha önce oluşturulmuş bir JSON dosyasını okuyoruz.
 
 ```powershell
 $nsgbaserules = Get-Content -Path C:\temp\testvm1-nsg.json | ConvertFrom-Json
 ```
 
-## <a name="retrieve-network-watcher"></a>Ağ İzleyicisi alınamıyor
+## <a name="retrieve-network-watcher"></a>Ağ İzleyicisini al
 
-Ağ İzleyicisi örneğini almak için sonraki adımdır bakın. `$networkWatcher` Değişken geçirilir `AzNetworkWatcherSecurityGroupView` cmdlet'i.
+Sonraki adım, ağ Izleyicisi örneğini almak için kullanılır. `$networkWatcher` Değişkeni cmdlet`AzNetworkWatcherSecurityGroupView` 'e geçirilir.
 
 ```powershell
-$nw = Get-AzResource | Where {$_.ResourceType -eq "Microsoft.Network/networkWatchers" -and $_.Location -eq "WestCentralUS" } 
-$networkWatcher = Get-AzNetworkWatcher -Name $nw.Name -ResourceGroupName $nw.ResourceGroupName 
+$networkWatcher = Get-AzResource | Where {$_.ResourceType -eq "Microsoft.Network/networkWatchers" -and $_.Location -eq "WestCentralUS" } 
 ```
 
-## <a name="get-a-vm"></a>VM Al
+## <a name="get-a-vm"></a>VM al
 
-Bir sanal makine çalıştırmak için gerekli olan `Get-AzNetworkWatcherSecurityGroupView` karşı cmdlet'i. Aşağıdaki örnek, bir sanal makine nesnesini alır.
+`Get-AzNetworkWatcherSecurityGroupView` Cmdlet 'ini çalıştırmak için bir sanal makine gerekir. Aşağıdaki örnek bir VM nesnesini alır.
 
 ```powershell
 $VM = Get-AzVM -ResourceGroupName "testrg" -Name "testvm1"
 ```
 
-## <a name="retrieve-security-group-view"></a>Güvenlik grubu görünümünü Al
+## <a name="retrieve-security-group-view"></a>Güvenlik grubu görünümünü al
 
-Sonraki adım, güvenlik grubu görünümü sonucu almasını sağlamaktır. Bu sonuç, daha önce gösterilen "temel" json karşılaştırılır.
+Bir sonraki adım, güvenlik grubu görünüm sonucunu almak için kullanılır. Bu sonuç, daha önce gösterilen "taban çizgisi" JSON ile karşılaştırılır.
 
 ```powershell
 $secgroup = Get-AzNetworkWatcherSecurityGroupView -NetworkWatcher $networkWatcher -TargetVirtualMachineId $VM.Id
 ```
 
-## <a name="analyzing-the-results"></a>Sonuçları analiz etme
+## <a name="analyzing-the-results"></a>Sonuçlar çözümleniyor
 
-Yanıt, ağ arabirimleri tarafından gruplandırılır. Döndürülen kuralları farklı türde etkilidir ve varsayılan güvenlik kuralları. Sonuç daha fazla nasıl, bir alt ağ veya sanal bir NIC'ye uygulandığı tarafından ayrılmıştır
+Yanıt, ağ arabirimlerine göre gruplandırılır. Döndürülen farklı kural türleri, etkili ve varsayılan güvenlik kurallarıdır. Sonuç, bir alt ağda veya sanal NIC 'de nasıl uygulandığı tarafından daha da bölünür.
 
-Aşağıdaki PowerShell betiğini bir NSG mevcut bir çıktısına güvenlik grubu görünümü sonuçlarını karşılaştırır. Aşağıdaki örnek, basit bir örneğini nasıl sonuçları ile karşılaştırılabilir `Compare-Object` cmdlet'i.
+Aşağıdaki PowerShell betiği, güvenlik grubu görünümünün sonuçlarını bir NSG 'nin mevcut çıkışıyla karşılaştırır. Aşağıdaki örnek, sonuçların cmdlet ile `Compare-Object` nasıl karşılaştırıladığına ilişkin basit bir örnektir.
 
 ```powershell
 Compare-Object -ReferenceObject $nsgbaserules `
@@ -161,7 +160,7 @@ Compare-Object -ReferenceObject $nsgbaserules `
 -Property Name,Description,Protocol,SourcePortRange,DestinationPortRange,SourceAddressPrefix,DestinationAddressPrefix,Access,Priority,Direction
 ```
 
-Aşağıdaki örnek sonuç olur. İki ilk kuralında ayarlanan kurallar Karşılaştırmada bulunmamaktadır görebilirsiniz.
+Aşağıdaki örnek, sonucudur. İlk kural kümesindeki kuralların iki tanesi karşılaştırmayla mevcut değildir.
 
 ```
 Name                     : My2ndRuleDoNotDelete
@@ -191,7 +190,7 @@ SideIndicator            : <=
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ayarları değiştirilmiş olup [ağ güvenlik grupları yönet](../virtual-network/manage-network-security-group.md) söz konusu olan ağ güvenlik grubu ve güvenlik kuralları izlemek için.
+Ayarlar değiştirildiyse, ağ güvenlik grubunu ve söz konusu güvenlik kurallarını izlemek için [ağ güvenlik gruplarını yönetme](../virtual-network/manage-network-security-group.md) bölümüne bakın.
 
 
 

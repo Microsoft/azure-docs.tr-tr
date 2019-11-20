@@ -1,45 +1,45 @@
 ---
-title: Azure dijital çiftleri ile cihaz bağlantısı ve telemetri giriş | Microsoft Docs
-description: Bir cihaz ekleme dijital İkizlerini Azure ile nasıl genel bakış
+title: Cihaz bağlantısı ve telemetri girişi-Azure dijital TWINS | Microsoft Docs
+description: Azure dijital TWINS 'te bir cihazı bağlamayı ve eklemeyi öğrenin.
+ms.author: alinast
 author: alinamstanciu
 manager: bertvanhoof
 ms.service: digital-twins
 services: digital-twins
 ms.topic: conceptual
-ms.date: 12/14/2018
-ms.author: alinast
-ms.openlocfilehash: 35d12d0114f9677905c85a9df94ecd074e5f8f75
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/07/2019
+ms.openlocfilehash: 529baf6a3eedf1d7490e8138642e90928a209876
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60926094"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74010120"
 ---
 # <a name="device-connectivity-and-telemetry-ingress"></a>Cihaz bağlantısı ve telemetri sorunları
 
-Tüm IOT çözümlerinin temel cihazlardan ve sensörlerden tarafından gönderilen telemetri verilerini oluşturur. Bu farklı kaynakları temsil eder ve bir konuma bağlamında yönetmek nasıl baş IOT uygulama geliştirmede edilir. Azure dijital İkizlerini cihazlardan ve sensörlerden olan bir uzamsal zeka grafik uniting tarafından IOT çözümleri geliştirme sürecini basitleştirir.
+Cihazlar ve sensörler tarafından gönderilen telemetri verileri, herhangi bir IoT çözümünün omurgasını oluşturur. Bu farklı kaynakları temsil etme ve bunları bir konum bağlamında yönetme IoT uygulama geliştirmede kaygıları beraberinde getirir. Azure dijital TWINS, uzamsal zeka Graf ile cihaz ve sensörlerden yararlanarak IoT çözümleri geliştirme sürecini basitleştirir.
 
-Başlamak için bir Azure IOT hub'ı kaynak uzamsal graf kökünde oluşturun. IOT hub'ı kaynak ileti göndermek için kök alanı tüm cihazların sağlar. IOT hub'ı oluşturulduktan sonra dijital İkizlerini örneği içinde sensörlerden cihazları kaydedin. Cihazlar bir dijital İkizlerini hizmete veri gönderebilir [Azure IOT cihaz SDK'sını](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-sdks).
+Başlamak için, uzamsal grafiğin kökünde bir Azure IoT Hub kaynağı oluşturun. IoT Hub kaynağı, kök alanının altındaki tüm cihazların ileti göndermesini sağlar. IoT Hub oluşturulduktan sonra, cihazları Dijital TWINS örneği içinde sensörler ile kaydedin. Cihazlar, [Azure IoT cihaz SDK 'sı](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-sdks)aracılığıyla dijital bir TWINS hizmetine veri gönderebilir.
 
-Yerleşik cihazlarını getirmesine hakkında adım adım kılavuz için bkz. [dijital İkizlerini yapılandırmak ve dağıtmak için öğreticiyi](tutorial-facilities-setup.md). Bir bakışta adımlar şunlardır:
+Cihazları ekleme hakkında adım adım yönergeler için bkz. [dijital TWINS dağıtma ve yapılandırma öğreticisi](tutorial-facilities-setup.md). Bir bakışta, adımlar şunlardır:
 
-- Bir dijital İkizlerini örneğinden dağıtma [Azure portalında](https://portal.azure.com).
-- Graftaki alanları oluşturun.
-- Bir IOT hub'ı kaynağını oluşturun ve grafınızı boşluk atayın.
-- Cihazlardan ve sensörlerden graftaki oluşturun ve bunları önceki adımlarda oluşturulan alanları atayabilirsiniz.
-- Telemetri iletilerini koşullara göre filtrelemek için bir Eşleştiricisi oluşturun.
-- Oluşturma bir [kullanıcı tanımlı işlev](concepts-user-defined-functions.md)ve bir alan grafiğinde, telemetri iletilerini, özel işlenmesi atayın.
-- Graf verilerine erişmek kullanıcı tanımlı işlev izin vermek için bir rol atayın.
-- IOT Hub cihaz bağlantı dizesini dijital İkizlerini yönetim API'lerinden alın.
-- Azure IOT cihaz SDK'sı ile bir cihazda cihaz bağlantı dizesini yapılandırın.
+- [Azure Portal](https://portal.azure.com)bir dijital TWINS örneği dağıtın.
+- Grafiğinizde boşluk oluşturun.
+- IoT Hub bir kaynak oluşturun ve bu kaynağı grafiğinizde bir alana atayın.
+- Grafiğinizde cihazlar ve algılayıcılar oluşturun ve bunları önceki adımlarda oluşturulan alanlara atayın.
+- Koşullara göre telemetri iletilerini filtrelemek için bir eşleştirici oluşturun.
+- [Kullanıcı tanımlı bir işlev](concepts-user-defined-functions.md)oluşturun ve telemetri iletilerinizin özel işlenmesi için grafikteki bir alana atayın.
+- Kullanıcı tanımlı işlevin grafik verilerine erişmesine izin vermek için bir rol atayın.
+- Dijital TWINS yönetim API 'Lerinden IoT Hub cihaz bağlantı dizesini alın.
+- Cihazda cihaz bağlantı dizesini Azure IoT cihaz SDK 'Sı ile yapılandırın.
 
-Aşağıdaki bölümlerde, dijital İkizlerini yönetim API'SİNDEN IOT Hub cihaz bağlantı dizesini alma konusunda bilgi edinin. Ayrıca telemetri algılayıcı tabanlı göndermek için IOT hub'a telemetri ileti biçimini kullanmayı öğrenin. Dijital İkizlerini telemetri algılayıcı uzamsal grafik içinde ile ilişkilendirilecek aldığı her bir parçası gerekiyor. Bu gereksinim, veriler işlenir ve uygun uzamsal bağlam içinde yönlendirilen emin olur.
+Aşağıdaki bölümlerde, dijital TWINS yönetim API 'sinden IoT Hub cihaz bağlantı dizesinin nasıl alınacağını öğreneceksiniz. Ayrıca, algılayıcı tabanlı telemetri göndermek için IoT Hub telemetri ileti biçimini kullanmayı öğreneceksiniz. Dijital TWINS, aldığı her telemetri parçasını, uzamsal grafik içindeki bir algılayıcı ile ilişkilendirmek üzere gerektirir. Bu gereksinim, verilerin işlenmiş ve uygun uzamsal bağlam içinde yönlendirildiğinden emin olmanızı sağlar.
 
-## <a name="get-the-iot-hub-device-connection-string-from-the-management-api"></a>Yönetim API'SİNDEN IOT Hub cihaz bağlantı dizesini alın
+## <a name="get-the-iot-hub-device-connection-string-from-the-management-api"></a>Yönetim API 'sinden IoT Hub cihaz bağlantı dizesi al
 
 [!INCLUDE [Digital Twins Management API](../../includes/digital-twins-management-api.md)]
 
-Cihaz API'si ile temel bir GET çağrısı yapmak bir `includes=ConnectionString` parametresini kullanarak IOT Hub cihaz bağlantı dizesini alın. Cihaz tarafından GUID veya donanım Kimliğini belirli bir cihaz bulmak için filtre.
+IoT Hub cihaz bağlantı dizesini almak için `includes=ConnectionString` parametresiyle cihaz API 'SI üzerinde bir GET çağrısı yapın. Verilen cihazı bulmak için cihaz GUID 'INE veya donanım KIMLIĞINE göre filtreleyin.
 
 ```plaintext
 YOUR_MANAGEMENT_API_URL/devices/YOUR_DEVICE_GUID?includes=ConnectionString
@@ -47,37 +47,37 @@ YOUR_MANAGEMENT_API_URL/devices/YOUR_DEVICE_GUID?includes=ConnectionString
 
 | Parametre | Şununla değiştir |
 | --- | --- |
-| *YOUR_DEVICE_GUID* | Cihaz kimliği |
+| *YOUR_DEVICE_GUID* | Cihaz KIMLIĞI |
 
 ```plaintext
-YOUR_MANAGEMENT_API_URL/devices?hardwareIds=YOUR_DEVICE_HARDWARE_ID&includes=ConnectionString
+YOUR_MANAGEMENT_API_URL/devices?HardwareIds=YOUR_DEVICE_HARDWARE_ID&includes=ConnectionString
 ```
 
 | Parametre değeri | Şununla değiştir |
 | --- | --- |
-| *YOUR_DEVICE_HARDWARE_ID* | Cihaz donanım kimliği |
+| *YOUR_DEVICE_HARDWARE_ID* | Cihaz donanım KIMLIĞI |
 
-Cihazın yanıt yükünde kopyalama **connectionString** özelliği. Azure IOT cihaz SDK'sı için dijital İkizlerini veri göndermek için çağırdığınızda kullanın.
+Yanıt yükünde, cihazın **ConnectionString** özelliğini kopyalayın. Verileri dijital TWINS 'e göndermek için Azure IoT cihaz SDK 'sını çağırdığınızda kullanırsınız.
 
-## <a name="device-to-cloud-message"></a>CİHAZDAN buluta ileti
+## <a name="device-to-cloud-message"></a>Cihazdan buluta iletisi
 
-Cihazınızın ileti biçimi ve yükü çözümünüzün gereksinimlerine uyacak şekilde özelleştirebilirsiniz. Bir bayt dizisi ya da tarafından desteklenen akış içine seri hale getirilebilir herhangi bir veri sözleşmesi kullanın [Azure IOT cihaz istemci ileti sınıfı, ileti (bayt [] byteArray)](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.message.-ctor?view=azure-dotnet#Microsoft_Azure_Devices_Client_Message__ctor_System_Byte___). Veri anlaşması karşılık gelen bir kullanıcı tanımlı işlev kodunu çözme sürece ileti tercih ettiğiniz özel bir ikili biçimi olabilir. Bir CİHAZDAN buluta ileti için yalnızca bir gereksinim yoktur. İleti işleme altyapısı için düzgün bir biçimde yönlendirildiğinden emin olmak için özellikler kümesi sürdürmeniz gerekir.
+Cihazınızın ileti biçimi ve yükünü, çözümünüzün ihtiyaçlarına uyacak şekilde özelleştirebilirsiniz. [Azure IoT cihaz Istemci ileti sınıfı (Byte [] ByteArray)](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.message.-ctor?view=azure-dotnet#Microsoft_Azure_Devices_Client_Message__ctor_System_Byte___)tarafından desteklenen bir bayt dizisine veya akışa seri hale getirilebilen bir veri sözleşmesi kullanın. İleti, ilgili Kullanıcı tanımlı işlevdeki veri sözleşmesinin kodunu çözmeniz koşuluyla, seçtiğiniz özel bir ikili biçimi olabilir. Cihazdan buluta ileti için yalnızca bir gereksinim vardır. İletinizin işleme motoruna uygun şekilde yönlendirildiğinden emin olmak için bir özellikler kümesi saklayın.
 
 ### <a name="telemetry-properties"></a>Telemetri özellikleri
 
- Yükü içeriğini bir **ileti** rastgele verilerin boyutu 256 KB'a kadar. Özellikleri için beklenen birkaç gereksinim vardır [ `Message.Properties` ](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.message.properties?view=azure-dotnet) türü. Tablo, sistem tarafından desteklenen gerekli ve isteğe bağlı özellikleri gösterir.
+ Bir **iletinin** yük içeriği, 256 KB 'a kadar olan rastgele veri olabilir. [`Message.Properties`](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.message.properties?view=azure-dotnet) türünün özellikleri için birkaç gereksinim bekleniyor. Tablo, sistem tarafından desteklenen gerekli ve isteğe bağlı özellikleri gösterir.
 
 | Özellik adı | Değer | Gerekli | Açıklama |
 |---|---|---|---|
-| **DigitalTwins Telemetri** | 1.0 | Evet | Bir ileti sistemi tanımlayan bir sabit değer. |
-| **DigitalTwins SensorHardwareId** | `string(72)` | Evet | Benzersiz bir tanımlayıcı gönderen algılayıcı **ileti**. Bu değer, bir nesnenin eşleşmelidir **HardwareId** sistemin işlemek özellik. Örneğin, `00FF0643BE88-CO2`. |
-| **CreationTimeUtc** | `string` | Hayır | Bir [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) akıştaki örnekleme zamanı belirten tarih dizesi olarak biçimlendirilmiş. Örneğin, `2018-09-20T07:35:00.8587882-07:00`. |
-| **Bağıntı Kimliği** | `string` | Hayır | Sistem izleme olayları için kullanılan UUID'si. Örneğin, `cec16751-ab27-405d-8fe6-c68e1412ce1f`.
+| **DigitalTwins-telemetri** | 1.0 | Yes | Sisteme bir ileti tanımlayan sabit bir değer. |
+| **DigitalTwins-Sensorhardwareıd** | `string(72)` | Yes | **İletiyi**gönderen sensör için benzersiz bir tanımlayıcı. Bu değer, sistemin işlemesi için bir nesnenin **HardwareID** özelliği ile aynı olmalıdır. Örneğin, `00FF0643BE88-CO2`. |
+| **CreationTimeUtc** | `string` | Hayır | Yükün örnekleme süresini tanımlayan [ıso 8601](https://en.wikipedia.org/wiki/ISO_8601) biçimli bir tarih dizesi. Örneğin, `2018-09-20T07:35:00.8587882-07:00`. |
+| **ID** | `string` | Hayır | Sistem genelinde olayları izlemek için kullanılan bir UUID. Örneğin, `cec16751-ab27-405d-8fe6-c68e1412ce1f`.
 
-### <a name="send-your-message-to-digital-twins"></a>Dijital çiftleri için gönderin
+### <a name="send-your-message-to-digital-twins"></a>İletinizi dijital TWINS 'e gönderin
 
-DeviceClient kullanın [SendEventAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventasync?view=azure-dotnet) veya [SendEventBatchAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventbatchasync?view=azure-dotnet) iletinizi göndermek için dijital çiftleri için çağrı.
+İletinizi dijital TWINS 'e göndermek için DeviceClient [SendEventAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventasync?view=azure-dotnet) veya [SendEventBatchAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventbatchasync?view=azure-dotnet) çağrısını kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure dijital İkizlerini veri işleme ve kullanıcı tanımlı işlevleri özellikleri hakkında bilgi edinmek için [Azure dijital İkizlerini veri işleme ve kullanıcı tanımlı işlevleri](concepts-user-defined-functions.md).
+- Azure dijital TWINS veri işleme ve Kullanıcı tanımlı işlevler özellikleri hakkında bilgi edinmek için [Azure Digital TWINS veri işleme ve Kullanıcı tanımlı işlevleri](concepts-user-defined-functions.md)makalesini okuyun.

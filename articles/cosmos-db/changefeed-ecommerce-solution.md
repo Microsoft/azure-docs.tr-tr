@@ -7,16 +7,16 @@ ms.devlang: java
 ms.topic: conceptual
 ms.date: 05/28/2019
 ms.author: sngun
-ms.openlocfilehash: a53a62a7bc7a5c7f8d9bdabdf411588fdf7bd5e7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 86d4dd706b097891db155214e4edb7e85e054858
+ms.sourcegitcommit: e42c778d38fd623f2ff8850bb6b1718cdb37309f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66257063"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69616942"
 ---
 # <a name="use-azure-cosmos-db-change-feed-to-visualize-real-time-data-analytics"></a>Kullanım Azure Cosmos DB değişiklik akışı, gerçek zamanlı veri analizi görselleştirmek için
 
-Azure Cosmos DB değişiklik akışı kayıtları gönderildiğini gibi bir Azure Cosmos DB kapsayıcısından kayıtların sürekli ve artımlı bir akışa almak için bir mekanizmadır oluşturulmuş veya değiştirilmiş. Değişiklik, herhangi bir değişiklik kapsayıcıya dinleyerek destek works akış. Ardından, değiştirilmiş olan sırayla değiştirilen belgelerin sıralanmış listesini çıkarır. Değişiklik akışı hakkında daha fazla bilgi için bkz: [değişiklik akışı ile çalışma](change-feed.md) makalesi. 
+Azure Cosmos DB değişiklik akışı, bu kayıtlar oluşturulduğu veya değiştirildiği için Azure Cosmos kapsayıcısından sürekli ve artımlı bir kayıt akışı almanın bir mekanizmadır. Değişiklik, herhangi bir değişiklik kapsayıcıya dinleyerek destek works akış. Ardından, değiştirilmiş olan sırayla değiştirilen belgelerin sıralanmış listesini çıkarır. Değişiklik akışı hakkında daha fazla bilgi için bkz: [değişiklik akışı ile çalışma](change-feed.md) makalesi. 
 
 Değişiklik akışı bir e-ticaret şirket tarafından nasıl kullanılabileceğini kullanıcı desenlerini öğrenir, gerçek zamanlı veri analizi ve görselleştirme gerçekleştirmek için bu makalede açıklanır. Bir kullanıcı bir öğeyi görüntüleme, kendi sepetine öğe ekleme veya bir öğe satın alma gibi olayları analiz eder. Bu olaylardan biri oluştuğunda, yeni bir kayıt oluşturulur ve kayıt günlükleri değişiklik akışı. Değişiklik, ardından bir dizi adım etkinlik ve şirket performansı analiz ölçümleri görselleştirmede kaynaklanan Tetikleyicileri akış. Gelir, benzersiz bir site ziyaretçilerinin, en popüler öğeleri görselleştirebilir miyim örnek ölçümler içerir ve karşı bir sepet karşı eklenen görüntülenen öğelerin ortalama fiyat satın. Bu örnek ölçümler, site popüler değerlendirmek, reklam ve fiyatlandırma stratejilerini geliştirin ve yatırım yapmaya hangi envanteri ile ilgili kararlar bir e-ticaret şirket yardımcı olabilir.
 
@@ -30,7 +30,7 @@ Aşağıdaki diyagramda, veri akışı ve çözümde ilgili bileşenleri temsil 
 
 ![Proje visual](./media/changefeed-ecommerce-solution/project-visual.png)
  
-1. **Veri oluşturma:** Veri simülatörü, bir kullanıcı bir öğeyi görüntüleme, kendi sepetine öğe ekleme ve bir öğe satın alma gibi olayları temsil eden perakende verileri oluşturmak için kullanılır. Veri oluşturucuyu kullanarak büyük örnek veri kümesi oluşturabilirsiniz. Oluşturulan örnek veriler, aşağıdaki biçimde belgeleri içerir:
+1. **Veri oluşturma:** Veri simülatörü, bir kullanıcının bir öğeyi görüntüleme, sepetine bir öğe ekleme ve bir öğe satın alma gibi olayları temsil eden perakende verileri oluşturmak için kullanılır. Veri oluşturucuyu kullanarak büyük örnek veri kümesi oluşturabilirsiniz. Oluşturulan örnek veriler, aşağıdaki biçimde belgeleri içerir:
    
    ```json
    {      
@@ -41,17 +41,17 @@ Aşağıdaki diyagramda, veri akışı ve çözümde ilgili bileşenleri temsil 
    }
    ```
 
-2. **Cosmos DB:** Oluşturulan veri depolarını bir Azure Cosmos DB koleksiyonunda değildir.  
+2. **Cosmos DB:** Oluşturulan veriler bir Azure Cosmos kapsayıcısında depolanır.  
 
-3. **Değişiklik akışı:** Değişiklik akışı, değişiklikler Azure Cosmos DB koleksiyonu için dinler. Her seferinde yeni bir belge (yani gibi bir öğe görüntüleyen bir kullanıcı bir olay meydana geldiğinde bunların sepetine öğe ekleme veya bir öğe satın alma) koleksiyona eklendiğinde, değişiklik akışı tetikleyen bir [Azure işlevi](../azure-functions/functions-overview.md).  
+3. **Değişiklik akışı:** Değişiklik akışı, Azure Cosmos kapsayıcısındaki değişiklikleri dinler. Her seferinde yeni bir belge (yani gibi bir öğe görüntüleyen bir kullanıcı bir olay meydana geldiğinde bunların sepetine öğe ekleme veya bir öğe satın alma) koleksiyona eklendiğinde, değişiklik akışı tetikleyen bir [Azure işlevi](../azure-functions/functions-overview.md).  
 
-4. **Azure işlevi:** Azure işlevi yeni verileri işler ve bu kümeye gönderen bir [Azure olay hub'ı](../event-hubs/event-hubs-about.md).  
+4. **Azure Işlevi:** Azure Işlevi, yeni verileri işler ve bunu bir [Azure Olay Hub 'ına](../event-hubs/event-hubs-about.md)gönderir.  
 
-5. **Event Hub:** Azure olay hub'ı bu olayları depolar ve onlara gönderir [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) başka analizler yapmak için.  
+5. **Olay Hub 'ı:** Azure Olay Hub 'ı bu olayları depolar ve daha fazla analiz yapmak için bunları [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) gönderir.  
 
 6. **Azure Stream Analytics:** Azure Stream Analytics olayları işlemek ve gerçek zamanlı veri analizi gerçekleştirmek için sorguları tanımlar. Bu veriler daha sonra gönderilir [Microsoft Power BI](https://docs.microsoft.com/power-bi/desktop-what-is-desktop).  
 
-7. **Power BI:** Azure Stream Analytics tarafından gönderilen verileri görselleştirmek için Power BI kullanılır. Ölçümleri gerçek zamanlı olarak nasıl değiştiğini görmek için bir Pano oluşturabilirsiniz.  
+7. **Power BI:** Power BI, Azure Stream Analytics tarafından gönderilen verileri görselleştirmek için kullanılır. Ölçümleri gerçek zamanlı olarak nasıl değiştiğini görmek için bir Pano oluşturabilirsiniz.  
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -143,7 +143,7 @@ Bir Azure olay hub'ı alır olay verileri, depolar, işlemler ve veri iletir. Ye
 
 ## <a name="set-up-azure-function-to-read-the-change-feed"></a>Azure işlevi değişiklik akışını okumak için ayarlama
 
-Yeni bir belge oluşturulur veya geçerli bir belge bir Cosmos DB koleksiyonunda değiştirildiğinde, değişiklik otomatik olarak akışı, değişikliklerin geçmişini, koleksiyon için değiştirilmiş bir belgeyi ekler. Şimdi yapı ve değişiklik akışı işleyen bir Azure işlevi çalıştırın. Bir belgede oluşturulduğunda veya değiştirildiğinde, oluşturduğunuz koleksiyonda, değişiklik akışı ile Azure işlevi tetiklenir. Ardından Azure işlevi değiştirilmiş belge olay Hub'ına gönderir.
+Yeni bir belge oluşturulduğunda veya Cosmos kapsayıcısında geçerli bir belge değiştirildiğinde, değişiklik akışı otomatik olarak bu değiştirilen belgeyi koleksiyon değişikliklerinin geçmişine ekler. Şimdi yapı ve değişiklik akışı işleyen bir Azure işlevi çalıştırın. Bir belgede oluşturulduğunda veya değiştirildiğinde, oluşturduğunuz koleksiyonda, değişiklik akışı ile Azure işlevi tetiklenir. Ardından Azure işlevi değiştirilmiş belge olay Hub'ına gönderir.
 
 1. Cihazınızda kopyalanmış depoya döndürür.  
 
@@ -165,7 +165,7 @@ Görmek için nasıl değişiklik akışı bir e-ticaret sitesinde yeni eylemler
 
 1. Dosya Gezgini'nde depoyu geri gidin ve sağ tıklayarak **ChangeFeedFunction.sln** tekrar yeni bir Visual Studio penceresi açın.  
 
-2. Gidin **App.config** dosya. İçinde `<appSettings>` engelleme, uç nokta ekleyin ve benzersiz **birincil anahtar** , daha önce aldığınız, Azure Cosmos DB hesabı.  
+2. **App. config** dosyasına gidin. Bloğu içinde, daha önce aldığınız Azure Cosmos DB hesabınızın uç noktasını ve benzersiz **birincil anahtarını** ekleyin. `<appSettings>`  
 
 3. Ekleme **koleksiyon** ve **veritabanı** adları. (Bu adlar olmalıdır **changefeedlabcollection** ve **changefeedlabdatabase** sizinki farklı ad seçmediğiniz sürece.)
 
@@ -316,9 +316,9 @@ Power BI, verileri analiz edip öngörü paylaşmaya yönelik İş analizi araç
 
    ![görselleştirmeler](./media/changefeed-ecommerce-solution/visualizations.png)
 
-## <a name="optional-visualize-with-an-e-commerce-site"></a>İsteğe bağlı: Bir E-ticaret sitesi ile görselleştirin
+## <a name="optional-visualize-with-an-e-commerce-site"></a>İsteğe bağlı: Bir E-ticaret sitesiyle görselleştirin
 
-Artık, bir gerçek e-ticaret sitesi ile bağlanmak için yeni veri analizi aracı nasıl kullanabileceğinizi gözlemleyeceksiniz. E-ticaret sitesi oluşturmak için ürün kategorileri (Kadınlar, erkek, her iki cins için) listesi, ürün kataloğunu ve en popüler öğelerin listesini depolamak için bir Azure Cosmos DB veritabanı kullanın.
+Artık, bir gerçek e-ticaret sitesi ile bağlanmak için yeni veri analizi aracı nasıl kullanabileceğinizi gözlemleyeceksiniz. E-ticaret sitesini derlemek için bir Azure Cosmos veritabanını kullanarak ürün kategorilerinin listesini (kadınlar, Erkek, Unisex), ürün kataloğunu ve en popüler öğelerin bir listesini depolayın.
 
 1. Geri gidin [Azure portalı](https://portal.azure.com/), ardından, **Cosmos DB hesabı**, ardından **Veri Gezgini**.  
 

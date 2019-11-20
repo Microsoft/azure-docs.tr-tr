@@ -1,6 +1,6 @@
 ---
-title: Veri odaklı-style ifadeler içinde Azure haritalar Web SDK'sı | Microsoft Docs
-description: Azure haritalar Web SDK'sı verilerle stili ifadeleri kullanma
+title: Azure Haritalar Web SDK 'sında veri odaklı stil Ifadeleri | Microsoft Docs
+description: Azure Maps web SDK 'sında veri tabanlı stil ifadeleri kullanma.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 4/4/2019
@@ -9,26 +9,26 @@ ms.service: azure-maps
 services: azure-maps
 manager: cpendleton
 ms.custom: codepen
-ms.openlocfilehash: 3b234ca37783fe557baf307f198de9636b06a382
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 507af54b8b4c2e7c67538a1a25a040c7ee5fdfd5
+ms.sourcegitcommit: 62bd5acd62418518d5991b73a16dca61d7430634
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60905009"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68976310"
 ---
-# <a name="data-driven-style-expressions-web-sdk"></a>Veri odaklı stili ifadeleri (Web SDK'sı)
+# <a name="data-driven-style-expressions-web-sdk"></a>Veri tabanlı stil Ifadeleri (Web SDK)
 
-İfadeler her bir veri kaynağı şeklinde içinde tanımlanan özellikler gözlemleyin stil seçeneklerini iş mantığı uygulamak etkinleştirin. İfadeler, bir veri kaynağı veya katman verileri filtrelemek için de kullanılabilir. İfadeler gibi IF deyimi, koşullu mantık oluşabilir ve ile verileri işlemek için de kullanılabilir; dize, mantıksal ve matematik işleçleri. 
+İfadeler, bir veri kaynağındaki her bir şekil için tanımlanan özellikleri gözlemleyecek stil seçeneklerine iş mantığı uygulamanızı sağlar. İfadeler, bir veri kaynağındaki veya katmandaki verileri filtrelemek için de kullanılabilir. İfadeler, if-deyimleri gibi koşullu mantığdan oluşabilir ve ile verileri işlemek için de kullanılabilir; dize, mantıksal ve matematik işleçleri. 
 
-Veri odaklı stilleri stil etrafında iş mantığı uygulamak için gereken kod miktarını azaltabilirsiniz. Katmanlar ile kullanıldığında, kullanıcı Arabirimi iş parçacığında iş mantığı değerlendirmek için karşılaştırıldığında daha yüksek performans sağlayan ayrı bir iş parçacığı üzerinde oluşturma zamanında ifadeler değerlendirilir.
+Veri odaklı stiller, Stillendirme etrafında iş mantığını uygulamak için gereken kod miktarını azaltabilir. Katmanlarla kullanıldığında, deyimler, Kullanıcı arabirimi iş parçacığı üzerinde iş mantığını değerlendirmeye kıyasla daha yüksek performans sağlayan ayrı bir iş parçacığında işleme zamanında değerlendirilir.
 
-Aşağıdaki video, veri odaklı stil Azure haritalar Web SDK'sındaki genel bir bakış sağlar.
+Aşağıdaki videoda, Azure Maps web SDK 'sında veri odaklı stillendirme hakkında bir genel bakış sunulmaktadır.
 
 <br/>
 
 <iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Data-Driven-Styling-with-Azure-Maps/player" width="960" height="540" allowFullScreen frameBorder="0"></iframe>
 
-İfadeleri JSON dizileri olarak temsil edilir. Dizi içindeki bir ifadenin ilk öğesi ifade işleci adını belirten bir dizedir. Örneğin, "+" veya "Durum". Sonraki öğeleri (varsa) ifadesi için bağımsız değişkenler. Her bağımsız değişken bir değişmez değer olduğunu (bir dize, sayı, Boole, veya `null`), veya başka bir ifade dizi. Aşağıdaki sözde kod, bir ifade temel yapısını tanımlar. 
+İfadeler JSON dizileri olarak temsil edilir. Dizideki bir ifadenin ilk öğesi, ifade işlecinin adını belirten bir dizedir. Örneğin, "+" veya "Case". Sonraki öğeler (varsa), ifadenin bağımsız değişkenlerdir. Her bağımsız değişken bir değişmez değer (bir dize, sayı, Boolean veya `null`) ya da başka bir ifade dizisi. Aşağıdaki sözde kod, bir ifadenin temel yapısını tanımlar. 
 
 ```javascript
 [ 
@@ -39,23 +39,24 @@ Aşağıdaki video, veri odaklı stil Azure haritalar Web SDK'sındaki genel bir
 ] 
 ```
 
-Azure haritalar Web SDK'sı kendi veya diğer ifadeler birlikte kullanılan ifadeler çoğu türlerini destekler.
+Azure Haritalar Web SDK 'Sı, kendi başına veya diğer ifadelerle birlikte kullanılabilecek birçok türü destekler.
 
 | İfade türü | Açıklama |
 |---------------------|-------------|
-| [Boole ifadeleri](#boolean-expressions) | Boolean ifadeleri Boole karşılaştırmalar değerlendirmek için bir Boole işleçleri ifade kümesi sağlar. |
-| [Renk ifadeleri](#color-expressions) | Renk ifadeleri oluşturma ve renk değerleri kolaylaştırır. |
-| [Koşullu ifadeler](#conditional-expressions) | Koşullu ifadeler gibi IF deyimi mantıksal işlemleri sağlar. |
-| [Veri ifadeleri](#data-expressions) | Bir özellik özelliği verilere erişim sağlar. |
-| [Enterpolasyon ve adım ifadeleri](#interpolate-and-step-expressions) | Enterpolasyon ve adım ifadeleri ilişkilendirilmiş bir eğri ya da adım işlevi değerleri hesaplamak için kullanılabilir. |
-| [Katman belirli ifadeler](#layer-specific-expressions) | Yalnızca tek bir katmana uygulanabilen özel ifadeler. |
-| [Matematik ifadeleri](#math-expressions) | İfade framework içindeki veri temelli hesaplamaları gerçekleştirmek için matematik işleçleri sağlar. |
-| [Dize işleci ifadeleri](#string-operator-expressions) | Dize işleci ifadeleri birleştirerek ve durumun dönüştürme gibi dizeleri dönüştürme işlemleri. |
-| [Tür ifadeleri](#type-expressions) | Tür ifadeleri test etmek ve dizeler, sayılar ve Boole değerleri gibi farklı veri türlerini dönüştürme için araçlar sağlar. |
-| [Değişken bağlama ifadeleri](#variable-binding-expressions) | Değişken bağlama ifadeleri hesaplamanın sonuçlarını bir değişkende depolanması sağlar ve başka bir yerde bir deyim içinde depolanan değeri yeniden hesaplar gerek kalmadan birden çok kez başvurulan. |
-| [Yakınlaştırma ifadesi](#zoom-expression) | Geçerli harita yakınlaştırma düzeyini işleme zaman alır. |
+| [Toplama ifadesi](#aggregate-expression) | Bir veri kümesi üzerinde işlenen ve ' a `clusterProperties` `DataSource`' seçeneği ile kullanılabilen bir hesaplamayı tanımlayan bir ifade. |
+| [Boole ifadeleri](#boolean-expressions) | Boolean ifadeleri, Boole karşılaştırmaları değerlendirmek için bir dizi Boole işleci sağlar. |
+| [Renk ifadeleri](#color-expressions) | Renk ifadeleri renk değerleri oluşturmayı ve işlemeyi kolaylaştırır. |
+| [Koşullu ifadeler](#conditional-expressions) | Koşullu ifadeler, IF-deyimleri gibi mantıksal işlemler sağlar. |
+| [Veri ifadeleri](#data-expressions) | Bir özelliğindeki Özellik verilerine erişim sağlar. |
+| [Ara ve adım ifadelerini enterpolala](#interpolate-and-step-expressions) | Enterpolasyonlu ve step ifadeleri, bir ara değerli eğri veya adım işlevi üzerinde değerleri hesaplamak için kullanılabilir. |
+| [Katmana özgü ifadeler](#layer-specific-expressions) | Yalnızca tek bir katman için geçerli olan özel ifadeler. |
+| [Matematik ifadeleri](#math-expressions) | Expression Framework içinde veri odaklı hesaplamalar gerçekleştirmek için matematik işleçleri sağlar. |
+| [Dize işleci ifadeleri](#string-operator-expressions) | Dize operatörü ifadeleri, büyük/küçük harfe dönüştürme ve dönüştürme gibi dizeler üzerinde dönüştürme işlemleri gerçekleştirir. |
+| [Tür ifadeleri](#type-expressions) | Tür ifadeleri, dizeler, sayılar ve Boole değerleri gibi farklı veri türlerini test etmek ve dönüştürmek için araçlar sağlar. |
+| [Değişken bağlama ifadeleri](#variable-binding-expressions) | Değişken bağlama ifadeleri, bir hesaplamanın sonuçlarının bir değişkende depolanmasını sağlar ve depolanan değeri yeniden hesaplamak zorunda kalmadan bir ifadenin başka bir yerinde bir yerde Başvurulmuş. |
+| [Yakınlaştırma ifadesi](#zoom-expression) | İşleme zamanında haritanın geçerli yakınlaştırma düzeyini alır. |
 
-Bu belgedeki tüm örneklerde, farklı türde ifadeler kullanılabilir, farklı yolları göstermek için aşağıdaki özellik kullanır. 
+Bu belgedeki tüm örnekler, farklı ifade türlerinin kullanılabileceği farklı yolları göstermek için aşağıdaki özelliği kullanır. 
 
 ```javascript
 {
@@ -64,7 +65,8 @@ Bu belgedeki tüm örneklerde, farklı türde ifadeler kullanılabilir, farklı 
         "type": "Point",
         "coordinates": [-122.13284, 47.63699]
     },
-    "properties": {     
+    "properties": { 
+        "id": 123,
         "entityType": "restaurant",
         "revenue": 12345,
         "subTitle": "Building 40", 
@@ -77,22 +79,22 @@ Bu belgedeki tüm örneklerde, farklı türde ifadeler kullanılabilir, farklı 
 
 ## <a name="data-expressions"></a>Veri ifadeleri
 
-Veri ifadeleri bir özellik özelliği verilere erişim sağlar. 
+Veri ifadeleri bir özelliğin özellik verilerine erişim sağlar. 
 
 | İfade | Dönüş türü | Açıklama |
 |------------|-------------|-------------|
-| `['at', number, array]` | object | Bir dizideki öğeyi alır. |
-| `['geometry-type']` | string | Özelliğin geometri türünü alır: Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon. |
-| `['get', string]` | value | Özellik değeri geçerli özelliğin özelliklerini alır. İstenen özellik eksik değilse null değerini döndürür. |
-| `['get', string, object]` | value | Sağlanan nesne özelliklerinden özellik değerini alır. İstenen özellik eksik değilse null değerini döndürür. |
-| `['has', string]` | boole | Bir özellik özelliklerini belirtilen özellik olup olmadığını belirler. |
-| `['has', string, object]` | boole | Nesnenin özelliklerini belirtilen özellik olup olmadığını belirler. |
-| `['id']` | value | Varsa özelliğin kimliği alır. |
-| `['length', string | array]` | number | Bir dize ya da dizinin uzunluğunu alır. |
+| `['at', number, array]` | object | Diziden bir öğe alır. |
+| `['geometry-type']` | dize | Özelliğin geometri türünü alır: Point, MultiPoint, LineString, MultiLineString, Çokgen, MultiPolygon. |
+| `['get', string]` | value | Geçerli özelliğin özelliklerinden özellik değerini alır. İstenen özellik eksikse null değerini döndürür. |
+| `['get', string, object]` | value | Belirtilen nesnenin özelliklerinden özellik değerini alır. İstenen özellik eksikse null değerini döndürür. |
+| `['has', string]` | boolean | Özelliğin özelliklerinin belirtilen özelliğe sahip olup olmadığını belirler. |
+| `['has', string, object]` | boolean | Nesnenin özelliklerinin belirtilen özelliğe sahip olup olmadığını belirler. |
+| `['id']` | value | Özelliği varsa özelliğin KIMLIĞINI alır. |
+| `['length', string | array]` | numarası | Bir dizenin veya dizinin uzunluğunu alır. |
 
 **Örnekler**
 
-Bir özellik özelliklerini erişilebilir bir deyimde doğrudan kullanarak bir `get` ifade. Aşağıdaki örnek, Kabarcık katmanın rengini özelliği belirtmek için bu özellik "zoneColor" değerini kullanır. 
+Bir özelliğin özelliklerine, bir `get` ifade kullanarak doğrudan bir ifadede erişilebilir. Aşağıdaki örnek, bir kabarcık katmanının Color özelliğini belirtmek için özelliğinin "zoneColor" değerini kullanır. 
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -100,7 +102,7 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-Yukarıdaki örnekte tüm noktası özellikleri varsa düzgün çalışır `zoneColor` bunlar yapmadığınız takdirde, ancak özelliği, renk büyük olasılıkla geri döner "siyah olarak". Geri dönüş rengini değiştirmek için bir `case` ifade ile birlikte kullanılabilir `has` özelliği varsa ve bir geri dönüş rengine yerine döndürmüyor denetlemek için ifade.
+Yukarıdaki örnek, tüm nokta özelliklerinin `zoneColor` özelliği varsa ince çalışacaktır, ancak yoksa, renk "siyah" a geri dönecektir. Geri dönüş rengini değiştirmek için bir `case` ifade, özelliğin mevcut olup olmadığını denetlemek için `has` ifadesiyle birlikte kullanılabilir ve bunun yerine bir geri dönüş rengi döndürmez.
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -115,7 +117,7 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-Kabarcık ve simge katmanlarını bir veri kaynağındaki tüm şekiller koordinatlarını varsayılan olarak işlenir. Bu Çokgen veya çizgi köşelerini vurgulamak için yapılabilir. `filter` Katmanın seçeneği, işler kullanarak özellikleri geometri türlerini sınırlamak için kullanılabilir bir `['geometry-type']` Boole ifadesinde bulunan bir ifade. Aşağıdaki örnek, yalnızca bir kabarcık katmanı sınırlar `Point` özellikleri işlenir.
+Balon ve sembol katmanları, varsayılan olarak bir veri kaynağındaki tüm şekillerin koordinatlarını işler. Bu, bir çokgen veya çizginin köşelerini vurgulamak için yapılabilir. Katman seçeneği, bir Boolean ifadesinde `['geometry-type']` ifade kullanarak oluşturduğu özelliklerin geometri türünü sınırlamak için kullanılabilir. `filter` Aşağıdaki örnek, yalnızca `Point` özelliklerin işlenmesi için bir kabarcık katmanını sınırlandırır.
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -123,7 +125,7 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-Aşağıdaki örnek, her ikisi de sağlayacak `Point` ve `MultiPoint` işlenecek özellikleri. 
+Aşağıdaki örnek hem hem de `Point` `MultiPoint` özelliklerinin işlenmesine imkan sağlayacak. 
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -131,69 +133,90 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-Benzer şekilde, çokgenler özetini satırı katmanlarında işlenir. Çizgi katmanı bu davranışı devre dışı bırakmak için yalnızca veren filtre ekleme `LineString` ve `MultiLineString` özellikleri.  
+Benzer şekilde, çokgenler ana hattı çizgi katmanlarında işlenir. Bir çizgi katmanında bu davranışı devre dışı bırakmak için yalnızca ve `LineString` `MultiLineString` özelliklerine izin veren bir filtre ekleyin.  
 
 ## <a name="math-expressions"></a>Matematik ifadeleri
 
-Matematik ifadeleri ifade çerçevesine veri temelli hesaplamaları gerçekleştirmek için matematik işleçleri sağlar.
+Matematik ifadeleri, ifade çerçevesi içinde veri odaklı hesaplamalar gerçekleştirmek için matematik işleçleri sağlar.
 
 | İfade | Dönüş türü | Açıklama |
 |------------|-------------|-------------|
-| `['+', number, number, …]` | number | Belirtilen sayıların toplamını hesaplar. |
-| `['-', number]` | number | 0 ile belirtilen sayıyı çıkartır. |
-| `['-', number, number]` | number | İkinci sayı ilk sayılarla çıkarır. |
-| `['*', number, number, …]` | number | Birlikte belirtilen sayı ile çarpar. |
-| `['/', number, number]` | number | İlk sayı ikinci sayı olarak böler. |
-| `['%', number, number]` | number | İkinci sayı ilk sayısı bölerken kalanı hesaplar. |
-| `['^', number, number]` | number | İkinci sayı üssü ilk değeri hesaplar. |
-| `['abs', number]` | number | Belirtilen sayının mutlak değerini hesaplar. |
-| `['acos', number]` | number | Belirtilen sayının arkkosinüsünü hesaplar. |
-| `['asin', number]` | number | Belirtilen sayının ark sinüsünü hesaplar. |
-| `['atan', number]` | number | Belirtilen sayının ark tanjantını hesaplar. |
-| `['ceil', number]` | number | Sonraki tamsayı en fazla sayıyı yuvarlar. |
-| `['cos', number]` | number | Belirtilen sayının cos hesaplar. |
-| `['e']` | number | Matematik sabiti döndürür `e`. |
-| `['floor', number]` | number | Önceki tamsayı sayıyı yuvarlar. |
-| `['ln', number]` | number | Belirtilen sayının doğal logaritmasını hesaplar. |
-| `['ln2']` | number | Matematik sabiti döndürür `ln(2)`. |
-| `['log10', number]` | number | Belirtilen sayının tabanı on logaritmasını hesaplar. |
-| `['log2', number]` | number | Belirtilen sayının tabanı iki logaritmasını hesaplar. |
-| `['max', number, number, …]` | number | Sayının belirtilen kümesindeki en fazla sayı hesaplar. |
-| `['min', number, number, …]` | number | Sayının belirtilen kümedeki alt sınır hesaplar. |
-| `['pi']` | number | Matematik sabiti döndürür `PI`. |
-| `['round', number]` | number | En yakın tamsayıya yuvarlar. Yarım değerler, sıfırdan uzağa yuvarlanır. Örneğin, `['round', -1.5]` -2 olarak değerlendirilir. |
-| `['sin', number]` | number | Belirtilen sayının sinüsünü hesaplar. |
-| `['sqrt', number]` | number | Belirtilen Sayının karekökünü hesaplar. |
-| `['tan', number]` | number | Belirtilen sayının tanjantını hesaplar. |
+| `['+', number, number, …]` | numarası | Belirtilen sayıların toplamını hesaplar. |
+| `['-', number]` | numarası | Belirtilen sayı ile 0 çıkartır. |
+| `['-', number, number]` | numarası | İkinci sayıya göre ilk sayıları çıkartır. |
+| `['*', number, number, …]` | numarası | Belirtilen sayıları birlikte çarpar. |
+| `['/', number, number]` | numarası | İlk sayıyı ikinci sayıya böler. |
+| `['%', number, number]` | numarası | İlk sayıyı ikinci sayıya bölerken kalanı hesaplar. |
+| `['^', number, number]` | numarası | İkinci sayının gücünden çıkarılan ilk değerin değerini hesaplar. |
+| `['abs', number]` | numarası | Belirtilen sayının mutlak değerini hesaplar. |
+| `['acos', number]` | numarası | Belirtilen sayının arkkosinüsünü hesaplar. |
+| `['asin', number]` | numarası | Belirtilen sayının arksinüsünü hesaplar. |
+| `['atan', number]` | numarası | Belirtilen sayının ark tanjantını hesaplar. |
+| `['ceil', number]` | numarası | Sayıyı bir sonraki tam tamsayıya yuvarlar. |
+| `['cos', number]` | numarası | Belirtilen sayının cos sayısını hesaplar. |
+| `['e']` | numarası | Matematik sabitini `e`döndürür. |
+| `['floor', number]` | numarası | Sayıyı, önceki tam tamsayıya yuvarlar. |
+| `['ln', number]` | numarası | Belirtilen sayının doğal logaritmasını hesaplar. |
+| `['ln2']` | numarası | Matematik sabitini `ln(2)`döndürür. |
+| `['log10', number]` | numarası | Belirtilen sayının 10 tabanında logaritmasını hesaplar. |
+| `['log2', number]` | numarası | Belirtilen sayının temel iki logaritmasını hesaplar. |
+| `['max', number, number, …]` | numarası | Belirtilen sayı kümesindeki en büyük sayıyı hesaplar. |
+| `['min', number, number, …]` | numarası | Belirtilen sayı kümesindeki minimum sayıyı hesaplar. |
+| `['pi']` | numarası | Matematik sabitini `PI`döndürür. |
+| `['round', number]` | numarası | Sayıyı en yakın tamsayıya yuvarlar. Yarı-değerler sıfırdan uzağa yuvarlanır. Örneğin, `['round', -1.5]` -2 olarak değerlendirilir. |
+| `['sin', number]` | numarası | Belirtilen sayının sinüsünü hesaplar. |
+| `['sqrt', number]` | numarası | Belirtilen sayının kare kökünü hesaplar. |
+| `['tan', number]` | numarası | Belirtilen sayının tanjantını hesaplar. |
+
+## <a name="aggregate-expression"></a>Toplama ifadesi
+
+Toplama ifadesi bir veri kümesi üzerinde işlenen ve ' a `clusterProperties` `DataSource`' seçeneği ile kullanılabilen bir hesaplamayı tanımlar. Bu ifadelerin çıktısı bir sayı veya Boole olmalıdır. 
+
+Toplama ifadesi üç değer alır; bir işleç değeri ve başlangıç değeri ve toplama işleminin uygulanması için bir veri içindeki her özellikten bir özelliği almak için bir ifade. Bu ifade aşağıdaki biçimdedir:
+
+```javascript
+[operator: string, initialValue: boolean | number, mapExpression: Expression]
+```
+
+- işlecinde Daha sonra, `mapExpression` kümedeki her bir nokta için hesaplanan tüm değerlere karşı uygulanan bir ifade işlevi. Desteklenen işleçler; 
+    - Sayılar için: `+` `*`,,, `max``min`
+    - Boole değerleri için `all`:,`any`
+- InitialValue: İlk hesaplanan değerin oluşturulduğu başlangıç değeri.
+- mapExpression: Veri kümesindeki her bir noktaya göre uygulanan bir ifade.
+
+**Örnekler**
+
+Bir veri kümesindeki tüm özelliklerin bir sayı olan bir `revenue` özelliği varsa. Veri kümesinden oluşturulan kümedeki tüm noktaların toplam geliri, aşağıdaki toplama ifadesi kullanılarak hesaplanabilir:`['+', 0, ['get', 'revenue']]`
+
 ## <a name="boolean-expressions"></a>Mantıksal ifadeler
 
-Boolean ifadeleri Boole karşılaştırmalar değerlendirmek için bir Boole işleçleri ifade kümesi sağlar.
+Boolean ifadeleri, Boole karşılaştırmaları değerlendirmek için bir dizi Boole işleci sağlar.
 
-Değerleri karşılaştırma, karşılaştırma kesin olarak belirlenmiş. Farklı türlerde değerler her zaman eşit olarak kabul edilir. Burada türleri ayrıştırma zamanında farklı olduğu bilinen durumları geçersiz olarak kabul edilir ve bir ayrıştırma hatası oluşturur. 
+Değerler karşılaştırılırken karşılaştırma kesin olarak yazılır. Farklı türlerin değerleri her zaman eşit kabul edilir. Türlerin ayrıştırma zamanında farklı olduğu bilinen durumlar geçersiz olarak değerlendirilir ve bir ayrıştırma hatası oluşturur. 
 
 | İfade | Dönüş türü | Açıklama |
 |------------|-------------|-------------|
-| `['! ', boolean]` | boole | Mantıksal değilleme. Döndürür `true` giriş ise `false`, ve `false` giriş ise `true`. |
-| `['!= ', value, value]` | boole | Döndürür `true` giriş değerler eşit değilse `false` Aksi takdirde. |
-| `['<', value, value]` | boole | Döndürür `true` ilk giriş ikinci kesinlikle küçük ise `false` Aksi takdirde. Bağımsız değişken ya da hem dize veya iki sayı olması gerekir. |
-| `['<=', value, value]` | boole | Döndürür `true` ilk giriş saniye veya daha az ise `false` Aksi takdirde. Bağımsız değişken ya da hem dize veya iki sayı olması gerekir. |
-| `['==', value, value]` | boole | Döndürür `true` giriş değerler eşitse, `false` Aksi takdirde. Bağımsız değişken ya da hem dize veya iki sayı olması gerekir. |
-| `['>', value, value]` | boole | Döndürür `true` ilk giriş ikinci kesinlikle büyük ise `false` Aksi takdirde. Bağımsız değişken ya da hem dize veya iki sayı olması gerekir. |
-| `['>=' value, value]` | boole | Döndürür `true` ilk giriş büyüktür veya eşittir, ikinci ise `false` Aksi takdirde. Bağımsız değişken ya da hem dize veya iki sayı olması gerekir. |
-| `['all', boolean, boolean, …]` | boole | Döndürür `true` tüm girişleri varsa `true`, `false` Aksi takdirde. |
-| `['any', boolean, boolean, …]` | boole | Döndürür `true` herhangi biri girişleri `true`, `false` Aksi takdirde. |
+| `['! ', boolean]` | boolean | Mantıksal değilleme. Girişin `true` olup `false`olmadığını ve`false`girişin olup olmadığını döndürür. `true` |
+| `['!= ', value, value]` | boolean | Giriş `true` değerleri eşit değilse döndürür, `false` Aksi takdirde. |
+| `['<', value, value]` | boolean | İlk `true` giriş ikinciden kesinlikle küçükse döndürür, `false` Aksi takdirde. Bağımsız değişkenlerin her iki dize veya iki sayı olması gerekir. |
+| `['<=', value, value]` | boolean | İlk `true` girişin ikinciden küçük veya ona eşit olup olmadığını döndürür, `false` Aksi takdirde. Bağımsız değişkenlerin her iki dize veya iki sayı olması gerekir. |
+| `['==', value, value]` | boolean | Giriş `true` değerlerinin eşitse, `false` Aksi takdirde döndürür. Bağımsız değişkenlerin her iki dize veya iki sayı olması gerekir. |
+| `['>', value, value]` | boolean | İlk `true` girişin ikinciden kesinlikle büyük olup olmadığını döndürür, `false` Aksi takdirde. Bağımsız değişkenlerin her iki dize veya iki sayı olması gerekir. |
+| `['>=' value, value]` | boolean | İlk `true` girişin ikinciden büyük veya ona eşit olup olmadığını döndürür, `false` Aksi takdirde. Bağımsız değişkenlerin her iki dize veya iki sayı olması gerekir. |
+| `['all', boolean, boolean, …]` | boolean | Tüm `true` `false` girdilerin ,yoksa,döndürür.`true` |
+| `['any', boolean, boolean, …]` | boolean | Girdilerden `true` herhangi `false` biri ise `true`, aksi takdirde döndürür. |
 
 ## <a name="conditional-expressions"></a>Koşullu ifadeler
 
-Koşullu ifadeler gibi IF deyimi mantıksal işlemleri sağlar.
+Koşullu ifadeler, IF-deyimleri gibi mantıksal işlemler sağlar.
 
-Aşağıdaki ifadeler, giriş veri çubuğunda koşullu mantık işlemleri. Örneğin, `case` ifade ederken "if/then/else" mantığı sağlar `match` "anahtar-gibi bir ifade" ifadesidir. 
+Aşağıdaki ifadeler giriş verilerinde koşullu mantık işlemleri gerçekleştirir. Örneğin, `case` ifade "if/then/else" mantığını `match` , ifade ise "switch-deyimi" gibi sağlar. 
 
-### <a name="case-expression"></a>CASE ifadesi
+### <a name="case-expression"></a>Case ifadesi
 
-A `case` ifade if deyimi (if/then/else) mantıksal gibi sağlayan koşullu ifade bir türüdür. Bu tür bir ifade, bir boolean Koşul listesi üzerinden adımları ve doğru olan ilk boolean koşulu çıkış değeri döndürür.
+`case` İfade, Logic LIKE (if/then/else) gibi if deyimi sağlayan bir koşullu ifade türüdür. Bu tür ifade adımları bir Boole koşulları listesi aracılığıyla ve true olan ilk Boole koşulunun çıkış değerini döndürür.
 
-Aşağıdaki sözde kod yapısını tanımlayan `case` ifade. 
+Aşağıdaki sözde kod, `case` ifadenin yapısını tanımlar. 
 
 ```javascript
 [
@@ -209,7 +232,7 @@ Aşağıdaki sözde kod yapısını tanımlayan `case` ifade.
 
 **Örnek**
 
-Aşağıdaki örnek olarak değerlendirilen bir tane bulana kadar farklı Boole koşulları adımları `true`ve ardından ilişkilendirilen değer döndürür. Herhangi bir boolean koşul değerlendirilirse `true`, bir geri dönüş değeri döndürülür. 
+Aşağıdaki örnek, olarak değerlendirilen bir tane bulana kadar farklı Boolean koşullarında adımlar sağlar `true`ve ardından ilgili değeri döndürür. Hiçbir Boole koşulu değerlendirilirse `true`, bir geri dönüş değeri döndürülür. 
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -230,11 +253,11 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-### <a name="match-expression"></a>Eşleştirme ifadesi
+### <a name="match-expression"></a>Match ifadesi
 
-A `match` ifadesi switch ifadesi gibi mantıksal sağlayan koşullu ifade bir türüdür. Giriş gibi herhangi bir ifade olabilir `['get', 'entityType']` bir dize veya sayı döndürür. Her etiket, tek bir değişmez değer veya bir dizi değişmez değerleri, tüm dize veya tüm sayı değerleri olmalıdır olması gerekir. Giriş dizisi eşleşen değerler varsa eşleşir. Her etiket, benzersiz olması gerekir. Etiketlerin türü giriş türü eşleşmiyorsa, geri dönüş değeri sonuç olacaktır.
+`match` İfade, Logic gibi switch deyimi sağlayan bir koşullu ifade türüdür. Giriş, bir dize veya sayı döndüren gibi `['get', 'entityType']` herhangi bir ifade olabilir. Her etiket tek bir sabit değer değeri ya da değerlerinin tüm dizeler veya tüm sayılar olması gereken sabit değerler dizisi olmalıdır. Dizideki herhangi bir değer eşleşiyorsa, giriş eşleşir. Her etiket benzersiz olmalıdır. Giriş türü etiketlerin türüyle eşleşmiyorsa, sonuç geri dönüş değeri olacaktır.
 
-Aşağıdaki sözde kod yapısını tanımlayan `match` ifade. 
+Aşağıdaki sözde kod, `match` ifadenin yapısını tanımlar. 
 
 ```javascript
 [
@@ -251,7 +274,7 @@ Aşağıdaki sözde kod yapısını tanımlayan `match` ifade.
 
 **Örnekler**
 
-Aşağıdaki örnek bakan `entityType` Kabarcık katmanda noktası özelliğinin özelliği için bir eşleşme arar. Bu bir eşleşme bulunursa, döndürülen değer veya geri dönüş değeri döndürür, belirtilen.
+Aşağıdaki örnek, bir kabarcık katmanındaki `entityType` bir nokta özelliğinin özelliğine bir eşleşme arayacağını bakar. Bir eşleşme bulursa, belirtilen değer döndürülür veya geri dönüş değerini döndürür.
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -271,7 +294,7 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-Aşağıdaki örnek, bir dizi tümü aynı değeri döndürmelidir etiketleri listelemek için bir dizi kullanır. Bu tek tek her etiket listesinde daha çok daha verimli olur. Bu durumda, `entityType` özelliktir "Restoran" veya "grocery_store", "red" renk döndürülür.
+Aşağıdaki örnek, hepsi aynı değeri döndürmesi gereken bir etiket kümesini listelemek için bir diziyi kullanır. Bu, her etiketin ayrı ayrı listelemesine göre çok daha etkilidir. Bu durumda `entityType` , özellik "Restoran" veya "grocery_store" ise, "kırmızı" rengi döndürülür.
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -292,11 +315,33 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-### <a name="coalesce-expression"></a>Birleştirme ifadesini
+Aşağıdaki örnek, bir "Array" veya "Array Contains" tür filtresi gerçekleştirmek için bir Match ifadesi kullanır. Bu durumda, izin verilen kimlikler listesinde bir ID değeri olan verileri filtreleme. Filtreler içeren ifadeler kullanılırken, sonucun bir Boole değeri olması gerekir.
 
-A `coalesce` ifade adımları bir ifade kümesi kadar ilk null olmayan değer elde edilir ve bu değeri döndürür. 
+```javascript
+var layer = new atlas.layer.BubbleLayer(datasource, null, {
+    filter: [
+        'match',  
 
-Aşağıdaki sözde kod yapısını tanımlayan `coalesce` ifade. 
+        //Get the property to match.
+        ['get', 'id'],  
+
+         //List of values to match.
+        [24, 53, 98], 
+
+        //If there is a match, return true.
+        true,
+    
+        //Otherwise return false.
+        false
+    ]
+});
+```
+
+### <a name="coalesce-expression"></a>Birleşim ifadesi
+
+İlk null olmayan değer alınana ve bu değeri döndürene kadar bir ifadekümesiaracılığıylaifadeadımları.`coalesce` 
+
+Aşağıdaki sözde kod, `coalesce` ifadenin yapısını tanımlar. 
 
 ```javascript
 [
@@ -309,7 +354,7 @@ Aşağıdaki sözde kod yapısını tanımlayan `coalesce` ifade.
 
 **Örnek**
 
-Aşağıdaki örnekte bir `coalesce` ayarlamak için ifade `textField` sembol katmanının seçeneği. `title` Özellik veya kümesine özelliği eksik `null`, aranırken ifade deneyecek `subtitle` özelliği varsa, eksik veya `null`, bunu daha sonra boş bir dize olarak döner. 
+Aşağıdaki örnek bir sembol katmanının `coalesce` `textField` seçeneğini ayarlamak için bir ifade kullanır. Özelliği özellikte yoksa veya olarak `null`ayarlandıysa, ifade `subtitle` daha sonra özelliği aramaya çalışır, veya `null`eksikse, daha sonra boş bir dizeye geri dönecektir. `title` 
 
 ```javascript
 var layer = new atlas.layer.SymbolLayer(datasource, null, {
@@ -332,19 +377,19 @@ var layer = new atlas.layer.SymbolLayer(datasource, null, {
 
 ## <a name="type-expressions"></a>Tür ifadeleri
 
-Tür ifadeleri test etmek ve dizeler, sayılar ve Boole değerleri gibi farklı veri türlerini dönüştürme için araçlar sağlar.
+Tür ifadeleri, dizeler, sayılar ve Boole değerleri gibi farklı veri türlerini test etmek ve dönüştürmek için araçlar sağlar.
 
 | İfade | Dönüş türü | Açıklama |
 |------------|-------------|-------------|
-| `['literal', array]`<br/><br/>`['literal', object]` | dizi \| nesnesi | Değişmez değer bir dizi veya nesne değeri döndürür. Bu ifade, bir ifade olarak değerlendirilen bir dizi veya nesne engellemek için kullanın. Bir ifade tarafından döndürülen bir dizi veya nesne ihtiyacı olduğunda, bu gereklidir. |
-| `['to-boolean', value]` | boole | Giriş değeri bir boolean değerine dönüştürür. Sonuç `false` giriş boş bir dize olduğunda `0`, `false`, `null`, veya `NaN`; Aksi takdirde, `true`. |
-| `['to-color', value]`<br/><br/>`['to-color', value1, value2…]` | color | Giriş değeri için bir renk dönüştürür. Birden çok değer sağlanıyorsa, ilk başarılı dönüştürme alınana kadar her birini sırayla değerlendirilir. Girişlerin hiçbiri dönüştürülebilir ise, ifade bir hatadır. |
-| `['to-number', value]`<br/><br/>`['to-number', value1, value2, …]` | number | Mümkünse, giriş değeri bir sayıya dönüştürür. Giriş ise `null` veya `false`, sonuç 0'dır. Giriş ise `true`, sonuç 1'dir. Giriş bir dize ise, bir sayı kullanarak dönüştürülür [ToNumber](https://tc39.github.io/ecma262/#sec-tonumber-applied-to-the-string-type) dize işlevi ECMAScript dil belirtimi. Birden çok değer sağlanıyorsa, ilk başarılı dönüştürme alınana kadar her birini sırayla değerlendirilir. Girişlerin hiçbiri dönüştürülebilir ise, ifade bir hatadır. |
-| `['to-string', value]` | string | Giriş değeri bir dizeye dönüştürür. Giriş ise `null`, sonuç `""`. Giriş bir boolean sonucu ise, `"true"` veya `"false"`. Giriş bir sayı ise, kullanarak bir dize dönüştürülür [ToString](https://tc39.github.io/ecma262/#sec-tostring-applied-to-the-number-type) ECMAScript dil belirtimi işlevi sayı. Giriş rengi ise, RGBA CSS renk dizesine dönüştürülür `"rgba(r,g,b,a)"`. Aksi takdirde, giriş kullanarak bir dize dönüştürülür [JSON.stringify](https://tc39.github.io/ecma262/#sec-json.stringify) işlevi ECMAScript dil belirtimi. |
-| `['typeof', value]` | string | Verilen değerin türünü tanımlayan bir dize döndürür. |
+| `['literal', array]`<br/><br/>`['literal', object]` | dizi \| nesnesi | Sabit bir dizi veya nesne değeri döndürür. Bir dizi ya da nesnenin bir ifade olarak değerlendirilmesini engellemek için bu ifadeyi kullanın. Bir dizi ya da nesnenin bir ifade tarafından döndürülmesi gerektiğinde bu gereklidir. |
+| `['to-boolean', value]` | boolean | Giriş değerini bir Boole değerine dönüştürür. `false` Sonuç, girişin boş bir dize `null` `false`, `0`,, veya `NaN`, aksi durumda `true`. |
+| `['to-color', value]`<br/><br/>`['to-color', value1, value2…]` | renk | Giriş değerini bir renge dönüştürür. Birden çok değer sağlanmışsa, ilk başarılı dönüştürme alınana kadar her biri sırayla değerlendirilir. Girdilerden hiçbiri dönüştürülemiyorsa, ifade bir hatadır. |
+| `['to-number', value]`<br/><br/>`['to-number', value1, value2, …]` | numarası | Mümkünse, giriş değerini bir sayıya dönüştürür. Giriş veya `null` `false`ise, sonuç 0 ' dır. Giriş ise `true`, sonuç 1 ' dir. Giriş bir dizeyse, ECMAScript dil belirtiminin [ToNumber](https://tc39.github.io/ecma262/#sec-tonumber-applied-to-the-string-type) dize işlevini kullanarak bir sayıya dönüştürülür. Birden çok değer sağlanmışsa, ilk başarılı dönüştürme alınana kadar her biri sırayla değerlendirilir. Girdilerden hiçbiri dönüştürülemiyorsa, ifade bir hatadır. |
+| `['to-string', value]` | dize | Giriş değerini bir dizeye dönüştürür. Giriş ise `null`, sonuç olur `""`. Giriş bir Boole ise, sonuç veya `"true"` `"false"`olur. Giriş bir sayı ise, ECMAScript dil belirtiminin [ToString](https://tc39.github.io/ecma262/#sec-tostring-applied-to-the-number-type) Number işlevi kullanılarak bir dizeye dönüştürülür. Giriş bir renkeyse CSS RGBA Color dizesine `"rgba(r,g,b,a)"`dönüştürülür. Aksi takdirde, giriş, ECMAScript dil belirtiminin [JSON. stringbelirt](https://tc39.github.io/ecma262/#sec-json.stringify) işlevi kullanılarak bir dizeye dönüştürülür. |
+| `['typeof', value]` | dize | Verilen değerin türünü tanımlayan bir dize döndürür. |
 
 > [!TIP]
-> Bir hata iletisi, benzer `Expression name must be a string, but found number instead. If you wanted a literal array, use ["literal", [...]].` tarayıcı konsolda göründüğü yere ilk değeri için bir dize olmayan bir dizisi olduğundan kodunuzda bir ifade olduğu anlamına gelir. Bir dizi döndürecek şekilde ifadeyi istiyorsanız, dizi ile sarmalamak `literal` ifade. Aşağıdaki örnekte ayarlar simgesine `offset` seçeneği kullanarak iki sayı içeren bir dizi olması gereken bir sembol katmanının bir `match` arasında iki uzaklık değerleri seçmek için ifade değerini temel alarak `entityType` noktasının özelliği özelliği.
+> Tarayıcı konsolunda aşağıdakine benzer `Expression name must be a string, but found number instead. If you wanted a literal array, use ["literal", [...]].` bir hata iletisi varsa, kodunuzda bir yerde, ilk değeri için bir dize olmayan bir ifade olduğu anlamına gelir. İfadenin bir dizi döndürmesini istiyorsanız, diziyi `literal` ifadesiyle sarın. Aşağıdaki örnek, iki sayı içeren `offset` bir dize olması gereken bir sembol katmanının simge seçeneğini belirler, bu, noktanın `entityType` özelliğinin değerine göre iki adet `match` fark değeri arasında seçim yapmak için bir ifade kullanmaktır Özellik.
 >
 > ```javascript
 > var layer = new atlas.layer.SymbolLayer(datasource, null, {
@@ -367,17 +412,17 @@ Tür ifadeleri test etmek ve dizeler, sayılar ve Boole değerleri gibi farklı 
 
 ## <a name="color-expressions"></a>Renk ifadeleri
 
-Renk ifadeleri oluşturma ve renk değerleri kolaylaştırır.
+Renk ifadeleri renk değerleri oluşturmayı ve işlemeyi kolaylaştırır.
 
 | İfade | Dönüş türü | Açıklama |
 |------------|-------------|-------------|
-| `['rgb', number, number, number]` | color | Bir renk değerinden oluşturur *kırmızı*, *yeşil*, ve *mavi* arasında aralığında olması gerekir bileşenleri `0` ve `255`ve biralfabileşeni`1`. Herhangi bir bileşeni aralık dışında ise, ifade bir hatadır. |
-| `['rgba', number, number, number, number]` | color | Bir renk değerinden oluşturur *kırmızı*, *yeşil*, *mavi* arasında aralığında olması gerekir bileşenleri `0` ve `255`ve bir dizi içinde bir alfa bileşeni `0` ve `1`. Herhangi bir bileşeni aralık dışında ise, ifade bir hatadır. |
-| `['to-rgba']` | \[sayı, sayı, sayı, numarası\] | Giriş rengin içeren dört öğeli bir dizi döndürür *kırmızı*, *yeşil*, *mavi*, ve *alfa* o sırada bileşenleri. |
+| `['rgb', number, number, number]` | renk | Ve `1` arasında`255` aralığa`0` gereken kırmızı, yeşil ve mavi bileşenlerden bir renk değeri oluşturur ve bir alfa bileşeni. Herhangi bir bileşen Aralık dışında olursa ifade bir hatadır. |
+| `['rgba', number, number, number, number]` | renk | Ve `0` `1`arasında aralığagereken`0` *kırmızı*, *yeşil*, mavi bileşenlerden ve bir ve aralığı içindeki bir Alfa bileşeninden bir renk değeri oluşturur. `255` Herhangi bir bileşen Aralık dışında olursa ifade bir hatadır. |
+| `['to-rgba']` | \[sayı, sayı, sayı, sayı\] | Giriş renginin *kırmızı*, *yeşil*, *mavi*ve *Alfa* bileşenlerini içeren dört öğeli bir diziyi bu sırayla döndürür. |
 
 **Örnek**
 
-Aşağıdaki örnek, oluşturur ve RGB renk değeri olan bir *kırmızı* değerini `255`, ve *yeşil* ve *mavi* çarpılarakhesaplanandeğerleri`2.5` değeriyle `temperature` özelliği. Farklı gri rengi değişir sıcaklık değiştikçe *kırmızı*.
+Aşağıdaki örnek `255`, *kırmızı* bir değeri olan ve `temperature` özelliğinin değeri ile çarpılarak `2.5` hesaplanan *yeşil* ve *mavi* değerler içeren RGB renk değeri oluşturur. Sıcaklık değiştiği için renk, farklı *kırmızı*gölgelerle değişecektir.
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -395,17 +440,17 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 
 ## <a name="string-operator-expressions"></a>Dize işleci ifadeleri
 
-Dize işleci ifadeleri birleştirerek ve durumun dönüştürme gibi dizeleri dönüştürme işlemleri. 
+Dize operatörü ifadeleri, büyük/küçük harfe dönüştürme ve dönüştürme gibi dizeler üzerinde dönüştürme işlemleri gerçekleştirir. 
 
 | İfade | Dönüş türü | Açıklama |
 |------------|-------------|-------------|
-| `['concat', string, string, …]` | string | Birden çok dizeyi birlikte art arda ekler. Her değer bir dize olmalıdır. Kullanım `to-string` gerekirse diğer değer türleri dizeye dönüştürmek için ifade yazın. |
-| `['downcase', string]` | string | Belirtilen dizeyi küçük harfe dönüştürür. |
-| `['upcase', string]` | string | Belirtilen dizeyi büyük harfe dönüştürür. |
+| `['concat', string, string, …]` | dize | Birden çok dizeyi birlikte birleştirir. Her değer bir dize olmalıdır. Gerekirse, diğer değer türlerini dizeye dönüştürmek için türifadesinikullanın.`to-string` |
+| `['downcase', string]` | dize | Belirtilen dizeyi küçük harfe dönüştürür. |
+| `['upcase', string]` | dize | Belirtilen dizeyi büyük harfe dönüştürür. |
 
 **Örnek**
 
-Aşağıdaki örnek `temperature` noktasının özelliğinin bir dizeye özellik ve sonuna "° F" art arda ekler.
+Aşağıdaki örnek, nokta özelliğinin `temperature` özelliğini bir dizeye dönüştürür ve sonra "°f" öğesini sonuna ekler.
 
 ```javascript
 var layer = new atlas.layer.SymbolLayer(datasource, null, {
@@ -420,33 +465,33 @@ var layer = new atlas.layer.SymbolLayer(datasource, null, {
 });
 ```
 
-Yukarıdaki ifadeyi "64 °, aşağıdaki resimde gösterildiği gibi üzerine yayılan F" metniyle harita üzerinde bir PIN işler.
+Yukarıdaki ifade, "64 °F" metni ile haritada, aşağıdaki görüntüde gösterildiği gibi çakışan bir PIN oluşturur.
 
 <center>
 
-![Dize işleci ifade örneği](media/how-to-expressions/string-operator-expression.png) </center>
+![Dize işleci ifade örneği](media/how-to-expressions/string-operator-expression.png)</center>
 
-## <a name="interpolate-and-step-expressions"></a>Enterpolasyon ve adım ifadeleri
+## <a name="interpolate-and-step-expressions"></a>Ara ve adım ifadelerini enterpolala
 
-Enterpolasyon ve adım ifadeleri ilişkilendirilmiş bir eğri ya da adım işlevi değerleri hesaplamak için kullanılabilir. Bu ifadeler, giriş olarak bir sayısal değeri döndürür. Örneğin bir ifadede ele `['get',  'temperature']`. Giriş değeri "olarak ilişkilendirilmiş eğri ya da adım işlevi en uygun değeri belirlemek için durdurulur" olarak adlandırılan, giriş ve çıkış değerleri çiftlerini karşı değerlendirilir. Her durağı giriş değeri bir sayı ve artan sırada olması gerekir. Çıkış değerleri, bir sayı ve bir sayı dizisi veya bir renk olmalıdır.
+Enterpolasyonlu ve step ifadeleri, bir ara değerli eğri veya adım işlevi üzerinde değerleri hesaplamak için kullanılabilir. Bu ifadeler, giriş olarak sayısal bir değer döndüren bir ifadeyi alır (örneğin `['get',  'temperature']`,). Giriş değeri, enterpolasyona veya Step işlevine en uygun değeri belirleyebilmek için, "Durdur" olarak adlandırılan giriş ve çıkış değerlerinin çiftlerine göre değerlendirilir. Her durun giriş değerleri bir sayı olmalı ve artan düzende olmalıdır. Çıkış değerleri bir sayı, sayı dizisi veya bir renk olmalıdır.
 
-### <a name="interpolate-expression"></a>İfade enterpolasyon
+### <a name="interpolate-expression"></a>Enterpolageç ifadesi
 
-Bir `interpolate` ifade, sürekli bir kesintisiz değerler kümesini durdurma değerleri arasında ilişkilendirme ile hesaplamak için kullanılabilir. Bir `interpolate` hangi sonucunda değerleri seçili gelen renk gradyan renk değerleri döndüren ifadeyi üretir.
+Bir `interpolate` ifade, durdurma değerleri arasında ilişkilendirme yaparak sürekli, düzgün bir değer kümesini hesaplamak için kullanılabilir. Renk `interpolate` değerleri döndüren bir ifade, sonuç değerlerinin seçildiği bir renk gradyanı üretir.
 
-Üç tür kullanılabilir ilişkilendirme yöntemi bir `interpolate` ifade:
+Bir `interpolate` ifadede kullanılabilecek üç tür ilişkilendirme yöntemi vardır:
  
-* `['linear']` -Durakları çifti arasında doğrusal olarak ilişkilendirir.
-* `['exponential', base]` -Katlanarak durakları arasında ilişkilendirir. `base` Değer, çıkış artırır oranı denetler. Yüksek değerler daha yüksek aralığın sonuna doğru artırmak çıkış yapın. A `base` değeri 1'e yakın daha doğrusal olarak artar bir çıktı üretir.
-* `['cubic-bezier', x1, y1, x2, y2]` -İlişkilendirileceğini kullanarak bir [üçüncü dereceden Bezier eğrisi](https://developer.mozilla.org/docs/Web/CSS/timing-function) verilen denetim noktaları tarafından tanımlanır.
+* `['linear']`-Durak çifti arasında doğrusal bir şekilde enterpolasyonlar.
+* `['exponential', base]`-Duraklar arasında üstel olarak katlanarak enterpolasyonlar. `base` Değer, çıktının arttığı hızı denetler. Daha yüksek değerler, çıktıyı aralığın üst ucunda daha fazla artar. 1 `base` ' e yakın bir değer, daha fazla doğrusal bir şekilde artan bir çıktı üretir.
+* `['cubic-bezier', x1, y1, x2, y2]`-Verilen denetim noktaları tarafından tanımlanan [üçüncü dereceden Bezier eğrisini](https://developer.mozilla.org/docs/Web/CSS/timing-function) kullanarak enterpolasyonlar.
 
-Bu ilişkilendirme farklı türde görünmesi bir örnek aşağıda verilmiştir. 
+İşte bu farklı türlerde ara nesnelerin nasıl görüneceğine ilişkin bir örnek. 
 
-| Doğrusal  | Üstel | Üçüncü derece Bezier |
+| Doğrusal  | Üstel | Üçüncü dereceden Bezier |
 |---------|-------------|--------------|
-| ![Doğrusal enterpolasyon grafiği](media/how-to-expressions/linear-interpolation.png) | ![Üstel ilişkilendirme grafiği](media/how-to-expressions/exponential-interpolation.png) | ![Üçüncü dereceden Bezier ilişkilendirme grafiği](media/how-to-expressions/bezier-curve-interpolation.png) |
+| ![Doğrusal ilişkilendirme grafiği](media/how-to-expressions/linear-interpolation.png) | ![Üstel enterpolasyon grafiği](media/how-to-expressions/exponential-interpolation.png) | ![Üçüncü dereceden Bezier enterpolasyon grafiği](media/how-to-expressions/bezier-curve-interpolation.png) |
 
-Aşağıdaki sözde kod yapısını tanımlayan `interpolate` ifade. 
+Aşağıdaki sözde kod, `interpolate` ifadenin yapısını tanımlar. 
 
 ```javascript
 [
@@ -463,7 +508,7 @@ Aşağıdaki sözde kod yapısını tanımlayan `interpolate` ifade.
 
 **Örnek**
 
-Aşağıdaki örnekte bir `linear interpolate` ayarlamak için ifade `color` Kabarcık katman özelliğini temel alarak `temperature` noktası özelliği özelliği. Varsa `temperature` değer olan 60, "mavi", "red" 80 veya daha büyük döndürdüyse 70 ve 80 arasında "turuncu", döndürülecek, 60 ve 70'den az sarı, döndürülecek döndürülen daha az.
+Aşağıdaki örnek, nokta özelliğinin `linear interpolate` `temperature` özelliğine dayalı bir kabarcık `color` katmanının özelliğini ayarlamak için bir ifade kullanır. `temperature` Değer 60 ' den küçükse, "mavi" değeri, 60 ve 70 ' den az olursa sarı döndürülür, 70 ve daha az "kırmızı" döndürülürse, "turuncu 80" döndürülür.
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -483,17 +528,17 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-Aşağıdaki görüntüde, renk için yukarıdaki ifadeyi nasıl seçilir gösterilmektedir.
+Aşağıdaki görüntüde, yukarıdaki ifade için renklerin nasıl seçildiği gösterilmektedir.
  
 <center>
 
-![İfade örneği enterpolasyon](media/how-to-expressions/interpolate-expression-example.png) </center>
+![Enterpolageç ifade](media/how-to-expressions/interpolate-expression-example.png) örneği</center>
 
 ### <a name="step-expression"></a>Adım ifadesi
 
-A `step` değerlendirilerek ayrık, basamaklı sonuç değerleri hesaplamak için ifade kullanılabilir bir [piecewise sabiti işlevi](http://mathworld.wolfram.com/PiecewiseConstantFunction.html) durakları tarafından tanımlanır. 
+Bir `step` ifade, duraklar tarafından tanımlanan bir [piecewise-sabit işlevi](http://mathworld.wolfram.com/PiecewiseConstantFunction.html) değerlendirerek ayrık ve basamaklı sonuç değerlerini hesaplamak için kullanılabilir. 
 
-Aşağıdaki sözde kod yapısını tanımlayan `step` ifade. 
+Aşağıdaki sözde kod, `step` ifadenin yapısını tanımlar. 
 
 ```javascript
 [
@@ -508,11 +553,11 @@ Aşağıdaki sözde kod yapısını tanımlayan `step` ifade.
 ]
 ```
 
-Adım ifadeleri ilk Durdur'den az giriş değeri ya da giriş ise ilk giriş değeri hemen önce Durdur çıkış değeri döndürür. 
+Adım ifadeleri, giriş değerinden hemen önce durun çıkış değerini ya da giriş ilk durmadan daha küçükse ilk giriş değerini döndürür. 
 
 **Örnek**
 
-Aşağıdaki örnekte bir `step` ayarlamak için ifade `color` Kabarcık katman özelliğini temel alarak `temperature` noktası özelliği özelliği. Varsa `temperature` değer olan 60, "mavi", "red" 80 veya daha büyük döndürdüyse 70 ve 80 arasında "turuncu", döndürülecek, 60 ve 70'den az arasında "Sarı", döndürülecek döndürülen daha az.
+Aşağıdaki örnek, nokta özelliğinin `step` `temperature` özelliğine dayalı bir kabarcık `color` katmanının özelliğini ayarlamak için bir ifade kullanır. `temperature` Değer 60 ' den küçükse, "mavi" değeri, 60 ve 70 ' den az olursa "sarı" döndürülür, 70 ve daha az "kırmızı" döndürülürse "turuncu 80" döndürülür.
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -530,27 +575,27 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 });
 ```
 
-Aşağıdaki görüntüde, renk için yukarıdaki ifadeyi nasıl seçilir gösterilmektedir.
+Aşağıdaki görüntüde, yukarıdaki ifade için renklerin nasıl seçildiği gösterilmektedir.
  
 <center>
 
 ![Adım ifadesi örneği](media/how-to-expressions/step-expression-example.png)
 </center>
 
-## <a name="layer-specific-expressions"></a>Katman belirli ifadeler
+## <a name="layer-specific-expressions"></a>Katmana özgü ifadeler
 
-Yalnızca belirli katmanlara uygulamak özel ifadeler.
+Yalnızca belirli katmanlara uygulanan özel ifadeler.
 
-### <a name="heat-map-density-expression"></a>Isı Haritası yoğunluğu ifadesi
+### <a name="heat-map-density-expression"></a>Isı haritası yoğunluğu ifadesi
 
-Isı Haritası yoğunluğu ifadesi her pikselin ısı Haritası katman ısı Haritası yoğunluklu değerini alır ve olarak tanımlanan `['heatmap-density']`. Bu değer arasında bir sayıdır `0` ve `1` ve birlikte kullanılan bir `interpolation` veya `step` ısı Haritası renklendirmek için kullanılan renk gradyanı tanımlamak için ifade. Bu ifade, yalnızca kullanılabilir [renk seçeneği](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.heatmaplayeroptions?view=azure-iot-typescript-latest#color) ısı Haritası katman.
+Isı haritası yoğunluğu ifadesi, ısı haritası katmanındaki her bir piksel için ısı haritası yoğunluğu değerini alır ve olarak `['heatmap-density']`tanımlanır. Bu `0` değer ile `1` arasında bir sayıdır ve, ısı haritasını renklendirmek için kullanılan renk `interpolation` degradesini tanımlamak için or `step` ifadesiyle birlikte kullanılır. Bu ifade yalnızca ısı haritası katmanının [Color seçeneğinde](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.heatmaplayeroptions?view=azure-iot-typescript-latest#color) kullanılabilir.
 
 > [!TIP]
-> Dizin 0 ilişkilendirme deyimde rengi veya bir adım renk varsayılan rengi tanımlar renk alanının veri olduğu ve arka plan rengi tanımlamak için kullanılabilir. Bu değer saydam veya yarı saydam siyah ayarlamak birçok tercih eder. 
+> Bir ilişkilendirme ifadesinde dizin 0 ' daki veya bir adım renginin varsayılan rengi olan renk, verilerin olmadığı alanın rengini tanımlar ve bir arka plan rengi tanımlamak için kullanılabilir. Birçok, bu değeri saydam veya yarı saydam bir siyah olarak ayarlamayı tercih eder. 
 
 **Örnek**
 
-Bu örnek düz renk gradyan ısı Haritası işlemeye oluşturmak için bir liner ilişkilendirme ifade kullanır. 
+Bu örnek, ısı haritasını işlemek için yumuşak bir renk gradyanı oluşturmak üzere bir Oluşturucu ilişkilendirme ifadesi kullanır. 
 
 ```javascript 
 var layer = new atlas.layer.HeatMapLayer(datasource, null, {
@@ -566,7 +611,7 @@ var layer = new atlas.layer.HeatMapLayer(datasource, null, {
 });
 ```
 
-Kesintisiz gradyan ısı Haritası renklendirmek için kullanmanın yanı sıra renkleri aralıkları bir dizi içinde kullanılarak belirtilebilir bir `step` ifade. Kullanarak bir `step` ısı Haritası renklendirme ifade aralıkları içine görsel olarak ve bu nedenle daha dağılımı ya da radar stili harita benzer yoğunluklu keser.  
+Bir ısı haritasını renklendirmeye yönelik düz bir gradyan kullanmanın yanı sıra, renkler bir `step` ifade kullanılarak bir aralıklar kümesi içinde belirlenebilir. Isı haritasının `step` renklendirilebilmesini için bir ifade kullanılması, yoğunluğu, bir dağılım veya radar stil eşlemesine benzer aralıklara görsel aralıklarla ayırır.  
 
 ```javascript 
 var layer = new atlas.layer.HeatMapLayer(datasource, null, {
@@ -583,18 +628,18 @@ var layer = new atlas.layer.HeatMapLayer(datasource, null, {
 });
 ```
 
-Daha fazla bilgi için [ısı Haritası katman eklemek](map-add-heat-map-layer.md) belgeleri.
+Daha fazla bilgi için bkz. [ısı haritası katmanı ekleme](map-add-heat-map-layer.md) belgeleri.
 
-### <a name="line-progress-expression"></a>Çizgi ilerleme ifadesi
+### <a name="line-progress-expression"></a>Satır ilerleme ifadesi
 
-Bir çizgi ilerleme ifadesi bir gradyan çizgi katmanı satır boyunca ilerleme durumunu alır ve olarak tanımlanan `['line-progress']`. Bu değer 0 ile 1 arasında bir sayı ve birlikte kullanılan bir `interpolation` veya `step` ifade. Bu ifade ile yalnızca kullanılabilir [strokeGradient seçeneği]( https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.linelayeroptions?view=azure-iot-typescript-latest#strokegradient) çizgi katmanı. 
+Bir satır ilerleme ifadesi, ilerleme durumunu çizgi katmanında bir gradyan çizgisi üzerinde alır ve olarak `['line-progress']`tanımlanır. Bu değer 0 ile 1 arasında bir sayıdır ve `interpolation` or `step` ifadesi ile birlikte kullanılır. Bu ifade yalnızca çizgi katmanının [Strokegradient seçeneğiyle]( https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.linelayeroptions?view=azure-iot-typescript-latest#strokegradient) birlikte kullanılabilir. 
 
 > [!NOTE]
-> `strokeGradient` Çizgi katmanı seçeneğini gerektirir `lineMetrics` ayarlamak için seçenek veri kaynağının `true`.
+> Çizgi katmanının `lineMetrics` seçeneği,`true`veri kaynağı seçeneğinin olarak ayarlanmasını gerektirir. `strokeGradient`
 
 **Örnek**
 
-Aşağıdaki örnekte `['line-progress']` vuruşunun bir satır için bir renk gradyanı uygulamak için ifade.
+Aşağıdaki örnek, bir satırın `['line-progress']` konturuna bir renk gradyanı uygulamak için ifadesini kullanır.
 
 ```javascript
 var layer = new atlas.layer.LineLayer(datasource, null, {
@@ -612,16 +657,16 @@ var layer = new atlas.layer.LineLayer(datasource, null, {
 });
 ```
 
-[Canlı örneğe bakın](map-add-shape.md#line-stroke-gradient)
+[Bkz. canlı örnek](map-add-line-layer.md#line-stroke-gradient)
 
 ### <a name="text-field-format-expression"></a>Metin alanı biçim ifadesi
 
-Metin alanı biçimi ifade ile kullanılan `textField` sembol katmanların seçeneği `textOptions` karışık metin biçimlendirmesini sağlamak için özellik. Bu ifade, bir dizi Giriş dizeleri ve biçimlendirme seçenekleri belirtilmesini sağlar. Aşağıdaki seçenekler, her bir Giriş dizesinin Bu ifadedeki için belirtilebilir.
+Metin alanı biçimi ifadesi, karışık metin biçimlendirmesi sağlamak üzere `textField` sembol katmanları `textOptions` özelliğinin seçeneğiyle birlikte kullanılabilir. Bu ifade, bir giriş dizesi ve biçimlendirme seçenekleri kümesinin belirtilmesini sağlar. Bu ifadedeki her giriş dizesi için aşağıdaki seçenekler belirlenebilir.
 
- * `'font-scale'` -Ölçeklendirme çarpanı için yazı tipi boyutunu belirtir. Belirtilmişse bu değer kılar `size` özelliği `textOptions` için tek tek dize.
- * `'text-font'` -Bu dize için kullanılması gereken bir veya birden çok yazı tipi aileleri belirtir. Belirtilmişse bu değer kılar `font` özelliği `textOptions` için tek tek dize.
+ * `'font-scale'`-Yazı tipi boyutu için ölçekleme faktörünü belirtir. Belirtilmişse, bu değer bağımsız dize `size` `textOptions` için öğesinin özelliğini geçersiz kılar.
+ * `'text-font'`-Bu dize için kullanılması gereken bir veya daha fazla yazı tipi ailesini belirtir. Belirtilmişse, bu değer bağımsız dize `font` `textOptions` için öğesinin özelliğini geçersiz kılar.
 
-Aşağıdaki sözde kod metin alanı biçimi ifadesi yapısını tanımlar. 
+Aşağıdaki sözde kod, metin alanı biçim ifadesinin yapısını tanımlar. 
 
 ```javascript
 [
@@ -642,7 +687,7 @@ Aşağıdaki sözde kod metin alanı biçimi ifadesi yapısını tanımlar.
 
 **Örnek**
 
-Aşağıdaki örnek, bir kalın yazı tipi ekleyerek ve yazı tipi boyutunu ölçeklendirme metin alanına biçimlendirir `title` özelliğinin özelliği. Bu örnek ayrıca ekler `subtitle` bir yeni satır ile genişletilmiş bir özelliği özelliği aşağı yazı tipi boyutu.
+Aşağıdaki örnek, bir kalın yazı tipi ekleyerek ve özelliğin `title` özelliğinin yazı tipi boyutunu ölçeklendirerek metin alanını biçimlendirir. Bu örnek ayrıca, ölçeklenmiş `subtitle` bir yazı tipi boyutuyla bir yeni satır üzerinde özelliğin özelliğini de ekler.
 
 ```javascript
 var layer = new atlas.layer.SymbolLayer(datasource, null, {
@@ -667,22 +712,22 @@ var layer = new atlas.layer.SymbolLayer(datasource, null, {
 });
 ```
 
-Bu katman, aşağıdaki resimde gösterildiği gibi noktası özelliği işlenir:
+Bu katman, aşağıdaki görüntüde gösterildiği gibi nokta özelliğini oluşturacak:
  
 <center>
 
-![Biçimlendirilmiş metin alanı noktası özelliğiyle görüntüsü](media/how-to-expressions/text-field-format-expression.png) </center>
+![Biçimli metin alanı](media/how-to-expressions/text-field-format-expression.png) olan nokta özelliğinin görüntüsü</center>
 
-### <a name="number-format-expression"></a>Sayı biçim ifadesi
+### <a name="number-format-expression"></a>Sayı biçimi ifadesi
 
-`number-format` İfade yalnızca kullanılabilir ile `textField` sembol katmanının seçeneği. Bu ifade, sağlanan sayıyı biçimlendirilmiş bir dizeye dönüştürür. JavaScript'ın bu ifadeyi sarar [Number.toLocalString](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) işlev ve aşağıdaki seçenekleri kümesini destekler.
+İfade yalnızca bir sembol katmanının `textField` seçeneğiyle birlikte kullanılabilir. `number-format` Bu ifade, belirtilen sayıyı biçimli bir dizeye dönüştürür. Bu ifade, JavaScript [Number. toLocalString](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) işlevini sarmalayan ve aşağıdaki seçenek kümesini destekler.
 
- * `locale` -İçin belirtilen dil ile uygun şekilde dizeleri sayılara dönüştürme için bu seçeneği belirtin. Başarılı bir [BCP 47 dil etiketi](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) halinde bu seçeneği.
- * `currency` -Sayı bir para birimini temsil eden bir dizeye dönüştürmek için. Olası değerler [ISO 4217 para birimi kodları](https://en.wikipedia.org/wiki/ISO_4217)ABD Doları "ABD", "Euro" için EUR veya Çince RMB için "CNY" gibi.
- * `'min-fraction-digits'` -Ondalık sayının dize sürümde eklenecek en az sayısını belirtir.
- * `'max-fraction-digits'` -Ondalık sayının dize sürümünde içerecek şekilde en fazla sayısını belirtir.
+ * `locale`-Sayıları, belirtilen dille hizalanan bir şekilde dizelere dönüştürmek için bu seçeneği belirtin. Bu seçeneğe bir [BCP 47 Language etiketi](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) geçirin.
+ * `currency`-Sayıyı bir para birimini temsil eden bir dizeye dönüştürmek için. Olası değerler [ıso 4217 para birimi kodlarıdır](https://en.wikipedia.org/wiki/ISO_4217), örneğin ABD Doları IÇIN "USD", Euro IÇIN "EUR" veya Çince RMB IÇIN "CNY" gibi.
+ * `'min-fraction-digits'`-Sayının dize sürümüne dahil edilecek en az ondalık basamak sayısını belirtir.
+ * `'max-fraction-digits'`-Sayının dize sürümüne dahil edilecek en fazla ondalık basamak sayısını belirtir.
 
-Aşağıdaki sözde kod metin alanı biçimi ifadesi yapısını tanımlar. 
+Aşağıdaki sözde kod, metin alanı biçim ifadesinin yapısını tanımlar. 
 
 ```javascript
 [
@@ -699,7 +744,7 @@ Aşağıdaki sözde kod metin alanı biçimi ifadesi yapısını tanımlar.
 
 **Örnek**
 
-Aşağıdaki örnekte bir `number-format` değiştirmek için ifade nasıl `revenue` noktası özelliği özelliği işlenir `textField` seçeneği bir simgenin bir ABD Doları değer göründüğü şekilde katman.
+Aşağıdaki örnek, nokta `number-format` `revenue` özelliğinin özelliğinin bir ABD Doları değeri gibi bir sembol katmanı seçeneğindenasılişleneceğinideğiştirmekiçinbirifadekullanır.`textField`
 
 ```javascript
 var layer = new atlas.layer.SymbolLayer(datasource, null, {
@@ -715,19 +760,19 @@ var layer = new atlas.layer.SymbolLayer(datasource, null, {
 });
 ```
 
-Bu katman, aşağıdaki resimde gösterildiği gibi noktası özelliği işlenir:
+Bu katman, aşağıdaki görüntüde gösterildiği gibi nokta özelliğini oluşturacak:
 
 <center>
 
-![Sayı biçimi ifade örneği](media/how-to-expressions/number-format-expression.png) </center>
+![Sayı biçimi ifade örneği](media/how-to-expressions/number-format-expression.png)</center>
 
 ## <a name="zoom-expression"></a>Yakınlaştırma ifadesi
 
-A `zoom` ifade geçerli harita yakınlaştırma düzeyini işleme zaman almak için kullanılır ve olarak tanımlanan `['zoom']`. Bu ifade, haritanın en düşük ve en yüksek yakınlaştırma düzeyinde aralığında bir sayı döndürür. Bu ifade kullanarak stilleri harita yakınlaştırma düzeyini değiştikçe dinamik olarak değiştirilmesine izin verir. `zoom` İfade yalnızca kullanılabilir ile `interpolate` ve `step` ifadeler.
+Bir `zoom` ifade, işleme zamanında haritanın geçerli yakınlaştırma düzeyini almak için kullanılır ve olarak `['zoom']`tanımlanır. Bu ifade haritanın en düşük ve en yüksek yakınlaştırma düzeyi aralığı arasında bir sayı döndürür. Bu ifadenin kullanılması, haritanın yakınlaştırma düzeyi değiştiği için stillerin dinamik olarak değiştirilmesini sağlar. İfade yalnızca `interpolate` ve`step`ifadeleriylebirliktekullanılabilir. `zoom`
 
 **Örnek**
 
-Varsayılan olarak, tüm yakınlaştırma düzeyleri için bir sabit piksel RADIUS yarıçaplarını ısı Haritası katmanda işlenen veri noktası var. Harita uzaklaştırılacağını gibi birlikte veri toplama ve ısı Haritası katman farklı görünüyor. A `zoom` ifade, her veri noktası aynı fiziksel alan harita kapsar, her yakınlaştırma düzeyi için RADIUS ölçeklendirmek için kullanılabilir. Bu konum ısı Haritası katman daha statik ve tutarlı hale getirir. Her harita yakınlaştırma düzeyini iki katı daha fazla piksel, dikey ve yatay önceki yakınlaştırma düzeyi vardır. RADIUS her yakınlaştırma düzeyi ile iki şekilde ölçeklendirme tüm yakınlaştırma düzeylerinin tutarlı görünen bir ısı Haritası oluşturun. Bu kullanarak gerçekleştirilebilir `zoom` ifadeyle bir `base 2 exponential interpolation` aşağıda gösterildiği gibi bir ifade. 
+Varsayılan olarak, ısı haritası katmanında işlenen veri noktalarının yarıçapının tüm yakınlaştırma düzeyleri için sabit bir piksel yarıçapı vardır. Eşleme, veri toplamlarını birlikte yakınlaştırırken ve ısı haritası katmanı farklı görünüyor. Her `zoom` bir yakınlaştırma düzeyi için yarıçapı ölçeklendirmek için, her bir veri noktasının haritanın aynı fiziksel alanını kapsaması gibi bir ifade kullanılabilir. Bu, ısı haritası katmanının daha statik ve tutarlı görünmesini sağlayacak. Haritanın her yakınlaştırma düzeyinin, önceki yakınlaştırma düzeyiyle dikey ve yatay olarak iki piksel daha vardır. Her yakınlaştırma düzeyiyle birlikte bulunan yarıçapı ölçeklemek, tüm yakınlaştırma düzeylerinde tutarlı görünen bir ısı haritası oluşturur. Bu, `zoom` ifadesi aşağıda gösterildiği gibi `base 2 exponential interpolation` ifadesiyle birlikte kullanılarak gerçekleştirilebilir. 
 
 ```javascript 
 var layer = new atlas.layer.HeatMapLayer(datasource, null, {
@@ -745,20 +790,20 @@ var layer = new atlas.layer.HeatMapLayer(datasource, null, {
 };
 ```
 
-[Canlı örneğe bakın](map-add-heat-map-layer.md#consistent-zoomable-heat-map)
+[Bkz. canlı örnek](map-add-heat-map-layer.md#consistent-zoomable-heat-map)
 
 ## <a name="variable-binding-expressions"></a>Değişken bağlama ifadeleri
 
-Değişken bağlama ifadeleri, hesaplamanın sonuçlarını bir değişkende depolayın, başka bir yerde bir deyimde birden çok kez onu yeniden hesaplama yapmak zorunda kalmadan başvurulabilir. Çok sayıda hesaplama içeren ifadeler için kullanışlı bir iyileştirme budur.
+Değişken bağlama ifadeleri, bir hesaplamanın sonuçlarını, bir ifadenin başka bir yerinde yeniden hesaplanması gerekmeden birden çok kez başvurulabilmeleri için bir değişkende depolar. Bu, birçok hesaplamayı içeren ifadeler için yararlı bir iyileştirmedir
 
 | İfade | Dönüş türü | Açıklama |
 |--------------|---------------|--------------|
-| \[<br/>&nbsp;&nbsp;&nbsp;&nbsp;'let'<br/>&nbsp;&nbsp;&nbsp;&nbsp;name1: dize<br/>&nbsp;&nbsp;&nbsp;&nbsp;Değer1: herhangi biri<br/>&nbsp;&nbsp;&nbsp;&nbsp;name2: dize<br/>&nbsp;&nbsp;&nbsp;&nbsp;Value2: herhangi biri<br/>&nbsp;&nbsp;&nbsp;&nbsp;…<br/>&nbsp;&nbsp;&nbsp;&nbsp;childExpression<br/>\] | | Bir veya daha fazla değer tarafından kullanılacak değişkenleri olarak depolayan `var` ifade alt ifadede sonucunu döndürür. |
-| `['var', name: string]` | Tüm | Kullanılarak oluşturulmuş bir değişkene başvuruyor `let` ifade. |
+| \[<br/>&nbsp;&nbsp;&nbsp;&nbsp;' Let ',<br/>&nbsp;&nbsp;&nbsp;&nbsp;name1: String,<br/>&nbsp;&nbsp;&nbsp;&nbsp;Değer1: Any,<br/>&nbsp;&nbsp;&nbsp;&nbsp;AD2: dize,<br/>&nbsp;&nbsp;&nbsp;&nbsp;değer2: Any,<br/>&nbsp;&nbsp;&nbsp;&nbsp;...<br/>&nbsp;&nbsp;&nbsp;&nbsp;childExpression<br/>\] | | Bir veya daha fazla değeri, sonucu döndüren alt ifadede `var` ifadesi tarafından kullanılmak üzere değişkenler olarak depolar. |
+| `['var', name: string]` | herhangi biri | `let` İfadesi kullanılarak oluşturulan bir değişkene başvurur. |
 
 **Örnek**
 
-Bu örnekte geliri sıcaklık oranı ve kullandığı hesaplar bir ifade bir `case` bu değeri Boole farklı işlemlerin değerlendirilecek ifade. `let` İfade yalnızca bir kez hesaplanacak gerekir böylece sıcaklık oranına göre gelir depolamak için kullanılan ve `var` ifadesi bu değişken, yeniden hesaplama yapmak zorunda kalmadan gerektiği sıklıkta başvuruyor.
+Bu örnek, sıcaklığa göre geliri hesaplayan bir ifade kullanır ve bu değer üzerinde farklı Boole `case` işlemlerini değerlendirmek için bir ifade kullanır. Bu ifade, geliri sıcaklık oranına göre depolamak için kullanılır, böylece yalnızca bir kez hesaplanmaları gerekir ve ifade, `var` bu değişkene yeniden hesaplama yapmak zorunda kalmadan gereken sıklıkta başvurur. `let`
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -786,19 +831,22 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-İfadeleri uygulamak daha fazla kod örneği için aşağıdaki makalelere bakın:
+İfadeler uygulayan daha fazla kod örneği için aşağıdaki makalelere bakın:
 
 > [!div class="nextstepaction"] 
-> [Sembol katmanı Ekle](map-add-pin.md)
+> [Sembol katmanı ekleme](map-add-pin.md)
 
 > [!div class="nextstepaction"] 
-> [Kabarcık katmanı Ekle](map-add-bubble-layer.md)
+> [Kabarcık katmanı ekleme](map-add-bubble-layer.md)
+
+> [!div class="nextstepaction"]
+> [Çizgi katmanı Ekle](map-add-line-layer.md)
+
+> [!div class="nextstepaction"]
+> [Çokgen katmanı Ekle](map-add-shape.md)
 
 > [!div class="nextstepaction"] 
-> [Şekil ekleme](map-add-shape.md)
-
-> [!div class="nextstepaction"] 
-> [Isı Haritası katman ekleyin](map-add-heat-map-layer.md)
+> [Isı haritası katmanı ekleme](map-add-heat-map-layer.md)
 
 İfadeleri destekleyen katman seçenekleri hakkında daha fazla bilgi edinin:
 

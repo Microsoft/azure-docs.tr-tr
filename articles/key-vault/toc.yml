@@ -7,17 +7,21 @@
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
-    - name: Gizli dizi ayarlama ve alma - CLI
+    - name: CLI
       href: quick-create-cli.md
-    - name: Gizli dizi ayarlama ve alma - Powershell
+    - name: PowerShell
       href: quick-create-powershell.md
-    - name: Gizli dizi ayarlama ve alma - Portal
+    - name: Portal
       href: quick-create-portal.md
-    - name: Gizli dizi ayarlama ve alma - .NET
+    - name: Python
+      href: quick-create-python.md
+    - name: .NET (SDK v4)
       href: quick-create-net.md
-    - name: Gizli dizi ayarlama ve alma - Node.js
+    - name: .NET (SDK v3)
+      href: quick-create-net-v3.md
+    - name: Node.js
       href: quick-create-node.md
-    - name: Gizli dizi ayarlama ve alma - Resource Manager Şablonu
+    - name: Azure Resource Manager şablonu
       displayName: 'resource manager, resource manager template, arm'
       href: quick-create-template.md
 - name: Öğreticiler
@@ -42,10 +46,12 @@
               href: tutorial-python-windows-virtual-machine.md
     - name: Depolama Hesabı Anahtarları
       items:
-        - name: Azure CLI kullanarak yönetilen depolama hesabı anahtarları
+        - name: Depolama hesabı anahtarlarını Azure CLI ile yönetme
           href: key-vault-ovw-storage-keys.md
-        - name: PowerShell kullanarak yönetilen depolama hesabı anahtarları
+        - name: Depolama hesabı anahtarlarını PowerShell ile yönetme
           href: key-vault-overview-storage-keys-powershell.md
+        - name: Kodda paylaşılan erişim imza belirteçlerini getirme
+          href: storage-keys-sas-tokens-code.md
     - name: Azure Kapsayıcıları
       href: ../container-instances/container-instances-managed-identity.md
     - name: Azure Resource Manager Şablonu
@@ -58,20 +64,22 @@
       href: 'https://azure.microsoft.com/resources/samples/?service=key-vault'
 - name: Kavramlar
   items:
+    - name: Temel kavramlar
+      href: basic-concepts.md
     - name: Güvenlik
       items:
         - name: Güvenliğe genel bakış
           href: overview-security.md
-        - name: Ortak güvenlik öznitelikleri
-          href: key-vault-security-attributes.md
         - name: Güvenlik dünyaları
           href: key-vault-ovw-security-worlds.md
         - name: Anahtar kasanızın güvenliğini sağlama
           href: key-vault-secure-your-key-vault.md
-    - name: Anahtar Kasası nedir?
-      href: key-vault-whatis.md
+        - name: Yerleşik güvenlik denetimleri
+          href: key-vault-security-controls.md
     - name: Geçici silme
       href: key-vault-ovw-soft-delete.md
+    - name: Key Vault olaylarını izleme
+      href: event-grid-overview.md
     - name: Azaltma
       href: key-vault-ovw-throttling.md
     - name: Sanal Ağ Hizmet Uç Noktaları
@@ -90,10 +98,24 @@
           href: create-certificate.md
         - name: Sertifika oluşturmayı izleme ve yönetme
           href: create-certificate-scenarios.md
-    - name: Azure Ortak Güvenlik Öznitelikleri
-      href: key-vault-security-attributes.md
 - name: Nasıl yapılır kılavuzları
   items:
+    - name: Güvenlik
+      items:
+        - name: Öneriler
+          href: security-recommendations.md
+    - name: Kimlik Doğrulaması
+      items:
+        - name: App Service yönetilen kimlik kullanma
+          href: managed-identity.md
+        - name: Erişim denetimi ilkesi kullanma
+          href: key-vault-group-permissions-for-apps.md
+    - name: Event Grid ile anahtar kasası bildirimlerini yönlendirme
+      href: event-grid-tutorial.md
+    - name: Event Grid ve Logic Apps aracılığıyla bildirim alma
+      href: event-grid-logicapps.md
+    - name: Azure İlkesi ile tümleştirme
+      href: azure-policy.md
     - name: Azure Key Vault günlüğü
       href: key-vault-logging.md
     - name: Güvenlik duvarı arkasına erişme
@@ -108,8 +130,6 @@
       href: key-vault-soft-delete-cli.md
     - name: Anahtar Kasası geçici silmeyi Azure PowerShell ile kullanma
       href: key-vault-soft-delete-powershell.md
-    - name: Erişim vermek için grupları kullanma
-      href: key-vault-group-permissions-for-apps.md
     - name: Güvenlik duvarlarını ve sanal ağları yapılandırma
       href: key-vault-network-security.md
     - name: Java geliştirme
@@ -164,8 +184,6 @@
       href: common-parameters-and-headers.md
     - name: Müşteri Verileri
       href: key-vault-customer-data.md
-    - name: Sürüm Notları
-      href: key-vault-versions.md
     - name: Fiyatlandırma
       href: 'https://azure.microsoft.com/pricing/details/key-vault/'
     - name: Bölge kullanılabilirliği

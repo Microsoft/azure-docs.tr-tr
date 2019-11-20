@@ -1,19 +1,18 @@
 ---
 title: Azure dosya paylaşımını Windows'da kullanma | Microsoft Docs
 description: Azure dosya paylaşımını Windows ve Windows Server ile kullanmayı öğrenin.
-services: storage
 author: roygara
 ms.service: storage
 ms.topic: conceptual
 ms.date: 06/07/2018
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 02a8b825a513c75ef7c037348ccaecdf5026ded2
-ms.sourcegitcommit: d3b1f89edceb9bff1870f562bc2c2fd52636fc21
+ms.openlocfilehash: 831c771da385ef6faeba194878ca53ede34ccc0a
+ms.sourcegitcommit: c8a102b9f76f355556b03b62f3c79dc5e3bae305
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67560487"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68816645"
 ---
 # <a name="use-an-azure-file-share-with-windows"></a>Azure dosya paylaşımını Windows'da kullanma
 [Azure Dosyaları](storage-files-introduction.md), Microsoft’un kullanımı kolay bulut dosya sistemidir. Azure dosya paylaşımları, Windows ve Windows Server’da sorunsuz bir şekilde kullanılabilir. Bu makalede Azure dosya paylaşımını Windows ve Windows Server ile kullanma konusunda dikkat edilmesi gerekenler anlatılmaktadır.
@@ -34,8 +33,8 @@ Azure VM üzerinde veya şirket içinde çalışan bir Windows yüklemesinde Azu
 | Windows 7              | SMB 2.1     | Evet                   | Hayır                   |
 | Windows Server 2008 R2 | SMB 2.1     | Evet                   | Hayır                   |
 
-<sup>1</sup>Windows 10 sürüm 1507, 1607, 1703, 1709, 1803 ve 1809.  
-<sup>2</sup>Windows Server sürüm 1709 ve 1803.
+<sup>1</sup> Windows 10, sürüm 1507, 1607, 1703, 1709, 1803, 1809 ve 1903.  
+<sup>2</sup> Windows Server, sürüm 1803, 1809 ve 1903.
 
 > [!Note]  
 > Her zaman Windows sürümünüz için en yeni KB’yi almanızı öneririz.
@@ -44,13 +43,13 @@ Azure VM üzerinde veya şirket içinde çalışan bir Windows yüklemesinde Azu
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar 
-* **Depolama hesabı adı**: Bir Azure dosya paylaşımını bağlayabilmeniz için depolama hesabınızın adı gerekir.
+* **Depolama hesabı adı**: Bir Azure dosya paylaşımının bağlanması için depolama hesabının adına ihtiyacınız olacaktır.
 
-* **Depolama hesabı anahtarı**: Bir Azure dosya paylaşımını bağlayabilmeniz için birincil (veya ikincil) depolama anahtarı gerekir. SAS anahtarları şu an bağlama için desteklenmemektedir.
+* **Depolama hesabı anahtarı**: Bir Azure dosya paylaşımının bağlanması için birincil (veya ikincil) depolama anahtarı gerekir. SAS anahtarları şu an bağlama için desteklenmemektedir.
 
-* **Bağlantı noktası 445'in açık olduğundan emin olun**: SMB protokolü TCP bağlantı noktası 445'in açık olmasını gerektirir; bağlantı noktası 445 engellenirse bağlantıları başarısız olur. `Test-NetConnection` cmdlet'ini kullanarak 445 numaralı bağlantı noktasının güvenlik duvarınız tarafından engellenip engellenmediğini görebilirsiniz. Hakkında bilgi edinebilirsiniz [engellenen geçici çözüm için çeşitli yollar burada 445 bağlantı noktası](https://docs.microsoft.com/azure/storage/files/storage-troubleshoot-windows-file-connection-problems#cause-1-port-445-is-blocked).
+* **Bağlantı noktası 445 ' ün açık olduğundan emin olun**: SMB protokolü, TCP bağlantı noktası 445 ' ün açık olmasını gerektirir; bağlantı noktası 445 engellenmişse, bağlantılar başarısız olur. `Test-NetConnection` cmdlet'ini kullanarak 445 numaralı bağlantı noktasının güvenlik duvarınız tarafından engellenip engellenmediğini görebilirsiniz. [Geçici çözüm 445 bağlantı noktası ' i engelleyen çeşitli yollar](https://docs.microsoft.com/azure/storage/files/storage-troubleshoot-windows-file-connection-problems#cause-1-port-445-is-blocked)hakkında bilgi edinebilirsiniz.
 
-    Aşağıdaki PowerShell kod varsayar Azure PowerShell Modülü yüklü, sahip olduğunuz bkz [Azure PowerShell modülü yükleme](https://docs.microsoft.com/powershell/azure/install-az-ps) daha fazla bilgi için. `<your-storage-account-name>` ile `<your-resource-group-name>` yerine depolama hesabınızla ilgili bilgileri yazmayı unutmayın.
+    Aşağıdaki PowerShell kodunda Azure PowerShell modülünün yüklü olduğu varsayılır, daha fazla bilgi için bkz. [Azure PowerShell modülünü yükleme](https://docs.microsoft.com/powershell/azure/install-az-ps) . `<your-storage-account-name>` ile `<your-resource-group-name>` yerine depolama hesabınızla ilgili bilgileri yazmayı unutmayın.
 
     ```powershell
     $resourceGroupName = "<your-resource-group-name>"
@@ -246,7 +245,7 @@ Aşağıdaki tabloda tüm Windows sürümlerinde SMB 1 protokolünün durumu hak
 | Windows 7                                 | Enabled              | Kayıt defteri ile devre dışı bırakma       | 
 
 ### <a name="auditing-smb-1-usage"></a>SMB 1 kullanımını denetleme
-> Windows Server 2019, Windows Server yarı yıllık kanal (sürüm 1709 ve 1803), Windows Server 2016, Windows 10 (sürüm 1507, 1607, 1703, 1709 ve 1803), Windows Server 2012 R2 ve Windows 8.1 için geçerlidir
+> Windows Server 2019, Windows Server yarı yıllık kanal (sürüm 1709 ve 1803), Windows Server 2016, Windows 10 (sürümler 1507, 1607, 1703, 1709 ve 1803), Windows Server 2012 R2 ve Windows 8.1 için geçerlidir.
 
 SMB 1'i ortamınızdan kaldırmadan önce bu değişiklikten etkilenecek istemciler olup olmadığını görmek için SMB 1 kullanımını denetlemek isteyebilirsiniz. SMB 1 ile yapılan SMB paylaşımı isteği varsa `Applications and Services Logs > Microsoft > Windows > SMBServer > Audit` altında bir denetim olayı kaydedilir. 
 
@@ -260,7 +259,7 @@ Set-SmbServerConfiguration –AuditSmb1Access $true
 ```
 
 ### <a name="removing-smb-1-from-windows-server"></a>Windows Server'dan SMB 1'i kaldırma
-> Windows Server 2019, Windows Server yarı yıllık kanal (sürüm 1709 ve 1803) Windows Server 2016, Windows Server 2012 R2 için geçerlidir
+> Windows Server 2019, Windows Server yarı yıllık kanal (sürüm 1709 ve 1803), Windows Server 2016, Windows Server 2012 R2 için geçerlidir
 
 SMB 1'i bir Windows Server örneğinden kaldırmak için aşağıdaki cmdlet'i yükseltilmiş PowerShell oturumundan yürütün:
 

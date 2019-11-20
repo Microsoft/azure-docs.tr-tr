@@ -5,55 +5,56 @@ services: application-insights
 documentationcenter: .net
 author: mrbullwinkle
 manager: carmonm
-ms.service: application-insights
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.workload: TBD
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
-ms.date: 04/25/2017
+ms.date: 10/14/2019
 ms.reviewer: sergkanz
 ms.author: mbullwin
-ms.openlocfilehash: 749b4077b457eff836ec515f21d97e892e663156
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b14ce5cc83dcbbeef2379d21027d4bca337fd9fd
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60899205"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72376033"
 ---
 # <a name="application-insights-telemetry-data-model"></a>Application Insights telemetri veri modeli
 
-[Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) uygulamanızın kullanımını ve performansını analiz etmek Azure portalında web uygulamanızdan telemetri gönderir. Telemetri modeli, böylece platform ve dilden bağımsız izleme oluşturmak mümkündür standartlaştırılmıştır. 
+[Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) , uygulamanızın performansını ve kullanımını çözümleyebilmeniz için web uygulamanızdan Azure Portal telemetri gönderir. Telemetri modeli, platform ve dilden bağımsız izleme oluşturmak mümkün olacak şekilde standartlaştırılmış hale gelir. 
 
-Application Insights tarafından toplanan veriler, bu normal bir uygulama yürütme düzeni modelleri:
+Application Insights tarafından toplanan veriler bu tipik uygulama yürütme modeli:
 
 ![Application Insights uygulama modeli](./media/data-model/application-insights-data-model.png)
 
-Aşağıdaki tür telemetri, uygulamanızın yürütülmesini izlemek için kullanılır. Aşağıdaki üç tür genellikle otomatik olarak Application Insights SDK'sı tarafından web Uygulama Çerçevesi ' toplanır:
+Aşağıdaki telemetri türleri uygulamanızın yürütülmesini izlemek için kullanılır. Aşağıdaki üç tür, genellikle Web uygulaması çerçevesindeki Application Insights SDK tarafından otomatik olarak toplanır:
 
-* [**İstek** ](data-model-request-telemetry.md) - uygulamanız tarafından alınan isteği açmak için oluşturulan. Örneğin, Application Insights web SDK'sı, web uygulamasının aldığı her HTTP isteği için bir istek telemetri öğesinin otomatik olarak oluşturur. 
+* Uygulamanız tarafından alınan bir isteği günlüğe kaydetmek için [**istek**](data-model-request-telemetry.md) oluşturuldu. Örneğin, Application Insights Web SDK, Web uygulamanızın aldığı her HTTP isteği için otomatik olarak bir Istek telemetrisi öğesi oluşturur. 
 
-    Bir **işlemi** bir isteği işleyen yürütme iş parçacığıdır. Ayrıca [kod yazma](../../azure-monitor/app/api-custom-events-metrics.md#trackrequest) bir "uyandır" bir web veya işi, düzenli aralıklarla işlev gibi diğer türde bir işlemi izlemek için verileri işler.  Her işlem, bir kimliği vardır. İçin kullanılabilir bu kimliği [grubu](../../azure-monitor/app/correlation.md) uygulamanızı isteği işlerken oluşturulan tüm telemetri. Her işlem ya da başarılı veya başarısız olur ve bir süre vardır.
-* [**Özel durum** ](data-model-exception-telemetry.md) -tipik bir işlemin başarısız olmasına neden olan bir özel durumu temsil eder.
-* [**Bağımlılık** ](data-model-dependency-telemetry.md) -bir dış hizmet ya da depolama REST API veya SQL gibi uygulamanızdan bir çağrısını temsil eder. Tarafından tanımlanan, ASP.NET SQL bağımlılık çağrıları `System.Data`. HTTP uç noktalarına çağrı tarafından tanımlanan `System.Net`. 
+    **İşlem** , bir isteği işleyen yürütmenin iş parçacıklarından oluşur. Ayrıca, verileri düzenli aralıklarla işleyen bir Web işinde "uyandırma" gibi diğer işlem türlerini izlemek için de [kod yazabilirsiniz](../../azure-monitor/app/api-custom-events-metrics.md#trackrequest) .  Her işlemin bir KIMLIĞI vardır. Bu KIMLIK, uygulamanız isteği işlerken oluşturulan tüm Telemetriyi [gruplandırmak](../../azure-monitor/app/correlation.md) için kullanılabilir. Her işlem başarılı olur ya da başarısız olur ve bir süre süresi vardır.
+* [**Özel durum**](data-model-exception-telemetry.md) -genellikle bir işlemin başarısız olmasına neden olan bir özel durumu temsil eder.
+* [**Bağımlılık**](data-model-dependency-telemetry.md) -uygulamanızdan bir REST API veya SQL gibi bir dış hizmete veya depoya olan çağrıyı temsil eder. ASP.NET ' de, SQL 'e bağımlılık çağrıları `System.Data` tarafından tanımlanır. HTTP uç noktalarına yapılan çağrılar `System.Net` tarafından tanımlanır. 
 
-Application Insights özel telemetri için üç ek veri türlerini sağlar:
+Application Insights özel telemetri için üç ek veri türü sağlar:
 
-* [İzleme](data-model-trace-telemetry.md) - doğrudan ya da kullanılan veya tanılama günlüğünü uygulamak için bağdaştırıcıyı aşina olduğu gibi bir izleme framework kullanarak `Log4Net` veya `System.Diagnostics`.
-* [Olay](data-model-event-telemetry.md) : genellikle hizmetiniz kullanım desenlerini analiz etmek, kullanıcı etkileşimi yakalamak için kullanılır.
-* [Ölçüm](data-model-metric-telemetry.md) - rapor düzenli skaler ölçümler için kullanılır.
+* [Trace](data-model-trace-telemetry.md) -`Log4Net` veya `System.Diagnostics` gibi tanıdık bir izleme çerçevesi kullanarak tanılama günlüğü uygulamak için doğrudan veya bir bağdaştırıcı aracılığıyla kullanılır.
+* [Olay](data-model-event-telemetry.md) -genellikle kullanım düzenlerini çözümlemek için hizmetinize yönelik kullanıcı etkileşimini yakalamak için kullanılır.
+* [Ölçüm](data-model-metric-telemetry.md) -düzenli skaler ölçümleri raporlamak için kullanılır.
 
-Her telemetri öğesine tanımlayabilirsiniz [bağlam bilgilerini](data-model-context.md) uygulama sürümü ya da kullanıcı oturum kimliği gibi. Belirli senaryolar engellemesinin kaldırıldığı bir dizi türü kesin belirlenmiş alanları bağlamıdır. Uygulama sürümü düzgün şekilde başlatıldığından, Application ınsights'ı yeniden dağıtma işlemi ile ilişkili uygulama davranışında yeni desenlerini algılayabilir. Oturum kimliği, kesinti veya kullanıcıların bir sorun etkisi hesaplamak için kullanılabilir. Oturum kimliği değerleri ayrı sayım belirli hesaplama bağımlılık başarısız oldu, hata izleme ya da kritik özel durum etkisi iyi bir anlayış verir.
+Her telemetri öğesi, uygulama sürümü veya Kullanıcı oturum kimliği gibi [bağlam bilgilerini](data-model-context.md) tanımlayabilir. Bağlam, belirli senaryoları engelleyen bir türü kesin belirlenmiş alanlar kümesidir. Uygulama sürümü düzgün şekilde başlatıldığında Application Insights, yeniden dağıtım ile bağıntılı uygulama davranışında yeni desenleri algılayabilir. Oturum kimliği, kullanıcılar üzerinde kesinti veya bir sorun etkisi hesaplamak için kullanılabilir. Bazı başarısız bağımlılık için farklı oturum kimliği sayısını hesaplama, hata izleme veya kritik özel durum, bir etkiyi daha iyi anlamak için sağlar.
 
-Application Insights telemetri modeli için bir yol tanımlar [bağıntısını](../../azure-monitor/app/correlation.md) işlemi bir parçası olduğu için telemetri. Örneğin, bir istek bir SQL veritabanı aramaları ve tanılama bilgileri kaydedilir. İstek telemetri tie telemetri öğeleri için bağıntı bağlamı ayarlayabilirsiniz.
+Application Insights telemetri modeli, telemetrinin bir parçası olan işlem ile [ilişkilendirilmesi](../../azure-monitor/app/correlation.md) için bir yol tanımlar. Örneğin, bir istek bir SQL veritabanı çağrısı ve kayıtlı tanılama bilgileri yapabilir. İstek telemetrisine geri bağlayan telemetri öğeleri için bağıntı bağlamını ayarlayabilirsiniz.
 
 ## <a name="schema-improvements"></a>Şema geliştirmeleri
 
-Application Insights veri modeli, uygulama telemetrinizi modellemek için basit ve basit ama güçlü bir yoludur. Modelin basit ve ince önemli senaryoları desteklemek için tutmak ve Gelişmiş kullanım için şemayı genişletmek için izin almak için elimizden.
+Application Insights veri modeli, uygulama telemetrinizi modeletmenin basit ve temel, güçlü bir yoludur. Temel senaryoları desteklemek ve Gelişmiş kullanım için şemayı genişletmeye izin vermek için modeli basit ve ince tutmak istiyoruz.
 
-Veri modeli veya şema sorunları ve önerileri kullanın GitHub bildirmek için [Applicationınsights giriş](https://github.com/Microsoft/ApplicationInsights-Home/labels/schema) depo.
+Veri modeli veya şema sorunlarını ve önerilerini raporlamak için GitHub [ApplicationInsights-Home](https://github.com/Microsoft/ApplicationInsights-Home/issues) Repository kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Özel telemetri yazma](../../azure-monitor/app/api-custom-events-metrics.md)
-- Bilgi edinmek için nasıl [genişletmek ve telemetri filtreleme](../../azure-monitor/app/api-filtering-sampling.md).
-- Kullanım [örnekleme](../../azure-monitor/app/sampling.md) telemetri veri modelini temel alan miktarını en aza indirmek için.
-- Kullanıma [platformları](../../azure-monitor/app/platforms.md) Application Insights tarafından desteklenir.
+- [Telemetrinin nasıl genişletileceğini ve filtreleneceğini](../../azure-monitor/app/api-filtering-sampling.md)öğrenin.
+- Veri modeli tabanlı telemetri miktarını en aza indirmek için [örnekleme](../../azure-monitor/app/sampling.md) kullanın.
+- Application Insights tarafından desteklenen [platformları](../../azure-monitor/app/platforms.md) inceleyin.

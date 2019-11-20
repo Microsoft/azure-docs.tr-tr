@@ -1,271 +1,281 @@
 ---
-title: Depolama Gezgini ile çalışmaya başlama | Microsoft Docs
+title: Depolama Gezgini kullanmaya başlayın | Microsoft Docs
 description: Depolama Gezgini ile Azure depolama kaynaklarını yönetme
 services: storage
 author: cawaMS
 ms.service: storage
 ms.devlang: multiple
 ms.topic: article
-ms.date: 04/22/2019
+ms.date: 11/08/2019
 ms.author: cawa
-ms.openlocfilehash: f7dd6d3d30f34ba2c69b40111bb28d484ce572e7
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: 7886d5a1ad0745550767b7d6f19592ca3c84b00a
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508745"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73891189"
 ---
 # <a name="get-started-with-storage-explorer"></a>Depolama Gezgini ile çalışmaya başlama
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure Depolama Gezgini Windows, macOS ve Linux'ta Azure depolama verileriyle kolayca çalışmanızı sağlayan bir tek başına uygulamadır. Bu makalede, bağlama ve Azure depolama hesaplarınızı yönetme çeşitli yollarını öğrenin.
+Microsoft Azure Depolama Gezgini, Windows, macOS ve Linux 'ta Azure Depolama verileriyle çalışmayı kolaylaştıran tek başına bir uygulamadır. Bu makalede, Azure depolama hesaplarınızı bağlamak ve yönetmek için kullanabileceğiniz çeşitli yollar öğreneceksiniz.
 
 ![Microsoft Azure Depolama Gezgini][0]
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="windowstabwindows"></a>[Windows](#tab/windows)
 
-Azure Depolama Gezgini, aşağıdaki Windows sürümlerinde desteklenir:
+Aşağıdaki Windows destek sürümleri Depolama Gezgini:
 
 * Windows 10 (önerilir)
 * Windows 8
 * Windows 7
 
-Windows, .NET Framework 4.6.2 tüm sürümleri için veya daha yükseği gerekli.
-
-[Depolama Gezgini’ni indirip yükleme](https://www.storageexplorer.com)
+Tüm Windows sürümleri için Depolama Gezgini .NET Framework 4.6.2 veya üzeri bir sürüm gerektirir.
 
 # <a name="macostabmacos"></a>[macOS](#tab/macos)
 
-Azure Depolama Gezgini, macOS üzerinde aşağıdaki sürümleri desteklenir:
+MacOS desteğinin aşağıdaki sürümleri Depolama Gezgini:
 
-* macOS 10.12 "Sierra" ve sonraki sürümler
-
-[Depolama Gezgini’ni indirip yükleme](https://www.storageexplorer.com)
+* macOS 10,12 Sierra ve sonraki sürümleri
 
 # <a name="linuxtablinux"></a>[Linux](#tab/linux)
 
-Azure Depolama Gezgini, Linux üzerinde aşağıdaki dağıtımlar desteklenir:
+Depolama Gezgini, Linux 'un en yaygın dağıtımları için [ek mağazada](https://snapcraft.io/storage-explorer) kullanılabilir. Bu yükleme için ek depolama önerilir. Depolama Gezgini Snap, yeni sürümler Snap Store 'da yayımlandığında tüm bağımlılıklarını ve güncelleştirmelerini yüklüyor.
 
-* Ubuntu 18.04 x64
-* Ubuntu 16.04 x64
-* Ubuntu 14.04 x64
+Desteklenen dağıtımlar için bkz. [anlık görüntü yükleme sayfası](https://snapcraft.io/docs/installing-snapd).
 
-Azure Depolama Gezgini diğer dağıtımlarında çalışabilir fakat yalnızca bunlardır yukarıda listelenen resmi olarak desteklenir.
+Depolama Gezgini, parola Yöneticisi 'nin kullanılmasını gerektirir. Parola yöneticisine el ile bağlanmanız gerekebilir. Aşağıdaki komutu çalıştırarak, Depolama Gezgini sisteminizin parola yöneticisine bağlayabilirsiniz:
 
-Depolama Gezgini'ni yükleme Linux üzerinde daha fazla yardım için bkz. [sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting#linux-dependencies).
+```bash
+snap connect storage-explorer:password-manager-service :password-manager-service
+```
 
-Azure Depolama Gezgini [sürüm notları](https://go.microsoft.com/fwlink/?LinkId=838275&clcid=0x409) bazı dağıtımlar için belirli adımları içerir.
+Depolama Gezgini *. tar. gz* Download olarak da kullanılabilir. Bağımlılıkları el ile yüklemelisiniz. Linux support *. tar. gz* yüklemesi için aşağıdaki dağıtımlar:
 
-[Depolama Gezgini’ni indirip yükleme](https://www.storageexplorer.com)
+* Ubuntu 18,04 x64
+* Ubuntu 16,04 x64
+* Ubuntu 14,04 x64
+
+*. Tar. gz* yüklemesi diğer dağıtımlar üzerinde çalışabilir, ancak yalnızca bu listelenmiş olanlar resmi olarak desteklenmektedir.
+
+Linux üzerinde Depolama Gezgini yükleme hakkında daha fazla yardım için, Azure Depolama Gezgini sorun giderme kılavuzunda [Linux bağımlılıkları](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting#linux-dependencies) bölümüne bakın.
 
 ---
+
+## <a name="download-and-install"></a>İndir ve yükle
+
+Depolama Gezgini indirmek ve yüklemek için bkz. [Azure Depolama Gezgini](https://www.storageexplorer.com).
 
 ## <a name="connect-to-a-storage-account-or-service"></a>Bir depolama hesabı veya hizmetine bağlanmak
 
 Depolama Gezgini depolama hesaplarına bağlamak için birçok yol sağlar. Genel olarak şunlardan birini yapabilirsiniz:
 
-* [Aboneliklerinizi ve kaynaklarına erişmek için Azure'da oturum açın](#sign-in-to-azure)
-* [Belirli bir depolama veya CosmosDB kaynak ekleme](#attach-a-specific-resource)
+* [Aboneliklerinize ve kaynaklarına erişmek için Azure 'da oturum açın](#sign-in-to-azure)
+* [Belirli bir depolama alanı veya CosmosDB kaynağı iliştirme](#attach-a-specific-resource)
 
 ### <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
 > [!NOTE]
-> Tam olarak oturum açtıktan sonra kaynaklara erişmek için Depolama Gezgini'ni hem Yönetim (ARM) hem de veri katmanı izinleri gerektirir. Başka bir deyişle, erişim veren hesabındaki kapsayıcıları ve kapsayıcılar içindeki verileri depolama hesabınız, Azure AD izinleri gerekir. Veri katmanında yalnızca izinlere sahipseniz kullanmayı [Azure AD ile iliştirme](#add-a-resource-via-azure-ad). Depolama Gezgini'nin gerekir tam izinleri hakkında daha fazla bilgi için bkz. [sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting?tabs=1804#role-based-access-control-permission-issues).
->
->
+> Oturum açtıktan sonra kaynakları tam olarak erişmek için Depolama Gezgini hem yönetim (Azure Resource Manager) hem de veri katmanı izinleri gerektirir. Bu, depolama hesabınıza, hesaptaki kapsayıcılara ve kapsayıcılardaki verilere erişmenizi sağlayan Azure Active Directory (Azure AD) izinlerinin olması gerektiği anlamına gelir. Yalnızca veri katmanında izinleriniz varsa, [Azure AD aracılığıyla bir kaynak eklemeyi](#add-a-resource-via-azure-ad)düşünün. Depolama Gezgini gerekli olan belirli izinler hakkında daha fazla bilgi için, bkz. [Azure Depolama Gezgini sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting#rbac-permissions-issues).
 
-1. Depolama Gezgini'nde seçin **hesaplarını yönetme** gitmek için **hesabı yönetim panelinde**.
+1. Depolama Gezgini ' de, > **Hesap yönetimini** **görüntüle** ' yi seçin veya **hesapları Yönet** düğmesini seçin.
 
     ![Hesapları yönetme][1]
 
-2. Sol bölmede, artık için açtığınız tüm Azure hesaplarınıza görüntüler. Başka bir hesaba bağlanmak için **Hesap Ekle**
+1. **Hesap yönetimi** artık oturum açtığınız tüm Azure hesaplarını görüntülüyor. Başka bir hesaba bağlanmak için **Hesap Ekle**' yi seçin.
 
-3. Ulusal bulut ya da bir Azure Stack oturum açmak istiyorsanız, tıklayarak **Azure ortamı** kullanmak istediğiniz hangi Azure bulut seçmek için açılır. Ortamınızı seçtikten sonra tıklayın **oturum açın...**  düğmesi. Azure Stack için imzalama olup [Depolama Gezgini'ni Azure Stack aboneliğine bağlanma](/azure-stack/user/azure-stack-storage-connect-se) daha fazla bilgi için.
+1. **Azure depolama 'Ya Bağlan**bölümünde, ulusal bir bulutta veya bir Azure Stack oturum açmak için Azure **ortamından** bir Azure bulutu seçin. Ortamınızı seçtikten sonra **İleri**' yi seçin.
 
-    ![Seçeneğinde oturum][2]
+    ![Oturum açma seçeneği][2]
 
-4. Bir Azure hesabıyla oturum başarıyla oturum sonra hesabı ve bu hesapla ilişkili Azure abonelikleriyle sol bölmeye eklenir. Çalışmak ve sonra istediğiniz Azure aboneliklerini seçin **Uygula** (seçme **abonelikler:** veya listelenen Azure aboneliklerinin hiçbirinin seçilmemesini).
+    Depolama Gezgini, oturum açmak için bir sayfa açar. Daha fazla bilgi için bkz. [depolama Gezginini bir Azure Stack aboneliğine veya depolama hesabına bağlama](/azure-stack/user/azure-stack-storage-connect-se).
+
+1. Azure hesabıyla başarıyla oturum açtıktan sonra hesap **yönetimi**altında bu hesapla ilişkili hesap ve Azure abonelikleri görüntülenir. Seçiminize tüm Azure aboneliklerinden hiçbiri arasında geçiş yapmak için **tüm abonelikler** ' i seçin. Birlikte çalışmak istediğiniz Azure aboneliklerini seçin ve ardından **Uygula**’yı seçin.
 
     ![Azure aboneliklerini seçme][3]
 
-    Sol bölmede seçili Azure abonelikleriyle ilişkili depolama hesapları gösterilir.
+    **Gezgin** seçili Azure abonelikleriyle ilişkili depolama hesaplarını görüntüler.
 
     ![Seçili Azure abonelikleri][4]
 
-### <a name="attach-a-specific-resource"></a>Belirli bir kaynak ekleyin
-    
-Çeşitli kaynak eklemek için Depolama Gezgini'ni seçenekleri vardır. Şunları yapabilirsiniz:
+### <a name="attach-a-specific-resource"></a>Belirli bir kaynağı iliştirme
 
-* [Azure AD ile bir kaynak ekleyin](#add-a-resource-via-azure-ad): Veri katmanında yalnızca izinlerine sahipseniz, bir Blob kapsayıcısı veya bir ADLS Gen2 Blob kapsayıcısı eklemek için bu seçeneği kullanabilirsiniz.
-* [Bir bağlantı dizesi kullanın](#use-a-connection-string): Bir depolama hesabı bağlantı dizesi varsa. Depolama Gezgini, her iki anahtarı destekler ve [SAS](storage/common/storage-dotnet-shared-access-signature-part-1.md) bağlantı dizeleri.
-* [SAS URI'si kullanma](#use-a-sas-uri): Varsa bir [SAS](storage/common/storage-dotnet-shared-access-signature-part-1.md) bir Blob kapsayıcısını, dosya paylaşımı, kuyruk veya tablo için URI. SAS URI'si almak için kullanabilir [Depolama Gezgini](#generate-a-sas-in-storage-explorer) veya [Azure portalında](https://portal.azure.com).
-* [Adı ve anahtarı kullan](#use-a-name-and-key): Ya da hesabı anahtarları, depolama hesabınıza biliyorsanız, hızlı bir şekilde bağlanmak için bu seçeneği kullanabilirsiniz. Depolama hesabınız için anahtarları depolama hesabında bulunan **erişim anahtarları** dikey penceresine [Azure portalında](https://portal.azure.com).
-* [Ekleme için yerel bir öykünücü](#attach-to-a-local-emulator): Kullanılabilir Azure depolama öykünücüsünü birini kullanıyorsanız, öykünücüsüne kolayca bağlanmak için bu seçeneği kullanın.
-* [Bir bağlantı dizesi kullanarak bir Azure Cosmos DB hesabına bağlanma](#connect-to-an-azure-cosmos-db-account-by-using-a-connection-string): CosmosDB örneğine bir bağlantı dizesi varsa.
-* [Azure Data Lake Store URI tarafından bağlanma](#connect-to-azure-data-lake-store-by-uri): Bir Azure Data Lake Store için bir URI varsa.
+Depolama Gezgini bir kaynağa eklemenin birkaç yolu vardır:
 
-#### <a name="add-a-resource-via-azure-ad"></a>Azure AD ile bir kaynak ekleyin
+* [Azure AD aracılığıyla bir kaynak ekleyin](#add-a-resource-via-azure-ad). Yalnızca veri katmanında izinleriniz varsa, bir blob kapsayıcısı veya Azure Data Lake Storage 2. blob depolama kapsayıcısı eklemek için bu seçeneği kullanın.
+* [Bir bağlantı dizesi kullanın](#use-a-connection-string). Depolama hesabına yönelik bir bağlantı dizeniz varsa bu seçeneği kullanın. Depolama Gezgini hem anahtar hem de [paylaşılan erişim imzası](storage/common/storage-dotnet-shared-access-signature-part-1.md) bağlantı dizelerini destekler.
+* [Paylaşılan erişim imzası URI 'Si kullanın](#use-a-shared-access-signature-uri). Blob kapsayıcısına, dosya paylaşımında, kuyrukta veya tabloda [paylaşılan erişim imzası URI 'si](storage/common/storage-dotnet-shared-access-signature-part-1.md) varsa, kaynağa eklemek için onu kullanın. Paylaşılan erişim imzası URI 'SI almak için [Depolama Gezgini](#generate-a-sas-in-storage-explorer) ya da [Azure Portal](https://portal.azure.com)kullanabilirsiniz.
+* [Bir ad ve anahtar kullanın](#use-a-name-and-key). Depolama hesabınızda hesap anahtarlarından birini biliyorsanız, bu seçeneği kullanarak hızlı bir şekilde bağlantı oluşturabilirsiniz. [Azure portal](https://portal.azure.com) > **erişim anahtarları** ' nı seçerek depolama hesabı sayfasında anahtarlarınızı bulun.
+* [Yerel bir öykünücüye ekleyin](#attach-to-a-local-emulator). Kullanılabilir Azure Storage öykünücülerinden birini kullanıyorsanız, öykünücüye kolayca bağlanmak için bu seçeneği kullanın.
+* [Bir bağlantı dizesi kullanarak bir Azure Cosmos DB hesabına bağlanın](#connect-to-an-azure-cosmos-db-account-by-using-a-connection-string). CosmosDB örneğine bir bağlantı dizeniz varsa bu seçeneği kullanın.
+* [URI 'ye göre Azure Data Lake Store bağlanın](#connect-to-azure-data-lake-store-by-uri). Azure Data Lake Store URI 'SI varsa bu seçeneği kullanın.
 
-1. Açık **Bağlan iletişim** tıklayarak **bağlanma düğmesi** sol taraftaki dikey araç çubuğu.
+#### <a name="add-a-resource-via-azure-ad"></a>Azure AD aracılığıyla kaynak ekleme
 
-    ![Azure Storage’a bağlanma seçeneği][9]
-
-2. Zaten yapmadıysanız kullanırsanız **Azure hesabı Ekle** seçeneği kaynağına erişimi olan bir Azure hesabı için oturum açın. İade için oturum açtıktan sonra **Bağlan iletişim**.
-
-3. Seçin **Azure Active Directory (Azure AD) aracılığıyla bir kaynak ekleyin** seçeneğini ve tıklayın **sonraki**.
-
-4. İliştirmek istediğiniz depolama kaynağı ve kaynak abonelik erişimi olan bir Azure hesabı seçin ve ardından **sonraki**.
-
-5. Eklemek istediğiniz kaynak türünü seçin ve ardından bağlanmak için gereken bilgileri girin. Bu sayfadaki girişleri eklemekte olduğunuz kaynak türüne bağlı olarak değişir. Doğru kaynak türünü seçtiğinizden emin olun. Gerekli bilgileri tıklatın doldurduktan sonra **sonraki**.
-
-6. Bağlantı özeti gözden geçirin ve tüm bilgilerin doğru olduğundan emin olun. Tüm bilgiler doğru görünüyorsa ardından **Bağlan**, aksi takdirde önceki sayfalar geri dönüp **geri** yanlış herhangi bir bilgiyi düzeltmek için düğme.
-
-Bağlantı başarıyla eklendikten sonra kaynak ağaç otomatik olarak bağlantıyı temsil eden düğümüne gidin. Herhangi bir nedenden dolayı altında görünüyor varsa **yerel ve ekli** → **depolama hesapları** → **(kapsayıcılar bağlı)** → **Blob kapsayıcıları** . Depolama Gezgini bağlantınızı ekleyemedi veya bağlantı başarıyla eklendikten sonra veri erişim sonra başvurun olamaz [sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting) Yardım.
-
-#### <a name="use-a-connection-string"></a>Bağlantı dizesini kullanın
-
-1. Açık **Bağlan iletişim** tıklayarak **bağlanma düğmesi** sol taraftaki dikey araç çubuğu.
+1. **Azure depolama 'Ya Bağlan**' ı açmak için **Bağlan** simgesini seçin.
 
     ![Azure Storage’a bağlanma seçeneği][9]
 
-2. Seçin **bağlantı dizesini kullanmak** seçeneğini ve tıklayın **sonraki**.
+1. Daha önce yapmadıysanız, kaynağa erişimi olan Azure hesabı 'nda oturum açmak için **Azure hesabı ekle** seçeneğini kullanın. Oturum açtıktan sonra **Azure depolama 'Ya Bağlan**' a geri dönün.
 
-3. Bağlantınız için bir görünen ad seçin ve bağlantı dizenizi girin. Ardından **İleri**'ye tıklayın.
+1. **Azure Active Directory (Azure AD) aracılığıyla Kaynak Ekle**' yi seçin ve ardından **İleri**' yi seçin.
 
-4. Bağlantı özeti gözden geçirin ve tüm bilgilerin doğru olduğundan emin olun. Tüm bilgiler doğru görünüyorsa ardından **Bağlan**, aksi takdirde önceki sayfalar geri dönüp **geri** yanlış herhangi bir bilgiyi düzeltmek için düğme.
+1. Bir Azure hesabı ve kiracı seçin. Bu değerler, iliştirmek istediğiniz depolama kaynağına erişebilmelidir. **İleri**’yi seçin.
 
-Bağlantı başarıyla eklendikten sonra kaynak ağaç otomatik olarak bağlantıyı temsil eden düğümüne gidin. Herhangi bir nedenden dolayı altında görünüyor varsa **yerel ve ekli** → **depolama hesapları**. Depolama Gezgini bağlantınızı ekleyemedi veya bağlantı başarıyla eklendikten sonra veri erişim sonra başvurun olamaz [sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting) Yardım.
+1. Eklemek istediğiniz kaynak türünü seçin. Bağlanmak için gereken bilgileri girin. 
 
-#### <a name="use-a-sas-uri"></a>SAS URI'si kullanma
+   Bu sayfaya girdiğiniz bilgiler, eklediğiniz kaynak türüne bağlıdır. Doğru kaynak türünü seçtiğinizden emin olun. Gerekli bilgileri girdikten sonra **İleri**' yi seçin.
 
-1. Açık **Bağlan iletişim** tıklayarak **bağlanma düğmesi** sol taraftaki dikey araç çubuğu.
+1. Tüm bilgilerin doğru olduğundan emin olmak için **bağlantı özetini** gözden geçirin. Varsa, **Bağlan**' ı seçin. Aksi takdirde, yanlış bilgileri onarmak için önceki sayfalara geri dönmek üzere **geri** ' yi seçin.
 
-    ![Azure Storage’a bağlanma seçeneği][9]
+Bağlantı başarıyla eklendikten sonra kaynak ağacı bağlantıyı temsil eden düğüme gider. Kaynak, **yerel & eklenmiş** > **depolama hesapları** >  **(ekli kapsayıcılar)**  > **BLOB kapsayıcıları**altında görüntülenir. Depolama Gezgini bağlantınızı ekleyemedik veya bağlantıyı başarıyla ekledikten sonra verilerinize erişemiyorsanız, bkz. [Azure Depolama Gezgini sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting).
 
-2. Seçin **paylaşılan erişim imzası (SAS) URI kullanma** seçeneğini ve tıklayın **sonraki**.
+#### <a name="use-a-connection-string"></a>Bağlantı dizesi kullan
 
-3. Bağlantınız için bir görünen ad seçin ve içinde SAS URI'sini girin. Otomatik doldurma iliştirmekte olduğunuz kaynak türü için hizmet uç noktası olmalıdır. Özel bir uç noktasını kullanıyorsanız, ardından bunu yapamazsınız mümkündür. **İleri**’ye tıklayın.
-
-4. Bağlantı özeti gözden geçirin ve tüm bilgilerin doğru olduğundan emin olun. Tüm bilgiler doğru görünüyorsa ardından **Bağlan**, aksi takdirde önceki sayfalar geri dönüp **geri** yanlış herhangi bir bilgiyi düzeltmek için düğme.
-
-Bağlantı başarıyla eklendikten sonra kaynak ağaç otomatik olarak bağlantıyı temsil eden düğümüne gidin. Herhangi bir nedenden dolayı altında görünüyor varsa **yerel ve ekli** → **depolama hesapları** → **(kapsayıcılar bağlı)** → **türü için hizmet düğümü kapsayıcı bağlı**. Depolama Gezgini bağlantınızı ekleyemedi veya bağlantı başarıyla eklendikten sonra veri erişim sonra başvurun olamaz [sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting) Yardım.
-
-#### <a name="use-a-name-and-key"></a>Adı ve anahtarı kullan
-
-1. Açık **Bağlan iletişim** tıklayarak **bağlanma düğmesi** sol taraftaki dikey araç çubuğu.
+1. **Azure depolama 'Ya Bağlan**' ı açmak için **Bağlan** simgesini seçin.
 
     ![Azure Storage’a bağlanma seçeneği][9]
 
-2. Seçin **bir depolama hesabı adı ve anahtarı kullan** seçeneğini ve tıklayın **sonraki**.
+1. **Bir bağlantı dizesi kullan**' ı seçin ve ardından **İleri**' yi seçin.
 
-3. Bağlantınız için bir görünen ad seçin.
+1. Bağlantınız için bir görünen ad seçin ve Bağlantı dizenizi girin. Sonra **İleri**’yi seçin.
 
-4. Depolama hesabınızın adını ve erişim anahtarlarını alıp birini girin.
+1. Tüm bilgilerin doğru olduğundan emin olmak için **bağlantı özetini** gözden geçirin. Varsa, **Bağlan**' ı seçin. Aksi takdirde, yanlış bilgileri onarmak için önceki sayfalara geri dönmek üzere **geri** ' yi seçin.
 
-5. Seçin **depolama etki alanı** kullanın ve ardından **sonraki**.
+Bağlantı başarıyla eklendikten sonra kaynak ağacı bağlantıyı temsil eden düğüme gider. Kaynak, **yerel & ekli** > **depolama hesapları**altında görünür. Depolama Gezgini bağlantınızı ekleyemedik veya bağlantıyı başarıyla ekledikten sonra verilerinize erişemiyorsanız, bkz. [Azure Depolama Gezgini sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting).
 
-4. Bağlantı özeti gözden geçirin ve tüm bilgilerin doğru olduğundan emin olun. Tüm bilgiler doğru görünüyorsa ardından **Bağlan**, aksi takdirde önceki sayfalar geri dönüp **geri** yanlış herhangi bir bilgiyi düzeltmek için düğme.
+#### <a name="use-a-shared-access-signature-uri"></a>Paylaşılan erişim imzası URI 'SI kullan
 
-Bağlantı başarıyla eklendikten sonra kaynak ağaç otomatik olarak bağlantıyı temsil eden düğümüne gidin. Herhangi bir nedenden dolayı altında görünüyor varsa **yerel ve ekli** → **depolama hesapları**. Depolama Gezgini bağlantınızı ekleyemedi veya bağlantı başarıyla eklendikten sonra veri erişim sonra başvurun olamaz [sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting) Yardım.
+1. **Azure depolama 'Ya Bağlan**' ı açmak için **Bağlan** simgesini seçin.
 
-#### <a name="attach-to-a-local-emulator"></a>Yerel bir öykünücü için ekleme
+    ![Azure Storage’a bağlanma seçeneği][9]
 
-Depolama Gezgini, tüm platformlarda öykünücüleri destekler. İki şu anda kullanılabilir resmi öykünücüleri şunlardır:
+1. **Paylaşılan erişim imzası (SAS) URI 'Si kullan**' ı seçin ve ardından **İleri**' yi seçin.
+
+1. Bağlantınız için bir görünen ad seçin ve paylaşılan erişim imza URI 'nizi girin. İliştirmekte olduğunuz kaynak türü için hizmet uç noktası otomatik olarak doldurulur. Özel bir uç nokta kullanıyorsanız, bu mümkün olmayabilir. **İleri**’yi seçin.
+
+1. Tüm bilgilerin doğru olduğundan emin olmak için **bağlantı özetini** gözden geçirin. Varsa, **Bağlan**' ı seçin. Aksi takdirde, yanlış bilgileri onarmak için önceki sayfalara geri dönmek üzere **geri** ' yi seçin.
+
+Bağlantı başarıyla eklendikten sonra kaynak ağacı bağlantıyı temsil eden düğüme gider. Kaynak, *eklenen kapsayıcı türü için hizmet düğümü > ,* **yerel & eklenmiş** > **depolama hesapları** >  **(ekli kapsayıcılar)** altında görüntülenir. Depolama Gezgini bağlantınızı ekleyemedik, bkz. [Azure Depolama Gezgini sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting). Bağlantıyı başarıyla ekledikten sonra verilerinize erişemiyorsanız sorun giderme kılavuzuna bakın.
+
+#### <a name="use-a-name-and-key"></a>Ad ve anahtar kullan
+
+1. **Azure depolama 'Ya Bağlan**' ı açmak için **Bağlan** simgesini seçin.
+
+    ![Azure Storage’a bağlanma seçeneği][9]
+
+1. **Depolama hesabı adı ve anahtarı kullan**' ı seçin ve ardından **İleri**' yi seçin.
+
+1. Bağlantınız için bir görünen ad seçin.
+
+1. Depolama hesabı adınızı ve erişim anahtarlarından birini girin.
+
+1. Kullanılacak **depolama alanını** seçin ve ardından **İleri**' yi seçin.
+
+1. Tüm bilgilerin doğru olduğundan emin olmak için **bağlantı özetini** gözden geçirin. Varsa, **Bağlan**' ı seçin. Aksi takdirde, yanlış bilgileri onarmak için önceki sayfalara geri dönmek üzere **geri** ' yi seçin.
+
+Bağlantı başarıyla eklendikten sonra kaynak ağacı bağlantıyı temsil eden düğüme gider. Kaynak, **yerel & ekli** > **depolama hesapları**altında görünür. Depolama Gezgini bağlantınızı ekleyemedik veya bağlantıyı başarıyla ekledikten sonra verilerinize erişemiyorsanız, bkz. [Azure Depolama Gezgini sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting).
+
+#### <a name="attach-to-a-local-emulator"></a>Yerel öykünücüye iliştirme
+
+Depolama Gezgini Şu anda iki adet resmi depolama öykünücüsünü desteklemektedir:
+
 * [Azure depolama öykünücüsü](storage/common/storage-use-emulator.md) (yalnızca Windows)
-* [Azurite](https://github.com/azure/azurite) (Windows, macOS veya Linux)
+* [Azurite](https://github.com/azure/azurite) (Windows, MacOS veya Linux)
 
-Varsayılan bağlantı noktalarını, öykünücünün çalıştığından, kullanabileceğiniz **öykünücüsü - varsayılan bağlantı noktalarını** her zaman altında bulunan düğüm **yerel ve ekli** → **depolama hesapları** , uygulamanızı öykünücü hızlıca erişmek için. Bağlantınız için farklı bir ad kullanın veya sizin öykünücü varsayılan bağlantı noktaları üzerinde çalışmıyor eğer istiyorsanız aşağıdaki adımları.
+Öykünücü, varsayılan bağlantı noktalarını dinliyorsa, öykünücüe erişmek için **öykünücü-varsayılan bağlantı noktaları** düğümünü kullanabilirsiniz. **Yerel & bağlı** > **depolama hesapları**altında **öykünücü-varsayılan bağlantı noktalarını** arayın.
 
-1. Öykünücüyü başlatın. Hangi bağlantı noktalarını not edin zaman öykünücü üzerinde her hizmet türü için dinliyor. Bu bilgiler daha sonra bilmeniz gerekir.
+Bağlantınız için farklı bir ad kullanmak istiyorsanız veya öykünücü varsayılan bağlantı noktalarında çalışmıyorsa, şu adımları izleyin:
+
+1. Öykünücüyü başlatın. Her hizmet türü için bağlantı noktalarını göstermek üzere komut `AzureStorageEmulator.exe status` girin.
 
    > [!IMPORTANT]
-   > Depolama Gezgini, öykünücüsü otomatik olarak başlamaz. Kendiniz başlatmanız gerekir.
+   > Depolama Gezgini öykünücüyü otomatik olarak başlatmıyor. El ile başlatmanız gerekir.
 
-2. Açık **Bağlan iletişim** tıklayarak **bağlanma düğmesi** sol taraftaki dikey araç çubuğu.
+1. **Azure depolama 'Ya Bağlan**' ı açmak için **Bağlan** simgesini seçin.
 
     ![Azure Storage’a bağlanma seçeneği][9]
 
-3. Seçin **eklemek için yerel bir öykünücü** seçeneğini ve tıklayın **sonraki**.
+1. **Yerel bir öykünücüye Ekle**' yi seçin ve ardından **İleri**' yi seçin.
 
-4. Bağlantınız için bir görünen ad seçin ve her hizmet türü için bir öykünücü dinlediği bağlantı noktalarını girin. Varsayılan olarak, metin kutuları çoğu öykünücüleri için varsayılan bağlantı noktası değerlerini içerir. **Dosyaları bağlantı noktası** resmi öykünücüleri hiçbiri şu anda dosyaları hizmet desteği de varsayılan olarak boş bırakılır. Ardından kullanmakta olduğunuz öykünücüyü desteklemesini rağmen, kullanılmakta olan bağlantı noktası girin. **İleri**’ye tıklayın.
+1. Bağlantınız için bir görünen ad seçin ve her bir hizmet türü için öykünücünüzün dinlediği bağlantı noktalarını girin. **Yerel bir öykünücüye iliştirme** , çoğu öykünücüye yönelik varsayılan bağlantı noktası değerlerini önerir. **Dosya bağlantı noktası** , resmi öykünücülerinden hiçbiri şu anda dosyalar hizmetini desteklemediğinden boş. Kullanmakta olduğunuz öykünücü dosyaları destekliyorsa, kullanılacak bağlantı noktasını girebilirsiniz. Sonra **İleri**’yi seçin.
 
-5. Bağlantı özeti gözden geçirin ve tüm bilgilerin doğru olduğundan emin olun. Tüm bilgiler doğru görünüyorsa ardından **Bağlan**, aksi takdirde önceki sayfalar geri dönüp **geri** yanlış herhangi bir bilgiyi düzeltmek için düğme.
+1. **Bağlantı özetini** gözden geçirin ve tüm bilgilerin doğru olduğundan emin olun. Varsa, **Bağlan**' ı seçin. Aksi takdirde, yanlış bilgileri onarmak için önceki sayfalara geri dönmek üzere **geri** ' yi seçin.
 
-Bağlantı başarıyla eklendikten sonra kaynak ağaç otomatik olarak bağlantıyı temsil eden düğümüne gidin. Herhangi bir nedenden dolayı altında görünüyor varsa **yerel ve ekli** → **depolama hesapları**. Depolama Gezgini bağlantınızı ekleyemedi veya bağlantı başarıyla eklendikten sonra veri erişim sonra başvurun olamaz [sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting) Yardım.
+Bağlantı başarıyla eklendikten sonra kaynak ağacı bağlantıyı temsil eden düğüme gider. Düğüm, **yerel & eklenmiş** > **depolama hesapları**altında görünmelidir. Depolama Gezgini bağlantınızı ekleyemedik veya bağlantıyı başarıyla ekledikten sonra verilerinize erişemiyorsanız, bkz. [Azure Depolama Gezgini sorun giderme kılavuzu](https://docs.microsoft.com/azure/storage/common/storage-explorer-troubleshooting).
 
-#### <a name="connect-to-an-azure-cosmos-db-account-by-using-a-connection-string"></a>Bir bağlantı dizesi kullanarak bir Azure Cosmos DB hesabına bağlanma
+#### <a name="connect-to-an-azure-cosmos-db-account-by-using-a-connection-string"></a>Bağlantı dizesi kullanarak bir Azure Cosmos DB hesabına bağlanma
 
-Seçeneklerinin yanı sıra Azure aboneliği aracılığıyla Azure Cosmos DB hesaplarını yönetebilir, bir Azure Cosmos DB'ye bağlanmanın alternatif bir yolu, bir bağlantı dizesi kullanmaktır. Bağlantı dizesi kullanarak bağlanmak için aşağıdaki adımları kullanın.
+Bir Azure aboneliği aracılığıyla Azure Cosmos DB hesaplarını yönetmek yerine, bir bağlantı dizesi kullanarak Azure Cosmos DB bağlanabilirsiniz. Bağlanmak için şu adımları izleyin:
 
-1. Soldaki ağaçtan **Yerel ve Bağlı**’yı bulun ve **Azure Cosmos DB Hesapları**’na sağ tıklayıp **Azure Cosmos DB’ye bağlan...** seçeneğini belirleyin.
+1. **Gezgin**altında, **eklenen yerel &** ' i genişletin, **Cosmos DB hesaplar**' a sağ tıklayın ve Azure Cosmos DB ' **ye Bağlan**' ı seçin
 
-    ![bağlantı dizesiyle Azure Cosmos DB'ye bağlanma][21]
+    ![Bağlantı dizesiyle Azure Cosmos DB’ye bağlanma][21]
 
-2. Azure Cosmos DB API seçin, yapıştırma, **bağlantı dizesi**ve ardından **Tamam** Azure Cosmos DB hesabına bağlanın. Bağlantı dizesini alma hakkında daha fazla bilgi için bkz. [Bağlantı dizelerini edinme](https://docs.microsoft.com/azure/cosmos-db/manage-account).
+1. Azure Cosmos DB API 'sini seçin, **bağlantı dizesi** verilerinizi girin ve sonra Azure Cosmos DB hesabını bağlamak için **Tamam** ' ı seçin. Bağlantı dizesini alma hakkında daha fazla bilgi için bkz. [Azure Cosmos hesabını yönetme](https://docs.microsoft.com/azure/cosmos-db/manage-account).
 
-    ![bağlantı dizesi][22]
+    ![Bağlantı dizesi][22]
 
-#### <a name="connect-to-azure-data-lake-store-by-uri"></a>Azure Data Lake Store URI ile bağlanma
+#### <a name="connect-to-azure-data-lake-store-by-uri"></a>URI 'ye göre Azure Data Lake Store bağlanma
 
-Aboneliğinizde olmayan kaynaklara erişmek istiyorsanız. Ancak diğer kullanıcılar kaynaklar için URI’yi alma izni veriyorsa. Bu durumda, oturum açtıktan sonra URI’yi kullanarak Data Lake Store’a bağlanabilirsiniz. Aşağıdaki adımlara bakın.
+Aboneliğinizde olmayan bir kaynağa erişebilirsiniz. Size Kaynak URI 'sini sağlamak için bu kaynağa erişimi olan bir kişi olması gerekir. Oturum açtıktan sonra, URI 'yi kullanarak Data Lake Store bağlanın. Bağlanmak için şu adımları izleyin:
 
-1. Depolama Gezgini'ni açın.
-2. Sol bölmede, **Yerel ve Ekli** öğesini genişletin.
-3. **Data Lake Store**’a sağ tıklayıp bağlam menüsünden **Data Lake Store’a bağlan...** seçeneğine tıklayın.
+1. **Gezgin**altında, **Yerel & ekli**' ı genişletin.
 
-    ![Data Lake Store’a bağlanma bağlam menüsü](./media/vs-azure-tools-storage-manage-with-storage-explorer/storageexplorer-adls-uri-attach.png)
+1. **Data Lake Storage 1.** öğesine sağ tıklayın ve **Data Lake Storage 1. Bağlan**' ı seçin.
 
-4. Siz URI’yi girdikten sonra araç girdiğiniz URL’nin konumuna gider.
+    ![Data Lake Store bağlam menüsüne Bağlan](./media/vs-azure-tools-storage-manage-with-storage-explorer/storage-explorer-connect-data-lake-storage.png)
 
-    ![Data Lake Store’a bağlanma bağlam iletişimi](./media/vs-azure-tools-storage-manage-with-storage-explorer/storageexplorer-adls-uri-attach-dialog.png)
+1. URI 'yi girip **Tamam**' ı seçin. Data Lake Store **Data Lake Storage**altında görünür.
 
-    ![Data Lake Store’a bağlanma sonucu](./media/vs-azure-tools-storage-manage-with-storage-explorer/storageexplorer-adls-attach-finish.png)
+    ![Data Lake Store sonuca Bağlan](./media/vs-azure-tools-storage-manage-with-storage-explorer/storage-explorer-attach-data-lake-finished.png)
 
+Bu örnek Data Lake Storage 1. kullanır. Azure Data Lake Storage 2. artık kullanılabilir. Daha fazla bilgi için bkz. [Azure Data Lake Storage 1. nedir?](./data-lake-store/data-lake-store-overview.md).
 
-## <a name="generate-a-sas-in-storage-explorer"></a>Depolama Gezgini'nde SAS oluşturma
+## Depolama Gezgini paylaşılan erişim imzası oluşturma<a name="generate-a-sas-in-storage-explorer"></a>
 
-### <a name="account-level-sas"></a>Hesap düzeyi SAS
+### <a name="account-level-shared-access-signature"></a>Hesap düzeyinde paylaşılan erişim imzası
 
-1. Paylaşın ve ardından istediğiniz depolama hesabına sağ tıklayın **paylaşılan erişim imzası Al...** .
+1. Paylaşmak istediğiniz depolama hesabına sağ tıklayın ve ardından **paylaşılan erişim Imzasını al**' ı seçin.
 
-    ![SAS alma içerik menüsü seçeneği][14]
+    ![Paylaşılan erişim imzasını al bağlam menü seçeneği][14]
 
-2. İçinde **paylaşılan erişim imzası oluşturma** iletişim kutusunda, bir zaman dilimi ve hesabınız için istediğiniz ve ardından izinleri belirtin **Oluştur** düğmesi.
+1. **Paylaşılan erişim imzası**' nda, hesap için istediğiniz zaman çerçevesini ve Izinleri belirtip **Oluştur**' u seçin.
 
-    ![SAS alma iletişim kutusu][15]
+    ![Paylaşılan erişim imzası al][15]
 
-3. Her iki kopya artık **bağlantı dizesi** veya ham **sorgu dizesi** panonuza.
+1. **Bağlantı dizesini** veya ham **sorgu dizesini** panonuza kopyalayın.
 
-### <a name="service-level-sas"></a>Hizmet düzeyi SAS
+### <a name="service-level-shared-access-signature"></a>Hizmet düzeyi paylaşılan erişim imzası
 
-[Depolama Gezgini'nde bir blob kapsayıcısı için SAS alma](vs-azure-tools-storage-explorer-blobs.md#get-the-sas-for-a-blob-container)
+Hizmet düzeyinde paylaşılan erişim imzası alabilirsiniz. Daha fazla bilgi için bkz. [bir blob kapsayıcısı IÇIN SAS edinme](vs-azure-tools-storage-explorer-blobs.md#get-the-sas-for-a-blob-container).
 
 ## <a name="search-for-storage-accounts"></a>Depolama hesapları arama
 
-Depolama kaynağı bulmanız gerekiyorsa ve nerede olduğunu bilmiyorsanız, kaynağı aramak için sol bölmenin en üstünde arama kutusunu kullanabilirsiniz.
+Bir depolama kaynağını bulmak için **Gezgin** bölmesinde arama yapabilirsiniz.
 
-Arama kutusuna yazarken sol bölmede o noktaya kadar girdiğiniz arama değeriyle eşleşen tüm kaynakları görüntüler. Örneğin, bir arama **uç noktaları** aşağıdaki ekran görüntüsünde gösterilir:
+Arama kutusuna metin girerken Depolama Gezgini, bu noktaya kadar girdiğiniz arama değeriyle eşleşen tüm kaynakları görüntüler. Bu örnekte, **uç noktaları**için arama gösterilmektedir:
 
 ![Depolama hesabı araması][23]
 
 > [!NOTE]
-> Kullanım **hesabı yönetim panelinde** aramanızın yürütme süresini kısaltmak için aradığınız öğeyi içermeyen tüm abonelikleri seçimini kaldırmak için. Ayrıca bir düğümüne sağ tıklayın ve seçin **gelen burada arama** belirli bir düğümden aramaya başlanacak.
+> Aramanızı hızlandırmak için, aradığınız öğeyi içermeyen aboneliklerin seçimini kaldırmak için **Hesap yönetimi** 'ni kullanın. Ayrıca, bir düğüme sağ tıklayıp belirli bir düğümden aramayı başlatmak için **buradan ara** ' yı seçebilirsiniz.
 >
 >
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Depolama Gezgini ile Azure Blob depolama kaynaklarını yönetme](vs-azure-tools-storage-explorer-blobs.md)
-* [(Önizleme) Azure depolama Gezgini'nde Azure Cosmos DB'yi yönetme](./cosmos-db/storage-explorer.md)
+* [Azure Depolama Gezgini kullanarak verilerle çalışma](./cosmos-db/storage-explorer.md)
 * [Depolama Gezgini ile Azure Data Lake Store kaynaklarını yönetme](./data-lake-store/data-lake-store-in-storage-explorer.md)
 
 [0]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/Overview.png
 [1]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ManageAccounts.png
-[2]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ConnectDialog-SignInSelected.png
-[3]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/AccountPanel.png
+[2]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/connect-to-azure-storage-azure-environment.png
+[3]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/account-panel-subscriptions-apply.png
 [4]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/SubscriptionNode.png
 [5]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ConnectDialog.png
 [7]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/PortalAccessKeys.png
@@ -275,13 +285,13 @@ Arama kutusuna yazarken sol bölmede o noktaya kadar girdiğiniz arama değeriyl
 [11]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ConnectDialog-NameAndKeyPage.png
 [12]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/AttachedWithKeyAccount.png
 [13]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/AttachedWithKeyAccount-Detach.png
-[14]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/GetSharedAccessSignature.png
-[15]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/SharedAccessSignatureDialog.png
+[14]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/get-shared-access-signature-for-storage-explorer.png
+[15]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/create-shared-access-signature-for-storage-explorer.png
 [16]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ConnectDialog-WithConnStringOrSASSelected.png
 [17]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ConnectDialog-ConnStringOrSASPage-1.png
 [18]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/AttachedWithSASAccount.png
 [19]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ConnectDialog-ConnStringOrSASPage-2.png
 [20]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/ServiceAttachedWithSAS.png
-[21]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/connect-to-db-by-connection-string.png
-[22]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/connection-string.png
-[23]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/Search.png
+[21]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/connect-to-cosmos-db-by-connection-string.png
+[22]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/connection-string-for-cosmos-db.png
+[23]: ./media/vs-azure-tools-storage-manage-with-storage-explorer/storage-explorer-search-for-resource.png

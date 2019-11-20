@@ -9,7 +9,13 @@
 - name: Öğretici
   items:
     - name: Otomatik makine öğrenimi ile regresyon
-      href: tutorial-opendatasets-automl.md
+      href: /azure/machine-learning/service/tutorial-auto-train-models?toc=/azure/open-datasets/toc.json&bc=/azure/open-datasets/breadcrumb/toc.json
+    - name: Resim sınıflandırma modelini zenginleştirme
+      href: /azure/machine-learning/service/tutorial-train-models-with-aml?toc=/azure/open-datasets/toc.json&bc=/azure/open-datasets/breadcrumb/toc.json
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Azure Machine Learning’de veri kümeleri
+      href: ../machine-learning/service/how-to-create-register-datasets.md?toc=/azure/open-datasets/toc.json&bc=/azure/open-datasets/breadcrumb/toc.json
 - name: Örnekler
   displayName: 'example, examples, Jupyter, azure notebooks, python, notebook, GitHub'
   href: samples.md
@@ -17,7 +23,7 @@
   items:
     - name: Python SDK'sı
       displayName: api open datasets reference sdk
-      href: 'https://aka.ms/open-datasets-api'
+      href: /python/api/azureml-opendatasets/azureml.opendatasets?view=azure-ml-py
     - name: Jupyter notebooks
       displayName: python notebooks
       href: 'https://github.com/Azure/OpenDatasetsNotebooks'

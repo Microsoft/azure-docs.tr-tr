@@ -63,8 +63,7 @@
               href: '../sql-database/sql-database-high-availability.md#zone-redundant-configuration'
         - name: Depolama
           items:
-            - name: |
-                Alanlar arası yedekli depolama
+            - name: Alanlar arası yedekli depolama
               href: ../storage/common/storage-redundancy-zrs.md
         - name: Event Hubs
           items:
@@ -82,6 +81,10 @@
           items:
             - name: Alanlar arası yedekli sanal ağ geçidi oluşturma
               href: ../vpn-gateway/create-zone-redundant-vnet-gateway.md
+        - name: Kimlik
+          items:
+            - name: Azure Active Directory Domain Services örneği oluşturma
+              href: ../active-directory-domain-services/tutorial-create-instance.md
 - name: Olağanüstü Durum Kurtarma
   items:
     - name: Azure Site Recovery’yi kullanma

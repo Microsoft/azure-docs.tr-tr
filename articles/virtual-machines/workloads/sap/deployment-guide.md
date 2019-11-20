@@ -1,29 +1,28 @@
 ---
-title: Azure sanal makineler dağıtım için SAP NetWeaver | Microsoft Docs
-description: Azure'da Linux sanal makinelerinde SAP yazılım dağıtmayı öğrenin.
+title: SAP NetWeaver için Azure sanal makineler dağıtımı | Microsoft Docs
+description: Azure 'da Linux sanal makinelerinde SAP yazılımı dağıtmayı öğrenin.
 services: virtual-machines-linux,virtual-machines-windows
 documentationcenter: ''
 author: MSSedusch
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.assetid: 1c4f1951-3613-4a5a-a0af-36b85750c84e
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 09/26/2018
+ms.date: 09/16/2019
 ms.author: sedusch
-ms.openlocfilehash: 82ab400c89cb57f3cf72cfb9196ea7c6402808fe
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 549fd8f4cb770d472eefd1c504e42837fa8230dd
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67203925"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71066860"
 ---
-# <a name="azure-virtual-machines-deployment-for-sap-netweaver"></a>Azure sanal makineler dağıtım için SAP NetWeaver
+# <a name="azure-virtual-machines-deployment-for-sap-netweaver"></a>SAP NetWeaver için Azure sanal makineler dağıtımı
 
 [767598]:https://launchpad.support.sap.com/#/notes/767598
 [773830]:https://launchpad.support.sap.com/#/notes/773830
@@ -81,21 +80,21 @@ ms.locfileid: "67203925"
 [azure-subscription-service-limits]:../../../azure-subscription-service-limits.md
 [azure-subscription-service-limits-subscription]:../../../azure-subscription-service-limits.md#subscription-limits
 
-[dbms-guide]:dbms-guide.md (SAP için Azure sanal makineleri DBMS dağıtım)
-[dbms-guide-2.1]:dbms-guide.md#c7abf1f0-c927-4a7c-9c1d-c7b5b3b7212f (VM'ler ve VHD'ler için önbelleğe alma)
+[dbms-guide]:dbms-guide.md (SAP için Azure sanal makineleri DBMS dağıtımı)
+[dbms-guide-2.1]:dbms-guide.md#c7abf1f0-c927-4a7c-9c1d-c7b5b3b7212f (VM 'Ler ve VHD 'Ler için önbelleğe alma)
 [dbms-guide-2.2]:dbms-guide.md#c8e566f9-21b7-4457-9f7f-126036971a91 (Yazılım RAID)
-[dbms-guide-2.3]:dbms-guide.md#10b041ef-c177-498a-93ed-44b3441ab152 (Microsoft Azure depolama)
-[dbms-guide-2]:dbms-guide.md#65fa79d6-a85f-47ee-890b-22e794f51a64 (Bir RDBMS dağıtım yapısı)
-[dbms-guide-3]:dbms-guide.md#871dfc27-e509-4222-9370-ab1de77021c3 (Azure sanal makineleri ile yüksek kullanılabilirlik ve olağanüstü durum kurtarma)
+[dbms-guide-2.3]:dbms-guide.md#10b041ef-c177-498a-93ed-44b3441ab152 (Microsoft Azure Depolama)
+[dbms-guide-2]:dbms-guide.md#65fa79d6-a85f-47ee-890b-22e794f51a64 (RDBMS dağıtımının yapısı)
+[dbms-guide-3]:dbms-guide.md#871dfc27-e509-4222-9370-ab1de77021c3 (Azure VM 'Leri ile yüksek kullanılabilirlik ve olağanüstü durum kurtarma)
 [dbms-guide-5.5.1]:dbms-guide.md#0fef0e79-d3fe-4ae2-85af-73666a6f7268 (SQL Server 2012 SP1 CU4 ve üzeri)
-[dbms-guide-5.5.2]:dbms-guide.md#f9071eff-9d72-4f47-9da4-1852d782087b (SQL Server 2012 SP1 CU3'ten ve önceki sürümleri)
-[dbms-guide-5.6]:dbms-guide.md#1b353e38-21b3-4310-aeb6-a77e7c8e81c8 (Azure Market'ten bir SQL Server görüntüsü kullanma)
-[dbms-guide-5.8]:dbms-guide.md#9053f720-6f3b-4483-904d-15dc54141e30 (Genel SQL Server SAP on Azure özeti)
-[dbms-guide-5]:dbms-guide.md#3264829e-075e-4d25-966e-a49dad878737 (SQL Server RDBMS özellikleri)
+[dbms-guide-5.5.2]:dbms-guide.md#f9071eff-9d72-4f47-9da4-1852d782087b (SQL Server 2012 SP1 CU3 ve önceki sürümleri)
+[dbms-guide-5.6]:dbms-guide.md#1b353e38-21b3-4310-aeb6-a77e7c8e81c8 (Azure Marketi 'nden bir SQL Server görüntüsü kullanma)
+[dbms-guide-5.8]:dbms-guide.md#9053f720-6f3b-4483-904d-15dc54141e30 (Azure 'da SAP için genel SQL Server Özeti)
+[dbms-guide-5]:dbms-guide.md#3264829e-075e-4d25-966e-a49dad878737 (SQL Server RDBMS için Ayrıntılar)
 [dbms-guide-8.4.1]:dbms-guide.md#b48cfe3b-48e9-4f5b-a783-1d29155bd573 (Depolama yapılandırması)
 [dbms-guide-8.4.2]:dbms-guide.md#23c78d3b-ca5a-4e72-8a24-645d141a3f5d (Yedekleme ve geri yükleme)
 [dbms-guide-8.4.3]:dbms-guide.md#77cd2fbb-307e-4cbf-a65f-745553f72d2c (Yedekleme ve geri yükleme için performans konuları)
-[dbms-guide-8.4.4]:dbms-guide.md#f77c1436-9ad8-44fb-a331-8671342de818 (Diğer)
+[dbms-guide-8.4.4]:dbms-guide.md#f77c1436-9ad8-44fb-a331-8671342de818 (Farklı)
 [dbms-guide-900-sap-cache-server-on-premises]:dbms-guide.md#642f746c-e4d4-489d-bf63-73e80177a0a8
 
 [dbms-guide-figure-100]:media/virtual-machines-shared-sap-dbms-guide/100_storage_account_types.png
@@ -108,27 +107,27 @@ ms.locfileid: "67203925"
 [dbms-guide-figure-800]:media/virtual-machines-shared-sap-dbms-guide/800-azure-vm-sap-content-server.png
 [dbms-guide-figure-900]:media/virtual-machines-shared-sap-dbms-guide/900-sap-cache-server-on-premises.png
 
-[deployment-guide]:deployment-guide.md (SAP için Azure sanal makineler dağıtımı)
+[deployment-guide]:deployment-guide.md (SAP için Azure sanal makineleri dağıtımı)
 [deployment-guide-2.2]:deployment-guide.md#42ee2bdb-1efc-4ec7-ab31-fe4c22769b94 (SAP kaynakları)
-[deployment-guide-3.1.2]:deployment-guide.md#3688666f-281f-425b-a312-a77e7db2dfab (Özel bir görüntü kullanarak bir VM dağıtma)
-[deployment-guide-3.2]:deployment-guide.md#db477013-9060-4602-9ad4-b0316f8bb281 (Senaryo 1: SAP için Azure Market'ten bir VM dağıtma)
-[deployment-guide-3.3]:deployment-guide.md#54a1fc6d-24fd-4feb-9c57-ac588a55dff2 (Senaryo 2: SAP için özel bir görüntü ile bir VM dağıtma)
-[deployment-guide-3.4]:deployment-guide.md#a9a60133-a763-4de8-8986-ac0fa33aa8c1 (Senaryo 3: Azure olmayan genelleştirilmiş VHD ile SAP kullanarak şirket içi VM taşıma)
-[deployment-guide-3]:deployment-guide.md#b3253ee3-d63b-4d74-a49b-185e76c4088e (Dağıtım senaryoları için Microsoft Azure üzerinde SAP VM)
-[deployment-guide-4.1]:deployment-guide.md#604bcec2-8b6e-48d2-a944-61b0f5dee2f7 (Azure PowerShell cmdlet'lerini dağıtma)
-[deployment-guide-4.2]:deployment-guide.md#7ccf6c3e-97ae-4a7a-9c75-e82c37beb18e (İndirme ve içeri aktarma SAP ilgili PowerShell cmdlet'leri)
-[deployment-guide-4.3]:deployment-guide.md#31d9ecd6-b136-4c73-b61e-da4a29bbc9cc (Bir şirket içi etki - yalnızca Windows VM katılın)
+[deployment-guide-3.1.2]:deployment-guide.md#3688666f-281f-425b-a312-a77e7db2dfab (Özel bir görüntü kullanarak VM dağıtma)
+[deployment-guide-3.2]:deployment-guide.md#db477013-9060-4602-9ad4-b0316f8bb281 (Senaryo 1: SAP için Azure Marketi 'nden bir VM dağıtma)
+[deployment-guide-3.3]:deployment-guide.md#54a1fc6d-24fd-4feb-9c57-ac588a55dff2 (Senaryo 2: SAP için özel bir görüntü ile VM dağıtma)
+[deployment-guide-3.4]:deployment-guide.md#a9a60133-a763-4de8-8986-ac0fa33aa8c1 (Senaryo 3: SAP ile Genelleştirilmiş olmayan bir Azure VHD kullanarak VM 'yi Şirket içinden taşıma)
+[deployment-guide-3]:deployment-guide.md#b3253ee3-d63b-4d74-a49b-185e76c4088e (Microsoft Azure üzerinde SAP için VM 'Lerin dağıtım senaryoları)
+[deployment-guide-4.1]:deployment-guide.md#604bcec2-8b6e-48d2-a944-61b0f5dee2f7 (Azure PowerShell cmdlet 'leri dağıtma)
+[deployment-guide-4.2]:deployment-guide.md#7ccf6c3e-97ae-4a7a-9c75-e82c37beb18e (SAP ile ilgili PowerShell cmdlet 'lerini indirme ve içeri aktarma)
+[deployment-guide-4.3]:deployment-guide.md#31d9ecd6-b136-4c73-b61e-da4a29bbc9cc (VM 'yi şirket içi etki alanına ekleme-yalnızca Windows)
 [deployment-guide-4.4.2]:deployment-guide.md#6889ff12-eaaf-4f3c-97e1-7c9edc7f7542 (Linux)
-[deployment-guide-4.4]:deployment-guide.md#c7cbb0dc-52a4-49db-8e03-83e7edc2927d (İndirme, yükleme ve Azure VM aracısını etkinleştirin)
+[deployment-guide-4.4]:deployment-guide.md#c7cbb0dc-52a4-49db-8e03-83e7edc2927d (Azure VM aracısını indirme, yükleme ve etkinleştirme)
 [deployment-guide-4.5.1]:deployment-guide.md#987cf279-d713-4b4c-8143-6b11589bb9d4 (Azure PowerShell)
-[deployment-guide-4.5.2]:deployment-guide.md#408f3779-f422-4413-82f8-c57a23b4fc2f (Azure CLI)
-[deployment-guide-4.5]:deployment-guide.md#d98edcd3-f2a1-49f7-b26a-07448ceb60ca (SAP için Azure Gelişmiş izleme uzantısı yapılandırma)
-[deployment-guide-5.1]:deployment-guide.md#bb61ce92-8c5c-461f-8c53-39f5e5ed91f2 (Hazır olma denetimi için Azure SAP Gelişmiş izleme)
-[deployment-guide-5.2]:deployment-guide.md#e2d592ff-b4ea-4a53-a91a-e5521edb6cd1 (Azure izleme altyapısı durumunu denetleme)
-[deployment-guide-5.3]:deployment-guide.md#fe25a7da-4e4e-4388-8907-8abc2d33cfd8 (Azure için SAP izleme sorunlarını giderme)
+[deployment-guide-4.5.2]:deployment-guide.md#408f3779-f422-4413-82f8-c57a23b4fc2f (Azure CLı)
+[deployment-guide-4.5]:deployment-guide.md#d98edcd3-f2a1-49f7-b26a-07448ceb60ca (SAP için Azure uzantısını yapılandırma)
+[deployment-guide-5.1]:deployment-guide.md#bb61ce92-8c5c-461f-8c53-39f5e5ed91f2 (SAP için Azure uzantısı için hazırlık denetimi)
+[deployment-guide-5.2]:deployment-guide.md#e2d592ff-b4ea-4a53-a91a-e5521edb6cd1 (SAP yapılandırması için Azure uzantısı için sistem durumu denetimi)
+[deployment-guide-5.3]:deployment-guide.md#fe25a7da-4e4e-4388-8907-8abc2d33cfd8 (SAP için Azure uzantısı sorunlarını giderme)
 
-[deployment-guide-configure-monitoring-scenario-1]:deployment-guide.md#ec323ac3-1de9-4c3a-b770-4ff701def65b (İzlemeyi Yapılandırma)
-[deployment-guide-configure-proxy]:deployment-guide.md#baccae00-6f79-4307-ade4-40292ce4e02d (Proxy yapılandırma)
+[deployment-guide-configure-monitoring-scenario-1]:deployment-guide.md#ec323ac3-1de9-4c3a-b770-4ff701def65b (VM uzantısını yapılandırma)
+[deployment-guide-configure-proxy]:deployment-guide.md#baccae00-6f79-4307-ade4-40292ce4e02d (Proxy 'yi yapılandırma)
 [deployment-guide-figure-100]:media/virtual-machines-shared-sap-deployment-guide/100-deploy-vm-image.png
 [deployment-guide-figure-1000]:media/virtual-machines-shared-sap-deployment-guide/1000-service-properties.png
 [deployment-guide-figure-11]:deployment-guide.md#figure-11
@@ -151,7 +150,7 @@ ms.locfileid: "67203925"
 [deployment-guide-figure-azure-cli-installed]:deployment-guide.md#402488e5-f9bb-4b29-8063-1c5f52a892d0
 [deployment-guide-figure-azure-cli-version]:deployment-guide.md#0ad010e6-f9b5-4c21-9c09-bb2e5efb3fda
 [deployment-guide-install-vm-agent-windows]:deployment-guide.md#b2db5c9a-a076-42c6-9835-16945868e866
-[deployment-guide-troubleshooting-chapter]:deployment-guide.md#564adb4f-5c95-4041-9616-6635e83a810b (Denetimler ve sorun giderme için uçtan uca izlemeyi ayarlama)
+[deployment-guide-troubleshooting-chapter]:deployment-guide.md#564adb4f-5c95-4041-9616-6635e83a810b (SAP konak Aracısı için uçtan uca veri toplama denetimleri ve sorun giderme)
 
 [deploy-template-cli]:../../../resource-group-template-deploy-cli.md
 [deploy-template-portal]:../../../resource-group-template-deploy-portal.md
@@ -180,33 +179,33 @@ ms.locfileid: "67203925"
 
 [msdn-set-Azvmaemextension]:https://docs.microsoft.com/powershell/module/az.compute/set-azvmaemextension
 
-[planning-guide]:planning-guide.md (Azure sanal makineleri planlama ve uygulama için SAP)
-[planning-guide-1.2]:planning-guide.md#e55d1e22-c2c8-460b-9897-64622a34fdff (Kaynakları)
-[planning-guide-11]:planning-guide.md#7cf991a1-badd-40a9-944e-7baae842a058 (Azure sanal Makineler'de çalışan SAP NetWeaver için yüksek kullanılabilirlik ve olağanüstü durum kurtarma)
+[planning-guide]:planning-guide.md (SAP için Azure sanal makineleri planlama ve uygulama)
+[planning-guide-1.2]:planning-guide.md#e55d1e22-c2c8-460b-9897-64622a34fdff (Kaynakların)
+[planning-guide-11]:planning-guide.md#7cf991a1-badd-40a9-944e-7baae842a058 (Azure sanal makinelerde çalışan SAP NetWeaver için yüksek kullanılabilirlik ve olağanüstü durum kurtarma)
 [planning-guide-11.4.1]:planning-guide.md#5d9d36f9-9058-435d-8367-5ad05f00de77 (SAP uygulama sunucuları için yüksek kullanılabilirlik)
-[planning-guide-11.5]:planning-guide.md#4e165b58-74ca-474f-a7f4-5e695a93204f (SAP örnekleri için AutoStart'ı kullanma)
-[planning-guide-2.1]:planning-guide.md#1625df66-4cc6-4d60-9202-de8a0b77f803 (Yalnızca bulut - şirket içi müşteri ağı bağımlılığı olmaksızın azure'da sanal makine dağıtımları)
-[planning-guide-2.2]:planning-guide.md#f5b3b18c-302c-4bd8-9ab2-c388f1ab3d10 (Şirket içi - dağıtımı tek veya birden çok SAP sanal makineleri azure'da şirket içi ağ ile tamamen tümleşiktir.)
+[planning-guide-11.5]:planning-guide.md#4e165b58-74ca-474f-a7f4-5e695a93204f (SAP örnekleri için autostart 'ı kullanma)
+[planning-guide-2.1]:planning-guide.md#1625df66-4cc6-4d60-9202-de8a0b77f803 (Şirket içi müşteri ağında bağımlılıklar olmadan Azure 'da yalnızca bulut sanal makine dağıtımları)
+[planning-guide-2.2]:planning-guide.md#f5b3b18c-302c-4bd8-9ab2-c388f1ab3d10 (Azure 'da tek veya birden çok SAP VM 'lerinin şirket içi ağla tam olarak tümleştirildiği şirketler arası dağıtım)
 [planning-guide-3.1]:planning-guide.md#be80d1b9-a463-4845-bd35-f4cebdb5424a (Azure bölgeleri)
 [planning-guide-3.2.1]:planning-guide.md#df49dc09-141b-4f34-a4a2-990913b30358 (Hata etki alanları)
 [planning-guide-3.2.2]:planning-guide.md#fc1ac8b2-e54a-487c-8581-d3cc6625e560 (Yükseltme etki alanları)
 [planning-guide-3.2.3]:planning-guide.md#18810088-f9be-4c97-958a-27996255c665 (Azure kullanılabilirlik kümeleri)
-[planning-guide-3.2]:planning-guide.md#8d8ad4b8-6093-4b91-ac36-ea56d80dbf77 (Microsoft Azure sanal makineleri kavramı)
-[planning-guide-3.3.2]:planning-guide.md#ff5ad0f9-f7f4-4022-9102-af07aef3bc92 (Azure Premium depolama)
-[planning-guide-5.1.1]:planning-guide.md#4d175f1b-7353-4137-9d2f-817683c26e53 (Bir sanal makine şirket içinden Azure'a genelleştirilmiş olmayan bir diskle taşıma)
-[planning-guide-5.1.2]:planning-guide.md#e18f7839-c0e2-4385-b1e6-4538453a285c (Müşteri belirli bir görüntüye sahip bir VM dağıtma)
-[planning-guide-5.2.1]:planning-guide.md#1b287330-944b-495d-9ea7-94b83aff73ef (Bir VM şirket içinden Azure'a genelleştirilmiş olmayan bir disk ile geçiş için hazırlama)
-[planning-guide-5.2.2]:planning-guide.md#57f32b1c-0cba-4e57-ab6e-c39fe22b6ec3 (SAP için müşteri belirli bir görüntüye sahip bir VM dağıtımı için hazırlama)
-[planning-guide-5.2]:planning-guide.md#6ffb9f41-a292-40bf-9e70-8204448559e7 (Azure için SAP ile Vm'leri hazırlama)
-[planning-guide-5.3.1]:planning-guide.md#6e835de8-40b1-4b71-9f18-d45b20959b79 (Azure görüntü ile bir Azure diskinin arasındaki fark)
-[planning-guide-5.3.2]:planning-guide.md#a43e40e6-1acc-4633-9816-8f095d5a7b6a (Şirket içinden azure'a VHD yükleme)
+[planning-guide-3.2]:planning-guide.md#8d8ad4b8-6093-4b91-ac36-ea56d80dbf77 (Microsoft Azure sanal makineler kavramı)
+[planning-guide-3.3.2]:planning-guide.md#ff5ad0f9-f7f4-4022-9102-af07aef3bc92 (Azure Premium Depolama)
+[planning-guide-5.1.1]:planning-guide.md#4d175f1b-7353-4137-9d2f-817683c26e53 (Bir VM 'yi Şirket içinden, genelleştirilmiş olmayan bir disk ile Azure 'a taşıma)
+[planning-guide-5.1.2]:planning-guide.md#e18f7839-c0e2-4385-b1e6-4538453a285c (Müşteriye özgü görüntüyle VM dağıtma)
+[planning-guide-5.2.1]:planning-guide.md#1b287330-944b-495d-9ea7-94b83aff73ef (Genelleştirilmiş olmayan bir diskle bir VM 'yi Şirket içinden Azure 'a taşımaya yönelik hazırlık)
+[planning-guide-5.2.2]:planning-guide.md#57f32b1c-0cba-4e57-ab6e-c39fe22b6ec3 (SAP için müşteriye özgü bir görüntüyle VM dağıtmaya hazırlanma)
+[planning-guide-5.2]:planning-guide.md#6ffb9f41-a292-40bf-9e70-8204448559e7 (Azure için SAP ile VM 'Leri hazırlama)
+[planning-guide-5.3.1]:planning-guide.md#6e835de8-40b1-4b71-9f18-d45b20959b79 (Azure disk ve Azure görüntüsü arasındaki fark)
+[planning-guide-5.3.2]:planning-guide.md#a43e40e6-1acc-4633-9816-8f095d5a7b6a (Şirket içinden Azure 'a VHD yükleme)
 [planning-guide-5.4.2]:planning-guide.md#9789b076-2011-4afa-b2fe-b07a8aba58a1 (Azure depolama hesapları arasında diskleri kopyalama)
 [planning-guide-5.5.1]:planning-guide.md#4efec401-91e0-40c0-8e64-f2dceadff646 (SAP dağıtımları için VM/VHD yapısı)
-[planning-guide-5.5.3]:planning-guide.md#17e0d543-7e8c-4160-a7da-dd7117a1ad9d (Otomatik bağlama bağlı diskleri için ayarlama)
-[planning-guide-7.1]:planning-guide.md#3e9c3690-da67-421a-bc3f-12c520d99a30 (Tek tanıtım/senaryo eğitim NetWeaver SAP VM)
-[planning-guide-7]:planning-guide.md#96a77628-a05e-475d-9df3-fb82217e8f14 (SAP örnekleri yalnızca bulutta yer alan dağıtım kavramları)
-[planning-guide-9.1]:planning-guide.md#6f0a47f3-a289-4090-a053-2521618a28c3 (Azure için SAP izleme çözümü)
-[planning-guide-azure-premium-storage]:planning-guide.md#ff5ad0f9-f7f4-4022-9102-af07aef3bc92 (Azure Premium depolama)
+[planning-guide-5.5.3]:planning-guide.md#17e0d543-7e8c-4160-a7da-dd7117a1ad9d (İliştirilmiş diskler için otomatik bağlama ayarlama)
+[planning-guide-7.1]:planning-guide.md#3e9c3690-da67-421a-bc3f-12c520d99a30 (SAP NetWeaver demo/eğitim senaryosuna sahip tek VM)
+[planning-guide-7]:planning-guide.md#96a77628-a05e-475d-9df3-fb82217e8f14 (SAP örneklerinin yalnızca bulutta dağıtılması kavramları)
+[planning-guide-9.1]:planning-guide.md#6f0a47f3-a289-4090-a053-2521618a28c3 (SAP için Azure Izleme çözümü)
+[planning-guide-azure-premium-storage]:planning-guide.md#ff5ad0f9-f7f4-4022-9102-af07aef3bc92 (Azure Premium Depolama)
 [planning-guide-managed-disks]:planning-guide.md#c55b2c6e-3ca1-4476-be16-16c81927550f (Yönetilen diskler)
 [planning-guide-figure-100]:media/virtual-machines-shared-sap-planning-guide/100-single-vm-in-azure.png
 [planning-guide-figure-1300]:media/virtual-machines-shared-sap-planning-guide/1300-ref-config-iaas-for-sap.png
@@ -232,12 +231,12 @@ ms.locfileid: "67203925"
 [planning-guide-figure-700]:media/virtual-machines-shared-sap-planning-guide/700-decision-tree-deploy-to-azure.png
 [planning-guide-figure-800]:media/virtual-machines-shared-sap-planning-guide/800-portal-vm-overview.png
 [planning-guide-microsoft-azure-networking]:planning-guide.md#61678387-8868-435d-9f8c-450b2424f5bd (Microsoft Azure ağı)
-[planning-guide-storage-microsoft-azure-storage-and-data-disks]:planning-guide.md#a72afa26-4bf4-4a25-8cf7-855d6032157f (Depolama: Microsoft Azure depolama ve veri diskleri)
+[planning-guide-storage-microsoft-azure-storage-and-data-disks]:planning-guide.md#a72afa26-4bf4-4a25-8cf7-855d6032157f (Depo Microsoft Azure Depolama ve veri diskleri)
 
 [resource-group-authoring-templates]:../../../resource-group-authoring-templates.md
 [resource-group-overview]:../../../azure-resource-manager/resource-group-overview.md
 [resource-groups-networking]:../../../networking/network-overview.md
-[sap-pam]: https://support.sap.com/pam (SAP ürün kullanılabilirliği Matrisi)
+[sap-pam]: https://support.sap.com/pam (SAP ürün kullanılabilirliği matrisi)
 [sap-templates-2-tier-marketplace-image]:https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-2-tier-marketplace-image%2Fazuredeploy.json
 [sap-templates-2-tier-marketplace-image-md]:https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-2-tier-marketplace-image-md%2Fazuredeploy.json
 [sap-templates-2-tier-os-disk]:https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-2-tier-user-disk%2Fazuredeploy.json
@@ -263,8 +262,8 @@ ms.locfileid: "67203925"
 [virtual-machines-azure-resource-manager-architecture]:../../../resource-manager-deployment-model.md
 [virtual-machines-Az-versus-azuresm]:virtual-machines-linux-compare-deployment-models.md
 [virtual-machines-windows-classic-configure-oracle-data-guard]:../../virtual-machines-windows-classic-configure-oracle-data-guard.md
-[virtual-machines-linux-cli-deploy-templates]:../../linux/cli-deploy-templates.md (Azure Resource Manager şablonları ve Azure CLI kullanarak sanal makineleri yönetme ve dağıtma)
-[virtual-machines-deploy-rmtemplates-powershell]:../../virtual-machines-windows-ps-manage.md (Azure Resource Manager ve PowerShell kullanarak sanal makineleri yönetme)
+[virtual-machines-linux-cli-deploy-templates]:./../linux/cli-deploy-templates.md (Azure Resource Manager şablonları ve Azure CLı kullanarak sanal makineleri dağıtma ve yönetme)
+[virtual-machines-deploy-rmtemplates-powershell]:./../virtual-machines-windows-ps-manage.md (Azure Resource Manager ve PowerShell kullanarak sanal makineleri yönetme)
 [virtual-machines-windows-agent-user-guide]:../../extensions/agent-windows.md
 [virtual-machines-linux-agent-user-guide]:../../extensions/agent-linux.md
 [virtual-machines-linux-agent-user-guide-command-line-options]:../../extensions/agent-linux.md#command-line-options
@@ -312,547 +311,547 @@ ms.locfileid: "67203925"
 
 [!INCLUDE [learn-about-deployment-models](../../../../includes/learn-about-deployment-models-rm-include.md)]
 
-Azure sanal makineler, en az sürede ve uzun tedarik döngüleri olmadan işlem ve depolama kaynaklarını gereken kuruluşlar çözümüdür. Azure sanal makineler, azure'da SAP NetWeaver tabanlı uygulamalar gibi Klasik uygulamaları dağıtmak için kullanabilirsiniz. Bir uygulamanın güvenilirlik ve kullanılabilirlik ek şirket içi kaynaklar olmadan genişletin. Böylece Azure sanal makineleri kuruluşunuzun şirket içi etki alanları, özel Bulutlar ve SAP sistem ortamı tümleştirebilirsiniz şirketler arası bağlantı, Azure sanal makineleri destekler.
+Azure sanal makineleri, işlem ve depolama kaynakları, en kısa sürede ve uzun tedarik döngüleri olmadan ihtiyaç duyulan kuruluşların çözümüdür. Azure 'da SAP NetWeaver tabanlı uygulamalar gibi klasik uygulamaları dağıtmak için Azure sanal makinelerini kullanabilirsiniz. Uygulamanın güvenilirliğini ve kullanılabilirliğini ek şirket içi kaynaklar olmadan genişletin. Azure sanal makineleri, şirket içi etki alanları, özel bulutlar ve SAP sistem yataya Azure sanal makinelerini tümleştirmenize olanak sağlamak için şirketler arası bağlantıyı destekler.
 
-Bu makalede, azure'da, diğer dağıtım seçenekleri dahil olmak üzere ve sorun giderme sanal makineleri (VM'ler) SAP uygulamaları dağıtma adımları ele. Bu makalede yer alan bilgiler geliştirir [planlama Azure sanal makineleri ve SAP NetWeaver uygulamasını][planning-guide]. Ayrıca SAP yükleme belgelerine ve yükleme ve SAP yazılım dağıtmak için birincil kaynaklardır SAP notları tamamlar.
+Bu makalede, farklı dağıtım seçenekleri ve sorun giderme dahil olmak üzere Azure 'daki sanal makinelerde (VM) SAP uygulamaları dağıtma adımları ele alınmaktadır. Bu makalede, [SAP NetWeaver için planlama ve uygulama Için Azure sanal makineler][planning-guide]'de bilgi oluşturulur. Ayrıca SAP yazılım yükleme ve dağıtmaya yönelik birincil kaynaklar olan SAP yükleme belgelerini ve SAP notlarını da tamamlar.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [updated-for-az](../../../../includes/updated-for-az.md)]
 
-Bir Azure sanal makinesi için SAP yazılım dağıtımı ayarlama adımları ve kaynakları birden çok içerir. Başlamadan önce Azure sanal makinelerinde SAP yazılım yüklemeye yönelik önkoşulları karşıladığından emin olun.
+SAP yazılım dağıtımı için bir Azure sanal makinesi ayarlama, birden çok adım ve kaynak içerir. Başlamadan önce, Azure 'daki sanal makinelere SAP yazılımı yükleme önkoşullarını karşıladığınızdan emin olun.
 
 ### <a name="local-computer"></a>Yerel bilgisayar
 
-Windows veya Linux sanal makineleri yönetmek için bir PowerShell Betiği ve Azure portalını kullanabilirsiniz. Her iki araç için Windows 7 veya sonraki bir Windows sürümü çalıştıran yerel bir bilgisayar gerekir. Yalnızca Linux Vm'leri yönetmek istediğiniz ve bu görev için bir Linux bilgisayar kullanmak istiyorsanız, Azure CLI'yı kullanabilirsiniz.
+Windows veya Linux VM 'lerini yönetmek için bir PowerShell betiği ve Azure portal kullanabilirsiniz. Her iki araç için de Windows 7 veya sonraki bir Windows sürümünü çalıştıran yerel bir bilgisayara ihtiyacınız vardır. Yalnızca Linux VM 'lerini yönetmek istiyorsanız ve bu görev için bir Linux bilgisayar kullanmak istiyorsanız, Azure CLı kullanabilirsiniz.
 
 ### <a name="internet-connection"></a>Internet bağlantısı
 
-İndirmek ve SAP yazılım dağıtımı için gerekli olan betikleri ve araçları çalıştırmak için Internet'e bağlı gerekir. Azure Gelişmiş izleme uzantısı için SAP çalıştıran Azure VM'nin de Internet erişimi gerekir. Azure VM'de bir Azure sanal ağı veya şirket içi etki alanının parçasıysa, açıklandığı gibi ilgili proxy ayarlarının belirlendiğini emin [Proxy'yi yapılandırmak][deployment-guide-configure-proxy].
+SAP yazılım dağıtımı için gerekli olan araçları ve betikleri indirmek ve çalıştırmak için, Internet 'e bağlı olmanız gerekir. SAP için Azure uzantısını çalıştıran Azure sanal makinesinin Ayrıca Internet erişimine ihtiyacı vardır. Azure VM bir Azure sanal ağının veya şirket içi etki alanının parçasıysa, [proxy 'Yi yapılandırma][deployment-guide-configure-proxy]bölümünde açıklandığı gibi ilgili proxy ayarlarının ayarlandığından emin olun.
 
 ### <a name="microsoft-azure-subscription"></a>Microsoft Azure aboneliği
 
-Etkin bir Azure hesabınız olmalıdır.
+Etkin bir Azure hesabınız olması gerekir.
 
 ### <a name="topology-and-networking"></a>Topoloji ve ağ
 
-Azure'da SAP dağıtımının mimarisini ve topolojisi tanımlayın yapmanız gerekir:
+Azure 'da SAP dağıtımının topolojisini ve mimarisini tanımlamanız gerekir:
 
-* Kullanılacak azure depolama hesapları
-* SAP sistemini dağıtmak için istediğiniz sanal ağ
-* SAP sistemine dağıtmak istediğiniz kaynak grubu
-* SAP sistemini dağıtmak için istediğiniz azure bölgesi
-* SAP yapılandırma (iki katmanlı veya üç katmanlı)
-* VM boyutları ve Vm'lere bağlanması ek veri diski sayısı
-* SAP düzeltme ve taşıma sistemi (CTS) yapılandırma
+* Kullanılacak Azure depolama hesapları
+* SAP sistemini dağıtmak istediğiniz sanal ağ
+* SAP sistemini dağıtmak istediğiniz kaynak grubu
+* SAP sistemini dağıtmak istediğiniz Azure bölgesi
+* SAP yapılandırması (iki katmanlı veya üç katmanlı)
+* VM 'lere takılacak sanal makine boyutları ve ek veri disklerinin sayısı
+* SAP düzeltme ve aktarım sistemi (CTS) yapılandırması
 
-Oluşturun ve SAP yazılım dağıtım işlemi başlamadan önce Azure depolama hesapları (gerekliyse) veya Azure sanal ağları yapılandırın. Oluşturma ve bu kaynakları yapılandırma hakkında daha fazla bilgi için bkz. [planlama Azure sanal makineleri ve SAP NetWeaver uygulamasını][planning-guide].
+SAP yazılım dağıtım işlemine başlamadan önce Azure depolama hesaplarını (gerekliyse) veya Azure sanal ağlarını oluşturun ve yapılandırın. Bu kaynakları oluşturma ve yapılandırma hakkında daha fazla bilgi için bkz. [SAP NetWeaver Için Azure sanal makineleri planlama ve uygulama][planning-guide].
 
 ### <a name="sap-sizing"></a>SAP boyutlandırma
 
-SAP boyutlandırma için aşağıdaki bilgileri bildirin:
+SAP boyutlandırma için aşağıdaki bilgileri öğrenin:
 
-* SAP uygulama performans standart (SAP) yanı sıra SAP hızlı Boyutlandırıcı aracı'nı kullanarak öngörülen SAP iş yükü, örneğin, numara
+* Örneğin, SAP Quick sizer aracını ve SAP uygulama performansı standardı (SAPS) numarasını kullanarak tahmini SAP iş yükü
 * SAP sisteminin gerekli CPU kaynağı ve bellek tüketimi
-* Saniye başına giriş/çıkış (g/ç) işlemleri gerekli
-* Son iletişim azure'da sanal makineler arasındaki ağ bant genişliği gerekli
-* Şirket içi varlıklara ve Azure ile dağıtılmış SAP sistemini arasında gerekli ağ bant genişliği
+* Saniye başına gerekli giriş/çıkış (g/ç) işlemleri
+* Azure 'da VM 'Ler arasında nihai iletişimin gerekli ağ bant genişliği
+* Şirket içi varlıklar ve Azure tarafından dağıtılan SAP sistemi arasında gerekli ağ bant genişliği
 
 ### <a name="resource-groups"></a>Kaynak grupları
 
-Azure Resource Manager'da Azure aboneliğinizdeki tüm uygulama kaynaklarını yönetmek için kaynak gruplarını kullanabilirsiniz. Daha fazla bilgi için [Azure Resource Manager'a genel bakış][resource-group-overview].
+Azure Resource Manager, Azure aboneliğinizdeki tüm uygulama kaynaklarını yönetmek için kaynak gruplarını kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure Resource Manager’a genel bakış][resource-group-overview].
 
 ## <a name="resources"></a>Kaynaklar
 
 ### <a name="42ee2bdb-1efc-4ec7-ab31-fe4c22769b94"></a>SAP kaynakları
 
-SAP yazılımı dağıtımınızı ayarlarken, aşağıdaki SAP kaynakları gerekir:
+SAP yazılım dağıtımınızı ayarlarken, aşağıdaki SAP kaynaklarına ihtiyacınız vardır:
 
-* SAP notu [1928533], sahip olduğu:
-  * SAP yazılım dağıtımı için desteklenen bir Azure VM boyutlarının listesini
+* SAP Note [1928533], şunları içerir:
+  * SAP yazılımının dağıtımı için desteklenen Azure VM boyutlarının listesi
   * Azure VM boyutları için önemli kapasite bilgileri
-  * Desteklenen bir SAP yazılım ve işletim sistemi (OS) ve veritabanı birleşimleri
-  * Windows ve Linux'ta Microsoft Azure için gerekli SAP çekirdek sürümü
+  * Desteklenen SAP yazılımı ve işletim sistemi (OS) ve veritabanı birleşimleri
+  * Microsoft Azure 'de Windows ve Linux için gereken SAP Kernel sürümü
 
-* SAP notu [2015553] azure'da SAP tarafından desteklenen SAP yazılım dağıtımları için önkoşulları listeler.
-* SAP notu [2178632] ayrıntılı azure'da SAP için bildirilen tüm izlenen ölçümler hakkında bilgi içerir.
-* SAP notu [1409604] Windows Azure için gerekli SAP konak Aracısı sürümü vardır.
-* SAP notu [2191498] azure'da Linux için gerekli SAP konak Aracısı sürümü vardır.
-* SAP notu [2243692] Linux Azure üzerinde SAP lisanslama hakkında bilgi içeriyor.
-* SAP notu [1984787] SUSE Linux Enterprise Server 12 ilgili genel bilgiler bulunur.
-* SAP notu [2002167] Red Hat Enterprise Linux hakkında genel bilgi 7.x.
-* SAP notu [2069760] Oracle Linux hakkında genel bilgi 7.x.
-* SAP notu [1999351] Azure Gelişmiş izleme uzantısı için SAP için ek bilgiler.
-* SAP notu [1597355] Linux için takas alanı ilgili genel bilgiler bulunur.
-* [Azure SCN sayfasında SAP](https://wiki.scn.sap.com/wiki/x/Pia7Gg) haberleri ve faydalı kaynaklar koleksiyonu vardır.
-* [SAP topluluk WIKI](https://wiki.scn.sap.com/wiki/display/HOME/SAPonLinuxNotes) tüm SAP notları Linux için zorunludur.
-* Parçası olan SAP özgü PowerShell cmdlet'leri [Azure PowerShell][azure-ps].
-* Parçası olan SAP özgü Azure CLI komutları [Azure CLI][azure-cli].
+* SAP Note [2015553] , Azure 'da SAP tarafından desteklenen SAP yazılım dağıtımları için önkoşulları listeler.
+* SAP Note [2178632] , Azure 'da SAP için raporlanan tüm izleme ölçümleriyle ilgili ayrıntılı bilgiler içerir.
+* SAP Note [1409604] , Azure 'da Windows IÇIN gereken SAP konak Aracısı sürümüne sahiptir.
+* SAP Note [2191498] , Azure 'da Linux IÇIN gereken SAP konak Aracısı sürümüne sahiptir.
+* SAP Note [2243692] , Azure 'da LINUX üzerinde SAP lisanslama hakkında bilgi içerir.
+* SAP Note [1984787] , SUSE Linux Enterprise Server 12 hakkında genel bilgiler içerir.
+* SAP Note [2002167] , Red Hat Enterprise Linux 7. x hakkında genel bilgiler içerir.
+* SAP Note [2069760] , Oracle Linux 7. x hakkında genel bilgiler içerir.
+* SAP Note [1999351] , SAP Için Azure Gelişmiş izleme uzantısı için ek sorun giderme bilgilerine sahiptir.
+* SAP Note [1597355] , Linux için takas alanı hakkında genel bilgiler içerir.
+* [Azure SCN üzerinde SAP](https://wiki.scn.sap.com/wiki/x/Pia7Gg) , Haberler ve yararlı kaynaklara yönelik bir koleksiyon içerir.
+* [SAP COMMUNITY WIKI](https://wiki.scn.sap.com/wiki/display/HOME/SAPonLinuxNotes) 'nin Linux için gereklı tüm sap notları vardır.
+* [Azure PowerShell][azure-ps]PARÇASı olan SAP 'A özgü PowerShell cmdlet 'leri.
+* [Azure CLI][azure-cli]'nın PARÇASı olan SAP 'ye özgü Azure CLI komutları.
 
 ### <a name="42ee2bdb-1efc-4ec7-ab31-fe4c22769b94"></a>Windows kaynakları
 
-Bu Microsoft makaleler, azure'da SAP dağıtımları kapsar:
+Bu Microsoft makaleleri Azure 'da SAP dağıtımlarını kapsar:
 
-* [Azure sanal makineleri planlama ve uygulama için SAP NetWeaver][planning-guide]
-* [Azure sanal makineler dağıtım için SAP NetWeaver (Bu makale)][deployment-guide]
-* [Azure sanal makineleri DBMS dağıtım için SAP NetWeaver][dbms-guide]
+* [SAP NetWeaver için Azure sanal makineleri planlama ve uygulama][planning-guide]
+* [SAP NetWeaver için Azure sanal makineler dağıtımı (Bu makale)][deployment-guide]
+* [SAP NetWeaver için Azure sanal makineler DBMS dağıtımı][dbms-guide]
 
-## <a name="b3253ee3-d63b-4d74-a49b-185e76c4088e"></a>Azure vm'lerde SAP yazılım için dağıtım senaryoları
+## <a name="b3253ee3-d63b-4d74-a49b-185e76c4088e"></a>Azure VM 'lerinde SAP yazılımı için dağıtım senaryoları
 
-Vm'leri ve ilişkili diskler azure'da dağıtmak için birçok seçeneğiniz vardır. Sanal makinelerinizin seçtiğiniz dağıtım türüne göre dağıtımına hazırlamak için farklı adımlar sürebilir çünkü dağıtım seçenekleri arasındaki farkları anlamak önemlidir.
+Azure 'da VM 'Leri ve ilişkili diskleri dağıtmaya yönelik birden çok seçeneğiniz vardır. Sanal makinelerinizi seçtiğiniz dağıtım türüne göre dağıtıma hazırlamak için farklı adımlar uygulayabileceğiniz için dağıtım seçenekleri arasındaki farklılıkları anlamak önemlidir.
 
-### <a name="db477013-9060-4602-9ad4-b0316f8bb281"></a>Senaryo 1: SAP için Azure Market'ten bir VM dağıtma
+### <a name="db477013-9060-4602-9ad4-b0316f8bb281"></a>Senaryo 1: SAP için Azure Marketi 'nden bir VM dağıtma
 
-Sanal makinenizin dağıtılacağı bir üçüncü taraf Azure Marketi'nde veya Microsoft tarafından sağlanan bir görüntüyü kullanabilirsiniz. Market bazı standart bir işletim sistemi görüntüleri Windows Server ve Linux dağıtımları sunar. Veritabanı Yönetimi içeren bir görüntüyü de dağıtabilirsiniz, örneğin, Microsoft SQL Server sistemi (DBMS) SKU'ları. Görüntüleri DBMS SKU'ları ile kullanma hakkında daha fazla bilgi için bkz. [SAP NetWeaver için Azure sanal makineleri DBMS dağıtım][dbms-guide].
+VM 'nizi dağıtmak için Microsoft veya Azure Market 'te üçüncü taraf tarafından sunulan bir görüntüyü kullanabilirsiniz. Market, Windows Server ve farklı Linux dağıtımlarının bazı standart işletim sistemi görüntülerini sunmaktadır. Ayrıca, veritabanı yönetim sistemi (DBMS) SKU 'Larını içeren bir görüntü da dağıtabilirsiniz. Örneğin, Microsoft SQL Server. DBMS SKU 'Ları ile görüntüleri kullanma hakkında daha fazla bilgi için bkz. [SAP NetWeaver Için Azure sanal MAKINELER DBMS dağıtımı][dbms-guide].
 
-Aşağıdaki akış çizelgesi, Azure Market'ten bir VM dağıtmak için adımları SAP özgü sırasını göstermektedir:
+Aşağıdaki akış çizelgesi, Azure Marketi 'nden bir VM dağıtmak için SAP 'ye özgü adımların sırasını göstermektedir:
 
-![VM dağıtımı için Azure Market'ten bir VM görüntüsü kullanarak SAP sistemlerini akış çizelgesi][deployment-guide-figure-100]
+![Azure Marketi 'nden bir VM görüntüsü kullanarak SAP sistemleri için VM dağıtımı akış çizelgesi][deployment-guide-figure-100]
 
-#### <a name="create-a-virtual-machine-by-using-the-azure-portal"></a>Azure portalını kullanarak bir sanal makine oluşturun
+#### <a name="create-a-virtual-machine-by-using-the-azure-portal"></a>Azure portal kullanarak bir sanal makine oluşturun
 
-Azure Market'te bir görüntüden yeni bir sanal makine oluşturmak için en kolay yolu, Azure portalı kullanmaktır.
+Azure Marketi 'nden bir görüntüyle yeni bir sanal makine oluşturmanın en kolay yolu Azure portal kullanmaktır.
 
-1.  <https://portal.azure.com/#create/hub> kısmına gidin.  Veya, Azure portal menüsünde seçin **+ yeni**.
-1.  Seçin **işlem**ve ardından dağıtmak istediğiniz işletim sistemi türünü seçin. Örneğin, Windows Server 2012 R2, SUSE Linux Enterprise Server 12 (SLES 12), Red Hat Enterprise Linux 7.2 (RHEL 7.2) veya Oracle Linux 7.2. Varsayılan liste görünümü, tüm desteklenen işletim sistemlerini göstermez. Seçin **tümünü gör** tam listesi için. SAP yazılım dağıtımı için desteklenen işletim sistemleri hakkında daha fazla bilgi için bkz. Not SAP [1928533].
-1.  Sonraki sayfada, hüküm ve koşulları gözden geçirin.
-1.  İçinde **dağıtım modeli seçin** kutusunda, seçin **Resource Manager**.
+1.  <https://portal.azure.com/#create/hub> kısmına gidin.  Ya da Azure portal menüsünde **+ Yeni**' yi seçin.
+1.  **İşlem**' ı seçin ve ardından dağıtmak istediğiniz işletim sistemi türünü seçin. Örneğin, Windows Server 2012 R2, SUSE Linux Enterprise Server 12 (SLES 12), Red Hat Enterprise Linux 7,2 (RHEL 7,2) veya Oracle Linux 7,2. Varsayılan liste görünümü desteklenen tüm işletim sistemlerini göstermez. Tam liste için **Tümünü göster** ' i seçin. SAP yazılım dağıtımı için desteklenen işletim sistemleri hakkında daha fazla bilgi için bkz. SAP Note [1928533].
+1.  Sonraki sayfada hüküm ve koşulları gözden geçirin.
+1.  **Bir dağıtım modeli seçin** kutusunda **Kaynak Yöneticisi**' yi seçin.
 1.  **Oluştur**’u seçin.
 
-Sihirbaz, ek olarak sanal makine ağ arabirimleri ve depolama hesapları gibi tüm gerekli kaynakları oluşturmak için gerekli parametreleri ayarlamanız konusunda size yol gösterir. Bu parametrelerden bazıları şunlardır:
+Sihirbaz, ağ arabirimleri ve depolama hesapları gibi gerekli tüm kaynaklara ek olarak, sanal makineyi oluşturmak için gerekli parametreleri ayarlama sırasında size rehberlik eder. Bu parametrelerden bazıları şunlardır:
 
 1. **Temel**:
-   * **Ad**: (Sanal makine adı) kaynağının adı.
-   * **VM disk türü**: İşletim sistemi diskinin disk türünü seçin. Premium depolama, veri diskleri için kullanmak istiyorsanız, işletim sistemi diski de Premium depolama kullanmanızı öneririz.
-   * **Kullanıcı adı ve parola** veya **SSH ortak anahtarı**: Kullanıcı adı ve sağlama sırasında oluşturulan kullanıcı parolasını girin. Bir Linux sanal makinesi için makineye oturum açmak için kullandığınız genel güvenli Kabuk (SSH) anahtarı girebilirsiniz.
-   * **Abonelik**: Yeni sanal makine sağlamak için kullanmak istediğiniz aboneliği seçin.
-   * **Kaynak grubu**: Sanal makine için kaynak grubunun adı. Yeni bir kaynak grubu adı veya zaten bir kaynak grubu adını girebilirsiniz.
-   * **Konum**: Yeni bir sanal makine dağıtılacağı yeri'ı tıklatın. Sanal makine, şirket içi ağınıza bağlanmak istiyorsanız, Azure şirket içi ağınıza bağlanan sanal ağ konumu seçtiğinizden emin olun. Daha fazla bilgi için [Microsoft Azure ağı] [ planning-guide-microsoft-azure-networking] içinde [planlama Azure sanal makineleri ve SAP NetWeaver uygulamasını] [ planning-guide].
+   * **Ad**: Kaynağın adı (sanal makine adı).
+   * **VM disk türü**: İşletim sistemi diskinin disk türünü seçin. Veri diskleriniz için Premium Depolama kullanmak istiyorsanız, işletim sistemi diski için Premium Depolama kullanmanızı da öneririz.
+   * **Kullanıcı adı ve parola** ya da **SSH ortak anahtarı**: Sağlama sırasında oluşturulan kullanıcının Kullanıcı adını ve parolasını girin. Linux sanal makinesi için, makinede oturum açmak için kullandığınız genel Secure Shell (SSH) anahtarını girebilirsiniz.
+   * **Abonelik**: Yeni sanal makineyi sağlamak için kullanmak istediğiniz aboneliği seçin.
+   * **Kaynak grubu**: VM için kaynak grubunun adı. Yeni bir kaynak grubunun adını ya da zaten var olan bir kaynak grubunun adını girebilirsiniz.
+   * **Konum**: Yeni sanal makinenin dağıtılacağı yer. Sanal makineyi şirket içi ağınıza bağlamak istiyorsanız, Azure 'u şirket içi ağınıza bağlayan sanal ağın konumunu seçtiğinizden emin olun. Daha fazla bilgi için bkz. [SAP NetWeaver Için Azure sanal makinelerinde planlama ve uygulama][planning-guide] [Microsoft Azure ağ iletişimi][planning-guide-microsoft-azure-networking] .
 1. **Boyutu**:
 
-     Desteklenen VM türlerinin bir listesi için bkz. Not SAP [1928533]. Azure Premium depolama kullanmak istiyorsanız doğru VM türünün seçtiğinizden emin olun. Tüm VM türleri Premium depolamayı destekler. Daha fazla bilgi için [Depolama: Microsoft Azure depolama ve veri diskleri] [ planning-guide-storage-microsoft-azure-storage-and-data-disks] ve [Azure Premium depolama] [ planning-guide-azure-premium-storage] içinde [Azure sanal makineler planlama ve uygulama SAP NetWeaver için][planning-guide].
+     Desteklenen VM türlerinin bir listesi için bkz. SAP Note [1928533]. Azure Premium Depolama kullanmak istiyorsanız, doğru VM türünü seçtiğinizden emin olun. Tüm VM türleri Premium depolamayı desteklemez. Daha fazla bilgi için bkz [. depolama: Azure sanal makineler 'de][planning-guide-storage-microsoft-azure-storage-and-data-disks] Microsoft Azure depolama ve veri diskleri ve [Azure Premium Depolama][planning-guide-azure-premium-storage] , [SAP NetWeaver için planlama ve uygulama][planning-guide].
 
 1. **Ayarları**:
    * **Depolama**
-     * **Disk türü**: İşletim sistemi diskinin disk türünü seçin. Premium depolama, veri diskleri için kullanmak istiyorsanız, işletim sistemi diski de Premium depolama kullanmanızı öneririz.
-     * **Yönetilen diskleri kullanma**: Yönetilen diskleri kullanmak istiyorsanız, Evet'i seçin. Yönetilen diskler hakkında daha fazla bilgi için bkz: bölüm [yönetilen diskler] [ planning-guide-managed-disks] Planlama Kılavuzu'nda.
-     * **Depolama hesabı**: Mevcut bir depolama hesabını seçin veya yeni bir tane oluşturun. SAP uygulamaları çalıştırmak için tüm depolama türlerinde çalışır. Depolama türleri hakkında daha fazla bilgi için bkz. [RDBMS dağıtımlar için bir VM depolama yapısını](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64).
+     * **Disk türü**: İşletim sistemi diskinin disk türünü seçin. Veri diskleriniz için Premium Depolama kullanmak istiyorsanız, işletim sistemi diski için Premium Depolama kullanmanızı da öneririz.
+     * **Yönetilen diskleri kullan**: Yönetilen diskleri kullanmak istiyorsanız Evet ' i seçin. Yönetilen diskler hakkında daha fazla bilgi için bkz. planlama kılavuzunda bölüm [yönetimli diskler][planning-guide-managed-disks] .
+     * **Depolama hesabı**: Mevcut bir depolama hesabını seçin veya yeni bir tane oluşturun. Tüm depolama türleri SAP uygulamalarını çalıştırmak için çalışmaz. Depolama türleri hakkında daha fazla bilgi için bkz. [bir sanal makinenin depolama yapısına RDBMS dağıtımları](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64).
    * **Ağ**
-     * **Sanal ağ** ve **alt**: Sanal makine intranetinize ile tümleştirmek için şirket içi ağınıza bağlı sanal ağ'ı seçin.
-     * **Genel IP adresi**: Kullanmak istediğiniz genel IP adresi seçin veya yeni bir ortak IP adresi oluşturmak için parametreler girin. Sanal makinenizi Internet üzerinden erişmek için genel bir IP adresi kullanabilirsiniz. Ayrıca, sanal makinenize güvenli erişim yardımcı olmak için ağ güvenlik grubu oluşturduğunuzdan emin olun.
-     * **Ağ güvenlik grubu**: Daha fazla bilgi için [denetleyen ağ güvenlik grupları ile ağ trafiği akışını][virtual-networks-nsg].
-   * **Uzantıları**: Dağıtımı ekleyerek sanal makine uzantıları yükleyebilirsiniz. Bu adımda uzantıları eklemek gerekmez. SAP destek için gereken uzantılarını daha sonra yüklenir. Bölüm bakın [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak] [ deployment-guide-4.5] bu kılavuzdaki.
-   * **Yüksek kullanılabilirlik**: Bir kullanılabilirlik kümesi seçin veya yeni bir kullanılabilirlik kümesi oluşturmak için parametreleri girin. Daha fazla bilgi için [Azure kullanılabilirlik kümeleri][planning-guide-3.2.3].
+     * **Sanal ağ** ve **alt ağ**: Sanal makineyi intranetle tümleştirmek için, şirket içi ağınıza bağlı sanal ağı seçin.
+     * **Genel IP adresi**: Kullanmak istediğiniz genel IP adresini seçin veya yeni bir genel IP adresi oluşturmak için parametreler girin. Internet üzerinden sanal makinenize erişmek için genel bir IP adresi kullanabilirsiniz. Sanal makinenize erişimi güvenli hale getirmeye yardımcı olmak için bir ağ güvenlik grubu da oluşturduğunuzdan emin olun.
+     * **Ağ güvenlik grubu**: Daha fazla bilgi için bkz. ağ [güvenlik grupları ile ağ trafiği akışını denetleme][virtual-networks-nsg].
+   * **Uzantılar**: Sanal makine uzantılarını dağıtıma ekleyerek yükleyebilirsiniz. Bu adımda uzantı eklemeniz gerekmez. SAP desteği için gerekli uzantılar daha sonra yüklenir. Bu kılavuzda [, bkz. sap Için Azure uzantısını yapılandırma][deployment-guide-4.5] bölümü.
+   * **Yüksek kullanılabilirlik**: Bir kullanılabilirlik kümesi seçin veya yeni bir kullanılabilirlik kümesi oluşturmak için parametreleri girin. Daha fazla bilgi için bkz. [Azure kullanılabilirlik kümeleri][planning-guide-3.2.3].
    * **İzleme**
-     * **Önyükleme tanılaması**: Seçebileceğiniz **devre dışı** önyükleme tanılaması için.
-     * **Konuk işletim sistemi tanılama**: Seçebileceğiniz **devre dışı** Tanılama izleme.
+     * **Önyükleme tanılaması**: Önyükleme tanılaması için **devre dışı bırak** seçeneğini belirleyebilirsiniz.
+     * **Konuk işletim sistemi tanılama**: İzleme tanılaması için **devre dışı** seçeneğini belirleyebilirsiniz.
 
 1. **Özet**:
 
-   Seçimlerinizi gözden geçirin ve ardından **Tamam**.
+   Seçimlerinizi gözden geçirin ve ardından **Tamam**' ı seçin.
 
-Sanal makinenizi, seçili kaynak grubunda dağıtılmış.
+Sanal makineniz seçtiğiniz kaynak grubunda dağıtılır.
 
-#### <a name="create-a-virtual-machine-by-using-a-template"></a>Bir şablonu kullanarak bir sanal makine oluşturma
+#### <a name="create-a-virtual-machine-by-using-a-template"></a>Şablon kullanarak sanal makine oluşturma
 
-Yayımlanan SAP şablonlardan birini kullanarak bir sanal makine oluşturabilirsiniz [azure hızlı başlangıç şablonları GitHub deposunda][azure-quickstart-templates-github]. Ayrıca el ile bir sanal makine kullanarak oluşturabileceğiniz [Azure portalında][virtual-machines-windows-tutorial], [PowerShell][virtual-machines-ps-create-preconfigure-windows-resource-manager-vms], veya [AzureCLI] [virtual-machines-linux-tutorial].
+[Azure-QuickStart-Templates GitHub deposunda][azure-quickstart-templates-github]yayımlanan SAP şablonlarından birini kullanarak bir sanal makine oluşturabilirsiniz. Ayrıca, [Azure Portal][virtual-machines-windows-tutorial], [POWERSHELL][virtual-machines-ps-create-preconfigure-windows-resource-manager-vms]veya [Azure CLI][virtual-machines-linux-tutorial]kullanarak el ile bir sanal makine oluşturabilirsiniz.
 
-* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu** (sap-2-katman-Pazar-görüntü)][sap-templates-2-tier-marketplace-image]
+* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu** (SAP-2 katmanlı-Market-görüntü)][sap-templates-2-tier-marketplace-image]
 
-  Yalnızca bir sanal makineyi kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
-* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu - yönetilen diskleri** (sap-2-tier-marketplace-image-md)][sap-templates-2-tier-marketplace-image-md]
+  Yalnızca bir sanal makine kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablon tarafından yönetilen diskler** (SAP-2 katmanlı-Market-Image-MD)][sap-templates-2-tier-marketplace-image-md]
 
-  Tek bir sanal makine ve yönetilen diskleri kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
-* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablonu** (sap-3-katman-Pazar-görüntü)][sap-templates-3-tier-marketplace-image]
+  Yalnızca bir sanal makine ve yönetilen diskler kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablonu** (SAP-3 katmanlı-Market-görüntü)][sap-templates-3-tier-marketplace-image]
 
-  Birden çok sanal makine kullanarak bir üç katmanlı sistemi oluşturmak için bu şablonu kullanın.
-* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablonu - yönetilen diskleri** (sap-3-tier-marketplace-image-md)][sap-templates-3-tier-marketplace-image-md]
+  Birden çok sanal makine kullanarak üç katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablon tarafından yönetilen diskler** (SAP-3 katmanlı-Market-Image-MD)][sap-templates-3-tier-marketplace-image-md]
 
-  Birden çok sanal makine ve yönetilen diskleri kullanarak bir üç katmanlı sistemi oluşturmak için bu şablonu kullanın.
+  Birden çok sanal makine ve yönetilen disk kullanarak üç katmanlı bir sistem oluşturmak için bu şablonu kullanın.
 
-Azure portalında şablon için aşağıdaki parametreleri girin:
+Azure portal, şablon için aşağıdaki parametreleri girin:
 
 1. **Temel**:
-   * **Abonelik**: Şablonu dağıtmak için kullanılacak aboneliği.
-   * **Kaynak grubu**: Şablonu dağıtmak için kullanılacak kaynak grubu. Yeni bir kaynak grubu oluşturabilir veya mevcut bir kaynak grubu aboneliği seçin.
-   * **Konum**: Şablonu dağıtmak yer. Mevcut bir kaynak grubu seçtiyseniz, bu kaynak grubu konumu kullanılır.
+   * **Abonelik**: Şablonu dağıtmak için kullanılacak abonelik.
+   * **Kaynak grubu**: Şablonu dağıtmak için kullanılacak kaynak grubu. Yeni bir kaynak grubu oluşturabilir veya abonelikte var olan bir kaynak grubunu seçebilirsiniz.
+   * **Konum**: Şablonun dağıtılacağı yer. Var olan bir kaynak grubunu seçtiyseniz bu kaynak grubunun konumu kullanılır.
 
 1. **Ayarları**:
-   * **SAP sistem kimliği**: SAP sistemi kimliği (SID).
-   * **İşletim sistemi türü**: Örneğin, Windows Server 2012 R2, SUSE Linux Enterprise Server 12 (SLES 12), Red Hat Enterprise Linux 7.2 (RHEL 7.2) veya Oracle Linux 7.2 dağıtmak istediğiniz işletim sistemi.
+   * **SAP SISTEM kimliği**: SAP sistem KIMLIĞI (SID).
+   * **Işletim sistemi türü**: Dağıtmak istediğiniz işletim sistemi (örneğin, Windows Server 2012 R2, SUSE Linux Enterprise Server 12 (SLES 12), Red Hat Enterprise Linux 7,2 (RHEL 7,2) veya Oracle Linux 7,2.
 
-     Liste görünümü, tüm desteklenen işletim sistemlerini göstermez. SAP yazılım dağıtımı için desteklenen işletim sistemleri hakkında daha fazla bilgi için bkz. Not SAP [1928533].
-   * **SAP sistemi boyutu**: SAP sistemine boyutu.
+     Liste görünümü desteklenen tüm işletim sistemlerini göstermez. SAP yazılım dağıtımı için desteklenen işletim sistemleri hakkında daha fazla bilgi için bkz. SAP Note [1928533].
+   * **SAP sistem boyutu**: SAP sisteminin boyutu.
 
-     Yeni sisteme sağlar SAP sayısı. Kaç tane SAP sistemi gerektiriyor değil eminseniz, SAP teknoloji iş ortağı veya sistem Entegratörü isteyin.
+     Yeni sistemin sağladığı SAPS sayısı. Sistemin kaç tane için gerekli olduğundan emin değilseniz, SAP Technology Iş ortağınızdan veya sistem tümleştirmenize sorun.
    * **Sistem kullanılabilirliği** (yalnızca üç katmanlı şablon): Sistem kullanılabilirliği.
 
-     Seçin **HA** yüksek kullanılabilirlik yüklemesi için uygun bir yapılandırma için. İki veritabanı sunucusu ve iki sunucu için ABAP SAP merkezi Hizmetleri (ASCS) oluşturulur.
-   * **Depolama türü** (yalnızca iki katmanlı şablon): Kullanmak için depolama türü.
+     Yüksek kullanılabilirliğe sahip bir yükleme için uygun olan bir yapılandırma için **ha** 'yi seçin. İki veritabanı sunucusu ve ABAP SAP Merkezi Hizmetleri (yoks) için iki sunucu oluşturulur.
+   * **Depolama türü** (yalnızca iki katmanlı şablon): Kullanılacak depolamanın türü.
 
-     Daha büyük sistemler için yüksek oranda Azure Premium depolama kullanmanızı öneririz. Depolama türleri hakkında daha fazla bilgi için şu kaynaklara bakın:
+     Daha büyük sistemler için, Azure Premium Depolama kullanmanızı kesinlikle öneririz. Depolama türleri hakkında daha fazla bilgi için şu kaynaklara bakın:
       * [SAP DBMS örneği için Azure Premium SSD depolama kullanımı][2367194]
-      * [RDBMS dağıtımlar için bir VM depolama yapısı](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64)
+      * [RDBMS dağıtımları için bir sanal makinenin depolama yapısı](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64)
       * [Premium Depolama: Azure sanal makine iş yükleri için yüksek performanslı depolama][storage-premium-storage-preview-portal]
-      * [Microsoft Azure Depolama'ya giriş][storage-introduction]
-   * **Yönetici kullanıcı adı** ve **yönetici parolası**: Bir kullanıcı adı ve parola.
-     Yeni bir kullanıcı sanal makineye oturum açmak için oluşturulur.
-   * **Yeni veya var olan bir alt ağa**: Yeni sanal ağ ve alt ağ oluşturulur veya var olan bir alt ağ kullanılan belirler. Şirket içi ağınıza bağlı bir sanal ağınız zaten varsa, seçin **varolan**.
-   * **Alt ağ kimliği**: Tanımlanan bir alt ağa sahip olduğunuz mevcut bir Vnet'te VM dağıtmak istiyorsanız, VM atanmalıdır belirli bir alt ağ kimliği adı için. Kimliği genellikle şöyle görünür: /subscriptions/&lt;abonelik kimliği > /resourceGroups/&lt;kaynak grubu adı > /providers/Microsoft.Network/virtualNetworks/&lt;sanal ağ adı > /subnets/&lt;alt ağ adı >
+      * [Microsoft Azure Depolama'ya Giriş][storage-introduction]
+   * **Yönetici Kullanıcı adı** ve **yönetici parolası**: Kullanıcı adı ve parola.
+     Sanal makinede oturum açmak için yeni bir Kullanıcı oluşturulur.
+   * **Yeni veya mevcut alt ağ**: Yeni bir sanal ağın ve alt ağın oluşturulup oluşturulmayacağını veya var olan bir alt ağın kullanılıp kullanılmadığını belirler. Şirket içi ağınıza bağlı bir sanal ağınız zaten varsa, **mevcut**' ı seçin.
+   * **Alt ağ kimliği**: VM 'yi tanımlanmış VM 'ye atanmış bir alt ağa sahip olduğunuz mevcut bir VNet 'e dağıtmak istiyorsanız, söz konusu alt ağın KIMLIĞINI adlandırın. Kimlik genellikle şöyle görünür:/Subscriptions/&lt;abonelik kimliği >/ResourceGroups/&lt;kaynak grubu adı >/Providers/Microsoft.Network/virtualNetworks/&lt;sanal ağ adı >/Subnets/&lt;alt ağ adı >
 
 1. **Hüküm ve koşullar**:  
-    Gözden geçirin ve yasal koşulları kabul edin.
+    Yasal koşulları gözden geçirin ve kabul edin.
 
 1. **Satın al**'ı seçin.
 
-Azure VM Aracısı, Azure Marketi'nden bir görüntü kullandığınızda varsayılan olarak dağıtılır.
+Azure VM Aracısı, Azure Marketi 'nden bir görüntü kullandığınızda varsayılan olarak dağıtılır.
 
-#### <a name="configure-proxy-settings"></a>Proxy ayarlarını yapılandırma
+#### <a name="configure-proxy-settings"></a>Ara sunucu ayarlarını yapılandırma
 
-Şirket içi ağınıza nasıl yapılandırıldığına bağlı olarak, VM'niz proxy ayarlamak gerekebilir. Sanal makinenize bağlı ise şirket içi ağınıza VPN veya ExpressRoute, bir VM aracılığıyla Internet erişimine sahip olmayabilir ve gerekli Uzantıları'nı indirin ve izleme verilerini toplamak mümkün olmayacaktır. Daha fazla bilgi için [Proxy'yi yapılandırmak][deployment-guide-configure-proxy].
+Şirket içi ağınızın nasıl yapılandırıldığına bağlı olarak, VM 'niz üzerinde proxy ayarlamanız gerekebilir. VM 'niz VPN veya ExpressRoute aracılığıyla şirket içi ağınıza bağlıysa, sanal makine Internet 'e erişemeyebilir ve SAP uzantısı aracılığıyla SAP konak Aracısı için gerekli VM uzantılarını indiremez veya Azure altyapı bilgilerini toplayamayabilir Azure için. Daha fazla bilgi için bkz. [proxy 'Yi yapılandırma][deployment-guide-configure-proxy].
 
-#### <a name="join-a-domain-windows-only"></a>(Yalnızca Windows) etki alanına Katıl
+#### <a name="join-a-domain-windows-only"></a>Etki alanına ekleme (yalnızca Windows)
 
-Azure dağıtımınızı bir Azure siteden siteye VPN bağlantısı veya ExpressRoute aracılığıyla şirket içi Active Directory ve DNS örneğine bağlı olup olmadığını (Bu adlandırılır *şirketler arası* içinde [Azure sanal makineler planlama SAP NetWeaver için ve uygulama][planning-guide]), VM bir şirket içi etki alanına katıldığını beklenir. Bu görev için dikkat edilecek noktalar hakkında daha fazla bilgi için bkz. [bir şirket içi etki alanına (yalnızca Windows) için bir VM katılmak][deployment-guide-4.3].
+Azure dağıtımınız, bir Azure siteden siteye VPN bağlantısı veya ExpressRoute aracılığıyla şirket içi Active Directory veya DNS örneğine bağlıysa (Bu, [SAP Için Azure sanal makineler planlama ve uygulama için şirketler arası olarak adlandırılır) NetWeaver][planning-guide]), VM 'nin şirket içi etki alanına katılması beklenmektedir. Bu görevle ilgili hususlar hakkında daha fazla bilgi için bkz. [BIR VM 'yi şirket içi etki alanına ekleme (yalnızca Windows)][deployment-guide-4.3].
 
-#### <a name="ec323ac3-1de9-4c3a-b770-4ff701def65b"></a>İzlemeyi Yapılandırma
+#### <a name="ec323ac3-1de9-4c3a-b770-4ff701def65b"></a>VM uzantısını yapılandırma
 
-Emin olmak için SAP ortamınızı açıklandığı gibi SAP için Azure izleme uzantısı ayarlamak destekler [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak][deployment-guide-4.5]. SAP izleme için önkoşul denetimi ve çekirdek SAP ve SAP konak Aracısı, gerekli en düşük sürümlerle kaynaklarında listelenen [SAP kaynakları][deployment-guide-2.2].
+SAP 'nin ortamınızı desteklediğinden emin olmak için SAP için Azure uzantısını [yapılandırma][deployment-guide-4.5]başlığı altında AÇıKLANDıĞı şekilde SAP Için Azure uzantısını ayarlayın. SAP [kaynakları][deployment-guide-2.2]' nda listelenen kaynaklarda SAP önkoşulları ve SAP kernel ve SAP ana bilgisayar aracısının gerekli en düşük sürümlerini denetleyin.
 
-#### <a name="monitoring-check"></a>İzleme denetimi
+#### <a name="vm-extension-for-sap-check"></a>SAP denetimi için VM Uzantısı
 
-İzleme çalışıp çalışmadığını, açıklandığı denetleyin [denetimler ve uçtan uca izleme ayarlamak için sorun giderme][deployment-guide-troubleshooting-chapter].
+SAP [konak Aracısı için uçtan uca veri toplama Için denetimler ve sorun giderme][deployment-guide-troubleshooting-chapter]bölümünde AÇıKLANDıĞı gibi SAP Için VM uzantısının çalışıp çalışmadığını denetleyin.
 
 #### <a name="post-deployment-steps"></a>Dağıtım sonrası adımlar
 
-Sonra VM'yi oluşturmak ve VM dağıtılır, VM'yi gerekli yazılım bileşenleri yüklemeniz gerekir. Bu tür bir VM dağıtımı dağıtım/yazılım yükleme sırası nedeniyle yüklenecek yazılım zaten ya da azure'da, başka bir VM'de veya eklenebilecek disk olarak kullanılabilir olmalıdır. Veya hangi şirket içi bağlantı, varlıklar (yükleme paylaşımları) verildiğinde bir içi ve dışı karışık senaryo kullanmayı düşünün.
+VM 'yi oluşturduktan ve VM dağıtıldıktan sonra, gerekli yazılım bileşenlerini sanal makineye yüklemeniz gerekir. Bu sanal makine dağıtımında Dağıtım/yazılım yükleme sırası nedeniyle, yüklenecek yazılımın Azure 'da, başka bir VM 'de veya eklenebilecek bir disk olarak zaten mevcut olması gerekir. Ya da şirket içi varlıklara (yükleme paylaşımları) bağlantının verildiği bir şirketler arası senaryo kullanmayı düşünün.
 
-Azure VM'nizi dağıttıktan sonra aynı yönergeler ve bir şirket içi ortamda olduğu gibi sanal makinenizde SAP yazılımı yüklemek için Araçlar izleyin. Bir Azure VM'de SAP yazılımı yüklemek için hem SAP ve Microsoft karşıya yükleme ve Azure VHD'leri veya yönetilen diskler üzerinde SAP yükleme medyasında depolamak veya gerekli tüm SAP yükleme medyasını içeren bir dosya sunucusu olarak çalışır, bir Azure sanal makinesi, oluşturmanızı öneririz.
+VM 'nizi Azure 'da dağıttıktan sonra, VM 'nize SAP yazılımını şirket içi bir ortamda olduğu gibi yüklemek için aynı yönergeleri ve araçları izleyin. SAP yazılımını bir Azure VM 'ye yüklemek için SAP ve Microsoft, SAP yükleme medyasını Azure VHD 'leri veya yönetilen disklere yükleyip depolamanızı veya tüm gerekli SAP yükleme medyasına sahip bir dosya sunucusu olarak çalışacak bir Azure VM oluşturmanızı önerir.
 
-### <a name="54a1fc6d-24fd-4feb-9c57-ac588a55dff2"></a>Senaryo 2: SAP için özel bir görüntü ile bir VM dağıtma
+### <a name="54a1fc6d-24fd-4feb-9c57-ac588a55dff2"></a>Senaryo 2: SAP için özel bir görüntü ile VM dağıtma
 
-Bir işletim sistemi veya DBMS farklı sürümlerini farklı düzeltme eki gereksinimleri olduğundan, Azure Marketi'nde bulma görüntüleri ihtiyaçlarınızı karşılamayabilir. Bunun yerine, daha sonra yeniden dağıtabilirsiniz, kendi işletim sistemi/DBMS VM görüntüsünü kullanarak bir VM oluşturmak isteyebilirsiniz.
-Windows için bir tane oluşturmak için daha Linux için özel bir görüntü oluşturmak için farklı adımlar kullanın.
+Bir işletim sisteminin veya DBMS 'nin farklı sürümlerinde farklı düzeltme gereksinimleri olduğundan, Azure Marketi 'nde bulduğunuz görüntüler gereksinimlerinize uygun olmayabilir. Bunun yerine, daha sonra yeniden dağıtabileceğiniz kendi OS/DBMS VM görüntünüzü kullanarak bir VM oluşturmak isteyebilirsiniz.
+Linux için özel bir görüntü oluşturmak üzere Windows için bir tane oluşturmak üzere farklı adımlar kullanırsınız.
 
 ---
 > ![Windows][Logo_Windows] Windows
 >
-> Birden çok sanal makine dağıtmak için kullanabileceğiniz bir Windows görüntüsünü hazırlamak için Windows ayarları (örneğin, Windows SID ve ana bilgisayar adı) soyutlanır veya gerekir şirket içi VM genelleştirilmiş. Kullanabileceğiniz [sysprep](https://msdn.microsoft.com/library/hh825084.aspx) Bunu yapmak için.
+> Birden çok sanal makine dağıtmak için kullanabileceğiniz bir Windows görüntüsünü hazırlamak için, Windows ayarlarının (Windows SID ve ana bilgisayar adı gibi) Şirket içi VM 'de soyut veya Genelleştirilmiş olması gerekir. Bunu yapmak için [Sysprep 'i](https://msdn.microsoft.com/library/hh825084.aspx) kullanabilirsiniz.
 >
 > ![Linux][Logo_Linux] Linux
 >
-> Birden çok sanal makine dağıtmak için kullanabileceğiniz bir Linux görüntüsü hazırlamak için bazı Linux ayarları soyutlanır veya gerekir şirket içi VM genelleştirilmiş. Kullanabileceğiniz `waagent -deprovision` Bunu yapmak için. Daha fazla bilgi için [Azure üzerinde çalışan Linux sanal makinesi yakalama] [ virtual-machines-linux-capture-image] ve [Azure Linux Aracısı Kullanım Kılavuzu][virtual-machines-linux-agent-user-guide-command-line-options].
+> Birden çok sanal makine dağıtmak için kullanabileceğiniz bir Linux görüntüsünü hazırlamak için bazı Linux ayarlarının, şirket içi VM 'de soyut veya Genelleştirilmiş olması gerekir. Bunu yapmak için `waagent -deprovision` kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure 'da çalışan bir Linux sanal makinesini][virtual-machines-linux-capture-image] ve [Azure Linux Aracısı kullanıcı kılavuzunu][virtual-machines-linux-agent-user-guide-command-line-options]yakalama.
 >
 >
 
 ---
-Hazırlama ve özel bir görüntü oluşturma ve birden fazla yeni VM oluşturmak için kullanın. Bu açıklanan [planlama Azure sanal makineleri ve SAP NetWeaver uygulamasını][planning-guide]. Veritabanı içeriğinizi (geri yükleyen bir veritabanı yedeği sanal makineye bağlı bir diskten) yeni bir SAP sistemine yüklemek için SAP yazılım sağlama Yöneticisi'ni kullanarak veya doğrudan Azure depolama, veritabanı yedeklemesini geri yükleme verilirse, DBMS Bu destekler. Daha fazla bilgi için [SAP NetWeaver için Azure sanal makineleri DBMS dağıtım][dbms-guide]. (Özellikle de iki katmanlı sistemleri için), şirket içi VM'de SAP sistemine zaten yüklediyseniz, SAP sistem ayarlarını Azure VM dağıtıldıktan sonra SAP yazılım sağlama Yöneticisi (SAP tarafından desteklenen sistem yeniden adlandır yordamı kullanarak uyarlayabilirsiniz Not [1619720]). Aksi takdirde, Azure VM dağıttıktan sonra SAP yazılım yükleyebilirsiniz.
+Özel bir görüntü hazırlayabilir ve oluşturabilir ve sonra birden çok yeni VM oluşturmak için kullanabilirsiniz. Bu, [SAP NetWeaver Için Azure sanal makineleri planlama ve uygulama][planning-guide]konusunda açıklanmaktadır. Yeni bir SAP sistemi yüklemek için SAP yazılım sağlama Yöneticisi 'Ni kullanarak veritabanı içeriğinizi ayarlayın (sanal makineye bağlı bir diskten bir veritabanı yedeklemesini geri yükler) veya DBMS 'niz varsa, bir veritabanı yedeklemesini doğrudan bir Azure depolama alanından geri yükleyerek destekler. Daha fazla bilgi için [SAP NetWeaver için Azure sanal makineleri DBMS dağıtım][dbms-guide]. Şirket içi sanal makinenize zaten bir SAP sistemi yüklediyseniz (özellikle iki katmanlı sistemler için), SAP yazılım sağlama Yöneticisi (SAP) tarafından desteklenen sistem yeniden adlandırma yordamını kullanarak SAP sistem ayarlarını Azure VM dağıtımı sonrasında uyarlayabilirsiniz. Note [1619720]). Aksi takdirde, Azure VM 'yi dağıttıktan sonra SAP yazılımını yükleyebilirsiniz.
 
-Aşağıdaki akış, bir özel görüntüsünden VM dağıtmak için adımları SAP özgü sırasını göstermektedir:
+Aşağıdaki akış çizelgesi, bir sanal makineyi özel bir görüntüden dağıtmaya yönelik, SAP 'ye özgü adımların sırasını göstermektedir:
 
-![VM dağıtımı için bir VM görüntüsü özel Market'te kullanarak SAP sistemlerini akış çizelgesi][deployment-guide-figure-300]
+![Özel Market 'te VM görüntüsü kullanarak SAP sistemleri için VM dağıtımı akış çizelgesi][deployment-guide-figure-300]
 
-#### <a name="create-a-virtual-machine-by-using-the-azure-portal"></a>Azure portalını kullanarak bir sanal makine oluşturun
+#### <a name="create-a-virtual-machine-by-using-the-azure-portal"></a>Azure portal kullanarak bir sanal makine oluşturun
 
-Azure portalını kullanarak yönetilen Disk görüntüsünden yeni bir sanal makine oluşturmak için en kolay yolu olan. Bir yönetme Disk görüntüsünün nasıl oluşturulacağı hakkında daha fazla bilgi için okuma [azure'da bir genelleştirilmiş VM'nin yönetilen görüntüsünü yakalama](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource)
+Yönetilen bir disk görüntüsünden yeni bir sanal makine oluşturmanın en kolay yolu Azure portal kullanmaktır. Bir disk yönetme görüntüsü oluşturma hakkında daha fazla bilgi için, [Azure 'da Genelleştirilmiş BIR VM 'nin yönetilen görüntüsünü](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource) okuyun
 
-1.  <https://ms.portal.azure.com/#blade/HubsExtension/Resources/resourceType/Microsoft.Compute%2Fimages> kısmına gidin. Veya, Azure portal menüsünde seçin **görüntüleri**.
-1.  Tıklayın ve dağıtmak istediğiniz yönetilen Disk görüntüsü seçin **VM oluştur**
+1.  <https://ms.portal.azure.com/#blade/HubsExtension/Resources/resourceType/Microsoft.Compute%2Fimages> kısmına gidin. Ya da Azure portal menüsünde **görüntüler**' i seçin.
+1.  Dağıtmak istediğiniz yönetilen disk görüntüsünü seçin ve **sanal makine oluştur** ' a tıklayın.
 
-Sihirbaz, ek olarak sanal makine ağ arabirimleri ve depolama hesapları gibi tüm gerekli kaynakları oluşturmak için gerekli parametreleri ayarlamanız konusunda size yol gösterir. Bu parametrelerden bazıları şunlardır:
+Sihirbaz, ağ arabirimleri ve depolama hesapları gibi gerekli tüm kaynaklara ek olarak, sanal makineyi oluşturmak için gerekli parametreleri ayarlama sırasında size rehberlik eder. Bu parametrelerden bazıları şunlardır:
 
 1. **Temel**:
-   * **Ad**: (Sanal makine adı) kaynağının adı.
-   * **VM disk türü**: İşletim sistemi diskinin disk türünü seçin. Premium depolama, veri diskleri için kullanmak istiyorsanız, işletim sistemi diski de Premium depolama kullanmanızı öneririz.
-   * **Kullanıcı adı ve parola** veya **SSH ortak anahtarı**: Kullanıcı adı ve sağlama sırasında oluşturulan kullanıcı parolasını girin. Bir Linux sanal makinesi için makineye oturum açmak için kullandığınız genel güvenli Kabuk (SSH) anahtarı girebilirsiniz.
-   * **Abonelik**: Yeni sanal makine sağlamak için kullanmak istediğiniz aboneliği seçin.
-   * **Kaynak grubu**: Sanal makine için kaynak grubunun adı. Yeni bir kaynak grubu adı veya zaten bir kaynak grubu adını girebilirsiniz.
-   * **Konum**: Yeni bir sanal makine dağıtılacağı yeri'ı tıklatın. Sanal makine, şirket içi ağınıza bağlanmak istiyorsanız, Azure şirket içi ağınıza bağlanan sanal ağ konumu seçtiğinizden emin olun. Daha fazla bilgi için [Microsoft Azure ağı] [ planning-guide-microsoft-azure-networking] içinde [planlama Azure sanal makineleri ve SAP NetWeaver uygulamasını] [ planning-guide].
+   * **Ad**: Kaynağın adı (sanal makine adı).
+   * **VM disk türü**: İşletim sistemi diskinin disk türünü seçin. Veri diskleriniz için Premium Depolama kullanmak istiyorsanız, işletim sistemi diski için Premium Depolama kullanmanızı da öneririz.
+   * **Kullanıcı adı ve parola** ya da **SSH ortak anahtarı**: Sağlama sırasında oluşturulan kullanıcının Kullanıcı adını ve parolasını girin. Linux sanal makinesi için, makinede oturum açmak için kullandığınız genel Secure Shell (SSH) anahtarını girebilirsiniz.
+   * **Abonelik**: Yeni sanal makineyi sağlamak için kullanmak istediğiniz aboneliği seçin.
+   * **Kaynak grubu**: VM için kaynak grubunun adı. Yeni bir kaynak grubunun adını ya da zaten var olan bir kaynak grubunun adını girebilirsiniz.
+   * **Konum**: Yeni sanal makinenin dağıtılacağı yer. Sanal makineyi şirket içi ağınıza bağlamak istiyorsanız, Azure 'u şirket içi ağınıza bağlayan sanal ağın konumunu seçtiğinizden emin olun. Daha fazla bilgi için bkz. [SAP NetWeaver Için Azure sanal makinelerinde planlama ve uygulama][planning-guide] [Microsoft Azure ağ iletişimi][planning-guide-microsoft-azure-networking] .
 1. **Boyutu**:
 
-     Desteklenen VM türlerinin bir listesi için bkz. Not SAP [1928533]. Azure Premium depolama kullanmak istiyorsanız doğru VM türünün seçtiğinizden emin olun. Tüm VM türleri Premium depolamayı destekler. Daha fazla bilgi için [Depolama: Microsoft Azure depolama ve veri diskleri] [ planning-guide-storage-microsoft-azure-storage-and-data-disks] ve [Azure Premium depolama] [ planning-guide-azure-premium-storage] içinde [Azure sanal makineler planlama ve uygulama SAP NetWeaver için][planning-guide].
+     Desteklenen VM türlerinin bir listesi için bkz. SAP Note [1928533]. Azure Premium Depolama kullanmak istiyorsanız, doğru VM türünü seçtiğinizden emin olun. Tüm VM türleri Premium depolamayı desteklemez. Daha fazla bilgi için bkz [. depolama: Azure sanal makineler 'de][planning-guide-storage-microsoft-azure-storage-and-data-disks] Microsoft Azure depolama ve veri diskleri ve [Azure Premium Depolama][planning-guide-azure-premium-storage] , [SAP NetWeaver için planlama ve uygulama][planning-guide].
 
 1. **Ayarları**:
    * **Depolama**
-     * **Disk türü**: İşletim sistemi diskinin disk türünü seçin. Premium depolama, veri diskleri için kullanmak istiyorsanız, işletim sistemi diski de Premium depolama kullanmanızı öneririz.
-     * **Yönetilen diskleri kullanma**: Yönetilen diskleri kullanmak istiyorsanız, Evet'i seçin. Yönetilen diskler hakkında daha fazla bilgi için bkz: bölüm [yönetilen diskler] [ planning-guide-managed-disks] Planlama Kılavuzu'nda.
+     * **Disk türü**: İşletim sistemi diskinin disk türünü seçin. Veri diskleriniz için Premium Depolama kullanmak istiyorsanız, işletim sistemi diski için Premium Depolama kullanmanızı da öneririz.
+     * **Yönetilen diskleri kullan**: Yönetilen diskleri kullanmak istiyorsanız Evet ' i seçin. Yönetilen diskler hakkında daha fazla bilgi için bkz. planlama kılavuzunda bölüm [yönetimli diskler][planning-guide-managed-disks] .
    * **Ağ**
-     * **Sanal ağ** ve **alt**: Sanal makine intranetinize ile tümleştirmek için şirket içi ağınıza bağlı sanal ağ'ı seçin.
-     * **Genel IP adresi**: Kullanmak istediğiniz genel IP adresi seçin veya yeni bir ortak IP adresi oluşturmak için parametreler girin. Sanal makinenizi Internet üzerinden erişmek için genel bir IP adresi kullanabilirsiniz. Ayrıca, sanal makinenize güvenli erişim yardımcı olmak için ağ güvenlik grubu oluşturduğunuzdan emin olun.
-     * **Ağ güvenlik grubu**: Daha fazla bilgi için [denetleyen ağ güvenlik grupları ile ağ trafiği akışını][virtual-networks-nsg].
-   * **Uzantıları**: Dağıtımı ekleyerek sanal makine uzantıları yükleyebilirsiniz. Bu adımda uzantısı eklemek gerekmez. SAP destek için gereken uzantılarını daha sonra yüklenir. Bölüm bakın [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak] [ deployment-guide-4.5] bu kılavuzdaki.
-   * **Yüksek kullanılabilirlik**: Bir kullanılabilirlik kümesi seçin veya yeni bir kullanılabilirlik kümesi oluşturmak için parametreleri girin. Daha fazla bilgi için [Azure kullanılabilirlik kümeleri][planning-guide-3.2.3].
+     * **Sanal ağ** ve **alt ağ**: Sanal makineyi intranetle tümleştirmek için, şirket içi ağınıza bağlı sanal ağı seçin.
+     * **Genel IP adresi**: Kullanmak istediğiniz genel IP adresini seçin veya yeni bir genel IP adresi oluşturmak için parametreler girin. Internet üzerinden sanal makinenize erişmek için genel bir IP adresi kullanabilirsiniz. Sanal makinenize erişimi güvenli hale getirmeye yardımcı olmak için bir ağ güvenlik grubu da oluşturduğunuzdan emin olun.
+     * **Ağ güvenlik grubu**: Daha fazla bilgi için bkz. ağ [güvenlik grupları ile ağ trafiği akışını denetleme][virtual-networks-nsg].
+   * **Uzantılar**: Sanal makine uzantılarını dağıtıma ekleyerek yükleyebilirsiniz. Bu adımda uzantı eklemeniz gerekmez. SAP desteği için gerekli uzantılar daha sonra yüklenir. Bu kılavuzda [, bkz. sap Için Azure uzantısını yapılandırma][deployment-guide-4.5] bölümü.
+   * **Yüksek kullanılabilirlik**: Bir kullanılabilirlik kümesi seçin veya yeni bir kullanılabilirlik kümesi oluşturmak için parametreleri girin. Daha fazla bilgi için bkz. [Azure kullanılabilirlik kümeleri][planning-guide-3.2.3].
    * **İzleme**
-     * **Önyükleme tanılaması**: Seçebileceğiniz **devre dışı** önyükleme tanılaması için.
-     * **Konuk işletim sistemi tanılama**: Seçebileceğiniz **devre dışı** Tanılama izleme.
+     * **Önyükleme tanılaması**: Önyükleme tanılaması için **devre dışı bırak** seçeneğini belirleyebilirsiniz.
+     * **Konuk işletim sistemi tanılama**: İzleme tanılaması için **devre dışı** seçeneğini belirleyebilirsiniz.
 
 1. **Özet**:
 
-   Seçimlerinizi gözden geçirin ve ardından **Tamam**.
+   Seçimlerinizi gözden geçirin ve ardından **Tamam**' ı seçin.
 
-Sanal makinenizi, seçili kaynak grubunda dağıtılmış.
+Sanal makineniz seçtiğiniz kaynak grubunda dağıtılır.
 
-#### <a name="create-a-virtual-machine-by-using-a-template"></a>Bir şablonu kullanarak bir sanal makine oluşturma
+#### <a name="create-a-virtual-machine-by-using-a-template"></a>Şablon kullanarak sanal makine oluşturma
 
-Azure portalından özel bir işletim sistemi görüntüsü kullanarak bir dağıtım oluşturmak için aşağıdaki SAP şablonlardan birini kullanın. Bu şablonlar yayınlanır [azure hızlı başlangıç şablonları GitHub deposunda][azure-quickstart-templates-github]. Ayrıca el ile bir sanal makine kullanarak oluşturabileceğiniz [PowerShell][virtual-machines-upload-image-windows-resource-manager].
+Azure portal özel bir işletim sistemi görüntüsü kullanarak bir dağıtım oluşturmak için aşağıdaki SAP şablonlarından birini kullanın. Bu şablonlar [Azure-QuickStart-Templates GitHub deposunda][azure-quickstart-templates-github]yayımlanır. Ayrıca, [PowerShell][virtual-machines-upload-image-windows-resource-manager]kullanarak el ile bir sanal makine da oluşturabilirsiniz.
 
-* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu** (sap-2-katman-kullanıcı-görüntü)][sap-templates-2-tier-user-image]
+* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu** (SAP-2-katmanlı-Kullanıcı-görüntü)][sap-templates-2-tier-user-image]
 
-  Yalnızca bir sanal makineyi kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
-* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu - yönetilen Disk görüntüsü** (sap-2-tier-user-image-md)][sap-templates-2-tier-user-image-md]
+  Yalnızca bir sanal makine kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablon tarafından yönetilen disk görüntüsü** (SAP-2-Tier-User-Image-MD)][sap-templates-2-tier-user-image-md]
 
-  Yalnızca bir sanal makine ve yönetilen Disk görüntüsü kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
-* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablonu** (sap-3-katman-kullanıcı-görüntü)][sap-templates-3-tier-user-image]
+  Yalnızca bir sanal makine ve yönetilen disk görüntüsü kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablonu** (SAP-3 katmanlı-Kullanıcı-görüntü)][sap-templates-3-tier-user-image]
 
-  Birden çok sanal makine ya da kendi işletim sistemi görüntüsü kullanarak bir üç katmanlı sistemi oluşturmak için bu şablonu kullanın.
-* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablonu - yönetilen Disk görüntüsü** (sap-3-tier-user-image-md)][sap-templates-3-tier-user-image-md]
+  Birden çok sanal makine veya kendi işletim sistemi görüntünüzü kullanarak üç katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+* [**Üç katmanlı yapılandırma (birden çok sanal makine) şablon tarafından yönetilen disk görüntüsü** (SAP-3-katmanlı-Kullanıcı-görüntü-MD)][sap-templates-3-tier-user-image-md]
 
-  Birden çok sanal makine veya kendi işletim sistemi görüntüsü ve bir yönetilen Disk görüntüsü kullanarak bir üç katmanlı sistemi oluşturmak için bu şablonu kullanın.
+  Birden çok sanal makine veya kendi işletim sistemi görüntünüzü ve yönetilen bir disk görüntüsünü kullanarak üç katmanlı bir sistem oluşturmak için bu şablonu kullanın.
 
-Azure portalında şablon için aşağıdaki parametreleri girin:
+Azure portal, şablon için aşağıdaki parametreleri girin:
 
 1. **Temel**:
-   * **Abonelik**: Şablonu dağıtmak için kullanılacak aboneliği.
-   * **Kaynak grubu**: Şablonu dağıtmak için kullanılacak kaynak grubu. Yeni bir kaynak grubu oluşturun veya mevcut bir kaynak grubu aboneliği seçin.
-   * **Konum**: Şablonu dağıtmak yer. Mevcut bir kaynak grubu seçtiyseniz, bu kaynak grubu konumu kullanılır.
+   * **Abonelik**: Şablonu dağıtmak için kullanılacak abonelik.
+   * **Kaynak grubu**: Şablonu dağıtmak için kullanılacak kaynak grubu. Yeni bir kaynak grubu oluşturabilir veya abonelikte var olan bir kaynak grubunu seçebilirsiniz.
+   * **Konum**: Şablonun dağıtılacağı yer. Var olan bir kaynak grubunu seçtiyseniz bu kaynak grubunun konumu kullanılır.
 1. **Ayarları**:
-   * **SAP sistem kimliği**: SAP sistem kimliği
-   * **İşletim sistemi türü**: (Windows veya Linux) dağıtmak istediğiniz işletim sistemi türü.
-   * **SAP sistemi boyutu**: SAP sistemine boyutu.
+   * **SAP SISTEM kimliği**: SAP sistem KIMLIĞI.
+   * **Işletim sistemi türü**: Dağıtmak istediğiniz işletim sistemi türü (Windows veya Linux).
+   * **SAP sistem boyutu**: SAP sisteminin boyutu.
 
-     Yeni sisteme sağlar SAP sayısı. Kaç tane SAP sistemi gerektiriyor değil eminseniz, SAP teknoloji iş ortağı veya sistem Entegratörü isteyin.
+     Yeni sistemin sağladığı SAPS sayısı. Sistemin kaç tane için gerekli olduğundan emin değilseniz, SAP Technology Iş ortağınızdan veya sistem tümleştirmenize sorun.
    * **Sistem kullanılabilirliği** (yalnızca üç katmanlı şablon): Sistem kullanılabilirliği.
 
-     Seçin **HA** yüksek kullanılabilirlik yüklemesi için uygun bir yapılandırma için. İki veritabanı sunucusu ve iki sunucu ASCS için oluşturulur.
-   * **Depolama türü** (yalnızca iki katmanlı şablon): Kullanmak için depolama türü.
+     Yüksek kullanılabilirliğe sahip bir yükleme için uygun olan bir yapılandırma için **ha** 'yi seçin. İki veritabanı sunucusu ve yoks için iki sunucu oluşturulur.
+   * **Depolama türü** (yalnızca iki katmanlı şablon): Kullanılacak depolamanın türü.
 
-     Daha büyük sistemler için yüksek oranda Azure Premium depolama kullanmanızı öneririz. Depolama türleri hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+     Daha büyük sistemler için, Azure Premium Depolama kullanmanızı kesinlikle öneririz. Depolama türleri hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
       * [SAP DBMS örneği için Azure Premium SSD depolama kullanımı][2367194]
-      * [RDBMS dağıtımlar için bir VM depolama yapısı](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64)
+      * [RDBMS dağıtımları için bir sanal makinenin depolama yapısı](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64)
       * [Premium Depolama: Azure sanal makine iş yükleri için yüksek performanslı depolama][storage-premium-storage-preview-portal]
-      * [Microsoft Azure Depolama'ya giriş][storage-introduction]
-   * **Kullanıcı görüntüsü VHD URİ'si** (yalnızca yönetilmeyen disk görüntüsü şablonu): VHD, örneğin, https:// URI özel işletim sistemi yansımasını&lt;accountname >.blob.core.windows.net/vhds/userimage.vhd.
-   * **Kullanıcı görüntüsü depolama hesabı** (yalnızca yönetilmeyen disk görüntüsü şablonu): Özel işletim sistemi görüntüsünün depolandığı, örneğin, depolama hesabının adını &lt;accountname > https:// içinde&lt;accountname >.blob.core.windows.net/vhds/userimage.vhd.
-   * **userImageId** (yalnızca yönetilen disk görüntüsü şablonu): Kullanmak istediğiniz yönetilen Disk görüntüsü kimliği
-   * **Yönetici kullanıcı adı** ve **yönetici parolası**: Kullanıcı adı ve parola.
+      * [Microsoft Azure Depolama'ya Giriş][storage-introduction]
+   * **Kullanıcı görüntüsü VHD URI 'si** (yalnızca yönetilmeyen disk görüntü şablonu): Özel işletim sistemi görüntüsü VHD 'sinin URI 'si; Örneğin, https://&lt;AccountName >. blob. Core. Windows. net/VHD/userımage. vhd.
+   * **Kullanıcı görüntüsü depolama hesabı** (yalnızca yönetilmeyen disk görüntü şablonu): Özel işletim sistemi görüntüsünün depolandığı depolama hesabının adı; örneğin, &lt;https://&lt;AccountName >. blob. Core. Windows. net/VHD/userımage. vhd içindeki AccountName >.
+   * **Userımageıd** (yalnızca yönetilen disk görüntüsü şablonu): Kullanmak istediğiniz yönetilen disk görüntüsünün kimliği
+   * **Yönetici Kullanıcı adı** ve **yönetici parolası**: Kullanıcı adı ve parola.
 
-     Yeni bir kullanıcı sanal makineye oturum açmak için oluşturulur.
-   * **Yeni veya var olan bir alt ağa**: Yeni sanal ağ ve alt ağ oluşturulur veya var olan bir alt ağ kullanılan belirler. Şirket içi ağınıza bağlı bir sanal ağınız zaten varsa, seçin **varolan**.
-   * **Alt ağ kimliği**: Tanımlanan bir alt ağa sahip olduğunuz mevcut bir Vnet'te VM dağıtmak istiyorsanız, VM atanmalıdır belirli bir alt ağ kimliği adı için. Kimliği genellikle şöyle görünür: /subscriptions/&lt;abonelik kimliği > /resourceGroups/&lt;kaynak grubu adı > /providers/Microsoft.Network/virtualNetworks/&lt;sanal ağ adı > /subnets/&lt;alt ağ adı >
+     Sanal makinede oturum açmak için yeni bir Kullanıcı oluşturulur.
+   * **Yeni veya mevcut alt ağ**: Yeni bir sanal ağın ve alt ağın oluşturulup oluşturulmayacağını veya var olan bir alt ağın kullanılıp kullanılmadığını belirler. Şirket içi ağınıza bağlı bir sanal ağınız zaten varsa, **mevcut**' ı seçin.
+   * **Alt ağ kimliği**: VM 'yi tanımlanmış VM 'ye atanmış bir alt ağa sahip olduğunuz mevcut bir VNet 'e dağıtmak istiyorsanız, söz konusu alt ağın KIMLIĞINI adlandırın. Kimlik genellikle şöyle görünür:/Subscriptions/&lt;abonelik kimliği >/ResourceGroups/&lt;kaynak grubu adı >/Providers/Microsoft.Network/virtualNetworks/&lt;sanal ağ adı >/Subnets/&lt;alt ağ adı >
 
 1. **Hüküm ve koşullar**:  
-    Gözden geçirin ve yasal koşulları kabul edin.
+    Yasal koşulları gözden geçirin ve kabul edin.
 
 1. **Satın al**'ı seçin.
 
-#### <a name="install-the-vm-agent-linux-only"></a>VM Aracısı (yalnızca Linux)
+#### <a name="install-the-vm-agent-linux-only"></a>VM Aracısı 'nı (yalnızca Linux) yükler
 
-Önceki bölümde açıklanan şablonlarını kullanmak için Linux Aracısı kullanıcı görüntüde yüklü olması gereken veya dağıtım başarısız olur. Karşıdan yükleyip VM Aracısı kullanıcı resimde açıklandığı [indirme, yükleme ve Azure VM aracısını etkinleştirin][deployment-guide-4.4]. Şablonları kullanmazsanız, daha sonra VM Aracısı de yükleyebilirsiniz.
+Önceki bölümde açıklanan şablonları kullanmak için, Linux aracısının Kullanıcı görüntüsünde zaten yüklü olması gerekir, aksi durumda dağıtım başarısız olur. [Azure VM aracısını indirme, yükleme ve etkinleştirme][deployment-guide-4.4]bölümünde açıklandığı gıbı, VM aracısını Kullanıcı görüntüsüne indirin ve yükleyin. Şablonları kullanmıyorsanız, VM aracısını daha sonra da yükleyebilirsiniz.
 
-#### <a name="join-a-domain-windows-only"></a>(Yalnızca Windows) etki alanına Katıl
+#### <a name="join-a-domain-windows-only"></a>Etki alanına ekleme (yalnızca Windows)
 
-Azure dağıtımınızı bir Azure siteden siteye VPN bağlantısı veya Azure ExpressRoute aracılığıyla şirket içi Active Directory ve DNS örneğine bağlı olup olmadığını (Bu adlandırılır *şirketler arası* içinde [Azure sanal makineler Planlama ve uygulama için SAP NetWeaver][planning-guide]), VM bir şirket içi etki alanına katıldığını beklenir. Bu adım için dikkat edilecek noktalar hakkında daha fazla bilgi için bkz. [bir şirket içi etki alanına (yalnızca Windows) için bir VM katılmak][deployment-guide-4.3].
+Azure dağıtımınız, bir Azure siteden siteye VPN bağlantısı veya Azure ExpressRoute aracılığıyla şirket içi Active Directory veya DNS örneğine bağlıysa (Bu, [SAP Için Azure sanal makineler planlama ve uygulama için şirket içi olarak adlandırılır) NetWeaver][planning-guide]), VM 'nin şirket içi etki alanına katılması beklenmektedir. Bu adımla ilgili konular hakkında daha fazla bilgi için bkz. [BIR VM 'yi şirket içi etki alanına ekleme (yalnızca Windows)][deployment-guide-4.3].
 
-#### <a name="configure-proxy-settings"></a>Proxy ayarlarını yapılandırma
+#### <a name="configure-proxy-settings"></a>Ara sunucu ayarlarını yapılandırma
 
-Şirket içi ağınıza nasıl yapılandırıldığına bağlı olarak, VM'niz proxy ayarlamak gerekebilir. Sanal makinenize bağlı ise şirket içi ağınıza VPN veya ExpressRoute, bir VM aracılığıyla Internet erişimine sahip olmayabilir ve gerekli Uzantıları'nı indirin ve izleme verilerini toplamak mümkün olmayacaktır. Daha fazla bilgi için [Proxy'yi yapılandırmak][deployment-guide-configure-proxy].
+Şirket içi ağınızın nasıl yapılandırıldığına bağlı olarak, VM 'niz üzerinde proxy ayarlamanız gerekebilir. VM 'niz VPN veya ExpressRoute aracılığıyla şirket içi ağınıza bağlıysa, sanal makine Internet 'e erişemeyebilir ve SAP uzantısı aracılığıyla SAP konak Aracısı için gerekli VM uzantılarını indiremez veya Azure altyapı bilgilerini toplayamayabilir Azure için bkz. [proxy 'Yi yapılandırma][deployment-guide-configure-proxy].
 
-#### <a name="configure-monitoring"></a>İzlemeyi yapılandırma
+#### <a name="configure-azure-vm-extension-for-sap"></a>SAP için Azure VM uzantısını yapılandırma
 
-Emin olmak için SAP ortamınızı açıklandığı gibi SAP için Azure izleme uzantısı ayarlamak destekler [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak][deployment-guide-4.5]. SAP izleme için önkoşul denetimi ve çekirdek SAP ve SAP konak Aracısı, gerekli en düşük sürümlerle kaynaklarında listelenen [SAP kaynakları][deployment-guide-2.2].
+SAP 'nin ortamınızı desteklediğinden emin olmak için SAP için Azure uzantısını [yapılandırma][deployment-guide-4.5]başlığı altında AÇıKLANDıĞı şekilde SAP Için Azure uzantısını ayarlayın. SAP [kaynakları][deployment-guide-2.2]' nda listelenen kaynaklarda SAP önkoşulları ve SAP kernel ve SAP ana bilgisayar aracısının gerekli en düşük sürümlerini denetleyin.
 
-#### <a name="monitoring-check"></a>İzleme denetimi
+#### <a name="sap-vm-extension-check"></a>SAP VM uzantı denetimi
 
-İzleme çalışıp çalışmadığını, açıklandığı denetleyin [denetimler ve uçtan uca izleme ayarlamak için sorun giderme][deployment-guide-troubleshooting-chapter].
+SAP [konak Aracısı için uçtan uca veri toplama Için denetimler ve sorun giderme][deployment-guide-troubleshooting-chapter]bölümünde AÇıKLANDıĞı gibi SAP Için VM uzantısının çalışıp çalışmadığını denetleyin.
 
 
-### <a name="a9a60133-a763-4de8-8986-ac0fa33aa8c1"></a>Senaryo 3: Azure olmayan genelleştirilmiş VHD ile SAP kullanarak bir şirket içi VM taşıma
+### <a name="a9a60133-a763-4de8-8986-ac0fa33aa8c1"></a>Senaryo 3: SAP ile Genelleştirilmiş olmayan bir Azure VHD kullanarak bir şirket içi VM 'yi taşıma
 
-Bu senaryoda, belirli bir SAP sistemine bir şirket içi ortamdan Azure'a taşımayı planlayın. Veri ve günlük dosyalarını azure'a DBMS ile işletim sistemi, SAP ikili dosyaları ve sonunda DBMS ikili dosyaları olan VHD'nin yanı sıra, VHD'leri yükleyerek bunu yapabilirsiniz. Açıklanan senaryoyu aksine [Senaryo 2: SAP için özel bir görüntü ile bir VM dağıtma][deployment-guide-3.3], bu durumda, konak adı, SAP SID tutun ve şirket içi ortamda yapılandırılmış olan çünkü Azure VM'de SAP kullanıcı hesapları. İşletim sistemi genelleştirmek gerekmez. Bu senaryo genellikle burada şirket içi SAP ortamının bir parçası çalışır ve bir bölümü Azure üzerinde çalışan şirket içi senaryolar için de geçerlidir.
+Bu senaryoda, belirli bir SAP sistemini şirket içi bir ortamdan Azure 'a taşımayı planlarsınız. Bu işlemi, işletim sistemi, SAP ikilileri ve sonuç olarak DBMS ikililerini içeren VHD 'yi karşıya yükleyerek ve DBMS 'nin veri ve günlük dosyalarına sahip VHD 'leri Azure 'a yükleyerek yapabilirsiniz. Senaryo 2 ' de [açıklanan senaryonun aksine: Bir VM 'yi SAP][deployment-guide-3.3]için özel bir görüntüyle dağıtma bu durumda, şirket içi ortamda yapılandırıldıklarından, ana bilgisayar adı, SAP SID ve SAP Kullanıcı hesaplarını Azure VM 'de saklayın. İşletim sistemini genelleştirmek zorunda değilsiniz. Bu senaryo, SAP 'nin bir kısmının şirket içinde çalıştığı ve Azure üzerinde çalıştığı bir parçası olan şirket içi senaryolar için çoğu zaman geçerlidir.
 
-Bu senaryoda, VM Aracısı olduğunu **değil** dağıtımı sırasında otomatik olarak yüklenmiş. VM aracısı ve Azure Gelişmiş izleme uzantısını SAP için Azure üzerinde SAP NetWeaver'ı çalıştırmak için gerekli olduğundan, indirme, yükleme ve sanal makineyi oluşturduktan sonra her iki bileşenin el ile etkinleştirmeniz gerekir.
+Bu senaryoda, VM Aracısı dağıtım **sırasında otomatik olarak yüklenmez.** VM Aracısı ve SAP için Azure uzantısı, Azure üzerinde SAP NetWeaver çalıştırmak için gerektiğinden, sanal makineyi oluşturduktan sonra her iki bileşeni de el ile indirmeniz, yüklemeniz ve etkinleştirmeniz gerekir.
 
 Azure VM Aracısı hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın.
 
 ---
 > ![Windows][Logo_Windows] Windows
 >
-> [Azure sanal makine Aracısı genel bakış][virtual-machines-windows-agent-user-guide]
+> [Azure sanal makine aracısına genel bakış][virtual-machines-windows-agent-user-guide]
 >
 > ![Linux][Logo_Linux] Linux
 >
-> [Azure Linux Aracısı Kullanım Kılavuzu][virtual-machines-linux-agent-user-guide]
+> [Azure Linux Aracısı Kullanıcı Kılavuzu][virtual-machines-linux-agent-user-guide]
 >
 >
 
 ---
 
-Aşağıdaki akış bir şirket içi VM genelleştirilmiş olmayan bir Azure VHD'nin kullanarak taşımak için adımlar dizisini gösterir:
+Aşağıdaki akış çizelgesi, genelleştirilmiş olmayan bir Azure VHD kullanarak bir şirket içi VM 'yi taşımaya yönelik adımların sırasını göstermektedir:
 
-![VM dağıtımı için bir VM disk kullanarak SAP sistemlerini akış çizelgesi][deployment-guide-figure-400]
+![VM diski kullanarak SAP sistemleri için VM dağıtımı akış çizelgesi][deployment-guide-figure-400]
 
-Disk zaten karşıya yüklendi ve Azure'da tanımlanan varsa (bkz [planlama Azure sanal makineleri ve SAP NetWeaver uygulamasını][planning-guide]), yapmak görevleri açıklanan önümüzdeki birkaç bölümler.
+Disk zaten Azure 'da yüklenip tanımlanmışsa (bkz. [SAP NetWeaver Için Azure sanal makineleri planlama ve uygulama][planning-guide]), sonraki birkaç bölümde açıklanan görevleri yapın.
 
 #### <a name="create-a-virtual-machine"></a>Sanal makine oluşturma
 
-Azure Portalı aracılığıyla özel bir işletim sistemi diski kullanarak bir dağıtım oluşturmak için yayımlanan SAP şablonu kullanın. [azure hızlı başlangıç şablonları GitHub deposunda][azure-quickstart-templates-github]. Ayrıca el ile bir sanal makine PowerShell kullanarak oluşturabilirsiniz.
+Azure portal aracılığıyla özel bir işletim sistemi diski kullanarak bir dağıtım oluşturmak için [Azure-QuickStart-Templates GitHub deposunda][azure-quickstart-templates-github]yayımlanan SAP şablonunu kullanın. Ayrıca, PowerShell kullanarak el ile bir sanal makine da oluşturabilirsiniz.
 
-* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu** (sap-2-katman-kullanıcı-disk)][sap-templates-2-tier-os-disk]
+* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu** (SAP-2-katmanlı-Kullanıcı-disk)][sap-templates-2-tier-os-disk]
 
-  Yalnızca bir sanal makineyi kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
-* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablonu - yönetilen Disk** (sap-2-tier-user-disk-md)][sap-templates-2-tier-os-disk-md]
+  Yalnızca bir sanal makine kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+* [**İki katmanlı yapılandırma (yalnızca bir sanal makine) şablon tarafından yönetilen disk** (SAP-2-katmanlı-User-disk-MD)][sap-templates-2-tier-os-disk-md]
 
-  Yalnızca bir sanal makine ve yönetilen Disk kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
+  Yalnızca bir sanal makine ve yönetilen disk kullanarak iki katmanlı bir sistem oluşturmak için bu şablonu kullanın.
 
-Azure portalında şablon için aşağıdaki parametreleri girin:
+Azure portal, şablon için aşağıdaki parametreleri girin:
 
 1. **Temel**:
-   * **Abonelik**: Şablonu dağıtmak için kullanılacak aboneliği.
-   * **Kaynak grubu**: Şablonu dağıtmak için kullanılacak kaynak grubu. Yeni bir kaynak grubu oluşturun veya mevcut bir kaynak grubu aboneliği seçin.
-   * **Konum**: Şablonu dağıtmak yer. Mevcut bir kaynak grubu seçtiyseniz, bu kaynak grubu konumu kullanılır.
+   * **Abonelik**: Şablonu dağıtmak için kullanılacak abonelik.
+   * **Kaynak grubu**: Şablonu dağıtmak için kullanılacak kaynak grubu. Yeni bir kaynak grubu oluşturabilir veya abonelikte var olan bir kaynak grubunu seçebilirsiniz.
+   * **Konum**: Şablonun dağıtılacağı yer. Var olan bir kaynak grubunu seçtiyseniz bu kaynak grubunun konumu kullanılır.
 1. **Ayarları**:
-   * **SAP sistem kimliği**: SAP sistem kimliği
-   * **İşletim sistemi türü**: (Windows veya Linux) dağıtmak istediğiniz işletim sistemi türü.
-   * **SAP sistemi boyutu**: SAP sistemine boyutu.
+   * **SAP SISTEM kimliği**: SAP sistem KIMLIĞI.
+   * **Işletim sistemi türü**: Dağıtmak istediğiniz işletim sistemi türü (Windows veya Linux).
+   * **SAP sistem boyutu**: SAP sisteminin boyutu.
 
-     Yeni sisteme sağlar SAP sayısı. Kaç tane SAP sistemi gerektiriyor değil eminseniz, SAP teknoloji iş ortağı veya sistem Entegratörü isteyin.
-   * **Depolama türü** (yalnızca iki katmanlı şablon): Kullanmak için depolama türü.
+     Yeni sistemin sağladığı SAPS sayısı. Sistemin kaç tane için gerekli olduğundan emin değilseniz, SAP Technology Iş ortağınızdan veya sistem tümleştirmenize sorun.
+   * **Depolama türü** (yalnızca iki katmanlı şablon): Kullanılacak depolamanın türü.
 
-     Daha büyük sistemler için yüksek oranda Azure Premium depolama kullanmanızı öneririz. Depolama türleri hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+     Daha büyük sistemler için, Azure Premium Depolama kullanmanızı kesinlikle öneririz. Depolama türleri hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
       * [SAP DBMS örneği için Azure Premium SSD depolama kullanımı][2367194]
-      * [RDBMS dağıtımlar için bir VM depolama yapısı](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64)
+      * [RDBMS dağıtımları için bir sanal makinenin depolama yapısı](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_general#65fa79d6-a85f-47ee-890b-22e794f51a64)
       * [Premium Depolama: Azure sanal makine iş yükleri için yüksek performanslı depolama][storage-premium-storage-preview-portal]
-      * [Microsoft Azure Depolama'ya giriş][storage-introduction]
-   * **İşletim sistemi diski VHD URI'si** (yalnızca yönetilmeyen disk şablonu): Özel işletim sistemi diski, örneğin, https:// URI&lt;accountname >.blob.core.windows.net/vhds/osdisk.vhd.
-   * **İşletim sistemi diski Disk kimliği yönetilen** (yalnızca yönetilen disk şablonu): Yönetilen diski işletim sistemi disk kimliği /subscriptions/92d102f7-81a5-4df7-9877-54987ba97dd9/resourceGroups/group/providers/Microsoft.Compute/disks/WIN
-   * **Yeni veya var olan bir alt ağa**: Yeni sanal ağ ve alt ağ oluşturulur veya varolan bir alt ağı kullanılır olup olmadığını belirler. Şirket içi ağınıza bağlı bir sanal ağınız zaten varsa, seçin **varolan**.
-   * **Alt ağ kimliği**: Tanımlanan bir alt ağa sahip olduğunuz mevcut bir Vnet'te VM dağıtmak istiyorsanız, VM atanmalıdır belirli bir alt ağ kimliği adı için. Kimliği genellikle şöyle görünür: /subscriptions/&lt;abonelik kimliği > /resourceGroups/&lt;kaynak grubu adı > /providers/Microsoft.Network/virtualNetworks/&lt;sanal ağ adı > /subnets/&lt;alt ağ adı >
+      * [Microsoft Azure Depolama'ya Giriş][storage-introduction]
+   * **Işletim sistemi DISKI VHD URI 'si** (yalnızca yönetilmeyen disk şablonu): Özel işletim sistemi diskinin URI 'si; Örneğin, https://&lt;AccountName >. blob. Core. Windows. net/VHD/OSDisk. vhd.
+   * **Işletim sistemi diski yönetilen disk kimliği** (yalnızca yönetilen disk şablonu): Yönetilen disk işletim sistemi diskinin kimliği,/subscriptions/92d102f7-81a5-4df7-9877-54987ba97dd9/resourceGroups/group/providers/Microsoft.Compute/disks/WIN
+   * **Yeni veya mevcut alt ağ**: Yeni bir sanal ağ ve alt ağ oluşturulup oluşturulmayacağını veya var olan bir alt ağın kullanılıp kullanılmadığını belirler. Şirket içi ağınıza bağlı bir sanal ağınız zaten varsa, **mevcut**' ı seçin.
+   * **Alt ağ kimliği**: VM 'yi tanımlanmış VM 'ye atanmış bir alt ağa sahip olduğunuz mevcut bir VNet 'e dağıtmak istiyorsanız, söz konusu alt ağın KIMLIĞINI adlandırın. Kimlik genellikle şöyle görünür:/Subscriptions/&lt;abonelik kimliği >/ResourceGroups/&lt;kaynak grubu adı >/Providers/Microsoft.Network/virtualNetworks/&lt;sanal ağ adı >/Subnets/&lt;alt ağ adı >
 
 1. **Hüküm ve koşullar**:  
-    Gözden geçirin ve yasal koşulları kabul edin.
+    Yasal koşulları gözden geçirin ve kabul edin.
 
 1. **Satın al**'ı seçin.
 
-#### <a name="install-the-vm-agent"></a>VM aracısını yükleyin
+#### <a name="install-the-vm-agent"></a>VM aracısını yükler
 
-Önceki bölümde açıklanan şablonlarını kullanmak için işletim sistemi diskinde VM Aracısı yüklenmelidir ve dağıtım başarısız olur. Karşıdan yükleyip VM Aracısı VM içinde anlatıldığı gibi [indirme, yükleme ve Azure VM aracısını etkinleştirin][deployment-guide-4.4].
+Önceki bölümde açıklanan şablonları kullanmak için, VM aracısının işletim sistemi diskine yüklenmesi gerekir, aksi durumda dağıtım başarısız olur. [Azure VM aracısını indirme, yükleme ve etkinleştirme][deployment-guide-4.4]bölümünde açıklandığı gibi VM aracısını sanal makineye indirin ve yükleyin.
 
-Önceki bölümde açıklanan şablonları kullanmazsanız, daha sonra VM Aracısı de yükleyebilirsiniz.
+Önceki bölümde açıklanan şablonları kullanmıyorsanız, daha sonra VM aracısını da yükleyebilirsiniz.
 
-#### <a name="join-a-domain-windows-only"></a>(Yalnızca Windows) etki alanına Katıl
+#### <a name="join-a-domain-windows-only"></a>Etki alanına ekleme (yalnızca Windows)
 
-Azure dağıtımınızı bir Azure siteden siteye VPN bağlantısı veya ExpressRoute aracılığıyla şirket içi Active Directory ve DNS örneğine bağlı olup olmadığını (Bu adlandırılır *şirketler arası* içinde [Azure sanal makineler planlama SAP NetWeaver için ve uygulama][planning-guide]), VM bir şirket içi etki alanına katıldığını beklenir. Bu görev için dikkat edilecek noktalar hakkında daha fazla bilgi için bkz. [bir şirket içi etki alanına (yalnızca Windows) için bir VM katılmak][deployment-guide-4.3].
+Azure dağıtımınız, bir Azure siteden siteye VPN bağlantısı veya ExpressRoute aracılığıyla şirket içi Active Directory veya DNS örneğine bağlıysa (Bu, [SAP Için Azure sanal makineler planlama ve uygulama için şirketler arası olarak adlandırılır) NetWeaver][planning-guide]), VM 'nin şirket içi etki alanına katılması beklenmektedir. Bu görevle ilgili hususlar hakkında daha fazla bilgi için bkz. [BIR VM 'yi şirket içi etki alanına ekleme (yalnızca Windows)][deployment-guide-4.3].
 
-#### <a name="configure-proxy-settings"></a>Proxy ayarlarını yapılandırma
+#### <a name="configure-proxy-settings"></a>Ara sunucu ayarlarını yapılandırma
 
-Şirket içi ağınıza nasıl yapılandırıldığına bağlı olarak, VM'niz proxy ayarlamak gerekebilir. Sanal makinenize bağlı ise şirket içi ağınıza VPN veya ExpressRoute, bir VM aracılığıyla Internet erişimine sahip olmayabilir ve gerekli Uzantıları'nı indirin ve izleme verilerini toplamak mümkün olmayacaktır. Daha fazla bilgi için [Proxy'yi yapılandırmak][deployment-guide-configure-proxy].
+Şirket içi ağınızın nasıl yapılandırıldığına bağlı olarak, VM 'niz üzerinde proxy ayarlamanız gerekebilir. VM 'niz VPN veya ExpressRoute aracılığıyla şirket içi ağınıza bağlıysa, sanal makine Internet 'e erişemeyebilir ve SAP uzantısı aracılığıyla SAP konak Aracısı için gerekli VM uzantılarını indiremez veya Azure altyapı bilgilerini toplayamayabilir Azure için bkz. [proxy 'Yi yapılandırma][deployment-guide-configure-proxy].
 
-#### <a name="configure-monitoring"></a>İzlemeyi yapılandırma
+#### <a name="configure-azure-vm-extension-for-sap"></a>SAP için Azure VM uzantısını yapılandırma
 
-Emin olmak için SAP ortamınızı açıklandığı gibi SAP için Azure izleme uzantısı ayarlamak destekler [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak][deployment-guide-4.5]. SAP izleme için önkoşul denetimi ve çekirdek SAP ve SAP konak Aracısı, gerekli en düşük sürümlerle kaynaklarında listelenen [SAP kaynakları][deployment-guide-2.2].
+SAP 'nin ortamınızı desteklediğinden emin olmak için SAP için Azure uzantısını [yapılandırma][deployment-guide-4.5]başlığı altında AÇıKLANDıĞı şekilde SAP Için Azure uzantısını ayarlayın. SAP [kaynakları][deployment-guide-2.2]' nda listelenen kaynaklarda SAP önkoşulları ve SAP kernel ve SAP ana bilgisayar aracısının gerekli en düşük sürümlerini denetleyin.
 
-#### <a name="monitoring-check"></a>İzleme denetimi
+#### <a name="sap-vm-check"></a>SAP VM denetimi
 
-İzleme çalışıp çalışmadığını, açıklandığı denetleyin [denetimler ve uçtan uca izleme ayarlamak için sorun giderme][deployment-guide-troubleshooting-chapter].
+SAP [konak Aracısı için uçtan uca veri toplama Için denetimler ve sorun giderme][deployment-guide-troubleshooting-chapter]bölümünde AÇıKLANDıĞı gibi SAP için VM uzantısının çalışıp çalışmadığını denetleyin.
 
-## <a name="update-the-monitoring-configuration-for-sap"></a>SAP için izleme yapılandırmasını güncelleştirme
+## <a name="update-the-configuration-of-azure-extension-for-sap"></a>SAP için Azure uzantısı yapılandırmasını güncelleştirme
 
-Aşağıdaki senaryolardan birinde SAP İzleme yapılandırmasını güncelleştirme:
-* Birleşik Microsoft/SAP ekibi, izleme yeteneklerini genişletir ve daha fazla veya daha az sayaç ister.
-* Microsoft izleme verileri sunan temel alınan Azure altyapısının yeni bir sürüm sunar ve bu değişiklikleri uyarlanabilen Azure Gelişmiş izleme uzantısını SAP için gerekiyor.
-* Azure VM için ek veri diskleri bağlayın veya veri diski kaldırabilirsiniz. Bu senaryoda depolama ile ilgili veri koleksiyonu güncelleştirin. Ekleyerek veya uç noktalarını silme veya IP adresleri atayarak bir VM yapılandırmanızı değiştirme, İzleme yapılandırmasını etkilemez.
-* Azure VM, boyutu gibi herhangi bir VM boyutu A5 boyutuna değiştirin.
-* Azure VM için yeni ağ arabirimi ekleyin.
+Aşağıdaki senaryolardan birinde SAP için Azure uzantısı yapılandırmasını güncelleştirin:
+* Birleşik Microsoft/SAP ekibi, VM uzantısının yeteneklerini genişletir ve daha fazla veya daha az sayaç ister.
+* Microsoft, verileri teslim eden temel Azure altyapısının yeni bir sürümünü tanıtır ve SAP için Azure uzantısının bu değişikliklere uyarlanmasını gerektirir.
+* Ek veri disklerini Azure sanal makinenize bağlarsınız veya bir veri diski kaldırırsınız. Bu senaryoda, depolamayla ilgili verilerin koleksiyonunu güncelleştirin. Uç nokta ekleyerek veya silerek veya bir sanal makineye IP adresleri atayarak yapılandırmanızın değiştirilmesi uzantı yapılandırmasını etkilemez.
+* Azure VM 'nizin boyutunu (örneğin, a5 boyutundan başka bir VM boyutuna) değiştirirsiniz.
+* Yeni ağ arabirimlerini Azure sanal makinenize eklersiniz.
 
-İzleme ayarlarını güncelleştirmek için izleme altyapısının içindeki adımları izleyerek güncelleştirme [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak][deployment-guide-4.5].
+Ayarları güncelleştirmek için SAP için Azure uzantısını [yapılandırma][deployment-guide-4.5]bölümündeki ADıMLARı izleyerek SAP Için Azure uzantısı yapılandırmasını güncelleştirin.
 
-## <a name="detailed-tasks-for-sap-software-deployment"></a>Ayrıntılı görevler için SAP yazılım dağıtımı
+## <a name="detailed-tasks-for-sap-software-deployment"></a>SAP yazılım dağıtımı için ayrıntılı görevler
 
-Bu bölüm yapılandırma ve dağıtım sürecini belirli görevleri yapmak için ayrıntılı adımları verilmiştir.
+Bu bölümde, yapılandırma ve dağıtım sürecinde belirli görevleri gerçekleştirmek için ayrıntılı adımlar bulunur.
 
-### <a name="604bcec2-8b6e-48d2-a944-61b0f5dee2f7"></a>Azure PowerShell cmdlet'lerini dağıtma
+### <a name="604bcec2-8b6e-48d2-a944-61b0f5dee2f7"></a>Azure PowerShell cmdlet 'lerini dağıtma
 
-1. Git [Microsoft Azure indirmeleri](https://azure.microsoft.com/downloads/).
-1. Altında **komut satırı araçları**altında **PowerShell**seçin **Windows yükleme**.
-1. İndirilen dosyayı (örneğin, WindowsAzurePowershellGet.3f.3f.3fnew.exe) için Microsoft İndirme Yöneticisi iletişim kutusunda seçin **çalıştırma**.
-1. Microsoft Web Platformu Yükleyicisi (Microsoft Web PI) çalıştırmak için seçin **Evet**.
-1. Bu görünür benzer bir sayfa:
+1. [Microsoft Azure İndirmeleri](https://azure.microsoft.com/downloads/)sayfasına gidin.
+1. **Komut satırı araçları**' nın altında, **PowerShell**altında **Windows yüklemesi**' ni seçin.
+1. İndirilen dosya için Microsoft Indirme Yöneticisi iletişim kutusunda (örneğin, WindowsAzurePowershellGet. 3F. 3F. 3fnew. exe) **Çalıştır**' ı seçin.
+1. Microsoft Web Platformu Yükleyicisi (Microsoft Web PI) çalıştırmak için **Evet**' i seçin.
+1. Aşağıdakine benzer bir sayfa görünür:
 
-   ![Azure PowerShell cmdlet'lerini yükleme sayfası][deployment-guide-figure-500]<a name="figure-5"></a>
+   ![Azure PowerShell cmdlet 'leri için yükleme sayfası][deployment-guide-figure-500]<a name="figure-5"></a>
 
-1. Seçin **yükleme**ve ardından Microsoft yazılım lisans koşullarını kabul edin.
-1. PowerShell'in yüklendiğinden. Seçin **son** Yükleme Sihirbazı'nı kapatın.
+1. **Yükler**' i seçin ve ardından Microsoft yazılımı lisans koşulları 'nı kabul edin.
+1. PowerShell yüklendi. Yükleme sihirbazını kapatmak için **son** ' u seçin.
 
-Sık güncelleştirmeler genellikle aylık güncelleştirilir PowerShell Cmdlet'lerine bakın. Güncelleştirmeleri denetlemek için en kolay yolu, önceki yükleme adımları, 5. adımda gösterilen yükleme sayfasında kadar yapmaktır. Cmdlet'ler yayın tarih ve yayın sayısı 5. adımda gösterilen sayfasında bulunur. SAP Not aksi belirtilmedikçe [1928533] veya SAP notu [2015553], Azure PowerShell cmdlet'lerinin en son sürümüyle çalışma öneririz.
+Genellikle aylık olarak güncellenen PowerShell cmdlet 'lerinin güncelleştirmeleri için sık kontrol edin. Güncelleştirmeleri denetlemek için en kolay yol, önceki yükleme adımlarını 5. adımda gösterilen yükleme sayfasına kadar kullanmaktır. Cmdlet 'lerinin Yayın tarihi ve sürüm numarası 5. adımda gösterilen sayfada bulunur. SAP Note [1928533] veya sap Note [2015553]' de aksi belirtilmedikçe, Azure PowerShell cmdlet 'lerinin en son sürümüyle çalışmanız önerilir.
 
-Azure PowerShell cmdlet'lerini, bilgisayarınızda yüklü sürümünü denetlemek için bu PowerShell komutunu çalıştırın:
+Bilgisayarınızda yüklü olan Azure PowerShell cmdlet 'lerinin sürümünü denetlemek için şu PowerShell komutunu çalıştırın:
 ```powershell
 (Get-Module Az.Compute).Version
 ```
-Sonucu şöyle görünür:
+Sonuç şöyle görünür:
 
-![Azure PowerShell cmdlet sürüm denetimi sonucu][deployment-guide-figure-600]
+![Azure PowerShell cmdlet sürümü denetiminin sonucu][deployment-guide-figure-600]
 <a name="figure-6"></a>
 
-Bilgisayarınızda yüklü Azure cmdlet sürümü geçerli sürümü, yükleme sihirbazının ilk sayfasında bu ekleyerek gösterir **(yüklü)** ürün başlığı için (aşağıdaki ekran görüntüsüne bakın). PowerShell Azure cmdlet'lerinizi güncel. Yükleme Sihirbazı'nı kapatmak için seçin **çıkış**.
+Bilgisayarınızda yüklü olan Azure cmdlet sürümü geçerli sürümzda ise, yükleme sihirbazının ilk sayfası, ürün başlığına **(yüklenmiş)** ekleyerek bunu gösterir (aşağıdaki ekran görüntüsüne bakın). PowerShell Azure cmdlet 'lerinizin güncel olması. Yükleme sihirbazını kapatmak için **Çıkış**' ı seçin.
 
-![Azure PowerShell cmdlet'lerinin en son sürümünü yüklenip yüklenmediğini gösteren Azure PowerShell cmdlet'lerini yükleme sayfası][deployment-guide-figure-700]
+![Azure PowerShell cmdlet 'lerinin en son sürümünün yüklü olduğunu belirten Azure PowerShell cmdlet 'lerinin yükleme sayfası][deployment-guide-figure-700]
 <a name="figure-7"></a>
 
-### <a name="1ded9453-1330-442a-86ea-e0fd8ae8cab3"></a>Azure CLI'yı dağıtma
+### <a name="1ded9453-1330-442a-86ea-e0fd8ae8cab3"></a>Azure CLı 'yı dağıtma
 
-1. Git [Microsoft Azure indirmeleri](https://azure.microsoft.com/downloads/).
-1. Altında **komut satırı araçları**altında **Azure komut satırı arabirimi**seçin **yükleme** işletim sisteminiz için bağlantı.
-1. İndirilen dosyayı (örneğin, WindowsAzureXPlatCLI.3f.3f.3fnew.exe) için Microsoft İndirme Yöneticisi iletişim kutusunda seçin **çalıştırma**.
-1. Microsoft Web Platformu Yükleyicisi (Microsoft Web PI) çalıştırmak için seçin **Evet**.
-1. Bu görünür benzer bir sayfa:
+1. [Microsoft Azure İndirmeleri](https://azure.microsoft.com/downloads/)sayfasına gidin.
+1. **Komut satırı araçları**' nın altında, **Azure komut satırı arabirimi**altında işletim sisteminizin **Install** bağlantısını seçin.
+1. Microsoft Download Manager iletişim kutusunda indirilen dosya için (örneğin, Windowsazurexplatclı. 3F. 3F. 3fnew. exe) **Çalıştır**' ı seçin.
+1. Microsoft Web Platformu Yükleyicisi (Microsoft Web PI) çalıştırmak için **Evet**' i seçin.
+1. Aşağıdakine benzer bir sayfa görünür:
 
-   ![Azure PowerShell cmdlet'lerini yükleme sayfası][deployment-guide-figure-500]<a name="figure-5"></a>
+   ![Azure PowerShell cmdlet 'leri için yükleme sayfası][deployment-guide-figure-500]<a name="figure-5"></a>
 
-1. Seçin **yükleme**ve ardından Microsoft yazılım lisans koşullarını kabul edin.
-1. Azure CLI yüklendi. Seçin **son** Yükleme Sihirbazı'nı kapatın.
+1. **Yükler**' i seçin ve ardından Microsoft yazılımı lisans koşulları 'nı kabul edin.
+1. Azure CLı yüklendi. Yükleme sihirbazını kapatmak için **son** ' u seçin.
 
-Güncelleştirmeleri genellikle her ay güncelleştirilen Azure CLI için sık sık kontrol edin. Güncelleştirmeleri denetlemek için en kolay yolu, önceki yükleme adımları, 5. adımda gösterilen yükleme sayfasında kadar yapmaktır.
+Genellikle aylık olarak güncellenen Azure CLı güncelleştirmeleri için sık kontrol edin. Güncelleştirmeleri denetlemek için en kolay yol, önceki yükleme adımlarını 5. adımda gösterilen yükleme sayfasına kadar kullanmaktır.
 
-Azure CLI, bilgisayarınızda yüklü sürümünü denetlemek için şu komutu çalıştırın:
+Bilgisayarınızda yüklü olan Azure CLı sürümünü denetlemek için şu komutu çalıştırın:
 ```
 azure --version
 ```
 
-Sonucu şöyle görünür:
+Sonuç şöyle görünür:
 
-![Azure CLI Sürüm denetimi sonucu][deployment-guide-figure-760]
+![Azure CLı sürüm denetimi sonucu][deployment-guide-figure-760]
 <a name="0ad010e6-f9b5-4c21-9c09-bb2e5efb3fda"></a>
 
-### <a name="31d9ecd6-b136-4c73-b61e-da4a29bbc9cc"></a>Bir şirket içi etki alanı (yalnızca Windows) için bir ekleme
+### <a name="31d9ecd6-b136-4c73-b61e-da4a29bbc9cc"></a>VM 'yi şirket içi etki alanına ekleme (yalnızca Windows)
 
-Burada şirket içi Active Directory ve DNS Azure'da genişletilir, bir şirket içi senaryosunda SAP VM dağıtırsanız, sanal makinelerin bir şirket içi etki alanı katıldığınız bekleniyor. Bir şirket içi etki alanı ve bir şirket içi etki alanının bir üyesi olması gereken ek yazılım için bir VM katılmak için ayrıntılı adımlar, müşteri tarafından değişir. Genellikle, bir VM için bir şirket içi etki alanına katılmak için kötü amaçlı yazılımdan koruma yazılımı gibi ek yazılımlar ve izleme ya da yedekleme yazılımları yüklemeniz gerekir.
+SAP VM 'lerini şirket içi Active Directory ve DNS Azure 'da genişletilebileceği şirketler arası bir senaryoda dağıtırsanız, VM 'Lerin şirket içi etki alanına katılması beklenmektedir. Bir VM 'yi şirket içi etki alanına katmak için uygulayabileceğiniz ayrıntılı adımlar ve şirket içi etki alanının üyesi olması gereken ek yazılımlar, müşteriye göre değişir. Genellikle, bir VM 'yi şirket içi etki alanına katmak için kötü amaçlı yazılımdan koruma yazılımı ve yedekleme veya izleme yazılımı gibi ek yazılımlar yüklemeniz gerekir.
 
-Bu senaryoda, ayrıca bir VM ortamınızda bir etki alanına katıldığında Internet proxy ayarları zorlanırsa aynı proxy ayarlarını Windows yerel sistem hesabını (S-1-5-18) Konuk VM içinde olduğundan emin olun gerekir. Etki alanı, etki alanındaki sistemlerine uygulanan Grup İlkesi'ni kullanarak proxy zorlamak için en kolay seçenektir bakın.
+Bu senaryoda Ayrıca, bir VM ortamınızdaki bir etki alanına katıldığında Internet proxy ayarlarının zorlandığından emin olmanız gerekir. Konuk VM 'deki Windows yerel sistem hesabı (S-1-5-18) aynı proxy ayarlarına sahiptir. En kolay seçenek, etki alanındaki sistemler için geçerli olan bir etki alanı grup ilkesi kullanarak proxy 'yi zorlamaktır.
 
-### <a name="c7cbb0dc-52a4-49db-8e03-83e7edc2927d"></a>İndirme, yükleme ve Azure VM aracısını etkinleştirin
+### <a name="c7cbb0dc-52a4-49db-8e03-83e7edc2927d"></a>Azure VM aracısını indirme, yükleme ve etkinleştirme
 
-(Örneğin, sysprep veya Windows Sistem hazırlığı aracı kaynaklanmayan bir görüntü) genelleştirilmiş olmayan bir işletim sistemi görüntü üzerinden dağıtılan sanal makineler için el ile indirme, yükleme ve Azure VM Aracısı'nı etkinleştirmeniz gerekir.
+Genelleştirilmiş olmayan bir işletim sistemi görüntüsünden dağıtılan sanal makineler için (örneğin, Windows sistem hazırlığı veya Sysprep, aracı), Azure VM aracısını el ile indirmeniz, yüklemeniz ve etkinleştirmeniz gerekir.
 
-Azure Market'ten bir VM dağıtırsanız, bu adım gerekli değildir. Görüntüleri Azure Market'te Azure VM Aracısı zaten var.
+Azure Marketi 'nden bir VM dağıtırsanız, bu adım gerekli değildir. Azure Marketi 'ndeki görüntülerin Azure VM Aracısı zaten var.
 
-#### <a name="b2db5c9a-a076-42c6-9835-16945868e866"></a>Windows
+#### <a name="b2db5c9a-a076-42c6-9835-16945868e866"></a>Pencerelerin
 
-1. Azure VM Aracısı'nı indirme:
-   1.  İndirme [Azure VM Aracısı Yükleyici paketi](https://go.microsoft.com/fwlink/?LinkId=394789).
-   1.  VM Aracısı MSI paketi yerel olarak bir kişisel bilgisayar veya sunucuda Store.
-1. Azure VM aracısını yükleyin:
-   1.  Dağıtılan Azure VM ile Uzak Masaüstü Protokolü (RDP) kullanarak bağlanın.
-   1.  VM üzerinde bir Windows Explorer penceresi açın ve hedef dizini için VM Aracısı bir MSI dosyası seçin.
-   1.  Azure VM Aracısı yükleyicisi MSI dosyasını yerel bilgisayar/sunucunuzdan VM'de VM aracısının hedef dizine sürükleyin.
-   1.  VM'deki MSI dosyasını çift tıklatın.
-1. Şirket içi etki alanına katılmış olan VM'ler için açıklandığı nihai Internet proxy ayarları ayrıca VM, Windows yerel sistem hesabına (S-1-5-18) uyguladığınızdan emin olun. [Proxy'yi yapılandırmak][deployment-guide-configure-proxy]. VM Aracısı, bu bağlamda çalışır ve Azure'a bağlanabilmesi gerekir.
+1. Azure VM aracısını indirin:
+   1.  [Azure VM Aracısı yükleyici paketini](https://go.microsoft.com/fwlink/?LinkId=394789)indirin.
+   1.  VM Aracısı MSI paketini bir kişisel bilgisayarda veya sunucuda yerel olarak depolayın.
+1. Azure VM aracısını yükler:
+   1.  Uzak Masaüstü Protokolü (RDP) kullanarak dağıtılan Azure VM 'ye bağlanın.
+   1.  VM 'de bir Windows Explorer penceresi açın ve VM aracısının MSI dosyası için hedef dizini seçin.
+   1.  Azure VM Aracısı yükleyicisi MSI dosyasını yerel bilgisayarınızdan/sunucudan VM 'deki VM aracısının hedef dizinine sürükleyin.
+   1.  VM 'deki MSI dosyasına çift tıklayın.
+1. Şirket içi etki alanlarına katılmış VM 'Ler için, [proxy 'Yi yapılandırma][deployment-guide-configure-proxy]bölümünde açıklandığı gibi, son Internet proxy ayarlarının VM 'Deki Windows yerel sistem hesabı (S-1-5-18) için de aynı olduğundan emin olun. VM Aracısı bu bağlamda çalışır ve Azure 'a bağlanabiliyor olması gerekir.
 
-Azure VM Aracısı'nı güncelleştirmek için kullanıcı etkileşimi gereklidir. VM Aracısı, otomatik olarak güncelleştirilir ve VM yeniden başlatma gerektirmez.
+Azure VM aracısını güncelleştirmek için Kullanıcı etkileşimi gerekmez. VM Aracısı otomatik olarak güncelleştirilir ve VM 'nin yeniden başlatılmasını gerektirmez.
 
-#### <a name="6889ff12-eaaf-4f3c-97e1-7c9edc7f7542"></a>Linux
+#### <a name="6889ff12-eaaf-4f3c-97e1-7c9edc7f7542"></a>'Un
 
-Linux için VM aracısı yüklemek için aşağıdaki komutları kullanın:
+Linux için VM aracısını yüklemek üzere aşağıdaki komutları kullanın:
 
 * **SUSE Linux Enterprise Server (SLES)**
 
@@ -866,37 +865,37 @@ Linux için VM aracısı yüklemek için aşağıdaki komutları kullanın:
   sudo yum install WALinuxAgent
   ```
 
-Azure Linux aracısını Güncelleştirme Aracısı'nı zaten yüklediyseniz, açıklanan adımları uygulayın [bir VM'de Azure Linux Aracısı Github'dan en son sürüme güncelleştirme][virtual-machines-linux-update-agent].
+Aracı zaten yüklüyse, Azure Linux aracısını güncelleştirmek için [BIR VM 'Deki Azure Linux Aracısı 'Nı GitHub 'dan en son sürüme güncelleştirme][virtual-machines-linux-update-agent]bölümünde açıklanan adımları uygulayın.
 
-### <a name="baccae00-6f79-4307-ade4-40292ce4e02d"></a>Proxy yapılandırma
+### <a name="baccae00-6f79-4307-ade4-40292ce4e02d"></a>Proxy 'yi yapılandırma
 
-Windows Proxy'yi yapılandırmak için uygulayacağınız adımlar, Linux proxy yapılandırma şekliniz farklıdır.
+Windows 'da proxy 'yi yapılandırmak için gerçekleştirmeniz gereken adımlar, Linux 'ta proxy 'yi yapılandırma yollarından farklıdır.
 
 #### <a name="windows"></a>Windows
 
-Proxy ayarlarını İnternet'e erişmek yerel sistem hesabı için doğru ayarlanmış olması gerekir. Proxy ayarlarını Grup İlkesi tarafından ayarlanmamışsa, yerel sistem hesabı ayarlarını yapılandırabilirsiniz.
+Yerel sistem hesabının Internet 'e erişmesi için proxy ayarlarının doğru ayarlanmış olması gerekir. Proxy ayarlarınız grup ilkesi tarafından ayarlanmamışsa, yerel sistem hesabı için ayarları yapılandırabilirsiniz.
 
-1. Git **Başlat**, girin **gpedit.msc**ve ardından **Enter**.
-1. Seçin **Bilgisayar Yapılandırması** > **Yönetim Şablonları** > **Windows bileşenleri**  >   **Internet Explorer**. Emin olun ayarı **proxy ayarları makine başına (yerine kullanıcı başına) olun** devre dışı bırakılmış veya yapılandırılmamış.
-1. İçinde **Denetim Masası**Git **ağ ve Paylaşım Merkezi** > **Internet Seçenekleri**.
-1. Üzerinde **bağlantıları** sekmesinde **LAN Ayarları** düğmesi.
-1. NET **ayarlarını otomatik olarak algıla** onay kutusu.
-1. Seçin **AĞINIZ için bir proxy sunucusu kullan** onay kutusunu işaretleyin ve ardından proxy adresi ve bağlantı noktası girin.
-1. Seçin **Gelişmiş** düğmesi.
-1. İçinde **özel durumları** kutusuna, IP adresi girin **168.63.129.16**. **Tamam**’ı seçin.
+1. **Başlat**' a gidin, **gpedit. msc**yazın ve ardından **ENTER**' u seçin.
+1.  > **Windows bileşenleri** > Internet > **Explorer**Yönetim Şablonları bilgisayar yapılandırması ' nı seçin. **Proxy ayarlarını makine başına (Kullanıcı başına değil)** ayarla ayarının devre dışı veya yapılandırılmamış olduğundan emin olun.
+1. **Denetim Masası**' nda **Ağ ve Paylaşım Merkezi** > **Internet seçenekleri**' ne gidin.
+1. **Bağlantılar** sekmesinde, **LAN ayarları** düğmesini seçin.
+1. **Ayarları otomatik olarak algıla** onay kutusunu temizleyin.
+1. **LAN için bir proxy sunucusu kullan** onay kutusunu seçin ve ardından proxy adresini ve bağlantı noktasını girin.
+1. **Gelişmiş** düğmesini seçin.
+1. **Özel durumlar** kutusuna **168.63.129.16**IP adresini girin. **Tamam**’ı seçin.
 
 #### <a name="linux"></a>Linux
 
-Yapılandırma dosyası şu konumdadır Microsoft Azure Konuk Aracısı'nın doğru ara sunucu yapılandırma \\vb.\\waagent.conf.
+Aynı anda \\\\waagent. conf dosyasında bulunan Microsoft Azure Konuk aracısının yapılandırma dosyasında doğru proxy 'yi yapılandırın.
 
 Aşağıdaki parametreleri ayarlayın:
 
-1. **HTTP proxy konağını**. Örneğin, kümesine **proxy.corp.local**.
+1. **Http proxy Konağı**. Örneğin, bunu **proxy. Corp. Local**olarak ayarlayın.
    ```
    HttpProxy.Host=<proxy host>
 
    ```
-1. **HTTP proxy bağlantı noktası**. Örneğin, kümesine **80**.
+1. **Http proxy bağlantı noktası**. Örneğin, bunu **80**olarak ayarlayın.
    ```
    HttpProxy.Port=<port of the proxy host>
 
@@ -907,38 +906,38 @@ Aşağıdaki parametreleri ayarlayın:
    sudo service waagent restart
    ```
 
-Proxy ayarları \\vb.\\waagent.conf gerekli VM uzantıları için de geçerlidir. Azure depoları kullanmak istiyorsanız, bu depoları trafiği şirket içi intranetiniz üzerinden olmayacağı emin olun. Kullanıcı tanımlı yollar, zorlamalı tünel etkinleştirmek için bir rota eklediğinizden emin olun oluşturduysanız, doğrudan Internet'e ve siteden siteye VPN bağlantınız üzerinden değil de, trafiği yönlendirir.
+Ya da\\waagent \\. conf içindeki ara sunucu ayarları, gerekli VM uzantıları için de geçerlidir. Azure depolarını kullanmak istiyorsanız, bu depoların trafiğinin şirket içi intranetinizden gitmediğinden emin olun. Zorlamalı tüneli etkinleştirmek için Kullanıcı tanımlı yollar oluşturduysanız, siteden siteye VPN bağlantınız üzerinden değil, trafiği depolara doğrudan Internet 'e yönlendiren bir yol eklediğinizden emin olun.
 
 * **SLES**
 
-  Ayrıca listelenen IP adresleri için yollar eklemeniz gerekir \\vb.\\regionserverclnt.cfg. Aşağıdaki şekil, bir örnek göstermektedir:
+  Ayrıca, vs \\\\regionserverclnt. cfg ' de listelenen IP adreslerine yönelik yollar eklemeniz gerekir. Aşağıdaki şekilde bir örnek gösterilmektedir:
 
   ![Zorlamalı tünel oluşturma][deployment-guide-figure-50]
 
 
-* **RHEL**
+* **RHEL FOR**
 
-  Ayrıca listelenen konakların IP adresleri için yollar eklemeniz gerekir \\vb.\\yum.repos.d\\rhuı yük Dengeleyiciler. Örneğin, önceki şekilde bakın.
+  Ayrıca, \\vb\\. Repos. d\\rhuı-Load-dengeleyicilerde listelenen konakların IP adresleri için yollar eklemeniz gerekir. Bir örnek için, yukarıdaki şekle bakın.
 
 * **Oracle Linux**
 
-  Azure'da Oracle Linux için depo vardır. Oracle Linux için kendi depolarınızı yapılandırın veya genel depolar kullanmanız gerekir.
+  Azure üzerinde Oracle Linux için depo yok. Oracle Linux için kendi depolarınızı yapılandırmanız veya ortak depoları kullanmanız gerekir.
 
-Kullanıcı tanımlı yollar hakkında daha fazla bilgi için bkz. [kullanıcı tanımlı yollar ve IP iletme][virtual-networks-udr-overview].
+Kullanıcı tanımlı rotalar hakkında daha fazla bilgi için bkz. [Kullanıcı tanımlı rotalar ve IP iletimi][virtual-networks-udr-overview].
 
-### <a name="d98edcd3-f2a1-49f7-b26a-07448ceb60ca"></a>SAP için Azure Gelişmiş izleme uzantısı yapılandırma
+### <a name="d98edcd3-f2a1-49f7-b26a-07448ceb60ca"></a>SAP için Azure uzantısını yapılandırma
 
-Ne zaman hazırladığınız VM açıklandığı [dağıtım senaryoları için azure'da SAP sanal makinelerinin][deployment-guide-3], Azure VM Aracısı sanal makineye yüklenir. Azure Gelişmiş izleme uzantısını Azure uzantı deposunda küresel Azure veri merkezlerinde kullanılabilir olan, SAP için sonraki adım dağıtmaktır. Daha fazla bilgi için [planlama Azure sanal makineleri ve SAP NetWeaver uygulamasını][planning-guide-9.1].
+VM 'yi [Azure 'DA SAP Için VM 'Lerin dağıtım senaryolarında][deployment-guide-3]açıklandığı şekilde hazırladığınızda, Azure VM Aracısı sanal makineye yüklenir. Sonraki adım, genel Azure veri merkezlerinde Azure uzantı deposunda bulunan SAP için Azure uzantısını dağıtmaktır. Daha fazla bilgi için bkz. [SAP NetWeaver Için Azure sanal makineleri planlama ve uygulama][planning-guide-9.1].
 
-Yükleme ve yapılandırma Azure Gelişmiş izleme uzantısını SAP için PowerShell veya Azure CLI'yı kullanabilirsiniz. Windows makine kullanarak bir Windows veya Linux VM'i uzantıyı yüklemek için bkz: [Azure PowerShell][deployment-guide-4.5.1]. Bir Linux Masaüstü'nü kullanarak bir Linux VM üzerinde uzantıyı yüklemek için bkz: [Azure CLI][deployment-guide-4.5.2].
+PowerShell veya Azure CLı kullanarak SAP için Azure uzantısını yükleyebilir ve yapılandırabilirsiniz. Uzantıyı bir Windows makine kullanarak bir Windows veya Linux VM 'sine yüklemek için, bkz. [Azure PowerShell][deployment-guide-4.5.1]. Bir Linux masaüstü kullanarak bir Linux VM 'ye uzantı yüklemek için bkz. [Azure CLI][deployment-guide-4.5.2].
 
-#### <a name="987cf279-d713-4b4c-8143-6b11589bb9d4"></a>Linux ve Windows Vm'leri için Azure PowerShell
+#### <a name="987cf279-d713-4b4c-8143-6b11589bb9d4"></a>Linux ve Windows VM 'Leri için Azure PowerShell
 
-Azure Gelişmiş izleme uzantısını SAP için PowerShell kullanarak yüklemek için:
+PowerShell kullanarak SAP için Azure uzantısı 'nı yüklemek için:
 
-1. Azure PowerShell cmdlet'ini en son sürümünü yüklediğinizden emin olun. Daha fazla bilgi için [dağıtma, Azure PowerShell cmdlet'lerini][deployment-guide-4.1].  
+1. Azure PowerShell cmdlet 'inin en son sürümünü yüklediğinizden emin olun. Daha fazla bilgi için bkz. [Azure PowerShell cmdlet 'Leri dağıtma][deployment-guide-4.1].  
 1. Aşağıdaki PowerShell cmdlet’ini çalıştırın.
-    Kullanılabilir ortamların listesi için çalıştırma `commandlet Get-AzEnvironment`. Küresel Azure kullanmak istiyorsanız, ortamınızın olup **AzureCloud**. Çin'de Azure için seçin **AzureChinaCloud**.
+    Kullanılabilir ortamların bir listesi için, öğesini çalıştırın `commandlet Get-AzEnvironment`. Küresel Azure 'u kullanmak istiyorsanız, ortamınız **Azurecyüksek**' dir. Çin 'de Azure için **AzureChinaCloud**öğesini seçin.
 
     ```powershell
     $env = Get-AzEnvironment -Name <name of the environment>
@@ -948,74 +947,74 @@ Azure Gelişmiş izleme uzantısını SAP için PowerShell kullanarak yüklemek 
     Set-AzVMAEMExtension -ResourceGroupName <resource group name> -VMName <virtual machine name>
     ```
 
-Hesap verilerinizi girin ve Azure sanal makineyi tanımlamak sonra betik gerekli uzantılarını dağıtır ve gerekli özellikleri sağlar. Bu işlem birkaç dakika sürebilir.
-Hakkında daha fazla bilgi için `Set-AzVMAEMExtension`, bkz: [kümesi AzVMAEMExtension][msdn-set-Azvmaemextension].
+Hesap verilerinizi girdikten ve Azure sanal makinesini tanımladıktan sonra, komut dosyası gerekli uzantıları dağıtır ve gerekli özellikleri sunar. Bu işlem birkaç dakika sürebilir.
+Hakkında `Set-AzVMAEMExtension`daha fazla bilgi için bkz. [set-AzVMAEMExtension][msdn-set-Azvmaemextension].
 
-![SAP özgü aktarılmadığı Azure cmdlet kümesi AzVMAEMExtension][deployment-guide-figure-900]
+![SAP 'ye özgü Azure cmdlet kümesi 'nin başarılı yürütülmesi-AzVMAEMExtension][deployment-guide-figure-900]
 
-`Set-AzVMAEMExtension` Yapılandırma, SAP için izleme ana bilgisayarı yapılandırmak için gereken tüm adımları yapar.
+`Set-AzVMAEMExtension` Yapılandırma, SAP için konak verileri toplamayı yapılandırmak için tüm adımları yapar.
 
-Betik çıktısı, aşağıdaki bilgileri içerir:
+Betik çıktısı aşağıdaki bilgileri içerir:
 
-* İşletim sistemi diski ve tüm ek veri diskleri için izleme yapılandırıldığını onayı.
-* Sonraki iki iletileri belirli bir depolama hesabına depolama ölçümleri yapılandırmasını doğrulayın.
-* Tek satırlık bir çıkış izleme yapılandırması, gerçek güncelleştirmenin durumunu sağlar.
-* Başka bir satır çıktı yapılandırma dağıtılan güncelleştirilmiş veya onaylar.
-* Çıkışının son satırında bilgilendirme amaçlıdır. Bu, İzleme yapılandırmasını test etmek için seçenekleri gösterir.
-* Azure Gelişmiş izleme tüm adımları başarıyla yürütüldüğünü ve Azure altyapı gerekli verileri sağlar denetlemek için Azure Gelişmiş izleme uzantısı, SAP için hazır olma denetimi içindeanlatıldığıgibidevam[Azure SAP Gelişmiş izleme için hazır olma denetimi][deployment-guide-5.1].
-* İlgili verileri toplamak Azure tanılama 15-30 dakika bekleyin.
+* İşletim sistemi diski ve tüm ek veri diskleri için veri koleksiyonunun yapılandırıldığını onaylayın.
+* Sonraki iki ileti, belirli bir depolama hesabı için depolama ölçümlerini yapılandırmayı onaylayın.
+* Bir çıkış satırı, SAP yapılandırması için VM uzantısının gerçek güncelleştirme durumunu verir.
+* Başka bir çıktı satırı yapılandırmanın dağıtıldığını veya güncelleştirildiğini onaylar.
+* Çıktının son satırı bilgilendirme amaçlıdır. SAP yapılandırması için VM uzantısının test edilmesine yönelik seçeneklerinizi gösterir.
+* SAP yapılandırması için Azure VM uzantısının tüm adımlarının başarıyla yürütüldüğünü ve Azure altyapısının gerekli verileri sağladığını denetlemek için, hazırlık denetimi bölümünde açıklandığı gibi SAP için Azure uzantısı için hazır olma denetimi ile devam edin [ for SAP için Azure uzantısı][deployment-guide-5.1].
+* Azure Tanılama ilgili verilerin toplanması için 15-30 dakika bekleyin.
 
-#### <a name="408f3779-f422-4413-82f8-c57a23b4fc2f"></a>Linux VM'ler için Azure CLI
+#### <a name="408f3779-f422-4413-82f8-c57a23b4fc2f"></a>Linux sanal makineleri için Azure CLı
 
-Azure Gelişmiş izleme uzantısını SAP için Azure CLI kullanarak yüklemek için:
+Azure CLı kullanarak SAP için Azure uzantısı 'nı yüklemek için:
 
-   1. Açıklandığı gibi Klasik Azure CLI yükleme [Klasik Azure CLI yükleme][azure-cli].
+   1. Azure klasik CLI 'yı [yüklemeyin][azure-cli].
    1. Azure hesabınızla oturum açın:
 
       ```
       azure login
       ```
 
-   1. Azure Resource Manager moduna geçin:
+   1. Azure Resource Manager moduna geç:
 
       ```
       azure config mode arm
       ```
 
-   1. Azure Gelişmiş izleme etkinleştir:
+   1. SAP için Azure uzantısını etkinleştir:
 
       ```
       azure vm enable-aem <resource-group-name> <vm-name>
       ```
 
-1. Azure CLI 2.0 kullanarak yükleme
+1. Azure CLı 2,0 kullanarak yüklemesi
 
-   1. Azure CLI 2. 0'da, bölümünde anlatılan şekilde yükleyin [Azure CLI 2.0 yükleme][azure-cli-2].
+   1. Azure CLI 2,0 'yi, [Azure clı 2,0][azure-cli-2]' de açıklandığı gibi yükler.
    1. Azure hesabınızla oturum açın:
 
       ```
       az login
       ```
 
-   1. Azure CLI AEM uzantısını yükle
+   1. Azure CLı AEM uzantısını yükler
   
       ```
       az extension add --name aem
       ```
   
-   1. Uzantıyı yükleyin
+   1. Uzantıyı ile birlikte yükler
   
       ```
       az vm aem set -g <resource-group-name> -n <vm name>
       ```
 
-1. Azure Gelişmiş izleme uzantısını Azure Linux VM'de etkin olduğunu doğrulayın. Denetleme olup olmadığını dosya \\var\\LIB\\AzureEnhancedMonitor\\PerfCounters bulunmaktadır. Bir komut isteminde varsa Azure Gelişmiş izleme tarafından toplanan bilgiler görüntülemek için şu komutu çalıştırın:
+1. SAP için Azure uzantısının Azure Linux VM 'de etkin olduğunu doğrulayın. Dosya \\var\\lib\\AzureEnhancedMonitorPerfCounters'invarolupolmadığınıdenetleyin.\\ Varsa, bir komut isteminde, SAP için Azure uzantısı tarafından toplanan bilgileri göstermek için bu komutu çalıştırın:
 
    ```
    cat /var/lib/AzureEnhancedMonitor/PerfCounters
    ```
 
-   Çıktı şuna benzer:
+   Çıktı şöyle görünür:
    ```
    ...
    2;cpu;Current Hw Frequency;;0;2194.659;MHz;60;1444036656;saplnxmon;
@@ -1023,117 +1022,117 @@ Azure Gelişmiş izleme uzantısını SAP için Azure CLI kullanarak yüklemek i
    ...
    ```
 
-## <a name="564adb4f-5c95-4041-9616-6635e83a810b"></a>Denetimler ve uçtan uca izleme için sorun giderme
+## <a name="564adb4f-5c95-4041-9616-6635e83a810b"></a>SAP konak Aracısı için uçtan uca veri toplama denetimleri ve sorun giderme
 
-Azure VM dağıttıktan ve ilgili Azure izleme altyapıyı ayarladıktan sonra Azure Gelişmiş izleme uzantısını tüm bileşenlerinin beklendiği gibi çalışıp çalışmadığını denetleyin.
+Azure VM 'nizi dağıttıktan ve SAP için ilgili Azure uzantısını ayarladıktan sonra, uzantının tüm bileşenlerinin beklenen şekilde çalışıp çalışmadığını denetleyin.
 
-Azure Gelişmiş izleme uzantısı için SAP için hazır olma denetimi açıklandığı gibi çalıştırın [hazırlık denetimi için Azure Gelişmiş izleme uzantısı için SAP][deployment-guide-5.1]. Tüm hazırlık denetimi sonucu pozitif ve tüm ilgili performans sayaçlarını Tamam görünürse, Azure izleme başarıyla ayarlandığını gösterdiğinde. SAP notları açıklandığı gibi SAP konak Aracısı yükleme işlemine devam etmeden [SAP kaynakları][deployment-guide-2.2]. Hazır olma denetimi sayaçları eksik olduğunu gösteriyorsa, sistem durumu denetimi için Azure izleme altyapısının açıklandığı gibi çalıştırın. [sistem durumu denetimi için Azure izleme altyapı yapılandırmasını] [ deployment-guide-5.2]. Daha fazla sorun giderme seçenekleri için bkz. [SAP için sorun giderme Azure izleme][deployment-guide-5.3].
+SAP için Azure [Uzantısı Için hazır olma denetimi][deployment-guide-5.1]bölümünde AÇıKLANDıĞı gibi SAP Için Azure uzantısı için hazırlık denetimini çalıştırın. Tüm hazırlık denetimi sonuçları pozitifse ve tüm ilgili performans sayaçları Tamam görünüyorsa, SAP için Azure uzantısı başarıyla ayarlanır. SAP ana bilgisayar aracısının SAP [kaynaklarında][deployment-guide-2.2]SAP notları bölümünde açıklandığı gibi yüklenmesine devam edebilirsiniz. Hazırlık denetimi sayaçların eksik olduğunu gösteriyorsa, SAP için Azure uzantısı için [sistem durumu denetimi][deployment-guide-5.2]bölümünde açıklandığı gıbı, SAP Için Azure uzantısı için sistem durumu denetimini çalıştırın. Daha fazla sorun giderme seçeneği için bkz. [SAP Için Azure uzantısı sorunlarını giderme][deployment-guide-5.3].
 
-### <a name="bb61ce92-8c5c-461f-8c53-39f5e5ed91f2"></a>Azure Gelişmiş izleme uzantısı için SAP için hazırlık denetimi
+### <a name="bb61ce92-8c5c-461f-8c53-39f5e5ed91f2"></a>SAP için Azure uzantısı için hazırlık denetimi
 
-Bu onay SAP uygulamanızın içinde görüntülenen tüm performans ölçümlerinin temel alınan Azure izleme altyapısı tarafından sağlandığından emin olur.
+Bu denetim SAP uygulamanızın içinde görüntülenen tüm performans ölçümlerinin SAP için temeldeki Azure uzantısı tarafından sağlandığından emin olur.
 
-#### <a name="run-the-readiness-check-on-a-windows-vm"></a>Bir Windows VM'de hazırlık denetimi Çalıştır
+#### <a name="run-the-readiness-check-on-a-windows-vm"></a>Windows VM 'de hazırlık denetimini çalıştırma
 
-1. Azure sanal makinede oturum açın (yönetici hesabı kullanarak gerekli değildir).
+1. Azure sanal makinesinde oturum açın (yönetici hesabı kullanarak gerekli değildir).
 1. Bir komut istemi penceresi açın.
-1. Komut isteminde dizini Azure Gelişmiş izleme uzantısını SAP için yükleme klasörünü değiştirin: C:\\paketleri\\eklentileri\\Microsoft.AzureCAT.AzureEnhancedMonitoring.AzureCATExtensionHandler\\&lt;sürüm >\\bırak
+1. Komut isteminde, SAP için Azure uzantısının yükleme klasörü olarak dizini değiştirin: C:\\paketler\\\\eklentiler\\Microsoft. AzureCAT. AzureEnhancedMonitoring. AzureCATExtensionHandler&lt;sürüm >\\bırakma
 
-   *Sürüm* izleme uzantısı yolunu farklılık gösterebilir. Klasörleri birden fazla sürümünü yükleme klasöründeki izleme uzantısı için görürseniz, AzureEnhancedMonitoring Windows hizmet yapılandırmasını denetleyin ve ardından olarak belirtilen klasöre geçin *yürütülebilir dosyanın yolu* .
+   Uzantının yolundaki *sürümü* farklılık gösterebilir. Yükleme klasöründe uzantının birden çok sürümü için klasörler görürseniz, AzureEnhancedMonitoring Windows hizmetinin yapılandırmasını denetleyin ve sonra *yürütülebilir dosyanın yolu*olarak belirtilen klasöre geçin.
 
-   ![Azure Gelişmiş izleme uzantısını SAP için çalışan hizmetin özellikleri][deployment-guide-figure-1000]
+   ![SAP için Azure uzantısını çalıştıran hizmetin özellikleri][deployment-guide-figure-1000]
 
-1. Komut isteminde çalıştırın **azperflib.exe** hiçbir parametre olmadan.
+1. Komut isteminde, herhangi bir parametre olmadan **azperflib. exe** ' yi çalıştırın.
 
    > [!NOTE]
-   > Azperflib.exe döngüsel olarak çalıştırır ve 60 saniyede toplanan sayaçların güncelleştirir. Döngü sona erdirmek için komut istemi penceresini kapatın.
+   > Azperflib. exe bir döngüde çalışır ve toplanan sayaçları her 60 saniyede bir güncelleştirir. Döngüyü sonlandırmak için komut Istemi penceresini kapatın.
    >
    >
 
-Azure Gelişmiş izleme uzantısı yüklü değil veya AzureEnhancedMonitoring hizmeti çalışmıyor, uzantının düzgün yapılandırılmadı. Uzantı dağıtma hakkında ayrıntılı bilgi için bkz. [SAP için Azure izleme altyapısının sorun giderme][deployment-guide-5.3].
+SAP için Azure uzantısı yüklü değilse veya AzureEnhancedMonitoring hizmeti çalışmıyorsa, uzantı doğru şekilde yapılandırılmamıştır. Uzantının nasıl dağıtılacağı hakkında ayrıntılı bilgi için bkz. [SAP Için Azure uzantısı sorunlarını giderme][deployment-guide-5.3].
 
 > [!NOTE]
-> Azperflib.exe kendi amacıyla kullanılan bir bileşenidir. Azure VM'de SAP konak aracısı için ilgili verileri izleme sağlayan bir bileşendir.
+> Azperflib. exe, kendi amaçları için kullanılamayan bir bileşendir. Bu, SAP konak aracısının VM ile ilgili Azure altyapı verilerini özel olarak sağlayan bir bileşendir.
 > 
 
-##### <a name="check-the-output-of-azperflibexe"></a>Onay azperflib.exe çıktısı
+##### <a name="check-the-output-of-azperflibexe"></a>Azperflib. exe çıktısını denetleyin
 
-Tüm Azure performans sayaçları için SAP doldurulmuş Azperflib.exe çıktısını gösterir. Toplanan sayaçlarının listesi sonunda bir özeti ve sistem durumu göstergesi Azure izleme durumunu gösterir.
+Azperflib. exe çıktısı SAP için doldurulan tüm Azure performans sayaçlarını gösterir. Toplanan sayaçların listesinin en altında, bir Özet ve sistem durumu göstergesi, SAP için Azure uzantısının durumunu gösterir.
 
-![Sistem durumu denetimi, herhangi bir sorun mevcut olduğunu gösteren azperflib.exe yürüterek çıktısı][deployment-guide-figure-1100]
+![Herhangi bir sorun olmadığını gösteren azperflib. exe ' yi yürüterek sistem durumu denetimi çıkışı][deployment-guide-figure-1100]
 <a name="figure-11"></a>
 
-İçin döndürülen sonuç denetleme **sayaçları toplam** boş olarak ve için bildirilen çıktı **sistem durumu**, önceki şekilde gösterildiği.
+Yukarıdaki şekilde gösterilen, boş olarak bildirilen **sayaçların toplam** çıkış ve **sistem durumu**için döndürülen sonucu denetleyin.
 
-Sonuçta elde edilen değerleri şu şekilde yorumlayabilir:
+Sonuç değerlerini aşağıdaki gibi yorumlayın:
 
-| Azperflib.exe sonuç değerleri | Azure sistem durumu izleme |
+| Azperflib. exe sonuç değerleri | SAP sistem durumu için Azure uzantısı |
 | --- | --- |
-| **API çağrıları - kullanılamıyor** | Kullanılabilir sayaçları ya olabilir sanal makine yapılandırması, geçerli veya hatalar. Bkz: **sistem durumu**. |
-| **Toplam - boş sayaçları** |Aşağıdaki iki Azure depolama sayaçları boş olabilir: <ul><li>Depolama okuma işlem gecikme süresi sunucu milisaniye</li><li>Depolama okuma işlem gecikme süresi E2E milisaniye</li></ul>Diğer tüm sayaçlar değerlere sahip olmalıdır. |
-| **Sistem durumu** |Yalnızca Tamam if dönüş durumu gösterir **Tamam**. |
-| **Tanılama** |Sistem durumu hakkında ayrıntılı bilgiler. |
+| **API çağrıları-kullanılamıyor** | Mevcut olmayan sayaçlar, sanal makine yapılandırması için geçerli olmayabilir ya da hatalar olabilir. Bkz. **sistem durumu**. |
+| **Toplam sayaç-boş** |Aşağıdaki iki Azure depolama sayacı boş olabilir: <ul><li>Depolama okuma Işlem gecikmesi sunucusu msn</li><li>Depolama okuma Işlem gecikmesi E2E msn</li></ul>Diğer tüm sayaçların değerleri olmalıdır. |
+| **Sistem durumu** |Yalnızca geri dönüş durumu **Tamam**gösteriyorsa Tamam 'a tıklayın. |
+| **Tanılama** |Sağlık durumu hakkında ayrıntılı bilgi. |
 
-Varsa **sistem durumu** değeri değil **Tamam**, yönergeleri [sistem durumu denetimi için Azure izleme altyapı yapılandırmasını] [ deployment-guide-5.2].
+**Sistem** durumu değeri **Tamam**değilse, [SAP yapılandırması için Azure uzantısı sistem durumu denetimi][deployment-guide-5.2]konusundaki yönergeleri izleyin.
 
-#### <a name="run-the-readiness-check-on-a-linux-vm"></a>Bir Linux VM üzerinde hazırlık denetimi Çalıştır
+#### <a name="run-the-readiness-check-on-a-linux-vm"></a>Bir Linux VM 'de hazırlık denetimini çalıştırma
 
-1. Azure sanal makine için SSH kullanarak bağlanın.
+1. SSH kullanarak Azure sanal makinesine bağlanın.
 
-1. Azure Gelişmiş izleme uzantısını çıktısını denetleyin.
+1. SAP için Azure uzantısının çıkışını denetleyin.
 
-   a.  `more /var/lib/AzureEnhancedMonitor/PerfCounters` öğesini çalıştırın
+   a.  `more /var/lib/AzureEnhancedMonitor/PerfCounters`'i çalıştırın.
 
-   **Beklenen sonuç**: Performans sayaçları listesi döndürür. Dosya boş olmamalıdır.
+   **Beklenen sonuç**: Performans sayaçlarının listesini döndürür. Dosya boş olmamalıdır.
 
-   b. `cat /var/lib/AzureEnhancedMonitor/PerfCounters | grep Error` öğesini çalıştırın
+   b. `cat /var/lib/AzureEnhancedMonitor/PerfCounters | grep Error`'i çalıştırın.
 
-   **Beklenen sonuç**: Hatanın bulunduğu bir satır döndürür **hiçbiri**, örneğin, **3; yapılandırma; Hata; 0; 0; yok; 0 1456416792; tst servercs;**
+   **Beklenen sonuç**: Hatanın **hiçbiri**olduğu, örneğin **3; config; olan bir satır döndürür Hata;; 0; 0; hiçbiri; 0; 1456416792; TST-servercs;**
 
-   c. `more /var/lib/AzureEnhancedMonitor/LatestErrorRecord` öğesini çalıştırın
+   c. `more /var/lib/AzureEnhancedMonitor/LatestErrorRecord`'i çalıştırın.
 
    **Beklenen sonuç**: Boş olarak döndürür veya yok.
 
-Önceki denetimi başarılı olmadıysa, bu ek denetimler çalıştırın:
+Yukarıdaki denetim başarılı olmazsa, şu ek denetimleri çalıştırın:
 
-1. Waagent yüklü ve etkin olduğundan emin olun.
+1. Waagent 'ın yüklü ve etkin olduğundan emin olun.
 
-   a.  `sudo ls -al /var/lib/waagent/` öğesini çalıştırın
+   a.  `sudo ls -al /var/lib/waagent/`'i çalıştırın.
 
-     **Beklenen sonuç**: Waagent dizinin içeriğini listeler.
+     **Beklenen sonuç**: Waagent dizininin içeriğini listeler.
 
-   b.  `ps -ax | grep waagent` öğesini çalıştırın
+   b.  `ps -ax | grep waagent`'i çalıştırın.
 
-   **Beklenen sonuç**: Benzer bir giriş görüntüler: `python /usr/sbin/waagent -daemon`
+   **Beklenen sonuç**: Şuna benzer bir giriş görüntüler:`python /usr/sbin/waagent -daemon`
 
-1. Azure Gelişmiş izleme uzantısı yüklü ve çalışıyor olduğundan emin olun.
+1. SAP için Azure uzantısının yüklü olduğundan ve çalıştığından emin olun.
 
-   a.  `sudo sh -c 'ls -al /var/lib/waagent/Microsoft.OSTCExtensions.AzureEnhancedMonitorForLinux-*/'` öğesini çalıştırın
+   a.  `sudo sh -c 'ls -al /var/lib/waagent/Microsoft.OSTCExtensions.AzureEnhancedMonitorForLinux-*/'`'i çalıştırın.
 
-   **Beklenen sonuç**: Azure Gelişmiş izleme uzantısını dizinin içeriğini listeler.
+   **Beklenen sonuç**: SAP için Azure uzantısı dizininin içeriğini listeler.
 
-   b. `ps -ax | grep AzureEnhanced` öğesini çalıştırın
+   b. `ps -ax | grep AzureEnhanced`'i çalıştırın.
 
-   **Beklenen sonuç**: Benzer bir giriş görüntüler: `python /var/lib/waagent/Microsoft.OSTCExtensions.AzureEnhancedMonitorForLinux-2.0.0.2/handler.py daemon`
+   **Beklenen sonuç**: Şuna benzer bir giriş görüntüler:`python /var/lib/waagent/Microsoft.OSTCExtensions.AzureEnhancedMonitorForLinux-2.0.0.2/handler.py daemon`
 
-1. SAP Not açıklandığı gibi SAP konak Aracısı yükleme [1031096]ve çıktısını kontrol `saposcol`.
+1. SAP ana bilgisayar aracısını SAP Note [1031096]' de açıklandığı gibi yükleyip çıktısını `saposcol`denetleyin.
 
-   a.  `/usr/sap/hostctrl/exe/saposcol -d` öğesini çalıştırın
+   a.  `/usr/sap/hostctrl/exe/saposcol -d`'i çalıştırın.
 
-   b.  `dump ccm` öğesini çalıştırın
+   b.  `dump ccm`'i çalıştırın.
 
-   c.  Denetleme olmadığını **Virtualization_Configuration\Enhanced erişim izleme** ölçümü **true**.
+   c.  **Virtualization_Configuration\Enhanced Izleme erişim** ölçüsünün **doğru**olup olmadığını denetleyin.
 
-Yüklü bir SAP NetWeaver ABAP uygulama sunucusu zaten varsa, işlem ST06 açın ve Gelişmiş izleme etkin olup olmadığını denetleyin.
+Zaten yüklüyse, işlem ST06 ' yi açın ve gelişmiş izlemenin etkin olup olmadığını denetleyin.
 
-Tüm bu denetimlerin başarısız olursa, ve uzantıyı yeniden dağıtma hakkında ayrıntılı bilgi için bkz. [SAP için Azure izleme altyapısının sorun giderme][deployment-guide-5.3].
+Bu denetimlerden herhangi biri başarısız olursa ve uzantının nasıl yeniden dağıtılması hakkında ayrıntılı bilgi için bkz. [SAP Için Azure uzantısı sorunlarını giderme][deployment-guide-5.3].
 
-### <a name="e2d592ff-b4ea-4a53-a91a-e5521edb6cd1"></a>Sistem durumu için Azure izleme altyapı yapılandırmasını denetleyin
+### <a name="e2d592ff-b4ea-4a53-a91a-e5521edb6cd1"></a>SAP yapılandırması için Azure uzantısı için sistem durumu denetimi
 
-Bazı izleme, veri açıklanan test tarafından belirtildiği şekilde doğru şekilde teslim edilemedi [Azure SAP Gelişmiş izleme için hazır olma denetimi][deployment-guide-5.1]çalıştırın `Test-AzVMAEMExtension` cmdlet'ini olmadığını Azure için SAP altyapı ve izleme uzantısı izleme doğru şekilde yapılandırılır.
+Altyapı verilerinden bazıları [SAP için Azure uzantısı için hazır olma denetimi][deployment-guide-5.1]' nde açıklanan test tarafından belirtilen şekilde doğru şekilde iletilemiyorsa, Azure altyapısının ve SAP `Test-AzVMAEMExtension` için Azure uzantısının olup olmadığını denetlemek için cmdlet 'ini çalıştırın. doğru şekilde yapılandırıldı.
 
-1. Açıklandığı gibi Azure PowerShell cmdlet en son sürümünü yüklediğinizden emin olun [dağıtma, Azure PowerShell cmdlet'lerini][deployment-guide-4.1].
-1. Aşağıdaki PowerShell cmdlet’ini çalıştırın. Kullanılabilir ortamların listesi için cmdlet'i çalıştırın `Get-AzEnvironment`. Küresel Azure kullanmayı tercih **AzureCloud** ortamı. Çin'de Azure için seçin **AzureChinaCloud**.
+1. [Azure PowerShell cmdlet 'Leri dağıtma][deployment-guide-4.1]bölümünde açıklandığı gibi Azure PowerShell cmdlet 'inin en son sürümünü yüklediğinizden emin olun.
+1. Aşağıdaki PowerShell cmdlet’ini çalıştırın. Kullanılabilir ortamların bir listesi için cmdlet 'ini `Get-AzEnvironment`çalıştırın. Küresel Azure 'u kullanmak için **Azurecyüksek** ortamını seçin. Çin 'de Azure için **AzureChinaCloud**öğesini seçin.
    ```powershell
    $env = Get-AzEnvironment -Name <name of the environment>
    Connect-AzAccount -Environment $env
@@ -1141,88 +1140,88 @@ Bazı izleme, veri açıklanan test tarafından belirtildiği şekilde doğru ş
    Test-AzVMAEMExtension -ResourceGroupName <resource group name> -VMName <virtual machine name>
    ```
 
-1. Hesap verilerinizi girin ve Azure sanal makine belirleyin.
+1. Hesap verilerinizi girin ve Azure sanal makinesini belirtin.
 
-   ![SAP özgü giriş sayfasında Azure cmdlet Test-VMConfigForSAP_GUI][deployment-guide-figure-1200]
+   ![SAP 'ye özgü Azure cmdlet test-VMConfigForSAP_GUI giriş sayfası][deployment-guide-figure-1200]
 
-1. Betik, seçtiğiniz sanal makine yapılandırmasını test eder.
+1. Betik, seçtiğiniz sanal makinenin yapılandırmasını sınar.
 
-   ![SAP için Azure izleme altyapısının başarılı test çıkışı][deployment-guide-figure-1300]
+   ![SAP için Azure uzantısının başarılı testinin çıkışı][deployment-guide-figure-1300]
 
-Her sistem durumu denetimi sonucu olduğundan emin olun **Tamam**. Bazı denetimleri görüntüleme, **Tamam**, açıklanan şekilde güncelleştirmeyi cmdlet'i çalıştırın [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak][deployment-guide-4.5]. 15 dakika bekleyin ve açıklanan denetimleri [Azure SAP Gelişmiş izleme için hazır olma denetimi] [ deployment-guide-5.1] ve [Azure izleme altyapısı yapılandırmasınıiçinsistemdurumudenetimi] [deployment-guide-5.2]. Denetimler hala bazı veya tüm sayaçları ile ilgili bir sorun gösteriyorsa, bkz. [SAP için Azure izleme altyapısının sorun giderme][deployment-guide-5.3].
+Her sistem durumu denetimi sonucunun **Tamam**olduğundan emin olun. Bazı denetimler **Tamam**' ı görüntülemediği takdirde, güncelleştirme CMDLET 'ini [SAP Için Azure uzantısını yapılandırma][deployment-guide-4.5]bölümünde anlatıldığı gibi çalıştırın. 15 dakika bekleyin ve SAP [yapılandırması Için Azure uzantısı IÇIN sap ve sistem durumu denetimi][deployment-guide-5.2]için [hazırlık denetimi][deployment-guide-5.1] bölümünde açıklanan denetimleri tekrarlayın. Denetimler hala bazı veya tüm sayaçlarla ilgili bir sorun gösteriyorsa, bkz. [SAP Için Azure uzantısı sorunlarını giderme][deployment-guide-5.3].
 
 > [!Note]
-> Bazı uyarılar oluştu, standart Azure diskler yönetilen kullandığınız durumlarda oluşabilir. "Tamam" döndüren testleri yerine uyarılar görüntülenir. Normal ve amaçlanan durumunda, disk türü budur. Ayrıca bkz: bkz [SAP için Azure izleme altyapı sorunlarını giderme][deployment-guide-5.3]
+> Yönetilen standart Azure disklerini kullandığınız durumlarda bazı uyarılar yaşayabilirsiniz. "Tamam" döndüren testler yerine uyarılar görüntülenecektir. Bu, normal ve bu disk türü olması durumunda tasarlanmıştır. Ayrıca bkz [. sap Için Azure uzantısı sorunlarını giderme][deployment-guide-5.3]
 > 
 
-### <a name="fe25a7da-4e4e-4388-8907-8abc2d33cfd8"></a>SAP için Azure izleme altyapı sorunlarını giderme
+### <a name="fe25a7da-4e4e-4388-8907-8abc2d33cfd8"></a>SAP için Azure uzantısı sorunlarını giderme
 
-#### <a name="windowslogowindows-azure-performance-counters-do-not-show-up-at-all"></a>![Windows][Logo_Windows] Azure performans sayaçları hiç gösterilmez
+#### <a name="windowslogo_windows-azure-performance-counters-do-not-show-up-at-all"></a>![Windows][Logo_Windows] Azure performans sayaçları hiç görünmüyor
 
-AzureEnhancedMonitoring Windows hizmeti, azure'da performans ölçümleri toplar. Hizmet doğru şekilde yüklenmedi veya, sanal çalışmıyorsa, performans ölçüm toplanabilir.
+AzureEnhancedMonitoring Windows hizmeti, Azure 'da performans ölçümlerini toplar. Hizmet doğru şekilde yüklenmemişse veya sanal makinenizde çalışmıyorsa, hiçbir performans ölçümü toplanamaz.
 
-##### <a name="the-installation-directory-of-the-azure-enhanced-monitoring-extension-is-empty"></a>Azure Gelişmiş izleme uzantısını yükleme dizinini boştur
+##### <a name="the-installation-directory-of-the-azure-extension-for-sap-is-empty"></a>SAP için Azure uzantısının yükleme dizini boş
 
 ###### <a name="issue"></a>Sorun
 
-Yükleme dizini C:\\paketleri\\eklentileri\\Microsoft.AzureCAT.AzureEnhancedMonitoring.AzureCATExtensionHandler\\&lt;sürüm >\\bırakma boştur.
+Yükleme dizini C:\\\\Microsoft.\\AzureCAT. AzureEnhancedMonitoring. AzureCATExtensionHandler\\&lt;sürüm >\\Drop paketleri boş.
 
 ###### <a name="solution"></a>Çözüm
 
-Uzantısı yüklü değil. (Daha önce açıklandığı gibi) bu Ara sunucu sorunu olup olmadığını belirler. Makineyi yeniden başlatın veya yeniden çalıştırmak ihtiyacınız olabilecek `Set-AzVMAEMExtension` yapılandırma betiği.
+Uzantı yüklü değil. Bunun bir ara sunucu sorunu olup olmadığını (daha önce açıklandığı gibi) öğrenin. Makineyi yeniden başlatmanız veya `Set-AzVMAEMExtension` yapılandırma betiğini yeniden çalıştırmanız gerekebilir.
 
-##### <a name="service-for-azure-enhanced-monitoring-does-not-exist"></a>Azure Gelişmiş izleme için hizmet kayıtlı değil
+##### <a name="service-for-azure-extension-for-sap-does-not-exist"></a>SAP için Azure uzantısı hizmeti yok
 
 ###### <a name="issue"></a>Sorun
 
-AzureEnhancedMonitoring Windows hizmet yok.
+AzureEnhancedMonitoring Windows hizmeti yok.
 
-Azperflib.exe çıkış bir hata oluşturur:
+Azperflib. exe çıktısı bir hata oluşturur:
 
-![SAP için Azure Gelişmiş izleme uzantısını hizmet çalışmıyor azperflib.exe yürütülmesini gösterir.][deployment-guide-figure-1400]
+![Azperflib. exe ' nin yürütülmesi SAP için Azure uzantısı hizmetinin çalışmadığını gösterir][deployment-guide-figure-1400]
 <a name="figure-14"></a>
 
 ###### <a name="solution"></a>Çözüm
 
-Azure Gelişmiş izleme uzantısını SAP için hizmetin mevcut değilse, doğru şekilde yüklenmedi. Dağıtım senaryonuz için açıklanan adımları kullanarak uzantıyı yeniden [dağıtım senaryoları için azure'da SAP sanal makinelerinin][deployment-guide-3].
+Hizmet yoksa, SAP için Azure uzantısı doğru şekilde yüklenmemiştir. [Azure 'DA SAP Için VM 'Lerin dağıtım senaryolarında][deployment-guide-3]dağıtım senaryolarınız için açıklanan adımları kullanarak uzantıyı yeniden dağıtın.
 
-Bir saat sonra uzantı dağıttıktan sonra yeniden Azure performans sayaçlarını Azure VM ile sağlanıp sağlanmadığını denetleyin.
+Uzantıyı dağıttıktan sonra, bir saatten sonra Azure performans sayaçlarının Azure sanal makinesinde sağlanmış olup olmadığını denetleyin.
 
-##### <a name="service-for-azure-enhanced-monitoring-exists-but-fails-to-start"></a>Azure Gelişmiş izleme hizmeti var, ancak başlatılamıyor
+##### <a name="service-for-azure-extension-for-sap-exists-but-fails-to-start"></a>SAP için Azure uzantısı hizmeti var, ancak başlatılamıyor
 
 ###### <a name="issue"></a>Sorun
 
-AzureEnhancedMonitoring Windows hizmeti var ve etkinleştirilir, ancak başlatılamıyor. Daha fazla bilgi için uygulama olay günlüğünü denetleyin.
+AzureEnhancedMonitoring Windows hizmeti var ve etkin, ancak başlatılamıyor. Daha fazla bilgi için uygulama olay günlüğünü denetleyin.
 
 ###### <a name="solution"></a>Çözüm
 
-Yapılandırması doğru değil. İzleme uzantısı açıklandığı gibi sanal makine için yeniden [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak][deployment-guide-4.5].
+Yapılandırma yanlış. VM 'de SAP için Azure uzantısını, [SAP Için Azure uzantısını yapılandırma][deployment-guide-4.5]başlığı altında açıklandığı gibi yeniden başlatın.
 
-#### <a name="windowslogowindows-some-azure-performance-counters-are-missing"></a>![Windows][Logo_Windows] Bazı Azure performans sayaçları kayboluyor
+#### <a name="windowslogo_windows-some-azure-performance-counters-are-missing"></a>![Windows][Logo_Windows] Bazı Azure performans sayaçları eksik
 
-AzureEnhancedMonitoring Windows hizmeti, azure'da performans ölçümleri toplar. Hizmet, çeşitli kaynaklardan veri alır. Bazı yapılandırma verilerini yerel olarak toplanır ve bazı performans ölçümlerini Azure Tanılama'ya okunur. Depolama sayaçları, oturum depolama abonelik düzeyinde kullanılır.
+AzureEnhancedMonitoring Windows hizmeti, Azure 'da performans ölçümlerini toplar. Hizmet, çeşitli kaynaklardan veri alır. Bazı yapılandırma verileri yerel olarak toplanır ve bazı performans ölçümleri Azure Tanılama okunurdur. Depolama sayaçları, depolama aboneliği düzeyinde günlüğe kaydetme işleminden kullanılır.
 
-SAP notu kullanarak sorun giderme olursa [1999351] değil, sorunu yeniden `Set-AzVMAEMExtension` yapılandırma betiği. Hemen etkinleştirdikten sonra depolama analizi veya tanılama sayaçları oluşturulamaz çünkü bir saat beklemeniz gerekebilir. Sorun devam ederse, SAP Müşteri Destek iletisine için bileşen OP NT AZR BC Windows veya BC-işlem-LNX-AZR Linux sanal makinesi için açın.
+SAP Note [1999351] kullanarak sorun giderme sorunu çözmezse, `Set-AzVMAEMExtension` yapılandırma betiğini yeniden çalıştırın. Depolama analizi veya tanılama sayaçları etkinleştirildikten sonra hemen oluşturulamaabileceğinden, bir saat beklemeniz gerekebilir. Sorun devam ederse, bir Linux sanal makinesi için Windows için BC-OP-NT-AZR veya BC-OP-LNX-AZR bileşen üzerinde bir SAP müşteri destek iletisi açın.
 
-#### <a name="linuxlogolinux-azure-performance-counters-do-not-show-up-at-all"></a>![Linux][Logo_Linux] Azure performans sayaçları hiç gösterilmez
+#### <a name="linuxlogo_linux-azure-performance-counters-do-not-show-up-at-all"></a>![Linux][Logo_Linux] Azure performans sayaçları hiç görünmüyor
 
-Azure'da performans ölçümleri, bir arka plan tarafından toplanır. Arka plan programı çalışmıyorsa, performans ölçüm toplanabilir.
+Azure 'daki performans ölçümleri bir Daemon tarafından toplanır. Arka plan programı çalışmıyorsa, hiçbir performans ölçümü toplanamaz.
 
-##### <a name="the-installation-directory-of-the-azure-enhanced-monitoring-extension-is-empty"></a>Azure Gelişmiş izleme uzantısını yükleme dizinini boştur
+##### <a name="the-installation-directory-of-the-azure-extension-for-sap-is-empty"></a>SAP için Azure uzantısının yükleme dizini boş
 
 ###### <a name="issue"></a>Sorun
 
-Dizin \\var\\LIB\\waagent\\ Azure Gelişmiş izleme uzantısı için bir alt dizin yok.
+Var \\olan\\LIB\\waagent\\ dizininde SAP için Azure uzantısı için bir alt dizin yok.
 
 ###### <a name="solution"></a>Çözüm
 
-Uzantısı yüklü değil. (Daha önce açıklandığı gibi) bu Ara sunucu sorunu olup olmadığını belirler. Makineyi yeniden başlatın ve/veya yeniden çalıştırmak ihtiyacınız olabilecek `Set-AzVMAEMExtension` yapılandırma betiği.
+Uzantı yüklü değil. Bunun bir ara sunucu sorunu olup olmadığını (daha önce açıklandığı gibi) öğrenin. Makineyi yeniden başlatmanız ve/veya `Set-AzVMAEMExtension` yapılandırma betiğini yeniden çalıştırmanız gerekebilir.
 
-##### <a name="the-execution-of-set-azvmaemextension-and-test-azvmaemextension-show-warning-messages-stating-that-standard-managed-disks-are-not-supported"></a>Set-AzVMAEMExtension ve Test AzVMAEMExtension yürütülmesini standart yönetilen diskler desteklenmediğini belirten bir uyarı iletilerini göster
+##### <a name="the-execution-of-set-azvmaemextension-and-test-azvmaemextension-show-warning-messages-stating-that-standard-managed-disks-are-not-supported"></a>Set-AzVMAEMExtension ve test-AzVMAEMExtension yürütme, Standart yönetilen disklerin desteklenmediğini belirten uyarı iletilerini gösterir
 
 ###### <a name="issue"></a>Sorun
 
-Ne zaman yürütülen kümesi AzVMAEMExtension veya Test AzVMAEMExtension iletileri bunlar gibi gösterilir:
+Set-AzVMAEMExtension veya test-AzVMAEMExtension iletileri çalıştırıldığında bunlar gösterilmektedir:
 
 <pre><code>
 WARNING: [WARN] Standard Managed Disks are not supported. Extension will be installed but no disk metrics will be available.
@@ -1230,17 +1229,17 @@ WARNING: [WARN] Standard Managed Disks are not supported. Extension will be inst
 WARNING: [WARN] Standard Managed Disks are not supported. Extension will be installed but no disk metrics will be available.
 </code></pre>
 
-Daha önce açıklandığı gibi azperfli.exe yürütme iyi durumda olmayan bir durumu gösteren bir sonuç elde edebilirsiniz. 
+Daha önce açıklandığı gibi azperfli. exe dosyasını yürütme, sağlıklı olmayan bir durumu gösteren bir sonuç elde edersiniz. 
 
 ###### <a name="solution"></a>Çözüm
 
-İletileri, standart yönetilen diskler standart Azure depolama hesapları istatistiklerle denetlemek için izleme uzantısı tarafından kullanılan API'ler sunan değil olgu kaynaklanır. Bu, birkaç önemli değildir. Standart Disk Depolama hesapları için izleme ile tanışın nedeni sık oluşan g/ç azaltma. Yönetilen diskler, bu tür bir depolama hesabındaki diskleri sayısını sınırlayarak azaltma kaçınır. Bu nedenle, bu türü izleme verilerinin olmaması önemli değildir.
+İletiler standart yönetilen disklerin, standart Azure depolama hesaplarının istatistiklerini denetlemek için SAP için SAP uzantısı tarafından kullanılan API 'Leri dağıtmadığından kaynaklanmıştır. Bu sorun önemli değildir. Standart Disk Depolama hesapları toplama verilerinin toplanması nedeni, sık gerçekleşen g/ç 'yi azaltmamıştı. Yönetilen diskler, bir depolama hesabındaki disk sayısını sınırlayarak bu tür azaltmaya engel olur. Bu nedenle, bu veri türü önemli değildir.
 
 
-#### <a name="linuxlogolinux-some-azure-performance-counters-are-missing"></a>![Linux][Logo_Linux] Bazı Azure performans sayaçları kayboluyor
+#### <a name="linuxlogo_linux-some-azure-performance-counters-are-missing"></a>![Linux][Logo_Linux] Bazı Azure performans sayaçları eksik
 
-Azure'da performans ölçümleri, çeşitli kaynaklardan veri alır bir arka plan programı tarafından toplanır. Bazı yapılandırma verilerini yerel olarak toplanır ve bazı performans ölçümlerini Azure Tanılama'ya okunur. Depolama sayaçları, depolama aboneliğinizdeki günlüklerinden gelir.
+Azure 'daki performans ölçümleri, çeşitli kaynaklardan veri alan bir Daemon tarafından toplanır. Bazı yapılandırma verileri yerel olarak toplanır ve bazı performans ölçümleri Azure Tanılama okunurdur. Depolama sayaçları, depolama aboneliğinizdeki günlüklerden gelir.
 
-Bilinen sorunların eksiksiz ve güncel listesi için bkz. Not SAP [1999351], SAP için Azure izleme Gelişmiş ek sorun giderme bilgileri içeriyor.
+Bilinen sorunların tam ve güncel listesi için bkz. sap Note [1999351], SAP Için Azure Uzantısı ile ilgili ek sorun giderme bilgileri.
 
-SAP notu kullanarak sorun giderme olursa [1999351] değil sorunu çözün, yeniden `Set-AzVMAEMExtension` açıklandığı gibi yapılandırma betiğini [Azure Gelişmiş izleme uzantısını SAP için yapılandırmak] [deployment-guide-4.5]. Hemen etkinleştirdikten sonra depolama analizi veya tanılama sayaçları oluşturulamaz çünkü bir saat beklemeniz gerekebilir. Sorun devam ederse, SAP Müşteri Destek iletisine için bileşen OP NT AZR BC Windows veya BC-işlem-LNX-AZR Linux sanal makinesi için açın.
+SAP Not [1999351] kullanarak sorun giderme sorunu çözmezse, `Set-AzVMAEMExtension` yapılandırma betiğini [SAP için Azure uzantısını yapılandırma][deployment-guide-4.5]bölümünde açıklandığı gibi yeniden çalıştırın. Depolama analizi veya tanılama sayaçları etkinleştirildikten sonra hemen oluşturulamaabileceğinden bir saat beklemeniz gerekebilir. Sorun devam ederse, bir Linux sanal makinesi için Windows için BC-OP-NT-AZR veya BC-OP-LNX-AZR bileşen üzerinde bir SAP müşteri destek iletisi açın.

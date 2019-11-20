@@ -1,27 +1,27 @@
 ---
-title: Azure Event Hubs Kafka protokolünü kullanarak akış verileri | Microsoft Docs
-description: Bu makalede akış için nasıl Azure Event Hubs'a API'leri ve Kafka protokolü kullanarak bilgi sağlanır.
+title: 'Hızlı başlangıç: Kafka protokolünü kullanarak Azure Event Hubs ile veri akışı'
+description: "Hızlı başlangıç: Bu makalede, Kafka Protokolü ve API 'Leri kullanılarak Azure Event Hubs 'da nasıl akış yapılacağı hakkında bilgiler sağlanmaktadır."
 services: event-hubs
-author: basilhariri
-ms.author: bahariri
+author: ShubhaVijayasarathy
+ms.author: shvija
 ms.service: event-hubs
 ms.topic: quickstart
 ms.custom: seodec18
-ms.date: 05/06/2019
-ms.openlocfilehash: a4e050fdef20cdc62ee92e6383c455ffcb9abc90
-ms.sourcegitcommit: 0568c7aefd67185fd8e1400aed84c5af4f1597f9
+ms.date: 11/05/2019
+ms.openlocfilehash: 2222345054982799f9f9e0b84961271a3cc04ddf
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65203915"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73717811"
 ---
-# <a name="data-streaming-with-event-hubs-using-the-kafka-protocol"></a>Event Hubs Kafka protokolünü kullanarak akış verileri
+# <a name="quickstart-data-streaming-with-event-hubs-using-the-kafka-protocol"></a>Hızlı başlangıç: Kafka protokolünü kullanarak Event Hubs veri akışı
 Bu hızlı başlangıçta, protokol istemcilerinizi değiştirmenize veya kendi kümelerinizi çalıştırmanıza gerek kalmadan Kafka etkin Event Hubs’a nasıl akış oluşturulacağı gösterilir. Yalnızca uygulamalarınızdaki bir yapılandırma değişikliğiyle Kafka etkin Event Hubs ile konuşmak için üreticilerinizi ve tüketicilerinizi nasıl kullanacağınızı öğrenirsiniz. Azure Event Hubs [Apache Kafka sürüm 1.0](https://kafka.apache.org/10/documentation.html)’ı destekler.
 
 > [!NOTE]
 > Bu örnek [GitHub](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/java)'da sağlanır
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu hızlı başlangıcı tamamlamak için aşağıdaki önkoşulların karşılandığından emin olun:
 
@@ -34,13 +34,13 @@ Bu hızlı başlangıcı tamamlamak için aşağıdaki önkoşulların karşıla
 
 ## <a name="create-a-kafka-enabled-event-hubs-namespace"></a>Kafka etkin Event Hubs ad alanı oluşturma
 
-1. Oturum [Azure portalında](https://portal.azure.com), tıklatıp **kaynak Oluştur** , ekranın sol üst köşesindeki.
+1. [Azure Portal](https://portal.azure.com)oturum açın ve ekranın sol üst kısmında bulunan **kaynak oluştur ' a** tıklayın.
 
 2. Event Hubs araması yapın ve burada gösterilen seçenekleri belirleyin:
     
     ![Portalda Event Hubs arama](./media/event-hubs-create-kafka-enabled/event-hubs-create-event-hubs.png)
  
-3. Benzersiz bir ad belirtin ve ad alanında Kafka'yı etkinleştirin. **Oluştur**’a tıklayın. Not: Event Hubs Kafka için yalnızca standart tarafından desteklenen ve adanmış katmanı Event Hubs. Event Hubs temel katman yanıt herhangi bir Kafka işlem olarak bir konu Yetkilendirme hatası döndürür.
+3. Benzersiz bir ad belirtin ve ad alanında Kafka'yı etkinleştirin. **Oluştur**'a tıklayın. Note: Kafka için Event Hubs yalnızca standart ve adanmış katman Event Hubs tarafından desteklenir. Temel katman Event Hubs, herhangi bir Kafka işlemine yanıt olarak bir konu yetkilendirme hatası döndürür.
     
     ![Ad alanı oluşturma](./media/event-hubs-create-kafka-enabled/create-kafka-namespace.jpg)
  
@@ -104,5 +104,5 @@ Bu makalede protokol istemcilerinizi değiştirmenize veya kendi kümelerinizi �
 * [Event Hubs hakkında bilgi edinin](event-hubs-what-is-event-hubs.md)
 * [Kafka için Event Hubs hakkında bilgi edinin](event-hubs-for-kafka-ecosystem-overview.md)
 * [Kafka için Event Hubs GitHub'ındaki diğer örnekleri keşfedin](https://github.com/Azure/azure-event-hubs-for-kafka)
-* Kullanım [MirrorMaker](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) için [kafka'ya şirket içi kafka'dan akış olayları Event Hubs bulut üzerinde etkin.](event-hubs-kafka-mirror-maker-tutorial.md)
+* [Kafka 'ten Şirket içindeki olayları, bulutta Kafka etkin Event Hubs akışa](event-hubs-kafka-mirror-maker-tutorial.md) almak Için [mirrormaker](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846330) 'ı kullanın.
 * [Apache Flink](event-hubs-kafka-flink-tutorial.md) ya da [Akka Streams](event-hubs-kafka-akka-streams-tutorial.md) kullanarak Kafka etkin Event Hubs’a nasıl akış oluşturacağınızı öğrenin.

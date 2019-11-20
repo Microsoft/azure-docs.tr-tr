@@ -66,10 +66,17 @@
     - name: Azure Resource Manager
       href: ../azure-resource-manager/resource-group-overview.md
       maintainContext: true
-    - name: Bölgeler ve kullanılabilirlik
-      href: ../virtual-machines/windows/regions-and-availability.md
+    - name: Bölgeler
+      href: ../virtual-machines/windows/regions.md
+    - name: Kullanılabilirlik ve performans
       maintainContext: true
       items:
+        - name: Kullanılabilirlik
+          href: availability.md
+        - name: Birlikte bulunma
+          href: co-location.md
+        - name: Ağ performansı
+          href: ../virtual-network/virtual-network-optimize-network-bandwidth.md?toc=%2fazure%2fvirtual-machine-scale-sets%2fwindows%2ftoc.json
         - name: Ölçek kümelerinde hata etki alanlarını yönetme
           href: virtual-machine-scale-sets-manage-fault-domains.md
     - name: VM türleri ve boyutları
@@ -118,6 +125,8 @@
     - name: Bakım ve güncelleştirmeler
       href: ../virtual-machines/windows/maintenance-and-updates.md
       maintainContext: true
+    - name: Düzenleme modları
+      href: orchestration-modes.md
     - name: Disk depolama
       items:
         - name: Yönetilen Diskler
@@ -143,8 +152,14 @@
     - name: Altyapı otomasyonu
       href: ../virtual-machines/windows/infrastructure-automation.md
       maintainContext: true
-    - name: Güvenlik ve ilke
-      href: ../virtual-machines/windows/security-policy.md
+    - name: Güvenlik
+      items:
+        - name: Güvenlik ve ilke
+          href: ../virtual-machines/windows/security-policy.md
+        - name: Azure Disk Şifrelemesi
+          href: disk-encryption-overview.md
+        - name: Yerleşik güvenlik denetimleri
+          href: virtual-machine-scale-sets-security-controls.md
       maintainContext: true
     - name: İzleme
       href: ../virtual-machines/windows/monitor.md
@@ -203,12 +218,15 @@
         - name: Ölçek kümelerinde diskleri şifreleme
           items:
             - name: PowerShell kullanma
-              href: virtual-machine-scale-sets-encrypt-disks-ps.md
+              href: disk-encryption-powershell.md
             - name: Azure CLI kullanma
-              href: virtual-machine-scale-sets-encrypt-disks-cli.md
+              href: disk-encryption-cli.md
+            - name: Azure Resource Manager şablonlarını kullanma
+              href: disk-encryption-azure-resource-manager.md
             - name: Uzantı sıralama
-              href: ../security/azure-security-disk-encryption-extension-sequencing.md
-              maintainContext: true
+              href: disk-encryption-extension-sequencing.md
+            - name: Azure Disk Şifrelemesi için anahtar kasası
+              href: disk-encryption-key-vault.md
         - name: Büyük ölçek kümeleriyle çalışma
           href: virtual-machine-scale-sets-placement-groups.md
         - name: Yönetilen disk kullanmak üzere bir ölçek kümesi şablonu dönüştürme
@@ -231,6 +249,10 @@
           href: virtual-machine-scale-sets-automatic-upgrade.md
         - name: Örnek koruması (Önizleme)
           href: virtual-machine-scale-sets-instance-protection.md
+        - name: Ölçek Genişletme İlkesi (Önizleme)
+          href: virtual-machine-scale-sets-scale-in-policy.md
+        - name: Silindiğinde bildirimi sonlandır (Önizleme)
+          href: virtual-machine-scale-sets-terminate-notification.md
         - name: Paylaşılan görüntü galerileri
           items:
             - name: Genel Bakış
@@ -243,6 +265,8 @@
               href: share-images-across-tenants.md
             - name: Paylaşılan görüntü sorunlarını giderme
               href: troubleshooting-shared-images.md
+        - name: Yakınlık yerleştirme grubu oluşturma
+          href: proximity-placement-groups.md
         - name: Ölçek kümesinde dikey ölçeklendirme
           href: virtual-machine-scale-sets-vertical-scale-reprovision.md
         - name: DSC ve ölçek kümelerini kullanma

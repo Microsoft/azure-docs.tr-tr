@@ -16,12 +16,12 @@ ms.topic: tutorial
 ms.date: 04/10/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a5b3c9a0152144ac0d705c7d3f12c18cbc38398f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 817eecce6c2c1be273b47494e8ecc14180394796
+ms.sourcegitcommit: c105ccb7cfae6ee87f50f099a1c035623a2e239b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67090143"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67705348"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-spotinst"></a>Öğretici: Spotinst ile Azure Active Directory Tümleştirme
 
@@ -114,7 +114,7 @@ Azure AD çoklu oturum açma ile Spotinst yapılandırmak için aşağıdaki ad�
 
     ![Spotinst etki alanı ve URL'ler tek oturum açma bilgileri](common/metadata-upload-additional-signon.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna URL'yi yazın:  `https://console.spotinst.com`
+    İçinde **oturum açma URL'si** metin kutusuna URL'yi yazın:  `https://console.spotinst.com/auth/saml`
 
     > [!NOTE]
     > Geçiş durumu değeri gerçek değil. Geçiş durumu değeri, öğreticinin ilerleyen bölümlerinde açıklanan gerçek geçiş durumu değeri ile güncelleştirir.

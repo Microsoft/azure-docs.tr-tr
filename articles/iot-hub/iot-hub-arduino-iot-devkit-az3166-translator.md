@@ -1,60 +1,59 @@
 ---
-title: Azure işlevleri ve Bilişsel hizmetler kullanarak bir IOT DevKit translator oluştur | Microsoft Docs
-description: Mikrofon üzerinde bir IOT DevKit bir sesli ileti alırsınız ve ardından İngilizce çevrilmiş metin işleme için Azure Bilişsel hizmetler için kullanın.
+title: Çeviriciyi w/Azure Işlevleri, bilişsel hizmetler, IoT DevKit yapın
+description: Bir IoT DevKit üzerinde mikrofonu kullanarak bir sesli ileti alın ve ardından Ingilizce dilinde, çevrilmiş metinde işlenmek üzere Azure bilişsel hizmetler 'i kullanın
 author: liydu
-manager: jeffya
 ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 12/19/2018
 ms.author: liydu
-ms.openlocfilehash: df7e7b426a8c85c8051d7f588c706a6f8811e183
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 8e840a1ae7161ea3e7b370889a1f0fb648ca120e
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60518913"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73953350"
 ---
-# <a name="use-iot-devkit-az3166-with-azure-functions-and-cognitive-services-to-make-a-language-translator"></a>IOT DevKit AZ3166 dil translator yapmak için Azure işlevleri ve Bilişsel hizmetler ile kullanın
+# <a name="use-iot-devkit-az3166-with-azure-functions-and-cognitive-services-to-make-a-language-translator"></a>Azure Işlevleri ve bilişsel hizmetler ile IoT DevKit AZ3166 kullanarak bir dil Çeviricisi oluşturun
 
-Bu makalede, bir dil translator olarak IOT DevKit kullanarak hale getirmeyi öğrenin [Azure Bilişsel Hizmetler](https://azure.microsoft.com/services/cognitive-services/). Sesinizi kaydeder ve İngilizce metni DevKit ekranda gösterilen çevirir.
+Bu makalede, Azure bilişsel [Hizmetler](https://azure.microsoft.com/services/cognitive-services/)'ı kullanarak IoT devkit 'in bir dil çeviricisi olarak nasıl yapılacağını öğreneceksiniz. Sesinizi kaydeder ve DevKit ekranında gösterilen Ingilizce metne çevirir.
 
-[MXChip IOT DevKit](https://aka.ms/iot-devkit) bir hepsi bir arada Arduino uyumlu zengin çevre ve sensörlerden panosudur. Onu kullanarak geliştirebilirsiniz [Azure IOT cihaz Workbench](https://aka.ms/iot-workbench) veya [Azure IOT Araçları](https://aka.ms/azure-iot-tools) Visual Studio Code uzantısı paketinde. [Projeleri Kataloğu](https://microsoft.github.io/azure-iot-developer-kit/docs/projects/) prototip IOT çözümlerine yardımcı olmak için örnek uygulamalar içerir.
+[Mxyongaıot DevKit](https://aka.ms/iot-devkit) , zengin çevre birimleri ve sensörlerle birlikte hepsi bir arada bir uyumlu panotir. Visual Studio Code 'de [Azure IoT cihaz çalışma ekranı](https://aka.ms/iot-workbench) veya [Azure IoT araçları](https://aka.ms/azure-iot-tools) Uzantı paketi ' ni kullanarak bu BT için geliştirme yapabilirsiniz. [Projeler kataloğu](https://microsoft.github.io/azure-iot-developer-kit/docs/projects/) , IoT çözümlerini prototiplerinizde yardımcı olacak örnek uygulamalar içerir.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu öğreticideki adımları tamamlamak için önce aşağıdaki görevleri yapın:
+Bu öğreticideki adımları tamamlayabilmeniz için önce aşağıdaki görevleri yapın:
 
-* İçindeki adımları izleyerek, DevKit hazırlama [IOT DevKit AZ3166 bulutta Azure IOT hub'a bağlanma](/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-get-started).
+* [IoT Hub IoT DEVKIT AZ3166 'e bağlanma bölümündeki adımları Bulutta Azure 'a](/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-get-started)hazırlayın.
 
-## <a name="create-azure-cognitive-service"></a>Azure Bilişsel hizmet oluşturma
+## <a name="create-azure-cognitive-service"></a>Azure bilişsel hizmeti oluşturma
 
-1. Azure portalında **kaynak Oluştur** araması **konuşma**. Konuşma hizmeti oluşturmak için formu doldurun.
-  ![Konuşma hizmeti](media/iot-hub-arduino-iot-devkit-az3166-translator/speech-service.png)
+1. Azure portal, **kaynak oluştur ' a** tıklayın ve **konuşma**için arama yapın. Konuşma hizmetini oluşturmak için formu doldurun.
+  Konuşma hizmeti ![](media/iot-hub-arduino-iot-devkit-az3166-translator/speech-service.png)
 
-1. Konuşma hizmeti için yeni oluşturduğunuz tıklatın Git **anahtarları** bölümü kopyalayın ve Not **Key1** DevKit ona erişmek için.
-  ![Anahtarları kopyalayın](media/iot-hub-arduino-iot-devkit-az3166-translator/copy-keys.png)
+1. Yeni oluşturduğunuz konuşma hizmetine gidin, **KEY1** for devkit 'e erişimi kopyalamak ve ona erişmek için **anahtarlar** Bölümü ' ne tıklayın.
+  anahtarları ![](media/iot-hub-arduino-iot-devkit-az3166-translator/copy-keys.png) Kopyala
 
-## <a name="open-sample-project"></a>Açık örnek proje
+## <a name="open-sample-project"></a>Örnek projeyi aç
 
-1. Kendi IOT DevKit olduğundan emin olun **bağlı** bilgisayarınıza. VS Code ilk kez başlatın ve ardından DevKit bilgisayarınıza bağlayın.
+1. IoT DevKit 'in bilgisayarınıza **bağlı** olmadığından emin olun. Önce VS Code başlatın ve ardından DevKit 'i bilgisayarınıza bağlayın.
 
-1. Tıklayın `F1` komut paletini açın için girin ve seçin **Azure IOT cihaz Workbench: Örnek Aç...** . Ardından **IOT DevKit** tablosu olarak.
+1. Komut paletini açmak için `F1` ' a tıklayın, yazın ve **Azure IoT cihaz çalışma ekranı ' nı seçin: örnekleri aç...** . Ardından, pano olarak **IoT DevKit** ' i seçin.
 
-1. IOT Workbench örnekler sayfasında bulma **DevKit Translator** tıklatıp **açık örnek**. Ardından örnek kodu indirmek için varsayılan yolu seçer.
-  ![Açık örnek](media/iot-hub-arduino-iot-devkit-az3166-translator/open-sample.png)
+1. IoT çalışma ekranı örnekleri sayfasında, **devkit çeviricisini** bulun ve **örnek aç**' a tıklayın. Ardından örnek kodu indirmek için varsayılan yolu seçer.
+  ![açık örnek](media/iot-hub-arduino-iot-devkit-az3166-translator/open-sample.png)
 
-## <a name="use-speech-service-with-azure-functions"></a>Konuşma hizmeti ile Azure işlevlerini kullanma
+## <a name="use-speech-service-with-azure-functions"></a>Azure Işlevleri ile konuşma hizmetini kullanma
 
-1. VS Code'da tıklayın `F1`yazın ve seçin **Azure IOT cihaz Workbench: Azure hizmetleri sağlama...** . ![Azure hizmetleri sağlama](media/iot-hub-arduino-iot-devkit-az3166-translator/provision.png)
+1. VS Code ' de, `F1`' a tıklayın ve **Azure IoT cihaz çalışma ekranı: Azure hizmetleri sağla...** seçeneğini belirleyin. Azure hizmetlerini sağlamak ![](media/iot-hub-arduino-iot-devkit-az3166-translator/provision.png)
 
-1. Azure IOT Hub ve Azure işlevleri'ni Hazırlama işleminin adımlarını izleyin.
-   ![Hazırlama adımları](media/iot-hub-arduino-iot-devkit-az3166-translator/provision-steps.png)
+1. Azure IoT Hub ve Azure Işlevlerini sağlamayı tamamlayacak adımları izleyin.
+   ![sağlama adımları](media/iot-hub-arduino-iot-devkit-az3166-translator/provision-steps.png)
 
-   Oluşturduğunuz Azure IOT Hub cihaz adını not alın.
+   Oluşturduğunuz Azure IoT Hub cihaz adını bir yere göz atın.
 
-1. Açık `Functions\DevKitTranslatorFunction.cs` ve cihaz adı ve konuşma hizmeti anahtarı not ettiğiniz aşağı aşağıdaki kod satırlarını güncelleştirin.
+1. `Functions\DevKitTranslatorFunction.cs` açın ve aşağıdaki kod satırlarını, not ettiğiniz cihaz adı ve konuşma hizmeti anahtarıyla güncelleştirin.
    ```csharp
    // Subscription Key of Speech Service
    const string speechSubscriptionKey = "";
@@ -66,90 +65,90 @@ Bu öğreticideki adımları tamamlamak için önce aşağıdaki görevleri yap�
    const string deviceName = "";
    ```
 
-1. Tıklayın `F1`yazın ve seçin **Azure IOT cihaz Workbench: Azure'a Dağıt...** . VS Code, yeniden dağıtım için onay isterse, tıklayın **Evet**.
-   ![Uyarı dağıtma](media/iot-hub-arduino-iot-devkit-az3166-translator/deploy-warning.png)
+1. `F1`' ye tıklayın, yazın ve **Azure IoT cihazı çalışma ekranı: Azure 'A dağıt...** seçeneğini belirleyin. VS Code yeniden dağıtım için onay isterse, **Evet**' e tıklayın.
+   ![dağıtım uyarısı](media/iot-hub-arduino-iot-devkit-az3166-translator/deploy-warning.png)
 
-1. Dağıtım başarılı olduğundan emin olun.
-   ![Başarı dağıtma](media/iot-hub-arduino-iot-devkit-az3166-translator/deploy-success.png)
+1. Dağıtımın başarılı olduğundan emin olun.
+   ![dağıtımı başarılı](media/iot-hub-arduino-iot-devkit-az3166-translator/deploy-success.png)
 
-1. Azure portalında Git **işlev uygulamaları** bölümünde, yeni oluşturduğunuz Azure işlevi uygulaması bulun. Tıklayın `devkit_translator`, ardından **<> / işlev URL'sini Al** URL'yi kopyalamak için.
-   ![İşlev URL'sini kopyalama](media/iot-hub-arduino-iot-devkit-az3166-translator/get-function-url.png)
+1. Azure portal, **Işlevler uygulamalar** bölümüne gidin, yeni oluşturduğunuz Azure işlevi uygulamasını bulun. `devkit_translator`' ye tıklayın, ardından URL 'yi kopyalamak için **</> işlev URL 'Sini al** ' a tıklayın.
+   ![kopyalama işlevi URL 'SI](media/iot-hub-arduino-iot-devkit-az3166-translator/get-function-url.png)
 
-1. URL'sini yapıştırın `azure_config.h` dosya.
-   ![Azure yapılandırma](media/iot-hub-arduino-iot-devkit-az3166-translator/azure-config.png)
+1. URL 'YI `azure_config.h` dosyasına yapıştırın.
+   ![Azure config](media/iot-hub-arduino-iot-devkit-az3166-translator/azure-config.png)
 
    > [!NOTE]
-   > İşlev uygulamasının düzgün şekilde çalışmaz, bu denetleyin [SSS](https://microsoft.github.io/azure-iot-developer-kit/docs/faq#compilation-error-for-azure-function) bu sorunu çözmek için bölüm.
+   > Işlev uygulaması düzgün çalışmıyorsa, bu [SSS](https://microsoft.github.io/azure-iot-developer-kit/docs/faq#compilation-error-for-azure-function) bölümüne bakın.
 
-## <a name="build-and-upload-device-code"></a>Derleme ve cihaz kodu yükleyin
+## <a name="build-and-upload-device-code"></a>Cihaz kodunu derleme ve karşıya yükleme
 
-1. Devkit'e geçiş **yapılandırma modunu** tarafından:
-   * Düğmesini basılı **A**.
-   * Tuşuna basın ve yayın **sıfırlama** düğmesi.
+1. DevKit 'i **yapılandırma moduna** şu şekilde değiştirin:
+   * Düğme **A**tuşunu basılı tutun.
+   * Basın ve serbest bırak **sıfırlama** düğmesi.
 
-   Ekran görüntüleri DevKit kimliği görürsünüz ve **yapılandırma**.
+   Bu ekranda, DevKit KIMLIĞI ve **yapılandırmasını**görürsünüz.
 
    ![DevKit yapılandırma modu](media/iot-hub-arduino-iot-devkit-az3166-translator/devkit-configuration-mode.png)
 
-1. Tıklayın `F1`yazın ve seçin **Azure IOT cihaz Workbench: Cihaz ayarlarını yapılandırma > yapılandırma cihaz bağlantı dizesini**. Seçin **IOT Hub cihaz bağlantı dizesini seçin** Devkit'e yapılandırmak için.
-   ![Bağlantı dizesini yapılandırma](media/iot-hub-arduino-iot-devkit-az3166-translator/configure-connection-string.png)
+1. `F1`' ye tıklayın, yazıp **Azure IoT cihaz çalışma ekranı: cihaz ayarlarını yapılandır... seçeneğini belirleyin. > Config cihaz bağlantı dizesi**. **IoT Hub cihaz bağlantı dizesi Seç** ' i seçerek devkit 'e yapılandırın.
+   bağlantı dizesini yapılandırma ![](media/iot-hub-arduino-iot-devkit-az3166-translator/configure-connection-string.png)
 
-1. Başarıyla tamamlandığında bildirim görürsünüz.
-   ![Yapılandırma bağlantı dizesini başarılı](media/iot-hub-arduino-iot-devkit-az3166-translator/configure-connection-string-success.png)
+1. Başarılı bir şekilde tamamlandıktan sonra bildirimi görürsünüz.
+   ![bağlantı dizesi başarısını yapılandırma](media/iot-hub-arduino-iot-devkit-az3166-translator/configure-connection-string-success.png)
 
-1. Tıklayın `F1` seçin ve yeniden yazın **Azure IOT cihaz Workbench: Cihaz kodu karşıya**. Bu derleme başlar ve kodu Devkit'e yükleyin.
-   ![Cihaz yükleme](media/iot-hub-arduino-iot-devkit-az3166-translator/device-upload.png)
+1. `F1` yeniden tıklatın, Azure IoT cihaz çalışma ekranı ' nı yazın ve seçin **: Cihaz kodunu karşıya yükleyin**. Derlemeyi başlatır ve kodu DevKit 'e yükler.
+   ![cihaz karşıya yükleme](media/iot-hub-arduino-iot-devkit-az3166-translator/device-upload.png)
 
-## <a name="test-the-project"></a>Test projesi
+## <a name="test-the-project"></a>Projeyi test etme
 
-Uygulama başlatma DevKit ekrandaki yönergeleri izleyin. Varsayılan kaynak dili Çince.
+Uygulama başlatma işleminden sonra DevKit ekranındaki yönergeleri izleyin. Varsayılan kaynak dili Çince 'dir.
 
 Çeviri için başka bir dil seçmek için:
 
-1. Kurulum moduna girmek için düğmesi A tuşlarına basın.
+1. Kurulum moduna girmek için düğme A 'ya basın.
 
-2. Desteklenen tüm kaynak dilleri kaydırmak için B düğmesine basın.
+2. Desteklenen tüm kaynak dillerini kaydırmak için B düğmesine basın.
 
-3. Kaynak dil seçiminizi onaylamak için düğmesi A tuşlarına basın.
+3. Kaynak dili seçiminizi onaylamak için düğme A 'ya basın.
 
-4. Tuşuna basın ve konuşma çalışırken düğmesi B basılı tutarken çeviri başlatmak için B düğmesini bırakın.
+4. Konuşma düğmesine basın ve basılı tutun, ardından çeviriyi başlatmak için B düğmesini bırakın.
 
-5. Ekranda İngilizce gösterir, çevrilmiş metni.
+5. Ingilizce olarak çevrilmiş metin ekranda görüntülenir.
 
-![Dilini seçmek için kaydırma](media/iot-hub-arduino-iot-devkit-az3166-translator/select-language.jpg)
+![Dil Seç ' e kaydır](media/iot-hub-arduino-iot-devkit-az3166-translator/select-language.jpg)
 
 ![Çeviri sonucu](media/iot-hub-arduino-iot-devkit-az3166-translator/translation-result.jpg)
 
-Çeviri sonucu ekranında, aşağıdakileri yapabilirsiniz:
+Çeviri sonucu ekranında şunları yapabilirsiniz:
 
-- A ve B kaydırın ve kaynak dili seçmek için düğmeler tuşuna basın.
+- Kaynak dilini kaydırmak ve seçmek için A ve B düğmelerine basın.
 
-- Konuşma B düğmesine basın. Ses gönderip çeviri metni almak için B düğmesini serbest bırakın.
+- Konuşmak için B düğmesine basın. Sesi göndermek ve çeviri metnini almak için B düğmesini bırakın.
 
 ## <a name="how-it-works"></a>Nasıl çalışır?
 
-![Mini-Solution-Voice-to-tweet-Diagram](media/iot-hub-arduino-iot-devkit-az3166-translator/diagram.png)
+![Mini çözüm-sesle Tweet-diyagram](media/iot-hub-arduino-iot-devkit-az3166-translator/diagram.png)
 
-IOT DevKit sesinizi kayıtlar ardından tetikleyici Azure işlevleri için bir HTTP isteği gönderir. Azure işlevleri, bilişsel hizmet konuşma çevirmeni API'sini çeviri yapmak için çağırır. Azure işlevleri çeviri metin aldıktan sonra cihaza bir C2D iletisi gönderir. Ardından çeviri ekranında görüntülenir.
+IoT DevKit, sesinizi kaydeder ve sonra Azure Işlevleri tetiklemeye yönelik bir HTTP isteği gönderir. Azure Işlevleri, çeviri yapmak için bilişsel hizmet konuşma çevirmeni API 'sini çağırır. Azure Işlevleri çeviri metnini aldıktan sonra, cihaza bir C2D iletisi gönderir. Ardından çeviri ekranda görüntülenir.
 
-## <a name="problems-and-feedback"></a>Sorunları ve geri bildirim
+## <a name="problems-and-feedback"></a>Sorunlar ve geri bildirim
 
-Sorunlarla karşılaşırsanız, başvurmak [IOT DevKit SSS](https://microsoft.github.io/azure-iot-developer-kit/docs/faq/) veya aşağıdaki kanalları kullanarak bize ulaşın:
+Sorunlarla karşılaşırsanız [IoT DevKit SSS](https://microsoft.github.io/azure-iot-developer-kit/docs/faq/) sayfasına bakın veya aşağıdaki kanalları kullanarak bize ulaşın:
 
 * [Gitter.im](https://gitter.im/Microsoft/azure-iot-developer-kit)
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/iot-devkit)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure işlevleri ve Bilişsel hizmetler kullanarak bir translator IOT DevKit kullanma öğrendiniz. Bu nasıl yapılır makalesinde öğrendiğiniz nasıl yapılır:
+IoT DevKit 'in Azure Işlevleri ve bilişsel hizmetler 'i kullanarak çevirmen olarak nasıl kullanılacağını öğrendiniz. Bu nasıl yapılır bölümünde şunları öğrendiniz:
 
 > [!div class="checklist"]
-> * Visual Studio Code görevi bulut hükümlerine otomatikleştirmek için kullanın
-> * Azure IOT cihaz bağlantı dizesini yapılandırma
-> * Azure işlevini dağıtma
-> * Sesli ileti çeviri test
+> * Visual Studio Code görevi kullanarak bulut sağlamasını otomatikleştirme
+> * Azure IoT cihaz bağlantı dizesini yapılandırma
+> * Azure Işlevini dağıtma
+> * Sesli mesaj çevirisini test etme
 
-Bilgi edinmek için diğer öğreticiler için geçin:
+Daha fazla bilgi edinmek için Diğer öğreticilere ilerleyin:
 
 > [!div class="nextstepaction"]
-> [IOT DevKit AZ3166 Azure IOT Uzaktan izleme çözüm hızlandırıcısına bağlamayı](https://docs.microsoft.com/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-devkit-remote-monitoring)
+> [IoT DevKit AZ3166 'i Azure IoT uzaktan Izleme çözüm hızlandırıcısına bağlama](https://docs.microsoft.com/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-devkit-remote-monitoring)

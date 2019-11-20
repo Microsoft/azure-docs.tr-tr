@@ -1,54 +1,54 @@
 ---
-title: Azure için Avere vFXT için destek alma
-description: Azure için destek biletlerini Avere vFXT hakkında açılış açıklaması
+title: Azure için avere vFXT desteği alma
+description: Azure için avere vFXT hakkında Destek biletleri açma açıklaması
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 10/31/2018
-ms.author: v-erkell
-ms.openlocfilehash: d621511cbb6983f8ad57ea8305823039475f40d0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: 068747fd51779bd8a20636355a9ce2b032f6151d
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60409685"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72255367"
 ---
-# <a name="get-help-with-your-system"></a>Sisteminiz ile ilgili yardım alın
+# <a name="get-help-with-your-system"></a>Sisteminizle ilgili yardım alın
 
-İle Avere vFXT yönelik yardım gerekiyorsa, destek almak için çeşitli yollar şunlardır:
+Azure için avere vFXT 'niz ile ilgili yardıma ihtiyacınız varsa, destek almak için çeşitli yollar şunlardır:
 
-* **Avere vFXT sorunu** -açıklandığı gibi Avere vFXT için bir destek bileti açmak için Azure portal'ı kullanmanızı [aşağıda](#open-a-support-ticket-for-your-avere-vfxt).
-* **Kota** - kota ilgili bir sorun varsa [bir kota artırım talebinde](#request-a-quota-increase)
-* **Belgeler ve örnekler** - bu belgeleri veya örnek, bir sorun bulursanız kullanın ve sorun sayfasının en altına gidin **geri bildirim** mevcut sorunları aramak ve yeni bir tek Eğer dosya bölümü gerekli.  
+* **Avere vfxt sorunu** - [aşağıda](#open-a-support-ticket-for-your-avere-vfxt)açıklanan şekilde avere vfxt 'niz için bir destek bileti açmak üzere Azure Portal kullanın.
+* **Kota** -kotayla ilgili bir sorununuz varsa, [Kota artışı isteyin](#request-a-quota-increase)
+* **Belgeler ve örnekler** -bu belge veya örneklerle ilgili sorunları buldıysanız, sorun ile sayfanın en altına gidin ve var olan sorunları aramak ve gerekirse yeni bir dosya eklemek Için **geri bildirim** bölümünü kullanın.  
 
-## <a name="open-a-support-ticket-for-your-avere-vfxt"></a>Avere vFXT için bir destek bileti açın
+## <a name="open-a-support-ticket-for-your-avere-vfxt"></a>Avere vFXT 'niz için bir destek bileti açın
 
-Dağıtma veya Avere vFXT kullanarak sırasında sorunlarla karşılaşırsanız, Azure Portalı aracılığıyla yardım isteyin.  
+Avere vFXT dağıtma veya kullanma sırasında sorunlarla karşılaşırsanız Azure portal aracılığıyla yardım isteyin.  
 
-Destek biletiniz kümenizden kaynak ile etiketlendiğinden emin olmak için aşağıdaki adımları izleyin. Bilet etiketleme desteği doğru kaynağa yönlendirmek yardımcı olur. 
+Destek biletinin kümenizdeki bir kaynakla etiketlendiğinden emin olmak için aşağıdaki adımları izleyin. Bilet etiketleme, doğru destek kaynağına yönlendirmemize yardımcı olur. 
 
-1. Gelen [ https://portal.azure.com ](https://portal.azure.com)seçin **kaynak grupları**.
+1. [@No__t-1](https://portal.azure.com)' den **kaynak grupları**' nı seçin.
 
-   !["kaynak grupları daire içinde" ile Azure portalında sol menüsünün ekran görüntüsü](media/avere-vfxt-ticket-rg.png)
+   !["kaynak grupları" daire içinde Azure portal sol menünün ekran görüntüsü](media/avere-vfxt-ticket-rg.png)
 
-1. Sorunun oluştuğu vFXT kümesi içeren kaynak grubunu bulun ve Avere sanal makinelerden birini tıklatın.
+1. Sorunun gerçekleştiği vFXT kümesini içeren kaynak grubuna gidin ve avere sanal makinelerinden birine tıklayın.
 
-    ![daire içinde belirli bir VM ile Azure portalında kaynak grubu "genel bakış" bölmesinin ekran görüntüsü](media/avere-vfxt-ticket-vm.png)
+    ![belirli bir VM 'ye sahip Azure portal kaynak grubu "genel bakış" panelinin ekran görüntüsü](media/avere-vfxt-ticket-vm.png)
 
-1. VM sayfasında, sol bölmenin altındaki aşağı kaydırın ve tıklayın **yeni destek isteği**.
+1. VM sayfasında, sol bölmenin alt kısmına gidin ve **Yeni destek isteği**' ne tıklayın.
 
-    ![Önceki ekran görüntüsünde gösterilen sanal makine için Azure portal VM sayfasının ekran görüntüsü. Soldaki menünün alt ve "Yeni destek isteği" kaydırılan daire içine alınmıştır.](media/avere-vfxt-ticket-request.png)
+    ![Önceki ekran görüntüsünden VM için Azure portal VM sayfasının ekran görüntüsü. Sol menü, en alta kaydırıldı ve "yeni destek isteği" bir daire içinde.](media/avere-vfxt-ticket-request.png)
 
-1. Sayfasında destek isteğini birini tıklatın **tüm hizmetleri** altına bakın **depolama** seçmek için **Avere vFXT**.
+1. Destek isteğinden biri sayfasında, **tüm hizmetler** ' e tıklayın ve **depolama alanının** altına bakarak **avere vfxt**' yi seçin.
 
-    ![Ekran başlığı "Temel" ve "Hizmet" öğesini bir daire ile Azure portalında yeni destek isteği ekran görüntüsü. "Tüm hizmetler" düğmesi seçilir ve açılan listeden alan "Avere vFXT" değere sahip](media/avere-vfxt-ticket-service.png)
+    !["temel bilgiler" üst bilgisi ve "hizmet" öğesinin etrafında bir daire olan Azure portal yeni destek isteği ekranının ekran görüntüsü. "Tüm hizmetler" düğmesi seçilidir ve açılan menü alanında "avere vFXT" değeri bulunur](media/avere-vfxt-ticket-service.png)
 
-1. İki sayfada, sorununuzu en yakından eşleşen kategorisi ve sorun türünü seçin. Bir kısa bir başlık ve sorunun gerçekleştiği zamana içeren bir açıklama ekleyin. 
+1. İki sayfa üzerinde, sorun türünü ve sorununuzla en yakından eşleşen kategoriyi seçin. Sorunun oluştuğu saati içeren kısa bir başlık ve açıklama ekleyin. 
 
-   ![üstbilgiyle tamamlanması gereken fazla alan içeriyor "sorun" yeni destek isteği ekranının ekran görüntüsü](media/avere-vfxt-ticket-problem.png)
+   ![Yeni destek isteği ekranının, tamamlanması gereken çok sayıda alan içeren "sorun" üst bilgisi ile ekran görüntüsü](media/avere-vfxt-ticket-problem.png)
 
-1. Üzerinde üç sayfasında, iletişim bilgilerinizi doldurun ve tıklayın **Oluştur**. Bir onay ve bilet numarası, e-posta adresinize gönderilir ve destek personelinin üyesi sizinle iletişim kuracağız.
+1. Üçüncü Sayfa sayfasında, iletişim bilgilerinizi girin ve **Oluştur**' a tıklayın. E-posta adresinize bir onaylama ve bilet numarası gönderilir ve bir destek personeli üyesi sizinle iletişim kuracaktır.
 
-## <a name="request-a-quota-increase"></a>Bir kota artırım talebinde
+## <a name="request-a-quota-increase"></a>Kota artışı iste
 
-Okuma [vFXT küme için kota](avere-vfxt-prereqs.md#quota-for-the-vfxt-cluster) hangi bileşenlerin Avere vFXT Azure'a dağıtmak için gerekli olan öğrenin. Yapabilecekleriniz [bir kota artırım talebinde](https://docs.microsoft.com/azure/azure-supportability/resource-manager-core-quotas-request) Azure portalından.
+Azure için avere vFXT 'yi dağıtmak için gereken bileşenleri öğrenmek üzere [vfxt kümesine yönelik kotayı](avere-vfxt-prereqs.md#quota-for-the-vfxt-cluster) okuyun. Azure portal [bir kota artışı isteyebilirsiniz](https://docs.microsoft.com/azure/azure-supportability/resource-manager-core-quotas-request) .

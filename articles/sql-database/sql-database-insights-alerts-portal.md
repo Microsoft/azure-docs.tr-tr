@@ -1,6 +1,6 @@
 ---
-title: Uyarılar ve bildirimler Azure portalını kullanarak kurulum | Microsoft Docs
-description: Belirttiğiniz koşullar karşılandığında bildirimleri veya otomasyonu tetikleyebilir SQL veritabanı uyarılar oluşturmak için Azure portalını kullanın.
+title: Kurulum uyarıları ve bildirimleri (Azure portal)
+description: Belirttiğiniz koşullar karşılandığında bildirimleri veya Otomasyonu tetikleyebilen SQL veritabanı uyarılarını oluşturmak için Azure portal kullanın.
 services: sql-database
 ms.service: sql-database
 ms.subservice: monitor
@@ -10,114 +10,113 @@ ms.topic: conceptual
 author: aamalvea
 ms.author: aamalvea
 ms.reviewer: jrasnik, carlrab
-manager: craigg
 ms.date: 11/02/2018
-ms.openlocfilehash: 93337e39a117c1f8d38f24dc416ff8ae95513a34
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ec625f203e9282d070e6c1b3b3d712be7ab789cf
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61036074"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73810376"
 ---
-# <a name="create-alerts-for-azure-sql-database-and-data-warehouse-using-azure-portal"></a>Azure SQL veritabanı ve Azure portalı kullanarak veri ambarı için uyarılar oluşturun
+# <a name="create-alerts-for-azure-sql-database-and-data-warehouse-using-azure-portal"></a>Azure portal kullanarak Azure SQL veritabanı ve veri ambarı için uyarı oluşturma
 
 ## <a name="overview"></a>Genel Bakış
-Bu makalede, Azure portalını kullanarak Azure SQL veritabanı ve veri ambarı uyarıları ayarlama işlemini göstermektedir. Uyarılar, bir e-posta Gönder veya bazı ölçüm (örneğin, veritabanı boyutu veya CPU kullanımı) eşiğe ulaştığında bir web kancası çağrısı. Bu makalede ayrıca uyarı nokta ayarlamaya yönelik en iyi yöntemler sağlar.    
+Bu makalede, Azure portal kullanarak Azure SQL veritabanı ve veri ambarı uyarılarını ayarlama hakkında yönergeler verilmektedir. Uyarılar bir e-posta gönderebilir veya bazı bir ölçüm (örneğin, veritabanı boyutu veya CPU kullanımı) eşiğe ulaştığında bir Web kancası çağırabilir. Bu makale, uyarı dönemlerini ayarlamaya yönelik en iyi yöntemleri de sağlar.    
 
 > [!IMPORTANT]
-> Bu özellik henüz yönetilen örneği'nde kullanılamaz. Alternatif olarak, temel bazı ölçümler için e-posta uyarıları göndermek üzere SQL Agent kullanabilirsiniz [dinamik yönetim görünümlerini](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/system-dynamic-management-views).
+> Bu özellik, yönetilen örnekte henüz kullanılamıyor. Alternatif olarak, [dinamik yönetim görünümlerine](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/system-dynamic-management-views)göre bazı ölçümler için e-posta uyarıları göndermek üzere SQL Agent 'ı kullanabilirsiniz.
 
-İzleme ölçümlerini veya olayları, Azure hizmetleriniz hakkındaki bağlı olarak bir uyarı alabilirsiniz.
+Azure hizmetleriniz, veya üzerindeki olaylar için izleme ölçümlerini temel alarak bir uyarı alabilirsiniz.
 
-* **Ölçüm değerleri** -belirtilen bir ölçüm değeri bir eşiği herhangi bir yönde atadığınız geçtiğinde bir uyarı tetikler. Diğer bir deyişle, her ikisi de tetikleyen zaman koşul önce ve sonra daha sonra ne zaman koşulu artık karşılanmıyor.    
-* **Etkinlik günlüğü olayları** -üzerinde bir uyarıyı tetikleyebilir *her* olay veya yalnızca belirli sayıda olayları oluşur.
+* **Ölçüm değerleri** -belirtilen bir ölçümün değeri her iki yönde atadığınız bir eşiği aştığında, uyarı tetiklenir. Yani, hem koşul ilk karşılandığında hem de daha sonra bu koşul karşılanamadığında bu durum tetiklenir.    
+* **Etkinlik günlüğü olayları** -bir uyarı *her* olay üzerinde veya yalnızca belirli bir sayıda olay meydana geldiğinde tetiklenebilir.
 
-Bir uyarı tetiklendiğinde aşağıdakileri yapılandırabilirsiniz:
+Bir uyarıyı, tetiklendiğinde aşağıdakileri yapmak için yapılandırabilirsiniz:
 
-* Hizmet Yöneticisi ve ortak yöneticilerine e-posta bildirimleri gönder
-* Belirttiğiniz ek e-postalar için e-posta gönderin.
+* hizmet yöneticisine ve ortak yöneticilere e-posta bildirimleri gönderme
+* Belirttiğiniz ek e-postalara e-posta gönderin.
 * Web kancası çağırma
 
-Yapılandırma ve uyarı kuralları kullanma hakkında bilgi edinin
+Kullanarak uyarı kuralları hakkında bilgi alabilir ve bunları alabilirsiniz
 
-* [Azure portal](../monitoring-and-diagnostics/insights-alerts-portal.md)
+* [Azure Portal](../monitoring-and-diagnostics/insights-alerts-portal.md)
 * [PowerShell](../azure-monitor/platform/alerts-classic-portal.md)
-* [Komut satırı arabirimi (CLI)](../azure-monitor/platform/alerts-classic-portal.md)
-* [Azure İzleyici REST API](https://msdn.microsoft.com/library/azure/dn931945.aspx)
+* [komut satırı arabirimi (CLı)](../azure-monitor/platform/alerts-classic-portal.md)
+* [Azure Izleyici REST API](https://msdn.microsoft.com/library/azure/dn931945.aspx)
 
-## <a name="create-an-alert-rule-on-a-metric-with-the-azure-portal"></a>Azure portalı ile bir ölçüm üzerinde uyarı kuralı oluşturma
-1. İçinde [portalı](https://portal.azure.com/)izlemek olan kaynağı bulun ve seçin.
-2. Seçin **uyarılar (Klasik)** izleme bölümü altında. Simge ve metin, farklı kaynaklar için biraz değişebilir.  
+## <a name="create-an-alert-rule-on-a-metric-with-the-azure-portal"></a>Azure portal bir ölçümde uyarı kuralı oluşturma
+1. [Portalda](https://portal.azure.com/), izlemekte olduğunuz kaynağı bulun ve seçin.
+2. Izleme bölümünün altında **Uyarılar (klasik)** öğesini seçin. Metin ve simge farklı kaynaklar için biraz farklılık gösterebilir.  
    
      ![İzleme](media/sql-database-insights-alerts-portal/AlertsClassicButton.JPG)
   
-   - **SQL DW ONLY**: Tıklayın **DWU kullanımı** grafiği. Seçin **Klasik uyarıları görüntüleme**
+   - **Yalnızca SQL DW**: **DWU kullanım** grafiğine tıklayın. **Klasik Uyarıları görüntüle** seçeneğini belirleyin
 
-3. Seçin **ölçüm uyarısı Ekle (Klasik)** düğmesine tıklayın ve alanları doldurun.
+3. **Ölçüm uyarısı Ekle (klasik)** düğmesini seçin ve alanları girin.
    
     ![Uyarı Ekle](media/sql-database-insights-alerts-portal/AddDBAlertPageClassic.JPG)
-4. **Adı** Uyarınız kuralı ve seçin bir **açıklama**, bildirim e-postalarda de gösterilmektedir.
-5. Seçin **ölçüm** izleyin ve ardından istediğiniz bir **koşul** ve **eşiği** ölçüm için değer. Ayrıca **süresi** uyarı tetiklenmeden önce ölçüm kuralının karşılanması gereken süre. Örneğin, "PT5M" süresi kullanıyorsanız ve uyarıyı % 80'in CPU görünüyor, uyarının ne zaman tetikler **ortalama** 5 dakika boyunca % 80'in CPU olmuştur. İlk tetikleyici gerçekleşir sonra ortalama CPU üzerinde 5 dakika % 80 aşağısına olduğunda tekrar tetikler. CPU ölçüm dakikada bir gerçekleşir. Desteklenen zaman pencereleri için aşağıdaki tabloya başvurun ve toplama yazın ve her uyarı kullandığı değil tüm uyarılar, ortalama değer kullanın.   
-6. Denetleme **e-posta sahipleri...**  yöneticileri ve ortak yöneticilerin uyarı tetiklendiğinde almayacağınızı istiyorsanız.
-7. Uyarı tetiklendiğinde bildirim alacak başka e-postalar istiyorsanız, bunları eklemek **ek yönetici email(s)** alan. Noktalı virgülle - birden çok e-postaları ayırın *e-posta\@contoso.com;email2\@contoso.com*
-8. Geçerli bir URI koymak **Web kancası** adlı bir uyarı tetiklendiğinde istiyorsanız alan.
-9. Seçin **Tamam** uyarı oluşturma işlemi tamamlandığında.   
+4. Uyarı kuralınızı **adlandırın** ve bildirim e-postalarında da gösterildiği bir **Açıklama**seçin.
+5. İzlemek istediğiniz **ölçümü** seçin, ardından ölçüm Için bir **koşul** ve **eşik** değeri seçin. Ayrıca **, uyarı** tetikleyiciden önce ölçüm kuralının karşılanması gereken süreyi seçin. Örneğin, "PT5M" dönemini kullanırsanız ve uyarınız %80 ' ün üzerinde CPU 'YU alıyorsa, uyarı, **Ortalama** CPU, 5 dakika boyunca %80 üzerinde olduğunda tetiklenir. İlk tetikleyici oluştuktan sonra, ortalama CPU, 5 dakikadan fazla %80 altına çıktığında yeniden tetiklenir. CPU Ölçümü her 1 dakikada bir gerçekleşir. Desteklenen zaman pencereleri ve her uyarının kullandığı toplama türü için aşağıdaki tabloya başvurun-tüm uyarılar, ortalama değeri kullanmaz.   
+6. Uyarı tetiklendiğinde yöneticilerin ve ortak yöneticilerin e-posta ile uyumlu olmasını istiyorsanız **e-posta sahiplerini denetleyin...**
+7. Uyarı tetiklendiğinde ek e-postaların bildirim almasını istiyorsanız, bunları **ek yönetici e-postası** alanına ekleyin. Birden çok e-postayı noktalı virgülle ayırın *\@contoso. com; email2\@contoso.com*
+8. Uyarı tetiklendiğinde çağırılabilmesi istiyorsanız **Web kancası** alanına GEÇERLI bir URI koyun.
+9. Uyarıyı oluşturmak için bittiğinde **Tamam ' ı** seçin.   
 
-Birkaç dakika içinde uyarı etkin ve daha önce açıklandığı gibi tetikler.
+Birkaç dakika içinde, uyarı etkin ve daha önce açıklandığı gibi tetikler.
 
 ## <a name="managing-your-alerts"></a>Uyarılarınızı yönetme
-Bir uyarı oluşturulduktan sonra bunu seçebilirsiniz ve:
+Bir uyarı oluşturduktan sonra, bunu seçebilirsiniz:
 
-* Ölçüm eşiği ve gerçek değerler önceki gün gösteren bir grafiği görüntüleyin.
+* Ölçüm eşiğini ve önceki günün gerçek değerlerini gösteren bir grafik görüntüleyin.
 * Düzenleyin veya silin.
-* **Devre dışı** veya **etkinleştirme** , geçici olarak durdurmak veya bu uyarı için bildirimleri almaya devam etmek istiyorsanız.
+* Bu uyarı için bildirimleri almayı geçici olarak durdurmak veya yeniden başlatmak istiyorsanız, **devre dışı bırakın** veya **etkinleştirin** .
 
 
 ## <a name="sql-database-alert-values"></a>SQL veritabanı uyarı değerleri
 
-| Kaynak Türü | Ölçüm Adı | Kolay ad | Toplama Türü | En düşük uyarı zaman penceresi|
+| Kaynak Türü | Ölçüm adı | Kolay ad | Toplama türü | En düşük uyarı süresi penceresi|
 | --- | --- | --- | --- | --- |
 | SQL veritabanı | cpu_percent | CPU yüzdesi | Ortalama | 5 dakika |
 | SQL veritabanı | physical_data_read_percent | Veri G/Ç yüzdesi | Ortalama | 5 dakika |
-| SQL veritabanı | log_write_percent | Günlük g/ç yüzdesi | Ortalama | 5 dakika |
+| SQL veritabanı | log_write_percent | Günlük GÇ yüzdesi | Ortalama | 5 dakika |
 | SQL veritabanı | dtu_consumption_percent | DTU yüzdesi | Ortalama | 5 dakika |
 | SQL veritabanı | depolama | Toplam veritabanı boyutu | Maksimum | 30 dakika |
 | SQL veritabanı | connection_successful | Başarılı bağlantılar | Toplam | 10 dakika |
 | SQL veritabanı | connection_failed | Başarısız Bağlantılar | Toplam | 10 dakika |
-| SQL veritabanı | blocked_by_firewall | Güvenlik Duvarı tarafından engellendi | Toplam | 10 dakika |
-| SQL veritabanı | Kilitlenme | Kilitlenmeler | Toplam | 10 dakika |
+| SQL veritabanı | blocked_by_firewall | Güvenlik duvarı tarafından engellendi | Toplam | 10 dakika |
+| SQL veritabanı | Çözül | Çık | Toplam | 10 dakika |
 | SQL veritabanı | storage_percent | Veri boyutu yüzdesi | Maksimum | 30 dakika |
-| SQL veritabanı | xtp_storage_percent | Bellek içi OLTP depolama percent(Preview) | Ortalama | 5 dakika |
-| SQL veritabanı | workers_percent | Çalışan yüzde | Ortalama | 5 dakika |
-| SQL veritabanı | sessions_percent | Oturumlarının yüzde | Ortalama | 5 dakika |
+| SQL veritabanı | xtp_storage_percent | Bellek içi OLTP depolama yüzdesi (Önizleme) | Ortalama | 5 dakika |
+| SQL veritabanı | workers_percent | Çalışan yüzdesi | Ortalama | 5 dakika |
+| SQL veritabanı | sessions_percent | Oturum yüzdesi | Ortalama | 5 dakika |
 | SQL veritabanı | dtu_limit | DTU sınırı | Ortalama | 5 dakika |
 | SQL veritabanı | dtu_used | Kullanılan DTU | Ortalama | 5 dakika |
 ||||||
 | Elastik havuz | cpu_percent | CPU yüzdesi | Ortalama | 10 dakika |
 | Elastik havuz | physical_data_read_percent | Veri G/Ç yüzdesi | Ortalama | 10 dakika |
-| Elastik havuz | log_write_percent | Günlük g/ç yüzdesi | Ortalama | 10 dakika |
+| Elastik havuz | log_write_percent | Günlük GÇ yüzdesi | Ortalama | 10 dakika |
 | Elastik havuz | dtu_consumption_percent | DTU yüzdesi | Ortalama | 10 dakika |
 | Elastik havuz | storage_percent | Depolama yüzdesi | Ortalama | 10 dakika |
-| Elastik havuz | workers_percent | Çalışan yüzde | Ortalama | 10 dakika |
+| Elastik havuz | workers_percent | Çalışan yüzdesi | Ortalama | 10 dakika |
 | Elastik havuz | eDTU_limit | eDTU sınırı | Ortalama | 10 dakika |
 | Elastik havuz | storage_limit | Depolama sınırı | Ortalama | 10 dakika |
-| Elastik havuz | eDTU_used | kullanılan eDTU | Ortalama | 10 dakika |
+| Elastik havuz | eDTU_used | eDTU kullanıldı | Ortalama | 10 dakika |
 | Elastik havuz | storage_used | Kullanılan depolama | Ortalama | 10 dakika |
 ||||||               
 | SQL veri ambarı | cpu_percent | CPU yüzdesi | Ortalama | 10 dakika |
 | SQL veri ambarı | physical_data_read_percent | Veri G/Ç yüzdesi | Ortalama | 10 dakika |
 | SQL veri ambarı | connection_successful | Başarılı bağlantılar | Toplam | 10 dakika |
 | SQL veri ambarı | connection_failed | Başarısız Bağlantılar | Toplam | 10 dakika |
-| SQL veri ambarı | blocked_by_firewall | Güvenlik Duvarı tarafından engellendi | Toplam | 10 dakika |
-| SQL veri ambarı | service_level_objective | Bir veritabanının Hizmet katmanını | Toplam | 10 dakika |
-| SQL veri ambarı | dwu_limit | dwu limiti | Maksimum | 10 dakika |
+| SQL veri ambarı | blocked_by_firewall | Güvenlik duvarı tarafından engellendi | Toplam | 10 dakika |
+| SQL veri ambarı | service_level_objective | Veritabanının hizmet katmanı | Toplam | 10 dakika |
+| SQL veri ambarı | dwu_limit | DWU sınırı | Maksimum | 10 dakika |
 | SQL veri ambarı | dwu_consumption_percent | DWU yüzdesi | Ortalama | 10 dakika |
 | SQL veri ambarı | dwu_used | Kullanılan DWU | Ortalama | 10 dakika |
 ||||||
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Azure izleme genel bakışın](../monitoring-and-diagnostics/monitoring-overview.md) toplamak ve izlemek bilgi türleri dahil olmak üzere.
-* Daha fazla bilgi edinin [uyarıları Web kancalarını yapılandırma](../azure-monitor/platform/alerts-webhooks.md).
-* Alma bir [tanılama günlüklerine genel bakış](../azure-monitor/platform/diagnostic-logs-overview.md) ve hizmet ayrıntılı yüksek sıklık düzeyindeki ölçümleri toplayın.
-* Alma bir [ölçümleri koleksiyonun genel bakış](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md) hizmetinizin kullanılabilir ve yanıt verdiğinden emin olmak için.
+* Toplayacağınız ve izleyebileceği bilgi türlerini içeren [Azure izlemeye genel bakış alın](../monitoring-and-diagnostics/monitoring-overview.md) .
+* [Uyarılarda Web kancalarını yapılandırma](../azure-monitor/platform/alerts-webhooks.md)hakkında daha fazla bilgi edinin.
+* [Tanılama günlüklerine genel bir bakış](../azure-monitor/platform/resource-logs-overview.md) alın ve hizmetinizde ayrıntılı yüksek frekanslı ölçümler toplayın.
+* Hizmetinizin kullanılabilir olduğundan ve yanıt verebilmesini sağlamak için [ölçüm koleksiyonuna genel bakış](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md) alın.

@@ -1,75 +1,75 @@
 ---
-title: Müşteri tarafından yönetilen anahtarlar Azure portalından Azure depolama şifrelemesi için yapılandırma
-description: Azure portalında Azure depolama şifrelemesi için müşteri tarafından yönetilen anahtarlar yapılandırmak için kullanmayı öğrenin. Müşteri tarafından yönetilen anahtarlar oluşturun, döndürme, devre dışı bırakın ve erişim denetimleri iptal olanak sağlar.
+title: Azure portal Azure depolama şifrelemesi için müşteri tarafından yönetilen anahtarları yapılandırın
+description: Azure depolama şifrelemesi için müşteri tarafından yönetilen anahtarları yapılandırmak üzere Azure portal nasıl kullanacağınızı öğrenin. Müşteri tarafından yönetilen anahtarlar, erişim denetimleri oluşturmanıza, döndürmenize, devre dışı bırakmanızı ve iptal edebilmesini sağlar.
 services: storage
 author: tamram
 ms.service: storage
 ms.topic: article
-ms.date: 04/16/2019
+ms.date: 10/15/2019
 ms.author: tamram
 ms.reviewer: cbrooks
 ms.subservice: common
-ms.openlocfilehash: baabc5a8e1d063cb51a3edea3a7218591e85aa1a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 74ca6f15baeeb9fe8adad4bda80e313a4b4cf03a
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65154164"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72376234"
 ---
-# <a name="configure-customer-managed-keys-for-azure-storage-encryption-from-the-azure-portal"></a>Müşteri tarafından yönetilen anahtarlar Azure portalından Azure depolama şifrelemesi için yapılandırma
+# <a name="configure-customer-managed-keys-for-azure-storage-encryption-from-the-azure-portal"></a>Azure portal Azure depolama şifrelemesi için müşteri tarafından yönetilen anahtarları yapılandırın
 
 [!INCLUDE [storage-encryption-configure-keys-include](../../../includes/storage-encryption-configure-keys-include.md)]
 
-Bu makalede, bir anahtar kasası ile müşteri tarafından yönetilen anahtarlar kullanılarak yapılandırma işlemi gösterilmektedir [Azure portalında](https://portal.azure.com/). Azure portalını kullanarak bir anahtar kasası oluşturmayı öğrenmek için bkz: [hızlı başlangıç: Ayarlayın ve Azure portalını kullanarak Azure Key Vault gizli dizi alma](../../key-vault/quick-create-portal.md). 
-
+Bu makalede, [Azure Portal](https://portal.azure.com/)kullanarak, müşteri tarafından yönetilen anahtarlarla bir anahtar kasasının nasıl yapılandırılacağı gösterilmektedir. Azure portal kullanarak bir Anahtar Kasası oluşturmayı öğrenmek için bkz. [hızlı başlangıç: Azure Portal kullanarak Azure Key Vault gizli dizi ayarlama ve alma](../../key-vault/quick-create-portal.md). 
 
 > [!IMPORTANT]
-> Azure depolama şifreleme ile müşteri tarafından yönetilen anahtarlar kullanılarak gerektirir anahtar kasanızın yapılandırılmış, iki gerekli özellikleri olmasını **geçici silme** ve **yapmak değil Temizleme**. Azure portalında yeni bir anahtar kasası oluşturduğunuzda, bu özellikler varsayılan olarak etkindir. Ancak, bu var olan bir anahtar kasasının özelliklerini etkinleştirmeniz gerekirse, PowerShell veya Azure CLI kullanmanız gerekir.
+> Azure depolama şifrelemesi ile müşteri tarafından yönetilen anahtarların kullanılması, anahtar kasasında iki özellik ayarlanmasını, **geçici silme** ve **Temizleme işlemi**yapılmasını gerektirir. Bu özellikler varsayılan olarak etkinleştirilmemiştir. Bu özellikleri etkinleştirmek için PowerShell veya Azure CLı kullanın.
+> Yalnızca RSA anahtarları ve anahtar boyutu 2048 desteklenir.
 
-## <a name="enable-customer-managed-keys"></a>Müşteri tarafından yönetilen anahtarlar etkinleştir
+## <a name="enable-customer-managed-keys"></a>Müşteri tarafından yönetilen anahtarları etkinleştir
 
-Azure Portalı'nda müşteri tarafından yönetilen anahtarlar etkinleştirmek için aşağıdaki adımları izleyin:
+Azure portal müşteri tarafından yönetilen anahtarları etkinleştirmek için şu adımları izleyin:
 
 1. Depolama hesabınıza gidin.
-1. Üzerinde **ayarları** depolama hesabı dikey penceresine tıklayın **şifreleme**. Seçin **kendi anahtarınızı kullanın** seçeneği, aşağıdaki resimde gösterildiği gibi.
+1. Depolama hesabının **Ayarlar** dikey penceresinde **şifreleme**' ye tıklayın. Aşağıdaki şekilde gösterildiği gibi **kendi anahtarınızı kullanın** seçeneğini belirleyin.
 
-    ![Portal ekran görüntüsü şifreleme seçeneği](./media/storage-encryption-keys-portal/ssecmk1.png)
+    ![Şifreleme seçeneğini gösteren Portal ekran görüntüsü](./media/storage-encryption-keys-portal/ssecmk1.png)
 
-## <a name="specify-a-key"></a>Bir anahtarı belirtin
+## <a name="specify-a-key"></a>Bir anahtar belirtin
 
-Müşteri tarafından yönetilen anahtarlar etkinleştirdikten sonra depolama hesabıyla ilişkilendirmek için bir anahtar belirtmek için fırsatınız olacaktır.
+Müşteri tarafından yönetilen anahtarları etkinleştirdikten sonra, depolama hesabıyla ilişkilendirilecek bir anahtar belirtme fırsatına sahip olacaksınız.
 
-### <a name="specify-a-key-as-a-uri"></a>Bir anahtar olarak bir URI belirtin.
+### <a name="specify-a-key-as-a-uri"></a>URI olarak bir anahtar belirtin
 
-Bir anahtar olarak bir URI belirtmek için bu adımları izleyin:
+Bir anahtarı URI olarak belirtmek için şu adımları izleyin:
 
-1. Anahtar URI'si Azure Portalı'nda bulmak için anahtar Kasası'na gidin ve seçin **anahtarları** ayarı. İstediğiniz anahtarı seçin ve ardından anahtar ayarlarını görüntülemek için tıklayın. Değerini kopyalayın **anahtar tanımlayıcısı** alanı URI sağlar.
+1. Azure portal anahtar URI 'sini bulmak için, anahtar kasanıza gidin ve **anahtarlar** ayarını seçin. İstediğiniz anahtarı seçin ve ardından ayarlarını görüntülemek için anahtara tıklayın. URI sağlayan **anahtar tanımlayıcı** alanının değerini kopyalayın.
 
-    ![Ekran gösterme anahtar kasası anahtar URI'si](media/storage-encryption-keys-portal/key-uri-portal.png)
+    ![Anahtar Kasası anahtar URI 'sini gösteren ekran görüntüsü](media/storage-encryption-keys-portal/key-uri-portal.png)
 
-1. İçinde **şifreleme** depolama hesabınız için ayarları seçin **Enter tuşunu URI** seçeneği.
-1. İçinde **anahtar URI'si** alan, URI belirtin.
+1. Depolama hesabınızın **şifreleme** ayarları ' nda **anahtar URI 'si girin** seçeneğini belirleyin.
+1. **Anahtar URI 'si** alanında URI 'yi belirtin.
 
-   ![Anahtar URI'si girin gösteren ekran görüntüsü](./media/storage-encryption-keys-portal/ssecmk2.png)
+   ![Anahtar URI 'sini girmeyi gösteren ekran görüntüsü](./media/storage-encryption-keys-portal/ssecmk2.png)
 
-### <a name="specify-a-key-from-a-key-vault"></a>Bir anahtar, anahtar kasası belirtin
+### <a name="specify-a-key-from-a-key-vault"></a>Anahtar kasasından anahtar belirtme
 
-Bir key vault anahtarı belirtmek için önce bir anahtar içeren bir anahtar kasası sahip emin olun. Bir key vault anahtarı belirtmek için bu adımları izleyin:
+Anahtar kasasından bir anahtar belirtmek için öncelikle anahtar içeren bir anahtar kasanızın olduğundan emin olun. Anahtar kasasından bir anahtar belirtmek için şu adımları izleyin:
 
-1. Seçin **Key Vault'tan seçin** seçeneği.
-2. Kullanmak istediğiniz anahtarı içeren anahtar Kasası'nı seçin.
-3. Anahtar, anahtar kasasından seçin.
+1. **Key Vault seçin** seçeneğini belirleyin.
+2. Kullanmak istediğiniz anahtarı içeren anahtar kasasını seçin.
+3. Anahtar kasasından anahtarı seçin.
 
    ![Müşteri tarafından yönetilen anahtar seçeneğini gösteren ekran görüntüsü](./media/storage-encryption-keys-portal/ssecmk3.png)
 
-## <a name="update-the-key-version"></a>Anahtar sürümü güncelleştir
+## <a name="update-the-key-version"></a>Anahtar sürümünü güncelleştirme
 
-Bir anahtarın yeni bir sürümünü oluşturduğunuzda, yeni sürümü kullanmak için depolama hesabının güncelleştirilmesi gerekir. Şu adımları uygulayın:
+Bir anahtarın yeni bir sürümünü oluşturduğunuzda, yeni sürümü kullanmak için depolama hesabını güncelleştirmeniz gerekir. Şu adımları uygulayın:
 
-1. Depolama hesabınıza gidin ve görüntüleme **şifreleme** ayarları.
-1. Yeni anahtar sürümü URI'sini belirtin. Alternatif olarak, anahtar kasası ve anahtar sürümünü güncellemeyi tekrar seçebilirsiniz.
+1. Depolama hesabınıza gidin ve **şifreleme** ayarlarını görüntüleyin.
+1. Yeni anahtar sürümünün URI 'sini belirtin. Alternatif olarak, sürümü güncelleştirmek için anahtar kasasını ve anahtarı yeniden seçebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Bekleyen veri için Azure depolama şifrelemesi](storage-service-encryption.md)
-- [Azure anahtar kasası nedir](https://docs.microsoft.com/azure/key-vault/key-vault-whatis)?
+- [Bekleyen veriler için Azure depolama şifrelemesi](storage-service-encryption.md)
+- [Azure Key Vault nedir](https://docs.microsoft.com/azure/key-vault/key-vault-overview)?

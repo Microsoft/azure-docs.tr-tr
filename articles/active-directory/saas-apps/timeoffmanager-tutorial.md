@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile TimeOffManager | Microsoft Docs'
-description: Azure Active Directory ve TimeOffManager arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: TimeOffManager ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve TimeOffManager arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -15,51 +15,51 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
-ms.openlocfilehash: 0d57b3ce4e378a366148b5c3eef6bc4d5d9eb96d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 69c5d30632e187efe36655a17a91c9e373062955
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67088555"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68943182"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-timeoffmanager"></a>Öğretici: TimeOffManager ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-timeoffmanager"></a>Öğretici: TimeOffManager ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile TimeOffManager tümleştirme konusunda bilgi edinin.
-Azure AD ile TimeOffManager tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, TimeOffManager 'ı Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+TimeOffManager 'ı Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* TimeOffManager erişimi, Azure AD'de kontrol edebilirsiniz.
-* Otomatik olarak (çoklu oturum açma) TimeOffManager için kendi Azure AD hesapları ile oturum açmış, kullanıcıların etkinleştirebilirsiniz.
+* Azure AD 'de, TimeOffManager 'a erişimi olan denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla TimeOffManager (çoklu oturum açma) için otomatik olarak oturum açmasını sağlayabilirsiniz.
 * Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile TimeOffManager yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini TimeOffManager ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik TimeOffManager çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* TimeOffManager çoklu oturum açma etkin aboneliği
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* TimeOffManager destekler **IDP** tarafından başlatılan
+* TimeOffManager, **IDP** tarafından başlatılan SSO 'yu destekliyor
 
-* TimeOffManager destekler **zamanında** kullanıcı sağlama
+* TimeOffManager **, tam zamanında** Kullanıcı sağlamayı destekliyor
 
 ## <a name="adding-timeoffmanager-from-the-gallery"></a>Galeriden TimeOffManager ekleme
 
-Azure AD'de TimeOffManager tümleştirmesini yapılandırmak için TimeOffManager Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+TimeOffManager 'ın Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden TimeOffManager 'ı yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
-**Galeriden TimeOffManager eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden TimeOffManager eklemek için aşağıdaki adımları uygulayın:**
 
 1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
@@ -67,88 +67,88 @@ Azure AD'de TimeOffManager tümleştirmesini yapılandırmak için TimeOffManage
 
     ![Yeni Uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **TimeOffManager**seçin **TimeOffManager** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **TimeOffManager**yazın, sonuç panelinden **TimeOffManager** ' ı seçin, sonra da uygulamayı eklemek için düğme **Ekle** ' ye tıklayın.
 
-     ![Sonuç listesinde TimeOffManager](common/search-new-app.png)
+     ![Sonuçlar listesinde TimeOffManager](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma TimeOffManager adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısının TimeOffManager ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+Bu bölümde, **Britta Simon**adlı bir test kullanıcısına göre TimeOffManager Ile Azure AD çoklu oturum açmayı yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve TimeOffManager 'daki ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma TimeOffManager ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açmayı, TimeOffManager ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
 1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[TimeOffManager çoklu oturum açmayı yapılandırma](#configure-timeoffmanager-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+2. **[TimeOffManager çoklu oturum açmayı yapılandırma](#configure-timeoffmanager-single-sign-on)** -uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
 3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
 4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[TimeOffManager test kullanıcısı oluşturma](#create-timeoffmanager-test-user)**  - kullanıcı Azure AD gösterimini bağlı TimeOffManager Britta simon'un bir karşılığı vardır.
+5. **[TimeOffManager test kullanıcısı oluşturun](#create-timeoffmanager-test-user)** -kullanıcının Azure AD gösterimine bağlı olan TimeOffManager 'Da Britta Simon 'a sahip olmak için.
 6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile TimeOffManager yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı TimeOffManager ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **TimeOffManager** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **TimeOffManager** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
     ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
 3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![TimeOffManager etki alanı ve URL'ler tek oturum açma bilgileri](common/idp-reply.png)
+    ![TimeOffManager etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-reply.png)
 
-    İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://www.timeoffmanager.com/cpanel/sso/consume.aspx?company_id=<companyid>`
+    **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:`https://www.timeoffmanager.com/cpanel/sso/consume.aspx?company_id=<companyid>`
 
     > [!NOTE]
-    > Bu değer, gerçek değil. Bu değer, gerçek yanıt URL'si ile güncelleştirin. Bu değeri alabilirsiniz **çoklu oturum açma ayarları sayfasına** daha sonra öğreticide veya kişi açıklanan [TimeOffManager Destek ekibine](https://www.purelyhr.com/contact-us). Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değer gerçek değil. Bu değeri gerçek yanıt URL 'siyle güncelleştirin. Bu değeri, öğreticide daha sonra açıklanan **Çoklu oturum açma ayarları sayfasından** alabilir veya [TimeOffManager destek ekibine](https://www.purelyhr.com/contact-us)başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-5. TimeOffManager uygulama, özel öznitelik eşlemelerini SAML belirteci öznitelikleri yapılandırmanıza ekleyin gerektiren belirli bir biçimde SAML onaylamalarını bekler. Aşağıdaki ekran görüntüsünde, varsayılan öznitelikler listesinde gösterilmiştir. Tıklayın **Düzenle** açmak için simgeyi **kullanıcı öznitelikleri** iletişim.
+5. TimeOffManager uygulaması, SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde SAML onayları bekliyor. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir. **Kullanıcı öznitelikleri** iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![image](common/edit-attribute.png)
 
-6. Yukarıdaki için ayrıca TimeOffManager uygulama SAML yanıtta geçirilecek birkaç daha fazla öznitelik bekliyor. İçinde **kullanıcı taleplerini** bölümünde **kullanıcı öznitelikleri** iletişim kutusunda gösterildiği gibi SAML belirteci özniteliği eklemek için aşağıdaki adımları gerçekleştirin tablonun altındaki: 
+6. Ayrıca, TimeOffManager uygulaması, daha fazla özniteliğin SAML yanıtına geri geçirilmesini bekler. **Kullanıcı öznitelikleri** Iletişim kutusundaki **Kullanıcı talepleri** bölümünde AŞAĞıDAKI tabloda gösterildiği gibi SAML belirteci özniteliği eklemek için aşağıdaki adımları gerçekleştirin: 
 
     | Ad | Kaynak özniteliği|
     | --- | --- |
-    | firstName |User.givenName |
-    | Soyadı |User.surname |
-    | Email |User.Mail |
+    | FirstName |Kullanıcı. |
+    | Soyadı |User. soyadı |
+    | Email |Kullanıcı. Mail |
 
-    a. Tıklayın **Ekle yeni talep** açmak için **yönetmek, kullanıcı talepleri** iletişim.
+    a. **Kullanıcı taleplerini Yönet** iletişim kutusunu açmak için **yeni talep Ekle** ' ye tıklayın.
 
     ![image](common/new-save-attribute.png)
 
     ![image](common/new-attribute-details.png)
 
-    b. İçinde **adı** metin kutusuna, bu satır için gösterilen öznitelik adı yazın.
+    b. **Ad** metin kutusuna, bu satır için gösterilen öznitelik adını yazın.
 
-    c. Bırakın **Namespace** boş.
+    c. **Ad alanını** boş bırakın.
 
-    d. Kaynağı olarak **özniteliği**.
+    d. **Öznitelik**olarak kaynak seçin.
 
-    e. Gelen **kaynak özniteliği** listesinde, ilgili satır için gösterilen öznitelik değeri yazın.
+    e. **Kaynak özniteliği** listesinde, bu satır için gösterilen öznitelik değerini yazın.
 
     f. Tıklayın **Tamam**
 
     g. **Kaydet**’e tıklayın.
 
-7. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+7. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-8. Üzerinde **TimeOffManager kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+8. **TimeOffManager ayarlama** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
     a. Oturum Açma URL'si:
 
@@ -156,35 +156,35 @@ Azure AD çoklu oturum açma ile TimeOffManager yapılandırmak için aşağıda
 
     c. Oturum Kapatma URL'si
 
-### <a name="configure-timeoffmanager-single-sign-on"></a>TimeOffManager tek oturum açmayı yapılandırın
+### <a name="configure-timeoffmanager-single-sign-on"></a>TimeOffManager çoklu oturum açmayı yapılandırma
 
-1. Farklı bir web tarayıcı penceresinde TimeOffManager şirket sitenize yönetici olarak oturum açın.
+1. Farklı bir Web tarayıcısı penceresinde, TimeOffManager şirket sitenizde yönetici olarak oturum açın.
 
-2. Git **hesabı \> hesap seçeneklerini \> çoklu oturum açma ayarları**.
+2. **Hesap\> hesabı seçenekleri\> çoklu oturum açma ayarları**' na gidin.
    
-    ![Çoklu oturum açma ayarları](./media/timeoffmanager-tutorial/ic795917.png "çoklu oturum açma ayarları")
+    ![Çoklu oturum açma ayarları](./media/timeoffmanager-tutorial/ic795917.png "Çoklu oturum açma ayarları")
 
-3. İçinde **çoklu oturum açma ayarları** bölümünde, aşağıdaki adımları gerçekleştirin:
+3. **Çoklu oturum açma ayarları** bölümünde aşağıdaki adımları uygulayın:
    
-    ![Çoklu oturum açma ayarları](./media/timeoffmanager-tutorial/ic795918.png "çoklu oturum açma ayarları")
+    ![Çoklu oturum açma ayarları](./media/timeoffmanager-tutorial/ic795918.png "Çoklu oturum açma ayarları")
    
-    a. Tüm sertifika içine yapıştırın, base-64 kodlanmış sertifika Not Defteri'nde açın ve içeriğini, panoya kopyalanmak **X.509 sertifikası** metin.
+    a. Base-64 kodlu sertifikanızı Not defteri 'nde açın, bu içeriği panonuza kopyalayın ve ardından tüm sertifikayı **X. 509.440 sertifikası** metin kutusuna yapıştırın.
    
-    b. İçinde **IDP veren** metin değerini yapıştırın **Azure AD tanımlayıcısı** , Azure Portalı'ndan kopyaladığınız.
+    b. **IDP veren** metin kutusunda, Azure Portal KOPYALADıĞıNıZ **Azure AD tanımlayıcısının** değerini yapıştırın.
    
-    c. İçinde **IDP uç nokta URL'si** metin değerini yapıştırın **oturum açma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    c. **IDP uç nokta URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
    
-    d. Olarak **zorunlu SAML**seçin **Hayır**.
+    d. **SAML zorlama**olarak **Hayır**' ı seçin.
    
-    e. Olarak **kullanıcılar otomatik olarak oluşturma**seçin **Evet**.
+    e. **Kullanıcıları otomatik oluştur**olarak **Evet**' i seçin.
    
-    f. İçinde **oturum kapatma URL'si** metin değerini yapıştırın **oturum kapatma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    f. **Logout URL** metin kutusuna, Azure Portal kopyaladığınız **Logout URL 'si** değerini yapıştırın.
    
-    g. Tıklayın **değişiklikleri kaydetmek**.
+    g. **Değişiklikleri Kaydet**' e tıklayın.
 
-4. İçinde **çoklu oturum açma ayarları** sayfasında, değerini kopyalayın **onay belgesi tüketici hizmeti URL'si** yapıştırın **yanıt URL'si** metin kutusu altında **temel SAML Yapılandırma** bölümü Azure Portalı'nda. 
+4. **Çoklu oturum açma ayarları** sayfasında, **onaylama tüketici hizmeti URL 'si** değerini kopyalayın ve Azure Portal içindeki **temel SAML yapılandırması** bölümündeki **yanıt URL** 'si metin kutusuna yapıştırın. 
 
-      ![Çoklu oturum açma ayarları](./media/timeoffmanager-tutorial/ic795915.png "çoklu oturum açma ayarları")
+      ![Çoklu oturum açma ayarları](./media/timeoffmanager-tutorial/ic795915.png "Çoklu oturum açma ayarları")
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
 
@@ -196,59 +196,59 @@ Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcıs
 
 2. Seçin **yeni kullanıcı** ekranın üstünde.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
 3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü brittasimon@yourcompanydomain.extension. Örneğin, BrittaSimon@contoso.com
+    b. **Kullanıcı adı** alanına yazın brittasimon@yourcompanydomain.extension. Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’a tıklayın.
+    d.           **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için TimeOffManager erişim vererek Britta Simon etkinleştirin.
+Bu bölümde, TimeOffManager 'a erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon özelliğini etkinleştirirsiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **TimeOffManager**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **TimeOffManager**' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **TimeOffManager**.
+2. Uygulamalar listesinde, **TimeOffManager**' ı seçin.
 
-    ![Uygulamalar listesinde TimeOffManager bağlantı](common/all-applications.png)
+    ![Uygulamalar listesindeki TimeOffManager bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
     !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
 5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
 ### <a name="create-timeoffmanager-test-user"></a>TimeOffManager test kullanıcısı oluşturma
 
-Bu bölümde, Britta Simon adlı bir kullanıcı TimeOffManager oluşturulur. TimeOffManager just-ın-time kullanıcı hazırlama, varsayılan olarak etkin olduğu destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Bir kullanıcı TimeOffManager içinde zaten mevcut değilse yeni bir kimlik doğrulamasından sonra oluşturulur.
+Bu bölümde, TimeOffManager 'da Britta Simon adlı bir Kullanıcı oluşturulur. TimeOffManager, varsayılan olarak etkinleştirilen tam zamanında Kullanıcı sağlamayı destekler. Bu bölümde sizin için herhangi bir eylem öğesi yok. Kullanıcı TimeOffManager 'da zaten mevcut değilse, kimlik doğrulamasından sonra yeni bir tane oluşturulur.
 
 >[!NOTE]
->Herhangi diğer TimeOffManager kullanıcı hesabı oluşturma araçları kullanabilir veya API Azure AD'ye kullanıcı hesapları sağlamak için TimeOffManager tarafından sağlanan.
+>Azure AD Kullanıcı hesapları sağlamak için TimeOffManager tarafından sunulan diğer bir TimeOffManager Kullanıcı hesabı oluşturma aracını veya API 'Leri kullanabilirsiniz.
 > 
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli TimeOffManager kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama TimeOffManager için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde TimeOffManager kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız TimeOffManager 'da otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
@@ -256,5 +256,5 @@ Erişim paneli TimeOffManager kutucuğa tıkladığınızda, size otomatik olara
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

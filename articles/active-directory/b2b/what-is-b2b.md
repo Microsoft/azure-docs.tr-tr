@@ -12,12 +12,12 @@ manager: celestedg
 ms.reviewer: mal
 ms.custom: it-pro, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5c5c133fe728126ea07834c8ff5b02b1203ec326
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 62bc550a809d596b5378c03aa95877db5e15febb
+ms.sourcegitcommit: b12a25fc93559820cd9c925f9d0766d6a8963703
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67112682"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69019505"
 ---
 # <a name="what-is-guest-user-access-in-azure-active-directory-b2b"></a>Azure Active Directory B2B’de konuk kullanıcı erişimi nedir?
 
@@ -35,7 +35,7 @@ Azure AD B2B ile ortaklar kendi kimlik yönetimi çözümlerini kullanır; bu ne
 - Harici hesapları veya parolaları yönetmeniz gerekmez. 
 - Hesapları eşitlemeniz veya hesap yaşam döngülerini yönetmeniz gerekmez.  
 
-![Ekleme gösteren ekran görüntüsü üyeleri sayfası](media/what-is-b2b/add-member.png)
+![Üye Ekle sayfasını gösteren ekran görüntüsü](media/what-is-b2b/add-member.png)
 
 ## <a name="invite-guest-users-with-a-simple-invitation-and-redemption-process"></a>Basit bir davet ve kullanım işlemiyle konuk kullanıcıları davet etme
 Konuk kullanıcılar, kendi iş, okul veya sosyal kimlikleriyle uygulama ve hizmetlerinizde oturum açar. Konuk kullanıcının bir Microsoft hesabı veya bir Azure AD hesabı yoksa, kullanıcılar davetlerini kullandığında kendileri için bir hesap oluşturulur. 
@@ -43,10 +43,10 @@ Konuk kullanıcılar, kendi iş, okul veya sosyal kimlikleriyle uygulama ve hizm
 - Bir uygulamaya doğrudan bağlantı gönderin veya konuk kullanıcının kendi Erişim Paneline bir davet gönderin. 
 - Konuk kullanıcılar, oturum açmak için birkaç basit kullanım adımını izler.
 
-![Gözden geçirme izinleri sayfasını gösteren ekran görüntüsü](media/what-is-b2b/consentscreen.png)
+![İzinleri gözden geçir sayfasını gösteren ekran görüntüsü](media/what-is-b2b/consentscreen.png)
 
 ## <a name="use-policies-to-securely-share-your-apps-and-services"></a>Uygulama ve hizmetlerinizi güvenli bir şekilde paylaşmak için ilkeleri kullanma
-Kurumsal içeriğinizi korumak için yetkilendirme ilkelerini kullanabilirsiniz. Çok faktörlü kimlik doğrulaması gibi koşullu erişim ilkeleri uygulanabilir:
+Şirket içeriğinizi korumak için yetkilendirme ilkeleri kullanabilirsiniz. Multi-Factor Authentication gibi koşullu erişim ilkeleri zorlanabilir:
 - Kiracı düzeyinde.
 - Uygulama düzeyinde.
 - Belirli konuk kullanıcıların kurumsal uygulamalarını ve verilerini koruması için.
@@ -61,7 +61,7 @@ Yönetici olarak, Azure portalda kuruluşunuza kolayca konuk kullanıcılar ekle
 - Konuk kullanıcı hemen Erişim Panelinde oturum açmalarını sağlayan özelleştirilebilir bir davet alır.
 - Dizindeki konuk kullanıcılar, uygulamalara veya gruplara atanabilir.  
 
-![Yeni Konuk kullanıcı davet giriş sayfasını gösteren ekran görüntüsü](media/what-is-b2b/adding-b2b-users-admin.png)
+![Yeni Konuk Kullanıcı daveti giriş sayfasını gösteren ekran görüntüsü](media/what-is-b2b/adding-b2b-users-admin.png)
 
 ## <a name="let-application-and-group-owners-manage-their-own-guest-users"></a>Uygulama ve grup sahiplerinin kendi konuk kullanıcılarını yönetmesine izin verme
 
@@ -69,15 +69,15 @@ Uygulama sahiplerinin, Microsoft uygulaması olsun olmasın, paylaşmak istedikl
  - Yöneticiler, self servis uygulama ve grup yönetimini ayarlar.
  - Yönetici olmayan kullanıcılar, uygulamalara veya gruplara konuk kullanıcılar eklemek için [Erişim Paneli](https://myapps.microsoft.com)’ni kullanır.
 
-![Konuk kullanıcı için erişim paneli gösteren ekran görüntüsü](media/what-is-b2b/access-panel-manage-app.png)
+![Konuk Kullanıcı için erişim panelini gösteren ekran görüntüsü](media/what-is-b2b/access-panel-manage-app.png)
 
 ## <a name="use-apis-and-sample-code-to-easily-build-applications-to-onboard"></a>Kolayca eklenecek uygulamalar derlemek için API’ler ve örnek kod ekleme
 
 Kuruluşunuzun gereksinimlerine göre özelleştirilmiş şekilde şirket dışındaki ortaklar ekleyin.
 - Self servis kayıt portalları oluşturma da dahil olmak üzere, ekleme deneyimlerinizi özelleştirmek için [B2B işbirliği davet API](https://developer.microsoft.com/graph/docs/api-reference/v1.0/resources/invitation)’lerini kullanın. 
-- Bir Self Servis portalı için sağladığımız örnek kodu kullanmak [github'da](https://github.com/Azure/active-directory-dotnet-graphapi-b2bportal-web).
+- [GitHub 'daki](https://github.com/Azure/active-directory-dotnet-graphapi-b2bportal-web)bir self servis portalı için sağladığımız örnek kodu kullanın.
 
-![Örnek kayıt Portalı'nı gösteren ekran görüntüsü](media/what-is-b2b/sign-up-portal.png)
+![Örnek kaydolma portalı 'nı gösteren ekran görüntüsü](media/what-is-b2b/sign-up-portal.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,6 +1,6 @@
 ---
-title: Bootstrap ile Azure HDInsight küme yapılandırmalarını özelleştirme
-description: HDInsight küme yapılandırması, .net, PowerShell ve Resource Manager kullanarak program aracılığıyla özelleştirmeyi öğrenin şablonları.
+title: Önyükleme kullanarak Azure HDInsight küme yapılandırmasını özelleştirme
+description: .Net, PowerShell ve Kaynak Yöneticisi şablonlarını kullanarak HDInsight küme yapılandırmasını programlı bir şekilde özelleştirmeyi öğrenin.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
@@ -8,55 +8,54 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 04/19/2019
-ms.openlocfilehash: 50db9a588cd953bbd0e912ec942194a8deeffe4c
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: 15d08b14e38f097e8e9c3e0db893efb1d6efe44d
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67484049"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71098666"
 ---
-# <a name="customize-hdinsight-clusters-using-bootstrap"></a>Bootstrap ile HDInsight kümeleri özelleştirme
+# <a name="customize-hdinsight-clusters-using-bootstrap"></a>Önyükleme kullanarak HDInsight kümelerini özelleştirme
 
-Önyükleme betikleri bileşenlerini yükleme ve Azure HDInsight içinde program aracılığıyla yapılandırma sağlar. 
+Önyükleme betikleri, Azure HDInsight 'taki bileşenleri programlı bir şekilde yüklemenize ve yapılandırmanıza olanak tanır.
 
-HDInsight kümenizi oluşturulurken yapılandırma dosyası ayarlarının ayarlamak için üç yaklaşım vardır:
+HDInsight kümeniz oluşturulurken yapılandırma dosyası ayarlarını ayarlamak için üç yaklaşım vardır:
 
 * Azure PowerShell kullanma
 * .NET SDK kullanma
 * Azure Resource Manager şablonu kullanma
 
-Örneğin, program bu yöntemleri kullanarak bu dosyaları seçeneklerini yapılandırabilirsiniz:
+Örneğin, bu programlama yöntemlerini kullanarak bu dosyalardaki seçenekleri yapılandırabilirsiniz:
 
 * clusterIdentity.xml
-* Core-site.xml
-* Gateway.XML
-* hbase env.xml
-* hbase-site.xml
+* Core-site. xml
+* Gateway. xml
+* HBase-env. xml
+* HBase-site. xml
 * hdfs-site.xml
-* Hive env.xml
-* Hive-site.xml
+* Hive-env. xml
+* Hive-site. xml
 * mapred-site
 * oozie-site.xml
-* oozie-env.xml
+* Oozie-env. xml
 * storm-site.xml
 * tez-site.xml
-* webhcat-site.xml
-* yarn-site.xml
-* Server.Properties (kafka Aracısını Yapılandırma)
+* webhcat-site. xml
+* Yarn-site. xml
+* Server. Properties (Kafka-Broker yapılandırması)
 
-Ek bileşenler oluşturma süre boyunca HDInsight kümesinde yükleme hakkında daha fazla bilgi için bkz: [özelleştirme HDInsight kümelerini betik eylemi (Linux) kullanarak](hdinsight-hadoop-customize-cluster-linux.md).
+Oluşturma süresi boyunca HDInsight kümesine ek bileşenler yükleme hakkında bilgi için bkz. [betik eylemi kullanarak HDInsight kümelerini özelleştirme (Linux)](hdinsight-hadoop-customize-cluster-linux.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* PowerShell kullanarak, ihtiyacınız olacak [Az modül](https://docs.microsoft.com/powershell/azure/overview).
+* PowerShell kullanıyorsanız, [az Module](https://docs.microsoft.com/powershell/azure/overview)gerekecektir.
 
 ## <a name="use-azure-powershell"></a>Azure PowerShell kullanma
 
-Aşağıdaki PowerShell kod özelleştirir bir [Apache Hive](https://hive.apache.org/) yapılandırma:
+Aşağıdaki PowerShell kodu bir [Apache Hive](https://hive.apache.org/) yapılandırmasını özelleştirir:
 
 > [!IMPORTANT]  
-> Parametre `Spark2Defaults` ile birlikte gerekebilir [Ekle AzHDInsightConfigValue](https://docs.microsoft.com/powershell/module/az.hdinsight/add-azhdinsightconfigvalue). Aşağıdaki kod örneğinde gösterildiği gibi parametresine boş değer geçirebilirsiniz.
-
+> Parametrenin `Spark2Defaults` [Add-AzHDInsightConfigValue](https://docs.microsoft.com/powershell/module/az.hdinsight/add-azhdinsightconfigvalue)ile kullanılması gerekebilir. Aşağıdaki kod örneğinde gösterildiği gibi parametreye boş değerler geçirebilirsiniz.
 
 ```powershell
 # hive-site.xml configuration
@@ -82,23 +81,23 @@ New-AzHDInsightCluster `
     -Config $config
 ```
 
-Tam çalışan bir PowerShell Betiği bulunabilir [ek](#appendix-powershell-sample).
+Çalışan bir PowerShell betiği, [ek](#appendix-powershell-sample)içinde bulunabilir.
 
 **Değişikliği doğrulamak için:**
 
 1. [Azure portalı](https://portal.azure.com) üzerinde oturum açın.
-2. Sol menüden **HDInsight kümeleri**. Görmüyorsanız, tıklayın **tüm hizmetleri** ilk.
+2. Sol menüden **HDInsight kümeleri**' ne tıklayın. Bunu görmüyorsanız, önce **tüm hizmetler** ' e tıklayın.
 3. PowerShell betiğini kullanarak yeni oluşturduğunuz kümeye tıklayın.
-4. Tıklayın **Pano** Ambari UI'ı açmak için dikey pencerenin üst.
-5. Tıklayın **Hive** sol menüden.
-6. Tıklayın **HiveServer2** gelen **özeti**.
-7. Tıklayın **yapılandırmaları** sekmesi.
-8. Tıklayın **Hive** sol menüden.
+4. Dikey pencerenin üst kısmındaki **Pano** ' ya tıklayarak, ambarı Kullanıcı arabirimini açın.
+5. Sol menüden **Hive** ' ye tıklayın.
+6. Özet **HiveServer2** tıklayın.
+7. **Configs** sekmesine tıklayın.
+8. Sol menüden **Hive** ' ye tıklayın.
 9. Tıklayın **Gelişmiş** sekmesi.
-10. Aşağı kaydırın ve ardından **hive site Gelişmiş**.
-11. Aranacak **hive.metastore.client.socket.timeout** bölümünde.
+10. Aşağı kaydırın ve ardından **Gelişmiş Hive sitesi**' ni genişletin.
+11. Bölümünde **Hive. metasarı. Client. Socket. Timeout** için arama yapın.
 
-Diğer yapılandırma dosyalarını özelleştirme hakkında daha fazla bazı örnekleri:
+Diğer yapılandırma dosyalarını özelleştirmeye ilişkin bazı örnekler:
 
 ```xml
 # hdfs-site.xml configuration
@@ -115,10 +114,10 @@ $OozieConfigValues = @{ "oozie.service.coord.normal.default.timeout"="150" }  # 
 ```
 
 ## <a name="use-net-sdk"></a>.NET SDK kullanma
-Bkz: [.NET SDK kullanarak HDInsight oluşturma Linux tabanlı kümelerde](hdinsight-hadoop-create-linux-clusters-dotnet-sdk.md#use-bootstrap).
+Bkz. [HDInsight 'ta .NET SDK kullanarak Linux tabanlı kümeler oluşturma](hdinsight-hadoop-create-linux-clusters-dotnet-sdk.md#use-bootstrap).
 
-## <a name="use-resource-manager-template"></a>Kullanım Resource Manager şablonu
-Resource Manager şablonunda önyükleme kullanabilirsiniz:
+## <a name="use-resource-manager-template"></a>Resource Manager şablonu kullanma
+Kaynak Yöneticisi şablonunda önyükleme kullanabilirsiniz:
 
 ```json
 "configurations": {
@@ -130,29 +129,27 @@ Resource Manager şablonunda önyükleme kullanabilirsiniz:
 }
 ```
 
-![HDInsight Hadoop kümesi önyükleme Azure Resource Manager şablonu özelleştirir](./media/hdinsight-hadoop-customize-cluster-bootstrap/hdinsight-customize-cluster-bootstrap-arm.png)
+![Hadoop, küme önyükleme Azure Resource Manager şablonunu özelleştirir](./media/hdinsight-hadoop-customize-cluster-bootstrap/hdinsight-customize-cluster-bootstrap-arm.png)
 
 ## <a name="see-also"></a>Ayrıca bkz.
-* [HDInsight Apache Hadoop kümeleri oluşturma][hdinsight-provision-cluster] diğer özel seçenekleri kullanarak bir HDInsight kümesi oluşturma hakkında yönergeler açıklanmaktadır.
-* [HDInsight için betik eylemi betikleri geliştirme][hdinsight-write-script]
-* [Yükleme ve Apache Spark HDInsight kümeleri kullanma][hdinsight-install-spark]
-* [Yükleme ve HDInsight kümeleri üzerinde Apache giraph'ı kullanma](hdinsight-hadoop-giraph-install.md).
+
+* [HDInsight 'ta Apache Hadoop kümeleri oluşturma][hdinsight-provision-cluster] diğer özel seçenekleri kullanarak HDInsight kümesi oluşturma hakkında yönergeler sağlar.
+* [HDInsight için betik eylem betikleri geliştirme][hdinsight-write-script]
+* [HDInsight kümelerinde Apache Spark yükleyip kullanma][hdinsight-install-spark]
+* [HDInsight kümelerine Apache Giraph 'Yi yükleyip kullanın](hdinsight-hadoop-giraph-install.md).
 
 [hdinsight-install-spark]: hdinsight-hadoop-spark-install.md
 [hdinsight-write-script]: hdinsight-hadoop-script-actions-linux.md
 [hdinsight-provision-cluster]: hdinsight-hadoop-provision-linux-clusters.md
 [powershell-install-configure]: /powershell/azureps-cmdlets-docs
+[img-hdi-cluster-states]: ./media/hdinsight-hadoop-customize-cluster/HDI-Cluster-state.png "Küme oluşturma sırasında aşamalar"
 
+## <a name="appendix-powershell-sample"></a>Yer PowerShell örneği
 
-[img-hdi-cluster-states]: ./media/hdinsight-hadoop-customize-cluster/HDI-Cluster-state.png "Küme oluşturma sırasında aşamaları"
-
-## <a name="appendix-powershell-sample"></a>Ek: PowerShell örneği
-
-Bu PowerShell Betiği bir HDInsight kümesi oluşturur ve Hive ayarı özelleştirir. İçin değerler girdiğinizden emin olun `$nameToken`, `$httpPassword`, ve `$sshPassword`.
+Bu PowerShell betiği bir HDInsight kümesi oluşturur ve bir Hive ayarını özelleştirir. `$nameToken` ,`$httpPassword`Ve değerlerini`$sshPassword`girdiğinizden emin olun.
 
 > [!WARNING]  
 > Depolama hesabı türü `BlobStorage` HDInsight kümeleri için kullanılamaz.
-
 
 ```powershell
 ####################################

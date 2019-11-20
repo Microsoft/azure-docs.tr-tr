@@ -1,52 +1,53 @@
 ---
-title: SaaS yerine getirme API'leri v1 | Azure Market
-description: Oluşturma ve yönetme ilişkili yerine getirme v1 API'leri kullanarak Azure Marketi'nde bir SaaS teklifi açıklanmaktadır.
+title: SaaS API v1 Azure Marketi
+description: İlişkili karşılama v1 API 'Lerini kullanarak Azure Marketi 'nde SaaS teklifinin nasıl oluşturulacağını ve yönetileceğini açıklar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 05/23/2019
 ms.author: evansma
 ROBOTS: NOINDEX
-ms.openlocfilehash: 78162983601e9126bd34cb737e74783df982bacb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 99dd6db7003e0358ddde2438f6897cd767932227
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66258947"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73816576"
 ---
-# <a name="saas-fulfillment-apis-version-1-deprecated"></a>SaaS yerine getirme API sürüm 1 (kullanım dışı)
+# <a name="saas-fulfillment-apis-version-1-deprecated"></a>SaaS karşılama API 'si sürüm 1 (kullanım dışı)
 
-Bu makalede, API'leri ile SaaS teklifi oluşturmak açıklanmaktadır. API uç noktaları, REST yöntemleri ve oluşan sahip satmak, seçili Azure SaaS teklifinizle aboneliklere izin vermek için gereklidir.  
+Bu makalede API 'lerle bir SaaS teklifinin nasıl oluşturulacağı açıklanmaktadır. REST yöntemlerinden ve uç noktalardan oluşan API 'Ler, seçili Azure üzerinden satış yaptıysanız SaaS teklifinizin aboneliklerine izin vermek için gereklidir.  
 
 > [!WARNING]
-> SaaS yerine getirme API bu ilk sürümünde kullanım dışı; Bunun yerine, [SaaS yerine getirme API V2](./pc-saas-fulfillment-api-v2.md).  API ekleyemeyen bu sürümü yalnızca mevcut yayımcıların Hizmet şu anda sağlanıyor. 
+> SaaS karşılama API 'sinin bu ilk sürümü kullanım dışıdır; Bunun yerine, [SaaS karşılama API v2 'yi](./pc-saas-fulfillment-api-v2.md)kullanın.  API 'nin bu başlatma sürümü şu anda yalnızca mevcut yayımcıları sunacak şekilde sağlanıyor. 
 
-Aşağıdaki API, SaaS hizmetinizin Azure ile tümleştirmenize yardımcı olmak için verilmiştir:
+SaaS hizmetinizi Azure ile tümleştirmenize yardımcı olmak için aşağıdaki API 'Ler verilmiştir:
 
 -   Çözümleme
 -   Abone olun
 -   Dönüştür
--   aboneliği iptal et
+-   kaldırmak
 
 
 ## <a name="api-methods-and-endpoints"></a>API yöntemleri ve uç noktaları
 
-Aşağıdaki bölümlerde, API yöntemleri ve bir SaaS teklifi için abonelikleri etkinleştirmek için kullanılabilir uç noktalar açıklanmaktadır.
+Aşağıdaki bölümlerde, SaaS teklifi için abonelikleri etkinleştirmek üzere kullanılabilecek API yöntemleri ve uç noktalar açıklanır.
 
 
 ### <a name="marketplace-api-endpoint-and-api-version"></a>Market API uç noktası ve API sürümü
 
-Azure Market API'si için uç nokta `https://marketplaceapi.microsoft.com`.
+Azure Marketi API 'sinin uç noktası `https://marketplaceapi.microsoft.com`.
 
 Geçerli API sürümü `api-version=2017-04-15`.
 
 
-### <a name="resolve-subscription"></a>Abonelik çözümleyin
+### <a name="resolve-subscription"></a>Aboneliği çözümle
 
-GÖNDERİSİNİ eyleme çözmek bir kalıcı kaynak kimliği için bir Market belirteç çözmek kullanıcıların uç nokta sağlar  Kaynak Kimliği SAAS abonelik için benzersiz tanımlayıcısıdır. 
+Bitiş noktasında son eylem, kullanıcıların Market belirtecini kalıcı bir kaynak KIMLIĞINE çözümlemesine izin verir.  Kaynak KIMLIĞI SAAS aboneliğinin benzersiz tanımlayıcısıdır. 
 
-Bir kullanıcı, bir ISV Web sitesine yönlendirilir, sorgu parametrelerinde bir belirteç URL'sini içerir. Bu belirteci kullanmasına ve bu sorunu çözmek için bir istekte bulunmak için ISV bekleniyor. Yanıtın benzersiz SAAS abonelik kimliği, adı, Teklif kimliği ve kaynak planlama içerir. Bu belirteci yalnızca bir saat için geçerli değil.
+Bir Kullanıcı bir ISV Web sitesine yeniden yönlendirildiğinde, URL sorgu parametrelerinde bir belirteç içerir. ISV 'nin bu belirteci kullanması beklenir ve çözümü çözümlemek için bir istek oluşturun. Yanıt, kaynak için benzersiz SAAS abonelik KIMLIĞI, adı, teklif KIMLIĞI ve planı içerir. Bu belirteç yalnızca saat için geçerlidir.
 
 *İstek*
 
@@ -56,19 +57,19 @@ Bir kullanıcı, bir ISV Web sitesine yönlendirilir, sorgu parametrelerinde bir
 
 |  **Parametre adı** |     **Açıklama**                                      |
 |  ------------------ |     ---------------------------------------------------- |
-|  API sürümü        |  Bu istek için kullanılacak işlem sürümü.   |
+|  api sürümü        |  Bu istek için kullanılacak işlemin sürümü.   |
 |  |  |
 
 
 *Üst Bilgiler*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
 |--------------------|--------------|-----------------------------------------------------------|
-| x-ms-requestid     | Hayır           | İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-| x-ms-bağıntı kimliği | Hayır           | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu alan istemci işlemi tüm olayları sunucu tarafında olaylarıyla ilişkilendirir. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
+| x-MS-RequestId     | Hayır           | İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır.  |
+| x-MS-bağıntıkimliği | Hayır           | İstemcideki işlem için benzersiz bir dize değeri. Bu alan, istemci işlemindeki tüm olayları sunucu tarafındaki olaylarla ilişkilendirir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır. |
 | içerik türü       | Evet          | `application/json`                                        |
-| authorization      | Evet          | JSON web token (JWT) taşıyıcı belirteç.                    |
-| x-ms-Pazar-token| Evet| Kullanıcı, Azure SaaS ISV Web sitesine yönlendirilir, URL'deki belirteci sorgu parametresi. **Not:** Bu belirteç, yalnızca 1 saat boyunca geçerlidir. Ayrıca, URL kod çözme tarayıcıdan belirteç değeri kullanmadan önce.|
+| yetkisi      | Evet          | JSON Web belirteci (JWT) taşıyıcı belirteci.                    |
+| x-MS-Market-belirteç| Evet| Kullanıcı, SaaS ISV 'nin Azure Web sitesine yönlendirildiğinde, URL 'deki belirteç sorgu parametresi. **Note:** Bu belirteç yalnızca 1 saat için geçerlidir. Ayrıca, URL 'YI kullanmadan önce tarayıcıdan belirteç değeri kodunu çözer.|
 |  |  |  |
   
 
@@ -85,10 +86,10 @@ Bir kullanıcı, bir ISV Web sitesine yönlendirilir, sorgu parametrelerinde bir
 
 | **Parametre adı** | **Veri türü** | **Açıklama**                       |
 |--------------------|---------------|---------------------------------------|
-| id                 | String        | SaaS aboneliğin kimliği.          |
-| subscriptionName| String| SaaS hizmetine abone sırasında azure'da kullanıcı tarafından ayarlanan SaaS abonelik adı.|
-| OfferId            | String        | Teklif kullanıcıya abone kimliği. |
-| Planıd             | String        | Bir kullanıcı abone kimliği planlayın.  |
+| id                 | Dize        | SaaS aboneliğinin KIMLIĞI.          |
+| subscriptionName| Dize| SaaS hizmetine abone olurken Azure 'da Kullanıcı tarafından ayarlanan SaaS aboneliğinin adı.|
+| OfferId            | Dize        | Kullanıcının abone olduğu teklif KIMLIĞI. |
+| PlanID             | Dize        | Kullanıcının abone olduğu plan KIMLIĞI.  |
 |  |  |  |
 
 
@@ -96,49 +97,49 @@ Bir kullanıcı, bir ISV Web sitesine yönlendirilir, sorgu parametrelerinde bir
 
 | **HTTP durum kodu** | **Hata kodu**     | **Açıklama**                                                                         |
 |----------------------|--------------------| --------------------------------------------------------------------------------------- |
-| 200                  | `OK`                 | Belirteç başarıyla çözümlendi.                                                            |
-| 400                  | `BadRequest`         | Ya da, üst bilgiler eksik veya geçersiz bir API sürümü belirtilen gereklidir. Belirteci hatalı biçimlendirilmiş ya da süresi dolmuş ya da belirteç olduğu için çözümlenemedi (belirteç yalnızca bir kez oluşturulan 1 saat boyunca geçerlidir). |
-| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirmek için yetkili değil.                                 |
-| 429                  | `RequestThrottleId`  | Hizmetidir istekleri işlemekle meşgul, daha sonra yeniden deneyin.                                |
-| 503                  | `ServiceUnavailable` | Hizmet olduğu aşağı geçici olarak, daha sonra yeniden deneyin.                                        |
+| 200                  | `OK`                 | Belirteç başarıyla çözüldü.                                                            |
+| 400                  | `BadRequest`         | Gerekli üst bilgiler eksik ya da geçersiz bir api sürümü belirtildi. Belirteç hatalı biçimlendirilmiş ya da zaman aşımına uğradığından belirteç çözümlenemedi (belirteç yalnızca oluşturulduktan sonra 1 saat için geçerlidir). |
+| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirme yetkisi yok.                                 |
+| 429                  | `RequestThrottleId`  | Hizmet istekleri işlemekle meşgul, daha sonra yeniden deneyin.                                |
+| 503                  | `ServiceUnavailable` | Hizmet geçici olarak devre dışı, daha sonra yeniden deneyin.                                        |
 |  |  |  |
 
 
-*Yanıt Üstbilgileri*
+*Yanıt üst bilgileri*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Evet          | İstek istemciden alınan kimliği.                                                                   |
-| x-ms-bağıntı kimliği | Evet          | Bağıntı kimliği istemci tarafından aksi durumda bu değer iletilmezse server bağıntı kimliğidir.                   |
-| x-ms-etkinlik kimliği    | Evet          | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu kimlik tüm Mutabakatları için kullanılır. |
-| Yeniden deneme sonrasında        | Hayır           | Bu değer yalnızca bir 429 yanıtı için ayarlanır.                                                                   |
+| x-MS-RequestId     | Evet          | İstemciden alınan istek KIMLIĞI.                                                                   |
+| x-MS-bağıntıkimliği | Evet          | Bağıntı KIMLIĞI istemci tarafından geçirilmemişse, bu değer sunucu bağıntı KIMLIĞIDIR.                   |
+| x-MS-ActivityId    | Evet          | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu KIMLIK, herhangi bir mutabakatları için kullanılır. |
+| Yeniden deneme-sonrası        | Hayır           | Bu değer yalnızca 429 yanıtı için ayarlanır.                                                                   |
 |  |  |  |
 
 
 ### <a name="subscribe"></a>Abone olun
 
-Abone uç noktası bir SaaS hizmetine belirli bir plan için bir abonelik başlatmak ve faturalandırma ticaret sisteminde etkinleştirmesine olanak sağlar.
+Abone uç noktası, kullanıcıların belirli bir plan için bir SaaS hizmetine abonelik başlatmasını ve ticaret sisteminde faturalandırmayı etkinleştirmesini sağlar.
 
 **PUT**
 
-**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{Subscriptionıd}* ?api-version=2017-04-15**
+**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{SubscriptionID}* ? api-Version = 2017-04-15**
 
 | **Parametre adı**  | **Açıklama**                                       |
 |---------------------|-------------------------------------------------------|
-| subscriptionId      | Benzersiz kimliği, SaaS çözmek API aracılığıyla belirteç çözdükten sonra elde edilen abonelik.                              |
-| API sürümü         | Bu istek için kullanılacak işlem sürümü. |
+| subscriptionId      | Belirteç Resolve API aracılığıyla çözümlendikten sonra elde edilen SaaS aboneliğinin benzersiz KIMLIĞI.                              |
+| api sürümü         | Bu istek için kullanılacak işlemin sürümü. |
 |  |  |
 
 *Üst Bilgiler*
 
-|  **Üstbilgi anahtarı**        | **Gerekli** |  **Açıklama**                                                  |
+|  **Üst bilgi anahtarı**        | **Gerekli** |  **Açıklama**                                                  |
 | ------------------     | ------------ | --------------------------------------------------------------------------------------- |
-| x-ms-requestid         |   Hayır         | İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-| x-ms-bağıntı kimliği     |   Hayır         | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu değer, tüm istemci işlemi olayları sunucu tarafında olaylarla ilişkilendirmek için kullanılabilir. Bu sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
+| x-MS-RequestId         |   Hayır         | İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır. |
+| x-MS-bağıntıkimliği     |   Hayır         | İstemcideki işlem için benzersiz bir dize değeri. Bu değer, istemci işlemindeki tüm olayları sunucu tarafında bulunan olaylar ile ilişkilendirmek içindir. Bu sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır. |
 | IF-Match/If-None-Match |   Hayır         |   Güçlü Doğrulayıcı ETag değeri.                                                          |
 | içerik türü           |   Evet        |    `application/json`                                                                   |
-|  authorization         |   Evet        |    JSON web token (JWT) taşıyıcı belirteç.                                               |
-| x-ms-Pazar-oturum-modu| Hayır | Bir SaaS teklife abone sırasında prova modunu etkinleştirmek için bayrak. Ayarlanırsa, abonelik ücret uygulanmayan durumunda. ISV senaryolarını test etmek için kullanışlıdır. Lütfen kümesine **'prova'**|
+|  yetkisi         |   Evet        |    JSON Web belirteci (JWT) taşıyıcı belirteci.                                               |
+| x-MS-Market-oturum modu| Hayır | SaaS teklifine abone olurken kuru çalıştırma modunu etkinleştirmek için bayrak. Ayarlanırsa, abonelik ücretlendirilmeyecektir. Bu, ISV test senaryoları için kullanışlıdır. Lütfen **' dryırun '** olarak ayarlayın|
 |  |  |  |
 
 *Gövde*
@@ -151,58 +152,58 @@ Abone uç noktası bir SaaS hizmetine belirli bir plan için bir abonelik başla
 
 | **Öğe adı** | **Veri türü** | **Açıklama**                      |
 |------------------|---------------|--------------------------------------|
-| Planıd           | (Gerekli) Dize        | SaaS hizmeti kullanıcı plan kimliği için abone oluyor.  |
+| PlanID           | Istenir Dizisinde        | Kullanıcının abone olduğu SaaS hizmeti için plan KIMLIĞI.  |
 |  |  |  |
 
 *Yanıt kodları*
 
 | **HTTP durum kodu** | **Hata kodu**     | **Açıklama**                                                           |
 |----------------------|--------------------|---------------------------------------------------------------------------|
-| 202                  | `Accepted`           | SaaS abonelik etkinleştirme için belirli bir plan aldı.                   |
-| 400                  | `BadRequest`         | Ya da üst bilgileri eksik olan veya JSON gövdesi yanlış biçimlendirilmiş gereklidir. |
-| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirmek için yetkili değil.                   |
-| 404                  | `NotFound`           | Aboneliğiniz ile sağlanan kimliği bulunamadı                                  |
-| 409                  | `Conflict`           | Abonelik üzerinde başka bir işlem sürüyor.                     |
-| 429                  | `RequestThrottleId`  | Hizmetidir istekleri işlemekle meşgul, daha sonra yeniden deneyin.                  |
-| 503                  | `ServiceUnavailable` | Hizmet olduğu aşağı geçici olarak, daha sonra yeniden deneyin.                          |
+| 202                  | `Accepted`           | SaaS aboneliği etkinleştirme, belirli bir plan için alındı.                   |
+| 400                  | `BadRequest`         | Gerekli üstbilgiler eksik veya JSON gövdesi hatalı biçimlendirilmiş. |
+| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirme yetkisi yok.                   |
+| 404                  | `NotFound`           | Belirtilen KIMLIĞE sahip abonelik bulunamadı                                  |
+| 409                  | `Conflict`           | Abonelikte başka bir işlem devam ediyor.                     |
+| 429                  | `RequestThrottleId`  | Hizmet istekleri işlemekle meşgul, daha sonra yeniden deneyin.                  |
+| 503                  | `ServiceUnavailable` | Hizmet geçici olarak devre dışı, daha sonra yeniden deneyin.                          |
 |  |  |  |
 
-'İşlemi-konum' üst bilgisi, istek işlemin durumu için 202 yanıt, iletişim kurun. Kimlik doğrulaması diğer Market API'leri ile aynıdır.
+202 yanıtı için, ' Operation-Location ' üstbilgisindeki istek işleminin durumunu izleyin. Kimlik doğrulaması, diğer Market API 'Leri ile aynıdır.
 
-*Yanıt Üstbilgileri*
+*Yanıt üst bilgileri*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Evet          | İstek istemciden alınan kimliği.                                                                   |
-| x-ms-bağıntı kimliği | Evet          | Bağıntı kimliği istemci tarafından aksi durumda bu değer iletilmezse server bağıntı kimliğidir.                   |
-| x-ms-etkinlik kimliği    | Evet          | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu değer, tüm Mutabakatları için kullanılır. |
-| Yeniden deneme sonrasında        | Evet          | Zaman aralığı ile hangi istemci durumu kontrol edebilirsiniz.                                                       |
-| İşlem konumu | Evet          | İşlem durumunu almak için bir kaynak bağlayın.                                                        |
+| x-MS-RequestId     | Evet          | İstemciden alınan istek KIMLIĞI.                                                                   |
+| x-MS-bağıntıkimliği | Evet          | Bağıntı KIMLIĞI istemci tarafından geçirilmemişse, bu değer sunucu bağıntı KIMLIĞIDIR.                   |
+| x-MS-ActivityId    | Evet          | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu değer, herhangi bir mutabakatları için kullanılır. |
+| Yeniden deneme-sonrası        | Evet          | İstemcinin durumu kontrol edebilir aralığı.                                                       |
+| İşlem-konum | Evet          | İşlem durumunu almak için bir kaynağa bağlayın.                                                        |
 |  |  |  |
 
-### <a name="change-plan-endpoint"></a>Değişiklik planı uç noktası
+### <a name="change-plan-endpoint"></a>Plan uç noktasını Değiştir
 
-Değişiklik uç noktası şu anda abone planlarına dönüştürmek için yeni bir plan izin verir.
+Değişiklik uç noktası, kullanıcının şu anda abone olunan planını yeni bir plana dönüştürmesini sağlar.
 
-**DÜZELTME EKİ**
+**DÜZELTMESI**
 
-**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{Subscriptionıd}* ?api-version=2017-04-15**
+**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{SubscriptionID}* ? api-Version = 2017-04-15**
 
 | **Parametre adı**  | **Açıklama**                                       |
 |---------------------|-------------------------------------------------------|
-| subscriptionId      | Abonelik kimliği, SaaS.                              |
-| API sürümü         | Bu istek için kullanılacak işlem sürümü. |
+| subscriptionId      | SaaS aboneliğinin KIMLIĞI.                              |
+| api sürümü         | Bu istek için kullanılacak işlemin sürümü. |
 |  |  |
 
 *Üst Bilgiler*
 
-| **Üstbilgi anahtarı**          | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
+| **Üst bilgi anahtarı**          | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
 |-------------------------|--------------|---------------------------------------------------------------------------------------------------------------------|
-| x-ms-requestid          | Hayır           | İstemciden istek izleme için benzersiz bir dize değeri. Bir GUID önerilir. Bu sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.   |
-| x-ms-bağıntı kimliği      | Hayır           | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu değer, tüm istemci işlemi olayları sunucu tarafında olaylarla ilişkilendirmek için kullanılabilir. Bu sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-| IF-Match /If-None-Match | Hayır           | Güçlü Doğrulayıcı ETag değeri.                              |
+| x-MS-RequestId          | Hayır           | İstemciden gelen isteği izlemek için benzersiz bir dize değeri. Bir GUID önerilir. Bu sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır.   |
+| x-MS-bağıntıkimliği      | Hayır           | İstemcideki işlem için benzersiz bir dize değeri. Bu değer, istemci işlemindeki tüm olayları sunucu tarafında bulunan olaylar ile ilişkilendirmek içindir. Bu sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır. |
+| IF-Match/If-None-Match | Hayır           | Güçlü Doğrulayıcı ETag değeri.                              |
 | içerik türü            | Evet          | `application/json`                                        |
-| authorization           | Evet          | JSON web token (JWT) taşıyıcı belirteç.                    |
+| yetkisi           | Evet          | JSON Web belirteci (JWT) taşıyıcı belirteci.                    |
 |  |  |  |
 
 *Gövde*
@@ -215,106 +216,106 @@ Değişiklik uç noktası şu anda abone planlarına dönüştürmek için yeni 
 
 |  **Öğe adı** |  **Veri türü**  | **Açıklama**                              |
 |  ---------------- | -------------   | --------------------------------------       |
-|  Planıd           |  (Gerekli) Dize         | SaaS hizmeti kullanıcı plan kimliği için abone oluyor.          |
+|  PlanID           |  Istenir Dizisinde         | Kullanıcının abone olduğu SaaS hizmeti için plan KIMLIĞI.          |
 |  |  |  |
 
 *Yanıt kodları*
 
 | **HTTP durum kodu** | **Hata kodu**     | **Açıklama**                                                           |
 |----------------------|--------------------|---------------------------------------------------------------------------|
-| 202                  | `Accepted`           | SaaS abonelik etkinleştirme için belirli bir plan aldı.                   |
-| 400                  | `BadRequest`         | Ya da üst bilgileri eksik olan veya JSON gövdesi yanlış biçimlendirilmiş gereklidir. |
-| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirmek için yetkili değil.                   |
-| 404                  | `NotFound`           | Aboneliğiniz ile sağlanan kimliği bulunamadı                                  |
-| 409                  | `Conflict`           | Abonelik üzerinde başka bir işlem sürüyor.                     |
-| 429                  | `RequestThrottleId`  | Hizmetidir istekleri işlemekle meşgul, daha sonra yeniden deneyin.                  |
-| 503                  | `ServiceUnavailable` | Hizmet olduğu aşağı geçici olarak, daha sonra yeniden deneyin.                          |
+| 202                  | `Accepted`           | SaaS aboneliği etkinleştirme, belirli bir plan için alındı.                   |
+| 400                  | `BadRequest`         | Gerekli üstbilgiler eksik veya JSON gövdesi hatalı biçimlendirilmiş. |
+| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirme yetkisi yok.                   |
+| 404                  | `NotFound`           | Belirtilen KIMLIĞE sahip abonelik bulunamadı                                  |
+| 409                  | `Conflict`           | Abonelikte başka bir işlem devam ediyor.                     |
+| 429                  | `RequestThrottleId`  | Hizmet istekleri işlemekle meşgul, daha sonra yeniden deneyin.                  |
+| 503                  | `ServiceUnavailable` | Hizmet geçici olarak devre dışı, daha sonra yeniden deneyin.                          |
 |  |  |  |
 
-*Yanıt Üstbilgileri*
+*Yanıt üst bilgileri*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Evet          | İstek istemciden alınan kimliği.                                                                   |
-| x-ms-bağıntı kimliği | Evet          | Bağıntı kimliği istemci tarafından aksi durumda bu değer iletilmezse server bağıntı kimliğidir.                   |
-| x-ms-etkinlik kimliği    | Evet          | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu değer, tüm Mutabakatları için kullanılır. |
-| Yeniden deneme sonrasında        | Evet          | Zaman aralığı ile hangi istemci durumu kontrol edebilirsiniz.                                                       |
-| İşlem konumu | Evet          | İşlem durumunu almak için bir kaynak bağlayın.                                                        |
+| x-MS-RequestId     | Evet          | İstemciden alınan istek KIMLIĞI.                                                                   |
+| x-MS-bağıntıkimliği | Evet          | Bağıntı KIMLIĞI istemci tarafından geçirilmemişse, bu değer sunucu bağıntı KIMLIĞIDIR.                   |
+| x-MS-ActivityId    | Evet          | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu değer, herhangi bir mutabakatları için kullanılır. |
+| Yeniden deneme-sonrası        | Evet          | İstemcinin durumu kontrol edebilir aralığı.                                                       |
+| İşlem-konum | Evet          | İşlem durumunu almak için bir kaynağa bağlayın.                                                        |
 |  |  |  |
 
-### <a name="delete-subscription"></a>Aboneliği silme
+### <a name="delete-subscription"></a>Aboneliği Sil
 
-Abone uç noktası silme eylemini belirtilen kimliğe sahip bir aboneliği silme açmasına olanak sağlar.
+Abone uç noktasındaki silme eylemi, kullanıcının belirtilen KIMLIĞE sahip bir aboneliği silmesine izin verir.
 
 *İstek*
 
 **DELETE**
 
-**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{Subscriptionıd}* ?api-version=2017-04-15**
+**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{SubscriptionID}* ? api-Version = 2017-04-15**
 
 | **Parametre adı**  | **Açıklama**                                       |
 |---------------------|-------------------------------------------------------|
-| subscriptionId      | Abonelik kimliği, SaaS.                              |
-| API sürümü         | Bu istek için kullanılacak işlem sürümü. |
+| subscriptionId      | SaaS aboneliğinin KIMLIĞI.                              |
+| api sürümü         | Bu istek için kullanılacak işlemin sürümü. |
 |  |  |
 
 *Üst Bilgiler*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
 |--------------------|--------------| ----------------------------------------------------------|
-| x-ms-requestid     | Hayır           | İstemciden istek izleme için benzersiz bir dize değeri. Bir GUID önerilir. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.                                                           |
-| x-ms-bağıntı kimliği | Hayır           | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu değer, tüm istemci işlemi olayları sunucu tarafında olaylarla ilişkilendirmek için kullanılabilir. Bu sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-| authorization      | Evet          | JSON web token (JWT) taşıyıcı belirteç.                    |
+| x-MS-RequestId     | Hayır           | İstemciden gelen isteği izlemek için benzersiz bir dize değeri. Bir GUID önerilir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır.                                                           |
+| x-MS-bağıntıkimliği | Hayır           | İstemcideki işlem için benzersiz bir dize değeri. Bu değer, istemci işlemindeki tüm olayları sunucu tarafında bulunan olaylar ile ilişkilendirmek içindir. Bu sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır. |
+| yetkisi      | Evet          | JSON Web belirteci (JWT) taşıyıcı belirteci.                    |
 |  |  |  |
 
 *Yanıt kodları*
 
 | **HTTP durum kodu** | **Hata kodu**     | **Açıklama**                                                           |
 |----------------------|--------------------|---------------------------------------------------------------------------|
-| 202                  | `Accepted`           | SaaS abonelik etkinleştirme için belirli bir plan aldı.                   |
-| 400                  | `BadRequest`         | Ya da üst bilgileri eksik olan veya JSON gövdesi yanlış biçimlendirilmiş gereklidir. |
-| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirmek için yetkili değil.                   |
-| 404                  | `NotFound`           | Aboneliğiniz ile sağlanan kimliği bulunamadı                                  |
-| 429                  | `RequestThrottleId`  | Hizmet istekleri işlemekle meşgul, lütfen daha sonra yeniden deneyin.                  |
-| 503                  | `ServiceUnavailable` | Hizmet geçici olarak kullanılamıyor. Lütfen daha sonra yeniden deneyin.                          |
+| 202                  | `Accepted`           | SaaS aboneliği etkinleştirme, belirli bir plan için alındı.                   |
+| 400                  | `BadRequest`         | Gerekli üstbilgiler eksik veya JSON gövdesi hatalı biçimlendirilmiş. |
+| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirme yetkisi yok.                   |
+| 404                  | `NotFound`           | Belirtilen KIMLIĞE sahip abonelik bulunamadı                                  |
+| 429                  | `RequestThrottleId`  | Hizmetin istekleri işlemesi meşgul, lütfen daha sonra yeniden deneyin.                  |
+| 503                  | `ServiceUnavailable` | Hizmet geçici olarak devre dışı. Lütfen daha sonra yeniden deneyin.                          |
 |  |  |  |
 
-'İşlemi-konum' üst bilgisi, istek işlemin durumu için 202 yanıt, iletişim kurun. Kimlik doğrulaması diğer Market API'leri ile aynıdır.
+202 yanıtı için, ' Operation-Location ' üstbilgisindeki istek işleminin durumunu izleyin. Kimlik doğrulaması, diğer Market API 'Leri ile aynıdır.
 
-*Yanıt Üstbilgileri*
+*Yanıt üst bilgileri*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Evet          | İstek istemciden alınan kimliği.                                                                   |
-| x-ms-bağıntı kimliği | Evet          | Bağıntı kimliği istemci tarafından aksi takdirde bu aktarılırsa server bağıntı kimliğidir.                   |
-| x-ms-etkinlik kimliği    | Evet          | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu, tüm Mutabakatları için kullanılır. |
-| Yeniden deneme sonrasında        | Evet          | Zaman aralığı ile hangi istemci durumu kontrol edebilirsiniz.                                                       |
-| İşlem konumu | Evet          | İşlem durumunu almak için bir kaynak bağlayın.                                                        |
+| x-MS-RequestId     | Evet          | İstemciden alınan istek KIMLIĞI.                                                                   |
+| x-MS-bağıntıkimliği | Evet          | İlişki KIMLIĞI, istemci tarafından geçirilmemişse, bu, sunucu bağıntı KIMLIĞIDIR.                   |
+| x-MS-ActivityId    | Evet          | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu, herhangi bir mutabakatları için kullanılır. |
+| Yeniden deneme-sonrası        | Evet          | İstemcinin durumu kontrol edebilir aralığı.                                                       |
+| İşlem-konum | Evet          | İşlem durumunu almak için bir kaynağa bağlayın.                                                        |
 |   |  |  |
 
-### <a name="get-operation-status"></a>İşlem durumunu Al
+### <a name="get-operation-status"></a>Işlem durumunu al
 
-Bu uç noktayı (abonelik/Aboneliği Kaldır/Değiştir planı) bir tetiklenen zaman uyumsuz işlemin durumunu izlemek kullanıcı sağlar.
+Bu uç nokta, kullanıcının tetiklenen bir zaman uyumsuz işlemin durumunu izlemesine olanak tanır (abonelik/abonelik kaldırma/değişiklik planı).
 
 *İstek*
 
 **GET**
 
-**https://marketplaceapi.microsoft.com/api/saas/operations/ *{Operationıd}* ?api-version=2017-04-15**
+**https://marketplaceapi.microsoft.com/api/saas/operations/ *{operationId}* ? api-Version = 2017-04-15**
 
 | **Parametre adı**  | **Açıklama**                                       |
 |---------------------|-------------------------------------------------------|
-| operationId         | Tetiklenen işlem benzersiz kimliği.                |
-| API sürümü         | Bu istek için kullanılacak işlem sürümü. |
+| operationId         | Tetiklenen işlemin benzersiz KIMLIĞI.                |
+| api sürümü         | Bu istek için kullanılacak işlemin sürümü. |
 |  |  |
 
 *Üst Bilgiler*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                                                                                                                                                  |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Hayır           | İstemciden istek izleme için benzersiz bir dize değeri. Bir GUID önerilir. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.   |
-| x-ms-bağıntı kimliği | Hayır           | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu değer, tüm istemci işlemi olayları sunucu tarafında olaylarla ilişkilendirmek için kullanılabilir. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.  |
-| authorization      | Evet          | JSON web token (JWT) taşıyıcı belirteç.                    |
+| x-MS-RequestId     | Hayır           | İstemciden gelen isteği izlemek için benzersiz bir dize değeri. Bir GUID önerilir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır.   |
+| x-MS-bağıntıkimliği | Hayır           | İstemcideki işlem için benzersiz bir dize değeri. Bu değer, istemci işlemindeki tüm olayları sunucu tarafında bulunan olaylar ile ilişkilendirmek içindir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır.  |
+| yetkisi      | Evet          | JSON Web belirteci (JWT) taşıyıcı belirteci.                    |
 |  |  |  | 
 
 *Yanıt gövdesi*
@@ -331,58 +332,58 @@ Bu uç noktayı (abonelik/Aboneliği Kaldır/Değiştir planı) bir tetiklenen z
 
 | **Parametre adı** | **Veri türü** | **Açıklama**                                                                                                                                               |
 |--------------------|---------------|-------------------------------------------------------------------------------------------|
-| id                 | String        | İşlemin kimliği.                                                                      |
-| status             | Enum          | İşlem durumu aşağıdakilerden biri: `In Progress`, `Succeeded`, veya `Failed`.          |
-| resourceLocation   | String        | Oluşturulan veya değiştirilen aboneliğinize bağlayın. Bu, istemci güncelleştirilen durumu post işlemi almak için yardımcı olur. Bu değer için ayarlanmadı `Unsubscribe` operations. |
-| Oluşturulan            | DateTime      | İşlem oluşturma zamanı UTC diliminde saat.                                                           |
-| Son değiştirme       | DateTime      | Son güncelleştirme işlemi UTC diliminde saat.                                                      |
+| id                 | Dize        | İşlemin KIMLIĞI.                                                                      |
+| status             | Sabit Listesi          | İşlem durumu, aşağıdakilerden biri: `In Progress`, `Succeeded`veya `Failed`.          |
+| resourceLocation   | Dize        | Oluşturulan veya değiştirilen aboneliğin bağlantısı. Bu, istemcinin güncelleştirilmiş durum post işlemini almasını sağlar. Bu değer `Unsubscribe` işlemler için ayarlanmadı. |
+| yaratıl            | DateTime      | UTC olarak işlem oluşturma süresi.                                                           |
+| lastModified       | DateTime      | UTC olarak işlemdeki son güncelleştirme.                                                      |
 |  |  |  |
 
 *Yanıt kodları*
 
 | **HTTP durum kodu** | **Hata kodu**     | **Açıklama**                                                              |
 |----------------------|--------------------|------------------------------------------------------------------------------|
-| 200                  | `OK`                 | Get isteği başarıyla çözümlendi ve yanıt gövdesi içerir.    |
-| 400                  | `BadRequest`         | Ya da, üst bilgiler eksik veya geçersiz bir API sürümü belirtildi gereklidir. |
-| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirmek için yetkili değil.                      |
-| 404                  | `NotFound`           | Abonelik belirtilen kimliğe sahip bulunamadı                                     |
-| 429                  | `RequestThrottleId`  | Hizmetidir istekleri işlemekle meşgul, daha sonra yeniden deneyin.                     |
-| 503                  | `ServiceUnavailable` | Hizmet olduğu aşağı geçici olarak, daha sonra yeniden deneyin.                             |
+| 200                  | `OK`                 | Get isteği başarıyla çözümlendi ve gövde yanıtı içeriyor.    |
+| 400                  | `BadRequest`         | Gerekli üstbilgiler eksik ya da geçersiz bir api sürümü belirtildi. |
+| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirme yetkisi yok.                      |
+| 404                  | `NotFound`           | Verilen KIMLIĞE sahip abonelik bulunamadı.                                     |
+| 429                  | `RequestThrottleId`  | Hizmet istekleri işlemekle meşgul, daha sonra yeniden deneyin.                     |
+| 503                  | `ServiceUnavailable` | Hizmet geçici olarak devre dışı, daha sonra yeniden deneyin.                             |
 |  |  |  |
 
-*Yanıt Üstbilgileri*
+*Yanıt üst bilgileri*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Evet          | İstek istemciden alınan kimliği.                                                                   |
-| x-ms-bağıntı kimliği | Evet          | Bağıntı kimliği istemci tarafından aksi takdirde bu aktarılırsa server bağıntı kimliğidir.                   |
-| x-ms-etkinlik kimliği    | Evet          | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu, tüm Mutabakatları için kullanılır. |
-| Yeniden deneme sonrasında        | Evet          | Zaman aralığı ile hangi istemci durumu kontrol edebilirsiniz.                                                       |
+| x-MS-RequestId     | Evet          | İstemciden alınan istek KIMLIĞI.                                                                   |
+| x-MS-bağıntıkimliği | Evet          | İlişki KIMLIĞI, istemci tarafından geçirilmemişse, bu, sunucu bağıntı KIMLIĞIDIR.                   |
+| x-MS-ActivityId    | Evet          | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu, herhangi bir mutabakatları için kullanılır. |
+| Yeniden deneme-sonrası        | Evet          | İstemcinin durumu kontrol edebilir aralığı.                                                       |
 |  |  |  |
 
-### <a name="get-subscription"></a>Aboneliği edinin
+### <a name="get-subscription"></a>Abonelik al
 
-Get eylemini abone uç noktası ile belirtilen kaynak tanımlayıcı bir abonelik almak olanak tanır.
+Abone ol uç noktasındaki alma eylemi, kullanıcının belirli bir kaynak tanımlayıcısına sahip bir abonelik almasına izin verir.
 
 *İstek*
 
 **GET**
 
-**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{Subscriptionıd}* ?api-version=2017-04-15**
+**https://marketplaceapi.microsoft.com/api/saas/subscriptions/ *{SubscriptionID}* ? api-Version = 2017-04-15**
 
 | **Parametre adı**  | **Açıklama**                                       |
 |---------------------|-------------------------------------------------------|
-| subscriptionId      | Abonelik kimliği, SaaS.                              |
-| API sürümü         | Bu istek için kullanılacak işlem sürümü. |
+| subscriptionId      | SaaS aboneliğinin KIMLIĞI.                              |
+| api sürümü         | Bu istek için kullanılacak işlemin sürümü. |
 |  |  |
 
 *Üst Bilgiler*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                           |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                           |
 |--------------------|--------------|-----------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Hayır           | İstemci, tercihen bir GUID istek izleme için benzersiz bir dize değeri. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.                                                           |
-| x-ms-bağıntı kimliği | Hayır           | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu değer, tüm istemci işlemi olayları sunucu tarafında olaylarla ilişkilendirmek için kullanılabilir. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-| authorization      | Evet          | JSON web token (JWT) taşıyıcı belirteç.                                                                    |
+| x-MS-RequestId     | Hayır           | İstemciden gelen isteği izlemeye yönelik benzersiz bir dize değeri, tercihen bir GUID. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır.                                                           |
+| x-MS-bağıntıkimliği | Hayır           | İstemcideki işlem için benzersiz bir dize değeri. Bu değer, istemci işlemindeki tüm olayları sunucu tarafında bulunan olaylar ile ilişkilendirmek içindir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır. |
+| yetkisi      | Evet          | JSON Web belirteci (JWT) taşıyıcı belirteci.                                                                    |
 |  |  |  |
 
 *Yanıt gövdesi*
@@ -401,41 +402,41 @@ Get eylemini abone uç noktası ile belirtilen kaynak tanımlayıcı bir aboneli
 
 | **Parametre adı**     | **Veri türü** | **Açıklama**                               |
 |------------------------|---------------|-----------------------------------------------|
-| id                     | String        | Azure abonelik kaynak kimliği, SaaS.    |
-| OfferId                | String        | Teklif kullanıcıya abone kimliği.         |
-| Planıd                 | String        | Bir kullanıcı abone kimliği planlayın.          |
-| saasSubscriptionName   | String        | SaaS abonelik adı.                |
-| saasSubscriptionStatus | Enum          | İşlem durumu.  Aşağıdakilerden biri:  <br/> - `Subscribed`: Abonelik etkin değil.  <br/> - `Pending`: Kullanıcı kaynak oluşturabilirsiniz, ancak ISV tarafından etkinleştirilmez.   <br/> - `Unsubscribed`: Kullanıcı iptal etti.   <br/> - `Suspended`: Kullanıcı aboneliği askıya aldı.   <br/> - `Deactivated`:  Azure abonelik askıya alındı.  |
-| Oluşturulan                | DateTime      | Abonelik oluşturma UTC zaman damgası değeri. |
-| Son değiştirme           | DateTime      | Abonelik UTC zaman damgası değeri değiştirildi. |
+| id                     | Dize        | Azure 'da SaaS Abonelik kaynağının KIMLIĞI.    |
+| OfferId                | Dize        | Kullanıcının abone olduğu teklif KIMLIĞI.         |
+| PlanID                 | Dize        | Kullanıcının abone olduğu plan KIMLIĞI.          |
+| saasSubscriptionName   | Dize        | SaaS aboneliğinin adı.                |
+| saasSubscriptionStatus | Sabit Listesi          | İşlem durumu.  Aşağıdakilerden biri:  <br/> - `Subscribed`: Abonelik etkin.  <br/> - `Pending`: Kullanıcı kaynağı oluşturma, ancak ISV tarafından etkinleştirilmemiş.   <br/> - `Unsubscribed`: kullanıcının aboneliği kaldırılmış.   <br/> - `Suspended`: Kullanıcı aboneliği askıya aldı.   <br/> - `Deactivated`: Azure aboneliği askıya alındı.  |
+| yaratıl                | DateTime      | UTC 'de abonelik oluşturma zaman damgası değeri. |
+| lastModified           | DateTime      | Abonelik UTC 'de zaman damgası değeri değiştirdi. |
 |  |  |  |
 
 *Yanıt kodları*
 
 | **HTTP durum kodu** | **Hata kodu**     | **Açıklama**                                                              |
 |----------------------|--------------------|------------------------------------------------------------------------------|
-| 200                  | `OK`                 | Get isteği başarıyla çözümlendi ve yanıt gövdesi içerir.    |
-| 400                  | `BadRequest`         | Ya da, üst bilgiler eksik veya geçersiz bir API sürümü belirtildi gereklidir. |
-| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirmek için yetkili değil.                      |
-| 404                  | `NotFound`           | Aboneliğiniz ile sağlanan kimliği bulunamadı                                     |
-| 429                  | `RequestThrottleId`  | Hizmetidir istekleri işlemekle meşgul, daha sonra yeniden deneyin.                     |
-| 503                  | `ServiceUnavailable` | Hizmet olduğu aşağı geçici olarak, daha sonra yeniden deneyin.                             |
+| 200                  | `OK`                 | Get isteği başarıyla çözümlendi ve gövde yanıtı içeriyor.    |
+| 400                  | `BadRequest`         | Gerekli üstbilgiler eksik ya da geçersiz bir api sürümü belirtildi. |
+| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirme yetkisi yok.                      |
+| 404                  | `NotFound`           | Belirtilen KIMLIĞE sahip abonelik bulunamadı                                     |
+| 429                  | `RequestThrottleId`  | Hizmet istekleri işlemekle meşgul, daha sonra yeniden deneyin.                     |
+| 503                  | `ServiceUnavailable` | Hizmet geçici olarak devre dışı, daha sonra yeniden deneyin.                             |
 |  |  |  |
 
-*Yanıt Üstbilgileri*
+*Yanıt üst bilgileri*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Evet          | İstek istemciden alınan kimliği.                                                                   |
-| x-ms-bağıntı kimliği | Evet          | Bağıntı kimliği istemci tarafından aksi takdirde bu aktarılırsa server bağıntı kimliğidir.                   |
-| x-ms-etkinlik kimliği    | Evet          | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu, tüm Mutabakatları için kullanılır. |
-| Yeniden deneme sonrasında        | Hayır           | Zaman aralığı ile hangi istemci durumu kontrol edebilirsiniz.                                                       |
-| eTag               | Evet          | İşlem durumunu almak için bir kaynak bağlayın.                                                        |
+| x-MS-RequestId     | Evet          | İstemciden alınan istek KIMLIĞI.                                                                   |
+| x-MS-bağıntıkimliği | Evet          | İlişki KIMLIĞI, istemci tarafından geçirilmemişse, bu, sunucu bağıntı KIMLIĞIDIR.                   |
+| x-MS-ActivityId    | Evet          | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu, herhangi bir mutabakatları için kullanılır. |
+| Yeniden deneme-sonrası        | Hayır           | İstemcinin durumu kontrol edebilir aralığı.                                                       |
+| Özelliği               | Evet          | İşlem durumunu almak için bir kaynağa bağlayın.                                                        |
 |  |  |  |
 
-### <a name="get-subscriptions"></a>Abonelikleri Al
+### <a name="get-subscriptions"></a>Abonelikleri al
 
-Abonelik uç noktasında alma işlemi ISV tüm abonelikler için tüm teklifleri almak açmasına olanak sağlar.
+Abonelikler üzerinde eylem al uç noktası, bir kullanıcının ISV 'den Tüm tekliflere yönelik tüm abonelikleri almasına izin verir.
 
 *İstek*
 
@@ -445,16 +446,16 @@ Abonelik uç noktasında alma işlemi ISV tüm abonelikler için tüm teklifleri
 
 | **Parametre adı**  | **Açıklama**                                       |
 |---------------------|-------------------------------------------------------|
-| API sürümü         | Bu istek için kullanılacak işlem sürümü. |
+| api sürümü         | Bu istek için kullanılacak işlemin sürümü. |
 |  |  |
 
 *Üst Bilgiler*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                           |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                           |
 |--------------------|--------------|-----------------------------------------------------------|
-| x-ms-requestid     | Hayır           | İstemciden istek izleme için benzersiz bir dize değeri. Bir GUID önerilir. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan.             |
-| x-ms-bağıntı kimliği | Hayır           | İstemci üzerinde işlem için benzersiz bir dize değeri. Bu değer, tüm istemci işlemi olayları sunucu tarafında olaylarla ilişkilendirmek için kullanılabilir. Bu değer sağlanmazsa, bir oluşturulur ve yanıt üst bilgilerinde sağlanan. |
-| authorization      | Evet          | JSON web token (JWT) taşıyıcı belirteç.                    |
+| x-MS-RequestId     | Hayır           | İstemciden gelen isteği izlemek için benzersiz bir dize değeri. Bir GUID önerilir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır.             |
+| x-MS-bağıntıkimliği | Hayır           | İstemcideki işlem için benzersiz bir dize değeri. Bu değer, istemci işlemindeki tüm olayları sunucu tarafında bulunan olaylar ile ilişkilendirmek içindir. Bu değer sağlanmazsa, bir tane oluşturulur ve yanıt üst bilgilerinde sağlanır. |
+| yetkisi      | Evet          | JSON Web belirteci (JWT) taşıyıcı belirteci.                    |
 |  |  |  |
 
 *Yanıt gövdesi*
@@ -473,40 +474,40 @@ Abonelik uç noktasında alma işlemi ISV tüm abonelikler için tüm teklifleri
 
 | **Parametre adı**     | **Veri türü** | **Açıklama**                               |
 |------------------------|---------------|-----------------------------------------------|
-| id                     | String        | Azure abonelik kaynak kimliği, SaaS    |
-| OfferId                | String        | Teklif kullanıcıya abone kimliği         |
-| Planıd                 | String        | Plan kullanıcı abone kimliği          |
-| saasSubscriptionName   | String        | SaaS abonelik adı                |
-| saasSubscriptionStatus | Enum          | İşlem durumu.  Aşağıdakilerden biri:  <br/> - `Subscribed`: Abonelik etkin değil.  <br/> - `Pending`: Kullanıcı kaynak oluşturabilirsiniz, ancak ISV tarafından etkinleştirilmez.   <br/> - `Unsubscribed`: Kullanıcı iptal etti.   <br/> - `Suspended`: Kullanıcı aboneliği askıya aldı.   <br/> - `Deactivated`:  Azure abonelik askıya alındı.  |
-| Oluşturulan                | DateTime      | Abonelik oluşturma zaman damgası değeri UTC |
-| Son değiştirme           | DateTime      | Abonelik UTC zaman damgası değeri değiştirildi |
+| id                     | Dize        | Azure 'da SaaS Abonelik kaynağının KIMLIĞI    |
+| OfferId                | Dize        | Kullanıcının abone olduğu teklif KIMLIĞI         |
+| PlanID                 | Dize        | Kullanıcının abone olduğu plan KIMLIĞI          |
+| saasSubscriptionName   | Dize        | SaaS aboneliğinin adı                |
+| saasSubscriptionStatus | Sabit Listesi          | İşlem durumu.  Aşağıdakilerden biri:  <br/> - `Subscribed`: Abonelik etkin.  <br/> - `Pending`: Kullanıcı kaynağı oluşturma, ancak ISV tarafından etkinleştirilmemiş.   <br/> - `Unsubscribed`: kullanıcının aboneliği kaldırılmış.   <br/> - `Suspended`: Kullanıcı aboneliği askıya aldı.   <br/> - `Deactivated`: Azure aboneliği askıya alındı.  |
+| yaratıl                | DateTime      | UTC 'de abonelik oluşturma zaman damgası değeri |
+| lastModified           | DateTime      | UTC 'de abonelik değiştirme zaman damgası değeri |
 |  |  |  |
 
 *Yanıt kodları*
 
 | **HTTP durum kodu** | **Hata kodu**     | **Açıklama**                                                              |
 |----------------------|--------------------|------------------------------------------------------------------------------|
-| 200                  | `OK`                 | Get isteği başarıyla çözümlendi ve yanıt gövdesi içerir.    |
-| 400                  | `BadRequest`         | Ya da, üst bilgiler eksik veya geçersiz bir API sürümü belirtildi gereklidir. |
-| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirmek için yetkili değil.                      |
-| 404                  | `NotFound`           | Aboneliğiniz ile sağlanan kimliği bulunamadı                                     |
-| 429                  | `RequestThrottleId`  | Hizmet istekleri işlemekle meşgul, lütfen daha sonra yeniden deneyin.                     |
-| 503                  | `ServiceUnavailable` | Hizmet geçici olarak kullanılamıyor. Lütfen daha sonra yeniden deneyin.                             |
+| 200                  | `OK`                 | Get isteği başarıyla çözümlendi ve gövde yanıtı içeriyor.    |
+| 400                  | `BadRequest`         | Gerekli üstbilgiler eksik ya da geçersiz bir api sürümü belirtildi. |
+| 403                  | `Forbidden`          | Çağıranın bu işlemi gerçekleştirme yetkisi yok.                      |
+| 404                  | `NotFound`           | Belirtilen KIMLIĞE sahip abonelik bulunamadı                                     |
+| 429                  | `RequestThrottleId`  | Hizmetin istekleri işlemesi meşgul, lütfen daha sonra yeniden deneyin.                     |
+| 503                  | `ServiceUnavailable` | Hizmet geçici olarak devre dışı. Lütfen daha sonra yeniden deneyin.                             |
 |  |  |  |
 
-*Yanıt Üstbilgileri*
+*Yanıt üst bilgileri*
 
-| **Üstbilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
+| **Üst bilgi anahtarı**     | **Gerekli** | **Açıklama**                                                                                        |
 |--------------------|--------------|--------------------------------------------------------------------------------------------------------|
-| x-ms-requestid     | Evet          | İstek istemciden alınan kimliği.                                                                   |
-| x-ms-bağıntı kimliği | Evet          | Bağıntı kimliği istemci tarafından aksi takdirde bu aktarılırsa server bağıntı kimliğidir.                   |
-| x-ms-etkinlik kimliği    | Evet          | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu, tüm Mutabakatları için kullanılır. |
-| Yeniden deneme sonrasında        | Hayır           | Zaman aralığı ile hangi istemci durumu kontrol edebilirsiniz.                                                       |
+| x-MS-RequestId     | Evet          | İstemciden alınan istek KIMLIĞI.                                                                   |
+| x-MS-bağıntıkimliği | Evet          | İlişki KIMLIĞI, istemci tarafından geçirilmemişse, bu, sunucu bağıntı KIMLIĞIDIR.                   |
+| x-MS-ActivityId    | Evet          | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu, herhangi bir mutabakatları için kullanılır. |
+| Yeniden deneme-sonrası        | Hayır           | İstemcinin durumu kontrol edebilir aralığı.                                                       |
 |  |  |  |
 
 ### <a name="saas-webhook"></a>SaaS Web kancası
 
-Bir SaaS Web kancası değişiklikleri SaaS hizmeti için proaktif olarak bildirmek için kullanılır. Bu GÖNDERİ API kimliği doğrulanmamış olması beklenir ve Microsoft hizmeti tarafından çağrılır. SaaS hizmeti doğrulamak ve Web kancası bildirim eylemi gerçekleştirmeden önce onları yetkilendirmek için API işlemleri çağırmak için bekleniyor. 
+SaaS Web kancası, SaaS hizmetine yönelik değişikliklere karşı bildirimde bulunmak için kullanılır. Bu POST API 'sinin kimliği doğrulanmamış olması beklenir ve Microsoft hizmeti tarafından çağrılacaktır. SaaS hizmetinin, Web kancası bildiriminde işlem yapmadan önce doğrulamak ve yetkilendirmek için Operations API 'sini çağırması beklenmektedir. 
 
 *Gövde*
 
@@ -523,17 +524,17 @@ Bir SaaS Web kancası değişiklikleri SaaS hizmeti için proaktif olarak bildir
 
 | **Parametre adı**     | **Veri türü** | **Açıklama**                               |
 |------------------------|---------------|-----------------------------------------------|
-| id  | String       | Tetiklenen işlem benzersiz kimliği.                |
-| activityId   | String        | Hizmet isteği izlemek için benzersiz bir dize değeri. Bu, tüm Mutabakatları için kullanılır.               |
-| subscriptionId                     | String        | Azure abonelik kaynak kimliği, SaaS.    |
-| OfferId                | String        | Teklif kullanıcıya abone kimliği. Yalnızca "Güncelleştir" eylemi ile sağlanır.        |
-| publisherId                | String        | Yayımcı kimliği SaaS teklifi         |
-| Planıd                 | String        | Bir kullanıcı abone kimliği planlayın. Yalnızca "Güncelleştir" eylemi ile sağlanır.          |
-| action                 | String        | Bu bildirim tetikleme eylem. Olası değerler - etkinleştirme, silme, askıda kalma, eski duruma getirme, güncelleştirme          |
-| Zaman damgası                 | String        | Bu bildirim tetiklendiğinde UTC zaman damgası değeri.          |
+| id  | Dize       | Tetiklenen işlemin benzersiz KIMLIĞI.                |
+| Etkinlik kimliği   | Dize        | Hizmetten gelen isteği izlemek için benzersiz bir dize değeri. Bu, herhangi bir mutabakatları için kullanılır.               |
+| subscriptionId                     | Dize        | Azure 'da SaaS Abonelik kaynağının KIMLIĞI.    |
+| OfferId                | Dize        | Kullanıcının abone olduğu teklif KIMLIĞI. Yalnızca "Güncelleştir" eylemiyle birlikte sunulur.        |
+| PublisherId                | Dize        | SaaS teklifinin yayımcı KIMLIĞI         |
+| PlanID                 | Dize        | Kullanıcının abone olduğu plan KIMLIĞI. Yalnızca "Güncelleştir" eylemiyle birlikte sunulur.          |
+| action                 | Dize        | Bu bildirimi tetikleyen eylem. Olası değerler-etkinleştirme, silme, askıya alma, yeniden devreye alma, güncelleştirme          |
+| Ilişkin                 | Dize        | Bu bildirimin tetiklendiği zaman zaman damgası değeri UTC.          |
 |  |  |  |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Geliştiriciler ayrıca programlı bir şekilde alabilir ve işleme iş yükleri, teklifler ve yayımcı profilini kullanarak [bulut iş ortağı portalı REST API'lerini](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-api-overview).
+Geliştiriciler, [bulut iş ortağı PORTALı REST API 'lerini](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-api-overview)kullanarak iş yüklerini, teklifleri ve yayımcı profillerini de programlamayla alabilir ve düzenleyebilir.

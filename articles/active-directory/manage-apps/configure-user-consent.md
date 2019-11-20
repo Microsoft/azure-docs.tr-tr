@@ -1,6 +1,6 @@
 ---
-title: Bir uygulamaya - Azure Active Directory kullanıcı onayı yapılandırın | Microsoft Docs
-description: Kullanıcılar uygulama izinleri onay şekilde yönetmeyi öğrenin. Yönetici onayı vererek kullanıcı deneyimini kolaylaştırabilirsiniz. Bu yöntemler, Azure Active Directory (Azure AD) kiracınız içindeki tüm son kullanıcılar için geçerlidir.
+title: Bir uygulama için Kullanıcı onayı Yapılandırma-Azure Active Directory | Microsoft Docs
+description: Kullanıcıların uygulama izinlerini kabul etme şeklini yönetmeyi öğrenin. Yönetici onayı vererek Kullanıcı deneyimini basitleştirebilirsiniz. Bu yöntemler Azure Active Directory (Azure AD) kiracınızdaki tüm son kullanıcılar için geçerlidir.
 services: active-directory
 author: msmimart
 manager: CelesteDG
@@ -12,69 +12,70 @@ ms.date: 10/22/2018
 ms.author: mimart
 ms.reviewer: arvindh
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4951984d05e75b0271cf6592c77c54ad13678994
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 6bd746e79bc9d70be23771f97b1757f090f6375f
+ms.sourcegitcommit: d4c9821b31f5a12ab4cc60036fde00e7d8dc4421
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67476547"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71709282"
 ---
-# <a name="configure-the-way-end-users-consent-to-an-application-in-azure-active-directory"></a>Son kullanıcılar Azure Active Directory'de bir uygulamaya onay şekilde yapılandırın
-Kullanıcılar uygulama izinleri onay şekilde yapılandırmayı öğrenin. Yönetici onayı vererek kullanıcı deneyimini kolaylaştırabilirsiniz. Bu makalede, kullanıcı onayı yapılandırabileceğiniz farklı yollar sunar. Azure Active Directory (Azure AD) kiracınız içindeki tüm son kullanıcılar için yöntemleri uygulayın. 
+# <a name="configure-the-way-end-users-consent-to-an-application-in-azure-active-directory"></a>Azure Active Directory ' deki bir uygulamaya Son Kullanıcı onay biçimini yapılandırma
+Kullanıcıların uygulama izinlerini kabul etme şeklini nasıl yapılandıracağınızı öğrenin. Yönetici onayı vererek Kullanıcı deneyimini basitleştirebilirsiniz. Bu makalede, Kullanıcı onayını yapılandırabileceğiniz farklı yollar sunulmaktadır. Yöntemler, Azure Active Directory (Azure AD) kiracınızdaki tüm son kullanıcılar için geçerlidir. 
 
-Uygulamalara yönelik daha fazla bilgi için bkz: [Azure Active Directory onay çerçevesine](../develop/consent-framework.md).
+Uygulamalara yönelik yarışmaya yönelik daha fazla bilgi için bkz. [Azure Active Directory izin çerçevesi](../develop/consent-framework.md).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Prerequisites
 
-Yönetici onayı verme genel yönetici, uygulama Yöneticisi veya bir bulut uygulaması Yöneticisi oturum açmanız gerekir.
+Yönetici onayı verme, genel yönetici, uygulama Yöneticisi veya bulut uygulama Yöneticisi olarak oturum açmanızı gerektirir.
 
-Uygulamalara erişimi kısıtlamak için kullanıcı atama isteme ve ardından kullanıcıları veya grupları uygulamaya atama gerekir.  Daha fazla bilgi için [kullanıcıları ve grupları atama yöntemleri](methods-for-assigning-users-and-groups.md).
+Uygulamalara erişimi kısıtlamak için Kullanıcı ataması yapmanız ve ardından kullanıcılara veya grupları uygulamaya atamanız gerekir.  Daha fazla bilgi için bkz. [kullanıcıları ve grupları atamaya yönelik yöntemler](methods-for-assigning-users-and-groups.md).
 
-## <a name="grant-admin-consent-to-enterprise-apps-in-the-azure-portal"></a>Azure portalının kurumsal uygulamalar için yönetici izni verme
+## <a name="grant-admin-consent-to-enterprise-apps-in-the-azure-portal"></a>Azure portal kurumsal uygulamalara yönetici onayı verme
 
-Kurumsal uygulama için yönetici onayı vermek için:
+Bir kurumsal uygulamaya yönetici onayı vermek için:
 
-1. Oturum [Azure portalında](https://portal.azure.com) genel yönetici, uygulama Yöneticisi veya bir bulut uygulaması Yöneticisi olarak.
-2. Tıklayın **tüm hizmetleri** sol gezinti menüsünün üstünde. **Azure Active Directory uzantısını** açılır.
-3. Filtre Arama kutusuna **"Azure Active Directory"** seçip **Azure Active Directory** öğesi.
-4. Gezinti menüden **kurumsal uygulamalar**.
-5. Onay için uygulamayı seçin.
-6. Seçin **izinleri** ve ardından **yönetici onayı vermek**. Uygulamayı yönetmek oturum açmanız istenir.
-7. Uygulama için yönetici onayı vermek için izinleri olan bir hesapla oturum açın. 
-8. Uygulama izni vermiş olursunuz.
+1. [Azure Portal](https://portal.azure.com) genel yönetici, uygulama Yöneticisi veya bulut uygulama Yöneticisi olarak oturum açın.
+2. Sol taraftaki Gezinti menüsünün en üstünde bulunan **tüm hizmetler** ' e tıklayın. **Azure Active Directory uzantısı** açılır.
+3. Filtre arama kutusuna **"Azure Active Directory"** yazın ve **Azure Active Directory** öğesini seçin.
+4. Gezinti menüsünde **Kurumsal uygulamalar**' a tıklayın.
+5. İzin için uygulamayı seçin.
+6. **İzinler** ' i seçin ve ardından **yönetici izni ver**' e tıklayın. Uygulamayı yönetmek için oturum açmanız istenir.
+7. Uygulama için yönetici onayı verme izinlerine sahip bir hesapla oturum açın. 
+8. Uygulama izinleri onayı.
 
-Bu seçenek, yalnızca uygulama ise çalışır: 
+Bu seçenek yalnızca uygulama şu olduğunda geçerlidir: 
 
 - Kiracınızda kayıtlı veya
-- Başka bir Azure AD kiracısına kayıtlı ve en az bir son kullanıcı tarafından onaylı. Son kullanıcı bir uygulamaya onay verdi sonra Azure AD uygulama listeler **Kurumsal uygulamaları** Azure portalında.
+- Başka bir Azure AD kiracısına kaydolmuş ve en az bir son kullanıcı tarafından onaylanan. Son Kullanıcı bir uygulamaya ulaştıktan sonra, Azure AD Azure portal **Kurumsal uygulamalar** altında uygulamayı listeler.
 
-## <a name="grant-admin-consent-when-registering-an-app-in-the-azure-portal"></a>Azure portalında bir uygulama kaydı sırasında verme yönetici onayı
+## <a name="grant-admin-consent-when-registering-an-app-in-the-azure-portal"></a>Azure portal uygulama kaydederken yönetici onayı verme
 
-Bir uygulama kaydı sırasında yönetici onayı vermek için: 
+Bir uygulamayı kaydederken yönetici onayı vermek için: 
 
-1. [Azure portalında](https://portal.azure.com) genel yönetici olarak oturum açın.
-2. Gidin **uygulama kayıtları** dikey penceresi.
-3. Uygulama onayı için seçin.
-4. Seçin **API izinleri**.
-5. Tıklayın **yönetici onayı vermek**.
+1. [Azure Portal](https://portal.azure.com) genel yönetici olarak oturum açın.
+2. **Uygulama kayıtları** dikey penceresine gidin.
+3. Onay için uygulamayı seçin.
+4. **API izinleri**' ni seçin.
+5. **Yönetici Izni ver**' e tıklayın.
 
 
-## <a name="grant-admin-consent-through-a-url-request"></a>Bir URL isteği aracılığıyla yönetici izni verme
+## <a name="grant-admin-consent-through-a-url-request"></a>URL isteği için yönetici onayı verme
 
 Bir URL isteği aracılığıyla yönetici onayı vermek için:
 
-1. Bir istek oluşturmak *login.microsoftonline.com* , uygulama yapılandırmaları olan ve üzerinde ekleme `&prompt=admin_consent`. 
-2. Yönetici kimlik bilgilerinizle oturum sonra uygulamayı tüm kullanıcılar için izin verildi.
+1. Uygulama yapılandırlarınızla *login.microsoftonline.com* için bir istek oluşturun ve `&prompt=admin_consent` ' e ekleyin. Bu URL şöyle görünür: `https://login.microsoftonline.com/<tenant-id>/oauth2/authorize?client_id=<client id>&response_type=code&redirect_uri=<Your-Redirect-URI-Https-Encoded>&nonce=1234&resource=<your-resource-Https-encoded>&prompt=admin_consent`
+2. Yönetici kimlik bilgileriyle oturum açtıktan sonra, uygulamaya tüm kullanıcılar için izin verildi.
 
 
-## <a name="force-user-consent-through-a-url-request"></a>Kullanıcı onayı bir URL isteği ile zorla
+## <a name="force-user-consent-through-a-url-request"></a>URL isteği aracılığıyla Kullanıcı onayını zorla
 
-Son kullanıcıların bir uygulama kimlik doğrulaması her zaman onayı istemek için ekleme `&prompt=consent` kimlik doğrulaması istek URL'si.
+Son kullanıcıların her kimlik doğrulamasından geçen her seferinde bir uygulamaya onay vermesini gerektirmek için, kimlik doğrulaması istek URL 'sine `&prompt=consent` ekleyin.
+Bu URL şöyle görünür: `https://login.microsoftonline.com/<tenant-id>/oauth2/authorize?client_id=<client id>&response_type=code&redirect_uri=<Your-Redirect-URI-Https-Encoded>&nonce=1234&resource=<your-resource-Https-encoded>&prompt=consent`
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Onay ve AzureAD uygulamaları ile tümleştirme](../develop/quickstart-v1-integrate-apps-with-azure-ad.md)
+[Uygulamaları AzureAD 'e onay ve Tümleştirme](../develop/quickstart-v1-integrate-apps-with-azure-ad.md)
 
-[Uygulama onayı ve AzureAD v2.0 için kullanarak yakınsanmış](../develop/active-directory-v2-scopes.md)
+[AzureAD v 2.0 yakınsanmış uygulamalar için onay ve Izinler](../develop/active-directory-v2-scopes.md)
 
 [AzureAD StackOverflow](https://stackoverflow.com/questions/tagged/azure-active-directory)

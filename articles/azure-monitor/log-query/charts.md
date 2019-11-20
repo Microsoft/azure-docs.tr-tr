@@ -1,36 +1,30 @@
 ---
-title: Azure izleyici günlüğü sorgularından grafikleri ve diyagramları oluşturma | Microsoft Docs
-description: Günlük verilerinizi farklı şekillerde göstermek için Azure İzleyici'de çeşitli görselleştirmeler açıklar.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici günlük sorgularından grafikler ve diyagramlar oluşturma | Microsoft Docs
+description: Günlük verilerinizi farklı yollarla görüntülemek için Azure Izleyici 'de çeşitli görselleştirmeler açıklanmıştır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 08/16/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 07d0866bd697587da170a00e8077a57035989d32
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 08/16/2018
+ms.openlocfilehash: 34975a1752467c61ea5b329210473eee266c98d1
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60594064"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900410"
 ---
-# <a name="creating-charts-and-diagrams-from-azure-monitor-log-queries"></a>Azure izleyici günlüğü sorgularından grafikleri ve diyagramları oluşturma
+# <a name="creating-charts-and-diagrams-from-azure-monitor-log-queries"></a>Azure Izleyici günlük sorgularından grafikler ve diyagramlar oluşturma
 
 > [!NOTE]
-> Tamamlamanız gereken [Azure İzleyici günlük sorguları toplamalara Gelişmiş](advanced-aggregations.md) dersin tamamlamadan önce.
+> Bu dersi tamamlamadan önce [Azure izleyici günlük sorgularında gelişmiş toplamaları](advanced-aggregations.md) tamamlamanız gerekir.
 
 [!INCLUDE [log-analytics-demo-environment](../../../includes/log-analytics-demo-environment.md)]
 
-Bu makalede, çeşitli görselleştirmeler günlük verilerinizi farklı şekillerde göstermek için Azure İzleyici'de açıklanmaktadır.
+Bu makalede, Azure Izleyici 'de günlük verilerinizi farklı yollarla görüntülemek için çeşitli görselleştirmeler açıklanmaktadır.
 
-## <a name="charting-the-results"></a>Sonuç grafiği
-Son bir saat işletim sistemi vardır kaç bilgisayarın gözden geçirerek başlayın:
+## <a name="charting-the-results"></a>Sonuçları grafikleme
+Son bir saat içinde işletim sistemi başına kaç bilgisayar olduğunu inceleyerek başlayın:
 
 ```Kusto
 Heartbeat
@@ -38,17 +32,17 @@ Heartbeat
 | summarize count(Computer) by OSType  
 ```
 
-Varsayılan olarak, sonuçları bir tablo olarak görüntülenir:
+Varsayılan olarak, sonuçlar tablo olarak görüntülenir:
 
 ![Tablo](media/charts/table-display.png)
 
-Daha iyi bir görünüm elde edin seçin **grafik**ve **pasta** sonuçların görselleştirilmesi için seçeneği:
+Daha iyi bir görünüm elde etmek için **grafik**' i seçin ve sonuçları görselleştirmek için **pasta** seçeneğini belirleyin:
 
-![Pasta grafiği](media/charts/charts-and-diagrams-pie.png)
+![Pasta grafik](media/charts/charts-and-diagrams-pie.png)
 
 
-## <a name="timecharts"></a>Timecharts
-Depo 1 saat ortalama, 50. ve 95. yüzdebirlik değerleri işlemci zamanı gösterir. Sorgu birden fazla seri oluşturur ve hangi serisi zaman grafikte gösterilecek daha sonra seçebilirsiniz:
+## <a name="timecharts"></a>Timegrafiklerim
+1 saatlik depo gözlerinde ortalama, 50. ve 6. yüzdebirlik değeri için işlemci zamanı gösterir. Sorgu birden çok seri oluşturur ve ardından zaman grafiğinde hangi serinin gösterileceğini seçebilirsiniz:
 
 ```Kusto
 Perf
@@ -57,13 +51,13 @@ Perf
 | summarize avg(CounterValue), percentiles(CounterValue, 50, 95)  by bin(TimeGenerated, 1h)
 ```
 
-Seçin **satırı** grafik görüntüleme seçeneği:
+**Çizgi** grafik görüntüleme seçeneğini belirleyin:
 
 ![Çizgi grafik](media/charts/charts-and-diagrams-multiSeries.png)
 
 ### <a name="reference-line"></a>Başvuru çizgisi
 
-Başvuru çizgisi ölçüm, belirli bir eşiği aşılırsa bir kolayca belirlemenize yardımcı olabilir. Grafiğe bir satır eklemek için bir sabit sütun kümesiyle genişletin:
+Başvuru satırı, ölçümün belirli bir eşiği aşmadığını kolayca belirlemenize yardımcı olabilir. Grafiğe satır eklemek için, veri kümesini sabit bir sütun ile genişletin:
 
 ```Kusto
 Perf
@@ -76,7 +70,7 @@ Perf
 ![Başvuru çizgisi](media/charts/charts-and-diagrams-multiSeriesThreshold.png)
 
 ## <a name="multiple-dimensions"></a>Birden çok boyut
-Birden çok ifadelerinde `by` yan tümcesi `summarize` birden çok satır sonuçları her değerlerinin birleşimi için bir tane oluşturun.
+`summarize` `by` yan tümcesindeki birden çok ifade, her değer birleşimi için bir tane olmak üzere sonuçlarda birden çok satır oluşturur.
 
 ```Kusto
 SecurityEvent
@@ -84,21 +78,21 @@ SecurityEvent
 | summarize count() by tostring(EventID), AccountType, bin(TimeGenerated, 1h)
 ```
 
-Sonuçları bir grafik olarak görüntüleyin, ilk sütunu kullandığı `by` yan tümcesi. Aşağıdaki örnek, yığılmış sütun grafiği ile gösterir _EventID._ Boyutlar olmalıdır `string` türü, bu örnekte bunu _EventID_ dizeye dönüştürün. 
+Sonuçları bir grafik olarak görüntülediğinizde, `by` yan tümcesindeki ilk sütunu kullanır. Aşağıdaki örnek, _EventID_ kullanılarak yığılmış bir sütun grafiği gösterir. Boyutların `string` türünde olması gerekir, bu nedenle bu örnekte _EventID_ dizeye dönüştürüldü. 
 
-![Çubuk grafik EventID](media/charts/charts-and-diagrams-multiDimension1.png)
+![Çubuk grafik olay kimliği](media/charts/charts-and-diagrams-multiDimension1.png)
 
-Sütun adıyla açılır menüyü seçerek arasında geçiş yapabilirsiniz. 
+Sütun adıyla açılan menüyü seçerek arasında geçiş yapabilirsiniz. 
 
 ![Çubuk grafik AccountType](media/charts/charts-and-diagrams-multiDimension2.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Diğer dersler kullanmak için bkz. [Kusto sorgu dili](/azure/kusto/query/) Azure İzleyici ile günlük verilerini:
+Azure Izleyici günlük verileriyle [kusto sorgu dilini](/azure/kusto/query/) kullanmaya yönelik diğer derslere bakın:
 
 - [Dize işlemleri](string-operations.md)
 - [Tarih ve saat işlemleri](datetime-operations.md)
 - [Toplama işlevleri](aggregations.md)
-- [Gelişmiş toplamaları](advanced-aggregations.md)
+- [Gelişmiş toplamalar](advanced-aggregations.md)
 - [JSON ve veri yapıları](json-data-structures.md)
 - [Gelişmiş sorgu yazma](advanced-query-writing.md)
-- [Birleşimler](joins.md)
+- [Birleştirmeler](joins.md)

@@ -1,5 +1,5 @@
 ---
-title: Microsoft Azure - ExpressRoute - eşdüzey hizmet sağlama bir siteden siteye VPN yapılandırma | Microsoft Docs
+title: "Azure ExpressRoute: Microsoft eşlemesi üzerinden S2S VPN 'i yapılandırma"
 description: IPSec/IKE siteden siteye VPN ağ geçidi kullanarak bir ExpressRoute Microsoft eşleme bağlantı hattı üzerinden azure'a bağlantısı yapılandırın.
 services: expressroute
 author: cherylmc
@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 02/25/2019
 ms.author: cherylmc
 ms.custom: seodec18
-ms.openlocfilehash: f35ed65b25d469b524e7174affecb45ad7c4735c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 89c7e398e24fb48c1829dbaa2811f440c5485a60
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66115721"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74038101"
 ---
 # <a name="configure-a-site-to-site-vpn-over-expressroute-microsoft-peering"></a>ExpressRoute Microsoft eşlemesi üzerinde siteden siteye VPN yapılandırma
 
@@ -24,7 +24,7 @@ Bu makalede, bir ExpressRoute özel bağlantı üzerinden şirket içi ağınız
 >
 >
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
 ## <a name="architecture"></a>Mimarisi
 
@@ -53,7 +53,7 @@ Microsoft eşlemesi üzerinden VPN tünelleri, VPN ağ geçidi kullanarak veya A
 6. (İsteğe bağlı) Güvenlik duvarları ve filtreleme, şirket içi VPN cihazında yapılandırın.
 7. Test ve IPSec iletişimi bir ExpressRoute devresi üzerinden doğrulayın.
 
-## <a name="peering"></a>1. Microsoft eşlemesini yapılandırın
+## <a name="peering"></a>1. Microsoft eşlemesini yapılandırma
 
 ExpressRoute üzerinden bir siteden siteye VPN bağlantısı yapılandırmak için ExpressRoute Microsoft eşlemesi yararlanarak gerekir.
 
@@ -65,9 +65,9 @@ Bağlantı hattı ve Microsoft eşleme yapılandırıldıktan sonra kolayca kull
 
 ![bağlantı hattı](./media/site-to-site-vpn-over-microsoft-peering/ExpressRouteCkt.png)
 
-## <a name="routefilter"></a>2. Rota filtreleri yapılandırma
+## <a name="routefilter"></a>2. yol filtrelerini yapılandırma
 
-Rota filtresi, ExpressRoute bağlantı hattınızın Microsoft eşlemesi üzerinden kullanmak istediğiniz hizmetleri tanımlamanızı sağlar. Bu, aslında bir beyaz liste tüm BGP topluluk değerlerin olur. 
+Rota filtresi, ExpressRoute bağlantı hattınızın Microsoft eşlemesi üzerinden kullanmak istediğiniz hizmetleri tanımlamanızı sağlar. Bu aslında tüm BGP topluluk değerlerinin izin verilenler listesidir. 
 
 ![Rota filtresi](./media/site-to-site-vpn-over-microsoft-peering/route-filter.png)
 
@@ -91,7 +91,7 @@ Bu örnek, bir Cisco IOS-XE komutunu kullanır. Örnekte, bir sanal Yönlendirme
 show ip bgp vpnv4 vrf 10 summary
 ```
 
-68 önekleri komşu tarafından alınan aşağıdaki kısmi çıkış gösterilir \*.243.229.34 ASN 12076'ile (MSEE):
+Aşağıdaki kısmi çıktıda 68 ön eklerin \*. 243.229.34, ASN 12076 (MSEE) ile birlikte alındığını gösterir:
 
 ```
 ...
@@ -112,7 +112,7 @@ sh ip bgp vpnv4 vrf 10 neighbors X.243.229.34 received-routes
 Get-AzBgpServiceCommunity
 ```
 
-## <a name="vpngateway"></a>3. VPN ağ geçidi yapılandırma ve IPSec tüneli
+## <a name="vpngateway"></a>3. VPN ağ geçidini ve IPSec tünellerini yapılandırma
 
 Bu bölümde, IPSec VPN tünelleri, Azure VPN ağ geçidi ile şirket içi VPN cihazınız arasında oluşturulur. Cisco bulut hizmeti yönlendirici (CSR1000) VPN cihazlarının örnekler kullanır.
 
@@ -354,7 +354,7 @@ Son eylem komut, Azure VPN ağ geçidi ile şirket içi VPN cihazınız arasınd
   }
 ```
 
-## <a name="device"></a>4. Şirket içi VPN cihazı yapılandırma
+## <a name="device"></a>4. Şirket içi VPN cihazını yapılandırma
 
 Azure VPN ağ geçidi, farklı satıcılardan birçok VPN cihazları ile uyumludur. Yapılandırma bilgilerini ve VPN ağ geçidi ile çalışacak şekilde doğrulanmış cihazlar için bkz. [VPN cihazları hakkında](../vpn-gateway/vpn-gateway-about-vpn-devices.md).
 
@@ -475,11 +475,11 @@ ip route 10.2.0.229 255.255.255.255 Tunnel1
 !
 ```
 
-## <a name="firewalls"></a>5. VPN cihazı filtreleme ve güvenlik duvarları (isteğe bağlı) yapılandırma
+## <a name="firewalls"></a>5. VPN cihaz filtrelemeyi ve güvenlik duvarlarını yapılandırma (isteğe bağlı)
 
 Güvenlik duvarını ve gereksinimlerinize göre filtrelemeyi yapılandırın.
 
-## <a name="testipsec"></a>6. Sınama ve doğrulama IPSec tüneli
+## <a name="testipsec"></a>6. IPSec tüneli test edin ve doğrulayın
 
 IPSec tünel durumu Azure VPN ağ geçidi Powershell komutlarıyla doğrulanabilir:
 

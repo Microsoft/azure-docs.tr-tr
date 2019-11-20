@@ -1,47 +1,67 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure Active Directory temel öğeler belgeleri
+summary: Kullanmaya başlamak için temel ortam, temel kullanıcılar ile gruplar oluşturma gibi temel Azure Active Directory (Azure AD) kavram ve süreçleri hakkında bilgi edinin.
 metadata:
-  document_id: null
   title: Azure Active Directory temel öğeler belgeleri
-  description: Azure Active Directory’yi kullanırken söz konusu olan temel kavramlar ve süreçler hakkında bilgi edinin.
-  services: active-directory
-  ms.subservice: fundamentals
-  author: eross-msft
+  description: Kullanmaya başlamak için temel ortam, temel kullanıcılar ile gruplar oluşturma gibi temel Azure Active Directory (Azure AD) kavram ve süreçleri hakkında bilgi edinin.
   manager: daveba
+  ms.author: ajburnle
+  ms.collection: na
+  ms.date: 08/27/2019
   ms.service: active-directory
+  ms.subservice: na
   ms.topic: landing-page
-  ms.date: 09/07/2018
-  ms.author: lizross
-abstract:
-  description: 'Kullanmaya başlamak için kullanıcı, grup ve ortam oluşturma gibi temel Azure Active Directory (Azure AD) kavram ve süreçleri hakkında bilgi edinin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure Active Directory portalını kullanmaya başlamayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: ./media/index/i_portal.png
-            text: Kiracı oluşturmak için Azure AD’ye erişme
-            href: active-directory-access-create-new-tenant.md
-          - image:
-              src: ./media/index/i_tasks.png
-            text: Grupları ve üyeleri görüntüleme
-            href: active-directory-groups-view-azure-portal.md
-  - title: Adım Adım kılavuzlar
-    items:
-      - type: paragraph
-        text: Azure Active Directory ortamınızı ayarlamak için temel görevleri gerçekleştirme hakkında bilgi edinin
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/fundamentals/active-directory-get-started-premium">Azure AD Premium’a kaydolun</a>
-          - html: <a href="/azure/active-directory/fundamentals/add-custom-domain">Özel bir etki alanı adı ekleme</a>
-          - html: <a href="/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal">Temel bir grup oluşturma ve üye ekleme</a>
-          - html: <a href="/azure/active-directory/fundamentals/active-directory-accessmanagement-managing-group-owners">Grup sahibi ekleme</a>
-          - html: <a href="/azure/active-directory/fundamentals/add-users-azure-active-directory">Yeni kullanıcı ekleme</a>
-          - html: <a href="/azure/active-directory/fundamentals/active-directory-users-assign-role-azure-portal">Kullanıcılara roller atama</a>
-          - html: <a href="/azure/active-directory/fundamentals/license-users-groups">Kullanıcılara lisans atama</a>
+  services: active-directory
+  ms.openlocfilehash: c0f85c065a4334f41c7f52a05e2b885f97dde25f
+  ms.sourcegitcommit: 07700392dd52071f31f0571ec847925e467d6795
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/28/2019
+  ms.locfileid: "70124889"
+landingContent:
+- title: Azure AD hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Active Directory nedir?
+      url: active-directory-whatis.md
+    - text: Azure Active Directory’deki yenilikler
+      url: whats-new.md
+  - linkListType: concept
+    links:
+    - text: Azure AD mimarisi
+      url: active-directory-architecture.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Portala erişme ve kiracı oluşturma
+      url: active-directory-access-create-new-tenant.md
+    - text: Atanan üyeler ile gruplarınızı görüntüleme
+      url: active-directory-groups-view-azure-portal.md
+- title: Azure AD hesabı oluşturma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Active Directory Premium sürümlerine kaydolma
+      url: active-directory-get-started-premium.md
+    - text: Azure AD’ye kuruluş olarak kaydolma
+      url: sign-up-organization.md
+    - text: Özel etki alanı adınızı ekleme
+      url: add-custom-domain.md
+- title: Azure AD’de grup oluşturma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Temel bir grup oluşturma ve üye ekleme
+      url: active-directory-groups-create-azure-portal.md
+    - text: Grup sahibi ekleme veya kaldırma
+      url: active-directory-accessmanagement-managing-group-owners.md
+- title: Kullanıcı ekleme ve rolleri ile lisanslarını atama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Kullanıcı ekleme veya silme
+      url: add-users-azure-active-directory.md
+    - text: Kullanıcılara lisans atama
+      url: license-users-groups.md

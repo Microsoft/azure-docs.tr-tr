@@ -1,118 +1,117 @@
 ---
-title: Azure SQL veritabanı için DNS diğer adı | Microsoft Docs
-description: Uygulamalarınızı Azure SQL veritabanı sunucunuzun adını için bir diğer ad bağlanabilirsiniz. Bu arada, diğer her zaman, vb. test edilmesini kolaylaştırmak için işaret SQL veritabanını değiştirebilirsiniz.
+title: DNS diğer adı
+description: Uygulamalarınız Azure SQL veritabanı sunucunuzun adı için bir diğer ada bağlanabilir. Bu arada, test etmeyi kolaylaştırmak için diğer adı işaret eden SQL veritabanını dilediğiniz zaman değiştirebilirsiniz.
 services: sql-database
 ms.service: sql-database
 ms.subservice: operations
-ms.custom: ''
+ms.custom: seo-lt-2019
 ms.devlang: ''
 ms.topic: conceptual
-author: oslake
-ms.author: moslake
-ms.reviewer: genemi, ayolubek, jrasnick
-manager: craigg
+author: rohitnayakmsft
+ms.author: rohitna
+ms.reviewer: genemi, jrasnick, vanto
 ms.date: 06/26/2019
-ms.openlocfilehash: bb38f73308fb1eb67be310120cb589cb9412e737
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.openlocfilehash: 05fa542a0ad1c72f73148eefd304a9771798598d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67461818"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820625"
 ---
 # <a name="dns-alias-for-azure-sql-database"></a>Azure SQL veritabanı için DNS diğer adı
 
-Azure SQL veritabanı, bir etki alanı adı sistemi (DNS) sunucusu vardır. PowerShell ve REST API'lerinin kabul [oluşturmak ve DNS diğer adları yönetmek için çağrıları](#anchor-powershell-code-62x) SQL veritabanı sunucu adınız için.
+Azure SQL veritabanında bir etki alanı adı sistemi (DNS) sunucusu vardır. PowerShell ve REST API 'Leri, SQL veritabanı sunucunuzun adı için [DNS diğer adları oluşturma ve yönetme çağrılarını](#anchor-powershell-code-62x) kabul eder.
 
-A *DNS diğer adı* Azure SQL veritabanı sunucu adı yerine kullanılabilir. İstemci programları diğer kendi bağlantı dizelerini kullanabilirsiniz. DNS diğer adı, istemci programları farklı sunuculara yönlendirebilirsiniz bir çeviri katmanı sağlar. Bu katman, bulun ve tüm istemcilerine ve bunların bağlantı dizelerini düzenlemek zorunda kalmadan, sorunlar ödemek zorunda kalmamasını sağlar.
+Azure SQL veritabanı sunucu adı yerine bir *DNS diğer adı* kullanılabilir. İstemci programları, bağlantı dizelerindeki diğer adı kullanabilir. DNS diğer adı, istemci programlarınızı farklı sunuculara yönlendirebilmek için bir çeviri katmanı sağlar. Bu katman, tüm istemcileri ve bunların bağlantı dizelerini bulma ve düzenleme zorunluluğunu ortadan çıkar.
 
-Aşağıdaki durumlarda bir DNS diğer adı için yaygın kullanımları şunlardır:
+Bir DNS diğer adı için ortak kullanımlar aşağıdaki durumları içerir:
 
-- Bir Azure SQL sunucusunun adını hatırlamak bir kolayca oluşturun.
-- İlk geliştirme sırasında test SQL veritabanı sunucusu için diğer adınızı başvurabilir. Uygulamayı Canlı çıktığında, üretim sunucusuna başvurmak için diğer ad değiştirebilirsiniz. Üretim testinden geçişi, veritabanı sunucusuna çeşitli istemciler yapılandırmaları değişiklik gerektirmez.
-- Başka bir SQL veritabanı sunucusuna, uygulamanızda yalnızca veritabanı taşınır varsayalım. Burada, diğer birkaç istemcisi yapılandırmalarını değiştirmek zorunda kalmadan değiştirebilirsiniz.
-- Bölgesel bir kesinti sırasında farklı bir sunucu ve bölge, veritabanını kurtarmak için coğrafi geri yükleme kullanın. Böylece var olan istemci uygulaması için yeniden bağlanamadı yeni sunucuya işaret edecek şekilde var olan diğer adınızı değiştirebilirsiniz. 
+- Azure SQL Server için kolay hatırlayabileceğiniz bir ad oluşturun.
+- İlk geliştirme sırasında, diğer adınız bir test SQL veritabanı sunucusuna başvurabilir. Uygulama canlı kaldığında, diğer adı, üretim sunucusuna başvuracak şekilde değiştirebilirsiniz. Testten üretime geçiş, yapılandırma için veritabanı sunucusuna bağlanan birkaç istemciye herhangi bir değişiklik yapılmasını gerektirmez.
+- Uygulamanızdaki tek veritabanının başka bir SQL veritabanı sunucusuna taşındığını varsayın. Burada, birkaç istemcinin yapılandırmasını değiştirmek zorunda kalmadan diğer adı değiştirebilirsiniz.
+- Bölgesel bir kesinti sırasında, veritabanınızı farklı bir sunucu ve bölgede kurtarmak için coğrafi geri yükleme kullanırsınız. Mevcut istemci uygulamanın yeniden bağlanabilmesi için mevcut diğer adınızı yeni sunucuyu işaret etmek üzere değiştirebilirsiniz. 
 
-## <a name="domain-name-system-dns-of-the-internet"></a>İnternet etki alanı adı sistemi (DNS)
+## <a name="domain-name-system-dns-of-the-internet"></a>Internet 'in etki alanı adı sistemi (DNS)
 
-Internet DNS kullanır. DNS, Azure SQL veritabanı sunucunuzun adını kolay adları çevirir.
+Internet, DNS 'i kullanır. DNS, kolay adlarınızı Azure SQL veritabanı sunucunuzun adına dönüştürür.
 
-## <a name="scenarios-with-one-dns-alias"></a>Bir DNS diğer adı ile senaryoları
+## <a name="scenarios-with-one-dns-alias"></a>Bir DNS diğer adına sahip senaryolar
 
-Yeni bir Azure SQL veritabanı sunucusuna sisteminizin geçiş etmeniz gerektiğini varsayalım. Her bağlantı dizesinde her istemci programı güncelleştirmek için gereken geçmişte. Ancak, bağlantı dizeleri bir DNS diğer adı kullanırsanız, yalnızca bir diğer ad özelliği artık güncelleştirilmelidir.
+Sisteminizi yeni bir Azure SQL veritabanı sunucusuna geçmeniz gerektiğini varsayın. Geçmişte her istemci programında her bağlantı dizesini bulup güncelleştirmeniz gerekir. Ancak, bağlantı dizeleri bir DNS diğer adı kullanıyorsa, yalnızca bir diğer ad özelliği güncellenmelidir.
 
-Azure SQL veritabanı'nın DNS diğer ad özelliği, aşağıdaki senaryolarda yardımcı olabilir:
+Azure SQL veritabanı 'nın DNS diğer adı özelliği, aşağıdaki senaryolarda yardımcı olabilir:
 
-### <a name="test-to-production"></a>Üretim için test etme
+### <a name="test-to-production"></a>Üretime test etme
 
-İstemci programlarından geliştirme başlattığınızda, bir DNS diğer adı, bağlantı dizelerini kullanma sağlayın. Azure SQL veritabanı sunucunuz deneme sürümü için diğer ad noktasının özelliklerini yapmanızı ister.
+İstemci programlarını geliştirmeye başladığınızda, bunların bağlantı dizelerinde bir DNS diğer adı kullanmalarını sağlayabilirsiniz. Diğer ad noktasının özelliklerini Azure SQL veritabanı sunucunuzun bir test sürümüne yaparsınız.
 
-Daha sonra yeni sisteme üretim ortamında dinamik çıktığında, üretim SQL veritabanı sunucusuna işaret etmesi diğer özellikleri güncelleştirebilirsiniz. Hiçbir değişiklik istemci programları için gereklidir.
+Daha sonra yeni sistem üretimde etkin olduğunda, diğer adın özelliklerini üretim SQL veritabanı sunucusuna işaret etmek için güncelleştirebilirsiniz. İstemci programlarında hiçbir değişiklik yapılması gerekmez.
 
-### <a name="cross-region-support"></a>Bölgeler arası destek
+### <a name="cross-region-support"></a>Çapraz bölge desteği
 
-Bir olağanüstü durum kurtarma için farklı bir coğrafi bölgede SQL veritabanı sunucunuza kaydırma. Bir DNS diğer adı kullanan bir sistem bulun ve tüm istemciler için tüm bağlantı dizelerini güncelleştirmek için gereken önlenebilir. Bunun yerine, artık veritabanınızı barındıran yeni SQL veritabanı sunucusuna başvurmak için bir diğer ad güncelleştirebilirsiniz.
+Olağanüstü durum kurtarma SQL veritabanı sunucunuzu farklı bir coğrafi bölgeye kaydırabilirler. DNS diğer adı kullanan bir sistem için tüm istemciler için tüm bağlantı dizelerini bulma ve güncelleştirme gereksinimlerinden kaçınılabilir. Bunun yerine, artık veritabanınızı barındıran yeni SQL veritabanı sunucusuna başvurmak için bir diğer ad güncelleştirebilirsiniz.
 
-## <a name="properties-of-a-dns-alias"></a>Bir DNS diğer adı özellikleri
+## <a name="properties-of-a-dns-alias"></a>DNS diğer adının özellikleri
 
-Aşağıdaki özellikler, SQL veritabanı sunucunuz için her bir DNS diğer adı için geçerlidir:
+Aşağıdaki özellikler, SQL veritabanı sunucunuzun her bir DNS diğer adı için geçerlidir:
 
-- *Benzersiz adı:* Yalnızca sunucu adları olarak oluşturduğunuz her bir diğer ad tüm Azure SQL veritabanı sunucuları arasında benzersizdir.
-- *Sunucu gereklidir:* Tam olarak bir sunucusuna başvuran ve sunucu zaten mevcut olmalıdır bir DNS diğer adı oluşturulamıyor. Güncelleştirilmiş bir diğer ad, her zaman tam olarak bir tane mevcut sunucunun başvurmanız gerekir.
-  - SQL veritabanı sunucusu düşürdüğünüzde, Azure sistem sunucusuna başvuran tüm DNS diğer adları da bırakır.
-- *Herhangi bir bölgesine bağlı değil:* DNS diğer adları bir bölgeye bağlı değil. Herhangi bir DNS diğer adları, herhangi bir coğrafi bölgede bulunan bir Azure SQL veritabanı sunucusuna başvurmak için güncelleştirilebilir.
-  - Ancak, başka bir sunucuya başvurmak için bir diğer ad güncelleştirirken, her iki sunucuyu aynı Azure bulunmalıdır *abonelik*.
-- *İzinler:* Bir DNS diğer adı'nı yönetmek için kullanıcının olmalıdır *Server Katılımcısı* izinler veya üzeri. Daha fazla bilgi için [Azure portalında rol tabanlı erişim denetimi ile çalışmaya başlama](../role-based-access-control/overview.md).
+- *Benzersiz ad:* Oluşturduğunuz her bir diğer ad, sunucu adlarının olduğu gibi tüm Azure SQL veritabanı sunucuları genelinde benzersizdir.
+- *Sunucu gereklidir:* Bir DNS diğer adı, tam olarak bir sunucuya başvurmadığı ve sunucu zaten var olmalıdır. Güncelleştirilmiş bir diğer ad, her zaman tam olarak bir mevcut sunucuya başvurmalıdır.
+  - Bir SQL veritabanı sunucusunu bıraktığınızda, Azure sistemi sunucuya başvuran tüm DNS diğer adlarını da bırakır.
+- *Hiçbir bölgeye bağlanmadı:* DNS diğer adları bir bölgeye bağlanmamış. Herhangi bir DNS diğer adı, herhangi bir coğrafi bölgede bulunan bir Azure SQL veritabanı sunucusuna başvuracak şekilde güncelleştirilemeyebilir.
+  - Ancak diğer bir sunucuya başvuracak bir diğer ad güncelleştirilirken her iki sunucu da aynı Azure *aboneliğinde*bulunmalıdır.
+- *İzinler:* Bir DNS diğer adını yönetmek için, kullanıcının *sunucu katılımcısı* izinlerinin veya daha yüksek olması gerekir. Daha fazla bilgi için, bkz. [Azure Portal rol tabanlı Access Control kullanmaya başlama](../role-based-access-control/overview.md).
 
-## <a name="manage-your-dns-aliases"></a>Kendi DNS diğer adları yönetme
+## <a name="manage-your-dns-aliases"></a>DNS diğer adlarınızı yönetin
 
-REST API'lerini hem PowerShell cmdlet'leri sağlamak, DNS diğer adları programlı olarak yönetmek kullanılabilir.
+Hem REST API 'Leri hem de PowerShell cmdlet 'leri, DNS diğer adlarını programlı bir şekilde yönetmenizi sağlar.
 
-### <a name="rest-apis-for-managing-your-dns-aliases"></a>Kendi DNS diğer adları yönetmek için REST API'leri
+### <a name="rest-apis-for-managing-your-dns-aliases"></a>DNS diğer adlarınızı yönetmek için REST API 'Leri
 
-REST API belgelerini, aşağıdaki web konumun kullanılabilir:
+REST API 'Leri için belgeler aşağıdaki Web konumlarına yakın bir yerde mevcuttur:
 
 - [Azure SQL veritabanı REST API](https://docs.microsoft.com/rest/api/sql/)
 
-Ayrıca, REST API'leri github'da görülebilir:
+Ayrıca REST API 'Leri GitHub ' da görülebilir:
 
-- [Azure SQL veritabanı sunucusu, DNS diğer adı REST API'leri](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json)
+- [Azure SQL veritabanı sunucusu, DNS diğer adı REST API 'Leri](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json)
 
 <a name="anchor-powershell-code-62x"/>
 
-#### <a name="powershell-for-managing-your-dns-aliases"></a>Kendi DNS diğer adları yönetmek için PowerShell
+#### <a name="powershell-for-managing-your-dns-aliases"></a>DNS diğer adlarınızı yönetmek için PowerShell
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 > [!IMPORTANT]
-> Azure Resource Manager PowerShell modülü, Azure SQL veritabanı tarafından hala desteklenmektedir, ancak tüm gelecekteki geliştirme için Az.Sql modüldür. Bu cmdlet'ler için bkz. [Azurerm.SQL'e](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az modül ve AzureRm modülleri komutları için bağımsız değişkenler büyük ölçüde aynıdır.
+> PowerShell Azure Resource Manager modülü Azure SQL veritabanı tarafından hala desteklenmektedir, ancak gelecekteki tüm geliştirmeler az. SQL modülüne yöneliktir. Bu cmdlet 'ler için bkz. [Azurerd. SQL](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az Module ve Azurerd modüllerinde komutların bağımsız değişkenleri önemli ölçüde aynıdır.
 
-PowerShell cmdlet'leri kullanılabilir REST API'larını çağırma.
+REST API 'leri çağıran PowerShell cmdlet 'leri kullanılabilir.
 
-DNS diğer adları yönetmek için kullanılan PowerShell cmdlet'lerini bir kod örneği, konumunda belgelenmiştir:
+DNS diğer adlarını yönetmek için kullanılan PowerShell cmdlet 'lerinin kod örneği şu adreste belgelenmiştir:
 
-- [PowerShell için Azure SQL veritabanı için DNS diğer adı](dns-alias-powershell.md)
+- [DNS diğer adı için PowerShell Azure SQL veritabanı](dns-alias-powershell.md)
 
-Aşağıdaki kod örneğinde kullanılan cmdlet'ler şunlardır:
+Kod örneğinde kullanılan cmdlet 'ler şunlardır:
 
-- [Yeni AzSqlServerDNSAlias](https://docs.microsoft.com/powershell/module/az.Sql/New-azSqlServerDnsAlias): Azure SQL veritabanı hizmet sistemde yeni bir DNS diğer ad oluşturur. Diğer ad, 1 Azure SQL veritabanı sunucusuna ifade eder.
-- [Get-AzSqlServerDNSAlias](https://docs.microsoft.com/powershell/module/az.Sql/Get-azSqlServerDnsAlias): Alın ve SQL DB sunucusu 1 atanmış olan tüm DNS diğer adları listesi.
-- [Set-AzSqlServerDNSAlias](https://docs.microsoft.com/powershell/module/az.Sql/Set-azSqlServerDnsAlias): Diğer adı için yapılandırılmış bir sunucu adı değiştirir, SQL veritabanı sunucusuna 2 1 sunucusundan bakın.
-- [Remove-AzSqlServerDNSAlias](https://docs.microsoft.com/powershell/module/az.Sql/Remove-azSqlServerDnsAlias): DNS diğer adı, diğer adı kullanarak, 2, SQL DB sunucusundan kaldırın.
+- [New-Azsqlserverdnsalıas](https://docs.microsoft.com/powershell/module/az.Sql/New-azSqlServerDnsAlias): Azure SQL veritabanı hizmet sisteminde yenı bir DNS diğer adı oluşturur. Diğer ad, Azure SQL veritabanı sunucusu 1 ' e başvurur.
+- [Get-Azsqlserverdnsalıas](https://docs.microsoft.com/powershell/module/az.Sql/Get-azSqlServerDnsAlias): SQL DB Server 1 ' e atanan tüm DNS diğer adlarını alın ve listeleyin.
+- [Set-Azsqlserverdnsalıas](https://docs.microsoft.com/powershell/module/az.Sql/Set-azSqlServerDnsAlias): diğer adın, Server 1 ' den SQL DB Server 2 ' ye başvuracak şekilde yapılandırıldığı sunucu adını değiştirir.
+- [Remove-Azsqlserverdnsalıas](https://docs.microsoft.com/powershell/module/az.Sql/Remove-azSqlServerDnsAlias): DNS DIĞER adını SQL DB sunucu 2 ' den diğer ad adını kullanarak kaldırın.
 
-## <a name="limitations-during-preview"></a>Önizleme süresince sınırlamaları
+## <a name="limitations-during-preview"></a>Önizleme sırasında sınırlamalar
 
-Şu anda, bir DNS diğer adı aşağıdaki sınırlamalara sahiptir:
+Şu anda bir DNS diğer adı aşağıdaki sınırlamalara sahiptir:
 
-- *En fazla 2 dakika gecikmesi:* Kaldırılan veya güncelleştirilmesi bir DNS diğer adı en fazla 2 dakika sürer.
-  - Kısa bir gecikme bağımsız olarak eski sunucunun istemci bağlantılarını başvuran diğer hemen durdurur.
-- *DNS araması:* Şimdilik yalnızca yetkili gerçekleştirerek belirli bir DNS diğer adı başvurduğu hangi sunucu olup olmadığını denetleyin şekilde bir [DNS araması](https://docs.microsoft.com/windows-server/administration/windows-commands/nslookup).
-- _Tablo denetimi desteklenmez:_ Bir DNS diğer adı olan bir Azure SQL veritabanı sunucusunda kullanamazsınız *tablo denetleme* bir veritabanında etkin.
-  - Tablo denetimi kullanım dışı bırakılmıştır.
-  - İçin taşıma öneririz [Blob denetimi](sql-database-auditing.md).
+- *2 dakikaya kadar gecikme:* Bir DNS diğer adının güncellenmesi veya kaldırılması 2 dakikaya kadar sürer.
+  - Kısa bir gecikmeden bağımsız olarak, diğer ad eski sunucuya yönelik istemci bağlantılarını hemen sonlandırır.
+- *DNS araması:* Şimdilik, belirli bir DNS diğer adının ne olduğunu kontrol etmenin tek yetkili yolu, [DNS araması](https://docs.microsoft.com/windows-server/administration/windows-commands/nslookup)gerçekleştirmektedir.
+- _Tablo denetimi desteklenmiyor:_ Bir veritabanında *tablo denetimi* etkinleştirilmiş BIR Azure SQL VERITABANı sunucusunda DNS diğer adı kullanamazsınız.
+  - Tablo denetimi kullanım dışıdır.
+  - [BLOB denetimine](sql-database-auditing.md)taşımanızı öneririz.
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-- [Azure SQL veritabanı'nda iş sürekliliğine genel bakış](sql-database-business-continuity.md), olağanüstü durum kurtarma dahil olmak üzere.
+- Olağanüstü durum kurtarma dahil olmak üzere [Azure SQL veritabanı ile iş sürekliliği 'Ne genel bakış](sql-database-business-continuity.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [PowerShell için Azure SQL veritabanı için DNS diğer adı](dns-alias-powershell.md)
+- [DNS diğer adı için PowerShell Azure SQL veritabanı](dns-alias-powershell.md)

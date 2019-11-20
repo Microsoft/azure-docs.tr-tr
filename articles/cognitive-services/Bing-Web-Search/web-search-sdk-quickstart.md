@@ -1,5 +1,5 @@
 ---
-title: "Hızlı Başlangıç: Bing Web araması için SDK'sını kullanınC#"
+title: "Hızlı Başlangıç: İçin Bing Web Araması SDK 'sını kullanınC#"
 titleSuffix: Azure Cognitive Services
 description: Bing Web Araması SDK'sı, Bing Web Araması özelliklerini C# uygulamanızla tümleştirmeyi kolaylaştırır. Bu hızlı başlangıçta istemci başlatmayı, istek göndermeyi ve yanıtı yazdırmayı öğreneceksiniz.
 services: cognitive-services
@@ -10,14 +10,14 @@ ms.subservice: bing-web-search
 ms.topic: quickstart
 ms.date: 04/15/2019
 ms.author: aahi
-ms.openlocfilehash: b1660034f1937d2d8ff9e70139407619626886a8
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 5e893fda5a0e71703eb867c045de19d391c012ed
+ms.sourcegitcommit: 71db032bd5680c9287a7867b923bf6471ba8f6be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60498874"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71018221"
 ---
-# <a name="quickstart-use-the-bing-web-search-sdk-for-c"></a>Hızlı Başlangıç: Bing Web araması için SDK'sını kullanınC#
+# <a name="quickstart-use-the-bing-web-search-sdk-for-c"></a>Hızlı Başlangıç: İçin Bing Web Araması SDK 'sını kullanınC#
 
 Bing Web Araması SDK'sı, Bing Web Araması özelliklerini C# uygulamanızla tümleştirmeyi kolaylaştırır. Bu hızlı başlangıçta istemci başlatmayı, istek göndermeyi ve yanıtı yazdırmayı öğreneceksiniz.
 
@@ -39,7 +39,7 @@ Bu hızlı başlangıcı çalıştırmak için aşağıdakilere ihtiyacınız ol
 > [!TIP]
 > Güncel kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/)'dan Visual Studio çözümü olarak alın.
 
-İlk adım yeni bir konsol projesi oluşturmaktır. Bir konsol projesi ayarlama konusunda Yardım gerekiyorsa bkz [Hello World--ilk bilgisayarınızı Program (C# Programlama Kılavuzu)](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/hello-world-your-first-program). Bing Web Araması SDK'sını uygulamanızda kullanmak için NuGet Paket Yöneticisi'ni kullanarak `Microsoft.Azure.CognitiveServices.Search.WebSearch` paketini yüklemeniz gerekir.
+İlk adım yeni bir konsol projesi oluşturmaktır. Bir konsol projesi ayarlamayla ilgili yardıma ihtiyacınız varsa, bkz. [Merhaba Dünya--Ilk programınız (C# Programlama Kılavuzu)](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/hello-world-your-first-program). Bing Web Araması SDK'sını uygulamanızda kullanmak için NuGet Paket Yöneticisi'ni kullanarak `Microsoft.Azure.CognitiveServices.Search.WebSearch` paketini yüklemeniz gerekir.
 
 [Web Arama SDK'sı paketi](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Search.WebSearch/1.2.0) şunları da yükler:
 
@@ -61,7 +61,7 @@ using System.Linq;
 
 ## <a name="create-project-scaffolding"></a>Proje yapı iskelesini oluşturma
 
-Yeni konsol projenizi oluşturduğunuzda uygulamanız için bir ad alanı ve sınıf da oluşturulmuş olmalıdır. Programınızı şu örnekteki gibi görünmelidir:
+Yeni konsol projenizi oluşturduğunuzda uygulamanız için bir ad alanı ve sınıf da oluşturulmuş olmalıdır. Programınız şu örnekteki gibi görünmelidir:
 
 ```csharp
 namespace WebSearchSDK
@@ -243,7 +243,7 @@ Bu örnekte "Best restaurants in Seattle" (Seattle'daki en iyi restoranlar) aram
     {
         try
         {
-            var webData = await client.Web.SearchAsync(query: "Best restaurants in Seattle", offset: 10, count: 20).Result;
+            var webData = await client.Web.SearchAsync(query: "Best restaurants in Seattle", offset: 10, count: 20);
             Console.WriteLine("\r\nSearching for \" Best restaurants in Seattle \"");
 
             if (webData?.WebPages?.Value?.Count > 0)
@@ -303,7 +303,7 @@ Bu örnekte arama sonuçlarını filtrelemek için `response_filter` parametresi
         try
         {
             IList<string> responseFilterstrings = new List<string>() { "news" };
-            var webData = await client.Web.SearchAsync(query: "Microsoft", responseFilter: responseFilterstrings).Result;
+            var webData = await client.Web.SearchAsync(query: "Microsoft", responseFilter: responseFilterstrings);
             Console.WriteLine("\r\nSearching for \" Microsoft \" with response filter \"news\"");
 
             if (webData?.News?.Value?.Count > 0)
@@ -366,7 +366,7 @@ Bu örnekte "Music Videos" (Müzik Videoları) aramasının sonuçlarını filtr
         try
         {
             IList<string> promoteAnswertypeStrings = new List<string>() { "videos" };
-            var webData = await client.Web.SearchAsync(query: "Music Videos", answerCount: 2, promote: promoteAnswertypeStrings, safeSearch: SafeSearch.Strict).Result;
+            var webData = await client.Web.SearchAsync(query: "Music Videos", answerCount: 2, promote: promoteAnswertypeStrings, safeSearch: SafeSearch.Strict);
             Console.WriteLine("\r\nSearching for \"Music Videos\"");
 
             if (webData?.Videos?.Value?.Count > 0)

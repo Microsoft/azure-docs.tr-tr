@@ -1,100 +1,102 @@
 ---
-title: Azure Site Recovery işlem sunucusu İzleyicisi
-description: Bu makalede Azure Site Recovery işlem sunucusu izlemeyi öğrenin.
+title: Azure Site Recovery işlem sunucusunu izleme
+description: Bu makalede, VMware VM/fiziksel sunucu olağanüstü durum kurtarma için kullanılan Azure Site Recovery işlem sunucusunun nasıl izleneceği açıklanır
 author: rayne-wiselman
 manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 05/30/2019
+ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: 4ff52e737438210296b8f2201d5e66e1d38b7bc9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 54c161c40c881d7626f79fc9bfe1ec1c160480ae
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66418290"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74082238"
 ---
-# <a name="monitor-the-process-server"></a>İşlem sunucusu İzleyicisi
+# <a name="monitor-the-process-server"></a>İşlem sunucusunu izleme
 
-Bu makalede izleme [Site Recovery](site-recovery-overview.md) işlem sunucusu.
+Bu makalede [Site Recovery](site-recovery-overview.md) işlem sunucusunun nasıl izleneceği açıklanır.
 
-- İşlem sunucusu, şirket içi VMware Vm'leri ve fiziksel sunucuları azure'a olağanüstü durum kurtarmayı ayarlarken kullanılır.
-- Varsayılan olarak, işlem sunucusu yapılandırma sunucusunda çalışır. Yapılandırma sunucusunu dağıttığınızda, varsayılan olarak yüklenir.
-- İsteğe bağlı olarak, çoğaltılmış makineler ölçek ve tutamacı daha fazla sayıda ve daha yüksek çoğaltma trafiği hacimlerini, ek olarak, ölçeği genişletilmiş işlem sunucularını dağıtabilirsiniz.
+- İşlem sunucusu, şirket içi VMware VM 'Leri ve fiziksel sunucuları Azure 'a olağanüstü durum kurtarmayı ayarlarken kullanılır.
+- Varsayılan olarak, işlem sunucusu yapılandırma sunucusunda çalışır. Yapılandırma sunucusunu dağıtırken varsayılan olarak yüklenir.
+- İsteğe bağlı olarak, çoğaltılan makinelerin daha büyük sayısını ve daha yüksek sayıda çoğaltma trafiğini ölçeklendirmek ve işlemek için ek, genişleme işlem sunucuları dağıtabilirsiniz.
 
-[Daha fazla bilgi edinin](vmware-physical-azure-config-process-server-overview.md) rolü ve işlem sunucusu dağıtımı hakkında.
+İşlem sunucularının rolü ve dağıtımı hakkında [daha fazla bilgi edinin](vmware-physical-azure-config-process-server-overview.md) .
 
 ## <a name="monitoring-overview"></a>İzlemeye genel bakış
 
-İşlem sunucusu çoğaltılan verilerin önbelleğe alma, sıkıştırma ve aktarım azure'a, özellikle de çok sayıda rolleri olduğundan işlem sunucusu durumu düzenli olarak izlemek önemlidir.
+İşlem sunucusu bu kadar çok rol içerdiğinden, özellikle çoğaltılan verileri önbelleğe alma, sıkıştırma ve Azure 'a aktarma işlemlerinin devam ettiğinden, işlem sunucusu durumunun sürekli olarak izlenmesi önemlidir.
 
-Genellikle işlem sunucusu performansını etkileyen durumlar vardır. Performansı etkileyen sorunları VM sistem durumu kritik duruma hem işlem sunucusu ve çoğaltılan makineler sonunda gönderme, geçişli bir etkisi olacaktır. Durumlar şunlardır:
+Genellikle işlem sunucusu performansını etkileyen bazı durumlar vardır. Performansı etkileyen sorunların VM sistem durumu üzerinde basamaklı bir etkisi olur, sonunda hem işlem sunucusu hem de çoğaltılan makineler kritik bir duruma gönderilir. Durumlar şunlardır:
 
-- VM'ler yüksek sayıda yaklaştığını veya önerilen sınırlamaları aşan bir işlem sunucusu kullanın.
-- İşlem sunucusunu kullanan VM'ler yüksek bir karmaşıklık oranı sahiptir.
-- VM'ler ve işlem sunucusu arasında ağ aktarım hızı çoğaltma verilerini işlem sunucusuna yüklemek için yeterli değildir.
-- Ağ aktarım hızı işlem sunucusu ve Azure arasında çoğaltma işlem sunucusu verileri azure'a yüklemek yeterli değil.
+- Yüksek sayıda sanal makine, önerilen sınırlamalara yaklaşarak veya aşarak bir işlem sunucusu kullanır.
+- İşlem sunucusunu kullanan VM 'Lerde yüksek bir karmaşıklık oranı vardır.
+- VM 'Ler ile işlem sunucusu arasındaki ağ aktarım hızı, çoğaltma verilerini işlem sunucusuna yüklemek için yeterli değil.
+- İşlem sunucusu ile Azure arasındaki ağ aktarım hızı, çoğaltma verilerini işlem sunucusundan Azure 'a yüklemek için yeterli değildir.
 
-Bu sorunların tümü, Vm'leri kurtarma noktası hedefi (RPO) etkileyebilir. 
+Bu sorunların tümü, VM 'lerin kurtarma noktası hedefini (RPO) etkileyebilir. 
 
-**Neden?** Bir VM için bir kurtarma noktası oluşturma VM'nin ortak noktası tüm disklerde gerektirdiğinden. Yüksek bir karmaşıklık oranı bir diski olduğundan, çoğaltma yavaşsa veya işlem sunucusu uygun değilse, Kurtarma noktaları nasıl verimli bir şekilde oluşturulur etkiler.
+**Kaydol?** Bir VM için bir kurtarma noktası oluşturmak, sanal makinenin tüm disklerinin ortak bir noktaya sahip olmasını gerektirir. Bir disk yüksek bir karmaşıklık hızına sahipse, çoğaltma yavaşsa veya işlem sunucusu en iyi durumda değilse, kurtarma noktalarının ne şekilde oluşturulduğunu etkiler.
 
 ## <a name="monitor-proactively"></a>Proaktif izleme
 
-İşlem sunucusu ile ilgili sorunları önlemek için önemlidir:
+İşlem sunucusuyla ilgili sorunları önlemek için şunları yapmanız gerekir:
 
-- İşlem sunucularını kullanarak belirli gereksinimlerini anlamak [kapasite ve rehberlik boyutlandırma](site-recovery-plan-capacity-vmware.md#capacity-considerations), işlem sunucularının dağıtıldığı emin olun ve öneriler göre çalıştırma.
-- Uyarıları izleme ve sorunlarını ortaya çıktıkları verimli bir şekilde çalışmasını işlem sunucularını korumak için.
+- İşlem sunucuları için [Kapasite ve boyutlandırma kılavuzunu](site-recovery-plan-capacity-vmware.md#capacity-considerations)kullanarak belirli gereksinimleri anlayın ve işlem sunucularının önerilere göre dağıtıldığından ve çalıştığından emin olun.
+- İşlem sunucularının verimli bir şekilde çalışmasını sağlamak için uyarıları izleyin ve ortaya çıkan sorunları giderin.
 
 
 ## <a name="process-server-alerts"></a>İşlem sunucusu uyarıları
 
-İşlem sunucusu, sistem durumu uyarıları, aşağıdaki tabloda özetlenen bir dizi oluşturur.
+İşlem sunucusu, aşağıdaki tabloda özetlenen bir dizi sistem durumu uyarısı oluşturur.
 
 **Uyarı türü** | **Ayrıntılar**
 --- | ---
-![Sorunsuz][green] | İşlem sunucusu bağlı ve iyi durumda.
-![Uyarı][yellow] | Son 15 dakika boyunca % CPU kullanımı > 80
-![Uyarı][yellow] | Son 15 dakika boyunca % bellek kullanımı > 80
-![Uyarı][yellow] | Önbellek klasörü boş alan < % 30 son 15 dakika
-![Uyarı][yellow] | Son 15 dakika için işlem sunucusu hizmetlerinin çalıştırmadığınız
-![Kritik][red] | Son 15 dakika için CPU kullanımı > %95
-![Kritik][red] | Bellek kullanımı > % 95'son 15 dakika boyunca
-![Kritik][red] | Önbellek klasörü boş alan < %25 son 15 dakika
+![Sorunsuz][green] | İşlem sunucusu bağlandı ve sağlıklı.
+![Uyarı][yellow] | Son 15 dakika boyunca %80 > CPU kullanımı
+![Uyarı][yellow] | Son 15 dakika boyunca bellek kullanımı > %80
+![Uyarı][yellow] | Son 15 dakika boyunca %30 < önbellek klasörü boş alanı
+![Uyarı][yellow] | Her beş dakikada bir bekleyen/giden verileri izler Site Recovery ve işlem sunucusu önbelleğindeki verilerin 30 dakika içinde Azure 'a yüklenemediğini tahmin eder.
+![Uyarı][yellow] | İşlem sunucusu Hizmetleri son 15 dakika boyunca çalışmıyor
+![Kritik][red] | Son 15 dakika boyunca %95 > CPU kullanımı
+![Kritik][red] | Son 15 dakika boyunca bellek kullanımı > %95
+![Kritik][red] | Son 15 dakika boyunca %25 < önbellek klasörü boş alanı
+![Kritik][red] | Her beş dakikada bir bekleyen/giden verileri izler Site Recovery ve işlem sunucusu önbelleğindeki verilerin 45 dakika içinde Azure 'a yüklenemediğini tahmin eder.
 ![Kritik][red] | 15 dakika boyunca işlem sunucusundan sinyal alınmadı.
 
 ![Tablo anahtarı](./media/vmware-physical-azure-monitor-process-server/table-key.png)
 
 > [!NOTE]
-> İşlem Sunucusu genel sistem durumunu oluşturulan kötü uyarıya dayanır.
+> İşlem sunucusunun genel sistem durumu, üretilen en kötü uyarıyı temel alır.
 
 
 
-## <a name="monitor-process-server-health"></a>İşlem sunucusu durumunu izleme
+## <a name="monitor-process-server-health"></a>İşlem sunucusu sistem durumunu izleme
 
-Aşağıdaki şekilde, işlem sunucularının sistem durumunu izleyebilirsiniz: 
+İşlem sunucularınızın sistem durumunu aşağıdaki şekilde izleyebilirsiniz: 
 
-1. Durum çoğaltılan bir makine ve kasa içinde kendi işlem sunucusu ve çoğaltma durumunu izlemek için > **çoğaltılan öğeler**, izlemek istediğiniz makineye tıklayın.
-2. İçinde **çoğaltma durumu**, VM durumunu izleyebilirsiniz. Hata ayrıntıları için detaya gitmek için duruma tıklayın.
+1. Çoğaltılan bir makinenin ve işlem sunucusunun çoğaltma durumunu ve durumunu izlemek için, > **çoğaltılan öğeler**kasa bölümünde izlemek istediğiniz makineye tıklayın.
+2. **Çoğaltma durumu**' nda VM sistem durumunu izleyebilirsiniz. Hata ayrıntılarına gitmek için duruma tıklayın.
 
-    ![Sanal makine Panosu'ndan işlem sunucusu durumu](./media/vmware-physical-azure-monitor-process-server/vm-ps-health.png)
+    ![VM panosundaki işlem sunucusu durumu](./media/vmware-physical-azure-monitor-process-server/vm-ps-health.png)
 
-4. İçinde **işlem sunucusu durumu**, işlem sunucusunun durumunu izleyebilirsiniz. Ayrıntılar için detayına gidin.
+4. **Işlem sunucusu sistem durumu**' nda, işlem sunucusunun durumunu izleyebilirsiniz. Ayrıntılar için detaya gidin.
 
-    ![Sanal makine Panosu'ndan işlem sunucusu ayrıntıları](./media/vmware-physical-azure-monitor-process-server/ps-summary.png)
+    ![VM panosundaki sunucu ayrıntılarını işleme](./media/vmware-physical-azure-monitor-process-server/ps-summary.png)
 
-5. Sistem durumu, ayrıca VM sayfasında grafik gösterimi kullanılarak izlenebilir.
-    - Bir genişleme işlem sunucusu vurgulanan ilişkili uyarıları varsa turuncu ve kritik sorunları varsa kırmızı olur. 
-    - İşlem sunucusu yapılandırma sunucusunda varsayılan dağıtım çalışıyorsa, yapılandırma sunucusu uygun şekilde vurgulanır.
-    - Detaya gitmek için yapılandırma sunucusu veya işlem sunucusu'nı tıklatın. Sorunları ve düzeltme önerisi unutmayın.
+5. Durum, VM sayfasındaki grafik temsili kullanılarak da izlenebilir.
+    - Bir genişleme işlem sunucusu kendisiyle ilişkili uyarılar varsa Turuncu renkle vurgulanır ve herhangi bir kritik sorun varsa kırmızı olur. 
+    - İşlem sunucusu yapılandırma sunucusundaki varsayılan dağıtımda çalışıyorsa, yapılandırma sunucusu uygun şekilde vurgulanacaktır.
+    - Ayrıntıya gitmek için yapılandırma sunucusuna veya işlem sunucusuna tıklayın. Tüm sorunları ve düzeltme önerilerini aklınızda edin.
 
-Ayrıca izleyebilirsiniz işlem sunucuları altında kasadaki **Site Recovery altyapısı**. İçinde **Site Recovery altyapınızı yönetin**, tıklayın **Configuration Servers**. Aşağı işlem sunucusu ve tatbikatı işlem sunucusu ayrıntıları ilişkili yapılandırma sunucusunu seçin.
+Ayrıca, **Site Recovery altyapı**altında kasadaki işlem sunucularını da izleyebilirsiniz. **Site Recovery altyapınızı yönetme**bölümünde **yapılandırma sunucuları**' na tıklayın. İşlem sunucusuyla ilişkili yapılandırma sunucusunu seçin ve işlem sunucusu ayrıntıları ' na gidin.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Tüm işlem sunucuları sorunları, izleyin varsa bizim [sorun giderme rehberi](vmware-physical-azure-troubleshoot-process-server.md)
-- Daha fazla yardıma ihtiyacınız varsa, sorunuzu gönderin [Azure Site Recovery Forumu](https://social.msdn.microsoft.com/Forums/azure/home?forum=hypervrecovmgr). 
+- Herhangi bir işlem sunucusu sorununuz varsa, [sorun giderme kılavuzumuzu](vmware-physical-azure-troubleshoot-process-server.md) izleyin
+- Daha fazla yardıma ihtiyacınız varsa sorunuzu [Azure Site Recovery forumuna](https://social.msdn.microsoft.com/Forums/azure/home?forum=hypervrecovmgr)gönderin. 
 
 [green]: ./media/vmware-physical-azure-monitor-process-server/green.png
 [yellow]: ./media/vmware-physical-azure-monitor-process-server/yellow.png

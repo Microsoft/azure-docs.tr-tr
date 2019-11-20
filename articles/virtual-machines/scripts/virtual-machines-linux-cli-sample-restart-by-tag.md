@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - VM’leri yeniden başlatma | Microsoft Docs
+title: Azure CLı betik örneği-VM 'Leri yeniden başlatma
 description: Azure CLI Betik Örneği - VM’leri etikete ve kimliğe göre yeniden başlatma
 services: virtual-machines-linux
 documentationcenter: virtual-machines
-author: allclark
-manager: douge
+author: cynthn
+manager: gwallace
 editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
@@ -14,14 +14,14 @@ ms.topic: sample
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 03/01/2017
-ms.author: allclark
+ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 94845573461d99fda9318f303d822abb6ca3f257
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 5545fc07bd7b30225bcaf01eee8f10a141cd8d57
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60862798"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74040244"
 ---
 # <a name="restart-vms"></a>VM’leri yeniden başlatma
 

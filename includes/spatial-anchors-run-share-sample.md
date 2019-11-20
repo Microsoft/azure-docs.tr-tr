@@ -4,63 +4,78 @@ ms.service: spatial-anchors
 ms.topic: include
 ms.date: 1/30/2019
 ms.author: rgarcia
-ms.openlocfilehash: b46a2b18309851bbe2934980137a53d2de6f6efc
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: ec8fb6efab126dcf5556a9abfdf58d1fd69d4212
+ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "67135318"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72882294"
 ---
-## <a name="set-up-your-device-in-unity"></a>Unity Cihazınızı ayarlama
+## <a name="androidtabandroid"></a>[Android](#tab/Android)
+
+Java Android örneği cihazlar arasında paylaşmayı destekler.
+Dosya `SharedActivity.java` Android Studio ' deki örnekler klasöründen açın. Önceki adımda edindiğiniz URL 'yi (ASP.NET Web uygulaması Azure dağıtımından) `SharedActivity.java` dosyasında `SharingAnchorsServiceUrl` değer olarak girin. URL 'deki `index.html` `api/anchors`ile değiştirin. Şöyle görünmelidir: `https://<app_name>.azurewebsites.net/api/anchors`.
+
+[!INCLUDE [Run shared sample](spatial-anchors-run-sample.md)]
+
+## <a name="iostabios"></a>[iOS](#tab/iOS)
+
+Amaç-C iOS örneği, cihazlar arasında paylaşmayı destekler.
+Samples klasöründeki dosya `SharedDemoViewController.m` açın. Önceki adımda edindiğiniz URL 'yi (ASP.NET Web uygulaması Azure dağıtımından) `SharedActivity.java` dosyasında `SharingAnchorsServiceUrl` değer olarak girin. URL 'deki `index.html` `api/anchors`ile değiştirin. Şöyle görünmelidir: `https://<app_name>.azurewebsites.net/api/anchors`.
+
+[!INCLUDE [Run shared sample](spatial-anchors-run-sample.md)]
+
+## <a name="xamarintabxamarin"></a>[Xamarin](#tab/Xamarin)
+
+Hem Xamarin Android hem de iOS örnekleri cihazlar arasında paylaşmayı destekler.
+Samples klasöründeki dosya `AccountDetails.cs` açın. Önceki adımda edindiğiniz URL 'yi (ASP.NET Web uygulaması Azure dağıtımından) `SharedActivity.java` dosyasında `AnchorSharingServiceUrl` değer olarak girin. URL 'deki `index.html` `api/anchors`ile değiştirin. Şöyle görünmelidir: `https://<app_name>.azurewebsites.net/api/anchors`.
+
+[!INCLUDE [Run shared sample](spatial-anchors-run-sample.md)]
+
+## <a name="unitytabunity"></a>['Yi](#tab/Unity)
 
 [!INCLUDE [Open Unity Project](spatial-anchors-open-unity-project.md)]
 
-### <a name="set-up-an-android-device"></a>Bir Android cihazı ayarlama
+### <a name="set-up-an-android-device"></a>Android cihazı ayarlama
 
 [!INCLUDE [Android Unity Build Settings](spatial-anchors-unity-android-build-settings.md)]
 
-### <a name="set-up-an-ios-device"></a>Bir iOS cihaz ayarlama
+### <a name="set-up-an-ios-device"></a>İOS cihazı ayarlama
 
 [!INCLUDE [iOS Unity Build Settings](spatial-anchors-unity-ios-build-settings.md)]
 
-## <a name="configure-the-account-identifier-and-key"></a>Hesap Kimliği ve anahtarını yapılandırma
+## <a name="configure-the-account-identifier-and-key"></a>Hesap tanımlayıcıyı ve anahtarı yapılandırın
 
-İçinde **proje** bölmesinde gidin `Assets/AzureSpatialAnchorsPlugin/Examples` açın `AzureSpatialAnchorsLocalSharedDemo.unity` Sahne dosyası.
+**Proje** bölmesinde `Assets/AzureSpatialAnchorsPlugin/Examples` ' a gidin ve `AzureSpatialAnchorsLocalSharedDemo.unity` sahne dosyasını açın.
 
 [!INCLUDE [Configure Unity Scene](spatial-anchors-unity-configure-scene.md)]
 
-İçinde **denetçisi** bölmesinde girin `Sharing Anchors Service url` (ASP.NET web uygulamanızdan Azure dağıtım) değeri olarak `Base Sharing Url`, değiştirmeyi `index.html` ile `api/anchors`. Şu şekilde görünmelidir: `https://<app_name>.azurewebsites.net/api/anchors`.
+**Proje** bölmesinde `Assets\AzureSpatialAnchors.Examples\Resources`' a gidin. `SpatialAnchorSamplesConfig` öğesini seçin. Ardından, **Inspector** bölmesinde, `index.html` `api/anchors`ile değiştirerek `Base Sharing Url`değeri olarak `Sharing Anchors Service url` (ASP.NET Web App Azure dağıtımından) girin. Şöyle görünmelidir: `https://<app_name>.azurewebsites.net/api/anchors`.
 
-Sahne seçerek Kaydet **dosya** > **Kaydet**.
+**Dosya** > **Kaydet**' i seçerek sahneyi kaydedin.
 
 ## <a name="deploy-to-your-device"></a>Cihazınıza dağıtma
 
 ### <a name="deploy-to-android-device"></a>Android cihazına dağıtma
 
-Android Cihazınızda oturum açın ve bir USB kablosu kullanarak bilgisayarınıza bağlayın.
+Android cihazınızda oturum açın ve USB kablosu kullanarak bilgisayarınıza bağlayın.
 
-Açık **Build Settings** seçerek **dosya** > **Build Settings**.
+**Dosya** > **derleme ayarları**' nı seçerek **derleme ayarlarını** açın.
 
-Altında **sahneler oluşturun**, Sahne tüm bunların yanında bir onay işareti sahip olduğunuzdan emin olun.
+**Yapı**' ın altında, tüm sahnelerin yanında onay işareti olduğundan emin olun.
 
-Emin **dışarı proje** bir onay işareti yok. Seçin **derleme ve çalıştırma**. Kaydetmeniz istenir, `.apk` dosya. Bunun için herhangi bir ad seçebilirsiniz.
+**Dışarı aktarma projesinin** onay işareti olmadığından emin olun. **Oluştur ve Çalıştır ' ı**seçin. `.apk` dosyanızı kaydetmeniz istenecektir. Bunun için herhangi bir ad seçebilirsiniz.
 
-Uygulama başlar, içinde bir kez **seçin bir tanıtım** iletişim kutusunda, seçmek için sol veya sağ okları kullanın **LocalShare** seçenek ve dokunun **gidin!** . Uygulamayı'ndaki yönergeleri izleyin. Seçebileceğiniz **oluştur & Paylaşımı bağlantı** veya **paylaşılan bağlantı bulun**.
+[!INCLUDE [Run shared sample](spatial-anchors-run-sample.md)]
 
-İlk senaryo, daha sonra aynı cihaz veya farklı bir bulunduğu bir bağlantı oluşturmanızı sağlar.
-Aynı cihaz veya farklı bir uygulama zaten çalıştırdıysanız, ikinci senaryo, daha önce paylaşılan bağlayıcılarını bulundurmanıza olanak tanır. Senaryonuzu seçin sonra uygulamayı daha ayrıntılı yönergeler ne yapılacağını geçici yol gösterecektir. Örneğin, ortam bilgilerini toplamak için Cihazınızı yerleri istenir. Daha sonra dünyada bir yer işareti koyun kaydetmek bekleyin ve benzeri.
+### <a name="deploy-to-an-ios-device"></a>İOS cihazına dağıtma
 
-### <a name="deploy-to-an-ios-device"></a>Bir iOS cihazına dağıtma
+**Dosya** > **derleme ayarları**' nı seçerek **derleme ayarlarını** açın.
 
-Açık **Build Settings** seçerek **dosya** > **Build Settings**.
-
-Altında **sahneler oluşturun**, Sahne tüm bunların yanında bir onay işareti sahip olduğunuzdan emin olun.
+**Yapı**' ın altında, tüm sahnelerin yanında onay işareti olduğundan emin olun.
 
 [!INCLUDE [Configure Xcode](spatial-anchors-unity-ios-xcode.md)]
 
-Uygulama başlar, içinde bir kez **seçin bir tanıtım** iletişim kutusunda, seçmek için sol veya sağ okları kullanın **LocalShare** seçenek ve dokunun **gidin!** . Uygulamayı'ndaki yönergeleri izleyin. Seçebileceğiniz **oluştur & Paylaşımı bağlantı** veya **paylaşılan bağlantı bulun**.
+[!INCLUDE [Run shared sample](spatial-anchors-run-sample.md)]
 
-İlk senaryo, daha sonra aynı cihaz veya farklı bir bulunduğu bir bağlantı oluşturmanızı sağlar.
-Aynı cihaz veya farklı bir uygulama zaten çalıştırdıysanız, ikinci senaryo, daha önce paylaşılan bağlayıcılarını bulundurmanıza olanak tanır. Senaryonuzu seçin sonra uygulamayı daha ayrıntılı yönergeler ne yapılacağını geçici yol gösterecektir. Örneğin, ortam bilgilerini toplamak için Cihazınızı yerleri istenir. Daha sonra dünyada bir yer işareti koyun kaydetmek bekleyin ve benzeri.
-
-Xcode'da, seçerek uygulamayı durdurun **Durdur**.
+Xcode 'da **Durdur**' u seçerek uygulamayı durdurun.

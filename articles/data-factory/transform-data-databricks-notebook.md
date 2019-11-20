@@ -1,31 +1,31 @@
 ---
-title: Databricks Not - Azure ile verileri dönüştürme | Microsoft Docs
-description: Bir Databricks not defteri çalıştırarak işleme veya dönüştürme veri öğrenin.
+title: Databricks Not defteri ile verileri dönüştürme-Azure
+description: Databricks Not defteri çalıştırarak verileri nasıl işleyeceğini veya dönüştürebileceğinizi öğrenin.
 services: data-factory
 documentationcenter: ''
-ms.assetid: ''
 ms.service: data-factory
 ms.workload: data-services
 ms.tgt_pltfrm: na
+author: nabhishek
+ms.author: abnarain
+manager: jroth
+ms.reviewer: maghan
 ms.topic: conceptual
 ms.date: 03/15/2018
-author: sharonlo101
-ms.author: shlo
-manager: craigg
-ms.openlocfilehash: 8036a8694bb8c8d0db236eba831f13dc2bf47d0a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 685a7863af74bf90c819453b41078b48ab6d2045
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60311674"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73683919"
 ---
-# <a name="transform-data-by-running-a-databricks-notebook"></a>Bir Databricks not defteri çalıştırarak verileri dönüştürme
+# <a name="transform-data-by-running-a-databricks-notebook"></a>Databricks Not defteri çalıştırarak verileri dönüştürme
 
-Azure Databricks not defteri etkinliği içinde bir [Data Factory işlem hattı](concepts-pipelines-activities.md) Azure Databricks çalışma alanınızda bir Databricks not defteri çalıştırır. Bu makalede yapılar [veri dönüştürme etkinlikleri](transform-data.md) makalesi, veri dönüştürme ve desteklenen dönüştürme etkinliklerinin genel bir bakış sunar. Azure Databricks, Apache Spark'ı çalıştırmaya yönelik bir yönetilen bir platformdur.
+Bir [Data Factory](concepts-pipelines-activities.md) işlem hattındaki Azure Databricks Not defteri etkinliği Azure Databricks çalışma alanınızda bir Databricks Not defteri çalıştırır. Bu makale, veri dönüştürme ve desteklenen dönüştürme etkinliklerine genel bir bakış sunan [veri dönüştürme etkinlikleri](transform-data.md) makalesine yönelik olarak oluşturulur. Azure Databricks, Apache Spark çalıştırmak için yönetilen bir platformdur.
 
-## <a name="databricks-notebook-activity-definition"></a>Databricks not defteri etkinliği tanımı
+## <a name="databricks-notebook-activity-definition"></a>Databricks Not defteri etkinlik tanımı
 
-Bir Databricks not defteri etkinliğini örnek JSON tanımı aşağıda verilmiştir:
+Databricks Not defteri etkinliğinin örnek JSON tanımı aşağıda verilmiştir:
 
 ```json
 {
@@ -53,24 +53,24 @@ Bir Databricks not defteri etkinliğini örnek JSON tanımı aşağıda verilmi�
 }
 ```
 
-## <a name="databricks-notebook-activity-properties"></a>Databricks not defteri etkinliği özellikleri
+## <a name="databricks-notebook-activity-properties"></a>Databricks Not defteri etkinlik özellikleri
 
 Aşağıdaki tabloda JSON tanımında kullanılan JSON özellikleri açıklanmaktadır:
 
 |Özellik|Açıklama|Gerekli|
 |---|---|---|
-|name|İşlem hattındaki bir etkinliğin adı.|Evet|
-|description|Etkinliğin ne yaptığını açıklayan metin.|Hayır|
-|türü|Databricks not defteri etkinliği için etkinlik DatabricksNotebook türüdür.|Evet|
-|linkedServiceName|Databricks bağlı Databricks not defteri çalıştığı hizmetin adı. Bu bağlı hizmeti hakkında bilgi edinmek için [işlem bağlı Hizmetleri](compute-linked-services.md) makalesi.|Evet|
-|notebookPath|Databricks çalışma alanınızda çalıştırılması için Not defterini mutlak yolu. Bu yol, eğik çizgi ile başlamalıdır.|Evet|
-|baseParameters|Anahtar-değer çiftleri dizisi. Temel parametreleri her etkinlik için kullanılabilir. Not defterini belirtilmemiş bir parametre alırsa, not defterindeki varsayılan değer kullanılır. Parametreler hakkında daha fazla bilgi edinin [Databricks not defterlerini](https://docs.databricks.com/api/latest/jobs.html#jobsparampair).|Hayır|
-|Kitaplıkları|İşi yürütecek kümede yüklenecek kitaplıkların bir listesi. Bir dizi olabilir \<dize, Nesne >.|Hayır|
+|ad|İşlem hattındaki etkinliğin adı.|Evet|
+|açıklama|Etkinliğin ne yaptığını açıklayan metin.|Hayır|
+|type|Databricks Not defteri etkinliği için etkinlik türü Databricksnot Defterinizdir.|Evet|
+|linkedServiceName|Databricks Not defterinin çalıştığı Databricks bağlı hizmetinin adı. Bu bağlı hizmet hakkında bilgi edinmek için bkz. [işlem bağlantılı hizmetleri](compute-linked-services.md) makalesi.|Evet|
+|Not Defteriyolu|Databricks çalışma alanında çalıştırılacak olan Not defterinin mutlak yolu. Bu yol bir eğik çizgiyle başlamalıdır.|Evet|
+|baseParameters|Anahtar-değer çiftleri dizisi. Temel parametreler her etkinlik çalıştırması için kullanılabilir. Not defteri belirtilmemiş bir parametre alırsa, not defterindeki varsayılan değer kullanılacaktır. [Databricks not defterlerinde](https://docs.databricks.com/api/latest/jobs.html#jobsparampair)parametreler hakkında daha fazla bilgi bulabilirsiniz.|Hayır|
+|Kütüphaneler|İşi yürütecek olan kümeye yüklenecek kitaplıkların listesi. \<dize, nesne > dizisi olabilir.|Hayır|
 
 
-## <a name="supported-libraries-for-databricks-activities"></a>Databricks etkinlikler için desteklenen kitaplıkları
+## <a name="supported-libraries-for-databricks-activities"></a>Databricks etkinlikleri için desteklenen kitaplıklar
 
-Yukarıdaki Databricks etkinlik tanımında, bu kitaplık türleri belirtin: *jar*, *Yumurta*, *maven*, *pypı*,  *cran*.
+Yukarıdaki databricks etkinlik tanımında şu kitaplık türlerini belirtirsiniz: *jar*, *Egg*, *WHL*, *Maven*, *Pypı*, *Cran*.
 
 ```json
 {
@@ -80,6 +80,12 @@ Yukarıdaki Databricks etkinlik tanımında, bu kitaplık türleri belirtin: *ja
         },
         {
             "egg": "dbfs:/mnt/libraries/library.egg"
+        },
+    {
+            "whl": "dbfs:/mnt/libraries/mlflow-0.0.1.dev0-py2-none-any.whl"
+        },
+        {
+            "whl": "dbfs:/mnt/libraries/wheel-libraries.wheelhouse.zip"
         },
         {
             "maven": {
@@ -104,18 +110,31 @@ Yukarıdaki Databricks etkinlik tanımında, bu kitaplık türleri belirtin: *ja
 
 ```
 
-Daha fazla ayrıntı için [Databricks belgeleri](https://docs.azuredatabricks.net/api/latest/libraries.html#managedlibrarieslibrary) kitaplık türleri için.
+Daha ayrıntılı bilgi için bkz. kitaplık türleri için [Databricks belgeleri](https://docs.azuredatabricks.net/api/latest/libraries.html#managedlibrarieslibrary) .
 
-## <a name="how-to-upload-a-library-in-databricks"></a>Databricks kitaplıkta karşıya yükleme
+## <a name="passing-parameters-between-notebooks-and-data-factory"></a>Not defterleri ve Data Factory arasında parametreleri geçirme
 
-#### <a name="using-databricks-workspace-uihttpsdocsazuredatabricksnetuser-guidelibrarieshtmlcreate-a-library"></a>[Databricks çalışma alanı kullanıcı arabirimini kullanarak](https://docs.azuredatabricks.net/user-guide/libraries.html#create-a-library)
+Databricks etkinliğinde *Baseparameters* özelliğini kullanarak, Veri Fabrikası parametrelerini not defterlerine geçirebilirsiniz. 
 
-Kullanıcı Arabirimi kullanılarak eklenen kitaplığı dbfs yolunu elde etmek için kullanabileceğiniz [Databricks CLI (yükleme)](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#install-the-cli). 
+Belirli durumlarda, veri fabrikasında denetim akışı (koşullu denetimler) için kullanılabilecek veya aşağı akış etkinlikleri tarafından tüketilen (boyut sınırı 2MB), belirli değerleri not defteri 'nden Data Factory 'ye geri geçirmeniz gerekebilir. 
 
-Genellikle, Jar kitaplıkları dbfs altında depolanır: / FileStore/jar'lar kullanıcı arabirimini kullanarak. Tüm CLI listeleyebilirsiniz: *databricks fs ls dbfs: / FileStore/jar dosyaları dışındaki*.
+1. Not defterinizde [dbutils. Not defteri. Exit ("ReturnValue")](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-workflows.html#notebook-workflows-exit) ve karşılık gelen "ReturnValue" de Data Factory 'ye döndürülür.
+
+2. `'@activity('databricks notebook activity name').output.runOutput'`gibi bir ifade kullanarak çıktıyı Data Factory 'de kullanabilirsiniz. 
+
+   > [!IMPORTANT]
+   > JSON nesnesi geçirçalışıyorsanız, özellik adlarını ekleyerek değerleri alabilirsiniz. Örnek: `'@activity('databricks notebook activity name').output.runOutput.PropertyName'`
+
+## <a name="how-to-upload-a-library-in-databricks"></a>Databricks 'te bir kitaplığı karşıya yükleme
+
+#### <a name="using-databricks-workspace-uihttpsdocsazuredatabricksnetuser-guidelibrarieshtmlcreate-a-library"></a>[Databricks çalışma alanı kullanıcı arabirimini kullanma](https://docs.azuredatabricks.net/user-guide/libraries.html#create-a-library)
+
+Kullanıcı arabirimi kullanılarak eklenen kitaplığın dBFS yolunu almak için [Databricks CLI (yükleme)](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#install-the-cli)kullanabilirsiniz. 
+
+Genellikle, jar kitaplıkları Kullanıcı arabirimi kullanılırken dBFS:/FileStore/jars altında depolanır. CLı: *databricks FS ls dBFS:/FileStore/jars*aracılığıyla tümünü listeleyebilirsiniz.
 
 
 
-#### <a name="copy-library-using-databricks-clihttpsdocsazuredatabricksnetuser-guidedev-toolsdatabricks-clihtmlcopy-a-file-to-dbfs"></a>[Kopya kitaplığı Databricks CLI kullanma](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#copy-a-file-to-dbfs)
+#### <a name="copy-library-using-databricks-clihttpsdocsazuredatabricksnetuser-guidedev-toolsdatabricks-clihtmlcopy-a-file-to-dbfs"></a>[Databricks CLı kullanarak Kitaplığı kopyalama](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#copy-a-file-to-dbfs)
 
-Örnek: *databricks fs cp SparkPi derleme 0.1.jar dbfs: / FileStore/jar dosyaları dışındaki*
+Örnek: *databricks FS CP sparkpi-Assembly-0.1. jar dBFS:/FileStore/jars*

@@ -1,40 +1,34 @@
 ---
-title: Azure'da Terraform ile şirket içi sanal ağ oluşturma
-description: Bir şirket içi sanal ağ yerel kaynakları barındıran Azure'da uygulama nasıl bulunacağını gösteren öğretici.
-services: terraform
-ms.service: azure
-keywords: terraform, hub ve bağlı bileşen, ağlar, hibrit ağlar, devops, sanal makine, azure, sanal ağ eşleme, şirket içi
-author: VaijanathB
-manager: jeconnoc
-ms.author: vaangadi
+title: Öğretici-Terrayform kullanarak Azure 'da şirket içi sanal ağ oluşturma
+description: Yerel kaynakların barındırıldığı Azure 'da şirket içi VNet 'in nasıl uygulanacağını gösteren öğretici
 ms.topic: tutorial
-ms.date: 03/01/2019
-ms.openlocfilehash: 435ee13de28fb1591a5579761ecc7ad5bf9f9d76
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 10/26/2019
+ms.openlocfilehash: 361f9919fdd406a1fef6bbf2b7512dbc20266a54
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60888695"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159207"
 ---
-# <a name="tutorial-create-on-premises-virtual-network-with-terraform-in-azure"></a>Öğretici: Azure'da Terraform ile şirket içi sanal ağ oluşturma
+# <a name="tutorial-create-on-premises-virtual-network-in-azure-using-terraform"></a>Öğretici: Terrayform kullanarak Azure 'da şirket içi sanal ağ oluşturma
 
-Bu öğreticide, bir Azure sanal ağı (VNet) kullanarak bir şirket içi ağına uygulayın. Bir Azure sanal ağı, kendi özel sanal ağ tarafından değiştirilebilir. Bunu yapmak için uygun alt ağ IP adresleri eşleyin.
+Bu öğreticide, bir Azure sanal ağı (VNet) kullanılarak şirket içi bir ağın nasıl uygulanacağı gösterilmektedir. Azure VNet, kendi özel sanal ağınızla değiştirilebilir. Bunu yapmak için, alt ağlardaki uygun IP adreslerini eşleyin.
 
-Bu öğretici aşağıdaki görevleri kapsar:
+Aşağıdaki görevler açıklanmaktadır:
 
 > [!div class="checklist"]
-> * Merkez-uç topolojisinde bir şirket içi sanal ağdan uygulamak için HCL (HashiCorp dili) kullanın
-> * Hub'ı ağ Gereci kaynakları oluşturmak için Terraform'u kullanın
-> * Şirket içi sanal makine oluşturmak için Terraform'u kullanın
-> * Şirket içi sanal özel ağ geçidi oluşturmak için Terraform'u kullanın
+> * Hub-ışınsal-uç topolojisinde şirket içi VNet uygulamak için HCL (HashiCorp Language) kullanın
+> * Terrayform kullanarak Merkez ağı gereç kaynakları oluşturma
+> * Şirket içi sanal makine oluşturmak için Terrayform kullanma
+> * Şirket içi sanal özel ağ geçidi oluşturmak için Terrayform kullanma
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-1. [Bir hub'ı oluşturup azure'da Terraform ile karma ağ topolojisi](./terraform-hub-spoke-introduction.md).
+1. [Azure 'Da Terrayform ile bir hub ve bağlı bileşen karma ağ topolojisi oluşturun](./terraform-hub-spoke-introduction.md).
 
 ## <a name="create-the-directory-structure"></a>Dizin yapısını oluşturma
 
-Bir şirket içi ağı benzetmek için bir Azure sanal ağı oluşturun. VNet tanıtım gerçek özel şirket içi ağ yerini alır. Mevcut şirket içi ağınız ile aynı yapmak için uygun alt ağ IP adresleri eşleyin.
+Şirket içi bir ağın benzetimini yapmak için bir Azure sanal ağı oluşturun. Tanıtım sanal ağı, gerçek bir özel şirket içi ağın yerini alır. Mevcut şirket içi ağlarınız ile aynı yapmak için, alt ağlardaki uygun IP adreslerini eşleyin.
 
 1. [Azure portala](https://portal.azure.com) gidin.
 
@@ -54,11 +48,11 @@ Bir şirket içi ağı benzetmek için bir Azure sanal ağı oluşturun. VNet ta
     cd hub-spoke
     ```
 
-## <a name="declare-the-on-premises-vnet"></a>Şirket içi sanal ağdan bildirme
+## <a name="declare-the-on-premises-vnet"></a>Şirket içi VNet 'i bildirme
 
-Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluşturun.
+Şirket içi VNet bildiren Terrayform yapılandırma dosyasını oluşturun.
 
-1. Cloud Shell'de adlı yeni bir dosya açın `on-prem.tf`.
+1. Cloud Shell ' de, `on-prem.tf`adlı yeni bir dosya açın.
 
     ```bash
     code on-prem.tf
@@ -66,7 +60,7 @@ Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluştu
 
 1. Aşağıdaki kodu düzenleyiciye yapıştırın:
 
-    ```JSON
+    ```hcl
     locals {
       onprem-location       = "SouthCentralUS"
       onprem-resource-group = "onprem-vnet-rg"
@@ -74,65 +68,65 @@ Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluştu
     }
 
     resource "azurerm_resource_group" "onprem-vnet-rg" {
-      name     = "${local.onprem-resource-group}"
-      location = "${local.onprem-location}"
+      name     = local.onprem-resource-group
+      location = local.onprem-location
     }
 
     resource "azurerm_virtual_network" "onprem-vnet" {
       name                = "onprem-vnet"
-      location            = "${azurerm_resource_group.onprem-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.onprem-vnet-rg.name}"
+      location            = azurerm_resource_group.onprem-vnet-rg.location
+      resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
       address_space       = ["192.168.0.0/16"]
 
       tags {
-        environment = "${local.prefix-onprem}"
+        environment = local.prefix-onprem
       }
     }
 
     resource "azurerm_subnet" "onprem-gateway-subnet" {
       name                 = "GatewaySubnet"
-      resource_group_name  = "${azurerm_resource_group.onprem-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.onprem-vnet.name}"
+      resource_group_name  = azurerm_resource_group.onprem-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.onprem-vnet.name
       address_prefix       = "192.168.255.224/27"
     }
 
     resource "azurerm_subnet" "onprem-mgmt" {
       name                 = "mgmt"
-      resource_group_name  = "${azurerm_resource_group.onprem-vnet-rg.name}"
-      virtual_network_name = "${azurerm_virtual_network.onprem-vnet.name}"
+      resource_group_name  = azurerm_resource_group.onprem-vnet-rg.name
+      virtual_network_name = azurerm_virtual_network.onprem-vnet.name
       address_prefix       = "192.168.1.128/25"
     }
 
     resource "azurerm_public_ip" "onprem-pip" {
         name                         = "${local.prefix-onprem}-pip"
-        location            = "${azurerm_resource_group.onprem-vnet-rg.location}"
-        resource_group_name = "${azurerm_resource_group.onprem-vnet-rg.name}"
+        location            = azurerm_resource_group.onprem-vnet-rg.location
+        resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
         allocation_method   = "Dynamic"
 
         tags {
-            environment = "${local.prefix-onprem}"
+            environment = local.prefix-onprem
         }
     }
 
     resource "azurerm_network_interface" "onprem-nic" {
       name                 = "${local.prefix-onprem}-nic"
-      location             = "${azurerm_resource_group.onprem-vnet-rg.location}"
-      resource_group_name  = "${azurerm_resource_group.onprem-vnet-rg.name}"
+      location             = azurerm_resource_group.onprem-vnet-rg.location
+      resource_group_name  = azurerm_resource_group.onprem-vnet-rg.name
       enable_ip_forwarding = true
 
       ip_configuration {
-        name                          = "${local.prefix-onprem}"
-        subnet_id                     = "${azurerm_subnet.onprem-mgmt.id}"
+        name                          = local.prefix-onprem
+        subnet_id                     = azurerm_subnet.onprem-mgmt.id
         private_ip_address_allocation = "Dynamic"
-        public_ip_address_id          = "${azurerm_public_ip.onprem-pip.id}"
+        public_ip_address_id          = azurerm_public_ip.onprem-pip.id
       }
     }
 
     # Create Network Security Group and rule
     resource "azurerm_network_security_group" "onprem-nsg" {
         name                = "${local.prefix-onprem}-nsg"
-        location            = "${azurerm_resource_group.onprem-vnet-rg.location}"
-        resource_group_name = "${azurerm_resource_group.onprem-vnet-rg.name}"
+        location            = azurerm_resource_group.onprem-vnet-rg.location
+        resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
 
         security_rule {
             name                       = "SSH"
@@ -152,16 +146,16 @@ Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluştu
     }
 
     resource "azurerm_subnet_network_security_group_association" "mgmt-nsg-association" {
-      subnet_id                 = "${azurerm_subnet.onprem-mgmt.id}"
-      network_security_group_id = "${azurerm_network_security_group.onprem-nsg.id}"
+      subnet_id                 = azurerm_subnet.onprem-mgmt.id
+      network_security_group_id = azurerm_network_security_group.onprem-nsg.id
     }
 
     resource "azurerm_virtual_machine" "onprem-vm" {
       name                  = "${local.prefix-onprem}-vm"
-      location              = "${azurerm_resource_group.onprem-vnet-rg.location}"
-      resource_group_name   = "${azurerm_resource_group.onprem-vnet-rg.name}"
-      network_interface_ids = ["${azurerm_network_interface.onprem-nic.id}"]
-      vm_size               = "${var.vmsize}"
+      location              = azurerm_resource_group.onprem-vnet-rg.location
+      resource_group_name   = azurerm_resource_group.onprem-vnet-rg.name
+      network_interface_ids = [azurerm_network_interface.onprem-nic.id]
+      vm_size               = var.vmsize
 
       storage_image_reference {
         publisher = "Canonical"
@@ -179,8 +173,8 @@ Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluştu
 
       os_profile {
         computer_name  = "${local.prefix-onprem}-vm"
-        admin_username = "${var.username}"
-        admin_password = "${var.password}"
+        admin_username = var.username
+        admin_password = var.password
       }
 
       os_profile_linux_config {
@@ -188,22 +182,22 @@ Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluştu
       }
 
       tags {
-        environment = "${local.prefix-onprem}"
+        environment = local.prefix-onprem
       }
     }
 
     resource "azurerm_public_ip" "onprem-vpn-gateway1-pip" {
       name                = "${local.prefix-onprem}-vpn-gateway1-pip"
-      location            = "${azurerm_resource_group.onprem-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.onprem-vnet-rg.name}"
+      location            = azurerm_resource_group.onprem-vnet-rg.location
+      resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
 
       allocation_method = "Dynamic"
     }
 
     resource "azurerm_virtual_network_gateway" "onprem-vpn-gateway" {
       name                = "onprem-vpn-gateway1"
-      location            = "${azurerm_resource_group.onprem-vnet-rg.location}"
-      resource_group_name = "${azurerm_resource_group.onprem-vnet-rg.name}"
+      location            = azurerm_resource_group.onprem-vnet-rg.location
+      resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
 
       type     = "Vpn"
       vpn_type = "RouteBased"
@@ -214,9 +208,9 @@ Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluştu
 
       ip_configuration {
         name                          = "vnetGatewayConfig"
-        public_ip_address_id          = "${azurerm_public_ip.onprem-vpn-gateway1-pip.id}"
+        public_ip_address_id          = azurerm_public_ip.onprem-vpn-gateway1-pip.id
         private_ip_address_allocation = "Dynamic"
-        subnet_id                     = "${azurerm_subnet.onprem-gateway-subnet.id}"
+        subnet_id                     = azurerm_subnet.onprem-gateway-subnet.id
       }
       depends_on = ["azurerm_public_ip.onprem-vpn-gateway1-pip"]
 
@@ -228,4 +222,4 @@ Bir şirket içi sanal ağdan bildirir Terraform yapılandırma dosyası oluştu
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Azure'da Terraform ile merkez sanal ağ oluşturma](./terraform-hub-spoke-hub-network.md)
+> [Azure 'da Terrayform ile bir hub sanal ağı oluşturma](./terraform-hub-spoke-hub-network.md)

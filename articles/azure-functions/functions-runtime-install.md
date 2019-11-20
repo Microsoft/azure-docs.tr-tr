@@ -1,140 +1,139 @@
 ---
-title: Azure işlevleri çalışma zamanı yükleme | Microsoft Docs
-description: Azure işlevleri çalışma zamanı Önizleme 2 yükleme
+title: Yükleme Azure İşlevleri Çalışma Zamanı | Microsoft Docs
+description: Azure İşlevleri Çalışma Zamanı Preview 2 ' ye nasıl yüklenir
 services: functions
 author: apwestgarth
 manager: stefsch
 ms.assetid: ''
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
 ms.date: 11/28/2017
 ms.author: anwestg
-ms.openlocfilehash: aae6bc41f3c2fc2c5f8cf63d07f6b4d79bb3564a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0fbc76f3cb3fea84347ef55e40e1b2bed9b98152
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61023205"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70085506"
 ---
-# <a name="install-the-azure-functions-runtime-preview-2"></a>Azure işlevleri çalışma zamanı preview 2 sürümünü yükleyin
+# <a name="install-the-azure-functions-runtime-preview-2"></a>Azure İşlevleri Çalışma Zamanı Preview 2 ' i yükler
 
 [!INCLUDE [intro](../../includes/functions-runtime-preview-note.md)]
 
-Azure işlevleri çalışma zamanı Önizleme 2 yüklemek istiyorsanız, aşağıdaki adımları izleyin:
+Azure İşlevleri Çalışma Zamanı Preview 2 ' yi yüklemek istiyorsanız aşağıdaki adımları izleyin:
 
-1. En düşük gereksinimleri makinenize geçirir emin olun.
-1. İndirme [Azure işlevleri çalışma zamanı Önizleme yükleyici](https://aka.ms/azafrv2).
-1. Azure işlevleri çalışma zamanı Önizleme 1 kaldırın.
-1. Azure işlevleri çalışma zamanı preview 2 sürümünü yükleyin.
-1. Azure işlevleri çalışma zamanı Önizleme 2 yapılandırmasını tamamlayın.
-1. Azure işlevleri çalışma zamanı önizlemesinde ilk işlevinizi oluşturma
+1. Makinenizin en düşük gereksinimleri geçirdiğinden emin olun.
+1. [Azure işlevleri çalışma zamanı Preview yükleyicisini](https://aka.ms/azafrv2)indirin.
+1. Azure İşlevleri Çalışma Zamanı Preview 1 ' i kaldırın.
+1. Azure İşlevleri Çalışma Zamanı Preview 2 ' i yükler.
+1. Azure İşlevleri Çalışma Zamanı Preview 2 yapılandırmasını doldurun.
+1. Azure İşlevleri Çalışma Zamanı önizlemede ilk işlevinizi oluşturma
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure işlevleri çalışma zamanı Önizleme yüklemeden önce aşağıdaki kaynaklara sahip olmalıdır:
+Azure İşlevleri Çalışma Zamanı Önizlemeyi yüklemeden önce aşağıdaki kaynaklara sahip olmanız gerekir:
 
 1. Microsoft Windows Server 2016 veya Microsoft Windows 10 Creators Update (Professional veya Enterprise Edition) çalıştıran bir makine.
-1. Ağınızda çalışan bir SQL Server örneği.  Gerekli en düşük sürüm, SQL Server Express ' dir.
+1. Ağınız içinde çalışan bir SQL Server örneği.  Gerekli en düşük sürüm SQL Server Express.
 
-## <a name="uninstall-previous-version"></a>Önceki sürümü kaldırmalısınız
+## <a name="uninstall-previous-version"></a>Önceki sürümü kaldır
 
-Azure işlevleri çalışma zamanı Önizleme daha önce yüklediyseniz, en son sürümü yüklemeden önce kaldırmanız gerekir.  Azure işlevleri çalışma zamanı Önizleme Ekle/Kaldır'ı Windows içinde program kaldırarak kaldırın.
+Azure İşlevleri Çalışma Zamanı önizlemesini daha önce yüklediyseniz, en son sürümü yüklemeden önce ' yi kaldırmanız gerekir.  Windows 'daki Program Ekle/Kaldır bölümünde programı kaldırarak Azure İşlevleri Çalışma Zamanı önizlemeyi kaldırın.
 
-## <a name="install-the-azure-functions-runtime-preview"></a>Azure işlevleri çalışma zamanı Preview sürümünü yükleyin
+## <a name="install-the-azure-functions-runtime-preview"></a>Azure İşlevleri Çalışma Zamanı önizlemeyi yükler
 
-Azure işlevleri çalışma zamanı Önizleme yükleyici, Azure işlevleri çalışma zamanı Önizleme yönetim ve çalışan rolleri yükleme size yol gösterir.  Yönetim ve çalışan rolü aynı makinede yüklemek mümkündür.  Ancak, daha fazla işlev uygulamaları ekledikçe daha fazla çalışan rolü üzerine birden çok çalışan işlevlerinizi ölçeklendirme için ek makineler dağıtmanız gerekir.
+Azure İşlevleri Çalışma Zamanı Preview yükleyicisi, Azure İşlevleri Çalışma Zamanı önizleme yönetimi ve çalışan rollerinin yüklenmesinde size kılavuzluk eder.  Yönetim ve çalışan rolünü aynı makineye yüklemek mümkündür.  Ancak, daha fazla işlev uygulaması eklediğinizde, işlevlerinizi birden çok çalışana ölçeklendirebilmek için ek makinelere daha fazla çalışan rolü dağıtmanız gerekir.
 
-## <a name="install-the-management-and-worker-role-on-the-same-machine"></a>Yönetim ve çalışan rolü aynı makineye yükleyin.
+## <a name="install-the-management-and-worker-role-on-the-same-machine"></a>Yönetim ve çalışan rolünü aynı makineye yükler
 
-1. Azure işlevleri çalışma zamanı Önizleme yükleyiciyi çalıştırın.
+1. Azure İşlevleri Çalışma Zamanı Preview yükleyicisini çalıştırın.
 
-    ![Azure işlevleri çalışma zamanı Önizleme yükleyicisi][1]
+    ![Azure İşlevleri Çalışma Zamanı Preview yükleyicisi][1]
 
-1. **İleri**’ye tıklayın.
-1. Koşullarını okuduğunuzu sonra **EULA**, **kutuyu** koşullarını kabul edin ve **sonraki** ilerlemek için.
-1. Bu makinede yüklemek istediğiniz rolleri seçin **işlevleri yönetim rolü** ve/veya **işlevleri çalışan rolü** tıklatıp **sonraki**.
+1. **İleri**'ye tıklayın.
+1. **EULA**'nın koşullarını okuduktan sonra, koşulları kabul etmek için **kutuyu işaretleyin** ve **İleri** ' ye tıklayın.
+1. Bu makine **Işlevleri yönetim rolü** ve/veya **işlevleri çalışan rolü** üzerine yüklemek Istediğiniz rolleri seçin ve **İleri**' ye tıklayın.
 
-    ![Azure işlevleri çalışma zamanı Önizleme yükleyici - rolü seçimi][3]
-
-    > [!NOTE]
-    > Yükleyebileceğiniz **işlevleri çalışan rolü** birçok diğer makinelere. Bunu yapmak için bu yönergeleri izleyin ve yalnızca belirli **işlevleri çalışan rolü** yükleyicisi.
-
-1. Tıklayın **sonraki** olmasını **Azure işlevleri çalışma zamanı Kurulum Sihirbazı'nı** makinenizde yükleme işlemini başlatabilir.
-1. İşlem tamamlandıktan sonra Kurulum Sihirbazı'nı başlatır **Azure işlevleri çalışma zamanı** yapılandırma aracı.
-
-    ![Azure işlevleri çalışma zamanı Önizleme yükleyici tamamlandı][6]
+    ![Azure İşlevleri Çalışma Zamanı Preview yükleyicisi-rol seçimi][3]
 
     > [!NOTE]
-    > Üzerinde yüklüyorsanız **Windows 10** ve **kapsayıcı** özelliği daha önce etkinleştirilmedi, **Azure işlevleri çalışma zamanı Kurulumu** makinenizi ister yüklemeyi tamamlamak için.
+    > **Işlevlerin çalışan rolünü** diğer birçok makineye yükleyebilirsiniz. Bunu yapmak için, bu yönergeleri izleyin ve yalnızca yükleyicideki **Işlevler çalışan rolü** ' nü seçin.
 
-## <a name="configure-the-azure-functions-runtime"></a>Azure işlevleri çalışma zamanı yapılandırma
+1. **Azure işlevleri çalışma zamanı Kurulum sihirbazının** makinenizde yükleme işlemini başlatmak için **İleri** ' ye tıklayın.
+1. Tamamlandıktan sonra, Kurulum Sihirbazı **Azure işlevleri çalışma zamanı** yapılandırma aracını başlatır.
 
-Azure işlevleri çalışma zamanı yüklemenin tamamlanması için yapılandırmasını tamamlamanız gerekir.
+    ![Azure İşlevleri Çalışma Zamanı Preview yükleyicisi Tamam][6]
 
-1. **Azure işlevleri çalışma zamanı** yapılandırma aracı makinenizde yüklü hangi rollerin gösterir.
+    > [!NOTE]
+    > **Windows 10** ' a yüklüyorsanız ve **kapsayıcı** özelliği daha önce etkinleştirilmemişse, **Azure işlevleri çalışma zamanı kurulum** , yüklemeyi tamamlaması için makinenizi yeniden başlatmanızı ister.
 
-    ![Azure işlevleri çalışma zamanı Önizleme yapılandırma aracı][7]
+## <a name="configure-the-azure-functions-runtime"></a>Azure İşlevleri Çalışma Zamanı yapılandırma
 
-1. Tıklayın **veritabanı** sekmesinde, bağlantı ayrıntılarını girin belirterek de dahil olmak üzere SQL Server örneğiniz için bir [veritabanı ana anahtarı](https://docs.microsoft.com/sql/relational-databases/security/encryption/sql-server-and-database-encryption-keys-database-engine), tıklatıp **Uygula**.  Çalışma zamanı desteği için bir veritabanı oluşturmak Azure işlevleri çalışma zamanı için sırada bir SQL Server örneğine bir bağlantı gereklidir.
+Azure İşlevleri Çalışma Zamanı yüklemesini gerçekleştirmek için, yapılandırmayı tamamlamalısınız.
 
-    ![Azure işlevleri çalışma zamanı Önizleme veritabanı yapılandırması][8]
+1. **Azure işlevleri çalışma zamanı** yapılandırma aracı, makinenizde hangi rollerin yüklü olduğunu gösterir.
 
-1. Tıklayın **kimlik bilgilerini** sekmesi.  Burada, tüm işlev uygulamaları barındırmak için bir dosya paylaşımı ile kullanmak için iki yeni kimlik bilgileri oluşturmanız gerekir.  Belirtin **kullanıcı adı** ve **parola** birleşimlerini **dosya paylaşımı sahibi** ve **dosya paylaşımı kullanıcısı**, ardından**Uygulamak**.
+    ![Azure İşlevleri Çalışma Zamanı Preview yapılandırma aracı][7]
 
-    ![Azure işlevleri çalışma zamanı Önizleme kimlik bilgileri][9]
+1. **Veritabanı** sekmesine tıklayın, bir [veritabanı ana anahtarı](https://docs.microsoft.com/sql/relational-databases/security/encryption/sql-server-and-database-encryption-keys-database-engine)belirtme dahil SQL Server Örneğiniz için bağlantı ayrıntılarını girin ve **Uygula**' ya tıklayın.  Azure İşlevleri Çalışma Zamanı çalışma zamanını destekleyecek bir veritabanı oluşturmak için bir SQL Server örneğine bağlantı gerekir.
 
-1. Tıklayın **dosya paylaşımı** sekmesi.  Burada, dosya paylaşım konumunu ayrıntılarını belirtmeniz gerekir.  Dosya Paylaşımı, oluşturulabilir veya var olan bir dosya paylaşımı'nı kullanın ve tıklayın **Uygula**.  Yeni bir dosya paylaşımı konumu seçin, Azure işlevleri çalışma zamanı tarafından kullanım için bir dizin belirtmeniz gerekir.
+    ![Azure İşlevleri Çalışma Zamanı Preview veritabanı yapılandırması][8]
 
-    ![Azure işlevleri çalışma zamanı Önizleme dosya paylaşımı][10]
+1. **Kimlik bilgileri** sekmesine tıklayın.  Burada, tüm işlev uygulamalarınızı barındırmak için bir dosya paylaşımıyla birlikte kullanmak üzere iki yeni kimlik bilgisi oluşturmalısınız.  **Dosya paylaşımının sahibi** ve **dosya paylaşma kullanıcısı**Için **Kullanıcı adı** ve **parola** birleşimlerini belirtip **Uygula**' ya tıklayın.
 
-1. Tıklayın **IIS** sekmesi.  Bu sekme, Azure işlevleri çalışma zamanı yapılandırma aracı oluşturur ve IIS içinde Web siteleri ayrıntılarını gösterir.  Bir özel DNS adını buraya Azure işlevleri çalışma zamanı Önizleme portalı için belirtebilirsiniz.  Tıklayın **Uygula** tamamlanması.
+    ![Azure İşlevleri Çalışma Zamanı Preview kimlik bilgileri][9]
 
-    ![Azure işlevleri çalışma zamanı Önizleme IIS][11]
+1. **Dosya paylaşma** sekmesine tıklayın.  Burada dosya paylaşma konumunun ayrıntılarını belirtmeniz gerekir.  Dosya paylaşma sizin için oluşturulabilir veya var olan bir dosya paylaşımından kullanılabilir ve **Uygula**' ya tıklayabilirsiniz.  Yeni bir dosya paylaşma konumu seçerseniz, Azure İşlevleri Çalışma Zamanı tarafından kullanılacak bir dizin belirtmeniz gerekir.
 
-1. Tıklayın **Hizmetleri** sekmesi.  Bu sekme, Azure işlevleri çalışma zamanı Yapılandırma aracında hizmetlerin durumunu gösterir.  Varsa **Azure işlevleri konak Etkinleştirme hizmeti** olan ilk yapılandırmadan sonra çalışmıyor, tıklayın **Hizmeti'ni Başlat**.
+    ![Azure İşlevleri Çalışma Zamanı Preview dosya paylaşma][10]
 
-    ![Azure işlevleri çalışma zamanı Önizleme yapılandırması tamamlandı][12]
+1. **IIS** sekmesine tıklayın.  Bu sekmede, Azure İşlevleri Çalışma Zamanı yapılandırma aracının oluşturduğu IIS 'deki Web sitelerinin ayrıntıları gösterilmektedir.  Azure İşlevleri Çalışma Zamanı Preview Portal için burada özel bir DNS adı belirtebilirsiniz.  Tamam ' a tıklayarak Tamam 'a tıklayın.
 
-1. Gözat **Azure işlevleri çalışma zamanı portalı** olarak `https://<machinename>.<domain>/`.
+    ![Azure İşlevleri Çalışma Zamanı Preview IIS][11]
 
-    ![Azure işlevleri çalışma zamanı Önizleme portalı][13]
+1. **Hizmetler** sekmesine tıklayın.  Bu sekmede Azure İşlevleri Çalışma Zamanı yapılandırma aracdaki hizmetlerin durumu gösterilmektedir.  **Azure Işlevleri ana bilgisayar etkinleştirme hizmeti** ilk yapılandırmadan sonra çalışmıyorsa, **Hizmeti Başlat**' a tıklayın.
 
-## <a name="create-your-first-function-in-azure-functions-runtime-preview"></a>Azure işlevleri çalışma zamanı önizlemesinde ilk işlevinizi oluşturma
+    ![Azure İşlevleri Çalışma Zamanı Preview Yapılandırması Tamam][12]
 
-Azure işlevleri çalışma zamanı önizlemesinde ilk işlevinizi oluşturma
+1. **Azure işlevleri çalışma zamanı portalına** `https://<machinename>.<domain>/`gidin.
 
-1. Gözat **Azure işlevleri çalışma zamanı portalı** olarak `https://<machinename>.<domain>` örneğin `https://mycomputer.mydomain.com`.
+    ![Azure İşlevleri Çalışma Zamanı Preview Portal][13]
 
-1. İsteyip istemediğiniz sorulur **oturum**, etki alanı hesabı kullanıcı adı ve parola, aksi takdirde yerel hesap kullanıcı adı ve parola portalda oturum açmak için bir etki alanı kullanması dağıtılmış.
+## <a name="create-your-first-function-in-azure-functions-runtime-preview"></a>Azure İşlevleri Çalışma Zamanı önizlemede ilk işlevinizi oluşturma
 
-    ![Azure işlevleri çalışma zamanı Önizleme portalı oturum açma][14]
+Azure İşlevleri Çalışma Zamanı önizlemede ilk işlevinizi oluşturmak için
 
-1. İşlev uygulamaları oluşturmak için abonelik oluşturmanız gerekir.  Portalın sol üst köşesinde tıklayın **+** abonelikleri yanındaki seçeneği.
+1. Örneğin `https://<machinename>.<domain>` Azureişlevleriçalışmazamanıportalına`https://mycomputer.mydomain.com`gidin.
 
-    ![Azure işlevleri çalışma zamanı Önizleme portalı abonelikleri][15]
+1. Bir etki alanında dağıtılmışsa etki alanı hesabınızın Kullanıcı adı ve parolasını kullanıyorsanız **oturum açmanız**istenir, aksi takdirde portalda oturum açmak için yerel hesap Kullanıcı adınızı ve parolanızı kullanın.
 
-1. Seçin **DefaultPlan**, aboneliğiniz için bir ad girin ve tıklayın **Oluştur**.
+    ![Azure İşlevleri Çalışma Zamanı Preview Portal oturum açma][14]
 
-    ![Azure işlevleri çalışma zamanı Önizleme portalı abonelik planı ve adı][16]
+1. İşlev uygulamaları oluşturmak için bir abonelik oluşturmanız gerekir.  Portalın sol üst köşesinde, abonelikler ' in yanındaki **+** seçeneğe tıklayın.
 
-1. Tüm işlev uygulamalarınızın, portalın sol bölmesinde listelenir.  Yeni bir işlev uygulaması oluşturmak için başlığı seçin **işlev uygulamaları** tıklatıp **+** seçeneği.
+    ![Azure İşlevleri Çalışma Zamanı Preview Portal abonelikleri][15]
 
-1. İşlev uygulamanız için bir ad girin, doğru aboneliği seçin, istediğiniz karşı program ve Azure işlevleri çalışma zamanı sürümünü **oluştur**
+1. **Defaultplan**' ı seçin, aboneliğiniz için bir ad girin ve **Oluştur**' a tıklayın.
 
-    ![Azure işlevleri çalışma zamanı Önizleme portalında yeni işlev uygulaması][17]
+    ![Azure İşlevleri Çalışma Zamanı Preview Portal abonelik planı ve adı][16]
 
-1. Yeni işlev uygulamanızı portalın sol bölmesinde listelenir.  İşlevler'i seçin ve ardından **yeni işlev** portalın Orta bölmede üstünde.
+1. Tüm işlev uygulamalarınız portalın sol bölmesinde listelenir.  Yeni bir işlev uygulaması oluşturmak için, **uygulama başlık işlevini** seçin ve **+** seçeneğe tıklayın.
 
-    ![Azure işlevleri çalışma zamanı Önizleme şablonları][18]
+1. İşlev uygulamanız için bir ad girin, doğru aboneliği seçin, hangi Azure Işlevleri çalışma zamanının Programlaştırmak istediğinizi seçin ve **Oluştur** ' a tıklayın.
 
-1. Zamanlayıcı tetikleyicisi işlevi seçin, sağ açılır öğesinde işlevinizi adlandırın ve için zamanlamayı değiştirmek `*/5 * * * * *` (Bu cron ifadesi her beş saniyede yürütmek Zamanlayıcı işlevinizin neden) tıklayıp **oluştur**
+    ![Azure İşlevleri Çalışma Zamanı Preview Portal yeni işlev uygulaması][17]
 
-    ![Azure işlevleri çalışma zamanı önizleme yeni Zamanlayıcı işlevi yapılandırması][19]
+1. Yeni işlev uygulamanız portalın sol bölmesinde listelenir.  Işlevler ' i seçin ve ardından portalda orta bölmenin en üstündeki **yeni işlev** ' ı tıklatın.
 
-1. İşleviniz artık oluşturuldu.  İşlev uygulamanızın yürütme günlüğü genişleterek görüntüleyebileceğiniz **günlük** portalın alt bölmesinde.
+    ![Azure İşlevleri Çalışma Zamanı önizleme şablonları][18]
 
-    ![Azure işlevleri çalışma zamanı Önizleme işlevi yürütme][20]
+1. Zamanlayıcı tetikleyicisi işlevini seçin, sağ taraftaki açılır menüdeki işlevinizi adlandırın ve zamanlamayı olarak `*/5 * * * * *` değiştirin (bu cron ifadesi Zamanlayıcı işlevinizin beş saniyede bir yürütmesine neden olur) ve **Oluştur** ' a tıklayın.
+
+    ![Yeni zamanlayıcı işlev yapılandırması Azure İşlevleri Çalışma Zamanı Önizleme][19]
+
+1. İşleviniz şimdi oluşturuldu.  Portalın alt kısmındaki **günlük** bölmesini genişleterek işlev uygulamanızın yürütme günlüğünü görüntüleyebilirsiniz.
+
+    ![Azure İşlevleri Çalışma Zamanı Preview işlevi yürütülüyor][20]
 
 <!--Image references-->
 [1]: ./media/functions-runtime-install/AzureFunctionsRuntime_Installer1.png

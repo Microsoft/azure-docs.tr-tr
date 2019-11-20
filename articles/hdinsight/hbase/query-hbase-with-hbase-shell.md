@@ -1,7 +1,7 @@
 ---
-title: 'Hızlı Başlangıç: Sorgu Apache HBase, HBase Kabuğu olan Azure HDInsight-'
-description: Bu hızlı başlangıçta, Apache HBase sorguları çalıştırmak için Apache HBase Kabuğu'nu kullanmayı öğrenin.
-keywords: hdınsight, hadoop, HBase
+title: "Hızlı Başlangıç: Azure HDInsight 'ta Apache HBase 'i sorgulama-HBase kabuğu"
+description: Bu hızlı başlangıçta Apache HBase kabuğunu kullanarak Apache HBase sorgularını nasıl çalıştıracağınızı öğreneceksiniz.
+keywords: HDInsight, Hadoop, HBase
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -9,62 +9,62 @@ ms.custom: hdinsightactive
 ms.topic: quickstart
 ms.date: 06/12/2019
 ms.author: hrasheed
-ms.openlocfilehash: d937e090895a5b02026c755b1efb7dd1e0b35000
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 033227f085cd23c5fa26313cb4a2816070676560
+ms.sourcegitcommit: 8ef0a2ddaece5e7b2ac678a73b605b2073b76e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67054308"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71076438"
 ---
-# <a name="quickstart-query-apache-hbase-in-azure-hdinsight-with-hbase-shell"></a>Hızlı Başlangıç: Azure HDInsight, sorgu Apache HBase ile HBase Kabuğu
+# <a name="quickstart-query-apache-hbase-in-azure-hdinsight-with-hbase-shell"></a>Hızlı Başlangıç: HBase kabuğu ile Azure HDInsight 'ta Apache HBase 'i sorgulama
 
-Bu hızlı başlangıçta, bir HBase tablosu oluşturmayı, veri eklemek ve ardından tabloyu sorgulamak için Apache HBase Kabuğu'nu kullanmayı öğrenin.
+Bu hızlı başlangıçta, bir HBase tablosu oluşturmak, veri eklemek ve ardından tabloyu sorgulamak için Apache HBase kabuğu 'nu nasıl kullanacağınızı öğreneceksiniz.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Bir Apache HBase kümesi. Bkz: [küme oluştur](../hadoop/apache-hadoop-linux-tutorial-get-started.md#create-cluster) bir HDInsight kümesi oluşturma.  Seçtiğiniz olun **HBase** küme türü.
+* Apache HBase kümesi. HDInsight kümesi oluşturmak için bkz. [küme oluşturma](../hadoop/apache-hadoop-linux-tutorial-get-started.md#create-cluster) .  **HBase** küme türünü seçtiğinizden emin olun.
 
-* Bir SSH istemcisi. Daha fazla bilgi için [SSH kullanarak HDInsight (Apache Hadoop) bağlanma](../hdinsight-hadoop-linux-use-ssh-unix.md).
+* Bir SSH istemcisi. Daha fazla bilgi için bkz. [SSH kullanarak HDInsight 'A bağlanma (Apache Hadoop)](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-## <a name="create-a-table-and-manipulate-data"></a>Bir tablo oluşturun ve veri işleme
+## <a name="create-a-table-and-manipulate-data"></a>Tablo oluşturma ve verileri işleme
 
 Çoğu kişi için veriler tablo biçiminde görünür:
 
-![HDInsight HBase tablo verileri](./media/query-hbase-with-hbase-shell/hdinsight-hbase-contacts-tabular.png)
+![HDInsight Apache HBase tablo verileri](./media/query-hbase-with-hbase-shell/hdinsight-hbase-contacts-tabular.png)
 
-HBase içinde (uygulaması [bulut BigTable](https://cloud.google.com/bigtable/)), aynı veriler şu gibi görünür:
+HBase 'de ( [Cloud BigTable](https://cloud.google.com/bigtable/)'ın bir uygulamasında), aynı veriler şöyle görünür:
 
-![HDInsight HBase BigTable verileri](./media/query-hbase-with-hbase-shell/hdinsight-hbase-contacts-bigtable.png)
+![HDInsight Apache HBase BigTable verileri](./media/query-hbase-with-hbase-shell/hdinsight-hbase-contacts-bigtable.png)
 
-HBase kümelerine bağlanmak ve Apache HBase Kabuğu kullanarak HBase tabloları oluşturmak, eklemek ve verileri sorgulamak için SSH kullanabilirsiniz.
+HBase kümelerine bağlanmak için SSH kullanabilirsiniz ve ardından, HBase tabloları oluşturmak, veri eklemek ve verileri sorgulamak için Apache HBase kabuğu ' nu kullanabilirsiniz.
 
-1. Kullanım `ssh` HBase kümenize bağlanmak için komutu. Değiştirerek aşağıdaki komutu düzenleyin `CLUSTERNAME` , kümenizin adını ve ardından komutu girin:
+1. HBase kümenize bağlanmak için komutunu kullanın `ssh` . Aşağıdaki komutu, kümenizin adıyla değiştirerek `CLUSTERNAME` düzenleyin ve ardından şu komutu girin:
 
     ```cmd
     ssh sshuser@CLUSTERNAME-ssh.azurehdinsight.net
     ```
 
-2. Kullanım `hbase shell` HBase etkileşimli Kabuk başlatmak için komutu. SSH bağlantınızı aşağıdaki komutu girin:
+2. HBase etkileşimli kabuğunu başlatmak için komutunu kullanın `hbase shell` . SSH bağlantınıza aşağıdaki komutu girin:
 
     ```bash
     hbase shell
     ```
 
-3. Kullanım `create` iki sütun ailesi ile bir HBase tablosu oluşturmak için komutu. Aşağıdaki komutu girin:
+3. İki `create` sütunlu ailelerle bir HBase tablosu oluşturmak için komutunu kullanın. Aşağıdaki komutu girin:
 
     ```hbase
     create 'Contacts', 'Personal', 'Office'
     ```
 
-4. Kullanım `list` HBase tüm tablolarda listelemek için komutu. Aşağıdaki komutu girin:
+4. HBase 'deki tüm tabloları listelemek için komutunu kullanın `list` . Aşağıdaki komutu girin:
 
     ```hbase
     list
     ```
 
-5. Kullanım `put` değerleri belirtilen bir sütunda belirli bir tablodaki belirli bir satır eklemek için komutu. Aşağıdaki komutu girin:
+5. Belirli `put` bir tablodaki belirtilen bir sütundaki değerleri eklemek için komutunu kullanın. Aşağıdaki komutu girin:
 
     ```hbase
     put 'Contacts', '1000', 'Personal:Name', 'John Dole'
@@ -73,55 +73,55 @@ HBase kümelerine bağlanmak ve Apache HBase Kabuğu kullanarak HBase tabloları
     put 'Contacts', '1000', 'Office:Address', '1111 San Gabriel Dr.'
     ```
 
-6. Kullanım `scan` tarama ve döndürmek için komut `Contacts` tablo verileri. Aşağıdaki komutu girin:
+6. `Contacts` Tablo verilerini taramak ve döndürmek için komutunu kullanın `scan` . Aşağıdaki komutu girin:
 
     ```hbase
     scan 'Contacts'
     ```
 
-7. Kullanım `get` komut satırının içeriği getirilemedi. Aşağıdaki komutu girin:
+7. Bir `get` satırın içeriğini getirmek için komutunu kullanın. Aşağıdaki komutu girin:
 
     ```hbase
     get 'Contacts', '1000'
     ```
 
-    Kullanılarak benzer sonuçlar görürsünüz `scan` yalnızca bir satır olduğundan komutu.
+    Yalnızca bir satır olduğundan, `scan` komutunu kullanarak benzer sonuçlar görürsünüz.
 
-8. Kullanım `delete` bir hücre değerini bir tablodaki silmek için komutu. Aşağıdaki komutu girin:
+8. Tablodaki `delete` bir hücre değerini silmek için komutunu kullanın. Aşağıdaki komutu girin:
 
     ```hbase
     delete 'Contacts', '1000', 'Office:Address'
     ```
 
-9. Kullanım `disable` tablo devre dışı bırakma komutu. Aşağıdaki komutu girin:
+9. Tabloyu `disable` devre dışı bırakmak için komutunu kullanın. Aşağıdaki komutu girin:
 
     ```hbase
     disable 'Contacts'
     ```
 
-10. Kullanım `drop` HBase tablo drop komutu. Aşağıdaki komutu girin:
+10. Bir `drop` tabloyu HBase 'den bırakmak için komutunu kullanın. Aşağıdaki komutu girin:
 
     ```hbase
     drop 'Contacts'
     ```
 
-11. Kullanım `exit` HBase etkileşimli Kabuk durdurmak için komutu. Aşağıdaki komutu girin:
+11. HBase etkileşimli kabuğunu durdurmak için komutunu kullanın `exit` . Aşağıdaki komutu girin:
 
     ```hbase
     exit
     ```
 
-HBase tablo şeması hakkında daha fazla bilgi için bkz. [Apache HBase şema tasarımına giriş](http://0b4af6cdc2f0c5998459-c0245c5c937c5dedcca3f1764ecc9b2f.r43.cf2.rackcdn.com/9353-login1210_khurana.pdf). Daha fazla HBase komutları için bkz. [Apache HBase Başvuru Kılavuzu](https://hbase.apache.org/book.html#quickstart).
+HBase tablo şeması hakkında daha fazla bilgi için bkz. [Apache HBase şema tasarımına giriş](http://0b4af6cdc2f0c5998459-c0245c5c937c5dedcca3f1764ecc9b2f.r43.cf2.rackcdn.com/9353-login1210_khurana.pdf). Daha fazla HBase komutu için bkz. [Apache HBase başvuru kılavuzu](https://hbase.apache.org/book.html#quickstart).
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
 Hızlı başlangıcı tamamladıktan sonra kümeyi silmek isteyebilirsiniz. HDInsight ile, verileriniz Azure Storage’da depolanır, böylece kullanılmadığında bir kümeyi güvenle silebilirsiniz. Ayrıca, kullanılmıyorken dahi HDInsight kümesi için sizden ücret kesilir. Küme ücretleri depolama ücretlerinin birkaç katı olduğundan, kullanılmadığında kümelerin silinmesi mantıklı olandır.
 
-Bir kümeyi silmek için bkz: [tarayıcınız, PowerShell veya Azure CLI kullanarak bir HDInsight kümesi silme](../hdinsight-delete-cluster.md).
+Bir kümeyi silmek için bkz. [tarayıcınızı, PowerShell 'i veya Azure CLI 'yı kullanarak HDInsight kümesini silme](../hdinsight-delete-cluster.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, bir HBase tablosu oluşturmayı, veri eklemek ve ardından tabloyu sorgulamak üzere Apache HBase Kabuğu kullanarak öğrendiniz. Hbase'de depolanan veriler hakkında daha fazla bilgi edinmek için sonraki makaleye, Apache Spark ile sorguları yürütüp yapmayı gösterir.
+Bu hızlı başlangıçta, bir HBase tablosu oluşturmak, veri eklemek ve ardından tabloyu sorgulamak için Apache HBase kabuğu 'nu nasıl kullanacağınızı öğrendiniz. HBase 'de depolanan veriler hakkında daha fazla bilgi edinmek için, bir sonraki makalede Apache Spark sorguları yürütme gösterilmektedir.
 
 > [!div class="nextstepaction"]
-> [Apache HBase veri okuma ve yazma için Apache Spark'ı kullanma](../hdinsight-using-spark-query-hbase.md)
+> [Apache HBase verilerini okumak ve yazmak için Apache Spark kullanma](../hdinsight-using-spark-query-hbase.md)

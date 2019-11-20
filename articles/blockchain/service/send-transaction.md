@@ -1,385 +1,94 @@
 ---
-title: Azure Blockchain hizmetini kullanarak işlemleri Gönder
-description: Akıllı bir sözleşme dağıtmak ve özel bir işlem göndermek için Azure blok zinciri hizmetini kullanmak nasıl gösteren öğretici.
+title: Visual Studio Code-Azure blok zinciri hizmeti 'ni kullanma
+description: Azure blok zinciri hizmetinde akıllı bir sözleşme oluşturmak, derlemek ve dağıtmak için Visual Studio Code 'de Ethereum uzantısı için Azure blok zinciri geliştirme seti 'ni kullanma hakkında öğretici.
 services: azure-blockchain
-keywords: ''
 author: PatAltimore
 ms.author: patricka
-ms.date: 05/29/2019
+ms.date: 10/14/2019
 ms.topic: tutorial
 ms.service: azure-blockchain
-ms.reviewer: jackyhsu
-manager: femila
-ms.openlocfilehash: 9037c7b5498a5e0a37b05e5ee09891bf8066393d
-ms.sourcegitcommit: c05618a257787af6f9a2751c549c9a3634832c90
+ms.reviewer: chrisseg
+ms.openlocfilehash: 13a5993a14e386dc7d24c7464610bbf1ace4b9cb
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66417494"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72329235"
 ---
-# <a name="tutorial-send-transactions-using-azure-blockchain-service"></a>Öğretici: Azure Blockchain hizmetini kullanarak işlemleri Gönder
+# <a name="tutorial-usevisual-studio-code-to-create-buildanddeploysmartcontracts"></a>Öğretici: akıllı sözleşmeleri oluşturmak, derlemek ve dağıtmak için Visual Studio Code kullanma
 
-Bu öğreticide, işlem düğümleri Gizlilik Sözleşmesi ve işlem test etmek için oluşturma gerekir.  Bir yerel geliştirme ortamı oluşturun ve akıllı bir sözleşme dağıtmak ve özel bir işlem göndermek için Truffle kullanacaksınız.
+Bu öğreticide, Azure blok zinciri hizmetinde akıllı bir sözleşme oluşturmak, derlemek ve dağıtmak için Visual Studio Code 'de Ethereum uzantısı için Azure blok zinciri geliştirme setini kullanın. Ayrıca bir işlem aracılığıyla akıllı sözleşme işlevini yürütmek için Truffle kullanırsınız.
 
-Şunları öğrenirsiniz:
+Ethereum için Azure blok zinciri geliştirme setini şu şekilde kullanabilirsiniz:
 
 > [!div class="checklist"]
-> * İşlem düğümleri Ekle
-> * Truffle akıllı bir sözleşme dağıtım yapma
-> * Bir işlem Gönder
-> * İşlem gizlilik doğrula
+> * Akıllı sözleşme oluşturma
+> * Akıllı sözleşme dağıtma
+> * Bir işlem aracılığıyla akıllı sözleşme işlevini yürütme
+> * Sözleşme durumunu sorgula
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Tam [Azure portalını kullanarak bir blok zinciri üye oluştur](create-member.md)
-* Tam [hızlı başlangıç: Truffle consortium ağa bağlamak için kullanın](connect-truffle.md)
-* Yükleme [Truffle](https://github.com/trufflesuite/truffle). Truffle gerektirir yüklenmesi için çeşitli araçlar dahil olmak üzere [Node.js](https://nodejs.org), [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-* Yükleme [Python 2.7.15](https://www.python.org/downloads/release/python-2715/). Python Web3 için gereklidir.
-* Yükleme [Visual Studio kodu](https://code.visualstudio.com/Download)
-* Yükleme [Visual Studio kod Solidity uzantısı](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+* [Hızlı başlangıç: Azure blok zinciri hizmeti Consortium ağına bağlanmak için Visual Studio Code kullanma](connect-vscode.md)
 
-## <a name="create-transaction-nodes"></a>İşlem düğümleri oluştur
+## <a name="create-a-smart-contract"></a>Akıllı sözleşme oluşturma
 
-Varsayılan olarak, bir işlem düğümü vardır. İki tane daha eklemek için ekleyeceğiz. Düğümlerden biri özel harekete katılan. Diğer özel bir işlemde dahil edilmez.
+Ethereum için Azure blok zinciri geliştirme seti, sözleşmeleri dolandırmaya, oluşturmaya ve dağıtmanıza yardımcı olmak için proje şablonları ve truffle araçlarını kullanır. Başlamadan önce önkoşul hızlı başlangıcını doldurun [: Azure blok zinciri hizmeti Consortium ağına bağlanmak için Visual Studio Code kullanın](connect-vscode.md). Hızlı başlangıç, Ethereum için Azure blok zinciri geliştirme setini yükleme ve yapılandırma sürecinde size rehberlik eder.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-1. Azure Blockchain üyelik için bulun ve seçin **işlem düğümleri > Ekle**.
-1. Adlı yeni bir işlem düğümü ayarlarını tamamlamak `alpha`.
+1. VS Code komut paletinden **Azure blok Zinciri: New Solidity Project**' i seçin.
+1. **Temel proje oluştur**seçeneğini belirleyin.
+1. @No__t-0 adlı yeni bir klasör oluşturun ve **Yeni proje yolu**' nu seçin.
 
-    ![İşlem düğümü oluşturma](./media/send-transaction/create-node.png)
+Azure blok zinciri geliştirme seti sizin için yeni bir Solidity projesi oluşturur ve başlatır. Temel proje, örnek bir **Helloblockzincirine** akıllı sözleşme ve Azure blok zinciri hizmeti 'nde Consortium üyelemenize dağıtmak için gereken tüm dosyaları içerir. Projenin oluşturulması birkaç dakika sürebilir. Azure blok zinciri için çıktıyı seçerek VS Code 'ın Terminal panelinde ilerleme durumunu izleyebilirsiniz.
 
-    | Ayar | Değer | Açıklama |
-    |---------|-------|-------------|
-    | Ad | `alpha` | İşlem düğümü adı. Adı, işlem düğümü uç nokta için DNS adresi oluşturmak için kullanılır. Örneğin, `alpha-mymanagedledger.blockchain.azure.com`. |
-    | Parola | güçlü parola | Parola, işlem düğümü uç noktasına temel kimlik doğrulaması ile erişmek için kullanılır.
+Proje yapısı aşağıdaki örneğe benzer şekilde görünür:
 
-1. **Oluştur**’u seçin.
+   ![Solidity projesi](./media/send-transaction/solidity-project.png)
 
-    Yeni bir işlem düğümü sağlama yaklaşık 10 dakika sürer.
+## <a name="build-a-smart-contract"></a>Akıllı sözleşme oluşturma
 
-1. 2 adlı bir işlem düğümü eklemek için 4 arasındaki adımları yineleyin `beta`.
+Akıllı sözleşmeler, projenin **sözleşmeler** dizininde bulunur. Akıllı sözleşmeleri bir blok zincirine dağıtmadan önce derleyebilirsiniz. Projenizdeki tüm akıllı sözleşmeleri derlemek için, **Yapı sözleşmeleri** komutunu kullanın.
 
-Düğümleri sağlanan sırada öğreticiyle devam edebilirsiniz. Sağlama tamamlandığında üç işlem düğümleri gerekir.
+1. VS Code Gezgini kenar çubuğunda, projenizdeki **sözleşmeler** klasörünü genişletin.
+1. **Helloblockzincirine. Nuevo** öğesine sağ tıklayın ve menüden **sözleşmeleri oluştur** ' u seçin.
 
-## <a name="open-truffle-console"></a>Truffle konsolunu açın
+    ![Yapı sözleşmeleri](./media/send-transaction/build-contracts.png)
 
-1. Node.js komut istemi veya kabuğunu açın.
-1. Yolunuza önkoşul Truffle proje dizinine değiştirme [hızlı başlangıç: Truffle consortium ağa bağlanacak](connect-truffle.md). Örneğin,
+Azure blok zinciri geliştirme seti, akıllı sözleşmeleri derlemek için Truffle kullanır.
 
-    ```bash
-    cd truffledemo
-    ```
+![Derleme çıkışı](./media/send-transaction/compile-output.png)
 
-1. Truffle'nın etkileşimli geliştirme konsolunu başlatın.
+## <a name="deploy-a-smart-contract"></a>Akıllı sözleşme dağıtma
 
-    ``` bash
-    truffle develop
-    ```
+Truffle, sözleşmelerinizi bir Ethereum ağına dağıtmak için geçiş betikleri kullanır. Geçişler, projenin **geçiş** dizininde bulunan JavaScript dosyalarıdır.
 
-    Truffle, yerel geliştirme blok zinciri oluşturur ve etkileşimli bir konsol sağlar.
+1. Akıllı sözleşmenizi dağıtmak için, **Helloblockzincirine. Nuevo** öğesine sağ tıklayın ve menüden **sözleşmeleri dağıt** ' ı seçin.
+1. Komut paletinde Azure blok zinciri Konsorsiyumu ağınızı seçin. Projeyi oluştururken, konsorsiyum blok zinciri ağı projenin Truffle yapılandırma dosyasına eklendi.
+1. **Anımsatıcı üret**' i seçin. Bir dosya adı seçin ve anımsatıcı dosyasını proje klasörüne kaydedin. Örneğin, `myblockchainmember.env`. Anımsatıcı dosyası, blok zinciri üyesiyseniz bir Ethereum özel anahtarı oluşturmak için kullanılır.
 
-## <a name="create-ethereum-account"></a>Ethereum hesabı oluşturma
+Azure blok zinciri geliştirme seti, sözleşmeleri blok zincirine dağıtmak üzere geçiş betiğini yürütmek için Truffle kullanır.
 
-Varsayılan işlem düğümüne bağlanın ve Ethereum hesap oluşturma Web3 kullanın. Web3 bağlantı dizesini Azure portalından alabilirsiniz.
+![Sözleşme başarıyla dağıtıldı](./media/send-transaction/deploy-contract.png)
 
-1. Azure portalında, varsayılan işlem düğümüne gidin ve seçin **işlem düğümleri > örnek kod > Web3**.
-1. JavaScript'ten kopyalama **HTTPS (erişim anahtarı: 1)** ![Web3 örnek kod](./media/send-transaction/web3-code.png)
+## <a name="call-a-contract-function"></a>Sözleşme işlevini çağırma
 
-1. Varsayılan işlem düğümünü Web3 JavaScript kodunu Truffle etkileşimli geliştirme konsola yapıştırın. Kod, Azure Blockchain hizmeti işlem düğüme bağlı bir Web3 nesnesi oluşturur.
+**Helloblockzincirleri** sözleşmesinin **SendRequest** işlevi **RequestMessage** durum değişkenini değiştirir. Bir blok zinciri ağının durumunun değiştirilmesi bir işlem aracılığıyla yapılır. **SendRequest** işlevini bir işlem aracılığıyla yürütmek için bir komut dosyası oluşturabilirsiniz.
 
-    ```bash
-    truffle(develop)> var Web3 = require("Web3");
-    truffle(develop)> var provider = new Web3.providers.HttpProvider("https://myblockchainmember.blockchain.azure.com:3200/hy5FMu5TaPR0Zg8GxiPwned");
-    truffle(develop)> var web3 = new Web3(provider);
-    ```
-
-    İşlem düğümünüzü ile etkileşim kurmak için Web3 nesne üzerinde yöntemleri çağırabilir.
-
-1. Varsayılan işlem düğümünde yeni bir hesap oluşturun. Parola parametresi kendi güçlü bir parola ile değiştirin.
-
-    ```bash
-    web3.eth.personal.newAccount("1@myStrongPassword");
-    ```
-
-    Döndürülen hesabı adresini not ve parola sağlayın. Sonraki bölümde parola ve hesap adresi Ethereum ihtiyacınız var.
-
-1. Çıkış Truffle geliştirme ortamı.
-
-    ```bash
-    .exit
-    ```
-
-## <a name="configure-truffle-project"></a>Truffle projesi yapılandırma
-
-Truffle projeyi yapılandırmak için Azure portalından bazı işlem düğümü bilgileri gerekir.
-
-### <a name="transaction-node-public-key"></a>İşlem düğümü ortak anahtarı
-
-Her işlem düğümü, bir ortak anahtar vardır. Ortak anahtarı bir özel işlem düğümüne göndermenizi sağlar. Bir işlem için varsayılan işlem düğümünden göndermek için *alfa* işlem düğümü, ihtiyacınız *alfa* işlem düğümün Ortak anahtar.
-
-İşlem düğümü listeden ortak anahtar alabilirsiniz. Alfa düğümü için ortak anahtarı kopyalayın ve daha sonra öğreticide değerini kaydedin.
-
-![İşlem düğümü listesi](./media/send-transaction/node-list.png)
-
-### <a name="transaction-node-endpoint-addresses"></a>İşlem düğümü uç nokta adresleri
-
-1. Azure portalında her işlem düğümüne gidin ve seçin **işlem düğümleri > bağlantı dizeleri**.
-1. Kopyalayın ve uç nokta URL'NİZDEN kaydedin **HTTPS (erişim anahtarı: 1)** her işlem düğümü için. Uç nokta adresleri öğreticinin ilerleyen bölümlerinde akıllı sözleşme yapılandırma dosyası gerekir.
-
-    ![İşlem uç nokta adresi](./media/send-transaction/endpoint.png)
-
-### <a name="edit-configuration-file"></a>Yapılandırma dosyasını düzenleyin
-
-1. Visual Studio Code'u başlatmak ve Truffle directory klasörü kullanarak projeyi açın **Dosya > Klasör Aç** menüsü.
-1. Truffle yapılandırma dosyasını açın `truffle-config.js`.
-1. Dosyanın içeriğini aşağıdaki yapılandırma bilgileri ile değiştirin. Bitiş adresi ve hesap bilgilerini içeren değişkeni ekleyin. Açılı ayraç bölümler önceki bölümlerinden toplanan değerlerle değiştirin.
-
-    ``` javascript
-    var defaultnode = "<default transaction node connection string>";
-    var alpha = "<alpha transaction node connection string>";
-    var beta = "<beta transaction node connection string>";
-    
-    var myAccount = "<Ethereum account address>";
-    var myPassword = "<Ethereum account password>";
-    
-    var Web3 = require("web3");
-    
-    module.exports = {
-      networks: {
-        defaultnode: {
-          provider:(() =>  {
-          const AzureBlockchainProvider = new Web3.providers.HttpProvider(defaultnode);
-    
-          const web3 = new Web3(AzureBlockchainProvider);
-          web3.eth.personal.unlockAccount(myAccount, myPassword);
-    
-          return AzureBlockchainProvider;
-          })(),
-    
-          network_id: "*",
-          gas: 0,
-          gasPrice: 0,
-          from: myAccount
-        },
-        alpha: {
-          provider: new Web3.providers.HttpProvider(alpha),
-          network_id: "*",
-          gas: 0,
-          gasPrice: 0
-        },
-        beta: {
-          provider: new Web3.providers.HttpProvider(beta),
-          network_id: "*",
-          gas: 0,
-          gasPrice: 0
-        }
-      }
-    }
-    ```
-
-1. Değişiklikleri kaydetmek `truffle-config.js`.
-
-## <a name="create-smart-contract"></a>Akıllı sözleşmesi oluşturma
-
-1. İçinde **sözleşmeleri** klasör adında yeni bir dosya oluşturun `SimpleStorage.sol`. Aşağıdaki kodu ekleyin.
-
-    ```solidity
-    pragma solidity >=0.4.21 <0.6.0;
-    
-    contract SimpleStorage {
-        string public storedData;
-    
-        constructor(string memory initVal) public {
-            storedData = initVal;
-        }
-    
-        function set(string memory x) public {
-            storedData = x;
-        }
-    
-        function get() view public returns (string memory retVal) {
-            return storedData;
-        }
-    }
-    ```
-    
-1. İçinde **geçişler** klasör adında yeni bir dosya oluşturun `2_deploy_simplestorage.js`. Aşağıdaki kodu ekleyin.
-
-    ```solidity
-    var SimpleStorage = artifacts.require("SimpleStorage.sol");
-    
-    module.exports = function(deployer) {
-    
-      // Pass 42 to the contract as the first constructor parameter
-      deployer.deploy(SimpleStorage, "42", {privateFor: ["<alpha node public key>"], from:"<Ethereum account address>"})  
-    };
-    ```
-
-1. Açılı ayraçlar değerleri değiştirin.
-
-    | Değer | Açıklama
-    |-------|-------------
-    | \<alpha node public key\> | Alfa düğümünün ortak anahtarı
-    | \<Ethereum account address\> | Varsayılan işlem düğümünde oluşturulan Ethereum hesap adresi
-
-    Bu örnekte, ilk değerini **storeData** değeri, 42'ye ayarlanır.
-
-    **privateFor** sözleşme olduğu kullanılabilir düğüm tanımlar. Bu örnekte, özel işlemler için varsayılan işlem düğümün hesabına çevirebilirsiniz **alfa** düğümü. Ortak anahtarları için tüm özel işlem katılımcıları eklersiniz. Dahil etmezseniz **privateFor:** ve **öğesinden:** , akıllı sözleşme hareketleri geneldir ve tüm consortium üyeleri tarafından görülebilir.
-
-1. Tüm dosyaları seçerek kaydedin **Dosya > Tümünü Kaydet**.
-
-## <a name="deploy-smart-contract"></a>Akıllı sözleşme dağıtma
-
-Truffle dağıtım yapma `SimpleStorage.sol` varsayılan işlem düğümü ağa.
-
-```bash
-truffle migrate --network defaultnode
-```
-
-Truffle ilk derler ve daha sonra dağıtır **SimpleStorage** akıllı sözleşme.
-
-Örnek çıktı:
-
-```
-admin@desktop:/mnt/c/truffledemo$ truffle migrate --network defaultnode
-
-2_deploy_simplestorage.js
-=========================
-
-   Deploying 'SimpleStorage'
-   -------------------------
-   > transaction hash:    0x3f695ff225e7d11a0239ffcaaab0d5f72adb545912693a77fbfc11c0dbe7ba72
-   > Blocks: 2            Seconds: 12
-   > contract address:    0x0b15c15C739c1F3C1e041ef70E0011e641C9D763
-   > account:             0x1a0B9683B449A8FcAd294A01E881c90c734735C3
-   > balance:             0
-   > gas used:            0
-   > gas price:           0 gwei
-   > value sent:          0 ETH
-   > total cost:          0 ETH
-
-
-   > Saving migration to chain.
-   > Saving artifacts
-   -------------------------------------
-   > Total cost:                   0 ETH
-
-
-Summary
-=======
-> Total deployments:   2
-> Final cost:          0 ETH
-```
-
-## <a name="validate-contract-privacy"></a>Sözleşme gizlilik doğrula
-
-Sözleşme gizlilik nedeniyle sözleşme değerleri biz bildirilen düğümlerden yalnızca sorgulanabilir **privateFor**. Hesap bu düğümü bulunduğundan bu örnekte biz varsayılan işlem düğümünü sorgulayabilirsiniz. 
-
-1. Truffle konsolunu kullanarak varsayılan işlem düğümüne bağlanın.
-
-    ```bash
-    truffle console --network defaultnode
-    ```
-
-1. Truffle konsolunda sözleşme örneğinin değerini döndüren bir kod yürütün.
-
-    ```bash
-    SimpleStorage.deployed().then(function(instance){return instance.get();})
-    ```
-
-    Varsayılan işlem düğümünü sorgulama başarılı olursa 42 değeri döndürülür. Örneğin:
-
-    ```
-    admin@desktop:/mnt/c/truffledemo$ truffle console --network defaultnode
-    truffle(defaultnode)> SimpleStorage.deployed().then(function(instance){return instance.get();})
-    '42'
-    ```
-
-1. Truffle konsoldan çıkın.
-
-    ```bash
-    .exit
-    ```
-
-Biz bildirilen bu yana **alfa** düğümün Ortak anahtar **privateFor**, biz sorgulayabilirsiniz **alfa** düğümü.
-
-1. Truffle konsol kullanarak bağlanır **alfa** düğümü.
-
-    ```bash
-    truffle console --network alpha
-    ```
-
-1. Truffle konsolunda sözleşme örneğinin değerini döndüren bir kod yürütün.
-
-    ```bash
-    SimpleStorage.deployed().then(function(instance){return instance.get();})
-    ```
-
-    Sorgulama, **alfa** düğüm başarılı olur, 42 değeri döndürülür. Örneğin:
-
-    ```
-    admin@desktop:/mnt/c/truffledemo$ truffle console --network alpha
-    truffle(alpha)> SimpleStorage.deployed().then(function(instance){return instance.get();})
-    '42'
-    ```
-
-1. Truffle konsoldan çıkın.
-
-    ```bash
-    .exit
-    ```
-
-Biz değil bildirmek beri **beta** düğümün Ortak anahtar **privateFor**, biz sorgu mümkün olmayacaktır **beta** sözleşme gizlilik nedeniyle düğümü.
-
-1. Truffle konsol kullanarak bağlanır **beta** düğümü.
-
-    ```bash
-    truffle console --network beta
-    ```
-
-1. Sözleşme örneğinin değerini döndüren bir kod yürütün.
-
-    ```bash
-    SimpleStorage.deployed().then(function(instance){return instance.get();})
-    ```
-
-1. Sorgulama **beta** sözleşme özel olduğundan bir düğümün başarısız olması. Örneğin:
-
-    ```
-    admin@desktop:/mnt/c/truffledemo$ truffle console --network beta
-    truffle(beta)> SimpleStorage.deployed().then(function(instance){return instance.get();})
-    Thrown:
-    Error: Returned values aren't valid, did it run Out of Gas?
-        at XMLHttpRequest._onHttpResponseEnd (/mnt/c/truffledemo/node_modules/xhr2-cookies/xml-http-request.ts:345:8)
-        at XMLHttpRequest._setReadyState (/mnt/c/truffledemo/node_modules/xhr2-cookies/xml-http-request.ts:219:8)
-        at XMLHttpRequestEventTarget.dispatchEvent (/mnt/c/truffledemo/node_modules/xhr2-cookies/xml-http-request-event-target.ts:44:13)
-        at XMLHttpRequest.request.onreadystatechange (/mnt/c/truffledemo/node_modules/web3-providers-http/src/index.js:96:13)
-    ```
-
-1. Truffle konsoldan çıkın.
-
-    ```bash
-    .exit
-    ```
-    
-## <a name="send-a-transaction"></a>Bir işlem Gönder
-
-1. Adlı bir dosya oluşturun `sampletx.js`. Proje kök dizininde kaydedin.
-1. Aşağıdaki komut dosyasında sözleşmenin ayarlar **storedData** 65 için değişken değeri. Yeni dosyaya kod ekleyin.
+1. Truffle projenizin kökünde yeni bir dosya oluşturun ve `sendrequest.js` olarak adlandırın. Aşağıdaki Web3 JavaScript kodunu dosyaya ekleyin.
 
     ```javascript
-    var SimpleStorage = artifacts.require("SimpleStorage");
-    
+    var HelloBlockchain = artifacts.require("HelloBlockchain");
+        
     module.exports = function(done) {
-      console.log("Getting deployed version of SimpleStorage...")
-      SimpleStorage.deployed().then(function(instance) {
-        console.log("Setting value to 65...");
-        return instance.set("65", {privateFor: ["<alpha node public key>"], from:"<Ethereum account address>"});
+      console.log("Getting the deployed version of the HelloBlockchain smart contract")
+      HelloBlockchain.deployed().then(function(instance) {
+        console.log("Calling SendRequest function for contract ", instance.address);
+        return instance.SendRequest("Hello, blockchain!");
       }).then(function(result) {
-        console.log("Transaction:", result.tx);
-        console.log("Finished!");
+        console.log("Transaction hash: ", result.tx);
+        console.log("Request complete");
         done();
       }).catch(function(e) {
         console.log(e);
@@ -388,85 +97,94 @@ Biz değil bildirmek beri **beta** düğümün Ortak anahtar **privateFor**, biz
     };
     ```
 
-    Açılı ayraçlar değerleri değiştirin, ardından dosyayı kaydedin.
+1. Azure blok zinciri geliştirme seti bir proje oluşturduğunda, Truffle yapılandırma dosyası, Consortium blok zinciri ağ uç noktası ayrıntılarınız ile oluşturulur. **Truffle-config. js** ' i projenizde açın. Yapılandırma dosyasında iki ağ listelenir: bir tane geliştirme ve bir tane, konsorsiyum ile aynı ada sahip.
+1. VS Code Terminal bölmesinde, komut dosyasını Konsorsiyumu blok zinciri ağınızda yürütmek için Truffle ' yi kullanın. Terminal bölmesi menü çubuğunda açılan menüde **Terminal** sekmesini ve **PowerShell** ' i seçin.
 
-    | Değer | Açıklama
-    |-------|-------------
-    | \<alpha node public key\> | Alfa düğümünün ortak anahtarı
-    | \<Ethereum account address\> | Varsayılan işlem düğümünde oluşturduğunuz Ethereum hesap adresi.
-
-    **privateFor** işlem olduğu kullanılabilir düğüm tanımlar. Bu örnekte, özel işlemler için varsayılan işlem düğümün hesabına çevirebilirsiniz **alfa** düğümü. Tüm özel işlem katılımcıları için ortak anahtarları eklemeniz gerekir.
-
-1. Varsayılan işlem düğümü için bir betik yürütmek için Truffle kullanın.
-
-    ```bash
-    truffle exec sampletx.js --network defaultnode
+    ```PowerShell
+    truffle exec sendrequest.js --network <blockchain network>
     ```
 
-1. Truffle konsolunda sözleşme örneğinin değerini döndüren bir kod yürütün.
+    @No__t-0blok zinciri ağı @ no__t-1 ' i **Truffle-config. js**' de tanımlanan blok zinciri ağının adıyla değiştirin.
 
-    ```bash
-    SimpleStorage.deployed().then(function(instance){return instance.get();})
+Truffle, betiği blok zinciri ağınızda yürütür.
+
+![Betik çıkışı](./media/send-transaction/execute-transaction.png)
+
+Bir sözleşmenin işlevini bir işlem aracılığıyla yürüttüğünüzde, bir blok oluşturuluncaya kadar işlem işlenmez. Bir işlem yoluyla yürütülmesi amaçlanan işlevler, dönüş değeri yerine bir işlem KIMLIĞI döndürür.
+
+## <a name="query-contract-state"></a>Sözleşme durumunu sorgula
+
+Akıllı sözleşme işlevleri, durum değişkenlerinin geçerli değerini döndürebilir. Bir durum değişkeninin değerini döndürecek bir işlev ekleyelim.
+
+1. **Helloblockzincirine. Nuevo**Içinde, **helloblockzincirine** akıllı sözleşmeye bir **GetMessage** işlevi ekleyin.
+
+    ``` solidity
+    function getMessage() public view returns (string memory)
+    {
+        if (State == StateType.Request)
+            return RequestMessage;
+        else
+            return ResponseMessage;
+    }
     ```
 
-    İşlem başarılı olduysa, 65 değeri döndürülür. Örneğin:
+    İşlevi, sözleşmenin geçerli durumuna bağlı olarak bir durum değişkeninde depolanan iletiyi döndürür.
+
+1. Akıllı sözleşmede değişiklikleri derlemek için **Helloblockzincirine. Nuevo** öğesine sağ tıklayın ve menüden **sözleşmeleri derle** ' yi seçin.
+1. Dağıtmak için, **Helloblockzincirine. Nuevo** öğesine sağ tıklayın ve menüden **sözleşmeleri dağıt** ' ı seçin. İstendiğinde, komut paletinde Azure blok zinciri Konsorsiyumu ağınızı seçin.
+1. Sonra, **GetMessage** işlevini çağırmak için kullanarak bir betik oluşturun. Truffle projenizin kökünde yeni bir dosya oluşturun ve `getmessage.js` olarak adlandırın. Aşağıdaki Web3 JavaScript kodunu dosyaya ekleyin.
+
+    ```javascript
+    var HelloBlockchain = artifacts.require("HelloBlockchain");
     
+    module.exports = function(done) {
+      console.log("Getting the deployed version of the HelloBlockchain smart contract")
+      HelloBlockchain.deployed().then(function(instance) {
+        console.log("Calling getMessage function for contract ", instance.address);
+        return instance.getMessage();
+      }).then(function(result) {
+        console.log("Request message value: ", result);
+        console.log("Request complete");
+        done();
+      }).catch(function(e) {
+        console.log(e);
+        done();
+      });
+    };
     ```
-    Getting deployed version of SimpleStorage...
-    Setting value to 65...
-    Transaction: 0x864e67744c2502ce75ef6e5e09d1bfeb5cdfb7b880428fceca84bc8fd44e6ce0
-    Finished!
-    ```
 
-1. Truffle konsoldan çıkın.
-
-    ```bash
-    .exit
-    ```
-    
-## <a name="validate-transaction-privacy"></a>İşlem gizlilik doğrula
-
-İşlem gizlilik nedeniyle işlem düğümlerinde biz bildirilen yalnızca gerçekleştirilebilir **privateFor**. Bu örnekte biz size bildirilen bu yana işlemleri gerçekleştirebilirsiniz **alfa** düğümün Ortak anahtar **privateFor**. 
-
-1. İşlem yürütmek için Truffle kullanın **alfa** düğümü.
-
-    ```bash
-    truffle exec sampletx.js --network alpha
-    ```
-    
-1. Sözleşme örneğinin değerini döndüren bir kod yürütün.
+1. VS Code, Terminal bölmesinde, blok zinciri ağınızda betiği yürütmek için Truffle kullanın. Terminal bölmesi menü çubuğunda açılan menüde **Terminal** sekmesini ve **PowerShell** ' i seçin.
 
     ```bash
-    SimpleStorage.deployed().then(function(instance){return instance.get();})
+    truffle exec getmessage.js --network <blockchain network>
     ```
-    
-    İşlem başarılı olduysa, 65 değeri döndürülür. Örneğin:
 
-    ```
-    Getting deployed version of SimpleStorage...
-    Setting value to 65...
-    Transaction: 0x864e67744c2502ce75ef6e5e09d1bfeb5cdfb7b880428fceca84bc8fd44e6ce0
-    Finished!
-    ```
-    
-1. Truffle konsoldan çıkın.
+    @No__t-0blok zinciri ağı @ no__t-1 ' i **Truffle-config. js**' de tanımlanan blok zinciri ağının adıyla değiştirin.
 
-    ```bash
-    .exit
-    ```
+Betik, getMessage işlevini çağırarak akıllı sözleşmeyi sorgular. **RequestMessage** durum değişkeninin geçerli değeri döndürüldü.
+
+![Betik çıkışı](./media/send-transaction/execute-get.png)
+
+Değerin **Merhaba, blok zinciri!** olmadığına dikkat edin. Bunun yerine, döndürülen değer bir yer tutucudur. Sözleşmeyi değiştirdiğinizde ve dağıttığınızda, sözleşme yeni bir sözleşme adresi alır ve durum değişkenlerine akıllı sözleşme oluşturucusunda değerler atanır. Truffle örnek **2_deploy_contracts. js** geçiş betiği, akıllı sözleşmeyi dağıtır ve bir yer tutucu değerini bağımsız değişken olarak geçirir. Oluşturucu **RequestMessage** durum değişkenini yer tutucu değerine ayarlar ve döndürülen değer.
+
+1. **RequestMessage** durum değişkenini ayarlamak ve değeri sorgulamak için **SendRequest. js** ve **GetMessage. js** betiklerini yeniden çalıştırın.
+
+    ![Betik çıkışı](./media/send-transaction/execute-set-get.png)
+
+    **SendRequest. js** , **RequestMessage** durum değişkenini **Merhaba, blok zinciri!** olarak ayarlar ve **GetMessage. js** , **isteği RequestMessage** durum değişkeninin değeri için sorgular ve **Hello, blok zinciri!** döndürür.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli olmadığında silerek kaynakları silebilirsiniz `myResourceGroup` oluşturduğunuz kaynak grubunu Azure Blockchain hizmeti tarafından.
+Artık gerekli değilse, *blok zinciri üye önkoşulu oluşturma* hızlı başlangıcı ' nda oluşturduğunuz `myResourceGroup` kaynak grubunu silerek kaynakları silebilirsiniz.
 
 Kaynak grubunu silmek için:
 
-1. Azure portalında gidin **kaynak grubu** sol gezinti bölmesi ve silmek istediğiniz kaynak grubunu seçin.
-1. **Kaynak grubunu sil**'i seçin. Kaynak grubu adı girerek silme doğrulamak **Sil**.
+1. Azure portal sol gezinti bölmesindeki **kaynak grubu** ' na gidin ve silmek istediğiniz kaynak grubunu seçin.
+1. **Kaynak grubunu sil**'i seçin. Kaynak grubu adını girip **Sil**' i seçerek silmeyi doğrulayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, iki işlem düğümleri Gizlilik Sözleşmesi ve işlem göstermek için eklendi. Varsayılan düğüm, özel bir akıllı sözleşme dağıtmak için kullanılır. Gizlilik sorgulanırken sözleşme değerleri ve gerçekleştirme işlemleri üzerinde blok zinciri tarafından test.
+Bu öğreticide, Azure blok zinciri geliştirme seti 'ni kullanarak örnek bir Solidity projesi oluşturdunuz. Azure blok zinciri hizmeti 'nde barındırılan bir blok zinciri konsorsiyum ağı üzerinde bir işlem aracılığıyla işlev olarak adlandırılan akıllı bir sözleşmeyi oluşturup dağıttığınız.
 
 > [!div class="nextstepaction"]
-> [Azure Blockchain Service kullanarak blok zinciri uygulamaları geliştirme](develop.md)
+> [Azure blok zinciri hizmetini kullanarak blok zinciri uygulamaları geliştirme](develop.md)

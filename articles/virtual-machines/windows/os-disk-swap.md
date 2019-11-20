@@ -1,44 +1,43 @@
 ---
-title: PowerShell ile Azure VM için takas işletim sistemi diski | Microsoft Docs
-description: PowerShell kullanarak Azure sanal makinesi tarafından kullanılan işletim sistemi diski olarak değiştirin.
+title: PowerShell ile bir Azure VM için işletim sistemi diskini değiştirme
+description: PowerShell kullanarak bir Azure sanal makinesi tarafından kullanılan işletim sistemi diskini değiştirme.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 04/24/2018
 ms.author: cynthn
-ms.openlocfilehash: be00f8338430452faa8bd5a20d9e2ddfcbb9d09d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ec66892804f3c2d1f831168a2955f2498462cbf3
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64701290"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74033021"
 ---
-# <a name="change-the-os-disk-used-by-an-azure-vm-using-powershell"></a>PowerShell kullanarak Azure VM tarafından kullanılan işletim sistemi diskini değiştirme
+# <a name="change-the-os-disk-used-by-an-azure-vm-using-powershell"></a>PowerShell kullanarak bir Azure VM tarafından kullanılan işletim sistemi diskini değiştirme
 
-Mevcut bir VM'ye sahip, ancak Yedekleme diski veya başka bir işletim sistemi diski için disk takas etmek istediğiniz işletim sistemi diskleri takas etmek için Azure PowerShell kullanabilirsiniz. VM'yi silip yeniden yükleme gerekmez. Zaten kullanımda olmadığı sürece, başka bir kaynak grubunda bile yönetilen disk kullanabilirsiniz.
+Var olan bir VM varsa, ancak diski bir yedekleme diski veya başka bir işletim sistemi diski için değiştirmek istiyorsanız, işletim sistemi disklerini değiştirmek için Azure PowerShell kullanabilirsiniz. VM 'yi silip yeniden oluşturmanız gerekmez. Zaten kullanımda olmadığı sürece, başka bir kaynak grubunda yönetilen bir disk de kullanabilirsiniz.
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-VM, stopped\deallocated olmasına gerek yoktur ve sonra yönetilen diskin kaynak kimliği farklı bir yönetilen diskin kaynak kimliği ile değiştirilebilir.
+VM 'nin stopped\serbest bırakılmış olması gerekir, ardından yönetilen diskin kaynak KIMLIĞI, farklı bir yönetilen diskin kaynak KIMLIĞI ile değiştirilebilir.
 
-VM boyutu ile depolama türü eklemek için kullanmak istediğiniz disk ile uyumlu olduğundan emin olun. Kullanmak istediğiniz disk bir Premium depolama ise, örneğin, sonra VM (DS serisi boyutu gibi) Premium depolama özelliğine sahip olması gerekir. 
+VM boyutunun ve depolama türünün iliştirmek istediğiniz diskle uyumlu olduğundan emin olun. Örneğin, kullanmak istediğiniz disk Premium depolamada ise, VM 'nin Premium depolama alanı (DS serisi boyutu gibi) olması gerekir. Her iki diskin de aynı boyutta olması gerekir.
 
-Diskleri kullanarak bir kaynak grubu listesini alma [Get-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/get-azdisk)
+[Get-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/get-azdisk) kullanarak bir kaynak grubundaki disklerin listesini alın
 
 ```azurepowershell-interactive
 Get-AzDisk -ResourceGroupName myResourceGroup | Format-Table -Property Name
 ```
  
-Kullanmak istediğiniz diskin adını sahip olduğunuzda, VM için işletim sistemi diski olarak ayarlayın. Bu örnek stop\deallocates adlı VM *myVM* ve adlı disk atar *newDisk* yeni işletim sistemi diski olarak. 
+Kullanmak istediğiniz diskin adına sahip olduğunuzda, sanal makine için işletim sistemi diski olarak ayarlayın. Bu örnek, *Myvm* adlı VM 'yi kaldırır ve yeni işletim sistemi diski olarak *newdisk* adlı diski atar. 
  
 ```azurepowershell-interactive 
 # Get the VM 
@@ -63,4 +62,4 @@ Start-AzVM -Name $vm.Name -ResourceGroupName myResourceGroup
 
 **Sonraki adımlar**
 
-Bir diski bir kopyasını oluşturmak için bkz: [bir diskin anlık görüntüsünü alma](snapshot-copy-managed-disk.md).
+Bir diskin kopyasını oluşturmak için bkz. [disk anlık görüntüsü](snapshot-copy-managed-disk.md).

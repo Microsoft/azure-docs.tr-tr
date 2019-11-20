@@ -1,7 +1,7 @@
 ---
-title: "Örnek: Yüzleri bir PersonGroup - yüz tanıma API'si ekleme"
+title: "Örnek: bir kişilik grubuna yüz ekleme-Yüz Tanıma API'si"
 titleSuffix: Azure Cognitive Services
-description: Görüntülere yüz eklemek için Yüz Tanıma API’sini kullanın.
+description: Bu kılavuzda, Azure bilişsel Hizmetler Yüz Tanıma API'si bir PersonGroup nesnesine çok sayıda kişi ve yüz ekleme gösterilmektedir.
 services: cognitive-services
 author: SteveMSFT
 manager: nitinme
@@ -10,20 +10,20 @@ ms.subservice: face-api
 ms.topic: sample
 ms.date: 04/10/2019
 ms.author: sbowles
-ms.openlocfilehash: 0415dcae08c188c1758150c4b8b0df4dee014ce6
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 2f8a6272b02aea5948be79ddf72d105c4f72bb33
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448598"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73744251"
 ---
-# <a name="add-faces-to-a-persongroup"></a>Yüz için bir PersonGroup Ekle
+# <a name="add-faces-to-a-persongroup"></a>Bir kişilik grubuna yüz ekleme
 
-Bu kılavuz, çok sayıda kişi ve yüz PersonGroup nesnesine eklemek gösterilmiştir. Strateji de LargePersonGroup FaceList ve LargeFaceList nesneler için geçerlidir. Bu örnekte yazılan C# Azure Bilişsel hizmetler yüz tanıma API'si .NET istemci kitaplığı kullanarak.
+Bu kılavuzda, bir PersonGroup nesnesine çok sayıda kişi ve yüz ekleme gösterilmektedir. Aynı strateji LargePersonGroup, çok yönlü liste ve Largecelist nesneleri için de geçerlidir. Bu örnek, Azure bilişsel Hizmetler Yüz Tanıma API'si .NET istemci kitaplığı kullanılarak dilinde yazılmıştır C# .
 
-## <a name="step-1-initialization"></a>1\. adım: Başlatma
+## <a name="step-1-initialization"></a>1\. Adım: Başlatma
 
-Aşağıdaki kod, birkaç değişken ve yüz zamanlamak için bir yardımcı işlevini eklemek uygulayan istekleri bildirir:
+Aşağıdaki kod birkaç değişken bildirir ve yüz ekleme isteklerini zamanlamak için bir yardımcı işlevi uygular:
 
 - `PersonCount`, toplam kişi sayısıdır.
 - `CallLimitPerSecond`, abonelik katmanına göre saniyedeki maksimum çağrı sayısıdır.
@@ -58,9 +58,9 @@ static async Task WaitCallLimitPerSecondAsync()
 }
 ```
 
-## <a name="step-2-authorize-the-api-call"></a>2\. adım: API çağrısı Yetkilendir
+## <a name="step-2-authorize-the-api-call"></a>2\. Adım: API çağrısını yetkilendirme
 
-Bir istemci kitaplığı kullandığınızda, abonelik anahtarınızı oluşturucusuna geçirmeniz gerekir **FaceClient** sınıfı. Örneğin:
+Bir istemci kitaplığı kullandığınızda, abonelik anahtarınızı **Faceclient** sınıfının oluşturucusuna geçirmeniz gerekir. Örneğin:
 
 ```csharp
 private readonly IFaceClient faceClient = new FaceClient(
@@ -68,9 +68,9 @@ private readonly IFaceClient faceClient = new FaceClient(
     new System.Net.Http.DelegatingHandler[] { });
 ```
 
-Abonelik anahtarını almak için Azure portalından Azure Marketi'nde gidin. Daha fazla bilgi için [abonelikleri](https://www.microsoft.com/cognitive-services/sign-up).
+Abonelik anahtarını almak için Azure portal Azure Marketi 'ne gidin. Daha fazla bilgi için bkz. [abonelikler](https://www.microsoft.com/cognitive-services/sign-up).
 
-## <a name="step-3-create-the-persongroup"></a>3\. adım: PersonGroup oluşturma
+## <a name="step-3-create-the-persongroup"></a>3\. Adım: PersonGroup oluşturma
 
 Kişileri kaydetmek için "MyPersonGroup" adlı bir PersonGroup oluşturulur.
 Genel doğrulama sağlamak için istek süresi, `_timeStampQueue` hedefinde kuyruğa alınır.
@@ -82,9 +82,9 @@ _timeStampQueue.Enqueue(DateTime.UtcNow);
 await faceClient.LargePersonGroup.CreateAsync(personGroupId, personGroupName);
 ```
 
-## <a name="step-4-create-the-persons-for-the-persongroup"></a>4\. Adım: Kişiler için PersonGroup oluşturma
+## <a name="step-4-create-the-persons-for-the-persongroup"></a>4\. Adım: PersonGroup için kişileri oluşturma
 
-Kişi aynı anda oluşturulur ve `await WaitCallLimitPerSecondAsync()` çağrı sınırını aşmamak için de uygulanır.
+Kişiler eşzamanlı olarak oluşturulur ve çağrı sınırını aşmamak için `await WaitCallLimitPerSecondAsync()` de uygulanır.
 
 ```csharp
 CreatePersonResult[] persons = new CreatePersonResult[PersonCount];
@@ -97,10 +97,10 @@ Parallel.For(0, PersonCount, async i =>
 });
 ```
 
-## <a name="step-5-add-faces-to-the-persons"></a>5\. Adım: Yüzleri kişilere ekleyin
+## <a name="step-5-add-faces-to-the-persons"></a>5\. Adım: Kişilere yüz ekleme
 
-Farklı kişilere eklenen yüzeyleri aynı anda işlenir. İçin belirli bir kişi yüzleri sıralı olarak işlenir.
-Yeniden `await WaitCallLimitPerSecondAsync()` isteği sıklığı sınırlama kapsamında olduğundan emin olmak için çağrılır.
+Farklı kişilere eklenen yüzler eşzamanlı olarak işlenir. Belirli bir kişiye eklenen yüzler sırayla işlenir.
+Yeniden `await WaitCallLimitPerSecondAsync()`, istek sıklığının sınırlama kapsamında olduğundan emin olmak için çağrılır.
 
 ```csharp
 Parallel.For(0, PersonCount, async i =>
@@ -122,21 +122,21 @@ Parallel.For(0, PersonCount, async i =>
 
 ## <a name="summary"></a>Özet
 
-Bu kılavuzda, çok büyük bir kişi ve yüz sayısı ile bir PersonGroup oluşturma işlemini öğrendiniz. Bazı anımsatıcılar:
+Bu kılavuzda, çok sayıda kişi ve yüz içeren bir PersonGroup oluşturma işlemini öğrendiniz. Bazı anımsatıcılar:
 
-- Bu strateji de belirlenmiştir ve LargePersonGroups için geçerlidir.
-- Ekleme veya silme farklı belirlenmiştir veya LargePersonGroups kişilerin yüzlerini eşzamanlı olarak işlenir.
-- Ekleme veya silme yüzleri FaceList veya bir LargePersonGroup kişinin belirli bir sırayla gerçekleştirilir.
-- Kolaylık olması için bu kılavuzda olası bir özel durumu işlemek nasıl atlanır. Daha fazla sağlamlığını artırmak istiyorsanız, uygun bir yeniden deneme ilkesi uygulayın.
+- Bu strateji Ayrıca çok yönlü listeler ve LargePersonGroups için de geçerlidir.
+- Farklı çok yönlü listelere veya LargePersonGroups içindeki kişilere yüz ekleme veya silme, eşzamanlı olarak işlenir.
+- Bir LargePersonGroup içindeki belirli bir çok yönlü liste veya kişiye yüz ekleme veya silme işlemi sırayla yapılır.
+- Kolaylık olması için, bu kılavuzda olası bir özel durum nasıl ele alınacağını göz ardı edilir. Daha fazla sağlamlık geliştirmek istiyorsanız, doğru yeniden deneme ilkesini uygulayın.
 
-Aşağıdaki özellikleri açıklandığı ve gösterildiği:
+Aşağıdaki özellikler açıklanmıştı ve gösterilmiştir:
 
-- Kişi kullanarak oluşturma [PersonGroup - oluşturma](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244) API.
-- Kişiler kullanarak oluşturma [PersonGroup kişi - oluşturma](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c) API.
-- Yüzleri kullanarak kişilere eklemek [PersonGroup kişi - yüz tanıma ekleme](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b) API.
+- [Persongroup-Create](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244) API ' i kullanarak kişilik grupları oluşturun.
+- Kişiler [-oluşturma](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c) API 'Sini kullanarak kişi oluşturun.
+- [Persongroup kişi-yüz tanıma](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b) API 'sini kullanarak kişilere yüz ekleyin.
 
 ## <a name="related-topics"></a>İlgili konular
 
-- [Bir görüntüdeki yüzleri belirleme](HowtoIdentifyFacesinImage.md)
-- [Görüntüdeki yüzleri algılayın](HowtoDetectFacesinImage.md)
-- [Büyük ölçekli özelliğini kullanma](how-to-use-large-scale.md)
+- [Görüntüdeki yüzeyleri tanımla](HowtoIdentifyFacesinImage.md)
+- [Görüntüdeki yüzeyleri algılama](HowtoDetectFacesinImage.md)
+- [Büyük ölçekli özelliği kullanın](how-to-use-large-scale.md)

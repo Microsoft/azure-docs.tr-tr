@@ -1,168 +1,168 @@
 ---
-title: Microsoft Azure FXT Edge dosyalayıcı belirtimleri | Microsoft Docs
-description: Fiziksel ve ortam Azure FXT Edge dosyalayıcı donanım belirtimleri
+title: Microsoft Azure FXT Edge Filer özellikleri | Microsoft Docs
+description: Azure FXT Edge Filer donanımı için fiziksel ve ortam belirtimleri
 author: ekpgh
 ms.service: fxt-edge-filer
 ms.topic: overview
 ms.date: 06/20/2019
-ms.author: v-erkell
-ms.openlocfilehash: 0679bce8eae515aa6b90e34fcfd15ee9b4e56b31
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.author: rohogue
+ms.openlocfilehash: 90d56ad0cec3d187d4c7307f8c004b14c3860390
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67542882"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72254700"
 ---
-# <a name="azure-fxt-edge-filer-specifications"></a>Azure FXT Edge dosyalayıcı belirtimleri
+# <a name="azure-fxt-edge-filer-specifications"></a>Azure FXT Edge Filer özellikleri
 
-Bu makalede, Azure FXT Edge dosyalayıcı donanım düğümleri için donanım belirtimleri açıklanmaktadır. Uygulamada, üç veya daha fazla düğüm kümelenmiş önbellek sistem sağlamak için birlikte yapılandırılır.
+Bu makalede, Azure FXT Edge Filer donanım düğümlerine yönelik donanım belirtimleri açıklanmaktadır. Uygulamada, kümelenmiş önbellek sistemi sağlamak için üç veya daha fazla düğüm birlikte yapılandırılır.
 
 ## <a name="hardware-specifications"></a>Donanım belirtimleri
 
 | Bileşen | FXT 6600 | FXT 6400 |
 |----------|-----------|-----------|
 | CPU çekirdekleri |  16 | 16 |
-| DİRHEMİ  | 1536 GB | 768 GB |
-| Ağ bağlantı noktaları | 6 x 25/10 Gb + 2 x 1 Gb | 6 x 25/10 Gb + 2 x 1 Gb |
-| NVMe SSD kapasitesi | 25.6 TB | 12,8 TB |
+| He  | 1536 GB | 768 GB |
+| Ağ bağlantı noktaları | 6 x 25/10 GB + 2 x 1 GB | 6 x 25/10 GB + 2 x 1 GB |
+| NVMe SSD kapasitesi | 25,6 TB | 12,8 TB |
 
-## <a name="drive-specifications"></a>Sürücü özellikleri
+## <a name="drive-specifications"></a>Sürücü belirtimleri
 
-Sistem on sürücü yuvaları, Önden erişilebilir sahiptir. Her doldurulmuş bir sürücü kapasite bilgileri ile sağdaki etiketlenir. 
+Sistemde, baştan erişilebilen on sürücü yuvası vardır. Doldurulan her sürücü, kapasite bilgileriyle sağ tarafta etiketlidir. 
 
-Sürücü numaraları sürücüleri arasındaki boşluk yazdırılır. Azure FXT Edge dosyalayıcı 0 sürücü sol üst sürücüdür ve 1 doğrudan o altında sürücüdür.
+Sürücü numaraları, sürücüler arasındaki alana yazdırılır. Azure FXT Edge Filsi içinde, 0. sürücü, sol üst sürücüdür ve 1. Sürücü doğrudan onun altında.
 
-![Fotoğraf bir sabit sürücünün sürücü numaraları ve kapasite etiketleri gösteren FXT kasa içinde bölmesi](media/fxt-drives-photo.png)
+![FXT kasadaki bir sabit sürücü bölmesinin fotoğrafı, sürücü numaralarını ve kapasite etiketlerini gösterir](media/fxt-drives-photo.png)
 
-| Sürücü numaraları    |  Kullanım   |  Belirtimler |
+| Sürücü numaraları    |  Bir yönetim grubuna bağlanmak veya bağlı bir yönetim grubunun özelliklerini düzenlemek için Yönetim çalışma alanında   |  Lerinize |
 |------------------|--------|-----------------|
-| 0, 1             | OS     | 480 GB SATA SSD |
-| 2, 3, 4, 5, 6, 7, 8, 9 | Data   | FXT 6600: 3.2 TB NVMe SSD <br> FXT 6400: 1.6 TB NVMe SSD |
+| 0, 1             | ATAYAMADı     | 480 GB SATA SSD |
+| 2, 3, 4, 5, 6, 7, 8, 9 | Veri   | FXT 6600:3,2 TB NVMe SSD <br> FXT 6400:1,6 TB NVMe SSD |
 
 
-## <a name="dimensions-and-weight"></a>Boyut ve Ağırlık
+## <a name="dimensions-and-weight"></a>Boyutlar ve ağırlık
 
-Azure FXT Edge dosyalayıcı standart 19" ekipman rafa uyacak şekilde tasarlanmıştır ve bir raf üstü yüksek (1U) birimidir. 
+Azure FXT Edge Filer, standart 19 "ekipman rafıyla uyum sağlayacak şekilde tasarlanmıştır ve bir raf birimi yüksek (1U). 
 
 <!-- 10x2.5 inches version -->
 
-| Dosyalayıcı boyutları           |                          |
+| Filer boyutları           |                          |
 |-----------------------------|--------------------------|
-| Yükseklik                      | 42.8 mm (1,68 inç)    |
-| Genişlik (raf kulağına dahil) | 482.0 mm (18.97 inç)  |
-| Genişlik - ana kutu      | 434.0 mm (17.08 inç) |
-| Derinlik - için raf kulağına arkasına ana kutu                   | 733.82 mm (29.61 inç) |
-| Derinlik - en arka protrusion için raf kulağına                 | 772.67 mm (30.42 inç) |
-| Derinlik - çerçeve olmadan en ön protrusion için raf kulağına | 22.0 mm (0.87 inç)  |
-| Derinlik - kasa ile en ön protrusion için raf kulağına    | 35.84 mm (1.41 inç) |
+| Yükseklik                      | 42,8 mm (1,68 inç)    |
+| Genişlik (raf kulakları dahil) | 482,0 mm (18,97 inç)  |
+| Genişlik-ana kutu      | 434,0 mm (17,08 inç) |
+| Derinlik rafı, ana kutunun geri dönmesi                   | 733,82 mm (29,61 inç) |
+| Derinlik rafı, en yüksek arka uç                 | 772,67 mm (30,42 inç) |
+| Derinlemesine önde bir ön ödeme yapmak için derinlik rafı, kasa olmadan | 22,0 mm (0,87 inç)  |
+| Derinlemesine, ön ödemeli, kasa    | 35,84 mm (1,41 inç) |
 
-| Ağırlık | |
+| Lık | |
 |-----------------|----------------------|
-| Düğüm ağırlık (olmadan, paketleme, Donatılar'olmadan) | 40 lbs (18.1 kg) |
-| Net Ağırlık (olmadan, paketleme, Donatılar'dahil olmak üzere) | 51 lbs (23.1 kg)|
-| (Gibi sevk, tüm paket dahil) brüt ağırlığı |  64 lbs (29.0 kg) |
+| Düğüm ağırlığı (paketsiz, aksesuarlar olmadan) | 40 lbs (18,1 kg) |
+| Net ağırlığı (Donatılar dahil olmak üzere paketlemeden) | 51 lbs (23,1 kg)|
+| Brüt ağırlık (sevk edilen, tüm paketlemeler dahil) |  64 lbs (29,0 kg) |
 
-### <a name="shipping-dimensions"></a>Sevkiyat boyutları
+### <a name="shipping-dimensions"></a>Teslimat boyutları
 
-| Paket boyutu | Milimetre | İnç yükseklik |
+| Paket boyutu | Milimetre | Cm |
 |-------------------|-------------|--------|
-| Yükseklik            | 311.2       | 12.25" |
-| Genişlik             | 642.8       | 25.31" |
-| Uzunluk            | 1,051.1     | 41.38" |
+| Yükseklik            | 311,2       | 12,25 " |
+| Genişlik             | 642,8       | 25,31 " |
+| Uzunluklu            | 1\.051,1     | 41,38 " |
 
-## <a name="power-and-thermal-specifications"></a>Güç ve sıcaklık belirtimleri
+## <a name="power-and-thermal-specifications"></a>Güç ve ısı belirtimleri
 
-Bu bölüm, güç derecelendirmelerini ve Azure FXT Edge dosyalayıcı ölçüleri sağlar.
+Bu bölüm, Azure FXT Edge Filer için güç derecelendirmeleri ve ölçümler sağlar.
 
-### <a name="nameplate-ratings"></a>Ad plakası derecelendirmeleri
+### <a name="nameplate-ratings"></a>Ad levhası derecelendirmeleri
 
-| FXT 6000 serisi modellerine yönelik ad plakası derecelendirmeleri |
+| FXT 6000 serisi modelleriyle ilgili ad levhası derecelendirmeleri |
 |----------------|
-| 100 - 240V~    |
-| 10A - 5A (X2)  |
+| 100-240V ~    |
+| 10A-5A (X2)  |
 | 50/60Hz         |
 
 <!-- matches the Dell regulatory label exactly -->
 
 ### <a name="power-and-thermal-measurements"></a>Güç ve sıcaklık ölçümleri 
 
-Azure FXT Edge dosyalayıcı düğümleri değişken hız fanlar, kullandığından, güç sıcaklığını ve yük bağlıdır. En fazla fanı hızı yüksek yük ve yükseltilmiş ortam sıcaklığı belirli birleşimlerini erişilebilir. 
+Azure FXT Edge filigran düğümleri değişken hız fanı kullanır, bu nedenle güç sıcaklığa ve yüke bağlıdır. Yüksek yük ve yükseltilmiş çevresel sıcaklıkların belirli birleşimlerinde en fazla fan hızına erişilebilir. 
 
-Bu grafikler güç tüketimini ve yaygın olarak kullanılan voltaj sıklığı birleşimleri için çıkış sıcaklık ölçümleri sağlar. 
+Bu grafikler, yaygın olarak kullanılan voltaj sıklığı birleşimleri için güç tüketimi ve sıcaklık çıkış ölçümleri sağlar. 
 
-| Oda FXT 6600 güç <br />(22° C, 71.6° F) | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz | 
+| FXT 6600 güç odası sıcaklığı <br />(22 ° C, 71,6 ° F) | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz | 
 |---------|---|---|---|---|---|
 | Voltaj (V) | 100 | 120 | 208 | 230 | 240 | 
 | Sıklık (Hz) | 60 | 60 | 60 | 50 | 50 |
-| Geçerli (A) | 5.02 | 4.16 |2.40 | 2.20 | 2.16 |
-| Görünen Power (VA) | 502 | 499 | 499 | 506 | 518|
-| Güç faktörü | 0.99 | 0.99 |0.98 | 0.98 | 0.98 |
-| Gerçek gücü (W) | 497 |494 | 489 | 496 | 508 |
-| Isı kaybı (BTU/saat) |1696 | 1686 | 1669 | 1692 | 1733 |
+| Geçerli (A) | 5,02 | 4,16 |2,40 | 2,20 | 2,16 |
+| Görünen güç (VA) | 502 | 499 | 499 | 506 | 518|
+| Güç faktörü | 0,99 | 0,99 |0,98 | 0,98 | 0,98 |
+| Gerçek güç (W) | 497 |494 | 489 | 496 | 508 |
+| Sıcaklık dağılımı (BTU/saat) |1696 | 1686 | 1669 | 1692 | 1733 |
 
-| En fazla fanı hızlarında FXT 6600 güç | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz | 
+| Maksimum fan hızlarındaki FXT 6600 gücü | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz | 
 |---------|---|---|---|---|---|
 | Voltaj (V) | 100 |120 | 208 | 230 | 240| 
 | Sıklık (Hz) | 60 | 60 | 60 | 50 | 50 |
-| Geçerli (A) | 5.98 | 5.01 | 2.81 | 2.55 | 2.48 |
-| Görünen Power (VA) | 598 | 601 | 584 | 587 | 595 |
-| Güç faktörü | 0.99 | 0.99 | 0.98 | 0.98 | 0.98 |
-| Gerçek gücü (W) | 592 | 595 | 573 | 575 | 583 |
-| Isı kaybı (BTU/saat) | 2020 |2031 | 1954 | 1961 | 1990 |
+| Geçerli (A) | 5,98 | 5,01 | 2,81 | 2,55 | 2,48 |
+| Görünen güç (VA) | 598 | 601 | 584 | 587 | 595 |
+| Güç faktörü | 0,99 | 0,99 | 0,98 | 0,98 | 0,98 |
+| Gerçek güç (W) | 592 | 595 | 573 | 575 | 583 |
+| Sıcaklık dağılımı (BTU/saat) | 2020 |2031 | 1954 | 1961 | 1990 |
 
-| Oda FXT 6400 güç <br />(22° C, 71.6° F) | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz | 
+| FXT 6400 güç odası sıcaklığı <br />(22 ° C, 71,6 ° F) | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz | 
 |---------|---|---|---|---|---|
 | Voltaj (V) | 100 | 120 | 208 | 230 | 240 |
 | Sıklık (Hz) |60 | 60 | 60 | 50 | 50 |
-| Geçerli (A) | 4.63 | 3.86 | 2.24 | 2.04 | 1.94 |
-| Görünen Power (VA) | 463 | 463 | 466 | 469 | 466 |
-| Güç faktörü | 0.99 | 0.99 | 0.98 | 0.98 | 0.98 | 
-| Gerçek gücü (W) | 458 | 459 | 457 | 460 | 456 |
-| Isı kaybı (BTU/saat) | 1564 | 1565 | 1558 | 1569 | 1557 |
+| Geçerli (A) | 4,63 | 3,86 | 2,24 | 2,04 | 1,94 |
+| Görünen güç (VA) | 463 | 463 | 466 | 469 | 466 |
+| Güç faktörü | 0,99 | 0,99 | 0,98 | 0,98 | 0,98 | 
+| Gerçek güç (W) | 458 | 459 | 457 | 460 | 456 |
+| Sıcaklık dağılımı (BTU/saat) | 1564 | 1565 | 1558 | 1569 | 1557 |
 
-| En fazla fanı hızlarında FXT 6400 güç | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz |
+| Maksimum fan hızlarındaki FXT 6400 gücü | 100 V, 60 Hz | 120 V, 60 Hz | 208 V, 60 Hz | 230 V, 50 Hz | 240 V, 50 Hz |
 |---------|---|---|---|---|---|
 | Voltaj (V) | 100 | 120 | 208 | 230 | 240 |
 | Sıklık (Hz) | 60 | 60 | 60 | 50 | 50 |
-| Geçerli (A) | 5.15 | 4.28 | 2.48 | 2.28 | 2.13 |
-| Görünen Power (VA) | 515 | 514 | 516 | 524 | 511 |
-| Güç faktörü | 0.99 | 0.99 | 0.98 | 0.98 | 0.98 |
-| Gerçek gücü (W) | 510 | 508 | 506 | 514 | 501 |
-| Isı kaybı (BTU/saat) | 1740 | 1735 | 1725 | 1753 | 1709 |
+| Geçerli (A) | 5,15 | 4,28 | 2,48 | 2,28 | 2,13 |
+| Görünen güç (VA) | 515 | 514 | 516 | 524 | 511 |
+| Güç faktörü | 0,99 | 0,99 | 0,98 | 0,98 | 0,98 |
+| Gerçek güç (W) | 510 | 508 | 506 | 514 | 501 |
+| Sıcaklık dağılımı (BTU/saat) | 1740 | 1735 | 1725 | 1753 | 1709 |
 
-## <a name="environmental-requirements"></a>Ortam gereksinimleri
+## <a name="environmental-requirements"></a>Çevresel gereksinimler
 
-Bu bölüm, donanım ortam ortam özellikleri sağlar.
+Bu bölüm, donanımın çevresel ortamı için belirtim sağlar.
 
-### <a name="temperature-and-humidity"></a>Sıcaklık ve nem oranı
+### <a name="temperature-and-humidity"></a>Sıcaklık ve nem
 
-| Ortam özniteliği   | Aralığı                   | Olmayan işletim aralığı         |
+| Çevresel özniteliği   | İşletim aralığı                   | İşletim dışı Aralık         |
 |---------------------------|-----------------------------------|-----------------------------|
-| Ortam sıcaklığı aralığı | 10° C-35° C (50-86° F)          | -40 ° C 65 ° C (-40-149 ° F) |
-| Ortam Bağıl nem oranı | %10 - % 80 yoğunlaşmayan          | %95 5 - % yoğunlaşmayan     |
-| En fazla dew noktası         | 29° C (84° F)                       | 33° C (91° F)                 |
-| Yükseklik                  | 3048 sıcaklık XML'deki derecelendirme tabi ölçümleri (10.000 feet) varan aşağıda belirtildiği | en fazla 12.000 ölçümleri (39,370 fit) |
+| Çevresel sıcaklık aralığı | 10 °C ila 35 °C (50-86 °F)          | -40 °C ila 65 °C (-40-149 °F) |
+| Çevresel göreli nem | % 10-% 80 yoğunlaşmayan          | % 5-% 95 yoğunlaşmayan     |
+| En fazla Dew noktası         | 29 °C (84 °F)                       | 33 °C (91 °F)                 |
+| Çalışma                  | en çok 3048 ölçüm (10.000 feet), aşağıda belirtilen sıcaklık derecelendirmesi ile ilgili konular | en fazla 12.000 ölçüm (39.370 metre) |
 
 > [!NOTE] 
-> **Yükseklik sıcaklık XML'deki derecelendirmesi:** En yüksek sıcaklık tarafından ° C 1/300 m (1 ° F/547 ft) 950 milyon (3,117 ft) azaltılır.
+> **Yükseklik sıcaklık sırası derecelendirmesi:** Maksimum sıcaklık 950 (3.117 ft) üzerinde 1 °C/300 milyon (1 °F/547 ft) azaltılır.
 
-### <a name="airflow-shock-and-vibration"></a>Hava akışı ve darbe Titreşim 
+### <a name="airflow-shock-and-vibration"></a>Airflow, şok ve titreşim 
 
-| Öznitelik         | Belirtimi |
+| Öznitelik         | Min |
 |-------------------|---------------|
-| Hava akışı                    | Sistem hava akışı arkadan öne ' dir. Sistem low-pressure arka Egzozu yüklemesiyle çalıştırılması gerekir. |
-| Darbe işletimsel         | 6 G 11 milisaniye (6 yönleri içinde test) |
-| Darbe çalışmaz     | 71 G 2 milisaniye (6 yönleri içinde test) |
-| Titreşim işletimsel     | 0, 26 G<sub>RMS</sub> 350 Hz rastgele için 5 Hz         |
-| Titreşim çalışmaz | 1.88 G<sub>RMS</sub> 10 Hz ila 15 dakika (test altı dışlamada) 500 Hz  |
+| Airflow                    | Sistem Airflow, baştan sona. Sistemin düşük basınç bir arka yükleme yüklemesiyle birlikte çalıştırılması gerekir. |
+| Darbe, işlemsel         | 11 milisaniye için 6 G (6 yönde test edilmiştir) |
+| Darbe, işlemsel olmayan     | 2 milisaniye için 71 G (6 yönde test edilmiştir) |
+| Titreşim, işletimsel     | 0,26 G<sub>RMS</sub> 5 hz Ila 350 Hz rastgele         |
+| Titreşim, işlemsel olmayan | 15 dakika boyunca 1,88 G<sub>RMS</sub> 10 hz Ila 500 Hz (altı tarafta test edilmiştir)  |
 
-## <a name="safety-regulation-compliance"></a>Güvenlik Mevzuata uyumluluk 
+## <a name="safety-regulation-compliance"></a>Güvenlik düzenlemesi uyumluluğu 
 
-Azure FXT Edge dosyalayıcı listelenen yönetmelikleri ile uyumludur. 
+Azure FXT Edge filigran, listelenen yönetmeliklere uyar. 
 
-| Category       | Yasal belirtimi | 
+| Kategori       | Yasal belirtim | 
 |----------------|--------------------------|
-| Genel güvenliği | TR 60950-1:2006 A1:2010 + A2:2013 + A11:2009 + A12:2011 / IEC 60950-1:2005 ed2 + A1:2009 A2:2013 <br>TR 62311:2008 | 
-| EMC            | FCC A, ICES-003  <br>EN 55032:2012/CISPR 32:2012  <br>EN 55032:2015/CISPR 32:2015  <br>EN 55024:2010 +A1:2015/CISPR 24:2010 +A1:2015  <br>TR 61000-3-2:2014 / IEC 61000-3-2:2014 (sınıfı D)   <br>EN 61000-3-3:2013/IEC 61000-3-3:2013 |
-| Enerji         | Commission Regulation (EU) No. 617/2013  |
-| RoHS           |    TR 50581:2012   |
+| Genel güvenlik | EN 60950-1:2006 + a1:2010 + a2:2013 + A11:2009 + A12:2011/ıEC 60950-1:2005 ED2 + a1:2009 + a2:2013 <br>EN 62311:2008 | 
+| EMC            | FCC A, ıCES-003  <br>EN 55032:2012/CıSPPR 32:2012  <br>EN 55032:2015/CıSPPR 32:2015  <br>EN 55024:2010 + A1:2015/CıSPPR 24:2010 + A1:2015  <br>EN 61000-3-2:2014/ıEC 61000-3-2:2014 (sınıf D)   <br>EN 61000-3-3:2013/ıEC 61000-3-3:2013 |
+| Enerji         | Komisyon Yönetmeliği (AB) No. 617/2013  |
+| RoHS           |    EN 50581:2012   |

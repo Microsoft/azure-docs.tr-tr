@@ -1,34 +1,32 @@
 ---
 title: Azure İşlevlerine Genel Bakış | Microsoft Belgeleri
 description: Uyumsuz iş yüklerini dakikalar içinde iyileştirmek için Azure İşlevlerinin nasıl kullanılacağını anlayın.
-services: functions
 documentationcenter: na
 author: mattchenderson
 manager: jeconnoc
 keywords: azure işlevleri, işlevler, olay işleme, web kancaları, dinamik işlem, sunucusuz mimari
 ms.assetid: 01d6ca9f-ca3f-44fa-b0b9-7ffee115acd4
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: overview
 ms.date: 10/03/2017
 ms.author: glenga
 ms.custom: H1Hack27Feb2017, mvc
-ms.openlocfilehash: b8d57a2bbaa53a0291dc9c05ab234c3238322a71
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: f3fc7691fc3afa3a1fe886655353d9ed41f631cc
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61020290"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70096073"
 ---
 # <a name="an-introduction-to-azure-functions"></a>Azure İşlevleri'ne giriş  
-Azure İşlevleri, küçük kod parçalarını veya "işlevleri" bulutta kolayca çalıştırmaya yönelik bir çözümdür. Tüm uygulama veya bunu çalıştıracak altyapı hakkında endişelenmeden elinizdeki sorun için ihtiyacınız olan kodu yazabilirsiniz. İşlevler geliştirme sürecinizi daha da verimli hale getirebilir ve tercih ettiğiniz geliştirme dilini (C#, F#, Node.js, Java veya PHP gibi) kullanabilirsiniz. Yalnızca kodunuzun çalıştığı zaman için ödeme yapın ve ihtiyaca göre ölçekleme konusunda Azure'a güvenin. Azure İşlevleri, Microsoft Azure'da [sunucusuz](https://azure.microsoft.com/solutions/serverless/) uygulamalar geliştirmenizi sağlar.
+Azure İşlevleri, küçük kod parçalarını veya "işlevleri" bulutta kolayca çalıştırmaya yönelik bir çözümdür. Tüm uygulama veya bunu çalıştıracak altyapı hakkında endişelenmeden elinizdeki sorun için ihtiyacınız olan kodu yazabilirsiniz. İşlevler, geliştirmeyi daha da üretken hale getirir ve tercih C#ettiğiniz geliştirme dilini (Java, JavaScript, PowerShell ve Python gibi) kullanabilirsiniz. Yalnızca kodunuzun çalıştığı zaman için ödeme yapın ve ihtiyaca göre ölçekleme konusunda Azure'a güvenin. Azure İşlevleri, Microsoft Azure'da [sunucusuz](https://azure.microsoft.com/solutions/serverless/) uygulamalar geliştirmenizi sağlar.
 
 Bu konu başlığında, Azure İşlevlerine üst düzey bir genel bakış sağlanmıştır. İşlevleri kullanmaya hemen başlamak isterseniz [İlk Azure İşlevinizi oluşturma](functions-create-first-azure-function.md) ile başlayın. İşlevler hakkında daha teknik bilgi arıyorsanız bkz. [geliştirici başvurusu](functions-reference.md).
 
 ## <a name="features"></a>Özellikler
 İşlevlerin önemli özelliklerinden bazıları şunlardır:
 
-* **Dil seçimi** - C#, F# veya Javascript dillerinden istediğinizi kullanarak işlevler yazın. Diğer seçenekler için bkz. [Desteklenen diller](supported-languages.md).
+* **Dil seçimi** -tercih ettiğiniz C#, Java, JavaScript, Python ve diğer dilleri kullanarak işlevleri yazın. Listenin tamamı için [desteklenen diller](supported-languages.md) bölümüne bakın.
 * **Kullandıkça ödeme fiyatlandırma modeli** - Yalnızca kodunuzu çalıştırmaya harcanan zaman için ödeme yapın. [Fiyatlandırma bölümünde](#pricing) Tüketim barındırma planı seçeneğine bakın.  
 * **Kendi bağımlılıklarınızı getirin** - İşlevler NuGet ve NPM'yi desteklediğinden, sık kullandığınız kitaplıklarınızı kullanabilirsiniz.  
 * **Tümleşik güvenlik** - Azure Active Directory, Facebook, Google, Twitter ve Microsoft Hesabı gibi OAuth sağlayıcılarıyla HTTP tetiklemeli işlevleri koruyun.  
@@ -47,7 +45,7 @@ Bu konu başlığında, Azure İşlevlerine üst düzey bir genel bakış sağla
 * **BlobTrigger** - Azure Storage bloblarını kapsayıcılara eklendiklerinde eşler. Görüntüyü yeniden boyutlandırmak için bu işlevi kullanabilirsiniz. Daha fazla bilgi için bkz. [Blob depolama bağlamaları](functions-bindings-storage-blob.md).
 * **QueueTrigger** - Bir Azure Storage kuyruğuna geldiklerinde iletilere yanıt verir. Daha fazla bilgi için bkz. [Azure Kuyruk Depolama bağlamaları](functions-bindings-storage-queue.md).
 * **EventGridTrigger** - Azure Event Grid’deki bir aboneliğe teslim edilen olaylara yanıt verir. Filtreleme içeren olayları almak için abonelik tabanlı bir model destekler. Olay tabanlı mimariler oluşturmak için iyi bir çözümdür. Örnek için, bkz. [Yüklenen görüntülerin yeniden boyutlandırılmasını Event Grid kullanarak otomatikleştirme](../event-grid/resize-images-on-storage-blob-upload-event.md).
-* **EventHubTrigger** - Bir Azure Event Hub'ına teslim edilen olaylara yanıt verir. Uygulama izleme, kullanıcı deneyiminde veya iş akışı işlemede ve nesnelerin İnternet'e (IOT) senaryolarında yararlıdır. Daha fazla bilgi için bkz. [Event Hubs bağlamaları](functions-bindings-event-hubs.md).
+* **EventHubTrigger** - Bir Azure Event Hub'ına teslim edilen olaylara yanıt verir. Özellikle uygulama izleme, Kullanıcı deneyimi veya iş akışı işleme ve Nesnelerin İnterneti (IoT) senaryolarında yararlı olur. Daha fazla bilgi için bkz. [Event Hubs bağlamaları](functions-bindings-event-hubs.md).
 * **ServiceBusQueueTrigger** - İleti kuyruklarını dinleyerek kodunuzu diğer Azure hizmetlerine veya şirket içi hizmetlere bağlar. Daha fazla bilgi için, bkz. [Service Bus bağlamaları](functions-bindings-service-bus.md).
 * **ServiceBusTopicTrigger** - Konu başlıklarına abone olarak kodunuzu diğer Azure hizmetlerine veya şirket içi hizmetlere bağlar. Daha fazla bilgi için, bkz. [Service Bus bağlamaları](functions-bindings-service-bus.md).
 

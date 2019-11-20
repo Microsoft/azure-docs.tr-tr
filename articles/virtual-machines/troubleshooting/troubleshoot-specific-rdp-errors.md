@@ -1,113 +1,112 @@
 ---
-title: Azure Vm'leri için belirli RDP hata iletileri | Microsoft Docs
-description: Azure'da Windows sanal makinesine Uzak Masaüstü Bağlantısı çalışırken karşılaşabileceğiniz belirli hata iletileri kullanın anlama
-keywords: Uzak Masaüstü hatası, Uzak Masaüstü bağlantısı hata, VM'ye bağlanamıyor Uzak Masaüstü sorunlarını giderme
+title: Azure VM 'Leri için belirli RDP hata iletileri | Microsoft Docs
+description: Azure 'da bir Windows sanal makinesine Uzak Masaüstü bağlantısı kullanmaya çalışırken alabileceğiniz belirli hata iletilerini anlayın
+keywords: Uzak Masaüstü hatası, Uzak Masaüstü bağlantı hatası, VM 'ye bağlanılamıyor, Uzak Masaüstü sorunlarını giderme
 services: virtual-machines-windows
 documentationcenter: ''
 author: genlin
-manager: jeconnoc
+manager: dcscontentpm
 editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 ms.assetid: 5feb1d64-ee6f-4907-949a-a7cffcbc6153
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: f4d733e29d2ba8213e1832f2c604b726283ab3e1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 851c5eb4ebfee4e4a4836a07b51578dd2b0c68cd
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60318706"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71088181"
 ---
-# <a name="troubleshooting-specific-rdp-error-messages-to-a-windows-vm-in-azure"></a>Azure'da Windows VM için belirli RDP hata iletileri sorunları giderme
-Azure'da Windows sanal makinesi (VM) için Uzak Masaüstü Bağlantısı kullanılırken, belirli bir hata iletisi alabilirsiniz. Bu makalede karşılaştı, sorun giderme yanı sıra bunları gidermek için adımları daha genel hata iletileri bazıları ayrıntılı olarak açıklanmaktadır. Sanal makinenizde bağlanma sorunu yaşıyorsanız RDP kullanmayan belirli hata iletisiyle karşılaştığınız bkz [Uzak Masaüstü için sorun giderme kılavuzu](troubleshoot-rdp-connection.md).
+# <a name="troubleshooting-specific-rdp-error-messages-to-a-windows-vm-in-azure"></a>Azure 'da Windows VM 'ye belirli RDP hata iletileri sorunlarını giderme
+Azure 'da bir Windows sanal makinesine (VM) Uzak Masaüstü bağlantısı kullanırken, belirli bir hata iletisi alabilirsiniz. Bu makalede, karşılaşılan daha yaygın hata iletilerinin bazıları ve bunları çözmek için sorun giderme adımlarıyla birlikte ayrıntılar verilmektedir. VM 'nize RDP kullanarak bağlanma sorunları yaşıyorsanız ancak belirli bir hata iletisiyle karşılaşmayın, [Uzak Masaüstü için sorun giderme kılavuzuna](troubleshoot-rdp-connection.md)bakın.
 
 Belirli hata iletileri hakkında daha fazla bilgi için aşağıdakilere bakın:
 
-* [Lisans sağlanabilecek Uzak Masaüstü lisans sunucusu olmadığından uzak oturumun bağlantısı kesildi](#rdplicense).
-* [Uzak Masaüstü bilgisayar "name" bulamıyor](#rdpname).
-* [Bir kimlik doğrulama hatası oluştu. Yerel Güvenlik Yetkilisi temas kurulamıyor](#rdpauth).
-* [Windows güvenlik hatası: Kimlik bilgilerinizi çalışmama](#wincred).
-* [Bu bilgisayar, uzak bilgisayara bağlanamıyor](#rdpconnect).
+* [Bir lisans sağlamak için kullanılabilir Uzak Masaüstü lisans sunucusu olmadığından uzak oturumun bağlantısı kesildi](#rdplicense).
+* [Uzak Masaüstü "adı" bilgisayarını bulamıyor](#rdpname).
+* [Bir kimlik doğrulama hatası oluştu. Yerel güvenlik yetkilisine](#rdpauth)ulaşılamıyor.
+* [Windows güvenlik hatası: Kimlik bilgileriniz çalışmadı](#wincred).
+* [Bu bilgisayar uzak bilgisayara bağlanamıyor](#rdpconnect).
 
 <a id="rdplicense"></a>
 
-## <a name="the-remote-session-was-disconnected-because-there-are-no-remote-desktop-license-servers-available-to-provide-a-license"></a>Lisans sağlanabilecek Uzak Masaüstü lisans sunucusu olmadığından uzak oturumun bağlantısı kesildi.
-Neden: Uzak Masaüstü Sunucusu rolü için 120 günlük lisansının yetkisiz kullanım süresi doldu ve lisansları yüklemeniz gerekir.
+## <a name="the-remote-session-was-disconnected-because-there-are-no-remote-desktop-license-servers-available-to-provide-a-license"></a>Bir lisans sağlamak için kullanılabilir Uzak Masaüstü lisans sunucusu olmadığından uzak oturumun bağlantısı kesildi.
+Neden: Uzak Masaüstü sunucu rolü için 120 günlük lisanslama yetkisiz kullanım süresi doldu ve lisansları yüklemeniz gerekiyor.
 
-Geçici bir çözüm olarak portaldan RDP dosyasının yerel bir kopyasını kaydedin ve bağlanmak için PowerShell komut isteminde şu komutu çalıştırın. Bu adım yalnızca bu bağlantı için lisanslama devre dışı bırakır:
+Geçici bir çözüm olarak, portaldan RDP dosyasının yerel bir kopyasını kaydedin ve bağlanmak için bir PowerShell komut isteminde bu komutu çalıştırın. Bu adım yalnızca bu bağlantı için lisanslamayı devre dışı bırakır:
 
         mstsc <File name>.RDP /admin
 
-VM'nin ikiden fazla eş zamanlı Uzak Masaüstü bağlantılarında gerçekten ihtiyacınız yoksa, Uzak Masaüstü sunucu rolünü kaldırmak için Sunucu Yöneticisi'ni kullanabilirsiniz.
+VM 'ye en fazla iki eşzamanlı uzak masaüstü bağlantısı gerekmiyorsa, uzak masaüstü sunucu rolünü kaldırmak için Sunucu Yöneticisi kullanabilirsiniz.
 
-Daha fazla bilgi için bkz. blog gönderisine [Azure VM başarısız "Hiçbir Uzak Masaüstü lisans sunucusu ile"](https://blogs.msdn.microsoft.com/mast/2014/01/21/rdp-to-azure-vm-fails-with-no-remote-desktop-license-servers-available/).
+Daha fazla bilgi için bkz. [Azure VM 'nin "kullanılabilir Uzak Masaüstü lisans sunucusu yok" ile başarısız olması](https://blogs.msdn.microsoft.com/mast/2014/01/21/rdp-to-azure-vm-fails-with-no-remote-desktop-license-servers-available/).
 
 <a id="rdpname"></a>
 
-## <a name="remote-desktop-cant-find-the-computer-name"></a>Uzak Masaüstü bilgisayar "name" bulunamıyor.
-Neden: Uzak Masaüstü İstemcisi bilgisayarınızda ayarlarında ve RDP dosyasını bilgisayarın adı çözümlenemiyor.
+## <a name="remote-desktop-cant-find-the-computer-name"></a>Uzak Masaüstü "adı" bilgisayarını bulamıyor.
+Neden: Bilgisayarınızdaki uzak masaüstü istemcisi, RDP dosyasının ayarlarındaki bilgisayarın adını çözümleyemiyor.
 
 Olası çözümler:
 
-* Bir kuruluşun intranet üzerinde kullanıyorsanız, bilgisayarınız proxy sunucusu erişimi olan ve HTTPS trafiğini gönderebilir emin olun.
-* Yerel olarak saklanan bir RDP dosyası kullanıyorsanız, portal tarafından oluşturulan bir kullanarak deneyin. Bu adım, sanal makine veya Bulut hizmeti ve VM'nin uç nokta bağlantı noktası doğru DNS adı sahip olmasını sağlar. Portal tarafından oluşturulan örnek bir RDP dosyası aşağıda verilmiştir:
+* Bir kuruluşun intraneti kullanıyorsanız, bilgisayarınızın proxy sunucusuna erişimi olduğundan ve buna HTTPS trafiği gönderediğinden emin olun.
+* Yerel olarak depolanan bir RDP dosyası kullanıyorsanız, portal tarafından oluşturulan birini kullanmayı deneyin. Bu adım, sanal makine için doğru DNS adına veya bulut hizmetine ve VM 'nin uç nokta bağlantı noktasına sahip olmanızı sağlar. Portal tarafından oluşturulan örnek bir RDP dosyası aşağıda verilmiştir:
   
         full address:s:tailspin-azdatatier.cloudapp.net:55919
         prompt for credentials:i:1
 
-Bu RDP dosyası adresi bölümü vardır:
+Bu RDP dosyasının adres kısmı şunlardır:
 
-* ("Tailspin-azdatatier.cloudapp.net" Bu örnekte) VM içeren bulut hizmetinin tam etki alanı adı.
-* Dış TCP bağlantı Uzak Masaüstü trafiğine (55919) için uç nokta.
+* VM 'yi içeren bulut hizmetinin tam etki alanı adı (Bu örnekte "tailspin-azdatatier.cloudapp.net").
+* Uzak Masaüstü trafiği için uç noktanın dış TCP bağlantı noktası (55919).
 
 <a id="rdpauth"></a>
 
-## <a name="an-authentication-error-has-occurred-the-local-security-authority-cannot-be-contacted"></a>Bir kimlik doğrulama hatası oluştu. Yerel Güvenlik Yetkilisi iletişim kurulamıyor.
-Neden: ' % S'hedef sanal makine güvenlik yetkilisi kimlik bilgilerinizi kullanıcı adı kısmı bulunamıyor.
+## <a name="an-authentication-error-has-occurred-the-local-security-authority-cannot-be-contacted"></a>Bir kimlik doğrulama hatası oluştu. Yerel güvenlik yetkilisine ulaşılamıyor.
+Neden: Hedef VM, kimlik bilgilerinizin Kullanıcı adı bölümünde güvenlik yetkilisini bulamıyor.
 
-Kullanıcı adınızı biçimde olduğunda *SecurityAuthority*\\*kullanıcıadı* (örnek: CORP\User1) *SecurityAuthority* bölümüdür (için yerel güvenlik yetkilisi) sanal makinenin bilgisayar adı ya da bir Active Directory etki alanı adı.
+Kullanıcı adınız *securityauthority*\\*Kullanıcı adı* biçiminde olduğunda (örnek: CORP\User1), *Securityauthority* bölümü, sanal makinenin bilgisayar adı (yerel güvenlik yetkilisi için) veya Active Directory etki alanı adı olabilir.
 
 Olası çözümler:
 
-* VM yerel hesapsa, VM adının doğru yazıldığından emin olun.
-* Hesabın bir Active Directory etki alanında ise, etki alanı adının yazımını kontrol edin.
-* Bir Active Directory etki alanı hesabı ve etki alanı adının doğru yazıldığından, bu etki alanında bir etki alanı denetleyicisinin kullanılabilir olduğunu doğrulayın. Etki alanı denetleyicileri, başlamadı nedeni bir etki alanı denetleyicisi kullanılamıyorsa içeren Azure sanal ağlarda bulunan sık karşılaşılan bir sorundur. Geçici çözüm olarak, bir yerel yönetici hesabı yerine bir etki alanı hesabı kullanabilirsiniz.
+* Hesap sanal makineye yerelse, VM adının doğru yazıldığından emin olun.
+* Hesap bir Active Directory etki alanında ise, etki alanı adının yazımını denetleyin.
+* Active Directory bir etki alanı hesabı ve etki alanı adı doğru yazılmışsa, bu etki alanında bir etki alanı denetleyicisinin kullanılabilir olduğunu doğrulayın. Bu, bir etki alanı denetleyicisinin başlatılmamış olduğu için kullanılamayan etki alanı denetleyicileri içeren Azure sanal ağlarında yaygın bir sorundur. Geçici bir çözüm olarak, bir etki alanı hesabı yerine yerel yönetici hesabı kullanabilirsiniz.
 
 <a id="wincred"></a>
 
-## <a name="windows-security-error-your-credentials-did-not-work"></a>Windows güvenlik hatası: Kimlik bilgilerinizi çalışmadı.
-Neden: ' % S'hedef sanal makine hesap adını ve parolasını doğrulayamıyor.
+## <a name="windows-security-error-your-credentials-did-not-work"></a>Windows güvenlik hatası: Kimlik bilgileriniz çalışmadı.
+Neden: Hedef VM, hesap adınızı ve parolanızı doğrulayamıyor.
 
-Windows tabanlı bir bilgisayarda yerel bir hesap veya bir etki alanı hesabının kimlik bilgilerini doğrulayabilirsiniz.
+Windows tabanlı bir bilgisayar, yerel bir hesabın veya bir etki alanı hesabının kimlik bilgilerini doğrulayabilir.
 
-* Yerel hesaplar için kullanmak *ComputerName*\\*kullanıcıadı* sözdizimi (örnek: SQL1\Admin4798).
-* Etki alanı hesapları için kullanıyorsanız *DomainName*\\*kullanıcıadı* sözdizimi (örnek: CONTOSO\peterodman).
+* Yerel hesaplar için *ComputerName*\\*Kullanıcı adı* sözdizimini kullanın (örnek: SQL1\Admin4798).
+* Etki alanı hesapları için *DomainName*\\*Kullanıcı adı* sözdizimini kullanın (örnek: CONTOSO\peterodman).
 
-VM'nize yeni bir Active Directory ormanındaki bir etki alanı denetleyicisi yükselttiyseniz, yeni ormanın ve etki alanı aynı parolayı eşdeğer bir hesapla oturum açtığınız yerel yönetici hesabı dönüştürülür. Yerel hesap ardından silinir.
+VM 'nizi yeni bir Active Directory ormanında bir etki alanı denetleyicisine yükseltdüyseniz, ile oturum açtığınız yerel yönetici hesabı, yeni orman ve etki alanında aynı parolaya sahip eşdeğer bir hesaba dönüştürülür. Yerel hesap daha sonra silinir.
 
-Örneğin, eğer DC1\DCAdmin yerel hesapla oturum açmış ve sanal makine bir etki alanı denetleyicisi corp.contoso.com etki alanında yeni bir ormanda tanıtılma biçimini DC1\DCAdmin yerel hesap silindiğinde ve yeni bir etki alanı hesabı (CORP\DCAdmin) aynı parola ile oluşturuldu.
+Örneğin, DC1\DCAdmin yerel hesabı ile oturum açtıysanız ve sonra sanal makineyi corp.contoso.com etki alanı için yeni bir ormanda etki alanı denetleyicisi olarak yükseltin, DC1\DCAdmin yerel hesabı silinir ve yeni bir etki alanı hesabı (CORP\DCAdmin) aynı parolayla oluşturulur.
 
-Hesap adı geçerli bir hesap sanal makine doğrulayabilirsiniz bir adı olduğunu ve parolanın doğru olduğundan emin olun.
+Hesap adının, sanal makinenin geçerli bir hesap olarak doğrulayabildiğini ve parolanın doğru olduğundan emin olun.
 
-Yerel yönetici hesabının parolasını değiştirmeniz gerekiyorsa, bkz. [bir parola veya Windows sanal makineler için Uzak Masaüstü hizmetini sıfırlama](reset-rdp.md).
+Yerel yönetici hesabının parolasını değiştirmeniz gerekiyorsa, bkz. [Windows sanal makineleri için bir parolayı veya Uzak Masaüstü hizmetini sıfırlama](reset-rdp.md).
 
 <a id="rdpconnect"></a>
 
-## <a name="this-computer-cant-connect-to-the-remote-computer"></a>Bu bilgisayar, uzak bilgisayara bağlanamıyor.
-Neden: Bağlanmak için kullanılan hesap, Uzak Masaüstü Oturum açma hakları yok.
+## <a name="this-computer-cant-connect-to-the-remote-computer"></a>Bu bilgisayar uzak bilgisayara bağlanamıyor.
+Neden: Bağlanmak için kullanılan hesabın uzak masaüstü oturum açma hakları yoktur.
 
-İçine uzaktan oturum grupları ve hesapları içeren bir Uzak Masaüstü users yerel grubu, her Windows bilgisayarı vardır. Bu hesaplar Uzak Masaüstü Kullanıcıları yerel Grup listelenmeyen olsa bile yerel Yöneticiler grubunun üyesi erişimi de. Yerel Yöneticiler grubunun, etki alanına katılan makineler için etki alanı için etki alanı yöneticileri de içerir.
+Her Windows bilgisayarında, uzaktan oturum açabilirler hesapları ve grupları içeren uzak masaüstü kullanıcıları yerel grubu bulunur. Yerel Yöneticiler grubunun üyeleri, bu hesaplar uzak masaüstü kullanıcıları yerel grubunda listelenmese de, erişimi de vardır. Etki alanına katılmış makineler için yerel Yöneticiler grubu, etki alanının etki alanı yöneticilerini de içerir.
 
-Bağlanmak için kullandığınız hesabın Uzak Masaüstü Oturum açma hakları olduğundan emin olun. Geçici bir çözüm olarak, Uzak Masaüstü aracılığıyla bağlanmak için bir etki alanı veya yerel yönetici hesabı kullanın. İstenen hesabı Uzak Masaüstü Kullanıcıları yerel grubuna eklemek için Microsoft Yönetim Konsolu ek bileşenini kullanın (**Sistem Araçları > yerel kullanıcılar ve Gruplar > Gruplar > Uzak Masaüstü Kullanıcıları**).
+Bağlanırken kullandığınız hesabın uzak masaüstü oturum açma haklarına sahip olduğundan emin olun. Geçici bir çözüm olarak, Uzak Masaüstü üzerinden bağlanmak için bir etki alanı veya yerel yönetici hesabı kullanın. İstenen hesabı uzak masaüstü kullanıcıları yerel grubuna eklemek için, Microsoft Yönetim Konsolu ek bileşenini (**sistem araçları > yerel kullanıcılar ve gruplar > gruplar > uzak masaüstü kullanıcıları**) kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu hatalar hiçbiri oluştu ve sorunu RDP kullanarak bağlantı kurulduğunda, bkz: Bilinmeyen bir varsa [Uzak Masaüstü için sorun giderme kılavuzu](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+Bu hatalardan hiçbiri oluştuysa ve RDP kullanarak bağlanma ile ilgili bilinmeyen bir sorununuz varsa, [Uzak Masaüstü için sorun giderme kılavuzuna](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)bakın.
 
-* Bir VM'de çalışan uygulamalara erişme adımlar sorun giderme için bkz: [bir Azure sanal makinesinde çalışan bir uygulamaya erişim sorunlarını giderme](../linux/troubleshoot-app-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
-* Güvenli Kabuk (SSH) kullanarak azure'da bir Linux VM bağlanmak için bkz sorunları yaşıyorsanız [sorun giderme SSH bağlantıları için azure'da bir Linux sanal makinesi](../linux/troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+* Bir VM üzerinde çalışan uygulamalara erişme sorunlarını giderme adımları için bkz. [Azure VM 'de çalışan bir uygulamaya erişim sorunlarını giderme](../linux/troubleshoot-app-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+* Azure 'da bir Linux VM 'sine bağlanmak üzere Secure Shell (SSH) kullanarak sorun yaşıyorsanız, bkz. [Azure 'Da LINUX VM Ile SSH bağlantılarında sorun giderme](../linux/troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 

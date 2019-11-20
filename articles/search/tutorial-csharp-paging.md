@@ -1,51 +1,52 @@
 ---
-title: C#Arama sonuçlarını sayfalandırma - Azure Search Öğreticisi
-description: Bu öğreticide, "Azure Search - ilk uygulamanızı oluşturma" projede iki tür disk belleği tercih ettiğiniz oluşturur. İlk sayfa numarası düğmelerini yanı sıra ilk olarak, daha önceki bir dizi kullanır ve düğmeler son sayfa. İkinci sayfalama sistem sonsuz kaydırma, dikey kaydırma çubuğu alt sınırına taşıyarak tetiklenen kullanır.
-services: search
-ms.service: search
-ms.topic: tutorial
-ms.author: v-pettur
+title: C#Arama sonuçları sayfalandırmasına ilişkin öğretici
+titleSuffix: Azure Cognitive Search
+description: Bu öğreticide arama sonuçlarının sayfalama gösterilmektedir. İlk, sonraki, önceki, son ve numaralandırılmış düğmelere göre disk belleğine sahip mevcut bir oteller projesi üzerinde oluşturulur. İkinci bir disk belleği sistemi, dikey bir kaydırma çubuğunu alt sınırına taşıyarak tetiklenen, sonsuz kaydırma kullanır.
+manager: nitinme
 author: PeterTurcan
-ms.date: 05/01/2019
-ms.openlocfilehash: 7e6c433168b73c6b58d13d4698bed55d7c18ec58
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.author: v-pettur
+ms.service: cognitive-search
+ms.topic: tutorial
+ms.date: 11/04/2019
+ms.openlocfilehash: 04f8229a86fbd8fbd5404997926412e760e74973
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67434646"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113756"
 ---
-# <a name="c-tutorial-search-results-pagination---azure-search"></a>C#öğretici: Arama sonuçlarını sayfalandırma - Azure Search
+# <a name="c-tutorial-search-results-pagination---azure-cognitive-search"></a>C#Öğretici: arama sonuçları sayfalandırma-Azure Bilişsel Arama
 
-İki farklı disk belleği sistemleri, uygulama hakkında bilgi edinmek ilk temel sayfa numaralarını ve sonsuz kayan üzerinde ikinci alan. Her iki sistem disk belleği, yaygın olarak kullanılan ve sonuçları ile istediğiniz kullanıcı deneyimini doğru olanı seçerek bağlıdır. Bu öğreticide oluşturulan projesine sayfalama sistemleri yapıları [ C# Öğreticisi: Azure Search - ilk uygulamanızı oluşturma](tutorial-csharp-create-first-app.md) öğretici.
+Sayfa numaralarına ve ikincinin sonsuz kaydırmasını temel alan iki farklı disk belleği sistemi uygulamayı öğrenin. Her iki sayfalama sistemi de yaygın olarak kullanılır ve sağ taraftaki seçim, sonuçlarla istediğiniz kullanıcı deneyimine bağlıdır. Bu öğretici, sayfalama sistemlerini [ C# öğreticide oluşturulan projede oluşturur: ilk uygulamanızı oluşturma-Azure bilişsel arama](tutorial-csharp-create-first-app.md) öğreticisi.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > [!div class="checklist"]
-> * Numaralı disk belleği ile uygulamanızı genişletin
-> * Sonsuz kayan ile uygulamanızı genişletin
+> * Uygulamanızı numaralandırılmış sayfalama ile genişletin
+> * Sınırsız kaydırma ile uygulamanızı genişletme
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu öğreticiyi tamamlamak için aşağıdakileri yapmanız gerekir:
 
-Sahip [ C# Öğreticisi: Azure Search - ilk uygulamanızı oluşturma](tutorial-csharp-create-first-app.md) proje çalışır. Bu proje kendi sürümü veya Github'dan yükleyin: [İlk uygulamanızı oluşturma](https://github.com/Azure-Samples/azure-search-dotnet-samples).
+[Öğreticiye sahipsiniz: ilk uygulamanızı oluşturun-Azure bilişsel arama projenizi çalışır duruma ayarlayın. C# ](tutorial-csharp-create-first-app.md) Bu proje kendi sürümünüz olabilir ya da GitHub: [ilk uygulama oluştur](https://github.com/Azure-Samples/azure-search-dotnet-samples)' dan yükleyebilirsiniz.
 
-## <a name="extend-your-app-with-numbered-paging"></a>Numaralı disk belleği ile uygulamanızı genişletin
+## <a name="extend-your-app-with-numbered-paging"></a>Uygulamanızı numaralandırılmış sayfalama ile genişletin
 
-Numaralı disk belleği ana internet arama motorları ve diğer arama Web sitelerinin çoğu tercih ettiğiniz sayfalama sistemidir. Numaralı disk belleği, genellikle bir dizi gerçek sayfa numarası yanı sıra, "İleri" ve "önceki" bir seçenek içerir. Ayrıca bir "ilk sayfası" ve "son sayfa" seçeneği de kullanılabilir. Bu seçenekler, sayfa tabanlı sonuçları arasında gezinme boyunca bir kullanıcı denetimi kesinlikle verin.
+Numaralandırılmış sayfalama, ana internet arama motorları ve diğer birçok arama Web sitesinin tercih ettiği disk belleği sistemidir. Numaralandırılmış sayfalama genellikle gerçek sayfa numaralarının bir aralığına ek olarak "ileri" ve "Previous" seçeneğini içerir. Ayrıca "ilk sayfa" ve "son sayfa" seçeneği de kullanılabilir olabilir. Bu seçenekler, sayfa tabanlı sonuçlarla gezinerek bir kullanıcı denetimi sunar.
 
-İlk, önceki, sonraki içerir ve en son, 1 ile başlamayan sayfa numaralarını birlikte seçenekleri sistem ekleyeceğiz ancak bunun yerine saran bir sayfayı kullanıcı (örneğin kullanıcı, 10, belki de sayfa numaralarını 8 sayfanın arıyor bu nedenle, açıktır 9, 10, 11 ve 12 görüntülenir).
+İlk, önceki, sonraki ve son seçeneklerini içeren bir sistem, 1 ' den başlamamayan sayfa numaralarıyla birlikte ekleyeceğiz, ancak örneğin, Kullanıcı sayfa 10 ' a bakıyorsam, belki sayfa numarası 8 ' de görünür , 9, 10, 11 ve 12 görüntülenir).
 
-Sistemin genel bir değişkende ayarlanacak görünür sayfası numaraları izin vermek için esnek olacaktır.
+Sistem, genel bir değişkende görünür sayfa numaralarının belirtilmesine izin verecek kadar esnek olacaktır.
 
-Sistem görüntülenen sayfa numaraları aralığını değiştirme tetikleyecek anlamı en sol ve sağ en sayfa numarası düğmelerini özel olarak değerlendirir. Örneğin, sayfa numarası 8, 9, 10, 11 ve 12 görüntülenir ve 8'de kullanıcı tıkladığında, ardından bir dizi sayfa numarası 6, 7, 8, 9 ve 10 görüntülenen değişir. Ve benzer bir sağa kaydırma 12'i seçtiyseniz.
+Sistem, en sol ve en sağdaki sayfa numarası düğmelerini özel olarak değerlendirir ve bu, görüntülendikleri sayfa numaralarının aralığının değiştirilmesini tetikler. Örneğin, 8, 9, 10, 11 ve 12 numaralı sayfa numaraları görüntüleniyorsa ve Kullanıcı 8 ' e tıkladığında sayfa numaraları aralığı 6, 7, 8, 9 ve 10 ' a değişir. Ayrıca, 12 ' nin seçildikleri takdirde sağa doğru bir kaydırma vardır.
 
-### <a name="add-paging-fields-to-the-model"></a>Modeli için disk belleği alanları ekleme
+### <a name="add-paging-fields-to-the-model"></a>Modele disk belleği alanları ekleme
 
-Açık temel arama sayfası çözümünüz varsa.
+Temel arama sayfası çözümünün açık olmasını sağlayabilirsiniz.
 
 1. SearchData.cs model dosyasını açın.
 
-2. Öncelikle bazı genel değişkenleri ekleyin. MVC'de genel değişkenleri kendi statik sınıfta bildirilir. **ResultsPerPage** sayfa başına sonuç sayısını ayarlar. **MaxPageRange** görünümünde görünür sayfa numaralarını sayısını belirler. **PageRangeDelta** kaç sayfaları sola veya sağa sayfa aralığı kaydırılacağı uzaklık, en sol veya en sağ bir sayfa numarası seçildiğinde belirler. Genellikle bu ikinci etrafında sayıdır yarısını **MaxPageRange**. Aşağıdaki kod ad alanına ekleyin.
+2. Önce bazı genel değişkenler ekleyin. MVC 'de, genel değişkenler kendi statik sınıfında bildirilmiştir. **Resultsperpage** sayfa başına sonuç sayısını ayarlar. **Maxpagerange** görünümdeki görünür sayfa numaralarının sayısını belirler. **Pagerangedelta** , sayfa aralığının en sol veya sağ sayfa numarası seçildiğinde kaç sayfa sola veya sağa kaydırılacağı belirler. Genellikle bu ikinci sayı **Maxpagerange**'un yarısı etrafında. Aşağıdaki kodu ad alanına ekleyin.
 
     ```cs
     public static class GlobalVariables
@@ -76,9 +77,9 @@ Açık temel arama sayfası çözümünüz varsa.
     ```
 
     >[!Tip]
-    >Bu proje, bir dizüstü bilgisayar gibi daha küçük bir ekrana sahip bir cihazda çalıştırıyorsanız değiştirmeyi göz önünde bulundurun **ResultsPerPage** 2.
+    >Bu projeyi dizüstü bilgisayar gibi daha küçük bir ekran üzerinde çalıştırıyorsanız, daha sonra **Resultsperpage** 'i 2 olarak değiştirmeyi düşünün.
 
-3. Disk belleği özellikleri **SearchData** , örneğin sonra sınıf **Aramametni** özelliği.
+3. Searchtext özelliğinden sonra, bir **Searchdata** sınıfına sayfalama özellikleri ekleyin.
 
     ```cs
         // The current page being displayed.
@@ -97,9 +98,9 @@ Açık temel arama sayfası çözümünüz varsa.
         public string paging { get; set; }
     ```
 
-### <a name="add-a-table-of-paging-options-to-the-view"></a>Disk belleği seçenekleri, tablo görünümü ekleme
+### <a name="add-a-table-of-paging-options-to-the-view"></a>Görünüme bir sayfalama seçenekleri tablosu ekleyin
 
-1. Index.cshtml dosyasını açıp kapatma hemen önce aşağıdaki kodu ekleyin &lt;/body&gt; etiketi. Bu yeni kod bir tablosu disk belleği seçenekleri sunar: ilk, önceki, 1, 2, 3, 4, 5, ardından, en son.
+1. İndex. cshtml dosyasını açın ve kapatma &lt;/Body&gt; etiketinin hemen öncesine aşağıdaki kodu ekleyin. Bu yeni kod, sayfalama seçeneklerinin bir tablosunu gösterir: ilk, önceki, 1, 2, 3, 4, 5, ileri, son.
 
     ```cs
     @if (Model != null && Model.pageCount > 1)
@@ -180,11 +181,11 @@ Açık temel arama sayfası çözümünüz varsa.
     }
     ```
 
-    Bir HTML tablosu şeyler düzgünce hizalamak için kullanırız. Tüm eylem geldiği ancak @Html.ActionLink her denetleyiciyle çağırma deyimleri, bir **yeni** farklı girişleri ile oluşturulan model **sayfalama** daha önce eklediğimiz özelliği.
+    Öğeleri düzgünce hizalamak için bir HTML tablosu kullanıyoruz. Ancak, her biri, denetleyiciyi daha önce eklediğimiz **sayfalama** özelliğine göre farklı girdilerle oluşturulan **Yeni** bir modelle çağıran @Html.ActionLink deyimlerden gelir.
 
-    İlk ve son sayfa seçenekleri gibi "first" ve "son" dizelerini gönderme, ancak doğru sayfa numaralarını gönderin.
+    İlk ve son sayfa seçenekleri "First" ve "Last" gibi dizeler göndermez, bunun yerine doğru sayfa numaralarını gönderir.
 
-2. Bazı sayfalama sınıfları HTML stillerini hotels.css dosya listesine ekleyin. **PageSelected** sınıfı oradadır kullanıcı şu anda görüntülemekte (sayı kalın kapatarak) sayfası tanımlamak için sayfa numaralarını listesinde.
+2. Oteller. CSS dosyasındaki HTML stilleri listesine bazı disk belleği sınıfları ekleyin. **Pageselected** sınıfı, sayfa numaraları listesindeki kullanıcının şu anda görüntüledikleri sayfayı (kalın sayıyı girerek) belirlemek için kullanılır.
 
     ```html
         .pageButton {
@@ -209,9 +210,9 @@ Açık temel arama sayfası çözümünüz varsa.
         }
     ```
 
-### <a name="add-a-page-action-to-the-controller"></a>Denetleyici için bir sayfa Eylem Ekle
+### <a name="add-a-page-action-to-the-controller"></a>Denetleyiciye bir sayfa eylemi ekleyin
 
-1. HomeController.cs dosyasını açın ve eklemek **sayfa** eylem. Bu eylem, seçili sayfa seçeneklerden herhangi biri olarak yanıt verir.
+1. HomeController.cs dosyasını açın ve **sayfa** eylemini ekleyin. Bu eylem, seçili sayfa seçeneklerinin herhangi birine yanıt verir.
 
     ```cs
         public async Task<ActionResult> Page(SearchData model)
@@ -257,12 +258,12 @@ Açık temel arama sayfası çözümünüz varsa.
         }
     ```
 
-    **RunQueryAsync** yöntemi bir söz dizimi hatası, şimdi biz de biraz gelir için üçüncü parametresi nedeniyle gösterilir.
+    **Runqueryasync** yöntemi artık, bir bit içinde olacak üçüncü parametre nedeniyle bir sözdizimi hatası gösterir.
 
     > [!Note]
-    > **TempData** çağrıları depolamak bir değer (bir **nesne**) geçici depolama biriminde, ancak bu depolama devam ederse için _yalnızca_ çağrı. Geçici verileri depolarız bir şey, bir denetleyici eylemi sonraki çağrı için kullanılabilir, ancak yapmamanız çağrı tarafından bundan sonra silinecekler! Bu kısa kullanım ömrü nedeniyle depolarız arama metnini ve disk belleği özellikleri her çağrı için geçici depolamayı geri **sayfa**.
+    > **TempData** çağrıları geçici depolamada bir değer ( **nesne**) depolar, ancak bu depolama _yalnızca_ tek bir çağrı için devam ediyor. Geçici verilerde bir şeyi depoluyoruz, bu, bir denetleyici eyleminin bir sonraki çağrısıyla kullanıma sunulacaktır, ancak bundan sonra çağrıdan kesinlikle çağrı yapılır! Bu kısa süre içinde, arama metni ve sayfalama özelliklerini geçici depolama alanına ve her bir **sayfa**çağrısıyla geri depolarız.
 
-2. **Index(model)** eylem gereksinimlerini en soldaki sayfa parametresi eklenecek ve geçici değişkenlerin depolamak için güncelleştirilmiş **RunQueryAsync** çağırın.
+2. **Dizin (model)** eyleminin geçici değişkenleri depolaması için güncelleştirilmesi ve en soldaki sayfa parametresini **Runqueryasync** çağrısına eklemesi gerekir.
 
     ```cs
         public async Task<ActionResult> Index(SearchData model)
@@ -292,7 +293,7 @@ Açık temel arama sayfası çözümünüz varsa.
         }
     ```
 
-3. **RunQueryAsync** yöntemi gereksinimlerini önemli ölçüde güncelleştirildi. Kullandığımız **atla**, **üst**, ve **IncludeTotalResultCount** alanlarının **kullanılması** yalnızca bir sayfa değerinde istemek için sınıfı Sonuçlar, başlayan **atla** ayarı. Ayrıca, görünüm için disk belleği değişkenleri hesaplamak ihtiyacımız var. Tüm yöntemini aşağıdaki kodla değiştirin.
+3. **Runqueryasync** yönteminin önemli ölçüde güncelleştirilmesi gerekir. **Skip** ayarından başlayarak, sonuçların yalnızca bir sayfa değerini Istemek Için **SearchParameters** sınıfının **Skip**, **top**ve **includetotalresultcount** alanlarını kullanırız. Görünümümüzü için sayfalama değişkenlerini de hesapladık. Tüm yöntemi aşağıdaki kodla değiştirin.
 
     ```cs
         private async Task<ActionResult> RunQueryAsync(SearchData model, int page, int leftMostPage)
@@ -351,7 +352,7 @@ Açık temel arama sayfası çözümünüz varsa.
         }
     ```
 
-4. Son olarak, görünümde küçük bir değişiklik yapmak ihtiyacımız var. Değişken **resultsList.Results.Count** artık toplam sayı bir sayfa (Bizim örneğimizde 3), döndürülen sonuç sayısını içerir. Biz ayarlandığından **IncludeTotalResultCount** true olarak değişkeni **resultsList.Count** artık sonuçlarının toplam sayısını içerir. Bu nedenle sonuç sayısı Görünümü'nde görüntüleyen bulun ve aşağıdaki kodla değiştirin.
+4. Son olarak, görünümde küçük bir değişiklik yapmanız gerekir. **ResultsList. Results. Count** değişkeni şimdi bir sayfada döndürülen sonuç sayısını (bizim örneğimizde 3), toplam sayı değil de içerecektir. **Includetotalresultcount** değerini true olarak belirlediğimiz Için, **resultsList. Count** değişkeni artık Toplam sonuç sayısını içerir. Bu nedenle, sonuçların sayısının görünümde nerede görüntülendiğini bulun ve aşağıdaki kodla değiştirin.
 
     ```cs
             // Show the result count.
@@ -361,50 +362,50 @@ Açık temel arama sayfası çözümünüz varsa.
     ```
 
     > [!Note]
-    > Genellikle çok ayarlayarak bir rağmen bir performans düşüşüne olan **IncludeTotalResultCount** true, bu toplam Azure Search tarafından hesaplanması gerektiği için. Döndürülen değer bir uyarı var. karmaşık veri kümeleri ile bir _yaklaşık_. Otel verilerimiz için doğru olacaktır.
+    > Bu toplamın Azure Bilişsel Arama tarafından hesaplanması gerektiğinden **ıncludetotalresultcount** değeri true olarak ayarlanarak, genellikle bir performans okuması vardır. Karmaşık veri kümeleriyle döndürülen değerin bir _yaklaşık_olduğunu belirten bir uyarı vardır. Otel verilerimizde doğru olacaktır.
 
-### <a name="compile-and-run-the-app"></a>Derleme ve uygulamayı çalıştırma
+### <a name="compile-and-run-the-app"></a>Uygulamayı derleyin ve çalıştırın
 
-Şimdi seçtiğiniz **hata ayıklama olmadan Başlat** (veya F5 tuşuna basın).
+Şimdi **hata ayıklama olmadan Başlat** ' ı seçin (veya F5 tuşuna basın).
 
-1. Sonuçlar (örneğin, "wifi") bolca sağlayacak bazı metin arama yapın. Düzgünce sonuçlarını sayfasında?
+1. Çok sayıda sonuç sağlayacak bir metin arayın (örneğin, "WiFi"). Sonuçlar arasında düzgün şekilde sayfa eklenebilir mi?
 
-    !["Havuzu" sonuçları numaralı sayfalama](./media/tutorial-csharp-create-first-app/azure-search-numbered-paging.png)
+    !["Havuz" sonuçları aracılığıyla numaralandırılmış sayfalama](./media/tutorial-csharp-create-first-app/azure-search-numbered-paging.png)
 
-2. En sağdaki ve daha sonra tıklayarak en soldaki sayfa numarası deneyin. Sayfa numaralarını Orta olan sayfa için uygun şekilde ayarlama?
+2. En sağ ve daha sonraki, en son sayfa numaralarına tıklamakta çalışın. Sayfa numaralarını açık olan sayfayı ortalamak için uygun şekilde ayarlayın mi?
 
-3. "First" ve "son" seçenekleri büyük/küçük harf yararlıdır? Başkalarının bunu ve bazı popüler web aramaları bu seçenekleri kullanın.
+3. "First" ve "Last" seçenekleri faydalıdır mi? Bazı popüler web aramaları bu seçenekleri kullanır ve diğerleri değildir.
 
-4. Son sonuçları sayfasına gidin. Son sayfa içerebilen tek sayfasıdır küçüktür **ResultsPerPage** sonuçları.
+4. Sonuçların son sayfasına gidin. Son sayfa, en az **Resultsperpage** sonuçları içerebilen tek sayfasıdır.
 
-    ![Son sayfasında "wifi" İnceleme](./media/tutorial-csharp-create-first-app/azure-search-pool-last-page.png)
+    ![Son "WiFi" sayfası inceleniyor](./media/tutorial-csharp-create-first-app/azure-search-pool-last-page.png)
 
-5. "Piyasada" yazın ve arama'yı tıklatın. Sonuçlar birden az standart sayfa değerinde ise disk belleği seçenekleri görüntülenir.
+5. "Town" yazın ve ara ' ya tıklayın. En az bir sayfa sonucu varsa, sayfalama seçeneği gösterilmez.
 
-    !["Şehir" için arama](./media/tutorial-csharp-create-first-app/azure-search-town.png)
+    !["Town" aranıyor](./media/tutorial-csharp-create-first-app/azure-search-town.png)
 
-Artık bu projeyi kaydedin ve bu tür bir disk belleği alternatif deneyelim.
+Şimdi bu projeyi kapatın ve bu sayfalama biçimine bir alternatif deneyelim.
 
-## <a name="extend-your-app-with-infinite-scrolling"></a>Sonsuz kayan ile uygulamanızı genişletin
+## <a name="extend-your-app-with-infinite-scrolling"></a>Sınırsız kaydırma ile uygulamanızı genişletme
 
-Bir kullanıcı, son görüntülenen sonuçların bir dikey kaydırma çubuğu kaydırdığında sonsuz kayan tetiklenir. Bu durumda, sonraki sonuç sayfasını için sunucuya bir çağrı yapılır. Daha fazla sonuç varsa, hiçbir şey döndürülür ve dikey kaydırma çubuğunun değişmez. Daha fazla sonuç varsa, geçerli sayfa ve daha fazla sonuç kullanılabilir olduğunu göstermek için kaydırma çubuğu değişiklikleri eklenir.
+Kullanıcı dikey kaydırma çubuğunu görüntülenmekte olan sonuçların en sonuna kaydırdığında sonsuz kaydırma tetiklenir. Bu olayda, bir sonraki sonuç sayfası için sunucuya çağrı yapılır. Daha fazla sonuç yoksa, hiçbir şey döndürülmez ve dikey kaydırma çubuğu değişmez. Daha fazla sonuç varsa, bunlar geçerli sayfaya eklenir ve kaydırma çubuğu, daha fazla sonuç olduğunu göstermek için değişir.
 
-Burada önemli olan nokta, görüntülenen sayfa, ancak eklenmiş yeni sonuçlarla yerini aldığını değil ' dir. Bir kullanıcı her zaman geri arama ilk sonuçlarını kadar kaydırma yapabilir.
+Buradaki önemli nokta, görüntülenen sayfanın değiştirilmemekte olduğu, ancak yeni sonuçlara eklendiği yerdir. Bir Kullanıcı her zaman aramanın ilk sonuçlarına geri gidebilirler.
 
-Herhangi bir sayfa numarası kaydırma öğeleri eklenmeden önceki sonsuz kayan uygulamak için proje ile başlayalım. Bu nedenle, gerekiyorsa, başka bir kopya temel arama sayfasının Github'dan olun: [İlk uygulamanızı oluşturma](https://github.com/Azure-Samples/azure-search-dotnet-samples).
+Sonsuz kaydırma uygulamak için, sayfa numarası kaydırma öğelerinden herhangi biri eklenmeden önce projeyle başlayalım. Bu nedenle, gerekirse, GitHub: [ilk uygulama oluştur](https://github.com/Azure-Samples/azure-search-dotnet-samples)' dan temel arama sayfasının başka bir kopyasını oluşturun.
 
-### <a name="add-paging-fields-to-the-model"></a>Modeli için disk belleği alanları ekleme
+### <a name="add-paging-fields-to-the-model"></a>Modele disk belleği alanları ekleme
 
-1. İlk olarak, ekleme bir **sayfalama** özelliğini **SearchData** sınıfta (SearchData.cs model dosyası).
+1. İlk olarak, **Searchdata** sınıfına (SearchData.cs model dosyasında) bir **sayfalama** özelliği ekleyin.
 
     ```cs
         // Record if the next page is requested.
         public string paging { get; set; }
     ```
 
-    Bu değişken sonraki sonuç sayfasını gönderilmesi gerektiğini veya boş bir arama'nın ilk sayfasında için "İleri" tutan bir dize ise.
+    Bu değişken, bir sonraki sonuç sayfası gönderilmesi gerekiyorsa "ileri" yi tutan bir dizedir veya bir aramanın ilk sayfası için null olmalıdır.
 
-2. Aynı dosyada ve ad alanı içinde bir özelliği olan bir genel değişken sınıfına ekleyin. MVC'de genel değişkenleri kendi statik sınıfta bildirilir. **ResultsPerPage** sayfa başına sonuç sayısını ayarlar. 
+2. Aynı dosyada ve ad alanı içinde, bir özelliği olan bir genel değişken sınıfı ekleyin. MVC 'de, genel değişkenler kendi statik sınıfında bildirilmiştir. **Resultsperpage** sayfa başına sonuç sayısını ayarlar. 
 
     ```cs
     public static class GlobalVariables
@@ -419,11 +420,11 @@ Herhangi bir sayfa numarası kaydırma öğeleri eklenmeden önceki sonsuz kayan
     }
     ```
 
-### <a name="add-a-vertical-scroll-bar-to-the-view"></a>Dikey kaydırma çubuğu görünümü Ekle
+### <a name="add-a-vertical-scroll-bar-to-the-view"></a>Görünüme dikey kaydırma çubuğu ekleme
 
-1. Sonuçları görüntüler Index.cshtml dosyasının bölümünü bulun (ile başlayan  **@if (Model! = null)** ).
+1. Sonuçları görüntüleyen index. cshtml dosyasının bölümünü bulun ( **@if (model! = null)** ile başlar).
 
-2. Bölümü, aşağıdaki kodla değiştirin. Yeni **&lt;div&gt;** bölümdür kaydırılabilir olmalıdır ve her ikisi de ekler etrafına bir **overflow-y** özniteliğini ve bir çağrı bir **onscroll**"scrolled()", çağrılan işlev sözlüğüdür.
+2. Bölümünü aşağıdaki kodla değiştirin. Yeni **&lt;div&gt;** bölümü, kaydırılabilir olması gereken alanı etrafında bulunur ve hem bir **overflow-y** özniteliği hem de "kaydırılan ()" adlı bir **OnScroll** işlevine çağrı ekler.
 
     ```cs
         @if (Model != null)
@@ -446,7 +447,7 @@ Herhangi bir sayfa numarası kaydırma öğeleri eklenmeden önceki sonsuz kayan
         }
     ```
 
-3. Döngü hemen altındaki sonra &lt;/div&gt; etiketinde, ekleyin **kaydırılan** işlevi.
+3. Doğrudan döngünün altında, &lt;/div&gt; etiketinden sonra, **kaydırılan** işlevi ekleyin.
 
     ```javascript
         <script>
@@ -466,15 +467,15 @@ Herhangi bir sayfa numarası kaydırma öğeleri eklenmeden önceki sonsuz kayan
         </script>
     ```
 
-    **Varsa** ifade yukarıda kullanıcının dikey kaydırma çubuğunun altına kaydırılan olmadığını görmek için sınar. Aksi halde, bir çağrı **giriş** denetleyicisi çağrılan bir eylem yapılan **sonraki**. Denetleyici tarafından başka hiçbir bilgi gereklidir, veri sonraki sayfasına dönersiniz. Bu verileri aynı HTML stil özgün sayfa kullanılarak biçimlendirilir. Hiçbir sonuç döndürmezse, hiçbir şey eklenir ve oldukları gibi şeyler kalın.
+    Yukarıdaki betikteki **if** ifadesinde, kullanıcının dikey kaydırma çubuğunun alt kısmına kaydırılıp kaydırılamayacağını görmek için sınamalar yapılır. Varsa, **daha sonra**adlı bir eyleme **giriş** denetleyicisine yönelik bir çağrı yapılır. Denetleyici tarafından başka bir bilgi gerekmez, bu, sonraki veri sayfasını döndürür. Bu veriler daha sonra Özgün sayfa olarak aynı HTML stilleri kullanılarak biçimlendirilir. Hiçbir sonuç döndürülmezse hiçbir şey eklenmez ve işlemler oldukları gibi kalır.
 
-### <a name="handle-the-next-action"></a>Tanıtıcı sonraki eylem
+### <a name="handle-the-next-action"></a>Sonraki eylemi işle
 
-Denetleyiciye gönderilmesi gereken yalnızca üç eylem vardır: çağıran uygulama, ilk çalıştırma **İNDİS()** , çağırır kullanıcı tarafından ilk arama **Index(model)** ve ardından sonraki Daha fazla sonuç için çağıran **Next(model)** .
+Denetleyiciye gönderilmesi gereken üç eylem vardır: uygulamanın ilk çalıştırılması ( **Dizin ()** , dizin ( **model)** ve ardından **İleri (model**) ile daha fazla sonuç için çağrı yapan, Kullanıcı tarafından yapılan ilk arama.
 
-1. Giriş denetleyicisine dosyasını açın ve silmek **RunQueryAsync** özgün öğreticiden yöntemi.
+1. Ana denetleyici dosyasını açın ve özgün öğreticiden **Runqueryasync** yöntemini silin.
 
-2. Değiştirin **Index(model)** aşağıdaki kodla eylem. Artık işleme **sayfalama** alan null ya da "sonraki" ayarlayın ve Azure Search çağrısını işler.
+2. **Dizin (model)** eylemini aşağıdaki kodla değiştirin. Artık null olduğunda **disk belleği** alanını işler veya "ileri" olarak ayarlanır ve Azure bilişsel arama çağrısını işler.
 
     ```cs
         public async Task<ActionResult> Index(SearchData model)
@@ -536,9 +537,9 @@ Denetleyiciye gönderilmesi gereken yalnızca üç eylem vardır: çağıran uyg
         }
     ```
 
-    Kullandığımız numaralı disk belleği yöntemine benzer **atla** ve **üst** ihtiyacımız olan veriler istemek için arama ayarları döndürülür.
+    Numaralandırılmış sayfalama yöntemine benzer şekilde, yalnızca ihtiyacımız olan verileri istemek için **Atla** ve **üst** arama ayarlarını kullanırız.
 
-3. Ekleme **sonraki** giriş denetleyicisine eylem. Nasıl bu iki öğeyi listeye eklemeyi her otel listesini döndürür. Not: bir otel adı ve Otel açıklama. Bu biçim eşleşecek şekilde ayarlanan **kaydırılan** döndürülen veri görünümünde işlevin kullanın.
+3. Giriş denetleyicisine bir **sonraki** eylemi ekleyin. Bir listeyi nasıl döndürdüğünü, her bir otelin listeye iki öğe eklemesini ve bir otel adı ve otel açıklaması olduğunu aklınızda edin. Bu biçim, **kaydırılan** işlevin görünümdeki döndürülen verilerin kullanımıyla eşleşecek şekilde ayarlanır.
 
     ```cs
         public async Task<ActionResult> Next(SearchData model)
@@ -562,42 +563,42 @@ Denetleyiciye gönderilmesi gereken yalnızca üç eylem vardır: çağıran uyg
         }
     ```
 
-4. Bir söz dizimi hatası alıyorsanız **listesi&lt;dize&gt;** , ardından aşağıdakileri ekleyin **kullanarak** denetleyici dosyasının başındaki yönergesini.
+4. **&lt;dize&gt;listede** bir sözdizimi hatası alıyorsanız, bu durumda denetleyici dosyasının baş bir yanındaki **using** yönergesini ekleyin.
 
     ```cs
     using System.Collections.Generic;
     ```
 
-### <a name="compile-and-run-your-project"></a>Projeyi derlemek ve çalıştırmak
+### <a name="compile-and-run-your-project"></a>Projenizi derleyin ve çalıştırın
 
-Şimdi seçtiğiniz **hata ayıklama olmadan Başlat** (veya F5 tuşuna basın).
+Şimdi **hata ayıklama olmadan Başlat** ' ı seçin (veya F5 tuşuna basın).
 
-1. Sonuçları bolca ("havuzu") gibi verin ve ardından dikey kaydırma çubuğunu test bir terim girin. Bu, yeni bir sayfa sonuçlarının işlemine neden?
+1. Çok sayıda sonuç sağlayacak bir terim ("havuz" gibi) girin ve dikey kaydırma çubuğunu test edin. Yeni bir sonuç sayfası tetikleyecektir mi?
 
-    ![Sonsuz "havuzu" sonuçları arasında kaydırma](./media/tutorial-csharp-create-first-app/azure-search-infinite-scroll.png)
+    !["Havuz" sonuçları aracılığıyla sonsuz kaydırma](./media/tutorial-csharp-create-first-app/azure-search-infinite-scroll.png)
 
     > [!Tip]
-    > Bir kaydırma çubuğu'nın ilk sayfasında görünmesini sağlamak için ilk sayfasını biraz içinde görüntüleniyor alanının yüksekliğini aşması gerekir. Bizim örneğimizde **.box1** 30 piksel cinsinden yüksekliği **.box2** 100 piksel yüksekliği _ve_ 24 piksel bir alt kenar boşluğu. Bu nedenle her giriş 154 piksel kullanır. Üç girdi, 3 x 154 = 462 ' alacağınız piksel. Dikey kaydırma çubuğunun görünmesi, yükseklik görüntüleme alanına ayarlanmalıdır 462 pikselden bile 461 works daha küçük sağlamaktır. Bu sorun yalnızca ilk sayfasında oluşur, daha sonra bir kaydırma çubuğunun görünmesi emin. Güncelleştirilecek satırın:  **&lt;div kimliği "myDiv" style = "width: 800 piksel; Yükseklik: 450px; overflow-y: scroll;" onscroll="scrolled()"&gt;** .
+    > İlk sayfada bir kaydırma çubuğunun göründüğünden emin olmak için sonuçların ilk sayfası, görüntülendikleri alanın yüksekliğini biraz daha aşmalıdır. Bizim örneğimizde **. Box1** , en fazla 30 piksel boyutunda, **. box2** , 100 piksel yüksekliğinde _ve_ 24 piksellik alt kenar boşluğuyla bulunur. Böylece her giriş 154 piksel kullanır. Üç giriş 3 x 154 = 462 piksel sürer. Dikey kaydırma çubuğunun göründüğünden emin olmak için, görüntüleme alanına yönelik bir yükseklik, 462 pikselden küçük, hatta 461 çalışıyor olmalıdır. Bu sorun yalnızca ilk sayfada, bir kaydırma çubuğu gösterildiğinizden emin olduktan sonra gerçekleşir. Güncelleştirilecek satır: **&lt;div ID = "myDiv" Style = "width: 800px; height: 450px; overflow-y: kaydır;" OnScroll = "kaydırılan ()"&gt;** .
 
-2. Tüm sonuçları alt kısmına kaydırın. Bildirim nasıl bir görünüm sayfasında tüm bilgiler sunulmuştur. Tüm geri dön sunucu çağrıları tetiklemeden gezinebilirsiniz.
+2. Sonuçların sonuna kadar aşağı doğru kaydırın. Tüm bilgilerin artık tek bir görünüm sayfasında nasıl olduğunu fark edin. Herhangi bir sunucu çağrısı tetiklemeden, her şey için en üste doğru kaydırma yapabilirsiniz.
 
-Daha karmaşık sonsuz kayan sistemleri, fare tekerleğini kullanıyor olabilir veya benzer sonuçlar yeni bir sayfa yüklenmesini tetiklemek için diğer mekanizması. Biz Bu öğretici, daha fazla tüm kaydırma sonsuz sürüyor değil, ancak ek fare tıklamasına önler ve diğer seçenekleri daha fazla araştırmak isteyebileceğiniz ona belirli bir düğmesine sahip!
+Daha gelişmiş sonsuz kaydırma sistemleri, yeni bir sonuç sayfası yüklemesini tetiklemek için fare tekerleğini veya benzer başka bir mekanizmayı kullanabilir. Bu öğreticilerde daha fazla sınırsız kaydırma gerçekleşmeyecek, ancak ek fare tıklamalarını önlediği ve diğer seçenekleri daha fazla araştırmak isteyebileceğiniz için belirli bir düğmesi vardır.
 
 ## <a name="takeaways"></a>Paketler
 
-Aşağıdaki paketler bu projedeki göz önünde bulundurun:
+Bu projeden aşağıdaki bu devralmayı göz önünde bulundurun:
 
-* Numaralı disk belleği, arama sonuçlarını sıralamasını biraz rastgele, seçeneğidir; yani orada Mayıs iyi olduğu bir sonraki sayfalarında, kullanıcılarınızın ilgisini için uygundur.
-* Sonsuz kayan sonuçlarını sıralamasını özellikle önemli olduğu durumlarda geçerlidir. Örneğin bir hedef şehri merkezine uzaklığı üzerinde sıralı sonuçlar.
-* Numaralı disk belleği daha iyi bazı gezinme sağlar. Örneğin, bu tür bir kolayca başvurmak sonsuz kayan var ancak bir kullanıcı bir ilgi çekici sonuç 6, sayfada olduğunu hatırlayabileceğiniz.
-* Sonsuz kayan tıklayın fussy sayfa numarası yok ile yukarı ve aşağı kaydırma bir kolayca geçirmeye itraz et, sahiptir.
-* Sonsuz kayan bir anahtar özelliği, sonuçları verimlidir, sayfa değiştirerek değil var olan bir sayfasına eklenir.
-* Geçici depolama için yalnızca bir çağrı devam ediyorsa ve ek çağrıları varlığını sürdürmesi için sıfırlanması gerekir.
+* Numaralandırılmış sayfalama, sonuçların sırasının biraz rasgele olduğu, daha sonraki sayfalarda kullanıcılarınıza ilgi çekici bir şey olabileceği gibi, arama için de iyidir.
+* Sonuçların sırası özellikle önemli olduğunda sonsuz kaydırma iyidir. Örneğin, sonuçlar hedef şehrin merkezinden uzaklığına göre sıralanır.
+* Numaralandırılmış sayfalama, daha iyi bir gezinmede izin verir. Örneğin, bir Kullanıcı ilginç bir sonucun 6. sayfada olduğunu anımsayacak, sonsuz kaydırmadaki böyle kolay bir başvuru mevcut değildir.
+* Sonsuz kaydırmanın kolay bir şekilde, üzerine tıklamasını sağlamak için Fussy sayfa numaraları olmadan yukarı ve aşağı kaydırın.
+* Sonsuz kaydırmanın temel bir özelliği, sonuçların var olan bir sayfaya eklenmeme ve bu sayfanın değişmemelidir.
+* Geçici depolama yalnızca tek bir çağrı için devam ettirir ve ek çağrılar için sıfırlanması gerekir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Disk belleği internet aramaları için temeldir. Kapsanan de disk belleği ile yazarken tamamlanan aramaları ekleyerek kullanıcı deneyimini daha da geliştirmek için sonraki adım olacaktır.
+Sayfalama, internet aramalarında temel bir araçlardır. Sayfalama iyi ele alınarak, bir sonraki adım, daha sonra, tür ön aramalar ekleyerek kullanıcı deneyimini daha da geliştirmaktır.
 
 > [!div class="nextstepaction"]
-> [C#Öğretici: Otomatik Tamamlama ve öneriler - Azure Search Ekle](tutorial-csharp-type-ahead-and-suggestions.md)
+> [C#Öğretici: otomatik tamamlama ve öneriler ekleme-Azure Bilişsel Arama](tutorial-csharp-type-ahead-and-suggestions.md)

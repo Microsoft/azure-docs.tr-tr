@@ -1,6 +1,6 @@
 ---
-title: NewTek TriCaster Kodlayıcı, tek bit hızlı canlı akış göndermek için yapılandırma | Microsoft Docs
-description: Bu konuda, tek bit hızlı akış gerçek zamanlı kodlama için etkinleştirilmiş kanallar AMS göndermek için Canlı Tricaster Kodlayıcı yapılandırma gösterilmektedir.
+title: Tek bit hızlı canlı akış göndermek için NewTek karmaşık Aster Kodlayıcısı 'nı yapılandırın | Microsoft Docs
+description: Bu konuda, karmaşık kodlama için etkinleştirilmiş AMS kanallarına tek bit hızlı bir akış göndermek için, karmaşık kodlayıcının nasıl yapılandırılacağı gösterilmektedir.
 services: media-services
 documentationcenter: ''
 author: cenkdin
@@ -13,29 +13,30 @@ ms.tgt_pltfrm: na
 ms.devlang: ne
 ms.topic: article
 ms.date: 03/14/2019
-ms.author: juliako;cenkd;anilmur
-ms.openlocfilehash: 6e09ce83296fccfbcb4a04913d55961e0da4de79
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: juliako
+ms.reviewer: anilmur
+ms.openlocfilehash: 0e793a5aa7d619b0bb7a1d3efcdf665ea400c555
+ms.sourcegitcommit: a8b638322d494739f7463db4f0ea465496c689c6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64720793"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "69016730"
 ---
-# <a name="use-the-newtek-tricaster-encoder-to-send-a-single-bitrate-live-stream"></a>NewTek TriCaster Kodlayıcı tek bit hızlı canlı akış göndermektir.  
+# <a name="use-the-newtek-tricaster-encoder-to-send-a-single-bitrate-live-stream"></a>Tek bit hızlı canlı akış göndermek için NewTek karmaşık Aster Kodlayıcısı 'nı kullanın  
 > [!div class="op_single_selector"]
 > * [Tricaster](media-services-configure-tricaster-live-encoder.md)
-> * [Elemental Live](media-services-configure-elemental-live-encoder.md)
+> * [Elete canlı](media-services-configure-elemental-live-encoder.md)
 > * [Wirecast](media-services-configure-wirecast-live-encoder.md)
 > * [FMLE](media-services-configure-fmle-live-encoder.md)
 >
 >
 
-Bu makalede nasıl yapılacağı gösterilmektedir [NewTek TriCaster](https://newtek.com/products/tricaster-40.html) AMS tekli bit hızı akışına kanallar göndermek için gerçek zamanlı Kodlayıcı, gerçek zamanlı kodlama için etkinleştirilir. Daha fazla bilgi için bkz. [Azure Media Services ile Gerçek Zamanlı Kodlama Gerçekleştirmek İçin Etkinleştirilmiş Kanallar ile Çalışma](media-services-manage-live-encoder-enabled-channels.md).
+Bu makalede, [NewTek](https://newtek.com/products/tricaster-40.html) bir bit hızı Live Encoder 'ın canlı kodlama için etkinleştirilmiş AMS kanallarına tek bir bit hızlı akış göndermek için nasıl yapılandırılacağı gösterilmektedir. Daha fazla bilgi için bkz. [Azure Media Services ile Gerçek Zamanlı Kodlama Gerçekleştirmek İçin Etkinleştirilmiş Kanallar ile Çalışma](media-services-manage-live-encoder-enabled-channels.md).
 
 Bu öğreticide, Azure Media Services Gezgini (AMSE) aracı ile Azure Media Services (AMS) yönetilecek gösterilmektedir. Bu araç yalnızca Windows bilgisayarda çalışır. Mac veya Linux bilgisayarda ise oluşturmak için Azure portalını kullanma [kanalları](media-services-portal-creating-live-encoder-enabled-channel.md#create-a-channel) ve [programlar](media-services-portal-creating-live-encoder-enabled-channel.md).
 
 > [!NOTE]
-> Gerçek zamanlı kodlama için etkinleştirilmiş kanallar AMS akışındaki bir katkısı göndermek için Tricaster kullanırken olabilir görüntü/ses arızalardan Canlı etkinliğiniz Tricaster, hızlı akışları arasında kesme veya maskeleme görüntülerini gönderip buralardan değiştirme gibi belirli özelliklerini kullanıyorsanız. AMS takım o zamana kadar bu sorunları düzeltmek için çalışmaktadır, bunu bu özellikleri kullanmak için önerilmez.
+> Gerçek zamanlı kodlama için etkinleştirilmiş AMS kanallarına bir katkı akışında göndermek üzere karmaşık bir şekilde kullanırken,, akışlar arasında hızlı kesme veya SLA 'lara geçiş yapma gibi karmaşık olaylarınızın belirli özelliklerini kullanırsanız canlı olayınızdaki video/ses bozuklukları olabilir. AMS ekibi bu sorunları gidermeye çalışarak, bu özelliklerin kullanılması önerilmez.
 >
 >
 
@@ -56,7 +57,7 @@ Bu öğreticide, Azure Media Services Gezgini (AMSE) aracı ile Azure Media Serv
 
 1. AMSE Aracı'nda gidin **canlı** sekmesini tıklatıp içinde kanal alana sağ tıklayın. Seçin **kanal oluştur...** belirleyin.
 
-    ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster1.png)
+    ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster1.png)
 
 2. Bir kanal adı belirtirseniz açıklama alanı isteğe bağlıdır. Kanal ayarları altında **standart** Live Encoding seçeneğini ayarlamak giriş protokolü için **RTMP**. Olduğu gibi tüm diğer ayarlar bırakabilirsiniz.
 
@@ -64,7 +65,7 @@ Bu öğreticide, Azure Media Services Gezgini (AMSE) aracı ile Azure Media Serv
 
 3. Tıklayın **kanal oluşturma**.
 
-   ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster2.png)
+   ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster2.png)
 
 > [!NOTE]
 > Kanalı başlatmak için 20 dakika sürebilir.
@@ -78,56 +79,56 @@ Kanal başlatılırken yapabilecekleriniz [kodlayıcıyı Yapılandır](media-se
 >
 >
 
-## <a name="a-idconfiguretricasterrtmpconfigure-the-newtek-tricaster-encoder"></a><a id="configure_tricaster_rtmp"/>NewTek TriCaster Kodlayıcı yapılandırın
+## <a name="a-idconfigure_tricaster_rtmpconfigure-the-newtek-tricaster-encoder"></a><a id="configure_tricaster_rtmp"/>NewTek kaçınıcı Encoder 'ı yapılandırma
 
 Bu öğreticide, aşağıdaki çıkış ayarları kullanılır. Bu bölümün geri kalanında daha ayrıntılı yapılandırma adımlarını açıklar.
 
 **Video**:
 
-* Codec: H.264
-* Profil: Yüksek (düzeyi 4.0)
-* Bit hızı: 5000 kbps
-* Ana kare: 2 saniye (60 saniye)
+* Bileşeni H.
+* Profilinizi Yüksek (düzey 4,0)
+* Bit hızı 5000 kbps
+* Denetçisinde 2 saniye (60 saniye)
 * Kare hızı: 30
 
 **Ses**:
 
-* Codec: AAC (LC)
-* Bit hızı: 192 kbps
-* Örnek Hızı: 44,1 kHz
+* Bileşeni AAC (LC)
+* Bit hızı 192 kbps
+* Örnek hız: 44,1 kHz
 
 ### <a name="configuration-steps"></a>Yapılandırma adımları
 
-1. Yeni bir **NewTek TriCaster** proje bağlı olarak hangi video giriş kaynağı kullanılır.
-2. Bu proje içinde bir kez bulmak **Stream** düğmesini ve yanında stream yapılandırma menüye erişmek için dişli simgesine tıklayın.
+1. Hangi video giriş kaynağının kullanılmakta olduğuna bağlı olarak yeni bir **NewTek karmaşık Aster** projesi oluşturun.
+2. Bu proje içinde bir kez, **Stream** düğmesini bulun ve yanındaki dişli simgesine tıklayarak akış yapılandırma menüsüne erişin.
 
-    ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster3.png)
-3. Menü açıldığında tıklayın **yeni** bağlantı başlığı. Bağlantı türü için sorulduğunda **Adobe Flash**.
+    ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster3.png)
+3. Menü açıldıktan sonra bağlantı başlığının altındaki **Yeni** ' ye tıklayın. Bağlantı türü sorulduğunda **Adobe Flash**' ı seçin.
 
-    ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster4.png)
+    ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster4.png)
 4. **Tamam**'ı tıklatın.
-5. FMLE profili artık açılan ok altında tıklayarak aktarılabilen **akış profili** giderek **Gözat**.
+5. Bir FMLE profili artık **akış profili** altında aşağı açılan oka tıklayarak ve **gözatmaya**karşı gezinerek içeri aktarılabilir.
 
-    ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster5.png)
-6. Yapılandırılan FMLE profili kaydedildiği gidin.
-7. Onu seçin ve basın **Tamam**.
+    ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster5.png)
+6. Yapılandırılan FMıLE profilinin kaydedildiği yere gidin.
+7. Seçin ve **Tamam**' a basın.
 
-    Profil karşıya yüklendikten sonra sonraki adıma geçin.
-8. Kanal alma giriş URL'si için Tricaster atamak için **RTMP uç nokta**.
+    Profil karşıya yüklendikten sonra, sonraki adıma geçin.
+8. Kanalın giriş URL 'sini, bunu karmaşık Aster **RTMP uç noktasına**atamak için alın.
 
     AMSE aracına gidin ve kanal tamamlanma durumunu denetleyin. Durum değiştiğinde **başlangıç** için **çalıştıran**, giriş URL'sini alabilirsiniz.
 
-    Kanal çalıştırırken, kanal adına sağ tıklayın, üzerine gelindiğinde aşağı gidin **Panoya kopyalama giriş URL** seçip **birincil giriş URL**.  
+    Kanal çalışırken kanal adına sağ tıklayın, **giriş URL 'sini panoya kopyala** üzerine gelin ve ardından **birincil giriş URL 'sini**seçin.  
 
-    ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster6.png)
-9. Bu bilgileri yapıştırın **konumu** altında **Flash Server** Tricaster projesi içinde. Ayrıca bir Akış adı atamak **Stream kimliği** alan.
+    ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster6.png)
+9. Bu bilgileri, karmaşık Aster projesindeki **Flash Server** altındaki **konum** alanına yapıştırın. Ayrıca **AKıŞ kimliği** alanına bir akış adı atayın.
 
-    Akış bilgileri FMLE profiline eklediyseniz, bu da bu bölüme tıklayarak içeri aktarılabilir **içeri aktarma ayarları**, kaydedilmiş FMLE profiline gidin ve tıklayarak **Tamam**. FMLE bilgileriyle ilgili Flash Server alanları doldurmanız gerekir.
+    Akış bilgileri FMLE profiline eklendiyse, **ayarları Içeri aktar**' a tıklayarak, kaydedilen FMLE profiline giderek ve **Tamam**' a tıklayarak bu bölüme de aktarılabilir. İlgili Flash Server alanları FMLE 'nin bilgileriyle doldurulmalıdır.
 
-    ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster7.png)
-10. İşiniz bittiğinde tıklayın **Tamam** ekranın alt kısmındaki. Video ve ses girdiler Tricaster olarak hazır olduğunuzda AMS'ye tıklayarak akış başlamak **Stream** düğmesi.
+    ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster7.png)
+10. İşiniz bittiğinde, ekranın altındaki **Tamam** ' a tıklayın. Daha karmaşık bir şekilde video ve ses girişleri hazırlandıktan sonra **akış** düğmesine tıklayarak AMS 'ye akışa başlayın.
 
-     ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster11.png)
+     ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster11.png)
 
 > [!IMPORTANT]
 > Tıklamadan önce **Stream**, size **gerekir** kanal hazır olduğundan emin olun.
@@ -143,13 +144,13 @@ AMSE aracına gidin ve test edilecek kanal sağ tıklayın. Menüden üzerine **
 
 Ardından akış Player'da görünüyorsa, kodlayıcı düzgün AMS'ye bağlanmak için yapılandırıldı.
 
-Bir hata aldıysanız, kanal sıfırlanması gerekir ve Kodlayıcı ayarları ayarlanır. Bkz: [sorun giderme](media-services-troubleshooting-live-streaming.md) makale Kılavuzu.  
+Bir hata alınıyorsa, kanalın sıfırlanması ve kodlayıcı ayarlarının ayarlanması gerekir. Bkz: [sorun giderme](media-services-troubleshooting-live-streaming.md) makale Kılavuzu.  
 
 ## <a name="create-a-program"></a>Bir program oluşturma
 
 1. Kanal kayıttan yürütme onaylandıktan sonra bir program oluşturun. Altında **canlı** sekmesinde AMSE aracı içinde program alanı sağ tıklatın ve seçin **yeni bir Program oluşturma**.  
 
-    ![Tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster9.png)
+    ![TriCaster](./media/media-services-tricaster-live-encoder/media-services-tricaster9.png)
 2. Program adı ve gerekirse ayarlamak **arşiv penceresi uzunluğu** (bunun varsayılan dört saate kadar). Ayrıca, bir depolama konumu belirtin veya varsayılan olarak bırakın.  
 3. Denetleme **programı'nı şimdi başlatmak** kutusu.
 4. Tıklayın **Program oluşturma**.  

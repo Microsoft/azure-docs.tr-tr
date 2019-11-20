@@ -1,21 +1,21 @@
 ---
-title: Azure Cosmos DB'de WHERE yan tümcesi
+title: Azure Cosmos DB WHERE yan tümcesi
 description: Azure Cosmos DB için SQL WHERE yan tümcesi hakkında bilgi edinin
 author: markjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 06/10/2019
 ms.author: mjbrown
-ms.openlocfilehash: 6a942e48ffea7785fe971cc2f8fa66e8569ed672
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: cd5643d8be06afcd43c5bfe38d6f5e9caa6f906e
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342702"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72326633"
 ---
-# <a name="where-clause"></a>WHERE yan tümcesi
+# <a name="where-clause-in-azure-cosmos-db"></a>Azure Cosmos DB WHERE yan tümcesi
 
-İsteğe bağlı WHERE yan tümcesi (`WHERE <filter_condition>`) koşulları belirtir kaynak JSON öğeleri sorgu sonuçlarında eklemek için karşılaması gerekir. Bir JSON öğesi için belirtilen koşullar değerlendirmelidir `true` sonucu olarak kabul edilmesi için. Dizin katman WHERE yan tümcesi, sonuç bir parçası olabilir kaynak öğeleri en küçük kümesini belirlemek için kullanır.
+İsteğe bağlı WHERE yan tümcesi (`WHERE <filter_condition>`), kaynak JSON öğelerinin sorgunun sonuçlara dahil etmek için karşılaması gereken koşulları belirtir. Bir JSON öğesi, sonuç için değerlendirilecek `true` için belirtilen koşulları değerlendirmelidir. Dizin Katmanı WHERE yan tümcesini kullanarak sonucun parçası olabilecek en küçük kaynak öğeleri alt kümesini tespit edebilir.
   
 ## <a name="syntax"></a>Sözdizimi
   
@@ -29,20 +29,20 @@ WHERE <filter_condition>
 
 - `<filter_condition>`  
   
-   Döndürülecek belgeler için karşılanması gereken bir koşulu belirtir.  
+   Döndürülecek belgelerin karşılanabileceği koşulu belirtir.  
   
 - `<scalar_expression>`  
   
-   Hesaplanmasını değeri gösteren ifade. Bkz: [skaler ifadelerin](sql-query-scalar-expressions.md) Ayrıntılar için.  
+   Hesaplanacağı değeri temsil eden ifade. Ayrıntılar için bkz. [skalar ifadeler](sql-query-scalar-expressions.md) .  
   
 
 ## <a name="remarks"></a>Açıklamalar
   
-  Filtre olarak belirtilen bir ifade döndürülecek belge sırada koşul true olarak değerlendirilmelidir. Başka bir değer koşulu, Boole değeri true yerine getirecek yalnızca: tanımsız, null, false, sayı, dizi veya nesne karşılamaz koşul. 
+  Belgenin döndürülmesi için filtre koşulu true olarak değerlendirilmelidir. Yalnızca true Boole değeri koşulu karşılar, başka bir değer vardır: tanımsız, null, yanlış, sayı, dizi veya nesne koşulu karşılamıyor. 
 
 ## <a name="examples"></a>Örnekler
 
-Aşağıdaki sorguda içeren istekleri öğelerini bir `id` özellik değeri `AndersenFamily`. Sahip olmayan herhangi bir öğeyi hariç bir `id` özelliği veya değeri eşleşmiyor `AndersenFamily`.
+Aşağıdaki sorgu, değeri `AndersenFamily` olan `id` özelliği içeren öğeleri ister. @No__t-0 özelliği olmayan ya da değeri `AndersenFamily` ile eşleşmeyen herhangi bir öğeyi dışlar.
 
 ```sql
     SELECT f.address
@@ -50,7 +50,7 @@ Aşağıdaki sorguda içeren istekleri öğelerini bir `id` özellik değeri `An
     WHERE f.id = "AndersenFamily"
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [{
@@ -62,21 +62,21 @@ Sonuçlar şu şekildedir:
     }]
 ```
 
-### <a name="scalar-expressions-in-the-where-clause"></a>WHERE yan tümcesinde skaler ifade
+### <a name="scalar-expressions-in-the-where-clause"></a>WHERE yan tümcesindeki skaler ifadeler
 
-Önceki örnekte, bir basit eşitlik sorgu gösterdi. SQL API'si ayrıca çeşitli destekler [skaler ifadelerin](sql-query-scalar-expressions.md). En sık kullanılan ikili ve birli ifadelerdir. Kaynak JSON nesne özelliği başvurularından da geçerli ifadelerdir.
+Önceki örnekte basit bir eşitlik sorgusu gösteriliyordu. SQL API ayrıca çeşitli [Skalar ifadeleri](sql-query-scalar-expressions.md)destekler. En yaygın olarak kullanılan ikili ve birli ifadelerdir. Kaynak JSON nesnesinden Özellik başvuruları da geçerli ifadelerdir.
 
-Aşağıdaki desteklenen ikili işleçler kullanabilirsiniz:  
+Aşağıdaki desteklenen ikili işleçleri kullanabilirsiniz:  
 
 |**İşleç türü**  | **Değerler** |
 |---------|---------|
-|Aritmetik | +,-,*,/,% |
-|bit düzeyinde    | \|, &, ^, <<>>,, >>> (sıfır dolgu sağa kaydırma) |
-|Mantıksal    | VE, VEYA DEĞİL      |
-|Karşılaştırma | =, !=, &lt;, &gt;, &lt;=, &gt;=, <> |
-|Dize     |  \|\| (birleştirme) |
+|Tiğinin | +,-,*,/,% |
+|Operatörün    | \|, &, ^, < <, > >, > > > (sıfır-doldur sağ SHIFT) |
+|Mantıksal    | VE, VEYA DEĞIL      |
+|Karşılaştırma | =,! =, &lt;, &gt;, &lt; =, &gt; =, < > |
+|Dize     |  \| @ no__t-1 (Birleştir) |
 
-Aşağıdaki sorgularda ikili işleçler kullanın:
+Aşağıdaki sorgular ikili işleçler kullanır:
 
 ```sql
     SELECT *
@@ -92,7 +92,7 @@ Aşağıdaki sorgularda ikili işleçler kullanın:
     WHERE c.grade >= 5    -- matching grades == 5
 ```
 
-Birli işleçleri kullanabilirsiniz +,-, ~, aşağıdaki örneklerde gösterildiği gibi sorgu değil ve:
+Ayrıca, aşağıdaki örneklerde gösterildiği gibi, sorgularda DEĞIL Birli İşleçler +,-, ~, kullanabilirsiniz:
 
 ```sql
     SELECT *
@@ -104,10 +104,10 @@ Birli işleçleri kullanabilirsiniz +,-, ~, aşağıdaki örneklerde gösterildi
     WHERE (-c.grade = -5)  -- matching grades == 5
 ```
 
-Sorgularda başvuran bir özelliğe de kullanabilirsiniz. Örneğin, `SELECT * FROM Families f WHERE f.isRegistered` özelliği içeren JSON öğeyi döndürür `isRegistered` eşit bir değer ile `true`. Gibi diğer değer `false`, `null`, `Undefined`, `<number>`, `<string>`, `<object>`, veya `<array>`, öğe sonuçtan dışlar. 
+Sorgularda Özellik başvurularını da kullanabilirsiniz. Örneğin `SELECT * FROM Families f WHERE f.isRegistered`, `true` değerine eşit değeri olan `isRegistered` özelliğini içeren JSON öğesini döndürür. @No__t-0, `null`, `Undefined`, `<number>`, `<string>`, `<object>` veya `<array>` gibi başka herhangi bir değer, öğeyi sonuçtan dışlar. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Başlarken](sql-query-getting-started.md)
-- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmosdb-dotnet)
+- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3)
 - [FROM yan tümcesi](sql-query-from.md)

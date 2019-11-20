@@ -1,7 +1,7 @@
 ---
-title: Test edin ve bir modeli - özel görüntü işleme hizmeti yeniden eğitme
-titlesuffix: Azure Cognitive Services
-description: Bir görüntüyü test etme ve modeli yeniden kullanma hakkında bilgi edinin.
+title: Model Özel Görüntü İşleme Hizmeti test etme ve yeniden eğitme
+titleSuffix: Azure Cognitive Services
+description: Bu makalede bir görüntünün nasıl test yapılacağı ve Özel Görüntü İşleme hizmetinde modelinizi yeniden eğitebilmeniz için nasıl kullanılacağı gösterilir.
 services: cognitive-services
 author: anrothMSFT
 manager: nitinme
@@ -10,52 +10,52 @@ ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 03/21/2019
 ms.author: anroth
-ms.openlocfilehash: d516cee81aef66ec58399cb5ff23c89db16bf2ab
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c6ed8869f6d33609381a42fd22d728e9e5542802
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60816634"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73721188"
 ---
-# <a name="test-and-retrain-a-model-with-custom-vision-service"></a>Özel görüntü işleme hizmeti ile bir modeli yeniden eğitme ve test
+# <a name="test-and-retrain-a-model-with-custom-vision-service"></a>Özel Görüntü İşleme Hizmeti bir modeli test etme ve yeniden eğitme
 
-Modelinizi eğitin sonra hızlıca yerel olarak depolanan bir resmi veya çevrimiçi bir görüntü kullanarak test edebilirsiniz. Test en yakın zamanda eğitilen yineleme kullanır.
+Modelinize eğdikten sonra, yerel olarak depolanan bir görüntü veya çevrimiçi görüntü kullanarak hızlı bir şekilde test edebilirsiniz. Test en son eğitilen yinelemeyi kullanır.
 
 ## <a name="test-your-model"></a>Modelinizi test etme
 
-1. Gelen [Custom Vision web sayfası](https://customvision.ai), projenizi seçin. Seçin **hızlı Test** sağ üst menü çubuğu. Bu eylem etiketli bir pencere açılır **hızlı Test**.
+1. [Özel görüntü işleme Web sayfasından](https://customvision.ai)projenizi seçin. Üstteki menü çubuğunun sağ tarafındaki **hızlı test** ' i seçin. Bu eylem **hızlı test**etiketli bir pencere açar.
 
-    ![Hızlı Test Et düğmesine pencerenin sağ üst köşesinde görüntülenir.](./media/test-your-model/quick-test-button.png)
+    ![Hızlı test düğmesi, pencerenin sağ üst köşesinde görüntülenir.](./media/test-your-model/quick-test-button.png)
 
-2. İçinde **hızlı Test** penceresinde tıklatın **görüntü gönderme** alan ve test için kullanmak istediğiniz görüntünün URL'sini girin. Bunun yerine yerel olarak depolanan bir resmi kullanmak istiyorsanız, tıklayın **yerel dosyalara Gözat** düğmesine tıklayın ve yerel bir resim dosyası seçin.
+2. **Hızlı test** penceresinde **görüntü gönder** alanına tıklayın ve testiniz için kullanmak istediğiniz görüntünün URL 'sini girin. Bunun yerine yerel olarak depolanmış bir görüntü kullanmak istiyorsanız, **yerel dosyalara gözatıp** düğmesine tıklayın ve bir yerel görüntü dosyası seçin.
 
-    ![Gönder görüntüsü sayfasının görüntüsü](./media/test-your-model/submit-image.png)
+    ![Görüntü gönder sayfasının görüntüsü](./media/test-your-model/submit-image.png)
 
-Seçtiğiniz görüntüye sayfanın ortasında görünür. Ardından sonuçları, aşağıdaki görüntüde etiketli iki sütunlu bir tablo biçiminde görünür **etiketleri** ve **güvenle**. Sonuçları görüntüledikten sonra kapanabiliyor **hızlı Test** penceresi.
+Seçtiğiniz görüntü sayfanın ortasında görünür. Sonra sonuçlar, **etiket** ve **güvenle**etiketlenmiş iki sütunlu bir tablo biçiminde görüntünün altında görüntülenir. Sonuçları güncelleştirdikten sonra **hızlı test** penceresini kapatabilirsiniz.
 
-Artık bu test görüntüsü eklersiniz ve sonra da modelinizi yeniden eğitme.
+Artık bu test görüntüsünü modelinize ekleyebilir ve sonra modelinize yeniden eğitebilirsiniz.
 
-## <a name="use-the-predicted-image-for-training"></a>Eğitim için tahmin edilen görüntü kullanma
+## <a name="use-the-predicted-image-for-training"></a>Eğitim için tahmin edilen görüntüyü kullanma
 
-Eğitim için daha önce gönderilen görüntüyü kullanmak için aşağıdaki adımları kullanın:
+Daha önce eğitim için gönderilen görüntüyü kullanmak için aşağıdaki adımları kullanın:
 
-1. Bir sınıflandırıcı gönderilen görüntüleri görmek için [Custom Vision web sayfası](https://customvision.ai) seçip __Öngörüler__ sekmesi.
+1. Sınıflandırıcıya gönderilen görüntüleri görüntülemek için, [özel görüntü işleme Web sayfasını](https://customvision.ai) açın ve __tahmin__ sekmesini seçin.
 
-    ![Öngörüler sekmesinin resmi](./media/test-your-model/predictions-tab.png)
-
-    > [!TIP]
-    > Geçerli yineleme görüntülerden varsayılan görünümünü gösterir. Kullanabileceğiniz __yineleme__ alan sırasında önceki yinelemelerin gönderilen görüntüleri görüntülemek için aşağı açılır.
-
-2. Sınıflandırıcı tarafından tahmin etiketlerini görmek için görüntüyü üzerine gelin.
+    ![Tahmin sekmesinin görüntüsü](./media/test-your-model/predictions-tab.png)
 
     > [!TIP]
-    > Görüntüleri bir sınıflandırıcı çoğu kazanç getiren görüntüleri en üstünde olacak şekilde sıralanır. Farklı bir sıralama seçmek için kullanın __sıralama__ bölümü.
+    > Varsayılan görünüm geçerli yinelemeden resimleri gösterir. Önceki yinelemeler sırasında gönderilen görüntüleri görüntülemek için __yineleme__ açılan alanını kullanabilirsiniz.
 
-    Eğitim verilerinizi resim eklemek için görüntüyü seçin, etiketi seçin ve ardından __Kaydet ve Kapat__. Görüntü kaldırılır __Öngörüler__ ve eğitim görüntülerin eklenir. Seçerek görüntüleyebilirsiniz __eğitim resmi__ sekmesi.
+2. Sınıflandırıcı tarafından tahmin edilen etiketleri görmek için bir görüntünün üzerine gelin.
+
+    > [!TIP]
+    > Resim, sınıflandırıcının en iyi kazançlarını getirebilmesi için derecelendirilir. Farklı bir sıralama seçmek için __sıralama__ bölümünü kullanın.
+
+    Eğitim verilerinize bir görüntü eklemek için görüntüyü seçin, etiketi seçin ve ardından __Kaydet ve Kapat__' ı seçin. Görüntü __tahminlerden__ kaldırılır ve eğitim görüntülerine eklenir. Bunu, __eğitim görüntüleri__ sekmesini seçerek görüntüleyebilirsiniz.
 
     ![Etiketleme sayfasının görüntüsü](./media/test-your-model/tag-image.png)
 
-3. Kullanım __eğitme__ sınıflandırıcı yeniden eğitme düğmesini.
+3. Sınıflandırıcının yeniden eğmesi için __eğitme__ düğmesini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

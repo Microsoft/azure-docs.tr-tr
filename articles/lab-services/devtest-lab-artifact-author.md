@@ -30,7 +30,7 @@ Bu makalede açıklanan adımlara genel bakış için aşağıdaki videoyu izley
 >
 
 ## <a name="overview"></a>Genel Bakış
-Kullanabileceğiniz *yapıtları* dağıtıp, bir VM sağlama sonra uygulamanızı ayarlama. Bir yapı tanımı dosyası ve bir klasördeki bir Git deposunda depolanan diğer komut dosyalarını bir yapıt oluşur. Yapıt tanımı dosyaları JSON ve bir VM'ye yüklemek istediğinizi belirtmek için kullanabileceğiniz ifadeler oluşur. Örneğin, çalıştırmak için bir komutu ve komutu çalıştırdığınızda kullanılabilen parametreleri bir yapıt adı tanımlayabilirsiniz. Yapıt tanım dosyası içinde diğer komut dosyaları ada göre bakabilirsiniz.
+Kullanabileceğiniz *artifacts* dağıtıp, bir VM sağlama sonra uygulamanızı ayarlama. Bir yapı tanımı dosyası ve bir klasördeki bir Git deposunda depolanan diğer komut dosyalarını bir yapıt oluşur. Yapıt tanımı dosyaları JSON ve bir VM'ye yüklemek istediğinizi belirtmek için kullanabileceğiniz ifadeler oluşur. Örneğin, çalıştırmak için bir komutu ve komutu çalıştırdığınızda kullanılabilen parametreleri bir yapıt adı tanımlayabilirsiniz. Yapıt tanım dosyası içinde diğer komut dosyaları ada göre bakabilirsiniz.
 
 ## <a name="artifact-definition-file-format"></a>Yapıt tanımlama dosyası biçimi
 Aşağıdaki örnek, bir tanım dosyasının temel yapıyı oluşturan bölümlerin gösterir:

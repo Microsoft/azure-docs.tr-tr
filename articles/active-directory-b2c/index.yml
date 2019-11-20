@@ -1,89 +1,133 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Active Directory B2C Belgeleri
+### YamlMime:Landing
+title: Azure Active Directory B2C belgeleri
+summary: Azure Active Directory B2C (Azure AD B2C), müşterilerinizin iOS, Android, .NET, tek sayfalı (SPA) ve diğer uygulamalarınızı kullanırken nasıl kaydolduğunu, oturum açtığını ve profillerini yönettiğini özel olarak denetlemenize olanak tanıyan bir kimlik yönetimi sistemidir. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle Azure AD BC2’yi kullanmayı öğrenin.
 metadata:
-  title: Azure Active Directory B2C Belgeleri
-  meta.description: 'Learn how to use Azure Active Directory B2C to customize and control how customers sign up, sign in, and manage their profiles when using your applications.'
+  title: Azure Active Directory B2C belgeleri
+  description: Müşterilerin uygulamalarınızı kullanırken nasıl kaydolduğunu, oturum açtığını ve profillerini yönettiğini özelleştirip denetlemek için Azure Active Directory B2C’yi kullanmayı öğrenin.
   services: active-directory-b2c
-  author: mmacy
-  manager: daveba
   ms.service: active-directory
   ms.subservice: B2C
   ms.topic: landing-page
-  ms.date: 03/29/2018
+  ms.collection: collection
+  author: mmacy
   ms.author: marsma
-abstract:
-  description: 'Azure Active Directory (Azure AD) B2C, müşterilerin uygulamalarınızı kullanırken nasıl kaydolduğunu, oturum açtığını ve profillerini yönettiğini özelleştirip denetlemenizi sağlayan bir kimlik yönetimi sistemidir. Buna diğerlerinin yanında iOS, Android ve .NET için geliştirilmiş uygulamalar dahildir. Azure AD B2C, aynı anda müşterilerinizin kimliklerini korurken bu eylemleri mümkün kılar. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle Azure AD BC2’yi kullanmayı öğrenin.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: ./media/index/active-directory-b2c-video.PNG
-      width: 250
-    title: 'Azure AD B2C ile Müşteri Kimlik Yönetimi (20:56)'
-    href: 'https://channel9.msdn.com/Shows/On-NET/Customer-Identity-Management-with-Azure-AD-B2C'
-    width: 250
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/active-directory-b2c/active-directory-b2c-overview
-            html: <p>Azure AD B2C ve özellikleri hakkında daha fazla bilgi edinin.</p>
-            image:
-              src: ./media/index/i_get-started.svg
-            title: Azure AD B2C hakkında
-          - href: /azure/active-directory-b2c/solution-articles
-            html: <p>Azure AD B2C kullanarak çözüm ve eğitim fırsatlarını araştırın.</p>
-            image:
-              src: ./media/index/i_advanced.svg
-            title: Çözümler ve eğitim
-          - href: /azure/active-directory-b2c/trustframeworkpolicy
-            html: <p>Azure AD B2C’deki özel ilkeleri kullanarak gelişmiş kaydolma ve oturum açma senaryoları oluşturun.</p>
-            image:
-              src: ./media/index/i_investigate.svg
-            title: Kimlik Deneyimi Altyapısı
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Uygulamanızı kullanan müşteriler için kimlik yönetimini ayarlama hakkında bilgi edinin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/azure/active-directory-b2c/media/index/logo_NET.svg'
-            text: .NET
-            href: 'https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-quickstarts-web-app'
-          - image:
-              src: 'https://docs.microsoft.com/azure/active-directory-b2c/media/index/logo_windows.svg'
-            text: Masaüstü
-            href: 'https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-quickstarts-desktop-app'
-          - image:
-              src: 'https://docs.microsoft.com/azure/active-directory-b2c/media/index/logo_nodejs.svg'
-            text: Tek sayfalı
-            href: 'https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-quickstarts-spa'
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'ASP.NET, masaüstü veya tek sayfalı Node.js uygulamalarında kaydolma, oturum açma ve müşteri profillerini yönetmeyi öğrenin.'
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: ASP.NET
-            html: <p>1. <a href="/azure/active-directory-b2c/tutorial-create-tenant">Kiracı oluşturma</a></p><p>2. <a href="/azure/active-directory-b2c/active-directory-b2c-tutorials-web-app">Kullanıcıların kimliklerini doğrulama</a></p><p>3. <a href="/azure/active-directory-b2c/active-directory-b2c-tutorials-web-api">API erişimi verme</a></p>
-          - title: Masaüstü
-            html: <p>1. <a href="/azure/active-directory-b2c/tutorial-create-tenant">Kiracı oluşturma</a></p><p>2. <a href="/azure/active-directory-b2c/active-directory-b2c-tutorials-desktop-app">Kullanıcıların kimliklerini doğrulama</a></p><p>3. <a href="/azure/active-directory-b2c/active-directory-b2c-tutorials-desktop-app-webapi">API erişimi verme</a></p>
-          - title: Tek sayfalı
-            html: <p>1. <a href="/azure/active-directory-b2c/tutorial-create-tenant">Kiracı oluşturma</a></p><p>2. <a href="/azure/active-directory-b2c/active-directory-b2c-tutorials-spa">Kullanıcıların kimliklerini doğrulama</a></p><p>3. <a href="/azure/active-directory-b2c/active-directory-b2c-tutorials-spa-webapi">API erişimi verme</a></p>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Uygulamanızdaki müşteri kimliklerini nasıl yöneteceğinizi gösteren örnekler bulun.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: '<a href="/azure/active-directory-b2c/code-samples">Mobil, masaüstü, web ve tek sayfalı uygulamalar</a>'
+  ms.date: 08/29/2019
+  ms.openlocfilehash: cc8626ba09f5646b5784645a9fc0b05eac20d699
+  ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/19/2019
+  ms.locfileid: "71120417"
+landingContent:
+- title: Temel bilgileri öğrenin
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD B2C nedir?
+      url: active-directory-b2c-overview.md
+    - text: Tekniğe ve özelliklere genel bakış
+      url: technical-overview.md
+  - linkListType: get-started
+    links:
+    - text: Azure AD B2C kiracısı oluşturma
+      url: tutorial-create-tenant.md
+    - text: Bir uygulamayı kaydetme
+      url: tutorial-register-applications.md
+    - text: Kullanıcı akışlarını ayarlama
+      url: tutorial-create-user-flows.md
+  - linkListType: video
+    links:
+    - text: Azure AD B2C nedir? (9:35)
+      url: https://www.youtube.com/watch?v=GmBKlXED9Ug
+- title: ASP.NET uygulamalarına kimlik ekleme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Oturum açmayı ayarlama
+      url: active-directory-b2c-quickstarts-web-app.md
+  - linkListType: tutorial
+    links:
+    - text: Bir .NET web uygulaması için kullanıcıların kimliklerini doğrulama
+      url: active-directory-b2c-tutorials-web-app.md
+    - text: Bir .NET web uygulamasına API erişimi verme
+      url: active-directory-b2c-tutorials-web-api.md
+    - text: Kurumsal ve sosyal ağlarda oturum açmaya olanak tanıma
+      url: tutorial-add-identity-providers.md
+  - linkListType: download
+    links:
+    - text: Web uygulamaları ve API'ler için kod örnekleri
+      url: code-samples.md#web-apps-and-apis
+- title: Tek sayfalı uygulamalara kimlik ekleme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Oturum açmayı ayarlama
+      url: active-directory-b2c-quickstarts-desktop-app.md
+  - linkListType: tutorial
+    links:
+    - text: Tek sayfalı bir uygulamada kullanıcıların kimliklerini doğrulama
+      url: active-directory-b2c-tutorials-spa.md
+    - text: Tek sayfalı bir uygulamaya API erişimi verme
+      url: active-directory-b2c-tutorials-spa-webapi.md
+    - text: Kurumsal ve sosyal ağlarda oturum açmaya olanak tanıma
+      url: tutorial-add-identity-providers.md
+  - linkListType: download
+    links:
+    - text: Tek sayfalı uygulamalar için kod örnekleri
+      url: code-samples.md#single-page-apps
+- title: Masaüstü uygulamalarına kimlik ekleme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Oturum açmayı ayarlama
+      url: active-directory-b2c-quickstarts-desktop-app.md
+  - linkListType: tutorial
+    links:
+    - text: Yerel istemcilerde kullanıcıların kimliklerini doğrulama
+      url: active-directory-b2c-tutorials-desktop-app.md
+    - text: Yerel istemcilere API erişimi verme
+      url: active-directory-b2c-tutorials-desktop-app-webapi.md
+    - text: Kurumsal ve sosyal ağlarda oturum açmaya olanak tanıma
+      url: tutorial-add-identity-providers.md
+  - linkListType: download
+    links:
+    - text: Mobil ve masaüstü uygulamalar için kod örnekleri
+      url: code-samples.md
+- title: Ortak kimlik senaryolarını yapılandırma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Kullanıcı akışlarına giriş
+      url: active-directory-b2c-reference-policies.md
+  - linkListType: how-to-guide
+    links:
+    - text: Kullanıcıları kaydetme ve oturumlarını açma
+      url: tutorial-create-user-flows.md
+    - text: Kullanıcı arabirimini özelleştirme
+      url: customize-ui-overview.md
+    - text: Facebook ile oturum açmayı etkinleştirme
+      url: active-directory-b2c-setup-fb-app.md
+  - linkListType: video
+    links:
+    - text: Temel ilkeleri yapılandırma (9:41)
+      url: https://www.youtube.com/watch?v=nWJ3m82536A
+- title: Gelişmiş kimlik senaryoları oluşturma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Özel ilkelere giriş
+      url: active-directory-b2c-overview-custom.md
+  - linkListType: how-to-guide
+    links:
+    - text: Kullanıcıları kaydetme ve oturumlarını açma
+      url: active-directory-b2c-get-started-custom.md
+    - text: Kullanıcı arabirimini özelleştirme
+      url: active-directory-b2c-ui-customization-custom.md
+    - text: Azure AD çoklu kiracı ile oturum açmayı etkinleştirme
+      url: active-directory-b2c-setup-commonaad-custom.md
+    - text: REST API’leri ile kendi iş mantığınızı ekleme
+      url: active-directory-b2c-rest-api-validation-custom.md
+  - linkListType: video
+    links:
+    - text: Azure AD B2C ile gelişmiş kullanım örnekleri (4:54)
+      url: https://www.youtube.com/watch?v=-ZmPBuMZY-Y

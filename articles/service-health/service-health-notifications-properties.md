@@ -1,80 +1,78 @@
 ---
-title: Azure hizmet durumu bildirimlerine nelerdir?
-description: Hizmet durumu bildirimlerine, Microsoft Azure tarafından yayınlanan hizmet sistem durumu iletileri görüntülemenize olanak sağlar.
-author: dkamstra
+title: Azure hizmet durumu bildirimleri nelerdir?
+description: Hizmet durumu bildirimleri Microsoft Azure tarafından yayınlanan hizmet durumu iletilerini görüntülemenize izin verir.
+author: stephbaron
 services: monitoring
 ms.service: azure-monitor
 ms.topic: conceptual
 ms.date: 4/12/2018
-ms.author: dukek
+ms.author: stbaron
 ms.subservice: logs
-ms.openlocfilehash: 87efa7442b0c67f2ee5f83b6b3e8ac8530ce5285
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b41c2cdc54ab5eecdc4503cbd98e69932c901a3d
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67079554"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74007096"
 ---
 # <a name="view-service-health-notifications-by-using-the-azure-portal"></a>Azure portalını kullanarak hizmet durumu bildirimlerini görüntüleme
 
-Hizmet durumu bildirimlerine, Azure tarafından yayımlanır ve aboneliğiniz kapsamındaki kaynaklar hakkında bilgiler içerir. Bu bildirimleri bir alt sınıfı etkinlik günlüğü olaylardır ve etkinlik günlüğü'nde bulunabilir. Hizmet durumu bildirimlerine bilgilendirici veya sınıf bağlı olarak eyleme dönüştürülebilir olabilir.
+Hizmet durumu bildirimleri Azure tarafından yayımlanır ve aboneliğinizdeki kaynaklarla ilgili bilgiler içerir. Bu bildirimler, etkinlik günlüğü olaylarının alt sınıfıdır ve etkinlik günlüğünde da bulunabilir. Hizmet durumu bildirimleri, sınıfa bağlı olarak bilgilendirici veya işlem yapılabilir olabilir.
 
-Hizmet durumu bildirimlerine çeşitli sınıfı vardır:  
+Çeşitli hizmet durum bildirimleri sınıfları vardır:  
 
-- **Eylem gerekiyor:** Azure, olağan dışı bir şey hesabınızdaki gerçekleşir ve bu sorunu gidermek için sizinle çalışma görebilirsiniz. Azure, gerçekleştirmeniz gereken eylemler veya nasıl Azure mühendislik veya desteğe başvurun ya da gerçekleşen bir bildirim gönderir.  
-- **Yardımlı kurtarma:** Bir olayın oluştuğunu ve mühendislerin etkisi hala yaşayan onayladıktan. Azure mühendislik doğrudan tam sağlık hizmetlerinizi geri yüklemek için birlikte çalışması gerekir.  
-- **Olay:** Hizmeti etkileyen bir olay şu anda bir veya daha fazla, aboneliğinizdeki kaynaklar etkiliyor.  
-- **Bakım:** Bir veya daha fazla aboneliğiniz kapsamındaki kaynaklar etkileyebilecek planlanan bakım etkinliği.  
-- **Bilgi:** Olası en iyi duruma getirme kaynağınızı geliştirebilecek kullanın. 
-- **Güvenlik:** Acil güvenlik ilgili bilgiler çözümlerinizin Azure üzerinde çalıştırın.
+- **Eylem gerekiyor:** Azure, hesabınızda olağan dışı bir durum olduğunu fark edebilir ve bunu çözmek için sizinle birlikte çalışabilirsiniz. Azure size, gerçekleştirmeniz gereken eylemleri ayrıntılandıran veya Azure Mühendisliği ya da destek ile iletişim kurma hakkında bir bildirim gönderir.  
+- **Olay:** Hizmeti etkileyen bir olay, şu anda aboneliğinizdeki bir veya daha fazla kaynağı etkiliyor.  
+- **Bakım:** Aboneliğinizdeki bir veya daha fazla kaynağı etkileyebilecek planlı bir bakım etkinliği.  
+- **Bilgi:** Kaynak kullanımını iyileştirmenize yardımcı olabilecek olası iyileştirmeler. 
+- **Güvenlik:** Azure üzerinde çalışan çözümlerinizle ilgili acil güvenlikle ilgili bilgiler.
 
-Her hizmet durumu bildirimi kapsamını ve etkisini kaynaklarınıza hakkında ayrıntılı bilgi içerir. Ayrıntıları içerir:
+Her hizmet durumu bildirimi, kapsamlarınızla ilgili ayrıntıları ve kaynaklarınızın etkisini içerir. Ayrıntılar şunları içerir:
 
 Özellik adı | Açıklama
 -------- | -----------
-Kanallar | Aşağıdaki değerlerden biri: **Yönetici** veya **işlemi**.
-correlationId | Genellikle bir GUID dize biçiminde. Genellikle aynı eyleme ait olayları aynı Correlationıd paylaşın.
-eventDataId | Olayın benzersiz tanımlayıcısı.
-EventName | Olay başlığı.
-düzey | Bir olay düzeyi
-resourceProviderName | Etkilenen kaynak bir kaynak sağlayıcısının adı.
-Kaynak türü| Etkilenen kaynak bir kaynağın türü.
-alt durumu | Genellikle karşılık gelen REST, HTTP durum kodu diyebilirsiniz, ama alt açıklayan diğer dizeleri de içerebilir. Örneğin: Tamam (HTTP durum kodu: 200) oluşturuldu (HTTP durum kodu: 201) kabul edildi (HTTP durum kodu: 202), içerik yok (HTTP durum kodu: 204), hatalı istek (HTTP durum kodu: 400) bulunamadı (HTTP durum kodu: 404), çakışma (HTTP durum kodu: 409), iç sunucu hatası (HTTP durum kodu: 500), hizmet kullanılamıyor (HTTP durum kodu: 503) ve ağ geçidi zaman aşımı (HTTP durum kodu: 504).
-eventTimestamp | Olaya karşılık gelen isteği işlemeye Azure hizmeti tarafından bir olay oluşturulduğunda, zaman damgası.
-submissionTimestamp | Olay sorgulamak için kullanılabilen kalktığında zaman damgası.
-subscriptionId | Bu olay günlüğe Azure aboneliği.
-status | İşlemin durumunu açıklayan bir dize. Sık karşılaşılan bazı değerler şunlardır: **Başlatılan**, **sürüyor**, **başarılı**, **başarısız**, **etkin**, ve **Çözümlendi**.
+lardan | Şu değerlerden biri: **yönetici** veya **işlem**.
+correlationId | Genellikle dize biçimindeki bir GUID. Aynı eyleme ait olan olaylar genellikle aynı Bağıntıkimliği 'ı paylaşır.
+Eventdataıd | Bir olayın benzersiz tanımlayıcısı.
+eventName | Bir olayın başlığı.
+level | Bir olayın düzeyi
+resourceProviderName | Etkilenen kaynak için kaynak sağlayıcının adı.
+resourceType| Etkilenen kaynağın kaynak türü.
+Dosya | Genellikle karşılık gelen REST çağrısının HTTP durum kodu, ancak alt durumu tanımlayan diğer dizeleri de içerebilir. Örneğin: Tamam (HTTP durum kodu: 200), oluşturulan (http durum kodu: 201), kabul edildi (http durum kodu: 202), Içerik yok (http durum kodu: 204), bozuk Istek (http durum kodu: 400), bir durum bulunamadı (http durum kodu: 404), çakışma Hata (HTTP durum kodu: 500), hizmet kullanılamıyor (HTTP durum kodu: 503) ve ağ geçidi zaman aşımı (HTTP durum kodu: 504).
+EventTimestamp | Olay, olaya karşılık gelen isteği işleyen Azure hizmeti tarafından oluşturulduğunda zaman damgası.
+submissionTimestamp | Olay sorgulama için kullanılabilir hale geldiğinde zaman damgası.
+subscriptionId | Bu olayın günlüğe kaydedildiği Azure aboneliği.
+status | İşlemin durumunu açıklayan dize. Bazı ortak değerler şunlardır: **başlatıldı**, **devam ediyor**, **başarılı**, **başarısız**, **etkin**ve **çözümlendi**.
 operationName | İşlemin adı.
-category | Bu özellik her zaman, **ServiceHealth**.
-resourceId | Etkilenen kaynak kaynak kimliği.
-Properties.Title | Bu iletişim için yerelleştirilmiş başlığı. İngilizce varsayılandır.
-Properties.communication | HTML biçimlendirmesi ile iletişimi yerelleştirilmiş ayrıntıları. İngilizce varsayılandır.
-Properties.incidentType | Aşağıdaki değerlerden biri: **Eylem gereklidir**, **bilgilendirici**, **olay**, **Bakım**, veya **güvenlik**.
-Properties.trackingId | Bu olay ile ilişkili olduğu olay. Bir olayla ilgili olayları ilişkilendirmek için bunu kullanın.
-Properties.impactedServices | Hizmetleri ve bölgeleri olaydan etkilenen açıklar JSON kaçan bir blob. Her biri, hizmetlerin bir listesini özelliği içeren bir **ServiceName**ve her biri etkilenen bölgelerin bir listesini bir **RegionName**.
-Properties.defaultLanguageTitle | İngilizce dilinde iletişim.
-Properties.defaultLanguageContent | HTML biçimlendirmesi veya düz metin olarak İngilizce dilinde iletişim.
-Properties.Stage | Olası değerler için **olay**, ve **güvenlik** olan **etkin** **çözümlenmiş** veya **RCA**. İçin **eylem gereklidir** veya **bilgilendirici** tek değerdir **etkin.** İçin **Bakım** bunlar: **Etkin**, **planlı**, **Inprogress**, **iptal**, **filtrelerden**, **çözümlenen**, veya **tam**.
-Properties.communicationId | Bu olay ile ilişkili olduğu iletişimi.
+category | Bu özellik her zaman **Servicehealth**' dır.
+resourceId | Etkilenen kaynağın kaynak KIMLIĞI.
+Properties. title | Bu iletişim için yerelleştirilmiş başlık. Varsayılan değer İngilizce 'dir.
+Properties. Communication | HTML işaretlemesi ile iletişimin yerelleştirilmiş ayrıntıları. Varsayılan değer İngilizce 'dir.
+Properties. incidentType | Şu değerlerden biri: **Actionrequired**, **bilgilendirici**, **olay**, **bakım**veya **güvenlik**.
+Properties.trackingId | Bu olayın ilişkilendirildiği olay. Bir olayla ilgili olayları ilişkilendirmek için bunu kullanın.
+Properties.impactedServices | Olaydan etkilenen hizmetleri ve bölgeleri açıklayan, kaçan JSON blobu. Özelliği, her birinin bir **ServiceName**'e sahip olduğu hizmetlerin bir listesini ve her birinin bir **BölgeAdı**olan etkilenen bölgelerin bir listesini içerir.
+Properties. defaultLanguageTitle | Ingilizce olarak iletişim.
+Properties. defaultLanguageContent | HTML biçimlendirme veya düz metin olarak Ingilizce iletişim.
+Properties. aşama | **Olay**ve **güvenlik** için olası değerler **etkin,** **Çözümlenmiş** veya **RCA**. **Actionrequired** veya **bilgilendirme** için tek değer **etkindir.** **Bakım** Için: **etkin**, **planlı**, **sürüyor**, **iptal edildi**, yeniden **zamanlandı**, **çözümlendi**veya **tamamlanmıştır**.
+Properties. Communicationıd | Bu olayın ilişkilendirildiği iletişim.
 
-### <a name="details-on-service-health-level-information"></a>Hizmet durumu düzeyi bilgileri hakkında ayrıntılı bilgi
+### <a name="details-on-service-health-level-information"></a>Hizmet durumu düzeyi bilgileri hakkındaki ayrıntılar
 
-**Eylem gerekiyor** (properties.incidentType == eylem gereklidir)
-- Bilgilendirici - mevcut hizmetlere etkiyi önlemek için gereken yönetici eylemi
+**Eylem gerekli** (Properties. incidentType = = actionrequired)
+- Mevcut hizmetlere etkileri engellemek için bilgilendirici yönetici eylemi gereklidir.
     
-**Bakım** (properties.incidentType bakım ==)
-- Uyarı - Acil bakım
-- Bilgilendirici - standart planlı bakım
+**Bakım** (Properties. incidentType = = Maintenance)
+- Uyarı-acil durum Bakımı
+- Bilgilendirici standart planlı bakım
 
-**Information** (properties.incidentType == Information)
-- Bilgi - yönetici, mevcut hizmetlere etkiyi önlemek için gerekebilir
+**Bilgi** (Properties. incidentType = = Information)
+- Bilgilendirici yönetici, mevcut hizmetlere etkileri engellemek için gerekli olabilir.
 
-**Güvenlik** (properties.incidentType güvenlik ==)
-- Hata - yaygın sorunları birden çok bölgede birden fazla hizmetlere erişen müşteriler çok geniş bir yelpazedeki etkileyen.
-- Uyarı - sorunları erişimi belirli hizmetlere ve/veya müşteri alt kümesini etkileyen özel bölgeler.
-- Hizmet kullanılabilirliği etkileyen değil bilgilendirici - yönetim işlemleri ve/veya gecikme süresi, etkileyen sorunları.
+**Güvenlik** (Properties. incidentType = = Security)
+- Uyarı-mevcut hizmetleri etkileyen ve yönetici eylemi gerektirebilecek güvenlik danışmanlığı.
+- Mevcut hizmetleri etkileyen bilgilendirici güvenlik danışmanlığı.
 
-**Hizmet sorunları** (properties.incidentType olay ==)
-- Hata - yaygın sorunları birden çok bölgede birden fazla hizmetlere erişen müşteriler çok geniş bir yelpazedeki etkileyen.
-- Uyarı - sorunları erişimi belirli hizmetlere ve/veya müşteri alt kümesini etkileyen özel bölgeler.
-- Hizmet kullanılabilirliği etkileyen değil bilgilendirici - yönetim işlemleri ve/veya gecikme süresi, etkileyen sorunları.
+**Hizmet sorunları** (Özellikler. incidentType = = olay)
+- Hata-birden çok bölge genelinde birden çok hizmete erişen yaygın sorunlar çok sayıda müşteriyi etkiliyor.
+- Uyarı-belirli hizmetlere ve/veya belirli bölgelere erişme sorunları müşterilerin bir alt kümesini etkiliyor.
+- Bilgilendirici-yönetim işlemlerini ve/veya gecikmeyi etkileyen, hizmet kullanılabilirliğini etkilemeden oluşan sorunlar.

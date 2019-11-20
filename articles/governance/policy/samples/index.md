@@ -1,18 +1,14 @@
 ---
 title: İlke örnekleri dizini
 description: Azure İlkesi örnekleri dizini. Adlandırma, etiketler, Key Vault, ağ iletişimi, depolama ve daha fazlasını içeren kategoriler.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
 ms.date: 03/19/2019
-ms.author: dacoulte
-ms.openlocfilehash: 140429cef7f63219a0d5cf82c6ebfb3731b0072b
-ms.sourcegitcommit: 59fd8dc19fab17e846db5b9e262a25e1530e96f3
+ms.topic: sample
+ms.openlocfilehash: 54e77a83a03d9a8f5cedd59f010569d7ecef7d90
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65979659"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74070110"
 ---
 # <a name="azure-policy-samples"></a>Azure İlkesi Örnekleri
 

@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory B2C'de özel öznitelikleri tanımlamak | Microsoft Docs
-description: Azure Active Directory B2C, müşterilerinizin hakkında bilgi toplamak için uygulamanız için özel öznitelikler tanımlayabilirsiniz.
+title: Azure Active Directory B2C özel öznitelikleri tanımlayın | Microsoft Docs
+description: Müşterileriniz hakkında bilgi toplamak için Azure Active Directory B2C ' de uygulamanız için özel öznitelikler tanımlayın.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,51 +10,51 @@ ms.topic: conceptual
 ms.date: 11/30/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 16907cb06d7e291a3da5b9d30b4d88cf4d50abf3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e6b0eac0b8cf7f61d76f90a4f769ba11abab6999
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66509573"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71065670"
 ---
-# <a name="define-custom-attributes-in-azure-active-directory-b2c"></a>Özel öznitelikler Azure Active Directory B2C'de tanımlayın
+# <a name="define-custom-attributes-in-azure-active-directory-b2c"></a>Azure Active Directory B2C özel öznitelikleri tanımlama
 
- Her müşteriye dönük uygulama, bilgilerin toplanması gerekir için benzersiz gereksinimleri vardır. Azure Active Directory (Azure AD) B2C kiracınızı, verilen ad, Soyadı, şehir ve posta kodu gibi özniteliklerde depolanan bilgileri yerleşik bir dizi ile birlikte gelir. Azure AD B2C ile her bir müşteri hesapta depolanan öznitelik kümesini genişletebilirsiniz. 
- 
- Özel öznitelikler oluşturabilirsiniz [Azure portalında](https://portal.azure.com/) ve kaydolma kullanıcı akışları, kaydolma veya oturum açma kullanıcı akışları veya profil düzenleme kullanıcı akışları kullanın. Ayrıca okuma ve yazma bu öznitelikleri kullanarak [Azure AD Graph API'si](active-directory-b2c-devquickstarts-graph-dotnet.md). Azure AD B2C, özel öznitelikler kullanma [Azure AD Graph API Directory şema uzantıları](/previous-versions/azure/ad/graph/howto/azure-ad-graph-api-directory-schema-extensions).  
+ Müşterilere yönelik her uygulamanın, toplanması gereken bilgiler için benzersiz gereksinimleri vardır. Azure Active Directory B2C (Azure AD B2C) kiracınız, belirtilen ad, soyadı, şehir ve posta kodu gibi özniteliklerde depolanan yerleşik bir bilgi kümesiyle gelir. Azure AD B2C, her müşteri hesabında depolanan özniteliklerin kümesini genişletebilirsiniz.
+
+ [Azure Portal](https://portal.azure.com/) özel öznitelikler oluşturabilir ve bunları kaydolma Kullanıcı akışlarınızda, kaydolma veya oturum açma Kullanıcı akışlarınızda veya profil düzenlemesi Kullanıcı akışlarınızda kullanabilirsiniz. Ayrıca, [Azure AD Graph API](active-directory-b2c-devquickstarts-graph-dotnet.md)kullanarak bu öznitelikleri okuyabilir ve yazabilirsiniz. Azure AD B2C özel öznitelikler [Azure AD Graph API Dizin şeması uzantılarını](/previous-versions/azure/ad/graph/howto/azure-ad-graph-api-directory-schema-extensions)kullanır.
 
 > [!NOTE]
-> Desteği yeni [Microsoft Graph API](https://docs.microsoft.com/graph/overview?view=graph-rest-1.0) Azure AD B2C sorgulama için Kiracı hala geliştirme aşamasındadır.
+> Azure AD B2C kiracının sorgulanmasında daha yeni [MICROSOFT Graph API](https://docs.microsoft.com/graph/overview?view=graph-rest-1.0) desteği hala geliştirme aşamasındadır.
 >
 
-## <a name="create-a-custom-attribute"></a>Özel bir öznitelik oluşturma
+## <a name="create-a-custom-attribute"></a>Özel öznitelik oluştur
 
 1. [Azure portalda](https://portal.azure.com/) Azure AD B2C kiracınızın genel yöneticisi olarak oturum açın.
-2. Azure AD B2C kiracınızı içeren dizini kullandığınızdan emin olmak için Azure portalın sağ üst köşesinde bu dizine geçin. Abonelik bilgilerinizi ve ardından **Dizin Değiştir**’i seçin. 
+2. Azure AD B2C kiracınızı içeren dizini kullandığınızdan emin olmak için Azure portalın sağ üst köşesinde bu dizine geçin. Abonelik bilgilerinizi ve ardından **Dizin Değiştir**’i seçin.
 
     ![Azure AD B2C kiracınıza geçiş yapma](./media/active-directory-b2c-reference-custom-attr/switch-directories.png)
 
     Kiracınızı içeren dizini seçin.
 
-    ![Dizin seçme](./media/active-directory-b2c-reference-custom-attr/select-directory.png)
+    ![Dizin ve abonelik filtresi 'nde B2C kiracısı vurgulandı](./media/active-directory-b2c-reference-custom-attr/select-directory.PNG)
 
 3. Azure portalın sol üst köşesinde **Tüm hizmetler**’i seçin ve **Azure AD B2C**’yi arayıp seçin.
-4. Seçin **kullanıcı öznitelikleri**ve ardından **Ekle**.
-5. Sağlayan bir **adı** özel öznitelik (örneğin, "ShoeSize")
-6. Seçin bir **veri türü**. Yalnızca **dize**, **Boole**, ve **Int** kullanılabilir.
-7. İsteğe bağlı olarak girin bir **açıklama** bilgilendirme amaçlıdır. 
-8. **Oluştur**’a tıklayın.
+4. **Kullanıcı öznitelikleri**' ni seçin ve ardından **Ekle**' yi seçin.
+5. Özel öznitelik için bir **ad** sağlayın (örneğin, "shoesize")
+6. Bir **veri türü**seçin. Yalnızca **String**, **Boolean**ve **Int** kullanılabilir.
+7. İsteğe bağlı olarak, bilgilendirici amaçlar için bir **Açıklama** girin.
+8. **Oluştur**'a tıklayın.
 
-Özel öznitelik listesinde kullanılabilir **kullanıcı öznitelikleri** ve kullanıcı akışlarınızda kullanın. Yalnızca hiçbir kullanıcı akışında kullanılan, ilk kez oluşturulan ve listesine değil eklediğinizde, özel bir öznitelik olan **kullanıcı öznitelikleri**. 
+Özel öznitelik artık **Kullanıcı öznitelikleri** listesinde ve Kullanıcı akışlarınızda kullanılmak üzere kullanılabilir. Özel bir öznitelik, **Kullanıcı öznitelikleri**listesine eklediğinizde değil, yalnızca herhangi bir Kullanıcı akışında kullanıldığı zaman oluşturulur.
 
 
-## <a name="use-a-custom-attribute-in-your-user-flow"></a>Özel bir öznitelik kullanıcı akışınızı kullanın
+## <a name="use-a-custom-attribute-in-your-user-flow"></a>Kullanıcı akışındaki özel bir öznitelik kullanma
 
-1. Azure AD B2C kiracınızı seçin **kullanıcı akışları**.
-2. Açmak için ilke (örneğin, "B2C_1_SignupSignin") seçin. 
-4. Seçin **kullanıcı öznitelikleri** ve sonra özel öznitelik (örneğin, "ShoeSize") seçin. **Kaydet**’e tıklayın.
-5. Seçin **uygulama taleplerini** ve özel özniteliği seçin. 
+1. Azure AD B2C kiracınızda **Kullanıcı akışları**' nı seçin.
+2. İlkeyi (örneğin, "B2C_1_SignupSignin") açmak için seçin.
+4. **Kullanıcı öznitelikleri** ' ni seçin ve ardından özel özniteliği seçin (örneğin, "shoesize"). **Kaydet**’e tıklayın.
+5. **Uygulama talepleri** ' ı seçin ve ardından özel özniteliği seçin.
 6. **Kaydet**’e tıklayın.
 
-İçinde yeni oluşturulan özel öznitelik kullanan bir kullanıcı akışı kullanan yeni bir kullanıcı oluşturduktan sonra nesneyi sorgulanabilir [Azure AD Graph Gezgini](https://docs.microsoft.com/azure/active-directory/develop/active-directory-graph-api-quickstart). Alternatif olarak [ **kullanıcı akışı çalıştırma** ](https://docs.microsoft.com/azure/active-directory-b2c/tutorial-create-user-flows) müşteri deneyimini doğrulamak için kullanıcı akışı özelliği. Görmelisiniz **ShoeSize** öznitelikler listesinde kaydolma yolculuğu sırasında toplanan ve uygulamanıza geri gönderilen belirteçte bakın. 
+Yeni oluşturulan özel özniteliği kullanan bir Kullanıcı akışı kullanarak yeni bir kullanıcı oluşturduktan sonra, nesne [Azure AD Graph Explorer](https://docs.microsoft.com/azure/active-directory/develop/active-directory-graph-api-quickstart)'da sorgulanabilir. Alternatif olarak, müşteri deneyimini doğrulamak için Kullanıcı akışındaki [**Kullanıcı akışını Çalıştır**](https://docs.microsoft.com/azure/active-directory-b2c/tutorial-create-user-flows) özelliğini de kullanabilirsiniz. Şimdi kayıt yolculuğu sırasında toplanan öznitelikler listesinde **Showesize** ' i görmeniz ve uygulamanıza geri gönderilen belirteçte onu görmeniz gerekir.
 

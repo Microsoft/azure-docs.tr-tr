@@ -1,108 +1,107 @@
 ---
-title: Azure MFA sürümleri ve tüketim planları - Azure Active Directory
-description: Çok faktörlü kimlik doğrulaması istemci farklı yöntemler ve kullanılabilir sürümler hakkında bilgi.
+title: Azure MFA sürümleri ve tüketim planları-Azure Active Directory
+description: Multi-Factor Authentication istemcisi ve kullanılabilir farklı yöntemler ve sürümler hakkında bilgiler.
 services: multi-factor-authentication
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 06/03/2018
+ms.date: 10/29/2019
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6a1ee55dd3aebca869da47bbc994f546aa4fe528
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 78e34e0433dd362150680046c2f0ca53996063c4
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66496765"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73151754"
 ---
-# <a name="how-to-get-azure-multi-factor-authentication"></a>Azure multi-Factor Authentication'ı edinme
+# <a name="how-to-get-azure-multi-factor-authentication"></a>Azure Multi-Factor Authentication alma
 
-İki aşamalı doğrulama hesaplarınızı korumak için söz konusu olduğunda, kuruluşunuz genelinde standart olması gerekir. Bu özellik, kaynaklara erişimi ayrıcalıklı hesaplar için özellikle önemlidir. Bu nedenle, Azure Active Directory (Azure AD) Yöneticiler için herhangi bir ek maliyet ve Microsoft Office 365 temel iki aşamalı doğrulama özellikleri sunar. Yöneticilerinizin özellikleri yükseltme veya geri kalanı kullanıcılarınız için iki aşamalı doğrulamayı genişletmek istiyorsanız, Azure multi-Factor Authentication çeşitli yollarla satın alabilirsiniz.
+Hesaplarınız korunurken, iki adımlı doğrulama, kuruluşunuz genelinde standart olmalıdır. Bu özellik özellikle kaynaklara ayrıcalıklı erişimi olan hesaplar için önemlidir. Bu nedenle, Microsoft, ek maliyet olmadan Office 365 ve Azure Active Directory (Azure AD) yöneticilerine temel iki adımlı doğrulama özellikleri sunar. Yöneticileriniz için özellikleri yükseltmek veya iki aşamalı doğrulamayı kullanıcılarınızın geri kalanına genişletmek istiyorsanız, Azure Multi-Factor Authentication çeşitli yollarla satın alabilirsiniz.
 
 > [!IMPORTANT]
-> Bu makalede, Azure multi-Factor Authentication'ı satın almak için farklı yollarını anlamanıza yardımcı olması için bir kılavuz olarak tasarlanmıştır. Fiyatlandırma ve faturalandırma hakkında belirli Ayrıntılar için her zaman başvurmanız gerekir [multi-Factor Authentication fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/multi-factor-authentication/).
+> Bu makalede, Azure Multi-Factor Authentication satın almanın farklı yollarını anlamanıza yardımcı olacak bir kılavuz olması amaçlanmıştır. Fiyatlandırma ve faturalandırma hakkında belirli Ayrıntılar için [Multi-Factor Authentication fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/multi-factor-authentication/)her zaman başvurmalısınız.
 >
 
-## <a name="available-versions-of-azure-multi-factor-authentication"></a>Azure multi-Factor Authentication'ın kullanılabilir sürümleri
+## <a name="available-versions-of-azure-multi-factor-authentication"></a>Azure Multi-Factor Authentication 'nin kullanılabilir sürümleri
 
-Aşağıdaki tabloda, çok faktörlü kimlik doğrulaması için üç sürümü arasındaki farklar açıklanmaktadır:
+Aşağıdaki tabloda Multi-Factor Authentication sürümleri arasındaki farklılıklar açıklanmaktadır:
 
-| Version | Açıklama |
+| Sürüm | Açıklama |
 | --- | --- |
-| Office 365 için Multi-Factor Authentication <br> Microsoft 365 İş | Bu sürüm, Office 365 veya Microsoft 365 portalından yönetilir. Yöneticiler, [Office 365 kaynakları iki aşamalı doğrulama ile güvenli hale getirme](https://support.office.com/article/Set-up-multi-factor-authentication-for-Office-365-users-8f0454b2-f51a-4d9c-bcde-2c48e41621c6). Bu sürüm, Office 365 veya Microsoft 365 iş aboneliğinin bir parçasıdır. |
-| Azure AD yöneticileri için multi-Factor Authentication | Azure AD kiracıları, Azure AD genel Yönetici rolüne atanan kullanıcılar hiçbir ek ücret ödemeden iki aşamalı doğrulamayı etkinleştirebilirsiniz. |
-| Azure Multi-Factor Authentication | Genellikle için "tam" sürüm olarak adlandırılan, Azure multi-Factor Authentication en zengin özellik kümesi sunar. Aracılığıyla ek yapılandırma seçenekleri sağlar [Azure portalında](https://portal.azure.com), Gelişmiş raporlama ve şirket içi bir dizi için destek ve bulut uygulamalarına. Azure multi-Factor Authentication'ın bir özelliğidir [Azure Active Directory Premium](https://www.microsoft.com/cloud-platform/azure-active-directory-features). |
+| Ücretsiz seçenek | Azure AD 'nin ücretsiz avantajlarından yararlanan müşteriler, ortamınızda Multi-Factor Authentication 'ı etkinleştirmek için [güvenlik varsayılanlarını](../conditional-access/concept-conditional-access-security-defaults.md) kullanabilir. |
+| Office 365 için Multi-Factor Authentication | Bu sürüm, Office 365 veya Microsoft 365 portalından yönetilir. Yöneticiler, [iki adımlı doğrulamayla Office 365 kaynaklarını güvenli hale](https://support.office.com/article/Set-up-multi-factor-authentication-for-Office-365-users-8f0454b2-f51a-4d9c-bcde-2c48e41621c6)getirebilirsiniz. Bu sürüm, Office 365 aboneliğinin bir parçasıdır. |
+| Azure AD yöneticileri için Multi-Factor Authentication | Azure AD kiracılarında Azure AD Genel Yöneticisi rolüne atanan kullanıcılar, ek bir ücret ödemeden iki aşamalı doğrulamayı etkinleştirebilir. |
+| Azure Multi-Factor Authentication | Genellikle "Full" sürümü olarak anılan Azure Multi-Factor Authentication, zenginest özellik kümesini sunar. [Azure Portal](https://portal.azure.com), gelişmiş raporlama ve bir dizi şirket içi ve bulut uygulaması için destek aracılığıyla ek yapılandırma seçenekleri sunar. Azure Multi-Factor Authentication, [Azure Active Directory Premium](https://www.microsoft.com/cloud-platform/azure-active-directory-features) ve [Microsoft 365 iş](https://www.microsoft.com/microsoft-365/business)bir özelliğidir. |
 
 > [!NOTE]
-> Yeni müşteriler artık etkin 1 Eylül Mayıs 2018 sunan bir tek başına olarak Azure multi-Factor Authentication satın alabilirsiniz. Çok faktörlü kimlik doğrulaması, Azure AD Premium lisansları bir özellik olarak kullanılabilir olmaya devam edecektir.
+> Yeni müşteriler artık 1 Eylül 2018 ' de geçerli olan tek başına bir teklif olarak Azure Multi-Factor Authentication satın alabilirler. Multi-Factor Authentication, Azure AD Premium veya Microsoft 365 İş lisanslarında bir özellik olarak kullanılabilir olmaya devam edecektir.
 
-## <a name="feature-comparison-of-versions"></a>Sürümleri özellik karşılaştırması
+## <a name="feature-comparison-of-versions"></a>Sürümlerin Özellik Karşılaştırması
 
-Aşağıdaki tabloda, çeşitli Azure multi-Factor Authentication sürümlerinde kullanılabilir olan özelliklerin bir listesini sağlar.
+Aşağıdaki tabloda, çeşitli Azure Multi-Factor Authentication sürümlerinde kullanılabilen özelliklerin bir listesi verilmiştir.
 
 > [!NOTE]
-> Bu karşılaştırma tablosu, her bir multi-Factor Authentication sürümü parçası olan özellikler açıklanmaktadır. Tam Azure multi-Factor Authentication hizmeti varsa, bazı özellikler kullanmak isteyip istemediğinize bağlı olarak mevcut olmayabilir [bulutta MFA veya MFA şirket içi](concept-mfa-whichversion.md).
+> Bu karşılaştırma tablosu Multi-Factor Authentication her bir sürümünün parçası olan özellikleri açıklamaktadır. Tam Azure Multi-Factor Authentication hizmetiniz varsa, [MFA 'yı bulutta mi yoksa Şirket IÇINDE MFA](concept-mfa-whichversion.md)mı kullandığınıza bağlı olarak bazı özellikler kullanılamayabilir.
 >
 
-| Özellik | Office 365 için Multi-Factor Authentication | Azure AD yöneticileri için multi-Factor Authentication | Azure Multi-Factor Authentication |
-| --- |:---:|:---:|:---:|
-| Azure AD yönetici hesapları MFA ile koruma |● |● (yalnızca Azure AD genel yönetici hesapları için) |● |
-| İkinci öğe olarak mobil uygulama |● |● |● |
-| İkinci öğe olarak telefon araması |● |● |● |
-| İkinci öğe olarak SMS |● |● |● |
-| Mfa'yı desteklemeyen istemciler için uygulama parolaları |● |● |● |
-| Doğrulama yöntemleri üzerinde yönetici denetimi |● |● |● |
-| Yönetici olmayan hesaplar MFA ile koruma |● | |● |
-| PIN modu | | |● |
-| Sahtekarlık uyarısı | | |● |
-| MFA Raporları | | |● |
-| Bir Kerelik Atlama | | |● |
-| Telefon aramaları için özel karşılama | | |● |
-| Telefon aramaları için özel arayan kimliği | | |● |
-| Güvenilen IP'ler | | |● |
-| Güvenilen cihazlar için MFA hatırlama |● |● |● |
-| Şirket içi uygulamalar için MFA | | |● |
+| Özellik | Office 365 için Multi-Factor Authentication | Azure AD yöneticileri için Multi-Factor Authentication | Azure Multi-Factor Authentication | Güvenlik varsayılanları | 
+| --- |:---:|:---:|:---:|:---:|
+| MFA ile Azure AD yönetici hesaplarını koruma |● |● (Yalnızca Azure AD Genel yönetici hesapları) |● |● |
+| İkinci bir faktör olarak mobil uygulama |● |● |● |● |
+| İkinci bir faktör olarak telefon araması |● |● |● |   |
+| İkinci bir faktör olarak SMS |● |● |● |   |
+| MFA 'yı desteklemeyen istemciler için uygulama parolaları |● |● |● |   |
+| Doğrulama yöntemleri üzerinde yönetici denetimi |● |● |● |   |
+| MFA ile yönetici olmayan hesapları koruma |● | |● |● |
+| PIN modu | | |● |   |
+| Sahtekarlık uyarısı | | |● |   |
+| MFA Raporları | | |● |   |
+| Bir Kerelik Atlatma | | |● |   |
+| Telefon aramaları için özel karşılama | | |● |   |
+| Telefon aramaları için özel arayan KIMLIĞI | | |● |   |
+| Güvenilen IP'ler | | |● |   |
+| Güvenilen cihazlar için MFA hatırlama |● |● |● |   |
+| Şirket içi uygulamalar için MFA | | |● |   |
 
 > [!IMPORTANT]
-> Telefon araması seçenekleri 2019'ın Mart başlangıç MFA ve SSPR kullanıcıları Azure AD ücretsiz/deneme kiracıları için kullanılabilir olmayacak. SMS iletileri, bu değişiklikten etkilenmez. Telefon Araması'nda kullanıcılara kullanılabilir Ücretli Azure AD kiracılarıyla devam eder. Bu değişiklik, yalnızca Azure AD ücretsiz/deneme kiracıları etkiler.
+> Mart 2019 ' den itibaren telefon araması seçenekleri ücretsiz/deneme Azure AD kiracılarında MFA ve SSPR kullanıcıları tarafından kullanılamaz. SMS iletileri bu değişiklikten etkilenmez. Telefon araması, ücretli Azure AD kiracılarındaki kullanıcılar için kullanılabilir olmaya devam edecektir. Bu değişiklik yalnızca ücretsiz/deneme Azure AD kiracılarını etkiler.
 
-## <a name="how-to-turn-on-azure-multi-factor-authentication-for-azure-ad-administrators"></a>Azure AD yöneticileri için Azure multi-Factor Authentication devre dışı bırakma
+## <a name="how-to-turn-on-azure-multi-factor-authentication-for-azure-ad-administrators"></a>Azure AD yöneticileri için Azure Multi-Factor Authentication 'yi etkinleştirme
 
-Azure AD kiracıları içinde genel Yönetici rolüne atanan kullanıcılar hiçbir ek ücret ödemeden Azure AD genel yönetici hesapları için iki aşamalı doğrulamayı etkinleştirebilirsiniz. Bir Microsoft Account kullanıyorsanız, çok faktörlü kimlik doğrulaması Microsoft hesabı destek makalesinde yönergelerle kaydedebilirsiniz [iki basamaklı doğrulama hakkında](https://support.microsoft.com/help/12408/microsoft-account-about-two-step-verification). Microsoft Account kullanmıyorsanız, genel makalede bulunan yönergeleri kullanarak yöneticiler için multi-Factor authentication açma [bir kullanıcı veya grup için iki aşamalı doğrulama gerektirme](howto-mfa-userstates.md).
+Azure AD kiracılarında genel yönetici rolüne atanan kullanıcılar, Azure AD Genel yönetici hesapları için ek bir ücret ödemeden iki aşamalı doğrulamayı etkinleştirebilir. Bir Microsoft hesabı kullanıyorsanız, [iki adımlı doğrulama hakkında](https://support.microsoft.com/help/12408/microsoft-account-about-two-step-verification)Microsoft hesabı destek makalesinde bulunan kılavuzdan yararlanarak Multi-Factor Authentication için kaydolabilirsiniz. Bir Microsoft hesabı kullanmıyorsanız, [bir kullanıcı veya grup için iki adımlı doğrulama gerektirme](howto-mfa-userstates.md)makalesinde bulunan Kılavuzu kullanarak genel Yöneticiler için Multi-Factor Authentication 'ı açın.
 
-## <a name="how-to-purchase-azure-multi-factor-authentication"></a>Azure multi-Factor Authentication'ı satın alma
+## <a name="how-to-purchase-azure-multi-factor-authentication"></a>Azure Multi-Factor Authentication satın alma
 
-Kullanıcılarınızın Azure Active Directory'de atamanız ve Azure Active Directory Premium ya da Azure AD Premium veya koşullu erişim içeren bir lisans paketini gibi Azure multi-Factor Authentication içeren lisansları satın alın.
+Azure Active Directory Premium gibi Azure Multi-Factor Authentication veya Azure AD Premium ya da koşullu erişimi içeren bir lisans paketi satın alın ve bu lisansları Azure Active Directory Kullanıcılarınıza atayın.
 
 ### <a name="consumption-based-licensing"></a>Tüketim tabanlı lisanslama
 
-Tüketim tabanlı lisanslama artık 1 Eylül 2018'den etkili yeni müşteriler için kullanılabilir.
+Tüketim tabanlı lisanslama, 1 Eylül 2018 ' de geçerli olan yeni müşteriler için artık kullanılamaz.
 
-1 Eylül 2018'den yeni etkin yetki sağlayıcılar artık oluşturulabilir. Mevcut kimlik doğrulama sağlayıcıları güncelleştirildi ve kullanılabilmesi devam edebilir. Çok faktörlü kimlik doğrulaması, Azure AD Premium lisansınız kullanılabilir bir özellik olmaya devam edecektir.
+1 Eylül 2018 ' den itibaren yeni kimlik doğrulama sağlayıcıları artık oluşturulmayabilir. Mevcut kimlik doğrulama sağlayıcıları çalışmaya ve güncelleştirilmesine devam edebilir. Multi-Factor Authentication, Azure AD Premium lisanlarında kullanılabilir bir özellik olmaya devam edecektir.
 
-Azure multi-Factor Authentication sağlayıcısı kullanırken, Azure aboneliğiniz faturalandırılırsınız kullanılabilir iki kullanım modeli vardır:
+Azure Multi-Factor Authentication sağlayıcısı kullanırken, Azure aboneliğinizde Faturalandırılan iki kullanım modeli bulunur:
 
-1. **Etkin kullanıcı başına** - sabit sayıda düzenli olarak kimlik doğrulaması gereken çalışanlar için iki aşamalı doğrulamayı etkinleştirmek istediğiniz kuruluşlara yöneliktir. Kullanıcı başına faturalandırma, Azure AD kiracınıza ve Azure MFA sunucunuzu MFA için etkinleştirilen kullanıcı sayısına bağlıdır. Kullanıcılar için mfa'yı hem de Azure AD'de etkin olup olmadığını ve Azure MFA sunucusu ve etki alanı eşitleme (Azure AD Connect) etkin sonra size daha büyük bir kullanıcı kümesine sayısı. Etki alanı eşitleme etkin değil sonra size Azure AD MFA için etkinleştirilmiş tüm kullanıcıların toplam sayısı ve Azure MFA sunucusu. Faturalandırma günlere eşit olarak dağıtılır ve ticaret sisteme günlük bildirdi.
-
-   > [!NOTE]
-   > Faturalandırma örnek 1: 5.000 kullanıcılar için mfa'yı bugün etkin var. MFA sistem bu sayıyı o gün için 31 ve raporları 161.29 kullanıcı tarafından böler. Yarın MFA sistem 161.77 kullanıcı o gün için raporlar için 15 daha fazla kullanıcı sağlar. Fatura dönemi sonunda Azure aboneliğinize faturalandırılır kullanıcıların toplam sayısı 5.000 kadar ekler.
-   >
-   > Faturalandırma örnek 2: Bir kullanıcı başına Azure MFA Sağlayıcısı'nın farkını yapmak zorunda lisansların ve kullanıcılar olmadan, bir karışımını sahip. 4\.500 vardır Enterprise Mobility + Security Lisanslarımı kiracınıza ancak MFA için etkinleştirilmiş 5.000 kullanıcılar. Azure aboneliğiniz 500 kullanıcı için fatura, günlere eşit olarak dağıtılır ve günlük 16.13 kullanıcılar olarak bildirilen.
-   >
-
-1. **Kimlik doğrulaması başına** - çok sayıda seyrek kimlik doğrulaması gereken kullanıcılar için iki aşamalı doğrulamayı etkinleştirmek istediğiniz kuruluşlara yöneliktir. Bu doğrulamaları başarısız veya reddedilen bağımsız olarak iki aşamalı doğrulama isteklerinin sayısı göre faturalandırılır. Bu faturalandırma Azure kullanım ekstreniz 10 kimlik doğrulama paketlerine görünür ve günlük olarak bildirilir.
+1. **Etkin Kullanıcı başına** -kimlik doğrulamasına düzenli olarak ihtiyaç duyan sabit sayıda çalışan için iki aşamalı doğrulamayı etkinleştirmek isteyen kuruluşlar için. Kullanıcı başına faturalandırma, Azure AD kiracınızda ve Azure MFA sunucunuzda MFA için etkinleştirilen kullanıcı sayısına bağlıdır. Kullanıcılar hem Azure AD hem de Azure MFA sunucusunda MFA için etkinleştirildiyse ve etki alanı eşitleme (Azure AD Connect) etkinleştirilirse, daha büyük kullanıcı kümesini sayıyoruz. Etki alanı eşitleme etkin değilse, Azure AD ve Azure MFA sunucusu 'nda MFA için etkinleştirilen tüm kullanıcıların toplamını sayıyoruz. Faturalandırma, eşit olarak dağıtılır ve her gün ticari sisteme bildirilir.
 
    > [!NOTE]
-   > Faturalandırma örnek 3: Bugün Azure MFA hizmeti 3,105 iki aşamalı doğrulama isteklerini aldı. Azure aboneliğiniz için 310.5 kimlik doğrulama paketlerini faturalandırılır.
+   > Faturalandırma örneği 1: günümüzde MFA için etkinleştirilen 5.000 kullanıcı var. MFA sistemi bu sayıyı 31 ' i böler ve bu güne ait 161,29 kullanıcısı raporlar. Yarın, 15 daha fazla kullanıcı etkinleştirin, bu nedenle MFA sistemi bu güne ait 161,77 kullanıcıyı raporlar. Faturalandırma döngüsünün sonuna kadar, Azure aboneliğinize göre faturalandırılan toplam kullanıcı sayısı 5.000 ' e kadar bir çözüm ekler.
+   >
+   > Faturalandırma örneği 2: lisansı ve kullanıcıları olmayan kullanıcıların bir karışımına sahip olursunuz. bu nedenle, farkı sağlamak için Kullanıcı başına Azure MFA sağlayıcısına sahip olursunuz. Kiracınızda 4.500 Enterprise Mobility + Security lisans vardır ancak MFA için etkinleştirilen 5.000 kullanıcı. Azure aboneliğiniz, 500 Kullanıcı için faturalandırılır, eşit olarak dağıtılır ve 16,13 Kullanıcı olarak günlük raporlanır.
    >
 
-Lisansları olabilir, ancak tüketim tabanlı yapılandırma için yine de faturalandırılır mıyım dikkat edin önemlidir. Bir kimlik doğrulaması başına Azure MFA sağlayıcısını ayarlama, olanlar lisansına sahip kullanıcılar tarafından gerçekleştirilen her iki aşamalı doğrulama isteği için faturalandırılırsınız. Azure AD kiracınıza bağlı olmayan bir etki alanındaki bir kullanıcı başına Azure MFA sağlayıcısını ayarlama, kullanıcılarınızın Azure AD lisansına sahip olsa bile etkinleştirilen kullanıcı başına faturalandırılır.
+1. **Kimlik doğrulaması başına** -daha seyrek kimlik doğrulamasına ihtiyaç duyan büyük bir Kullanıcı grubu için iki aşamalı doğrulamayı etkinleştirmek isteyen kuruluşlar için. Faturalandırma, bu doğrulamanın başarılı veya reddedilmiş olmasına bakılmaksızın iki adımlı doğrulama isteklerinin sayısını temel alır. Bu Faturalandırma, Azure kullanım deyiminizde 10 kimlik doğrulama paketlerinde görünür ve günlük olarak bildirilir.
+
+   > [!NOTE]
+   > Faturalandırma örnek 3: bugün, Azure MFA hizmeti 3.105 2 adımlı doğrulama istekleri aldı. Azure aboneliğiniz 310,5 kimlik doğrulama paketi için faturalandırılır.
+   >
+
+Lisanslarınızın olabileceğini, ancak hala tüketim tabanlı yapılandırma için faturalandırılırsanız emin olmanız önemlidir. Kimlik doğrulama başına Azure MFA sağlayıcısı ayarlarsanız, lisanslarına sahip kullanıcılar tarafından yapılan istekler bile dahil olmak üzere her iki adımlı doğrulama isteği için faturalandırılırsınız. Azure AD kiracınızla bağlantılı olmayan bir etki alanında Kullanıcı başına Azure MFA sağlayıcısı ayarlarsanız, kullanıcılarınız Azure AD üzerinde lisanslarına sahip olsa bile etkin kullanıcı başına faturalandırılırsınız.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla fiyatlandırma ayrıntıları için bkz. [Azure MFA fiyatlandırması](https://azure.microsoft.com/pricing/details/multi-factor-authentication/).
-
-- Azure mfa'yı dağıtmak isteyip istemediğinizi seçin [bulutta veya şirket içi](concept-mfa-whichversion.md)
+- Daha fazla fiyatlandırma ayrıntısı için bkz. [Azure MFA fiyatlandırması](https://azure.microsoft.com/pricing/details/multi-factor-authentication/).

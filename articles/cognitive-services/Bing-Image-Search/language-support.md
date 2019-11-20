@@ -1,43 +1,43 @@
 ---
-title: Dil desteği - Bing resim arama API'si
+title: Dil desteği-Bing Resim Arama API'si
 titleSuffix: Azure Cognitive Services
-description: Hangi ülkeler/bölgeler ve diller Bing resim arama API'si tarafından desteklendiğini öğrenin.
+description: Bing Resim Arama API'si hangi ülkelerin/bölgelerin ve dillerin desteklendiğini öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-image-search
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/04/2019
 ms.author: aahi
-ms.openlocfilehash: 6f4c354c89fa00d5fc65c635f5f6315761be2f01
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ca3821b6088e45730334d1b0971e270b1d86dfce
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66384154"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68881915"
 ---
-# <a name="language-and-region-support-for-the-bing-image-search-api"></a>Bing resim arama API'si için dil ve bölge desteği
+# <a name="language-and-region-support-for-the-bing-image-search-api"></a>Bing Resim Arama API'si için dil ve bölge desteği
 
-Bing resim arama API'si, birden fazla üç düzine ülkeler/bölgeler, çoğu birden fazla dili destekler. Öncelikle bu ülke/bölge ilgi göre arama sonuçlarını daraltmak için bir sorgu ile bir ülke/bölge belirtme işlevi görür. Ayrıca, sonuçları Bing bağlantılarını içerebilir ve bu bağlantıları Bing kullanıcı deneyimini belirtilen ülke/bölge ve dil göre yerelleştirin.
+Bing Resim Arama API'si, birden fazla dilden çok sayıda ülkeyi/bölgeyi destekler. Bir ülkeyi/bölgeyi bir sorgu ile belirtmek, birincil olarak bu ülkenin/bölgedeki ilgi alanları temelinde arama sonuçlarını iyileştirmesini sağlar. Ayrıca, sonuçlar Bing bağlantıları içerebilir ve bu bağlantılar, belirtilen ülkeye/bölgelere veya dile göre Bing Kullanıcı deneyimini yerelleştiremeyebilir.
 
-Ülke/Bölge ve dil belirtmek için ayarlayın `mkt` (Pazar) sorgu parametresine bir koddan **pazarlara** aşağıdaki tabloda. Market, bir ülke/bölge ve dil belirtir. Kullanıcının tercih ettiği görmek, metni farklı bir dilde görüntülemek, ayarlamak `setLang` sorgu parametresi için uygun dil kodu.
+Ülke/bölge ve dil belirtmek için, `mkt` (Pazar) sorgu parametresini aşağıdaki **pazarlar** tablosundan bir koda ayarlayın. Pazar, hem ülke/bölge hem de dili belirtir. Kullanıcı farklı bir dilde görüntüleme metnini görmeyi tercih ediyorsa, sorgu parametresini uygun dil `setLang` koduna ayarlayın.
 
-Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametresi. Bir ülke/bölge belirtirseniz, kullanarak bir veya daha fazla dil kodunu da belirtmeniz gerekir `Accept-Language` HTTP üstbilgisi. Desteklenen diller, ülke/bölgeye göre değişiklik gösterir; pazarlara tablodaki her ülke/bölge için verilir.
+Alternatif olarak, ülke/bölge ' yi `cc` sorgu parametresini kullanarak belirtebilirsiniz. Bir ülke/bölge belirtirseniz, `Accept-Language` http üstbilgisini kullanarak bir veya daha fazla dil kodu da belirtmeniz gerekir. Desteklenen diller ülkeye/bölgeye göre farklılık gösterir. Bunlar, pazarlar tablosundaki her bir ülke/bölge için verilir.
 
 > [!NOTE]
-> Popüler resimler API'si şu anda aşağıdaki borsa destekler:
-> - en-US (İngilizce, Amerika Birleşik Devletleri)
-> - tr-CA (İngilizce, Kanada)
-> - tr-AU (İngilizce, Avustralya)
+> Popüler resimler API 'SI Şu anda yalnızca aşağıdaki pazarları desteklemektedir:
+> - en-US (Ingilizce, Birleşik Devletler)
+> - en-CA (Ingilizce, Kanada)
+> - En-AU (Ingilizce, Avustralya)
 > - zh-CN (Çince, Çin)
 
-## <a name="countriesregions"></a>Ülkeler/bölgeler
+## <a name="countriesregions"></a>Ülkeler/Bölgeler
 
 |Ülke/bölge|Kod|
 |-------|----|
 |Arjantin|AR|
-|Avustralya|AU|
+|Avustralya|Otomatik Olarak Güncelleştir|
 |Avusturya|AT|
 |Belçika|BE|
 |Brezilya|BR|
@@ -49,8 +49,8 @@ Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametr
 |Almanya|DE|
 |Hong Kong SAR|HK|
 |Hindistan|IN|
-|Endonezya|Kimlik|
-|İtalya|BT|
+|Endonezya|id|
+|İtalya|IT|
 |Japonya|JP|
 |Güney Kore|KR|
 |Malezya|MY|
@@ -74,40 +74,40 @@ Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametr
 |Amerika Birleşik Devletleri|ABD|
 
 
-## <a name="markets"></a>Pazarlar
+## <a name="markets"></a>Pazar
 
-|Ülke/bölge|Dil|Pazar kod|
+|Ülke/bölge|Dil|Pazar kodu|
 |-------|--------|-----------|
 |Arjantin|İspanyolca|es-AR|
 |Avustralya|Türkçe|tr-AU|
 |Avusturya|Almanca|de-AT|
-|Belçika|Felemenkçe|NL-olabilir|
-|Belçika|Fransızca|FR-olabilir|
+|Belçika|Felemenkçe|nl-|
+|Belçika|Fransızca|fr-of|
 |Brezilya|Portekizce|pt-BR|
 |Kanada|Türkçe|CA tr|
 |Kanada|Fransızca|fr-CA|
-|Şili|İspanyolca|ES-CL|
+|Şili|İspanyolca|es-CL|
 |Danimarka|Danca|v-DK|
 |Finlandiya|Fince|FI-FI|
 |Fransa|Fransızca|fr-FR|
 |Almanya|Almanca|de-DE|
 |Hong Kong SAR|Geleneksel Çince|zh-HK|
 |Hindistan|Türkçe|tr-giriş|
-|Endonezya|Türkçe|tr kimliği|
+|Endonezya|Türkçe|En-KIMLIĞI|
 |İtalya|İtalyanca|İt-IT|
 |Japonya|Japonca|ja-JP|
 |Güney Kore|Korece|ko-KR|
-|Malezya|Türkçe|MY tr|
+|Malezya|Türkçe|En-MY|
 |Meksika|İspanyolca|es-MX|
 |Hollanda|Felemenkçe|NL-NL|
 |Yeni Zelanda|Türkçe|tr NZ|
 |Çin|Çince|zh-CN|
 |Polonya|Lehçe|pl-PL|
 |Portekiz|Portekizce|pt-PT|
-|Filipinler|Türkçe|tr PH|
+|Filipinler|Türkçe|En-PH|
 |Rusya|Rusça|ru-RU|
 |Suudi Arabistan|Arapça|ar-SA|
-|Güney Afrika|Türkçe|tr-ZA|
+|Güney Afrika|Türkçe|En-ZA|
 |İspanya|İspanyolca|es-ES|
 |İsveç|İsveççe|sv-SE|
 |İsviçre|Fransızca|FR-CH|
@@ -116,7 +116,7 @@ Alternatif olarak, ülke/bölge kullanarak belirtebilirsiniz `cc` sorgu parametr
 |Türkiye|Türkçe|tr-TR|
 |Birleşik Krallık|Türkçe|en-GB|
 |Amerika Birleşik Devletleri|Türkçe|en-US|
-|Amerika Birleşik Devletleri|İspanyolca|ES-ABD|
+|Amerika Birleşik Devletleri|İspanyolca|es-US|
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bing haber arama uç noktaları hakkında daha fazla bilgi için bkz. [haber resim arama API'si v7 başvuru](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference).
+Bing Haber Arama uç noktaları hakkında daha fazla bilgi için bkz. [News resım arama API v7 Reference](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference).

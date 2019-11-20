@@ -1,113 +1,117 @@
 ---
-title: Tanılama ve sorun giderme Azure zaman serisi öngörüleri Önizleme | Microsoft Docs
-description: Azure zaman serisi öngörüleri önizlemesi ile ilgili sorunları giderme ve Tanılama hakkında bilgi edinin.
-author: ashannon7
+title: Önizleme ortamını tanılama ve sorunlarını giderme-Azure Time Series Insights | Microsoft Docs
+description: Azure Time Series Insights önizleme ortamını tanılamayı ve sorun gidermeyi öğrenin.
+author: deepakpalled
 ms.author: dpalled
-ms.workload: big-data
 manager: cshankar
+ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
-ms.date: 04/30/2019
+ms.date: 10/22/2019
 ms.custom: seodec18
-ms.openlocfilehash: d18f8f4808d5ca9dd7eca1561b1ee08c2073f5fa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: df8300e84309a874faa4b1c06891a4c5b549fce6
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66237537"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014773"
 ---
-# <a name="diagnose-and-troubleshoot"></a>Tanılama ve sorun giderme
+# <a name="diagnose-and-troubleshoot-a-preview-environment"></a>Önizleme ortamını tanılama ve sorunlarını giderme
 
-Bu makalede, Azure zaman serisi öngörüleri önizlemesi ortamınız ile çalışırken karşılaşabileceğiniz bazı yaygın sorunlar özetlenmektedir. Makalede ayrıca olası nedenler ve çözümler her sorun için açıklanır.
+Bu makalede, Azure Time Series Insights önizleme ortamınızla çalışırken karşılaşabileceğiniz bazı yaygın sorunlar özetlenmektedir. Makalede ayrıca, her bir sorun için olası nedenler ve çözümler açıklanmaktadır.
 
-## <a name="problem-i-cant-find-my-environment-in-the-preview-explorer"></a>Sorun: Önizleme Gezgini'nde ortamımın bulunamıyor
+## <a name="problem-i-cant-find-my-environment-in-the-preview-explorer"></a>Sorun: ortamı önizleme Gezgininde bulamıyorum
 
-Zaman serisi görüşleri ortamına erişim izni yoksa, bu sorun oluşabilir. Kullanıcıların kendi Time Series Insights ortamı görüntülemek için bir okuyucu düzeyinde erişim rolünü gerekir. Geçerli erişim düzeyleri doğrulamak ve ek erişim vermek için zaman serisi görüşleri kaynak veri erişimi ilkeleri bölümü ziyaret [Azure portalında](https://portal.azure.com/).
+Time Series Insights ortamına erişim izniniz yoksa bu sorun oluşabilir. Kullanıcıların Time Series Insights ortamını görüntülemesi için okuyucu düzeyinde bir erişim rolü olması gerekir. Geçerli erişim düzeylerini doğrulamak ve ek erişim vermek için [Azure portal](https://portal.azure.com/)Time Series Insights kaynağın **veri erişim ilkeleri** bölümüne gidin.
 
-  [![Ortam](media/v2-update-diagnose-and-troubleshoot/environment.png)](media/v2-update-diagnose-and-troubleshoot/environment.png#lightbox)
+  [![ortamı](media/v2-update-diagnose-and-troubleshoot/environment.png)](media/v2-update-diagnose-and-troubleshoot/environment.png#lightbox)
 
-## <a name="problem-no-data-is-seen-in-the-preview-explorer"></a>Sorun: Veri önizleme Gezgini'nde görülür.
+## <a name="problem-no-data-is-seen-in-the-preview-explorer"></a>Sorun: Önizleme Gezgininde hiçbir veri görülmedi
 
-Neden olmayan görebileceğiniz verilerinizi birkaç genel nedeni vardır [Azure zaman serisi öngörüleri önizlemesi Gezgini](https://insights.timeseries.azure.com/preview).
+[Azure Time Series Insights önizleme Gezgininde](https://insights.timeseries.azure.com/preview)verilerinizi görmemenizin birkaç yaygın nedeni vardır.
 
-- Olay kaynağınızı veri alma değil.
+- Olay kaynağınız veri almıyor olabilir.
 
-    Bir olay hub'ı veya IOT hub, olay kaynağı veri etiketleri ya da örnek aldığını doğrulayın. Doğrulamak için Azure portalında kaynağınıza Genel Bakış sayfasına gidin.
+    Bir olay hub 'ı veya IoT Hub 'ı olan olay kaynağınızın etiketinizden veya örneklerinizden veri aldığını doğrulayın. Doğrulamak için Azure portal kaynağınızın genel bakış sayfasına gidin.
 
-    [![ınsights Panosu](media/v2-update-diagnose-and-troubleshoot/dashboard-insights.png)](media/v2-update-diagnose-and-troubleshoot/dashboard-insights.png#lightbox)
+    [![panosu-Öngörüler](media/v2-update-diagnose-and-troubleshoot/dashboard-insights.png)](media/v2-update-diagnose-and-troubleshoot/dashboard-insights.png#lightbox)
 
-- Olay kaynağı verileriniz, JSON biçiminde değil.
+- Olay kaynak verileriniz JSON biçiminde değil.
 
-    Time Series Insights, yalnızca JSON verilerini destekler. JSON örnekleri için bkz [desteklenen JSON şekilleri](./how-to-shape-query-json.md).
+    Time Series Insights yalnızca JSON verilerini destekler. JSON örnekleri için bkz [desteklenen JSON şekilleri](./how-to-shape-query-json.md).
 
-- Olay kaynağı anahtarınızı gerekli izni yok.
+- Olay kaynak anahtarınıza gerekli bir izin eksik.
 
-  * Bir IOT hub için anahtar sağlamanız gereken **hizmetini bağlama** izni.
+  * IoT Hub 'ı için, **hizmet bağlantısı** iznine sahip anahtarı sağlamanız gerekir.
 
     [![Yapılandırma](media/v2-update-diagnose-and-troubleshoot/configuration.png)](media/v2-update-diagnose-and-troubleshoot/configuration.png#lightbox)
 
-  * Yukarıdaki görüntüde, iki ilke gösterildiği **iothubowner** ve **hizmet** sahip oldukları çalışma **hizmetine bağlanın** izni.
-  * Bir event hub için anahtar sağlamanız gereken **dinleme** izni.
+  * Önceki görüntüde gösterildiği gibi, her iki ilke de, **hizmet bağlantısı** izni olduğundan, her ikisi de **ıothubowner** ve **Service** çalışır.
+  * Bir olay hub 'ı için, **dinlemesi** iznine sahip anahtarı sağlamanız gerekir.
   
-    [![İzinleri](media/v2-update-diagnose-and-troubleshoot/permissions.png)](media/v2-update-diagnose-and-troubleshoot/permissions.png#lightbox)
+    [![Izinleri](media/v2-update-diagnose-and-troubleshoot/permissions.png)](media/v2-update-diagnose-and-troubleshoot/permissions.png#lightbox)
 
-  * Yukarıdaki görüntüde, her ikisi de gösterildiği gibi **okuma** ve **yönetme** ilkeleri, sahip oldukları çalışma **dinleme** izni.
+  * Önceki görüntüde gösterildiği gibi, **okuma** ve **yönetme** Ilkelerinin her ikisi de **dinleme** iznine sahip olduklarından çalışır.
 
-- Sağlanan tüketici grubunuz için Time Series Insights özel değildir.
+- Belirtilen tüketici grubunuz Time Series Insights için özel değil.
 
-    Bir IOT hub'ı veya olay hub'ı, kayıt sırasında verileri okumak için kullanılan bir tüketici grubu belirtin. Bu tüketici grubu paylaşmayın. Tüketici grubu paylaşılıyorsa, temel alınan olay hub'ı otomatik olarak bir okuyucu rastgele bağlantısını keser. Time Series Insights'ın okumak için bir benzersiz bir tüketici grubu sağlayın.
+    Bir IoT Hub 'ı veya Olay Hub 'ı kaydı sırasında, verileri okumak için kullanılan tüketici grubunu belirtirsiniz. Bu Tüketici grubu, ortam başına benzersiz olmalıdır. Tüketici grubu paylaşılmışsa, temeldeki Olay Hub 'ı, okuyuculardan birinin rastgele bağlantısını otomatik olarak keser. Okunacak Time Series Insights için benzersiz bir tüketici grubu sağlayın.
 
-- Zaman serisi kimliği özelliğinizi sağlama sırasında belirtilen yanlış, eksik veya null.
+- Sağlama sırasında belirtilen zaman serisi KIMLIĞI özelliği yanlış, eksik veya null.
 
-    Zaman serisi ID özelliği ortamı sağlama sırasında yanlış yapılandırılırsa, bu sorun ortaya çıkabilir. Daha fazla bilgi için [bir zaman serisi kimliği seçmek için en iyi yöntemler](./time-series-insights-update-how-to-id.md). Şu anda farklı bir zaman serisi kimliği kullanmak için bir zaman serisi görüşleri ortamı güncelleştirilemiyor.
+    Bu sorun, ortamı sağlama sırasında zaman serisi KIMLIĞI özelliği yanlış yapılandırılmışsa meydana gelebilir. Daha fazla bilgi için bkz. [bir zaman SERISI kimliği seçmek Için en iyi uygulamalar](./time-series-insights-update-how-to-id.md). Şu anda, mevcut bir Time Series Insights ortamını farklı bir zaman serisi KIMLIĞI kullanacak şekilde güncelleştiremezsiniz.
 
-## <a name="problem-some-data-shows-but-some-is-missing"></a>Sorun: bazı verileri gösterir, ancak bazı eksik
+## <a name="problem-some-data-shows-but-some-is-missing"></a>Sorun: bazı veriler gösteriliyor, ancak bazıları eksik
 
-Zaman serisi kimliği olmadan veri gönderiyor olabilir
+Zaman serisi KIMLIĞI olmadan veri gönderiyor olabilirsiniz.
 
-- Olayları zaman serisi Kimliği alanı yükü olmadan gönderdiğinizde bu sorun oluşabilir. Daha fazla bilgi için [desteklenen JSON şekilleri](./how-to-shape-query-json.md).
-
-- Ortamınızı kısıtladığı için bu sorun oluşabilir.
+- Bu sorun, yük içindeki zaman serisi KIMLIĞI alanı olmadan olayları gönderdiğinizde meydana gelebilir. Daha fazla bilgi için bkz. [desteklenen JSON şekilleri](./how-to-shape-query-json.md).
+- Bu sorun, ortamınız kısıtlanmakta olduğu için meydana gelebilir.
 
     > [!NOTE]
-    > Şu anda 6 MB/sn en yüksek alma oranını Time Series Insights'ı destekler.
+    > Time Series Insights, en fazla 6 Mbps alma oranını destekler.
 
-## <a name="problem-my-event-sources-timestamp-property-name-doesnt-work"></a>Sorun: benim olay kaynağının zaman damgası özellik adı çalışmıyor
+## <a name="problem-my-event-sources-timestamp-property-name-doesnt-work"></a>Sorun: olay kaynağınızın zaman damgası Özellik adı çalışmıyor
 
 Ad ve değer şu kurallara uyar emin olun:
 
-* Zaman damgası özellik adı büyük/küçük harfe duyarlıdır.
-* Bir JSON dizesi olarak olay kaynağınızı geldiği zaman damgası özellik değeri şu biçimdedir `yyyy-MM-ddTHH:mm:ss.FFFFFFFK`. Bu tür bir dize örneğidir `“2008-04-12T12:53Z”`.
+* Zaman damgası Özellik adı büyük/küçük harfe duyarlıdır.
+* Olay kaynağınızdan JSON dizesi olarak gelen zaman damgası özelliği değeri `yyyy-MM-ddTHH:mm:ss.FFFFFFFK`biçimindedir. Bu tür bir dize örneğidir `“2008-04-12T12:53Z”`.
 
-Zaman damgası özellik adı, yakalanan ve zaman serisi öngörüleri Önizleme Gezgini'ni kullanma düzgün bir şekilde çalışıyor olduğundan emin olmak için en kolay yolu. Zaman serisi öngörüleri Önizleme Gezgini içinde bir süre sonra size sağlanan zaman damgası özellik adı seçmek için grafik kullanın. Seçime sağ tıklayın ve seçin **olayları keşfet** seçeneği. İlk sütun başlığına, zaman damgası özellik adı ' dir. Olması gereken `($ts)` sözcüğünün yanındaki `Timestamp`, yerine:
+Zaman damgası özelliği adınızın yakalanıp düzgün şekilde çalışmasını sağlamanın en kolay yolu Time Series Insights önizleme Gezginini kullanmaktır. Time Series Insights önizleme Gezgini ' nde, zaman damgası özellik adını girdikten sonra bir süre seçmek için grafiği kullanın. Seçime sağ tıklayın ve **olayları keşfet** seçeneğini belirleyin. İlk sütun üst bilgisi, zaman damgası özellik adıdır. Bunun yerine `Timestamp`sözcüğünün yanında `($ts)` olmalıdır:
 
-* `(abc)`, gösteren Time Series Insights veri değerleri dize olarak okur.
-* Takvim simgesini gösteren Time Series Insights veri değerini datetime olarak okur.
-* `#`, belirten bir tamsayı olarak Time Series Insights veri değerlerini okur.
+* `(abc)`, Time Series Insights veri değerlerini dizeler olarak okuduğunu gösterir.
+* Time Series Insights, veri değerini DateTime olarak okuduğunu gösteren **Takvim** simgesi.
+* `#`, Time Series Insights veri değerlerini tamsayı olarak okuduğunu gösterir.
 
-Zaman damgası özelliği açıkça belirtilmezse, bir olayın IOT hub'ı veya olay hub'ı sıraya süresi varsayılan zaman damgası kullanılır.
+Zaman damgası özelliği açıkça belirtilmemişse, varsayılan zaman damgası olarak bir olayın IoT Hub 'ı veya Olay Hub 'ı sıraya alma zamanı kullanılır.
 
-## <a name="problem-i-cant-view-or-edit-my-time-series-model"></a>Sorun: Ben görüntüleyemez veya my zaman serisi modeli Düzenle
+## <a name="problem-i-cant-view-data-from-my-warm-store-in-the-explorer"></a>Sorun: gezgin 'de sıcak mağazamın verilerini görüntüleyemiyorum
 
-- Zaman serisi öngörüleri S1 veya S2 ortam erişiyor.
+- Kısa süre önce ısınma deponuzu sağlamış olabilirsiniz ve veriler hala içinde akar.
+- Isınma deponuzu silmiş olabilirsiniz ve bu durumda veri kaybı olur.
 
-   Zaman serisi modelleri yalnızca PAYG ortamlarında desteklenir. Zaman serisi öngörüleri Önizleme Gezgini'nden S1/S2 ortamınızı erişim hakkında daha fazla bilgi için bkz. [gezginde verileri görselleştirme](./time-series-insights-update-explorer.md).
+## <a name="problem-i-cant-view-or-edit-my-time-series-model"></a>Sorun: zaman serisi modelimi görüntüleyemiyorum veya düzenleyemiyorum
 
-   [![Erişim](media/v2-update-diagnose-and-troubleshoot/access.png)](media/v2-update-diagnose-and-troubleshoot/access.png#lightbox)
+- Time Series Insights S1 veya S2 ortamına erişim sağlayabilirsiniz.
 
-- Görüntüleme ve düzenleme model izni olmayabilir.
+   Zaman serisi modelleri yalnızca Kullandıkça Öde ortamlarında desteklenir. Time Series Insights önizleme Gezgini ' nden S1 veya S2 ortamınıza erişme hakkında daha fazla bilgi için bkz. [Explorer 'da verileri görselleştirme](./time-series-insights-update-explorer.md).
 
-   Kullanıcıların, düzenlemek ve görüntülemek, zaman serisi modeli için katkıda bulunan düzeyinde erişim gerekir. Geçerli erişim düzeyleri doğrulamak ve ek erişim vermek için Azure portalında Time Series Insights kaynağınızda veri erişimi ilkeleri bölümünü ziyaret edin.
+   [![erişim](media/v2-update-diagnose-and-troubleshoot/access.png)](media/v2-update-diagnose-and-troubleshoot/access.png#lightbox)
 
-## <a name="problem-all-my-instances-in-the-preview-explorer-lack-a-parent"></a>Sorun: tüm Örneklerim Önizleme Gezgini'nde bir üst öğesi eksik.
+- Modeli görüntüleme ve düzenleme izinlerine sahip olmayabilirsiniz.
 
-Ortamınızı tanımlı bir zaman serisi modeli hiyerarşi yok, bu sorun ortaya çıkabilir. Daha fazla bilgi için [çalışma ile zaman serisi modelleri](./time-series-insights-update-how-to-tsm.md).
+   Kullanıcıların zaman serisi modelini düzenlemek ve görüntülemek için katkıda bulunan düzeyinde erişimi olması gerekir. Geçerli erişim düzeylerini doğrulamak ve ek erişim vermek için, Azure portal Time Series Insights kaynağınızın **veri erişim ilkeleri** bölümüne gidin.
 
-  [![Zaman serisi modelleri](media/v2-update-diagnose-and-troubleshoot/tsm.png)](media/v2-update-diagnose-and-troubleshoot/tsm.png#lightbox)
+## <a name="problem-all-my-instances-in-the-preview-explorer-lack-a-parent"></a>Sorun: Önizleme Gezgini 'ndeki tüm örneklerim üst öğeye sahip değil
+
+Ortamınızda tanımlı bir zaman serisi model hiyerarşisi yoksa bu sorun oluşabilir. Daha fazla bilgi için bkz. [zaman serisi modelleriyle çalışma](./time-series-insights-update-how-to-tsm.md).
+
+  [![zaman serisi modelleri](media/v2-update-diagnose-and-troubleshoot/tsm.png)](media/v2-update-diagnose-and-troubleshoot/tsm.png#lightbox)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Okuma [çalışma ile zaman serisi modelleri](./time-series-insights-update-how-to-tsm.md).
-
-- Hakkında bilgi edinin [desteklenen JSON şekilleri](./how-to-shape-query-json.md).
+- [Zaman serisi modelleriyle çalışmayı](./time-series-insights-update-how-to-tsm.md)okuyun.
+- [Desteklenen JSON şekilleri](./how-to-shape-query-json.md)hakkında bilgi edinin.
+- Azure Time Series Insights önizlemede [planlama ve limitleri](./time-series-insights-update-plan.md) gözden geçirin.

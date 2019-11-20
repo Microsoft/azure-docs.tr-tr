@@ -1,189 +1,222 @@
 ---
 title: Veri bilimi projeleri - Team Data Science Process, Çevik Geliştirme
-description: Geliştiriciler bir sistematik, sürüm denetimli bir veri bilimi proje nasıl yürütebilir ve işbirliğine dayalı bir şekilde Team Data Science Process kullanarak bir proje ekibi içinde.
+description: Ekip veri bilimi Işlemini kullanarak bir proje ekibinin içindeki bir sistematik, sürüm denetimli ve işbirliğine dayalı bir şekilde bir veri bilimi projesi yürütün.
 author: marktab
 manager: cgronlun
 editor: cgronlun
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 11/28/2017
+ms.date: 09/05/2019
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: adf713fc3f875168f99b302b0a9affef88e8414f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 09c5962e62077fbecc9b327320d0bb5b88416ffa
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60327906"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71260677"
 ---
 # <a name="agile-development-of-data-science-projects"></a>Veri bilimi projeleri, Çevik Geliştirme
 
-Bu belgede, nasıl geliştiricilerin veri bilimi proje bir sistematik olarak, sürüm denetimli ve işbirliğine dayalı bir şekilde bir proje ekibi içinde kullanarak yürütebilirsiniz açıklanmaktadır [Team Data Science Process](overview.md) (TDSP). TDSP, etkinlikleri, bulut tabanlı ve Tahmine dayalı analiz çözümleri verimli bir şekilde yürütmek için yapılandırılmış bir dizi sağlayan Microsoft tarafından geliştirilen bir çerçevedir. Personel roller ve bir veri bilimi takım bu işlemle ilgili hale getirerek işlenen ilişkilendirilen görevlerinin ana hat için bkz. [Team Data Science Process rolleri ve görevleri](roles-tasks.md). 
+Bu belgede, nasıl geliştiricilerin veri bilimi proje bir sistematik olarak, sürüm denetimli ve işbirliğine dayalı bir şekilde bir proje ekibi içinde kullanarak yürütebilirsiniz açıklanmaktadır [Team Data Science Process](overview.md) (TDSP). TDSP, bulut tabanlı, tahmine dayalı analiz çözümlerini verimli bir şekilde yürütmek için yapılandırılmış bir etkinlik dizisi sağlayan Microsoft tarafından geliştirilen bir çerçevedir. TDSP üzerinde standartlaştırarak bir veri bilimi ekibi tarafından işlenen rol ve görevlerin bir özeti için bkz. [Team Data Science işlem rolleri ve görevleri](roles-tasks.md). 
 
 Bu makale için yönergeler içerir: 
 
-1. yapmak **sprint planlamayı** bir projesinde iş öğeleri için.<br> Sprint planlama ile alışkın değilseniz, ayrıntıları ve genel bilgileri bulabilirsiniz [burada](https://en.wikipedia.org/wiki/Sprint_(software_development) "burada"). 
-2. **İş öğelerini eklemek** sprint için. 
+- Bir projede yer alan iş öğeleri için *Sprint planlaması* yapın.
+- Sprint 'lere *iş öğeleri* ekleyin.
+- Özel olarak TDSP yaşam döngüsü aşamaları ile hizalanan *çevik türetilmiş bir iş öğesi şablonu* oluşturun ve kullanın.
+
+Aşağıdaki yönergeler, Azure DevOps 'da Azure Boards ve Azure Repos kullanarak bir TDSP ekip ortamı ayarlamak için gereken adımları özetler. Yönergeler, Microsoft 'ta TDSP 'nin uygulanması nedeniyle Azure DevOps kullanır. Grubunuz farklı bir kod barındırma platformu kullanıyorsa, ekip sağlama görevleri genellikle değişmez, ancak görevleri tamamlamaya yönelik yol farklıdır. Örneğin, bir iş öğesini git dalına bağlamak, Azure Repos ile olduğu için GitHub ile aynı olmayabilir.
+
+Aşağıdaki şekilde, bir veri bilimi projesi için tipik bir sprint planlama, kodlama ve kaynak denetimi iş akışı gösterilmektedir:
+
+![Team Data Science Process](./media/agile-development/1-project-execute.png)
+
+##  <a name='Terminology-1'></a>İş öğesi türleri
+
+TDSP sprint planlama çerçevesinde, sık kullanılan dört *iş öğesi* türü vardır: *Özellikler*, *Kullanıcı hikayeleri*, *Görevler*ve *hatalar*. Tüm iş öğeleri için biriktirme listesi, git deposu düzeyi değil, proje düzeyidir. 
+
+İşte iş öğesi türleri için tanımlar:
+
+- **Özellik**: Bir özellik proje katılımını karşılık gelir. Bir istemciye sahip farklı görevlendirmeler farklı özelliklerdir ve projenin farklı aşamalarını farklı özellikler olarak düşünmek en iyisidir. Özelliklerinizi adlandırmak için  *\<clientname >\<-EngagementName >* gibi bir şema seçerseniz, proje bağlamını kolayca tanıyabilir ve adların kendilerini kolayca ayırt edebilirsiniz.
+  
+- **Kullanıcı hikayesi**: Kullanıcı hikayeleri, bir özelliği uçtan uca tamamlayabilmeniz için gereken iş öğeleridir. Kullanıcı hikayeleri örnekleri şunları içerir:
+  - Verileri alma 
+  - Verileri inceleme 
+  - Özellik Oluştur
+  - Modelleri oluşturma
+  - Modelleri kullanıma hazır hale getirin 
+  - Modelleri yeniden eğitme
+  
+- **Görev**: Görevler, belirli bir kullanıcı hikayesini tamamlamaya yönelik yapılması gereken atanabilir iş öğeleridir. Örneğin, Kullanıcı hikayesinden *veri al* görevleri şu şekilde olabilir:
+  - SQL Server kimlik bilgilerini al
+  - SQL veri ambarı 'na veri yükleme
+  
+- **Hata**: Hatalar, var olan koddaki veya bir görevi tamamlaması için düzeltilmesi gereken belgelerdeki sorunlardır. Hatalar eksik iş öğelerinden kaynaklanıyorsa, bu kişiler Kullanıcı hikayeleri veya görevleri için de bu Işlemleri yapabilir. 
+
+Veri bilimcileri, özellikleri, kullanıcı hikayelerini ve Işleri TDSP yaşam döngüsü aşamaları ve alt aşamalarıyla değiştiren çevik bir şablonu kullanarak daha rahat bir fikir verebilir. TDSP yaşam döngüsü aşamalarıyla özel olarak hizalanan çevik türetilmiş bir şablon oluşturmak için bkz. [çevık TDSP iş şablonu kullanma](#set-up-agile-dsp-6).
 
 > [!NOTE]
-> Azure DevOps Hizmetleri'ni kullanarak TDSP takım ortamını ayarlamak için gerekli olan adımları aşağıdaki yönergeler kümesini özetlenmiştir. Bunlar, Microsoft'ta TDSP uygulama olduğundan, Azure DevOps hizmetleriyle bu görevleri gerçekleştirmek üzere nasıl belirtin.  Azure DevOps Hizmetleri, öğeleri (3) ve (4) önceki listede kullanmayı tercih ederseniz doğal olarak aldığınız avantajları var. Grubunuz için başka bir kod barındırma platformu kullanılıyorsa, ekip lideri tarafından genellikle tamamlanması gereken görevler değiştirmeyin. Ancak bu görevleri tamamlamak için yol farklı zordur. Örneğin, öğe bölümünde altı, **Git dal ile bir çalışma öğesiyle bağlantılandırmak**, Azure DevOps hizmetlerinde olduğu gibi kolay olmayabilir.
->
->
-
-Tipik bir sprint planlama, kodlama aşağıdaki şekilde gösterilmiştir ve uygulama bir veri bilimi proje kaynak denetimi iş akışı söz konusu:
-
-![1](./media/agile-development/1-project-execute.png)
-
-
-##  1. <a name='Terminology-1'></a>Terminolojisi 
-
-TDSP sprint planlama framework, sık kullanılan dört tür **iş öğelerini**: **Özellik**, **kullanıcı hikayesi**, **görev**, ve **hata**. Tüm iş öğeleri için tek bir biriktirme listesi her proje tutar. Git deposu düzeyinde bir projesi altındaki hiçbir biriktirme listesi yoktur. Tanımlarını şunlardır:
-
-- **Özellik**: Bir özellik için bir proje engagement karşılık gelir. İstemcisi ile farklı angajmanları farklı özellikleri olarak kabul edilir. Benzer şekilde, farklı bir proje aşamasının farklı özelliklere sahip bir istemci dikkate alınması gereken en iyisidir. Bir şema gibi seçerseniz ***ClientName EngagementName*** özelliklerinizi adlandırmak için ardından, kolayca adları proje/engagement'tan bağlamında tanıyabilir.
-- **Hikaye**: Hikayeler bir özellik (Proje) için uçtan uca tamamlamak için gereken farklı iş öğelerdir. Hikayeler örnekleri şunlardır:
-    - Veri alma 
-    - Verileri Araştırma 
-    - Özellikleri oluşturma
-    - Yapı modelleri
-    - Faaliyete geçirmeye yönelik model 
-    - Modelleri yeniden eğitme
-- **Görev**: Atanabilir kod veya belge iş öğeleri ya da belirli bir hikayeyi tamamlamak üzere gerçekleştirilmesi gereken diğer etkinlikleri görevlerdir. Örneğin, öyküyü görevleri *veri alma* olabilir:
-    -  SQL Server'ın kimlik bilgilerini alma 
-    -  SQL Data Warehouse'a veri yükleme. 
-- **Hata**: Hataları, genellikle bir görevi tamamlanırken yapılan bir var olan kod veya belge için gerekli düzeltmeleri için bakın. Aşamalar veya görevleri sırasıyla eksik hataya neden oluyorsa, bir hikayesi veya bir görev olarak ilerletebilirler. 
-
-> [!NOTE]
-> Kavramları, özellikleri, hikayeleri, görevleri ve yazılım kodu Yönetimi (SCM) veri bilimi kullanılacak hatalardan ödünç. Bunlar, geleneksel SCM tanımlarından biraz farklı olabilir.
->
->
-
-> [!NOTE]
-> Veri bilimcileri, özellikle TDSP yaşam döngüsünün aşamaları ile eşleşen bir Çevik şablonu kullanarak daha iyi çalışır. Göz önünde bir Çevik türetilmiş sprint planlama şablonu, Epic'ler, hikayeleri vb. TDSP yaşam döngüsünün aşamaları veya substages burada değiştirilir oluşturuldu. Bir Çevik şablonu oluşturma hakkında yönergeler için bkz: [Visual Studio Online'da Çevik data science Process'i ayarlama](agile-development.md#set-up-agile-dsp-6).
->
->
-
-## 2. <a name='SprintPlanning-2'></a>Sprint planlama 
-
-Sprint planlama, proje önceliği ve kaynak planlama ve ayırma için kullanışlıdır. Birçok veri uzmanları, her biri tamamlanması aylar sürebilir, birden fazla projeyle katılan. Projeleri, genellikle farklı oşluklar devam edin. Azure DevOps Services'ta kolayca oluşturabilir, yönetebilir ve projenizde iş öğelerini izlemek ve sprint projelerinizi beklendiği gibi ileri taşıdığınızdan emin olmak planlama yapın. 
-
-İzleyin [bu bağlantıyı](https://www.visualstudio.com/en-us/docs/work/scrum/sprint-planning) sprint planlama Azure DevOps Hizmetleri'nde adım adım yönergeler için. 
-
-
-## 3. <a name='AddFeature-3'></a>Özellik Ekle  
-
-İçin takım projesi deponuzu altında bir projeye oluşturulduktan sonra Git **genel bakış** sayfasında ve tıklayın **çalışmasını yönetmesi**.
-
-![2](./media/agile-development/2-sprint-team-overview.png)
-
-Biriktirme listesinde bir özellik eklemek için tıklatın **biriktirme listelerini** --> **özellikleri** --> **yeni**, özellik türü **başlık**(genelde projenizin adına) ve ardından **Ekle** .
-
-![3](./media/agile-development/3-sprint-team-add-work.png)
-
-Oluşturduğunuz özellik çift tıklayın. Bağlantısındaki açıklamalara doldurun, bu özellik için takım üyeleri atamak ve planlama parametreleri için bu özelliği ayarlayın. 
-
-Bu özellik Proje depoya da bağlayabilirsiniz. Tıklayın **Ekle bağlantısını** altında **geliştirme** bölümü. Özellik düzenleme tamamladıktan sonra tıklayın **Kaydet ve Kapat** çıkmak için.
-
-
-## 4. <a name='AddStoryunderfeature-4'></a>Hikaye altında özelliği Ekle 
-
-Özelliği altında (özellik) proje işleminin tamamlanması için gereken önemli adımlar açıklamak için hikayeleri eklenebilir. Yeni bir hikaye eklemek için tıklatın **+** sol tarafındaki özellik biriktirme listesi görünümü'nde oturum açın.  
-
-![4](./media/agile-development/4-sprint-add-story.png)
-
-Yazının durumu, açıklama, yorumlar, planlama ve açılır pencerede öncelik gibi ayrıntılarını düzenleyebilirsiniz.
-
-![5](./media/agile-development/5-sprint-edit-story.png)
-
-Bu hikaye tıklayarak mevcut bir depoya bağlayabilirsiniz **+ Ekle bağlantısını** altında **geliştirme**. 
-
-![6](./media/agile-development/6-sprint-link-existing-branch.png)
-
-
-## 5. <a name='AddTaskunderstory-5'></a>Bir hikaye için bir görev ekleyin 
-
-Her hikayesini tamamlamak için gereken belirli ayrıntılı adımlar görevlerdir. Hikayeyi çok konunun tüm görevler tamamlandıktan sonra tamamlanmalıdır. 
-
-Bir hikaye için bir görev eklemek için tıklatın **+** oturum select hikayesi öğesinin yanındaki **görev**ve ardından bu görevin açılır pencerede ayrıntılı bilgileri doldurun.
-
-![7](./media/agile-development/7-sprint-add-task.png)
-
-Özellikler, hikayeler ve görevler oluşturduktan sonra bunları görüntüleyebilirsiniz **biriktirme listesi** veya **Panosu** durumlarını izlemek için görünümler.
-
-![8](./media/agile-development/8-sprint-backlog-view.png)
-
-![9](./media/agile-development/9-link-to-a-new-branch.png)
-
-
-## 6. <a name='set-up-agile-dsp-6'></a> Bir Visual Studio Online'da Çevik TDSP iş şablonu ayarlama
-
-Bu makalede, TDSP veri bilimi yaşam döngüsünün aşamaları kullanan ve Visual Studio Online (vso) ile çalışma öğelerini izleyen bir Çevik veri bilimi işlem şablonu ayarlama açıklanmaktadır. Veri bilimi özgü Çevik ayarlama örneği kılavuzda aşağıdaki adımları işlem şablonuna *AgileDataScienceProcess* ve şablonu temel alan veri bilimi iş öğelerini oluşturma işlemi gösterilmektedir.
-
-### <a name="agile-data-science-process-template-setup"></a>Çevik veri bilimi işlem şablonu Kurulumu
-
-1. Sunucu giriş sayfasına gidin **yapılandırma** -> **işlem**.
-
-    ![10](./media/agile-development/10-settings.png) 
-
-2. Gidin **tüm işlemler** -> **işlemleri**altında **Çevik** tıklayın **devralınan işlem oluştur**. Ardından, işlem adı "AgileDataScienceProcess" put ve tıklayın **işlem oluşturma**.
-
-    ![11](./media/agile-development/11-agileds.png)
-
-3. Altında **AgileDataScienceProcess** -> **iş öğesi türleri** sekmesinde, devre dışı **Epic**, **özellik**,  **Kullanıcı hikayesi**, ve **görev** iş öğesi türleri tarafından **yapılandırma -> devre dışı bırak**
-
-    ![12](./media/agile-development/12-disable.png)
-
-4. Gidin **AgileDataScienceProcess** -> **biriktirme listesi düzeyleri** sekmesi. Tıklayarak "TDSP projelerine" "Epic" Yeniden Adlandır **yapılandırma** -> **düzenleme/yeniden adlandırma**. Aynı iletişim kutusuna tıklayın **+ yeni iş öğesi türü** "Veri bilimi proje" de ve değerini ayarlama **varsayılan iş öğesi türü** "TDSP projesi" 
-
-    ![13](./media/agile-development/13-rename.png)  
-
-5. Benzer şekilde, biriktirme listesi adı "Özellikler" "TDSP aşamalara" değiştirip ekleyin **yeni iş öğesi türünü**:
-
-    - İşin Gereksinimlerini Anlama
-    - Veri alma
-    - Modelleme
-    - Dağıtım
-
-6. "Kullanıcı hikayesi", "TDSP yeni oluşturulan"TDSP Substage"türüne ayarlanır Substages" varsayılan iş öğesi türü ile yeniden adlandırın.
-
-7. "Yeni iş öğesi türü"TDSP görevi"oluşturulan görevlere" ayarlayın 
-
-8. Bu adımlardan sonra kapsam düzeyleri şu şekilde görünmelidir:
-
-    ![14](./media/agile-development/14-template.png)  
-
- 
-### <a name="create-data-science-work-items"></a>Veri bilimi iş öğeleri oluşturma
-
-Veri bilimi işlem şablonu oluşturulduktan sonra oluşturun ve TDSP yaşam döngüsü için karşılık gelen veri bilimi iş öğelerinizi izleyin.
-
-1. Yeni bir proje oluşturduğunuzda, "Agile\AgileDataScienceProcess" olarak seçin **iş öğesi işlemi**:
-
-    ![15](./media/agile-development/15-newproject.png)
-
-2. Yeni oluşturulan projeye gidin ve tıklayarak **iş** -> **biriktirme listelerini**.
-
-3. Tıklayarak "TDSP projeleri" görünür hale getirin **team ayarlarını yapılandır** ve "TDSP projeleri" denetleyin; ardından kaydedin.
-
-    ![16](./media/agile-development/16-enabledsprojects.png)
-
-4. Artık veri bilimi özgü iş öğelerini oluşturmaya başlayabilirsiniz.
-
-    ![17](./media/agile-development/17-dsworkitems.png)
-
-5. Veri bilimi proje çalışma öğeleri nasıl görünmelidir örneği aşağıda verilmiştir:
-
-    ![18](./media/agile-development/18-workitems.png)
+> TDSP, yazılım kod yönetimi 'nden (SCM) özellikler, Kullanıcı hikayeleri, görevler ve hatalar kavramlarını sıralar. TDSP kavramları, geleneksel SCM tanımlarından biraz farklı görünebilir.
+
+## <a name='SprintPlanning-2'></a>Sprint planlaması
+
+Birçok veri bilimcileri, tamamlanması ve farklı bir şekilde ilerlemek için ay sürebilen birden çok projeyle sahip olur. Sprint planlama, proje önceliği ve kaynak planlama ve ayırma için kullanışlıdır. Azure Boards, projeleriniz için iş öğelerini kolayca oluşturabilir, yönetebilir ve izleyebilir ve projelerin beklendiği gibi ilerlemelerini sağlamak için Sprint planlaması gerçekleştirebilirsiniz.
+
+Sprint planlama hakkında daha fazla bilgi için bkz. [Scrum Sprint](https://en.wikipedia.org/wiki/Scrum_(software_development)#Sprint)'leri. 
+
+Azure Boards sprint planlama hakkında daha fazla bilgi için bkz. [bir sprint 'e biriktirme listesi öğeleri atama](/azure/devops/boards/sprints/assign-work-sprint). 
+
+## <a name='AddFeature-3'></a>Biriktirme listesine özellik ekleme 
+
+Projeniz ve proje kod deponuz oluşturulduktan sonra, projenize yönelik işi göstermek için biriktirme listesine bir özellik ekleyebilirsiniz.
+
+1. Proje sayfanızda, sol gezinti bölmesinde **panolar** > **biriktirme** listeleri ' ni seçin. 
+   
+1. **Kapsam** sekmesinde, üstteki çubukta iş öğesi türü **hikayeler**Ise, açılan ve **Özellikler**' i seçin. Ardından **Yeni Iş öğesi** ' ni seçin.
+   
+   ![Yeni Iş Öğesi Seç](./media/agile-development/2-sprint-team-overview.png)
+   
+1. Özellik için genellikle proje adınız olarak bir başlık girin ve ardından **üste Ekle**' yi seçin. 
+   
+   ![Bir başlık girin ve en üste Ekle ' yi seçin](./media/agile-development/3-sprint-team-add-work.png)
+   
+1. **Kapsam** listesinden yeni özelliği seçin ve açın. Açıklamayı girin, bir takım üyesi atayın ve planlama parametrelerini ayarlayın. 
+   
+   Ayrıca, **geliştirme** bölümünün altında **bağlantı ekle** ' ye tıklayarak özelliği projenin Azure Repos kod deposuna bağlayabilirsiniz. 
+   
+   Özelliği düzenledikten sonra **kaydet & kapat**' ı seçin.
+   
+   ![Özelliği Düzenle ve Kaydet & Kapat 'ı seçin](./media/agile-development/3a-add-link-repo.png)
+
+## <a name='AddStoryunderfeature-4'></a>Özelliğe bir kullanıcı hikayesi ekleyin 
+
+Özelliği altında, projeyi bitirebilmeniz için gereken önemli adımları anlatan Kullanıcı hikayeleri ekleyebilirsiniz. 
+
+Bir özelliğe yeni bir kullanıcı hikayesi eklemek için:
+
+1. **Kapsam** sekmesinde, özelliğin solundaki ' ı **+** seçin. 
+   
+   ![Özelliğin altına yeni bir kullanıcı hikayesi ekleyin](./media/agile-development/4-sprint-add-story.png)
+   
+1. Kullanıcı hikayesine bir başlık verin ve atama, durum, açıklama, Yorumlar, planlama ve öncelik gibi ayrıntıları düzenleyin. 
+   
+   Ayrıca, **geliştirme** bölümünün altında **bağlantı ekle** ' yi seçerek, Kullanıcı hikayesini projenin Azure Repos kod deposunun bir dalına bağlayabilirsiniz. İş öğesini bağlamak istediğiniz depoyu ve dalı seçin ve ardından **Tamam**' ı seçin.
+   
+   ![Bağlantı ekle](./media/agile-development/5-sprint-edit-story.png)
+   
+1. Kullanıcı hikayesini düzenledikten sonra **kaydet & kapat**' ı seçin. 
+
+## <a name='AddTaskunderstory-5'></a>Kullanıcı hikayesine görev ekleme 
+
+Görevler, her kullanıcı hikayesini tamamlaması için gereken belirli ayrıntılı adımlardır. Kullanıcı hikayesinin tüm görevleri tamamlandıktan sonra, Kullanıcı hikayesi de tamamlanmalıdır. 
+
+Bir kullanıcı hikayesine bir görev eklemek için, Kullanıcı hikayesi öğesinin **+** yanındaki ' ı seçin ve **görev**' i seçin. Başlığı ve görevdeki diğer bilgileri girin.
+
+![Kullanıcı hikayesine görev ekleme](./media/agile-development/7-sprint-add-task.png)
+
+Özellikler, Kullanıcı hikayeleri ve görevler oluşturduktan sonra, durumlarını izlemek için bunları **biriktirme** listeleri veya **panolar** görünümlerinde görüntüleyebilirsiniz.
+
+![Biriktirme listeleri görünümü](./media/agile-development/8-sprint-backlog-view.png)
+
+![Panolar görünümü](./media/agile-development/8a-sprint-board-view.png)
+
+## <a name='set-up-agile-dsp-6'></a>Çevik TDSP iş şablonu kullanma
+
+Veri bilimcileri, özellikleri, kullanıcı hikayelerini ve Işleri TDSP yaşam döngüsü aşamaları ve alt aşamalarıyla değiştiren çevik bir şablonu kullanarak daha rahat bir fikir verebilir. Azure Boards, iş öğeleri oluşturmak ve izlemek için TDSP yaşam döngüsü aşamalarını kullanan çevik türetilmiş bir şablon oluşturabilirsiniz. Aşağıdaki adımlarda, veri bilimi özgü çevik işlem şablonu ayarlama ve şablona göre veri bilimi iş öğeleri oluşturma işlemleri gösterilmektedir.
+
+### <a name="set-up-an-agile-data-science-process-template"></a>Çevik bir veri bilimi Işlem şablonu ayarlama
+
+1. Azure DevOps kuruluş ana sayfasından sol gezinti bölmesinde **kuruluş ayarları** ' nı seçin. 
+   
+1. **Kuruluş ayarları** sol gezinti bölmesinde, **panolar**altında **işlem**' i seçin. 
+   
+1. **Tüm işlemler** bölmesinde, **çevik**' ın yanındaki **...** öğesini seçin ve ardından **devralınan işlem oluştur**' u seçin.
+   
+   ![Çevik 'ten devralınan işlem oluşturma](./media/agile-development/10-settings.png) 
+   
+1. **Çevik 'dan devralınan Işlem oluştur** iletişim kutusunda, *Agiledatabilimenceprocess*adlı adı girin ve **işlem oluştur**' u seçin.
+   
+   ![Agiledatabilimenceprocess işlemi oluşturma](./media/agile-development/11-agileds.png)
+   
+1. **Tüm işlemler**' de, yeni **Agiledatabilimenceprocess**' i seçin. 
+   
+1. **İş öğesi türleri** sekmesinde, her bir öğenin yanındaki **...** ' i seçip **devre dışı bırak**' ı seçerek **Epic**, **özelliği**, **Kullanıcı hikayesini**ve **görevi** devre dışı bırakın. 
+   
+   ![İş öğesi türlerini devre dışı bırak](./media/agile-development/12-disable.png)
+   
+1. **Tüm Işlemlerde** **kapsam düzeyleri** sekmesini seçin. **Portföy biriktirme listeleri**altında **Epic (devre dışı)** seçeneğinin yanındaki **...** ' ı seçin ve ardından **Düzenle/yeniden adlandır**' ı seçin. 
+   
+1. **Kapsam düzeyini Düzenle** iletişim kutusunda:
+   1. **Ad**' ın altında, **Epic** ile *TDSP projelerini*değiştirin. 
+   1. **Bu kapsam düzeyindeki iş öğesi türleri**altında **yeni iş öğesi türü**' nü seçin, *TDSP projesi*girin ve **Ekle**' yi seçin. 
+   1. **Varsayılan iş öğesi türü**altında, açılır ve **TDSP projesi**' ni seçin. 
+   1. **Kaydet**’i seçin.
+   
+   ![Portföy biriktirme listesi düzeyini ayarla](./media/agile-development/13-rename.png)  
+   
+1. **Özellikleri** *TDSP aşamalarına*yeniden adlandırmak için aynı adımları izleyin ve aşağıdaki yeni iş öğesi türlerini ekleyin:
+   
+   - *İşin gereksinimlerini anlama*
+   - *Veri alımı*
+   - *Modelleme*
+   - *Dağıtım*
+   
+1. **Gereksinim biriktirme listesi**altında, **hikayeleri** *TDSP alt aşamalarına*yeniden adlandırın, yeni Iş öğesi türü *TDSP alt aşamasını*ekleyin ve varsayılan iş öğesi türünü **TDSP alt aşamasına**ayarlayın.
+   
+1. **Yineleme biriktirme listesi**altında, yeni bir iş öğesi türü *TDSP görevi*ekleyin ve varsayılan iş öğesi türü olarak ayarlayın. 
+   
+Adımları tamamladıktan sonra, kapsam düzeyleri şöyle görünmelidir:
+   
+ ![TDSP şablonu kapsam düzeyleri](./media/agile-development/14-template.png)  
+
+### <a name="create-agile-data-science-process-work-items"></a>Çevik veri bilimi oluşturma iş öğelerini Işleme
+
+TDSP projelerini oluşturmak ve TDSP yaşam döngüsü aşamasına karşılık gelen iş öğelerini izlemek için veri bilimi işlem şablonunu kullanabilirsiniz.
+
+1. Azure DevOps kuruluş ana sayfasından **Yeni proje**' yi seçin. 
+   
+1. **Yeni proje oluştur** iletişim kutusunda projenize bir ad verin ve **Gelişmiş**' i seçin. 
+   
+1. **Çalışma öğesi işlemi**altında, açılır ve **Agiledatabilimenceprocess**' i seçin ve ardından **Oluştur**' u seçin.
+   
+   ![TDSP projesi oluşturma](./media/agile-development/15-newproject.png)
+   
+1. Yeni oluşturulan projede, sol gezinti bölmesinde **panolar** > **biriktirme** listeleri ' ni seçin.
+   
+1. TDSP projelerini görünür yapmak için **Ekip ayarlarını yapılandır** simgesini seçin. **Ayarlar** ekranında, **TDSP projeleri** onay kutusunu seçin ve ardından **Kaydet ve Kapat**' ı seçin.
+   
+   ![TDSP projelerini seç onay kutusu](./media/agile-development/16-enabledsprojects1.png)
+   
+1. Veri bilimi 'e özgü bir TDSP projesi oluşturmak için üstteki çubukta **TDSP projeleri** ' ni seçin ve ardından **yeni iş öğesi**' ni seçin. 
+   
+1. Açılan pencerede TDSP proje iş öğesine bir ad verin ve **en üste Ekle**' yi seçin.
+   
+   ![Veri bilimi projesi iş öğesi oluştur](./media/agile-development/17-dsworkitems0.png)
+   
+1. TDSP projesinin altına bir iş öğesi eklemek için projenin **+** yanındaki öğesini seçin ve ardından oluşturulacak iş öğesi türünü seçin. 
+   
+   ![Veri bilimi iş öğesi türünü seçin](./media/agile-development/17-dsworkitems1.png)
+   
+1. Yeni iş öğesindeki ayrıntıları doldurup **kaydet & kapat**' ı seçin.
+   
+1. Yeni TDSP aşamaları **+** , alt aşamalar ve görevler eklemek için iş öğelerinin yanındaki sembolleri seçerken devam edin. 
+   
+Veri bilimi proje iş öğelerinin **biriktirme** listesi görünümünde nasıl görünmeli bir örnek aşağıda verilmiştir:
+
+![18](./media/agile-development/18-workitems1.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Git ile işbirliğine dayalı kodlama](collaborative-coding-with-git.md) paylaşılan kod geliştirme çerçevesi Git kullanarak veri bilimi projeleri için işbirliğine dayalı kod geliştirme yapmak ve çevik işlem ile planlanan çalışmayı etkinlikleri kodlama bağlantı açıklanır.
+[Git Ile Işbirliğine dayalı kodlama](collaborative-coding-with-git.md) , paylaşılan kod geliştirme çerçevesi olarak git kullanan veri bilimi projeleri için işbirliğine dayalı kod geliştirmenin nasıl yapılacağını ve bu kodlama etkinliklerinin çevik işlemle planlanmış iş 'e nasıl bağlanacağını açıklar.
 
-Çevik süreçlerin şirket kaynaklarına ek bağlantılar aşağıda verilmiştir.
+[Örnek izlenecek yollar](walkthroughs.md) , bağlantılar ve küçük resim açıklamalarıyla belirli senaryolara yönelik izlenecek yolları listeler. Bağlantılı senaryolar, akıllı uygulamalar oluşturmak için bulut ve şirket içi araçların ve hizmetlerin iş akışları veya işlem hatları halinde nasıl birleştirileceğini gösterir.
+  
+Çevik işlemlerde ek kaynaklar:
 
-- Çevik işlem   [https://www.visualstudio.com/en-us/docs/work/guidance/agile-process](https://www.visualstudio.com/en-us/docs/work/guidance/agile-process)
-- Çevik işlem iş öğesi türleri ve iş akışı   [https://www.visualstudio.com/en-us/docs/work/guidance/agile-process-workflow](https://www.visualstudio.com/en-us/docs/work/guidance/agile-process-workflow)
+- [Çevik işlem](/azure/devops/boards/work-items/guidance/agile-process)
+  
+- [Çevik işlem iş öğesi türleri ve iş akışı](/azure/devops/boards/work-items/guidance/agile-process-workflow)
 
-
-İşlem için tüm adımları gösteren talimatlara **belirli senaryoları** de sağlanır. Listelenen ve küçük resim açıklamasında ile bağlantılı [örnek izlenecek yollar](walkthroughs.md) makalesi. Bunlar, bulut, şirket içi araçları ve Hizmetleri, bir iş akışı veya akıllı bir uygulama oluşturmak için işlem hattı birleştirme işlemini göstermektedir. 

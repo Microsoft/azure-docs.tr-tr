@@ -1,23 +1,24 @@
 ---
-title: Bir teklifi yayımlama | Azure Market
-description: Belirtilen teklif yayımlamak için API'ı tıklatın.
+title: Teklif yayımlama | Azure Marketi
+description: Belirtilen teklifi yayımlamak için API.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 117a4e5e238e754524ff813ce25ebc1105e2153c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b7ad8086c417cf1f14d9116fa4abcb0a88030922
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64934972"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819651"
 ---
 <a name="publish-an-offer"></a>Teklif yayımlama
 ================
 
-Belirtilen teklif için yayımlama işlemi başlar. Bu çağrı bir uzun süren bir işlemdir.
+Belirtilen teklif için yayımlama işlemini başlatır. Bu çağrı uzun süredir çalışan bir işlemdir.
 
   `POST  https://cloudpartner.azure.com/api/publishers/<publisherId>/offers/<offerId>/publish?api-version=2017-10-31`
 
@@ -26,13 +27,13 @@ Belirtilen teklif için yayımlama işlemi başlar. Bu çağrı bir uzun süren 
 
 |  **Ad**      |    **Açıklama**                               |  **Veri türü** |
 |  ------------- |  ------------------------------------            |   -----------  |
-|  publisherId   | Örneğin, yayımcı tanımlayıcısı `contoso`      |   String       |
-|  OfferId       | Teklif tanımlayıcısı                                 |   String       |
-|  API sürümü   | API'nin en son sürümü                        |   Tarih         |
+|  PublisherId   | Yayımcı tanımlayıcı, örneğin `contoso`      |   Dize       |
+|  OfferId       | Teklif tanımlayıcısı                                 |   Dize       |
+|  api sürümü   | API 'nin en son sürümü                        |   Tarih         |
 |  |  |
 
 
-<a name="header"></a>Üstbilgi
+<a name="header"></a>Üst bilgi
 ------
 
 |  **Ad**        |    **Değer**          |
@@ -60,7 +61,7 @@ Belirtilen teklif için yayımlama işlemi başlar. Bu çağrı bir uzun süren 
 
 |  **Ad**               |   **Açıklama**                                                                                 |
 |  ---------------------  | ------------------------------------------------------------------------------------------------- |
-|  bildirim e-postaları    | Yayımlama işleminin ilerleme durumunu gönderilecek e-posta adreslerini virgülle ayrılmış liste. |
+|  bildirim-e-postalar    | Yayımlama işleminin ilerleme durumunun bildirilmesi için, virgülle ayrılmış e-posta adresleri listesi. |
 |  |  |
 
 
@@ -73,16 +74,16 @@ Belirtilen teklif için yayımlama işlemi başlar. Bu çağrı bir uzun süren 
 
 |  **Ad**             |    **Değer**                                                                 |
 |  -------------------- | ---------------------------------------------------------------------------- |
-| İşlem konumu    | Geçerli işlemin durumunu belirlemek için sorgulanabilir URL'si.    |
+| İşlem-konum    | İşlemin geçerli durumunu öğrenmek için sorgulanabilen URL.    |
 |  |  |
 
 
 ### <a name="response-status-codes"></a>Yanıt durum kodları
 
-| **Kod** |  **Açıklama**                                                                                                                           |
+| **Kodudur** |  **Açıklama**                                                                                                                           |
 | ------   |  ----------------------------------------------------------------------------------------------------------------------------------------- |
-| 202   | `Accepted` -İstek başarıyla kabul edildi. Başlatılan işlem izlemek için kullanılan bir konuma yanıtı içerir. |
-| 400   | `Bad/Malformed request` -Hata yanıt gövdesi, daha fazla bilgi sağlayabilir.                                                               |
-| 422   | `Un-processable entity` -Yayımlanacak varlık başarısız olduğunu gösterir doğrulama.                                                        |
-| 404   | `Not found` -İstemci tarafından belirtilen varlık yok.                                                                              |
+| 202   | `Accepted`-istek başarıyla kabul edildi. Yanıt, başlatılan işlemi izlemek için kullanılabilecek bir konum içerir. |
+| 400   | `Bad/Malformed request`-hata yanıtı gövdesi daha fazla bilgi sağlayabilir.                                                               |
+| 422   | `Un-processable entity`-yayımlanacak varlığın başarısız olduğunu belirtir.                                                        |
+| 404   | `Not found`-istemci tarafından belirtilen varlık yok.                                                                              |
 |  |  |

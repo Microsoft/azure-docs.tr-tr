@@ -1,9 +1,10 @@
 ---
-title: Belirteç sessizce almak (Microsoft kimlik doğrulama kitaplığı .NET için) | Azure
-description: Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanılarak erişim belirteci sessizce (önbellekten belirteç) alma hakkında bilgi edinin.
+title: Sessizce belirteç alma (.NET için Microsoft kimlik doğrulama kitaplığı)
+titleSuffix: Microsoft identity platform
+description: .NET için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL.NET) kullanarak bir erişim belirtecini sessizce (belirteç önbelleğinden) nasıl edinebileceğinizi öğrenin.
 services: active-directory
 documentationcenter: dev-center-name
-author: rwike77
+author: TylerMSFT
 manager: CelesteDG
 editor: ''
 ms.service: active-directory
@@ -12,25 +13,25 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 04/30/2019
-ms.author: ryanwi
+ms.date: 07/16/2019
+ms.author: twhitney
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6331407067a39550d866d7c293a92fac9184b54e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1dc573c37aab95006f647509080fb9883d8650c7
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65544230"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72802930"
 ---
-# <a name="get-a-token-from-the-token-cache-using-msalnet"></a>Bir belirteç, MSAL.NET kullanarak belirteç önbellekten alma
+# <a name="get-a-token-from-the-token-cache-using-msalnet"></a>MSAL.NET kullanarak belirteç önbelleğinden belirteç alma
 
-Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanarak bir erişim belirteci aldığınızda, belirteç önbelleğe alınır. Uygulamasının bir belirteç gerektiğinde, ilk çağırmalıdır `AcquireTokenSilent` kabul edilebilir bir belirteci önbellekte olup olmadığını doğrulamak için yöntem. Çoğu durumda, bir belirteç önbelleğe göre daha fazla kapsamlarla başka bir belirteç almak mümkündür. (Belirteç önbelleği yenileme belirteci içerecek şekilde) süresi doluyor bir belirteç yenilemeye mümkündür.
+.NET için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL.NET) kullanarak bir erişim belirteci aldığınızda, belirteç önbelleğe alınır. Uygulamanın bir belirtece ihtiyacı olduğunda, kabul edilebilir bir belirtecin önbellekte olup olmadığını doğrulamak için öncelikle `AcquireTokenSilent` yöntemini çağırmalıdır. Çoğu durumda, önbellekteki bir belirtece göre daha fazla kapsam içeren başka bir belirteç elde etmek mümkündür. Ayrıca, kullanım süresi dolmak üzere (belirteç önbelleği de bir yenileme belirteci içerdiğinden) bir belirteci yenilemek mümkündür.
 
-Önerilen Düzen çağırmaktır `AcquireTokenSilent` yöntemi ilk.  Varsa `AcquireTokenSilent` başarısız sonra diğer yöntemleri kullanarak bir belirteç edinme.
+Önerilen model öncelikle `AcquireTokenSilent` yöntemini çağırmalıdır.  `AcquireTokenSilent` başarısız olursa, diğer yöntemleri kullanarak bir belirteç alın.
 
-Aşağıdaki örnekte, uygulama belirteç önbellekten belirteç almak ilk önce çalışır.  Varsa bir `MsalUiRequiredException` özel durum oluştu, uygulamanın etkileşimli olarak bir belirteç alır. 
+Aşağıdaki örnekte, uygulama ilk olarak belirteç önbelleğinden bir belirteç edinmeye çalışır.  `MsalUiRequiredException` bir özel durum oluşturulursa, uygulama bir belirteci etkileşimli olarak alır. 
 
 ```csharp
 AuthenticationResult result = null;
@@ -43,8 +44,8 @@ try
 }
 catch (MsalUiRequiredException ex)
 {
- // A MsalUiRequiredException happened on AcquireTokenSilentAsync.
- // This indicates you need to call AcquireTokenAsync to acquire a token
+ // A MsalUiRequiredException happened on AcquireTokenSilent.
+ // This indicates you need to call AcquireTokenInteractive to acquire a token
  System.Diagnostics.Debug.WriteLine($"MsalUiRequiredException: {ex.Message}");
 
  try

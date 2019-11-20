@@ -1,5 +1,5 @@
 ---
-title: 'Öğretici: Makale kişiselleştirme - Custom Decision Service'
+title: 'Öğretici: Makale kişiselleştirmesi-Özel Karar Alma Hizmeti'
 titlesuffix: Azure Cognitive Services
 description: Bağlamsal karar almaya yönelik makale kişiselleştirmesi için öğretici.
 services: cognitive-services
@@ -10,14 +10,15 @@ ms.subservice: custom-decision-service
 ms.topic: tutorial
 ms.date: 05/08/2018
 ms.author: slivkins
-ms.openlocfilehash: d8ddafe20ff93e7ae4d51e2180bbd40447729234
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ROBOTS: NOINDEX
+ms.openlocfilehash: f7eafed9db25fba904d98ddea652671dc45aa01d
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60863395"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707212"
 ---
-# <a name="tutorial-article-personalization-for-contextual-decision-making"></a>Öğretici: Bağlamsal bir karar alma için makale kişiselleştirme
+# <a name="tutorial-article-personalization-for-contextual-decision-making"></a>Öğretici: Bağlamsal karar oluşturma için kişiselleştirme makalesi
 
 Bu öğreticide, bir web sitesinin ön sayfasındaki makale seçkisini kişiselleştirmeye odaklanılmaktadır. Örneğin, Özel Karar Alma Hizmeti, ön sayfadaki *birden çok* makale listesini etkiler. Sayfa, yalnızca siyaset ve sporla ilgili bir haber web sitesi olabilir. Makalelerin üç sıralı listesini gösterir: siyasi, spor ve son dakika.
 
@@ -44,7 +45,7 @@ Her akış bir makale listesi sağlar. RSS’de her biri aşağıdaki gibi bir `
 </channel></rss>
 ```
 
-Makalelerin sırası önemlidir. Varsayılan sıralamayı, başka bir deyişle, makalelerin nasıl sıralanması gerektiğine dair en iyi tahmininizi belirtir. Varsayılan derecelendirme sonra Panoda performans karşılaştırma için kullanılır.
+Makalelerin sırası önemlidir. Varsayılan sıralamayı, başka bir deyişle, makalelerin nasıl sıralanması gerektiğine dair en iyi tahmininizi belirtir. Varsayılan derecelendirme daha sonra panoda performans karşılaştırması için kullanılır.
 
 Akış biçimi hakkında daha fazla bilgi için bkz.[API başvurusu](custom-decision-service-api-reference.md#action-set-api-customer-provided).
 

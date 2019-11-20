@@ -1,26 +1,23 @@
 ---
-title: MariaDB için Azure veritabanı performans önerileri
-description: Bu makalede MariaDB için Azure veritabanı performans önerisi özelliği
+title: MariaDB için Azure veritabanı 'nda performans önerileri
+description: Bu makalede, MariaDB için Azure veritabanı 'nda performans önerisi özelliği açıklanmaktadır
 author: ajlam
 ms.author: andrela
 ms.service: mariadb
 ms.topic: conceptual
-ms.date: 06/27/2019
-ms.openlocfilehash: a2f9b7597022822272692d20976e1da654b9d524
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.date: 11/04/2019
+ms.openlocfilehash: 1c903dcd9015de47c5364c5abd65569d17e7e21f
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67462049"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73604130"
 ---
-# <a name="performance-recommendations-in-azure-database-for-mariadb"></a>MariaDB için Azure veritabanı performans önerileri
+# <a name="performance-recommendations-in-azure-database-for-mariadb"></a>MariaDB için Azure veritabanı 'nda performans önerileri
 
-**Şunlara uygulanır:** 10.2 MariaDB için Azure veritabanı
+**Uygulama hedefi:** MariaDB için Azure veritabanı 10,2
 
-> [!NOTE]
-> Performans önerileri önizlemededir.
-
-Performans önerileri özelliği, performansı artırmak için özelleştirilmiş öneri oluşturmak için veritabanlarınızı analiz eder. Öneriler üretmek için şema dahil olmak üzere çeşitli veritabanı özellikleri, analiz arar. Etkinleştirme [Query Store](concepts-query-store.md) performans önerileri özelliği tam olarak yararlanmak için sunucunuzdaki. Performans şema kapalı ise, Query Store üzerinde kapatma performance_schema ve performans şema Instruments özellik için gerekli bir alt kümesi sağlar. Herhangi bir performans önerisi uyguladıktan sonra bu değişikliklerin etkisini değerlendirmek için performans test etmeniz gerekir.
+Performans önerileri özelliği, gelişmiş performans için özelleştirilmiş öneriler oluşturmak üzere veritabanlarınızı analiz eder. Bu önerileri oluşturmak için analiz, şema dahil çeşitli veritabanı özelliklerine bakar. Performans önerileri özelliğini tam olarak kullanmak için sunucunuzda [sorgu deposunu](concepts-query-store.md) etkinleştirin. Performans şeması KAPALıYSA, Query Store 'u açmak performance_schema ve özellik için gereken performans şeması gereçlerinin bir alt kümesini sunar. Herhangi bir performans önerisi uygulandıktan sonra, bu değişikliklerin etkisini değerlendirmek için performansı sınamalısınız.
 
 ## <a name="permissions"></a>İzinler
 
@@ -30,26 +27,26 @@ Performans Önerileri özelliğini kullanarak analiz çalıştırmak için **Sah
 
 [Performans Önerileri](concepts-performance-recommendations.md) özelliği, performansı iyileştirme potansiyeli olan dizinleri tanımlamak için sunucunuzdaki iş yüklerini analiz eder.
 
-Açık **performans önerileri** gelen **akıllı performans** MariaDB sunucunuz için Azure portal sayfasındaki menü çubuğunda bölümü.
+MariaDB sunucunuzun Azure portal sayfasındaki menü çubuğunun **akıllı performans** bölümünde **performans önerilerini** açın.
 
 ![Performans Önerileri giriş sayfası](./media/concepts-performance-recommendations/performance-recommendations-page.png)
 
-Seçin **Çözümle** ve analizini başlayacak bir veritabanı seçin. İş yükünüze bağlı olarak, analiz tamamlanması birkaç dakika sürebilir. Analiz tamamlanınca portalda bir bildirim olur. Çözümleme veritabanınızın derin bir incelemesini yapar. Yoğun olmayan dönemlerde analiz almanızı öneririz.
+**Çözümle** ' yi seçin ve analiz işlemini başlatmak için bir veritabanı seçin. İş yükünüze bağlı olarak, çözümlemenin tamamlanması birkaç dakika sürebilir. Analiz tamamlanınca portalda bir bildirim olur. Analiz, veritabanınızı ayrıntılı bir şekilde inceleme işlemini gerçekleştirir. Yoğun olmayan dönemler sırasında analiz gerçekleştirmenizi öneririz.
 
-**Önerileri** penceresi karşılanmadığı, öneriler ve bu öneriyi oluşturulan ilişkili sorgu kimliği bir listesini gösterir. Sorgu kimliği ile kullanabileceğiniz [mysql.query_store](concepts-query-store.md#mysqlquery_store) sorgusu hakkında daha fazla bilgi için görünümü.
+**Öneriler** penceresi, varsa önerilerin bir listesini ve bu öneriyi oluşturan ılgılı sorgu kimliğini gösterir. Sorgu KIMLIĞIYLE, sorgu hakkında daha fazla bilgi edinmek için [MySQL. query_store](concepts-query-store.md#mysqlquery_store) görünümünü kullanabilirsiniz.
 
 ![Performans önerileri yeni sayfa](./media/concepts-performance-recommendations/performance-recommendations-result.png)
 
-Önerileri otomatik olarak uygulanmaz. Öneri uygulamak için sorgu metni kopyalayın ve tercih ettiğiniz istemcinizden çalıştırın. Öneri değerlendirmek için izleme ve test unutmayın.
+Öneriler otomatik olarak uygulanmaz. Öneriyi uygulamak için, sorgu metnini kopyalayın ve tercih ettiğiniz istemciden çalıştırın. Öneriyi değerlendirmek için sınamayı ve izlemeyi unutmayın.
 
 ## <a name="recommendation-types"></a>Öneri türleri
 
-Şu anda yalnızca *Create Index* önerileri desteklenir.
+Şu anda yalnızca *Dizin önerileri oluşturma* desteklenir.
 
 ### <a name="create-index-recommendations"></a>Dizin önerileri oluşturma
 
-*Dizin oluşturma* en sık çalıştırma ya da zaman harcayan iş yükü sorgularda hızlandırmak için yeni dizin önerileri önerin. Bu öneri duyacağı [Query Store](concepts-query-store.md) etkinleştirilecek. Query Store sorgu bilgilerini toplar ve analiz, öneride bulunmak için kullandığı ayrıntılı sorgu çalışma zamanı ve sıklığı istatistikler sağlar.
+*Dizin önerilerini oluşturma* , iş yükünde en sık çalıştırılan veya zaman alan sorguları hızlandırmak için yeni dizinler önerir. Bu öneri türü, [sorgu deposunun](concepts-query-store.md) etkinleştirilmesini gerektirir. Sorgu deposu sorgu bilgilerini toplar ve çözümlemenin öneriyi yapmak için kullandığı ayrıntılı sorgu çalışma zamanı ve sıklık istatistiklerini sağlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [izleme ve ayarlama](concepts-monitoring.md) MariaDB için Azure veritabanı'nda.
+- MariaDB için Azure veritabanı 'nda [izleme ve ayarlama](concepts-monitoring.md) hakkında daha fazla bilgi edinin.

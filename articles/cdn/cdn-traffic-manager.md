@@ -1,13 +1,13 @@
 ---
-title: Birden fazla Azure CDN uç noktası ile Azure Traffic Manager arasında devretmeyi ayarlamak | Microsoft Docs
-description: Azure CDN uç noktaları ile Azure Traffic Manager'ı ayarlama hakkında bilgi edinin.
+title: Traffic Manager ile birden çok Azure CDN uç noktası arasında yük devretme
+description: Azure Traffic Manager Azure CDN uç noktalarıyla ayarlama hakkında bilgi edinin.
 services: cdn
 documentationcenter: ''
 author: mdgattuso
 manager: danielgi
 editor: ''
 ms.assetid: ''
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,88 +15,88 @@ ms.topic: article
 ms.date: 03/18/2019
 ms.author: magattus
 ms.custom: ''
-ms.openlocfilehash: f7de7fe1c677d54c0fa3e6d3ca4730ef1083bc81
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: de91f61385942db077bc98721eabe9f3f0b8624c
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67273283"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083000"
 ---
-# <a name="set-up-failover-across-multiple-azure-cdn-endpoints-with-azure-traffic-manager"></a>Birden fazla Azure CDN uç noktası ile Azure Traffic Manager arasında devretmeyi ayarlayın
+# <a name="set-up-failover-across-multiple-azure-cdn-endpoints-with-azure-traffic-manager"></a>Azure Traffic Manager birden çok Azure CDN uç noktası arasında yük devretmeyi ayarlama
 
-Azure Content Delivery Network (CDN) yapılandırdığınızda, ihtiyaçlarınız için en iyi sağlayıcısı ve fiyatlandırma katmanı seçebilirsiniz. Azure CDN, Global olarak dağıtılmış, altyapı ile varsayılan olarak yerel ve coğrafi yedeklilik ve hizmet kullanılabilirliği ve performansı artırmak için genel yük oluşturur. Bir konum içerik sunmak kullanılabilir değilse, istekleri başka bir konuma otomatik olarak yönlendirilir ve en iyi bulunma noktası (istek konumu ve sunucusu yük gibi etkenlere göre), her istemci isteğe hizmet vermek için kullanılır. 
+Azure Content Delivery Network (CDN) yapılandırdığınızda, gereksinimlerinize göre en uygun sağlayıcıyı ve fiyatlandırma katmanını seçebilirsiniz. Azure CDN, genel olarak dağıtılmış altyapıyla, hizmet kullanılabilirliğini ve performansını geliştirmek için varsayılan olarak yerel ve coğrafi artıklık ve küresel Yük Dengeleme oluşturur. Bir konum içerik hizmeti için kullanılabilir değilse, istekler otomatik olarak başka bir konuma yönlendirilir ve her istemci isteğine hizmeti sağlamak için en iyi POP (istek konumu ve sunucu yükü gibi etkenlere bağlı olarak) kullanılır. 
  
-Birden çok CDN profiliniz varsa, kullanılabilirliği ve performansı Azure Traffic Manager ile daha da artırabilirsiniz. Azure CDN ile Azure Traffic Manager, yük dengelemek birden çok CDN uç noktaları arasında yük devretme, coğrafi Yük Dengeleme ve diğer senaryolar için kullanabilirsiniz. Bir genel yük devretme senaryosunda, tüm istemci isteklerini ilk birincil CDN profiline yönlendirilmiş; Profil kullanılabilir durumda değilse, birincil CDN profilinizi tekrar çevrimiçi olana kadar istek daha sonra ikincil CDN profiline geçirilir. Bu şekilde Azure Traffic Manager'ı kullanarak web uygulamanızı her zaman kullanılabilir sağlar. 
+Birden çok CDN profiliniz varsa Azure Traffic Manager ile kullanılabilirliği ve performansı daha da artırabilirsiniz. Yük devretme, coğrafi Yük Dengeleme ve diğer senaryolar için birden çok CDN uç noktası arasında dengeyi yük dengelemek için Azure Traffic Manager Azure CDN kullanabilirsiniz. Tipik bir yük devretme senaryosunda, tüm istemci istekleri öncelikle birincil CDN profiline yönlendirilir; profil kullanılamıyorsa, birincil CDN profiliniz yeniden çevrimiçi olana kadar istekler daha sonra ikincil CDN profiline geçirilir. Azure Traffic Manager 'yi bu şekilde kullanmak Web uygulamanızın her zaman kullanılabilir olmasını sağlar. 
 
-Bu makalede, rehberlik ve yük devretme ile ayarlamak nasıl bir örnek sağlanmaktadır **verizon'dan Azure CDN standart** ve **akamai'den Azure CDN standart** profilleri.
+Bu makalede, Verizon **Azure CDN ve Akamai profillerindeki standart** **Azure CDN Standart** ile yük devretmeyi ayarlama hakkında yönergeler ve bir örnek verilmektedir.
 
-## <a name="set-up-azure-cdn"></a>Azure CDN ' ayarlayın 
-Azure CDN profili ve uç noktaları iki veya daha fazla farklı sağlayıcıları ile oluşturun.
+## <a name="set-up-azure-cdn"></a>Azure CDN ayarlama 
+Farklı sağlayıcılarla iki veya daha fazla Azure CDN profili ve uç noktası oluşturun.
 
-1. Oluşturma bir **verizon'dan Azure CDN standart** ve **akamai'den Azure CDN standart** adımları izleyerek profil [yeni bir CDN profili oluşturmak](cdn-create-new-endpoint.md#create-a-new-cdn-profile).
+1. [Yeni BIR CDN profili oluşturma](cdn-create-new-endpoint.md#create-a-new-cdn-profile)bölümündeki adımları izleyerek Verizon **Azure CDN ve Akamai profilinden standart** bir **Azure CDN standardı** oluşturun.
  
    ![CDN birden çok profil](./media/cdn-traffic-manager/cdn-multiple-profiles.png)
 
-2. İçindeki adımları izleyerek her yeni profilleri en az bir uç nokta oluşturma [yeni bir CDN uç noktası](cdn-create-new-endpoint.md#create-a-new-cdn-endpoint).
+2. Yeni profillerin her birinde [Yeni BIR CDN uç noktası oluşturma](cdn-create-new-endpoint.md#create-a-new-cdn-endpoint)bölümündeki adımları izleyerek en az bir uç nokta oluşturun.
 
-## <a name="set-up-azure-traffic-manager"></a>Azure Traffic Manager'ı ayarlama
-Bir Azure Traffic Manager profili oluşturun ve CDN uç noktalarınızı arasında yük dengelemeyi ayarlama. 
+## <a name="set-up-azure-traffic-manager"></a>Azure Traffic Manager ayarlama
+Azure Traffic Manager profili oluşturun ve CDN uç noktalarınızda yük dengelemeyi ayarlayın. 
 
-1. İçindeki adımları izleyerek bir Azure Traffic Manager profili oluşturma [Traffic Manager profili oluşturma](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-create-profile). 
+1. [Traffic Manager profili oluşturma](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-create-profile)bölümündeki adımları Izleyerek bir Azure Traffic Manager profili oluşturun. 
 
-    İçin **yönlendirme yöntemi**seçin **öncelik**.
+    **Yönlendirme yöntemi**için **Öncelik**' i seçin.
 
-2. CDN uç noktalarınızı içindeki adımları izleyerek Traffic Manager profilinize ekleyin [ekleme Traffic Manager uç noktaları](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-create-profile#add-traffic-manager-endpoints)
+2. [Traffic Manager uç noktaları ekleme](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-create-profile#add-traffic-manager-endpoints) bölümündeki adımları izleyerek TRAFFIC Manager profilinize CDN uç noktalarınızı ekleyin
 
-    İçin **türü**seçin **dış uç noktalar**. İçin **öncelik**, bir sayı girin.
+    **Tür**için **dış uç noktalar**' ı seçin. **Öncelik**için bir sayı girin.
 
-    Örneğin, oluşturma *cdndemo101akamai.azureedge.net* önceliği *1* ve *cdndemo101verizon.azureedge.net* önceliği *2*.
+    Örneğin, önceliği *2*olan *1* ve *cdndemo101verizon.azureedge.net* ile *cdndemo101akamai.azureedge.net* oluşturun.
 
-   ![CDN traffic manager uç noktası](./media/cdn-traffic-manager/cdn-traffic-manager-endpoints.png)
+   ![CDN Traffic Manager uç noktaları](./media/cdn-traffic-manager/cdn-traffic-manager-endpoints.png)
 
 
-## <a name="set-up-custom-domain-on-azure-cdn-and-azure-traffic-manager"></a>Azure Traffic Manager ve Azure CDN özel etki alanında ayarlama
-CDN ve Traffic Manager profillerinizi ayarladıktan sonra DNS eşlemesi ekleyin ve özel etki alanını CDN uç noktalarına kaydetmek için bu adımları izleyin. Bu örnekte, özel etki alanı adıdır *cdndemo101.dustydogpetcare.online*.
+## <a name="set-up-custom-domain-on-azure-cdn-and-azure-traffic-manager"></a>Azure CDN ve Azure Traffic Manager için özel etki alanı ayarlama
+CDN ve Traffic Manager profillerinizi ayarladıktan sonra, DNS eşlemesi eklemek ve CDN uç noktalarına özel etki alanını kaydetmek için aşağıdaki adımları izleyin. Bu örnekte, özel etki alanı adı *cdndemo101. alacatydogpetilgilen. Online*olur.
 
-1. GoDaddy gibi özel etki alanınızın etki alanı sağlayıcınız için web sitesine gidin ve iki DNS CNAME girişleri oluşturulamıyor. 
+1. GoDaddy gibi özel etki alanının etki alanı sağlayıcısı için Web sitesine gidin ve iki DNS CNAME girişi oluşturun. 
 
-    a. İlk CNAME girişi için cdnverify alt etki alanı, özel etki alanınızı CDN uç noktanıza eşleyin. Bu giriş, 2. adımda eklediğiniz Traffic Manager için CDN uç noktasına özel etki alanı kaydetmek için gerekli bir adımdır.
+    a. İlk CNAME girişi için, cdnverify alt etki alanı ile özel etki alanınızı CDN uç noktanıza eşleyin. Bu giriş, adım 2 ' de Traffic Manager eklenen CDN uç noktasına özel etki alanını kaydetmek için gerekli bir adımdır.
 
       Örneğin: 
 
       `cdnverify.cdndemo101.dustydogpetcare.online  CNAME  cdnverify.cdndemo101akamai.azureedge.net`  
 
-    b. İkinci CNAME girişi için cdnverify alt etki alanı olmadan özel etki alanınızı CDN uç noktanıza eşleyin. Bu giriş, özel etki alanını Traffic Manager eşler. 
+    b. İkinci CNAME girdisi için, cdnverify alt etki alanı olmadan özel etki alanınızı CDN uç noktanıza eşleyin. Bu giriş, Traffic Manager özel etki alanını eşler. 
 
       Örneğin: 
       
       `cdndemo101.dustydogpetcare.online  CNAME  cdndemo101.trafficmanager.net`   
 
     > [!NOTE]
-    > Bu adımı, etki alanınız şu anda canlı ve yarıda kesilemez, son uygulayın. Özel DNS etki alanınızı Traffic Manager'a güncelleştirmeden önce CDN uç noktaları ve traffic manager etki alanı dinamik olduğunu doğrulayın.
+    > Etki alanınız Şu anda etkin ve kesintiye uğrarsa, bu adımı son yapın. Özel etki alanı DNS 'nizi Traffic Manager için güncelleştirmeden önce CDN uç noktaları ve Traffic Manager etki alanlarının canlı olduğunu doğrulayın.
     >
 
 
-2.  Azure CDN profilinizi, ilk CDN uç noktası (Akamai) seçin. Seçin **özel etki alanı Ekle** ve giriş *cdndemo101.dustydogpetcare.online*. Özel etki alanını doğrulamak için onay işareti yeşil olduğundan emin olun. 
+2.  Azure CDN profilinizde, ilk CDN uç noktasını (Akamai) seçin. **Özel etki alanı Ekle** ve Input *cdndemo101. alacatydogpetilgilen. Online*öğesini seçin. Özel etki alanını doğrulama onay işareti yeşil olduğunu doğrulayın. 
 
-    Azure CDN kullanan *cdnverify* kayıt işlemini tamamlamak için bir DNS eşlemesi doğrulamak için alt etki alanı. Daha fazla bilgi için [bir CNAME DNS kaydı oluşturma](cdn-map-content-to-custom-domain.md#create-a-cname-dns-record). Bu adım, Azure CDN, böylece kendi isteklerini yanıtlayan özel etki alanı tanımak etkinleştirir.
+    Azure CDN, bu kayıt işlemini tamamlaması için DNS eşlemesini doğrulamak üzere *cdnverify* alt etki alanını kullanır. Daha fazla bilgi için bkz. [CNAME DNS kaydı oluşturma](cdn-map-content-to-custom-domain.md#create-a-cname-dns-record). Bu adım Azure CDN, isteklerine yanıt verebilmeleri için özel etki alanını tanımasını sağlar.
     
     > [!NOTE]
-    > SSL etkinleştirmek için bir **akamai'den Azure CDN** profillerini uç noktanıza özel etki alanı cname doğrudan gerekir. SSL etkinleştirmek için cdnverify henüz desteklenmiyor. 
+    > Akamai profillerindeki bir **Azure CDN** SSL 'yi etkinleştirmek için, özel etki alanı için uç noktanıza doğrudan CNAME uygulamanız gerekir. SSL 'yi etkinleştirmek için cdnverify henüz desteklenmiyor. 
     >
 
-3.  Özel etki alanınızın etki alanı sağlayıcınız için web sitesine dönün ve böylece özel etki alanı için ikinci bir CDN uç noktanızla eşlendi oluşturduğunuz ilk DNS eşlemesini güncelleştirin.
+3.  Özel etki alanının etki alanı sağlayıcısı için Web sitesine geri dönün ve ' de oluşturduğunuz ilk DNS eşlemesini, özel etki alanının ikinci CDN uç noktanıza eşlenmesi için güncelleştirin.
                              
     Örneğin: 
 
     `cdnverify.cdndemo101.dustydogpetcare.online  CNAME  cdnverify.cdndemo101verizon.azureedge.net`  
 
-4. Azure CDN profilinizi ikinci CDN uç noktası (Verizon) seçin ve 2. adımı yineleyin. Seçin **özel etki alanı Ekle**ve giriş *cdndemo101.dustydogpetcare.online*.
+4. Azure CDN profilinizde ikinci CDN uç noktasını (Verizon) seçin ve 2. adımı tekrarlayın. **Özel etki alanı Ekle**ve Input *cdndemo101. alacatydogpetilgilen. Online*' ı seçin.
  
-Bu adımları tamamladıktan sonra Yük devretme özellikleriyle çoklu CDN hizmetiniz Azure Traffic Manager ile ayarlanır. Test erişmek mümkün olacaktır özel etki alanınızı URL'lerden. İşlevselliğini test etmek için birincil CDN uç noktası devre dışı bırakın ve istek doğru şekilde ikincil CDN uç noktasına taşınır olduğunu doğrulayın. 
+Bu adımları tamamladıktan sonra, yük devretme özelliklerine sahip çoklu CDN hizmetiniz Azure Traffic Manager ile ayarlanır. Özel etki alanından test URL 'Lerine erişebileceksiniz. İşlevselliği test etmek için, birincil CDN uç noktasını devre dışı bırakın ve isteğin ikincil CDN uç noktasına doğru şekilde taşındığını doğrulayın. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yönlendirme diğer yöntemleri, aşağıdaki gibi ayarlayabilirsiniz coğrafi farklı CDN uç noktaları arasında yük dengelemek için. Daha fazla bilgi için [Traffic Manager'ı kullanarak coğrafi trafik yönlendirme yöntemini yapılandırma](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-configure-geographic-routing-method).
+Ayrıca, yükü farklı CDN uç noktaları arasında dengelemek için coğrafi gibi diğer yönlendirme yöntemlerini de ayarlayabilirsiniz. Daha fazla bilgi için bkz. [Traffic Manager kullanarak coğrafi trafik yönlendirme yöntemini yapılandırma](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-configure-geographic-routing-method).
 
 
 

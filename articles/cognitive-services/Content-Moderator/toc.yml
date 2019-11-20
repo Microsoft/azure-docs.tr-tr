@@ -11,16 +11,12 @@
       href: quick-start.md
     - name: İstemci SDK’sini kullanma
       items:
-        - name: 'C#'
-          items:
-            - name: Resim içeriğini analiz etme
-              href: image-moderation-quickstart-dotnet.md
-            - name: Metin içeriğini analiz etme
-              href: text-moderation-quickstart-dotnet.md
-        - name: Python
-          items:
-            - name: Metin içeriğini analiz etme
-              href: text-moderation-quickstart-python.md
+        - name: .NET SDK’sini kullanma
+          href: dotnet-sdk-quickstart.md
+        - name: Python SDK'yı kullanma
+          href: python-sdk-quickstart.md
+        - name: Java SDK'yı kullanma
+          href: java-sdk-quickstart.md
 - name: Öğreticiler
   items:
     - name: Orta e-ticaret görüntüleri
@@ -69,8 +65,6 @@
           href: Review-Tool-User-Guide/Review-Moderated-Images.md
         - name: REST API
           href: try-review-api-review.md
-        - name: .NET SDK
-          href: moderation-reviews-quickstart-dotnet.md
         - name: Video gözden geçirmeleri (.NET)
           href: video-reviews-quickstart-dotnet.md
         - name: Video transkripti gözden geçirmeleri (.NET)
@@ -120,11 +114,9 @@
         - name: 'C# dilinde REST API örnekleri'
           href: samples-rest.md
         - name: Diğer Azure örnekleri
-          href: 'https://azure.microsoft.com/resources/samples/?service=cognitive-services&term=content+moderator'
+          href: 'https://docs.microsoft.com/samples/browse/?products=azure&term=content-moderator'
     - name: Azure web semineri serisi
       href: 'https://info.microsoft.com/cognitive-services-content-moderator-ondemand.html'
-    - name: SSS
-      href: FAQs.md
     - name: Fiyatlandırma ve limitler
       href: 'https://azure.microsoft.com/pricing/details/cognitive-services/content-moderator'
     - name: UserVoice

@@ -1,39 +1,41 @@
 ---
-title: Azure Notification Hubs SDK'ları
-description: Kullanılabilir Azure Notification Hubs SDK'ları listesi
+title: Azure Notification Hubs SDK 'Ları
+description: Kullanılabilir Azure Notification Hubs SDK 'larının listesi
 services: notification-hubs
 documentationcenter: ''
-author: jwargo
-manager: patniko
-editor: spelluru
+author: sethmanheim
+manager: femila
+editor: jwargo
 ms.assetid: 91188310-307a-11e9-b210-d663bd873d93
 ms.service: notification-hubs
 ms.workload: mobile
 ms.topic: article
-ms.author: jowargo
 ms.date: 02/14/2019
-ms.openlocfilehash: 9ed69ac3526098cd5426c966952de97c948322b5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 02/14/2019
+ms.openlocfilehash: 8a4b05c0ee76aca07fd740a16a76a634727504e9
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60559951"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71213016"
 ---
-# <a name="azure-notification-hubs-sdks"></a>Azure Notification Hubs SDK'ları
+# <a name="azure-notification-hubs-sdks"></a>Azure Notification Hubs SDK 'Ları
 
-Microsoft ve üçüncü taraflar için Azure Notification Hubs SDK'ları yayımlayın. Android, iOS ve .NET için Microsoft depoları Ayrıca, her hedef platform için örnek uygulamaları içerir.
+Azure Notification Hubs için Microsoft ve üçüncü taraf SDK 'Ları yayımlayın. Android, iOS ve .NET için Microsoft depoları, her bir hedef platform için örnek uygulamalar da içerir.
 
 | SDK            | Yayımcı      |
 | -------------- | -------------- |
-| [.NET sunucu](https://github.com/Azure/azure-notificationhubs-dotnet) | Microsoft |
+| [.NET Server](https://github.com/Azure/azure-notificationhubs-dotnet) | Microsoft |
 | [Android](https://github.com/Azure/azure-notificationhubs-android)  |Microsoft |
 | [Apache Cordova](https://github.com/derek82511/cordova-azure-notification-hubs) | Üçüncü taraf |
 | [iOS](https://github.com/Azure/azure-notificationhubs-ios) |Microsoft |
-| [Java Server](https://github.com/Azure/azure-notificationhubs-java-backend) |Microsoft |
-| [Nodejs](https://github.com/Azure/azure-sdk-for-node) | Microsoft |
-| [React Native](https://github.com/CatalystCode/react-native-azurenotificationhub) | Üçüncü taraf |
+| [Java sunucusu](https://github.com/Azure/azure-notificationhubs-java-backend) |Microsoft |
+| [NodeJS](https://github.com/Azure/azure-sdk-for-node) | Microsoft |
+| [Yerel olarak tepki verme](https://github.com/CatalystCode/react-native-azurenotificationhub) | Üçüncü taraf |
 
 > [!Note]
-> Microsoft, kalite, fayda veya üçüncü taraf çözümleri desteklenebilirliği sorumlu değildir.
+> Microsoft, üçüncü taraf çözümlerin kalite, kullanışlılığı veya desteklenebiliründen sorumlu değildir.
 
-Lütfen bize bildiren var. tüm eksik.
+Lütfen eksik bir sorun olup olmadığını bize bildirin.

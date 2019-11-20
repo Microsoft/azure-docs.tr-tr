@@ -1,0 +1,89 @@
+- name: IoT Tak Çalıştır Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: IoT Tak Çalıştır nedir?
+      href: overview-iot-plug-and-play.md
+- name: Hızlı Başlangıçlar
+  expanded: true
+  items:
+    - name: Cihaz oluşturma - Windows
+      href: quickstart-create-pnp-device.md
+    - name: Cihaz oluşturma - Linux
+      href: quickstart-create-pnp-device-linux.md
+    - name: IoT Hub’a cihaz bağlama - Windows
+      href: quickstart-connect-pnp-device.md
+    - name: IoT Hub’a cihaz bağlama - Linux
+      href: quickstart-connect-pnp-device-linux.md
+    - name: IoT Central’a cihaz bağlama
+      href: ../iot-central/preview/quick-create-pnp-device.md
+    - name: Çözümünüzde bir cihaza bağlanma
+      href: quickstart-connect-pnp-device-solution.md
+- name: Öğreticiler
+  items:
+    - name: VS Code kullanarak cihaz oluşturma
+      href: tutorial-pnp-visual-studio-code.md
+    - name: Sertifikasyon için hazır cihaz oluşturma
+      href: tutorial-build-device-certification.md
+    - name: Cihazınız için sertifika alma
+      href: tutorial-certification-test.md
+- name: Kavramlar
+  items:
+    - name: Sözlük
+      href: iot-plug-and-play-glossary.md
+    - name: Geliştirici kılavuzu
+      href: concepts-developer-guide.md
+    - name: Ortak arabirimler
+      href: concepts-common-interfaces.md
+    - name: Model keşfi
+      href: concepts-model-discovery.md
+    - name: Limitler ve kotalar
+      href: concepts-limits-quotas.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Visual Studio ve Visual Studio Code ile geliştirme
+      href: howto-develop-with-vs-vscode.md
+    - name: IoT gezginini yükleme
+      href: howto-install-iot-explorer.md
+    - name: Azure CLI uzantısını yükleme
+      href: howto-install-pnp-cli.md
+    - name: IoT portalına ekleme
+      href: howto-onboard-portal.md
+    - name: Modelleri yönetme
+      href: howto-manage-models.md
+    - name: Cihaza bağlanma ve cihazla etkileşim kurma
+      href: howto-develop-solution.md
+- name: Başvuru
+  items:
+    - name: REST
+      href: 'https://docs.microsoft.com/rest/api/iothub/digitaltwinmodel/createorupdatemodel'
+    - name: REST güvenlik belirteci oluşturma
+      href: howto-generate-sas-token.md
+- name: İlgili
+  items:
+    - name: Çözümler
+      items:
+        - name: IoT Central
+          href: /azure/iot-central
+        - name: IoT çözüm hızlandırıcıları
+          href: /azure/iot-accelerators
+    - name: Platform Hizmetleri
+      items:
+        - name: IoT Hub
+          href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
+        - name: IoT Hub Cihazı Sağlama Hizmeti
+          href: /azure/iot-dps
+        - name: IoT Hizmet SDK’ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+        - name: Haritalar
+          href: /azure/azure-maps
+        - name: Time Series Insights
+          href: /azure/time-series-insights
+    - name: IoT Edge
+      items:
+        - name: Azure IoT Edge
+          href: /azure/iot-edge
+        - name: IoT Cihaz SDK'ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'

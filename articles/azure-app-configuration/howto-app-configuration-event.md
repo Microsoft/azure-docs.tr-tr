@@ -1,6 +1,6 @@
 ---
-title: Bir web uç noktasına olayları göndermek Azure uygulama yapılandırması ayarlanıyor için öğretici | Microsoft Docs
-description: Bu öğreticide, bir web uç noktası için anahtar-değer değişikliği olayları göndermek için Azure uygulama yapılandırması olay abonelikleri Ayarla öğrenin.
+title: Azure Uygulama yapılandırması 'nı olayları bir Web uç noktasına göndermek için ayarlama öğreticisi | Microsoft Docs
+description: Bu öğreticide, bir Web uç noktasına anahtar-değer değiştirme olayları göndermek için Azure uygulama yapılandırma olay aboneliklerini ayarlamayı öğreneceksiniz.
 services: azure-app-configuration
 documentationcenter: ''
 author: jimmyca
@@ -13,24 +13,20 @@ ms.topic: tutorial
 ms.date: 05/30/2019
 ms.author: yegu
 ms.custom: mvc
-ms.openlocfilehash: 2cb9ad28a21842987f8c0f7c75151ab8c7fe6fa0
-ms.sourcegitcommit: 4cdd4b65ddbd3261967cdcd6bc4adf46b4b49b01
+ms.openlocfilehash: d41ce06279536e3479b96d8d7afedf81624dbc9b
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66735363"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68326594"
 ---
-# <a name="quickstart-route-azure-app-configuration-events-to-a-web-endpoint-with-azure-cli"></a>Hızlı Başlangıç: Azure uygulama yapılandırma olaylarını Azure CLI ile bir web uç noktasına yönlendirme
+# <a name="quickstart-route-azure-app-configuration-events-to-a-web-endpoint-with-azure-cli"></a>Hızlı Başlangıç: Azure CLı ile Azure uygulama yapılandırma olaylarını bir Web uç noktasına yönlendirme
 
-Azure uygulama yapılandırması kullanıcıları, anahtar-değer değiştirdiğinde yayılan iş olaylarına abone olabilirsiniz. Web kancaları, Azure işlevleri, Azure depolama kuyrukları veya tarafından desteklenen herhangi bir olay işleyici bu olayları tetikleyebilir [Azure Event Grid](https://docs.microsoft.com/azure/event-grid/event-handlers). Bu makalede, Azure uygulama yapılandırma olaylarına abone olmak için Azure CLI'yı kullanmayı öğreneceksiniz.
+Bu hızlı başlangıçta, bir Web uç noktasına anahtar-değer değiştirme olayları göndermek için Azure uygulama yapılandırma olay aboneliklerini ayarlamayı öğreneceksiniz. Azure uygulama yapılandırma kullanıcıları, anahtar değerleri değiştirildiğinde yayınlanan olaylara abone olabilir. Bu olaylar Web kancaları, Azure Işlevleri, Azure depolama kuyrukları veya Azure Event Grid tarafından desteklenen diğer herhangi bir olay işleyicisini tetikleyebilir. Normalde olayları, olay verilerini işleyen ve eylemler gerçekleştiren bir uç noktaya gönderirsiniz. Bununla birlikte, bu makaleyi basitleştirmek için olayları iletilerin toplandığı ve görüntülendiği bir web uygulamasına gönderirsiniz.
 
-Normalde olayları, olay verilerini işleyen ve eylemler gerçekleştiren bir uç noktaya gönderirsiniz. Bununla birlikte, bu makaleyi basitleştirmek için olayları iletilerin toplandığı ve görüntülendiği bir web uygulamasına gönderirsiniz.
+## <a name="prerequisites"></a>Önkoşullar
 
-Bu makalede açıklanan adımları tamamladıktan sonra olay verilerinin web uygulamasına gönderildiğini görürsünüz.
-
-![Abonelik olayını görüntüleme](./media/quickstarts/event-grid/view-results.png)
-
-[!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
+- Azure aboneliği- [ücretsiz olarak bir tane oluşturun](https://azure.microsoft.com/free/). İsteğe bağlı olarak Azure Cloud Shell kullanabilirsiniz.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
@@ -44,7 +40,7 @@ Event Grid konuları Azure kaynaklarıdır ve bir Azure kaynak grubuna yerleşti
 
 [az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. 
 
-Aşağıdaki örnekte adlı bir kaynak grubu oluşturur `<resource_group_name>` içinde *westus* konumu.  `<resource_group_name>` değerini kaynak grubunuz için benzersiz bir adla değiştirin.
+Aşağıdaki örnek, `<resource_group_name>` *westus* konumunda adlı bir kaynak grubu oluşturur.  `<resource_group_name>` değerini kaynak grubunuz için benzersiz bir adla değiştirin.
 
 ```azurecli-interactive
 az group create --name <resource_group_name> --location westus
@@ -52,7 +48,7 @@ az group create --name <resource_group_name> --location westus
 
 ## <a name="create-an-app-configuration"></a>Uygulama yapılandırması oluşturma
 
-Değiştirin `<appconfig_name>` , uygulama yapılandırması için benzersiz bir ada sahip ve `<resource_group_name>` daha önce oluşturduğunuz kaynak grubu ile. Bir DNS adı olarak kullanıldığından adı benzersiz olmalıdır.
+Uygulama `<appconfig_name>` yapılandırmanız için benzersiz bir adla ve `<resource_group_name>` daha önce oluşturduğunuz kaynak grubuyla değiştirin. Ad bir DNS adı olarak kullanıldığı için benzersiz olmalıdır.
 
 ```azurecli-interactive
 az appconfig create \
@@ -82,9 +78,9 @@ Dağıtımın tamamlanması birkaç dakika sürebilir. Dağıtım başarıyla ge
 
 [!INCLUDE [event-grid-register-provider-cli.md](../../includes/event-grid-register-provider-cli.md)]
 
-## <a name="subscribe-to-your-app-configuration"></a>Uygulama yapılandırmanız için abone olun
+## <a name="subscribe-to-your-app-configuration"></a>Uygulama yapılandırmanıza abone olma
 
-Event Grid’e hangi olayları izlemek istediğinizi ve bu olayların nereye gönderileceğini bildirmek için bir konuya abone olursunuz. Aşağıdaki örnek, oluşturduğunuz ve URL'sini web uygulamanızdan olay bildirimi için uç nokta olarak geçirir. Uygulama yapılandırması abone olur. Olay aboneliğiniz için `<event_subscription_name>` öğesini bir ad ile değiştirin. `<resource_group_name>` ve `<appconfig_name>` için daha önce oluşturduğunuz değerleri kullanın.
+Event Grid’e hangi olayları izlemek istediğinizi ve bu olayların nereye gönderileceğini bildirmek için bir konuya abone olursunuz. Aşağıdaki örnek, oluşturduğunuz uygulama yapılandırmasına abone olur ve Web uygulamanızdan URL 'YI olay bildirimi için uç nokta olarak geçirir. Olay aboneliğiniz için `<event_subscription_name>` öğesini bir ad ile değiştirin. `<resource_group_name>` ve `<appconfig_name>` için daha önce oluşturduğunuz değerleri kullanın.
 
 Web uygulamanızın uç noktası `/api/updates/` sonekini içermelidir.
 
@@ -102,9 +98,9 @@ Web uygulamanızı yeniden görüntüleyin ve buna bir abonelik doğrulama olay�
 
 ![Abonelik olayını görüntüleme](./media/quickstarts/event-grid/view-subscription-event.png)
 
-## <a name="trigger-an-app-configuration-event"></a>Uygulama yapılandırması olay tetikleme
+## <a name="trigger-an-app-configuration-event"></a>Uygulama yapılandırma olayını tetikleme
 
-Şimdi, Event Grid’in iletiyi uç noktanıza nasıl dağıttığını görmek için bir olay tetikleyelim. Kullanarak bir anahtar-değer oluşturma `<appconfig_name>` daha önce gelen.
+Şimdi, Event Grid’in iletiyi uç noktanıza nasıl dağıttığını görmek için bir olay tetikleyelim. `<appconfig_name>` Öğesinden daha önce kullanarak bir anahtar değeri oluşturun.
 
 ```azurecli-interactive
 az appconfig kv set --name <appconfig_name> --key Foo --value Bar --yes
@@ -130,7 +126,7 @@ Olayı tetiklediniz ve Event Grid, iletiyi abone olurken yapılandırdığınız
 ```
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
-Bu uygulama yapılandırması ve olay aboneliği ile çalışmaya devam etmeyi planlıyorsanız bu makalede oluşturulan kaynakları temizlemeyin. Devam etmeyi planlamıyorsanız, aşağıdaki komutu kullanarak bu makalede oluşturduğunuz kaynakları silin.
+Bu uygulama yapılandırması ve olay aboneliğiyle çalışmaya devam etmeyi planlıyorsanız, bu makalede oluşturulan kaynakları temizlemeyin. Devam etmeyi planlamıyorsanız, aşağıdaki komutu kullanarak bu makalede oluşturduğunuz kaynakları silin.
 
 `<resource_group_name>` değerini yukarıda oluşturduğunuz kaynak grubuyla değiştirin.
 
@@ -140,7 +136,8 @@ az group delete --name <resource_group_name>
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Konu ve olay abonelikleri oluşturma işlemini artık bildiğinize göre anahtar-değer olayları ve ne Event Grid yapmanıza yardımcı olabileceğini hakkında daha fazla bilgi:
+Artık konular ve olay abonelikleri oluşturmayı bildiğinize göre, anahtar-değer olayları hakkında daha fazla bilgi edinin ve Event Grid şunları yapmanıza yardımcı olabilir:
 
-- [Anahtar-değer olaylara tepki verme](concept-app-configuration-event.md)
+- [Anahtar-değer olaylarına yeniden davranma](concept-app-configuration-event.md)
 - [Event Grid Hakkında](../event-grid/overview.md)
+- [Azure Event Grid işleyiciler](../event-grid/event-handlers.md)

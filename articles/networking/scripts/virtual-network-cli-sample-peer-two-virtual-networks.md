@@ -1,13 +1,10 @@
 ---
-title: Azure CLI betik örneği - iki sanal ağı eşleme | Microsoft Docs
-description: Azure CLI betik örneği - iki sanal ağı eşleme
+title: Azure CLı betik örneği-eş iki sanal ağ | Microsoft Docs
+description: Azure CLı betik örneği-eşler arası iki sanal ağ
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
-manager: timlt
-editor: tysonn
-tags: ''
-ms.assetid: ''
+manager: mtillman
 ms.service: virtual-network
 ms.devlang: azurecli
 ms.topic: article
@@ -15,16 +12,16 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 07/07/2017
 ms.author: kumud
-ms.openlocfilehash: 072d62f925d4f4024aa17d648a56dc6f37de00f1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0e5aaf07b49546aca9f44dcb9a43a79127c82341
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60848495"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890238"
 ---
-# <a name="peer-two-virtual-networks"></a>İki sanal ağı eşleme
+# <a name="peer-two-virtual-networks"></a>Eş iki sanal ağ
 
-Bu betik Azure ağı aracılığıyla aynı bölgedeki iki sanal ağı bağlanır ve oluşturur. Betiği çalıştırdıktan sonra iki sanal ağ arasında eşleme oluşturmuş olursunuz.
+Bu betik, Azure ağı aracılığıyla aynı bölgedeki iki sanal ağı oluşturur ve bağlar. Betiği çalıştırdıktan sonra iki sanal ağ arasında eşleme oluşturmuş olursunuz.
 
 [!INCLUDE [sample-cli-install](../../../includes/sample-cli-install.md)]
 

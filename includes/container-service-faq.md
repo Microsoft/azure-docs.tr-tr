@@ -4,14 +4,14 @@ ms.service: container-service
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: danlep
-ms.openlocfilehash: f903828285b0d4fdc8fbd932fa7c85056e937481
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 3e1e1266122ebcccc0149ca8e0421577becd6708
+ms.sourcegitcommit: 94ee81a728f1d55d71827ea356ed9847943f7397
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188928"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70036796"
 ---
-# <a name="deprecated-container-service-frequently-asked-questions"></a>(KULLANIM DIŞI) Kapsayıcı hizmeti sık sorulan sorular
+# <a name="deprecated-container-service-frequently-asked-questions"></a>Kullanım DıŞı Kapsayıcı hizmeti sık sorulan sorular
 
 [!INCLUDE [ACS deprecation](container-service-deprecation.md)]
 
@@ -37,7 +37,7 @@ Senaryonuza bağlı olarak, diğer Azure hizmetleriyle de özel kapsayıcı çö
 ### <a name="what-is-the-difference-between-azure-container-service-and-acs-engine"></a>Azure Container Service ile ACS Altyapısı arasındaki fark nedir? 
 Azure Container Service; Azure portalı, Azure komut satırı araçları ve Azure API’lerindeki özelliklere sahip SLA destekli bir Azure hizmetidir. Hizmet, çok az sayıda yapılandırma seçeneği ile standart kapsayıcı düzenleme araçlarını çalıştıran kümeleri hızlıca uygulayıp yönetmenizi sağlar. 
 
-[ACS Altyapısı](http://github.com/Azure/acs-engine), yetkili kullanıcıların her düzeyde küme yapılandırmasını özelleştirmesine olanak tanıya bir açık kaynak projesidir. Hem altyapı hem de yazılım yapılandırmasını değiştirmeye yönelik bu özellik, ACS Altyapısı için SLA sunulmadığı anlamına gelir. Destek, resmi Microsoft kanalları yerine GitHub üzerinde açık kaynak projesi üzerinden gerçekleştirilir. 
+[ACS Altyapısı](https://github.com/Azure/acs-engine), yetkili kullanıcıların her düzeyde küme yapılandırmasını özelleştirmesine olanak tanıya bir açık kaynak projesidir. Hem altyapı hem de yazılım yapılandırmasını değiştirmeye yönelik bu özellik, ACS Altyapısı için SLA sunulmadığı anlamına gelir. Destek, resmi Microsoft kanalları yerine GitHub üzerinde açık kaynak projesi üzerinden gerçekleştirilir. 
 
 Ek ayrıntılar için lütfen [kapsayıcılar için destek ilkemize](https://support.microsoft.com/en-us/help/4035670/support-policy-for-containers) bakın.
 
@@ -79,9 +79,11 @@ Azure portalı, Azure Kaynak Gezgini veya diğer Azure araçlarında kümeniz i�
 
 ### <a name="how-do-i-tell-which-orchestrator-version-is-running-in-my-cluster"></a>Kümemde hangi orchestrator sürümünün çalıştığını nasıl öğrenirim?
 
-* DC/OS: Bkz: [Mesosphere belgeleri](https://docs.mesosphere.com/1.7/usage/cli/command-reference/)
-* Docker Swarm: `docker version` öğesini çalıştırın
-* Kubernetes: `kubectl version` öğesini çalıştırın
+* DC/OS: [Mesosphere belgelerine](https://docs.mesosphere.com/1.7/usage/cli/command-reference/) bakın
+* Docker Sısınma: 
+          `docker version`'i çalıştırın.
+* Kubernetes: 
+          `kubectl version`'i çalıştırın.
 
 ### <a name="how-do-i-upgrade-the-orchestrator-after-deployment"></a>Dağıtımdan sonra orchestrator’ı nasıl yükseltirim?
 

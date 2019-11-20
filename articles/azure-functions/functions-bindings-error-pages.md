@@ -1,6 +1,6 @@
 ---
-title: Azure işlevleri hata işleme Kılavuzu | Microsoft Docs
-description: İşlevlerinizi yürüttüğünüzde içinde oluşan hataları ve özel bağlama hataları konulara bağlantılar işleme için genel rehberlik sağlar.
+title: Azure Işlevleri hata işleme Kılavuzu
+description: Azure Işlevlerinde belirli bağlama hatalarının bağlantılarıyla ilgili hataları işleme hakkında bilgi edinin.
 services: functions
 cloud: ''
 documentationcenter: ''
@@ -8,28 +8,29 @@ author: craigshoemaker
 manager: gwallace
 ms.assetid: ''
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
-ms.date: 02/01/2018
+ms.date: 09/11/2019
 ms.author: cshoe
-ms.openlocfilehash: ef8f2d5a63f7924097362f6aa0ebc78cc0f6455f
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: d301940998175adb6469e46cff2de918b5cae9df
+ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67480702"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71155279"
 ---
-# <a name="azure-functions-error-handling"></a>Azure işlevleri hata işleme
+# <a name="azure-functions-error-handling"></a>Azure Işlevleri hata işleme
 
-Bu konu, işlevlerinizin yürüttüğünüzde, oluşan hataları ele alma için genel rehberlik sağlar. Ayrıca, oluşabilecek bağlama özgü hatalar açıklayan konulara bağlantılar sağlar. 
+Azure Işlevlerinde hataları işleme, kayıp verilerin, unutulan olayların olmaması ve uygulamanızın durumunu izlemek için önemlidir.
 
-## <a name="handing-errors-in-functions"></a>İşleme hataları işlevleri
+Bu makalede, bağlama özgü hataların bağlantılarıyla birlikte hata işleme için genel stratejiler açıklanmaktadır.
+
+## <a name="handling-errors"></a>Hataları işleme
+
 [!INCLUDE [bindings errors intro](../../includes/functions-bindings-errors-intro.md)]
 
- 
 ## <a name="binding-error-codes"></a>Bağlama hata kodları
 
-Azure Hizmetleri ile tümleştirme, temel alınan hizmetler API'lerinden kaynaklanan yükseltilmiş hataları olabilir. Hata bağlantıları bu hizmetler bulunabilir için belgeleri kod **özel durumlar ve dönüş kodları** aşağıdaki tetikleyici ve bağlama başvuru konuları bölümünde:
+Azure hizmetleriyle tümleştirilirken, hatalar temeldeki hizmetlerin API 'Lerinden kaynaklanmayabilir. Bağlama özgü hatalarla ilgili bilgiler aşağıdaki makalelerin **özel durumlar ve dönüş kodları** bölümünde bulunabilir:
 
 + [Azure Cosmos DB](functions-bindings-cosmosdb.md#exceptions-and-return-codes)
 

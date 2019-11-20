@@ -1,6 +1,6 @@
 ---
-title: Azure Site Recovery'de (S2d) VM'ler depolama alanları doğrudan için çoğaltma yapılandırma | Microsoft Docs
-description: Bu makalede bir Azure bölgesinden diğerine Site RECOVERY'yi kullanarak, S2D sahip VM'ler için çoğaltma yapılandırma açıklanır.
+title: Azure Site Recovery kullanarak Depolama Alanları Doğrudan çalıştıran Azure VM 'lerini çoğaltma
+description: Bu makalede Azure Site Recovery kullanarak Depolama Alanları Doğrudan çalıştıran Azure VM 'lerinin nasıl çoğaltılacağı açıklanır.
 services: site-recovery
 author: asgang
 manager: rochakm
@@ -8,93 +8,93 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 01/29/2019
 ms.author: asgang
-ms.openlocfilehash: 6c639d4503b170660abed5767e3571c8a2bf24b9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 25ac7fa577aa33eda036c0f8544cc5ab03b12cd7
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60790342"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954457"
 ---
-# <a name="replicate-azure-virtual-machines-using-storage-spaces-direct-to-another-azure-region"></a>Depolama alanları doğrudan kullanarak başka bir Azure bölgesine çoğaltma Azure sanal makineler
+# <a name="replicate-azure-vms-running-storage-spaces-direct-to-another-region"></a>Depolama Alanları Doğrudan çalıştıran Azure VM 'lerini başka bir bölgeye çoğaltma
 
-Bu makalede, Azure Vm'lerinde çalışan depolama alanları doğrudan için olağanüstü durum kurtarmayı etkinleştirmeyi açıklar.
+Bu makalede, depolama alanları doğrudan çalıştıran Azure VM 'lerinin olağanüstü durum kurtarmasının nasıl etkinleştirileceği açıklanır.
 
 >[!NOTE]
->Yalnızca kilitlenme tutarlı kurtarma noktaları, depolama alanları doğrudan kümeleri için desteklenir.
+>Yalnızca çökme ile tutarlı kurtarma noktaları, depolama alanları doğrudan kümeleri için desteklenir.
 >
 
 ## <a name="introduction"></a>Giriş 
-[Depolama alanları doğrudan (S2D)](https://docs.microsoft.com/windows-server/storage/storage-spaces/deploy-storage-spaces-direct) oluşturmak için bir yol sağlayan bir yazılım tanımlı depolama, [Konuk kümeleri](https://blogs.msdn.microsoft.com/clustering/2017/02/14/deploying-an-iaas-vm-guest-clusters-in-microsoft-azure) azure'da.  Bir konuk Microsoft azure'da Iaas sanal makinelerin yük devretme oluşan kümedir. Tek bir Azure VM sağladığından daha yüksek kullanılabilirlik SLA'sı uygulamalar elde Konuk kümeleri arasında yük devretmek, barındırılan VM iş yükleri sağlar. Burada SQL veya ölçek kritik bir uygulamayı barındıran VM bu dosya sunucusuna vb. gibi senaryolarda yararlıdır.
+[Depolama alanları doğrudan (S2D)](https://docs.microsoft.com/windows-server/storage/storage-spaces/deploy-storage-spaces-direct) , Azure üzerinde [Konuk kümeler](https://blogs.msdn.microsoft.com/clustering/2017/02/14/deploying-an-iaas-vm-guest-clusters-in-microsoft-azure) oluşturmak için bir yol sağlayan, yazılım tanımlı bir depodır.  Microsoft Azure Konuk küme, IaaS VM 'lerinden oluşan bir yük devretme kümesidir. Barındırılan VM iş yüklerinin Konuk kümeler genelinde yük devredebilmeleri için, tek bir Azure VM 'nin sağlayabileceğinden uygulamalar için daha yüksek kullanılabilirlik SLA 'Sı sağlar. VM 'nin SQL veya genişleme dosya sunucusu gibi kritik bir uygulamayı barındırmakta olduğu senaryolarda faydalıdır.
 
-## <a name="disaster-recovery-of-azure-virtual-machines-using-storage-spaces-direct"></a>Olağanüstü durum kurtarma, Azure depolama alanları doğrudan kullanarak sanal makineleri
-Tipik bir senaryoda, azure'da sanal makineler Konuk küme için genişleme dosya sunucusuna ölçek gibi uygulamanızın daha yüksek bir dayanıklılık olabilir. Bu, daha yüksek kullanılabilirlik sağlarken, herhangi bir bölge düzeyinde hata için Site RECOVERY'yi kullanarak bu uygulamaları korumak ister misiniz? Site Recovery, veriler bir bölgeden başka bir Azure bölgesine çoğaltılır ve olağanüstü durum kurtarma bölgesinde bir olay, yük devretme kümesinde getirir.
+## <a name="disaster-recovery-of-azure-virtual-machines-using-storage-spaces-direct"></a>Depolama alanları doğrudan kullanarak Azure sanal makinelerini olağanüstü durumdan kurtarma
+Tipik bir senaryoda, Azure 'da genişleme dosya sunucusu gibi daha yüksek dayanıklılık sağlamak için sanal makineler konuk kümeniz olabilir. Bu, uygulamanızın daha yüksek kullanılabilirlik sağlamasına karşın, herhangi bir bölge düzeyindeki başarısızlık için Site Recovery kullanarak bu uygulamaları korumak istersiniz. Site Recovery, verileri bir bölgeden başka bir Azure bölgesine çoğaltır ve yük devretme durumunda kümeyi olağanüstü durum kurtarma bölgesinde getirir.
 
-Aşağıdaki diyagramda iki resimsel temsilini gösteren Azure Vm'leri yük devretme kümesi kullanarak depolama alanları doğrudan.
+Aşağıdaki diyagramda, depolama alanları doğrudan kullanan iki Azure VM yük devretme kümesinin resim gösterimi gösterilmektedir.
 
 ![storagespacesdirect](./media/azure-to-azure-how-to-enable-replication-s2d-vms/storagespacedirect.png)
 
  
-- Windows Yük devretme kümesinde iki Azure sanal makineleri ve her bir sanal makine iki veya daha fazla veri diski var.
-- S2D, verileri diskteki verileri eşitler ve bir depolama havuzu olarak eşitlenmiş depolama sunar.
-- Depolama havuzu, yük devretme kümesine Küme Paylaşılan birimi (CSV) olarak gösterir.
-- Yük devretme kümesine CSV veri sürücüleri için kullanır.
+- Bir Windows Yük devretme kümesindeki iki Azure sanal makinesi ve her sanal makinenin iki veya daha fazla veri diski vardır.
+- S2D veri diskindeki verileri eşitler ve eşitlenmiş depolamayı bir depolama havuzu olarak gösterir.
+- Depolama havuzu, yük devretme kümesine bir küme paylaşılan birimi (CSV) olarak sunulur.
+- Yük devretme kümesi, veri sürücüleri için CSV 'yi kullanır.
 
-**Olağanüstü durum kurtarma değerlendirmeleri**
+**Olağanüstü durum kurtarma konuları**
 
-1. Ne zaman ayarladığınız [bulut tanığı](https://docs.microsoft.com/windows-server/failover-clustering/deploy-cloud-witness#CloudWitnessSetUp) kümesi için Tanık olağanüstü durum kurtarma bölgesinde tutun.
-2. Daha sonra alt ağda kaynak bölgeden farklı DR bölgesindeki sanal makinelere yük devretmek için kullanacaksanız olması değiştirmek, yük devretme işleminden sonra küme IP adresi gerekir.  ASR kullanması gereken küme IP değiştirmek için [kurtarma planı betiği.](https://docs.microsoft.com/azure/site-recovery/site-recovery-runbook-automation)</br>
-[Örnek komut dosyası](https://github.com/krnese/azure-quickstart-templates/blob/master/asr-automation-recovery/scripts/ASR-Wordpress-ChangeMysqlConfig.ps1) özel betik uzantısını kullanarak VM içinde komutu yürütmek için 
+1. Küme için [bulut tanığı](https://docs.microsoft.com/windows-server/failover-clustering/deploy-cloud-witness#CloudWitnessSetUp) ayarlarken, tanığını olağanüstü durum kurtarma bölgesinde tutun.
+2. Kaynak bölgeden farklı olan DR bölgesindeki alt ağa sanal makinelerin yükünü devretmek için, küme IP adresinin yük devretmeden sonra değiştirilmesi gerekir.  Kümenin IP 'sini değiştirmek için ASR [kurtarma planı betiği](https://docs.microsoft.com/azure/site-recovery/site-recovery-runbook-automation) kullanmanız gerekir.</br>
+Özel Betik uzantısı kullanarak VM içinde komut yürütmek için [örnek betik](https://github.com/krnese/azure-quickstart-templates/blob/master/asr-automation-recovery/scripts/ASR-Wordpress-ChangeMysqlConfig.ps1) 
 
-### <a name="enabling-site-recovery-for-s2d-cluster"></a>Site Recovery için S2D kümesi etkinleştirme:
+### <a name="enabling-site-recovery-for-s2d-cluster"></a>S2D kümesi için Site Recovery Etkinleştiriliyor:
 
-1. İçinde bir kurtarma Hizmetleri kasası, tıklayın "+ Çoğalt"
-1. Kümedeki tüm düğümleri seçin ve bunları parçası olan bir [çoklu VM tutarlılığı grubu](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-common-questions#multi-vm-consistency)
-1. Çoğaltma İlkesi ile uygulama tutarlılığı kapalı seçin. * (kilitlenme tutarlılığı desteği yalnızca kullanılabilir)
+1. Kurtarma Hizmetleri kasasının içinde "+ Çoğalt" a tıklayın.
+1. Kümedeki tüm düğümleri seçin ve bunları [Çoklu VM tutarlılık grubunun](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-common-questions#multi-vm-consistency) bir parçası yapın
+1. Uygulama tutarlılığı olmadan çoğaltma ilkesi seçin * (yalnızca kilitlenme tutarlılığı desteği kullanılabilir)
 1. Çoğaltmayı etkinleştirme
 
-   ![storagespacesdirect koruma](./media/azure-to-azure-how-to-enable-replication-s2d-vms/multivmgroup.png)
+   ![storagespacesdirect koruması](./media/azure-to-azure-how-to-enable-replication-s2d-vms/multivmgroup.png)
 
-2. Çoğaltılan öğeler'e gidin ve her iki sanal makine durumunu görebilirsiniz. 
-3. Sanal makinelerin korunur ve aynı zamanda çoklu VM tutarlılığı grubunun bir parçası gösterilir.
+2. Çoğaltılan öğelere gidin ve sanal makine durumunu da görebilirsiniz. 
+3. Her iki sanal makine de korunur ve çoklu VM tutarlılık grubunun bir parçası olarak gösterilir.
 
-   ![storagespacesdirect koruma](./media/azure-to-azure-how-to-enable-replication-s2d-vms/storagespacesdirectgroup.PNG)
+   ![storagespacesdirect koruması](./media/azure-to-azure-how-to-enable-replication-s2d-vms/storagespacesdirectgroup.PNG)
 
-## <a name="creating-a-recovery-plan"></a>Bir kurtarma planı oluşturma
-Bir kurtarma planı yük devretme sırasında çok katmanlı bir uygulama çeşitli katmanları sıralama destekler. Sıralama, özel olarak uygulama tutarlılığı sürdürmeye yardımcı olur. Çok katmanlı web uygulaması için bir kurtarma planı oluşturduğunuzda, tam adımlar açıklanan [Site Recovery kullanarak bir kurtarma planı oluşturma](site-recovery-create-recovery-plans.md).
+## <a name="creating-a-recovery-plan"></a>Kurtarma planı oluşturma
+Kurtarma planı, yük devretme sırasında çok katmanlı bir uygulamadaki çeşitli katmanların sıralamasını destekler. Sıralama, uygulama tutarlılığını sürdürmenize yardımcı olur. Çok katmanlı bir Web uygulaması için bir kurtarma planı oluşturduğunuzda [Site Recovery kullanarak kurtarma planı oluşturma](site-recovery-create-recovery-plans.md)bölümünde açıklanan adımları uygulayın.
 
-### <a name="adding-virtual-machines-to-failover-groups"></a>Sanal makineler için yük devretme grupları ekleme
+### <a name="adding-virtual-machines-to-failover-groups"></a>Yük devretme gruplarına sanal makineler ekleme
 
-1.  Sanal makineler ekleyerek bir kurtarma planı oluşturun.
-2.  'Sanal makineleri gruplandırmak için Özelleştir' tıklayın. Varsayılan olarak, tüm VM'ler 'Grubu 1' bir parçasıdır.
-
-
-### <a name="add-scripts-to-the-recovery-plan"></a>Betikleri kurtarma planına ekleyin
-Uygulamalarınızın düzgün çalışması, yük devretme işleminden sonra veya bir yük devretme testi sırasında Azure sanal makinelerinde bazı işlemler yapmanız gerekebilir. Bazı yük devretme sonrası işlemleri otomatik hale getirebilirsiniz. Örneğin, burada size loadbalancer bağladığınız ve küme IP değiştirme.
+1.  Sanal makineleri ekleyerek bir kurtarma planı oluşturun.
+2.  VM 'Leri gruplandırmak için ' Özelleştir 'e tıklayın. Varsayılan olarak, tüm VM 'Ler ' Grup 1 ' in bir parçasıdır.
 
 
-### <a name="failover-of-the-virtual-machines"></a>Sanal makinelerin yük devretme 
-Sanal makinelerin her iki düğüm gerekiyor başarısız olması yerine [ASR kurtarma planı](https://docs.microsoft.com/azure/site-recovery/site-recovery-create-recovery-plans) 
+### <a name="add-scripts-to-the-recovery-plan"></a>Kurtarma planına betikler ekleme
+Uygulamalarınızın düzgün çalışması için, yük devretmeden sonra veya yük devretme testi sırasında Azure sanal makinelerinde bazı işlemler yapmanız gerekebilir. Bazı yük devretme sonrası işlemleri otomatik hale getirebilirsiniz. Örneğin, bu yük dengeleyici ekleniyor ve küme IP 'yi değiştiriyor.
 
-![storagespacesdirect koruma](./media/azure-to-azure-how-to-enable-replication-s2d-vms/recoveryplan.PNG)
+
+### <a name="failover-of-the-virtual-machines"></a>Sanal makinelerin yük devretmesi 
+Her iki sanal makine düğümünün de [ASR kurtarma planı](https://docs.microsoft.com/azure/site-recovery/site-recovery-create-recovery-plans) kullanılarak yük devri yapması gerekir 
+
+![storagespacesdirect koruması](./media/azure-to-azure-how-to-enable-replication-s2d-vms/recoveryplan.PNG)
 
 ## <a name="run-a-test-failover"></a>Yük devretme testi çalıştırma
-1.  Azure portalında kurtarma Hizmetleri kasanızı seçin.
-2.  Oluşturduğunuz kurtarma planı seçin.
+1.  Azure portal, kurtarma hizmetleri kasanızı seçin.
+2.  Oluşturduğunuz kurtarma planını seçin.
 3.  **Yük Devretme Testi**'ni seçin.
-4.  Test yük devretme işlemini başlatmak için kurtarma noktası ve Azure sanal ağı'nı seçin.
-5.  İkincil bir ortamı yukarı olduğunda doğrulamaları gerçekleştirin.
-6.  Yük devretme ortamı temizlemek için doğrulamaları tamamlandığı zaman seçin **yük devretme testini Temizle**.
+4.  Yük devretme testi işlemini başlatmak için kurtarma noktasını ve Azure sanal ağını seçin.
+5.  İkincil ortam çalışır duruma geldiğinde doğrulama gerçekleştirin.
+6.  Doğrulamalar tamamlandığında, yük devretme ortamını temizlemek için **Test yük devretmesini**Temizle ' yi seçin.
 
-Daha fazla bilgi için [Azure Site recovery'de yük devretme testi](site-recovery-test-failover-to-azure.md).
+Daha fazla bilgi için bkz. [Azure 'a yük devretmeyi test etme Site Recovery](site-recovery-test-failover-to-azure.md).
 
 ## <a name="run-a-failover"></a>Yük devretme çalıştırma
 
-1.  Azure portalında kurtarma Hizmetleri kasanızı seçin.
-2.  SAP uygulamaları için oluşturduğunuz kurtarma planı seçin.
+1.  Azure portal, kurtarma hizmetleri kasanızı seçin.
+2.  SAP uygulamaları için oluşturduğunuz kurtarma planını seçin.
 3.  **Yük devretme**'yi seçin.
 4.  Yük devretme işlemini başlatmak için kurtarma noktasını seçin.
 
-Daha fazla bilgi için [Site recovery'de yük devretme](site-recovery-failover.md).
+Daha fazla bilgi için bkz. [Site Recovery 'de yük devretme](site-recovery-failover.md).
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Daha fazla bilgi edinin](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-failover-failback) yeniden çalışma çalıştırma hakkında.
+Yeniden çalışma çalıştırma hakkında [daha fazla bilgi edinin](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-failover-failback) .

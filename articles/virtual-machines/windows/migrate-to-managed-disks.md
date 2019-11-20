@@ -1,45 +1,36 @@
 ---
-title: Azure Vm'leri yönetilen disklere geçirme | Microsoft Docs
-description: Yönetilen diskleri kullanacak şekilde depolama hesaplarındaki yönetilmeyen diskler kullanılarak oluşturulan Azure sanal makineleri geçirin.
-services: virtual-machines-windows
-documentationcenter: ''
+title: Azure VM 'lerini yönetilen disklere geçirme
+description: Yönetilen diskleri kullanmak için depolama hesaplarında yönetilmeyen diskler kullanılarak oluşturulan Azure sanal makinelerini geçirin.
 author: roygara
-manager: twooley
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.workload: infrastructure-services
-ms.tgt_pltfrm: vm-windows
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/30/2019
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: 7a390c5231f715ce778c0cc267211b8bfb5934d2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7b907cf5bf64aa1a8a458a8d2b42c30dffd0dfd1
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66418408"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74029788"
 ---
-# <a name="migrate-azure-vms-to-managed-disks-in-azure"></a>Azure Vm'leri azure'da yönetilen disklere geçirme
+# <a name="migrate-azure-vms-to-managed-disks-in-azure"></a>Azure VM 'Leri Azure 'da yönetilen disklere geçirme
 
-Azure yönetilen diskler, ayrı ayrı depolama hesaplarını yönetme ihtiyacını ortadan kaldırarak depolama yönetimini basitleştirir.  Ayrıca mevcut Azure Vm'lerinizi bir kullanılabilirlik kümesindeki VM'ler, daha fazla güvenilirlik yararlanmasını yönetilen diskler geçirebilirsiniz. Bir kullanılabilirlik kümesindeki farklı VM disklerinin yeterince tek hata noktasını önlemek için birbirinden yalıtılmasını sağlar. Bir kullanılabilirlik sınırlayan tek depolama ölçek birimi hatalarına neden nedeniyle donanım ve yazılım hataları etkisini kümesi'nde, farklı depolama ölçek birimi (damgaları ') farklı bir VM disklerinin otomatik olarak geçirir.
-Gereksinimlerinize bağlı olarak, dört tür depolama seçeneği seçebilirsiniz. Kullanılabilir disk türleri hakkında bilgi edinmek için bkz: makalemizi [bir disk türü seçin](disks-types.md)
+Azure yönetilen diskler, depolama hesaplarını ayrı olarak yönetme gereksinimini ortadan kaldırarak depolama yönetiminizi basitleştirir.  Ayrıca, bir kullanılabilirlik kümesindeki VM 'lerin daha iyi güvenlerinden yararlanmak için mevcut Azure sanal makinelerinizi yönetilen disklere geçirebilirsiniz. Tek bir başarısızlık noktasını önlemek için bir kullanılabilirlik kümesindeki farklı sanal makinelerin disklerinin birbirinden yeterince yalıtılmış olmasını sağlar. Farklı sanal makinelerin disklerini, farklı depolama ölçek birimlerindeki (damgalar), donanım ve yazılım hatalarından kaynaklanan tek bir depolama ölçek birimi hatalarının etkisini sınırlayan bir kullanılabilirlik kümesine otomatik olarak koyar.
+Gereksinimlerinize göre dört tür depolama seçeneği arasından seçim yapabilirsiniz. Kullanılabilir disk türleri hakkında bilgi edinmek için bkz. makalemiz [disk türü seçme](disks-types.md)
 
 ## <a name="migration-scenarios"></a>Geçiş senaryoları
 
-Aşağıdaki senaryolarda yönetilen disklere geçirebilirsiniz:
+Aşağıdaki senaryolarda yönetilen disklere geçiş yapabilirsiniz:
 
 |Senaryo  |Makale  |
 |---------|---------|
-|Tek başına VM'leri ve bir kullanılabilirlik kümesindeki VM'leri yönetilen disklere dönüştürme     |[Vm'leri yönetilen diskleri kullanacak şekilde dönüştürme](convert-unmanaged-to-managed-disks.md)         |
-|Tek bir VM'yi Klasikten Resource Manager'a yönetilen diskler üzerindeki Dönüştür     |[Klasik bir VHD'den VM oluşturma](create-vm-specialized-portal.md)         |
-|Bir sanal ağ içindeki tüm Vm'leri Klasik moddan Resource Manager için yönetilen diskler üzerindeki Dönüştür     |[Iaas kaynaklarının Klasikten Resource Manager'a geçiş](migration-classic-resource-manager-ps.md) ardından [VM'yi yönetilmeyen disklerden yönetilen disklere dönüştürme](convert-unmanaged-to-managed-disks.md)         |
-|VM'ler, vm'lere standart yönetilmeyen diskler ile premium yönetilen diskler ile yükseltme     | İlk olarak, [bir Windows sanal makine yönetilmeyen disklerden yönetilen disklere dönüştürme](convert-unmanaged-to-managed-disks.md). Ardından [yönetilen disk depolama türü güncelleştirme](convert-disk-storage.md).         |
+|Tek başına VM'leri ve bir kullanılabilirlik kümesindeki VM'leri yönetilen disklere dönüştürme     |[VM 'Leri yönetilen diskleri kullanacak şekilde dönüştürme](convert-unmanaged-to-managed-disks.md)         |
+|Yönetilen disklerde tek bir VM 'yi klasik 'ten Kaynak Yöneticisi dönüştürme     |[Klasik bir VHD 'den VM oluşturma](create-vm-specialized-portal.md)         |
+|Yönetilen disklerde, bir sanal ağdaki tüm VM 'Leri klasik 'ten Kaynak Yöneticisi Dönüştür     |[IaaS kaynaklarını klasik 'ten Kaynak Yöneticisi geçirin](migration-classic-resource-manager-ps.md) ve ardından [bir VM 'yi yönetilmeyen disklerden yönetilen disklere dönüştürün](convert-unmanaged-to-managed-disks.md)         |
+|Yönetilen Premium disklere sahip VM 'lere standart yönetilmeyen disklerle sanal makineler yükseltme     | İlk olarak, [bir Windows sanal makinesini yönetilmeyen disklerden yönetilen disklere dönüştürün](convert-unmanaged-to-managed-disks.md). Ardından [yönetilen bir diskin depolama türünü güncelleştirin](convert-disk-storage.md).         |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [yönetilen diskler](managed-disks-overview.md)
-- Gözden geçirme [yönetilen diskler için fiyatlandırma](https://azure.microsoft.com/pricing/details/managed-disks/).
+- [Yönetilen diskler](managed-disks-overview.md) hakkında daha fazla bilgi edinin
+- [Yönetilen diskler için fiyatlandırmayı](https://azure.microsoft.com/pricing/details/managed-disks/)gözden geçirin.

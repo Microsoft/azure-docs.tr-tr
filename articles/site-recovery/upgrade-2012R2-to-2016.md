@@ -1,6 +1,6 @@
 ---
-title: Windows Server 2012 R2 konakların ve Windows Server 2016 için Azure Site Recovery ile yapılandırılmış SCVMM yükseltme
-description: Azure'da olağanüstü durum kurtarma için Azure Stack Vm'leri Azure Site Recovery hizmeti ile nasıl ayarlanacağını öğrenin.
+title: Windows Server/System Center VMM 2012 R2 'yi Windows Server 2016 'ye yükseltme-Azure Site Recovery
+description: Azure Site Recovery hizmetiyle Azure Stack VM 'Ler için Azure 'da olağanüstü durum kurtarmayı ayarlamayı öğrenin.
 services: site-recovery
 author: rajani-janaki-ram
 manager: rochakm
@@ -8,106 +8,106 @@ ms.topic: conceptual
 ms.service: site-recovery
 ms.date: 12/03/2018
 ms.author: rajanaki
-ms.openlocfilehash: b67290f72f762331a6d699fb79aef0c0d7f9fb65
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1d94935db542a0e64754ab8769996fe906f88b46
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61275532"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954416"
 ---
-# <a name="upgrade-windows-server-2012-r2-hosts-scvmm-2012-r2-configured-with-azure-site-recovery-to-windows-server-2016--scvmm-2016"></a>Windows Server 2012 R2 ana bilgisayarları, Windows Server 2016 & SCVMM 2016 Azure Site Recovery ile yapılandırılmış SCVMM 2012 R2 yükseltme
+# <a name="upgrade-windows-server-serversystem-center-2012-r2-vmm-to-windows-servervmm-2016"></a>Windows Server Server/System Center 2012 R2 VMM 'yi Windows Server/VMM 2016 'ye yükseltme 
 
-Bu makalede, Windows Server 2012 R2 konakların ve Azure Site Recovery, Windows Server 2016 & SCVMM 2016 ile yapılandırılmış bir SCVMM 2012 R2 sürümüne yükseltme yapmayı gösterir
+Bu makalede, Azure Site Recovery ile yapılandırılan Windows Server 2012 R2 konaklarının & SCVMM 2012 R2 'yi Windows Server 2016 & SCVMM 2016 ' e nasıl yükselteceğiniz gösterilmektedir
 
-Site Recovery, iş sürekliliği ve olağanüstü durum kurtarma (BCDR) stratejinize katkı sağlar. VM iş yüklerinizi beklendiği zaman kullanılabilir durumda kalır ve beklenmeyen kesintiler hizmet sağlar.
+Site Recovery iş sürekliliği ve olağanüstü durum kurtarma (BCDR) stratejinize katkıda bulunur. Hizmet, sanal makine iş yüklerinizin beklenen durumlarda kullanılabilir kalmasını ve beklenmeyen kesintiler meydana gelmesini sağlar.
 
 > [!IMPORTANT]
-> Azure Site Recovery çoğaltması için yapılandırılmış olan Windows Server 2012 R2 konak yükselttiğinizde, bu belgede anlatılan adımları izlemelisiniz. Yükseltme için seçilen herhangi bir alternatif yolu desteklenmeyen durumlarda neden olabilir ve bir kesme çoğaltma veya yük devretme gerçekleştirme becerisi neden olabilir.
+> Azure Site Recovery ile çoğaltma için zaten yapılandırılmış olan Windows Server 2012 R2 konaklarını yükselttiğinizde, bu belgede bahsedilen adımları izlemeniz gerekir. Yükseltme için seçilen alternatif yol, desteklenmeyen durumlara neden olabilir ve çoğaltma veya yük devretme gerçekleştirme yeteneğinin oluşmasına neden olabilir.
 
 
-Bu makalede, ortamınızda aşağıdaki yapılandırmaları sürümüne yükseltme yapmayı öğrenin:
+Bu makalede, ortamınızda aşağıdaki yapılandırmaların nasıl yükseltileceğini öğreneceksiniz:
 
 > [!div class="checklist"]
-> * **Windows Server 2012 R2 konak, bir SCVMM tarafından yönetilmiyor** 
-> * **Tek başına SCVMM 2012 R2 sunucusu tarafından yönetilen Windows Server 2012 R2 konak** 
-> * **Yüksek oranda kullanılabilir bir SCVMM 2012 R2 sunucusu tarafından yönetilen Windows Server 2012 R2 konak**
+> * **SCVMM tarafından yönetilmeyen Windows Server 2012 R2 Konakları** 
+> * **Tek başına bir SCVMM 2012 R2 sunucusu tarafından yönetilen Windows Server 2012 R2 Konakları** 
+> * **Yüksek oranda kullanılabilir SCVMM 2012 R2 Server tarafından yönetilen Windows Server 2012 R2 Konakları**
 
 
-## <a name="prerequisites--factors-to-consider"></a>Önkoşulları & dikkat edilecek noktalar
+## <a name="prerequisites--factors-to-consider"></a>Dikkate alınması gereken & önkoşulları
 
-Yükseltmeden önce aşağıdakilere dikkat edin:-
+Yükseltmeden önce şunları göz önünde bulabilirsiniz:-
 
-- SCVMM tarafından yönetilmeyen Windows Server 2012 R2 ana bilgisayarları varsa ve tek başına ortam oluşturma, olacaktır mola Çoğaltmada yükseltme yapmayı denerseniz.
-- Seçtiyseniz, "*Anahtarlarımı Active Directory'de dağıtılmış anahtar yönetimi altında depolamamayı*" ilk başta SCVMM 2012 R2'yi yüklerken, yükseltmeleri başarıyla tamamlanmayacaktır.
+- SCVMM tarafından yönetilmeyen Windows Server 2012 R2 Konakları varsa ve tek başına bir ortam kurulumu ise, yükseltmeyi gerçekleştirmeye çalışırsanız çoğaltma sırasında bir kesme olur.
+- SCVMM 2012 R2 'yi ilk yere yüklerken "*anahtarlarımı dağıtılmış anahtar yönetimi altında Active Directory olarak depolamam*" seçeneğini belirlediyseniz, yükseltmeler başarıyla tamamlanmaz.
 
 - System Center 2012 R2 VMM kullanıyorsanız, 
 
-    - VMM veritabanı bilgileri kontrol edin: **VMM konsolunu** -> **ayarları** -> **genel** -> **veritabanı bağlantısı**
-    - System Center Virtual Machine Manager Aracısı hizmeti için kullanılan hizmet hesaplarını denetle
-    - VMM veritabanının bir yedeği olduğundan emin olun.
-    - SCVMM sunucular, veritabanı adı not edin. Bu giderek yapılabilir **VMM konsolunu** -> **ayarları** -> **genel** -> **veritabanı bağlantısı**
-    - 2012R2 birincil ve kurtarma VMM sunucuları VMM Kimliğini not alın. Kayıt defterinden "HKLM:\SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Setup" VMM kimliği bulunamadı.
-    - Önceden olarak, kümeye eklemek yeni SCVMMs aynı adları geçerli olduğundan emin olun. 
+    - VMM 'deki veritabanı bilgilerini denetleyin: **VMM konsolu** -> **ayarları** -> **genel** -> **veritabanı bağlantısı**
+    - System Center Virtual Machine Manager Aracısı hizmeti için kullanılan hizmet hesaplarını denetleme
+    - VMM veritabanının yedeğine sahip olduğunuzdan emin olun.
+    - Dahil edilen SCVMM sunucularının veritabanı adını aklınızda edin. Bu işlem, **VMM konsol** -> **ayarları** -> **genel** -> **veritabanı bağlantısı** ' na gidilerek yapılabilir
+    - Hem 2012R2 birincil hem de kurtarma VMM sunucularının VMM KIMLIĞINI aklınızda edin. VMM KIMLIĞI, "HKLM: \ SOFTWARE\Microsoft\Microsoft System Center Virtual Machine Manager Server\Setup" kayıt defterinden bulunabilir.
+    - Kümeye eklediğiniz yeni SCN 'ler, daha önce olduğu gibi adlara sahip olduğundan emin olun. 
 
-- Her iki kenarı da SCVMMs tarafından yönetilen sitelerinizden ikisi arasında çoğaltıyorsanız, birincil tarafı yükseltmeden önce kurtarma tarafı önce yükseltmeniz emin olun.
+- Her iki tarafta da SCVMMs tarafından yönetilen sitelerinizden ikisi arasında çoğaltma yapıyorsanız, birincil tarafı yükseltmeden önce kurtarma yüzinizi yükseltdiğinizden emin olun.
   > [!WARNING]
-  > İçin Dağıtılmış anahtar yönetimi altında SCVMM 2012 R2 yükseltilirken seçin **şifreleme anahtarlarını Active Directory'de depolamak**. Hizmet hesabını ve dağıtılmış anahtar yönetimi ayarlarını dikkatle seçin. Gibi şablonlardaki parolalar değil yükseltmeden sonra kullanılabilir ve büyük olasılıkla için yaptığınız seçime göre şifrelenmiş veriler Azure Site Recovery ile çoğaltmayı etkiler
+  > SCVMM 2012 R2 'yi yükseltirken, dağıtılmış anahtar yönetimi altında, **şifreleme anahtarlarını Active Directory ' de depolamayı**seçin. Hizmet hesabı ve dağıtılmış anahtar yönetimi ayarlarını dikkatle seçin. Seçiminize bağlı olarak, şablonlardaki parolalar gibi şifrelenmiş veriler yükseltmeden sonra kullanılamayabilir ve Azure Site Recovery ile çoğaltmayı etkileyebilecek olabilir
 
 > [!IMPORTANT]
-> Lütfen ayrıntılı SCVMM belgelerine başvurun [önkoşulları](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#requirements-and-limitations)
+> Lütfen [önkoşulların](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#requirements-and-limitations) ayrıntılı SCVMM belgelerine bakın
 
-## <a name="windows-server-2012-r2-hosts-which-arent-managed-by-scvmm"></a>Windows Server 2012 R2 konak, bir SCVMM tarafından yönetilmiyor 
-Kullanıcı yapılandırmasından aşağıda belirtilen adımları listesi uygulandığı [azure'a Hyper-V konakları](https://docs.microsoft.com/azure/site-recovery/hyper-v-azure-architecture) takip ederek yürütülen [Öğreticisi](https://docs.microsoft.com/azure/site-recovery/hyper-v-prepare-on-premises-tutorial)
+## <a name="windows-server-2012-r2-hosts-which-arent-managed-by-scvmm"></a>SCVMM tarafından yönetilmeyen Windows Server 2012 R2 Konakları 
+Aşağıda bahsedilen adımların listesi, bu [öğreticiyi](https://docs.microsoft.com/azure/site-recovery/hyper-v-prepare-on-premises-tutorial) izleyerek [Hyper-V konaklarındaki Azure 'a yönelik](https://docs.microsoft.com/azure/site-recovery/hyper-v-azure-architecture) Kullanıcı Yapılandırması için geçerlidir
 
 > [!WARNING]
-> Önkoşullarda belirtildiği gibi bu adımlar yalnızca kümelenmiş ortam senaryosu ve bir tek başına Hyper-V ana bilgisayar yapılandırması içinde değil geçerlidir.
+> Önkoşullardan bahsedildiği gibi, bu adımlar yalnızca, tek başına bir Hyper-V ana bilgisayar yapılandırmasında değil, kümelenmiş bir ortam senaryosu için geçerlidir.
 
-1. Adımları gerçekleştirmek için [sıralı küme yükseltmesi.](https://docs.microsoft.com/windows-server/failover-clustering/cluster-operating-system-rolling-upgrade#cluster-os-rolling-upgrade-process) sıralı Küme yükseltme işlemini yürütmek için.
-2. Kümede kullanıma sunulan her yeni Windows Server 2016 ana bilgisayar ile bir Windows Server 2012 R2 konağı başvurusu, [burada] belirtilen adımları izleyerek Azure Site Recovery'den kaldırın. Bu konak kümesinden Tahliye & Boşalt seçtiniz olmalıdır.
-3. Bir kez *güncelleştirme VMVersion* komutu tüm sanal makineler için yürütüldü, yükseltme tamamlandı. 
-4. Belirtilen adımları kullanmak [burada](https://docs.microsoft.com/azure/site-recovery/hyper-v-azure-tutorial#set-up-the-source-environment) yeni Windows Server 2016 konağı Azure Site recovery'ye kaydetmek için. Hyper-V sitesi halen etkin olduğundan ve yeni konak kümesine kaydetmek yeterlidir lütfen unutmayın. 
-5.  Azure portalına gidin ve kurtarma Hizmetleri içinde çoğaltılmış sistem durumunu doğrulayın
+1. [Kayan küme yükseltmesini](https://docs.microsoft.com/windows-server/failover-clustering/cluster-operating-system-rolling-upgrade#cluster-os-rolling-upgrade-process) gerçekleştirmek için adımları izleyin. çalışırken küme yükseltme işlemini yürütmek için.
+2. Kümede tanıtılan her yeni Windows Server 2016 ana bilgisayarı ile, [buradan] bahsedilen adımları izleyerek Azure Site Recovery bir Windows Server 2012 R2 ana bilgisayarının başvurusunu kaldırın. Bu, kümeden çıkarılması & boşaltmayı seçtiğiniz ana bilgisayar olmalıdır.
+3. *Update-VMVersion* komutu tüm sanal makineler için yürütüldükten sonra, yükseltmeler tamamlanmıştır. 
+4. Azure Site Recovery için yeni Windows Server 2016 konağını kaydetmek üzere [burada](https://docs.microsoft.com/azure/site-recovery/hyper-v-azure-tutorial#set-up-the-source-environment) bahsedilen adımları kullanın. Lütfen Hyper-V sitesinin zaten etkin olduğunu ve yalnızca yeni konağı kümeye kaydetmeniz gerektiğini unutmayın. 
+5.  Azure portal gidin ve Kurtarma Hizmetleri içindeki çoğaltılan sistem durumunu doğrulayın
 
-## <a name="upgrade-windows-server-2012-r2-hosts-managed-by-stand-alone-scvmm-2012-r2-server"></a>Tek başına SCVMM 2012 R2 sunucusu tarafından yönetilen Windows Server 2012 R2'in konakları yükseltme
-Windows Server 2012 R2 konaklarınız yükseltmeden önce SCVMM 2012 R2'yi SCVMM 2016'ya yükseltmeniz gerekir. İzleyin aşağıdaki adımları:-
+## <a name="upgrade-windows-server-2012-r2-hosts-managed-by-stand-alone-scvmm-2012-r2-server"></a>Tek başına SCVMM 2012 R2 sunucusu tarafından yönetilen Windows Server 2012 R2 konaklarınızı yükseltin
+Windows sever 2012 R2 konaklarınızı yükseltmeden önce, SCVMM 2012 R2 'yi SCVMM 2016 sürümüne yükseltmeniz gerekir. Aşağıdaki adımları izleyin:-
 
-**Tek başına SCVMM 2012 R2'yi SCVMM 2016'ya yükseltme**
+**Tek başına SCVMM 2012 R2 'yi SCVMM 2016 sürümüne yükseltin**
 
-1.  Denetim Masası'na giderek kaldırma ASR sağlayıcısı -> Programlar -> Programlar ve Özellikler -> Microsoft Azure Site Recovery ve üzerinde Kaldır'ı tıklatın
-2. [SCVMM veritabanını korumak ve işletim sistemini yükseltme](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#back-up-and-upgrade-the-operating-system)
-3. İçinde **Ekle Kaldır**seçin **VMM** > **kaldırma**. b. Seçin **özellikleri Kaldır**ve V ardından**MM yönetim sunucusu ve VMM konsolunu**. c. İçinde **veritabanı seçenekleri**seçin **veritabanını tut**. d. Özeti gözden geçirin ve tıklayın **kaldırma**.
+1.  Denetim Masası-> Programlar-> Programlar ve Özellikler-> Microsoft Azure Site Recovery ' a giderek ASR sağlayıcısını kaldırın ve Kaldır ' a tıklayın.
+2. [SCVMM veritabanını koruma ve işletim sistemini yükseltme](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#back-up-and-upgrade-the-operating-system)
+3. **Program Ekle Kaldır**bölümünde **VMM** > **Kaldır**' ı seçin. b. **Özellikleri Kaldır**' ı seçin ve ardından V**mm YÖNETIM sunucusu ve VMM konsolu**' nu seçin. c. **Veritabanı seçenekleri**' nde **veritabanını sakla**' yı seçin. d. Özeti gözden geçirin ve **Kaldır**' a tıklayın.
 
-4. [VMM 2016'yı yükleyin](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#install-vmm-2016)
-5. SCVMM başlatın ve her bir ana bilgisayar durumunu **dokularını** sekmesi. Tıklayın **Yenile** en son durumu almak için. "Dikkat gerekiyor" durumuna görmeniz gerekir. 
-17. Son yükleme [Microsoft Azure Site Recovery sağlayıcısı](https://aka.ms/downloaddra) SCVMM üzerinde.
-16. Son yükleme [Microsoft Azure kurtarma hizmeti (MARS) aracısı](https://aka.ms/latestmarsagent) kümenin her bir konakta. SCVMM ana başarıyla sorgulayabilir olduğundan emin olmak için yenileyin.
+4. [VMM 2016 'yi yükler](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#install-vmm-2016)
+5. **Yapılar** sekmesinin altındaki her BIR konağın SCVMM 'yi başlatın ve durumunu denetleyin. en son durumu almak için **Yenile** 'ye tıklayın. Durumu "Ilgilenilmesi gerekiyor" olarak görmeniz gerekir. 
+17. En son [Microsoft Azure Site Recovery SAĞLAYıCıSıNı](https://aka.ms/downloaddra) SCVMM 'ye yükler.
+16. En son [Microsoft Azure kurtarma hizmeti (mars) aracısını](https://aka.ms/latestmarsagent) kümenin her bir konağına yükler. SCVMM 'nin Konakları başarıyla sorgulayabilmesini sağlamak için yenileyin.
 
-**Windows Server 2012 R2 konak Windows Server 2016'ya yükseltme**
+**Windows Server 2012 R2 konaklarınızı Windows Server 2016 ' ye yükseltme**
 
-1. Belirtilen adımları takip [burada](https://docs.microsoft.com/windows-server/failover-clustering/cluster-operating-system-rolling-upgrade#cluster-os-rolling-upgrade-process) sıralı Küme yükseltme işlemini yürütmek için. 
-2. Yeni konağın kümeye ekledikten sonra bu güncelleştirilmiş bir konakta VMM aracısını yüklemek için ana bilgisayardan SCVMM konsolunu yenileyin.
-3. Yürütme *güncelleştirme VMVersion* sanal makinelerin VM sürümlerinin güncelleştirilecek. 
-4.  Azure portalına gidin ve kurtarma Hizmetleri kasası içindeki sanal makinelere çoğaltılmış sistem durumunu doğrulayın. 
+1. Sıralı küme yükseltme işlemini yürütmek için [burada](https://docs.microsoft.com/windows-server/failover-clustering/cluster-operating-system-rolling-upgrade#cluster-os-rolling-upgrade-process) bahsedilen adımları izleyin. 
+2. Kümeye yeni ana bilgisayar eklendikten sonra, VMM aracısını bu güncelleştirilmiş konağa yüklemek için SCVMM konsolundan Konağı yenileyin.
+3. Sanal makinelerin VM sürümlerini güncelleştirmek için *Update-VMVersion* komutunu yürütün. 
+4.  Azure portal gidin ve kurtarma hizmetleri kasasının içindeki sanal makinelerin çoğaltılan sistem durumunu doğrulayın. 
 
-## <a name="upgrade-windows-server-2012-r2-hosts-are-managed-by-highly-available-scvmm-2012-r2-server"></a>Yükseltme Windows Server 2012 R2 konak yüksek oranda kullanılabilir bir SCVMM 2012 R2 sunucusu tarafından yönetilir
-Windows Server 2012 R2 konaklarınız yükseltmeden önce SCVMM 2012 R2'yi SCVMM 2016'ya yükseltmeniz gerekir. Azure Site Recovery - ek hiçbir VMM sunucusu ile karışık mod & ek VMM sunucuları ile karma mod ile yapılandırılmış SCVMM 2012 R2 sunucusu yükseltilirken aşağıdaki modları yükseltme desteklenir.
+## <a name="upgrade-windows-server-2012-r2-hosts-are-managed-by-highly-available-scvmm-2012-r2-server"></a>Windows Server 2012 R2 Konakları yükseltme, yüksek oranda kullanılabilir SCVMM 2012 R2 sunucusu tarafından yönetilir
+Windows sever 2012 R2 konaklarınızı yükseltmeden önce, SCVMM 2012 R2 'yi SCVMM 2016 sürümüne yükseltmeniz gerekir. Aşağıdaki yükseltme modları, ek VMM sunucularıyla karma mod & ek VMM sunucusu olmadan Azure Site Recovery karma mod ile yapılandırılan SCVMM 2012 R2 sunucuları yükseltilirken desteklenir.
 
-**SCVMM 2012 R2'yi SCVMM 2016'ya yükseltme**
+**SCVMM 2012 R2 'yi SCVMM 2016 'ye yükseltme**
 
-1.  Denetim Masası'na giderek kaldırma ASR sağlayıcısı -> Programlar -> Programlar ve Özellikler -> Microsoft Azure Site Recovery ve üzerinde Kaldır'ı tıklatın
-2. Belirtilen adımları takip [burada](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#upgrade-a-standalone-vmm-server) tabanlı üzerinde yürütmek istediğiniz yükseltme modu.
-3. SCVMM konsolunu başlatın ve her bir ana bilgisayar durumunu **dokularını** sekmesi. Tıklayın **Yenile** en son durumu almak için. "Dikkat gerekiyor" durumuna görmeniz gerekir.
-4. Son yükleme [Microsoft Azure Site Recovery sağlayıcısı](https://aka.ms/downloaddra) SCVMM üzerinde.
-5. En son güncelleştirme [Microsoft Azure kurtarma hizmeti (MARS) aracısı](https://aka.ms/latestmarsagent) kümenin her bir konakta. SC VMM konakları başarıyla sorgulayabilir olduğundan emin olmak için yenileyin.
+1.  Denetim Masası-> Programlar-> Programlar ve Özellikler-> Microsoft Azure Site Recovery ' a giderek ASR sağlayıcısını kaldırın ve Kaldır ' a tıklayın.
+2. Yürütmek istediğiniz yükseltme moduna göre [burada](https://docs.microsoft.com/system-center/vmm/upgrade-vmm?view=sc-vmm-2016#upgrade-a-standalone-vmm-server) bahsedilen adımları izleyin.
+3. SCVMM konsolunu başlatın ve **yapılar** sekmesinin altındaki her bir konağın durumunu denetleyin. en son durumu almak için **Yenile** 'ye tıklayın. Durumu "Ilgilenilmesi gerekiyor" olarak görmeniz gerekir.
+4. En son [Microsoft Azure Site Recovery SAĞLAYıCıSıNı](https://aka.ms/downloaddra) SCVMM 'ye yükler.
+5. Kümenin her bir konağında en son [Microsoft Azure kurtarma hizmeti (mars) aracısını](https://aka.ms/latestmarsagent) güncelleştirin. SC VMM 'nin Konakları başarıyla sorgulayabilmesini sağlamak için yenileyin.
 
 
-**Windows Server 2012 R2 konak Windows Server 2016'ya yükseltme**
+**Windows Server 2012 R2 konaklarınızı Windows Server 2016 ' ye yükseltme**
 
-1. Belirtilen adımları takip [burada](https://docs.microsoft.com/windows-server/failover-clustering/cluster-operating-system-rolling-upgrade#cluster-os-rolling-upgrade-process) sıralı Küme yükseltme işlemini yürütmek için.
-2. Yeni konağın kümeye ekledikten sonra bu güncelleştirilmiş bir konakta VMM aracısını yüklemek için ana bilgisayardan SCVMM konsolunu yenileyin.
-3. Yürütme *güncelleştirme VMVersion* sanal makinelerin VM sürümlerinin güncelleştirilecek. 
-4.  Azure portalına gidin ve kurtarma Hizmetleri kasası içindeki sanal makinelere çoğaltılmış sistem durumunu doğrulayın. 
+1. Sıralı küme yükseltme işlemini yürütmek için [burada](https://docs.microsoft.com/windows-server/failover-clustering/cluster-operating-system-rolling-upgrade#cluster-os-rolling-upgrade-process) bahsedilen adımları izleyin.
+2. Kümeye yeni ana bilgisayar eklendikten sonra, VMM aracısını bu güncelleştirilmiş konağa yüklemek için SCVMM konsolundan Konağı yenileyin.
+3. Sanal makinelerin VM sürümlerini güncelleştirmek için *Update-VMVersion* komutunu yürütün. 
+4.  Azure portal gidin ve kurtarma hizmetleri kasasının içindeki sanal makinelerin çoğaltılan sistem durumunu doğrulayın. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Konak yükseltme gerçekleştirildikten sonra gerçekleştirebileceğiniz bir [yük devretme testi](tutorial-dr-drill-azure.md) çoğaltma ve olağanüstü durum kurtarma durumunuzu durumunu test etmek için.
+Konakları yükseltme işlemi gerçekleştirildikten sonra, çoğaltma ve olağanüstü durum kurtarma durumlarınızın sistem durumunu test etmek için bir [Yük devretme testi](tutorial-dr-drill-azure.md) gerçekleştirebilirsiniz.
 

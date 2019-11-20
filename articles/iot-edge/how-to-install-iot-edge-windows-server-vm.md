@@ -1,6 +1,6 @@
 ---
-title: Azure IOT Edge, Windows Server sanal makinelerinde çalıştırma | Microsoft Docs
-description: Azure IOT Edge kurulum yönergelerini Windows Server Market sanal makineler
+title: Windows Server sanal makinelerinde Azure IoT Edge çalıştırma | Microsoft Docs
+description: Windows Server Market sanal makinelerinde kurulum yönergelerini Azure IoT Edge
 author: gregman-msft
 manager: arjmands
 ms.reviewer: kgremban
@@ -9,82 +9,86 @@ services: iot-edge
 ms.topic: conceptual
 ms.date: 06/12/2019
 ms.author: gregman
-ms.openlocfilehash: 9e3f7e3b23cba3fab87ee35aa2a15b6305d9ece4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b32bbfa5e849c1a0490bba5d09d1838268033b26
+ms.sourcegitcommit: c4700ac4ddbb0ecc2f10a6119a4631b13c6f946a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67054187"
+ms.lasthandoff: 10/27/2019
+ms.locfileid: "72964667"
 ---
-# <a name="run-azure-iot-edge-on-windows-server-virtual-machines"></a>Azure IOT Edge, Windows Server sanal makinelerinde çalıştırma
-Azure IOT Edge çalışma zamanı, ne bir cihaz ile IOT Edge cihazı kapatır ' dir. Çalışma zamanı, cihaz olarak endüstriyel sunucusu olarak büyük veya küçük bir Raspberry Pi üzerinde dağıtılabilir. Bir cihaz IOT Edge çalışma zamanı ile yapılandırıldıktan sonra iş mantığı buluttan dağıttıktan başlayabilirsiniz.
+# <a name="run-azure-iot-edge-on-windows-server-virtual-machines"></a>Windows Server sanal makinelerinde Azure IoT Edge çalıştırma
 
-IOT Edge çalışma zamanı nasıl çalıştığını ve hangi bileşenler dahildir hakkında daha fazla bilgi için bkz: [Azure IOT Edge çalışma zamanı ve mimarisini anlama](iot-edge-runtime.md).
+Azure IoT Edge çalışma zamanı, bir cihazı IoT Edge cihazına dönüştürür. Çalışma zamanı, cihazlarda Raspberry Pi kadar küçük veya endüstriyel sunucu olarak büyük olarak dağıtılabilir. Bir cihaz IoT Edge çalışma zamanına göre yapılandırıldıktan sonra, buluta iş mantığı dağıtmaya başlayabilirsiniz.
 
-Azure IOT Edge çalışma zamanı, Windows Server 2019 kullanarak bir sanal makine üzerinde çalıştırmak için adımlar bu makalede listelenmektedir [Windows Server](https://azuremarketplace.microsoft.com/marketplace/apps/microsoftwindowsserver.windowsserver?tab=Overview) Azure Marketi'nde teklif. Konumundaki yönergeleri [Azure IOT Edge çalışma zamanı yükleme](how-to-install-iot-edge-windows.md) diğer sürümleriyle birlikte kullanılmak üzere Windows üzerinde.
+IoT Edge çalışma zamanının nasıl çalıştığı ve hangi bileşenlerin dahil olduğu hakkında daha fazla bilgi edinmek için bkz. [Azure IoT Edge çalışma zamanını ve mimarisini anlayın](iot-edge-runtime.md).
 
-## <a name="deploy-from-the-azure-marketplace"></a>Azure Market görüntüsünden dağıtım
-1.  Gidin [Windows Server](https://azuremarketplace.microsoft.com/marketplace/apps/microsoftwindowsserver.windowsserver?tab=Overview) Azure Marketi'nde teklif veya "Windows Server" arama [Azure Marketi](https://azuremarketplace.microsoft.com/)
-2.  Seçin **alma şimdi** 
-3.  İçinde **yazılım planı**, "Windows Server 2019 veri merkezi Sunucu Çekirdeği ile kapsayıcıları" bulun ve ardından **devam** sonraki iletişim kutusunda.
-    * Kapsayıcılar ile Windows Server'ın diğer sürümleri için bu yönergeleri kullanabilirsiniz
-4.  Azure portalında bir kez seçin **Oluştur** ve VM dağıtmak için sihirbazı izleyin. 
-    *   İlk kez bir VM çalışırken ise, bunu bir parola kullanmak ve RDP ve SSH ortak gelen bağlantı noktası menüde etkinleştirmek için en kolay yoldur. 
-    *   Bir kaynak kullanımı yoğun iş yükü varsa, daha fazla CPU ve/veya bellek ekleyerek sanal makine boyutu yükseltmeniz gerekir.
-5.  Sanal makine dağıtıldıktan sonra IOT Hub'ınıza bağlanmak için yapılandırın:
-    1.  IOT Edge Cihazınızı IOT hub'ına oluşturulan cihaz bağlantı dizesini kopyalayın (izleyebilirsiniz [Azure portalından yeni Azure IOT Edge cihaz kaydetme](how-to-register-device-portal.md) bu işlemle ilgili bilgi sahibi değilseniz, nasıl yapılır Kılavuzu)
-    1.  Azure portal ve açık, yeni oluşturulan sanal makine kaynağı seçin **komutu Çalıştır** seçeneği
-    1.  Seçin **RunPowerShellScript** seçeneği
-    1.  Bu betik, cihaz bağlantısı dizeniz ile komut penceresine kopyalayın: 
+Bu makalede, Windows [Server](https://azuremarketplace.microsoft.com/marketplace/apps/microsoftwindowsserver.windowsserver?tab=Overview) Azure Marketi teklifini kullanarak windows Server 2019 sanal makinesinde Azure IoT Edge çalışma zamanını çalıştırma adımları listelenir. Diğer sürümlerle kullanmak üzere Windows 'da [Azure IoT Edge çalışma zamanını yüklerken](how-to-install-iot-edge-windows.md) yönergeleri izleyin.
+
+## <a name="deploy-from-the-azure-marketplace"></a>Azure Marketi 'nden dağıtma
+
+1.  [Windows Server](https://azuremarketplace.microsoft.com/marketplace/apps/microsoftwindowsserver.windowsserver?tab=Overview) Azure Marketi teklifine veya [Azure Marketi](https://azuremarketplace.microsoft.com/) 'nde "Windows Server" arayarak gidin
+2.  **Şimdi al** seçeneğini belirleyin 
+3.  **Yazılım planında**, "kapsayıcılarla Windows Server 2019 Datacenter Server Core" öğesini bulun ve ardından İleri Iletişim kutusunda **devam** ' ı seçin.
+    * Bu yönergeleri, kapsayıcılarla Windows Server 'ın diğer sürümleri için de kullanabilirsiniz
+4.  Azure portal bir kez **Oluştur** ' u seçin ve VM 'yi dağıtmak için Sihirbazı izleyin. 
+    *   Bir VM 'yi ilk kez deniyorsanız, bir parolanın kullanılması ve genel gelen bağlantı noktası menüsünde RDP ve SSH 'yi etkinleştirmek en kolay yoldur. 
+    *   Yoğun kaynak iş yükünüz varsa, daha fazla CPU ve/veya bellek ekleyerek sanal makine boyutunu yükseltmeniz gerekir.
+5.  Sanal makine dağıtıldıktan sonra, IoT Hub bağlanacak şekilde yapılandırın:
+    1.  Cihaz Bağlantı dizenizi, IoT Hub oluşturulan IoT Edge cihazınızdan kopyalayın. [Azure Portal bağlantı dizesini alma](how-to-register-device.md#retrieve-the-connection-string-in-the-azure-portal)yordamına bakın.
+    1.  Azure portal yeni oluşturduğunuz sanal makine kaynağını seçin ve **komutu Çalıştır** seçeneğini açın
+    1.  **Runpowershellscript** seçeneğini belirleyin
+    1.  Bu betiği, cihaz bağlantı dizeniz ile komut penceresine kopyalayın: 
         ```powershell
         . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; `
         Install-IoTEdge -Manual -DeviceConnectionString '<connection-string>'
         ```
-    1.  Edge çalışma zamanı yükleme ve bağlantı dizenizi seçerek ayarlamak için bu betiği yürütün **çalıştırın**
-    1.  Bir veya iki dakika sonra Edge çalışma zamanı yüklü ve başarıyla kaynak sağlandı, bir ileti görürsünüz.
+    1.  IoT Edge çalışma zamanını yüklemek ve **Çalıştır** 'ı seçerek Bağlantı dizenizi ayarlamak için betiği yürütün
+    1.  Bir veya iki dakika sonra, Edge çalışma zamanının başarıyla yüklendiğini ve sağlandığını belirten bir ileti görmeniz gerekir.
 
+## <a name="deploy-from-the-azure-portal"></a>Azure portal dağıtma
 
-## <a name="deploy-from-the-azure-portal"></a>Azure portalından dağıtma
-1. Azure portalında, "Windows Server'de" arayın ve seçin **Windows Server 2019 Datacenter** VM oluşturma iş akışı başlatmak için. 
-2. Gelen **yazılım planı seçin** "Windows Server 2019 veri merkezi Sunucu Çekirdeği ile kapsayıcıları" öğesini seçin ve ardından **oluştur**
-3. Yukarıdaki 5. adım "Dağıtma gelen Azure Marketi'nde" yönergeleri tamamlayın.
+1. Azure portal, "Windows Server" araması yapın ve sanal makine oluşturma iş akışını başlatmak için **Windows server 2019 Datacenter** ' ı seçin. 
+2. **Yazılım planı seç** ' den "kapsayıcı Içeren Windows Server 2019 Datacenter Server Core" öğesini seçin ve ardından **Oluştur** ' u seçin.
+3. Yukarıdaki "Azure Marketi 'nden dağıtma" yönergelerindeki 5. adımı uygulayın.
 
-## <a name="deploy-from-azure-cli"></a>Azure CLI üzerinden dağıtma
-1. Sizin masaüstünüzde Azure CLI kullanıyorsanız, oturum açarak başlatın:
+## <a name="deploy-from-azure-cli"></a>Azure CLı 'dan dağıtma
+
+1. Masaüstünüzde Azure CLı kullanıyorsanız, oturum açarak başlayın:
 
    ```azurecli-interactive
    az login
    ```
-    
-1. Birden fazla aboneliğiniz varsa, kullanmak istediğiniz aboneliği seçin:
+
+1. Birden çok aboneliğiniz varsa, kullanmak istediğiniz aboneliği seçin:
    1. Aboneliklerinizi listeleyin:
-    
+
       ```azurecli-interactive
       az account list --output table
       ```
-    
-   1. Kopyalama için kullanmak istediğiniz aboneliği Subscriptionıd alanı
-   1. Kopyaladığınız Kimliğiyle şu komutu çalıştırın:
-    
+
+   1. Kullanmak istediğiniz aboneliğin abonelik alanını kopyalayın
+   1. Kopyaladığınız KIMLIKLE bu komutu çalıştırın:
+
       ```azurecli-interactive 
       az account set -s {SubscriptionId}
       ```
-    
-1. Yeni bir kaynak grubu oluşturun (veya var olan bir sonraki adımlarda belirtin):
+
+1. Yeni bir kaynak grubu oluşturun (veya sonraki adımlarda mevcut bir tane belirtin):
 
    ```azurecli-interactive
    az group create --name IoTEdgeResources --location westus2
    ```
-    
+
 1. Yeni bir sanal makine oluşturun:
 
    ```azurecli-interactive
    az vm create -g IoTEdgeResources -n EdgeVM --image MicrosoftWindowsServer:WindowsServer:2019-Datacenter-Core-with-Containers:latest  --admin-username azureuser --generate-ssh-keys --size Standard_DS1_v2
    ```
-   * Bu komut için bir parola ister, ancak seçeneğini ekleyebilirsiniz `--admin-password` daha kolay bir betikte ayarlamak için
-   * Windows Server Core görüntü desteği yalnızca Uzak Masaüstü ile satır, tam masaüstü deneyimi isterseniz belirtin komut bulunuyor `MicrosoftWindowsServer:WindowsServer:2019-Datacenter-with-Containers:latest` görüntü
 
-1. Cihaz bağlantı dizesini ayarlayalım (izleyebilirsiniz [Azure CLI ile yeni bir Azure IOT Edge cihazı kaydetme](how-to-register-device-cli.md) bu işlemle ilgili bilgi sahibi değilseniz, nasıl yapılır kılavuzunda):
+   * Bu komut sizden bir parola ister, ancak bir betikte daha kolay bir şekilde ayarlamak için `--admin-password` seçeneğini ekleyebilirsiniz
+   * Windows Server çekirdek görüntüsünün yalnızca uzak masaüstü ile komut satırı desteği vardır. bu nedenle, tam masaüstü deneyimi istiyorsanız görüntü olarak `MicrosoftWindowsServer:WindowsServer:2019-Datacenter-with-Containers:latest` belirtin
+
+1. Cihaz bağlantı dizesini ayarlayın (Bu işleme alışkın değilseniz [Azure CLI ile bağlantı dizesini alma](how-to-register-device.md#retrieve-the-connection-string-with-the-azure-cli) yordamını izleyebilirsiniz):
 
    ```azurecli-interactive
    az vm run-command invoke -g IoTEdgeResources -n EdgeVM --command-id RunPowerShellScript --script ". {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; `Install-IoTEdge -Manual -DeviceConnectionString '<connection-string>'"
@@ -92,12 +96,12 @@ Azure IOT Edge çalışma zamanı, Windows Server 2019 kullanarak bir sanal maki
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yüklü olan çalışma zamanı ile sağlanan bir IOT Edge cihazına sahip olduğunuza göre şunları yapabilirsiniz [IOT Edge modüllerini dağıtmak](how-to-deploy-modules-portal.md).
+Çalışma zamanının yüklü olduğu bir IoT Edge cihazınıza sahip olduğunuza göre, [IoT Edge modülleri dağıtabilirsiniz](how-to-deploy-modules-portal.md).
 
-Düzgün bir şekilde yükleme Edge çalışma zamanı ile ilgili sorunlar yaşıyorsanız, kullanıma [sorun giderme](troubleshoot.md) sayfası.
+Edge çalışma zamanının düzgün şekilde yüklenmesiyle ilgili sorun yaşıyorsanız, [sorun giderme](troubleshoot.md) sayfasına göz atın.
 
-Var olan bir yüklemesini IOT Edge en yeni sürüme güncelleştirmek için bkz: [IOT Edge güvenlik arka plan programı ve çalışma zamanını güncelleştirme](how-to-update-iot-edge.md).
+Mevcut bir yüklemeyi en yeni IoT Edge sürümüne güncelleştirmek için bkz. [IoT Edge güvenlik cini ve çalışma zamanını güncelleştirme](how-to-update-iot-edge.md).
 
-Windows sanal makinelerde kullanma hakkında daha fazla bilgi edinin [Windows sanal makineler belgeleri](https://docs.microsoft.com/azure/virtual-machines/windows/).
+[Windows sanal makineleri belgelerinde](https://docs.microsoft.com/azure/virtual-machines/windows/)Windows sanal makinelerini kullanma hakkında daha fazla bilgi edinin.
 
-Kurulumdan sonra bu VM'ye SSH istiyorsanız izleyin [yükleme OpenSSH için Windows Server'ın](https://docs.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse#installing-openssh-with-powershell) Uzak Masaüstü veya uzak powershell kullanarak Kılavuzu.
+Kurulumdan sonra bu VM 'ye SSH eklemek istiyorsanız, uzak masaüstü veya uzak PowerShell kullanarak [Windows Server Için OpenSSH yükleme](https://docs.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse#installing-openssh-with-powershell) kılavuzunu izleyin.

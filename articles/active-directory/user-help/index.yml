@@ -1,0 +1,101 @@
+### YamlMime:Landing
+title: Kullanıcılar için yardım belgeleri
+summary: Bir çalışan, BT çalışanı veya son kullanıcı olarak iş ya da okul hesabınız için kimlik doğrulamasını ayarlayın, kendi parolanızı sıfırlayın, cihazları ayarlayıp birleştirin, Microsoft Authenticator uygulamasını ayarlayın ve çeşitli portalları kullanın.
+metadata:
+  title: Kimlik doğrulaması, uygulamalar ve cihazlar için kullanıcı yardımı
+  description: Çalışan veya son kullanıcı olarak, kimlik doğrulamasını, Microsoft Authenticator uygulamasını ve Uygulamalarım portalını ayarlayıp kullanmayı öğrenin.
+  services: active-directory
+  ms.service: active-directory
+  ms.subservice: user-help
+  ms.topic: landing-page
+  ms.collection: M365-identity-device-management
+  author: eross-msft
+  ms.author: lizross
+  ms.date: 08/26/2019
+  ms.openlocfilehash: c60b536c43b8a82a46ef9176eb077b212da529c0
+  ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73574219"
+landingContent:
+- title: Microsoft Authenticator uygulamasını ayarlama ve kullanma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Microsoft Authenticator uygulaması nedir?
+      url: user-help-auth-app-overview.md
+  - linkListType: download
+    links:
+    - text: Uygulamayı indirme ve yükleme
+      url: user-help-auth-app-download-install.md
+  - linkListType: how-to-guide
+    links:
+    - text: Hesap bilgilerini yedekleme ve kurtarma
+      url: user-help-auth-app-backup-recovery.md
+    - text: Uygulamayı kullanarak oturum açma
+      url: user-help-auth-app-sign-in.md
+- title: İki adımlı doğrulama yöntemlerinizi seçin
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: İki aşamalı doğrulama nedir?
+      url: user-help-two-step-verification-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Doğrulama yöntemlerinizi ayarlama
+      url: multi-factor-authentication-end-user-first-time.md
+    - text: Ayarları yönetme
+      url: multi-factor-authentication-end-user-manage-settings.md
+    - text: Yardım alın
+      url: multi-factor-authentication-end-user-troubleshoot.md
+- title: Uygulamalarım portalındaki bilgilerinizi güncelleştirme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Uygulamalarım portalı nedir?
+      url: my-apps-portal-end-user-access.md
+  - linkListType: how-to-guide
+    links:
+    - text: Bilgilerinizi güncelleştirme
+      url: my-apps-portal-end-user-update-profile.md
+    - text: Yardım alın
+      url: my-apps-portal-end-user-troubleshoot.md
+- title: Güvenlik bilgilerinizi ayarlama ve yönetme (önizleme)
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Güvenlik bilgileri (önizleme) nedir?
+      url: user-help-security-info-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Güvenlik bilgileri yöntemlerinizi ayarlama
+      url: security-info-add-update-methods-overview.md
+    - text: Oturum açma istemi sırasında bilgi ekleme
+      url: security-info-setup-signin.md
+- title: Hesabım portalında bilgilerinizi yönetme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Hesabım portalı nedir?
+      url: my-account-portal-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Bağlı cihazlarınızı yönetme
+      url: my-account-portal-devices-page.md
+    - text: Kuruluşlarınızı yönetme
+      url: my-account-portal-organizations-page.md
+    - text: Son oturum açma etkinliğinizi görüntüleme
+      url: my-account-portal-sign-ins-page.md
+- title: Kendi parolanızı sıfırlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Parola sıfırlaması nedir?
+      url: user-help-password-reset-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Parola sıfırlama için kaydolma
+      url: active-directory-passwords-reset-register.md
+    - text: Parolanızı sıfırlama
+      url: active-directory-passwords-update-your-own-password.md

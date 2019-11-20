@@ -1,35 +1,34 @@
 ---
-title: Ölçümler, uyarılar ve tanılama günlükleri - Azure Batch | Microsoft Docs
+title: Ölçümler, uyarılar ve tanılama günlükleri-Azure Batch | Microsoft Docs
 description: Kayıt ve tanılama günlüğü olaylarını havuzlar ve görevler gibi Azure Batch hesabı kaynakları için analiz edin.
 services: batch
 documentationcenter: ''
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: ''
 ms.service: batch
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: multiple
 ms.workload: big-compute
 ms.date: 12/05/2018
 ms.author: lahugh
 ms.custom: seodec18
-ms.openlocfilehash: e1fc405951789305b0df86fd0f7b91890fb45c06
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: aa86d6cf22562fa1fac7d45de20b28aa0eec33aa
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66242629"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71261669"
 ---
 # <a name="batch-metrics-alerts-and-logs-for-diagnostic-evaluation-and-monitoring"></a>Toplu ölçümleri, uyarılar ve değerlendirme tanılama ve izleme günlükleri
 
  
-Bu makalede, bir Batch hesabı özelliklerini kullanarak izlemek açıklanmaktadır [Azure İzleyici](../azure-monitor/overview.md). Azure İzleyici toplar [ölçümleri](../azure-monitor/platform/data-platform-metrics.md) ve [tanılama günlükleri](../azure-monitor/platform/diagnostic-logs-overview.md) Batch hesabınızdaki kaynaklara için. Toplama ve Batch hesabınızı izleme ve sorunlarını tanılamak için yol çeşitli bu verileri kullanır. Ayrıca [ölçüm uyarıları](../azure-monitor/platform/alerts-overview.md) bir ölçüm belirli bir değere ulaştığında bildirimleri almak için. 
+Bu makalede, bir Batch hesabı özelliklerini kullanarak izlemek açıklanmaktadır [Azure İzleyici](../azure-monitor/overview.md). Azure İzleyici toplar [ölçümleri](../azure-monitor/platform/data-platform-metrics.md) ve [tanılama günlükleri](../azure-monitor/platform/resource-logs-overview.md) Batch hesabınızdaki kaynaklara için. Toplama ve Batch hesabınızı izleme ve sorunlarını tanılamak için yol çeşitli bu verileri kullanır. Ayrıca [ölçüm uyarıları](../azure-monitor/platform/alerts-overview.md) bir ölçüm belirli bir değere ulaştığında bildirimleri almak için. 
 
 ## <a name="batch-metrics"></a>Toplu ölçümleri
 
-(Performans sayaçları olarak da bilinir) Azure telemetri verilerini Azure İzleyici hizmeti tarafından kullanılan, Azure kaynaklarınızı tarafından yayılan ölçümleridir. Bir Batch hesabında örnek ölçümler şunları içerir: Havuz oluşturma olayları, düşük öncelikli düğüm sayısı ve görev olayları'nı tamamlayın. 
+(Performans sayaçları olarak da bilinir) Azure telemetri verilerini Azure İzleyici hizmeti tarafından kullanılan, Azure kaynaklarınızı tarafından yayılan ölçümleridir. Batch hesabındaki örnek ölçümler şunları içerir: Havuz oluşturma olayları, düşük öncelikli düğüm sayısı ve görev tamamlanma olayları. 
 
 Bkz: [Batch desteklenen ölçümlerin listesi](../azure-monitor/platform/metrics-supported.md#microsoftbatchbatchaccounts).
 
@@ -37,7 +36,7 @@ Bkz: [Batch desteklenen ölçümlerin listesi](../azure-monitor/platform/metrics
 
 * Her Batch hesabında bir ek yapılandırma olmadan varsayılan olarak etkin
 * Her 1 dakikada oluşturulan
-* Otomatik olarak kalıcı değil, ancak 30 günlük çalışırken geçmişi bulunur. Tanılama günlüğüne kaydetme bir parçası olarak etkinlik ölçümlerinin kalıcı hale getirebilirsiniz.
+* Otomatik olarak kalıcı değil, ancak 30 günlük çalışırken geçmişi bulunur. Tanılama günlüğü 'nün bir parçası olarak etkinlik ölçümlerini kalıcı hale getirebilirsiniz.
 
 ### <a name="view-metrics"></a>Ölçümleri görüntüle
 
@@ -48,6 +47,7 @@ Tüm Batch hesabı ölçümleri görüntülemek için:
 1. Portalında **tüm hizmetleri** > **Batch hesapları**ve ardından Batch hesabınızın adına tıklayın.
 2. Altında **izleme**, tıklayın **ölçümleri**.
 3. Bir veya daha fazla ölçüm seçin. İsterseniz, ek kaynak ölçümleri kullanarak seçme **abonelikleri**, **kaynak grubu**, **kaynak türü**, ve **kaynak** Açılır listeler.
+    * Count tabanlı ölçümler ("adanmış çekirdek sayısı" veya "düşük öncelikli düğüm sayısı" gibi) için "Ortalama" toplamayı kullanın. Olay tabanlı ölçümler ("havuz yeniden boyutlandırma tam olayları" gibi) için "say" toplamasını kullanın.
 
     ![Toplu ölçümleri](media/batch-diagnostics/metrics-portal.png)
 
@@ -91,7 +91,7 @@ Tanılama günlükleri için isteğe bağlı diğer hedefleri:
 
 * Batch tanılama günlüğü olaylarını Stream bir [Azure olay hub'ı](../event-hubs/event-hubs-what-is-event-hubs.md). Event hubs'ı, sonra dönüştürebilir ve herhangi bir gerçek zamanlı analiz sağlayıcısı kullanarak depolama, saniye başına milyonlarca olayı içe alabilir. 
 
-* Tanılama günlükleri gönderin [Azure İzleyici günlükleri](../log-analytics/log-analytics-overview.md), burada onları çözümleyebilir veya Power BI'ı veya Excel'i analizi için bunları dışarı aktarmak.
+* Tanılama günlüklerini [Azure izleyici günlüklerine](../log-analytics/log-analytics-overview.md)göndererek bunları analiz edebilir veya Power BI veya Excel 'de Analize aktarabilirsiniz.
 
 > [!NOTE]
 > Depolama veya Azure hizmetleriyle tanılama günlük verilerini işlemek için ek ücrete neden. 
@@ -101,7 +101,7 @@ Tanılama günlükleri için isteğe bağlı diğer hedefleri:
 
 1. Portalında **tüm hizmetleri** > **Batch hesapları**ve ardından Batch hesabınızın adına tıklayın.
 2. Altında **izleme**, tıklayın **tanılama günlükleri** > **tanılamayı Aç**.
-3. İçinde **tanılama ayarları**, ayar için bir ad girin ve bir günlük hedefi (mevcut bir depolama hesabı, olay hub'ı veya Azure İzleyici günlüklerine) seçin. Veya ikisini birden seçin **ServiceLog** ve **AllMetrics**.
+3. **Tanılama ayarları**' nda, ayar için bir ad girin ve bir günlük hedefi (mevcut depolama hesabı, Olay Hub 'ı veya Azure izleyici günlükleri) seçin. Veya ikisini birden seçin **ServiceLog** ve **AllMetrics**.
 
     İsteğe bağlı olarak bir depolama hesabını seçtiğinizde bir bekletme ilkesi ayarlayın. Veriler, birkaç gün bekletme için belirtmezseniz, depolama hesabının ömrü tutulur.
 
@@ -109,7 +109,7 @@ Tanılama günlükleri için isteğe bağlı diğer hedefleri:
 
     ![Batch tanılama](media/batch-diagnostics/diagnostics-portal.png)
 
-Günlük toplamayı etkinleştirmek için diğer seçenekler şunlardır: portalda Azure İzleyicisi'ni kullanın tanılama ayarları yapılandırmak, kullanmak için bir [Resource Manager şablonu](../azure-monitor/platform/diagnostic-logs-stream-template.md), veya Azure PowerShell veya Azure CLI'yı kullanın. bkz: [toplamak ve Azure kaynaklarınızdan günlük verilerini kullanma](../azure-monitor/platform/diagnostic-logs-overview.md).
+Günlük toplamayı etkinleştirmek için diğer seçenekler şunlardır: portalda Azure İzleyicisi'ni kullanın tanılama ayarları yapılandırmak, kullanmak için bir [Resource Manager şablonu](../azure-monitor/platform/diagnostic-settings-template.md), veya Azure PowerShell veya Azure CLI'yı kullanın. bkz: [toplamak ve Azure kaynaklarınızdan günlük verilerini kullanma](../azure-monitor/platform/resource-logs-overview.md).
 
 
 ### <a name="access-diagnostics-logs-in-storage"></a>Depolama erişim tanılama günlükleri
@@ -119,7 +119,7 @@ Batch tanılama günlükleri bir depolama hesabında arşivleyin, ilgili olay ol
 ```
 insights-{log category name}/resourceId=/SUBSCRIPTIONS/{subscription ID}/
 RESOURCEGROUPS/{resource group name}/PROVIDERS/MICROSOFT.BATCH/
-BATCHACCOUNTS/{batch account name}/y={four-digit numeric year}/
+BATCHACCOUNTS/{Batch account name}/y={four-digit numeric year}/
 m={two-digit numeric month}/d={two-digit numeric day}/
 h={two-digit 24-hour clock hour}/m=00/PT1H.json
 ```
@@ -130,12 +130,15 @@ insights-metrics-pt1m/resourceId=/SUBSCRIPTIONS/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX
 RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.BATCH/
 BATCHACCOUNTS/MYBATCHACCOUNT/y=2018/m=03/d=05/h=22/m=00/PT1H.json
 ```
-Her PT1H.json blobu dosya blob URL'SİNDE belirtilen saat içinde gerçekleşen, JSON ile biçimlendirilmiş olayları içerir (örneğin, h = 12). Mevcut saat boyunca, olaylar meydana geldikçe PT1H.json dosyasına eklenir. Dakika değeri (m = 00) her zaman 00, tanılama günlük olayları saat başına bloblara ayrılmış sonra. (Her zaman UTC biçimindedir.)
+Her `PT1H.json` blob dosyası, blob URL 'sinde belirtilen saat içinde gerçekleşen JSON biçimli olayları içerir (örneğin, `h=12`). Mevcut saat boyunca olaylar, oluşan sırada `PT1H.json` dosyaya eklenir. Tanılama günlüğü olayları saat`m=00`başına ayrı bloblara bölündüğü için, dakika değeri () her zaman `00`olur. (Her zaman UTC biçimindedir.)
 
+Bir `PoolResizeCompleteEvent` `PT1H.json` günlük dosyasındaki bir girdinin örneği aşağıda verilmiştir. Bu, adanmış ve düşük öncelikli düğümlerin geçerli ve hedef sayısı ile işlemin başlangıç ve bitiş saati hakkında bilgiler içerir:
 
-Tanılama günlükleri depolama hesabındaki şeması hakkında daha fazla bilgi için bkz. [Azure tanılama günlüklerini arşivleme](../azure-monitor/platform/archive-diagnostic-logs.md#schema-of-diagnostic-logs-in-the-storage-account).
+```
+{ "Tenant": "65298bc2729a4c93b11c00ad7e660501", "time": "2019-08-22T20:59:13.5698778Z", "resourceId": "/SUBSCRIPTIONS/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.BATCH/BATCHACCOUNTS/MYBATCHACCOUNT/", "category": "ServiceLog", "operationName": "PoolResizeCompleteEvent", "operationVersion": "2017-06-01", "properties": {"id":"MYPOOLID","nodeDeallocationOption":"Requeue","currentDedicatedNodes":10,"targetDedicatedNodes":100,"currentLowPriorityNodes":0,"targetLowPriorityNodes":0,"enableAutoScale":false,"isAutoPool":false,"startTime":"2019-08-22 20:50:59.522","endTime":"2019-08-22 20:59:12.489","resultCode":"Success","resultMessage":"The operation succeeded"}}
+```
 
-Depolama hesabınızdaki günlüklerini programlı olarak erişmek için depolama API'leri kullanın. 
+Tanılama günlükleri depolama hesabındaki şeması hakkında daha fazla bilgi için bkz. [Azure tanılama günlüklerini arşivleme](../azure-monitor/platform/resource-logs-collect-storage.md#schema-of-resource-logs-in-storage-account). Depolama hesabınızdaki günlüklerini programlı olarak erişmek için depolama API'leri kullanın. 
 
 ### <a name="service-log-events"></a>Hizmet günlüğü olayları
 Azure Batch hizmeti toplanan, günlükleri ayrı bir Batch kaynak havuzu veya göreviyle gibi kullanım ömrü süresince Azure Batch hizmeti tarafından oluşturulan olayları içerir. Batch tarafından yayılan her olay, JSON biçiminde kaydedilir. Örneğin, bu bir örnek gövdesidir **havuz oluşturma olayı**:

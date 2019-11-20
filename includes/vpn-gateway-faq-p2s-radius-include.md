@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/21/2018
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 857d29f407c9939143fbb8263be40dadb040efdc
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: f9b787413dd6e2aaeafd4aa3bcee0eff746abece
+ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188196"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71310552"
 ---
 [!INCLUDE [P2S FAQ All](vpn-gateway-faq-p2s-all-include.md)]
 
@@ -39,9 +39,9 @@ Hayır. Yalnızca bir Siteden Siteye bağlantı üzerinden yönlendirilebilir.
  
 ### <a name="is-there-a-change-in-the-number-of-sstp-connections-supported-with-radius-authentication-what-is-the-maximum-number-of-sstp-and-ikev2-connections-supported"></a>RADIUS kimlik doğrulaması ile desteklenen SSTP bağlantılarının sayısında bir değişiklik var mı? En fazla kaç SSTP ve IKEv2 bağlantısı desteklenir?
 
-RADIUS kimlik doğrulaması ile bir ağ geçidinde desteklenen en fazla SSTP bağlantısı sayısında bir değişiklik yoktur. SSTP için hala 128 bağlantı desteklenmektedir, ancak ağ geçidi SKU'sunu için Ikev2 bağlıdır. Desteklenen bağlantı sayısı hakkında daha fazla bilgi için bkz. [ağ geçidi SKU'ları](../articles/vpn-gateway/vpn-gateway-about-vpngateways.md#gwsku).
+RADIUS kimlik doğrulaması ile bir ağ geçidinde desteklenen en fazla SSTP bağlantısı sayısında bir değişiklik yoktur. SSTP için 128 kalır, ancak Ikev2 için ağ geçidi SKU 'suna bağımlıdır. Desteklenen bağlantı sayısı hakkında daha fazla bilgi için bkz. [ağ geçidi SKU 'ları](../articles/vpn-gateway/vpn-gateway-about-vpngateways.md#gwsku).
  
-### <a name="what-is-the-difference-between-doing-certificate-authentication-using-a-radius-server-vs-using-azure-native-certificate-authentication-by-uploading-a-trustedcertificate-to-azure"></a>Karşılaştırması (güvenilir sertifikayı Azure'a yükleyerek) Azure yerel sertifika doğrulaması kullanarak bir RADIUS sunucusu kullanarak sertifika doğrulaması yapma arasındaki fark nedir?
+### <a name="what-is-the-difference-between-doing-certificate-authentication-using-a-radius-server-vs-using-azure-native-certificate-authentication-by-uploading-a-trustedcertificate-to-azure"></a>Bir RADIUS sunucusu kullanarak sertifika kimlik doğrulaması yapma ile Azure yerel sertifika kimlik doğrulamasını kullanma (güvenilen bir sertifikayı Azure 'a yükleyerek) arasındaki fark nedir?
 
 RADIUS sertifika doğrulamasında, doğrulaması isteği gerçek sertifika doğrulamasını işleyen bir RADIUS sunucusuna iletilir. Zaten mevcut bir sertifika doğrulaması altyapısını RADIUS üzerinden tümleştirmek istiyorsanız bu seçenek yararlı olur.
   
@@ -50,3 +50,7 @@ Sertifika doğrulaması için Azure kullanıldığında, Azure VPN ağ geçidi s
 ### <a name="does-radius-authentication-work-with-both-ikev2-and-sstp-vpn"></a>RADIUS kimlik doğrulaması hem IKEv2 hem de SSTP VPN ile çalışır mı?
 
 Evet, RADIUS kimlik doğrulaması hem IKEv2 hem de SSTP VPN için desteklenir. 
+
+### <a name="does-radius-authentication-work-with-the-openvpn-client"></a>RADIUS kimlik doğrulaması, OpenVPN istemcisiyle çalışır mı?
+
+OpenVPN istemcisi için RADIUS kimlik doğrulaması desteklenmiyor.

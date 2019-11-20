@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory tümleştirmesiyle Comm100 canlı sohbet | Microsoft Docs'
-description: Azure Active Directory ve Comm100 canlı sohbet arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Comm100 Canlı sohbetle tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve Comm100 canlı sohbet arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 0340d7f3-ab54-49ef-b77c-62a0efd5d49c
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,263 +16,263 @@ ms.topic: tutorial
 ms.date: 01/22/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a03b185f6df5e32012883d210d684ec08b119019
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 91a7bf535a4afe0d46a13bbdc5643da7d5ce3334
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67105021"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73157334"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-comm100-live-chat"></a>Öğretici: Azure Active Directory tümleştirmesiyle Comm100 canlı sohbet
+# <a name="tutorial-azure-active-directory-integration-with-comm100-live-chat"></a>Öğretici: Comm100 Canlı sohbetle tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile tümleştirme Comm100 canlı sohbet öğrenin.
-Azure AD ile tümleştirme Comm100 canlı sohbet ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Comm100 Live Chat 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Comm100 Live Chat 'i Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Comm100 canlı sohbet erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak Comm100 canlı sohbet için (çoklu oturum açma) oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Comm100 Live Chat 'e erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla Comm100 canlı sohbet (çoklu oturum açma) ile otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesi Comm100 canlı sohbet ile yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini Comm100 Canlı sohbetle yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik Comm100 canlı sohbet çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Comm100 canlı sohbet çoklu oturum açma etkin abonelik
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Comm100 canlı sohbet destekler **SP** tarafından başlatılan
+* Comm100 canlı sohbeti **SP** tarafından başlatılan SSO 'yu destekler
 
 ## <a name="adding-comm100-live-chat-from-the-gallery"></a>Galeriden Comm100 canlı sohbet ekleme
 
-Azure AD'de Comm100 canlı sohbet, tümleştirmesini yapılandırmak için Comm100 canlı sohbet Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Comm100 Live Chat 'in tümleştirmesini Azure AD 'ye göre yapılandırmak için galerideki Comm100 Live Chat 'i yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Galeriden Comm100 canlı sohbet eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden Comm100 canlı sohbet eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **Comm100 canlı sohbet**seçin **Comm100 canlı sohbet** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **Comm100 canlı sohbet**yazın, sonuç panelinden **Comm100 canlı sohbet** ' i seçin ve sonra uygulamayı eklemek için **Ekle** düğmesine tıklayın.
 
-     ![Canlı sohbet Comm100 sonuç listesinde](common/search-new-app.png)
+     ![Sonuç listesinde Comm100 canlı sohbet](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma Comm100 adlı bir test kullanıcı tabanlı canlı sohbet ile test etme **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ile ilgili kullanıcı Comm100 canlı sohbet arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, **Britta Simon**adlı bir test kullanıcısına göre Comm100 Canlı sohbetle Azure AD çoklu oturum açmayı yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve Comm100 Live Chat içindeki ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma Comm100 canlı sohbet ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Comm100 Canlı sohbetle Azure AD çoklu oturum açmayı yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Comm100 canlı sohbet çoklu oturum açmayı yapılandırma](#configure-comm100-live-chat-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Test kullanıcısı Comm100 canlı sohbet oluşturma](#create-comm100-live-chat-test-user)**  - Comm100 Canlı kullanıcı Azure AD gösterimini bağlı sohbet Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Comm100 Live Chat çoklu oturum açmayı yapılandırın](#configure-comm100-live-chat-single-sign-on)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Kullanıcının Azure AD gösterimine bağlı olan Comm100 Live Chat 'te Britta Simon 'a sahip olmak için **[Comm100 Live Chat test kullanıcısı oluşturun](#create-comm100-live-chat-test-user)** .
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma Comm100 canlı sohbet ile yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı Comm100 Canlı sohbetle yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **Comm100 canlı sohbet** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **Comm100 canlı sohbet** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![Comm100 canlı sohbet etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-signonurl.png)
+    ![Comm100 canlı sohbet etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/sp-signonurl.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://<SUBDOMAIN>.comm100.com/AdminManage/LoginSSO.aspx?siteId=<SITEID>`
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<SUBDOMAIN>.comm100.com/AdminManage/LoginSSO.aspx?siteId=<SITEID>`
 
     > [!NOTE] 
-    > Oturum açma URL değeri, gerçek değil. Oturum açma URL değeri, bu öğreticinin ilerleyen bölümlerinde açıklanan gerçek oturum açma URL ile güncelleştirir.
+    > Oturum açma URL 'SI değeri gerçek değil. Oturum açma URL 'si değerini, öğreticide daha sonra açıklanacak olan gerçek oturum açma URL 'SI ile güncelleştirirsiniz.
 
-5. Uygulama Comm100 canlı sohbet, belirli bir biçimde SAML onaylamalarını bekler. Bu uygulama için aşağıdaki talepleri yapılandırın. Bu öznitelikleri değerlerini yönetebilirsiniz **kullanıcı öznitelikleri** uygulama tümleştirme sayfasında bölümü. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için düğmeyi **kullanıcı öznitelikleri** iletişim.
+5. Comm100 canlı sohbet uygulaması, SAML onaylamalarını belirli bir biçimde bekliyor. Bu uygulama için aşağıdaki talepleri yapılandırın. Bu özniteliklerin değerlerini, uygulama tümleştirme sayfasındaki **Kullanıcı öznitelikleri** bölümünden yönetebilirsiniz. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **Kullanıcı öznitelikleri** Iletişim kutusunu açmak için **Düzenle** düğmesine tıklayın.
 
     ![image](common/edit-attribute.png)
 
-6. İçinde **kullanıcı taleplerini** bölümünde **kullanıcı öznitelikleri** iletişim kutusunda kullanarak talep Düzenle **düzenleme simgesi** veya talep kullanarak **Ekle yeni talep**SAML belirteci özniteliği yukarıdaki görüntüde gösterildiği gibi yapılandırın ve aşağıdaki adımları gerçekleştirin: 
+6. **Kullanıcı öznitelikleri** Iletişim kutusundaki **Kullanıcı talepleri** bölümünde, yukarıdaki görüntüde gösterildiği gibi, **Düzen simgesini** kullanarak talepleri DÜZENLEYIN veya aşağıdaki resimde gösterildiği gibi SAML belirteci özniteliğini yapılandırmak için **yeni talep Ekle** ' yi kullanarak talepleri ekleyin ve aşağıdaki adımları gerçekleştirin: 
 
-    | Ad |  Kaynak özniteliği|
+    | Adı |  Kaynak özniteliği|
     | ---------------| --------------- |
-    |   email    | User.Mail |
+    |   e-posta    | Kullanıcı. Mail |
 
-    a. Tıklayın **Ekle yeni talep** açmak için **yönetmek, kullanıcı talepleri** iletişim.
+    a. **Kullanıcı taleplerini Yönet** iletişim kutusunu açmak için **yeni talep Ekle** ' ye tıklayın.
 
     ![image](common/new-save-attribute.png)
 
     ![image](common/new-attribute-details.png)
 
-    b. İçinde **adı** metin kutusuna, bu satır için gösterilen öznitelik adı yazın.
+    b. **Ad** metin kutusuna, bu satır için gösterilen öznitelik adını yazın.
 
-    c. Bırakın **Namespace** boş.
+    c. **Ad alanını** boş bırakın.
 
-    d. Kaynağı olarak **özniteliği**.
+    d. **Öznitelik**olarak kaynak seçin.
 
-    e. Gelen **kaynak özniteliği** listesinde, ilgili satır için gösterilen öznitelik değeri yazın.
+    e. **Kaynak özniteliği** listesinde, bu satır için gösterilen öznitelik değerini yazın.
 
-    f. Tıklayın **Tamam**
+    f. **Tamam 'a** tıklayın
 
-    g. **Kaydet**’e tıklayın.
+    g. **Kaydet** düğmesine tıklayın.
 
-4. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+4. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. Üzerinde **Comm100 canlı sohbet kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. **Comm100 canlı sohbetini ayarla** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-comm100-live-chat-single-sign-on"></a>Comm100 canlı sohbet çoklu oturum açmayı yapılandırın
+### <a name="configure-comm100-live-chat-single-sign-on"></a>Comm100 Live Chat çoklu oturum açmayı yapılandırma
 
-1. Bir başka web tarayıcı penceresinde Comm100 canlı sohbet bir güvenlik yöneticisi olarak oturum açın.
+1. Farklı bir Web tarayıcısı penceresinde, güvenlik yöneticisi olarak Comm100 canlı sohbette oturum açın.
 
-1. Sayfanın üst sağ tarafında tıklayın **hesabım**.
+1. Sayfanın sağ üst kısmında **Hesabım**' ı tıklatın.
 
-   ![Myaccount Comm100 canlı sohbet](./media/comm100livechat-tutorial/tutorial_comm100livechat_account.png)
+   ![Comm100 canlı sohbet myaccount](./media/comm100livechat-tutorial/tutorial_comm100livechat_account.png)
 
-1. Menü Sol taraftan tıklayın **güvenlik** ve ardından **aracı çoklu oturum açma**.
+1. Menünün sol tarafında **güvenlik** ' e ve ardından **Aracı çoklu oturum açma**' ya tıklayın.
 
-   ![Güvenlik Comm100 canlı sohbet](./media/comm100livechat-tutorial/tutorial_comm100livechat_security.png)
+   ![Comm100 canlı sohbet güvenliği](./media/comm100livechat-tutorial/tutorial_comm100livechat_security.png)
 
-1. Üzerinde **aracı çoklu oturum açma** sayfasında, aşağıdaki adımları gerçekleştirin:
+1. **Aracı çoklu oturum açma** sayfasında, aşağıdaki adımları uygulayın:
 
-   ![Güvenlik Comm100 canlı sohbet](./media/comm100livechat-tutorial/tutorial_comm100livechat_singlesignon.png)
+   ![Comm100 canlı sohbet güvenliği](./media/comm100livechat-tutorial/tutorial_comm100livechat_singlesignon.png)
 
-   a. İlk vurgulanan bağlantıyı kopyalayın ve yapıştırın **oturum açma URL'si** metin kutusunda **Comm100 canlı sohbet etki alanı ve URL'ler** bölümü Azure portalı.
+   a. İlk vurgulanan bağlantıyı kopyalayın ve Azure portal **oturum açma URL 'si** metin kutusuna **Comm100 Live Chat etki alanı ve URL 'leri** bölümüne yapıştırın.
 
-   b. İçinde **SAML SSO URL** metin değerini yapıştırın **oturum açma URL'si**, hangi Azure portaldan kopyaladığınız.
+   b. **SAML SSO URL** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si**değerini yapıştırın.
 
-   c. İçinde **uzak oturum kapatma URL'si** metin değerini yapıştırın **oturum kapatma URL'si**, hangi Azure portaldan kopyaladığınız.
+   c. **Uzaktan oturum kapatma URL 'si** metin kutusunda, Azure Portal kopyaladığınız **Logout URL 'si**değerini yapıştırın.
 
-   d. Tıklayın **bir dosya seçin** base-64 karşıya yüklemek için Azure portalından içine yüklediğiniz sertifika kodlanmış **sertifika**.
+   d. Azure portal indirdiğiniz Base-64 kodlu sertifikayı **sertifikaya**yüklemek Için **Dosya Seç** ' e tıklayın.
 
-   e. Tıklayın **Değişiklikleri Kaydet**
+   e. **Değişiklikleri Kaydet** 'e tıklayın
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma Comm100 canlı sohbet için erişim izni verme kullanmak Britta Simon etkinleştirin.
+Bu bölümde, Comm100 Live Chat 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **Comm100 canlı sohbet**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **Comm100 canlı sohbet**' i seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **Comm100 canlı sohbet**.
+2. Uygulamalar listesinde **Comm100 Live Chat**' i seçin.
 
-    ![Uygulamalar listesinde Comm100 canlı sohbet bağlantı](common/all-applications.png)
+    ![Uygulamalar listesindeki Comm100 Live Chat bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-comm100-live-chat-test-user"></a>Comm100 canlı sohbet test kullanıcısı oluşturma
+### <a name="create-comm100-live-chat-test-user"></a>Comm100 Live Chat test kullanıcısı oluşturma
 
-Comm100 canlı sohbet oturum açmak Azure AD kullanıcılarının etkinleştirmek için bunlar Comm100 canlı sohbet sağlanması gerekir. Comm100 canlı sohbet sağlama bir el ile gerçekleştirilen bir görevdir.
+Azure AD kullanıcılarının Comm100 canlı sohbette oturum açmasını sağlamak için, Comm100 Live Chat 'e sağlanması gerekir. Comm100 canlı sohbette, sağlama el ile gerçekleştirilen bir görevdir.
 
 **Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:**
 
-1. İçin Comm100 canlı sohbet bir güvenlik yöneticisi olarak oturum açın.
+1. Comm100 canlı sohbette güvenlik yöneticisi olarak oturum açın.
 
-2. Sayfanın üst sağ tarafında tıklayın **hesabım**.
+2. Sayfanın sağ üst kısmında **Hesabım**' ı tıklatın.
 
-    ![Myaccount Comm100 canlı sohbet](./media/comm100livechat-tutorial/tutorial_comm100livechat_account.png)
+    ![Comm100 canlı sohbet myaccount](./media/comm100livechat-tutorial/tutorial_comm100livechat_account.png)
 
-3. Menü Sol taraftan tıklayın **aracıları** ve ardından **yeni aracı**.
+3. Menünün sol tarafında **aracılar** ' a ve ardından **Yeni Aracı**' e tıklayın.
 
-    ![Aracı Comm100 canlı sohbet](./media/comm100livechat-tutorial/tutorial_comm100livechat_agent.png)
+    ![Comm100 canlı sohbet Aracısı](./media/comm100livechat-tutorial/tutorial_comm100livechat_agent.png)
 
-4. Üzerinde **yeni aracı** sayfasında, aşağıdaki adımları gerçekleştirin:
+4. **Yeni Aracı** sayfasında, aşağıdaki adımları uygulayın:
 
-    ![Yeni aracı Comm100 canlı sohbet](./media/comm100livechat-tutorial/tutorial_comm100livechat_newagent.png)
+    ![Comm100 canlı sohbet yeni aracı](./media/comm100livechat-tutorial/tutorial_comm100livechat_newagent.png)
 
-    a. a. İçinde **e-posta** metin kutusuna, kullanıcının gibi e-posta girin **Brittasimon\@contoso.com**.
+    a. a. **E-posta** metin kutusuna, **\@contoso.com**gibi kullanıcının e-postasını girin.
 
-    b. İçinde **ad** metin kutusunda, gibi kullanıcı adını girin **Britta**.
+    b. **Ad** metin kutusuna, ilk Kullanıcı adını **Britta**gibi girin.
 
-    c. İçinde **Soyadı** metin kutusunda, son kullanıcı gibi adını **simon**.
+    c. **Soyadı** metin kutusuna, **Simon**gibi kullanıcı adının soyadını girin.
 
-    d. İçinde **görünen adı** metin gibi kullanıcının görünen adını girin **Britta simon**
+    d. **Görünen ad** metin kutusuna, **Britta Simon** gibi kullanıcının görünen adını girin
 
-    e. İçinde **parola** metin kutusuna bir parola yazın.
+    e. **Parola** metin kutusuna parolanızı yazın.
 
-    f. **Kaydet**’e tıklayın.
+    f. **Kaydet** düğmesine tıklayın.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim panelinde Comm100 canlı sohbet kutucuğa tıkladığınızda, otomatik olarak Comm100 Canlı SSO'yu ayarlama sohbet için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde Comm100 Live Chat kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Comm100 canlı sohbetinde otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

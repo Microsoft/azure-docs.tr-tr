@@ -13,12 +13,12 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 9/11/2018
 ms.author: dekapur
-ms.openlocfilehash: e5fa46930a3be3c85cd76e655fac3164cc45d957
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 8b9f659098e563a3dc0692530ad798a5c763551f
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60544747"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74133407"
 ---
 # <a name="plan-and-prepare-your-service-fabric-standalone-cluster-deployment"></a>Plan ve hazırlık, Service Fabric tek başına Küme dağıtımı
 
@@ -65,10 +65,11 @@ Kümeye eklemek istediğiniz her makine için önerilen bazı özellikleri şunl
 * 40 GB kullanılabilir disk alanı en az
 * Bir 4 çekirdekli veya daha fazla CPU
 * Güvenli bir ağ veya tüm makineler için ağ bağlantısı
-* Windows Server işletim sistemi yüklü (geçerli sürüm: 2012 R2, 2016, 1709 veya 1803)
+* Windows Server işletim sistemi yüklü (geçerli sürümler: 2012 R2, 2016, 1709 veya 1803). Service Fabric Version 6.4.654.9590 ve üzeri, Server 2019 ve 1809 sürümlerini de destekler.
 * [.NET framework 4.5.1 veya üzeri](https://www.microsoft.com/download/details.aspx?id=40773), tam yükleme
-* [Windows PowerShell 3.0](https://msdn.microsoft.com/powershell/scripting/setup/installing-windows-powershell)
+* [Windows PowerShell 3.0](https://msdn.microsoft.com/powershell/scripting/install/installing-windows-powershell)
 * [RemoteRegistry hizmeti](https://technet.microsoft.com/library/cc754820) tüm makinelerde çalıştırılması
+* Service Fabric yükleme sürücüsü NTFS dosya sistemi olmalıdır
 
 Dağıtma ve yapılandırma kümenin Küme Yöneticisi olmalıdır [yönetici ayrıcalıkları](https://social.technet.microsoft.com/wiki/contents/articles/13436.windows-server-2012-how-to-add-an-account-to-a-local-administrator-group.aspx) her makine. Service Fabric’i bir etki alanı denetleyicisine yükleyemezsiniz.
 
@@ -98,18 +99,18 @@ Bir Küme Yöneticisi, Service Fabric tek başına küme yapılandırdığında,
 1. Kümeyi oluşturan kullanıcının küme yapılandırma dosyasında düğümleri olarak listelenen tüm makineler için yönetici düzeyinde güvenlik ayrıcalıkları olmalıdır.
 2. Her küme düğümünde makine yanı sıra küme oluşturulduğu makine gerekir:
    * Service Fabric SDK'sı kaldırmış
-   * Service Fabric çalışma zamanı kaldırıldı 
+   * Service Fabric çalışma zamanı kaldırıldı
    * Windows Güvenlik Duvarı (mpssvc) hizmet etkinleştirdiniz mi
    * Uzak Kayıt Defteri hizmeti (uzak kayıt defteri) etkinleştirdiniz mi
    * Dosya Paylaşımı (SMB) etkin
    * Gerekli bağlantı noktaları açıldı, küme yapılandırması bağlantı noktalarına bağlı olan
-   * Açılan Windows SMB ve uzak kayıt defteri hizmeti için gerekli bağlantı noktaları vardır: 135 ve 137, 138, 139'dur ve 445
+   * Gerekli bağlantı noktalarını Windows SMB ve uzak kayıt defteri hizmeti için açılmış olması: 135 ve 137, 138, 139'dur ve 445
    * Başka bir ağ bağlantısına sahip
 3. Küme düğümü makinelerin hiçbirinin bir etki alanı denetleyicisi olmalıdır.
 4. Kümenin dağıtılması için güvenli bir küme ise, Önkoşullar içinde yerleştirin ve yapılandırmanın karşı doğru yapılandırıldığından gerekli güvenlik doğrulayın.
 5. Küme makinelerin İnternet'ten erişilebilen emin değilseniz, aşağıdaki küme yapılandırmasında ayarlayın:
-   * Telemetri devre dışı bırakın: Altında *özellikleri* ayarlamak *"enableTelemetry": false*
-   * Otomatik yapı sürümü indirme & Geçerli Küme sürümü, destek sonuna yaklaşıyor bildirimleri devre dışı bırak: Altında *özellikleri* ayarlamak *"fabricClusterAutoupgradeEnabled": false*
+   * Telemetri devre dışı bırak: altında *özellikleri* ayarlamak *"enableTelemetry": false*
+   * Otomatik yapı sürümü indirme & Geçerli Küme sürümü, destek sonuna yaklaşıyor bildirimleri devre dışı bırak: altında *özellikleri* ayarlamak *"fabricClusterAutoupgradeEnabled": false*
    * Alternatif olarak, ağ internet erişimi beyaz listelenen etki alanları için sınırlı ise, aşağıdaki etki alanlarına otomatik yükseltme için gereken: go.microsoft.com download.microsoft.com
 
 6. Service Fabric uygun virüsten koruma dışlamaları ayarlayın:
@@ -136,7 +137,7 @@ Bir Küme Yöneticisi, Service Fabric tek başına küme yapılandırdığında,
 | FileStoreService.exe |
 
 ## <a name="validate-environment-using-testconfiguration-script"></a>TestConfiguration betik kullanarak ortamı doğrulama
-Tek başına paketteki TestConfiguration.ps1 betiği bulunamadı. Yukarıdaki ölçütlere bazıları doğrulamak için bir en iyi yöntemler Çözümleyicisi kullanılır ve sağlamlık denetim olarak bir küme belirli bir ortamda dağıtılıp dağıtılamayacağını doğrulamak için kullanılmalıdır. Herhangi bir hata varsa, listenin altında başvurmak [ortam Kurulumu](service-fabric-cluster-standalone-deployment-preparation.md) sorun giderme. 
+Tek başına paketteki TestConfiguration.ps1 betiği bulunamadı. Yukarıdaki ölçütlere bazıları doğrulamak için bir en iyi yöntemler Çözümleyicisi kullanılır ve sağlamlık denetim olarak bir küme belirli bir ortamda dağıtılıp dağıtılamayacağını doğrulamak için kullanılmalıdır. Herhangi bir hata varsa, listenin altında başvurmak [ortam Kurulumu](service-fabric-cluster-standalone-deployment-preparation.md) sorun giderme.
 
 Bu betik, küme yapılandırma dosyasında düğümleri olarak listelenen tüm makineler için yönetici erişimi olan herhangi bir makinede çalıştırılabilir. Bu betiğin çalıştırıldığı makine kümesinin parçası olacak gerekmez.
 
@@ -159,12 +160,12 @@ FabricInstallable          : True
 Passed                     : True
 ```
 
-Şu anda bu bağımsız olarak yapılması gerekir, böylece bu yapılandırmayı test modül güvenlik yapılandırması doğrulamaz.  
+Şu anda bu bağımsız olarak yapılması gerekir, böylece bu yapılandırmayı test modül güvenlik yapılandırması doğrulamaz.
 
 > [!NOTE]
-> Hatalı veya eksik bir durumda ise düşünüyorsanız, bu nedenle sürekli olarak iyileştirmeler Bu modülün daha sağlam hale getirmek için şu anda TestConfiguration tarafından yakalanan yapıyoruz, aracılığıyla bize bildirin bizim [destek kanalları](https://docs.microsoft.com/azure/service-fabric/service-fabric-support).   
-> 
-> 
+> Hatalı veya eksik bir durumda ise düşünüyorsanız, bu nedenle sürekli olarak iyileştirmeler Bu modülün daha sağlam hale getirmek için şu anda TestConfiguration tarafından yakalanan yapıyoruz, aracılığıyla bize bildirin bizim [destek kanalları](https://docs.microsoft.com/azure/service-fabric/service-fabric-support).
+>
+>
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * [Windows Server üzerinde çalışan tek başına küme oluşturma](service-fabric-cluster-creation-for-windows-server.md)

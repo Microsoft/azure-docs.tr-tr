@@ -1,6 +1,6 @@
 ---
-title: PowerShell kullanarak bir Azure sanal makinesinde Azure kaynakları için yönetilen kimlik yapılandırma
-description: Adım adım yapılandırma yönergeleri kimliklerini Azure VM'de PowerShell kullanarak Azure kaynakları için yönetilen.
+title: PowerShell kullanarak bir Azure VM 'de Azure kaynakları için Yönetilen kimlikler yapılandırma
+description: PowerShell kullanarak bir Azure VM 'de Azure kaynakları için Yönetilen kimlikler yapılandırmaya yönelik adım adım yönergeler.
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -12,23 +12,23 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 11/27/2017
+ms.date: 09/26/2019
 ms.author: markvi
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6f76fef3d5e6515e9d546c709ace0a4a533c0a45
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4ba8ce6fb8147736c8265148a9f3576390dcccc6
+ms.sourcegitcommit: 0486aba120c284157dfebbdaf6e23e038c8a5a15
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66112702"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71309771"
 ---
-# <a name="configure-managed-identities-for-azure-resources-on-an-azure-vm-using-powershell"></a>PowerShell kullanarak bir Azure sanal makinesinde Azure kaynakları için yönetilen kimlik Yapılandır
+# <a name="configure-managed-identities-for-azure-resources-on-an-azure-vm-using-powershell"></a>PowerShell kullanarak Azure VM 'de Azure kaynakları için Yönetilen kimlikler yapılandırma
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
 
-Azure kaynakları için yönetilen kimlikleri Azure Active Directory'de otomatik olarak yönetilen bir kimlikle Azure hizmetleri sağlar. Bu kimlik, Azure AD kimlik doğrulaması, kimlik bilgilerini kodunuzda zorunda kalmadan destekleyen herhangi bir hizmeti kimlik doğrulaması için kullanabilirsiniz. 
+Azure kaynakları için Yönetilen kimlikler, Azure Active Directory ' de otomatik olarak yönetilen bir kimlikle Azure hizmetleri sağlar. Bu kimliği, kodunuzda kimlik bilgileri olmadan Azure AD kimlik doğrulamasını destekleyen herhangi bir hizmette kimlik doğrulaması yapmak için kullanabilirsiniz. 
 
-Bu makalede, PowerShell kullanarak, Azure sanal makinesinde Azure kaynaklarını işlemleri için yönetilen şu kimlikler gerçekleştirmeyi öğrenin.
+Bu makalede, PowerShell 'i kullanarak Azure VM 'de Azure kaynakları işlemleri için aşağıdaki yönetilen kimlikleri nasıl gerçekleştireceğinizi öğreneceksiniz.
 
 [!INCLUDE [az-powershell-update](../../../includes/updated-for-az.md)]
 
@@ -40,173 +40,168 @@ Bu makalede, PowerShell kullanarak, Azure sanal makinesinde Azure kaynaklarını
 
 ## <a name="system-assigned-managed-identity"></a>Sistem tarafından atanan yönetilen kimlik
 
-Bu bölümde, Azure PowerShell kullanarak sistem tarafından atanan yönetilen kimlik devre öğreneceksiniz.
+Bu bölümde, Azure PowerShell kullanarak sistem tarafından atanan yönetilen kimliği etkinleştirmeyi ve devre dışı bırakmayı öğreneceksiniz.
 
-### <a name="enable-system-assigned-managed-identity-during-creation-of-an-azure-vm"></a>Bir Azure VM oluşturma sırasında sistem tarafından atanan yönetilen kimlik etkinleştir
+### <a name="enable-system-assigned-managed-identity-during-creation-of-an-azure-vm"></a>Azure VM oluşturma sırasında sistem tarafından atanan yönetilen kimliği etkinleştirme
 
-Etkin sistem tarafından atanan yönetilen kimlik ile bir Azure VM oluşturmak için hesabınızın gerekli [sanal makine Katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rol ataması.  Hiçbir ek Azure AD dizini rol atamaları gereklidir.
+Sistem tarafından atanan yönetilen kimlik etkin bir Azure VM 'si oluşturmak için hesabınızın [sanal makine katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rolü ataması gerekir.  Ek Azure AD dizin rolü ataması gerekli değildir.
 
-1. Aşağıdaki Azure VM yalnızca gerekli bölümlerini ("" Oluşturma kaynak grubu","Ağ Grup Oluştur","oluşturma"VM Azure'da oturum",) tamamlama hızlı Başlangıçlar, birine bakın.
+1. Yalnızca gerekli bölümleri ("Azure 'da oturum aç", "kaynak grubu oluşturma", "ağ oluşturma grubu oluştur", "VM oluşturma") tamamlanırken aşağıdaki Azure VM hızlı başlangıçlarından birine bakın.
     
-    "VM oluşturma" bölümüne aldığınızda, küçük bir değişiklik yapmak [yeni AzVMConfig](/powershell/module/az.compute/new-azvm) cmdlet sözdizimi. Eklediğinizden emin olun bir `-AssignIdentity:$SystemAssigned` parametresi, sistem tarafından atanan kimliği etkinleştirildi, örneğin VM sağlamak için:
+    "VM oluşturma" bölümüne geldiğinizde, [New-AzVMConfig](/powershell/module/az.compute/new-azvm) cmdlet sözdiziminde küçük bir değişiklik yapın. VM 'yi, sistem tarafından `-AssignIdentity:$SystemAssigned` atanan kimlik etkin olacak şekilde sağlamak için bir parametre eklediğinizden emin olun; örneğin:
       
     ```powershell
     $vmConfig = New-AzVMConfig -VMName myVM -AssignIdentity:$SystemAssigned ...
     ```
 
-   - [PowerShell'i kullanarak bir Windows sanal makinesi oluşturma](../../virtual-machines/windows/quick-create-powershell.md)
-   - [PowerShell kullanarak bir Linux sanal makinesi oluşturma](../../virtual-machines/linux/quick-create-powershell.md)
+   - [PowerShell kullanarak Windows sanal makinesi oluşturma](../../virtual-machines/windows/quick-create-powershell.md)
+   - [PowerShell kullanarak Linux sanal makinesi oluşturma](../../virtual-machines/linux/quick-create-powershell.md)
 
-> [!NOTE]
-> İsteğe bağlı olarak, VM uzantısını Azure kaynakları için yönetilen kimlik sağlama, ancak yakında kullanımdan kaldırılacak. Azure örnek meta veri kimlik uç nokta kimlik doğrulaması için kullanmanızı öneririz. Daha fazla bilgi için [Azure IMDS uç nokta kimlik doğrulaması için VM uzantısı'ten geçiş](howto-migrate-vm-extension.md).
 
-### <a name="enable-system-assigned-managed-identity-on-an-existing-azure-vm"></a>Yönetilen kimlik sistemi atanmış mevcut bir Azure sanal makinesinde etkinleştirin
 
-Sistem tarafından atanan yönetilen kimlik olmadan ilk olarak sağlanan bir VM üzerinde etkinleştirmek için hesabınızın gerekir [sanal makine Katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rol ataması.  Hiçbir ek Azure AD dizini rol atamaları gereklidir.
+### <a name="enable-system-assigned-managed-identity-on-an-existing-azure-vm"></a>Mevcut bir Azure VM 'de sistem tarafından atanan yönetilen kimliği etkinleştirme
 
-1. Oturum açmak için Azure kullanarak `Connect-AzAccount`. VM içeren Azure aboneliği ile ilişkili olan bir hesap kullanın.
+Başlangıçta sağlanan bir VM 'de sistem tarafından atanan yönetilen kimliği etkinleştirmek için hesabınızın [sanal makine katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rolü ataması gerekir.  Ek Azure AD dizin rolü ataması gerekli değildir.
+
+1. Kullanarak `Connect-AzAccount`Azure 'da oturum açın. VM 'yi içeren Azure aboneliğiyle ilişkili bir hesap kullanın.
 
    ```powershell
    Connect-AzAccount
    ```
 
-2. İlk VM özelliklerini kullanarak alınması `Get-AzVM` cmdlet'i. Sistem tarafından atanan bir yönetilen kimlik etkinleştirmek için ardından kullanmak `-AssignIdentity` açın [güncelleştirme-AzVM](/powershell/module/az.compute/update-azvm) cmdlet:
+2. İlk olarak `Get-AzVM` cmdlet 'ini kullanarak VM özelliklerini alın. Ardından, sistem tarafından atanan bir yönetilen kimliği etkinleştirmek için `-AssignIdentity` [Update-azvm](/powershell/module/az.compute/update-azvm) cmdlet 'inde anahtarını kullanın:
 
    ```powershell
    $vm = Get-AzVM -ResourceGroupName myResourceGroup -Name myVM
    Update-AzVM -ResourceGroupName myResourceGroup -VM $vm -AssignIdentity:$SystemAssigned
    ```
 
-> [!NOTE]
-> İsteğe bağlı olarak, VM uzantısını Azure kaynakları için yönetilen kimlik sağlama, ancak yakında kullanımdan kaldırılacak. Azure örnek meta veri kimlik uç nokta kimlik doğrulaması için kullanmanızı öneririz. Daha fazla bilgi için [Azure IMDS uç nokta kimlik doğrulaması için VM uzantısı'ten geçiş](howto-migrate-vm-extension.md).
 
-### <a name="add-vm-system-assigned-identity-to-a-group"></a>VM sistem tarafından atanan kimliği gruba ekleme
 
-Sistem tarafından atanan kimlik bir VM'de etkinleştirdikten sonra gruba ekleyebilirsiniz.  Aşağıdaki yordamda, bir sanal makinenin sistem tarafından atanan kimlik bir gruba ekler.
+### <a name="add-vm-system-assigned-identity-to-a-group"></a>VM sistem tarafından atanan kimliği bir gruba ekle
 
-1. Oturum açmak için Azure kullanarak `Connect-AzAccount`. VM içeren Azure aboneliği ile ilişkili olan bir hesap kullanın.
+Bir VM 'de sistem tarafından atanan kimliği etkinleştirdikten sonra, bir gruba ekleyebilirsiniz.  Aşağıdaki yordam bir gruba bir sanal makinenin sistem tarafından atanmış kimliğini ekler.
+
+1. Kullanarak `Connect-AzAccount`Azure 'da oturum açın. VM 'yi içeren Azure aboneliğiyle ilişkili bir hesap kullanın.
 
    ```powershell
    Connect-AzAccount
    ```
 
-2. Alın ve Not `ObjectID` (belirtilmiş `Id` döndürülen değerleri alan) sanal makinenin hizmet sorumlusunun:
+2. VM 'nin hizmet sorumlusunun `ObjectID` (döndürülen değerlerin `Id` alanında belirtildiği gibi) öğesini alın ve aklınızda edin:
 
    ```powerhshell
    Get-AzADServicePrincipal -displayname "myVM"
    ```
 
-3. Alın ve Not `ObjectID` (belirtilmiş `Id` döndürülen değerleri alan) grubunun:
+3. Grubunun `ObjectID` (döndürülen değerlerin `Id` alanında belirtildiği gibi) ' i alın ve bu gruba göz önünde edin:
 
    ```powershell
    Get-AzADGroup -searchstring "myGroup"
    ```
 
-4. Sanal makinenin hizmet sorumlusu gruba ekleyin:
+4. VM 'nin hizmet sorumlusunu gruba ekleyin:
 
    ```powershell
    Add-AzureADGroupMember -ObjectId "<objectID of group>" -RefObjectId "<object id of VM service principal>"
    ```
 
-## <a name="disable-system-assigned-managed-identity-from-an-azure-vm"></a>Yönetilen kimlik sistem tarafından atanan bir Azure VM'den devre dışı bırak
+## <a name="disable-system-assigned-managed-identity-from-an-azure-vm"></a>Azure VM 'den sistem tarafından atanan yönetilen kimliği devre dışı bırakma
 
-Yönetilen kimlik sistem tarafından atanan bir VM'de devre dışı bırakmak için hesabınızın gerekli [sanal makine Katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rol ataması.  Hiçbir ek Azure AD dizini rol atamaları gereklidir.
+Bir VM 'de sistem tarafından atanan yönetilen kimliği devre dışı bırakmak için hesabınızın [sanal makine katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rolü ataması gerekir.  Ek Azure AD dizin rolü ataması gerekli değildir.
 
-Artık sistem tarafından atanan bir yönetilen kimlik gerekiyor ancak yine de kullanıcı tarafından atanan yönetilen kimlikleri gereken bir sanal makine varsa, aşağıdaki cmdlet'i kullanın:
+Sistem tarafından atanan yönetilen kimliğe, ancak hala Kullanıcı tarafından atanan yönetilen kimliklere ihtiyaç duyulmayan bir sanal makineniz varsa, aşağıdaki cmdlet 'i kullanın:
 
-1. Oturum açmak için Azure kullanarak `Connect-AzAccount`. VM içeren Azure aboneliği ile ilişkili olan bir hesap kullanın.
+1. Kullanarak `Connect-AzAccount`Azure 'da oturum açın. VM 'yi içeren Azure aboneliğiyle ilişkili bir hesap kullanın.
 
    ```powershell
    Connect-AzAccount
    ```
 
-2. Kullanarak VM özelliklerini almak `Get-AzVM` cmdlet'i ve `-IdentityType` parametresi `UserAssigned`:
+2. `Get-AzVM` Cmdlet 'ini kullanarak VM özelliklerini alın ve `-IdentityType` parametresini şu şekilde `UserAssigned`ayarlayın:
 
    ```powershell   
    $vm = Get-AzVM -ResourceGroupName myResourceGroup -Name myVM 
    Update-AzVm -ResourceGroupName myResourceGroup -VM $vm -IdentityType "UserAssigned"
    ```
 
-Artık yönetilen kimlik sistem tarafından atanan gereken bir sanal makineye sahip ve kullanıcı tarafından atanan yönetilen kimlik varsa, aşağıdaki komutları kullanın:
+Artık sistem tarafından atanan yönetilen kimliğe ihtiyacı olmayan ve Kullanıcı tarafından atanan yönetilen kimliklere sahip olmayan bir sanal makineniz varsa, aşağıdaki komutları kullanın:
 
 ```powershell
 $vm = Get-AzVM -ResourceGroupName myResourceGroup -Name myVM
 Update-AzVm -ResourceGroupName myResourceGroup -VM $vm -IdentityType None
 ```
 
-> [!NOTE]
-> (Kullanım dışı için) VM uzantısını Azure kaynakları için yönetilen kimliği sağladıysa kullanarak kaldırmanız gereken [Remove-AzVMExtension](/powershell/module/az.compute/remove-azvmextension). Daha fazla bilgi için [Azure IMDS kimlik doğrulaması için VM uzantısı'ten geçiş](howto-migrate-vm-extension.md).
+
 
 ## <a name="user-assigned-managed-identity"></a>Kullanıcı tarafından atanan yönetilen kimlik
 
-Bu bölümde, bir kullanıcı tarafından atanan bir yönetilen kimlik Azure PowerShell kullanarak bir sanal makineden ekleyip öğrenin.
+Bu bölümde, Azure PowerShell kullanarak bir VM 'den Kullanıcı tarafından atanan yönetilen kimlik ekleme ve kaldırma hakkında bilgi edineceksiniz.
 
-### <a name="assign-a-user-assigned-managed-identity-to-a-vm-during-creation"></a>Kullanıcı tarafından atanan bir yönetilen kimlik oluşturma sırasında bir VM'ye atayın
+### <a name="assign-a-user-assigned-managed-identity-to-a-vm-during-creation"></a>Oluşturma sırasında bir VM 'ye Kullanıcı tarafından atanan yönetilen kimlik atama
 
-Bir VM için bir kullanıcı tarafından atanan kimliği atamak için hesabınızın gerekir [sanal makine Katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) ve [yönetilen kimlik işleci](/azure/role-based-access-control/built-in-roles#managed-identity-operator) rol atamaları. Hiçbir ek Azure AD dizini rol atamaları gereklidir.
+Bir VM 'ye Kullanıcı tarafından atanan bir kimlik atamak için hesabınızın [sanal makine katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) ve [yönetilen kimlik işleci](/azure/role-based-access-control/built-in-roles#managed-identity-operator) rol atamalarına ihtiyacı vardır. Ek Azure AD dizin rolü ataması gerekli değildir.
 
-1. Aşağıdaki Azure VM yalnızca gerekli bölümlerini ("" Oluşturma kaynak grubu","Ağ Grup Oluştur","oluşturma"VM Azure'da oturum",) tamamlama hızlı Başlangıçlar, birine bakın. 
+1. Yalnızca gerekli bölümleri ("Azure 'da oturum aç", "kaynak grubu oluşturma", "ağ oluşturma grubu oluştur", "VM oluşturma") tamamlanırken aşağıdaki Azure VM hızlı başlangıçlarından birine bakın. 
   
-    "VM oluşturma" bölümüne aldığınızda, küçük bir değişiklik yapmak [ `New-AzVMConfig` ](/powershell/module/az.compute/new-azvm) cmdlet sözdizimi. Ekleme `-IdentityType UserAssigned` ve `-IdentityID` kullanıcı tarafından atanan bir kimlikle VM sağlamak için parametreleri.  Değiştirin `<VM NAME>`,`<SUBSCRIPTION ID>`, `<RESROURCE GROUP>`, ve `<USER ASSIGNED IDENTITY NAME>` kendi değerlerinizle.  Örneğin:
+    "VM oluşturma" bölümüne geldiğinizde [`New-AzVMConfig`](/powershell/module/az.compute/new-azvm) cmdlet sözdiziminde küçük bir değişiklik yapın. VM 'yi Kullanıcı `-IdentityID` tarafından atanan bir kimlikle sağlamak için veparametreleriniekleyin.`-IdentityType UserAssigned`  ,,, Ve `<VM NAME>` değerlerinikendideğerlerinizledeğiştirin.`<USER ASSIGNED IDENTITY NAME>` `<SUBSCRIPTION ID>` `<RESROURCE GROUP>`  Örneğin:
     
     ```powershell 
     $vmConfig = New-AzVMConfig -VMName <VM NAME> -IdentityType UserAssigned -IdentityID "/subscriptions/<SUBSCRIPTION ID>/resourcegroups/<RESROURCE GROUP>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<USER ASSIGNED IDENTITY NAME>..."
     ```
     
-    - [PowerShell'i kullanarak bir Windows sanal makinesi oluşturma](../../virtual-machines/windows/quick-create-powershell.md)
-    - [PowerShell kullanarak bir Linux sanal makinesi oluşturma](../../virtual-machines/linux/quick-create-powershell.md)
+    - [PowerShell kullanarak Windows sanal makinesi oluşturma](../../virtual-machines/windows/quick-create-powershell.md)
+    - [PowerShell kullanarak Linux sanal makinesi oluşturma](../../virtual-machines/linux/quick-create-powershell.md)
 
-> [!NOTE]
-> İsteğe bağlı olarak, VM uzantısını Azure kaynakları için yönetilen kimlik sağlama, ancak yakında kullanımdan kaldırılacak. Azure örnek meta veri kimlik uç nokta kimlik doğrulaması için kullanmanızı öneririz. Daha fazla bilgi için [Azure IMDS uç nokta kimlik doğrulaması için VM uzantısı'ten geçiş](howto-migrate-vm-extension.md).
 
-### <a name="assign-a-user-assigned-managed-identity-to-an-existing-azure-vm"></a>Kullanıcı tarafından atanan bir yönetilen kimlik mevcut bir Azure VM'ye atayın
 
-Bir VM için bir kullanıcı tarafından atanan kimliği atamak için hesabınızın gerekir [sanal makine Katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) ve [yönetilen kimlik işleci](/azure/role-based-access-control/built-in-roles#managed-identity-operator) rol atamaları. Hiçbir ek Azure AD dizini rol atamaları gereklidir.
+### <a name="assign-a-user-assigned-managed-identity-to-an-existing-azure-vm"></a>Mevcut bir Azure VM 'sine Kullanıcı tarafından atanan bir yönetilen kimlik atama
 
-1. Oturum açmak için Azure kullanarak `Connect-AzAccount`. VM içeren Azure aboneliği ile ilişkili olan bir hesap kullanın.
+Bir VM 'ye Kullanıcı tarafından atanan bir kimlik atamak için hesabınızın [sanal makine katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) ve [yönetilen kimlik işleci](/azure/role-based-access-control/built-in-roles#managed-identity-operator) rol atamalarına ihtiyacı vardır. Ek Azure AD dizin rolü ataması gerekli değildir.
+
+1. Kullanarak `Connect-AzAccount`Azure 'da oturum açın. VM 'yi içeren Azure aboneliğiyle ilişkili bir hesap kullanın.
 
    ```powershell
    Connect-AzAccount
    ```
 
-2. Bir kullanıcı tarafından atanan yönetilen kimlik kullanarak oluşturduğunuz [yeni AzUserAssignedIdentity](/powershell/module/az.managedserviceidentity/new-azuserassignedidentity) cmdlet'i.  Not `Id` çıktıda çünkü bu bir sonraki adımda gerekecektir.
+2. [New-Azuseratandidentity](/powershell/module/az.managedserviceidentity/new-azuserassignedidentity) cmdlet 'ini kullanarak Kullanıcı tarafından atanan bir yönetilen kimlik oluşturun.  Sonraki adımda `Id` bunun gerekli olacağı için çıktıda öğesine göz önünde bulabilirsiniz.
 
    > [!IMPORTANT]
-   > Kullanıcı tarafından atanan yönetilen kimlikleri yalnızca destekler alfasayısal oluşturma, alt çizgi ve tire (0-9 veya a-z veya A-Z, \_ veya -) karakter. Ayrıca, ad 3 ila 128 karakter uzunluğu atama düzgün çalışması için VM/VMSS için sınırlı olmalıdır. Daha fazla bilgi için [SSS ve bilinen sorunlar](known-issues.md)
+   > Kullanıcı tarafından atanan yönetilen kimliklerin oluşturulması yalnızca alfasayısal, alt çizgi ve kısa çizgi (0-9 veya a-z veya a-z \_ veya-) karakterlerini destekler. Ayrıca, VM/VMSS atamasının düzgün çalışması için ad 3 ile 128 karakter uzunluğunda olmalıdır. Daha fazla bilgi için bkz. [SSS ve bilinen sorunlar](known-issues.md)
 
    ```powershell
    New-AzUserAssignedIdentity -ResourceGroupName <RESOURCEGROUP> -Name <USER ASSIGNED IDENTITY NAME>
    ```
-3. Kullanarak VM özelliklerini almak `Get-AzVM` cmdlet'i. Ardından, kullanıcı tarafından atanan bir yönetilen kimlik Azure VM'sine atanacak kullanın `-IdentityType` ve `-IdentityID` açın [güncelleştirme-AzVM](/powershell/module/az.compute/update-azvm) cmdlet'i.  Değeri`-IdentityId` parametresi `Id` , önceki adımda not ettiğiniz.  Değiştirin `<VM NAME>`, `<SUBSCRIPTION ID>`, `<RESROURCE GROUP>`, ve `<USER ASSIGNED IDENTITY NAME>` kendi değerlerinizle.
+3. `Get-AzVM` Cmdlet 'ini kullanarak VM özelliklerini alın. Ardından, Azure VM 'ye Kullanıcı tarafından atanan bir yönetilen kimlik atamak için `-IdentityType` [Update-azvm](/powershell/module/az.compute/update-azvm) cmdlet 'inde ve `-IdentityID` anahtarını kullanın.  `-IdentityId` Parametresinin`Id` değeri, önceki adımda not ettiğiniz değerdir.  ,,, Ve `<VM NAME>` değerlerinikendideğerlerinizledeğiştirin.`<USER ASSIGNED IDENTITY NAME>` `<SUBSCRIPTION ID>` `<RESROURCE GROUP>`
 
    > [!WARNING]
-   > VM'ye atanmış tüm daha önce kullanıcı tarafından atanan yönetilen kimlikleri korumak için sorgu `Identity` VM nesnesinin özelliği (örneğin, `$vm.Identity`).  Herhangi bir kullanıcı atanmış yönetilen kimlikleri döndürülür, sanal Makineye atamak istediğiniz yeni kullanıcı tarafından atanan yönetilen kimliği ile birlikte aşağıdaki komutu ekleyin.
+   > VM 'ye atanan önceden Kullanıcı tarafından atanan yönetilen kimlikleri tutmak için VM nesnesinin `Identity` özelliğini sorgulayın (örneğin, `$vm.Identity`).  Yönetilen kimlikler atanmış herhangi bir Kullanıcı döndürülürse, sanal makineye atamak istediğiniz yeni kullanıcı tarafından atanmış yönetilen kimlik ile birlikte bunları aşağıdaki komuta dahil edin.
 
    ```powershell
    $vm = Get-AzVM -ResourceGroupName <RESOURCE GROUP> -Name <VM NAME>
    Update-AzVM -ResourceGroupName <RESOURCE GROUP> -VM $vm -IdentityType UserAssigned -IdentityID "/subscriptions/<SUBSCRIPTION ID>/resourcegroups/<RESROURCE GROUP>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<USER ASSIGNED IDENTITY NAME>"
    ```
 
-> [!NOTE]
-> İsteğe bağlı olarak, VM uzantısını Azure kaynakları için yönetilen kimlik sağlama, ancak yakında kullanımdan kaldırılacak. Azure örnek meta veri kimlik uç nokta kimlik doğrulaması için kullanmanızı öneririz. Daha fazla bilgi için [Azure IMDS uç nokta kimlik doğrulaması için VM uzantısı'ten geçiş](howto-migrate-vm-extension.md).
 
-### <a name="remove-a-user-assigned-managed-identity-from-an-azure-vm"></a>Kullanıcı tarafından atanan bir yönetilen kimlik bir Azure VM'den kaldırın.
 
-Bir VM için bir kullanıcı tarafından atanan kimliği kaldırmak için hesabınızın gerekli [sanal makine Katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rol ataması.
+### <a name="remove-a-user-assigned-managed-identity-from-an-azure-vm"></a>Kullanıcı tarafından atanan yönetilen kimliği bir Azure VM 'den kaldırma
 
-Sanal makinenize birden çok kullanıcı tarafından atanan yönetilen kimlik varsa, aşağıdaki komutları kullanarak tüm sonuncu kaldırabilirsiniz. `<RESOURCE GROUP>` ve `<VM NAME>` parametre değerlerini kendi değerlerinizle değiştirmeyi unutmayın. `<USER ASSIGNED IDENTITY NAME>` VM üzerinde kalmalıdır kullanıcı tarafından atanan yönetilen kimliğin adı özelliği. Bu bilgiler sorgulanarak bulunabilir `Identity` VM nesnesinin özelliği.  Örneğin, `$vm.Identity`:
+Kullanıcı tarafından atanan kimliği bir VM 'ye kaldırmak için hesabınızın [sanal makine katılımcısı](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) rolü ataması gerekir.
+
+SANAL makinenizde birden çok kullanıcı tarafından atanan yönetilen kimlik varsa, aşağıdaki komutları kullanarak en son biri hariç tümünü kaldırabilirsiniz. `<RESOURCE GROUP>` ve `<VM NAME>` parametre değerlerini kendi değerlerinizle değiştirmeyi unutmayın. , `<USER ASSIGNED IDENTITY NAME>` Kullanıcı tarafından atanan yönetilen kimliğin ad özelliğidir ve bu, VM 'de kalmalıdır. Bu bilgiler, VM nesnesinin `Identity` özelliği sorgulanarak bulunabilir.  Örneğin `$vm.Identity`:
 
 ```powershell
 $vm = Get-AzVm -ResourceGroupName myResourceGroup -Name myVm
 Update-AzVm -ResourceGroupName myResourceGroup -VirtualMachine $vm -IdentityType UserAssigned -IdentityID <USER ASSIGNED IDENTITY NAME>
 ```
-Sanal makinenize bir sistem tarafından atanan yönetilen yoksa kimlik ve istediğiniz kullanıcı tarafından atanan tüm yönetilen kimlikleri kaldırın, aşağıdaki komutu kullanın:
+SANAL makinenizde sistem tarafından atanan yönetilen bir kimlik yoksa ve bundan sonra Kullanıcı tarafından atanan tüm yönetilen kimlikleri kaldırmak istiyorsanız aşağıdaki komutu kullanın:
 
 ```powershell
 $vm = Get-AzVm -ResourceGroupName myResourceGroup -Name myVm
 Update-AzVm -ResourceGroupName myResourceGroup -VM $vm -IdentityType None
 ```
-Sanal makinenizin sistem tarafından atanan hem de kullanıcı tarafından atanan yönetilen kimlikleri varsa, tüm kullanıcı tarafından atanan yönetilen kimlikleri yalnızca sistem tarafından atanan yönetilen kimlikleri kullanmak için geçerek kaldırabilirsiniz.
+SANAL makinenizde hem sistem tarafından atanan hem de Kullanıcı tarafından atanan Yönetilen kimlikler varsa, yalnızca sistem tarafından atanan yönetilen kimlikleri kullanmak üzere geçiş yaparak Kullanıcı tarafından atanan tüm yönetilen kimlikleri kaldırabilirsiniz.
 
 ```powershell 
 $vm = Get-AzVm -ResourceGroupName myResourceGroup -Name myVm
@@ -216,7 +211,7 @@ Update-AzVm -ResourceGroupName myResourceGroup -VirtualMachine $vm -IdentityType
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure kaynaklarına genel bakış için yönetilen kimlik](overview.md)
-- Tam Azure VM oluşturmak için hızlı başlangıç kılavuzları, bkz:
+- Azure VM oluşturma hızlı başlangıçlarını tam olarak görmek için bkz.:
   
-  - [PowerShell ile bir Windows sanal makinesi oluşturma](../../virtual-machines/windows/quick-create-powershell.md) 
+  - [PowerShell ile Windows sanal makinesi oluşturma](../../virtual-machines/windows/quick-create-powershell.md) 
   - [PowerShell ile Linux sanal makinesi oluşturma](../../virtual-machines/linux/quick-create-powershell.md) 

@@ -1,9 +1,10 @@
 ---
-title: Bir ortak istemci uygulaması (.NET için Microsoft kimlik doğrulama kitaplığı) seçeneklerle örneği | Azure
-description: Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanarak yapılandırma seçenekleri ile birlikte ortak istemci uygulaması örneğini oluşturma konusunda bilgi edinin.
+title: Seçeneklerle ortak bir istemci uygulaması örneğini oluşturma (.NET için Microsoft kimlik doğrulama kitaplığı)
+titleSuffix: Microsoft identity platform
+description: .NET için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL.NET) kullanarak yapılandırma seçenekleriyle ortak bir istemci uygulamasını nasıl örnekleyeceğinizi öğrenin.
 services: active-directory
 documentationcenter: dev-center-name
-author: rwike77
+author: TylerMSFT
 manager: CelesteDG
 editor: ''
 ms.service: active-directory
@@ -13,30 +14,30 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 04/30/2019
-ms.author: ryanwi
+ms.author: twhitney
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 125bbf9aed54fb00f039aeffddd5cc1aad3360a6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bdc6d65d811c09ffae94fe6394f8ae7e61cf0a6f
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65544395"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72802873"
 ---
-# <a name="instantiate-a-public-client-application-with-configuration-options-using-msalnet"></a>Genel istemci uygulaması yapılandırma seçenekleriyle, MSAL.NET kullanarak örneği
+# <a name="instantiate-a-public-client-application-with-configuration-options-using-msalnet"></a>MSAL.NET kullanarak yapılandırma seçenekleriyle ortak bir istemci uygulaması örneğini oluşturma
 
-Bu makalede örneği oluşturmak nasıl bir [genel istemci uygulaması](msal-client-applications.md) Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanarak.  Uygulama ayarları dosyasında tanımlanan yapılandırma seçenekleri ile başlatılır.
+Bu makalede, .NET için Microsoft kimlik doğrulama kitaplığı (MSAL.NET) kullanılarak [genel bir istemci uygulamasının](msal-client-applications.md) nasıl oluşturulacağı açıklanır.  Uygulama, bir ayar dosyasında tanımlanan yapılandırma seçenekleriyle birlikte oluşturulur.
 
-Bir uygulamayı başlatmadan önce öncelikle gerekir [kaydetme](quickstart-register-app.md) , böylece uygulamanız Microsoft kimlik platformu ile tümleştirilebilir. Kayıt sonrasında (Bu, Azure portalında bulunabilir) aşağıdaki bilgilere ihtiyacınız:
+Uygulamayı başlatmadan önce, uygulamanızın Microsoft Identity platformu ile tümleştirilebilmesi için öncelikle [kaydetmeniz](quickstart-register-app.md) gerekir. Kayıttan sonra, aşağıdaki bilgiler (Azure portal bulunabilir) gerekebilir:
 
-- İstemci kimliği (bir GUİD'i temsil eden bir dize)
-- Kimlik sağlayıcısı URL'si (örnek olarak adlandırılır) ve uygulamanız için oturum açma İzleyici. Bu iki parametre topluca yetkilisi olarak bilinir.
-- Yalnızca kuruluşunuz için (aynı zamanda tek kiracılı uygulama adlı) bir satır iş kolu uygulaması yazıyorsanız Kiracı kimliği.
-- Web apps için ve bazen genel istemci uygulamalarında (belirli bir aracı kullanmak uygulamanızı ihtiyacı olduğunda) için ayrıca redirectUri burada kimlik sağlayıcı arka başvururlar güvenlik belirteçlerini uygulamanızla ayarladığınız.
+- İstemci KIMLIĞI (bir GUID 'YI temsil eden dize)
+- Kimlik sağlayıcısı URL 'SI (örnek olarak adlandırılır) ve uygulamanız için oturum açma hedef kitlesi. Bu iki parametre, her topluca yetkili olarak bilinir.
+- Yalnızca kuruluşunuz için bir iş kolu uygulaması yazıyorsanız (tek kiracılı uygulama olarak da adlandırılır) kiracı KIMLIĞI.
+- Web uygulamaları için ve bazen genel istemci uygulamaları için (uygulamanızın bir aracı kullanması gerektiğinde), kimlik sağlayıcısının güvenlik belirteçleriyle uygulamanızı geri yükleyeceğim yeniden yönlendirilebilir.
 
 
-Bir .NET Core konsol uygulaması aşağıdaki olabilir *appsettings.json* yapılandırma dosyası:
+.NET Core konsol uygulaması aşağıdaki *appSettings. JSON* yapılandırma dosyasına sahip olabilir:
 
 ```json
 {
@@ -52,7 +53,7 @@ Bir .NET Core konsol uygulaması aşağıdaki olabilir *appsettings.json* yapıl
 }
 ```
 
-Aşağıdaki kod .NET yapılandırma çerçevesini kullanarak bu dosyayı okur:
+Aşağıdaki kod, .NET yapılandırma çerçevesini kullanarak bu dosyayı okur:
 
 ```csharp
 public class SampleConfiguration
@@ -94,7 +95,7 @@ public class SampleConfiguration
 }
 ```
 
-Aşağıdaki kod, yapılandırma ayarları dosyasından kullanarak uygulamanızı oluşturur:
+Aşağıdaki kod, ayarlar dosyasındaki yapılandırmayı kullanarak uygulamanızı oluşturur:
 
 ```csharp
 SampleConfiguration config = SampleConfiguration.ReadFromJsonFile("appsettings.json");

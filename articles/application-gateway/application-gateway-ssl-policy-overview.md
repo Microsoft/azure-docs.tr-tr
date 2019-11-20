@@ -1,35 +1,28 @@
 ---
-title: Azure Application Gateway SSL İlkesi genel bakış | Microsoft Docs
-description: Azure Application Gateway SSL İlkesi yapılandırmanızı nasıl imkan hakkında bilgi edinin
+title: Azure Application Gateway için SSL ilkesine genel bakış
+description: Azure Application Gateway SSL ilkesini yapılandırmayı ve arka uç sunucu grubundan şifreleme ve şifre çözme ek yükünü azaltmayı öğrenin.
 services: application gateway
-documentationcenter: na
 author: amsriva
-manager: ''
-editor: ''
-tags: azure resource manager
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure services
-ms.date: 08/03/2017
+ms.date: 11/16/2019
 ms.author: amsriva
-ms.openlocfilehash: 46a823e4e230656b53a93a97f195d0879fd08bf2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6b3d52f1f6bd0390ab6ccafa80b2979cb0e498fd
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62122243"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74130417"
 ---
-# <a name="application-gateway-ssl-policy-overview"></a>Uygulama ağ geçidi SSL ilkesine genel bakış
+# <a name="application-gateway-ssl-policy-overview"></a>Application Gateway SSL ilkesine genel bakış
 
-Azure Application Gateway SSL sertifika yönetimini merkezden gerçekleştirin ve arka uç sunucu grubundan şifreleme ve şifre çözme yükü azaltmak için kullanabilirsiniz. Ayrıca işleme bu merkezi SSL Kurumsal güvenlik gereksinimlerinize uygun merkezi SSL İlkesi belirtmenize olanak sağlar. Bu, güvenlik yönergeleri yanı sıra uyumluluk gereksinimlerini karşılamanıza yardımcı olur ve önerilen uygulamalar.
+SSL sertifika yönetimini merkezileştirmek ve arka uç sunucu grubundan şifreleme ve şifre çözme yükünü azaltmak için Azure Application Gateway kullanabilirsiniz. Bu merkezi SSL işleme, kurumsal güvenlik gereksinimlerinize uygun bir merkezi SSL ilkesi belirtmenize de olanak tanır. Bu, uyumluluk gereksinimlerini ve güvenlik yönergelerini ve önerilen uygulamaları karşılamanıza yardımcı olur.
 
-SSL İlkesi SSL Protokolü sürüm hem de şifre paketleri ve şifrelemeleri bir SSL el sıkışması sırasında kullanılan düzenini denetimi içerir. Application Gateway'de SSL İlkesi denetlemeye yönelik iki mekanizma sunar. Önceden tanımlanmış bir ilke veya özel bir ilke kullanabilirsiniz.
+SSL ilkesi, SSL el sıkışması sırasında SSL protokolü sürümünün ve şifre paketlerinin ve şifrelemelerin kullanıldığı sıranın denetimini içerir. Application Gateway, SSL ilkesini denetlemek için iki mekanizma sunar. Önceden tanımlanmış bir ilke ya da özel ilke kullanabilirsiniz.
 
-## <a name="predefined-ssl-policy"></a>Önceden tanımlanmış SSL İlkesi
+## <a name="predefined-ssl-policy"></a>Önceden tanımlanmış SSL ilkesi
 
-Uygulama ağ geçidi üç önceden tanımlı güvenlik ilkeleri vardır. Ağ geçidi herhangi uygun düzeyde güvenlik almak için bu ilkeleri yapılandırabilirsiniz. İlke adları, yapılandırılmış olan ay ve yıl açıklamalı olan. Her ilke teklifler farklı SSL protokolü sürümlerini ve şifre paketleri. En iyi SSL güvenliğini sağlamak için en yeni SSL ilkeleri kullanmanızı öneririz.
+Application Gateway önceden tanımlanmış üç güvenlik ilkesi vardır. Uygun güvenlik düzeyini almak için ağ geçidinizi bu ilkelerden herhangi biriyle yapılandırabilirsiniz. İlke adlarına, yapılandırıldığı yıl ve aya göre açıklama eklenir. Her ilke farklı SSL protokol sürümleri ve şifre paketleri sunar. En iyi SSL güvenliğini sağlamak için en yeni SSL ilkelerini kullanmanızı öneririz.
 
 ### <a name="appgwsslpolicy20150501"></a>AppGwSslPolicy20150501
 
@@ -37,7 +30,7 @@ Uygulama ağ geçidi üç önceden tanımlı güvenlik ilkeleri vardır. Ağ ge�
 |---|---|
 |Ad     | AppGwSslPolicy20150501        |
 |MinProtocolVersion     | TLSv1_0        |
-|Varsayılan| TRUE (önceden tanımlanmış hiçbir ilke belirlediyseniz) |
+|Varsayılan| True (önceden tanımlanmış bir ilke belirtilmemişse) |
 |CipherSuites     |TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384<br>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256<br>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384<br>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256<br>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA<br>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA<br>TLS_DHE_RSA_WITH_AES_256_GCM_SHA384<br>TLS_DHE_RSA_WITH_AES_128_GCM_SHA256<br>TLS_DHE_RSA_WITH_AES_256_CBC_SHA<br>TLS_DHE_RSA_WITH_AES_128_CBC_SHA<br>TLS_RSA_WITH_AES_256_GCM_SHA384<br>TLS_RSA_WITH_AES_128_GCM_SHA256<br>TLS_RSA_WITH_AES_256_CBC_SHA256<br>TLS_RSA_WITH_AES_128_CBC_SHA256<br>TLS_RSA_WITH_AES_256_CBC_SHA<br>TLS_RSA_WITH_AES_128_CBC_SHA<br>TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384<br>TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256<br>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384<br>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256<br>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA<br>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA<br>TLS_DHE_DSS_WITH_AES_256_CBC_SHA256<br>TLS_DHE_DSS_WITH_AES_128_CBC_SHA256<br>TLS_DHE_DSS_WITH_AES_256_CBC_SHA<br>TLS_DHE_DSS_WITH_AES_128_CBC_SHA<br>TLS_RSA_WITH_3DES_EDE_CBC_SHA<br>TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA |
   
 ### <a name="appgwsslpolicy20170401"></a>AppGwSslPolicy20170401
@@ -58,19 +51,19 @@ Uygulama ağ geçidi üç önceden tanımlı güvenlik ilkeleri vardır. Ağ ge�
 |Varsayılan| False |
 |CipherSuites     |TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 <br>    TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 <br>    TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA <br>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA <br>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256<br>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384<br>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384<br>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256<br>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA<br>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA<br>TLS_RSA_WITH_AES_256_GCM_SHA384<br>TLS_RSA_WITH_AES_128_GCM_SHA256<br>TLS_RSA_WITH_AES_256_CBC_SHA256<br>TLS_RSA_WITH_AES_128_CBC_SHA256<br>TLS_RSA_WITH_AES_256_CBC_SHA<br>TLS_RSA_WITH_AES_128_CBC_SHA<br> |
 
-## <a name="custom-ssl-policy"></a>Özel SSL İlkesi
+## <a name="custom-ssl-policy"></a>Özel SSL ilkesi
 
-Önceden tanımlanmış bir SSL İlkesi gereksinimleriniz için yapılandırılmış olması gerekiyorsa, kendi özel SSL İlkesi tanımlamanız gerekir. Özel bir SSL İlkesi ile desteklenen şifre paketleri ve öncelik sıralarına yanı sıra desteklemek için en düşük SSL Protokolü sürüm üzerinde tam denetime sahip.
+Gereksinimlerinize göre önceden tanımlanmış bir SSL ilkesinin yapılandırılması gerekiyorsa, kendi özel SSL ilkenizi tanımlamanız gerekir. Özel bir SSL ilkesiyle, desteklenecek en düşük SSL protokolü sürümü ve desteklenen şifre paketleri ve bunların öncelik sıralaması üzerinde tüm denetiminiz vardır.
  
-### <a name="ssl-protocol-versions"></a>SSL protokolü sürümlerini
+### <a name="ssl-protocol-versions"></a>SSL protokolü sürümleri
 
-* SSL 2.0 ve 3.0, tüm application gateway'ler için varsayılan olarak devre dışıdır. Bu protokol sürümleri yapılandırılabilir değildir.
-* Özel bir SSL İlkesi, ağ geçidiniz için en düşük SSL protokolü sürümü olarak şu üç protokolden herhangi birini seçmek için seçeneği sunar: TLSv1_0, TLSv1_1 ve TLSv1_2.
-* Hiçbir SSL İlkesi tanımlanmazsa, tüm üç protokolden (TLSv1_0, TLSv1_1 ve TLSv1_2) etkinleştirilir.
+* SSL 2,0 ve 3,0 tüm uygulama ağ geçitleri için varsayılan olarak devre dışıdır. Bu protokol sürümleri yapılandırılamaz.
+* Özel bir SSL ilkesi, aşağıdaki üç protokolden birini ağ geçidinizin en düşük SSL protokolü sürümü olarak seçme seçeneği sunar: TLSv1_0, TLSv1_1 ve TLSv1_2.
+* Hiçbir SSL ilkesi tanımlanmamışsa, üç protokol (TLSv1_0, TLSv1_1 ve TLSv1_2) etkinleştirilir.
 
 ### <a name="cipher-suites"></a>Şifre paketleri
 
-Application Gateway, özel ilkeniz seçim yapabileceğiniz aşağıdaki şifre paketleri destekler. Şifre paketlerinin sıralama sırasında SSL anlaşması öncelik sırasını belirler.
+Application Gateway, özel ilkenizi seçebileceğiniz aşağıdaki şifre paketlerini destekler. Şifre paketlerinin sıralaması, SSL anlaşması sırasında öncelik sırasını belirler.
 
 
 - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
@@ -102,6 +95,9 @@ Application Gateway, özel ilkeniz seçim yapabileceğiniz aşağıdaki şifre p
 - TLS_RSA_WITH_3DES_EDE_CBC_SHA
 - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
 
+> [!NOTE]
+> Bağlantı için kullanılan SSL şifre paketleri de kullanılan sertifikanın türüne bağlıdır. İstemciden uygulama ağ geçidi bağlantılarında, kullanılan şifre paketleri uygulama ağ geçidi dinleyicisinde sunucu sertifikalarının türünü temel alır. Uygulama ağ geçidinde arka uç havuzu bağlantılarına, kullanılan şifre paketleri, arka uç havuzu sunucularındaki sunucu sertifikalarının türünü temel alır.
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-SSL İlkesi yapılandırmak için bkz. bilgi almak istiyorsanız [bir uygulama ağ geçidinde SSL yapılandırma İlkesi](application-gateway-configure-ssl-policy-powershell.md).
+Bir SSL ilkesi yapılandırmayı öğrenmek istiyorsanız, bkz. [bir uygulama ağ GEÇIDINDE SSL Ilkesini yapılandırma](application-gateway-configure-ssl-policy-powershell.md).

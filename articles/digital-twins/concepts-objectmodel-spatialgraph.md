@@ -1,82 +1,78 @@
 ---
-title: Dijital İkizlerini nesne modelleri ve uzamsal zeka graf anlama | Microsoft Docs
+title: Nesne modellerini ve uzamsal zeka grafiğini anlama-Azure dijital TWINS | Microsoft Docs
 description: İnsanlar, yerler ve cihazlar arasındaki ilişkileri modellemek için Azure Digital Twins’i kullanın
+ms.author: alinast
 author: alinamstanciu
 manager: bertvanhoof
 ms.service: digital-twins
 services: digital-twins
 ms.topic: conceptual
-ms.date: 12/14/2018
-ms.author: alinast
-ms.openlocfilehash: e7efe1a8632643e2a299b6c9a1b1407414deee4b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/05/2019
+ms.openlocfilehash: 85fb67248a69a2726fef99ebe4749d61807631e4
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60925894"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74010099"
 ---
-# <a name="understand-digital-twins-object-models-and-spatial-intelligence-graph"></a>Dijital İkizlerini nesne modelleri ve uzamsal zeka graf anlama
+# <a name="understand-digital-twins-object-models-and-spatial-intelligence-graph"></a>Dijital TWINS nesne modellerini ve uzamsal zeka grafiğini anlama
 
-Azure dijital İkizlerini fiziksel ortamları ve ilişkili cihazlar, algılayıcılar ve kişiler kapsamlı sanal temsillerini güç katan bir Azure IOT hizmetidir. Geliştirme, etki alanına özgü kavramları yararlı modellerini düzenleyerek artırır. Modelleri ardından bir uzamsal zeka grafik içinde yer. Bu kavramlar, kişiler, boşluk ve cihazlar arasındaki etkileşimler ve ilişkiler faithfully model.
+Azure dijital TWINS, fiziksel ortamların ve ilişkili cihazların, sensörlerin ve kişilerin kapsamlı sanal sunumlarını destekleyen bir Azure IoT hizmetidir. Etki alanına özgü kavramları yararlı modellerle düzenleyerek geliştirmeyi geliştirir. Modeller daha sonra bir uzamsal zeka grafiği içinde bulunur. Bu tür kavramlar, kişiler, boşluklar ve cihazlar arasındaki ilişkileri ve etkileşimleri modelleyin.
 
-Dijital İkizlerini nesne modelleri, etki alanına özgü kavramları, kategoriler ve özellikler açıklanmaktadır. Modelleri, kendi ihtiyaçlarınıza göre istediğiniz şekilde özelleştirilebilmesine isteyen kullanıcıların önceden tanımlanmıştır. Birlikte, bunlar dijital nesne modelleri oluşturan İkizlerini önceden bir _ontology_. Akıllı bir yapı 's ontology bölgeler, mekanlar, Katlar, ofisleri, bölgeleri, Konferans salonu ve odak odaları açıklar. Çeşitli power istasyonları, şalt, enerji kaynakları ve müşterilerin bir enerji kılavuz ontology açıklar. Dijital İkizlerini nesne modelleri ve ontolojileri, çeşitli senaryolar ve ihtiyaçlarınızı özelleştirilebilir.
+Dijital TWINS nesne modelleri, etki alanına özgü kavramları, kategorileri ve özellikleri anlatmaktadır. Modeller, çözümü belirli gereksinimlerine uyarlamak isteyen kullanıcılar tarafından önceden tanımlanmıştır. Birlikte, bu önceden tanımlanmış dijital TWINS nesne modelleri bir _ontology_yapar. Akıllı bina ontology bölgeleri, havalandırma, zeminler, ofisleri, bölgeleri, konferans odalarını ve odak odalarını açıklar. Energy Grid ontology çeşitli güç istasyonları, alt istasyonlar, enerji kaynakları ve müşteriler hakkında da açıklanmaktadır. Dijital TWINS nesne modelleriyle ve ontoloda, farklı senaryolar ve gereksinimler özelleştirilebilir.
 
-Dijital İkizlerini nesne modelleri ve yerinde bir ontology ile doldurabilirsiniz bir _uzamsal graf_. Alanları, cihazları ve bir IOT çözümü için uygun olan kişiler arasında birçok ilişki sanal temsillerini uzamsal grafiklerdir. Bu diyagram bir akıllı yapı 's ontology kullanan bir uzamsal grafiği örneği gösterilmektedir.
+Dijital TWINS nesne modelleriyle ve bir ontology yerinde, _uzamsal bir grafiği_doldurabilirsiniz. Uzamsal grafikler, bir IoT çözümüyle ilgili olan boşluklar, cihazlar ve kişiler arasındaki birçok ilişkinin sanal temsilleridir. Bu diyagramda, akıllı bina ontology kullanan bir uzamsal grafiğe örnek gösterilmektedir.
 
-![Dijital İkizlerini uzamsal grafik oluşturma][1]
+[![dijital TWINS uzamsal grafik oluşturma](media/concepts/digital-twins-spatial-graph-building.png)](media/concepts/digital-twins-spatial-graph-building.png#lightbox)
 
-<a id="model"></a>
+Uzamsal grafik, boşluk, cihaz, algılayıcı ve Kullanıcı gibi bir araya getirir. Her biri gerçek dünyayı modelleyen bir şekilde birbirine bağlanır. Bu örnekte, mekan 43, her biri birçok farklı alana sahip dört katça sahiptir. Kullanıcılar iş istasyonlarıyla ilişkilendirilir ve grafiğin bölümlerine erişim sağlar. Bir yöneticinin uzamsal grafiğinde değişiklik yapma hakkı vardır. Bu, bir ziyaretçi yalnızca belirli bina verilerini görüntüleme haklarına sahiptir.
 
-Uzamsal grafik alanları, cihazlar, algılayıcılar ve kullanıcıların bir araya getirir. Her birlikte gerçek dünyada modellerin bir şekilde bağlıdır. Bu örnekte, mekan 43 her birçok farklı alanlara sahip dört Katlar yok. Kullanıcılar kendi iş istasyonları ile ilişkili ve graf kısımlarına erişim verilir. Yönetici bir ziyaretçi yalnızca belirli bir yapı verileri görüntüleme haklarına sahip olmakla birlikte, uzamsal grafiğe, değişiklik yapmak için haklara sahip olur.
+## <a name="digital-twins-object-models"></a>Dijital TWINS nesne modelleri
 
-## <a name="digital-twins-object-models"></a>Dijital İkizlerini nesne modelleri
+Dijital TWINS nesne modelleri bu nesne ana kategorilerini destekler:
 
-Bu kategoride nesnelerin dijital İkizlerini nesne modellerini destekler:
+- **Boşluklar** , `Tenant`, `Customer`, `Region`ve `Venue`gibi sanal veya fiziksel konumlardır.
+- **Cihazlar** , `AwesomeCompany Device` ve `Raspberry Pi 3`gibi sanal veya fiziksel ekipman parçalarından oluşur.
+- **Algılayıcılar** , örneğin `AwesomeCompany Temperature Sensor` ve `AwesomeCompany Presence Sensor`olaylarını algılayan nesnelerdir.
+- **Kullanıcılar** , iştları ve bunların özelliklerini belirler.
 
-- **Alanları** sanal veya fiziksel konumlar, örneğin: `Tenant`, `Customer`, `Region`, ve `Venue`.
-- **Cihazları** sanal veya fiziksel donanım, örneğin, parçalarıdır `AwesomeCompany Device` ve `Raspberry Pi 3`.
-- **Algılayıcılar** olayları, örneğin, algılamak nesneler `AwesomeCompany Temperature Sensor` ve `AwesomeCompany Presence Sensor`.
-- **Kullanıcılar** occupants ve özelliklerini tanımlar.
+Diğer nesne kategorileri şunlardır:
 
-Diğer nesnelerin kategorileri şunlardır:
-
-- **Kaynakları** için bir alanı eklenmiş ve genellikle uzamsal grafiğinde, örneğin, nesneler tarafından kullanılan Azure kaynakları temsil `IoTHub`.
-- **Blobları** nesnelerine (örneğin, boşluk, cihazlar, algılayıcılar ve kullanıcılar) eklenir. MIME türü ve meta dosyaları olarak örneğin kullanıldıklarından `maps`, `pictures`, ve `manuals`.
-- **Türler Genişletilmiş** belirli özelliklere sahip varlıklar örneğin büyütmek Genişletilebilir numaralandırmalar olan `SpaceType` ve `SpaceSubtype`.
-- **Ontolojileri** genişletilmiş türleri kümesi örneğin temsil `Default`, `Building`, `BACnet`, ve `EnergyGrid`.
-- **Özellik anahtarları ve değerleri** alanları, cihazlar, algılayıcılar ve kullanıcıların özel özellikleri sahiptir. Bunlar gibi yerleşik özelliklere yanı sıra kullanılabilir `DeltaProcessingRefreshTime` anahtar olarak ve `10` değer olarak.
-- **Rolleri** kullanıcılara ve cihazlara uzamsal grafiğinde, örneğin, atanan izinleri gruplarıdır `Space Administrator`, `User Administrator`, ve `Device Administrator`.
-- **Rol atamaları** olan rol ve uzamsal grafikteki bir nesne arasındaki ilişki. Örneğin, bir kullanıcı veya hizmet sorumlusu uzamsal grafik alanında yönetme izni verilebilir.
-- **Güvenlik anahtarı depoları** cihazın güvenli bir şekilde dijital çiftleri ile iletişim kurmasına izin vermek için belirtilen alanı nesnesi altında hiyerarşideki tüm cihazlar için güvenlik anahtarları sağlar.
-- **Kullanıcı tanımlı işlevleri** (UDF) izin içinde uzamsal grafik işleme özelleştirilebilir algılayıcı telemetri. Örneğin, bir UDF yapabilirsiniz:
-  - Bir algılayıcı değere ayarlayın.
-  - Özel mantığı üzerinde sensör okumaları tabanlı gerçekleştirmek ve çıkış için bir alanı ayarlayın.
-  - Meta veriler için bir alanı ekleyin.
-  - Önceden tanımlanmış koşullar karşılandığında bildirimleri gönderin. Şu anda, UDF'ler JavaScript dilinde yazılabilir.
-- **Matchers** olan hangi UDF'ler belirlemek nesneleri için belirli bir telemetri iletisi yürütülür.
-- **Uç noktaları** burada telemetri iletilerini ve dijital İkizlerini olayları yönlendirilir, örneğin, konumlar `Event Hub`, `Service Bus`, ve `Event Grid`.
-
-<a id="graph"></a>
+- **Kaynaklar** bir alana iliştirilir ve genellikle uzamsal grafikteki nesneler tarafından kullanılacak Azure kaynaklarını temsil eder, örneğin `IoTHub`.
+- **Bloblar** nesnelere (boşluklar, cihazlar, algılayıcılar ve kullanıcılar gibi) eklenir. MIME türü ve meta veriler (örneğin, `maps`, `pictures`ve `manuals`) dosyaları olarak kullanılırlar.
+- **Genişletilmiş türler** , belirli özelliklere sahip varlıkları geliştiren Genişletilebilir numaralandırmalar, örneğin `SpaceType` ve `SpaceSubtype`.
+- **Ontolo,** , `Default`, `Building`, `BACnet`ve `EnergyGrid`gibi bir genişletilmiş türler kümesini temsil eder.
+- **Özellik anahtarları ve değerleri** , boşlukların, cihazların, sensörların ve kullanıcıların özel özelliklerdir. Yerleşik özelliklerle birlikte kullanılabilir; Örneğin, anahtar olarak `DeltaProcessingRefreshTime` ve değer olarak `10`.
+- **Roller** , uzamsal grafikteki kullanıcılara ve cihazlara atanan izin kümeleridir; örneğin, `Space Administrator`, `User Administrator`ve `Device Administrator`.
+- **Rol atamaları** , uzamsal grafikteki bir rol ve bir nesne arasındaki ilişkidir. Örneğin, bir kullanıcı veya hizmet sorumlusu, uzamsal grafikteki bir alanı yönetmek için izin verebilir.
+- **Güvenlik anahtarı depoları** , cihazın dijital TWINS ile güvenli bir şekilde iletişim kurmasına izin vermek için belirli bir alan nesnesinin altındaki hiyerarşideki tüm cihazlar için güvenlik anahtarlarını sağlar.
+- **Kullanıcı tanımlı işlevler** (UDF 'ler), uzamsal grafik içinde özelleştirilebilir algılayıcı telemetri işlemesine izin verir. Örneğin, bir UDF şunları yapabilir:
+  - Bir algılayıcı değeri ayarlayın.
+  - Algılayıcı okumaları temelinde özel mantık gerçekleştirin ve çıktıyı bir boşluk olarak ayarlayın.
+  - Bir alana meta veriler ekleyin.
+  - Önceden tanımlanmış koşullar karşılandığında bildirim gönder. Şu anda, UDF 'ler JavaScript 'te yazılabilir.
+- **Eşleştiriciler** , belirli bir telemetri iletisi Için hangi UDF 'leri çalıştırılacağını belirleyen nesnelerdir.
+- **Uç noktalar** telemetri Iletilerinin ve dijital TWINS olaylarının yönlendirilebileceği konumlardır; örneğin, `Event Hub`, `Service Bus`ve `Event Grid`.
 
 ## <a name="spatial-intelligence-graph"></a>Uzamsal zeka grafı
 
-Uzamsal grafik, alanları, cihazlar ve kişiler dijital İkizlerini nesne modelinde tanımlı hiyerarşik grafiğidir. Uzamsal grafiği, devralma, filtreleme, geçiş, ölçeklenebilirlik ve genişletilebilirliği destekler. Yönetebilir ve uzamsal grafınızı REST API'lerden oluşan bir koleksiyon ile etkileşim.
+Uzamsal grafik, dijital TWINS nesne modelinde tanımlanan boşlukların, cihazların ve kişilerin hiyerarşik grafiktir. Uzamsal grafik devralma, filtreleme, geçiş, ölçeklenebilirlik ve genişletilebilirliği destekler. Bir REST API koleksiyonu ile uzamsal grafınızı yönetebilir ve bunlarla etkileşim kurabilirsiniz.
 
-Aboneliğinizde bir dijital İkizlerini hizmet dağıtırsanız, kök düğümün genel yönetici olur. Yapının tamamını tam erişim otomatik olarak verilen. Graftaki alanları alanı API'sini kullanarak sağlayın. Hizmetleri, sensör ve cihaz API'si algılayıcı API'sini kullanarak kullanarak sağlayın. [Açık kaynak Araçları](https://github.com/Azure-Samples/digital-twins-samples-csharp) Ayrıca toplu grafikte sağlamak kullanılabilir.
+Aboneliğinizde bir dijital TWINS hizmeti dağıtırsanız, kök düğümün genel yöneticisi olursunuz. Böylece, tüm yapıya otomatik olarak tam erişim hakkı vermiş olursunuz. Boşluk API 'sini kullanarak grafikte boşluk sağlayın. Algılayıcı API 'sini kullanarak cihaz API 'sini ve algılayıcıları kullanarak hizmetleri sağlayın. [Açık kaynak araçları](https://github.com/Azure-Samples/digital-twins-samples-csharp) , grafiği toplu olarak sağlamak için de kullanılabilir.
 
-**Devralma Grafiği**. Devralma izinleri ve altındaki tüm düğümler için bir üst düğümden düzen özellikleri için geçerlidir. Örneğin, belirli bir düğüm üzerinde bir kullanıcıya rol atandığında, kullanıcının bu rolün izinleri verilen düğüm ve her düğüm altındaki ' var. Her bir özellik anahtarı ve belirli bir düğümde tanımlanan genişletilmiş türü, o düğümü altındaki tüm düğümler tarafından devralınır.
+**Grafik devralma**. Devralma, bir üst düğümden altındaki tüm düğümlere yönelik olan izinler ve özellikler için geçerlidir. Örneğin, bir rol belirli bir düğümdeki bir kullanıcıya atandığında, Kullanıcı o rolün verilen düğüm ve altındaki her düğüm için bu izinlere sahip olur. Belirli bir düğüm için tanımlanan her özellik anahtarı ve genişletilmiş tür, bu düğümün altındaki tüm düğümler tarafından devralınır.
 
-**Graf filtreleme**. Filtreleme, istek sonuçları daraltmak için kullanılır. Kimlikleri, adı, türleri, alt türleri, üst alanı ve ilişkili alanları göre filtreleyebilirsiniz. Algılayıcı veri türleri, özellik anahtarları ve değerleri de filtreleyebilirsiniz *çapraz*, *minLevel*, *maxLevel*ve diğer OData filtre parametreleri.
+**Grafik filtreleme**. Filtreleme, istek sonuçlarının kapsamını daraltmak için kullanılır. Kimlikler, ad, türler, alt türler, üst boşluk ve ilişkili alanlarla filtreleyebilirsiniz. Ayrıca, algılayıcı veri türlerine, özellik anahtarlarına ve değerlerine, *geçiş*, *MinLevel*, *maxlevel*ve diğer OData filtre parametrelerine göre de filtre uygulayabilirsiniz.
 
-**Graf geçiş**. Uzamsal grafik derinliği ve onun üzerinden çapraz geçiş yapabilirsiniz. Derinlik için parametreleri kullanarak yukarıdan aşağı veya aşağıdan yukarıya grafiği çapraz geçirin *çapraz*, *minLevel*, ve *maxLevel*. Doğrudan üst boşluk veya avantajlarına için alt öğelerinden birine bağlı eşdüzey düğümleri almak için grafiği çapraz geçirin. Bir nesne sorguladığınızda kullanarak söz konusu nesne ilişkileri olan tüm ilgili nesneleri alabilirsiniz *içerir* alma API'leri parametresi.
+**Grafik geçişi**. Uzamsal grafiği derinliğine ve enine göre çapraz geçiş yapabilirsiniz. Derinlemesine *geçiş*, *MinLevel*ve *maxlevel*parametrelerini kullanarak grafik yukarıdan aşağıya veya alt alta çapraz geçiş yapın. Bir üst alana veya alt öğelerinden birine doğrudan bağlı eşdüzey düğümleri almak için grafiği gezin. Bir nesneyi sorgulayıp, GET API 'lerinin *içerme* parametresini kullanarak bu nesneyle ilişkiler içeren ilgili tüm nesneleri alabilirsiniz.
 
-**Graf ölçeklenebilirlik**. Gerçek iş yüklerinizi işleyebilmesi için graf ölçeklenebilirlik, dijital İkizlerini güvence altına alır. Dijital İkizlerini Gayrimenkul, altyapı, cihazlar, algılayıcılar, telemetri ve diğer, büyük Portföyleri temsil etmek için kullanılabilir.
+**Grafik ölçeklenebilirliği**. Dijital TWINS, grafik ölçeklenebilirliğini garanti eder, böylece gerçek dünyada iş yüklerinizi işleyebilir. Dijital TWINS, büyük ölçekli emlak, altyapı, cihaz, sensör, telemetri ve daha fazlasını temsil etmek için kullanılabilir.
 
-**Graf genişletilebilirlik**. Genişletilebilirlik, temel alınan dijital İkizlerini nesne modelleri ile yeni türler ve ontolojileri özelleştirmek için kullanın. Genişletilebilir özellikler ve değerler ile dijital İkizlerini verilerinizi de zenginleştirilebilir.
+**Grafik genişletilebilirliği**. Temel alınan dijital TWINS nesne modellerini yeni türler ve ontolode ile özelleştirmek için genişletilebilirlik kullanın. Ayrıca, dijital TWINS verileriniz Genişletilebilir Özellikler ve değerlerle de zenginleştirilebilir.
 
-### <a name="spatial-intelligence-graph-management-apis"></a>Uzamsal zeka graf Yönetimi API'leri
+### <a name="spatial-intelligence-graph-management-apis"></a>Uzamsal zeka grafik yönetimi API 'Leri
 
-Gelen dijital İkizlerini dağıttıktan sonra [Azure portalında](https://portal.azure.com), [Swagger](https://swagger.io/tools/swagger-ui/) yönetim API'leri URL'sini otomatik olarak oluşturulur. Azure portalında görüntülenen **genel bakış** bölümü aşağıdaki biçime sahip.
+[Azure Portal](https://portal.azure.com)dijital TWINS 'i dağıttıktan sonra, yönetim API 'lerinin [Swagger](https://swagger.io/tools/swagger-ui/) URL 'si otomatik olarak oluşturulur. **Genel bakış** bölümündeki Azure Portal aşağıdaki biçimde gösterilir.
 
 ```plaintext
 https://YOUR_INSTANCE_NAME.YOUR_LOCATION.azuresmartspaces.net/management/swagger
@@ -87,26 +83,22 @@ https://YOUR_INSTANCE_NAME.YOUR_LOCATION.azuresmartspaces.net/management/swagger
 | YOUR_INSTANCE_NAME | Dijital İkizlerini örneğinizin adı |
 | YOUR_LOCATION | Örneğiniz üzerinde barındırılıyorsa hangi sunucu bölge |
 
- Bu görüntüde tam URL'si biçiminde görünür.
+ Tam URL biçimi bu görüntüde görünür.
 
-![Dijital İkizlerini portalında yönetim API][2]
+[![Digital TWINS Portal Yönetim API 'SI](media/concepts/digital-twins-spatial-graph-management-api-url.png)](media/concepts/digital-twins-spatial-graph-management-api-url.png#lightbox)
 
-Uzamsal zeka grafiklerini kullanma hakkında daha fazla bilgi için Azure dijital İkizlerini yönetim API'leri önizlemesi ziyaret edin.
+Uzamsal zeka grafiklerini kullanma hakkında daha fazla bilgi için Azure Digital TWINS yönetim API 'Leri gizli Önizleme sayfasını ziyaret edin.
 
 > [!TIP]
-> Swagger önizlemesi API özelliği göstermek için sağlanmıştır.
-> Konumunda barındırılan [docs.westcentralus.azuresmartspaces.net/management/swagger](https://docs.westcentralus.azuresmartspaces.net/management/swagger).
+> API özelliği kümesini göstermek için Swagger gizli dizi önizlemesi sağlanır.
+> [Docs.westcentralus.azuresmartspaces.net/Management/Swagger](https://docs.westcentralus.azuresmartspaces.net/management/swagger)adresinde barındırılır.
 
-Daha fazla bilgi edinin [Swagger'ı kullanmayı](how-to-use-swagger.md).
+[Swagger kullanma](how-to-use-swagger.md)hakkında daha fazla bilgi edinin.
 
-Tüm API çağrıları kullanarak SSO'yu [OAuth](https://docs.microsoft.com/azure/active-directory/develop/v1-protocols-oauth-code). API'leri izleyin [Microsoft REST API'si yönergelerinin kuralları](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md). Çoğu koleksiyonları döndüren API'leri destekler [OData](https://www.odata.org/getting-started/basic-tutorial/#queryData) sistem sorgu seçenekleri.
+Tüm API çağrılarının kimliği, [OAuth](https://docs.microsoft.com/azure/active-directory/develop/v1-protocols-oauth-code)kullanılarak yapılmalıdır. API 'Ler [Microsoft REST API yönergeleri kurallarını](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md)izler. Koleksiyonları döndüren API 'lerin çoğu [OData](https://www.odata.org/getting-started/basic-tutorial/#queryData) sistem sorgu seçeneklerini destekler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Cihaz bağlantısı ve telemetri iletilerini göndermek için dijital İkizleri hakkında bilgi edinmek için [Azure dijital İkizlerini cihaz bağlantısı ve telemetri girişi](concepts-device-ingress.md).
+- Cihaz bağlantısı ve dijital TWINS 'e telemetri iletileri gönderme hakkında bilgi edinmek için [Azure dijital TWINS cihaz bağlantısı ve telemetri](concepts-device-ingress.md)girişi makalesini okuyun.
 
-- Yönetim API sınırlamaları ve kısıtlamalar hakkında bilgi edinmek için [Azure dijital İkizlerini API yönetimi ve sınırlamalar](concepts-service-limits.md).
-
-<!-- Images -->
-[1]: media/concepts/digital-twins-spatial-graph-building.png
-[2]: media/concepts/digital-twins-spatial-graph-management-api-url.png
+- Yönetim API 'SI sınırlamaları ve kısıtları hakkında bilgi edinmek için [Azure Digital TWINS API Yönetimi ve sınırlamaları](concepts-service-limits.md)makalesini okuyun.

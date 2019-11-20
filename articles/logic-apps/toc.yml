@@ -1,4 +1,4 @@
-- name: Azure Logic Apps Belgeleri
+- name: Azure Logic Apps belgeleri
   href: index.yml
 - name: Genel Bakış
   items:
@@ -15,17 +15,23 @@
       href: quickstart-create-logic-apps-visual-studio-code.md
 - name: Öğreticiler
   items:
-    - name: Trafiği düzenli olarak denetleme
+    - name: Zamanlamaya dayalı iş akışları oluşturma
       href: tutorial-build-schedule-recurring-logic-app-workflow.md
-    - name: Posta listesi isteklerini yönetme
+    - name: Onaya dayalı iş akışları oluşturma
       href: tutorial-process-mailing-list-subscriptions-workflow.md
-    - name: E-posta eklerini işleme
+    - name: Azure Depolama ve Azure İşlevleri iş akışı oluşturma
       href: tutorial-process-email-attachments-workflow.md
+- name: Örnekler
+  items:
+    - name: Azure kod örnekleri
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure-logic-apps'
+    - name: Resource Manager hızlı başlangıç şablonları
+      href: 'https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Logic'
 - name: Kavramlar
   items:
     - name: Logic Apps için bağlayıcılar
       href: ../connectors/apis-list.md
-    - name: Yinelenen otomatik iş akışlarını zamanlama
+    - name: Yinelenen iş akışlarını zamanlama
       href: concepts-schedule-automated-recurring-tasks-workflows.md
     - name: Azure ile sunucusuz mimari
       href: logic-apps-serverless-overview.md
@@ -41,6 +47,8 @@
           href: logic-apps-create-logic-apps-from-templates.md
         - name: BizTalk Services’dan geçirme
           href: logic-apps-move-from-mabs.md
+        - name: Akışları Power Automate'ten dışarı aktarma ve Azure Logic Apps’e dağıtma
+          href: export-from-microsoft-flow-logic-app-template.md
         - name: İş akışı yürütmeyi denetleme
           items:
             - name: Koşullu deyimler
@@ -103,6 +111,12 @@
           href: logic-apps-enterprise-integration-partners.md
         - name: Sözleşmeler
           href: logic-apps-enterprise-integration-agreements.md
+        - name: XML doğrulaması için şemalar
+          href: logic-apps-enterprise-integration-schemas.md
+        - name: XML dönüştürme için eşlemeler
+          href: logic-apps-enterprise-integration-maps.md
+        - name: Sertifikalar
+          href: logic-apps-enterprise-integration-certificates.md
         - name: Yapıt meta verileri
           href: logic-apps-enterprise-integration-metadata.md
         - name: B2B iletilerini alma
@@ -133,26 +147,22 @@
           href: logic-apps-scenario-edi-send-batch-messages.md
         - name: Düz dosyaları işleme
           href: logic-apps-enterprise-integration-flatfile.md
+        - name: XML’i dönüştürme
+          href: logic-apps-enterprise-integration-transform.md
         - name: XML’i işleme
           href: logic-apps-enterprise-integration-xml.md
         - name: XML’i doğrulama
           href: logic-apps-enterprise-integration-xml-validation.md
-        - name: XML doğrulaması için şemalar ekleme
-          href: logic-apps-enterprise-integration-schemas.md
-        - name: XML’i dönüştürme
-          href: logic-apps-enterprise-integration-transform.md
-        - name: XML dönüştürme için eşlemeler ekleme
-          href: logic-apps-enterprise-integration-maps.md
         - name: JSON’u dönüştürme
           href: logic-apps-enterprise-integration-liquid-transform.md
-        - name: Güvenlik sertifikaları ekleme
-          href: logic-apps-enterprise-integration-certificates.md
         - name: B2B hatalarında sorun giderme
           href: logic-apps-enterprise-integration-b2b-list-errors-solutions.md
         - name: Olağanüstü durum kurtarma planı oluşturma
           href: logic-apps-enterprise-integration-b2b-business-continuity.md
     - name: Yalıtılmış ortamlarla sanal ağlara bağlanma
       href: connect-virtual-network-vnet-isolated-environment.md
+    - name: Tümleştirme hizmeti ortamlarına yapıtlar ekleme
+      href: add-artifacts-integration-service-environment-ise.md
     - name: Şirket içi verilere erişim
       items:
         - name: Veri ağ geçidi yükleme
@@ -253,8 +263,6 @@
           href: ../connectors/connectors-create-api-salesforce.md
         - name: SAP (Yeni)
           href: logic-apps-using-sap-connector.md
-        - name: SAP
-          href: logic-apps-using-sap-connector-old.md
         - name: SendGrid
           href: ../connectors/connectors-create-api-sendgrid.md
         - name: SFTP
@@ -293,6 +301,10 @@
           href: manage-logic-apps-with-visual-studio.md
         - name: Tümleştirme hesaplarını yönetme
           href: logic-apps-enterprise-integration-accounts.md
+        - name: Tümleştirme hizmeti ortamlarını yönetme
+          href: ise-manage-integration-service-environment.md
+        - name: Mantıksal uygulama kaynaklarını taşıma
+          href: move-logic-app-resources.md
         - name: En son şemaya geçiş
           href: ../connectors/connectors-schema-migration.md
     - name: Test etme
@@ -301,10 +313,12 @@
           href: test-logic-apps-mock-data-static-results.md
     - name: Dağıtma
       items:
+        - name: Genel bakış - Mantıksal uygulama dağıtımını otomatikleştirme
+          href: logic-apps-azure-resource-manager-templates-overview.md
         - name: Mantıksal uygulama şablonları oluşturma
-          href: logic-apps-create-deploy-template.md
+          href: logic-apps-create-azure-resource-manager-templates.md
         - name: Mantıksal uygulama şablonları dağıtma
-          href: logic-apps-create-deploy-azure-resource-manager-templates.md
+          href: logic-apps-deploy-azure-resource-manager-templates.md
     - name: İzleme
       items:
         - name: Mantıksal uygulamaları izleme
@@ -341,15 +355,15 @@
           href: /azure/architecture/reference-architectures/enterprise-integration/queues-events
     - name: 'Bağlayıcılar: Tüm ayrıntılar'
       href: 'https://docs.microsoft.com/connectors/'
-    - name: Limitler ve yapılandırma
+    - name: Hizmet limitleri ve yapılandırma
       href: logic-apps-limits-and-config.md
-    - name: Kullanım ölçümü
+    - name: Fiyatlandırma modeli ve kullanım ölçümü
       href: logic-apps-pricing.md
     - name: Azure PowerShell
       href: /powershell/module/az.logicapp
     - name: REST API
       href: /rest/api/logic/
-    - name: Resource Manager şablonu
+    - name: Resource Manager şablon başvurusu
       href: /azure/templates/microsoft.logic/allversions
     - name: İş Akışı Tanımı Dil şeması
       href: logic-apps-workflow-definition-language.md
@@ -370,23 +384,27 @@
           href: logic-apps-track-integration-account-custom-tracking-schema.md
 - name: Kaynaklar
   items:
+    - name: Microsoft Learn ile becerilerinizi geliştirin
+      href: 'https://docs.microsoft.com/learn/browse/?products=azure-logic-apps'
     - name: Azure Logic Apps yol haritası
       href: 'https://aka.ms/logicappsroadmap/'
     - name: Azure yol haritası
       href: 'https://azure.microsoft.com/roadmap/'
-    - name: MSDN forumu
-      href: 'https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=azurelogicapps'
-    - name: Stack Overflow
-      href: 'https://stackoverflow.com/questions/tagged/azure-logic-apps'
-    - name: Twitter
-      href: 'https://twitter.com/logicappsio'
     - name: Fiyatlandırma
       href: 'https://azure.microsoft.com/pricing/details/logic-apps/'
     - name: Fiyatlandırma hesaplayıcı
       href: 'https://azure.microsoft.com/pricing/calculator/'
-    - name: Hizmet güncelleştirmeleri
-      href: 'https://azure.microsoft.com/updates/?product=logic-apps'
     - name: Müşteri hikayeleri
       href: 'https://customers.microsoft.com/en-us/search?sq=%22Azure%20Logic%20Apps%20%22&ff=story_product_categories%26%3EAzure&p=0&so=story_publish_date%20desc'
     - name: Videolar
       href: 'https://azure.microsoft.com/resources/videos/index/?services=logic-apps&sort=newest'
+    - name: MSDN forumu
+      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=azurelogicapps'
+    - name: Stack Overflow
+      href: 'https://stackoverflow.com/questions/tagged/azure-logic-apps'
+    - name: Twitter
+      href: 'https://twitter.com/logicappsio'
+    - name: Ürün geri bildirimi sağlama
+      href: 'https://feedback.azure.com/forums/287593-logic-apps'
+    - name: Hizmet güncelleştirmeleri
+      href: 'https://azure.microsoft.com/updates/?product=logic-apps'

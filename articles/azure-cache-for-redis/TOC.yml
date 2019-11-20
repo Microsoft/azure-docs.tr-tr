@@ -7,17 +7,17 @@
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
-    - name: ASP.NET uygulaması oluşturma
+    - name: ASP.NET uygulaması
       href: cache-web-app-howto.md
-    - name: .NET uygulaması oluşturma
-      href: cache-dotnet-how-to-use-azure-redis-cache.md
-    - name: .NET Core uygulaması oluşturma
+    - name: .NET Core uygulaması
       href: cache-dotnet-core-quickstart.md
-    - name: Node.js uygulaması oluşturma
-      href: cache-nodejs-get-started.md
-    - name: Java uygulaması oluşturma
+    - name: .NET uygulaması
+      href: cache-dotnet-how-to-use-azure-redis-cache.md
+    - name: Java uygulaması
       href: cache-java-get-started.md
-    - name: Python uygulaması oluşturma
+    - name: Node.js uygulaması
+      href: cache-nodejs-get-started.md
+    - name: Python uygulaması
       href: cache-python-get-started.md
 - name: Öğreticiler
   items:
@@ -28,53 +28,59 @@
     - name: Redis için Azure Önbelleği örnekleri
       href: cache-redis-samples.md
     - name: Azure PowerShell
-      href: cache-howto-manage-redis-cache-powershell.md
+      href: cache-how-to-manage-redis-cache-powershell.md
     - name: Azure CLI
       href: cli-samples.md
 - name: Kavramlar
   items:
-    - name: En İyi Uygulamalar
-      items:
-        - name: Redis için Azure Önbelleği'ne ilişkin En İyi Yöntemler
-          href: cache-best-practices.md
-        - name: Önbelleğe Alma İçin Azure Mimarisi Açısından En İyi Uygulamalar
-          href: 'https://docs.microsoft.com/azure/architecture/best-practices/caching?toc=%2Fazure%2Fredis-cache%2Ftoc.json'
+    - name: Yük devretme ve yama uygulama
+      href: cache-failover.md
+    - name: En iyi uygulamalar
+      href: cache-best-practices.md
+    - name: Önbelleğe alma İçin mimari açıdan en iyi uygulamalar
+      href: 'https://docs.microsoft.com/azure/architecture/best-practices/caching?toc=%2Fazure%2Fredis-cache%2Ftoc.json'
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Planlama
       items:
         - name: Önbellek katmanı seçme
           href: 'cache-faq.md#what-redis-cache-offering-and-size-should-i-use'
+        - name: Kümelemeyle önbelleğinizi dağıtın
+          href: cache-how-to-premium-clustering.md
         - name: Redis veri kalıcılığı ile önbelleğinizi koruyun
           href: cache-how-to-premium-persistence.md
         - name: Sanal ağ ile önbelleğinizi koruyun
           href: cache-how-to-premium-vnet.md
-        - name: Kümelemeyle önbelleğinizi dağıtın
-          href: cache-how-to-premium-clustering.md
+        - name: Coğrafi çoğaltmayı ayarla
+          href: cache-how-to-geo-replication.md
         - name: Yönetilen Önbellek Hizmeti’nden Geçiş
           href: cache-migrate-to-redis.md
     - name: Otomatikleştirme
       items:
         - name: Azure Powershell kullanarak dağıtma ve yönetme
-          href: cache-howto-manage-redis-cache-powershell.md
+          href: cache-how-to-manage-redis-cache-powershell.md
         - name: Azure CLI Kullanarak Dağıtın ve Yönetin
           href: cli-samples.md
         - name: Redis için Azure Önbelleği'ni sağlama
           href: cache-redis-cache-arm-provision.md
         - name: Redis için Azure Önbelleği ile Web Uygulaması sağlama
           href: cache-web-app-arm-with-redis-cache-provision.md
-    - name: ASP.NET ile tümleştirme
+    - name: Uygulama ile tümleştirme
       items:
-        - name: Oturum durumu sağlayıcısı
-          href: cache-aspnet-session-state-provider.md
-        - name: Çıkış önbelleği sağlayıcısı
-          href: cache-aspnet-output-cache-provider.md
+        - name: ASP.NET
+          items:
+            - name: Oturum durumu sağlayıcısı kullanma
+              href: cache-aspnet-session-state-provider.md
+            - name: Çıkış önbelleği sağlayıcısı kullanma
+              href: cache-aspnet-output-cache-provider.md
+        - name: Java Spring
+          items:
+            - name: Spring Boot Başlatıcı uygulaması kullanma
+              href: cache-java-spring-boot-initializer-with-redis-cache.md
     - name: Yönetme
       items:
         - name: Azure portalında yapılandırma
           href: cache-configure.md
-        - name: Coğrafi çoğaltmayı yapılandırma
-          href: cache-how-to-geo-replication.md
         - name: Verileri İçeri/Dışarı Aktarma
           href: cache-how-to-import-export-data.md
         - name: Yeniden başlatma
@@ -83,24 +89,30 @@
           href: 'cache-administration.md#schedule-updates'
         - name: redis-cli.exe erişimini yapılandırma
           href: cache-how-to-redis-cli-tool.md
-    - name: İzleme ve sorun giderme
+        - name: TLS 1.0 ve 1.1'i kaldırma
+          href: cache-remove-tls-10-11.md
+    - name: İzleme
       items:
         - name: Azure portalında izleme
           href: cache-how-to-monitor.md
-        - name: Önbellek sorunlarını giderme
-          href: cache-how-to-troubleshoot.md
         - name: Özel durumlar için uyarılar ayarlama
           href: 'cache-how-to-monitor.md#operations-and-alerts'
+    - name: Tanılama ve sorun giderme
+      items:
+        - name: Redis sunucusu sorunlarını giderme
+          href: cache-troubleshoot-server.md
+        - name: Redis istemcisi sorunlarını giderme
+          href: cache-troubleshoot-client.md
+        - name: Zaman aşımı sorunlarını giderme
+          href: cache-troubleshoot-timeouts.md
+        - name: Veri kaybı sorunlarını giderme
+          href: cache-troubleshoot-data-loss.md
     - name: Ölçek
       items:
         - name: Farklı bir boyuta ve katmana güncelleştirme
           href: cache-how-to-scale.md
         - name: Ölçek daraltma veya genişletme için Redis kümesini kullanma
           href: cache-how-to-premium-clustering.md
-    - name: Spring Boot ile tümleştirme
-      items:
-        - name: Bir Spring Boot Başlatıcı uygulamasını Redis için Azure Önbelleği ile kullanma
-          href: cache-java-spring-boot-initializer-with-redis-cache.md
 - name: Başvuru
   items:
     - name: Kod örnekleri

@@ -1,26 +1,19 @@
 ---
-title: Azure CLI betik örneği - bir Azure önbelleği için Redis ayrıntılarını Get | Microsoft Docs
+title: Azure CLI betik örneği - bir Azure önbelleği için Redis ayrıntılarını Al
 description: Azure CLI betik örneği - bir Azure önbelleği için Redis ayrıntılarını Al
-services: cache
-documentationcenter: ''
 author: yegu-ms
-manager: jhubbard
-editor: ''
 tags: azure-service-management
-ms.assetid: 155924e6-00d5-4a8c-ba99-5189f300464a
 ms.service: cache
 ms.devlang: azurecli
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: tbd
+ms.topic: sample
 ms.date: 08/30/2017
 ms.author: yegu
-ms.openlocfilehash: 8b4c0311f935fa141170206f51e01b90eb4b98ae
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f3e6c6dab95722eebdc4a175379444ef5840cad1
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60240289"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74122477"
 ---
 # <a name="get-details-of-an-azure-cache-for-redis"></a>Bir Azure önbelleği için Redis ayrıntılarınıza
 

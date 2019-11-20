@@ -5,6 +5,7 @@
     - name: Time Series Insights hakkında
       href: time-series-insights-update-overview.md
 - name: Hızlı Başlangıçlar
+  expanded: true
   items:
     - name: Azure Time Series Insights GA
       items:
@@ -16,9 +17,9 @@
           href: time-series-insights-update-quickstart.md
 - name: Öğreticiler
   items:
-    - name: Time Series Insights JavaScript istemci kitaplığını keşfetme
+    - name: Time Series Insights JavaScript istemci kitaplığı
       href: tutorial-explore-js-client-lib.md
-    - name: Time Series Insights tek sayfalı web uygulaması oluşturma
+    - name: Tek sayfalı web uygulaması oluşturma
       href: tutorial-create-tsi-sample-spa.md
     - name: Azure Time Series Insights GA
       items:
@@ -26,7 +27,7 @@
           href: tutorial-create-populate-tsi-environment.md
     - name: Azure Time Series Insights Önizleme
       items:
-        - name: Azure Time Series Insights Önizleme öğreticisi
+        - name: Önizleme ortamını ayarlama
           href: time-series-insights-update-create-environment.md
 - name: Kavramlar
   items:
@@ -58,9 +59,9 @@
           href: time-series-insights-update-storage-ingress.md
         - name: Uygulama alanları
           href: time-series-insights-update-use-cases.md
-        - name: Veri modelleme
+        - name: Zaman Serisi Modeli
           href: time-series-insights-update-tsm.md
-        - name: Veri sorgulama
+        - name: Zaman Serisi Sorgusu
           href: time-series-insights-update-tsq.md
         - name: Gezginde verileri görselleştirme (Önizleme)
           href: time-series-insights-update-explorer.md
@@ -70,6 +71,8 @@
               href: time-series-insights-authentication-and-authorization.md
             - name: 'C# kullanarak verileri sorgulama'
               href: time-series-insights-update-query-data-csharp.md
+            - name: Power BI tümleştirme
+              href: concepts-power-bi.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Veri erişim izni verme
@@ -110,11 +113,15 @@
           href: time-series-insights-update-how-to-tsm.md
         - name: Sorgular için JSON'u şekillendirme
           href: time-series-insights-update-how-to-shape-events.md
+        - name: Power BI'a bağlanma
+          href: how-to-connect-power-bi.md
 - name: Başvuru
   items:
     - name: Time Series Insights
       items:
-        - name: Azure Time Series Insights GA
+        - name: Azure Zaman Serisi Görüşleri
+          href: /rest/api/time-series-insights/index
+        - name: Veri Erişimi GK
           href: /rest/api/time-series-insights/ga
           items:
             - name: Sorgu
@@ -126,49 +133,12 @@
                   href: /rest/api/time-series-insights/ga-query-syntax
             - name: Başvuru Verileri API'si
               href: /rest/api/time-series-insights/ga-reference-data-api
-        - name: Azure Time Series Insights Önizleme
+        - name: Veri Erişimi Kavramları Önizlemesi
           href: /rest/api/time-series-insights/preview
-          items:
-            - name: Zaman Serisi Sorgusu
-              href: /rest/api/time-series-insights/preview-query
-            - name: Zaman Serisi Modeli
-              href: /rest/api/time-series-insights/preview-model
-            - name: Zaman Serisi Ortamı API'si
-              href: /rest/api/time-series-insights/preview-env
-            - name: Zaman Serisi İfadesi ve söz dizimi
-              href: /rest/api/time-series-insights/preview-tsx
     - name: İstemci SDK’sı
       items:
         - name: JavaScript İstemci SDK’sı
           href: 'https://github.com/microsoft/tsiclient/blob/master/docs/API.md'
-- name: İlgili
-  items:
-    - name: Çözümler
-      items:
-        - name: IoT Paketi önceden yapılandırılmış çözümler
-          href: /azure/iot-suite
-        - name: IoT Central
-          href: 'https://docs.microsoft.com/microsoft-iot-central/'
-    - name: Platform hizmetleri
-      items:
-        - name: IoT Hub
-          href: /azure/iot-hub
-        - name: IoT Hub Cihazı Sağlama Hizmeti
-          href: /azure/iot-dps
-        - name: Haritalar
-          href: /azure/azure-maps
-        - name: Hizmet SDK'ları
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
-        - name: Time Series Insights
-          href: /azure/time-series-insights
-    - name: Edge
-      items:
-        - name: IoT Edge
-          href: /azure/iot-edge
-        - name: IoT cihaz SDK'ları
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
-    - name: Azure Stream Analytics
-      href: /azure/stream-analytics/
 - name: Kaynaklar
   items:
     - name: Müşteri verisi istekleri

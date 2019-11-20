@@ -4,19 +4,19 @@ ms.author: crdun
 ms.service: app-service-mobile
 ms.topic: include
 ms.date: 08/23/2018
-ms.openlocfilehash: d1dcd7895025ea608e5f6c4db5e0967817934f2a
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 3c6147cc24f285fc32dce145e594f743c9633c20
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188884"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68857524"
 ---
-Arka uç projesi eşleşeni yordamı&mdash;ya da [.NET arka ucu](#dotnet) veya [Node.js arka ucu](#nodejs).
+Arka uç proje türünden&mdash; [.net Back end](#dotnet) veya [Node. js arka ucu](#nodejs)ile eşleşen yordamı kullanın.
 
 ### <a name="dotnet"></a>.NET arka uç projesi
 
-1. Visual Studio'da sunucu projesini sağ tıklayın ve **NuGet paketlerini Yönet**. Arama `Microsoft.Azure.NotificationHubs`ve ardından **yükleme**. Bu, bildirim hub'ları istemci kitaplığı yükler.
-2. Denetleyicileri klasöründe TodoItemController.cs açın ve aşağıdakileri ekleyin `using` ifadeleri:
+1. Visual Studio 'da sunucu projesine sağ tıklayın ve **NuGet Paketlerini Yönet**' e tıklayın. Arama yapın ve ardından Install öğesine tıklayın. `Microsoft.Azure.NotificationHubs` Bu, Notification Hubs istemci kitaplığını kurar.
+2. Denetleyiciler klasöründe TodoItemController.cs ' i açın ve aşağıdaki `using` deyimleri ekleyin:
 
     ```csharp
     using Microsoft.Azure.Mobile.Server.Config;
@@ -67,10 +67,10 @@ Arka uç projesi eşleşeni yordamı&mdash;ya da [.NET arka ucu](#dotnet) veya [
 
 4. Sunucu projesini yeniden yayımlayın.
 
-### <a name="nodejs"></a>Node.js arka uç projesi
+### <a name="nodejs"></a>Node. js arka uç projesi
 
-1. Bunu zaten bunu yapmadıysanız [hızlı başlangıç projesi indirme](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#download-quickstart), veya başka kullanım [Azure portalında çevrimiçi düzenleyicisini](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#online-editor).
-2. Todoitem.js dosyasındaki mevcut kodu aşağıdakiyle değiştirin:
+1. Arka uç projenizi ayarlayın.
+2. TodoItem. js dosyasındaki mevcut kodu aşağıdaki kodla değiştirin:
 
     ```javascript
     var azureMobileApps = require('azure-mobile-apps'),
@@ -117,6 +117,6 @@ Arka uç projesi eşleşeni yordamı&mdash;ya da [.NET arka ucu](#dotnet) veya [
     module.exports = table;
     ```
 
-    Bu, yeni bir todo öğesi eklendiğinde item.text içeren bir GCM bildirim gönderir.
+    Bu, yeni bir Todo öğesi eklendiğinde Item. Text içeren bir GCM bildirimi gönderir.
 
-3. Yerel bilgisayarınızdaki dosyası düzenlenirken, sunucu projesi yeniden yayımlayın.
+3. Yerel bilgisayarınızda dosyayı düzenlediğinizde, sunucu projesini yeniden yayımlayın.

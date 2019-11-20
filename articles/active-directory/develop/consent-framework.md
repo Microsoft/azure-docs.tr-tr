@@ -1,6 +1,7 @@
 ---
-title: Azure Active Directory onay çerçevesine
-description: Azure Active Directory ve nasıl, çok kiracılı web ve yerel istemci uygulamaları geliştirmek kolaylaştırır onay çerçevesine hakkında bilgi edinin.
+title: Azure Active Directory izin çerçevesi
+titleSuffix: Microsoft identity platform
+description: Azure Active Directory 'de onay çerçevesi ve çok kiracılı web ve yerel istemci uygulamaları geliştirmeyi nasıl kolaylaştırdığını öğrenin.
 services: active-directory
 documentationcenter: ''
 author: rwike77
@@ -17,56 +18,56 @@ ms.author: ryanwi
 ms.reviewer: zachowd, lenalepa, jesakowi
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7b9d272c8a01eeed58278a6e7f0cec147b01a10e
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: af5b60901e57392aaea504f96572801a878d707c
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67482930"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72803852"
 ---
-# <a name="azure-active-directory-consent-framework"></a>Azure Active Directory onay çerçevesine
+# <a name="azure-active-directory-consent-framework"></a>Azure Active Directory izin çerçevesi
 
-Azure Active Directory (Azure AD) onay çerçevesine, çok kiracılı web ve yerel istemci uygulamaları geliştirmeyi kolaylaştırır. Bu uygulamaları burada uygulamanın kayıtlı olandan farklı bir Azure AD kiracısı oturum açma ana kadar kullanıcı hesapları tarafından sağlar. Web API'leri gibi Microsoft Graph API'ye (Azure AD erişim, Intune ve Office 365 Hizmetleri) ve web API'leri yanı sıra diğer Microsoft Hizmetleri API'leri erişmek de gerekebilir.
+Azure Active Directory (Azure AD) onay çerçevesi, çok kiracılı web ve yerel istemci uygulamaları geliştirmeyi kolaylaştırır. Bu uygulamalar, bir Azure AD kiracısından, uygulamanın kaydedildiği bilgisayardan farklı olan kullanıcı hesaplarına oturum açma izni verir. Ayrıca, kendi Web API 'lerinize ek olarak, Microsoft Graph API (Office 365 ' deki Azure AD, Intune ve hizmetlere erişmek için) ve diğer Microsoft Hizmetleri ' API 'Leri gibi Web API 'Lerine erişim de gerekebilir.
 
-Bir kullanıcı veya yönetici içerebilir directory verilerine erişme, dizinde kayıtlı ister bir uygulamaya onay vermiş framework dayanır. Örneğin, web istemci uygulaması, Office 365'ten Takvim kullanıcı hakkındaki bilgileri okumak gerekiyorsa kullanıcı istemci uygulama ilk onayı gerekli. İzin verilen sonra istemci uygulaması kullanıcı adına Microsoft Graph API'sini çağırmak ve Takvim bilgileri gerektiğinde mümkün olacaktır. [Microsoft Graph API](https://developer.microsoft.com/graph) (takvimler ve Exchange, siteler ve SharePoint, OneDrive, OneNote Not defterlerinden, Planner görevleri ve çalışma kitaplarından belgelerden listelerinden iletileri gibi Office 365'te verilere erişim sağlar. , Kullanıcılar ve grupları Azure ad ve diğer veri nesneleri daha fazla Microsoft bulut hizmetlerinden yanı sıra excel).
+Çerçeve, dizin verilerine erişmeyi gerektirebilecek, kendi dizinine kaydedilmesini isteyen bir uygulamaya onay veren bir kullanıcı veya yöneticiye dayalıdır. Örneğin, bir Web istemcisi uygulamasının Office 365 kullanıcısı hakkındaki takvim bilgilerini okuması gerekiyorsa, bu kullanıcının önce istemci uygulamaya onay verilmesi gerekir. Onay verildikten sonra, istemci uygulaması kullanıcı adına Microsoft Graph API 'sini çağırabilir ve gerektiğinde takvim bilgilerini kullanabilir. [Microsoft Graph API 'Si](https://developer.microsoft.com/graph) Office 365 ' deki verilere erişim sağlar (takvimler ve Exchange 'ten gelen Iletiler, SharePoint 'ten gelen siteler ve listeler, OneDrive 'daki belgeler, iş defterlerindeki görevler ve Excel 'deki çalışma kitapları) ve kullanıcılar ve Azure AD ve diğer veri nesnelerinden daha fazla Microsoft bulut hizmetlerinden gruplar.
 
-Genel ya da gizli istemciler kullanarak Yetkilendirme kodu verme ve istemci kimlik bilgileri verin gibi onay çerçevesine OAuth 2.0 ve kendi çeşitli akışlar üzerinde oluşturulmuştur. OAuth 2.0 kullanarak Azure AD, telefon, tablet, sunucu veya bir web uygulaması--gibi farklı türlerde istemci uygulamaları oluşturmak ve gerekli kaynaklara erişmesini mümkün kılar.
+Onay çerçevesi, OAuth 2,0 ' de ve yetkilendirme kodu verme ve istemci kimlik bilgileri gibi çeşitli akışlarda, genel veya gizli istemciler kullanılarak oluşturulmuştur. Azure AD, OAuth 2,0 kullanarak bir telefon, tablet, sunucu veya Web uygulaması gibi birçok farklı türde istemci uygulaması oluşturmayı mümkün kılar ve gerekli kaynaklara erişim elde edebilir.
 
-Onay çerçevesine OAuth2.0 yetkilendirme vermeleri ile kullanma hakkında daha fazla bilgi için bkz. [OAuth 2.0 ve Azure AD kullanarak web uygulamalarına erişim yetkisi verme](v1-protocols-oauth-code.md) ve [Azure AD için kimlik doğrulama senaryoları](authentication-scenarios.md). Microsoft Graph Office 365 için yetkili erişim sağlama hakkında daha fazla bilgi için bkz. [Microsoft Graph ile uygulama kimlik doğrulamasını](https://developer.microsoft.com/graph/docs/authorization/auth_overview).
+Onay çerçevesini OAuth 2.0 yetkilendirmesi ile kullanma hakkında daha fazla bilgi için bkz. [Azure AD Için](authentication-scenarios.md) [OAuth 2,0 ve Azure AD ve kimlik doğrulama senaryolarını kullanarak Web uygulamalarına erişim yetkisi verme](v1-protocols-oauth-code.md) . Microsoft Graph aracılığıyla Office 365 yetkilendirme erişimi alma hakkında bilgi için bkz. [Microsoft Graph Ile uygulama kimlik doğrulaması](https://developer.microsoft.com/graph/docs/authorization/auth_overview).
 
-## <a name="consent-experience---an-example"></a>Onay deneyiminde - örneği
+## <a name="consent-experience---an-example"></a>Onay deneyimi-bir örnek
 
-Aşağıdaki adımlar nasıl onayı deneyimi çalıştığı uygulama geliştiricisi ve kullanıcı için gösterir.
+Aşağıdaki adımlarda, onay deneyiminin hem uygulama geliştiricisi hem de Kullanıcı için nasıl çalıştığı gösterilmektedir.
 
-1. Belirli bir kaynak/API'sine erişim izni istemek için gereken bir web istemci uygulaması olduğunu kabul edelim. Sonraki bölümde bu yapılandırmayı geçekleştirmeden öğreneceksiniz ancak temelde Azure portalı, yapılandırma sırasında izin isteklerini bildirmek için kullanılır. Diğer yapılandırma ayarları gibi uygulamanın Azure AD kaydı bir parçası haline gelir:
+1. Bir kaynağa/API 'ye erişmek için belirli izinler istemesi gereken bir Web istemci uygulamanız olduğunu varsayalım. Bir sonraki bölümde bu yapılandırmayı nasıl yapacağınızı öğreneceksiniz, ancak temel olarak Azure portal yapılandırma zamanında izin isteklerini bildirmek için kullanılır. Diğer yapılandırma ayarları gibi, uygulamanın Azure AD kaydının bir parçası haline gelir:
 
-    ![Diğer uygulamalara izinler](./media/consent-framework/permissions.png)
+    ![Diğer uygulamalar için izinler](./media/consent-framework/permissions.png)
 
-1. Uygulama izinleri güncelleştirildi, uygulamayı çalıştıran ve bir kullanıcı ilk kez kullanmak hakkında sağlamaktır göz önünde bulundurun. İlk olarak, Azure AD'den ait bir yetkilendirme kodunu almak uygulamanın ihtiyacı `/authorize` uç noktası. Yetkilendirme kodu, ardından belirteci yenileyin ve yeni bir erişim almak için kullanılabilir.
+1. Uygulamanızın izinlerinin güncelleştirildiğini, uygulamanın çalıştığını ve bir kullanıcının ilk kez kullanmak üzere olduğunu göz önünde bulundurun. İlk olarak, uygulamanın Azure AD 'nin `/authorize` uç noktasından bir yetkilendirme kodu alması gerekir. Yetkilendirme kodu daha sonra yeni bir erişim ve yenileme belirteci almak için kullanılabilir.
 
-1. Kullanıcı kimliği doğrulanmış, Azure AD'nin değilse `/authorize` uç nokta, kullanıcının oturum açmasını ister.
+1. Kullanıcının kimliği doğrulanmıyorsa, Azure AD 'nin `/authorize` uç noktası kullanıcıdan oturum açmasını ister.
 
-    ![Azure ad kullanıcı veya yönetici oturumu açma](./media/quickstart-v1-integrate-apps-with-azure-ad/usersignin.png)
+    ![Kullanıcı veya yönetici Azure AD 'de oturum açın](./media/quickstart-v1-integrate-apps-with-azure-ad/usersignin.png)
 
-1. Kullanıcı oturum açtıktan sonra Azure AD kullanıcı bir onay sayfası gerekip gerekmediğini belirler. Bu belirleme, kullanıcı (veya onun kuruluşunun yönetici) zaten uygulama onay verilip üzerinde temel alır. Onay zaten verilmedi, Azure AD kullanıcıdan onayı ister ve çalışması için gerekli izinleri görüntüler. Onay iletişim kutusunda görüntülenen izin kümesiyle eşleşen seçili olanları **temsilci izinleri** Azure portalında.
+1. Kullanıcı oturum açtıktan sonra, Azure AD kullanıcının bir onay sayfası gösterilmesi gerekip gerekmediğini tespit eder. Bu belirleme, kullanıcının (veya kuruluşun yöneticisinin) uygulama iznini zaten vermiş olup olmadığına bağlıdır. İzin verilmemişse, Azure AD kullanıcıya onay ister ve çalışması gereken gerekli izinleri görüntüler. Onay iletişim kutusunda görüntülenen izin kümesi, Azure portal **temsilci izinleri** içinde seçili olanlarla eşleşir.
 
-    ![Onay iletişim kutusunda görüntülenen izinleri örneği gösterilmektedir](./media/quickstart-v1-integrate-apps-with-azure-ad/consent.png)
+    ![Onay iletişim kutusunda gösterilen izinlere bir örnek gösterir](./media/quickstart-v1-integrate-apps-with-azure-ad/consent.png)
 
-1. Kullanıcıya izin verir. sonra bir yetkilendirme kodu erişim belirteci alma ve yenileme belirteci için kullanılan, uygulamaya döndürülür. Bu akışı hakkında daha fazla bilgi için bkz. [Web API'sini uygulama türü](web-api.md).
+1. Kullanıcı onay verdikten sonra uygulamanıza bir erişim belirteci ve yenileme belirteci almak için kullanılan bir yetkilendirme kodu döndürülür. Bu akış hakkında daha fazla bilgi için bkz. [Web API uygulaması türü](web-api.md).
 
-1. Bir yönetici olarak, aynı zamanda tüm kullanıcılar adına uygulamanın temsilci izinleri için kiracınızda onay verebilir. Yönetici onayı onay iletişim kutusunu kiracıdaki her kullanıcı için görüntülenmesini engeller ve yapılabilir [Azure portalında](https://portal.azure.com) Yönetici rolüne sahip kullanıcılar tarafından. Hangi yönetici rolleri için temsilci izinleri izin alma bilgi edinmek için [Azure AD'de Yönetici rolü izinleri](../users-groups-roles/directory-assign-admin-roles.md).
+1. Yönetici olarak, kiracınızdaki tüm kullanıcılar adına bir uygulamanın temsilci izinlerini de kabul edebilirsiniz. Yönetici onayı, izin iletişim kutusunun Kiracıdaki her kullanıcı için görünmesini engeller ve yönetici rolüne sahip kullanıcılar tarafından [Azure Portal](https://portal.azure.com) yapılabilir. Hangi Yönetici rollerinin temsilci izinleri onaylamasına izin verebileceğini öğrenmek için bkz. [Azure AD 'de yönetici rolü izinleri](../users-groups-roles/directory-assign-admin-roles.md).
 
-    **Bir uygulamaya onay için temsilci izinleri**
+    **Uygulamanın temsilci izinlerini kabul etmek için**
 
-   1. Git **API izinleri** uygulamanız için sayfa
-   1. Tıklayarak **yönetici onayı vermek** düğmesi.
+   1. Uygulamanızın **API izinleri** sayfasına gidin
+   1. **Yönetici onayı ver** düğmesine tıklayın.
 
-      ![Açık yönetici onayı için izin ver](./media/consent-framework/grant-consent.png)
+      ![Açık yönetici onayı için izin verme](./media/consent-framework/grant-consent.png)
 
    > [!IMPORTANT]
-   > Açık verme onay kullanarak **izinleri verin** düğmesidir ADAL.js kullanan tek sayfalı uygulamalar için (SPA) şu anda gerekli. Erişim belirteci istendiğinde, aksi takdirde uygulama başarısız olur.
+   > **Izin verme** düğmesi kullanılarak açık onay verilmesi şu anda adal. js kullanan tek sayfalı uygulamalar (Spa) için gereklidir. Aksi takdirde, erişim belirteci istendiğinde uygulama başarısız olur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bkz: [uygulamanın çok kiracılı dönüştürme](howto-convert-app-to-be-multi-tenant.md)
-* Daha fazla ayrıntı için bilgi [onayı sırasında yetkilendirme kodu verme akışı OAuth 2.0 protokolü katmanında nasıl desteklenir.](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code)
+* Bkz. [bir uygulamayı çok kiracılı olarak dönüştürme](howto-convert-app-to-be-multi-tenant.md)
+* Daha ayrıntılı bilgi edinmek için [yetkilendirme kodu verme akışı sırasında OAuth 2,0 protokol katmanında izin nasıl desteklendiğini öğrenin.](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code)

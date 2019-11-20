@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory'de cihaz Kimliği nedir?
-description: Cihaz Kimlik Yönetimi, ortamınızdaki kaynakların erişen cihazları yönetmek için nasıl yardımcı olabileceğini öğrenin.
+title: Azure Active Directory cihaz kimliği nedir?
+description: Cihaz kimlik yönetimi 'nin ortamınızdaki kaynaklara erişen cihazları yönetmenize nasıl yardımcı olabileceğini öğrenin.
 services: active-directory
 ms.service: active-directory
 ms.subservice: devices
@@ -11,77 +11,77 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5d38ca8bdf93ff201b3f5842f4cb0e8409dcd0c3
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: 07c1d6e3c622a76a1e625962ad5f08d414ad8cef
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67481671"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73175048"
 ---
 # <a name="what-is-a-device-identity"></a>Cihaz kimliği nedir?
 
-Tüm şekil ve boyutları ve kendi cihazını getir (KCG) kavramı cihazları yaygınlaşmasının ile BT uzmanları, iki biraz kpı'lere hedefleriyle kalmaktadır:
+Tüm şekil ve boyutlardaki cihazların ve kendi cihazını getir (KCG) kavramıyla, BT uzmanları iki ayrı rakip hedefle birlikte başlatılacaktır:
 
-- Son kullanıcıların ne zaman ve yerde üretken izin ver
+- Son kullanıcıların her yerde ve her yerde üretken olmasına izin ver
 - Kuruluşun varlıklarını koruma
 
-Bu varlıklar korumak için BT personelinin ilk cihaz kimliklerini yönetme gerekir. BT personeli, güvenlik ve uyumluluk standartlarını karşılandığından emin olmak için Microsoft Intune gibi araçlarla cihaz kimliği oluşturabilirsiniz. Azure Active Directory (Azure AD), cihazları ve uygulamaları için çoklu oturum açma sağlar ve hizmetlere herhangi bir yerden bu cihazlar.
+Bu varlıkları korumak için BT personelinin öncelikle cihaz kimliklerini yönetmesi gerekir. BT personeli, güvenlik ve uyumluluk standartlarının karşılanmasını sağlamak için Microsoft Intune gibi araçlarla cihaz kimliği oluşturabilir. Azure Active Directory (Azure AD), cihazlar, uygulamalar ve hizmetlerde bu cihazlarda her yerden çoklu oturum açma imkanı sağlar.
 
-- Kullanıcılarınızın, ihtiyaç duydukları kuruluşunuzun varlıklarına erişin. 
-- BT personelinizin, kuruluşunuzun güvenliğini sağlamak için ihtiyaç duydukları denetimleri alın.
+- Kullanıcılarınız, kuruluşunuzun ihtiyaç duydukları varlıklara erişim sağlar. 
+- BT personeliniz, kuruluşunuzun güvenliğini sağlamak için ihtiyaç duydukları denetimleri alır.
 
-Cihaz kimlik yönetimi için temel, [cihaz tabanlı koşullu erişim](../conditional-access/require-managed-devices.md). Cihaz tabanlı koşullu erişim ilkeleriyle ortamınızdaki kaynaklarına erişimi yalnızca yönetilen cihazlarla mümkün olduğundan emin olun.
+Cihaz kimliği yönetimi, [cihaz tabanlı koşullu erişim](../conditional-access/require-managed-devices.md)için temel bir temelidir. Cihaz tabanlı koşullu erişim ilkeleriyle, ortamınızdaki kaynaklara erişimin yalnızca yönetilen cihazlarla yapılabilmesini sağlayabilirsiniz.
 
-## <a name="getting-devices-in-azure-ad"></a>Azure AD'de aygıt alma
+## <a name="getting-devices-in-azure-ad"></a>Azure AD 'de cihazları alma
 
-Azure AD'de bir cihaz almak için birçok seçeneğiniz vardır:
+Azure AD 'de bir cihaz almak için, birden çok seçeneğiniz vardır:
 
 - **Azure AD kayıtlı**
-   - Azure AD kayıtlı cihazlar genellikle kişisel olarak sahip olduğu veya mobil cihazlara olan ve uygulamasında kişisel bir Microsoft hesabı veya başka bir yerel hesap ile oturum.
+   - Azure AD kaydı olan cihazlar genellikle kişisel olarak sahip olunan ve mobil cihazlardır ve kişisel Microsoft hesabı veya başka bir yerel hesapla oturum açtı.
       - Windows 10
       - iOS
       - Android
-      - macOS
-- **Azure AD'ye katıldı**
-   - Azure AD'ye katılmış cihazlar bir kuruluşa ait ve bu kuruluşa ait bir Azure AD hesabı ile oturum açmış. Bunlar, yalnızca bulutta mevcut.
+      - MacOS
+- **Azure AD 'ye katılmış**
+   - Azure AD 'ye katılmış cihazlar bir kuruluşa aittir ve bu kuruluşa ait bir Azure AD hesabıyla oturum açtı. Bunlar yalnızca bulutta bulunur.
       - Windows 10 
 - **Hibrit Azure AD'ye katılmış**
-   - Hibrit Azure AD'ye katılmış cihazlar bir kuruluşa ait ve bu kuruluşa ait bir Azure AD hesabı ile oturum açmış. Bunlar bulutta mevcut ve 
-      - Windows 7, 8.1 veya 10
+   - Karma Azure AD 'ye katılmış cihazlar bir kuruluşa aittir ve bu kuruluşa ait bir Azure AD hesabıyla oturum açtı. Bunlar bulutta ve şirket içinde mevcuttur.
+      - Windows 7, 8,1 veya 10
       - Windows Server 2008 veya üzeri
 
-![Azure AD cihazları için dikey pencerede gösterilen cihazlar](./media/overview/azure-ad-devices-all-devices-overview.png)
+![Azure AD cihazları Dikey penceresinde görünen cihazlar](./media/overview/azure-ad-devices-all-devices-overview.png)
 
 ## <a name="device-management"></a>Cihaz yönetimi
 
-Azure AD'de cihazları Intune, System Center Configuration Manager, Grup İlkesi (hibrit Azure AD katılımı), mobil uygulama yönetimi (MAM) araçları veya diğer üçüncü taraf araçları gibi mobil cihaz Yönetimi (MDM) araçlarını kullanarak yönetilebilir.
+Azure AD 'deki cihazlar Microsoft Intune, System Center Configuration Manager, grup ilkesi (Hibrit Azure AD katılımı), mobil uygulama yönetimi (MAM) araçları veya diğer üçüncü taraf araçları gibi mobil cihaz yönetimi (MDM) araçları kullanılarak yönetilebilir.
 
 ## <a name="resource-access"></a>Kaynak erişimi
 
-Kaydetme ve katılma özelliği bu kaynaklara koşullu erişim ilkelerini uygulamak için bulut kaynakları ve Yöneticiler için sorunsuz oturum açma (SSO) kullanıcılarınızın verin. 
+Kaydolmak ve katılmak, kullanıcılarınıza bulut kaynaklarına ve yöneticilerine koşullu erişim ilkelerini uygulama olanağı sunan sorunsuz oturum açma (SSO) sağlar. 
 
-SSO özelliğinden yararlanır, kuruluşunuzun şirket içi kaynakların yanı sıra bulut kaynakları için Azure AD'ye katılmış cihazlar veya hibrit Azure AD'ye katıldı. Daha fazla bilgi makalesinde bulunabilir [nasıl SSO için şirket içi kaynakları çalışır Azure AD alanına katılmış cihazlar](azuread-join-sso.md).
+Azure AD 'ye katılmış veya karma Azure AD 'ye katılmış cihazlar, SSO 'dan kuruluşunuzun şirket içi kaynaklarına ve bulut kaynaklarına kadar faydalanır. Makalede daha fazla bilgi bulunabilir, [Şirket içi kaynaklara YÖNELIK SSO 'Nun Azure AD 'ye katılmış cihazlarda nasıl çalıştığı](azuread-join-sso.md).
 
 ## <a name="device-security"></a>Cihaz güvenliği
 
-- **Azure AD'ye kayıtlı cihazlar** son kullanıcı tarafından yönetilen bir hesap kullanın, bu hesap bir Microsoft hesabı ya da bir veya daha fazlasını korunan başka bir yerel olarak yönetilen kimlik bilgileri.
+- **Azure AD kayıtlı cihazlar** Son Kullanıcı tarafından yönetilen bir hesabı kullanır, bu hesap bir veya bir veya daha fazla ile korunan bir Microsoft hesabı ya da yerel olarak yönetilen bir kimlik bilgisi olur.
    - Parola
-   - PIN
+   - IĞNES
    - Desen
    - Windows Hello
-- **Azure AD'ye katılmış veya hibrit Azure AD'ye katılmış cihazları** birini veya birkaçını ile güvenliği sağlanan Azure AD'de bir kuruluş hesabı kullanın.
+- **Azure AD 'ye katılmış veya hibrit Azure AD 'ye katılmış cihazlar** , aşağıdakilerden biri veya birkaçı ile güvenli bir şekılde Azure AD 'de kurumsal hesap kullanır.
    - Parola
    - İş İçin Windows Hello
 
 ## <a name="provisioning"></a>Sağlama
 
-Cihazları Azure AD'ye alınırken bir Self Servis şekilde ya da denetimli bir sağlama sürecindeki yöneticileri tarafından gerçekleştirilebilir.
+Cihazların Azure AD 'ye alınması self servis bir şekilde veya yöneticiler tarafından denetlenen sağlama sürecinde yapılabilir.
 
 ## <a name="summary"></a>Özet
 
-Azure AD'de cihaz Kimlik Yönetimi ile şunları yapabilirsiniz:
+Azure AD 'de cihaz kimlik yönetimi ile şunları yapabilirsiniz:
 
-- Getirme ve Azure AD'de cihazları yönetme işlemini basitleştirin
+- Azure AD 'de cihazları getirme ve yönetme sürecini kolaylaştırın
 - Kullanıcılarınıza, kuruluşunuzun bulut tabanlı kaynaklarına kolay erişim olanağı sağlama
 
 ## <a name="license-requirements"></a>Lisans gereksinimleri
@@ -90,8 +90,8 @@ Azure AD'de cihaz Kimlik Yönetimi ile şunları yapabilirsiniz:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [Azure AD'ye kayıtlı cihazlar](concept-azure-ad-register.md)
-- Daha fazla bilgi edinin [Azure AD'ye katılmış cihazlar](concept-azure-ad-join.md)
-- Daha fazla bilgi edinin [hibrit Azure AD'ye katılmış cihazlar](concept-azure-ad-join-hybrid.md)
-- Azure portalında cihaz kimliklerini nasıl yöneteceğiniz hakkında genel bakış edinmek için [Azure portalını kullanarak cihaz kimliklerini yönetme](device-management-azure-portal.md).
-- Cihaz tabanlı koşullu erişim hakkında daha fazla bilgi için bkz: [cihaz tabanlı koşullu erişim ilkeleri Azure Active Directory'yi Yapılandır](../conditional-access/require-managed-devices.md).
+- [Azure AD kayıtlı cihazlar](concept-azure-ad-register.md) hakkında daha fazla bilgi edinin
+- [Azure AD 'ye katılmış cihazlar](concept-azure-ad-join.md) hakkında daha fazla bilgi edinin
+- [Karma Azure AD 'ye katılmış cihazlar](concept-azure-ad-join-hybrid.md) hakkında daha fazla bilgi edinin
+- Azure portal cihaz kimliklerini yönetme hakkında genel bilgi almak için, bkz. [Azure Portal kullanarak cihaz kimliklerini yönetme](device-management-azure-portal.md).
+- Cihaz tabanlı koşullu erişim hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory cihaz tabanlı koşullu erişim Ilkelerini yapılandırma](../conditional-access/require-managed-devices.md).

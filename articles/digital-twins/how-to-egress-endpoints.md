@@ -1,31 +1,31 @@
 ---
-title: Çıkış ve Azure dijital İkizlerini uç noktaların | Microsoft Docs
-description: Azure ile dijital İkizlerini uç noktaları oluşturma hakkında yönergeler.
+title: Çıkış ve uç noktalar-Azure dijital TWINS | Microsoft Docs
+description: Azure dijital TWINS 'de olay uç noktaları oluşturmayı ve çıkış yapmayı öğrenin.
+ms.author: alinast
 author: alinamstanciu
 manager: bertvanhoof
 ms.service: digital-twins
 services: digital-twins
 ms.topic: conceptual
-ms.date: 06/06/2019
-ms.author: alinast
-ms.openlocfilehash: 478fe1859dd9067e8097df0384657793602c1378
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 10/02/2019
+ms.openlocfilehash: 33e8a6a281fbc6620a4608c7b0821b196043423e
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67071453"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74010064"
 ---
-# <a name="egress-and-endpoints"></a>Çıkış ve uç noktaları
+# <a name="egress-and-endpoints-in-azure-digital-twins"></a>Azure dijital TWINS 'teki çıkış ve uç noktalar
 
-Azure dijital İkizlerini *uç noktaları* bir kullanıcının Azure aboneliğinde bir ileti veya olay Aracısı temsil eder. Azure Event Hubs, Azure Event Grid ve Azure Service Bus konuları için olayları ve iletileri gönderilebilir.
+Azure dijital TWINS *uç noktaları* , bir kullanıcının Azure aboneliğindeki bir iletiyi veya olay aracısını temsil eder. Olaylar ve iletiler Azure Event Hubs, Azure Event Grid ve Azure Service Bus konularına gönderilebilir.
 
-Olayları, önceden tanımlanmış yönlendirme tercihlerini göre Uç noktalara yönlendirilir. Kullanıcılar geçidime hangi *olay türleri* her uç nokta alabilirsiniz.
+Olaylar, önceden tanımlanmış yönlendirme tercihlerine göre uç noktalara yönlendirilir. Kullanıcılar, her uç noktanın alabileceği *olay türlerini* belirtir.
 
-Olaylar hakkında daha fazla bilgi için Yönlendirme ve olay türlerini başvurmak [yönlendirme olayları ve iletileri Azure dijital İkizlerini](./concepts-events-routing.md).
+Olaylar, Yönlendirme ve olay türleri hakkında daha fazla bilgi edinmek için bkz. [Azure dijital TWINS 'de yönlendirme olayları ve iletileri](./concepts-events-routing.md).
 
 ## <a name="events"></a>Olaylar
 
-Olayları Azure ileti ve olay aracıları tarafından işlenmek IOT nesneler (örneğin, cihazlar ve algılayıcılar) tarafından gönderilir. Olaylar, şunlarla tanımlanır [Azure Event Grid olay şema başvurusu](../event-grid/event-schema.md).
+Olaylar, Azure ileti ve olay aracıları tarafından işlenmek üzere IoT nesneleri (cihazlar ve algılayıcılar gibi) tarafından gönderilir. Olaylar aşağıdaki [Azure Event Grid olay şeması başvurusu](../event-grid/event-schema.md)tarafından tanımlanır.
 
 ```JSON
 {
@@ -49,23 +49,23 @@ Olayları Azure ileti ve olay aracıları tarafından işlenmek IOT nesneler (ö
 
 | Öznitelik | Tür | Açıklama |
 | --- | --- | --- |
-| id | string | Olayın benzersiz tanımlayıcısı. |
-| subject | string | Yayımcı tarafından tanımlanan olay konu yolu. |
-| data | object | Kaynak sağlayıcıya özel olay verileri. |
+| id | string | Etkinliğin benzersiz tanımlayıcısı. |
+| subject | string | Olay konusunun yayımcı tanımlı yolu. |
+| data | object | Kaynak sağlayıcısına özel olay verileri. |
 | eventType | string | Bu olay kaynağı için kayıtlı olay türlerinden biri. |
-| eventTime | string | Olayın oluşturulduğu zamandan, sağlayıcının UTC saatini temel alan. |
-| dataVersion | string | Veri nesnesinin şema sürümü. Yayımcı, şema sürümü tanımlar. |
-| metadataVersion | string | Olay meta verilerinin şema sürümü. Event Grid, şemanın en üst düzey özellikleri tanımlar. Event Grid, bu değeri sağlar. |
-| topic | string | Olay kaynağı tam kaynak yolu. Bu alan, yazılabilir değil. Event Grid, bu değeri sağlar. |
+| eventTime | string | Etkinliğin UTC saatine göre oluşturulduğu zaman. |
+| dataVersion | string | Veri nesnesinin şema sürümü. Yayımcı, şema sürümünü tanımlar. |
+| metadataVersion | string | Olay meta verilerinin şema sürümü. Event Grid üst düzey özelliklerin şemasını tanımlar. Event Grid bu değeri sağlar. |
+| konu başlığı | string | Olay kaynağının tam kaynak yolu. Bu alan yazılabilir değil. Event Grid bu değeri sağlar. |
 
 Event Grid olay şeması hakkında daha fazla bilgi için:
 
-- Gözden geçirme [Azure Event Grid olay şema başvurusu](../event-grid/event-schema.md).
-- Okuma [Azure EventGrid Node.js SDK'sı EventGridEvent başvuru](https://docs.microsoft.com/javascript/api/azure-eventgrid/eventgridevent?view=azure-node-latest).
+- [Azure Event Grid olay şeması başvurusunu](../event-grid/event-schema.md)gözden geçirin.
+- [Azure EventGrid Node. js SDK EventGridEvent başvurusunu](https://docs.microsoft.com/javascript/api/@azure/eventgrid/eventgridevent?view=azure-node-latest)okuyun.
 
 ## <a name="event-types"></a>Olay türleri
 
-Olay türleri olay doğasını sınıflandırmak ve ayarlanan **eventType** alan. Kullanılabilir olay türleri tarafından aşağıdaki listede verilmiştir:
+Olay türleri olayın yapısını sınıflandırır ve **EventType** alanında ayarlanır. Kullanılabilir olay türleri aşağıdaki liste tarafından verilmiştir:
 
 - TopologyOperation
 - UdfCustom
@@ -73,11 +73,11 @@ Olay türleri olay doğasını sınıflandırmak ve ayarlanan **eventType** alan
 - SpaceChange
 - DeviceMessage
 
-Her bir olay türü için olay biçimlerini aşağıdaki alt bölümlerde daha ayrıntılı açıklanmaktadır.
+Her olay türü için olay biçimleri aşağıdaki alt bölümlerde daha ayrıntılı olarak açıklanmıştır.
 
 ### <a name="topologyoperation"></a>TopologyOperation
 
-**TopologyOperation** grafiği değişiklikleri uygular. **Konu** özelliği, etkilenen nesne türünü belirtir. Aşağıdaki nesne türlerini, bu olay tetikleyebilir:
+**Topologyoperation** , grafik değişiklikleri için geçerlidir. **Subject** özelliği, etkilenen nesne türünü belirtir. Aşağıdaki nesne türleri bu olayı tetikleyebilir:
 
 - Cihaz
 - DeviceBlobMetadata
@@ -87,14 +87,14 @@ Her bir olay türü için olay biçimlerini aşağıdaki alt bölümlerde daha a
 - Anahtar deposu
 - Rapor
 - RoleDefinition
-- Algılayıcı
+- Algılayıcısı
 - SensorBlobMetadata
 - SensorExtendedProperty
 - Uzay
 - SpaceBlobMetadata
 - SpaceExtendedProperty
 - SpaceResource
-- SpaceRoleAssignment
+- Spaceroleatama
 - Sistem
 - Kullanıcı
 - UserBlobMetadata
@@ -124,14 +124,14 @@ Her bir olay türü için olay biçimlerini aşağıdaki alt bölümlerde daha a
 
 | Değer | Şununla değiştir |
 | --- | --- |
-| YOUR_TOPIC_NAME | Özelleştirilmiş, konu adı |
+| YOUR_TOPIC_NAME | Özelleştirilmiş konunun adı |
 
 ### <a name="udfcustom"></a>UdfCustom
 
-**UdfCustom** kullanıcı tanımlı işlev tarafından (UDF) gönderilen bir olay.
+**Udfcustom** , Kullanıcı tanımlı bir Işlev (UDF) tarafından gönderilen bir olaydır.
   
 > [!IMPORTANT]  
-> Bu olay, açıkça UDF'yi gönderilmelidir.
+> Bu olay UDF 'den açıkça gönderilmesi gerekir.
 
 #### <a name="example"></a>Örnek
 
@@ -155,11 +155,11 @@ Her bir olay türü için olay biçimlerini aşağıdaki alt bölümlerde daha a
 
 | Değer | Şununla değiştir |
 | --- | --- |
-| YOUR_TOPIC_NAME | Özelleştirilmiş, konu adı |
+| YOUR_TOPIC_NAME | Özelleştirilmiş konunun adı |
 
 ### <a name="sensorchange"></a>SensorChange
 
-**SensorChange** telemetri değişikliklere dayalı bir algılayıcının durumu bir güncelleştirmedir.
+**Sensorchange** , telemetri değişikliklerine bağlı olarak bir sensörin durumunun güncelleştirmesidir.
 
 #### <a name="example"></a>Örnek
 
@@ -190,11 +190,11 @@ Her bir olay türü için olay biçimlerini aşağıdaki alt bölümlerde daha a
 
 | Değer | Şununla değiştir |
 | --- | --- |
-| YOUR_TOPIC_NAME | Özelleştirilmiş, konu adı |
+| YOUR_TOPIC_NAME | Özelleştirilmiş konunun adı |
 
 ### <a name="spacechange"></a>SpaceChange
 
-**SpaceChange** boşlukla ait durum telemetri değişikliklere dayalı bir güncelleştirmedir.
+**Spacechange** , telemetri değişikliklerine göre bir alanın durumunun bir güncelleştirmesidir.
 
 #### <a name="example"></a>Örnek
 
@@ -225,34 +225,34 @@ Her bir olay türü için olay biçimlerini aşağıdaki alt bölümlerde daha a
 
 | Değer | Şununla değiştir |
 | --- | --- |
-| YOUR_TOPIC_NAME | Özelleştirilmiş, konu adı |
+| YOUR_TOPIC_NAME | Özelleştirilmiş konunun adı |
 
 ### <a name="devicemessage"></a>DeviceMessage
 
-Kullanarak **DeviceMessage**, belirtebileceğiniz bir **EventHub** için ham telemetri olayları yönlendirilir de Azure dijital İkizlerini bağlantı.
+**Devicemessage**kullanarak, ham telemetri olaylarının Azure dijital TWINS 'ten de yönlendirilebilmesi Için bir **EventHub** bağlantısı belirtebilirsiniz.
 
 > [!NOTE]
-> - **DeviceMessage** combinable ile yalnızca olan **EventHub**. Birleştirmeniz mümkün olmayacaktır **DeviceMessage** herhangi bir olay türü.
-> - Tek bir uç nokta türü bileşimi belirtebilirsiniz **EventHub** veya **DeviceMessage**.
+> - **Devicemessage** yalnızca **EventHub**ile combinable. **Devicemessage** ' i diğer olay türlerinden herhangi biriyle birleştiremezsiniz.
+> - **EventHub** veya **devicemessage**türü birleşiminin yalnızca bir uç noktasını belirtebilirsiniz.
 
 ## <a name="configure-endpoints"></a>Uç noktaları yapılandırma
 
-Uç nokta yönetim uç noktalarını API aracılığıyla Uygula.
+Uç nokta yönetimi uç noktalar API 'SI aracılığıyla yapılır.
 
 [!INCLUDE [Digital Twins Management API](../../includes/digital-twins-management-api.md)]
 
-Aşağıdaki örnekler, desteklenen uç noktalar yapılandırmak nasıl ekleyebileceğiniz gösterilmektedir.
+Aşağıdaki örneklerde desteklenen uç noktaların nasıl yapılandırılacağı gösterilmektedir.
 
 >[!IMPORTANT]
-> Dikkatli dikkat **eventTypes** özniteliği. Hangi olay türleri bitiş noktası tarafından işlenir ve bu nedenle, akışı belirler ve tanımlar.
+> **EventTypes** özniteliğinde dikkatli bir dikkat ödeyin. Hangi olay türlerinin bitiş noktası tarafından işleneceğini tanımlar ve bu nedenle yönlendirmeyi belirler.
 
-Kimliği doğrulanmış bir HTTP POST isteği
+Kimliği doğrulanmış bir HTTP POST isteği şu şekilde yapılır:
 
 ```plaintext
 YOUR_MANAGEMENT_API_URL/endpoints
 ```
 
-- Service Bus olay türleri için rota **SensorChange**, **SpaceChange**, ve **TopologyOperation**:
+- Service Bus olay türlerine yönlendirme **Sensorchange**, **Spacechange**ve **topologyoperation**:
 
   ```JSON
   {
@@ -270,12 +270,12 @@ YOUR_MANAGEMENT_API_URL/endpoints
 
     | Değer | Şununla değiştir |
     | --- | --- |
-    | YOUR_NAMESPACE | Uç noktanız için ad alanı |
+    | YOUR_NAMESPACE | Uç noktanızın ad alanı |
     | YOUR_PRIMARY_KEY | Kimlik doğrulaması için kullanılan birincil bağlantı dizesi |
     | YOUR_SECONDARY_KEY | Kimlik doğrulaması için kullanılan ikincil bağlantı dizesi |
-    | YOUR_TOPIC_NAME | Özelleştirilmiş, konu adı |
+    | YOUR_TOPIC_NAME | Özelleştirilmiş konunun adı |
 
-- Event Grid olay türleri için rota **SensorChange**, **SpaceChange**, ve **TopologyOperation**:
+- Event Grid olay türlerine yönlendirme **Sensorchange**, **Spacechange**ve **topologyoperation**:
 
   ```JSON
   {
@@ -295,9 +295,9 @@ YOUR_MANAGEMENT_API_URL/endpoints
     | --- | --- |
     | YOUR_PRIMARY_KEY | Kimlik doğrulaması için kullanılan birincil bağlantı dizesi|
     | YOUR_SECONDARY_KEY | Kimlik doğrulaması için kullanılan ikincil bağlantı dizesi |
-    | YOUR_TOPIC_NAME | Özelleştirilmiş, konu adı |
+    | YOUR_TOPIC_NAME | Özelleştirilmiş konunun adı |
 
-- Event Hubs olay türleri için rota **SensorChange**, **SpaceChange**, ve **TopologyOperation**:
+- Event Hubs olay türlerine yönlendirme **Sensorchange**, **Spacechange**ve **topologyoperation**:
 
   ```JSON
   {
@@ -315,12 +315,12 @@ YOUR_MANAGEMENT_API_URL/endpoints
 
     | Değer | Şununla değiştir |
     | --- | --- |
-    | YOUR_NAMESPACE | Uç noktanız için ad alanı |
+    | YOUR_NAMESPACE | Uç noktanızın ad alanı |
     | YOUR_PRIMARY_KEY | Kimlik doğrulaması için kullanılan birincil bağlantı dizesi |
     | YOUR_SECONDARY_KEY | Kimlik doğrulaması için kullanılan ikincil bağlantı dizesi |
-    | YOUR_EVENT_HUB_NAME | Olay hub'ınızın adı |
+    | YOUR_EVENT_HUB_NAME | Olay Hub 'ınızın adı |
 
-- Event Hubs olay türü için rota **DeviceMessage**. Eklenmesi, `EntityPath` içinde **connectionString** zorunludur:
+- Event Hubs olay türü **Devicemessage**'ye yönlendir. **ConnectionString** 'e `EntityPath` eklenmesi zorunludur:
 
   ```JSON
   {
@@ -336,28 +336,28 @@ YOUR_MANAGEMENT_API_URL/endpoints
 
     | Değer | Şununla değiştir |
     | --- | --- |
-    | YOUR_NAMESPACE | Uç noktanız için ad alanı |
+    | YOUR_NAMESPACE | Uç noktanızın ad alanı |
     | YOUR_PRIMARY_KEY | Kimlik doğrulaması için kullanılan birincil bağlantı dizesi |
     | YOUR_SECONDARY_KEY | Kimlik doğrulaması için kullanılan ikincil bağlantı dizesi |
-    | YOUR_EVENT_HUB_NAME | Olay hub'ınızın adı |
+    | YOUR_EVENT_HUB_NAME | Olay Hub 'ınızın adı |
 
 > [!NOTE]  
-> Yeni bir uç nokta oluşturulduktan sonra en fazla 5 uç noktasında olayları almaya başlaması için 10 dakika sürebilir.
+> Yeni bir uç nokta oluşturulduktan sonra, uç noktada olayların alınmasına başlaması 5 ila 10 dakika kadar sürebilir.
 
 ## <a name="primary-and-secondary-connection-keys"></a>Birincil ve ikincil bağlantı anahtarları
 
-Birincil bağlantı anahtar yetkisiz duruma geldiğinde, sistem otomatik olarak ikincil bağlantı anahtar çalışır. Bir yedekleme sağlar ve düzgün bir şekilde kimlik doğrulaması ve API uç noktaları aracılığıyla birincil anahtarı güncelleştirmek olanağı sağlar.
+Birincil bağlantı anahtarı yetkisiz hale geldiğinde, sistem otomatik olarak ikincil bağlantı anahtarını dener. Bu, bir yedekleme sağlar ve uç noktalar API 'SI aracılığıyla birincil anahtarı düzgün şekilde kimlik doğrulaması ve güncelleştirme olasılığının olmasını sağlar.
 
-Birincil ve ikincil bağlantı anahtarları yetkisiz ise sistem 30 dakikaya kadar bir üstel geri alma bekleme süresini girer. Olayları, geri alma tetiklenen bekleme her seferinde bırakılır.
+Birincil ve ikincil bağlantı anahtarlarının her ikisi de yetkisiz olursa, sistem en fazla 30 dakikalık bir üstel geri dönme bekleme süresi girer. Olaylar, tetiklenen her geri dönme saatinde bırakılır.
 
-Sistem olduğunda bekleme durumu bir geri alma, güncelleştirme bağlantıları anahtarları uç API'sinden etkili 30 dakika kadar sürebilir.
+Sistem bir geri alma bekleme durumunda olduğunda, bağlantı anahtarlarının uç noktalar API 'SI aracılığıyla güncelleştirilmesi 30 dakika kadar sürebilir.
 
-## <a name="unreachable-endpoints"></a>Erişilemeyen uç noktaları
+## <a name="unreachable-endpoints"></a>Erişilemeyen uç noktalar
 
-Bir uç nokta ulaşılamaz duruma gelmediği sistem 30 dakikaya kadar bir üstel geri alma bekleme süresini girer. Olayları, geri alma tetiklenen bekleme her seferinde bırakılır.
+Bir uç nokta ulaşılamaz hale geldiğinde, sistem en fazla 30 dakikalık bir üstel geri dönme bekleme süresi girer. Olaylar, tetiklenen her geri dönme saatinde bırakılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi [Azure dijital Swagger İkizlerini kullanma](how-to-use-swagger.md).
+- [Azure dijital TWINS Swagger kullanmayı](how-to-use-swagger.md)öğrenin.
 
-- Daha fazla bilgi edinin [yönlendirme olayları ve iletileri](concepts-events-routing.md) Azure dijital İkizlerini içinde.
+- Azure dijital TWINS 'de [olayları ve iletileri yönlendirme](concepts-events-routing.md) hakkında daha fazla bilgi edinin.

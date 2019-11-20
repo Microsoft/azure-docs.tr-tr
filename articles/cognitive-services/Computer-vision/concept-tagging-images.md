@@ -1,7 +1,7 @@
 ---
-title: Uygulanan içerik etiketleri görüntülerine - görüntü işleme
+title: İçerik etiketleri-Görüntü İşleme
 titleSuffix: Azure Cognitive Services
-description: Görüntüleri etiketleme özelliğini görüntü işleme API'si, ilgili kavramları öğrenin.
+description: Görüntü İşleme API'si resimler etiketleme özelliğiyle ilgili kavramları öğrenin.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
@@ -11,24 +11,24 @@ ms.topic: conceptual
 ms.date: 02/08/2019
 ms.author: pafarley
 ms.custom: seodec18
-ms.openlocfilehash: aeb03566a650fe46286d77913e0d36dcbb19f436
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ad01751f7f7c573352c8fd15cc0f8cc2ebbbe700
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60759682"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68945117"
 ---
 # <a name="applying-content-tags-to-images"></a>Resimlere içerik etiketleri uygulama
 
-Görüntü işleme tanınabilir nesne, canlı, manzara ve Eylemler binlerce alan etiketler döndürür. Belirsiz veya herkesçe bilinmeyen etiketler söz konusu olduğunda, API yanıtı, etiketin anlamının bilinen bir ortama ilişkin bağlamda açıklığa kavuşturulması için "ipuçları" sağlar. Etiketler taksonomi olarak tanınmaz ve hiçbir devralma hiyerarşisi yoktur. Bir içerik etiketi koleksiyonu, tam tümceler halinde biçimlendirilmiş insan tarafından okunabilir dilde görüntülenen bir görüntü 'açıklamasının' temelini oluşturur. Şu noktada görüntü açıklaması için desteklenen tek dilin İngilizce olduğunu unutmayın.
+Görüntü İşleme, nesnelerin binlerce tanınabilir nesne, canlı, manzara ve eylemlere göre, etiketleri döndürür. Belirsiz veya herkesçe bilinmeyen etiketler söz konusu olduğunda, API yanıtı, etiketin anlamının bilinen bir ortama ilişkin bağlamda açıklığa kavuşturulması için "ipuçları" sağlar. Etiketler taksonomi olarak tanınmaz ve hiçbir devralma hiyerarşisi yoktur. Bir içerik etiketi koleksiyonu, tam tümceler halinde biçimlendirilmiş insan tarafından okunabilir dilde görüntülenen bir görüntü 'açıklamasının' temelini oluşturur. Şu noktada görüntü açıklaması için desteklenen tek dilin İngilizce olduğunu unutmayın.
 
-Görüntü işleme algoritmaları, bir görüntü yüklemek veya bir resim URL'si belirtme sonra nesneleri, canlı ve Eylemler görüntüde tanımlanmış temel alan etiketler çıktı. Etiketleme yalnızca temel konu ile sınırlı kalmayıp ortam (iç mekân veya dış mekân), mobilyalar, aletler, bitkiler, hayvanlar, aksesuarlar, araçlar ve benzeri öğeleri de kapsar.
+Bir görüntüyü karşıya yükledikten veya bir görüntü URL 'SI belirttikten sonra, görüntüde tanımlanan nesneleri, canlı kullanımları ve eylemleri temel alan algoritma çıkış etiketleri Görüntü İşleme. Etiketleme yalnızca temel konu ile sınırlı kalmayıp ortam (iç mekân veya dış mekân), mobilyalar, aletler, bitkiler, hayvanlar, aksesuarlar, araçlar ve benzeri öğeleri de kapsar.
 
 ## <a name="image-tagging-example"></a>Resim etiketleme örneği
 
-Görüntü işleme algılandı örnek görüntüde visual özellikleri etiketlenirken döndürür aşağıdaki JSON yanıtı gösterilir.
+Aşağıdaki JSON yanıtında, örnek görüntüde algılanan görsel özellikleri etiketlerken ne Görüntü İşleme döndürdüğü gösterilmektedir.
 
-![Mavi bir ev ve ön yard](./Images/house_yard.png).
+![Mavi Ev ve ön bahçe](./Images/house_yard.png).
 
 ```json
 {
@@ -85,4 +85,4 @@ Görüntü işleme algılandı örnek görüntüde visual özellikleri etiketlen
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kavramları hakkında bilgi edinin [görüntüleri kategorilendirme](concept-categorizing-images.md) ve [görüntüleri açıklayan](concept-describing-images.md).
+[Görüntüleri kategorilere ayırma](concept-categorizing-images.md) ve [görüntüleri açıklama](concept-describing-images.md)hakkında kavramlar öğrenin.

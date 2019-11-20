@@ -8,20 +8,20 @@ ms.topic: include
 author: sgilley
 ms.author: sgilley
 ms.date: 05/06/2019
-ms.openlocfilehash: 43232dd181f9375b3f3eedc74fc499b0a8cc2965
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 18e855a5f87e700481b69c39c4fe03a69437895e
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188787"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490064"
 ---
-1. [Bir Azure Machine Learning çalışma alanı oluşturma](../articles/machine-learning/service/setup-create-workspace.md#portal) tane yoksa.
+1. Bir [Azure Machine Learning çalışma alanı oluşturun](../articles/machine-learning/service/how-to-manage-workspace.md) .
 
-1. Çalışma alanınızda açın [Azure portalında](https://portal.azure.com/).  Çalışma alanınızı Portalı'nda bulmak nasıl emin değilseniz bkz [çalışma alanınızı nasıl](../articles/machine-learning/service/how-to-manage-workspace.md#view).
+1. [Ml.Azure.com](https://ml.azure.com) içinde oturum açın ve birlikte çalışmak istediğiniz çalışma alanını seçin.
 
-1. Çalışma alanınızı seçin **görsel arabirim**.  Ardından **başlatma görsel arabirim**.  
- 
-    ![Görsel arabirim başlatın](./media/aml-ui-prereq/launch-ui.png)
+1. **Tasarımcı**' yı seçin.
 
-    Yeni bir tarayıcı sayfada arabirimi Web sayfası açılır.  
+    ![Tasarımcıyı başlatma](./media/aml-ui-prereq/launch-designer.png)
+
+
 

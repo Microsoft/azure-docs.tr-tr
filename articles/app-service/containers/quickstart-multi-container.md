@@ -1,7 +1,7 @@
 ---
-title: Docker Compose - Azure App Service'ı kullanarak çok kapsayıcılı uygulama oluşturma
+title: Docker Compose kullanarak çok Kapsayıcılı uygulama oluşturma Azure App Service
 description: Azure Kapsayıcılar için Web App'te ilk çok kapsayıcılı uygulamanızı birkaç dakikada dağıtın
-keywords: Azure app service, web uygulaması, linux, docker compose, multicontainer, çok kapsayıcılı, kapsayıcılar için web app birden fazla kapsayıcılar, kapsayıcı, wordpress, mysql için azure db, kapsayıcılar ile üretim veritabanı
+keywords: Azure App Service, Web uygulaması, Linux, Docker, Compose, çok Kapsayıcılı, çok Kapsayıcılı, kapsayıcılar için Web App, birden çok kapsayıcı, kapsayıcı, WordPress, MySQL için Azure DB, kapsayıcılarla üretim veritabanı
 services: app-service\web
 documentationcenter: ''
 author: msangapu
@@ -10,19 +10,18 @@ editor: ''
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
-ms.date: 03/27/2019
+ms.date: 08/23/2019
 ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: 543ba3ee4e72c5d31708e9b4983e7889421940ca
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 89cf13fd4405b9ddcbc5b31fad9f0c945aef64aa
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60396924"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70071117"
 ---
-# <a name="create-a-multi-container-preview-app-using-a-docker-compose-configuration"></a>Bir Docker Compose Yapılandırması'nı kullanarak bir (Önizleme) çoklu kapsayıcı uygulaması oluşturma
+# <a name="create-a-multi-container-preview-app-using-a-docker-compose-configuration"></a>Docker Compose yapılandırma kullanarak çok Kapsayıcılı (Önizleme) uygulama oluşturma
 
 [Kapsayıcılar için Web App](app-service-linux-intro.md), Docker görüntülerini esnek bir şekilde kullanmanızı sağlar. Bu hızlı başlangıçta Docker Compose yapılandırması kullanarak [Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)'de Kapsayıcılar için Web App'e çok kapsayıcılı uygulama dağıtma adımları gösterilmektedir.
 
@@ -45,7 +44,7 @@ Cloud Shell'de bir quickstart dizini oluşturun ve o dizine geçin.
 ```bash
 mkdir quickstart
 
-cd quickstart
+cd $HOME/quickstart
 ```
 
 Ardından, örnek uygulama deposunu quickstart dizininize kopyalamak için aşağıdaki komutu çalıştırın. Ardından `multicontainerwordpress` dizinine geçin.
@@ -102,7 +101,7 @@ App Service planı oluşturulduğunda Azure CLI, aşağıdaki örneğe benzer bi
 
 ## <a name="create-a-docker-compose-app"></a>Docker Compose uygulaması oluşturma
 
-Cloud Shell terminalinde [az webapp create](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) komutunu kullanarak `myAppServicePlan` App Service planında çok kapsayıcılı bir [web uygulaması](app-service-linux-intro.md) oluşturun. _\<app_name>_ yerine benzersiz bir uygulama adı girmeyi unutmayın.
+Cloud Shell terminalinde [az webapp create](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) komutunu kullanarak `myAppServicePlan` App Service planında çok kapsayıcılı bir [web uygulaması](app-service-linux-intro.md) oluşturun. _\<App_name >_ `a-z`, benzersiz bir uygulama adıyla değiştirmeyi unutmayın (geçerli karakterler, `0-9`ve `-`).
 
 ```bash
 az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name <app_name> --multicontainer-config-type compose --multicontainer-config-file compose-wordpress.yml
@@ -138,10 +137,10 @@ Dağıtılan uygulamaya göz atmak için (`http://<app_name>.azurewebsites.net`)
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Öğretici: WordPress çoklu kapsayıcı uygulaması](tutorial-multi-container-app.md)
+> [Öğretici: Çok Kapsayıcılı WordPress uygulaması](tutorial-multi-container-app.md)
 
 > [!div class="nextstepaction"]
-> [Özel bir kapsayıcı yapılandırma](configure-custom-container.md)
+> [Özel kapsayıcı yapılandırma](configure-custom-container.md)
 
 <!--Image references-->
 [1]: ./media/tutorial-multi-container-app/azure-multi-container-wordpress-install.png

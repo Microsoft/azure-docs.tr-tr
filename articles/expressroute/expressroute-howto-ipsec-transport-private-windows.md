@@ -1,5 +1,5 @@
 ---
-title: 'IPSec aktarım modu Windows konakları özel eşleme için yapılandırın: ExpressRoute: Azure | Microsoft Docs'
+title: 'Azure ExpressRoute özel eşlemesi: IPSec aktarım modunu yapılandırma-Windows Konakları'
 description: Azure Windows VM ve GPO'ları ve OU'ları kullanarak eşlemesi özel ExpressRoute aracılığıyla şirket içi Windows konaklar arasında IPSec aktarım modu etkinleştirme konusunda.
 services: expressroute
 author: fabferri
@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 10/17/2018
 ms.author: fabferri
 ms.custom: seodec18
-ms.openlocfilehash: d728980517988e2dc39be4e4b64d20157a1aef54
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1bc33047d31262af443cddc418853fbacd88aec1
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60367362"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74022001"
 ---
 # <a name="configure-ipsec-transport-mode-for-expressroute-private-peering"></a>IPSec aktarım modu için ExpressRoute özel eşlemesini yapılandırın
 
@@ -43,17 +43,17 @@ Bu diyagramda IPSec tünelleri, ExpressRoute özel eşlemesi içinde Aktarımdak
 ### <a name="working-with-ipsec-policy"></a>IPSec ilkesi ile çalışma
 
 Windows şifreleme, IPSec ilkesi ile ilişkilidir. IPSec ilkesi hangi IP trafiği güvenli ve IP paketlerini uygulanan güvenlik mekanizmasını tanımlar.
-**IPSec ilkeleri** şu öğelerden oluşan: **Filtre listeleri**, **filtre eylemlerini**, ve **güvenlik kuralları**.
+**IPSec ilkeleri** şu öğelerden oluşan: **filtre listeleri**, **filtre eylemleri**, ve **güvenlik kuralları**.
 
 IPSec ilkesi yapılandırırken aşağıdaki IPSec ilkesi terimleri anlamak önemlidir:
 
-* **IPSec ilkesi:** Kuralları koleksiyonu. Yalnızca bir ilke ("belirli bir zamanda atanan") etkin olabilir. Her ilke, bunların tümü aynı anda etkin olabilir, bir veya daha fazla kural bulunabilir. Bir bilgisayar yalnızca bir etkin IPSec ilkesinin atanabilir adresindeki saati verildiğinde. Ancak, IPSec ilkesi içinde farklı durumlarda büyütülmesine harcanabilir birden fazla eylem tanımlayabilirsiniz. Her bir IPSec kuralları kümesi, kuralın geçerli olduğu ağ trafiği türü etkileyen bir filtre listesi ile ilişkilendirilir.
+* **IPSec ilkesi:** kuralları koleksiyonu. Yalnızca bir ilke ("belirli bir zamanda atanan") etkin olabilir. Her ilke, bunların tümü aynı anda etkin olabilir, bir veya daha fazla kural bulunabilir. Bir bilgisayar yalnızca bir etkin IPSec ilkesinin atanabilir adresindeki saati verildiğinde. Ancak, IPSec ilkesi içinde farklı durumlarda büyütülmesine harcanabilir birden fazla eylem tanımlayabilirsiniz. Her bir IPSec kuralları kümesi, kuralın geçerli olduğu ağ trafiği türü etkileyen bir filtre listesi ile ilişkilendirilir.
 
-* **Filtre listeler:** Filtre, bir veya daha fazla filtre paket listeleridir. Bir liste, birden çok filtre içerebilir. Filtre iletişim izin, güvenliği veya IP adres aralıkları, protokolleri veya hatta belirli protokolü bağlantı noktasını göre engellenen tanımlar. Her filtre, belirli bir koşul kümesini eşleşir; Örneğin, belirli bir alt ağdan belirli bir bilgisayar üzerinde belirli hedef bağlantı noktasına gönderilen paketler. Ağ koşulları, bir veya daha fazla bu filtreler eşleştiğinde, filtrenin etkinleştirilir. Her filtre, belirli bir filtre listesi içinde tanımlanır. Filtreler, filtre listeleri arasında paylaşılamaz. Ancak, belirli filtresi listesi, birden fazla IPSec ilkelerine eklenebilir. 
+* **Filtre listeleri:** filtre listeleri, bir veya daha fazla filtre paketidir. Bir liste, birden çok filtre içerebilir. Filtre iletişim izin, güvenliği veya IP adres aralıkları, protokolleri veya hatta belirli protokolü bağlantı noktasını göre engellenen tanımlar. Her filtre, belirli bir koşul kümesini eşleşir; Örneğin, belirli bir alt ağdan belirli bir bilgisayar üzerinde belirli hedef bağlantı noktasına gönderilen paketler. Ağ koşulları, bir veya daha fazla bu filtreler eşleştiğinde, filtrenin etkinleştirilir. Her filtre, belirli bir filtre listesi içinde tanımlanır. Filtreler, filtre listeleri arasında paylaşılamaz. Ancak, belirli filtresi listesi, birden fazla IPSec ilkelerine eklenebilir. 
 
-* **Filtre eylemleri:** Bir dizi güvenlik algoritmalar, protokolleri, bir güvenlik yöntemi tanımlar ve anahtar bir bilgisayar IKE görüşmelerinde sunar. Filtre, güvenlik yöntemleri, tercih sırasına göre sıralanmış listesini eylemlerdir.  Bir bilgisayarı bir IPSec oturumu belirleyici, kabul veya filtre Eylemler listesinde depolanan güvenlik ayarına göre teklifler gönderir.
+* **Filtre eylemleri:** bir dizi güvenlik algoritmalar, protokolleri, bir güvenlik yöntemi tanımlar ve anahtar bir bilgisayar IKE görüşmelerinde sunar. Filtre, güvenlik yöntemleri, tercih sırasına göre sıralanmış listesini eylemlerdir.  Bir bilgisayarı bir IPSec oturumu belirleyici, kabul veya filtre Eylemler listesinde depolanan güvenlik ayarına göre teklifler gönderir.
 
-* **Güvenlik kuralları:** Belirleyen kuralları nasıl ve ne zaman bir IPSec ilkesi iletişimi korur. Kullandığı **filtresi listesi** ve **filtre eylemlerini** IPSec bağlantısı oluşturmak için bir IPSec kuralı oluşturmak için. Her ilke, bunların tümü aynı anda etkin olabilir, bir veya daha fazla kural bulunabilir. Her kural, IP filtreleri ve bu filtre listesi ile eşleşmeyi üzerinde gerçekleşmesi güvenlik eylemleri koleksiyonunu listesini içerir:
+* **Güvenlik kuralları:** belirleyen kuralları nasıl ve ne zaman bir IPSec ilkesi iletişimi korur. Kullandığı **filtresi listesi** ve **filtre eylemlerini** IPSec bağlantısı oluşturmak için bir IPSec kuralı oluşturmak için. Her ilke, bunların tümü aynı anda etkin olabilir, bir veya daha fazla kural bulunabilir. Her kural, IP filtreleri ve bu filtre listesi ile eşleşmeyi üzerinde gerçekleşmesi güvenlik eylemleri koleksiyonunu listesini içerir:
   * IP filtresi eylemleri
   * Kimlik doğrulama yöntemleri
   * IP tünel ayarları
@@ -99,7 +99,7 @@ Aşağıdaki önkoşulları karşıladığından emin olun:
 
 * **Azure Windows sanal makineleri:** vm1, vm2
 
-## <a name="creategpo"></a>1. GPO oluşturma
+## <a name="creategpo"></a>1. bir GPO oluşturun
 
 1. Bir kuruluş birimine bağlı yeni bir GPO oluşturmak için Grup İlkesi Yönetimi ek bileşenini açın ve GPO bağlanacak OU'yu bulun. Örnekte, OU adlı **IPSecOU**. 
 
@@ -111,7 +111,7 @@ Aşağıdaki önkoşulları karşıladığından emin olun:
 
    [![11]][11]
 
-## <a name="enablelink"></a>2. GPO bağlantısı etkinleştirme
+## <a name="enablelink"></a>2. GPO bağlantısını etkinleştirin
 
 GPO OU'ya uygulamak için GPO yalnızca kuruluş bağlanmalıdır değil, ancak bağlantı etkinleştirilmiş olması da gerekir.
 
@@ -120,7 +120,7 @@ GPO OU'ya uygulamak için GPO yalnızca kuruluş bağlanmalıdır değil, ancak 
 
    [![12]][12]
 
-## <a name="filteraction"></a>3. IP filtre eylemi tanımlayın
+## <a name="filteraction"></a>3. IP filtre eylemini tanımlayın
 
 1. Açılan listeden, sağ **IP güvenlik ilkesi Active Directory üzerinde**ve ardından **yönetme IP filtresi listelerini ve filtre eylemler...** .
 
@@ -151,7 +151,7 @@ GPO OU'ya uygulamak için GPO yalnızca kuruluş bağlanmalıdır değil, ancak 
 
    [![23]][23]
 
-## <a name="filterlist1"></a>4. IP filtre listesi tanımlayın
+## <a name="filterlist1"></a>4. bir IP filtre listesi tanımlayın
 
 Hedef bağlantı noktası 8080'ile şifrelenmiş HTTP trafik belirten bir filtre listesi oluşturun.
 
@@ -170,7 +170,7 @@ Hedef bağlantı noktası 8080'ile şifrelenmiş HTTP trafik belirten bir filtre
 5. Kaynak adresi belirtin **IP adresinin veya alt ağ:** IP trafiğinin, ardından **sonraki**.
 
    [![28]][28]
-6. Belirtin **hedef adresi:** IP adresi veya alt ağ. Ardından **İleri**'ye tıklayın.
+6. Belirtin **hedef adresi:** IP adresinin veya alt ağ. Ardından **İleri**'ye tıklayın.
 
    [![29]][29]
 7. Üzerinde **IP protokol türü** sayfasında **TCP**. Ardından **İleri**'ye tıklayın.
@@ -181,14 +181,14 @@ Hedef bağlantı noktası 8080'ile şifrelenmiş HTTP trafik belirten bir filtre
    [![31]][31]
 9. IP filtre listesi görüntüleyin.  IP filtre listesi yapılandırmasını **azure şirket içi HTTP8080** aşağıdaki ölçütleri ile eşleşen tüm trafik için şifrelemeyi tetikleyen:
 
-   * 10\.0.1.0/24 (Azure Subnet2) herhangi bir kaynak adresi
-   * 10\.2.27.0/25 (şirket içi alt ağ) herhangi bir hedef adresi
+   * 10.0.1.0/24 (Azure Subnet2) herhangi bir kaynak adresi
+   * 10.2.27.0/25 (şirket içi alt ağ) herhangi bir hedef adresi
    * TCP Protokolü
    * Hedef bağlantı noktası 8080
 
    [![32]][32]
 
-## <a name="filterlist2"></a>5. IP filtre listesini düzenle
+## <a name="filterlist2"></a>5. IP filtre listesini düzenleyin
 
 Aynı türde (Azure VM şirket içi konaktan) ters yönde trafiği şifrelemek için ikinci bir IP Filtresi gerekir. Yeni Filtre ayarlama işlemi ilk IP filtre ayarlamak için kullanılan aynı işlemidir. Tek fark, kaynak alt ağ ve hedef alt ağ vardır.
 
@@ -207,7 +207,7 @@ Aynı türde (Azure VM şirket içi konaktan) ters yönde trafiği şifrelemek i
 
 Şifreleme bir şirket içi konumunuz ve mevcut IP filtresi listesi, değiştirme yerine bir uygulamayı korumak için Azure bir alt ağ arasında gerekiyorsa, bunun yerine yeni bir IP filtre listesi ekleyebilirsiniz. 2 IP ilişkilendirme bırakıldığına aynı IPSec ilkesi sağlar daha iyi esneklik belirli bir IP filtre listesi değiştirildiğinde veya diğer IP filtresi listeleri etkilemeden herhangi bir zamanda kaldırıldı.
 
-## <a name="ipsecpolicy"></a>6. Bir IPSec güvenlik ilkesi oluşturma 
+## <a name="ipsecpolicy"></a>6. IPSec güvenlik ilkesi oluşturma 
 
 IPSec ilkesi ile güvenlik kuralları oluşturun.
 
@@ -224,7 +224,7 @@ IPSec ilkesi ile güvenlik kuralları oluşturun.
 
    [![40]][40]
 
-## <a name="editipsec"></a>7. IPSec güvenlik ilkesini Düzenle
+## <a name="editipsec"></a>7. IPSec güvenlik ilkesini düzenleyin
 
 IPSec ilkesi için ekleme **IP filtresi listesi** ve **filtreleme eylemini** önceden yapılandırılmış.
 
@@ -252,16 +252,16 @@ IPSec ilkesi için ekleme **IP filtresi listesi** ve **filtreleme eylemini** ön
 6. Varolan bir filtre eylemini seçin **myEncryption** daha önce oluşturduğunuz.
 
    [![46]][46]
-7. Windows kimlik doğrulama dört farklı türlerini destekler: Kerberos, sertifikaları, NTLMv2 ve önceden paylaşılan anahtar. Etki alanına katılmış konaklarla çalışıyoruz çünkü seçin **varsayılan Active Directory (Kerberos V5 protokolü)** ve ardından **sonraki**.
+7. Windows kimlik doğrulama dört farklı türlerini destekler: Kerberos, sertifikaları, NTLMv2 ve anahtarı'önceden paylaşılan. Etki alanına katılmış konaklarla çalışıyoruz çünkü seçin **varsayılan Active Directory (Kerberos V5 protokolü)** ve ardından **sonraki**.
 
    [![47]][47]
-8. Yeni ilke güvenlik kuralı oluşturur: **azure şirket içi HTTP8080**. **Tamam** düğmesine tıklayın.
+8. Yeni ilke güvenlik kuralı oluşturur: **azure şirket içi HTTP8080**. **OK (Tamam)** düğmesine tıklayın.
 
    [![48]][48]
 
 Hedef bağlantı noktası 8080 IPSec aktarım modu kullanmak için tüm HTTP bağlantılarda IPSec ilkesi gerektirir. Düz metin Protokolü HTTP olduğu için etkin güvenlik ilkesine sahip veriler, ExpressRoute özel eşlemesi üzerinden aktarıldığında şifrelenir sağlar. IP güvenlik ilkesi Active Directory için daha Gelişmiş Güvenlik Özellikli Windows Güvenlik Duvarı'nı yapılandırmak için daha karmaşık olmakla birlikte daha fazla özelleştirme IPSec bağlantısı ile ilgili izin vermiyor.
 
-## <a name="assigngpo"></a>8. IPSec GPO OU'ya atayın
+## <a name="assigngpo"></a>8. IPSec GPO 'sunu OU 'ya atayın
 
 1. İlke görüntüleyin. Güvenlik grubu ilkesi tanımlı, ancak henüz atanmadı.
 

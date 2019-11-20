@@ -1,23 +1,24 @@
 ---
-title: API işlemlerini alma | Azure Market
-description: Tüm işlemler teklif veya belirli bir işlem için belirtilen Operationıd almak için alır.
+title: Operations API 'sini alma | Azure Marketi
+description: Belirtilen operationId için teklif üzerindeki tüm işlemleri alır veya belirli bir işlem al.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 09/14/2018
 ms.author: pabutler
-ms.openlocfilehash: 1fbcc1d50dbc4488c4123be64e85de612233ccc3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c3eb77744d61322ca0aed20bb2b3f486cc02ac70
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935772"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819605"
 ---
 <a name="retrieve-operations"></a>İşlemleri alma
 ===================
 
-Tüm işlemler teklif veya belirli bir işlem için belirtilen Operationıd almak için alır. İstemci işlemleri üzerinde çalışan filtrelemek için sorgu parametrelerini kullanabilir.
+Belirtilen operationId için teklif üzerindeki tüm işlemleri alır veya belirli bir işlem al. İstemci, çalışan işlemleri filtrelemek için sorgu parametrelerini kullanabilir.
 
 ``` https
 
@@ -33,15 +34,15 @@ Tüm işlemler teklif veya belirli bir işlem için belirtilen Operationıd alma
 
 |  **Ad**          |      **Açıklama**                                                                                           | **Veri türü** |
 |  ----------------  |     --------------------------------------------------------------------------------------------------------   |  -----------  |
-|  publisherId       |  Örneğin, yayımcı tanımlayıcısı `Contoso`                                                                   |  String       |
-|  OfferId           |  Teklif tanımlayıcısı                                                                                              |  String       |
-|  operationId       |  Teklif işlemi benzersiz olarak tanımlayan GUID. Operationıd bu API kullanılarak alınabilir ve ayrıca herhangi bir uzun süre çalışan işlem için yanıtın HTTP üst bilgisindeki gibi döndürülür [Yayımla teklif](./cloud-partner-portal-api-publish-offer.md) API.  |   Guid   |
-|  filteredStatus    | Duruma göre filtrelemek için kullanılan isteğe bağlı bir sorgu parametresi (örneğin `running`) bu API'si tarafından döndürülen koleksiyonu.  |   String |
-|  API sürümü       | API'sının en son sürümü                                                                                           |    Tarih      |
+|  PublisherId       |  Yayımcı tanımlayıcı, örneğin `Contoso`                                                                   |  Dize       |
+|  OfferId           |  Teklif tanımlayıcısı                                                                                              |  Dize       |
+|  operationId       |  Teklif üzerinde işlemi benzersiz bir şekilde tanımlayan GUID. OperationId bu API kullanılarak alınabilir ve ayrıca, [teklif](./cloud-partner-portal-api-publish-offer.md) API 'si gibi uzun süre çalışan herhangi bir işlem IÇIN yanıtın http üst bilgisinde döndürülür.  |   Guid   |
+|  filteredStatus    | Bu API tarafından döndürülen koleksiyonda duruma göre filtrelemek için kullanılan isteğe bağlı sorgu parametresi (örneğin `running`).  |   Dize |
+|  api sürümü       | En son API sürümü                                                                                           |    Tarih      |
 |  |  |  |
 
 
-<a name="header"></a>Üstbilgi
+<a name="header"></a>Üst bilgi
 ------
 
 |  **Ad**          |  **Değer**           |
@@ -56,7 +57,7 @@ Tüm işlemler teklif veya belirli bir işlem için belirtilen Operationıd alma
 
 ### <a name="response"></a>Yanıt
 
-#### <a name="get-operations"></a>İşlemleri Al
+#### <a name="get-operations"></a>İşlemleri al
 
 ``` json
     [
@@ -81,7 +82,7 @@ Tüm işlemler teklif veya belirli bir işlem için belirtilen Operationıd alma
     ]
 ```
 
-#### <a name="get-operation"></a>ALMA işlemi
+#### <a name="get-operation"></a>İşlemi al
 
 ``` json
     [
@@ -178,21 +179,21 @@ Tüm işlemler teklif veya belirli bir işlem için belirtilen Operationıd alma
 
 |  **Ad**                    |  **Açıklama**                                                                                  |
 |  --------------------        |  ------------------------------------------------------------------------------------------------ |
-|  id                          | İşlem benzersiz olarak tanımlayan GUID                                                       |
-|  submissionType              | Teklif için örneğin bildirilen işlemi türünü tanımlar `Publish/GGoLive`      |
-|  oluşturma tarihi/saati             | İşlemi oluşturulduğunda UTC tarih/saat                                                       |
-|  lastActionDateTime          | Son güncelleştirme işlemi bittiğinde UTC tarih/saat                                       |
-|  status                      | İşlemin durumu ya da `not started` \| `running` \| `failed` \| `completed`. Yalnızca tek bir işlem durumu olabilir `running` birer güncelleştirir. |
+|  id                          | İşlemi benzersiz bir şekilde tanımlayan GUID                                                       |
+|  submissionType              | Teklif için bildirilen işlem türünü tanımlar, örneğin `Publish/GGoLive`      |
+|  Saati             | İşlem oluşturulduğunda UTC tarih saati                                                       |
+|  lastActionDateTime          | İşlemdeki son güncelleştirme tamamlandığında UTC tarih/saati                                       |
+|  status                      | İşlemin durumu, `not started` \| `running` \| `failed` \| `completed`. Tek seferde yalnızca bir işlemin durum `running` olabilir. |
 |  error                       | Başarısız işlemler için hata iletisi                                                               |
 |  |  |
 
 
 ### <a name="response-status-codes"></a>Yanıt durum kodları
 
-| **Kod**  |   **Açıklama**                                                                                  |
+| **Kodudur**  |   **Açıklama**                                                                                  |
 |  -------- |   -------------------------------------------------------------------------------------------------|
-|  200      | `OK` -İstek başarıyla işlendi ve istenen işlemleri döndürülmedi.        |
-|  400      | `Bad/Malformed request` -Hata yanıt gövdesi, daha fazla bilgi içeriyor olabilir.                    |
-|  403      | `Forbidden` -İstemcisi belirtilen ad alanı için erişime sahip değil.                          |
-|  404      | `Not found` -Belirtilen varlık yok.                                                 |
+|  200      | `OK`-istek başarıyla işlendi ve istenen işlem (ler) döndürüldü.        |
+|  400      | `Bad/Malformed request`-hata yanıtı gövdesinde daha fazla bilgi bulunabilir.                    |
+|  403      | `Forbidden`-istemcinin belirtilen ad alanına erişimi yok.                          |
+|  404      | `Not found`-belirtilen varlık yok.                                                 |
 |  |  |

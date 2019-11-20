@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell örnekleri için Traffic Manager | Microsoft Docs
-description: Azure PowerShell örnekleri için Traffic Manager
+title: Traffic Manager için Azure PowerShell örnekleri | Microsoft Docs
+description: Bu örnekle Azure Traffic Manager dağıtmak ve yapılandırmak için Azure PowerShell kullanın.
 services: traffic-manager
 documentationcenter: traffic-manager
 author: asudbring
@@ -12,19 +12,19 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 10/23/2018
 ms.author: allensu
-ms.openlocfilehash: b82cfe77ceead51dd78fc595eb0d504d91c7780d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0ad345e8fb72c0068a507318c0954a0f9512188e
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67051026"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037223"
 ---
-# <a name="azure-powershell-samples-for-traffic-manager"></a>Azure PowerShell örnekleri için Traffic Manager
+# <a name="azure-powershell-samples-for-traffic-manager"></a>Traffic Manager için Azure PowerShell örnekleri
 
 Aşağıdaki tablo, Azure PowerShell kullanılarak oluşturulan Traffic Manager betiklerinin bağlantılarını içerir.
 
-|Unvan  |Açıklama |
+|Başlık  |Açıklama |
 |---------|---------|
-|[Uygulama yüksek kullanılabilirlik için birden çok bölge arasında trafiği](./scripts/traffic-manager-powershell-websites-high-availability.md)   |    İki app service planı, iki web uygulaması, traffic manager profili ve iki traffic manager uç noktası oluşturur.     |
+|[Yüksek uygulama kullanılabilirliği için birden çok bölge genelinde trafiği yönlendirme](./scripts/traffic-manager-powershell-websites-high-availability.md)   |    İki App Service planı, iki Web uygulaması, bir Traffic Manager profili ve iki Traffic Manager uç noktası oluşturur.     |
 |    |         |
 

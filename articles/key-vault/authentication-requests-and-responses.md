@@ -1,76 +1,76 @@
 ---
 title: Kimlik doğrulaması, istekler ve yanıtlar
-description: AD için Key Vault'u kullanarak kimlik doğrulaması
+description: Key Vault kullanmak için AD ile kimlik doğrulama
 services: key-vault
 author: msmbaldwin
-manager: barbkess
+manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.topic: conceptual
 ms.date: 01/07/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 4160d6ce324cf419cd4b9a61b68bb39b0443321c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2b4f198d596ddcb475e123c355c38ada784d21d3
+ms.sourcegitcommit: 7c5a2a3068e5330b77f3c6738d6de1e03d3c3b7d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64694733"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70884006"
 ---
 # <a name="authentication-requests-and-responses"></a>Kimlik doğrulaması, istekler ve yanıtlar
 
-Azure Key Vault, JSON biçimli isteklerini ve yanıtlarını destekler. Azure Key vault'a istekleri bir geçerli kullanarak Azure Key Vault URL'si için bazı URL parametreleri ile HTTPS ve JSON istek ve yanıt gövdeleri kodlanmış yönlendirilir.
+Azure Key Vault JSON biçimli istekleri ve yanıtları destekler. Azure Key Vault istekleri, URL parametreleri ve JSON kodlamalı istek ve yanıt gövdeleriyle HTTPS kullanılarak geçerli bir Azure Key Vault URL 'sine yönlendirilir.
 
-Bu konu, Azure Key Vault hizmeti için özellikleri kapsar. Azure REST arabirimleri, kimlik doğrulama/yetkilendirme ve bir erişim belirteci almak nasıl dahil olmak üzere kullanma hakkında genel bilgi için bkz. [Azure REST API Başvurusu](https://docs.microsoft.com/rest/api/azure).
+Bu konu, Azure Key Vault hizmetinin özelliklerini içerir. Kimlik doğrulama/yetkilendirme ve erişim belirteci alma gibi Azure REST arabirimlerini kullanma hakkında genel bilgi için bkz. [azure REST API başvurusu](https://docs.microsoft.com/rest/api/azure).
 
 ## <a name="request-url"></a>İstek URL'si  
- Anahtar yönetimi işlemlerini HTTP DELETE, GET, düzeltme eki, PUT ve HTTP POST ve HTTP POST mevcut anahtar nesnelere karşı şifreleme işlemleri kullanın. Belirli HTTP fiillerine destekleyemiyorsa istemciler de hedeflenen fiili belirtmek için X-HTTP-istek üstbilgisi kullanarak HTTP POST kullanabilirsiniz; Normalde bir gövde gerektirmeyen istekleri, HTTP POST, POST, DELETE yerine kullanırken örneğin kullanırken boş gövdesi içermelidir.  
+ Anahtar yönetim işlemleri, mevcut anahtar nesnelerinde http DELETE, GET, PATCH, PUT ve HTTP POST ve şifreleme işlemlerini kullanır. Belirli HTTP fiillerini destekleyemediği istemciler, amaçlanan fiili belirtmek için X-HTTP-REQUEST üst bilgisini kullanarak da HTTP POST kullanabilir. Normalde bir gövde gerektirmeyen istekler HTTP POST kullanılırken boş bir gövde içermelidir, örneğin DELETE yerine POST kullanılıyor.  
 
- Azure anahtar Kasası'nda nesnelerle çalışmaya örnek URL'leri aşağıda verilmiştir:  
+ Azure Key Vault nesneleriyle çalışmak için aşağıdaki örnek URL 'Ler verilmiştir:  
 
-- Bir Key Vault kullanımda TESTKEY adlı bir anahtar oluşturmak için- `PUT /keys/TESTKEY?api-version=<api_version> HTTP/1.1`  
+- Key Vault kullanımı içinde TESTKEY adlı bir anahtar oluşturmak için`PUT /keys/TESTKEY?api-version=<api_version> HTTP/1.1`  
 
-- Bir Key Vault kullanımı IMPORTEDKEY adlı bir anahtar almak için- `POST /keys/IMPORTEDKEY/import?api-version=<api_version> HTTP/1.1`  
+- IMPORTEDKEY adlı bir anahtarı Key Vault kullanımı-içine aktarmak için`POST /keys/IMPORTEDKEY/import?api-version=<api_version> HTTP/1.1`  
 
-- Bir Key Vault kullanımda ETTİYSENİZ adlı bir gizli diziyi almak için- `GET /secrets/MYSECRET?api-version=<api_version> HTTP/1.1`  
+- Bir Key Vault kullanımı ile MYSECRET adlı bir gizli dizi almak için`GET /secrets/MYSECRET?api-version=<api_version> HTTP/1.1`  
 
-- Bir anahtar kullanarak bir Özet İMZALAMAK için TESTKEY bir Key Vault kullanımda olarak çağrıldı- `POST /keys/TESTKEY/sign?api-version=<api_version> HTTP/1.1`  
+- Key Vault kullanımı içinde TESTKEY adlı bir anahtarı kullanarak bir özeti IMZALAMAK için`POST /keys/TESTKEY/sign?api-version=<api_version> HTTP/1.1`  
 
-  Yetkili bir Key Vault için bir istek için her zaman gibidir,  `https://{keyvault-name}.vault.azure.net/`  
+  Bir Key Vault isteği için olan yetki her zaman aşağıdaki gibidir.`https://{keyvault-name}.vault.azure.net/`  
 
-  Anahtarlar, her zaman /keys yolun altında depolanır, gizli dizileri her zaman /secrets yolun altında depolanır.  
+  Anahtarlar her zaman/Keys yolu altında depolanır, gizlilikler her zaman/gizlilikler yolu altında depolanır.  
 
 ## <a name="api-version"></a>API Sürümü  
- Bu istemciler için tüm özellikleri kullanılabilse Protokolü sürüm oluşturma, alt düzey istemciler, uyum sağlamak için Azure Key Vault hizmetine destekler. İstemciler kullanmalıdır `api-version` sorgu dizesi parametresi için varsayılan olarak destekledikleri protokol sürümünü belirtin.  
+ Azure Key Vault hizmeti, alt düzey istemcilerle uyumluluk sağlamak için protokol sürümü oluşturmayı destekler, ancak tüm yetenekler bu istemciler için kullanılabilir olmaz. İstemcilerin, desteklediği protokol `api-version` sürümünü belirtmek için sorgu dizesi parametresini kullanması gerekir, çünkü varsayılan yoktur.  
 
- Azure Key Vault protokol sürümleri numaralandırma şemasını {YYYY} kullanarak bir tarih izleyin. {MM}. {DD} biçimi.  
+ Azure Key Vault protokol sürümleri, {YYYY} kullanarak bir tarih numaralandırma şemasını izler. {MM}. {DD} biçimi.  
 
 ## <a name="request-body"></a>İstek Gövdesi  
- HTTP belirtimine göre GET işlemleri istek gövdesi olmaması gerekir ve POST ve PUT işlemleri istek gövdesi olmalıdır. SİLME işlemleri gövdesinde HTTP isteğe bağlıdır.  
+ HTTP belirtimine göre, GET işlemlerinde bir istek gövdesi olmaması ve POST ve PUT işlemlerinin bir istek gövdesine sahip olması gerekir. DELETE işlemlerinde gövde, HTTP 'de isteğe bağlıdır.  
 
- İşlem açıklamasında aksi belirtilmediği sürece, istek gövdesi içerik türü application/json olmalıdır ve serileştirilmiş bir JSON nesnesi uyumlu içerik türü içermelidir.  
+ İşlem açıklamasında aksi belirtilmedikçe, istek gövdesi içerik türü Application/JSON olmalı ve içerik türüne uyumlu serileştirilmiş JSON nesnesi içermelidir.  
 
- İşlemi açıklamasında aksi belirtilmediği sürece, uygulama/json medya türü Accept istek üst bilgisi içermelidir.  
+ İşlem açıklamasında aksi belirtilmedikçe, Accept istek üst bilgisi Application/JSON medya türünü içermelidir.  
 
-## <a name="response-body"></a>Yanıt gövdesi  
- İşlem açıklamasında aksi belirtilmediği sürece, başarılı ve başarısız işlemlerin yanıt gövdesi içerik türü application/json olacaktır ve ayrıntılı hata bilgileri içerir.  
+## <a name="response-body"></a>Yanıt Gövdesi  
+ İşlem açıklamasında aksi belirtilmedikçe, hem başarılı hem de başarısız olan işlemlerin yanıt gövdesi içerik türü Application/JSON olur ve ayrıntılı hata bilgilerini içerir.  
 
-## <a name="using-http-post"></a>HTTP POST kullanılmış  
- Bazı istemciler, PATCH veya DELETE gibi belirli HTTP fiillerine kullanmanız mümkün olmayabilir. İstemci özel özgün HTTP fiili "X-HTTP-METHOD" başlığına da içerir. sağlanan azure Key Vault HTTP POST alternatif olarak bu istemciler için destekler. HTTP POST için destek, bu belgede tanımlanan API'sinin her biri için Not edilir.  
+## <a name="using-http-post"></a>HTTP POST kullanma  
+ Bazı istemciler, düzeltme eki veya SILME gibi bazı HTTP fiillerini kullanmayabilir. Azure Key Vault, istemcinin özgün HTTP fiiline özgü "X-HTTP-METHOD" üst bilgisini de içermesi kaydıyla, bu istemcilere alternatif olarak HTTP POST 'un kullanılmasını destekler. Bu belgede tanımlanan her API için HTTP POST için destek belirtilmiştir.  
 
 ## <a name="error-responses"></a>Hata yanıtları  
- Hata işleme HTTP durum kodları kullanır. Tipik sonuçlar şu şekildedir:  
+ Hata işleme HTTP durum kodlarını kullanacaktır. Tipik sonuçlar şunlardır:  
 
-- 2xx – başarılı: Normal işlem için kullanılmaz. Yanıt gövdesi beklenen sonuç içerir  
+- 2xx – başarılı: Normal işlem için kullanılır. Yanıt gövdesinde beklenen sonuç yer alacak  
 
-- 3xx – yeniden yönlendirme: 304 "Değişiklik" şartlı alma karşılamak için döndürülebilir. Diğer 3xx kodları gelecekte DNS ve yolu değişiklikleri göstermek için kullanılabilir.  
+- 3xx – yeniden yönlendirme: Koşullu GET 'in yerine getirilmesi için 304 "değiştirilmedi" de döndürülebilir. Diğer 3xx kodları gelecekte DNS ve yol değişikliklerini göstermek için kullanılabilir.  
 
-- 4xx – istemci hatası: Hatalı istekleri, eksik anahtar, sözdizimi hatası, geçersiz parametreler, kimlik doğrulama hataları için kullanıldığında, vb. Yanıt gövdesi ayrıntılı hata açıklamasını içerir.  
+- 4xx – Istemci hatası: Hatalı istekler, eksik anahtarlar, sözdizimi hataları, geçersiz parametreler, kimlik doğrulama hataları vb. için kullanılır. Yanıt gövdesinde ayrıntılı hata açıklaması yer alacak.  
 
-- 5XX – sunucu hatası: İç sunucu hataları için kullanılır. Yanıt gövdesi özetlenen hata bilgilerini içerir.  
+- 5xx – sunucu hatası: İç sunucu hataları için kullanılır. Yanıt gövdesi özetlenen hata bilgilerini içerir.  
 
-  Sistem, bir proxy veya güvenlik duvarı çalışacak şekilde tasarlanmıştır. Bu nedenle, bir istemci diğer hata kodları alabilirsiniz.  
+  Sistem bir proxy veya güvenlik duvarının arkasında çalışacak şekilde tasarlanmıştır. Bu nedenle, bir istemci diğer hata kodlarını alabilir.  
 
-  Bir sorun ortaya çıktığında azure Key Vault ayrıca yanıt gövdesi içinde hata bilgilerini döndürür. Yanıt gövdesi JSON ile biçimlendirilmemiş ve biçimi alır:  
+  Azure Key Vault, bir sorun oluştuğunda yanıt gövdesinde hata bilgilerini de döndürür. Yanıt gövdesi JSON olarak biçimlendirilir ve şu biçimde olur:  
 
 ```  
 
@@ -87,12 +87,12 @@ Bu konu, Azure Key Vault hizmeti için özellikleri kapsar. Azure REST arabiriml
 
 ```  
 
-## <a name="authentication"></a>Kimlik Doğrulaması  
- Tüm istekler için Azure anahtar kasası gerekir. kimlik doğrulaması. Azure Key Vault, oauth2'yi kullanarak elde edilebilir Azure Active Directory erişim belirteçleri destekleyen [[RFC6749](https://tools.ietf.org/html/rfc6749)]. 
+## <a name="authentication"></a>Authentication  
+ Azure Key Vault tüm isteklerin kimliğinin doğrulanması gerekır. Azure Key Vault, OAuth2 [[RFC6749](https://tools.ietf.org/html/rfc6749)] kullanılarak elde edilebilir Azure Active Directory erişim belirteçlerini destekler. 
  
- Uygulamanızı kaydetmek ve Azure anahtar kasası kullanılacak kimlik doğrulaması hakkında daha fazla bilgi için bkz. [istemci uygulamanızı Azure AD'ye kaydetme](https://docs.microsoft.com/rest/api/azure/index#register-your-client-application-with-azure-ad).
+ Uygulamanızı kaydetme ve Azure Key Vault kullanmak için kimlik doğrulama hakkında daha fazla bilgi için bkz. [istemci uygulamanızı Azure AD 'ye kaydetme](https://docs.microsoft.com/rest/api/azure/index#register-your-client-application-with-azure-ad).
  
- Erişim belirteçleri, HTTP yetkilendirme üst bilgisi kullanarak hizmete gönderilen gerekir:  
+ Erişim belirteçlerinin HTTP yetkilendirme üst bilgisi kullanılarak hizmete gönderilmesi gerekir:  
 
 ```  
 PUT /keys/MYKEY?api-version=<api_version>  HTTP/1.1  
@@ -100,7 +100,7 @@ Authorization: Bearer <access_token>
 
 ```  
 
- Bir erişim belirteci sağlanmadı veya bir belirteç hizmeti tarafından kabul edilmiyor bir HTTP 401 hatası istemciye döndürülen ve WWW-Authenticate üstbilgisi, örneğin içerir:  
+ Erişim belirteci sağlanmamışsa veya bir belirteç hizmet tarafından kabul edilmediğinde, istemciye bir HTTP 401 hatası döndürülür ve WWW-Authenticate üst bilgisini dahil eder; örneğin:  
 
 ```  
 401 Not Authorized  
@@ -108,11 +108,11 @@ WWW-Authenticate: Bearer authorization="…", resource="…"
 
 ```  
 
- WWW-Authenticate üstbilgisi Parametreler şunlardır:  
+ WWW-Authenticate üstbilgisindeki parametreler şunlardır:  
 
--   Yetkilendirme: İstek için bir erişim belirteci almak için kullanılabilir OAuth2 yetkilendirme hizmeti adresi.  
+-   Yetkisi İstek için bir erişim belirteci almak üzere kullanılabilecek OAuth2 yetkilendirme hizmetinin adresi.  
 
--   Kaynak: Yetkilendirme isteğine kullanmak için bir kaynak adı.  
+-   Kaynak Yetkilendirme isteğinde kullanılacak kaynağın adı.  
 
 ## <a name="see-also"></a>Ayrıca Bkz.  
  [Anahtarlar, gizli diziler ve sertifikalar hakkında](about-keys-secrets-and-certificates.md)

@@ -1,108 +1,102 @@
 ---
-title: Azure Log Analytics ile System Center Operations Manager ortamınızı en iyi duruma getirme | Microsoft Docs
-description: Sistem Center Operations Manager sistem durumu denetimi çözümü, düzenli aralıklarla, ortamlarının sistem durumunu ve riskini değerlendirmek için kullanabilirsiniz.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: tysonn
-ms.assetid: 49aad8b1-3e05-4588-956c-6fdd7715cda1
-ms.service: log-analytics
+title: System Center Operations Manager ortamınızı Azure Log Analytics iyileştirin | Microsoft Docs
+description: Düzenli aralıklarla ortamlarınızın riskini ve durumunu değerlendirmek için System Center Operations Manager Sistem Durumu Denetimi çözümünü kullanabilirsiniz.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 06/25/2018
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 27b55af74a713c51655891df8c852ff44cd3744a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 06/25/2018
+ms.openlocfilehash: 33aa246e21b54aebaa902304ff92d4b74bfaac4b
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60401740"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72898777"
 ---
-# <a name="optimize-your-environment-with-the-system-center-operations-manager-health-check-preview-solution"></a>Ortamınızı System Center Operations Manager sistem durumunu denetleyin (Önizleme) çözümü ile en iyi duruma getirme
+# <a name="optimize-your-environment-with-the-system-center-operations-manager-health-check-preview-solution"></a>System Center Operations Manager Sistem Durumu Denetimi (Önizleme) çözümü ile ortamınızı iyileştirin
 
-![System Center Operations Manager sistem durumu denetimi simgesi](./media/scom-assessment/scom-assessment-symbol.png)
+![System Center Operations Manager Sistem Durumu Denetimi simgesi](./media/scom-assessment/scom-assessment-symbol.png)
 
-Sistem Center Operations Manager sistem durumu denetimi çözümü, risk ve System Center Operations Manager yönetim grubunuzun sistem durumuna ilişkin düzenli aralıklarla değerlendirmek için kullanabilirsiniz. Bu makalede, yükleme, yapılandırma ve çözüm kullanabilir, böylece olası sorunlar için düzeltici eylemleri gerçekleştirebilirsiniz yardımcı olur.
+Düzenli bir aralıkta System Center Operations Manager yönetim grubunuzun riskini ve sistem durumunu değerlendirmek için System Center Operations Manager Sistem Durumu Denetimi çözümünü kullanabilirsiniz. Bu makale, olası sorunlar için düzeltici eylemler yapabilmeniz için çözümü yüklemenize, yapılandırmanıza ve kullanmanıza yardımcı olur.
 
-Bu çözüm, Önceliklendirilmiş öneriler dağıtılan sunucu altyapınızı belirli listesini sağlar. Öneriler dört arasında ayrılır odak alanlarına odaklanmak hızlı bir şekilde yardımcı riskini anlamak ve düzeltici eylemi gerçekleştirme.
+Bu çözüm, dağıtılan sunucu altyapınıza özgü önerilerin öncelikli bir listesini sağlar. Öneriler, riski hızla anlamanıza ve düzeltici eylem yapmanıza yardımcı olan dört odak alanına göre kategorize edilir.
 
-Yapılan öneriler bilgi ve müşteri binlerce Microsoft mühendisinin göre kazanılan deneyimi temel alır. Her öneri, önerilen değişiklikleri uygulamak nasıl bir sorun için neden önemli ve ilgili yönergeleri sağlar.
+Yapılan öneriler, binlerce müşteri ziyaretinden Microsoft mühendisleri tarafından kazanılan bilgi ve deneyime dayanır. Her öneri, bir sorunun neden bir sorun ve önerilen değişikliklerin nasıl uygulanacağı hakkında rehberlik sağlar.
 
-Ücretsiz ve sağlam bir risk ortamında çalışan kendi ilerleme durumlarını izlemek ve kuruluşunuz için en önemli odak alanlarına odaklanmak seçebilirsiniz.
+Kuruluşunuz için en önemli odak alanını seçebilir ve risk ücretsiz ve sağlıklı bir ortamı çalıştırmaya yönelik ilerlemenizi izleyebilirsiniz.
 
-Çözüm ekledikten sonra değerlendirme gerçekleştirilir, Özet bilgi odak alanlarına odaklanmak için gösterilir **sistem Center Operations Manager sistem durumu denetimi** altyapınız için Pano. Aşağıdaki bölümlerde bilgileri kullanmak üzere nasıl **sistem Center Operations Manager sistem durumu denetimi** Pano, burada görüntüleyebilir ve ardından Al eylemleri, Operations Manager ortamınız için önerilen.
+Çözümü ekledikten ve bir değerlendirme gerçekleştirildikten sonra, altyapı için **System Center Operations Manager sistem durumu denetimi** panosunda odak alanlarının Özet bilgileri gösterilir. Aşağıdaki bölümlerde, Operations Manager ortamınız için önerilen eylemleri görüntüleyip uygulayabileceğiniz **System Center Operations Manager sistem durumu denetimi** panosundaki bilgilerin nasıl kullanılacağı açıklanır.
 
 ![System Center Operations Manager çözüm kutucuğu](./media/scom-assessment/log-analytics-scom-healthcheck-tile.png)
 
-![System Center Operations Manager sistem durumu denetimi Panosu](./media/scom-assessment/log-analytics-scom-healthcheck-dashboard-01.png)
+![System Center Operations Manager Sistem Durumu Denetimi panosu](./media/scom-assessment/log-analytics-scom-healthcheck-dashboard-01.png)
 
-## <a name="installing-and-configuring-the-solution"></a>Çözümünü yükleme ve yapılandırma
+## <a name="installing-and-configuring-the-solution"></a>Çözümü yükleme ve yapılandırma
 
-Çözüm, Microsoft System Center 2012 Operations Manager Hizmet Paketi 1, Microsoft System Center 2012 R2 Operations Manager, Microsoft System Center 2016 Operations Manager, Microsoft System Center 2016 Operations Manager ve Microsoft System ile çalışır Center Operations Manager 1807
+Çözüm, Microsoft System Center 2012 Operations Manager hizmet paketi 1, Microsoft System Center 2012 R2 Operations Manager, Microsoft System Center 2016 Operations Manager, Microsoft System Center 2016 Operations Manager ve Microsoft System ile birlikte kullanılabilir Merkez Operations Manager 1807
 
 Çözümü yüklemek ve yapılandırmak için aşağıdaki bilgileri kullanın.
 
-- Sistem durumu denetimi çözümü Log Analytics'te kullanabilmeniz için önce çözümü yüklenmiş olması gerekir. Çözüm yükleme [Azure Market](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.SCOMAssessmentOMS?tab=Overview).
+- Log Analytics 'de sistem durumu denetimi çözümünü kullanabilmeniz için çözümün yüklü olması gerekir. Çözümü [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.SCOMAssessmentOMS?tab=Overview)'nden yüklersiniz.
 
-- Çözüm çalışma alanına ekledikten sonra **sistem Center Operations Manager sistem durumu denetimi** Panodaki kutucuk bir ek yapılandırma gerekli iletisi görüntüler. Kutucuğuna ve sayfasında belirtilen yapılandırma adımlarını izleyin
+- Çalışma alanına çözüm eklendikten sonra, panodaki **System Center Operations Manager sistem durumu denetimi** kutucuğunda ek bir yapılandırma gerekli iletisi görüntülenir. Kutucuğa tıklayın ve sayfada bahsedilen yapılandırma adımlarını izleyin
 
-  ![System Center Operations Manager Pano kutucuğu](./media/scom-assessment/scom-configrequired-tile.png)
+  ![Pano kutucuğunu System Center Operations Manager](./media/scom-assessment/scom-configrequired-tile.png)
 
 > [!NOTE]
-> System Center Operations Manager yapılandırma yapılabilir Log analytics'te çözüm yapılandırma sayfasında belirtilen adımları izleyerek bir komut dosyası kullanma.
+> System Center Operations Manager yapılandırması, Log Analytics çözümün yapılandırma sayfasında belirtilen adımları izleyerek bir komut dosyası kullanılarak yapılabilir.
 
- Operations Manager işletim Konsolu aracılığıyla değerlendirmeyi yapılandırmak için aşağıdaki adımları aşağıdaki sırayla gerçekleştirin:
-1. [Sistem Center Operations Manager sistem durumu denetimi için farklı çalıştır hesabı ayarlayın](#operations-manager-run-as-accounts-for-log-analytics)  
-2. Sistem Center Operations Manager sistem durumu denetimi kuralı yapılandırma
+ Operations Manager Işlemler konsolu aracılığıyla değerlendirmeyi yapılandırmak için aşağıdaki adımları sırayla gerçekleştirin:
+1. [Farklı Çalıştır hesabını System Center Operations Manager Sistem Durumu Denetimi ayarla](#operations-manager-run-as-accounts-for-log-analytics)  
+2. System Center Operations Manager Sistem Durumu Denetimi kuralını yapılandırma
 
-## <a name="system-center-operations-manager-health-check-data-collection-details"></a>System Center Operations Manager sistem durumu denetimi veri koleksiyonu ayrıntıları
+## <a name="system-center-operations-manager-health-check-data-collection-details"></a>Veri toplama ayrıntılarını System Center Operations Manager Sistem Durumu Denetimi
 
-Sistem Center Operations Manager sistem durumu denetimi çözümü, aşağıdaki kaynaklardan toplar:
+System Center Operations Manager Sistem Durumu Denetimi çözümü, verileri aşağıdaki kaynaklardan toplar:
 
-* Kayıt defteri
+* Kayıt Defteri
 * Windows Yönetim Araçları (WMI)
 * Olay günlüğü
 * Dosya verileri
-* PowerShell ve SQL sorguları, belirttiğiniz bir yönetim sunucusundan doğrudan Operations Manager'ı kullanma.  
+* Doğrudan PowerShell ve SQL sorguları kullanarak, belirttiğiniz bir yönetim sunucusundan Operations Manager.  
 
-Veriler yönetim Sunucusu'nda toplanır ve her yedi günde Log Analytics'e iletilir.  
+Veriler yönetim sunucusunda toplanır ve her yedi günde bir Log Analytics iletilir.  
 
-## <a name="operations-manager-run-as-accounts-for-log-analytics"></a>Log Analytics için Operations Manager farklı çalıştırma hesapları
+## <a name="operations-manager-run-as-accounts-for-log-analytics"></a>Log Analytics için Operations Manager farklı çalıştır hesapları
 
-Log Analytics yönetim paketleri sağlamak iş yükleri için derlemelerinde değeri-hizmetlerini ekleyin. Her iş yükü, etki alanı kullanıcı hesabı gibi farklı güvenlik bağlamı yönetim paketlerini çalıştırmak için iş yüküne özgü ayrıcalıkları gerektirir. Bir Operations Manager farklı çalıştır hesabı, ayrıcalıklı kimlik bilgileriyle yapılandırın. Ek bilgi için bkz: [bir farklı çalıştır hesabının nasıl oluşturulacağını](https://technet.microsoft.com/library/hh321655(v=sc.12).aspx) Operations Manager belgelerinde.
+Log Analytics, değer ekleme hizmetleri sağlamak için iş yükleri için yönetim paketlerinde yapılar. Her iş yükü, yönetim paketlerini bir etki alanı kullanıcı hesabı gibi farklı bir güvenlik bağlamında çalıştırmak için iş yüküne özgü ayrıcalıklar gerektirir. Ayrıcalıklı kimlik bilgileriyle Operations Manager farklı çalıştır hesabı yapılandırın. Daha fazla bilgi için, Operations Manager belgelerinde [Farklı Çalıştır hesabı oluşturma](https://technet.microsoft.com/library/hh321655(v=sc.12).aspx) konusuna bakın.
 
-Sistem Center Operations Manager sistem durumu denetimi için Operations Manager farklı çalıştır hesabı ayarlamak için aşağıdaki bilgileri kullanın.
+System Center Operations Manager Sistem Durumu Denetimi için Operations Manager farklı çalıştır hesabını ayarlamak üzere aşağıdaki bilgileri kullanın.
 
-### <a name="set-the-run-as-account"></a>Farklı Çalıştır hesabı ayarlayın
+### <a name="set-the-run-as-account"></a>Farklı Çalıştır hesabını ayarla
 
-Farklı Çalıştır hesabı aşağıdaki devam etmeden önce gereksinimleri karşılaması gerekir:
+Devam etmeden önce farklı çalıştır hesabının aşağıdaki gereksinimleri karşılaması gerekir:
 
-* Tüm Operations Manager rolüne - yönetim sunucusu, işletimsel barındıran SQL Server, veri ambarı ve ACS veritabanı destekleyen tüm sunucularında yerel Administrators grubunun üyesi olan bir etki alanı kullanıcı hesabı raporlama, Web konsolu ile ağ geçidi sunucusu.
-* İncelenen yönetim grubu için işlem yöneticisi rolü
-* Hesaba SQL sysadmin hakları yoksa, ardından yürütme [betik](#sql-script-to-grant-granular-permissions-to-the-run-as-account) hesapta bir veya tüm Operations Manager veritabanlarını barındıran her SQL Server örneği için ayrıntılı izinler vermek için.
+* Tüm Operations Manager rol yönetim sunucusunu destekleyen tüm sunucularda yerel Yöneticiler grubunun üyesi olan bir etki alanı kullanıcı hesabı, işletimsel, veri ambarı ve ACS veritabanı, raporlama, Web Konsolu ve ağ geçidi sunucusu SQL Server.
+* Değerlendirilmekte olan yönetim grubu için Operation Manager yönetici rolü
+* Hesapta SQL sysadmin hakları yoksa, Operations Manager veritabanlarının birini veya tümünü barındıran her bir SQL Server örneğindeki hesaba ayrıntılı izinler vermek için [betiği](#sql-script-to-grant-granular-permissions-to-the-run-as-account) yürütün.
 
-1. Operations Manager Konsolu'ndaki tanıyı seçin **Yönetim** gezinti düğmesi.
-2. Altında **farklı çalıştır Yapılandırması**, tıklayın **hesapları**.
-3. İçinde **Çalıştır hesabı oluştur** Sihirbazı'nda **giriş** sayfasında **sonraki**.
-4. Üzerinde **Genel Özellikler** sayfasında **Windows** içinde **farklı çalıştır hesabı türü:** listesi.
-5. Bir görünen ad yazın **görünen adı** metin kutusu ve isteğe bağlı olarak bir açıklama yazın **açıklama** kutusuna ve ardından **sonraki**.
-6. Üzerinde **dağıtım güvenliği** sayfasında **daha güvenli**.
+1. Operations Manager konsolunda, **Yönetim** Gezinti düğmesini seçin.
+2. **Farklı Çalıştır Yapılandırması**altında **hesaplar**' a tıklayın.
+3. **Farklı Çalıştır hesabı oluşturma** Sihirbazı 'nda **giriş** sayfasında **İleri**' ye tıklayın.
+4. **Genel Özellikler** sayfasında, **Farklı Çalıştır hesap türü:** listesinde **Windows** ' u seçin.
+5. **Görünen ad** metin kutusuna bir görünen ad yazın ve isteğe bağlı olarak **Açıklama** kutusuna bir açıklama yazın ve ardından **İleri**' ye tıklayın.
+6. **Dağıtım güvenliği** sayfasında **daha güvenli**' i seçin.
 7. **Oluştur**’a tıklayın.  
 
-Farklı Çalıştır hesabı oluşturulduğuna göre hedef yönetim grubundaki yönetim sunucularının gerekiyor ve iş akışları, kimlik bilgilerini kullanarak çalışacak şekilde bir önceden tanımlanmış farklı çalıştır profili ile ilişkilendirilmiş.  
+Farklı Çalıştır hesabı oluşturuldığına göre, yönetim grubundaki yönetim sunucularını hedeflemek ve iş akışlarının kimlik bilgileri kullanılarak çalışması için önceden tanımlanmış bir Farklı Çalıştır profiliyle ilişkilendirilmesi gerekir.  
 
-1. Altında **farklı çalıştır Yapılandırması**, **hesapları**, sonuçlar bölmesinde, daha önce oluşturduğunuz hesaba çift tıklayın.
-2. Üzerinde **dağıtım** sekmesinde **Ekle** için **seçilen bilgisayarlar** kutusunda ve hesaba dağıtmak için yönetim sunucusu ekleyin.  Tıklayın **Tamam** iki kez yaptığınız değişiklikleri kaydedin.
-3. Altında **farklı çalıştır Yapılandırması**, tıklayın **profilleri**.
-4. Arama *SCOM değerlendirmesi profili*.
-5. Profil adı olması gerekir: *Microsoft System Center Operations Manager sistem durumu denetimi farklı çalıştır profili*.
-6. Sağ tıklayın ve özelliklerini güncelleştirin ve son oluşturduğunuz farklı çalıştır daha önce oluşturduğunuz hesabı ekleyin.
+1. **Farklı Çalıştır Yapılandırması**, **hesaplar**, sonuçlar bölmesinde, daha önce oluşturduğunuz hesaba çift tıklayın.
+2. **Dağıtım** sekmesinde, **Seçili bilgisayarlar** kutusu için **Ekle** ' ye tıklayın ve hesabı dağıtılacak yönetim sunucusunu ekleyin.  Değişikliklerinizi kaydetmek için iki kez **Tamam** ' a tıklayın.
+3. **Farklı Çalıştır Yapılandırması**altında **profiller**' e tıklayın.
+4. *SCOM değerlendirme profilini*arayın.
+5. Profil adı şöyle olmalıdır: *Microsoft System Center Operations Manager sistem durumu denetimi farklı çalıştır profili*.
+6. Sağ tıklayın ve özelliklerini güncelleştirin ve daha önce oluşturduğunuz en son oluşturulan farklı çalıştır hesabını ekleyin.
 
-### <a name="sql-script-to-grant-granular-permissions-to-the-run-as-account"></a>Farklı Çalıştır hesabı için ayrıntılı izinler vermek için SQL betiği
+### <a name="sql-script-to-grant-granular-permissions-to-the-run-as-account"></a>Farklı Çalıştır hesabına ayrıntılı izinler vermek için SQL betiği
 
-Operations Manager işletimsel barındırma, veri ambarı ve ACS veritabanı tarafından kullanılan SQL Server örneğinde farklı çalıştır hesabı için gerekli izinleri vermek için aşağıdaki SQL betiğini yürütün.
+İşlem, veri ambarı ve ACS veritabanını barındıran Operations Manager tarafından kullanılan SQL Server örneğindeki Farklı Çalıştır hesabına gerekli izinleri vermek için aşağıdaki SQL betiğini yürütün.
 
 ```
 -- Replace <UserName> with the actual user name being used as Run As Account.
@@ -150,156 +144,156 @@ ALTER ROLE [db_owner] ADD MEMBER [UserName]
 
 ```
 
-### <a name="configure-the-health-check-rule"></a>Sistem durumu onay kuralı yapılandırma
+### <a name="configure-the-health-check-rule"></a>Sistem durumu denetimi kuralını yapılandırma
 
-Adlı bir kural sistem Center Operations Manager sistem durumu denetimi çözümün Yönetim paketini içeren *Microsoft System Center Operations Manager sistem durumu denetleyin kural çalıştırma*. Bu kural, sistem durumu denetimini çalıştırmaktan sorumludur. Kuralı etkinleştirmek ve sıklığını yapılandırmak için aşağıdaki yordamları kullanın.
+System Center Operations Manager Sistem Durumu Denetimi çözümünün yönetim paketi, *Microsoft System Center Operations Manager Run Health denetim kuralı*adlı bir kural içerir. Bu kural, sistem durumu denetimini çalıştırmaktan sorumludur. Kuralı etkinleştirmek ve sıklığı yapılandırmak için aşağıdaki yordamları kullanın.
 
-Varsayılan olarak, Microsoft System Center Operations Manager sistem durumu denetleyin kural çalıştırma devre dışıdır. Sistem durumu denetimini çalıştırmak için kural bir yönetim sunucusunda etkinleştirmeniz gerekir. Aşağıdaki adımları kullanın.
+Varsayılan olarak, Microsoft System Center Operations Manager çalışan sistem durumu denetim kuralı devre dışıdır. Sistem durumu denetimini çalıştırmak için, kuralı bir yönetim sunucusu üzerinde etkinleştirmeniz gerekir. Aşağıdaki adımları kullanın.
 
-#### <a name="enable-the-rule-for-a-specific-management-server"></a>Belirli bir yönetim sunucusuna ilişkin kuralını etkinleştirme
+#### <a name="enable-the-rule-for-a-specific-management-server"></a>Belirli bir yönetim sunucusu için kuralı etkinleştir
 
-1. İçinde **yazma** kuralını arayın Operations Manager işletim konsolunun çalışma *Microsoft System Center Operations Manager sistem durumu denetleyin kural çalıştırma* içinde **kuralları** bölmesi.
-2. Metin içeren bir arama sonuçlarında seçin *türü: Yönetim sunucusu*.
-3. Kurala sağ tıklayın ve ardından **geçersiz kılmalar** > **sınıfın belirli bir nesnesi için: Yönetim sunucusu**.
-4.  Kullanılabilir yönetim sunucuları listesinde, kuralın çalıştırıldığı yönetim sunucularını seçin.  Bu, aynı yönetim sunucusuna daha önce farklı çalıştır hesabı ile ilişkilendirmek üzere yapılandırılmış olması gerekir.
-5.  Geçersiz kılma değerine değiştirdiğinizden emin olun **True** için **etkin** parametre değeri.<br><br> ![parametre geçersiz kıl](./media/scom-assessment/rule.png)
+1. Operations Manager Işletim konsolunun **yazma** çalışma alanında, **kurallar** bölmesindeki *Microsoft System Center Operations Manager sistem durumu denetimi kuralını Çalıştır* kuralını arayın.
+2. Arama sonuçlarında, metin türünü içeren bir tane seçin *: yönetim sunucusu*.
+3. Kurala sağ tıklayın ve sonra şu **sınıfın belirli bir nesnesi için** > **geçersiz kılmalar** ' a tıklayın: yönetim sunucusu.
+4.  Kullanılabilir yönetim sunucuları listesinde, kuralın çalıştırılacağı yönetim sunucusunu seçin.  Bu, farklı çalıştır hesabını ile ilişkilendirmek için daha önce yapılandırdığınız yönetim sunucusu olmalıdır.
+5.  **Etkin** parametre değeri için geçersiz kılma değerini **true** olarak değiştirdiğinizden emin olun.<br><br> ![override parametresi](./media/scom-assessment/rule.png)
 
-    Yine de bu pencerede karşın, bir sonraki yordamı kullanarak çalışma sıklığını yapılandırın.
+    Bu pencerede hala, sonraki yordamı kullanarak çalıştırma sıklığını yapılandırın.
 
-#### <a name="configure-the-run-frequency"></a>Çalışma sıklığını yapılandırma
+#### <a name="configure-the-run-frequency"></a>Çalıştırma sıklığını yapılandırma
 
-Değerlendirme her 10.080 dakika (veya yedi gün) çalıştırmak için varsayılan olarak yapılandırılır. Değer 1440 dakika (veya bir gün) en düşük değerini geçersiz kılabilirsiniz. Değer, art arda gelen değerlendirme çalışmaları arasında gerekli en düşük zaman aralığı temsil eder. Aralık geçersiz kılmak için aşağıdaki adımları kullanın.
+Değerlendirme, varsayılan olarak her 10.080 dakikada bir (veya yedi gün) çalışacak şekilde yapılandırılmıştır. Değeri en az 1440 dakikalık bir değere (veya bir gün) geçersiz kılabilirsiniz. Değer, ardışık değerlendirme çalıştırmaları arasında gereken en kısa zaman boşluğunu temsil eder. Aralığı geçersiz kılmak için aşağıdaki adımları kullanın.
 
-1. İçinde **yazma** kuralını arayın Operations Manager konsolunun çalışma *Microsoft System Center Operations Manager sistem durumu denetleyin kural çalıştırma* içinde **kuralları** bölümü.
-2. Metin içeren bir arama sonuçlarında seçin *türü: Yönetim sunucusu*.
-3. Kurala sağ tıklayın ve ardından **kuralı geçersiz kıl** > **sınıfın tüm nesneleri için: Yönetim sunucusu**.
-4. Değişiklik **aralığı** parametre değeri, istenen aralığı değeri. Aşağıdaki örnekte, değer 1440 dakika (bir gün) olarak ayarlanır.<br><br> ![aralığı parametresi](./media/scom-assessment/interval.png)<br>  
+1. Operations Manager konsolunun **yazma** çalışma alanında, **kurallar** bölümündeki *Microsoft System Center Operations Manager sistem durumu denetimi kuralını Çalıştır* kuralını arayın.
+2. Arama sonuçlarında, metin türünü içeren bir tane seçin *: yönetim sunucusu*.
+3. Kurala sağ tıklayın ve sonra **sınıfın tüm nesneleri için** > **kuralı geçersiz kıl** ' a tıklayın: yönetim sunucusu.
+4. **Aralık** parametre değerini istediğiniz Aralık değeri olarak değiştirin. Aşağıdaki örnekte, değer 1440 dakika (bir gün) olarak ayarlanır.<br><br> ![Interval parametresi](./media/scom-assessment/interval.png)<br>  
 
-    Değer 1440 dakikadan daha kısa bir süre için ayarlarsanız, kural tek günlük bir aralık üzerinde çalışır. Bu örnekte, kural aralık değeri yoksayar ve bir günlük bir sıklıkta çalıştırır.
+    Değer 1440 dakikadan daha kısa bir süre içinde ayarlandıysa, kural bir gün aralığında çalışır. Bu örnekte, kural Aralık değerini yoksayar ve bir günde bir sıklıkta çalışır.
 
 
-## <a name="understanding-how-recommendations-are-prioritized"></a>Öneriler nasıl önceliklendirilir anlama
+## <a name="understanding-how-recommendations-are-prioritized"></a>Önerilerin nasıl önceliklendirildiğini anlama
 
-Yaptığınız her öneri, öneri göreceli önemini tanımlayan bir ağırlık değeri verilir. Yalnızca en önemli 10 önerileri gösterilir.
+Yapılan her öneriye, önerinin göreli önemini tanımlayan bir ağırlık değeri verilir. Yalnızca en önemli 10 öneri gösterilmektedir.
 
 ### <a name="how-weights-are-calculated"></a>Ağırlıklar nasıl hesaplanır
 
-Ağırlık belirlemeyi üç anahtar etkenlere göre toplam değerler şunlardır:
+Ağırlıklı değerler üç ana etkene göre toplam değerlerdir:
 
-- *Olasılık* tanımlanan bir sorunun sorunlara neden. Daha yüksek bir olasılık öneri için daha büyük bir genel puan karşılık gelir.
-- *Etkisi* kuruluşunuzdaki bir soruna neden olursa sorunun. Daha yüksek bir etkisi öneri için daha büyük bir genel puan karşılık gelir.
-- *Çaba* öneriyi uygulamak için gereklidir. Daha yüksek bir çaba öneri için daha küçük bir genel puan karşılık gelir.
+- Bir sorunun tanımlanabileceği *olasılık* sorunlara neden olur. Daha yüksek bir olasılık, öneriye ilişkin daha büyük bir genel puanı elde eden bir olasılıktır.
+- Soruna neden olursa sorunun kuruluşunuza *etkisi* . Daha yüksek bir etkisi, önerinin daha büyük bir genel puanı ile aynıdır.
+- Öneriyi uygulamak için gereken *çaba* . Daha yüksek bir çaba, önerinin daha küçük bir genel puanı ile aynıdır.
 
-Her öneri için hesaplamasının her odak alanı için kullanılabilir toplam puanı yüzdesi olarak ifade edilir. Örneğin, bu öneri uygulandıktan bir puan % 5, kullanılabilirlik ve iş sürekliliği odak alanında bir öneri varsa, genel kullanılabilirlik ve iş sürekliliği puanı tarafından %5 artırır.
+Her öneri ağırlığı, her bir odak alanı için kullanılabilen toplam puanların yüzdesi olarak ifade edilir. Örneğin, kullanılabilirlik ve Iş sürekliliği odağının bir önerisi %5 puanına sahipse, bu öneriyi uygulamak genel kullanım ve Iş sürekliliği puanınızı %5 oranında artırır.
 
-### <a name="focus-areas"></a>Odak alanları
+### <a name="focus-areas"></a>Odak alanı
 
-**Kullanılabilirlik ve iş sürekliliği** -hizmet kullanılabilirlik, dayanıklılık, altyapı ve işletme korumasına yönelik öneriler bu odak alanı gösterir.
+**Kullanılabilirlik ve Iş sürekliliği** -bu odak alanı hizmet kullanılabilirliği, altyapınızın esnekliği ve iş koruma önerilerini gösterir.
 
-**Performans ve ölçeklenebilirlik** -bu odak alanı kuruluşunuzun yardımcı olacak öneriler gösterir BT altyapısı arttıkça, BT ortamınızı geçerli performans gereksinimlerini karşıladığından ve değişen altyapı mümkün olduğundan emin olun gerekir.
+**Performans ve ölçeklenebilirlik** -bu odak alanı, kuruluşunuzun BT altyapısının BÜYÜMESI, BT ortamınızın geçerli performans gereksinimlerini karşıladığından emin olmak ve değişen altyapı ihtiyaçlarına yanıt verebilmeleri için öneriler gösterir.
 
-**Yükseltme, geçiş ve dağıtım** -bu odak alanı yükseltme, geçirme ve SQL Server'ı mevcut altyapınızı dağıtmadan yardımcı olacak öneriler gösterir.
+**Yükseltme, geçiş ve dağıtım** -bu odak alanı, mevcut altyapınıza SQL Server yükseltmenize, geçirmenize ve dağıtmanıza yardımcı olan önerileri gösterir.
 
-**İşlemler ve izleme** -BT işlemlerinizi kolaylaştırın, önleyici bakım uygulama ve performansı en üst düzeye yardımcı olacak öneriler bu odak alanı gösterir.
+**İşlemler ve izleme** -bu odak alanı, BT işlemlerinizi kolaylaştırmaya, önleyici bakım uygulamanıza ve performansı en üst düzeye çıkarmaya yardımcı olmaya yönelik öneriler gösterir.
 
-### <a name="should-you-aim-to-score-100-in-every-focus-area"></a>% 100 her odak alanında puanlamak için indirmeyi amaçlamanız gerekir?
+### <a name="should-you-aim-to-score-100-in-every-focus-area"></a>Her odak alanında %100 puan elde etmeniz gerekir mi?
 
-Olmayabilir. Öneriler bilgi ve müşteri binlerce Microsoft mühendisleri tarafından elde edilen deneyimler temel alır. Ancak, hiçbir iki sunucu altyapıları aynıdır ve öneriler için daha az veya uygun olabilir. Örneğin, bazı güvenlik önerilerini sanal makinelerinize Internet'e açık değildir, daha az ilgili olabilir. Bazı kullanılabilirlik önerisi düşük öncelikli işler için geçici veri toplama ve raporlama sağladığı hizmetler için daha uygun olabilir. Olgun bir işletmeye için önemli olan sorunları için bir başlangıç daha az önemli olabilir. Önceliklerinizle odak alanları tanımlamak ve puanları, zaman içinde nasıl değiştiğini ardından aramak isteyebilirsiniz.
+Olmayabilir. Öneriler, binlerce müşteri ziyaretinde Microsoft mühendisleri tarafından kazanılan bilgi ve deneyimlere dayalıdır. Ancak, iki sunucu altyapısı aynı değildir ve belirli öneriler sizinle daha fazla veya daha az olabilir. Örneğin, sanal makineleriniz Internet 'e açık değilse bazı güvenlik önerileri daha az ilgili olabilir. Bazı kullanılabilirlik önerileri düşük öncelikli geçici veri toplama ve raporlama sağlayan hizmetlerle daha az ilgili olabilir. Yetişkin iş açısından önemli olan sorunlar, başlangıç için daha az önemli olabilir. Önceliklerinizin hangi odak alanlarından olduğunu belirlemek ve sonra puanlarınızın zaman içinde nasıl değişdiklerini görmek isteyebilirsiniz.
 
-Her öneri neden önemli olduğu ile ilgili yönergeler içerir. Öneri uygulandıktan verilen BT hizmetlerinizin doğasını ve kuruluşunuzun iş gereksinimlerini, sizin için uygun olup olmadığını değerlendirmek için bu kılavuzu kullanın.
+Her öneri, neden önemli olduğuna ilişkin bir kılavuz içerir. BT hizmetlerinizin doğası ve kuruluşunuzun iş ihtiyaçlarını göz önünde bulundurarak, öneriyi uygulamak için uygun olup olmadığını değerlendirmek için bu kılavuzu kullanın.
 
-## <a name="use-health-check-focus-area-recommendations"></a>Odak alanı önerileri kullanım durumunu denetleme
+## <a name="use-health-check-focus-area-recommendations"></a>Sistem durumu denetimi odak alanı önerilerini kullan
 
-Log Analytics'te bir sistem durumu denetimi çözümü kullanabilmeniz için önce çözümü yüklenmiş olması gerekir. Daha fazla bilgi için çözüm yükleme hakkında bkz [yönetim çözümü yüklemek](../../azure-monitor/insights/solutions.md). Yüklendikten sonra sistem Center Operations Manager sistem durumu denetimi kutucuk kullanarak önerileri özetini görüntüleyebilirsiniz **genel bakış** Azure portalında çalışma sayfası.
+Log Analytics bir sistem durumu denetimi çözümünü kullanabilmeniz için çözümün yüklü olması gerekir. Çözümleri yükleme hakkında daha fazla bilgi için bkz. [yönetim çözümü yükleme](../../azure-monitor/insights/solutions.md). Yüklendikten sonra, Azure portal çalışma alanınızın **genel bakış** sayfasında System Center Operations Manager sistem durumu denetimi kutucuğunu kullanarak önerilerin özetini görüntüleyebilirsiniz.
 
-Altyapınız ve ardından-ayrıntıya önerileri için Özet uyumluluk değerlendirmesi görüntüleyin.
+Altyapınız için özetlenen uyumluluk değerlendirmelerini görüntüleyin ve sonra öneriler ' e gidin.
 
-### <a name="to-view-recommendations-for-a-focus-area-and-take-corrective-action"></a>Odak alanı için önerileri görüntüleme ve düzeltme eylemi
+### <a name="to-view-recommendations-for-a-focus-area-and-take-corrective-action"></a>Bir odak alanı önerilerini görüntülemek ve düzeltici eylemi gerçekleştirmek için
 1. [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
 2. Azure portalının sol alt köşesinde bulunan **Diğer hizmetler**'e tıklayın. Kaynak listesinde **Log Analytics** yazın. Yazmaya başladığınızda liste, girişinize göre filtrelenir. **Log Analytics**’i seçin.
-3. Log Analytics abonelikleri bölmesinde, bir çalışma alanı seçin ve ardından **çalışma özeti** menü öğesi.  
-4. Üzerinde **genel bakış** sayfasında **sistem Center Operations Manager sistem durumu denetimi** Döşe.
-5. Üzerinde **sistem Center Operations Manager sistem durumu denetimi** sayfasında odak alanı dikey pencereleri biriyle özet bilgilerini gözden geçirin ve ardından bu odak alanı için önerileri görmek için tıklatın.
-6. Herhangi bir odak alanı sayfalar üzerinde ortamınız için yapılan Önceliklendirilmiş öneriler görüntüleyebilirsiniz. Altında bir öneriye tıklayabilir **etkilenen nesneler** öneri neden yapılır hakkında ayrıntılı bilgi görüntülemek için.<br><br> ![Odak alanı](./media/scom-assessment/log-analytics-scom-healthcheck-dashboard-02.png)<br>
-7. Önerilen düzeltici eylemleri gerçekleştirebilirsiniz **önerilen eylemleri**. Öğe ele alındığında, önerilen eylemlerin yapıldığını ve uyumluluk puanınız artıracaktır sonraki değerlendirmeler kaydeder. Düzeltilen öğeler görünür olarak **geçirilen nesneleri**.
+3. Log Analytics abonelikler bölmesinde bir çalışma alanı seçin ve ardından **çalışma alanı Özet** menü öğesine tıklayın.  
+4. **Genel bakış** sayfasında **System Center Operations Manager sistem durumu denetimi** kutucuğuna tıklayın.
+5. **System Center Operations Manager sistem durumu denetimi** sayfasında, odak alanı Dikey penceresinde bulunan Özet bilgilerini gözden geçirin ve ardından bu odak alanı önerilerini görüntülemek için bir tane tıklatın.
+6. Odak alanı sayfalarında, ortamınız için yapılan öncelikli önerileri görüntüleyebilirsiniz. Önerinin neden yapıldığına ilişkin ayrıntıları görüntülemek için **etkilenen nesneler** altında bir öneriye tıklayın.<br><br> odak alanını ![](./media/scom-assessment/log-analytics-scom-healthcheck-dashboard-02.png)<br>
+7. **Önerilen eylemlerde**önerilen düzeltici eylemler gerçekleştirebilirsiniz. Öğe giderildiği zaman, daha sonra değerlendirmeler önerilen eylemlerin alındığını ve uyumluluk puanınız artar. Düzeltilen öğeler **geçirilmiş nesneler**olarak görünür.
 
-## <a name="ignore-recommendations"></a>Öneriler yoksay
+## <a name="ignore-recommendations"></a>Önerileri yoksay
 
-Yok saymak için istediğiniz önerilerini varsa, öneriler, değerlendirme sonuçlarında görüntülenmesini önlemek için Log Analytics kullanan bir metin dosyası oluşturabilirsiniz.
+Yok saymak istediğiniz önerileriniz varsa, önerilerin değerlendirme sonuçlarında görünmesini engellemek için Log Analytics tarafından kullanılan bir metin dosyası oluşturabilirsiniz.
 
-### <a name="to-identify-recommendations-that-you-want-to-ignore"></a>Yok saymak için istediğiniz önerilerini tanımlamak için
-1. Log Analytics çalışma sayfasında seçilen çalışma alanınız için Azure portalında **günlük araması** menü öğesi.
-2. Ortamınızdaki bilgisayarları için başarısız olan liste öneriler için aşağıdaki sorguyu kullanın.
+### <a name="to-identify-recommendations-that-you-want-to-ignore"></a>Yoksaymak istediğiniz önerileri belirlemek için
+1. Seçtiğiniz çalışma alanınızın Log Analytics çalışma alanı sayfasındaki Azure portal **günlük araması** menü öğesine tıklayın.
+2. Ortamınızdaki bilgisayarlarda başarısız olan önerileri listelemek için aşağıdaki sorguyu kullanın.
 
     ```
     Type=SCOMAssessmentRecommendationRecommendationResult=Failed | select Computer, RecommendationId, Recommendation | sort Computer
     ```
 
     >[!NOTE]
-    > Çalışma alanınız için yükseltildiyse [yeni Log Analytics sorgu diline](../../azure-monitor/log-query/log-query-overview.md), yukarıdaki sorguda, şu şekilde değiştirilmesi gerekir.
+    > Çalışma alanınız [yeni Log Analytics sorgu diline](../../azure-monitor/log-query/log-query-overview.md)yükseltilmişse yukarıdaki sorgu aşağıdaki gibi değişir.
     >
     > `SCOMAssessmentRecommendationRecommendation | where RecommendationResult == "Failed" | sort by Computer asc | project Computer, RecommendationId, Recommendation`
 
-    Günlük araması sorgusuna gösteren ekran görüntüsü aşağıda verilmiştir:<br><br> ![günlük araması](./media/scom-assessment/scom-log-search.png)<br>
+    Günlük arama sorgusunu gösteren bir ekran görüntüsü aşağıda verilmiştir:<br><br> ![günlük araması](./media/scom-assessment/scom-log-search.png)<br>
 
-3. Yok saymak için istediğiniz önerilerini seçin. Sonraki yordamda Recommendationıd için değerleri kullanacaksınız.
+3. Yoksaymak istediğiniz önerileri seçin. Sonraki yordamda RecommendationId için değerleri kullanacaksınız.
 
-### <a name="to-create-and-use-an-ignorerecommendationstxt-text-file"></a>Oluşturma ve bir IgnoreRecommendations.txt metin dosyası kullanma
+### <a name="to-create-and-use-an-ignorerecommendationstxt-text-file"></a>Bir ıgnorereyorum geçişleri. txt metin dosyası oluşturmak ve kullanmak için
 
-1. IgnoreRecommendations.txt adlı bir dosya oluşturun.
-2. Yapıştırın veya ayrı bir satıra yoksay ve sonra dosyayı kaydedip kapatın için Log Analytics'i istediğiniz her bir öneri için her Recommendationıd yazın.
-3. Dosya, aşağıdaki klasörde, önerileri yok saymak için Log Analytics istediğiniz her bilgisayara yerleştirin.
-4. Operations Manager yönetim sunucusunda - *SystemDrive*: \Program System Center 2012 R2\Operations Manager\Server.
+1. Ignorereyorumgeçişleri. txt adlı bir dosya oluşturun.
+2. Log Analytics ayrı bir satırda yoksaymasını istediğiniz her öneri için her bir RecommendationId yapıştırın veya yazın, sonra dosyayı kaydedip kapatın.
+3. Log Analytics önerileri yoksaymasını istediğiniz her bilgisayarda dosyayı aşağıdaki klasöre yerleştirin.
+4. Operations Manager Management Server- *systemdrive*: \Program Files\Microsoft System Center 2012 R2\Operations Manager\Server.
 
-### <a name="to-verify-that-recommendations-are-ignored"></a>Öneriler göz ardı edilir doğrulamak için
+### <a name="to-verify-that-recommendations-are-ignored"></a>Önerilerin yoksayıldığını doğrulamak için
 
-1. Sonraki değerlendirme çalışır, varsayılan olarak yedi günde bir zamanlanmış sonra belirtilen önerileri yoksayıldı işaretlenir ve sistem durumu denetimi Panoda görünmez.
-2. Yoksayılan tüm önerilere listelemek için aşağıdaki günlük arama sorgularını kullanabilirsiniz.
+1. Zamanlanan bir sonraki değerlendirme çalıştıktan sonra, varsayılan olarak yedi günde bir, belirtilen öneriler yoksayıldı olarak işaretlenir ve sistem durumu denetimi panosunda görünmez.
+2. Tüm yoksayılan önerileri listelemek için aşağıdaki günlük arama sorgularını kullanabilirsiniz.
 
     ```
     Type=SCOMAssessmentRecommendationRecommendationResult=Ignored | select  Computer, RecommendationId, Recommendation | sort  Computer
     ```
 
     >[!NOTE]
-    > Çalışma alanınız için yükseltildiyse [yeni Log Analytics sorgu diline](../../azure-monitor/log-query/log-query-overview.md), yukarıdaki sorguda, şu şekilde değiştirilmesi gerekir.
+    > Çalışma alanınız [yeni Log Analytics sorgu diline](../../azure-monitor/log-query/log-query-overview.md)yükseltilmişse yukarıdaki sorgu aşağıdaki gibi değişir.
     >
     > `SCOMAssessmentRecommendationRecommendation | where RecommendationResult == "Ignore" | sort by Computer asc | project Computer, RecommendationId, Recommendation`
 
-3. Daha sonra yoksayılan önerileri görmek istediğinize karar verirseniz, IgnoreRecommendations.txt dosyaları kaldırın veya bunları RecommendationIDs kaldırabilirsiniz.
+3. Daha sonra yoksayılan önerilere bakmak istediğinize karar verirseniz, tüm ıgnorereyorum. txt dosyalarını kaldırın veya RecommendationIDs kaldırabilir.
 
-## <a name="system-center-operations-manager-health-check-solution-faq"></a>System Center Operations Manager sistem durumu denetimi çözümü ile ilgili SSS
+## <a name="system-center-operations-manager-health-check-solution-faq"></a>System Center Operations Manager Sistem Durumu Denetimi çözümü SSS
 
-*Sistem durumu denetimi çözümü için Log Analytics çalışma Alanım ekledim. Ancak, öneriler göremiyorum. Neden olmasın?* Çözüm ekledikten sonra aşağıdaki adımları görünümü Log Analytics Panoda önerileri kullanın.  
+*Log Analytics çalışma alanım 'a durum denetimi çözümünü ekledim. Ancak önerileri görmüyorum. Neden olmasın?* Çözümü ekledikten sonra, aşağıdaki adımları kullanın Log Analytics panosundaki önerileri görüntüleyin.  
 
-- [Sistem Center Operations Manager sistem durumu denetimi için farklı çalıştır hesabı ayarlayın](#operations-manager-run-as-accounts-for-log-analytics)  
-- [Sistem Center Operations Manager sistem durumu denetimi kuralı yapılandırma](#configure-the-health-check-rule)
+- [Farklı Çalıştır hesabını System Center Operations Manager Sistem Durumu Denetimi ayarla](#operations-manager-run-as-accounts-for-log-analytics)  
+- [System Center Operations Manager Sistem Durumu Denetimi kuralını yapılandırma](#configure-the-health-check-rule)
 
 
-*Onay çalışma sıklığını yapılandırmak için bir yol var mı?* Evet. Bkz: [çalıştırma sıklığını yapılandırmak](#configure-the-run-frequency).
+*Çekin ne sıklıkta çalışacağını yapılandırmak için bir yol var mı?* Evet. Bkz. [çalışma sıklığını yapılandırma](#configure-the-run-frequency).
 
-*Ben sistem Center Operations Manager sistem durumu denetimi çözümü ekledikten sonra başka bir sunucuya bulunmuşsa, denetlenecek?* Evet, bulunduktan sonra daha sonra varsayılan olarak yedi günde denetlenir.
+*System Center Operations Manager Sistem Durumu Denetimi çözümünü ekledikten sonra başka bir sunucu bulunursa, kontrol edilecek mi?* Evet, bulduktan sonra varsayılan olarak yedi günde bir işaretlenir.
 
-*Veri koleksiyonu yapan işlemin adı nedir?* AdvisorAssessment.exe
+*Veri toplamayı yapan işlemin adı nedir?* Danışmanorassessment. exe
 
-*Burada AdvisorAssessment.exe işlem çalışıyor mu?* AdvisorAssessment.exe sistem durumu onay kuralı etkinleştirdiğiniz yönetim sunucusunun HealthService işlem altında çalışır. Bu işlem, tüm ortamınıza ilişkin bulma uzaktan veri toplama kullanılmasıdır.
+*Danışmanorassessment. exe işlemi nerede çalıştırılır?* Danışmanorassessment. exe, sistem durumu denetimi kuralının etkinleştirildiği yönetim sunucusunun HealthService işlemi altında çalışır. Bu işlemi kullanarak, tüm ortamınızı bulma işlemi uzak veri koleksiyonu aracılığıyla gerçekleştirilir.
 
-*Ne kadar veri toplamaya yönelik sürer?* Veri toplama sunucusuna yaklaşık bir saat sürer. Bu pek çok Operations Manager örnek veya veritabanı olan ortamlarda daha uzun sürebilir.
+*Veri toplama için ne kadar sürer?* Sunucudaki veri toplama yaklaşık bir saat sürer. Birçok Operations Manager örneği veya veritabanına sahip ortamlarda daha uzun sürebilir.
 
-*Peki değerlendirme aralığını 1440 dakikadan daha kısa bir süre için ayarlayabilirim?* Değerlendirme, en fazla günde bir kere çalışmak üzere önceden yapılandırılmıştır. Aralık değeri için bir değer 1440 dakikadan geçersiz kılarsanız değerlendirme 1440 dakika aralığı değeri kullanır.
+*Değerlendirmenin aralığını 1440 dakikadan daha kısa bir süre olarak ayarlarsanız ne yapmalıyım?* Değerlendirme, günde en fazla bir kez çalışacak şekilde önceden yapılandırılmıştır. Aralık değerini 1440 dakikadan daha kısa bir değere geçersiz kılarsınız değerlendirme, Aralık değeri olarak 1440 dakika kullanır.
 
-*Önkoşul hataları olup olmadığını bilmek nasıl?* Ardından sistem durumu denetimini çalıştırıldı ve sonuçları göremiyorsanız, bazı Önkoşullar onay için başarısız olduğunu büyük olasılıkla olur. Sorgu yürütebilirsiniz: `Operation Solution=SCOMAssessment` ve `SCOMAssessmentRecommendation FocusArea=Prerequisites` Log Search başarısız önkoşullara bakın.
+*Önkoşul hatalarından haberdar olup olmadığını nasıl anlarsınız?* Sistem durumu denetimi çalıştırılmışsa ve sonuçları görmüyorsanız, denetim önkoşullarının bazıları başarısız olabilir. Başarısız önkoşulları görmek için `Operation Solution=SCOMAssessment` ve günlük aramasında `SCOMAssessmentRecommendation FocusArea=Prerequisites` sorguları çalıştırabilirsiniz.
 
-*Var olan bir `Failed to connect to the SQL Instance (….).` önkoşul hatası iletisi. Sorun nedir?* AdvisorAssessment.exe, verileri toplayan işlem HealthService işlem altında yönetim sunucusunda çalışır. Sistem durumu denetimi bir parçası olarak, işlem Operations Manager veritabanının mevcut olduğu SQL Server'a bağlanmak çalışır. Güvenlik duvarı kuralları SQL Server örneği bağlantısı engellediğinizde bu hata oluşabilir.
+*Önkoşul hatalarında `Failed to connect to the SQL Instance (….).` bir ileti var. Sorun nedir?* Veri toplayan işlem, yönetim sunucusundaki HealthService işlemi altında çalışan Danışmanorassessment. exe. Sistem durumu denetiminin bir parçası olarak, işlem Operations Manager veritabanının bulunduğu SQL Server bağlanmaya çalışır. Bu hata, güvenlik duvarı kuralları SQL Server örneğine bağlantıyı engellediğinizde ortaya çıkabilir.
 
-*Ne tür verilere toplanır?* Aşağıdaki veri türlerini toplanır: - WMI verilerini - kayıt defteri - olay günlüğü verilerini - Operations Manager verilerini Windows PowerShell, SQL sorguları ve dosya bilgileri Toplayıcı aracılığıyla.
+*Ne tür veriler toplanır?* Aşağıdaki veri türleri toplanır:-WMI veri-kayıt defteri verileri-EventLog veri-Windows PowerShell, SQL sorguları ve dosya bilgileri toplayıcısı aracılığıyla verileri Operations Manager.
 
-*Farklı Çalıştır hesabı yapılandırmak neden gerekiyor?* Operations Manager ile çeşitli SQL sorguları çalıştırılır. Sırayla çalışmak üzere için gerekli izinlere sahip farklı çalıştır hesabı kullanmanız gerekir. Ayrıca, yerel yönetici kimlik bilgileri WMI Sorgu için gereklidir.
+*Neden farklı çalıştır hesabı yapılandırmam gerekir?* Operations Manager, çeşitli SQL sorguları çalıştırılır. Bunların çalışması için gerekli izinlere sahip bir farklı çalıştır hesabı kullanmanız gerekir. Ayrıca, WMI sorgulamak için yerel yönetici kimlik bilgileri gereklidir.
 
-*Neden yalnızca ilk 10 önerileri görüntülensin mi?* Kapsamlı, büyük bir Görevler listesini vermek yerine, Önceliklendirilmiş öneriler adresleme odaklanmak öneririz. Bunları adres sonra ek öneriler kullanılabilir hale gelir. Ayrıntılı listesini görmek isterseniz, günlük arama özelliğini kullanarak tüm önerileri görüntüleyebilirsiniz.
+*Neden yalnızca ilk 10 öneriyi görüntülersin?* Size ayrıntılı, yoğun bir görev listesi vermek yerine öncelikle öncelikli önerileri adreslemeye odaklanmanız önerilir. Bunları adresledikten sonra ek öneriler kullanılabilir hale gelir. Ayrıntılı listeyi görmeyi tercih ediyorsanız, günlük aramasını kullanarak tüm önerileri görüntüleyebilirsiniz.
 
-*Bir öneri yok saymak için bir yol var mı?* Evet, bkz: [önerileri yoksay](#ignore-recommendations).
+*Öneriyi yoksaymak için bir yol var mı?* Evet, bkz. [yoksayma önerileri](#ignore-recommendations).
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Arama günlüklerini](../../azure-monitor/log-query/log-query-overview.md) ayrıntılı verileri System Center Operations Manager sistem durumunu denetleyin ve önerileri çözümleme hakkında bilgi edinmek için.
+- Ayrıntılı System Center Operations Manager Sistem Durumu Denetimi verilerini ve önerilerini çözümlemeyi öğrenmek için [günlüklere bakın](../../azure-monitor/log-query/log-query-overview.md) .

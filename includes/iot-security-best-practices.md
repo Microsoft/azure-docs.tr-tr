@@ -8,75 +8,73 @@ ms.topic: include
 ms.date: 08/07/2018
 ms.author: robinsh
 ms.custom: include file
-ms.openlocfilehash: 2138eed9975abe804442c476d19b5b7229685362
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 4fdb891d668d99644d8a9ed9c15d158e65d53ba5
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188486"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72793120"
 ---
-# <a name="security-best-practices-for-internet-of-things-iot"></a>Nesnelerin interneti (IOT) için en iyi güvenlik uygulamaları
+Nesnelerin İnterneti (IoT) altyapısının güvenliğini sağlamak, ayrıntılı bir güvenlik kapsamlı strateji gerektirir. Bu strateji, bulutta verilerin güvenliğini sağlamanızı, genel İnternet üzerinden aktarım sırasında veri bütünlüğünü korumanızı ve cihazları güvenli bir şekilde sağlamanızı gerektirir. Her katman, genel altyapıda daha fazla güvenlik güvencesi oluşturur.
 
-Bir nesnelerin interneti (IOT) altyapısını koruma sıkı bir güvenlik savunma stratejisi gerektirir. Bu strateji, verileri bulutta güvenli, genel internet üzerinden aktarım sırasında veri bütünlüğünü korumak ve güvenli bir şekilde cihaz sağlamayı gerektirir. Her katman, daha yüksek güvenlik güvencesi genel altyapı oluşturur.
+## <a name="secure-an-iot-infrastructure"></a>IoT altyapısının güvenliğini sağlama
 
-## <a name="secure-an-iot-infrastructure"></a>Güvenli bir IOT altyapısı
+Bu derinlemesine güvenlik stratejisi, IoT cihazlarının ve altyapısının üretimi, geliştirilmesi ve dağıtılması ile ilgili çeşitli oyuncuların etkin katılımı ile geliştirilebilir ve Yürütülebilirler. Aşağıda bu oyuncuların üst düzey bir açıklaması verilmiştir.
 
-Bu güvenlik savunma stratejisi geliştirilen ve üretim, geliştirme ve IOT cihazları ve altyapı dağıtımı ile ilgili çeşitli Yürütücü etkin katılım ile yürütülür. Bu oyuncuların üst düzey bir açıklaması verilmiştir.
+* **IoT donanım üreticisi/tümleştirici**: genellikle bu oyuncular dağıtılan IoT donanımının üreticileri, çeşitli üreticilerden donanım montaj tümleştiricileri veya IoT dağıtımı için donanım sağlayan tedarikçilerle ya da diğer tedarikçilerle tümleşiktir.
 
-* **IOT donanım üreticisi/entegratörü**: Genellikle, bu oyuncuların çeşitli üretici veya tedarikçileri üretilen veya başka üreticiler tarafından tümleşik bir IOT dağıtımı için donanım sağlayarak donanım derleyerek tümleştiricileri dağıtılan IOT donanım üreticilerine cihazlardır.
+* **IoT çözüm geliştiricisi**: bir IoT çözümünün geliştirilmesi genellikle bir çözüm geliştiricisi tarafından yapılır. Bu geliştirici, bu etkinlikte bir şirket içi ekibin veya Sistem Tümleştirici (sı) 'nin bir parçası olabilir. IoT çözüm geliştiricisi, IoT çözümünün çeşitli bileşenlerini sıfırdan geliştirebilir, çeşitli raf veya açık kaynaklı bileşenleri tümleştirebilir veya küçük bir uyarlama ile çözüm hızlandırıcılarını benimseyebilirler.
 
-* **IOT çözüm geliştirici**: Bir IOT çözümünün geliştirilmesini, genellikle bir çözüm geliştirici tarafından yapılır. Bu Geliştirici bölüm şirket içi bir takım veya bu etkinliğe uzmanlaşan bir sistem entegratörü (sı). IOT çözüm geliştirici çeşitli bileşenlerinin sıfırdan IOT çözümü geliştirmek, çeşitli kullanıma hazır veya açık kaynak bileşenlerini tümleştirmek veya Çözüm Hızlandırıcıları ile küçük uyarlama benimseyin.
+* **IoT çözüm dağıtıcı**: bir IoT çözümü geliştirildiğinde, bu, alanına dağıtılması gerekir. Bu işlem, donanım cihazlarındaki veya buluttaki çözümlerin dağıtımını, cihazların iç bağlantısı ve çözümlerin dağıtımını içerir.
 
-* **IOT çözüm dağıtıcı**: Bir IOT çözümü geliştirdiğini sonra alanına dağıtılması gerekiyor. Bu işlem donanım, cihaz bağlantısı ve donanım cihazlarının çözümlerinde veya Bulut dağıtımını dağıtımını içerir.
+* **IoT çözüm operatörü**: IoT çözümü dağıtıldıktan sonra uzun süreli işlemler, izleme, yükseltmeler ve bakım gerektirir. Bu görevler, bilgi teknolojisi uzmanları, donanım işlemleri ve bakım takımları ve genel IoT altyapısının doğru davranışını izleyen etki alanı uzmanları içeren bir şirket içi ekip tarafından yapılabilir.
 
-* **IOT çözüm işleci**: IOT çözümü dağıtıldıktan sonra uzun süreli işlem, izleme, yükseltme ve bakım gerektirir. Bu görevler, bilgi teknolojisi uzmanları, donanım işlemler ve Bakım takımlar ve genel IOT altyapının doğru davranışları olan etki alanı uzmanlarıyla kapsar şirket içi bir ekip tarafından yapılabilir.
+Aşağıdaki bölümler, bu oyuncuların her biri için güvenli bir IoT altyapısı geliştirmeye, dağıtmaya ve çalıştırmaya yardımcı olmak üzere en iyi uygulamaları sunmaktadır.
 
-Aşağıdaki bölümlerde her geliştirme, dağıtma ve güvenli bir IOT altyapısı işletin yardımcı olmak için bu Yürütücü için en iyi yöntemler sağlar.
+## <a name="iot-hardware-manufacturerintegrator"></a>IoT donanım üreticisi/tümleştirici
 
-## <a name="iot-hardware-manufacturerintegrator"></a>IOT donanım üreticisi/entegratörü
+IoT donanım üreticileri ve donanım tümleştiricileri için en iyi uygulamalar aşağıda verilmiştir.
 
-IOT donanım üreticilerinin ve donanım entegratörleri için en iyi uygulamalar aşağıda verilmiştir.
+* **En düşük gereksinimlere sahip donanım kapsamı**: donanım tasarımı, donanımın çalışması için gereken en düşük özellikleri ve hiçbir şeyi içermelidir. Yalnızca cihazın çalışması için gerekliyse USB bağlantı noktalarını dahil etmek bir örnektir. Bu ek özellikler, kaçınılması gereken istenmeyen saldırı vektörlerine yönelik cihazı açar.
 
-* **Kapsam en düşük gereksinimlere donanım**: Donanım tasarımı, donanım ve hiçbir şey daha fazla işlem için gereken en düşük özellikleri eklemeniz gerekir. Yalnızca gereken durumlarda işlemi cihazın USB bağlantı noktası eklemek için kullanılan bir örnektir. Bu ek özellikler cihaz kaçınılmalıdır istenmeyen saldırı vektörlerinin için açın.
+* **Donanım üzerinde oynama sağlaması yapın**: cihaz kapağını açma veya cihazın bir kısmını kaldırma gibi fiziksel değişiklik algılama mekanizmaları oluşturun. Bu izin sinyalleri, buluta yüklenen veri akışının bir parçası olabilir ve bu olayların işleçlerini uyarabilir.
 
-* **Kavram değiştirmesine donanım olun**: Cihaz yüzünde açarak veya bir bölümü cihazın kaldırılması gibi fiziksel oynama algılamak için mekanizmaları oluşturun. Bu sinyalleri değiştirmesine bu olayların işleçleri uyarı cloud'a yüklenebilir veri akışının parçası olabilir.
+* **Güvenli donanım etrafında derleyin**: SMM izin veriyorsa, güvenli ve şifreli depolama gibi güvenlik özellikleri veya GÜVENILIR Platform Modülü (TPM) tabanlı önyükleme işlevleri oluşturun. Bu özellikler, cihazları daha güvenli hale getirir ve genel IoT altyapısının korunmasına yardımcı olur.
 
-* **Güvenli donanım derleme**: COGS izin veriyorsa, güvenli ve şifrelenmiş depolama ya da Güvenilir Platform Modülü (TPM) üzerinde tabanlı önyükleme işlevsellik gibi güvenlik özelliklerini oluşturun. Bu özellikler cihazların daha güvenli ve genel IOT altyapısı korunmasına yardımcı olun.
+* **Yükseltmeleri güvenli yapın**: cihazın ömrü boyunca bellenim yükseltmeleri, çok daha fazla tablodur. Bellenim sürümlerinin yükseltmeleri ve şifreleme Güvencesi için güvenli yollarla cihaz oluşturma, cihazın yükseltmelerde ve sonrasında güvenli olmasını sağlar.
 
-* **Yükseltmeler güvenli hale getirmek**: Cihaz kullanım ömrü süresince üretici yazılımını yükseltme kaçınılmazdır. Güvenli yolları cihazlarla yükseltmeler ve şifreleme güvencesi bellenim sürümleri oluşturma, cihazın sırasında ve sonrasında yükseltmeleri güvenli olmasını sağlar.
+## <a name="iot-solution-developer"></a>IoT çözüm geliştiricisi
 
-## <a name="iot-solution-developer"></a>IOT çözümü geliştirme
+IoT çözüm geliştiricileri için en iyi uygulamalar şunlardır:
 
-IOT çözüm geliştiriciler için en iyi uygulamalar şunlardır:
+* **Güvenli yazılım geliştirme metodolojisini takip edin**: güvenli yazılım geliştirme, projenin uygulama, test ve dağıtımına kadar her şey için, güvenlik hakkında bilgi sahibi olmanızı gerektirir. Platformların, dillerin ve araçların seçimleri bu metodolojide etkilendi. Microsoft güvenlik geliştirme yaşam döngüsü, güvenli yazılım oluşturmaya yönelik adım adım bir yaklaşım sağlar.
 
-* **Güvenli bir yazılım geliştirme metodolojisinin izleyin**: Güvenli yazılım geliştirmenin en başından başlayarak, uygulama, test ve dağıtımı için tüm proje yeni bir güvenlik düşünmek gerekir. Platform, diller ve Araçlar Seçenekler tüm bu yöntemiyle etkilenmiştir. Microsoft güvenlik geliştirme yaşam döngüsü güvenli yazılımlar oluşturmaya yönelik adım adım bir yaklaşım sağlar.
+* **Dikkatli açık kaynak yazılım seçin**: açık kaynaklı yazılım, çözümleri hızlı bir şekilde geliştirmeye yönelik bir fırsat sağlar. Açık kaynaklı yazılım seçerken, her bir açık kaynaklı bileşen için topluluğun etkinlik düzeyini göz önünde bulundurun. Etkin bir topluluk, yazılımın desteklendiğini ve sorunların keşfedildiğini ve sağlandığını sağlar. Alternatif olarak, gizlemeli ve etkin olmayan bir açık kaynaklı yazılım projesi desteklenmeyebilir ve sorunlar büyük olasılıkla bulunamamalıdır.
 
-* **Açık kaynak yazılım dikkatle seçin**: Açık kaynak yazılım çözümlerinizi hızla geliştirin fırsatı sunar. Açık kaynak yazılım seçerken, her bir açık kaynak bileşen için topluluk etkinliği düzeyini göz önünde bulundurun. Yazılım desteklenir ve sorunları bulunan ve yönelik etkin bir topluluk sağlar. Alternatif olarak, belirsiz ve etkin olmayan açık kaynak yazılım projesinde desteklenmiyor ve sorunları olan büyük olasılıkla olması bulunamaz.
+* **Dikkatli tümleştirin**: kitaplıkların ve API 'lerin sınırında birçok yazılım güvenlik kusuri vardır. Geçerli dağıtım için gerekli olmayabilir işlevselliği bir API katmanı ile hala kullanılabilir olabilir. Genel güvenliği sağlamak için, güvenlik kusurda tümleştirildiği bileşenlerin tüm arabirimlerini denetlediğinizden emin olun.
 
-* **Dikkatli tümleştirme**: Birçok yazılım güvenlik açıkları, kitaplıkları ve API'ler sınırında mevcut. Geçerli dağıtım için gerekli olmayabilir işlevselliği yine de bir API katmanı kullanılabilir. Genel güvenliğini sağlamak için güvenlik açıkları tümleştirilmektedir bileşenlerinin tüm arabirimleri denetimi emin olun.
+## <a name="iot-solution-deployer"></a>IoT çözüm dağıtıcı
 
-## <a name="iot-solution-deployer"></a>IOT çözüm dağıtıcı
+IoT çözüm dağıtımcıları için en iyi yöntemler şunlardır:
 
-IOT çözüm planlayıcılar için en iyi uygulamalar şunlardır:
+* **Donanımı güvenli bir şekilde dağıtın**: IoT dağıtımları, donanımın, genel boşluklar veya denetimli yerel ayarlarda olduğu gibi güvenli olmayan konumlara dağıtılması gerekebilir. Bu gibi durumlarda, donanım dağıtımının en yüksek ölçüde mümkün olup olmadığından emin olun. Donanımda USB veya diğer bağlantı noktaları varsa, bunların güvenli bir şekilde kapsandıklarından emin olun. Birçok saldırı vektörü, bunları giriş noktaları olarak kullanabilir.
 
-* **Donanım güvenli bir şekilde dağıtmak**: IOT dağıtımları gibi ortak alanları ya da Denetimsiz yerel ayarlara güvenli olmayan konumlardaki dağıtılacak donanım gerektirebilir. Bu gibi durumlarda, donanım dağıtım artıklığının olmasını sağlamak en yüksek ölçüde. Donanımda USB veya diğer bağlantı noktaları varsa, bunların güvenli bir şekilde kapsama alındığından emin olun. Çok sayıda saldırı vektörlerinin giriş noktaları olarak kullanabilirsiniz.
+* **Kimlik doğrulama anahtarlarını güvenli tut**: dağıtım sırasında her cihaz, bulut hizmeti tarafından oluşturulan cihaz kimliklerini ve ilişkili kimlik doğrulama anahtarlarını gerektirir. Dağıtımdan sonra bile bu anahtarları fiziksel olarak güvende tutun. Kötü amaçlı bir cihaz, var olan bir cihaz olarak maske sağlamak için kullanılabilir.
 
-* **Kimlik doğrulama anahtarlarını güvende tutun**: Dağıtım sırasında her cihaz, cihaz kimliklerini ve bulut hizmeti tarafından oluşturulan ilişkili kimlik doğrulaması anahtarlarını gerektirir. Bu anahtarları dağıtımdan sonra bile, fiziksel olarak güvenli tutun. Güvenliği aşılmış bir tuşa kötü amaçlı bir cihaz tarafından geçici var olan bir cihaz için kullanılabilir.
+## <a name="iot-solution-operator"></a>IoT çözüm operatörü
 
-## <a name="iot-solution-operator"></a>IOT çözümü işleci
+IoT çözüm işleçleri için en iyi uygulamalar şunlardır:
 
-IOT çözüm işleçleri için en iyi uygulamalar şunlardır:
+* **Sistemi güncel tutun**: cihaz işletim sistemlerinin ve tüm cihaz sürücülerinin en son sürümlere yükseltildiğinden emin olun. Windows 10 ' da (IoT veya diğer SKU 'Lar) otomatik güncelleştirmeleri açarsanız, Microsoft, IoT cihazları için güvenli bir işletim sistemi sağlayan BT 'yi güncel tutar. Diğer işletim sistemlerinin (Linux gibi) güncel tutulması, kötü niyetli saldırılara karşı korunmasını sağlar.
 
-* **Sistemin güncel**: Cihaz işletim sistemleri ve tüm cihaz sürücülerini en son sürümüne yükseltildiğinden emin olun. Otomatik güncelleştirmeler Windows 10 (IOT veya diğer SKU'lar) açarsanız, Microsoft güncel, güvenli bir işletim sistemi için IOT cihaz sağlama tutar. Tutma (Linux gibi) diğer işletim sistemlerinin güncel sağlamaya yardımcı olur bunlar aynı zamanda kötü amaçlı saldırılara karşı korunur.
+* **Kötü amaçlı etkinliğe karşı koruma**: işletim sistemi izin veriyorsa, her cihaz işletim sistemine en son virüsten koruma ve kötü amaçlı yazılımdan koruma özelliklerini yükler. Bu uygulama, çoğu dış tehdidi azaltmaya yardımcı olabilir. Uygun adımları gerçekleştirerek, çoğu modern işletim sistemini tehditlere karşı koruyabilirsiniz.
 
-* **Kötü amaçlı etkinliklere karşı korumaya**: İşletim sistemi izin veriyorsa, en son virüs ve kötü amaçlı yazılımdan koruma özelliklerinden her cihaz işletim sistemine yükleyin. Bu yöntem en dış tehditlerin azaltılmasına yardımcı olabilir. Uygun adımları izleyerek, çoğu modern işletim sistemi tehditlere karşı koruyabilirsiniz.
+* **Denetim genellikle**: güvenlik olaylarına yanıt verme sırasında güvenlikle ilgili sorunlar için IoT altyapısını denetleme anahtarıdır. Çoğu işletim sistemi, güvenlik ihlali gerçekleşmeyen emin olmak için sık incelenmesi gereken yerleşik olay günlüğü sağlar. Denetim bilgileri, bulut hizmetine çözümlenebileceği ayrı bir telemetri akışı olarak gönderilebilir.
 
-* **Sık denetim**: Güvenlikle ilgili sorunlar için IOT altyapısı denetimi güvenlik olaylarına yanıt vermek anahtardır. Çoğu işletim sistemleri, hiçbir güvenlik ihlali oluştu emin olmak için sık incelenmelidir yerleşik olay günlüğü sağlar. Denetim bilgilerini ayrı telemetri akışı olarak bunu edilebilecekleri bulut hizmetine gönderilebilir.
+* **IoT altyapısını fiziksel olarak koruyun**: IoT altyapısına karşı en kötü güvenlik saldırıları cihazlara fiziksel erişim kullanılarak başlatılır. Önemli bir güvenlik uygulaması, USB bağlantı noktalarının ve diğer fiziksel erişimin kötü amaçlı kullanımına karşı koruma sağlar. Oluşmuş olabilecek ihlallerinin kapsamadan bir anahtar, USB bağlantı noktası kullanımı gibi fiziksel erişimin günlüğe kaydedilmesini sağlar. Yine, Windows 10 (IoT ve diğer SKU 'Lar) bu olayların ayrıntılı günlüğe kaydedilmesini mümkün bir şekilde sunar.
 
-* **Fiziksel olarak IOT altyapısını koruma**: Cihazlara fiziksel erişim kullanarak IOT altyapısı kötü güvenlik saldırıları başlatılabilir. Bir önemli güvenlik kötü niyetli kullanımına USB bağlantı noktaları ve diğer fiziksel erişime karşı korumaya yönelik uygulamadır. USB bağlantı noktası kullanımı gibi fiziksel erişim oluşmuş olabilir analiziyle ihlallerini anahtardan günlüğe kaydetme. Yeniden, Windows 10 (IOT ve diğer SKU'lar), bu olayların ayrıntılı günlük kaydını etkinleştirir.
+* **Bulut kimlik bilgilerini koruma**: IoT dağıtımını yapılandırmak ve çalıştırmak için kullanılan bulut kimlik doğrulama kimlik bilgileri, büyük olasılıkla bir IoT sistemine erişmek ve bu sisteme zarar vermek için en kolay yoldur. Parolayı sık sık değiştirerek kimlik bilgilerini koruyun ve bu kimlik bilgilerini genel makinelerde kullanmaktan kaçının.
 
-* **Bulut kimlik bilgilerini koruyun**: Bulut kimlik doğrulaması kimlik bilgilerini yapılandırmak ve çalışan IOT dağıtım için kullanılan büyük olasılıkla erişmek ve tehlikeye bir IOT sisteminin en kolay yoludur. Parolayı sık sık değiştirerek kimlik bilgilerini koruma ve genel makinelerde bu kimlik bilgilerini kullanmadığınızdan.
+Farklı IoT cihazlarının özellikleri farklılık gösterir. Bazı cihazlar ortak masaüstü işletim sistemlerini çalıştıran bilgisayarlar olabilir ve bazı cihazlar çok hafif işletim sistemlerini çalıştırıyor olabilir. Daha önce açıklanan en iyi güvenlik uygulamaları, bu cihazlar için değişen derecelerde uygulanabilir olabilir. Sağlanmışsa, bu cihazların üreticilerinden ek güvenlik ve dağıtım en iyi uygulamaları izlenmelidir.
 
-Farklı IOT cihaz özellikleri değişir. Bazı cihazlar ortak masaüstü işletim sistemlerini çalıştıran bilgisayarlar olabilir ve bazı cihazların çok hafif işletim sistemleri çalışıyor olabilir. Daha önce açıklanan güvenlik en iyi uygulamaları bu cihazlara değişen derece cinsinden geçerli olabilir. Sağlanırsa, ek güvenlik ve dağıtım en iyi Üreticiler bu cihazların gelmelidir.
-
-Bazı eski ve kısıtlı cihazları IOT dağıtım için özel olarak tasarlanmış olabilir değil. Bu cihazlar, verileri şifrelemek için Internet ile bağlanmak veya gelişmiş denetim sağlamak özelliğini olmayabilir. Bu gibi durumlarda, modern ve güvenli bir alan ağ geçidi eski cihazlardan veri toplama ve bu cihazların Internet üzerinden bağlanması için gereken güvenlik sağlar. Alan ağ geçitleri, güvenli kimlik doğrulaması, şifrelenmiş oturumlarının anlaşma, Bulut ve diğer birçok güvenlik özelliği komutları alınmasını sağlayabilirsiniz.
+Bazı eski ve kısıtlanmış cihazlar IoT dağıtımı için özel olarak tasarlanmayabilir. Bu cihazlar, verileri şifrelemek, Internet 'e bağlanmak veya Gelişmiş denetim sağlamak için yeterli olanalabilir. Bu durumlarda, modern ve güvenli bir alan ağ geçidi eski cihazlardan verileri toplayabilir ve bu cihazları Internet üzerinden bağlamak için gereken güvenliği sağlayabilir. Alan ağ geçitleri, güvenli kimlik doğrulaması, şifreli oturumların anlaşması, buluttan komutların alınması ve diğer birçok güvenlik özelliği sağlayabilir.

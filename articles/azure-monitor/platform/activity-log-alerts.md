@@ -1,69 +1,66 @@
 ---
-title: Azure İzleyicisi'nde etkinlik günlüğü uyarıları
-description: SMS, Web kancası, SMS, e-posta ve daha fazlasını belirli olaylar etkinlik günlüğünde gerçekleştiğinde aracılığıyla bildirilir.
-author: msvijayn
-services: azure-monitor
+title: Azure Izleyici 'de etkinlik günlüğü uyarıları
+description: Etkinlik günlüğünde belirli olaylar meydana geldiğinde SMS, Web kancası, SMS, e-posta ve daha fazlası aracılığıyla bilgilendirilirsiniz.
 ms.service: azure-monitor
-ms.topic: conceptual
-ms.date: 09/17/2018
-ms.author: vinagara
 ms.subservice: alerts
-ms.openlocfilehash: 5d0819f71405b1bf1d4bef57a8b93d57bc879087
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: conceptual
+author: rboucher
+ms.author: robb
+ms.date: 09/17/2018
+ms.openlocfilehash: d3cb075d5ec0607453ca21f2574df7def02a4453
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66244980"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72553714"
 ---
-# <a name="alerts-on-activity-log"></a>Etkinlik günlüğü uyarıları 
+# <a name="alerts-on-activity-log"></a>Etkinlik günlüğündeki uyarılar 
 
 ## <a name="overview"></a>Genel Bakış
-Etkinlik günlüğü uyarıları uyarıda belirtilen koşulları karşılayan yeni bir etkinlik günlüğü olay meydana geldiğinde, etkinleştirme uyarılardır. Bir Azure Resource Manager şablonu kullanarak oluşturulabilir şekilde, Azure kaynaklarının değildirler. Bunlar ayrıca oluşturulabilir, güncelleştirilmiş veya Azure portalında silindi. Bu makale, etkinlik günlüğü uyarıları kavramları tanıtır. Bunu ardından, Azure portalında etkinlik günlüğü olayları hakkında bir uyarı ayarlamak için nasıl kullanılacağını gösterir. Kullanım hakkında daha fazla bilgi için bkz. [oluşturun ve etkinlik günlüğü Uyarıları yönetme](alerts-activity-log.md).
+Etkinlik günlüğü uyarıları, uyarıda belirtilen koşullara uyan yeni bir [etkinlik günlüğü olayı](activity-log-schema.md) gerçekleştiğinde etkinleştiği uyarılardır. [Azure etkinlik günlüğüne](activity-logs-overview.md)kaydedilen olayların sırasına ve hacmine bağlı olarak, uyarı kuralı başlatılır. Etkinlik günlüğü uyarı kuralları, Azure kaynaklarıdır, bu nedenle bir Azure Resource Manager şablonu kullanılarak oluşturulabilirler. Ayrıca, Azure portal oluşturulabilir, güncelleştirilemeyebilir veya silinebilirler. Bu makalede, etkinlik günlüğü uyarılarının arkasındaki kavramlar tanıtılmaktadır. Etkinlik günlüğü uyarı kurallarının oluşturulması veya kullanımı hakkında daha fazla bilgi için bkz. [etkinlik günlüğü uyarıları oluşturma ve yönetme](alerts-activity-log.md).
 
 > [!NOTE]
-> Uyarılar **olamaz** etkinlik günlüğü uyarısı kategorisinde oluşturulan olaylar için.
+> Etkinlik günlüğü uyarı kategorisinde olaylar **için uyarılar oluşturulamıyor** .
 
-Genellikle, etkinlik günlüğü uyarıları, bildirimleri almak için oluşturma sırasında:
+Genellikle, şu durumlarda bildirim almak için etkinlik günlüğü uyarıları oluşturursunuz:
 
-* Genellikle belirli bir kaynak grubu veya kaynakları için kapsamlı, Azure aboneliğinizdeki kaynaklar üzerinde belirli işlemler oluşur. Örneğin, myProductionResourceGroup herhangi bir sanal makine silindiğinde, size bildirilmesini isteyebilirsiniz. Veya bir kullanıcıya, aboneliğinizdeki herhangi bir yeni rolü atanmışsa bildirilmesini isteyebilirsiniz.
-* Hizmet sistem durumu olayı oluşur. Olaylar ve, aboneliğinizdeki kaynaklar uygulamak bakım olayları bildirimi hizmet durumu olayları içerir.
+* Azure aboneliğinizdeki kaynaklarda, genellikle belirli kaynak grupları veya kaynaklar kapsamındaki belirli işlemler meydana gelir. Örneğin, Myüretim Resourcegroup içindeki herhangi bir sanal makine silindiğinde bildirim almak isteyebilirsiniz. Ya da aboneliğinizdeki bir kullanıcıya herhangi bir yeni rol atanmışsa bildirim almak isteyebilirsiniz.
+* Hizmet durumu olayı oluşur. Hizmet durumu olayları, aboneliğinizdeki kaynaklar için uygulanan olayların ve bakım olaylarının bildirimini içerir.
 
-Bir basit benzerleme, uyarı kuralları oluşturulabilir, etkinlik günlüğünde anlama koşullar için olan keşfedin veya aracılığıyla olayları filtrelemek için [Azure portalında etkinlik günlüğü](activity-log-view.md#azure-portal). Azure İzleyici - etkinlik günlüğü, bir filtre veya gerekli olay bulabilir ve ardından kullanarak bir uyarı oluşturma **etkinlik günlüğü uyarısı Ekle** düğmesi.
+Etkinlik günlüğünde hangi uyarı kurallarının oluşturulabileceği koşullarını anlamak için basit bir benzerleme vurguladı, [Azure Portal Etkinlik günlüğü](activity-log-view.md#azure-portal)aracılığıyla olayları keşfetmeye veya filtrelemeye yöneliktir. Azure Izleyici-etkinlik günlüğünde, bir tane gerekli olayı filtreleyebilir veya bulabilir ve sonra **etkinlik günlüğü uyarısı Ekle** düğmesini kullanarak bir uyarı oluşturabilir.
 
-Her iki durumda da, olayların uyarının oluşturulduğu abonelik için yalnızca bir etkinlik günlüğü uyarısı izler.
+Her iki durumda da, bir etkinlik günlüğü uyarısı yalnızca, uyarının oluşturulduğu abonelikteki olaylar için izler.
 
-Herhangi bir üst düzey özelliği için bir etkinlik günlüğü olayında JSON nesnesinde dayalı bir etkinlik günlüğü uyarısı yapılandırabilirsiniz. Daha fazla bilgi için [Azure etkinlik günlüğü'ne genel bakış](./activity-logs-overview.md#categories-in-the-activity-log). Hizmet durumu olayları hakkında daha fazla bilgi için bkz: [etkinlik günlüğü uyarıları hizmet bildirimleri almak](./alerts-activity-log-service-notifications.md). 
+Etkinlik günlüğü olayı için JSON nesnesindeki herhangi bir üst düzey özelliğe göre etkinlik günlüğü uyarısı yapılandırabilirsiniz. Daha fazla bilgi için bkz. [Azure etkinlik günlüğü 'Ne genel bakış](./activity-logs-overview.md#categories-in-the-activity-log). Hizmet durumu olayları hakkında daha fazla bilgi edinmek için bkz. [hizmet bildirimlerinde etkinlik günlüğü uyarıları alma](./alerts-activity-log-service-notifications.md). 
 
-Etkinlik günlüğü uyarıları, birkaç ortak seçeneğiniz vardır:
+Etkinlik günlüğü uyarıları bazı yaygın seçeneklere sahiptir:
 
-- **Kategori**: Yönetici, hizmet sistem durumu, otomatik ölçeklendirme, güvenlik, ilke ve öneri. 
-- **Kapsam**: Tek başına bir kaynak veya etkinlik günlüğü uyarısında tanımlandığı kaynaklar kümesi. Kapsam bir etkinlik günlüğü uyarısı için çeşitli düzeylerde tanımlanabilir:
+- **Kategori**: yönetim, hizmet durumu, otomatik ölçeklendirme, güvenlik, Ilke ve öneri. 
+- **Kapsam**: etkinlik günlüğündeki uyarının tanımlandığı tek kaynak veya kaynak kümesi. Etkinlik günlüğü uyarısı kapsamı, çeşitli düzeylerde tanımlanabilir:
     - Kaynak düzeyi: Örneğin, belirli bir sanal makine için
-    - Kaynak grubu düzeyi: Örneğin, tüm sanal makinelerin belirli bir kaynak grubu
-    - Abonelik düzeyi: Örneğin, tüm sanal makineleri bir aboneliği (veya) bir Abonelikteki tüm kaynaklar
-- **Kaynak grubu**: Varsayılan olarak, uyarı kuralı kapsamında tanımlanan hedef aynı kaynak grubunda kaydedilir. Kullanıcı, uyarı kuralı nerede depolanması gereken kaynak grubunu da tanımlayabilirsiniz.
-- **Kaynak türü**: Kaynak Yöneticisi uyarı hedef ad alanı tanımlı.
-
-- **İşlem adı**: Resource Manager rol tabanlı erişim denetimi işlem adı.
-- **Düzey**: (Ayrıntılı, bilgi, uyarı, hata veya kritik) olay önem derecesi.
-- **Durum**: Olay, genellikle çalışmaya, başarısız veya başarılı durumu.
-- **Olayı başlatan tarafından**: Olarak da bilinen "çağırana." E-posta adresi veya işlemi gerçekleştiren kullanıcının Azure Active Directory tanımlayıcısı.
+    - Kaynak grubu düzeyi: Örneğin, belirli bir kaynak grubundaki tüm sanal makineler
+    - Abonelik düzeyi: Örneğin, bir abonelikteki tüm sanal makineler (veya) bir abonelikteki tüm kaynaklar
+- **Kaynak grubu**: varsayılan olarak, uyarı kuralı kapsamda tanımlanan hedefle aynı kaynak grubuna kaydedilir. Kullanıcı, uyarı kuralının saklanacağı kaynak grubunu da tanımlayabilir.
+- **Kaynak türü**: Kaynak Yöneticisi uyarının hedefi için tanımlı ad alanı.
+- **İşlem adı**: rol tabanlı Access Control için kullanılan [Azure Resource Manager işlem](../../role-based-access-control/resource-provider-operations.md) adı. Azure Resource Manager kayıtlı olmayan işlemler, etkinlik günlüğü uyarı kuralında kullanılamaz.
+- **Düzey**: etkinliğin önem derecesi (ayrıntılı, bilgilendirici, uyarı, hata veya kritik).
+- **Durum**: etkinliğin durumu, genellikle başlatıldı, başarısız veya başarılı.
+- **Olay tarafından başlatılan**: "arayan" olarak da bilinir. İşlemi gerçekleştiren kullanıcının e-posta adresi veya Azure Active Directory tanımlayıcısı.
 
 > [!NOTE]
-> Bir abonelikte en fazla 100 uyarı kuralları bir kapsamda ya da etkinliğin oluşturulabilir: tek bir kaynak, tüm kaynaklar kaynak grubuna (veya) tüm abonelik düzeyi.
+> Bir abonelikte 100 ' e kadar uyarı kuralı, tek bir kaynak, kaynak grubundaki tüm kaynaklar (veya) tüm abonelik düzeyinde bir kapsam etkinliği için oluşturulabilir.
 
-Bir etkinlik günlüğü uyarısı etkinleştirildiğinde, Eylemler veya bildirimleri oluşturmak için bir eylem grubu kullanır. Bir eylem grubu yeniden kullanılabilir e-posta adresleri gibi bildirim alıcıları Web kancası URL'leri ya da SMS telefon numaralarını kümesidir. Alıcılar, merkezileştirme ve bildirim kanallarınızın grup için birden çok uyarı başvurulabilir. Etkinlik günlüğü uyarınızın tanımlamak için iki seçeneğiniz vardır. Şunları yapabilirsiniz:
+Etkinlik günlüğü uyarısı etkinleştirildiğinde, eylemler veya bildirimler oluşturmak için bir eylem grubu kullanır. Eylem grubu, e-posta adresleri, Web kancası URL 'Leri veya SMS telefon numaraları gibi yeniden kullanılabilir bir bildirim alıcıları kümesidir. Alıcıların bildirim kanallarınızı merkezileştirmek ve gruplamak için birden çok uyarıdan başvurulabilirler. Etkinlik günlüğü uyarısını tanımlarken iki seçeneğiniz vardır. Yapabilecekleriniz:
 
-* Etkinlik günlüğü uyarınızın var olan bir eylem grubu kullanın.
+* Etkinlik günlüğü uyarısında mevcut bir eylem grubunu kullanın.
 * Yeni bir eylem grubu oluşturun.
 
-Eylem grupları hakkında daha fazla bilgi için bkz: [oluştur ve Eylem grupları Azure portalında yönetmek](action-groups.md).
+Eylem grupları hakkında daha fazla bilgi edinmek için [Azure Portal eylem grupları oluşturma ve yönetme](action-groups.md)konusuna bakın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Alma bir [uyarılara genel bakış](alerts-overview.md).
-- Hakkında bilgi edinin [etkinlik günlüğü uyarıları oluşturup](alerts-activity-log.md).
-- Gözden geçirme [etkinlik günlüğü uyarısı Web kancası şeması](activity-log-alerts-webhook.md).
-- Hakkında bilgi edinin [hizmet durumu bildirimlerini](service-notifications.md).
 
-
+- [Uyarılara genel bakış](alerts-overview.md)alın.
+- [Etkinlik günlüğü uyarıları oluşturma ve değiştirme](alerts-activity-log.md)hakkında bilgi edinin.
+- [Etkinlik günlüğü uyarısı Web kancası şemasını](activity-log-alerts-webhook.md)gözden geçirin.
+- [Hizmet durumu bildirimleri](service-notifications.md)hakkında bilgi edinin.

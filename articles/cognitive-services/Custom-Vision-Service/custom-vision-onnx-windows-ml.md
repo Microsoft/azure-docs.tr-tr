@@ -1,23 +1,23 @@
 ---
-title: "Öğretici: Windows ML - Custom Vision Service'e ONNX model kullanın"
-titlesuffix: Azure Cognitive Services
+title: 'Öğretici: Windows ML ile ONNX modeli kullanma - Özel Görüntü İşleme Hizmeti'
+titleSuffix: Azure Cognitive Services
 description: Azure Bilişsel Hizmetler’den dışarı aktarılan bir ONNX modelini kullanan Windows UWP uygulamasının nasıl oluşturulacağını öğrenin.
 services: cognitive-services
-author: larryfr
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: tutorial
-ms.date: 03/21/2019
-ms.author: larryfr
-ms.openlocfilehash: ceb45048d160603a3ee619e3ea0e69a0c188a9ad
-ms.sourcegitcommit: 44a85a2ed288f484cc3cdf71d9b51bc0be64cc33
+ms.date: 07/03/2019
+ms.author: pafarley
+ms.openlocfilehash: 7877f24ee77fa694745d0af0a99778fc53cd71e3
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "64725775"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754143"
 ---
-# <a name="tutorial-use-an-onnx-model-from-custom-vision-with-windows-ml-preview"></a>Öğretici: Bir özel görüntü işleme ONNX modelden Windows ML (Önizleme) ile kullanma
+# <a name="tutorial-use-an-onnx-model-from-custom-vision-with-windows-ml-preview"></a>Öğretici: Windows ML (önizleme) ile Özel Görüntü İşleme hizmetinden ONNX modeli kullanma
 
 Windows ML (önizleme) ile Özel Görüntü İşleme hizmetinden dışarı aktarılan bir ONNX modelinin nasıl kullanılacağını öğrenin.
 
@@ -31,9 +31,9 @@ Bu belgedeki bilgiler, Windows ML ile Özel Görüntü İşleme Hizmeti’nden d
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Windows 10 derleme 17738 veya üzeri
+* Windows 10 sürüm 1809 veya üzeri
 
-* Derleme 17738 veya üzeri için Windows SDK
+* 17763 veya üzeri derleme Windows SDK
 
 * __Evrensel Windows Platformu geliştirmesi__ iş yükü etkinleştirilmiş Visual Studio 2017 15.7 veya sonraki bir sürüm.
 
@@ -45,7 +45,7 @@ Uygulama, genel bir Windows UWP uygulamasıdır. Bilgisayarınızdan bir görün
 
 ## <a name="get-the-example-code"></a>Örnek kodunu alma
 
-Örnek uygulamaya [https://github.com/Azure-Samples/cognitive-services-onnx12-customvision-sample/](https://github.com/Azure-Samples/cognitive-services-onnx12-customvision-sample/) konumundan erişilebilir.
+Örnek uygulamaya [https://github.com/Azure-Samples/cognitive-services-onnx-customvision-sample](https://github.com/Azure-Samples/cognitive-services-onnx-customvision-sample) konumundan erişilebilir.
 
 ## <a name="run-the-example"></a>Örneği çalıştırma
 
@@ -59,7 +59,7 @@ Kendi modelinizi kullanmak için aşağıdaki adımları uygulayın:
 
 1. Özel Görüntü İşleme Hizmeti ile bir sınıflandırıcı [oluşturun ve eğitin](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier). Modeli dışarı aktarmak için **Genel (sıkıştırılmış)** gibi bir __sıkıştırılmış__ etki alanı seçin. Var olan bir sınıflandırıcıyı dışarı aktarmak için sağ üstteki dişli simgesini seçerek etki alanını sıkıştırın. __Ayarlar__ sayfasında sıkıştırılmış bir model seçin, projenizi kaydedin ve eğitin.  
 
-1. Performans sekmesine giderek [modelinizi dışarı aktarın](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/export-your-model). Sıkıştırılmış etki alanı ile eğitilmiş bir yineleme seçtiğinizde "Dışarı aktar" düğmesi görünür. *Dışarı Aktar*, *ONNX*, *ONNX1.2* ve ardından *Dışarı Aktar*'ı seçin. Dosya hazır duruma geldikten sonra *İndir* düğmesini seçin.
+1. Performans sekmesine giderek [modelinizi dışarı aktarın](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/export-your-model) . bir Compact etki alanı ile eğitilen bir yineleme seçin, "dışarı aktar" düğmesi görünür. *Dışarı aktar*, *onnx*ve ardından *dışarı aktar*' ı seçin. Dosya hazır duruma geldikten sonra *İndir* düğmesini seçin.
 
 1. ONNX dosyasını projenizin __Varlıklar__ klasörüne bırakın. 
 

@@ -1,20 +1,16 @@
 ---
-title: Örnek - izin verilen SQL DB SKU'ları
-description: Bu örnek ilke tanımını onaylı bir SKU kullanmak için SQL veritabanları gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-Izin verilen SQL DB SKU 'Ları
+description: Bu örnek ilke tanımı, SQL veritabanlarının onaylanan bir SKU kullanmasını gerektirir. Gereksinimi karşılamayan yeni kaynaklar reddedildi.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 193048baac8ffcc5212b3e1d9772148f8c55aacd
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 0365de32cd2b6d52b236f2105912e0969f9b7a18
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60546004"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076367"
 ---
-# <a name="sample---allowed-sql-database-skus"></a>SQL veritabanı'SKU ' ları izin örneği-
+# <a name="sample---allowed-sql-database-skus"></a>Örnek-Izin verilen SQL veritabanı SKU 'Ları
 
 Bu ilke, SQL veritabanlarının onaylı bir SKU kullanmasını gerektirir. İzin verilen bir SKU kimlikleri dizisi veya izin verilen bir SKU adları dizisi belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke, SQL veritabanlarının onaylı bir SKU kullanmasını gerektirir. İzin
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FSQL%2Fsql-db-skus%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FSQL%2Fsql-db-skus%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

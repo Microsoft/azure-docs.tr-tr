@@ -1,146 +1,146 @@
 ---
-title: C# hizmet kitaplığı kullanarak Microsoft konuşma tanıma API'si ile çalışmaya başlama | Microsoft Docs
+title: C# Hizmet kitaplığı 'Nı kullanarak Microsoft konuşma tanıma API 'si ile çalışmaya başlama | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Konuşma dilini metne dönüştürmek için Bing konuşma tanıma hizmeti Kitaplığı'nı kullanın.
+description: Konuşma dilini metne dönüştürmek için Bing Konuşma tanıma hizmeti kitaplığını kullanın.
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 0f445d1fff48ee7a04c0b1c1d64c808f87d824b7
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 71c3e471a8844eb6c6b70921e40c94338a084a8b
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515220"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70965851"
 ---
-# <a name="quickstart-use-the-bing-speech-recognition-service-library-in-c35-for-net-windows"></a>Hızlı Başlangıç: Bing konuşma tanıma hizmeti kitaplık C'de kullanın&#35; .NET Windows için
+# <a name="quickstart-use-the-bing-speech-recognition-service-library-in-c35-for-net-windows"></a>Hızlı Başlangıç: .NET Windows için C&#35; 'de Bing Konuşma tanıma hizmeti kitaplığını kullanma
 
 [!INCLUDE [Deprecation note](../../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Hizmet Kitaplığı kendi bulut hizmetine sahip ve kendi hizmetinden konuşma hizmeti çağırmak amacıyla isteyen geliştiricilere yöneliktir. Cihaz bağlı uygulamalardan konuşma tanıma hizmeti çağırmak istiyorsanız, bu SDK'sı kullanmayın. (Diğer istemci kitaplıkları veya REST API'leri için kullanın.)
+Hizmet kitaplığı, kendi bulut hizmetine sahip olan ve hizmetlerinden konuşma hizmeti 'ni çağırmak isteyen geliştiricilere yöneliktir. Konuşma tanıma hizmetini cihaz bağlantılı uygulamalardan çağırmak isterseniz, bu SDK 'yı kullanmayın. (Bunun için diğer istemci kitaplıklarını veya REST API 'Lerini kullanın.)
 
-C# hizmet kitaplığı kullanmak için yükleyin [NuGet paketini Microsoft.Bing.Speech](https://www.nuget.org/packages/Microsoft.Bing.Speech/). Kitaplığı API Başvurusu için bkz. [Microsoft konuşma C# hizmet Kitaplığı](https://cdn.rawgit.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary/master/docs/index.html).
+C# Hizmet kitaplığını kullanmak için [Microsoft. Bing. Speech NuGet paketini](https://www.nuget.org/packages/Microsoft.Bing.Speech/)yükledikten sonra. Kitaplık API 'SI başvurusu için bkz. [Microsoft konuşma C# hizmeti kitaplığı](https://cdn.rawgit.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary/master/docs/index.html).
 
-Aşağıdaki bölümlerde, yükleme, oluşturma ve C# hizmet kitaplığı kullanarak C# örnek uygulamayı çalıştırma açıklanmaktadır.
+Aşağıdaki bölümlerde, C# C# hizmet kitaplığını kullanarak örnek uygulamanın nasıl yükleneceğini, oluşturulacağı ve çalıştırılacağı açıklanır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 ### <a name="platform-requirements"></a>Platform gereksinimleri
 
-Aşağıdaki örnek Windows 8 + ve .NET 4.5 + için geliştirilen kullanarak Framework [Visual Studio 2015, Community Edition](https://www.visualstudio.com/products/visual-studio-community-vs).
+Aşağıdaki örnek, Windows 8 + ve .NET 4.5 + Framework için [Visual Studio 2015, Community Edition](https://www.visualstudio.com/products/visual-studio-community-vs)kullanılarak geliştirilmiştir.
 
-### <a name="get-the-sample-application"></a>Örnek uygulaması edinir
+### <a name="get-the-sample-application"></a>Örnek uygulamayı al
 
-Örnekten kopyalama [konuşma C# hizmet kitaplığı örneği](https://github.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary) depo.
+[Konuşma C# hizmeti kitaplığı örnek](https://github.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary) deposundan örneği kopyalayın.
 
-### <a name="subscribe-to-the-speech-recognition-api-and-get-a-free-trial-subscription-key"></a>Konuşma tanıma API'si için abone olur ve ücretsiz deneme aboneliği anahtarını alma
+### <a name="subscribe-to-the-speech-recognition-api-and-get-a-free-trial-subscription-key"></a>Konuşma tanıma API 'sine abone olun ve ücretsiz deneme aboneliği anahtarı alın
 
-Konuşma tanıma API'si, Bilişsel hizmetler (daha önce Project Oxford) bir parçasıdır. Ücretsiz deneme aboneliği anahtarları alabilirsiniz [Bilişsel hizmetler abonelik](https://azure.microsoft.com/try/cognitive-services/) sayfası. Konuşma tanıma API'si belirledikten sonra seçin **API anahtarı alma** anahtarını almak için. Birincil ve ikincil anahtar döndürür. İki anahtarı kullanabilmeniz için her iki anahtarı aynı kotası bağlıdır.
+Konuşma API 'SI bilişsel hizmetler 'in (daha önce Project Oxford) bir parçasıdır. Bilişsel [Hizmetler aboneliği](https://azure.microsoft.com/try/cognitive-services/) sayfasından ücretsiz deneme aboneliği anahtarlarına sahip olabilirsiniz. Konuşma API 'sini seçtikten sonra anahtarı almak için **API anahtarı al** ' ı seçin. Birincil ve ikincil anahtar döndürür. Her iki anahtar de aynı kotaya bağlıdır, bu nedenle her iki anahtarı da kullanabilirsiniz.
 
 > [!IMPORTANT]
-> * Bir abonelik anahtarı edinirler. Konuşma istemci kitaplıkları kullanabilmeniz için önce olmalıdır bir [abonelik anahtarı](https://azure.microsoft.com/try/cognitive-services/).
+> * Abonelik anahtarı alın. Konuşma istemci kitaplıklarını kullanabilmeniz için önce bir [abonelik anahtarınız](https://azure.microsoft.com/try/cognitive-services/)olması gerekir.
 >
-> * Abonelik anahtarınızı kullanın. Sağlanan C# hizmet kitaplığı örnek uygulaması, bir komut satırı parametreleri abonelik anahtarınızı sağlamanız gerekir. Daha fazla bilgi için [örnek uygulamayı çalıştırma](#step-3-run-the-sample-application).
+> * Abonelik anahtarınızı kullanın. Belirtilen C# hizmet kitaplığı örnek uygulamasıyla, abonelik anahtarınızı komut satırı parametrelerinden biri olarak sağlamanız gerekir. Daha fazla bilgi için bkz. [Örnek uygulamayı çalıştırma](#step-3-run-the-sample-application).
 
-## <a name="step-1-install-the-sample-application"></a>1\. adım: Örnek uygulamayı yüklemek
+## <a name="step-1-install-the-sample-application"></a>1\. adım: Örnek uygulamayı yükler
 
-1. Visual Studio 2015'i başlatın ve **dosya** > **açık** > **proje/çözüm**.
+1. Visual Studio 2015 ' u başlatın ve **Dosya** > **Aç** > **Proje/çözüm**' ı seçin.
 
-2. SpeechClient.sln adlı Visual Studio 2015 çözümü (.sln) dosyasını açmak için çift tıklayın. Çözüm, Visual Studio'da açılır.
+2. SpeechClient. sln adlı Visual Studio 2015 çözüm (. sln) dosyasını açmak için çift tıklayın. Çözüm, Visual Studio 'da açılır.
 
-## <a name="step-2-build-the-sample-application"></a>2\. adım: Örnek uygulaması oluşturma
+## <a name="step-2-build-the-sample-application"></a>2\. adım: Örnek uygulamayı oluşturma
 
-Ctrl + Shift + B tuşuna basın veya **derleme** Şerit menüsünde. Ardından **Çözümü Derle**.
+CTRL + SHIFT + B tuşlarına basın veya şerit menüsünde **Oluştur** ' u seçin. Ardından **Build Solution**öğesini seçin.
 
 ## <a name="step-3-run-the-sample-application"></a>3\. adım: Örnek uygulamayı çalıştırın
 
-1. Derleme tamamlandıktan sonra F5 tuşuna basın veya seçin **Başlat** örneği çalıştırmak için Şerit menüsünde.
+1. Derleme tamamlandıktan sonra, örneği çalıştırmak için F5 tuşuna basın veya şerit menüsünde **Başlat** ' ı seçin.
 
-2. Örnek, örneğin, SpeechClientSample\bin\Debug için çıkış dizinini açın. SHIFT + sağ tıklatın ve seçin **burada açık bir komut penceresi**.
+2. Örnek için çıkış dizinini açın, örneğin, SpeechClientSample\bin\Debug. SHIFT + sağ tıklama tuşlarına basın ve **burada komut penceresini aç**' ı seçin.
 
-3. Çalıştırma `SpeechClientSample.exe` aşağıdaki bağımsız değişkenleriyle:
+3. Aşağıdaki `SpeechClientSample.exe` bağımsız değişkenlerle Çalıştır:
 
-   * Arg [0]: Giriş Ses WAV dosyası belirtin.
-   * [1]. değişken: Ses yerel ayarları belirtin.
-   * [2] bağımsız değişken: Tanıma modları belirtin: *Kısa* için `ShortPhrase` modu ve *uzun* için `LongDictation` modu.
-   * [3] bağımsız değişken: Konuşma tanıma hizmeti erişmek için abonelik anahtarını belirtin.
+   * Arg [0]: Bir giriş sesi WAV dosyası belirtin.
+   * Arg [1]: Ses yerel ayarını belirtin.
+   * Arg [2]: Tanıma modlarını belirtin: `ShortPhrase` Modun`LongDictation` ve modunun uzunluğu için kısa.
+   * Arg [3]: Konuşma tanıma hizmetine erişmek için abonelik anahtarını belirtin.
 
-## <a name="samples-explained"></a>Açıklanan örnekleri
+## <a name="samples-explained"></a>Açıklanan örnekler
 
 ### <a name="recognition-modes"></a>Tanıma modları
 
-* `ShortPhrase` modu: Uzun bir utterance fazla 15 saniye. İstemci, veriler sunucuya gönderildiğinde gibi birden çok kısmı sonuç ve bir son en iyi sonucu alır.
-* `LongDictation` modu: Uzun bir utterance en fazla 10 dakika. Veriler sunucuya gönderildiğinde gibi istemci, birden çok kısmı sonuç ve birden çok Nihai sonuç, sunucunun cümle duraklamaları burada gösterir temel alır.
+* `ShortPhrase`modundaysa En fazla 15 saniye uzunluğunda bir utterlik. Veriler sunucuya gönderildiğinde, istemci birden çok kısmi sonuç ve en iyi sonucu alır.
+* `LongDictation`modundaysa En fazla 10 dakika uzunluğunda bir utterlik. Veriler sunucuya gönderilirken, istemci, tümce duraklamaları gösterdiği yere bağlı olarak birden çok kısmi sonuç ve birden çok nihai sonuç alır.
 
-### <a name="supported-audio-formats"></a>Ses biçimleri desteklenir
+### <a name="supported-audio-formats"></a>Desteklenen ses biçimleri
 
-Konuşma tanıma API'si, aşağıdakileri kullanarak ses/WAV destekler:
+Konuşma API 'si aşağıdaki codec bileşenlerini kullanarak ses/WAV 'yi destekler:
 
 * PCM tek kanal
-* Siren
+* SIREN
 * SirenSR
 
-### <a name="preferences"></a>Tercihleri
+### <a name="preferences"></a>Tercihler
 
-Bir SpeechClient oluşturmak için ilk tercihleri nesnesi oluşturmanız gerekir. Konuşma hizmeti davranışını yapılandıran bir dizi parametreleri tercihleri nesnedir. Bunu, aşağıdaki alanlardan oluşur:
+Bir SpeechClient oluşturmak için önce bir Tercihler nesnesi oluşturmanız gerekir. Tercihler nesnesi, konuşma hizmetinin davranışını yapılandıran bir parametre kümesidir. Aşağıdaki alanlardan oluşur:
 
-* `SpeechLanguage`: Konuşma tanıma Hizmeti'ne gönderilen ses yerel ayar.
-* `ServiceUri`: Konuşma hizmeti çağırmak için kullanılan uç nokta.
-* `AuthorizationProvider`: Konuşma hizmeti erişmek için kullanılan belirteçleri getirilecek IAuthorizationProvider uygulaması. Örnek bir Bilişsel hizmetler yetkilendirme sağlayıcısı sağlasa da, belirteç önbelleğe işlemek için kendi uygulama oluşturmanızı öneririz.
-* `EnableAudioBuffering`: Gelişmiş bir seçenek. Bkz: [bağlantı yönetimi](#connection-management).
+* `SpeechLanguage`: Konuşma hizmetine gönderilen sesin yerel ayarı.
+* `ServiceUri`: Konuşma hizmetini çağırmak için kullanılan uç nokta.
+* `AuthorizationProvider`: Konuşma hizmetine erişmek için belirteçleri getirmek üzere kullanılan bir ıauthorizationprovider uygulaması. Örnek, bilişsel hizmetler yetkilendirme sağlayıcısı sağlasa da, belirteç önbelleğe alma işlemini idare etmek için kendi uygulamanızı oluşturmanızı kesinlikle öneririz.
+* `EnableAudioBuffering`: Gelişmiş bir seçenek. Bkz. [bağlantı yönetimi](#connection-management).
 
-### <a name="speech-input"></a>Konuşma giriş
+### <a name="speech-input"></a>Konuşma girişi
 
-SpeechInput nesne iki alandan oluşur:
+SpeechInput nesnesi iki alandan oluşur:
 
-* **Ses**: SDK'sı ses çeker, tercih ettiğiniz bir akış uygulaması. Herhangi olabilir [stream](https://msdn.microsoft.com/library/system.io.stream(v=vs.110).aspx) okuma destekleyen.
+* **Ses**: SDK 'nın ses çekmesi arasından tercih ettiğiniz bir akış uygulamasıdır. Okumayı destekleyen herhangi bir [akış](https://msdn.microsoft.com/library/system.io.stream(v=vs.110).aspx) olabilir.
    > [!NOTE]
-   > Akış döndürdüğünde SDK akışın sonuna algılar **0** olarak okundu.
+   > Akış okuma içinde **0** DÖNDÜRDÜĞÜNDE, SDK akışın sonunu algılar.
 
-* **RequestMetadata**: Konuşma isteğiyle ilgili meta veriler. Daha fazla bilgi için [başvuru](https://cdn.rawgit.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary/master/docs/index.html).
+* **Requestmetadata**: Konuşma isteğiyle ilgili meta veriler. Daha fazla bilgi için bkz. [başvuru](https://cdn.rawgit.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary/master/docs/index.html).
 
 ### <a name="speech-request"></a>Konuşma isteği
 
-SpeechClient ve SpeechInput nesneleri örneği sonra RecognizeAsync konuşma hizmeti için bir istekte bulunmak için kullanın.
+Bir SpeechClient ve SpeechInput nesneleri örnekledikten sonra, konuşma hizmetine bir istek yapmak için RecognizeAsync kullanın.
 
 ```cs
     var task = speechClient.RecognizeAsync(speechInput);
 ```
 
-İstek tamamlandıktan sonra RecognizeAsync tarafından döndürülen görev tamamlanır. Son RecognitionResult tanıma sonudur. Hizmet veya SDK'sını beklenmedik şekilde başarısız olursa, görev başarısız olabilir.
+İstek bittikten sonra, RecognizeAsync tarafından döndürülen görev tamamlanır. Son Recognıtionresult, tanımanın sonu. Hizmet veya SDK beklenmedik bir şekilde başarısız olursa görev başarısız olabilir.
 
 ### <a name="speech-recognition-events"></a>Konuşma tanıma olayları
 
-#### <a name="partial-results-event"></a>Kısmi sonuçlar olay
+#### <a name="partial-results-event"></a>Kısmi sonuçlar olayı
 
-Konuşma hizmeti bile Konuşmayı bitirmeden kişilerin, yorumlarını tahmin her başlatıldığında bu olay adlı (kullanırsanız `MicrophoneRecognitionClient`) veya veri gönderen son (kullanırsanız `DataRecognitionClient`). Kullanarak olaya abone olabilirsiniz `SpeechClient.SubscribeToPartialResult()`. Veya genel olay aboneliği yöntemi kullanabileceğiniz `SpeechClient.SubscribeTo<RecognitionPartialResult>()`.
+Bu olay, konuşma hizmeti, konuşmayı bitirmeden ( `MicrophoneRecognitionClient`kullanıyorsanız) veya veri göndermeyi ( `DataRecognitionClient`kullanıyorsanız) bir kez her tahmin edildiğinde çağrılır. Kullanarak `SpeechClient.SubscribeToPartialResult()`olaya abone olabilirsiniz. Ya da genel olaylar abonelik yöntemini `SpeechClient.SubscribeTo<RecognitionPartialResult>()`kullanabilirsiniz.
 
 **Dönüş biçimi** | Açıklama |
 ------|------
-**LexicalForm** | Bu form, ham, işlenmemiş konuşma tanıma sonuçları gerek duyan uygulamalar tarafından kullanım için idealdir.
-**Görüntü metni** | Ters metin normalleştirme, büyük/küçük harf, noktalama işaretleri ve uygulanan küfür maskeleme ile tanınan tümceciği. Küfür yıldız işareti ile ilk karakterden sonra Örneğin, "d ***." maskelenir. Bu formu, konuşma tanıma sonuçları kullanıcıya görüntüleyen uygulamalar tarafından kullanım için idealdir.
-**güven** | Güvenirlik düzeyini tanınan tümceciği ilgili ses için konuşma tanıma sunucu tarafından tanımlanan temsil eder.
-**MediaTime** | Geçerli saati (zaman 100 nanosaniyelik birimlerindeki) ses akışı başlangıcını göre.
-**MediaDuration** | Geçerli deyim süresi/uzunluğu ilgili ses kesimdeki (100 nanosaniyelik birimler zaman).
+**LexicalForm** | Bu form, ham, işlenmemiş konuşma tanıma sonuçları gerektiren uygulamalar tarafından kullanılmak üzere idealdir.
+**Görünüm** | Ters Metin normalleştirme, büyük/küçük harf, noktalama ve küfür maskeleme uygulanmış bilinen tümcecik. Küfür başlangıç karakterinden sonra yıldız işaretiyle maskelenir, örneğin, "d * * *." Bu form, konuşma tanıma sonuçlarını bir kullanıcıya görüntüleyen uygulamalar tarafından kullanılmak üzere idealdir.
+**Likli** | Tanınan tümceciğin güvenirlik düzeyi, konuşma tanıma sunucusu tarafından tanımlanan ilişkili ses için temsil eder.
+**MediaTime** | Ses akışının başlangıcına göre geçerli zaman (100-nanosaniyelik birimi).
+**MediaDuration** | Ses kesimine (100-nanosaniyelik birimi) göre geçerli tümcecik süresi/uzunluğu.
 
-#### <a name="result-event"></a>Olay sonucu
-Konuşma tamamladığınızda (içinde `ShortPhrase` modu), bu olay çağrılır. Sonuç için en iyi n seçenekleri sunulur. İçinde `LongDictation` modu, olay çağrılabilir birden çok kez tabanlı sunucunun cümle duraklamaları burada gösterir. Kullanarak olaya abone olabilirsiniz `SpeechClient.SubscribeToRecognitionResult()`. Veya genel olay aboneliği yöntemi kullanabileceğiniz `SpeechClient.SubscribeTo<RecognitionResult>()`.
+#### <a name="result-event"></a>Sonuç olayı
+Konuşmayı bitirdiğinizde ( `ShortPhrase` modunda), bu olay çağırılır. Sonuç için n en iyi seçenek sunulur. `LongDictation` Modunda, olay birden çok kez çağrılabilir ve bu, sunucunun tümce duraklamaları gösterdiği yere bağlıdır. Kullanarak `SpeechClient.SubscribeToRecognitionResult()`olaya abone olabilirsiniz. Ya da genel olaylar abonelik yöntemini `SpeechClient.SubscribeTo<RecognitionResult>()`kullanabilirsiniz.
 
 **Dönüş biçimi** | Açıklama |
 ------|------|
-**RecognitionStatus** | Tanıma üretme üzerinde durumu. Örneğin, başarılı tanıma sonucunda veya iptal etme bağlantısı, vb. sonucunda üretilmiştir.
-**İfadeleri** | En iyi n tanıma güvenle tanınan ifadeler kümesi.
+**Recognıtionstatus** | Tanımanın nasıl üretilme durumu. Örneğin, başarılı bir tanıma sonucu olarak ya da bağlantının iptal edilmesine bir sonuç olarak üretildiyse, vb.
+**Deyim** | Tanıma güveniyle birlikte n-en iyi tanınan tümcecikler kümesi.
 
 Tanıma sonuçları hakkında daha fazla bilgi için bkz. [çıkış biçimi](../Concepts.md#output-format).
 
-### <a name="speech-recognition-response"></a>Konuşma tanıma yanıt
+### <a name="speech-recognition-response"></a>Konuşma tanıma yanıtı
 
-Konuşma yanıt örnek:
+Konuşma yanıtı örneği:
 ```
 --- Partial result received by OnPartialResult  
 ---what  
@@ -155,17 +155,17 @@ Konuşma yanıt örnek:
 What's the weather like? (Confidence:High)
 ```
 
-## <a name="connection-management"></a>Bağlantı Yönetimi
+## <a name="connection-management"></a>Bağlantı yönetimi
 
-İstek başına tek bir WebSocket Bağlantısı API kullanır. En iyi kullanıcı deneyimi için SDK'sı konuşma hizmetine yeniden bağlanın ve tanıma aldığı son RecognitionResult başlatmak çalışır. Örneğin, ses isteği iki dakikadan uzun olduğundan, bir dakikalık işaretinde bir RecognitionEvent SDK alınan ve beş saniye sonra bir ağ hatası oluştu, SDK'sı bir dakikalık işaretinden başlayan yeni bir bağlantı başlatır.
+API, istek başına tek bir WebSocket bağlantısı kullanır. En iyi kullanıcı deneyimi için SDK, konuşma hizmetine yeniden bağlanmaya çalışır ve aldığı son Recognıtionresult 'dan tanımayı başlatır. Örneğin, ses isteği iki dakika uzunsa SDK, tek dakikalık bir noktada bir Recognıtionevent almıştır ve beş saniye sonra bir ağ hatası oluştuysa, SDK bir dakikalık işaretten başlayan yeni bir bağlantı başlatır.
 
 >[!NOTE]
->SDK'sı, akış aramayı desteklemiyor olabilir çünkü bir dakikalık işaretine arama değil. Bunun yerine, SDK, bir iç arabellek ses arabelleğe almak için kullanır ve arabellek RecognitionResult olayları alırken temizler tutar.
+>Akış aramayı desteklemediği için SDK tek dakikalık işaretine geri arama yapmaz. Bunun yerine, SDK, ses arabelleği arabelleğe almak için kullandığı bir dahili arabelleği tutar ve bu, Recognıtionresult olaylarını aldığından arabelleği temizler.
 
 ## <a name="buffering-behavior"></a>Arabelleğe alma davranışı
 
-Varsayılan olarak, bir ağ kesme oluştuğunda, kurtarabilmeniz SDK ses arabelleğe alır. Ağ bağlantı kesme sırasında kaybedilen ses atmak ve bağlantıyı yeniden başlatmak için tercih olduğu bir senaryoda, ayarlayarak ses arabelleğe almayı devre dışı bırakmak en iyi `EnableAudioBuffering` tercihleri nesnesindeki `false`.
+Varsayılan olarak SDK, bir ağ kesintisi oluştuğunda kurtarabilmesi için sesi arabelleğe alır. Ağ bağlantısı kesilme sırasında kesilen sesi atmayı tercih eden bir senaryoda ve bağlantıyı yeniden başlattıktan sonra, Tercihler `EnableAudioBuffering` `false`nesnesinde ' i ayarlayarak ses arabelleğe almayı devre dışı bırakmak en iyisidir.
 
 ## <a name="related-topics"></a>İlgili konular
 
-[Microsoft konuşma C# hizmet Kitaplığı Başvurusu](https://cdn.rawgit.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary/master/docs/index.html)
+[Microsoft konuşma C# hizmeti kitaplığı başvurusu](https://cdn.rawgit.com/Microsoft/Cognitive-Speech-STT-ServiceLibrary/master/docs/index.html)

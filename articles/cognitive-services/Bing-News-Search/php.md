@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: PHP ile bir haber arama ve Bing haber arama REST API'si işlemleri"
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, PHP kullanarak Bing haber arama REST API'si için bir istek göndermek için kullanın ve bir JSON yanıtı alırsınız.
+title: 'Hızlı Başlangıç: PHP ile bir haber araması gerçekleştirin Bing Haber Arama REST API'
+titleSuffix: Azure Cognitive Services
+description: Bu hızlı başlangıcı, PHP kullanarak Bing Haber Arama REST API isteği göndermek ve bir JSON yanıtı almak için kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -11,22 +11,22 @@ ms.topic: quickstart
 ms.date: 6/18/2019
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: 9fd03b433580444c2fc3f956dded6deb1a2be7f1
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: b905993c88bd4425215dd83962980d8e46a7b943
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67203331"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68423715"
 ---
-# <a name="quickstart-perform-a-news-search-using-php-and-the-bing-news-search-rest-api"></a>Hızlı Başlangıç: PHP ve Bing haber arama REST API'si kullanarak bir haber arama yapın
+# <a name="quickstart-perform-a-news-search-using-php-and-the-bing-news-search-rest-api"></a>Hızlı Başlangıç: PHP ve Bing Haber Arama REST API kullanarak bir haber araması gerçekleştirin
 
 İlk Bing Resim Arama API’si çağrınızı yapmak ve bir JSON yanıtı almak için bu hızlı başlangıcı kullanın. Bu basit JavaScript uygulaması, API’ye bir arama sorgusu gönderir ve ham sonuçları görüntüler.
 
-Bu uygulama, PHP'de yazılmış olsa da bir RESTful Web API'si, uyumlu, çoğu programlama dilinden hizmet.
+Bu uygulama PHP 'de yazıldığı sırada API, en fazla programlama dili ile uyumlu bir Web hizmeti hizmetidir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* PHP 5.6 veya üzeri
+* PHP 5,6 veya üzeri
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../includes/cognitive-services-bing-news-search-signup-requirements.md)]
 

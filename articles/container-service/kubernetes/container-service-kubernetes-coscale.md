@@ -20,7 +20,7 @@ ms.locfileid: "60713086"
 
 [!INCLUDE [ACS deprecation](../../../includes/container-service-kubernetes-deprecation.md)]
 
-Bu makalede, nasıl dağıtılacağı gösteriyoruz [CoScale](https://web.archive.org/web/20180317071550/ https://www.coscale.com/) tüm düğümleri ve Azure Container Service'te Kubernetes kümenizde kapsayıcıları İzleme Aracısı. Bu yapılandırma için bir hesabıyla CoScale ihtiyacınız var. 
+Bu makalede, nasıl dağıtılacağı gösteriyoruz [CoScale](https://web.archive.org/web/20180317071550/https://www.coscale.com/) tüm düğümleri ve Azure Container Service'te Kubernetes kümenizde kapsayıcıları İzleme Aracısı. Bu yapılandırma için bir hesabıyla CoScale ihtiyacınız var. 
 
 
 ## <a name="about-coscale"></a>CoScale hakkında 
@@ -34,7 +34,7 @@ Bu makalede gösterilen şekilde bir SaaS çözümü olarak CoScale çalıştır
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Öncelikle [CoScale hesabı oluşturma](https://web.archive.org/web/20170507123133/ https://www.coscale.com/free-trial).
+Öncelikle [CoScale hesabı oluşturma](https://web.archive.org/web/20170507123133/https://www.coscale.com/free-trial).
 
 Bu izlenecek yol, sahibi olduğunuzu varsayar [Azure Container Service kullanan bir Kubernetes kümesi oluşturuldu](container-service-kubernetes-walkthrough.md).
 
@@ -81,5 +81,5 @@ CoScale Aracısı kümedeki yeni makinelere otomatik olarak dağıtılır. Otoma
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [CoScale belgeleri](https://web.archive.org/web/20180415164304/ http://docs.coscale.com:80/) ve [blog](https://web.archive.org/web/20170501021344/ http://www.coscale.com:80/blog) CoScale izleme çözümleri hakkında daha fazla bilgi. 
+Bkz: [CoScale belgeleri](https://web.archive.org/web/20180415164304/http://docs.coscale.com:80/) ve [blog](https://web.archive.org/web/20170501021344/http://www.coscale.com:80/blog) CoScale izleme çözümleri hakkında daha fazla bilgi. 
 

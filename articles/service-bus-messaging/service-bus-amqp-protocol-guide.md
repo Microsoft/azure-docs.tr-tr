@@ -212,11 +212,11 @@ AMQP için 's tanımlar için uygulaması gereken herhangi bir özellik eşlenme
 
 | Alan Adı | Kullanım | API adı |
 | --- | --- | --- |
-| dayanıklı |- |- |
-| öncelik |- |- |
-| TTL |Bu iletinin yaşam süresi |[TimeToLive](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
-| ilk alıcı |- |- |
-| Teslimat sayısı |- |[DeliveryCount](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
+| durable |- |- |
+| priority |- |- |
+| ttl |Bu iletinin yaşam süresi |[TimeToLive](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
+| first-acquirer |- |- |
+| delivery-count |- |[DeliveryCount](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
 
 #### <a name="properties"></a>properties
 
@@ -224,7 +224,7 @@ AMQP için 's tanımlar için uygulaması gereken herhangi bir özellik eşlenme
 | --- | --- | --- |
 | ileti kimliği |Bu ileti için uygulama tanımlı, serbest biçimli tanımlayıcı. Yinelenen algılama için kullanılır. |[MessageID](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
 | Kullanıcı Kimliği |Service Bus tarafından yorumlanır değil, uygulama tanımlı kullanıcı tanımlayıcısı. |Service Bus API'sini aracılığıyla erişilebilir değil. |
-| - |Service Bus tarafından yorumlanır değil, hedef uygulama tanımlı tanımlayıcısı. |[Alıcı](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
+| to |Service Bus tarafından yorumlanır değil, hedef uygulama tanımlı tanımlayıcısı. |[Alıcı](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
 | subject |Service Bus tarafından yorumlanır değil, uygulama tarafından tanımlanan ileti amaçlı tanımlayıcısı. |[Etiket](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
 | Yanıtla |Uygulama tanımlı yanıt yolu göstergesi, Service Bus tarafından yorumlanır değil. |[replyTo](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |
 | Bağıntı Kimliği |Service Bus tarafından yorumlanır değil, uygulama tanımlı bağıntı tanımlayıcısı. |[Bağıntı Kimliği](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) |

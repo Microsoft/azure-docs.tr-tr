@@ -1,79 +1,73 @@
 ---
-title: Azure İzleyici'de çözümlerini izleme hedefleme | Microsoft Docs
-description: İzleme çözümleri hedefleyen belirli bir aracılar kümesi için izleme çözümleri sınırlamanıza olanak sağlar.  Bu makalede bir kapsam yapılandırması oluşturma ve bunu bir çözüm uygulayabilirsiniz.
-services: monitoring
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: tysonn
-ms.assetid: 1f054a4e-6243-4a66-a62a-0031adb750d8
+title: Azure Izleyici 'de izleme çözümlerini hedefleme | Microsoft Docs
+description: İzleme çözümlerini hedefleme, izleme çözümlerini belirli bir aracı kümesiyle sınırlamanıza olanak tanır.  Bu makalede, bir kapsam yapılandırmasının nasıl oluşturulacağı ve bir çözüme nasıl uygulanacağı açıklanır.
 ms.service: azure-monitor
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 04/27/2017
+ms.subservice: ''
+ms.topic: conceptual
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 4082847e1871fc03713471b0c043dddb80f91b0d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 04/27/2017
+ms.openlocfilehash: 04b47cb6079d9213c1a20425f62286f1b2aa778b
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62110353"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555318"
 ---
-# <a name="targeting-monitoring-solutions-in-azure-monitor-preview"></a>Azure İzleyici (Önizleme) hedefleme izleme çözümleri
-Aboneliğinize bir izleme çözümü eklediğinizde, Log Analytics çalışma alanınıza bağlı tüm Windows ve Linux aracıları için varsayılan olarak otomatik olarak dağıtılır.  Maliyetlerinizi yönetin ve belirli bir aracılar kümesi için sınırlayarak bir çözüm için toplanan veri miktarını sınırlamak isteyebilirsiniz.  Bu makalede nasıl kullanılacağını **çözüm hedefleme** çözümlerinize bir kapsam uygulamanıza imkan sağlayan bir özelliği olan.
+# <a name="targeting-monitoring-solutions-in-azure-monitor-preview"></a>Azure Izleyici 'de izleme çözümlerini hedefleme (Önizleme)
+Aboneliğinize bir izleme çözümü eklediğinizde, varsayılan olarak, Log Analytics çalışma alanınıza bağlı tüm Windows ve Linux aracılarına otomatik olarak dağıtılır.  Maliyetlerinizi yönetmek ve bir çözüm için toplanan veri miktarını belirli bir aracı kümesiyle sınırlayarak sınırlamak isteyebilirsiniz.  Bu makalede, çözümlerinize bir kapsam uygulamanıza olanak tanıyan bir özellik olan **çözüm hedeflemesi** 'nin nasıl kullanılacağı açıklanır.
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-## <a name="how-to-target-a-solution"></a>Nasıl bir çözümü hedeflemek için
-Aşağıdaki bölümlerde açıklandığı gibi bir çözüm hedefleme için üç adım vardır. 
+## <a name="how-to-target-a-solution"></a>Bir çözümü hedefleme
+Aşağıdaki bölümlerde açıklandığı gibi bir çözümü hedeflemek için üç adım vardır. 
 
 
-### <a name="1-create-a-computer-group"></a>1. Bir bilgisayar grubu oluşturun
-Bir kapsamda oluşturarak dahil etmek istediğiniz bilgisayarları belirttiğiniz bir [bilgisayar grubu](../platform/computer-groups.md) Azure İzleyici'de.  Bilgisayar grubu, bir günlük temelli veya Active Directory veya WSUS grupları gibi diğer kaynaklardan içeri aktarılabilir. Olarak [aşağıda açıklanan](#solutions-and-agents-that-cant-be-targeted), Azure İzleyici doğrudan bağlanan bilgisayarlar kapsamda dahil edilir.
+### <a name="1-create-a-computer-group"></a>1. bir bilgisayar grubu oluşturun
+Azure Izleyici 'de bir [bilgisayar grubu](../platform/computer-groups.md) oluşturarak kapsama eklemek istediğiniz bilgisayarları belirlersiniz.  Bilgisayar grubu, bir günlük sorgusuna dayalı olabilir veya Active Directory veya WSUS grupları gibi diğer kaynaklardan içeri aktarılabilir. [Aşağıda açıklandığı](#solutions-and-agents-that-cant-be-targeted)gibi, yalnızca Azure izleyici 'ye doğrudan bağlı olan bilgisayarlar kapsama dahil edilir.
 
-Bir veya daha fazla çözüm için uygulanabilir bir kapsam yapılandırmasında dahil sonra çalışma alanınızda oluşturduğunuz bilgisayar grubu olduğunda.
+Çalışma alanınızda bilgisayar grubu oluşturulduktan sonra, bir veya daha fazla çözümü uygulanabilecek bir kapsam yapılandırmasına dahil edersiniz.
  
  
-### <a name="2-create-a-scope-configuration"></a>2. Kapsam yapılandırması oluşturma
- A **kapsam yapılandırması** bir veya daha fazla bilgisayar grupları içerir ve bir veya daha fazla çözüm için uygulanabilir. 
+### <a name="2-create-a-scope-configuration"></a>2. kapsam yapılandırması oluşturma
+ **Kapsam yapılandırmasında** bir veya daha fazla bilgisayar grubu bulunur ve bir veya daha fazla çözüm için uygulanabilir. 
  
  Aşağıdaki işlemi kullanarak bir kapsam yapılandırması oluşturun.  
 
- 1. Azure portalında gidin **Log Analytics çalışma alanları** ve çalışma alanınızı seçin.
- 2. Çalışma alanı altında özelliklerinde **çalışma alanı veri kaynakları** seçin **kapsam yapılandırmaları**.
- 3. Tıklayın **Ekle** yeni bir kapsam yapılandırması oluşturmak için.
- 4. Tür a **adı** kapsam yapılandırması için.
- 5. Tıklayın **bilgisayar grupları Seç**.
- 6. Oluşturduğunuz bilgisayar grubu ve isteğe bağlı olarak diğer gruplar yapılandırmasına eklemek için seçin.  **Seç**'e tıklayın.  
- 6. Tıklayın **Tamam** kapsam yapılandırması oluşturmak için. 
+ 1. Azure portal, **Log Analytics çalışma alanları** ' na gidin ve çalışma alanınızı seçin.
+ 2. Çalışma alanı **veri kaynakları** altındaki çalışma alanının özelliklerinde **kapsam yapılandırması**' nı seçin.
+ 3. Yeni bir kapsam yapılandırması oluşturmak için **Ekle** ' ye tıklayın.
+ 4. Kapsam yapılandırması için bir **ad** yazın.
+ 5. **Bilgisayar gruplarını Seç**' e tıklayın.
+ 6. Oluşturduğunuz bilgisayar grubunu ve isteğe bağlı olarak yapılandırmaya eklenecek diğer grupları seçin.  **Seç**'e tıklayın.  
+ 6. Kapsam yapılandırmasını oluşturmak için **Tamam** ' ı tıklatın. 
 
 
-### <a name="3-apply-the-scope-configuration-to-a-solution"></a>3. Kapsam yapılandırması bir çözüm için geçerlidir.
-Ardından kapsam yapılandırması aldıktan sonra bunu için bir veya daha fazla çözüm uygulayabilirsiniz.  Sahip birden çok çözümü tek bir kapsam yapılandırma kullanılabilse de, her bir çözüm için yalnızca bir kapsam yapılandırması kullanabileceğinizi unutmayın.
+### <a name="3-apply-the-scope-configuration-to-a-solution"></a>3. kapsam yapılandırmasını bir çözüme uygulayın.
+Kapsam yapılandırmasına sahip olduktan sonra, bir veya daha fazla çözüm için uygulayabilirsiniz.  Tek bir kapsam yapılandırması birden çok çözümle birlikte kullanılabileceği sürece, her çözümün yalnızca bir kapsam yapılandırması kullanabileceğini unutmayın.
 
-Aşağıdaki işlemi kullanarak bir kapsam yapılandırması uygulanır.  
+Aşağıdaki işlemi kullanarak bir kapsam yapılandırması uygulayın.  
 
- 1. Azure portalında gidin **Log Analytics çalışma alanları** ve çalışma alanınızı seçin.
- 2. Çalışma alanı özelliklerini seçin **çözümleri**.
- 3. Kapsama istediğiniz çözümü tıklayın.
- 4. Çözüm için özelliklerde **çalışma alanı veri kaynakları** seçin **çözüm hedefleme**.  Seçenek kullanılabilir değilse, ardından [Bu çözüm hedeflenemez](#solutions-and-agents-that-cant-be-targeted).
- 5. Tıklayın **kapsam yapılandırması Ekle**.  Bu çözüm için uygulanan bir yapılandırma zaten varsa bu seçenek kullanılamaz.  Başka bir tane eklemeden önce mevcut yapılandırmayı kaldırmanız gerekir.
- 6. Kapsam yapılandırmasına göre oluşturduğunuz tıklayın.
- 7. İzleme **durumu** gösterildiğinden emin olmak için yapılandırmayı, **başarılı**.  Seçin ve yapılandırmayı sağındaki elips durumu hata gösterir, ardından **düzenleme kapsam yapılandırması** değişiklik yapma.
+ 1. Azure portal, **Log Analytics çalışma alanları** ' na gidin ve çalışma alanınızı seçin.
+ 2. Çalışma alanının özelliklerinde **çözümler**' i seçin.
+ 3. Kapsam yapmak istediğiniz çözüme tıklayın.
+ 4. **Çalışma alanı veri kaynakları** altındaki çözüm özellikleri ' nde **çözüm hedefleme**' yi seçin.  Seçenek kullanılamıyorsa, [Bu çözüm hedeflenemez](#solutions-and-agents-that-cant-be-targeted).
+ 5. **Kapsam yapılandırması Ekle**' ye tıklayın.  Bu çözüme uygulanan bir yapılandırma zaten varsa, bu seçenek kullanılamaz.  Başka bir yapılandırma eklemeden önce varolan yapılandırmayı kaldırmanız gerekir.
+ 6. Oluşturduğunuz kapsam yapılandırmasına tıklayın.
+ 7. **Başarılı**olduğunu gösterdiğinizden emin olmak Için yapılandırmanın **durumunu** izleyin.  Durum bir hata gösteriyorsa, yapılandırmanın sağındaki elipsi tıklatın ve değişiklik yapmak için **kapsam yapılandırmasını düzenle** ' yi seçin.
 
-## <a name="solutions-and-agents-that-cant-be-targeted"></a>Çözümler ve hedeflenemez aracıları
-Aracıları ve çözüm hedefleme ile kullanılamaz çözümleri ölçütlerini aşağıda verilmiştir.
+## <a name="solutions-and-agents-that-cant-be-targeted"></a>Hedeflenemez çözümler ve aracılar
+Çözüm hedefleme ile kullanılamayan aracıların ve çözümlerin ölçütleri aşağıda verilmiştir.
 
-- Çözüm hedefleme yalnızca aracılar için dağıtım çözümleri için geçerlidir.
-- Çözüm hedefleme yalnızca Microsoft tarafından sağlanan çözümleri için geçerlidir.  Çözümleri uygulanmaz [kendiniz veya iş ortakları tarafından oluşturulan](solutions-creating.md).
-- Yalnızca Azure İzleyicisi ile doğrudan bağlantı aracıları filtreleyebilirsiniz.  Çözümler, bunlar bir kapsam yapılandırmasına dahil edilip edilmeyeceğini bağlı bir Operations Manager yönetim grubunun parçası olan tüm aracılara otomatik olarak dağıtır.
+- Çözüm hedefleme yalnızca aracılara dağıtan çözümler için geçerlidir.
+- Çözüm hedefleme yalnızca Microsoft tarafından sunulan çözümler için geçerlidir.  [Kendi veya iş ortakları tarafından oluşturulan](solutions-creating.md)çözümlere uygulanmaz.
+- Yalnızca Azure Izleyici 'ye doğrudan bağlanan aracıları filtreleyebilirsiniz.  Çözümler, bir kapsam yapılandırmasına dahil edilip edilmeksizin bağlı Operations Manager yönetim grubunun parçası olan aracılara otomatik olarak dağıtılır.
 
-### <a name="exceptions"></a>Özel durumlar
-Bunlar belirtilen ölçütlere uyan olsa bile çözüm hedefleme aşağıdaki çözümleri ile kullanılamaz.
+### <a name="exceptions"></a>Özel Durumlar
+Çözüm hedefleme, belirtilen ölçütlere uygun olsa da aşağıdaki çözümlerle kullanılamaz.
 
-- Aracı sistem durumu değerlendirmesi
+- Aracı Durumu değerlendirmesi
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Ortamınızda yüklemek açık olan çözümler gibi çözümlerle izleme hakkında daha fazla [Azure günlük izleme çözümleri çalışma alanınıza Analytics](solutions.md).
-- Bilgisayar grupları oluşturma hakkında daha fazla bilgi [bilgisayar grupları Azure İzleyici'de oturum sorguları](../platform/computer-groups.md).
+- [Çalışma alanınıza Azure Log Analytics izleme çözümleri ekleme](solutions.md)bölümünde ortamınızda yüklenebilecek çözümler dahil olmak üzere çözümleri izleme hakkında daha fazla bilgi edinin.
+- [Azure izleyici günlük sorgularının bilgisayar gruplarında](../platform/computer-groups.md)bilgisayar grupları oluşturma hakkında daha fazla bilgi edinin.

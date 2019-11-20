@@ -1,6 +1,6 @@
 ---
-title: Hızlı Başlangıç - Azure uzamsal Çıpasıyla iOS uygulaması oluşturma | Microsoft Docs
-description: Bu hızlı başlangıçta, uzamsal bağlayıcılarını kullanarak bir iOS uygulamasının nasıl oluşturulacağını öğrenin.
+title: Hızlı başlangıç-Azure uzamsal bağlayıcılarla iOS uygulaması oluşturma | Microsoft Docs
+description: Bu hızlı başlangıçta, uzamsal bağlayıcıları kullanarak bir iOS uygulaması oluşturmayı öğreneceksiniz.
 author: craigktreasure
 manager: aliemami
 services: azure-spatial-anchors
@@ -8,23 +8,23 @@ ms.author: crtreasu
 ms.date: 02/24/2019
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 56360238db8632e74a95c057a7fe643b5cea3151
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: a1d2fa083c0083423767484b20e296a3080e4ebe
+ms.sourcegitcommit: a170b69b592e6e7e5cc816dabc0246f97897cb0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67206825"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74092109"
 ---
-# <a name="quickstart-create-an-ios-app-with-azure-spatial-anchors-in-either-swift-or-objective-c"></a>Hızlı Başlangıç: Azure uzamsal bağlantıları, Swift veya Objective-C ile bir iOS uygulaması oluşturma
+# <a name="quickstart-create-an-ios-app-with-azure-spatial-anchors-in-either-swift-or-objective-c"></a>Hızlı başlangıç: Azure uzamsal bağlayıcılarla, Swift veya amaç-C ' d a iOS uygulaması oluşturma
 
-Bu hızlı başlangıçta kullanarak bir iOS uygulaması oluşturmak nasıl etkinleştireceğinizi de açıklar [Azure uzamsal bağlayıcılarını](../overview.md) Swift veya Objective-c Azure uzamsal bağlayıcılarını konumlarına cihazlar arasında zaman içinde kalıcı nesneler kullanarak karma gerçeklik deneyimleri oluşturmanıza olanak tanıyan platformlar arası Geliştirici hizmetidir. İşiniz bittiğinde, kaydedebilir ve uzamsal bağlantı geri çağırma ARKit iOS uygulamasının sahip olacaksınız.
+Bu hızlı başlangıçta, Swift veya amaç-C ' d e [Azure uzamsal bağlayıcılarını](../overview.md) kullanarak bir iOS uygulamasının nasıl oluşturulacağı ele alınmaktadır. Azure uzamsal bağlantıları, zaman içinde cihazlarda konumlarını sürekli tutan nesneleri kullanarak karma gerçeklik deneyimleri oluşturmanıza olanak sağlayan bir platformlar arası geliştirici hizmetidir. İşiniz bittiğinde, bir uzamsal bağlayıcıyı kaydedip geri çekebilmeniz için bir ARKit iOS uygulamasına sahip olacaksınız.
 
 Şunları öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Uzamsal bağlayıcılarını hesabı oluşturma
-> * Uzamsal bağlayıcılarını hesap tanımlayıcısı ve hesap anahtarını yapılandırma
-> * Dağıtma ve iOS cihazda çalıştırma
+> * Uzamsal bağlayıcı hesabı oluşturma
+> * Uzamsal Tutturucuların hesap tanımlayıcısını ve hesap anahtarını yapılandırın
+> * İOS cihazında dağıtma ve çalıştırma
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
@@ -32,19 +32,19 @@ Bu hızlı başlangıçta kullanarak bir iOS uygulaması oluşturmak nasıl etki
 
 Bu hızlı başlangıcı tamamlamak için aşağıdakileri yaptığınızdan emin olun:
 
-- Bir geliştirici etkin macOS makineyle <a href="https://geo.itunes.apple.com/us/app/xcode/id497799835?mt=12" target="_blank">Xcode 10 +</a> ve <a href="https://cocoapods.org" target="_blank">CocoaPods</a> yüklü.
-- HomeBrew yüklü Git. Tek satırlık bir Terminal içinde aşağıdaki komutu girin: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`. Ardından çalıştırın `brew install git`.
-- Etkin bir geliştirici <a href="https://developer.apple.com/documentation/arkit/verifying_device_support_and_user_permission" target="_blank">ARKit uyumlu</a> iOS cihaz.
+- En son <a href="https://geo.itunes.apple.com/us/app/xcode/id497799835?mt=12" target="_blank">Xcode</a> ve <a href="https://cocoapods.org" target="_blank">Cocoapods</a> sürümü yüklü olan MacOS makinesi özellikli bir geliştirici.
+- Git, HomeBrew aracılığıyla yüklendi. Terminalin tek bir satırına şu komutu girin: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`. Ardından `brew install git`çalıştırın.
+- Bir geliştirici, <a href="https://developer.apple.com/documentation/arkit/verifying_device_support_and_user_permission" target="_blank">ARKit uyumlu</a> bir iOS cihazını etkinleştirdi.
 
 [!INCLUDE [Create Spatial Anchors resource](../../../includes/spatial-anchors-get-started-create-resource.md)]
 
 ## <a name="open-the-sample-project"></a>Örnek projeyi açın
 
-Terminalde, aşağıdaki eylemleri gerçekleştirmek için kullanın.
+Aşağıdaki eylemleri gerçekleştirmek için terminali kullanın.
 
 [!INCLUDE [Clone Sample Repo](../../../includes/spatial-anchors-clone-sample-repository.md)]
 
-CocoaPods kullanarak gerekli pod'ların yükleyin:
+Cocoapods kullanarak gerekli Pod 'yi yükler:
 
 # <a name="swifttabopenproject-swift"></a>[Swift](#tab/openproject-swift)
 
@@ -64,9 +64,12 @@ cd ./iOS/Objective-C/
 
 ---
 
-Çalıştırma `pod install --repo-update` projenin Cocoapods'u yüklemek üzere.
+Proje için CocoaPods yüklemek üzere `pod install --repo-update` çalıştırın.
 
-Artık `.xcworkspace` xcode'da.
+Şimdi `.xcworkspace` Xcode 'da açın.
+
+> [!NOTE]
+> MacOS Catalina 'e yükselttikten sonra CocoaPod sorunları [yaşıyorsanız, sorun giderme adımlarına bakın](#cocoapods-issues-on-macos-catalina-1015) (10,15).
 
 # <a name="swifttabopenproject-swift"></a>[Swift](#tab/openproject-swift)
 
@@ -82,46 +85,58 @@ open ./SampleObjC.xcworkspace
 
 ---
 
-## <a name="configure-account-identifier-and-key"></a>Hesap Kimliği ve anahtarını yapılandırma
+## <a name="configure-account-identifier-and-key"></a>Hesap tanımlayıcıyı ve anahtarı yapılandırın
 
-Sonraki adım uygulamayı hesap tanımlayıcısı ve hesap anahtarını kullanacak şekilde yapılandırmaktır. Bir metin düzenleyiciye kopyaladığınız zaman [uzamsal bağlayıcılarını kaynağı ayarı](#create-a-spatial-anchors-resource).
+Bir sonraki adım, uygulamayı hesap tanımlayıcıyı ve hesap anahtarınızı kullanacak şekilde yapılandırmaktır. [Uzamsal Tutturucuların kaynağını ayarlarken](#create-a-spatial-anchors-resource)bunları bir metin düzenleyicisine kopyaladınız.
 
 # <a name="swifttabopenproject-swift"></a>[Swift](#tab/openproject-swift)
 
 Açık `iOS/Swift/SampleSwift/ViewControllers/BaseViewController.swift`.
 
-Bulun `spatialAnchorsAccountKey` değiştirin ve alan `Set me` ile hesap anahtarı.
+`spatialAnchorsAccountKey` alanını bulun ve `Set me` hesap anahtarıyla değiştirin.
 
-Bulun `spatialAnchorsAccountId` değiştirin ve alan `Set me` hesap tanımlayıcı ile.
+`spatialAnchorsAccountId` alanını bulun ve `Set me` hesap tanımlayıcısı ile değiştirin.
 
 # <a name="objective-ctabopenproject-objc"></a>[Objective-C](#tab/openproject-objc)
 
 Açık `iOS/Objective-C/SampleObjC/BaseViewController.m`.
 
-Bulun `SpatialAnchorsAccountKey` değiştirin ve alan `Set me` ile hesap anahtarı.
+`SpatialAnchorsAccountKey` alanını bulun ve `Set me` hesap anahtarıyla değiştirin.
 
-Bulun `SpatialAnchorsAccountId` değiştirin ve alan `Set me` hesap tanımlayıcı ile.
+`SpatialAnchorsAccountId` alanını bulun ve `Set me` hesap tanımlayıcısı ile değiştirin.
 
 ---
 
-## <a name="deploy-the-app-to-your-ios-device"></a>İOS cihazınıza uygulaması dağıtma
+## <a name="deploy-the-app-to-your-ios-device"></a>Uygulamayı iOS cihazınıza dağıtma
 
-İOS cihazı ayarlama ve Mac bağlayın **etkin düzeni** iOS cihazınıza.
+İOS cihazını Mac 'e bağlayın ve **etkin düzeni** iOS cihazınıza ayarlayın.
 
 ![Cihazı seçin](./media/get-started-ios/select-device.png)
 
-Seçin **oluşturun ve ardından geçerli düzenini çalıştırın**.
+**Oluştur ' u seçin ve ardından geçerli düzeni çalıştırın**.
 
-![Dağıtma ve çalıştırma](./media/get-started-ios/deploy-run.png)
+![Dağıt ve Çalıştır](./media/get-started-ios/deploy-run.png)
 
 > [!NOTE]
-> Görürseniz bir `library not found for -lPods-SampleObjC` hata büyük olasılıkla açtığınız `.xcodeproj` yerine dosya `.xcworkspace`. Açık `.xcworkspace` ve yeniden deneyin.
+> `library not found for -lPods-SampleObjC` bir hata görürseniz, büyük olasılıkla `.xcworkspace`yerine `.xcodeproj` dosyasını açtınız. `.xcworkspace` açın ve yeniden deneyin.
 
-Xcode içindeki tuşlarına basarak uygulamayı durdurun **Durdur**.
+Xcode 'da **Durdur**' a basarak uygulamayı durdurun.
+
+## <a name="troubleshooting"></a>Sorun giderme
+
+### <a name="cocoapods-issues-on-macos-catalina-1015"></a>MacOS Catalina CocoaPods sorunlar (10,15)
+
+Yakın zamanda macOS Catalina (10,15) ' e güncelleştirdiyseniz ve önceden CocoaPods yüklüyse, CocoaPods bozuk bir durumda olabilir ve dizin ve `.xcworkspace` proje dosyalarınızı düzgün şekilde yapılandıramadı. Bu sorunu çözmek için aşağıdaki komutları çalıştırarak CocoaPods öğesini yeniden yüklemeniz gerekir:
+
+```shell
+brew update
+brew install cocoapods --build-from-source
+brew link --overwrite cocoapods
+```
 
 [!INCLUDE [Clean-up section](../../../includes/clean-up-section-portal.md)]
 
 [!INCLUDE [Next steps](../../../includes/spatial-anchors-quickstarts-nextsteps.md)]
 
 > [!div class="nextstepaction"]
-> [Öğretici: Cihazlar arasında paylaşımı uzamsal yer işaretleri](../tutorials/tutorial-share-anchors-across-devices.md)
+> [Öğretici: cihazlarda uzamsal bağlayıcıları paylaşma](../tutorials/tutorial-share-anchors-across-devices.md)

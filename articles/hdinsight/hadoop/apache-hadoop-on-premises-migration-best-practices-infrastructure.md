@@ -1,108 +1,108 @@
 ---
-title: Azure HDInsight - altyapı en iyi uygulamaları şirket içi Apache Hadoop kümelerini geçirme
-description: Azure HDInsight için geçirme şirket içi Hadoop kümeleri için en iyi altyapı öğrenin.
+title: "Altyapı: şirket içi Apache Hadoop Azure HDInsight 'a"
+description: Şirket içi Hadoop kümelerini Azure HDInsight 'a geçirmek için en iyi altyapı uygulamalarını öğrenin.
 author: hrasheed-msft
-ms.reviewer: jasonwhowell
+ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
-ms.date: 04/05/2019
+ms.date: 09/04/2019
 ms.author: hrasheed
-ms.openlocfilehash: 5bdd5049b7ddeaac4425734aa6f4d633b08cd3b4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: adc0e5f5eef41dcb1f826ffbf0cfe91a937fac01
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67057482"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73499227"
 ---
-# <a name="migrate-on-premises-apache-hadoop-clusters-to-azure-hdinsight---infrastructure-best-practices"></a>Azure HDInsight - altyapı en iyi uygulamaları şirket içi Apache Hadoop kümelerini geçirme
+# <a name="migrate-on-premises-apache-hadoop-clusters-to-azure-hdinsight---infrastructure-best-practices"></a>Şirket içi Apache Hadoop kümelerini Azure HDInsight 'a geçirme-altyapı en iyi yöntemleri
 
-Bu makalede, Azure HDInsight kümelerinin altyapının yönetilmesi için öneriler sunar. Geçirme şirket içi Apache Hadoop sistemler ile Azure HDInsight için yardımcı olması için en iyi yöntemler sağlayan bir dizi gereksinimlerimizim bir parçasıdır.
+Bu makale, Azure HDInsight kümelerinin altyapısını yönetmeye yönelik öneriler sağlar. Şirket içi Apache Hadoop sistemlerini Azure HDInsight 'a geçirmeye yardımcı olmak için en iyi uygulamaları sağlayan bir serinin bir parçasıdır.
 
-## <a name="plan-for-hdinsight-cluster-capacity"></a>HDInsight küme kapasitesi planlama
+## <a name="plan-for-hdinsight-cluster-capacity"></a>HDInsight kümesi kapasitesini planlayın
 
-HDInsight küme kapasitesi planlama yapmak için temel seçenekler şunlardır:
+HDInsight kümesi kapasite planlaması için yapılacak temel seçimler şunlardır:
 
-- **Bir bölge seçin** -Azure bölgesi belirler burada küme fiziksel olarak sağlanır. Küme okuma ve yazma gecikme süresini en aza indirmek için verilerin aynı bölgede olmalıdır.
-- **Depolama konumu ve boyutu seçmek** -varsayılan depolama alanı kümeyle aynı bölgede olması gerekir. 48 düğümlü bir küme için 4-8 depolama hesabınızın olması önerilir. Yeterli toplam depolama alanı zaten olabilir ancak her depolama hesabı, işlem düğümleri için ek ağ bant genişliği sağlar. Birden çok depolama hesabında olduğunda, bir önek olmayan her bir depolama hesabı için rastgele bir ad kullanın. Rastgele adlandırma amacı dışında tüm hesaplarda (azaltma) depolama performans sorunlarını veya ortak modu hataları olasılığını azaltır. Daha iyi performans için depolama hesabı başına yalnızca bir kapsayıcı kullanın.
-- **Türü (G serisi şimdi destekler) ve VM boyutu seçin** - düğüm türleri kümesi her küme türü vardır ve her düğüm türü, VM boyutunu ve türünü belirli seçenekler içerir. VM boyutunu ve türünü CPU işleme güç, RAM boyutu ve ağ gecikmesi tarafından belirlenir. Sanal bir iş yükü, en iyi VM boyutu ve her düğüm türü için türü belirlemek için kullanılabilir.
-- **Çalışan düğümlerinin sayısını seçin** -sanal iş yükleri kullanarak ilk çalışan düğümü sayısı belirlenebilir. Küme, yoğun yük taleplerini karşılamak üzere daha fazla alt düğüm ekleyerek daha sonra ölçeklendirilebilir. Küme, daha sonra geri ek çalışan düğümleri gerekli olmadığında ölçeklendirilebilir.
+- **Bölgeyi seçin** -Azure bölgesi, kümenin fiziksel olarak sağlandığını belirler. Okuma ve yazma gecikmesini en aza indirmek için, kümenin verilerle aynı bölgede olması gerekir.
+- **Depolama konumu ve boyutunu seçin** -varsayılan depolama, kümeyle aynı bölgede olmalıdır. 48 düğümlü bir küme için 4 ile 8 arasında depolama hesabı olması önerilir. Toplam depolama alanı zaten yeterli olabilir, ancak her depolama hesabı işlem düğümleri için ek ağ bant genişliği sağlar. Birden çok depolama hesabı olduğunda, ön ek olmadan her depolama hesabı için rastgele bir ad kullanın. Rastgele adlandırma amacı, tüm hesaplarda depolama performans sorunlarını (azaltma) veya genel modlu hataların olasılığını azaltmaktadır. Daha iyi performans için, depolama hesabı başına yalnızca bir kapsayıcı kullanın.
+- **VM boyutunu ve türünü seçin (artık G-serisini destekler)** -her küme türünün bir düğüm türleri kümesi vardır ve her düğüm türü, sanal makine boyutu ve türleri için özel seçeneklere sahiptir. VM boyutu ve türü, CPU işleme gücü, RAM boyutu ve ağ gecikmesi tarafından belirlenir. Sanal bir iş yükü, her düğüm türü için en iyi VM boyutunu ve türünü tespit etmek üzere kullanılabilir.
+- **Çalışan düğümü sayısını seçin** -sanal iş yükleri kullanılarak ilk çalışan düğüm sayısı belirlenebilir. Küme, en yüksek yük taleplerini karşılamak için daha fazla çalışan düğümü eklenerek daha sonra ölçeklendirilebilir. Daha sonra ek çalışan düğümleri gerekli olmadığında küme daha sonra yeniden ölçeklendirilebilir.
 
-Daha fazla bilgi için bkz [HDInsight kümeleri için kapasite planlaması](../hdinsight-capacity-planning.md).
+Daha fazla bilgi için bkz. [HDInsight kümeleri Için kapasite planlaması](../hdinsight-capacity-planning.md).
 
-## <a name="use-recommended-virtual-machine-type-for-cluster"></a>Küme için önerilen sanal makine türünü kullanın
+## <a name="use-recommended-virtual-machine-type-for-cluster"></a>Küme için önerilen sanal makine türünü kullan
 
-Bkz: [varsayılan küme düğümü yapılandırması ve sanal makine boyutları](../hdinsight-component-versioning.md#default-node-configuration-and-virtual-machine-sizes-for-clusters) için önerilen sanal makine türleri için HDInsight kümesi her türü.
+Her HDInsight kümesi türü için önerilen sanal makine türlerine yönelik [kümeler için bkz. varsayılan düğüm yapılandırması ve sanal makine boyutları](../hdinsight-component-versioning.md#default-node-configuration-and-virtual-machine-sizes-for-clusters) .
 
-## <a name="check-hadoop-components-availability-in-hdinsight"></a>HDInsight Hadoop bileşenlerinin kullanılabilirliğini denetleyin
+## <a name="check-hadoop-components-availability-in-hdinsight"></a>HDInsight 'ta Hadoop bileşenleri kullanılabilirliğini denetleme
 
-Her bir HDInsight sürüm ekonomik sistem bileşenleri Hadoop kümesinin bulut dağıtımıdır. Bkz: [HDInsight bileşen sürümü oluşturma](../hdinsight-component-versioning.md) tüm HDInsight bileşenleri ve bunların geçerli sürümleri hakkında ayrıntılı bilgi için.
+Her HDInsight sürümü, bir Hadoop ekonomik sistem bileşenleri kümesinin bulut dağıtımıdır. Tüm HDInsight bileşenleri ve bunların geçerli sürümleri hakkında ayrıntılı bilgi için bkz. [HDInsight bileşen sürümü oluşturma](../hdinsight-component-versioning.md) .
 
-Hadoop bileşenleri ve HDInsight sürümleri denetlemek için Apache Ambari UI veya Ambari REST API de kullanabilirsiniz.
+Ayrıca, HDInsight 'taki Hadoop bileşenlerini ve sürümlerini denetlemek için Apache ambarı Kullanıcı arabirimi veya ambarı REST API de kullanabilirsiniz.
 
-Uygulamaları veya bileşenleri, şirket içi kümeleri kullanılabilir ancak HDInsight kümelerinin parçası olmayan kenar düğümünde veya bir VM'de aynı sanal ağda HDInsight kümesi olarak eklenebilir. Azure HDInsight üzerinde kullanılabilir değil bir üçüncü taraf Hadoop uygulamasını, HDInsight kümesinde "Uygulamalar" seçeneğini kullanarak yüklenebilir. Özel Hadoop uygulamaları "betik eylemleri" kullanarak HDInsight kümesine yüklenebilir. Aşağıdaki tabloda bazı ortak uygulamalar ve kendi HDInsight tümleştirme seçenekleri yer almaktadır:
+Şirket içi kümelerde bulunan ancak HDInsight kümelerinin bir parçası olmayan uygulamalar veya bileşenler, bir kenar düğümüne veya HDInsight kümesiyle aynı VNet 'teki bir sanal makineye eklenebilir. Azure HDInsight üzerinde kullanılamayan bir üçüncü taraf Hadoop uygulaması, HDInsight kümesindeki "uygulamalar" seçeneği kullanılarak yüklenebilir. Özel Hadoop uygulamaları, HDInsight kümesine "betik eylemleri" kullanılarak yüklenebilir. Aşağıdaki tabloda bazı ortak uygulamalar ve bunların HDInsight tümleştirme seçenekleri listelenmektedir:
 
-|**Uygulama**|**Tümleştirme**
+|**Uygulamanızı**|**Tümleştirme**
 |---|---|
-|Hava akışı|Kenar düğümüne Iaas ya da HDInsight
-|Alluxio|IaaS  
+|Airflow|IaaS veya HDInsight Edge düğümü
+|Alluxıo|IaaS  
 |Arcadia|IaaS 
 |Atlas|Hiçbiri (yalnızca HDP)
-|Datameer|HDInsight kenar düğümüne
-|Datastax (Cassandra)|Iaas (CosmosDB alternatif azure'da)
-|DataTorrent|IaaS 
+|Datameer|HDInsight Edge düğümü
+|DataStax (Cassandra)|IaaS (CosmosDB Azure üzerinde alternatif)
+|Veri Toruya|IaaS 
 |Drill|IaaS 
 |Ignite|IaaS
-|Jethro|IaaS 
-|Mapador|IaaS 
-|Mongo|Iaas (CosmosDB alternatif azure'da)
+|Jetro dili|IaaS 
+|Mapaçi|IaaS 
+|Mongo|IaaS (CosmosDB Azure üzerinde alternatif)
 |NiFi|IaaS 
-|Presto|Kenar düğümüne Iaas ya da HDInsight
+|Presto|IaaS veya HDInsight Edge düğümü
 |Python 2|PaaS 
 |Python 3|PaaS 
 |R|PaaS 
-|SAS|IaaS 
-|Vertica|Iaas (SQLDW alternatif azure'da)
+|'LARıNıN|IaaS 
+|Vertica|IaaS (Azure 'da SQLDW bir alternatif)
 |Tableau|IaaS 
-|Waterline|HDInsight kenar düğümüne
-|StreamSets|HDInsight edge 
-|Palantir|IaaS 
-|Sailpoint|Iaas 
+|Su çizgisi|HDInsight Edge düğümü
+|StreamSets|HDInsight Edge 
+|Palanyapıştır|IaaS 
+|Sailpoint|IaaS 
 
-Daha fazla bilgi için bkz [farklı HDInsight sürümlerle kullanılabilir olan Apache Hadoop bileşenleri](../hdinsight-component-versioning.md#apache-hadoop-components-available-with-different-hdinsight-versions)
+Daha fazla bilgi için, [farklı HDInsight sürümleriyle kullanılabilen bileşenler Apache Hadoop](../hdinsight-component-versioning.md#apache-hadoop-components-available-with-different-hdinsight-versions) makalesine bakın
 
-## <a name="customize-hdinsight-clusters-using-script-actions"></a>Komut dosyası Eylemleri'ni kullanarak HDInsight kümelerini özelleştirin
+## <a name="customize-hdinsight-clusters-using-script-actions"></a>Betik eylemlerini kullanarak HDInsight kümelerini özelleştirme
 
-HDInsight, küme yapılandırmasının adlı bir yöntem sağlar bir **betik eylemi**. Betik eylemi, bir HDInsight kümesindeki düğümler üzerinde çalışan ve ek bileşenler yükleme ve yapılandırma ayarlarını değiştirmek için kullanılan Bash komut dosyasıdır.
+HDInsight, bir **betik eylemi**olarak adlandırılan bir küme yapılandırması yöntemi sağlar. Bir betik eylemi, HDInsight kümesindeki düğümlerde çalıştırılan ve ek bileşenleri yüklemek ve yapılandırma ayarlarını değiştirmek için kullanılabilir olan Bash betiğiyle çalışır.
 
-Betik eylemleri, HDInsight kümesinden erişilebilir bir URI üzerinde depolanmalıdır. Bunlar, küme oluşturma sırasında veya sonrasında kullanılabilir ve yalnızca belirli düğüm türleri üzerinde çalıştırmak için kısıtlı olabilir.
+Betik eylemleri, HDInsight kümesinden erişilebilen bir URI üzerinde depolanmalıdır. Bunlar, küme oluşturma sırasında veya sonrasında kullanılabilir ve yalnızca belirli düğüm türlerinde çalışacak şekilde kısıtlanabilir.
 
-Betik kalıcı veya bir kez yürütülür. Kalıcı duruma getirilmiş betiklerin küme işlemleri ölçeklendirme aracılığıyla eklenen yeni çalışan düğümlerindeki özelleştirmek için kullanılır. Ölçeklendirme işlemlerini gerçekleştiğinde kalıcı bir betik gibi bir baş düğüm, başka bir düğüm türü için değişiklikleri de uygulanabilir.
+Betik kalıcı olabilir veya bir kez çalıştırılabilir. Kalıcı betikler, ölçek işlemleri aracılığıyla kümeye eklenen yeni çalışan düğümlerini özelleştirmek için kullanılır. Kalıcı bir betik, ölçeklendirme işlemleri gerçekleştiğinde baş düğüm gibi başka bir düğüm türüne değişiklikler de uygulayabilir.
 
-HDInsight, HDInsight kümelerinde aşağıdaki bileşenleri yüklemek için önceden yazılmış betik sağlar:
+HDInsight, HDInsight kümelerine aşağıdaki bileşenleri yüklemek için önceden yazılmış betikler sağlar:
 
-- Bir Azure depolama hesabı ekleme
+- Azure depolama hesabı ekleme
 - Hue yükleme
-- Presto yükleme
-- Solr yükleme
-- Giraph yükleme
-- Hive kitaplıklarını önceden yükleme
+- Presto 'A Install
+- Solr 'yi yükler
+- Giraph 'yi yükler
+- Hive kitaplıklarını önceden yükle
 - Mono’yu yükleme veya güncelleştirme
 
 > [!Note]  
-> HDInsight, özel hadoop bileşenleri veya betik eylemleri kullanılarak yüklenen bileşenler için doğrudan destek sağlamaz.
+> HDInsight, özel Hadoop bileşenleri veya betik eylemleri kullanılarak yüklenen bileşenler için doğrudan destek sağlamaz.
 
-Betik eylemleri, bir HDInsight uygulaması olarak Azure Marketi'nde ayrıca yayımlanabilir.
+Betik eylemleri, Azure Marketi 'Nde de HDInsight uygulaması olarak yayımlanabilir.
 
 Daha fazla bilgi için aşağıdaki makalelere bakın:
 
-- [HDInsight üzerinde üçüncü taraf Apache Hadoop uygulamaları yükleme](../hdinsight-apps-install-applications.md)
-- [Komut dosyası Eylemleri'ni kullanarak HDInsight kümelerini özelleştirin](../hdinsight-hadoop-customize-cluster-linux.md)
-- [Bir HDInsight uygulaması Azure Market'te yayımlama](../hdinsight-apps-publish-applications.md)
+- [HDInsight 'a üçüncü taraf Apache Hadoop uygulamalarını yükler](../hdinsight-apps-install-applications.md)
+- [Betik eylemlerini kullanarak HDInsight kümelerini özelleştirme](../hdinsight-hadoop-customize-cluster-linux.md)
+- [Azure Marketi 'nde HDInsight uygulaması yayımlama](../hdinsight-apps-publish-applications.md)
 
-## <a name="customize-hdinsight-configs-using-bootstrap"></a>Bootstrap ile HDInsight yapılandırmaları özelleştirme
+## <a name="customize-hdinsight-configs-using-bootstrap"></a>Önyükleme kullanarak HDInsight yapılandırmalarını özelleştirme
 
-Yapılandırma dosyalarında yapılandırmaları gibi değişikliklerini `core-site.xml`, `hive-site.xml` ve `oozie-env.xml` Bootstrap ile yapılabilir. Aşağıdaki betiği Powershell kullanarak bir örnektir [AZ modül](https://docs.microsoft.com/powershell/azure/new-azureps-module-az) cmdlet'i [yeni AzHDInsightClusterConfig](https://docs.microsoft.com/powershell/module/az.hdinsight/new-azhdinsightcluster):
+`core-site.xml`, `hive-site.xml` ve `oozie-env.xml` gibi yapılandırma dosyalarındaki kurulumunun değişiklikleri önyükleme kullanılarak yapılabilir. Aşağıdaki betik, PowerShell [az Module](https://docs.microsoft.com/powershell/azure/new-azureps-module-az) cmdlet [New-AzHDInsightClusterConfig](https://docs.microsoft.com/powershell/module/az.hdinsight/new-azhdinsightcluster)kullanarak bir örnektir:
 
 ```powershell
 # hive-site.xml configuration
@@ -127,70 +127,70 @@ New—AzHDInsightCluster `
     —Config $config
 ```
 
-Daha fazla bilgi için bkz [özelleştirme HDInsight kümeleri Bootstrap ile](../hdinsight-hadoop-customize-cluster-bootstrap.md).  Ayrıca bkz [yönetme HDInsight kümeleri Apache Ambari REST API'yi kullanarak](../hdinsight-hadoop-manage-ambari-rest-api.md).
+Daha fazla bilgi için bkz. [önyükleme kullanarak HDInsight kümelerini özelleştirme](../hdinsight-hadoop-customize-cluster-bootstrap.md)makalesi.  Ayrıca bkz. [Apache ambarı REST API kullanarak HDInsight kümelerini yönetme](../hdinsight-hadoop-manage-ambari-rest-api.md).
 
-## <a name="access-client-tools-from-hdinsight-hadoop-cluster-edge-nodes"></a>Erişim istemci araçlarından HDInsight Hadoop küme kenar düğümleri
+## <a name="access-client-tools-from-hdinsight-hadoop-cluster-edge-nodes"></a>HDInsight Hadoop kümesi kenar düğümlerinden istemci araçlarına erişme
 
-Bir Linux sanal makinesi ile aynı istemci araçları yüklenir ve baş düğümleri olarak yapılandırılır, ancak hiçbir Hadoop Hizmetleri çalıştıran bir boş kenar düğümüdür. Kenar düğümüne aşağıdaki amaçlarla kullanılabilir:
+Boş bir Edge düğümü, aynı istemci araçları yüklü ve baş düğümlerde olarak yapılandırılmış, ancak hiçbir Hadoop hizmeti çalıştırmayan bir Linux sanal makinedir. Edge düğümü aşağıdaki amaçlarla kullanılabilir:
 
-- Küme erişme
+- kümeye erişme
 - istemci uygulamalarını test etme
 - istemci uygulamaları barındırma
 
-Kenar düğümleri oluşturulabilir ve Azure portalı üzerinden silinmesi sırasında kullanılabilir ve sonra oluşturma küme. Kenar düğümüne oluşturulduktan sonra kenar düğümüne SSH kullanarak bağlanma ve HDInsight Hadoop kümesinde erişmek için İstemci Araçları'nı çalıştırın. Kenar düğümünün ssh uç noktası olan `<EdgeNodeName>.<ClusterName>-ssh.azurehdinsight.net:22`.
+Edge düğümleri Azure portal ile oluşturulup silinebilir ve küme oluşturma sırasında veya sonrasında kullanılabilir. Edge düğümü oluşturulduktan sonra, SSH kullanarak kenar düğümüne bağlanabilir ve HDInsight 'ta Hadoop kümesine erişmek için istemci araçlarını çalıştırabilirsiniz. Edge düğümü SSH uç noktası `<EdgeNodeName>.<ClusterName>-ssh.azurehdinsight.net:22`.
 
 
-Daha fazla bilgi için bkz [HDInsight, Apache Hadoop kümelerinde boş kenar düğümlerini kullanma](../hdinsight-apps-use-edge-node.md).
+Daha fazla bilgi için bkz. [HDInsight 'ta Apache Hadoop kümelerinde boş kenar düğümlerini kullanma](../hdinsight-apps-use-edge-node.md).
 
 
-## <a name="use-scale-up-and-scale-down-feature-of-clusters"></a>Küme ölçek büyütme ve ölçek azaltma özelliğini kullanın
+## <a name="use-scale-up-and-scale-down-feature-of-clusters"></a>Kümelerin ölçek genişletme ve genişleme özelliğini kullanma
 
-HDInsight, ölçeğini ve, kümede çalışan düğümleri sayısını ölçeğini seçeneği vererek esneklik sağlar. Bu özellik, bir küme saat sonra veya hafta sonu Daralt ve en yüksek iş gereksinimlerini sırasında genişletmek verir. Daha fazla bilgi için bkz.
+HDInsight, kümelerinizdeki çalışan düğümlerinin sayısını artırma ve azaltma seçeneği sunarak esneklik sağlar. Bu özellik, bir kümeyi saat veya hafta sonları ile küçültmenize ve yoğun iş talepleri sırasında genişletmenize olanak sağlar. Daha fazla bilgi için bkz.
 
-* [HDInsight kümeleri ölçeklendirme](../hdinsight-scaling-best-practices.md).
-* [Ölçek kümeleri](../hdinsight-administer-use-portal-linux.md#scale-clusters).
+* [HDInsight kümelerini ölçeklendirin](../hdinsight-scaling-best-practices.md).
+* [Kümeleri ölçeklendirin](../hdinsight-administer-use-portal-linux.md#scale-clusters).
 
-## <a name="use-hdinsight-with-azure-virtual-network"></a>HDInsight ile Azure sanal ağı kullanma
+## <a name="use-hdinsight-with-azure-virtual-network"></a>Azure sanal ağı ile HDInsight kullanma
 
-Azure kaynakları gibi Azure birbiriyle, İnternet'e güvenli şekilde iletişim kurması için sanal makineler, Azure sanal ağları etkinleştirebilir ve şirket içi ağlarda, filtrelemesini ve yönlendirmesini ağ trafiği.
+Azure sanal ağları, ağ trafiğini filtreleyerek ve yönlendirerek, Azure sanal makineleri gibi Azure kaynaklarının birbirleriyle, internet ve şirket içi ağlarla güvenli bir şekilde iletişim kurmasını sağlar.
 
-HDInsight ile Azure sanal ağ kullanarak aşağıdaki senaryolar sağlar:
+Azure sanal ağını HDInsight ile kullanmak aşağıdaki senaryoları sunar:
 
-- HDInsight için bir şirket içi ağdan doğrudan bağlanma.
-- HDInsight verilerine bağlantı kurma, bir Azure sanal ağında depolar.
-- Doğrudan internet üzerinden genel olarak kullanılamayan Hadoop hizmetlerine erişme. Örneğin, Kafka API'lerin veya HBase Java API'si.
+- HDInsight 'a doğrudan şirket içi ağdan bağlanma.
+- HDInsight 'ı bir Azure sanal ağındaki veri depolarına bağlama.
+- Internet üzerinden genel kullanıma açık olmayan Hadoop hizmetlerine doğrudan erişme. Örneğin, Kafka API 'Leri veya HBase Java API 'SI.
 
-HDInsight, ya da yeni veya var olan Azure sanal ağa eklenebilir. HDInsight, mevcut bir sanal ağa ekleniyor, var olan ağ güvenlik grupları ve kullanıcı tanımlı yollar Kısıtlanmamış erişime izin vermek için güncelleştirilmesi gereken [birden fazla IP adresi](../hdinsight-extend-hadoop-virtual-network.md#hdinsight-ip) Azure veri merkezi. Ayrıca, trafiği engellemediğinizden emin [bağlantı noktaları](../hdinsight-extend-hadoop-virtual-network.md#hdinsight-ports), HDInsight Hizmetleri tarafından kullanılan.
+HDInsight, yeni veya mevcut bir Azure sanal ağına eklenebilir. HDInsight var olan bir sanal ağa eklenirse, mevcut ağ güvenlik gruplarının ve Kullanıcı tanımlı yolların, Azure veri merkezi 'nde [bırkaç IP adresine](../hdinsight-management-ip-addresses.md) sınırsız erişime izin verecek şekilde güncelleştirilmeleri gerekir. Ayrıca, HDInsight Hizmetleri tarafından kullanılan [bağlantı noktalarında](../hdinsight-plan-virtual-network-deployment.md#hdinsight-ports)trafiği engellemediğinizden emin olun.
 
 > [!Note]  
-> HDInsight, zorlamalı tünel şu anda desteklemiyor. Zorlamalı tünel, giden Internet trafiği İnceleme için bir cihaz için zorlayan bir alt ağ ayarı ve günlük kaydı değildir. Zorlamalı tünel bir alt ağa HDInsight'ı yüklemeden önce kaldırın ya da HDInsight için yeni bir alt ağ oluşturun. HDInsight, giden ağ bağlantısını kısıtlama da desteklemez.
+> HDInsight Şu anda zorlamalı tüneli desteklemiyor. Zorlamalı tünel, gelen Internet trafiğini İnceleme ve günlüğe kaydetme amacıyla bir cihaza zorlayan bir alt ağ ayarıdır. HDInsight 'ı bir alt ağa yüklemeden önce zorlamalı tüneli kaldırın veya HDInsight için yeni bir alt ağ oluşturun. HDInsight, giden ağ bağlantısının kısıtlanması de desteklemez.
 
 Daha fazla bilgi için aşağıdaki makalelere bakın:
 
-- [Azure sanal-ağ-genel bakış](../../virtual-network/virtual-networks-overview.md)
-- [Bir Azure sanal ağı kullanarak Azure Hdınsight genişletme](../hdinsight-extend-hadoop-virtual-network.md)
+- [Azure sanal ağları-genel bakış](../../virtual-network/virtual-networks-overview.md)
+- [Azure Sanal Ağını kullanarak Azure HDInsight kapsamını genişletme](../hdinsight-plan-virtual-network-deployment.md)
 
-## <a name="securely-connect-to-azure-services-with-azure-virtual-network-service-endpoints"></a>Azure Hizmetleri Azure sanal ağ hizmet uç noktaları ile güvenli bir şekilde bağlanma
+## <a name="securely-connect-to-azure-services-with-azure-virtual-network-service-endpoints"></a>Azure sanal ağ hizmet uç noktaları ile Azure hizmetlerine güvenli bir şekilde bağlanma
 
-HDInsight'ı destekleyen [sanal ağ hizmet uç noktaları](../../virtual-network/virtual-network-service-endpoints-overview.md), güvenli bir şekilde Azure Blob Depolama, Azure Data Lake depolama Gen2, Cosmos DB ve SQL veritabanlarına bağlanmak sağlar. Trafik, Azure HDInsight için bir hizmet uç noktası etkinleştirildiğinde, Azure veri merkezinde bir güvenli rotadaki aracılığıyla akar. Bu gelişmiş düzeyde güvenlik ağ katmanında ile büyük veri depolama hesapları, belirtilen sanal ağlar (Vnet'ler) kilitleme ve yine de HDInsight kümeleri sorunsuz bir şekilde erişmek ve bu verileri işlemek için kullanın.
+HDInsight, Azure Blob depolama, Azure Data Lake Storage 2., Cosmos DB ve SQL veritabanlarına güvenli bir şekilde bağlanmanıza olanak tanıyan [sanal ağ hizmet uç noktalarını](../../virtual-network/virtual-network-service-endpoints-overview.md)destekler. Azure HDInsight için bir hizmet uç noktası etkinleştirerek trafik, Azure veri merkezi içinden güvenli bir yol üzerinden akar. Ağ katmanında bu gelişmiş güvenlik düzeyiyle, büyük veri depolama hesaplarını belirtilen sanal ağlarına (VNet 'ler) kilitleyebilir ve bu verilere erişmek ve onları işlemek için HDInsight kümelerini sorunsuz bir şekilde kullanmaya devam edebilirsiniz.
 
 Daha fazla bilgi için aşağıdaki makalelere bakın:
 
 - [Sanal ağ hizmet uç noktaları](../../virtual-network/virtual-network-service-endpoints-overview.md)
-- [Hizmet uç noktaları ile HDInsight güvenliğini artırın](https://azure.microsoft.com/blog/enhance-hdinsight-security-with-service-endpoints/)
+- [Hizmet uç noktaları ile HDInsight güvenliğini geliştirme](https://azure.microsoft.com/blog/enhance-hdinsight-security-with-service-endpoints/)
 
-## <a name="connect-hdinsight-to-the-on-premises-network"></a>HDInsight şirket içi ağa bağlanma
+## <a name="connect-hdinsight-to-the-on-premises-network"></a>HDInsight 'ı şirket içi ağa bağlama
 
-HDInsight, Azure sanal ağları ve VPN ağ geçidi kullanarak şirket içi ağa bağlanabilir. Aşağıdaki adımlar, bağlantı kurmak için kullanılabilir:
+HDInsight, Azure sanal ağları ve bir VPN ağ geçidi kullanarak şirket içi ağa bağlanabilir. Aşağıdaki adımlar bağlantı kurmak için kullanılabilir:
 
-- Azure sanal ağında şirket içi ağ bağlantısı olan HDInsight'ı kullanın.
-- DNS ad çözümlemesi, şirket içi ağ ve sanal ağ arasında yapılandırın.
-- Ağ güvenlik grupları veya kullanıcı tanımlı yollar (UDR) ağ trafiğinizi denetlemek için yapılandırın.
+- Şirket içi ağa bağlantısı olan bir Azure sanal ağında HDInsight kullanın.
+- Sanal ağ ile şirket içi ağ arasında DNS ad çözümlemesini yapılandırın.
+- Ağ trafiğini denetlemek için ağ güvenlik gruplarını veya Kullanıcı tanımlı yolları (UDR) yapılandırın.
 
-Daha fazla bilgi için bkz [HDInsight'ı şirket içi ağınıza bağlama](../connect-on-premises-network.md)
+Daha fazla bilgi için bkz. [HDInsight 'ı şirket içi ağınıza bağlama](../connect-on-premises-network.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu serideki sonraki makaleyi okuyun:
+Bu serideki bir sonraki makaleyi okuyun:
 
-- [Şirket içi-Azure HDInsight Hadoop geçiş için en iyi depolama](apache-hadoop-on-premises-migration-best-practices-storage.md)
+- [Azure HDInsight Hadoop geçiş için şirket içi depolama için en iyi uygulamalar](apache-hadoop-on-premises-migration-best-practices-storage.md)

@@ -1,117 +1,112 @@
 ---
-title: Azure Application Insights uyarıları ayarlamak | Microsoft Docs
-description: Yavaş yanıt süreleri, özel durumlar ve diğer performans veya kullanımı ile ilgili değişiklikleri web uygulamanıza ilgili bildirim alın.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.reviewer: lagayhar
-ms.assetid: f8ebde72-f819-4ba5-afa2-31dbd49509a5
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights uyarı ayarlama | Microsoft Docs
+description: Web uygulamanızda yavaş yanıt süreleri, özel durumlar ve diğer performans veya kullanım değişiklikleri hakkında bildirim alın.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 01/23/2019
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: eb8e98f66d000290ce7eb07d3d73e82fbc43514a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 01/23/2019
+ms.reviewer: lagayhar
+ms.openlocfilehash: a21e2676d1b03472c58e2f95095a1a59d00b16be
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60693515"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72678400"
 ---
-# <a name="set-alerts-in-application-insights"></a>Uygulama anlayışları'nda uyarılar ayarlayın
-[Azure Application Insights] [ start] web uygulamanızdaki performansı ya da kullanım ölçümleri değişikliklere uyarabilir. 
+# <a name="set-alerts-in-application-insights"></a>Application Insights uyarıları ayarlama
+[Azure Application Insights][start] , Web uygulamanızdaki performans veya kullanım ölçümlerinde değişiklikler yapmak için sizi uyarır. 
 
-Application Insights hakkında Canlı uygulamanızı izler bir [çeşitli platformlarda] [ platforms] performans sorunlarını tanılama ve kullanım biçimlerini anlamanıza yardımcı olacak.
+Application Insights, performans sorunlarını tanılamanıza ve kullanım düzenlerini anlamanıza yardımcı olmak üzere [çok çeşitli platformlarda][platforms] canlı uygulamanızı izler.
 
 Birden çok uyarı türü vardır:
 
-* [**Ölçüm uyarıları** ](../../azure-monitor/platform/alerts-metric-overview.md) ne zaman bir ölçüm - yanıt süreleri, özel durum sayısı, CPU kullanımı veya sayfa görüntüleme gibi belirli bir süre boyunca eşik değerini aştığında size söyler.
-* [**Günlük uyarıları** ](../../azure-monitor/platform/alerts-unified-log.md) uyarılar açıklamak için uyarı sinyali özel Kusto sorgu burada temelli kullanılır.
-* [**Web testleri** ] [ availability] sitenizi yavaş internet üzerindeki kullanılamıyor veya yanıt olduğunda söyleyin. [Daha fazla bilgi edinin][availability].
-* [**Proaktif tanılama** ](../../azure-monitor/app/proactive-diagnostics.md) olağan dışı performans desenler hakkında bilgilendirmek için otomatik olarak yapılandırılır.
+* [**Ölçüm uyarıları**](../../azure-monitor/platform/alerts-metric-overview.md) , bir ölçüm bir dönem için yanıt süreleri, özel durum sayısı, CPU kullanımı veya sayfa görünümleri gibi bir eşik değeri kesiştiği zaman size bildirir.
+* [**Günlük uyarıları**](../../azure-monitor/platform/alerts-unified-log.md) , uyarı sinyalinin özel bir kusto sorgusuna dayalı olduğu uyarıları anlatmak için kullanılır.
+* [**Web testleri**][availability] siteniz Internet 'te kullanılamadığında veya yavaş yanıt vermeyi bildirir. [Daha fazla bilgi edinin][availability].
+* [**Proaktif Tanılamalar**](../../azure-monitor/app/proactive-diagnostics.md) , olağan dışı performans desenleri hakkında sizi bilgilendirmek üzere otomatik olarak yapılandırılır.
 
-## <a name="set-a-metric-alert"></a>Ölçüm uyarısı ayarlama
+## <a name="set-a-metric-alert"></a>Ölçüm uyarısı ayarla
 Uyarı kuralları sekmesini açın ve ardından Ekle düğmesini kullanın.
 
-![Uyarı kuralları sekmesinde, ekleme uyarısı seçin. Uygulamanızı, ölçün, uyarı için bir ad girin ve bir ölçüm seçin için kaynak olarak ayarlayın.](./media/alerts/01-set-metric.png)
+![Uyarı kuralları sekmesinde, uyarı Ekle ' yi seçin. Uygulamanızı ölçülecek kaynak olarak ayarlayın, uyarı için bir ad sağlayın ve bir ölçüm seçin.](./media/alerts/01-set-metric.png)
 
-* Kaynak önce diğer özelliklerini ayarlayın. **"(Bileşenler)" kaynağı seçin** performans ya da kullanım ölçümlerine göre uyarıları ayarlamak istiyorsanız.
-* Uyarı veren adı (uygulamanız yalnızca) kaynak grubu içinde benzersiz olmalıdır.
-* Eşik değerini girmeniz istenir birimleri Not dikkat edin.
-* "E-posta sahipleri..." kutuyu işaretlerseniz, uyarılar, bu kaynak grubu erişimi olan herkes için e-posta ile gönderilir. Bu kişi kümesi genişletmek için bunları Ekle [kaynak grubuna veya aboneliğe](../../azure-monitor/app/resources-roles-access-control.md) (kaynak değil).
-* "Ek e-postaları" belirtirseniz, uyarılar, bu kişiler veya gruplara (olsun veya olmasın, "e-posta sahipleri..." onay kutusunun işareti) gönderilir. 
-* Ayarlanmış bir [Web kancası adresi](../../azure-monitor/platform/alerts-webhooks.md) uyarılara yanıt veren web uygulaması ayarladıysanız. Uyarı etkinleştirildiğinde hem çözüldüğünde çağrılır. (Ancak şu anda sorgu parametreleri Web kancası özellikleri geçirilecek değil olduğunu unutmayın.)
-* Devre dışı bırakabilir veya uyarıyı etkinleştir: üstündeki düğmeleri bakın.
+* Kaynağı diğer özelliklerden önce ayarlayın. Performans veya kullanım ölçümlerinde uyarılar ayarlamak istiyorsanız **"(bileşenler)" kaynağını seçin** .
+* Uyarıya verdiğiniz ad, kaynak grubu içinde (yalnızca uygulamanız değil) benzersiz olmalıdır.
+* Eşik değerini girmeniz istenecek birimleri göz önünde bulunmamaya dikkat edin.
+* "E-posta sahipleri..." kutusunu işaret ederseniz, uyarılar bu kaynak grubuna erişebilen herkese e-posta ile gönderilir. Bu kişi kümesini genişletmek için, onları [kaynak grubuna veya aboneliğe](../../azure-monitor/app/resources-roles-access-control.md) (kaynak değil) ekleyin.
+* "Ek e-postalar" belirtirseniz, uyarılar bu kişilere veya gruplara gönderilir ("e-posta sahipleri..." seçeneğini iade etmeksizin Box). 
+* Uyarılara yanıt veren bir Web uygulaması ayarladıysanız bir Web [kancası adresi](../../azure-monitor/platform/alerts-webhooks.md) ayarlayın. Bu, hem uyarı etkinleştirildiğinde hem de çözümlendiği zaman çağrılır. (Ancak, var olan sorgu parametrelerinin Web kancası özellikleri olarak geçirilmediğini unutmayın.)
+* Uyarıyı etkinleştirebilir veya devre dışı bırakabilirsiniz: üstteki düğmelere bakın.
 
-*Uyarı Ekle düğmesinin göremiyorum.*
+*Uyarı Ekle düğmesini görmüyorum.*
 
-* Bir kuruluş hesabı kullanıyorsunuz? Sahibi veya katkıda bulunan bu uygulama kaynağına erişimi varsa, uyarılar ayarlayabilirsiniz. Erişim denetimi sekmesini göz atın. [Erişim denetimi hakkında bilgi edinin][roles].
+* Bir kuruluş hesabı mı kullanıyorsunuz? Bu uygulama kaynağına sahip veya katkıda bulunan erişiminiz varsa uyarılar ayarlayabilirsiniz. Access Control sekmesine göz atın. [erişim denetimi hakkında bilgi edinin][roles].
 
 > [!NOTE]
-> Uyarılar dikey penceresinde,, zaten var. bir uyarı kümesi bakın: [Proaktif tanılama](../../azure-monitor/app/proactive-failure-diagnostics.md). Otomatik uyarı bir belirli ölçüm, istek hata oranı izler. Proaktif uyarı devre dışı bırakmak karar vermediğiniz sürece, istek hata oranı üzerinde kendi uyarı ayarlama gerekmez.
+> Uyarılar dikey penceresinde, zaten bir uyarı ayarlanmış olduğunu görürsünüz: [proaktif tanılama](../../azure-monitor/app/proactive-failure-diagnostics.md). Otomatik uyarı, belirli bir ölçümü izler, istek hata oranı. Proaktif uyarıyı devre dışı bırakmayı seçmediğiniz takdirde, istek hata oranı üzerine kendi uyarınızı ayarlamanız gerekmez.
 > 
 > 
 
-## <a name="see-your-alerts"></a>Uyarılarınızı görmek
-Etkin ve etkin arasındaki değişiklikleri uyarı durumu, e-posta alın. 
+## <a name="see-your-alerts"></a>Uyarılarınıza bakın
+Bir uyarı, etkin olmayan ve etkin arasındaki durumu değiştirdiğinde bir e-posta alırsınız. 
 
-Her bir uyarının geçerli durumu uyarı kuralları sekmesinde gösterilir.
+Her uyarının geçerli durumu, uyarı kuralları sekmesinde gösterilir.
 
-Aşağı açılan Uyarılardaki son etkinliğin bir özeti verilmiştir:
+Uyarılar açılan listesinden en son etkinliğin bir özeti vardır:
 
-![Aşağı açılan uyarıları](./media/alerts/010-alert-drop.png)
+![Uyarı açılan uyarıları](./media/alerts/010-alert-drop.png)
 
-Durum değişikliklerinin geçmişini etkinlik günlüğünde şöyledir:
+Durum değişikliklerinin geçmişi etkinlik günlüğünde bulunur:
 
-![Genel Bakış sekmesinde ayarları, Denetim günlükleri](./media/alerts/09-alerts.png)
+![Genel Bakış sekmesinde ayarlar, denetim günlükleri ' ne tıklayın.](./media/alerts/09-alerts.png)
 
 ## <a name="how-alerts-work"></a>Uyarılar nasıl çalışır?
-* Bir uyarı üç durumu vardır: "Etkinleştirmemiştir", "Etkinleştirildi" ve "Çözüldü." Son Değerlendirme zaman etkinleştirilmiş anlamına gelir, belirtilen koşulun true.
-* Bir uyarı durumu değiştiğinde bildirim oluşturulur. (Bir uyarı oluşturulduğunda Uyarı koşulu zaten true, koşul false ölçeklendirilinceye kadar bir uyarı almayabilir.)
-* E-posta kutusu işaretli ya da e-posta adreslerini sağlanan her bir bildirim e-posta oluşturur. Bildirimler açılır listenin de bakabilirsiniz.
-* Bir uyarı, bir ölçüm ulaşan, ancak aksi her zaman değerlendirilir.
-* Değerlendirme, önceki dönem boyunca ölçüm toplar ve ardından yeni durumu belirlemek için eşikle karşılaştırır.
-* Aralık belirten seçtiğiniz dönem ölçümleri toplanır. Uyarı sıklıkta değerlendirileceğini etkilemez: varış ölçümleri sıklığı temel bağlıdır.
-* Hiçbir veri süre için belirli bir ölçüm alınırsa, boşluk uyarı değerlendirmesi ve ölçüm Gezgini'nde grafiklerini farklı etkileri vardır. Uzun süre grafiğin örnekleme aralığı, veri görüldüğünde ölçüm Gezgini'nde grafik 0 değerini gösterir. Ancak aynı ölçüme göre bir uyarı değil yeniden değerlendirimiş, ve uyarının durumu değişmeden kalır. 
+* Bir uyarının üç durumu vardır: "hiçbir şekilde etkin değil", "etkin" ve "çözümlendi." Etkin, belirttiğiniz koşulun en son değerlendirildiği zaman doğru olduğu anlamına gelir.
+* Bir uyarının durumu değiştiğinde bir bildirim oluşturulur. (Uyarıyı oluştururken uyarı koşulu zaten doğruysa, koşul false olana kadar bildirim almayabilir.)
+* E-postalar kutusunu veya sağlanmış e-posta adreslerini denetlediyseniz her bildirim bir e-posta oluşturur. Ayrıca Bildirimler açılan listesine de bakabilirsiniz.
+* Bir ölçüm her ulaştığında bir uyarı değerlendirilir, ancak Aksi takdirde.
+* Değerlendirme, ölçümü önceki dönem boyunca toplar ve ardından yeni durumu tespit etmek için bu değeri eşikle karşılaştırır.
+* Seçtiğiniz süre, ölçümlerin toplanacak aralığı belirtir. Uyarının ne sıklıkta değerlendirileceğini etkilemez: Bu, ölçümlerin gelişmesinin sıklığından kaynaklanır.
+* Belirli bir ölçüm için herhangi bir veri alınırsa, boşluğun uyarı değerlendirmesi ve Ölçüm Gezgini 'ndeki grafiklerde farklı etkileri vardır. Ölçüm Gezgini 'nde, grafiğin örnekleme aralığından daha uzun bir veri görülemeyeceğini, grafik 0 değerini gösterir. Ancak aynı ölçümü temel alan bir uyarı yeniden değerlendirilmez ve uyarının durumu değişmeden kalır. 
   
-    Veri sonunda ulaştığında, grafik sıfır değerine geri atlar. Uyarı değerlendirir, belirtilen süre için kullanılabilir verileri temel alan. Yeni veri noktası süresinde tek çoğaltmaysa, toplama yalnızca veri noktası temel alır.
-* Uzun süre ayarlasanız bile bir uyarı uyarı ve iyi durumda durumlar arasında sık Titreşim. Ölçüm değeri bir eşiği getirirse bu durum oluşabilir. Eşik yok hysteresis yoktur: geçiş sağlıklı olarak aynı değerde uyarı geçiş olur.
+    Veriler sonuç olarak ulaştığında, grafik sıfır olmayan bir değere geri atlar. Uyarı, belirttiğiniz dönem için kullanılabilir verilere göre değerlendirilir. Yeni veri noktası dönemde kullanılabilir tek tek ise, toplama yalnızca o veri noktasına dayalıdır.
+* Bir uyarı, uzun bir süre ayarlamış olsanız bile uyarı ve sağlıklı durumlar arasında sıkça titreşebilir. Ölçüm değeri eşiğin etrafında olursa bu durum oluşabilir. Eşikte bir hysteresin yok: uyarıya geçiş, sağlıklı geçişle aynı değerde olur.
 
-## <a name="what-are-good-alerts-to-set"></a>Ayarlanacak iyi uyarılar nedir?
-Bu durum uygulamanıza bağlıdır. İle başlamak çok sayıda ölçüm ayarlanmadı en iyisidir. Uygulamanız çalışırken nasıl normal şekilde davranır için bir genel görünüm almak için ölçüm grafiklerine baktığımızda biraz zaman ayırın. Bu uygulama veritabanının performansını geliştirmeye yönelik yollar bulmanıza yardımcı olur. Ardından zaman ölçümlerini normal bölgenin dışında Git bildirmek için uyarılar ayarlayın. 
+## <a name="what-are-good-alerts-to-set"></a>Ayarlanacak iyi uyarılar nelerdir?
+Uygulamanıza bağlıdır. İle başlamak için çok fazla ölçüm ayarlanmamalıdır. Uygulamanızın çalışırken ölçüm grafiklerinize bakmak için bir süre harcaın, normal şekilde davrandığı konusunda fikir edinebilirsiniz. Bu uygulama, performansını geliştirmenin yollarını bulmanıza yardımcı olur. Ardından, ölçümler normal bölgenin dışına gittiğinizde size bildirmek için Uyarılar ayarlayın. 
 
 Popüler uyarılar şunlardır:
 
-* [Tarayıcı ölçümleri][client], özellikle tarayıcı **sayfa yükleme sürelerinin**, web uygulamaları için uygundur. Birçok betik, sayfa varsa göz önünde bulundurmanız gerekenler **tarayıcı özel durumları**. Bu ölçümleri ve uyarıları almak için ayarlanmış olması [web sayfası izleme][client].
-* **Sunucu yanıt süresi** sunucu tarafı web uygulamaları için. Uyarıları Ayarlama yanı sıra bu ölçüm, orantısız ile yüksek istek hızları değişiyorsa görmek için takip: değişim uygulamanızı kaynaklar yetersiz çalıştığını gösterebilir. 
-* **Sunucu özel durumları** - bunları görmek için bazı yapmanız gereken [ek kurulum](../../azure-monitor/app/asp-net-exceptions.md).
+* [Tarayıcı ölçümleri][client], özellikle tarayıcı **sayfası yükleme süreleri**, Web uygulamaları için uygundur. Sayfanızda çok sayıda komut dosyası varsa, **tarayıcı özel durumlarına**bakmanız gerekir. Bu ölçümleri ve uyarıları almak için [Web sayfası izlemeyi][client]ayarlamanız gerekir.
+* Web uygulamalarının sunucu tarafı için **sunucu yanıt süresi** . Uyarıları ayarlamanın yanı sıra, yüksek istek hızlarıyla orantılı bir şekilde değişiklik olup olmadığını görmek için bu ölçümü göz önünde bulundurun: çeşitleme, uygulamanızın kaynakları tükendiğine işaret edebilir. 
+* **Sunucu özel durumları** -bunları görmek için bazı [ek kurulum](../../azure-monitor/app/asp-net-exceptions.md)yapmanız gerekir.
 
-Gerektiğini unutmayın [öngörülü hata oranı tanılama](../../azure-monitor/app/proactive-failure-diagnostics.md) otomatik olarak, uygulamanızın yanıt vereceğini hata kodlarıyla isteklerine oranı izleyin.
+[Öngörülü hata oranı tanılaması](../../azure-monitor/app/proactive-failure-diagnostics.md) 'nın, uygulamanızın hata kodlarıyla olan isteklere nasıl yanıt verdiğini otomatik olarak izleyip izleyeceğinizi unutmayın.
 
-## <a name="how-to-set-an-exception-alert-using-custom-log-search"></a>Özel günlük arama özelliğini kullanarak bir özel durum uyarısı ayarlama
+## <a name="how-to-set-an-exception-alert-using-custom-log-search"></a>Özel günlük aramasını kullanarak özel durum uyarısı ayarlama
 
-Bu bölümde, bir sorgu tabanlı özel durum uyarısı ayarlamak nasıl alacağız. Bu örnekte, son 24 saat içindeki başarısız oranı % 10'dan yüksek olduğunda bir uyarı istiyoruz. diyelim.
+Bu bölümde, sorgu tabanlı özel durum uyarısını nasıl ayarlayacağız. Bu örnekte, son 24 saat içindeki başarısız oran %10 ' dan büyük olduğunda bir uyarı istiyoruz.
 
-1. Azure portalında Application Insight kaynağınıza gidin.
-2. Sol tarafta, altında tıklatın yapılandırın **uyarı**.
+1. Azure portal uygulama Insight kaynağına gidin.
+2. Sol tarafta, Yapılandır ' ın altındaki **Uyarı**' ı tıklatın.
 
-    ![Soldaki altında yapılandırma uyarıya tıklayın](./media/alerts/1appinsightalert.png)
+    ![Sol tarafta, Yapılandır tıklama uyarısı](./media/alerts/1appinsightalert.png)
 
-3. Uyarı sekmenin üstünde seçin **yeni uyarı kuralı**.
+3. Uyarı sekmesinin en üstünde **Yeni uyarı kuralı**' nı seçin.
 
-     ![Uyarı sekmenin üst kısmında yeni uyarı kuralı'a tıklayın.](./media/alerts/2createalert.png)
+     ![Uyarı sekmesinin en üstünde yeni uyarı kuralı ' na tıklayın.](./media/alerts/2createalert.png)
 
-4. Kaynağınızın otomatik seçili olmalıdır. Bir koşul ayarlamak için tıklayın **koşul Ekle**.
+4. Kaynağınızın otomatik olarak seçilmesi gerekir. Bir koşul ayarlamak için **Koşul Ekle**' ye tıklayın.
 
-    ![Koşul Ekle seçeneğine tıklayın](./media/alerts/3addcondition.png)
+    ![Koşul Ekle ' ye tıklayın](./media/alerts/3addcondition.png)
 
-5. Yapılandırma sinyal mantığını sekmesinde seçin **özel günlük araması**
+5. Sinyal mantığını Yapılandır sekmesinde **özel günlük araması** ' nı seçin.
 
-    ![Özel günlük Ara](./media/alerts/4customlogsearch.png)
+    ![Özel günlük araması ' na tıklayın](./media/alerts/4customlogsearch.png)
 
-6. Özel günlük arama sekmede sorgunuzu "Arama sorgusu" kutusuna girin. Bu örnekte, kullanacağız Kusto sorgusu aşağıda.
+6. Özel günlük araması sekmesinde sorgunuzu "arama sorgusu" kutusuna girin. Bu örnekte, aşağıdaki kusto sorgusunu kullanacağız.
     ```kusto
     let percentthreshold = 10;
     let period = 24h;
@@ -124,65 +119,65 @@ Bu bölümde, bir sorgu tabanlı özel durum uyarısı ayarlamak nasıl alacağ�
 
     ```
 
-    ![Sorgu arama sorgu kutuya yazın.](./media/alerts/5searchquery.png)
+    ![Arama sorgu kutusuna sorgu yazın](./media/alerts/5searchquery.png)
     
     > [!NOTE]
-    > Ayrıca, diğer sorgu tabanlı uyarı türleri için bu adımları uygulayabilirsiniz. Bu Kusto sorgu dili hakkında daha fazla bilgi [Kusto Başlarken doc](https://docs.microsoft.com/azure/kusto/concepts/) veya bu [SQL Kusto için kural sayfası](https://docs.microsoft.com/azure/kusto/query/sqlcheatsheet)
+    > Ayrıca, bu adımları sorgu tabanlı diğer uyarı türleri için de uygulayabilirsiniz. Kusto sorgu dili hakkında daha fazla bilgi edinmek için bu [kusto kullanmaya başlama belgesi](https://docs.microsoft.com/azure/kusto/concepts/) veya bu [SQL to kusto chyiyecek sayfasını](https://docs.microsoft.com/azure/kusto/query/sqlcheatsheet) kullanabilirsiniz
 
-7. "Altında Alert logic", sonuçları veya ölçüm ölçüsü sayısına göre olup olmadığını seçin. Ardından koşulu (büyüktür, eşittir, daha fazla) ve bir eşik seçin. Bu değerleri değiştirirken, Koşul Önizleme cümle değişiklikler fark edebilirsiniz. Bu örnekte "equal" kullanıyoruz.
+7. "Uyarı mantığı" altında, bunun sonuç sayısına veya ölçüm ölçüsüne göre yapılıp yapılmayacağını seçin. Sonra koşulu (büyüktür, eşittir, küçüktür) ve bir eşiği seçin. Bu değerleri değiştirirken, koşul önizleme cümlesi değişikliklerinin olduğunu fark edebilirsiniz. Bu örnekte, "eşittir" olarak kullanıyoruz.
 
-    ![Uyarı mantığı altında göre sağlanan seçenekleri ve koşul seçin, ardından bir eşik girin](./media/alerts/6alertlogic.png)
+    ![Uyarı mantığı altında, ve koşulunu temel alarak belirtilen seçeneklerden seçim yapın ve ardından bir eşik yazın](./media/alerts/6alertlogic.png)
 
-8. "Temel Evaluated" altında sıklığı ve süresi ayarlayın. Dönem burada biz için put değeriyle eşleşmelidir yukarıdaki sorguda dönem. Ardından **Bitti**.
+8. "Değerlendirilen tabanlı" altında, dönemi ve sıklığı ayarlayın. Buradaki süre, Yukarıdaki sorguda dönem için koyduğumuz değerle eşleşmelidir. Ardından **bitti**' ye tıklayın.
 
-    ![Dönem ve sıklığı altındaki ayarlayın ve sonra bitti'ye tıklayın](./media/alerts/7evaluate.png)
+    ![En alttaki dönemi ve sıklığı ayarlayıp bitti ' ye tıklayın.](./media/alerts/7evaluate.png)
 
-9. Artık ile tahmini aylık maliyet oluşturduğumuz koşul görüyoruz. Aşağıda altında ["Eylem grupları"](../platform/action-groups.md) yeni bir grup oluşturun veya varolan bir tanesini seçin. İsterseniz, eylemlerini özelleştirebilirsiniz.
+9. Şimdi, tahmini aylık maliyet ile oluşturduğumuz koşulu görüyoruz. Aşağıda ["eylem grupları"](../platform/action-groups.md) altında, yeni bir grup oluşturabilir veya var olan bir grubu seçebilirsiniz. İsterseniz, eylemleri özelleştirebilirsiniz.
 
-    ![Seç'e tıklayın veya eylem grubu altında düğmeler oluşturma](./media/alerts/8actiongroup.png)
+    ![eylem grubu altında Seç veya Oluştur düğmesine tıklayın](./media/alerts/8actiongroup.png)
 
-10. Son uyarı ayrıntılarınızı ekleyin (uyarı kuralı adı, açıklaması, önem derecesi). İşiniz bittiğinde tıklayın **uyarı kuralı oluştur** altındaki.
+10. Son olarak uyarı ayrıntılarınızı (uyarı kuralı adı, açıklama, önem derecesi) ekleyin. İşiniz bittiğinde, en altta **Uyarı kuralı oluştur** ' a tıklayın.
 
-    ![Uyarı ayrıntısı altında uyarı kuralı adınızı yazın, bir açıklama yazın ve bir önem derecesi seçin](./media/alerts/9alertdetails.png)
+    ![Uyarı ayrıntısı altında uyarı kuralı adınızı yazın, bir açıklama yazın ve önem derecesi seçin](./media/alerts/9alertdetails.png)
 
-## <a name="how-to-unsubscribe-from-classic-alert-e-mail-notifications"></a>Klasik uyarı e-posta bildirim aboneliği nasıl
+## <a name="how-to-unsubscribe-from-classic-alert-e-mail-notifications"></a>Klasik uyarı e-posta bildirimlerinin aboneliğini kaldırma
 
-Bu bölümde uygulandığı **Klasik kullanılabilirlik uyarıları**, **Klasik Application Insights ölçüm uyarıları**ve **Klasik hata anomalileri uyarılar**.
+Bu bölüm, klasik **kullanılabilirlik uyarıları**, **Klasik Application Insights ölçüm uyarıları**ve **Klasik hata bozukluklar uyarıları**için geçerlidir.
 
-Aşağıdakilerden biri geçerliyse bu Klasik uyarılar için e-posta bildirimleri alıyorsunuz:
+Aşağıdakilerden biri geçerliyse, bu klasik uyarılar için e-posta bildirimleri alıyorsunuz:
 
-* E-posta adresinizi, bildirim e-posta alıcıları alanında uyarı kuralı ayarlar listelenir.
+* E-posta adresiniz, uyarı kuralı ayarlarındaki bildirim e-posta alıcıları alanında listelenir.
 
-* Abonelik için belirli rolleri barındıran kullanıcılara e-posta bildirimleri gönderme seçeneği etkinleştirilir ve ilgili rol, belirli bir Azure aboneliği için basılı tutun.
+* Abonelik için belirli rolleri tutan kullanıcılara e-posta bildirimleri gönderme seçeneği etkinleştirilir ve söz konusu Azure aboneliği için ilgili bir rol tutabilirsiniz.
 
 ![Uyarı bildirimi ekran görüntüsü](./media/alerts/alert-notification.png)
 
-Güvenlik ve gizlilik genellikle öneririz, açıkça bildirim alıcılarını Klasik uyarılarınızı için belirttiğiniz daha iyi denetlemek için **bildirim e-posta alıcılarını** alan. Belirli roller bulunduran tüm kullanıcılara bildirin seçeneğini geriye dönük uyumluluk için sağlanır.
+Güvenlik ve gizliliğinizi daha iyi denetlemek için, **bildirim e-posta alıcıları** alanında klasik uyarılarınız için bildirim alıcılarını açıkça belirtmenizi öneririz. Geri uyumluluk için belirli rolleri tutan tüm kullanıcılara bildirme seçeneği sağlanır.
 
-Bir belirli uyarı kuralı tarafından oluşturulan e-posta bildirimi aboneliğinizi iptal etmek, e-posta adresinizi kaldırmak **bildirim e-posta alıcılarını** alan.
+Belirli bir uyarı kuralı tarafından oluşturulan e-posta bildirimlerinin aboneliğini kaldırmak için, **bildirim e-posta alıcıları** alanından e-posta adresinizi kaldırın.
 
-Belirli roller tüm üyeleri otomatik olarak bilgilendirme seçeneğini devre dışı bırakın ve bunun yerine bu uyarı kuralı için bildirimler bildirim e-posta almak için gereken tüm kullanıcı e-postalar listesi e-posta adresinizi açıkça listelenmemişse öneririz Alıcılar alan.
+E-posta adresiniz açıkça listelenmiyorsa, belirli rollerin tüm üyelerini otomatik olarak bildirme seçeneğini devre dışı bırakmanız ve bunun yerine bildirim e-postasında bu uyarı kuralı için bildirim alması gereken tüm kullanıcı e-postalarını listeetmenizi öneririz. alıcılar alanı.
 
-## <a name="who-receives-the-classic-alert-notifications"></a>Kimin (Klasik) Uyarı bildirimlerini alır?
+## <a name="who-receives-the-classic-alert-notifications"></a>(Klasik) uyarı bildirimlerini kim alıyor?
 
-Bu bölümde, yalnızca klasik uyarılar için geçerlidir ve yalnızca istenen alıcılarınız bildirimlerini aldığından emin olmak için Uyarı bildirimlerini iyileştirmenize yardımcı olur. Arasındaki fark hakkında daha fazla anlamak için [Klasik uyarılar](../platform/alerts-classic.overview.md) ve yeni uyarılar deneyimini, başvurmak [uyarılar genel bakış makalesi](../platform/alerts-overview.md). Yeni uyarılar deneyimini uyarı bildiriminde denetlemek için kullanın [Eylem grupları](../platform/action-groups.md).
+Bu bölüm yalnızca, klasik uyarılar için geçerlidir ve yalnızca istediğiniz alıcıların bildirimleri almasını sağlamak için uyarı bildirimlerinizi iyileştirmenize yardımcı olur. [Klasik uyarılar](../platform/alerts-classic.overview.md) ve yeni uyarılar deneyimi arasındaki fark hakkında daha fazla bilgi edinmek için [uyarılara genel bakış makalesine](../platform/alerts-overview.md)bakın. Yeni uyarılar deneyiminde uyarı bildirimini denetlemek için [eylem grupları](../platform/action-groups.md)' nı kullanın.
 
-* Klasik bir uyarı bildirimlerini belirli alıcılara kullanılmasını öneririz.
+* Klasik uyarı bildirimleri için belirli alıcıların kullanılmasını öneririz.
 
-* (Kullanılabilirlik ölçümlerini dahil), herhangi bir Application Insights ölçümler ile ilgili uyarılar için **toplu/grup** abonelik sahibi, katkıda bulunan veya okuyucu rollerine sahip kullanıcılar için onay kutusu seçeneği etkinleştirilirse, gönderir. Aslında, _tüm_ abonelik Application Insights kaynağına erişimi olan kullanıcılar kapsamındaki ve ilgili bildirimler alacaksınız.
+* Tüm Application Insights ölçümlerinde (kullanılabilirlik ölçümleri dahil) uyarılar için, **toplu/grup** onay kutusu seçeneği etkinse, abonelikte sahip, katkıda bulunan veya okuyucu rolleriyle kullanıcılara gönderir. Aslında, aboneliğe erişimi olan _Tüm_ kullanıcılar Application Insights kaynak kapsamdadır ve bildirimler alacaktır.
 
 > [!NOTE]
-> Şu anda kullanıyorsanız **toplu/grup** onay kutusu seçeneğini ve devre dışı bırakmak, bu değişikliği geri almak mümkün olmayacaktır.
+> Şu anda **toplu/grup** onay kutusu seçeneğini kullanırsanız ve devre dışı bıraktığınızda, değişikliği döndüremezsiniz.
 
-Yeni uyarı deneyimi/neredeyse gerçek zamanlı uyarılar, rollerine bağlı olarak kullanıcılara bildirmek gerekiyorsa kullanın. İle [Eylem grupları](../platform/action-groups.md), (tek bir seçenek olarak birlikte birleştirilmiş değil) sahip/katkıda bulunan/okuyucu rolüne sahip kullanıcılara e-posta bildirimleri yapılandırabilirsiniz.
+Kullanıcılara rollerine göre bildirimde bulunan yeni uyarı deneyimini veya neredeyse gerçek zamanlı uyarıları kullanın. [Eylem gruplarıyla](../platform/action-groups.md), katkıda bulunan/sahip/okuyucu rollerinin herhangi birine sahip kullanıcılar için e-posta bildirimleri yapılandırabilirsiniz (tek bir seçenek olarak birlikte birleştirilemez).
 
 ## <a name="automation"></a>Otomasyon
-* [Uyarıları Ayarlama otomatikleştirmek için PowerShell kullanma](../../azure-monitor/app/powershell-alerts.md)
-* [Uyarılara yanıt verme otomatikleştirmek için Web kancalarını kullanma](../../azure-monitor/platform/alerts-webhooks.md)
+* [Uyarıları ayarlamayı otomatikleştirmek için PowerShell 'i kullanma](../../azure-monitor/app/powershell-alerts.md)
+* [Uyarıları yanıtlamayı otomatikleştirmek için Web kancalarını kullanma](../../azure-monitor/platform/alerts-webhooks.md)
 
 ## <a name="see-also"></a>Ayrıca bkz.
-* [Kullanılabilirlik web testleri](../../azure-monitor/app/monitor-web-app-availability.md)
-* [Uyarıları Ayarlama otomatikleştirin](../../azure-monitor/app/powershell-alerts.md)
+* [Kullanılabilirlik Web testleri](../../azure-monitor/app/monitor-web-app-availability.md)
+* [Uyarıları ayarlamayı otomatikleştirme](../../azure-monitor/app/powershell-alerts.md)
 * [Proaktif tanılama](../../azure-monitor/app/proactive-diagnostics.md) 
 
 <!--Link references-->

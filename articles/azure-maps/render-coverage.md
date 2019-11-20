@@ -1,6 +1,6 @@
 ---
-title: İşleme kapsamı içinde Azure haritalar | Microsoft Docs
-description: İşleme kapsamı içinde Azure haritalar hakkında bilgi edinin
+title: Azure haritalar 'da işleme kapsamı | Microsoft Docs
+description: Azure haritalar 'da Işleme kapsamı hakkında bilgi edinin
 author: jingjing-z
 ms.author: jinzh
 ms.date: 03/22/2019
@@ -8,31 +8,31 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.openlocfilehash: 7feea92d48a826000fd8aa878b95658b79d6d908
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5affc9952cfe13ebfeede126051f2236499d1343
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64869989"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72934286"
 ---
 # <a name="azure-maps-render-coverage"></a>Azure haritalar işleme kapsamı
 
-Azure haritalar ızgara kutucukları hem de vektör bölmelerini eşlemeleri oluşturmak için kullanır. En düşük, çözünürlükte, tek bir döşeme üzerinde dünyaya uyar. En yüksek çözünürlüğünü, tek bir kutucuk 38 metrekare temsil eder. Bu nedenle, bir harita üzerinde yakınlaştırma gibi kıtadaki, bölgeleri, şehir ve tek tek sokaklar hakkında giderek daha fazla ayrıntı görebilirsiniz. Daha fazla bilgi için [yakınlaştırma düzeyleri ve döşeme Kılavuzu](zoom-levels-and-tile-grid.md).
+Azure haritalar haritalar oluşturmak için hem raster kutucukları hem de vektör kutucukları kullanır. En düşük çözünürlükte dünyanın tamamı tek bir kutucuğa sığar. En yüksek çözünürlükte, tek bir kutucuk 38 kare metreyi temsil eder. Haritada yakınlaştırdığınızda, bu nedenle kıtalar, bölgeler, şehirler ve bireysel Streets hakkında daha fazla ayrıntı görebilirsiniz. Daha fazla bilgi için bkz. [yakınlaştırma düzeyleri ve kutucuk Kılavuzu](zoom-levels-and-tile-grid.md).
 
-Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağıdaki tablolarda her bölgede beklediğiniz işlenmiş ayrıntı düzeyini hakkında bilgi sağlar.
+Ancak, haritalar tüm bölgeler için aynı düzeyde bilgi ve doğruluk düzeyine sahip değildir. Aşağıdaki tablolarda, her bir bölgeden beklediğiniz işlenen ayrıntı düzeyi hakkında bilgi sağlanır.
 
-## <a name="legend"></a>Gösterge
+## <a name="legend"></a>Deki
 
 | Sembol | Anlamı |
 |--------|---------|
-| ✓ | Bölge, ayrıntılı veri ile temsil edilir.   |
-| Ø | Bölge, Basitleştirilmiş veri ile temsil edilir. |
+| ✓ | Bölge, ayrıntılı verilerle temsil edilir.   |
+| Ø | Bölge, Basitleştirilmiş verilerle temsil edilir. |
 
 
 ## <a name="africa"></a>Afrika 
 
 
-| Ülke/Bölge | Birleşik ızgara kutucukları | Vektör bölmelerini birleşik |
+| Ülke/Bölge | Raster kutucukları Birleşik | Vektör kutucukları Birleşik |
 | ------ | :------------------: | :------------------: |
 | Cezayir                          | ✓ | ✓ |
 | Angola                           | ✓ | ✓ |
@@ -44,7 +44,7 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Kamerun                         | ✓ | ✓ |
 | Orta Afrika Cumhuriyeti         | ✓ | Ø |
 | Çad                             | ✓ | Ø |
-| Komorlar                          | ✓ | Ø |
+| Komorolar                          | ✓ | Ø |
 | Kongo Demokratik Cumhuriyeti | ✓ | ✓ |
 | Fildişi Sahili (Côte d’Ivoire)                    | ✓ | Ø |
 | Cibuti                         | ✓ | Ø |
@@ -53,10 +53,10 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Eritre                          | ✓ | Ø |
 | Etiyopya                         | ✓ | Ø |
 | Gabon                            | ✓ | ✓ |
-| Gambia                           | ✓ | Ø |
+| Gambiya                           | ✓ | Ø |
 | Gana                            | ✓ | ✓ |
 | Gine                           | ✓ | Ø |
-| Gine-Bissau                    | ✓ | Ø |
+| Gine Bissau                    | ✓ | Ø |
 | Kenya                            | ✓ | ✓ |
 | Lesoto                          | ✓ | ✓ |
 | Liberya                          | ✓ | Ø |
@@ -72,18 +72,18 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Namibya                          | ✓ | ✓ |
 | Nijer                            | ✓ | ✓ |
 | Nijerya                          | ✓ | ✓ |
-| Réunion                          | ✓ | ✓ |
-| Rwanda                           | ✓ | ✓ |
+| Reunion                          | ✓ | ✓ |
+| Ruanda                           | ✓ | ✓ |
 | Saint Helena, Ascension ve Tristan da Cunha | ✓ | Ø |
 | Sao Tome ve Principe            | ✓ | Ø |
 | Senegal                          | ✓ | ✓ |
-| Sierra Leone                     | ✓ | ✓ |
+| Sierra Taone                     | ✓ | ✓ |
 | Somali                          | ✓ | ✓ |
 | Güney Afrika                     | ✓ | ✓ |
 | Güney Sudan                      | ✓ | ✓ |
 | Sudan                            | ✓ | ✓ |
 | Svaziland                        | ✓ | ✓ |
-| Tanzanya birleşik Cumhuriyeti      | ✓ | ✓ |
+| Tanzanya Birleşik Cumhuriyeti      | ✓ | ✓ |
 | Togo                             | ✓ | ✓ |
 | Tunus                          | ✓ | ✓ |
 | Uganda                           | ✓ | ✓ |
@@ -92,7 +92,7 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 
 ## <a name="americas"></a>Kuzey ve Güney Amerika
 
-| Ülke/Bölge | Birleşik ızgara kutucukları | Vektör bölmelerini birleşik |
+| Ülke/Bölge | Raster kutucukları Birleşik | Vektör kutucukları Birleşik |
 | ------ | :------------------: | :------------------: |
 | Anguilla                  | ✓ | ✓ |
 | Antigua ve Barbuda       | ✓ | ✓ |
@@ -102,17 +102,17 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Barbados                  | ✓ | ✓ |
 | Belize                    | ✓ | ✓ |
 | Bermuda                   | ✓ | ✓ |
-| ' In Devleti durumu Bolivya | ✓ | ✓ |
+| Bolivya 'nın plurinsel durumu | ✓ | ✓ |
 | Bonaire, Sint Eustatius ve Saba | ✓ | ✓ |
 | Brezilya                    | ✓ | ✓ |
 | Kanada                    | ✓ | ✓ |
-| Kayman Adaları            | ✓ | ✓ |
+| Cayman Adaları            | ✓ | ✓ |
 | Şili                     | ✓ | ✓ |
 | Kolombiya                  | ✓ | ✓ |
 | Kosta Rika                | ✓ | ✓ |
 | Küba                      | ✓ | ✓ |
 | Curaçao                   | ✓ | ✓ |
-| Dominica                  | ✓ | ✓ |
+| Dominika                  | ✓ | ✓ |
 | Dominik Cumhuriyeti        | ✓ | ✓ |
 | Ekvador                   | ✓ | ✓ |
 | Falkland Adaları (Malvinas) | ✓ | ✓ |
@@ -135,18 +135,18 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Peru                      | ✓ | ✓ |
 | Porto Riko               | ✓ | ✓ |
 | Quebec (Kanada)           | ✓ | ✓ |
-| Saint Barthélemy          | ✓ | ✓ |
+| Saint Barthélimy          | ✓ | ✓ |
 | Saint Kitts ve Nevis     | ✓ | ✓ |
 | Saint Lucia               | ✓ | ✓ |
-| Saint Martin (Fransız)     | ✓ | ✓ |
+| Saint MARTIN (Fransızca)     | ✓ | ✓ |
 | Saint Pierre ve Miquelon | ✓ | ✓ |
 | Saint Vincent ve Grenadinler | ✓ | ✓ |
-| Sint Maarten (Hollanda dili)      | ✓ | ✓ |
+| Sint Maarten (Felemenkçe)      | ✓ | ✓ |
 | Güney Georgia ve Güney Sandwich Adaları | ✓ | ✓ |
 | Surinam                  | ✓ | ✓ |
 | Trinidad ve Tobago       | ✓ | ✓ |
 | Turks ve Caicos Adaları  | ✓ | ✓ |
-| Amerika Birleşik Devletleri             | ✓ | ✓ |
+| Birleşik Devletler             | ✓ | ✓ |
 | Uruguay                   | ✓ | ✓ |
 | Venezuela                 | ✓ | ✓ |
 | Virgin Adaları, İngiliz   | ✓ | ✓ |
@@ -154,20 +154,19 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 
 ## <a name="asia"></a>Asya 
 
-| Ülke/Bölge | Birleşik ızgara kutucukları | Vektör bölmelerini birleşik |
+| Ülke/Bölge | Raster kutucukları Birleşik | Vektör kutucukları Birleşik |
 | ------ | :------------------: | :------------------: |
 | Afganistan               |   | Ø |
 | Bahreyn                   | ✓ | ✓ |
 | Bangladeş                |   | Ø |
 | Butan                    |   | Ø |
 | Britanya Hint Okyanusu Toprakları |   | Ø |
-| Brunei                    | ✓ | ✓ |
+| Barış                    | ✓ | ✓ |
 | Kamboçya                  |   | Ø |
 | Çin                     |   | Ø |
 | Cocos (Keeling) Adaları   |   | Ø |
 | Kore Demokratik Halk Cumhuriyeti |   | Ø |
-| Dokdo ve Takeshima       |   | Ø |
-| Hong Kong SAR             | ✓ | ✓ |
+| Hong Kong ÖIB             | ✓ | ✓ |
 | Hindistan                     | Ø | ✓ | 
 | Endonezya                 | ✓ | ✓ |
 | İran                      |   | Ø |
@@ -180,7 +179,7 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Kırgızistan                |   | Ø |
 | Laos Demokratik Halk Cumhuriyeti |   | Ø |
 | Lübnan                   | ✓ | ✓ |
-| Makao ÖİB                 | ✓ | ✓ |
+| Makao ÖIB                 | ✓ | ✓ |
 | Malezya                  | ✓ | ✓ |
 | Maldivler                  |   | Ø |
 | Moğolistan                  |   | Ø |
@@ -209,13 +208,13 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 
 ## <a name="oceania"></a>Okyanusya
 
-| Ülke/Bölge | Birleşik ızgara kutucukları | Vektör bölmelerini birleşik |
+| Ülke/Bölge | Raster kutucukları Birleşik | Vektör kutucukları Birleşik |
 | ------ | :------------------: | :------------------: |
 | Amerikan Samoası            |   | ✓ |
 | Avustralya                 | ✓ | ✓ |
 | Cook Adaları              |   | Ø |
 | Fiji                      |   | Ø |
-| FRANSIZ POLİNEZYASI          |   | Ø |
+| Fransız Polinezyası          |   | Ø |
 | Guam                      | ✓ | ✓ |
 | Kiribati                  |   | Ø |
 | Marshall Adaları          |   | Ø |
@@ -228,7 +227,7 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Palau                     |   | Ø |
 | Papua Yeni Gine          |   | Ø |
 | Pitcairn                  |   | Ø |
-| Samoa                     |   | Ø |
+| Devleti                     |   | Ø |
 | Solomon Adaları           |   | Ø|
 | Tokelau                   |   | Ø |
 | Tonga                     |   | Ø |
@@ -239,7 +238,7 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 
 ## <a name="europe"></a>Avrupa
 
-| Ülke/Bölge | Birleşik ızgara kutucukları | Vektör bölmelerini birleşik |
+| Ülke/Bölge | Raster kutucukları Birleşik | Vektör kutucukları Birleşik |
 | ------ | :------------------: | :------------------: |
 | Arnavutluk                   | ✓ | ✓ |
 | Andorra                   | ✓ | ✓ |
@@ -271,7 +270,7 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Jan Mayen                 | ✓ | ✓ |
 | Jersey                    | ✓ | ✓ |
 | Letonya                    | ✓ | ✓ |
-| Lihtenştayn             | ✓ | ✓ |
+| Liechtenstein             | ✓ | ✓ |
 | Litvanya                 | ✓ | ✓ |
 | Lüksemburg                | ✓ | ✓ |
 | Kuzey Makedonya           | ✓ | ✓ |
@@ -289,7 +288,7 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Sırbistan                    | ✓ | ✓ |
 | Slovakya                  | ✓ | ✓ |
 | Slovenya                  | ✓ | ✓ |
-| Güney Kurils           | ✓ | ✓ |
+| Güney Küıls           | ✓ | ✓ |
 | İspanya                     | ✓ | ✓ |
 | Svalbard                  | ✓ | ✓ |
 | İsveç                    | ✓ | ✓ |
@@ -297,10 +296,10 @@ Ancak, Maps yok bilgi ve doğruluk tüm bölgeler için aynı düzeyde. Aşağı
 | Türkiye                    | ✓ | ✓ |
 | Ukrayna                   | ✓ | ✓ |
 | Birleşik Krallık            | ✓ | ✓ |
-| Vatikan              | ✓ | ✓ |
+| Vatikan şehri              | ✓ | ✓ |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure haritalar işleme hakkında daha fazla bilgi için bkz. [yakınlaştırma düzeyleri ve döşeme Kılavuzu](zoom-levels-and-tile-grid.md).
+Azure haritalar işleme hakkında daha fazla bilgi için bkz. [yakınlaştırma düzeyleri ve kutucuk Kılavuzu](zoom-levels-and-tile-grid.md).
 
-Hakkında bilgi edinin [hizmeti Yönlendirme eşlemeleri için kapsamı alanları](routing-coverage.md). 
+[Haritalar yönlendirme hizmeti için kapsam bölgeleri](routing-coverage.md)hakkında bilgi edinin. 

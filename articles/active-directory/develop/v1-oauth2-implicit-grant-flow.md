@@ -1,6 +1,6 @@
 ---
-title: Azure AD'de izin akışı örtük OAuth2 anlama | Microsoft Docs
-description: OAuth2 örtük Azure Active Directory uygulaması hakkında daha fazla izin akışı, öğrenin ve uygulamanız için doğru olup olmadığını.
+title: Azure AD 'de OAuth2 örtük verme akışını anlama | Microsoft Docs
+description: Azure Active Directory OAuth2 örtük verme akışının uygulaması ve uygulamanızın doğru olup olmadığı hakkında daha fazla bilgi edinin.
 services: active-directory
 documentationcenter: dev-center-name
 author: rwike77
@@ -10,68 +10,68 @@ ms.assetid: 90e42ff9-43b0-4b4f-a222-51df847b2a8d
 ms.service: active-directory
 ms.subservice: develop
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 09/24/2018
+ms.date: 08/15/2019
 ms.author: ryanwi
 ms.reviewer: jmprieur
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8fe0ee8021ae7e70654a161e37d072195bbc035f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: eb751d4cad036135865af9f97e159da104749388
+ms.sourcegitcommit: 040abc24f031ac9d4d44dbdd832e5d99b34a8c61
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65545253"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69532414"
 ---
-# <a name="understanding-the-oauth2-implicit-grant-flow-in-azure-active-directory-ad"></a>Azure Active Directory (AD) OAuth2 örtük verme akışı anlama
+# <a name="understanding-the-oauth2-implicit-grant-flow-in-azure-active-directory-ad"></a>Azure Active Directory (AD) OAuth2 örtük verme akışını anlama
 
 [!INCLUDE [active-directory-develop-applies-v1](../../../includes/active-directory-develop-applies-v1.md)]
 
-OAuth2 örtük verme, güvenlik kaygıları OAuth2 belirtimi uzun listesi izinle olan için ticaret. Ve ADAL JS ve SPA uygulamaları yazarken öneririz biri tarafından uygulanan yaklaşıma henüz olmasıdır. Neler sağlar? Tüm birkaç ödünler olduğu: ve ortaya çıkmıştır gibi örtük vermeyi sizin daha sonra amacınızın bir tarayıcıdan JavaScript aracılığıyla bir Web API'sini kullanan uygulamalar için en iyi yaklaşımdır.
+OAuth2 örtük verme, OAuth2 belirtiminde en uzun güvenlik sorunları listesine izin vermekle birlikte, ntoriou olur. Henüz, ADAL JS tarafından uygulanan yaklaşım ve SPA uygulamaları yazarken önerdiğimiz bir yaklaşım. Ne sağlar? Bu, tüm dengelerden bağımsız olarak, bir tarayıcıdan JavaScript aracılığıyla bir Web API 'SI kullanan uygulamalar için en iyi yaklaşım, örtük bir yöntemdir.
 
 ## <a name="what-is-the-oauth2-implicit-grant"></a>OAuth2 örtük verme nedir?
 
-Quintessential [OAuth2 yetkilendirme kodu verme](https://tools.ietf.org/html/rfc6749#section-1.3.1) kullanan iki ayrı uç noktası yetkilendirme verme olur. Yetkilendirme uç noktası, sonuçları bir yetkilendirme kodu ile kullanıcı etkileşimi aşaması için kullanılır. Belirteç uç noktası, ardından bir erişim belirteci ve genellikle de bir yenileme belirteci için kod değişimi için istemci tarafından kullanılır. Yetkilendirme sunucusu istemcinin kimliğini doğrulamak için web uygulamaları ve belirteç uç noktasına, kendi uygulama kimlik sunmak için gereklidir.
+Quintessential [OAuth2 yetkilendirme kodu verme](https://tools.ietf.org/html/rfc6749#section-1.3.1) , iki ayrı uç nokta kullanan yetkilendirme vericisinden yararlanır. Yetkilendirme uç noktası, bir yetkilendirme kodu ile sonuçlanan Kullanıcı etkileşimi aşaması için kullanılır. Belirteç uç noktası daha sonra istemci tarafından bir erişim belirtecinin kodunu ve genellikle bir yenileme belirtecini değiş tokuş etmek için kullanılır. Yetkilendirme sunucusunun istemcinin kimliğini doğrulayabilmesi için, Web uygulamalarının belirteç uç noktasına kendi uygulama kimlik bilgilerini sunması gerekir.
 
-[OAuth2 örtük verme](https://tools.ietf.org/html/rfc6749#section-1.3.2) diğer yetkilendirme vermeleri bir çeşididir. Bir erişim belirteci almak bir istemci sağlar (ve kullanırken id_token [Openıd Connect](https://openid.net/specs/openid-connect-core-1_0.html)) ya da istemci kimliğini doğrulama ve belirteç uç noktasına bağlanılıyor olmadan doğrudan yetkilendirme uç noktasından,. Bu değişken, JavaScript tabanlı bir Web tarayıcısında çalışan uygulamalar için tasarlanmıştır: orijinal OAuth2 belirtimi belirteçleri bir URI parçası döndürülür. Belirteci BITS JavaScript kodunu istemciye kullanılabilmesini sağlar, ancak yeniden yönlendirmeleri sunucunun doğru olarak eklenmeyecek garanti eder. Tarayıcı yoluyla belirteçleri döndüren doğrudan yetkilendirme uç noktasından yönlendirilir. Ayrıca, çapraz JavaScript uygulama ve belirteç uç noktasına başvurun gerekiyorsa, gerekli olan kaynak çağrıları için herhangi bir gereksinimi ortadan avantajına sahiptir.
+[OAuth2 örtük verme](https://tools.ietf.org/html/rfc6749#section-1.3.2) , diğer yetkilendirmelerden oluşan bir değişkendir. Bir istemcinin, bir erişim belirteci almasına izin verir (ve [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html)kullanılırken id_token), belirteç uç noktası ile iletişim kurmadan veya istemcinin kimliğini doğrulamadan doğrudan yetkilendirme uç noktasından. Bu değişken, bir Web tarayıcısında çalışan JavaScript tabanlı uygulamalar için tasarlandı: özgün OAuth2 belirtiminde belirteçler bir URI parçasında döndürülür. Bu, belirteç bitlerini istemcideki JavaScript kodu için kullanılabilir hale getirir, ancak sunucuya doğru yeniden yönlendirmelere dahil edilmezler. OAuth2 örtük izin ' da, yetkilendirme uç noktası önceden sağlanan yeniden yönlendirme URI 'sini kullanarak doğrudan istemciye erişim belirteçleri verir. Ayrıca, belirteç uç noktasıyla iletişim kurmak için JavaScript uygulamasının gerekli olduğu durumlarda gerekli olan çapraz kaynak çağrıları için tüm gereksinimleri ortadan kaldırma avantajına sahiptir.
 
-OAuth2 örtük verme önemli bir özelliğidir, gibi istemciye hiçbir zaman dönüş yenileme belirteçleri akışlar da dağıtılmasıdır. Sonraki bölümde, nasıl bunun gerekli olmadığını gösterir ve aslında bir güvenlik sorunu olabilir.
+OAuth2 örtük verme 'nin önemli bir özelliği, bu akışların istemciye hiçbir zaman yenileme belirteçleri döndürmemesinden kaynaklanmaktadır. Sonraki bölümde bunun gerekli olmadığını ve aslında bir güvenlik sorunu olduğunu gösterir.
 
-## <a name="suitable-scenarios-for-the-oauth2-implicit-grant"></a>OAuth2 örtük verme için uygun senaryoları
+## <a name="suitable-scenarios-for-the-oauth2-implicit-grant"></a>OAuth2 örtük verme için uygun senaryolar
 
-OAuth2 belirtimi, örtük vermeyi Kullanıcı aracısını uygulamaları – yani, bir tarayıcı içinde yürütülen JavaScript uygulamaları etkinleştirmek için çıkabilecek bildirir. Edici bu tür uygulamalar JavaScript kodu (genellikle bir Web API'si) sunucu kaynaklarına erişim ve uygulama kullanıcı deneyiminde uygun şekilde güncelleştirmek için kullanılan özelliğidir. Gmail veya Outlook Web Access gibi uygulamalar düşünün: bir ileti gelen kutunuzdaki seçtiğinizde, sayfanın geri kalanını değiştirilmemiş devam ederken yeni seçim, görüntülenecek yalnızca ileti görselleştirme paneli değiştirir. Bu özellik geleneksel yeniden yönlendirme tabanlı Web apps farklı olarak, burada her kullanıcı etkileşimi tam sayfa geri gönderme ve yeni sunucu yanıtı tam sayfada çizmeye sonuçları oluyor.
+OAuth2 belirtimi, örtük verme 'nin, Kullanıcı Aracısı uygulamalarının (örneğin, bir tarayıcıda yürütülen JavaScript uygulamaları) etkinleştirilmesi için bu özelliği kaldırdığınızı bildirir. Bu tür uygulamaların tanımlanması, JavaScript kodunun sunucu kaynaklarına (genellikle bir Web API) erişmek ve uygulama kullanıcı deneyiminin uygun şekilde güncelleştirilmesi için kullanılır. Gmail veya Outlook Web Erişimi gibi uygulamalar düşünün: gelen kutunuzdan bir ileti seçtiğinizde, yalnızca ileti görselleştirme paneli yeni seçimi görüntüleyecek şekilde değişir, ancak sayfanın geri kalanı değiştirilmemiş olarak kalır. Bu özellik geleneksel yeniden yönlendirme tabanlı Web Apps 'in aksine, her kullanıcı etkileşimi tam sayfa geri gönderme işlemiyle ve yeni sunucu yanıtının tam sayfa işlemesi ile sonuçlanır.
 
-JavaScript tabanlı yaklaşımı, üst düzey için uygulamaları tek sayfa uygulamaları veya Spa'lar çağrılır. Bu uygulamalar yalnızca bir ilk HTML sayfası ve ilişkili JavaScript ile Web API çağrıları tarafından yönlendirilen JavaScript aracılığıyla gerçekleştirilen tüm etkileşiminde hizmet emin olur. Ancak, karma yaklaşımları burada uygulama çoğunlukla geri gönderme temelli ancak bazen JS çağrıları gerçekleştirir, seyrek olmayan – örtük akış kullanımıyla ilgili tartışma de olanlar için geçerlidir.
+Üst sınırına yönelik JavaScript tabanlı yaklaşımdan uygulamalar tek sayfalı uygulamalar veya maça olarak adlandırılır. Fikir, bu uygulamaların yalnızca bir ilk HTML sayfası ve ilişkili JavaScript 'e sahip olduğu ve JavaScript aracılığıyla gerçekleştirilen Web API çağrıları tarafından çalıştırılmakta olan bir sonraki etkileşimi sunan bir uygulamadır. Bununla birlikte, uygulamanın genellikle geri gönderme yapılır ancak zaman zaman JS çağrıları gerçekleştirdiği karma yaklaşımlar, seyrek erişimli değildir. örtülü akış kullanımı hakkındaki tartışma, bunlar için de geçerlidir.
 
-Yeniden yönlendirme tabanlı uygulamalar genellikle yaklaşım JavaScript uygulamaları için de çalışmıyor isteklerinde tanımlama bilgileri, ancak aracılığıyla güvenli hale getirin. Tanımlama bilgileri, yalnızca diğer etki alanlarında doğru JavaScript çağrılarını yönlendirilebilir ancak bunlar için oluşturulmuş bir etki alanına göre çalışır. Aslında, sık olacak durum: Microsoft Graph API, Office API'si, Azure API uygulama Burada sunulan gelen etki alanı dışındaki tüm bulunan – çağıran uygulamalar düşünün. Artan bir eğilim JavaScript uygulamaları için arka uç, bağlı olan üçüncü taraf Web API'leri, kendi iş işlevi uygulamak için %100 sağlamaktır.
+Yeniden yönlendirme tabanlı uygulamalar, genellikle istekleri tanımlama bilgileri aracılığıyla güvenli hale getirmeye karşın bu yaklaşım, JavaScript uygulamaları için de çalışmaz. Tanımlama bilgileri, JavaScript çağrıları diğer etki alanlarına yönlendirilirken, yalnızca için oluşturulan etki alanına karşı çalışır. Aslında bu durum genellikle şu şekilde olacaktır: Microsoft Graph API, Office API 'si, Azure API 'SI çağıran uygulamaları, uygulamanın sunulduğu etki alanının dışında bulundurduğunu düşünün. JavaScript uygulamalarına yönelik büyümekte olan bir eğilim, iş işlevlerini uygulamak için üçüncü taraf Web API 'Lerinde% 100 bağlı bir arka uç gerektirmez.
 
-Şu anda, tercih edilen yöntem Web API'sine yapılan çağrıları korumak için OAuth2 taşıyıcı belirteci yaklaşım burada her çağrı bir OAuth2 erişim belirteciyle birlikte sunulduğu kullanmaktır. Web API'si gelen erişim belirteci inceler ve içinde gerekli kapsamları bulursa, istenen işlem için erişim verir. Örtük akış, tanımlama bilgileri açısından çok sayıda avantaj sunan bir Web API'si için erişim belirteçleri almak JavaScript uygulamaları için kullanışlı bir mekanizma sağlar:
+Şu anda, bir Web API 'sine yapılan çağrıları korumanın tercih edilen yöntemi, her çağrının bir OAuth2 erişim belirteciyle birlikte olduğu OAuth2 taşıyıcı belirteç yaklaşımını kullanmaktır. Web API 'SI, gelen erişim belirtecini inceler ve gerekli kapsamlar içinde bulunursa, istenen işleme erişim izni verir. Örtük akış, JavaScript uygulamalarının bir Web API 'sine erişim belirteçleri elde etmek için kullanışlı bir mekanizma sağlar ve tanımlama bilgilerine göre çok sayıda avantaj sunar:
 
-* Gerek kaynak çağrıları – çapraz zorunlu kayıt yeniden yönlendirme URI'si belirteçleri dönüş belirteçleri değil gördüğümüz şey de, garanti eder. belirteçlerin güvenilir bir şekilde elde edilebilir
-* JavaScript uygulamaları, hedefledikleri – çok Web API'leri hiçbir kısıtlama olmaksızın etki alanları için ihtiyaç duydukları kadar erişim belirteçleri elde edebilirsiniz
-* Oturum gibi HTML5 özellikler veya yerel depolama, tanımlama bilgileri yönetim uygulaması için donuktur ise belirteç önbelleğe almayı ve kullanım ömrü yönetimi üzerinde Tam Denetim verin
-* Erişim belirteçleri siteler arası istek sahteciliği (CSRF) saldırılarına açık değil
+* Belirteçler, çapraz kaynak çağrılarına gerek kalmadan güvenilir bir şekilde elde edilebilir: belirteçlerin döndürüleceği yeniden yönlendirme URI 'sinin zorunlu kaydı, belirteçlerin hatalı olarak döndürülmediğini garanti eder
+* JavaScript uygulamaları, istedikleri sayıda Web API 'si için, her bir etki alanında kısıtlama olmadan, gerek duydukları sayıda erişim belirteci elde edebilir
+* Oturum veya yerel depolama gibi HTML5 özellikleri, belirteç önbelleğe alma ve ömür yönetimi üzerinde tam denetim verir, ancak tanımlama bilgileri yönetimi uygulama için donuk olur
+* Erişim belirteçleri siteler arası istek sahteciliğini önleme (CSRF) saldırılarına karşı savunmasız değildir
 
-Örtük verme akışı çoğunlukla güvenlik nedenleriyle, yenileme belirteçleri kesmez. Bir yenileme belirteci olarak, sayısı azalacağından, sızmasına durumunda bu nedenle çok fazla zarara inflicting çok daha fazla güç vermek, erişim belirteçleri olarak kapsamlı değildir. Örtük akış, belirteçleri URL'de teslim edilir, bu nedenle riskinin içinde yetkilendirme kodu verme göre olandan yüksektir.
+Örtük verme akışı, genellikle güvenlik nedenleriyle yenileme belirteçleri vermez. Yenileme belirteci, erişim belirteçleri olarak en dar kapsamlı değildir, bu nedenle çok daha fazla güç verilmeye devam ediyor ve çok daha fazla Zararsızmış olabilir. Örtük akışta, belirteçler URL 'de dağıtılır, bu nedenle, geri alma riski yetkilendirme kodu verenden daha yüksektir.
 
-Ancak, bir JavaScript uygulama kullanıcıdan kimlik bilgilerini tekrar tekrar sormadan erişim belirteçlerini yenileme kendi elden başka bir mekanizma vardır. Uygulamanın Azure ad yetkilendirme uç noktasına yönelik yeni belirteç isteklerini gerçekleştirmek için gizli bir iframe kullanın: tarayıcı hala etkin bir oturuma sahip olduğu sürece (okuma: oturum tanımlama bilgisi varsa) Azure AD etki alanına göre kimlik doğrulama isteği olabilir Kullanıcı etkileşimi gerek kalmadan başarıyla oluşur.
+Ancak, bir JavaScript uygulamasının, kullanıcıya kimlik bilgileri için sürekli olarak sormadan erişim belirteçlerini yenilemeye yönelik başka bir mekanizması vardır. Uygulama, Azure AD 'nin yetkilendirme uç noktasına karşı yeni belirteç istekleri gerçekleştirmek için gizli bir iframe kullanabilir: tarayıcının hala Azure AD etki alanına karşı etkin bir oturum (okuma: bir oturum tanımlama bilgisi vardır) olduğu sürece, kimlik doğrulama isteği Kullanıcı etkileşimi gerektirmeden başarıyla meydana gelir.
 
-Bu model, JavaScript uygulama bağımsız olarak erişim belirteçlerini yenileme ve yenilerini yeni bir API için (kullanıcı daha önce bunlar için onaylı şartıyla) bile alma olanağı verir. Bu, alma, sürdürme ve bir yenileme belirteci gibi bir yüksek değerli yapıt korumaya ek yükünü ortadan kaldırır. Sessiz yenileme gelebilecek yapıt Azure AD oturum tanımlama bilgisinin uygulamanın dışında yönetilir. Bu yaklaşımın başka bir avantajı, bir kullanıcının Azure AD'den Azure AD'ye tarayıcı sekmeleri birini çalıştıran, oturum açmış uygulamalarından herhangi birini kullanarak oturum açabilirsiniz olmasıdır. Bu Azure AD oturum tanımlama bilgisinin silinmesine neden olur ve JavaScript uygulama otomatik olarak kullanıma oturum açmış kullanıcının belirteçleri yenileme özelliği kaybedilmesine neden olur.
+Bu model, JavaScript uygulamasına, erişim belirteçlerini bağımsız olarak yenileme ve hatta yeni bir API için yeni bir API (Kullanıcı tarafından daha önce kendisine onay verilmiş olan) için yeni bir API alma özelliği verir. Bu, yenileme belirteci gibi yüksek değerli yapıtları alma, sürdürme ve koruma yükünü ortadan kaldırır. Sessiz yenilemeyi mümkün kılan yapıt, Azure AD oturum tanımlama bilgisi uygulama dışında yönetilir. Bu yaklaşımın bir diğer avantajı, Azure AD 'de oturum açmış uygulamalardan herhangi birini kullanarak, tarayıcı sekmelerinden birinde çalışan bir kullanıcının Azure AD 'den oturumu açmasını sağlayabilir. Bu, Azure AD oturum tanımlama bilgisinin silinmesine neden olur ve JavaScript uygulaması, oturum açan kullanıcı için belirteçleri yenileme özelliğini otomatik olarak kaybeder.
 
-## <a name="is-the-implicit-grant-suitable-for-my-app"></a>Uygulamam için örtük vermeyi uygundur?
+## <a name="is-the-implicit-grant-suitable-for-my-app"></a>Örtük izin uygulamam için uygun midir?
 
-Örtük vermeyi diğer verir değerinden daha fazla riskine neden olur ve ihtiyacınız dikkat edilmesi gereken alanları iyi belgelenmiştir (örneğin, [kötüye, erişim belirtecini örtük akış, kaynak sahibi taklit] [ OAuth2-Spec-Implicit-Misuse]ve [OAuth 2.0 tehdit modeli ve güvenlik konuları][OAuth2-Threat-Model-And-Security-Implications]). Ancak, büyük ölçüde etkin kod, bir tarayıcıya uzak bir kaynak tarafından sunulan yürütülen uygulamalarda etkinleştirmek için tasarlanmıştır alınmamasından ötürü olabilir, daha yüksek risk profili olur. Planlıyorsanız, bir SPA mimari hiçbir arka uç bileşenlerine sahip veya JavaScript aracılığıyla bir Web API'sini çağırmak mı istiyordunuz, belirteç edinme için örtük akış kullanılması önerilir.
+Örtük verme, diğer izin verenden daha fazla risk sunar ve dikkat etmeniz gereken alanların iyi belgelendiğinden (örneğin, [örtük akışta kaynak sahibine taklit etmek Için erişim belirtecinin kötüye kullanımı][OAuth2-Spec-Implicit-Misuse] ve [OAuth 2,0 tehdit modeli ve güvenliği) Dikkat edilecek noktalar][OAuth2-Threat-Model-And-Security-Implications]). Ancak, daha yüksek riskli profil büyük ölçüde, uzak bir kaynak tarafından tarayıcıya hizmet veren etkin kodu çalıştıran uygulamaların etkinleştirilmesi amaçlıyordu. SPA mimarisi planlarken, arka uç bileşenleri yoksa veya JavaScript aracılığıyla bir Web API 'SI çağırmak istiyorsanız, belirteç alımı için örtük akışın kullanılması önerilir.
 
-Örtük akış, uygulamanızı bir yerel istemciyse, harika uygun değildir. Azure AD oturum tanımlama bilgisinin yerel bir istemci bağlamında olmaması, uzun süreli oturumunun bakımını yapma toplanabilmesini uygulamanızdan deprives. Yani uygulamanızı sürekli olarak yeni kaynaklar için erişim belirteci alınırken girmesini ister.
+Uygulamanız yerel bir istemcili ise, örtük akış harika bir uyum değildir. Azure AD oturum tanımlama bilgisinin bir yerel istemci bağlamında yokluğu, uygulamanızı uzun süreli bir oturum koruma yoluyla kaldırır. Yani, uygulamanız yeni kaynaklar için erişim belirteçleri alırken Kullanıcı tarafından tekrar tekrar sorulacak.
 
-Bir arka uç ve arka uç kodunu API'den tüketen içeren bir Web uygulaması geliştiriyorsanız örtük akış ayrıca uygun değildir. Diğer verir çok daha fazla güç sağlar. Örneğin, OAuth2 istemci kimlik bilgileri verme kullanıcı temsilcileri aksine uygulamanın kendisi için atanan izinler yansıtan belirteçleri elde etme yeteneği sağlar. Bu durum, istemci bir kullanıcı etkin bir oturum ve benzeri ilgilendiğini değil, kaynaklarına programlı erişim bile koruma özelliği olduğu anlamına gelir. Sıra, ancak böyle bir onayları daha yüksek güvenlik Güvenceleri sağlar. Örneğin, erişim belirteçleri şu kullanıcı tarayıcıdan hiçbir zaman geçiş, bunlar kullanmayın tarayıcı geçmişini kaydedilmesini risk ve benzeri. İstemci uygulaması, ayrıca bir belirteç isterken güçlü kimlik doğrulaması gerçekleştirebilirsiniz.
+Arka uç içeren ve arka uç kodundan bir API kullanan bir Web uygulaması geliştiriyorsanız, örtük akış de uygun değildir. Diğer izinler size daha fazla güç verir. Örneğin, OAuth2 istemci kimlik bilgileri verme, Kullanıcı temsilcilerinin aksine uygulamanın kendisine atanan izinleri yansıtan belirteçleri elde etme yeteneği sağlar. Bu, bir kullanıcı oturumunda etkin bir şekilde olmadığında ve bu şekilde devam ettiğinizde, istemcinin kaynaklara programlı erişim sağlama yeteneğine sahip olduğu anlamına gelir. Ancak, bu tür izinler daha yüksek güvenlik garantisi verir. Örneğin, erişim belirteçleri Kullanıcı tarayıcısından hiçbir şekilde geçiş yapmayın, tarayıcı geçmişine kaydedilmeleri ve bu şekilde devam eder. İstemci uygulaması, belirteç istenirken güçlü kimlik doğrulaması da gerçekleştirebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* OAuth2 yetkilendirme ve protokolleri Azure AD tarafından akışlar destek vermek için başvuru bilgileri de dahil olmak üzere Geliştirici Kaynakları tam listesi için bkz [Azure AD Geliştirici Kılavuzu][AAD-Developers-Guide]
-* Bkz: [uygulamanın Azure AD ile tümleştirmek nasıl] [ ACOM-How-To-Integrate] uygulama tümleştirme işlemi hakkında ek ayrıntılı için.
+* Geliştirici kaynaklarının tüm listesi için, protokoller ve OAuth2 yetkilendirmesi için başvuru bilgileri de dahil olmak üzere Azure AD tarafından desteklenen [Azure AD Geliştirici Kılavuzu][AAD-Developers-Guide] ' na bakın.
+* Uygulama Tümleştirme sürecinde daha ayrıntılı bilgi için bkz. [bir uygulamayı Azure AD ile tümleştirme][ACOM-How-To-Integrate] .
 
 <!--Image references-->
 

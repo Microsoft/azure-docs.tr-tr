@@ -1,6 +1,6 @@
 ---
-title: Linux üzerinde - Azure App Service Kurumsal Java web uygulaması derleme | Microsoft Docs
-description: Wildfly Linux üzerinde Azure App Service'te çalışan bir Java Enterprise uygulamasını nasıl edinebileceğinizi öğrenin.
+title: Linux 'ta Java Enterprise Web App derleme-Azure App Service | Microsoft Docs
+description: Linux 'ta Azure App Service üzerinde çalışan bir Java Enterprise uygulamasını nasıl alabileceğinizi öğrenin.
 author: JasonFreeberg
 manager: routlaw
 ms.service: app-service-web
@@ -11,48 +11,48 @@ ms.topic: tutorial
 ms.date: 11/13/2018
 ms.author: jafreebe
 ms.custom: seodec18
-ms.openlocfilehash: dcd1ef5c54885b758ac9a301616d79a163999bc9
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: 2d26d9e145030e5972289c224dc2f76078d67527
+ms.sourcegitcommit: a0b37e18b8823025e64427c26fae9fb7a3fe355a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67509625"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68498492"
 ---
-# <a name="tutorial-build-a-java-ee-and-postgres-web-app-in-azure"></a>Öğretici: Azure'da bir Java EE ve Postgres web uygulaması oluşturma
+# <a name="tutorial-build-a-java-ee-and-postgres-web-app-in-azure"></a>Öğretici: Azure 'da Java EE ve Postgres Web uygulaması oluşturma
 
-Bu öğreticide Azure App Service'te bir Java Enterprise Edition (EE) web uygulaması oluşturma ve bir Postgres veritabanı'na bağlanma gösterilmektedir. İşlemi tamamladığınızda, olacaktır bir [WildFly](https://www.wildfly.org/about/) veri depolarken uygulama [Postgres için Azure veritabanı](https://azure.microsoft.com/services/postgresql/) Azure üzerinde çalışan [Linux üzerinde App Service'te](app-service-linux-intro.md).
+Bu öğreticide, Azure App Service üzerinde Java Enterprise Edition (EE) Web uygulaması oluşturma ve bunu bir Postgres veritabanına bağlama işlemlerinin nasıl yapılacağı gösterilir. İşiniz bittiğinde, [Linux üzerinde azure App Service](app-service-linux-intro.md)çalışan [Postgres için Azure veritabanı](https://azure.microsoft.com/services/postgresql/) 'nda veri depolayan bir yavama uygulamanız olur. [](https://www.wildfly.org/about/)
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > [!div class="checklist"]
-> * Maven kullanarak Azure'a bir Java EE uygulama dağıtma
+> * Maven kullanarak bir Java EE uygulamasını Azure 'a dağıtma
 > * Azure'da Postgres veritabanı oluşturma
-> * WildFly sunucusunu Postgres kullanacak şekilde yapılandırma
+> * Yavalar sunucusunu, Postgres 'yi kullanacak şekilde yapılandırma
 > * Uygulamayı güncelleştirme ve yeniden dağıtma
-> * WildFly üzerinde birim testleri çalıştırma
+> * Birim testlerini açık bir şekilde Çalıştır
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 1. [Git'i indirin ve yükleyin](https://git-scm.com/)
-2. [Maven 3'ü yükleyin ve indirin](https://maven.apache.org/install.html)
-3. [Azure CLI'yı yükleme ve indirme](https://docs.microsoft.com/cli/azure/install-azure-cli)
+2. [Maven 3 indirin ve yükleyin](https://maven.apache.org/install.html)
+3. [Azure CLı 'yı indirme ve yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli)
 
-## <a name="clone-and-edit-the-sample-app"></a>Kopyalamak ve örnek uygulamayı Düzenle
+## <a name="clone-and-edit-the-sample-app"></a>Örnek uygulamayı kopyalama ve düzenleme
 
-Bu adımda, örnek uygulamayı kopyalayın ve yapılandırma Maven proje nesne modeli (POM veya *pom.xml*) dağıtımı için.
+Bu adımda, örnek uygulamayı kopyalacaksınız ve dağıtım için Maven proje nesne modelini (pod veya *Pod. xml*) yapılandıracaksınız.
 
 ### <a name="clone-the-sample"></a>Örneği kopyalama
 
-Terminal penceresinde, bir çalışma dizini ve kopya Git [örnek depoyu](https://github.com/Azure-Samples/wildfly-petstore-quickstart).
+Terminal penceresinde, çalışma dizinine gidin ve [örnek depoyu](https://github.com/Azure-Samples/wildfly-petstore-quickstart)kopyalayın.
 
 ```bash
 git clone https://github.com/Azure-Samples/wildfly-petstore-quickstart.git
 ```
 
-### <a name="update-the-maven-pom"></a>Maven POM güncelleştir
+### <a name="update-the-maven-pom"></a>Maven Pod 'yi güncelleştirme
 
-Maven Azure eklentisi, istenen adı ve kaynak grubu, App Service ile güncelleştirin. App Service planı veya örnek önceden oluşturmanız gerekmez. Maven plugin, zaten yoksa, App Service ve kaynak grubu oluşturur.
+Maven Azure eklentisini App Service istenen adı ve kaynak grubuyla güncelleştirin. Önceden App Service planı veya örneği oluşturmanız gerekmez. Maven eklentisi, kaynak grubunu oluşturur ve henüz yoksa App Service.
 
-Aşağı kaydırarak `<plugins>` bölümünü *pom.xml*, değişiklik yapmak için 200 satır.
+Değişiklikleri yapmak için, aşağı `<plugins>` kaydırarak *Pod. xml*, satır 200 bölümüne kaydırabilirsiniz.
 
 ```xml
 <!-- Azure App Service Maven plugin for deployment -->
@@ -68,43 +68,43 @@ Aşağı kaydırarak `<plugins>` bölümünü *pom.xml*, değişiklik yapmak iç
 </plugin>  
 ```
 
-Değiştirin `YOUR_APP_NAME` ve `YOUR_RESOURCE_GROUP` App Service ve kaynak grubunuzun adlarına sahip.
+`YOUR_APP_NAME` Ve`YOUR_RESOURCE_GROUP` App Service ve kaynak grubunuzun adlarını değiştirin.
 
 ## <a name="build-and-deploy-the-application"></a>Uygulama derleme ve dağıtma
 
-Şimdi Maven App Service'e dağıtma ve uygulamamızı oluşturmak için kullanacağız.
+Şimdi de Maven 'i kullanarak uygulamamızı derleyip App Service.
 
-### <a name="build-the-war-file"></a>Derleme .war dosyası
+### <a name="build-the-war-file"></a>. War dosyasını oluşturun
 
-Bu projede POM, bir Web Arşivi (WAR) dosyasına uygulamayı paketlemek için yapılandırılır. Maven kullanarak uygulama oluşturun:
+Bu projedeki Pod, uygulamayı bir Web arşivi (WAR) dosyasına paketlemek üzere yapılandırılmıştır. Maven kullanarak uygulamayı oluşturun:
 
 ```bash
 mvn clean install -DskipTests
 ```
 
-Bu uygulamanın test çalışmalarını WildFly uygulama dağıtıldığında çalıştırılmak üzere tasarlanmıştır. Biz yerel olarak derlemek için testleri atlar ve App Service üzerinde uygulama dağıtıldıktan sonra testleri çalıştırın.
+Bu uygulamadaki test çalışmaları, uygulama bir Yavaya dağıtıldığında çalışacak şekilde tasarlanmıştır. Yerel olarak oluşturulacak testleri atlayacağız ve uygulama App Service dağıtıldıktan sonra testleri çalıştırırsınız.
 
 ### <a name="deploy-to-app-service"></a>App Service’e dağıtma
 
-WAR hazır olduğuna göre Azure eklentisi için App Service'e dağıtım yapmak kullanabiliriz:
+Artık WAR hazır olduğuna göre, App Service dağıtmak için Azure eklentisini kullanabiliriz:
 
 ```bash
 mvn azure-webapp:deploy
 ```
 
-Dağıtım tamamlandığında, sonraki adıma devam edin.
+Dağıtım tamamlandığında, bir sonraki adımla devam edin.
 
-### <a name="create-a-record"></a>Bir kayıt oluşturun
+### <a name="create-a-record"></a>Kayıt oluştur
 
-Bir tarayıcı açın ve gidin `https://<your_app_name>.azurewebsites.net/`. Tebrikler, Azure App Service'e bir Java EE uygulama dağıttığınız!
+Bir tarayıcı açın ve gidin `https://<your_app_name>.azurewebsites.net/`. Tebrikler, Azure App Service için bir Java EE uygulaması dağıttıysanız!
 
-Bu noktada, uygulamayı bir bellek içi H2 veritabanını kullanıyor. Gezinti çubuğunda bulunan "Yönetici"'ye tıklayın ve yeni bir kategori oluşturun. App Service örneğinizin yeniden başlatırsanız, bellek içi veritabanı kaydı kaybolur. Aşağıdaki adımlarda, Azure üzerinde Postgres veritabanı sağlayarak bu sorunu gidermek ve kullanılacağını WildFly yapılandırın.
+Bu noktada, uygulama bellek içi H2 veritabanı kullanıyor. Gezinti çubuğunda "Yönetici" ye tıklayın ve yeni bir kategori oluşturun. App Service örneğinizi yeniden başlatırsanız, bellek içi veritabanınızdaki kayıt kaybedilir. Aşağıdaki adımlarda, Azure 'da bir Postgres veritabanı sağlayarak bunu çözeceğinizi ve Yavalarını kullanmaya yönelik olarak yapılandıracaksınız.
 
-![Yönetici düğmesi konumu](media/tutorial-java-enterprise-postgresql-app/admin_button.JPG)
+![Yönetim düğmesi konumu](media/tutorial-java-enterprise-postgresql-app/admin_button.JPG)
 
-## <a name="provision-a-postgres-database"></a>Postgres veritabanı sağlama
+## <a name="provision-a-postgres-database"></a>Bir Postgres veritabanı sağlama
 
-Postgres veritabanı sunucusu sağlamak için bir terminal açın ve [az postgres server oluşturma](https://docs.microsoft.com/cli/azure/postgres/server) , aşağıdaki örnekte gösterildiği gibi komutu. Seçtiğiniz değerleriyle (köşeli dahil olmak üzere) yer tutucularını değiştirin, aynı kaynak kullanarak, Grup, App Service örneğinizin daha önce sağlanan. Sağladığınız yönetici kimlik bilgileri gelecek erişimi etkinleştirmek için bu nedenle, bunları daha sonra kullanmak için Not tuttuğunuzdan emin olun.
+Bir Postgres veritabanı sunucusu sağlamak için bir Terminal açın ve aşağıdaki örnekte gösterildiği gibi [az Postgres Server Create](https://docs.microsoft.com/cli/azure/postgres/server) komutunu kullanın. Daha önce App Service örneğiniz için verdiğiniz aynı kaynak grubunu kullanarak yer tutucuları (açılı ayraçlar dahil) tercih ettiğiniz değerlerle değiştirin. Sağladığınız yönetici kimlik bilgileri gelecekteki erişimi etkinleştirecek, bu nedenle daha sonra kullanmak üzere bunları bir yere uyguladığınızdan emin olun.
 
 ```bash
 az postgres server create \
@@ -116,21 +116,21 @@ az postgres server create \
     --admin-password <administrator password> \
 ```
 
-Bu komutu çalıştırdıktan sonra Azure portalına gidin ve Postgres veritabanına gidin. Yedekleme dikey penceresinde olduğunda, "Sunucu adı" ve "Sunucu Yöneticisi oturum açma adı" değerlerini kopyalayın, daha sonra gerekecektir.
+Bu komutu çalıştırdıktan sonra, Azure portal gidin ve Postgres veritabanınıza gidin. Dikey pencere yukarı yüklendiğinde, "sunucu adı" ve "Sunucu Yöneticisi oturum açma adı" değerlerini kopyalayın, daha sonra ihtiyacınız olacaktır.
 
 ### <a name="allow-access-to-azure-services"></a>Azure hizmetlerine erişime izin ver
 
-İçinde **bağlantı güvenliği** paneli Azure veritabanı dikey pencerenin "Azure hizmetlerine erişime izin ver" düğmesine geçiş **ON** konumu.
+Azure veritabanı dikey penceresinin **bağlantı güvenliği** panelinde, "Azure hizmetlerine erişime izin ver" düğmesine **Açık** konuma geçiş yapın.
 
 ![Azure hizmetlerine erişime izin verme](media/tutorial-java-enterprise-postgresql-app/postgress_button.JPG)
 
-## <a name="update-your-java-app-for-postgres"></a>Postgres için Java uygulamanızı güncelleştirin
+## <a name="update-your-java-app-for-postgres"></a>Postgres için Java uygulamanızı güncelleştirme
 
-Şimdi bazı değişiklikler bizim Postgres veritabanı kullanmak üzere etkinleştirmek için Java uygulaması yapacağız.
+Şimdi, Postgres veritabanınızı kullanmasını sağlamak için Java uygulamasında bazı değişiklikler yapacağız.
 
-### <a name="add-postgres-credentials-to-the-pom"></a>İçin POM Postgres kimlik bilgilerini ekleyin
+### <a name="add-postgres-credentials-to-the-pom"></a>Pod 'ye Postgres kimlik bilgileri ekleme
 
-İçinde *pom.xml*, büyük harflerle yazılan ifadeler yer tutucu değerlerini Postgres sunucu adı, yönetici oturum açma adı ve parola ile değiştirin. Bu alanlar Azure Maven Plugin içinde olur. (Değiştirdiğinizden emin olun `YOUR_SERVER_NAME`, `YOUR_PG_USERNAME`, ve `YOUR_PG_PASSWORD` içinde `<value>` ... etiketleri içinde değil `<name>` etiketleri!)
+*Poz. xml*dosyasında, büyük harfli yer tutucu değerlerini Postgres sunucu adı, yönetici oturum açma adı ve parola ile değiştirin. Bu alanlar Azure Maven eklentisinin içindedir. ( `YOUR_SERVER_NAME`, `YOUR_PG_USERNAME`Ve `<value>` etiketlerinin içinde bulunduğundan emin olun... `YOUR_PG_PASSWORD` `<name>` Etiketler içinde değil!)
 
 ```xml
 <plugin>
@@ -153,52 +153,52 @@ Bu komutu çalıştırdıktan sonra Azure portalına gidin ve Postgres veritaban
 </plugin>
 ```
 
-### <a name="update-the-java-transaction-api"></a>Java API işlem güncelleştir
+### <a name="update-the-java-transaction-api"></a>Java Işlem API 'sini güncelleştirme
 
-Ardından, böylece daha önce kullandığımız bellek içi H2 veritabanı yerine Java uygulamamız Postgres ile iletişim kurar, bizim Java işlem API (JPA) yapılandırmasını düzenlemek ihtiyacımız var. Bir düzenleyici açık *src/main/resources/META-INF/persistence.xml*. `<jta-data-source>` değerini `java:jboss/datasources/postgresDS` ile değiştirin. JTA XML dosyanızı, şimdi bu ayarı sahip olmalıdır:
+Daha sonra, Java uygulamamız, daha önce kullanmakta olduğumuz bellek içi H2 veritabanı yerine Postgres ile iletişim kuracak şekilde, Java Işlem API 'SI (JPA) yapılandırmanızı düzenlememiz gerekir. *Src/Main/Resources/meta-INF/kalıcılık. xml*için bir düzenleyici açın. `<jta-data-source>` değerini `java:jboss/datasources/postgresDS` ile değiştirin. JTA XML 'niz artık bu ayarı içermelidir:
 
 ```xml
 <jta-data-source>java:jboss/datasources/postgresDS</jta-data-source>
 ```
 
-## <a name="configure-the-wildfly-application-server"></a>WildFly uygulama sunucusunu yapılandırma
+## <a name="configure-the-wildfly-application-server"></a>Yavaya uygulama sunucusunu yapılandırma
 
-Yeniden yapılandırılan uygulamamız dağıtmadan önce biz WildFly uygulama sunucusu Postgres modülü ve bağımlılıkları ile güncelleştirmeniz gerekir. Daha fazla yapılandırma bilgileri şu adreste bulunabilir: [WildFly yapılandırma sunucusu](configure-language-java.md#configure-java-ee-wildfly).
+Yeniden yapılandırılmış uygulamamıza dağıtım yapmadan önce, Yavama uygulama sunucusunu Postgres modülü ve bağımlılıklarıyla güncelleştirmemiz gerekir. Daha fazla yapılandırma bilgisi, Yavama [sunucusunda](configure-language-java.md#configure-java-ee-wildfly)bulunabilir.
 
-Sunucuyu yapılandırmak için şu dört dosyalarında gerekir *wildfly_config /* dizini:
+Sunucuyu yapılandırmak için *wildfly_config/* dizininde dört dosya gerekir:
 
-- **postgresql-42.2.5.jar**: Bu JAR Dosyası Postgres için JDBC sürücüsü içindir. Daha fazla bilgi için [resmi Web sitesi](https://jdbc.postgresql.org/index.html).
-- **postgres module.xml**: Bu XML dosyası (org.postgres) Postgres modül için bir ad bildirir. Ayrıca, kullanılacak modülü için gerekli olan bağımlılıklar ve kaynakları belirtir.
-- **jboss_cli_commands.cl**: Bu dosya, JBoss CLI tarafından yürütülecek yapılandırma komutları içerir. Komutlar Postgres modülü WildFly uygulama sunucusuna ekleyin, kimlik bilgilerini sağlayın, JNDI adı bildirmek, vb. zaman aşımı eşiği. JBoss CLI ile alışkın değilseniz bkz [resmi belgelerine](https://access.redhat.com/documentation/red_hat_jboss_enterprise_application_platform/7.0/html-single/management_cli_guide/#how_to_cli).
-- **startup_script.sh**: Son olarak, App Service örneği başlatıldığında bu kabuk betiği yürütülür. Komut dosyası, yalnızca tek bir işlevi gerçekleştirir: komutlar akışkan *jboss_cli_commands.cli* JBoss CLI için.
+- **PostgreSQL-42.2.5. jar**: Bu JAR dosyası, Postgres için JDBC sürücüsüdür. Daha fazla bilgi için [Resmi Web sitesine](https://jdbc.postgresql.org/index.html)bakın.
+- **Postgres-Module. xml**: Bu XML dosyası, Postgres modülü (org. Postgres) için bir ad bildirir. Ayrıca, modülün kullanılması için gerekli kaynakları ve bağımlılıkları da belirtir.
+- **jboss_cli_commands. CLI**: Bu dosya, Jpatron CLı tarafından yürütülecek yapılandırma komutlarını içerir. Bu komutlar, Yavares uygulama sunucusuna Postgres modülünü ekler, kimlik bilgilerini sağlar, bir JNDı adı bildirir, zaman aşımı eşiğini ayarlar vb. Jpatron CLı 'yı tanımıyorsanız, [resmi belgelere](https://access.redhat.com/documentation/red_hat_jboss_enterprise_application_platform/7.0/html-single/management_cli_guide/#how_to_cli)bakın.
+- **startup_script. sh**: Son olarak, App Service örneğiniz her başlatıldığında bu kabuk betiği yürütülür. Betik yalnızca bir işlev gerçekleştirir: *jboss_cli_commands. CLI* Içindeki komutları JPATRON CLI 'ya boru.
 
-Bu dosyaların içeriğini özellikle okuma önerisi *jboss_cli_commands.cli*.
+Özellikle *jboss_cli_commands. CLI*olan bu dosyaların içeriğini okumayı çok önertik.
 
-### <a name="ftp-the-configuration-files"></a>FTP yapılandırma dosyaları
+### <a name="ftp-the-configuration-files"></a>Yapılandırma dosyalarını FTP
 
-FTP içeriği ihtiyacımız *wildfly_config /* bizim App Service örneğine. FTP kimlik bilgilerinizi almak için tıklayın **yayımlama profili Al** düğme Azure portalında App Service dikey penceresinde. FTP kullanıcı adı ve parola indirilen XML belgesinde olacaktır. Yayımlama profili hakkında daha fazla bilgi için bkz. [bu belgeyi](https://docs.microsoft.com/azure/app-service/deploy-configure-credentials).
+*Wildfly_config/* ' un içeriğini App Service ÖRNEĞIMIZE FTP ile kullanacağız. FTP kimlik bilgilerinizi almak için Azure portal App Service dikey penceresinde **Yayımlama profilini al** düğmesine tıklayın. FTP Kullanıcı adınız ve parolanız, indirilen XML belgesinde olacaktır. Yayımlama profili hakkında daha fazla bilgi için [Bu belgeye](https://docs.microsoft.com/azure/app-service/deploy-configure-credentials)bakın.
 
-Tercih ettiğiniz bir FTP aracını kullanarak, dört dosyaları aktarma *wildfly_config /* için */home/site/dağıtım/tools/* . (, Dizin dosyaları kendilerinin yalnızca Aktarım değil unutmayın.)
+Tercih ettiğiniz FTP aracını kullanarak, *wildfly_config/* to */Home/site/Deployments/araçlar/* konumundaki dört dosyayı aktarın. (Dizini, yalnızca dosyaların kendilerini aktarmayacağınızı unutmayın.)
 
-### <a name="finalize-app-service"></a>App Service Sonlandır
+### <a name="finalize-app-service"></a>Sonlandırma App Service
 
-App Service "Uygulama ayarları" panele dikey penceresine gidin. "Çalışma zamanı altında", "Başlangıç dosyası" alanın ayarlanacağı */home/site/deployments/tools/startup_script.sh*. Bu, sonra App Service örneği oluşturulur, ancak önce WildFly sunucuyu başlatır Kabuk betiği çalıştırılır garanti eder.
+App Service dikey penceresinde "uygulama ayarları" paneline gidin. "Çalışma zamanı" altında "başlangıç dosyası" alanını */Home/site/Deployments/Tools/startup_script.exe*olarak ayarlayın. Bu, App Service örneği oluşturulduktan sonra, ancak Yavaya sunucusu başlamadan önce kabuk betiğinin çalıştırılmasını sağlayacaktır.
 
-Son olarak, App service'inizi yeniden başlatın. "Genel bakış" panelinde düğmesidir.
+Son olarak, App Service yeniden başlatın. Düğme, "genel bakış" masasında bulunur.
 
-## <a name="redeploy-the-application"></a>Uygulamayı yeniden dağıtma
+## <a name="redeploy-the-application"></a>Uygulamayı yeniden dağıtın
 
-Bir terminal penceresinde, yeniden oluşturun ve uygulamanızı yeniden dağıtın.
+Bir Terminal penceresinde, uygulamanızı yeniden derleyin ve dağıtın.
 
 ```bash
 mvn clean install -DskipTests azure-webapp:deploy
 ```
 
-Tebrikler! Uygulamanız artık Postgres veritabanı kullanıyor ve uygulama içinde oluşturulan herhangi bir kayıt Postgres yerine önceki H3 bellek içi veritabanına depolanır. Bunu doğrulamak için bir kayıt olun ve App service'inizi yeniden başlatın. Uygulamanızı yeniden başlatırken kayıtları kalmaya devam eder.
+Tebrikler! Uygulamanız şimdi bir Postgres veritabanı kullanıyor ve uygulamada oluşturulan tüm kayıtlar önceki H2 bellek içi veritabanı yerine Postgres 'de saklanacaktır. Bunu onaylamak için bir kayıt yapabilir ve App Service yeniden başlatabilirsiniz. Kayıtlar, uygulamanız yeniden başlatıldığında yine de orada olacaktır.
 
 ## <a name="clean-up"></a>Temizleme
 
-Bu kaynaklara başka bir öğretici için gereksinim duymuyorsanız (sonraki adımlara bakın), aşağıdaki komutu çalıştırarak silebilirsiniz:
+Bu kaynaklara başka bir öğretici için ihtiyacınız yoksa (bkz. sonraki adımlar), aşağıdaki komutu çalıştırarak bunları silebilirsiniz:
 
 ```bash
 az group delete --name <your-resource-group>
@@ -209,16 +209,16 @@ az group delete --name <your-resource-group>
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 
 > [!div class="checklist"]
-> * Maven kullanarak Azure'a bir Java EE uygulama dağıtma
+> * Maven kullanarak bir Java EE uygulamasını Azure 'a dağıtma
 > * Azure'da Postgres veritabanı oluşturma
-> * WildFly sunucusunu Postgres kullanacak şekilde yapılandırma
+> * Yavalar sunucusunu, Postgres 'yi kullanacak şekilde yapılandırma
 > * Uygulamayı güncelleştirme ve yeniden dağıtma
-> * WildFly üzerinde birim testleri çalıştırma
+> * Birim testlerini açık bir şekilde Çalıştır
 
-Uygulamanıza özel bir DNS adı eşlemeyle ilgili bilgi edinmek için sonraki öğreticiye ilerleyin.
+Özel bir DNS adını uygulamanıza nasıl eşleyeceğinizi öğrenmek için bir sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
-> [Öğretici: Uygulamanıza özel DNS adı eşleme](../app-service-web-tutorial-custom-domain.md)
+> [Öğretici: Özel DNS adını uygulamanıza eşleyin](../app-service-web-tutorial-custom-domain.md)
 
 Ya da diğer kaynaklara göz atın:
 

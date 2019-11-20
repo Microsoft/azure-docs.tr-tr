@@ -1,5 +1,5 @@
 ---
-title: Sanal ağ için Azure CLI örnekleri | Microsoft Docs
+title: Sanal ağ için Azure CLI örnekleri
 description: Sanal ağ için Azure CLI örnekleri.
 services: virtual-network
 documentationcenter: virtual-network
@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: ''
 ms.workload: infrastructure
-ms.date: 04/17/2019
+ms.date: 07/15/2019
 ms.author: kumud
-ms.openlocfilehash: de96f101778b7011a5d3c67905b24908df7a7362
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
-ms.translationtype: HT
+ms.openlocfilehash: ff1017c8a6bc3c2806da6ea2a53b931aaf28644f
+ms.sourcegitcommit: a170b69b592e6e7e5cc816dabc0246f97897cb0c
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62098465"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74092088"
 ---
 # <a name="azure-cli-samples-for-virtual-network"></a>Sanal ağ için Azure CLI örnekleri
 
@@ -32,4 +32,5 @@ Aşağıdaki tablo, Azure CLI komutları ile bash betiklerine yönelik bağlant�
 | [İki sanal ağı eşleme](./scripts/virtual-network-cli-sample-peer-two-virtual-networks.md) | Aynı bölgede iki sanal ağ oluşturur ve bunları bağlar. |
 | [Bir ağ sanal gereci yoluyla trafiği yönlendirme](./scripts/virtual-network-cli-sample-route-traffic-through-nva.md) | İki alt ağ arasında trafiği yönlendirebilen bir sanal makine ve ön uç ve arka uç alt ağları içeren bir sanal ağ oluşturur. |
 | [Gelen ve giden sanal makine ağ trafiğini filtreleme](./scripts/virtual-network-cli-sample-filter-network-traffic.md) | Ön uç ve arka uç alt ağları ile sanal ağ oluşturur. Ön uç alt ağına gelen ağ trafiği, HTTP, HTTPS ve SSH ile sınırlıdır. Arka uç alt ağından İnternet’e giden trafiğe izin verilmez. |
-|[Yapılandırma IPv4 + IPv6 ikili yığını sanal ağ](./scripts/virtual-network-cli-sample-ipv6-dual-stack.md)|İkili yığın (IPv4 + IPv6) sanal ağ ile iki VM ve bir Azure temel yük dengeleyici genel IP adresleri IPv4 ve IPv6 ile dağıtır. |
+|[Temel Load Balancer IPv4 + IPv6 çift yığın sanal ağını yapılandırma](./scripts/virtual-network-cli-sample-ipv6-dual-stack.md)|İki VM ile çift yığın (IPv4 + IPv6) sanal ağını ve IPv4 ve IPv6 genel IP adreslerine sahip bir Azure temel Load Balancer dağıtır. |
+|[IPv4 + IPv6 çift yığın sanal ağını Standart Load Balancer ile yapılandırma](./scripts/virtual-network-cli-sample-ipv6-dual-stack-standard-load-balancer.md)|İki VM ile çift yığın (IPv4 + IPv6) sanal ağını ve IPv4 ve IPv6 genel IP adreslerine sahip bir Azure Standart Load Balancer dağıtır. |

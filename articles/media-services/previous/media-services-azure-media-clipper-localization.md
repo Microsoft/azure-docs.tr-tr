@@ -1,44 +1,44 @@
 ---
-title: Azure Media Clipper'ı yerelleştirmeyi yapılandırma | Microsoft Docs
-description: Azure Media Clipper'ı desteklenen diller ve yerelleştirme desteği hakkında bilgi edinin
+title: Azure Media Clipper yerelleştirmesini yapılandırma | Microsoft Docs
+description: Azure Media Clipper desteklenen diller ve yerelleştirme desteği hakkında bilgi edinin
 services: media-services
-keywords: clip;subclip;encoding;media
-author: dbgeorge
-manager: jasonsue
-ms.author: dwgeo
+keywords: klip; alt klip; kodlama; medya
+author: Juliako
+manager: femila
+ms.author: juliako
 ms.date: 03/14/2019
 ms.topic: article
 ms.service: media-services
-ms.openlocfilehash: 41fd483a0b78619db6d018cf4b2ab7933a7c3031
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 96ffdfe5e6b3e913bd5596dd624e35afcaecfabe
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61465805"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685036"
 ---
 # <a name="configure-localization"></a>Yerelleştirmeyi yapılandırma 
 
-Azure Media Clipper'ı 18 dilde kullanılabilir. Pencere öğesi dilini ayarlamak amacıyla, tanımlamalısınız `language` başlatma sırasında parametre. İstediğiniz dil kodu dizesinde aşağıdaki listeden geçirin:
-- Çince (Basitleştirilmiş): zh-hans
-- Çince (Geleneksel): zh-hant
-- Çekçe: cs
-- Hollanda, Flemish: nl
-- English: en
+Azure Medya Clipper, 18 dilde kullanılabilir. Pencere öğesi dilini ayarlamak için başlatma sırasında `language` parametresini tanımlamanız gerekir. Aşağıdaki listeden istenen dil kodu dizesini geçirin:
+- Çince (Basitleştirilmiş): zh-Hans
+- Çince (Geleneksel): zh-Hant
+- Çekçe: CS
+- Felemenkçe, Flemish: nl
+- İngilizce: en
 - Fransızca: fr
-- Almanca: Gizle
-- Macarca: hu
-- İtalyanca:,
+- Almanca: de
+- Macarca: Hu
+- İtalyanca: BT
 - Japonca: ja
-- Korece: ko
+- Korece: Ko
 - Lehçe: pl
 - Portekizce (Brezilya): pt-br
-- Portekizce (Portekiz): pt-pt
+- Portekizce (Portekiz): PT NK
 - Rusça: ru
-- Spanish: es
-- Swedish: sv
+- İspanyolca: es
+- İsveççe: ZF
 - Türkçe: tr
 
-Özel dil sözlüğü ayarlamak veya varsayılan dil sözlüğü genişletmek için tanımlamalısınız `languages` veya `extraLanguages` parametresi, sırasıyla. Şu JSON biçimini kullanarak özel bir sözlükte iletirsiniz:
+Özel bir dil sözlüğü ayarlamak veya varsayılan dil sözlüğünü genişletmek için sırasıyla `languages` veya `extraLanguages` parametresini tanımlamanız gerekir. Aşağıdaki JSON biçimini kullanarak özel bir sözlük geçirin:
 
 ```javascript
 {
@@ -50,7 +50,7 @@ Azure Media Clipper'ı 18 dilde kullanılabilir. Pencere öğesi dilini ayarlama
 }
 ```
 
-Örneğin, aşağıdaki örnek yerelleştirilmiş İngilizce dizeleri tanımlar:
+Örneğin, aşağıdaki örnek yerelleştirilmiş Ingilizce dizeleri tanımlar:
 
 ```javascript
 {
@@ -140,7 +140,7 @@ Azure Media Clipper'ı 18 dilde kullanılabilir. Pencere öğesi dilini ayarlama
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Media Clipper'ı yapılandırmak için sonraki adımlara bakın:
-- [Azure Media Clipper'a varlık yükleme](media-services-azure-media-clipper-load-assets.md)
+Azure Medya Clipper 'ı yapılandırmaya yönelik sonraki adımlara bakın:
+- [Varlıkları Azure Media Clipper 'a yükleme](media-services-azure-media-clipper-load-assets.md)
 - [Özel klavye kısayollarını yapılandırma](media-services-azure-media-clipper-keyboard-shortcuts.md)
-- [Clipper kırpma işlerini gönderme](media-services-azure-media-clipper-submit-job.md)
+- [Clipper 'dan kırpma işleri gönderme](media-services-azure-media-clipper-submit-job.md)

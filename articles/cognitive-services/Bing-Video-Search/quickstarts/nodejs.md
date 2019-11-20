@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Bing Video arama REST API'si ve Node.js kullanarak video arayın"
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, Bing Video arama REST kullanarak JavaScript API'si için video arama istekleri göndermek için kullanın.
+title: 'Hızlı Başlangıç: Bing Video Arama REST API ve Node. js kullanarak video arayın'
+titleSuffix: Azure Cognitive Services
+description: JavaScript kullanarak Bing Video Arama REST API video arama istekleri göndermek için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,36 +10,36 @@ ms.subservice: bing-video-search
 ms.topic: quickstart
 ms.date: 06/26/2019
 ms.author: aahi
-ms.openlocfilehash: a7cfdeb69fd0df9d79424ade3823ab7f8adb4913
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 786302b882fbd59932af17ccc6a390fa41b30ac9
+ms.sourcegitcommit: 13a289ba57cfae728831e6d38b7f82dae165e59d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67449287"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68932966"
 ---
-# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-nodejs"></a>Hızlı Başlangıç: Bing Video arama REST API'si ve Node.js kullanarak video arayın
+# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-nodejs"></a>Hızlı Başlangıç: Bing Video Arama REST API ve Node. js kullanarak video arayın
 
-Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir JSON yanıtı Arama sonuçlarından görüntülemek için kullanın. Bu basit bir JavaScript uygulama API'sine HTTP video arama sorgusu gönderir ve yanıtını görüntüler. Bu uygulamanın, JavaScript'te yazılmış ve Node.js kullanır, ancak çoğu programlama dilleri ile uyumlu bir RESTful Web hizmeti API'dir. Bu örneğin kaynak kodu, ek hata işleme ve kod açıklama notları ile [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingVideoSearchv7.js)’da bulunabilir.
+Bing Video Arama API'si ilk çağrısını yapmak ve JSON yanıtından bir arama sonucu görüntülemek için bu hızlı başlangıcı kullanın. Bu basit JavaScript uygulaması, API 'ye bir HTTP video arama sorgusu gönderir ve yanıtı görüntüler. Bu uygulama JavaScript 'te yazıldığı ve Node. js kullandığından, API çoğu programlama dili ile uyumlu olan bir yeniden sorun Web hizmetidir. Bu örneğin kaynak kodu, ek hata işleme ve kod açıklama notları ile [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingVideoSearchv7.js)’da bulunabilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 * [Node.js](https://nodejs.org/en/download/)
 
-* JavaScript için istek Modülü
-    * Bu modül kullanarak yükleyebilirsiniz. `npm install request`
+* JavaScript için Istek modülü
+    * Bu modülü kullanarak yükleyebilirsiniz`npm install request`
 
 [!INCLUDE [cognitive-services-bing-video-search-signup-requirements](../../../../includes/cognitive-services-bing-video-search-signup-requirements.md)]
 
-## <a name="initialize-the-application"></a>Uygulamayı Başlat
+## <a name="initialize-the-application"></a>Uygulamayı başlatma
 
-1. Yeni bir JavaScript dosyası, sık kullandığınız IDE veya düzenleyici oluşturun. Katılık ayarlayın ve aşağıdaki gereksinim ekleyin:
+1. En sevdiğiniz IDE veya düzenleyicide yeni bir JavaScript dosyası oluşturun. Striclük ayarlayın ve aşağıdaki gereksinimi ekleyin:
 
     ```javascript
     'use strict';
     let https = require('https');
     ```
 
-2. API uç noktanıza, abonelik anahtarını ve arama teriminizi değişkenleri oluşturun.
+2. API uç noktanız, abonelik anahtarınız ve arama teriminiz için değişkenler oluşturun.
 
     ```javascript
     let subscriptionKey = 'enter key here';
@@ -50,7 +50,7 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
 
 ## <a name="create-a-response-handler"></a>Yanıt işleyici oluşturma
 
-1. Çağrılan bir işlev oluşturma `response_handler` API'sinden bir JSON yanıtı gerçekleştirilecek. Yanıt gövdesi için bir değişken oluşturun. Yanıt ekleme yaparken bir `data` bayrağı alındığında, kullanarak `response.on()`.
+1. API 'den JSON yanıtı `response_handler` almak için adlı bir işlev oluşturun. Yanıt gövdesi için bir değişken oluşturun. `data` Kullanarak`response.on()`bir bayrak alındığında yanıtı ekleyin.
 
     ```javascript
     let response_handler = function (response) {
@@ -61,7 +61,7 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
     };
     ```
     
-   1. Zaman `end` olan sinyal, kullanın `response.on()` bing ile ilgili üst bilgileri depolamak için (başlayarak `bingapis` veya `x-msedge-`). Ardından kullanarak JSON Ayrıştır `JSON.parse()`, bir dize dönüştürmek `JSON.stringify()`, yazdırabilirsiniz.
+   1. Ne `end` zaman sinyalle, `response.on()` Bing ile `bingapis` ilgili üst bilgileri depolamak için kullanın (veya `x-msedge-`sürümünden itibaren). Ardından, kullanarak `JSON.parse()`JSON 'ı ayrıştırın, ile `JSON.stringify()`bir dizeye dönüştürün ve yazdırın.
 
        ```javascript
        response.on('end', function () {
@@ -75,9 +75,9 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
        });
        ```
 
-# <a name="create-and-send-the-search-request"></a>Oluşturma ve arama isteği gönderme
+## <a name="create-and-send-the-search-request"></a>Arama isteği oluştur ve Gönder
 
-1. Çağrılan bir işlev oluşturma `bing_video_search()`. Ana bilgisayar adı ve üst bilgiler dahil olmak üzere, istek parametrelerini ekleyin. Arama teriminizi kodlama ve yol parametreniz eklemenin `?q=` parametresi. Ardından istekle Gönder `req.end()`.
+1. Adlı `bing_video_search()`bir işlev oluşturun. İsteğiniz için ana bilgisayar adınızı ve üst bilgileri de içeren parametreleri ekleyin. Arama teriminizi kodlayın ve `?q=` parametresi ile Path parametresine ekleyin. Sonra isteği ile `req.end()`gönderin.
 
     ```javascript
     let bing_video_search = function (search_term) {
@@ -208,8 +208,8 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Tek sayfa uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
+> [Tek sayfalı Web uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
 
 ## <a name="see-also"></a>Ayrıca bkz. 
 
- [Bing Video arama API'si nedir?](../overview.md)
+ [Bing Video Arama API'si nedir?](../overview.md)

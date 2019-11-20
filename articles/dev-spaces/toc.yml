@@ -9,14 +9,18 @@
       items:
         - name: Takım geliştirme
           href: quickstart-team-development.md
-        - name: Java (VS Code ve CLI)
-          href: quickstart-java.md
-        - name: .NET Core (VS Code ve CLI)
-          href: quickstart-netcore.md
-        - name: .NET Core (Visual Studio)
-          href: quickstart-netcore-visualstudio.md
-        - name: Node.js (VS Code ve CLI)
-          href: quickstart-nodejs.md
+        - name: Hata ayıklama ve yineleme
+          items:
+            - name: Visual Studio Code ve Java kullanma
+              href: quickstart-java.md
+            - name: Visual Studio Code ve .NET Core kullanma
+              href: quickstart-netcore.md
+            - name: Visual Studio Code ve Node.js kullanma
+              href: quickstart-nodejs.md
+            - name: Visual Studio ve .NET Core kullanma
+              href: quickstart-netcore-visualstudio.md
+        - name: CLI kullanarak geliştirme
+          href: quickstart-cli.md
     - name: Öğreticiler
       items:
         - name: Java (VS Code ve CLI)
@@ -55,8 +59,12 @@
       items:
         - name: Geliştirme Alanları Nasıl Çalışır?
           href: how-dev-spaces-works.md
+        - name: Dev Spaces ile VS Code nasıl çalışır?
+          href: how-vs-code-works-with-dev-spaces.md
     - name: Nasıl yapılır
       items:
+        - name: Azure Dev Spaces’i yükleme
+          href: how-to/install-dev-spaces.md
         - name: Azure Cloud Shell kullanarak Kubernetes kümesi oluşturma
           href: how-to/create-cluster-cloud-shell.md
         - name: Azure Dev Spaces'i paylaşma
@@ -65,13 +73,27 @@
           href: how-to/manage-secrets.md
         - name: Özel NuGet akışı kullanma
           href: how-to/use-custom-nuget-feed.md
+        - name: Özel Helm deposu kullanma
+          href: how-to/use-private-helm-repo.md
         - name: Azure Dev Spaces ile kubectl kullanma
           href: how-to/use-kubectl-with-azure-dev-spaces.md
         - name: Azure Dev Spaces araçlarını yükseltme
           href: how-to/upgrade-tools.md
         - name: Azure Dev Spaces ile CI/CD kullanma
           href: how-to/setup-cicd.md
+        - name: Azure Dev Spaces ile GitHub Eylemlerini Kullanma (önizleme)
+          href: how-to/github-actions.md
+        - name: Jenkins için Azure Dev Spaces eklentisini kullanma
+          href: ../jenkins/tutorial-jenkins-dev-spaces.md
         - name: Azure Dev Spaces için iş sürekliliği ve olağanüstü durum kurtarma
           href: how-to/dev-spaces-business-continuity.md
+        - name: Windows kapsayıcıları ile etkileşim kurma
+          href: how-to/run-dev-spaces-windows-containers.md
+        - name: Özel giriş ve HTTPS için traefik kullanma
+          href: how-to/ingress-https-traefik.md
+        - name: Geliştirme makinenizi AKS kümesine bağlama (önizleme)
+          href: how-to/connect.md
     - name: Sorun giderme
       href: troubleshooting.md
+    - name: SSS
+      href: faq.md

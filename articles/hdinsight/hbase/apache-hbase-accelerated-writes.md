@@ -1,50 +1,51 @@
 ---
-title: Azure HDInsight için Apache HBase yazmaları hızlandırılmış
-description: Apache HBase yazmak isterseniz günlüğün performansını artırmak için premium yönetilen diskler kullanan Azure HDInsight hızlandırılmış Yazar özelliğine genel bakış sağlar.
+title: Apache HBase için Azure HDInsight hızlandırılmış yazma Işlemleri
+description: Apache HBase yazma öncesinde günlüğü performansını geliştirmek için Premium yönetilen diskler kullanan Azure HDInsight hızlandırılmış yazma özelliğine genel bakış sunar.
 services: hdinsight
 ms.service: hdinsight
 author: hrasheed-msft
 ms.author: hrasheed
+ms.reviewer: jasonh
 ms.topic: conceptual
-ms.date: 4/29/2019
-ms.openlocfilehash: 219899c2e336f544ff6572589cc79f84f555490d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/21/2019
+ms.openlocfilehash: bcc9736280b144a77bca57b4f4df1303f4b54796
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65233843"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71179096"
 ---
-# <a name="azure-hdinsight-accelerated-writes-for-apache-hbase"></a>Azure HDInsight için Apache HBase yazmaları hızlandırılmış
+# <a name="azure-hdinsight-accelerated-writes-for-apache-hbase"></a>Apache HBase için Azure HDInsight hızlandırılmış yazma Işlemleri
 
-Bu makalede arka plan sağlar **hızlandırılmış Yazar** Azure HDInsight, Apache HBase için özellik ve nasıl etkili bir şekilde geliştirmek için kullanılabilmesi için yazma performansı. **Hızlandırılmış yazma** kullanan [Azure premium SSD yönetilen diskleri](../../virtual-machines/linux/disks-types.md#premium-ssd) performansı, Apache HBase yazma devam günlük (WAL). Apache HBase hakkında daha fazla bilgi için bkz: [HDInsight, Apache HBase nedir](apache-hbase-overview.md).
+Bu makalede, Azure HDInsight 'ta Apache HBase için **hızlandırılmamış yazma** özelliği ve yazma performansını geliştirmek için etkin bir şekilde nasıl kullanılabilecek arka plan sağlanmaktadır. **Hızlandırılmış yazma işlemleri** , Apache HBase yazma günlüğü (Wal) performansını geliştirmek için [Azure Premium SSD tarafından yönetilen diskleri](../../virtual-machines/linux/disks-types.md#premium-ssd) kullanır. Apache HBase hakkında daha fazla bilgi edinmek için bkz. [HDInsight 'Ta Apache HBase nedir](apache-hbase-overview.md).
 
 ## <a name="overview-of-hbase-architecture"></a>HBase mimarisine genel bakış
 
-HBase içinde bir **satır** bir veya daha fazla oluşur **sütunları** ve tarafından tanımlanan bir **satır anahtarı**. Birden çok satır oluşturan bir **tablo**. Sütunları içeren **hücreleri**, bu sütunda değeri zaman damgalı sürümleri olan. Sütunlar halinde gruplanır **sütun ailesi**, ve bir sütun ailesindeki tüm sütunları birlikte adlı depolama dosyalarda saklanır **HFiles**.
+HBase 'de, bir **satır** bir veya daha fazla **sütundan** oluşur ve bir **satır anahtarı**tarafından tanımlanır. Birden çok satır bir **tablo**yapar. Sütunlar, bu sütundaki değerin zaman damgamış sürümleri olan **hücreler**içerir. Sütunlar **sütun aileleri**halinde gruplandırılır ve bir sütun ailesindeki tüm sütunlar, **hfiles**adlı depolama dosyalarında birlikte depolanır.
 
-**Bölgeleri** Hbase'de veri işleme yükü dengelemek için kullanılır. HBase tablo satırlarını tek bir bölgede ilk depolar. Satırları tablo arttıkça veri miktarı olarak birden çok bölge arasında yayılır. **Bölge sunucuları** birden çok bölgeye yönelik istekleri işleyebilir.
+HBase **bölgeleri** , veri işleme yükünü dengelemek için kullanılır. HBase öncelikle bir tablonun satırlarını tek bir bölgede depolar. Tablodaki veri miktarı arttıkça, satırlar birden çok bölgeye yayılır. **Bölge sunucuları** , birden çok bölgeye yönelik istekleri işleyebilir.
 
-## <a name="write-ahead-log-for-apache-hbase"></a>Apache HBase için önceden günlüğe yaz
+## <a name="write-ahead-log-for-apache-hbase"></a>Apache HBase için önceden yazma günlüğü
 
-HBase, ilk yürütme günlüğü bir yazma devam günlük (WAL) adlı bir türü için veri güncelleştirmeleri yazar. Güncelleştirme WAL depolandıktan sonra bellek içi için yazılmadan **MemStore**. Bellekteki verileri maksimum kapasitesine ulaşıldıysa olarak diske yazılmış bir **Hfıle**.
+HBase önce veri güncelleştirmelerini yazma öncesinde günlük (WAL) olarak adlandırılan bir işleme günlüğü türüne yazar. Güncelleştirme WAL 'de depolandıktan sonra, bellek içi **Memstore**'e yazılır. Bellekteki veriler en yüksek kapasiteye ulaştığında, bir **hfile**olarak diske yazılır.
 
-Varsa bir **RegionServer** kilitlenmesine veya kullanılamaz duruma gelirse güncelleştirmeleri oynamanıza MemStore aktarılmadan önce devam yazma günlük kullanılabilir. WAL olmadan, bir **RegionServer** güncelleştirmeleri boşaltma önce kilitleniyor bir **Hfıle**, tüm bu güncelleştirmelerin kaybolur.
+Bir **Regionserver** , memstore temizlenmeden önce kilitlenirse veya kullanılamaz hale gelirse, güncelleştirmeleri yeniden oynatmak Için önceden yazma günlüğü kullanılabilir. WAL olmadan, bir **Regionserver** bir **hfile**güncelleştirmelerini reçeteye göre kilitlenirse, tüm bu güncelleştirmeler kaybedilir.
 
-## <a name="accelerated-writes-feature-in-azure-hdinsight-for-apache-hbase"></a>Azure HDInsight için Apache HBase hızlandırılmış yazma özelliği
+## <a name="accelerated-writes-feature-in-azure-hdinsight-for-apache-hbase"></a>Apache HBase için Azure HDInsight 'ta hızlandırılmış yazma özelliği
 
-Hızlandırılmış Yazar özelliğini daha yüksek yazma-gecikmeleri yazma devam bulut depolama alanında olan günlükleri kullanarak neden olunan sorununu çözer.  HDInsight Apache HBase için hızlandırılmış Yazar özellik kümeleri, ekler premium SSD yönetilen disklere her RegionServer (çalışan düğümü). Yazma devam günlükleri sonra bu disklerdeki premium yönetilen-bulut depolama yerine oluşturulmuş Hadoop dosya sistemi (HDFS) için yazılmıştır.  Premium yönetilen diskler Solid-State diskleri (SSD'ler) ve hataya dayanıklılık ile mükemmel g/ç performansı sunar.  Bir depolama birimi kesilse yönetilmeyen disklerden farklı olarak, aynı kullanılabilirlik kümesindeki diğer depolama birimleri etkilemez.  Sonuç olarak, yönetilen diskler, düşük yazma gecikme süresi ve uygulamalarınız için daha iyi esneklik sağlar. Azure yönetilen diskler hakkında daha fazla bilgi için bkz: [giriş Azure yönetilen diskler](../../virtual-machines/windows/managed-disks-overview.md). 
+Hızlandırılmış yazma özelliği, bulut depolamadaki ön yazma günlüklerini kullanmanın neden olduğu daha yüksek yazma gecikme süreleriyle ilgili sorunu çözer.  HDInsight Apache HBase kümeleri için hızlandırılmış yazma özelliği, Premium SSD ile yönetilen diskleri her RegionServer 'a (çalışan düğümü) iliştirir. Sonradan yazma günlükleri, bulut depolaması yerine bu Premium yönetilen disklere takılan Hadoop dosya sistemine (SUI) yazılır.  Premium yönetilen diskler, katı hal diskleri (SSD 'Ler) kullanır ve hata toleransı ile mükemmel g/ç performansı sunar.  Yönetilmeyen disklerden farklı olarak, bir depolama birimi kapalıysa, aynı Kullanılabilirlik kümesindeki diğer depolama birimlerini etkilemez.  Sonuç olarak, yönetilen diskler, uygulamalarınız için düşük yazma gecikme süresi ve daha iyi dayanıklılık sağlar. Azure tarafından yönetilen diskler hakkında daha fazla bilgi edinmek için bkz. [Azure yönetilen disklere giriş](../../virtual-machines/windows/managed-disks-overview.md). 
 
-## <a name="how-to-enable-accelerated-writes-for-hbase-in-hdinsight"></a>HDInsight HBase için hızlandırılmış Yazar'ı etkinleştirme
+## <a name="how-to-enable-accelerated-writes-for-hbase-in-hdinsight"></a>HDInsight 'ta HBase için hızlandırılmış yazma Işlemleri nasıl etkinleştirilir
 
-Hızlandırılmış Yazar özelliğiyle yeni bir HBase kümesi oluşturmak için adımları [HDInsight kümelerinde ayarlama](../hdinsight-hadoop-provision-linux-clusters.md) ulaşana kadar **3. adım, depolama**. Altında **meta depo ayarları**, yanındaki onay kutusuna tıklayın **etkinleştirin (Önizleme) Yazar hızlandırılmış**. Ardından, küme oluşturma için kalan adımlarla devam edin.
+Hızlandırılmış yazma özelliği ile yeni bir HBase kümesi oluşturmak için, **3. adıma**ulaşana kadar [HDInsight 'ta kümeleri ayarlama](../hdinsight-hadoop-provision-linux-clusters.md) bölümündeki adımları izleyin. **Meta veri deposu ayarları**altında, **hızlandırılmış yazma işlemlerini etkinleştir (Önizleme)** seçeneğinin yanındaki onay kutusuna tıklayın. Ardından, küme oluşturma için kalan adımlara devam edin.
 
-![HDInsight Apache HBase için hızlandırılmış yazma seçeneğini etkinleştirin](./media/apache-hbase-accelerated-writes/accelerated-writes-cluster-creation.png)
+![HDInsight Apache HBase için hızlandırılmış yazma seçeneğini etkinleştirme](./media/apache-hbase-accelerated-writes/accelerated-writes-cluster-creation.png)
 
 ## <a name="other-considerations"></a>Dikkat edilecek diğer noktalar
 
-Veri dayanıklılığı korumak için en az üç çalışan düğümü ile bir küme oluşturun. Oluşturulduktan sonra Üçten az çalışan düğümü kümeye ölçeğini olamaz.
+Veri dayanıklılığını korumak için en az üç çalışan düğümü olan bir küme oluşturun. Oluşturulduktan sonra, kümeyi üçten az çalışan düğümden ölçeklendirdirebilirsiniz.
 
-Flush veya önceden yazma günlük verilerini kaybetmeyin böylece kümeyi silmeden önce HBase tablolarını devre dışı.
+Küme silinmeden önce HBase tablolarınızı boşaltıp veya devre dışı bırakarak, yazma öncesi günlük verilerini kaybetmezsiniz.
 
 ```
 flush 'mytable'
@@ -54,7 +55,13 @@ flush 'mytable'
 disable 'mytable'
 ```
 
+Kümenizin ölçeğini ölçeklendirirken benzer adımları izleyin: tabloları temizleyin ve gelen verileri durdurmak için tablolarınızı devre dışı bırakın. Kümenizin ölçeğini üçten az düğüm olacak şekilde ölçeklendirebilirsiniz.
+
+Bu adımları takip etmek, başarılı bir ölçeklendirme işlemi sağlar ve bir süs Yot 'ın, alt veya geçici dosyalar nedeniyle güvenli mod olma olasılığını ortadan önler.
+
+Süs Yot ölçeği bir ölçeklendirdikten sonra safemode ' e gidilırsa, doğru çoğaltılan blokları yeniden çoğaltmak ve güvenli moddan yararlanmak için, bu komutu kullanın. Bu yeniden çoğaltma, HBase 'i başarıyla yeniden başlatmanıza olanak tanır.
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Apache HBase resmi belgelerine [devam günlük yazma özelliği](https://hbase.apache.org/book.html#wal)
-* Hızlandırılmış Yazar kullanmak için HDInsight Apache HBase kümenizi yükseltmek için bkz: [bir Apache HBase kümesi yeni bir sürüme geçirmek](apache-hbase-migrate-new-version.md).
+* [Öne yazma günlüğü özelliği](https://hbase.apache.org/book.html#wal) hakkında resmi Apache HBase belgeleri
+* HDInsight Apache HBase kümenizi hızlandırılmış yazmaları kullanacak şekilde yükseltmek için bkz. [Apache HBase kümesini yeni bir sürüme geçirme](apache-hbase-migrate-new-version.md).

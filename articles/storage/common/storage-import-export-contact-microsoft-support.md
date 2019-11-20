@@ -6,14 +6,14 @@ author: alkohli
 ms.service: storage
 ms.topic: article
 ms.date: 03/29/2018
-ms.author: alkohli;
+ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: 42c8c9c89a69224b222aabe8e929d800d22162ce
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8361c32860d48b78c778ea5106ba04715fcc5f3c
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65604232"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67621048"
 ---
 # <a name="open-a-support-ticket-for-an-importexport-job"></a>İçeri/dışarı aktarma işi için bir destek bileti açın
 
@@ -40,7 +40,7 @@ Bir destek isteği oluşturmak için aşağıdaki adımları gerçekleştirin:
         - Seçerseniz **Blob**seçin **kaynak**, **kapsayıcı adları** (isteğe bağlı) ve **destek planı**.
             ![BLOB seçin](./media/storage-import-export-contact-microsoft-support/import-export-support2.png)
         - Seçerseniz **dosya**seçin **kaynak**, **dosya paylaşımı adları** (isteğe bağlı) ve **destek planı** ![Dosya Seç](./media/storage-import-export-contact-microsoft-support/import-export-support4.png)
-    4. **İleri**’ye tıklayın.
+    4.           **İleri**'ye tıklayın.
 
 3. İçinde **yeni destek isteği**seçin **adım 2 sorun**. İçinde **sorun**, aşağıdaki adımları uygulayın:
     
@@ -51,7 +51,7 @@ Bir destek isteği oluşturmak için aşağıdaki adımları gerçekleştirin:
     5. Başlangıç tarihi ve saati sorun için sağlar.
     6. İçinde **karşıya dosya yükleme**, karşıya yüklemek istediğiniz diğer tüm dosyalara göz atmak için klasör simgesine tıklayın.
     7. Denetleme **tanılama bilgilerini paylaşmak**.
-    8. **İleri**’ye tıklayın.
+    8.           **İleri**'ye tıklayın.
 
        ![Sorun](./media/storage-import-export-contact-microsoft-support/import-export-support5.png)
 
@@ -59,7 +59,7 @@ Bir destek isteği oluşturmak için aşağıdaki adımları gerçekleştirin:
 
    1. İçinde **başvurun seçenekleri**, tercih ettiğiniz iletişim yöntemi (telefon veya e-posta) ve dil sağlar. Yanıt süresi, abonelik planınıza göre otomatik olarak seçilir.
    2. Kişi bilgileri, ad, e-posta, isteğe bağlı bir kişi, ülke/bölge belirtin. Seçin **Kaydet kişi değişikliklerini gelecekteki destek istekleri** onay kutusu.
-   3. **Oluştur**’a tıklayın.
+   3.           **Oluştur**'a tıklayın.
    
        ![İletişim bilgileri](./media/storage-import-export-contact-microsoft-support/import-export-support7.png)   
 

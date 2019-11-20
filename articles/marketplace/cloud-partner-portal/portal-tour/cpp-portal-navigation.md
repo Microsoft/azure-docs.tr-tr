@@ -1,91 +1,92 @@
 ---
-title: Azure Marketi iş ortağı portalı gezinme bulut
-description: Bulut iş ortağı portalı içinde gezinme, Azure Market'te açıklaması.
+title: Azure Marketi için Bulut İş Ortağı Portalı gezintisi
+description: Azure Marketi için Bulut İş Ortağı Portalı içindeki gezintinin açıklaması.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 11/09/2018
 ms.author: pabutler
-ms.openlocfilehash: ef329bfef9dc4f98dfd975a33c190f0b1825df4e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 57ccc7fb738dc23956e56e70c68405cc995a9a99
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942067"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821485"
 ---
-# <a name="cloud-partner-portal-navigation"></a>Bulut iş ortağı portalı Gezinti
+# <a name="cloud-partner-portal-navigation"></a>Bulut İş Ortağı Portalı gezintisi
 
-Geçici olarak gezinmek için iki birincil kullanıcı arabirimi (UI) mekanizma vardır [bulut iş ortağı portalı](https://cloudpartner.azure.com): üst menü çubuğundaki ve sol taraftaki gezinti bölmesinde.  Bu kullanıcı Arabirimi öğeleri, sabit, hangi sayfaya gidin, portal ne olursa olsun kullanılabilir.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com)gezinmek için iki birincil kullanıcı ARABIRIMI (UI) mekanizması vardır: üstteki menü çubuğu ve sol taraftaki Gezinti bölmesi.  Bu Kullanıcı arabirimi öğeleri, hangi Portal üzerinde gezindiğinizden bağımsız olarak kullanılabilir.
 
 
 ## <a name="menu-bar"></a>Menü çubuğu
 
-Menü çubuğunda, portal sitesi üst kısmında çalıştırır.  Aşağıdaki dört etkin alanları içerir:
+Menü çubuğu, portal sitesinin üst kısmında çalışır.  Aşağıdaki dört etkin alana sahiptir:
 
 ![Menü çubuğu](./media/top-menubar1.png)
 
-Bu alanlar sonuçları aşağıdaki eylemleri tıklayarak:
+Bu alanlara tıkladığınızda aşağıdaki eylemler oluşur:
 
-1. Başlık alanının - portal giriş sayfasına götürür.
-2. **Yardım** düğmesini - kullanıcı Yardım için kaynakları sağlar Yardım menüsünden görüntüler.
-3. **Geri bildirim** düğmesi - görüntüler **bize geri bildirim gönderin** formu.
-4. **Yayımcı** düğmesi - profillerini yönetmek kullanıcının sağlayan bir menü görüntüler.
+1. Başlık alanı-portal giriş sayfasına gider.
+2. **Yardım** düğmesi-kullanıcıyı kolaylaştırmak için kaynaklar sağlayan Yardım menüsünü görüntüler.
+3. **Geri bildirim** düğmesi- **bize geri bildirim gönder** formunu görüntüler.
+4. **Yayımcı** düğmesi-kullanıcının profilini yönetmesine olanak tanıyan bir menü görüntüler.
 
-Bu menüleri ve formları daha sonra açıklanmaktadır.
+Bu menüler ve formlar daha sonra açıklanmaktadır.
 
 ### <a name="help-menu"></a>Yardım menüsü
 
-**Yardımcı** menü bulut iş ortağı portalı kullanıcıya yardımcı olmak için kaynaklar sunar.
+**Yardım** menüsü, kullanıcıya bulut iş ortağı portalı yardımcı olmaya yönelik kaynaklar sağlar.
 
 ![Üst menü çubuğu](./media/top-menubar2.png)
 
 Yardım menüsü aşağıdaki öğeleri içerir:
 
-- **Belgeleri** - tarayıcıdaki yeni bir sekmede başlatır ve bulut iş ortağı portalı için belgeler giriş sayfasına götürür. 
-- **Forum** - yeni bir sekmede başlatır ve Azure Market ve AppSource için iş ortağı topluluğu için belgeler giriş sayfasına gider.
-- **Destek** - yeni bir sekmede başlatır ve Market bir olay raporu oluşturabileceğiniz yayımlama için Destek sayfasına götürür.  Önceliklendirme ve tüm geri bildirimleri gözden geçirin ve size her zaman gizliliğinize saygı gösteririz. İstek ya da daha fazla bilgi için sorun yalnızca sizinle iletişim.
+- **Belgeler** -tarayıcıda yeni bir sekme başlatır ve bulut iş ortağı portalı belge giriş sayfasına gider. 
+- **Forum** -yeni bir sekme başlatır ve appsource ve Azure marketlerine yönelik Iş ortağı topluluğunun belge giriş sayfasına gider.
+- **Destek** -yeni bir sekme başlatır ve bir olay raporu oluşturabileceğiniz Market Yayımlama destek sayfasına gider.  Tüm geri bildirimleri önceliklendirmemiz ve gözden geçiririz ve gizliliğe her zaman saygı duyuyoruz. Yalnızca daha fazla bilgi talep ediyorsanız veya sormanız durumunda sizinle iletişim kuracağız.
 
 
-### <a name="send-us-feedback-form"></a>Bize geri bildirim formu gönderin
+### <a name="send-us-feedback-form"></a>Bize geri bildirim formu gönder
 
-**Bize geri bildirim gönderin** form Market yayımcı Onboarding ekibi için geri bildirim sağlamak için bir doğrudan yöntem ile size sağlar.  Denetlediyseniz yalnızca ek bilgi için sizinle iletişim **hakkındaki görüşlerinizi iletişime geçilebilir** onay kutusu.
+**Bize geri bildirim gönder** formu, Market yayımcısı ekleme ekibine geri bildirim sağlamak için size doğrudan bir yöntem sağlar.  **Geri bildirim** onay kutusu hakkında sizinle iletişime geçmeniz durumunda yalnızca ek bilgiler için sizinle iletişim kuracağız.
 
 ![Geri bildirim formu](./media/feedback-form.png)
 
 > [!TIP]
-> Geri bildiriminiz hakkında belirli bir bulut iş ortağı portalı sayfasında ise, lütfen bu sayfaya tıklayarak önce gidin **geri bildirim** düğmesi.  Doğrulayın **ekran görüntüsü Ekle** onay kutusunun seçili, oturumunun UI durumu yakalanabilir böylece Geri bildiriminizi göndermeden önce. 
+> Geri bildiriminiz Bulut İş Ortağı Portalı belirli bir sayfayla ilgili ise, lütfen **geri bildirim** düğmesine tıklamadan önce bu sayfaya gidin.  Oturumunuzun Kullanıcı arabirimi durumunun yakalanabilmesi için geri bildiriminizi göndermeden önce **ekran görüntüsünü Ekle** onay kutusunun seçildiğini doğrulayın. 
 
 
 ### <a name="publisher-menu"></a>Yayımcı menüsü
 
-Bu menü, oturum ve profil yönetmenizi sağlar: doğrudan yayımcı profil sayfanızı erişim, Microsoft yayımcı Sözleşmesi'ni görüntüleme veya oturum dışında geçerli oturumu. 
+Bu menü, profilinizi ve oturumunuzu yönetmenizi sağlar: Yayımcı profili sayfanıza doğrudan erişim, Microsoft Publisher sözleşmesini görüntüleme veya geçerli oturumu kapatma. 
 
 ![Yayımcı menüsü](./media/publisher-menu.png)
 
 
 ## <a name="left-navigation-pane"></a>Sol gezinti bölmesi
 
-Daraltılabilir Gezinti bölmesinde, portalın sol tarafındaki kaplar.  İş ortakları için etkinleştirme aşağıdaki öğeleri içeren bir menü içerir:
+Daraltılabilir bir gezinti bölmesi portalın sol tarafını kaplar.  İş ortaklarının şunları uygulamasına olanak tanıyan aşağıdaki öğelerle bir menü çubuğu içerir:
 
 
 |    **Menü öğesi**     |      **Açıklama**                       |
 |    -------------     |      ---------------                       |
-| ![Yeni Teklif öğe](./media/left-navbar1.png) | [Yeni Teklif menüsü](./cpp-new-offer-menu.md) belirtilen türe ait yeni teklifler oluşturmak için. |
-| ![Tüm teklifler öğesi](./media/left-navbar2.png) | [Tüm teklifler](./cpp-all-offers-page.md) sayfa görünümü tüm gönderilen sunar ve bazı birincil özelliklerini. |
-| ![Onay öğesi](./media/left-navbar3.png) | [Onaylar](./cpp-approvals-page.md) , şu anda onaylanmış teklifler görüntülemek için sayfa. |
-| ![Tüm yayımcılar öğesi](./media/left-navbar4.png) | [Tüm yayımcılar](./cpp-all-publishers-page.md) sayfası, tüm geçerli kayıtlı bulut iş ortağı yayımcılar listeler. |
-| ![Kullanıcılar öğesi](./media/left-navbar5.png) | [Kullanıcılar](./cpp-users-page.md) sayfasında kayıtlı bulut iş ortakları ile ilişkili tüm geçerli kullanıcı hesapları listelenir. |
-| ![Geçmiş öğesi](./media/left-navbar6.png) | [Geçmiş](./cpp-history-page.md) sayfası için tüm yayımcılar teklif yayımlama ve değişikliği olayları listeler. |
-| ![Insights öğesi](./media/left-navbar7.png) | [Insights](./cpp-insights-page.md) sayfası oluşturan çeşitli panolar içerir *satıcı Insights* bu portalı özelliğidir. |
-| ![Belge öğesi](./media/left-navbar8.png) | Bulut iş ortağı portalı için belgeler giriş sayfası için yeni bir sekmede başlatır (giriş yineleyen **yardımcı** menü). |
-| ![Forum öğesi](./media/left-navbar9.png)  | Azure Market ve AppSource için iş ortağı topluluğu için belgeler giriş sayfası için yeni bir sekmede başlatır (giriş yineleyen **yardımcı** menü). |
+| ![Yeni teklif öğesi](./media/left-navbar1.png) | Yeni [teklif menüsü](./cpp-new-offer-menu.md) , belirtilen türde yeni teklifler oluşturmaya yönelik. |
+| ![Tüm teklif öğeleri](./media/left-navbar2.png) | [Tüm](./cpp-all-offers-page.md) gönderilen teklifleri ve bunların bazı birincil özelliklerini görüntülemek için tüm sayfalar. |
+| ![Onaylar öğesi](./media/left-navbar3.png) | Onaylanan tüm teklifleri görüntülemek için [onaylar](./cpp-approvals-page.md) sayfası. |
+| ![Tüm yayımcılar öğesi](./media/left-navbar4.png) | [Tüm yayımcılar](./cpp-all-publishers-page.md) sayfası, geçerli kayıtlı tüm bulut ortağı yayımcılarını listeler. |
+| ![Kullanıcı öğesi](./media/left-navbar5.png) | [Kullanıcılar](./cpp-users-page.md) sayfasında, kayıtlı bulut iş ortaklarıyla ilişkili tüm geçerli kullanıcı hesapları listelenir. |
+| ![Geçmiş öğesi](./media/left-navbar6.png) | [Geçmiş](./cpp-history-page.md) sayfasında tüm yayımcılar için teklif yayımlama ve değişiklik olayları listelenir. |
+| ![Öngörüler öğesi](./media/left-navbar7.png) | [Öngörüler](./cpp-insights-page.md) sayfasında, bu portalın *satıcı öngörüleri* özelliğini oluşturan çeşitli panolar bulunur. |
+| ![Belge öğesi](./media/left-navbar8.png) | Belgeler giriş sayfasında, Bulut İş Ortağı Portalı ( **Yardım** menüsünde yinelemeler girişi) için yeni bir sekme başlatır. |
+| ![Forum öğesi](./media/left-navbar9.png)  | AppSource ve Azure Marketplaces ( **Yardım** menüsünde yinelemeler girişi) Için Iş ortağı topluluğunun belge giriş sayfasına yeni bir sekme başlatır. |
 |  |  |
 
 > [!NOTE]
-> Bu menü, düzenli aralıklarla yeni portal özelliklerinin yansıtacak şekilde güncelleştirildiğinden gördüğünüz öğeleri tam olarak yukarıdaki tabloda içindeki alanlarla eşleşmesi.
+> Bu menü çubuğu, portalın yeni özelliklerini yansıtacak şekilde düzenli olarak güncelleştirildiğinden, gördüğünüz öğeler Yukarıdaki tablodaki öğelerle tam olarak eşleşmeyebilir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sonraki makalede, [yeni teklif menü](./cpp-new-offer-menu.md), ile oluşturabileceğiniz teklif türleri listeler **yeni teklif** menüsü.
+[Yeni teklif menüsü](./cpp-new-offer-menu.md), yeni **teklif** menüsüyle oluşturabileceğiniz tekliflerin türlerini listeler.

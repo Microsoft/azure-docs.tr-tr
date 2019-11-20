@@ -1,84 +1,83 @@
 ---
-title: IP adresi Azure Site Recovery ile yük devretme sonrasında bir ikincil şirket içi siteye bağlanmak için ayarlama | Microsoft Docs
-description: Olağanüstü durum kurtarma ve Azure Site Recovery ile yük devretme sonrasında bir ikincil şirket içi sitedeki vm'lere bağlanmak için IP adresini ayarlama işlemi açıklanmaktadır.
-services: site-recovery
+title: Azure Site Recovery ile ikincil bir siteye yük devretmeden sonra IP adresleme ayarlama
+description: Azure Site Recovery ile olağanüstü durum kurtarma ve yük devretme işleminden sonra ikincil bir şirket içi sitede VM 'lere bağlanmak için IP adreslemesini nasıl ayarlayabileceğinizi açıklar.
 author: rayne-wiselman
 manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 05/30/2019
+ms.date: 11/12/2019
 ms.author: raynew
-ms.openlocfilehash: 8e4dca61016adce209bdce356ea4280fee525c05
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a61f7ff69e648262eb721eb61a98b09dbbee924c
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66397958"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73961436"
 ---
-# <a name="set-up-ip-addressing-to-connect-to-a-secondary-on-premises-site-after-failover"></a>IP adresi yük devretmenin ardından ikincil şirket içi siteye bağlanmak için ayarlama
+# <a name="set-up-ip-addressing-to-connect-to-a-secondary-on-premises-site-after-failover"></a>Yük devretmeden sonra ikincil şirket içi bir siteye bağlanmak için IP adresi ayarlama
 
-İkincil bir siteye System Center Virtual Machine Manager (VMM) bulutlarındaki Hyper-V sanal makinelerini yük devretme sonra olması gereken çoğalma VM'ler için bağlanın. Bu makalede bunu yapmamıza yardımcı olur. 
+System Center Virtual Machine Manager (VMM) bulutlarındaki Hyper-V VM 'lerinin ikincil bir siteye yük devretme yaptıktan sonra çoğaltma VM 'lerine bağlanmanız gerekir. Bu makale, bunu yapmanıza yardımcı olur. 
 
 ## <a name="connection-options"></a>Bağlantı seçenekleri
 
-Yük devretmeden sonra birkaç çoğaltma VM'ler için IP adresleme işlemek için yolu vardır: 
+Yük devretmeden sonra çoğaltma VM 'Leri için IP adreslemesini işlemek için birkaç yol vardır: 
 
-- **Yük devretme sonrasında aynı IP adresini korumak**: Bu senaryoda, çoğaltılan VM birincil VM aynı IP adresine sahiptir. Bu kolaylaştırır ilgili ağ sorunları yük devretme işleminden sonra ancak bazı altyapı çalışmasını gerektirir.
-- **Yük devretmeden sonra farklı bir IP adresi kullanmak**: Bu senaryoda, sanal makine yük devretme işleminden sonra yeni bir IP adresi alır. 
+- **Yük devretmeden sonra aynı IP adresini sakla**: Bu senaryoda, çoğaltılan VM Birincil VM Ile aynı IP adresine sahiptir. Bu, yük devretmeden sonra ağla ilgili sorunları basitleştirir, ancak bazı altyapı çalışmaları gerektirir.
+- **Yük devretmeden sonra farklı bır IP adresi kullan**: Bu senaryoda VM yük devretmeden sonra yenı bir IP adresi alır. 
  
 
-## <a name="retain-the-ip-address"></a>IP adresini koruma
+## <a name="retain-the-ip-address"></a>IP adresini sakla
 
-IP adreslerini birincil siteden ikincil siteye yük devretmenin ardından korumak istiyorsanız, şunları yapabilirsiniz:
+Birincil siteden IP adreslerini sürdürmek istiyorsanız, ikincil siteye yük devretmeden sonra şunları yapabilirsiniz:
 
-- Esnetilmiş bir alt birincil ve ikincil siteler arasında dağıtın.
-- Tam bir alt ağ yük devretme birincil düğümden ikincil site için gerçekleştirin. IP adreslerini yeni konumunu belirtmek için rotalar güncelleştirmeniz gerekir.
-
-
-### <a name="deploy-a-stretched-subnet"></a>Esnetilmiş bir alt ağ dağıtma
-
-Esnetilmiş bir yapılandırmada, alt ağ aynı anda hem birincil hem de ikincil sitelerde kullanılabilir. İkincil site için bir makine ve (Katman 3) IP adresi yapılandırmasını taşıdığınızda Uzatılan bir alt ağ içinde ağ otomatik olarak trafik yeni konuma yönlendirir. 
-
-- Bir katman 2 (veri bağlantı katmanı) açısından bakıldığında, esnetilmiş VLAN yönetebilirsiniz ağ ekipmanları gerekir.
-- VLAN yayarak olası hata etki alanı her iki sitede genişletir. Bu, bir tek hata noktası haline gelir. Düşük ihtimalle de olsa, böyle bir senaryoda, bir yayın storm gibi bir olay ayırmak mümkün olmayabilir. 
+- Birincil ve ikincil siteler arasında uzatılmış bir alt ağ dağıtın.
+- Birincil siteden ikincil siteye tam alt ağ yük devretmesi gerçekleştirin. IP adreslerinin yeni konumunu belirtmek için yolları güncelleştirmeniz gerekir.
 
 
-### <a name="fail-over-a-subnet"></a>Bir alt ağ başarısız
+### <a name="deploy-a-stretched-subnet"></a>Uzatılmış bir alt ağ dağıtma
 
-Aslında uzatma olmadan esnetilen alt avantajlarından yararlanabilmek için tüm alt devredebilir. Bu çözümde bir alt ağ kullanılabilir kaynak veya hedef sitede, ancak her ikisi de aynı anda.
+Uzatılmış bir yapılandırmada alt ağ, hem birincil hem de ikincil sitelerde aynı anda kullanılabilir. Uzatılmış bir alt ağda, bir makineyi ve IP (katman 3) adres yapılandırmasını ikincil siteye taşıdığınızda, ağ trafiği otomatik olarak yeni konuma yönlendirir. 
 
-- Yük devretme durumunda IP adres alanı sağlamak için program aracılığıyla alt ağlar bir konumdan diğerine taşımak yönlendirici altyapı düzenleyebilirsiniz.
-- Bir yük devretme işlemi gerçekleştiğinde, alt ağlar ile ilişkili Vm'lerini taşıyın.
-- Bu yaklaşımın asıl sakıncası, bir hata olması durumunda olduğundan, tüm alt taşıma gerekir.
+- Bir katman 2 (veri bağlantısı katmanı) perspektifinden, uzatılmış bir VLAN 'ı yönetebilen ağ donanımlarının olması gerekir.
+- VLAN 'ı genişleterek olası hata etki alanı her iki siteye de genişletilir. Bu tek hata noktası haline gelir. Böyle bir senaryoda, büyük olasılıkla bir yayın fırtınası gibi bir olayı yalıtameyebilirsiniz. 
+
+
+### <a name="fail-over-a-subnet"></a>Bir alt ağ üzerinden yük devretme
+
+Uzatılmış alt ağın avantajlarını gerçekten uzatmadan elde etmek için tüm alt ağın yükünü devrederde olursunuz. Bu çözümde, bir alt ağ, kaynak veya hedef sitede mevcuttur, ancak her ikisi de aynı anda kullanılamaz.
+
+- Yük devretme durumunda IP adresi alanını korumak için, alt ağları bir siteden diğerine taşımak üzere yönlendirici altyapısı için program aracılığıyla düzenleme yapabilirsiniz.
+- Yük devretme gerçekleştiğinde, alt ağlar ilişkili VM 'lerle birlikte taşınır.
+- Bu yaklaşımın başlıca dezavantajı, bir başarısızlık durumunda tüm alt ağı taşımanız gerekir.
 
 #### <a name="example"></a>Örnek
 
-Eksiksiz bir alt ağ yük devretme örneği aşağıda verilmiştir. 
+Aşağıda alt ağ yük devretmesinin bir örneği verilmiştir. 
 
-- Önce yük devretme, birincil sitenin alt 192.168.1.0/24 içinde çalışan uygulamalar vardır.
-- Yük devretme sırasında tüm bu alt ağdaki sanal makinelerin ikincil siteye yük devretme ve IP adreslerini korur. 
-- Tüm siteler arasındaki yolları alt 192.168.1.0/24 tüm sanal makineleri ikincil siteye artık taşınmış olgu yansıtacak şekilde değiştirilmesi gerekir.
+- Yük devretmeden önce birincil sitede 192.168.1.0/24 alt ağı üzerinde çalışan uygulamalar vardır.
+- Yük devretme sırasında, bu alt ağdaki tüm VM 'Ler ikincil siteye devredilmez ve IP adreslerini korurlar. 
+- Tüm siteler arasındaki yolların, 192.168.1.0/24 alt ağındaki tüm VM 'Lerin artık ikincil siteye taşındığı gerçeğini yansıtacak şekilde değiştirilmesi gerekir.
 
-Aşağıdaki grafik, önce ve sonra Yük devretme alt ağlar gösterilmektedir.
+Aşağıdaki grafiklerde, yük devretmeden önce ve sonra alt ağlar gösterilmektedir.
 
 
-**Önce yük devretme**
+**Yük devretmeden önce**
 
-![Önce yük devretme](./media/hyper-v-vmm-networking/network-design2.png)
+![Yük devretmeden önce](./media/hyper-v-vmm-networking/network-design2.png)
 
 **Yük devretmeden sonra**
 
 ![Yük devretmeden sonra](./media/hyper-v-vmm-networking/network-design3.png)
 
-Site Recovery, yük devretme işleminden sonra VM'deki her ağ arabirimi için IP adresi ayırır. Adresi ilgili ağdaki her bir VM örneği için statik IP adresi havuzundan ayrılır.
+Yük devretmeden sonra, Site Recovery VM 'deki her bir ağ arabirimi için bir IP adresi ayırır. Adres, her bir sanal makine örneği için ilgili ağdaki statik IP adresi havuzundan ayrılır.
 
-- IP adresi havuzu ikincil sitede aynı kaynak sitesinde ise Site Recovery çoğaltma VM'sine aynı IP adresini (kaynak VM) ayırır. IP adresi VMM'de ayrılmış, ancak Hyper-V konağında yük devretme IP adresi olarak ayarlanmamış. Bir Hyper-v konağı yük devretme IP adresi, yalnızca yük devretme önce ayarlanır.
-- Site Recovery, aynı IP adresi kullanılabilir değilse, başka bir kullanılabilir IP adresi havuzundan ayırır.
-- Site Recovery, VM'lerin DHCP kullanıyorsanız, IP adreslerini yönetmez. Kaynak site olarak aynı aralıktan ikincil sitede DHCP sunucusu adresleri ayırabilirsiniz denetlemek gerekir.
+- İkincil sitedeki IP adresi havuzu kaynak siteyle aynı ise, Site Recovery çoğaltma sanal makinesine aynı IP adresini (kaynak VM 'nin) ayırır. IP adresi VMM 'de ayrılmıştır, ancak Hyper-V konağında yük devretme IP adresi olarak ayarlanmadı. Hyper-v konağındaki yük devretme IP adresi, yük devretmeden hemen önce ayarlanır.
+- Aynı IP adresi yoksa Site Recovery havuzdan başka bir kullanılabilir IP adresi ayırır.
+- VM 'Ler DHCP kullanıyorsa Site Recovery IP adreslerini yönetmez. İkincil sitedeki DHCP sunucusunun, kaynak siteyle aynı aralıktan adresler ayırabilmesi gerektiğini denetlemeniz gerekir.
 
-### <a name="validate-the-ip-address"></a>IP adresini doğrula
+### <a name="validate-the-ip-address"></a>IP adresini doğrulama
 
-Bir sanal makine için koruma etkinleştirdikten sonra VM'ye atanmış olan adresi doğrulamak için örnek komut dosyası kullanabilirsiniz. Bu IP adresi, yük devretme IP adresi olarak ayarlayın ve yük devretme sırasında sanal Makineye atanan:
+Bir VM için korumayı etkinleştirdikten sonra, VM 'ye atanan adresi doğrulamak için aşağıdaki örnek betiği kullanabilirsiniz. Bu IP adresi, yük devretme IP adresi olarak ayarlanır ve yük devretme sırasında VM 'ye atanır:
 
     ```
     $vm = Get-SCVirtualMachine -Name <VM_NAME>
@@ -89,10 +88,10 @@ Bir sanal makine için koruma etkinleştirdikten sonra VM'ye atanmış olan adre
 
 ## <a name="use-a-different-ip-address"></a>Farklı bir IP adresi kullanın
 
-Bu senaryoda, yük devretme sanal IP adreslerini değiştirilir. Bu çözümünün dezavantajı, gerekli bakım olmasıdır.  DNS ve önbellek girdilerinin güncelleştirilmesi gerekebilir. Bu, şu şekilde azaltılması gereken kapalı kalma neden olabilir:
+Bu senaryoda yük devretme yapan VM 'lerin IP adresleri değişir. Bu çözümün dezavantajı gereken bakımda.  DNS ve önbellek girişlerinin güncellenmesi gerekebilir. Bu, şu şekilde azaltılan kapalı kalma süresine yol açabilir:
 
-- İntranet uygulamaları için düşük TTL değerleri kullanın.
-- Aşağıdaki betiği bir Site Recovery kurtarma planında bir DNS sunucusu zamanında güncelleştirmesi kullanın. Dinamik DNS kaydı kullanırsanız komut dosyası gerekmez.
+- İntranet uygulamaları için düşük TTL değerlerini kullanın.
+- DNS sunucusunun zamanında güncelleştirilmesi için Site Recovery kurtarma planında aşağıdaki betiği kullanın. Dinamik DNS kaydı kullanırsanız betiğe gerek yoktur.
 
     ```
     param(
@@ -108,22 +107,22 @@ Bu senaryoda, yük devretme sanal IP adreslerini değiştirilir. Bu çözümün�
     
 ### <a name="example"></a>Örnek 
 
-Bu örnekte biz farklı IP adreslerini birincil ve ikincil siteler arasında olması ve site birincil veya kurtarma barındırılan hangi uygulamalardan erişilebilir üçüncü bir site yoktur.
+Bu örnekte, birincil ve ikincil sitelerde farklı IP adresliyoruz ve birincil veya kurtarma sitesinde barındırılan uygulamalara erişilebileceği üçüncü bir site vardır.
 
-- Yük devretme önce birincil sitede barındırılan alt 192.168.1.0/24 uygulamalardır.
-- Yük devretmeden sonra uygulamaları alt 172.16.1.0/24 de ikincil sitede yapılandırılır.
-- Üç tüm siteleri birbirine erişebilir.
-- Yük devretmeden sonra kurtarma alt ağda uygulamalar geri yüklenir.
-- Bu senaryoda tüm alt ağ başarısız olmasına gerek yoktur ve hiçbir değişiklik VPN ya da ağ yolları yapılandırmak için gereklidir. Yük devretme ve bazı DNS güncelleştirmeleri uygulamaların erişilebilir kalmasını sağlayın.
-- DNS dinamik güncelleştirmeleri izin verecek şekilde yapılandırılmışsa, Vm'leri kendilerini kullanıcıdan yük devretmeden sonra başlatırken yeni IP adresini kullanarak kaydeder.
+- Yük devretmeden önce, uygulamalar birincil sitede 192.168.1.0/24 alt ağ olarak barındırılır.
+- Yük devretmeden sonra, uygulamalar ikincil sitede 172.16.1.0/24 alt ağında yapılandırılır.
+- Üç site da birbirine erişebilir.
+- Yük devretmeden sonra, uygulamalar kurtarma alt ağına geri yüklenir.
+- Bu senaryoda, tüm alt ağın yükünü devretmek ve VPN veya ağ yollarını yeniden yapılandırmak için herhangi bir değişiklik yapılması gerekmez. Yük devretme ve bazı DNS güncelleştirmeleri, uygulamaların erişilebilir kalacağından emin olun.
+- DNS dinamik güncelleştirmelere izin verecek şekilde yapılandırıldıysa VM 'Ler, yük devretmeden sonra başlatıldığında yeni IP adresini kullanarak kendilerini kaydeder.
 
-**Önce yük devretme**
+**Yük devretmeden önce**
 
-![Yük devretmeden önce - farklı bir IP adresi](./media/hyper-v-vmm-networking/network-design10.png)
+![Farklı IP adresi-yük devretmeden önce](./media/hyper-v-vmm-networking/network-design10.png)
 
 **Yük devretmeden sonra**
 
-![Yük devretmeden sonra - farklı bir IP adresi](./media/hyper-v-vmm-networking/network-design11.png)
+![Farklı IP adresi-yük devretme sonrası](./media/hyper-v-vmm-networking/network-design11.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

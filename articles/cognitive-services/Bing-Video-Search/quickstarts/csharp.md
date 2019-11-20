@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Bing Video arama REST API'si kullanarak video arayın veC#"
-titlesuffix: Azure Cognitive Services
-description: Bing Video arama REST API'si kullanarak video arama istekleri göndermek için bu hızlı başlangıçta kullanmak C#.
+title: 'Hızlı Başlangıç: Bing Video Arama REST API kullanarak videoları arayın veC#'
+titleSuffix: Azure Cognitive Services
+description: Kullanarak C#Bing video arama REST API video arama istekleri göndermek için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,21 +10,21 @@ ms.subservice: bing-video-search
 ms.topic: quickstart
 ms.date: 06/19/2019
 ms.author: aahi
-ms.openlocfilehash: 06f01875b6173c2b1188c2179b9bc4b3f67c714c
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 9ba2027641ef6cc9a86044850e8996f986992bf8
+ms.sourcegitcommit: a0b37e18b8823025e64427c26fae9fb7a3fe355a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67275892"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68500179"
 ---
-# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-c"></a>Hızlı Başlangıç: Bing Video arama REST API'si kullanarak video arayın veC#
+# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-c"></a>Hızlı Başlangıç: Bing Video Arama REST API kullanarak videoları arayın veC#
 
-Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir JSON yanıtı Arama sonuçlarından görüntülemek için kullanın. Bu basit C# uygulama API'sine HTTP video arama sorgusu gönderir ve yanıtını görüntüler. Bu uygulama C# ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir.
+Bing Video Arama API'si ilk çağrısını yapmak ve JSON yanıtından bir arama sonucu görüntülemek için bu hızlı başlangıcı kullanın. Bu basit C# uygulama API 'ye bir http video arama sorgusu gönderir ve yanıtı görüntüler. Bu uygulama C# ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir.
 
-Bu örnek için kaynak kodu kullanılabilir [github'da](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/dotnet/Search/BingVideoSearchv7.cs) ek hata işleme, özellik ve kod ek açıklamaları.
+Bu örneğe ilişkin kaynak kodu, [GitHub 'da](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/dotnet/Search/BingVideoSearchv7.cs) ek hata işleme, Özellikler ve kod ek açıklamalarıyla kullanılabilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
-* Herhangi bir sürümünü [Visual Studio 2017 veya üstü](https://www.visualstudio.com/downloads/).
+* Herhangi bir [Visual Studio 2017 veya üzeri](https://www.visualstudio.com/downloads/)sürümü.
 * NuGet paketi olarak kullanılabilen [Json.NET](https://www.newtonsoft.com/json) çerçevesi.
 * Linux/MacOS kullanıyorsanız bu uygulama, [Mono](https://www.mono-project.com/) kullanılarak çalıştırılabilir.
 
@@ -32,7 +32,7 @@ Bu örnek için kaynak kodu kullanılabilir [github'da](https://github.com/Azure
 
 ## <a name="create-and-initialize-a-project"></a>Proje oluşturma ve başlatma
 
-1. Visual Studio'da yeni bir konsol çözümü oluşturun. Ardından ana kod dosyasına aşağıdaki ad alanlarını ekleyin.
+1. Visual Studio 'da yeni bir konsol çözümü oluşturun. Ardından ana kod dosyasına aşağıdaki ad alanlarını ekleyin.
 
     ```csharp
     using System;
@@ -42,7 +42,7 @@ Bu örnek için kaynak kodu kullanılabilir [github'da](https://github.com/Azure
     using System.Collections.Generic;
     ```
 
-2. Abonelik anahtarı, uç nokta ve arama için değişkenlerini ekleyin terim.
+2. Abonelik anahtarınız, uç noktanız ve arama teriminiz için değişken ekleyin.
 
     ```csharp
     const string accessKey = "enter your key here";
@@ -50,7 +50,7 @@ Bu örnek için kaynak kodu kullanılabilir [github'da](https://github.com/Azure
     const string searchTerm = "kittens";
     ```
 
-### <a name="create-a-struct-to-format-the-bing-video-search-api-response"></a>Bing Video arama API'si yanıtı biçimlendirmek için bir yapı oluşturma
+### <a name="create-a-struct-to-format-the-bing-video-search-api-response"></a>Bing Video Arama API'si yanıtını biçimlendirmek için bir yapı oluşturma
 
 1. Görüntü arama sonuçlarını ve JSON üst bilgi bilgilerini içerecek bir `SearchResult` yapısı tanımlayın.
 
@@ -62,11 +62,11 @@ Bu örnek için kaynak kodu kullanılabilir [github'da](https://github.com/Azure
         }
     ```
 
-## <a name="create-and-handle-a-video-search-request"></a>Oluşturma ve video arama isteği işleme
+## <a name="create-and-handle-a-video-search-request"></a>Video arama isteği oluşturma ve işleme
 
 API’ye çağrı yapmak için `BingVideoSearch` adlı bir yöntem oluşturun ve dönüş türünü daha önce oluşturduğunuz `SearchResult` yapısına ayarlayın. Yönteminde aşağıdaki adımları gerçekleştirin:
 
-1. Arama isteği için URI oluşturun. Arama terimi toSearch dizesine eklenen önce biçimlendirilmelidir unutmayın.
+1. Arama isteği için URI oluşturun. Arama teriminin dizeye eklenmeden önce biçimlendirilmesi gerektiğini unutmayın.
 
     ```csharp
     
@@ -76,7 +76,7 @@ API’ye çağrı yapmak için `BingVideoSearch` adlı bir yöntem oluşturun ve
     //...
     ```
 
-2. Anahtarı ekleyerek web isteği gerçekleştirmek `Ocp-Acpim-Subscription-Key` üst bilgi ve kullanarak bir `HttpWebResponse` API yanıtı depolamak için nesne. Ardından bir `StreamReader` JSON dizesini almak için.
+2. Anahtarınızı `Ocp-Acpim-Subscription-Key` üstbilgiye ekleyerek ve API yanıtını depolamak için bir `HttpWebResponse` nesnesi kullanarak Web isteği gerçekleştirin. Ardından JSON dizesini `StreamReader` almak için bir kullanın.
 
     ```csharp
     //...
@@ -87,9 +87,9 @@ API’ye çağrı yapmak için `BingVideoSearch` adlı bir yöntem oluşturun ve
     //...
     ```
 
-## <a name="process-the-result"></a>İşlem sonucu
+## <a name="process-the-result"></a>Sonucu işleme
 
-1. Arama sonucu nesnesini oluşturun ve Bing HTTP üst bilgilerini ayıklayın. Ardından dönün `searchResult` nesne. 
+1. Arama sonucu nesnesini oluşturun ve Bing HTTP üst bilgilerini ayıklayın. Sonra `searchResult` nesneyi döndürün. 
 
     ```csharp
     var searchResult = new SearchResult();
@@ -105,7 +105,7 @@ API’ye çağrı yapmak için `BingVideoSearch` adlı bir yöntem oluşturun ve
     return searchResult;
     ```
 
-2. Ardından, yanıt yazdırabilir.
+2. Ardından yanıtı yazdırabilirsiniz.
 
     ```csharp
     Console.WriteLine(result.jsonResult);
@@ -224,8 +224,8 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Tek sayfa uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
+> [Tek sayfalı Web uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
 
 ## <a name="see-also"></a>Ayrıca bkz. 
 
- [Bing Video arama API'si nedir?](../overview.md)
+ [Bing Video Arama API'si nedir?](../overview.md)

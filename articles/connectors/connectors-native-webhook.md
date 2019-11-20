@@ -1,6 +1,6 @@
 ---
-title: Azure Logic Apps'te olay-tabanlı görevler ve iş akışları oluşturun
-description: Tetiklemek için Duraklat ve otomatik görevler, süreçleri ve iş akışları Azure Logic Apps kullanarak bir uç noktada gerçekleşen olayları temel Sürdür
+title: Olaylara bekle ve Yanıtla-Azure Logic Apps
+description: Azure Logic Apps kullanarak bir hizmet uç noktasındaki olaylara göre tetikleme, duraklatma ve devam eden iş akışlarını otomatikleştirin
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -8,129 +8,132 @@ author: ecfan
 ms.author: estfan
 ms.reviewer: klam, LADocs
 ms.topic: conceptual
-ms.date: 07/05/2019
+ms.date: 10/10/2019
 tags: connectors
-ms.openlocfilehash: c2658df185d4836210c496d2c46a00a3541257a2
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: ee86f53795b1b3e7bd61480a490d4e18c844d4c2
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67541405"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72804267"
 ---
-# <a name="automate-event-based-tasks-and-workflows-by-using-http-webhooks-in-azure-logic-apps"></a>Azure Logic Apps'te HTTP Web kancalarını kullanarak olay-tabanlı görevler ve iş akışlarını otomatikleştirin
+# <a name="create-and-run-automated-event-based-workflows-by-using-http-webhooks-in-azure-logic-apps"></a>Azure Logic Apps 'de HTTP Web kancalarını kullanarak otomatik olay tabanlı iş akışları oluşturun ve çalıştırın
 
-İle [Azure Logic Apps](../logic-apps/logic-apps-overview.md) ve yerleşik HTTP Web kancası Bağlayıcısı bekleyin ve mantıksal uygulamalar oluşturarak bir HTTP veya HTTPS uç noktada gerçekleşen belirli olayları temelinde çalıştırılacak iş akışlarını otomatik hale getirebilirsiniz. Örneğin, bir hizmet uç noktası için belirli bir olay iş akışını tetikleyen ve belirtilen eylemleri çalıştırmak yerine önce düzenli olarak denetleme bekleyerek izleyen bir mantıksal uygulama oluşturabilirsiniz veya *yoklama* Bu uç nokta.
+[Azure Logic Apps](../logic-apps/logic-apps-overview.md) ve yerleşik http Web kancası Bağlayıcısı sayesinde, mantıksal uygulamalar oluşturarak http veya HTTPS uç noktasında gerçekleşen belirli olaylara dayalı olarak bekleyen ve çalışan iş akışlarını otomatikleştirebilirsiniz. Örneğin, bir hizmet uç noktasını, iş akışını tetiklemeden önce belirli bir olayı bekleyerek ve bu uç noktayı düzenli olarak denetlemek veya *yoklamak* yerine, belirtilen eylemleri çalıştırarak izleyen bir mantıksal uygulama oluşturabilirsiniz.
 
-Bazı örnek olay-tabanlı iş akışları şunlardır:
+Örnek olay tabanlı bazı iş akışları aşağıda verilmiştir:
 
-* Gelen ulaşması için bir öğe için bekleyin bir [Azure olay hub'ı](https://github.com/logicappsio/EventHubAPI) önce bir mantıksal uygulama çalıştırması tetikleniyor.
-* Bir iş akışı devam etmeden önce onay bekler.
+* Mantıksal uygulama çalıştırmayı tetiklemeden önce bir öğenin [Azure Olay Hub 'ından](https://github.com/logicappsio/EventHubAPI) gelmesini bekleyin.
+* Bir iş akışına devam etmeden önce onay bekle.
 
 ## <a name="how-do-webhooks-work"></a>Web kancaları nasıl çalışır?
 
-Bir HTTP Web kancası tetikleyici olay tabanlı, denetimi veya düzenli olarak yeni öğeler için yoklama bağımlı değildir. Mantıksal uygulama bir Web kancası tetikleyici ile başlar veya mantıksal uygulama devre dışı iken etkin olarak, Web kancası tetikleyicisine değiştirdiğinizde kaydettiğinizde *abone* belirli bir hizmet veya kaydederek uç noktası için bir *geriçağırmaURL'si* hizmet veya uç nokta. Tetikleyici, sonra bu hizmeti veya mantıksal uygulama çalışmaya başlar URL'yi çağırmak için uç nokta için bekler. Benzer şekilde [istek tetikleyicisi](connectors-native-reqres.md), belirtilen olay durumda hemen mantıksal uygulama başlatılır. Tetikleyici *abonelikten çıkma* hizmet ya da uç nokta tetikleyici kaldırın ve mantıksal uygulamanızı kaydedin veya mantıksal uygulamanızdan değiştirdiğinizde etkin devre dışı.
+HTTP Web kancası tetikleyicisi, olay tabanlıdır ve yeni öğeler için düzenli olarak denetim veya yoklamaya bağlı değildir. Bir Web kancası tetikleyicisi ile başlayan bir mantıksal uygulamayı kaydettiğinizde veya mantıksal uygulamanızı devre dışı iken etkin olarak değiştirdiğinizde Web kancası tetikleyicisi, bu hizmet veya uç noktaya *geri çağırma URL 'si* kaydederek belirli bir hizmete veya uç noktaya *abone olur* . Tetikleyici daha sonra bu hizmetin veya uç noktanın mantıksal uygulamayı çalıştırmaya başlayan URL 'YI aramasını bekler. [İstek tetikleyicisine](connectors-native-reqres.md)benzer şekilde, mantıksal uygulama, belirtilen olay gerçekleştiğinde hemen başlatılır. Tetikleyiciyi kaldırır ve mantıksal uygulamanızı kaydettiğinizde veya mantıksal uygulamanızı etkin durumundan devre dışı olarak değiştirdiğinizde tetikleyici, hizmetten veya uç noktadan *aboneliği* kaldırır.
 
-Olay tabanlı bir HTTP Web kancası eylem ayrıca ve *abone* belirli bir hizmet veya kaydederek uç noktası için bir *geri çağırma URL'si* hizmet veya uç nokta. Web kancası eylemi mantıksal uygulamanın iş akışı duraklatır ve aramaları çalıştıran logic app sürdürür önce URL'yi hizmet veya uç nokta kadar bekler. Eylem mantıksal uygulama *abonelikten çıkma* hizmet veya bu gibi durumlarda uç noktası:
+Bir HTTP Web kancası eylemi ayrıca olay tabanlıdır ve bu hizmet veya uç noktaya *geri çağırma URL 'si* kaydederek belirli bir hizmete veya uç noktaya *abone* olur. Web kancası eylemi mantıksal uygulamanın iş akışını duraklatır ve Logic App çalışmaya devam etmeden önce hizmet veya uç nokta URL 'YI çağırana kadar bekler. Eylem mantığı uygulaması, bu durumlarda hizmetten veya uç noktadan *aboneliği* kaldırır:
 
 * Web kancası eylemi başarıyla tamamlandığında
-* Bir yanıtı beklenirken mantıksal uygulama çalıştırması iptal edilirse
-* Uygulama mantığı önce zaman aşımına uğruyor
+* Bir yanıt beklenirken mantıksal uygulama çalıştırması iptal edilirse
+* Mantıksal uygulama zaman aşımına uğramadan önce
 
-Örneğin, Office 365 Outlook bağlayıcının [ **onay e-posta Gönder** ](connectors-create-api-office365-outlook.md) eylem Bu desen aşağıdaki Web kancası eylem örneği verilmiştir. Bu düzen, Web kancası eylemi kullanarak herhangi bir hizmeti genişletebilirsiniz.
+Örneğin, Office 365 Outlook bağlayıcısının [**onay e-postası gönder**](connectors-create-api-office365-outlook.md) eylemi, bu kalıbı izleyen bir Web kancası eyleminin örneğidir. Web kancası eylemini kullanarak bu kalıbı herhangi bir hizmete genişletebilirsiniz.
+
+> [!NOTE]
+> Logic Apps, geri çağrıyı HTTP Web kancası tetikleyicisine veya eylemine geri alırken Aktarım Katmanı Güvenliği (TLS) 1,2 ' i zorlar. SSL el sıkışma hataları görürseniz, TLS 1,2 kullandığınızdan emin olun.
 
 Daha fazla bilgi için şu konulara bakın:
 
 * [HTTP Web kancası tetikleyici parametreleri](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger)
 * [Web kancaları ve abonelikler](../logic-apps/logic-apps-workflow-actions-triggers.md#webhooks-and-subscriptions)
-* [Bir Web kancası desteği, özel API'ler oluşturma](../logic-apps/logic-apps-create-api-app.md)
+* [Web kancasını destekleyen özel API 'Ler oluşturma](../logic-apps/logic-apps-create-api-app.md)
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 * Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-* Zaten dağıtılmış bir uç nokta URL'sini ya da Web kancası destekleyen API abone olma ve aboneliği desenini [logic apps'teki Web kancası Tetikleyicileri](../logic-apps/logic-apps-create-api-app.md#webhook-triggers) veya [Web kancası eylemleri logic apps'teki](../logic-apps/logic-apps-create-api-app.md#webhook-actions) uygun şekilde
+* [Mantıksal uygulamalar veya Web](../logic-apps/logic-apps-create-api-app.md#webhook-triggers) kancası [eylemleri](../logic-apps/logic-apps-create-api-app.md#webhook-actions) için Web kancası abone ve abonelik kaldırma düzenlerini destekleyen, önceden dağıtılan BIR uç noktanın veya API 'nin URL 'si
 
-* Hakkında temel bilgilere [mantıksal uygulamalar oluşturmak nasıl](../logic-apps/quickstart-create-first-logic-app-workflow.md). Logic apps kullanmaya yeni başladıysanız gözden [Azure Logic Apps nedir?](../logic-apps/logic-apps-overview.md)
+* [Mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)hakkında temel bilgi. Logic Apps 'e yeni başladıysanız [ne Azure Logic Apps](../logic-apps/logic-apps-overview.md) olduğunu gözden geçirin.
 
-* Hedef uç noktasında belirli olaylar için beklenecek istediğiniz mantıksal uygulaması. HTTP Web kancası tetikleyici ile başlayın için [boş mantıksal uygulama oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md). HTTP Web kancası eylemi kullanmak için mantıksal uygulamanızın istediğiniz herhangi bir tetikleyici ile başlayın. Bu örnek HTTP tetikleyicisi, ilk adım olarak kullanır.
+* Hedef uç noktada belirli olayları beklemek istediğiniz mantıksal uygulama. HTTP Web kancası tetikleyicisinden başlamak için [boş bir mantıksal uygulama oluşturun](../logic-apps/quickstart-create-first-logic-app-workflow.md). HTTP Web kancası eylemini kullanmak için, mantıksal uygulamanızı istediğiniz tetikleyiciyle başlatın. Bu örnek, ilk adım olarak HTTP tetikleyicisini kullanır.
 
-## <a name="add-an-http-webhook-trigger"></a>Bir HTTP Web kancası tetikleyici ekleme
+## <a name="add-an-http-webhook-trigger"></a>HTTP Web kancası tetikleyicisi ekleme
 
-Bu yerleşik bir tetikleyici, bir geri çağırma URL'si belirtilen hizmetine kaydeder ve bu hizmet için bu URL'yi bir HTTP POST isteği göndermek bekler. Bu olay meydana geldiğinde tetiklenir ve mantıksal uygulamayı hemen çalıştırılır.
+Bu yerleşik tetikleyici, belirtilen hizmetle bir geri çağırma URL 'SI kaydeder ve bu hizmetin bu URL 'ye bir HTTP POST isteği göndermesini bekler. Bu olay gerçekleştiğinde, tetikleyici ateşlenir ve mantıksal uygulamayı hemen çalıştırır.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın. Boş mantıksal uygulamanızı Logic Apps Tasarımcısı'nda açın.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın. Mantıksal uygulama tasarımcısında boş mantıksal uygulamanızı açın.
 
-1. Tasarımcıda arama kutusuna filtreniz olarak "http Web kancası" yazın. Gelen **Tetikleyicileri** listesinden **HTTP Web kancası** tetikleyici.
+1. Tasarımcıda arama kutusuna filtreniz olarak "http Web kancası" yazın. **Tetikleyiciler** listesinden **http Web kancası** tetikleyicisi ' ni seçin.
 
-   ![HTTP Web kancası tetikleyicisini seçin](./media/connectors-native-webhook/select-http-webhook-trigger.png)
+   ![HTTP Web kancası tetikleyicisi seçin](./media/connectors-native-webhook/select-http-webhook-trigger.png)
 
-   Bu örnek daha açıklayıcı bir ad adım sahip olacak şekilde "HTTP Web kancası tetikleyici" tetikleyiciye yeniden adlandırır. Ayrıca, örnek daha sonra bir HTTP Web kancası eylem ekler ve her iki adları benzersiz olmalıdır.
+   Bu örnek, adımın daha açıklayıcı bir ada sahip olması için tetikleyiciyi "HTTP Web kancası tetikleyicisi" olarak yeniden adlandırır. Ayrıca, örnek daha sonra bir HTTP Web kancası eylemi ekler ve her iki ad de benzersiz olmalıdır.
 
-1. İçin değerler sağlayın [HTTP Web kancası tetikleyici parametreleri](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger) kullanmak için abonelik ve aramalar, örneğin aboneliği istiyorsanız:
+1. Abone ol ve abonelik kaldırma çağrıları için kullanmak istediğiniz [http Web kancası tetikleyici parametrelerinin](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger) değerlerini girin, örneğin:
 
-   ![HTTP Web kancası tetikleyici parametreleri girin](./media/connectors-native-webhook/http-webhook-trigger-parameters.png)
+   ![HTTP Web kancası tetikleyici parametrelerini girin](./media/connectors-native-webhook/http-webhook-trigger-parameters.png)
 
-1. Kullanılabilir diğer parametre eklemek için açık **yeni parametre Ekle** listesinde ve istediğiniz parametreleri seçin.
+1. Kullanılabilir başka parametreler eklemek için **yeni parametre Ekle** listesini açın ve istediğiniz parametreleri seçin.
 
-   HTTP Web kancası kullanılabilir kimlik doğrulama türleri hakkında daha fazla bilgi için bkz. [HTTP kimlik doğrulaması tetikleyiciler ve Eylemler](../logic-apps/logic-apps-workflow-actions-triggers.md#connector-authentication).
+   HTTP Web kancası için kullanılabilen kimlik doğrulama türleri hakkında daha fazla bilgi için bkz. [giden çağrılara kimlik doğrulama ekleme](../logic-apps/logic-apps-securing-a-logic-app.md#add-authentication-outbound).
 
-1. Mantıksal uygulamanızın Tetikleyici etkinleştirildiğinde çalıştırılan eylemleri iş akışı oluşturmaya devam edin.
+1. Tetikleyici tetiklendiğinde çalıştırılan eylemlerle mantıksal uygulamanızın iş akışını oluşturmaya devam edin.
 
-1. İşlemi tamamladığınızda, mantıksal uygulamanızı kaydetmek Bitti, unutmayın. Tasarımcı araç çubuğunda **Kaydet**.
+1. İşiniz bittiğinde, işiniz bittiğinde mantıksal uygulamanızı kaydetmeyi unutmayın. Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
-   Mantıksal uygulamanızı kaydetme abone ol uç noktasına çağrı ve bu mantıksal uygulama tetiklemek için geri çağırma URL'si kaydeder.
+   Mantıksal uygulamanızı kaydetmek, abonelik uç noktasını çağırır ve bu mantıksal uygulamayı tetiklemek için geri çağırma URL 'sini kaydeder.
 
-1. Artık, her hedef hizmet gönderen bir `HTTP POST` istek geri çağırma URL'si için mantıksal uygulama etkinleşir ve isteği aracılığıyla iletilen tüm verileri içerir.
+1. Artık, hedef hizmet geri çağırma URL 'sine `HTTP POST` isteği gönderdiğinde, mantıksal uygulama ateşlenir ve istek aracılığıyla geçirilen tüm verileri içerir.
 
-## <a name="add-an-http-webhook-action"></a>HTTP Web kancası Eylem Ekle
+## <a name="add-an-http-webhook-action"></a>HTTP Web kancası eylemi ekleme
 
-Bu yerleşik eylem, bir geri çağırma URL'si belirtilen hizmetine kaydeder, mantıksal uygulama iş akışı duraklatır ve bu hizmet için bu URL'yi bir HTTP POST isteği göndermek bekler. Bu olay meydana geldiğinde, eylem, mantıksal uygulama çalıştırma sürdürür.
+Bu yerleşik eylem, belirtilen hizmetle bir geri çağırma URL 'SI kaydeder, mantıksal uygulamanın iş akışını duraklatır ve bu hizmetin bu URL 'ye bir HTTP POST isteği göndermesini bekler. Bu olay gerçekleştiğinde, eylem mantıksal uygulamayı çalıştırmaya devam eder.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın. Mantıksal uygulamanızı Logic Apps Tasarımcısı'nda açın.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın. Mantıksal uygulama tasarımcısında mantıksal uygulamanızı açın.
 
-   Bu örnekte, ilk adım olarak HTTP Web kancası tetikleyici kullanır.
+   Bu örnek, ilk adım olarak HTTP Web kancası tetikleyicisini kullanır.
 
-1. HTTP Web kancası eylem eklemek istediğiniz adımı altında seçin **yeni adım**.
+1. HTTP Web kancası eylemini eklemek istediğiniz adım altında **yeni adım**' ı seçin.
 
-   Adımlar arasında bir eylem eklemek için işaretçinizi adımlar arasındaki okun üzerine getirin. Artı işaretini seçin ( **+** ), görünür ve ardından **Eylem Ekle**.
+   Adımlar arasında bir eylem eklemek için, işaretçinizi adımlar arasındaki oka taşıyın. Görüntülenen artı işaretini ( **+** ) seçin ve ardından **Eylem Ekle**' yi seçin.
 
-1. Tasarımcıda arama kutusuna filtreniz olarak "http Web kancası" yazın. Gelen **eylemleri** listesinden **HTTP Web kancası** eylem.
+1. Tasarımcıda arama kutusuna filtreniz olarak "http Web kancası" yazın. **Eylemler** listesinden **http Web kancası** eylemini seçin.
 
-   ![HTTP Web kancası eylemi seçin](./media/connectors-native-webhook/select-http-webhook-action.png)
+   ![HTTP Web kancası eylemini seç](./media/connectors-native-webhook/select-http-webhook-action.png)
 
-   Bu örnek daha açıklayıcı bir ad adım sahip olacak şekilde "HTTP Web kancası eylemi" eylemini yeniden adlandırır.
+   Bu örnek, adımın daha açıklayıcı bir ada sahip olması için eylemi "HTTP Web kancası eylemi" olarak yeniden adlandırır.
 
-1. Değerleri için HTTP Web kancası benzer olan eylem parametrelerini girin [HTTP Web kancası tetikleyici parametreleri](../logic-apps/logic-apps-workflow-actions-triggers.md##http-webhook-trigger) kullanmak için abonelik ve aramalar, örneğin aboneliği istiyorsanız:
+1. Abone ve abonelik kaldırma çağrıları için kullanmak istediğiniz [http Web kancası tetikleyici parametrelerine](../logic-apps/logic-apps-workflow-actions-triggers.md##http-webhook-trigger) benzer http Web kancası eylem parametrelerinin değerlerini sağlayın, örneğin:
 
    ![HTTP Web kancası eylem parametrelerini girin](./media/connectors-native-webhook/http-webhook-action-parameters.png)
 
-   Abone uç noktası bu eylem çalıştırıldığında, mantıksal uygulama çalışma zamanı sırasında çağırır. Mantıksal uygulamanız sonra iş akışı duraklatır ve göndermek hedef hizmet için bekleyen bir `HTTP POST` istek geri çağırma URL'si. Eyleme başarıyla tamamlandığında, eylemi uç noktasından abonelikten çıkma ve mantıksal uygulamanızı sürdürür iş akışını çalıştıran.
+   Çalışma zamanı sırasında mantıksal uygulama, bu eylemi çalıştırırken abonelik uç noktasını çağırır. Daha sonra mantıksal uygulamanız iş akışını duraklatır ve hedef hizmetin geri çağırma URL 'sine `HTTP POST` isteği göndermesini bekler. Eylem başarıyla tamamlanırsa, eylem uç noktadan aboneliği kaldırır ve mantıksal uygulamanız iş akışını çalıştırmaya devam eder.
 
-1. Kullanılabilir diğer parametre eklemek için açık **yeni parametre Ekle** listesinde ve istediğiniz parametreleri seçin.
+1. Kullanılabilir başka parametreler eklemek için **yeni parametre Ekle** listesini açın ve istediğiniz parametreleri seçin.
 
-   HTTP Web kancası kullanılabilir kimlik doğrulama türleri hakkında daha fazla bilgi için bkz. [HTTP kimlik doğrulaması tetikleyiciler ve Eylemler](../logic-apps/logic-apps-workflow-actions-triggers.md#connector-authentication).
+   HTTP Web kancası için kullanılabilen kimlik doğrulama türleri hakkında daha fazla bilgi için bkz. [giden çağrılara kimlik doğrulama ekleme](../logic-apps/logic-apps-securing-a-logic-app.md#add-authentication-outbound).
 
-1. İşlemi tamamladığınızda, mantıksal uygulamanızı kaydetmeyi unutmayın. Tasarımcı araç çubuğunda **Kaydet**.
+1. İşiniz bittiğinde mantıksal uygulamanızı kaydetmeyi unutmayın. Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
 ## <a name="connector-reference"></a>Bağlayıcı başvurusu
 
-Birbirine benzer, tetikleyici ve eylem parametreleri hakkında daha fazla bilgi için bkz. [HTTP Web kancası parametreleri](../logic-apps/logic-apps-workflow-actions-triggers.md##http-webhook-trigger).
+Tetikleyici ve eylem parametreleri hakkında daha fazla bilgi için, bkz. [http Web kancası parametreleri](../logic-apps/logic-apps-workflow-actions-triggers.md##http-webhook-trigger).
 
-### <a name="output-details"></a>Çıkış Ayrıntıları
+### <a name="output-details"></a>Çıkış ayrıntıları
 
-Bir HTTP Web kancası tetikleyicisine veya bu bilgileri döndüren eylem çıkışları hakkında daha fazla bilgi aşağıda verilmiştir:
+Bu bilgileri döndüren bir HTTP Web kancası tetikleyicisinden veya eyleminden alınan çıktılar hakkında daha fazla bilgi bulabilirsiniz:
 
 | Özellik adı | Tür | Açıklama |
 |---------------|------|-------------|
-| Üst bilgileri | object | İstek üstbilgileri |
-| Gövde | object | JSON nesnesi | İstek gövdesi içeriğe sahip nesne |
-| Durum kodu | int | İstek durum kodu |
+| Bilgisinde | object | İstekten gelen üstbilgiler |
+| bölümü | object | JSON nesnesi | İstekten gelen gövde içeriğine sahip nesne |
+| durum kodu | int | İstekteki durum kodu |
 |||
 
 | Durum kodu | Açıklama |
 |-------------|-------------|
-| 200 | Tamam |
-| 202 | Kabul edildi |
+| 200 | TAMAM |
+| 202 | Eden |
 | 400 | Hatalı istek |
 | 401 | Yetkilendirilmemiş |
 | 403 | Yasak |
@@ -140,4 +143,4 @@ Bir HTTP Web kancası tetikleyicisine veya bu bilgileri döndüren eylem çıkı
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Diğer hakkında bilgi edinin [Logic Apps bağlayıcıları](../connectors/apis-list.md)
+* Diğer [Logic Apps bağlayıcıları](../connectors/apis-list.md) hakkında bilgi edinin

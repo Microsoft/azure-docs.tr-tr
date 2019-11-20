@@ -5,48 +5,52 @@ services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: include
-ms.date: 03/20/2019
+ms.date: 11/12/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: b1a9d93d9fccf02ba1517e429625150736e539e9
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 8087025810214f3edbb74e628698eb69558f3500
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188256"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74085282"
 ---
-Bir sanal ağ geçidi oluşturduğunuzda, kullanmak istediğiniz ağ geçidi SKU’sunu belirtmeniz gerekir. İş yükü, aktarım hızı, özellik ve SLA türlerine bağlı olarak gereksinimlerinize uyan SKU’ları seçin. Sanal ağ geçidi SKU'ları Azure kullanılabilirlik alanları için bkz: [Azure kullanılabilirlik alanları ağ geçidi SKU'ları](../articles/vpn-gateway/about-zone-redundant-vnet-gateways.md).
+Bir sanal ağ geçidi oluşturduğunuzda, kullanmak istediğiniz ağ geçidi SKU’sunu belirtmeniz gerekir. İş yükü, aktarım hızı, özellik ve SLA türlerine bağlı olarak gereksinimlerinize uyan SKU’ları seçin. Azure Kullanılabilirlik Alanları sanal ağ geçidi SKU 'Ları için, bkz. [Azure kullanılabilirlik alanları ağ geçidi SKU 'ları](../articles/vpn-gateway/about-zone-redundant-vnet-gateways.md).
 
 ###  <a name="benchmark"></a>Tünele, bağlantıya ve performansa göre Ağ Geçidi SKU’ları
 
 [!INCLUDE [Aggregated throughput by SKU](./vpn-gateway-table-gwtype-aggtput-include.md)]
 
-[!INCLUDE [classic SKU](./vpn-gateway-classic-sku-support-include.md)]
+> [!NOTE]
+> VpnGw SKU 'Ları (VpnGw1, VpnGw1AZ, VpnGw2, VpnGw2AZ, VpnGw3, VpnGw3AZ, VpnGw4, VpnGw4AZ, VpnGw5 ve VpnGw5AZ) yalnızca Kaynak Yöneticisi dağıtım modeli için desteklenir. Klasik sanal ağlar eski (eski) SKU 'Ları kullanmaya devam etmelidir.
+>  * Eski ağ geçidi SKU 'Ları (temel, standart ve HighPerformance) ile çalışma hakkında daha fazla bilgi için bkz. [VPN Gateway SKU 'ları (eski SKU 'lar) Ile çalışma](../articles/vpn-gateway/vpn-gateway-about-skus-legacy.md).
+>  * ExpressRoute ağ geçidi SKU 'Ları için bkz. [ExpressRoute Için sanal ağ geçitleri](../articles/expressroute/expressroute-about-virtual-network-gateways.md).
+>
 
-###  <a name="feature"></a>Özellik kümesi tarafından ağ geçidi SKU'ları
+###  <a name="feature"></a>Özellik kümesine göre ağ geçidi SKU 'Ları
 
-Yeni VPN ağ geçidi SKU'ları ağ geçitlerinde sunulan özellik kümeleri açısından kolaylık sağlar:
+Yeni VPN Gateway SKU 'Ları, ağ geçitleri üzerinde sunulan özellik kümelerini kolaylaştırır:
 
 | **SKU**| **Özellikler**|
 | ---    | ---         |
-|**Temel** (\*\*)   | **Rota tabanlı VPN**: S2S/bağlantılar için 10 tünel; RADIUS kimlik doğrulaması olmaması için P2S; P2S için Ikev2 yok<br>**İlke tabanlı VPN**: (IKEv1): 1 S2S/bağlantı tünel; P2S yok|
-| **VpnGw1, VpnGw2 ve VpnGw3** | **Rota tabanlı VPN**: 30 tünele kadar (*), P2S, BGP, etkin-etkin, özel IPSec/IKE İlkesi, ExpressRoute/VPN birlikte kullanımı |
+|**Temel** (\*\*)   | **Rota tabanlı VPN**: S2S/bağlantılar için 10 tüneli; P2S için RADIUS kimlik doğrulaması yok; P2S için Ikev2 yok<br>**İlke tabanlı VPN**: (IKEv1): 1 S2S/bağlantı tüneli; P2S yok|
+| **Temel hariç tüm Generation1 ve Generation2 SKU 'Ları** | **Rota tabanlı VPN**: en fazla 30 tünelle (*), P2S, BGP, etkin-etkin, özel ıPSEC/Ike Ilkesi, ExpressRoute/VPN birlikte kullanımı |
 |        |             |
 
-( * ) Rota tabanlı bir VPN ağ geçidini (VpnGw1, VpnGw2, VpnGw3) şirket içi ilke tabanlı birden fazla güvenlik duvarı cihazına bağlamak için "PolicyBasedTrafficSelectors" yapılandırması gerçekleştirebilirsiniz. Ayrıntılı bilgi için bkz. [PowerShell kullanarak VPN ağ geçitlerini şirket içi ilke tabanlı birden fazla VPN cihazına bağlama](../articles/vpn-gateway/vpn-gateway-connect-multiple-policybased-rm-ps.md).
+(*) Yol tabanlı bir VPN ağ geçidini birden çok şirket içi ilke tabanlı güvenlik duvarı cihazına bağlamak için "PolicyBasedTrafficSelectors" yapılandırabilirsiniz. Ayrıntılı bilgi için bkz. [PowerShell kullanarak VPN ağ geçitlerini şirket içi ilke tabanlı birden fazla VPN cihazına bağlama](../articles/vpn-gateway/vpn-gateway-connect-multiple-policybased-rm-ps.md).
 
-(\*\*) Temel SKU eski SKU olarak kabul edilir. Temel SKU, belirli özellik sınırlamaları vardır. Yeni ağ geçidi SKU'ları birine bir temel SKU kullanan bir ağ geçidini yeniden boyutlandırma, bunun yerine VPN ağ geçidiniz geçemezsiniz içeren yeni bir SKU'ya için değiştirmeniz gerekir.
+(\*\*) Temel SKU, eski SKU olarak kabul edilir. Temel SKU 'nun belirli özellik sınırlamaları vardır. Temel SKU kullanan bir ağ geçidini yeni ağ geçidi SKU 'larından birine yeniden boyutlandıramazsınız, bunun yerine VPN ağ geçidinizi silmeyi ve yeniden oluşturmayı içeren yeni bir SKU 'ya geçiş yapmanız gerekir.
 
-###  <a name="workloads"></a>Ağ geçidi SKU'ları - üretim vs. Geliştirme-Test İş Yükleri Karşılaştırması
+###  <a name="workloads"></a>Ağ Geçidi SKU 'Ları-üretim ve geliştirme ve test Iş yükleri
 
-SLA ve özellik kümeleri farklılıklar nedeniyle üretim ve geliştirme ve test için aşağıdaki SKU'ları öneririz:
+SLA 'Lar ve özellik kümelerindeki farklılıklar nedeniyle, üretim ve geliştirme ve test için aşağıdaki SKU 'Ların kullanılması önerilir:
 
 | **İş yükü**                       | **SKU'lar**               |
 | ---                                | ---                    |
-| **Üretim, kritik iş yükleri** | VpnGw1, VpnGw2, VpnGw3 |
+| **Üretim, kritik iş yükleri** | Temel hariç tüm Generation1 ve Generation2 SKU 'Ları |
 | **Geliştirme-test veya kavram kanıtı**   | Temel (\*\*)                 |
 |                                    |                        |
 
-(\*\*) Temel SKU eski SKU olarak kabul edilir ve özellik sınırlamaları vardır. Temel SKU kullanmadan önce gereksinim duyduğunuz özellik desteklendiğinden emin olun.
+(\*\*) Temel SKU 'su eski SKU olarak değerlendirilir ve özellik sınırlamaları vardır. Temel SKU 'YU kullanmadan önce ihtiyacınız olan özelliğin desteklendiğinden emin olun.
 
-Eski SKU'ları (eski) kullanıyorsanız, üretim standart ve yüksek performanslı ' dir. Bilgi ve yönergeler için eski SKU'ları için bkz. [ağ geçidi SKU'ları (eski)](../articles/vpn-gateway/vpn-gateway-about-skus-legacy.md).
+Eski SKU 'Ları (eski) kullanıyorsanız, üretim SKU 'SU önerileri standart ve yüksek Performansdır. Eski SKU 'Lar hakkında bilgi ve yönergeler için bkz. [ağ geçidi SKU 'ları (eski)](../articles/vpn-gateway/vpn-gateway-about-skus-legacy.md).

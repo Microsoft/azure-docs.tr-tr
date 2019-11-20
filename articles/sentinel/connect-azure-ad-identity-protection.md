@@ -1,55 +1,54 @@
 ---
-title: Gözcü Azure Önizleme için Azure AD kimlik koruması verilere bağlanma | Microsoft Docs
-description: Azure Gözcü için Azure AD kimlik koruması veri bağlanmayı öğreneceksiniz.
+title: Azure AD Kimlik Koruması verilerini Azure Sentinel 'e bağlama | Microsoft Docs
+description: Azure AD Kimlik Koruması verilerini Azure Sentinel 'e bağlamayı öğrenin.
 services: sentinel
 documentationcenter: na
 author: rkarlin
 manager: rkarlin
 editor: ''
 ms.assetid: 91c870e5-2669-437f-9896-ee6c7fe1d51d
-ms.service: sentinel
+ms.service: azure-sentinel
+ms.subservice: azure-sentinel
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/07/2019
+ms.date: 11/17/2019
 ms.author: rkarlin
-ms.openlocfilehash: 10dc31e21f20618450de6d99b3fce40d63272d31
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5d73ce12d509b2ccc534e19a27124980f3b60044
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65204366"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158890"
 ---
-# <a name="connect-data-from-azure-ad-identity-protection"></a>Azure AD kimlik Koruması ' veri bağlama
+# <a name="connect-data-from-azure-ad-identity-protection"></a>Azure AD Kimlik Koruması verileri bağlama
 
-> [!IMPORTANT]
-> Azure Sentinel şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-Günlüklerinden akışını [Azure AD kimlik koruması](https://docs.microsoft.com/azure/information-protection/reports-aip) Azure Gözcü stream uyarılar Azure panoları görüntülemesine, özel uyarıları oluşturma ve araştırma geliştirmek için Gözcü içine içine. Azure Active Directory kimlik koruması, risk altındaki kullanıcıların, risk olaylarının ve güvenlik açıklarının birleştirilmiş bir görünüm riski hemen düzeltme ve gelecekte gerçekleşecek olayları otomatik olarak düzeltmeye yönelik ilkeler ayarlama olanağı sağlar. Hizmet müşteri kimliklerini koruma Microsoft'un deneyimini temel alır ve günlük 13 milyar oturum bileşenler düzeltebilmeniz doğruluk. 
+
+Panoları görüntülemek, özel uyarılar oluşturmak ve araştırmayı geliştirmek için uyarıları Azure Sentinel 'e aktarmak üzere Azure Sentinel 'e [Azure AD kimlik koruması](https://docs.microsoft.com/azure/information-protection/reports-aip) Günlükler akışını sağlayabilirsiniz. Azure Active Directory Kimlik Koruması, risk kullanıcılarının, risk algılamaları ve güvenlik açıklarına göre birleştirilmiş bir görünüm sağlar ve gelecekteki olayları otomatik olarak düzeltmek için ilkeler ayarlayabilir. Hizmet, Microsoft 'un tüketici kimliklerini koruma deneyiminden oluşturulmuştur ve noktadan itibaren 13.000.000.000 günlük bir oturum açma sinyalinden çok fazla doğruluk kazandır. 
 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Olmalıdır bir [Azure Active Directory Premium P1 veya P2 lisansı](https://azure.microsoft.com/pricing/details/active-directory/)
-- Genel yönetici veya güvenlik yöneticisi izinleri ile kullanıcı
+- [Azure Active Directory Premium P1 veya P2 lisansınızın](https://azure.microsoft.com/pricing/details/active-directory/) olması gerekir
+- Genel yönetici veya Güvenlik Yöneticisi izinlerine sahip Kullanıcı
 
 
-## <a name="connect-to-azure-ad-identity-protection"></a>İçin Azure AD kimlik koruması bağlantısı kurma
+## <a name="connect-to-azure-ad-identity-protection"></a>Azure AD Kimlik Koruması Bağlan
 
-Azure AD kimlik koruması varsa olduğundan emin olun [ağınızda etkin](../active-directory/identity-protection/enable.md).
-Varsa Azure AD kimlik koruması dağıtılan ve veri alma, uyarı verileri kolayca Azure Gözcü aktarılabilir.
-
-
-1. Azure Gözcü içinde seçin **veri bağlayıcıları** ve ardından **Azure AD kimlik koruması** Döşe.
-
-2. Tıklayın **Connect** Azure Gözcü Azure AD kimlik koruması olaylarının akışını başlatmak için.
+Zaten Azure AD Kimlik Koruması varsa, [Ağınızda etkinleştirildiğinden](../active-directory/identity-protection/overview-identity-protection.md)emin olun.
+Azure AD Kimlik Koruması dağıtılırsa ve veri alıyorsanız, uyarı verileri kolayca Azure Sentinel 'e akışla eklenebilir.
 
 
-6. İlgili şema Log Analytics'te Azure AD kimlik koruması uyarılarını kullanmak için arama **IdentityProtectionLogs_CL**.
+1. Azure Sentinel 'de **veri bağlayıcıları** ' nı seçin ve **Azure AD kimlik koruması** kutucuğuna tıklayın.
+
+2. Azure Sentinel 'e Azure AD Kimlik Koruması olayları akışa başlamak için **Bağlan** ' a tıklayın.
+
+
+6. Azure AD Kimlik Koruması uyarıları için Log Analytics ilgili şemayı kullanmak için, **Securityalert**aratın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu belgede, Azure Gözcü için Azure AD kimlik koruması bağlantısı kurma öğrendiniz. Azure Gözcü hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
-- Bilgi nasıl [görünürlük almak, veri ve olası tehditleri](quickstart-get-visibility.md).
-- Başlama [Azure Gözcü kullanarak tehditleri algılama](tutorial-detect-threats.md).
+Bu belgede Azure AD Kimlik Koruması Azure Sentinel 'e bağlamayı öğrendiniz. Azure Sentinel hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+- [Verilerinize nasıl görünürlük alabileceğinizi ve olası tehditleri](quickstart-get-visibility.md)öğrenin.
+- [Azure Sentinel ile tehditleri algılamaya](tutorial-detect-threats-built-in.md)başlayın.

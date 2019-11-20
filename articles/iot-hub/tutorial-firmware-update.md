@@ -1,25 +1,22 @@
 ---
 title: Azure IoT Hub aracılığıyla cihaz üretici yazılımını güncelleştirme | Microsoft Docs
-description: İşleri ve cihaz ikizlerini kullanarak cihaz üretici yazılımı güncelleştirme işlemi gerçekleştirin.
+description: IoT Hub 'ınıza bağlı bir arka uç uygulamasından tetiklenebilecek bir cihaz üretici yazılımı güncelleştirme işlemini nasıl uygulayacağınızı öğrenin.
 services: iot-hub
 author: wesmc7777
-manager: philmea
 ms.author: wesmc
 ms.service: iot-hub
 ms.devlang: dotnet
 ms.topic: tutorial
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 06/28/2019
 ms.custom: mvc
-ms.openlocfilehash: c576020118778e34b80187ec056fca22a4d9c5b1
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: 0665a20bfd8253b28936044abe515862b32f1b43
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67485824"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73888753"
 ---
-# <a name="tutorial-implement-a-device-firmware-update-process"></a>Öğretici: Cihaz üretici yazılımı güncelleştirme işlemini uygulayın
+# <a name="tutorial-implement-a-device-firmware-update-process"></a>Öğretici: Cihaz yazılımı güncelleştirme işlemi gerçekleştirme
 
 IoT hub'ınıza bağlı cihazların üretici yazılımını güncelleştirmeniz gerekebilir. Örneğin üretici yazılımına yeni özellik eklemek veya güvenlik yaması uygulamak isteyebilirsiniz. Birçok IoT senaryosunda fiziksel cihazlarınızı ziyaret edip cihaz yazılımı güncelleştirmelerini el ile uygulamak zordur. Bu öğreticide hub'ınıza bağlı bir arka uç uygulaması üzerinden cihaz yazılımı güncelleştirme işlemini uzaktan başlatma ve izleme adımları anlatılmaktadır.
 
@@ -39,9 +36,9 @@ Bu öğreticide, aşağıdaki görevleri tamamlayacaksınız:
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Bu hızlı başlangıçta çalıştırdığınız iki örnek uygulama, Node.js kullanılarak yazılır. Geliştirme makinenize Node.js v10.x.x veya sonraki bir sürümü gerekir.
+Bu hızlı başlangıçta çalıştırdığınız iki örnek uygulama, Node.js kullanılarak yazılır. Geliştirme makinenizde Node. js ile v10 arasındaki. x. x veya üzeri gerekir.
 
 [nodejs.org](https://nodejs.org) adresinden birden fazla platform için Node.js’yi indirebilirsiniz.
 
@@ -51,7 +48,7 @@ Aşağıdaki komutu kullanarak geliştirme makinenizde geçerli Node.js sürüm�
 node --version
 ```
 
-[https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip](https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip ) adresinden örnek Node.js projesini indirin ve ZIP arşivini ayıklayın.
+https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip adresinden örnek Node.js projesini indirin ve ZIP arşivini ayıklayın.
 
 ## <a name="set-up-azure-resources"></a>Azure kaynakları ayarlama
 
@@ -73,7 +70,7 @@ az group create --name tutorial-iot-hub-rg --location $location
 az iot hub create --name $hubname --location $location --resource-group tutorial-iot-hub-rg --sku F1
 
 # Make a note of the service connection string, you need it later
-az iot hub show-connection-string --name $hubname -policy-name service -o table
+az iot hub show-connection-string --name $hubname --policy-name service -o table
 
 ```
 
@@ -99,7 +96,7 @@ az iot hub device-identity show-connection-string --device-id MyFirmwareUpdateDe
 
 ## <a name="start-the-firmware-update"></a>Cihaz yazılımı güncelleştirmesini başlatma
 
-**devicetype** etiketine sahip tüm soğutucularda cihaz yazılımı güncelleştirme işlemini başlatmak için arka uç uygulamasında bir [otomatik cihaz yönetimi yapılandırması](iot-hub-automatic-device-management.md#create-a-configuration) oluşturursunuz. Bu bölümde şunları nasıl yapabileceğinizi öğrenirsiniz:
+[devicetype](iot-hub-automatic-device-management.md#create-a-configuration) etiketine sahip tüm soğutucularda cihaz yazılımı güncelleştirme işlemini başlatmak için arka uç uygulamasında bir **otomatik cihaz yönetimi yapılandırması** oluşturursunuz. Bu bölümde şunları nasıl yapabileceğinizi öğrenirsiniz:
 
 * Arka uç uygulamasından yapılandırma oluşturma.
 * İşi tamamlanana kadar izleme.
@@ -186,7 +183,7 @@ Aşağıdaki ekran görüntüsünde arka uç uygulamasından alınan çıkış g
 
 ![Arka uç uygulaması](./media/tutorial-firmware-update/BackEnd2.png)
 
-Oluşturma sırasında otomatik cihaz yapılandırmaları çalıştırır ve ardından her beş dakikada güncelleştirme her durumu görebilirsiniz değil çünkü arka uç uygulaması için gönderilir. Ölçümleri portalda görüntülemek için IoT Hub'ınızın **Automatic device management -> IoT device configuration** (Otomatik cihaz yönetimi -> IoT cihazı yapılandırması) bölümüne gidin:
+Otomatik cihaz yapılandırması oluşturma zamanında çalıştığından ve beş dakikada bir çalıştığı için, arka uç uygulamasına gönderilen her durum güncelleştirmesini göremeyebilirsiniz. Ölçümleri portalda görüntülemek için IoT Hub'ınızın **Automatic device management -> IoT device configuration** (Otomatik cihaz yönetimi -> IoT cihazı yapılandırması) bölümüne gidin:
 
 ![Yapılandırmayı portalda görüntüleme](./media/tutorial-firmware-update/portalview.png)
 
@@ -205,7 +202,7 @@ az group delete --name tutorial-iot-hub-rg
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide bağlı cihazlarınıza, cihaz yazılımı güncelleştirme işlemi uygulamayı öğrendiniz. Cihaz bağlantısını test etmek için Azure IOT hub'ı portal araçları ve Azure CLI komutlarını kullanma hakkında bilgi edinmek için sonraki öğreticiye ilerleyin.
+Bu öğreticide bağlı cihazlarınıza, cihaz yazılımı güncelleştirme işlemi uygulamayı öğrendiniz. Cihaz bağlantısını test etmek için Azure IoT Hub Portal araçları 'nı ve Azure CLı komutlarını nasıl kullanacağınızı öğrenmek için sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
 > [IoT hub’ınızla bağlantıyı test etmek için bir sanal cihaz kullanma](tutorial-connectivity.md)

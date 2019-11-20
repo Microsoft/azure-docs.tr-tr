@@ -1,33 +1,28 @@
 ---
-title: Azure Cloud Services rolü şema | Microsoft Docs
+title: Azure Cloud Services rol şeması | Microsoft Docs
 ms.custom: ''
 ms.date: 12/07/2016
 services: cloud-services
-ms.reviewer: ''
 ms.service: cloud-services
-ms.suite: ''
-ms.tgt_pltfrm: ''
 ms.topic: reference
-ms.assetid: e4fbffc1-98eb-449c-971c-de415e45ab34
 caps.latest.revision: 12
-author: jpconnock
-ms.author: jeconnoc
-manager: timlt
-ms.openlocfilehash: aa6f8a821edea6261d64bb411154e82fdf212a8d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+author: georgewallace
+ms.author: gwallace
+ms.openlocfilehash: 481301333ada39297bf2813bbea5f096c2abd3ad
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62130254"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68360664"
 ---
-# <a name="azure-cloud-services-config-role-schema"></a>Azure bulut Hizmetleri rol yapılandırma şeması
+# <a name="azure-cloud-services-config-role-schema"></a>Azure Cloud Services yapılandırma rolü şeması
 
-`Role` Herhangi bir sertifika parmak izleri bir rolle ilişkili ve yapılandırma dosyası öğesi herhangi bir yapılandırma ayarı değerini hizmetin her rol için dağıtmak için rol örneklerinin sayısını belirtir.
+Yapılandırma `Role` dosyasının öğesi, hizmette her bir rol için dağıtılacak rol örneği sayısını, herhangi bir yapılandırma ayarlarının değerlerini ve bir rolle ilişkili tüm sertifikalar için parmak izlerini belirtir.
 
-Azure hizmet yapılandırma şeması hakkında daha fazla bilgi için bkz: [bulut hizmeti (Klasik) yapılandırma şeması](schema-cscfg-file.md). Azure Hizmet tanım düzenini hakkında daha fazla bilgi için bkz: [bulut hizmeti (Klasik) tanım Şeması](schema-csdef-file.md).
+Azure hizmet yapılandırma şeması hakkında daha fazla bilgi için bkz. [Cloud Service (klasik) yapılandırma şeması](schema-cscfg-file.md). Azure hizmet tanımı şeması hakkında daha fazla bilgi için bkz. [bulut hizmeti (klasik) Tanım Şeması](schema-csdef-file.md).
 
-##  <a name="Role"></a> Rol öğesi
-Aşağıdaki örnekte gösterildiği `Role` öğesi ve onun alt öğeleri.
+##  <a name="Role"></a>Rol öğesi
+Aşağıdaki örnek `Role` öğesi ve onun alt öğelerini gösterir.
 
 ```xml 
 <ServiceConfiguration>
@@ -43,20 +38,20 @@ Aşağıdaki örnekte gösterildiği `Role` öğesi ve onun alt öğeleri.
 </ServiceConfiguration>
 ```
 
-Aşağıdaki tablo için öznitelikler açıklanmaktadır `Role` öğesi.
+Aşağıdaki tabloda `Role` öğesi için öznitelikler açıklanmaktadır.
 
 | Öznitelik | Açıklama |
 | --------- | ----------- |
-| name   | Gereklidir. Rolün adını belirtir. Hizmet tanım dosyası rol için sağlanan adı eşleşmelidir.|
-| vmName | İsteğe bağlı. Bir sanal makinenin DNS adını belirtir. 10 karakter adı olmalıdır ya da daha az.|
+| name   | Gerekli. Rolün adını belirtir. Ad, hizmet tanımı dosyasındaki rol için girilen adla eşleşmelidir.|
+| vmName | İsteğe bağlı. Bir sanal makinenin DNS adını belirtir. Ad 10 karakter veya daha az olmalıdır.|
 
-Aşağıdaki tabloda, alt öğelerini açıklar `Role` öğesi.
+Aşağıdaki tablo, `Role` öğesinin alt öğelerini açıklar.
 
 | Öğe | Açıklama |
 | ------- | ----------- |
-| Örnekler | Gereklidir. Role dağıtılacak örnek sayısını belirtir. Örnek sayısı için bir tamsayı tarafından tanımlanan `count` özniteliği.|
-| Ayar   | İsteğe bağlı. Bir ayarın adını ve değerini bir rol için bir ayarlar koleksiyonu belirtir. Ayar adı için bir dize tarafından tanımlanan `name` özniteliği ve ayar değeri bir dize tarafından tanımlanır `value` özniteliği.|
-| Sertifika | İsteğe bağlı. Ad, parmak izi ve rolüyle ilişkilendirilmesi için bir hizmet sertifikası algoritması belirtir. Sertifika adı için bir dize tarafından tanımlanan `name` özniteliği. Sertifika parmak izini onaltılık sayı için boşluk içeren bir dize tarafından tanımlanan `thumbprint` özniteliği. Onaltılık sayılar, rakam ve büyük harfli alfasayısal karakterler kullanılarak temsil edilebilir. Sertifika algoritma için bir dize tarafından tanımlanan `thumbprintAlgorithm` özniteliği.|
+| Örnekler | Gerekli. Rol için dağıtılacak örneklerin sayısını belirtir. Örnek sayısı `count` öznitelik için bir tamsayı ile tanımlanır.|
+| Ayar   | İsteğe bağlı. Bir rolün ayarlar koleksiyonundaki bir ayar adı ve değeri belirtir. Ayar adı, `name` özniteliği için bir dize tarafından tanımlanır ve ayar değeri `value` öznitelik için bir dize tarafından tanımlanır.|
+| Sertifika | İsteğe bağlı. Rolüyle ilişkilendirilecek bir hizmet sertifikasının adını, parmak izini ve algoritmasını belirtir. Sertifika adı, `name` öznitelik için bir dize tarafından tanımlanır. Sertifika parmak izi, `thumbprint` öznitelik için boşluk içermeyen bir onaltılık sayı dizesi tarafından tanımlanır. Onaltılık sayılar, rakamlar ve büyük Alfa karakterleri kullanılarak temsil etmelidir. Sertifika algoritması, `thumbprintAlgorithm` özniteliği için bir dize tarafından tanımlanır.|
 
 ## <a name="see-also"></a>Ayrıca Bkz.
-[Bulut hizmeti (Klasik) yapılandırma şeması](schema-cscfg-file.md)
+[Bulut hizmeti (klasik) yapılandırma şeması](schema-cscfg-file.md)

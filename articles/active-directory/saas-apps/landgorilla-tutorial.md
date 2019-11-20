@@ -1,244 +1,163 @@
 ---
-title: 'Öğretici: Land Gorilla istemci ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve Land Gorilla arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Land Gorilla ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve Land Gorilla arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: daveba
+manager: mtillman
+ms.reviewer: barbkess
 ms.assetid: 28acce3e-22a0-4a37-8b66-6e518d777350
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 03/13/2017
+ms.topic: tutorial
+ms.date: 08/07/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d12519a2bd0a5e3951d0ca9ae51a54bd728a782b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e7c2f9b076d831f4d851a964ababb64930a7c7f8
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65987887"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68880000"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-land-gorilla-client"></a>Öğretici: Land Gorilla istemci ile Azure Active Directory Tümleştirme
+# <a name="tutorial-integrate-land-gorilla-with-azure-active-directory"></a>Öğretici: Land Gorilla 'yı Azure Active Directory ile tümleştirin
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Land Gorilla istemci tümleştirme konusunda bilgi edinin.
+Bu öğreticide, Land Gorilla 'yı Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. Land Gorilla 'yı Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-Azure AD ile land Gorilla istemci tümleştirme ile aşağıdaki avantajları sağlar:
+* Azure AD 'de Land Gorilla 'ya erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla Land Gorilla 'ya otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-- Land Gorilla istemci erişimi, Azure AD'de denetleyebilirsiniz
-- Azure AD hesaplarına otomatik olarak imzalanan (çoklu oturum açma) Land Gorilla istemciye açma, kullanıcılarınızın etkinleştirebilirsiniz
-- Bir merkezi konumda - Azure Yönetim Portalı hesaplarınızı yönetebilirsiniz.
-
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](../manage-apps/what-is-single-sign-on.md).
-
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesi Land Gorilla istemcisi ile yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-- Azure AD aboneliği
-- Bir kara Gorilla istemci çoklu oturum açma etkin aboneliği
-
-
-> [!NOTE]
-> Bu öğreticideki adımları test etmek için üretim ortamı kullanarak önermiyoruz.
-
-
-Bu öğreticideki adımları test etmek için bu önerileri izlemelidir:
-
-- Bu gerekli olmadığı sürece üretim ortamınızı kullanmamanız gerekir.
-- Azure AD deneme ortamı yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/).
-
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Land Gorilla çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
-Bu öğreticide, Azure AD çoklu oturum açma bir test ortamında test edin. Bu öğreticide özetlenen senaryo iki temel yapı taşları oluşur:
 
-1. Galeriden land Gorilla istemci ekleme
-1. Yapılandırma ve test Azure AD çoklu oturum açma
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
+* Land Gorilla, **IDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-land-gorilla-client-from-the-gallery"></a>Galeriden land Gorilla istemci ekleme
-Azure AD'de Land Gorilla istemci tümleştirmesini yapılandırmak için Land Gorilla istemci Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+## <a name="adding-land-gorilla-from-the-gallery"></a>Galeriden Land Gorilla ekleme
 
-**Galeriden land Gorilla istemci eklemek için aşağıdaki adımları gerçekleştirin:**
+Land Gorilla 'nın tümleştirmesini Azure AD 'ye göre yapılandırmak için, Galeriden, yönetilen SaaS uygulamaları listenize Land Gorilla eklemeniz gerekir.
 
-1. İçinde  **[Azure Yönetim Portalı](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi. 
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **Land Gorilla** yazın.
+1. Sonuçlar panelinden **Land Gorilla** ' yı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-    ![Active Directory][1]
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-1. Gidin **kurumsal uygulamalar**. Ardından **tüm uygulamaları**.
+**B. Simon**adlı bir test kullanıcısı kullanarak Land Gorilla Ile Azure AD SSO 'yu yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ve Land Gorilla 'daki ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-    ![Uygulamalar][2]
-    
-1. Tıklayın **Ekle** iletişim kutusunun üst kısmındaki düğmesi.
+Azure AD SSO 'yu Land Gorilla ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-    ![Uygulamalar][3]
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+2. , Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Land Gorilla SSO 'Yu yapılandırın](#configure-land-gorilla-sso)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+5. Kullanıcı Azure AD gösterimine bağlı olan Land Gorilla 'da B. Simon 'a sahip olmak için **[Land Gorilla test kullanıcısı oluşturun](#create-land-gorilla-test-user)** .
+6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-1. Arama kutusuna **Land Gorilla istemci**.
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/landgorilla-tutorial/tutorial_landgorilla_search.png)
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-1. Sonuçlar panelinde seçin **Land Gorilla istemci**ve ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+1. [Azure Portal](https://portal.azure.com/), **Land Gorilla** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/landgorilla-tutorial/tutorial_landgorilla_addfromgallery.png)
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, aşağıdaki alanlar için değerleri girin:
 
-##  <a name="configuring-and-testing-azure-ad-single-sign-on"></a>Yapılandırma ve test Azure AD çoklu oturum açma
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma Land Gorilla "b adlı bir test kullanıcı tabanlı istemcisiyle test etme Simon".
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki düzenin birini kullanarak bir URL yazın:
 
-Tek iş için oturum açma için Azure AD ne Land Gorilla istemci karşılık gelen kullanıcı için bir kullanıcı Azure AD'de olduğunu bilmeniz gerekir. Diğer bir deyişle, bir Azure AD kullanıcısı ve ilgili kullanıcı Land Gorilla istemcisinde arasında bir bağlantı ilişki kurulması gerekir.
+    | | |
+    |-|-|
+    | `https://<customer domain>.landgorilla.com/`|
+    | `https://www.<customer domain>.landgorilla.com`|
+    | | |
 
-Değerini atayarak bu bağlantı ilişki kurulduktan **kullanıcı adı** değerini Azure AD'de **kullanıcıadı** Land Gorilla istemcisinde.
+    b. **Yanıt URL 'si** metin kutusunda, aşağıdaki düzenin birini kullanarak bir URL yazın:
 
-Yapılandırma ve Azure AD çoklu oturum açma Land Gorilla istemcisiyle test etme için aşağıdaki yapı taşlarını tamamlanması gerekir:
+    | | |
+    |-|-|
+    | `https://<customer domain>.landgorilla.com/simplesaml/module.php/core/authenticate.php`|
+    | `https://www.<customer domain>.landgorilla.com/simplesaml/module.php/core/authenticate.php`|
+    | `https://<customer domain>.landgorilla.com/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp`|
+    | `https://www.<customer domain>.landgorilla.com/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp`|
 
-1. **[Azure AD çoklu oturum açmayı yapılandırma](#configuring-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-1. **[Bir Azure AD test kullanıcısı oluşturma](#creating-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma sınırlı grubu ile test etmek için.
-1. **[Bir kara Gorilla test kullanıcısı oluşturma](#creating-a-land-gorilla-test-user)**  - Azure AD çoklu oturum açma b Simon ile test etmek için.
-1. **[Azure AD test kullanıcı atama](#assigning-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak b Simon etkinleştirmek için.
-1. **[Çoklu oturum açma testi](#testing-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+    > [!NOTE]
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı ve yanıt URL 'siyle güncelleştirin. Burada, Tanımlayıcıdaki benzersiz dize değerini kullanmanızı öneririz. Bu değerleri almak için [Land Gorilla istemci destek ekibine](https://www.landgorilla.com/support/) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **Federasyon meta verileri XML** 'i bulun ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-Bu bölümde, Azure AD çoklu oturum açma Azure yönetim portalında etkinleştirin ve çoklu oturum açma Land Gorilla istemci uygulamanızı yapılandırın.
+    ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-**Azure AD çoklu oturum açma Land Gorilla istemcisi ile yapılandırmak için aşağıdaki adımları gerçekleştirin:**
+1. **Land Gorilla 'Yı ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-1. Azure Yönetim Portalı'nda üzerinde **Land Gorilla istemci** uygulama tümleştirme sayfasını tıklatın **çoklu oturum açma**.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    ![Çoklu oturum açmayı yapılandırın][4]
+### <a name="configure-land-gorilla-sso"></a>Land Gorilla SSO 'yu yapılandırma
 
-1. Üzerinde **çoklu oturum açma** iletişim kutusunda olarak **modu** seçin **SAML tabanlı oturum açma** için çoklu oturum açmayı etkinleştirme.
- 
-    ![Çoklu oturum açmayı yapılandırın](./media/landgorilla-tutorial/tutorial_landgorilla_samlbase.png)
+**Land Gorilla** tarafında çoklu oturum açmayı yapılandırmak için, Indirilen **Federasyon meta veri XML** 'sini ve Azure Portal ' den [Land Gorilla destek ekibine](https://www.landgorilla.com/support/)uygun şekilde kopyalanmış URL 'leri göndermeniz gerekir. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 
-1. Üzerinde **Land Gorilla istemci etki alanı ve URL'ler** bölümünde, aşağıdaki adımları gerçekleştirin:
+### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-    ![Çoklu oturum açmayı yapılandırın](./media/landgorilla-tutorial/tutorial_landgorilla_url_02.png)
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-    a. İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak değeri yazın: 
-    
-    `https://<customer domain>.landgorilla.com/` 
-    
-    `https://www.<customer domain>.landgorilla.com`
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Seçin **yeni kullanıcı** ekranın üstünde.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına, username@companydomain.extensiongirin. Örneğin: `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1.           **Oluştur**'a tıklayın.
 
-    b. İçinde **yanıt URL'si** metin kutusuna bir URL şu biçimi kullanarak:
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-    `https://<customer domain>.landgorilla.com/simplesaml/module.php/core/authenticate.php`
+Bu bölümde, Land Gorilla 'ya erişim vererek, B. Simon 'u Azure çoklu oturum açma özelliğini kullanacak şekilde etkinleştireceksiniz.
 
-    `https://www.<customer domain>.landgorilla.com/simplesaml/module.php/core/authenticate.php`
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **Land Gorilla**' yı seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-    `https://<customer domain>.landgorilla.com/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp`
-    
-    `https://www.<customer domain>.landgorilla.com/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp`
+   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-    > [!NOTE] 
-    > Bunlar gerçek değerleri olmadığına dikkat edin. Bu değerler gerçek tanımlayıcısı ve yanıt URL'sini güncelleştirmeniz gerekiyor. Burada benzersiz dize değeri tanımlayıcıda kullanmanızı öneririz. İlgili kişi [Land Gorilla istemci takım](https://www.landgorilla.com/support/) bu değerleri almak için. 
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-1. Üzerinde **SAML imzalama sertifikası** bölümünde **meta veri XML** ve bilgisayarınızda XML dosyasını kaydedin.
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-    ![Çoklu oturum açmayı yapılandırın](./media/landgorilla-tutorial/tutorial_landgorilla_certificate.png) 
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-1. Tıklayın **Kaydet** düğmesi.
+### <a name="create-land-gorilla-test-user"></a>Land Gorilla test kullanıcısı oluşturma
 
-    ![Çoklu oturum açmayı yapılandırın](./media/landgorilla-tutorial/tutorial_general_400.png) 
+Bu bölümde, Land Gorilla 'da Britta Simon adlı bir Kullanıcı oluşturacaksınız. Kullanıcıları Land Gorilla platformuna eklemek için [Land Gorilla destek ekibi](https://www.landgorilla.com/support/) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
-1. SSO yapılandırma Land Gorilla sonunda uygulamanız için tam almak için iletişime geçin [Land Gorilla istemci Destek ekibine](https://www.landgorilla.com/support/) ve indirilen sağlayacağını **"meta veri XML** dosya.
-
-
-### <a name="creating-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
-Bu bölümün amacı, bir test kullanıcısı b Simon adlı Azure Yönetim Portalı'nda oluşturmaktır.
-
-![Azure AD kullanıcısı oluşturun][100]
-
-**Azure AD'de bir test kullanıcısı oluşturmak için aşağıdaki adımları gerçekleştirin:**
-
-1. İçinde **Azure Yönetim Portalı**, sol gezinti bölmesinde **Azure Active Directory** simgesi.
-
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/landgorilla-tutorial/create_aaduser_01.png) 
-
-1. Git **kullanıcılar ve gruplar** tıklatıp **tüm kullanıcılar** kullanıcılar listesini görüntüleyin.
-    
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/landgorilla-tutorial/create_aaduser_02.png) 
-
-1. İletişim kutusunun en üstünde tıklayın **Ekle** açmak için **kullanıcı** iletişim.
- 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/landgorilla-tutorial/create_aaduser_03.png) 
-
-1. Üzerinde **kullanıcı** iletişim sayfasında, aşağıdaki adımları gerçekleştirin:
- 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/landgorilla-tutorial/create_aaduser_04.png) 
-
-    a. İçinde **adı** metin kutusuna **b Simon**.
-
-    b. İçinde **kullanıcı adı** metin kutusuna **e-posta adresi** B. simon'un.
-
-    c. Seçin **Göster parola** ve değerini yazma **parola**.
-
-    d. **Oluştur**’a tıklayın. 
-
-### <a name="creating-a-land-gorilla-test-user"></a>Bir kara Gorilla test kullanıcısı oluşturma
-
-Lütfen birlikte çalışarak [Land Gorilla Destek ekibine](https://www.landgorilla.com/support/) Land Gorilla platform kullanıcıları eklemek için.
-    
-### <a name="assigning-the-azure-ad-test-user"></a>Azure AD test kullanıcı atama
-
-Bu bölümde, B. Land Gorilla istemci erişim vererek, Azure çoklu oturum açma kullanılacak Simon etkinleştirin.
-
-![Kullanıcı Ata][200] 
-
-**B. Simon Land Gorilla istemciye atamak için aşağıdaki adımları gerçekleştirin:**
-
-1. Azure Yönetim Portalı'nda uygulamaları görünümü açtığınız dizin görünümüne gidin ve Git **kurumsal uygulamalar** ardından **tüm uygulamaları**.
-
-    ![Kullanıcı Ata][201] 
-
-1. Uygulamalar listesinde **Land Gorilla istemci**.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/landgorilla-tutorial/tutorial_landgorilla_app.png) 
-
-1. Soldaki menüde **kullanıcılar ve gruplar**.
-
-    ![Kullanıcı Ata][202] 
-
-1. Tıklayın **Ekle** düğmesi. Ardından **kullanıcılar ve gruplar** üzerinde **atama Ekle** iletişim.
-
-    ![Kullanıcı Ata][203]
-
-1. Üzerinde **kullanıcılar ve gruplar** iletişim kutusunda **b Simon** kullanıcıları listesinde.
-
-1. Tıklayın **seçin** düğmesini **kullanıcılar ve gruplar** iletişim.
-
-1. Tıklayın **atama** düğmesini **atama Ekle** iletişim.
-    
-
-
-### <a name="testing-single-sign-on"></a>Çoklu oturum açma testi
+### <a name="test-sso"></a>Test SSO 'SU
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim panelinde Land Gorilla istemci kutucuğa tıkladığınızda, otomatik olarak Land Gorilla istemci uygulamanıza açan.
-
+Erişim panelinde Land Gorilla kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Land Gorilla 'da otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](tutorial-list.md)
-* [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-
-<!--Image references-->
-
-[1]: ./media/landgorilla-tutorial/tutorial_general_01.png
-[2]: ./media/landgorilla-tutorial/tutorial_general_02.png
-[3]: ./media/landgorilla-tutorial/tutorial_general_03.png
-[4]: ./media/landgorilla-tutorial/tutorial_general_04.png
-
-[100]: ./media/landgorilla-tutorial/tutorial_general_100.png
-[200]: ./media/landgorilla-tutorial/tutorial_general_200.png
-[201]: ./media/landgorilla-tutorial/tutorial_general_201.png
-[202]: ./media/landgorilla-tutorial/tutorial_general_202.png
-[203]: ./media/landgorilla-tutorial/tutorial_general_203.png
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

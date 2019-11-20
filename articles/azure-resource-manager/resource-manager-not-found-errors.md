@@ -1,32 +1,29 @@
 ---
-title: Azure kaynak bulunamadı hatası | Microsoft Docs
-description: Bir kaynak bulunamadığında hataları gidermek nasıl açıklar.
-author: tfitzmac
-ms.service: azure-resource-manager
+title: Kaynak bulunamadı hataları
+description: Bir Azure Resource Manager şablonuyla dağıtıldığında bir kaynak bulunamadığında hataların nasıl çözümleneceğini açıklar.
 ms.topic: troubleshooting
 ms.date: 06/06/2018
-ms.author: tomfitz
-ms.openlocfilehash: 9c999a70ffdbed0c954cfc960b5febdaff06e4ae
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: c6dbe0e494e59017cda166c0785a187ab07c3b54
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67206195"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150593"
 ---
-# <a name="resolve-not-found-errors-for-azure-resources"></a>Azure kaynakları için bulunamadı hataları çözün
+# <a name="resolve-not-found-errors-for-azure-resources"></a>Azure kaynakları için bulunamadı hatalarını çözümleme
 
-Bu makalede, dağıtım sırasında bir kaynağı bulunamıyor görebileceğiniz hatalar açıklanır.
+Bu makalede, dağıtım sırasında bir kaynak bulunamadığında görebileceğiniz hatalar açıklanır.
 
 ## <a name="symptom"></a>Belirti
 
-Şablonunuz, çözümlenemeyen bir kaynağın adını içerdiğinde, benzer bir hata alırsınız:
+Şablonunuz çözülemeyen bir kaynağın adını içerdiğinde şuna benzer bir hata alırsınız:
 
 ```
 Code=NotFound;
 Message=Cannot find ServerFarm with name exampleplan.
 ```
 
-Kullanırsanız [başvuru](resource-group-template-functions-resource.md#reference) veya [Listkeys'i](resource-group-template-functions-resource.md#listkeys) aşağıdaki hata iletisini çözümlenemeyen kaynağı olan işlevler:
+[Başvuru](resource-group-template-functions-resource.md#reference) veya [ListKeys](resource-group-template-functions-resource.md#listkeys) işlevlerini çözülemeyen bir kaynakla birlikte kullanırsanız, şu hatayı alırsınız:
 
 ```
 Code=ResourceNotFound;
@@ -36,11 +33,11 @@ group {resource group name} was not found.
 
 ## <a name="cause"></a>Nedeni
 
-Resource Manager kaynak özelliklerini almak gerekiyor, ancak aboneliğinizde kaynak tanımlanamıyor.
+Kaynak Yöneticisi bir kaynağın özelliklerini alması gerekiyor, ancak aboneliğinizde kaynağı tanımlayamıyor.
 
-## <a name="solution-1---set-dependencies"></a>Çözüm 1 - kümesi bağımlılıkları
+## <a name="solution-1---set-dependencies"></a>Çözüm 1-bağımlılıkları ayarlama
 
-Şablon eksik kaynak dağıtmaya çalışıyorsanız, bir bağımlılık eklemek gerekli olup olmadığını denetleyin. Resource Manager dağıtım, mümkün olduğunda paralel olarak kaynakları oluşturarak iyileştirir. Bir kaynak başka bir kaynak sonra dağıtılması gerekiyorsa kullanmanız gerekir **dependsOn** şablonunuzdaki öğesi. Örneğin, bir web uygulaması dağıtım yaparken, App Service planı mevcut olması gerekir. Web uygulamasını App Service planı üzerinde bağlıdır belirtmediyseniz, Resource Manager, aynı anda hem kaynakları oluşturur. Web uygulamasında bir özellik ayarlama girişiminde bulunduğunuzda henüz yok çünkü App Service planı kaynak bulunamadığını belirten bir hatayla alın. Bu hata, web uygulamasında bağımlılık ayarlayarak engeller.
+Şablonda eksik kaynağı dağıtmaya çalışıyorsanız, bir bağımlılık eklemeniz gerekip gerekmediğini kontrol edin. Kaynak Yöneticisi, mümkün olduğunda, paralel olarak kaynakları oluşturarak dağıtımı iyileştirir. Bir kaynak başka bir kaynaktan sonra dağıtılması gerekiyorsa, şablonunuzda **Bağımlıdson** öğesini kullanmanız gerekir. Örneğin, bir Web uygulaması dağıtıldığında App Service planının mevcut olması gerekir. Web uygulamasının App Service planına bağlı olduğunu belirtmediyse Kaynak Yöneticisi her iki kaynak de aynı anda oluşturulur. Yalnızca Web uygulamasında bir özellik ayarlamaya çalışırken mevcut olmadığından App Service planı kaynağının bulunamadığını belirten bir hata alırsınız. Web uygulamasındaki bağımlılığı ayarlayarak bu hatayı önleyebilirsiniz.
 
 ```json
 {
@@ -53,29 +50,29 @@ Resource Manager kaynak özelliklerini almak gerekiyor, ancak aboneliğinizde ka
 }
 ```
 
-Ancak, gerekmeyen bağımlılıklarını ayarlama önlemek isteyebilirsiniz. Gereksiz bağımlılıkları varsa, paralel olarak dağıtılan birbirlerine bağımlı olmayan kaynakları engelleyerek dağıtım süresini uzatmak. Ayrıca, dağıtımı engelleyen döngüsel bağımlılıklar oluşturabilir. [Başvuru](resource-group-template-functions-resource.md#reference) işlevi ve [listesi *](resource-group-template-functions-resource.md#list) işlevleri bu kaynağa aynı şablonda dağıtılır ve onun adı (kaynak kimliği değil'tarafından başvurulan bu örtülü bir bağımlılık başvurulan kaynakta oluşturur ). Bu nedenle, bağımlılıkları belirtilenden daha fazla bağımlılıkları olabilir **dependsOn** özelliği. [ResourceId](resource-group-template-functions-resource.md#resourceid) işlevi değil ya da örtük bir bağımlılık oluşturmak kaynağın mevcut olduğunu doğrulayın. [Başvuru](resource-group-template-functions-resource.md#reference) işlevi ve [listesi *](resource-group-template-functions-resource.md#list) kaynağa kendi kaynak kimliği tarafından başvurulan işlevler dolaylı bir bağımlılığı oluşturmayın Örtük bir bağımlılık oluşturmak için aynı şablonda dağıtılan kaynağın adını geçirin.
+Ancak, gerekmeyen bağımlılıkları ayarlamayı önlemek isteyebilirsiniz. Gereksiz bağımlılıklara sahip olduğunuzda, birbirlerine bağımlı olmayan kaynakların paralel olarak dağıtılmasını önleyecek şekilde dağıtım süresini uzattınız. Ayrıca, dağıtımı engelleyen döngüsel bağımlılıklar da oluşturabilirsiniz. [Başvuru](resource-group-template-functions-resource.md#reference) işlevi ve [liste *](resource-group-template-functions-resource.md#list) işlevleri, başvurulan kaynak üzerinde bu kaynak aynı şablonda dağıtıldığında ve adına (kaynak kimliği değil) başvurduğu zaman bir örtük bağımlılık oluşturur. Bu nedenle, **Bağımlıdson** özelliğinde belirtilen bağımlılıklardan daha fazla bağımlılığı olabilir. [RESOURCEID](resource-group-template-functions-resource.md#resourceid) işlevi örtük bir bağımlılık oluşturmaz veya kaynağın mevcut olduğunu doğrular. [Başvuru](resource-group-template-functions-resource.md#reference) işlevi ve [liste *](resource-group-template-functions-resource.md#list) IŞLEVLERI, kaynağa kaynak kimliği tarafından bahsedildiğinde örtülü bir bağımlılık oluşturmaz. Örtük bir bağımlılık oluşturmak için, aynı şablonda dağıtılan kaynağın adını geçirin.
 
-Bağımlılık sorunlarını gördüğünüzde, kaynak dağıtım sıralamasını bir anlayış kazanmak gerekir. Dağıtım işlemlerini sırasını görüntülemek için:
+Bağımlılık sorunlarını gördüğünüzde, kaynak dağıtımının sırası hakkında öngörü elde etmeniz gerekir. Dağıtım işlemlerinin sırasını görüntülemek için:
 
 1. Kaynak grubunuz için dağıtım geçmişini seçin.
 
-   ![Dağıtım geçmişi seçin](./media/resource-manager-not-found-errors/select-deployment.png)
+   ![Dağıtım geçmişini seçin](./media/resource-manager-not-found-errors/select-deployment.png)
 
-2. Bir dağıtım geçmişinden seçip **olayları**.
+2. Geçmişten bir dağıtım seçin ve **Olaylar**' ı seçin.
 
-   ![Dağıtım olayları seçin](./media/resource-manager-not-found-errors/select-deployment-events.png)
+   ![Dağıtım olaylarını seçin](./media/resource-manager-not-found-errors/select-deployment-events.png)
 
-3. Her kaynak için olaylar dizisini inceleyin. Her işlemin durumu dikkat edin. Örneğin, aşağıdaki görüntüde, paralel olarak dağıtılan üç depolama hesabı gösterilmektedir. Üç depolama hesabı aynı anda başlatılır dikkat edin.
+3. Her kaynak için olay sırasını inceleyin. Her işlemin durumuna dikkat edin. Örneğin, aşağıdaki görüntüde paralel olarak dağıtılan üç depolama hesabı gösterilmektedir. Üç depolama hesabının aynı anda başlatıldığını unutmayın.
 
-   ![Paralel dağıtım](./media/resource-manager-not-found-errors/deployment-events-parallel.png)
+   ![paralel dağıtım](./media/resource-manager-not-found-errors/deployment-events-parallel.png)
 
-   Sıradaki resimde, paralel olarak dağıtılan olmayan üç depolama hesaplarını gösterir. İlk Depolama hesabında ikinci depolama hesabına bağlıdır ve üçüncü depolama hesabının ikinci depolama hesabına bağlıdır. İlk Depolama hesabı başlatıldığından, kabul edilen ve sonraki başlatılmadan önce tamamlandı.
+   Sonraki görüntüde paralel olarak dağıtılmayan üç depolama hesabı gösterilmektedir. İkinci depolama hesabı, ilk depolama hesabına bağlıdır ve üçüncü depolama hesabı ikinci depolama hesabına bağlıdır. İlk depolama hesabı, bir sonraki başlatılmadan önce başlatılır, kabul edilir ve tamamlanır.
 
    ![sıralı dağıtım](./media/resource-manager-not-found-errors/deployment-events-sequence.png)
 
-## <a name="solution-2---get-resource-from-different-resource-group"></a>Çözüm 2 - farklı bir kaynak grubundan kaynak alma
+## <a name="solution-2---get-resource-from-different-resource-group"></a>Çözüm 2-farklı kaynak grubundan kaynak al
 
-Farklı bir kaynak grubu için Dağıtılmış bir kaynak var, kullanın [ResourceId işlevi](resource-group-template-functions-resource.md#resourceid) kaynağın tam olarak nitelenmiş adını almak için.
+Kaynak, dağıtılmasından farklı bir kaynak grubunda mevcut olduğunda, kaynağın tam adını almak için [RESOURCEID işlevini](resource-group-template-functions-resource.md#resourceid) kullanın.
 
 ```json
 "properties": {
@@ -84,9 +81,9 @@ Farklı bir kaynak grubu için Dağıtılmış bir kaynak var, kullanın [Resour
 }
 ```
 
-## <a name="solution-3---check-reference-function"></a>Çözüm 3 - denetimi başvuru işlevi
+## <a name="solution-3---check-reference-function"></a>Çözüm 3-başvuru işlevini denetle
 
-İçeren bir ifade için konum [başvuru](resource-group-template-functions-resource.md#reference) işlevi. Sağladığınız değerler kaynak aynı şablonun, kaynak grubu ve abonelik olup göre değişir. Çifte denetim senaryonuz için gerekli parametre değerlerini sunuyorsunuz. Farklı kaynak grubunda kaynak ise tam kaynak kimliği sağlayın. Örneğin, başka bir kaynak grubuna bir depolama hesabında başvurmak için kullanın:
+[Başvuru](resource-group-template-functions-resource.md#reference) işlevini içeren bir ifade arayın. Sağladığınız değerler, kaynağın aynı şablonda, kaynak grubunda ve abonelikte olup olmadığına göre farklılık gösterir. Senaryonuz için gerekli parametre değerlerini sağlayıp sağlamadığınızı iki kez denetleyin. Kaynak farklı bir kaynak grubsunda, tam kaynak KIMLIĞI sağlayın. Örneğin, başka bir kaynak grubundaki bir depolama hesabına başvurmak için şunu kullanın:
 
 ```json
 "[reference(resourceId('exampleResourceGroup', 'Microsoft.Storage/storageAccounts', 'myStorage'), '2017-06-01')]"

@@ -1,6 +1,6 @@
 ---
-title: SAP Business Warehouse açık bir Azure Data Factory kullanarak hub'ı aracılığıyla veri kopyalama | Microsoft Docs
-description: Desteklenen bir havuz veri depolarına açık hub'ı aracılığıyla SAP Business Warehouse (BW) gelen bir Azure Data Factory işlem hattında kopyalama etkinliği'ni kullanarak veri kopyalama hakkında bilgi edinin.
+title: Azure Data Factory kullanarak SAP Business Warehouse 'tan açık hub aracılığıyla veri kopyalama
+description: Azure Data Factory bir işlem hattındaki kopyalama etkinliğini kullanarak SAP Business Warehouse 'tan (siyah beyaz) açık Merkez aracılığıyla desteklenen havuz veri depolarına veri kopyalamayı öğrenin.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -10,102 +10,110 @@ ms.service: data-factory
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.date: 03/08/2019
+ms.date: 09/04/2019
 ms.author: jingwang
-ms.openlocfilehash: 6fb989632d3165ac5e54e540aae4385fc2258c85
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f4ee4ec40aeecdb902be3cf93beb9ee25350e262
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66256903"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73680313"
 ---
-# <a name="copy-data-from-sap-business-warehouse-via-open-hub-using-azure-data-factory"></a>SAP Business Warehouse açık bir Azure Data Factory kullanarak hub'ı aracılığıyla veri kopyalama
+# <a name="copy-data-from-sap-business-warehouse-via-open-hub-using-azure-data-factory"></a>Azure Data Factory kullanarak SAP Business Warehouse 'tan açık hub aracılığıyla veri kopyalama
 
-Bu makalede, kopyalama etkinliği Azure Data Factory'de bir SAP Business Warehouse (BW) öğesinden açık hub'ı aracılığıyla veri kopyalamak için nasıl kullanılacağını özetlenmektedir. Yapılar [kopyalama etkinliği'ne genel bakış](copy-activity-overview.md) kopyalama etkinliği genel bir bakış sunan makalesi.
+Bu makalede, Açık hub aracılığıyla SAP Business Warehouse 'tan (bant genişliği) veri kopyalamak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı özetlenmektedir. Kopyalama etkinliğine genel bir bakış sunan [kopyalama etkinliğine genel bakış](copy-activity-overview.md) makalesinde oluşturulur.
 
-## <a name="supported-capabilities"></a>Desteklenen özellikler
+>[!TIP]
+>ADF 'nin SAP veri tümleştirme senaryosunda genel desteğini öğrenmek için ayrıntılı giriş, comparme ve kılavuzla [Azure Data Factory Teknik İnceleme kullanarak SAP veri tümleştirme](https://github.com/Azure/Azure-DataFactory/blob/master/whitepaper/SAP%20Data%20Integration%20using%20Azure%20Data%20Factory.pdf) konusuna bakın.
 
-Tüm desteklenen havuz veri deposuna SAP Business Warehouse açık hub'ı üzerinden gelen verileri kopyalayabilirsiniz. Kaynakları/havuz kopyalama etkinliği tarafından desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablo.
+## <a name="supported-capabilities"></a>Desteklenen yetenekler
 
-Özellikle, bu SAP Business Warehouse açık Hub bağlayıcı'yı destekler:
+Bu SAP Iş ambarı, açık Merkez bağlayıcı aracılığıyla aşağıdaki etkinlikler için desteklenir:
 
-- SAP Business Warehouse **sürüm 7.01 veya üzeri (yığındaki son SAP destek paketi 2015 yıl sonra yayımlanan)** .
-- Olabilen altında DSO, Infocube, MultiProvider, veri kaynağı, vb. açık Hub hedef yerel tablo aracılığıyla veri kopyalama.
-- Temel kimlik doğrulaması kullanarak veri kopyalama.
+- [Desteklenen kaynak/havuz matrisi](copy-activity-overview.md) ile [kopyalama etkinliği](copy-activity-overview.md)
+- [Arama etkinliği](control-flow-lookup-activity.md)
+
+SAP Business Warehouse 'tan verileri, desteklenen herhangi bir havuz veri deposuna açık hub aracılığıyla kopyalayabilirsiniz. Kopyalama etkinliği tarafından kaynak/havuz olarak desteklenen veri depolarının listesi için [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablosuna bakın.
+
+Özellikle, bu SAP Business Warehouse açık hub Bağlayıcısı şunları destekler:
+
+- SAP Business Warehouse **sürüm 7,01 veya üzeri (2015 yıldan sonra yayınlanan son sap desteği paket yığınında)** .
+- ' Nin altında açık hub hedefi yerel tablosu aracılığıyla veri kopyalama, DSO, InfoCube, MultiProvider, DataSource vb. olabilir.
+- Temel kimlik doğrulaması kullanarak verileri kopyalama.
 - Uygulama sunucusuna bağlanılıyor.
 
-## <a name="sap-bw-open-hub-integration"></a>SAP BW Open Hub tümleştirmesi 
+## <a name="sap-bw-open-hub-integration"></a>SAP BW açık Hub tümleştirmesi 
 
-[SAP BW Open Hub Service](https://wiki.scn.sap.com/wiki/display/BI/Overview+of+Open+Hub+Service) SAP BW verileri ayıklamak için etkili bir yoludur. Aşağıdaki diyagramda imajlarını kendi SAP sistemde tipik akışlar birini gösterir, SAP ECC hangi büyük veri akışları PSA -> DSO -> Küp ->.
+[SAP BW açık hub hizmeti](https://wiki.scn.sap.com/wiki/display/BI/Overview+of+Open+Hub+Service) , verileri SAP BW ayıklamaya yönelik etkili bir yoldur. Aşağıdaki diyagramda, müşterilerin SAP sisteminde sahip olduğu tipik akışlardan biri gösterilmektedir. Bu durumda, verilerin SAP ECC-> PSA-> DSO-> küpünden akışı vardır.
 
-SAP BW Open Hub hedef (OHD) için SAP veri geçirilen hedef tanımlar. SAP veri aktarım işlemi (DTP) tarafından desteklenen herhangi bir nesne açık hub'ı veri kaynakları, örneğin DSO, Infocube, veri kaynağı, vb. olarak kullanılabilir. Veritabanı tabloları (yerel veya uzak) - geçirilen verilerin depolandığı - açık Hub hedef türü olabilir ve düz dosyaları. BW OHD yerel tabloda veri kopyalama bu SAP BW Open Hub Bağlayıcısı desteği. Durumunda diğer türleri kullanıyorsanız, veritabanı veya dosya sistemine diğer bağlayıcıları kullanarak doğrudan bağlantı kurabilir.
+SAP BW açık hub hedefi (OHD), SAP verilerinin geçirilme hedefini tanımlar. SAP Veri Aktarımı Process (DTP) tarafından desteklenen tüm nesneler açık Hub veri kaynakları (örneğin, DSO, InfoCube, DataSource vb.) olarak kullanılabilir. Açık hub hedefi türü-geçirilen verilerin depolandığı yer-veritabanı tabloları (yerel veya uzak) ve düz dosyalar olabilir. Bu SAP BW Open hub Connector, OHD yerel tablosundan sıyah verileri kopyalamayı destekler. Başka türler kullanıyorsanız, diğer bağlayıcıları kullanarak veritabanına veya dosya sistemine doğrudan bağlanabilirsiniz.
 
-![SAP BW Open Hub](./media/connector-sap-business-warehouse-open-hub/sap-bw-open-hub.png)
+![Açık hub SAP BW](./media/connector-sap-business-warehouse-open-hub/sap-bw-open-hub.png)
 
-## <a name="delta-extraction-flow"></a>Delta ayıklama akışı
+## <a name="delta-extraction-flow"></a>Değişim ayıklama akışı
 
-ADF SAP BW Open Hub Bağlayıcısı iki isteğe bağlı özellikleri sunar: `excludeLastRequest` ve `baseRequestId` açık Hub'ından delta yükü işlemek için kullanılabilir. 
+ADF SAP BW Open hub Bağlayıcısı iki isteğe bağlı özellik sunar: Açık hub 'dan Delta yükünü işlemek için kullanılabilecek `excludeLastRequest` ve `baseRequestId`. 
 
-- **excludeLastRequestId**: Son istek kayıtlarını hariç verilmeyeceğini belirtir. Varsayılan değer True'dur. 
-- **baseRequestId**: Delta yükleme isteği kimliği. Ayarlandıktan sonra yalnızca veri RequestId bu özelliğin değerinden daha büyük olan alınır. 
+- **Excludelastrequestıd**: son isteğin kayıtlarının dışlanıp dışlanmayacağı. Varsayılan değer true 'dur. 
+- **baseRequestId**: Delta yükleme isteğinin kimliği. Ayarlandıktan sonra yalnızca RequestId ile bu özelliğin değerinden büyük olan veriler alınır. 
 
-Genel olarak, Azure Data Factory (ADF) için ayıklama SAP InfoProviders gelen 2 adımlardan oluşur: 
+Genel olarak, SAP bilgi sağlayıcılarından Azure Data Factory (ADF) olarak ayıklama 2 adımdan oluşur: 
 
-1. **SAP BW veri aktarım işlemi (DTP)** Bu adım bir SAP BW InfoProvider veriler, bir SAP BW Open Hub tabloya kopyalar. 
+1. **SAP BW veri aktarımı işlemi (DTP)** Bu adım, verileri bir SAP BW ınfoprovider 'tan SAP BW açık hub tablosuna kopyalar 
 
-1. **ADF veri kopyalama** Bu adımda, ADF bağlayıcı tarafından okunan açık Hub tablosu 
+1. **ADF veri kopyalama** Bu adımda, Açık hub tablosu ADF Bağlayıcısı tarafından okundu 
 
-![Delta ayıklama akışı](media/connector-sap-business-warehouse-open-hub/delta-extraction-flow.png)
+![Değişim ayıklama akışı](media/connector-sap-business-warehouse-open-hub/delta-extraction-flow.png)
 
-İlk adımda bir DTP yürütülür. Her yürütme yeni bir SAP talep kimliği oluşturur. İstek Kimliği açık Hub tablosunda depolanır ve sonra belirlemek delta için ADF bağlayıcı tarafından kullanılır. İki adımı zaman uyumsuz olarak çalışır: DTP SAP tarafından tetiklenir ve ADF veri kopyalama ADF tetiklenir. 
+İlk adımda bir DTP yürütülür. Her yürütme yeni bir SAP istek KIMLIĞI oluşturur. İstek KIMLIĞI açık hub tablosunda depolanır ve sonra, Delta tanımlamak için ADF Bağlayıcısı tarafından kullanılır. İki adım zaman uyumsuz olarak çalışır: DTP SAP tarafından tetiklenir ve ADF veri kopyalama, ADF aracılığıyla tetiklenir. 
 
-Varsayılan olarak, ADF son delta açık Hub tablosundan okuyor değil ("hariç tutma son isteği" seçeneğini true). İşbu sözleşme ile ADF verileri % 100 (son delta eksik) açık Hub tablodaki verileri güncel değil. Hiçbir satır zaman uyumsuz ayıklama nedeni kayıp, buna karşılık, bu yordamı sağlar. DTP hala aynı tabloya yazma olsa bile ADF açık Hub tablosu okunurken düzgün çalışır. 
+Varsayılan olarak, ADF açık hub tablosundan en son Delta değerini okumuyor ("son isteği hariç tut" seçeneği doğrudur). Burada, ADF 'deki veriler açık hub tablosundaki veriler ile %100 güncel değildir (son Delta eksik). Bu yordam, dönüş sırasında zaman uyumsuz ayıklamanın neden olduğu hiçbir satırın kaybolmamasını sağlar. DTP hala aynı tabloya yazarken ADF, Açık hub tablosunu okurken bile sorunsuz bir şekilde çalışıyor. 
 
-Genellikle son çalıştırılmasındaki hazırlama veri deposu (örneğin, yukarıdaki diyagramda Azure Blob üzerinde), ADF tarafından en fazla kopyalanan istek kimliği saklayın. Bu nedenle, aynı istekte ikinci kez ADF tarafından sonraki çalıştırmada okunmadı. Bu arada, verileri otomatik olarak açık Hub tablosundan silinmez unutmayın.
+Genellikle, en fazla kopyalanmış istek KIMLIĞINI bir hazırlama veri deposunda (Yukarıdaki diyagramda Azure Blob gibi) ADF tarafından son çalıştırmada depoladığınız bir şekilde depoluyordu. Bu nedenle, sonraki çalıştırmada aynı istek ADF tarafından ikinci kez okunmaz. Bu arada, verilerin açık hub tablosundan otomatik olarak silinmediğini not edin.
 
-İçin uygun delta, işleme istek farklı DTPs kimlikleri aynı açık Hub tabloya sahip izin verilmiyor. Bu nedenle, her açık Hub hedef (OHD) için birden fazla DTP oluşturmamalıdır. Aynı InfoProvider tam ve değişim ayıklama ihtiyaç duyulduğunda için aynı InfoProvider iki OHDs oluşturmanız gerekir. 
+Doğru Delta işleme için, aynı Açık hub tablosunda farklı DTPs 'lerden istek kimliklerinin bulunmasına izin verilmez. Bu nedenle, her bir açık hub hedefi (OHD) için birden fazla DTP oluşturmanız gerekir. Aynı bilgi sağlayıcısından tam ve Delta ayıklama gereksinimi olduğunda, aynı ınfoprovider için iki Dirend oluşturmalısınız. 
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-SAP Business Warehouse açık Hub bu bağlayıcıyı kullanmak için gerekir:
+Bu SAP Business Warehouse açık hub bağlayıcısını kullanmak için şunları yapmanız gerekir:
 
-- Bir şirket içinde barındırılan tümleştirme çalışma zamanı sürümü 3.13 veya üzeri olarak ayarlayın. Bkz: [şirket içinde barındırılan tümleştirme çalışma zamanı](create-self-hosted-integration-runtime.md) makale Ayrıntılar için.
+- 3,13 veya üzeri bir sürümü olan şirket içinde barındırılan Integration Runtime ayarlayın. Ayrıntılar için bkz. [Şirket içinde barındırılan Integration Runtime](create-self-hosted-integration-runtime.md) makalesi.
 
-- İndirme **64-bit [SAP .NET bağlayıcı 3.0](https://support.sap.com/en/product/connectors/msnet.html)**  SAP'nin sitesinden ve şirket içinde barındırılan IR makineye yükleyin. Ne zaman yükleme, isteğe bağlı kurulum adımlarını penceresinde seçtiğinizden emin olun **yükleme derlemeleri GAC'ye** seçenek aşağıdaki görüntüde gösterildiği gibi. 
+- SAP web sitesinden **64 bitlik [sap .net Connector 3,0](https://support.sap.com/en/product/connectors/msnet.html)**  ' i indirin ve şirket içinde barındırılan IR makinesine yükleyin. Yükleme sırasında, isteğe bağlı kurulum adımları penceresinde, aşağıdaki görüntüde gösterildiği gibi **GAC 'ye derlemeleri yükleme** seçeneğini seçtiğinizden emin olun. 
 
-    ![SAP .NET bağlayıcısını yükleme](./media/connector-sap-business-warehouse-open-hub/install-sap-dotnet-connector.png)
+    ![SAP .NET bağlayıcısını yükler](./media/connector-sap-business-warehouse-open-hub/install-sap-dotnet-connector.png)
 
-- Data Factory BW Bağlayıcısı kullanılan SAP kullanıcının aşağıdaki izinleri olmalıdır: 
+- Data Factory bant genişliği Bağlayıcısı 'nda kullanılan SAP kullanıcısının aşağıdaki izinlere sahip olması gerekir: 
 
     - RFC ve SAP BW için yetkilendirme. 
-    - "Yürütme" etkinlik "S_SDSAUTH" yetkilendirme nesnesinin izinleri.
+    - "S_SDSAUTH" yetkilendirme nesnesinin "yürütme" etkinliğinin izinleri.
 
-- SAP açık Hub hedef türünde oluşturma **veritabanı tablosu** "Teknik anahtarı" seçeneği işaretli.  Ayrıca, gerekli olmamasına rağmen silme veri tablosundan olarak işaretlemeden bırakın için önerilir. DTP yararlanın (doğrudan yürütün veya var olan bir işlem zincirine tümleştirme) verileri (örneğin, küp) kaynak nesneden yerleşmesi açık hub hedef tabloya seçtiniz.
+- "Teknik anahtar" seçeneği işaretli SAP Open hub hedef türünü **veritabanı tablosu** olarak oluşturun.  Ayrıca, gerekli olmasa da tablo silme, tablodaki verileri işaretsiz olarak bırakmak için de önerilir. , Açık Merkez hedefi tablosuna seçtiğiniz kaynak nesneden (küp gibi) verileri aktarmak için DTP 'den yararlanın (doğrudan var olan işlem zinciriyle yürütün veya tümleştirin).
 
 ## <a name="getting-started"></a>Başlarken
 
 > [!TIP]
 >
-> SAP BW Open Hub Bağlayıcısı'nı kullanarak bir kılavuz için bkz. [veri yükleme SAP Business Warehouse (BW) Azure Data Factory kullanarak](load-sap-bw-data.md).
+> SAP BW açık hub bağlayıcısını kullanmaya yönelik bir anlatım için, bkz. [Azure Data Factory kullanarak SAP Business Warehouse 'tan (bant genişliği) veri yükleme](load-sap-bw-data.md).
 
 [!INCLUDE [data-factory-v2-connector-get-started](../../includes/data-factory-v2-connector-get-started.md)]
 
-Aşağıdaki bölümler, SAP Business Warehouse açık Hub bağlayıcıya belirli Data Factory varlıkları tanımlamak için kullanılan özellikleri hakkında ayrıntılı bilgi sağlar.
+Aşağıdaki bölümlerde, SAP Business Warehouse açık hub Bağlayıcısı ' na özgü Data Factory varlıkları tanımlamak için kullanılan özellikler hakkında ayrıntılı bilgi sağlanmaktadır.
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
 
-SAP Business Warehouse açık bağlı Hub hizmeti için aşağıdaki özellikleri destekler:
+SAP Business Warehouse açık hub bağlı hizmeti için aşağıdaki özellikler desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Type özelliği ayarlanmalıdır: **SapOpenHub** | Evet |
-| server | SAP BW örneği yer aldığı sunucunun adı. | Evet |
-| systemNumber | SAP BW sisteminin sistem numarası.<br/>İzin verilen değer: bir dize olarak temsil edilen iki basamaklı ondalık sayı. | Evet |
-| clientId | SAP W sisteminde istemcinin istemci kimliği.<br/>İzin verilen değer: bir dize olarak temsil edilen üç basamaklı ondalık sayı. | Evet |
-| language | SAP sisteminin kullandığı dil. | Hayır (varsayılan değer **tr**)|
-| userName | SAP sunucusuna erişimi olan kullanıcı adı. | Evet |
-| password | Kullanıcının parolası. Data Factory'de güvenle depolamak için bir SecureString olarak bu alanı işaretleyin veya [Azure Key Vault'ta depolanan bir gizli dizi başvuru](store-credentials-in-key-vault.md). | Evet |
-| connectVia | [Integration Runtime](concepts-integration-runtime.md) veri deposuna bağlanmak için kullanılacak. Belirtildiği gibi bir şirket içinde barındırılan tümleştirme çalışma zamanı gereklidir [önkoşulları](#prerequisites). |Evet |
+| type | Type özelliği: **Sapopenhub** olarak ayarlanmalıdır | Evet |
+| sunucu | SAP BW örneğinin bulunduğu sunucunun adı. | Evet |
+| systemNumber | SAP BW sisteminin sistem numarası.<br/>İzin verilen değer: dize olarak temsil edilen iki basamaklı ondalık sayı. | Evet |
+| ClientID | SAP W sistemindeki istemcinin istemci KIMLIĞI.<br/>İzin verilen değer: dize olarak temsil edilen üç basamaklı ondalık sayı. | Evet |
+| language | SAP sisteminin kullandığı dil. | Hayır (varsayılan değer **en**)|
+| Nitelen | SAP sunucusuna erişimi olan kullanıcının adı. | Evet |
+| password | Kullanıcının parolası. Data Factory güvenli bir şekilde depolamak için bu alanı SecureString olarak işaretleyin veya [Azure Key Vault depolanan bir gizli dizi başvurusu](store-credentials-in-key-vault.md)yapın. | Evet |
+| connectVia | Veri deposuna bağlanmak için kullanılacak [Integration Runtime](concepts-integration-runtime.md) . [Önkoşul](#prerequisites)bölümünde belirtildiği gibi, kendinden konak Integration Runtime gereklidir. |Evet |
 
 **Örnek:**
 
@@ -134,19 +142,16 @@ SAP Business Warehouse açık bağlı Hub hizmeti için aşağıdaki özellikler
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
 
-Bölümleri ve veri kümeleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [veri kümeleri](concepts-datasets-linked-services.md) makalesi. Bu bölümde, SAP BW Open Hub veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
+Veri kümelerini tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. [veri kümeleri](concepts-datasets-linked-services.md) makalesi. Bu bölüm SAP BW açık Hub veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
 
-Gelen ve SAP BW Open Hub'ına veri kopyalamak için dataset öğesinin type özelliği ayarlamak **SapOpenHubTable**. Aşağıdaki özellikler desteklenir.
+Ve SAP BW açık hub 'a veri kopyalamak için, veri kümesinin Type özelliğini **Sapopenhubtable**olarak ayarlayın. Aşağıdaki özellikler desteklenir.
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Type özelliği ayarlanmalıdır **SapOpenHubTable**.  | Evet |
-| openHubDestinationName | Verileri kopyalamak için açık Hub hedef adı. | Evet |
-| excludeLastRequest | Son istek kayıtlarını hariç verilmeyeceğini belirtir. | Hayır (varsayılan değer **true**) |
-| baseRequestId | Delta yükleme isteği kimliği. Ayarladıktan sonra yalnızca RequestId verilerle **büyük** bu özelliğin değeri alınır.  | Hayır |
+| type | Type özelliği **Sapopenhubtable**olarak ayarlanmalıdır.  | Evet |
+| openHubDestinationName | Verilerin kopyalanacağı açık hub hedefinin adı. | Evet |
 
->[!TIP]
->Açık Hub tablonuzda yalnızca tek bir istek kimliği tarafından oluşturulan veriler içerir, örneğin, her zaman yük tam ve tablodaki mevcut verilerin üzerine veya yalnızca DTP testi için bir kez çalıştırdığınız unutmayın d kopyalamak için "excludeLastRequest" seçeneğinin işaretini kaldırın Ata'yı uğradı.
+Veri kümesinde `excludeLastRequest` ve `baseRequestId` ayarlıyorsanız, hala olduğu gibi desteklenir, ancak etkinlik kaynağı ' nda yeni modeli kullanmaya önermeniz önerilir.
 
 **Örnek:**
 
@@ -155,12 +160,13 @@ Gelen ve SAP BW Open Hub'ına veri kopyalamak için dataset öğesinin type öze
     "name": "SAPBWOpenHubDataset",
     "properties": {
         "type": "SapOpenHubTable",
+        "typeProperties": {
+            "openHubDestinationName": "<open hub destination name>"
+        },
+        "schema": [],
         "linkedServiceName": {
             "referenceName": "<SAP BW Open Hub linked service name>",
             "type": "LinkedServiceReference"
-        },
-        "typeProperties": {
-            "openHubDestinationName": "<open hub destination name>"
         }
     }
 }
@@ -168,11 +174,22 @@ Gelen ve SAP BW Open Hub'ına veri kopyalamak için dataset öğesinin type öze
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
 
-Bölümleri ve etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları](concepts-pipelines-activities.md) makalesi. Bu bölümde, SAP BW Open Hub kaynak tarafından desteklenen özelliklerin bir listesini sağlar.
+Etkinlikleri tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. işlem [hatları](concepts-pipelines-activities.md) makalesi. Bu bölüm SAP BW açık Merkez kaynağı tarafından desteklenen özelliklerin bir listesini sağlar.
 
-### <a name="sap-bw-open-hub-as-source"></a>SAP BW Open Hub kaynağı olarak
+### <a name="sap-bw-open-hub-as-source"></a>Açık hub 'ı kaynak olarak SAP BW
 
-SAP BW Open Hub'ından veri kopyalamak için kopyalama etkinliği için kaynak türünü ayarlayın. **SapOpenHubSource**. Kopyalama etkinliği gereken ek türe özgü özellikler yoktur **kaynak** bölümü.
+SAP BW açık hub 'dan veri kopyalamak için, etkinlik **kaynağını** kopyalama bölümünde aşağıdaki özellikler desteklenir:
+
+| Özellik | Açıklama | Gerekli |
+|:--- |:--- |:--- |
+| type | Kopyalama etkinliği kaynağının **Type** özelliği **Sapopenhubsource**olarak ayarlanmalıdır. | Evet |
+| excludeLastRequest | Son isteğin kayıtlarının dışlanıp dışlanmayacağı. | Hayır (varsayılan değer **doğru**) |
+| baseRequestId | Delta yükleme isteğinin Kımlığı. Ayarlandıktan sonra yalnızca RequestId ile bu özelliğin değerinden **büyük** olan veriler alınır.  | Hayır |
+
+>[!TIP]
+>Açık hub tablonuz yalnızca tek bir istek KIMLIĞI tarafından oluşturulan verileri içeriyorsa, her zaman tam yükleme yapın ve tablodaki mevcut verilerin üzerine yazar veya test için yalnızca DTP 'yi bir kez çalıştırırsanız, d 'yi kopyalamak için "excludeLastRequest" seçeneğinin işaretini kaldırmanız gerektiğini unutmayın. ata.
+
+Veri yüklemeyi hızlandırmak için kopyalama etkinliğinde [`parallelCopies`](copy-activity-performance.md#parallel-copy) ayarlayarak SAP BW açık hub 'dan paralel olarak veri yükleyebilirsiniz. Örneğin, `parallelCopies` dört olarak ayarlarsanız, Data Factory aynı anda dört RFC çağrısını yürütür ve her RFC çağrısı, DTP istek KIMLIĞI ve paket KIMLIĞI tarafından bölümlenmiş SAP BW açık hub tablosundan verilerin bir kısmını alır. Bu, benzersiz DTP istek KIMLIĞI + paket KIMLIĞI sayısının `parallelCopies`değerinden büyük olması durumunda geçerlidir. Dosya tabanlı veri deposuna veri kopyalarken, bir klasöre birden çok dosya (yalnızca klasör adını belirt) olarak yazmak da daha da iyidir. Bu durumda, performans tek bir dosyaya yazılmasından daha iyidir.
 
 **Örnek:**
 
@@ -195,30 +212,37 @@ SAP BW Open Hub'ından veri kopyalamak için kopyalama etkinliği için kaynak t
         ],
         "typeProperties": {
             "source": {
-                "type": "SapOpenHubSource"
+                "type": "SapOpenHubSource",
+                "excludeLastRequest": true
             },
             "sink": {
                 "type": "<sink type>"
-            }
+            },
+            "parallelCopies": 4
         }
     }
 ]
 ```
 
-## <a name="data-type-mapping-for-sap-bw-open-hub"></a>SAP BW Open merkezi için veri türü eşlemesi
+## <a name="data-type-mapping-for-sap-bw-open-hub"></a>SAP BW açık Hub için veri türü eşleme
 
-SAP BW Open Hub'ından veri kopyalama işlemi sırasında aşağıdaki eşlemeler SAP BW veri türlerinden Azure veri fabrikası geçici veri türleri için kullanılır. Bkz: [şema ve veri türü eşlemeleri](copy-activity-schema-and-type-mapping.md) eşlemelerini nasıl yapar? kopyalama etkinliği kaynak şema ve veri türü için havuz hakkında bilgi edinmek için.
+SAP BW açık hub 'dan veri kopyalarken aşağıdaki eşlemeler, SAP BW veri türlerinden Azure Data Factory geçici veri türlerine kadar kullanılır. Kopyalama etkinliğinin kaynak şemayı ve veri türünü havuza nasıl eşlediğini öğrenmek için bkz. [şema ve veri türü eşlemeleri](copy-activity-schema-and-type-mapping.md) .
 
 | SAP ABAP türü | Veri Fabrikası geçici veri türü |
 |:--- |:--- |
-| C (dize) | String |
-| Ben (tamsayı) | Int32 |
-| F (kayan nokta) | Double |
-| D (tarih) | String |
-| T (saat) | String |
-| P (BCD paketlenmiş, para birimi, Decimal, miktar) | Decimal |
-| N (Numc) | String |
-| (İkili ve ham) X | String |
+| C (dize) | Dize |
+| I (tamsayı) | Int32 |
+| F (float) | Çift |
+| D (Tarih) | Dize |
+| T (Time) | Dize |
+| P (BCD paketlenmiş, para birimi, ondalık, miktar) | Kategori |
+| N (NUMC) | Dize |
+| X (Ikili ve ham) | Dize |
+
+## <a name="lookup-activity-properties"></a>Arama etkinliği özellikleri
+
+Özelliklerle ilgili ayrıntıları öğrenmek için [arama etkinliğini](control-flow-lookup-activity.md)denetleyin.
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Data Factory kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).
+Azure Data Factory içindeki kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).

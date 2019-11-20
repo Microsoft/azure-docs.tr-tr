@@ -1,5 +1,5 @@
 ---
-title: Mevcut özel DNS adını - Azure App Service map | Microsoft Docs
+title: Varolan özel DNS adını eşle-Azure App Service | Microsoft Docs
 description: Mevcut özel DNS etki alanı adını (gösterim etki alanı) web uygulamasına, mobil uygulama arka ucuna veya Azure App Service'te API uygulamasına eklemeyi öğrenin.
 keywords: uygulama hizmeti, azure app service, etki alanı eşlemesi, etki alanı adı, mevcut etki alanı, konak adı
 services: app-service\web
@@ -13,19 +13,19 @@ ms.workload: web
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: tutorial
-ms.date: 06/06/201
+ms.date: 06/06/2019
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: a3677e45738c368d8438872da740a362a8048a63
-ms.sourcegitcommit: 1289f956f897786090166982a8b66f708c9deea1
+ms.openlocfilehash: fa8acbab8179eea752607c4410851d74ae4e9444
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67155546"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73835866"
 ---
-# <a name="tutorial-map-an-existing-custom-dns-name-to-azure-app-service"></a>Öğretici: Mevcut bir özel DNS adını Azure App Service'e eşlemek
+# <a name="tutorial-map-an-existing-custom-dns-name-to-azure-app-service"></a>Öğretici: mevcut bir özel DNS adını Azure App Service eşleme
 
-[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar. Bu öğreticide Azure App Service'e var olan özel bir DNS adı eşlemeyle ilgili bilgi gösterir.
+[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar. Bu öğreticide, mevcut bir özel DNS adını Azure App Service ile nasıl eşleyebileceğiniz gösterilmektedir.
 
 ![Azure uygulamasına portal gezintisi](./media/app-service-web-tutorial-custom-domain/app-with-custom-dns.png)
 
@@ -52,7 +52,7 @@ Bu öğreticiyi tamamlamak için:
 
 ## <a name="prepare-the-app"></a>Uygulamayı hazırlama
 
-Özel DNS adını web uygulamasının için web uygulamasına eşlemek için [App Service planı](https://azure.microsoft.com/pricing/details/app-service/) Ücretli katmanı olmalıdır (**paylaşılan**, **temel**, **standart**, **Premium** veya **tüketim** Azure işlevleri için). Bu adımda, App Service uygulamasının desteklenen bir fiyatlandırma katmanında olduğundan emin olursunuz.
+Özel bir DNS adını bir Web uygulamasına eşlemek için, Web uygulamasının [App Service planı](https://azure.microsoft.com/pricing/details/app-service/) ücretli bir katman (**paylaşılan**, **temel**, **Standart**, **Premium** veya Azure işlevleri için **Tüketim** ) olmalıdır. Bu adımda, App Service uygulamasının desteklenen bir fiyatlandırma katmanında olduğundan emin olursunuz.
 
 [!INCLUDE [app-service-dev-test-note](../../includes/app-service-dev-test-note.md)]
 
@@ -60,9 +60,13 @@ Bu öğreticiyi tamamlamak için:
 
 [Azure Portal](https://portal.azure.com)'ı açın ve Azure hesabınızla oturum açın.
 
-### <a name="navigate-to-the-app-in-the-azure-portal"></a>Azure Portal'da uygulamaya gitme
+### <a name="select-the-app-in-the-azure-portal"></a>Azure portal uygulamayı seçin
 
-Sol menüden **Uygulama Hizmetleri**'ni ve ardından uygulamanın adını seçin.
+**Uygulama hizmetleri**' ni arayıp seçin.
+
+![Uygulama hizmetlerini seçin](./media/app-service-web-tutorial-custom-domain/app-services.png)
+
+**Uygulama hizmetleri** sayfasında, Azure uygulamanızın adını seçin.
 
 ![Azure uygulamasına portal gezintisi](./media/app-service-web-tutorial-custom-domain/select-app.png)
 
@@ -88,7 +92,7 @@ App Service planı **F1** katmanında değilse, **Ölçeği artır** sayfasını
 
 Ücretsiz olmayan katmanlardan birini seçin (**D1**, **B1**, **B2**, **B3** veya **Üretim** kategorisindeki herhangi bir katmanı). Ek seçenekler için **Ek seçeneklere bakın**’a tıklayın.
 
-**Uygula**'ya tıklayın.
+**Apply (Uygula)** düğmesine tıklayın.
 
 ![Fiyatlandırma katmanını denetleyin](./media/app-service-web-tutorial-custom-domain/choose-pricing-tier.png)
 
@@ -119,7 +123,7 @@ Aşağıdaki bildirimi gördüğünüzde, ölçeklendirme işlemi tamamlanmışt
 
 #### <a name="create-the-cname-record"></a>CNAME kaydı oluşturma
 
-Uygulamanın varsayılan etki alanı adı için bir alt etki alanı eşlemek için bir CNAME kaydı ekleyin (`<app_name>.azurewebsites.net`burada `<app_name>` uygulamanızın adıdır).
+Bir alt etki alanını uygulamanın varsayılan etki alanı adına (`<app_name>.azurewebsites.net`, `<app_name>` uygulamanızın adı olduğu) eşlemek için bir CNAME kaydı ekleyin.
 
 `www.contoso.com` etki alanı örneğinde, `www` adını `<app_name>.azurewebsites.net` ile eşleyen bir CNAME kaydı ekleyin.
 
@@ -135,7 +139,7 @@ Azure Portal'daki uygulama sayfasının sol gezintisinde **Özel etki alanları*
 
 Uygulamanın **Özel etki alanları** sayfasında, tam özel DNS adını (`www.contoso.com`) listeye ekleyin.
 
-Seçin **+** yanındaki simge **özel etki alanı Ekle**.
+**Özel etki alanı Ekle**' nin yanındaki **+** simgesini seçin.
 
 ![Konak adı ekleme](./media/app-service-web-tutorial-custom-domain/add-host-name-cname.png)
 
@@ -145,18 +149,18 @@ CNAME kaydı eklediğiniz tam etki alanı adını (örneğin, `www.contoso.com`)
 
 **Özel etki alanı Ekle** sayfası gösterilir.
 
-Emin olun **konak adı kayıt türü** ayarlanır **CNAME (www\.example.com veya herhangi bir alt etki alanı)** .
+**Ana bilgisayar adı kayıt türünün** **CNAME (www\.example.com veya herhangi bir alt etki alanı)** olarak ayarlandığından emin olun.
 
 **Özel etki alanı ekle**'yi seçin.
 
 ![Uygulamaya DNS adı ekleme](./media/app-service-web-tutorial-custom-domain/validate-domain-name-cname.png)
 
-Bu uygulamanın yansıtılması yeni özel etki alanı için biraz zaman alabilir **özel etki alanları** sayfası. Verileri güncelleştirmek için tarayıcıyı yenilemeyi deneyin.
+Yeni özel etki alanının uygulamanın **özel etki alanları** sayfasında yansıtılması biraz zaman alabilir. Verileri güncelleştirmek için tarayıcıyı yenilemeyi deneyin.
 
 ![CNAME kaydı eklenir](./media/app-service-web-tutorial-custom-domain/cname-record-added.png)
 
 > [!NOTE]
-> A **değil güvenli** henüz bir SSL sertifikasına bağlıdır ve herhangi bir tarayıcıdan HTTPS isteğini özel etki alanınıza alacak özel etki alanı anlamına gelir ve hata veya uyarı, tarayıcıya bağlı olarak etiket. SSL bağlaması eklemek için bkz [mevcut bir özel SSL sertifikasını Azure App Service'e bağlama](app-service-web-tutorial-custom-ssl.md).
+> Özel etki alanınız için **güvenli olmayan** bir etiket, henüz bir SSL sertifikasına bağlanmamış ve tarayıcıya bağlı olarak bir tarayıcıdan özel etki alanınız için HERHANGI bir https isteği alacak ve hata ya da uyarı verecek. SSL bağlaması eklemek için, bkz. [Azure App Service BIR SSL bağlaması ile özel BIR DNS adını güvenli hale getirme](configure-ssl-bindings.md).
 
 Daha önce bir adımı atladıysanız veya yazım hatası yaptıysanız, sayfanın en altında bir doğrulama hatası görürsünüz.
 
@@ -191,19 +195,19 @@ Azure Portal'daki uygulama sayfasının sol gezintisinde **Özel etki alanları*
 A kaydını bir uygulamaya eşlemek için, App Service **iki** DNS kaydı gerektirir:
 
 - Uygulamanın IP adresini eşlemek için bir **A** kaydı.
-- A **TXT** uygulamanın varsayılan etki alanı adına eşlemek için kaydı `<app_name>.azurewebsites.net`. App Service bu kaydı yalnızca yapılandırma sırasında, özel etki alanının sahibi olduğunuzu doğrulamak için kullanır. Özel etki alanınız doğrulandıktan ve App Service'te yapılandırıldıktan sonra, bu TXT kaydını silebilirsiniz.
+- Uygulamanın varsayılan etki alanı adına eşlemek için bir **txt** kaydı `<app_name>.azurewebsites.net`. App Service bu kaydı yalnızca yapılandırma sırasında, özel etki alanının sahibi olduğunuzu doğrulamak için kullanır. Özel etki alanınız doğrulandıktan ve App Service'te yapılandırıldıktan sonra, bu TXT kaydını silebilirsiniz.
 
 `contoso.com` etki alanı örneğinde, A ve TXT kayıtlarını aşağıdaki tabloda gösterildiği gibi oluşturun (`@` normalde kök etki alanını temsil eder).
 
-| Kayıt türü | Ana bilgisayar | Değer |
+| Kayıt türü | Host | Değer |
 | - | - | - |
 | A | `@` | [Uygulamanın IP adresini kopyalama](#info) bölümünden IP adresi |
 | TXT | `@` | `<app_name>.azurewebsites.net` |
 
 > [!NOTE]
-> Bir alt etki alanı eklemek için (gibi `www.contoso.com`) bir A kaydı yerine bir önerilen kullanarak [CNAME kaydı](#map-a-cname-record), kayıt ve TXT kayıt bunun yerine aşağıdaki tabloda gibi görünmelidir:
+> Önerilen [CNAME kaydı](#map-a-cname-record)yerine bir kayıt kullanarak bir alt etki alanı (`www.contoso.com`gibi) eklemek Için, bir KAYDıNıZ ve txt kaydınız bunun yerine aşağıdaki tablo gibi görünmelidir:
 >
-> | Kayıt türü | Ana bilgisayar | Değer |
+> | Kayıt türü | Host | Değer |
 > | - | - | - |
 > | A | `www` | [Uygulamanın IP adresini kopyalama](#info) bölümünden IP adresi |
 > | TXT | `www` | `<app_name>.azurewebsites.net` |
@@ -219,7 +223,7 @@ Kayıtlar eklendiğinde, DNS kayıtları sayfası aşağıdaki örnekte gösteri
 
 Azure Portal'da uygulamanın **Özel etki alanları** sayfasında dönün ve tam özel DNS adını (örneğin, `contoso.com`) listeye ekleyin.
 
-Seçin **+** yanındaki simge **özel etki alanı Ekle**.
+**Özel etki alanı Ekle**' nin yanındaki **+** simgesini seçin.
 
 ![Konak adı ekleme](./media/app-service-web-tutorial-custom-domain/add-host-name-cname.png)
 
@@ -235,12 +239,12 @@ A kaydını yapılandırdığınız tam etki alanı adını (örneğin, `contoso
 
 ![Uygulamaya DNS adı ekleme](./media/app-service-web-tutorial-custom-domain/validate-domain-name.png)
 
-Bu uygulamanın yansıtılması yeni özel etki alanı için biraz zaman alabilir **özel etki alanları** sayfası. Verileri güncelleştirmek için tarayıcıyı yenilemeyi deneyin.
+Yeni özel etki alanının uygulamanın **özel etki alanları** sayfasında yansıtılması biraz zaman alabilir. Verileri güncelleştirmek için tarayıcıyı yenilemeyi deneyin.
 
 ![A kaydı eklenir](./media/app-service-web-tutorial-custom-domain/a-record-added.png)
 
 > [!NOTE]
-> A **değil güvenli** henüz bir SSL sertifikasına bağlıdır ve herhangi bir tarayıcıdan HTTPS isteğini özel etki alanınıza alacak özel etki alanı anlamına gelir ve hata veya uyarı, tarayıcıya bağlı olarak etiket. SSL bağlaması eklemek için bkz [mevcut bir özel SSL sertifikasını Azure App Service'e bağlama](app-service-web-tutorial-custom-ssl.md).
+> Özel etki alanınız için **güvenli olmayan** bir etiket, henüz bir SSL sertifikasına bağlanmamış ve tarayıcıya bağlı olarak bir tarayıcıdan özel etki alanınız için HERHANGI bir https isteği alacak ve hata ya da uyarı verecek. SSL bağlaması eklemek için, bkz. [Azure App Service BIR SSL bağlaması ile özel BIR DNS adını güvenli hale getirme](configure-ssl-bindings.md).
 
 Daha önce bir adımı atladıysanız veya yazım hatası yaptıysanız, sayfanın en altında bir doğrulama hatası görürsünüz.
 
@@ -258,7 +262,7 @@ Daha önce bir adımı atladıysanız veya yazım hatası yaptıysanız, sayfan�
 
 #### <a name="create-the-cname-record"></a>CNAME kaydı oluşturma
 
-Uygulamanın varsayılan etki alanı adı için bir joker karakteri eşleştirmek için bir CNAME kaydı ekleyin (`<app_name>.azurewebsites.net`).
+Joker karakter adını uygulamanın varsayılan etki alanı adına (`<app_name>.azurewebsites.net`) eşlemek için bir CNAME kaydı ekleyin.
 
 `*.contoso.com` etki alanı örneğinde, CNAME kaydı `*` adını `<app_name>.azurewebsites.net` ile eşler.
 
@@ -274,7 +278,7 @@ Azure Portal'daki uygulama sayfasının sol gezintisinde **Özel etki alanları*
 
 ![Özel etki alanı menüsü](./media/app-service-web-tutorial-custom-domain/custom-domain-menu.png)
 
-Seçin **+** yanındaki simge **özel etki alanı Ekle**.
+**Özel etki alanı Ekle**' nin yanındaki **+** simgesini seçin.
 
 ![Konak adı ekleme](./media/app-service-web-tutorial-custom-domain/add-host-name-cname.png)
 
@@ -282,20 +286,20 @@ Joker karakter etki alanıyla (örneğin, `sub1.contoso.com`) eşleşen bir tam 
 
 **Özel etki alanı Ekle** düğmesi etkinleştirilir.
 
-Emin olun **konak adı kayıt türü** ayarlanır **CNAME kaydı (www\.example.com veya herhangi bir alt etki alanı)** .
+**Ana bilgisayar adı kayıt türünün** **CNAME kaydı (www\.example.com veya herhangi bir alt etki alanı)** olarak ayarlandığından emin olun.
 
 **Özel etki alanı ekle**'yi seçin.
 
 ![Uygulamaya DNS adı ekleme](./media/app-service-web-tutorial-custom-domain/validate-domain-name-cname-wildcard.png)
 
-Bu uygulamanın yansıtılması yeni özel etki alanı için biraz zaman alabilir **özel etki alanları** sayfası. Verileri güncelleştirmek için tarayıcıyı yenilemeyi deneyin.
+Yeni özel etki alanının uygulamanın **özel etki alanları** sayfasında yansıtılması biraz zaman alabilir. Verileri güncelleştirmek için tarayıcıyı yenilemeyi deneyin.
 
-Seçin **+** yeniden başka bir joker karakter etki alanıyla eşleşen özel etki alanı eklemek için simge. Örneğin, `sub2.contoso.com` ekleyin.
+Joker karakter etki alanıyla eşleşen başka bir özel etki alanı eklemek için **+** simgesini yeniden seçin. Örneğin, `sub2.contoso.com` ekleyin.
 
 ![CNAME kaydı eklenir](./media/app-service-web-tutorial-custom-domain/cname-record-added-wildcard2.png)
 
 > [!NOTE]
-> A **Not güvenli** henüz bir SSL sertifikasına bağlıdır ve herhangi bir tarayıcıdan HTTPS isteğini özel etki alanınıza alacak özel etki alanı anlamına gelir ve hata veya uyarı, tarayıcıya bağlı olarak etiket. SSL bağlaması eklemek için bkz [mevcut bir özel SSL sertifikasını Azure App Service'e bağlama](app-service-web-tutorial-custom-ssl.md).
+> Özel etki alanınız için bir **Not güvenli** etiketi, henüz bir SSL sertifikasına bağlanmamış ve tarayıcıya bağlı olarak bir tarayıcıdan özel etki alanınız için HERHANGI bir https isteğinin gönderileceği ve hata ya da uyarı alacağı anlamına gelir. SSL bağlaması eklemek için, bkz. [Azure App Service BIR SSL bağlaması ile özel BIR DNS adını güvenli hale getirme](configure-ssl-bindings.md).
 
 ## <a name="test-in-browser"></a>Tarayıcıda test
 
@@ -326,7 +330,7 @@ Sayfanın en altında, kök sanal dizin `/` varsayılan olarak `site\wwwroot` di
 
 ![Sanal dizini özelleştirme](./media/app-service-web-tutorial-custom-domain/customize-virtual-directory.png)
 
-İşlem tamamlandığında, uygulamanız kök yolda (örneğin, http://contoso.com) ) doğru sayfaya dönmelidir.
+İşlem tamamlandığında, uygulamanız kök yolda doğru sayfayı döndürmelidir (örneğin, `http://contoso.com`).
 
 ## <a name="automate-with-scripts"></a>Betiklerle otomatikleştirme
 
@@ -374,4 +378,4 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 Web uygulamasına özel bir SSL sertifikası bağlamayla ilgili bilgi edinmek için sonraki öğreticiye geçin.
 
 > [!div class="nextstepaction"]
-> [Azure App Service'e mevcut özel bir SSL sertifikasını bağlama](app-service-web-tutorial-custom-ssl.md)
+> [Azure App Service 'de SSL bağlaması ile özel bir DNS adının güvenliğini sağlama](configure-ssl-bindings.md)

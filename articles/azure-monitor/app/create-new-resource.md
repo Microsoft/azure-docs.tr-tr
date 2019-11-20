@@ -1,66 +1,156 @@
 ---
-title: Yeni bir Azure Application Insights kaynağı oluşturun | Microsoft Docs
-description: El ile yeni bir canlı uygulaması için Application Insights izleme işlevini ayarlama.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 878b007e-161c-4e36-8ab2-3d7047d8a92d
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Yeni bir Azure Application Insights kaynağı oluşturma | Microsoft Docs
+description: Yeni bir canlı uygulama için Application Insights izlemeyi el ile ayarlayın.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 06/10/2019
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 9da52e5a9dfa3b55431d66ed3162172226f71a40
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 08/16/2019
+ms.openlocfilehash: be68c70a105737f232741f02994da87c0c628bd7
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67073281"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72677496"
 ---
 # <a name="create-an-application-insights-resource"></a>Application Insights kaynağı oluşturma
 
-Azure Application Insights, Microsoft Azure'da uygulamanızla ilgili verileri görüntüler *kaynak*. Yeni kaynak oluşturma, bu nedenle parçası [yeni bir uygulama izlemek için Application ınsights'ı ayarlama][start]. Yeni kaynak oluşturduktan sonra izleme anahtarı edinme ve, Application Insights SDK'sını yapılandırmak için kullanın. İzleme anahtarını telemetrinizi kaynağına bağlar.
+Azure Application Insights, uygulamanız hakkındaki verileri bir Microsoft Azure *kaynağında*görüntüler. Bu nedenle yeni bir kaynak oluşturmak, [Yeni bir uygulamayı izlemek için Application Insights ayarlamanın][start]bir parçasıdır. Yeni kaynağınızı oluşturduktan sonra, izleme anahtarını alabilir ve Application Insights SDK 'sını yapılandırmak için kullanabilirsiniz. İzleme anahtarı, telemetrinizi kaynağa bağlar.
 
-## <a name="sign-in-to-microsoft-azure"></a>Microsoft Azure'da oturum açın
+## <a name="sign-in-to-microsoft-azure"></a>Microsoft Azure oturum açın
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.com/free/) bir hesap oluşturun.
 
 ## <a name="create-an-application-insights-resource"></a>Application Insights kaynağı oluşturma
 
-Oturum [Azure portalında](https://portal.azure.com)ve bir Application Insights kaynağı oluşturun:
+[Azure Portal](https://portal.azure.com)oturum açın ve bir Application Insights kaynağı oluşturun:
 
-![Sol üst köşesinde '+' işaretine tıklayın. Application Insights tarafından izlenen Geliştirici Araçları'nı seçin](./media/create-new-resource/new-app-insights.png)
+![Sol üst köşedeki ' + ' işaretine tıklayın. Geliştirici Araçları sonra Application Insights ' yi seçin](./media/create-new-resource/new-app-insights.png)
 
    | Ayarlar        |  Değer           | Açıklama  |
    | ------------- |:-------------|:-----|
-   | **Ad**      | Genel Olarak Benzersiz Değer | İzlemekte olduğunuz uygulamayı tanımlayan ad. |
-   | **Kaynak Grubu**     | myResourceGroup      | App Insights verileri barındırmak için yeni veya mevcut bir kaynak grubunun adı. |
-   | **Konum** | Doğu ABD | Size yakın bir konum seçin veya uygulamanızın barındırıldığı yakın. |
+   | **Adı**      | Genel Olarak Benzersiz Değer | İzlemekte olduğunuz uygulamayı tanımlayan ad. |
+   | **Kaynak Grubu**     | myResourceGroup      | App Insights verilerini barındıracak yeni veya mevcut kaynak grubunun adı. |
+   | **Konum** | Doğu ABD | Size yakın bir konum seçin veya uygulamanızın nerede barındırıldığını görürsünüz. |
 
-Gerekli alanlara uygun değerleri girin ve ardından **gözden geçir + Oluştur**.
+Gerekli alanlara uygun değerleri girin ve ardından **gözden geçir + oluştur**' u seçin.
 
-![Alanlara gerekli değerleri girin ve "gözden geçir + oluştur" seçin.](./media/create-new-resource/review-create.png)
+![Gerekli alanlara değerler girin ve ardından "gözden geçir + oluştur" u seçin.](./media/create-new-resource/review-create.png)
 
-Uygulamanızı oluştururken, yeni bir bölme açılır. Bu bölme, performans ve kullanım verilerini, izlenen uygulama hakkında gördüğünüz ' dir. 
+Uygulamanız oluşturulduğunda yeni bir bölme açılır. Bu bölme, izlenen uygulamanızla ilgili performans ve kullanım verilerini görebileceğiniz yerdir. 
 
 ## <a name="copy-the-instrumentation-key"></a>İzleme anahtarını kopyalama
 
-Telemetri verileriniz ile ilişkilendirmek istediğiniz kaynağın izleme anahtarını tanımlar. İzleme anahtarı için uygulamanızın kod eklemek için kopyalama gerekir.
+İzleme anahtarı, telemetri verilerinizi ilişkilendirmek istediğiniz kaynağı tanımlar. İzleme anahtarını uygulamanızın koduna eklemek için kopyaya ihtiyacınız olacak.
 
-![' A tıklayın ve izleme anahtarını kopyalama](./media/create-new-resource/instrumentation-key.png)
+![İzleme anahtarını tıklayın ve kopyalayın](./media/create-new-resource/instrumentation-key.png)
 
-## <a name="install-the-sdk-in-your-app"></a>Uygulamanıza SDK yükleme
+## <a name="install-the-sdk-in-your-app"></a>Uygulamanıza SDK 'Yı yükler
 
-Uygulamanıza Application Insights SDK'sını yükleyin. Bu adım, yoğun bir şekilde uygulama türüne bağlıdır.
+Application Insights SDK 'sını uygulamanıza yükler. Bu adım büyük ölçüde uygulamanızın türüne bağlıdır.
 
-İzleme anahtarını yapılandırmak için kullanın [uygulamanıza yükleme SDK'sı][start].
+[Uygulamanıza yüklediğiniz SDK 'yı][start]yapılandırmak için izleme anahtarını kullanın.
 
-SDK'sı telemetri ek kod yazmaya gerek kalmadan gönderme Standart modüller içerir. Kullanıcı eylemlerini izlemek veya sorunları daha ayrıntılı tanılama için [API'sini] [ api] kendi telemetrinizi göndermek için.
+SDK, ek kod yazmak zorunda kalmadan telemetri gönderen Standart modüller içerir. Kullanıcı eylemlerini izlemek veya sorunları daha ayrıntılı olarak tanılamak için [API 'yi kullanarak][api] kendi telemetrinizi gönderin.
 
-## <a name="creating-a-resource-automatically"></a>Bir kaynağı otomatik olarak oluşturma
-Yazabileceğiniz bir [PowerShell Betiği](../../azure-monitor/app/powershell.md) otomatik olarak bir kaynak oluşturun.
+## <a name="creating-a-resource-automatically"></a>Otomatik olarak kaynak oluşturma
+
+### <a name="powershell"></a>PowerShell
+
+Yeni bir Application Insights kaynağı oluşturma
+
+```powershell
+New-AzApplicationInsights [-ResourceGroupName] <String> [-Name] <String> [-Location] <String> [-Kind <String>]
+ [-Tag <Hashtable>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+#### <a name="example"></a>Örnek
+
+```powershell
+New-AzApplicationInsights -Kind java -ResourceGroupName testgroup -Name test1027 -location eastus
+```
+#### <a name="results"></a>Sonuçlar
+
+```powershell
+Id                 : /subscriptions/{subid}/resourceGroups/testgroup/providers/microsoft.insights/components/test1027
+ResourceGroupName  : testgroup
+Name               : test1027
+Kind               : web
+Location           : eastus
+Type               : microsoft.insights/components
+AppId              : 8323fb13-32aa-46af-b467-8355cf4f8f98
+ApplicationType    : web
+Tags               : {}
+CreationDate       : 10/27/2017 4:56:40 PM
+FlowType           :
+HockeyAppId        :
+HockeyAppToken     :
+InstrumentationKey : 00000000-aaaa-bbbb-cccc-dddddddddddd
+ProvisioningState  : Succeeded
+RequestSource      : AzurePowerShell
+SamplingPercentage :
+TenantId           : {subid}
+```
+
+Bu cmdlet 'in tam PowerShell belgeleri için ve izleme anahtarını alma hakkında bilgi edinmek için [Azure PowerShell belgelerine](https://docs.microsoft.com/powershell/module/az.applicationinsights/new-azapplicationinsights?view=azps-2.5.0)danışın.
+
+### <a name="azure-cli-preview"></a>Azure CLı (Önizleme)
+
+Azure CLı komutlarına önizleme Application Insights erişmek için öncelikle şunu çalıştırmanız gerekir:
+
+```azurecli
+ az extension add -n application-insights
+```
+
+@No__t_0 komutunu çalıştırmazsanız, şu durumu belirten bir hata iletisi görürsünüz: `az : ERROR: az monitor: 'app-insights' is not in the 'az monitor' command group. See 'az monitor --help'.`
+
+Artık Application Insights kaynağınız oluşturmak için aşağıdakileri çalıştırabilirsiniz:
+
+```azurecli
+az monitor app-insights component create --app
+                                         --location
+                                         --resource-group
+                                         [--application-type]
+                                         [--kind]
+                                         [--tags]
+```
+
+#### <a name="example"></a>Örnek
+
+```azurecli
+az monitor app-insights component create --app demoApp --location westus2 --kind web -g demoRg --application-type web
+```
+
+#### <a name="results"></a>Sonuçlar
+
+```azurecli
+az monitor app-insights component create --app demoApp --location eastus --kind web -g demoApp  --application-type web
+{
+  "appId": "87ba512c-e8c9-48d7-b6eb-118d4aee2697",
+  "applicationId": "demoApp",
+  "applicationType": "web",
+  "creationDate": "2019-08-16T18:15:59.740014+00:00",
+  "etag": "\"0300edb9-0000-0100-0000-5d56f2e00000\"",
+  "flowType": "Bluefield",
+  "hockeyAppId": null,
+  "hockeyAppToken": null,
+  "id": "/subscriptions/{subid}/resourceGroups/demoApp/providers/microsoft.insights/components/demoApp",
+  "instrumentationKey": "00000000-aaaa-bbbb-cccc-dddddddddddd",
+  "kind": "web",
+  "location": "eastus",
+  "name": "demoApp",
+  "provisioningState": "Succeeded",
+  "requestSource": "rest",
+  "resourceGroup": "demoApp",
+  "samplingPercentage": null,
+  "tags": {},
+  "tenantId": {tenantID},
+  "type": "microsoft.insights/components"
+}
+```
+
+Bu komutla ilgili tam Azure CLı belgeleri için ve izleme anahtarını alma hakkında bilgi edinmek için bkz. [Azure CLI belgeleri](https://docs.microsoft.com/cli/azure/ext/application-insights/monitor/app-insights/component?view=azure-cli-latest#ext-application-insights-az-monitor-app-insights-component-create).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * [Tanılama Araması](../../azure-monitor/app/diagnostic-search.md)

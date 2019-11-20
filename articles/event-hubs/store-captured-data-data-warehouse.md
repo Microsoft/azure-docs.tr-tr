@@ -1,22 +1,22 @@
 ---
-title: SQL veri ambarı - Azure Event Hubs olay verileri geçirme | Microsoft Docs
-description: Bu öğreticide, olay hub'ınızdaki verileri olay kılavuzu tarafından tetiklenen bir Azure işlevini kullanarak SQL veri ambarında nasıl yakalayacağınız gösterilmektedir.
+title: "Öğretici: olay verilerini SQL veri ambarı 'na geçirme-Azure Event Hubs"
+description: "Öğretici: Bu öğreticide, bir olay kılavuzuyla tetiklenen bir Azure işlevi kullanarak Olay Hub 'ından bir SQL veri ambarına veri yakalama işlemi gösterilmektedir."
 services: event-hubs
 author: ShubhaVijayasarathy
 manager: ''
 ms.author: shvija
 ms.custom: seodec18
-ms.date: 12/06/2018
+ms.date: 11/05/2019
 ms.topic: tutorial
 ms.service: event-hubs
-ms.openlocfilehash: 90a17839afdddb4d6ad8abfa57963b4c76b100ed
-ms.sourcegitcommit: 6ea7f0a6e9add35547c77eef26f34d2504796565
+ms.openlocfilehash: 92c414afbb8121eb03353c79dfe3a51e0cfa7ec0
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65604301"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718876"
 ---
-# <a name="migrate-captured-event-hubs-data-to-a-sql-data-warehouse-using-event-grid-and-azure-functions"></a>Event Grid ve Azure işlevleri'ni kullanarak bir SQL veri ambarı yakalanan Event Hubs verilerini geçirme
+# <a name="tutorial-migrate-captured-event-hubs-data-to-a-sql-data-warehouse-using-event-grid-and-azure-functions"></a>Öğretici: Event Grid ve Azure Işlevlerini kullanarak yakalanan Event Hubs verilerini SQL veri ambarı 'na geçirme
 
 Event Hubs [Capture](https://docs.microsoft.com/azure/event-hubs/event-hubs-capture-overview) özelliği, Event Hubs'da akışı yapılan verileri bir Azure Blob depolama alanına veya Azure Data Lake Store'a otomatik olarak iletmenin en kolay yoludur. Ardından, verileri işleyebilir ve SQL Veri Ambarı veya Cosmos DB gibi istediğiniz bir diğer depolama hedefine aktarabilirsiniz. Bu öğreticide, olay hub'ınızdaki verilerin [olay kılavuzu](https://docs.microsoft.com/azure/event-grid/overview) tarafından tetiklenen bir Azure işlevi kullanılarak SQL veri ambarında nasıl yakalandığını öğreneceksiniz.
 
@@ -35,7 +35,7 @@ Bu öğreticide, aşağıdaki eylemleri gerçekleştireceksiniz:
 > * Event Hub'a örnek veri akışı yapma. 
 > * Yakalanan verileri SQL Veri Ambarı'nda doğrulama
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
@@ -91,7 +91,7 @@ New-AzResourceGroupDeployment -ResourceGroupName rgDataMigration -TemplateUri ht
 
 
 ### <a name="create-a-table-in-sql-data-warehouse"></a>SQL Veri Ambarında tablo oluşturma 
-[Visual Studio](../sql-data-warehouse/sql-data-warehouse-query-visual-studio.md), [SQL Server Management Studio](../sql-data-warehouse/sql-data-warehouse-query-ssms.md) veya portaldaki Sorgu Düzenleyicisi ile [CreateDataWarehouseTable.sql](https://github.com/Azure/azure-event-hubs/blob/master/samples/e2e/EventHubsCaptureEventGridDemo/scripts/CreateDataWarehouseTable.sql) betiğini çalıştırarak SQL veri ambarınızda bir tablo oluşturun. 
+[Visual Studio](https://github.com/Azure/azure-event-hubs/blob/master/samples/e2e/EventHubsCaptureEventGridDemo/scripts/CreateDataWarehouseTable.sql), [SQL Server Management Studio](../sql-data-warehouse/sql-data-warehouse-query-visual-studio.md) veya portaldaki Sorgu Düzenleyicisi ile [CreateDataWarehouseTable.sql](../sql-data-warehouse/sql-data-warehouse-query-ssms.md) betiğini çalıştırarak SQL veri ambarınızda bir tablo oluşturun. 
 
 ```sql
 CREATE TABLE [dbo].[Fact_WindTurbineMetrics] (
@@ -106,7 +106,7 @@ WITH (CLUSTERED COLUMNSTORE INDEX, DISTRIBUTION = ROUND_ROBIN);
 
 ## <a name="publish-code-to-the-functions-app"></a>Kodu İşlevler Uygulamasında yayımlama
 
-1. Çözümü açın *EventHubsCaptureEventGridDemo.sln* Visual Studio 2019 içinde.
+1. Visual Studio 2019 ' de *Eventhubscaptureeventgriddemo. sln* çözümünü açın.
 
 1. Çözüm Gezgini’nde *FunctionEGDWDumper*’a sağ tıklayın ve **Yayımla**’yı seçin.
 
@@ -141,7 +141,7 @@ WITH (CLUSTERED COLUMNSTORE INDEX, DISTRIBUTION = ROUND_ROBIN);
 
    ![Abonelik ekleme](./media/store-captured-data-data-warehouse/add-event-grid-subscription.png)
 
-1. Event grid aboneliğine bir ad verin. Olay türü olarak **Event Hubs Ad Alanları**’nı kullanın. Event Hubs ad alanı örneğinizi seçmek için değerler sağlayın. Abone uç noktasını sağlanan değer olarak bırakın. **Oluştur**’u seçin.
+1. Event grid aboneliğine bir ad verin. Olay türü olarak **Event Hubs Ad Alanları**’nı kullanın. Event Hubs ad alanı örneğinizi seçmek için değerler sağlayın. Abone uç noktasını sağlanan değer olarak bırakın. **Oluştur**'u seçin.
 
    ![Abonelik oluşturma](./media/store-captured-data-data-warehouse/set-subscription-values.png)
 

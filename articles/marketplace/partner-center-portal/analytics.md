@@ -1,287 +1,345 @@
 ---
-title: İş ortağı merkezi ticari Market'te için analiz
-description: Satış izleme, performansı değerlendirmek ve Market tekliflerinize en iyi duruma getirmek için analitik raporlar erişmeyi öğrenin.
-author: mattwojo
+title: Iş Ortağı Merkezi 'nde ticari Market için analiz
+description: Satışları izlemek, performansı değerlendirmek ve Market tekliflerinizi iyileştirmek için analitik raporlara nasıl erişebileceğinizi öğrenin.
+author: ChJenk
 manager: evansma
-ms.author: shthota
+ms.author: v-chjen
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 05/31/2019
-ms.openlocfilehash: 0da95dbdca52232b4b24ad921bf2d9c78dc76d56
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/14/2019
+ms.openlocfilehash: 53d7cb125f59491190aadb07755954ade78356fa
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66247732"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075518"
 ---
-# <a name="analytics-for-the-commercial-marketplace-in-partner-center"></a>İş ortağı merkezi ticari Market'te için analiz
+# <a name="analytics-for-the-commercial-marketplace-in-partner-center"></a>Iş Ortağı Merkezi 'nde ticari Market için analiz
 
-Satış izleme, performansını değerlendirmek ve tekliflerin Market'te en iyi duruma getirmek için Microsoft Partner Center'da analiz raporları erişmeyi öğrenin. Bir iş ortağı olarak, veri Görselleştirme ve iş ortağı Merkezi tarafından desteklenen öngörü grafikler kullanarak, Teklif listeleri izleyebilir ve satışlarınızı en üst düzeye çıkarmak için yollarını bulun. Gelişmiş analiz araçları performans sonuçları üzerinde hareket ve satıcılar ve müşteriler ile daha iyi ilişkiler sürdürmek etkinleştirin. 
+Satışları izlemek, performansı değerlendirmek ve Market 'teki tekliflerinizi iyileştirmek için Microsoft Iş Ortağı Merkezi 'ndeki analitik raporlara nasıl erişebileceğinizi öğrenin. İş ortağı olarak, Iş Ortağı Merkezi tarafından desteklenen veri görselleştirme ve Öngörüler grafiklerini kullanarak teklif listelerinizi izleyebilir ve satışlarınızı en üst düzeye çıkarmak için kullanabileceğiniz yolları bulabilirsiniz. Geliştirilmiş analiz araçları, performans sonuçları üzerinde işlem yapma ve müşterilerinizle ve satıcılarınızla daha iyi ilişkiler elde etme olanağı sağlar.
 
-İş ortağı merkezi analiz araçlarına erişmek için açık **[Çözümle](https://partner.microsoft.com/dashboard/commercial-marketplace/analytics/summary)** Pano altındaki ticari Market.
+Iş ortağı merkezi analiz araçlarına erişmek için, ticari Market altında **[analiz](https://partner.microsoft.com/dashboard/commercial-marketplace/analytics/summary)** panosunu açın.
 
-|**Pano**|**Görüntülenen içerik**|
+|**Pano**|**Görünen içerik**|
 |:---|:---|
-|[Özet](#summary-dashboard)|Grafikler, eğilimler ve değerleri, teklifleri Market etkinliği özetleyen toplam veri|
-|[Siparişler](#orders-dashboard)|Grafik ve indirilebilir bir biçimde siparişlerinizi hakkında bilgi|
-|[Müşteriler](#customer-dashboard)|Grafik ve indirilebilir bir biçimde sunulan büyüme eğilimleri dahil olmak üzere müşterilerinizin hakkında bilgi|
-|[İndirmeler](#downloads-dashboard)|Son 30 gün üzerinden indirme isteklerinizin listesini|
+|[Özet](#summary-dashboard)|Tekliflerinizle ilgili Market etkinliklerini özetleyen grafikler, eğilimler ve toplam veri değerleri|
+|[Siparişler](#orders-dashboard)|Grafik ve indirilebilir biçimdeki Siparişleriniz hakkında bilgi|
+|[Müşterinizin](#customer-dashboard)|Grafik ve indirilebilir biçimde sunulan büyüme eğilimleri dahil olmak üzere müşterileriniz hakkında bilgiler|
+|[Dosyaların](#downloads-dashboard)|Son 30 gün içindeki indirme isteklerinizin listesi|
+|[Derecelendirmeler ve İncelemeler](#ratings-and-reviews)| Derecelendirdikleri tekliflere ait olan derecelendirmeler ve müşterilerinizin değerlendirmeleriyle ilgili bilgiler.
 
 ## <a name="summary-dashboard"></a>Özet Panosu
 
-**Özeti** Pano, her teklif türüne göre genel bir bakış sunar. **Insights** önemli bilgileri bir bakışta gösterir ve satış etkinliklerine tekliflerinize geniş kapsamlı bir görünümünü sağlar. Kullanarak bu raporları görselleştirebilirsiniz **özeti** Pano:
+**Özet** panosu, her teklif türüne göre genel bir bakış sunar. **Öngörüler** , önemli bilgileri bir bakışta gösterir ve tekliflerinizin satış etkinliğinin geniş bir görünümünü sağlar. **Özet** panosunu kullanarak bu raporları görselleştirebilirsiniz:
 
-- [Toplam siparişleri](#totals)
-- [Toplam müşteriler](#totals)
-- [Müşterilerinizin coğrafi konum](#customers-by-geography)
-- [Yeni ortaya çıkan eğilimleri, müşteri ile sipariş bilgilerini temel alarak](#growth-trend-chart)
-- [En yüksek sipariş ile müşteri puan tablosu](#customer-leaderboard)
+- [Toplam siparişler](#totals)
+- [Toplam Müşteri](#totals)
+- [Müşterilerinizin coğrafi konumu](#customers-by-geography)
+- [Müşteri ve sipariş bilgileriniz temelinde gelişen eğilimler](#growth-trend-chart)
+- [En yüksek siparişleri olan müşteri puan tablosu](#customer-leaderboard)
 - [Teklif adına göre düzenlenmiş siparişlerin sayısı](#offers-by-orders)
 
 ### <a name="date-range"></a>Tarih aralığı
 
-Bir tarih aralığı seçimi her sayfanın sağ üst köşesinde bulabilirsiniz. Çıkışı **özeti** geçmişi temel bir tarih aralığı seçerek grafikleri sayfası özelleştirilebilir 3, 6 veya 12 aylık dönem veya 12 aylık en fazla süre ile özel bir tarih aralığı seçerek. Varsayılan tarih aralığı altı aydır.
+Her sayfanın sağ üst köşesinde bir tarih aralığı seçimi bulabilirsiniz. **Özet** sayfası grafiklerinin çıktısı, son 3, 6 veya 12 aya dayalı bir tarih aralığı seçilerek veya en fazla 12 ay süresince özel bir tarih aralığı seçilerek özelleştirilebilir. Varsayılan tarih aralığı altı aydır.
 
-![İş ortağı merkezi analiz Panosu](./media/analyze-dashboard.png)
+![İş Ortağı Merkezi panoyu çözümle](./media/analyze-dashboard.png)
 
-### <a name="totals"></a>Toplamları
+### <a name="totals"></a>Düzeyinin
 
-**Toplamları** bölümü tüm siparişleri oluşturulan veya, seçili tarih aralığı içinde edinilen müşterilerin sayısını görüntüler. 
+**Toplamlar** bölümü, seçilen tarih aralığı boyunca oluşturulan tüm siparişlerin veya alınan müşterilerin sayısını görüntüler. 
 
-- Yüzde değeri yanındaki **toplam siparişleri** ve **toplam müşteriler** önceki aya göre büyüme miktarını temsil eder. 
-- Gösteren yeşil üçgeni yukarı doğru pozitif büyüme eğilimi gösterir. İşaret eden kırmızı bir üçgen aşağı önceki aya göre negatif büyüme eğilimi gösterir. 
-- Sırasını ve müşteri büyüme eğilimleri çubuk grafikler tarafından temsil edilir ve değer için her ay grafiğin sütunları gelerek görüntülenir.
+- **Toplam siparişlerin** ve **Toplam müşterilerin** yanındaki yüzde değeri, önceki aya kıyasla büyüme miktarını temsil eder. 
+- Yukarıyı gösteren bir yeşil üçgen, pozitif bir büyüme eğilimi gösterir. Aşağıyı gösteren kırmızı üçgen, önceki aya göre negatif büyüme eğilimi gösterir. 
+- Sipariş ve müşteri büyüme eğilimleri çubuk grafiklerle temsil edilir ve grafiğin sütunlarının üzerine gelindiğinde her ay için değeri görüntüler.
 
-![İş ortağı merkezi analiz toplamları](./media/analyze-totals.png)
+![İş Ortağı Merkezi Toplam Analizi](./media/analyze-totals.png)
 
-### <a name="customers-by-geography"></a>Müşteriler tarafından coğrafi konum
+### <a name="customers-by-geography"></a>Coğrafya ile müşteriler
 
-**Coğrafyaya göre müşteriler** ısı Haritası dünya haritada müşteri sayısını görüntüler. 
+Coğrafya ısı haritasını **tarafından müşteriler** bir dünya eşlemesindeki müşteri sayısını görüntüler.
 
-- Tam görüntülemek için haritadan taşıyabilirsiniz. 
-- Belirli bir konuma yakınlaştırma yapabilirsiniz. 
-- Isı Haritası müşteri sayımının ayrıntılarını görüntülemek için tamamlayıcı bir kılavuz vardır (veya [sipariş sayısı](#orders-by-geography)) belirli bir konumda. 
-- Arama ve konumu haritada yakınlaştırmak için kılavuzundaki bir ülke seçin. Basarak özgün görünüme geri **giriş** haritadaki düğmesi.
-- A **yeni** müşteri bir tekliflerinize seçili tarih aralığı içinde bir ay sırasında ilk kez satın.
+- Tam konumu görüntülemek için Haritayı taşıyabilirsiniz.
+- Belirli bir konuma yakınlaştırabilirsiniz.
+- Isı haritasını 'in belirli bir konumdaki müşteri sayısı (veya [sıra sayısı](#orders-by-geography)) ayrıntılarını görüntülemek için bir ek kılavuz vardır.
+- Haritada konum yakınlaştırmak için kılavuzda bir ülke arayabilir ve seçebilirsiniz. Haritadaki **giriş** düğmesine basarak özgün görünüme dönün.
+- **Yeni** bir müşteri, seçili tarih aralığında yer alan ilk kez tekliflerinizin birini satın almış.
 
-![İş ortağı merkezi analiz müşteri Coğrafya](./media/analyze-customer-geography.png)
+![İş ortağı merkezi müşteri Coğrafya çözümle](./media/analyze-customer-geography.png)
 
-### <a name="growth-trend-chart"></a>Büyüme eğilim Grafiği
+### <a name="growth-trend-chart"></a>Büyüme eğilimi grafiği
 
-Büyüme oranını tabanlı eğilimleri görüntüleyebilir, **oluşturulan siparişleri** veya **alınan müşteriler**aydan aya göre seçili tarih aralığı gösterilir. Daha fazla, ilgili gidin grafiğin altındaki bağlantıları seçerek bu eğilimlerini çözümleyebilirsiniz **sipariş** veya **müşteri** sayfaları.
+Eğilimleri, seçilen tarih aralığına göre aya göre oluşturulan veya **müşterilerin elde ettiği**, aylık olarak gösterildiği **siparişlerin** büyümesi temelinde görebilirsiniz. Bu eğilimleri daha fazla analiz ederek grafiğin altındaki bağlantılar ' ı seçerek ilgili **sipariş** veya **Müşteri** sayfalarına gidebilirsiniz.
 
-![İş ortağı merkezi analiz büyüme eğilimleri](./media/analyze-growth-trends.png)
+![İş Ortağı Merkezi büyüme eğilimlerini çözümleme](./media/analyze-growth-trends.png)
 
 ### <a name="customer-leaderboard"></a>Müşteri puan tablosu
 
-İlk 50 müşterilerle siparişler en çok görüntülenen bir *puan tablosu*, en yüksek sırada sayısını ve sırasını yüzdesi göre sıralanır. 
+En yüksek sayıda siparişi olan ilk 50 müşteri, en yüksek sıra sayısına ve sıra yüzdesine göre sıralanmış bir *öncü panoda*görüntülenir. 
 
-- Bir müşteri, kendi profili ayrıntıları, teklif tarafından düzenlenen siparişleri veya Azure lisans türü ve fiyatlandırma kanal tarafından düzenlenen siparişleri görüntülemek için seçin. 
-- **Müşterilere göre siparişler sunar** halka grafik (sipariş sayısıyla) en çok dört teklifler sunan ve kalan Rest 'Tümü' olarak gruplandırılmış olarak sunar.
+- Profil ayrıntılarını, teklif tarafından düzenlenen siparişleri veya Azure lisans türü ve fiyatlandırma kanalı tarafından düzenlenen siparişleri görüntülemek için bir müşteri seçin. 
+- Yer halka grafik **bazında teklifler** , ilk dört teklifi (order count 'a göre) ve kalan teklifleri ' rest All ' olarak gruplanmış olarak gösterir.
 
 > [!NOTE]
-> Yalnızca müşteri onayı sağladıysa, müşterilerin kişisel bilgilerini sunulur. İle oturum açtıysanız bu bilgiler görüntüleyebileceğiniz bir **sahibi** rol izinleri düzeyi. Kullanıcılarla **katkıda bulunan** rolü bu bilgileri görüntüleme olanağınız olmayacaktır. [Kullanıcı rolleri ve izinleri hakkında daha fazla bilgi edinin](./manage-account.md#define-user-roles-and-permissions).
+> Müşterinin kişisel bilgileri yalnızca müşterinin onay sağlamış olması halinde sunulur. **Sahip** rolü izinleri düzeyi ile oturum açtıysanız, bu bilgileri görüntüleyebilirsiniz. **Katkıda** bulunan rolüne sahip kullanıcılar bu bilgileri görüntüleyemeyecektir. [Kullanıcı rolleri ve izinleri hakkında daha fazla bilgi edinin](./manage-account.md#define-user-roles-and-permissions).
 
-![İş ortağı merkezi analiz büyüme eğilimleri](./media/analyze-growth-trends.png)
+![İş Ortağı Merkezi büyüme eğilimlerini çözümleme](./media/analyze-growth-trends.png)
 
-### <a name="offers-by-orders"></a>Siparişler tarafından teklifler
+### <a name="offers-by-orders"></a>Siparişlere göre teklifler
 
-**Sunar müşterilere göre siparişler** grafik etkin siparişlerinizi teklif adına göre düzenler. 
+**Siparişlere göre teklifler** grafiği, etkin siparişlerinizi teklif adına göre düzenler. 
 
-- Sürüklediğiniz teklif için daha fazla ayrıntı görüntülemek için yararlı doğru halka grafiği sol halka grafiği dilimleri sürükleyebilirsiniz. Bu iki grafik, belirli bir teklif performansını tüm diğer tekliflerinize ('Rest tüm') ile karşılaştırmak etkinleştirin. 
+- Sürüklediğiniz teklifin daha fazla ayrıntılarını göstermek için sol Halka grafiğindeki dilimlerin üzerine sağ halka grafik üzerinde sürükleyebilirsiniz. Bu iki grafik, belirli bir teklifi diğer tekliflerinizin (' rest All ') performansı ile karşılaştırmanıza imkan tanır. 
 
-![İş ortağı merkezi siparişler tarafından analiz teklifler](./media/analyze-offer-by-order.png)
+![İş Ortağı Merkezi teklifleri siparişlere göre analiz etme](./media/analyze-offer-by-order.png)
 
-## <a name="orders-dashboard"></a>Siparişler Panosu
+## <a name="orders-dashboard"></a>Siparişler panosu
 
-**Siparişler** panosunu **Çözümle** , SaaS tekliflerini geçerli siparişleri menü görüntüler. Grafik gösterimi görüntüleyebilirsiniz:
+**Çözümle** menüsünün **siparişler** panosu, SaaS tekliflerinizin tamamına ait geçerli siparişleri görüntüler. Grafik gösterimlerini şu şekilde görüntüleyebilirsiniz:
 
-- [Sipariş toplamları](#order-totals)
-- [Coğrafyaya göre siparişler](#orders-by-geography)
-- [Etkin ve iptal edilen siparişleri için eğilimleri](#trends-for-active-and-canceled-orders)
-- [Market lisans türüne göre düzenlenmiş siparişleri](#orders-by-marketplace-license-type)
-- [Yeni ve mevcut müşteriler tarafından düzenlenen siparişleri](#orders-by-customer-type)
+- [Sıra toplamları](#order-totals)
+- [Coğrafya tarafından siparişler](#orders-by-geography)
+- [Etkin ve iptal edilmiş siparişlere yönelik eğilimler](#trends-for-active-and-canceled-orders)
+- [Market lisans türüne göre düzenlenen siparişler](#orders-by-marketplace-license-type)
+- [Yeni ve mevcut müşteriler tarafından düzenlenen siparişler](#orders-by-customer-type)
 - [Sipariş Ayrıntıları tablosu](#order-details-table)
 
 > [!NOTE]
-> Analytics görünen bulut iş ortağı portalı (CPP) ve iş ortağı merkezi yeni ticari Market programda nasıl raporları arasındaki farklar vardır. Belirli bir yolu olan **satıcı Insights** CPP sahip bir **siparişleri & kullanımı** görüntüleyen veri kullanım tabanlı teklif ve kullanım tabanlı olmayan teklifler için sekmesinde. İş ortağı Merkezi'nde **siparişler** sayfasında SaaS teklifler ayrı bir sekmesinde bulunur.
+> Analiz raporlarının Bulut İş Ortağı Portalı (CPP) ve Iş Ortağı Merkezi 'ndeki yeni ticari Market programında nasıl görüntüleneceği arasında farklılıklar vardır. Belirli bir şekilde, CPP içindeki **satıcı öngörülerinin** , kullanım tabanlı tekliflere ve kullanım tabanlı olmayan tekliflere yönelik verileri görüntüleyen bir **siparişler & kullanım** sekmesi vardır. Iş Ortağı Merkezi 'nde, **siparişler** sayfasının SaaS teklifleri için ayrı bir sekmesi vardır.
 
-### <a name="order-totals"></a>Sipariş toplamları
+### <a name="order-totals"></a>Sıra toplamları
 
-**Sipariş toplamlarını** bölümü her ikisi de dahil olmak üzere oluşturulmuş tüm siparişleri sayısını görüntüler **etkin** ve **iptal** siparişler, seçili sırasında [tarih aralığı ](#date-range). 
+**Sipariş toplamı** bölümü, seçilen [Tarih aralığı](#date-range)boyunca hem **etkin** hem de **iptal edilen** siparişler dahil olmak üzere oluşturulan tüm siparişlerin sayısını görüntüler. 
 
-- Yüzde değeri yanındaki **toplam siparişleri** önceki aya göre büyüme miktarını temsil eder. 
-- Gösteren yeşil üçgeni yukarı doğru pozitif büyüme eğilimi gösterir. İşaret eden kırmızı bir üçgen aşağı önceki aya göre negatif büyüme eğilimi gösterir. 
-- Büyüme eğilimleri çubuk grafikler tarafından temsil edilir ve grafiğin sütunları gelerek her ay değeri görüntülenir.
+- **Toplam siparişlerin** yanındaki yüzde değeri, önceki aya kıyasla büyüme miktarını temsil eder. 
+- Yukarıyı gösteren bir yeşil üçgen, pozitif bir büyüme eğilimi gösterir. Aşağıyı gösteren kırmızı üçgen, önceki aya göre negatif büyüme eğilimi gösterir. 
+- Büyüme eğilimleri çubuk grafiklerle temsil edilir ve grafiğin sütunlarının üzerine gelindiğinde her ay için değeri görüntüler.
 
-### <a name="orders-by-geography"></a>Coğrafyaya göre siparişler
+### <a name="orders-by-geography"></a>Coğrafya tarafından siparişler
 
-**Coğrafyaya göre siparişler** ısı Haritası üzerinde bir dünya Haritası siparişlerinizi sayısını görüntüler ve aynı şekilde işler  **[müşteriler tarafından Coğrafya ısı Haritası](#customers-by-geography)** .
+Coğrafya ısı haritasını **tarafından siparişler** , bir dünya haritasının siparişlerinin sayımını gösterir ve **[müşteriler ile Coğrafya ısı haritasını ile](#customers-by-geography)** aynı şekilde çalışır.
 
-### <a name="trends-for-active-and-canceled-orders"></a>Etkin ve iptal edilen siparişleri için eğilimleri
+### <a name="trends-for-active-and-canceled-orders"></a>Etkin ve iptal edilmiş siparişlere yönelik eğilimler
 
-**Etkin siparişleri tarafından teklifler** halka grafik tüm etkin siparişlerinizi teklif adlarına göre düzenler.
+**Etkin siparişler** , halka grafik sunarak tüm etkin siparişlerinizi kendi teklif adlarına göre düzenler.
 
-- En çok 4 teklifleri grafikte görüntülenir ve tekliflerin rest 'Rest tümü ' gruplandırılır.
-- Bu teklifler yalnızca grafikte görüntülenecek Göstergedeki belirli teklifleri seçebilirsiniz. 
-- Bir dilimi grafiğin geldiğinizde siparişlerin sayısını ve sipariş için toplam sayısı tüm teklifleri karşılaştırıldığında Bu teklif yüzdesini görüntüler.
-- **Siparişler teklifler göre edinme miktarı eğilimi** aydan aya büyüme eğilimleri gösterir. Ay sütun teklif adıyla siparişlerin sayısını temsil eder. Çizgi grafiği çizilen bir z ekseni üzerinde büyüme yüzdesi eğilimi gösterir.
-- Belirli veri noktalarını x ekseni ve odak boyunca soldaki sağa kaydırın grafiğin üst kısmındaki kaydırıcıyı kullanın.
-- Eğilim grafiği, belirli bir öğeyi gösterge seçerek görüntüleyebilirsiniz.
-- Ayrıca eğilimleri ve verileri görüntülemeyi seçebilirsiniz **siparişi iptal edildi**. Graf etkin siparişler aynı şekilde çalışmaya devam edecek.
+- En üstteki dört teklif grafikte görüntülenir ve tekliflerin geri kalanı ' rest All ' olarak gruplandırılır.
+- Yalnızca grafikteki teklifleri göstermek için göstergede belirli teklifleri seçebilirsiniz. 
+- Grafikteki bir dilimin üzerine gelindiğinde, tüm tekliflerde toplam sipariş sayısı ile karşılaştırıldığında, bu teklifin sipariş sayısı ve yüzdesi görüntülenir.
+- **Tekliflere göre siparişler eğilimi** , aylık büyüme eğilimlerini görüntüler. Month sütunu, teklif adına göre sipariş sayısını temsil eder. Çizgi grafik, z ekseni üzerinde çizilen büyüme yüzdesi eğilimini görüntüler.
+- X ekseninde sağa ve sola kaydırmak ve belirli veri noktalarına odaklanmak için grafiğin en üstündeki kaydırıcıyı kullanabilirsiniz.
+- Açıklamada belirli bir öğe seçerek eğilim grafiğini görüntüleyebilirsiniz.
+- Ayrıca, **iptal edilen siparişlerin**eğilimlerini ve verilerini görüntülemeyi de seçebilirsiniz. Grafik, etkin siparişlerle aynı şekilde çalışır.
 
-![Etkin Çözümle siparişler, iş ortağı Merkezi](./media/analyze-active-orders.png)
+![İş Ortağı Merkezi etkin siparişleri çözümle](./media/analyze-active-orders.png)
 
 ### <a name="orders-by-marketplace-license-type"></a>Market lisans türüne göre siparişler
 <!-- Section needs review and clarification!  -->
-**Market lisans türüne göre siparişler** grafik bir aydan aya sipariş sayısı lisans türü ve fatura yöntemini Market teklifi göre görüntüler. Lisans türleri şunlardır:
+**Market lisans türüne göre siparişler** grafiğinde, Market teklifinin lisans türü ve faturalandırma yöntemine göre aylık bir sıra sayısı görüntülenir. Lisans türleri şunları içerir:
 
-- **Azure üzerinden faturalandırılır**: Microsoft, sizin adınıza müşteriler için seçtiğinizde düzenler [teklifinizi Microsoft aracılığıyla satış](./create-new-saas-offer.md#sell-through-microsoft) bu lisans türüne sahip. Kullandıkça Öde kredi kartı veya Kurumsal fatura aracılığıyla ödeme türleri içerir.
-- **Kendi lisansını Getir**: Microsoft, müşterilerin bu tür bir Market teklifi kullanımları bill değil. Olarak listelenen **[hemen (ücretsiz) edinin](./create-new-saas-offer.md#get-it-now-free)** Market'te.
-- **Ücretsiz**: Microsoft, müşterilerin bu tür bir Market teklifi kullanımları bill değil. Olarak listelenen **[ücretsiz deneme sürümü](./create-new-saas-offer.md#free-trial)** Market'te.
-- **Microsoft satıcı olarak**: Microsoft satıcıları tarafından bir parçası olarak satılan tekliflerin temsil  **[bulut çözümü sağlayıcısı (CSP) programında](./create-new-saas-offer.md#csp-program-opt-in)** .
+- **Azure üzerinden faturalandırılır**: Bu lisans türüyle [Microsoft aracılığıyla teklifinizi satmayı](./create-new-saas-offer.md#sell-through-microsoft) seçtiğinizde Microsoft, müşterileri sizin adınıza faturalar. Ödeme türleri, kredi kartı veya kurumsal faturalandırma aracılığıyla Kullandıkça Öde 'yi içerir.
+- **Kendi lisansınızı getir**: Microsoft, müşterileri bu tür Market teklifinin kullanımı için faturalandırmaz. Market 'te **[Şimdi al (ücretsiz)](./create-new-saas-offer.md#get-it-now-free)** olarak listelenir.
+- **Ücretsiz**: Microsoft, müşterileri bu tür Market teklifinin kullanımı için faturalandırmaz. Market 'te **[ücretsiz deneme](./create-new-saas-offer.md##free-trial-listing)** olarak listelenir.
+- **Satıcı olarak Microsoft**: **[bulut çözümü sağlayıcısı (CSP) programının](./create-new-saas-offer.md)** bir parçası olarak Microsoft satıcıları tarafından satılan teklifleri temsil eder.
 
-![İş ortağı merkezi analiz siparişleri lisans türü](./media/analyze-license-type.png)
+![İş Ortağı Merkezi, siparişleri lisans türüne göre analiz eder](./media/analyze-license-type.png)
 
 ### <a name="orders-by-customer-type"></a>Müşteri türüne göre siparişler
 
-**Müşteri türüne göre siparişler** çubuk grafik görüntüler arasında bölünen siparişler **yeni müşteriler** ve **mevcut müşteriler**. 
+**Müşteri türüne göre siparişler** çubuk grafiğinde **yeni müşteriler** ve **mevcut müşteriler**arasında bölünen siparişlerin sayısı görüntülenir. 
 
-- A **yeni müşteri** bir veya daha fazla tekliflerinizi (y ekseni) aynı takvim ayı içinde ilk kez aldı. Bir **mevcut müşteri** daha önce sizden bir teklif (y ekseni üzerinde) bildirilen Takvim ayı önce aldı. 
-- Ek bir pasta grafik, seçilen tarih aralığı için yeni veya var olan müşteri tarafından oluşturulan tüm siparişleri temsil eder.
-- Her iki grafikte, ilgili gösterge seçerek yalnızca yeni veya yalnızca mevcut müşteriler görüntülemeyi seçebilirsiniz.
+- **Yeni bir müşteri** , bir veya daha fazla teklifinizden aynı takvim ayı (y ekseni) içinde ilk kez edinildi. **Mevcut bir müşteri** daha önce size bildirilen takvim ayına (y ekseninde) başlamadan önce bir teklif almış. 
+- Ek bir pasta grafik, seçilen tarih aralığı için yeni veya mevcut müşteri tarafından oluşturulan tüm siparişleri temsil eder.
+- Her iki grafikte de ilgili göstergeyi seçerek yalnızca yeni veya mevcut müşterileri görüntülemeyi tercih edebilirsiniz.
 
-![İş ortağı merkezi analiz müşterilere göre siparişler yazın](./media/analyze-order-by-customer.png)
+![İş Ortağı Merkezi siparişleri müşteri türüne göre analiz etme](./media/analyze-order-by-customer.png)
 
 ### <a name="order-details-table"></a>Sipariş Ayrıntıları tablosu
 
-**Sipariş Ayrıntıları tablosu** alım tarihine göre sıralanmış 1000 üst siparişleri numaralı bir listesini görüntüler.
+**Sipariş Ayrıntıları tablosu** , Alım tarihine göre sıralanan 1000 üst siparişin numaralandırılmış bir listesini görüntüler.
 
-- Her sütunda bir kılavuz sıralanabilir.
-- Kayıt sayısı 1000'den az ise TSV dosyası için veri ayıklanabilir.
-- Kayıtları sayısının 1000 üzerinde dışarı aktardıysanız veri zaman uyumsuz olarak bir indirmeler sayfasına sonraki 30 gün boyunca yerleştirilir.
-- Filtre uygulanabilir **Sipariş Ayrıntıları tablosu** yalnızca ilgilendiğiniz veriler görüntülenecek şekilde. Veri ülkeye göre filtrelenebilir Azure lisans türü, Market lisans türü, Teklif türü, sipariş durumu, ücretsiz izler, Market abonelik kimliği, Müşteri Kimliği ve şirket adı.
+- Kılavuzdaki her bir sütun sıralanabilir.
+- Kayıt sayısı 1000 ' den küçükse veriler TSV dosyasına ayıklanabilir.
+- 1000 üzerinden kayıt numarası varsa, verilen veriler sonraki 30 güne ait bir indirmeler sayfasına zaman uyumsuz olarak yerleştirilir.
+- Yalnızca ilgilendiğiniz verileri göstermek için, **Düzen Ayrıntıları tablosuna** filtreler uygulanabilir. Veriler ülke, Azure lisans türü, Market lisans türü, teklif türü, sipariş durumu, ücretsiz izler, Market abonelik KIMLIĞI, müşteri KIMLIĞI ve şirket adı ile filtrelenebilir.
 
-![İş ortağı merkezi analiz Sipariş Ayrıntıları](./media/analyze-order-details.png)
+![İş Ortağı Merkezi sipariş ayrıntılarını analiz etme](./media/analyze-order-details.png)
 
-## <a name="customer-dashboard"></a>Müşteri Panosu
+## <a name="customer-dashboard"></a>Müşteri panosu
 
-**Müşteri** panosunu **Çözümle** menü tekliflerinizi satın alan müşteriler için verileri görüntüler. Grafik gösterimi görüntüleyebilirsiniz:
+**Çözümle** menüsünün **Müşteri** panosu, tekliflerinizi almış müşterilerin verilerini görüntüler. Grafik gösterimlerini şu şekilde görüntüleyebilirsiniz:
 
 - [Müşteri toplamları](#customer-totals)
-- [Müşteriler tarafından coğrafi konum](#customers-by-geography)
+- [Coğrafya ile müşteriler](#customers-by-geography)
 - [Müşteri eğilimleri](#customer-trends)
-- [Müşterilere göre siparişler](#customers-by-orders)
-- [Müşteri ayrıntıları tablosu](#customer-details-table)
+- [Siparişlere göre müşteriler](#customers-by-orders)
+- [Müşteri Ayrıntıları tablosu](#customer-details-table)
 
 ### <a name="customer-totals"></a>Müşteri toplamları
 
-**Müşteri toplamları** bölümü yeni, mevcut ve çoğaltılmaları, seçili sırasında dahil tüm müşterilerin sayısını görüntüler [tarih aralığı](#date-range).
+**Müşteri toplamları** bölümü, seçilen [tarih aralığında](#date-range)yeni, mevcut ve tamamen dahil olmak üzere tüm müşterilerin sayısını görüntüler.
 
-- Önceki aya göre büyüme yüzdesini müşterilerin sayısını ve kırmızı, yeşil veya aşağı göstergesi yukarı göstergesi ile belirtilir.
-- Büyüme eğilimleri çubuk grafikler tarafından temsil edilir ve grafiğin sütunları gelerek her ay değeri görüntülenir.
+- Müşterilerin önceki aya kıyasla büyüme yüzdesi, yeşil veya aşağı gösterge göstergesinde sayı ve yukarı gösterge olarak belirtilmiştir.
+- Büyüme eğilimleri çubuk grafiklerle temsil edilir ve grafiğin sütunlarının üzerine gelindiğinde her ay için değeri görüntüler.
 
 #### <a name="customer-types"></a>Müşteri türleri
 
-Üç müşteri türü vardır: yeni, mevcut ve çoğaltılmaları. 
+Üç müşteri türü vardır: yeni, var ve bir şekilde. 
 
-- Yeni bir müşteri, bir veya daha fazla seçili ay içinde ilk kez tekliflerinizi aldı.
-- Varolan bir müşteri, bir veya daha fazla seçili ay önce tekliflerinizi aldı.
-- Daha önce satın aldığınız tüm teklifleri churned müşteri iptal etti.
+- Yeni bir müşteri, seçili ay içinde ilk kez bir veya daha fazla teklifinizden elde etti.
+- Mevcut bir müşteri, seçili olan aydan önce bir veya daha fazla teklifinizden elde etti.
+- Oluşturulmuş bir müşteri, daha önce satın alınan tüm teklifleri iptal etti.
 
 ### <a name="customer-trends"></a>Müşteri eğilimleri
 
-**Müşteri eğilimleri** grafik yeni, mevcut ve çoğaltılmaları, bir aydan aya büyüme eğilim ile de dahil olmak üzere tüm müşterilerin sayısını görüntüler.
+**Müşteri eğilimleri** grafiği, aylık bir büyüme eğilimi ile yeni, mevcut ve tamamen dahil olmak üzere tüm müşterilerin sayısını görüntüler.
 
-- Çizgi grafik, Genel Müşteri büyüme yüzde temsil eder. 
-- Ay sütun, müşterilerin yeni, mevcut ve çoğaltılmaları Yığılmış müşterilerin sayısını temsil eder.
-- Negatif Y ekseninin yönü çoğaltılmaları müşteri sayısı görüntülenir.
-- Özel gösterge öğeleri daha fazla görüntülenen seçebileceğiniz ayrıntılı görünüm. Örneğin, yeni müşteriler göstergeden yalnızca yeni müşteriler görüntülemek için seçin.
-- Daha ayrıntılı olarak görüntülemek için sağ ve sol tarafta x ekseni ve belirli veri noktalarına odaklanacak kaydırmak için grafiğin üst kısmındaki kaydırıcıyı kullanın.
-- Bir sütun grafiğin geldiğinizde söz konusu ay için yalnızca ayrıntılarını gösterir.
+- Çizgi grafik, genel müşteri büyüme yüzdelerini temsil eder. 
+- Month sütunu, yeni, var olan ve tarafından kullanılan müşteriler tarafından yığılmış müşterilerin sayısını temsil eder.
+- Tek bir müşteri sayısı, Y ekseninin negatif yönünde görüntülenir.
+- Daha ayrıntılı görünümlerde görüntülenmek üzere belirli gösterge öğelerini seçebilirsiniz. Örneğin, yalnızca yeni müşterileri göstermek için göstergeden yeni müşteriler ' i seçin.
+- X ekseninde sağa ve sola kaydırmak için grafiğin en üstündeki kaydırıcıyı kullanabilir ve daha ayrıntılı görüntülemek için belirli veri noktalarına odaklanırsınız.
+- Grafik sütununun üzerine gelindiğinde yalnızca söz konusu ayın ayrıntıları görüntülenir.
 
-![İş ortağı merkezi analiz müşteri eğilimleri](./media/analyze-customer-trends.png)
+![İş ortağı merkezi müşteri eğilimlerini çözümle](./media/analyze-customer-trends.png)
 
-### <a name="customers-by-orders"></a>Müşterilere göre siparişler
+### <a name="customers-by-orders"></a>Siparişlere göre müşteriler
 
-**Müşterilere göre siparişler** grafik görüntüler **üst müşteri yüzdebirlik** siparişler kendi sayısına göre belirlenen x ekseni, boyunca. Y ekseni müşterinin sipariş sayısını görüntüler. Z ekseni (çizgi grafik) toplam sayısı siparişleri toplu yüzdesini görüntüler. Çizgi grafik noktalarını üzerine gelerek ayrıntıları görüntüleyebilirsiniz.
+**Siparişlere göre müşteriler** grafiği, **en yüksek müşteri yüzdebirlik** değerlerini, siparişlerin sayısı tarafından belirlendiği şekilde x ekseni boyunca görüntüler. Y ekseni, müşterinin sıra sayısını görüntüler. Z ekseni (çizgi grafik) toplam sipariş sayısının kümülatif yüzdesini görüntüler. Çizgi grafik boyunca noktaların üzerine gelerek ayrıntıları gösterebilirsiniz.
 
-Örnek olarak, müşterilerinizin en çok %30 %83 2,130 siparişlere eşit siparişlerin katkıda bulunduğunuz bu müşteri sipariş verilerden bilgi edinebilirsiniz.
+Örnek olarak, bu müşteri siparişi verilerinden, müşterilerin %30 ' una ait siparişlerin %83 ' una eşit olduğunu ve 2.130 siparişe eşit olduğunu öğrenebilirsiniz.
 
-![İş ortağı merkezi analiz müşteri siparişleri](./media/analyze-customer-orders.png)
+![İş ortağı merkezi müşteri siparişlerini çözümle](./media/analyze-customer-orders.png)
 
-### <a name="customer-details-table"></a>Müşteri ayrıntıları tablosu
+### <a name="customer-details-table"></a>Müşteri Ayrıntıları tablosu
 
-**Müşteri Ayrıntıları tablosu** numaralı bunlar önce edinilen tekliflerinizi birini tarihine göre sıralanmış ilk 1000 müşterilerin listesini görüntüler.
+**Müşteri Ayrıntıları tablosu** , en önde gelen 1000 müşterinin, tekliflerinizin birini ilk almış oldukları tarihe göre sıralanan numaralandırılmış bir listesini görüntüler.
 
-- Müşterilerin kişisel bilgilerini yalnızca bir müşteri onay verdiyse kullanılabilir olacak. İle oturum açtıysanız bu bilgiler yalnızca görüntüleyebilirsiniz bir **sahibi** rol düzeyi izinleri. [Kullanıcı rolleri ve izinleri hakkında daha fazla bilgi edinin](./manage-account.md#define-user-roles-and-permissions).
-- Her sütunda bir kılavuz sıralanabilir.
-- Kayıt sayısı 1000'den az ise TSV dosyası için veri ayıklanabilir.
-- Kayıtları sayısının 1000 üzerinde dışarı aktardıysanız veri zaman uyumsuz olarak bir indirmeler sayfasına sonraki 30 gün boyunca yerleştirilir.
-- Filtrelerini tablosuna yalnızca ilgilendiğiniz veriler görüntülenecek şekilde uygulanabilir. Veriler Müşteri Kimliği, Market abonelik kimliği, Azure lisans türü, alım tarihi, tarih kayıp, müşteri e-posta, Müşteri Ülke/durumu/Şehir/Zip, müşteri dil gibi şirketinizin adına göre filtre vb.
+- Müşterinin kişisel bilgileri, yalnızca müşteri izin sağladıysa kullanılabilir. Bu bilgileri yalnızca **sahip** rol izinleri düzeyiyle oturum açtıysanız görüntüleyebilirsiniz. [Kullanıcı rolleri ve izinleri hakkında daha fazla bilgi edinin](./manage-account.md#define-user-roles-and-permissions).
+- Kılavuzdaki her bir sütun sıralanabilir.
+- Kayıt sayısı 1000 ' den küçükse veriler TSV dosyasına ayıklanabilir.
+- 1000 üzerinden kayıt numarası varsa, verilen veriler sonraki 30 güne ait bir indirmeler sayfasına zaman uyumsuz olarak yerleştirilir.
+- Filtreler, yalnızca ilgilendiğiniz verileri göstermek için tabloya uygulanabilir. Veriler şirket adı, müşteri KIMLIĞI, Market abonelik KIMLIĞI, Azure lisans türü, alınma tarihi, tarih kaybı, müşteri e-postası, müşteri ülkesi/eyalet/şehir/zip, müşteri dili vb. tarafından filtrelenebilir.
 
-![İş ortağı merkezi analiz Müşteri ayrıntıları](./media/analyze-customer-table.png)
+![İş ortağı merkezi müşteri ayrıntılarını çözümle](./media/analyze-customer-table.png)
 
-## <a name="downloads-dashboard"></a>Pano indirir
+## <a name="downloads-dashboard"></a>Karşıdan yüklemeler panosu
 
-**İndirir** panosunu **Çözümle** menüsü, müşteri ve sipariş verilerini 1000'den satırlarını içeren herhangi bir indirme isteklerini görüntüler.
+**Çözümle** menüsünün **indirmeler** panosu, müşteri veya sipariş verilerini 1000 ' den fazla satırı içeren indirmelere yönelik istekleri görüntüler.
 
-Bir açılır bildirim ve bağlantısı içeren bir e-posta alırsınız **indirir** 1000'den veri satırları içeren bir indirme isteği her Pano. Bu veri indirmeleri 30 günlük dönem için kullanılabilir olacak ve sonra kaldırılır.
+1000 ' den fazla veri satırı içeren bir indirme isteğinde bulunduğunda, **indirmeler** panosuna bir bağlantı içeren bir açılır bildirim ve e-posta alacaksınız. Bu veri İndirmeleri 30 günlük bir dönemde kullanıma sunulacaktır ve sonra kaldırılır.
 
-![İş ortağı merkezi analiz indirir](./media/analyze-downloads.png)
+![İş Ortağı Merkezi İndirmeleri çözümle](./media/analyze-downloads.png)
 
-### <a name="dictionary-of-data-terms"></a>Veri terimler sözlüğü
+### <a name="dictionary-of-data-terms"></a>Veri koşullarının sözlüğü
 
 | Öznitelik adı | Raporlar | Tanım|
 |---|---|---|
-| Azure lisans türü | Müşteri, sipariş | Müşterilerin Azure'u satın almak için kullanılan lisans sözleşmesi türü. Kanal olarak da bilinir |
-| Azure lisans türü: Bulut Çözümü Sağlayıcısı | Müşteri, sipariş | Azure ve Market teklifinizi kimin satıcınızla davranan, bulut çözümü sağlayıcısı aracılığıyla son müşteri procures.|
-| Azure lisans türü: Enterprise | Müşteri, sipariş | Azure ve doğrudan Microsoft ile imzalanmış bir kurumsal anlaşması, Market teklifi, son müşteri procures.|
-| Azure lisans türü: Satıcıdan Enterprise  | Müşteri, sipariş | Azure ve Market teklifinizi Microsoft ile Kurumsal Anlaşma kolaylaştıran bir satıcı aracılığıyla son müşteri procures.|  |
-| Azure lisans türü: Kullandıkça ödeyin| Müşteri, sipariş | Azure ve Market teklifinizi doğrudan Microsoft ile imzalanmış bir "Kullandıkça Öde" sözleşmesi aracılığıyla son müşteri procures.||
-| Bulut örneği adı| Sipariş verme| Bir VM dağıtımı oluştuğu Microsoft Cloud.||
-| Bulut örneği adı: Azure genel| Sipariş verme| Genel küresel Microsoft bulut.|| |
-| Bulut örneği adı: Azure Kamu | Sipariş verme| Aşağıdaki devlet kurumları, birinin government'a özel Microsoft bulut: Çin, Almanya veya Amerika Birleşik Devletleri.| |
-| Müşteri Şehir| Müşteri| Müşteri tarafından sağlanan şehir adı. Şehir, bir müşterinin Azure aboneliğini şehirde farklı olabilir.||
-| Müşteri iletişim dili  | Müşteri| İletişim müşteri tarafından tercih edilen dili.||
-| Müşteri şirket adı | Müşteri, sipariş | Müşteri tarafından sağlanan şirket adı. Ad, bir müşterinin Azure aboneliğini şehirde farklı olabilir.|  |
-| Müşteri Ülke | Müşteri, sipariş | Müşteri tarafından sağlanan ülke adı. Ülke, bir müşterinin Azure aboneliğini ülkede farklı olabilir.|  |
-| Müşteri e-posta| Müşteri| Son müşteri tarafından sağlanan e-posta adresi. E-posta, bir müşterinin Azure aboneliği e-posta adresinden farklı olabilir.||
-| Müşteri adı| Müşteri| Müşteri tarafından sağlanan adı. Ad, bir müşterinin Azure aboneliğinde sağlanan adından farklı olabilir.| |
-| Müşteri Kimliği | Müşteri, sipariş | Bir müşteri için atanan benzersiz tanımlayıcısı. Bir müşteri, sıfır veya daha fazla Azure Market abonelikleri olabilir.|  |
-| Müşteri posta kodu  | Müşteri| Müşteri tarafından sağlanan posta kodu. Kod, bir müşterinin Azure aboneliğinde sağlanan posta kodu farklı olabilir.| |
-| Müşteri durumu| Müşteri| Müşteri tarafından sağlanan durumu (adres). Durumu, bir müşterinin Azure aboneliğinde sağlanan son adından farklı olabilir.| |
-| Alım tarihi| Müşteri| İlk tarih müşteri tarafından yayımladığınız herhangi bir teklif satın.| |
-| Kayıp tarihi| Müşteri| Son tarihi daha önce satın aldığınız tüm teklifleri son müşteri iptal edildi.||
-| Yeni müşteri  | Sipariş verme| Bir veya daha fazla tekliflerinizi ilk kez (veya etkinleştirmezsiniz) alınırken yeni bir müşteri değeri tanımlar. Değer, ", aynı takvim ayı içinde"Tarih alım için"Evet" olacaktır. Müşteri tekliflerinizi önce bildirilen Takvim ayı birini satın aldıysa, değer "Hayır" olacaktır. |
-| Önizleme SKU| Sipariş verme| Değer SKU "Önizleme" olarak etiketlenmiş, size sağlayacaktır. Değer "Evet" SKU buna göre etiketlenir ve sizin tarafınızdan yetkili yalnızca Azure abonelikleri dağıtabilir ve bu görüntüyü kullanma olacaktır. SKU "Önizleme" olarak tanımlanmamış değer "Hayır" olacaktır.  |
-| Promosyon kişi olduğunu kabul etme| Müşteri| Değer, müşteri proaktif olarak promosyon kişiden yayımcılar için kabul durumunda size sağlayacaktır. Biz panoyu arasında "Hayır" belirttiniz. Bu nedenle şu anda şu seçeneği müşterilere sunuyorsanız değil. Bu özellik dağıtıldıktan sonra uygun şekilde güncelleştirilmesi başlayacağız.|
-| Market lisans türü| Sipariş verme| Market teklifi fatura yöntemi.||
-| Market lisans türü: Azure üzerinden faturalandırılır| Sipariş verme| Microsoft bu Market teklifi aracınızın ve sizin adınıza müşteriler düzenler. (PAYG kredi kartı veya fatura Kurumsal)||
-| Market lisans türü: Kendi lisansını Getir | Sipariş verme| VM dağıtmak için müşteri tarafından sağlanan bir lisans anahtarı gerektirir. Microsoft, teklifleri Market aracılığıyla bu şekilde listelemek için müşterilerin fatura değil.||
-| Market lisans türü: Boş| Sipariş verme| Teklif, tüm kullanıcılara ücretsiz olarak yapılandırılır. Microsoft, müşteriler bu tekliften kullanımları bill değil.||
-| Market lisans türü: Microsoft satıcı olarak  | Sipariş verme| Bu Market teklifi için satıcınızla Microsoft'tur.|  |
-| Market abonelik kimliği | Müşteri, sipariş | Benzersiz tanımlayıcısı, müşterinin, Market teklifi satın almak için kullanılan Azure aboneliği ile ilişkili. Kimliği, eski adıyla Azure abonelik GUİD'i oluştu.||
-| Teklif Adı  | Sipariş verme| Market teklifi adı.|| |
-| Teklif Türü  | Sipariş verme| Microsoft Marketplace Teklif türü.|||
-| Teklif türü: Yönetilen uygulama  | Sipariş | Azure uygulama kullanma: yönetilen uygulama Teklif türü aşağıdaki koşullar gerekli olduğunda: Her bir abonelik tabanlı çözüm müşteriniz için bir VM veya Iaas tabanlı tüm bir çözümü kullanarak dağıtırsınız. Siz veya müşteriniz gerektiren çözüm iş ortağı tarafından yönetiliyor olabilir. |
-| Teklif türü: Azure Uygulaması| Sipariş | Çözümünüzü basit bir sanal makine başka dağıtım ve yapılandırma otomasyonundan gerektirdiğinde Azure uygulama çözüm şablonu teklif türünü kullanın.||
-| Teklif türü: Danışmanlık Hizmetleri| Sipariş verme| Danışmanlık Hizmetleri Azure Market'te, müşterileri desteklemek ve bunların Azure kullanımını genişletmek için hizmetleriyle bağlanmak için yardımcı olur.| |
-| Teklif türü: Kapsayıcı | Sipariş verme| Çözümünüze bir Kubernetes tabanlı Azure kapsayıcı hizmeti sağlanan bir Docker kapsayıcı görüntüsü olduğunda kapsayıcı teklif türünü kullanın.||
-| Teklif türü: Dynamics 365 Business Central| Sipariş verme| Çözümünüzü Finans ve operasyon için Dynamics 365 ile tümleşiktir, bu teklif türünü kullanın.| |
-| Teklif türü: Müşteri Etkileşimi için Dynamics 365 | Sipariş verme| Çözümünüzün müşteri katılımı için Dynamics 365 ile tümleştirildiğinde Bu teklif türünü kullanın.||
-| Teklif türü: IOT Edge Modülü | Sipariş verme| Azure IOT Edge modülleri, IOT Edge tarafından yönetilen en küçük hesaplama birimleri ve Microsoft Hizmetleri (örneğin, Azure Stream Analytics), 3. taraf hizmetleri veya kendi çözümünüze özgü kodla içerebilir. |
-| Teklif türü: Power BI uygulaması | Sipariş verme| Power BI ile tümleşik bir uygulama dağıttığınızda Power BI uygulaması teklif türünü kullanın.|  |
-| Teklif türü: SaaS uygulaması| Sipariş verme| SaaS tabanlı, teknik çözümünüz olarak bir abonelik satın almak müşteri etkinleştirmek için SaaS uygulama Teklif türü kullanın.||
-| Teklif türü: Sanal makine | Sipariş verme| Müşteriniz ile ilişkili bir abonelik için bir sanal gereç dağıttığınızda sanal makine teklif türünü kullanın.||
-| Teklif türü: Visual Studio Market uzantısı  | Sipariş verme| Azure DevOps uzantı geliştiricileri için Teklif türü daha önce kullanılabilir. Azure DevOps ileri giderek uzantı geliştiricileri kendi uzantı doğrudan müşterilere satabilirsiniz. Uzantı teklifleri, ücretli veya deneme sürümü dahil olmak üzere yapılandırılabilir. |
-| Sipariş İptal tarihi| Sipariş verme| Market siparişi iptal edildiği tarih.||
-| Sipariş Kimliği| Sipariş verme| Müşteri siparişi Market hizmetiniz için benzersiz tanımlayıcısı. Sanal makine kullanım tabanlı teklifleri bir sıra ile ilişkili değildir.| |
-| Sipariş satın alma tarihi| Sipariş verme| Market siparişi oluşturulduğu tarih.|||
-| Sipariş durumu| Sipariş verme| Verilerin son yenilenme zamanı Market sırada durumu.|     |
-| Sipariş durumu: Etkin  | Sipariş verme| Müşteri, sipariş satın aldı ve bunların sırası iptal değil.|         |
-| Sipariş durumu: iptal edildi | Sipariş verme| Müşteri sipariş önceden satın ve daha sonra bunların sırası iptal edildi.||
-| Sağlayıcı e-posta| Müşteri| Son müşteri ile Microsoft arasındaki ilişkiyi katılan sağlayıcısı e-posta adresi. Müşteri kuruluş satıcıdan ise, bu satıcıya olacaktır. Bir bulut çözümü sağlayıcısı (CSP) söz konusuysa bu CSP olacaktır.|
-| Sağlayıcı adı| Müşteri| Microsoft ve son müşteri arasındaki ilişkiyi katılan sağlayıcısının adı. Müşteri kuruluş satıcıdan ise, bu satıcıya olacaktır. Bir bulut çözümü sağlayıcısı (CSP) söz konusuysa bu CSP olacaktır.|
-| SKU| Sipariş verme| Yayımlama sırasında tanımlanan SKU adı. Bir teklif birçok SKU'ları olabilir, ancak bir SKU yalnızca tek bir Teklifle ilişkili olabilir.||
-| Deneme bitiş tarihi| Sipariş verme| ' % S'tarih Bu sipariş için deneme süresi sona erer veya sona erdi.||
+| Azure lisans türü | Müşteri, sipariş | Müşteriler tarafından Azure satın alma için kullanılan lisans sözleşmesinin türü. Kanal olarak da bilinen |
+| Azure lisans türü: bulut çözümü sağlayıcısı | Müşteri, sipariş | Azure ve Market procures son müşterisi, bulut çözümü sağlayıcısı aracılığıyla satıcıya göre davranan bir tekliftir.|
+| Azure lisans türü: Kurumsal | Müşteri, sipariş | Azure procures son müşterisi ve Market, doğrudan Microsoft ile imzalanmış bir Kurumsal Anlaşma aracılığıyla teklif.|
+| Azure lisans türü: satıcı aracılığıyla kurumsal  | Müşteri, sipariş | Azure ve Market procures son müşterisi, Microsoft ile Kurumsal Anlaşma kolaylaştıran bir satıcı aracılığıyla teklif sunuyor.|  |
+| Azure lisans türü: Kullandıkça öde| Müşteri, sipariş | Azure procures son müşterisi ve Market, doğrudan Microsoft ile imzalanmış bir "Kullandıkça öde" sözleşmesi aracılığıyla teklif sunuyor.||
+| Bulut örneği adı| Sipariş verme| Bir VM dağıtımının gerçekleştiği Microsoft Bulut.||
+| Bulut örneği adı: Azure genel| Sipariş verme| Genel genel Microsoft bulutu.|| |
+| Bulut örneği adı: Azure Kamu | Sipariş verme| Aşağıdaki hükümetlerden biri için kamu 'ya özgü Microsoft bulutları: Çin, Almanya veya Amerika Birleşik Devletler.| |
+| Müşteri şehri| Müşteri| Müşteri tarafından sunulan şehir adı. Şehir, müşterinin Azure aboneliğindeki şehirden farklı olabilir.||
+| Müşteri Iletişim dili  | Müşteri| İletişim için müşterinin tercih ettiği dil.||
+| Müşteri şirket adı | Müşteri, sipariş | Müşterinin sunduğu şirket adı. Ad, müşterinin Azure aboneliğindeki şehirden farklı olabilir.|  |
+| Müşteri ülkesi | Müşteri, sipariş | Müşterinin sunduğu ülke adı. Ülke, müşterinin Azure aboneliğindeki ülkeden farklı olabilir.|  |
+| Müşteri e-postası| Müşteri| Son müşteri tarafından sunulan e-posta adresi. E-posta, müşterinin Azure aboneliğindeki e-posta adresinden farklı olabilir.||
+| Müşteri adı| Müşteri| Müşterinin verdiği ad. Ad, müşterinin Azure aboneliğinde belirtilen ad ile farklı olabilir.| |
+| Müşteri KIMLIĞI | Müşteri, sipariş | Müşteriye atanan benzersiz tanımlayıcı. Müşterinin sıfır veya daha fazla Azure Market aboneliği olabilir.|  |
+| Müşteri posta kodu  | Müşteri| Müşteri tarafından sunulan posta kodu. Kod, müşterinin Azure aboneliğinde girilen posta kodundan farklı olabilir.| |
+| Müşteri durumu| Müşteri| Müşteri tarafından sunulan eyalet (adres). Durum, müşterinin Azure aboneliğinde belirtilen durumdan farklı olabilir.| |
+| Alınma tarihi| Müşteri| Müşterinin sizin tarafınızdan yayınlanan teklifi satın aldığı ilk tarih.| |
+| Kayıp tarihi| Müşteri| Müşterinin daha önce satın alınan tüm tekliflerden son iptal ettiği son tarih.||
+| Yeni müşteri  | Sipariş verme| Bu değer, yeni bir müşteriyi, bir veya daha fazla teklifinizden ilk kez (veya değil) edinirsiniz. "Tarihi alındı" için aynı takvim ayı içinde değer "Evet" olacaktır. Müşteri tekliflerinizin herhangi birini bildirilen takvim ayına göre satın alıyorsa değer "Hayır" olacaktır. |
+| Önizleme SKU 'SU| Sipariş verme| Bu değer, SKU 'YU "Önizleme" olarak etiketlediyseniz size bilgi verir. SKU buna uygun şekilde etiketlenmişse değer "Evet" olur ve yalnızca sizin tarafından yetkilendirilen Azure abonelikleri bu görüntüyü dağıtabilir ve kullanabilir. SKU "Önizleme" olarak tanımlanmamışsa, değer "Hayır" olacaktır.  |
+| Promosyon ekibine katılım kabul ediyor| Müşteri| Bu değer, müşterinin yayımcılardan promosyon kişisini önceden kabul eder olduğunu bilmenizi sağlar. Şu anda, bu seçeneği müşterilere sunuyoruz, bu nedenle Pano genelinde "Hayır" belirtiyoruz. Bu özellik dağıtıldıktan sonra, güncelleştirmeye uygun olarak başlayacağız.|
+| Market lisans türü| Sipariş verme| Market teklifinin faturalandırma yöntemi.||
+| Market lisans türü: Azure üzerinden faturalandırılır| Sipariş verme| Microsoft bu Market 'e yönelik aracısıdır ve sizin adınıza müşteri reçeteleri sunun. (PAYG kredi kartı ya da kurumsal fatura)||
+| Market lisans türü: kendi lisansınızı getirin | Sipariş verme| VM, dağıtım için müşterinin sunduğu bir lisans anahtarı gerektirir. Microsoft, tekliflerini Market aracılığıyla bu şekilde listelemek için müşterileri faturalandırmaz.||
+| Market lisans türü: ücretsiz| Sipariş verme| Teklif, tüm kullanıcılar için ücretsiz olacak şekilde yapılandırılmıştır. Microsoft, müşterileri bu teklifin kullanımıyla ilgili olarak faturalandırmaz.||
+| Market lisans türü: satıcı olarak Microsoft  | Sipariş verme| Microsoft bu Market teklifinin satıcısına yöneliktir.|  |
+| Market abonelik KIMLIĞI | Müşteri, sipariş | Market teklifinizi satın almak için kullanılan müşterinin Azure aboneliğiyle ilişkili benzersiz tanımlayıcı. KIMLIĞI daha önce Azure aboneliği GUID 'iydi.||
+| Teklif Adı  | Sipariş verme| Market sunumunun adı.|| |
+| Teklif Türü  | Sipariş verme| Microsoft Market teklif türü.|||
+| Teklif türü: yönetilen uygulama  | Siparişi | Aşağıdaki koşullar gerektiğinde Azure uygulaması: yönetilen uygulama teklifi türünü kullanın: bir VM veya tüm IaaS tabanlı bir çözümü kullanarak müşteriniz için abonelik tabanlı bir çözüm dağıtırsınız. Siz veya müşteriniz, çözümün bir iş ortağı tarafından yönetilmesini gerektirir. |
+| Teklif türü: Azure uygulaması| Siparişi | Çözümünüz basit bir sanal makinenin ötesinde ek dağıtım ve yapılandırma Otomasyonu gerektirdiğinde Azure Uygulama çözümü şablonu teklif türünü kullanın.||
+| Teklif türü: danışmanlık hizmeti| Sipariş verme| Azure Marketi 'ndeki Danışmanlık Hizmetleri, Azure 'un kullanımını desteklemek ve genişletmek için müşterilerin hizmetleriyle bağlantı sağlanmasına yardımcı olur.| |
+| Teklif türü: kapsayıcı | Sipariş verme| Çözümünüz, Kubernetes tabanlı bir Azure Container Service olarak sağlanan bir Docker kapsayıcı görüntüsü olduğunda kapsayıcı teklif türünü kullanın.||
+| Teklif türü: Dynamics 365 Iş Merkezi| Sipariş verme| Çözümünüz finans ve Işlemler için Dynamics 365 ile tümleştirildiğinde bu teklif türünü kullanın| |
+| Teklif türü: müşteri katılımı için Dynamics 365 | Sipariş verme| Çözümünüz müşteri katılımı için Dynamics 365 ile tümleştirildiğinde bu teklif türünü kullanın.||
+| Teklif türü: IoT Edge modülü | Sipariş verme| Azure IoT Edge modüller, IoT Edge tarafından yönetilen en düşük hesaplama birimleridir ve Microsoft hizmetlerini (Azure Stream Analytics), 3. taraf hizmetleri veya kendi çözümüne özgü kodunuzu içerebilir. |
+| Teklif türü: Power BI uygulama | Sipariş verme| Power BI ile tümleştirilmiş bir uygulama dağıtırken Power BI uygulama teklifi türünü kullanın.|  |
+| Teklif türü: SaaS uygulaması| Sipariş verme| Müşterinizin SaaS tabanlı, teknik çözümünüzü bir abonelik olarak satın almasını sağlamak için SaaS uygulaması teklif türünü kullanın.||
+| Teklif türü: sanal makine | Sipariş verme| Müşterinizin ilişkili aboneliğine bir Sanal Gereç dağıtırken sanal makine teklif türünü kullanın.||
+| Teklif türü: Visual Studio Market uzantısı  | Sipariş verme| Daha önce Azure DevOps uzantı geliştiricileri için sunulan teklif türü. Azure DevOps uzantısı geliştiricilerinin ileri, doğrudan müşterilere dahili olarak dahili olarak iletilmesini sağlayabilir. Uzantı teklifleri ücretli olarak veya bir deneme dahil olmak üzere yapılandırılabilir. |
+| Sipariş Iptali tarihi| Sipariş verme| Market siparişinin iptal edildiği tarih.||
+| Sipariş kimliği| Sipariş verme| Market hizmetiniz için müşteri siparişinin benzersiz tanımlayıcısı. Sanal makine kullanımı tabanlı teklifler bir siparişle ilişkili değildir.| |
+| Sipariş satın alma tarihi| Sipariş verme| Market siparişinin oluşturulduğu tarih.|||
+| Sipariş durumu| Sipariş verme| Verilerin son yenilenme sırasında Market siparişi durumu.|     |
+| Sipariş durumu: etkin  | Sipariş verme| Müşterinin siparişi satın almış ve siparişi iptal edilmemiş.|         |
+| Sipariş durumu: iptal edildi | Sipariş verme| Müşteri daha önce bir siparişi satın almış ve ardından sıralarını iptal etti.||
+| Sağlayıcı e-postası| Müşteri| Sağlayıcının Microsoft ile son müşteri arasındaki ilişkiye dahil olan e-posta adresi. Müşteri, satıcı üzerinden bir kurumsal ise, bu satıcı olacaktır. Bir bulut çözümü sağlayıcısı (CSP) dahil edilmişse, bu CSP olacaktır.|
+| Sağlayıcı adı| Müşteri| Microsoft ile son müşteri arasındaki ilişkiye katılan sağlayıcının adı. Müşteri, satıcı üzerinden bir kurumsal ise, bu satıcı olacaktır. Bir bulut çözümü sağlayıcısı (CSP) dahil edilmişse, bu CSP olacaktır.|
+| SKU| Sipariş verme| Yayımlama sırasında tanımlanan SKU adı. Bir teklifin birçok SKU 'su olabilir, ancak bir SKU yalnızca tek bir teklifle ilişkilendirilebilir.||
+| Deneme bitiş tarihi| Sipariş verme| Bu sipariş için deneme döneminin sona erdiği veya sonlandırmış olacağı tarih.||
+
+## <a name="ratings-and-reviews"></a>Derecelendirmeler ve İncelemeler
+
+Müşteriler her iki markette de teklifler sunarak, arama ve satın alma tekliflerinden elde ettikleri teklifler için derecelendirmeleri ve incelemeleri bırakabilir. Yeni derecelendirmeler veya incelemeler gönderebilirler, derecelendirmeleri veya zaten gönderdikleri İncelemeleri güncelleştirebilir veya silebilir. İncelemeler, teklifin ürün görüntüleme sayfasının Incelemeler sekmesinde Azure Market veya AppSource 'a gönderilir. Müşteriler, derecelendirmeleri veya incelemeleri için adlarını içerebilir veya anonim olarak posta oluşturabilir.  
+
+> [!NOTE]
+> Müşteriler yalnızca derecelendirmelere ve sahip oldukları gözden geçirmelere değişiklik yapabilirler.
+
+**Derecelendirmeler & Gözden geçirme panosu** , müşteri etkinliklerinin eğilimlerini ve öngörülerini görüntüler. Grafik gösterimi şunları sağlar:
+
+- Derecelendirmeler & değerlendirmeleri  
+- Açıklamaları gözden geçir
+
+### <a name="marketplace-storefront-tabs"></a>Market storefront sekmeleri
+
+Yayımcılar, teklif ölçümlerini Azure Market sekmelerinde AppSource & Ayrıca görüntüleyebilir. Belirli teklif ölçümlerini görüntülemek için açılan listeden **teklif** ' i seçin:
+
+![İş Ortağı Merkezi teklifi çözümle açılan kutusu](./media/analyze-offer-dropdown.png)
+
+### <a name="ratings-and-reviews-summary"></a>Derecelendirmeler ve İncelemeler Özeti
+
+Derecelendirmeler & gözden geçirmeler Özeti bölümünde, seçilen bir tarih aralığı için aşağıdaki ölçümler görüntülenir:
+
+- **Ortalama derecelendirme:** Seçili teklif için müşteriler tarafından gönderilen tüm derecelendirmelerin ağırlıklı ortalama yıldız derecelendirmesi.
+- **Derecelendirme dökümü:** Derecelendirmeyi gönderen müşterilerin sayısına göre yıldız derecelendirmesinin dökümü. Çubuk grafik gerçek ve düzeltilmiş derecelendirmeler (güncelleştirilmiş derecelendirme sayısı) ile yığılmış.
+- **Toplam derecelendirme:** Gönderilen toplam derecelendirme sayısı. Bu sayı Ayrıca, gözden geçirmesiz ve olmayan derecelendirmeler içerir.
+- **Gözden geçirmeler Içeren derecelendirmeler:** Gönderilen gözden geçirme sayısı.
+
+![İş Ortağı Merkezi derecelendirmeleri ve incelemeleri İnceleme Özeti](./media/analyze-ratings-summary.png)
+
+### <a name="review-comments"></a>Açıklamaları gözden geçir
+
+İncelemeler, ne zaman nakledildiğini kronolojik sırada görüntülenir. Varsayılan görünüm tüm incelemeleri görüntüler. Açılır menüdeki **filtreyi** kullanarak, yıldıza göre gözden geçirmeler aracılığıyla filtre uygulayabilirsiniz. İnceleme içinde görüntülenen anahtar sözcükleri de arayabilirsiniz.  
+
+![İş Ortağı Merkezi İnceleme açıklamalarını çözümle](./media/analyze-reviews.png)
+
+## <a name="frequently-asked-questions"></a>Sık Sorulan Sorular
+
+Bu bölümde, Iş Ortağı Merkezi 'nde **henüz analiz yok** iletisi bulunmayan sorular hakkında sık sorulan sorulara yanıtlar verilmektedir.
+
+**Iş Ortağı Merkezi 'nde Analytics verilerimi görüntüleyemiyorum. Bu sayfalara erişirken aşağıdaki iletiyi görüyorum. Bunun nedeni nedir?**
+
+![Henüz tekliflerinizi için veri yok](./media/analytics-faq-no-data.png)
+
+Bu iletiyi neden alabilirsiniz:
+
+- Market 'te listelenen tekliflerinizi SaaS teklifleri değildir. Şu anda Iş ortağı merkezi yalnızca SaaS teklifleri için analiz raporlar. Dynamics 365 teklifleri iş ortağı merkezi 'nde yayımlanabilir, ancak bu tekliflere ait analizler henüz iş ortağı merkezi 'nde etkin değildir.
+- Market 'teki yayımlanmış tekliflerinizin Şu anda bir alım yok. Bu, tekliflerinizin Market 'te canlı olması ve ürün görüntüleme sayfalarındaki müşterilerden görünüm elde etmesinin yanı sıra müşterilerin satın alma ve dağıtma eylemi gerçekleştirmemiş olması anlamına gelir.
+- Teklifinizin yayımlanması sürecinde olabilir ve henüz canlı değildir. Müşteriler tarafından yalnızca canlı tekliflerle elde edilebilir. Tekliflerinizin durumunu denetlemek için bkz. [analiz panosunda](https://partner.microsoft.com/dashboard/commercial-marketplace/analytics/summary)genel bakış. Daha fazla bilgi için bu makaledeki [Özet Panosu](#summary-dashboard) ' na bakın.
+- Tekliflerinizin yalnızca liste teklifleri olan ve Market 'teki müşteriler tarafından satın alınamamakta olan **benimle Iletişim kurmak**üzere listelenmiş olabilir. Bu teklif, müşteri adayları oluşturur ve sizinle paylaşılır, ancak satın alınamazlar, bu teklifler için Siparişler oluşturulmaz. Teklif listesi türünü denetlemek için kurulum sayfasına gidin.
+
+**Analytics verilerine sahip olduğumu biliyorum, ancak aşağıdaki ileti görünür:**
+
+![Belirtilen tarih aralığı için veri yok](./media/analytics-faq-data-range.png)
+
+Bu iletiyi alıyorsanız, analiz verileriniz vardır ancak seçtiğiniz tarih aralığı için veri yok demektir. 2010 sonrasındaki verileri görüntülemek için farklı bir tarih aralığı veya özel tarih aralığı seçin. Daha fazla bilgi için bkz. [Tarih aralığı](#date-range).

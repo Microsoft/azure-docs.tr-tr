@@ -1,6 +1,6 @@
 ---
-title: Güvenlik işlemleri Microsoft Graph Security - Azure Logic Apps ile tümleştirme
-description: Microsoft Graph güvenlik ve Azure Logic Apps ile güvenlik işlemlerini yöneterek uygulamanızın tehdit koruması, algılama ve yanıt özellikleri geliştirin
+title: Güvenlik işlemlerini tümleştirin ve yönetin-Azure Logic Apps & Microsoft Graph güvenliği
+description: Microsoft Graph güvenlik & ile uygulamanızın tehdit korumasını, algılamayı ve yanıtını geliştirebilirsiniz Azure Logic Apps
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -10,108 +10,108 @@ ms.reviewer: klam, estfan, LADocs
 ms.topic: article
 ms.date: 01/30/2019
 tags: connectors
-ms.openlocfilehash: 24963a35bc3e54b2d140bf4ed1d169b213bd9b2a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 845f57d84f49bdd964cc6f61790faff093f59466
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60448062"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72679088"
 ---
-# <a name="improve-threat-protection-by-integrating-security-operations-with-microsoft-graph-security--azure-logic-apps"></a>Tehdit koruması güvenlik işlemleri Microsoft Graph güvenlik ve Azure Logic Apps ile tümleştirerek geliştirin
+# <a name="improve-threat-protection-by-integrating-security-operations-with-microsoft-graph-security--azure-logic-apps"></a>Güvenlik işlemlerini Microsoft Graph güvenlik & tümleştirerek tehdit korumasını geliştirebilirsiniz Azure Logic Apps
 
-İle [Azure Logic Apps](../logic-apps/logic-apps-overview.md) ve [Microsoft Graph güvenlik](https://docs.microsoft.com/graph/security-concept-overview) Bağlayıcısı, uygulamanızı nasıl algıladığı artırabilir, korur ve tehditleri Microsoft tümleştirme için otomatik iş akışları oluşturarak yanıt verir. güvenlik ürünleri, hizmetleri ve iş ortakları. Örneğin, oluşturabileceğiniz [Azure Güvenlik Merkezi playbook'ları](../security-center/security-center-playbooks.md) , izleme ve uyarılar gibi Microsoft Graph güvenlik varlıkları yönetme. Microsoft Graph güvenlik bağlayıcı tarafından desteklenen bazı senaryolar aşağıda verilmiştir:
+[Azure Logic Apps](../logic-apps/logic-apps-overview.md) ve [Microsoft Graph güvenlik](https://docs.microsoft.com/graph/security-concept-overview) Bağlayıcısı sayesinde, Microsoft güvenlik ürünleri, hizmetleri ve iş ortaklarının tümleştirilmesine yönelik otomatik iş akışları oluşturarak uygulamanızın tehditleri nasıl algıladığı, koruduğunu ve yanıtladığını artırabilirsiniz. Örneğin, uyarılar gibi Microsoft Graph güvenlik varlıklarını izleyen ve yöneten [Azure Güvenlik Merkezi oyun kitapları](../security-center/security-center-playbooks.md) oluşturabilirsiniz. Microsoft Graph güvenlik Bağlayıcısı tarafından desteklenen bazı senaryolar aşağıda verilmiştir:
 
-* Sorguları veya uyarı kimliğine göre temel uyarılar alın Örneğin, yüksek önem düzeyindeki uyarılar içeren bir listesini alabilirsiniz.
-* Uyarılar güncelleştirin. Örneğin, atama, uyarılar için açıklama ekleme veya uyarıları etiket uyarı güncelleştirebilirsiniz.
-* İzleme, uyarılar oluşturulduğunda veya oluşturarak değiştirilen [uyarı abonelikleri (Web kancaları)](https://docs.microsoft.com/graph/api/resources/webhooks).
-* Uyarı aboneliklerinizi yönetin. Örneğin, etkin abonelikleri Al, bir abonelik için kullanım süresi sonu genişletmek veya abonelikleri silin.
+* Sorguları veya uyarı KIMLIĞINE göre uyarıları alın. Örneğin, yüksek önem derecesi uyarıları içeren bir liste alabilirsiniz.
+* Uyarıları güncelleştirin. Örneğin, uyarı atamalarını güncelleştirebilir, uyarılara yorum ekleyebilir veya uyarıları etiketleyebilir.
+* [Uyarı abonelikleri (Web kancaları)](https://docs.microsoft.com/graph/api/resources/webhooks)oluşturarak uyarıların ne zaman oluşturulduğunu veya değiştirildiğini izler.
+* Uyarı aboneliklerinizi yönetin. Örneğin, etkin abonelikler alabilir, bir aboneliğin süre sonu süresini genişletebilir veya abonelikleri silebilirsiniz.
 
-Mantıksal uygulamanızın iş akışı, Microsoft Graph güvenlik bağlayıcısından yanıtları alın ve bu çıktı, iş akışınızı diğer eylemler için kullanılabilir hale eylemlerini kullanabilirsiniz. Diğer Eylemler, iş akışı Kullanımdaki Microsoft Graph güvenlik bağlayıcı eylemleri çıktısı da olabilir. Microsoft Graph Security Bağlayıcısı yüksek öneme sahip uyarılar alın, örneğin, bu Uyarıları e-posta iletisinde Outlook Bağlayıcısı'nı kullanarak gönderebilirsiniz. 
+Mantıksal uygulamanızın iş akışı, Microsoft Graph güvenlik bağlayıcısından yanıt alan eylemleri kullanabilir ve bu çıktıyı iş akışınızda diğer eylemler için kullanılabilir hale getirir. Ayrıca, iş akışınızda başka eylemlere de sahip olabilirsiniz Microsoft Graph güvenlik Bağlayıcısı eylemleriyle çıktıyı kullanın. Örneğin, Microsoft Graph güvenlik Bağlayıcısı aracılığıyla yüksek önem derecesine sahip uyarılar alırsanız, bu uyarıları Outlook bağlayıcısını kullanarak bir e-posta iletisiyle gönderebilirsiniz. 
 
-Microsoft Graph güvenlik hakkında daha fazla bilgi için bkz: [Microsoft Graph güvenlik API'sine genel bakış](https://aka.ms/graphsecuritydocs). Logic apps kullanmaya yeni başladıysanız gözden [Azure Logic Apps nedir?](../logic-apps/logic-apps-overview.md). Microsoft Flow veya PowerApps için arıyorsanız bkz [Flow nedir?](https://flow.microsoft.com/) veya [PowerApps nedir?](https://powerapps.microsoft.com/)
+Microsoft Graph güvenliği hakkında daha fazla bilgi edinmek için [Microsoft Graph güvenlik API 'sine genel bakış](https://aka.ms/graphsecuritydocs)bölümüne bakın. Logic Apps 'e yeni başladıysanız [ne Azure Logic Apps? ne olduğunu](../logic-apps/logic-apps-overview.md)gözden geçirin. Microsoft Flow veya PowerApps arıyorsanız bkz. [Flow nedir?](https://flow.microsoft.com/) veya [PowerApps nedir?](https://powerapps.microsoft.com/)
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 * Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/). 
 
-* Microsoft Graph güvenlik bağlayıcıyı kullanmak için olmalıdır *açıkça belirtilen* parçası olan Azure Active Directory (AD) Kiracı yönetici onayı, [Microsoft Graph güvenlik kimlik doğrulama gereksinimleri ](https://aka.ms/graphsecurityauth). Microsoft Graph güvenlik bağlayıcı'nın uygulama kimliği ve ayrıca bulabileceğiniz adı, bu onayı gerektirir [Azure portalında](https://portal.azure.com):
+* Microsoft Graph güvenlik bağlayıcısını kullanmak için, [Microsoft Graph güvenlik kimlik doğrulama gereksinimlerinin](https://aka.ms/graphsecurityauth)bir parçası olan, *AÇıKÇA* Azure Active Directory (ad) Kiracı Yöneticisi onay vermiş olmanız gerekir. Bu onay, Microsoft Graph güvenlik bağlayıcısının uygulama KIMLIĞI ve adının yanı sıra [Azure Portal](https://portal.azure.com)de bulabileceğinizi gerektirir:
 
    | Özellik | Değer |
    |----------|-------|
    | **Uygulama adı** | `MicrosoftGraphSecurityConnector` |
-   | **Uygulama Kimliği** | `c4829704-0edc-4c3d-a347-7c4a67586f3c` |
+   | **Uygulama KIMLIĞI** | `c4829704-0edc-4c3d-a347-7c4a67586f3c` |
    |||
 
-   Bağlayıcı için izin vermek için Azure AD Kiracı yöneticinizle ya da şu adımları izleyin:
+   Bağlayıcıya izin vermek için, Azure AD kiracı yöneticiniz aşağıdaki adımları izleyebilir:
 
-   * [Azure AD uygulamaları için Kiracı yönetici izni verme](../active-directory/develop/v2-permissions-and-consent.md).
+   * [Azure AD uygulamaları için kiracı yöneticisine Izin verin](../active-directory/develop/v2-permissions-and-consent.md).
 
-   * Mantıksal uygulamanızın ilk çalıştırma sırasında Azure AD Kiracı yöneticiniz gelen, onay uygulamanızı isteyebilir [uygulama onay deneyiminde](../active-directory/develop/application-consent-experience.md).
+   * Mantıksal uygulamanızın ilk çalıştırıldığı sırada, [uygulamanız uygulama onayı deneyimi](../active-directory/develop/application-consent-experience.md)aracılığıyla Azure AD kiracı yöneticinizden izin isteyebilir.
    
-* Hakkında temel bilgilere [mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+* [Mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md) hakkında temel bilgi
 
-* Uyarıları gibi Microsoft Graph güvenlik varlıklarınızı erişmek istediğiniz mantıksal uygulaması. Şu anda bu bağlayıcı, tetikleyici vardır. Bu nedenle, Microsoft Graph güvenlik eylemi kullanmak için mantıksal uygulamanızın bir tetikleyici ile örneğin başlatın, **yinelenme** tetikleyici.
+* Uyarılar gibi Microsoft Graph güvenlik varlıklarınıza erişmek istediğiniz mantıksal uygulama. Şu anda bu bağlayıcının tetikleyicisi yok. Bu nedenle, Microsoft Graph bir güvenlik eylemi kullanmak için, mantıksal uygulamanızı bir tetikleyici ile başlatın, örneğin **yineleme** tetikleyicisi.
 
-## <a name="connect-to-microsoft-graph-security"></a>Microsoft Graph Security'ye bağlama 
+## <a name="connect-to-microsoft-graph-security"></a>Microsoft Graph güvenliğine bağlanma 
 
 [!INCLUDE [Create connection general intro](../../includes/connectors-create-connection-general-intro.md)]
 
-1. Oturum [Azure portalında](https://portal.azure.com/)ve Logic Apps Tasarımcısı'nda mantıksal uygulamanızı açın, açık değilse.
+1. [Azure Portal](https://portal.azure.com/)oturum açın ve daha önce açık değilse mantıksal uygulama Tasarımcısı 'nda mantıksal uygulamanızı açın.
 
-1. Boş mantıksal uygulama için tetikleyici ve Microsoft Graph güvenlik eylemi eklemeden önce istediğiniz herhangi bir eylem ekleyin.
+1. Boş Logic Apps için, Microsoft Graph bir güvenlik eylemi eklemeden önce tetikleyiciyi ve istediğiniz diğer eylemleri ekleyin.
 
-   veya
+   -veya-
 
-   Var olan mantıksal uygulamalar, son adım, bir Microsoft Graph güvenlik eylem eklemek istediğiniz altında seçin için **yeni adım**.
+   Mevcut Logic Apps için, Microsoft Graph güvenlik eylemi eklemek istediğiniz son adım altında **yeni adım**' ı seçin.
 
-   veya
+   -veya-
 
-   Adımlar arasında bir eylem eklemek için işaretçinizi adımlar arasındaki okun üzerine getirin. 
-   Görünür ve seçin, artı (+) seçin **Eylem Ekle**.
+   Adımlar arasında bir eylem eklemek için, işaretçinizi adımlar arasındaki oka taşıyın. 
+   Görüntülenen artı işaretini (+) seçin ve **Eylem Ekle**' yi seçin.
 
-1. Arama kutusuna filtreniz olarak "microsoft graph güvenliği" girin. Eylem listesinden istediğiniz eylemi seçin.
+1. Arama kutusuna filtreniz olarak "Microsoft Graph Security" yazın. Eylemler listesinden istediğiniz eylemi seçin.
 
 1. Microsoft Graph güvenlik kimlik bilgilerinizle oturum açın.
 
-1. Seçili eyleminiz için gerekli bilgileri sağlayın ve mantıksal uygulamanızın iş akışı oluşturmaya devam edin.
+1. Seçtiğiniz eyleminiz için gerekli ayrıntıları sağlayın ve mantıksal uygulamanızın iş akışını oluşturmaya devam edin.
 
-## <a name="add-actions"></a>Eylemler ekleyin
+## <a name="add-actions"></a>Eylem ekleme
 
-Kullanılabilir eylemler Microsoft Graph güvenlik Bağlayıcısı ile kullanma hakkında daha özel ayrıntılar aşağıda verilmiştir.
+Microsoft Graph güvenlik Bağlayıcısı ile kullanılabilen çeşitli eylemleri kullanma hakkında daha ayrıntılı bilgiler aşağıda verilmiştir.
 
 ### <a name="manage-alerts"></a>Uyarıları yönetme
 
-Filtre uygulamak için sıralama, veya en son sonuçlar elde edin, sağlayın *yalnızca* [Microsoft Graph tarafından desteklenen ODATA sorgu parametrelerini](https://docs.microsoft.com/graph/query-parameters). *Belirtmeyin* tam temel URL'yi veya örneğin, HTTP eylemi `https://graph.microsoft.com/v1.0/security/alerts`, veya `GET` veya `PATCH` işlemi. Parametrelerini gösteren belirli bir örnek bir **uyarıları alma** yüksek önem düzeyindeki uyarılar listesiyle istediğinizde eylem:
+En son sonuçları filtrelemek, sıralamak veya almak için *yalnızca* [Microsoft Graph tarafından desteklenen OData sorgu parametrelerini](https://docs.microsoft.com/graph/query-parameters)sağlayın. Tüm temel URL 'YI veya HTTP eylemini (örneğin, `https://graph.microsoft.com/v1.0/security/alerts` veya `GET` veya `PATCH` işlemi) *belirtmeyin* . Yüksek önem derecesine sahip bir liste istediğinizde, **uyarıları al** eyleminin parametrelerini gösteren belirli bir örnek aşağıda verilmiştir:
 
 `Filter alerts value as Severity eq 'high'`
 
-Bu bağlayıcı ile kullanabileceğiniz sorguları hakkında daha fazla bilgi için bkz. [Microsoft Graph güvenlik uyarıları başvuru belgeleri](https://docs.microsoft.com/graph/api/alert-list). Bu bağlayıcı ile Gelişmiş deneyimler oluşturmak üzere daha fazla bilgi edinin [şema özellikleri uyarılar](https://docs.microsoft.com/graph/api/resources/alert) , bir bağlayıcıyı destekler.
+Bu bağlayıcı ile kullanabileceğiniz sorgular hakkında daha fazla bilgi için [Microsoft Graph güvenlik uyarıları başvuru belgelerine](https://docs.microsoft.com/graph/api/alert-list)bakın. Bu bağlayıcıyla ilgili gelişmiş deneyimler oluşturmak için bağlayıcının desteklediği [şema özellikleri uyarıları](https://docs.microsoft.com/graph/api/resources/alert) hakkında daha fazla bilgi edinin.
 
 | Eylem | Açıklama |
 |--------|-------------|
-| **Uyarılar alın** | Get göre filtrelenmiş bir veya daha fazla uyarı [uyarı özellikleri](https://docs.microsoft.com/graph/api/resources/alert), örneğin: <p>`Provider eq 'Azure Security Center' or 'Palo Alto Networks'` | 
-| **Uyarı Kimliğine göre Al** | Uyarı Kimliği temel alınarak belirli bir uyarı alma | 
-| **Güncelleştirme uyarısı** | Uyarı Kimliği temel alınarak belirli bir uyarı güncelleştirme <p>Gerekli ve düzenlenebilir özellikler İsteğinizde geçirdiğinizden emin olmak için bkz. [uyarılar için düzenlenebilir özellikler](https://docs.microsoft.com/graph/api/alert-update). Örneğin, bunlar araştırmak için bir güvenlik analisti bir uyarı atamak için uyarının güncelleştirebilirsiniz **atanan** özelliği. |
+| **Uyarıları al** | Bir veya daha fazla [Uyarı özelliklerine](https://docs.microsoft.com/graph/api/resources/alert)göre filtrelenmiş uyarıları alın, örneğin: <p>`Provider eq 'Azure Security Center' or 'Palo Alto Networks'` | 
+| **KIMLIĞE göre uyarı al** | Uyarı KIMLIğINE bağlı olarak belirli bir uyarı alın. | 
+| **Uyarıyı Güncelleştir** | Uyarı KIMLIĞINE göre belirli bir uyarıyı güncelleştirin. <p>İsteğinize gerekli ve düzenlenebilir özellikleri geçirdiğinizden emin olmak için, [Uyarılar için düzenlenebilir özelliklere](https://docs.microsoft.com/graph/api/alert-update)bakın. Örneğin, araştırabilmeleri için bir güvenlik analiste uyarı atamak üzere uyarının **atanmış** özelliğini güncelleştirebilirsiniz. |
 |||
 
-### <a name="manage-alert-subscriptions"></a>Uyarı abonelikleri yönetme
+### <a name="manage-alert-subscriptions"></a>Uyarı aboneliklerini yönetme
 
-Microsoft Graph'ı destekleyen [ *abonelikleri*](https://docs.microsoft.com/graph/api/resources/subscription), veya [ *Web kancaları*](https://docs.microsoft.com/graph/api/resources/webhooks). Almak için güncelleştirme veya abonelikleri silin, sağlayın [Microsoft Graph tarafından desteklenen ODATA sorgu parametrelerini](https://docs.microsoft.com/graph/query-parameters) Microsoft Graph varlık oluşturun ve dahil `security/alerts` ODATA sorgu tarafından izlenen. 
-*İçerme* temel URL'si, örneğin, `https://graph.microsoft.com/v1.0`. Bunun yerine, bu örnekte biçimi kullanın:
+Microsoft Graph [*abonelikleri*](https://docs.microsoft.com/graph/api/resources/subscription)veya [*Web kancalarını*](https://docs.microsoft.com/graph/api/resources/webhooks)destekler. Abonelikleri almak, güncelleştirmek veya silmek için [Microsoft Graph tarafından desteklenen OData sorgu parametrelerini](https://docs.microsoft.com/graph/query-parameters) Microsoft Graph varlık yapısına sağlayın ve `security/alerts` ve ardından OData sorgusunu ekleyin. 
+Temel URL 'yi *eklemeyin* , örneğin `https://graph.microsoft.com/v1.0`. Bunun yerine, şu örnekteki biçimi kullanın:
 
 `security/alerts?$filter=status eq 'New'`
 
 | Eylem | Açıklama |
 |--------|-------------|
-| **Abonelik oluşturma** | [Abonelik oluşturma](https://docs.microsoft.com/graph/api/subscription-post-subscriptions) , herhangi bir değişiklik hakkında sizi bilgilendirir. Bu aboneliği istediğiniz belirli uyarı türleri için filtre uygulayabilirsiniz. Örneğin, yüksek öneme sahip uyarılar hakkında uyaran bir aboneliği oluşturabilirsiniz. |
-| **Etkin abonelikleri Al** | [Süresi dolmamış abonelikleri Al](https://docs.microsoft.com/graph/api/subscription-list). | 
-| **Aboneliği güncelleştirme** | [Bir aboneliği güncelleştirme](https://docs.microsoft.com/graph/api/subscription-update) abonelik kimliğini sağlayarak Örneğin, aboneliğinizi genişletmek için aboneliğin güncelleştirebilirsiniz `expirationDateTime` özelliği. | 
-| **Aboneliği silme** | [Aboneliği silme](https://docs.microsoft.com/graph/api/subscription-delete) abonelik kimliğini sağlayarak | 
+| **Abonelik oluşturma** | Herhangi bir değişiklik hakkında size bildirimde bulunan [bir abonelik oluşturun](https://docs.microsoft.com/graph/api/subscription-post-subscriptions) . İstediğiniz belirli uyarı türleri için bu aboneliği filtreleyebilirsiniz. Örneğin, size yüksek önem derecesi uyarıları bildiren bir abonelik oluşturabilirsiniz. |
+| **Etkin abonelikleri al** | Süre [dolmamış abonelikler alın](https://docs.microsoft.com/graph/api/subscription-list). | 
+| **Aboneliği Güncelleştir** | Abonelik KIMLIĞINI sağlayarak [bir aboneliği güncelleştirin](https://docs.microsoft.com/graph/api/subscription-update) . Örneğin, aboneliğinizi genişletmek için, aboneliğin `expirationDateTime` özelliğini güncelleştirebilirsiniz. | 
+| **Aboneliği Sil** | Abonelik KIMLIĞINI sağlayarak [bir aboneliği silin](https://docs.microsoft.com/graph/api/subscription-delete) . | 
 ||| 
 
 ## <a name="connector-reference"></a>Bağlayıcı başvurusu
 
-Tetikleyiciler ve Eylemler sınırları hakkında teknik ayrıntılar için bağlayıcının Openapı'nin açıklanmıştır (önceki adıyla Swagger) açıklama, bağlayıcının gözden [başvuru sayfası](https://aka.ms/graphsecurityconnectorreference).
+Bağlayıcının Openapı (eski adıyla Swagger) açıklaması tarafından tanımlanan Tetikleyiciler, Eylemler ve limitlerle ilgili teknik ayrıntılar için bağlayıcının [başvuru sayfasını](https://aka.ms/graphsecurityconnectorreference)gözden geçirin.
 
 ## <a name="get-support"></a>Destek alın
 
@@ -120,4 +120,4 @@ Sorularınız için [Azure Logic Apps forumunu](https://social.msdn.microsoft.co
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Diğer hakkında bilgi edinin [Logic Apps bağlayıcıları](../connectors/apis-list.md)
+Diğer [Logic Apps bağlayıcıları](../connectors/apis-list.md) hakkında bilgi edinin

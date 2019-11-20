@@ -1,6 +1,6 @@
 ---
-title: BuildingBlocks - Azure Active Directory B2C | Microsoft Docs
-description: Azure Active Directory B2C'de özel bir ilke BuildingBlocks öğesi belirtin.
+title: BuildingBlocks-Azure Active Directory B2C | Microsoft Docs
+description: Azure Active Directory B2C bir özel ilkenin BuildingBlocks öğesini belirtin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 67770661f0660b9a84d16bbbc7d86cfcbca2cfdf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5ab2b11749aa57065a1a4d688b02fed97731ab7c
+ms.sourcegitcommit: c72ddb56b5657b2adeb3c4608c3d4c56e3421f2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66511579"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68464739"
 ---
 # <a name="buildingblocks"></a>BuildingBlocks
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-**BuildingBlocks** öğe içinde eklenen [TrustFrameworkPolicy](trustframeworkpolicy.md) öğesi.
+**Buildingblocks** öğesi [TrustFrameworkPolicy](trustframeworkpolicy.md) öğesinin içine eklenir.
 
 ```XML
 <TrustFrameworkPolicy
@@ -55,21 +55,23 @@ ms.locfileid: "66511579"
  </BuildingBlocks>
 ```
 
-**BuildingBlocks** öğesi tanımlı sırada belirtilen aşağıdaki öğeleri içerir:
+**Buildingblocks** öğesi, tanımlı sırada belirtilmesi gereken aşağıdaki öğeleri içerir:
 
-- [ClaimsSchema](claimsschema.md) -ilkenin bir parçası başvurulabilir talep türlerini tanımlar. Talep şema, talep türleri bildirme burada yerdir. Bir talep türü, birçok programlama dili bir değişkende benzerdir. Özel ilkeniz tarafından kullanılan iç veri depolamak veya uygulamanızın kullanıcıdan veri toplamak, sosyal kimlik sağlayıcılarını talepleri almak, veri göndermek ve özel bir REST API'si almak için talep türünü kullanın. 
+- [Claimsschema](claimsschema.md) -ilkenin bir parçası olarak başvurulabilen talep türlerini tanımlar. Talep şeması, talep türlerinizi bildirdiğiniz yerdir. Talep türü birçok programlama dilinde bir değişkene benzerdir. Uygulamanızın kullanıcısının verilerini toplamak, sosyal kimlik sağlayıcılarından talepler almak, özel bir REST API veri göndermek ve almak veya özel ilkeniz tarafından kullanılan tüm dahili verileri depolamak için talep türünü kullanabilirsiniz. 
 
-- [Koşullar ve PredicateValidationsInput](predicates.md) -düzgün biçimlendirilmiş veriler yalnızca bir talep girildiğinden emin olmak için bir doğrulama işlemi gerçekleştirmenizi sağlar.
+- [Koşullar ve PredicateValidationsInput](predicates.md) -bir talebe yalnızca düzgün biçimlendirilmiş verilerin girildiğinden emin olmak için bir doğrulama işlemi gerçekleştirmenizi sağlar.
  
-- [ClaimsTransformations](claimstransformations.md) -ilkenizde kullanılabilir talep dönüştürmeleri listesini içerir.  Talep dönüştürme bir talep diğerine dönüştürür. Talep dönüştürme bir dönüştürme yöntemi gibi belirtin: 
-    - Belirtilen dize talep durumunu değiştirme. Örneğin, bir dize küçük büyük harf olarak değiştiriliyor.
-    - İki talep karşılaştırma ve bir talep belirten true ile eşleşen talepleri, aksi takdirde false döndüren.
-    - İlkede sağlanan parametre bir dize talep oluşturma.
-    - Rastgele sayı oluşturucusunu kullanarak rastgele bir dize oluşturma.
-    - Bir talep göre sağlanan biçim dizesi biçimlendiriliyor. Bu dönüşüm C# kullanan `String.Format` yöntemi.
+- [Claimstransformations](claimstransformations.md) -ilkenizde kullanılabilecek talep dönüştürmelerinin bir listesini içerir.  Talep dönüştürmesi bir talebi diğerine dönüştürür. Talep dönüşümünde, şöyle bir dönüşüm yöntemi belirtirsiniz: 
+    - Bir dize talebinin durumunu belirtilen bir şekilde değiştirme. Örneğin, bir dizeyi küçük harfle büyük harfe değiştirme.
+    - İki talebi karşılaştırma ve taleplerin eşleştiğini belirten true ile talep döndürme, aksi takdirde false.
+    - İlkede belirtilen parametreden bir dize talebi oluşturuluyor.
+    - Rastgele sayı oluşturucuyu kullanarak rastgele dize oluşturma.
+    - Talep, belirtilen biçim dizesine göre biçimlendiriliyor. Bu dönüşüm C# `String.Format` yöntemini kullanır.
+    
+- Inputvalidation-bu öğe, *ve* ile benzer Boole toplamaları gerçekleştirmenize olanak *tanır.*
 
-- [ContentDefinitions](contentdefinitions.md) -içeren kullanıcı yolculuğunuza kullanılacak URL'leri HTML5 şablonları için. Özel bir ilke içerik tanımı HTML5 sayfa için belirtilen bir kullanıcı yolculuğu adımda kullanılan URI tanımlar. Örneğin, oturum açma veya kaydolma, parola sıfırlama veya hata sayfaları. LoadUri HTML5 dosyası için geçersiz kılarak görünümünü değiştirebilirsiniz. Veya yeni içerik tanımlarını ihtiyaçlarınıza göre oluşturabilirsiniz. Bu öğe bir yerelleştirme kimliği kullanarak yerelleştirilmiş kaynaklar başvuru içerebilir
+- [ContentDefinitions](contentdefinitions.md) -Kullanıcı yolculuğunda kullanmak üzere HTML5 şablonlarının URL 'lerini içerir. Bir özel ilkede, içerik tanımı Kullanıcı yolculuğunda belirtilen bir adım için kullanılan HTML5 sayfa URI 'sini tanımlar. Örneğin, oturum açma veya kaydolma, parola sıfırlama veya hata sayfaları. HTML5 dosyası için LoadUri 'yi geçersiz kılarak görünümü değiştirebilirsiniz. Veya gereksinimlerinize göre yeni içerik tanımları da oluşturabilirsiniz. Bu öğe, yerelleştirme KIMLIĞI kullanılarak yerelleştirilmiş bir kaynak başvurusu içerebilir.
 
-- [Yerelleştirme](localization.md) -birden çok dil desteği sağlar. Varsayılan bir dil seçin ve bir ilkede desteklenen dillerin listesini ayarlayın ilkelerinde yerelleştirme desteğini sağlar. Dile özgü dizeleri ve koleksiyonları da desteklenir.
+- [Yerelleştirme](localization.md) -birden çok dili desteketmenize olanak tanır. İlkelerde yerelleştirme desteği, bir ilkede desteklenen dillerin listesini ayarlamanıza ve varsayılan bir dil seçmenizi sağlar. Dile özgü dizeler ve koleksiyonlar da desteklenir.
 
 

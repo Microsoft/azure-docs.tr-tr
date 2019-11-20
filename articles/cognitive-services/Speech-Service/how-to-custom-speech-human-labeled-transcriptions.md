@@ -1,171 +1,171 @@
 ---
-title: İnsan etiketli döküm yönergeler - konuşma Hizmetleri
-titlesuffix: Azure Cognitive Services
-description: Özellikle sözcükleri silindi veya yanlış yerine, neden olduğu sorunları olan tanıma doğruluğunu artırmak için arıyorsanız İnsan etiketli döküm ses verilerinizi birlikte kullanmak isteyebilirsiniz. İnsan etiketli döküm nedir? Bunu yapmak kolaydır, bir ses dosyasının word sözcüklü, aynen döküm oldukları.
+title: İnsan etiketli döküm yönergeleri-konuşma hizmeti
+titleSuffix: Azure Cognitive Services
+description: Sözcüklerin ne zaman silindiği ya da yanlış kullanıldığı gibi konuşma tanıma doğruluğunu artırmak için, insan etiketli döküm 'yi ses verilerinize birlikte kullanabilirsiniz. İnsan etiketli döküm, bir ses dosyasının sözcük-sözcük, tam olarak yazılı dökümlerdir.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 05/02/2019
+ms.date: 09/06/2019
 ms.author: erhopf
-ms.openlocfilehash: ba6d137a7eb5fc2c56bfc39aa8f831d76411fb46
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1eeb2e7ccf5c365fedd02a8de4c6b442dd3d5bc8
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67060862"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075807"
 ---
-# <a name="how-to-create-human-labeled-transcriptions"></a>İnsan etiketli döküm oluşturma
+# <a name="how-to-create-human-labeled-transcriptions"></a>İnsan etiketlendirmeleri oluşturma
 
-Özellikle sözcükleri silindi veya yanlış yerine, neden olduğu sorunları olan tanıma doğruluğunu artırmak için arıyorsanız İnsan etiketli döküm ses verilerinizi birlikte kullanmak isteyebilirsiniz. İnsan etiketli döküm nedir? Bunu yapmak kolaydır, bir ses dosyasının word sözcüklü, aynen döküm oldukları.
+Tanıma doğruluğunu artırmak istiyorsanız, özellikle sözcüklerin silindiği veya yanlış kullanıldığı durumlarda oluşan sorunlar, insan etiketli dökümlerini ses verilerinize birlikte kullanmak isteyeceksiniz. İnsan etiketli döküm nedir? Bu çok kolay bir deyişle, bir ses dosyasının sözcük sözcük, tam olarak yazılı olduğu bir işlemdir.
 
-Döküm verilerinin büyük bir örnek tanımayı geliştirmek için gereklidir, döküm veri 10 ile 1000 saat arasında sağlama öneririz. Bu sayfada size yüksek kaliteli döküm oluşturmanıza yardımcı olmak için tasarlanan yönergeleri gözden geçirelim. Bu kılavuz, ABD İngilizcesi, Mandarin Çince ve Almanca için bölümleri olan bir yerel ayar tarafından ayrılmıştır.
+Tanımayı geliştirmek için büyük bir döküm verileri örneği gerekir, bu da 10 ila 1.000 saatlik Döküm verileri sağlamayı öneririz. Bu sayfada, yüksek kaliteli dökümler oluşturmanıza yardımcı olmak için tasarlanan yönergeleri inceleyeceğiz. Bu kılavuz, ABD Ingilizcesi, MANDARIN Çince ve Almanca bölümleri ile yerel ayar tarafından bölünmüştür.
 
-## <a name="us-english-en-us"></a>ABD İngilizce (en-US)
+## <a name="us-english-en-us"></a>ABD Ingilizcesi (en-US)
 
-İnsan etiketli döküm İngilizce ses yalnızca ASCII karakterler kullanarak düz metin olarak sağlanmalıdır. Latin-1 ya da Unicode noktalama karakterleri kullanmaktan kaçının. Bu karakterler, metin bir kelime işleme uygulaması veya web sayfalarından veri değiştirilene kopyalarken genellikle istemeden eklenir. Bu karakterler varsa, bunları uygun ASCII değiştirme ile güncelleştirdiğinizden emin olun.
+Ingilizce ses için insan etiketli dökümlerde yalnızca ASCII karakterler kullanılarak düz metin olarak sağlanmalıdır. Latin-1 veya Unicode noktalama karakterleri kullanmaktan kaçının. Bu karakterler genellikle bir sözcük işleme uygulamasından metin kopyalanırken veya Web sayfalarından veri koruma verilerinden yanlışlıkla eklenir. Bu karakterler varsa, bunları uygun ASCII değiştirme ile güncelleştirdiğinizden emin olun.
 
 İşte birkaç örnek:
 
-| Önlemek için karakter | Değiştirme | Notlar |
-|---------------------|--------------|-------|
-| "Hello world" | "Hello world" | Uygun ASCII karakterleri ile açılış ve kapanış tırnak işareti yapıştırıyorsanız. |
-| Can'ın gün | Can'ın gün | Kesme işareti uygun ASCII karakteri ile değiştirdi. |
-| iyi — Hayır, harika! | en iyi--, harika! | Em dash iki kısa çizgi ile kullanıldı. |
+| Kaçınacak karakterler | Değiştirme | Notlar |
+| ------------------- | ------------ | ----- |
+| "Merhaba Dünya" | "Merhaba Dünya" | Açma ve kapatma tırnak işaretleri, uygun ASCII karakterleriyle değiştirilmiştir. |
+| John 'un günü | John 'un günü | Kesme işareti uygun ASCII karakteriyle değiştirildi. |
+| Her şey iyi değildi. harika! | iyi--Hayır, harika! | Em Dash iki kısa çizgi ile değiştirildi. |
 
-### <a name="text-normalization-for-us-english"></a>ABD İngilizcesi için metin normalleştirme
+### <a name="text-normalization-for-us-english"></a>ABD Ingilizcesi için metin normalleştirme
 
-Sözcük bir modeli eğitimindeki kullanılan tutarlı bir biçime metin normalleştirme dönüşümdür. Bazı normalleştirme kuralları metni otomatik olarak uygulanır, ancak, İnsan etiketli transkripsiyonu verilerinizi hazırlanırken bu yönergeleri kullanmanızı öneririz:
+Metin normalleştirme, bir modeli eğitmek için kullanılan tutarlı bir biçime sözcüklerin dönüştürülmesine sahiptir. Bazı normalleştirme kuralları metne otomatik olarak uygulanır; ancak, insan etiketli döküm verilerini hazırlarken bu yönergelerin kullanılmasını öneririz:
 
-* Sözcük içindeki kısaltmalar dışarı yazın.
-* Standart sayısal dizeler sözcük (örneğin, muhasebe koşulları) dışarı yazın.
-* Alfabetik olmayan karakterler veya karma alfasayısal karakterler belirgin olarak transcribed.
-* Sözcükler olarak telaffuz kısaltmaları (örneğin, "radar", "lazer", "RAM" veya "NATO") düzenlenebilir olmamalıdır.
-* Bir boşluk ile ayrılan her bir harfle ayrı harf olarak telaffuz kısaltmalar çıkış yazma.
+- Sözcüklerdeki kısaltmaları yazın.
+- Sözcüklerdeki standart olmayan sayısal dizeleri (muhasebe terimleri gibi) yazın.
+- Alfabetik olmayan karakterler veya karışık alfasayısal karakterler aynı şekilde yerleştirilmelidir.
+- Sözcüklerin düzenlenmemesi gereken kısaltmalar ("Radar", "lazer", "RAM" veya "NATO" gibi).
+- Boşlukla ayrılmış olarak, her bir harfle ayrı harfler olarak uygulanan kısaltmalar yazın.
 
-Döküm üzerinde gerçekleştirmeniz gereken normalleştirme bazı örnekleri aşağıda verilmiştir:
+Aşağıda, bir dökümde gerçekleştirmeniz gereken normalleştirmenin birkaç örneği verilmiştir:
 
-| Orijinal metni | Normalleştirme sonra gelen metin |
-|---------------|--------------------------|
-| Dr. Bruce başlığı | Hastanede Bruce başlığı |
-| James Bond, 007 | James Bond çift oh yedi |
-| Ke$ha | Kesha |
-| 2 x 4 ne kadardır | Tarafından iki dört ne kadardır |
-| 1-3'te gelen toplantı gider | Bir ila üç pm toplantı gider |
-| My tansiyon O + türüdür | O pozitif My tansiyon türüdür |
-| Su H20 olduğu | Su H 2 O olduğu |
-| Van Halen tarafından OU812 Yürüt | O U Van Halen 8 1 2 Yürüt |
-| BOM ile UTF-8 | BOM ile U T F 8 |
+| Özgün metin               | Normalleştirme sonrası metin              |
+| --------------------------- | ------------------------------------- |
+| Dr. Bruce başlığı            | Doctor Bruce başlığı                   |
+| James Bononu, 007             | James bonu, Çift Oh           |
+| Ke $ ha                       | Kesha                                 |
+| 2x4 ne kadar süre         | Ne kadar ikisi dört ile           |
+| Toplantı 1-3pm 'den geçer | Toplantı bir ile üç PM arasında gider |
+| Kan türü O +         | Kan türü O pozitif           |
+| Su H20                | Su, H 2 O                        |
+| Van Halen tarafından OU812 Yürüt     | Van Halen tarafından e U 8 1 2 çal           |
+| BOM ile UTF-8              | BOM ile U T F 8                      |
 
-Aşağıdaki normalleştirme kuralları, otomatik döküm için uygulanır:
+Aşağıdaki normalleştirme kuralları, dökümlere otomatik olarak uygulanır:
 
-* Küçük harf kullanın.
-* Tüm noktalama dışında sözcük içinde kesme kaldırın.
-* Tutarlara gibi sözcükler ve konuşma form içine numaraları genişletin.
+- Küçük harfler kullanın.
+- Sözcüklerin içinde kesme işareti dışında tüm noktalama işaretlerini kaldırın.
+- Sayıları, dolar tutarları gibi sözcükler/konuşulan bir biçimde genişletin.
 
-Normalleştirme transkripsiyonu üzerinde otomatik olarak gerçekleştirilen bazı örnekleri aşağıda verilmiştir:
+Bu, otomatik olarak dökümde gerçekleştirilen normalleştirme örnekleri aşağıda verilmiştir:
 
-| Orijinal metni | Normalleştirme sonra gelen metin |
-|---------------|--------------------------|
-| "Muhteşem inek!" söz konusu Batman. | Muhteşem inek batman dedi. |
-| "Ne olacak?" söz konusu Batman'ın sidekick, bir kez deneme. | hangi söz konusu batman'ın sidekick bir kez deneme |
-| Git - em alın! | go get em |
-| Double-jointed istiyorum | Çift jointed istiyorum |
-| 104 Elm Street | bir oh dört istasyon Sokak |
-| 102\.7 için ayarlama | bir oh ayarlama iki yedi |
-| PI hakkında 3,14 olan | Pi yaklaşık üç noktası bir dört olduğu |
-$3.14 maliyetleri| üç on dört maliyetleri |
+| Özgün metin                          | Normalleştirme sonrası metin          |
+| -------------------------------------- | --------------------------------- |
+| "Kutsal Cow!" Batman diyor.               | Kutsal inek diyor Batman              |
+| "Ne?" Batman 'ın sidekick, deneme olduğunu diyor. | Batman 'ın Sidekick 'in bir kez deneme olduğu söylenebilir |
+| Go al-em!                            | Git Get em                         |
+| Ben Double Jointed                     | Ben Double Jointed                |
+| 104 ağaç Caddesi                         | 1 0 4 ağaç Caddesi            |
+| 102,7 olarak ayarla                          | 1 0 2 noktası yedi olarak ayarlayın    |
+| PI yaklaşık 3,14                       | Pi üç nokta 1 4  |
+| BT maliyetleri \$3,14                        | BT maliyetleri 3 14           |
 
 ## <a name="mandarin-chinese-zh-cn"></a>Mandarin Çince (zh-CN)
 
-İnsan etiketli döküm Mandarin Çince ses için UTF-8 bayt sırası işaretçisi ile kodlanmış olmalıdır. Yarım genişlikteki noktalama karakterleri kullanmaktan kaçının. Bir sözcük program uygulamasında veri hazırlama veya web sayfalarından veri scrape şu karakterleri yanlışlıkla dahil edilebilir. Bu karakterler varsa, bunları uygun tam genişlikli değiştirme ile güncelleştirdiğinizden emin olun.
+Mandarin Çin seslerinin insan etiketli dökümlerinin, bir bayt sırası işaretleyicisi ile UTF-8 kodlu olması gerekir. Yarı genişlikte noktalama karakterleri kullanmaktan kaçının. Bu karakterler, verileri bir kelime işleme programında veya Web sayfalarından bir atık olarak hazırlarken, yanlışlıkla dahil edilebilir. Bu karakterler varsa, bunları uygun tam genişlikteki değiştirme ile güncelleştirdiğinizden emin olun.
 
 İşte birkaç örnek:
 
-| Önlemek için karakter | Değiştirme | Notlar |
-|---------------------|--------------|-------|
-| "你好" | "你好" | Uygun karakterlerle açılış ve kapanış tırnak işareti yapıştırıyorsanız. |
-| 需要什么帮助? | 需要什么帮助？ | Soru işareti uygun karakteri ile değiştirdi. |
+| Kaçınacak karakterler | Değiştirme   | Notlar |
+| ------------------- | -------------- | ----- |
+| "你好" | "你好" | Açma ve kapatma tırnak işaretleri, uygun karakterlerle değiştirildi. |
+| 需要什么帮助? | 需要什么帮助?| Soru işareti uygun karakterle değiştirildi. |
 
 ### <a name="text-normalization-for-mandarin-chinese"></a>Mandarin Çince için metin normalleştirme
 
-Sözcük bir modeli eğitimindeki kullanılan tutarlı bir biçime metin normalleştirme dönüşümdür. Bazı normalleştirme kuralları metni otomatik olarak uygulanır, ancak, İnsan etiketli transkripsiyonu verilerinizi hazırlanırken bu yönergeleri kullanmanızı öneririz:
+Metin normalleştirme, bir modeli eğitmek için kullanılan tutarlı bir biçime sözcüklerin dönüştürülmesine sahiptir. Bazı normalleştirme kuralları metne otomatik olarak uygulanır; ancak, insan etiketli döküm verilerini hazırlarken bu yönergelerin kullanılmasını öneririz:
 
-* Sözcük içindeki kısaltmalar dışarı yazın.
-* Sayısal dizeler sözlü biçimde dışarı yazın.
+- Sözcüklerdeki kısaltmaları yazın.
+- Sayısal dizeleri konuşulan biçimde yazın.
 
-Döküm üzerinde gerçekleştirmeniz gereken normalleştirme bazı örnekleri aşağıda verilmiştir:
+Aşağıda, bir dökümde gerçekleştirmeniz gereken normalleştirmenin birkaç örneği verilmiştir:
 
-| Orijinal metni | Normalleştirme sonra gelen metin |
-|---------------|--------------------------|
-| 我今年21 | 我今年二十一 |
-| 3号楼504 | 三号 楼 五 零 四 |
+| Özgün metin | Normalleştirme sonrası metin |
+| ------------- | ------------------------ |
+| 我今年 21 | 我今年二十一 |
+| 3 号楼 504 | 三号 楼 五 零 四 |
 
-Aşağıdaki normalleştirme kuralları, otomatik döküm için uygulanır:
+Aşağıdaki normalleştirme kuralları, dökümlere otomatik olarak uygulanır:
 
-* Tüm noktalama işaretlerini kaldırın
-* Konuşulan forma sayı genişletin
-* Tam genişlikli harfleri yarım genişlik için Dönüştür
-* Büyük harfler için tüm Türkçe kelimeler kullanarak
+- Tüm noktalama işaretlerini kaldır
+- Rakamları konuşulan biçime Genişlet
+- Tam genişlikli harfleri yarı genişlik mektuplarına Dönüştür
+- Tüm Ingilizce kelimeler için büyük harfler kullanma
 
-Normalleştirme transkripsiyonu üzerinde otomatik olarak gerçekleştirilen bazı örnekleri aşağıda verilmiştir:
+Bu, otomatik olarak dökümde gerçekleştirilen normalleştirme örnekleri aşağıda verilmiştir:
 
-| Orijinal metni | Normalleştirme sonra gelen metin |
-|---------------|--------------------------|
-| 3.1415 | 三 点 一 四 一 五 |
-| ￥3.5 | 三 元 五 角 |
-| w f y z |W F Y, Z |
-| 1992年8月8日 | 一 九 九 二 年 八 月 八 日 |
+| Özgün metin | Normalleştirme sonrası metin |
+| ------------- | ------------------------ |
+| 3,1415 | 三 点 一 四 一 五 |
+| ¥3,5 | 三 元 五 角 |
+| w f y z | W F Y Z |
+| 1992 年 8 月 8 日 | 一 九 九 二 年 八 月 八 日 |
 | 你吃饭了吗? | 你 吃饭 了 吗 |
-| 下午5:00的航班 | 下午 五点 的 航班 |
-| 我今年21岁 | 我 今年 二十 一 岁 |
+| 下午 5:00 的航班 | 下午 五点 的 航班 |
+| 我今年 21 岁 | 我 今年 二十 一 岁 |
 
 ## <a name="german-de-de-and-other-languages"></a>Almanca (de-DE) ve diğer diller
 
-İnsan etiketli döküm Almanca ses (ve diğer İngilizce olmayan veya Mandarin Çince dil), UTF-8 bayt sırası işaretçisi ile kodlanmış olmalıdır. Her ses dosyası için bir insan etiketli döküm sağlanmalıdır.
+Almanya ses (ve Ingilizce olmayan veya Mandarin Çince dilleri) için insan etiketli döküm, bir bayt düzeni işaretleyicisi ile UTF-8 ile kodlanmış olmalıdır. Her ses dosyası için bir insan etiketli yazılı döküm sağlanmalıdır.
 
 ### <a name="text-normalization-for-german"></a>Almanca için metin normalleştirme
 
-Sözcük bir modeli eğitimindeki kullanılan tutarlı bir biçime metin normalleştirme dönüşümdür. Bazı normalleştirme kuralları metni otomatik olarak uygulanır, ancak, İnsan etiketli transkripsiyonu verilerinizi hazırlanırken bu yönergeleri kullanmanızı öneririz:
+Metin normalleştirme, bir modeli eğitmek için kullanılan tutarlı bir biçime sözcüklerin dönüştürülmesine sahiptir. Bazı normalleştirme kuralları metne otomatik olarak uygulanır; ancak, insan etiketli döküm verilerini hazırlarken bu yönergelerin kullanılmasını öneririz:
 
-*   Ondalık noktası olarak yazma ","ve".".
-*   Yazma saat ayırıcısı olarak ":"ve"." (örneğin: 12:00 Uhr).
-*   Kısaltmalar gibi "ca". Değiştirilen değildir. Tam konuşulan biçimini kullanmanızı öneririz.
-*   Dört ana matematik işleçleri (+, -, \*, ve /) kaldırılır. Yazılı biçime ile değiştirmeden öneririz: "Ayrıca," "eksi," "kötü" ve "geteilt."
-*   Karşılaştırma işleçleri kaldırılır (=, <, ve >). "Gleich ile" değiştirmeden öneririz "kleiner als," ve "grösser als."
-*   3/4 gibi kesirler yazılı biçiminde yazın (örneğin: "drei viertel" 3/4 yerine).
-*   Alt yazılı biçime "Euro." ile "€" simgesini değiştirme
+- Ondalık noktaları "," olarak yazın ve "." değil.
+- Zaman ayırıcıları ":" olarak yazın ve "." olarak yazın. (örneğin: 12:00 Uhr).
+- "CA" gibi kısaltmalar. değiştirilmez. Tam konuşulan formu kullanmanızı öneririz.
+- Dört ana matematik işleci (+,-, \*ve/) kaldırılır. "Plus", "", "" yanlış "ve" geteilt "yazılı formuyla değiştirmeniz önerilir.
+- Karşılaştırma işleçleri kaldırılır (=, < ve >). Bunları "Gleich," "Kleiner ALS" ve "grösser ALS" ile değiştirmeniz önerilir.
+- Yazılan biçimde 3/4 gibi kesirleri yazın (örneğin, 3/4 yerine "Drei Viertel").
+- "€" Sembolünü "Euro" yazılı formuyla değiştirin.
 
-Döküm üzerinde gerçekleştirmeniz gereken normalleştirme bazı örnekleri aşağıda verilmiştir:
+Aşağıda, bir dökümde gerçekleştirmeniz gereken normalleştirmenin birkaç örneği verilmiştir:
 
-| Orijinal metni | Kullanıcı normalleştirme sonra gelen metin | Sistem normalleştirme sonra gelen metin |
-|---------------|-------------------------------|---------------------------------|
-| ES ist 12.23 Uhr | ES ist 12:23 Uhr | es ist zwölf uhr drei und zwanzig uhr |
-| {12.45} | {12,45} | zwölf komma vier fünf |
-| 2 + 3 - 4 | 2 ve 3 4 eksi | zwei plus drei minus vier |
+| Özgün metin    | Kullanıcı normalleştirdikten sonra metin | Sistem normalleştirme sonrası metin       |
+| ---------------- | ----------------------------- | ------------------------------------- |
+| Es ist 12,23 Uhr | Es ist 12:23 Uhr              | es ist zwölf Uhr Drei und Zwanzig Uhr |
+| {12,45}          | {12,45}                       | zwölf komma Vier Fünf                 |
+| 2 + 3-4        | 2 artı 3 eksi 4              | zwei plus drei minus vier             |
 
-Aşağıdaki normalleştirme kuralları, otomatik döküm için uygulanır:
+Aşağıdaki normalleştirme kuralları, dökümlere otomatik olarak uygulanır:
 
-* Tüm metni küçük harf kullanın.
-* Çeşitli tırnak işaretleri dahil olmak üzere tüm noktalama işaretlerini kaldırın ("test", 'test', "test" ve «test» edilir).
-* Özel karakterler bu kümesindeki satırları At: ¢ ¤ ¥ ¦ m © ª ¬® ° ± ² µ × ÿ Ø¬¬.
-* Sayı dolar veya Euro miktarları dahil olmak üzere, konuşulan biçimine genişletin.
-* Umlaut kabul yalnızca o için ve. Diğerleri "th" değiştirilir veya iptal edilecek.
+- Tüm metinler için küçük harfler kullanın.
+- Çeşitli tırnak işareti türleri ("test", "test", "test" ve «test») dahil tüm noktalama işaretlerini kaldırın.
+- Bu kümeden özel karakterler içeren satırları at: ¢ ¤ ¥ ¦ § © ª ¬® ° ± ² μ × ÿ Ø ¬ ¬.
+- Dolar veya Euro miktarları dahil olmak üzere, konuşulan rakamları genişletin.
+- Yalnızca bir, o ve için kabul edin. Diğerleri "TH" ile değiştirilirler veya atılır.
 
-Normalleştirme transkripsiyonu üzerinde otomatik olarak gerçekleştirilen bazı örnekleri aşağıda verilmiştir:
+Bu, otomatik olarak dökümde gerçekleştirilen normalleştirme örnekleri aşağıda verilmiştir:
 
-| Orijinal metni | Normalleştirme sonra gelen metin |
-|---------------|--------------------------|
-| Frankfurter halka | frankfurter halka |
-| ¡Eine Frage! | eine frage |
-| WIR, haben | WIR haben |
+| Özgün metin    | Normalleştirme sonrası metin |
+| ---------------- | ------------------------ |
+| Frankfurter halkası | Frankfurter halkası         |
+| ¡ Eine Frage!     | Eine Frage               |
+| WIR, haben       | WIR haben                |
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-* [Hazırlama ve test, verileri](how-to-custom-speech-test-data.md)
-* [Verilerinizi denetleyin](how-to-custom-speech-inspect-data.md)
-* [Verilerinizi değerlendirin](how-to-custom-speech-evaluate-data.md)
-* [Modelinizi eğitin](how-to-custom-speech-train-model.md)
-* [Modelinizi dağıtma](how-to-custom-speech-deploy-model.md)
+- [Verilerinizi hazırlayın ve test edin](how-to-custom-speech-test-data.md)
+- [Verilerinizi inceleyin](how-to-custom-speech-inspect-data.md)
+- [Verilerinizi değerlendirin](how-to-custom-speech-evaluate-data.md)
+- [Modelinize eğitme](how-to-custom-speech-train-model.md)
+- [Modelinizi dağıtın](how-to-custom-speech-deploy-model.md)

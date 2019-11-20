@@ -5,6 +5,7 @@
     - name: Spatial Anchors hakkında
       href: overview.md
 - name: Hızlı Başlangıçlar
+  expanded: true
   items:
     - name: Unity uygulaması oluşturma
       href: unity-overview.yml
@@ -16,18 +17,25 @@
           href: quickstarts/get-started-unity-android.md
         - name: iOS
           href: quickstarts/get-started-unity-ios.md
-    - name: iOS uygulaması oluşturma
-      href: quickstarts/get-started-ios.md
-    - name: Android uygulaması oluşturma
-      href: quickstarts/get-started-android.md
     - name: HoloLens uygulaması oluşturma
       href: quickstarts/get-started-hololens.md
+    - name: Android uygulaması oluşturma
+      href: quickstarts/get-started-android.md
+    - name: iOS uygulaması oluşturma
+      href: quickstarts/get-started-ios.md
+    - name: Xamarin uygulaması oluşturma
+      items:
+        - name: Android
+          href: quickstarts/get-started-xamarin-android.md
+        - name: iOS
+          href: quickstarts/get-started-xamarin-ios.md
 - name: Öğreticiler
   items:
-    - name: Unity’de paylaşım
+    - name: Oturumlar ve cihazlar arasında paylaşma
       href: tutorials/tutorial-share-anchors-across-devices.md
-    - name: Azure Cosmos DB ile Unity’de paylaşım
-      href: tutorials/tutorial-use-cosmos-db-to-store-anchors.md
+      items:
+        - name: Azure Cosmos DB ile kalıcı paylaşma
+          href: tutorials/tutorial-use-cosmos-db-to-store-anchors.md
     - name: Yeni bir Unity HoloLens uygulaması başlatma
       href: tutorials/tutorial-new-unity-hololens-app.md
     - name: Yeni bir Android uygulaması başlatma
@@ -49,6 +57,20 @@
           href: how-tos/create-locate-anchors-cpp-ndk.md
         - name: C++/WinRT üzerinde
           href: how-tos/create-locate-anchors-cpp-winrt.md
+    - name: Yakın bağlantıları keşfetmek için cihaz üzerindeki algılayıcıları kullanma
+      items:
+        - name: 'In C#/Unity'
+          href: how-tos/set-up-coarse-reloc-unity.md
+        - name: Objective-C üzerinde
+          href: how-tos/set-up-coarse-reloc-objc.md
+        - name: Swift üzerinde
+          href: how-tos/set-up-coarse-reloc-swift.md
+        - name: Java üzerinde
+          href: how-tos/set-up-coarse-reloc-java.md
+        - name: C + +/ NDK üzerinde
+          href: how-tos/set-up-coarse-reloc-cpp-ndk.md
+        - name: C++/WinRT üzerinde
+          href: how-tos/set-up-coarse-reloc-cpp-winrt.md
 - name: Örnekler
   items:
     - name: Azure Spatial Anchors örnekleri (GitHub)
@@ -63,6 +85,8 @@
       href: concepts/guidelines-effective-anchor-experiences.md
     - name: Günlüğe kaydetme ve tanılama
       href: concepts/logging-diagnostics.md
+    - name: Kaba yeniden yerelleştirme
+      href: concepts/coarse-reloc.md
 - name: Başvurular
   items:
     - name: Unity için SDK
@@ -77,6 +101,10 @@
       href: 'https://docs.microsoft.com/cpp/api/spatial-anchors/winrt/'
 - name: Kaynaklar
   items:
+    - name: Sürüm Notları
+      href: 'https://github.com/Azure/azure-spatial-anchors-samples/releases'
+    - name: Azure Karma Gerçeklik Kaynak Yönetimi REST API’si
+      href: 'https://docs.microsoft.com/rest/api/mixedreality/'
     - name: SSS
       href: spatial-anchor-faq.md
     - name: Ürün Geri Bildirimi Sağlama

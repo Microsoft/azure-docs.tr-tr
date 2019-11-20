@@ -1,10 +1,10 @@
 ---
-title: Azure CLI ile özel bir Linux disk karşıya yükle | Microsoft Docs
-description: Oluşturma ve Resource Manager dağıtım modelini ve Azure CLI kullanarak Azure'da bir sanal sabit disk (VHD) yükleme
+title: Azure CLı ile özel bir Linux diski yükleme
+description: Kaynak Yöneticisi dağıtım modelini ve Azure CLı 'yi kullanarak Azure 'a bir sanal sabit disk (VHD) oluşturma ve yükleme
 services: virtual-machines-linux
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: a8c7818f-eb65-409e-aa91-ce5ae975c564
@@ -15,53 +15,53 @@ ms.devlang: azurecli
 ms.topic: article
 ms.date: 07/10/2017
 ms.author: cynthn
-ms.openlocfilehash: 368fec658dd1f063c45f3d00d42a4549ca9dfd83
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ef2db7f13ea5192634855b69a0d355e0f1e11ecb
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60771167"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74035074"
 ---
-# <a name="upload-and-create-a-linux-vm-from-custom-disk-with-the-azure-cli"></a>Azure CLI ile bir özel diskten Linux VM oluşturma ve karşıya yükleme
+# <a name="upload-and-create-a-linux-vm-from-custom-disk-with-the-azure-cli"></a>Azure CLı ile özel diskten bir Linux sanal makinesi yükleme ve oluşturma
 
-Bu makalede Azure CLI ile Azure depolama hesabınız için bir sanal sabit disk (VHD) karşıya yükleyin ve bu özel diskten Linux Vm'leri oluşturma gösterilmektedir. Bu işlev, yüklemek ve bir Linux distro gereksinimlerinize yapılandırın ve ardından Azure sanal makineleri (VM) hızlı bir şekilde oluşturmak için bu VHD'yi kullanması sağlar.
+Bu makalede, Azure CLı ile bir Azure depolama hesabına sanal sabit disk (VHD) yükleme ve bu özel diskten Linux VM oluşturma işlemlerinin nasıl yapılacağı gösterilir. Bu işlevsellik, gereksinimlerinize bir Linux yükleyip yapılandırmanıza ve ardından bu VHD 'yi kullanarak Azure sanal makinelerini (VM 'Ler) hızlı bir şekilde oluşturmanıza olanak tanır.
 
-Bu konuda depolama hesapları için son VHD'ler kullanır, ancak bu adımları kullanarak da yapabilirsiniz [yönetilen diskler](upload-vhd.md). 
+Bu konu, son VHD 'ler için depolama hesapları kullanır, ancak bu adımları [yönetilen diskleri](upload-vhd.md)kullanarak da yapabilirsiniz. 
 
 ## <a name="quick-commands"></a>Hızlı komutlar
-Hızlı bir şekilde, aşağıdaki bölümde ayrıntıları temel görevi gerekirse Azure'a VHD yükleme komutları. Bilgi ve içerik her adım, belgenin geri kalanında bulunabilir ayrıntılı [burada başlangıç](#requirements).
+Görevi hızlı bir şekilde gerçekleştirmeniz gerekirse, aşağıdaki bölümde bir VHD 'yi Azure 'a yüklemek için temel komutların ayrıntıları verilmiştir. Her adım için daha ayrıntılı bilgi ve bağlam, [buradan başlayarak](#requirements)belgenin geri kalanını tespit edebilir.
 
-En son sahip olduğunuzdan emin olun [Azure CLI](/cli/azure/install-az-cli2) yüklü ve bir Azure hesabı kullanarak oturum açmış [az login](/cli/azure/reference-index).
+En son [Azure CLI](/cli/azure/install-az-cli2) 'nın yüklü olduğundan ve [az Login](/cli/azure/reference-index)kullanarak bir Azure hesabında oturum açtığınızdan emin olun.
 
-Aşağıdaki örneklerde, örnek parametre adları kendi değerlerinizle değiştirin. Örnek parametre adları dahil `myResourceGroup`, `mystorageaccount`, ve `mydisks`.
+Aşağıdaki örneklerde, örnek parametre adlarını kendi değerlerinizle değiştirin. `myResourceGroup`, `mystorageaccount`ve `mydisks`dahil olmak üzere örnek parametre adları.
 
-Öncelikle [az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek `WestUs` konumunda `myResourceGroup` adlı bir kaynak grubu oluşturur:
+Öncelikle [az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek `myResourceGroup` konumunda `WestUs` adlı bir kaynak grubu oluşturur:
 
 ```azurecli
 az group create --name myResourceGroup --location westus
 ```
 
-Sanal diskleri tutmak için depolama hesabı oluşturma [az depolama hesabı oluşturma](/cli/azure/storage/account). Aşağıdaki örnekte adlı bir depolama hesabı oluşturur `mystorageaccount`:
+[Az Storage Account Create](/cli/azure/storage/account)komutuyla sanal disklerinizi barındıracak bir depolama hesabı oluşturun. Aşağıdaki örnek, `mystorageaccount`adlı bir depolama hesabı oluşturur:
 
 ```azurecli
 az storage account create --resource-group myResourceGroup --location westus \
   --name mystorageaccount --kind Storage --sku Standard_LRS
 ```
 
-Depolama hesabınızın erişim anahtarlarını Listele [az depolama hesabı anahtarları listesi](/cli/azure/storage/account/keys). Not `key1`:
+Depolama hesabınızın erişim anahtarlarını [az Storage Account Keys List](/cli/azure/storage/account/keys)ile listeleyin. `key1`bir kopyasını alın:
 
 ```azurecli
 az storage account keys list --resource-group myResourceGroup --account-name mystorageaccount
 ```
 
-İle elde ettiğiniz depolama anahtarını kullanarak, depolama hesabında bir kapsayıcı oluşturmak [az depolama kapsayıcısı oluşturma](/cli/azure/storage/container). Aşağıdaki örnekte adlı bir kapsayıcı oluşturur `mydisks` depolama anahtar değerini kullanarak `key1`:
+[Az Storage Container Create](/cli/azure/storage/container)ile edindiğiniz depolama anahtarını kullanarak depolama hesabınızda bir kapsayıcı oluşturun. Aşağıdaki örnek, `key1`depolama anahtarı değerini kullanarak `mydisks` adlı bir kapsayıcı oluşturur:
 
 ```azurecli
 az storage container create --account-name mystorageaccount \
     --account-key key1 --name mydisks
 ```
 
-Son olarak, oluşturduğunuz kapsayıcıya VHD'nizi karşıya [az storage blob upload](/cli/azure/storage/blob). VHD'nizi yerel yol belirtin `/path/to/disk/mydisk.vhd`:
+Son olarak, VHD 'nizi [az Storage blob upload](/cli/azure/storage/blob)ile oluşturduğunuz kapsayıcıya yükleyin. `/path/to/disk/mydisk.vhd`altında VHD 'niz için yerel yolu belirtin:
 
 ```azurecli
 az storage blob upload --account-name mystorageaccount \
@@ -69,7 +69,7 @@ az storage blob upload --account-name mystorageaccount \
     --file /path/to/disk/mydisk.vhd --name myDisk.vhd
 ```
 
-Disk için bir URI belirtin (`--image`) ile [az vm oluşturma](/cli/azure/vm). Aşağıdaki örnekte adlı bir VM oluşturur `myVM` sanal diski kullanarak daha önce yüklenmiş:
+[Az VM Create](/cli/azure/vm)Ile diskinizin URI 'sini (`--image`) belirtin. Aşağıdaki örnek, daha önce karşıya yüklenen sanal diski kullanarak `myVM` adlı bir sanal makıne oluşturur:
 
 ```azurecli
 az vm create --resource-group myResourceGroup --location westus \
@@ -79,52 +79,52 @@ az vm create --resource-group myResourceGroup --location westus \
     --use-unmanaged-disk
 ```
 
-Hedef depolama hesabını, sanal diskinizin yüklediğiniz aynı olması gerekir. Belirtmeniz gerekir veya yanıt ister gerektirdiği tüm ek parametreleri için **az vm oluşturma** sanal ağ, genel IP adresi, kullanıcı adı ve SSH anahtarları gibi komutu. Daha fazla bilgi edinebilirsiniz [kullanılabilir CLI Resource Manager parametreleri](../azure-cli-arm-commands.md#azure-vm-commands-to-manage-your-azure-virtual-machines).
+Hedef depolama hesabı, sanal diskinizi karşıya yüklediğiniz konum ile aynı olmalıdır. Ayrıca, sanal ağ, genel IP adresi, Kullanıcı adı ve SSH anahtarları gibi **az VM Create** komutu için gereken tüm ek parametreleri de belirtmeniz veya yanıt vermenizi da gerekir. [KULLANILABILIR clı Kaynak Yöneticisi parametreleri](../azure-cli-arm-commands.md#azure-vm-commands-to-manage-your-azure-virtual-machines)hakkında daha fazla bilgi edinebilirsiniz.
 
 ## <a name="requirements"></a>Gereksinimler
-Aşağıdaki adımları tamamlamak için gerekir:
+Aşağıdaki adımları tamamlayabilmeniz için şunlar gerekir:
 
-* **Linux işletim sistemi yüklü bir .vhd dosyasına** -yüklemek bir [Azure destekli Linux dağıtım](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) (veya [bilgi dağıtımlarla için](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)) VHD biçiminde bir sanal diske . VM ve VHD oluşturmak için birden çok araçlar mevcuttur:
-  * Yükleme ve yapılandırma [QEMU](https://en.wikibooks.org/wiki/QEMU/Installing_QEMU) veya [KVM](https://www.linux-kvm.org/page/RunningKVM), alma, görüntü biçimi olarak VHD kullanmak için dikkat edin. Gerekirse, [görüntüyü dönüştürme](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) kullanarak `qemu-img convert`.
-  * Hyper-V ayrıca kullanabileceğiniz [Windows 10](https://msdn.microsoft.com/virtualization/hyperv_on_windows/quick_start/walkthrough_install) veya [Windows Server 2012/2012 R2'deki](https://technet.microsoft.com/library/hh846766.aspx).
+* **Linux işletim sistemi bir. vhd dosyasına yüklenir** - [Azure tarafından onaylanan bir Linux dağıtımını](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) (veya [onaylı olmayan dağıtımlar için bilgileri](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)) VHD biçimindeki bir sanal diske yükleme. VM ve VHD oluşturmak için birden çok araç mevcuttur:
+  * Kemu veya [](https://en.wikibooks.org/wiki/QEMU/Installing_QEMU) [KVM](https://www.linux-kvm.org/page/RunningKVM)'yi yükleyip yapılandırarak, görüntü biçimi olarak VHD 'yi kullanmaya özen gösterin. Gerekirse, `qemu-img convert`kullanarak [bir görüntüyü dönüştürebilirsiniz](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) .
+  * Hyper-V ' d i [Windows 10](https://msdn.microsoft.com/virtualization/hyperv_on_windows/quick_start/walkthrough_install) veya [Windows Server 2012/2012 R2](https://technet.microsoft.com/library/hh846766.aspx)üzerinde de kullanabilirsiniz.
 
 > [!NOTE]
-> Azure'da yeni VHDX biçimi desteklenmiyor. Bir VM oluşturduğunuzda, VHD biçiminde belirtin. Gerekirse, VHD kullanarak VHDX diskler dönüştürülebilir [ `qemu-img convert` ](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) veya [ `Convert-VHD` ](https://technet.microsoft.com/library/hh848454.aspx) PowerShell cmdlet'i. Ayrıca, Azure gibi disklerin statik Vhd'lere karşıya yüklemeden önce dönüştürmeniz gerekmez dinamik VHD'ler, karşıya yükleme desteklemez. Gibi araçları kullanın [GO için Azure VHD'nin Utilities](https://github.com/Microsoft/azure-vhd-utils-for-go) Azure'a yükleme işlemi sırasında dinamik diskleri dönüştürme.
+> Yeni VHDX biçimi Azure 'da desteklenmez. Bir VM oluşturduğunuzda, VHD 'yi biçim olarak belirtin. Gerekirse, [`qemu-img convert`](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) veya [`Convert-VHD`](https://technet.microsoft.com/library/hh848454.aspx) POWERSHELL cmdlet 'INI kullanarak VHDX disklerini VHD 'ye dönüştürebilirsiniz. Azure, Dinamik VHD 'leri karşıya yüklemeyi desteklemez, bu nedenle karşıya yüklemeden önce bu diskleri statik VHD 'lere dönüştürmeniz gerekir. Azure 'a yükleme işlemi sırasında dinamik diskleri dönüştürmek için [Azure VHD yardımcı programları](https://github.com/Microsoft/azure-vhd-utils-for-go) gibi araçları kullanabilirsiniz.
 > 
 > 
 
-* Özel diskinizden oluşturulan sanal makinelerin disk ile aynı depolama hesabındaki bulunmalıdır
-  * Bir depolama hesabı ve kapsayıcı özel disk ve oluşturulan VM'ler için oluşturma
-  * Tüm Vm'leriniz oluşturduktan sonra disk güvenli bir şekilde silebilirsiniz
+* Özel diskinizden oluşturulan VM 'Lerin, diskin kendisiyle aynı depolama hesabında bulunması gerekir
+  * Hem özel diskinizi hem de oluşturulan VM 'Leri barındıracak bir depolama hesabı ve kapsayıcısı oluşturun
+  * Tüm VM 'lerinizi oluşturduktan sonra, diskinizi güvenle silebilirsiniz
 
-En son sahip olduğunuzdan emin olun [Azure CLI](/cli/azure/install-az-cli2) yüklü ve bir Azure hesabı kullanarak oturum açmış [az login](/cli/azure/reference-index).
+En son [Azure CLI](/cli/azure/install-az-cli2) 'nın yüklü olduğundan ve [az Login](/cli/azure/reference-index)kullanarak bir Azure hesabında oturum açtığınızdan emin olun.
 
-Aşağıdaki örneklerde, örnek parametre adları kendi değerlerinizle değiştirin. Örnek parametre adları dahil `myResourceGroup`, `mystorageaccount`, ve `mydisks`.
+Aşağıdaki örneklerde, örnek parametre adlarını kendi değerlerinizle değiştirin. `myResourceGroup`, `mystorageaccount`ve `mydisks`dahil olmak üzere örnek parametre adları.
 
-<a id="prepimage"></a>
+<a id="prepimage"> </a>
 
-## <a name="prepare-the-disk-to-be-uploaded"></a>Karşıya yüklenecek diski hazırlama
-Azure, çeşitli Linux dağıtımları destekler (bkz [desteklenen dağıtımı](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)). Aşağıdaki makaleler Azure üzerinde desteklenen çeşitli Linux dağıtımları hazırlama size kılavuzluk eder:
+## <a name="prepare-the-disk-to-be-uploaded"></a>Diski karşıya yüklenecek şekilde hazırlama
+Azure çeşitli Linux dağıtımlarını destekler (bkz. [onaylı dağıtımlar](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)). Aşağıdaki makaleler, Azure 'da desteklenen çeşitli Linux dağıtımlarını hazırlama konusunda size rehberlik sağlar:
 
 * **[CentOS tabanlı dağıtımlar](create-upload-centos.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
-* **[Debian Linux](debian-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
+* **[Linux 'u kaldırma](debian-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
 * **[Oracle Linux](oracle-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
 * **[Red Hat Enterprise Linux](redhat-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
 * **[SLES & openSUSE](suse-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
 * **[Ubuntu](create-upload-ubuntu.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
-* **[Diğer - dağıtımlarla](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
+* **[Diğer-onaylı olmayan dağıtımlar](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)**
 
-Ayrıca bkz: **[Linux yükleme notları](create-upload-generic.md#general-linux-installation-notes)** Azure için Linux görüntüleri hazırlama hakkında daha fazla genel ipuçları için.
+Ayrıca, Linux görüntülerini Azure için hazırlama hakkında daha genel ipuçları için bkz. **[Linux yükleme notları](create-upload-generic.md#general-linux-installation-notes)** .
 
 > [!NOTE]
-> [Azure platformunun SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) , yalnızca desteklenen dağıtımlarla birini 'Sürümleri desteklenir' altında belirtildiği gibi yapılandırma ayrıntılarını ile kullanıldığında, Linux çalıştıran Vm'leri uygulandığı [Azure destekli Linux Dağıtımları](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+> [Azure platformu SLA 'sı](https://azure.microsoft.com/support/legal/sla/virtual-machines/) yalnızca, [Azure tarafından onaylanan dağıtımlarda Linux](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)'ta ' desteklenen sürümler ' altında belirtilen yapılandırma ayrıntıları ile belirlenen dağıtımlardan biri kullanıldığında, Linux çalıştıran VM 'ler için geçerlidir.
 > 
 > 
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
-Kaynak grupları mantıksal olarak sanal ağ ve depolama gibi sanal makinelerinizi desteklemek için tüm Azure kaynaklarını bir araya getirin. Daha fazla bilgi kaynak grupları için bkz: [kaynak gruplarına genel bakış](../../azure-resource-manager/resource-group-overview.md). Özel diskinizi karşıya yükleme ve sanal makineleri oluşturma önce ilk ile bir kaynak grubu oluşturmak için ihtiyacınız [az grubu oluşturma](/cli/azure/group).
+Kaynak grupları, sanal ağ ve depolama gibi sanal makinelerinizi desteklemek için tüm Azure kaynaklarını mantıksal olarak bir araya getirir. Daha fazla bilgi kaynak grubu için bkz. [kaynak gruplarına genel bakış](../../azure-resource-manager/resource-group-overview.md). Özel diskinizi karşıya yüklemeden ve VM 'Ler oluşturmadan önce, [az Group Create](/cli/azure/group)ile bir kaynak grubu oluşturmanız gerekir.
 
-Aşağıdaki örnek `westus` konumunda `myResourceGroup` adlı bir kaynak grubu oluşturur:
+Aşağıdaki örnek `myResourceGroup` konumunda `westus` adlı bir kaynak grubu oluşturur:
 
 ```azurecli
 az group create --name myResourceGroup --location westus
@@ -132,9 +132,9 @@ az group create --name myResourceGroup --location westus
 
 ## <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 
-Özel disk ve VM içeren bir depolama hesabı oluşturma [az depolama hesabı oluşturma](/cli/azure/storage/account). Bu disk aynı depolama hesabındaki olacak şekilde özel disk gereksiniminizi kaynağından oluşturduğunuz yönetilmeyen disklere sahip makineler. 
+[Az Storage Account Create](/cli/azure/storage/account)komutuyla özel diskiniz ve VM 'niz için bir depolama hesabı oluşturun. Özel diskinizden oluşturduğunuz yönetilmeyen disklere sahip sanal makinelerin, bu diskle aynı depolama hesabında olması gerekir. 
 
-Aşağıdaki örnekte adlı bir depolama hesabı oluşturur `mystorageaccount` daha önce oluşturduğunuz kaynak grubunda:
+Aşağıdaki örnek, daha önce oluşturulan kaynak grubunda `mystorageaccount` adlı bir depolama hesabı oluşturur:
 
 ```azurecli
 az storage account create --resource-group myResourceGroup --location westus \
@@ -142,9 +142,9 @@ az storage account create --resource-group myResourceGroup --location westus \
 ```
 
 ## <a name="list-storage-account-keys"></a>Depolama hesabı anahtarlarını Listele
-Azure, her depolama hesabı için iki adet 512 bit erişim tuşu oluşturur. Bu erişim anahtarlarını gibi depolama hesabı için kimlik doğrulaması yapılırken, yazma işlemleri gerçekleştirmek için kullanılır. Daha fazla bilgi edinin [burada Depolama Yönetimi](../../storage/common/storage-account-manage.md#access-keys). Erişim anahtarı görüntüleme [az depolama hesabı anahtarları listesi](/cli/azure/storage/account/keys).
+Azure, her depolama hesabı için 2 512 bitlik erişim anahtarları oluşturur. Bu erişim anahtarları, depolama hesabında kimlik doğrulaması yapılırken (örneğin, yazma işlemlerini yürütmek için) kullanılır. [Depolama alanına erişimi yönetme](../../storage/common/storage-account-manage.md#access-keys)hakkında daha fazla bilgi edinmek için buraya tıklayın. Erişim anahtarlarını [az Storage Account Keys List](/cli/azure/storage/account/keys)komutuyla görüntüleyebilirsiniz.
 
-Oluşturduğunuz depolama hesabının erişim anahtarlarını görüntüleyin:
+Oluşturduğunuz depolama hesabı için erişim anahtarlarını görüntüleyin:
 
 ```azurecli
 az storage account keys list --resource-group myResourceGroup --account-name mystorageaccount
@@ -161,12 +161,12 @@ data:    key1  d4XAvZzlGAgWdvhlWfkZ9q4k9bYZkXkuPCJ15NTsQOeDeowCDAdB80r9zA/tUINAp
 data:    key2  Ww0T7g4UyYLaBnLYcxIOTVziGAAHvU+wpwuPvK4ZG0CDFwu/mAxS/YYvAQGHocq1w7/3HcalbnfxtFdqoXOw8g==  Full
 info:    storage account keys list command OK
 ```
-Not `key1` sonraki adımlarda depolama hesabınızla etkileşim kurmak için kullanacağınız.
+Sonraki adımlarda depolama hesabınızla etkileşimde bulunmak için `key1` bir göz önüne alın.
 
 ## <a name="create-a-storage-container"></a>Bir depolama kapsayıcısı oluşturma
-Yerel dosya sisteminize mantıksal olarak düzenlemek için farklı bir dizin oluşturma yolla disklerinizi düzenlemek için bir depolama hesabında bir kapsayıcı oluşturun. Bir depolama hesabı herhangi bir sayıda kapsayıcı içerebilir. Bir kapsayıcı ile [az depolama kapsayıcısı oluşturma](/cli/azure/storage/container).
+Yerel dosya sisteminizi mantıksal olarak düzenlemek için farklı dizinler oluşturduğunuz gibi, disklerinizi düzenlemek için bir depolama hesabı içinde kapsayıcılar oluşturursunuz. Depolama hesabı, herhangi bir sayıda kapsayıcı içerebilir. [Az Storage Container Create](/cli/azure/storage/container)ile bir kapsayıcı oluşturun.
 
-Aşağıdaki örnekte adlı bir kapsayıcı oluşturur `mydisks`:
+Aşağıdaki örnek, `mydisks`adlı bir kapsayıcı oluşturur:
 
 ```azurecli
 az storage container create \
@@ -174,10 +174,10 @@ az storage container create \
     --name mydisks
 ```
 
-## <a name="upload-vhd"></a>VHD'yi karşıya yükleme
-Şimdi, özel bir disk ile karşıya [az storage blob upload](/cli/azure/storage/blob). Size karşıya yükleme ve sayfa blobu olarak özel diskinizin depolama.
+## <a name="upload-vhd"></a>VHD 'YI karşıya yükle
+Şimdi, [az Storage blob upload](/cli/azure/storage/blob)ile özel diskinizi karşıya yükleyin. Özel diskinizi bir Sayfa Blobu olarak karşıya yükleyip depoladığınızda.
 
-Erişim anahtarınızı, önceki adımda ve özel disk yolu yerel bilgisayarınızda oluşturduğunuz kapsayıcıya belirtin:
+Erişim anahtarınızı, önceki adımda oluşturduğunuz kapsayıcıyı ve ardından yerel bilgisayarınızdaki özel disk yolunu belirtin:
 
 ```azurecli
 az storage blob upload --account-name mystorageaccount \
@@ -186,11 +186,11 @@ az storage blob upload --account-name mystorageaccount \
 ```
 
 ## <a name="create-the-vm"></a>Sanal makine oluşturma
-Yönetilmeyen disklerle bir VM oluşturmak için disk URI'si belirtin (`--image`) ile [az vm oluşturma](/cli/azure/vm). Aşağıdaki örnekte adlı bir VM oluşturur `myVM` sanal diski kullanarak daha önce yüklenmiş:
+Yönetilmeyen diskler içeren bir VM oluşturmak için [az VM Create](/cli/azure/vm)ile disk (`--image`) URI 'sini belirtin. Aşağıdaki örnek, daha önce karşıya yüklenen sanal diski kullanarak `myVM` adlı bir sanal makıne oluşturur:
 
-Belirttiğiniz `--image` parametresiyle [az vm oluşturma](/cli/azure/vm) özel diskinize yönlendirin. Emin `--storage-account` özel diskinizi depolandığı depolama hesabını eşleşir. Aynı kapsayıcı Vm'lerinizi depolamak için özel bir disk olarak kullanmak zorunda değil. Özel diskinizi karşıya yüklemeden önce önceki adımları aynı şekilde ek tüm kapsayıcıları oluşturduğunuzdan emin olun.
+Özel diskinize işaret etmek için [az VM Create](/cli/azure/vm) ile `--image` parametresini belirtirsiniz. `--storage-account`, özel diskinizin depolandığı depolama hesabıyla eşleştiğinden emin olun. VM 'lerinizi depolamak için özel diskle aynı kapsayıcıyı kullanmanız gerekmez. Özel diskinizi karşıya yüklemeden önce, önceki adımlarla aynı şekilde ek kapsayıcılar oluşturduğunuzdan emin olun.
 
-Aşağıdaki örnekte adlı bir VM oluşturur `myVM` özel diskinizden:
+Aşağıdaki örnek, özel diskinizden `myVM` adlı bir sanal makine oluşturur:
 
 ```azurecli
 az vm create --resource-group myResourceGroup --location westus \
@@ -200,13 +200,13 @@ az vm create --resource-group myResourceGroup --location westus \
     --use-unmanaged-disk
 ```
 
-Yine de belirtmeniz gerekir veya yanıt ister gerektirdiği tüm ek parametreleri için **az vm oluşturma** kullanıcı adı ve SSH anahtarları gibi komutu.
+Kullanıcı adı ve SSH anahtarları gibi **az VM Create** komutu için gerekli tüm ek parametreleri de belirtmeniz veya bu istemlere yanıt vermesi gerekir.
 
 
 ## <a name="resource-manager-template"></a>Resource Manager şablonu
-Azure Resource Manager şablonları, oluşturmak istediğiniz ortamı tanımlayan JavaScript nesne gösterimi (JSON) dosyalarıdır. Şablonları, işlem veya ağ gibi farklı kaynak sağlayıcıları için ayrılmıştır. Var olan şablonları kullanın veya kendinizinkini yazabilirsiniz. Daha fazla bilgi edinin [Resource Manager şablonları ile](../../azure-resource-manager/resource-group-overview.md).
+Azure Resource Manager şablonlar, derlemek istediğiniz ortamı tanımlayan JavaScript Nesne Gösterimi (JSON) dosyalarıdır. Şablonlar, işlem veya ağ gibi farklı kaynak sağlayıcılarına bölünmüştür. Mevcut şablonları kullanabilir veya kendi kendinize yazabilirsiniz. [Kaynak Yöneticisi ve şablonları kullanma](../../azure-resource-manager/resource-group-overview.md)hakkında daha fazla bilgi edinin.
 
-İçinde `Microsoft.Compute/virtualMachines` şablonunuzu sağlayıcısı, sahip olduğunuz bir `storageProfile` VM'niz için yapılandırma ayrıntılarını içeren bir düğüm. Düzenlemek için iki ana parametreler `image` ve `vhd` özel diskinizi ve yeni sanal makinenizin sanal diski işaret bir URI'leri. Özel bir disk kullanmak için JSON örneği aşağıda gösterilmiştir:
+Şablonunuzun `Microsoft.Compute/virtualMachines` sağlayıcısı içinde, sanal makinenizin yapılandırma ayrıntılarını içeren bir `storageProfile` düğümünüz vardır. Düzenlenecek iki ana parametre, özel diskinize ve yeni VM 'nin sanal diskine işaret eden `image` ve `vhd` URI 'Lerdir. Aşağıda özel disk kullanımı için JSON örneği gösterilmektedir:
 
 ```json
 "storageProfile": {
@@ -224,16 +224,16 @@ Azure Resource Manager şablonları, oluşturmak istediğiniz ortamı tanımlaya
           }
 ```
 
-Kullanabileceğiniz [özel bir görüntüden bir VM oluşturmak için bu mevcut şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-from-user-image) veya okuma hakkında [kendi Azure Resource Manager şablonları oluşturmaya](../../azure-resource-manager/resource-group-authoring-templates.md). 
+[Bu mevcut şablonu kullanarak özel görüntüden BIR VM oluşturabilir](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-from-user-image) veya [kendi Azure Resource Manager şablonlarınızı oluşturma](../../azure-resource-manager/resource-group-authoring-templates.md)hakkında bilgi edinebilirsiniz. 
 
-Yapılandırılmış bir şablonu oluşturduktan sonra kullanma [az grubu dağıtım oluşturma](/cli/azure/group/deployment) Vm'lerinizi oluşturmak için. Bir URI ile JSON şablonunuzun `--template-uri` parametresi:
+Bir şablonunuz yapılandırıldıktan sonra, VM 'lerinizi oluşturmak için [az Group Deployment Create](/cli/azure/group/deployment) kullanın. `--template-uri` parametresiyle JSON şablonunuzun URI 'sini belirtin:
 
 ```azurecli
 az group deployment create --resource-group myNewResourceGroup \
   --template-uri https://uri.to.template/mytemplate.json
 ```
 
-Yerel olarak bilgisayarınızda depolanan bir JSON dosyası varsa, kullanabileceğiniz `--template-file` parametresi yerine:
+Bilgisayarınızda yerel olarak depolanan bir JSON dosyanız varsa, bunun yerine `--template-file` parametresini kullanabilirsiniz:
 
 ```azurecli
 az group deployment create --resource-group myNewResourceGroup \
@@ -242,5 +242,5 @@ az group deployment create --resource-group myNewResourceGroup \
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Hazır ve özel sanal diskinizin karşıya sonra daha fazla bilgi edinebilirsiniz [Resource Manager şablonları ile](../../azure-resource-manager/resource-group-overview.md). Ayrıca isteyebilirsiniz [veri diski ekleme](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) yeni vm'lere. Erişmesi gereken sanal makinelerinizde çalışan uygulamalarınız varsa, mutlaka [açık bağlantı noktalarını ve uç noktaları](nsg-quickstart.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Özel sanal diskinizi hazırladıktan ve karşıya yükledikten sonra, [Kaynak Yöneticisi ve şablonları kullanma](../../azure-resource-manager/resource-group-overview.md)hakkında daha fazla bilgi edinebilirsiniz. Ayrıca, yeni sanal makinelerinize [bir veri diski eklemek](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) isteyebilirsiniz. Sanal makinelerinize erişmeniz gereken uygulamalarınız varsa, [bağlantı noktalarını ve uç noktaları açmayı](nsg-quickstart.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)unutmayın.
 

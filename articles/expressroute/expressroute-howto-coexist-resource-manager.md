@@ -1,5 +1,5 @@
 ---
-title: 'ExpressRoute ve siteden siteye VPN bağlantıları yapılandırma - bir arada var: PowerShell: Azure | Microsoft Docs'
+title: 'ExpressRoute ve S2S VPN birlikte var olan bağlantıları yapılandırma: Azure PowerShell'
 description: ExpressRoute ve PowerShell kullanarak Resource Manager modelinde bir arada var olabilen siteden siteye VPN bağlantısı yapılandırın.
 services: expressroute
 author: charwen
@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 07/01/2019
 ms.author: charwen
 ms.custom: seodec18
-ms.openlocfilehash: fdd267937db589156aa5eddc7608323b143266de
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: 84c4d466a820616b8f8dfa69cfa149cb86006f49
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508846"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74132859"
 ---
 # <a name="configure-expressroute-and-site-to-site-coexisting-connections-using-powershell"></a>PowerShell kullanarak ExpressRoute ve siteden siteye arada var olabilen bağlantılar yapılandırma
 > [!div class="op_single_selector"]
@@ -38,9 +38,9 @@ Siteden Siteye VPN ve ExpressRoute eşzamanlı bağlantılarını yapılandırma
 ## <a name="limits-and-limitations"></a>Sınırlar ve sınırlamalar
 * **Geçiş yönlendirmesi desteklenmez.** Siteden Siteye VPN aracılığıyla bağlanan yerel ağınız ve ExpressRoute aracılığıyla bağlanan yerel ağınız arasında (Azure aracılığıyla) yönlendirme yapamazsınız.
 * **Temel SKU ağ geçidi desteklenmez.** Hem [ExpressRoute ağ geçidi](expressroute-about-virtual-network-gateways.md) hem de [VPN ağ geçidi](../vpn-gateway/vpn-gateway-about-vpngateways.md) için Temel SKU olmayan bir ağ geçidi kullanmanız gerekir.
-* **Yalnızca rota tabanlı VPN ağ geçidi desteklenir.** Rota tabanlı [VPN Gateway](../vpn-gateway/vpn-gateway-about-vpngateways.md) kullanmanız gerekir.
+* **Yalnızca rota tabanlı VPN ağ geçidi desteklenir.** Rota tabanlı bir [VPN ağ geçidi](../vpn-gateway/vpn-gateway-about-vpngateways.md)kullanmanız gerekir. Ayrıca, [birden çok ilke tabanlı VPN cihazına bağlanma](../vpn-gateway/vpn-gateway-connect-multiple-policybased-rm-ps.md)bölümünde açıklandığı gibi ' ilke tabanlı trafik seçicileri ' için YAPıLANDıRıLMıŞ bir VPN bağlantısı ile rota tabanlı bir VPN ağ geçidini de kullanabilirsiniz.
 * **VPN ağ geçidiniz için statik rota yapılandırılmalıdır.** Yerel ağınız hem ExpressRoute hem de Siteden Siteye VPN’e bağlıysa Siteden Siteye VPN bağlantısını genel İnternet’e yönlendirebilmeniz için yerel ağınızda statik bir rotanın yapılandırılmış olması gerekir.
-* **VPN ağ geçidi varsayılan olarak 65515 ASN'si için belirtilmediyse.** Azure VPN ağ geçidi, BGP yönlendirme protokolünü destekler. -Asn anahtarını ekleyerek bir sanal ağ için ASN (AS numarası) belirtebilirsiniz. Bu parametre, varsayılan 65515 numarası olduğu gibi belirtmezseniz. Yapılandırma için herhangi bir ASN kullanabilirsiniz, ancak 65515 dışında bir şey seçerseniz, ayarın etkili olması ağ geçidini sıfırlamanız gerekir.
+* **Belirtilmemişse, varsayılan olarak ASN 65515 VPN Gateway.** Azure VPN Gateway BGP yönlendirme protokolünü destekler. -ASN anahtarını ekleyerek bir sanal ağ için ASN (AS Number) belirtebilirsiniz. Bu parametreyi belirtmezseniz, varsayılan AS numarası 65515 ' dir. Yapılandırma için herhangi bir ASN kullanabilirsiniz, ancak 65515 dışında bir öğe seçerseniz, ayarın etkili olması için ağ geçidini sıfırlamanız gerekir.
 
 ## <a name="configuration-designs"></a>Yapılandırma tasarımları
 ### <a name="configure-a-site-to-site-vpn-as-a-failover-path-for-expressroute"></a>Siteden siteye VPN’i ExpressRoute için bir yük devretme yolu olarak yapılandırma
@@ -77,7 +77,7 @@ Aralarından seçim yapabileceğiniz iki farklı yordam kümesi vardır. Seçti�
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
 [!INCLUDE [working with cloud shell](../../includes/expressroute-cloudshell-powershell-about.md)]
 
@@ -216,7 +216,7 @@ Bu yapılandırma için kullanacağınız cmdlet'ler tanıdıklarınızdan biraz
    ```azurepowershell-interactive
    $vnet = Set-AzVirtualNetwork -VirtualNetwork $vnet
    ```
-4. Bu noktada, hiçbir ağ geçidi olmayan bir sanal ağa sahip olursunuz. Yeni ağ geçitleri oluşturmak ve bağlantıları ayarlamak için aşağıdaki örnekleri kullanın:
+4. Bu noktada, hiçbir ağ geçidi olmayan bir sanal ağa sahip olursunuz. Yeni ağ geçitleri oluşturmak ve bağlantıları kurmak için aşağıdaki örnekleri kullanın:
 
    Değişkenleri ayarlayın.
 
@@ -228,7 +228,7 @@ Bu yapılandırma için kullanacağınız cmdlet'ler tanıdıklarınızdan biraz
    $gwConfig = New-AzVirtualNetworkGatewayIpConfig -Name "ERGatewayIpConfig" -SubnetId $gwSubnet.Id -PublicIpAddressId $gwIP.Id
    ```
 
-   Ağ geçidi oluşturun.
+   Ağ geçidini oluşturun.
 
    ```azurepowershell-interactive
    $gw = New-AzVirtualNetworkGateway -Name <yourgatewayname> -ResourceGroupName <yourresourcegroup> -Location <yourlocation) -IpConfigurations $gwConfig -GatewayType "ExpressRoute" -GatewaySku Standard
@@ -243,7 +243,7 @@ Bu yapılandırma için kullanacağınız cmdlet'ler tanıdıklarınızdan biraz
 
 ## <a name="to-add-point-to-site-configuration-to-the-vpn-gateway"></a>VPN ağ geçidine noktadan siteye yapılandırması eklemek için
 
-Bir arada bulunma kurulumda VPN ağ geçidinize noktadan siteye yapılandırması eklemek için aşağıdaki adımları izleyebilirsiniz. VPN kök sertifikasını karşıya yüklemek için PowerShell, yerel bilgisayarınıza yükleyin, veya Azure portalını kullanın.
+Bir arada bulunma kurulumda VPN ağ geçidinize noktadan siteye yapılandırması eklemek için aşağıdaki adımları izleyebilirsiniz. VPN kök sertifikasını karşıya yüklemek için PowerShell 'i bilgisayarınıza yerel olarak yüklemeniz ya da Azure portal kullanmanız gerekir.
 
 1. VPN İstemcisi adres havuzunu ekleyin.
 
@@ -251,7 +251,7 @@ Bir arada bulunma kurulumda VPN ağ geçidinize noktadan siteye yapılandırmas�
    $azureVpn = Get-AzVirtualNetworkGateway -Name "VPNGateway" -ResourceGroupName $resgrp.ResourceGroupName
    Set-AzVirtualNetworkGatewayVpnClientConfig -VirtualNetworkGateway $azureVpn -VpnClientAddressPool "10.251.251.0/24"
    ```
-2. VPN ağ geçidiniz için VPN kök sertifikasını Azure’a yükleyin. Bu örnekte, kök sertifikasının aşağıdaki PowerShell cmdlet'lerinin çalıştığı yerel makinede depolanır ve PowerShell'i yerel olarak çalıştığını kabul edilir. Ayrıca, Azure portalını kullanarak sertifikayı karşıya yükleyebilirsiniz.
+2. VPN ağ geçidiniz için VPN kök sertifikasını Azure’a yükleyin. Bu örnekte, kök sertifikanın aşağıdaki PowerShell cmdlet 'lerinin çalıştırıldığı ve PowerShell 'i yerel olarak çalıştırdığınız yerel makinede depolandığı varsayılır. Azure portal kullanarak da sertifikayı karşıya yükleyebilirsiniz.
 
    ```powershell
    $p2sCertFullName = "RootErVpnCoexP2S.cer" 

@@ -1,244 +1,244 @@
 ---
-title: Azure Blockchain Workbench akıllı sözleşme tümleştirme desenleri
-description: Azure Blockchain Workbench akıllı sözleşme tümleştirme desenleri genel bakış.
+title: Azure blok zinciri çalışma ekranı 'nda akıllı sözleşme tümleştirme desenleri
+description: Azure blok zinciri çalışma ekranı önizlemesinde akıllı sözleşme tümleştirme düzenlerine genel bakış.
 services: azure-blockchain
 keywords: ''
 author: PatAltimore
 ms.author: patricka
-ms.date: 05/09/2019
-ms.topic: article
+ms.date: 10/14/2019
+ms.topic: conceptual
 ms.service: azure-blockchain
 ms.reviewer: mmercuri
 manager: femila
-ms.openlocfilehash: bd53ae3346882cf20ae7464548fa9ef2c0329f05
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7176cddae6affd19df4fe418afcf420f92d624ab
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65957018"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73579783"
 ---
-# <a name="smart-contract-integration-patterns"></a>Akıllı sözleşme tümleştirme desenleri
+# <a name="smart-contract-integration-patterns"></a>Akıllı anlaşma tümleştirme desenleri
 
-Nitelikli akıllı anlaşmalar genellikle dış sistemleri ve cihazların ile tümleştirmek için gereken iş akışı temsil eder.
+Akıllı sözleşmeler genellikle dış sistemlerle ve cihazlarla tümleştirilmesi gereken iş akışını temsil eder.
 
-Bu iş akışları bir dış sistem, hizmet ya da cihaz verileri içeren dağıtılmış bir defter işlemler başlatmak için bir gereksinimi gereklidir. Bunlar ayrıca dış sistemler üzerinde dağıtılmış bir defter nitelikli akıllı anlaşmalar kaynaklanan olaylara tepki olması gerekir.
+Bu iş akışlarının gereksinimleri, bir dış sistem, hizmet veya cihazdan veri içeren dağıtılmış bir defter üzerinde işlem başlatma gereksinimi içerir. Ayrıca, dağıtılmış bir muhasebedeki akıllı sözleşmelerden kaynaklanan olaylara yanıt vermek için dış sistemlerin da olması gerekir.
 
-REST API ve mesajlaşma tümleştirme gönderir işlemleri dış sistemlerden bir Azure Blockchain Workbench uygulamasına dahil edilen nitelikli akıllı anlaşmalar için. Ayrıca bir uygulama içinde gerçekleşen değişikliklere göre dış sistemler için olay bildirimleri gönderir.
+REST API ve mesajlaşma tümleştirmesi, dış sistemlerden Azure blok zinciri çalışma ekranı uygulamasına dahil edilen akıllı sözleşmelere işlem gönderir. Ayrıca, bir uygulama içinde gerçekleşen değişikliklere göre dış sistemlere olay bildirimleri gönderir.
 
-Veri tümleştirme senaryoları için Azure Blockchain Workbench blok zinciri ve meta verileri, uygulamalar ve nitelikli akıllı anlaşmalar hakkında işlem verilerini bir birleşimini birleştirme veritabanı görünümü kümesi içerir.
+Veri tümleştirme senaryolarında, Azure blok zinciri çalışma ekranı blok zincirinden ve uygulamalar ve akıllı sözleşmeler hakkında meta verilerden işlem verilerinin bir birleşimini birleştirerek oluşan bir veritabanı görünümleri kümesi içerir.
 
-Ayrıca, zincir veya medya kaynağı ile ilgili olanlar gibi bazı senaryolarda tümleştirme belgelerinin gerektirebilir. Azure Blockchain Workbench belgeleri doğrudan işlemek için API çağrıları belirtmese belgeleri bir blok zinciri uygulamasına dahil edilebilir. Bu bölüm, ayrıca bu deseni içerir.
+Ayrıca, tedarik zinciri veya medya ile ilgili olanlar gibi bazı senaryolar da belgelerin tümleştirilmesini gerektirebilir. Azure blok zinciri çalışma ekranı belgeleri doğrudan işlemek için API çağrıları sağlamıyorsa, belgeler blok zinciri uygulamasına eklenebilir. Bu bölümde ayrıca bu desenler de bulunur.
 
-Bu bölüm bu tümleştirmeler türlerinin her biri, uçtan uca çözümleri uygulamak için tanımlanmış desenleri içerir.
+Bu bölüm, uçtan uca çözümlerinde bu tür tümleştirmelerin her birini uygulamak için tanımlanan desenleri içerir.
 
-## <a name="rest-api-based-integration"></a>REST API tabanlı bir tümleştirme
+## <a name="rest-api-based-integration"></a>REST API tabanlı tümleştirme
 
-Azure Blockchain Workbench oluşturulan web uygulaması'larında sunulan özellikler, REST API aracılığıyla sunulur. Azure Blockchain Workbench karşıya yükleme, yapılandırma ve yönetim uygulamalarının dağıtılmış bir defter ve uygulama meta verileri ve kayıt defteri verilerini sorgulama işlemleri göndermek, özelliklerini içerir.
+Azure blok zinciri çalışma ekranı tarafından oluşturulan Web uygulaması içindeki yetenekler REST API aracılığıyla sunulur. Yetenekler, Azure blok zinciri çalışma ekranı yükleme, uygulamaların yapılandırılması ve yönetimi, dağıtılmış bir genel muhasebeye işlem gönderme ve uygulama meta verilerinin ve muhasebe verilerinin sorgulanmasına dahildir.
 
-REST API, web, mobil, gibi etkileşimli istemciler ve bot uygulamalar için öncelikli olarak kullanılır.
+REST API, öncelikle web, mobil ve bot uygulamaları gibi etkileşimli istemciler için kullanılır.
 
-Bu bölümde işlem dağıtılmış bir defter ve desenler için bu sorgu veri hareketlerini Azure Blockchain Workbench uygulamasını 's gönderen REST API'sinin odaklanan düzenlerini inceler *kapalı zinciri* SQL veritabanı.
+Bu bölüm, dağıtılmış bir genel muhasebe ve Azure blok zinciri çalışma ekranı *zinciri* SQL veritabanı 'ndan işlemler hakkındaki verileri sorgulayan REST API yönlerini odaklanan desenlere bakar.
 
-### <a name="sending-transactions-to-a-distributed-ledger-from-an-external-system"></a>Bir dış sistemden gönderme işlemleri için Dağıtılmış bir defter
+### <a name="sending-transactions-to-a-distributed-ledger-from-an-external-system"></a>Dış sistemden dağıtılmış bir genel muhasebeye işlem gönderme
 
-Azure Blockchain Workbench REST API işlemleri üzerinde dağıtılmış bir defter yürütmek için kimliği doğrulanmış istekler gönderir.
+Azure blok zinciri çalışma ekranı REST API dağıtılmış bir muhasebedeki işlemleri yürütmek için kimliği doğrulanmış istekleri gönderir.
 
-![Gönderme işlemleri için Dağıtılmış bir defter](./media/integration-patterns/send-transactions-ledger.png)
+![Dağıtılmış bir genel muhasebeye işlem gönderme](./media/integration-patterns/send-transactions-ledger.png)
 
-İşlem yürütme işlemi kullanarak daha önce gösterilen nerede oluşur:
+İşlemleri yürütmek, daha önce gösterilen işlemi kullanarak oluşur, burada:
 
--   Dış uygulama, Azure Active Directory'ı Azure Blockchain Workbench dağıtımının bir parçası sağlanan kimliğini doğrular.
--   Yetkili kullanıcılar API'sine isteklerle gönderilebilecek bir taşıyıcı belirteç alır.
--   Dış uygulama, taşıyıcı belirteç kullanarak REST API çağrıları yapma.
--   REST API istek iletisi paketleri ve Service Bus'a gönderir. Buradan, alınan, imzalı ve uygun olan dağıtılmış kayıt defteri gönderilir.
--   REST API, Azure Blockchain Workbench SQL istek kaydetmek ve geçerli sağlama durumu'kurmak için DB için bir istek gönderir.
--   SQL DB sağlama durumunu döndürür ve API çağrısı, onu çağıran dış uygulama Kimliğini döndürür.
+-   Dış uygulama, Azure blok zinciri çalışma ekranı dağıtımının bir parçası olarak sağlanan Azure Active Directory kimliğini doğrular.
+-   Yetkili kullanıcılar, API 'ye isteklerle gönderilebilecek bir taşıyıcı belirteci alır.
+-   Dış uygulamalar, REST API taşıyıcı belirtecini kullanarak çağrılar yapar.
+-   REST API, isteği bir ileti olarak paketler ve Service Bus gönderir. Buradan alınır, imzalanır ve uygun dağıtılmış bir genel muhasebeye gönderilir.
+-   REST API, Azure blok zinciri için SQL DB 'nin isteği kaydetmesine ve geçerli sağlama durumunu kurmaya yönelik bir istek yapar.
+-   SQL DB, sağlama durumunu döndürür ve API çağrısı KIMLIĞI onu çağıran dış uygulamaya döndürür.
 
-### <a name="querying-blockchain-workbench-metadata-and-distributed-ledger-transactions"></a>Blockchain Workbench'i meta veri ve dağıtılmış kayıt defteri işlemleri sorgulama
+### <a name="querying-blockchain-workbench-metadata-and-distributed-ledger-transactions"></a>Blok zinciri çalışma ekranı meta verileri ve dağıtılmış genel muhasebe işlemleri sorgulanıyor
 
-Azure Blockchain Workbench REST API'sine kimliği doğrulanmış istekler dağıtılmış bir defter akıllı sözleşme yürütülmesine ilgili sorgu ayrıntıları gönderir.
+Azure blok zinciri çalışma ekranı REST API, dağıtılmış bir muhasebedeki akıllı sözleşme yürütme ile ilgili ayrıntıları sorgulamak için kimliği doğrulanmış istekleri gönderir.
 
-![Meta verileri Sorgulama](./media/integration-patterns/querying-metadata.png)
+![Meta veriler sorgulanıyor](./media/integration-patterns/querying-metadata.png)
 
-Sorgulama işlemi kullanarak daha önce gösterilen nerede oluşur:
+Sorgulama, daha önce gösterilen işlemi kullanarak gerçekleşir, burada:
 
-1. Dış uygulama, Azure Active Directory'ı Azure Blockchain Workbench dağıtımının bir parçası sağlanan kimliğini doğrular.
-2. Yetkili kullanıcılar API'sine isteklerle gönderilebilecek bir taşıyıcı belirteç alır.
-3. Dış uygulama, taşıyıcı belirteç kullanarak REST API çağrıları yapma.
-4. REST API, SQL DB istekten verileri sorgular ve istemciye döndürür.
+1. Dış uygulama, Azure blok zinciri çalışma ekranı dağıtımının bir parçası olarak sağlanan Azure Active Directory kimliğini doğrular.
+2. Yetkili kullanıcılar, API 'ye isteklerle gönderilebilecek bir taşıyıcı belirteci alır.
+3. Dış uygulamalar, REST API taşıyıcı belirtecini kullanarak çağrılar yapar.
+4. REST API SQL DB 'den istek için verileri sorgular ve istemciye döndürür.
 
-## <a name="messaging-integration"></a>Mesajlaşma tümleştirme
+## <a name="messaging-integration"></a>Mesajlaşma tümleştirmesi
 
-Tümleştirme Mesajlaşma sistemleri, hizmet ve cihaz bir etkileşimli oturum açma veya istenmediğinde olduğu ile etkileşimi kolaylaştırır. Mesajlaşma tümleştirme iletileri iki tür üzerinde odaklanır: iletileri isteyen işlem dağıtılmış bir defter ve olayları bu kayıt defteri tarafından gerçekleştirilen işlemler, kullanıma sunulan yürütülebilir.
+Mesajlaşma tümleştirmesi, etkileşimli bir oturum açma mümkün veya istenmediğinde sistemlerle, hizmetlerle ve cihazlarla etkileşimi kolaylaştırır. Mesajlaşma tümleştirmesi iki tür iletiye odaklanır: işlem yapan iletiler dağıtılmış bir muhasebede yürütülür ve işlemler gerçekleştiği sırada bu muhasebe tarafından kullanıma sunulan olaylardır.
 
-Mesajlaşma tümleştirme yürütülmesine odaklanır ve hareket izleme ve kullanıcı oluşturma, sözleşme oluşturma ve yürütme işlemlerinde sözleşmelerinde ilgili tarafından kullanılır *gözetimsiz* arka uç sistemler.
+Mesajlaşma tümleştirmesi, Kullanıcı oluşturma, sözleşme oluşturma ve sözleşmelerin üzerinde işlem yürütme ile ilgili işlemlerin yürütülmesine ve izlenmesine odaklanır ve öncelikle *gözetimsiz* arka uç sistemleri tarafından kullanılır.
 
-Bu bölümde temel dağıtılmış kayıt defteri tarafından kullanıma sunulan olay iletileri temsil eden desenleri ve işlemleri için Dağıtılmış bir defter gönderin ve ileti tabanlı API odaklanan düzenlerini inceler.
+Bu bölüm, dağıtılmış bir defter ve temel alınan dağıtılmış defter tarafından kullanıma sunulan olay iletilerini temsil eden desenlere işlem gönderen ileti tabanlı API 'nin yönlerine odaklanan desenlere bakar.
 
-### <a name="one-way-event-delivery-from-a-smart-contract-to-an-event-consumer"></a>Olay tüketicisi için akıllı bir sözleşme tek yönlü olay teslimi 
+### <a name="one-way-event-delivery-from-a-smart-contract-to-an-event-consumer"></a>Bir akıllı sözleşmeden bir olay tüketicisine tek yönlü olay teslimi 
 
-Bu senaryoda, bir akıllı sözleşmesi içinde Örneğin, bir durum değişikliği veya yürütme işleminin belirli bir türdeki bir olayı oluşur. Bu olay bir Event Grid aşağı akış tüketicilere ve bu tüketiciler yayın sonra uygun eylemleri gerçekleştirin.
+Bu senaryoda, bir akıllı sözleşmede, örneğin bir durum değişikliği veya belirli bir işlem türünün yürütülmesi gibi bir olay oluşur. Bu olay, bir Event Grid aşağı akış tüketicilerine ve bu tüketicilerle ilgili işlemleri gerçekleştirebilir.
 
-Bu senaryoya örnek olarak, bir işlem ortaya çıktığında, bir tüketici uyarı almak ve SQL DB veya Common Data Service içinde bilgi kaydetme gibi eylemleri, gerçekleştirebilir, ' dir. Bu senaryo Workbench doldurmak için aşağıdaki aynı desendir kendi *kapalı zinciri* SQL DB.
+Bu senaryoya örnek olarak, bir işlem gerçekleştiğinde bir tüketici uyarı verebilir ve bilgileri bir SQL VERITABANıNA veya Common Data Service kaydetme gibi işlemler gerçekleştirebilir. Bu senaryo, SQL DB 'nin *kapalı zincirini* doldurmak için aşağıdaki şekilde kullanılan modeldir.
 
-Başka bir akıllı bir sözleşme sözleşme girer, örneğin belirli bir duruma geçiş durumunda olacaktır bir *OutOfCompliance*. Bu durum değişikliği olduğunda, bir yöneticinin cep telefonunuza gönderilecek bir uyarı tetikleyebilir.
+Başka bir deyişle, bir anlaşma bir *Outofuyum*içine geçtiğinde, bir akıllı anlaşma belirli bir duruma geçiş yaptığında olur. Bu durum değişikliği gerçekleştiğinde, bir uyarının bir yöneticinin cep telefonuna gönderilmesini tetikleyemeyebilir.
 
 ![Tek yönlü olay teslimi](./media/integration-patterns/one-way-event-delivery.png)
 
-Bu senaryo, daha önce gösterilen nerede işlemi kullanarak oluşur:
+Bu senaryo, daha önce gösterilen işlemi kullanarak oluşur; burada:
 
--   Akıllı sözleşme, yeni bir duruma geçer ve kayıt defteri için bir olay gönderir.
--   Genel muhasebe alır ve Azure Blockchain Workbench'i olay gönderir.
--   Azure Blockchain Workbench defterine olaylara abone olur ve olayı alır.
--   Azure Blockchain Workbench abonelerinin kullanımına Event Grid olayı yayımlar.
--   Dış sistemler için Event Grid abonesiniz iletiyi kullanmak ve uygun eylemleri gerçekleştirin.
+-   Akıllı sözleşme yeni bir duruma geçiş yapar ve bir olayı genel muhasebeye gönderir.
+-   Genel muhasebe, olayı alır ve Azure blok zinciri çalışma ekranına gönderir.
+-   Azure blok zinciri çalışma ekranı, genel muhasebedeki olaylara abone olur ve olayı alır.
+-   Azure blok zinciri çalışma ekranı, etkinliği Event Grid abonelere yayımlar.
+-   Dış sistemler Event Grid abone olunmuş, iletiyi tüketir ve uygun eylemleri gerçekleştirebilir.
 
-## <a name="one-way-event-delivery-of-a-message-from-an-external-system-to-a-smart-contract"></a>Tek yönlü olay teslimi iletinin bir dış sistemden bir akıllı Sözleşmesi
+## <a name="one-way-event-delivery-of-a-message-from-an-external-system-to-a-smart-contract"></a>Bir dış sistemden bir akıllı sözleşmeye yönelik bir iletinin tek yönlü olay teslimi
 
-Ters yönlerde akan bir senaryo yoktur. Bu durumda, bir olay bir algılayıcı tarafından oluşturulan veya bir dış sistem ve olay verilerini akıllı bir sözleşmeyi gönderilmelidir.
+Ayrıca, karşıt yönden akan bir senaryo da vardır. Bu durumda, bir olay bir algılayıcı veya bir dış sistem tarafından oluşturulur ve bu olaydan gelen verilerin bir akıllı sözleşmeye gönderilmesi gerekir.
 
-Yaygın olarak karşılaşılan örneklerden veri gelen Finans piyasalarına, örneğin, bono, ticari mallar veya hisse senedi fiyatlarını akıllı bir sözleşme teslimatıdır.
+Yaygın olarak kullanılan örnek, finans pazarlarından veri tesliminin (örneğin, Commodities, hisse senedi veya Bonun fiyatları) akıllı bir sözleşmeye gönderilir.
 
-### <a name="direct-delivery-of-an-azure-blockchain-workbench-in-the-expected-format"></a>Bir Azure Blockchain Workbench beklenen biçimde doğrudan teslim
+### <a name="direct-delivery-of-an-azure-blockchain-workbench-in-the-expected-format"></a>Beklenen biçimde bir Azure blok zinciri çalışma ekranının doğrudan teslimi
 
-Bazı uygulamalar Azure Blockchain Workbench ile tümleştirmek için tasarlanmıştır ve doğrudan oluşturur ve beklenen biçimlerde ileti gönderme.
+Bazı uygulamalar, Azure blok zinciri çalışma ekranı ile tümleştirilecek şekilde oluşturulmuştur ve beklenen biçimlerde iletileri doğrudan oluşturur ve gönderir.
 
-![Doğrudan teslimat](./media/integration-patterns/direct-delivery.png)
+![Doğrudan teslim](./media/integration-patterns/direct-delivery.png)
 
-Bu teslim işlemi kullanarak daha önce gösterilen nerede oluşur:
+Bu teslim, daha önce gösterilen işlem kullanılarak oluşur; burada:
 
--   Dış sistemdeki bir ileti oluşturmak için Azure Blockchain Workbench tetikleyen bir olay gerçekleşir.
--   Dış Sistem bilinen bir biçimde bu iletiyi oluşturmak için yazılan kod ve doğrudan Service Bus'a gönderir.
--   Azure Blockchain Workbench, Service Bus olaylara abone olur ve iletiyi alır.
--   Azure Blockchain Workbench, belirli bir sözleşmeyi dış sistemden veri gönderen bir muhasebe, çağrı başlatır.
--   Bir ileti alındığında, sözleşmeyi yeni bir duruma geçer.
+-   Bir dış sistemde, Azure blok zinciri çalışma ekranı için ileti oluşturmayı tetikleyen bir olay oluşur.
+-   Dış sistemin, bu iletiyi bilinen bir biçimde oluşturmak ve doğrudan Service Bus göndermesi için yazıldığı kodu vardır.
+-   Azure blok zinciri çalışma ekranı, Service Bus olaylara abone olur ve iletiyi alır.
+-   Azure blok zinciri çalışma ekranı, dış sistemden belirli bir sözleşmeye veri gönderen bir genel muhasebeye çağrı başlatır.
+-   İleti alındıktan sonra, sözleşme yeni bir duruma geçer.
 
-### <a name="delivery-of-a-message-in-a-format-unknown-to-azure-blockchain-workbench"></a>Azure Blockchain Workbench bilinmeyen bir biçimde bir ileti teslimi
+### <a name="delivery-of-a-message-in-a-format-unknown-to-azure-blockchain-workbench"></a>Azure blok zinciri için bilinmeyen bir biçimde ileti teslimi çalışma ekranı
 
-Bazı sistemler, Azure Blockchain Workbench tarafından kullanılan standart bir biçimde iletileri ulaştırmak üzere değiştirilemez. Bu durumlarda, mekanizmalar ve ileti biçimlerinden bu sistemler genellikle kullanılabilir. Özellikle, beklenen biçimler Mesajlaşma standart birine eşlemek için Logic Apps, Azure işlevleri veya diğer özel kod kullanarak bu sistemlerin yerel ileti türleri dönüştürülebilir.
+Bazı sistemler, Azure blok zinciri çalışma ekranı tarafından kullanılan standart biçimlerdeki iletileri teslim etmek üzere değiştirilemez. Bu durumlarda, bu sistemlerdeki mevcut mekanizmalar ve ileti biçimleri genellikle kullanılabilir. Özellikle, bu sistemlerin yerel ileti türleri, beklenen standart mesajlaşma biçimlerinden biriyle eşlenecek Logic Apps, Azure Işlevleri veya diğer özel kodlar kullanılarak dönüştürülebilir.
 
 ![Bilinmeyen ileti biçimi](./media/integration-patterns/unknown-message-format.png)
 
-Bu işlemi kullanarak daha önce gösterilen nerede oluşur:
+Bu, daha önce gösterilen işlemi kullanarak oluşur; burada:
 
--   Bir olay, bir ileti oluşturulmasını tetikler bir dış sistemde gerçekleşir.
--   Bir mantıksal uygulama veya özel kod ileti alma ve standart Azure Blockchain Workbench biçimlendirilmiş bir ileti dönüştürmek için kullanılır.
--   Mantıksal uygulama dönüştürülmüş iletiyi doğrudan Service Bus'a gönderir.
--   Azure Blockchain Workbench, Service Bus olaylara abone olur ve iletiyi alır.
--   Azure Blockchain Workbench, Anlaşmadaki belirli bir işlevi dış sistemden veri gönderme genel bir çağrı başlatır.
--   İşlevi yürütür ve tipik olarak durumu değiştirir. Durum değişikliği diğer işlevleri artık uygun olarak yürütülmesini etkinleştirmek akıllı sözleşmesindeki yansıtılan iş akışını ileriye taşır.
+-   Bir dış sistemde bir ileti oluşturulmasını tetikleyen bir olay oluşur.
+-   Bir mantıksal uygulama veya özel kod, bu iletiyi almak ve standart bir Azure blok zinciri çalışma ekranı biçimli iletiye dönüştürmek için kullanılır.
+-   Mantıksal uygulama, dönüştürülmüş iletiyi doğrudan Service Bus gönderir.
+-   Azure blok zinciri çalışma ekranı, Service Bus olaylara abone olur ve iletiyi alır.
+-   Azure blok zinciri çalışma ekranı, verileri dış sistemden sözleşmede belirli bir işleve gönderen bir genel muhasebeye çağrı başlatır.
+-   İşlev yürütülür ve genellikle durumu değiştirir. Durum değişikliği, akıllı sözleşmede yansıtıldığı iş iş akışını ileri doğru şekilde yürütülene kadar, diğer işlevlerin de uygun şekilde yürütülmesini sağlar.
 
-### <a name="transitioning-control-to-an-external-process-and-await-completion"></a>Bir dış denetimine geçiş işlemek ve tamamlanmasını bekler
+### <a name="transitioning-control-to-an-external-process-and-await-completion"></a>Denetimi bir dış işleme geçme ve tamamlanmayı bekleme
 
-İç yürütme ve bir dış işlem kapalı el akıllı bir sözleşme burada durdurmalısınız senaryo vardır. Dış işleme sonra tamamlamanız, akıllı sözleşme ve yürütme için bir ileti gönderme ardından içinde akıllı sözleşme devam eder.
+Bir akıllı sözleşmenin iç yürütmeyi durdurması ve harici bir işleme kapalı olması gereken senaryolar vardır. Daha sonra bu dış işlem tamamlanır, akıllı sözleşmeye bir ileti gönderir ve ardından yürütme akıllı sözleşme içinde devam edecektir.
 
 #### <a name="transition-to-the-external-process"></a>Dış işleme geçiş
 
-Bu düzen, genellikle aşağıdaki yaklaşımı kullanılarak uygulanır:
+Bu model genellikle aşağıdaki yaklaşım kullanılarak uygulanır:
 
--   Belirli bir durumu akıllı sözleşme geçer. Bu durumda, ya da yok veya bir dış sistem istenen bir eylemde kadar sınırlı bir dizi işlev yürütülebilir.
--   Durum değişikliği bir aşağı akış tüketici için bir olay olarak kullanıma sunulur.
--   Aşağı Akış tüketici olayı alır ve dış kod yürütme tetikler.
+-   Akıllı sözleşme belirli bir duruma geçiş yapar. Bu durumda, bir dış sistem istenen bir eylem yapana kadar hiçbir veya sınırlı sayıda işlev Yürütülebilirler.
+-   Durum değişikliği, bir aşağı akış tüketiciye olay olarak ortaya çıkmış.
+-   Aşağı akış tüketicisi olayı alır ve dış kod yürütmeyi tetikler.
 
 ![Dış işleme geçiş denetimi](./media/integration-patterns/transition-external-process.png)
 
-#### <a name="return-of-control-from-the-smart-contract"></a>Akıllı sözleşmeden denetimin dönüşü
+#### <a name="return-of-control-from-the-smart-contract"></a>Akıllı sözleşmeden denetim döndürme
 
-Dış Sistem özelleştirme yeteneği, bağlı olarak olabilir veya Azure Blockchain Workbench bekliyor standart biçimlerinden birinde iletileri ulaştırmak üzere mümkün olmayabilir. Bunlardan birini üretmek için dış sistemler yeteneklerine bağlı iletileri belirlemek, aşağıdaki iki dönüş yolları alınır.
+Dış sistemi özelleştirme yeteneğinin ne olduğuna bağlı olarak, Azure blok zinciri çalışma ekranının beklediği standart biçimlerden birinde iletileri teslim edebilir veya mümkün olmayabilir. Dış sistemleri temel alan bu iletilerden birini oluşturma özelliği, aşağıdaki iki dönüş yolundan hangisinin alındığını tespit edilir.
 
-##### <a name="direct-delivery-of-an-azure-blockchain-workbench-in-the-expected-format"></a>Bir Azure Blockchain Workbench beklenen biçimde doğrudan teslim
+##### <a name="direct-delivery-of-an-azure-blockchain-workbench-in-the-expected-format"></a>Beklenen biçimde bir Azure blok zinciri çalışma ekranının doğrudan teslimi
 
 ![](./media/integration-patterns/direct-delivery.png)
 
-Bu modelde, sözleşmenin ve sonraki durumu değişikliği iletişim önceki işlemi gerçekleşir. burada -
+Bu modelde, sözleşmeye ve sonraki durum değişikliğine yönelik iletişim, önceki işlem sonrasında oluşur-
 
--   Tamamlama veya harici kod yürütme belirli bir kilometre taşı ulaştığınızda, Azure Blockchain Workbench'i bağlı Service Bus olay gönderilir.
+-   Dış kod yürütmesindeki tamamlamaya veya belirli bir kilometre taşına ulaştıktan sonra Azure blok zinciri çalışma ekranına bağlı Service Bus bir olay gönderilir.
 
--   API için beklentileri uyan ileti yazmak için doğrudan uyarlanabilen olamaz sistemler için onu dönüştürülür.
+-   API 'nin beklentilerine uyan bir ileti yazmak üzere doğrudan uyarlanabilen sistemler için, dönüştürülür.
 
--   İleti içeriğini paketlenir ve akıllı Anlaşmadaki belirli bir işleve gönderilen. Dış sistemle ilişkili kullanıcı adına Bu teslim bitti.
+-   İleti içeriği paketlenir ve akıllı sözleşmede belirli bir işleve gönderilir. Bu teslim, dış sistemle ilişkili kullanıcı adına yapılır.
 
--   İşlevi yürütür ve tipik olarak durumu değiştirir. Durum değişikliği diğer işlevleri artık uygun olarak yürütülmesini etkinleştirmek akıllı sözleşmesindeki yansıtılan iş akışını ileriye taşır.
+-   İşlev yürütülür ve genellikle durumu değiştirir. Durum değişikliği, akıllı sözleşmede yansıtıldığı iş iş akışını ileri doğru şekilde yürütülene kadar, diğer işlevlerin de uygun şekilde yürütülmesini sağlar.
 
 ### 
 
-### <a name="delivery-of-a-message-in-a-format-unknown-to-azure-blockchain-workbench"></a>Azure Blockchain Workbench bilinmeyen bir biçimde bir ileti teslimi
+### <a name="delivery-of-a-message-in-a-format-unknown-to-azure-blockchain-workbench"></a>Azure blok zinciri için bilinmeyen bir biçimde ileti teslimi çalışma ekranı
 
 ![Bilinmeyen ileti biçimi](./media/integration-patterns/unknown-message-format.png)
 
-Burada bir ileti standart bir biçimde doğrudan iletişim sözleşmeye gönderilemez ve sonraki durumu değişikliği önceki gerçekleşir, bu modelde işlem yeri:
+Standart biçimdeki bir iletinin doğrudan gönderilemediği bu modelde, sözleşmeye ve sonraki durum değişikliğine yönelik iletişim, şu durumlarda bir önceki işlemden sonra oluşur:
 
-1.  Tamamlama veya harici kod yürütme belirli bir kilometre taşı ulaştığınızda, Azure Blockchain Workbench'i bağlı Service Bus olay gönderilir.
-2.  Bir mantıksal uygulama veya özel kod ileti alma ve standart Azure Blockchain Workbench biçimlendirilmiş bir ileti dönüştürmek için kullanılır.
-3.  Mantıksal uygulama dönüştürülmüş iletiyi doğrudan Service Bus'a gönderir.
-4.  Azure Blockchain Workbench, Service Bus olaylara abone olur ve iletiyi alır.
-5.  Azure Blockchain Workbench, belirli bir sözleşmeyi dış sistemden veri gönderen bir muhasebe, çağrı başlatır.
-6. İleti içeriğini paketlenir ve akıllı Anlaşmadaki belirli bir işleve gönderilen. Dış sistemle ilişkili kullanıcı adına Bu teslim bitti.
-7.  İşlevi yürütür ve tipik olarak durumu değiştirir. Durum değişikliği diğer işlevleri artık uygun olarak yürütülmesini etkinleştirmek akıllı sözleşmesindeki yansıtılan iş akışını ileriye taşır.
+1.  Dış kod yürütmesindeki tamamlamaya veya belirli bir kilometre taşına ulaştıktan sonra Azure blok zinciri çalışma ekranına bağlı Service Bus bir olay gönderilir.
+2.  Bir mantıksal uygulama veya özel kod, bu iletiyi almak ve standart bir Azure blok zinciri çalışma ekranı biçimli iletiye dönüştürmek için kullanılır.
+3.  Mantıksal uygulama, dönüştürülmüş iletiyi doğrudan Service Bus gönderir.
+4.  Azure blok zinciri çalışma ekranı, Service Bus olaylara abone olur ve iletiyi alır.
+5.  Azure blok zinciri çalışma ekranı, dış sistemden belirli bir sözleşmeye veri gönderen bir genel muhasebeye çağrı başlatır.
+6. İleti içeriği paketlenir ve akıllı sözleşmede belirli bir işleve gönderilir. Bu teslim, dış sistemle ilişkili kullanıcı adına yapılır.
+7.  İşlev yürütülür ve genellikle durumu değiştirir. Durum değişikliği, akıllı sözleşmede yansıtıldığı iş iş akışını ileri doğru şekilde yürütülene kadar, diğer işlevlerin de uygun şekilde yürütülmesini sağlar.
 
-## <a name="iot-integration"></a>IOT tümleştirme
+## <a name="iot-integration"></a>IoT tümleştirmesi
 
-Genel bir tümleştirme senaryosu akıllı bir sözleşme sensörlerden alınan telemetri verilerini eklenmesidir. Sensörleri tarafından sunulan veri bağlı olarak, nitelikli akıllı anlaşmalar bilgiye dayalı eylemleri ve sözleşmenin durumunu değiştirme.
+Ortak bir tümleştirme senaryosu, bir akıllı sözleşmede sensörlerden alınan Telemetri verilerinin içermesidir. Sensörler tarafından teslim edilen verilere bağlı olarak, akıllı sözleşmeler bilinçli eylemler alabilir ve sözleşmenin durumunu değiştirebilir.
 
-Örneğin, TIP sunan bir kamyon 110 derece oranında artırdı, sıcaklık olsaydı, ilaç verimliliğini etkileyebilir kamu güvenliği soruna neden olabilir değilse algılandı ve tedarik zinciri kaldırıldı. Bir sürücü için saat başına 100 mil, araba hızlandırılmış, Algılayıcı bilgilerine, sigorta sağlayıcısı sigorta iptali tetikleyebilir. Araba kiralama araba, GPS veri sürücüsü dışında bir Coğrafya, kiralama anlaşması kapsamında gittiği zaman belirtmek ve bir ceza ücret.
+Örneğin, bir kamyonun sıcaklığını 110 derecenin altına çıkarıyorsa, ilaç 'nın verimliliğini etkileyebilir ve tedarik zincirinde algılanmadığında ve kaldırılmadığında ortak bir güvenlik sorununa neden olabilir. Bir sürücü, arabasını saat başına 100 mil olarak hızlandırdıysanız, sonuçta elde edilen algılayıcı bilgileri sigorta sağlayıcısı tarafından sigorta iptali tetiklenebilir. Araba bir kiralama arabasında ise, GPS verileri, sürücünün kiralama anlaşmasıyla ele alınan bir Coğrafya dışında ne zaman başladığını belirtebilir ve ceza ücreti ödemenize neden olabilir.
 
-Bu sensörlerden veri sürekli olarak teslim ve tüm bu verileri akıllı bir sözleşmeyi göndermek uygun değil zorluktur. İkincil bir depoya tüm iletileri sunarken blok zincirine gönderilen ileti sayısını sınırla tipik bir yaklaşımdır. Örneğin, yalnızca sabit aralık, örneğin, saatte bir ve içerdiği değer anlaşılmış dışında düştüğünde alınan iletilerin teslim akıllı bir sözleşme için aralığı temel alır. Toleranslar dışında kalan değerleri denetlemek, veri sözleşme iş mantığına uygun yürütülen ve alındığını sağlar. Aralık değeri denetleme algılayıcı hala raporlama onaylar. Tüm veriler gönderildiğinde bir ikincil raporlama depoya daha geniş raporlama, analiz ve makine öğrenimi etkinleştirmek için. Örneğin, GPS için sensör okumaları alma dakikada akıllı bir sözleşme için gerekli olmayabilir ancak raporları veya eşleme rotaları kullanılacak için ilginç verileri sağlayabilir.
+Sınama, bu sensörlerden sabit bir şekilde veri teslim edilebilir ve bu verilerin tümünü akıllı bir sözleşmeye göndermek uygun değildir. Tipik bir yaklaşım, tüm iletileri ikincil depoya teslim ederken blok zincirine gönderilen ileti sayısını sınırlandırmalıdır. Örneğin, yalnızca sabit aralıklarla alınan iletileri, örneğin saatte bir kez ve kapsanan bir değer bir akıllı sözleşme için kabul edilen bir değerin dışında kaldığında teslim edin. Toleranslar dışında kalan değerler kontrol edilirken, sözleşmelerin iş mantığı ile ilgili verilerin alınıp yürütülmesi sağlanır. Aralıktaki değeri denetlemek, sensörin hala raporlama olduğunu onaylar. Tüm veriler, daha geniş raporlama, analiz ve makine öğrenimini sağlamak için ikincil bir raporlama deposuna gönderilir. Örneğin, GPS için sensörler için bir akıllı sözleşme için her dakika gerek duyulmayabilir, ancak raporlarda veya eşleme rotalarında kullanılacak ilginç veriler sağlayabilir.
 
-Azure platformunda, cihazlar ile tümleştirme, genellikle IOT Hub ile gerçekleştirilir. IOT Hub, iletilerin içeriğine göre yönlendirme sağlar ve daha önce açıklanan işlevsellik türünü sağlar.
+Azure platformunda cihazlarla tümleştirme, genellikle IoT Hub ile yapılır. IoT Hub, iletilerin içeriğe göre yönlendirilmesini sağlar ve daha önce açıklanan işlevselliğin türünü sağlar.
 
-![IOT iletileri](./media/integration-patterns/iot.png)
+![IoT iletileri](./media/integration-patterns/iot.png)
 
-İşlemi bir deseni gösterir:
+İşlem bir model gösterir:
 
--   Bir cihaz doğrudan veya bir alan ağ geçidi için IOT Hub ile iletişim kurar.
--   IOT Hub iletilerini alır ve iletileri yollar kurulan karşı değerlendirir örneğin iletisinin içeriği denetleyin. *50 derece büyük bir sıcaklık algılayıcısı bildirimde bulunur?*
--   IOT hub'ı ölçütlerine yol için tanımlı bir Service Bus iletileri gönderir.
--   Mantıksal uygulama veya diğer kod rota için IOT Hub'ın oluşturduğu Service Bus'a dinler.
--   Mantıksal uygulama veya diğer kod alır ve ileti bilinen biçimine dönüştürün.
--   Dönüştürülmüş iletiyi artık standart bir biçimde, Service Bus-Azure Blockchain Workbench için gönderilir.
--   Azure Blockchain Workbench, Service Bus olaylara abone olur ve iletiyi alır.
--   Azure Blockchain Workbench, belirli bir sözleşmeyi dış sistemden veri gönderen bir muhasebe, çağrı başlatır.
--   İleti alındığında sözleşmesi veri değerlendirir ve için yüksek bir sıcaklık, değerlendirme, örneğin, sonuca dayanarak durum değişikliği, duruma getirmeniz *dışı Uyumluluk*.
+-   Bir cihaz, IoT Hub için doğrudan veya bir alan ağ geçidi aracılığıyla iletişim kurar.
+-   IoT Hub iletileri alır ve ileti içeriğini kontrol eden yollarla iletileri değerlendirir (örneğin,). *Algılayıcı 50 dereceden büyük bir sıcaklık rapor veriyor mu?*
+-   IoT Hub, ölçütlere uyan iletileri yol için tanımlı bir Service Bus gönderir.
+-   Bir mantıksal uygulama veya diğer kod, IoT Hub yol için kurduğu Service Bus dinler.
+-   Mantıksal uygulama veya diğer kod, iletiyi alır ve bilinen bir biçime dönüştürür.
+-   Dönüştürülmüş ileti, artık standart biçimde, Azure blok zinciri çalışma ekranı için Service Bus gönderilir.
+-   Azure blok zinciri çalışma ekranı, Service Bus olaylara abone olur ve iletiyi alır.
+-   Azure blok zinciri çalışma ekranı, dış sistemden belirli bir sözleşmeye veri gönderen bir genel muhasebeye çağrı başlatır.
+-   İletinin alınması sırasında, sözleşme verileri değerlendirir ve bu değerlendirmenin sonucuna göre durumu değiştirebilir (örneğin, yüksek bir sıcaklık için durumu *uyumsuz*olarak değiştirin).
 
 ## <a name="data-integration"></a>Veri tümleştirmesi
 
-REST ve ileti tabanlı API ek olarak, Azure Blockchain Workbench Ayrıca, dağıtılan defterler işlem verilerini yanı sıra, uygulama ve sözleşme meta veriler ile doldurulmuş bir SQL veritabanına erişim sağlar.
+REST ve ileti tabanlı API 'nin yanı sıra Azure blok zinciri çalışma ekranı Ayrıca, uygulama ve Sözleşme meta verilerinin yanı sıra dağıtılmış defterlerden işlem verileri ile doldurulmuş bir SQL DB 'ye erişim sağlar.
 
 ![Veri tümleştirmesi](./media/integration-patterns/data-integration.png)
 
-Veri tümleştirmesi, iyi bilinen:
+Veri tümleştirmesi iyi bilinmektedir:
 
--   Azure Blockchain Workbench normal çalışma davranışını bir parçası olarak uygulamaları, iş akışları, sözleşmeler ve işlemler hakkındaki meta verileri depolar.
--   Veritabanı sunucusu adı, veritabanı adı, türü kimlik doğrulaması, oturum açma kimlik bilgileri ve kullanmak için hangi veritabanı görünümleri gibi veritabanı hakkındaki bilgileri koleksiyonunu kolaylaştırmak için bir veya daha fazla iletişim kutuları, dış sistemler veya araçlar sağlar.
--   Sorgular, aşağı akış tüketim kolaylaştırmak için SQL veritabanı görünümlerini karşı dış sistemler, hizmetleri, raporlama, geliştirici araçları ve kurumsal üretkenlik araçları tarafından yazılır.
+-   Azure blok zinciri, uygulamalar, iş akışları, sözleşmeler ve işlemler hakkındaki meta verileri normal çalışma davranışının bir parçası olarak depolar.
+-   Dış sistemler veya Araçlar veritabanı sunucu adı, veritabanı adı, kimlik doğrulama türü, oturum açma kimlik bilgileri ve hangi veritabanı görünümlerinin kullanıldığı hakkında bilgi toplamayı kolaylaştırmak için bir veya daha fazla iletişim kutusu sağlar.
+-   Dış sistemler, hizmetler, raporlama, geliştirici araçları ve kurumsal üretkenlik araçları tarafından aşağı akış tüketimini kolaylaştırmak için sorgular SQL veritabanı görünümlerine karşı yazılır.
 
-## <a name="storage-integration"></a>Depolama tümleştirme
+## <a name="storage-integration"></a>Depolama tümleştirmesi
 
-Birçok senaryo attestable dosyaları eklemenize gerek gerektirebilir. Birden çok nedeniyle, bir blok zinciri dosyaları yerleştirmek uygun değildir. Bunun yerine, bir dosyaya karşı bir şifreleme karması ile (örneğin, SHA-256) gerçekleştirmek ve dağıtılmış bir defter o karma paylaşmak için yaygın bir yaklaşım olan. Gelecekteki istediğiniz zaman yeniden karma gerçekleştirme aynı sonucu döndürmelidir. Dosya değiştirilirse, yalnızca bir piksel görüntüdeki değiştirilirse bile, farklı bir değer döndürür.
+Birçok senaryo, attestable dosyalarını birleştirme gereksinimini gerektirebilir. Birden çok nedenden dolayı, dosyaları bir blok zincirine yerleştirmek uygun değildir. Bunun yerine, yaygın bir yaklaşım bir dosyaya karşı şifreleme karması (örneğin, SHA-256) gerçekleştirmek ve bu karmayı dağıtılmış bir defter üzerinde paylaşmalıdır. Daha sonra herhangi bir zamanda karmayı yeniden gerçekleştirmek aynı sonucu döndürmelidir. Dosya değiştirilirse, görüntüde yalnızca bir piksel değiştirilse bile, karma farklı bir değer döndürür.
 
-![Depolama tümleştirme](./media/integration-patterns/storage-integration.png)
+![Depolama tümleştirmesi](./media/integration-patterns/storage-integration.png)
 
-Desen uygulanabileceği yeri:
+Bu model şu şekilde uygulanabilir:
 
--   Dış sistemdeki bir Azure depolama gibi bir depolama mekanizması dosyasında devam ettirir.
--   Karma dosyası veya dosya ile oluşturulur ve ilişkili meta verileri vb. gibi sahibi, dosyanın bulunduğu, URL için bir tanımlayıcı.
--   Karma ve herhangi bir meta veri gönderildiği bir akıllı sözleşmesini bir işlev gibi *FileAdded*
--   Gelecekte, dosya meta verileri yeniden karma hale ve muhasebe üzerinde depolanan değerleri karşı karşılaştırılır.
+-   Bir dış sistem, Azure depolama gibi bir depolama mekanizmasında bir dosyayı sürdürür.
+-   Bir karma dosya veya dosya ile, sahip için bir tanımlayıcı, dosyanın bulunduğu URL, vs. gibi ilişkili meta veriler ile oluşturulur.
+-   Karma ve tüm meta veriler akıllı bir sözleşmede bir işleve gönderilir; Örneğin, *dosya eklendi*
+-   Gelecekte dosya ve meta veriler karma hale getirilir ve bu, genel muhasebede depolanan değerlerle karşılaştırılır.
 
-## <a name="prerequisites-for-implementing-integration-patterns-using-the-rest-and-message-apis"></a>REST ve ileti API'leri kullanarak tümleştirme desenleri uygulamak için Önkoşullar
+## <a name="prerequisites-for-implementing-integration-patterns-using-the-rest-and-message-apis"></a>REST ve ileti API 'Lerini kullanarak tümleştirme desenleri uygulama önkoşulları
 
-Bir dış sistem veya cihaz için REST veya ileti API kullanarak akıllı sözleşme ile etkileşim olanağı kolaylaştırmak için aşağıdakiler olmalıdır-
+Bir dış sistemin veya cihazın, REST veya ileti API 'sini kullanarak akıllı sözleşmeyle etkileşime geçmesini kolaylaştırmak için aşağıdakiler gerçekleşmelidir-
 
-1. Consortium Azure Active Directory'de Dış Sistem ya da cihaz temsil eden bir hesabı oluşturulur.
-2. Bir veya daha fazla uygun nitelikli akıllı anlaşmalar Azure Blockchain Workbench uygulamanız için Dış Sistem veya cihazınızdan olayları kabul etmek için tanımlanan işlevleri vardır.
-3. Akıllı sözleşmeniz için uygulama yapılandırma dosyasını içeren sistemi veya cihaz rolü atanır.
-4. Akıllı sözleşmeniz için uygulama yapılandırma dosyası içinde tanımlanan rol tarafından bu işlev çağrılır bildiren tanımlar.
-5. Azure Blockchain Workbench için uygulama yapılandırma dosyası ve nitelikli akıllı anlaşmalar yüklenir.
+1. Konsorsiyumun Azure Active Directory, dış sistemi veya cihazı temsil eden bir hesap oluşturulur.
+2. Azure blok zinciri çalışma ekranı uygulamanız için bir veya daha fazla uygun akıllı sözleşme, dış sisteminizden veya cihazınızdan olayları kabul edecek şekilde tanımlı işlevlere sahip.
+3. Akıllı sözleşmeniz için uygulama yapılandırma dosyası, sistemin veya cihazın atandığı rolü içerir.
+4. Akıllı sözleşmeniz için uygulama yapılandırma dosyası, bu işlevin tanımlanan rol tarafından çağrıldığı durumları tanımlar.
+5. Uygulama yapılandırma dosyası ve akıllı sözleşmeleri Azure blok zinciri çalışma ekranı 'na yüklendi.
 
-Uygulama yüklendikten sonra Azure Active Directory hesabı dış sistem için sözleşme ve ilişkili rol atanır.
+Uygulama karşıya yüklendikten sonra, dış sistem için Azure Active Directory hesabı sözleşmeye ve ilişkili role atanır.
 
-## <a name="testing-external-system-integration-flows-prior-to-writing-integration-code"></a>Dış Sistem tümleştirme akışlarını tümleştirme kod yazmadan önce test etme 
+## <a name="testing-external-system-integration-flows-prior-to-writing-integration-code"></a>Tümleştirme kodu yazmadan önce dış sistem tümleştirme akışlarını test etme 
 
-Dış sistemlerle tümleştirme, birçok senaryo önemli bir gereksinimdir. Dış sistemlerle tümleştirmek için akıllı sözleşme tasarım önceki veya paralel kod geliştirme doğrulayabilmesi için istenen bir durumdur.
+Dış sistemlerle tümleştirme pek çok senaryonun önemli bir gereksinimidir. Dış sistemlerle tümleştirme için kodun geliştirilmesine paralel olarak veya paralel olarak, akıllı sözleşme tasarımını doğrulayabilmek istenebilir.
 
-Azure Active Directory (Azure AD) kullanımını önemli ölçüde Geliştirici üretkenliği ve saat değeri hızlandırabilirsiniz. Özellikle, bir dış sistem kod tümleştirmesiyle Önemsiz olmayan bir süre beklemeniz gerekebilir. Azure AD kullanarak ve UX Azure Blockchain Workbench tarafından otomatik olarak oluşturulmasını, geliştiricilerin Blockchain Workbench'i Dış Sistem olarak oturum açın ve UX'i üzerinden dış sisteme değerlerinden Doldur izin verebilirsiniz Hızlı bir şekilde geliştirin ve dış sistemler için tümleştirme kodu yazılmadan önce bir kavram kanıtı ortamında fikirlerinizi doğrulayın.
+Azure Active Directory (Azure AD) kullanımı, geliştirici üretkenliğini ve değere göre süreyi önemli ölçüde hızlandırmanızı sağlayabilir. Özellikle, bir dış sistemle kod tümleştirmesi, önemsiz olmayan bir süre alabilir. Azure AD 'yi ve UX 'i Azure blok zinciri çalışma ekranı tarafından otomatik olarak oluşturmayı kullanarak, geliştiricilerin dış sistem olarak blok zinciri çalışma ekranına oturum açmasını ve UX aracılığıyla dış sistemden değer doldurmasına izin verebilirsiniz. Tümleştirme kodu dış sistemler için yazılmadan önce kavram kanıtı ortamında hızlıca geliştirme ve doğrulama yapabilirsiniz.

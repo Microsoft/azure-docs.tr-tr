@@ -1,23 +1,23 @@
 ---
-title: Web trafiğini yönlendirme URL'sine bağlı - Azure CLI
-description: Bu makalede, Azure CLI kullanarak sunucularının belirli ölçeklenebilir havuzları URL'sine göre web trafiği yönlendirmeyi öğrenin.
+title: Web trafiğini URL 'ye göre yönlendirme-Azure CLı
+description: Bu makalede, Azure CLı kullanarak Web trafiğini URL 'ye göre ölçeklenebilir sunucuların belirli havuzlarıyla yönlendirmeyi öğrenin.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: tutorial
-ms.date: 5/20/2019
+ms.topic: article
+ms.date: 08/01/2019
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: c0954d1010a6cf5ef6f8edab1470588df9fba559
-ms.sourcegitcommit: 24fd3f9de6c73b01b0cee3bcd587c267898cbbee
+ms.openlocfilehash: b6bc0b00579bdef0a358f756b8cf2b6034aca017
+ms.sourcegitcommit: d585cdda2afcf729ed943cfd170b0b361e615fae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/20/2019
-ms.locfileid: "65955573"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68688187"
 ---
-# <a name="route-web-traffic-based-on-the-url-using-the-azure-cli"></a>Azure CLI kullanarak URL'sini temel alarak web trafiğini yönlendirme
+# <a name="route-web-traffic-based-on-the-url-using-the-azure-cli"></a>Azure CLı kullanarak Web trafiğini URL 'ye göre yönlendirme
 
-Web trafiğini yöneten bir BT yöneticisi olarak müşterilerinizin ihtiyaç duydukları bilgilere mümkün olan en hızlı şekilde ulaşmalarına yardımcı olmak istersiniz. Müşteri deneyimini iyileştirmenin bir yolu da farklı türlerdeki web trafiğini farklı sunucu kaynaklarına yönlendirmektir. Bu makalede Azure CLI'yı kurma ve uygulamanızın farklı trafik türleri için uygulama ağ geçidi yönlendirme yapılandırma için nasıl kullanılacağını gösterir. Yönlendirme, trafiği URL'ye göre farklı sunucu havuzlarına yönlendirir.
+Web trafiğini yöneten bir BT yöneticisi olarak müşterilerinizin ihtiyaç duydukları bilgilere mümkün olan en hızlı şekilde ulaşmalarına yardımcı olmak istersiniz. Müşteri deneyimini iyileştirmenin bir yolu da farklı türlerdeki web trafiğini farklı sunucu kaynaklarına yönlendirmektir. Bu makalede, Azure CLı kullanarak uygulamanızdan farklı türde trafik için Application Gateway yönlendirmeyi ayarlama ve yapılandırma hakkında yönergeler verilmektedir. Yönlendirme, trafiği URL'ye göre farklı sunucu havuzlarına yönlendirir.
 
 ![URL yönlendirme örneği](./media/tutorial-url-route-cli/scenario.png)
 
@@ -31,15 +31,15 @@ Bu makalede şunları öğreneceksiniz:
 > * Otomatik ölçeklendirme gerçekleştirmek için her havuzda bir ölçek kümesi oluşturma
 > * Farklı trafik türlerinin doğru havuza gittiğini doğrulamak için bir test gerçekleştirme
 
-Tercih ederseniz, bu yordamı kullanarak tamamlayabilirsiniz [Azure PowerShell](tutorial-url-route-powershell.md) veya [Azure portalında](create-url-route-portal.md).
+İsterseniz, [Azure PowerShell](tutorial-url-route-powershell.md) veya [Azure Portal](create-url-route-portal.md)kullanarak bu yordamı tamamlayabilirsiniz.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale Azure CLI 2.0.4 sürümünü çalıştırmanızı gerektirir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli).
+CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale, Azure CLı sürüm 2.0.4 veya üstünü çalıştırmanızı gerektirir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli).
 
-## <a name="create-a-resource-group"></a>Kaynak grubu oluşturun
+## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
 Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. `az group create` komutunu kullanarak bir kaynak grubu oluşturun.
 
@@ -70,12 +70,14 @@ az network vnet subnet create \
 
 az network public-ip create \
   --resource-group myResourceGroupAG \
-  --name myAGPublicIPAddress
+  --name myAGPublicIPAddress \
+  --allocation-method Static \
+  --sku Standard
 ```
 
 ## <a name="create-the-app-gateway-with-a-url-map"></a>URL eşleme ile uygulama ağ geçidi oluşturma
 
-`az network application-gateway create` komutunu kullanarak *myAppGateway* adlı bir uygulama ağ geçidi oluşturun. Azure CLI kullanarak bir uygulama ağ geçidi oluşturduğunuzda, kapasite, sku ve HTTP ayarları gibi yapılandırma bilgilerini belirtirsiniz. Uygulama ağ geçidi, *myAGSubnet*’e ve daha önce oluşturduğunuz *myAGPublicIPAddress*’e atanır.
+`az network application-gateway create` komutunu kullanarak *myAppGateway* adlı bir uygulama ağ geçidi oluşturun. Azure CLI kullanarak bir uygulama ağ geçidi oluşturduğunuzda, kapasite, sku ve HTTP ayarları gibi yapılandırma bilgilerini belirtirsiniz. Application Gateway, *Myagsubnet* ve *Myagpublicıpaddress*öğesine atanır.
 
 ```azurecli-interactive
 az network application-gateway create \
@@ -85,7 +87,7 @@ az network application-gateway create \
   --vnet-name myVNet \
   --subnet myAGsubnet \
   --capacity 2 \
-  --sku Standard_Medium \
+  --sku Standard_v2 \
   --http-settings-cookie-based-affinity Disabled \
   --frontend-port 80 \
   --http-settings-port 80 \
@@ -180,9 +182,9 @@ az network application-gateway rule create \
   --address-pool appGatewayBackendPool
 ```
 
-## <a name="create-vm-scale-sets"></a>VM ölçek kümelerini oluşturma
+## <a name="create-virtual-machine-scale-sets"></a>Sanal makine ölçek kümelerini oluşturma
 
-Bu makalede, oluşturduğunuz üç arka uç havuzu destekleyen üç sanal makine ölçek kümeleri oluşturun. Oluşturduğunuz ölçek kümeleri *myvmss1*, *myvmss2* ve *myvmss3* olarak adlandırılır. Her bir ölçek kümesi NGINX yükleyeceğiniz iki sanal makine örneği içerir.
+Bu makalede, oluşturduğunuz üç arka uç havuzunu destekleyen üç sanal makine ölçek kümesi oluşturacaksınız. Oluşturduğunuz ölçek kümeleri *myvmss1*, *myvmss2* ve *myvmss3* olarak adlandırılır. Her bir ölçek kümesi NGINX yükleyeceğiniz iki sanal makine örneği içerir.
 
 ```azurecli-interactive
 for i in `seq 1 3`; do
@@ -234,7 +236,7 @@ done
 
 ## <a name="test-the-application-gateway"></a>Uygulama ağ geçidini test etme
 
-Uygulama ağ geçidinin genel IP adresini almak için az network public-ip show komutunu kullanın. Genel IP adresini kopyalayıp tarayıcınızın adres çubuğuna yapıştırın. Gibi `http://40.121.222.19`, `http://40.121.222.19:8080/images/test.htm`, veya `http://40.121.222.19:8080/video/test.htm`.
+Uygulama ağ geçidinin genel IP adresini almak için az network public-ip show komutunu kullanın. Genel IP adresini kopyalayıp tarayıcınızın adres çubuğuna yapıştırın. ,,, Veya`http://40.121.222.19:8080/video/test.htm`gibi. `http://40.121.222.19` `http://40.121.222.19:8080/images/test.htm`
 
 ```azurecli-interactive
 az network public-ip show \
@@ -246,11 +248,11 @@ az network public-ip show \
 
 ![Temel URL’yi uygulama ağ geçidinde test etme](./media/tutorial-url-route-cli/application-gateway-nginx.png)
 
-URL’yi http://&lt;ip-address&gt;:8080/images/test.html olarak değiştirin. Burada &lt;ip-address&gt; değeri olarak kendi IP adresinizi kullanın. Aşağıdaki örneğe benzer bir sonuç olacaktır:
+URL 'yi IP adresi için&lt; &lt;IP&gt;adresinizi http://&gt;IP adresi: 8080/images/test.html olarak değiştirin ve aşağıdaki örneğe benzer bir şey görmeniz gerekir:
 
 ![Görüntü URL’sini uygulama ağ geçidinde test etme](./media/tutorial-url-route-cli/application-gateway-nginx-images.png)
 
-URL’yi http://&lt;ip-adresi&gt;:8080/video/test.html olarak değiştirin. Burada &lt;ip-adresi&gt; değeri olarak kendi IP adresinizi kullanın. Aşağıdaki örneğe benzer bir sonuç olacaktır.
+URL 'yi IP adresi için&lt; &lt;IP&gt;adresinizi http://&gt;IP adresi: 8080/video/test.html olarak değiştirin ve aşağıdaki örneğe benzer bir şey görmeniz gerekir.
 
 ![Video URL’sini uygulama ağ geçidinde test etme](./media/tutorial-url-route-cli/application-gateway-nginx-video.png)
 
@@ -259,9 +261,9 @@ URL’yi http://&lt;ip-adresi&gt;:8080/video/test.html olarak değiştirin. Bura
 Artık gerekli olmadığında kaynak grubunu, uygulama ağ geçidini ve tüm ilgili kaynakları silin.
 
 ```azurecli-interactive
-az group delete --name myResourceGroupAG --location eastus
+az group delete --name myResourceGroupAG
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [URL yolu tabanlı yönlendirme ile bir uygulama ağ geçidi oluşturma](./tutorial-url-redirect-cli.md)
+[URL yolu tabanlı yönlendirme ile bir uygulama ağ geçidi oluşturma](./tutorial-url-redirect-cli.md)

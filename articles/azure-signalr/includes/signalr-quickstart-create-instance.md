@@ -7,12 +7,12 @@ ms.topic: include
 ms.date: 09/14/2018
 ms.author: antchu
 ms.custom: include file
-ms.openlocfilehash: 4e8bdc63daa7450a88c2fcf4b7e878e18cea260d
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: ac77f0b6a1d90fd78db64618c1e03ade198a67c0
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188739"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68882115"
 ---
 ## <a name="create-an-azure-signalr-service-instance"></a>Azure SignalR Hizmeti örneği oluşturma
 
@@ -34,9 +34,10 @@ Uygulamanız Azure’da bir SignalR hizmeti örneğine bağlanır.
     | **Location** | Batı ABD | Size yakın bir [bölge](https://azure.microsoft.com/regions/) seçin. |
     | **Fiyatlandırma katmanı** | Boş | Azure SignalR Hizmetini ücretsiz deneyin. |
     | **Birim sayısı** |  Geçerli değil | Birim sayısı, SignalR Hizmeti örneğinizin kaç bağlantı kabul edebileceğini belirtir. Bu yalnızca Standart katmanda yapılandırılabilir. |
+    | **Hizmet modu** |  Sunucusuz | Azure Işlevleri veya REST API kullanmak için. |
 
     ![SignalR Hizmeti Oluşturma](../media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-create.png)
 
 1. SignalR Hizmeti örneğini dağıtmaya başlamak için **Oluştur**’u seçin.
 
-1. Örneği dağıtıldıktan sonra portalda açın ve kendi ayarları sayfasını bulun. Hizmet Modu ayarını *sunucusuz* yalnızca Azure işlevleri bağlama veya REST API Azure SignalR hizmeti kullanıyorsanız. İçinde bırakın *Klasik* veya *varsayılan* Aksi takdirde.
+1. Örnek dağıtıldıktan sonra portalda açın ve ayarlar sayfasını bulun. Azure SignalR hizmetini Azure Işlevleri bağlama veya REST API aracılığıyla kullanıyorsanız, hizmet modu ayarını *sunucusuz* olarak değiştirin. Aksi halde *Klasik* veya *varsayılan* olarak bırakın.

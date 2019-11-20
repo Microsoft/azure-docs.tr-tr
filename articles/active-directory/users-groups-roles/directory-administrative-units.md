@@ -1,44 +1,46 @@
 ---
-title: Yönetim birimleri Yönetimi (Önizleme) - Azure Active Directory | Microsoft Docs
-description: Daha ayrıntılı temsilci izinleri Azure Active Directory'de Yönetim birimleri kullanma
+title: Yönetim birimleri yönetimi (Önizleme)-Azure AD | Microsoft Docs
+description: Azure Active Directory izinlerin daha ayrıntılı olarak temsili için yönetim birimleri kullanma
 services: active-directory
 documentationcenter: ''
 author: curtand
-manager: mtillman
-editor: ''
+manager: daveba
 ms.service: active-directory
 ms.topic: article
 ms.subservice: users-groups-roles
 ms.workload: identity
-ms.date: 01/31/2019
+ms.date: 11/13/2019
 ms.author: curtand
 ms.reviewer: elkuzmen
 ms.custom: oldportal;it-pro;
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 77f1a6e5b1e8191c1497e437cc26e1caf1255ba7
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3c4958975a080a98fb900bf317229ba9eda795d5
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60472379"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74028421"
 ---
-# <a name="administrative-units-management-in-azure-active-directory-public-preview"></a>Yönetim birimleri Yönetimi Azure Active Directory'de (genel Önizleme)
+# <a name="administrative-units-management-in-azure-active-directory-preview"></a>Azure Active Directory 'de yönetim birimleri yönetimi (Önizleme)
 
-Bu makalede yeni bir Azure Active Directory (Azure AD) kapsayıcı kullanıcılar alt kümeleri üzerinde yönetim izinleri için temsilci seçme ve bir kullanıcı alt ilkeleri uygulamak için kullanılan kaynakların Yönetim birimleri – açıklanır. Azure Active Directory'de Yönetim birimleri merkezi yöneticileri izinler için bölgesel yöneticileri temsilci veya ayrıntılı düzeyde ilke ayarlamak için etkinleştirin.
+Bu makalede Azure Active Directory (Azure AD) içindeki yönetim birimleri açıklanmaktadır. Yönetim birimi, diğer Azure AD kaynakları için bir kapsayıcı olabilecek bir Azure AD kaynağıdır. Bu önizleme sürümünde, bu kaynaklar yalnızca Kullanıcı olabilir. Örneğin, yönetim birimi kapsamlı bir kullanıcı hesabı Yöneticisi, profil bilgilerini güncelleştirebilir, parolaları sıfırlayabilir ve yalnızca kendi yönetim biriminde kullanıcılar için lisans atayabilir.
 
-Bu bağımsız bölümlere, örneğin, birbirinden bağımsız olan birçok otonom okullar (iş, okul, mühendislik Okul vb.), yapılan büyük üniversite bir kuruluşlarıyla faydalıdır. Bu tür bölümler, erişim denetimi, kullanıcıları yönetme ve kendi bölme için özel ilkeler, kendi BT yöneticileri vardır. Bu bölümsel vermek mümkün olmasını istediğiniz merkezi yöneticileri kullanıcıları, belirli Departmanlar üzerinden yöneticileri izinleri. Daha açık belirtmek gerekirse bu örneği kullanarak, bir merkezi Yöneticisi, örneği için bir yönetim birimindeki belirli bir school (iş ve Okul) için oluşturabilir ve yalnızca iş Okul kullanıcılar ile doldurun. Daha sonra merkezi bir yönetici iş Okul BT personeli kapsamlı bir role ekleyebilirsiniz. diğer bir deyişle, BT çalışanlarının iş Okul yönetimsel izinler yalnızca iş Okul yönetim birimi verin.
+Yönetim birimlerini, kullanıcıların alt kümeleri üzerinde yönetici izinleri atamak ve kullanıcıların bir alt kümesine ilke uygulamak için kullanabilirsiniz. Bölgesel yöneticilerle izinleri devretmek veya ayrıntılı bir düzeyde ilke ayarlamak için yönetim birimlerini kullanabilirsiniz.
 
-> [!IMPORTANT]
-> Yönetim birimleri kullanmak için bir Azure Active Directory Premium lisansı ve tüm kullanıcılar için Azure Active Directory temel Lisansı yönetim birimi için bir yönetim birimi kapsamlı yönetim gerektirir. Daha fazla bilgi için [Azure AD Premium ile çalışmaya başlama](../fundamentals/active-directory-get-started-premium.md).
->
+## <a name="deployment-scenario"></a>Dağıtım senaryosu
 
+Yönetim birimleri bağımsız bölümler içeren kuruluşlarda yararlı olabilir. Birçok otonom okuldan (Iş kolu, mühendisin Okulu vb.) oluşan büyük bir üniversitenin örneğini, her birinin erişimi denetleyen, kullanıcıları yöneten ve okulların ilkelerini ayarlayabilen kendi BT yöneticilerine sahip olduğu bir örnek olarak düşünün. Merkezi bir yönetici, Iş Okulu için yönetim birimi oluşturabilir ve yalnızca iş okul öğrencilerine ve personeline göre doldurabilir. Daha sonra merkezi yönetici, Iş Okulu BT personelini, iş okul yönetim birimindeki yalnızca Azure AD kullanıcıları üzerinde yönetici izinleri veren kapsamlı bir role ekleyebilir.
 
-Merkezi yönetici açısından bakıldığında, bir yönetim birimi oluşturulan ve kaynakları ile doldurulmuş bir dizin nesnesidir. **Bu önizleme sürümünde bu kaynakların yalnızca kullanıcılar olabilir.** Oluşturulur ve doldurulur sonra bir yönetim birimi yalnızca yönetici biriminde bulunan kaynaklar üzerinden verilen kısıtlamak için kapsamı olarak kullanılabilir.
+## <a name="license-requirements"></a>Lisans gereksinimleri
 
-## <a name="managing-administrative-units"></a>Yönetim birimleri yönetme
-Bu önizleme sürümünde oluşturabilir ve Azure Active Directory için Windows PowerShell modülü cmdlet'lerini kullanarak yönetim birimlerini yönetme. Bunun hakkında daha fazla bilgi edinmek için [Yönetim birimleri ile çalışma](https://docs.microsoft.com/powershell/azure/active-directory/working-with-administrative-units?view=azureadps-2.0)
+Yönetim birimlerini kullanmak için her yönetim birimi Yöneticisi için bir Azure Active Directory Premium lisansı gerekir. Daha fazla bilgi için bkz. [Azure AD Premium kullanmaya](../fundamentals/active-directory-get-started-premium.md)başlama.
 
-Yazılım gereksinimleri ve Azure AD modülünü yükleme hakkında daha fazla bilgi ve söz dizimi, parametre açıklamalarını ve örnekleri dahil olmak üzere Yönetim birimleri yönetmek için Azure AD modülü cmdlet'leri hakkında daha fazla bilgi için bkz. [Azure Active Dizin PowerShell](https://docs.microsoft.com/powershell/azure/active-directory/overview?view=azureadps-2.0).
+## <a name="managing-administrative-units"></a>Yönetim birimlerini yönetme
+
+Bu önizleme sürümünde, yönetim birimlerini oluşturabileceğiniz ve yönetebileceğiniz tek yol, Windows PowerShell cmdlet 'leri için Azure Active Directory modülünü [yönetim birimleriyle çalışma](https://docs.microsoft.com/powershell/azure/active-directory/working-with-administrative-units?view=azureadps-2.0) konusunda açıklandığı şekilde kullanmaktır
+
+Yazılım gereksinimleri hakkında daha fazla bilgi ve Azure AD modülünü yükleme ve sözdizimi, parametre açıklamaları ve örnekler de dahil olmak üzere yönetim birimlerini yönetmek için Azure AD modülü cmdlet 'leri hakkında başvuru bilgileri için bkz. [Azure Active Directory PowerShell](https://docs.microsoft.com/powershell/azure/active-directory/overview?view=azureadps-2.0).
 
 ## <a name="next-steps"></a>Sonraki adımlar
+
 [Azure Active Directory sürümleri](../fundamentals/active-directory-whatis.md)

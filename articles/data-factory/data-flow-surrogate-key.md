@@ -1,55 +1,55 @@
 ---
-title: Azure veri fabrikası veri akışı vekil anahtar dönüştürme eşlemesi
-description: Sıralı anahtar değerleri oluşturmak için Azure Data Factory'nin eşleme veri akışı vekil anahtar dönüştürme kullanma
+title: Azure Data Factory eşleme veri akışı yedek anahtar dönüştürmesi
+description: Azure Data Factory eşleme veri akışı yedek anahtar dönüşümü kullanarak sıralı anahtar değerleri oluşturma
 author: kromerm
 ms.author: makromer
 ms.reviewer: douglasl
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 02/12/2019
-ms.openlocfilehash: eaa1c577f7e208400d3430222b006e0dbbd7956a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 144d6298a13d35d94a68b35c443a3a47cefcfc2a
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61350614"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72387173"
 ---
-# <a name="mapping-data-flow-surrogate-key-transformation"></a>Veri akışı vekil anahtar dönüştürme eşlemesi
+# <a name="mapping-data-flow-surrogate-key-transformation"></a>Veri akışı yedek anahtar dönüşümünü eşleme
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
 
-Yedek anahtar dönüşümü, veri akışı satır kümesi için artan iş kolu rastgele anahtar değeri eklemek için kullanın. Bu, boyut tabloları, boyut tabloları içindeki her üyenin Kimball DW metodolojiyi iş kolu anahtar, parçası olan benzersiz bir anahtar olması gereken yere bir yıldız şeması analitik veri modelinde tasarlarken kullanışlıdır.
 
-![Yedek anahtar dönüştürme](media/data-flow/surrogate.png "vekil anahtar dönüştürme")
+Veri akışı satır kümesine artan iş dışı bir anahtar değeri eklemek için vekil anahtar dönüşümünü kullanın. Bu, boyut tablolarınızdaki her üyenin, Kıbol DW metodolojisinin bir parçası olan iş dışı bir anahtar olan benzersiz bir anahtara sahip olması gereken bir yıldız şeması analitik veri modelinde, boyut tabloları tasarlarken yararlıdır.
 
-"Anahtar sütun", yeni vekil anahtar sütunu sunacak addır.
+![Vekil anahtar dönüşümü](media/data-flow/surrogate.png "Vekil anahtar dönüşümü")
 
-"Başlangıç değeri" başlangıç noktasını artımlı değeri olur.
+"Anahtar sütun", yeni yedek anahtar sütununuzu verdiğiniz addır.
 
-## <a name="increment-keys-from-existing-sources"></a>Mevcut kaynaklarına artış anahtarları
+"Başlangıç değeri", artımlı değerin başlangıç noktasıdır.
 
-Dizinizin bir kaynakta var olan bir değer başlamak istiyorsanız, bir sütunu türetilmiş dönüşümü vekil anahtar dönüşümünüzü takip kullanın ve iki değer birlikte ekleyin:
+## <a name="increment-keys-from-existing-sources"></a>Mevcut kaynaklardan anahtarları artırma
 
-![SK eklemek en fazla](media/data-flow/sk006.png "vekil anahtar dönüştürme Max Ekle")
+Dizinizi bir kaynakta bulunan bir değerden başlatmak isterseniz, yedek anahtar dönüşümünüzü hemen izleyerek türetilmiş bir sütun dönüştürmesi kullanabilir ve iki değeri birlikte ekleyebilirsiniz:
 
-Önceki en yüksek anahtar değeriyle sağlamak için kullanabileceğiniz iki teknik vardır:
+![SK en fazla Ekle](media/data-flow/sk006.png "Vekil anahtar dönüştürme en fazla Ekle")
+
+Anahtar değerini önceki üst sınır ile temel almak için kullanabileceğiniz iki teknik vardır:
 
 ### <a name="database-sources"></a>Veritabanı kaynakları
 
-Kaynak koordinat dönüştürmesini kullanma kaynağınızdan MAX() seçmek için "Sorgu" seçeneğini kullanın:
+Kaynak dönüşümünü kullanarak kaynağınızdan MAX () ' i seçmek için "sorgu" seçeneğini kullanın:
 
-![Yedek anahtar sorgu](media/data-flow/sk002.png "vekil anahtar dönüşüm sorgusu")
+![Vekil anahtar sorgusu](media/data-flow/sk002.png "Vekil anahtar dönüştürme sorgusu")
 
 ### <a name="file-sources"></a>Dosya kaynakları
 
-Bir dosyada, önceki en yüksek değer ise kaynak dönüşümünüzü bir toplama dönüşümü ile birlikte kullanın ve önceki en yüksek değeri elde etmek MAX() ifade işlevini kullanın:
+Önceki en büyük değer bir dosya içinde ise, kaynak dönüşümünüzü bir toplam dönüşümle birlikte kullanabilir ve en büyük () ifade işlevini kullanarak önceki en büyük değeri alabilirsiniz:
 
-![Yedek anahtar dosyası](media/data-flow/sk008.png "vekil anahtar dosyası")
+![Vekil anahtar dosyası](media/data-flow/sk008.png "Vekil anahtar dosyası")
 
-Her iki durumda da, önceki en büyük değeri içeren kaynak ile birlikte gelen yeni verilerinizi eklemeniz gerekir:
+Her iki durumda da, gelen yeni verilerinizi önceki en büyük değeri içeren kaynakla birlikte katılmanız gerekir:
 
-![Yedek anahtar birleştirme](media/data-flow/sk004.png "vekil anahtar birleştirme")
+![Vekil anahtar birleşimi](media/data-flow/sk004.png "Vekil anahtar birleşimi")
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu örneklerde [katılın](data-flow-join.md) ve [türetilmiş sütun](data-flow-derived-column.md) dönüşümler.
+Bu örnekler, [JOIN](data-flow-join.md) ve [türetilmiş sütun](data-flow-derived-column.md) dönüşümlerini kullanır.

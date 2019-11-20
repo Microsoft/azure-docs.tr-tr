@@ -1,27 +1,26 @@
 ---
-title: Azure PowerShell Betiği Örneği - Windows Sanal Makinesi Oluşturma | Microsoft Docs
+title: Azure PowerShell Betiği Örneği - Windows Sanal Makinesi Oluşturma
 description: Azure PowerShell Betiği Örneği - Windows Sanal Makinesi Oluşturma
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 12/12/2017
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: f2008a795addb035cf3f19606170dbac5ffd1a5b
-ms.sourcegitcommit: e69fc381852ce8615ee318b5f77ae7c6123a744c
+ms.openlocfilehash: c21c9a78e2f56cc771178043bbf1e6e397370945
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/11/2019
-ms.locfileid: "55993393"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74038942"
 ---
 # <a name="create-a-virtual-machine-with-powershell"></a>PowerShell ile sanal makine oluşturma
 
@@ -29,7 +28,7 @@ Bu betik Windows Server 2016 çalıştıran bir Azure Sanal Makinesi oluşturur.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [updated-for-az-vm.md](../../../includes/updated-for-az-vm.md)]
+ 
 
 ## <a name="sample-script"></a>Örnek betik
 

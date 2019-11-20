@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Bing Video arama REST API'si ile PHP videolar için arama yapın"
-titlesuffix: Azure Cognitive Services
-description: Bing Video arama PHP kullanarak REST API'sini için video arama istekleri göndermek için bu Hızlı Başlangıç'ı kullanın
+title: 'Hızlı Başlangıç: Bing Video Arama REST API ve PHP kullanarak video arayın'
+titleSuffix: Azure Cognitive Services
+description: PHP kullanarak Bing Video Arama REST API video arama istekleri göndermek için bu hızlı başlangıcı kullanın
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,23 +10,23 @@ ms.subservice: bing-video-search
 ms.topic: quickstart
 ms.date: 06/26/2019
 ms.author: aahi
-ms.openlocfilehash: 2e5d05c32c9c3271cfc49e7abd0609ec7b090778
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 8ecbba5ef046a284e9b4134f8703580021adb9d8
+ms.sourcegitcommit: a0b37e18b8823025e64427c26fae9fb7a3fe355a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67435306"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68500096"
 ---
-# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-php"></a>Hızlı Başlangıç: Bing Video arama REST API'si ile PHP videolar için arama yapın
+# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-php"></a>Hızlı Başlangıç: Bing Video Arama REST API ve PHP kullanarak video arayın
 
-Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir JSON yanıtı Arama sonuçlarından görüntülemek için kullanın. Bu basit bir JavaScript uygulama API'sine HTTP video arama sorgusu gönderir ve yanıtını görüntüler. Bu uygulamanın, JavaScript'te yazılmış ve Node.js kullanır, ancak çoğu programlama dilleri ile uyumlu bir RESTful Web hizmeti API'dir.
+Bing Video Arama API'si ilk çağrısını yapmak ve JSON yanıtından bir arama sonucu görüntülemek için bu hızlı başlangıcı kullanın. Bu basit JavaScript uygulaması, API 'ye bir HTTP video arama sorgusu gönderir ve yanıtı görüntüler. Bu uygulama JavaScript 'te yazıldığı ve Node. js kullandığından, API çoğu programlama dili ile uyumlu olan bir yeniden sorun Web hizmetidir.
 Örnek kod PHP 5.6 ile çalışmak üzere yazılmıştır.
 
 API'lerle ilgili teknik ayrıntılar için [API başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference)'na bakın.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* PHP 5.6 veya üzeri
+* PHP 5,6 veya üzeri
 
 [!INCLUDE [cognitive-services-bing-video-search-signup-requirements](../../../../includes/cognitive-services-bing-video-search-signup-requirements.md)]
 
@@ -213,8 +213,8 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Tek sayfa uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
+> [Tek sayfalı Web uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
 
 ## <a name="see-also"></a>Ayrıca bkz. 
 
- [Bing Video arama API'si nedir?](../overview.md)
+ [Bing Video Arama API'si nedir?](../overview.md)

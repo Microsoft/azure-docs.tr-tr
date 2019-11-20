@@ -1,29 +1,28 @@
 ---
-title: Azure Batch havuz silme tamamlama olayı | Microsoft Docs
-description: Sil Tamam olayını Batch havuzu için başvuru.
+title: Azure Batch havuzu silme Tamam olayı | Microsoft Docs
+description: Toplu Işlem havuzu silme Tamam olayı başvurusu.
 services: batch
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 ms.assetid: ''
 ms.service: batch
-ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 04/20/2017
 ms.author: lahugh
-ms.openlocfilehash: e715ccd0f5e79f9c640a3c060b0252b798748b4d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9bf50bd19ca3f4316c4c2ddbcdd3333745ebefd7
+ms.sourcegitcommit: 267a9f62af9795698e1958a038feb7ff79e77909
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60775772"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70258555"
 ---
 # <a name="pool-delete-complete-event"></a>Havuz silme tamamlama olayı
 
- Havuz silme işlemi tamamlandıktan sonra bu olay yayılır.
+ Bu olay, bir havuz silme işlemi tamamlandığında yayınlanır.
 
- Aşağıdaki örnek, bir havuz silme tamamlama olayı gövdesi gösterir.
+ Aşağıdaki örnekte, bir havuz silme Tamam olayının gövdesi gösterilmektedir.
 
 ```
 {
@@ -33,11 +32,11 @@ ms.locfileid: "60775772"
 }
 ```
 
-|Öğe|Tür|Notlar|
+|Öğe|Type|Notlar|
 |-------------|----------|-----------|
-|id|String|Havuz kimliği.|
-|startTime|DateTime|Havuz silme zaman başlatıldı.|
-|endTime|DateTime|Tamamlanma havuzunu silme zamanı.|
+|`id`|Dize|Havuzun KIMLIĞI.|
+|`startTime`|DateTime|Havuzun silmenin başladığı zaman.|
+|`endTime`|DateTime|Havuzun silineceği zaman tamamlandı.|
 
 ## <a name="remarks"></a>Açıklamalar
-Durumları ve havuz yeniden boyutlandırma işlemi için hata kodları hakkında daha fazla bilgi için bkz. [bir hesaptan bir havuzunu silme](https://docs.microsoft.com/rest/api/batchservice/delete-a-pool-from-an-account).
+Havuz yeniden boyutlandırma işleminin durumları ve hata kodları hakkında daha fazla bilgi için bkz. bir [hesaptan havuz silme](https://docs.microsoft.com/rest/api/batchservice/delete-a-pool-from-an-account).

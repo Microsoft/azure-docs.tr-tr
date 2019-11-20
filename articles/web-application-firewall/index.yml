@@ -1,0 +1,55 @@
+### YamlMime:Landing
+title: Web Uygulaması Güvenlik Duvarı belgeleri
+summary: Web Uygulaması Güvenlik Duvarı (WAF) web uygulamalarınız için yaygın güvenlik açıklarına ve açıklardan yararlanma işlemlerine karşı merkezi bir koruma sağlar. WAF'yi Azure Application Gateway veya Azure Front Door Service üzerinde dağıtabilirsiniz.
+metadata:
+  title: Web Uygulaması Güvenlik Duvarı belgeleri
+  description: Application Gateway ve Front Door ile dağıtılabilen Web Uygulaması Güvenlik Duvarı hakkında bilgi edinin
+  services: web-application-firewall
+  ms.service: web-application-firewall
+  ms.topic: landing-page
+  author: vhorne
+  ms.author: victorh
+  ms.date: 09/28/2019
+  ms.openlocfilehash: 1fb58cdf0f5c88a560ccbd4140564497745b503e
+  ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73508780"
+landingContent:
+- title: Genel Bakış
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Web Uygulaması Güvenlik Duvarı nedir?
+      url: overview.md
+    - text: Application Gateway üzerinde Web Uygulaması Güvenlik Duvarı
+      url: ./ag/ag-overview.md
+    - text: Front Door üzerinde Web Uygulaması Güvenlik Duvarı
+      url: ./afds/afds-overview.md
+- title: Başlarken
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Application Gateway üzerinde Web Uygulaması Güvenlik Duvarı
+      url: ./ag/application-gateway-web-application-firewall-portal.md
+    - text: Front Door üzerinde Web Uygulaması Güvenlik Duvarı
+      url: ./afds/waf-front-door-create-portal.md
+- title: Application Gateway üzerinde WAF kurallarını yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Application Gateway üzerinde Web Uygulaması Güvenlik Duvarı kurallarını özelleştirme
+      url: ./ag/application-gateway-customize-waf-rules-portal.md
+  - linkListType: overview
+    links:
+    - text: Web uygulaması güvenlik duvarı CRS kural gruplar ve kuralları
+      url: ./ag/application-gateway-crs-rulegroups-rules.md
+- title: Front Door üzerinde WAF'yi yapılandırma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Bot korumasını yapılandırma
+      url: ./afds/waf-front-door-policy-configure-bot-protection.md
+    - text: Özel yanıt yapılandırma
+      url: ./afds/waf-front-door-configure-custom-response-code.md

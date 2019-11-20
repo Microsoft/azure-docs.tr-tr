@@ -1,104 +1,110 @@
 ---
-title: Bir blueprint'in yaşam döngüsünü anlama
-description: Her aşamanın ayrıntılarını ve bir şema geçtiği yaşam döngüsü hakkında bilgi edinin.
-author: DCtheGeek
-ms.author: dacoulte
-ms.date: 02/01/2019
+title: Bir şemanın yaşam döngüsünü anlama
+description: Bir şema 'in gittiği yaşam döngüsü ve her aşama hakkındaki ayrıntılar hakkında bilgi edinin.
+ms.date: 07/30/2019
 ms.topic: conceptual
-ms.service: blueprints
-manager: carmonm
-ms.custom: seodec18
-ms.openlocfilehash: a57085fa37efd56a46b740d8cbc4278dc53cf39f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: d071a2af985d294bc87a5363d9e7566762e0fd8a
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60683198"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73960487"
 ---
-# <a name="understand-the-lifecycle-of-an-azure-blueprint"></a>Bir Azure blueprint'in yaşam döngüsünü anlama
+# <a name="understand-the-lifecycle-of-an-azure-blueprint"></a>Azure Blueprint yaşam döngüsünü anlama
 
-Azure içinde birçok kaynaklar gibi Azure şemaları blueprint'te tipik ve doğal bir yaşam döngüsü vardır. Bunlar oluşturulan, dağıtılan ve son olarak, artık gerekli veya ilgili silindi.
-Blueprint standart yaşam döngüsü işlemleri destekler. Daha sonra bunları kod – DevOps anahtar bir öğe olarak kendi altyapısını yönetme kuruluşlar için yaygın bir sürekli tümleştirme ve sürekli dağıtım işlem hatları destekleyen ek durumu düzeyleri sağlamak için temel oluşturur.
+Azure 'daki birçok kaynak gibi Azure 'da bir şema, tipik ve doğal yaşam döngüsüne sahiptir. Bunlar artık gerekli olmadığında veya ilgili olduğunda oluşturulur, dağıtılır ve son olarak silinir.
+Planlar standart yaşam döngüsü işlemlerini destekler. Daha sonra, altyapısını kod olarak yöneten kuruluşlar için ortak sürekli tümleştirmeyi ve sürekli dağıtım işlem hatlarını destekleyen ek durum düzeyleri sağlar.
 
-Bir şema ve aşamalar tam olarak anlamak için standart bir yaşam döngüsü değineceğiz:
+Bir şema ve aşamaları tamamen anlamak için standart yaşam döngüsünü ele alacağız:
 
 > [!div class="checklist"]
-> - Oluşturma ve bir şema düzenleme
-> - Blueprint yayımlama
-> - Oluşturma ve düzenleme, yeni bir şema sürümü
-> - Yeni bir şema sürümünü yayımlama
-> - Blueprint belirli bir sürümü siliniyor
+> - Şema oluşturma ve düzenleniyor
+> - Şema 'i yayımlama
+> - Şema 'in yeni bir sürümünü oluşturma ve düzenlemeyle
+> - Şema 'in yeni bir sürümünü yayımlama
+> - Şema 'in belirli bir sürümünü silme
 > - Şema silme
 
-## <a name="creating-and-editing-a-blueprint"></a>Oluşturma ve bir şema düzenleme
+## <a name="creating-and-editing-a-blueprint"></a>Şema oluşturma ve düzenleniyor
 
-Bir şema oluşturma eklediğinizde, yapılara bir yönetim grubuna veya aboneliğe kaydedin ve benzersiz bir ad ve benzersiz bir sürümü sağlanmaktadır. Blueprint artık bulunduğu bir **taslak** modu ve henüz atanamaz. İçinde çalışırken **taslak** modu da devam edebilirsiniz güncelleştirilen ve değiştirildi.
+Bir Blueprint oluştururken, bu yapıya yapıt ekleyin, bir yönetim grubuna veya aboneliğine kaydedin ve benzersiz bir ad ve benzersiz bir sürüm sağlamış olmanız gerekir. Şema artık **taslak** modunda ve henüz atanamaz. **Taslak** modundayken, güncelleştirilme ve değiştirme devam edebilir.
 
-A hiçbir zaman blueprint'te yayımlanan **taslak** modu üzerinde farklı bir simge görüntüler **şema tanımları** olan olanları sayfadan **yayımlanan**. **En son sürümü** olarak görüntülenen **taslak** hiçbir zaman yayımlanan bu planlar için.
+**Taslak** modunda hiçbir şekilde yayımlanmamış bir şema, şema **tanımları** sayfasında **yayımlandıklarından**farklı bir simge görüntüler. **En son sürüm** , bu yayımlanmamış hiçbir şema için **taslak** olarak görüntülenir.
 
-Oluşturma ve düzenleme ile bir şema [Azure portalında](../create-blueprint-portal.md#create-a-blueprint) veya [REST API](../create-blueprint-rest-api.md#create-a-blueprint).
+[Azure Portal](../create-blueprint-portal.md#create-a-blueprint) veya [REST API](../create-blueprint-rest-api.md#create-a-blueprint)bir şema oluşturun ve düzenleyin.
 
-## <a name="publishing-a-blueprint"></a>Blueprint yayımlama
+## <a name="publishing-a-blueprint"></a>Şema yayımlama
 
-İçin bir şema tüm planlı değişiklikler yapıldıktan sonra **taslak** modunda olabilir **yayımlanan** ve atama için kullanılabilir. **Yayımlanan** şema sürümü olamaz değiştirilebilir.
-Bir kez **yayımlanan**, farklı bir simge içeren şema görüntüler **taslak** Blueprint ve sağlanan sürüm numarasını görüntüler **en son sürümü** sütun.
+Tüm planlı değişiklikler **taslak** modunda bir şema üzerinde yapıldıktan sonra **yayımlanabilir** ve atama için kullanılabilir hale getirilebilir. Şema 'in **yayımlanan** sürümü değiştirilemez.
+**Yayımladıktan**sonra, şema **taslak** taslaktan farklı bir simgeyle görüntülenir ve belirtilen sürüm numarasını **en son sürüm** sütununda görüntüler.
 
-Bir şema ile yayımlama [Azure portalında](../create-blueprint-portal.md#publish-a-blueprint) veya [REST API](../create-blueprint-rest-api.md#publish-a-blueprint).
+[Azure Portal](../create-blueprint-portal.md#publish-a-blueprint) veya [REST API](../create-blueprint-rest-api.md#publish-a-blueprint)ile bir şema yayımlayın.
 
-## <a name="creating-and-editing-a-new-version-of-the-blueprint"></a>Oluşturma ve düzenleme, yeni bir şema sürümü
+## <a name="creating-and-editing-a-new-version-of-the-blueprint"></a>Şema 'in yeni bir sürümünü oluşturma ve düzenlemeyle
 
-A **yayımlanan** bir şema sürümü olamaz değiştirilebilir. Ancak, yeni bir şema sürümü mevcut blueprint'e eklenebilen ve gerektiğinde değişiklik. Var olan bir şema için düzenleyerek değişiklik. Yeni değişiklikler kaydedildiğinde, şema sunuyor **yayımdan kaldırılmış değişikliklerinizi**. Bu yeni değişiklikler **taslak** şema sürümü.
+Bir şema 'in **yayımlanmış** bir sürümü değiştirilemez. Ancak, yeni bir şema sürümü var olan şema öğesine eklenebilir ve gerektiğinde değiştirilebilir. Varolan bir şemayı düzenleyerek değişiklik yapın. Yeni değişiklikler kaydedildiğinde, şema şimdi **yayımdan kaldırılmış değişiklikleri**içerir. Bu değişiklikler, Blueprint 'in yeni bir **taslak** sürümüdür.
 
-Bir şema ile düzenleme [Azure portalında](../create-blueprint-portal.md#edit-a-blueprint).
+[Azure Portal](../create-blueprint-portal.md#edit-a-blueprint)ile bir şema 'i düzenleyin.
 
-## <a name="publishing-a-new-version-of-the-blueprint"></a>Yeni bir şema sürümünü yayımlama
+## <a name="publishing-a-new-version-of-the-blueprint"></a>Şema 'in yeni bir sürümünü yayımlama
 
-Düzenlenen her bir şema sürümü olmalıdır **yayımlanan** atanabilmesi için önce. Zaman **yayımdan kaldırılmış değişikliklerinizi** bir şema için yapılan ama **yayımlanan**, **Blueprint Yayımla** düğmesi düzenleme şema sayfasında kullanılabilir. Düğmenin görünür değilse, şema zaten yüklenmişse **yayımlanan** ve hiçbir **yayımdan kaldırılmış değişikliklerinizi**.
-
-> [!NOTE]
-> Tek bir şema, birden çok olabilir **yayımlanan** birbirlerinden sürümleri aboneliğe atanabilir.
-
-Bir şema ile yayımlamak için **yayımdan kaldırılmış değişikliklerinizi**, yeni şema yayımlamak için aynı adımları kullanın.
-
-## <a name="deleting-a-specific-version-of-the-blueprint"></a>Blueprint belirli bir sürümü siliniyor
-
-Her bir şema sürümü benzersiz bir nesnedir ve ayrı ayrı olabilir **yayımlanan**. Bu nedenle, her bir şema sürümü de silinebilir. Bir şema sürümü siliniyor o diğer sürümleri üzerinde hiçbir etkisi yok.
+Bir şema 'in düzenlenmiş her sürümü, atanmadan önce **yayımlanmalıdır** . Bir **şema Için yayımdan kaldırılan değişiklikler** yapıldı Ancak **Yayımlanmadığında**, şemayı **Yayınla** sayfasında şeması Düzenle düğmesi bulunur. Düğme görünür değilse, şema zaten **yayımlandı** ve **yayımlanmamış değişikliklere**sahip değildir.
 
 > [!NOTE]
-> Etkin bir ataması yok bir şema silmek mümkün değildir. Atamaları silin ve ardından kaldırmak istediğiniz sürümü silin.
+> Tek bir şema, her biri aboneliğe atanabileceği birden çok **yayımlanmış** sürüme sahip olabilir.
 
-1. Seçin **tüm hizmetleri** sol bölmesinde. Arayın ve seçin **şemaları**.
+**Yayımlanmamış değişikliklerle**bir şema yayımlamak için, yeni bir şema yayımlamak için aynı adımları kullanın.
 
-1. Seçin **Blueprint tanımları** sayfasında sol ve bir sürümünü silmek istediğiniz şema bulmak için filtre seçeneklerini kullanın. Düzen sayfasını açmak için tıklayın.
+## <a name="deleting-a-specific-version-of-the-blueprint"></a>Şema 'in belirli bir sürümünü silme
 
-1. Tıklayın **sürümleri yayımlanan** sekmesini ve silmek istediğiniz sürümü bulun.
+Bir şema 'in her sürümü benzersiz bir nesnedir ve tek tek **yayımlanabilir**. Bu nedenle, bir şema 'in her sürümü de silinebilir. Bir şema sürümünün silinmesi, bu şema 'in diğer sürümlerini etkilemez.
 
-1. Sürümü silin ve seçmek için sağ **bu sürümü Sil**.
+> [!NOTE]
+> Etkin atamaları olan bir şema silmek mümkün değildir. Önce atamaları silin ve ardından kaldırmak istediğiniz sürümü silin.
+
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
+
+1. Sol taraftaki sayfadan **şema tanımlarını** seçin ve bir sürümünü silmek istediğiniz şema öğesini bulmak için filtre seçeneklerini kullanın. Düzenle sayfasını açmak için tıklayın.
+
+1. **Yayınlanan sürümler** sekmesine tıklayın ve silmek istediğiniz sürümü bulun.
+
+1. Silmek için sürüme sağ tıklayın ve **Bu sürümü Sil**' i seçin.
 
 ## <a name="deleting-the-blueprint"></a>Şema silme
 
-Çekirdek blueprint da silinebilir. Çekirdek blueprint silinmesi da her ikisi de dahil olmak üzere bu blueprint'in tüm şema sürümlerini siler **taslak** ve **yayımlanan** planlar. Olarak bir şema sürümünü silme işlemine çekirdek şema silme şema sürümlerinin herhangi birinin mevcut atamaları kaldırmaz.
+Çekirdek Şeması da silinebilir. Çekirdek şema silme, hem **taslak** hem de **yayımlanan** şemalar dahil olmak üzere, bu şema 'in tüm şema sürümlerini de siler. Şema 'in bir sürümünü silmenin yanı da, çekirdek şeması silme, şema sürümlerinin herhangi birinin mevcut atamalarını kaldırmaz.
 
 > [!NOTE]
-> Etkin bir ataması yok bir şema silmek mümkün değildir. Atamaları silin ve ardından kaldırmak istediğiniz sürümü silin.
+> Etkin atamaları olan bir şema silmek mümkün değildir. Önce atamaları silin ve ardından kaldırmak istediğiniz sürümü silin.
 
-Bir şema ile Sil [Azure portalında](../create-blueprint-portal.md#delete-a-blueprint) veya [REST API](../create-blueprint-rest-api.md#delete-a-blueprint).
+[Azure Portal](../create-blueprint-portal.md#delete-a-blueprint) veya [REST API](../create-blueprint-rest-api.md#delete-a-blueprint)bir şema öğesini silin.
 
 ## <a name="assignments"></a>Atamalar
 
-Blueprint bir aboneliğe atanabilir yaşam döngüsü boyunca birkaç nokta vardır. Şema sürümü modunda olduğunda **yayımlanan**, sonra da bu sürüm bir aboneliğe atanabilir. Bu yaşam döngüsünü kullanılan ve yeni bir sürüme geliştirilen etkin olarak atanmış bir şema sürümleri sağlar.
+Bir şema için bir şema atanabileceği yaşam döngüsü sırasında birkaç noktaya yer vardır. Bir şema sürümünün bir sürümü **yayımlandığında**, bu sürüm bir aboneliğe atanabilir. Bu yaşam döngüsü, daha yeni bir sürüm geliştirildiğinde bir şema sürümlerinin kullanılmasını ve etkin olarak atanmasını sağlar.
 
-Blueprint sürümlerini atandığından, burada atanmış oldukları ve hangi parametrelerle bunların ile atanan anlamak önemlidir. Parametreleri ya da statik veya dinamik olabilir. Daha fazla bilgi için bkz. [statik ve dinamik parametreleri](parameters.md).
+Planların sürümleri atandığında, atanma yerleri ve hangi parametrelere atandıklarından emin olmak önemlidir. Parametreler statik veya dinamik olabilir. Daha fazla bilgi için bkz. [statik ve dinamik parametreler](parameters.md).
 
-### <a name="updating-assignments"></a>Atamaları güncelleştiriliyor
+### <a name="updating-assignments"></a>Atamalar güncelleştiriliyor
 
-Bir şema atandığında atama güncelleştirilebilir. Mevcut bir atamanın güncelleştirilmesi için birkaç nedeni vardır dahil olmak üzere:
+Bir şema atandığında, atama güncelleştirilebilen olabilir. Mevcut bir atamayı güncelleştirmek için aşağıdakiler de dahil olmak üzere çeşitli nedenler vardır:
 
-- Ekleme veya kaldırma [kaynak kilitleme](resource-locking.md)
-- Değiştirin [dinamik parametreler](parameters.md#dynamic-parameters)
-- Atama yeni bir yükseltme **yayımlanan** şema sürümü
+- [Kaynak kilitlemeyi](resource-locking.md) ekleme veya kaldırma
+- [Dinamik parametrelerin](parameters.md#dynamic-parameters) değerini değiştirme
+- Atamayı, şema 'in daha yeni **yayımlanmış** bir sürümüne yükseltin
 
-Bilgi edinmek için bkz [mevcut Atamaları Güncelleştir](../how-to/update-existing-assignments.md).
+Nasıl yapılacağını öğrenmek için bkz. [var olan atamaları güncelleştirme](../how-to/update-existing-assignments.md).
+
+### <a name="unassigning-assignments"></a>Atama kaldırma
+
+Şema artık gerekmiyorsa, yönetim grubu veya abonelikten atanmamış olabilir. Şeması kaldırma sırasında aşağıdakiler gerçekleşir:
+
+- [Şema kaynak kilitlemeyi](resource-locking.md) kaldırma
+- Şema atama nesnesini silme
+- Oluştur **Sistem tarafından atanan yönetilen bir kimlik** kullanılmışsa de silinir
+
+> [!NOTE]
+> Şema atama tarafından dağıtılan tüm kaynaklar yerinde kalır, ancak artık Azure şemaları tarafından korunmaz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

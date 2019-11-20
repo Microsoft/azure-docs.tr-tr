@@ -1,46 +1,47 @@
 ---
-title: Bing Yerel İşletme Arama API'si nedir? | Microsoft Docs
+title: Bing Yerel İşletme Arama API'si nedir?
 titleSuffix: Azure Cognitive Services
 description: Bing Yerel İşletme Arama API'si, uygulamalarınızın arama sorguları temelinde yerel konumlar ve işletmeler hakkında bilgi bulmasına olanak tanıyan bir RESTful hizmetidir.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
-ms.topic: article
-ms.date: 11/01/2018
-ms.author: rosh
-ms.openlocfilehash: 3cc9ed4dd108e76da6430a450876b709be514356
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.subservice: bing-local-business
+ms.topic: overview
+ms.date: 09/13/2019
+ms.author: aahi
+ms.openlocfilehash: bdada613ef46881bbf051144efded541ac3d0974
+ms.sourcegitcommit: 1752581945226a748b3c7141bffeb1c0616ad720
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65796764"
+ms.lasthandoff: 09/14/2019
+ms.locfileid: "70996698"
 ---
-# <a name="what-is-bing-local-business-search"></a>Bing arama yerel iş nedir?
-Bing yerel iş arama API'si arama sorgularına dayalı yerel işletmeler hakkında bilgi, uygulamaların bir RESTful hizmeti olduğu. Örneğin, `q=<business-name> in Redmond, Washington`, veya `q=Italian restaurants near me`. 
+# <a name="what-is-bing-local-business-search"></a>Bing yerel Iş arama nedir?
+Bing yerel Iş Arama API 'SI, uygulamalarınızın arama sorguları temelinde yerel işletmeler hakkında bilgi bulmasına olanak tanıyan bir yeniden hizmet hizmetidir. Örneğin, `q=<business-name> in Redmond, Washington`veya `q=Italian restaurants near me`. 
 
 ## <a name="features"></a>Özellikler
 | Özellik | Açıklama |  
 | -- | -- | 
-| [Yerel işletmeler ve konumları bulma](quickstarts/local-quickstart.md) | Bing yerel iş arama API'si, bir sorgudan yerelleştirilmiş sonuçlarını alır. Sonuçları işletmenin Web sitesi için bir URL içerir ve metin, telefon numarası ve coğrafi konum, görüntüleme dahil olmak üzere: GPS koordinatlarını, şehir, posta adresi |  
-| [Coğrafi sınırlar ile yerel sonuçlarını filtreleme](specify-geographic-search.md) | Dairesel bir alanı veya sınırlayıcı kutu kare tarafından belirtilen belirli bir coğrafi alana sonuçlarını sınırlamak için arama parametrelerini olarak koordinatları ekleyin. | 
-| [Yerel iş sonuçları kategoriye göre filtreleme](local-categories.md) | Yerel iş sonuçları kategoriye göre arayın. Bu seçenek, ters IP konumu veya çağıranın GPS koordinatlarını iş çeşitli kategorilerde yerelleştirilmiş sonuçları döndürmek için kullanır.|
+| [Yerel işletmeleri ve konumları bulma](quickstarts/local-quickstart.md) | Bing yerel Iş Arama API 'SI, bir sorgudan yerelleştirilmiş sonuçlar alır. Sonuç olarak, iş Web sitesinin bir URL 'SI ve görüntüleme metni, telefon numarası ve coğrafi konum gibi aşağıdakiler de dahildir: GPS koordinatları, şehir, sokak adresi |  
+| [Yerel sonuçları coğrafi sınırlara göre filtrele](specify-geographic-search.md) | Sonuçları, dairesel bir alan veya kare sınırlayıcı kutusuyla belirtilen belirli bir coğrafi alanla sınırlamak için arama parametresi olarak koordinatları ekleyin. | 
+| [Yerel iş sonuçlarını kategoriye göre filtrele](local-categories.md) | Kategoriye göre yerel iş sonuçlarını arayın. Bu seçenek, çeşitli iş kategorilerindeki yerelleştirilmiş sonuçları döndürmek için çağıranın ters IP konumunu veya GPS koordinatlarını kullanır.|
 
 ## <a name="workflow"></a>İş akışı
-Bing yerel iş arama API'si, HTTP istekleri ve JSON yanıtlarını ayrıştırabilen herhangi programlama dilinden çağırın. Bu hizmet, REST API kullanılarak erişilebilir.
+HTTP istekleri yapıp JSON yanıtlarını ayrıştırabilen herhangi bir programlama dilinden Bing yerel Iş Arama API 'sini çağırın. Bu hizmete REST API kullanılarak erişilebilir.
  
-1. Oluşturma bir [Bilişsel hizmetler API hesabı](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) Bing arama API'lerine erişim. Azure aboneliğiniz yoksa [ücretsiz hesap](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) oluşturabilirsiniz.   
-2. URL kodlaması için arama terimlerinizi `q=""` sorgu parametresi. Örneğin, `q=nearby+restaurant` veya `q=nearby%20restaurant`. Sayfalandırma da gerekirse ayarlayın. 
-3. Gönderme bir [Bing yerel iş arama API'si isteği](quickstarts/local-quickstart.md) 
-4. JSON yanıtı ayrıştırılamadı 
+1. Bing Arama API'leri erişimi olan bilişsel [HIZMETLER API hesabı](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) oluşturun. Azure aboneliğiniz yoksa [ücretsiz hesap](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) oluşturabilirsiniz.   
+2. URL, `q=""` sorgu parametresi için arama terimlerinizi kodlayın. Örneğin, `q=nearby+restaurant` veya `q=nearby%20restaurant`. Gerekirse, sayfalandırma da ayarlayın. 
+3. [Bing yerel Iş Arama API 'sine istek](quickstarts/local-quickstart.md) gönderme 
+4. JSON yanıtını Ayrıştır 
 
 > [!NOTE]
-> Şu anda yalnızca yerel iş arama destekler `en-US` Pazar. 
+> Şu anda yerel iş arama yalnızca `en-US` pazarı destekler. 
 > [!NOTE]
-> Şu anda yerel iş arama otomatik öneri desteklemez. 
+> Şu anda yerel Iş araması otomatik önermeyi desteklemez. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Sorgulama ve yanıtlama](local-search-query-response.md)
-- [Yerel iş arama hızlı başlangıç](quickstarts/local-quickstart.md)
-- [Yerel iş arama API'si başvurusu](local-search-reference.md)
+- [Sorgu ve yanıt](local-search-query-response.md)
+- [Yerel Iş araması hızlı başlangıç](quickstarts/local-quickstart.md)
+- [Yerel Iş Arama API 'SI başvurusu](local-search-reference.md)
 - [Kullanım ve görüntüleme gereksinimleri](use-display-requirements.md)

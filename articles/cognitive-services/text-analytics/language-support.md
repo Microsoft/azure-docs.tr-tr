@@ -1,79 +1,83 @@
 ---
-title: Dil desteği - metin analizi API'si
+title: Dil desteği-Metin Analizi API'si
 titleSuffix: Azure Cognitive Services
-description: "Doğal metin analizi API'si tarafından desteklenen dillerin listesi. Bu makalede her işlem için desteklenen dilleri açıklar: yaklaşım analizi, anahtar ifade ayıklama, dil algılama ve varlık tanıma."
+description: "Metin Analizi API'si tarafından desteklenen doğal dillerin bir listesi. Bu makalede her bir işlem için hangi dillerin desteklendiği açıklanmaktadır: yaklaşım analizi, anahtar ifade ayıklama, dil algılama ve varlık tanıma."
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: conceptual
-ms.date: 06/18/2019
+ms.date: 11/04/2019
 ms.author: aahi
-ms.openlocfilehash: 5e4f231db781b96fe204802555b56238b9e27e52
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 529568cf4f667e72b0b4fb7ba83d0b85c4a90341
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67442679"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73499990"
 ---
-# <a name="language-and-region-support-for-the-text-analytics-api"></a>Metin analizi API'si için dil ve bölge desteği
+# <a name="language-and-region-support-for-the-text-analytics-api"></a>Metin Analizi API'si için dil ve bölge desteği
 
-Bu makalede her işlem için desteklenen dilleri açıklar: yaklaşım analizi, anahtar ifade ayıklama, dil algılama ve adlandırılmış varlık tanıma.
+Bu makalede her bir işlem için hangi dillerin desteklendiği açıklanmaktadır: yaklaşım analizi, anahtar ifade ayıklama, dil algılama ve adlandırılmış varlık tanıma.
 
 ## <a name="language-detection"></a>Dil Algılama
 
-Metin analizi API'si, çok çeşitli diller, çeşitleri, diyalektler ve bölge/kültürel bazı diller algılayabilir.  Dil algılama dilinin "betik" döndürür. Örneğin, tümcecik "I sahip bir köpek" döndürür `en` yerine `en-US`. Dil algılama yeteneği döndürdüğü Çince, yalnızca özel bir durum olduğu `zh_CHS` veya `zh_CHT` sağlanan metin verilen betiği belirleyebilirseniz. Burada belirli bir betik tanımlanamıyor Çince belge durumlarda, yalnızca döndüreceği `zh`.
+Metin Analizi API'si, çok çeşitli diller, çeşitler, diapacts ve bazı bölgesel/kültürel dillerini algılayabilir.  Dil Algılama, bir dilin "betiğini" döndürür. Örneğin, "bir köpek var" ifadesi için `en-US`yerine `en` döndürülür. Tek özel durum, dil algılama yeteneğinin `zh_CHS` veya `zh_CHT` verilen metni tespit edebilir. Belirli bir betiğin bir Çince belge için belirlenemediği durumlarda yalnızca `zh`döndürür.
 
-Biz bu özelliğin dillerin tam listesini yayımlama, ancak çok çeşitli diller, çeşitleri, diyalektler ve bölge/kültürel bazı diller algılayabilir. 
+Bu özellik için dillerin tam listesini yayımlamadık, ancak çeşitli diller, çeşitler, diapacts ve bazı bölgesel/kültürel dillerini algılayabilir. 
 
-Daha az sık kullanılan bir dille ifade içeriğiniz varsa, bir kod döndürür görmek için dil algılama deneyebilirsiniz. Yanıt algılanamayan diller için `unknown`.
+Daha az sıklıkta kullanılan bir dilde ifade ettiğiniz bir içeriğiniz varsa, bir kodu döndürüp döndürdüğünü görmek için Dil Algılama deneyebilirsiniz. Tespit edilemez dillerin yanıtı `unknown`.
 
-## <a name="sentiment-analysis-key-phrase-extraction-and-named-entity-recognition"></a>Yaklaşım analizi, anahtar ifade ayıklama ve adlandırılmış varlık tanıma
+## <a name="sentiment-analysis-key-phrase-extraction-and-named-entity-recognition"></a>Yaklaşım Analizi, Anahtar İfade Ayıklama ve adlandırılmış varlık tanıma
 
-Yaklaşım analizi, anahtar ifade ayıklama ve varlık tanıma, desteklenen dillerin listesini Çözümleyicileri ek diller dil kurallarına uyum sağlamak için daraltılmış daha Seçici. Eksiksiz bir listesi için destek [varlık türleri](how-tos/text-analytics-how-to-entity-linking.md#supported-types-for-named-entity-recognition) şu anda aşağıdaki diller için sınırlıdır: 
+Yaklaşım analizi, anahtar ifade ayıklama ve varlık tanıma için, desteklenen dillerin listesi, çözümleyiciler ek dillerin dil kurallarına uyum sağlayacak şekilde iyileştirilmişse daha seçmeli olur. Adlandırılmış varlık tanıma v2 'de, [varlık türlerinin](how-tos/text-analytics-how-to-entity-linking.md#supported-types-for-named-entity-recognition-v2) tam kümesi için destek şu anda aşağıdaki dillerle sınırlıdır: 
 * Türkçe
-* Çince (Basitleştirilmiş)
+* Çince-Basitleştirilmiş
 * Fransızca
 * Almanca
 * İspanyolca
 
-Yalnızca `Person`, `Location` ve `Organization` adlandırılmış varlık, diğer diller için döndürülür.
+Diğer diller için yalnızca `Person`, `Location` ve `Organization` adlandırılmış varlıklar döndürülür.
 
-## <a name="language-list-and-status"></a>Dil listesini ve durumu
+## <a name="language-list-and-status"></a>Dil listesi ve durumu
 
-Dil desteği başlangıçta Mezun genel kullanıma (GA) durumuna birbirinden ve metin analizi hizmetinin genel Önizleme aşamasında kullanıma sunulma. Önizleme aşamasında için genel kullanıma sunulan metin analizi API'si geçişi sırasında bile kalmasına diller için mümkündür.
+Dil desteği başlangıçta, genel kullanıma açık (GA) duruma, her biri birbirinden bağımsız olarak ve Metin Analizi hizmetten bağımsız olarak kullanıma sunulmuştur. Dillerin, genel kullanıma açık olan Metin Analizi API'si geçiş sırasında bile önizlemede kalması mümkündür.
 
-| Dil    | Dil kodu | Yaklaşım | Anahtar ifadeler | Adlandırılmış Varlık Tanıma |   Notlar  |
-|:----------- |:-------------:|:---------:|:-----------:|:-----------:|:-----------:
-| Arapça      | `ar`          |           |             | ✔ \*                     | |
-| Çekçe       | `cs`          |           |             | ✔ \*                     | |
-| Çince (Basitleştirilmiş) | `zh-CN`|           |             | ✔ \*        |    |
-| Danca      | `da`          | ✔ \*     | ✔           | ✔ \*            |     |
-| Felemenkçe       | `nl`          | ✔ \*     | ✔          |  ✔ \*           |     |
-| Türkçe     | `en`          | ✔        | ✔           |  ✔ \*\*     |      |
-| Fince     | `fi`          | ✔ \*     | ✔           |  ✔ \*           |     |
-| Fransızca      | `fr`          | ✔        | ✔           |  ✔ \*           |     |
-| Almanca      | `de`          | ✔ \*     | ✔           |  ✔ \*          |     |
-| Yunanca       | `el`          | ✔ \*     |             |            |     |
-| Macarca   | `hu`          |           |             |  ✔ \*          |     | 
-| İtalyanca     | `it`          | ✔ \*     | ✔           |  ✔ \*           |     |
-| Japonca    | `ja`          |          | ✔           |  ✔ \*          |     |
-| Korece      | `ko`          |          | ✔           |  ✔ \*          |     |
-| Norwegian  (Bokmål) | `no`  | ✔ \*     |  ✔          | ✔ \*            |     |
-| Lehçe      | `pl`          | ✔ \*     |  ✔          |  ✔ \*           |     |
-| Portekizce (Portekiz) | `pt-PT`| ✔        |  ✔          | ✔ \*      |`pt` Ayrıca kabul edildi|
-| Portekizce (Brezilya)   | `pt-BR`|          |  ✔   |  ✔ \*       |     |
-| Rusça     | `ru`          | ✔ \*     | ✔           |  ✔ \*           |     |
-| İspanyolca     | `es`          | ✔        | ✔           |   ✔ \*\*      |     | 
-| İsveççe     | `sv`          | ✔ \*     | ✔           |   ✔ \*          |     |
-| Türkçe     | `tr`          | ✔ \*     |             |   ✔ \*          |  |
+> [!NOTE]
+> Adlandırılmış varlık tanıma (NER) v3 genel önizlemesi için ayrıntılı dil desteği için bkz. [adlandırılmış varlık türleri](named-entity-types.md).
 
-\* Dil desteği Önizleme aşamasındadır.
+| Dil              | Dil kodu | Yaklaşım | Anahtar ifadeler | Adlandırılmış Varlık Tanıma | Varlık bağlama |       Notlar        |
+|:----------------------|:-------------:|:---------:|:-----------:|:------------------------:|:--------------:|:------------------:|
+| Arapça                |     `ar`      |           |             |           ✔ \*           |                |                    |
+| Çekçe                 |     `cs`      |           |             |           ✔ \*           |                |                    |
+| Çince-Basitleştirilmiş    |   `zh-hans`   |  ✔ \*\*   |             |            ✔             |                |                    |
+| Çince-Geleneksel   |   `zh-hant`   |  ✔ \*\*   |             |                          |                |                    |
+| Danca                |     `da`      |   ✔ \*    |      ✔      |           ✔ \*           |                |                    |
+| Hollanda dili                 |     `nl`      |   ✔ \**   |      ✔      |           ✔ \*           |                |                    |
+| Türkçe               |     `en`      |   ✔ \**   |      ✔      |          ✔ \*\*          |     ✔ \**      |                    |
+| Fince               |     `fi`      |   ✔ \*    |      ✔      |           ✔ \*           |                |                    |
+| Fransızca                |     `fr`      |   ✔ \**   |      ✔      |            ✔             |                |                    |
+| Almanca                |     `de`      |   ✔ \**   |      ✔      |            ✔             |                |                    |
+| Yunanca                 |     `el`      |   ✔ \*    |             |                          |                |                    |
+| Macarca             |     `hu`      |           |             |           ✔ \*           |                |                    |
+| İtalyanca               |     `it`      |   ✔ \**   |      ✔      |           ✔ \*           |                |                    |
+| Japonca              |     `ja`      |   ✔ \**   |      ✔      |           ✔ \*           |                |                    |
+| Korece                |     `ko`      |           |      ✔      |           ✔ \*           |                |                    |
+| Norveççe (Bokmål)   |     `no`      |   ✔ \*    |      ✔      |           ✔ \*           |                |                    |
+| Lehçe                |     `pl`      |   ✔ \*    |      ✔      |           ✔ \*           |                |                    |
+| Portekizce (Portekiz) |    `pt-PT`    |   ✔\**    |      ✔      |           ✔ \*           |                | `pt` de kabul edildi |
+| Portekizce (Brezilya)   |    `pt-BR`    |           |      ✔      |           ✔ \*           |                |                    |
+| Rusça               |     `ru`      |   ✔ \*    |      ✔      |           ✔ \*           |                |                    |
+| İspanyolca               |     `es`      |   ✔\**    |      ✔      |           ✔ \*           |     ✔ \**      |                    |
+| İsveççe               |     `sv`      |   ✔ \*    |      ✔      |           ✔ \*           |                |                    |
+| Türkçe               |     `tr`      |   ✔ \*    |             |           ✔ \*           |                |                    |
 
-\*\* [Adlandırılmış varlık tanıma](how-tos/text-analytics-how-to-entity-linking.md#named-entity-recognition-ner) ve [varlık bağlama](how-tos/text-analytics-how-to-entity-linking.md#entity-linking) her ikisi de bu dil için kullanılabilir.    
+\* dil desteği önizlemede
+
+\** [yaklaşım Analizi v3](https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-sentiment-analysis#sentiment-analysis-v3-public-preview) ve/veya [adlandırılmış varlık tanıma v3](how-tos/text-analytics-how-to-entity-linking.md#named-entity-recognition-v3-public-preview) Genel önizlemelerinde de mevcuttur.
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-[Bilişsel hizmetler belgeleri sayfası](https://docs.microsoft.com/azure/cognitive-services/)   
+Bilişsel [Hizmetler belge sayfası](https://docs.microsoft.com/azure/cognitive-services/)   
 [Bilişsel Hizmetler Ürün sayfası](https://azure.microsoft.com/services/cognitive-services/)

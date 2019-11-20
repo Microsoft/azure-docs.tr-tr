@@ -1,56 +1,57 @@
 ---
-title: Azure Container Registry'de resim depolama
-description: Docker kapsayıcı görüntülerinizi Azure Container Registry'de güvenlik, yedeklilik ve kapasite de dahil olmak üzere nasıl depolandığı ayrıntıları.
+title: Azure Container Registry görüntü depolaması
+description: Docker kapsayıcı görüntülerinizin güvenlik, artıklık ve kapasite dahil olmak üzere Azure Container Registry nasıl depolandığı hakkında ayrıntılar.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: article
 ms.date: 03/21/2018
 ms.author: danlep
-ms.openlocfilehash: 55c84907ab41f6da9d7a0989c68a1c1f90c5e424
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4517cc21ca0087358e750cd480288d4ec3718791
+ms.sourcegitcommit: f5075cffb60128360a9e2e0a538a29652b409af9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60827281"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68310530"
 ---
-# <a name="container-image-storage-in-azure-container-registry"></a>Kapsayıcı görüntüsü Azure Container Registry depolamada
+# <a name="container-image-storage-in-azure-container-registry"></a>Azure Container Registry kapsayıcı görüntüsü depolaması
 
-Her [temel, standart ve Premium](container-registry-skus.md) bekleyen şifreleme görüntü veri güvenliği ve coğrafi olarak yedeklilik görüntü veri koruma için Gelişmiş Azure depolama Özelliği Azure kapsayıcı kayıt defteri avantajları ister. Aşağıdaki bölümlerde, hem özellikleri hem de Azure Container Registry (ACR) resim depolama sınırları açıklanmaktadır.
+Her [temel, standart ve Premium](container-registry-skus.md) Azure Container Registry, görüntü verileri güvenliği için bekleyen şifreleme ve görüntü verileri koruması için coğrafi yedeklilik gibi gelişmiş Azure depolama özelliklerinden yararlanır. Aşağıdaki bölümlerde, Azure Container Registry (ACR) ' de görüntü depolamanın özellikleri ve sınırları açıklanır.
 
 ## <a name="encryption-at-rest"></a>Bekleyen şifreleme
 
-Tüm kapsayıcı görüntülerini kullanarak kayıt bekleme durumundayken şifrelenir. Azure otomatik olarak bir görüntü depolamadan önce şifreler ve siz veya uygulama ve hizmetlerinizin görüntü çekme, üzerinde halindeyken şifresini çözer.
+Kayıt defterinizde bulunan tüm kapsayıcı görüntüleri bekleyen olarak şifrelenir. Azure, bir görüntüyü depolamadan önce otomatik olarak şifreler ve siz veya Uygulamalarınız ve hizmetleriniz görüntüyü çektiğinizde BT 'nin şifresini çözer.
 
 ## <a name="geo-redundant-storage"></a>Coğrafi olarak yedekli depolama
 
-Azure, kapsayıcı görüntülerinizi kaybına karşı koruma sağlamak için coğrafi olarak yedekli depolama düzeni kullanır. Birden çok coğrafi olarak uzak veri merkezlerinin otomatik olarak çoğaltır, kapsayıcı görüntülerinizi bölgesel depolama hatası durumunda kullanıcıların kaybını önleme Azure Container kayıt defteri.
+Azure, kapsayıcı görüntülerinin kaybedilmesine karşı koruma sağlamak için coğrafi olarak yedekli bir depolama şeması kullanır. Azure Container Registry, kapsayıcı görüntülerinizi otomatik olarak birden çok coğrafi olarak uzak veri merkezine çoğaltarak bölgesel bir depolama arızası durumunda kaybedilmesini önler.
 
 ## <a name="geo-replication"></a>Coğrafi çoğaltma
 
-Daha yüksek kullanılabilirlik garantisi gerektiren senaryolar için düşünün kullanarak [coğrafi çoğaltma](container-registry-geo-replication.md) Premium kayıt defterlerinin özelliğidir. Coğrafi çoğaltma, durumunda, kayıt defteri erişimini kaybetme karşı korumanıza yardımcı olur bir *toplam* bölgesel hatalara, yalnızca bir depolama hatası. Coğrafi çoğaltma diğer avantajları sağlar, çok, ağa yakın görüntüsü gibi depolama için daha hızlı gönderim ve Dağıtılmış Geliştirme ve dağıtım senaryolarında çeker.
+Daha da yüksek kullanılabilirlik güvencesi gerektiren senaryolar için Premium kayıt defterlerinin [coğrafi çoğaltma](container-registry-geo-replication.md) özelliğini kullanmayı düşünün. Coğrafi çoğaltma, yalnızca bir depolama hatası değil, *Toplam* bölgesel bir hata durumunda kayıt defterinize erişimi kaybetmekten korunmaya yardımcı olur. Coğrafi çoğaltma, dağıtılmış geliştirme veya dağıtım senaryolarında daha hızlı gönderim ve çekmelerde diğer avantajlar sağlar.
 
 ## <a name="image-limits"></a>Görüntü sınırları
 
-Aşağıdaki tablo, kapsayıcı görüntüsü ve depolama limitleri Azure kapsayıcısı kayıt defterleri için yerinde açıklar.
+Aşağıdaki tabloda, Azure Container Registry için kapsayıcı görüntüsü ve depolama sınırları açıklanmaktadır.
 
 | Resource | Sınır |
 | -------- | :---- |
 | Depoları | Sınırsız |
 | Görüntüler | Sınırsız |
-| Katmanları | Sınırsız |
+| Katmanlarda | Sınırsız |
 | Tags | Sınırsız|
 | Depolama | 5 TB |
 
-Çok yüksek sayıda depoları ve etiketleri, kayıt defterinizin performansını etkileyebilir. Kayıt defteri bakım yordamının bir parçası olarak düzenli aralıklarla kullanılmayan depoları, etiketler ve görüntüleri silin. Kayıt defteri kaynakları depoları, görüntüleri ve etiketleri gibi silinmiş *olamaz* , silindikten sonra kurtarılamaz. Kayıt defteri kaynakları silme hakkında daha fazla bilgi için bkz. [Sil kapsayıcı görüntülerini Azure Container Registry'de](container-registry-delete.md).
+Çok yüksek sayıda depolar ve Etiketler, kayıt defterinizin performansını etkileyebilir. Kullanılmayan depoları, etiketleri ve görüntüleri kayıt defteri bakım yordamlarınızın bir parçası olarak düzenli aralıklarla silin. Depolar, görüntüler *ve Etiketler gibi* silinen kayıt defteri kaynakları silinmeden sonra kurtarılamaz. Kayıt defteri kaynaklarını silme hakkında daha fazla bilgi için bkz. [Azure Container Registry kapsayıcı görüntülerini silme](container-registry-delete.md).
 
 ## <a name="storage-cost"></a>Depolama maliyeti
 
-Fiyatlandırma hakkında tam Ayrıntılar için bkz [Azure Container Registry fiyatlandırma][pricing].
+Fiyatlandırma hakkında tam Ayrıntılar için bkz. [Azure Container Registry fiyatlandırması][pricing].
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Farklı Azure Container Registry SKU'ları (temel, standart, Premium) hakkında daha fazla bilgi için bkz: [Azure Container Registry SKU'ları](container-registry-skus.md).
+Farklı Azure Container Registry SKU 'Lar (temel, standart, Premium) hakkında daha fazla bilgi için bkz. [Azure Container Registry SKU 'ları](container-registry-skus.md).
 
 <!-- IMAGES -->
 

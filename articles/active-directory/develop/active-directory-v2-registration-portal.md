@@ -1,6 +1,7 @@
 ---
-title: Uygulama kayıt portalı Yardım konuları | Microsoft Docs
-description: Microsoft uygulama kayıt Portalı'nda çeşitli özellikleri açıklaması.
+title: Uygulama kayıt portalı yardım konuları
+titleSuffix: Microsoft identity platform
+description: Microsoft uygulama kayıt portalındaki çeşitli özelliklerin açıklaması.
 services: active-directory
 documentationcenter: ''
 author: rwike77
@@ -12,49 +13,46 @@ ms.subservice: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 08/28/2018
+ms.topic: conceptual
+ms.date: 08/13/2019
 ms.author: ryanwi
 ms.reviewer: lenalepa
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ec615e1c6229539958f66d0dca15cf7eb788e597
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 61787e7a86a1c40ec04fb7a3d605158c85782d94
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65546105"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72803399"
 ---
 # <a name="app-registration-reference"></a>Uygulama kayıt başvurusu
-Bu belgede bağlam sağlar ve çeşitli özelliklerin açıklamaları bulunan [uygulama kayıt portalı](https://apps.dev.microsoft.com/?referrer=https://azure.microsoft.com/).
+Bu belge, Azure portal [uygulama kayıtları](https://aka.ms/appregistrations) deneyiminde bulunan çeşitli özelliklerin bağlamını ve açıklamalarını sağlar.
 
-> [!NOTE]
-> Artık kaydetme ve yönetme yakınsanmış ve Azure AD uygulamalarında destekleyeceğiz [uygulama kayıt portalı](https://apps.dev.microsoft.com/?referrer=https://azure.microsoft.com/) Mayıs 2019 başlatılıyor. Mevcut uygulamalarınızı yönetmek ve kullanarak yeni uygulamalar kaydetme öneririz [uygulama kayıtları](https://aka.ms/appregistrations) Azure portalında karşılaşırsınız.
-
-## <a name="my-applications-or-converged-applications"></a>Uygulamalarım veya hiper yakınsanmış uygulamalar
-Bu liste tüm uygulamalarınızı Azure AD v2.0 uç noktası ile kullanılması için kaydedilen içerir. Bu uygulamaların kullanıcıların hem kişisel Microsoft hesapları hem de iş/Okul hesapları Azure Active Directory ile oturum açma olanağı vardır. Azure AD v2.0 uç noktası hakkında daha fazla bilgi için bkz: [v2.0 genel bakış](active-directory-appmodel-v2-overview.md). Bu uygulamalar Microsoft hesabı kimlik doğrulaması uç nokta ile tümleştirmek için de kullanılabilir `https://login.live.com`.
+## <a name="my-applications-or-converged-applications"></a>Uygulamalarım veya yakınsanmış uygulamalar
+Bu liste, Microsoft Identity platform (v 2.0) uç noktasıyla birlikte kullanılmak üzere kaydedilen tüm uygulamalarınızı içerir. Bu uygulamalar, kullanıcıların hem kişisel Microsoft hesapları hem de iş/okul hesaplarıyla Azure Active Directory oturum açabilme özelliğine sahiptir. Kimlik platformu uç noktası hakkında daha fazla bilgi edinmek için bkz. [v 2.0 genel bakış](active-directory-appmodel-v2-overview.md). Bu uygulamalar, `https://login.live.com`Microsoft hesabı kimlik doğrulama uç noktası ile tümleştirme için de kullanılabilir.
 
 ## <a name="azure-ad-only-applications"></a>Yalnızca Azure AD uygulamaları
-Bu liste tüm uygulamalarınızı Azure AD v1.0 uç noktası ile kullanılması için kaydedilen içerir. Bu uygulamalar, kullanıcılar Azure Active Directory'den iş/Okul hesaplarıyla oturum açma olanağı yeterlidir. Bu liste kullanılarak kaydedilmiş uygulamaları içerir **uygulama kayıtları** deneyimini [Azure portalı](https://portal.azure.com).
+Bu liste, Azure AD v 1.0 uç noktasıyla birlikte kullanılmak üzere kaydedilen tüm uygulamalarınızı içerir. Bu uygulamalar yalnızca Azure Active Directory ' den iş/okul hesaplarıyla kullanıcıları oturum açabilme özelliğine sahiptir. Bu liste, [Azure portal](https://portal.azure.com) **uygulama kayıtları** deneyimi kullanılarak kaydedilmiş uygulamaları içerir.
 
-## <a name="live-sdk-applications"></a>Live SDK uygulamaları
-Bu liste tüm uygulamalarınızı, yalnızca Microsoft hesabı ile kullanmak için kayıtlı içerir. Azure Active Directory ile kullanmak için etkinleştirilmedi. MSA Geliştirici portalında ile daha önce kaydolan tüm uygulamaları nerede budur `https://account.live.com/developers/applications`. Daha önce sırasında gerçekleştirilen tüm işlevleri `https://account.live.com/developers/applications` artık bu yeni portalda gerçekleştirilebilir `https://apps.dev.microsoft.com`.
+## <a name="live-sdk-applications"></a>Canlı SDK Uygulamaları
+Bu liste, yalnızca Microsoft hesabı ile kullanım için kaydedilmiş tüm uygulamalarınızı içerir. Azure Active Directory ile kullanım için etkinleştirilmemelidir. Bu, daha önce `https://account.live.com/developers/applications`adresinden MSA geliştirici portalına kayıtlı olan herhangi bir uygulamayı bulabileceğiniz yerdir. Daha önce `https://account.live.com/developers/applications` gerçekleştirdiğiniz tüm işlevler artık [uygulama kayıtları](https://aka.ms/appregistrations)gerçekleştirilebilir.
 
-## <a name="application-secrets"></a>Uygulama gizli dizilerini
-Uygulama gizli dizilerini gerçekleştirmek, uygulamanızın güvenilir izin veren kimlik bilgileri olan [istemci kimlik doğrulaması](https://tools.ietf.org/html/rfc6749#section-2.3) Azure AD ile. OAuth ve Openıd Connect bir uygulama gizli anahtarı yaygın olarak adlandırılır bir `client_secret`. Bir web adreslenebilir konumda bir güvenlik belirteci alan herhangi bir uygulama v2.0 protokolündeki (kullanarak bir `https` düzeni) bu güvenlik belirtecinin kullanım sırasında Azure AD'ye kendisini tanımlamak için bir uygulama gizli anahtarı kullanmanız gerekir. Ayrıca, belirteçleri bir cihazda alan herhangi bir yerel istemcisi istemci kimlik doğrulaması gerçekleştirmek için bir uygulama gizli anahtarı kullanarak Yasak. Bu, gizli dizileri güvenli olmayan ortamlarda depolanmasını gerçekleştirilmesini önler.
+## <a name="application-secrets"></a>Uygulama gizli dizileri
+Uygulama gizli dizileri, uygulamanızın Azure AD ile güvenilir [istemci kimlik doğrulaması](https://tools.ietf.org/html/rfc6749#section-2.3) gerçekleştirmesini sağlayan kimlik bilgileridir. OAuth & OpenID Connect içinde, uygulama gizli dizisi genellikle `client_secret`olarak adlandırılır. V 2.0 protokolünde, bir Web adreslenebilir konumda (`https` şeması kullanarak) bir güvenlik belirteci alan tüm uygulamalar, bu güvenlik belirtecinin kullanıma alınması sırasında kendisini Azure AD 'ye tanıtmak için bir uygulama gizli anahtarı kullanmalıdır. Ayrıca, bir cihazda belirteçleri alan tüm yerel istemcilerin, istemci kimlik doğrulaması gerçekleştirmek için bir uygulama gizli anahtarı kullanılması yasaktır. Bu etkilenmeden, güvenli olmayan ortamlarda gizli dizi depolanmasını ister.
 
-Her uygulama, belirli bir zamanda iki geçerli uygulama gizli dizilerini içerebilir. İki gizli dizileri tutarak, uygulamanızın tüm ortam genelinde düzenli anahtar geçişi gerçekleştirme imkanına sahip olursunuz. Uygulamanızın yeni bir gizli dizi tamamen geçiş yaptıktan sonra eski gizli anahtarı silme ve yeni bir tane sağlayın.
+Her bir uygulama, belirli bir zamanda iki geçerli uygulama parolası içerebilir. İki gizli dizi tutarak, uygulamanızın tamamı boyunca düzenli anahtar geçişi gerçekleştirebilirsiniz. Uygulamanızı tamamen yeni bir gizli dizi ile geçirdikten sonra, eski parolayı silip yeni bir parola sağlayabilirsiniz.
 
-Şu anda yalnızca iki tür uygulama gizli dizilerinin uygulama kayıt Portalı'nda izin verilir. Seçme **yeni parola oluştur** oluşturur ve paylaşılan gizlilik uygulamanızda kullanabileceğiniz ilgili veri deposunda saklar. Seçme **yeni anahtar çifti oluşturma** indirmiş ve Azure AD'ye istemci kimlik doğrulaması için kullanılan yeni bir ortak/özel anahtar çifti oluşturur. Seçme **ortak anahtarı karşıya** kendi ortak/özel anahtar çifti kullanmanıza olanak tanır.
-Bir ortak anahtar içeren bir sertifikayı karşıya yüklemek için gereklidir.
+Şu anda, uygulama kayıt portalında yalnızca iki tür uygulama gizli listesine izin verilir. **Yeni parola oluştur** seçeneğinin belirlenmesi, uygulamanızda kullanabileceğiniz ilgili veri deposunda paylaşılan bir gizli dizi oluşturur ve depolar. **Yeni anahtar çifti oluştur** seçildiğinde, Azure AD 'de istemci kimlik doğrulaması için indirilebilen ve kullanılabilecek yeni bir ortak/özel anahtar çifti oluşturulur. **Ortak anahtarı karşıya yükle** seçeneğinin belirlenmesi, kendi ortak/özel anahtar çiftini kullanmanıza olanak sağlar.
+Ortak anahtar içeren bir sertifikayı karşıya yüklemeniz gerekir.
 
 ## <a name="profile"></a>Profil
-Uygulama kayıt portalı profili bölümünü, uygulamanız için oturum açma sayfasını özelleştirmek için kullanılabilir. Şu anda oturum açma sayfasının uygulama logosu, alter koşulları hizmet URL'sini ve gizlilik bildirimi URL'si. Logo, saydam bir 48 x 48 veya 50 x 50 piksel boyutunda, 15 KB bir GIF, PNG veya JPEG dosyası içinde olmalıdır ya da daha küçük. Deneyin değiştirerek ve sonuçta elde edilen oturum açma sayfası görüntüleme!
+Uygulama kayıt portalının profil bölümü, uygulamanız için oturum açma sayfasını özelleştirmek üzere kullanılabilir. Bu sırada, oturum açma sayfasının uygulama logosunu, hizmet koşullarını ve gizlilik bildirimi URL 'sini değiştirebilirsiniz. Logo, 15 KB veya daha küçük bir GIF, PNG veya JPEG dosyasında bir saydam 48 x 48 veya 50 x 50 piksel görüntüsü olmalıdır. Değerleri değiştirmeyi ve ortaya çıkan oturum açma sayfasını görüntülemeyi deneyin!
 
 ## <a name="live-sdk-support"></a>Canlı SDK desteği
-"Canlı SDK desteği" etkinleştirdiğinizde, hem Azure AD ile oluşturduğunuz herhangi bir uygulama gizli dizilerini sağlanacak ve Microsoft Account veri depoları. Bu, uygulamanızın doğrudan Microsoft Account hizmetini ile (login.live.com) tümleştirme sağlar. Microsoft Account doğrudan (Azure AD v2.0 uç noktası aksine) kullanarak bir uygulama oluşturmak istiyorsanız, Canlı SDK desteği etkin olduğundan emin olun.
+"Canlı SDK desteği" ni etkinleştirdiğinizde, oluşturduğunuz tüm uygulama gizli dizileri hem Azure AD hem de Microsoft hesabı veri depolarına sağlanacak. Bu, uygulamanızın doğrudan Microsoft hesabı hizmeti (login.live.com) ile tümleşmesini sağlar. Doğrudan Microsoft hesabı 'nı kullanarak bir uygulama oluşturmak istiyorsanız (v 2.0 uç noktasını kullanmanın aksine) canlı SDK desteğinin etkinleştirildiğinden emin olun.
 
-Canlı SDK desteği devre dışı bırakma sağlar uygulama gizli anahtarı yalnızca Azure AD verisine yazılan depolayın. Azure AD veri deposu FISMA uyumluluğu gibi belirli standartlarını karşılayacak şekilde sağlayan kurumsal düzeyde düzenlemeler içerir. Canlı SDK desteği etkinleştirirseniz, uygulamanızın bazı Bu standartlar ile uyumluluk elde değil.
+Canlı SDK desteğini devre dışı bırakmak, uygulama gizliliğinin yalnızca Azure AD veri deposuna yazılmasını sağlar. Azure AD veri deposu, bu BT 'nin FMA uyumluluğu gibi belirli standartları karşıladığından izin veren kurumsal düzeyde yönetmelikler içerir. Canlı SDK desteğini etkinleştirirseniz, uygulamanız bu standartlardan bazıları ile uyumluluk elde edebilir.
 
-Yalnızca Azure AD v2.0 uç noktası kullanmayı planlıyorsanız, Canlı SDK desteği güvenli bir şekilde devre dışı bırakabilirsiniz.
+Yalnızca v 2.0 uç noktasını kullanmayı planlıyorsanız, canlı SDK desteğini güvenle devre dışı bırakabilirsiniz.
 

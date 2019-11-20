@@ -1,6 +1,6 @@
 ---
-title: 'Service Fabric kümesi güvenliği: istemci rolleri | Microsoft Docs'
-description: Bu makalede iki istemci rolleri ve sağlanan rollere izinleri açıklar.
+title: 'Küme güvenliği Service Fabric: istemci rolleri | Microsoft Docs'
+description: Bu makalede, iki istemci rolü ve rollere sunulan izinler açıklanmaktadır.
 services: service-fabric
 documentationcenter: .net
 author: mani-ramaswamy
@@ -13,94 +13,94 @@ ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 2/23/2018
-ms.author: subramar
-ms.openlocfilehash: ed000dc4be1ae45382d688d4a596ec745c69d0bb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: atsenthi
+ms.openlocfilehash: 38656d286cae631cb5def0e0c8b171268e4cf428
+ms.sourcegitcommit: aef6040b1321881a7eb21348b4fd5cd6a5a1e8d8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60711170"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72167258"
 ---
-# <a name="role-based-access-control-for-service-fabric-clients"></a>Service Fabric istemciler için rol tabanlı erişim denetimi
-Azure Service Fabric, bir Service Fabric kümesine bağlanan istemciler için iki farklı erişim denetim türlerini destekler: Yönetici ve kullanıcı. Küme Yöneticisi, belirli küme işlemleri farklı kümeye daha güvenli hale getirme, kullanıcı grupları için erişimi sınırlandırmak erişim denetimi sağlar.  
+# <a name="role-based-access-control-for-service-fabric-clients"></a>Service Fabric istemcileri için rol tabanlı erişim denetimi
+Azure Service Fabric, bir Service Fabric kümesine bağlı istemciler için iki farklı erişim denetimi türünü destekler: yönetici ve Kullanıcı. Erişim denetimi, küme yöneticisinin farklı Kullanıcı grupları için belirli küme işlemlerine erişimi sınırlandırıp kümenin daha güvenli olmasını sağlar.  
 
-**Yöneticiler** yönetim özellikleri (okuma/yazma özellikleri dahil olmak üzere) tam erişime sahiptir. Varsayılan olarak, **kullanıcılar** yalnızca yönetim özelliklerine (örneğin, sorgu işlevleri) okuma erişimi ve uygulamaları ve Hizmetleri çözümlenebilmesi gerekir.
+**Yöneticiler** , yönetim özelliklerine (okuma/yazma özellikleri dahil) tam erişime sahiptir. Varsayılan olarak, **kullanıcıların** yalnızca yönetim özelliklerine okuma erişimi vardır (örneğin, sorgu özellikleri) ve uygulama ve Hizmetleri çözme özelliği vardır.
 
-Küme oluşturma sırasında her biri için ayrı sertifikalar sağlayarak iki istemci rolleri (Yönetici ve istemci) belirtin. Bkz: [Service Fabric küme güvenliği](service-fabric-cluster-security.md) güvenli bir Service Fabric kümesi oluşturma hakkında bilgi.
+Her biri için ayrı sertifikalar sağlayarak küme oluşturma sırasında iki istemci rolünü (yönetici ve istemci) belirtirsiniz. Güvenli bir Service Fabric kümesi ayarlama hakkında daha fazla bilgi için bkz. [Service Fabric küme güvenliği](service-fabric-cluster-security.md) .
 
 ## <a name="default-access-control-settings"></a>Varsayılan erişim denetimi ayarları
-Yönetici erişim denetim türü FabricClient API'leri tam erişimi vardır. Aşağıdaki işlemleri dahil olmak üzere Service Fabric kümesinde herhangi bir okuma ve yazma işlemleri gerçekleştirebilirsiniz:
+Yönetici erişimi denetim türü tüm FabricClient API 'Lerine tam erişime sahiptir. Service Fabric kümesinde aşağıdaki işlemler dahil olmak üzere okuma ve yazma işlemleri gerçekleştirebilir:
 
 ### <a name="application-and-service-operations"></a>Uygulama ve hizmet işlemleri
 * **CreateService**: hizmet oluşturma                             
-* **CreateServiceFromTemplate**: hizmet şablonundan oluşturma                             
-* **UpdateService**: hizmet güncelleştirmeleri                             
-* **DeleteService**: Hizmet silme                             
-* **ProvisionApplicationType**: uygulama sağlama türü                             
-* **CreateApplication**: uygulama oluşturma                               
+* **Createservicefromtemplate**: şablondan hizmet oluşturma                             
+* **Updateservice**: hizmet güncelleştirmeleri                             
+* **DeleteService**: hizmet silme                             
+* **Provisionapplicationtype**: uygulama türü sağlama                             
+* **Createapplication**: uygulama oluşturma                               
 * **DeleteApplication**: uygulama silme                             
-* **UpgradeApplication**: başlangıç veya uygulama yükseltmeleri engellemeden                             
-* **UnprovisionApplicationType**: uygulama türünün sağlamasını kaldırma işlemini                             
-* **MoveNextUpgradeDomain**: Uygulama yükseltme ile açık bir güncelleme etki alanı sürdürülüyor                             
-* **ReportUpgradeHealth**: uygulama yükseltmeleri geçerli yükseltme işlemi ilerleme durumu ile sürdürülüyor                             
-* **ReportHealth**: sağlık raporlaması                             
-* **PredeployPackageToNode**: dağıtım öncesi API                            
-* **CodePackageControl**: kod paketleri yeniden başlatılıyor                             
-* **RecoverPartition**: bir bölüm kurtarma                             
-* **RecoverPartitions**: bölümler kurtarma                             
-* **RecoverServicePartitions**: hizmeti bölümlerini kurtarma                             
-* **RecoverSystemPartitions**: sistem hizmeti bölümleri kurtarma                             
+* **Upgradeapplication**: uygulama yükseltmelerini başlatma veya kesme                             
+* **Unprovisionapplicationtype**: uygulama türü sağlamayı kaldırma                             
+* **MoveNextUpgradeDomain**: açık bir güncelleştirme etki alanı ile uygulama yükseltmeleri sürdürülüyor                             
+* **Reportupgradehealth**: geçerli yükseltme ilerlemesiyle uygulama yükseltmeleri sürdürülüyor                             
+* **Reporthegizlilik**: raporlama durumu                             
+* **Predeploypackagetonode**: ön dağıtım API 'si                            
+* **Codepackagecontrol**: kod paketlerini yeniden başlatma                             
+* **Recoverpartition**: bir bölümü kurtarma                             
+* **Recoverpartitions**: bölümleri kurtarma                             
+* **Recoverservicepartitions**: hizmet bölümlerini kurtarma                             
+* **Recoversystempartitions**: sistem hizmeti bölümlerini kurtarma                             
 
-### <a name="cluster-operations"></a>Küm işlemleri
-* **ProvisionFabric**: MSI ve/veya küme sağlama bildirimi                             
-* **UpgradeFabric**: Küme yükseltme başlatılıyor                             
-* **UnprovisionFabric**: Sağlamasını kaldırma işlemini MSI ve/veya küme bildirimi                         
-* **MoveNextFabricUpgradeDomain**: küme yükseltmeleriyle açık güncelleme etki alanı sürdürülüyor                             
-* **ReportFabricUpgradeHealth**: Küme yükseltme geçerli yükseltme işlemi ilerleme durumu ile sürdürülüyor                             
-* **StartInfrastructureTask**: altyapı bir görevini başlatmadan                             
-* **FinishInfrastructureTask**: altyapı görevleri tamamlama                             
-* **InvokeInfrastructureCommand**: altyapı görev management komutlar                              
-* **ActivateNode**: düğüm etkinleştirme                             
-* **DeactivateNode**: bir düğüm devre dışı bırakma                             
-* **DeactivateNodesBatch**: birden çok düğüm devre dışı bırakma                             
-* **RemoveNodeDeactivations**: birden çok düğümde geri alma devre dışı bırakma                             
-* **GetNodeDeactivationStatus**: devre dışı bırakma durumunu denetleme                             
-* **NodeStateRemoved**: düğüm durumu raporlama kaldırıldı                             
-* **ReportFault**: hata raporlama                             
-* **FileContent**: görüntü deposu istemci dosya aktarımı (Dış küme)                             
-* **FileDownload**: görüntü deposu istemci dosyası indirme başlatma (kümeye dış)                             
-* **InternalList**: görüntü deposu istemci Dosya listeleme işlemi (iç)                             
-* **Silme**: görüntü deposu istemci silme işlemi                              
-* **Karşıya yükleme**: görüntü deposu istemci karşıya yükleme işlemi                             
-* **NodeControl**: başlatılmasını, durdurmasını ve düğümleri yeniden başlatılıyor                             
-* **MoveReplicaControl**: çoğaltmalar bir düğümden diğerine taşıma                             
+### <a name="cluster-operations"></a>Küme işlemleri
+* **Provisionfabric**: MSI ve/veya küme bildirimi sağlama                             
+* **Yükselmen Bric**: küme yükseltmeleri başlatılıyor                             
+* **Unprovisionfabric**: MSI ve/veya küme bildirimi sağlama geri alınıyor                         
+* **MoveNextFabricUpgradeDomain**: açık bir güncelleştirme etki alanı ile küme yükseltmeleri sürdürülüyor                             
+* **Reportfabricupgradehealth**: geçerli yükseltme ilerlemesi ile küme yükseltmeleri sürdürülüyor                             
+* **Starınfrastructuretask**: altyapı görevleri başlatılıyor                             
+* **FinishInfrastructureTask**: altyapı görevleri bitiriliyor                             
+* **InvokeInfrastructureCommand**: altyapı görevi yönetim komutları                              
+* **ActivateNode**: bir düğümü etkinleştirme                             
+* **DeactivateNode**: düğümü devre dışı bırakma                             
+* **DeactivateNodesBatch**: birden çok düğümü devre dışı bırakma                             
+* **Removenodedeetkinleştirmeleri**: birden çok düğümdeki devre dışı bırakma geri döndürülüyor                             
+* **Getnodedeactivationstatus**: devre dışı bırakma durumu denetleniyor                             
+* **NodeStateRemoved**: Raporlama düğümü durumu kaldırıldı                             
+* **Reportfault**: raporlama hatası                             
+* **Dosya içeriği**: görüntü deposu istemci dosyası aktarımı (dış küme)                             
+* **Dosya indirme**: görüntü deposu istemci dosyası indirme başlatma (dış küme)                             
+* **InternalList**: görüntü deposu istemci dosyası listeleme işlemi (iç)                             
+* **Sil**: görüntü deposu istemcisi silme işlemi                              
+* **Karşıya yükle**: görüntü deposu istemci yükleme işlemi                             
+* **NodeControl**: düğümleri başlatma, durdurma ve yeniden başlatma                             
+* **Movereperepcontrol**: çoğaltmaları bir düğümden diğerine taşıma                             
 
 ### <a name="miscellaneous-operations"></a>Çeşitli işlemler
-* **Ping**: istemci ping                             
-* **Sorgu**: izin verilen tüm sorgular
-* **NameExists**: URI varlığı denetimleri adlandırma                             
+* **Ping**: istemci ping işlemleri                             
+* **Sorgu**: tüm sorgular izin verildi
+* **Nameexists**: URI varlık denetimlerini adlandırma                             
 
-Kullanıcı erişim denetimi türü varsayılan olarak şu işlemler için sınırlı verilmiştir: 
+Kullanıcı erişim denetimi türü, varsayılan olarak aşağıdaki işlemlerle sınırlıdır: 
 
-* **EnumerateSubnames**: URI numaralandırma adlandırma                             
-* **EnumerateProperties**: property sabit listesi adlandırma                             
-* **PropertyReadBatch**: özellik adlarının okuma işlemleri                             
-* **GetServiceDescription**: uzun yoklama hizmet bildirimleri ve okuma hizmet açıklamaları                             
-* **ResolveService**: şikayet tabanlı hizmet çözümleme                             
-* **ResolveNameOwner**: çözümleme adlandırma URI'si sahibi                             
-* **ResolvePartition**: Sistem Hizmetleri Çözümleme                             
+* **Enumeratesubnames**: URI numaralandırması adlandırma                             
+* **Enumerateproperties**: adlandırma özelliği numaralandırması                             
+* **Propertyreadbatch**: Özellik okuma işlemleri adlandırma                             
+* **GetServiceDescription**: uzun yoklama hizmeti bildirimleri ve okuma hizmeti açıklamaları                             
+* **ResolveService**: şikayet tabanlı hizmet çözümlemesi                             
+* **ResolveNameOwner**: adlandırma URI 'si sahibi çözümleniyor                             
+* **ResolvePartition**: sistem hizmetlerini çözümleme                             
 * **ServiceNotifications**: olay tabanlı hizmet bildirimleri                             
-* **GetUpgradeStatus**: Uygulama yükseltme durumunu yoklama                             
-* **GetFabricUpgradeStatus**: Küme yükseltme durumunu yoklama                             
-* **InvokeInfrastructureQuery**: altyapısı görevlerini sorgulama                             
-* **Liste**: görüntü deposu istemci Dosya listeleme işlemi                             
-* **ResetPartitionLoad**: bir yük devretme biriminin yük sıfırlanıyor                             
-* **ToggleVerboseServicePlacementHealthReporting**: ayrıntılı hizmet yerleştirme sağlık raporlaması geçiş                             
+* **Getupgradestatus**: uygulama yükseltme durumu yoklanıyor                             
+* **Getfabricupgradestatus**: küme yükseltme durumu yoklanıyor                             
+* **InvokeInfrastructureQuery**: altyapı görevlerini sorgulama                             
+* **Liste**: görüntü deposu istemci dosyası listeleme işlemi                             
+* **Resetpartitionload**: yük devretme birimi için yükleme sıfırlanıyor                             
+* **ToggleVerboseServicePlacementHealthReporting**: ayrıntılı hizmet yerleştirme sistem durumu raporlamasını değiştirme                             
 
-Yönetici erişim denetimi önceki işlemleri de erişebilir.
+Yönetici erişim denetimi, önceki işlemlere de erişebilir.
 
 ## <a name="changing-default-settings-for-client-roles"></a>İstemci rolleri için varsayılan ayarları değiştirme
-Küme bildirim dosyasında istemciye gerekirse yönetici özellikleri sağlayabilir. Varsayılanları giderek değiştirebilirsiniz **yapı ayarları** sırasında seçeneği [küme oluşturma](service-fabric-cluster-creation-via-portal.md), önceki ayarlar sağlayarak **adı**,  **Yönetici**, **kullanıcı**, ve **değer** alanları.
+Küme bildirim dosyasında, gerekirse istemciye yönetici özellikleri sağlayabilirsiniz. [Küme oluşturma](service-fabric-cluster-creation-via-portal.md)sırasında **doku ayarları** seçeneğine giderek Varsayılanları değiştirebilir ve **ad**, **yönetici**, **Kullanıcı**ve **değer** alanlarında önceki ayarları sağlayabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 [Service Fabric küme güvenliği](service-fabric-cluster-security.md)

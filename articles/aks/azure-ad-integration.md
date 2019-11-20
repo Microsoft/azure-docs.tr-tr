@@ -1,164 +1,164 @@
 ---
-title: Azure Kubernetes hizmeti ile Azure Active Directory Tümleştirme
-description: Azure Active Directory özellikli Azure Kubernetes Service (AKS) kümeleri oluşturma
+title: Azure Active Directory Azure Kubernetes hizmeti ile tümleştirme
+description: Azure Active Directory etkin Azure Kubernetes hizmeti (AKS) kümeleri oluşturma
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 04/26/2019
-ms.author: iainfou
-ms.openlocfilehash: db166c82e39e9184528fde67ff868229cf9b1d57
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: mlearned
+ms.openlocfilehash: 26f1544cab5cf5be2edd52f97c758d46eb835514
+ms.sourcegitcommit: 1c9858eef5557a864a769c0a386d3c36ffc93ce4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67061115"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71103782"
 ---
-# <a name="integrate-azure-active-directory-with-azure-kubernetes-service"></a>Azure Kubernetes hizmeti ile Azure Active Directory Tümleştirme
+# <a name="integrate-azure-active-directory-with-azure-kubernetes-service"></a>Azure Active Directory Azure Kubernetes hizmeti ile tümleştirme
 
-Azure Kubernetes Service (AKS), Azure Active Directory (Azure AD) kullanmak için kullanıcı kimlik doğrulaması için yapılandırılabilir. Bu yapılandırmada, bir AKS kümesi için Azure AD kimlik doğrulama belirtecinizi kullanarak oturum açabilir.
+Azure Kubernetes hizmeti (AKS), Kullanıcı kimlik doğrulaması için Azure Active Directory (Azure AD) kullanacak şekilde yapılandırılabilir. Bu yapılandırmada, Azure AD kimlik doğrulama belirtecinizi kullanarak bir AKS kümesinde oturum açabilirsiniz.
 
-Küme yöneticileri, bir kullanıcının kimlik veya dizin grubu üyeliğine göre Kubernetes rol tabanlı erişim denetimi (RBAC) yapılandırabilirsiniz.
+Küme yöneticileri, Kubernetes rol tabanlı erişim denetimini (RBAC) bir kullanıcının kimliğine veya dizin grubu üyeliğine göre yapılandırabilir.
 
-Bu makalede açıklanır nasıl yapılır:
+Bu makalede nasıl yapılacağı açıklanmaktadır:
 
-- AKS ve Azure AD önkoşulları dağıtın.
-- Azure AD etkin kümesine dağıtın.
-- Temel bir RBAC rolü, Azure portalını kullanarak AKS kümesinde oluşturun.
+- AKS ve Azure AD için önkoşulları dağıtın.
+- Azure AD özellikli bir küme dağıtın.
+- Azure portal kullanarak AKS kümesinde temel bir RBAC rolü oluşturun.
 
-Ayrıca, kullanarak aşağıdaki adımları tamamlayabilirsiniz [Azure CLI][azure-ad-cli].
-
-> [!NOTE]
-> Azure AD, yalnızca yeni bir RBAC etkin küme oluşturduğunuzda etkinleştirilebilir. Azure AD var olan bir AKS kümesi üzerinde etkinleştirilemiyor.
-
-## <a name="authentication-details"></a>Kimlik doğrulama ayrıntıları
-
-Azure AD kimlik doğrulaması, AKS kümeye Openıd Connect olması sağlanır. Openıd Connect, OAuth 2.0 protokolünü üzerinde yerleşik bir kimlik katmanı olan.
-
-Openıd Connect hakkında daha fazla bilgi için bkz: [Openıd Connect ile Azure AD kullanarak web uygulamalarına erişim yetkisi verme][open-id-connect].
-
-İçinde bir Kubernetes kümesi, Web kancası belirteci kimlik doğrulaması için kimlik doğrulama belirteçleri kullanılır. Web kancası belirteci kimlik doğrulaması yapılandırılır ve AKS kümesinin bir parçası yönetilir.
-
-Web kancası belirteci kimlik doğrulaması hakkında daha fazla bilgi için bkz: [Web kancası belirteci kimlik doğrulaması] [ kubernetes-webhook] Kubernetes belgeleri bölümünde.
-
-AKS kümesini Azure AD kimlik doğrulamasını sağlamak için iki Azure AD uygulama oluşturulur. İlk kullanıcı kimlik doğrulaması sağlayan bir sunucu bileşeni uygulamasıdır. İkinci kimlik doğrulaması için CLI tarafından istendiğinde kullanılan bir istemci bileşeni uygulamasıdır. Bu istemci uygulaması sunucu uygulaması istemci tarafından sağlanan kimlik bilgilerinin gerçek kimlik doğrulaması için kullanır.
+Ayrıca, [Azure CLI][azure-ad-cli]kullanarak bu adımları tamamlayabilirsiniz.
 
 > [!NOTE]
-> AKS kimlik doğrulaması için Azure AD yapılandırdığınızda, iki Azure AD uygulamaları yapılandırılır. Bir Azure Kiracı Yöneticisi tarafından adımları her uygulama için izinler tamamlanması gerekir.
+> Azure AD, yalnızca yeni bir RBAC etkin küme oluşturduğunuzda etkinleştirilebilir. Mevcut bir AKS kümesinde Azure AD 'yi etkinleştiremezsiniz.
+
+## <a name="authentication-details"></a>Kimlik doğrulaması ayrıntıları
+
+Azure AD kimlik doğrulaması, OpenID Connect içeren AKS kümelerine sağlanır. OpenID Connect, OAuth 2,0 protokolünün üstünde oluşturulmuş bir kimlik katmanıdır.
+
+OpenID Connect hakkında daha fazla bilgi için bkz. [OpenID Connect ve Azure ad kullanarak Web uygulamalarına erişim yetkisi verme][open-id-connect].
+
+Bir Kubernetes kümesi içinde, Web kancası belirteci kimlik doğrulaması, kimlik doğrulama belirteçleri için kullanılır. Web kancası belirteci kimlik doğrulaması, AKS kümesinin bir parçası olarak yapılandırılır ve yönetilir.
+
+Web kancası belirteci kimlik doğrulaması hakkında daha fazla bilgi için, Kubernetes belgelerindeki [Web kancası belirteci kimlik doğrulaması][kubernetes-webhook] bölümüne bakın.
+
+Bir AKS kümesi için Azure AD kimlik doğrulaması sağlamak üzere iki Azure AD uygulaması oluşturulur. İlk uygulama, Kullanıcı kimlik doğrulaması sağlayan bir sunucu bileşenidir. İkinci uygulama, kimlik doğrulaması için CLı tarafından istendiğinde kullanılan bir istemci bileşenidir. Bu istemci uygulaması, istemci tarafından belirtilen kimlik bilgilerinin gerçek kimlik doğrulaması için sunucu uygulamasını kullanır.
+
+> [!NOTE]
+> Azure AD 'yi AKS kimlik doğrulaması için yapılandırdığınızda, iki Azure AD uygulaması yapılandırılır. Her uygulama için izin verme adımları bir Azure kiracı yöneticisi tarafından tamamlanmalıdır.
 
 ## <a name="create-the-server-application"></a>Sunucu uygulaması oluşturma
 
-İlk Azure AD uygulaması, bir kullanıcının Azure AD grup üyeliğini almak için uygulanır. Azure portalında bu uygulamayı oluşturmak için:
+İlk Azure AD uygulaması, bir kullanıcının Azure AD grubu üyeliğini almak için uygulanır. Bu uygulamayı Azure portal oluşturmak için:
 
-1. Seçin **Azure Active Directory** > **uygulama kayıtları** > **yeni kayıt**.
+1. **Yeni kayıt** **uygulama kayıtları** > AzureActiveDirectory > seçin.
 
-    a. Uygulama gibi bir ad verin *AKSAzureADServer*.
+    a. Uygulamaya *AKSAzureADServer*gibi bir ad verin.
 
-    b. İçin **desteklenen hesap türleri**seçin **hesapları yalnızca kuruluş bu dizinde**.
+    b. **Desteklenen hesap türleri**için **yalnızca bu kuruluş dizinindeki hesaplar**' ı seçin.
     
-    c. Seçin **Web** için yeniden yönlendirme URI'sini yazın ve tüm URI biçimli değeri, gibi enter *https://aksazureadserver* .
+    c. Yeniden yönlendirme URI 'SI türü için **Web** ' i seçin ve ardından, *https://aksazureadserver* URI biçimli herhangi bir değer (gibi) girin.
 
-    d. Seçin **kaydetme** işiniz bittiğinde.
+    d. İşiniz bittiğinde **Kaydet** ' i seçin.
 
-2. Seçin **bildirim**ve ardından düzenleme **groupMembershipClaims:** olarak değer **tüm**. Güncelleştirmeleriyle tamamladığınızda seçin **Kaydet**.
+2. **Bildirim**' ı seçin ve ardından **groupmembershipclaim:** değerini **All**olarak düzenleyin. Güncelleştirmeler ile işiniz bittiğinde **Kaydet**' i seçin.
 
-    ![Tüm grup üyeliği güncelleştir](media/aad-integration/edit-manifest.png)
+    ![Grup üyeliğini tümüne Güncelleştir](media/aad-integration/edit-manifest.png)
 
-3. Azure AD uygulamasının sol bölmesinde seçin **sertifikaları ve parolaları**.
+3. Azure AD uygulamasının sol bölmesinde, **sertifikalar & gizlilikler**' ı seçin.
 
-    a. Seçin **+ yeni gizli**.
+    a. **+ Yeni istemci parolası**' nı seçin.
 
-    b. Gibi anahtar bir açıklama ekleyin *AKS Azure AD sunucusu*. Sona erme süresini seçin ve ardından **Ekle**.
+    b. *Aks Azure AD Server*gibi bir anahtar açıklaması ekleyin. Bir sona erme saati seçin ve ardından **Ekle**' yi seçin.
 
-    c. Yalnızca şu anda görüntülenen anahtar değerini not edin. Azure AD etkin AKS kümesi dağıtırken, bu değer sunucu uygulama gizli anahtarı olarak adlandırılır.
+    c. Yalnızca şu anda gösterilecek olan anahtar değerini aklınızda edin. Azure AD özellikli bir AKS kümesi dağıttığınızda, bu değere sunucu uygulama gizli dizisi denir.
 
-4. Azure AD uygulamasının sol bölmesinde seçin **API izinleri**ve ardından **+ izin Ekle**.
+4. Azure AD uygulamasının sol bölmesinde, **API izinleri**' ni seçin ve **+ izin Ekle**' yi seçin.
 
-    a. Altında **Microsoft APIs**seçin **Microsoft Graph**.
+    a. **Microsoft API 'leri**altında **Microsoft Graph**' yi seçin.
 
-    b. Seçin **temsilci izinleri**ve ardından yanındaki onay kutusunu seçin **dizin > Directory.Read.All (dizin verilerini okuma)** .
+    b. **Temsilci izinleri**' ni seçin ve ardından Dizin > Dizin ' in yanındaki onay kutusunu Işaretleyin. **tümünü oku (dizin verilerini oku)** .
 
-    c. Varsayılan temsilci izni varsa **kullanıcı > User.Read (oturum açın ve kullanıcı profilini okuma)** mevcut değil, yanındaki onay kutusunu işaretleyin.
+    c. Kullanıcı > Kullanıcı için varsayılan bir temsilci izni varsa **. okuma (oturum açma ve kullanıcı profilini okuma)** yoksa, yanındaki onay kutusunu işaretleyin.
 
-    d. Seçin **uygulama izinleri**ve ardından yanındaki onay kutusunu seçin **dizin > Directory.Read.All (dizin verilerini okuma)** .
+    d. **Uygulama izinleri**' ni seçin ve ardından Dizin > Dizin ' in yanındaki onay kutusunu Işaretleyin. **tümünü oku (dizin verilerini oku)** .
 
-    ![Graph izinleri ayarlama](media/aad-integration/graph-permissions.png)
+    ![Grafik izinlerini ayarla](media/aad-integration/graph-permissions.png)
 
-    e. Seçin **izinleri eklemek** güncelleştirmeleri kaydetmek için.
+    e. Güncelleştirmeleri kaydetmek için **Izinleri Ekle** ' yi seçin.
 
-    f. Altında **onay verme**seçin **yönetici onayı vermek**. Bu düğme geçerli hesabın bir kiracı Yöneticisi değilse kullanılabilir değil
+    f. **Izin ver**' in altında, **yönetici izni ver**' i seçin. Bu düğme kullanılamayacak geçerli hesap, kiracı yöneticisi olarak listelenmez.
 
-    İzinler başarıyla verildi, aşağıdaki bildirim portalda görüntülenir:
+    İzinler başarıyla verildiğinde, portalda aşağıdaki bildirim görüntülenir:
 
-   ![Bildirim başarıyla izin verildi](media/aad-integration/permissions-granted.png)
+   ![Başarılı izin verilen bildirim](media/aad-integration/permissions-granted.png)
 
-5. Azure AD uygulamasının sol bölmesinde seçin **bir API'yi kullanıma sunmak**ve ardından **+ "kapsam" Ekle**.
+5. Azure AD uygulamasının sol bölmesinde, **BIR API 'Yi kullanıma**sunma ' yı seçin ve **+ Kapsam Ekle**' yi seçin.
     
-    a. Girin bir **kapsam adı**e **yönetici onayı görünen adı**ve ardından bir **yönetici onayı açıklaması** gibi *AKSAzureADServer*.
+    a. **Kapsam adı**, **yönetici onayı görünen adı**ve *AKSAzureADServer*gibi bir **Yönetici onay açıklaması** girin.
 
-    b. Emin **durumu** ayarlanır **etkin**.
+    b. **Durumun** **etkin**olarak ayarlandığından emin olun.
 
-    ![Sunucu uygulamasının diğer hizmetleri ile kullanmak için bir API olarak kullanıma sunma](media/aad-integration/expose-api.png)
+    ![Sunucu uygulamasını diğer hizmetlerle kullanılmak üzere API olarak kullanıma sunma](media/aad-integration/expose-api.png)
 
-    c. Seçin **kapsamı Ekle**.
+    c. **Kapsam Ekle**' yi seçin.
 
-6. Uygulamaya dönmek **genel bakış** sayfası ve Not **uygulama (istemci) kimliği**. Azure AD etkin AKS kümesi dağıtırken, sunucu uygulama kimliği. Bu değer çağrılır
+6. Uygulamaya **genel bakış** sayfasına dönün ve **uygulamanın (istemci) kimliğini**aklınızda edin. Azure AD özellikli bir AKS kümesi dağıttığınızda, bu değere sunucu uygulama KIMLIĞI denir.
 
-    ![Uygulama Kimliği alma](media/aad-integration/application-id.png)
+    ![Uygulama KIMLIĞINI al](media/aad-integration/application-id.png)
 
 ## <a name="create-the-client-application"></a>İstemci uygulaması oluşturma
 
-Kubernetes CLI (kubectl) ile oturum açtığınızda, ikinci Azure AD uygulaması kullanılır.
+İkinci Azure AD uygulaması, Kubernetes CLı (kubectl) ile oturum açtığınızda kullanılır.
 
-1. Seçin **Azure Active Directory** > **uygulama kayıtları** > **yeni kayıt**.
+1. **Yeni kayıt** **uygulama kayıtları** > AzureActiveDirectory > seçin.
 
-    a. Uygulama gibi bir ad verin *AKSAzureADClient*.
+    a. Uygulamaya *AKSAzureADClient*gibi bir ad verin.
 
-    b. İçin **desteklenen hesap türleri**seçin **hesapları yalnızca kuruluş bu dizinde**.
+    b. **Desteklenen hesap türleri**için **yalnızca bu kuruluş dizinindeki hesaplar**' ı seçin.
 
-    c. Seçin **Web** için yeniden yönlendirme URI'sini yazın ve ardından URI biçimli herhangi bir değer gibi girin *https://aksazureadclient* .
+    c. Yeniden yönlendirme URI 'SI türü için **Web** ' i seçin ve ardından gibi *https://aksazureadclient* URI biçimli herhangi bir değer girin.
 
-    d. Seçin **kaydetme** işiniz bittiğinde.
+    d. İşiniz bittiğinde **Kaydet** ' i seçin.
 
-2. Azure AD uygulamasının sol bölmesinde seçin **API izinleri**ve ardından **+ izin Ekle**.
+2. Azure AD uygulamasının sol bölmesinde, **API izinleri**' ni seçin ve **+ izin Ekle**' yi seçin.
 
-    a. Seçin **Apı'lerim**ve ardından, Azure AD sunucu uygulaması gibi önceki adımda oluşturulan *AKSAzureADServer*.
+    a. **API 'Lerim**' i seçin ve ardından önceki adımda oluşturulan Azure ad sunucu uygulamanızı *AKSAzureADServer*gibi seçin.
 
-    b. Seçin **temsilci izinleri**ve ardından, Azure AD sunucu uygulaması yanındaki onay kutusunu seçin.
+    b. **Temsilci izinleri**' ni seçin ve ardından Azure AD Server uygulamanızın yanındaki onay kutusunu işaretleyin.
 
     ![Uygulama izinlerini yapılandırma](media/aad-integration/select-api.png)
 
-    c. Seçin **izinleri eklemek**.
+    c. **Izin Ekle**' yi seçin.
 
-    d. Altında **onay verme**seçin **yönetici onayı vermek**. Bu düğme, geçerli hesap bir kiracı Yöneticisi değilse kullanılamaz İzinler verildiğinde, aşağıdaki bildirim portalda görüntülenir:
+    d. **Izin ver**' in altında, **yönetici izni ver**' i seçin. Geçerli hesap kiracı yöneticisi değilse bu düğme kullanılamaz. İzinler verildiğinde, portalda aşağıdaki bildirim görüntülenir:
 
-    ![Bildirim başarıyla izin verildi](media/aad-integration/permissions-granted.png)
+    ![Başarılı izin verilen bildirim](media/aad-integration/permissions-granted.png)
 
-3. Azure AD uygulamasının sol bölmesinde seçin **kimlik doğrulaması**.
+3. Azure AD uygulamasının sol bölmesinde **kimlik doğrulaması**' nı seçin.
 
-    - Altında **varsayılan istemci türü**seçin **Evet** için **istemci genel bir istemci kabul**.
+    - **Varsayılan istemci türü**altında, **istemciyi ortak istemci olarak değerlendirmek**için **Evet** ' i seçin.
 
-5. Azure AD uygulamasının sol bölmede, uygulama kimliğini not edin. Azure AD etkin AKS kümesi dağıtırken, istemci uygulama kimliği. Bu değer çağrılır
+5. Azure AD uygulamasının sol bölmesinde uygulama KIMLIĞI ' ni aklınızda edin. Azure AD özellikli bir AKS kümesi dağıttığınızda, bu değere istemci uygulama KIMLIĞI denir.
 
-   ![Uygulama Kimliğini Al](media/aad-integration/application-id-client.png)
+   ![Uygulama KIMLIĞINI al](media/aad-integration/application-id-client.png)
 
-## <a name="get-the-tenant-id"></a>Kiracı Kimliğinizi alma
+## <a name="get-the-tenant-id"></a>Kiracı KIMLIĞINI al
 
-Ardından, Azure kiracınızın Kimliğini alın. Bu değer AKS kümesi oluşturduğunuzda kullanılır.
+Ardından, Azure kiracınızın KIMLIĞINI alın. Bu değer, AKS kümesini oluştururken kullanılır.
 
-Azure portalından seçin **Azure Active Directory** > **özellikleri** ve Not **dizin kimliği**. Azure AD etkin AKS kümesi oluşturduğunuzda, bu değer Kiracı kimliğini çağrılır
+Azure Portal, **Azure Active Directory** > **Özellikler** ' i seçin ve **dizin kimliğini**aklınızda yapın. Azure AD özellikli bir AKS kümesi oluşturduğunuzda, bu değere kiracı KIMLIĞI denir.
 
-![Azure Kiracı Kimliğinizi alma](media/aad-integration/tenant-id.png)
+![Azure kiracı KIMLIĞI 'ni al](media/aad-integration/tenant-id.png)
 
-## <a name="deploy-the-aks-cluster"></a>AKS kümesi dağıtma
+## <a name="deploy-the-aks-cluster"></a>AKS kümesini dağıtma
 
-Kullanım [az grubu oluşturma] [ az-group-create] AKS kümesi için bir kaynak grubu oluşturmak için komutu.
+AKS kümesi için bir kaynak grubu oluşturmak için [az Group Create][az-group-create] komutunu kullanın.
 
 ```azurecli
 az group create --name myResourceGroup --location eastus
 ```
 
-Kullanım [az aks oluşturma] [ az-aks-create] AKS kümesi dağıtmak için komutu. Ardından, aşağıdaki örnek komutta değerleri değiştirin. Sunucu uygulama kimliği, uygulama gizli anahtarı, istemci uygulama kimliği ve Kiracı kimliği için Azure AD uygulamaları oluştururken toplanan değerler kullanın
+AKS kümesini dağıtmak için [az aks Create][az-aks-create] komutunu kullanın. Sonra, aşağıdaki örnek komutundaki değerleri değiştirin. Sunucu uygulama KIMLIĞI, uygulama gizli anahtarı, istemci uygulama KIMLIĞI ve kiracı KIMLIĞI için Azure AD uygulamalarını oluştururken toplanan değerleri kullanın.
 
 ```azurecli
 az aks create \
@@ -171,29 +171,32 @@ az aks create \
   --aad-tenant-id 72f988bf-0000-0000-0000-2d7cd011db47
 ```
 
-Bir AKS kümesi oluşturmak için birkaç dakika sürer.
+AKS kümesinin oluşturulması birkaç dakika sürer.
 
-## <a name="create-an-rbac-binding"></a>Bir RBAC bağlama oluşturma
+## <a name="create-an-rbac-binding"></a>RBAC bağlaması oluşturma
 
-Bir Azure Active Directory hesabı ile bir AKS kümesi kullanmadan önce rolü bağlama veya küme rolünü bağlama oluşturmanız gerekir. Rol izinleri tanımlayın ve bağlamaları bunları istediğiniz kullanıcılar için geçerlidir. Bu atamaları, tüm küme üzerinde veya belirtilen bir ad alanı için uygulanabilir. Daha fazla bilgi için [kullanarak RBAC yetkilendirme][rbac-authorization].
+> [!NOTE]
+> Küme rolü bağlama adı büyük/küçük harfe duyarlıdır.
 
-İlk olarak, [az aks get-credentials] [ az-aks-get-credentials] komutunu `--admin` yönetici erişimi ile küme oturum açmak için bağımsız değişken.
+AKS kümesiyle bir Azure Active Directory hesabı kullanmadan önce, rol bağlama veya küme rolü bağlama oluşturmanız gerekir. Roller, verilecek izinleri tanımlar ve bağlamalar onları istenen kullanıcılara uygular. Bu atamalar, belirli bir ad alanına veya tüm küme genelinde uygulanabilir. Daha fazla bilgi için bkz. [RBAC yetkilendirmesi kullanma][rbac-authorization].
+
+İlk olarak, yönetici erişimiyle kümede oturum açmak için, `--admin` bağımsız değişkeniyle [az aks Get-Credentials][az-aks-get-credentials] komutunu kullanın.
 
 ```azurecli
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --admin
 ```
 
-Ardından, ClusterRoleBinding AKS kümesi erişim vermek istediğiniz bir Azure AD hesabı oluşturun. Aşağıdaki örnek kümedeki tüm ad alanlarını hesabı tam erişim sağlar:
+Ardından, AKS kümesine erişim vermek istediğiniz bir Azure AD hesabı için ClusterRoleBinding oluşturun. Aşağıdaki örnek, hesaba kümedeki tüm ad alanları için tam erişim sağlar:
 
-- Kullanıcı için RBAC bağlama aynı Azure AD kiracısında vermek, kullanıcı asıl adına (UPN) dayalı izinleri atayın. Adım ClusterRoleBinding YAML bildirimi oluşturmak için geçin.
+- RBAC bağlamasını verdiğiniz kullanıcı aynı Azure AD kiracısında ise, Kullanıcı asıl adına (UPN) göre izinler atayın. ClusterRoleBinding için YAML bildirimini oluşturmak üzere adıma geçin.
 
-- Kullanıcı, başka bir Azure AD Kiracı, sorgulama ve kullanma **objectID** özelliği bunun yerine. Gerekirse, gerekli bir kullanıcı hesabının objectID almak [az ad kullanıcı show] [ az-ad-user-show] komutu. Gerekli hesabının kullanıcı asıl adı (UPN) sağlayın:
+- Kullanıcı farklı bir Azure AD kiracısında ise, için sorgulama yapın ve onun yerine **ObjectID** özelliğini kullanın. Gerekirse, [az ad User Show][az-ad-user-show] komutunu kullanarak gerekli Kullanıcı hesabının ObjectID 'sini alın. Gerekli hesabın kullanıcı asıl adını (UPN) belirtin:
 
     ```azurecli-interactive
     az ad user show --upn-or-object-id user@contoso.com --query objectId -o tsv
     ```
 
-Gibi bir dosya oluşturun *rbac aad user.yaml*ve aşağıdaki içeriği yapıştırın. Son satırında değiştirin **userPrincipalName_or_objectId** UPN veya nesne kimliğine sahip Seçimi kullanıcı aynı Azure AD kiracısına veya olmasına göre değişir.
+*RBAC-AAD-User. YAML*gibi bir dosya oluşturun ve aşağıdaki içeriği yapıştırın. Son satırda **userPrincipalName_or_objectId** değerini UPN veya nesne kimliğiyle değiştirin. Bu seçenek, kullanıcının aynı Azure AD kiracısı olup olmamasına bağlıdır.
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -210,15 +213,15 @@ subjects:
   name: userPrincipalName_or_objectId
 ```
 
-Bağlama kullanarak uygulama [kubectl uygulamak] [ kubectl-apply] komutu aşağıdaki örnekte gösterildiği gibi:
+Aşağıdaki örnekte gösterildiği gibi, [kubectl Apply][kubectl-apply] komutunu kullanarak bağlamayı uygulayın:
 
 ```console
 kubectl apply -f rbac-aad-user.yaml
 ```
 
-Bir rol bağlama için bir Azure AD grubunun tüm üyelerini de oluşturulabilir. Azure AD grupları grubu nesne kimliği'ni kullanarak aşağıdaki örnekte gösterildiği gibi belirtilir.
+Bir Azure AD grubunun tüm üyeleri için rol bağlama da oluşturulabilir. Azure AD grupları, aşağıdaki örnekte gösterildiği gibi grup nesne KIMLIĞI kullanılarak belirtilir.
 
-Gibi bir dosya oluşturun *rbac aad group.yaml*ve aşağıdaki içeriği yapıştırın. Grubun nesne Kimliğini bir Azure AD kiracınız ile güncelleştirin:
+*RBAC-AAD-Group. YAML*gibi bir dosya oluşturun ve aşağıdaki içeriği yapıştırın. Grup nesnesi KIMLIĞINI Azure AD kiracınızdan bir tane ile güncelleştirin:
 
  ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -235,23 +238,23 @@ subjects:
    name: "894656e1-39f8-4bfe-b16a-510f61af6f41"
 ```
 
-Bağlama kullanarak uygulama [kubectl uygulamak] [ kubectl-apply] komutu aşağıdaki örnekte gösterildiği gibi:
+Aşağıdaki örnekte gösterildiği gibi, [kubectl Apply][kubectl-apply] komutunu kullanarak bağlamayı uygulayın:
 
 ```console
 kubectl apply -f rbac-aad-group.yaml
 ```
 
-RBAC ile bir Kubernetes kümesi güvenliğini sağlama konusunda daha fazla bilgi için bkz. [kullanarak RBAC yetkilendirme][rbac-authorization].
+Bir Kubernetes kümesinin RBAC ile güvenliğini sağlama hakkında daha fazla bilgi için bkz. [RBAC yetkilendirmesi kullanma][rbac-authorization].
 
-## <a name="access-the-cluster-with-azure-ad"></a>Azure AD ile küme erişim
+## <a name="access-the-cluster-with-azure-ad"></a>Azure AD ile kümeye erişme
 
-Yönetici olmayan kullanıcı bağlamı kullanarak çekme [az aks get-credentials] [ az-aks-get-credentials] komutu.
+[Az aks Get-Credentials][az-aks-get-credentials] komutunu kullanarak yönetici olmayan kullanıcı bağlamını çekin.
 
 ```azurecli
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
 ```
 
-Çalıştırdıktan sonra `kubectl` istenir Azure kullanarak kimlik doğrulaması için komutu. İzleyin ekran aşağıdaki örnekte gösterildiği gibi işlemi tamamlamak için yönergeleri:
+`kubectl` Komutu çalıştırdıktan sonra, Azure kullanarak kimlik doğrulaması yapmanız istenir. Aşağıdaki örnekte gösterildiği gibi, işlemi tamamlaması için ekrandaki yönergeleri izleyin:
 
 ```console
 $ kubectl get nodes
@@ -264,26 +267,26 @@ aks-nodepool1-79590246-1   Ready     agent     1h        v1.13.5
 aks-nodepool1-79590246-2   Ready     agent     1h        v1.13.5
 ```
 
-İşlem tamamlandığında, kimlik doğrulama belirteci önbelleğe alınır. Yalnızca belirteç süre sonu veya Kubernetes yapılandırma dosyası yeniden oluşturulana tekrar oturum açmanız istenir.
+İşlem tamamlandığında, kimlik doğrulama belirteci önbelleğe alınır. Yalnızca belirtecin süresi dolarsa veya Kubernetes yapılandırma dosyası yeniden oluşturulduğunda yeniden oturum açmanız istenir.
 
-Başarıyla oturum açtıktan sonra bir yetkilendirme hata iletisini görürseniz, aşağıdaki ölçütleri denetleyin:
+Başarıyla oturum açtıktan sonra bir yetkilendirme hata iletisi görürseniz, aşağıdaki ölçütleri kontrol edin:
 
 ```console
 error: You must be logged in to the server (Unauthorized)
 ```
 
 
-- Uygun nesne Kimliğini veya UPN'sini, kullanıcı hesabının aynı Azure AD kiracısında olup olmadığını bağlı olarak, tanımladığınız.
-- Kullanıcı, 200'den fazla grupların bir üyesi değildir.
-- Sunucu kullanılarak yapılandırılan değerle için uygulama kaydında tanımlanan gizli `--aad-server-app-secret`.
+- Kullanıcı hesabının aynı Azure AD kiracısında olup olmadığı ile ilgili olarak uygun nesne KIMLIĞINI veya UPN 'yi tanımlamış olursunuz.
+- Kullanıcı 200 taneden fazla grubun üyesi değil.
+- Sunucu için uygulama kaydında tanımlanan gizli dizi kullanılarak `--aad-server-app-secret`yapılandırılan değerle eşleşir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Küme kaynaklarına erişimi denetlemek için Azure AD kullanıcılarını ve gruplarını kullanmak için bkz: [AKS rol tabanlı erişim denetimi ve Azure AD kimlikleri kullanarak küme kaynaklarında erişim denetimi][azure-ad-rbac].
+Küme kaynaklarına erişimi denetlemek için Azure AD kullanıcıları ve grupları 'nı kullanmak için bkz. [AKS 'de rol tabanlı erişim denetimi ve Azure AD kimlikleri kullanarak küme kaynaklarına erişimi denetleme][azure-ad-rbac].
 
-Güvenli Kubernetes kümelerini kullanma hakkında daha fazla bilgi için bkz. [AKS için erişim ve kimlik seçeneklerini][rbac-authorization].
+Kubernetes kümelerinin güvenliğini sağlama hakkında daha fazla bilgi için bkz. [AKS Için erişim ve kimlik seçenekleri][rbac-authorization].
 
-Kimlik ve kaynak denetimi hakkında daha fazla bilgi için bkz: [en iyi uygulamalar için kimlik doğrulama ve yetkilendirme aks'deki][operator-best-practices-identity].
+Kimlik ve kaynak denetimi hakkında daha fazla bilgi için bkz. [AKS 'de kimlik doğrulama ve yetkilendirme Için en iyi uygulamalar][operator-best-practices-identity].
 
 <!-- LINKS - external -->
 [kubernetes-webhook]:https://kubernetes.io/docs/reference/access-authn-authz/authentication/#webhook-token-authentication

@@ -1,6 +1,6 @@
 ---
-title: Azure Traffic Manager - trafik yönlendirme yöntemleri
-description: Bu Traffic Manager tarafından kullanılan farklı trafik yönlendirme yöntemleri anlamanıza yardımcı makaleler
+title: Azure Traffic Manager trafik yönlendirme yöntemleri
+description: Bu makaleler Traffic Manager tarafından kullanılan farklı trafik yönlendirme yöntemlerini anlamanıza yardımcı olur
 services: traffic-manager
 author: asudbring
 ms.service: traffic-manager
@@ -10,133 +10,176 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/17/2018
 ms.author: allensu
-ms.openlocfilehash: 9068cb0dad742ac6e5eeae0b3a1b801d08d4734c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 06ce7fb5d18920be6f71821b034dc13061c60032
+ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67071007"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70051453"
 ---
 # <a name="traffic-manager-routing-methods"></a>Traffic Manager yönlendirme yöntemleri
 
-Azure Traffic Manager çeşitli hizmet uç noktaları için ağ trafiğini yönlendirmek üzere nasıl dağıtılacağını belirlemenin altı trafik yönlendirme yöntemlerini destekler. Herhangi bir profil için Traffic Manager trafik yönlendirme yöntemini aldığı her DNS sorgusu için ilişkili geçerlidir. Trafik yönlendirme yöntemini, hangi uç noktaya DNS yanıtında döndürülen belirler.
+Azure Traffic Manager, ağ trafiğinin çeşitli hizmet uç noktalarına nasıl yönlendirildiğine yönelik altı trafik yönlendirme yöntemini destekler. Her profil için, Traffic Manager onunla ilişkili trafik yönlendirme yöntemini aldığı her DNS sorgusuyla uygular. Trafik-yönlendirme yöntemi, DNS yanıtında hangi uç noktanın döndürüleceğini belirler.
 
-Trafik Yöneticisi'nde aşağıdaki trafik yönlendirme yöntemleri kullanılabilir:
+Aşağıdaki trafik yönlendirme yöntemleri Traffic Manager ' de kullanılabilir:
 
-* **[Öncelik](#priority):** Seçin **öncelik** ne zaman tüm trafiği için birincil hizmet uç noktası ve birincil durumda yedekleme sağlamak istediğiniz veya yedekleme uç noktaları kullanılamıyor.
-* **[Ağırlıklı](#weighted):** Seçin **ağırlıklı** trafiği bir uç nokta kümesine arasında dağıtmak istediğinizde, eşit veya, ağırlıklara göre tanımlayın.
-* **[Performans](#performance):** Seçin **performans** zaman uç noktalar farklı coğrafi konumlarda olan ve son kullanıcıların en düşük ağ gecikme süresi açısından "en yakın" uç nokta kullanmasını istediğiniz.
-* **[Coğrafi](#geographic):** Seçin **Geographic** DNS sorgularını, böylece kullanıcılar hangi coğrafi konum temelinde belirli Uç noktalara (Azure, dış veya iç içe) yönlendirilir kaynaklanan. Bu, kullanıcının coğrafi bölgede bilerek ve bunları oturum tabanlı yönlendirme önemli olduğu senaryolar etkinleştirmek için Traffic Manager müşterileri güçlendirir. Veri egemenliği mandates içeriği ve kullanıcı deneyimi yerelleştirmesi uymak ve farklı bölgelerden trafik ölçme verilebilir.
-* **[Birden çok değerli](#multivalue):** Seçin **birden çok değerli** için Traffic Manager profilleri, yalnızca IPv4/IPv6 adresleri uç noktalar olarak sahip olabilirsiniz. Bu profil için bir sorgu alındığında, tüm sağlıklı uç noktalar döndürülür.
-* **[Alt ağ](#subnet):** Seçin **alt** kümeleri son kullanıcı IP adresi aralıklarının bir Traffic Manager profili içinde belirli bir uç noktaya eşlemek için trafik yönlendirme yöntemi. Bir istek alındığında, uç nokta, bu isteğin kaynak IP adresi için eşleştirilecek döndürdü. 
+* **[Öncelik](#priority):** Tüm trafik için bir birincil hizmet uç noktası kullanmak istediğinizde **Öncelik** ' i seçin ve birincil veya yedekleme uç noktalarının kullanılamadığı durumlarda yedeklemeler sağlayın.
+* **[Ağırlıklı](#weighted):** Trafiği, istediğiniz bir uç nokta genelinde eşit veya ağırlığa göre dağıtmak istediğinizde **ağırlıklı** ' ı seçin.
+* **[Performans](#performance):** Farklı coğrafi konumlarda uç noktalarınız olduğunda ve son kullanıcıların "en yakın" uç noktasını en düşük ağ gecikmesi açısından kullanmasını istiyorsanız **performans** ' ı seçin.
+* **[Coğrafi](#geographic):** Kullanıcılar DNS sorgusunun kaynaklandığı coğrafi konuma göre belirli uç noktalara (Azure, dış veya Iç Içe) yönlendirilmek için **coğrafi** ' ı seçin. Bu, müşterileri bir kullanıcının coğrafi bölgesini bilmenin ve bunları temel alarak yönlendiren senaryolara olanak tanımak için Traffic Manager güçler. Örnek olarak, veri egemenlik mantarihlerle, içerik & kullanıcı deneyiminin yerelleştirilmesi ve farklı bölgelerden gelen trafiğin ölçülmesi verilebilir.
+* **[Çoklu değer](#multivalue):** Yalnızca bitiş noktaları olarak IPv4/IPv6 adreslerine sahip olan Traffic Manager profilleri için **Çoklu değer** seçeneğini belirleyin. Bu profil için bir sorgu alındığında, sağlıklı tüm uç noktalar döndürülür.
+* **[Alt ağ](#subnet):** Son Kullanıcı IP adresi aralıklarını bir Traffic Manager profili içindeki belirli bir uç noktaya eşlemek için **alt ağ** trafiği-yönlendirme yöntemini seçin. Bir istek alındığında döndürülen uç nokta, bu isteğin kaynak IP adresi için eşlenmiş bir değer olacaktır. 
 
 
-Tüm Traffic Manager profillerini uç nokta sistem durumu ve otomatik bir uç nokta yük devretme izleme içerir. Daha fazla bilgi için [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md). Tek bir Traffic Manager profili, yalnızca bir trafik yönlendirme yöntemini kullanabilirsiniz. Herhangi bir zamanda profiliniz için farklı trafik yönlendirme yöntemini seçebilirsiniz. Bir dakika içinde değişiklikler uygulanır ve kapalı kalma süresi olmadan oluşur. Trafik yönlendirme yöntemleri, iç içe Traffic Manager profilleri kullanılarak birleştirilebilir. İç içe geçme daha büyük ve karmaşık uygulamaların gereksinimlerini karşılayan karmaşık ve esnek trafik yönlendirme yapılandırmaları sağlar. Daha fazla bilgi için [iç içe Traffic Manager profillerini](traffic-manager-nested-profiles.md).
+Tüm Traffic Manager profiller, uç nokta durumunu ve otomatik uç nokta yük devretmesini izlemeyi içerir. Daha fazla bilgi için bkz. [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md). Tek bir Traffic Manager profili yalnızca bir trafik yönlendirme yöntemi kullanabilir. Profiliniz için istediğiniz zaman farklı bir trafik yönlendirme yöntemi seçebilirsiniz. Değişiklikler bir dakika içinde uygulanır ve kapalı kalma süresi olmaz. Trafik yönlendirme yöntemleri, iç içe geçmiş Traffic Manager profilleri kullanılarak birleştirilebilir. İç içe geçme, daha büyük, karmaşık uygulamaların ihtiyaçlarını karşılayan gelişmiş ve esnek trafik yönlendirme yapılandırmalarına izin verebilir. Daha fazla bilgi için bkz. [iç içe Traffic Manager profilleri](traffic-manager-nested-profiles.md).
 
-## <a name = "priority"></a>Öncelik trafik yönlendirme yöntemi
+## <a name = "priority"></a>Öncelik trafiği-yönlendirme yöntemi
 
-Genellikle bir kuruluş, birincil hizmet arıza durumunda bir veya daha fazla yedekleme hizmetlerini dağıtarak hizmetlerinin için güvenilirlik sağlamak istiyor. Azure müşterileri kolayca bu yük devretme deseni uygulamak 'Öncelik' trafik yönlendirme yöntemi sağlar.
+Genellikle bir kuruluş, birincil hizmetlerinin kapanması olasılığına karşı bir veya daha fazla yedekleme hizmeti dağıtarak Hizmetleri için güvenilirlik sağlamak istemektedir. ' Priority ' trafik-yönlendirme yöntemi, Azure müşterilerinin bu yük devretme modelini kolayca uygulamasına olanak tanır.
 
-![Azure Traffic Manager 'Öncelik' trafik yönlendirme yöntemi](media/traffic-manager-routing-methods/priority.png)
+![Azure Traffic Manager ' Priority ' trafiği yönlendirme yöntemi](media/traffic-manager-routing-methods/priority.png)
 
-Traffic Manager profili, hizmet uç noktalarının öncelikli listesi içerir. Varsayılan olarak, Traffic Manager tüm trafiği birincil (en yüksek öncelik) uç noktasına gönderir. Birincil uç nokta kullanılabilir durumda değilse, Traffic Manager trafiği ikinci uç noktasına yönlendirir. Birincil ve ikincil uç kullanılabilir durumda değilse, trafiği üçüncü ve benzeri gider. Uç noktanın kullanılabilirliğini yapılandırılan durumu (etkin veya devre dışı) ve devam eden bir uç nokta izleme bağlıdır.
+Traffic Manager profili, hizmet uç noktalarının öncelikli bir listesini içerir. Varsayılan olarak, Traffic Manager tüm trafiği birincil (en yüksek öncelikli) uç noktaya gönderir. Birincil uç nokta kullanılabilir değilse, trafiği ikinci uç noktaya yönlendirir Traffic Manager. Hem birincil hem de ikincil uç noktaları kullanılabilir değilse, trafik üçüncü olarak gider ve bu şekilde devam eder. Uç noktanın kullanılabilirliği, yapılandırılan durumu (etkin veya devre dışı) ve devam eden uç nokta izlemeyi temel alır.
 
-### <a name="configuring-endpoints"></a>Uç noktalarını yapılandırma
+### <a name="configuring-endpoints"></a>Uç noktaları yapılandırma
 
-Azure Resource Manager ile 'priority' özelliği kullanılarak açıkça her uç nokta için uç nokta önceliği yapılandırın. Bu özellik, 1 ile 1000 arasında bir değerdir. Düşük değerler daha yüksek önceliği temsil eder. Uç noktaları öncelik değerleri paylaşamazsınız. Özelliği isteğe bağlıdır. Atlanırsa, varsayılan uç nokta sıraya göre bir öncelik kullanılır.
+Azure Resource Manager, her bitiş noktası için ' Priority ' özelliğini kullanarak uç nokta önceliğini açık olarak yapılandırırsınız. Bu özellik 1 ile 1000 arasında bir değerdir. Daha düşük değerler daha yüksek bir öncelik temsil eder. Uç noktalar öncelik değerlerini paylaşamaz. Özelliği ayarlama isteğe bağlıdır. Atlanırsa, uç nokta sırasına göre varsayılan bir öncelik kullanılır.
 
-## <a name = "weighted"></a>Ağırlıklı trafik yönlendirme yöntemi
-'Ağırlıklı' trafik yönlendirme yöntemini trafiği eşit olarak dağıtmak için veya önceden tanımlanmış ağırlığı kullanmayı sağlar.
+## <a name = "weighted"></a>Ağırlıklı trafik-yönlendirme yöntemi
+' Ağırlıklı ' trafik-yönlendirme yöntemi, trafiği eşit bir şekilde dağıtmanıza veya önceden tanımlanmış bir ağırlığa kullanmanıza olanak sağlar.
 
-![Azure Traffic Manager 'Ağırlıklı' trafik yönlendirme yöntemi](media/traffic-manager-routing-methods/weighted.png)
+![Azure Traffic Manager ' ağırlıklı ' trafik-yönlendirme yöntemi](media/traffic-manager-routing-methods/weighted.png)
 
-Ağırlıklı trafik yönlendirme yöntemini her bir uç nokta Traffic Manager profili yapılandırması için bir ağırlık atayın. Ağırlık 1-1000 arasında bir tamsayıdır. Bu parametre isteğe bağlıdır. Atlanırsa, trafik yöneticileri '1' varsayılan ağırlığı kullanır. Daha yüksek ağırlık, öncelik o kadar yüksektir.
+Ağırlıklı trafik-yönlendirme yönteminde, Traffic Manager profili yapılandırmasındaki her bir uç noktaya bir ağırlık atarsınız. Ağırlık 1-1000 arasında bir tamsayıdır. Bu parametre isteğe bağlıdır. Atlanırsa, trafik yöneticileri varsayılan olarak ' 1 ' ağırlığını kullanır. Daha yüksek ağırlık, öncelik daha yüksektir.
 
-Traffic Manager, alınan her DNS sorgusu için kullanılabilir uç nokta rastgele seçer. Bir uç noktasını olasılığını tüm kullanılabilir uç noktaları için atanan ağırlıklara göre faturalandırılır. Genelinde tüm uç noktalar sonuçları bir bile trafik dağılımı ağırlık kullanıyor. Belirli Uç noktalara daha yüksek veya düşük Ağırlıklar kullanılıyor, bu Uç noktalara daha fazla veya daha az sık DNS yanıtlarını döndürülecek neden olur.
+Alınan her DNS sorgusu için, Traffic Manager rastgele kullanılabilir bir uç nokta seçer. Uç nokta seçme olasılığı, kullanılabilir tüm uç noktalara atanan ağırlıkları temel alır. Tüm uç noktalarında aynı ağırlığı kullanmak, hatta trafik dağıtımına neden olur. Belirli uç noktalarda daha yüksek veya daha düşük kalınlıklar kullanmak, bu uç noktaların DNS yanıtlarına daha fazla veya daha az sıklıkta döndürülmesine neden olur.
 
-Ağırlıklı yöntemin bazı yararlı senaryolara olanak tanır:
+Ağırlıklı yöntem bazı faydalı senaryolara izin verebilir:
 
-* Aşamalı uygulama yükseltme: Yeni bir uç noktasına yönlendirme için trafik yüzdesi ayırın ve yavaş yavaş % 100 zaman içinde trafik artırın.
-* Uygulamayı azure'a: Bir profili ile hem Azure hem de dış uç noktaları oluşturun. Tercih ettiğiniz yeni uç nokta için uç nokta ağırlığı ayarlayın.
-* Bulut Patlaması ek kapasite için: Traffic Manager profili yerleştirerek hızlı bir şekilde bir şirket içi dağıtım buluta genişletin. Bulutta ek kapasiteye ihtiyaç duyduğunuzda, ekleyin veya daha fazla uç noktalarının etkinleştirilmesi ve trafiğin hangi kısmını her uç noktaya gider belirtin.
+* Aşamalı uygulama yükseltme: Yeni bir uç noktaya yönlendirmek için trafik yüzdesi ayırın ve zaman içinde trafiği zaman içinde% 100 olarak artırın.
+* Azure 'a uygulama geçişi: Hem Azure hem de dış uç noktalarla bir profil oluşturun. Yeni uç noktaları tercih etmek için uç noktaların kalınlığını ayarlayın.
+* Ek kapasite için bulut patlaması: Şirket içi bir dağıtımı Traffic Manager bir profilin arkasına yerleştirerek buluta hızlıca genişletin. Bulutta fazladan kapasiteye ihtiyacınız olduğunda, daha fazla uç nokta ekleyebilir veya etkinleştirebilir ve her bir uç noktaya giden trafik bölümünün ne olduğunu belirtebilirsiniz.
 
-Azure portalını kullanmaya ek olarak, Azure PowerShell, CLI ve REST API'lerini kullanarak ağırlıkları yapılandırabilirsiniz.
+Azure portal kullanmanın yanı sıra, Azure PowerShell, CLı ve REST API 'Leri kullanarak ağırlıkları yapılandırabilirsiniz.
 
-DNS yanıtları, DNS adlarını çözümlemek için istemcilerin kullandığı yinelenen DNS sunucuları ve istemciler tarafından önbelleğe alınır anlamak önemlidir. Bu önbelleğe alma, ağırlıklı trafiği dağıtımlarında bir etkisi olabilir. İstemcileri ve yinelenen DNS sunucuları sayısı büyük olduğunda trafik dağılımı beklendiği gibi çalışır. İstemciler veya yinelenen DNS sunucuları sayısı az olduğunda, ancak önbelleğe alma önemli ölçüde trafik dağılımı eğriltilebilir.
+DNS yanıtlarının istemciler tarafından ve istemcilerin DNS adlarını çözümlemek için kullandığı özyinelemeli DNS sunucuları tarafından önbelleğe alınacağını anlamak önemlidir. Bu önbelleğe alma, ağırlıklı trafik dağıtımlarını etkileyebilir. İstemci sayısı ve özyinelemeli DNS sunucuları büyükse, trafik dağıtımı beklendiği gibi çalışıyor demektir. Ancak, istemci sayısı veya özyinelemeli DNS sunucuları küçük olduğunda, önbelleğe alma işlemi trafik dağıtımını önemli ölçüde eğebilir.
 
-Genel kullanım örnekleri şunlardır:
+Yaygın kullanım örnekleri şunlardır:
 
 * Geliştirme ve test ortamları
-* Uygulama uygulama iletişimleri
-* Bir dar kullanıcı ortak bir özyinelemeli DNS altyapısı (örneğin, bir proxy üzerinden bağlanma şirket çalışanları) paylaşan tabanlı uygulamaları özeliklerin
+* Uygulamadan uygulamaya iletişimler
+* Ortak bir özyinelemeli DNS altyapısını (örneğin, bir ara sunucu aracılığıyla bağlanan şirket çalışanları) paylaşan bir dar kullanıcı tabanına hedeflenmiş uygulamalar
 
-Bu DNS önbelleğe alma etkileri tüm DNS tabanlı trafik yönlendirme sistemler için yalnızca Azure Traffic Manager yaygındır. Bazı durumlarda, açıkça DNS önbelleği temizleniyor, geçici bir çözüm sağlayabilir. Diğer durumlarda, alternatif bir trafik yönlendirme yöntemi daha uygun olabilir.
+Bu DNS önbelleğe alma etkileri yalnızca Azure Traffic Manager değil, DNS tabanlı tüm trafik yönlendirme sistemlerinde ortaktır. Bazı durumlarda, DNS önbelleğini açıkça temizlemek geçici bir çözüm sağlayabilir. Diğer durumlarda, alternatif bir trafik yönlendirme yöntemi daha uygun olabilir.
 
-## <a name = "performance"></a>Performans trafiği yönlendirme yöntemi
+## <a name = "performance"></a>Performans trafiği-yönlendirme yöntemi
 
-İki veya daha fazla konumda uç noktaları, dünya çapında dağıtma 'size en yakın' konumu için trafiği yönlendirme tarafından birçok uygulama yanıt verme hızını artırabilir. Bu özelliği 'Performans' trafik yönlendirme yöntemini sunar.
+Uç noktaların dünya genelinde iki veya daha fazla konumda dağıtımı, trafiği ' en yakın ' olan konuma yönlendirerek birçok uygulamanın yanıt hızını iyileştirebilirler. ' Performance ' trafik-yönlendirme yöntemi bu yeteneği sağlar.
 
-![Azure Traffic Manager 'Performans' trafik yönlendirme yöntemi](media/traffic-manager-routing-methods/performance.png)
+![Azure Traffic Manager ' Performance ' trafiği-yönlendirme yöntemi](media/traffic-manager-routing-methods/performance.png)
 
-'En yakın' uç noktası tarafından coğrafi uzaklık ölçülen mutlaka en yakın değil. Bunun yerine, ağ gecikmesi ölçerek en yakın uç nokta 'Performans' trafik yönlendirme yöntemini belirler. Traffic Manager her bir Azure veri merkezi IP adres aralıkları arasında gidiş dönüş süresi izlemek için bir Internet gecikme tablosu tutar.
+' En yakın ' uç noktası coğrafi mesafede ölçülen kadar yakın değildir. Bunun yerine, ' Performance ' trafik-yönlendirme yöntemi ağ gecikmesini ölçerek en yakın uç noktayı belirler. Traffic Manager, IP adresi aralıkları ve her Azure veri merkezi arasında gidiş dönüş süresini izlemek için bir Internet gecikme tablosu saklar.
 
-Traffic Manager, gelen Internet gecikme tablo DNS isteğinin kaynak IP adresi arar. Traffic Manager kullanılabilir uç nokta IP adres aralığı için en düşük gecikme süresine sahiptir ve bu uç nokta DNS yanıtında döndüren Azure veri merkezinde ardından seçer.
+Traffic Manager, Internet gecikme süresi tablosundaki gelen DNS isteğinin kaynak IP adresini arar. Traffic Manager, bu IP adresi aralığı için en düşük gecikme süresine sahip Azure veri merkezinde kullanılabilir bir uç nokta seçer ve DNS yanıtında bu uç noktayı döndürür.
 
-İçinde anlatıldığı gibi [Traffic Manager nasıl çalışır](traffic-manager-how-it-works.md), Traffic Manager DNS sorguları doğrudan istemcilerden almaz. Bunun yerine, DNS sorguları, istemcilerin kullanmak üzere yapılandırılmış özyinelemeli DNS hizmetinden gelir. Bu nedenle, 'en yakın' uç noktası, istemcinin IP adresi değil, ancak özyinelemeli DNS hizmeti IP adresi olduğu belirlemek için kullanılan IP adresi. Uygulamada, istemci için iyi bir proxy bu IP adresidir.
+[Traffic Manager nasıl çalıştığı konusunda](traffic-manager-how-it-works.md)açıklandığı gibi, Traffic Manager doğrudan istemcilerden DNS sorguları almaz. Bunun yerine, DNS sorguları istemcilerin kullanmak üzere yapılandırıldığı özyinelemeli DNS hizmetinden gelir. Bu nedenle, ' en yakın ' uç noktasını belirlemede kullanılan IP adresi istemcinin IP adresidir, ancak özyinelemeli DNS hizmetinin IP adresidir. Uygulamada, bu IP adresi istemci için iyi bir ara sunucu.
 
 
-Traffic Manager, genel İnternet'e ve yeni Azure bölgeleri değişiklikleri hesaba Internet gecikme tablosu düzenli olarak güncelleştirir. Ancak, uygulama performansı göre gerçek zamanlı çeşitlemeleri yük Internet üzerinden değişir. Performans trafiği yönlendirme belirli hizmet uç noktası üzerindeki yük izlemez. Bir uç nokta kullanılamaz duruma gelirse, ancak, Traffic Manager, DNS sorgu yanıtları içermez.
+Traffic Manager, Internet gecikme tablosunu genel Internet ve yeni Azure bölgelerindeki değişikliklere göre hesaba göre düzenli olarak güncelleştirir. Bununla birlikte, uygulama performansı, Internet üzerinde yükün gerçek zamanlı farklılıklara göre farklılık gösterir. Performans trafiği-yönlendirme, belirli bir hizmet uç noktasındaki yükü izlemez. Ancak, bir uç nokta kullanılamaz hale gelirse Traffic Manager DNS sorgu yanıtlarına eklemez.
 
 
 Dikkat edilecek noktalar:
 
-* Profilinizi aynı Azure bölgesinde birden fazla uç noktası içeriyorsa, ardından Traffic Manager trafik bu bölgede kullanılabilir uç noktalar arasında dağıtır. Bir bölge içinde farklı trafik dağıtım tercih ederseniz, kullanabileceğiniz [iç içe Traffic Manager profillerini](traffic-manager-nested-profiles.md).
-* Traffic Manager trafiği en yakın Azure bölgesine etkinleştirilmiş tüm uç noktalar düşürülmüş ise sonraki en yakın Azure bölgesinde uç noktalarına taşır. Tercih edilen bir yük devretme sırası tanımlamak istediğiniz kullanırsanız [iç içe Traffic Manager profillerini](traffic-manager-nested-profiles.md).
-* Performans trafiği yönlendirme metodunu dış uç noktalar veya iç içe uç noktaları ile kullanırken, bu Uç noktalara konumunu belirtmek gerekir. Dağıtımınız için en yakın Azure bölgesi seçin. Konumların Internet gecikme tablo tarafından desteklenen değerler.
-* Uç nokta seçtiği belirleyici algoritmasıdır. Yinelenen DNS sorguları aynı istemciden aynı uç noktaya yönlendirilir. Genellikle, istemciler farklı yinelenen DNS sunucuları dolaşırken kullanır. İstemci, farklı bir uç noktasına yönlendirilebilir. Yönlendirme de Internet gecikme tabloya yapılan güncelleştirmeler etkilenebilir. Bu nedenle, performans trafiği yönlendirme yöntemini bir istemci her zaman aynı uç noktaya yönlendirilir garantilemez.
-* Internet gecikme tablosu değiştiğinde, bazı istemciler farklı bir uç noktaya yönlendirilir fark edebilirsiniz. Bu yönlendirme değişiklik geçerli gecikme verilere göre daha doğru olur. Bu güncelleştirmeler, Internet sürekli geliştikçe performans trafiği yönlendirme doğruluğunu sağlamak için gereklidir.
+* Profiliniz aynı Azure bölgesinde birden fazla uç nokta içeriyorsa, Traffic Manager trafiği bu bölgedeki kullanılabilir uç noktalar arasında eşit olarak dağıtır. Bir bölge içinde farklı bir trafik dağıtımını tercih ediyorsanız, [iç içe geçmiş Traffic Manager profillerini](traffic-manager-nested-profiles.md)kullanabilirsiniz.
+* En yakın Azure bölgesindeki tüm etkin uç noktalar düşürülirse Traffic Manager trafiği bir sonraki en yakın Azure bölgesindeki uç noktalara taşıdıkça. Tercih edilen bir yük devretme sırası tanımlamak istiyorsanız, [iç içe geçmiş Traffic Manager profillerini](traffic-manager-nested-profiles.md)kullanın.
+* Dış uç noktalar veya iç içe geçmiş uç noktalarla performans trafiği yönlendirme yöntemini kullanırken, bu uç noktaların konumunu belirtmeniz gerekir. Dağıtımınıza en yakın Azure bölgesini seçin. Bu konumlar Internet gecikme süresi tablosu tarafından desteklenen değerlerdir.
+* Uç noktayı seçen algoritma belirleyici olur. Aynı istemciden yinelenen DNS sorguları aynı uç noktaya yönlendirilir. Genellikle, istemciler seyahat ederken farklı özyinelemeli DNS sunucuları kullanır. İstemci farklı bir uç noktaya yönlendirilebilir. Yönlendirme, Internet gecikme tablosuna ait güncelleştirmelerden da etkilenebilir. Bu nedenle, performans trafiği-yönlendirme yöntemi, bir istemcinin her zaman aynı uç noktaya yönlendirildiğini garanti etmez.
+* Internet gecikme süresi tablosu değiştiğinde, bazı istemcilerin farklı bir uç noktaya yönlendirildiğine dikkat edebilirsiniz. Bu yönlendirme değişikliği, geçerli gecikme verilerine göre daha doğru. Internet sürekli geliştikçe performans trafiği yönlendirmenin doğruluğunu sürdürmek için bu güncelleştirmeler önemlidir.
 
-## <a name = "geographic"></a>Coğrafi trafik yönlendirme yöntemi
+## <a name = "geographic"></a>Coğrafi trafik-yönlendirme yöntemi
 
-Traffic Manager profilleri, böylece kullanıcılar kendi DNS sorgusu kaynaklandığı hangi coğrafi konum tabanlı belirli Uç noktalara (Azure, dış veya iç içe) yönlendirilir coğrafi yönlendirme yöntemini kullanmak için yapılandırılabilir. Bu, kullanıcının coğrafi bölgede bilerek ve bunları oturum tabanlı yönlendirme önemli olduğu senaryolar etkinleştirmek için Traffic Manager müşterileri güçlendirir. Veri egemenliği mandates içeriği ve kullanıcı deneyimi yerelleştirmesi uymak ve farklı bölgelerden trafik ölçme verilebilir.
-Bir profili devre dışı coğrafi yönlendirme için yapılandırıldığında, her bir uç nokta profili coğrafi bölgesinde atanmış bir dizi sahip olması gerektiğini ilişkili. Aşağıdaki ayrıntı düzeylerinde bir coğrafi bölgede olabilir 
+Traffic Manager profiller, kullanıcıların DNS sorgusunun kaynaklandığı coğrafi konuma göre belirli uç noktalara (Azure, dış veya Iç Içe) yönlendirilmeleri için coğrafi yönlendirme yöntemini kullanacak şekilde yapılandırılabilir. Bu, müşterileri bir kullanıcının coğrafi bölgesini bilmenin ve bunları temel alarak yönlendiren senaryolara olanak tanımak için Traffic Manager güçler. Örnek olarak, veri egemenlik mantarihlerle, içerik & kullanıcı deneyiminin yerelleştirilmesi ve farklı bölgelerden gelen trafiğin ölçülmesi verilebilir.
+Bir profil coğrafi yönlendirme için yapılandırıldığında, bu profille ilişkilendirilen her uç noktanın kendisine atanmış bir coğrafi bölge kümesi olması gerekir. Coğrafi bölge, aşağıdaki ayrıntı düzeyi düzeylerinde olabilir 
 - Dünya – herhangi bir bölge
-- Bölgesel gruplandırma – örneğin Afrika, Orta Doğu, Avustralya/Pasifik vs. 
-- Örneğin, İrlanda, ülke/bölge – Peru, Hong Kong ÖİB vs. 
-- Eyalet/il – örneğin California ABD, Avustralya-Queensland, Kanada Alberta vb. (Not: Bu ayrıntı düzeyi yalnızca durum için desteklenen / il Avustralya, Kanada ve ABD'deki).
+- Bölgesel gruplandırma: Örneğin, Afrika, Orta Doğu, Avustralya/Pasifik vb. 
+- Ülke/bölge: Örneğin, Irlanda, Peru, Hong Kong ÖİB vb. 
+- Eyalet/bölge – örneğin, ABD-California, Avustralya-Queensland, Kanada-Alberta vb. (Note: Bu ayrıntı düzeyi düzeyi yalnızca Avustralya, Kanada ve ABD 'deki eyalet/eyalet için desteklenir).
 
-Bir bölge veya bölge kümesinin bir uç noktasına atandığında, tüm istekler bu bölgelerden yönlendirilmiş yalnızca bu uç noktaya. Traffic Manager, gelen bir kullanıcı sorgulama: genellikle bu kullanıcı adına sorgu yapmadan yerel DNS Çözümleyicisi IP adresi olan bölgeyi belirlemek için DNS sorgusu kaynak IP adresini kullanır.  
+Bir bölge veya bölge kümesi bir uç noktaya atandığında, bu bölgelerden gelen istekler yalnızca o uç noktaya yönlendirilir. Traffic Manager, kullanıcının sorgulama yaptığı bölgeyi belirlemekte DNS sorgusunun kaynak IP adresini kullanır – genellikle bu, Kullanıcı adına sorgu yapan yerel DNS Çözümleyicisinin IP adresidir.  
 
-![Azure Traffic Manager 'Coğrafi' trafik yönlendirme yöntemi](./media/traffic-manager-routing-methods/geographic.png)
+![Azure Traffic Manager ' coğrafi ' trafik-yönlendirme yöntemi](./media/traffic-manager-routing-methods/geographic.png)
 
-Traffic Manager DNS sorgusu kaynak IP adresini okur ve veritabanından kaynaklanan hangi coğrafi bölgeyi belirler. Ardından bu coğrafi bölgede eşlenmiş olan bir uç noktası olup olmadığını görmek için görünüyor. En düşük ayrıntı düzeyinde (burada, desteklenir, aksi takdirde ülke/bölge düzeyinde eyalet/il) bu aramayı başlatır ve olan tüm en yüksek düzeye kadar **dünya**. Bu geçişi kullanarak uç noktası olarak sorgu yanıtına döndürülecek atanır ilk eşleşme bulundu. Bu alt profilinde bir uç nokta bir iç içe türü uç noktasıyla eşleşen döndürüldüğünde, yönlendirme yöntemini temel. Aşağıdaki noktaları için bu davranış geçerlidir:
+Traffic Manager, DNS sorgusunun kaynak IP adresini okur ve hangi coğrafi bölgenin kaynaklandığı karar verir. Daha sonra bu coğrafi bölgenin eşlendiği bir uç nokta olup olmadığını görmek için görünür. Bu arama en düşük ayrıntı düzeyi düzeyinde (desteklenen eyalet/eyalet, başka bir deyişle ülke/bölge düzeyinde) başlar ve **dünyanın**en yüksek düzeyine kadar tüm şekilde çalışır. Bu çapraz geçiş kullanılarak bulunan ilk eşleşme, sorgu yanıtında döndürülecek uç nokta olarak belirtilmiştir. Iç Içe geçmiş bir tür uç noktasıyla eşleştirilirken, bu alt profil içindeki bir uç nokta, yönlendirme yöntemine göre döndürülür. Aşağıdaki noktaları bu davranış için geçerlidir:
 
-- Yönlendirme türü coğrafi yönlendirme olduğunda yalnızca bir Traffic Manager profilinde bir uç nokta için bir coğrafi bölgede eşlenebilir. Bu kullanıcıları yönlendirme kararlı ve müşterilerin benzersiz coğrafi sınırlar gerektiren senaryolar etkinleştirebilirsiniz sağlar.
-- Bir kullanıcının bölge iki farklı uç noktaların coğrafi eşleme geliyorsa, Traffic Manager uç noktası ile en düşük ayrıntı düzeyi seçer ve bu bölgedeki başka bir uç noktası yönlendirme isteklerini dikkate almaz. Örneğin, bir coğrafi yönlendirme türü profili ile iki uç nokta - bitiş noktası 1 ve Endpoint2 göz önünde bulundurun. Bitiş noktası 1, İrlanda'dan trafiği almak için yapılandırılır ve Endpoint2 Avrupa'dan trafiği almak için yapılandırılır. İrlanda'dan bir isteğin kaynaklandığı, her zaman için bitiş noktası 1 yönlendirilir.
-- Bir bölge yalnızca bir uç noktaya eşlenebilecek olduğundan, Traffic Manager uç nokta iyi durumda olup olmamasına bakılmaksızın döndürür.
+- Bir coğrafi bölge, yönlendirme türü coğrafi yönlendirme olduğunda bir Traffic Manager profilindeki bir uç nokta ile eşlenebilir. Bu, kullanıcıların yönlendirilmesini belirleyici hale gelmesini ve müşterilerin, belirsiz coğrafi sınır gerektiren senaryoları etkinleştirebilmesini sağlar.
+- Bir kullanıcının bölgesi iki farklı bitiş noktası ' coğrafi eşleme altına gelirse Traffic Manager en düşük ayrıntı düzeyi olan uç noktayı seçer ve bu bölgeden diğer uç noktaya yönlendirme isteklerini göz önünde bulundurmaz. Örneğin, iki uç nokta (Endpoint1 ve Endpoint2) olan coğrafi yönlendirme türü profilini göz önünde bulundurun. Endpoint1, Irlanda 'dan trafik alacak şekilde yapılandırılmıştır ve Endpoint2, Avrupa 'dan gelen trafiği alacak şekilde yapılandırılır. Bir istek Irlanda 'dan kaynaklanıyorsa, her zaman Endpoint1 'a yönlendirilir.
+- Bir bölge yalnızca bir uç nokta ile eşleştirilemediğinden, Traffic Manager uç noktanın sağlıklı olup olmamasına bakılmaksızın onu döndürür.
 
     >[!IMPORTANT]
-    >Coğrafi yönlendirme yöntemini kullanan müşteriler, her içinde en az iki uç noktaları içeren alt profil iç içe türü uç noktası ile ilişkilendirdiğinizden de önemle tavsiye edilir.
-- Bir uç nokta eşleşme bulundu ve bu uç noktaya **durduruldu** durumunda, Traffic Manager NODATA yanıt verir. Bu durumda, başka hiçbir arama coğrafi bölgeyi hiyerarşide daha üst kısımlarda yapılır. Alt profili olduğunda bu davranış da iç içe uç nokta türleri için geçerli **durduruldu** veya **devre dışı bırakılmış** durumu.
-- Bir uç nokta görüntülerse bir **devre dışı bırakılmış** durumu, işlem eşleştirme bölgede dahil edilmeyecektir. Uç nokta olduğunda bu davranış da iç içe uç nokta türleri için geçerli **devre dışı bırakılmış** durumu.
-- Sorgu hiçbir eşleme profilde sahip bir coğrafi bölgesinden geliyorsa, Traffic Manager NODATA yanıtı döndürür. Bu nedenle, müşterilerin ideal olarak alt profiliyle bölge içinde en az iki uç noktaları ile iç içe türü, bir uç nokta ile coğrafi yönlendirme kullanmak önerilir **dünya** atanmış. Bu, ayrıca bir bölgeye eşlemeyin herhangi bir IP adresi işlenmesini sağlar.
+    >Coğrafi yönlendirme yöntemini kullanan müşterilerin, her biri içinde en az iki uç nokta içeren alt profilleri olan Iç Içe geçmiş tür uç noktaları ile ilişkilendirilebilmesi önemle önerilir.
+- Bir uç nokta eşleşmesi bulunursa ve uç nokta **durdurulmuş** durumdaysa, Traffic Manager bir NoData yanıtı döndürür. Bu durumda, coğrafi bölge hiyerarşisinde daha fazla arama yapılmaz. Bu davranış, alt profil **durdurulmuş** veya **devre dışı** durumdayken iç içe geçmiş uç nokta türleri için de geçerlidir.
+- Bir uç nokta **devre dışı** durumunu görüntülüyorsa, bölge eşleştirme işlemine dahil değildir. Bu davranış, uç nokta **devre dışı** durumundayken iç içe geçmiş uç nokta türleri için de geçerlidir.
+- Bir sorgu, bu profilde eşlenmesiz bir coğrafi bölgeden geliyorsa, Traffic Manager NODATA yanıtı döndürür. Bu nedenle, müşterilerin bir uç nokta ile coğrafi yönlendirme kullanması önemle önerilir. Bu, alt profil içinde en az iki uç nokta ile Iç Içe, **Dünya çapında** atanmış bölge Ile iç içe. Bu Ayrıca, bir bölgeyle eşlenmemesi gereken tüm IP adreslerinin işlenmesini de sağlar.
 
-İçinde anlatıldığı gibi [Traffic Manager nasıl çalışır](traffic-manager-how-it-works.md), Traffic Manager DNS sorguları doğrudan istemcilerden almaz. Bunun yerine, DNS sorguları, istemcilerin kullanmak üzere yapılandırılmış özyinelemeli DNS hizmetinden gelir. Bu nedenle, kullanılan IP adresini bölge istemcinin IP adresi değil, ancak özyinelemeli DNS hizmeti IP adresi olduğu belirlemek için. Uygulamada, istemci için iyi bir proxy bu IP adresidir.
+[Traffic Manager nasıl çalıştığı konusunda](traffic-manager-how-it-works.md)açıklandığı gibi, Traffic Manager doğrudan istemcilerden DNS sorguları almaz. Bunun yerine, DNS sorguları istemcilerin kullanmak üzere yapılandırıldığı özyinelemeli DNS hizmetinden gelir. Bu nedenle, bölgeyi belirlemekte kullanılan IP adresi istemcinin IP adresidir, ancak özyinelemeli DNS hizmetinin IP adresidir. Uygulamada, bu IP adresi istemci için iyi bir ara sunucu.
 
-## <a name = "multivalue"></a>Çok değerli trafik yönlendirme yöntemi
-**Birden çok değerli** trafik yönlendirme yöntemi birden fazla sağlıklı uç noktası tek bir DNS sorgu yanıtına yararlanmanıza olanak sağlar. Bu, yanıt vermeyen olan döndürülen bir uç nokta olması durumunda diğer uç noktalar ile istemci tarafı deneme yapmak için çağırana sağlar. Bu düzen, bir hizmetin kullanılabilirliğini artırmak ve sağlıklı bir uç nokta elde etmek için yeni bir DNS sorgusu ile ilişkili gecikme süresini azaltın. Yalnızca IPv4 veya IPv6 adresleri 'Dış' türündeki uç noktalar ve olan belirtilen çok değerli yönlendirme yöntemini çalışır. Bu profil için bir sorgu alındığında, tüm sağlıklı uç noktalar döndürülür ve yapılandırılabilir bir maksimum dönüş sayısı tabidir.
+### <a name="faqs"></a>SSS
 
-## <a name = "subnet"></a>Alt ağ trafik yönlendirme yöntemi
-**Alt** trafik yönlendirme yöntemini profilindeki belirli Uç noktalara bir son kullanıcının IP adresi aralıkları kümesini eşlemenizi sağlar. Traffic Manager, bu profil için bir DNS sorgusu alırsa, daha sonra bu kaynak inceler (Bu arayan tarafından kullanılan DNS Çözümleyicisi giden IP adresi olur çoğu durumda), isteğin IP adresini belirlemek hangi uç noktaya eşlenir ve t döndürür Sorgu yanıtına hat uç noktası. 
+* [Coğrafi yönlendirmenin yararlı olduğu bazı kullanım durumları nelerdir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-are-some-use-cases-where-geographic-routing-is-useful)
 
-Bir uç noktaya eşlenmesi için IP adresi, CIDR aralığı (ör. 1.2.3.0/24) veya adres aralığı (ör. 1.2.3.4-5.6.7.8) olarak belirtilebilir. Bir uç noktasıyla ilişkili IP aralıkları, bu profili içinde benzersiz olması gerekir ve bir çakışma farklı bir uç noktası IP adresi kümesiyle aynı profile sahip olamaz.
-Hiçbir adres aralığına sahip bir uç nokta tanımlarsanız, bir geri dönüş ve sınav zamanı akışından kalan hiçbir alt ağ olarak çalışır. Geri dönüş uç nokta dahil ise, Traffic Manager tüm tanımlanmamış aralıkları için NODATA yanıt gönderir. Bu nedenle, ya da geri dönüş bir uç noktası tanımlama, aksi takdirde, olası tüm IP aralıklarını, uç noktalar genelinde belirtildiğinden emin olun önerilir.
+* [Performans yönlendirme yöntemini mi yoksa coğrafi yönlendirme yöntemini mi kullanmalıyım Nasıl yaparım? karar veriyor musunuz?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-do-i-decide-if-i-should-use-performance-routing-method-or-geographic-routing-method)
 
-Alt ağ yönlendirme belirli bir IP alanından bağlanan kullanıcılar için farklı bir deneyim sunmak için kullanılabilir. Örneğin, alt ağ yönlendirme kullanarak, bir müşteri, ofisten gelen tüm isteklerin farklı bir uç noktaya yönlendirilmesini uygulamasının bir iç tek sürümü burada test yapabilirsiniz. Belirli bir ISS'niz (örneğin, belirli bir ISS blok kullanıcıların) bağlanan kullanıcılar için farklı bir deneyim sağlamak istiyorsanız başka bir senaryodur.
+* [Coğrafi yönlendirme için Traffic Manager tarafından desteklenen bölgeler nelerdir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-are-the-regions-that-are-supported-by-traffic-manager-for-geographic-routing)
+
+* [Traffic Manager bir kullanıcının sorgu nerede olduğunu nasıl belirleyebilir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-does-traffic-manager-determine-where-a-user-is-querying-from)
+
+* [Traffic Manager her durumda kullanıcının tam coğrafi konumunu doğru bir şekilde belirleyebilsin mi?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#is-it-guaranteed-that-traffic-manager-can-correctly-determine-the-exact-geographic-location-of-the-user-in-every-case)
+
+* [Bir uç noktanın coğrafi yönlendirme için yapılandırılmış ile aynı bölgede fiziksel olarak bulunması gerekir mi?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#does-an-endpoint-need-to-be-physically-located-in-the-same-region-as-the-one-it-is-configured-with-for-geographic-routing)
+
+* [Coğrafi yönlendirme yapmak üzere yapılandırılmamış bir profildeki uç noktalara coğrafi bölgeler atayabilir miyim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#can-i-assign-geographic-regions-to-endpoints-in-a-profile-that-is-not-configured-to-do-geographic-routing)
+
+* [Mevcut bir profilin yönlendirme yöntemini coğrafi olarak değiştirmeyi denediğimde neden hata alıyorum?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#why-am-i-getting-an-error-when-i-try-to-change-the-routing-method-of-an-existing-profile-to-geographic)
+
+* [Müşterilerin coğrafi yönlendirmeyi etkin bir profil altında olan uç noktalar yerine iç içe geçmiş profiller oluşturması kesinlikle önerilir mi?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#why-is-it-strongly-recommended-that-customers-create-nested-profiles-instead-of-endpoints-under-a-profile-with-geographic-routing-enabled)
+
+* [API sürümünde bu yönlendirme türünü destekleyen herhangi bir kısıtlama var mı?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#are-there-any-restrictions-on-the-api-version-that-supports-this-routing-type)
+
+## <a name = "multivalue"></a>Çoklu değer trafik-yönlendirme yöntemi
+Çoklu **değer** trafik-yönlendirme yöntemi, tek bir DNS sorgu yanıtında birden çok sağlıklı uç nokta almanızı sağlar. Bu, arayanın yanıt vermeyen bir uç noktanın olaydaki diğer uç noktalarla istemci tarafı yeniden denemeleri yapmasına olanak sağlar. Bu model, bir hizmetin kullanılabilirliğini artırabilir ve sağlıklı bir uç nokta elde etmek için yeni bir DNS sorgusuyla ilişkili gecikme süresini azaltabilir. Çoklu değer yönlendirme yöntemi yalnızca ' External ' türündeki tüm uç noktalar ve IPv4 veya IPv6 adresleri olarak belirtilmişse kullanılabilir. Bu profil için bir sorgu alındığında, sağlıklı tüm uç noktalar döndürülür ve yapılandırılabilir en yüksek dönüş sayısına tabidir.
+
+### <a name="faqs"></a>SSS
+
+* [Çok değerli yönlendirmenin yararlı olduğu bazı kullanım durumları nelerdir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-are-some-use-cases-where-multivalue-routing-is-useful)
+
+* [Çok değerli yönlendirme kullanıldığında kaç uç nokta döndürülüyor?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-many-endpoints-are-returned-when-multivalue-routing-is-used)
+
+* [Çoklu küme yönlendirmesi kullanıldığında aynı uç nokta kümesini alacak mıyım?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#will-i-get-the-same-set-of-endpoints-when-multivalue-routing-is-used)
+
+## <a name = "subnet"></a>Alt ağ trafiği-yönlendirme yöntemi
+**Alt ağ** trafiği-yönlendirme yöntemi, bir dizi Son Kullanıcı IP adresi aralığını bir profildeki belirli uç noktalara eşlemenizi sağlar. Bundan sonra, Traffic Manager Bu profil için bir DNS sorgusu alırsa, bu isteğin kaynak IP adresini inceleyerek (çoğu durumda bu, çağıran tarafından kullanılan DNS Çözümleyicisinin giden IP adresi olacaktır), hangi uç noktanın eşlendiğini ve t döndürecek olduğunu tespit eder sorgu yanıtında hat uç noktası. 
+
+Bir uç noktaya eşlenecek IP adresi CıDR aralıkları (ör. 1.2.3.0/24) veya bir adres aralığı (örneğin, 1.2.3.4-5.6.7.8) olarak belirtilebilir. Bir uç noktayla ilişkili IP aralıklarının bu profilde benzersiz olması gerekir ve aynı profildeki farklı bir uç noktanın IP adresi kümesiyle çakışamaz.
+Adres aralığı olmayan bir uç nokta tanımlarsanız, bu işlem geri dönüş olarak çalışır ve kalan alt ağlardan trafik alır. Geri dönüş uç noktası yoksa, Traffic Manager tanımsız aralıklar için bir NODATA yanıtı gönderir. Bu nedenle, bir geri dönüş uç noktası tanımlamanız veya diğer tüm olası IP aralıklarının uç noktalarınız genelinde belirtildiğinden emin olmanız önemle tavsiye edilir.
+
+Alt ağ yönlendirme, belirli bir IP alanından bağlanan kullanıcılar için farklı bir deneyim sunmak üzere kullanılabilir. Örneğin, alt ağ yönlendirmeyi kullanarak bir müşteri, kurumsal ofislerinden gelen tüm isteklerin, uygulamasının yalnızca dahili bir sürümünü test ettikleri farklı bir uç noktaya yönlendirilmesini sağlayabilir. Başka bir senaryo, belirli bir ISS 'den bağlanan kullanıcılara farklı bir deneyim sağlamak istiyorsanız (örneğin, belirli bir ISS 'den kullanıcıları engelle).
+
+### <a name="faqs"></a>SSS
+
+* [Alt ağ yönlendirmesinin yararlı olduğu bazı kullanım durumları nelerdir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-are-some-use-cases-where-subnet-routing-is-useful)
+
+* [Traffic Manager son kullanıcının IP adresini nasıl bilir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-does-traffic-manager-know-the-ip-address-of-the-end-user)
+
+* [Alt ağ yönlendirmeyi kullanırken IP adreslerini nasıl belirtirim?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-can-i-specify-ip-addresses-when-using-subnet-routing)
+
+* [Alt ağ yönlendirmesi kullanırken bir geri dönüş uç noktası nasıl belirtebilir?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-can-i-specify-a-fallback-endpoint-when-using-subnet-routing)
+
+* [Bir alt ağ yönlendirme türü profilinde bir uç nokta devre dışıysa ne olur?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#what-happens-if-an-endpoint-is-disabled-in-a-subnet-routing-type-profile)
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kullanarak yüksek kullanılabilirlik uygulamalarını nasıl geliştirebileceğinizi öğrenin [Traffic Manager uç nokta izleme](traffic-manager-monitoring.md)
+[Traffic Manager uç nokta izleme](traffic-manager-monitoring.md) kullanarak yüksek kullanılabilirliğe sahip uygulamalar geliştirmeyi öğrenin
 
 
 

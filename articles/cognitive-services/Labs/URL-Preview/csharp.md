@@ -1,5 +1,5 @@
 ---
-title: 'Hızlı Başlangıç: Proje URL önizlemesiC#'
+title: "Hızlı Başlangıç: Proje URL 'SI önizlemesi,C#"
 titlesuffix: Azure Cognitive Services
 description: C# ile URL Önizleme Projesini kullanmaya başlayın.
 services: cognitive-services
@@ -10,22 +10,23 @@ ms.subservice: url-preview
 ms.topic: quickstart
 ms.date: 03/16/2018
 ms.author: rosh
-ms.openlocfilehash: 2cb3f1de803b8549a88866da1042f4f32609a601
-ms.sourcegitcommit: be9fcaace62709cea55beb49a5bebf4f9701f7c6
+ROBOTS: NOINDEX
+ms.openlocfilehash: 7f900b95b30f6ab5298e98661e6922e4e4d360c7
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2019
-ms.locfileid: "65827156"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68706959"
 ---
-# <a name="quickstart-url-preview-query-in-c"></a>Hızlı Başlangıç: URL önizlemesi sorguC#
+# <a name="quickstart-url-preview-query-in-c"></a>Hızlı Başlangıç: URL önizlemesi sorgusuC#
 
 Aşağıdaki C# örneği SwiftKey Web sitesi için bir URL Önizlemesi oluşturur: https://swiftkey.com/en.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-İhtiyacınız olacak [Visual Studio 2017 veya üstü](https://www.visualstudio.com/downloads/) Windows üzerinde bu kodu çalıştırmak için. (Ücretsiz Community Edition’ı kullanabilirsiniz.)
+Bu kodu Windows üzerinde çalıştırmak için [Visual Studio 2017 veya sonraki bir sürüme](https://www.visualstudio.com/downloads/) ihtiyacınız olacaktır. (Ücretsiz Community Edition’ı kullanabilirsiniz.)
 
-[Bilişsel Hizmetler Laboratuvarları](https://aka.ms/answersearchsubscription) ücretsiz denemesi için erişim anahtarı alın
+[Bilişsel Hizmetler Laboratuvarları](https://labs.cognitive.microsoft.com/en-us/project-answer-search) ücretsiz denemesi için erişim anahtarı alın
 
 ## <a name="code-scenario"></a>Kod senaryosu
 

@@ -1,168 +1,164 @@
 ---
-title: Örnek - ISO 27001 paylaşılan hizmetler blueprint - adımları dağıtma
-description: Adımlar ISO 27001 paylaşılan hizmetler şema örnek dağıtın.
-author: DCtheGeek
-ms.author: dacoulte
+title: ISO 27001 paylaşılan hizmetleri şema örnek-dağıt adımları
+description: Şema yapıt parametresi ayrıntıları dahil olmak üzere ISO 27001 paylaşılan hizmetleri şeması örneği için adımları dağıtın.
 ms.date: 03/14/2019
 ms.topic: sample
-ms.service: blueprints
-manager: carmonm
-ms.openlocfilehash: 88d5cfbbcb29cacc2e8c1c6a226367c5f23e8231
-ms.sourcegitcommit: 2028fc790f1d265dc96cf12d1ee9f1437955ad87
+ms.openlocfilehash: 54f53e13e6d4561cb46f62318203c41c504ee60b
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/30/2019
-ms.locfileid: "64926295"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037342"
 ---
-# <a name="deploy-the-iso-27001-shared-services-blueprint-sample"></a>ISO 27001 paylaşılan hizmetler blueprint örneği dağıtma
+# <a name="deploy-the-iso-27001-shared-services-blueprint-sample"></a>ISO 27001 paylaşılan hizmetleri şema örneğini dağıtma
 
-Azure kavramsal tasarımlar ISO 27001 paylaşılan hizmetler şema örnek dağıtmak için aşağıdaki adım atılmalıdır:
+Azure şemaları ISO 27001 paylaşılan hizmetleri şema örneğini dağıtmak için aşağıdaki adımlar gerçekleştirilmelidir:
 
 > [!div class="checklist"]
-> - Örnekten yeni blueprint oluşturma
-> - Örnek olarak kopyanızın işaretlemek **yayımlandı**
-> - Blueprint kopyasını mevcut bir aboneliğe atayın
+> - Örnekten yeni bir şema oluştur
+> - Örnek kopyanızı **yayımlandı** olarak işaretleyin
+> - Şema kopyanızı mevcut bir aboneliğe atama
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free) oluşturun.
 
-## <a name="create-blueprint-from-sample"></a>Örnekten Blueprint oluşturma
+## <a name="create-blueprint-from-sample"></a>Örnekten şema oluştur
 
-İlk olarak, şema örnek bir başlangıç örneğini kullanarak ortamınızda yeni bir şema oluşturarak uygulayın.
+İlk olarak, bir başlangıç olarak örneği kullanarak ortamınızda yeni bir şema oluşturarak şema örneğini uygulayın.
 
-1. Seçin **tüm hizmetleri** arayın ve seçin **ilke** sol bölmesinde. Üzerinde **ilke** sayfasında **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Gelen **Başlarken** seçin sol taraftaki sayfasında **Oluştur** düğmesini _blueprint oluşturma_.
+1. Soldaki **Başlarken** sayfasında, şema _Oluştur_altında **Oluştur** düğmesini seçin.
 
-1. Bulma **ISO 27001: Paylaşılan Hizmetler** şema örnek altında _diğer örnekleri_ seçip **Bu örneği kullanmak**.
+1. **Iso 27001: paylaşılan hizmetler** şeması ' nı _diğer örnekler_ altında bulun ve **Bu örneği kullan**' ı seçin.
 
-1. Girin _Temelleri_ şema örnek:
+1. Şema örneği _hakkında temel bilgileri_ girin:
 
-   - **Blueprint adı**: ISO 27001 paylaşılan hizmetler şema örnek kopyası için bir ad sağlayın.
-   - **Tanım konumu**: Üç nokta kullanın ve örneğe kopyasını kaydetmek için yönetim grubunu seçin.
+   - **Şema adı**: ISO 27001 paylaşılan hizmetleri şema Sample kopyasına bir ad verin.
+   - **Tanım konumu**: üç noktayı kullanın ve örneğin kopyasını kaydetmek için yönetim grubunu seçin.
 
-1. Seçin _Yapıtları_ sayfanın üst kısmındaki sekme veya **sonraki: Yapıtları** sayfanın alt kısmındaki.
+1. Sayfanın üst kısmındaki _yapıtlar_ sekmesini veya sonraki: sayfanın en altındaki **yapıtları** seçin.
 
-1. Şema örnek değişiklikleri yapıtların listesini gözden geçirin. Yapıtlar birçoğu, daha sonra tanımlarız parametrelere sahip. Seçin **Taslağı Kaydet** bittiğinde şema örnek gözden geçirme.
+1. Şema örneğini oluşturan yapıtların listesini gözden geçirin. Yapıtların çoğunda, daha sonra tanımlayacağımız parametreler vardır. Şema örneğini gözden geçirmeyi bitirdiğinizde **Taslağı kaydet** ' i seçin.
 
-## <a name="publish-the-sample-copy"></a>Örnek kopyalama yayımlama
+## <a name="publish-the-sample-copy"></a>Örnek kopyayı Yayımla
 
-Şema örnek kopyanızın artık ortamınızda oluşturuldu. İçinde oluşturulan **taslak** modu ve olmalıdır **yayımlanan** , atanan ve dağıtılan kullanılmadan önce. Değişiklik uzağa ISO 27001 standardının taşıyabilir ancak bu şema kopyasını gereksinimlerine ve ortam için özelleştirilebilir.
+Şema örneğinin kopyası artık ortamınızda oluşturulmuştur. **Taslak** modunda oluşturulur ve atanmadan ve dağıtılmadan önce **yayımlanmaları** gerekir. Şema örneğinin kopyası ortamınıza ve gereksinimlerinize göre özelleştirilebilir, ancak bu değişiklik bu değişikliği ISO 27001 standbundan uzağa taşıyabilir.
 
-1. Seçin **tüm hizmetleri** arayın ve seçin **ilke** sol bölmesinde. Üzerinde **ilke** sayfasında **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Seçin **Blueprint tanımları** soldaki sayfası. Şema örnek kopyasını bulun ve seçin için filtreleri kullanın.
+1. Sol taraftaki **Blueprint tanımları** sayfasını seçin. Şemayı kullanarak şema örneğinin kopyasını bulun ve ardından seçin.
 
-1. Seçin **Yayımla şema** sayfanın üstünde. Sağ taraftaki yeni sayfa sağlayan bir **sürüm** şema örnek kopyası için. Bu özellik, daha sonra bir değişikliği yapmak için yararlıdır. Sağlamak **notları değiştirmek** "ilk sürüm ISO 27001 blueprint örnekten yayımlanan gibi." Ardından **Yayımla** sayfanın alt kısmındaki.
+1. Sayfanın üst kısmındaki şemayı **Yayımla** ' yı seçin. Sağ taraftaki yeni sayfada, şema örneğinin kopyası için bir **Sürüm** belirtin. Daha sonra bir değişiklik yaparsanız, bu özellik için faydalıdır. "ISO 27001 şema örneğinden yayımlanan ilk sürüm" gibi **değişiklik notları** sağlayın. Ardından sayfanın alt kısmında **Yayımla** ' yı seçin.
 
-## <a name="assign-the-sample-copy"></a>Örnek kopya atama
+## <a name="assign-the-sample-copy"></a>Örnek kopyayı atama
 
-Blueprint kopyasını başarıyla silindikten sonra **yayımlanan**, yönetim grubu için kaydedildi dahilinde bir aboneliğe atanabilir. Bu adım, burada parametreler şema kopyasını, her dağıtım benzersiz olacak şekilde sağlanır.
+Şema örneğinin kopyası başarıyla **yayımlandıktan**sonra, kaydedildiği yönetim grubu içindeki bir aboneliğe atanabilir. Bu adım, her bir şema örneğinin kopyasının her dağıtımını yapmak için parametrelerin sağlandığı yerdir.
 
-1. Seçin **tüm hizmetleri** arayın ve seçin **ilke** sol bölmesinde. Üzerinde **ilke** sayfasında **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Seçin **Blueprint tanımları** soldaki sayfası. Şema örnek kopyasını bulun ve seçin için filtreleri kullanın.
+1. Sol taraftaki **Blueprint tanımları** sayfasını seçin. Şemayı kullanarak şema örneğinin kopyasını bulun ve ardından seçin.
 
-1. Seçin **Ata şema** şema tanımı sayfanın üstünde.
+1. Şema tanım sayfasının en üstünde şema **ata** ' yı seçin.
 
-1. Blueprint ataması için parametre değerlerini sağlayın:
+1. Şema atamasının parametre değerlerini sağlayın:
 
    - Temel Bilgiler
 
-     - **Abonelikler**: Bir veya daha fazla yönetim grubuna olduğunuz abonelikleri için şema örnek kopyanızın kaydedilen seçin. Birden fazla aboneliğiniz seçerseniz, bir atama için her girdiğiniz parametreleri kullanarak oluşturulur.
-     - **Ödev adı**: Şema adını temel alarak, önceden doldurulmuş adıdır.
-       Gerektiği gibi değiştirin ya da olduğu gibi bırakın.
-     - **Konum**: Yönetilen kimlikle oluşturulması için bir bölge seçin. Azure Blueprint bu yönetilen kimliği kullanarak tüm yapıtları atanmış şemaya dağıtır. Daha fazla bilgi için bkz. [Azure kaynakları için yönetilen kimlikler](../../../../active-directory/managed-identities-azure-resources/overview.md).
-     - **Şema tanımı sürümü**: Çekme bir **yayımlanan** şema örnek kopyanızın sürümü.
+     - **Abonelikler**: şema örneğinin kopyasını kaydettiğiniz yönetim grubundaki bir veya daha fazla abonelik seçin. Birden fazla abonelik seçerseniz, girilen parametreleri kullanarak her biri için bir atama oluşturulur.
+     - **Atama adı**: ad, BLUEPRINT adına göre önceden doldurulur.
+       Gerektiğinde değiştirin veya olduğu gibi bırakın.
+     - **Konum**: yönetilen kimliğin oluşturulacağı bölgeyi seçin. Azure Blueprint bu yönetilen kimliği kullanarak tüm yapıtları atanmış şemaya dağıtır. Daha fazla bilgi için bkz. [Azure kaynakları için yönetilen kimlikler](../../../../active-directory/managed-identities-azure-resources/overview.md).
+     - Şema **tanımı sürümü**: şema örneğinin kopyasının **yayınlanmış** bir sürümünü seçin.
 
-   - Atamayı Kilitle
+   - Kilit ataması
 
-     Ortamınızı ayarlama şema kilidi seçin. Daha fazla bilgi için bkz. [şema kaynağı kilitleme](../../concepts/resource-locking.md).
+     Ortamınız için BLUEPRINT Lock ayarını seçin. Daha fazla bilgi için bkz. [şema kaynağı kilitleme](../../concepts/resource-locking.md).
 
    - Yönetilen Kimlik
 
-     Varsayılan değeri bırakın _sistem tarafından atanan_ yönetilen kimlik seçeneği.
+     Varsayılan sistem tarafından _atanmış_ yönetilen kimlik seçeneğini bırakın.
 
    - Şema parametreleri
 
-     Bu bölümde tanımlanan parametrelerin, tutarlılık sağlamak için şema tanımı içindeki yapıları birçoğu tarafından kullanılır.
+     Bu bölümde tanımlanan parametreler, tutarlılığı sağlamak için şema tanımındaki birçok yapıtlar tarafından kullanılır.
 
-     - **Kuruluş adı**: Kuruluşunuz için bir kısa ad girin. Bu özellik, öncelikle kaynakları adlandırmak için kullanılır.
-     - **Paylaşılan Hizmetler alt ağı adres ön eki**: Dağıtılan kaynakları birlikte ağ için CIDR gösterimi değeri sağlayın.
-     - **Ortak Hizmetleri konuma**: Yapıtlar dağıtılan hangi konumunu belirler. Tüm hizmetler tüm konumlarda kullanılabilir. Tür hizmetlerin dağıtımı yapıtları dağıtmak için bu yapıt konumu için bir parametre seçeneği sağlar.
-     - **İzin verilen konumunu (İlkesi: Blueprint girişim ISO 27001 için)**: Kaynak grubu ve kaynak için izin verilen konumlar belirten değer.
-     - **VM aracıları için log Analytics çalışma alanı (İlkesi: Blueprint girişim ISO 27001 için)**: Bir çalışma alanının kaynak Kimliğini belirtir. Bu parametre bir `concat` kaynak kimliği oluşturmak için işlevi
+     - **Kuruluş adı**: kuruluşunuz için kısa bir ad girin. Bu özellik birincil olarak adlandırma kaynakları için kullanılır.
+     - **Paylaşılan hizmetler alt ağ adresi ön eki**: dağıtılan kaynakları birbirine DAĞıTMAK için CIDR Gösterimi değerini sağlayın.
+     - **Paylaşılan hizmetler konumu**: yapıtların hangi konuma dağıtıldığını belirler. Tüm hizmetler tüm konumlarda kullanılabilir değildir. Bu tür hizmetleri dağıtan yapıtlar, bu yapıtın dağıtılacağı konum için bir parametre seçeneği sağlar.
+     - **Izin verilen konum (ilke: ıso 27001 Için Blueprint girişimi)** : kaynak grupları ve kaynaklar için izin verilen konumları gösteren değer.
+     - **VM aracıları için Log Analytics çalışma alanı (ilke: ıso 27001 Için Blueprint girişimi)** : bir çalışma ALANıNıN kaynak kimliğini belirtir. Bu parametre, kaynak KIMLIĞINI oluşturmak için bir `concat` işlevi kullanır.
 
    - Yapıt parametreleri
 
-     Bu bölümde tanımlanan parametrelerin altında tanımlandığı yapıtı için geçerlidir. Bu parametreler [dinamik parametreleri](../../concepts/parameters.md#dynamic-parameters) blueprint ataması sırasında tanımlanan olduğundan. Tam bir liste veya yapıt parametrelerin ve Tanımlamaların için bkz. [Yapıt parametreleri tablo](#artifact-parameters-table).
+     Bu bölümde tanımlanan parametreler, tanımlanan yapıt için geçerlidir. Bu parametreler, Blueprint atama sırasında tanımlandıklarından [dinamik parametrelerdir](../../concepts/parameters.md#dynamic-parameters) . Tam liste veya yapıt parametreleri ve açıklamaları için bkz. [yapıt parametreleri tablosu](#artifact-parameters-table).
 
-1. Tüm parametreler girildikten sonra seçin **atama** sayfanın alt kısmındaki. Şema atamasını oluşturulur ve yapıt dağıtımı başlar. Dağıtım gereken yaklaşık bir saat. Dağıtım durumunu denetlemek için şema atamasını açın.
+1. Tüm parametreler girildikten sonra sayfanın alt kısmındaki **ata** ' yı seçin. Şema ataması oluşturulur ve yapıt dağıtımı başlar. Dağıtım kabaca bir saat sürer. Dağıtımın durumunu denetlemek için, BLUEPRINT atamasını açın.
 
 > [!WARNING]
-> Azure şemaları hizmet ve yerleşik şema örnekleri **ücretsiz olarak sunulmaktadır**. Azure kaynaklarıdır [ürüne göre fiyatlandırılır](https://azure.microsoft.com/pricing/). Kullanım [fiyatlandırma hesaplayıcısını](https://azure.microsoft.com/pricing/calculator/) çalıştıran bu şema örnek tarafından dağıtılan kaynakların maliyetini tahmin etmek için.
+> Azure şemaları hizmeti ve yerleşik şema örnekleri **ücretsiz olarak ücretsizdir**. Azure kaynakları [ürüne göre fiyatlandırılır](https://azure.microsoft.com/pricing/). Bu şema örneği tarafından dağıtılan çalışan kaynakların maliyetini tahmin etmek için [fiyatlandırma hesaplayıcısını](https://azure.microsoft.com/pricing/calculator/) kullanın.
 
-## <a name="artifact-parameters-table"></a>Yapıt parametreleri Tablo
+## <a name="artifact-parameters-table"></a>Yapıt parametreleri tablosu
 
-Aşağıdaki tabloda, yapıt parametreleri şema listesi sağlar:
+Aşağıdaki tabloda, şema yapıt parametrelerinin bir listesi verilmiştir:
 
 |Yapıt adı|Yapıt türü|Parametre adı|Açıklama|
 |-|-|-|-|
-|\[Önizleme\]: Linux VM ölçek kümeleri (VMSS) için log Analytics aracısını dağıtmayı|İlke ataması|İsteğe bağlı: Kapsama eklemek için Linux işletim sistemi desteklenen bir VM görüntüsü listesi|(İsteğe bağlı) Varsayılan değer _["none"]_.|
-|\[Önizleme\]: Linux Vm'leri için log Analytics aracısını dağıtmayı|İlke ataması|İsteğe bağlı: Kapsama eklemek için Linux işletim sistemi desteklenen bir VM görüntüsü listesi|(İsteğe bağlı) Varsayılan değer _["none"]_.|
-|\[Önizleme\]: Windows VM ölçek kümeleri (VMSS) için log Analytics aracısını dağıtmayı|İlke ataması|İsteğe bağlı: Windows işletim sistemi kapsamına eklenecek desteklenen bir VM görüntüsü listesi|(İsteğe bağlı) Varsayılan değer _["none"]_.|
-|\[Önizleme\]: Windows Vm'leri için log Analytics aracısını dağıtmayı|İlke ataması|İsteğe bağlı: Windows işletim sistemi kapsamına eklenecek desteklenen bir VM görüntüsü listesi|(İsteğe bağlı) Varsayılan değer _["none"]_.|
-|İzin verilen kaynak türleri|İlke ataması|İzin verilen kaynak türleri|Dağıtılacak izin verilen kaynak türleri listesi. Bu liste, paylaşılan hizmetlerinde dağıtılan tüm kaynak türleri, oluşur.|
-|İzin verilen depolama hesabı SKU'ları|İlke ataması|İzin verilen depolama SKU'ları|Liste tanılama depolama hesabı SKU'ları izin günlüğe kaydeder. Varsayılan değer _["Standard_LRS"]_.|
-|İzin verilen sanal makine SKU'ları|İlke ataması|Dağıtılacak sanal makine SKU'ların listesini izin. Varsayılan değer _["Standard_DS1_v2", "Standard_DS2_v2"]_.|
-|ISO 27001 için şema girişim|İlke ataması|Tanılama günlükleri denetlemek için kaynak türleri|Tanılama Günlüğü ayarı etkin değilse denetim için kaynak türleri listesi. Kabul edilebilir değerler bulunabilir [Azure İzleyici tanılama günlükleri şemaları](../../../../azure-monitor/platform/diagnostic-logs-schema.md#supported-log-categories-per-resource-type).|
-|Log Analytics kaynak grubu|Kaynak grubu|Ad|**Kilitli** -sıralar **kuruluş adı** ile `-sharedsvsc-log-rg` kaynak grubunu benzersiz olacak şekilde.|
-|Log Analytics kaynak grubu|Kaynak grubu|Location|**Kilitli** -şema parametresini kullanır.|
-|Log Analytics şablonu|Resource Manager şablonu|Hizmet katmanı|Log Analytics çalışma alanının katman ayarlar. Varsayılan değer _PerNode_.|
-|Log Analytics şablonu|Resource Manager şablonu|Gün cinsinden günlük tutma süresi|Gün cinsinden veri tutma. Varsayılan değer _365_.|
-|Log Analytics şablonu|Resource Manager şablonu|Location|Log Analytics çalışma alanı oluşturmak için kullanılan bölge. Varsayılan değer _Batı ABD 2_.|
-|Ağ kaynak grubu|Kaynak grubu|Ad|**Kilitli** -sıralar **kuruluş adı** ile `-sharedsvcs-net-rg` kaynak grubunu benzersiz olacak şekilde.|
-|Ağ kaynak grubu|Kaynak grubu|Location|**Kilitli** -şema parametresini kullanır.|
-|Azure Güvenlik Duvarı şablonu|Resource Manager şablonu|Azure güvenlik duvarı özel IP'si|Özel IP'si ile yapılandırır [Azure Güvenlik Duvarı](../../../../firewall/overview.md). Bu değer, paylaşılan hizmetler alt ağdaki varsayılan rota tablosu olarak da kullanılır. Tanımlanan CIDR gösteriminde bir parçası olması gereken **Azure güvenlik duvarı alt ağ adres ön eki**. Varsayılan değer _10.0.4.4_.|
-|Azure Güvenlik Duvarı şablonu|Resource Manager şablonu|Gün cinsinden günlük tutma süresi|Gün cinsinden veri tutma. Varsayılan değer _365_.|
-|Ağ Güvenlik Grubu şablonu|Resource Manager şablonu|Gün cinsinden günlük tutma süresi|Gün cinsinden veri tutma. Varsayılan değer _365_.|
-|Sanal Ağ ve Yönlendirme Tablosu şablonu|Resource Manager şablonu|Sanal Ağ adresi ön eki|Sanal ağ için CIDR gösterimi. Varsayılan değer _10.0.0.0/16_.|
-|Sanal Ağ ve Yönlendirme Tablosu şablonu|Resource Manager şablonu|Sanal Ağ DDoS korumasını etkinleştir|DDoS koruması sanal ağ için yapılandırır. Varsayılan değer _true_.|
-|Sanal Ağ ve Yönlendirme Tablosu şablonu|Resource Manager şablonu|Paylaşılan Hizmetler alt ağı adres ön eki|Paylaşılan Hizmetler alt ağ için CIDR gösterimi. Varsayılan değer _10.0.0.0/24_.|
-|Sanal Ağ ve Yönlendirme Tablosu şablonu|Resource Manager şablonu|DMZ alt ağ adresi ön eki|DMZ alt ağ için CIDR gösterimi. Varsayılan değer _10.0.1.0/24_.|
-|Sanal Ağ ve Yönlendirme Tablosu şablonu|Resource Manager şablonu|Uygulama Ağ Geçidi alt ağ adresi ön eki|Uygulama ağ geçidi alt ağının CIDR gösterimi. Varsayılan değer _10.0.2.0/24_.|
-|Sanal Ağ ve Yönlendirme Tablosu şablonu|Resource Manager şablonu|Sanal Ağ Geçidi alt ağ adresi ön eki|Sanal ağ ağ geçidi alt ağının CIDR gösterimi. Varsayılan değer _10.0.3.0/24_.|
-|Sanal Ağ ve Yönlendirme Tablosu şablonu|Resource Manager şablonu|Azure Güvenlik Duvarı alt ağ adresi ön eki|CIDR gösterimi [Azure Güvenlik Duvarı](../../../../firewall/overview.md) alt ağ. İçermelidir **Azure güvenlik duvarı özel IP** parametresi.|
-|Key Vault kaynak grubu|Kaynak grubu|Ad|**Kilitli** -sıralar **kuruluş adı** ile `-sharedsvcs-kv-rg` kaynak grubunu benzersiz olacak şekilde.|
-|Key Vault kaynak grubu|Kaynak grubu|Location|**Kilitli** -şema parametresini kullanır.|
-|Key Vault şablonu|Resource Manager şablonu|Jumpbox yöneticisi kullanıcı adı|Sıçrama kutusu için kullanıcı adı. Aynı özellik değeri ile eşleşmesi gerekir **Sıçrama kutusu şablonu**. Varsayılan değer _jb yönetici kullanıcı_.|
-|Key Vault şablonu|Resource Manager şablonu|Jumpbox yöneticisinin SSH anahtarı veya parolası|Anahtar veya Sıçrama kutusu hesap için parola. Aynı özellik değeri ile eşleşmesi gerekir **Sıçrama kutusu şablonu**. Varsayılan değer ve boş bırakılamaz.|
-|Key Vault şablonu|Resource Manager şablonu|Etki alanı yöneticisi kullanıcı adı|Active Directory VM erişmek ve diğer VM'lerin bir etki alanına eklemek için kullanılan kullanıcı adı. Eşleşmelidir **etki alanı yönetici kullanıcı** özellik değeri **Active Directory Domain Services şablon**. Varsayılan değer _etki alanı yönetici kullanıcı_.|
-|Key Vault şablonu|Resource Manager şablonu|Etki alanı yöneticisi parolası|Etki alanı yönetici kullanıcının parolası. Varsayılan değer ve boş bırakılamaz.|
-|Key Vault şablonu|Resource Manager şablonu|AAD nesnesi kimliği|Key Vault örneğine erişim gerektirir. hesap AAD nesne tanımlayıcısı. Varsayılan değer ve boş bırakılamaz. Azure portalından bu değeri bulmak için arama ve altında "Kullanıcılar" seçin _Hizmetleri_. Kullanım _adı_ kutusunu filtrelemek için hesap adını ve bu hesabı seçin. Üzerinde _kullanıcı profili_ sayfasında, "kopyalamak için tıklayın" simgesini seçin _nesne kimliği_.  |
-|Key Vault şablonu|Resource Manager şablonu|Gün cinsinden günlük tutma süresi|Gün cinsinden veri tutma. Varsayılan değer _365_.|
-|Key Vault şablonu|Resource Manager şablonu|Key Vault SKU'su|Oluşturulan anahtar kasası SKU'su belirtir. Varsayılan değer _Premium_.|
-|Sıçrama kutusu kaynak grubu|Kaynak grubu|Ad|**Kilitli** -sıralar **kuruluş adı** ile `-sharedsvcs-jb-rg` kaynak grubunu benzersiz olacak şekilde.|
-|Sıçrama kutusu kaynak grubu|Kaynak grubu|Location|**Kilitli** -şema parametresini kullanır.|
-|Jumpbox şablonu|Resource Manager şablonu|Jumpbox yöneticisi kullanıcı adı|Vm'lere Sıçrama kutusuna erişmek için kullanılan kullanıcı adı. Aynı özellik değeri ile eşleşmesi gerekir **Key Vault şablon**. Varsayılan değer _jb yönetici kullanıcı_.|
-|Jumpbox şablonu|Resource Manager şablonu|Sıçrama kutusu yönetici parolası (Key Vault kaynak kimliği)|Key Vault kaynak kimliği. Kullanım "/ subscriptions/{subscriptionId}/resourceGroups/{orgName}-sharedsvcs-kv-rg/providers/Microsoft.KeyVault/vaults/{orgName}-sharedsvcs-kv" değiştirin `{subscriptionId}` yerine abonelik Kimliğinizi ve `{orgName}` ile  **Kuruluş adı** blueprint parametresi.|
-|Jumpbox şablonu|Resource Manager şablonu|Sıçrama kutusu yönetici parolası (Key Vault gizli dizi adı)|Sıçrama kutusu yöneticisinin kullanıcı adı Değer eşleşmelidir **Key Vault şablon** özelliği **Sıçrama kutusu yönetici kullanıcı adı**.|
-|Jumpbox şablonu|Resource Manager şablonu|Jumpbox İşletim Sistemi|Sıçrama kutusu VM işletim sistemini belirler. Varsayılan değer _Windows_.|
-|Active Directory etki alanı Hizmetleri kaynak grubu|Kaynak grubu|Ad|**Kilitli** -sıralar **kuruluş adı** ile `-sharedsvcs-adds-rg` kaynak grubunu benzersiz olacak şekilde.|
-|Active Directory etki alanı Hizmetleri kaynak grubu|Kaynak grubu|Location|**Kilitli** -şema parametresini kullanır.|
-|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yöneticisi kullanıcı adı|ADDS Sıçrama kutusu için kullanıcı adı. Aynı özellik değeri ile eşleşmesi gerekir **Key Vault şablon**. Varsayılan değer _ekler-admin-user_.|
-|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yönetici parolası (Key Vault kaynak kimliği)|Key Vault kaynak kimliği. Kullanım "/ subscriptions/{subscriptionId}/resourceGroups/{orgName}-sharedsvcs-kv-rg/providers/Microsoft.KeyVault/vaults/{orgName}-sharedsvcs-kv" değiştirin `{subscriptionId}` yerine abonelik Kimliğinizi ve `{orgName}` ile  **Kuruluş adı** blueprint parametresi.|
-|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yönetici parolası (Key Vault gizli dizi adı)|Etki alanı yöneticisinin kullanıcı adı Değer eşleşmelidir **Key Vault şablon** özelliği **etki alanı yönetici kullanıcı adı**.|
-|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı adı|Active Directory örnek tarafından oluşturulan adı. Varsayılan değer _contoso.com_.|
-|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yönetici kullanıcı|AD yönetici hesabı ve cihazlar için AD etki alanına katılmak için kullanıcı adı. Eşleşmelidir **AD yönetici kullanıcı adı** özellik değeri **Key Vault şablon**. Varsayılan değer _etki alanı yönetici kullanıcı_.|
-|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yöneticisi parolası|Parolayı depolamak için Key Vault ayrıntılarını ayarlayın. Varsayılan değer ve boş bırakılamaz.|
+|\[Preview\]: Linux VM Ölçek Kümeleri için Log Analytics aracısı dağıtma (VMSS)|İlke ataması|İsteğe bağlı: kapsama eklemek için desteklenen Linux işletim sistemini destekleyen VM görüntülerinin listesi|Seçim Varsayılan değer _["none"]_ değeridir.|
+|\[Önizleme\]: Linux sanal makineleri için Log Analytics aracısını dağıtmayı|İlke ataması|İsteğe bağlı: kapsama eklemek için desteklenen Linux işletim sistemini destekleyen VM görüntülerinin listesi|Seçim Varsayılan değer _["none"]_ değeridir.|
+|\[Preview\]: Windows VM Ölçek Kümeleri için Log Analytics aracısı dağıtma (VMSS)|İlke ataması|İsteğe bağlı: kapsama eklemek için desteklenen Windows işletim sistemini destekleyen VM görüntülerinin listesi|Seçim Varsayılan değer _["none"]_ değeridir.|
+|\[Önizleme\]: Windows Vm'leri için Log Analytics aracısını dağıtmayı|İlke ataması|İsteğe bağlı: kapsama eklemek için desteklenen Windows işletim sistemini destekleyen VM görüntülerinin listesi|Seçim Varsayılan değer _["none"]_ değeridir.|
+|İzin verilen kaynak türleri|İlke ataması|İzin verilen kaynak türleri|Dağıtılmasına izin verilen kaynak türleri listesi. Bu liste, paylaşılan hizmetlerde dağıtılan tüm kaynak türlerinden oluşur.|
+|İzin verilen depolama hesabı SKU'ları|İlke ataması|İzin verilen depolama SKU 'Ları|İzin verilen tanılama günlüğü depolama hesabı SKU 'Larının listesi. Varsayılan değer _["Standard_LRS"]_ değeridir.|
+|İzin verilen sanal makine SKU 'Ları|İlke ataması|Dağıtılmasına izin verilen sanal makine SKU 'Larının listesi. Varsayılan değer _["Standard_DS1_v2", "Standard_DS2_v2"]_ .|
+|ISO 27001 için Blueprint girişimi|İlke ataması|Tanılama günlüklerini denetlemek için kaynak türleri|Tanılama günlüğü ayarı etkinleştirilmemişse denetlenecek kaynak türleri listesi. Kabul edilebilir değerler, [Azure izleyici tanılama günlükleri şemalarında](../../../../azure-monitor/platform/diagnostic-logs-schema.md#supported-log-categories-per-resource-type)bulunabilir.|
+|Log Analytics kaynak grubu|Kaynak grubu|Ad|**Kilitli** -kaynak grubunu benzersiz hale getirmek için `-sharedsvsc-log-rg` ile **kuruluş adını** art arda ekler.|
+|Log Analytics kaynak grubu|Kaynak grubu|Konum|**Kilitli** -şema parametresini kullanır.|
+|Log Analytics şablonu|Resource Manager şablonu|Hizmet katmanı|Log Analytics çalışma alanının katmanını ayarlar. Varsayılan değer _PerNode_değeridir.|
+|Log Analytics şablonu|Resource Manager şablonu|Günlük tutma gün sayısı|Gün cinsinden veri saklama. Varsayılan değer _365_' dir.|
+|Log Analytics şablonu|Resource Manager şablonu|Konum|Log Analytics çalışma alanını oluşturmak için kullanılan bölge. Varsayılan değer _Batı ABD 2_.|
+|Ağ kaynak grubu|Kaynak grubu|Ad|**Kilitli** -kaynak grubunu benzersiz hale getirmek için `-sharedsvcs-net-rg` ile **kuruluş adını** art arda ekler.|
+|Ağ kaynak grubu|Kaynak grubu|Konum|**Kilitli** -şema parametresini kullanır.|
+|Azure Güvenlik Duvarı şablonu|Resource Manager şablonu|Azure Güvenlik Duvarı özel IP 'si|[Azure Güvenlik duvarının](../../../../firewall/overview.md)özel IP 'sini yapılandırır. Bu değer, paylaşılan hizmetler alt ağında varsayılan yol tablosu olarak da kullanılır. **Azure Güvenlik Duvarı alt ağ adresi ön eki**'NDE tanımlanan CIDR gösteriminin bir parçası olmalıdır. Varsayılan değer _10.0.4.4_' dir.|
+|Azure Güvenlik Duvarı şablonu|Resource Manager şablonu|Günlük tutma gün sayısı|Gün cinsinden veri saklama. Varsayılan değer _365_' dir.|
+|Ağ güvenlik grubu şablonu|Resource Manager şablonu|Günlük tutma gün sayısı|Gün cinsinden veri saklama. Varsayılan değer _365_' dir.|
+|Sanal ağ ve yol tablosu şablonu|Resource Manager şablonu|Sanal ağ adresi ön eki|Sanal ağın CıDR gösterimi. Varsayılan değer _10.0.0.0/16_' dır.|
+|Sanal ağ ve yol tablosu şablonu|Resource Manager şablonu|Sanal ağ DDoS korumasını etkinleştir|Sanal ağ için DDoS korumasını yapılandırır. Varsayılan değer _true_'dur.|
+|Sanal ağ ve yol tablosu şablonu|Resource Manager şablonu|Paylaşılan hizmetler alt ağ adresi ön eki|Paylaşılan hizmetler alt ağının CıDR gösterimi. Varsayılan değer _10.0.0.0/24_' dir.|
+|Sanal ağ ve yol tablosu şablonu|Resource Manager şablonu|DMZ alt ağ adresi öneki|DMZ alt ağı için CıDR gösterimi. Varsayılan değer _10.0.1.0/24_' dir.|
+|Sanal ağ ve yol tablosu şablonu|Resource Manager şablonu|Application Gateway alt ağ adresi öneki|Uygulama ağ geçidi alt ağının CıDR gösterimi. Varsayılan değer _10.0.2.0/24_' dir.|
+|Sanal ağ ve yol tablosu şablonu|Resource Manager şablonu|Sanal ağ geçidi alt ağ adresi ön eki|Sanal ağ geçidi alt ağının CıDR gösterimi. Varsayılan değer _10.0.3.0/24_' dir.|
+|Sanal ağ ve yol tablosu şablonu|Resource Manager şablonu|Azure Güvenlik Duvarı alt ağ adresi ön eki|[Azure Güvenlik Duvarı](../../../../firewall/overview.md) alt ağı için CIDR Gösterimi. **Azure Güvenlik Duvarı özel IP** parametresini içermelidir.|
+|Key Vault kaynak grubu|Kaynak grubu|Ad|**Kilitli** -kaynak grubunu benzersiz hale getirmek için `-sharedsvcs-kv-rg` ile **kuruluş adını** art arda ekler.|
+|Key Vault kaynak grubu|Kaynak grubu|Konum|**Kilitli** -şema parametresini kullanır.|
+|Key Vault şablonu|Resource Manager şablonu|JumpBox Yönetici Kullanıcı adı|Sıçrama kutusu için Kullanıcı adı. Sıçrama **kutusu şablonundaki**aynı özellik değeriyle eşleşmelidir. Varsayılan değer _JB-admin-User_değeridir.|
+|Key Vault şablonu|Resource Manager şablonu|JumpBox yönetici SSH anahtarı veya parolası|Sıçrama kutusundaki hesabın anahtar veya parolası. Sıçrama **kutusu şablonundaki**aynı özellik değeriyle eşleşmelidir. Varsayılan değer olmadığından boş bırakılamaz.|
+|Key Vault şablonu|Resource Manager şablonu|Etki alanı yöneticisi Kullanıcı adı|Active Directory VM 'ye erişmek ve diğer VM 'Leri bir etki alanına katmak için kullanılan Kullanıcı adı. **Active Directory Domain Services şablonundaki** **Domain Admin kullanıcı** özelliği değeriyle eşleşmelidir. Varsayılan değer _etki alanı-yönetici-kullanıcı_' dır.|
+|Key Vault şablonu|Resource Manager şablonu|Etki alanı yöneticisi parolası|Etki alanı yöneticisi kullanıcısının parolası. Varsayılan değer olmadığından boş bırakılamaz.|
+|Key Vault şablonu|Resource Manager şablonu|AAD nesne KIMLIĞI|Key Vault örneğine erişim gerektiren hesabın AAD nesne tanımlayıcısı. Varsayılan değer olmadığından boş bırakılamaz. Azure portal bu değeri bulmak için, _Hizmetler_altında "kullanıcılar" ı arayın ve seçin. Hesap adını filtrelemek için _ad_ kutusunu kullanın ve bu hesabı seçin. _Kullanıcı profili_ sayfasında, _nesne kimliğinin_yanındaki "kopyalamak için tıklayın" simgesini seçin.  |
+|Key Vault şablonu|Resource Manager şablonu|Günlük tutma gün sayısı|Gün cinsinden veri saklama. Varsayılan değer _365_' dir.|
+|Key Vault şablonu|Resource Manager şablonu|Key Vault SKU 'SU|Oluşturulan Key Vault SKU 'sunu belirtir. Varsayılan değer _Premium_' dur.|
+|Atlama kutusu kaynak grubu|Kaynak grubu|Ad|**Kilitli** -kaynak grubunu benzersiz hale getirmek için `-sharedsvcs-jb-rg` ile **kuruluş adını** art arda ekler.|
+|Atlama kutusu kaynak grubu|Kaynak grubu|Konum|**Kilitli** -şema parametresini kullanır.|
+|Sıçrama kutusu şablonu|Resource Manager şablonu|JumpBox Yönetici Kullanıcı adı|Sıçrama kutusu VM 'lerine erişmek için kullanılan Kullanıcı adı. **Key Vault şablonunda**aynı özellik değeriyle eşleşmelidir. Varsayılan değer _JB-admin-User_değeridir.|
+|Sıçrama kutusu şablonu|Resource Manager şablonu|JumpBox yönetici parolası (Key Vault kaynak KIMLIĞI)|Key Vault kaynak KIMLIĞI. "/Subscriptions/{SubscriptionID}/resourceGroups/{orgName}-sharedsvcs-kV-RG/Providers/Microsoft.KeyVault/Vaults/{orgName}-sharedsvcs-kV" kullanın ve `{subscriptionId}` abonelik kimliğinizle ve `{orgName}` **kuruluş adı** şema parametresiyle değiştirin.|
+|Sıçrama kutusu şablonu|Resource Manager şablonu|JumpBox yönetici parolası (Key Vault gizli adı)|Sıçrama kutusu yöneticisinin Kullanıcı adı. **Key Vault Template** özelliği **JumpBox Yönetici Kullanıcı adı**' nın değeriyle eşleşmelidir.|
+|Sıçrama kutusu şablonu|Resource Manager şablonu|JumpBox Işletim sistemi|Sıçrama kutusu sanal makinesinin işletim sistemini belirler. Varsayılan değer _Windows_' dır.|
+|Active Directory Domain Services kaynak grubu|Kaynak grubu|Ad|**Kilitli** -kaynak grubunu benzersiz hale getirmek için `-sharedsvcs-adds-rg` ile **kuruluş adını** art arda ekler.|
+|Active Directory Domain Services kaynak grubu|Kaynak grubu|Konum|**Kilitli** -şema parametresini kullanır.|
+|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yöneticisi Kullanıcı adı|Atlama kutusu ekleme için Kullanıcı adı. **Key Vault şablonunda**aynı özellik değeriyle eşleşmelidir. Varsayılan değer _ekler-admin-User_.|
+|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yönetici parolası (Key Vault kaynak KIMLIĞI)|Key Vault kaynak KIMLIĞI. "/Subscriptions/{SubscriptionID}/resourceGroups/{orgName}-sharedsvcs-kV-RG/Providers/Microsoft.KeyVault/Vaults/{orgName}-sharedsvcs-kV" kullanın ve `{subscriptionId}` abonelik kimliğinizle ve `{orgName}` **kuruluş adı** şema parametresiyle değiştirin.|
+|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yönetici parolası (Key Vault gizli adı)|Etki alanı yöneticisinin Kullanıcı adı. **Key Vault şablon** özelliği **etki alanı Yönetici Kullanıcı adı**' nın değeriyle eşleşmelidir.|
+|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı adı|Örnek tarafından oluşturulan Active Directory adı. Varsayılan değer _contoso.com_' dir.|
+|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yöneticisi kullanıcısı|Yönetici AD hesabı için Kullanıcı adı ve cihazları AD etki alanına katma. **Key Vault şablonundaki** **ad Yöneticisi Kullanıcı adı** özellik değeriyle eşleşmelidir. Varsayılan değer _etki alanı-yönetici-kullanıcı_' dır.|
+|Active Directory Domain Services şablonu|Resource Manager şablonu|Etki alanı yöneticisi parolası|Parolayı depolamak için Key Vault ayrıntılarını ayarlayın. Varsayılan değer olmadığından boş bırakılamaz.|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-ISO 27001 paylaşılan hizmetler şema örnek dağıtmak için adımları gözden geçirdikten sonra denetimi eşleme ve mimari hakkında bilgi edinmek için şu makaleleri ziyaret edin:
+ISO 27001 paylaşılan hizmetleri şema örneğini dağıtma adımlarını gözden geçirdiğinize göre, mimari ve denetim eşlemesi hakkında bilgi edinmek için aşağıdaki makaleleri ziyaret edin:
 
 > [!div class="nextstepaction"]
-> [ISO 27001 paylaşılan hizmetler şema - genel bakış](./index.md)
-> [ISO 27001 paylaşılan hizmetler şema - denetim eşleme](./control-mapping.md)
+> [ISO 27001 paylaşılan hizmetler şeması-genel bakış](./index.md)
+> [ISO 27001 paylaşılan hizmetler şema-Control Mapping](./control-mapping.md)
 
 Şemalar ve bunların kullanımı hakkındaki diğer makaleler:
 

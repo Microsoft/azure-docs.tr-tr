@@ -1,96 +1,93 @@
 ---
-title: Azure Data Factory - sık sorulan sorular
-description: Sık sorulan Azure Data Factory hakkında sorular.
+title: Azure Data Factory-sık sorulan sorular
+description: Azure Data Factory hakkında sık sorulan sorular.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-ms.assetid: 532dec5a-7261-4770-8f54-bfe527918058
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.author: shlo
-robots: noindex
-ms.openlocfilehash: 518e3fa842c5283dc20a6111773bd55451f026b6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7c0b5cbfe77a39cbc8ac660178a1c573d1fe8f7d
+ms.sourcegitcommit: d200cd7f4de113291fbd57e573ada042a393e545
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60486876"
+ms.lasthandoff: 08/29/2019
+ms.locfileid: "70139828"
 ---
-# <a name="azure-data-factory---frequently-asked-questions"></a>Azure Data Factory - sık sorulan sorular
+# <a name="azure-data-factory---frequently-asked-questions"></a>Azure Data Factory-sık sorulan sorular
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [sık sorulan soru - Data Factory](../frequently-asked-questions.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [sık sorulan sorular-Data Factory](../frequently-asked-questions.md).
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 ## <a name="general-questions"></a>Genel sorular
 ### <a name="what-is-azure-data-factory"></a>Azure Data Factory nedir?
-Data Factory, bulut tabanlı veri tümleştirme hizmeti **taşımayı ve dönüştürmeyi otomatikleştiren**. Ham maddeleri alıp bunları tamamlanmış ürünlere dönüştürmek için donanım çalıştıran yalnızca bir fabrikası gibi Data Factory, ham verileri toplayan ve kullanıma hazır bilgilere dönüştürün var olan hizmetleri düzenler.
+Data Factory **, verilerin hareketini ve dönüştürülmesini otomatikleştiren**bulut tabanlı bir veri tümleştirme hizmetidir. Ham malzemeler almak ve bunları mamul mallar halinde dönüştürmek üzere ekipman çalıştıran bir fabrikada olduğu gibi, ham verileri toplayıp bunları kullanıma hazırlama bilgilerine dönüştüren mevcut hizmetleri de Data Factory.
 
-Veri fabrikası, hem şirket içi ve bulut veri depolarının yanı sıra Azure HDInsight ve Azure Data Lake Analytics gibi işlem hizmetlerini kullanarak işlem/dönüştürme verileri arasında veri taşımak için veri odaklı iş akışları oluşturmanıza olanak sağlar. İhtiyacınız olan eylemi gerçekleştiren bir işlem hattı oluşturduktan sonra (saatlik, günlük, haftalık vb.) düzenli aralıklarla çalışacak şekilde zamanlayabilirsiniz.   
+Data Factory, verileri şirket içi ve bulut veri depoları arasında taşımak için veri odaklı iş akışları oluşturmanıza olanak tanır ve Azure HDInsight ve Azure Data Lake Analytics gibi işlem hizmetlerini kullanarak verileri işleyebilir/dönüştürebilirsiniz. İhtiyaç duyduğunuz eylemi gerçekleştiren bir işlem hattı oluşturduktan sonra, düzenli aralıklarla (saatlik, günlük, haftalık vb.) çalışacak şekilde zamanlayabilirsiniz.   
 
-Daha fazla bilgi için [genel bakış ve temel kavramlar](data-factory-introduction.md).
+Daha fazla bilgi için bkz. [genel bakış & temel kavramlar](data-factory-introduction.md).
 
-### <a name="where-can-i-find-pricing-details-for-azure-data-factory"></a>Nereden bulabilirim fiyatlandırma ayrıntıları için Azure Data Factory?
-Bkz: [Data Factory fiyatlandırma ayrıntıları sayfasına] [ adf-pricing-details] Azure Data Factory için fiyatlandırma ayrıntıları.  
+### <a name="where-can-i-find-pricing-details-for-azure-data-factory"></a>Azure Data Factory için fiyatlandırma ayrıntılarını nerede bulabilirim?
+Azure Data Factory ilişkin fiyatlandırma ayrıntıları için bkz. [Data Factory fiyatlandırma ayrıntıları sayfası][adf-pricing-details] .  
 
-### <a name="how-do-i-get-started-with-azure-data-factory"></a>Azure Data factory'yi kullanmaya nasıl başlayabilirim?
-* Azure Data Factory'ye genel bakış için bkz. [Azure Data Factory'ye giriş](data-factory-introduction.md).
-* Hakkında bir öğretici için **veri kopyalama/taşıma** kullanarak kopyalama etkinliği bkz [verileri Azure Blob depolama alanından Azure SQL veritabanına kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
-* Hakkında bir öğretici için **verileri dönüştürme** kullanarak HDInsight Hive etkinliği. Bkz: [Hadoop kümesinde Hive betiği çalıştırarak verileri işleyin](data-factory-build-your-first-pipeline.md)
+### <a name="how-do-i-get-started-with-azure-data-factory"></a>Azure Data Factory kullanmaya başlamak Nasıl yaparım??
+* Azure Data Factory genel bir bakış için bkz. [Azure Data Factory giriş](data-factory-introduction.md).
+* Kopyalama etkinliğini kullanarak **verileri kopyalama/taşıma** hakkında bir öğretici için bkz. [Azure Blob depolamadan Azure SQL veritabanı 'na veri kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+* HDInsight Hive etkinliğini kullanarak **verileri dönüştürme** hakkında bir öğretici için. Bkz. [Hadoop kümesinde Hive betiği çalıştırarak işlem verileri](data-factory-build-your-first-pipeline.md)
 
-### <a name="what-is-the-data-factorys-region-availability"></a>Veri fabrikasının bölge kullanılabilirliği nedir?
-Data Factory, kullanılabilir **ABD Batı** ve **Kuzey Avrupa**. Veri fabrikası tarafından kullanılan işlem ve depolama hizmetleri, başka bölgelerde olabilir. Bkz: [desteklenen bölgeler](data-factory-introduction.md#supported-regions).
+### <a name="what-is-the-data-factorys-region-availability"></a>Data Factory bölgenin kullanılabilirliği nedir?
+Data Factory **ABD Batı** ve **Kuzey Avrupa**kullanılabilir. Veri fabrikaları tarafından kullanılan işlem ve depolama hizmetleri diğer bölgelerde olabilir. Bkz. [Desteklenen bölgeler](data-factory-introduction.md#supported-regions).
 
-### <a name="what-are-the-limits-on-number-of-data-factoriespipelinesactivitiesdatasets"></a>Veri fabrikaları/işlem hatları/etkinlik/veri kümeleri sayısı sınırları nelerdir?
-Bkz: **Azure veri fabrikası sınırları** bölümünü [Azure aboneliği ve hizmet limitleri, kotalar ve kısıtlamalar](../../azure-subscription-service-limits.md#data-factory-limits) makalesi.
+### <a name="what-are-the-limits-on-number-of-data-factoriespipelinesactivitiesdatasets"></a>Veri fabrikaları/işlem hatları/etkinlik/veri kümeleri için sınırlamalar nelerdir?
+[Azure aboneliği ve hizmet sınırları, Kotalar ve kısıtlamalar](../../azure-subscription-service-limits.md#data-factory-limits) makalesinin **Azure Data Factory sınırları** bölümüne bakın.
 
-### <a name="what-is-the-authoringdeveloper-experience-with-azure-data-factory-service"></a>Azure Data Factory hizmetiyle yazma geliştirici deneyimi nedir?
-Yazar/aşağıdaki araçlardan/Sdk'lardan birini kullanarak veri fabrikaları oluşturabilirsiniz:
+### <a name="what-is-the-authoringdeveloper-experience-with-azure-data-factory-service"></a>Azure Data Factory hizmeti ile yazma/geliştirici deneyimi nedir?
+Aşağıdaki araçlardan/SDK 'Lardan birini kullanarak veri fabrikaları yazabilir/oluşturabilirsiniz:
 
-* **Azure portalında** Azure Portal'daki Data Factory dikey pencereleri veri fabrikaları ad bağlantılı hizmetler oluşturmak için zengin kullanıcı arabirimi sağlar. **Data Factory düzenleyici**, ayrıca Portalı'nın parçası olduğu kolayca bağlı hizmetler, tablolar, veri kümeleri ve işlem hatlarını bu yapılar için JSON tanımları belirterek oluşturmanıza imkan tanır. Bkz: [Azure portalını kullanarak ilk veri işlem hattınızı](data-factory-build-your-first-pipeline-using-editor.md) oluşturmak ve veri fabrikası dağıtmak için portal/Düzenleyicisi'ni kullanarak bir örnek için.
-* **Visual Studio** bir Azure veri fabrikası oluşturmak için Visual Studio'yu kullanabilirsiniz. Bkz: [Visual Studio kullanarak ilk veri işlem hattınızı](data-factory-build-your-first-pipeline-using-vs.md) Ayrıntılar için.
-* **Azure PowerShell** bkz [oluşturma ve Azure PowerShell kullanarak Azure Data factory'yi izleme](data-factory-build-your-first-pipeline-using-powershell.md) PowerShell kullanarak veri fabrikası oluşturmak için öğretici/kılavuz. Bkz: [Data Factory Cmdlet başvurusu] [ adf-powershell-reference] kapsamlı belgeler Data Factory cmdlet'leri için MSDN Kitaplığı içeriği.
-* **.NET sınıf kitaplığı** Data Factory .NET SDK'sını kullanarak programlama yoluyla veri fabrikaları oluşturabilirsiniz. Bkz [oluşturma, izleme ve yönetme .NET SDK kullanarak veri fabrikaları](data-factory-create-data-factories-programmatically.md) kılavuz .NET SDK kullanarak veri fabrikası oluşturma. Bkz: [Data Factory sınıf kitaplığı başvurusu] [ msdn-class-library-reference] Data Factory .NET SDK'ın kapsamlı belgeler için.
-* **REST API** oluşturup veri fabrikaları dağıtmak için Azure Data Factory hizmeti tarafından kullanıma sunulan REST API de kullanabilirsiniz. Bkz: [Data Factory REST API Başvurusu] [ msdn-rest-api-reference] Data Factory REST API, kapsamlı belgeler için.
-* **Azure Resource Manager şablonu** bkz [Öğreticisi: Azure Resource Manager şablonu kullanarak ilk Azure data factory'nizi derleme](data-factory-build-your-first-pipeline-using-arm.md) fo ayrıntıları.
+* **Visual Studio** Bir Azure Data Factory oluşturmak için Visual Studio 'Yu kullanabilirsiniz. Ayrıntılar için bkz. [Visual Studio kullanarak ilk veri işlem hattınızı oluşturma](data-factory-build-your-first-pipeline-using-vs.md) .
+* **Azure PowerShell** Bkz. PowerShell kullanarak veri fabrikası oluşturmaya yönelik bir öğretici için [Azure PowerShell kullanarak Azure Data Factory oluşturma ve izleme](data-factory-build-your-first-pipeline-using-powershell.md) . Data Factory cmdlet 'lerinin kapsamlı bir belgesi için MSDN Kitaplığı 'ndaki [Data Factory cmdlet başvurusu][adf-powershell-reference] içeriğine bakın.
+* **.NET sınıf kitaplığı** Data Factory .NET SDK kullanarak program aracılığıyla veri fabrikaları oluşturabilirsiniz. .NET SDK kullanarak veri fabrikası oluşturma hakkında yönergeler için bkz. [.NET SDK kullanarak veri fabrikaları oluşturma, izleme ve yönetme](data-factory-create-data-factories-programmatically.md) . .NET SDK Data Factory kapsamlı bir belge için bkz. [Data Factory sınıf kitaplığı başvurusu][msdn-class-library-reference] .
+* **REST API** Ayrıca, veri fabrikaları oluşturmak ve dağıtmak için Azure Data Factory hizmetinin açığa çıkarılan REST API de kullanabilirsiniz. Data Factory REST API kapsamlı bir belge için bkz. [Data Factory REST API başvurusu][msdn-rest-api-reference] .
+* **Azure Resource Manager şablonu** Öğreticiye bakın [: Azure Resource Manager şablonu](data-factory-build-your-first-pipeline-using-arm.md) kullanarak ilk Azure veri fabrikanızı oluşturun ayrıntıları Info.
 
-### <a name="can-i-rename-a-data-factory"></a>Veri Fabrikası yeniden adlandırabilir miyim?
-Hayır. Diğer Azure kaynakları gibi Azure veri fabrikası adı değiştirilemez.
+### <a name="can-i-rename-a-data-factory"></a>Bir veri fabrikasını yeniden adlandırabilir miyim?
+Hayır. Diğer Azure kaynakları gibi, Azure Data Factory 'nin adı değiştirilemez.
 
-### <a name="can-i-move-a-data-factory-from-one-azure-subscription-to-another"></a>Veri Fabrikası bir Azure aboneliğine ait diğerine taşıyabilirim?
-Evet. Kullanım **taşıma** düğme Aşağıdaki diyagramda gösterildiği gibi data factory dikey penceresinde:
+### <a name="can-i-move-a-data-factory-from-one-azure-subscription-to-another"></a>Bir veri fabrikasını bir Azure aboneliğinden diğerine taşıyabilir miyim?
+Evet. Aşağıdaki diyagramda gösterildiği gibi Data Factory dikey penceresindeki **Taşı** düğmesini kullanın:
 
-![Veri Fabrikası Taşı](media/data-factory-faq/move-data-factory.png)
+![Veri fabrikasını taşıma](media/data-factory-faq/move-data-factory.png)
 
-### <a name="what-are-the-compute-environments-supported-by-data-factory"></a>Data Factory tarafından desteklenen işlem ortamlarının nelerdir?
-Aşağıdaki tabloda Data Factory ve bunlar üzerinde çalışan etkinlikler tarafından desteklenen işlem ortamlarının listesi sağlar.
+### <a name="what-are-the-compute-environments-supported-by-data-factory"></a>Data Factory tarafından desteklenen işlem ortamları nelerdir?
+Aşağıdaki tabloda, Data Factory tarafından desteklenen işlem ortamlarının listesi ve bunlar üzerinde çalışabilecek etkinlikler verilmiştir.
 
 | İşlem ortamı | activities |
 | --- | --- |
-| [İsteğe bağlı HDInsight kümesi](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) veya [kendi HDInsight kümenizi](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) |[DotNet](data-factory-use-custom-activities.md), [Hive](data-factory-hive-activity.md), [Pig](data-factory-pig-activity.md), [MapReduce](data-factory-map-reduce.md), [Hadoop akış](data-factory-hadoop-streaming-activity.md) |
+| [İsteğe bağlı HDInsight kümesi](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) veya [kendi HDInsight kümeniz](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) |[DotNet](data-factory-use-custom-activities.md), [Hive](data-factory-hive-activity.md), [Pig](data-factory-pig-activity.md), [MapReduce](data-factory-map-reduce.md), [Hadoop akışı](data-factory-hadoop-streaming-activity.md) |
 | [Azure Batch](data-factory-compute-linked-services.md#azure-batch-linked-service) |[DotNet](data-factory-use-custom-activities.md) |
 | [Azure Machine Learning](data-factory-compute-linked-services.md#azure-machine-learning-linked-service) |[Machine Learning etkinlikleri: Toplu yürütme ve kaynak güncelleştirme](data-factory-azure-ml-batch-execution-activity.md) |
 | [Azure Data Lake Analytics'i](data-factory-compute-linked-services.md#azure-data-lake-analytics-linked-service) |[Data Lake Analytics U-SQL](data-factory-usql-activity.md) |
 | [Azure SQL](data-factory-compute-linked-services.md#azure-sql-linked-service), [Azure SQL veri ambarı](data-factory-compute-linked-services.md#azure-sql-data-warehouse-linked-service), [SQL Server](data-factory-compute-linked-services.md#sql-server-linked-service) |[Saklı Yordam](data-factory-stored-proc-activity.md) |
 
-### <a name="how-does-azure-data-factory-compare-with-sql-server-integration-services-ssis"></a>Nasıl Azure Data Factory, SQL Server Integration Services (SSIS) arasındaki fark nedir? 
-Bkz: [Azure Data factory'yi vs. SSIS](https://www.sqlbits.com/Sessions/Event15/Azure_Data_Factory_vs_SSIS) sunudan bizim Professionals (en değerli uzmanları) biri: Reza Rad. Son değişiklikleri Data factory'de bazıları PowerPoint'te slayt Destesi listelenmeyebilir. Daha fazla özellik sürekli olarak Azure Data Factory'ye ekliyorsunuz. Daha fazla özellik sürekli olarak Azure Data Factory'ye ekliyorsunuz. Biz bu güncelleştirmeler Microsoft gelen veri tümleştirme teknolojileri karşılaştırması içine süre bu yıl birleştirecektir.   
+### <a name="how-does-azure-data-factory-compare-with-sql-server-integration-services-ssis"></a>Azure Data Factory SQL Server Integration Services (SSIS) ile nasıl karşılaştırılmaktadır? 
+Bkz. [Azure Data Factory vs. MVP 'larımızdan (en değerli profesyonellerden) SSISsunumu:](https://www.sqlbits.com/Sessions/Event15/Azure_Data_Factory_vs_SSIS) Reza Rad. Data Factory yapılan son değişikliklerden bazıları slayt destede listelenmeyebilir. Azure Data Factory için sürekli olarak daha fazla özellik ekliyoruz. Azure Data Factory için sürekli olarak daha fazla özellik ekliyoruz. Bu güncelleştirmeleri Microsoft 'un bu yıldan daha sonra bir süre içinde veri tümleştirme teknolojilerinin karşılaştırmasına dahil edeceğiz.   
 
-## <a name="activities---faq"></a>Etkinlikleri - SSS
-### <a name="what-are-the-different-types-of-activities-you-can-use-in-a-data-factory-pipeline"></a>Bir Data Factory işlem hattında kullanabileceğiniz etkinlikler farklı türleri nelerdir?
-* [Veri taşıma etkinlikleri](data-factory-data-movement-activities.md) verileri taşımak için.
-* [Veri dönüştürme etkinlikleri](data-factory-data-transformation-activities.md) işlem/veri dönüştürme için.
+## <a name="activities---faq"></a>Etkinlikler-SSS
+### <a name="what-are-the-different-types-of-activities-you-can-use-in-a-data-factory-pipeline"></a>Data Factory ardışık düzeninde kullanabileceğiniz farklı etkinlik türleri nelerdir?
+* Verileri taşımak için [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) .
+* Verileri işlemek/dönüştürmek için [veri dönüştürme etkinlikleri](data-factory-data-transformation-activities.md) .
 
-### <a name="when-does-an-activity-run"></a>Bir etkinlik çalıştırıldığında?
-**Kullanılabilirlik** yapılandırma ayarı çıktı veri tablosundaki etkinlik çalıştırıldığında belirler. Etkinlik giriş veri kümeleri belirtilirse, tüm giriş verilerini bağımlılıkların olup olmadığını denetler (diğer bir deyişle, **hazır** durumu) çalışmaya başlamadan önce.
+### <a name="when-does-an-activity-run"></a>Bir etkinlik ne zaman çalıştırılır?
+Çıkış verileri tablosundaki **kullanılabilirlik** yapılandırma ayarı etkinliğin ne zaman çalıştırılacağını belirler. Giriş veri kümeleri belirtilirse, etkinlik, çalışmaya başlamadan önce tüm giriş verileri bağımlılıklarının (yani, **Ready** durumu) karşılanıp karşılanmadığını denetler.
 
-## <a name="copy-activity---faq"></a>Kopyalama etkinliği - SSS
-### <a name="is-it-better-to-have-a-pipeline-with-multiple-activities-or-a-separate-pipeline-for-each-activity"></a>Birden çok etkinliği ile işlem hattı veya etkinlikleri için ayrı bir işlem hattı için daha iyi mi?
-İşlem hatları ilgili etkinlikleri paket kaydetmeleri beklenir. Bağlantı veri kümeleri işlem hattı dışında başka herhangi bir etkinliği tarafından tüketilen değil, tek işlem hattında etkinlikleri tutabilirsiniz. Böylece birbirleri ile hizalamak bu şekilde, zincir işlem hattı etkin nokta ihtiyaç duymaz. Ayrıca, işlem hattı güncelleştirirken tablolarda işlem hattının iç veri bütünlüğü daha iyi korunur. İşlem hattı güncelleştirme temelde işlem hattındaki tüm etkinlikleri durdurur, bunları kaldırır ve yeniden oluşturur. Perspektif geliştirme, bu da ilgili etkinlikler, işlem hattı için bir JSON dosyası içinde veri akışını görmek daha kolay olabilir.
+## <a name="copy-activity---faq"></a>Kopyalama etkinliği-SSS
+### <a name="is-it-better-to-have-a-pipeline-with-multiple-activities-or-a-separate-pipeline-for-each-activity"></a>Her etkinlik için birden çok etkinliğe veya ayrı bir işlem hattına sahip bir işlem hattına sahip olmak daha iyidir mi?
+İşlem hatları, ilgili etkinlikleri gruplamak için gerekir. Bunları bağlayan veri kümeleri, ardışık düzen dışında başka bir etkinlik tarafından tüketilmez, etkinlikleri tek bir işlem hattına taşıyabilirsiniz. Bu şekilde, ardışık düzen etkin periyotlarını birbirleriyle hizalamaları için zincirlemek zorunda değilsiniz. Ayrıca, işlem hattı güncelleştirilirken, ardışık düzen için tablolardaki veri bütünlüğü daha iyi korunur. İşlem hattı güncelleştirmesi, temelde işlem hattının içindeki tüm etkinlikleri durduruyor, kaldırır ve yeniden oluşturur. Yazma perspektifinden, işlem hattı için bir JSON dosyasında ilgili etkinliklerdeki verilerin akışını görmek daha da kolay olabilir.
 
 ### <a name="what-are-the-supported-data-stores"></a>Desteklenen veri depoları nelerdir?
 Data Factory’deki Kopyalama Etkinliği bir kaynak veri deposundan havuz veri deposuna verileri kopyalar. Data Factory aşağıdaki veri depolarını destekler. Herhangi bir kaynaktan gelen veriler herhangi bir havuza yazılabilir. Bir depoya veya depodan veri kopyalama hakkında bilgi edinmek için veri deposuna tıklayın.
@@ -103,23 +100,23 @@ Data Factory’deki Kopyalama Etkinliği bir kaynak veri deposundan havuz veri d
 ### <a name="what-are-the-supported-file-formats"></a>Desteklenen dosya biçimleri nelerdir?
 [!INCLUDE [data-factory-file-format](../../../includes/data-factory-file-format.md)]
 
-### <a name="where-is-the-copy-operation-performed"></a>Kopyalama işleminin gerçekleştirildiği?
-Bkz: [küresel olarak kullanılabilir veri taşıma](data-factory-data-movement-activities.md#global) ayrıntıları bölümü. Kısacası, bir şirket içi veri deposuna söz konusu olduğunda, veri yönetimi ağ geçidi, şirket içi ortamınızda kopyalama işlemi gerçekleştirilir. Ayrıca, iki bulut deposu arasında veri taşıma olduğunda, aynı coğrafyadaki havuz konumu en yakın bölgede kopyalama işlemi gerçekleştirilir.
+### <a name="where-is-the-copy-operation-performed"></a>Kopyalama işlemi nerede gerçekleştirilir?
+Ayrıntılar için [genel kullanıma açık veri taşıma](data-factory-data-movement-activities.md#global) bölümüne bakın. Kısacası, şirket içi veri deposu dahil edildiğinde kopyalama işlemi, şirket içi ortamınızda Veri Yönetimi Ağ Geçidi tarafından gerçekleştirilir. Veri taşıma iki bulut deposu arasında olduğunda, kopyalama işlemi aynı coğrafya içindeki havuz konumuna en yakın bölgede gerçekleştirilir.
 
-## <a name="hdinsight-activity---faq"></a>HDInsight etkinliği - SSS
-### <a name="what-regions-are-supported-by-hdinsight"></a>HDInsight tarafından hangi bölgeler desteklenir?
-Coğrafi kullanılabilirlik bölümüne şu makaleye bakın: veya [HDInsight fiyatlandırma ayrıntıları][hdinsight-supported-regions].
+## <a name="hdinsight-activity---faq"></a>HDInsight etkinliği-SSS
+### <a name="what-regions-are-supported-by-hdinsight"></a>HDInsight tarafından desteklenen bölgeler nelerdir?
+Aşağıdaki makaledeki coğrafi kullanılabilirlik bölümüne bakın: veya [HDInsight fiyatlandırma ayrıntıları][hdinsight-supported-regions].
 
-### <a name="what-region-is-used-by-an-on-demand-hdinsight-cluster"></a>Hangi bölge, bir isteğe bağlı HDInsight kümesi tarafından kullanılır?
-İsteğe bağlı HDInsight kümesi kümeyle birlikte kullanılmak üzere belirtilen depolama bulunduğu bölgede oluşturulur.    
+### <a name="what-region-is-used-by-an-on-demand-hdinsight-cluster"></a>İsteğe bağlı HDInsight kümesi tarafından kullanılan bölge nedir?
+İsteğe bağlı HDInsight kümesi, kümeyle birlikte kullanılmak üzere belirttiğiniz depolamanın bulunduğu bölgede oluşturulur.    
 
-### <a name="how-to-associate-additional-storage-accounts-to-your-hdinsight-cluster"></a>Ek depolama hesapları HDInsight kümenize ilişkilendirmek nasıl?
-Kendi HDInsight kümenizi (BYOC - bilgisayarınızı kendi küme Getir) kullanıyorsanız, aşağıdaki konulara bakın:
+### <a name="how-to-associate-additional-storage-accounts-to-your-hdinsight-cluster"></a>HDInsight kümenize ek depolama hesapları nasıl ilişkilendireceğiniz?
+Kendi HDInsight kümenizi kullanıyorsanız (BYOC-Kendi kümenizi getir), aşağıdaki konulara bakın:
 
-* [Alternatif depolama hesapları ve meta Depolarla HDInsight kümesi kullanma][hdinsight-alternate-storage]
-* [Ek depolama hesapları HDInsight Hive'ı kullanın.][hdinsight-alternate-storage-2]
+* [Alternatif depolama hesaplarıyla bir HDInsight kümesi ve Metastores kullanma][hdinsight-alternate-storage]
+* [HDInsight Hive ile ek depolama hesapları kullanma][hdinsight-alternate-storage-2]
 
-Data Factory hizmeti tarafından oluşturulan bir talep üzerine küme kullanıyorsanız, Data Factory hizmetinin sizin adınıza kaydedebilmesi ek depolama hesapları için HDInsight bağlı hizmeti belirtin. İsteğe bağlı hizmet JSON tanımında **additionalLinkedServiceNames** özelliğini aşağıdaki JSON kod parçacığında gösterildiği gibi diğer depolama hesaplarını belirtin:
+Data Factory hizmeti tarafından oluşturulan isteğe bağlı bir küme kullanıyorsanız, HDInsight bağlı hizmeti için ek depolama hesapları belirtin, böylece Data Factory hizmeti sizin adınıza kaydedebilir. İsteğe bağlı bağlı hizmet için JSON tanımında, aşağıdaki JSON kod parçacığında gösterildiği gibi alternatif depolama hesapları belirtmek için **Addilinkedservicenames** özelliğini kullanın:
 
 ```JSON
 {
@@ -138,25 +135,25 @@ Data Factory hizmeti tarafından oluşturulan bir talep üzerine küme kullanıy
     }
 }
 ```
-Yukarıdaki örnekte, bağlı hizmetler, tanımları HDInsight küme alternatif depolama hesapları erişmesi gereken kimlik bilgilerini içeren otherLinkedServiceName1 ve otherLinkedServiceName2 temsil eder.
+Yukarıdaki örnekte, otherLinkedServiceName1 ve otherLinkedServiceName2 tanımları, HDInsight kümesinin alternatif depolama hesaplarına erişmesi gereken kimlik bilgilerini içeren bağlı hizmetleri temsil eder.
 
-## <a name="slices---faq"></a>Dilimler - SSS
-### <a name="why-are-my-input-slices-not-in-ready-state"></a>Neden benim girdi dilimi hazır durumda değil misiniz?
-Sıkça ayarlamıyor **dış** özelliğini **true** girdi verileri data factory (data factory tarafından üretilen değil) dışında olduğunda giriş veri kümesi üzerinde.
+## <a name="slices---faq"></a>Dilimler-SSS
+### <a name="why-are-my-input-slices-not-in-ready-state"></a>Giriş dilimlerim neden kullanılabilir durumda değil?
+Giriş verileri veri fabrikasına (Data Factory tarafından üretilmez) harici olduğunda, genel bir hata giriş veri kümesinde **dış** özelliği **true** olarak ayarlamadır.
 
-Aşağıdaki örnekte, yalnızca ayarlamanız gerekir **dış** üzerinde true **dataset1**.  
+Aşağıdaki örnekte, **dataSet1**üzerinde yalnızca **External** ' ı true olarak ayarlamanız gerekir.  
 
-**DataFactory1** 1 işlem hattı: dataset1 activity1 -> -> dataset2 -> activity2 dataset3 işlem hattı 2 ->: dataset3 -> activity3 ancak dataset4 ->
+**DataFactory1** İşlem hattı 1: DataSet1-> Activity1-> DataSet2-> Activity2-> dataset3 işlem hattı 2: dataset3-> Activity3-> dataset4
 
-Başka bir veri fabrikası dataset4 (2 1 data factory'de işlem hattı tarafından üretilen) alan bir işlem hattıyla varsa, veri kümesi farklı bir veri fabrikası (DataFactory1, DataFactory2 değil) tarafından oluşturulduğundan dataset4 dış bir veri kümesi olarak işaretleyin.  
+Dataset4 alan bir işlem hattına sahip başka bir veri fabrikanızı varsa (Data Factory 1 ' de işlem hattı 2 tarafından üretilen), veri kümesi farklı bir veri Fabrikası (DataFactory1, DataFactory2 değil) tarafından oluşturulduğundan, dataset4 'yi bir dış veri kümesi olarak işaretleyin.  
 
 **DataFactory2**    
-İşlem hattı 1: dataset4 -> activity4 dataset5 ->
+İşlem hattı 1: dataset4-> Activity4 ancak-> dataset5
 
-Dış özelliği düzgün şekilde ayarlarsanız, giriş verilerini giriş veri kümesi tanımında belirtilen konumda var olup olmadığını doğrulayın.
+Dış özellik doğru ayarlandıysa, giriş veri kümesi tanımında belirtilen konumda giriş verilerinin olup olmadığını doğrulayın.
 
-### <a name="how-to-run-a-slice-at-another-time-than-midnight-when-the-slice-is-being-produced-daily"></a>Nasıl daha gece yarısı zaman dilimi günlük üretilmekte olan başka bir zaman dilimi çalıştırılır?
-Kullanım **uzaklığı** özelliği üretilecek dilim istediğiniz süreyi belirtin. Bkz: [veri kümesinin kullanılabilirliğine](data-factory-create-datasets.md#dataset-availability) bölümü bu özellik hakkında ayrıntılı bilgi için. Hızlı bir örnek aşağıda verilmiştir:
+### <a name="how-to-run-a-slice-at-another-time-than-midnight-when-the-slice-is-being-produced-daily"></a>Dilim, her gün üretildiğinde gece yarısından farklı bir zamanda nasıl çalıştırılır?
+Dilimin üretileceği saati belirtmek için, **fark** özelliğini kullanın. Bu özellik hakkındaki ayrıntılar için bkz. [veri kümesi kullanılabilirliği](data-factory-create-datasets.md#dataset-availability) bölümü. İşte hızlı bir örnek:
 
 ```json
 "availability":
@@ -166,36 +163,36 @@ Kullanım **uzaklığı** özelliği üretilecek dilim istediğiniz süreyi beli
     "offset": "06:00:00"
 }
 ```
-Günlük dilimleri başlar **6 AM** varsayılan gece yarısı yerine.     
+Günlük dilimler varsayılan gece yarısı yerine **6** ' da başlar.     
 
-### <a name="how-can-i-rerun-a-slice"></a>Bir dilim nasıl yeniden çalıştırabilir miyim?
-Bir dilim aşağıdaki yollardan birinde çalıştırabilirsiniz:
+### <a name="how-can-i-rerun-a-slice"></a>Bir dilimi nasıl yeniden çalıştırabilirim?
+Aşağıdaki yollarla bir dilimi yeniden çalıştırabilirsiniz:
 
-* Bir etkinlik penceresi veya dilimi yeniden çalıştırmak için izleme ve yönetme uygulaması'nı kullanın. Bkz: [seçilen yeniden çalıştır etkinliği windows](data-factory-monitor-manage-app.md#perform-batch-actions) yönergeler için.   
-* Tıklayın **çalıştırma** komut çubuğunda **veri DİLİMİ** dilimin Azure portalındaki dikey.
-* Çalıştırma **kümesi AzDataFactorySliceStatus** durumu cmdlet'iyle kümesine **bekleniyor** dilim için.   
+* Bir etkinlik penceresini veya dilimi yeniden çalıştırmak için Izleme ve yönetme uygulamasını kullanın. Yönergeler için bkz. [Seçili etkinlik pencerelerini yeniden çalıştır](data-factory-monitor-manage-app.md#perform-batch-actions) .   
+* Azure portal dilimin **VERI dilimi** dikey penceresindeki komut çubuğunda **Çalıştır** ' a tıklayın.
+* Dilim **bekleniyor** olarak set **-AzDataFactorySliceStatus** cmdlet 'ini durum kümesiyle çalıştırın.   
 
     ```powershell
     Set-AzDataFactorySliceStatus -Status Waiting -ResourceGroupName $ResourceGroup -DataFactoryName $df -TableName $table -StartDateTime "02/26/2015 19:00:00" -EndDateTime "02/26/2015 20:00:00"
     ```
-  Bkz: [kümesi AzDataFactorySliceStatus] [ set-azure-datafactory-slice-status] cmdlet'i hakkında daha fazla ayrıntı için.
+  Cmdlet hakkındaki ayrıntılar için bkz. [set-AzDataFactorySliceStatus][set-azure-datafactory-slice-status] .
 
-### <a name="how-long-did-it-take-to-process-a-slice"></a>Ne kadar bir dilimi işlemesi için sürer?
-Veri dilimi işlemesi için ne kadar sürdüğünü öğrenmek için etkinlik penceresi Gezgini'nde izleme ve yönetme uygulamasını kullanın. Bkz: [etkinlik penceresi Gezgini](data-factory-monitor-manage-app.md#activity-window-explorer) Ayrıntılar için.
+### <a name="how-long-did-it-take-to-process-a-slice"></a>Bir dilimi işlemek ne kadar sürer?
+Bir veri dilimini işlemeye ne kadar sürdüğünü öğrenmek için, Izleme & uygulamayı yönetme ' de etkinlik penceresi Gezgini ' ni kullanın. Ayrıntılar için [etkinlik penceresi Gezgini](data-factory-monitor-manage-app.md#activity-window-explorer) ' ne bakın.
 
-Ayrıca Azure portalında aşağıdakileri yapabilirsiniz:  
+Azure portal şunları da yapabilirsiniz:  
 
-1. Tıklayın **veri kümeleri** kutucuğundan **DATA FACTORY** veri fabrikanızın dikey.
-2. Belirli bir veri kümesi tıklayarak **veri kümeleri** dikey penceresi.
-3. Gelen ilginizi çeken dilimi seçin **son dilimler** listesini **tablo** dikey penceresi.
-4. Çalıştırılan etkinlik tıklayın **etkinlik çalıştırmalarını** listesini **veri DİLİMİ** dikey penceresi.
-5. Tıklayın **özellikleri** kutucuğundan **etkinlik çalışma ayrıntıları** dikey penceresi.
-6. Görmelisiniz **süresi** alan değerine sahip. Bu değer dilimi işlemesi için geçen süredir.   
+1. Veri fabrikanızın **VERI fabrikası** dikey penceresinde veri **kümeleri** kutucuğuna tıklayın.
+2. **Veri kümeleri** dikey penceresinde belirli bir veri kümesine tıklayın.
+3. **Tablo** dikey penceresindeki **son dilimler** listesinden ilgilendiğiniz dilimi seçin.
+4. **VERI dilimi** dikey penceresinde **etkinlik çalıştırmaları** listesinden Çalıştır ' a tıklayın.
+5. **Etkınlık çalışma ayrıntıları** dikey penceresinde **Özellikler** Bölmesi ' ne tıklayın.
+6. **DURATION** alanını bir değer ile görmeniz gerekir. Bu değer, dilimi işlemek için geçen süredir.   
 
-### <a name="how-to-stop-a-running-slice"></a>Çalışan bir dilim durdurmak nasıl?
-İşlem hattının yürütülmesini durdurmak gerekiyorsa, kullanabileceğiniz [Suspend-AzDataFactoryPipeline](/powershell/module/az.datafactory/suspend-azdatafactorypipeline) cmdlet'i. Şu anda, işlem hattı askıya sürmekte olan dilim yürütme durdurulmaz. Devam eden yürütmeler tamamladıktan sonra ek dilim çekilir.
+### <a name="how-to-stop-a-running-slice"></a>Çalışan bir dilim nasıl durdurulur?
+İşlem hattının yürütülmesini durdurmanız gerekiyorsa, [askıya al-AzDataFactoryPipeline](/powershell/module/az.datafactory/suspend-azdatafactorypipeline) cmdlet 'ini kullanabilirsiniz. Şu anda, işlem hattının askıya alınması devam eden dilim yürütmelerini durdurmaz. Devam eden yürütmeler tamamlandığında, hiç ek dilim alınmaz.
 
-Gerçekten tüm yürütmeleri hemen durdurmak istiyorsanız, tek yolu, işlem hattını silip yeniden oluşturmanız olacaktır. İşlem hattı silmeyi seçerseniz, tablolar ve işlem hattı tarafından kullanılan bağlı hizmet silme gerekmez.
+Tüm yürütmeleri gerçekten durdurmak istiyorsanız tek yol, işlem hattını silmek ve yeniden oluşturmaktır. İşlem hattını silmeyi seçerseniz, işlem hattı tarafından kullanılan tabloları ve bağlı hizmetleri silmeniz gerekmez.
 
 [create-factory-using-dotnet-sdk]: data-factory-create-data-factories-programmatically.md
 [msdn-class-library-reference]: /dotnet/api/microsoft.azure.management.datafactories.models

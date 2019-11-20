@@ -8,23 +8,25 @@ ms.topic: include
 ms.date: 02/21/2018
 ms.author: nzthiago
 ms.custom: include file
-ms.openlocfilehash: ffb29fc76313e8870b52cb0a63936da7853ea6ce
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 47c2429363945cf1529cee6e49947aaea95b7022
+ms.sourcegitcommit: b4f201a633775fee96c7e13e176946f6e0e5dd85
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188933"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72597427"
 ---
 ## <a name="timeout"></a>İşlev uygulaması zaman aşımı süresi 
 
-Bir işlev uygulaması zaman aşımı süresini functionTimeout özelliği tarafından tanımlanan [host.json](../articles/azure-functions/functions-host-json.md#functiontimeout) proje dosyası. Aşağıdaki tabloda, her iki plan dakika ve her iki çalışma zamanı sürümleri varsayılan ve en yüksek değerleri gösterir:
+Bir işlev uygulamasının zaman aşımı süresi, [Host. JSON](../articles/azure-functions/functions-host-json.md#functiontimeout) proje dosyasındaki functiontimeout özelliği tarafından tanımlanır. Aşağıdaki tabloda, hem planlar hem de çalışma zamanı sürümlerinde, varsayılan ve en büyük değerler dakika cinsinden gösterilmektedir:
 
-| Planlama | Çalışma zamanı sürümü | Varsayılan | Maksimum |
+| Plan | Çalışma zamanı sürümü | Varsayılan | Maksimum |
 |------|---------|---------|---------|
-| Tüketim | 1.x | 5 | 10 |
+| Tüketim | 'in | 5 | 10 |
 | Tüketim | 2.x | 5 | 10 |
-| App Service | 1.x | Sınırsız | Sınırsız |
-| App Service | 2.x | 30 | Sınırsız |
+| Tüketim | 3. x (Önizleme) | 5 | 10 |
+| App Service | 'in | İş çalışma zamanında | İş çalışma zamanında |
+| App Service | 2.x | 30 | İş çalışma zamanında |
+| App Service | 3. x (Önizleme) | 30 | İş çalışma zamanında |
 
 > [!NOTE] 
-> İşlev uygulaması zaman aşımı ayarı bağımsız olarak 230 saniyedir HTTP ile tetiklenen bir işlev bir isteğe cevap vermesi alabileceği en uzun süreyi. Bu nedenle, [boşta kalma zaman aşımı Azure Load Balancer'ın varsayılan](../articles/app-service/faq-availability-performance-application-issues.md#why-does-my-request-time-out-after-230-seconds). Daha uzun işleme sürelerine kullanmayı [dayanıklı işlevler zaman uyumsuz desen](../articles/azure-functions/durable/durable-functions-concepts.md#async-http) veya [asıl işi ertele ve anlık bir yanıt döndürür](../articles/azure-functions/functions-best-practices.md#avoid-long-running-functions).
+> İşlev uygulaması zaman aşımı ayarından bağımsız olarak, 230 saniye bir HTTP tetiklenen işlevin bir isteğe yanıt vermek için gidebildiği en uzun süredir. Bunun nedeni, [Azure Load Balancer varsayılan boşta kalma zaman aşımı süresi](../articles/app-service/faq-availability-performance-application-issues.md#why-does-my-request-time-out-after-230-seconds). Daha uzun işlem süreleri için [dayanıklı işlevler zaman uyumsuz model](../articles/azure-functions/durable/durable-functions-overview.md#async-http) kullanmayı veya [gerçek işi erteleyin ve anında yanıt döndürmenizi](../articles/azure-functions/functions-best-practices.md#avoid-long-running-functions)düşünün.

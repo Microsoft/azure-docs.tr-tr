@@ -8,14 +8,14 @@ ms.reviewer: jasonh
 ms.custom: hdinsightactive
 ms.topic: overview
 ms.date: 06/13/2019
-ms.openlocfilehash: e500f08de414a5907a0f1aeeca90d8c2090adcdd
-ms.sourcegitcommit: e5dcf12763af358f24e73b9f89ff4088ac63c6cb
+ms.openlocfilehash: 7cf83af52d5bedee5b4d57ee1b4dda2fb34d1b3f
+ms.sourcegitcommit: dd69b3cda2d722b7aecce5b9bd3eb9b7fbf9dc0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67137069"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70960104"
 ---
-# <a name="what-is-apache-kafka-in-azure-hdinsight"></a>Azure HDInsight, Apache Kafka nedir
+# <a name="what-is-apache-kafka-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache Kafka nedir?
 
 [Apache Kafka](https://kafka.apache.org), gerçek zamanlı akış verisi işlem hatları ve uygulamaları oluşturmak için kullanılabilen, açık kaynak dağıtılmış akış platformudur. Kafka ayrıca, adlandırılmış veri akışları yayımlayıp abone olabileceğiniz bir ileti kuyruğuna benzer aracı işlevselliği sağlar. 
 
@@ -25,27 +25,27 @@ Aşağıda, HDInsight üzerinde Kafka’ya özgü özellikler verilmiştir:
 
 * Microsoft, Kafka çalışma süresinde %99,9 Hizmet Düzeyi Sözleşmesi (SLA) sağlar. Daha fazla bilgi için [HDInsight için SLA bilgileri](https://azure.microsoft.com/support/legal/sla/hdinsight/v1_0/) belgesine bakın.
 
-* Kafka için yedekleme deposu olarak Azure Yönetilen Diskler’i kullanır. Yönetilen Diskler, her Kafka aracısı için 16 TB’a kadar depolama alanı sağlayabilir. HDInsight üzerinde Kafka ile yönetilen diskleri yapılandırma hakkında daha fazla bilgi için bkz: [HDInsight üzerinde Apache Kafka'nın ölçeklenebilirliğini artırma](apache-kafka-scalability.md).
+* Kafka için yedekleme deposu olarak Azure Yönetilen Diskler’i kullanır. Yönetilen Diskler, her Kafka aracısı için 16 TB’a kadar depolama alanı sağlayabilir. HDInsight üzerinde Kafka ile yönetilen diskleri yapılandırma hakkında daha fazla bilgi için bkz. [HDInsight 'ta Apache Kafka ölçeklenebilirliğini artırma](apache-kafka-scalability.md).
 
     Yönetilen diskler hakkında daha fazla bilgi için bkz. [Azure Yönetilen Diskler](../../virtual-machines/windows/managed-disks-overview.md).
 
 * Kafka, bir rafın tek bir boyutlu görünümüyle tasarlanmıştır. Azure, bir rafı iki boyuta ayırır: Güncelleştirme Etki Alanları (UD) ve Hata Etki Alanları (FD). Microsoft, UD ve FD’ler genelinde Kafka bölümleri ve çoğaltmalarını yeniden dengeleyen araçlar sağlar. 
 
-    Daha fazla bilgi için [HDInsight üzerinde Apache Kafka ile yüksek kullanılabilirlik](apache-kafka-high-availability.md).
+    Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka yüksek kullanılabilirlik](apache-kafka-high-availability.md).
 
 * HDInsight, küme oluşturulduktan sonra çalışan düğümlerinin sayısını (Kafka aracısını barındıran) değiştirmenize olanak sağlar. Ölçeklendirme Azure portalı, Azure PowerShell ve diğer Azure yönetim arabirimleri üzerinde gerçekleştirilebilir. Kafka için, bölüm çoğaltmalarını ölçeklendirme işlemlerinden sonra yeniden dengelemeniz gerekir. Bölümleri yeniden dengelemek, Kafka’nın yeni çalışan düğüm sayısından yararlanabilmesini sağlar.
 
-    Daha fazla bilgi için [HDInsight üzerinde Apache Kafka ile yüksek kullanılabilirlik](apache-kafka-high-availability.md).
+    Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka yüksek kullanılabilirlik](apache-kafka-high-availability.md).
 
-* Azure İzleyici günlüklerine, HDInsight üzerinde Kafka izlemek için kullanılabilir. Azure İzleyici yüzeyleri sanal makine düzeyinde bilgi açığa disk, NIC ölçüleri ve JMX ölçüleri gibi Kafka'dan günlüğe kaydeder.
+* Azure Izleyici günlükleri, HDInsight üzerinde Kafka izlemek için kullanılabilir. Azure Izleyici, disk ve NIC ölçümleri gibi sanal makine düzeyindeki bilgileri ve Kafka 'ten JMX ölçümlerini kaydeder.
 
-    Daha fazla bilgi için [HDInsight üzerinde Apache Kafka için günlük çözümleme](apache-kafka-log-analytics-operations-management.md).
+    Daha fazla bilgi için bkz. [HDInsight 'ta Apache Kafka için günlükleri çözümleme](apache-kafka-log-analytics-operations-management.md).
 
 ### <a name="apache-kafka-on-hdinsight-architecture"></a>HDInsight mimarisi üzerinde Apache Kafka
 
 Aşağıdaki diyagram, olayların hata dayanıklılığı ile paralel olarak okunması için tüketici gruplarını, bölümlemeyi ve çoğaltmayı kullanan tipik Kafka yapılandırmasını göstermektedir:
 
-![Kafka kümesi yapılandırması diyagramı](./media/apache-kafka-introduction/kafka-cluster.png)
+![Kafka kümesi yapılandırması diyagramı](./media/apache-kafka-introduction/kafka-cluster-diagram.png)
 
 Apache ZooKeeper, Kafka kümesinin durumunu yönetir. Zookeeper, eşzamanlı, esnek ve düşük gecikme süreli işlemler için derlenmiştir. 
 
@@ -55,39 +55,39 @@ Aracılar arasında konuların bölüm kayıtları. Kayıtları tüketirken, ver
 
 Çoğaltma, düğümler arasında bölmeleri çoğaltmak ve düğüm (aracı) kesintilerine karşı koruma sağlamak için kullanılır. Diyagramda *(L)* harfi bulunan bölüm, verilen bölümün lideridir. Üretici trafiği ZooKeeper tarafından yönetilen durum kullanılarak her düğümün liderine yönlendirilir.
 
-## <a name="why-use-apache-kafka-on-hdinsight"></a>Neden HDInsight üzerinde Apache Kafka kullanmalıyım?
+## <a name="why-use-apache-kafka-on-hdinsight"></a>HDInsight üzerinde neden Apache Kafka kullanmalıyım?
 
 Aşağıda, HDInsight üzerinde Kafka kullanılarak gerçekleştirilebilen yaygın görevler ve desenler verilmiştir:
 
-* **Apache Kafka verilerini çoğaltma**: Kafka, Kafka kümeleri arasında verileri çoğaltan MirrorMaker yardımcı programını sağlar.
+* **Apache Kafka verilerinin çoğaltılması**: Kafka, Kafka kümeleri arasında veri çoğaltan MirrorMaker yardımcı programını sağlar.
 
-    Mirrormaker hakkında daha fazla bilgi için bkz: [Apache Kafka konularını çoğaltma HDInsight üzerinde Apache Kafka ile](apache-kafka-mirroring.md).
+    MirrorMaker kullanma hakkında daha fazla bilgi için bkz. [HDInsight 'ta Apache Kafka Apache Kafka konularına çoğaltma](apache-kafka-mirroring.md).
 
-* **Yayımla-abone ol Mesajlaşma modeli**: Kafka, Kafka konu yayımlama kayıtlar için bir Producer API sağlar. Bir konu başlığına abone olurken Consumer API (Tüketici API’si) kullanılır.
+* **Yayımlama-abone olma mesajlaşma stili**: Kafka, bir Kafka konusuna kayıt yayımlamak için bir üretici API 'SI sağlar. Bir konu başlığına abone olurken Consumer API (Tüketici API’si) kullanılır.
 
-    Daha fazla bilgi için [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
+    Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
 
-* **Stream işleme**: Kafka genellikle gerçek zamanlı akış işleme için Apache Storm veya Spark ile birlikte kullanılır. Kafka 0.10.0.0 (HDInsight sürüm 3.5 ve 3.6), Storm ya da Spark gerektirmeden akış çözümleri oluşturmanızı sağlayan bir akış API’sini kullanıma sunmuştur.
+* **Akış işleme**: Kafka, genellikle gerçek zamanlı akış işleme için Apache Storm veya Spark ile birlikte kullanılır. Kafka 0.10.0.0 (HDInsight sürüm 3.5 ve 3.6), Storm ya da Spark gerektirmeden akış çözümleri oluşturmanızı sağlayan bir akış API’sini kullanıma sunmuştur.
 
-    Daha fazla bilgi için [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
+    Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
 
-* **Yatay ölçek**: Kafka, HDInsight kümesindeki düğümler arasında akış bölümleri. Kayıtlar kullanılırken yük dengeleme sağlamak üzere tüketici işlemleri, tek bölümlerle ilişkilendirilebilir.
+* **Yatay ölçek**: Kafka bölümleri, HDInsight kümesindeki düğümler arasında akışlar. Kayıtlar kullanılırken yük dengeleme sağlamak üzere tüketici işlemleri, tek bölümlerle ilişkilendirilebilir.
 
-    Daha fazla bilgi için [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
+    Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
 
-* **Sıralı teslim**: Her bölüm kayıtlar alındıkları sırayla akışa depolanır. Bölüm başına bir tüketici işlemi ile ilişkilendirerek, kayıtların sırayla işlenmesini garanti edebilirsiniz.
+* **Sıralı teslim**: Her bölümde kayıtlar, alındıkları sırada akışta saklanır. Bölüm başına bir tüketici işlemi ile ilişkilendirerek, kayıtların sırayla işlenmesini garanti edebilirsiniz.
 
-    Daha fazla bilgi için [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
+    Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).
 
 ## <a name="use-cases"></a>Uygulama alanları
 
-* **Mesajlaşma**: Yayımlama desteklediğinden-abone ol ileti modelini, Kafka genellikle ileti aracısı olarak kullanılır.
+* **Mesajlaşma**: Yayımla-abone ol ileti modelini desteklediğinden, Kafka genellikle bir ileti Aracısı olarak kullanılır.
 
-* **Etkinlik izleme**: Kafka, kayıtların sıralı günlüğü sağlar. bu yana, izlemek ve etkinlikleri yeniden oluşturmak için kullanılabilir. Örneğin, bir web sitesindeki veya uygulamadaki kullanıcı işlemleri.
+* **Etkinlik izleme**: Kafka, kayıtların sıralı olarak günlüğe kaydedilmesini sağladığından etkinlikleri izlemek ve yeniden oluşturmak için kullanılabilir. Örneğin, bir web sitesindeki veya uygulamadaki kullanıcı işlemleri.
 
-* **Toplama**: Akış işleme kullanarak, birleştirmek ve işletimsel verileri bilgisini merkezileştirmek için farklı akışlarından bilgi toplayabilirsiniz.
+* **Toplama**: Akış işlemeyi kullanarak, bilgileri bir işlem verileriyle birleştirmek ve merkezileştirmek için farklı akışlardan bilgi toplayabilirsiniz.
 
-* **Dönüştürme**: Akış işlemeyi kullanarak, birleştirmek ve verileri birden fazla girdi konu birine zenginleştirmek veya daha fazla çıktı konu.
+* **Dönüştürme**: Akış işlemeyi kullanarak, birden çok Giriş konusunun verilerini bir veya daha fazla çıktı konu başlığı içinde birleştirebilir ve zenginleştirebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -97,4 +97,4 @@ HDInsight’ta Apache Kafka kullanma hakkında bilgi almak için aşağıdaki ba
 
 * [Öğretici: HDInsight üzerinde Apache Kafka ile Apache Spark kullanma](../hdinsight-apache-spark-with-kafka.md)
 
-* [Öğretici: Apache Storm'u HDInsight üzerinde Apache Kafka ile kullanma](../hdinsight-apache-storm-with-kafka.md)
+* [Öğretici: HDInsight üzerinde Apache Kafka ile Apache Storm kullanma](../hdinsight-apache-storm-with-kafka.md)

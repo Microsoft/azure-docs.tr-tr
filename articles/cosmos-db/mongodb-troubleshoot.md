@@ -1,37 +1,38 @@
 ---
-title: Mongo DB için Azure Cosmos DB'nin API'sindeki sık karşılaşılan hataları giderme
-description: Bu belge, MongoDB için Azure Cosmos DB'nin API'SİNDE karşılaşılan genel sorunları gidermek için yollar ele alınmaktadır.
+title: Mongo DB için Azure Cosmos DB API 'sindeki yaygın hataların sorunlarını giderme
+description: Bu belgede, MongoDB için Azure Cosmos DB API 'sinde karşılaşılan yaygın sorunları gidermeye yönelik yollar ele alınmaktadır.
 author: roaror
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.topic: conceptual
 ms.date: 06/05/2019
 ms.author: roaror
-ms.openlocfilehash: 5b3d3993a497240c1ea18f0fcf852c0e834f6e79
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ece975fa37e500b1c160210684a0cb46e719c48b
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66735714"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754965"
 ---
-# <a name="troubleshoot-common-issues-in-azure-cosmos-dbs-api-for-mongodb"></a>MongoDB için Azure Cosmos DB'nin API'sindeki yaygın sorunlarını giderme
+# <a name="troubleshoot-common-issues-in-azure-cosmos-dbs-api-for-mongodb"></a>MongoDB için Azure Cosmos DB API 'sindeki yaygın sorunları giderme
 
-Azure Cosmos DB MongoDB dahil olmak üzere sık kullanılan NoSQL veritabanları kablo protokollerin uygular. Hat üzeri protokol uygulanması nedeniyle, mevcut istemci SDK'ları, sürücüler ve NoSQL veritabanları ile çalışan araçları kullanarak şeffaf bir şekilde Azure Cosmos DB ile etkileşim kurabilir. Azure Cosmos DB, kablo ile uyumlu API'leri herhangi bir NoSQL veritabanı sağlamak için herhangi bir kaynak kod veritabanı kullanmaz. Azure Cosmos DB'ye kablo protokolü sürümleri anlayan herhangi bir MongoDB istemcisi sürücüsünü bağlanabilirsiniz.
+Azure Cosmos DB, MongoDB dahil olmak üzere yaygın NoSQL veritabanlarının tel protokollerini uygular. Kablo protokol uygulamasına bağlı olarak, NoSQL veritabanlarıyla çalışan mevcut istemci SDK 'larını, sürücüleri ve araçları kullanarak Azure Cosmos DB ile şeffaf bir şekilde etkileşim kurabilirsiniz. Azure Cosmos DB, NoSQL veritabanlarının herhangi biri için kablo ile uyumlu API 'Ler sağlamak üzere veritabanlarının herhangi bir kaynak kodunu kullanmaz. Tel Protokolü sürümlerini anlayan tüm MongoDB istemci sürücüleri, Azure Cosmos DB bağlanabilir.
 
-Azure Cosmos DB'nin MongoDB API'si, Mongodb'nin kablo protokolünü (sorgu işleçlerini ve 3.4 sürümünde eklenen özellikler şu anda önizleme olarak kullanılabilir) 3.2 sürümü ile uyumlu olsa da, Azure Cosmos DB için karşılık gelen bazı özel hata kodları vardır belirli hataları. Bu makalede, farklı hatalar, hata kodları ve bu hataları gidermek için adımları açıklanmaktadır.
+MongoDB için Azure Cosmos DB API 'SI, MongoDB 'nin kablo protokolünün 3,2 sürümüyle uyumlu olsa da (sürüm 3,4 ' de eklenen sorgu işleçleri ve Özellikler Şu anda önizleme olarak kullanılabilir), Azure Cosmos DB karşılık gelen bazı özel hata kodları vardır belirli hatalar. Bu makalede farklı hatalar, hata kodları ve bu hataları gidermek için gereken adımlar açıklanmaktadır.
 
-## <a name="common-errors-and-solutions"></a>Genel hatalar ve çözümleri
+## <a name="common-errors-and-solutions"></a>Yaygın hatalar ve çözümler
 
-| Hata               | Kod  | Açıklama  | Çözüm  |
+| Hata               | Kodlayın  | Açıklama  | Çözüm  |
 |---------------------|-------|--------------|-----------|
-| TooManyRequests     | 16500 | İstek birimleri tüketilen toplam sayısı, koleksiyon için sağlanan istek birimi hızdan daha ve kısıtlanan. | Azure portalından bir kapsayıcı veya bir dizi kapsayıcıları atanan aktarım hızını ölçeklendirmeyi düşünün veya işlemi yeniden deneyin. |
-| ExceededMemoryLimit | 16501 | Çok kiracılı bir hizmet, istemcinin bellek birimi işlemi geçti. | Destek ile iletişime geçin veya daha kısıtlayıcı bir sorgu ölçütü ile bir işlem kapsamını azaltın [Azure portalında](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade). Örnek: `db.getCollection('users').aggregate([{$match: {name: "Andy"}}, {$sort: {age: -1}}]))` |
-| MongoDB kablo sürüm sorunları | - | MongoDB sürücüleri eski sürümleri Azure Cosmos hesabın adını, bağlantı dizelerini algılayamaz. | Append *appName = @**accountName** @*  MongoDB bağlantı dizesi, Cosmos DB'nin API'sini sonunda burada ***accountName*** Cosmos DB hesabının adıdır . |
+| TooManyRequests     | 16500 | Tüketilen istek birimlerinin toplam sayısı, koleksiyonun sağlanan istek birimi hızından daha fazla ve kısıtlanmış. | Azure portal bir kapsayıcıya veya bir kapsayıcı kümesine atanmış üretilen işi ölçeklendirebilir veya işlemi yeniden deneyebilirsiniz. |
+| ExceededMemoryLimit | 16501 | Çok kiracılı bir hizmet olarak, işlem istemcinin bellek işlem biriminden çıktı. | Daha kısıtlayıcı sorgu ölçütleri aracılığıyla işlemin kapsamını azaltın veya [Azure Portal](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade)destek ekibiyle iletişime geçin. Örnek: `db.getCollection('users').aggregate([{$match: {name: "Andy"}}, {$sort: {age: -1}}]))` |
+| Belirtilen order by öğesine karşılık gelen dizin yolu hariç tutulur/order by sorgusunda, kendisine sunulabilecek bir bileşik dizin yoktur. | 2 | Sorgu, dizini oluşturulmamış bir alana sıralama isteğinde bulunur. | Denenen sıralama sorgusu için eşleşen bir dizin (veya bileşik dizin) oluşturun. |
+| MongoDB hat sürümü sorunları | - | MongoDB sürücülerinin eski sürümleri, bağlantı dizelerindeki Azure Cosmos hesabının adını algılayamaz. | MongoDB bağlantı dizesi için Cosmos DB API 'sinin sonundaki *@AppName = @**AccountName***  , burada ***AccountName*** Cosmos DB hesabınızın adıdır. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi edinmek için nasıl [Studio 3T kullanma](mongodb-mongochef.md) Azure Cosmos DB'nin MongoDB API'si ile.
-- Bilgi edinmek için nasıl [Robo 3T kullanma](mongodb-robomongo.md) Azure Cosmos DB'nin MongoDB API'si ile.
-- MongoDB keşfedin [örnekleri](mongodb-samples.md) Azure Cosmos DB'nin MongoDB API'si ile.
+- [Studio 3T](mongodb-mongochef.md) 'ı Azure Cosmos DB MongoDB IÇIN API 'si ile nasıl kullanacağınızı öğrenin.
+- MongoDB için Azure Cosmos DB API 'SI ile [Robo 3T kullanmayı](mongodb-robomongo.md) öğrenin.
+- MongoDB için Azure Cosmos DB API 'siyle MongoDB [örneklerini](mongodb-samples.md) gezin.
 

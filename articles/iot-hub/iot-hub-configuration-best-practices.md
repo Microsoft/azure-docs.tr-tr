@@ -1,93 +1,93 @@
 ---
-title: Azure IOT Hub için cihaz yapılandırma en iyi yöntemler | Microsoft Docs
-description: IOT cihazlarını uygun ölçekte yapılandırmak için en iyi uygulamalar hakkında bilgi edinin
+title: Azure IoT Hub için cihaz yapılandırması en iyi yöntemleri | Microsoft Docs
+description: IoT cihazlarını ölçeklendirmede bulunan yinelenen ve karmaşık görevleri en aza indirmek için otomatik cihaz yönetimini kullanmaya yönelik en iyi yöntemler hakkında bilgi edinin.
 author: chrisgre
 ms.author: chrisgre
 ms.date: 06/28/2019
 ms.topic: conceptual
 ms.service: iot-hub
 services: iot-hub
-ms.openlocfilehash: 33e77d63b958df292ee9b4ac8ded41f3693cb6bc
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: a3b70af71c2ce19835ac2ef8fc8ceed79ca5fe1a
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67485805"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73889524"
 ---
-# <a name="best-practices-for-device-configuration-within-an-iot-solution"></a>Bir IOT çözüm içinde cihaz yapılandırması için en iyi uygulamalar
+# <a name="best-practices-for-device-configuration-within-an-iot-solution"></a>IoT çözümünde cihaz yapılandırması için en iyi uygulamalar
 
-Azure IOT hub otomatik cihaz Yönetimi döngülerini tamamına büyük cihaz filolarına yönetme çok sayıda yinelenen ve karmaşık görevleri otomatik hale getirir. Bu makalede, geliştirme ve IOT çözümünü işletim birçok dahil çeşitli rolleri için en iyi tanımlar.
+Azure IoT Hub otomatik cihaz yönetimi, büyük cihaz filliklerini tümüyle yaşam döngülerine göre yönetmenin çok sayıda yinelenen ve karmaşık görevi otomatikleştirir. Bu makalede, IoT çözümünü geliştirme ve çalıştırma konusunda yer alan çeşitli roller için en iyi uygulamaların birçoğu tanımlanmaktadır.
 
-* **IOT donanım üreticisi/entegratörü:** IOT donanım üreticileri çeşitli üretici veya tedarikçileri üretilen veya başka üreticiler tarafından tümleşik bir IOT dağıtımı için donanım sağlayarak donanım derleyerek tümleştiricileri. Geliştirme ve üretici yazılımı, katıştırılmış işletim sistemleri ve ekli yazılımdan tümleştirme söz konusu.
+* **IoT donanım üreticisi/tümleştirici:** IoT donanım üreticileri, tümleştiricileri çeşitli üreticilerin donanımını veya diğer tedarikçiler tarafından üretilen veya tümleştirilmiş bir IoT dağıtımı için donanım sağlayan tedarikçilerden oluşur. Üretici yazılımı, katıştırılmış işletim sistemleri ve ekli yazılımların geliştirilmesi ve tümleştirilmesine dahil değildir.
 
-* **IOT çözümü geliştirme:** Bir IOT çözümünün geliştirilmesini, genellikle bir çözüm geliştirici tarafından yapılır. Bu geliştirici, şirket içi bir takım veya bu etkinliğe uzmanlaşan bir sistem tümleştiricisi parçası olabilir. IOT çözümü geliştirme çeşitli bileşenlerinin sıfırdan IOT çözümü geliştirmek, çeşitli standart veya açık kaynak bileşenlerini tümleştirmek veya özelleştirme bir [IOT Çözüm Hızlandırıcısı](/azure/iot-accelerators/).
+* **IoT çözüm geliştiricisi:** IoT çözümünün geliştirilmesi genellikle çözüm geliştiricisi tarafından yapılır. Bu geliştirici, bu etkinlikte bir şirket içi ekibin veya bir sistem tümleştirici 'nin bir parçası olabilir. IoT çözüm geliştiricisi, IoT çözümünün çeşitli bileşenlerini sıfırdan geliştirebilir, çeşitli standart veya açık kaynaklı bileşenleri tümleştirebilir veya bir [IoT çözüm hızlandırıcıyı](/azure/iot-accelerators/)özelleştirebilir.
 
-* **IOT çözümü işleci:** IOT çözümü dağıtıldıktan sonra uzun süreli işlem, izleme, yükseltme ve bakım gerektirir. Bu görevler, bilgi teknolojisi uzmanları, donanım işlemler ve Bakım takımlar ve kim genel IOT altyapının doğru davranışları etki alanı uzmanlarıyla oluşan bir şirket içi ekibi tarafından yapılabilir.
+* **IoT çözüm operatörü:** IoT çözümü dağıtıldıktan sonra uzun süreli işlemler, izleme, yükseltmeler ve bakım gerektirir. Bu görevler, bilgi teknolojisi uzmanları, donanım işlemleri ve bakım ekipleri ve genel IoT altyapısının doğru davranışını izleyen etki alanı uzmanlarından oluşan bir şirket içi ekip tarafından yapılabilir.
 
-## <a name="understand-automatic-device-management-for-configuring-iot-devices-at-scale"></a>IOT cihazlarını uygun ölçekte yapılandırmak için otomatik cihaz yönetimini anlama
+## <a name="understand-automatic-device-management-for-configuring-iot-devices-at-scale"></a>IoT cihazlarını ölçekli olarak yapılandırmak için otomatik cihaz yönetimini anlama
 
-Otomatik cihaz Yönetimi'ni içeren birçok yararından biri [cihaz ikizlerini](iot-hub-devguide-device-twins.md) ve [modül ikizlerini](iot-hub-devguide-module-twins.md) istenen ve bildirilen durumlar cihazlar ve bulut arasında eşitlenecek. [Otomatik cihaz yapılandırmaları](iot-hub-auto-device-config.md) otomatik olarak büyük çiftleri kümesini güncelleştirmek ve ilerleme durumunu ve uyumluluğunu özetler. Otomatik cihaz Yönetimi aşağıdaki üst düzey adımları açıklamak geliştirilen ve kullanılır:
+Otomatik cihaz yönetimi, bulut ve cihazlar arasında istenen ve bildirilen durumları eşzamanlı hale getirmek için [cihaz](iot-hub-devguide-device-twins.md) ikiklerini ve [Modül](iot-hub-devguide-module-twins.md) iklerini içerir. [Otomatik cihaz yapılandırması](iot-hub-auto-device-config.md) büyük sayıda TWINS kümesini otomatik olarak güncelleştirir ve ilerleme ve uyumluluğu özetler. Aşağıdaki üst düzey adımlarda otomatik cihaz yönetiminin nasıl geliştirildiğini ve kullanıldığını anlatmaktadır:
 
-* **IOT donanım üreticisi/entegratörü** kullanarak katıştırılmış uygulama içinde cihaz yönetimi özellikleri uygulayan [cihaz ikizlerini](iot-hub-devguide-device-twins.md). Bu özellikler, üretici yazılımı güncelleştirmelerini, yazılım yükleme ve güncelleştirme ve ayar yönetimi dahil olabilir.
+* **IoT donanım üreticisi/tümleştiricisi** , Device [TWINS](iot-hub-devguide-device-twins.md)kullanarak eklenmiş bir uygulama içinde cihaz yönetim özellikleri uygular. Bu özellikler üretici yazılımı güncelleştirmeleri, yazılım yükleme ve güncelleştirme ve ayar yönetimine dahil olabilir.
 
-* **IOT çözüm geliştirici** cihaz yönetimi işlemleri kullanarak yönetim katmanı uygulayan [cihaz ikizlerini](iot-hub-devguide-device-twins.md) ve [otomatik cihaz yapılandırmaları](iot-hub-auto-device-config.md). Çözüm, cihaz yönetim görevlerini gerçekleştirmek için bir işleç arabirimi tanımlama içermelidir.
+* **IoT çözüm geliştiricisi** cihaz yönetim işlemlerinin yönetim katmanını ve [cihaz](iot-hub-devguide-device-twins.md) iklerini ve [otomatik cihaz yapılandırmasını](iot-hub-auto-device-config.md)uygular. Çözüm, cihaz yönetimi görevlerini gerçekleştirmek için bir operatör arabirimi tanımlamayı içermelidir.
 
-* **IOT çözüm işleci** kullanan IOT çözümü birlikte özellikle cihazları için cihaz yönetim görevlerini gerçekleştirmek için yapılandırma değişiklikleri gibi üretici yazılımı güncelleştirmelerini başlatma, ilerlemeyi izlemek ve sorunlarını giderme sorunları ortaya çıkar.
+* **IoT çözüm işletmeni** , cihaz yönetimi görevlerini gerçekleştirmek için IoT çözümünü, özellikle de cihazları gruplamak, bellenim güncelleştirmeleri gibi yapılandırma değişiklikleri başlatmak, ilerlemeyi izlemek ve ortaya çıkan sorunları gidermek için kullanır.
 
-## <a name="iot-hardware-manufacturerintegrator"></a>IOT donanım üreticisi/entegratörü
+## <a name="iot-hardware-manufacturerintegrator"></a>IoT donanım üreticisi/tümleştirici
 
-Donanım üreticileri ve katıştırılmış yazılım geliştirme ile ilgili entegratörleri için en iyi uygulamalar şunlardır:
+Aşağıda, donanım üreticileri ve tümleşik yazılım geliştirme ile ilgili tümleştirmelerde en iyi yöntemler verilmiştir:
 
-* **Uygulama [cihaz ikizlerini](iot-hub-devguide-device-twins.md):** Cihaz ikizlerini eşitleme istenen yapılandırma buluttan ve geçerli yapılandırmanıza ve cihaz özelliklerini raporlamak etkinleştirin. Cihaz ikizlerini katıştırılmış uygulamalar içinde uygulamak için en iyi yollarından biri sayesinde [Azure IOT SDK'ları](https://github.com/Azure/azure-iot-sdks). İçin cihaz ikizlerini yapılandırması için en uygun bunlar:
+* **[Cihaz TWINS](iot-hub-devguide-device-twins.md)'i Uygula:** Cihaz TWINS, istenen yapılandırmayı buluttan eşitlemeye ve geçerli yapılandırma ve cihaz özelliklerini raporlamaya olanak tanır. Katıştırılmış uygulamalarda cihaz ikizlerini uygulamanın en iyi yolu [Azure IoT SDK 'ları](https://github.com/Azure/azure-iot-sdks)kullanmaktır. Cihaz İkileri yapılandırma için en iyi seçenektir:
 
-    * Çift yönlü iletişimi destekler.
-    * Her iki bağlı ve bağlantısı kesilmiş cihaz durumları için izin verin.
-    * Son tutarlılık ilkesini izleyin.
-    * Bulutta tam olarak sorgulanabilir ' dir.
+    * İki yönlü iletişimi destekler.
+    * Hem bağlı hem de bağlantısı kesilen cihaz durumlarına izin verin.
+    * Nihai tutarlılık ilkesini izleyin.
+    * Bulutta tamamen ilişkiiyor.
 
-* **Cihaz yönetimi için cihaz ikizi yapısı:** Cihaz ikizi, cihaz yönetim özelliklerini mantıksal olarak birlikte bölümler halinde gruplandırılmıştır şekilde yapılandırılmalıdır. Bunun yapılması, yapılandırma değişiklikleri ikizinin diğer bölümleri etkilemeden yalıtılmış olması olanak sağlar. Örneğin, üretici yazılımı, yazılım, başka bir bölüme için istenen özellikler bir bölümündeki oluşturun ve ağ ayarlarını bir üçüncü bölümü. 
+* Cihaz **yönetimi için cihaz Ikizi yapısı:** Cihaz ikizi, cihaz yönetimi özellikleri mantıksal olarak bölümler halinde gruplandırılarak yapılandırılmalıdır. Bunun yapılması, ikizi 'in diğer bölümlerini etkilemeden yapılandırma değişikliklerinin yalıtılmasını sağlayacaktır. Örneğin, üretici yazılımı için istenen özellikler içinde bir bölüm, yazılım için başka bir bölüm ve ağ ayarları için üçüncü bir bölüm oluşturun. 
 
-* **Cihaz yönetimi için yararlı olan rapor cihaz öznitelikleri:** Fiziksel cihazı gibi öznitelikleri marka ve model, üretici yazılımı, işletim sistemi, seri numarası, ve diğer tanımlayıcıları yapılandırma değişiklikleri hedeflemek için parametre olarak ve raporlama için kullanışlıdır.
+* **Cihaz yönetimi için yararlı olan rapor cihaz öznitelikleri:** Fiziksel cihaz oluşturma ve model, üretici yazılımı, işletim sistemi, seri numarası ve diğer tanımlayıcılar gibi öznitelikler, raporlama ve yapılandırma değişikliklerini hedeflemek için yararlıdır.
 
-* **Durumunu ve ilerlemesini raporlama için ana durumları tanımlayın:** Böylece işleci için bildirilen üst düzey durumlar listelenmiş. Örneğin, üretici yazılımı güncelleştirme durumunu geçerli, indirme, uygulama, devam eden ve hata olarak rapor. Daha fazla bilgi için ek alanlar üzerinde her bir durum tanımlayın.
+* **Raporlama durumu ve ilerleme durumunun ana durumlarını tanımlayın:** Üst düzey durumlar, işlecine raporlanabilmesi için numaralandırılmalıdır. Örneğin, bir bellenim güncelleştirmesi durumu geçerli, karşıdan yükleme, uygulama, devam ediyor ve hata olarak raporlayabilir. Her durum hakkında daha fazla bilgi için ek alanlar tanımlayın.
 
-## <a name="iot-solution-developer"></a>IOT çözümü geliştirme
+## <a name="iot-solution-developer"></a>IoT çözüm geliştiricisi
 
-Azure'da tabanlı sistemler oluşturmaya IOT çözüm geliştiriciler için en iyi uygulamalar şunlardır:
+Aşağıda, Azure 'a dayalı sistemler oluşturan IoT çözüm geliştiricileri için en iyi yöntemler verilmiştir:
 
-* **Uygulama [cihaz ikizlerini](iot-hub-devguide-device-twins.md):** Cihaz ikizlerini eşitleme istenen yapılandırma buluttan ve geçerli yapılandırmanıza ve cihaz özelliklerini raporlamak etkinleştirin. Cihaz ikizlerini bulut çözümleri uygulamaları içinde uygulamak için en iyi yollarından biri sayesinde [Azure IOT SDK'ları](https://github.com/Azure/azure-iot-sdks). İçin cihaz ikizlerini yapılandırması için en uygun bunlar:
+* **[Cihaz TWINS](iot-hub-devguide-device-twins.md)'i Uygula:** Cihaz TWINS, istenen yapılandırmayı buluttan eşitlemeye ve geçerli yapılandırma ve cihaz özelliklerini raporlamaya olanak tanır. Bulut çözümleri uygulamalarında cihaz ikizlerini uygulamanın en iyi yolu [Azure IoT SDK 'ları](https://github.com/Azure/azure-iot-sdks)kullanmaktır. Cihaz İkileri yapılandırma için en iyi seçenektir:
 
-    * Çift yönlü iletişimi destekler.
-    * Her iki bağlı ve bağlantısı kesilmiş cihaz durumları için izin verin.
-    * Son tutarlılık ilkesini izleyin.
-    * Bulutta tam olarak sorgulanabilir ' dir.
+    * İki yönlü iletişimi destekler.
+    * Hem bağlı hem de bağlantısı kesilen cihaz durumlarına izin verin.
+    * Nihai tutarlılık ilkesini izleyin.
+    * Bulutta tamamen ilişkiiyor.
 
-* **Cihaz ikizi etiketleri kullanarak cihazları düzenleyin:** Çözüm, kalite halkaları ya da diğer cihazları kanarya gibi çeşitli dağıtım stratejilerini göre kümesini tanımlamak işleç izin vermelidir. Çözümünüz içinde cihaz ikizi etiketleri kullanarak cihaz kuruluş uygulanabilir ve [sorguları](iot-hub-devguide-query-language.md). Cihaz kuruluş için yapılandırma sunulmasını güvenli bir şekilde ve doğru bir şekilde izin vermek gereklidir.
+* **Cihaz ikizi etiketlerini kullanarak cihazları düzenleyin:** Çözüm, işlecin, Canary gibi çeşitli dağıtım stratejilerine göre kalite halkalarını veya diğer cihaz kümelerini tanımlamasına izin vermelidir. Cihaz organizasyonu, cihaz ikizi etiketleri ve [sorguları](iot-hub-devguide-query-language.md)kullanılarak çözümünüz dahilinde uygulanabilir. Cihaz organizasyonu, yapılandırma için güvenli ve doğru bir şekilde izin vermek üzere gereklidir.
 
-* **Uygulama [otomatik cihaz yapılandırmaları](iot-hub-auto-device-config.md):** Otomatik cihaz yapılandırmaları dağıtma ve cihaz ikizlerini aracılığıyla IOT cihazlarının daha büyük kümeleri için izleme yapılandırmasını değiştirir.
+* **[Otomatik cihaz yapılandırmasını](iot-hub-auto-device-config.md)Uygula:** Otomatik cihaz yapılandırmaları, cihaz TWINS aracılığıyla büyük IoT cihazı kümelerinde yapılandırma değişikliklerini dağıtır ve izler.
 
-   Otomatik cihaz yapılandırmaları cihaz ikizlerini kümesi hedef **hedef koşulu** bir sorgudur ikizi etiketleri cihazda veya bildirilen özellikler. **Hedef içerik** içinde hedeflenen cihaz ikizlerini ayarlanan istenen özellikleri kümesidir. İçerik hedef, IOT donanım üreticisi/entegratörü tarafından tanımlanan cihaz ikizi yapısı ile hizalamanız gerekir. **Ölçümleri** cihaz çifti sorguları bildirilen özellikler ve aynı zamanda IOT donanım üreticisi/entegratörü tarafından tanımlanan cihaz ikizi yapısı ile hizalamanız gerekir.
+   Otomatik cihaz yapılandırması, cihaz ikizi etiketlerinde veya bildirilen özelliklerde bir sorgu olan **hedef koşul** aracılığıyla cihaz ikimleri kümelerini hedef alır. **Hedef içerik** , hedeflenen cihaz TWINS 'i içinde ayarlanacak olan istenen özellikler kümesidir. Hedef içerik IoT donanım üreticisi/tümleştiricisi tarafından tanımlanan cihaz ikizi yapısıyla hizalanmalıdır. **Ölçümler** , Device ikizi raporlanan Özellikler üzerindeki sorgulardır ve ayrıca IoT donanım üreticisi/tümleştiricisi tarafından tanımlanan Device ikizi yapısıyla de hizalanmalıdır.
 
-   Otomatik cihaz yapılandırmaları, kısa süre içinde yapılandırma oluşturulduktan sonra ilk kez ve ardından beş dakikalık aralıklarla çalıştırın. Bunlar cihaz ikizi işlemleri hiçbir zaman aşan bir hızda IOT Hub'ından fayda [sınırları](iot-hub-devguide-quotas-throttling.md) cihaz ikizi okumaları ve güncelleştirmeler için.
+   Otomatik cihaz yapılandırmaları yapılandırma oluşturulduktan kısa bir süre sonra ve ardından beş dakikalık aralıklarla ilk kez çalışır. Ayrıca, cihaz ikizi okuma ve güncelleştirme için [azaltma limitlerini](iot-hub-devguide-quotas-throttling.md) hiçbir zaman aşmayacak bir hızda cihaz ikizi işlemleri gerçekleştirmeye IoT Hub de faydalanır.
 
-* **Kullanım [cihaz sağlama hizmeti](../iot-dps/how-to-manage-enrollments.md):** Çözüm geliştiricilerin kullanması gereken cihaz sağlama hizmeti yeni cihazları için cihaz ikizi etiketler atama tarafından otomatik olarak yapılandırılacak şekilde **otomatik cihaz yapılandırmaları** ikizlerini etiketi içeren, hedeflenen. 
+* **[Cihaz sağlama hizmetini](../iot-dps/how-to-manage-enrollments.md)kullanın:** çözüm geliştiricileri, cihaz ikizi etiketlerini yeni cihazlara atamak Için cihaz sağlama hizmeti 'ni kullanmalıdır. bu şekilde, bu etikete sahip TWINS 'e hedeflenmiş **otomatik cihaz yapılandırmalarına** göre otomatik olarak yapılandırılır. 
 
-## <a name="iot-solution-operator"></a>IOT çözümü işleci
+## <a name="iot-solution-operator"></a>IoT çözüm operatörü
 
-Azure üzerinde derlenen bir IOT çözümünü kullanarak IOT çözümü işleçleri için en iyi uygulamalar şunlardır:
+Aşağıda, Azure üzerinde oluşturulmuş bir IoT çözümü kullanan IoT çözüm işleçleri için en iyi yöntemler verilmiştir:
 
-* **Yönetim için cihazları düzenleyin:** IOT çözümü tanımlayın veya kalite halkaları oluşturma veya diğer kümeleri kanarya gibi çeşitli dağıtım stratejilerini bağlı cihazlar için izin gerekir. Cihazları kümesi yapılandırma değişiklikleri alma ve diğer ölçekli cihaz yönetimi işlemleri gerçekleştirmek için kullanılır.
+* **Cihazları yönetim Için Düzenle:** IoT çözümü, Canary gibi çeşitli dağıtım stratejilerine göre kalite halkaları veya diğer cihaz kümelerinin oluşturulmasını tanımlamalıdır veya buna izin verir. Cihaz kümeleri, yapılandırma değişikliklerini almak ve diğer ölçekte cihaz yönetimi işlemlerini gerçekleştirmek için kullanılacaktır.
 
-* **Yapılandırma değişiklikleri aşamalı kullanarak gerçekleştirin:**  Aşamalı yapabildiği değişiklikleri operatörün insanın ufkunu genişleten bir IOT cihazları kümesine dağıtır, genel bir işlemdir. Aşamalı olarak geniş ölçek bozucu değişiklikler yapma riskini azaltmak için değişiklik olmaktır.  İşleci, çözümün arabirimi oluşturmak için kullanmalısınız bir [otomatik cihaz yapılandırma](iot-hub-auto-device-config.md) ve hedefleme koşul cihazları (örneğin, kanarya bir grubu) başlangıç kümesi hedeflemelidir. İşleci, ardından cihaz ilk kümesini yapılandırma değişikliği doğrulamalıdır.
+* **Aşamalı kullanıma alma kullanarak yapılandırma değişiklikleri gerçekleştirin:**  Aşamalı bir işlem, bir işlecin, bir dizi IoT cihazında değişiklikleri dağıttığı genel bir işlemdir. Amaç, geniş ölçekli büyük değişiklikler yapma riskini azaltmak için değişiklikler yavaş yavaş yapılır.  Operatör, bir [otomatik cihaz yapılandırması](iot-hub-auto-device-config.md) oluşturmak için çözümün arabirimini kullanmalıdır ve hedefleme koşulu bir ilk cihaz kümesini (örneğin, Kanarya grubu) hedeflemelidir. Sonra operatör ilk cihaz kümesindeki yapılandırma değişikliğini doğrulamalıdır.
 
-   Doğrulama tamamlandıktan sonra işleci daha büyük bir cihaz eklemek için otomatik cihaz yapılandırmasını güncelleştirir. İşleç önceliği yapılandırmasının şu anda bu cihazları hedefleyen diğer yapılandırmalar daha yüksek olması de ayarlamanız gerekir. Otomatik cihaz yapılandırması tarafından bildirilen ölçümleri kullanarak dağıtım izlenebilir.
+   Doğrulama tamamlandıktan sonra operatör, otomatik cihaz yapılandırmasını daha büyük bir cihaz kümesi içerecek şekilde güncelleştirir. Operatör Ayrıca yapılandırmanın önceliğini, bu cihazlara yönelik olarak şu anda hedeflenen diğer yapılandırmalardan daha yüksek olacak şekilde ayarlamış olmalıdır. Kullanıma alma, otomatik cihaz yapılandırması tarafından bildirilen ölçümler kullanılarak izlenebilir.
 
-* **Hataları veya yanlış yapılandırmalarını durumunda geri alma işlemleri gerçekleştirin:**  Hata veya yanlış yapılandırmalarını neden olan otomatik cihaz yapılandırmasını değiştirerek geri alınabilir **koşul hedefleyen** böylece cihazlar artık hedefleme koşulu karşılamıyor. Düşük öncelikli başka bir otomatik cihaz yapılandırmasını, bu cihazlar için hala hedeflendiğinden emin olun. Geri alma ölçümleri görüntüleyerek başarılı olduğunu doğrulayın: Toplu geri yapılandırma artık untargeted cihazlar için durumunu göstermesi gerekir ve ikinci yapılandırma ölçümleri artık hala hedeflenen cihazlar için sayımları içerir.
+* **Hata veya yanlış yapılandırma durumunda geri alma Işlemleri gerçekleştirin:**  Hatalara veya hata yapılandırmasına neden olan bir otomatik cihaz yapılandırması, cihazların hedefleme koşulunu artık karşılamaz şekilde **hedefleme koşulu** değiştirilerek geri alınabilir. Daha düşük önceliğe sahip başka bir otomatik cihaz yapılandırmasının hala bu cihazlar için hedeflediğinden emin olun. Ölçümleri görüntüleyerek geri almanın başarılı olduğunu doğrulayın: geri alma yapılandırması artık hedeflenmemiş cihazların durumunu göstermemelidir ve ikinci yapılandırmanın ölçümleri artık hedeflenmiş cihazların sayısını içermelidir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Cihaz ikizlerini uygulama hakkında bilgi edinmek [IOT hub'daki cihaz ikizlerini kavrama ve kullanma](iot-hub-devguide-device-twins.md).
+* Cihaz ikizlerini [anlama ve IoT Hub cihaz TWINS kullanma](iot-hub-devguide-device-twins.md)hakkında bilgi edinin.
 
-* Oluşturmak, güncelleştirmek veya silmek otomatik cihaz yapılandırması için adımlarında yol [yapılandırma ve izleme IOT cihazlarını uygun ölçekte](iot-hub-auto-device-config.md).
+* [IoT cihazlarını yapılandırma ve izleme](iot-hub-auto-device-config.md)bölümünde otomatik cihaz yapılandırması oluşturma, güncelleştirme veya silme adımlarını gözden geçir.
 
-* Cihaz ikizleri ve otomatik cihaz yapılandırmalarında kullanarak bir üretici yazılımı güncelleştirme desenini uygulama [Öğreticisi: Cihaz üretici yazılımı güncelleştirme işlemini uygulamak](tutorial-firmware-update.md).
+* Cihaz TWINS ve otomatik cihaz yapılandırması kullanarak bir bellenim güncelleştirme modelini uygulama [öğretici: bir cihaz üretici yazılımı güncelleştirme Işlemi uygulayın](tutorial-firmware-update.md).

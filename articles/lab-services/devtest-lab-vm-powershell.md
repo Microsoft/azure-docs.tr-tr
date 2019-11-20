@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell ile DevTest labs'deki bir sanal makine oluşturun. | Microsoft Docs
-description: Oluşturma ve Azure PowerShell ile sanal makineleri yönetmek için Azure DevTest Labs'i kullanmayı öğrenin.
+title: Azure PowerShell ile DevTest Labs 'de sanal makine oluşturma | Microsoft Docs
+description: Azure PowerShell ile sanal makineler oluşturmak ve yönetmek için Azure DevTest Labs nasıl kullanacağınızı öğrenin.
 services: devtest-lab,virtual-machines,lab-services
 documentationcenter: na
 author: spelluru
@@ -13,24 +13,24 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/02/2019
 ms.author: spelluru
-ms.openlocfilehash: a9629cd14c71a163612c2c4ba3c7b109a52b91ad
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1a6938bd541e316dbe9f333c670c382faab6ad21
+ms.sourcegitcommit: 470041c681719df2d4ee9b81c9be6104befffcea
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60622448"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67854259"
 ---
-# <a name="create-a-virtual-machine-with-devtest-labs-using-azure-powershell"></a>Azure PowerShell kullanarak DevTest Labs ile bir sanal makine oluşturun
-Bu makalede Azure PowerShell kullanarak Azure DevTest Labs'de sanal makine oluşturma işlemini gösterir. Azure DevTest labs'deki bir laboratuvara sanal makinelerin oluşturmayı otomatikleştirmek için PowerShell komut dosyalarını kullanabilirsiniz. 
+# <a name="create-a-virtual-machine-with-devtest-labs-using-azure-powershell"></a>Azure PowerShell kullanarak DevTest Labs ile sanal makine oluşturma
+Bu makalede Azure PowerShell kullanarak Azure DevTest Labs sanal makine oluşturma gösterilmektedir. Azure DevTest Labs bir laboratuvarda sanal makine oluşturulmasını otomatikleştirmek için PowerShell betikleri kullanabilirsiniz. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 Başlamadan önce:
 
-- [Bir laboratuvar oluşturma](devtest-lab-create-lab.md) komutları ve komut dosyası, bu makaledeki test etmek için var olan bir laboratuvar kullanmak istemiyorsanız. 
-- [Azure PowerShell'i yükleme](/powershell/azure/install-az-ps?view=azps-1.7.0) veya Azure portalında tümleşik Azure Cloud Shell kullanın. 
+- Bu makaledeki betiği veya komutları test etmek için mevcut bir laboratuvarı kullanmak istemiyorsanız [bir laboratuvar oluşturun](devtest-lab-create-lab.md) . 
+- [Azure PowerShell yükleyip](/powershell/azure/install-az-ps?view=azps-1.7.0) Azure portal tümleştirilmiş Azure Cloud Shell kullanın. 
 
 ## <a name="powershell-script"></a>PowerShell betiği
-Bu bölümde örnek betikte [Invoke-AzResourceAction](/powershell/module/az.resources/invoke-azresourceaction?view=azps-1.7.0) cmdlet'i.  Bu cmdlet Laboratuvar kaynak kimliği, gerçekleştirilecek eylem adını alır (`createEnvironment`), ve gerekli parametreleri bu eylemi gerçekleştirin. Tüm sanal makine açıklama özellikleri içeren bir karma tablo parametrelerdir. 
+Bu bölümdeki örnek komut dosyası [Invoke-AzResourceAction](/powershell/module/az.resources/invoke-azresourceaction?view=azps-1.7.0) cmdlet 'ini kullanır.  Bu cmdlet, laboratuvarın kaynak kimliğini, gerçekleştirilecek eylemin adını (`createEnvironment`) ve bu eylemi gerçekleştirmek için gereken parametreleri alır. Parametreler, tüm sanal makine açıklaması özelliklerini içeren bir karma tablodur. 
 
 ```powershell
 [CmdletBinding()]
@@ -82,6 +82,7 @@ try {
           "labSubnetName"           = $labSubnetName;
           "notes"                   = "Windows Server 2016 Datacenter";
           "osType"                  = "windows"
+          "expirationDate"          = "2019-12-01"
           "galleryImageReference"   = @{
              "offer"     = "WindowsServer";
              "publisher" = "MicrosoftWindowsServer";
@@ -114,29 +115,29 @@ finally {
 }
 ```
 
-Yukarıdaki komut sanal makinenin özelliklerini işletim sistemi olarak Windows Server 2016 DataCenter ile bir sanal makine oluşturmak olanak tanır. Her sanal makine türü için bu özellikleri biraz farklı olacaktır. [Sanal makineyi tanımlama](#define-virtual-machine) bölümü, bu komut dosyasını kullanmak için hangi özellikleri belirlemek nasıl gösterir.
+Yukarıdaki betikteki sanal makine özellikleri, işletim sistemi olarak Windows Server 2016 DataCenter ile bir sanal makine oluşturmamıza olanak tanır. Her sanal makine türü için bu özellikler biraz farklı olacaktır. [Sanal makineyi tanımla](#define-virtual-machine) bölümü, bu betikte hangi özelliklerin kullanılacağını nasıl belirleyecağınızı gösterir.
 
-Aşağıdaki komutu bir dosya adı kaydedilmiş betik çalıştıran bir örnek sağlar: Oluştur-LabVirtualMachine.ps1. 
+Aşağıdaki komut, bir dosya adında kaydedilen betiği çalıştırmaya ilişkin bir örnek sağlar: Create-LabVirtualMachine. ps1. 
 
 ```powershell
  PS> .\Create-LabVirtualMachine.ps1 -ResourceGroupName 'MyLabResourceGroup' -LabName 'MyLab' -userName 'AdminUser' -password 'Password1!' -VMName 'MyLabVM'
 ```
 
-## <a name="define-virtual-machine"></a>Sanal makineyi tanımlama
-Bu bölümde, oluşturmak istediğiniz sanal makine türüne özgü özelliklerini alma işlemini göstermektedir. 
+## <a name="define-virtual-machine"></a>Sanal makineyi tanımla
+Bu bölümde, oluşturmak istediğiniz bir sanal makine türüne özgü özelliklerin nasıl alınacağı gösterilmektedir. 
 
 ### <a name="use-azure-portal"></a>Azure portalı kullanma
-Azure portalında bir VM oluştururken, bir Azure Resource Manager şablonu oluşturabilirsiniz. VM oluşturma işleminin tamamlanması gerekmez. Şablon görene kadar yalnızca adımları izleyin. Oluşturulan VM'yi bir laboratuvara zaten yoksa, gerekli JSON açıklama almak için en iyi yolu budur. 
+Azure portal bir VM oluştururken Azure Resource Manager şablonu oluşturabilirsiniz. VM oluşturma işlemini gerçekleştirmeniz gerekmez. Yalnızca şablonu görene kadar adımları izleyin. Bu, önceden oluşturulmuş bir laboratuvar VM 'si yoksa, gerekli JSON açıklamasını almanın en iyi yoludur. 
 
 1. [Azure portalına](https://portal.azure.com) gidin.
-2. Seçin **tüm hizmetleri** sol gezinti menüsünde.
-3. Arayın ve seçin **DevTest Labs** hizmetler listesinden. 
-4. Üzerinde **DevTest Labs** sayfasında, laboratuvarınızda Laboratuvar listesinde seçin.
-5. Laboratuvarınız için giriş sayfasında, seçin **+ Ekle** araç. 
-6. Seçin bir **temel görüntü** VM için. 
-7. Seçin **Otomasyon seçenekleri** yukarıdaki sayfanın alt kısmındaki **Gönder** düğmesi. 
-8. Gördüğünüz **Azure Resource Manager şablonu** sanal makine oluşturma. 
-9. JSON kesimdeki **kaynakları** bölümünde daha önce seçilen görüntü türüne ilişkin tanımı bulunur. 
+2. Sol gezinti menüsünde **tüm hizmetler** ' i seçin.
+3. Hizmetler listesinden **DevTest Labs** 'i arayın ve seçin. 
+4. **DevTest Labs** sayfasında laboratuvarınızı laboratuvar listesinden seçin.
+5. Laboratuvarınızın giriş sayfasında, araç çubuğunda **+ Ekle** ' yi seçin. 
+6. VM için bir **temel görüntü** seçin. 
+7. **Gönder** düğmesinin üstündeki sayfanın altındaki **Otomasyon seçeneklerini** belirleyin. 
+8. Sanal makineyi oluşturmak için **Azure Resource Manager şablonunu** görürsünüz. 
+9. **Kaynaklar** bölümündeki JSON segmenti, daha önce seçtiğiniz görüntü türünün tanımına sahiptir. 
 
     ```json
     {
@@ -176,18 +177,51 @@ Azure portalında bir VM oluştururken, bir Azure Resource Manager şablonu olu�
     }
     ```
 
-Bu örnekte, nasıl Azure Marketi görüntü tanımını almak bkz. Özel bir görüntü, bir formül olarak ayarlayın veya bir ortam tanımı aynı şekilde alabilirsiniz. Sanal makine için gerekli tüm yapıtlar ekleyin ve gerekli tüm Gelişmiş ayarlar. Gerekli alanları ve isteğe bağlı alanları için değerleri girdikten sonra önce seçerek **Otomasyon seçenekleri** düğmesi.
+Bu örnekte, bir Azure pazar yeri görüntüsünün tanımını nasıl kullanacağınızı görürsünüz. Aynı şekilde özel bir görüntünün, bir formülün veya ortamın tanımını alabilirsiniz. Sanal makine için gereken yapıtları ekleyin ve gerekli tüm gelişmiş ayarları ayarlayın. Gerekli alanlar için değerleri ve tüm isteğe bağlı alanları **Otomasyon seçenekleri** düğmesini seçmeden önce sağlamaktan sonra.
 
 ### <a name="use-azure-rest-api"></a>Azure REST API kullanma
-Aşağıdaki yordam, REST API kullanarak görüntü özelliklerini almak için adımları sunar: Bu adımlar, yalnızca bir laboratuvarda var olan bir VM için geçerlidir. 
+Aşağıdaki yordam REST API kullanarak bir görüntünün özelliklerini almak için adımlar sağlar: Bu adımlar yalnızca laboratuvardaki mevcut bir VM için çalışır. 
 
-1. Gidin [sanal makineler - liste](/rest/api/dtl/virtualmachines/list) sayfasında **deneyin** düğmesi. 
+1. [Sanal makineler-liste](/rest/api/dtl/virtualmachines/list) sayfasına gidin, **deneyin** düğmesini seçin. 
 2. **Azure aboneliğinizi** seçin.
-3. Girin **Laboratuvar için kaynak grubu**.
-4. Girin **Laboratuvar adı**. 
+3. **Laboratuvar için kaynak grubunu**girin.
+4. **Laboratuvarın adını**girin. 
 5. **Çalıştır**'ı seçin.
-6. Gördüğünüz **görüntü özelliklerini** VM oluşturulduğu üzerinde temel. 
+6. VM 'nin oluşturulduğu **görüntünün özelliklerini** görürsünüz. 
 
+## <a name="set-expiration-date"></a>Sona erme tarihi ayarla
+Eğitim, tanıtımlar ve denemeler gibi senaryolarda, sanal makineler oluşturmak ve bunları sabit bir süreden sonra otomatik olarak silmek isteyebilirsiniz, böylece gereksiz maliyetlere tabi kalmazsınız. PowerShell kullanarak, örnek [PowerShell betiği](#powershell-script) bölümünde gösterildiği gibi, bir VM için bir sona erme tarihi ayarlayabilirsiniz.
+
+Laboratuvardaki tüm mevcut VM 'Ler için sona erme tarihi ayarlayan örnek bir PowerShell betiği aşağıda verilmiştir:
+
+```powershell
+# Values to change
+$subscriptionId = '<Enter the subscription Id that contains lab>'
+$labResourceGroup = '<Enter the lab resource group>'
+$labName = '<Enter the lab name>'
+$VmName = '<Enter the VmName>'
+$expirationDate = '<Enter the expiration date e.g. 2019-12-16>'
+
+# Log into your Azure account
+Login-AzureRmAccount
+
+Select-AzureRmSubscription -SubscriptionId $subscriptionId
+$VmResourceId = "subscriptions/$subscriptionId/resourcegroups/$labResourceGroup/providers/microsoft.devtestlab/labs/$labName/virtualmachines/$VmName"
+
+$vm = Get-AzureRmResource -ResourceId $VmResourceId -ExpandProperties
+
+# Get all the Vm properties
+$VmProperties = $vm.Properties
+
+# Set the expirationDate property
+If ($VmProperties.expirationDate -eq $null) {
+    $VmProperties | Add-Member -MemberType NoteProperty -Name expirationDate -Value $expirationDate
+} Else {
+    $VmProperties.expirationDate = $expirationDate
+}
+
+Set-AzureRmResource -ResourceId $VmResourceId -Properties $VmProperties -Force
+```
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

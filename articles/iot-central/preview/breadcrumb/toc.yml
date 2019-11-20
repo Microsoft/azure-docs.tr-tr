@@ -1,0 +1,15 @@
+- name: Azure
+  tocHref: /azure
+  topicHref: /azure/index
+  items:
+    - name: Nesnelerin İnterneti
+      tocHref: /azure/iot-fundamentals/
+      topicHref: /azure/iot-fundamentals/index
+      items:
+        - name: IoT Central
+          tocHref: /azure/iot-central/
+          topicHref: /azure/iot-central/index
+          items:
+            - name: IoT Central (önizleme özellikleri)
+              tocHref: /azure/iot-central/
+              topicHref: /azure/iot-central/preview/index

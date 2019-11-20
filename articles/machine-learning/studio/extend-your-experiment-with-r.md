@@ -1,7 +1,7 @@
 ---
 title: R ile denemenizi genişletme
-titleSuffix: Azure Machine Learning Studio
-description: Azure Machine Learning Studio'da R dili ile R betiği yürütme modülünü kullanarak genişletmek nasıl.
+titleSuffix: ML Studio (classic) - Azure
+description: R dil aracılığıyla Azure Machine Learning Studio (klasik) işlevinin işlevselliğini genişletme komut dosyası modülünü kullanma.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,47 +10,47 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: previous-author=heatherbshapiro, previous-ms.author=hshapiro
 ms.date: 03/20/2017
-ms.openlocfilehash: 8c1292d0d36874892a286d91b1e367c7336b99aa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 13d385c69151891030ea0ee8f87ea8b55197a73f
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60811440"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73837598"
 ---
-# <a name="azure-machine-learning-studio-extend-your-experiment-with-r"></a>Azure Machine Learning Studio: R ile denemenizi genişletme 
-Kullanarak Azure Machine Learning Studio'da R diliyle işlevselliğini genişletebilirsiniz [R betiği yürütme] [ execute-r-script] modülü.
+# <a name="azure-machine-learning-studio-classic-extend-your-experiment-with-r"></a>Azure Machine Learning Studio (klasik): deneme 'nizi R ile genişletin 
+Azure Machine Learning Studio (klasik) işlevlerini R dili ile, [Yürüt komut dosyası][execute-r-script] modülünü kullanarak genişletebilirsiniz.
 
-Bu modül, birden çok giriş veri kümeleri kabul eder ve tek bir veri kümesi çıktı olarak verir. Bir R betiği yazabilirsiniz **R betiği** parametresinin [R betiği yürütme] [ execute-r-script] modülü.
+Bu modül birden çok giriş veri kümesini kabul eder ve çıkış olarak tek bir veri kümesi verir. R betiği [Yürüt][execute-r-script] modülünün **r betiği** parametresine bir r betiği yazabilirsiniz.
 
-Her giriş bağlantı noktasına modülü, aşağıdakine benzer kod kullanarak erişin:
+Modülün her giriş bağlantı noktasına şuna benzer bir kod kullanarak erişirsiniz:
 
     dataset1 <- maml.mapInputPort(1)
 
-## <a name="listing-all-currently-installed-packages"></a>Şu anda yüklü tüm paketlerin listesi
-Yüklü paketler listesini değiştirebilirsiniz. Şu anda yüklü paketler listesini bulunabilir [R paketleri Azure Machine Learning Studio tarafından desteklenen](https://msdn.microsoft.com/library/azure/mt741980.aspx).
+## <a name="listing-all-currently-installed-packages"></a>Şu anda yüklü olan tüm paketleri listeleme
+Yüklü paketlerin listesi değişebilir. Şu anda yüklü olan paketlerin listesi, [Azure Machine Learning Studio (klasik) tarafından desteklenen R paketlerinde](https://msdn.microsoft.com/library/azure/mt741980.aspx)bulunabilir.
 
-Aşağıdaki kodu girerek yüklü paketleri tam, güncel listesini alabilirsiniz [R betiği yürütme] [ execute-r-script] Modülü:
+Ayrıca, aşağıdaki kodu [Execute R betik][execute-r-script] modülüne girerek yüklü paketlerin tüm ve geçerli listesini alabilirsiniz:
 
     out <- data.frame(installed.packages(,,,fields="Description"))
     maml.mapOutputPort("out")
 
-Bu çıkış bağlantı noktasına paketleri listesi gönderir [R betiği yürütme] [ execute-r-script] modülü.
-Connect gibi bir dönüştürme modülü paket listesini görüntülemek için [CSV'ye Dönüştür] [ convert-to-csv] sol çıktısına [R betiği yürütme] [ execute-r-script] Modülü denemeyi çalıştırın ve sonra dönüştürme modülün çıkışına tıklayın ve seçin **indirme**. 
+Bu, paket listesini [Execute R betik][execute-r-script] modülünün çıkış bağlantı noktasına gönderir.
+Paket listesini görüntülemek için, [CSV 'ye Dönüştür][convert-to-csv] gibi bir dönüştürme modülünü [R betiği Yürüt][execute-r-script] modülünün sol çıktısına bağlayın, denemeyi çalıştırın, ardından dönüştürme modülünün çıktısına tıklayın ve **İndir**' i seçin. 
 
-!["CSV dönüştürme" modülü çıkışı indirme](./media/extend-your-experiment-with-r/download-package-list.png)
+!["CSV 'ye Dönüştür" modülüne ait çıktıyı indirin](./media/extend-your-experiment-with-r/download-package-list.png)
 
 
 <!--
 For convenience, here is the [current full list with version numbers in Excel format](https://az754797.vo.msecnd.net/docs/RPackages.xlsx).
 -->
 
-## <a name="importing-packages"></a>Paketleri içeri aktarma
-Aşağıdaki komutları kullanarak henüz yüklenmemişse paketleri içeri aktarabilirsiniz [R betiği yürütme] [ execute-r-script] Modülü:
+## <a name="importing-packages"></a>Paketler içeri aktarılıyor
+Aşağıdaki komutları kullanarak, zaten yüklü olmayan paketleri [R betiği Yürüt][execute-r-script] modülünde içeri aktarabilirsiniz:
 
     install.packages("src/my_favorite_package.zip", lib = ".", repos = NULL, verbose = TRUE)
     success <- library("my_favorite_package", lib.loc = ".", logical.return = TRUE, verbose = TRUE)
 
-Burada `my_favorite_package.zip` paketinizi dosyası içerir.
+`my_favorite_package.zip` dosyası paketinizi içerir.
 
 
 

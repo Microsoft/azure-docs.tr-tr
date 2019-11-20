@@ -1,27 +1,26 @@
 ---
-title: Azure'da kurgusal yürütmeyi azaltma Kılavuzu | Microsoft Docs
-description: Kurgusal yürütme yan kanal güvenlik açıklarına azure'da azaltma Kılavuzu.
+title: Azure 'da kurgusal yürütmeyi azaltıcı kılavuz
+description: Azure 'da kurgusal yürütme tarafı kanalları güvenlik açıklarını azaltmaya yönelik kılavuz.
 services: virtual-machines-linux
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
-keywords: spectre, meltdown specter
+keywords: SPECTRE, meltters, Specter
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
-ms.date: 06/04/2019
+ms.date: 11/12/2019
 ms.author: cynthn
-ms.openlocfilehash: 02c89cda7b2c11678539581e16d7162d3466a850
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c5ac8298ba6be79740d9eb70d8274c0c844311be
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66735286"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74035700"
 ---
-# <a name="guidance-for-mitigating-speculative-execution-side-channel-vulnerabilities-in-azure"></a>Kurgusal yürütme yan kanal güvenlik açıklarına azure'da azaltma Kılavuzu
+# <a name="guidance-for-mitigating-speculative-execution-side-channel-vulnerabilities-in-azure"></a>Azure 'da kurgusal yürütme yan kanallı güvenlik açıklarını azaltmaya yönelik kılavuz
 
 [!INCLUDE [virtual-machines-common-mitigate-se](../../../includes/virtual-machines-common-mitigate-se.md)]

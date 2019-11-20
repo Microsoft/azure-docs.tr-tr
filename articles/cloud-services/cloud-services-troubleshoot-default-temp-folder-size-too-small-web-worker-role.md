@@ -1,42 +1,41 @@
 ---
-title: Varsayılan TEMP klasörünün boyutu, bir rol için çok küçük değil | Microsoft Docs
-description: Bir bulut hizmeti rolü alanı TEMP klasörü için sınırlı bir süre vardır. Bu makalede nasıl alanı yetersiz çalışmasını önlemek bazı öneriler sağlar.
+title: Varsayılan GEÇICI klasör boyutu bir rol için çok küçük | Microsoft Docs
+description: Bir bulut hizmeti rolü, GEÇICI klasör için sınırlı miktarda alana sahiptir. Bu makalede, boş alan çalıştırmanın nasıl önleneceğini gösteren bazı öneriler sunulmaktadır.
 services: cloud-services
 documentationcenter: ''
 author: simonxjx
-manager: felixwu
+manager: dcscontentpm
 editor: ''
 tags: top-support-issue
 ms.assetid: 9f2af8dd-2012-4b36-9dd5-19bf6a67e47d
 ms.service: cloud-services
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: tbd
 ms.date: 06/15/2018
 ms.author: v-six
-ms.openlocfilehash: 7862e4d5c4dd603dacf5784df6c4194392ebc351
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0b869b73a79872d9263058bedfead018e18721c1
+ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60652190"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71154993"
 ---
-# <a name="default-temp-folder-size-is-too-small-on-a-cloud-service-webworker-role"></a>Varsayılan TEMP klasörünün boyutu, bir bulut hizmeti web/çalışan rolünde çok küçük
-Varsayılan geçici dizin bir bulut hizmeti çalışan veya web rolünün belirli bir noktada tam durdurabilir 100 MB boyut sınırı vardır. Bu makalede, geçici dizin için alanı çalıştırmaktan kaçınmak açıklar.
+# <a name="default-temp-folder-size-is-too-small-on-a-cloud-service-webworker-role"></a>Varsayılan GEÇICI klasör boyutu bir bulut hizmeti Web/çalışan rolünde çok küçük
+Bir bulut hizmeti çalışanının veya Web rolünün varsayılan geçici dizini en fazla 100 MB olabilir, bu da bazı bir noktada dolu olabilir. Bu makalede, geçici dizin için boş alan kalmadı.
 
 [!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
-## <a name="why-do-i-run-out-of-space"></a>Yer kalmadı neden çalıştırılsın mı?
-TEMP ve TMP standart Windows ortam değişkenlerini, uygulamanızda çalışan kodu tarafından kullanılabilir. TEMP ve TMP hem bir en fazla 100 MB boyutuna sahip tek bir dizin noktası. Bulut hizmeti yaşam döngüsü bu dizinde depolanan tüm veriler kalıcı değil; bir bulut hizmetinde rol örneklerini dönüştürülünceye, dizin temizlendiği.
+## <a name="why-do-i-run-out-of-space"></a>Neden çalışma alanım?
+TEMP ve TMP standart Windows ortam değişkenleri, uygulamanızda çalışan kod tarafından kullanılabilir. Hem TEMP hem de TMP, en fazla 100 MB boyutunda tek bir dizine işaret noktasıdır. Bu dizinde depolanan tüm veriler, bulut hizmetinin yaşam döngüsü boyunca kalıcı değildir; bir bulut hizmetindeki rol örnekleri geri dönüştürüldüğünde, Dizin temizlenir.
 
-## <a name="suggestion-to-fix-the-problem"></a>Sorunu gidermek için öneri
-Aşağıdaki yollardan birini uygulayın:
+## <a name="suggestion-to-fix-the-problem"></a>Sorunu gidermeye yönelik öneri
+Aşağıdaki seçeneklerden birini uygulayın:
 
-* TEMP veya TMP kullanmak yerine doğrudan erişmek ve yerel depolama kaynağı yapılandırın. Uygulamanızda çalışan kodu yerel depolama kaynağına erişmek için çağrı [RoleEnvironment.GetLocalResource](/previous-versions/azure/reference/ee772845(v=azure.100)) yöntemi.
-* Yerel depolama kaynağı yapılandırın ve yerel depolama kaynağı yoluna işaret edecek şekilde TEMP ve TMP dizinleri gelin. Bu değişikliği içinde yapılması [RoleEntryPoint.OnStart](/previous-versions/azure/reference/ee772851(v=azure.100)) yöntemi.
+* Yerel bir depolama kaynağı yapılandırın ve TEMP veya TMP kullanmak yerine doğrudan erişin. Uygulamanızda çalışan koddan yerel bir depolama kaynağına erişmek için [Roleenvironment. GetLocalResource](/previous-versions/azure/reference/ee772845(v=azure.100)) yöntemini çağırın.
+* Yerel bir depolama kaynağı yapılandırın ve yerel depolama kaynağının yolunu işaret etmek için TEMP ve TMP dizinlerini işaret edin. Bu değişiklik [Roleentrypoint. OnStart](/previous-versions/azure/reference/ee772851(v=azure.100)) yöntemi içinde gerçekleştirilmelidir.
 
-Aşağıdaki kod örneği, hedef dizin TEMP ve TMP gelen OnStart yöntemi içinde nasıl değiştirileceğini gösterir:
+Aşağıdaki kod örneği, OnStart yönteminin içinden TEMP ve TMP için hedef dizinlerin nasıl değiştirileceğini göstermektedir:
 
 ```csharp
 using System;
@@ -71,8 +70,8 @@ namespace WorkerRole1
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Açıklayan blogunu okuyun [Azure Web rolü ASP.NET geçici klasörü boyutunu artırmak nasıl](https://blogs.msdn.com/b/kwill/archive/2011/07/18/how-to-increase-the-size-of-the-windows-azure-web-role-asp-net-temporary-folder.aspx).
+[Azure Web rolü ASP.NET geçici klasörünün boyutunu nasıl artırabileceğinizi](https://blogs.msdn.com/b/kwill/archive/2011/07/18/how-to-increase-the-size-of-the-windows-azure-web-role-asp-net-temporary-folder.aspx)açıklayan bir blog okuyun.
 
-Daha fazlasını görüntüle [sorun giderme makaleleri](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/vs-azure-tools-debugging-cloud-services-overview.md) bulut Hizmetleri için.
+Cloud Services için daha fazla [sorun giderme makalesini](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/vs-azure-tools-debugging-cloud-services-overview.md) görüntüleyin.
 
-Azure PaaS bilgisayar tanılama verilerini kullanarak bulut hizmeti rolü sorunlarını giderme konusunda bilgi almak için görüntüleyin [Kevin Williamson'ın blog dizisini](https://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx).
+Azure PaaS bilgisayar tanılama verilerini kullanarak bulut hizmeti rolü sorunlarını giderme hakkında bilgi edinmek için [Kevin Williamson 'ın blog serisini](https://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx)görüntüleyin.

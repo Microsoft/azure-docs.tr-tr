@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Görev ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve TAS. arasında çoklu oturum açmayı yapılandırma hakkında bilgi edinin
+title: 'Öğretici: TAS ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve TAS arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -15,49 +15,49 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/19/2019
 ms.author: jeedes
-ms.openlocfilehash: 279f6970c34acbfea645366f7e965c830873fdbf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: efd64830c0d9afa83838adef96cf1c103b4485e8
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67089185"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68943267"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-tas"></a>Öğretici: Azure Active Directory Tümleştirmesi ile GÖR
+# <a name="tutorial-azure-active-directory-integration-with-tas"></a>Öğretici: TAS ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile görevi tümleştirme konusunda bilgi edinin.
-Görev Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, TAS 'yi Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+TAS 'yi Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* TAS. erişimi, Azure AD'de denetleyebilirsiniz
-* Otomatik olarak (çoklu oturum açma) görevi için kendi Azure AD hesapları ile oturum açmış, kullanıcıların etkinleştirebilirsiniz.
+* Azure AD 'de, TAS 'e erişimi olan denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla otomatik olarak (çoklu oturum açma) oturum açmasını sağlayabilirsiniz.
 * Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile görevi yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini TAS ile yapılandırmak için aşağıdaki öğelere ihtiyacınız vardır:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik görevi çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* TAS çoklu oturum açma etkin aboneliği
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* GÖREVİ destekler **SP ve IDP** tarafından başlatılan
+* TAS **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-tas-from-the-gallery"></a>Galeriden görev ekleme
+## <a name="adding-tas-from-the-gallery"></a>Galeriden TAS ekleme
 
-Azure AD'de görevi tümleştirmesini yapılandırmak için görevi Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+TAS 'ın Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize görev eklemeniz gerekir.
 
-**Galeriden görev eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden TAS eklemek için aşağıdaki adımları uygulayın:**
 
 1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
@@ -65,66 +65,66 @@ Azure AD'de görevi tümleştirmesini yapılandırmak için görevi Galeriden y�
 
     ![Yeni Uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **görevi**seçin **görevi** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Ara kutusuna **tas**yazın, sonuç panelinden **tas** ' ı seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde GÖR](common/search-new-app.png)
+     ![Sonuçlar listesinde TAS](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma görevi adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve ilgili kullanıcı görevi arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test KULLANıCıSıNA göre görev ile yapılandırıp test edersiniz.
+Çoklu oturum açma 'nın çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı arasındaki bir bağlantı ilişkisinin oluşturulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma görevi ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açmayı, TAS ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
 1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[GÖREVİ çoklu oturum açmayı yapılandırma](#configure-tas-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[tas çoklu oturum açmayı yapılandırın](#configure-tas-single-sign-on)** .
 3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
 4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[GÖREVİ test kullanıcısı oluşturma](#create-tas-test-user)**  - kullanıcı Azure AD gösterimini bağlı görevi Britta simon'un bir karşılığı vardır.
+5. Kullanıcının Azure AD gösterimine bağlı olan TAS 'ta Britta Simon 'un bir karşılığı olacak şekilde, **[tas test kullanıcısı oluşturun](#create-tas-test-user)** .
 6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile görevi yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açma 'yı TAS ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **görevi** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **tas** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
     ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
 3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** başlatılan modu, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımları uygulayın:
 
-    ![Oturum açma bilgileri tek bir görevi etki alanı ve URL'ler](common/idp-intiated.png)
+    ![GÖREV etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-intiated.png)
 
-    a. İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://taseu.combtas.com/<DOMAIN>`
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://taseu.combtas.com/<DOMAIN>`
 
-    b. İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://taseu.combtas.com/<ENVIRONMENTNAME>/AssertionService.aspx`
+    b. **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:`https://taseu.combtas.com/<ENVIRONMENTNAME>/AssertionService.aspx`
 
-5. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+5. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    ![Oturum açma bilgileri tek bir görevi etki alanı ve URL'ler](common/metadata-upload-additional-signon.png)
+    ![GÖREV etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/metadata-upload-additional-signon.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://taseu.combtas.com/<DOMAIN>`
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://taseu.combtas.com/<DOMAIN>`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu, öğreticinin ilerleyen bölümlerinde açıklanan gerçek tanımlayıcısı, yanıt URL'si ve oturum açma URL'si ile güncelleştirir. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bunları, Öğreticinin ilerleyen kısımlarında açıklanan gerçek tanımlayıcı, yanıt URL 'SI ve oturum açma URL 'SI ile güncelleştirirsiniz. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-6. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+6. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-7. Üzerinde **görevi ayarlayın** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+7. **Görevi ayarla** bölümünde, uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
     a. Oturum Açma URL'si:
 
@@ -132,36 +132,36 @@ Azure AD çoklu oturum açma ile görevi yapılandırmak için aşağıdaki adı
 
     c. Oturum Kapatma URL'si
 
-### <a name="configure-tas-single-sign-on"></a>GÖREVİ tek oturum açmayı yapılandırın
+### <a name="configure-tas-single-sign-on"></a>TAS çoklu oturum açmayı yapılandırma
 
-1. Bir başka web tarayıcı penceresinde görevi yönetici olarak oturum açın.
+1. Farklı bir Web tarayıcısı penceresinde, yönetici olarak görev olarak oturum açın.
 
-2. Menü sol tarafında tıklayarak **ayarları** gidin **yönetici** ve ardından **yönetme çoklu oturum açmayı**.
+2. Menünün sol tarafında, **Ayarlar** ' a tıklayın ve **yönetici** ' ye gidin ve ardından **Çoklu oturum açmayı Yönet**' e tıklayın.
 
-    ![GÖREVİ yapılandırma](./media/tas-tutorial/configure01.png)
+    ![GÖREV yapılandırması](./media/tas-tutorial/configure01.png)
 
-3. Üzerinde **yönetme çoklu oturum açmayı** sayfasında, aşağıdaki adımları gerçekleştirin:
+3. **Çoklu oturum açmayı Yönet** sayfasında, aşağıdaki adımları uygulayın:
 
-    ![GÖREVİ yapılandırma](./media/tas-tutorial/configure02.png)
+    ![GÖREV yapılandırması](./media/tas-tutorial/configure02.png)
 
-    a. İçinde **adı** metin ortam adınızı yazın.
+    a. **Ad** metin kutusuna ortam adınızı yazın.
     
-    b. Seçin **SAML2** olarak **kimlik doğrulama türü**.
+    b. **Kimlik doğrulama türü**olarak **SAML2** öğesini seçin.
 
-    c. İçinde **URL'si girin** metin değerini yapıştırın **oturum açma URL'si** hangi Azure portaldan kopyaladığınız.
+    c. **URL girin** metin kutusuna, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
 
-    d. Not Defteri'nde, Azure portalından indirdiğiniz base-64 kodlanmış sertifika açın, içeriğini kopyalayın ve ardından yapıştırın **girin sertifika** kutusu.
+    d. Not defteri 'nde, Azure portal indirdiğiniz temel 64 kodlu sertifikayı açın, içeriğini kopyalayın ve ardından **sertifikayı gir** kutusuna yapıştırın.
 
-    e. İçinde **yeni IP** metin kutusuna IP adresini yazın.
+    e. **Yenı IP girin** metın kutusuna IP adresini yazın.
 
     >[!NOTE]
-    > İlgili kişi [görevi Destek ekibine](mailto:support@combtas.com) IP adresini almak için.
+    > IP adresini almak için, [tas destek ekibine](mailto:support@combtas.com) başvurun.
 
-    f. Kopyalama **çoklu oturum açma** URL'sini yapıştırın **tanımlayıcı (varlık kimliği)** ve **oturum açma URL'si** textbox'ın **temel SAML yapılandırma** içinde Azure Portalı'nı tıklatın. Url büyük/küçük harfe duyarlıdır ve bir eğik çizgi (/) ile bitmelidir lütfen unutmayın.
+    f. **Çoklu oturum açma** URL 'sini kopyalayın ve Azure Portal ' DEKI **temel SAML yapılandırması** ' nın **tanımlayıcısına (varlık kimliği)** ve **oturum açma URL 'si** metin kutusuna yapıştırın. URL 'nin büyük/küçük harfe duyarlı olduğunu ve eğik çizgiyle (/) bitmesi gerektiğini lütfen unutmayın.
 
-    g. Kopyalama **onaylama hizmet** kurulumunda url yapıştırın ve sayfa **yanıt URL'si** textbox'ın **temel SAML yapılandırma** Azure portalında.
+    g. **Doğrulama hizmeti** URL 'sini kurulum sayfasında kopyalayın ve Azure Portal ' DEKI **temel SAML yapılandırması** **yanıt URL** 'si metin kutusuna yapıştırın.
 
-    h. Tıklayın **Ekle SSO satır**.
+    h. **SSO satırı ekle**' ye tıklayın.
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
 
@@ -173,56 +173,56 @@ Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcıs
 
 2. Seçin **yeni kullanıcı** ekranın üstünde.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
 3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alan türü **brittasimon@yourcompanydomain.extension**  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’a tıklayın.
+    d.           **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için TAS. erişim vererek Britta Simon etkinleştir
+Bu bölümde, TAS 'a erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **görevi**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **görev**' i seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **görevi**.
+2. Uygulamalar listesinde, **tas**' ı seçin.
 
-    ![Uygulamalar listesinde görev bağlantı](common/all-applications.png)
+    ![Uygulamalar listesindeki TAS bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
     !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
 5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-tas-test-user"></a>GÖREVİ test kullanıcısı oluşturma
+### <a name="create-tas-test-user"></a>TAS test kullanıcısı oluşturma
 
-Bu bölümde, Britta Simon TAS. içinde adlı bir kullanıcı oluşturma Çalışmak [görevi Destek ekibine](mailto:support@combtas.com) görevi platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
+Bu bölümde, TAS 'da Britta Simon adlı bir Kullanıcı oluşturacaksınız. Kullanıcıları TAS platformunda eklemek için [tas destek ekibi](mailto:support@combtas.com) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli görevi kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama görevi için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde TAS kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız TAS 'ta otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
@@ -230,5 +230,5 @@ Erişim paneli görevi kutucuğa tıkladığınızda, size otomatik olarak SSO'y
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

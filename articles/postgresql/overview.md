@@ -7,57 +7,55 @@ ms.custom: mvc
 ms.service: postgresql
 ms.topic: overview
 ms.date: 05/06/2019
-ms.openlocfilehash: f4023fa84215a0319669de0d812d8306b62278e3
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: 9d4389ed2c0cc5d7b632380fba691ae2e9a6b257
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "65073282"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73466744"
 ---
 # <a name="what-is-azure-database-for-postgresql"></a>PostgreSQL için Azure Veritabanı nedir?
-PostgreSQL için Azure veritabanı, Microsoft bulutunda geliştiriciler için oluşturulmuş ilişkisel veritabanı hizmetidir. Açık kaynak topluluk sürümünü temel alan [PostgreSQL](https://www.postgresql.org/) veritabanı altyapısı ve iki dağıtım seçeneklerinde kullanılabilir: Tek sunucu ve hiper ölçekli (Citus) (Önizleme).
+PostgreSQL için Azure veritabanı, geliştiriciler için derlenmiş Microsoft bulutundaki bir ilişkisel veritabanı hizmetidir. Bu, açık kaynak [PostgreSQL](https://www.postgresql.org/) veritabanı altyapısının topluluk sürümüne dayalıdır ve iki dağıtım seçeneklerinde mevcuttur: tek sunucu ve hiper ölçek (Citus).
 
-## <a name="azure-database-for-postgresql---single-server"></a>PostgreSQL - tek bir sunucu için Azure veritabanı
-Tek sunuculu dağıtım seçeneği sunar:
+## <a name="azure-database-for-postgresql---single-server"></a>PostgreSQL için Azure veritabanı-tek sunucu
+Tek sunuculu dağıtım seçeneği şunları sağlar:
 
-- Ek ücret ödemeden (% 99,99 SLA) ile yerleşik yüksek kullanılabilirlik
+- Ek ücret ödemeden yerleşik yüksek kullanılabilirlik (% 99,99 SLA)
 - Kapsamlı kullandıkça öde fiyatlandırması kullanılarak öngörülebilir performans
-- Saniyeler içinde gerektikçe dikey ölçeklendirme
-- İzleme ve hızlı bir şekilde ölçeklendirme etkisini değerlendirmek için uyarı
+- Saniyeler içinde gereken şekilde dikey ölçek
+- Ölçeklendirmenin etkilerini hızlı bir şekilde değerlendirmek için izleme ve uyarma
 - Bekleyen ve hareket halindeki hassas verileri korumaya yönelik güvenlik
 - Otomatik yedeklemeler ve 35 güne kadar belirli bir noktaya geri yükleme
 - Kurumsal düzeyde güvenlik ve uyumluluk
 
-Tüm bu özellikler neredeyse hiç yönetim gerektirmez ve tümüyle ek ücret ödemeden sağlanır. Hızlı uygulama geliştirmeye ve piyasaya sunma sürenizi kısaltmaya, yerine değerli zamanınızı ve kaynaklarınızı sanal makineleri ve altyapıyı yönetmek için harcama odaklanmanıza olanak sağlar. Yeni beceriler edinmek zorunda kalmadan açık kaynak araçları ve tercih ettiğiniz platform ile geliştirmeye devam edebilirsiniz.
+Tüm bu özellikler neredeyse hiç yönetim gerektirmez ve tümüyle ek ücret ödemeden sağlanır. Bu kişiler, sanal makineleri ve altyapıyı yönetmek için değerli zaman ve kaynakları harcamaktansa hızlı uygulama geliştirmeye odaklanmanıza ve zamanınızı pazara sunma sürecinize olanak tanır. Yeni beceriler öğrenmeye gerek kalmadan, seçtiğiniz açık kaynaklı araçlar ve platformla uygulamanızı geliştirmeye devam edebilirsiniz.
 
-Tek sunuculu dağıtım seçeneği, üç fiyatlandırma katmanı sunar: Temel, genel amaçlı ve bellek için iyileştirilmiş. Her katman veritabanı iş yükünüzü desteklemek için farklı kaynak özellikleri sunar. İlk uygulamanızı aylık birkaç dolar ücretle küçük bir veritabanı üzerinde oluşturabilir ve sonra çözümünüzün gereksinimlerine göre ölçeği ayarlayabilirsiniz. Dinamik ölçeklendirebilirlik, veritabanınızın hızla değişen kaynak gereksinimlerine saydam bir şekilde yanıt verebilmesini sağlar. Yalnızca ihtiyacınız olan kaynaklar için ve yalnızca bunlara ihtiyacınız olduğunda ödeme yaparsınız. Bkz: [fiyatlandırma katmanları](concepts-pricing-tiers.md) Ayrıntılar için.
+Tek sunuculu dağıtım seçeneği üç fiyatlandırma katmanı sunar: temel, Genel Amaçlı ve bellek için Iyileştirilmiş. Her katman veritabanı iş yükünüzü desteklemek için farklı kaynak özellikleri sunar. İlk uygulamanızı aylık birkaç dolar ücretle küçük bir veritabanı üzerinde oluşturabilir ve sonra çözümünüzün gereksinimlerine göre ölçeği ayarlayabilirsiniz. Dinamik ölçeklendirebilirlik, veritabanınızın hızla değişen kaynak gereksinimlerine saydam bir şekilde yanıt verebilmesini sağlar. Yalnızca ihtiyacınız olan kaynaklar için ve yalnızca bunlara ihtiyacınız olduğunda ödeme yaparsınız. Ayrıntılar için bkz. [fiyatlandırma katmanları](concepts-pricing-tiers.md) .
 
-## <a name="azure-database-for-postgresql---hyperscale-citus-preview"></a>PostgreSQL - hiper ölçekli (Citus) (Önizleme) için Azure veritabanı
-Hiper ölçekli (Citus) seçeneğini sorguları parçalama kullanarak birden fazla makine arasında yatay olarak ölçeklendirir. Sorgu motoru gelen SQL sorguları daha hızlı yanıt büyük veri kümelerinde bu sunucular arasında parallelizes. Bu daha yüksek ölçek ve performans gerektiren uygulamalar, genellikle yaklaştığı--veya zaten aşan--100 GB veri iş yükleri sunar.
+## <a name="azure-database-for-postgresql---hyperscale-citus"></a>PostgreSQL için Azure veritabanı-hiper ölçek (Citus)
+Hyperscale (Citus) seçeneği, parçaları kullanarak birden çok makine genelinde sorguları yatay olarak ölçeklendirir. Sorgu altyapısı, büyük veri kümelerinde daha hızlı yanıtlar için bu sunucular genelinde gelen SQL sorgularını paralelleştiriyor. Daha fazla ölçek ve performans gerektiren uygulamalara, genellikle yaklaştığı veya en fazla-100 GB veri aşmış olan iş yükleri sunar.
 
-Hiper ölçekli (Citus) dağıtım seçeneği sunar:
+Hyperscale (Citus) dağıtım seçeneği şunları sağlar:
 
-- Yatay parçalama kullanarak birden fazla makine arasında ölçeklendirme
-- Büyük veri kümelerinde hızlı yanıtlar için bu sunucular arasında sorgu paralelleştirme
-- Çok kiracılı uygulamaları, gerçek zamanlı işlem analizi ve yüksek aktarım hızı işlem iş yükleri için mükemmel destek
+- Parçalara ayırma kullanılarak birden çok makine arasında yatay ölçeklendirme
+- Büyük veri kümelerinde daha hızlı yanıtlar için bu sunucular genelinde paralelleştirme sorgula
+- Çok kiracılı uygulamalar, gerçek zamanlı işlem analizi ve yüksek verimlilik işlem iş yükleri için mükemmel destek
 
-PostgreSQL, Hiper ölçekli (Citus) üzerinde dağıtılmış sorgular çalıştırabilirsiniz için standart ile oluşturulan uygulamalar [bağlantı kitaplıkları](./concepts-connection-libraries.md) ve küçük değişiklikler.
-
-Hiper ölçekli (Citus) genel Önizleme aşamasındadır ve bu nedenle bir SLA'sı henüz sunmaz unutmayın.
+PostgreSQL için derlenmiş uygulamalar, standart [bağlantı kitaplıkları](./concepts-connection-libraries.md) ve en az değişiklikle hiper ölçekte (Citus) dağıtılmış sorgular çalıştırabilir.
 
 ## <a name="data-security"></a>Veri güvenliği
-PostgreSQL için Azure veritabanı, Azure veritabanı hizmetlerinde yılda veri güvenliği anlayışına. Erişimi sınırlayan, bekleyen veri ve Hareket halindeki koruyan ve etkinlikleri izlemenize yardımcı olan özellikler var. Azure'ın platform güvenliği hakkında bilgi edinmek için [Azure Güven Merkezi](https://azure.microsoft.com/overview/trusted-cloud/)'ni ziyaret edin.
+PostgreSQL için Azure veritabanı, Azure veritabanı Hizmetleri ' gelenek of Data Security 'yi içerir. Erişimi sınırlayan, verileri REST ve hareket halindeyken koruyan ve etkinliği izlemenize yardımcı olan özelliklere sahiptir. Azure'ın platform güvenliği hakkında bilgi edinmek için [Azure Güven Merkezi](https://azure.microsoft.com/overview/trusted-cloud/)'ni ziyaret edin.
 
-Hizmet PostgreSQL için Azure veritabanı, bekleyen veri için depolama şifrelemesi kullanır ve FIPS 140-2 uyumludur. Yedeklemeler gibi veriler diskte şifrelenir. Hizmet, Azure depolama şifrelemesi kapsamında yer alan AES 256-bit şifrelemesini kullanır ve anahtarlar sistem tarafından yönetilir. Depolama şifrelemesi her zaman açıktır ve devre dışı bırakılamaz. Varsayılan olarak, hizmet PostgreSQL için Azure veritabanı, güvenli bağlantılar hem ağ üzerinden hem de veritabanı ve istemci uygulaması arasında halindeki için verileri gerektirir.
+PostgreSQL için Azure veritabanı hizmeti, bekleyen verilerin depolama şifrelemesi için FIPS 140-2 tarafından doğrulanan şifreleme modülünü kullanır. Yedeklemeler de dahil olmak üzere veriler, sorgular çalıştırılırken oluşturulan geçici dosyalar hariç olmak üzere diskte şifrelenir. Hizmet, Azure depolama şifrelemesi 'ne dahil olan AES 256 bitlik şifrelemeyi kullanır ve anahtarlar sistem tarafından yönetilir. Depolama şifrelemesi her zaman açıktır ve devre dışı bırakılamaz. Varsayılan olarak, PostgreSQL için Azure veritabanı hizmeti, hem ağ hem de veritabanı ile istemci uygulaması arasında hareket halindeki veriler için güvenli bağlantılar gerektirir.
 
 ## <a name="contacts"></a>Kişiler
-Herhangi bir sorunuz veya PostgreSQL için Azure veritabanı ile çalışma hakkında daha fazla öneri için bir e-posta PostgreSQL takım için Azure veritabanı'na gönderin. ([ @Ask PostgreSQL için Azure DB](mailto:AskAzureDBforPostgreSQL@service.microsoft.com)). Bu, destek biletlerini yerine genel sorular için adresidir.
+PostgreSQL için Azure veritabanı ile çalışmaya yönelik herhangi bir soru veya öneri için, PostgreSQL için Azure veritabanı ekibine bir e-posta gönderin ([@Ask PostgreSQL Için Azure DB](mailto:AskAzureDBforPostgreSQL@service.microsoft.com)). Bu adres destek bileti yerine genel sorulara yöneliktir.
 
-Ayrıca, uygun şekilde iletişim şu noktaları göz önünde bulundurun:
-- Azure desteği ile iletişime geçin veya hesabınız ile bir sorunu düzeltmek için [Azure portalından bileti](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
+Ayrıca, bu iletişim noktalarını uygun şekilde göz önünde bulundurun:
+- Azure desteği ile iletişim kurmak veya hesabınızla ilgili bir sorunu sabitlemek için [Azure Portal bir bilet](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade)gönderin.
 - Görüş bildirmek veya yeni özellikler istemek için [UserVoice](https://feedback.azure.com/forums/597976-azure-database-for-postgresql) aracılığıyla bir giriş oluşturun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - Maliyet karşılaştırmaları ve hesaplayıcıları için [fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/postgresql/) bakın.
-- PostgreSQL için Azure veritabanı sunucunuza ilk oluşturarak başlayın [tek sunucu](./quickstart-create-server-database-portal.md) veya [hiper ölçekli (Citus) (Önizleme)](./quickstart-create-hyperscale-portal.md)
-- Python, PHP, Ruby, C ilk uygulamanızı oluşturun\#, Java, Node.js: [Bağlantı kitaplıkları](./concepts-connection-libraries.md)
+- İlk PostgreSQL için Azure veritabanınızı [tek sunuculu](./quickstart-create-server-database-portal.md) veya [hiper ölçekte oluşturmaya başlayın (Citus)](./quickstart-create-hyperscale-portal.md)
+- Python, PHP, Ruby, C\#, Java, Node.js'de ilk uygulamanızı oluşturun: [Bağlantı kitaplıkları](./concepts-connection-libraries.md)

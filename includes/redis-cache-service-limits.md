@@ -4,24 +4,24 @@ ms.service: redis-cache
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: wesmc
-ms.openlocfilehash: 77019068279261a36f8ba40247e5f5694ca77892
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 1ab6243be39bf30bc060ed5745fbf600924743a9
+ms.sourcegitcommit: 15e3bfbde9d0d7ad00b5d186867ec933c60cebe6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188775"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71839200"
 ---
-| Kaynak | Sınır |
+| Kaynak | Sınırlı |
 | --- | --- |
-| Önbellek boyutu |530 GB |
+| Önbellek boyutu |1,2 TB |
 | Veritabanları |64 |
-| Bağlı istemci sayısı üst sınırı |40,000 |
-| Azure önbelleği için Redis çoğaltmalar, yüksek kullanılabilirlik |1 |
-| Kümeleme ile premium önbellek parçalarda |10 |
+| En fazla bağlı istemci |40.000 |
+| Redsıs çoğaltmaları için Azure önbelleği, yüksek kullanılabilirlik için |1\. |
+| Kümeleme ile Premium önbellekteki parçalar |10 |
 
-Azure önbelleği için Redis sınırlar ve boyutları için her fiyatlandırma katmanının farklıdır. Fiyatlandırma katmanları ve bunların ilişkili boyutları için bkz [Azure Cache, Redis fiyatlandırma](https://azure.microsoft.com/pricing/details/cache/).
+Redsıs limitleri ve boyutları için Azure önbelleği her fiyatlandırma katmanı için farklıdır. Fiyatlandırma katmanlarını ve bunlarla ilişkili boyutları görmek için bkz. [redsıs fiyatlandırması Için Azure önbelleği](https://azure.microsoft.com/pricing/details/cache/).
 
-Redis yapılandırması sınırları Azure Cache hakkında daha fazla bilgi için bkz. [varsayılan Redis sunucu yapılandırması](../articles/azure-cache-for-redis/cache-configure.md#default-redis-server-configuration).
+Redsıs yapılandırma sınırları için Azure önbelleği hakkında daha fazla bilgi için bkz. [varsayılan redsıs sunucu yapılandırması](../articles/azure-cache-for-redis/cache-configure.md#default-redis-server-configuration).
 
-Yapılandırma ve yönetim Azure Cache, Redis örneği için yapılır çünkü Microsoft tarafından tüm Redis komutları Azure Cache Redis için desteklenir. Daha fazla bilgi için [Redis komutları Azure önbelleği için Redis desteklenmeyen](../articles/azure-cache-for-redis/cache-configure.md#redis-commands-not-supported-in-azure-cache-for-redis).
+Redsıs örnekleri için Azure önbelleğinin yapılandırma ve yönetimi Microsoft tarafından yapıldığından, redsıs için Azure önbelleğinde tüm Redi komutları desteklenmez. Daha fazla bilgi için bkz. redsıs [komutları redsıs Için Azure önbelleğinde desteklenmez](../articles/azure-cache-for-redis/cache-configure.md#redis-commands-not-supported-in-azure-cache-for-redis).
 

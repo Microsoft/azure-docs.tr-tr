@@ -1,58 +1,59 @@
 ---
-title: El ile Azure Container Instances'da kapsayıcı başlatma veya durdurma
-description: El ile Azure Container Instances'da bir kapsayıcı grubu başlatmak veya durdurmak öğrenin.
+title: Azure Container Instances kapsayıcıları el ile durdurma veya başlatma
+description: Azure Container Instances bir kapsayıcı grubunu el ile durdurmayı veya başlatmayı öğrenin.
 services: container-instances
 author: dlepow
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
 ms.date: 04/15/2019
 ms.author: danlep
-ms.openlocfilehash: 8e62d106a42dfbec897e5e14cf68fd3d7fd823c4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c7d46ad8d935e28b5a24e48c85ac2464b55b2669
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65070808"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68325652"
 ---
-# <a name="manually-stop-or-start-containers-in-azure-container-instances"></a>El ile Azure Container Instances'da kapsayıcı başlatma veya durdurma
+# <a name="manually-stop-or-start-containers-in-azure-container-instances"></a>Azure Container Instances kapsayıcıları el ile durdurma veya başlatma
 
-[Yeniden başlatma ilkesi](container-instances-restart-policy.md) nasıl container Instances Başlat veya Durdur varsayılan olarak bir kapsayıcı grubu ayarı belirler. Varsayılan el ile durdurma veya bir kapsayıcı grubu başlatma ayarı geçersiz kılabilirsiniz.
+Bir kapsayıcı grubunun [yeniden başlatma ilkesi](container-instances-restart-policy.md) ayarı, kapsayıcı örneklerinin varsayılan olarak nasıl başlatılacağını veya durdurulacağını belirler. Bir kapsayıcı grubunu el ile durdurarak veya başlatarak varsayılan ayarı geçersiz kılabilirsiniz.
 
 ## <a name="stop"></a>Durdur
 
-El ile çalıştırılan bir kapsayıcı grubu - Örneğin, kullanarak durdurun [az container durdurma] [ az-container-stop] komutu veya Azure portalında. Belirli kapsayıcı iş yükleri, maliyet tasarrufu için tanımlanan bir süre sonra uzun süre çalışan bir kapsayıcı grubu durdurmak isteyebilirsiniz. 
+Çalışan bir kapsayıcı grubunu el ile durdurun; Örneğin, [az Container stop][az-container-stop] komutunu veya Azure Portal kullanarak. Belirli kapsayıcı iş yükleri için, maliyetlerde tasarruf etmek üzere tanımlı bir dönemden sonra uzun süre çalışan bir kapsayıcı grubunu durdurmak isteyebilirsiniz. 
 
-*Kapsayıcı grubu durduruldu durumuna girdiğinde, sonlandırır ve gruptaki tüm kapsayıcıları geri dönüştürür. Kapsayıcı durumu korumaz.*
+*Bir kapsayıcı grubu durdurulmuş duruma girdiğinde gruptaki tüm kapsayıcıları sonlandırır ve geri dönüştürür. Kapsayıcı durumunu korumaz.*
 
-Kapsayıcıları dönüştürülünceye olduğunda [kaynakları](container-instances-container-groups.md#resource-allocation) durakları kapsayıcı grubu için faturalama ve serbest bırakılır.
+Kapsayıcılar geri dönüştürüldüğünde, [kaynak](container-instances-container-groups.md#resource-allocation) serbest bırakılır ve kapsayıcı grubu için faturalandırma duraklar.
 
-Kapsayıcı grubu zaten sonlandırıldıysa durdurma eylemi etkiye sahip değildir (başarılı veya başarısız durumda). Örneğin, bir kapsayıcı grubu başarıyla çalıştı kez çalıştırılan kapsayıcı görevleri başarılı durumunda sonlandırır. Durum değiştirme durumu, grubun durdurmaya çalışır. 
+Kapsayıcı grubu zaten sonlandırılırsa (başarılı veya başarısız durumdaysa) durdurma eylemi etkisizdir. Örneğin, başarıyla çalışan bir kez çalıştırılan kapsayıcı görevi olan bir kapsayıcı grubu başarılı durumunda sonlandırılır. Bu durumda grubu durdurma girişimleri durumu değiştirmez. 
 
-## <a name="start"></a>Başlatma
+## <a name="start"></a>Start
 
-Ya da kapsayıcıları, kendi sonlandırıldı veya grubu - el ile durduruldu çünkü bir kapsayıcı grubu durdurulduğunda - kapsayıcıları başlayabilirsiniz. Örneğin, [az container başlangıç] [ az-container-start] komutu veya Azure portalında kapsayıcı grubuna el ile başlatmak için. Her kapsayıcı için kapsayıcı görüntüsü güncelleştirdiyseniz, yeni bir görüntü alınır. 
+Bir kapsayıcı grubu durdurulduğunda-kapsayıcılar kendi üzerinde sonlandırıldığı ya da grubu el ile durdurduğu için kapsayıcıları başlatabilirsiniz. Örneğin, gruptaki kapsayıcıları el ile başlatmak için [az Container start][az-container-start] komutunu veya Azure Portal kullanın. Herhangi bir kapsayıcının kapsayıcı görüntüsü güncelleştirilirse yeni bir görüntü çekilir. 
 
-Bir kapsayıcı grubu başlayarak yeni bir dağıtım ile aynı kapsayıcı yapılandırması başlar. Bu eylem, hızlı bir şekilde beklediğiniz gibi çalışır bir bilinen kapsayıcı grubunun yapılandırması yeniden yardımcı olabilir. Aynı iş yükünü çalıştırmak için yeni bir kapsayıcı grubu oluşturmanız gerekmez.
+Bir kapsayıcı grubu başlatıldığında aynı kapsayıcı yapılandırmasıyla yeni bir dağıtım başlatılır. Bu eylem, beklendiği gibi çalışarak bilinen bir kapsayıcı grubu yapılandırmasını hızlıca yeniden kullanmanıza yardımcı olabilir. Aynı iş yükünü çalıştırmak için yeni bir kapsayıcı grubu oluşturmanız gerekmez.
 
-Bir kapsayıcı grubundaki tüm kapsayıcıları, bu eylem tarafından başlatılır. Belirli bir kapsayıcı grubunda başlatılamıyor.
+Bir kapsayıcı grubundaki tüm kapsayıcılar bu eylem tarafından başlatılır. Grupta belirli bir kapsayıcıyı başlatamazsınız.
 
-El ile başlatın veya bir kapsayıcı grubu yeniden sonra kapsayıcı grubu çalıştırmalar göre yapılandırılmış ilke yeniden başlatın.
+Bir kapsayıcı grubunu el ile başlattıktan veya yeniden başlattıktan sonra kapsayıcı grubu, yapılandırılan yeniden başlatma ilkesine göre çalışır.
   
 ## <a name="restart"></a>yeniden başlatıp
 
--Örneğin, kullanarak çalışırken, bir kapsayıcı grubu yeniden başlatabilirsiniz [az container yeniden] [ az-container-restart] komutu. Bu eylem tüm kapsayıcıları, kapsayıcı grubunda yeniden başlatır. Her kapsayıcı için kapsayıcı görüntüsü güncelleştirdiyseniz, yeni bir görüntü alınır. 
+Bir kapsayıcı grubunu çalışırken yeniden başlatabilirsiniz; Örneğin, [az Container Restart][az-container-restart] komutunu kullanarak. Bu eylem kapsayıcı grubundaki tüm kapsayıcıları yeniden başlatır. Herhangi bir kapsayıcının kapsayıcı görüntüsü güncelleştirilirse yeni bir görüntü çekilir. 
 
-Kapsayıcı grubu yeniden başlatma, bir dağıtım sorunu gidermek istediğinizde yararlıdır. Geçici kaynak sınırlaması kapsayıcılarınızı başarıyla çalışmasını engelliyorsa, örneğin, grubu yeniden başlatılması sorunu çözebilir.
+Bir dağıtım sorunuyla ilgili sorunları gidermek istediğinizde bir kapsayıcı grubunun yeniden başlatılması yararlı olur. Örneğin, geçici bir kaynak sınırlaması, kapsayıcılarınızın başarıyla çalışmasını engelliyorsa, grubun yeniden başlatılması sorunu çözebilir.
 
-Bir kapsayıcı grubundaki tüm kapsayıcıları, bu eylem tarafından başlatılır. Belirli bir kapsayıcı grubunda yeniden başlatılamıyor.
+Bir kapsayıcı grubundaki tüm kapsayıcılar bu eylem tarafından yeniden başlatılır. Grupta belirli bir kapsayıcıyı yeniden çalıştıramazsınız.
 
-Kapsayıcı grubu çalıştırmalar göre yapılandırılmış bir kapsayıcı grubu el ile yeniden başlatıldıktan sonra ilke yeniden başlatın.
+Bir kapsayıcı grubunu el ile yeniden başlattıktan sonra kapsayıcı grubu, yapılandırılan yeniden başlatma ilkesine göre çalışır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi edinin [ilke ayarlarını yeniden](container-instances-restart-policy.md) Azure Container ınstances'da.
+Azure Container Instances 'de [yeniden başlatma ilkesi ayarları](container-instances-restart-policy.md) hakkında daha fazla bilgi edinin.
 
-El ile durdurma ve kapsayıcı grubu mevcut yapılandırmayla başlatma ek olarak, şunları yapabilirsiniz [ayarlarını güncelleştirme](container-instances-update.md) çalışan bir kapsayıcı grubunun.
+Aynı yapılandırmaya sahip bir kapsayıcı grubunu el ile durdurup başlatmaya ek olarak, çalışan bir kapsayıcı grubunun [ayarlarını güncelleştirebilirsiniz](container-instances-update.md) .
 
 <!-- LINKS - External -->
 

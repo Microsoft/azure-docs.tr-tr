@@ -1,49 +1,40 @@
 ---
-title: Linux VM'den - Azure veri diski çıkarma | Microsoft Docs
-description: Azure CLI veya Azure portalını kullanarak azure'da bir sanal makineden veri diski çıkarma öğrenin.
-services: virtual-machines-linux
-documentationcenter: ''
+title: Linux VM 'den bir veri diskini ayırma-Azure
+description: Azure CLı veya Azure portal kullanarak Azure 'daki bir sanal makineden bir veri diskini kullanımdan çıkarmayı öğrenin.
 author: roygara
-manager: twooley
-editor: ''
-tags: azure-service-management
-ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.workload: infrastructure-services
-ms.tgt_pltfrm: vm-windows
-ms.devlang: azurecli
-ms.topic: article
+ms.topic: conceptual
 ms.date: 07/18/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: 02cb970b5c70064abbbc71e585fe3dd1540fda90
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f8a0790169b17ad7755386f9bdd4f9372efc83e7
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64696709"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036380"
 ---
-# <a name="how-to-detach-a-data-disk-from-a-linux-virtual-machine"></a>Nasıl bir Linux sanal makinesinden veri diski çıkarma
+# <a name="how-to-detach-a-data-disk-from-a-linux-virtual-machine"></a>Bir Linux sanal makinesinden veri diski ayırma
 
-Sanal makineye bağlı bir veri diskine ihtiyacınız olmadığında bunu kolayca ayırabilirsiniz. Bu diski sanal makineden kaldırır, ancak depolama alanından kaldırmaz. Bu makalede, bir Ubuntu LTS, 16.04 dağıtım çalışıyoruz. Başka bir dağıtım kullanıyorsanız, diski çıkarma yönergelerini farklı olabilir.
+Sanal makineye bağlı bir veri diskine ihtiyacınız olmadığında bunu kolayca ayırabilirsiniz. Bu, diski sanal makineden kaldırır, ancak depolama alanından kaldırmaz. Bu makalede Ubuntu LTS 16,04 dağıtımı ile çalışıyoruz. Farklı bir dağıtım kullanıyorsanız, diskin takılmasını kaldırmak için yönergeler farklı olabilir.
 
 > [!WARNING]
-> Disk ayırma, otomatik olarak silinmez. Premium depolamaya abone olduğunuz, disk için depolama ücretleri uygulanmaya devam edecektir. Daha fazla bilgi için [fiyatlandırma ve Premium depolama kullanırken faturalama](https://azure.microsoft.com/pricing/details/storage/page-blobs/).
+> Bir diski ayırdıysanız otomatik olarak silinmez. Premium depolamaya abone olduysa, disk için depolama ücretleri uygulanmaya devam edersiniz. Daha fazla bilgi için [Premium Depolama kullanılırken fiyatlandırma ve faturalandırma](https://azure.microsoft.com/pricing/details/storage/page-blobs/)bölümüne bakın.
 
 Disk üzerinde var olan verileri yeniden kullanmak isterseniz bu verileri aynı sanal makineye veya başka birine yeniden ekleyebilirsiniz.  
 
 
-## <a name="connect-to-the-vm-to-unmount-the-disk"></a>Diski çıkarın VM'ye bağlanma
+## <a name="connect-to-the-vm-to-unmount-the-disk"></a>Diski çıkarmak için VM 'ye bağlanın
 
-CLI veya portalı kullanarak disk ayırmadan önce disk kaldırılması gerekiyor ve fstab dosyanızı, başvuruları kaldırılır.
+CLı veya Portal kullanarak diski ayırabilmeniz için önce fstab dosyanızdaki disk bağlantısını çıkarmanız ve başvuruları kaldıralmanız gerekir.
 
-VM’ye bağlanın. Bu örnekte, sanal makinenin genel IP adresidir *10.0.1.4* kullanıcı *azureuser*: 
+VM’ye bağlanın. Bu örnekte, VM 'nin genel IP adresi Kullanıcı adı *azureuser*ile *10.0.1.4* olur: 
 
 ```bash
 ssh azureuser@10.0.1.4
 ```
 
-İlk olarak, ayırmak istediğiniz veri diski bulun. Aşağıdaki örnek dmesg SCSI diskler üzerinde filtrelemek için kullanır:
+İlk olarak, ayırmak istediğiniz veri diskini bulun. Aşağıdaki örnek, SCSI disklerinde filtrelemek için dmesg kullanır:
 
 ```bash
 dmesg | grep SCSI
@@ -59,13 +50,13 @@ dmesg | grep SCSI
 [ 1828.162306] sd 5:0:0:0: [sdc] Attached SCSI disk
 ```
 
-Burada, *sdc* ayırmak için istediğimiz disktir. Ayrıca, diskin UUID'sini alın.
+Burada, *SDC* ayırmak istediğimiz disktir. Ayrıca, diskin UUID 'sini de almalısınız.
 
 ```bash
 sudo -i blkid
 ```
 
-Çıktı aşağıdaki örneğe benzer:
+Çıktı aşağıdaki örneğe benzer şekilde görünür:
 
 ```bash
 /dev/sda1: UUID="11111111-1b1b-1c1c-1d1d-1e1e1e1e1e1e" TYPE="ext4"
@@ -74,33 +65,33 @@ sudo -i blkid
 ```
 
 
-Düzen */etc/fstab* disk başvuruları kaldırın. 
+*/Etc/fstab* dosyasını düzenleyerek diske başvuruları kaldırın. 
 
 > [!NOTE]
-> Yanlış düzenleme **/etc/fstab** dosya yapılamamasına bir sistemde neden olabilir. Emin değilseniz, düzgün bir şekilde bu dosya düzenleme hakkında daha fazla bilgi için ait dağıtım belgelerine bakın. Ayrıca düzenlemeden önce /etc/fstab dosyasının yedek bir kopyası oluşturulur önerilir.
+> **/Etc/fstab** dosyasının yanlış düzenlenmesiyle, önyüklenemeyen bir sistemle sonuçlanabilir. Emin değilseniz, bu dosyayı doğru şekilde düzenleme hakkında bilgi edinmek için dağıtımın belgelerine bakın. Ayrıca,/etc/fstab dosyasının bir yedeğinin düzenlenmeden önce oluşturulması önerilir.
 
-Açık */etc/fstab* gibi bir metin düzenleyicisinde dosya:
+*/Etc/fstab* dosyasını bir metin düzenleyicisinde şu şekilde açın:
 
 ```bash
 sudo vi /etc/fstab
 ```
 
-Bu örnekte, aşağıdaki satırı öğesinden silinmesi gereken */etc/fstab* dosyası:
+Bu örnekte, */etc/fstab* dosyasından aşağıdaki satırın silinmesi gerekir:
 
 ```bash
 UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail   1   2
 ```
 
-Kullanım `umount` disk çıkaramadı. Aşağıdaki örnek çıkarır */dev/sdc1* gelen bölüm */datadrive* bağlama noktası:
+Diski çıkarmak için `umount` kullanın. Aşağıdaki örnek */datadrive* bağlama noktasından */dev/sdc1* bölümünü çıkarır:
 
 ```bash
 sudo umount /dev/sdc1 /datadrive
 ```
 
 
-## <a name="detach-a-data-disk-using-azure-cli"></a>Azure CLI kullanarak veri diski çıkarma 
+## <a name="detach-a-data-disk-using-azure-cli"></a>Azure CLı kullanarak veri diskini ayırma 
 
-Bu örnekte ayırır *myDataDisk* adlı VM'den diski *myVM* içinde *myResourceGroup*.
+Bu örnek, *Myresourcegroup*Içindeki *MYVM* adlı VM 'den *mydatadisk* diskini ayırır.
 
 ```azurecli
 az vm disk detach \
@@ -109,23 +100,23 @@ az vm disk detach \
     -n myDataDisk
 ```
 
-Disk depolama alanında kalır, ancak artık bir sanal makineye bağlı değildir.
+Disk depolamada kalır, ancak artık bir sanal makineye bağlı değildir.
 
 
 ## <a name="detach-a-data-disk-using-the-portal"></a>Portalı kullanarak veri diski çıkarma
 
-1. Sol menüde **sanal makineler**.
-2. Önce ayırmak istediğiniz veri diskinin bulunduğu sanal makineyi seçin **Durdur** için VM'yi serbest bırakın.
-3. Sanal makine bölmesinde seçin **diskleri**.
-4. Üst kısmındaki **diskleri** bölmesinde **Düzenle**.
-5. İçinde **diskleri** bölmesinde, en sağdaki ayırmak için istediğiniz veri diskinin ![Ayır düğmesi](./media/detach-disk/detach.png) düğmesi ayırma.
-5. Disk kaldırıldıktan sonra Bölmenin üst kısmındaki Kaydet'e tıklayın.
-6. Sanal makine bölmesinden **genel bakış** ve ardından **Başlat** VM'yi yeniden başlatmak için bölmenin üstünde düğme.
+1. Sol taraftaki menüden **sanal makineler**' i seçin.
+2. Ayırmak istediğiniz veri diskine sahip sanal makineyi seçin ve VM 'yi serbest bırakmak için **Durdur** ' a tıklayın.
+3. Sanal makine bölmesinde, **diskler**' i seçin.
+4. **Diskler** bölmesinin üst kısmında **Düzenle**' yi seçin.
+5. **Diskler** bölmesinde, ayırmak istediğiniz veri diskinin en sağında yer alan ![ayır düğme görüntüsünü](./media/detach-disk/detach.png) ayır düğmesine tıklayın.
+5. Disk kaldırıldıktan sonra bölmenin en üstünde yer alan Kaydet ' e tıklayın.
+6. Sanal makine bölmesinde **genel bakış** ' a tıklayın ve ardından sanal makineyi yeniden başlatmak için bölmenin üst kısmındaki **Başlat** düğmesine tıklayın.
 
-Disk depolama alanında kalır, ancak artık bir sanal makineye bağlı değildir.
+Disk depolamada kalır, ancak artık bir sanal makineye bağlı değildir.
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Veri diskini yeniden kullanmak istiyorsanız, eklediğiniz [, başka bir VM'ye](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Veri diskini yeniden kullanmak istiyorsanız, yalnızca [başka BIR sanal](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)makineye ekleyebilirsiniz.
 

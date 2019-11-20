@@ -1,106 +1,106 @@
 ---
-title: İlgili Azure-yönlendirme siteye | Microsoft Docs
-description: Bu makalede, noktadan siteye VPN yönlendirme nasıl davranacağını anlamanıza yardımcı olur.
+title: 'Azure VPN Gateway: P2S yönlendirme hakkında'
+description: Bu makale, Noktadan siteye VPN yönlendirmesinin nasıl davranacağını anlamanıza yardımcı olur.
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: article
-ms.date: 01/28/2019
+ms.date: 10/08/2019
 ms.author: anzaman
-ms.openlocfilehash: 486a910226db5dc7b36aaf873e7bb8115eb78805
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7205b5f3049773545d78c3a3e3423450779b78c5
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60653621"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150974"
 ---
 # <a name="about-point-to-site-vpn-routing"></a>Noktadan Siteye VPN yönlendirme hakkında
 
-Bu makalede Azure noktadan siteye VPN yönlendirme nasıl davranacağını anlamanıza yardımcı olur. P2S VPN yönlendirme davranışı, istemci işletim sistemi, VPN bağlantısı ve nasıl, birbirine bağlı sanal ağlar (Vnet'ler) için kullanılan protokol bağımlıdır.
+Bu makale, Azure Noktadan siteye VPN yönlendirmesinin nasıl davranacağını anlamanıza yardımcı olur. P2S VPN yönlendirme davranışı, istemci işletim sistemine, VPN bağlantısı için kullanılan protokole ve sanal ağların (VNet 'ler) birbirlerine nasıl bağlı olduğunu bağımlıdır.
 
-Azure, şu anda uzaktan erişim için Ikev2 ve SSTP iki protokollerini destekler. Ikev2, çok sayıda istemci işletim Windows, Linux, MacOS, Android ve iOS gibi sistemlerinde desteklenir. SSTP yalnızca Windows üzerinde desteklenir. Ağınızın topolojisi için değişiklik ve Windows VPN istemciniz varsa, Windows istemcileri için VPN istemci paketi indirilir ve istemciye uygulanacak değişiklikler için sırayla yeniden yüklenir.
+Azure Şu anda uzaktan erişim, Ikev2 ve SSTP için iki protokolü desteklemektedir. Ikev2, Windows, Linux, MacOS, Android ve iOS gibi birçok istemci işletim sisteminde desteklenir. SSTP yalnızca Windows 'ta desteklenir. Ağınızın topolojisine bir değişiklik yaparsanız ve Windows VPN istemcileriniz varsa, değişikliklerin istemciye uygulanması için Windows istemcileri için VPN istemci paketinin indirilip yeniden yüklenmesi gerekir.
 
 > [!NOTE]
 > Bu makale yalnızca Ikev2 için geçerlidir.
 >
 
-## <a name="diagrams"></a>Şemaları hakkında
+## <a name="diagrams"></a>Diyagramlar hakkında
 
-Bu makaledeki farklı diyagramlarda vardır. Her bölümde farklı topoloji veya yapılandırma gösterilmektedir. IPSec tünelleri hem de olduğu gibi bu makalenin amaçları için siteden siteye (S2S) ve VNet-VNet bağlantılarında aynı şekilde işlev. Bu makaledeki tüm VPN ağ geçitleri yol tabanlı.
+Bu makalede birçok farklı diyagram vardır. Her bölümde farklı bir topoloji veya yapılandırma gösterilmektedir. Bu makalenin amaçları doğrultusunda, siteden siteye (S2S) ve VNet 'ten VNet 'e bağlantılar, her ikisi de IPSec tünellerinin yanı sıra aynı şekilde çalışır. Bu makaledeki tüm VPN ağ geçitleri rota tabanlıdır.
 
-## <a name="isolatedvnet"></a>Bir sanal ağ yalıtılmış
+## <a name="isolatedvnet"></a>Bir yalıtılmış VNet
 
-Bu örnekte noktadan siteye VPN ağ geçidi bağlantısı olmayan bağlı olan veya tüm diğer sanal ağ ile (VNet1 ') eşlenmiş VNet içindir. Bu örnekte, SSTP veya Ikev2 kullanan istemciler vnet1'e erişebilir.
+Bu örnekteki Noktadan siteye VPN Ağ Geçidi bağlantısı, başka bir sanal ağla bağlantılı veya eşlenmiş olmayan bir VNet için (VNet1). Bu örnekte, istemciler VNet1 'e erişebilir.
 
-![sanal ağ yönlendirme yalıtılmış](./media/vpn-gateway-about-point-to-site-routing/1.jpg "VNet yönlendirme yalıtılmış")
+![yalıtılmış VNet yönlendirmesi](./media/vpn-gateway-about-point-to-site-routing/1.jpg "yalıtılmış VNet yönlendirmesi")
 
 ### <a name="address-space"></a>Adres alanı
 
-* VNet1: 10.1.0.0/16
+* VNet1:10.1.0.0/16
 
 ### <a name="routes-added"></a>Eklenen yollar
 
-* Windows istemcileri için eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
 
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
 
 ### <a name="access"></a>Access
 
-* Windows istemcileri vnet1'e erişebilir.
+* Windows istemcileri VNet1 erişebilir
 
-* Windows olmayan istemciler vnet1'e erişebilir
+* Windows dışı istemciler VNet1 erişebilir
 
-## <a name="multipeered"></a>Birden çok eşlenmiş sanal ağlar
+## <a name="multipeered"></a>Birden çok eşlenen sanal ağlar
 
-Bu örnekte, noktadan siteye VPN ağ geçidi bağlantısı için VNet1 ' dir. VNet1'den vnet2'ye ile eşlenmişse. VNet 2 ile VNet3 eşlenmişse. VNet1 ile vnet4 arasında eşlenmişse. Hiçbir doğrudan VNet1 ile VNet3 arasında eşleme yoktur. VNet1 "ağ geçidi aktarımına izin ver" ve "etkin Uzak ağ geçitlerini kullan" den vnet2'ye sahiptir.
+Bu örnekte, Noktadan siteye VPN Ağ Geçidi bağlantısı VNet1 içindir. VNet1, VNet2 ile eşlenmez. VNet 2, VNet3 ile eşlenmez. VNet1, Ile vnet4 arasında ile eşlenmez. VNet1 ve VNet3 arasında doğrudan eşleme yoktur. VNet1 "Gateway aktarımına Izin ver" ve VNet2 "uzak ağ geçitlerini kullan" özelliği etkinleştirilmiş.
 
-Windows kullanan istemciler doğrudan eşlenmiş Vnet'ler erişebilir, ancak sanal ağ eşlemesi veya ağ topolojisi için herhangi bir değişiklik yapılırsa VPN istemcisinin yeniden yüklenmesi gerekir. Windows olmayan istemcilerin doğrudan eşlenmiş sanal ağlar erişebilir. Erişim geçişli değildir ve yalnızca doğrudan eşlenmiş sanal ağlara sınırlıdır.
+Windows kullanan istemciler doğrudan eşlenmiş sanal ağlara erişebilir, ancak VNet eşlemesi veya ağ topolojisi üzerinde herhangi bir değişiklik yapılırsa VPN istemcisinin yeniden indirilmesi gerekir. Windows dışı istemciler, doğrudan eşlenmiş sanal ağlara erişebilir. Erişim geçişli değildir ve yalnızca doğrudan eşlenmiş VNET 'ler ile sınırlıdır.
 
-![birden çok sanal ağlar eşlenmiş](./media/vpn-gateway-about-point-to-site-routing/2.jpg "birden çok eşlenmiş sanal ağlar")
+![birden çok eşlenen sanal ağlar](./media/vpn-gateway-about-point-to-site-routing/2.jpg "birden çok eşlenen sanal ağlar")
 
 ### <a name="address-space"></a>Adres alanı:
 
-* VNet1: 10.1.0.0/16
+* VNet1:10.1.0.0/16
 
-* VNet2: 10.2.0.0/16
+* VNet2:10.2.0.0/16
 
-* VNet3: 10.3.0.0/16
+* VNet3:10.3.0.0/16
 
-* VNet4: 10.4.0.0/16
+* Ile vnet4 arasında: 10.4.0.0/16
 
 ### <a name="routes-added"></a>Eklenen yollar
 
-* Windows istemcileri için eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.4.0.0/16, 192.168.0.0/24
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.4.0.0/16, 192.168.0.0/24
 
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.4.0.0/16, 192.168.0.0/24
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.4.0.0/16, 192.168.0.0/24
 
 ### <a name="access"></a>Access
 
-* Windows istemcileri VNet1'den vnet2'ye ve vnet4 arasında erişebilir, ancak VPN istemcisi topolojisi değişikliklerin etkili olması yeniden yüklenmesi gerekir.
+* Windows istemcileri VNet1, VNet2 ve Ile vnet4 arasında erişebilir, ancak herhangi bir topoloji değişikliklerinin etkili olması için VPN istemcisinin yeniden indirilmesi gerekir.
 
-* Windows olmayan istemcilerin VNet1'den vnet2'ye ve vnet4 arasında erişebilirsiniz.
+* Windows olmayan istemciler VNet1, VNet2 ve Ile vnet4 arasında 'ye erişebilir
 
-## <a name="multis2s"></a>Bir S2S VPN kullanarak bağlanan birden fazla sanal ağ
+## <a name="multis2s"></a>S2S VPN kullanılarak bağlı birden çok VNET
 
-Bu örnekte, noktadan siteye VPN ağ geçidi bağlantısı için VNet1 ' dir. Vnet2'den vnet1'e bağlı bir siteden siteye VPN bağlantısı kullanarak. VNet2 VNet3 bağlı bir siteden siteye VPN bağlantısı kullanarak. Doğrudan bir eşlemesi veya VNet1 ile VNet3 arasında siteden siteye VPN bağlantısı yoktur. Tüm siteden siteye bağlantıları BGP yönlendirme için çalışmıyor.
+Bu örnekte, Noktadan siteye VPN Ağ Geçidi bağlantısı VNet1 içindir. VNet1, siteden siteye VPN bağlantısı kullanılarak VNet2 'e bağlanır. VNet2, siteden siteye VPN bağlantısı kullanılarak VNet3 'e bağlanır. VNet1 ve VNet3 arasında doğrudan eşleme veya siteden siteye VPN bağlantısı yoktur. Tüm siteden siteye bağlantılar yönlendirme için BGP 'yi çalıştırmıyor.
 
-Windows veya başka bir desteklenen işletim sistemi kullanan istemciler yalnızca vnet1'e erişebilir. Ek sanal ağlar erişmek için BGP kullanılması gerekir.
+Windows veya desteklenen başka bir işletim sistemi kullanan istemciler yalnızca VNet1 erişebilir. Ek VNET 'lere erişmek için BGP kullanılmalıdır.
 
-![birden çok sanal ağlar ve S2S](./media/vpn-gateway-about-point-to-site-routing/3.jpg "birden çok sanal ağlar ve S2S")
+![birden çok VNET ve S2S](./media/vpn-gateway-about-point-to-site-routing/3.jpg "birden çok VNET ve S2S")
 
 ### <a name="address-space"></a>Adres alanı
 
-* VNet1: 10.1.0.0/16
+* VNet1:10.1.0.0/16
 
-* VNet2: 10.2.0.0/16
+* VNet2:10.2.0.0/16
 
-* VNet3: 10.3.0.0/16
+* VNet3:10.3.0.0/16
 
 ### <a name="routes-added"></a>Eklenen yollar
 
-* Windows istemcileri için eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
 
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 192.168.0.0/24
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 192.168.0.0/24
 
 ### <a name="access"></a>Access
 
@@ -108,147 +108,147 @@ Windows veya başka bir desteklenen işletim sistemi kullanan istemciler yalnız
 
 * Windows olmayan istemciler yalnızca VNet1 erişebilir
 
-## <a name="multis2sbgp"></a>Bir S2S VPN (BGP) kullanarak birden çok sanal ağlara bağlı
+## <a name="multis2sbgp"></a>S2S VPN (BGP) kullanılarak bağlı birden fazla sanal ağ
 
-Bu örnekte, noktadan siteye VPN ağ geçidi bağlantısı için VNet1 ' dir. Vnet2'den vnet1'e bağlı bir siteden siteye VPN bağlantısı kullanarak. VNet2 VNet3 bağlı bir siteden siteye VPN bağlantısı kullanarak. Doğrudan bir eşlemesi veya VNet1 ile VNet3 arasında siteden siteye VPN bağlantısı yoktur. Tüm Site ve Site bağlantıları, BGP yönlendirme için çalışıyor.
+Bu örnekte, Noktadan siteye VPN Ağ Geçidi bağlantısı VNet1 içindir. VNet1, siteden siteye VPN bağlantısı kullanılarak VNet2 'e bağlanır. VNet2, siteden siteye VPN bağlantısı kullanılarak VNet3 'e bağlanır. VNet1 ve VNet3 arasında doğrudan eşleme veya siteden siteye VPN bağlantısı yoktur. Tüm siteden siteye bağlantılar yönlendirme için BGP çalıştırıyor.
 
-İstemcileri Windows ya da başka bir desteklenen işletim sistemi kullanarak siteden siteye VPN bağlantısı kullanarak bağlı olan tüm Vnet'lerin erişebilir, ancak bağlı sanal ağlar için rotalar Windows istemcilerine el ile eklenmesi gerekir.
+Windows veya desteklenen başka bir işletim sistemi kullanan istemciler, siteden siteye VPN bağlantısı kullanılarak bağlı olan tüm sanal ağlara erişebilir, ancak bağlı VNET 'lere olan yolların Windows istemcilerine el ile eklenmesi gerekir.
 
-![birden çok sanal ağlar ve S2S (BGP)](./media/vpn-gateway-about-point-to-site-routing/4.jpg "birden çok sanal ağlar ve S2S BGP")
-
-### <a name="address-space"></a>Adres alanı
-
-* VNet1: 10.1.0.0/16
-
-* VNet2: 10.2.0.0/16
-
-* VNet3: 10.3.0.0/16
-
-### <a name="routes-added"></a>Eklenen yollar
-
-* Windows istemcileri için eklenen yollar: 10.1.0.0/16
-
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 192.168.0.0/24
-
-### <a name="access"></a>Access
-
-* Windows istemcileri VNet1'den vnet2'ye ve VNet3 erişebilir, ancak yolları'den vnet2'ye ve VNet3 el ile eklenmesi gerekir.
-
-* Windows olmayan istemcilerin VNet1'den vnet2'ye ve VNet3 erişebilirsiniz.
-
-## <a name="vnetbranch"></a>Bir sanal ağ ve bir şube ofisi
-
-Bu örnekte, noktadan siteye VPN ağ geçidi bağlantısı için VNet1 ' dir. Vnet1'e bağlı olmayan / herhangi diğer sanal ağla eşlendikten ancak bir BGP çalıştırmayan bir siteden siteye VPN bağlantısı üzerinden şirket içi siteye bağlı.
-
-Windows ve Windows olmayan istemciler, yalnızca vnet1'e erişebilir.
-
-![bir sanal ağ ve bir şube ofisi ile yönlendirme](./media/vpn-gateway-about-point-to-site-routing/5.jpg "VNet ve şube ile yönlendirme")
+![birden çok VNET ve S2S (BGP)](./media/vpn-gateway-about-point-to-site-routing/4.jpg "birden çok VNET ve S2S BGP")
 
 ### <a name="address-space"></a>Adres alanı
 
-* VNet1: 10.1.0.0/16
+* VNet1:10.1.0.0/16
 
-* Site1: 10.101.0.0/16
+* VNet2:10.2.0.0/16
+
+* VNet3:10.3.0.0/16
 
 ### <a name="routes-added"></a>Eklenen yollar
 
-* Windows istemcileri için eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16
 
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 192.168.0.0/24
 
 ### <a name="access"></a>Access
 
-* Windows istemcileri yalnızca vnet1'e erişebilir.
+* Windows istemcileri VNet1, VNet2 ve VNet3 erişebilir, ancak VNet2 ve VNet3 yollarının el ile eklenmesi gerekir.
+
+* Windows olmayan istemciler VNet1, VNet2 ve VNet3 'ye erişebilir
+
+## <a name="vnetbranch"></a>Bir sanal ağ ve şube ofisi
+
+Bu örnekte, Noktadan siteye VPN Ağ Geçidi bağlantısı VNet1 içindir. VNet1, başka bir sanal ağla bağlantılı değildir/eşlenmez, ancak BGP çalıştırmayan siteden siteye VPN bağlantısı aracılığıyla şirket içi siteye bağlanır.
+
+Windows ve Windows dışı istemciler yalnızca VNet1 'e erişebilir.
+
+![VNet ve şube ofisi ile yönlendirme](./media/vpn-gateway-about-point-to-site-routing/5.jpg "VNet ve şube ofisi ile yönlendirme")
+
+### <a name="address-space"></a>Adres alanı
+
+* VNet1:10.1.0.0/16
+
+* Site1:10.101.0.0/16
+
+### <a name="routes-added"></a>Eklenen yollar
+
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+
+### <a name="access"></a>Access
+
+* Windows istemcileri yalnızca VNet1 erişebilir
 
 * Windows olmayan istemciler yalnızca VNet1 erişebilir
 
-## <a name="vnetbranchbgp"></a>Bir sanal ağ ve bir şube ofisi (BGP)
+## <a name="vnetbranchbgp"></a>Bir sanal ağ ve şube ofisi (BGP)
 
-Bu örnekte, noktadan siteye VPN ağ geçidi bağlantısı için VNet1 ' dir. Vnet1'e bağlı değil veya tüm diğer sanal ağla eşlendikten BGP çalıştıran bir siteden siteye VPN bağlantısı üzerinden şirket içi siteye (Site1) bağlı olan ancak.
+Bu örnekte, Noktadan siteye VPN Ağ Geçidi bağlantısı VNet1 içindir. VNet1 bağlı değildir veya başka bir sanal ağla eşlenmez, ancak BGP çalıştıran siteden siteye VPN bağlantısı aracılığıyla şirket içi siteye (site1) bağlanır.
 
-Windows istemcileri VNet ve şube ofisi (Site1) erişebilir ancak Site1 yolları istemcide el ile eklenmesi gerekir. Windows olmayan istemciler, VNet ve bunun yanı sıra şirket içi şube ofisi erişebilir.
+Windows istemcileri VNet 'e ve şube ofise (site1) erişebilir, ancak site1 'e giden yolların el ile istemciye eklenmesi gerekir. Windows dışı istemciler, VNet 'e ve şirket içi şube ofisine erişebilir.
 
-![bir sanal ağ ve bir şube ofisi (BGP)](./media/vpn-gateway-about-point-to-site-routing/6.jpg "bir sanal ağ ve bir şube ofisi")
-
-### <a name="address-space"></a>Adres alanı
-
-* VNet1: 10.1.0.0/16
-
-* Site1: 10.101.0.0/16
-
-### <a name="routes-added"></a>Eklenen yollar
-
-* Windows istemcileri için eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
-
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 10.101.0.0/16, 192.168.0.0/24
-
-### <a name="access"></a>Access
-
-* Windows istemcileri VNet1 ve Site1 erişebilir ancak Site1 yolları el ile eklenmesi gerekir.
-
-* Windows olmayan istemciler, VNet1 ve Site1 erişebilir.
-
-
-## <a name="multivnets2sbranch"></a>S2S ve şube kullanarak bağlı birden fazla sanal ağ
-
-Bu örnekte, noktadan siteye VPN ağ geçidi bağlantısı için VNet1 ' dir. Vnet2'den vnet1'e bağlı bir siteden siteye VPN bağlantısı kullanarak. VNet2 VNet3 bağlı bir siteden siteye VPN bağlantısı kullanarak. Doğrudan bir eşlemesi veya VNet1 ve VNet3 ağları arasında siteden siteye VPN tüneli yoktur. VNet3 bir siteden siteye VPN bağlantısı kullanarak bir şube ofisine (Site1) bağlıdır. Tüm VPN bağlantıları BGP çalışmıyor.
-
-Tüm istemciler yalnızca vnet1'e erişebilir.
-
-![multi-VNet S2S ve şube ofis](./media/vpn-gateway-about-point-to-site-routing/7.jpg "multi-VNet S2S ve şube ofis")
+![bir sanal ağ ve şube ofisi (BGP)](./media/vpn-gateway-about-point-to-site-routing/6.jpg "bir sanal ağ ve şube ofisi")
 
 ### <a name="address-space"></a>Adres alanı
 
-* VNet1: 10.1.0.0/16
+* VNet1:10.1.0.0/16
 
-* VNet2: 10.2.0.0/16
-
-* VNet3: 10.3.0.0/16
-
-* Site1: 10.101.0.0/16
+* Site1:10.101.0.0/16
 
 ### <a name="routes-added"></a>Eklenen yollar
 
-* Yollar istemciler eklendi: 10.1.0.0/16, 192.168.0.0/24
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
 
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.101.0.0/16, 192.168.0.0/24
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 10.101.0.0/16, 192.168.0.0/24
 
 ### <a name="access"></a>Access
 
-* Windows istemcileri VNet1 yalnızca erişebilir
+* Windows istemcileri VNet1 ve site1 erişebilir, ancak site1 yollarının el ile eklenmesi gerekir.
+
+* Windows dışı istemciler, VNet1 ve site1 'e erişebilir.
+
+
+## <a name="multivnets2sbranch"></a>S2S ve şube ofisi kullanılarak bağlanan birden çok VNET
+
+Bu örnekte, Noktadan siteye VPN Ağ Geçidi bağlantısı VNet1 içindir. VNet1, siteden siteye VPN bağlantısı kullanılarak VNet2 'e bağlanır. VNet2, siteden siteye VPN bağlantısı kullanılarak VNet3 'e bağlanır. VNet1 ve VNet3 ağları arasında doğrudan eşleme veya siteden siteye VPN tüneli yoktur. VNet3, siteden siteye VPN bağlantısı kullanarak bir şube ofisine (site1) bağlanır. Tüm VPN bağlantıları BGP çalıştırmıyor.
+
+Tüm istemciler yalnızca VNet1 erişim sağlayabilir.
+
+![Çoklu VNet S2S ve şube ofisi](./media/vpn-gateway-about-point-to-site-routing/7.jpg "Çoklu VNet S2S ve şube ofisi")
+
+### <a name="address-space"></a>Adres alanı
+
+* VNet1:10.1.0.0/16
+
+* VNet2:10.2.0.0/16
+
+* VNet3:10.3.0.0/16
+
+* Site1:10.101.0.0/16
+
+### <a name="routes-added"></a>Eklenen yollar
+
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
+
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.101.0.0/16, 192.168.0.0/24
+
+### <a name="access"></a>Access
+
+* Windows istemcileri yalnızca VNet1 erişebilir
 
 * Windows olmayan istemciler yalnızca VNet1 erişebilir
 
-## <a name="multivnets2sbranchbgp"></a>S2S ve şube ofisi (BGP) kullanarak birden çok sanal ağlara bağlı
+## <a name="multivnets2sbranchbgp"></a>S2S ve şube ofisi (BGP) kullanılarak bağlanan birden çok VNET
 
-Bu örnekte, noktadan siteye VPN ağ geçidi bağlantısı için VNet1 ' dir. Vnet2'den vnet1'e bağlı bir siteden siteye VPN bağlantısı kullanarak. VNet2 VNet3 bağlı bir siteden siteye VPN bağlantısı kullanarak. Doğrudan bir eşlemesi veya VNet1 ve VNet3 ağları arasında siteden siteye VPN tüneli yoktur. VNet3 bir siteden siteye VPN bağlantısı kullanarak bir şube ofisine (Site1) bağlıdır. Tüm VPN bağlantıları, BGP çalışıyor.
+Bu örnekte, Noktadan siteye VPN Ağ Geçidi bağlantısı VNet1 içindir. VNet1, siteden siteye VPN bağlantısı kullanılarak VNet2 'e bağlanır. VNet2, siteden siteye VPN bağlantısı kullanılarak VNet3 'e bağlanır. VNet1 ve VNet3 ağları arasında doğrudan eşleme veya siteden siteye VPN tüneli yoktur. VNet3, siteden siteye VPN bağlantısı kullanarak bir şube ofisine (site1) bağlanır. Tüm VPN bağlantıları BGP çalıştırıyor.
 
-İstemcileri Windows kullanarak sanal ağlar erişebilir ve bir siteden siteye VPN bağlantısı, ancak vnet2'den, VNet3 ve Site1 yolları kullanarak bağlanan siteler için istemci el ile eklenmesi gerekir. Windows olmayan istemciler, sanal ağlar ve herhangi bir el ile müdahale olmadan bir siteden siteye VPN bağlantısı kullanarak bağlanan siteler erişebilir. Geçişli bir erişilir ve istemciler tüm bağlı sanal ağlar ve siteleri (şirket içi) kaynaklarına erişim sağlayabilir.
+Windows kullanan istemciler, siteden siteye VPN bağlantısı kullanılarak bağlanan sanal ağlara ve sitelere erişebilir, ancak VNet2, VNet3 ve site1 yollarının istemciye el ile eklenmesi gerekir. Windows dışı istemcileri, bir siteden siteye VPN bağlantısı kullanılarak bağlı olan sanal ağlara ve sitelere el ile müdahale olmadan erişebilirler. Erişim geçişlidir ve istemciler tüm bağlı sanal ağlarda ve sitelerde (Şirket içi) kaynaklara erişebilir.
 
-![multi-VNet S2S ve şube ofis](./media/vpn-gateway-about-point-to-site-routing/8.jpg "multi-VNet S2S ve şube ofis")
+![Çoklu VNet S2S ve şube ofisi](./media/vpn-gateway-about-point-to-site-routing/8.jpg "Çoklu VNet S2S ve şube ofisi")
 
 ### <a name="address-space"></a>Adres alanı
 
-* VNet1: 10.1.0.0/16
+* VNet1:10.1.0.0/16
 
-* VNet2: 10.2.0.0/16
+* VNet2:10.2.0.0/16
 
-* VNet3: 10.3.0.0/16
+* VNet3:10.3.0.0/16
 
-* Site1: 10.101.0.0/16
+* Site1:10.101.0.0/16
 
 ### <a name="routes-added"></a>Eklenen yollar
 
-* Yollar istemciler eklendi: 10.1.0.0/16, 192.168.0.0/24
+* Windows istemcilerine eklenen yollar: 10.1.0.0/16, 192.168.0.0/24
 
-* Windows olmayan istemciler için eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.101.0.0/16, 192.168.0.0/24
+* Windows olmayan istemcilere eklenen yollar: 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.101.0.0/16, 192.168.0.0/24
 
 ### <a name="access"></a>Access
 
-* Windows istemcileri VNet1, vnet2'den, VNet3 ve Site1 erişebilir, ancak yolları vnet2'den, VNet3 ve Site1 istemciye elle eklenmesi gerekir.
+* Windows istemcileri VNet1, VNet2, VNet3 ve site1 erişebilir, ancak VNet2, VNet3 ve site1 yollarının istemciye el ile eklenmesi gerekir.
 
-* Windows olmayan istemcilerin VNet1, vnet2'den, VNet3 ve Site1 erişebilirsiniz.
+* Windows olmayan istemciler VNet1, Vnet2, VNet3 ve site1 'e erişebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [Azure portalını kullanarak bir P2S VPN Oluştur](vpn-gateway-howto-point-to-site-resource-manager-portal.md) , P2S VPN oluşturmaya başlayın.
+P2S VPN 'nizi oluşturmaya başlamak için [Azure Portal kullanarak P2S VPN oluşturma](vpn-gateway-howto-point-to-site-resource-manager-portal.md) konusuna bakın.

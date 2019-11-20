@@ -1,94 +1,94 @@
 ---
-title: SSS - Avere vFXT Azure
-description: Azure için Avere vFXT hakkında sık sorulan sorular
+title: SSS-Azure için avere vFXT
+description: Azure için avere vFXT hakkında sık sorulan sorular
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
-ms.date: 02/28/2019
-ms.author: v-erkell
-ms.openlocfilehash: 47a4b38d39c52992b51284776ec34cb9491020e7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/06/2019
+ms.author: rohogue
+ms.openlocfilehash: 7839530463ea834ed5f8ae2ae06854985a77c673
+ms.sourcegitcommit: 16c5374d7bcb086e417802b72d9383f8e65b24a7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65595417"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73847360"
 ---
 # <a name="avere-vfxt-for-azure-faq"></a>Azure için Avere vFXT hakkında SSS
 
-Bu makalede, Azure için Avere vFXT gereksinimleriniz için doğru seçenek olup olmadığını karar vermenize yardımcı olabilecek sorular yanıtlanmaktadır. Avere vFXT hakkında temel bilgiler verir ve diğer Azure bileşenlerini ve dış satıcılardan ürünleri ile nasıl çalıştığı açıklanmaktadır. 
+Bu makalede, Azure için avere vFXT 'nin gereksinimlerinize uygun olup olmadığına karar vermenize yardımcı olabilecek sorular yanıtlanmaktadır. Avere vFXT hakkında temel bilgileri verir ve diğer Azure bileşenleriyle ve dış satıcıların ürünleriyle nasıl çalıştığını açıklar.
 
-## <a name="general"></a>Genel 
+## <a name="general"></a>Genel
 
 ### <a name="what-is-avere-vfxt-for-azure"></a>Azure için Avere vFXT nedir?
 
-Azure için Avere vFXT kritik iş yüklerinin verimli işleme için Azure işlem etkin verileri önbelleğe alan bir yüksek performanslı dosya sistemidir.
+Azure için avere vFXT, kritik iş yüklerini verimli bir şekilde işlemek için Azure işlem 'da etkin verileri önbelleğe alan yüksek performanslı bir dosya sistemidir.
 
-### <a name="is-avere-vfxt-a-storage-solution"></a>Bir depolama çözümü Avere vFXT mi?
+### <a name="is-avere-vfxt-a-storage-solution"></a>Avere vFXT bir depolama çözümüdür mi?
 
-Hayır. Avere vFXT olan bir dosya sistemi *önbellek* , EMC NetApp NAS veya bir Azure blob kapsayıcısı gibi depolama ortamlarına ekler. Avere vFXT veri istemcilerden gelen istekleri verimli ve uygun ölçekte ve zaman içerisinde performansı artırmak için hizmet verileri önbelleğe alır. Avere vFXT kendisi verileri depolamaz. Bu, arkasına depolanan veri miktarı hakkında bir bilgi bulunmaz.
+Hayır. Avere vFXT, EMC veya NetApp NAS veya bir Azure Blob kapsayıcısı gibi depolama ortamlarına bağlanan bir dosya sistemi *önbelleğidir* . Avere vFXT istemcilerden gelen veri isteklerini kolaylaştırır ve ölçek ve zaman içinde performansı artırmak için hizmet verdiği verileri önbelleğe alır. Avere vFXT, verileri depolamaz. Bu, arkasında depolanan veri miktarı hakkında bilgi içermez.
 
-### <a name="is-avere-vfxt-a-tiering-solution"></a>Çözüm katmanlama Avere vFXT mi?
+### <a name="is-avere-vfxt-a-tiering-solution"></a>Avere vFXT bir çözüm mi?
 
-Avere vFXT sık ve seyrek erişimli Katmanlar arasındaki katman verileri otomatik olarak yapar.  
+Avere vFXT, sık erişimli ve seyrek katmanlar arasında verileri otomatik olarak katmanlamaz.  
 
-### <a name="how-do-i-know-if-an-environment-is-right-for-avere-vfxt"></a>Bir ortam Avere vFXT için doğru seçenek olup olmadığını nasıl anlarım?
+### <a name="how-do-i-know-if-an-environment-is-right-for-avere-vfxt"></a>Nasıl yaparım? avere vFXT için bir ortamın doğru olup olmadığını öğrenin.
 
-Bu soruyu hakkında düşünmek için en iyi yolu sormaktır, "iş yükü önbelleğe alınabilir mi?" Diğer bir deyişle, iş yüküne yüksek okuma ve yazma oranı var mı? 80/20 veya 70/30 okumayı/yazmayı buna bir örnektir.
+Bu soruyu düşünmenin en iyi yolu, "iş yükü önbelleklenebilir mi?" sorusunu sormaktır. Diğer bir deyişle, iş yükünün okuma/yazma oranına sahip olması gerekir mi? Örneğin, 80/20 veya 70/30 okuma/yazma işlemleri.
 
-Avere vFXT Azure'a yönelik çok sayıda Azure sanal makineler üzerinde çalışan bir dosya tabanlı analiz işlem hattı varsa ve bir veya daha fazla aşağıdaki koşulları karşılayan göz önünde bulundurun:
+Çok sayıda Azure sanal makinesi üzerinde çalışan dosya tabanlı bir analitik işlem hattına sahipseniz ve aşağıdaki koşullardan birini veya daha fazlasını karşılıyorsa Azure için avere vFXT 'yi düşünün:
 
-* Genel performans uzun dosya erişim zamanları (on gereksinimlerine bağlı olarak, saniye ve milisaniye) nedeniyle yavaş veya tutarsız. Bu gecikme süresi için müşteri tarafından kabul edilmez.
+* Genel performans, uzun dosya erişim süreleri (gereksinimlere bağlı olarak on dakika veya saniye) nedeniyle yavaş veya tutarsız olur. Bu gecikme, müşteri tarafından kabul edilemez.
 
-* Verilerin işlenmesi için gereken WAN ortam en sonunda bulunan ve verilerin kalıcı olarak taşınması zordur. Verileri, bir müşteri veri merkezinde veya farklı bir Azure bölgesinde olabilir.
+* İşleme için gereken veriler bir WAN ortamının en sonunda bulunur ve bu verilerin kalıcı olarak taşınması pratik bir şekilde yapılır. Veriler farklı bir Azure bölgesinde veya bir müşteri veri merkezinde olabilir.
 
-* İstemcilerin çok sayıda veri - Örneğin, bir yüksek performanslı bilgi işlem (HPC) kümesinde isteniyor. Çok sayıda eş zamanlı istek gecikme süresini artırabilir.
+* Önemli sayıda istemci, verileri (örneğin, yüksek performanslı bilgi işlem (HPC) kümesinde ister. Çok sayıda eşzamanlı istek gecikme süresini artırabilir.
 
-* Müşteri, geçerli işlem hattı çalıştırma ister "olduğu gibi" Azure sanal makinelerinde ve ihtiyaçlarını POSIX tabanlı depolama (veya önbelleğe alma) paylaşılan ölçeklenebilirlik için çözüm. Azure için Avere vFXT kullanarak Azure Blob Depolama yerel çağrı yapmak için iş işlem hattını yeniden oluşturma gerekmez.
+* Müşteri, Azure sanal makinelerinde geçerli işlem hattını "olduğu gibi" çalıştırmak istiyor ve ölçeklenebilirlik için POSIX tabanlı bir paylaşılan depolama (veya önbelleğe alma) çözümüne ihtiyaç duyuyor. Azure için avere vFXT kullanarak, Azure Blob depolamaya yerel çağrılar yapmak üzere iş ardışık düzenini yeniden mimarmeniz gerekmez.
 
-* HPC uygulamanızı NFSv3 istemcilerde temel alır. (Bazı durumlarda, SMB 2.1 istemcileri kullanabilirsiniz, ancak performans sınırlıdır.)
+* HPC uygulamanız NFSv3 istemcilerini temel alır. (Bazı durumlarda, SMB 2,1 istemcilerini kullanabilir, ancak performans sınırlıdır.)
 
-Aşağıdaki diyagramda, bu sorunun yanıtı basitleştirir. İş akışınızı üst sağa edilirse, önbelleğe alma çözümü Avere ortamınız için uygun olduğu daha yakındır.
+Aşağıdaki diyagram, bu sorunun yanıtını basitleştirir. İş akışınız sağ üst köşede, avere önbellek çözümünün ortamınız için doğru olması olasıdır.
 
-![binlerce istemciden okuma ağır yüklerle daha iyi olduğunu gösteren diyagram Avere vFXT için uygun](media/avere-vfxt-fit-assessment.png)
+![Avere vFXT için binlerce istemci içeren okuma ağır yükün daha uygun olduğunu gösteren diyagram](media/avere-vfxt-fit-assessment.png)
 
-### <a name="at-what-scale-of-clients-does-the-avere-vfxt-solution-make-the-most-sense"></a>Hangi istemcilerin ölçeğini Avere mu vFXT çözüm en anlamlı yapılsın mı?
+### <a name="at-what-scale-of-clients-does-the-avere-vfxt-solution-make-the-most-sense"></a>İstemci ölçeğinde avere vFXT çözümü en mantıklı midir?
 
-Avere vFXT önbellek çözümü, yüzlerce, binlerce veya on binlerce işlem çekirdeğine işlemek için oluşturulmuştur. Hafif iş çalışan birkaç makineleriniz varsa, Avere vFXT doğru çözüm değildir.
+Avere vFXT önbellek çözümü yüzlerce, binlerce veya on binlerce işlem çekirdeğini işleyecek şekilde oluşturulmuştur. Hafif çalışma çalıştıran birkaç makineniz varsa, avere vFXT doğru çözüm değildir.
 
-Tipik Avere vFXT müşteriler yaklaşık 1.000 CPU çekirdeği başlangıç zorlu iş yüklerini çalıştırın. Bu ortamların çekirdek 50.000 veya daha büyük olabilir. Avere vFXT ölçeklenebilir olduğundan, daha fazla üretilen işi veya daha yüksek IOPS gerektirecek şekilde büyüdükçe, bu iş yüklerini desteklemek için düğümleri ekleyebilirsiniz.
+Tipik avere vFXT müşterileri, yaklaşık 1.000 CPU çekirdekleri ile başlayan yoğun iş yüklerini çalıştırır. Bu ortamlar 50.000 çekirdek veya daha fazlası kadar büyük olabilir. Avere vFXT ölçeklenebilir olduğundan, daha fazla verimlilik veya daha fazla ıOPS gerektirecek şekilde büyürken bu iş yüklerini desteklemek için düğüm ekleyebilirsiniz.
 
-### <a name="how-much-data-can-an-avere-vfxt-environment-store"></a>Ne kadar veri Avere vFXT ortam depolayabilir miyim?
+### <a name="how-much-data-can-an-avere-vfxt-environment-store"></a>Avere vFXT ortam deposu ne kadar veri olabilir?
 
-Avere vFXT bir önbellektir. Özellikle veri depolama değil. Önbelleğe alınmış verileri depolamak için RAM ve SSD kullanır. Veriler, bir arka uç depolama sisteminde (örneğin, NetApp NAS sistem veya bir blob kapsayıcısı) kalıcı olarak depolanır. Avere vFXT sistem arkasına depolanan veri miktarı hakkında bilgi yok. Avere vFXT yalnızca istemciler istemek, verilerin alt kümesini önbelleğe alır.  
+Avere vFXT bir önbelleğidir. Verileri özel olarak depolamaz. Önbelleğe alınmış verileri depolamak için RAM ve SSD 'lerin bir birleşimini kullanır. Veriler, arka uç depolama sisteminde (örneğin, bir NetApp NAS sistemi veya bir blob kapsayıcısı) kalıcı olarak depolanır. Avere vFXT sisteminde, arkasında depolanan veri miktarı hakkında bilgi yok. Avere vFXT yalnızca istemcilerin talep aldığı verilerin alt kümesini önbelleğe alır.  
 
-### <a name="what-regions-are-supported"></a>Hangi bölgeler desteklenir?
+### <a name="what-regions-are-supported"></a>Hangi bölgeler destekleniyor?
 
-Azure için Avere vFXT bağımsız bölgelerde (Çin, Almanya) dışındaki tüm bölgelerde desteklenir. Kullanmak istediğiniz bölgeyi işlem Çekirdeği ve Avere vFXT küme oluşturmak için gereken sanal makine örneklerinin büyük miktarlarda desteklediğinden emin olun.
+Azure için avere vfxt, bağımsız bölgeleri hariç tüm bölgelerde desteklenir (Çin, Almanya). Kullanmak istediğiniz bölgenin büyük miktarda bilgi işlem çekirdeğini ve avere vFXT kümesini oluşturmak için gereken sanal makine örneklerini destekleyebileceği emin olun.
 
-### <a name="how-do-i-get-help-with-avere-vfxt"></a>Avere vFXT yardımıyla nasıl alabilirim?
+### <a name="how-do-i-get-help-with-avere-vfxt"></a>Avere vFXT ile ilgili yardım almak Nasıl yaparım??
 
-Bir özel destek grubu Avere vFXT ile ilgili Yardım için Azure'ı sunar. Bölümündeki yönergeleri [sisteminizle Yardım Al](avere-vfxt-open-ticket.md#open-a-support-ticket-for-your-avere-vfxt) Azure portalından bir destek bileti açın. 
+Özelleştirilmiş bir destek grubu, Azure için avere vFXT ile yardım sağlar. Azure portal bir destek bileti açmak için [sisteminizle ilgili yardım alın](avere-vfxt-open-ticket.md#open-a-support-ticket-for-your-avere-vfxt) bölümündeki yönergeleri izleyin.
 
 ### <a name="is-avere-vfxt-highly-available"></a>Avere vFXT yüksek oranda kullanılabilir mi?
 
-Evet, özel bir HA çözümü olarak Avere vFXT çalıştırır.
+Evet, avere vFXT özel olarak bir HA çözümü olarak çalışır.
 
-### <a name="does-avere-vfxt-for-azure-also-support-other-cloud-services"></a>Azure için Avere vFXT ayrıca diğer bulut hizmetlerini destekliyor mu?
+### <a name="does-avere-vfxt-for-azure-also-support-other-cloud-services"></a>Azure için avere vFXT, diğer bulut hizmetlerini de destekliyor mu?
 
-Evet, müşteriler birden fazla bulut sağlayıcısı Avere vFXT kümesiyle kullanabilirsiniz. Bu, AWS S3 standart demetleri, Google bulut Hizmetleri standart demetleri ve Azure blob kapsayıcıları destekler. 
+Evet, müşteriler avere vFXT kümesi ile birden fazla bulut sağlayıcısı kullanabilir. AWS S3 standart demetlerini, Google Cloud Services standart demetlerini ve Azure Blob kapsayıcıları destekler.
 
 > [!NOTE] 
-> Avere vFXT AWS veya Google Cloud, ancak değil Azure ile kullanmak için bir yazılım ücreti uygulanır.
+> Yazılım ücreti, AWS veya Google bulutu 'nda avere vFXT kullanımı için geçerlidir, ancak Azure ile kullanılamaz.
 
-## <a name="technical-compute"></a>Teknik: İşlem
+## <a name="technical-compute"></a>Teknik: Işlem
 
-### <a name="can-you-describe-what-an-avere-vfxt-environment-looks-like"></a>"Benzer" hangi Avere vFXT ortam açıklayabilirsiniz?
+### <a name="can-you-describe-what-an-avere-vfxt-environment-looks-like"></a>Bir avere vFXT ortamının "nasıl göründüğünü" tanımlayabilir misiniz?
 
-Avere vFXT yapılan birden çok Azure sanal makineleri, kümelenmiş bir gereçtir. Python kitaplığı, küme oluşturma, silme ve değiştirme işler. Okuma [Avere vFXT Azure nedir?](avere-vfxt-overview.md) daha fazla bilgi için. 
+Avere vFXT, birden çok Azure sanal makinesi tarafından oluşturulan kümelenmiş bir gereç. Bir Python kitaplığı, küme oluşturma, silme ve değiştirme işlemini gerçekleştirir. Daha fazla bilgi edinmek için [Azure Için avere vFXT nedir?](avere-vfxt-overview.md) makalesini okuyun.
 
-### <a name="what-kind-of-azure-virtual-machines-does-avere-vfxt-run-on"></a>Ne tür bir Azure sanal makineleri Avere vFXT çalışıyor mu?  
+### <a name="what-kind-of-azure-virtual-machines-does-avere-vfxt-run-on"></a>Avere vFXT ne tür Azure sanal makineleri üzerinde çalışıyor?  
 
-Bir Avere vFXT Azure küme için Microsoft Azure E32s_v3 sanal makineler kullanır. 
+Azure kümesi için bir avere vFXT Microsoft Azure sanal makineler E32s_v3 kullanır.
 
 <!-- ### Can I mix and match virtual machine types for my cluster?
 
@@ -100,195 +100,197 @@ Yes, there is a migration path to move from one VM type to the other. [Open a su
 
 -->
 
-### <a name="does-the-avere-vfxt-environment-scale"></a>Avere vFXT ortamınızı ölçeklendirme mu?
+### <a name="does-the-avere-vfxt-environment-scale"></a>Avere vFXT ortamı ölçeklendirsin mi?
 
-Avere vFXT küme üç sanal makine düğümlerinin kadar küçük veya 24 düğümleri büyüklüğünde olabilir. Birden fazla dokuz düğümden oluşan bir küme gerekir düşünüyorsanız planlama konusunda yardım için Azure teknik desteğine başvurun. Daha fazla düğüm sayısıyla daha büyük bir dağıtım mimarisi gerektirir.
+Avere vFXT kümesi, üç sanal makine düğümü kadar küçük veya 24 düğüm kadar büyük olabilir. Dokuz taneden fazla düğüm kümesine ihtiyaç duymadıysanız planlama konusunda yardım almak için Azure teknik desteği 'ne başvurun. Daha büyük sayıda düğüm daha büyük bir dağıtım mimarisi gerektirir.
 
-### <a name="does-the-avere-vfxt-environment-autoscale"></a>"Otomatik ölçeklendirme" Avere vFXT ortam mu?
+### <a name="does-the-avere-vfxt-environment-autoscale"></a>Avere vFXT ortamı "otomatik ölçeklendirme" mı?
 
-Hayır. Küme boyutu yukarı ve aşağı ölçeklendirilebilir, ancak Küme düğüm ekleme veya kaldırma el ile gerçekleştirilen bir adımdır.
+Hayır. Küme boyutunu yukarı ve aşağı ölçeklendirebilirsiniz, ancak küme düğümlerini ekleme veya kaldırma işlemi el ile gerçekleştirilen bir adımdır.
 
-### <a name="can-i-run-the-avere-vfxt-cluster-as-a-virtual-machine-scale-set"></a>Bir sanal makine ölçek kümesi Avere vFXT küme çalıştırabilir miyim?
+### <a name="can-i-run-the-avere-vfxt-cluster-as-a-virtual-machine-scale-set"></a>Avere vFXT kümesini sanal makine ölçek kümesi olarak çalıştırabilir miyim?
 
-Bir sanal makine ölçek kümesi dağıtımı Avere vFXT desteklemez. Çeşitli yerleşik kullanılabilirlik desteği mekanizmalar, yalnızca bir kümeye katılan atomik VM'ler için tasarlanmıştır.  
+Avere vFXT, bir sanal makine ölçek kümesinin dağıtımını desteklemez. Çeşitli yerleşik kullanılabilirlik desteği mekanizmaları yalnızca bir kümeye katılan atomik VM 'Ler için tasarlanmıştır.  
 
-### <a name="can-i-run-the-avere-vfxt-cluster-on-low-priority-vms"></a>Düşük öncelikli VM'ler üzerinde Avere vFXT küme çalıştırabilir miyim?
+### <a name="can-i-run-the-avere-vfxt-cluster-on-low-priority-vms"></a>Düşük öncelikli VM 'lerde avere vFXT kümesini çalıştırabilir miyim?
 
-Hayır, sistem kararlı bir temel alınan sanal makine kümesi olmasını gerektirir.
+Hayır, sistem temeldeki kararlı bir sanal makine kümesi gerektirir.
 
-### <a name="can-i-run-the-avere-vfxt-cluster-in-containers"></a>Kapsayıcılarda Avere vFXT küme çalıştırabilir miyim?
+### <a name="can-i-run-the-avere-vfxt-cluster-in-containers"></a>Avere vFXT kümesini kapsayıcılarda çalıştırabilir miyim?
 
-Hayır, Avere vFXT bağımsız bir uygulama dağıtılması gerekir.
+Hayır, avere vFXT bağımsız bir uygulama olarak dağıtılmalıdır.
 
-### <a name="do-the-avere-vfxt-vms-count-against-my-compute-quota"></a>Sanal makine sayısının karşı Bilgisayarım işlem kotası Avere vFXT musunuz?
+### <a name="do-the-avere-vfxt-vms-count-against-my-compute-quota"></a>Avere vFXT VM 'Leri işlem kotamla karşı mı?
 
-Evet. Bölge kümesini desteklemek için yeterli kotası olduğundan emin olun.  
+Evet. Kümeyi desteklemek için bölgede yeterli kotayı kullandığınızdan emin olun.  
 
-### <a name="can-i-run-the-avere-vfxt-cluster-machines-in-different-availability-zones"></a>Farklı kullanılabilirlik alanlarında Avere vFXT küme makineler çalıştırabilir miyim?
+### <a name="can-i-run-the-avere-vfxt-cluster-machines-in-different-availability-zones"></a>Avere vFXT kümesi makinelerini farklı kullanılabilirlik bölgelerinde çalıştırabilir miyim?
 
-Hayır. Şu anda Avere vFXT yüksek kullanılabilirlik modelinde farklı kullanılabilirlik alanlarında bulunan tek Avere vFXT küme üyelerini desteklemez.
+Hayır. Avere vFXT içindeki yüksek kullanılabilirlik modeli, farklı kullanılabilirlik bölgelerinde bulunan bireysel avere vFXT kümesi üyelerini desteklemez.
 
-### <a name="can-i-clone-avere-vfxt-virtual-machines"></a>Avere vFXT sanal makineler kopyalayabilir miyim?
+### <a name="can-i-clone-avere-vfxt-virtual-machines"></a>Avere vFXT sanal makinelerini kopyalayabilir miyim?
 
-Hayır, ekleme veya düğümleri kaldırma Avere vFXT kümede için desteklenen Python betiğini kullanmanız gerekir. Daha fazla bilgi için okuma [Avere vFXT kümesini yönetme](avere-vfxt-manage-cluster.md).  
+Hayır, avere vFXT kümesinde düğüm eklemek veya kaldırmak için desteklenen Python betiğini kullanmanız gerekir. Daha fazla bilgi için [avere vFXT kümesini yönetme](avere-vfxt-manage-cluster.md)makalesini okuyun.  
 
-### <a name="is-there-a-vm-version-of-the-software-i-can-run-in-my-own-local-environment"></a>Kendi yerel ortamda çalıştırabilir miyim yazılım "VM" sürümü var mı?
+### <a name="is-there-a-vm-version-of-the-software-i-can-run-in-my-own-local-environment"></a>Kendi yerel ortammda çalıştırabileceğiniz yazılımın bir "VM" sürümü var mı?
 
-Hayır, sistem kümelenmiş bir gereç sunulan ve belirli bir sanal makine türlerini test. Bu kısıtlama, tipik bir Avere vFXT iş akışının yüksek performanslı gereksinimlerini destekleyemiyorsa bir sistem oluşturmaktan kaçının müşterilere yardımcı olur. 
+Hayır, sistem kümelenmiş gereç olarak sunulur ve belirli sanal makine türlerinde test edilir. Bu kısıtlama, müşterilerin tipik bir avere vFXT iş akışının yüksek performanslı gereksinimlerini destekleyebilen bir sistem oluşturmaktan kaçınmasına yardımcı olur.
 
-## <a name="technical-disks"></a>Teknik: Diskler
+## <a name="technical-disks"></a>Teknik: diskler
 
-### <a name="what-types-of-disks-are-supported-for-the-azure-vms"></a>Azure Vm'leri için hangi disk türleri desteklenir?
+### <a name="what-types-of-disks-are-supported-for-the-azure-vms"></a>Azure VM 'Leri için ne tür diskler destekleniyor?
 
-Azure için Avere vFXT 1 TB veya 4 TB premium SSD yapılandırmalar kullanabilirsiniz. Premium SSD yapılandırma, birden fazla yönetilen disk dağıtılabilir.
+Azure için avere vFXT, 1 TB veya 4 TB Premium SSD yapılandırması kullanabilir. Premium SSD yapılandırması birden çok yönetilen disk olarak dağıtılabilir.
 
-### <a name="does-the-cluster-support-unmanaged-disks"></a>Küme, yönetilmeyen diskler destekliyor mu?
+### <a name="does-the-cluster-support-unmanaged-disks"></a>Küme, yönetilmeyen diskleri destekliyor mu?
 
-Hayır, küme, yönetilen diskler gerekir.
+Hayır, küme yönetilen diskler gerektirir.
 
-### <a name="does-the-system-support-local-attached-ssds"></a>Sistem yerel (ekli) SSD destekliyor mu?
+### <a name="does-the-system-support-local-attached-ssds"></a>Sistem yerel (ekli) SSD 'yi destekliyor mu?
 
-Azure için Avere vFXT yerel SSD şu anda desteklemiyor. Avere vFXT için kullanılan disk kapatın ve yeniden başlatmanız gerekir, ancak yerel ekli Ssd'lerde bu yapılandırma yalnızca sonlandırılabilir.
+Azure için avere vFXT Şu anda yerel SSD 'leri desteklemiyor. Avere vFXT için kullanılan disklerin kapatılıp yeniden başlatılması gerekir, ancak bu yapılandırmadaki yerel ekli SSD 'Ler yalnızca sonlandırılabilir.
 
-### <a name="does-the-system-support-ultra-ssds"></a>Sistem ultra SSD destekliyor mu?
+### <a name="does-the-system-support-ultra-ssds"></a>Sistem Ultra SSD 'leri destekliyor mu?
 
-Hayır, sistem yalnızca premium SSD yapılandırmaları destekler.
+Hayır, sistem yalnızca Premium SSD yapılandırmasını destekler.
 
-### <a name="can-i-detach-my-premium-ssds-and-reattach-them-later-to-preserve-cache-contents-between-use"></a>My premium SSD ayırma ve miyim bunları daha sonra kullanım arasında önbellek içeriği korumak için yeniden?
+### <a name="can-i-detach-my-premium-ssds-and-reattach-them-later-to-preserve-cache-contents-between-use"></a>Premium SSD 'larımı ayırabilir ve daha sonra kullanım arasındaki önbellek içeriğini korumak için yeniden eklenebilir miyim?
 
-Ayırma ve SSD yeniden bağlanması desteklenmiyor. Veri bütünlüğü sorunları neden olabilecek kullanımlar arasında kaynak meta verileri veya dosya içeriği değişmiş olabilir.
+SSD 'Lerin ayrılması ve yeniden iliştirme desteklenmez. Kaynaktaki meta veriler veya dosya içerikleri, veri bütünlüğü sorunlarına neden olabilecek kullanımları arasında değişmiş olabilir.
 
-### <a name="does-the-system-encrypt-the-cache"></a>Sistem önbelleği şifreleyebilir mi?
+### <a name="does-the-system-encrypt-the-cache"></a>Sistem önbelleği şifreliyor mu?
 
-Veri disklere yayılarak, ancak şifrelenmez. Ancak, diskleri şifrelenebilir. Daha fazla bilgi için [Azure içindeki sanal makinelerde güvenli ve kullanım ilkeleri](https://docs.microsoft.com/azure/virtual-machines/linux/security-policy#encryption).
+Veriler, diskler arasında şeritlenir ancak şifrelenmez. Ancak, disklerin kendisi şifrelenebilir. Daha fazla bilgi için bkz. [Azure 'da sanal makinelerde Ilkeleri güvenli hale getirme ve kullanma](https://docs.microsoft.com/azure/virtual-machines/linux/security-policy#encryption).
 
-## <a name="technical-networking"></a>Teknik: Ağ
+## <a name="technical-networking"></a>Teknik: ağ Iletişimi
 
 ### <a name="what-network-is-recommended"></a>Hangi ağ önerilir?
 
-Şirket içi depolama ile Avere vFXT kullanıyorsanız, 1 GB/sn veya daha iyi ağ bağlantısı olmalıdır. Küçük miktarda veriniz varsa ve işleri çalıştırmadan önce verileri buluta kopyalama istediğiniz VPN bağlantısı yeterli olabilir. 
+Avere vFXT ile şirket içi depolama kullanıyorsanız, 1 GB/sn veya daha iyi bir ağ bağlantısına sahip olmanız gerekir. Az miktarda veriniz varsa ve işleri çalıştırmadan önce verileri buluta kopyalamak istiyorsanız VPN bağlantısı yeterince olabilir. 
 
-> [!TIP] 
-> Yavaş ağ bağlantısı, ilk soğuk okuma daha yavaş olur. Yavaş okuma iş işlem hattı gecikme süresini artırın. 
+> [!TIP]
+> Ağ bağlantısı ne kadar yavaşsa, başlangıçtaki soğuk okuma sayısı daha yavaş olur. Yavaş okumalar iş işlem hattının gecikmesini arttırır.
 
-### <a name="can-i-run-avere-vfxt-in-a-different-virtual-network-than-my-compute-cluster"></a>İşlem kümem farklı bir sanal ağda Avere vFXT çalıştırabilir miyim?
+### <a name="can-i-run-avere-vfxt-in-a-different-virtual-network-than-my-compute-cluster"></a>Avere vFXT 'yi işlem kümemdeki farklı bir sanal ağda çalıştırabilir miyim?
 
-Evet, farklı bir sanal ağda Avere vFXT sisteminizi oluşturabilirsiniz. Okuma [Avere vFXT sisteminizi planlama](avere-vfxt-deploy-plan.md) Ayrıntılar için.
+Evet, avere vFXT sisteminizi farklı bir sanal ağda oluşturabilirsiniz. Ayrıntılar için [avere vFXT sisteminizin planını](avere-vfxt-deploy-plan.md) okuyun.
 
-### <a name="does-avere-vfxt-require-its-own-subnet"></a>Kendi alt ağına Avere vFXT gerektiriyor mu?
+### <a name="does-avere-vfxt-require-its-own-subnet"></a>Avere vFXT kendi alt ağını gerektiriyor mu?
 
-Evet. Avere vFXT yüksek kullanılabilirlik (HA) kümesi olarak kesin olarak çalışır ve çalışması için birden çok IP adresi gerektirir. Küme, kendi alt ağına ise, yükleme ve normal işlem için sorunlara neden olabilir IP adresi çakışmaları riski kaçının. Çakışma hiçbir IP adresleri sürece kümenin alt var olan sanal ağ içinde olabilir.
+Evet. Avere vFXT tamamen yüksek kullanılabilirlik (HA) kümesi olarak çalışır ve çalışması için birden çok IP adresi gerekir. Küme kendi alt ağdaysa, IP adresi çakışmaları riskinden kaçınabilirsiniz, bu da yükleme ve normal işlem sorunlarına neden olabilir. Kümenin alt ağı, hiçbir IP adresi çakıştığına sahip olan sanal ağ içinde olabilir.
 
-### <a name="can-i-run-avere-vfxt-on-infiniband"></a>Avere vFXT InfiniBand üzerinde çalıştırabilir mi?
+### <a name="can-i-run-avere-vfxt-on-infiniband"></a>Avere vFXT 'yi InfiniBand üzerinde çalıştırabilir miyim?
 
-Hayır, yalnızca Ethernet/IP Avere vFXT kullanır.
+Hayır, avere vFXT yalnızca Ethernet/IP kullanır.
 
-### <a name="how-do-i-access-my-on-premises-nas-environment-from-avere-vfxt"></a>Şirket içi NAS ortamımın Avere vFXT nasıl erişebilirim?
+### <a name="how-do-i-access-my-on-premises-nas-environment-from-avere-vfxt"></a>Avere vFXT 'den şirket içi NAS ortamlarıma erişim Nasıl yaparım??
 
-Müşteri veri merkezi (ve geriye) bir ağ geçidi veya VPN üzerinden gönderilmiş erişimi gerektirir, Avere vFXT herhangi bir Azure VM gibi ortamıdır. Ortamınızda varsa, Azure ExpressRoute bağlantısı kullanmayı düşünün.
+Avere vFXT ortamı, bir ağ geçidi ya da VPN (ve geri) üzerinden bir ağ geçidi veya VPN aracılığıyla yönlendirilmiş erişim gerektirdiğinden diğer tüm Azure VM 'leri gibidir. Ortamınızda kullanılabiliyorsa Azure ExpressRoute bağlantısı kullanmayı göz önünde bulundurun.
 
 ### <a name="what-are-the-bandwidth-requirements-for-avere-vfxt"></a>Avere vFXT için bant genişliği gereksinimleri nelerdir?
 
-Toplam bant genişliğinin iki etkenlere bağlıdır: 
+Genel bant genişliği gereksinimi iki etkene bağlıdır:
 
-* Kaynak istenen veri miktarı 
-* İlk veri yükleme sırasında istemci sistemin dayanıklılık gecikmesi  
+* Kaynaktan istenen veri miktarı
+* İlk veri yükleme sırasında istemci sistemin gecikme süresi toleransı  
 
-Gecikmeye duyarlı ortamlar için 1 GB/sn ile bir minimum bağlantı hızı fiber çözüm kullanmanız gerekir. Varsa Expressroute'u kullanın.  
+Gecikme süresine duyarlı ortamlar için en az 1 Gbps bağlantı hızına sahip bir fiber çözüm kullanmanız gerekir. Varsa ExpressRoute kullanın.  
 
-### <a name="can-i-run-avere-vfxt-with-public-ip-addresses"></a>Genel IP adresleri ile Avere vFXT çalıştırabilir miyim?
+### <a name="can-i-run-avere-vfxt-with-public-ip-addresses"></a>Avere vFXT 'yi genel IP adresleriyle çalıştırabilir miyim?
 
-Hayır, en iyi yöntemler güvenli bir ağ ortamında yapılacak Avere vFXT yöneliktir.  
+Hayır, avere vFXT, en iyi yöntemlerle güvenliği sağlanmış bir ağ ortamında işletilyöneliktir.
 
-### <a name="can-i-restrict-internet-access-from-my-clusters-virtual-network"></a>My kümenin sanal ağdan internet erişiminin kısıtlandığı? 
+### <a name="can-i-restrict-internet-access-from-my-clusters-virtual-network"></a>Internet erişimini Kümemin sanal ağından kısıtlayabilirim miyim?
 
-Genel olarak, ek güvenlik gerektiğinde sanal ağınızda yapılandırabilirsiniz, ancak bazı kısıtlamalar ile küme işlemi engelleyebilir.
+Genel olarak, gerektiğinde sanal ağınızda ek güvenlik yapılandırabilirsiniz, ancak bazı kısıtlamalar kümenin çalışmasını etkileyebilir.
 
-Açıkça AzureCloud erişmesine izin veren bir kuralı da eklemediğiniz sürece, ağınızdan giden internet erişimi kısıtlama sorunlara küme için neden olur. Bu durumda açıklanan [ek belgeleri github'da](https://github.com/Azure/Avere/tree/master/src/vfxt/internet_access.md).
+Örneğin, sanal ağınızdan giden Internet erişiminin kısıtlanması, Ayrıca, Azurecı 'ye açıkça erişim izni veren bir kural eklemediğiniz takdirde küme için sorunlara neden olur. Bu durum [GitHub 'daki ek belgelerde](https://github.com/Azure/Avere/tree/master/src/vfxt/internet_access.md)açıklanmaktadır.
 
-Bölümünde anlatıldığı gibi özelleştirilmiş güvenlik konusunda yardım için desteğe başvurun [sisteminizle Yardım Al](avere-vfxt-open-ticket.md#open-a-support-ticket-for-your-avere-vfxt).
+Özelleştirilmiş güvenlik konusunda yardım için, [sisteminizle ilgili yardım alın](avere-vfxt-open-ticket.md#open-a-support-ticket-for-your-avere-vfxt)bölümünde açıklandığı gibi desteğe başvurun.
 
-## <a name="technical-back-end-storage-core-filers"></a>Teknik: Arka uç depolama (çekirdek filtrelerin)
+## <a name="technical-back-end-storage-core-filers"></a>Teknik: arka uç depolama (çekirdek dosyasıları)
 
-### <a name="how-many-core-filers-does-a-single-avere-vfxt-environment-support"></a>Kaç tane çekirdek filtrelerin tek bir Avere vFXT ortam destekliyor mu?
+### <a name="how-many-core-filers-does-a-single-avere-vfxt-environment-support"></a>Tek bir avere vFXT ortamı kaç adet çekirdek filerdestekler?
 
-20 adede kadar çekirdek filtrelerin bir Avere vFXT kümesini destekler. 
+Bir avere vFXT kümesi en fazla 20 çekirdekli filers 'yi destekler.
 
-### <a name="how-does-the-avere-vfxt-environment-store-data"></a>Nasıl Avere vFXT ortam veri depoluyor mu?
+### <a name="how-does-the-avere-vfxt-environment-store-data"></a>Avere vFXT ortamı verileri nasıl saklar?
 
-Avere vFXT depolama değildir. Okuyan ve çekirdek filtrelerin adlı birden çok depolama hedeflerden veri yazan bir önbellektir. Premium SSD diskleri Avere vFXT içinde depolanan veriler geçici ve sonunda arka uç çekirdek dosyalayıcı depolama temizlenir.
+Avere vFXT depolama değildir. Bu, çekirdek filers adlı birden çok depolama hedefi ile verileri okuyan ve yazan bir önbelleğidir. Avere vfxt 'de Premium SSD disklerinde depolanan veriler geçicidir ve sonunda arka uç çekirdek dosyalayıcı depolama alanına temizlenir.
 
-### <a name="which-core-filers-does-avere-vfxt-support"></a>Hangi çekirdek filtrelerin Avere vFXT destekliyor mu?
+### <a name="which-core-filers-does-avere-vfxt-support"></a>Hangi çekirdek dosyasıları avere vFXT destekler?
 
-Genel koşullarını Avere vFXT Azure çekirdek filtrelerin aşağıdaki sistemlerini destekler: 
+Genel koşullarda, Azure için avere vFXT, çekirdek filers olarak aşağıdaki sistemleri destekler:
 
-* Dell EMC Isilon (OneFS 7.1, 7.2, 8.0 ve 8.1) 
-* NetApp ONTAP (kümelenmiş modu 9.4 sürümünden, 9.3, 9.2, 9.1P1, 8.3 8.0) ve (7 modu 7.*, 8.3 8.0) 
+* Dell EMC Isilon (OneFS 7,1, 7,2, 8,0 ve 8,1) 
+* NetApp ONTAP (kümelenmiş Mod 9,4, 9,3, 9,2, 9.1 P1, 8.0-8.3) ve (7-Mod 7. *, 8.0-8.3)
 
-  > [!NOTE] 
-  > NetApp Azure dosyaları şu anda desteklenmiyor. 
+  > [!NOTE]
+  > Azure NetApp Files Şu anda desteklenmiyor.
 
-* Azure blob kapsayıcıları (yalnızca yerel olarak yedekli depolama) 
-* AWS S3 demet 
-* Google Cloud demetlerine
+* Azure Blob kapsayıcıları (yalnızca yerel olarak yedekli depolama)
+* AWS S3 demetleri
+* Google bulut demetleri
 
-### <a name="why-doesnt-avere-vfxt-support-all-nfs-filers"></a>Neden Avere vFXT tüm NFS filtrelerin desteklemiyor?
+### <a name="why-doesnt-avere-vfxt-support-all-nfs-filers"></a>Neden avere vFXT tüm NFS dosyası'leri destekliyor?
 
-Tüm NFS platformlar aynı IETF standartlara uyduğumuzu olsa da, uygulamada her uygulama kendi quirks sahiptir. Bu ayrıntılar Avere vFXT depolama sistemi ile nasıl etkileştiğini etkiler. En yaygın olarak kullanılan platformları Marketi'nde desteklenen sistemleridir.
+Tüm NFS platformları aynı IETF standartlarını karşılıyorsa, ancak her bir uygulama kendi kendine sahiptir. Bu ayrıntılar, avere vFXT 'nin depolama sistemiyle nasıl etkileşime gireceğini etkiler. Desteklenen sistemler Market 'teki en yaygın kullanılan platformlardır.
 
-### <a name="does-avere-vfxt-support-private-object-storage-such-as-swiftstack"></a>Avere vFXT özel nesne depolama (örneğin, SwiftStack) destekliyor mu?
+### <a name="does-avere-vfxt-support-private-object-storage-such-as-swiftstack"></a>Avere vFXT özel nesne depolamayı (SwiftStack gibi) destekler mi?
 
-Özel bir nesne depolama Avere vFXT desteklemez.
+Avere vFXT özel nesne depolamayı desteklemez.
 
-### <a name="how-can-i-get-a-specific-storage-product-under-support"></a>Belirli depolama ürün destek kapsamında nasıl alabilirim?
+### <a name="how-can-i-get-a-specific-storage-product-under-support"></a>Destek kapsamında belirli bir depolama ürününü nasıl alabilirim?
 
-Destek, isteğe bağlı olarak alan miktarını dayanır. Bir NAS çözümü desteklemek için yeterli gelir tabanlı istekler varsa, onu ele alacağız. Azure destek isteklerini olun.
+Destek, alanındaki talep miktarına göre belirlenir. Bir NAS çözümünü desteklemek için yeterli sayıda gelir tabanlı istek varsa, bunu kabul edeceğiz. Azure desteği aracılığıyla istek yapın.
 
-### <a name="can-i-use-azure-blob-storage-as-a-core-filer"></a>Bir çekirdek dosyalayıcı Azure Blob Depolama kullanabilir miyim?
+### <a name="can-i-use-azure-blob-storage-as-a-core-filer"></a>Azure Blob depolamayı bir çekirdek filmi olarak kullanabilir miyim?
 
-Evet, Avere vFXT Azure blok blob kapsayıcısına bir bulut çekirdek dosyalayıcı kullanabilirsiniz.  
+Evet, Azure için avere vFXT, bir Blok Blobu kapsayıcısını bulut çekirdeği filsi olarak kullanabilir.  
 
-### <a name="what-are-the-storage-account-requirements-for-a-blob-core-filer"></a>Bir blob çekirdek dosyalayıcı için depolama hesabı gereksinimleri nelerdir?
+### <a name="what-are-the-storage-account-requirements-for-a-blob-core-filer"></a>Blob çekirdeği filmidir için depolama hesabı gereksinimleri nelerdir?
 
-Genel amaçlı v2 depolama hesabınızın olması gerekir (GPv2) hesabı ve yalnızca yerel olarak yedekli depolama için yapılandırılmış. Coğrafi olarak yedekli depolama ve bölgesel olarak yedekli depolama desteklenmez.
+Depolama hesabınızın bir genel amaçlı v2 (GPv2) hesabı olması ve yalnızca yerel olarak yedekli depolama için yapılandırılmış olması gerekir. Coğrafi olarak yedekli depolama ve bölge yedekli depolama desteklenmez.
 
-### <a name="can-i-use-archive-blob-storage"></a>Arşiv blob depolama kullanabilir miyim?
+### <a name="can-i-use-archive-blob-storage"></a>Arşiv BLOB depolama alanını kullanabilir miyim?
 
-Hayır. Arşiv depolama için hizmet düzeyi sözleşmesi (SLA) gerçek zamanlı dizin ve dosya erişim gereksinimlerini Avere vFXT sistem ile uyumlu değil. 
+Hayır. Arşiv depolaması için hizmet düzeyi sözleşmesi (SLA), avere vFXT sisteminin gerçek zamanlı dizin ve dosya erişim gereksinimleriyle uyumlu değildir.
 
-### <a name="can-i-use-cool-blob-storage"></a>Seyrek erişimli blob depolama kullanabilir miyim?
+### <a name="can-i-use-cool-blob-storage"></a>Cool blob Storage kullanabilir miyim?
 
-Seyrek erişimli katmana kullanır, ancak işlemlerinin hızıdır. çok daha yüksek olacağını unutmayın. 
+Seyrek Erişimli Katman blob depolaması, genellikle Azure Core Filer için bir avere vFXT için önerilmez. Cool Tier, daha düşük depolama maliyetleri sunar (Daha fazla ayrıntı için bkz. [Blok Blobu fiyatlandırması](<https://azure.microsoft.com/pricing/details/storage/blobs/>) .) Veriler sıklıkla erişilip değiştirilmeyecektir veya siliniyorsa, lütfen etkin katmanı kullanmayı düşünün.
 
-### <a name="how-do-i-encrypt-the-blob-container"></a>Blob kapsayıcısını nasıl şifreliyor mu?
+[Erişim katmanları](https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers#cool-access-tier) , bir vFXT Core filsi olarak Seyrek Erişimli Katman depolaması kullanmanın ne zaman yararlı olabileceğini hakkında daha fazla bilgi sağlar.
 
-Blob şifrelemesi (tercih edilir) Azure veya Avere vFXT çekirdek dosyalayıcı düzeyinde yapılandırabilirsiniz.  
+### <a name="how-do-i-encrypt-the-blob-container"></a>Blob kapsayıcısını şifrelemek Nasıl yaparım? mı?
 
-### <a name="can-i-use-my-own-encryption-key-for-a-blob-core-filer"></a>Kendi şifreleme anahtarı için bir blob çekirdek dosyalayıcı kullanabilir miyim?
+Blob şifrelemesini Azure 'da (tercih edilen) ya da avere vfxt Core dosyalayıcı düzeyinde yapılandırabilirsiniz.  
 
-Varsayılan olarak, Azure Blob, tablo ve kuyruk depolamanın yanı sıra, Azure dosyaları için Microsoft tarafından yönetilen anahtarlar aracılığıyla veriler şifrelenir. Blob Depolama ve Azure dosyaları için şifreleme için kendi anahtarınızı getirebilirsiniz. Avere vFXT şifreleme kullanmayı seçerseniz, Avere oluşturulan anahtarı kullanın ve yerel olarak depolar. 
+### <a name="can-i-use-my-own-encryption-key-for-a-blob-core-filer"></a>Blob çekirdeği filmi için kendi şifreleme anahtarımı kullanabilir miyim?
+
+Varsayılan olarak, veriler Azure blob, tablo ve kuyruk depolama için Microsoft tarafından yönetilen anahtarlar ve ayrıca Azure dosyaları aracılığıyla şifrelenir. BLOB depolama ve Azure dosyaları için şifreleme için kendi anahtarınızı getirebilirsiniz. Avere vFXT şifrelemesini kullanmayı seçerseniz, avere tarafından oluşturulan anahtarı kullanmanız ve yerel olarak depolamanız gerekir.
 
 ## <a name="purchasing"></a>Satın alma
 
-### <a name="how-do-i-get-avere-vfxt-for-azure-licensing"></a>Azure lisanslama Avere vFXT nasıl alabilirim?
+### <a name="how-do-i-get-avere-vfxt-for-azure-licensing"></a>Azure lisanslama için avere vFXT al Nasıl yaparım??
 
-Azure lisansını Avere vFXT başlama Azure Marketi aracılığıyla kolay bir işlemdir. Bir Azure hesabı için kaydolun ve içindeki yönergeleri izleyin [Avere vFXT kümeyi dağıtmak](avere-vfxt-deploy.md) bir Avere vFXT kümesi oluşturmak için. 
+Azure lisansına yönelik bir avere vFXT 'nin alınması, Azure Marketi aracılığıyla kolay bir işlemdir. Bir Azure hesabı için kaydolun ve ardından bir avere vFXT kümesi oluşturmak için [avere vfxt kümesini dağıtma](avere-vfxt-deploy.md) bölümündeki yönergeleri izleyin.
 
-### <a name="how-much-does-avere-vfxt-cost"></a>Avere vFXT maliyeti ne kadar?
+### <a name="how-much-does-avere-vfxt-cost"></a>VFXT maliyeti ne kadar avere?
 
-Azure'da Avere vFXT kümelerini kullanarak hiçbir ek lisans ücreti yoktur. Müşteriler, depolama ve diğer Azure kullanım ücretleri için sorumludur.
+Azure 'da avere vFXT kümelerini kullanmak için ek bir lisans ücreti yoktur. Müşteriler, depolama ve diğer Azure tüketim ücretlerine göre sorumludur.
 
-### <a name="can-avere-vfxt-vms-be-run-as-low-priority"></a>Avere vFXT VM düşük öncelikli olarak çalıştırabilir miyim?
+### <a name="can-avere-vfxt-vms-be-run-as-low-priority"></a>Avere vFXT sanal makineleri düşük öncelikli olarak çalıştırılabilir mi?
 
-Hayır, Avere vFXT kümeleri "her zaman açık" gerektiren hizmet. Kümeler, gerekli olduğunda kapatılabilir. 
+Hayır, avere vFXT kümeleri "Always On" hizmetini gerektirir. Gerekli olmadığında kümeler kapatılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure için Avere vFXT ile çalışmaya başlamak için planlama ve kendi sisteminizi dağıtma hakkında bilgi edinmek için bu makaleleri okuyun:
+Azure için avere vFXT 'yi kullanmaya başlamak için, kendi sisteminizi nasıl planlayıp dağıtacağınızı öğrenmek için şu makaleleri okuyun:
 
 * [Avere vFXT sisteminizi planlama](avere-vfxt-deploy-plan.md)
 * [Dağıtıma genel bakış](avere-vfxt-deploy-overview.md)
-* [Bir Avere vFXT kümesi oluşturmak hazırlama](avere-vfxt-prereqs.md)
+* [Avere vFXT kümesi oluşturmaya hazırlanma](avere-vfxt-prereqs.md)
 * [Avere vFXT kümesini dağıtma](avere-vfxt-deploy.md)
 
-Avere vFXT için kullanım örnekleri ve özellikleri hakkında daha fazla bilgi edinmek için şurayı ziyaret edin [Avere vFXT Azure](https://azure.microsoft.com/services/storage/avere-vfxt/).
+Avere vFXT için yetenekler ve kullanım örnekleri hakkında daha fazla bilgi edinmek için [Azure Için avere vfxt](https://azure.microsoft.com/services/storage/avere-vfxt/)adresini ziyaret edin.

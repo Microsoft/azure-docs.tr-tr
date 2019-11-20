@@ -1,6 +1,6 @@
 ---
-title: Azure - dış App Service ortamı oluşturma
-description: Bir uygulama ya da tek başına oluştururken bir App Service ortamı oluşturma açıklanır
+title: Dış App Service ortamı oluşturma-Azure
+description: Uygulama oluştururken veya tek başına bir App Service ortamı oluşturmayı açıklar
 services: app-service
 documentationcenter: na
 author: ccompy
@@ -9,174 +9,173 @@ ms.assetid: 94dd0222-b960-469c-85da-7fcb98654241
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 06/13/2017
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: eef13c5a4e3757b0eafd77c0915717175c2dbd8c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 19d58ed90de4bdbd3cd7606d15c115bb1633770a
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60769109"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70069700"
 ---
-# <a name="create-an-external-app-service-environment"></a>Bir dış App Service ortamı oluşturma
+# <a name="create-an-external-app-service-environment"></a>Dış App Service ortamı oluşturma
 
 Azure App Service Ortamı, Azure App Service’in Azure sanal ağı (VNet) içindeki bir alt ağa dağıtımıdır.
 
 > [!NOTE]
-> Bir sanal IP (App Service ortamı başvurmak için kullanılan VIP), her bir App Service ortamı yok.
+> Her App Service Ortamı App Service Ortamı iletişim kurmak için kullanılabilen bir sanal IP (VIP) vardır.
 
 Bir App Service Ortamı (ASE) iki şekilde dağıtılabilir:
 
 - Genellikle Dış ASE olarak adlandırılan durumda, bir dış IP adresi üzerindeki VIP ile.
-- İç uç nokta bir iç yük dengeleyici (ILB) olduğu için iç IP adresi üzerindeki VIP ile genellikle bir ILB ASE olarak adlandırılan.
+- İç uç nokta bir Iç Load Balancer (ıLB) olduğundan, iç IP adresine sahip VIP ile genellikle ıLB Ao adı verilir.
 
-Bu makalede, dış ASE oluşturma işlemini gösterir. ASE genel bakış için bkz. [App Service ortamı giriş][Intro]. ILB ASE oluşturma hakkında daha fazla bilgi için bkz: [oluşturma ve kullanma ILB ASE][MakeILBASE].
+Bu makalede, dış Ao 'nın nasıl oluşturulacağı gösterilmektedir. Ao 'ya genel bakış için [App Service ortamı giriş][Intro]bölümüne bakın. ILB ATıCı oluşturma hakkında daha fazla bilgi için bkz. [ILB Ai oluşturma ve kullanma][MakeILBASE].
 
-## <a name="before-you-create-your-ase"></a>ASE'NİZİN oluşturmadan önce
+## <a name="before-you-create-your-ase"></a>ATıCı 'nizi oluşturmadan önce
 
-ASE'yi oluşturduktan sonra aşağıdaki değiştiremezsiniz:
+ATıCı 'nizi oluşturduktan sonra, aşağıdakileri değiştiremezsiniz:
 
 - Location
-- Abonelik
-- Kaynak grubu
-- Kullanılan sanal ağ
+- Subscription
+- Resource group
+- Kullanılan VNet
 - Kullanılan alt ağ
 - Alt ağ boyutu
 
 > [!NOTE]
-> Bir VNet seçin ve bir alt ağ belirtin, gelecekteki büyümeye ve ölçeklendirme ihtiyaçlarını karşılayacak kadar büyük olduğundan emin olun. Boyutu öneririz `/24` 256 adreslerine sahip.
+> VNet seçtiğinizde ve bir alt ağ belirttiğinizde, gelecekteki büyüme ve ölçekleme ihtiyaçlarına uyum sağlayacak kadar büyük olduğundan emin olun. 256 adres `/24` içeren bir boyut önerilir.
 >
 
-## <a name="three-ways-to-create-an-ase"></a>Bir ASE oluşturma üç yolu
+## <a name="three-ways-to-create-an-ase"></a>ATıCı oluşturmanın üç yolu
 
-Bir ASE oluşturma üç yolu vardır:
+ATıCı oluşturmanın üç yolu vardır:
 
-- **Bir App Service planı oluşturulurken**. Bu yöntem, tek bir adımda ASE ile App Service planı oluşturur.
-- **Tek başına bir eylem olarak**. Bu yöntem, tek başına bir ASE, boş bir ASE olduğu oluşturur. Bu yöntem, ASE oluşturmak için daha gelişmiş bir işlemdir. Bir ASE, ILB ile oluşturmak için kullanın.
-- **Bir Azure Resource Manager şablonundan**. Bu yöntem, İleri düzey kullanıcılar için kullanılır. Daha fazla bilgi için [şablondan ASE oluşturma][MakeASEfromTemplate].
+- **App Service planı oluşturma sırasında**. Bu yöntem, Ave App Service planını tek bir adımda oluşturur.
+- **Tek başına bir eylem olarak**. Bu yöntem, içinde hiçbir şey olmayan tek başına bir ADE oluşturur. Bu yöntem, ATıCı oluşturmak için daha gelişmiş bir işlemdir. ILB ile bir AO oluşturmak için bunu kullanırsınız.
+- **Azure Resource Manager şablonundan**. Bu yöntem gelişmiş kullanıcılar içindir. Daha fazla bilgi için, bkz. [bir şablondan atıcı oluşturma][MakeASEfromTemplate].
 
-Dış ASE ase'deki uygulamalar için tüm HTTP/HTTPS trafiğini İnternet'ten erişilebilen bir IP adresi ulaştığını anlamına gelir. bir genel VIP sahiptir. Bir ASE, ILB ile ASE tarafından kullanılan alt ağdan bir IP adresi vardır. ILB ASE'de barındırılan uygulamalar, doğrudan internet'e kullanıma sunulmaz.
+Dış ASE 'nin genel bir VIP 'si vardır ve bu, ASE 'deki uygulamalara yönelik tüm HTTP/HTTPS trafiğinin internet erişimli bir IP adresi ile aynı olduğunu gösterir. ILB ile bir Ao, Ao tarafından kullanılan alt ağdan bir IP adresine sahiptir. ILB asa 'da barındırılan uygulamalar doğrudan internet 'e gösterilmez.
 
-## <a name="create-an-ase-and-an-app-service-plan-together"></a>Birlikte bir ASE ve App Service planı oluşturma
+## <a name="create-an-ase-and-an-app-service-plan-together"></a>Bir ACE ve bir App Service planı oluşturma
 
-App Service planı, uygulamaların bir kapsayıcıdır. App Service'te bir uygulama oluşturduğunuzda, seçin veya bir App Service planı oluşturun. App Service ortamları App Service planları basılı tutun ve uygulamaları App Service planları tutun.
+App Service planı, uygulamaların bir kapsayıcısıdır. App Service bir uygulama oluşturduğunuzda, bir App Service planı seçersiniz veya oluşturursunuz. App Service ortamlar, App Service planlarını ve App Service planlar uygulamaları tutar.
 
-Bir App Service planını oluştururken bir ASE oluşturmak için:
+Bir App Service planı oluştururken Ao oluşturmak için:
 
-1. İçinde [Azure portalında](https://portal.azure.com/)seçin **kaynak Oluştur** > **Web + mobil** > **Web uygulaması**.
+1.  >  [Azure Portal](https://portal.azure.com/),**Web uygulaması** **Web ve mobil** >  **kaynak oluştur**' u seçin.
 
     ![Web uygulaması oluşturma][1]
 
-2. Aboneliğinizi seçin. Uygulama ve ASE aynı abonelik içinde oluşturulur.
+2. Aboneliğinizi seçin. Uygulama ve Ao, aynı aboneliklerde oluşturulur.
 
-3. Kaynak grubunu seçin veya oluşturun. Kaynak grupları ile ilgili Azure kaynaklarını bir birim olarak yönetebilirsiniz. Kaynak grupları, ayrıca, uygulamalarınız için rol tabanlı erişim denetimi kuralları oluştur olduğunda yararlıdır. Daha fazla bilgi için [Azure Resource Manager'a genel bakış][ARMOverview].
+3. Kaynak grubunu seçin veya oluşturun. Kaynak grupları ile ilgili Azure kaynaklarını birim olarak yönetebilirsiniz. Kaynak grupları, uygulamalarınız için rol tabanlı Access Control kuralları oluştururken de yararlı olur. Daha fazla bilgi için bkz. [Azure Resource Manager’a genel bakış][ARMOverview].
 
-4. (Windows, Linux ve Docker) işletim sisteminizi seçin. 
+4. İşletim sistemini (Windows, Linux veya Docker) seçin. 
 
-5. App Service planı seçin ve ardından **Yeni Oluştur**. Linux web uygulamaları ve Windows web uygulamaları aynı App Service planında olamaz, ancak aynı App Service Ortamı'nda olabilir. 
+5. App Service planını seçin ve ardından **Yeni oluştur**' u seçin. Linux Web Apps ve Windows Web Apps aynı App Service planında olamaz, ancak aynı App Service Ortamı olabilir. 
 
     ![Yeni App Service planı][2]
 
-6. İçinde **konumu** aşağı açılan listesinde, istediğiniz bölgeyi seçin, ASE oluşturma. Mevcut bir ASE seçerseniz, yeni bir ASE oluşturulmaz. App Service planı, seçtiğiniz ASE'de oluşturulur. 
+6. **Konum** açılır listesinde, atıcı 'yi oluşturmak istediğiniz bölgeyi seçin. Var olan bir AO dili seçerseniz, yeni bir ATıCı oluşturulmaz. App Service planı, seçtiğiniz as 'de oluşturulur. 
 
-7. Seçin **fiyatlandırma katmanı**ve birini **yalıtılmış** fiyatlandırma SKU'ları. Seçerseniz bir **yalıtılmış** SKU kartı ve bir ASE değil bir konum, yeni bir ASE oluşturulduğu konumda. ASE oluşturma işlemini başlatmak için **seçin**. **Yalıtılmış** SKU yalnızca ASE ile birlikte kullanılabilir. Ayrıca herhangi bir fiyatlandırma SKU bir ASE'de dışında kullanamazsınız **yalıtılmış**. 
+7. **Fiyatlandırma katmanını**seçin ve **yalıtılmış** fiyatlandırma SKU 'larından birini seçin. **Yalıtılmış** bir SKU kartı ve Ao olmayan bir konum seçerseniz, bu konumda yeni bir as oluşturulur. Bir as oluşturmak için işlemi başlatmak üzere **Seç**' i seçin. **Yalıtılmış** SKU yalnızca bir atıcı ile birlikte kullanılabilir. Ayrıca, **yalıtılmış**dışında başka bir fiyatlandırma SKU 'su de kullanamazsınız. 
 
-    ![Fiyatlandırma katmanı seçimi][3]
+    ![Fiyatlandırma Katmanı seçimi][3]
 
-8. ASE'NİZİN adını girin. Bu ad, adreslenebilir adında uygulamalarınız için kullanılır. Ase'nin adı ise _appsvcenvdemo_, etki alanı adı *. appsvcenvdemo.p.azurewebsites.net*. Adlı bir uygulama oluşturursanız *mytestapp*, mytestapp.appsvcenvdemo.p.azurewebsites.net adreslenebilir. Ad boşluk kullanamazsınız. Büyük harf karakterler kullanırsanız, etki alanı adı toplam küçük harfli sürümünü adıdır.
+8. ATıCı 'niz için ad girin. Bu ad, uygulamalarınızın adreslenebilir adında kullanılır. Ao 'nun adı _appsvcenvdemo_ise, etki alanı adı *. appsvcenvdemo.p.azurewebsites.net*olur. *Mytestapp*adlı bir uygulama oluşturursanız, mytestapp.appsvcenvdemo.p.azurewebsites.net adresinde adreslenebilir. Adda boşluk kullanamazsınız. Büyük harfli karakterler kullanırsanız, etki alanı adı bu adın toplam küçük harfli sürümüdür.
 
-    ![Yeni App Service planı adı][4]
+    ![Yeni App Service plan adı][4]
 
-9. Azure sanal ağ ayrıntılarını belirtin. Şunlardan birini seçin **Yeni Oluştur** veya **var olanı Seç**. Seçili bölgesinde bir sanal ağınız varsa var olan bir sanal ağ seçme seçeneği kullanılabilir. Seçerseniz **Yeni Oluştur**, sanal ağ için bir ad girin. Bu ada sahip yeni bir Resource Manager sanal ağı oluşturulur. Adres alanı kullanan `192.168.250.0/23` seçili bölgesinde. Seçerseniz **var olanı Seç**, gerekir:
+9. Azure sanal ağ ayrıntılarınızı belirtin. **Yeni oluştur** ' u seçin veya mevcut ' ı **seçin**. Mevcut bir VNet seçme seçeneği yalnızca seçili bölgede bir sanal ağ varsa kullanılabilir. **Yeni oluştur**' u seçerseniz VNET için bir ad girin. Bu ada sahip yeni bir Kaynak Yöneticisi VNet oluşturulur. Seçili bölgedeki adres alanını `192.168.250.0/23` kullanır. **Varolanı Seç**' i seçerseniz şunları yapmanız gerekir:
 
-    a. Birden fazla aboneliğiniz varsa, sanal ağ adres bloğu seçin.
+    a. Birden fazla tane varsa VNet adres bloğunu seçin.
 
     b. Yeni bir alt ağ adı girin.
 
-    c. Alt ağ boyutunu seçin. *Unutmayın, ase'nizin gelecekteki büyümeye uyum sağlamak için büyük bir boyut seçin.* Öneririz `/25`, 128 adres içeren ve bir en büyük boyutlu ASE'yi işleyebilen. Önermemekteyiz `/28`, örneğin, çünkü yalnızca 16 adresleri kullanılabilir. Altyapı en az yedi adresleri ve başka bir 5 Azure ağ kullanır. İçinde bir `/28` alt kaldığını App Service planı, ILB ASE için örnekleri en dış ASE için 4 App Service planı örneği, ölçekleme ve yalnızca 3.
+    c. Alt ağın boyutunu seçin. *Ao 'nizin gelecekteki büyümesini karşılayacak büyüklükte bir boyut seçip seçmeyi unutmayın.* 128 adresine `/24`sahip ve en yüksek boyutlu bir abi 'yi işleyebilen için önerilir. Örneğin, yalnızca `/28`16 adres kullanılabildiği için bu önerilmez. Altyapı en az yedi adres kullanır ve Azure ağı başka bir 5 kullanır. Bir `/28` alt ağda, bir dış ay için App Service plan örnekleri ve bir ILB ay için yalnızca 3 App Service plan örneği olan 4 en yüksek ölçeklendirmeyle birlikte kalır.
 
-    d. Alt ağ IP aralığı seçin.
+    d. Alt ağ IP aralığını seçin.
 
-10. Seçin **Oluştur** ASE oluşturma. Bu işlem ayrıca App Service planı ve bir uygulama oluşturur. ASE, App Service planı ve app: aynı abonelik altında tümünü ve ayrıca aynı kaynak grubunda. Ayrı bir kaynak grubu, ASE'NİZİN erişmesi gerekiyorsa veya ILB ASE gerekiyorsa, tek başına bir ASE oluşturma adımlarını izleyin.
+10. ATıCı oluşturmak için **Oluştur** ' u seçin. Bu işlem, App Service planı ve uygulamayı da oluşturur. Ao, App Service planı ve uygulama aynı abonelikte ve ayrıca aynı kaynak grubunda bulunur. ATıCı 'niz ayrı bir kaynak grubuna ihtiyaç duyuyorsa veya bir ıLB Ao 'ya ihtiyacınız varsa, kendi başına bir AO oluşturmak için adımları izleyin.
 
-## <a name="create-an-ase-and-a-linux-web-app-using-a-custom-docker-image-together"></a>Bir ASE ve özel bir Docker görüntüsü birlikte kullanarak bir Linux web uygulaması oluşturma
+## <a name="create-an-ase-and-a-linux-web-app-using-a-custom-docker-image-together"></a>Özel bir Docker görüntüsünü birlikte kullanarak asa ve Linux Web uygulaması oluşturma
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **kaynak Oluştur** > **Web + mobil** > **kapsayıcılar için Web uygulaması.** 
+1. [Azure Portal](https://portal.azure.com/) **bir kaynak** > **kapsayıcılar için web app**Webvemobil > oluşturun. 
 
     ![Web uygulaması oluşturma][7]
 
-1. Aboneliğinizi seçin. Uygulama ve ASE aynı abonelik içinde oluşturulur.
+1. Aboneliğinizi seçin. Uygulama ve Ao, aynı aboneliklerde oluşturulur.
 
-1. Kaynak grubunu seçin veya oluşturun. Kaynak grupları ile ilgili Azure kaynaklarını bir birim olarak yönetebilirsiniz. Kaynak grupları, ayrıca, uygulamalarınız için rol tabanlı erişim denetimi kuralları oluştur olduğunda yararlıdır. Daha fazla bilgi için [Azure Resource Manager'a genel bakış][ARMOverview].
+1. Kaynak grubunu seçin veya oluşturun. Kaynak grupları ile ilgili Azure kaynaklarını birim olarak yönetebilirsiniz. Kaynak grupları, uygulamalarınız için rol tabanlı Access Control kuralları oluştururken de yararlı olur. Daha fazla bilgi için bkz. [Azure Resource Manager’a genel bakış][ARMOverview].
 
-1. App Service planı seçin ve ardından **Yeni Oluştur**. Linux web uygulamaları ve Windows web uygulamaları aynı App Service planında olamaz, ancak aynı App Service Ortamı'nda olabilir. 
+1. App Service planını seçin ve ardından **Yeni oluştur**' u seçin. Linux Web Apps ve Windows Web Apps aynı App Service planında olamaz, ancak aynı App Service Ortamı olabilir. 
 
     ![Yeni App Service planı][8]
 
-1. İçinde **konumu** aşağı açılan listesinde, istediğiniz bölgeyi seçin, ASE oluşturma. Mevcut bir ASE seçerseniz, yeni bir ASE oluşturulmaz. App Service planı, seçtiğiniz ASE'de oluşturulur. 
+1. **Konum** açılır listesinde, atıcı 'yi oluşturmak istediğiniz bölgeyi seçin. Var olan bir AO dili seçerseniz, yeni bir ATıCı oluşturulmaz. App Service planı, seçtiğiniz as 'de oluşturulur. 
 
-1. Seçin **fiyatlandırma katmanı**ve birini **yalıtılmış** fiyatlandırma SKU'ları. Seçerseniz bir **yalıtılmış** SKU kartı ve bir ASE değil bir konum, yeni bir ASE oluşturulduğu konumda. ASE oluşturma işlemini başlatmak için **seçin**. **Yalıtılmış** SKU yalnızca ASE ile birlikte kullanılabilir. Ayrıca herhangi bir fiyatlandırma SKU bir ASE'de dışında kullanamazsınız **yalıtılmış**. 
+1. **Fiyatlandırma katmanını**seçin ve **yalıtılmış** fiyatlandırma SKU 'larından birini seçin. **Yalıtılmış** bir SKU kartı ve Ao olmayan bir konum seçerseniz, bu konumda yeni bir as oluşturulur. Bir as oluşturmak için işlemi başlatmak üzere **Seç**' i seçin. **Yalıtılmış** SKU yalnızca bir atıcı ile birlikte kullanılabilir. Ayrıca, **yalıtılmış**dışında başka bir fiyatlandırma SKU 'su de kullanamazsınız. 
 
-    ![Fiyatlandırma katmanı seçimi][3]
+    ![Fiyatlandırma Katmanı seçimi][3]
 
-1. ASE'NİZİN adını girin. Bu ad, adreslenebilir adında uygulamalarınız için kullanılır. Ase'nin adı ise _appsvcenvdemo_, etki alanı adı *. appsvcenvdemo.p.azurewebsites.net*. Adlı bir uygulama oluşturursanız *mytestapp*, mytestapp.appsvcenvdemo.p.azurewebsites.net adreslenebilir. Ad boşluk kullanamazsınız. Büyük harf karakterler kullanırsanız, etki alanı adı toplam küçük harfli sürümünü adıdır.
+1. ATıCı 'niz için ad girin. Bu ad, uygulamalarınızın adreslenebilir adında kullanılır. Ao 'nun adı _appsvcenvdemo_ise, etki alanı adı *. appsvcenvdemo.p.azurewebsites.net*olur. *Mytestapp*adlı bir uygulama oluşturursanız, mytestapp.appsvcenvdemo.p.azurewebsites.net adresinde adreslenebilir. Adda boşluk kullanamazsınız. Büyük harfli karakterler kullanırsanız, etki alanı adı bu adın toplam küçük harfli sürümüdür.
 
-    ![Yeni App Service planı adı][4]
+    ![Yeni App Service plan adı][4]
 
-1. Azure sanal ağ ayrıntılarını belirtin. Şunlardan birini seçin **Yeni Oluştur** veya **var olanı Seç**. Seçili bölgesinde bir sanal ağınız varsa var olan bir sanal ağ seçme seçeneği kullanılabilir. Seçerseniz **Yeni Oluştur**, sanal ağ için bir ad girin. Bu ada sahip yeni bir Resource Manager sanal ağı oluşturulur. Adres alanı kullanan `192.168.250.0/23` seçili bölgesinde. Seçerseniz **var olanı Seç**, gerekir:
+1. Azure sanal ağ ayrıntılarınızı belirtin. **Yeni oluştur** ' u seçin veya mevcut ' ı **seçin**. Mevcut bir VNet seçme seçeneği yalnızca seçili bölgede bir sanal ağ varsa kullanılabilir. **Yeni oluştur**' u seçerseniz VNET için bir ad girin. Bu ada sahip yeni bir Kaynak Yöneticisi VNet oluşturulur. Seçili bölgedeki adres alanını `192.168.250.0/23` kullanır. **Varolanı Seç**' i seçerseniz şunları yapmanız gerekir:
 
-    a. Birden fazla aboneliğiniz varsa, sanal ağ adres bloğu seçin.
+    a. Birden fazla tane varsa VNet adres bloğunu seçin.
 
     b. Yeni bir alt ağ adı girin.
 
-    c. Alt ağ boyutunu seçin. *Unutmayın, ase'nizin gelecekteki büyümeye uyum sağlamak için büyük bir boyut seçin.* Öneririz `/25`, 128 adres içeren ve bir en büyük boyutlu ASE'yi işleyebilen. Önermemekteyiz `/28`, örneğin, çünkü yalnızca 16 adresleri kullanılabilir. Altyapı en az yedi adresleri ve başka bir 5 Azure ağ kullanır. İçinde bir `/28` alt kaldığını App Service planı, ILB ASE için örnekleri en dış ASE için 4 App Service planı örneği, ölçekleme ve yalnızca 3.
+    c. Alt ağın boyutunu seçin. *Ao 'nizin gelecekteki büyümesini karşılayacak büyüklükte bir boyut seçip seçmeyi unutmayın.* 128 adresine `/24`sahip ve en yüksek boyutlu bir abi 'yi işleyebilen için önerilir. Örneğin, yalnızca `/28`16 adres kullanılabildiği için bu önerilmez. Altyapı en az yedi adres kullanır ve Azure ağı başka bir 5 kullanır. Bir `/28` alt ağda, bir dış ay için App Service plan örnekleri ve bir ILB ay için yalnızca 3 App Service plan örneği olan 4 en yüksek ölçeklendirmeyle birlikte kalır.
 
-    d. Alt ağ IP aralığı seçin.
+    d. Alt ağ IP aralığını seçin.
 
-1.  "Container Yapılandır" seçeneğini belirleyin
-    * (Azure Container Registry, Docker Hub ve kendi özel kayıt defterinizi kullanabilirsiniz), özel görüntü adı girin. Kendi özel kapsayıcınızı kullanmak istemiyorsanız, yalnızca kodunuzu getirin ve yukarıdaki yönergeleri kullanarak Linux'ta App Service ile yerleşik görüntü kullanın. 
+1.  "Kapsayıcıyı Yapılandır" ı seçin.
+    * Özel görüntü adınızı girin (Azure Container Registry, Docker Hub ve kendi özel kayıt defteriniz) kullanabilirsiniz. Kendi özel kapsayıcınızı kullanmak istemiyorsanız, yukarıdaki yönergeleri kullanarak yalnızca kodunuzu getirip Linux üzerinde App Service yerleşik bir görüntü kullanabilirsiniz. 
 
-    ![Kapsayıcı yapılandırma][9]
+    ![Kapsayıcıyı yapılandırma][9]
 
-1. Seçin **Oluştur** ASE oluşturma. Bu işlem ayrıca App Service planı ve bir uygulama oluşturur. ASE, App Service planı ve app: aynı abonelik altında tümünü ve ayrıca aynı kaynak grubunda. Ayrı bir kaynak grubu, ASE'NİZİN erişmesi gerekiyorsa veya ILB ASE gerekiyorsa, tek başına bir ASE oluşturma adımlarını izleyin.
+1. ATıCı oluşturmak için **Oluştur** ' u seçin. Bu işlem, App Service planı ve uygulamayı da oluşturur. Ao, App Service planı ve uygulama aynı abonelikte ve ayrıca aynı kaynak grubunda bulunur. ATıCı 'niz ayrı bir kaynak grubuna ihtiyaç duyuyorsa veya bir ıLB Ao 'ya ihtiyacınız varsa, kendi başına bir AO oluşturmak için adımları izleyin.
 
 
-## <a name="create-an-ase-by-itself"></a>Tek başına bir ASE oluşturma
+## <a name="create-an-ase-by-itself"></a>Kendi başına bir ATıCı oluşturun
 
-Bir ASE tek başına oluşturursanız, hiçbir şey var. Boş bir ASE, hala altyapısı için aylık olarak ücretlendirilir. Bir ASE, ILB ile oluşturma veya kendi kaynak grubunda bir ASE oluşturmak için aşağıdaki adımları izleyin. ASE'yi oluşturduktan sonra uygulama içinde normal işlem kullanarak oluşturabilirsiniz. Yeni ASE'nizi konum olarak seçin.
+Tek başına bir bağımsız oluşturursanız, içinde hiç bir şey yoktur. Boş bir Ao, altyapı için hala aylık bir ücret doğurur. Bir ıLB ile ATıCı oluşturmak veya kendi kaynak grubunda Ao oluşturmak için bu adımları izleyin. Ace 'nizi oluşturduktan sonra, normal işlemi kullanarak bu uygulamalarda uygulamalar oluşturabilirsiniz. Konum olarak yeni ATıCı 'nizi seçin.
 
-1. Azure Market'te arama **App Service ortamı**, ya da seçin **kaynak Oluştur** > **Web mobil** > **uygulama Hizmet ortamı**. 
+1. **App Service ortamı**için Azure Marketi 'nde arama yapın veya **kaynak** > oluştur**Web mobil** > **App Service ortamı**' i seçin. 
 
-1. ASE'NİZİN adını girin. Bu ad, ASE içinde oluşturulan uygulamalar için kullanılır. Adı ise *mynewdemoase*, alt etki alanı adı *. mynewdemoase.p.azurewebsites.net*. Adlı bir uygulama oluşturursanız *mytestapp*, mytestapp.mynewdemoase.p.azurewebsites.net adreslenebilir. Ad boşluk kullanamazsınız. Büyük harf karakterler kullanırsanız, etki alanı adı toplam küçük harfli sürümünü adıdır. Bir ILB kullanırsanız, ASE adınız alt etki alanı içinde kullanılmaz, ancak bunun yerine ASE oluşturma sırasında açıkça belirtilir.
+1. ATıCı 'nizin adını girin. Bu ad, Ao 'da oluşturulan uygulamalar için kullanılır. Ad *yenematıcı*ise, alt etki alanı adı *. mynewdemoase.p.azurewebsites.net*olur. *Mytestapp*adlı bir uygulama oluşturursanız, mytestapp.mynewdemoase.p.azurewebsites.net adresinde adreslenebilir. Adda boşluk kullanamazsınız. Büyük harfli karakterler kullanırsanız, etki alanı adı, adın toplam küçük harfli sürümüdür. ILB kullanıyorsanız, Ao adınız alt etki alanında kullanılmaz, ancak bunun yerine ama oluşturma sırasında açıkça belirtilir.
 
-    ![ASE adlandırma][5]
+    ![ATıCı adlandırma][5]
 
-1. Aboneliğinizi seçin. Bu abonelik ayrıca ASE içindeki tüm uygulamalar kullanan biridir. Başka bir abonelikte bir vnet'e ASE'nizi konulamaz.
+1. Aboneliğinizi seçin. Bu abonelik Ayrıca, Ao 'daki tüm uygulamaların kullandığı bir uygulamalardır. ASE 'nizi başka bir abonelikte yer alan bir sanal ağa koyamazsınız.
 
-1. Seçin veya yeni bir kaynak grubu belirtin. ASE'niz için kullanılan kaynak grubunu, sanal ağ için kullanılan hizmet örneğiyle aynı olmalıdır. Mevcut bir sanal ağı seçerseniz ASE'niz için kaynak grubu seçimi, ağınızın yansıtacak şekilde güncelleştirilir. *Resource Manager şablonu kullanıyorsanız, VNet kaynak grubundan farklı bir kaynak grubu ile bir ASE oluşturabilirsiniz.* Şablondan ASE oluşturma için bkz: [bir şablondan bir App Service ortamı oluşturma][MakeASEfromTemplate].
+1. Yeni bir kaynak grubu seçin veya belirtin. ASE 'niz için kullanılan kaynak grubu, VNet 'iniz için kullanılan bir aynı olmalıdır. Var olan bir sanal ağı seçerseniz, ASE 'niz için kaynak grubu seçimi sanal ağınızın içeriğini yansıtacak şekilde güncelleştirilir. *Bir Kaynak Yöneticisi şablonu kullanıyorsanız, VNet kaynak grubundan farklı bir kaynak grubuyla bir ASE oluşturabilirsiniz.* Bir şablondan Ao oluşturmak için, bkz. [bir şablondan App Service ortam oluşturma][MakeASEfromTemplate].
 
     ![Kaynak grubu seçimi][6]
 
-1. VNet ve konumu seçin. Yeni bir VNet oluşturun veya mevcut bir VNet seçin: 
+1. VNet ve konumunuzu seçin. Yeni bir VNet oluşturabilir veya var olan bir sanal ağı seçebilirsiniz: 
 
     * Yeni bir VNet seçerseniz, bir ad ve konum belirtebilirsiniz. 
     
-    * Yeni sanal ağ adres aralığı 192.168.250.0/23 ve varsayılan adlı bir alt ağ vardır. Alt ağ 192.168.250.0/24 tanımlanır. Yalnızca Resource Manager sanal ağı seçebilirsiniz. **VIP türü** seçim ASE'NİZİN doğrudan internet'ten (Dış) erişilebilen bir ILB kullanıyorsa veya belirler. Bu seçenekler hakkında daha fazla bilgi için bkz. [oluşturma ve kullanma App Service ortamı ile iç yük dengeleyici][MakeILBASE]. 
+    * Yeni VNet 'in adres aralığı 192.168.250.0/23 ve varsayılan olarak adlandırılan bir alt ağ vardır. Alt ağ 192.168.250.0/24 olarak tanımlanır. Yalnızca bir Kaynak Yöneticisi VNet seçebilirsiniz. **VIP türü** SEÇIMI, Ao 'larınızın internet 'Ten (harici) doğrudan erişilebildiğini veya ILB kullanıp kullanmadığını belirler. Bu seçenekler hakkında daha fazla bilgi edinmek için bkz. [App Service ortamı ile iç yük dengeleyici oluşturma ve kullanma][MakeILBASE]. 
 
-      * Seçerseniz **dış** için **VIP türü**, sistem oluşturulur ile IP tabanlı SSL amaçları için kaç dış IP adreslerini seçebilirsiniz. 
+      * **VIP türü**için **dış** ' i SEÇERSENIZ, IP tabanlı SSL amaçları için SISTEMIN kaç tane dış IP adresi oluşturduğunu seçebilirsiniz. 
     
-      * Seçerseniz **dahili** için **VIP türü**, ASE'nizi kullanan etki alanı belirtmeniz gerekir. Bir ASE genel veya özel adres aralıkları kullanan bir Vnet'e dağıtabilirsiniz. Ortak adres aralığı ile bir sanal ağ kullanmak için önceden sanal ağ oluşturmanız gerekir. 
+      * **VIP türü**için **dahili** ' ı seçerseniz, atıcı 'nizin kullandığı etki alanını belirtmeniz gerekir. ASE 'yi ortak veya özel adres aralıklarını kullanan bir sanal ağa dağıtabilirsiniz. Bir VNet 'i ortak adres aralığıyla birlikte kullanmak için, VNet 'i daha önce oluşturmanız gerekir. 
     
-    * Mevcut bir sanal ağı seçerseniz, ASE'yi oluşturulduğunda yeni bir alt ağ oluşturulur. *Portalda, önceden oluşturulmuş bir alt ağ kullanamazsınız. Resource Manager şablonu kullanıyorsanız, var olan bir alt ağ ile bir ASE oluşturabilirsiniz.* Şablondan ASE oluşturma için bkz: [bir şablondan bir App Service ortamı oluşturma][MakeASEfromTemplate].
+    * Mevcut bir sanal ağı seçerseniz, ASE oluşturulduğunda yeni bir alt ağ oluşturulur. *Portalda önceden oluşturulmuş bir alt ağ kullanamazsınız. Kaynak Yöneticisi şablonu kullanıyorsanız, mevcut bir alt ağla bir AO oluşturabilirsiniz.* Şablondan bir AO oluşturmak için, bkz. [bir şablondan App Service ortamı oluşturma][MakeASEfromTemplate].
 
 ## <a name="app-service-environment-v1"></a>App Service Ortamı v1
 
-App Service ortamı (ASEv1) ilk sürümü örneklerini yine de oluşturabilirsiniz. İşlemini başlatmak için markette Ara **App Service ortamı v1**. ASE'i ASE tek başına oluşturduğunuz aynı şekilde oluşturun. Tamamlandığında, iki ön uç ve iki çalışan, ASEv1 sahiptir. ASEv1 ile ön uçlar ve çalışanlardan yönetmeniz gerekir. App Service planlarınızda oluşturduğunuzda, bunlar otomatik olarak eklenir. Ön uçlar HTTP/HTTPS uç noktaları olarak davranır ve çalışanlar için trafiği göndermek. Çalışanlar, uygulamaları barındıran rollerdir. ASE'yi oluşturduktan sonra ön uçlar ve çalışanlardan miktarını ayarlayabilirsiniz. 
+App Service Ortamı (ASEv1) öğesinin ilk sürümünün örneklerini oluşturmaya devam edebilirsiniz. Bu işlemi başlatmak için Market 'Te **App Service ortamı v1**'yi arayın. ATıCı 'yi tek başına Ao 'yu oluşturduğunuz şekilde oluşturursunuz. İşiniz bittiğinde, ASEv1 için iki ön uç ve iki çalışan vardır. ASEv1 ile ön uçları ve çalışanları yönetmeniz gerekir. App Service planlarınızı oluşturduğunuzda otomatik olarak eklenmez. Ön uçlar, HTTP/HTTPS uç noktaları olarak davranır ve çalışanlara trafik gönderir. Çalışanlar, uygulamalarınızı barındıran rollerdir. ATıCı 'nizi oluşturduktan sonra ön uçların ve çalışanların miktarını ayarlayabilirsiniz. 
 
-ASEv1 hakkında daha fazla bilgi için bkz: [App Service ortamı v1 giriş][ASEv1Intro]. Ölçeklendirme hakkında daha fazla bilgi için bkz: yönetme ve ASEv1, izleme [bir App Service ortamını yapılandırma][ConfigureASEv1].
+ASEv1 hakkında daha fazla bilgi edinmek için bkz. [App Service ortamı v1 'ye giriş][ASEv1Intro]. ASEv1 ölçeklendirme, yönetme ve izleme hakkında daha fazla bilgi için bkz. [nasıl yapılandırılır App Service ortamı][ConfigureASEv1].
 
 <!--Image references-->
 [1]: ./media/how_to_create_an_external_app_service_environment/createexternalase-create.png

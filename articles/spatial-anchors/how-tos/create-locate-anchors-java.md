@@ -1,49 +1,49 @@
 ---
-title: Oluşturma ve Java uzamsal tutturucular Azure kullanarak yer işaretleri bulun | Microsoft Docs
-description: Java'da Azure uzamsal bağlayıcılarını kullanarak nasıl oluşturulup bulun, ayrıntılı açıklama tutturur.
+title: Java 'da Azure uzamsal bağlayıcılarını kullanarak Tutturucular oluşturma ve bulma | Microsoft Docs
+description: Java 'da Azure uzamsal bağlayıcılarını kullanarak bağlantıları oluşturma ve bulma hakkında ayrıntılı açıklama.
 author: ramonarguelles
 manager: vicenterivera
 services: azure-spatial-anchors
 ms.author: rgarcia
 ms.date: 02/24/2019
-ms.topic: how-to
+ms.topic: tutorial
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 9a0a65ae1406e4c197370c7b11373603dc40c8ee
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7bc4a2251fa07f201d35e385806d2eb49cd8851e
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65964943"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68562521"
 ---
-# <a name="how-to-create-and-locate-anchors-using-azure-spatial-anchors-in-java"></a>Java'da Azure uzamsal bağlayıcılarını kullanarak nasıl oluşturulup bulun tutturur
+# <a name="how-to-create-and-locate-anchors-using-azure-spatial-anchors-in-java"></a>Java 'da Azure uzamsal bağlayıcılarını kullanarak Tutturucular oluşturma ve bulma
 
 > [!div  class="op_single_selector"]
-> * [Unity](create-locate-anchors-unity.md)
+> * ['Yi](create-locate-anchors-unity.md)
 > * [Objective-C](create-locate-anchors-objc.md)
 > * [Swift](create-locate-anchors-swift.md)
 > * [Android Java](create-locate-anchors-java.md)
 > * [C++/NDK](create-locate-anchors-cpp-ndk.md)
-> * [C++/WinRT](create-locate-anchors-cpp-winrt.md)
+> * [C++/Wınrt](create-locate-anchors-cpp-winrt.md)
 
-Azure uzamsal yer işaretleri, yer işaretleri dünyanın farklı cihazlar arasında paylaşmak izin verin. Bu, birkaç farklı geliştirme ortamlarında destekler. Bu makalede, sizi Azure uzamsal bağlayıcılarını SDK'sı, Java, kullanılacak nasıl ele alacağız:
+Azure uzamsal bağlantıları, dünyanın farklı cihazları arasında bağlantıları paylaşmanızı sağlar. Çeşitli farklı geliştirme ortamlarını destekler. Bu makalede, Java 'da Azure uzamsal bağlayıcı SDK 'sını nasıl kullanacağınızı inceleyeceğiz:
 
-- Doğru şekilde ayarlayın ve Azure uzamsal bağlayıcılarını oturumu yönetin.
-- Oluşturma ve yerel bağlayıcıları üzerinde özelliklerini ayarlayın.
+- Azure uzamsal bağlayıcı oturumunu doğru şekilde kurun ve yönetin.
+- Yerel bağlayıcıların özelliklerini oluşturun ve ayarlayın.
 - Bunları buluta yükleyin.
-- Bulun ve uzamsal uygulamasının bulut bağlayıcılarını silin.
+- Bulut uzamsal bağlayıcılarını bulun ve silin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu kılavuzu tamamlamak için sahip olduğunuzdan emin olun:
+Bu kılavuzu gerçekleştirmek için şunları yaptığınızdan emin olun:
 
-- Okumak [Azure uzamsal yer işaretleri genel bakış](../overview.md).
-- Biri tamamlandı [5 dakikalık hızlı Başlangıçlar](../index.yml).
-- Java hakkında temel bilgilere.
-- Hakkında temel bilgilere <a href="https://developers.google.com/ar/discover/" target="_blank">ARCore</a> 1.7.
+- [Azure uzamsal Tutturucuların genel bakış](../overview.md)bölümünü okuyun.
+- [5 dakikalık hızlı](../index.yml)başlangıçlardan biri tamamlandı.
+- Java hakkında temel bilgi.
+- <a href="https://developers.google.com/ar/discover/" target="_blank">Arcore</a>hakkında temel bilgi.
 
 [!INCLUDE [Start](../../../includes/spatial-anchors-create-locate-anchors-start.md)]
 
-Daha fazla bilgi edinin [CloudSpatialAnchorSession](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession) sınıfı.
+[CloudSpatialAnchorSession](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession) sınıfı hakkında daha fazla bilgi edinin.
 
 ```java
     private CloudSpatialAnchorSession mCloudSession;
@@ -53,7 +53,7 @@ Daha fazla bilgi edinin [CloudSpatialAnchorSession](https://docs.microsoft.com/j
 
 [!INCLUDE [Account Keys](../../../includes/spatial-anchors-create-locate-anchors-account-keys.md)]
 
-Daha fazla bilgi edinin [SessionConfiguration](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.sessionconfiguration) sınıfı.
+[Sessionconfiguration](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.sessionconfiguration) sınıfı hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.getConfiguration().setAccountKey("MyAccountKey");
@@ -67,7 +67,7 @@ Daha fazla bilgi edinin [SessionConfiguration](https://docs.microsoft.com/java/a
 
 [!INCLUDE [Access Tokens Event](../../../includes/spatial-anchors-create-locate-anchors-access-tokens-event.md)]
 
-Daha fazla bilgi edinin [TokenRequiredListener](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.tokenrequiredlistener) arabirimi.
+[Tokenrequiredlistener](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.tokenrequiredlistener) arabirimi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.addTokenRequiredListener(args -> {
@@ -115,7 +115,7 @@ Daha fazla bilgi edinin [TokenRequiredListener](https://docs.microsoft.com/java/
 
 [!INCLUDE [Setup](../../../includes/spatial-anchors-create-locate-anchors-setup-non-ios.md)]
 
-Daha fazla bilgi edinin [Başlat](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.start) yöntemi.
+[Başlangıç](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.start) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.setSession(mSession);
@@ -124,7 +124,7 @@ Daha fazla bilgi edinin [Başlat](https://docs.microsoft.com/java/api/com.micros
 
 [!INCLUDE [Frames](../../../includes/spatial-anchors-create-locate-anchors-frames.md)]
 
-Daha fazla bilgi edinin [processFrame](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.processframe) yöntemi.
+[Processframe](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.processframe) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.processFrame(mSession.update());
@@ -132,7 +132,7 @@ Daha fazla bilgi edinin [processFrame](https://docs.microsoft.com/java/api/com.m
 
 [!INCLUDE [Feedback](../../../includes/spatial-anchors-create-locate-anchors-feedback.md)]
 
-Daha fazla bilgi edinin [SessionUpdatedListener](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.sessionupdatedlistener) arabirimi.
+[Sessionupdatedlistener](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.sessionupdatedlistener) arabirimi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.addSessionUpdatedListener(args -> {
@@ -148,7 +148,7 @@ Daha fazla bilgi edinin [SessionUpdatedListener](https://docs.microsoft.com/java
 
 [!INCLUDE [Creating](../../../includes/spatial-anchors-create-locate-anchors-creating.md)]
 
-Daha fazla bilgi edinin [CloudSpatialAnchor](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchor) sınıfı.
+[CloudSpatialAnchor](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchor) sınıfı hakkında daha fazla bilgi edinin.
 
 ```java
     // Create a local anchor, perhaps by hit-testing and creating an ARAnchor
@@ -197,7 +197,7 @@ Daha fazla bilgi edinin [CloudSpatialAnchor](https://docs.microsoft.com/java/api
 
 [!INCLUDE [Session Status](../../../includes/spatial-anchors-create-locate-anchors-session-status.md)]
 
-Daha fazla bilgi edinin [getSessionStatusAsync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.getsessionstatusasync) yöntemi.
+[Getsessionstatusasync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.getsessionstatusasync) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     Future<SessionStatus> sessionStatusFuture = mCloudSession.getSessionStatusAsync();
@@ -229,7 +229,7 @@ Daha fazla bilgi edinin [getSessionStatusAsync](https://docs.microsoft.com/java/
 
 [!INCLUDE [Setting Properties](../../../includes/spatial-anchors-create-locate-anchors-setting-properties.md)]
 
-Daha fazla bilgi edinin [getAppProperties](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchor.getappproperties) yöntemi.
+[Getappproperties](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchor.getappproperties) metodu hakkında daha fazla bilgi edinin.
 
 ```java
     CloudSpatialAnchor cloudAnchor = new CloudSpatialAnchor();
@@ -243,7 +243,7 @@ Daha fazla bilgi edinin [getAppProperties](https://docs.microsoft.com/java/api/c
 
 [!INCLUDE [Update Anchor Properties](../../../includes/spatial-anchors-create-locate-anchors-updating-properties.md)]
 
-Daha fazla bilgi edinin [updateAnchorPropertiesAsync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.updateanchorpropertiesasync) yöntemi.
+[UpdateAnchorPropertiesAsync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.updateanchorpropertiesasync) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     CloudSpatialAnchor anchor = /* locate your anchor */;
@@ -275,7 +275,7 @@ Daha fazla bilgi edinin [updateAnchorPropertiesAsync](https://docs.microsoft.com
 
 [!INCLUDE [Getting Properties](../../../includes/spatial-anchors-create-locate-anchors-getting-properties.md)]
 
-Daha fazla bilgi edinin [getAnchorPropertiesAsync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.getanchorpropertiesasync) yöntemi.
+[GetAnchorPropertiesAsync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.getanchorpropertiesasync) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     Future<CloudSpatialAnchor> getAnchorPropertiesFuture = mCloudSession.getAnchorPropertiesAsync("anchorId");
@@ -307,7 +307,7 @@ Daha fazla bilgi edinin [getAnchorPropertiesAsync](https://docs.microsoft.com/ja
 
 [!INCLUDE [Expiration](../../../includes/spatial-anchors-create-locate-anchors-expiration.md)]
 
-Daha fazla bilgi edinin [setExpiration](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchor.setexpiration) yöntemi.
+[Setexpiasyon](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchor.setexpiration) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     Date now = new Date();
@@ -320,7 +320,7 @@ Daha fazla bilgi edinin [setExpiration](https://docs.microsoft.com/java/api/com.
 
 [!INCLUDE [Locate](../../../includes/spatial-anchors-create-locate-anchors-locating.md)]
 
-Daha fazla bilgi edinin [createWatcher](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.createwatcher) yöntemi.
+[Createizleyici](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.createwatcher) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     AnchorLocateCriteria criteria = new AnchorLocateCriteria();
@@ -330,7 +330,7 @@ Daha fazla bilgi edinin [createWatcher](https://docs.microsoft.com/java/api/com.
 
 [!INCLUDE [Locate Events](../../../includes/spatial-anchors-create-locate-anchors-locating-events.md)]
 
-Daha fazla bilgi edinin [AnchorLocatedListener](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.anchorlocatedlistener) arabirimi.
+[Anchorlocatedlistener](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.anchorlocatedlistener) arabirimi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.addAnchorLocatedListener(args -> {
@@ -357,7 +357,7 @@ Daha fazla bilgi edinin [AnchorLocatedListener](https://docs.microsoft.com/java/
 
 [!INCLUDE [Deleting](../../../includes/spatial-anchors-create-locate-anchors-deleting.md)]
 
-Daha fazla bilgi edinin [deleteAnchorAsync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.deleteanchorasync) yöntemi.
+[Deleteanchorasync](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.deleteanchorasync) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     Future deleteAnchorFuture = mCloudSession.deleteAnchorAsync(cloudAnchor);
@@ -366,7 +366,7 @@ Daha fazla bilgi edinin [deleteAnchorAsync](https://docs.microsoft.com/java/api/
 
 [!INCLUDE [Stopping](../../../includes/spatial-anchors-create-locate-anchors-stopping.md)]
 
-Daha fazla bilgi edinin [Durdur](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.stop) yöntemi.
+[Stop](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.stop) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.stop();
@@ -374,7 +374,7 @@ Daha fazla bilgi edinin [Durdur](https://docs.microsoft.com/java/api/com.microso
 
 [!INCLUDE [Resetting](../../../includes/spatial-anchors-create-locate-anchors-resetting.md)]
 
-Daha fazla bilgi edinin [sıfırlama](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.reset) yöntemi.
+[Reset](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.reset) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.reset();
@@ -382,7 +382,7 @@ Daha fazla bilgi edinin [sıfırlama](https://docs.microsoft.com/java/api/com.mi
 
 [!INCLUDE [Cleanup](../../../includes/spatial-anchors-create-locate-anchors-cleanup-java.md)]
 
-Daha fazla bilgi edinin [kapatmak](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.close) yöntemi.
+[Close](https://docs.microsoft.com/java/api/com.microsoft.azure.spatialanchors.cloudspatialanchorsession.close) yöntemi hakkında daha fazla bilgi edinin.
 
 ```java
     mCloudSession.close();

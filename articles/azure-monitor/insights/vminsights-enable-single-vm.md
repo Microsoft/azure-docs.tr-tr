@@ -1,35 +1,29 @@
 ---
-title: Azure İzleyici (Önizleme) VM'ler için değerlendirme için etkinleştirme | Microsoft Docs
-description: Tek bir Azure sanal makine veya sanal makine ölçek kümesi sanal makineleri için Azure İzleyici değerlendirilecek öğrenin.
-services: azure-monitor
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
+title: Değerlendirme için VM'ler için Azure İzleyici (Önizleme) etkinleştirme | Microsoft Docs
+description: Tek bir Azure sanal makinesinde veya bir sanal makine ölçek kümesinde VM'ler için Azure İzleyici değerlendirmeyi öğrenin.
 ms.service: azure-monitor
+ms.subservice: ''
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 05/09/2019
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: ec909bcd16f923bbd7036f6a69df2bbb07e561b8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/14/2019
+ms.openlocfilehash: 3ab3164db7702566e62b2eedf2a9a03e9f7fb55c
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67122473"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74109138"
 ---
-# <a name="enable-azure-monitor-for-vms-preview-for-evaluation"></a>Azure İzleyici (Önizleme) VM'ler için değerlendirme için etkinleştirin.
+# <a name="enable-azure-monitor-for-vms-preview-for-evaluation"></a>Değerlendirme için VM'ler için Azure İzleyici (Önizleme) etkinleştir
 
-Azure İzleyici (Önizleme) VM'ler için az sayıda Azure sanal makineleri (VM) üzerinde değerlendirmek veya üzerinde tek bir sanal makine veya sanal makine ölçek kümesi. İzlemeyi etkinleştirmek için en kolay ve en doğrudan Azure portalından yoludur. Vm'lerinizi izleme ve herhangi bir performans veya kullanılabilirlik sorunları bulmak için amacınız anlamaktır. 
+Az sayıda Azure sanal makinesi (VM) veya tek bir VM ya da sanal makine ölçek kümesi üzerinde VM'ler için Azure İzleyici (Önizleme) değerlendirebilirsiniz. İzlemeyi etkinleştirmenin en kolay ve en dolaysız yolu Azure portal. Amacınız, sanal makinelerinizi izlemek ve tüm performans veya kullanılabilirlik sorunlarını bulmaktır. 
 
-Başlamadan önce gözden [önkoşulları](vminsights-enable-overview.md) kaynak gereksinimlerini karşılamak ve aboneliğinizi emin olun.  
+Başlamadan önce [önkoşulları](vminsights-enable-overview.md) gözden geçirin ve aboneliğinizin ve kaynaklarınızın gereksinimleri karşıladığından emin olun.  
 
-## <a name="enable-monitoring-for-a-single-azure-vm"></a>Tek bir Azure VM için izlemeyi etkinleştir
-Azure VM izlemeyi etkinleştirmek için:
+## <a name="enable-monitoring-for-a-single-azure-vm"></a>Tek bir Azure VM için izlemeyi etkinleştirme
+Azure VM 'nizi izlemeyi etkinleştirmek için:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
 
 1. Seçin **sanal makineler**.
 
@@ -39,51 +33,50 @@ Azure VM izlemeyi etkinleştirmek için:
 
 1. Üzerinde **Insights (Önizleme)** sayfasında **şimdi deneyin**.
 
-    ![Bir VM için sanal makineler için Azure İzleyici etkinleştir](./media/vminsights-enable-single-vm/enable-vminsights-vm-portal-01.png)
+    ![Bir VM için sanal makineler için Azure İzleyici etkinleştir](./media/vminsights-enable-single-vm/enable-vminsights-vm-portal.png)
 
 1. Üzerinde **Azure İzleyici İçgörüler ekleme** sayfasında mevcut bir Log Analytics varsa, aynı abonelikte çalışma alanı, aşağı açılan listeden seçin.  
 
-    Listenin varsayılan çalışma alanı ve VM aboneliğinde dağıtıldığı konum belirler. 
+    Liste, varsayılan çalışma alanını ve VM 'nin abonelikte dağıtıldığı konumu önceden seçer. 
 
     >[!NOTE]
-    >VM izleme verilerini depolamak için yeni bir Log Analytics çalışma alanı oluşturmak için bkz [Log Analytics çalışma alanı oluşturma](../../azure-monitor/learn/quick-create-workspace.md). Log Analytics çalışma alanınızın birine ait olmalıdır [desteklenen bölgeler](vminsights-enable-overview.md#log-analytics).
+    >İzleme verilerini VM 'den depolamak üzere yeni bir Log Analytics çalışma alanı oluşturmak için, bkz. [Log Analytics çalışma alanı oluşturma](../../azure-monitor/learn/quick-create-workspace.md). Log Analytics çalışma alanınız [desteklenen bölgelerden](vminsights-enable-overview.md#log-analytics)birine ait olmalıdır.
 
-İzleme etkinleştirdikten sonra sanal makine için sistem durumu ölçümleri görmeden önce yaklaşık 10 dakika beklemeniz gerekebilir.
+İzlemeyi etkinleştirdikten sonra, VM 'nin sistem durumu ölçümlerini görüntüleyebilmeniz için yaklaşık 10 dakika beklemeniz gerekebilir.
 
 ![Dağıtım işlemi izlemeyi VM'ler için Azure İzleyicisi'ni etkinleştirme](./media/vminsights-enable-single-vm/onboard-vminsights-vm-portal-status.png)
 
-## <a name="enable-monitoring-for-a-single-virtual-machine-scale-set"></a>Tek sanal makine ölçek kümesi için izlemeyi etkinleştir
+## <a name="enable-monitoring-for-a-single-virtual-machine-scale-set"></a>Tek bir sanal makine ölçek kümesi için izlemeyi etkinleştir
 
 Azure sanal makine ölçek kümesini izlemeyi etkinleştirmek için:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
 
-2. Seçin **sanal makine ölçek kümeleri**.
+2. **Sanal makine ölçek kümelerini**seçin.
 
-3. Listeden bir sanal makine ölçek kümesi'ni seçin.
+3. Listeden bir sanal makine ölçek kümesi seçin.
 
-4. Üzerine sanal makine ölçek kümesi sayfası, buna **izleme** bölümünden **Insights (Önizleme)** .
+4. Sanal makine ölçek kümesi sayfasında, **izleme** bölümünde Öngörüler ' i **(Önizleme)** seçin.
 
-5. Üzerinde **Insights (Önizleme)** sayfasında mevcut bir Log Analytics çalışma alanı kullanmak istiyorsanız aşağı açılan listeden seçin.
+5. **Öngörüler (Önizleme)** sayfasında, mevcut bir Log Analytics çalışma alanını kullanmak istiyorsanız, açılır listeden seçin.
 
-    Listenin varsayılan çalışma alanı ve VM abonelikte dağıtılmış konumunu belirler. 
+    Liste, varsayılan çalışma alanını ve VM 'nin abonelikte dağıtıldığı konumu önceden seçer. 
 
-    ![Azure İzleyici VM'ler için bir sanal makine ölçek kümesi için etkinleştirin.](./media/vminsights-enable-single-vm/enable-vminsights-vmss-portal-01.png)
+    ![Bir sanal makine ölçek kümesi için VM'ler için Azure İzleyici etkinleştir](./media/vminsights-enable-single-vm/enable-vminsights-vmss-portal.png)
 
     >[!NOTE]
-    >Sanal makine ölçek kümesi izleme verilerini depolamak için yeni bir Log Analytics çalışma alanı oluşturmak için bkz [Log Analytics çalışma alanı oluşturma](../learn/quick-create-workspace.md). Log Analytics çalışma alanınızın birine ait olmalıdır [desteklenen bölgeler](vminsights-enable-overview.md#log-analytics).
+    >Sanal makine ölçek kümesinden izleme verilerini depolamak üzere yeni bir Log Analytics çalışma alanı oluşturmak için, bkz. [Log Analytics çalışma alanı oluşturma](../learn/quick-create-workspace.md). Log Analytics çalışma alanınız [desteklenen bölgelerden](vminsights-enable-overview.md#log-analytics)birine ait olmalıdır.
 
-İzleme etkinleştirdikten sonra ölçek kümesi için izleme verilerini görüntülemeden önce yaklaşık 10 dakika beklemeniz gerekebilir.
+İzlemeyi etkinleştirdikten sonra, ölçek kümesi için izleme verilerini görüntüleyebilmeniz için yaklaşık 10 dakika beklemeniz gerekebilir.
 
 >[!NOTE]
->Ölçek kümeniz için el ile yükseltme modeli kullandığınız, Kurulumu tamamlamak için örneklerini yükseltin. Yükseltmelerinin başlayabilirsiniz **örnekleri** sayfasında **ayarları** bölümü.
+>Ölçek kümesi için el ile yükseltme modeli kullanıyorsanız, kurulumu tamamladıktan sonra örnekleri yükseltin. **Ayarlar** bölümünde, **örnekler** sayfasından yükseltmeleri başlatabilirsiniz.
 
 ![Dağıtım işlemi izlemeyi VM'ler için Azure İzleyicisi'ni etkinleştirme](./media/vminsights-enable-single-vm/onboard-vminsights-vmss-portal-status-01.png)
 
-Sanal makine veya sanal makine ölçek kümesi için izleme etkinleştirdikten sonra izleme bilgileri analiz VM'ler için Azure İzleyici'de kullanılabilir. 
+VM 'niz veya sanal makine ölçek kümesi için izlemeyi etkinleştirmiş olduğunuza göre, izleme bilgileri VM'ler için Azure İzleyici analiz için kullanılabilir. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Sistem durumu özelliği kullanmayı öğrenmek için bkz: [Vm'leri Azure izleme durumunu anlamak](vminsights-health.md). 
-* Bulunan Uygulama bağımlılıklarını görüntülemek için bkz: [kullanımı Azure İzleyici Vm'leri harita](vminsights-maps.md). 
-* Performans sorunlarını, genel kullanımı ve performansını belirlemek için bkz. [görünümü Azure VM performansını](vminsights-performance.md).
+* Bulunan uygulama bağımlılıklarını görüntülemek için bkz. [VM'ler için Azure izleyici haritasını kullanma](vminsights-maps.md). 
+* Performans sorunlarını, genel kullanımı ve sanal makinenizin performansını belirlemek için bkz. [Azure VM performansını görüntüleme](vminsights-performance.md).

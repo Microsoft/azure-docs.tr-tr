@@ -1,67 +1,67 @@
 ---
-title: Android'de Java Microsoft konuşma tanıma API'si ile çalışmaya başlama | Microsoft Docs
+title: Android 'de Java 'da Microsoft konuşma tanıma API 'SI ile çalışmaya başlama | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Konuşmayı metne dönüştürme Android uygulamaları geliştirmek için Microsoft konuşma tanıma API'si kullanın.
+description: Konuşulan sesi metne dönüştüren Android uygulamaları geliştirmek için Microsoft konuşma API 'sini kullanın.
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 147042e300e629dd7e354d4e9079cc4855a8146c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 77fee2ecee9cfabe3fad9c1df2c41c7803c3367e
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515192"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70966839"
 ---
-# <a name="quickstart-use-the-bing-speech-recognition-api-in-java-on-android"></a>Hızlı Başlangıç: Bing konuşma tanıma API'si Java'da Android'de kullanın
+# <a name="quickstart-use-the-bing-speech-recognition-api-in-java-on-android"></a>Hızlı Başlangıç: Android 'de Java 'daki Bing Konuşma tanıma API 'sini kullanma
 
 [!INCLUDE [Deprecation note](../../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Bing konuşma tanıma API'SİYLE konuşma kayıtlarını metne dönüştürmek için Bing konuşma bulut tabanlı hizmet kullanan Android uygulamaları geliştirebilirsiniz. Uygulamanız aynı anda olabilir ve zaman uyumsuz olarak hizmete ses gönderiyor aynı anda kısmi tanıma sonuçları almak için gerçek zamanlı akış, API'yi destekler.
+Bing Konuşma tanıma API 'SI ile, konuşulan sesi metne dönüştürmek için bulut tabanlı Bing Konuşma hizmetini kullanan Android uygulamaları geliştirebilirsiniz. API gerçek zamanlı akışı destekler, böylece uygulamanız aynı anda ve zaman uyumsuz olarak kısmi tanıma sonuçları alabilir ve bu da hizmete ses gönderiyor.
 
-Bu makalede, Android için konuşma istemcisi kitaplığını Android cihazları için Java konuşma metin uygulama geliştirmek için nasıl kullanılacağını göstermek için örnek bir uygulama kullanılmıştır.
+Bu makalede, Android cihazlar için Java 'da konuşmaya metin uygulamaları geliştirmek üzere Android için Konuşma istemci kitaplığı kullanmayı göstermek üzere örnek bir uygulama kullanılmaktadır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 ### <a name="platform-requirements"></a>Platform gereksinimleri
 
-Örnek tarafından geliştirilen [Android Studio](https://developer.android.com/sdk/index.html) Java'da Windows için.
+Örnek, Java 'daki Windows için [Android Studio](https://developer.android.com/sdk/index.html) tarafından geliştirilmiştir.
 
-### <a name="get-the-client-library-and-sample-application"></a>İstemci Kitaplığı ve örnek uygulaması alma
+### <a name="get-the-client-library-and-sample-application"></a>İstemci kitaplığı ve örnek uygulamayı edinme
 
-Konuşma istemcisi kitaplığını ve Android için örnekleri kullanılabilir [konuşma tanıma istemcisi Android için SDK](https://github.com/microsoft/cognitive-speech-stt-android). Derlenebilir örnek samples/SpeechRecoExample dizininin altında bulabilirsiniz. İhtiyacınız kullanmak için kendi uygulamalarında SpeechSDK/kitaplıkları armeabi altında iki kitaplıkları ve x86 bulabilirsiniz klasör. Libandroid_platform.so dosyasının boyutu, 22 MB olmakla birlikte dağıtım sırasında 4 MB olarak azaltılır.
+Android için Konuşma istemci kitaplığı ve örnekleri, [Android Için konuşma istemcisi SDK 'sında](https://github.com/microsoft/cognitive-speech-stt-android)bulunur. Örnek/SpeechRecoExample dizini altında oluşturulabilir örneği bulabilirsiniz. Armeabi ve x86 klasörü altındaki SpeechSDK/libs içindeki kendi uygulamalarınızda kullanmanız gereken iki kitaplığı bulabilirsiniz. Libandroid_platform. so dosyasının boyutu 22 MB 'tır, ancak dağıtım zamanında 4 MB 'ye düşürülür.
 
-#### <a name="subscribe-to-the-speech-api-and-get-a-free-trial-subscription-key"></a>Konuşma tanıma API'si için abone olur ve ücretsiz deneme aboneliği anahtarını alma
+#### <a name="subscribe-to-the-speech-api-and-get-a-free-trial-subscription-key"></a>Konuşma API 'sine abone olun ve ücretsiz deneme aboneliği anahtarı alın
 
-Konuşma tanıma API'si, Bilişsel hizmetler (daha önce Project Oxford) bir parçasıdır. Ücretsiz deneme aboneliği anahtarları alabilirsiniz [Bilişsel hizmetler abonelik](https://azure.microsoft.com/try/cognitive-services/) sayfası. Konuşma tanıma API'si belirledikten sonra seçin **API anahtarı alma** anahtarını almak için. Birincil ve ikincil anahtar döndürür. İki anahtarı kullanabilmeniz için her iki anahtarı aynı kotası bağlıdır.
+Konuşma API 'SI bilişsel hizmetler 'in (daha önce Project Oxford) bir parçasıdır. Bilişsel [Hizmetler aboneliği](https://azure.microsoft.com/try/cognitive-services/) sayfasından ücretsiz deneme aboneliği anahtarlarına sahip olabilirsiniz. Konuşma API 'sini seçtikten sonra anahtarı almak için **API anahtarı al** ' ı seçin. Birincil ve ikincil anahtar döndürür. Her iki anahtar de aynı kotaya bağlıdır, bu nedenle her iki anahtarı da kullanabilirsiniz.
 
-Kullanmak istiyorsanız *tanıma amacıyla*, ayrıca kaydolmanız gerekir [Language Understanding Intelligent Service (LUIS)](https://azure.microsoft.com/services/cognitive-services/language-understanding-intelligent-service/).
+*Tanımayı amaç ile birlikte*kullanmak istiyorsanız, [Language Understanding Intelligent Service (lusıs)](https://azure.microsoft.com/services/cognitive-services/language-understanding-intelligent-service/)için kaydolmanız gerekir.
 
 > [!IMPORTANT]
->* Bir abonelik anahtarı edinirler. Konuşma istemci kitaplıkları kullanabilmeniz için önce olmalıdır bir [abonelik anahtarı](https://azure.microsoft.com/try/cognitive-services/).
+>* Abonelik anahtarı alın. Konuşma istemci kitaplıklarını kullanabilmeniz için önce bir [abonelik anahtarınız](https://azure.microsoft.com/try/cognitive-services/)olması gerekir.
 >
->* Abonelik anahtarınızı kullanın. Sağlanan Android örnek uygulama ile birlikte dosya samples/SpeechRecoExample/res/values/strings.xml abonelik anahtarlarınızı ile güncelleştirin. Daha fazla bilgi için [derleme ve çalıştırma örnekleri](#build-and-run-samples).
+>* Abonelik anahtarınızı kullanın. Sağlanan Android örnek uygulamasıyla, örnek/SpeechRecoExample/res/Values/Strings. xml dosyasını abonelik anahtarlarınız ile güncelleştirin. Daha fazla bilgi için bkz. [oluşturma ve çalıştırma örnekleri](#build-and-run-samples).
 
-## <a name="use-the-speech-client-library"></a>Konuşma istemci kitaplığını kullanma
+## <a name="use-the-speech-client-library"></a>Konuşma istemci kitaplığı kullanın
 
-Uygulamanızda istemci kitaplığını kullanmak için izleyin [yönergeleri](https://github.com/microsoft/cognitive-speech-stt-android#the-client-library).
+Uygulamanızdaki istemci kitaplığını kullanmak için [yönergeleri](https://github.com/microsoft/cognitive-speech-stt-android#the-client-library)izleyin.
 
-Kitaplık Başvurusu docs klasöründe bulunan Android için istemci bulabilirsiniz [konuşma tanıma istemcisi Android için SDK](https://github.com/microsoft/cognitive-speech-stt-android).
+Android için istemci kitaplığı başvurusunu [Android Için konuşma istemcisi SDK 'sının](https://github.com/microsoft/cognitive-speech-stt-android)Docs klasöründe bulabilirsiniz.
 
-## <a name="build-and-run-samples"></a>Derleme ve örneklerini çalıştırma
+## <a name="build-and-run-samples"></a>Örnek oluşturma ve çalıştırma
 
-Derleme ve örneklerini çalıştırma hakkında bilgi edinmek için bu bkz [Benioku sayfa](https://github.com/microsoft/cognitive-speech-stt-android#the-sample).
+Örnek oluşturma ve çalıştırma hakkında bilgi edinmek için bu [Benioku sayfasına](https://github.com/microsoft/cognitive-speech-stt-android#the-sample)bakın.
 
-## <a name="samples-explained"></a>Açıklanan örnekleri
+## <a name="samples-explained"></a>Açıklanan örnekler
 
 ### <a name="create-recognition-clients"></a>Tanıma istemcileri oluşturma
 
-Aşağıdaki örnek kodda, kullanıcı senaryoları tabanlı tanıma istemci sınıfları oluşturma işlemi gösterilmektedir:
+Aşağıdaki örnekteki kod, Kullanıcı senaryolarına göre tanınma istemci sınıflarının nasıl oluşturulacağını gösterir:
 
 ```java
 void initializeRecoClient()
@@ -115,39 +115,39 @@ void initializeRecoClient()
 
 ```
 
-İstemci Kitaplığı önceden uygulanan tanıma, konuşma tanıma tipik senaryolar için istemci sınıfları sağlar:
+İstemci kitaplığı, konuşma tanımada tipik senaryolar için önceden uygulanmış tanıma istemci sınıfları sağlar:
 
-* `DataRecognitionClient`: Konuşma tanıma PCM verileri (örneğin, bir dosya ya da ses kaynağından gelen) ile. Veri arabellekleri ayrılmıştır ve her arabellek konuşma hizmeti için gönderilir. Kullanıcının kendi sessizlik algılama isterseniz uygulayabilmek için hiçbir değişiklik arabellekleri için gerçekleştirilir. Veri WAV dosyalarını sağlanırsa, konuşma tanıma hizmeti dosya sağdan veriler gönderebilir. Ham verileri varsa, örneğin, Bluetooth üzerinden gelen ses, ilk biçimi üstbilgisi konuşma hizmeti verileri gönderin.
-* `MicrophoneRecognitionClient`: Konuşma tanıma mikrofondan gelen sesi ile. Mikrofondan gelen veriler için konuşma tanıma hizmeti gönderilir ve mikrofon açık olduğundan emin olun. Tanıma hizmetine gönderilmeden önce bir yerleşik "sessizlik algılayıcısı" Mikrofon verilere uygulanır.
-* `DataRecognitionClientWithIntent` ve `MicrophoneRecognitionClientWithIntent`: Bu istemciler, metin tanıma, yapılandırılmış bilgiler amacı hakkında daha fazla Eylemler sürücüsüne uygulamalarınız tarafından kullanılabilecek konuşmacının ek olarak döndürür. "Hedefi" kullanmak için önce kullanarak bir model eğitip gerekir [LUIS](https://azure.microsoft.com/services/cognitive-services/language-understanding-intelligent-service/).
+* `DataRecognitionClient`: PCM verileriyle konuşma tanıma (örneğin, bir dosya veya ses kaynağından). Veriler arabelleklere ayrılır ve her bir arabellek konuşma hizmetine gönderilir. Arabelleklere herhangi bir değişiklik yapılmaz, böylece Kullanıcı isterseniz kendi sessizlik algılamayı uygulayabilir. Veriler WAV dosyalarından sağlanmışsa, dosyadan konuşma hizmetine doğru veri gönderebilirsiniz. Ham verileriniz varsa (örneğin, Bluetooth 'tan geliyorsa), önce konuşma hizmetine bir biçim üst bilgisi gönderin ve ardından veriler gelir.
+* `MicrophoneRecognitionClient`: Mikrofondan gelen ses ile konuşma tanıma. Mikrofonun açık olduğundan ve mikrofondan alınan verilerin konuşma tanıma hizmetine gönderildiğinden emin olun. Mikrofon verilerine, tanıma hizmetine gönderilmeden önce yerleşik bir "sessizlik algılayıcısı" uygulanır.
+* `DataRecognitionClientWithIntent`ve `MicrophoneRecognitionClientWithIntent`: Bu istemciler, tanıma metnine ek olarak, konuşmacının amacı hakkında yapılandırılmış bilgiler sağlar ve bu da, uygulamalarınıza göre başka işlemler için kullanılabilir. "Amaç" kullanmak için, bir modeli [lusıs](https://azure.microsoft.com/services/cognitive-services/language-understanding-intelligent-service/)kullanarak eğitmeniz gerekir.
 
 ### <a name="recognition-language"></a>Tanıma dili
 
-Kullanırken `SpeechRecognitionServiceFactory` istemcisi oluşturmak için bir dil seçmeniz gerekir. Konuşma hizmeti tarafından desteklenen dillerin tam listesi için bkz. [desteklenen diller](../API-Reference-REST/supportedlanguages.md).
+İstemcisini oluşturmak için `SpeechRecognitionServiceFactory` kullandığınızda bir dil seçmeniz gerekir. Konuşma hizmeti tarafından desteklenen dillerin tüm listesi için bkz. [desteklenen diller](../API-Reference-REST/supportedlanguages.md).
 
 ### `SpeechRecognitionMode`
 
-Ayrıca belirtmenize gerek `SpeechRecognitionMode` istemciyle oluşturduğunuzda `SpeechRecognitionServiceFactory`:
+Ayrıca şunları ile `SpeechRecognitionServiceFactory`istemcisini oluştururken `SpeechRecognitionMode` belirtmeniz gerekir:
 
-* `ShortPhrase`: Uzun bir utterance fazla 15 saniye. Hizmetine gönderilen veri gibi istemci, birden çok kısmı sonuç ve birden çok en iyi n seçim ile bir nihai sonucu alır.
-* `LongDictation`: Uzun bir utterance en fazla iki dakika. Hizmete gönderilen veri gibi istemci birden çok kısmı sonuç ve hizmeti cümle duraklamaları burada tanımlar göre birden çok Nihai sonuç alır.
+* `ShortPhrase`: En fazla 15 saniye uzunluğunda bir utterlik. Veriler hizmete gönderilirken, istemci birden çok kısmi sonuç ve birden çok n en iyi seçenek içeren bir nihai sonuç alır.
+* `LongDictation`: En fazla iki dakikalık bir utterlik. Veriler hizmete gönderilirken, istemci, hizmetin cümle duraklamaları tanımladığı yere bağlı olarak birden çok kısmi sonuç ve birden çok son sonuç alır.
 
-### <a name="attach-event-handlers"></a>Olay işleyicileri ekleme
+### <a name="attach-event-handlers"></a>Olay işleyicilerini Ekle
 
-İstemciye çeşitli olay işleyicileri ekleyebilirsiniz, oluşturan:
+Oluşturduğunuz istemciye çeşitli olay işleyicileri ekleyebilirsiniz:
 
-* **Kısmi sonuçlar olayları**: Konuşma hizmeti bile Konuşmayı bitirmeden kişilerin, yorumlarını tahmin her başlatıldığında bu olay adlı (kullanırsanız `MicrophoneRecognitionClient`) veya veri gönderen son (kullanırsanız `DataRecognitionClient`).
-* **Hata olayları**: Hizmet bir hata algıladığında çağrılır.
-* **Hedefi olayları**: "WithIntent" istemciler üzerinde çağrılır (yalnızca `ShortPhrase` modu) sonra son tanıma işleminin sonucu yapılandırılmış bir JSON hedefi ayrıştırılır.
-* **Neden olayların**:
-  * İçinde `ShortPhrase` modu, bu olay adı verilir ve konuşma tamamladıktan sonra en iyi n sonuçlarını döndürür.
-  * İçinde `LongDictation` modu, olay işleyicisi adlı birden çok kez bağlı hizmeti cümle duraklamaları burada tanımlar.
-  * **Her en iyi n seçim**, güvenirlik değeri ve tanınan metin birkaç farklı biçimleri döndürülür. Daha fazla bilgi için [çıkış biçimi](../Concepts.md#output-format).
+* **Kısmi sonuçlar olayları**: Bu olay, konuşma hizmeti, konuşmayı bitirmeden ( `MicrophoneRecognitionClient`kullanıyorsanız) veya veri göndermeyi ( `DataRecognitionClient`kullanıyorsanız) bir kez her tahmin edildiğinde çağrılır.
+* **Hata olayları**: Hizmet bir hata algıladığında çağırılır.
+* **Amaç olayları**: Son tanıma sonucu yapılandırılmış bir JSON amacına ayrıştırıldıktan sonra `ShortPhrase` , "withamaç" istemcilerinde (yalnızca modunda) çağırılır.
+* **Sonuç olayları**:
+  * `ShortPhrase` Modda bu olay çağrılır ve konuşmayı tamamladıktan sonra n en iyi sonuçları döndürür.
+  * `LongDictation` Modunda, olay işleyicisi hizmetin cümle duraklamaları tanımladığı yere bağlı olarak birden çok kez çağrılır.
+  * **Her n en iyi seçenek için**, tanınan metnin bir güvenirlik değeri ve birkaç farklı biçimi döndürülür. Daha fazla bilgi için bkz. [çıkış biçimi](../Concepts.md#output-format).
 
 ## <a name="related-topics"></a>İlgili konular
 
-* [Android istemci Kitaplığı Başvurusu](https://github.com/Azure-Samples/Cognitive-Speech-STT-Android/tree/master/docs)
-* [C# Microsoft konuşma tanıma API'si için .NET içinde Windows kullanmaya başlayın](GetStartedCSharpDesktop.md)
-* [İOS üzerinde Objective-C, Microsoft konuşma tanıma API'si ile başlama](Get-Started-ObjectiveC-iOS.md)
-* [JavaScript içinde Microsoft konuşma tanıma API'si ile çalışmaya başlama](GetStartedJSWebsockets.md)
-* [REST aracılığıyla Microsoft konuşma tanıma API'si ile çalışmaya başlama](GetStartedREST.md)
+* [Android için istemci kitaplığı başvurusu](https://github.com/Azure-Samples/Cognitive-Speech-STT-Android/tree/master/docs)
+* [.NET ' te Windows C# Için Microsoft konuşma API 'si ile çalışmaya başlama](GetStartedCSharpDesktop.md)
+* [İOS üzerinde amaç-C ' d a Microsoft konuşma API 'SI ile çalışmaya başlama](Get-Started-ObjectiveC-iOS.md)
+* [JavaScript 'te Microsoft konuşma API 'SI ile çalışmaya başlama](GetStartedJSWebsockets.md)
+* [REST aracılığıyla Microsoft konuşma API 'SI ile çalışmaya başlama](GetStartedREST.md)

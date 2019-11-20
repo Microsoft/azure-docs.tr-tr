@@ -5,18 +5,19 @@ services: active-directory
 author: rolyon
 ms.service: role-based-access-control
 ms.topic: include
-ms.date: 05/13/2019
+ms.date: 06/21/2019
 ms.author: rolyon
 ms.custom: include file
-ms.openlocfilehash: f8576c8486fb25d645eaf67448d2d7e0b9f5071f
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 56f4f24fb504d08c34542129f854547b78967cb3
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188779"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "70997743"
 ---
 | Resource | Sınır |
 | --- | --- |
-| [Rol atamaları Azure abonelik başına Azure kaynakları için](../articles/role-based-access-control/overview.md) | 2,000 |
+| [Azure aboneliği başına Azure kaynakları için rol atamaları](../articles/role-based-access-control/overview.md) | 2,000 |
+| [Yönetim grubu başına Azure kaynakları için rol atamaları](../articles/role-based-access-control/overview.md) | 500 |
 | [Kiracı başına Azure kaynakları için özel roller](../articles/role-based-access-control/custom-roles.md) | 5,000 |
-| [Kiracı başına Azure kaynakları için özel roller](../articles/role-based-access-control/custom-roles.md)<br/>(Azure kamu, Azure Almanya ve Azure Çin 21Vianet gibi özel bulut) | 2,000 |
+| [Kiracı başına Azure kaynakları için özel roller](../articles/role-based-access-control/custom-roles.md)<br/>(Azure Kamu, Azure Almanya ve Azure Çin 21Vianet gibi özel bulutlar) | 2,000 |

@@ -1,47 +1,46 @@
 ---
-title: C++ için depolama istemcisi kitaplığı ile Azure depolama kaynaklarını liste | Microsoft Docs
-description: Listenin API'leri C++ için Microsoft Azure depolama istemci kitaplığı kapsayıcıları, bloblar, kuyruklar, tablolar ve varlıklar numaralandırmak için nasıl kullanılacağını öğrenin.
-services: storage
+title: Azure depolama kaynaklarını depolama Istemci kitaplığı | için C++ listeleyin Microsoft Docs
+description: Kapsayıcıları, Blobları, kuyrukları, tabloları ve varlıkları listelemek C++ Için Microsoft Azure depolama istemci Kitaplığı ' nda listeleme API 'lerinin nasıl kullanılacağını öğrenin.
 author: mhopkins-msft
-ms.service: storage
-ms.topic: article
-ms.date: 01/23/2017
 ms.author: mhopkins
-ms.reviewer: dineshm
+ms.date: 01/23/2017
+ms.service: storage
 ms.subservice: common
-ms.openlocfilehash: edf50b97ff25a67b41bad266df9236145f288409
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: conceptual
+ms.reviewer: dineshm
+ms.openlocfilehash: 3a87e39c9435ba02357b4b655e95e96666242b71
+ms.sourcegitcommit: 85b3973b104111f536dc5eccf8026749084d8789
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65146872"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68721912"
 ---
-# <a name="list-azure-storage-resources-in-c"></a>Azure depolama kaynaklarını C++ dilinde listesi
-Liste, Azure depolama ile birçok geliştirme senaryoları için anahtar işlemlerdir. Bu makalede, en verimli şekilde listenin C++ için Microsoft Azure depolama istemci Kitaplığı'ndaki sağlanan API'leri kullanarak Azure Depolama'daki nesnelerini listeleme açıklar.
+# <a name="list-azure-storage-resources-in-c"></a>Azure depolama kaynaklarını listelemeC++
+
+Listeleme işlemleri, Azure depolama ile birçok geliştirme senaryosunda önemli değildir. Bu makalede, için C++Microsoft Azure depolama istemci kitaplığında belirtilen listeleme API 'Lerini kullanarak Azure Storage 'da nesnelerin nasıl etkili bir şekilde numaralandırılacağı açıklanır.
 
 > [!NOTE]
-> Bu kılavuzda hedefleyen C++ sürümü için Azure depolama istemci kitaplığı aracılığıyla kullanılabilir olan 2.x [NuGet](https://www.nuget.org/packages/wastorage) veya [GitHub](https://github.com/Azure/azure-storage-cpp).
-> 
-> 
+> Bu kılavuz, [NuGet](https://www.nuget.org/packages/wastorage) veya [GitHub](https://github.com/Azure/azure-storage-cpp)aracılığıyla kullanılabilen sürüm C++ 2. x için Azure Storage istemci kitaplığı 'nı hedefler.
 
-Depolama istemcisi kitaplığı çeşitli Azure storage'da listesi veya sorgusuna nesnelere yöntemler sağlar. Bu makalede aşağıdaki senaryoları ele alır:
+Depolama Istemci kitaplığı, Azure Storage 'daki nesneleri listelemek veya sorgulamak için çeşitli yöntemler sağlar. Bu makalede aşağıdaki senaryolar ele alınmaktadır:
 
-* Bir hesabındaki kapsayıcıları listesi
-* Bir kapsayıcı veya blob sanal dizin içindeki blobları listeleme
-* Bir hesapta kuyrukları listeleme
-* Bir hesapta listede tablolar
-* Bir tablodaki varlıkları sorgulayın
+* Bir hesaptaki kapsayıcıları listeleme
+* Kapsayıcıda veya sanal blob dizininde Blobları listeleme
+* Bir hesaptaki kuyrukları listeleme
+* Bir hesaptaki tabloları listeleme
+* Bir tablodaki varlıkları sorgulama
 
-Bu yöntemlerin her biri farklı aşırı yüklemeler farklı senaryolar için kullanma gösterilmektedir.
+Bu yöntemlerin her biri farklı senaryolar için farklı aşırı yüklemeler kullanılarak gösterilmektedir.
 
-## <a name="asynchronous-versus-synchronous"></a>Zaman uyumlu ve zaman uyumsuz
-C++ için depolama istemci kitaplığı üzerine inşa edildiğinden [C++ REST Kitaplığı](https://github.com/Microsoft/cpprestsdk), kendiliğinden zaman uyumsuz işlemleri kullanarak destekliyoruz [pplx::task](https://microsoft.github.io/cpprestsdk/classpplx_1_1task.html). Örneğin:
+## <a name="asynchronous-versus-synchronous"></a>Zaman uyumsuz ve zaman uyumlu
+
+İçin C++ depolama istemci kitaplığı, [ C++ Rest kitaplığının](https://github.com/Microsoft/cpprestsdk)üzerine inşa edildiğinden, zaman uyumsuz işlemleri [pplx:: Task](https://microsoft.github.io/cpprestsdk/classpplx_1_1task.html)kullanarak bir şekilde destekliyoruz. Örneğin:
 
 ```cpp
 pplx::task<list_blob_item_segment> list_blobs_segmented_async(continuation_token& token) const;
 ```
 
-Zaman uyumlu işlemler karşılık gelen zaman uyumsuz işlemler kaydır:
+Zaman uyumlu işlemler, karşılık gelen zaman uyumsuz işlemleri kaydırır:
 
 ```cpp
 list_blob_item_segment list_blobs_segmented(const continuation_token& token) const
@@ -50,19 +49,20 @@ list_blob_item_segment list_blobs_segmented(const continuation_token& token) con
 }
 ```
 
-Birden çok iş parçacıklı uygulamalar veya hizmetler ile çalışıyorsanız, zaman uyumsuz API'leri doğrudan bir iş parçacığı oluşturmak yerine eşitleme performansınızı önemli ölçüde etkiler API'leri çağırmak için kullanmanızı öneririz.
+Birden çok iş parçacığı uygulaması veya hizmetleriyle çalışıyorsanız, eşitleme API 'lerini çağırmak için bir iş parçacığı oluşturmak yerine, zaman uyumsuz API 'Leri doğrudan kullanmanızı öneririz. bu sayede performansı önemli ölçüde etkiler.
 
-## <a name="segmented-listing"></a>Bölümlenmiş listeleme
-Bulut depolama ölçek segmentli listeleme gerektirir. Örneğin, bir Azure blob kapsayıcısındaki bloblar bir milyon veya bir Azure tablosu bir milyardan fazla varlıklarda üzerinden olabilir. Bunlar teorik sayılar, ancak gerçek müşteri kullanım durumları değildir.
+## <a name="segmented-listing"></a>Bölümlenmiş liste
 
-Bu nedenle, tek bir yanıt tüm nesneleri listelemek için zordur. Bunun yerine, disk belleği kullanarak nesneleri listeleyebilirsiniz. Her biri listeyi API'leri bir *bölümlenmiş* aşırı yükleme.
+Bulut depolamanın ölçeği, bölümlenmiş liste gerektirir. Örneğin, bir Azure Blob kapsayıcısında veya bir Azure tablosundaki milyardan fazla varlıkta bir milyon blobunuz olabilir. Bunlar teorik sayı değildir, ancak gerçek müşteri kullanım durumları.
 
-Bölümlenmiş listeleme işlemi için yanıt içerir:
+Bu nedenle, tüm nesneleri tek bir yanıtta listelemek pratik değildir. Bunun yerine, sayfalama kullanarak nesneleri listeleyebilirsiniz. Liste API 'lerinin her birinde *kesimli* bir aşırı yükleme vardır.
 
-* <i>_segment</i>, tek bir çağrı listesi API'si için döndürülen sonuç kümesini içerir.
-* *continuation_token*, sonraki sonuç sayfasını almak için sonraki çağrı geçirilir. Daha fazla sonuç döndürmek için olduğunda, devamlılık belirteci null olur.
+Bölümlenmiş bir listeleme işleminin yanıtı şunları içerir:
 
-Örneğin, bir kapsayıcıdaki tüm blobları listelemek için tipik bir çağrı, aşağıdaki kod parçacığı gibi görünebilir. Kodu bizim [örnekleri](https://github.com/Azure/azure-storage-cpp/blob/master/Microsoft.WindowsAzure.Storage/samples/BlobsGettingStarted/Application.cpp):
+* *_segment*, liste API 'sine tek bir çağrı için döndürülen sonuç kümesini içerir.
+* bir sonraki sonuç sayfasına ulaşmak için sonraki çağrıya geçirilen *continuation_token*. Döndürülecek daha fazla sonuç olmadığında devamlılık belirteci null olur.
+
+Örneğin, bir kapsayıcıdaki tüm Blobları listelemek için tipik bir çağrı aşağıdaki kod parçacığı gibi görünebilir. Kod, örneklerimizde mevcuttur [](https://github.com/Azure/azure-storage-cpp/blob/master/Microsoft.WindowsAzure.Storage/samples/BlobsGettingStarted/Application.cpp):
 
 ```cpp
 // List blobs in the blob container
@@ -87,7 +87,7 @@ do
 while (!token.empty());
 ```
 
-Bir sayfa döndürülen sonuç sayısı parametresi tarafından denetlenebilir Not *max_results* örneğin her API aşırı yüklemesini içinde:
+Bir sayfada döndürülen sonuç sayısının her API 'nin aşırı yüklemesiyle *max_results* parametresi tarafından denetlenebileceğini unutmayın, örneğin:
 
 ```cpp
 list_blob_item_segment list_blobs_segmented(const utility::string_t& prefix, bool use_flat_blob_listing,
@@ -95,14 +95,15 @@ list_blob_item_segment list_blobs_segmented(const utility::string_t& prefix, boo
     const blob_request_options& options, operation_context context)
 ```
 
-Siz belirtmezseniz *max_results* parametre, varsayılan en büyük değer en fazla 5000 sonuçlarının tek sayfa olarak döndürülür.
+*Max_results* parametresini belirtmezseniz, tek bir sayfada en fazla 5000 sonucun varsayılan en büyük değeri döndürülür.
 
-Ayrıca Azure tablo Depolama'yı kullanan bir sorgu kayıt yok veya değerinden daha az sayıda kayıt döndürebilir unutmayın *max_results* devamlılık belirteci boş olsa bile, belirttiğiniz parametresi. Nedenlerinden biri, sorgu beş saniye içinde tamamlanamadı olabilir. Devamlılık belirteci boş değil sürece, sorgu devam etmelidir ve kodunuzu segment sonuçları boyutunu varsayımında bulunmamalıdır.
+Ayrıca, Azure Tablo depolamaya yönelik bir sorgu, devamlılık belirteci boş olmasa bile, belirttiğiniz *max_results* parametresinin değerinden bir kayıt veya daha az kayıt döndürebileceğini unutmayın. Bir nedenden dolayı sorgunun beş saniye içinde tamamlanmamasının nedeni olabilir. Devamlılık belirteci boş olmadığı sürece sorgu devam etmelidir ve kodunuz, kesim sonuçlarının boyutunu varsaymamalıdır.
 
-Çoğu senaryo için önerilen kodlama düzeni listelemek, liste veya sorgulama ve hizmet her isteğin nasıl yanıt vereceğini açık ilerlemesini sağlayan bölümlenmiş. Özellikle C++ uygulamaları veya hizmetleri için alt düzey denetim listesi ilerleme denetimi bellek ve performans yardımcı olabilir.
+Çoğu senaryo için önerilen kodlama deseninin, listeleme veya sorgulama üzerinde açık ilerleme durumu ve hizmetin her bir isteğe nasıl yanıt verdiği ile ilgili olarak bölümlenmiş listesi verilmiştir. Özellikle uygulamalar C++ veya hizmetler için, liste ilerleme durumunun alt düzey denetimi bellek ve performansın denetimine yardımcı olabilir.
 
-## <a name="greedy-listing"></a>Doyumsuz listeleme
-C++ için depolama istemci Kitaplığı'nın önceki sürümlerini (Önizleme sürümleri buradan 0.5.0 sürümünü ve önceki sürümleri) listesi API'leri için tablolar ve Kuyruklar, aşağıdaki örnekte olduğu gibi segmentlere ayrılmamış dahil:
+## <a name="greedy-listing"></a>Greedy listeleme
+
+İçin C++ depolama istemcisi kitaplığı 'nın (0.5.0 Preview ve önceki sürümler) daha önceki sürümleri, aşağıdaki örnekte olduğu gibi, tablolar ve kuyruklar için bölünmeyen listeleme API 'leri içerir:
 
 ```cpp
 std::vector<cloud_table> list_tables(const utility::string_t& prefix) const;
@@ -110,13 +111,13 @@ std::vector<table_entity> execute_query(const table_query& query) const;
 std::vector<cloud_queue> list_queues() const;
 ```
 
-Bu yöntemler bölümlenmiş API'lerinin sarmalayıcıları uygulandığına. Her yanıt segmentli dökümün için kod sonuçları bir vektör kayıtlarına eklenir ve sonra tam kapsayıcıları taranan tüm sonuç döndürmedi.
+Bu yöntemler, kesimli API 'lerin sarmalayıcıları olarak uygulanmıştır. Bölümlenmiş listenin her yanıtı için, kod sonuçları bir Vector öğesine eklenmiş ve tam kapsayıcılar tarandıktan sonra tüm sonuçları döndürdü.
 
-Bu yaklaşım, tablo ve depolama hesabı nesneleri az sayıda içerdiğinde işe yarayabilir. Ancak, tüm sonuçlar bellekte kalan çünkü nesnelerin sayısında bir artış ile gerekli bellek sınırı arttırabilir. Bir listeleme işlemi boyunca ilerleme durumunu hakkında hiçbir bilgi arayan vardı çok uzun zaman alabilir.
+Bu yaklaşım, depolama hesabı veya tablosu az sayıda nesne içerdiğinde işe alabilir. Ancak, nesne sayısında bir artış ile, tüm sonuçlar bellekte kaldığı için gereken bellek sınır olmadan artabilir. Tek bir listeleme işlemi çok uzun sürebilir, bu süre içinde çağıranın ilerleme durumu hakkında hiçbir bilgi yoktur.
 
-Bu SDK'sı API'leri doyumsuz listeleme C#, Java veya JavaScript Node.js ortamında mevcut değil. Doyumsuz bu API'leri kullanarak olası sorunları önlemek için bunları 0.6.0 sürümü kaldırdık Önizleme.
+SDK 'daki bu doyumsuz listeleme API 'leri C#, Java veya JavaScript Node. js ortamında bulunmamaktadır. Bu doyumsuz API 'lerini kullanmanın olası sorunlarından kaçınmak için, bunları sürüm 0.6.0 Önizleme sürümünde kaldırdık.
 
-Kodunuzu bu doyumsuz API'ları çağırıyorsa:
+Kodunuz bu doyumsuz API 'lerini arıyorsanız:
 
 ```cpp
 std::vector<azure::storage::table_entity> entities = table.execute_query(query);
@@ -126,7 +127,7 @@ for (auto it = entities.cbegin(); it != entities.cend(); ++it)
 }
 ```
 
-Bölümlenmiş listenin API'leri kullanmak için kodunuzu değiştirmeniz gerekir:
+Daha sonra, bölümlenmiş listeleme API 'Lerini kullanmak için kodunuzu değiştirmelisiniz:
 
 ```cpp
 azure::storage::continuation_token token;
@@ -142,22 +143,23 @@ do
 } while (!token.empty());
 ```
 
-Belirterek *max_results* parametresi kesiminin, Bakiye isteklerinin sayısı ve uygulamanız için performans konuları karşılamak için bellek kullanımını arasında.
+Segmentin *max_results* parametresini belirterek, uygulamanızın performans konularını karşılamak için istek sayısı ve bellek kullanımı arasında denge yapabilirsiniz.
 
-Bölümlenmiş listeleme API kullanıyorsanız, ancak "greedy" stil yerel bir koleksiyondaki verileri depolamak, ayrıca, ayrıca dikkatli bir şekilde uygun ölçekte yerel bir koleksiyondaki verileri depolama işlemek için kodunuzu yeniden düzenleyin öneririz.
+Ayrıca, bölümlenmiş liste API 'Leri kullanıyorsanız, ancak verileri bir "Greedy" stilinde bir yerel koleksiyonda depoluyorsanız, verileri yerel bir koleksiyonda depolamayı ölçeklendirerek dikkatle işlemek için kodunuzu yeniden düzenlemeniz de önemle tavsiye ederiz.
 
 ## <a name="lazy-listing"></a>Yavaş listeleme
-Doyumsuz listeleme olası sorunları ortaya olsa da, kapsayıcıda çok fazla nesne yoksa, kullanışlıdır.
 
-Ayrıca C# veya Oracle Java SDK'ları kullanıyorsanız, bir yavaş, gerekirse burada verileri belirli bir uzaklıkta yalnızca getirildiğini listeleme stili sunan numaralandırılabilir programlama modeli ile ilgili bilgi sahibi olması gerekir. C++'da, yineleyici tabanlı şablon da benzer bir yaklaşım sağlar.
+Doyumsuz, olası sorunları ortaya çıkarsa da kapsayıcıda çok fazla nesne yoksa bu, kullanışlı bir yöntemdir.
 
-Tipik yavaş listeleme API'sini kullanarak **list_blobs** örnek olarak, şöyle görünür:
+Ayrıca veya Oracle Java SDK C# 'ları kullanıyorsanız, belirli bir uzaklığında verilerin yalnızca gerekli olduğu durumlarda alındığı bir geç stil listesi sunan, sıralanabilir programlama modeliyle ilgili bilgi sahibi olmanız gerekir. ' C++De, yineleyici tabanlı şablon da benzer bir yaklaşım sağlar.
+
+Örnek olarak **list_blobs** kullanan tipik bir yavaş listeleme API 'si şöyle görünür:
 
 ```cpp
 list_blob_item_iterator list_blobs() const;
 ```
 
-Yavaş listeleme desen kullanan bir tipik kod parçacığı şuna benzeyebilir:
+Yavaş liste modelini kullanan tipik bir kod parçacığı şöyle görünebilir:
 
 ```cpp
 // List blobs in the blob container
@@ -175,27 +177,28 @@ for (auto it = container.list_blobs(); it != end_of_results; ++it)
 }
 ```
 
-Yavaş listesi yalnızca zaman uyumlu modda kullanılabilir olduğunu unutmayın.
+Yavaş listenin yalnızca zaman uyumlu modda kullanılabileceğini unutmayın.
 
-Doyumsuz listeleme ile karşılaştırıldığında, yavaş listesi yalnızca gerektiğinde verileri getirir. Yalnızca sonraki yineleyiciye sonraki kesime hareket ettiğinde, perde, verileri Azure depolama biriminden getirir. Bu nedenle, bellek kullanımı sınırlanmış bir boyutu ile denetlenir ve hızlı bir işlemdir.
+Doyumsuz listelemesi ile karşılaştırıldığında, yavaş listeleme yalnızca gerektiğinde verileri getirir. Bu bölümde, Azure Storage 'dan verileri, yalnızca sonraki Yineleyici bir sonraki kesimye geldiğinde getirir. Bu nedenle, bellek kullanımı sınırlı bir boyutla denetlenir ve işlem hızlıdır.
 
-Yavaş listeleme API'leri dahil edilecek depolama istemci Kitaplığı'ndaki için C++ 2.2.0 sürümde.
+Yavaş listeleme API 'Leri, sürüm 2.2.0 içinde için C++ depolama istemci kitaplığı 'na dahildir.
 
 ## <a name="conclusion"></a>Sonuç
-Bu makalede, C++ için depolama istemcisi kitaplığı çeşitli nesneleri için API'leri listeleme farklı aşırı yüklemeler ele almıştık. Özetlersek:
 
-* Zaman uyumsuz API'ları birden çok iş parçacıklı senaryoları altında önerilir.
-* Bölümlenmiş listeleme çoğu senaryo için önerilir.
-* Yavaş listesi kitaplıkta zaman uyumlu senaryolarda uygun bir kapsayıcı olarak sağlanır.
-* Doyumsuz listeleme önerilmez ve Kitaplığı'ndan kaldırıldı.
+Bu makalede, için C++ depolama istemci kitaplığındaki çeşitli nesnelere yönelik API 'leri listelemek için farklı aşırı yüklemeler ele alınmıştır. Özetlemek için:
+
+* Zaman uyumsuz API 'Lerin birden çok iş parçacığı senaryosu altında kullanılması önemle önerilir.
+* Kesimli liste çoğu senaryo için önerilir.
+* Yavaş listeleme, kitaplıkta zaman uyumlu senaryolarda uygun bir sarmalayıcı olarak sağlanır.
+* Greedy listesi önerilmez ve kitaplıktan kaldırılmıştır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-C++ için Azure depolama ve istemci Kitaplığı hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın.
 
-* [BLOB depolama alanından C++ kullanma](../blobs/storage-c-plus-plus-how-to-use-blobs.md)
-* [Tablo depolama'yı C++ kullanma](../../cosmos-db/table-storage-how-to-use-c-plus.md)
-* [Kuyruk Depolama'yı C++ kullanma](../storage-c-plus-plus-how-to-use-queues.md)
-* [C++ API belgeleri için Azure depolama istemci kitaplığı.](https://azure.github.io/azure-storage-cpp/)
+İçin C++Azure depolama ve istemci kitaplığı hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın.
+
+* [Öğesinden blob depolamayı kullanmaC++](../blobs/storage-c-plus-plus-how-to-use-blobs.md)
+* [Öğesinden Tablo Depolamayı kullanmaC++](../../cosmos-db/table-storage-how-to-use-c-plus.md)
+* [Kuyruk depolamayı kullanmaC++](../storage-c-plus-plus-how-to-use-queues.md)
+* [API belgeleri için C++ Azure Storage istemci kitaplığı.](https://azure.github.io/azure-storage-cpp/)
 * [Azure Depolama Ekibi Blog’u](https://blogs.msdn.com/b/windowsazurestorage/)
 * [Azure Depolama Belgeleri](https://azure.microsoft.com/documentation/services/storage/)
-

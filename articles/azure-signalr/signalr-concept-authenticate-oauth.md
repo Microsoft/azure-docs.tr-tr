@@ -1,17 +1,17 @@
 ---
-title: Azure SignalR hizmeti istemcilerin kimliğini doğrulama Kılavuzu
-description: Bu kılavuzda, Azure SignalR hizmeti istemcilerin kimliğini doğrulamak öğrenin
+title: Azure SignalR hizmeti istemcilerinin kimlik doğrulamasına yönelik kılavuz
+description: E2e örneğini izleyerek kendi kimlik doğrulamasını nasıl uygulayacağınızı ve Azure SignalR hizmeti ile tümleştirmeyi öğrenin.
 author: sffamily
 ms.service: signalr
 ms.topic: conceptual
-ms.date: 03/01/2019
+ms.date: 11/13/2019
 ms.author: zhshang
-ms.openlocfilehash: 7660e1405598676599cab30467d22ac979438deb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cc955adffbe7df5809f9c4c860877ad22df3e99b
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66128290"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158286"
 ---
 # <a name="azure-signalr-service-authentication"></a>Azure SignalR hizmeti kimlik doğrulaması
 
@@ -42,13 +42,13 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticiyi tamamlamak için aşağıdaki önkoşullara sahip olmanız gerekir:
+Bu öğreticiyi tamamlamak için aşağıdaki ön koşullara sahip olmanız gerekir:
 
 * [GitHub](https://github.com/)'da oluşturulan bir hesap
 * [Git](https://git-scm.com/)
 * [.NET Core SDK](https://www.microsoft.com/net/download/windows)
 * [Yapılandırılmış Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/quickstart)
-* İndirin veya kopyalayın [AzureSignalR örnek](https://github.com/aspnet/AzureSignalR-samples) GitHub deposu.
+* [AzureSignalR-Sample](https://github.com/aspnet/AzureSignalR-samples) GitHub deposunu indirin veya kopyalayın.
 
 ## <a name="create-an-oauth-app"></a>OAuth uygulaması oluşturma
 
@@ -60,9 +60,9 @@ Bu öğreticiyi tamamlamak için aşağıdaki önkoşullara sahip olmanız gerek
 
     | Ayar Adı | Önerilen Değer | Açıklama |
     | ------------ | --------------- | ----------- |
-    | Uygulama adı | *Azure SignalR Sohbeti* | GitHub kullanıcı tanıması ve uygulamanın ile kimlik doğrulama güven olmalıdır.   |
+    | Uygulama adı | *Azure SignalR Sohbeti* | GitHub kullanıcısı, kimlik doğrulama yaptıkları uygulamayı tanıyabilmelidir ve güvenmelidir.   |
     | Giriş sayfası URL'si | `http://localhost:5000/home` | |
-    | Uygulama açıklaması | *Azure SignalR hizmeti GitHub kimlik doğrulamasını kullanarak bir sohbet odası örneği* | Uygulama kullanıcılarınızın kullanılan kimlik doğrulamanın bağlamını anlayabilmesine yardımcı olacak, yararlı bir uygulama açıklaması. |
+    | Uygulama açıklaması | *GitHub kimlik doğrulamasıyla Azure SignalR hizmetini kullanan bir sohbet odası örneği* | Uygulama kullanıcılarınızın kullanılan kimlik doğrulamanın bağlamını anlayabilmesine yardımcı olacak, yararlı bir uygulama açıklaması. |
     | Yetkilendirme geri çağırma URL'si | `http://localhost:5000/signin-github` | Bu ayar, OAuth uygulamanız için en önemli ayardır. Bu, başarılı bir kimlik doğrulamasının ardından GitHub'ın kullanıcıyı döndürdüğü geri çağırma URL'sidir. Bu öğreticide, *AspNet.Security.OAuth.GitHub* paketi için varsayılan geri çağırma URL'sini ( */signin-github*) kullanmalısınız.  |
 
 4. Yeni OAuth uygulama kaydı tamamlandıktan sonra, aşağıdaki komutları kullanarak *İstemci Kimliği* ve *İstemci Parolası*'nı Parola Yöneticisi'ne ekleyin. *Your_GitHub_Client_Id* ve *Your_GitHub_Client_Secret* değerlerini OAuth uygulamanızın değerleriyle değiştirin.
@@ -115,7 +115,7 @@ Bu öğreticiyi tamamlamak için aşağıdaki önkoşullara sahip olmanız gerek
         });
     ```
 
-4. `Startup` sınıfına `GetUserCompanyInfoAsync` yardımcı yöntemini ekleyin.
+4. `GetUserCompanyInfoAsync` sınıfına `Startup` yardımcı yöntemini ekleyin.
 
     ```csharp
     private static async Task GetUserCompanyInfoAsync(OAuthCreatingTicketContext context)
@@ -195,7 +195,7 @@ Bu bölümde, hub sınıfına `Authorize` özniteliğini ekleyerek ve hub yönte
     using Microsoft.AspNetCore.Authorization;
     ```
 
-2. Hub kodunu aşağıda gösterildiği gibi güncelleştirin. Bu kod `Chat` sınıfına `Authorize` özniteliğini ekler ve hub yöntemlerinde kullanıcının doğrulanmış kimliğini kullanır. Ayrıca, her yeni istemci bağlantısında sohbet odasında günlüğe bir sistem iletisi kaydedecek olan `OnConnectedAsync` yöntemini ekler.
+2. Hub kodunu aşağıda gösterildiği gibi güncelleştirin. Bu kod `Authorize` sınıfına `Chat` özniteliğini ekler ve hub yöntemlerinde kullanıcının doğrulanmış kimliğini kullanır. Ayrıca, her yeni istemci bağlantısında sohbet odasında günlüğe bir sistem iletisi kaydedecek olan `OnConnectedAsync` yöntemini ekler.
 
     ```csharp
     [Authorize]
@@ -375,9 +375,9 @@ Bu bölümde, hub sınıfına `Authorize` özniteliğini ekleyerek ve hub yönte
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-## <a name="deploy-the-app-to-azure"></a>Uygulamayı Azure'a dağıtma
+## <a name="deploy-the-app-to-azure"></a>Uygulamayı Azure’da dağıtma
 
-Bu bölümde, Azure komut satırı arabirimi (CLI) Azure Cloud Shell'den yeni bir web uygulaması oluşturmak için kullanacağınız [Azure App Service](https://docs.microsoft.com/azure/app-service/) ASP.NET uygulamanızı azure'da barındırmak için. Web uygulaması, yerel Git dağıtımını kullanacak şekilde yapılandırılacak. Web uygulaması ayrıca SignalR bağlantı dizenizle, GitHub OAuth uygulaması parolalarıyla ve dağıtım kullanıcısıyla da yapılandırılacak.
+Bu bölümde, Azure 'da ASP.NET uygulamanızı barındırmak üzere [Azure App Service](https://docs.microsoft.com/azure/app-service/) yeni bir Web uygulaması oluşturmak Için Azure Cloud Shell Azure komut satırı arabirimi 'NI (CLI) kullanacaksınız. Web uygulaması, yerel Git dağıtımını kullanacak şekilde yapılandırılacak. Web uygulaması ayrıca SignalR bağlantı dizenizle, GitHub OAuth uygulaması parolalarıyla ve dağıtım kullanıcısıyla da yapılandırılacak.
 
 Bu bölümdeki adımlarda Azure CLI için *signalr* uzantısı kullanılır. Aşağıdaki komutu yürüterek Azure CLI için *signalr* uzantısını yükleyin:
 

@@ -1,6 +1,6 @@
 ---
-title: Azure AD Connect Health'i - sistem sağlığı hizmeti verileri değil en fazla tarih uyarı | Microsoft Docs
-description: Bu belgede nedenini "sistem sağlığı hizmeti verileri güncel değil" uyarısı ve nasıl giderileceği açıklanmaktadır.
+title: Azure AD Connect Health-sistem sağlığı hizmeti verileri güncel değil uyarısı | Microsoft Docs
+description: Bu belgede "sağlık hizmeti verileri güncel değil" uyarısı ve sorun giderme sorunu anlatılmaktadır.
 services: active-directory
 documentationcenter: ''
 author: zhiweiwangmsft
@@ -12,62 +12,62 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.date: 02/26/2018
-ms.author: zhiweiw
+ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3ffd783ec41b1b0c4a11ee426648c1e36fbbbf75
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 41c1c102e88e1712d561874aef87a6f22ed250a9
+ms.sourcegitcommit: 77bfc067c8cdc856f0ee4bfde9f84437c73a6141
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60349959"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72430222"
 ---
-# <a name="health-service-data-is-not-up-to-date-alert"></a>Sistem sağlığı hizmeti verileri güncel uyarı değil
+# <a name="health-service-data-is-not-up-to-date-alert"></a>Sistem sağlığı hizmeti verileri güncel değil uyarısı
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure AD Connect Health düzenli aralıklarla izler şirket içi makinelere aracılar, Azure AD Connect Health hizmeti için verileri karşıya yükleyin. Hizmet Aracısı'ndan veri almazsa, portal sunar bilgi eski olacaktır. Hizmet sorunu vurgulamak için oluşturacağı **sistem sağlığı hizmeti verileri güncel değil** uyarı. Hizmet, son iki saat içinde eksiksiz bir veri almadı olduğunda bu uyarı oluşturulur.  
+Azure AD Connect Health izleyen şirket içi makinelerde bulunan aracılar, düzenli aralıklarla verileri Azure AD Connect Health hizmetine yükler. Hizmet bir aracıdan veri almazsa, portalın sunduğu bilgiler eski olacaktır. Sorunu vurgulamak için, hizmet **sistem sağlığı hizmeti verilerinin güncel** bir uyarı olduğunu tetiklayacaktır. Bu uyarı, hizmet son iki saat içinde tüm verileri almadığında oluşturulur.  
 
-- **Uyarı** durum uyarısı tetikler sistem sağlığı hizmeti yalnızca aldıysa **kısmi** sunucudan son iki saat içinde gönderilen veri türleri. Uyarı durumu, yapılandırılmış alıcılara e-posta bildirimleri tetiklemez. 
-- **Hata** sistem sağlığı hizmeti, son iki saat içinde sunucudan tüm veri türleri almadı, durumu uyarı tetikler. Hata durumu uyarı Tetikleyiciler yapılandırılmış alıcılara e-posta bildirimleri.
+- Sistem Sağlığı Hizmeti, son iki saatte sunucudan gönderilen **kısmi** veri türleri aldıysa **Uyarı** durumu uyarısı ateşlenir. Uyarı durumu uyarısı, yapılandırılmış alıcılara e-posta bildirimlerini tetiklemez. 
+- Sistem Sağlığı Hizmeti, son iki saatte sunucudan herhangi bir veri türü almamışsa **hata** durumu uyarısı ateşlenir. Hata durumu uyarısı, yapılandırılmış alıcılara e-posta bildirimlerini tetikler.
 
-Hizmet, hizmet türüne bağlı olarak şirket içi makinelerde çalışan aracılardan gelen verileri alır. Aşağıdaki tabloda, makine, yaptıkları ve hizmet oluşturur veri türleri üzerinde çalışan aracıları listeler. Bazı durumlarda, birden çok hizmet mevcuttur işleminde yer alan için bunlardan herhangi birini sorunlu olabilir. 
+Hizmet, hizmet türüne bağlı olarak, şirket içi makinelerde çalışan aracılardan verileri alır. Aşağıdaki tabloda makinede çalışan aracılar, ne yaptıkları ve hizmetin oluşturduğu veri türleri listelenmektedir. Bazı durumlarda, süreçte yer alan birden çok hizmet bulunur, bu nedenle bunlardan herhangi biri olabilir. 
 
-## <a name="understanding-the-alert"></a>Uyarı anlama
+## <a name="understanding-the-alert"></a>Uyarıyı anlama
 
-**Uyarı ayrıntıları** ne zaman uyarı oluştu ve son algılama dikey pencerede gösterilir. Her iki saatte bir çalışan bir arka plan işlemi oluşturur ve uyarıyı yeniden değerlendirir. Aşağıdaki örnekte, 9: 59'da 03/10'da ilk uyarı oluştu. Uyarı, 10:00 ne zaman uyarı yeniden Hesaplandı'da hala 03/12 vardı. Dikey penceresinde, da sistem sağlığı hizmeti, belirli bir veri türüne en son aldığı zaman ayrıntıları. 
+Uyarı **ayrıntıları** dikey penceresi, uyarının ne zaman oluştuğunu ve en son algılanmadığını gösterir. Her iki saatte bir çalışan bir arka plan işlemi, uyarıyı oluşturur ve yeniden değerlendirir. Aşağıdaki örnekte, ilk uyarı 03/10 ' de 9:59 ' de gerçekleşti. Uyarı yeniden değerlendiriliyorsa uyarı 10:00 ' de hala 03/12 ' de vardı. Dikey pencere Ayrıca Sistem Sağlığı Hizmeti belirli bir veri türü aldığı son süreyi de ayrıntılardır. 
  
- ![Azure AD Connect Health uyarı ayrıntıları](./media/how-to-connect-health-data-freshness/data-freshness-details.png)
+ ![Azure AD Connect Health Uyarı ayrıntıları](./media/how-to-connect-health-data-freshness/data-freshness-details.png)
  
-Aşağıdaki tabloda hizmet türleri karşılık gelen gerekli veri türlerine eşlenir:
+Aşağıdaki tabloda, hizmet türleri ilgili gerekli veri türleriyle eşlenir:
 
 | Hizmet türü | Aracı (Windows hizmeti adı) | Amaç | Oluşturulan veri türü  |
 | --- | --- | --- | --- |  
-| Azure AD Connect (eşitleme) | Azure AD Connect Health Eşitleme Öngörü Hizmeti | AAD Connect özgü bilgileri toplama (bağlayıcılar, eşitleme kuralları, vb.) | AadSyncService SynchronizationRules <br />  AadSyncService bağlayıcılar <br /> AadSyncService GlobalConfigurations  <br />  - AadSyncService-RunProfileResults <br /> - AadSyncService-ServiceConfigurations <br /> - AadSyncService-ServiceStatus   |
-|  | Azure AD Connect Health Eşitleme İzleme Hizmeti | AAD Connect özgü performans sayaçları, ETW izlemelerini, dosyaları Topla | Performans sayacı |
-| AD DS | Azure AD Connect Health AD DS Insights Hizmeti | Yapay testler gerçekleştirin, topoloji bilgilerini, çoğaltma meta verilerini topla |  Ekler-TopologyInfo-Json <br /> Ortak-test-(test sonuçlarını oluşturur) Json   | 
-|  | Azure AD Connect Health AD DS İzleme Hizmeti | ADDS özgü performans sayaçları, ETW izlemelerini, dosyaları Topla | -Performans sayacı  <br /> Ortak-test-(test sonuçlarını yükler) Json  |
-| AD FS | Azure AD Connect Health AD FS Tanılama Hizmeti | Yapay testleri gerçekleştir | TestResult (test sonuçlarını oluşturur) | 
-| | Azure AD Connect Health AD FS Öngörü Hizmeti  | ADFS kullanım ölçümlerini Topla | Adfs-UsageMetrics |
-| | Azure AD Connect Health AD FS İzleme Hizmeti | ADFS özgü performans sayaçları, ETW izlemelerini, dosyaları Topla | TestResult (test sonuçlarını yükler) |
+| Azure AD Connect (eşitleme) | Azure AD Connect Health Eşitleme Öngörü Hizmeti | AAD Connect 'e özgü bilgileri toplayın (bağlayıcılar, eşitleme kuralları vb.) | -AadSyncService-SynchronizationRules <br />  -AadSyncService-bağlayıcılar <br /> -AadSyncService-GlobalConfigurations  <br />  -AadSyncService-RunProfileResults <br /> -AadSyncService-ServiceConfigurations <br /> -AadSyncService-ServiceStatus   |
+|  | Azure AD Connect Health Eşitleme İzleme Hizmeti | AAD Connect 'e özgü performans sayaçlarını, ETW izlemelerini, dosyaları toplayın | Performans sayacı |
+| AD DS | Azure AD Connect Health AD DS Insights Hizmeti | Yapay testler gerçekleştirme, topoloji bilgilerini toplama, çoğaltma meta verileri |  -Ekler-Topologyıınfo-JSON <br /> -Common-TestData-JSON (test sonuçlarını oluşturur)   | 
+|  | Azure AD Connect Health AD DS İzleme Hizmeti | EKLEMELERI özel performans sayaçlarını, ETW izlemelerini, dosyaları toplayın | -Performans sayacı  <br /> -Common-TestData-JSON (test sonuçlarını yükler)  |
+| AD FS | Azure AD Connect Health AD FS Tanılama Hizmeti | Yapay testler gerçekleştirme | TestResult (test sonuçlarını oluşturur) | 
+| | Azure AD Connect Health AD FS Öngörü Hizmeti  | ADFS kullanım ölçümlerini topla | ADFS Usage ölçümleri |
+| | Azure AD Connect Health AD FS İzleme Hizmeti | ADFS 'e özgü performans sayaçlarını, ETW izlemelerini, dosyaları toplayın | TestResult (test sonuçlarını yükler) |
 
 ## <a name="troubleshooting-steps"></a>Sorun giderme adımları 
 
-Sorunu tanılamak için gereken adımlar aşağıda verilmiştir. İlk tüm hizmet türleri için ortak olan temel denetimler kümesidir. Her hizmet türü ve veri türü için belirli adımları listeleyen aşağıdaki tabloda. 
+Sorunu tanılamak için gereken adımlar aşağıda verilmiştir. İlki, tüm hizmet türlerinde ortak olan temel denetimler kümesidir. 
 
 > [!IMPORTANT] 
-> Bu uyarı Connect Health aşağıdaki [veri bekletme ilkesi](reference-connect-health-user-privacy.md#data-retention-policy)
+> Bu uyarı, durum [verilerini bekletme Ilkesi](reference-connect-health-user-privacy.md#data-retention-policy) bağlantısını izler
 
-* En son sürümlerini aracıları yüklü olduğundan emin olun. Görünüm [sürüm geçmişi](reference-connect-health-version-history.md). 
-* Azure AD Connect Health aracılarını Hizmetleri olduğundan emin olun **çalıştıran** makine üzerinde. Örneğin, AD FS için Connect Health, üç hizmet olması gerekir.
-  ![Azure AD Connect Health'i doğrulama](./media/how-to-connect-health-agent-install/install5.png)
+* Aracıların en son sürümlerinin yüklü olduğundan emin olun. [Yayın geçmişini](reference-connect-health-version-history.md)görüntüleyin. 
+* Makinede Azure AD Connect Health Agents hizmetlerinin **çalıştığından** emin olun. Örneğin, AD FS için Connect Health üç hizmete sahip olmalıdır.
+  ![Verify Azure AD Connect Health @ no__t-1
 
-* Azure portalına ve karşılamak emin [gereksinimler bölümüne](how-to-connect-health-agent-install.md#requirements).
-* Kullanım [test bağlantısı aracı](how-to-connect-health-agent-install.md#test-connectivity-to-azure-ad-connect-health-service) bağlantı sorunları bulmak için.
-* Bir HTTP Proxy'si varsa, bunları izleyin [yapılandırma adımları](how-to-connect-health-agent-install.md#configure-azure-ad-connect-health-agents-to-use-http-proxy). 
+* [Gereksinimler bölümünü](how-to-connect-health-agent-install.md#requirements)ziyaret edin ve bunları karşıladığınızdan emin olun.
+* Bağlantı sorunlarını saptamak için [Test Bağlantısı aracını](how-to-connect-health-agent-install.md#test-connectivity-to-azure-ad-connect-health-service) kullanın.
+* Bir HTTP proxy 'Si varsa, bu [yapılandırma adımlarını](how-to-connect-health-agent-install.md#configure-azure-ad-connect-health-agents-to-use-http-proxy)izleyin. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yukarıdaki adımların hiçbirini tanımlanan bir sorun varsa düzeltin ve uyarıyı çözümlemek bekleyin. Uyarıyı çözmek için 2 saat sürer. Bu nedenle uyarı arka plan işlemi, her 2 saatte çalışır. 
+Yukarıdaki adımlardan herhangi biri bir sorun tanımladığında, düzeltin ve uyarının çözülmesini bekleyin. Uyarı arka plan işlemi 2 saatte bir çalışır, bu nedenle uyarının çözülmesi 2 saate kadar sürer. 
 
 * [Azure AD Connect Health veri bekletme ilkesi](reference-connect-health-user-privacy.md#data-retention-policy)
 * [Azure AD Connect Health ile ilgili SSS](reference-connect-health-faq.md)

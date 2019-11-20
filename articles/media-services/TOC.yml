@@ -7,6 +7,20 @@
   href: video-indexer/
 - name: Azure Media Player
   href: 'https://amp.azure.net/libs/amp/latest/docs/index.html'
+- name: Belirtimler
+  items:
+    - name: Timed Metadata
+      items:
+        - name: RTMP ve Kesintisiz Akış
+          href: media-services-specifications-live-timed-metadata.md
+    - name: Protokoller
+      items:
+        - name: Kesintisiz Akış (MS-SSTR)
+          items:
+            - name: HEVC desteği
+              href: media-services-specifications-ms-sstr-amendment-hevc.md
+            - name: Kesintisiz Akış alma
+              href: media-services-fmp4-live-ingest-overview.md
 - name: Kaynaklar
   items:
     - name: Azure Yol Haritası

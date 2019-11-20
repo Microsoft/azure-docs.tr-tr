@@ -1,25 +1,25 @@
 ---
-title: Azure Media Clipper'ı kullanmaya başlama | Microsoft Docs
-description: AMS varlıkları video küçük resimleri oluşturmaya yönelik bir araç olan Azure Media Clipper kullanmaya başlama
+title: Azure Medya Clipper 'ı kullanmaya başlama | Microsoft Docs
+description: AMS varlıklarından video klipleri oluşturmaya yönelik bir araç olan Azure Media Clipper 'ı kullanmaya başlama
 services: media-services
-keywords: clip;subclip;encoding;media
-author: dbgeorge
-manager: jasonsue
-ms.author: dwgeo
+keywords: klip; alt klip; kodlama; medya
+author: Juliako
+manager: femila
+ms.author: juliako
 ms.date: 03/14/2019
 ms.topic: article
 ms.service: media-services
-ms.openlocfilehash: 51848b9ba4d18b3ac7d652cfbd97cab6b85f2ee8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 45ecc81967d6a95f817b10bce7f8396d9379bc94
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61466281"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685084"
 ---
-# <a name="create-clips-with-azure-media-clipper"></a>Küçük resimleri ile Azure Media Clipper'ı oluşturma
-Bu bölümde, Azure Media Clipper'ı kullanmaya başlama hakkında temel adımları gösterir. İzleyen bölümlerde Azure Media Clipper'ı yapılandırma konusunda ayrıntıları sağlayın.
+# <a name="create-clips-with-azure-media-clipper"></a>Azure Medya Clipper ile klipler oluşturma
+Bu bölümde, Azure Media Clipper ile çalışmaya başlama hakkında temel adımlar gösterilmektedir. Aşağıdaki bölümlerde Azure Medya Clipper 'ın nasıl yapılandırılacağı hakkında bilgiler sağlanmaktadır.
 
-- İlk olarak, aşağıdaki bağlantıları için belgenizin head için Azure Media Player'ı ve Azure Media Clipper'ı ekleyin. Kırpıcıyı açar ve Azure Media Player URL'lerinde açıkça belirtilmesi önerilir. İsteğe bağlı olarak değişebilir oldukları gibi bu kaynaklar en son sürümü üretim ortamında kullanmayın.
+- İlk olarak, Azure Media Player ve Azure Media Clipper için belge başınızdan aşağıdaki bağlantıları ekleyin. Doğrudan bir Clipper sürümü ve URL 'lerde Azure Media Player belirtilmesini öneririz. İsteğe bağlı olarak değişikliğe tabi olduklarından üretimde bu kaynakların en son sürümünü kullanmayın.
 
 ```javascript
 <!--Azure Media Player 2.1.4 or later is a prerequisite-->
@@ -30,19 +30,19 @@ Bu bölümde, Azure Media Clipper'ı kullanmaya başlama hakkında temel adımla
 <script src="//amp.azure.net/libs/amc/0.1.0/azuremediaclipper.min.js"></script>
 ```
 
-- Ardından, aşağıdaki sınıflar Clipper örneklemek için istediğiniz div öğesine ekleyin.
+- Ardından, aşağıdaki sınıfları, Clipper 'ın örneğini oluşturmak istediğiniz div öğesine ekleyin.
 
 ```javascript
 <div id="root" class="azure-subclipper" />
 ```
 
-İsteğe bağlı olarak, koyu tema etkinleştirmek için koyu kaplama sınıfı ekleyin:
+İsteğe bağlı olarak, koyu temayı etkinleştirmek için koyu-Skin sınıfını ekleyin:
 
 ```javascript
 <div id="root" class="azure-subclipper dark-skin" />
 ```
 
-- Ardından, aşağıdaki API çağrısı ile Clipper'ı örneği:
+- Ardından, aşağıdaki API çağrısıyla Clipper örneğini oluşturun:
 
 ```javascript
 var subclipper = new subclipper({
@@ -87,41 +87,41 @@ var subclipper = new subclipper({
 });
 ```
 
-Başlatma yöntemi çağrısı için Parametreler şunlardır:
-- `selector` {GEREKLİ dize}: CSS Seçici pencere burada işleneceğini eşleşen HTML öğesi.
-- `restVersion` {GEREKLİ dize}: Hedef Azure Media Services REST API sürümü. REST sürümü pencere öğesi tarafından oluşturulan çıktı biçimini tanımlar. Şu anda yalnızca 2.0 desteklenmektedir.
-- `submitSubclipCallback` {GEREKLİ promise} Pencere öğesinin "Gönder" düğmesine tıklandığında çağrılan geri çağırma işlevi. Geri çağırma işlevi (bir işleme işi yapılandırması veya filtre tanımını) pencere tarafından oluşturulan çıktıyı beklemelisiniz. Daha fazla bilgi için alt klip geri gönderme bakın.
-- `logLevel` {İsteğe bağlı, {'info', 'Uyar', 'error'}}: Tarayıcının konsolunda görüntülenecek günlük kaydı düzeyi. Varsayılan değer: hata
-- `minimumMarkerGap` {İsteğe bağlı, int}: Bir alt klip (saniye cinsinden) en küçük boyutu. Not: değer aynı zamanda varsayılan değer olan 6, eşit veya daha büyük olmalıdır.
-- `singleBitrateMp4Profile` {İsteğe bağlı, JSON nesnesi} Pencere öğesi tarafından oluşturulan işleme işi yapılandırması için kullanmak üzere tek bit hızlı mp4 profili. Sağlanmazsa, kullandığı [varsayılan tek bit hızlı MP4 profil](https://docs.microsoft.com/azure/media-services/media-services-mes-preset-h264-single-bitrate-1080p).
-- `multiBitrateMp4Profile` {İsteğe bağlı, JSON nesnesi} Kullanılmak üzere Çoklu bit hızı mp4 profili pencere öğesi tarafından oluşturulan iş yapılandırması işleyin. Sağlanmazsa, kullandığı [varsayılan Çoklu bit hızına sahip MP4 profil](https://docs.microsoft.com/azure/media-services/media-services-mes-preset-h264-multiple-bitrate-1080p).
-- `keymap` {İsteğe bağlı, json nesnesi} Pencere öğesinin klavye kısayolları özelleştirilmesine olanak tanır. Daha fazla bilgi için [özelleştirilebilir klavye kısayolları](media-services-azure-media-clipper-keyboard-shortcuts.md).
-- `assetsPanelLoaderCallback` {İsteğe bağlı, promise} Kullanıcı bölmenin altındaki aşağı kaydırma her seferinde yeni bir sayfa varlıkların varlıklar bölmesine (zaman uyumsuz olarak) yüklemek için çağrılan geri çağırma işlevi. Varlık bölmesinde yükleyici geri çağırma daha fazla bilgi için bkz.
-- `height` {İsteğe bağlı, number} Pencere öğesinin toplam yüksekliği (minimum yükseklik olan 600 piksel varlıklar bölmesinde ve 850 olmadan varlıklar bölmesinde piksel).
-- `subclippingMode` (İsteğe bağlı {'all', 'işleme', 'filtre'}): Klip modları izin verilir. Varsayılan değer tümüdür.
-- `filterAssetsTypes` (İsteğe bağlı, Boole): filterAssetsTypes varlıklar bölmesinde filtreler açılan Göster/Gizle olanak sağlar. Varsayılan değer true olur.
-- `speedLevels` (İsteğe bağlı, dizi): speedLevels, farklı hızı düzeyi için video oynatıcı ayarlamaya olanak tanır, bkz: [Azure Media Player belgeleri](https://amp.azure.net/libs/amp/latest/docs/#amp.player.playbackspeedoptions) daha fazla bilgi için.
-- `resetOnJobDone` (İsteğe bağlı, Boole): resetOnJobDone Clipper'ı, bir işi başarıyla gönderildiğinde, alt klip oluşturucu bir ilk durumuna sıfırlayın sağlar.
-- `autoplayVideo` (İsteğe bağlı, Boole): autoplayVideo yük video için otomatik Clipper sağlar. Varsayılan değer true olur.
-- `language` {İsteğe bağlı, dize}: dil pencere öğesinin dili ayarlar. Belirtilmezse, pencere öğesi tarayıcı diline dayalı iletilerini yerelleştirmeniz dener. Pencere öğesi hiçbir dil tarayıcıda algılanırsa, İngilizce için varsayılan olarak. Daha fazla bilgi için [yerelleştirmeyi yapılandırma](media-services-azure-media-clipper-localization.md) bölümü.
-- `languages` {İsteğe bağlı, JSON}: kullanıcı tarafından tanımlanan özel bir sözlük dilleri varsayılan sözlüğü dilleri parametreyi değiştirir. Daha fazla bilgi için [yerelleştirmeyi yapılandırma](media-services-azure-media-clipper-localization.md) bölümü.
-- `extraLanguages` (İsteğe bağlı, JSON): extraLanguages parametre yeni diller varsayılan sözlüğe ekler. Daha fazla bilgi için [yerelleştirmeyi yapılandırma](media-services-azure-media-clipper-localization.md) bölümü.
+Başlatma yöntemi çağrısının parametreleri şunlardır:
+- `selector` {REQUIRED, String}: pencere öğesinin oluşturulması gereken eşleşen HTML öğesinin CSS Seçicisi.
+- `restVersion` {REQUIRED, String}: hedeflenecek Azure Media Services REST API'si sürümü. REST sürümü pencere öğesi tarafından oluşturulan çıktının biçimini tanımlar. Şu anda yalnızca 2,0 desteklenir.
+- {REQUIRED, Promise} `submitSubclipCallback` pencere öğesinin "Gönder" düğmesine tıklandığında çağrılan geri çağırma işlevi. Geri çağırma işlevi pencere öğesi (bir işleme iş yapılandırması veya bir filtre tanımı) tarafından oluşturulan çıktıyı beklemelisiniz. Daha fazla bilgi için bkz. alt klip geri çağırması gönderme.
+- `logLevel` {OPTIONAL, {' Info ', ' warn ', ' Error '}}: tarayıcı konsolunda görüntülenecek günlük düzeyi. Varsayılan değer: hata
+- `minimumMarkerGap` {OPTIONAL, int}: alt klibin en küçük boyutu (saniye cinsinden). Note: değer 6 ' dan büyük veya buna eşit olmalıdır, bu da varsayılandır.
+- pencere öğesi tarafından oluşturulan işleme işi yapılandırması için kullanılacak {OPTIONAL, JSON nesnesi} tek bit hızı MP4 profilini `singleBitrateMp4Profile`. Sağlanmazsa, [varsayılan tek bit hızlı MP4 profilini](https://docs.microsoft.com/azure/media-services/media-services-mes-preset-h264-single-bitrate-1080p)kullanır.
+- ' Isteğe bağlı, JSON nesnesi} `multiBitrateMp4Profile` pencere öğesi tarafından oluşturulan işleme iş yapılandırması için kullanılacak çoklu bit hızı MP4 profili. Sağlanmazsa, [varsayılan çoklu bit hızı MP4 profilini](https://docs.microsoft.com/azure/media-services/media-services-mes-preset-h264-multiple-bitrate-1080p)kullanır.
+- {OPTIONAL, JSON nesnesi} `keymap` pencere öğesinin klavye kısayollarının özelleştirilmesine Izin verir. Daha fazla bilgi için bkz. [özelleştirilebilir klavye kısayolları](media-services-azure-media-clipper-keyboard-shortcuts.md).
+- `assetsPanelLoaderCallback` {OPTIONAL, Promise} geri çağırma işlevi, Kullanıcı bölmenin en altına her kaydırıldığında varlıklar bölmesine bir varlık sayfasına yüklemek için çağrılır (zaman uyumsuz). Daha fazla bilgi için bkz. varlık bölmesi yükleyici geri çağırma.
+- {OPTIONAL, Number} `height` pencere öğesinin toplam yüksekliği (minimum yükseklik, varlıklar bölmesi olmayan 600 px ve varlıklar bölmesi ile 850 px).
+- `subclippingMode` (Isteğe bağlı, {' All ', ' render ', ' Filter '}): alt kırpma moduna izin verilir. Varsayılan değer tümü ' dir.
+- `filterAssetsTypes` (Isteğe bağlı, bool): filterAssetsTypes varlıklar bölmesinden filtreler açılan listesini gösterip gizlemenize izin verir. Varsayılan değer true 'dur.
+- `speedLevels` (Isteğe bağlı, dizi): speedLevels, video oynatıcı için farklı hız düzeyleri ayarlamaya olanak tanır. daha fazla bilgi için bkz. [Azure Media Player belgeleri](https://amp.azure.net/libs/amp/latest/docs/#amp.player.playbackspeedoptions) .
+- `resetOnJobDone` (Isteğe bağlı, bool): resetOnJobDone, bir iş başarıyla gönderildiğinde, Clipper 'ın alt Clipper 'ı bir başlangıç durumuna sıfırlamasına izin verir.
+- `autoplayVideo` (Isteğe bağlı, bool): autoplayVideo, Clipper 'ın yükleme sırasında videoyu otomatik olarak kullanmasına izin verir. Varsayılan değer true 'dur.
+- `language` {OPTIONAL, String}: dil pencere öğesinin dilini ayarlar. Belirtilmemişse pencere öğesi, tarayıcı diline bağlı olarak iletileri yerelleştirmeye çalışır. Tarayıcıda bir dil algılanmazsa pencere öğesi varsayılan olarak Ingilizce olur. Daha fazla bilgi için bkz. [Yerelleştirme yapılandırma](media-services-azure-media-clipper-localization.md) bölümü.
+- {OPTIONAL, JSON} `languages`: diller parametresi, Kullanıcı tarafından tanımlanan özel bir sözlükten dillerin varsayılan sözlüğünün yerini alır. Daha fazla bilgi için bkz. [Yerelleştirme yapılandırma](media-services-azure-media-clipper-localization.md) bölümü.
+- `extraLanguages` (Isteğe bağlı, JSON): extraLanguages parametresi varsayılan sözlüğe yeni diller ekler. Daha fazla bilgi için bkz. [Yerelleştirme yapılandırma](media-services-azure-media-clipper-localization.md) bölümü.
 
 ## <a name="typescript-definition"></a>TypeScript tanımı
-A [TypeScript](https://www.typescriptlang.org/) Clipper'ı için tanım dosyasını bulunabilir [burada](https://amp.azure.net/libs/amc/latest/azuremediaclipper.d.ts).
+[Buraya](https://amp.azure.net/libs/amc/latest/azuremediaclipper.d.ts), Clipper Için bir [TypeScript](https://www.typescriptlang.org/) tanım dosyası bulabilirsiniz.
 
-## <a name="azure-media-clipper-api"></a>Azure Media Clipper'ı API
-Bu bölümde Clipper tarafından sağlanan bir API yüzeyi belgeler.
+## <a name="azure-media-clipper-api"></a>Azure Medya Clipper API 'SI
+Bu bölüm, Clipper tarafından sunulan API yüzeyini belgeler.
 
-- `ready(handler)`: Clipper'ı tam olarak yüklenir ve kullanılmaya hazır duruma geldiği JavaScript çalıştırmanın bir yolunu sunar.
-- `load(assets)`: varlıklar listesi (kullanılmamalıdır assetsPanelLoaderCallback birlikte) pencere öğesi zaman çizelgesi yükler. Bkz. Bu [makale](media-services-azure-media-clipper-load-assets.md) varlıklar Clipper'a varlık yükleme hakkında ayrıntılar için.
-- `setLogLevel(level)`: tarayıcının konsolunda görüntülenecek günlüğe kaydetme düzeyini ayarlar. Olası değerler şunlardır: `info`, `warn`, `error`.
-- `setHeight(height)`: toplam pencere öğesinin yüksekliğini piksel cinsinden ayarlar (minimum yükseklik olan 600 piksel varlıklar bölmesinde olmadan ve 850 varlıklar bölmesinde piksel).
+- `ready(handler)`:, Clipper tam olarak yüklenip kullanıma sunulduktan hemen sonra JavaScript 'ı çalıştırmanın bir yolunu sunar.
+- `load(assets)`: bir varlık listesini pencere öğesi zaman çizelgesine yükler (assetsPanelLoaderCallback ile birlikte kullanılmamalıdır). Varlıkları Clipper 'a yükleme hakkında ayrıntılı bilgi için bu [makaleye](media-services-azure-media-clipper-load-assets.md) bakın.
+- `setLogLevel(level)`: tarayıcı konsolunda görüntülenecek günlüğe kaydetme düzeyini ayarlar. Olası değerler şunlardır: `info`, `warn`, `error`.
+- `setHeight(height)`: pencere öğesinin toplam yüksekliğini piksel cinsinden ayarlar (varlık bölmesi olmayan minimum yükseklik 600 px ve varlıklar bölmesi ile 850 piksel).
 - `version`: pencere öğesi sürümünü alır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Media Clipper'ı yapılandırmak için sonraki adımlara bakın:
-- [Azure Media Clipper'a varlık yükleme](media-services-azure-media-clipper-load-assets.md)
+Azure Medya Clipper 'ı yapılandırmaya yönelik sonraki adımlara bakın:
+- [Varlıkları Azure Media Clipper 'a yükleme](media-services-azure-media-clipper-load-assets.md)
 - [Özel klavye kısayollarını yapılandırma](media-services-azure-media-clipper-keyboard-shortcuts.md)
-- [Clipper kırpma işlerini gönderme](media-services-azure-media-clipper-submit-job.md)
-- [Yerelleştirme yapılandırma](media-services-azure-media-clipper-localization.md)
+- [Clipper 'dan kırpma işleri gönderme](media-services-azure-media-clipper-submit-job.md)
+- [Yerelleştirmeyi yapılandırma](media-services-azure-media-clipper-localization.md)

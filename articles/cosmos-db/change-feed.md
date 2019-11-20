@@ -1,129 +1,129 @@
 ---
-title: Azure Cosmos DB'de destek akış değişiklik ile çalışma
-description: Azure Cosmos DB değişiklik akışı desteği, belgelerdeki değişiklikleri izlemek ve Tetikleyicileri gibi olay tabanlı işleme ve önbelleğe alır ve analiz sistemlerinin güncel tutarak gerçekleştirmek için kullanın.
-author: rimman
-ms.author: rimman
+title: Azure Cosmos DB değişiklik akışı desteğiyle çalışma
+description: Belgelerdeki değişiklikleri izlemek ve Tetikleyiciler ve analiz sistemlerini güncel tutmak gibi olay tabanlı işleme gerçekleştirmek için Azure Cosmos DB akış desteğini değiştirin.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/20/2019
+ms.date: 07/23/2019
 ms.reviewer: sngun
 ms.custom: seodec18
-ms.openlocfilehash: 51a554586c67842ead40cd4a1bfaaa51bbdd8a18
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8e6bd3dadd636127f212db0ea0c0755a6b52a087
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65954404"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72757018"
 ---
-# <a name="change-feed-in-azure-cosmos-db---overview"></a>Değişiklik akışı Azure Cosmos DB'de - genel bakış
+# <a name="change-feed-in-azure-cosmos-db---overview"></a>Azure Cosmos DB akışı değiştirme-genel bakış
 
-Azure Cosmos DB geliştirilme akış desteği, herhangi bir değişiklik için bir Azure Cosmos DB kapsayıcısı için dinleyerek değiştirin. Ardından, değiştirilmiş olan sırayla değiştirilen belgelerin sıralanmış listesini çıkarır. Değişiklikler kalıcı hale getirilir, zaman uyumsuz ve artırımlı olarak işlenebilir ve çıkış, paralel işleme için bir veya daha fazla tüketiciye dağıtılabilir. 
+Azure Cosmos DB akış desteğini değiştirme, tüm değişiklikler için bir Azure Cosmos kapsayıcısını dinleyerek işe yarar. Ardından çıkış olarak, değiştirilen belgelerin değiştirilme zamanına göre sıralandığı bir belge listesi oluşturur. Değişiklikler kalıcı hale getirilir, zaman uyumsuz ve artırımlı olarak işlenebilir ve çıkış, paralel işleme için bir veya daha fazla tüketiciye dağıtılabilir. 
 
-Azure Cosmos DB, perakende, oyun, IOT ve işlem günlüğü uygulamalar için uygundur. Bu uygulamalar bir ortak tasarım modelinde, ek eylemleri tetiklemek için verilerde yapılan değişiklikleri kullanmaktır. Ek eylem örnekleri şunlardır:
+Azure Cosmos DB IoT, oyun, perakende ve işlemsel günlük uygulamalar için uygundur. Bu uygulamalardaki ortak bir tasarım deseninin ek eylemleri tetiklemek için verilerde yapılan değişiklikler kullanılır. Ek eylemlere örnek olarak şunlar verilebilir:
 
-* Bir öğe eklendiğinde veya bir bildirim ya da bir API çağrısına tetikleniyor.
-* Gerçek Zamanlı Akış, IOT veya gerçek zamanlı analiz işlem verilerinde işleme için işleme.
-* Ek veri taşıma, bir önbellek veya bir arama motoru veya veri ambarı eşitleme veya soğuk depolama için veri arşivleme.
+* Bir öğe eklendiğinde veya güncelleştirilirken bir bildirim veya bir API çağrısı tetikleniyor.
+* İşletimsel veriler üzerinde IoT veya gerçek zamanlı analiz işleme için gerçek zamanlı akış işleme.
+* Bir önbellek veya arama altyapısı ya da bir veri ambarı ile eşitleyerek veya verileri soğuk depolamaya arşivleyerek ek veri hareketleri.
 
-Değişiklik Azure Cosmos DB'de akışı, aşağıdaki görüntüde gösterildiği gibi her biri bu desenleri için etkili ve ölçeklenebilir çözümler oluşturmanıza olanak sağlar:
+Azure Cosmos DB değişiklik akışı, aşağıdaki görüntüde gösterildiği gibi, bu desenlerden her biri için etkili ve ölçeklenebilir çözümler oluşturmanıza olanak sağlar:
 
-![Güç gerçek zamanlı analiz ve olay temelli bilgi işlem senaryoları kullanarak Azure Cosmos DB değişiklik akışı](./media/change-feed/changefeedoverview.png)
+![Gerçek zamanlı analiz ve olay odaklı bilgi işlem senaryolarına Azure Cosmos DB değişiklik akışını kullanma](./media/change-feed/changefeedoverview.png)
 
-## <a name="supported-apis-and-client-sdks"></a>Desteklenen API'ları ve istemci SDK'ları
+## <a name="supported-apis-and-client-sdks"></a>Desteklenen API 'Ler ve istemci SDK 'Ları
 
-Bu özellik şu anda aşağıdaki Azure Cosmos DB API'ları ve istemci SDK'ları tarafından desteklenmektedir.
+Bu özellik şu anda aşağıdaki Azure Cosmos DB API 'Leri ve istemci SDK 'Ları tarafından desteklenmektedir.
 
-| **İstemci sürücüleri** | **Azure CLI** | **SQL API'Sİ** | **Cassandra API'si** | **Azure Cosmos DB'nin MongoDB API'si** | **Gremlin API**|**Tablo API’si** |
+| **İstemci sürücüleri** | **Azure CLI** | **SQL APı 'SI** | **Cassandra API** | **MongoDB için Azure Cosmos DB API 'SI** | **Gremlin API 'SI**|**Tablo API’si** |
 | --- | --- | --- | --- | --- | --- | --- |
-| .NET | NA | Evet | Hayır | Hayır | Evet | Hayır |
-|Java|NA|Evet|Hayır|Hayır|Evet|Hayır|
-|Python|NA|Evet|Hayır|Hayır|Evet|Hayır|
-|Düğüm/JS|NA|Evet|Hayır|Hayır|Evet|Hayır|
+| .NET | Yok | Yes | Hayır | Hayır | Yes | Hayır |
+|Java|Yok|Yes|Hayır|Hayır|Yes|Hayır|
+|Python|Yok|Yes|Hayır|Hayır|Yes|Hayır|
+|Node/JS|Yok|Yes|Hayır|Hayır|Yes|Hayır|
 
-## <a name="change-feed-and-different-operations"></a>Değişiklik akışı ve farklı işlemler
+## <a name="change-feed-and-different-operations"></a>Akışı ve farklı işlemleri değiştirme
 
-Bugün, değişiklik akışı tüm işlemlerde bakın. Burada denetleyebilirsiniz işlevi yalnızca güncelleştirmeler ve değil ekler gibi henüz kullanılabilir akış, belirli işlemler için değiştirin. "Yumuşak işaret" öğesi güncelleştirmeleri ve üzerinde değişiklik akışı öğeleri işlerken göre filtre ekleyebilirsiniz. Değişiklik akışı siler oturum şu anda değil. Önceki örneğe benzer, yumuşak bir işaretçi, silinen öğeleri ekleyebilirsiniz, örneğin, böylece otomatik olarak silinebilir "silindi" adlı "true" olarak ayarlayın ve öğe üzerinde bir TTL ayarlamak öğesindeki bir öznitelik ekleyebilirsiniz. Değişiklik geçmiş öğeleri için örneğin, beş yıl önce eklenen öğeleri akışı okuyabilirsiniz. Öğe silinmedi, değişiklik okuyabilirsiniz kapsayıcınızı kaynağı sunulan ürünün kendinde akış.
+Bugün, değişiklik akışında tüm işlemleri görürsünüz. Değişiklik akışını denetleyebileceğiniz işlevler, yalnızca güncelleştirmeler ve eklemeler gibi belirli işlemler için henüz kullanılamaz. Değişiklik akışındaki öğeleri işlerken bu öğeye bağlı olarak, güncelleştirmeler ve filtre için öğe üzerinde "geçici işaretleyici" ekleyebilirsiniz. Şu anda değişiklik akışında silme günlüğü yok. Önceki örneğe benzer şekilde, silinmekte olan öğelerde bir yumuşak işaret ekleyebilirsiniz, örneğin, "Deleted" adlı öğeye bir öznitelik ekleyebilir ve bunu "true" olarak ayarlayabilir ve öğe üzerinde bir TTL ayarlarsınız, böylece otomatik olarak silinebilir. Geçmiş öğeler için değişiklik akışını okuyabilir (öğeye karşılık gelen en son değişiklik, ara değişiklikleri içermez), örneğin, beş yıl önce eklenmiş olan öğeler. Öğe silinmemişse, değişiklik akışını kapsayıcının kaynağına kadar okuyabilirsiniz.
 
-### <a name="sort-order-of-items-in-change-feed"></a>Değişiklik akışı öğelerinin sıralama
+### <a name="sort-order-of-items-in-change-feed"></a>Değişiklik akışında öğelerin sıralama düzeni
 
-Değişiklik akışı öğelerini değiştirme zamanlarının sırasına göre gelir. Bu sıralama düzeni mantıksal bölüm anahtarı garanti edilir.
+Değişiklik akışı öğeleri değiştirme zamanının sırasıyla gelir. Bu sıralama düzeni mantıksal bölüm anahtarı başına garanti edilir.
 
-### <a name="change-feed-in-multi-region-azure-cosmos-accounts"></a>Değişiklik akışı çok bölgeli Azure Cosmos hesaplar
+### <a name="change-feed-in-multi-region-azure-cosmos-accounts"></a>Çok bölgeli Azure Cosmos hesaplarında akışı değiştirme
 
-Çok bölgeli bir Azure Cosmos hesabında üzerine yazma bölgesi başarısız olursa, değişiklik akışı el ile yük devretme işlemi çalışır ve bitişik olacaktır.
+Çok bölgeli bir Azure Cosmos hesabında, bir yazma bölgesi yük devrettikten sonra değişiklik akışı el ile yük devretme işleminde çalışır ve bitişik olur.
 
-### <a name="change-feed-and-time-to-live-ttl"></a>Değişiklik akışı ve yaşam süresi (TTL)
+### <a name="change-feed-and-time-to-live-ttl"></a>Akışı ve yaşam süresini (TTL) değiştirme
 
-Değişiklik akışı, bir TTL (yaşam süresi) özelliği bir öğe üzerinde -1 olarak ayarlarsanız, her zaman açık kalır. Veriler silinmez, değişiklik akışı kalır.  
+Bir öğede TTL (yaşam süresi) özelliği ayarlanırsa, değişiklik akışı süresiz olarak kalır. Veriler silinmediği takdirde değişiklik akışında kalır.  
 
-### <a name="change-feed-and-etag-lsn-or-ts"></a>Değişiklik akışı ve _etag, _lsn veya _ts
+### <a name="change-feed-and-_etag-_lsn-or-_ts"></a>Akış ve _etag, _lsn veya _ts 'yi Değiştir
 
-_Etag biçimi dahili kullanım içindir ve dilediğiniz zaman değiştirebilirsiniz çünkü, bağımlılık üzerinde almamalıdır. _ts bir değişiklik ya da oluşturma zaman damgası ' dir. _Ts kronolojik bir karşılaştırması için kullanabilirsiniz. _lsn için değişiklik yalnızca akışı eklenen bir toplu iş kimliği:; Bu işlem kimliğini temsil eder Birçok öğe aynı _lsn olabilir. ETag FeedResponse üzerinde öğede gördüğünüz _etag farklıdır. _etag dahili bir tanımlayıcıdır ve eşzamanlılık için kullanılan denetim öğesi sürümü hakkında akışın sıralama için ETag kullanılırken söyler.
+_Etag biçimi iç, her zaman değiştirebildiğinden, buna bağımlılığı almanız gerekir. _ts bir değiştirme veya oluşturma zaman damgasıdır. Kronolojik karşılaştırma için _ts kullanabilirsiniz. _lsn yalnızca değişiklik akışı için eklenen bir toplu iş KIMLIĞIDIR; işlem KIMLIĞINI temsil eder. Birçok öğe aynı _lsn 'ye sahip olabilir. FeedResponse üzerinde ETag, öğede gördüğünüz _etag öğesinden farklı. _etag bir iç tanımlayıcıdır ve eşzamanlılık denetimi, öğenin sürümü hakkında bilgi için kullanılır, ancak ETag, akışı sıralama için kullanılır.
 
-## <a name="change-feed-use-cases-and-scenarios"></a>Kullanım örnekleri ve senaryoları değişiklik akışı
+## <a name="change-feed-use-cases-and-scenarios"></a>Akış kullanım örneklerini ve senaryolarını değiştirme
 
-Yüksek hacimli yazma ile büyük veri kümeleri işlem verimli etkinleştirir değişiklik akışı. Ayrıca, değişiklik akışı nelerin değiştiğini belirlemek için bir veri kümesinin tamamında sorgulama için bir alternatif sunar.
+Değişiklik akışı, büyük veri kümelerinin yüksek miktarda yazma hacimiyle verimli bir şekilde işlenmesini sağlar. Değişiklik akışı Ayrıca, nelerin değiştiğini belirlemek için bir veri kümesinin sorgulanmasına bir alternatif sağlar.
 
 ### <a name="use-cases"></a>Uygulama alanları
 
 Örneğin, değişiklik akışı ile aşağıdaki görevleri verimli bir şekilde gerçekleştirebilirsiniz:
 
-* Bir önbellek güncelleştirme, bir arama dizinini güncelleştirin veya Azure Cosmos DB'de depolanan verilerle bir veri ambarı'nı güncelleştirin.
+* Bir önbelleği güncelleştirme, bir arama dizinini güncelleştirme veya bir veri ambarını Azure Cosmos DB depolanan verilerle güncelleştirme.
 
-* Bir uygulama düzeyi verileri katmanlama ve Arşiv uygulamak, örneğin, "Sık erişimli veriler" Azure Cosmos DB'de depolamak ve örneğin, "soğuk veri" diğer depolama sistemlerinde kullanıma yaş [Azure Blob Depolama](../storage/common/storage-introduction.md).
+* Uygulama düzeyinde veri katmanlama ve arşivleme uygulayın, örneğin, [Azure Blob depolama](../storage/common/storage-introduction.md)gibi diğer depolama sistemlerine "soğuk verileri" Azure Cosmos DB ve yaş dışına "sık verileri" depolayın.
 
-* Başka bir Azure Cosmos hesabı ya da başka bir Azure Cosmos kapsayıcı sıfır kapalı kalma süresini geçişler, farklı bir mantıksal bölüm anahtarı ile gerçekleştirin.
+* Başka bir Azure Cosmos hesabına veya farklı bir mantıksal bölüm anahtarına sahip başka bir Azure Cosmos kapsayıcısına sıfır-zaman geçişleri gerçekleştirin.
 
-* Uygulama [lambda mimarisi](https://blogs.technet.microsoft.com/msuspartner/2016/01/27/azure-partner-community-big-data-advanced-analytics-and-lambda-architecture/) kullanarak Azure Cosmos DB, burada Azure Cosmos DB hem gerçek zamanlı olarak toplu hem de hizmet katmanları sorgu destekler, böylece lambda mimarisi düşük ile etkinleştirme.
+* Azure Cosmos DB gerçek zamanlı, toplu işlem ve sorgu özelliklerini desteklediği Azure Cosmos DB kullanarak [lambda mimarisini](https://blogs.technet.microsoft.com/msuspartner/2016/01/27/azure-partner-community-big-data-advanced-analytics-and-lambda-architecture/) uygulayın. bu sayede, düşük TCO ile Lambda mimarisini etkinleştirir.
 
-* Kullanarak bu olaylar gerçek zamanlı olarak, örneğin, işlem almak ve olay verilerini cihazlar, algılayıcılar, altyapı ve uygulamalardan [Spark](../hdinsight/spark/apache-spark-overview.md).  Aşağıdaki görüntüde, değişiklik akışı ile Azure Cosmos DB kullanarak lambda mimarisi nasıl uygulayacağınıza dair gösterilmektedir:
+* Cihazlardan, sensörlerden, altyapıdan ve uygulamalardan olay verilerini alın ve depolayın ve örneğin [Spark](../hdinsight/spark/apache-spark-overview.md)kullanarak bu olayları gerçek zamanlı olarak işleyin.  Aşağıdaki görüntüde, değişiklik akışı aracılığıyla Azure Cosmos DB kullanarak lambda mimarisini nasıl uygulayabileceğinizi gösterilmektedir:
 
-![Kesintisiz alım ve sorgu için Azure Cosmos DB tabanlı lambda işlem hattı](./media/change-feed/lambda.png)
+![Alma ve sorgu için Azure Cosmos DB tabanlı lambda işlem hattı](./media/change-feed/lambda.png)
 
 ### <a name="scenarios"></a>Senaryolar
 
-Değişiklik akışı ile kolayca uygulayabilirsiniz senaryolardan bazıları şunlardır:
+Değişiklik akışı ile kolayca uygulayabileceğiniz bazı senaryolar aşağıda verilmiştir:
 
-* İçinde [sunucusuz](https://azure.microsoft.com/solutions/serverless/) web veya mobil uygulamaları, müşterinizin profili, tercihlerine veya konumlarını olayları gibi tüm değişiklikleri izlemek ve belirli eylemler, örneğin, cihazlarına anında iletme bildirimleri gönderme tetikleyin kullanarak [Azure işlevleri](change-feed-functions.md).
+* [Sunucusuz](https://azure.microsoft.com/solutions/serverless/) Web veya mobil uygulamalarınız içinde, müşterinizin profilinde, tercihlerinde veya konumlarından yapılan tüm değişiklikler gibi olayları izleyebilir ve örneğin Azure kullanarak cihazlarına anında iletme bildirimleri göndererek belirli eylemleri tetikleyebilirsiniz. [ İşlevler](change-feed-functions.md).
 
-* Bir oyun oluşturmak için Azure Cosmos DB kullanıyorsanız, şunları yapabilirsiniz, örneğin, kullanım değişiklik akışı tamamlanmış oyunlardan puanları göre gerçek zamanlı puan tabloları uygulamak için.
+* Bir oyun oluşturmak için Azure Cosmos DB kullanıyorsanız, örneğin, tamamlanmış oyunlardan puanları temel alarak gerçek zamanlı öncü panolar uygulamak için değişiklik akışı ' nı kullanabilirsiniz.
 
 
 ## <a name="working-with-change-feed"></a>Değişiklik akışı ile çalışma
 
-Aşağıdaki seçenekleri kullanarak değişiklik akışı ile çalışabilirsiniz:
+Değişiklik akışı ile aşağıdaki seçenekleri kullanarak çalışabilirsiniz:
 
-* [Azure işlevleri ile akış Değiştir](change-feed-functions.md)
-* [Değişiklik kullanarak değişiklik akışı işlemci kitaplığı içeren akış](change-feed-processor.md) 
+* [Azure Işlevleri ile değişiklik akışını kullanma](change-feed-functions.md)
+* [Değişiklik akışı işlemcisi ile değişiklik akışını kullanma](change-feed-processor.md) 
 
-Değişiklik akışı kapsayıcıdaki her bir mantıksal bölüm anahtarı için kullanılabilir ve, paralel işleme için bir veya daha fazla tüketicileri arasında aşağıdaki resimde gösterildiği gibi dağıtılabilir.
+Değişiklik akışı, kapsayıcı içindeki her mantıksal bölüm anahtarı için kullanılabilir ve aşağıdaki görüntüde gösterildiği gibi paralel işleme için bir veya daha fazla tüketiciye dağıtılabilir.
 
-![Azure Cosmos DB değişiklik akışı, dağıtılan işleme](./media/change-feed/changefeedvisual.png)
+![Azure Cosmos DB değişiklik akışını dağıtılmış işleme](./media/change-feed/changefeedvisual.png)
 
 ## <a name="features-of-change-feed"></a>Değişiklik akışı özellikleri
 
-* Değişiklik akışı, tüm Azure Cosmos hesaplar için varsayılan olarak etkindir.
+* Değişiklik akışı, tüm Azure Cosmos hesapları için varsayılan olarak etkindir.
 
-* Kullanabileceğiniz, [sağlanan aktarım hızı](request-units.md) değişiklik akışı okumak için olduğu gibi herhangi diğer Azure Cosmos DB işleminde, Azure Cosmos veritabanınızla ilişkili bölgelerden.
+* Azure Cosmos veritabanınız ile ilişkili bölgelerin herhangi birinde olduğu Azure Cosmos DB gibi, değişiklik akışından okumak için [sağlanan aktarım hızını](request-units.md) kullanabilirsiniz.
 
-* Değişiklik akışı, ekler ve kapsayıcı içindeki öğelerde yapılan güncelleştirme işlemlerini içerir. Siler yakalayabilirsiniz öğelerinizi (örneğin, belgeleri) içinde "geçici silme" bayrak ayarlayarak yerine siler. Alternatif olarak, sınırlı bir süre için öğelerinizle ayarlayabilirsiniz [TTL özelliği](time-to-live.md). Örneğin, 24 saat ve kullanım yakalamak için bu özelliğin değerini siler. Bu çözüm sayesinde, TTL sona erme süresinden daha kısa bir süre içinde değişiklikleri işleme gerekir. 
+* Değişiklik akışı, kapsayıcı içindeki öğelere yapılan ekleme ve güncelleştirme işlemlerini içerir. Öğelerin (örneğin, belgeler) içinden silme yerine "geçici silme" bayrağını ayarlayarak silmeleri yakalayabilirsiniz. Alternatif olarak, [TTL özelliği](time-to-live.md)olan öğeleriniz için sonlu bir süre sonu süresi ayarlayabilirsiniz. Örneğin, 24 saat ve silmeleri yakalamak için bu özelliğin değerini kullanın. Bu çözümle, değişiklikleri TTL süre sonu süresinden daha kısa bir zaman aralığı içinde işleyebilmeniz gerekir. 
 
-* Her değişiklik için bir öğe değişiklik akışı tam bir kez görünür ve istemcilerin denetim noktası oluşturma mantığı yönetmeniz gerekir. Kontrol noktalarını yönetme karmaşasından kaçınmak istiyorsanız, değişiklik akışı işlemci kitaplığı otomatik denetim noktası oluşturma ve "en az bir kez" semantiği sağlar. Bkz: [değişiklik akışa değişiklik akışı işlemci kitaplığı ile](change-feed-processor.md).
+* Bir öğedeki her değişiklik, değişiklik akışında tam olarak bir kez görünür ve istemciler checkişaret mantığını yönetmelidir. Kontrol noktalarını yönetme karmaşıklığına engel olmak istiyorsanız, değişiklik akışı işlemcisi otomatik onay işareti ve "en az bir kez" semantiği sağlar. Bkz. [değişiklik akışı işlemcisi ile değişiklik akışını kullanma](change-feed-processor.md).
 
-* Yalnızca belirli bir öğe en son değişikliğin değişiklik günlüğünde bulunur. Ara değişikliklerin kullanılamayabilir.
+* Değişiklik günlüğüne yalnızca belirli bir öğe için en son değişiklik eklenir. Ara değişiklikler kullanılamıyor olabilir.
 
-* Değişiklik akışı, her bir mantıksal bölüm anahtarı değeri içinde değişiklik sıraya göre sıralanır. Bölüm anahtarı değerlerine arasında yürütülme sırası yoktur.
+* Değişiklik akışı, her mantıksal bölüm anahtarı değeri içindeki değiştirilme sırasına göre sıralanır. Bölüm anahtarı değerleri arasında garantili bir sıra yok.
 
-* Değişiklikleri tüm-değişiklikler kullanılabilir sabit veri saklama dönemi yoktur olan belirli bir noktaya, eşitlenebilir.
+* Değişiklikler herhangi bir noktadan eşitlenebilir, bu, değişikliklerin kullanılabildiği sabit veri saklama süresi değildir.
 
-* Değişiklikler, paralel bir Azure Cosmos kapsayıcının tüm mantıksal bölüm anahtarları için kullanılabilir. Bu özellik paralel olarak birden fazla tüketici tarafından işlenmek üzere büyük kapsayıcıları değişikliklerini tanır.
+* Değişiklikler, bir Azure Cosmos kapsayıcısının tüm mantıksal bölüm anahtarları için paralel olarak kullanılabilir. Bu yetenek, büyük kapsayıcılardaki değişikliklerin birden çok tüketici tarafından paralel olarak işlenmesine izin verir.
 
-* Uygulamaları aynı anda birden çok değişiklik akışlarından aynı kapsayıcıda genericread isteyebilir. ChangeFeedOptions.StartTime ilk bir başlangıç noktası sağlamak için kullanılabilir. Örneğin, belirli bir saatin karşılık gelen devamlılık belirteci bulunamadı. ContinuationToken belirtilmişse StartTime ve StartFromBeginning değerlerin kazanır. ~ 5 saniye duyarlığını ChangeFeedOptions.StartTime olur. 
+* Uygulamalar aynı kapsayıcıda aynı anda birden fazla değişiklik akışı talep edebilir. Changefeedoçen. StartTime, ilk başlangıç noktası sağlamak için kullanılabilir. Örneğin, belirli bir saat saatine karşılık gelen devamlılık belirtecini bulmak için. Belirtilmişse, StartTime ve Startfromstarted değerleri üzerinden WINS. Changefeedo,. StartTime duyarlık değeri ~ 5 saniye. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağıdaki makaleler de akış değiştirme hakkında daha fazla bilgi edinmek için şimdi geçebilirsiniz:
+Aşağıdaki makalelerde değişiklik akışı hakkında daha fazla bilgi edinmek için devam edebilirsiniz:
 
-* [Değişiklik akışını okumak için seçenekleri](read-change-feed.md)
-* [Azure işlevleri ile akış Değiştir](change-feed-functions.md)
-* [Kullanarak değişiklik akışı işlemci kitaplığı](change-feed-processor.md)
+* [Değişiklik akışını okuma seçenekleri](read-change-feed.md)
+* [Azure Işlevleri ile değişiklik akışını kullanma](change-feed-functions.md)
+* [Değişiklik akışı işlemcisini kullanma](change-feed-processor.md)

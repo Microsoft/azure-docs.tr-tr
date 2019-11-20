@@ -1,33 +1,34 @@
 ---
-title: Teklif yayımlamak | Azure Market
-description: Program aracılığıyla sanal makine yayımlama iş akışını nasıl otomatikleştireceğinizi açıklar.
+title: Teklif yayımlamayı otomatikleştirin | Azure Marketi
+description: Sanal makine yayımlama iş akışını programlama yoluyla nasıl otomatikleştirebileceğinizi açıklar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 0a927c72a82c6aa3c79988c599ea8b840821a2b8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6464c8354c9d56092380e4b76c1ea962f5102c72
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935896"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824341"
 ---
-<a name="automate-offer-publishing"></a>Teklif yayımlamak
+<a name="automate-offer-publishing"></a>Teklif yayımlamayı otomatikleştirin
 =========================
 
-İş akışı yayımlandığında, API'leri kullanarak VM ayrıca programlı bir şekilde otomatik hale getirebilirsiniz [API Başvurusu](./cloud-partner-portal-api-overview.md) bölümü. Otomasyon planlarken dikkate alınması gereken iki farklı senaryo vardır: ilk yayımlama ve sonraki teklifi yayımlama sunar.
+Ayrıca, [API başvurusu](./cloud-partner-portal-api-overview.md) bölümündeki API 'LERI kullanarak VM yayımlama iş akışını programlı bir şekilde otomatikleştirebilirsiniz. Otomasyon planlama sırasında göz önünde bulundurmanız gereken iki farklı senaryo vardır: ilk yayımlama ve sonraki teklif yayımlamayı sunma.
 
 
-<a name="offer-initial-publishing"></a>İlk Yayımlama sunar
+<a name="offer-initial-publishing"></a>Teklif ilk yayımlama
 -------------------------
 
-Bir teklif ilk kez yayımladığınızda, Market'te karşıya yüklemeden önce bazı ek adımlar gerektirir.  Örneğin, meta veri hazırlama ve bir teklif taslağı oluşturmanız gerekir. İlk Yayımlama iş akışı aşağıdaki diyagramda gösterilmiştir.
+Bir teklifi ilk kez yayımladığınızda Market 'e yüklemeden önce birkaç ek adım gerekir.  Örneğin, meta verileri hazırlamanız ve bir teklif taslağı oluşturmanız gerekir. İlk yayımlama iş akışı aşağıdaki diyagramda gösterilmiştir.
 
-![Bir ilk etkileşimlerinin Yayını sunar.](media/cloud-partner-portal-automate-offer-publishing/first-time-offer-publishing.png)
+![İlk teklif yayınının etkileşimleri](media/cloud-partner-portal-automate-offer-publishing/first-time-offer-publishing.png)
 
-Aşağıdaki örnek kod, bu adımları gösterir.
+Aşağıdaki örnek kod bu adımları gösterir.
 
 ``` csharp
   CreateOfferAndPublish()
@@ -55,7 +56,7 @@ Aşağıdaki örnek kod, bu adımları gösterir.
   ValidateAndGoLive()    
   {
       // Confirm the version in preview slot is the version that needs to go live
-      offer = CloudPartnerPortal.Client.GetOffer(offerName, “Preview”);
+      offer = CloudPartnerPortal.Client.GetOffer(offerName, "Preview");
       if(!offer[skuName].containsVersion(VMDisk.Version))
       {
           UpdateOfferAndPublish()
@@ -74,12 +75,12 @@ Aşağıdaki örnek kod, bu adımları gösterir.
 ```
 
 
-<a name="subsequent-offer-publishing"></a>Sonraki teklifi yayımlama
+<a name="subsequent-offer-publishing"></a>Sonraki teklif yayımlaması
 ---------------------------
 
-Sanal makine (VM) teklifi sürekli tümleştirme işlem hattı'nda tümleştirildiğinde yayımlama iş akışının yeni bir sanal sabit disk (VHD) oluşturulduğunda çalışmasını otomatik hale getirebilirsiniz.  Bu iş akışı aşağıdaki diyagramda ve örnek kodda gösterilmiştir.
+Sanal makine (VM) teklifi bir sürekli tümleştirme ardışık düzenine tümleştirildiğinde, her yeni sanal sabit disk (VHD) oluşturulduğunda yayımlama iş akışını otomatik hale getirebilirsiniz.  Bu iş akışı aşağıdaki diyagram ve örnek kod tarafından gösterilmiştir.
 
-![Etkileşimler sonraki teklif yayını](media/cloud-partner-portal-automate-offer-publishing/update-offer-and-publish.png)
+![Sonraki teklif yayınlarının etkileşimleri](media/cloud-partner-portal-automate-offer-publishing/update-offer-and-publish.png)
 
 ``` csharp
     UpdateOfferAndPublish()
@@ -127,7 +128,7 @@ Sanal makine (VM) teklifi sürekli tümleştirme işlem hattı'nda tümleştiril
     ValidateAndGoLive()
     {
         // Confirm the version in preview slot is the version that needs to go live
-        offer = CloudPartnerPortal.Client.GetOffer(offerName, “Preview”);
+        offer = CloudPartnerPortal.Client.GetOffer(offerName, "Preview");
         if(!offer[skuName].containsVersion(VMDisk.Version))
         {
             UpdateOfferAndPublish()

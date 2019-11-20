@@ -1,10 +1,10 @@
 ---
-title: Denetim içinde bir Azure sanal ağ - PowerShell - Klasik yönlendirme | Microsoft Docs
-description: PowerShell kullanarak sanal ağ içinde yönlendirme denetlemeyi öğrenin | Klasik
+title: Azure sanal ağında denetim yönlendirme-PowerShell-klasik | Microsoft Docs
+description: PowerShell kullanarak VNET 'lerde yönlendirmeyi nasıl denetleyeceğinizi öğrenin | Klasik
 services: virtual-network
 documentationcenter: na
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 tags: azure-service-management
 ms.assetid: d8d07c16-cbe5-4536-acd6-870269346fe3
@@ -15,14 +15,14 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/02/2016
 ms.author: genli
-ms.openlocfilehash: 1441ee9a3d4a563ab35cd9b01e8347d8f51b827a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f2f2c17740bd94629209c2bffb82689ecc931fc8
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60743403"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71058761"
 ---
-# <a name="control-routing-and-use-virtual-appliances-classic-using-powershell"></a>Yönlendirilmesini denetlemesini ve PowerShell kullanarak sanal gereçler (Klasik) kullanma
+# <a name="control-routing-and-use-virtual-appliances-classic-using-powershell"></a>PowerShell kullanarak yönlendirmeyi denetleme ve sanal gereçler (klasik) kullanma
 
 > [!div class="op_single_selector"]
 > * [PowerShell](tutorial-create-route-table-powershell.md)
@@ -33,26 +33,26 @@ ms.locfileid: "60743403"
 [!INCLUDE [virtual-network-create-udr-intro-include.md](../../includes/virtual-network-create-udr-intro-include.md)]
 
 > [!IMPORTANT]
-> Azure kaynaklarıyla çalışmadan önce Azure'da şu anda iki dağıtım modeli olduğunu anlamak önemlidir: Azure Resource Manager ve klasik. Azure kaynaklarıyla çalışmadan önce [dağıtım modellerini ve araçlarlarını](../azure-resource-manager/resource-manager-deployment-model.md) iyice anladığınızdan emin olun. Bu makalenin üst kısmındaki bir seçenek belirleyerek, farklı araçlarla belgeleri görüntüleyebilirsiniz. Bu makale, klasik dağıtım modelini kapsamaktadır.
+> Azure kaynaklarıyla çalışmadan önce Azure 'da Şu anda iki dağıtım modeli olduğunu anlamanız önemlidir: Azure Resource Manager ve klasik. Azure kaynaklarıyla çalışmadan önce [dağıtım modellerini ve araçlarlarını](../azure-resource-manager/resource-manager-deployment-model.md) iyice anladığınızdan emin olun. Bu makalenin üst kısmında bir seçenek belirleyerek farklı araçların belgelerini görüntüleyebilirsiniz. Bu makale, klasik dağıtım modelini kapsamaktadır.
 > 
 
 [!INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
 
-Örnek Azure PowerShell önceden oluşturulmuş basit bir ortam aşağıdaki komutları beklediğiniz, yukarıdaki senaryo temel alınarak. Bu belgede gösterildiği komutları çalıştırmak istiyorsanız, gösterilen ortam oluşturma [PowerShell kullanarak bir sanal ağa (Klasik) oluşturmak](virtual-networks-create-vnet-classic-netcfg-ps.md).
+Aşağıdaki örnek Azure PowerShell komutları yukarıdaki senaryoya göre önceden oluşturulmuş basit bir ortam bekler. Komutları bu belgede görüntülendikleri gibi çalıştırmak istiyorsanız, [PowerShell kullanarak VNET (klasik) oluşturma](virtual-networks-create-vnet-classic-netcfg-ps.md)bölümünde gösterilen ortamı oluşturun.
 
 [!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
-## <a name="create-the-udr-for-the-front-end-subnet"></a>Ön uç alt ağı için UDR oluşturun
-Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota oluşturmak için aşağıdaki adımları izleyin.
+## <a name="create-the-udr-for-the-front-end-subnet"></a>Ön uç alt ağı için UDR oluşturma
+Yukarıdaki senaryoya göre ön uç alt ağı için gereken yol tablosu ve yolu oluşturmak için aşağıdaki adımları izleyin.
 
-1. Bir ön uç alt ağı için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın:
+1. Ön uç alt ağı için bir yol tablosu oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```powershell
     New-AzureRouteTable -Name UDR-FrontEnd -Location uswest `
     -Label "Route table for front end subnet"
     ```
 
-2. İçin bir yol arka uç alt ağına (192.168.2.0/24) hedefleyen tüm trafiği göndermek için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın **FW1** VM (192.168.0.4):
+2. Bir arka uç alt ağına (192.168.2.0/24) giden tüm trafiği **FW1** VM 'sine (192.168.0.4) göndermek için yol tablosunda bir yol oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```powershell
     Get-AzureRouteTable UDR-FrontEnd `
@@ -61,7 +61,7 @@ Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota 
     -NextHopIpAddress 192.168.0.4
     ```
 
-3. Yol tablosu ile ilişkilendirmek için aşağıdaki komutu çalıştırın **ön uç** alt ağı:
+3. Yol tablosunu **ön uç** alt ağıyla ilişkilendirmek için aşağıdaki komutu çalıştırın:
 
     ```powershell
     Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
@@ -69,10 +69,10 @@ Yol tablosu ve yukarıdaki senaryo temel alınarak ön uç alt ağı için rota 
     -RouteTableName UDR-FrontEnd
     ```
 
-## <a name="create-the-udr-for-the-back-end-subnet"></a>Arka uç alt ağı için UDR oluşturun
-Yol tablosu ve senaryo temel alınarak arka uç alt ağı için rota oluşturmak için aşağıdaki adımları tamamlayın:
+## <a name="create-the-udr-for-the-back-end-subnet"></a>Arka uç alt ağı için UDR 'yi oluşturma
+Senaryoya bağlı olarak arka uç alt ağı için yol tablosu ve yolu oluşturmak üzere aşağıdaki adımları izleyin:
 
-1. Arka uç alt ağı için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın:
+1. Arka uç alt ağı için bir yol tablosu oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```powershell
     New-AzureRouteTable -Name UDR-BackEnd `
@@ -80,7 +80,7 @@ Yol tablosu ve senaryo temel alınarak arka uç alt ağı için rota oluşturmak
     -Label "Route table for back end subnet"
     ```
 
-2. İçin bir yol (192.168.1.0/24) ön uç alt ağı hedefleyen tüm trafiği göndermek için rota tablosu oluşturmak için aşağıdaki komutu çalıştırın **FW1** VM (192.168.0.4):
+2. Ön uç alt ağına (192.168.1.0/24) giden tüm trafiği **FW1** VM 'sine (192.168.0.4) göndermek için yol tablosunda bir yol oluşturmak üzere aşağıdaki komutu çalıştırın:
 
     ```powershell
     Get-AzureRouteTable UDR-BackEnd
@@ -91,7 +91,7 @@ Yol tablosu ve senaryo temel alınarak arka uç alt ağı için rota oluşturmak
     -NextHopIpAddress 192.168.0.4
     ```
 
-3. Yol tablosu ile ilişkilendirmek için aşağıdaki komutu çalıştırın **arka uç** alt ağı:
+3. Yol tablosunu **arka uç** alt ağıyla ilişkilendirmek için aşağıdaki komutu çalıştırın:
 
     ```powershell
     Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
@@ -99,18 +99,18 @@ Yol tablosu ve senaryo temel alınarak arka uç alt ağı için rota oluşturmak
     -RouteTableName UDR-BackEnd
     ```
 
-## <a name="enable-ip-forwarding-on-the-fw1-vm"></a>FW1 VM'de IP iletimini etkinleştir
+## <a name="enable-ip-forwarding-on-the-fw1-vm"></a>FW1 VM 'de IP iletmeyi etkinleştirme
 
-IP FW1 VM'yi iletmeyi etkinleştirmek için aşağıdaki adımları tamamlayın:
+FW1 VM 'de IP iletmeyi etkinleştirmek için aşağıdaki adımları izleyin:
 
-1. IP iletimi durumunu denetlemek için aşağıdaki komutu çalıştırın:
+1. IP iletimi durumunu denetlemek için şu komutu çalıştırın:
 
     ```powershell
     Get-AzureVM -Name FW1 -ServiceName TestRGFW `
     | Get-AzureIPForwarding
     ```
 
-2. IP için iletmeyi etkinleştirmek için aşağıdaki komutu çalıştırın *FW1* VM:
+2. *FW1* VM için IP iletmeyi etkinleştirmek üzere aşağıdaki komutu çalıştırın:
 
     ```powershell
     Get-AzureVM -Name FW1 -ServiceName TestRGFW `

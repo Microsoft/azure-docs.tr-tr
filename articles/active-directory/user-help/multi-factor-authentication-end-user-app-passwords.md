@@ -1,6 +1,6 @@
 ---
-title: Uygulama parolaları - Azure Active Directory yönetme | Microsoft Docs
-description: Uygulama parolaları ve ne olduğu hakkında bilgi edinmek için iki aşamalı doğrulama ile ilgili olarak kullanılır.
+title: Uygulama parolalarını yönetme-Azure Active Directory | Microsoft Docs
+description: Uygulama parolaları ve iki adımlı doğrulamaya yönelik olarak kullanıldıkları özellikler hakkında bilgi edinin.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -10,117 +10,121 @@ ms.workload: identity
 ms.service: active-directory
 ms.subservice: user-help
 ms.topic: conceptual
-ms.date: 07/30/2018
+ms.date: 08/13/2019
 ms.author: lizross
 ms.custom: user-help, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c6790fa1cbb10999a751b31bcb27db2edcb67b4a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 78acb1f27b27c53aaaac508e0aa99a5b9c14ff2d
+ms.sourcegitcommit: 083aa7cc8fc958fc75365462aed542f1b5409623
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60334985"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70914928"
 ---
-# <a name="manage-app-passwords-for-two-step-verification"></a>İki aşamalı doğrulama için uygulama parolaları yönetme
+# <a name="manage-app-passwords-for-two-step-verification"></a>İki adımlı doğrulama için uygulama parolalarını yönetme
 
-Outlook 2010 gibi belirli tarayıcı olmayan uygulamalar, iki aşamalı doğrulamayı desteklemez. Bu destek eksikliği, iki aşamalı doğrulama kullanıyorsanız, uygulama çalışmıyor anlamına gelir. Bu sorunla karşılaşmamak için normal parolasından ayrı her tarayıcı içi uygulaması ile birlikte kullanmak için otomatik olarak oluşturulan bir parola oluşturabilirsiniz.
+>[!Important]
+>Yöneticiniz uygulama parolalarını kullanmanıza izin vermeyebilir. **Uygulama parolalarını** bir seçenek olarak görmüyorsanız, kuruluşunuzda mevcut değildir.
 
-Uygulama parolaları kullanırken unutmamak önemlidir:
+Uygulama parolalarını kullanırken, dikkat edilmesi önemlidir:
 
-- Uygulama parolaları otomatik olarak oluşturulan ve tek uygulama girilen.
+- Uygulama parolaları otomatik olarak oluşturulur ve uygulama başına bir kez oluşturulup girilmelidir.
 
-- Kullanıcı başına 40 parolalık bir sınır yoktur. Bir sonraki bu sınırı oluşturmayı denerseniz, yeni bir tane oluşturmak için izin verilen önce var olan bir parola silmek için istenir.
-
-- Cihaz başına, uygulama başına değil bir uygulama parolasını kullanın. Örneğin, dizüstü bilgisayarınızda tüm uygulamalar için tek bir parola ve masaüstünüzde tüm uygulamalar için tek başka bir parola oluşturun.
+- Kullanıcı başına 40 parola sınırı vardır. Bu sınırdan sonra bir tane oluşturmayı denerseniz, yenisini oluşturmaya izin verilmeden önce mevcut bir parolayı silmeniz istenir.
 
     >[!Note]
-    >(Outlook gibi) office 2013 istemcilerindeki yeni kimlik doğrulama protokolleri destekleyen ve iki aşamalı doğrulamayla birlikte kullanılabilir. Bu destek, iki aşamalı doğrulama açıldıktan sonra artık uygulama parolaları için Office 2013 istemcilerindeki gerektiğini anlamına gelir. Daha fazla bilgi için bkz. [Office 2013 ve Office 2016 istemci uygulamaları için nasıl modern kimlik doğrulaması çalıştığı](https://support.office.com/article/how-modern-authentication-works-for-office-2013-and-office-2016-client-apps-e4c45989-4b1a-462e-a81b-2a13191cf517) makalesi.
+    >Office 2013 istemcileri (Outlook dahil) yeni kimlik doğrulama protokollerini destekler ve iki adımlı doğrulama ile kullanılabilir. Bu destek, iki adımlı doğrulama etkinleştirildikten sonra Office 2013 istemcileri için uygulama parolalarına gerek kalmaz. Daha fazla bilgi için bkz. [office 2013 ve office 2016 istemci uygulamalarında modern kimlik doğrulaması nasıl kullanılır](https://support.office.com/article/how-modern-authentication-works-for-office-2013-and-office-2016-client-apps-e4c45989-4b1a-462e-a81b-2a13191cf517) makalesi.
 
-## <a name="where-to-create-and-delete-your-app-passwords"></a>Where oluşturup, uygulama parolalarını Sil
+## <a name="create-new-app-passwords"></a>Yeni uygulama parolaları oluşturma
 
-Size bir uygulama parolası, ilk iki aşamalı doğrulama kaydı sırasında verilir. En fazla bir parola gerekiyorsa, ek parolalar, iki aşamalı doğrulamanın nasıl kullandığınıza bağlı oluşturabilirsiniz:
+İlk iki öğeli doğrulama kayıt işleminiz sırasında tek bir uygulama parolası sunulur. Birden fazla ihtiyacınız varsa, bunları kendiniz oluşturmanız gerekir. Kuruluşunuzda iki öğeli doğrulamanın nasıl ayarlandığına bağlı olarak, birden çok alandan uygulama parolaları oluşturabilirsiniz. İş veya okul hesabınızla iki öğeli doğrulama kullanmaya kaydolma hakkında daha fazla bilgi için bkz. [iki öğeli doğrulamaya ve iş veya okul hesabınıza](multi-factor-authentication-end-user-first-time.md) ve Ilgili makalelere genel bakış.
 
-- **İki aşamalı doğrulama ile iş veya Okul hesabı ve MyApps portalında kullanın.** Oluşturun ve Oluştur yönergeleri kullanarak, uygulama parolalarını Sil ve bu makalede portal MyApps bölümünü kullanarak uygulama parolalarını Sil. MyApps portalında ve nasıl kullanılacağı hakkında daha fazla bilgi için bkz. [MyApps portalında Azure Active Directory nedir?](active-directory-saas-access-panel-introduction.md).
+### <a name="where-to-create-and-delete-your-app-passwords"></a>Uygulama parolalarınızı oluşturma ve silme
 
-- **İki aşamalı doğrulama ile iş veya Okul hesabı ve Office 365 portalını kullanın.** Oluşturma ve kullanma yönergeleri, uygulama parolalarını Sil [Office 365 portalını kullanarak uygulama parolaları oluşturma ve silme](#create-and-delete-app-passwords-using-the-office-365-portal) bu makalenin.
+İki öğeli doğrulamayı nasıl kullanacağınızı temel alarak uygulama parolaları oluşturabilir ve silebilirsiniz:
 
-- **İki aşamalı doğrulama, kişisel Microsoft hesabınızla kullandığınız.** Oluşturma ve kullanma, uygulama parolalarını Sil [güvenlik temel kavramları](https://account.microsoft.com/account/) kişisel Microsoft hesabınızla sayfası. Daha fazla bilgi için bkz. [uygulama parolaları ve iki aşamalı doğrulama](https://support.microsoft.com/help/12409/microsoft-account-app-passwords-two-step-verification) makalesi.
+- **Kuruluşunuz iki öğeli doğrulama ve ek güvenlik doğrulama sayfası kullanır.** Kuruluşunuzda iki öğeli doğrulama ile iş veya okul hesabınızı ( alain@contoso.comgibi) kullanıyorsanız, uygulama parolalarınızı [ek güvenlik doğrulama sayfasından](https://account.activedirectory.windowsazure.com/Proofup.aspx)yönetebilirsiniz. Ayrıntılı yönergeler için, bu makaledeki [ek güvenlik doğrulaması sayfasını kullanarak uygulama parolaları oluşturma ve silme](#create-and-delete-app-passwords-from-the-additional-security-verification-page) bölümüne bakın.
 
-## <a name="create-and-delete-app-passwords-using-the-myapps-portal"></a>Oluşturma ve MyApps portalında kullanarak uygulama parolalarını Sil
-Oluşturun ve MyApps portalı üzerinden uygulama parolalarını Sil.
+- **Kuruluşunuz iki öğeli doğrulama ve Office 365 portalını kullanır.** Kuruluşunuzda iş veya okul hesabınızı (örneğin, alain@contoso.com), iki faktörlü doğrulamayı ve Office 365 uygulamalarını kullanıyorsanız, uygulama parolalarınızı [Office 365 Portal sayfasından](https://www.office.com)yönetebilirsiniz. Ayrıntılı yönergeler için, bu makaledeki [Office 365 portalını kullanarak uygulama parolaları oluşturma ve silme](#create-and-delete-app-passwords-using-the-office-365-portal) bölümüne bakın.
 
-### <a name="to-create-an-app-password-using-the-myapps-portal"></a>MyApps portalında kullanarak bir uygulama parolası oluşturmak için
+- **Kişisel Microsoft hesabı iki öğeli doğrulama kullanıyorsunuz.** İki öğeli doğrulamayla bir kişisel Microsoft hesabı ( alain@outlook.comgibi) kullanıyorsanız, uygulama parolalarınızı [güvenlik temel bilgileri sayfasından](https://account.microsoft.com/security/)yönetebilirsiniz. Ayrıntılı yönergeler için bkz. [iki aşamalı doğrulamayı desteklemeyen uygulamalarla uygulama parolaları kullanma](https://support.microsoft.com/help/12409/microsoft-account-app-passwords-and-two-step-verification).
 
-1. [https://myapps.microsoft.com](https://myapps.microsoft.com) adresinde oturum açın.
+## <a name="create-and-delete-app-passwords-from-the-additional-security-verification-page"></a>Ek güvenlik doğrulama sayfasından uygulama parolaları oluşturma ve silme
 
-2. Sağ üst köşedeki adınızın seçip seçin **profili**.
+İş veya okul hesabınız için **ek güvenlik doğrulama** sayfasından uygulama parolaları oluşturabilir ve silebilirsiniz.
 
-3. Seçin **ek güvenlik doğrulaması**.
+1. [Ek güvenlik doğrulama sayfasında](https://account.activedirectory.windowsazure.com/Proofup.aspx)oturum açın ve ardından **Uygulama parolaları**' nı seçin.
 
-   ![Ek güvenlik doğrulaması - ekran görüntüsü seçin](./media/multi-factor-authentication-end-user-app-passwords/myapps1.png)
+    ![Uygulama parolaları sayfası, uygulama parolaları sekmesi vurgulanmış şekilde](media/multi-factor-authentication-end-user-app-passwords/mfa-app-passwords-page.png)
 
-4. Seçin **uygulama parolaları**.
+2. **Oluştur**' u seçin, uygulama parolasını gerektiren uygulamanın adını yazın ve ardından **İleri**' yi seçin.
 
-   ![Uygulama parolaları - ekran görüntüsü seçin](./media/multi-factor-authentication-end-user-app-passwords/apppass2.png)
+    ![Parola gerektiren uygulama adı ile uygulama parolaları Oluştur sayfası](media/multi-factor-authentication-end-user-app-passwords/mfa-create-app-password-page.png)
 
-5. **Oluştur**’a tıklayın.
+3. **Uygulama parolası** sayfasından parolayı kopyalayın ve ardından **Kapat**' ı seçin.
 
-6. Uygulama parolası için bir ad yazın ve ardından **sonraki**.
+    ![Belirtilen uygulamanızın parolasıyla birlikte uygulama parolası sayfanız](media/multi-factor-authentication-end-user-app-passwords/mfa-your-app-password-page.png)
 
-7. Uygulama parolasını panoya kopyalayın ve uygulamanıza yapıştırın.
-   
-    ![Bir uygulama parolası oluşturma](./media/multi-factor-authentication-end-user-app-passwords/create2.png)
+4. **Uygulama parolaları** sayfasında, uygulamanızın listelendiğinden emin olun.
 
-### <a name="to-delete-an-app-password-using-the-myapps-portal"></a>MyApps portalında kullanarak bir uygulama parolasını silmek için
+     ![Listede yeni uygulamayla gösterilen uygulama parolaları sayfası](media/multi-factor-authentication-end-user-app-passwords/mfa-app-passwords-page-with-new-password.png)  
 
-1. Profilinize gidin ve ardından **ek güvenlik doğrulama**.
+5. Uygulama parolasını oluşturduğunuz uygulamayı (örneğin, Outlook 2010) açın ve istendiğinde uygulama parolasını yapıştırın. Bunu uygulama başına yalnızca bir kez yapmanız gerekir.
 
-2. Seçin **uygulama parolaları**ve ardından **Sil** yanındaki silmek istediğiniz uygulama parolası.
+### <a name="to-delete-an-app-password-using-the-app-passwords-page"></a>Uygulama parolaları sayfasını kullanarak bir uygulama parolasını silmek için
 
-   ![Bir uygulama parolasını silme](./media/multi-factor-authentication-end-user-app-passwords/delete1.png)
+1. **Uygulama parolaları** sayfasında, silmek istediğiniz uygulama parolasının yanındaki **Sil** ' i seçin.
 
-3. Seçin **Evet** parola silin ve ardından istediğinizi onaylamak için **Kapat**.
+   ![Uygulama parolasını silme](media/multi-factor-authentication-end-user-app-passwords/mfa-app-passwords-page-delete.png)
 
-## <a name="create-and-delete-app-passwords-using-the-office-365-portal"></a>Oluşturma ve Office 365 portalını kullanarak uygulama parolalarını Sil
-
-İki aşamalı doğrulama ile iş veya Okul hesabı ve Office 365 uygulamalarınıza kullanırsanız, oluşturabilir ve Office 365 portalını kullanarak, uygulama parolalarını Sil. Bir seferde en fazla 40 uygulama parolaları olabilir. Bu sınırdan sonra başka bir uygulama parolasına ihtiyacınız varsa, varolan uygulama parolalarından birini silmeniz gerekir.
-
-### <a name="to-create-app-passwords-using-the-office-365-portal"></a>Office 365 portalını kullanarak uygulama parolaları oluşturmak için
-
-1. İş veya Okul hesabınızda oturum açın.
-
-2. Git [ https://portal.office.com ](https://portal.office.com)seçin **ayarları** simgesini sağ üst kısmındaki **Office 365 portalında** sayfasında ve ardından **ek güvenlik doğrulama**.
-
-    ![Office portalı gösteren ek güvenlik doğrulama alanı genişletilmiş](media/security-info/security-info-o365password.png)
-
-3. Şunu metni seçin **oluşturma ve uygulama parolaları yönetme** açmak için **uygulama parolaları** sayfası.
-
-4. Seçin **Oluştur**uygulama parolası gerekiyor uygulama için bir kolay ad yazın ve ardından **sonraki**.
-
-5. Seçin **parolayı Panoya Kopyala**ve ardından **Kapat**.
-
-6. Tarayıcı olmayan uygulamanıza oturum açmak için kopyalanan uygulama parolasını kullanın. Bu parola bir kere girmeniz yeterlidir ve geleceğe yönelik hatırlanır.
-
-### <a name="to-delete-app-passwords-using-the-office-365-portal"></a>Uygulama parolaları Office 365 portalını kullanarak silmek için
-
-1. İş veya Okul hesabınızda oturum açın.
-
-2. Git [ https://portal.office.com ](https://portal.office.com)seçin **ayarları** simgesini sağ üst kısmındaki **Office 365 portalında** sayfasında ve ardından **ek güvenlik doğrulama**.
-
-3. Şunu metni seçin **oluşturma ve uygulama parolaları yönetme** açmak için **uygulama parolaları** sayfası.
-
-4. Seçin **Sil** uygulama parolasını silmek işaretleyin **Evet** onay kutusunu ve ardından **Kapat**.
+2. Parolayı silmek istediğinizi onaylamak için **Evet** ' i seçin ve ardından **Kapat**' ı seçin.
 
     Uygulama parolası başarıyla silindi.
 
-5. Yeni uygulama parolası oluşturmak için bir uygulama parolası oluşturmak için adımları izleyin.
+## <a name="create-and-delete-app-passwords-using-the-office-365-portal"></a>Office 365 portalını kullanarak uygulama parolaları oluşturma ve silme
 
-## <a name="if-your-app-passwords-arent-working-properly"></a>Varsa, uygulama parolaları düzgün çalışmayan
+İş veya okul hesabınızla ve Office 365 uygulamalarınızda iki aşamalı doğrulama kullanırsanız, Office 365 portalını kullanarak uygulama parolalarınızı oluşturabilir ve silebilirsiniz.
 
-Parolanızı doğru yazdığınızdan emin olun. Parolanızı doğru girildiğinden emin değilseniz, yeniden oturum açın ve yeni bir uygulama parolası oluşturmak deneyebilirsiniz. Bu seçeneklerden hiçbiri sorununuzu gidermek, mevcut uygulama parolalarınızın almadığınızdan olanları oluşturmanızı, silebileceğiniz şirketinizin Destek birimine. 
+### <a name="to-create-app-passwords-using-the-office-365-portal"></a>Office 365 portalını kullanarak uygulama parolaları oluşturmak için
+
+1. Office 365 ' te oturum açın ve [Hesabım sayfasına](https://portal.office.com)gidin, **Güvenlik & Gizlilik**' i seçin ve ardından **ek güvenlik doğrulaması**' nı genişletin.
+
+    ![Genişletilmiş ek güvenlik doğrulama alanını gösteren Office portalı](media/multi-factor-authentication-end-user-app-passwords/mfa-app-passwords-o365-my-account-page.png)
+
+2. Uygulama **Parolaları** sayfasını açmak için **Uygulama parolaları oluştur ve Yönet** ' in bulunduğu metni seçin.
+
+    ![Uygulama parolaları sayfası, uygulama parolaları sekmesi vurgulanmış şekilde](media/multi-factor-authentication-end-user-app-passwords/mfa-app-passwords-page.png)
+
+3. **Oluştur**' u seçin, uygulama parolasını gerektiren uygulamanın adını yazın ve ardından **İleri**' yi seçin.
+
+    ![Parola gerektiren uygulama adı ile uygulama parolaları Oluştur sayfası](media/multi-factor-authentication-end-user-app-passwords/mfa-create-app-password-page.png)
+
+4. **Uygulama parolası** sayfasından parolayı kopyalayın ve ardından **Kapat**' ı seçin.
+
+    ![Belirtilen uygulamanızın parolasıyla birlikte uygulama parolası sayfanız](media/multi-factor-authentication-end-user-app-passwords/mfa-your-app-password-page.png)
+
+5. **Uygulama parolaları** sayfasında, uygulamanızın listelendiğinden emin olun.
+
+     ![Listede yeni uygulamayla gösterilen uygulama parolaları sayfası](media/multi-factor-authentication-end-user-app-passwords/mfa-app-passwords-page-with-new-password.png)  
+
+6. Uygulama parolasını oluşturduğunuz uygulamayı (örneğin, Outlook 2010) açın ve istendiğinde uygulama parolasını yapıştırın. Bunu uygulama başına yalnızca bir kez yapmanız gerekir.
+
+### <a name="to-delete-app-passwords-using-the-app-passwords-page"></a>Uygulama parolaları sayfasını kullanarak uygulama parolalarını silme
+
+1. **Uygulama parolaları** sayfasında, silmek istediğiniz uygulama parolasının yanındaki **Sil** ' i seçin.
+
+   ![Uygulama parolasını silme](media/multi-factor-authentication-end-user-app-passwords/mfa-app-passwords-page-delete.png)
+
+2. Onay kutusunda **Evet** ' i seçin ve ardından **Kapat**' ı seçin.
+
+    Uygulama parolası başarıyla silindi.
+
+## <a name="if-your-app-passwords-arent-working-properly"></a>Uygulama parolalarınız düzgün çalışmıyorsa
+
+Parolanızı doğru yazdığınızdan emin olun. Parolanızı doğru girdiğinizden emin değilseniz, yeniden oturum açmayı deneyebilir ve yeni bir uygulama parolası oluşturabilirsiniz. Bu seçeneklerden hiçbiri sorununuzu gidermezse, kuruluşunuzun yardım masasına başvurarak mevcut uygulama parolalarınızı silebilmeleri için, yeni markaların oluşturulmasını sağlayabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [İki adımlı doğrulama ayarlarınızı yönetme](multi-factor-authentication-end-user-manage-settings.md)
 
-- Denemenin [Microsoft Authenticator uygulamasını](user-help-auth-app-download-install.md) oturum açma işlemlerini uygulama bildirimleri, metinleri veya çağrıları almak yerine ile doğrulayın.
+- Metin veya çağrı almak yerine uygulama bildirimleri ile oturum açma işlemlerini doğrulamak için [Microsoft Authenticator uygulamasını](user-help-auth-app-download-install.md) deneyin.

@@ -1,27 +1,26 @@
 ---
-title: Azure PowerShell Betik Örneğine genelleştirilmiş bir VHD yükleme | Microsoft Docs
+title: Betik örneğine Azure PowerShell genelleştirilmiş bir VHD yükleyin
 description: Azure’a genelleştirilmiş bir VHD yüklemek ve kaynak yöneticisi dağıtım modelini ve Yönetilen Diskleri kullanarak yeni bir sanal makine oluşturmak için PowerShell örnek betiği.
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 01/02/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 95826cb3928f9a3220505040ef3162fe5016d08b
-ms.sourcegitcommit: f0f21b9b6f2b820bd3736f4ec5c04b65bdbf4236
+ms.openlocfilehash: f2c739d90917bd00bbde5d680a20a18271a581cc
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2019
-ms.locfileid: "58447631"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74038894"
 ---
 # <a name="sample-script-to-upload-a-vhd-to-azure-and-create-a-new-vm"></a>Bir VHD’yi Azure’a yüklemek ve yeni bir sanal makine oluşturmak için örnek betik
 
@@ -31,7 +30,7 @@ Bu betik, genelleştirilmiş bir sanal makineden yerel bir .vhd dosyasını alı
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [updated-for-az-vm.md](../../../includes/updated-for-az-vm.md)]
+ 
 
 ## <a name="sample-script"></a>Örnek betik
 
@@ -133,23 +132,23 @@ Bu betik, dağıtımı oluşturmak için aşağıdaki komutları kullanır. Tabl
 | Komut                                                                                                             | Notlar                                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup)                           | Tüm kaynakların depolandığı bir kaynak grubu oluşturur.                                                                                                                          |
-| [Yeni AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount)                         | Bir depolama hesabı oluşturur.                                                                                                                                                           |
-| [AzVhd ekleyin](https://docs.microsoft.com/powershell/module/az.compute/add-azvhd)                                               | Şirket içi bir sanal makineden, Azure’da bulut depolama hesabındaki bir bloba sanal sabit disk yükler.                                                                       |
-| [Yeni AzImageConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azimageconfig)                               | Yapılandırılabilir bir görüntü nesnesi oluşturur.                                                                                                                                                 |
+| [New-AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount)                         | Bir depolama hesabı oluşturur.                                                                                                                                                           |
+| [Add-AzVhd](https://docs.microsoft.com/powershell/module/az.compute/add-azvhd)                                               | Şirket içi bir sanal makineden, Azure’da bulut depolama hesabındaki bir bloba sanal sabit disk yükler.                                                                       |
+| [New-Azımageconfig](https://docs.microsoft.com/powershell/module/az.compute/new-azimageconfig)                               | Yapılandırılabilir bir görüntü nesnesi oluşturur.                                                                                                                                                 |
 | [Set-AzImageOsDisk](https://docs.microsoft.com/powershell/module/az.compute/set-azimageosdisk)                               | Bir görüntü nesnesinde işletim sistemi disk özelliklerini ayarlar.                                                                                                                        |
-| [Yeni AzImage](https://docs.microsoft.com/powershell/module/az.compute/new-azimage)                                           | Yeni bir görüntü oluşturur.                                                                                                                                                                 |
-| [Yeni AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig) | Bir alt ağ yapılandırması oluşturur. Bu yapılandırma, sanal ağ oluşturma işlemiyle birlikte kullanılır.                                                                                |
-| [Yeni AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork)                         | Sanal ağ oluşturur.                                                                                                                                                           |
-| [New-AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress)                       | Genel bir IP adresi oluşturur.                                                                                                                                                         |
-| [Yeni AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface)                     | Ağ arabirimi oluşturur.                                                                                                                                                         |
+| [New-Azımage](https://docs.microsoft.com/powershell/module/az.compute/new-azimage)                                           | Yeni bir görüntü oluşturur.                                                                                                                                                                 |
+| [New-AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig) | Bir alt ağ yapılandırması oluşturur. Bu yapılandırma, sanal ağ oluşturma işlemiyle birlikte kullanılır.                                                                                |
+| [New-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork)                         | Sanal ağ oluşturur.                                                                                                                                                           |
+| [New-Azpublicıpaddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress)                       | Genel bir IP adresi oluşturur.                                                                                                                                                         |
+| [New-Aznetworkınterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface)                     | Ağ arabirimi oluşturur.                                                                                                                                                         |
 | [New-AzNetworkSecurityRuleConfig](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecurityruleconfig)   | Ağ güvenlik grubu kuralı yapılandırması oluşturur. Bu yapılandırma, NSG oluşturulduğunda bir NSG kuralı oluşturmak için kullanılır.                                                       |
 | [New-AzNetworkSecurityGroup](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecuritygroup)             | Ağ güvenlik grubu oluşturur.                                                                                                                                                    |
 | [Get-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/get-azvirtualnetwork)                         | Bir kaynak grubundaki sanal ağı alır.                                                                                                                                          |
-| [Yeni AzVMConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azvmconfig)                                     | Sanal makine yapılandırması oluşturur. Bu yapılandırma; sanal makine adı, işletim sistemi ve yönetici kimlik bilgileri gibi bilgileri içerir. Yapılandırma, sanal makine oluşturulurken kullanılır. |
-| [Set-AzVMSourceImage](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsourceimage)                           | Sanal makine için bir görüntü belirtir.                                                                                                                                            |
+| [New-AzVMConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azvmconfig)                                     | Sanal makine yapılandırması oluşturur. Bu yapılandırma; sanal makine adı, işletim sistemi ve yönetici kimlik bilgileri gibi bilgileri içerir. Yapılandırma, sanal makine oluşturulurken kullanılır. |
+| [Set-Azvmsourceımage](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsourceimage)                           | Sanal makine için bir görüntü belirtir.                                                                                                                                            |
 | [Set-AzVMOSDisk](https://docs.microsoft.com/powershell/module/az.compute/set-azvmosdisk)                                     | Bir sanal makinedeki işletim sistemi disk özelliklerini ayarlar.                                                                                                                      |
 | [Set-AzVMOperatingSystem](https://docs.microsoft.com/powershell/module/az.compute/set-azvmoperatingsystem)                   | Bir sanal makinedeki işletim sistemi disk özelliklerini ayarlar.                                                                                                                      |
-| [AzVMNetworkInterface ekleyin](https://docs.microsoft.com/powershell/module/az.compute/add-azvmnetworkinterface)                 | Sanal makineye bir ağ arabirimi ekler.                                                                                                                                       |
+| [Add-Azvmnetworkınterface](https://docs.microsoft.com/powershell/module/az.compute/add-azvmnetworkinterface)                 | Sanal makineye bir ağ arabirimi ekler.                                                                                                                                       |
 | [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm)                                                 | Sanal makine oluşturur.                                                                                                                                                            |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup)                     | Kaynak grubunu ve grubun içerdiği tüm kaynakları kaldırır.                                                                                                                         |
 

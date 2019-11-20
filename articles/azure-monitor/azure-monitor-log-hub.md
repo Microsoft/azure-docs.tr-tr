@@ -1,27 +1,26 @@
 ---
 layout: HubPage
 hide_bc: false
-title: Azure İzleyici günlük veri belgeleri | Microsoft Docs
-description: Azure İzleyici, farklı kaynakları olarak günlük verilerini toplamak ve bağıntı ve analiz sorgu dili kullanarak için saklayın.
-services: azure-monitor
-author: mgoedtel
-manager: carmonm
+title: Azure Izleyici günlük verileri belgeleri | Microsoft Docs
+description: Azure Izleyici, farklı kaynakları günlük verileri olarak toplayabilir ve sorgu dilini kullanarak bağıntı ve analiz için depolar.
 ms.service: azure-monitor
+ms.subservice: ''
 ms.topic: hub-page
-ms.date: 01/29/2019
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: ced88f973ff26f7c8990c1c80bf8532949ef9ae8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 01/29/2019
+ms.openlocfilehash: 407e18008c947f95204ea073db31b5f2279a5a4c
+ms.sourcegitcommit: b4f201a633775fee96c7e13e176946f6e0e5dd85
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60640115"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72597317"
 ---
 <div id="main" class="v2">
     <div class="container">
-        <h1>Azure İzleyici günlük veri belgeleri</h1>
-        <p>Azure İzleyici, farklı kaynakları olarak günlük verilerini toplamak ve bağıntı ve analiz sorgu dili kullanarak için saklayın.</p>
-        <p>En popüler içeriklerimizde planlamak, toplamak ve günlük verilerini nasıl keşfedin.</p>
+        <h1>Azure Izleyici günlük verileri belgeleri</h1>
+        <p>Azure Izleyici, farklı kaynakları günlük verileri olarak toplayabilir ve sorgu dilini kullanarak bağıntı ve analiz için depolar.</p>
+        <p>Günlük verilerini nasıl planlayacağınızı, toplayacağınızı ve analiz edeceğinizi öğrenmek için en popüler içeriğimizi keşfedebilirsiniz.</p>
         <hr style="margin: 30px 0;" />
         <ul class="pivots">
             <li>
@@ -46,11 +45,11 @@ ms.locfileid: "60640115"
                                                                     </div>
                                                                 </div>
                                                                 <div class="cardText" style="padding-left: 0px">
-                                                                    <h3>Temel özellikleri öğrenin</h3> 
+                                                                    <h3>Temelleri öğrenin</h3> 
                                                                     <p> 
-                                                                        <a href="/azure/azure-monitor/overview">Azure İzleyici nedir?</a><br/>
+                                                                        <a href="/azure/azure-monitor/overview">Azure Izleyici nedir?</a><br/>
                                                                         <a href="/azure/azure-monitor/azure-monitor-rebrand">Marka değişiklikleri</a><br/>
-                                                                        <a href="/azure/azure-monitor/platform/data-sources">Veri kaynakları izleme</a><br/>
+                                                                        <a href="/azure/azure-monitor/platform/data-sources">Veri kaynaklarını izleme</a><br/>
                                                                         <a href="/azure/azure-monitor/platform/service-providers">Hizmet sağlayıcılarına yönelik tasarım konuları</a><br/>
                                                                     </p>
                                                                 </div>
@@ -77,12 +76,12 @@ ms.locfileid: "60640115"
                                                                         <a href="/azure/azure-monitor/platform/roles-permissions-security">Rol izinleri ve güvenlik</a><br/>
                                                                     </p>
                                                                     <br>
-                                                                     <h3>Çalışma alanını yönetme</h3>
+                                                                     <h3>Çalışma alanını yönet</h3>
                                                                     <p>
-                                                                    <a href="/azure/azure-monitor/learn/quick-create-workspace">Azure portalında çalışma alanı oluşturma</a><br/>
-                                                                    <a href="/azure/azure-monitor/learn/quick-create-workspace-cli">Azure CLI ile çalışma alanı oluşturma</a><br/>
-                                                                   <a href="/azure/azure-monitor/learn/quick-create-workspace-posh">Azure PowerShell ile çalışma alanı oluşturma</a><br/>
-                                                                  <a href="/azure/azure-monitor/platform/delete-workspace">Çalışma alanını silme</a><br/>
+                                                                    <a href="/azure/azure-monitor/learn/quick-create-workspace">Azure portal çalışma alanı oluşturma</a><br/>
+                                                                    <a href="/azure/azure-monitor/learn/quick-create-workspace-cli">Azure CLı ile çalışma alanı oluşturma</a><br/>
+                                                                   <a href="/azure/azure-monitor/learn/quick-create-workspace-posh">Azure PowerShell çalışma alanı oluşturma</a><br/>
+                                                                  <a href="/azure/azure-monitor/platform/delete-workspace">Çalışma alanını sil</a><br/>
                                                                  </p>
                                                                 </div>
                                                             </div>
@@ -99,13 +98,13 @@ ms.locfileid: "60640115"
                                                     <div class="cardText">
                                                     <h3>İzleme</h3>
                                                         <p>
-                                                            <a href="/azure/azure-monitor/platform/data-collection">Ölçüm ve günlükleri</a><br/>
-                                                            <a href="/azure/azure-monitor/platform/data-ingestion-time">Günlük veri alım zamanı</a><br/>
+                                                            <a href="/azure/azure-monitor/platform/data-collection">Ölçümler ve Günlükler</a><br/>
+                                                            <a href="/azure/azure-monitor/platform/data-ingestion-time">Günlük verisi alma süresi</a><br/>
                                                         </p>
                                                         <br>
                                                         <h3>Veri kaynakları</h3>
                                                         <p>
-                                                            <a href="/azure/azure-monitor/platform/data-sources">Genel bakış<br/>
+                                                            <a href="/azure/azure-monitor/platform/data-sources">Overview<br/>
                                                             <a href="/azure/azure-monitor/platform/data-sources-windows-events">Windows olayları</a><br/>
                                                             <a href="/azure/azure-monitor/platform/data-sources-performance-counters">Windows ve Linux performans sayaçları</a><br/>
                                                             <a href="/azure/azure-monitor/platform/data-sources-linux-applications">Linux uygulama performansı</a><br/>
@@ -116,7 +115,7 @@ ms.locfileid: "60640115"
                                                             <a href="/azure/azure-monitor/platform/data-sources-iis-logs">IIS günlükleri</a><br/>
                                                             <a href="/azure/azure-monitor/platform/data-sources-custom-logs">Özel günlükler</a><br/>
                                                             <a href="/azure/azure-monitor/platform/custom-fields">Özel alanlar</a><br/>
-                                                            <a href="/azure/azure-monitor/platform/data-collector-api">Veri Toplayıcı API'si</a><br/>
+                                                            <a href="/azure/azure-monitor/platform/data-collector-api">Veri Toplayıcı API 'SI</a><br/>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -133,16 +132,16 @@ ms.locfileid: "60640115"
                                                                     </div>
                                                                 </div>
                                                     <div class="cardText">
-                                                        <h3>Verileri analiz etme</h3>
+                                                        <h3>Verileri analiz edin</h3>
                                                         <p>
                                                             <a href="/azure/azure-monitor/log-query/get-started-queries">Sorguları kullanmaya başlama</a><br/>
-                                                            <a href="/azure/azure-monitor/log-query/search-queries">Günlük sorguları anlama</a><br/>
-                                                            <a href="/azure/azure-monitor/log-query/portals">Günlük sorgu portalları</a><br/>
-                                                            <a href="/azure/azure-monitor/log-query/query-language">Günlük sorgu dili başvurusu</a><br/>
-                                                            <a href="/azure/azure-monitor/log-query/cross-workspace-query">Kaynaklar arası sorgu</a><br/>
+                                                            <a href="/azure/azure-monitor/log-query/search-queries">Günlük sorgularını anlama</a><br/>
+                                                            <a href="/azure/azure-monitor/log-query/portals">Günlük sorgusu portalları</a><br/>
+                                                            <a href="/azure/azure-monitor/log-query/query-language">Günlük sorgusu dil başvurusu</a><br/>
+                                                            <a href="/azure/azure-monitor/log-query/cross-workspace-query">Çapraz kaynak sorgusu</a><br/>
                                                         </p>
                                                         <br>
-                                                        <h3>Olay yanıtı</h3>
+                                                        <h3>Olay yanıtlama</h3>
                                                         <p>
                                                             <a href="/azure/azure-monitor/platform/alerts-overview">Uyarılara genel bakış</a><br/>
                                                             <a href="/azure/azure-monitor/platform/autoscale-overview">Otomatik Ölçeklendirme</a><br/>

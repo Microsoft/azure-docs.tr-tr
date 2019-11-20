@@ -1,85 +1,99 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Event Grid Belgeleri
+### YamlMime:Landing
+title: Azure Event Grid belgeleri
+summary: Hem Azure hizmetlerinde hem de Azure dışı hizmetlerde gerçekleşen ilgili olaylara neredeyse gerçek zamanlı yanıt vermek için Azure Event Grid’i kullanmayı öğrenin.
 metadata:
-  title: 'Azure Event Grid Belgeleri - Öğreticiler, API Başvurusu'
-  description: Hem Azure hizmetlerinde hem de Azure dışı hizmetlerde gerçekleşen ilgili olaylara neredeyse gerçek zamanlı yanıt vermek için Azure Event Grid’i kullanın.
+  title: Azure Event Grid belgeleri
+  description: Hem Azure hizmetlerinde hem de Azure dışı hizmetlerde gerçekleşen ilgili olaylara neredeyse gerçek zamanlı yanıt vermek için Azure Event Grid’i kullanmayı öğrenin.
   services: event-grid
-  author: czeumault
-  manager: carolz
   ms.service: event-grid
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: 
   ms.topic: landing-page
-  ms.date: 08/10/2017
-  ms.author: carolz
-abstract:
-  description: 'Azure Event Grid; yayımla-abone ol modelini kullanan, tek düzen olay tüketimine izin veren, tam yönetimli ve akıllı bir olay yönlendirme hizmetidir. Hem Azure hizmetlerinde hem de Azure dışı hizmetlerde gerçekleşen ilgili olaylara neredeyse gerçek zamanlı yanıt vermek için Azure Event Grid’i kullanın. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, Azure Event Grid’i kullanmayı öğrenin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Özel olay oluşturmayı ve özel olaylara abone olmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/event-grid/media/index/cli.svg
-            text: Azure CLI
-            href: /azure/event-grid/custom-event-quickstart
-          - image:
-              src: /azure/event-grid/media/index/logo_powershell.svg
-            text: Azure PowerShell
-            href: /azure/event-grid/custom-event-quickstart-powershell
-          - image:
-              src: /azure/event-grid/media/index/portal.svg
-            text: Azure Portal
-            href: /azure/event-grid/custom-event-quickstart-portal
-      - type: paragraph
-        text: Blob depolama olaylarını yönlendirmeyi öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/event-grid/media/index/cli.svg
-            text: Azure CLI
-            href: /azure/storage/blobs/storage-blob-event-quickstart?toc=%2fazure%2fevent-grid%2ftoc.json
-          - image:
-              src: /azure/event-grid/media/index/logo_powershell.svg
-            text: Azure PowerShell
-            href: /azure/storage/blobs/storage-blob-event-quickstart-powershell?toc=%2fazure%2fevent-grid%2ftoc.json
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Olaylara yanıt veren uygulamaları geliştirmeyi öğrenin.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/event-grid/monitor-virtual-machine-changes-event-grid-logic-app">Logic Apps ile sanal makinelerde yapılan değişiklikleri izleme</a>
-          - html: <a href="/azure/event-grid/resize-images-on-storage-blob-upload-event">Karşıya yüklenen görüntüleri yeniden boyutlandırma</a>
-          - html: <a href="/azure/event-grid/ensure-tags-exists-on-new-virtual-machines">Azure Otomasyonu’nu Event Grid ile tümleştirme</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Hizmetlerinizin arasında gevşek bir bağlantı oluşturmak için Azure'da bir mesajlaşma modeli seçme
-            href: /learn/modules/choose-a-messaging-model-in-azure-to-connect-your-services/
-            image:
-              src: /learn/achievements/choose-a-messaging-model-in-azure-to-connect-your-services.svg
-              href: /learn/modules/choose-a-messaging-model-in-azure-to-connect-your-services/
-      - type: paragraph
-        text: <a href="/learn/browse/?products=azure-event-grid">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/cli/azure/eventgrid">Azure CLI</a></p><p><a href="/powershell/module/az.eventgrid">PowerShell</a></p>
-          - title: REST API'leri
-            html: <p><a href="/rest/api/eventgrid">REST</a></p>
-          - title: Şemalar
-            html: <p><a href="/azure/event-grid/subscription-creation-schema ">Abonelik Şeması</a></p><p><a href="/azure/event-grid/event-schema">Olay Şeması</a></p>
+  ms.collection: collection
+  author: spelluru
+  ms.author: spelluru
+  ms.date: 09/06/2019
+  ms.openlocfilehash: b03b1b385a2d30376d6e9a0359b4ead95236d709
+  ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/19/2019
+  ms.locfileid: "74169248"
+landingContent:
+- title: Event Grid Hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Event Grid nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Event Grid kavramları
+      url: concepts.md
+    - text: Olay kaynakları
+      url: event-sources.md
+    - text: Olay işleyicileri
+      url: event-handlers.md
+    - text: Olay filtreleri
+      url: event-filtering.md
+- title: Senaryolar
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Blob depolama olaylarını bir web uç noktasına yönlendirme
+      url: blob-event-quickstart-portal.md
+    - text: Olay işleyicisi olarak Azure İşlevleri
+      url: custom-event-to-function.md
+    - text: Olay işleyicisi olarak kuyruk depolama
+      url: custom-event-to-queue-storage.md
+    - text: Olay işleyicisi olarak Event Hubs
+      url: custom-event-to-eventhub.md
+    - text: Özel olayları bir web uç noktasına yönlendirme
+      url: custom-event-quickstart-portal.md
+    - text: Özel kapsayıcı kayıt defterinden olayları gönderme
+      url: ../container-registry/container-registry-event-grid-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json
+  - linkListType: tutorial
+    links:
+    - text: VM değiştiğinde e-posta gönderme
+      url: monitor-virtual-machine-changes-event-grid-logic-app.md
+    - text: Karşıya yüklenen görüntüleri yeniden boyutlandırma
+      url: resize-images-on-storage-blob-upload-event.md
+    - text: Otomasyon runbook tetikleme
+      url: ensure-tags-exists-on-new-virtual-machines.md
+    - text: IoT Hub cihazı eklendiğinde e-posta gönderme
+      url: publish-iot-hub-events-to-logic-apps.md
+    - text: Service Bus olaylarını yanıtlama
+      url: ../service-bus-messaging/service-bus-to-event-grid-integration-example.md?toc=%2fazure%2fevent-grid%2ftoc.json
+    - text: Event Hubs’dan veri akışı sağlama
+      url: event-grid-event-hubs-integration.md
+    - text: Media Services olaylarını yönlendirme
+      url: ..//media-services/latest/job-state-events-cli-how-to.md?toc=%2fazure%2fevent-grid%2ftoc.json
+    - text: Karma Bağlantılara yönlendirme
+      url: custom-event-to-hybrid-connection.md
+- title: Gelişmiş kavramlar
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Güvenlik ve kimlik doğrulaması
+      url: security-authentication.md
+    - text: Teslim ve yeniden deneme
+      url: delivery-and-retry.md
+    - text: Olay etki alanları
+      url: event-domains.md
+    - text: Coğrafi olağanüstü durum kurtarma
+      url: geo-disaster-recovery.md
+- title: Özelleştirmeler
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Özel olayları web uç noktasına yönlendirme
+      url: custom-event-quickstart-portal.md
+  - linkListType: how-to-guide
+    links:
+    - text: Özel konu oluşturma
+      url: scripts/event-grid-cli-create-custom-topic.md
+    - text: Özel konuya abone olma
+      url: scripts/event-grid-cli-subscribe-custom-topic.md
+    - text: Özel konuya gönderme
+      url: post-to-custom-topic.md
+    - text: Özel alanları Event Grid şemasına eşleme
+      url: input-mappings.md

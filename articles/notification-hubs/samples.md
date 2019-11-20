@@ -1,25 +1,27 @@
 ---
-title: Azure Notification hubs'ı örnekleri
-description: Kullanılabilir Azure Notification Hubs SDK'ları listesi
+title: Azure Notification Hubs örnekleri
+description: Kullanılabilir Azure Notification Hubs SDK 'larının listesi
 services: notification-hubs
 documentationcenter: ''
-author: jwargo
-manager: patniko
-editor: spelluru
+author: sethmanheim
+manager: femila
+editor: jwargo
 ms.service: notification-hubs
 ms.workload: mobile
 ms.topic: article
-ms.author: jowargo
 ms.date: 03/28/2019
-ms.openlocfilehash: 1d035513418147b8fae1d8e2f217d20d19f02f2e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 03/28/2019
+ms.openlocfilehash: 5c7c2b073d0684d908b677d3dda1586f6baa8f61
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60559934"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71213313"
 ---
-# <a name="azure-notification-hubs-samples"></a>Azure Notification hubs'ı örnekleri
-Bu makalede, Azure Notification Hubs'ın temel özelliklerini gösteren örneklere bağlantılar sağlar.
+# <a name="azure-notification-hubs-samples"></a>Azure Notification Hubs örnekleri
+Bu makalede, Azure Notification Hubs 'da önemli özellikleri gösteren örneklere bağlantılar sağlanmaktadır.
 
 ## <a name="samples"></a>Örnekler
 
@@ -30,4 +32,4 @@ Bu makalede, Azure Notification Hubs'ın temel özelliklerini gösteren örnekle
 - [iOS](https://github.com/Azure/azure-notificationhubs-ios/tree/master/Samples)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Öğreticilerde bkz **öğreticiler** İçindekiler (TOC) bölümü.
+İçindekiler tablosunun (TOC) **öğreticiler** bölümünde öğreticiler bölümüne bakın.

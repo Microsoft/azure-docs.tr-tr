@@ -4,24 +4,24 @@ ms.service: dns
 ms.topic: include
 ms.date: 11/25/2018
 ms.author: victorh
-ms.openlocfilehash: f7fa018225d82e2db4a3c51b333aea6fcb9a1514
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 261ae22348cd82b129727261c619727917e19c96
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67189001"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73832043"
 ---
 ### <a name="record-names"></a>Kayıt adları
 
-Azure DNS’de, kayıtlar göreli adlar kullanılarak belirtilir. *Tam* etki alanı adında (FQDN) bölge adı varken *göreli* adda bu yoktur. Örneğin, "contoso.com" bölgesindeki "www" göreli kayıt adı "www.contoso.com" tam kayıt adını verir.
+Azure DNS’de, kayıtlar göreli adlar kullanılarak belirtilir. *Tam* etki alanı adında (FQDN) bölge adı varken *göreli* adda bu yoktur. Örneğin, `www` göreli kayıt adı bölge `contoso.com`, `www.contoso.com`tam kayıt adını verir.
 
-*Tepe* kaydı, bir DNS bölgesinin kökündeki (veya *tepesindeki*) DNS kaydıdır. Örneğin "contoso.com" DNS bölgesinde tepe kaydı aynı zamanda "contoso.com" tam ada sahiptir (buna bazen *çıplak* etki alanı da denir).  Kural, göreli adı olarak '\@' tepe kayıtlarını göstermek için kullanılır.
+*Tepe* kaydı, bir DNS bölgesinin kökündeki (veya *tepesindeki*) DNS kaydıdır. Örneğin, DNS bölgesinde `contoso.com`, bir tepesinde kaydı da `contoso.com` tam ada sahiptir (buna bazen *çıplak* etki alanı denir).  Kurala göre, '\@' göreli adı tepesinde kayıtlarını temsil etmek için kullanılır.
 
 ### <a name="record-types"></a>Kayıt türleri
 
 Her DNS kaydında bir ad ve bir tür vardır. Kayıtlar, içerdikleri verilere göre çeşitli türlerde düzenlenmiştir. En yaygın tür olan "A" kaydı bir adı bir IPv4 adresiyle eşleştirir. Başka bir sık kullanılan tür olan "MX" kaydıysa bir adı bir posta sunucusuyla eşleştirir.
 
-Azure DNS tüm yaygın DNS kayıt türlerini destekler: A, AAAA, CAA, CNAME, MX, NS, PTR, SOA, SRV ve TXT. [SPF kayıtlarının TXT kaydı kullanılarak gösterildiğini](../articles/dns/dns-zones-records.md#spf-records) unutmayın.
+Azure DNS, tüm ortak DNS kayıt türlerini destekler: A, AAAA, CAA, CNAME, MX, NS, PTR, SOA, SRV ve TXT. [SPF kayıtlarının TXT kaydı kullanılarak gösterildiğini](../articles/dns/dns-zones-records.md#spf-records) unutmayın.
 
 ### <a name="record-sets"></a>Kayıt kümeleri
 

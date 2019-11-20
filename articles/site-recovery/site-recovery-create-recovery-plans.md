@@ -1,96 +1,95 @@
 ---
-title: Oluşturma ve Azure Site Recovery ile olağanüstü durum kurtarma için kurtarma planlarını özelleştirme | Microsoft Docs
-description: Oluşturma ve Azure Site Recovery hizmetini kullanarak olağanüstü durum kurtarma için kurtarma planları özelleştirme hakkında bilgi edinin.
+title: Azure Site Recovery kurtarma planlarını oluşturma/özelleştirme
+description: Azure Site Recovery hizmetini kullanarak olağanüstü durum kurtarma için kurtarma planları oluşturmayı ve özelleştirmeyi öğrenin.
 author: rayne-wiselman
 manager: carmonm
-services: site-recovery
 ms.service: site-recovery
 ms.topic: article
-ms.date: 05/30/2019
+ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: 866374df7d3a6973cfc5995afd5cc3c4b0145c48
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9bb5a1a3aa0c2a4681ddecb5e20df41d481755ec
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66399995"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084518"
 ---
-# <a name="create-and-customize-recovery-plans"></a>Oluşturma ve kurtarma planlarını özelleştirme
+# <a name="create-and-customize-recovery-plans"></a>Kurtarma planlarını oluşturma ve özelleştirme
 
-Bu makalede oluşturma ve bir kurtarma planındaki özelleştirme [Azure Site Recovery](site-recovery-overview.md). Başlamadan önce [daha fazla bilgi edinin](recovery-plan-overview.md) kurtarma planları hakkında.
+Bu makalede, [Azure Site Recovery](site-recovery-overview.md)' de bir kurtarma planının nasıl oluşturulacağı ve özelleştirileceği açıklanır. Başlamadan önce, kurtarma planları hakkında [daha fazla bilgi edinin](recovery-plan-overview.md) .
 
 ## <a name="create-a-recovery-plan"></a>Kurtarma planı oluşturma
 
-1. Kurtarma Hizmetleri Kasası'nda seçin **kurtarma planları (Site Recovery)**  >  **+ kurtarma planı**.
-2. İçinde **kurtarma planı oluştur**, plan için bir ad belirtin.
-3. Kaynak ve hedef makinelerde plana göre seçip **Resource Manager** dağıtım modeli için. Kaynak konumu makineler yük devretme ve kurtarma için etkinleştirilmiş olması gerekir. 
+1. Kurtarma Hizmetleri kasasında **kurtarma planları (Site Recovery)**  >  **+ kurtarma planı**' nı seçin.
+2. **Kurtarma planı oluştur**' da plan için bir ad belirtin.
+3. Plandaki makinelere göre bir kaynak ve hedef seçin ve dağıtım modeli için **Kaynak Yöneticisi** ' yi seçin. Kaynak konumu, yük devretme ve kurtarma için etkinleştirilen makinelere sahip olmalıdır. 
 
    **Yük devretme** | **Kaynak** | **Hedef** 
    --- | --- | ---
    Azure-Azure arası | Azure bölgesi |Azure bölgesi
-   Vmware'den azure'a | Yapılandırma sunucusu | Azure
-   Fiziksel makineleri azure'a | Yapılandırma sunucusu | Azure   
-   Azure'a VMM tarafından yönetilen Hyper-V  | VMM görünen adı | Azure
-   Azure'a VMM olmadan Hyper-V | Hyper-V site adı | Azure
-   VMM'den VMM'e |VMM kolay adı | VMM görünen adı 
+   VMware 'den Azure 'a | Yapılandırma Sunucusu | Azure
+   Fiziksel makineleri Azure 'a | Yapılandırma Sunucusu | Azure   
+   VMM tarafından Azure 'a yönetilen Hyper-V  | VMM görünen adı | Azure
+   VMM 'den Azure 'a Hyper-V | Hyper-V site adı | Azure
+   VMM 'den VMM 'ye |VMM kolay adı | VMM görünen adı 
 
    > [!NOTE]
-   > Bir kurtarma planı ile aynı kaynak ve hedef makine içerebilir. VMware ve VMM tarafından yönetilen Hyper-V Vm'lerini aynı plana olamaz. VMware Vm'leri ve fiziksel sunucuları aynı planında, kaynağın bir yapılandırma sunucusu olduğu olabilir.
+   > Bir kurtarma planı aynı kaynak ve hedefe sahip makineler içerebilir. VMM tarafından yönetilen VMware ve Hyper-V VM 'Leri aynı planda olamaz. VMware VM 'Leri ve fiziksel sunucular, kaynağın bir yapılandırma sunucusu olduğu planda olabilir.
 
-2. İçinde **seçin, sanal makineler öğelerini**, plana eklemek istediğiniz makineleri (veya çoğaltma grubunu) seçin. Daha sonra, **Tamam**'a tıklayın.
-    - Makineler, varsayılan grup (Grup 1) plana eklenir. Yük devretme işleminden sonra bu gruptaki tüm makinelerin aynı anda başlatın.
-    - Yalnızca makineleri seçebilirsiniz, belirtilen kaynak ve hedef konumların de. 
-1. Tıklayın **Tamam** planı oluşturun.
+2. **Öğe seçin sanal makineler**bölümünde, plana eklemek istediğiniz makineleri (veya çoğaltma grubunu) seçin. Daha sonra, **Tamam**'a tıklayın.
+    - Makineler, planda varsayılan grup (Grup 1) olarak eklenir. Yük devretmeden sonra, bu gruptaki tüm makineler aynı anda başlatılır.
+    - Yalnızca belirttiğiniz kaynak ve hedef konumlarda makineler seçebilirsiniz. 
+1. Planı oluşturmak için **Tamam** ' ı tıklatın.
 
-## <a name="add-a-group-to-a-plan"></a>Bir plana bir grubu Ekle
+## <a name="add-a-group-to-a-plan"></a>Plana grup ekleme
 
-Ek grupları oluşturun ve bu makine, farklı gruplara ekleyebilirsiniz, böylece bir grubu tarafından temelinde farklı davranış belirtebilirsiniz. Örneğin, bir gruptaki makinelerin yük devretme işleminden sonra Başlat veya grup başına özelleştirilmiş eylemleri belirtin, belirtebilirsiniz.
+Grup grubu temelinde farklı davranışlar belirleyebilmeniz için ek gruplar oluşturur ve farklı gruplara makineler eklersiniz. Örneğin, bir gruptaki makinelerin yük devretmeden sonra ne zaman başlaması gerektiğini belirtebilir veya grup başına özelleştirilmiş eylemleri belirtebilirsiniz.
 
-1. İçinde **kurtarma planları**, plan sağ tıklayın > **Özelleştir**. Varsayılan olarak, bir plan oluşturduktan sonra tüm ona eklediğiniz makineleri varsayılan Grup 1 bulunur.
-2. Tıklayın **+ grup**. Varsayılan olarak yeni bir grup eklenmiş sırada numaralandırılmıştır. En fazla yedi grubunuz olabilir.
-3. Yeni grubuna taşımak için istediğiniz makineyi seçin **grubu Değiştir**ve ardından yeni grubu seçin. Alternatif olarak, grup adına sağ tıklayın > **korumalı öğesi**, makineleri gruba ekleyin. Bir makine ya da çoğaltma grubu yalnızca bir kurtarma planında bir gruba ait olabilir.
+1. **Kurtarma planları**' nda plana sağ tıklayın > **özelleştirin**. Varsayılan olarak, bir plan oluşturduktan sonra, ona eklediğiniz tüm makineler varsayılan Grup 1 ' de bulunur.
+2. **+ Grup**' a tıklayın. Varsayılan olarak, yeni bir grup eklendiği sırada numaralandırılır. En fazla yedi grup olabilir.
+3. Yeni gruba taşımak istediğiniz makineyi seçin, **grubu Değiştir**' e tıklayın ve ardından yeni Grup ' u seçin. Alternatif olarak, **korunan öğe**> Grup adına sağ tıklayın ve gruba makine ekleyin. Bir makine veya çoğaltma grubu, bir kurtarma planında yalnızca bir gruba ait olabilir.
 
 
-## <a name="add-a-script-or-manual-action"></a>Bir betik veya el ile eylemi ekleme
+## <a name="add-a-script-or-manual-action"></a>Betik veya el ile eylem ekleme
 
-Bir kurtarma planı betiği veya el ile gerçekleştirilen eylem ekleyerek özelleştirebilirsiniz. Aşağıdakilere dikkat edin:
+Bir komut dosyası veya el ile eylem ekleyerek bir kurtarma planını özelleştirebilirsiniz. Şunlara dikkat edin:
 
-- Azure'a çoğaltma yapıyorsanız, kurtarma planına Azure Otomasyonu runbook'ları tümleştirebilirsiniz. [Daha fazla bilgi edinin](site-recovery-runbook-automation.md).
-- System Center VMM tarafından yönetilen Hyper-V Vm'lerini çoğaltma yapıyorsanız şirket içi VMM sunucusunda bir komut dosyası oluşturabilir ve kurtarma planında içerir.
-- Bir betik eklediğinizde, yeni bir grubu için Eylemler ekler. Örneğin, grubu 1 öncesi adımları adıyla oluşturulur *Grup 1: önceki adımlar*. Önceki tüm adımlar bu kümesi içinde listelenir. Dağıtılan bir VMM sunucusu varsa, birincil sitedeki bir komut dosyası ekleyebilirsiniz.
-- Kurtarma planında çalıştığında el ile gerçekleştirilen bir eylem eklerseniz, el ile gerçekleştirilen eylem yerleştirdiğiniz noktada durdurur. Bir iletişim kutusu el ile gerçekleştirilen eylem tamamlandığını belirtmenizi ister.
-- VMM sunucusunda bir komut dosyası oluşturmak için yönergeleri izleyin. [bu makalede](hyper-v-vmm-recovery-script.md).
-- Betikleri ikincil siteye yük devretme sırasında ve yeniden çalışma sırasında ikincil siteden birincil siteye uygulanabilir. Destek çoğaltma senaryonuza bağlıdır:
+- Azure 'a çoğaltma yapıyorsanız, Azure Otomasyonu runbook 'larını kurtarma planınızla tümleştirebilirsiniz. [Daha fazla bilgi edinin](site-recovery-runbook-automation.md).
+- System Center VMM tarafından yönetilen Hyper-V VM 'lerini çoğaltırken, şirket içi VMM sunucusunda bir betik oluşturabilir ve kurtarma planına ekleyebilirsiniz.
+- Bir komut dosyası eklediğinizde, grup için yeni bir eylem kümesi ekler. Örneğin, Grup 1 için bir ön adım kümesi, ad *grubu 1 ile oluşturulur: ön adımlar*. Tüm ön adımlar bu küme içinde listelenmiştir. Birincil siteye yalnızca dağıtılan bir VMM sunucusu varsa, bir komut dosyası ekleyebilirsiniz.
+- El ile eylem eklerseniz, kurtarma planı çalıştırıldığında, el ile gerçekleştirilen eylemi eklediğiniz noktada duraklar. Bir iletişim kutusu, el ile gerçekleştirilen eylemin tamamlandığını belirtmenizi ister.
+- VMM sunucusunda bir betik oluşturmak için [Bu makaledeki](hyper-v-vmm-recovery-script.md)yönergeleri izleyin.
+- Betikler ikincil siteye yük devretme sırasında ve ikincil siteden birincil konuma yeniden çalışma sırasında uygulanabilir. Destek, çoğaltma senaryonuza bağlıdır:
     
     **Senaryo** | **Yük devretme** | **İlk duruma döndürme**
     --- | --- | --- 
     Azure-Azure arası  | Runbook | Runbook
     Vmware’den Azure’a | Runbook | NA 
-    Azure'a VMM ile Hyper-V | Runbook | Komut Dosyası
+    VMM 'den Azure 'a Hyper-V | Runbook | Betik
     Azure'da Hyper-V sitesi | Runbook | NA
-    İkincil VMM VMM'ye | Komut Dosyası | Komut Dosyası
+    VMM 'den ikincil VMM 'ye | Betik | Betik
 
-1. Kurtarma planında hangi eylemi eklenmelidir ve eylemi ne zaman gerçekleşmesi gerektiğini belirtin. Adım'a tıklayın:
-    1. Gruptaki makinelerin yük devretme sonrasında, select başlamadan gerçekleşecek eylemi istiyorsanız **ön Eylem Ekle**.
-    1. Makine grubu başlangıç sonra Yük devretme işleminden sonra gerçekleşecek şekilde eylem istiyorsanız belirleyin **sonraki eylem Ekle**. Eylemin konumuna taşımak, seçmek **Yukarı Taşı** veya **Aşağı Taşı** düğmeleri.
-2. İçinde **Ekle eylemini**seçin **betik** veya **el ile gerçekleştirilen eylem**.
-3. El ile gerçekleştirilen bir eylem eklemek istiyorsanız, aşağıdakileri yapın:
-    1. Eylem için bir ad yazın ve eylem yönergeleri yazın. Yük devretme çalıştıran kişinin, bu yönergeler karşınıza çıkar.
-    1. Tüm türleri (Test, yük devretme, (uygunsa) planlı yük devretme) yük devretme için el ile gerçekleştirilen eylem eklemek isteyip istemediğinizi belirtin. Daha sonra, **Tamam**'a tıklayın.
-4. Bir komut dosyası eklemek istiyorsanız, aşağıdakileri yapın:
-    1. VMM komut ekliyorsanız seçin **yük devretme VMM betiği**hem de **betik yolu** paylaşımına göreli yolunu yazın. Örneğin, paylaşım, bulunuyorsa \\ \<VMMServerName > \MSSCVMMLibrary\RPScripts, yolu belirtin: \RPScripts\RPScript.PS1.
-    1. Kitap çalıştıran bir Azure Otomasyonu ekliyorsanız belirtin **Azure Otomasyonu hesabı** , runbook bulunur ve uygun seçin **Azure Runbook betiği**.
-5. Kurtarma planı betiği beklendiği gibi çalıştığından emin olmak için bir yük devretme çalıştırın.
+1. Kurtarma planında, eylemin eklenmesi gereken adıma tıklayın ve eylemin ne zaman gerçekleşmesi gerektiğini belirtin:
+    1. Eylemin yük devretmeden sonra gruptaki makineler başlatılmadan önce gerçekleşmesini istiyorsanız, **ön eylem Ekle**' yi seçin.
+    1. İşlemin yük devretmeden sonra başlatılacak olan makineler sonrasında gerçekleşmesini istiyorsanız, **gönderme eylemi Ekle**' yi seçin. Eylemin konumunu taşımak için **Yukarı taşı** veya **aşağı taşı** düğmelerini seçin.
+2. **Ekle eyleminde** **betik** veya **el ile eylem**' i seçin.
+3. El ile eylem eklemek istiyorsanız, aşağıdakileri yapın:
+    1. Eylem için bir ad yazın ve eylem yönergeleri yazın. Yük devretmeyi çalıştıran kişi bu yönergeleri görür.
+    1. Tüm yük devretme türleri için el ile eylem eklemek isteyip istemediğinizi belirtin (test, yük devretme, planlı yük devretme (ilgiliyse)). Daha sonra, **Tamam**'a tıklayın.
+4. Bir betik eklemek istiyorsanız, aşağıdakileri yapın:
+    1. VMM betiği ekliyorsanız, **VMM betiğine yük devretme**' yı seçin ve **betik yolu** ' nda, paylaşımın göreli yolunu yazın. Örneğin, paylaşım \\\<VMMServerName > \MSSCVMMLibrary\RPScripts yolunda bulunuyorsa, şu yolu belirtin: \Rpscripts\rpscript.exe. ps1.
+    1. Bir Azure Otomasyonu çalıştırma defteri ekliyorsanız, runbook 'un bulunduğu **Azure Otomasyonu hesabını** belirtin ve uygun **Azure runbook betiğini**seçin.
+5. Komut dosyasının beklendiği gibi çalıştığından emin olmak için kurtarma planının test yük devretmesini çalıştırın.
 
 ## <a name="watch-a-video"></a>Bir video izleyin
 
-Bir kurtarma planı oluşturmak nasıl gösteren bir video izleyin.
+Bir kurtarma planının nasıl oluşturulacağını gösteren bir video izleyin.
 
 
 > [!VIDEO https://www.youtube.com/embed/1KUVdtvGqw8]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi edinin [devretme testlerini çalıştırma](site-recovery-failover.md).  
+[Yük devretme çalıştırma](site-recovery-failover.md)hakkında daha fazla bilgi edinin.  
 
     

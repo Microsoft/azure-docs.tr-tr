@@ -1,64 +1,58 @@
 ---
-title: Kullanıcı bağlamı kimlikleri kullanımını etkinleştirmek için Azure Application Insights'ta deneyimleri gönderme | Microsoft Docs
-description: Bunların her biri benzersiz, kalıcı bir kimlik dizesi Application ınsights'ta atayarak hizmetinizi kullanıcıları nasıl taşımak izleyin.
-services: application-insights
-documentationcenter: ''
-author: NumberByColors
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
-ms.devlang: csharp
+title: Azure Application Insights kullanım deneyimlerini etkinleştirmek için Kullanıcı bağlamı kimlikleri gönderin | Microsoft Docs
+description: Kullanıcıların Application Insights ' de benzersiz, kalıcı bir KIMLIK dizesi atayarak hizmetinize nasıl geçiş yapıldığını izleyin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: NumberByColors
+ms.author: daviste
 ms.date: 01/03/2019
 ms.reviewer: abgreg;mbullwin
-ms.pm_owner: daviste;NumberByColors
-ms.author: daviste
-ms.openlocfilehash: 7c458867b89a76a2f19bbd632c8a884c629f5765
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b105e8ba79e99be02420ca1821f6a080b0862d6f
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60371844"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73887405"
 ---
-# <a name="send-user-context-ids-to-enable-usage-experiences-in-azure-application-insights"></a>Azure Application ınsights'ta kullanım deneyimlerini etkinleştirmelerine olanak kimlikleri kullanıcı bağlamı gönderme
+# <a name="send-user-context-ids-to-enable-usage-experiences-in-azure-application-insights"></a>Azure Application Insights kullanım deneyimlerini etkinleştirmek için Kullanıcı bağlamı kimlikleri gönderin
 
-## <a name="tracking-users"></a>Kullanıcılar izleme
+## <a name="tracking-users"></a>Kullanıcıları izleme
 
-Application Insights izlemek ve ürün kullanım araçlar kümesi yoluyla kullanıcılarınıza izlemenize olanak sağlar:
+Application Insights, bir ürün kullanım araçları kümesi aracılığıyla kullanıcılarınızı izlemenizi ve izlemenizi sağlar:
 
 - [Kullanıcılar, Oturumlar, Etkinlikler](https://docs.microsoft.com/azure/application-insights/app-insights-usage-segmentation)
 - [Huniler](https://docs.microsoft.com/azure/application-insights/usage-funnels)
 - [Bekletme](https://docs.microsoft.com/azure/application-insights/app-insights-usage-retention) Kohortlar
 - [Çalışma kitapları](https://docs.microsoft.com/azure/application-insights/app-insights-usage-workbooks)
 
-Zaman içinde bir kullanıcı ne yaptığını izlemek için her bir kullanıcı veya oturum için Application Insights bir kimliği gerekir. Aşağıdaki kimlikler her özel olay veya sayfa görünümünde içerir.
+Kullanıcının zaman içinde ne yaptığını izlemek için, Application Insights her kullanıcı veya oturum için bir KIMLIĞE ihtiyaç duyuyor. Aşağıdaki kimlikleri her özel olay veya sayfa görünümüne ekleyin.
 
-- Kullanıcılar, Huniler, bekletme ve Kohortlar: Kullanıcı kimliğini içerir
-- Oturumlar: Oturum kimliği Ekle
+- Kullanıcılar, komik, bekletme ve Cohorts: kullanıcı KIMLIĞINI Içerir.
+- Oturumlar: oturum KIMLIĞINI dahil et.
 
 > [!NOTE]
-> Bu, kullanıcı etkinliği Application Insights ile izleme için manuel adımlar anahat oluşturma, Gelişmiş bir makaledir. Birçok web uygulamalarıyla **adımları gerekli olmayabilir**, varsayılan sunucu tarafı olarak SDK'ları ile birlikte [tarayıcı/istemci-tarafı JavaScript SDK'sı](../../azure-monitor/app/website-monitoring.md ), genellikle otomatik olarak izlemek yeterli olur kullanıcı etkinliği. Yapılandırmadıysanız, [istemci-tarafı izleme](../../azure-monitor/app/website-monitoring.md ) sunucu tarafı SDK'sı ek olarak, öncelikle bunu ve kullanıcı davranış analizi araçları beklendiği gibi işlemi yapıyorsanız görmek için test edin.
+> Bu, Kullanıcı etkinliğini Application Insights ile izlemeye yönelik el ile yapılan adımların ana hattı olan gelişmiş bir makaledir. Birçok **Web uygulaması ile,** [istemci/tarayıcı tarafı JavaScript SDK 'sı](../../azure-monitor/app/website-monitoring.md )ile birlikte varsayılan sunucu tarafı SDK 'ları, Kullanıcı etkinliğini otomatik olarak izlemek için genellikle yeterlidir. Sunucu tarafı SDK 'ya ek olarak [istemci tarafı izlemeyi](../../azure-monitor/app/website-monitoring.md ) yapılandırmadıysanız, önce bunu yapın ve Kullanıcı davranışı analiz araçlarının beklendiği gibi olup olmadığını görmek için test edin.
 
 ## <a name="choosing-user-ids"></a>Kullanıcı kimliklerini seçme
 
-Kullanıcı kimliklerini kullanıcıları zaman içinde nasıl davranacağını izlemek için kullanıcı oturumları arasında kalıcı olması. Kimliği kalıcı hale getirmeniz için çeşitli yaklaşımlar bulunmaktadır.
+Kullanıcı kimlikleri, kullanıcıların zaman içinde nasıl davrandığını izlemek için kullanıcı oturumlarında kalıcı hale gelmelidir. KIMLIĞI kalıcı hale getirme için çeşitli yaklaşımlar vardır.
 
-- Zaten sahip olduğunuz hizmetinizde kullanıcı tanımı.
-- Hizmet, bir tarayıcı erişimi varsa, bu tarayıcı bir tanımlama bilgisi kimliği içine geçirebilirsiniz. Tanımlama bilgisi kullanıcının tarayıcısında kaldığı sürece kimliği için açık kalır.
-- Gerekirse, yeni bir kimliği her oturumda kullanabilirsiniz, ancak kullanıcılar hakkında sonuçları sınırlı olacaktır. Örneğin, bir kullanıcının davranışını zamanla nasıl değiştiğini görmek mümkün olmayacaktır.
+- Hizmetinize zaten sahip olduğunuz bir kullanıcının tanımı.
+- Hizmetin bir tarayıcıya erişimi varsa, tarayıcıya bir kimliğe sahip bir kimlik bilgisi gönderebilir. Tanımlama bilgisi kullanıcının tarayıcısında kaldığı sürece KIMLIĞI devam edecektir.
+- Gerekirse, her oturum için yeni bir KIMLIK kullanabilirsiniz, ancak kullanıcıların sonuçları sınırlı olacaktır. Örneğin, bir kullanıcının davranışının zaman içinde nasıl değiştiği hakkında bilgi sahibi olmayacaktır.
 
-Kimliği bir GUID veya başka bir dize yeterince karmaşık her kullanıcıyı benzersiz şekilde tanımlamak için olmalıdır. Örneğin, uzun rastgele bir sayı olabilir.
+KIMLIK, her kullanıcıyı benzersiz bir şekilde tanımlamak için yeterince karmaşık bir GUID veya bir dize olmalıdır. Örneğin, bu uzun bir rastgele sayı olabilir.
 
-Kimliği kullanıcıyla ilgili kişisel tanımlama bilgileri içeriyorsa, bu Application ınsights'ı bir kullanıcı kimliği olarak göndermek için uygun bir değer değil Böyle bir kimlik olarak gönderdiğiniz bir [kimliği doğrulanmış kullanıcı kimliği](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#authenticated-users), ancak kullanım senaryoları için kullanıcı kimliği gereksinimi karşılamıyordur.
+KIMLIK, kullanıcı hakkındaki kişisel tanımlama bilgilerini içeriyorsa, Kullanıcı KIMLIĞI olarak Application Insights göndermek için uygun bir değer değildir. Bu tür bir KIMLIĞI kimliği [doğrulanmış bir kullanıcı kimliği](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#authenticated-users)olarak gönderebilirsiniz, ancak kullanım senaryoları IÇIN Kullanıcı kimliği gereksinimini karşılamaz.
 
-## <a name="aspnet-apps-setting-the-user-context-in-an-itelemetryinitializer"></a>ASP.NET uygulamaları: Kullanıcı bağlamı içinde bir ITelemetryInitializer ayarlama
+## <a name="aspnet-apps-setting-the-user-context-in-an-itelemetryinitializer"></a>ASP.NET Apps: bir ılemetrybaşlatıcısında kullanıcı bağlamını ayarlama
 
-Ayrıntılı olarak açıklandığı bir telemetri Başlatıcısı oluşturma [burada](https://docs.microsoft.com/azure/application-insights/app-insights-api-filtering-sampling#add-properties-itelemetryinitializer). Oturum kimliği istek telemetrisi aracılığıyla geçirin ve Context.User.Id Context.Session.Id ayarlayın.
+[Burada](https://docs.microsoft.com/azure/application-insights/app-insights-api-filtering-sampling#addmodify-properties-itelemetryinitializer)ayrıntılı olarak açıklandığı gibi bir telemetri başlatıcısı oluşturun. İstek telemetrisi aracılığıyla oturum KIMLIĞINI geçirin ve Context.User.Id ve Context.Session.Id ayarlayın.
 
-Bu örnek, süresi dolan sonra oturumun tanımlayıcı kullanıcı Kimliğini ayarlar. Mümkünse, oturumu arasında kalıcıdır bir kullanıcı kimliği kullanın.
+Bu örnek, kullanıcı KIMLIĞINI oturum sonrasında süresi dolan bir tanımlayıcıya ayarlar. Mümkünse, oturumlar arasında devam eden bir kullanıcı KIMLIĞI kullanın.
 
-### <a name="telemetry-initializer"></a>Telemetri başlatıcısını
+### <a name="telemetry-initializer"></a>Telemetri başlatıcısı
 
 ```csharp
 using System;
@@ -136,8 +130,8 @@ namespace MvcWebRole.Telemetry
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kullanım deneyimlerini etkinleştirmek için göndermeye başlayın [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views).
-- Özel olay veya sayfa görüntülemesi zaten gönderirseniz, kullanıcıların hizmetinizin nasıl öğrenmek için kullanım araçları keşfedin.
+- Kullanım deneyimlerini etkinleştirmek için [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views)göndermeye başlayın.
+- Özel olayları veya sayfa görünümlerini zaten gönderirseniz, kullanıcıların hizmetinizi nasıl kullandığını öğrenmek için kullanım araçları ' nı araştırın.
     - [Kullanıma genel bakış](usage-overview.md)
     - [Kullanıcılar, Oturumlar ve Etkinlikler](usage-segmentation.md)
     - [Huniler](usage-funnels.md)

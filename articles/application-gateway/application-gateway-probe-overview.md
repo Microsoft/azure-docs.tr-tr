@@ -1,48 +1,47 @@
 ---
-title: İzlemeye genel bakış için Azure Application Gateway durumu
-description: Azure Application Gateway izleme özellikleri hakkında bilgi edinin
+title: Azure Application Gateway için durum izlemeye genel bakış
+description: Azure Application Gateway, arka uç havuzundaki tüm kaynakların sistem durumunu izler ve havuzdan sağlıksız olarak kabul edilen kaynakları otomatik olarak kaldırır.
 services: application-gateway
 author: vhorne
-manager: jpconnock
 ms.service: application-gateway
 ms.topic: article
-ms.date: 8/6/2018
+ms.date: 11/16/2019
 ms.author: victorh
-ms.openlocfilehash: d0c425bcb9961fde9fb319991148c18c6a9ff57b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2938665aa0c0a3df66b6ddcfd1c8c5fbc4598319
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66135206"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74130687"
 ---
-# <a name="application-gateway-health-monitoring-overview"></a>Uygulama ağ geçidi sistem durumu izlemeye genel bakış
+# <a name="application-gateway-health-monitoring-overview"></a>Application Gateway sistem durumu izlemeye genel bakış
 
-Varsayılan olarak Azure Application Gateway, arka uç havuzunda tüm kaynakların izler ve herhangi bir kaynak havuzundan iyi durumda olmadığı kabul otomatik olarak kaldırır. Application Gateway, iyi durumda olmayan örnekler izlemeye devam eder ve kullanılabilir hale gelir ve sistem durumu araştırmaları yanıt sonra bunları sağlıklı arka uç havuzuna ekler. Uygulama ağ geçidi arka uç HTTP Ayarları'nda tanımlanan aynı bağlantı noktası ile sistem durumu araştırmalarının gönderir. Bu yapılandırma, araştırma müşteriler arka ucuna bağlanmak için kullanılmasını aynı bağlantı noktasını sınıyor sağlar.
+Azure Application Gateway, arka uç havuzundaki tüm kaynakların sistem durumunu izler ve havuzdan sağlıksız olarak kabul edilen kaynakları otomatik olarak kaldırır. Application Gateway, sağlıksız örnekleri izlemeye devam eder ve mevcut olduktan sonra sistem durumu araştırmalarını yanıtladıktan sonra yeniden sağlıklı arka uç havuzuna ekler. Application Gateway, arka uç HTTP ayarlarında tanımlanan aynı bağlantı noktasıyla sistem durumu araştırmalarını gönderir. Bu yapılandırma, araştırmanın, müşterilerin arka uca bağlanmak için kullandığı bağlantı noktasını test edilmesini sağlar.
 
-![Uygulama ağ geçidi araştırma örneği][1]
+![Application Gateway araştırma örneği][1]
 
-Varsayılan sistem durumu izleme yoklaması kullanmanın yanı sıra durum yoklaması, uygulamanızın gereksinimlerine uyacak şekilde özelleştirebilirsiniz. Bu makalede, hem varsayılan hem de özel sistem durumu araştırmaları ele alınmaktadır.
+Varsayılan sistem durumu araştırması izlemeyi kullanmanın yanı sıra, sistem durumu araştırmasını uygulamanızın gereksinimlerine uyacak şekilde de özelleştirebilirsiniz. Bu makalede, hem varsayılan hem de özel sistem durumu araştırmaları ele alınmıştır.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="default-health-probe"></a>Varsayılan durum araştırması
+## <a name="default-health-probe"></a>Varsayılan sistem durumu araştırması
 
-Özel araştırma yapılandırmaların ayarlamazsanız, bir uygulama ağ geçidi varsayılan durum araştırması otomatik olarak yapılandırır. Davranış izleme, arka uç havuzu için yapılandırılmış IP adresleri için bir HTTP isteği yaparak çalışır. Arka uç http ayarları, HTTPS için yapılandırılmış olması halinde varsayılan araştırmaları için araştırma de arka uçları durumunu test etmek için HTTPS kullanır.
+Herhangi bir özel araştırma yapılandırması ayarlamazsanız, uygulama ağ geçidi varsayılan bir sistem durumu araştırmasını otomatik olarak yapılandırır. İzleme davranışı, arka uç havuzu için yapılandırılmış IP adreslerine bir HTTP isteği getirerek işe yarar. Varsayılan yoklamalar için arka uç http ayarları HTTPS için yapılandırılmışsa, araştırma arka uçların durumunu test etmek için HTTPS kullanır.
 
-Örneğin: Uygulama ağ geçidinizin bağlantı noktası 80 üzerinde HTTP ağ trafiği almak için arka uç sunucularının A, B ve C kullanmak için yapılandırın. Varsayılan sistem durumu izlemeyi her 30 saniyede sağlıklı bir HTTP yanıtı için üç sunucu sınar. Sağlıklı bir HTTP yanıtı sahip bir [durum kodu](https://msdn.microsoft.com/library/aa287675.aspx) 200 399 arasındaki.
+Örneğin: 80 numaralı bağlantı noktasında HTTP ağ trafiği almak için uygulama ağ geçidinizi A, B ve C arka uç sunucularını kullanacak şekilde yapılandırırsınız. Varsayılan sistem durumu izlemesi, sağlıklı bir HTTP yanıtı için her 30 saniyede bir üç sunucuyu sınar. Sağlıklı bir HTTP yanıtının 200 ile 399 arasında bir [durum kodu](https://msdn.microsoft.com/library/aa287675.aspx) vardır.
 
-Bir sunucu için varsayılan araştırma denetimi başarısız olursa, application gateway, arka uç havuzundan kaldırır ve bu sunucuya giden ağ trafiğini durdurur. Varsayılan araştırma, yine de her 30 saniyede bir sunucu için denetlemeye devam eder. Sunucu varsayılan durum araştırması başarıyla bir isteğe yanıt verdiğinde, bu geri sağlıklı olarak arka uç havuzuna eklenir ve sunucuya yeniden akan trafiği başlatır.
+Sunucu A için varsayılan araştırma denetimi başarısız olursa, Application Gateway onu arka uç havuzundan kaldırır ve ağ trafiği bu sunucuya akar. Varsayılan araştırma, her 30 saniyede bir sunucu denetlemeye devam eder. Sunucu A, varsayılan bir sistem durumu araştırmasının bir isteğine başarıyla yanıt verdiğinde, arka uç havuzuna sağlıklı olarak geri eklenir ve trafik sunucuya yeniden akar.
 
-### <a name="probe-matching"></a>Eşleşen araştırma
+### <a name="probe-matching"></a>Araştırma eşleştirme
 
-Varsayılan olarak, bir HTTP (S) yanıt durum kodu 200 399 arasındaki sağlıklı olarak değerlendirilir. Özel sistem durumu araştırmaları, ayrıca iki eşleştirme ölçütü destekler. Ölçütlerle eşleşen isteğe bağlı olarak sağlıklı bir yanıt nelerden varsayılan yorumlama değiştirmek için kullanılabilir.
+Varsayılan olarak, 200 ve 399 arasındaki durum koduna sahip HTTP (S) yanıtı sağlıklı olarak değerlendirilir. Özel sistem durumu araştırmalarının yanı sıra iki eşleşen ölçüt de desteklenir. Uygun ölçütler, sağlıklı bir yanıtın ne olduğunu belirten varsayılan yorumu isteğe bağlı olarak değiştirmek için kullanılabilir.
 
-Şu ölçütlerle eşleşen: 
+Aşağıdakiler eşleşen ölçütlerdir: 
 
-- **HTTP yanıtı durum kodu eşleşme** - araştırma eşleştirme ölçütü kabul etmek için kullanıcı belirtilen http yanıt kodu veya yanıt kodu aralığı. Virgülle ayrılmış tek bir yanıt durum kodları veya durum kodu aralığı desteklenir.
-- **HTTP yanıt gövdesi eşleşme** - eşleştirme ölçütü HTTP yanıt gövdesinde ve bir eşleşme bakar dizesi belirtilen araştırma. Kullanıcı tarafından belirtilen varlığını yalnızca eşleşme arar, yanıt gövdesi içinde dize ve tam normal ifade eşleştirmesi değildir.
+- **Http yanıt durum kodu eşleşmesi** -Kullanıcı tarafından belirtilen http yanıt kodunu veya yanıt kodu aralıklarını kabul etmek için araştırma eşleştirme ölçütü. Virgülle ayrılmış tek tek yanıt durum kodları veya bir durum kodu aralığı desteklenir.
+- Http yanıt gövdesi **eşleştirmesi** -http yanıt gövdesi ' ne ve Kullanıcı tarafından belirtilen dizeyle eşleşiyor görünen araştırma eşleştirme ölçütü. Eşleşme yalnızca yanıt gövdesinde Kullanıcı tarafından belirtilen dize olup olmadığını arar ve tam bir normal ifade eşleşmesi değildir.
 
-Eşleşme ölçütlerini kullanılarak belirtilebilir `New-AzApplicationGatewayProbeHealthResponseMatch` cmdlet'i.
+`New-AzApplicationGatewayProbeHealthResponseMatch` cmdlet 'i kullanılarak eşleşme ölçütü belirtilebilir.
 
 Örneğin:
 
@@ -50,57 +49,57 @@ Eşleşme ölçütlerini kullanılarak belirtilebilir `New-AzApplicationGatewayP
 $match = New-AzApplicationGatewayProbeHealthResponseMatch -StatusCode 200-399
 $match = New-AzApplicationGatewayProbeHealthResponseMatch -Body "Healthy"
 ```
-Eşleşme ölçütlerini belirtilen sonra bu yapılandırmayı kullanarak araştırma iliştirilebilir bir `-Match` PowerShell parametresi.
+Eşleşme ölçütü belirtildiğinde, PowerShell 'de bir `-Match` parametresi kullanılarak araştırma yapılandırmasına eklenebilir.
 
-### <a name="default-health-probe-settings"></a>Varsayılan durum yoklama ayarları
+### <a name="default-health-probe-settings"></a>Varsayılan durum araştırma ayarları
 
 | Araştırma özelliği | Değer | Açıklama |
 | --- | --- | --- |
-| Araştırma URL'si |http://127.0.0.1:\<port\>/ |URL yolu |
-| Interval |30 |Sonraki durum araştırması önce beklenecek saniye cinsinden süreyi gönderilir.|
-| Zaman aşımı |30 |Süreyi saniye cinsinden, uygulama ağ geçidi araştırma sağlıksız olarak işaretlemek için bir araştırma yanıt bekler. Bir araştırma sağlıklı olarak döndürürse, karşılık gelen arka uç hemen sağlıklı olarak işaretlenir.|
-| Sağlıksız durum eşiği |3 |Kaç yoktur normal durum yoklaması bir arıza durumunda gönderilecek araştırmaları yönetir. Bu ek sistem durumu araştırmaları, sayfayı hızlı bir şekilde arka uç durumunu hızlı bir şekilde belirlemek için gönderilir ve araştırma aralığı için beklemez. Sağlıksız durum eşiği ardışık araştırma hatası sayısı ulaştıktan sonra arka uç sunucu işaretlenir. |
+| Araştırma URL 'SI |http://127.0.0.1:\<port\>/ |URL yolu |
+| Interval |30 |Bir sonraki sistem durumu araştırması gönderilmeden önce beklenecek saniye cinsinden süre.|
+| Zaman aşımı |30 |Uygulama ağ geçidinin araştırmayı sağlıksız olarak işaretlemeden önce yoklama yanıtı için bekleyeceği saniye cinsinden süre. Bir araştırma sağlıklı olarak döndürülürse, ilgili arka uç hemen sağlıklı olarak işaretlenir.|
+| Sağlıksız eşik |3 |Düzenli durum araştırmasının başarısız olması durumunda kaç yoklamanın gönderileceğini yönetir. Bu ek durum araştırmaları, arka ucun hızlı bir şekilde durumunun belirlenmesi için hızlı bir şekilde gönderilir ve araştırma aralığını beklemez. Arka uç sunucusu, ardışık araştırma hatası sayısı uygun olmayan eşiğe ulaştığında aşağı olarak işaretlenir. |
 
 > [!NOTE]
-> Bağlantı noktasını arka uç HTTP ayarları olarak aynı bağlantı noktasıdır.
+> Bağlantı noktası, arka uç HTTP ayarlarıyla aynı bağlantı noktasıdır.
 
-Varsayılan araştırma yalnızca http arar:\//127.0.0.1:\<bağlantı noktası\> sistem durumunu belirlemek için. Bir özel URL'ye gidin veya diğer herhangi bir ayarı değiştirmek için sistem durumu araştırma yapılandırmanız gerekiyorsa, özel araştırmalar kullanmanız gerekir.
+Varsayılan araştırma, sistem durumunu belirlemede yalnızca http:\//127.0.0.1:\<bağlantı noktası\> arar. Sistem durumu araştırmasını özel bir URL 'ye gidecek veya diğer ayarları değiştirecek şekilde yapılandırmanız gerekiyorsa, özel araştırmaları kullanmanız gerekir.
 
-### <a name="probe-intervals"></a>Araştırma aralığı
+### <a name="probe-intervals"></a>Araştırma aralıkları
 
-Birbirinden bağımsız arka uç uygulama ağ geçidi tüm örneklerini yoklama. Her bir uygulama ağ geçidi örneğine aynı araştırma yapılandırması uygular. Örneğin, araştırma yapılandırması sistem durumu araştırmaları her 30 saniyede göndermek ve uygulama ağ geçidinin iki örnek olduğuna her iki örnek her 30 saniyede durum yoklaması gönderir.
+Tüm Application Gateway örnekleri arka ucunu birbirinden bağımsız olarak araştırın. Aynı araştırma yapılandırması her bir Application Gateway örneği için geçerlidir. Örneğin, araştırma yapılandırması, her 30 saniyede bir sistem durumu araştırmaları göndermektir ve uygulama ağ geçidinde iki örnek varsa, her iki örnek de her ikisi de her 30 saniyede bir durum araştırması gönderir.
 
-Ayrıca birden çok dinleyici varsa, her dinleyici birbirinden bağımsız arka uç araştırmaları. İki dinleyici aynı arka uç havuzuna (iki arka uç http ayarları tarafından yapılandırılır) iki farklı noktalarında işaret eden varsa, ardından her dinleyici aynı arka uç bağımsız olarak araştırmaları. Bu durumda, her uygulama ağ geçidi örneğinden iki araştırmaları iki dinleyici için de vardır. Bu senaryoda uygulama ağ geçidinin iki örneği varsa, arka uç sanal makine yapılandırılmış yoklama aralığı başına dört araştırmaları görür.
+Ayrıca, birden çok dinleyici varsa, her dinleyici arka ucunu birbirinden bağımsız olarak yoklamalar. Örneğin, iki farklı bağlantı noktasında aynı arka uç havuzunu işaret eden iki dinleyici varsa (iki arka uç http ayarı ile yapılandırılır), her dinleyici aynı arka ucu bağımsız olarak yoklamakta. Bu durumda, iki dinleyici için her bir uygulama ağ geçidi örneğinden iki araştırma vardır. Bu senaryoda uygulama ağ geçidinin iki örneği varsa, arka uç sanal makinesi yapılandırılan yoklama aralığı başına dört araştırma görür.
 
 ## <a name="custom-health-probe"></a>Özel durum araştırması
 
-Özel araştırmalar sistem durumu izleme daha ayrıntılı denetime sahip olmanızı sağlar. Özel araştırmalar kullanırken, araştırma aralığı, URL ve test etmek için yolu ve arka uç havuzu örnek sağlıksız olarak işaretleme önce kabul etmek için kaç başarısız yanıtları yapılandırabilirsiniz.
+Özel yoklamalar, sistem durumu izleme üzerinde daha ayrıntılı bir denetime sahip olmasını sağlar. Özel yoklamalar kullanırken, araştırma aralığını, test edilecek URL 'yi ve yolu ve arka uç havuzu örneğini sağlıksız olarak işaretlemeden önce kaç tane başarısız yanıt kabul edeceğini yapılandırabilirsiniz.
 
-### <a name="custom-health-probe-settings"></a>Özel durum yoklama ayarları
+### <a name="custom-health-probe-settings"></a>Özel durum araştırma ayarları
 
-Aşağıdaki tabloda, bir özel durum araştırması özelliklerini tanımlarını sağlar.
+Aşağıdaki tabloda özel bir sistem durumu araştırmasının özelliklerine ilişkin tanımlar verilmiştir.
 
 | Araştırma özelliği | Açıklama |
 | --- | --- |
-| Ad |Araştırma adı. Bu ad, arka uç HTTP ayarlarında araştırma başvurmak için kullanılır. |
-| Protocol |Araştırma göndermek için kullanılan protokol. Araştırma arka uç HTTP Ayarları'nda tanımlanan protokolünü kullanır. |
-| Ana bilgisayar |Araştırma göndermek için ana bilgisayar adı. Geçerli çok siteli, yalnızca uygulama ağ geçidinde yapılandırılan, aksi takdirde '127.0.0.1' kullanın. Bu değer, VM'nin ana bilgisayar adından farklıdır. |
-| `Path` |Araştırma göreli yolu. Geçerli yol başlatılır '/'. |
-| Interval |Aralık saniye cinsinden araştırma. İki ardışık araştırmaları arasındaki zaman aralığını değerdir. |
-| Zaman aşımı |Zaman aşımını saniye cinsinden araştırma. Bu zaman aşımı süresi içinde geçerli bir yanıt alınmazsa, araştırma başarısız olarak işaretlenir.  |
-| Sağlıksız durum eşiği |Yeniden deneme sayısı araştırma. Sağlıksız durum eşiği ardışık araştırma hatası sayısı ulaştıktan sonra arka uç sunucu işaretlenir. |
+| Ad |Araştırmanın adı. Bu ad, arka uç HTTP ayarlarındaki araştırmayı ifade etmek için kullanılır. |
+| Protokol |Araştırmayı göndermek için kullanılan protokol. Araştırma, arka uç HTTP ayarlarında tanımlanan protokolü kullanır |
+| Host |Araştırmanın gönderileceği ana bilgisayar adı. Yalnızca Application Gateway 'de birden çok site yapılandırıldığında uygulanabilir, aksi takdirde ' 127.0.0.1 ' kullanın. Bu değer, VM ana bilgisayar adından farklıdır. |
+| Yol |Araştırmanın göreli yolu. Geçerli yol '/' öğesinden başlar. |
+| Interval |Saniye cinsinden yoklama aralığı. Bu değer, iki ardışık yoklamalar arasındaki zaman aralığıdır. |
+| Zaman aşımı |Saniye cinsinden araştırma zaman aşımı. Bu zaman aşımı süresi içinde geçerli bir yanıt alınmıyorsa, araştırma başarısız olarak işaretlenir.  |
+| Sağlıksız eşik |Araştırma yeniden deneme sayısı. Arka uç sunucusu, ardışık araştırma hatası sayısı uygun olmayan eşiğe ulaştığında aşağı olarak işaretlenir. |
 
 > [!IMPORTANT]
-> Application Gateway için tek bir site yapılandırdıysanız, varsayılan olarak ana bilgisayar adı '127.0.0.1' özel araştırma aksi şekilde yapılandırılmadıkça belirtilmelidir.
-> Özel bir araştırma gönderilir başvurusunu \<Protokolü\>://\<konak\>:\<bağlantı noktası\>\<yolu\>. Kullanılan bağlantı noktasını arka uç HTTP Ayarları'nda tanımlanan aynı bağlantı noktası olacaktır.
+> Tek bir site için Application Gateway yapılandırıldıysa, varsayılan olarak, özel araştırmata yapılandırılmadığı sürece konak adı ' 127.0.0.1 ' olarak belirtilmelidir.
+> Başvuru için bir özel araştırma \<protokol\>://\<ana bilgisayar\>:\<bağlantı noktası\>\<yol\>. Kullanılan bağlantı noktası, arka uç HTTP ayarlarında tanımlananla aynı bağlantı noktası olacaktır.
 
 ## <a name="nsg-considerations"></a>NSG konuları
 
-Bir uygulama ağ geçidi alt ağı üzerinde ağ güvenlik grubu (NSG) varsa, bağlantı noktası aralıkları 65503 65534 uygulama ağ geçidi alt ağının gelen trafik için açılmalıdır. Bu bağlantı noktaları, arka uç sistem durumu çalışmak üzere API için gereklidir.
+Bir uygulama ağ geçidi alt ağında ağ güvenlik grubu (NSG) varsa, gelen trafik için uygulama ağ geçidi alt ağında 65503-65534 numaralı bağlantı noktası aralığı açılmalıdır. Bu bağlantı noktaları, arka uç sistem durumu API 'sinin çalışması için gereklidir.
 
-Buna ek olarak, giden Internet bağlantısı engellenemez ve AzureLoadBalancer etiketini Yakında gelen trafiğe izin verilmesi gerekir.
+Ayrıca, giden Internet bağlantısı engellenmeyebilir ve AzureLoadBalancer etiketinden gelen trafiğe izin verilmelidir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Uygulama ağ geçidi sistem durumu izleme hakkında daha fazla edindikten sonra yapılandırdığınız bir [özel durum araştırması](application-gateway-create-probe-portal.md) Azure portalında veya [özel durum araştırması](application-gateway-create-probe-ps.md) PowerShell ve Azure Resource Manager kullanarak dağıtım modeli.
+Application Gateway sistem durumu izleme hakkında bilgi aldıktan sonra, PowerShell ve Azure Resource Manager dağıtım modelini kullanarak Azure portal veya özel bir [sistem durumu araştırmasına](application-gateway-create-probe-ps.md) yönelik [özel bir sistem durumu araştırması](application-gateway-create-probe-portal.md) yapılandırabilirsiniz.
 
 [1]: ./media/application-gateway-probe-overview/appgatewayprobe.png

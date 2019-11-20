@@ -1,33 +1,36 @@
 ---
-title: İfade listeleri - konuşma Hizmetleri
-titlesuffix: Azure Cognitive Services
-description: Bir ifade listesini kullanarak konuşma hizmetleri sağlamak öğrenin `PhraseListGrammar` konuşma metin tanıma Sonuçları iyileştirmek için nesne.
+title: Tümcecik listeleri-konuşma hizmeti
+titleSuffix: Azure Cognitive Services
+description: Konuşmayı metne dönüştürme sonuçlarını geliştirmek için `PhraseListGrammar` nesnesini kullanarak bir tümcecik listesi ile konuşma hizmetlerini sağlamayı öğrenin.
 services: cognitive-services
 author: rhurey
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 5/02/2019
+ms.date: 07/05/2019
 ms.author: rhurey
-ms.openlocfilehash: a3be5d28ebe394771a2d8b492f1f6a9c8a82fb9e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 61d3e4d2de6b8707ee7433815f8002e5d5e3e3d6
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66515316"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73464535"
 ---
-# <a name="phrase-lists-for-speech-to-text"></a>Konuşma metin için ifade listeleri
+# <a name="phrase-lists-for-speech-to-text"></a>Konuşmayı metne yönelik tümcecik listeleri
 
-Bir ifade listesi konuşma Hizmetleri sağlayarak, konuşma tanıma doğruluğunu geliştirebilir. İfade listeleri, bir kişinin adını veya belirli bir konuma gibi ses verilerinde bilinen ifadeleri tanımlamak için kullanılır.
+Bir tümcecik listesi ile konuşma hizmetleri sunarak, konuşma tanımanın doğruluğunu artırabilirsiniz. Tümcecik listeleri, bir kişinin adı veya belirli bir konum gibi, ses verilerinde bilinen tümcecikleri belirlemek için kullanılır.
 
-Örneğin, bir komut varsa, "Taşı" ve "konuşulan, Atla" olası hedefi "Taşımak için Atla" bir giriş ekleyebilirsiniz. Bir ifade ekleme olasılığı artar, ne zaman ses tanınır "Taşıma doğru" yerine "Taşımak için Atla" tanınır.
+Örnek olarak, "taşı" komutuna ve söylenen "Ward" bir hedefe sahipseniz, "Ward 'e taşı" girişini ekleyebilirsiniz. Bir tümcecik eklemek, ses "ilerlemek için taşı" yerine "ilerlemek" yerine tanınabilmesi olasılığını artırır.
 
-Tek sözcükleri veya tümcecikleri tam tümcecik listesine eklenebilir. Ses tam bir eşleşme içeriyorsa bir deyim listesindeki bir girdinin tanıma sırasında kullanılır. Önceki örnekten, ifade listesi "Taşımak için Atla" ve yakalanan deyimi içeriyorsa oluşturma "doğru yavaş taşıma" adıdır, ardından "Yavaş taşımak için Atla" tanıma sonuç olacaktır.
+Tek sözcükler veya bütün ifadeler, bir tümcecik listesine eklenebilir. Tanıma sırasında, sese tam eşleşme varsa, tümcecik listesindeki bir giriş kullanılır. Önceki örnekte oluşturma, tümcecik listesi "Ward 'a taşı" Ifadesini içeriyorsa ve ses yakalanan seslerin her ikisi de "ilerlemek için" ve "Ward 'a taşı" gibi bir daha tanınırsa, tanınma sonucu "daha yavaş geçiş" olarak tanınacaktır.
 
-## <a name="how-to-use-phrase-lists"></a>İfade listeleri kullanma
+>[!Note]
+> Şu anda, tümcecik listeleri yalnızca konuşmayı metin için destekler.
 
-Aşağıdaki örnekler kullanarak bir ifade listesini oluşturmak nasıl çalışılacağını `PhraseListGrammar` nesne.
+## <a name="how-to-use-phrase-lists"></a>Tümcecik listelerini kullanma
+
+Aşağıdaki örneklerde `PhraseListGrammar` nesnesini kullanarak bir tümcecik listesinin nasıl oluşturulacağı gösterilmektedir.
 
 ```C++
 auto phraselist = PhraseListGrammar::FromRecognizer(recognizer);
@@ -65,9 +68,9 @@ phraseListGrammar.addPhrase("Move to Ted");
 ```
 
 >[!Note]
-> En fazla tümceciği konuşma hizmeti konuşma eşleştirmek için kullanacağı listeler 1024 tümcecikleri sayısıdır.
+> Konuşma hizmetinin konuşmayı eşleştirmek için kullanacağı en fazla tümcecik listesi sayısı 1024 tümceciklerdir.
 
-İlişkilendirilmiş ifadeler de temizleyebilirsiniz `PhraseListGrammar` çağıran clear() tarafından.
+Ayrıca, Clear () öğesini çağırarak `PhraseListGrammar` ilişkili tümcecikleri temizleyebilirsiniz.
 
 ```C++
 phraselist->Clear();
@@ -90,7 +93,7 @@ phraseListGrammar.clear();
 ```
 
 > [!NOTE]
-> Değişikliklerini bir `PhraseListGrammar` Al etkileyen sonraki tanıma ya da bir konuşma hizmetleri yeniden bağlanma aşağıdaki nesne.
+> Bir `PhraseListGrammar` nesnesindeki değişiklikler bir sonraki tanıma göre veya konuşma hizmetlerine yeniden bağlanma sonrasında etkili olur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

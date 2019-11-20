@@ -80,7 +80,13 @@
           items:
             - name: Veri Kopyalama aracı
               href: tutorial-incremental-copy-partitioned-file-name-copy-data-tool.md
-    - name: Buluttaki verileri dönüştürme
+    - name: Veri akışlarıyla verileri dönüştürme ve hazırlama
+      items:
+        - name: Eşleme veri akışıyla verileri dönüştürme
+          href: tutorial-data-flow.md
+        - name: Hazırlama veri akışıyla verileri hazırlama
+          href: wrangling-data-flow-tutorial.md
+    - name: Dış dönüşümler
       items:
         - name: HDInsight Spark
           items:
@@ -92,7 +98,7 @@
           items:
             - name: Kullanıcı arabirimi (UI)
               href: transform-data-using-databricks-notebook.md
-    - name: Sanal ağdaki verileri dönüştürme
+    - name: Sanal ağda Hive dönüşümü
       items:
         - name: Kullanıcı arabirimi (UI)
           href: tutorial-transform-data-hive-virtual-network-portal.md
@@ -110,6 +116,19 @@
           href: tutorial-deploy-ssis-packages-azure.md
         - name: Azure PowerShell
           href: tutorial-deploy-ssis-packages-azure-powershell.md
+    - name: Data Lake Storage Gen2 yükleme
+      href: load-azure-data-lake-storage-gen2.md
+      items:
+        - name: Data Lake Storage Gen1'den kopyalama
+          href: load-azure-data-lake-storage-gen2-from-gen1.md
+    - name: SQL Veri Ambarı’nı yükleme
+      href: load-azure-sql-data-warehouse.md
+    - name: Data Lake Storage Gen1 yükleme
+      href: load-azure-data-lake-store.md
+    - name: SAP BW verilerini yükleme
+      href: load-sap-bw-data.md
+    - name: Office 365 verilerini yükleme
+      href: load-office-365-data.md
 - name: Örnekler
   items:
     - name: Kod örnekleri
@@ -128,32 +147,36 @@
       href: concepts-pipeline-execution-triggers.md
     - name: Tümleştirme çalışma zamanı
       href: concepts-integration-runtime.md
-    - name: Veri Akışlarını Eşleme
+    - name: Veri akışları
       items:
-        - name: Veri akışlarını eşleme kavramları
-          href: concepts-data-flow-overview.md
-        - name: Hata ayıklama modu
-          href: concepts-data-flow-debug-mode.md
-        - name: Schema Drift
-          href: concepts-data-flow-schema-drift.md
-        - name: Denetleme bölmesi
-          href: concepts-data-flow-inspect-pane.md
-        - name: Sütun desenleri
-          href: concepts-data-flow-column-pattern.md
-        - name: Veri akışını izleme
-          href: concepts-data-flow-monitoring.md
-        - name: Veri akışı performansı
-          href: concepts-data-flow-performance.md
-        - name: Düğümleri taşıma
-          href: concepts-data-flow-move-nodes.md
-        - name: İyileştirme sekmesi
-          href: concepts-data-flow-optimize-tab.md
-        - name: İfade oluşturucusu
-          href: concepts-data-flow-expression-builder.md
-        - name: Başvuru düğümleri
-          href: concepts-data-flow-reference-node.md
-        - name: İfade dili
-          href: data-flow-expression-functions.md
+        - name: Eşleme veri akışlarıyla verileri dönüştürme
+          items:
+            - name: Veri akışını eşlemeye genel bakış
+              href: concepts-data-flow-overview.md
+            - name: Hata ayıklama modu
+              href: concepts-data-flow-debug-mode.md
+            - name: JSON işleme
+              href: concepts-data-flow-json.md
+            - name: Schema Drift
+              href: concepts-data-flow-schema-drift.md
+            - name: Sütun desenleri
+              href: concepts-data-flow-column-pattern.md
+            - name: Veri akışını izleme
+              href: concepts-data-flow-monitoring.md
+            - name: Veri akışı performansı
+              href: concepts-data-flow-performance.md
+            - name: Yönetim grafı
+              href: concepts-data-flow-manage-graph.md
+            - name: İfade oluşturucusu
+              href: concepts-data-flow-expression-builder.md
+            - name: İfade dili
+              href: data-flow-expression-functions.md
+        - name: Hazırlama veri akışlarıyla verileri hazırlama
+          items:
+            - name: Hazırlama veri akışına genel bakış
+              href: wrangling-data-flow-overview.md
+            - name: Desteklenen işlevler
+              href: wrangling-data-flow-functions.md
     - name: Roller ve izinler
       href: concepts-roles-permissions.md
     - name: Fiyatlandırmayı anlama
@@ -166,20 +189,28 @@
       items:
         - name: Veri fabrikalarını görsel olarak yazma
           href: author-visually.md
+        - name: Kaynak denetimi
+          href: source-control.md
         - name: Sürekli tümleştirme ve teslim
           href: continuous-integration-deployment.md
         - name: Yinelemeli geliştirme ve hata ayıklama
           href: iterative-development-debugging.md
     - name: Bağlayıcılar
       items:
+        - name: Bağlayıcıya genel bakış
+          href: connector-overview.md
         - name: Amazon Marketplace Web Service
           href: connector-amazon-marketplace-web-service.md
         - name: Amazon Redshift
           href: connector-amazon-redshift.md
         - name: Amazon S3
           href: connector-amazon-simple-storage-service.md
+        - name: Avro biçimi
+          href: format-avro.md
         - name: Azure Blob Depolama
           href: connector-azure-blob-storage.md
+        - name: Azure Bilişsel Arama
+          href: connector-azure-search.md
         - name: Azure Cosmos DB SQL API
           href: connector-azure-cosmos-db.md
         - name: MongoDB için Azure Cosmos DB API'si
@@ -198,16 +229,16 @@
           href: connector-azure-database-for-postgresql.md
         - name: Azure Dosya Depolama
           href: connector-azure-file-storage.md
-        - name: Azure Search
-          href: connector-azure-search.md
         - name: Azure SQL Veritabanı
           href: connector-azure-sql-database.md
         - name: Azure SQL Veritabanı Yönetilen Örneği
-          href: connector-azure-sql-database-managed-insance.md
+          href: connector-azure-sql-database-managed-instance.md
         - name: Azure SQL Veri Ambarı
           href: connector-azure-sql-data-warehouse.md
         - name: Azure Table Storage
           href: connector-azure-table-storage.md
+        - name: İkili biçim
+          href: format-binary.md
         - name: Cassandra
           href: connector-cassandra.md
         - name: Uygulamalar için Common Data Service
@@ -253,9 +284,11 @@
         - name: Impala
           href: connector-impala.md
         - name: Informix
-          href: 'connector-odbc.md#ibm-informix-source'
+          href: connector-informix.md
         - name: Jira
           href: connector-jira.md
+        - name: JSON biçimi
+          href: format-json.md
         - name: Magento
           href: connector-magento.md
         - name: MariaDB
@@ -263,7 +296,7 @@
         - name: Marketo
           href: connector-marketo.md
         - name: Microsoft Access
-          href: 'connector-odbc.md#microsoft-access-source'
+          href: connector-microsoft-access.md
         - name: MongoDB
           href: connector-mongodb.md
           items:
@@ -287,9 +320,11 @@
           href: connector-oracle-responsys.md
         - name: Oracle Service Cloud
           href: connector-oracle-service-cloud.md
+        - name: ORC biçimi
+          href: format-orc.md
         - name: Parquet biçimi
           href: format-parquet.md
-        - name: Paypal
+        - name: PayPal
           href: connector-paypal.md
         - name: Phoenix
           href: connector-phoenix.md
@@ -304,7 +339,7 @@
         - name: Salesforce
           href: connector-salesforce.md
         - name: Salesforce Service Cloud
-          href: connector-salesforce.md
+          href: connector-salesforce-service-cloud.md
         - name: Salesforce Marketing Cloud
           href: connector-salesforce-marketing-cloud.md
         - name: SAP Business Warehouse Açık Hub'ı
@@ -354,68 +389,55 @@
           href: delete-activity.md
         - name: Veri Kopyalama aracı
           href: copy-data-tool.md
-        - name: Data Lake Storage Gen2 yükleme
-          href: load-azure-data-lake-storage-gen2.md
-          items:
-            - name: Data Lake Storage Gen1'den kopyalama
-              href: load-azure-data-lake-storage-gen2-from-gen1.md
-        - name: SQL Veri Ambarı’nı yükleme
-          href: load-azure-sql-data-warehouse.md
-        - name: Data Lake Storage Gen1 yükleme
-          href: load-azure-data-lake-store.md
-        - name: SAP BW verilerini yükleme
-          href: load-sap-bw-data.md
-        - name: Office 365 verilerini yükleme
-          href: load-office-365-data.md
-        - name: Bölümlenmiş verileri okuma veya yazma
-          href: how-to-read-write-partitioned-data.md
+        - name: Performans ve ayar
+          href: copy-activity-performance.md
         - name: Biçimlendirme ve sıkıştırma desteği
           href: supported-file-formats-and-compression-codecs.md
         - name: Şema ve tür eşlemesi
           href: copy-activity-schema-and-type-mapping.md
         - name: Hataya dayanıklılık
           href: copy-activity-fault-tolerance.md
-        - name: Performans ve ayar
-          href: copy-activity-performance.md
     - name: Verileri dönüştürme
       href: transform-data.md
       items:
-        - name: HDInsight Hive Etkinliği
-          href: transform-data-using-hadoop-hive.md
-        - name: HDInsight Pig Etkinliği
-          href: transform-data-using-hadoop-pig.md
-        - name: HDInsight MapReduce Etkinliği
-          href: transform-data-using-hadoop-map-reduce.md
-        - name: HDInsight Akış Etkinliği
-          href: transform-data-using-hadoop-streaming.md
-        - name: HDInsight Spark Etkinliği
-          href: transform-data-using-spark.md
-        - name: ML Batch Yürütme Etkinliği
-          href: transform-data-using-machine-learning.md
-        - name: ML Kaynak Güncelleştirme Etkinliği
-          href: update-machine-learning-models.md
-        - name: Saklı Yordam Etkinliği
-          href: transform-data-using-stored-procedure.md
-        - name: Data Lake U-SQL Etkinliği
-          href: transform-data-using-data-lake-analytics.md
-        - name: Databricks Not Defteri Etkinliği
-          href: transform-data-databricks-notebook.md
+        - name: Veri Akışı Etkinliğini Yürütme
+          href: control-flow-execute-data-flow-activity.md
+        - name: Azure İşlev Etkinliği
+          href: control-flow-azure-function-activity.md
+        - name: Özel Etkinlik
+          href: transform-data-using-dotnet-custom-activity.md
         - name: Databricks Jar Etkinliği
           href: transform-data-databricks-jar.md
+        - name: Databricks Not Defteri Etkinliği
+          href: transform-data-databricks-notebook.md
         - name: Databricks Python Etkinliği
           href: transform-data-databricks-python.md
-        - name: Özel etkinlik
-          href: transform-data-using-dotnet-custom-activity.md
+        - name: Data Lake U-SQL Etkinliği
+          href: transform-data-using-data-lake-analytics.md
+        - name: HDInsight Hive Etkinliği
+          href: transform-data-using-hadoop-hive.md
+        - name: HDInsight MapReduce Etkinliği
+          href: transform-data-using-hadoop-map-reduce.md
+        - name: HDInsight Pig Etkinliği
+          href: transform-data-using-hadoop-pig.md
+        - name: HDInsight Spark Etkinliği
+          href: transform-data-using-spark.md
+        - name: HDInsight Akış Etkinliği
+          href: transform-data-using-hadoop-streaming.md
+        - name: Machine Learning Batch Yürütme Etkinliği
+          href: transform-data-using-machine-learning.md
+        - name: Machine Learning Kaynak Güncelleştirme Etkinliği
+          href: update-machine-learning-models.md
+        - name: Machine Learning İşlem Hattı Yürütme Etkinliği
+          href: transform-data-machine-learning-service.md
+        - name: Saklı Yordam Etkinliği
+          href: transform-data-using-stored-procedure.md
         - name: İşlem bağlantılı hizmetler
           href: compute-linked-services.md
     - name: Denetim akışı
       items:
         - name: Değişken Etkinlik Ekleme
           href: control-flow-append-variable-activity.md
-        - name: Azure İşlev Etkinliği
-          href: control-flow-azure-function-activity.md
-        - name: Veri Akışı Etkinliğini Yürütme
-          href: control-flow-execute-data-flow-activity.md
         - name: İşlem Hattı Çalıştırma Etkinliği
           href: control-flow-execute-pipeline-activity.md
         - name: Filtre Etkinliği
@@ -426,6 +448,8 @@
           href: control-flow-get-metadata-activity.md
         - name: If Condition Etkinliği
           href: control-flow-if-condition-activity.md
+        - name: Etkinlik değiştirme
+          href: control-flow-switch-activity.md
         - name: Arama Etkinliği
           href: control-flow-lookup-activity.md
         - name: Değişken Etkinlik Ayarlama
@@ -494,6 +518,8 @@
           href: data-movement-security-considerations.md
         - name: Kimlik bilgilerini Azure Key Vault’ta depolama
           href: store-credentials-in-key-vault.md
+        - name: İşlem hattı etkinliklerinde Azure Key Vault gizli dizilerini kullanma
+          href: how-to-use-azure-key-vault-secrets-pipeline-activities.md
         - name: Kimlik bilgilerini şirket içinde barındırılan tümleştirme çalışma zamanı için şifreleme
           href: encrypt-credentials-self-hosted-integration-runtime.md
         - name: Data Factory için yönetilen kimlik
@@ -526,6 +552,10 @@
           href: create-shared-self-hosted-integration-runtime-powershell.md
     - name: Azure’da SSIS paketlerini çalıştırma
       items:
+        - name: Azure’da SSIS paketlerini SSDT’ten çalıştırma
+          href: how-to-invoke-ssis-package-ssdt.md
+        - name: SSIS paketlerini Azure'da etkinleştirilen dtexec ile çalıştırma
+          href: how-to-invoke-ssis-package-azure-enabled-dtexec.md
         - name: SSIS Paketlerini Yürütme etkinliği ile SSIS paketleri çalıştırma
           href: how-to-invoke-ssis-package-ssis-activity.md
         - name: Saklı Yordam etkinliği ile SSIS paketleri çalıştırma
@@ -534,6 +564,8 @@
           href: how-to-schedule-azure-ssis-integration-runtime.md
         - name: Azure-SSIS IR’yi bir sanal ağa ekleme
           href: join-azure-ssis-integration-runtime-virtual-network.md
+        - name: Azure-SSIS IR için Şirket İçinde Barındırılan IR’yi ara sunucu olarak yapılandırma
+          href: self-hosted-integration-runtime-proxy-ssis.md
         - name: Azure SSIS IR için Azure AD kimlik doğrulamasını etkinleştirme
           href: enable-aad-authentication-azure-ssis-ir.md
         - name: Azure-SSIS IR için Enterprise Edition sağlama
@@ -556,6 +588,8 @@
           href: how-to-create-schedule-trigger.md
         - name: Atlayan pencere tetikleyicisi oluşturma
           href: how-to-create-tumbling-window-trigger.md
+        - name: Atlayan pencere tetikleyici bağımlılığı oluşturma
+          href: tumbling-window-trigger-dependency.md
     - name: Şablonlar
       items:
         - name: Şablonlara genel bakış
@@ -564,20 +598,58 @@
           href: solution-template-copy-files-multiple-containers.md
         - name: LastModifiedDate parametresine göre yeni dosyaları kopyalama
           href: solution-template-copy-new-files-lastmodifieddate.md
-        - name: Denetim tablosuyla toplu kopyalama
+        - name: Veritabanından toplu kopyalama
           href: solution-template-bulk-copy-with-control-table.md
-        - name: Denetim tablosuyla delta kopyalama
+        - name: Veritabanından delta kopyalama
           href: solution-template-delta-copy-with-control-table.md
+        - name: Verileri Amazon S3'ten Azure Depolama'ya geçirme
+          href: solution-template-migration-s3-azure.md
+        - name: Dosyaları taşıma
+          href: solution-template-move-files.md
         - name: Databricks ile verileri dönüştürme
           href: solution-template-databricks-notebook.md
     - name: Sorun giderme kılavuzu
       items:
         - name: Etkinlik sorun giderme
           href: data-factory-troubleshoot-guide.md
+        - name: Bağlayıcı sorunlarını giderme
+          href: connector-troubleshoot-guide.md
+        - name: Azure-SSIS IR Yönetimi Sorunlarını Giderme
+          href: ssis-integration-runtime-management-troubleshoot.md
+        - name: Şirket içinde barındırılan IR sorunlarını giderme
+          href: self-hosted-integration-runtime-troubleshoot-guide.md
         - name: Azure-SSIS IR’de Paket Yürütme Sorunlarını Giderme
           href: ssis-integration-runtime-ssis-activity-faq.md
+        - name: Veri Akışı Sorunlarını Giderme
+          href: data-flow-troubleshoot-guide.md
+- name: Senaryolar
+  items:
+    - name: Veri gölü ve EDW için veri geçişi
+      items:
+        - name: Neden Azure Data Factory?
+          href: data-migration-guidance-overview.md
+        - name: AWS S3'ten Azure'a verileri geçirme
+          href: data-migration-guidance-s3-azure-storage.md
+        - name: Şirket içi Hadoop kümesinden Azure’a veri geçirme
+          href: data-migration-guidance-hdfs-azure-storage.md
+        - name: Şirket içi Netezza sunucusundan Azure’a veri geçirme
+          href: data-migration-guidance-netezza-azure-sqldw.md
+    - name: Veri akışlarını eşlemeyi kullanarak dönüştürme
+      items:
+        - name: Sabit genişlikli metin dosyalarını işleme
+          href: how-to-fixed-width.md
+        - name: Hata satırı işleme
+          href: how-to-data-flow-error-rows.md
+    - name: Şirket içinden SSIS’ye geçirme
+      items:
+        - name: SSIS geçişine genel bakış
+          href: scenario-ssis-migration-overview.md
+        - name: SSISDB’den Azure SQL Veritabanı yönetilen örneğine geçirme
+          href: scenario-ssis-migration-ssisdb-mi.md
 - name: Başvuru
   items:
+    - name: Veri akışı betiği
+      href: data-flow-script.md
     - name: .NET
       href: /dotnet/api/microsoft.azure.management.datafactory
     - name: PowerShell

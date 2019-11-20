@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - Linux VM Oluşturma | Microsoft Docs
+title: Azure CLI Betik Örneği - Linux VM Oluşturma
 description: Azure CLI Betik Örneği - Linux VM Oluşturma
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
@@ -16,12 +16,12 @@ ms.workload: infrastructure
 ms.date: 02/27/2017
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 97fe97d17c7f751dd44cf229a52346f8e9b0342b
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: e36f1ab4389600d45ce0bdc9f8a764c2fdc4ad29
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60680038"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037607"
 ---
 # <a name="create-a-fully-configured-virtual-machine"></a>Tam olarak yapılandırılmış bir sanal makine oluşturma
 

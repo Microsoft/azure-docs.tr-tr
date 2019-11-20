@@ -1,6 +1,6 @@
 ---
-title: 'Azure portalı: SQL veritabanı dinamik veri maskeleme | Microsoft Docs'
-description: Nasıl Azure portalında SQL veritabanı dinamik veri maskelemeyi kullanmaya başlama
+title: 'Azure portal: dinamik veri maskeleme'
+description: Azure portal SQL veritabanı dinamik veri maskelemeyi kullanmaya başlama
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
@@ -10,53 +10,52 @@ ms.topic: conceptual
 author: ronitr
 ms.author: ronitr
 ms.reviewer: vanto
-manager: craigg
 ms.date: 03/04/2018
-ms.openlocfilehash: 3d5ab203268ced1951d2ba9c852ece5bd5467c68
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0053958c0681e98ee225232249b050583d4e13b2
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61077839"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826559"
 ---
-# <a name="get-started-with-sql-database-dynamic-data-masking-with-the-azure-portal"></a>SQL veritabanı dinamik veri maskeleme Azure portalı ile kullanmaya başlayın
+# <a name="get-started-with-sql-database-dynamic-data-masking-with-the-azure-portal"></a>Azure portal ile SQL veritabanı dinamik veri maskeleme ile çalışmaya başlama
 
-Bu makalede nasıl uygulayacağınızı gösteren [dinamik veri maskeleme](sql-database-dynamic-data-masking-get-started.md) Azure portalı ile. Dinamik veri maskelemeyi kullanarak uygulayabileceğiniz [Azure SQL veritabanı cmdlet'leri](https://docs.microsoft.com/powershell/module/az.sql/) veya [REST API](https://docs.microsoft.com/rest/api/sql/).
+Bu makalede, Azure portal ile [dinamik veri maskeleme](sql-database-dynamic-data-masking-get-started.md) 'nin nasıl uygulanacağı gösterilmektedir. Ayrıca, [Azure SQL veritabanı cmdlet 'lerini](https://docs.microsoft.com/powershell/module/az.sql/) veya [REST API](https://docs.microsoft.com/rest/api/sql/)kullanarak dinamik veri maskeleme uygulayabilirsiniz.
 
-## <a name="set-up-dynamic-data-masking-for-your-database-using-the-azure-portal"></a>Dinamik veri maskeleme Azure portalını kullanarak veritabanınız için ayarlama
+## <a name="set-up-dynamic-data-masking-for-your-database-using-the-azure-portal"></a>Azure portal kullanarak veritabanınız için dinamik veri maskeleme ayarlayın
 
-1. Adresinden Azure portalında başlatma [ https://portal.azure.com ](https://portal.azure.com).
-2. Hassas verileri maskelemek için istediğiniz içeren veritabanı ayarları sayfasına gidin.
-3. Tıklayın **dinamik veri maskeleme** başlatan kutucuğa **dinamik veri maskeleme** yapılandırma sayfası.
+1. [https://portal.azure.com](https://portal.azure.com)Azure Portal başlatın.
+2. Maskelemek istediğiniz hassas verileri içeren veritabanının ayarlar sayfasına gidin.
+3. **Dinamik veri maskeleme** yapılandırma sayfasını başlatan **dinamik veri maskeleme** kutucuğuna tıklayın.
 
-   * Alternatif olarak, aşağı kaydırabilir **işlemleri** tıklayın ve bölüm **dinamik veri maskeleme**.
+   * Alternatif olarak, **işlemler** bölümüne kaydırabilir ve **dinamik veri maskeleme**' ye tıklayabilirsiniz.
 
      ![Gezinti bölmesi](./media/sql-database-dynamic-data-masking-get-started/4_ddm_settings_tile.png)
 
-4. İçinde **dinamik veri maskeleme** yapılandırma sayfası hizmetinin öneriler motoru maskelemeyi işaretlenmiş bazı veritabanı sütunları ile karşılaşabilirsiniz. Önerileri kabul et için tıklamanız **maske Ekle** bir veya daha fazla sütun ve maskesi için bu sütun için varsayılan türü temel alınarak oluşturulur. Maskeleme işlevi maskeleme kuralı tıklayarak ve maskeleme düzenleyerek değiştirebilirsiniz alan biçim için tercih ettiğiniz farklı bir biçim. Tıkladığınızdan emin olun **Kaydet** ayarlarınızı kaydetmek için.
+4. **Dinamik veri maskeleme** yapılandırması sayfasında, öneriler altyapısının maskeleme için işaretlediğini belirten bazı veritabanı sütunlarını görebilirsiniz. Önerileri kabul etmek için, bir veya daha fazla sütun için **maske Ekle** ' ye tıklamanız yeterlidir ve bu sütunun varsayılan türüne göre bir maske oluşturulur. Maskeleme kuralına tıklayarak Maskeleme işlevini değiştirebilirsiniz ve maskeleme alanı biçimini istediğiniz farklı bir biçime düzenleyebilirsiniz. Ayarlarınızı kaydetmek için **Kaydet** ' e tıkladığınızdan emin olun.
 
     ![Gezinti bölmesi](./media/sql-database-dynamic-data-masking-get-started/5_ddm_recommendations.png)
 
-5. Herhangi bir sütun için bir maske en üstündeki veritabanınızı eklemek için **dinamik veri maskeleme** yapılandırma sayfası tıklayın **maske Ekle** açmak için **maskeleme Kuralı Ekle** yapılandırma sayfası .
+5. Veritabanınıza herhangi bir sütun için bir maske eklemek istiyorsanız, **dinamik veri maskeleme** yapılandırma sayfasının üst kısmında **maske Ekle** ' ye tıklayarak **maskeleme kuralı Yapılandırması Ekle** sayfasını açın.
 
     ![Gezinti bölmesi](./media/sql-database-dynamic-data-masking-get-started/6_ddm_add_mask.png)
 
-6. Seçin **şema**, **tablo** ve **sütun** maskeleme için belirtilen alan tanımlamak için.
-7. Seçin bir **maskeleme alanı biçimi** hassas verileri maskeleme kategorileri listesinden.
+6. Maskeleme için belirlenen alanı tanımlamak için **Şemayı**, **tabloyu** ve **sütunu** seçin.
+7. Hassas veri maskeleme kategorileri listesinden bir **maskeleme alanı biçimi** seçin.
 
     ![Gezinti bölmesi](./media/sql-database-dynamic-data-masking-get-started/7_ddm_mask_field_format.png)
 
-8. Tıklayın **Kaydet** veri maskeleme kuralları dinamik veri maskeleme ilke maskeleme kümesi güncelleştirmek için kural sayfası.
-9. SQL kullanıcı veya maskeleme işlemi bırakılmalıdır ve maskelenmemiş hassas verilere erişimi AAD kimliklerini yazın. Bu, kullanıcıların noktalı virgülle ayrılmış bir listesi olmalıdır. Yönetici ayrıcalıklarına sahip kullanıcılar her zaman özgün maskelenmemiş verilere erişebilir.
+8. Dinamik veri maskeleme ilkesindeki maskeleme kuralları kümesini güncelleştirmek için veri maskeleme kuralı sayfasında **Kaydet** ' e tıklayın.
+9. Maskelemeden dışlanması gereken SQL kullanıcıları veya AAD kimliklerini yazın ve maskelenmemiş gizli verilere erişime sahip olun. Bu, noktalı virgülle ayrılmış bir kullanıcı listesi olmalıdır. Yönetici ayrıcalıklarına sahip olan kullanıcılar, her zaman ilk maskelenmemiş veriye erişebilir.
 
     ![Gezinti bölmesi](./media/sql-database-dynamic-data-masking-get-started/8_ddm_excluded_users.png)
 
     > [!TIP]
-    > Uygulama katmanı uygulama ayrıcalıklı kullanıcılar için hassas verileri görüntülemek üzere hale getirmek için AAD kimlik uygulama veritabanını sorgulamak için kullanır ve SQL kullanıcı ekleyin. Bu liste ayrıcalıklı kullanıcıların, hassas verilerin en aza indirmek için en az sayıda içermesi önerilir.
+    > Bunu yapmak için uygulama katmanının, uygulama ayrıcalıklı kullanıcıları için hassas verileri görüntülemesi amacıyla, uygulamanın veritabanını sorgulamak için kullandığı SQL kullanıcısını veya AAD kimliğini ekleyin. Hassas verilerin açıklanmasını en aza indirmek için bu listenin en az sayıda ayrıcalıklı kullanıcı içermesi önerilir.
 
-10. Tıklayın **Kaydet** ilke yapılandırma sayfasında, yeni veya güncelleştirilmiş kaydetmek için maskeleme verileri maskeleme.
+10. Yeni veya güncelleştirilmiş maskeleme ilkesini kaydetmek için veri maskeleme yapılandırma sayfasında **Kaydet** ' e tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Dinamik veri maskeleme genel bakış için bkz. [dinamik veri maskeleme](sql-database-dynamic-data-masking-get-started.md).
-* Dinamik veri maskelemeyi kullanarak uygulayabileceğiniz [Azure SQL veritabanı cmdlet'leri](https://docs.microsoft.com/powershell/module/az.sql/) veya [REST API](https://docs.microsoft.com/rest/api/sql/).
+* Dinamik veri maskeleme 'ye genel bakış için bkz. [dinamik veri maskeleme](sql-database-dynamic-data-masking-get-started.md).
+* Ayrıca, [Azure SQL veritabanı cmdlet 'lerini](https://docs.microsoft.com/powershell/module/az.sql/) veya [REST API](https://docs.microsoft.com/rest/api/sql/)kullanarak dinamik veri maskeleme uygulayabilirsiniz.

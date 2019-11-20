@@ -1,7 +1,7 @@
 ---
-title: FASTQ dosya girişlerini - Microsoft Genomics kullanarak iş akışı gönderme
-titleSuffix: Azure
-description: Bu makalede, yüklü msgen istemcisini yüklediğiniz ve hizmet aracılığıyla örnek verileri başarıyla çalıştırdığınız varsayılır.
+title: FASTQ dosya girişlerini kullanarak iş akışı gönderme
+titleSuffix: Microsoft Genomics
+description: Bu makalede, giriş dosyalarınız tek bir FASTQ dosyası çiftinde olduğunda Microsoft Genomiks hizmetine bir iş akışı gönderme gösterilmektedir.
 services: genomics
 author: grhuynh
 manager: cgronlun
@@ -9,24 +9,24 @@ ms.author: grhuynh
 ms.service: genomics
 ms.topic: conceptual
 ms.date: 12/07/2017
-ms.openlocfilehash: 2662a8f52c58a39916e5789fa9ed7fadd91216c0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3806b165e5abb661e53c6a315650d025fd42e17f
+ms.sourcegitcommit: 961468fa0cfe650dc1bec87e032e648486f67651
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60333681"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72248555"
 ---
-# <a name="submit-a-workflow-using-fastq-file-inputs-in-microsoft-genomics"></a>Microsoft Genomiks’te FASTQ dosyası girişlerini kullanarak iş akışı gönderme
+# <a name="submit-a-workflow-using-fastq-file-inputs-in-microsoft-genomics"></a>Microsoft Genomiks 'de FASTQ dosya girişlerini kullanarak iş akışı gönderme
 
-Bu makalede, giriş dosyalarınızı tek bir çift FASTQ dosyası olduğunda Microsoft Genomics hizmetine bir iş akışı gönderme adımları gösterilmektedir. Bu konu başlığında `msgen` istemcisini yükleyip çalıştırdığınız ve Azure Depolama konusunda bilgi sahibi olduğunuz kabul edilmektedir. Sağlanan örnek verileri kullanarak bir iş akışı başarıyla gönderdiyseniz, bu makalede ile devam etmek hazır olursunuz. 
+Bu makalede, giriş dosyalarınız tek bir FASTQ dosyası çiftinde olduğunda Microsoft Genomiks hizmetine bir iş akışı gönderme gösterilmektedir. Bu konu, `msgen` istemcisini zaten yüklediğinizi ve çalıştırdığınızı varsayar ve Azure Storage 'ı nasıl kullanacağınızı öğrenirsiniz. Belirtilen örnek verileri kullanarak bir iş akışını başarıyla gönderdiyseniz, bu makaleye devam etmeye hazırsınızdır. 
 
-## <a name="set-up-upload-your-fastq-files-to-azure-storage"></a>Ayarlayın: FASTQ dosyalarınızı Azure depolamaya yükleme
-*reads_1.fq.gz* ve *reads_2.fq.gz* olmak üzere iki dosyaya sahip olduğunuzu ve bunları *myaccount* adlı Azure depolama hesabınıza **https://<span></span>myaccount.blob.core<span></span>.windows<span></span>.net<span></span>/inputs/reads_1<span></span>.fq<span></span>.gz<span></span>** ve **https://<span></span>myaccount.blob.core.<span></span>windows<span></span>.net/<span></span>inputs/<span></span>reads_2.fq<span></span>.gz<span></span>** olarak yüklediğinizi düşünelim. API URL'sine ve erişim anahtarına sahipsiniz. **https://<span></span>myaccount.blob.core<span></span>.windows<span></span>.net<span></span>/outputs<span></span>** içinde iki çıkış olmasını istiyorsunuz.
+## <a name="set-up-upload-your-fastq-files-to-azure-storage"></a>Kurulum: FASTQ dosyalarınızı Azure depolama 'ya yükleme
+*Reads_1. FQ. gz* ve *reads_2. FQ. gz*adlı iki dosyanız olduğunu varsayalım ve bunları Azure 'daki *myaccount* depolama hesabınıza **https://<span></span>myaccount. blob. Core<span></span>. Windows<span></span>.net/<span></span> girişler/reads_1<span></span>. FQ<span></span>. gz<span> </span>**  ve **https://<span></span>myaccount. blob. Core.<span> </span> Windows<span></span>.net/<span></span>girişler/<span></span>reads_2. FQ<span></span>. gz<span></span>** . API URL 'SI ve erişim anahtarınız vardır. **<span></span>Https://myaccount. blob. Core<span></span>. Windows<span></span>.net<span></span>/çıkışları<span></span>** içinde çıkış almak istiyorsunuz.
 
 
 ## <a name="submit-your-job-to-the-msgen-client"></a>İşinizi `msgen` istemcisine gönderme 
 
-Burada `msgen` istemcisine sağlamanız gereken minimum bağımsız değişkenler verilmiştir; kodun daha anlaşılır olması için satır sonları eklenmiştir:
+@No__t-0 istemcisine sağlamanız gereken en az bağımsız değişken kümesi aşağıda verilmiştir; açıklık için satır sonları eklenmiştir:
 
 Windows için:
 
@@ -45,7 +45,7 @@ msgen submit ^
   --output-storage-account-container outputs
 ```
 
-Unix için:
+UNIX için:
 
 ```
 msgen submit \
@@ -63,7 +63,7 @@ msgen submit \
 ```
 
 
-Yapılandırma dosyası kullanmayı tercih ediyorsanız şu bileşenleri dahil etmeniz gerekir:
+Bir yapılandırma dosyası kullanmayı tercih ediyorsanız, şunları içerir:
 
 ```
 api_url_base:                     <Genomics API URL>
@@ -79,7 +79,7 @@ output_storage_account_key:       <storage access key to "myaccount">
 output_storage_account_container: outputs
 ```
 
-`config.txt` dosyasını şu çağrıyla gönderin: `msgen submit -f config.txt`
+@No__t-0 dosyasını bu çağrıdan gönder: `msgen submit -f config.txt`
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede FASTQ dosyaları çiftini Azure Depolama'ya yükleyip `msgen` python istemcisi üzerinden Microsoft Genomiks hizmetine bir iş akışı gönderdiniz. İş akışının gönderilmesi ve Microsoft Genomics hizmetiyle kullanabileceğiniz diğer komutlar hakkında daha fazla bilgi edinmek için müşterilerimize [SSS](frequently-asked-questions-genomics.md). 
+Bu makalede, Azure depolama 'ya bir çift FASTQ dosyası yüklediniz ve `msgen` Python istemcisi üzerinden Microsoft Genomiks hizmetine bir iş akışı gönderdiniz. İş akışı gönderme ve Microsoft Genomiks hizmetiyle kullanabileceğiniz diğer komutlar hakkında daha fazla bilgi edinmek için bkz. [SSS](frequently-asked-questions-genomics.md). 

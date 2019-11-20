@@ -1,11 +1,10 @@
 ---
-title: Azure Güvenlik Merkezi Hızlı Başlangıç - Linux bilgisayarlarınızı Güvenlik Merkezi’ne ekleme | Microsoft Docs
+title: Linux bilgisayarlarını Azure Güvenlik Merkezi 'ne ekleme | Microsoft Docs
 description: Bu hızlı başlangıç, Linux bilgisayarlarınızı Güvenlik Merkezi’ne nasıl ekleyebileceğinizi gösterir.
 services: security-center
 documentationcenter: na
-author: rkarlin
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: 61e95a87-39c5-48f5-aee6-6f90ddcd336e
 ms.service: security-center
 ms.devlang: na
@@ -14,37 +13,37 @@ ms.custom: mvc
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/02/2018
-ms.author: rkarlin
-ms.openlocfilehash: 9f4e001909fb739aa368e5201649e85cce9906d3
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: memildin
+ms.openlocfilehash: 9f49b858a23d0a1f58505d9f9971a31e8c9167e9
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60910651"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73664490"
 ---
-# <a name="quickstart-onboard-linux-computers-to-azure-security-center"></a>Hızlı Başlangıç: Linux bilgisayarları Azure Güvenlik Merkezi'ne ekleme
-Azure aboneliklerinizi ekledikten sonra Linux Aracısı’nı sağlayarak Azure dışında (örneğin, şirket içinde veya diğer bulutlarda) çalışan Linux kaynakları için Güvenlik Merkezi’ni etkinleştirebilirsiniz.
+# <a name="quickstart-onboard-linux-computers-to-azure-security-center"></a>Hızlı başlangıç: Linux bilgisayarlarını Azure Güvenlik Merkezi’ne ekleme
+Azure aboneliklerinizi ekledikten sonra, Azure dışında çalışan Linux kaynakları için güvenlik merkezini, örneğin şirket içi veya diğer bulutlarda, bir aracı sağlayarak etkinleştirebilirsiniz. Aracıya Microsoft Monitoring Agent (MMA) denir, ancak OMS Aracısı olarak da bilinir.
 
-Bu hızlı başlangıçta bir Linux bilgisayara Linux Aracısı'nın nasıl yükleneceği gösterir.
+Bu hızlı başlangıçta aracının bir Linux bilgisayara nasıl yükleneceği gösterilmektedir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 Güvenlik Merkezi ile çalışmaya başlamak için Microsoft Azure aboneliğinizin olması gerekir. Bir aboneliğiniz yoksa [ücretsiz hesap](https://azure.microsoft.com/pricing/free-trial/) için kaydolabilirsiniz.
 
-Bu hızlı başlangıca başlamadan önce Güvenlik Merkezi’nin Standart fiyatlandırma katmanında olmanız gerekir. Yükseltme yönergeleri için bkz. [Azure aboneliğinizi Güvenlik Merkezi Standart katmanına ekleme](security-center-get-started.md). Güvenlik Merkezi'nin standart hiçbir ücret ödemeden deneyebilirsiniz. Daha fazla bilgi için bkz. [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/security-center/).
+Bu hızlı başlangıçtaki adımlara geçmeden önce Güvenlik Merkezi’nin Standart fiyatlandırma katmanında olmanız gerekir. Yükseltme yönergeleri için bkz. [Azure aboneliğinizi Güvenlik Merkezi Standart katmanına ekleme](security-center-get-started.md). Güvenlik Merkezi 'nin standardını ücretsiz olarak deneyebilirsiniz. Daha fazla bilgi için bkz. [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/security-center/).
 
 ## <a name="add-new-linux-computer"></a>Yeni Linux bilgisayarı ekleme
 
-1. [Azure portal](https://azure.microsoft.com/features/azure-portal/) oturum açın.
+1. [Azure portalında](https://azure.microsoft.com/features/azure-portal/) oturum açın.
 2. **Microsoft Azure** menüsünde **Güvenlik Merkezi**’ni seçin. **Güvenlik Merkezi - Genel Bakış** açılır.
 
    ![Güvenlik Merkezine genel bakış][2]
 
 3. Güvenlik Merkezi ana menüsü altında, **Başlarken**’i seçin.
-4. **Başlangıç** sekmesini seçin. ![Başlangıç][3]
+4. **Kullanmaya başlayın sekmesini seçin** . ![kullanmaya başlayın][3]
 
 5. **Yeni Azure olmayan bilgisayarlar ekleme** atında **Yapılandır**’a tıklayın, Log Analytics çalışma alanlarınızın bir listesi gösterilir. Listede, varsa, otomatik sağlama etkinleştirildiğinde Güvenlik Merkezi tarafından sizin için oluşturulan varsayılan çalışma alanı bulunur. Bu çalışma alanını veya kullanmak istediğiniz başka bir çalışma alanını seçin.
 
-    ![Azure olmayan bilgisayar ekleme](./media/quick-onboard-linux-computer/non-azure.png)
+    ![Azure dışı bilgisayar ekleme](./media/quick-onboard-linux-computer/non-azure.png)
 
 6. **Direct Agent** (Doğrudan Aracı) sayfasının **DOWNLOAD AND ONBOARD AGENT FOR LINUX** (Linux için aracıyı indir ve ekle) bölümünden **copy** (Kopyala) düğmesini seçerek *wget* komutunu kopyalayın.
 
@@ -57,7 +56,7 @@ Bu hızlı başlangıca başlamadan önce Güvenlik Merkezi’nin Standart fiyat
 
    ![Aracıyı yükleme][5]
 
-Linux için Güvenlik Merkezi Aracısı günlükleri şu yolda bulunabilir:: */var/opt/microsoft/omsagent/\<çalışma alanı kimliği > /log/*
+Aracının günlükleri şurada bulunabilir: */var/SeçenekKodu/Microsoft/omsagent/\<çalışma alanı kimliği >/log/*
 
   ![Aracı günlükleri][6]
 
@@ -67,7 +66,7 @@ Artık Azure VM’lerinizi ve Azure dışı bilgisayarlarınızı tek bir yerde 
 
   ![Compute (İşlem) dikey penceresi][7] **Compute** (İşlem) dikey penceresinde temsil edilen iki tür simge vardır:
 
-  ![simge1](./media/quick-onboard-linux-computer/security-center-monitoring-icon1.png) Azure olmayan bilgisayar
+  ![simge1](./media/quick-onboard-linux-computer/security-center-monitoring-icon1.png) Azure dışı bilgisayar
 
   ![simge2](./media/quick-onboard-linux-computer/security-center-monitoring-icon2.png) Azure VM
 
@@ -82,7 +81,7 @@ Aracıyı kaldırmak için:
     `sudo sh ./omsagent-<version>.universal.x64.sh --purge`
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu hızlı başlangıçta, bir Linux bilgisayarında aracıyı sağladınız. Güvenlik Merkezi'ni kullanma hakkında daha fazla bilgi için bir güvenlik ilkesi yapılandırma ve kaynaklarınızın güvenliğini değerlendirme ile ilgili öğreticiye geçin.
+Bu hızlı başlangıçta aracıyı bir Linux bilgisayarda sağladınız. Güvenlik Merkezi'ni kullanma hakkında daha fazla bilgi için bir güvenlik ilkesi yapılandırma ve kaynaklarınızın güvenliğini değerlendirme ile ilgili öğreticiye geçin.
 
 > [!div class="nextstepaction"]
 > [Öğretici: Güvenlik ilkelerini tanımlama ve değerlendirme](tutorial-security-policy.md)

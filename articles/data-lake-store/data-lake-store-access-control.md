@@ -12,12 +12,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/26/2018
 ms.author: twooley
-ms.openlocfilehash: 211cb32298b17bb9e4023bf8bc74233c3916f58d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 276e691351d852d6dcb0075d47bf33af6767fc10
+ms.sourcegitcommit: 920ad23613a9504212aac2bfbd24a7c3de15d549
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60879115"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "68226091"
 ---
 # <a name="access-control-in-azure-data-lake-storage-gen1"></a>Azure Data Lake depolama Gen1 erişim denetimi
 
@@ -27,9 +27,9 @@ Azure Data Lake depolama Gen1 sırayla POSIX erişim denetimi modelinden türeti
 
 İki tür erişim denetim listesi (ACL) vardır: **Erişim ACL’leri** ve **Varsayılan ACL’ler**.
 
-* **Erişim ACL'leri**: Bu denetim erişimi bir nesne. Hem dosyalar hem de klasörler Erişim ACL’lerine sahiptir.
+* **Erişim ACL 'leri**: Bu denetim bir nesneye erişim sağlar. Hem dosyalar hem de klasörler Erişim ACL’lerine sahiptir.
 
-* **Varsayılan ACL'ler**: "Bir klasörle ilişkili bir şablonu" olan ACL'lerin o klasör altında oluşturulan tüm alt öğelere ilişkin erişim ACL'lerini belirleyen. Dosyalar Varsayılan ACL’ye sahip değildir.
+* **Varsayılan ACL 'ler**: Bu klasör altında oluşturulan tüm alt öğelere ilişkin erişim ACL 'Lerini tespit eden bir klasörle ilişkili ACL 'lerin bir "şablonu". Dosyalar Varsayılan ACL’ye sahip değildir.
 
 
 Hem Erişim ACL'leri hem de Varsayılan ACL'ler aynı yapıdadır.
@@ -132,8 +132,8 @@ POSIX ACL’lerinde her kullanıcı bir "birincil grup" ile ilişkilendirilir. �
 
 **Yeni dosya veya klasör için sahip olan grup atama**
 
-* **Case 1**: Kök klasör "/". Bir Data Lake depolama Gen1 hesabı oluşturulduğunda bu klasör oluşturulur. Bu durumda sahip olan grup için bir tüm sıfır GUID ayarlanır.  Bu değer, erişime izin vermez.  Bir grup atanır bu zamana kadar yer tutucu olduğu.
-* **2. durum** (diğer her olay): Yeni bir öğe oluşturulduğunda sahip olan Grup üst klasörden kopyalanır.
+* **Durum 1**: "/" Kök klasörü. Bir Data Lake depolama Gen1 hesabı oluşturulduğunda bu klasör oluşturulur. Bu durumda sahip olan grup için bir tüm sıfır GUID ayarlanır.  Bu değer, erişime izin vermez.  Bir grup atanır bu zamana kadar yer tutucu olduğu.
+* **Durum 2** (Diğer her durum): Yeni bir öğe oluşturulduğunda sahip olan grup üst klasörden kopyalanır.
 
 **Sahip olan Grup değiştirme**
 
@@ -166,7 +166,7 @@ def access_check( user, desired_perms, path ) :
   # Handle the owning user. Note that mask IS NOT used.
   entry = get_acl_entry( path, OWNER )
   if (user == entry.identity)
-      return ( (desired_perms & e.permissions) == desired_perms )
+      return ( (desired_perms & entry.permissions) == desired_perms )
 
   # Handle the named users. Note that mask IS used.
   entries = get_acl_entries( path, NAMED_USER )
@@ -216,9 +216,9 @@ Var olan bir klasör altında yeni bir dosya ya da klasör oluşturulduğunda ü
 
 ### <a name="umask"></a>umask
 
-Bir dosyanın veya klasörün oluşturulduğu sırada umask varsayılan ACL'ler alt öğede nasıl ayarlanacağını değiştirmek için kullanılır. umask bir 9 bitlik bir RWX değeri için üst klasörlerinde 9 bitlik bir değer olan **sahip olan kullanıcı**, **sahip olan grup**, ve **diğer**.
+Bir dosyanın veya klasörün oluşturulduğu sırada umask varsayılan ACL'ler alt öğede nasıl ayarlanacağını değiştirmek için kullanılır. umask, **sahip olan Kullanıcı**, **sahip olan grup**ve **diğer**için RWX değeri içeren üst klasörlerdeki 9 bitlik bir değerdir.
 
-Azure Data Lake depolama Gen1 bir sabit değeri için umask 007 için ayarlayın. Bu değer için çevirir
+Azure Data Lake Storage 1. için umask, 007 olarak ayarlanan sabit bir değerdir. Bu değer için çevirir
 
 | umask bileşeni     | Sayısal biçim | Kısa biçim | Anlamı |
 |---------------------|--------------|------------|---------|

@@ -21,7 +21,7 @@ Bu makalede, runbook'ların tamamlanma durumu temelinde uyarılar oluşturma hak
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
-https://portal.azure.com adresinden Azure'da oturum açın
+[https://portal.azure.com](https://portal.azure.com ) adresinden Azure'da oturum açın
 
 ## <a name="create-alert"></a>Uyarı oluşturma
 

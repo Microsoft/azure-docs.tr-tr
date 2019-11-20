@@ -1,40 +1,40 @@
 ---
-title: Dil desteği - görüntü işleme
+title: Dil desteği-Görüntü İşleme
 titleSuffix: Azure Cognitive Services
-description: Doğal görüntü işleme özellikleri tarafından desteklenen dillerin listesi.
+description: Bu makale, Görüntü İşleme özellikleri tarafından desteklenen doğal dillerin bir listesini sağlar; OCR, Metin Tanıma ve okuma.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: computer-vision
-ms.topic: article
+ms.topic: conceptual
 ms.date: 04/17/2019
 ms.author: pafarley
-ms.openlocfilehash: 1a70d1b2ea504d0ccfba925810a2d19d0c7583cc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a834c68119340d796f87971912a07fc0524a6d21
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60759614"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718620"
 ---
-# <a name="language-support-for-computer-vision"></a>Görüntü işleme için dil desteği
+# <a name="language-support-for-computer-vision"></a>Görüntü İşleme için dil desteği
 
-Görüntü işleme özelliklerinden bazıları birden çok dil desteği: Burada bahsedilen değil herhangi bir özelliği yalnızca İngilizce destekler.
+Görüntü İşleme bazı özellikleri birden çok dili destekler; Burada bahsedilen özellikler yalnızca Ingilizce 'yi destekler.
 
 ## <a name="text-recognition"></a>Metin tanıma
 
-Görüntü işleme, birden çok dilde metin tanıyabilirsiniz. Özellikle, [OCR](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fc) API, çeşitli dillerde, desteklerken [okuma](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/2afb498089f74080d7ef85eb) API ve [metni tanı](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/587f2c6a154055056008f200) API desteği yalnızca İngilizce. Bkz: [yazdırılan ve el yazısı metinleri tanıma](concept-recognizing-text.md) bu işlevselliği ve her API avantajları hakkında daha fazla bilgi için.
+Görüntü İşleme, metni birçok dilde tanıyabilir. Özellikle, [OCR](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fc) API 'si çeşitli dilleri destekler, ancak [Read](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/2afb498089f74080d7ef85eb) API ve [metin tanıma](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/587f2c6a154055056008f200) API yalnızca İngilizce 'yi destekler. Bu işlevsellik ve her bir API 'nin avantajları hakkında daha fazla bilgi için bkz. [basılı ve el yazısı metnini tanıma](concept-recognizing-text.md) .
 
-API çağrısında bir dil kodu belirtmenize gerek yoktur olduğundan OCR giriş malzeme dili otomatik olarak algılar. Ancak, dil kodlarını değeri olarak her zaman döndürülür `"language"` JSON yanıtındaki düğümü.
+OCR, giriş malzemesinin dilini otomatik olarak algılar, bu nedenle API çağrısında bir dil kodu belirtmeniz gerekmez. Ancak, dil kodları her zaman JSON yanıtında `"language"` düğümünün değeri olarak döndürülür.
 
-|Dil| Dil kodu | OCR API |
+|Dil| Dil kodu | OCR APı 'SI |
 |:-----|:----:|:-----:|
 |Arapça | `ar`|✔ |
 |Çince (Basitleştirilmiş) | `zh-Hans`|✔ |
-|seçenekleri yerine | `zh-Hant`|✔ |
+|Çince (Geleneksel) | `zh-Hant`|✔ |
 |Çekçe | `cs` |✔ |
 |Danca | `da` |✔ |
-|Felemenkçe | `nl` |✔ |
+|Hollanda dili | `nl` |✔ |
 |Türkçe | `en` |✔ |
 |Fince | `fi` |✔ |
 |Fransızca | `fr` |✔ |
@@ -56,11 +56,11 @@ API çağrısında bir dil kodu belirtmenize gerek yoktur olduğundan OCR giriş
 |İsveççe | `sw` |✔ |
 |Türkçe | `tr` |✔ |
 
-## <a name="image-analysis"></a>Görüntü analizi
+## <a name="image-analysis"></a>Görüntü Analizi
 
-Bazı eylemleri [analiz - görüntü](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa) API ile belirtilen diğer dillerdeki sonuçlar döndürebilir `language` sorgu parametresi. Diğer Eylemler, dilden bağımsız olarak belirtilir İngilizce sonuçları döndürür ve diğer desteklenmeyen diller için bir özel durum. İle belirtilen eylemleri `visualFeatures` ve `details` sorgu parametreleri; bkz [genel bakış](home.md) görüntü Analizi ile yapabileceğiniz tüm eylemlerin listesi.
+[Analyze-Image](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa) API 'sindeki bazı eylemler, `language` sorgu parametresiyle belirtilen diğer dillerde sonuç döndürebilir. Diğer Eylemler, belirtilen dilin ne olduğuna bakmaksızın sonuçları Ingilizce olarak döndürür ve bazıları desteklenmeyen diller için bir özel durum oluşturur. Eylemler `visualFeatures` ve `details` sorgu parametreleriyle belirtilir; görüntü analizi ile yapabileceğiniz tüm eylemlerin listesini görmek için bkz. [genel bakış](home.md) .
 
-|Dil | Dil kodu | Categories | Tags | Açıklama | Yetişkin | Markalar | Renk | Yüzler | Resim Türü | Nesneler | Ünlüler | Yer işareti |
+|Dil | Dil kodu | Kategoriler | Etiketler | Açıklama | Yetişkin | Markalar | Renk | Yüzler | Resim Türü | Nesneler | Ünlüler | Sakal |
 |:---|:---:|:----:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |Çince | `zh`    | ✔ | ✔| ✔|-|-|-|-|-|❌|✔|✔|
 |Türkçe | `en`   | ✔ | ✔| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
@@ -70,7 +70,7 @@ Bazı eylemleri [analiz - görüntü](https://westus.dev.cognitive.microsoft.com
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu kılavuzun başlarında da belirtildiği görüntü işleme özelliklerini kullanmaya başlayın.
+Bu kılavuzda bahsedilen Görüntü İşleme özelliklerini kullanmaya başlayın.
 
-* [Yerel bir görüntü (REST) analiz edin](./quickstarts/csharp-analyze.md)
-* [Yazdırılan metin (REST) ayıklayın](./quickstarts/csharp-print-text.md)
+* [Yerel görüntüyü çözümleme (REST)](./quickstarts/csharp-analyze.md)
+* [Yazdırılan metni Ayıkla (REST)](./quickstarts/csharp-print-text.md)

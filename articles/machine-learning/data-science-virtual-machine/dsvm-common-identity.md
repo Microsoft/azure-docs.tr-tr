@@ -1,86 +1,80 @@
 ---
-title: Ortak bir kimlik ayarlamak için veri bilimi sanal makinesi - Azure | Microsoft Docs
+title: Ortak bir kimlik ayarlama
+titleSuffix: Azure Data Science Virtual Machine
 description: Birden çok veri bilimi sanal makinelerde kullanılabilir ortak kullanıcı hesapları oluşturma hakkında bilgi edinin. Azure Active Directory veya bir şirket içi Active Directory, veri bilimi sanal makinesi için kullanıcıların kimliğini doğrulamak için kullanabilirsiniz.
 keywords: derin öğrenme yapay ZEKA, veri bilimi araçları, veri bilimi sanal makinesi, Jeo-uzamsal analiz, team data science Process'i
 services: machine-learning
-documentationcenter: ''
-author: gopitk
-manager: cgronlun
-ms.custom: seodec18
-ms.assetid: ''
 ms.service: machine-learning
 ms.subservice: data-science-vm
-ms.workload: data-services
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+author: vijetajo
+ms.author: vijetaj
+ms.topic: conceptual
 ms.date: 05/08/2018
-ms.author: gokuma
-ms.openlocfilehash: 0146ee6ee37c2eb9e98d831b54df2218d7de5b62
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 44f1f7ae3b290e1dbf01877f3881e1d95a238446
+ms.sourcegitcommit: 5f67772dac6a402bbaa8eb261f653a34b8672c3a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60502386"
+ms.lasthandoff: 09/01/2019
+ms.locfileid: "70208150"
 ---
-# <a name="set-up-a-common-identity-on-the-data-science-virtual-machine"></a>Üzerinde veri bilimi sanal makinesi ortak bir kimlik ayarlayın
+# <a name="set-up-a-common-identity-on-a-data-science-virtual-machine"></a>Veri Bilimi Sanal Makinesi ortak bir kimlik ayarlama
 
-Azure sanal veri bilimi sanal makinesi (DSVM) dahil olmak üzere makinesinde (VM), VM sağlarken yerel kullanıcı hesapları oluşturun. Kullanıcılar daha sonra bu kimlik bilgilerini kullanarak VM'ye kimlik doğrulaması. Erişmesi gereken birden fazla VM varsa, kimlik bilgilerini yönetme gibi bu yaklaşım hızlı bir şekilde hantal alabilirsiniz. Genel kullanıcı hesapları ve Yönetimi standartlara dayalı kimlik sağlayıcısı üzerinden azure'da birden çok Dsvm'leri dahil olmak üzere birden çok kaynaklara erişmek için tek bir kimlik bilgileri kümesi kullanmak sağlar. 
+Bir Veri Bilimi Sanal Makinesi (DSVM) dahil Microsoft Azure bir sanal makinede (VM), VM sağlanırken yerel kullanıcı hesapları oluşturursunuz. Kullanıcılar daha sonra bu kimlik bilgilerini kullanarak VM'ye kimlik doğrulaması. Kullanıcılarınızın erişmesi gereken birden çok VM 'niz varsa, kimlik bilgilerini yönetmek çok fazla sayıda olabilir. Mükemmel bir çözüm, standart tabanlı bir kimlik sağlayıcısı aracılığıyla ortak Kullanıcı hesapları ve yönetimi dağıtmaktır. Bu yaklaşımda, birden çok DSVMs dahil olmak üzere Azure 'daki birden fazla kaynağa erişmek için tek bir kimlik bilgileri kümesi kullanabilirsiniz.
 
-Active Directory, popüler kimlik sağlayıcısı ve Azure üzerinde bir hizmet ve şirket içi desteklenir. Azure Active Directory (Azure AD) kullanabilir veya tek başına DSVM veya kümede bir Azure sanal makine ölçek kümesi Dsvm'leri kullanıcıların kimliklerini doğrulamak için Active Directory şirket. Bunun için DSVM örnekleri bir Active Directory etki alanına katılarak. 
+Active Directory, popüler bir kimlik sağlayıcıdır ve Azure 'da hem bulut hizmeti hem de şirket içi dizin olarak desteklenir. Azure Active Directory (Azure AD) kullanabilir veya tek başına DSVM veya kümede bir Azure sanal makine ölçek kümesi Dsvm'leri kullanıcıların kimliklerini doğrulamak için Active Directory şirket. Bunun için DSVM örnekleri bir Active Directory etki alanına katılarak.
 
-Kimliklerini yönetmek için Active Directory zaten varsa, ortak bir kimlik sağlayıcısı olarak kullanabilirsiniz. Active Directory yoksa, adlı bir hizmet aracılığıyla yönetilen bir Active Directory örneğini Azure üzerinde çalıştırabilirsiniz [Azure Active Directory Domain Services](https://docs.microsoft.com/azure/active-directory-domain-services/) (Azure AD DS). 
+Zaten Active Directory varsa, bunu ortak kimlik sağlayıcınız olarak kullanabilirsiniz. Active Directory yoksa, Azure 'da [Azure Active Directory Domain Services](https://docs.microsoft.com/azure/active-directory-domain-services/) (Azure AD DS) aracılığıyla yönetilen bir Active Directory örneğini çalıştırabilirsiniz.
 
-Belgelerine [Azure AD'ye](https://docs.microsoft.com/azure/active-directory/) sağlayan ayrıntılı [yönetim yönergeleri](https://docs.microsoft.com/azure/active-directory/choose-hybrid-identity-solution), varsa şirket içi dizininizi Azure AD'ye bağlanma dahil olmak üzere. 
+[Azure AD](https://docs.microsoft.com/azure/active-directory/) belgeleri, Azure AD 'niz varsa şirket içi dizininize bağlama hakkında rehberlik dahil olmak üzere ayrıntılı [Yönetim yönergeleri](https://docs.microsoft.com/azure/active-directory/choose-hybrid-identity-solution)sağlar.
 
-Bu makalede Azure AD DS kullanarak azure'da tam olarak yönetilen bir Active Directory etki alanı hizmeti ayarlamak için gereken adımlar açıklanmaktadır. Ardından, ortak bir kullanıcı hesabı ve kimlik bilgilerini kullanarak Dsvm'leri (ve diğer Azure kaynakları) oluşan bir havuz erişmelerini sağlamak için yönetilen Active Directory etki alanında, Dsvm'leri katılmasını sağlayabilirsiniz. 
+Bu makalede Azure AD DS kullanarak Azure 'da tam olarak yönetilen bir Active Directory etki alanı hizmetinin nasıl ayarlanacağı açıklanır. Daha sonra DSVMs 'nizi yönetilen Active Directory etki alanına ekleyebilirsiniz. Bu yaklaşım, kullanıcıların bir DSVMs havuzuna (ve diğer Azure kaynaklarına) ortak bir kullanıcı hesabı ve kimlik bilgileriyle erişmelerini sağlar.
 
 ## <a name="set-up-a-fully-managed-active-directory-domain-on-azure"></a>Azure üzerinde tam olarak yönetilen bir Active Directory etki alanı ayarlama
 
-Azure AD DS Azure'da tam olarak yönetilen bir hizmet sağlayarak kimliklerinizi yönetmek basit hale getirir. Bu Active Directory etki alanı kullanıcıları ve grupları yönetin. Dizininizdeki bir Azure'da barındırılan Active Directory etki alanı ve kullanıcı hesaplarını ayarlama adımları şunlardır:
+Azure AD DS Azure'da tam olarak yönetilen bir hizmet sağlayarak kimliklerinizi yönetmek basit hale getirir. Bu Active Directory etki alanı kullanıcıları ve grupları yönetin. Dizininizde Azure 'da barındırılan Active Directory etki alanı ve Kullanıcı hesapları ayarlamak için şu adımları izleyin:
 
 1. Azure portalında, kullanıcının Active Directory'ye ekleyin: 
 
-   a. Dizin için genel yönetici olan bir hesapla [Azure Active Directory yönetim merkezinde](https://aad.portal.azure.com) oturum açın.
+   1. [Azure Active Directory Yönetim merkezinde](https://aad.portal.azure.com) , dizin için genel yönetici olan bir hesap kullanarak oturum açın.
     
-   b. **Azure Active Directory**'yi ve ardından **Kullanıcılar ve gruplar**'ı seçin.
+   1. **Azure Active Directory**'yi ve ardından **Kullanıcılar ve gruplar**'ı seçin.
     
-   c. **Kullanıcılar ve gruplar** sayfasında **Tüm kullanıcılar**'ı ve ardından **Yeni kullanıcı**'yı seçin.
+   1. **Kullanıcılar ve gruplar**' da, **tüm kullanıcılar**' ı seçin ve ardından **Yeni Kullanıcı**' yı seçin.
    
-      **Kullanıcı** bölmesi açılır.
+           The **User** pane opens:
       
       !["Kullanıcı" bölmesi](./media/add-user.png)
     
-   d. **Ad** ve **Kullanıcı adı** gibi kullanıcı ayrıntılarını girin. İlk varsayılan etki alanı adı "[etki alanı adı].onmicrosoft.com" veya doğrulanmış, kullanıcı adı etki alanı adı kısmı olmalıdır Federasyon olmayan [özel etki alanı adı](../../active-directory/add-custom-domain.md) "contoso.com" gibi
+   1. **Ad** ve **Kullanıcı adı** gibi kullanıcı ayrıntılarını girin. İlk varsayılan etki alanı adı "[etki alanı adı].onmicrosoft.com" veya doğrulanmış, kullanıcı adı etki alanı adı kısmı olmalıdır Federasyon olmayan [özel etki alanı adı](../../active-directory/add-custom-domain.md) "contoso.com" gibi
     
-   e. Bu işlem tamamlandıktan sonra kullanıcıyla paylaşabilmek için oluşturulan kullanıcı parolasını kopyalayın veya bir yere not edin.
+   1. Bu işlem tamamlandıktan sonra kullanıcıyla paylaşabilmek için oluşturulan kullanıcı parolasını kopyalayın veya bir yere not edin.
     
-   f. İsteğe bağlı olarak kullanıcının **Profil**, **Gruplar** veya **Dizin rolü** bilgilerini doldurun. 
+   1. İsteğe bağlı olarak kullanıcının **Profil**, **Gruplar** veya **Dizin rolü** bilgilerini doldurun. 
     
-   g. **Kullanıcı** sayfasında **Oluştur**'u seçin.
+   1. **Kullanıcı**altında **Oluştur**' u seçin.
     
-   h. Kullanıcının oturum açabilmesi için oluşturulan parolayı güvenli bir şekilde iletin.
+   1. Oluşturulan parolayı, oturum açabilmeniz için yeni kullanıcıya güvenli bir şekilde dağıtın.
 
-1. Azure AD DS örneği oluşturun. Makaledeki yönergeleri [etkinleştirme Azure Active Directory etki alanı Azure portalını kullanarak Hizmetleri](https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-getting-started) (1-5 görevleri). Azure AD DS'de parola eşitlendiğinde, mevcut Active Directory kullanıcı parolalarını güncelleştirmek önemlidir. Ayrıca görev makaleyi 4 açıklandığı Azure AD DS, DNS eklemek önemlidir. 
+1. Azure AD DS örneği oluşturun. Azure portal ("bir örnek oluşturma ve temel ayarları yapılandırma" bölümünde) [Azure Active Directory Domain Services etkinleştir](https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-getting-started) bölümündeki yönergeleri izleyin. Azure AD DS'de parola eşitlendiğinde, mevcut Active Directory kullanıcı parolalarını güncelleştirmek önemlidir. Ayrıca, bu bölümdeki "bir Azure AD DS örneği oluşturmak için Azure portal temel bilgileri penceresindeki alanları doldurun" bölümünde açıklandığı gibi, Azure AD DS DNS eklemek de önemlidir.
 
-1. Önceki adımı 2 görevde oluşturduğunuz sanal ağı ayrı bir DSVM alt ağ oluşturun.
-1. Bir veya daha fazla veri bilimi sanal makinesi örneğini DSVM alt ağında oluşturun. 
-1. İzleyin [yönergeleri](https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-join-ubuntu-linux-vm ) DSVM Active Directory'ye ekleme. 
-1. Herhangi bir makinede çalışma alanınızı bağlamak etkinleştirmek üzere, giriş veya not defteri dizinde barındırmak için Azure dosyaları paylaşımına bağlayın. (Sıkı dosya düzeyinde izinlerin gerekiyorsa, bir veya daha fazla Vm'lerde çalışan NFS gerekir.)
+1. Yukarıdaki adımın "sanal ağ oluşturma ve yapılandırma" bölümünde oluşturulan sanal ağda ayrı bir DSVM alt ağı oluşturun.
+1. DSVM alt ağında bir veya daha fazla DSVM örneği oluşturun.
+1. Active Directory 'e DSVM eklemek için [yönergeleri](https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-join-ubuntu-linux-vm ) izleyin. 
+1. Çalışma alanınızın herhangi bir makineye bağlanmasını sağlamak için ev veya Not defteri dizininizi barındırmak üzere bir Azure dosya paylaşımının bağlama. (Sıkı dosya düzeyi izinlere ihtiyacınız varsa, bir veya daha fazla VM üzerinde çalışan ağ dosya sistemi [NFS] gerekir.)
 
-   a. [Bir Azure dosya paylaşımı oluşturma](../../storage/files/storage-how-to-create-file-share.md).
+   1. [Bir Azure dosya paylaşımı oluşturma](../../storage/files/storage-how-to-create-file-share.md).
     
-   b. Bu, üzerinde bir Linux DSVM'sini bağlayın. Seçtiğinizde, **Connect** Linux DSVM'sini Kabuk görünür Bash'te çalıştırmak için komutu Azure portalında depolama hesabınızda Azure dosyaları paylaşım için düğme. Komut şöyle görünür:
+   2.  Bu paylaşımın Linux DSVM üzerine takın. Azure portal depolama hesabınızda Azure dosya paylaşımının **bağlantısını** seçtiğinizde, LINUX dsvm 'de bash kabuğu 'nda çalıştırılacak komut görüntülenir. Komut şöyle görünür:
    
    ```
    sudo mount -t cifs //[STORAGEACCT].file.core.windows.net/workspace [Your mount point] -o vers=3.0,username=[STORAGEACCT],password=[Access Key or SAS],dir_mode=0777,file_mode=0777,sec=ntlmssp
    ```
-1. Azure dosya paylaşımınızdaki /data/workspace, örneğin bağlandığını varsayar. Artık kullanıcılarınızı paylaşımındaki her dizini oluşturmak: /data/workspace/user1 /data/workspace/user2 ve benzeri. Oluşturma bir `notebooks` her bir kullanıcının çalışma dizini. 
+1. Örneğin, Azure dosya paylaşımınızı/Data/Workspace dizinine bağladığınızı varsayalım. Şimdi paylaşımdaki her bir kullanıcı için dizinler oluşturun:/Data/Workspace/User1,/Data/Workspace/User2 vb. Oluşturma bir `notebooks` her bir kullanıcının çalışma dizini. 
 1. İçin simgesel bağlantılar oluştur `notebooks` içinde `$HOME/userx/notebooks/remote`.   
 
-Artık, kullanıcıların, Azure'da barındırılan, Active Directory örneğine sahip. Active Directory kimlik bilgilerini kullanarak, kullanıcılar, Azure AD DS'ye katılan tüm DSVM (SSH veya JupyterHub) için oturum açabilir. JupyterHub kullanırken kullanıcılar kullanıcı çalışma bir Azure dosya paylaşımında olduğundan, kullanıcıların not defterlerini ve diğer iş herhangi DSVM erişimini sahip olursunuz. 
+Artık Azure 'da barındırılan Active Directory örneğindeki kullanıcılara sahipsiniz. Kullanıcılar, Active Directory kimlik bilgilerini kullanarak Azure AD DS 'a katılmış herhangi bir DSVM 'de (SSH veya jupi) oturum açabilirler. JupyterHub kullanırken kullanıcılar kullanıcı çalışma bir Azure dosya paylaşımında olduğundan, kullanıcıların not defterlerini ve diğer iş herhangi DSVM erişimini sahip olursunuz.
 
-Otomatik ölçeklendirme için sanal makine ölçek kümesi bağlı paylaşılan disk ile ve bu şekilde etki alanına katılmış tüm VM'lerin bir havuz oluşturmak için kullanabilirsiniz. Kullanıcılar, sanal makine ölçek kümesindeki tüm kullanılabilir makine oturum açın ve kullanıcıların not defterlerini kaydedildiği paylaşılan disk erişimi. 
+Otomatik ölçeklendirme için sanal makine ölçek kümesi bağlı paylaşılan disk ile ve bu şekilde etki alanına katılmış tüm VM'lerin bir havuz oluşturmak için kullanabilirsiniz. Kullanıcılar, sanal makine ölçek kümesindeki kullanılabilir herhangi bir makinede oturum açabilir ve onun Not defterlerinin kaydedildiği paylaşılan diske erişebilir. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,71 +1,74 @@
 ---
-title: Bir Windows sanal masaüstü Önizleme konak havuzu - Azure için bir kullanıcı profili paylaşımını ayarlama
-description: Bir Windows sanal masaüstü Önizleme konak havuz için bir FSLogix profili kapsayıcısı ayarlama yapma.
+title: Windows sanal masaüstü FSLogix profili kapsayıcı paylaşma-Azure
+description: Sanal makine tabanlı dosya paylaşımının kullanıldığı bir Windows sanal masaüstü konak havuzu için FSLogix profil kapsayıcısını ayarlama.
 services: virtual-desktop
 author: Heidilohr
 ms.service: virtual-desktop
-ms.topic: how-to
-ms.date: 04/05/2019
+ms.topic: conceptual
+ms.date: 08/20/2019
 ms.author: helohr
-ms.openlocfilehash: f6516e37107a16d80c4d9eb9514782bdbcc44184
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 65d800cc6c1b6818369807ffeae9cd350a34066f
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64925205"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606999"
 ---
-# <a name="set-up-a-user-profile-share-for-a-host-pool"></a>Ana bilgisayar havuzu için kullanıcı profili paylaşımı ayarlama
+# <a name="create-a-profile-container-for-a-host-pool-using-a-file-share"></a>Dosya paylaşımı kullanarak ana bilgisayar havuzu için profil kapsayıcısı oluşturma
 
-Windows sanal masaüstü Önizleme hizmeti önerilen kullanıcı profili çözümü FSLogix profili kapsayıcılar sunar. Kullanım dışı olacak kullanıcı profili diski (UPD) çözümünü kullanarak gelecek sürümlerinde Windows sanal masaüstünün önerilmemektedir.
+Windows sanal masaüstü hizmeti, önerilen Kullanıcı profili çözümü olarak FSLogix profil kapsayıcıları sunar. Windows sanal masaüstü 'nün gelecek sürümlerinde kullanım dışı bırakılacak Kullanıcı profili diski (UPD) çözümünü kullanmanızı önermiyoruz.
 
-Bu bölümde bir ana makine havuzu için bir FSLogix profili kapsayıcı paylaşım kurma bildirir. FSLogix ilgili genel belgeler için bkz. [FSLogix site](https://docs.fslogix.com/).
+Bu makalede, sanal makine tabanlı dosya paylaşımından bir konak havuzu için bir FSLogix profil kapsayıcısı paylaşımının nasıl ayarlanacağı açıklanır. Daha fazla FSLogix belgeleri için bkz. [fslogix sitesi](https://docs.fslogix.com/).
 
-## <a name="create-a-new-virtual-machine-that-will-act-as-a-file-share"></a>Bir dosya paylaşımı olarak görev yapacak yeni bir sanal makine oluşturma
+>[!NOTE]
+>Azure 'daki farklı FSLogix profili kapsayıcı depolama seçenekleri hakkında daha fazla bilgi arıyorsanız, bkz. [FSLogix profil kapsayıcıları Için depolama seçenekleri](store-fslogix-profile.md).
 
-Sanal makine oluştururken ya da aynı sanal ağ üzerinde konak havuzu sanal makineler veya sanal makineleri barındıracak havuzu bağlantısı olan bir sanal ağ üzerindeki yerleştirdiğinizden emin olun. Birden çok yolla bir sanal makine oluşturabilirsiniz:
+## <a name="create-a-new-virtual-machine-that-will-act-as-a-file-share"></a>Dosya paylaşma işlevi görecek yeni bir sanal makine oluşturun
 
-- [Bir Azure Galerisi görüntüsünü bir sanal makine oluşturun](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#create-virtual-machine)
-- [Yönetilen bir görüntüden sanal makine oluşturma](https://docs.microsoft.com/azure/virtual-machines/windows/create-vm-generalized-managed)
-- [Yönetilmeyen bir görüntüden sanal makine oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-from-user-image)
+Sanal makineyi oluştururken, konak havuzu sanal makineleriyle aynı sanal ağa veya konak havuzu sanal makinelerine bağlantısı olan bir sanal ağa yerleştirdiğinizden emin olun. Bir sanal makineyi birden çok şekilde oluşturabilirsiniz:
 
-Sanal makineyi oluşturduktan sonra aşağıdaki işlemleri yaparak etki alanına katılmadan:
+- [Azure Galeri görüntüsünden sanal makine oluşturma](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#create-virtual-machine)
+- [Yönetilen görüntüden sanal makine oluşturma](https://docs.microsoft.com/azure/virtual-machines/windows/create-vm-generalized-managed)
+- [Yönetilmeyen görüntüden sanal makine oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-from-user-image)
 
-1. [Sanal makineye bağlanma](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#connect-to-virtual-machine) sanal makine oluştururken sağladığınız kimlik.
-2. Sanal makinede başlatın **Denetim Masası** seçip **sistem**.
-3. Seçin **bilgisayar adı**seçin **ayarlarını değiştir**ve ardından **Değiştir...**
-4. Seçin **etki alanı** ve ardından sanal ağ üzerinde Active Directory etki alanını girin.
-5. Makine etki alanına katılım ayrıcalıkları olan bir etki alanı hesabıyla kimlik doğrulaması.
+Sanal makineyi oluşturduktan sonra, aşağıdaki işlemleri gerçekleştirerek etki alanına ekleyin:
 
-## <a name="prepare-the-virtual-machine-to-act-as-a-file-share-for-user-profiles"></a>Kullanıcı profilleri için dosya paylaşımı olarak görev yapacak bir sanal makine hazırlama
+1. Sanal makineyi oluştururken girdiğiniz kimlik bilgileriyle [sanal makineye bağlanın](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#connect-to-virtual-machine) .
+2. Sanal makinede, **Denetim Masası** ' nı başlatın ve **sistem**' i seçin.
+3. **Bilgisayar adı**' nı seçin, **Ayarları Değiştir**' i seçin ve ardından Değiştir ' i seçin **.**
+4. **Etki alanı** ' nı seçin ve ardından sanal ağda Active Directory etki alanını girin.
+5. Etki alanına katma makinelere ayrıcalıkları olan bir etki alanı hesabıyla kimlik doğrulaması yapın.
 
-Kullanıcı profilleri için dosya paylaşımı olarak görev yapacak bir sanal makine hazırlama hakkında genel yönergeler şunlardır:
+## <a name="prepare-the-virtual-machine-to-act-as-a-file-share-for-user-profiles"></a>Sanal makineyi Kullanıcı profilleri için dosya paylaşma görevi görecek şekilde hazırlama
 
-1. Windows sanal masaüstü Active Directory Kullanıcıları için ekleme bir [Active Directory güvenlik grubu](https://docs.microsoft.com/windows/security/identity-protection/access-control/active-directory-security-groups). Bu güvenlik grubu, yeni oluşturduğunuz dosya paylaşımı sanal makineye Windows sanal masaüstü kullanıcıların kimliğini doğrulamak için kullanılır.
-2. [Dosya Paylaşımı sanal makineye bağlanma](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#connect-to-virtual-machine).
-3. Dosya Paylaşımı sanal makinede, üzerinde bir klasör oluşturun. **C sürücüsüne** profili paylaşımı olarak kullanılacak.
-4. Yeni klasöre sağ tıklayın, **özellikleri**seçin **paylaşım**, ardından **Gelişmiş paylaşım...** .
-5. Seçin **bu klasörü paylaş**seçin **izinler...** , ardından **Ekle...** .
-6. Windows Sanal Masaüstü Kullanıcıları eklediğiniz için güvenlik grubu arayın, ardından bu gruba sahip olduğundan emin olun **tam denetim**.
-7. Güvenlik grubuna ekledikten sonra klasöre sağ tıklayın, **özellikleri**seçin **paylaşım**, ardından aşağı kopyalayın **ağ yolu** için daha sonra kullanmak üzere.
+Aşağıda, bir sanal makinenin Kullanıcı profilleri için dosya paylaşma işlevi görecek şekilde hazırlanmasına ilişkin genel yönergeler verilmiştir:
 
-İzinler hakkında daha fazla bilgi için bkz. [FSLogix belgeleri](https://docs.fslogix.com/display/20170529/Requirements%2B-%2BProfile%2BContainers).
+1. Windows sanal masaüstü Active Directory kullanıcılarını [Active Directory bir güvenlik grubuna](https://docs.microsoft.com/windows/security/identity-protection/access-control/active-directory-security-groups)ekleyin. Bu güvenlik grubu, yeni oluşturduğunuz dosya paylaşımının sanal makinesine Windows sanal masaüstü kullanıcılarının kimliğini doğrulamak için kullanılacaktır.
+2. [Dosya paylaşımının sanal makinesine bağlanın](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#connect-to-virtual-machine).
+3. Dosya paylaşma sanal makinesinde, **C sürücüsünde** profil paylaşma olarak kullanılacak bir klasör oluşturun.
+4. Yeni klasöre sağ tıklayın, **Özellikler**' i seçin, **Paylaşım**' ı seçin ve **Gelişmiş paylaşım...** öğesini seçin.
+5. **Bu klasörü paylaşma**, **izinler...** öğesini seçin ve ardından **Ekle...** seçeneğini belirleyin.
+6. Windows sanal masaüstü kullanıcılarını eklediğiniz güvenlik grubunu arayın, sonra grubun **tam denetime**sahip olduğundan emin olun.
+7. Güvenlik grubu eklendikten sonra, klasöre sağ tıklayın, **Özellikler**' i seçin, **Paylaşım**' ı seçin ve ardından **ağ yolunu** daha sonra kullanmak üzere kopyalayın.
 
-## <a name="configure-the-fslogix-profile-container"></a>FSLogix profili kapsayıcısını yapılandırma
+İzinler hakkında daha fazla bilgi için bkz. [Fslogix belgeleri](https://docs.microsoft.com/fslogix/fslogix-storage-config-ht).
 
-Sanal makineler ile FSLogix yazılım yapılandırmak için aşağıdaki ana havuzuna kayıtlı her makinede yapın:
+## <a name="configure-the-fslogix-profile-container"></a>FSLogix profil kapsayıcısını yapılandırma
 
-1. [Sanal makineye bağlanma](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#connect-to-virtual-machine) sanal makine oluştururken sağladığınız kimlik.
-2. Bir internet tarayıcısı başlatın ve gidin [bu bağlantıyı](https://go.microsoft.com/fwlink/?linkid=2084562) FSLogix aracısını indirmek için. Windows sanal masaüstü genel Önizleme kapsamında FSLogix yazılım etkinleştirmek için bir lisans anahtarı alırsınız. Anahtar FSLogix aracı .zip dosyasına dahil LicenseKey.txt dosyasıdır.
-3. Ya da gidin \\ \\Win32\\sürüm veya \\ \\X64\\.zip dosyası ve çalışma sürümde **FSLogixAppsSetup** FSLogix aracıyı yüklemek için.
-4. Gidin **Program dosyaları** > **FSLogix** > **uygulamaları** yüklü bir aracıyı onaylamak için.
-5. Başlat menüsünden çalıştırmak **RegEdit** yönetici olarak. Gidin **bilgisayar\\HKEY_LOCAL_MACHINE\\yazılım\\FSLogix**.
-6. Adlı bir anahtar oluşturun **profilleri**.
-7. Profilleri anahtarı için aşağıdaki değerleri oluşturun:
+Sanal makineleri FSLogix yazılımıyla yapılandırmak için, konak havuzuna kayıtlı her makinede aşağıdakileri yapın:
+
+1. Sanal makineyi oluştururken girdiğiniz kimlik bilgileriyle [sanal makineye bağlanın](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal#connect-to-virtual-machine) .
+2. Bir internet tarayıcısı başlatın ve FSLogix aracısını indirmek için [Bu bağlantıya](https://go.microsoft.com/fwlink/?linkid=2084562) gidin.
+3. . Zip dosyasında \\\\Win32\\Release veya \\\\x64\\sürümü ' ne gidin ve **Fslogixappssetup** ' ı çalıştırarak FSLogix aracısını kurun.  FSLogix 'i yükleme hakkında daha fazla bilgi edinmek için bkz. [Fslogix indirme ve yükleme](https://docs.microsoft.com/fslogix/install-ht).
+4. Aracının yüklü olduğunu onaylamak için > **Fslogix** > **Apps** **program dosyalarına** gidin.
+5. Başlat menüsünde, **Regedit** komutunu yönetici olarak çalıştırın. **\\hkey_local_machıne\\software\\FSLogix bilgisayarına**gidin.
+6. **Profiller**adlı bir anahtar oluşturun.
+7. Profiller anahtarı için aşağıdaki değerleri oluşturun:
 
 | Ad                | Tür               | Veri/değer                        |
 |---------------------|--------------------|-----------------------------------|
-| Enabled             | DWORD              | 1                                 |
-| VHDLocations        | Çok dizeli değer | "Dosya paylaşımı için ağ yolu"     |
+| Etkin             | EKLEYEBILECEĞI              | 1                                 |
+| Vhdkonumları        | Çok dizeli değer | "Dosya paylaşımının ağ yolu"     |
 
 >[!IMPORTANT]
->Güvenliğini sağlamaya yardımcı olmak için azure'da Windows sanal masaüstü ortamınızı Vm'lerinizde gelen bağlantı noktası 3389 açmayın öneririz. Windows sanal masaüstü açık bir konak havuzun Vm'leri erişmek kullanıcılar için 3389 numaralı gelen bağlantı noktası gerektirmez. Sorun giderme amacıyla 3389 numaralı bağlantı noktası açmanız gerekiyorsa, kullanmanızı öneririz [tam zamanında VM erişimi](https://docs.microsoft.com/azure/security-center/security-center-just-in-time).
+>Azure 'da Windows sanal masaüstü ortamınızı güvenli hale getirmeye yardımcı olmak için, VM 'leriniz üzerinde gelen bağlantı noktası 3389 ' i açmanız önerilir. Windows sanal masaüstü, kullanıcıların konak havuzunun VM 'lerine erişmesi için açık bir gelen bağlantı noktası 3389 gerektirmez. Sorun giderme amacıyla bağlantı noktası 3389 ' i açmanız gerekiyorsa, [tam ZAMANıNDA VM erişimi](../security-center/security-center-just-in-time.md)kullanmanızı öneririz.

@@ -1,105 +1,159 @@
 ---
-title: 'Hızlı Başlangıç: Derinlikli okuyucu başlatan bir web uygulaması oluşturma (C#)'
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, sıfırdan bir web uygulaması derleme ve sürükleyici okuyucu işlevsellik ekler.
+title: 'Hızlı Başlangıç: İle modern okuyucuyu Başlatan bir Web uygulaması oluşturmaC#'
+titleSuffix: Azure Cognitive Services
+description: Bu hızlı başlangıçta, sıfırdan bir Web uygulaması oluşturup tam ekran okuyucusu API işlevini eklersiniz.
 services: cognitive-services
 author: metanMSFT
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: immersive-reader
 ms.topic: quickstart
 ms.date: 06/20/2019
 ms.author: metan
-ms.openlocfilehash: 77d95383c801038c256ccb2bf386ddf06048cf78
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.openlocfilehash: ed49f834cb7cd4f649d84aea9e549e212771eead
+ms.sourcegitcommit: d3dced0ff3ba8e78d003060d9dafb56763184d69
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67311804"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69899360"
 ---
-# <a name="quickstart-create-a-web-app-that-launches-the-immersive-reader-c"></a>Hızlı Başlangıç: Derinlikli okuyucu başlatan bir web uygulaması oluşturma (C#)
+# <a name="quickstart-create-a-web-app-that-launches-the-immersive-reader-c"></a>Hızlı Başlangıç: Tam ekran okuyucu (C#) başlatan bir Web uygulaması oluşturma
 
-[Sürükleyici okuyucu](https://www.onenote.com/learningtools) okuma kavramayı geliştirmek için kendini kanıtlamış teknikleri uygulayan aralığında tasarlanmış bir araçtır.
+[Tam ekran okuyucu](https://www.onenote.com/learningtools) , okuma kavramasını geliştirmek için kendini kanıtlamış teknikler uygulayan, ve dahil tasarlanmış bir araçtır.
 
-Bu hızlı başlangıçta, sıfırdan bir web uygulaması derleme ve sürükleyici okuyucu SDK'sını kullanarak derinlikli okuyucu tümleştirin. Tam çalışma örnek bu hızlı başlangıç kullanılabilir [burada](https://github.com/Microsoft/immersive-reader-sdk/samples/quickstart-csharp).
+Bu hızlı başlangıçta, sıfırdan bir Web uygulaması oluşturur ve modern Okuyucu SDK 'sını kullanarak tam ekran okuyucuyu tümleştirin. Bu hızlı başlangıç için tam bir çalışma örneğine [buradan](https://github.com/microsoft/immersive-reader-sdk/tree/master/js/samples/quickstart-csharp)ulaşabilirsiniz.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 * [Visual Studio 2017](https://visualstudio.microsoft.com/downloads)
-* Bir abonelik anahtarı sürükleyici okuyucu. İzleyerek bir tane alın [bu yönergeleri](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account).
+* Azure Active Directory (Azure AD) kimlik doğrulaması için yapılandırılmış bir tam ekran okuyucu kaynağı. Kurulumunu yapmak için [Bu yönergeleri](./azure-active-directory-authentication.md) izleyin. Örnek proje özellikleri yapılandırılırken burada oluşturulan bazı değerler gerekir. Daha sonra başvurmak üzere oturumunuzun çıkışını bir metin dosyasına kaydedin.
 
-## <a name="create-a-web-app-project"></a>Bir web uygulaması projesi oluşturma
+## <a name="create-a-web-app-project"></a>Web uygulaması projesi oluşturma
 
-Visual Studio'da yerleşik Model-View-Controller ile ASP.NET Core Web uygulaması şablonunu kullanarak yeni bir proje oluşturun.
+Yerleşik Model-View-Controller ile ASP.NET Core Web uygulaması şablonunu kullanarak Visual Studio 'da yeni bir proje oluşturun.
 
 ![Yeni Proje](./media/vswebapp.png)
 
 ![Yeni ASP.NET Core Web uygulaması](./media/vsmvc.png)
 
-## <a name="acquire-an-access-token"></a>Erişim belirteci alma
+## <a name="acquire-an-azure-ad-authentication-token"></a>Azure AD kimlik doğrulaması belirteci alma
 
-Bu sonraki adım için abonelik anahtarınızı ve uç nokta gerekir. Abonelik anahtarınızı sürükleyici okuyucu kaynağınızın Azure portalındaki anahtarlar sayfasında bulabilirsiniz. Uç noktanız genel bakış sayfasında bulabilirsiniz.
+Bu bölüm için yukarıdaki Azure AD kimlik doğrulama yapılandırması önkoşul adımından bazı değerlere ihtiyacınız vardır. Bu oturumu kaydettiğiniz metin dosyasına geri bakın.
 
-Projeye sağ tıklayarak _Çözüm Gezgini_ ve **nıcı parolalarını Yönet**. Bu adlı bir dosya açar _secrets.json_. Bu dosyanın içeriğini aşağıdakilerle değiştirin, uygun yerlerde abonelik anahtarını ve uç noktası sağlama.
+````text
+TenantId     => Azure subscription TenantId
+ClientId     => Azure AD ApplicationId
+ClientSecret => Azure AD Application Service Principal password
+Subdomain    => Immersive Reader resource subdomain (resource 'Name' if the resource was created in the Azure portal, or 'CustomSubDomain' option if the resource was created with Azure CLI Powershell. Check the Azure portal for the subdomain on the Endpoint in the resource Overview page, for example, 'https://[SUBDOMAIN].cognitiveservices.azure.com/')
+````
+
+_Çözüm Gezgini_ projeye sağ tıklayın ve **Kullanıcı gizli dizilerini Yönet**' i seçin. Bu, _gizli dizileri. JSON_adlı bir dosya açar. Yukarıdaki özel özellik değerlerinizi sağlayarak bu dosyanın içeriğini aşağıdaki kodla değiştirin.
 
 ```json
 {
-  "SubscriptionKey": YOUR_SUBSCRIPTION_KEY,
-  "Endpoint": YOUR_ENDPOINT
+  "TenantId": YOUR_TENANT_ID,
+  "ClientId": YOUR_CLIENT_ID,
+  "ClientSecret": YOUR_CLIENT_SECRET,
+  "Subdomain": YOUR_SUBDOMAIN
 }
 ```
 
-Açık _Controllers\HomeController.cs_ve yerine `HomeController` aşağıdaki kodla sınıfı.
+_Controllers\homecontroller.cs_dosyasını açın ve dosyayı aşağıdaki kodla değiştirin.
 
 ```csharp
-public class HomeController : Controller
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+
+namespace QuickstartSampleWebApp.Controllers
 {
-    private readonly string SubscriptionKey;
-    private readonly string Endpoint;
-
-    public HomeController(Microsoft.Extensions.Configuration.IConfiguration configuration)
+    public class HomeController : Controller
     {
-        SubscriptionKey = configuration["SubscriptionKey"];
-        Endpoint = configuration["Endpoint"];
+        private readonly string TenantId;     // Azure subscription TenantId
+        private readonly string ClientId;     // Azure AD ApplicationId
+        private readonly string ClientSecret; // Azure AD Application Service Principal password
+        private readonly string Subdomain;    // Immersive Reader resource subdomain (resource 'Name' if the resource was created in the Azure portal, or 'CustomSubDomain' option if the resource was created with Azure CLI Powershell. Check the Azure portal for the subdomain on the Endpoint in the resource Overview page, for example, 'https://[SUBDOMAIN].cognitiveservices.azure.com/')
 
-        if (string.IsNullOrEmpty(Endpoint) || string.IsNullOrEmpty(SubscriptionKey))
+        public HomeController(Microsoft.Extensions.Configuration.IConfiguration configuration)
         {
-            throw new ArgumentNullException("Endpoint or subscriptionKey is null!");
-        }
-    }
+            TenantId = configuration["TenantId"];
+            ClientId = configuration["ClientId"];
+            ClientSecret = configuration["ClientSecret"];
+            Subdomain = configuration["Subdomain"];
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    [Route("token")]
-    public async Task<string> Token()
-    {
-        return await GetTokenAsync();
-    }
-
-    /// <summary>
-    /// Exchange your Azure subscription key for an access token
-    /// </summary>
-    private async Task<string> GetTokenAsync()
-    {
-        using (var client = new System.Net.Http.HttpClient())
-        {
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", SubscriptionKey);
-            using (var response = await client.PostAsync(Endpoint, null))
+            if (string.IsNullOrWhiteSpace(TenantId))
             {
-                return await response.Content.ReadAsStringAsync();
+                throw new ArgumentNullException("TenantId is null! Did you add that info to secrets.json?");
             }
+
+            if (string.IsNullOrWhiteSpace(ClientId))
+            {
+                throw new ArgumentNullException("ClientId is null! Did you add that info to secrets.json?");
+            }
+
+            if (string.IsNullOrWhiteSpace(ClientSecret))
+            {
+                throw new ArgumentNullException("ClientSecret is null! Did you add that info to secrets.json?");
+            }
+
+            if (string.IsNullOrWhiteSpace(Subdomain))
+            {
+                throw new ArgumentNullException("Subdomain is null! Did you add that info to secrets.json?");
+            }
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("subdomain")]
+        public string GetSubdomain()
+        {
+            return Subdomain;
+        }
+
+        [Route("token")]
+        public async Task<string> GetToken()
+        {
+            return await GetTokenAsync();
+        }
+
+        /// <summary>
+        /// Get an Azure AD authentication token
+        /// </summary>
+        private async Task<string> GetTokenAsync()
+        {
+            string authority = $"https://login.windows.net/{TenantId}";
+            const string resource = "https://cognitiveservices.azure.com/";
+
+            AuthenticationContext authContext = new AuthenticationContext(authority);
+            ClientCredential clientCredential = new ClientCredential(ClientId, ClientSecret);
+
+            AuthenticationResult authResult = await authContext.AcquireTokenAsync(resource, clientCredential);
+
+            return authResult.AccessToken;
         }
     }
 }
+```
+
+## <a name="add-the-microsoftidentitymodelclientsactivedirectory-nuget-package"></a>Microsoft. IdentityModel. clients. ActiveDirectory NuGet paketini ekleyin
+
+Yukarıdaki kod, **Microsoft. IdentityModel. clients. ActiveDirectory** NuGet paketindeki nesneleri kullanır, böylece projenizde bu pakete bir başvuru eklemeniz gerekir.
+
+**Araçlar-> NuGet Paket Yöneticisi-> paket yöneticisi konsolundan** NuGet Paket Yöneticisi konsolunu açın ve aşağıdakileri yazın:
+
+```powershell
+    Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -Version 5.1.0
 ```
 
 ## <a name="add-sample-content"></a>Örnek içerik Ekle
 
-Bu web uygulamasını şimdi bazı örnek içerik ekleyeceğiz. Açık _Views\Home\Index.cshtml_ ve bu örnek ile otomatik olarak oluşturulan kodu değiştirin:
+Şimdi bu Web uygulamasına örnek içerik ekleyeceğiz. _Views\home\ındex.cshtml_ dosyasını açın ve otomatik olarak oluşturulan kodu şu örnekle değiştirin:
 
 ```html
 <h1 id='title'>Geography</h1>
@@ -110,9 +164,9 @@ Bu web uygulamasını şimdi bazı örnek içerik ekleyeceğiz. Açık _Views\Ho
 <div class='immersive-reader-button' data-button-style='iconAndText' onclick='launchImmersiveReader()'></div>
 
 @section scripts {
-<script type='text/javascript' src='https://contentstorage.onenote.office.net/onenoteltir/immersivereadersdk/immersive-reader-sdk.0.0.1.js'></script>
-<script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-<script type='text/javascript'>
+    <script type='text/javascript' src='https://contentstorage.onenote.office.net/onenoteltir/immersivereadersdk/immersive-reader-sdk.0.0.2.js'></script>
+    <script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+    <script type='text/javascript'>
     function getImmersiveReaderTokenAsync() {
         return new Promise((resolve) => {
             $.ajax({
@@ -120,6 +174,18 @@ Bu web uygulamasını şimdi bazı örnek içerik ekleyeceğiz. Açık _Views\Ho
                 type: 'GET',
                 success: token => {
                     resolve(token);
+                }
+            });
+        });
+    }
+
+    function getSubdomainAsync() {
+        return new Promise((resolve) => {
+            $.ajax({
+                url: '/subdomain',
+                type: 'GET',
+                success: subdomain => {
+                    resolve(subdomain);
                 }
             });
         });
@@ -135,25 +201,29 @@ Bu web uygulamasını şimdi bazı örnek içerik ekleyeceğiz. Açık _Views\Ho
         };
 
         const token = await getImmersiveReaderTokenAsync();
-        ImmersiveReader.launchAsync(token, content, { uiZIndex: 1000000 });
+        var subdomain = await getSubdomainAsync();
+
+        ImmersiveReader.launchAsync(token, subdomain, content, { uiZIndex: 1000000 });
     }
-</script>
+    </script>
 }
 ```
 
 ## <a name="build-and-run-the-app"></a>Uygulamayı derleme ve çalıştırma
 
-Menü çubuğundan seçin **hata ayıklama > hata ayıklamayı Başlat**, veya basın **F5** uygulamayı başlatmak için.
+Menü çubuğundan **hata ayıkla > hata ayıklamayı Başlat**' ı seçin veya **F5** ' e basarak uygulamayı başlatın.
 
-Tarayıcınızda görmeniz gerekir:
+Tarayıcınızda şunları görmeniz gerekir:
 
 ![Örnek uygulama](./media/quickstart-result.png)
 
-"Sürükleyici okuyucu" düğmesine tıkladığınızda, sürükleyici sayfasında içerikle başlatılan okuyucu görürsünüz.
+"Modern okuyucu" düğmesine tıkladığınızda, sayfadaki içerikle birlikte modern okuyucu başlatılır.
 
 ![Tam Ekran Okuyucu](./media/quickstart-immersive-reader.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Görünüm [öğretici](./tutorial.md) sürükleyici okuyucu SDK'sı ile başka neler yapabileceğinizi görmek için
-* Keşfedin [sürükleyici okuyucu SDK](https://github.com/Microsoft/immersive-reader-sdk) ve [sürükleyici okuyucu SDK başvurusu](./reference.md)
+* Node. js kullanarak modern Okuyucu SDK 'Sı ile neler yapabileceğinizi öğrenmek için [Node. js öğreticisini](./tutorial-nodejs.md) görüntüleyin
+* Python kullanarak modern Okuyucu SDK 'Sı ile neler yapabileceğinizi öğrenmek için [Python öğreticisini](./tutorial-python.md) görüntüleyin
+* Swift kullanarak tam ekran okuyucu SDK 'Sı ile neler yapabileceğinizi öğrenmek için [iOS öğreticisini](./tutorial-ios-picture-immersive-reader.md) görüntüleyin
+* [Modern Okuyucu SDK 'sını](https://github.com/microsoft/immersive-reader-sdk) ve [tam ekran okuyucu SDK başvurusunu](./reference.md) keşfet

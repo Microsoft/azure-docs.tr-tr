@@ -1,40 +1,39 @@
 ---
-title: Karmaşık veri türlerini modelleme - Azure Search hakkında
-description: İç içe ya da hiyerarşik veri yapılarını ComplexType ve koleksiyonları veri türlerini kullanarak, Azure Search dizini modellenebilir.
+title: Karmaşık veri türlerini modelleme
+titleSuffix: Azure Cognitive Search
+description: İç içe geçmiş veya hiyerarşik veri yapıları, ComplexType ve Collections veri türleri kullanılarak Azure Bilişsel Arama dizininde modellenebilir.
+manager: nitinme
 author: brjohnstmsft
-manager: jlembicz
 ms.author: brjohnst
 tags: complex data types; compound data types; aggregate data types
-services: search
-ms.service: search
+ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 06/13/2019
-ms.custom: seodec2018
-ms.openlocfilehash: 61f2094449995e26c3d321aaf35deb3d60ff250c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/04/2019
+ms.openlocfilehash: c7578b84fe1d23d2b4d97aa263cac576305db240
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67056595"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73889925"
 ---
-# <a name="how-to-model-complex-data-types-in-azure-search"></a>Azure Search karmaşık veri türlerini modelleme hakkında
+# <a name="how-to-model-complex-data-types-in-azure-cognitive-search"></a>Azure Bilişsel Arama karmaşık veri türlerini modelleme
 
-Bir Azure Search dizinini doldurmak için kullanılan dış veri kümeleri, çeşitli şekillerde gelebilir. Bazen hiyerarşik veya iç içe geçmiş substructures içerirler. Örnekleri tek bir müşteri, birden çok renkler ve boyutlar, tek bir kitap için birden çok yazarları gibi tek bir SKU için birden çok adresi içerir ve benzeri. Koşulları modelleme araçlarındaki olarak adlandırılan bu yapıları görebileceğiniz *karmaşık*, *bileşik*, *bileşik*, veya *toplama* veri türleri. Azure Search kullanan bu kavramı terimi **karmaşık tür**. Azure arama'yı kullanarak karmaşık türler modellenir **karmaşık alanları**. Karmaşık bir alan, diğer karmaşık türler dahil olmak üzere tüm veri türü olabilir (alt alanları) alt öğeleri içeren bir alandır. Bu, yapılandırılmış veri türleri bir programlama dili olarak benzer şekilde çalışır.
+Azure Bilişsel Arama dizinini doldurmak için kullanılan dış veri kümeleri birçok şekilde gelebilir. Bazen hiyerarşik veya iç içe geçmiş alt yapıları içerirler. Örnekler tek bir müşteri için birden çok adres, tek bir SKU için birden çok renk ve boyut, tek bir kitabın birden çok yazarı vb. içerebilir. Modelleme koşullarında, bu yapıları *karmaşık*, *bileşik*, *bileşik*veya *toplama* veri türleri olarak ifade edilen olarak görebilirsiniz. Bu kavram için kullanılan Azure Bilişsel Arama terimi karmaşık bir **türdür**. Azure Bilişsel Arama 'de karmaşık türler **karmaşık alanlar**kullanılarak modellenir. Karmaşık alan, diğer karmaşık türler de dahil olmak üzere herhangi bir veri türünde olabilecek alt öğeler (alt alanlar) içeren bir alandır. Bu, bir programlama dilinde yapılandırılmış veri türleri gibi benzer bir şekilde çalışmaktadır.
 
-Belge içindeki tek bir nesne veya nesneler, veri türüne bağlı olarak bir dizi karmaşık alanlar gösterir. Türünde alanlar `Edm.ComplexType` türünde alanlar çalışırken tek nesneleri temsil `Collection(Edm.ComplexType)` nesne dizileri temsil eder.
+Karmaşık alanlar, veri türüne bağlı olarak belgedeki tek bir nesneyi ya da bir nesne dizisini temsil eder. `Edm.ComplexType` alanlar tek nesneleri temsil ederken, `Collection(Edm.ComplexType)` türündeki alanlar nesne dizilerini temsil eder.
 
-Azure arama, karmaşık türler ve Koleksiyonlar yerel olarak destekler. Bu türler, neredeyse tüm Azure Search dizini JSON yapısındaki model olanak tanır. Azure arama API'lerinin önceki sürümlerinde, yalnızca satır kümeleri alınamadı düzleştirilmiş. En yeni sürümde dizininizi artık daha yakından kaynak verilere karşılık gelebilir. Diğer bir deyişle, veri kaynağınızı karmaşık türler varsa dizininizi karmaşık türler de olabilir.
+Azure Bilişsel Arama, karmaşık türleri ve koleksiyonları yerel olarak destekler. Bu türler, bir Azure Bilişsel Arama dizininde neredeyse tüm JSON yapılarını modelleyebilir. Azure Bilişsel Arama API 'lerinin önceki sürümlerinde yalnızca düzleştirilmiş satır kümeleri içeri aktarılabilir. En yeni sürümde, dizininiz artık kaynak verilere daha yakından karşılık olabilir. Diğer bir deyişle, kaynak verilerinizde karmaşık türler varsa, dizininiz de karmaşık türlere sahip olabilir.
 
-Başlamak için önerilir [Hotels veri kümesi](https://github.com/Azure-Samples/azure-search-sample-data/blob/master/README.md), içinde yük **verileri içeri aktarma** Azure portalındaki Sihirbazı. Sihirbaz, karmaşık türler kaynak olarak algılar ve algılanan yapıları tabanlı bir dizin şemasını önerir.
+Başlamak için, Azure portal **verileri Içeri aktarma** Sihirbazı ' nda yükleyebilmeniz için [oteller veri kümesini](https://github.com/Azure-Samples/azure-search-sample-data/blob/master/README.md)öneririz. Sihirbaz, kaynakta karmaşık türleri algılar ve algılanan yapıları temel alan bir dizin şeması önerir.
 
 > [!Note]
-> Karmaşık türler için destek sunulmuştur `api-version=2019-05-06`. 
+> Karmaşık türler için destek, `api-version=2019-05-06`' de genel kullanıma sunulmuştur. 
 >
-> Arama çözümünüzü düzleştirilmiş veri kümesi bir koleksiyondaki önceki geçici çözümler üzerinde oluşturulursa, yeni API sürümünde desteklenen gibi karmaşık türler dahil etmek için dizininizi değiştirmeniz gerekir. API sürümleri yükseltme hakkında daha fazla bilgi için bkz. [en yeni REST API sürümüne yükseltme](search-api-migration.md) veya [en yeni .NET SDK'sı sürümüne yükseltin](search-dotnet-sdk-migration-version-9.md).
+> Arama çözümünüz bir koleksiyondaki düzleştirilmiş veri kümelerinde daha önceki geçici çözümler üzerine inşa ediyorsanız, dizininizi en yeni API sürümünde desteklenen karmaşık türleri içerecek şekilde değiştirmelisiniz. API sürümlerini yükseltme hakkında daha fazla bilgi için bkz. [en yeni REST API sürümüne yükseltme](search-api-migration.md) veya [en yeni .NET SDK sürümüne yükseltme](search-dotnet-sdk-migration-version-9.md).
 
-## <a name="example-of-a-complex-structure"></a>Karmaşık bir yapısı örneği
+## <a name="example-of-a-complex-structure"></a>Karmaşık bir yapı örneği
 
-Basit ve karmaşık alanları aşağıdaki JSON belgesini oluşur. Gibi karmaşık alanları `Address` ve `Rooms`, alt alanlar içerir. `Address` Belge içindeki tek bir nesne olduğundan bu alt alanlar için değerler tek bir kümesi vardır. Buna karşılık, `Rooms` birden fazla kendi alt alanlar için değerler, her nesne için bir koleksiyonu vardır.
+Aşağıdaki JSON belgesi basit alanlar ve karmaşık alanlardan oluşur. `Address` ve `Rooms`gibi karmaşık alanların alt alanları vardır. `Address` belgede tek bir nesne olduğundan, bu alt alanlar için tek bir değer kümesi vardır. Buna karşılık `Rooms`, alt alanları için bir, koleksiyondaki her nesne için birden çok değer kümesine sahiptir.
 
 ```json
 {
@@ -50,25 +49,25 @@ Basit ve karmaşık alanları aşağıdaki JSON belgesini oluşur. Gibi karmaş�
     {
       "Description": "Budget Room, 1 Queen Bed (Cityside)",
       "Type": "Budget Room",
-      "BaseRate": 96.99,
+      "BaseRate": 96.99
     },
     {
       "Description": "Deluxe Room, 2 Double Beds (City View)",
       "Type": "Deluxe Room",
-      "BaseRate": 150.99,
+      "BaseRate": 150.99
     },
   ]
 }
 ```
 
-## <a name="creating-complex-fields"></a>Karmaşık alanları oluşturma
+## <a name="creating-complex-fields"></a>Karmaşık alanlar oluşturma
 
-Portal, kullanabileceğiniz herhangi bir dizin tanımını ile gibi [REST API](https://docs.microsoft.com/rest/api/searchservice/create-index), veya [.NET SDK'sı](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.index?view=azure-dotnet) karmaşık türler içeren bir şema oluşturun. 
+Herhangi bir dizin tanımında olduğu gibi, karmaşık türler içeren bir şema oluşturmak için Portal, [REST API](https://docs.microsoft.com/rest/api/searchservice/create-index)veya [.NET SDK 'sını](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.index?view=azure-dotnet) kullanabilirsiniz. 
 
-Aşağıdaki örnek bir JSON dizin şeması ile basit alanlar, koleksiyonlar ve karmaşık türler gösterir. Karmaşık bir tür içindeki her alt alan bir türe sahiptir ve özniteliklere sahip olabilir, yalnızca gibi üst düzey alanları dikkat edin. Şema, yukarıdaki örnek verilere karşılık gelir. `Address` (bir otel bir adresi olan) bir koleksiyon değil karmaşık bir alandır. `Rooms` (bir otel birçok odaları sahiptir) karmaşık bir toplama alandır.
+Aşağıdaki örnek, basit alanlar, koleksiyonlar ve karmaşık türler içeren bir JSON Dizin şemasını gösterir. Karmaşık bir tür içinde her bir alt alanın bir tür olduğunu ve en üst düzey alanların olduğu gibi özniteliklere sahip olabileceğini unutmayın. Şema yukarıdaki örnek verilere karşılık gelir. `Address`, koleksiyon olmayan karmaşık bir alandır (otel bir adrese sahiptir). `Rooms` karmaşık bir koleksiyon alanıdır (otel birçok odaya sahiptir).
 
 <!---
-For indexes used in a [push-model data import](search-what-is-data-import.md) strategy, where you are pushing a JSON data set to an Azure Search index, you can only have the basic syntax shown here: single complex types like `Address`, or a `Collection(Edm.ComplexType)` like `Rooms`. You cannot have complex types nested inside other complex types in an index used for push-model data ingestion.
+For indexes used in a [push-model data import](search-what-is-data-import.md) strategy, where you are pushing a JSON data set to an Azure Cognitive Search index, you can only have the basic syntax shown here: single complex types like `Address`, or a `Collection(Edm.ComplexType)` like `Rooms`. You cannot have complex types nested inside other complex types in an index used for push-model data ingestion.
 
 Indexers are a different story. When defining an indexer, in particular one used to build a knowledge store, your index can have nested complex types. An indexer is able to hold a chain of complex data structures in-memory, and when it includes a skillset, it can support highly complex data forms. For more information and an example, see [How to get started with knowledge store](knowledge-store-howto.md).
 -->
@@ -98,71 +97,71 @@ Indexers are a different story. When defining an indexer, in particular one used
 }
 ```
 
-## <a name="updating-complex-fields"></a>Karmaşık alanlar güncelleştiriliyor
+## <a name="updating-complex-fields"></a>Karmaşık alanları güncelleştirme
 
-Tüm [kuralları ölçeklemek](search-howto-reindex.md) geçerli alanlar, karmaşık alanlar için genel olarak hala geçerli. Birkaç Dinleyicilerinizden ana kuralları Burada, bir alan ekleme bir dizini yeniden oluşturma gerektirmez, ancak en son değişiklikleri yapın.
+Genel içindeki alanlar için uygulanan [yeniden dizin oluşturma kuralları](search-howto-reindex.md) , hala karmaşık alanlar için geçerlidir. Burada ana kuralların birçoğuna restating bir alan eklemek için dizin yeniden oluşturma gerekmez, ancak çoğu değişiklik yapılır.
 
-### <a name="structural-updates-to-the-definition"></a>Tanımına yapısal güncelleştirmeler
+### <a name="structural-updates-to-the-definition"></a>Tanım için yapısal güncelleştirmeler
 
-Bir dizini yeniden oluşturma gerek kalmadan herhangi bir zamanda karmaşık bir alan için yeni alt alanlar ekleyebilirsiniz. "ZipCode" Örneğin, ekleme `Address` veya için "s" `Rooms` izin, yalnızca bir dizine en üst düzey bir alan eklemeye benzer. Açıkça verilerinizi güncelleştirerek bu alanları doldurmak kadar varolan belgeleri yeni alanlar için null bir değer var.
+Bir dizin yeniden oluşturma gereksinimi olmadan istediğiniz zaman bir karmaşık alana yeni alt alanlar ekleyebilirsiniz. Örneğin, bir dizine en üst düzey bir alan eklemekle benzer şekilde, `Rooms` "ZipCode" `Address` veya "değişiklik" olarak eklenmesine izin verilir. Mevcut belgelerde, verilerinizi güncelleştirerek bu alanları açıkça doldurana kadar yeni alanlar için null değer vardır.
 
-Karmaşık bir tür içindeki her alt alan bir türe sahiptir ve özniteliklere sahip olabilir, yalnızca gibi üst düzey alanları dikkat edin.
+Karmaşık bir tür içinde her bir alt alanın bir türe sahip olduğunu ve en üst düzey alanların yaptığı gibi özniteliklere sahip olabileceğini unutmayın.
 
 ### <a name="data-updates"></a>Veri güncelleştirmeleri
 
-Mevcut belgelerde dizin ile güncelleştirme `upload` eylemi, karmaşık ve basit alanlar için aynı şekilde çalışır; tüm alanları değiştirilir. Ancak, `merge` (veya `mergeOrUpload` var olan bir belgeyi uygulandığında) aynı tüm alanlar genelinde çalışmaz. Özellikle, `merge` bir koleksiyon içinde birleştirme öğeleri desteklemez. Bu sınırlama, ilkel türler ve karmaşık koleksiyonlar için bulunmaktadır. Bir koleksiyonu güncellemek için tam koleksiyon değerini almak için değişiklikleri yapın ve ardından yeni bir koleksiyon dizin API isteğe ekleyin.
+`upload` eylemi ile bir dizinde bulunan mevcut belgelerin güncelleştirilmesi, karmaşık ve basit alanlar için aynı şekilde çalışmaktadır--tüm alanlar değişir. Ancak, `merge` (veya var olan bir belgeye uygulandığında `mergeOrUpload`) tüm alanlarda aynı şekilde çalışmaz. Özellikle `merge`, bir koleksiyon içindeki öğelerin birleştirilmesini desteklemez. Bu sınırlama, temel türlerin ve karmaşık koleksiyonların koleksiyonları için vardır. Bir koleksiyonu güncelleştirmek için, tam koleksiyon değerini almanız, değişiklikler yapmanız ve sonra yeni koleksiyonu Dizin API 'SI isteğine eklemeniz gerekir.
 
-## <a name="searching-complex-fields"></a>Karmaşık arama alanları
+## <a name="searching-complex-fields"></a>Karmaşık alanları arama
 
-Serbest biçimli arama ifadeleri, karmaşık türleri ile beklendiği gibi çalışmayabilir. Aranabilir alan ya da belgede herhangi bir alt alanı eşleşirse, belge bir eşleştirme olup.
+Serbest biçimli arama ifadeleri karmaşık türlerle beklenen şekilde çalışır. Belgedeki herhangi bir yerde aranabilir alan veya alt alan eşleşiyorsa, belgenin kendisi bir eşleşmedir.
 
-Daha fazla sorgu get, birden çok hüküm ve işleçler varsa ve bazı terimler mümkün olduğu gibi belirtilen alan adlarını sahip ince [Lucene sözdizimi](query-lucene-syntax.md). Örneğin, bu sorgu iki terim, "İstanbul" eşleştirmeye çalışır ve "OR" Adres alanının iki alt alanlara göre:
+Birden çok hüküm ve işleçle sahip olduğunuzda sorgular daha fazla bilgi edinmiş olur ve bazı şartlar belirtilen alan adlarına sahiptir ve bu da [Lucene sözdizimi](query-lucene-syntax.md)ile mümkün olur. Örneğin, bu sorgu iki terimi ("Portland" ve "veya") adres alanının iki alt alanına göre eşleştirmeye çalışır:
 
     search=Address/City:Portland AND Address/State:OR
 
-Sorgu tanımladığınıza göre bu ister *uncorrelated* filtreleri aksine, tam metin araması için. Aralık değişkenleri kullanarak karmaşık bir koleksiyonun alt alanları üzerinde sorgular bağıntılı filtrelere [ `any` veya `all` ](search-query-odata-collection-operators.md). Lucene sorgu yukarıdaki Oregon diğer şehirlerin yanı sıra, hem "Portland, Maine" ve "Portland, Oregon" içeren belgeleri döndürür. "Geçerli alt belgeye" kavramı olması için tüm belgeyi kendi alanın tüm değerlerini her yan tümcesi geçerli olduğundan bu gerçekleşir. Bunun hakkında daha fazla bilgi için bkz. [Azure Search'te toplama filtreleri anlama OData](search-query-understand-collection-filters.md).
+Bu gibi sorgular, filtrelerin aksine tam metin arama için *bağıntılı* değildir. Filtrelerde, karmaşık bir koleksiyonun alt alanları üzerindeki sorgular, [`any` veya `all`](search-query-odata-collection-operators.md)Aralık değişkenleri kullanılarak bağıntılı. Yukarıdaki Lucene sorgusu, "Istanbul, Maine" ve "Istanbul, Oregon" içeren belgeleri, Oregon 'daki diğer şehirlerle birlikte döndürür. Bu durum her yan tümce tüm belgedeki alanının tüm değerlerine uygulandığı için, "geçerli alt belge" kavramı yoktur. Bunun hakkında daha fazla bilgi için bkz. [Azure bilişsel arama OData koleksiyon filtrelerini anlama](search-query-understand-collection-filters.md).
 
 ## <a name="selecting-complex-fields"></a>Karmaşık alanları seçme
 
-`$select` Parametresi hangi alanların arama sonuçlarında döndürülen seçmek için kullanılır. Karmaşık bir alan belirli alt alanları seçmek için bu parametreyi kullanmak için üst alanı ve eğik çizgiyle ayrılmış alt alanı ekleyin (`/`).
+`$select` parametresi, arama sonuçlarında hangi alanların döndürüleceğini seçmek için kullanılır. Karmaşık bir alanın belirli alt alanlarını seçmek üzere bu parametreyi kullanmak için üst alanı ve alt alanı eğik çizgiyle (`/`) ayırarak dahil edin.
 
     $select=HotelName, Address/City, Rooms/BaseRate
 
-Arama sonuçlarında istiyorsanız alanları dizinde alınabilir işaretlenmelidir. Yalnızca alınabilir işaretlenmiş alanlar kullanılabilir bir `$select` deyimi.
+Arama sonuçlarında isterseniz, alanların dizinde alınabilir olarak işaretlenmesi gerekir. `$select` bildiriminde yalnızca alınabilir olarak işaretlenen alanlar kullanılabilir.
 
-## <a name="filter-facet-and-sort-complex-fields"></a>Filtre, sıralama karmaşık alanlarını ve modeli
+## <a name="filter-facet-and-sort-complex-fields"></a>Filtre, model ve karmaşık alanları sıralama
 
-Aynı [OData yolu sözdizimi](query-odata-filter-orderby-syntax.md) filtreleme için kullanılan ve fielded aramaları da kullanılabilir modelleme, sıralama ve arama talebinde alanı seçmek için. Karmaşık türler için alt alanları olarak sıralanabilir olarak işaretlenebilir veya modellenebilir yöneten kurallar uygulanır. Bu kurallar hakkında daha fazla bilgi için bkz. [oluşturma dizini API Başvurusu](https://docs.microsoft.com/rest/api/searchservice/create-index#request).
+Filtreleme ve ara sıra aramaları için kullanılan aynı [OData yolu söz dizimi](query-odata-filter-orderby-syntax.md) , bir arama isteğindeki alanları otomatik olarak sıralama, sıralama ve seçme için de kullanılabilir. Karmaşık türler için, hangi alt alanların sıralanabilir veya çok yönlü tablo olarak işaretleneceğini belirleyen kurallar uygulanır. Bu kurallar hakkında daha fazla bilgi için [create INDEX API Reference](https://docs.microsoft.com/rest/api/searchservice/create-index#request)bölümüne bakın.
 
-### <a name="faceting-sub-fields"></a>Alt alanlar model oluşturma
+### <a name="faceting-sub-fields"></a>Alt alanları renklendirme
 
-Türü olmadığı sürece, herhangi bir alt alanı modellenebilir işaretlenebilir `Edm.GeographyPoint` veya `Collection(Edm.GeographyPoint)`.
+`Edm.GeographyPoint` veya `Collection(Edm.GeographyPoint)`türünde olmadığı sürece herhangi bir alt alan, çok yönlü tablo olarak işaretlenebilir.
 
-Model sonuçlarında çıkmadıysa belge sayısını üst belge (bir otel), alt belgeleri değil karmaşık bir koleksiyondaki (odaları) için hesaplanır. Örneğin, bir otel 20 odaları türü "paketi" olduğunu varsayalım. Bu facet parametresini verilen `facet=Rooms/Type`, model sayısı değil odaları 20 otel için bir tane olacaktır.
+Model sonuçlarında döndürülen belge sayıları, karmaşık bir koleksiyondaki (Odalar) alt belgelerde değil, üst belge (otel) için hesaplanır. Örneğin, bir otelin "Suite" türünde 20 oda olduğunu varsayalım. Bu model parametresi `facet=Rooms/Type`verildiğinde model sayısı odalar için 20 değil, otel için bir tane olacaktır.
 
-### <a name="sorting-complex-fields"></a>Sıralama karmaşık alanları
+### <a name="sorting-complex-fields"></a>Karmaşık alanları sıralama
 
-Sıralama işlemi (Oteller) ve alt belgeler değil (odaları) için geçerlidir. Odaları gibi bir karmaşık tür koleksiyonu olduğunda odaları üzerinde hiç sıralayamazsınız hayata geçirmek önemlidir. Aslında, herhangi bir koleksiyon sıralama yapılamaz.
+Sıralama işlemleri, belgeler (otel) için geçerlidir ve alt belgelere (Odalar) uygulanmaz. Odalar gibi karmaşık bir tür koleksiyonunuz olduğunda, odaların tümünde sıralayamazsınız. Aslında, hiçbir koleksiyonu sıralayamazsınız.
 
-Alanlar, belge başına tek bir değer alanın bir basit alan veya bir alt alanı bir karmaşık tür olup olmadığını sıralama işlemi çalışır. Örneğin, `Address/City` olduğundan otel, başına yalnızca bir adres şekilde sıralanabilir izin verilen `$orderby=Address/City` hotels şehre göre sıralanır.
+Alanların belge başına tek bir değeri olduğunda, alanın basit bir alan olması veya karmaşık bir türdeki alt alan olması durumunda sıralama işlemleri çalışır. Örneğin, otel başına yalnızca bir adres olduğundan `Address/City` sıralanabilir olmasına izin verilir. bu nedenle, `$orderby=Address/City` oteller şehre göre sıralanır.
 
 ### <a name="filtering-on-complex-fields"></a>Karmaşık alanlarda filtreleme
 
-Alt alanları bir filtre ifadesi karmaşık bir alana başvurabilir. Yalnızca aynı kullanın [OData yolu sözdizimi](query-odata-filter-orderby-syntax.md) modelleme, sıralama ve alanları seçmek için kullanılır. Örneğin, aşağıdaki filtre tüm hotels Kanada'da döndürür:
+Bir filtre ifadesinde karmaşık bir alanın alt alanlarına başvurabilirsiniz. Yalnızca oluşturma, sıralama ve alanları seçme için kullanılan aynı [OData yolu sözdizimini](query-odata-filter-orderby-syntax.md) kullanın. Örneğin, aşağıdaki filtre Kanada 'daki tüm oteller döndürür:
 
     $filter=Address/Country eq 'Canada'
 
-Karmaşık toplama alana göre filtrelemek için kullanabileceğiniz bir **lambda ifadesi** ile [ `any` ve `all` işleçleri](search-query-odata-collection-operators.md). Bu durumda, **aralık değişkeni** alt alanları içeren bir nesne bir lambda ifadesidir. Standart OData yolu sözdizimi içeren alt alanlar başvurabilirsiniz. Örneğin, aşağıdaki filtre en az bir lüks yer tüm otellere ve İçilmez odaları olmayan tüm döndürür:
+Karmaşık bir koleksiyon alanını filtrelemek için, [`any` ve `all` işleçleriyle](search-query-odata-collection-operators.md)bir **lambda ifadesi** kullanabilirsiniz. Bu durumda, lambda ifadesinin **Aralık değişkeni** , alt alanları olan bir nesnedir. Standart OData yolu söz dizimi ile bu alt alanlara başvurabilirsiniz. Örneğin, aşağıdaki filtre en az bir lüks ve tüm içgörü olmayan odalar ile tüm oteller döndürür:
 
     $filter=Rooms/any(room: room/Type eq 'Deluxe Room') and Rooms/all(room: not room/SmokingAllowed)
 
-Bunlar varsa en üst düzey basit alanlarla karmaşık alanlarının basit alt alanlar yalnızca filtreleri eklenebilir gibi **filtrelenebilir** özniteliğini `true` dizin tanımında. Daha fazla bilgi için [oluşturma dizini API Başvurusu](https://docs.microsoft.com/rest/api/searchservice/create-index#request).
+Üst düzey basit alanlarda olduğu gibi, karmaşık alanların basit alt alanları, yalnızca **filtrelenebilir** özniteliği Dizin tanımında `true` olarak ayarlandıysa filtrelere dahil edilebilir. Daha fazla bilgi için [create INDEX API Reference](https://docs.microsoft.com/rest/api/searchservice/create-index#request)bölümüne bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Deneyin [Hotels veri kümesi](https://github.com/Azure-Samples/azure-search-sample-data/blob/master/README.md) içinde **verileri içeri aktarma** Sihirbazı. Verilere erişmek için Benioku belgesinde sağlanan Cosmos DB bağlantı bilgileri gerekir.
+**Veri alma** Sihirbazı 'nda [oteller veri kümesini](https://github.com/Azure-Samples/azure-search-sample-data/blob/master/README.md) deneyin. Verilere erişmek için Benioku dosyasında sağlanmış Cosmos DB bağlantı bilgilerine ihtiyacınız olacaktır.
 
-El ile bu bilgileri kullanarak ilk adımınız sihirbazında yeni bir Azure Cosmos DB veri kaynağı oluşturmaktır. Hedef dizin sayfasına geldiğinizde daha fazla üzerinde Sihirbazı'nda, bir dizin ile karmaşık türler görürsünüz. Oluşturun ve bu dizin yükleme ve sonra yeni yapısını anlamak için sorgular yürütün.
+Bu bilgilerle, sihirbazdaki ilk adım yeni bir Azure Cosmos DB veri kaynağı oluşturmaktır. Sihirbazda daha fazla bilgi, hedef dizin sayfasına geldiğinizde karmaşık türlerde bir dizin görürsünüz. Bu dizini oluşturup yükleyin ve ardından yeni yapıyı anlamak için sorguları yürütün.
 
 > [!div class="nextstepaction"]
-> [Hızlı Başlangıç: içeri aktarma, dizin oluşturma ve sorgular portal Sihirbazı](search-get-started-portal.md)
+> [Hızlı başlangıç: içeri aktarma, dizin oluşturma ve sorgular için Portal Sihirbazı](search-get-started-portal.md)

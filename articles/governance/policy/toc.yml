@@ -28,6 +28,9 @@
     - name: Özel ilke tanımı oluşturma
       displayName: 'disabled, parameters, rule, mode'
       href: ./tutorials/create-custom-policy-definition.md
+    - name: Etiket idaresini yönetme
+      displayName: 'modify, append, effects'
+      href: ./tutorials/govern-tags.md
     - name: Uygulamalı Laboratuvarlar - Azure İlkesi'ni inceleme
       displayName: 'create, policy, training, learn'
       href: 'https://handsonlabs.microsoft.com/handsonlabs/SelfPacedLabs?storyId=story://content-private/content/sp-azuregovernance/1-azpolicy/a-policy'
@@ -215,9 +218,6 @@
             - name: SQL Server düzeyi denetim ayarlarını denetle
               displayName: auditIfNotExists
               href: samples/audit-sql-server-audit-setting.md
-            - name: SQL Server sürüm 12.0 gerektir
-              displayName: 'deny, builtin'
-              href: samples/require-sql-12.md
         - name: SQL Veritabanları
           items:
             - name: İzin verilen SQL DB SKU’ları
@@ -249,9 +249,6 @@
         - name: Depolama dosya şifrelemesini güvence altına alma
           displayName: 'deny, all'
           href: samples/ensure-storage-file-encryption.md
-        - name: Depolama hesabı şifrelemesi iste
-          displayName: 'deny, builtin'
-          href: samples/require-storage-account-encryption.md
 - name: Kavramlar
   items:
     - name: Azure İlkesi tanım yapısı
@@ -260,20 +257,40 @@
     - name: İlke etkilerini anlama
       displayName: 'order, evaluation'
       href: ./concepts/effects.md
+    - name: Azure İlkesi atama yapısı
+      displayName: 'parameters, enforcementmode, policyDefinitionId'
+      href: ./concepts/assignment-structure.md
+    - name: Yeni ilkenin etkisini değerlendirme
+      displayName: 'audit, enforcementmode, compliance'
+      href: ./concepts/evaluate-impact.md
+    - name: İlkeyi Kod iş akışları olarak tasarklama
+      displayName: 'devops, infrastructure as code, iac, release, continuous, delivery, deploy'
+      href: ./concepts/policy-as-code.md
     - name: Kubernetes için Azure İlkesi
-      displayName: 'aks, rego, k8s, opa, open policy agent, gatekeeper'
-      href: ./concepts/rego-for-aks.md
+      items:
+        - name: AKS için İlke
+          displayName: 'aks, rego, k8s, opa, open policy agent, gatekeeper, v2'
+          href: ./concepts/rego-for-aks.md
+        - name: AKS Altyapısı için İlke
+          displayName: 'aks, k8s, opa, open policy agent, gatekeeper, v3, crd, constraints'
+          href: ./concepts/aks-engine.md
     - name: Konuk Yapılandırması ile VM’leri denetleme
       displayName: 'provider, tools, definition'
       href: ./concepts/guest-configuration.md
 - name: Nasıl yapılır kılavuzları
   items:
+    - name: VSCode için Azure İlkesi uzantısı
+      displayName: visual studio code
+      href: ./how-to/extension-for-vscode.md
     - name: Programlı olarak ilkeler oluşturma
       displayName: 'assign, definition'
       href: ./how-to/programmatically-create.md
     - name: Dizi özellikleri için yazar ilkeleri
       displayName: 'array property, alias, aliases, in, notIn, type, defaultValue'
       href: ./how-to/author-policies-for-arrays.md
+    - name: Konuk Yapılandırma ilkesi oluşturma
+      displayName: 'powershell, dsc, chef, linux, windows'
+      href: ./how-to/guest-configuration-create.md
     - name: Uyumluluk verilerini alma
       displayName: 'evaluation, scan, summarize, query, events, log analytics'
       href: ./how-to/get-compliance-data.md
@@ -283,9 +300,19 @@
     - name: Uyumlu olmayan kaynakları düzeltme
       displayName: 'managed identity, task, definition, roleDefinitionIds'
       href: ./how-to/remediate-resources.md
-    - name: VM’ler için Azure İzleyici’yi etkinleştirme (önizleme)
-      displayName: 'insights, log analytics, builtin'
-      href: ../../azure-monitor/insights/vminsights-enable-at-scale-policy.md?toc=/azure/governance/policy/toc.json
+    - name: Azure Lighthouse tümleştirmesi
+      items:
+        - name: İlkeyi uygun ölçekte dağıtma
+          displayName: 'lighthouse, scale, deploy'
+          href: ../../lighthouse/how-to/policy-at-scale.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
+        - name: Düzeltilebilir bir ilke dağıtma
+          displayName: 'lighthouse, scale, remediate'
+          href: ../../lighthouse/how-to/deploy-policy-remediation.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
+    - name: Azure İzleyici tümleştirmesi
+      items:
+        - name: VM’ler için Azure İzleyici’yi etkinleştirme (önizleme)
+          displayName: 'monitor, insights, log analytics, builtin'
+          href: ../../azure-monitor/insights/vminsights-enable-at-scale-policy.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
 - name: Başvuru
   items:
     - name: Azure CLI
@@ -304,6 +331,14 @@
           href: /dotnet/api/microsoft.azure.management.resourcemanager.models.policyassignment
         - name: İlke Tanımları
           href: /dotnet/api/microsoft.azure.management.resourcemanager.models.policydefinition
+    - name: Python için Azure SDK
+      items:
+        - name: İlke
+          href: /python/api/azure-mgmt-resource/azure.mgmt.resource.policy
+        - name: İlke istemcisi
+          href: /python/api/azure-mgmt-resource/azure.mgmt.resource.policyclient
+        - name: İlke İçgörüleri
+          href: /python/api/azure-mgmt-policyinsights/azure.mgmt.policyinsights
     - name: REST
       items:
         - name: Olaylar

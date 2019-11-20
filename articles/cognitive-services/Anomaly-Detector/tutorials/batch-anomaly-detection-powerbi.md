@@ -1,74 +1,74 @@
 ---
-title: Anomalileri batch algılama ve Power BI kullanarak Görselleştirme
-titlesuffix: Azure Cognitive Services
-description: Zaman serisi verilerinizle boyunca anomalileri görselleştirmek için Power BI ve Anomali algılayıcısı API kullanın.
+title: Toplu algılama ve Power BI kullanarak anormallikleri görselleştirin
+titleSuffix: Azure Cognitive Services
+description: Anomali algılayıcı API 'sini ve Power BI, zaman serisi verileriniz genelinde anormallikleri görselleştirmek için kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
-ms.topic: article
-ms.date: 04/30/2019
+ms.topic: tutorial
+ms.date: 10/01/2019
 ms.author: aahi
-ms.openlocfilehash: de353c946da46b2bbe4e755e21e355f6bd18725b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fa78e737cd863d19e294c5001dfd27b07760521f
+ms.sourcegitcommit: 15e3bfbde9d0d7ad00b5d186867ec933c60cebe6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65827131"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71840877"
 ---
-# <a name="tutorial-visualize-anomalies-using-batch-detection-and-power-bi"></a>Öğretici: Anomalileri batch algılama ve Power BI kullanarak Görselleştirme
+# <a name="tutorial-visualize-anomalies-using-batch-detection-and-power-bi"></a>Öğretici: toplu algılama ve Power BI kullanarak anomali görselleştirin
 
-Zaman serisi veri kümesinde toplu olarak anormallikleri bulmak için bu öğreticiyi kullanın. Power BI desktop'ı kullanarak, bir Excel dosyasını ele, Anomali algılayıcısı API için verileri hazırlama ve bunu boyunca istatistiksel anomalileri görselleştirin.
+Toplu iş olarak ayarlanan zaman serisi verilerinin içindeki bozukluklar bulmak için bu öğreticiyi kullanın. Power BI Masaüstü 'nü kullanarak bir Excel dosyası alır, anomali algılayıcı API 'sine yönelik verileri hazırlar ve bunun genelinde istatistiksel bozukluklar görselleştirebilirsiniz.
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide, aşağıdakileri nasıl yapacağınızı öğreneceksiniz:
 
 > [!div class="checklist"]
-> * İçeri aktarma ve zaman serisi veri kümesini dönüştürmek için Power BI Desktop'ı kullanma
-> * Power BI Desktop, batch anomali algılama için Anomali algılayıcısı API'si ile tümleştirme
-> * Beklenen ve görülen değerleri ve anomali algılama sınırları dahil olmak üzere verilerinizi içinde bulunan anormallikleri görselleştirin.
+> * Zaman serisi veri kümesini içeri ve dışarı dönüştürmek için Power BI Desktop kullanma
+> * Batch anomali algılama için anomali algılayıcı API 'siyle Power BI Desktop tümleştirme
+> * Beklenen ve görülen değerler ve anomali algılama sınırları dahil olmak üzere verilerinizde bulunan anormallikleri görselleştirin.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Prerequisites
 
-* [Microsoft Power BI Desktop](https://powerbi.microsoft.com/get-started/), kullanılabilir ücretsiz.
-* Bir excel dosyası (.xlsx) içeren zaman serisi verilerini işaret eder. Bu Hızlı Başlangıç için örnek veri çubuğunda bulunabilir [GitHub](https://go.microsoft.com/fwlink/?linkid=2090962)
+* [Microsoft Power BI Desktop](https://powerbi.microsoft.com/get-started/)ücretsiz olarak kullanılabilir.
+* Zaman serisi veri noktaları içeren bir Excel dosyası (. xlsx). Bu hızlı başlangıçta örnek veriler [GitHub](https://go.microsoft.com/fwlink/?linkid=2090962) 'da bulunabilir
 
 [!INCLUDE [cognitive-services-anomaly-detector-data-requirements](../../../../includes/cognitive-services-anomaly-detector-data-requirements.md)]
 
 [!INCLUDE [cognitive-services-anomaly-detector-signup-requirements](../../../../includes/cognitive-services-anomaly-detector-signup-requirements.md)]
 
-## <a name="load-and-format-the-time-series-data"></a>Yük ve zaman serisi verileri biçimlendirme
+## <a name="load-and-format-the-time-series-data"></a>Zaman serisi verilerini yükleme ve biçimlendirme
 
-Kullanmaya başlamak için Power BI Desktop'ı açın ve zaman serisi verilerini önkoşulları karşıdan yükleyin. Bu excel dosyasını bir dizi eşgüdümlü evrensel saat (UTC) zaman damgası ve değer çiftleri içerir.  
+Başlamak için Power BI Desktop açın ve önkoşullardan indirdiğiniz zaman serisi verilerini yükleyin. Bu Excel dosyası, bir dizi Eşgüdümlü Evrensel Saat (UTC) zaman damgası ve değer çiftleri içerir.  
 
 > [!NOTE]
-> Power BI, veri kaynakları, .csv dosyalarını, SQL veritabanları, Azure blob depolama ve daha fazlası gibi çok sayıda farklı kullanabilirsiniz.  
+> Power BI. csv dosyaları, SQL veritabanları, Azure Blob depolama ve daha fazlası gibi çok çeşitli kaynaklardan verileri kullanabilir.  
 
-Power BI Desktop ana penceresinde tıklayın **giriş** Şerit. İçinde **dış veri** Şerit, açık grup **Veri Al** açılır menüsüne ve ardından **Excel**.
+Ana Power BI Desktop penceresinde, **giriş** şeridi ' ne tıklayın. Şeridin **dış veri** grubunda, **veri al** açılır menüsünü açın ve **Excel**' e tıklayın.
 
-![Power bı'da "Veri Al" düğmesine görüntüsü](../media/tutorials/power-bi-get-data-button.png)
+![Power BI içindeki "veri al" düğmesinin görüntüsü](../media/tutorials/power-bi-get-data-button.png)
 
-İletişim kutusu görüntülendikten sonra örnek .xlsx dosyası karşıdan yüklediğiniz klasöre gidin ve seçin. Sonra **Gezgin** iletişim kutusu görüntülendikten sonra **Sayfa1**, ardından **Düzenle**.
+İletişim kutusu görüntülendikten sonra, example. xlsx dosyasını indirdiğiniz klasöre gidin ve dosyayı seçin. **Gezgin** iletişim kutusu görüntülendikten sonra, **Sheet1**' e ve ardından **Düzenle**' ye tıklayın.
 
-![Power bı'da veri kaynağı "Gezgin" ekran görüntüsü](../media/tutorials/navigator-dialog-box.png)
+![Power BI ' de veri kaynağı "Gezgini" ekranının görüntüsü](../media/tutorials/navigator-dialog-box.png)
 
-Power BI tarafından dönüştürülür zaman damgaları için ilk sütunda bir `Date/Time` veri türü. Bu zaman damgaları metne Anomali algılayıcısı API'sine gönderilmek üzere dönüştürülmesi gerekir. Power Query Düzenleyicisi'ni otomatik olarak açılmazsa tıklayın **sorguları Düzenle** Giriş sekmesinde. 
+Power BI, ilk sütundaki zaman damgasını `Date/Time` veri türüne dönüştürür. Bu zaman damgaları, anomali algılayıcısı API 'sine gönderilmek üzere metne dönüştürülemelidir. Power Query Düzenleyicisi otomatik olarak açılmazsa Giriş sekmesinde **sorguları Düzenle** ' ye tıklayın. 
 
-Tıklayın **dönüştürme** güç sorgu Düzenleyicisi'ndeki Şerit. İçinde **herhangi bir sütun** açık grup **veri türü:** açılan menüsünde ' nı seçip **metin**.
+Power Query düzenleyicisinde **Dönüştür** şeridine tıklayın. **Herhangi bir sütun** grubunda, **veri türü:** açılan menü menüsünü açın ve **metin**' i seçin.
 
-![Power bı'da veri kaynağı "Gezgin" ekran görüntüsü](../media/tutorials/data-type-drop-down.png)
+![Power BI ' de veri kaynağı "Gezgini" ekranının görüntüsü](../media/tutorials/data-type-drop-down.png)
 
-Sütun türü değiştirme konusunda bir uyarı aldığınızda, tıklayın **değiştirin geçerli**. Daha sonra tıklayın **Kapat & Uygula** veya **Uygula** içinde **giriş** Şerit. 
+Sütun türünü değiştirme hakkında bir bildirim aldığınızda, **geçerli Değiştir**' e tıklayın. Daha sonra, **kapat &** **giriş** şeridinde Uygula veya **Uygula** ' ya tıklayın. 
 
-## <a name="create-a-function-to-send-the-data-and-format-the-response"></a>Veri göndermek ve yanıtın biçimlendirmek için bir işlev oluşturma
+## <a name="create-a-function-to-send-the-data-and-format-the-response"></a>Verileri göndermek ve yanıtı biçimlendirmek için bir işlev oluşturma
 
-Biçimlendirme ve veri dosyası Anomali algılayıcısı API'sine göndermek için yukarıda oluşturulan tablo üzerinde bir sorgu çağırabilirsiniz. Güç sorgu Düzenleyicisi'nde, gelen **giriş** Şerit, açık **yeni kaynak** açılır menüsüne ve ardından **boş sorgu**.
+Veri dosyasını anomali algılayıcı API 'sine biçimlendirmek ve göndermek için yukarıda oluşturulan tabloda bir sorgu çağırabilirsiniz. Power Query düzenleyicisinde, **giriş** şeridinde, **Yeni kaynak** açılan menüsünü açın ve **boş sorgu**' ya tıklayın.
 
-Yeni sorgunuzu seçildiğinden emin olun, ardından tıklatın **Gelişmiş Düzenleyici**. 
+Yeni sorgunuzun seçili olduğundan emin olun ve ardından **Gelişmiş Düzenleyici**' ye tıklayın. 
 
-![Power bı'da "Gelişmiş Düzenleyici" düğme görüntüsü](../media/tutorials/advanced-editor-screen.png)
+![Power BI içindeki "Gelişmiş Düzenleyici" düğmesinin görüntüsü](../media/tutorials/advanced-editor-screen.png)
 
-Gelişmiş Düzenleyici içinde tablodan sütunları ayıklar ve API'ye göndermek için Power Query M aşağıdaki kod parçacığını kullanın. Daha sonra sorgu JSON yanıtı bir tablo oluşturun ve döndürün. Değiştirin `apiKey` değişken geçerli Anomali algılayıcısı API anahtarınızı ve `endpoint` uç noktanız ile. Gelişmiş Düzenleyici sorgu girdikten sonra tıklayın **Bitti**.
+Gelişmiş Düzenleyici içinde, tablodaki sütunları ayıklamak ve API 'ye göndermek için aşağıdaki Power Query a kod parçacığını kullanın. Daha sonra sorgu, JSON yanıtından bir tablo oluşturur ve döndürür. @No__t-0 değişkenini geçerli anomali algılayıcı API anahtarınızla ve `endpoint` ' i uç noktanızla değiştirin. Sorguyu Gelişmiş Düzenleyici girdikten sonra **bitti**' ye tıklayın.
 
 ```M
 (table as table) => let
@@ -112,65 +112,65 @@ Gelişmiş Düzenleyici içinde tablodan sütunları ayıklar ve API'ye gönderm
  in results
 ```
 
-Sorgu veri sayfanızdaki seçerek çağırma `Sheet1` aşağıda **parametre gir**, tıklatıp **Invoke**. 
+Aşağıdaki `Sheet1` **' ı seçerek**veri sayfanızda sorguyu çağırın ve ardından **çağır**' a tıklayın. 
 
-!["Gelişmiş Düzenleyici" düğme görüntüsü](../media/tutorials/invoke-function-screenshot.png)
+!["Gelişmiş Düzenleyici" düğmesinin görüntüsü](../media/tutorials/invoke-function-screenshot.png)
 
-## <a name="data-source-privacy-and-authentication"></a>Veri kaynağı gizlilik ve kimlik doğrulaması
+## <a name="data-source-privacy-and-authentication"></a>Veri kaynağı gizliliği ve kimlik doğrulaması
 
 > [!NOTE]
-> Veri gizliliği ve erişim için kuruluşunuzun ilkelerine farkında olun. Bkz: [Power BI Desktop gizlilik düzeyleri](https://docs.microsoft.com/power-bi/desktop-privacy-levels) daha fazla bilgi için.
+> Veri gizliliği ve erişimi için kuruluşunuzun ilkelerine dikkat edin. Daha fazla bilgi için bkz. [Power BI Desktop gizlilik düzeyleri](https://docs.microsoft.com/power-bi/desktop-privacy-levels) .
 
-Bir dış veri kaynağını kullanan bu yana sorgusunu çalıştırmayı denediğinizde bir uyarı iletisi alabilirsiniz. 
+Bir dış veri kaynağı kullandığından sorguyu çalıştırmaya çalıştığınızda bir uyarı iletisi alabilirsiniz. 
 
-![Power BI tarafından oluşturulan bir uyarı gösteren görüntü](../media/tutorials/blocked-function.png)
+![Power BI tarafından oluşturulan bir uyarıyı gösteren resim](../media/tutorials/blocked-function.png)
 
-Bu sorunu gidermek için tıklatın **dosya**, ve **seçenekler ve ayarlar**. Ardından **seçenekleri**. Aşağıda **geçerli dosya**seçin **gizlilik**, ve **gizlilik düzeylerini yoksayın ve potansiyel performansı geliştirin**. 
+Bu hatayı onarmak için **Dosya**ve **Seçenekler ve ayarlar**' a tıklayın. **Seçenekler**' e tıklayın. **Geçerli dosyanın**altında **Gizlilik**' i seçin ve **gizlilik düzeylerini yoksayın ve potansiyel olarak performansı geliştirebilirsiniz**. 
 
-Ayrıca, API'ye bağlanmak nasıl istediğinizi belirtmek için isteyen bir ileti alabilirsiniz.
+Ayrıca, API 'ye nasıl bağlanmak istediğinizi belirtmenizi isteyen bir ileti alabilirsiniz.
 
-![Erişim kimlik bilgilerini belirtmek için bir istek gösteren görüntü](../media/tutorials/edit-credentials-message.png)
+![Erişim kimlik bilgilerini belirtme isteğini gösteren bir görüntü](../media/tutorials/edit-credentials-message.png)
 
-Bu sorunu gidermek için tıklatın **bilgilerini Düzenle** iletisi. İletişim kutusu görüntülendikten sonra seçin **anonim** API için anonim olarak bağlanmasına izin. Ardından **Bağlan**’a tıklayın. 
+Bu hatayı onarmak için iletideki **kimlik bilgilerini düzenle** ' ye tıklayın. İletişim kutusu görüntülendikten sonra, API 'ye anonim olarak bağlanmak için **anonim** ' i seçin. Ardından **Bağlan**' a tıklayın. 
 
-Daha sonra tıklayın **Kapat & Uygula** içinde **giriş** değişiklikleri uygulamak için Şerit.
+Ardından, değişiklikleri uygulamak için **giriş** şeridindeki **Kapat & Uygula** ' ya tıklayın.
 
-## <a name="visualize-the-anomaly-detector-api-response"></a>Anomali algılayıcısı API yanıtı görselleştirin
+## <a name="visualize-the-anomaly-detector-api-response"></a>Anomali algılayıcı API 'SI yanıtını görselleştirin
 
-Ana Power BI ekranında, verileri görselleştirmek için yukarıda oluşturduğunuz sorguları kullanmaya başlayın. İlk seçin **çizgi grafik** içinde **görselleştirmeler**. Zaman damgası çizgi grafiğin için çağrılan bir işlevden eklersiniz **eksen**. Sağ tıklayın ve seçin **zaman damgası**. 
+Ana Power BI ekranında, verileri görselleştirmek için yukarıda oluşturulan sorguları kullanmaya başlayın. Önce **Görselleştirmelerde** **çizgi grafik** ' i seçin. Sonra çağrılan işlevden zaman damgasını çizgi grafiğinin **eksenine**ekleyin. Sağ tıklayın ve **zaman damgası**' nı seçin. 
 
-![Zaman damgası değeri sağ](../media/tutorials/timestamp-right-click.png)
+![Zaman damgası değerine sağ tıklayın](../media/tutorials/timestamp-right-click.png)
 
-Aşağıdaki alanları ekleyin **çağrılan işlev** grafiğin için **değerleri** alan. Kullanım grafiği oluşturmanıza yardımcı olmak üzere ekran görüntüsü aşağıda.
+**Çağrılan işlevden** aşağıdaki alanları grafiğin **değerler** alanına ekleyin. Grafiğinizi oluşturmaya yardımcı olması için aşağıdaki ekran görüntüsünü kullanın.
 
     * Değer
-    * UpperMargins
-    * LowerMargins
+    * Üst Üstekenar boşlukları
+    * Harf kenar boşlukları
     * ExpectedValues
 
-![Yeni Hızlı ölçü ekran görüntüsü](../media/tutorials/chart-settings.png)
+![Yeni hızlı ölçü ekranının görüntüsü](../media/tutorials/chart-settings.png)
 
-Alanları ekledikten sonra grafiğe ve tüm veri noktalarının gösterecek şekilde yeniden boyutlandırın. Grafiğinizi benzer şekilde görünmelidir ekran görüntüsü aşağıda:
+Alanları ekledikten sonra grafiğe tıklayın ve tüm veri noktalarını gösterecek şekilde yeniden boyutlandırın. Grafiğiniz aşağıdaki ekran görüntüsüne benzer şekilde görünür:
 
-![Yeni Hızlı ölçü ekran görüntüsü](../media/tutorials/chart-visualization.png)
+![Yeni hızlı ölçü ekranının görüntüsü](../media/tutorials/chart-visualization.png)
 
 ### <a name="display-anomaly-data-points"></a>Anomali veri noktalarını görüntüle
 
-Power BI penceresinin sağ tarafındaki aşağıda **alanları** sağ bölmesinde **değer** altında **çağrılan işlev sorgusu**, tıklatıp **yeni hızlı Ölçü**.
+Power BI penceresinin sağ tarafında, **alanlar** bölmesinin altında, **çağrılan Işlev sorgusunun**altındaki **değere** sağ tıklayın ve **yeni hızlı ölçü**' e tıklayın.
 
-![Yeni Hızlı ölçü ekran görüntüsü](../media/tutorials/new-quick-measure.png)
+![Yeni hızlı ölçü ekranının görüntüsü](../media/tutorials/new-quick-measure.png)
 
-Görünen ekranda işaretleyin **filtre değeri** hesaplaması olarak. Ayarlama **temel değer** için `Sum of Value`. Ardından sürükleyin `IsAnomaly` gelen **çağrılan işlev** alanlarını **filtre**. Seçin `True` gelen **filtre** açılan menüsü.
+Görüntülenen ekranda, hesaplama olarak **filtrelenmiş değer** ' i seçin. **Taban değerini** `Sum of Value` olarak ayarlayın. Sonra **çağrılan işlev** alanlarından `IsAnomaly` ' ı **filtrelemek**için sürükleyin. **Filtre** açılan menüsünden `True` ' ı seçin.
 
-![Yeni Hızlı ölçü ekran görüntüsü](../media/tutorials/new-quick-measure-2.png)
+![Yeni hızlı ölçü ekranının görüntüsü](../media/tutorials/new-quick-measure-2.png)
 
-' I tıklattıktan sonra **Tamam**, olması bir `Value for True` alanlarınızı listesinin altındaki alan. Sağ tıklayın ve yeniden adlandırın **Anomali**. Grafiğin ekleme **değerleri**. Ardından **biçimi** aracını ve x ekseni türünü ayarlayın **kategorik**.
+**Tamam**' a tıkladıktan sonra, alanlarınız listesinin en altında bir `Value for True` alanı olacaktır. Sağ tıklayın ve **anomali**olarak yeniden adlandırın. Bunu grafiğin **değerlerine**ekleyin. Daha sonra **Biçim** aracını seçin ve X ekseni türünü **kategorik**olarak ayarlayın.
 
-![Yeni Hızlı ölçü ekran görüntüsü](../media/tutorials/format-x-axis.png)
+![Yeni hızlı ölçü ekranının görüntüsü](../media/tutorials/format-x-axis.png)
 
-Renkleri tıklayarak grafiğinize uygulamak **biçimi** aracı ve **veri renkleri**. Grafiğiniz aşağıdakine benzer görünmelidir:
+**Biçim** aracına ve **veri renklerine**tıklayarak, grafiğinize renkler uygulayın. Grafiğiniz aşağıdakine benzer görünmelidir:
 
-![Yeni Hızlı ölçü ekran görüntüsü](../media/tutorials/final-chart.png)
+![Yeni hızlı ölçü ekranının görüntüsü](../media/tutorials/final-chart.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

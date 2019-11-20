@@ -1,7 +1,7 @@
 ---
-title: Application InsightsC#
+title: 'Öğretici: Application Insights, C# -Lua'
 titleSuffix: Azure Cognitive Services
-description: Bu öğreticide, Application Insights telemetri verileri depolama alanına bot ve Language Understanding bilgi ekler.
+description: Bu öğreticide, Application Insights telemetri veri depolama alanına bot ve Language Understanding bilgileri eklenmektedir.
 services: cognitive-services
 author: diberry
 manager: nitinme
@@ -9,47 +9,49 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: tutorial
-ms.date: 06/16/2019
+ms.date: 10/14/2019
 ms.author: diberry
-ms.openlocfilehash: fa7147dd1b5f22ead17a60042c1c35c4b770cd18
-ms.sourcegitcommit: 1289f956f897786090166982a8b66f708c9deea1
+ms.openlocfilehash: 036ecbbbd2ea562f3e809691a1b3af62578893f5
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67154904"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73498963"
 ---
-# <a name="add-luis-results-to-application-insights-from-a-bot-in-c"></a>LUIS sonuçları bir Bot içinde Application Insights ekleyinC#
+# <a name="tutorial-add-luis-results-to-application-insights-from-a-bot-in-c"></a>Öğretici: içindeki bir bot 'tan Application Insights LUSıS sonuçları eklemeC#
 
-Bu öğreticide bot ve Language Understanding bilgileri ekler [Application Insights](https://azure.microsoft.com/services/application-insights/) telemetri veri depolama. Bu verileri aldıktan sonra bunu Kusto dil veya çözümlemek, toplama, Power BI ile sorgulayabilirsiniz ve hedefleri ve gerçek zamanlı utterance varlıklarının rapor. Bu analiz, eklediğinizde veya amaç ve varlıkları LUIS uygulamanızı düzenlemek, belirlemenize yardımcı olur.
+Bu öğreticide, [Application Insights](https://azure.microsoft.com/services/application-insights/) telemetri veri depolama alanına bot ve Language Understanding bilgileri eklenmektedir. Bu verilere sahip olduktan sonra, kusto Language veya Power BI ile sorgulayabilirsiniz, toplayabilirsiniz ve amaçlarını ve gerçek zamanlı olarak yapılan varlıkları analiz etmek, toplamak ve raporlamak için kullanabilirsiniz. Bu analiz, LUSıS uygulamanızın amaçlarını ve varlıklarını ekleme veya düzenleme gerekip gerekmediğini belirlemenize yardımcı olur.
+
+[!INCLUDE [Waiting for Bot refresh](./includes/wait-bot-upgrade.md)]
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Bot ve dil Anlama veri Application ınsights'ta Yakala
-> * Application Insights için Language Understanding verileri Sorgulama
+> * Application Insights içinde verileri anlamak için bot ve dil yakalayın
+> * Language Understanding verileri için sorgu Application Insights
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Application Insights ile oluşturulan bir Azure robot hizmeti Robotu.
-* Bot kod önceki bot indirilen  **[öğretici](luis-csharp-tutorial-bf-v4.md)** . 
+* Application Insights etkinken oluşturulmuş bir Azure bot hizmet bot.
+* Önceki bot **[öğreticiden](luis-csharp-tutorial-bf-v4.md)** bot kodu indirildi. 
 * [Robot öykünücüsü](https://aka.ms/abs/build/emulatordownload)
 * [Visual Studio Code](https://code.visualstudio.com/Download)
 
-Bu öğreticideki kod tüm kullanılabilir [Azure-Samples dil anlama GitHub deposu](https://github.com/Azure-Samples/cognitive-services-language-understanding/tree/master/documentation-samples/tutorial-web-app-bot-application-insights/v4/luis-csharp-bot-johnsmith-src-telemetry). 
+Bu öğreticideki tüm kod, [Azure-Samples Language Understanding GitHub deposunda](https://github.com/Azure-Samples/cognitive-services-language-understanding/tree/master/documentation-samples/tutorial-web-app-bot-application-insights/v4/luis-csharp-bot-johnsmith-src-telemetry)bulunur. 
 
-## <a name="add-application-insights-to-web-app-bot-project"></a>Application Insights web app botu projeye Ekle
+## <a name="add-application-insights-to-web-app-bot-project"></a>Web uygulaması bot projesine Application Insights ekleyin
 
-Şu anda bu web app botu kullanılan Application Insights hizmeti için robot genel durumu telemetri toplar. LUIS bilgi toplamaz. 
+Şu anda, bu Web uygulaması bot 'ta kullanılan Application Insights hizmeti, bot için genel durum telemetrisi toplar. LUSıS bilgileri toplanmaz. 
 
-LUIS bilgileri yakalamak için web app botu gereken **[Microsoft.applicationınsights](https://www.nuget.org/packages/Microsoft.ApplicationInsights/)** NuGet paketi yüklenir ve yapılandırılır.  
+LUSıS bilgilerini yakalamak için, Web uygulaması bot 'ın **[Microsoft. ApplicationInsights](https://www.nuget.org/packages/Microsoft.ApplicationInsights/)** NuGet paketinin yüklü ve yapılandırılmış olması gerekir.  
 
-1. Visual Studio'da bağımlılık çözüme ekleyin. İçinde **Çözüm Gezgini**, proje adını sağ tıklatın ve seçin **NuGet paketlerini Yönet...** . NuGet Paket Yöneticisi yüklü paketler listesini gösterir. 
-1. Seçin **Gözat** arayın **Microsoft.applicationınsights**.
-1. Paketi yükleyin. 
+1. Visual Studio 'dan çözüme bağımlılığı ekleyin. **Çözüm Gezgini**, proje adına sağ tıklayın ve **NuGet Paketlerini Yönet...** seçeneğini belirleyin. NuGet Paket Yöneticisi yüklü paketlerin bir listesini gösterir. 
+1. **Araştır** ' ı seçin ve ardından **Microsoft. ApplicationInsights**'ı arayın.
+1. Paketi yükler. 
 
-## <a name="capture-and-send-luis-query-results-to-application-insights"></a>Yakalama ve LUIS sorgu sonuçları Application Insights'a gönderme
+## <a name="capture-and-send-luis-query-results-to-application-insights"></a>Application Insights için LUSıS sorgu sonuçlarını yakala ve Gönder
 
-1. Açık `LuisHelper.cs` dosyasını açıp içeriğini aşağıdaki kodla değiştirin. **LogToApplicationInsights** yöntemi bot ve LUIS veri yakalama ve adlı bir izleme olayı Application Insights'a gönderir `LUIS`.
+1. `LuisHelper.cs` dosyasını açın ve içeriğini aşağıdaki kodla değiştirin. **Logtoapplicationınsights** yöntemi, bot ve lusıs verilerini yakalar ve bunu `LUIS`adlı bir izleme olayı olarak Application Insights gönderir.
 
     ```csharp
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -148,35 +150,35 @@ LUIS bilgileri yakalamak için web app botu gereken **[Microsoft.applicationıns
 
 ## <a name="add-application-insights-instrumentation-key"></a>Application Insights izleme anahtarı Ekle 
 
-Application ınsights'a veri eklemek için izleme anahtarı gerekir.
+Application Insights 'a veri eklemek için, izleme anahtarına ihtiyacınız vardır.
 
-1. Bir tarayıcıda, [Azure portalında](https://portal.azure.com), botunuzun ait bulma **Application Insights** kaynak. Adını botun adı çoğunu olacaktır ve rastgele adının sonuna gibi karakterler `luis-csharp-bot-johnsmithxqowom`. 
-1. Application Insights kaynağı üzerinde **genel bakış** sayfasında, kopya **izleme anahtarını**.
-1. Visual Studio'da açın **appsettings.json** bot projenin köküne dosya. Bu dosya, tüm ortam değişkenleri tutar.
-1. Yeni bir değişken eklemek `BotDevAppInsightsKey` izleme anahtarınızı değerine sahip. Değer tırnak işareti olmalıdır. 
+1. Bir tarayıcıda [Azure Portal](https://portal.azure.com), bot 'ın **Application Insights** kaynağını bulun. Adında, bot adının büyük bir kısmında, adın sonunda `luis-csharp-bot-johnsmithxqowom`gibi rastgele karakterler olacaktır. 
+1. Application Insights kaynağında **genel bakış** sayfasında, **izleme anahtarını**kopyalayın.
+1. Visual Studio 'da, bot projesinin kökündeki **appSettings. JSON** dosyasını açın. Bu dosya, tüm ortam değişkenlerinizi içerir.
+1. İzleme anahtarınızın değeri ile `BotDevAppInsightsKey` yeni bir değişken ekleyin. İçindeki değer tırnak içinde olmalıdır. 
 
-## <a name="build-and-start-the-bot"></a>Oluşturun ve bot başlatın
+## <a name="build-and-start-the-bot"></a>Bot oluşturma ve başlatma
 
-1. Visual Studio'da derleyin ve bot çalıştırın. 
-1. Bot öykünücüyü başlatın ve bot açın. Bu [adım](luis-csharp-tutorial-bf-v4.md#use-the-bot-emulator-to-test-the-bot) önceki öğreticide sağlanır.
+1. Visual Studio 'da, bot 'ı derleyin ve çalıştırın. 
+1. Bot öykünücüsünü başlatın ve bot 'ı açın. Bu [adım](luis-csharp-tutorial-bf-v4.md#use-the-bot-emulator-to-test-the-bot) , önceki öğreticide sunulmaktadır.
 
-1. Bot, bir soru sorun. Bu [adım](luis-csharp-tutorial-bf-v4.md#ask-bot-a-question-for-the-book-flight-intent) önceki öğreticide sağlanır.
+1. Bot 'a soru sorun. Bu [adım](luis-csharp-tutorial-bf-v4.md##use-the-bot-emulator-to-test-the-bot) , önceki öğreticide sunulmaktadır.
 
-## <a name="view-luis-entries-in-application-insights"></a>Application ınsights'ta görünümü LUIS girişleri
+## <a name="view-luis-entries-in-application-insights"></a>Application Insights Lua girdilerini görüntüle
 
-LUIS girişlerini görmek için Application ınsights'ı açın. Bu verilerin Application Insights'da gösterilmesi birkaç dakika sürebilir.
+LUIN girdilerini görmek için Application Insights açın. Verilerin Application Insights görünmesi birkaç dakika sürebilir.
 
-1. İçinde [Azure portalında](https://portal.azure.com), botun Application Insights kaynağını açın. 
-1. Kaynak açıldığında seçin **arama** ve son tüm veriler için arama **30 dakika** olay türü ile **izleme**. Adlı izlemenin seçin **LUIS**. 
-1. Bot ve LUIS bilgileri altında kullanılabilir **özel özellikler**. 
+1. [Azure Portal](https://portal.azure.com), bot 'ın Application Insights kaynağını açın. 
+1. Kaynak açıldığında **Ara** ' yı seçin ve son **30 dakika** içinde, **izleme**olay türü ile tüm verileri ara ' yı seçin. **Lusıs**adlı izlemeyi seçin. 
+1. Bot ve LUSıS bilgileri **özel özellikler**altında bulunabilir. 
 
-    ![Uygulama anlayışları'nda depolanan LUIS özel özellikleri gözden geçirin](./media/luis-tutorial-appinsights/application-insights-luis-trace-custom-properties-csharp.png)
+    ![Application Insights ' de depolanan LUSıS özel özelliklerini gözden geçirin](./media/luis-tutorial-appinsights/application-insights-luis-trace-custom-properties-csharp.png)
 
-## <a name="query-application-insights-for-intent-score-and-utterance"></a>Amacını ve score utterance için Application Insights sorgu
-Application Insights ile verileri sorgulamak için power size [Kusto](https://docs.microsoft.com/azure/application-insights/app-insights-analytics#query-data-in-analytics) dışarı aktarma yanı dil [Power BI](https://powerbi.microsoft.com). 
+## <a name="query-application-insights-for-intent-score-and-utterance"></a>Amaç, skor ve söylenişi için Application Insights sorgulama
+Application Insights, verileri [kusto](https://docs.microsoft.com/azure/azure-monitor/log-query/log-query-overview#what-language-do-log-queries-use) diliyle sorgulama yanı sıra [Power BI](https://powerbi.microsoft.com)dışa aktarma gücü sağlar. 
 
-1. Seçin **günlük (analiz)** . Bir sorgu penceresi üstündeki ve bir veri tablosu penceresi altındaki yeni bir pencere açılır. Veritabanları önce kullandıysanız, bu düzenleme tanıdık gelir. Sorgu, önceki filtrelenmiş verileri temsil eder. **CustomDimensions** sütununun bot ve LUIS bilgileri.
-1. Üst amacı, Puanlama ve utterance çıkarmak için aşağıdaki yalnızca son satırı ekleyin ( `|top...` satır) sorgu penceresinde:
+1. **Günlük (Analiz)** öğesini seçin. En üstteki bir sorgu penceresi ve bunun altında bir veri tablosu penceresi ile yeni bir pencere açılır. Daha önce veritabanlarını kullandıysanız, bu düzenleme tanıdık gelecektir. Sorgu, önceki Filtrelenen verileri temsil eder. **Customdimensions** sütununda bot ve lusıs bilgileri bulunur.
+1. En üst amacı, puanı ve utterance 'i almak için, sorgu penceresinde son satırın (`|top...` satırı) hemen üstüne aşağıdakini ekleyin:
 
     ```kusto
     | extend topIntent = tostring(customDimensions.LUIS_topScoringIntent_Name)
@@ -184,20 +186,20 @@ Application Insights ile verileri sorgulamak için power size [Kusto](https://do
     | extend utterance = tostring(customDimensions.LUIS_query)
     ```
 
-1. Sorguyu çalıştırın. Yeni sütunlar topIntent, Puanlama ve utterance kullanılabilir. Sıralanacak topIntent sütun seçin.
+1. Sorguyu çalıştırın. Yeni topamaç, skor ve söylenişi sütunları mevcuttur. Sıralamak için Topamaç sütununu seçin.
 
-Daha fazla bilgi edinin [Kusto sorgu dili](https://docs.microsoft.com/azure/log-analytics/query-language/get-started-queries) veya [verileri Power BI'a aktarma](https://docs.microsoft.com/azure/application-insights/app-insights-export-power-bi). 
+[Kusto sorgu dili](https://docs.microsoft.com/azure/log-analytics/query-language/get-started-queries) hakkında daha fazla bilgi edinin veya [verileri Power BI dışarı aktarın](https://docs.microsoft.com/azure/application-insights/app-insights-export-power-bi). 
 
 
 ## <a name="learn-more-about-bot-framework"></a>Bot Framework hakkında daha fazla bilgi edinin
 
-Daha fazla bilgi edinin [Bot Framework](https://dev.botframework.com/).
+[Bot Framework](https://dev.botframework.com/)hakkında daha fazla bilgi edinin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Application ınsights veri eklemek isteyebileceğiniz diğer bilgileri içeren uygulama kimliği, sürüm kimliği, son model değişikliği tarihi, son tarih eğitmek, son yayımlama tarihi. Bu değerler ya da ayarlanabilir uç nokta URL'si (uygulama kimliği ve sürüm kimliği) veya geliştirme API çağrısı alınan sonra web app botu ayarlarında ve buradan çekilir.  
+Application Insights verilerine eklemek isteyebileceğiniz diğer bilgiler uygulama KIMLIĞI, sürüm KIMLIĞI, son model değiştirme tarihi, son tren tarihi, son yayımlama tarihi içerir. Bu değerler, uç nokta URL 'sinden (uygulama KIMLIĞI ve sürüm KIMLIĞI) alınabilir veya bir yazma API çağrısından, daha sonra Web uygulaması bot ayarlarında ayarlanır ve buradan çekilir.  
 
-Birden fazla LUIS uygulaması için aynı uç nokta aboneliği kullanıyorsanız, abonelik kimliği ve paylaşılan anahtar olduğunu belirten bir özellik içermelidir.
+Birden fazla LUO uygulaması için aynı uç nokta aboneliğini kullanıyorsanız, abonelik KIMLIĞINI ve paylaşılan anahtar olduğunu belirten bir özelliği de eklemeniz gerekir.
 
 > [!div class="nextstepaction"]
-> [Örnek konuşma hakkında daha fazla bilgi edinin](luis-how-to-add-example-utterances.md)
+> [Örnek araslar hakkında daha fazla bilgi edinin](luis-how-to-add-example-utterances.md)

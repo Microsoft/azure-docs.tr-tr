@@ -1,57 +1,57 @@
 ---
-title: Azure Kubernetes Service (AKS) kubeconfig'i denetleyin erişimi sınırlayın
-description: Küme yöneticileri ve küme kullanıcılar için Kubernetes yapılandırma dosyası (kubeconfig'i denetleyin) erişimi denetleme hakkında bilgi edinin
+title: Azure Kubernetes Service (AKS) içindeki kubeconfig 'e erişimi sınırlama
+description: Küme yöneticileri ve küme kullanıcıları için Kubernetes yapılandırma dosyasına (kubeconfig) erişimi denetleme hakkında bilgi edinin
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 05/31/2019
-ms.author: iainfou
-ms.openlocfilehash: b55cc226cfbb462cdccd73b3b80cfb0d56c10711
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: mlearned
+ms.openlocfilehash: cbc653b86ed83f9d6a7348d39f51dc7cd49c6892
+ms.sourcegitcommit: 0f54f1b067f588d50f787fbfac50854a3a64fff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66475601"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "67615668"
 ---
-# <a name="use-azure-role-based-access-controls-to-define-access-to-the-kubernetes-configuration-file-in-azure-kubernetes-service-aks"></a>Azure rol tabanlı erişim denetimleri Kubernetes yapılandırma dosyasının Azure Kubernetes Service (AKS) erişim tanımlamak için kullanın
+# <a name="use-azure-role-based-access-controls-to-define-access-to-the-kubernetes-configuration-file-in-azure-kubernetes-service-aks"></a>Azure Kubernetes hizmetindeki (AKS) Kubernetes yapılandırma dosyasına erişim tanımlamak için Azure rol tabanlı erişim denetimlerini kullanma
 
-Kullanarak Kubernetes kümeleriyle etkileşim kurma `kubectl` aracı. Azure CLI'yı erişim kimlik bilgilerini almak için kolay bir yol sağlar ve, AKS için bağlanmak için yapılandırma bilgileri kümeleri kullanarak `kubectl`. Kubernetes yapılandırma alabilirsiniz sınırla (*kubeconfig'i denetleyin*) bilgilerini ve ardından sahip izinleri sınırlamak için Azure rol tabanlı erişim denetimleri (RBAC) kullanabilirsiniz.
+`kubectl` Aracı kullanarak Kubernetes kümeleriyle etkileşim kurabilirsiniz. Azure CLı, kullanarak `kubectl`aks kümelerinize bağlanmak için erişim kimlik bilgilerini ve yapılandırma bilgilerini almanın kolay bir yolunu sunar. Bu Kubernetes yapılandırma (*kubeconfig*) bilgilerini kimlerin alabilirim ve sahip oldukları izinleri kısıtlamak için Azure rol tabanlı erişim DENETIMLERINI (RBAC) kullanabilirsiniz.
 
-Bu makalede bir AKS kümesi yapılandırma bilgilerini alabilirsiniz bu sınırı RBAC rollerini atama işlemini gösterir.
+Bu makalede, bir AKS kümesi için yapılandırma bilgilerini kimlerin alabilirim olduğunu sınırlayan RBAC rollerinin nasıl atanacağı gösterilmektedir.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu makalede, var olan bir AKS kümesi olduğunu varsayar. AKS hızlı bir AKS kümesi gerekirse bkz [Azure CLI kullanarak] [ aks-quickstart-cli] veya [Azure portalını kullanarak][aks-quickstart-portal].
+Bu makalede, mevcut bir AKS kümeniz olduğunu varsaymaktadır. AKS kümesine ihtiyacınız varsa bkz. [Azure CLI kullanarak][aks-quickstart-cli] aks hızlı başlangıç veya [Azure Portal kullanımı][aks-quickstart-portal].
 
-Bu makalede, ayrıca Azure CLI Sürüm 2.0.65 çalıştırdığınız gerektirir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme][azure-cli-install].
+Bu makalede, Azure CLı sürüm 2.0.65 veya üstünü de çalıştırıyor olmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli-install].
 
-## <a name="available-cluster-roles-permissions"></a>Kullanılabilir küme rol izinleri
+## <a name="available-cluster-roles-permissions"></a>Kullanılabilir küme rolleri izinleri
 
-Ne zaman etkileşim kullanarak bir AKS kümesi `kubectl` aracı, yapılandırma dosyasının küme bağlantı bilgileri tanımlayan kullanılır. Bu yapılandırma dosyası genellikle depolanan *~/.kube/config*. Birden fazla küme bu tanımlanabilir *kubeconfig'i denetleyin* dosya. Kullanarak küme arasında geçiş [kubectl config kullanım bağlam] [ kubectl-config-use-context] komutu.
+`kubectl` Aracı kullanarak bir aks kümesiyle etkileşim kurarken, küme bağlantı bilgilerini tanımlayan bir yapılandırma dosyası kullanılır. Bu yapılandırma dosyası genellikle *~/. Kube/config*dizininde depolanır. Bu *kubeconfig* dosyasında birden çok küme tanımlanabilir. [Kubectl config Use-Context][kubectl-config-use-context] komutunu kullanarak kümeler arasında geçiş yapabilirsiniz.
 
-[Az aks get-credentials] [ az-aks-get-credentials] komut bir AKS kümesi için erişim kimlik bilgilerini almanıza olanak tanır ve bunları birleştirir *kubeconfig'i denetleyin* dosya. Azure rol tabanlı erişim denetimleri (RBAC), bu kimlik bilgileri erişimi denetlemek için kullanabilirsiniz. Bu Azure RBAC rolleri kimin alabilirsiniz tanımlamanıza olanak sağlar *kubeconfig'i denetleyin* dosya ve hangi ardından sahip oldukları küme içinde izinleri.
+[Az aks Get-Credentials][az-aks-get-credentials] komutu, BIR aks kümesinin erişim kimlik bilgilerini almanıza ve bunları *kubeconfig* dosyasına birleştirmenize imkan tanır. Bu kimlik bilgilerine erişimi denetlemek için Azure rol tabanlı erişim denetimlerini (RBAC) kullanabilirsiniz. Bu Azure RBAC rolleri, *kubeconfig* dosyasını kimlerin alabileceklerini ve daha sonra küme içinde sahip oldukları izinleri tanımlamanızı sağlar.
 
-İki yerleşik roller bulunmaktadır:
+İki yerleşik rol şunlardır:
 
-* **Azure Kubernetes hizmeti Küme Yöneticisi rolü**  
-    * Erişime izin *Microsoft.ContainerService/managedClusters/listClusterAdminCredential/action* API çağrısı. Bu API çağrısı [Küme Yöneticisi kimlik bilgileri listeler][api-cluster-admin].
-    * İndirmeler *kubeconfig'i denetleyin* için *clusterAdmin* rol.
-* **Azure Kubernetes hizmeti küme kullanıcı rolü**
-    * Erişime izin *Microsoft.ContainerService/managedClusters/listClusterUserCredential/action* API çağrısı. Bu API çağrısı [küme kullanıcı kimlik bilgilerini listeler][api-cluster-user].
-    * İndirmeler *kubeconfig'i denetleyin* için *clusterUser* rol.
+* **Azure Kubernetes hizmet kümesi yönetici rolü**  
+    * *Microsoft. ContainerService/Managedkümeler/listClusterAdminCredential/Action* API çağrısına erişime izin verir. Bu API çağrısı [, Küme Yöneticisi kimlik bilgilerini listeler][api-cluster-admin].
+    * *Clusteradmin* rolü için *kubeconfig* ' i indirir.
+* **Azure Kubernetes hizmet kümesi Kullanıcı rolü**
+    * *Microsoft. ContainerService/Managedkümeler/listClusterUserCredential/Action* API çağrısına erişime izin verir. Bu API çağrısı [, küme kullanıcı kimlik bilgilerini listeler][api-cluster-user].
+    * *Clusteruser* rolü için *kubeconfig* ' i indirir.
 
-Bu RBAC rolleri, bir Azure Active Directory (AD) kullanıcı veya gruba uygulanabilir.
+Bu RBAC rolleri, bir Azure Active Directory (AD) kullanıcısına veya grubuna uygulanabilir.
 
-## <a name="assign-role-permissions-to-a-user-or-group"></a>Bir kullanıcı veya grup rolü izinleri atama
+## <a name="assign-role-permissions-to-a-user-or-group"></a>Bir kullanıcıya veya gruba rol izinleri atama
 
-Kullanılabilir rollerden biri atamak için kaynak Kimliğini AKS kümesi ve Azure AD kullanıcı hesabı veya grup Kimliğini almanız gerekir. Aşağıdaki örnek komutlar:
+Kullanılabilir rollerden birini atamak için AKS kümesinin kaynak KIMLIĞINI ve Azure AD Kullanıcı hesabı veya grubunun KIMLIĞINI almanız gerekir. Aşağıdaki örnek komutlar:
 
-* Küme kaynak Kimliğini kullanarak alma [az aks show] [ az-aks-show] adlı Küme için komutu *myAKSCluster* içinde *myResourceGroup* kaynak grubu. Gerektiğinde kendi küme ve kaynak grubu adı belirtin.
-* Kullanan [az hesabı show] [ az-account-show] ve [az ad kullanıcı show] [ az-ad-user-show] kullanıcı kimliğinizi almak için komutları
-* Son olarak, bir rolü kullanarak atar [az rol ataması oluşturma] [ az-role-assignment-create] komutu.
+* *Myresourcegroup* kaynak grubundaki *Myakscluster* adlı küme için [az aks Show][az-aks-show] komutunu kullanarak küme kaynak kimliğini alın. Gerektiğinde kendi kümenizi ve kaynak grubu adını sağlayın.
+* Kullanıcı KIMLIĞINIZI almak için [az Account Show][az-account-show] ve [az ad User Show][az-ad-user-show] komutlarını kullanır.
+* Son olarak, [az role atama Create][az-role-assignment-create] komutunu kullanarak bir rol atar.
 
-Aşağıdaki örnek atar *Azure Kubernetes hizmeti Küme Yöneticisi rolüne* bireysel bir kullanıcı hesabı için:
+Aşağıdaki örnek, *Azure Kubernetes hizmet kümesi Yöneticisi rolünü* bireysel bir kullanıcı hesabına atar:
 
 ```azurecli-interactive
 # Get the resource ID of your AKS cluster
@@ -69,11 +69,11 @@ az role assignment create \
 ```
 
 > [!TIP]
-> Azure AD grubu için izinleri atamak istiyorsanız, güncelleştirme `--assignee` parametresi için nesne Kimliğine sahip bir önceki örnekte gösterilen *grubu* yerine *kullanıcı*. Bir grubun nesne Kimliğini almak için kullanın [az ad Grup show] [ az-ad-group-show] komutu. Aşağıdaki örnekte adlı bir Azure AD grubu nesne kimliği alır *appdev*: `az ad group show --group appdev --query objectId -o tsv`
+> Bir Azure AD grubuna izinler atamak istiyorsanız, önceki örnekte gösterilen `--assignee` parametreyi bir *Kullanıcı*yerine *grubun* nesne kimliğiyle güncelleştirin. Bir grubun nesne KIMLIĞINI almak için [az Ad Group Show][az-ad-group-show] komutunu kullanın. Aşağıdaki örnek, *AppDev*ADLı Azure AD grubu IÇIN nesne kimliğini alır:`az ad group show --group appdev --query objectId -o tsv`
 
-Önceki atama için değiştirebileceğiniz *küme kullanıcı rolünü* gerektiğinde.
+Daha önce, *küme kullanıcı rolü* için bir önceki atamayı gerektiği şekilde değiştirebilirsiniz.
 
-Rol ataması başarıyla oluşturuldu, aşağıdaki örnek çıktı gösterilmektedir:
+Aşağıdaki örnek çıktıda, rol atamasının başarıyla oluşturulduğu gösterilmektedir:
 
 ```
 {
@@ -88,15 +88,15 @@ Rol ataması başarıyla oluşturuldu, aşağıdaki örnek çıktı gösterilmek
 }
 ```
 
-## <a name="get-and-verify-the-configuration-information"></a>Alma ve yapılandırma bilgilerini doğrulayın
+## <a name="get-and-verify-the-configuration-information"></a>Yapılandırma bilgilerini edinme ve doğrulama
 
-Atanan RBAC rolleri ile [az aks get-credentials] [ az-aks-get-credentials] almak için komut *kubeconfig'i denetleyin* AKS kümenizin tanımı. Aşağıdaki örnekte *--yönetici* kullanıcı verilmişse, düzgün çalışması kimlik bilgilerini *Küme Yöneticisi rolüne*:
+RBAC rolleri atandığında, AKS kümenizin *kubeconfig* tanımını almak için [az aks Get-Credentials][az-aks-get-credentials] komutunu kullanın. Aşağıdaki örnekte, kullanıcıya *Küme Yönetici rolü*verildiyse doğru şekilde çalışan *--yönetici* kimlik bilgileri alınır:
 
 ```azurecli-interactive
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --admin
 ```
 
-Ardından [kubectl config görünümü] [ kubectl-config-view] doğrulamak için komut *bağlam* Küme Yöneticisi yapılandırma bilgileri uygulandığını gösterir:
+Daha sonra, küme *bağlamının* yönetici yapılandırma bilgilerinin uygulandığını gösterdiğini doğrulamak için [kubectl config View][kubectl-config-view] komutunu kullanabilirsiniz:
 
 ```
 $ kubectl config view
@@ -123,9 +123,9 @@ users:
     token: e9f2f819a4496538b02cefff94e61d35
 ```
 
-## <a name="remove-role-permissions"></a>Rol izinleri Kaldır
+## <a name="remove-role-permissions"></a>Rol izinlerini kaldır
 
-Rol atamalarını kaldırmak için [az rol atamasını Sil] [ az-role-assignment-delete] komutu. Hesap Kimliği ve küme kaynağı kimliği, önceki komutlarda elde edilmiş olarak belirtin. Uygun grup nesne kimliği yerine hesap nesnesi kimliği için kullanıcı yerine bir grup rolü atanmışsa belirtin `--assignee` parametresi:
+Rol atamalarını kaldırmak için [az role atama Delete][az-role-assignment-delete] komutunu kullanın. Önceki komutlarda elde edilen hesap KIMLIĞI ve küme kaynak KIMLIĞI ' ni belirtin. Rolü bir kullanıcı yerine bir gruba atadıysanız, `--assignee` parametre için hesap nesne kimliği yerine uygun Grup nesnesi kimliğini belirtin:
 
 ```azurecli-interactive
 az role assignment delete --assignee $ACCOUNT_ID --scope $AKS_CLUSTER
@@ -133,7 +133,7 @@ az role assignment delete --assignee $ACCOUNT_ID --scope $AKS_CLUSTER
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Gelişmiş Güvenlik AKS kümelerine erişim [Azure Active Directory kimlik doğrulamasını tümleştirmek][aad-integration].
+AKS kümelerine erişim hakkında gelişmiş güvenlik için [Azure Active Directory kimlik doğrulamasını tümleştirin][aad-integration].
 
 <!-- LINKS - external -->
 [kubectl-config-use-context]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#config

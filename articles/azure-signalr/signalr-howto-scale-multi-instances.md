@@ -1,30 +1,30 @@
 ---
-title: Azure SignalR hizmeti için birden çok örnek ile ölçeklendirme
-description: Birçok ölçeklendirme senaryolarda, müşteri genellikle birden fazla sağlama ve bunları birlikte, büyük ölçekli bir dağıtımı oluşturmak için kullanmak için yapılandırmanız gerekir. Örneğin, birden fazla destekleyen parçalama gerektirir.
+title: Birden çok örnek ile ölçeklendirme-Azure SignalR hizmeti
+description: Birçok ölçeklendirme senaryosunda, müşterinin genellikle birden çok örnek sağlaması ve büyük ölçekli bir dağıtım oluşturmak için bunları birlikte kullanmak üzere yapılandırması gerekir. Örneğin, parça birden çok örnek desteği gerektirir.
 author: sffamily
 ms.service: signalr
 ms.topic: conceptual
 ms.date: 03/27/2019
 ms.author: zhshang
-ms.openlocfilehash: e284a0492774e02cab79db6d9006c1718a7fcfc9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 43d703312cbc1fc067a2d51d5623ed028ba01405
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60809116"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158164"
 ---
-# <a name="how-to-scale-signalr-service-with-multiple-instances"></a>Birden çok örnek ile SignalR hizmetini ölçeklendirmek nasıl?
-Son SignalR hizmet SDK'ın birden fazla uç nokta için SignalR hizmet örneklerini destekler. Eş zamanlı bağlantı ölçeklendirmek için bu özelliği kullanın veya bölgeler arası Mesajlaşma için kullanın.
+# <a name="how-to-scale-signalr-service-with-multiple-instances"></a>SignalR hizmetini birden çok örnek ile ölçeklendirme
+En son SignalR hizmeti SDK 'Sı, SignalR hizmet örnekleri için birden çok uç noktayı destekler. Bu özelliği, eş zamanlı bağlantıları ölçeklendirmek veya bölgeler arası mesajlaşma için kullanmak üzere kullanabilirsiniz.
 
 ## <a name="for-aspnet-core"></a>ASP.NET Core için
 
-### <a name="how-to-add-multiple-endpoints-from-config"></a>Yapılandırma dosyasından birden fazla uç noktası eklemek nasıl?
+### <a name="how-to-add-multiple-endpoints-from-config"></a>Yapılandırmadan birden fazla uç nokta nasıl eklenir?
 
-Anahtara sahip yapılandırma `Azure:SignalR:ConnectionString` veya `Azure:SignalR:ConnectionString:` SignalR hizmet bağlantı dizesi.
+SignalR hizmeti bağlantı dizesi için anahtar `Azure:SignalR:ConnectionString` veya `Azure:SignalR:ConnectionString:` yapılandırma.
 
-Anahtar ile başlarsa `Azure:SignalR:ConnectionString:`, biçiminde olması gerektiğini `Azure:SignalR:ConnectionString:{Name}:{EndpointType}`burada `Name` ve `EndpointType` özellikleridir `ServiceEndpoint` nesne ve koddan erişilebilir.
+Anahtar `Azure:SignalR:ConnectionString:`ile başlıyorsa, `Name` ve `EndpointType` `ServiceEndpoint` nesnesinin özellikleri olduğu ve koddan erişilebilen `Azure:SignalR:ConnectionString:{Name}:{EndpointType}`biçiminde olmalıdır.
 
-Aşağıdakileri kullanarak birden çok örnek bağlantı dizeleri ekleyebilirsiniz `dotnet` komutları:
+Aşağıdaki `dotnet` komutlarını kullanarak birden çok örnek bağlantı dizesi ekleyebilirsiniz:
 
 ```batch
 dotnet user-secrets set Azure:SignalR:ConnectionString:east-region-a <ConnectionString1>
@@ -32,10 +32,10 @@ dotnet user-secrets set Azure:SignalR:ConnectionString:east-region-b:primary <Co
 dotnet user-secrets set Azure:SignalR:ConnectionString:backup:secondary <ConnectionString3>
 ```
 
-### <a name="how-to-add-multiple-endpoints-from-code"></a>Birden fazla uç nokta koddan ekleme?
+### <a name="how-to-add-multiple-endpoints-from-code"></a>Koddan birden fazla uç nokta nasıl eklenir?
 
-A `ServicEndpoint` sınıfı, bir Azure SignalR Hizmeti uç noktası özelliklerini tanımlamak için sunulmuştur.
-Azure SignalR hizmeti SDK'sı aracılığıyla kullanırken, birden fazla örneğinin uç noktası yapılandırabilirsiniz:
+Bir Azure SignalR hizmeti uç noktasının özelliklerini açıklamaya yönelik bir `ServicEndpoint` sınıfı sunulmuştur.
+Azure SignalR Service SDK kullanırken şu şekilde birden çok örnek uç noktası yapılandırabilirsiniz:
 ```cs
 services.AddSignalR()
         .AddAzureSignalR(options => 
@@ -53,23 +53,23 @@ services.AddSignalR()
         });
 ```
 
-### <a name="how-to-customize-endpoint-router"></a>Uç nokta yönlendirici özelleştirmek nasıl?
+### <a name="how-to-customize-endpoint-router"></a>Uç nokta yönlendirici nasıl özelleştirilir?
 
-Varsayılan olarak, SDK'sı kullanır [DefaultEndpointRouter](https://github.com/Azure/azure-signalr/blob/dev/src/Microsoft.Azure.SignalR/EndpointRouters/DefaultEndpointRouter.cs) uç noktaları ayarlama seçmek için.
+Varsayılan olarak SDK, son noktaları almak için [Defaultendpointrouter](https://github.com/Azure/azure-signalr/blob/dev/src/Microsoft.Azure.SignalR/EndpointRouters/DefaultEndpointRouter.cs) kullanır.
 
 #### <a name="default-behavior"></a>Varsayılan davranış 
-1. İstemci istek yönlendirme
+1. İstemci isteği yönlendirme
 
-    İstemci `/negotiate` uygulama sunucusu ile. Varsayılan olarak, SDK'sı **rastgele seçer** kullanılabilir hizmet uç noktaları kümesinden bir uç nokta.
+    İstemci, uygulama sunucusuyla `/negotiate`. Varsayılan olarak SDK, kullanılabilir hizmet uç noktaları kümesinden bir uç noktayı **rastgele seçer** .
 
-2. Sunucu ileti yönlendirme
+2. Sunucu iletisi yönlendirme
 
-    Zaman * belirli bir ileti gönderilirken ** bağlantısı *** ve hedef bağlantı geçerli sunucuya yönlendirilmesini, doğrudan bağlı uç noktanın için ileti gider. Aksi takdirde, her Azure SignalR uç noktasına iletileri yayımladınız.
+    \* Belirli bir * * bağlantısına ileti gönderiyor * * * ve hedef bağlantı geçerli sunucuya yönlendirilse, ileti doğrudan o bağlı uç noktaya gider. Aksi takdirde, iletiler her Azure SignalR uç noktasına alınır.
 
-#### <a name="customize-routing-algorithm"></a>Yönlendirme algoritması özelleştirme
-İletileri gitmesi gereken hangi uç noktaları tanımlamak için özel bilgilere sahip olduğunuzda, kendi yönlendirici oluşturabilirsiniz.
+#### <a name="customize-routing-algorithm"></a>Yönlendirme algoritmasını özelleştirme
+İletilerin gitmesi gereken uç noktaları belirlemek için özel bilginiz varsa, kendi yönlendiricinizi oluşturabilirsiniz.
 
-Özel bir yönlendirici aşağıda bir örnek olarak tanımlanmıştır, ile başlayan gruplar `east-` adlı uç nokta her zaman Git `east`:
+Bir özel yönlendirici aşağıda, `east-` ile başlayan gruplar her zaman `east`adlı uç noktaya gidecebir örnek olarak tanımlanmıştır:
 
 ```cs
 private class CustomRouter : EndpointRouterDecorator
@@ -87,7 +87,7 @@ private class CustomRouter : EndpointRouterDecorator
 }
 ```
 
-Aşağıdaki varsayılan geçersiz kılan başka bir örnek anlaşma davranışı, uç noktaları seçmek için burada uygulama sunucusu konumuna bağlıdır.
+Aşağıdaki diğer bir örnek, uç noktaların seçimi için varsayılan anlaşma davranışını geçersiz kılan, uygulama sunucusunun bulunduğu yere bağlıdır.
 
 ```cs
 private class CustomRouter : EndpointRouterDecorator
@@ -110,7 +110,7 @@ private class CustomRouter : EndpointRouterDecorator
 }
 ```
 
-DI kullanarak kapsayıcının yönlendirici kaydedilecek unutmayın:
+Şunu kullanarak şu şekilde yönlendirici için olan yönlendiriciyi kaydetmeyi unutmayın:
 
 ```cs
 services.AddSingleton(typeof(IEndpointRouter), typeof(CustomRouter));
@@ -129,13 +129,13 @@ services.AddSignalR()
 
 ## <a name="for-aspnet"></a>ASP.NET için
 
-### <a name="how-to-add-multiple-endpoints-from-config"></a>Yapılandırma dosyasından birden fazla uç noktası eklemek nasıl?
+### <a name="how-to-add-multiple-endpoints-from-config"></a>Yapılandırmadan birden fazla uç nokta nasıl eklenir?
 
-Anahtara sahip yapılandırma `Azure:SignalR:ConnectionString` veya `Azure:SignalR:ConnectionString:` SignalR hizmet bağlantı dizesi.
+SignalR hizmeti bağlantı dizesi için anahtar `Azure:SignalR:ConnectionString` veya `Azure:SignalR:ConnectionString:` yapılandırma.
 
-Anahtar ile başlarsa `Azure:SignalR:ConnectionString:`, biçiminde olması gerektiğini `Azure:SignalR:ConnectionString:{Name}:{EndpointType}`burada `Name` ve `EndpointType` özellikleridir `ServiceEndpoint` nesne ve koddan erişilebilir.
+Anahtar `Azure:SignalR:ConnectionString:`ile başlıyorsa, `Name` ve `EndpointType` `ServiceEndpoint` nesnesinin özellikleri olduğu ve koddan erişilebilen `Azure:SignalR:ConnectionString:{Name}:{EndpointType}`biçiminde olmalıdır.
 
-Birden çok örnek bağlantı dizeleri ekleyebilirsiniz `web.config`:
+`web.config`, birden çok örnek bağlantı dizesi ekleyebilirsiniz:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -150,10 +150,10 @@ Birden çok örnek bağlantı dizeleri ekleyebilirsiniz `web.config`:
 </configuration>
 ```
 
-### <a name="how-to-add-multiple-endpoints-from-code"></a>Birden fazla uç nokta koddan ekleme?
+### <a name="how-to-add-multiple-endpoints-from-code"></a>Koddan birden fazla uç nokta nasıl eklenir?
 
-A `ServicEndpoint` sınıfı, bir Azure SignalR Hizmeti uç noktası özelliklerini tanımlamak için sunulmuştur.
-Azure SignalR hizmeti SDK'sı aracılığıyla kullanırken, birden fazla örneğinin uç noktası yapılandırabilirsiniz:
+Bir Azure SignalR hizmeti uç noktasının özelliklerini açıklamaya yönelik bir `ServicEndpoint` sınıfı sunulmuştur.
+Azure SignalR Service SDK kullanırken şu şekilde birden çok örnek uç noktası yapılandırabilirsiniz:
 
 ```cs
 app.MapAzureSignalR(
@@ -171,11 +171,11 @@ app.MapAzureSignalR(
         });
 ```
 
-### <a name="how-to-customize-router"></a>Yönlendirici özelleştirmek nasıl?
+### <a name="how-to-customize-router"></a>Yönlendirici nasıl özelleştirilir?
 
-ASP.NET SignalR ve ASP.NET Core SignalR arasındaki tek fark http bağlamı için türüdür `GetNegotiateEndpoint`. Biri olan ASP.NET SignalR için [IOwinContext](https://github.com/Azure/azure-signalr/blob/dev/src/Microsoft.Azure.SignalR.AspNet/EndpointRouters/DefaultEndpointRouter.cs#L19) türü.
+ASP.NET SignalR ve ASP.NET Core SignalR arasındaki tek fark, `GetNegotiateEndpoint`için http bağlam türüdür. ASP.NET SignalR için, bu, [ıowincontext](https://github.com/Azure/azure-signalr/blob/dev/src/Microsoft.Azure.SignalR.AspNet/EndpointRouters/DefaultEndpointRouter.cs#L19) türüdür.
 
-ASP.NET SignalR için özel anlaşma örnek aşağıdadır:
+Aşağıda ASP.NET SignalR için özel anlaşma örneği verilmiştir:
 
 ```cs
 private class CustomRouter : EndpointRouterDecorator
@@ -197,7 +197,7 @@ private class CustomRouter : EndpointRouterDecorator
 }
 ```
 
-DI kullanarak kapsayıcının yönlendirici kaydedilecek unutmayın:
+Şunu kullanarak şu şekilde yönlendirici için olan yönlendiriciyi kaydetmeyi unutmayın:
 
 ```cs
 var hub = new HubConfiguration();
@@ -215,31 +215,31 @@ app.MapAzureSignalR(GetType().FullName, hub, options => {
 
 ## <a name="configuration-in-cross-region-scenarios"></a>Bölgeler arası senaryolarda yapılandırma
 
-`ServiceEndpoint` Nesnesinin bir `EndpointType` özellik değeriyle `primary` veya `secondary`.
+`ServiceEndpoint` nesnesi, `primary` veya `secondary`değeri olan bir `EndpointType` özelliğine sahiptir.
 
-`primary` uç noktaları, istemci trafiğini almak için tercih edilen uç noktaları olan ve daha güvenilir ağ bağlantıları sahip olduğu kabul edilir; `secondary` uç noktaları daha az güvenilir ağ bağlantıları sahip olduğu kabul edilir ve sunucu trafiğini alma istemciye için değil, yalnızca yayın iletileri alma sunucusu istemci trafiği için kullanılır.
+`primary` uç noktaları, istemci trafiği almak için tercih edilen uç noktalardır ve daha güvenilir ağ bağlantılarına sahip olduğu kabul edilir; `secondary` uç noktaları, daha az güvenilir ağ bağlantılarına sahip olduğu kabul edilir ve yalnızca sunucuyu istemci trafiğine almak için kullanılır; Örneğin, istemci sunucu trafiği almak için değil.
 
-Bölgeler arası durumlarda ağ kararsız duruma gelmesine neden olabilir. Bulunan bir uygulama sunucusu için *Doğu ABD*, SignalR hizmet uç noktası bulunan aynı *Doğu ABD* bölge olarak yapılandırılabilir `primary` ve diğer bölgelerde uç noktalar olarak işaretlenmiş `secondary`. Bu yapılandırmada diğer bölgelerdeki hizmet uç noktaları için **alma** bu iletileri *Doğu ABD* uygulama sunucusu, ancak bulunmaz olması hiçbir **bölgeler arası** istemcilere yönlendirilmesi için Bu uygulama sunucusu. Mimari Aşağıdaki diyagramda gösterilmiştir:
+Bölgeler arası durumlarda ağ kararsız olabilir. *Doğu ABD*bulunan bir uygulama sunucusu için, aynı *Doğu ABD* bölgesinde bulunan SignalR hizmeti uç noktası, `secondary`olarak işaretlenen diğer bölgelerde `primary` ve uç noktalar olarak yapılandırılabilir. Bu yapılandırmada, diğer bölgelerdeki hizmet uç noktaları bu *Doğu ABD* App Server 'dan iletiler **alabilir** , ancak bu uygulama sunucusuna hiçbir **çapraz bölge** istemcisi yönlendirilmeyecektir. Mimari aşağıdaki diyagramda gösterilmiştir:
 
-![Cross-Geo Infra](./media/signalr-howto-scale-multi-instances/cross_geo_infra.png)
+![Çapraz coğrafi bölgeler](./media/signalr-howto-scale-multi-instances/cross_geo_infra.png)
 
-Bir istemci olduğunda çalışır `/negotiate` varsayılan yönlendirici, SDK'sı ile uygulama sunucusu ile **rastgele seçer** kullanılabilir kümesinden bir uç nokta `primary` uç noktaları. Uç nokta kullanılabilir olduğunda SDK'sı ardından **rastgele seçer** tüm kullanılabilir `secondary` uç noktaları. Uç nokta olarak işaretlenmiş **kullanılabilir** sunucu ve hizmet uç noktası arasındaki bağlantıyı olduğunda tutma.
+Bir istemci App Server ile `/negotiate` denediğinde varsayılan yönlendirici ile SDK, kullanılabilir `primary` uç noktaları kümesinden bir uç nokta **rastgele seçer** . Birincil uç nokta kullanılabilir olmadığında, SDK, tüm kullanılabilir `secondary` uç noktalarından **rastgele seçer** . Uç nokta, sunucu ve hizmet uç noktası arasındaki bağlantı etkin olduğunda **kullanılabilir** olarak işaretlenir.
 
-Bölgeler arası senaryoda bir istemci çalıştığında `/negotiate` barındırılan uygulama sunucusu ile *Doğu ABD*tarafından döndürür her zaman varsayılan `primary` uç nokta aynı bölgede yer alan. Zaman tüm *Doğu ABD* uç noktaları kullanılabilir değil, istemci de başka bölgelerde Uç noktalara yönlendirilir. Yük devretme bölümüne ayrıntılı bir senaryoyu açıklar.
+Bölgeler arası senaryoda, bir istemci *Doğu ABD*' de barındırılan uygulama sunucusuyla `/negotiate` denediğinde, varsayılan olarak her zaman aynı bölgedeki `primary` uç noktasını döndürür. Tüm *Doğu ABD* uç noktaları kullanılabilir olmadığında, istemci diğer bölgelerdeki uç noktalara yönlendirilir. Aşağıdaki yük devretme bölümünde senaryo ayrıntılı olarak açıklanmaktadır.
 
-![Normal anlaşması](./media/signalr-howto-scale-multi-instances/normal_negotiate.png)
+![Normal anlaşma](./media/signalr-howto-scale-multi-instances/normal_negotiate.png)
 
 ## <a name="fail-over"></a>Yük devretme
 
-Zaman tüm `primary` uç noktaları kullanılabilir değil, istemcinin `/negotiate` seçer kullanılabilir `secondary` uç noktaları. Bu yük devretme mekanizması her uç nokta olarak kullanılmalıdır gerektirir `primary` uç noktası için en az bir uygulama sunucusu.
+Tüm `primary` uç noktaları kullanılabilir olmadığında, istemci `/negotiate` kullanılabilir `secondary` uç noktalarından seçer. Bu yük devretme mekanizması her bir uç noktanın en az bir uygulama sunucusuna `primary` uç nokta olarak sunması gerekir.
 
 ![Yük devretme](./media/signalr-howto-scale-multi-instances/failover_negotiate.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu kılavuzda, ölçeklendirme, parçalama ve bölgeler arası senaryoları için aynı uygulamada birden fazla yapılandırma hakkında bilgi edindiniz.
+Bu kılavuzda, aynı uygulamada ölçeklendirme, parçalama ve çapraz bölge senaryoları için birden çok örneği nasıl yapılandıracağınızı öğrendiniz.
 
-Birden çok uç noktaları destekliyor, yüksek kullanılabilirlik ve olağanüstü durum kurtarma senaryolarında da kullanılabilir.
+Yüksek kullanılabilirlik ve olağanüstü durum kurtarma senaryolarında de birden fazla uç nokta desteklenir.
 
 > [!div class="nextstepaction"]
-> [Olağanüstü durum kurtarma ve yüksek kullanılabilirlik için SignalR hizmetini ayarlama](./signalr-concept-disaster-recovery.md)
+> [Olağanüstü durum kurtarma ve yüksek kullanılabilirlik için SignalR hizmetini kurma](./signalr-concept-disaster-recovery.md)

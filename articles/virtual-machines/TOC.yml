@@ -1,27 +1,19 @@
 - name: Sanal Makineler Belgeleri
   href: index.yml
 - name: Azure’da Linux Sanal Makineleri
-  href: linux/overview.md
+  href: 'https://docs.microsoft.com/azure/virtual-machines/linux/'
 - name: Azure’da Windows Sanal Makineleri
-  href: windows/overview.md
+  href: 'https://docs.microsoft.com/azure/virtual-machines/windows/'
 - name: VM Uzantıları Belgeleri
-  href: extensions/overview.md
+  href: ./extensions/overview.md
 - name: İş yükleri
-  items:
-    - name: Oracle
-      href: workloads/oracle/oracle-considerations.md
-    - name: SAP
-      href: workloads/sap/get-started.md
-    - name: Yüksek performanslı bilgi işlem
-      href: workloads/hpc/configure.md
-    - name: Ana bilgisayar yeniden barındırma
-      href: workloads/mainframe-rehosting/overview.md
+  href: ./workloads/workloads.md
 - name: Klasik dağıtımlar
   items:
     - name: Klasik dağıtım kullanan Linux sanal makineleri
-      href: linux/overview.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json
+      href: 'https://docs.microsoft.com/previous-versions/azure/virtual-machines/linux/classic/'
     - name: Klasik dağıtım kullanan Windows sanal makineleri
-      href: windows/overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json
+      href: 'https://docs.microsoft.com/previous-versions/azure/virtual-machines/windows/classic/'
 - name: Kaynaklar
   items:
     - name: Microsoft Learn ile becerilerinizi geliştirin

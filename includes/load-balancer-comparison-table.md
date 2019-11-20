@@ -8,28 +8,28 @@ ms.topic: include
 ms.date: 02/08/2018
 ms.author: kumud
 ms.custom: include file
-ms.openlocfilehash: 1d3ce900f7354b31e999c12b8e1eb0e23d391fcb
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 8b08e0ced0c7094890a80c37452c7f1b001fe511
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188792"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73888680"
 ---
 | | Standart SKU | Temel SKU |
 | --- | --- | --- |
-| Arka uç havuzu boyutu | 1000'e kadar örneklerini destekler. | 100 örneğe kadar destekler. |
-| Arka uç havuzu uç noktaları | blend, sanal makinelerin kullanılabilirlik kümeleri dahil olmak üzere tek bir sanal ağ içindeki herhangi bir sanal makine, sanal makine ölçek kümeleri. | Sanal makineleri tek bir kullanılabilirlik kümesi veya sanal makine ölçek kümesi. |
-| [Sistem durumu yoklamaları](../articles/load-balancer/load-balancer-custom-probe-overview.md#types) | TCP VE HTTP, HTTPS | TCP VE HTTP |
-| [Sistem durumu araştırma davranışını aşağı](../articles/load-balancer/load-balancer-custom-probe-overview.md#probedown) | TCP bağlantıları örneğini araştırma hakkında Canlı kalmasını __ve__ tüm araştırmalar üzerinde. | TCP bağlantıları örneğini araştırma üzerinde etkin kalır. Tüm TCP bağlantılarını tüm sonlandırmak araştırmaları olan aşağı. |
-| Kullanılabilirlik Alanları | Standart SKU, gelen ve giden için bölgesel olarak yedekli ve bölgesel ön uçlar, bölge hatası, bölgeler arası Yük Dengeleme giden akışlar eşlemeleri önceliklidir. | Kullanılamıyor. |
-| Tanılama | Azure İzleyici, bayt ve paket sayaçları, sistem durumu da dahil olmak üzere çok boyutlu ölçümler araştırma durumu, bağlantı denemeleri (TCP SYN), giden bağlantı durumu (SNAT başarılı ve başarısız akışlar), etkin veri düzlemi ölçümleri | Azure Log Analytics genel Load Balancer için yalnızca SNAT tükenmesi uyarı, arka uç havuzu durumu sayısı. |
-| HA bağlantı noktaları | İç Yük Dengeleyici | Kullanılamıyor. |
-| Varsayılan olarak güvenli | Genel IP, genel yük dengeleyici uç noktaları, uç noktaları olan kapalı olarak gelen akışlar sürece iç Load Balancer izin verilenler listesinde bir ağ güvenlik grubu. | Varsayılan olarak, ağ güvenliği açık grubu isteğe bağlı. |
-| [Giden bağlantılar](../articles/load-balancer/load-balancer-outbound-connections.md) | Giden NAT havuzu tabanlı ile açıkça tanımlayabileceğiniz [giden kuralları](../articles/load-balancer/load-balancer-outbound-rules-overview.md). Yük Dengeleme kuralı çevirme başına birden çok ön uç ile kullanabilirsiniz. Giden bir senaryo _gerekir_ oluşturulabilir sanal makine için kullanılabilirlik kümesi, sanal makine ölçek kümesi giden bağlantı kullanmak için.  Sanal ağ hizmet uç noktalarına giden bağlantı tanımlamadan erişilebilir ve doğru işlenen veri sayılmaz.  Sanal ağ hizmet uç noktaları kullanılabilir değil Azure PaaS Hizmetleri dahil olmak üzere tüm genel IP adresleri, giden bağlantı ve işlenen veri doğrultusunda sayısı üzerinden erişilmesi gereken. Bir sanal makine yalnızca bir iç yük dengeleyici hizmet veren, kullanılabilirlik kümesi veya sanal makine ölçek kümesi, giden bağlantılara varsayılan SNAT aracılığıyla kullanılamaz; kullanma [giden kuralları](../articles/load-balancer/load-balancer-outbound-rules-overview.md) yerine. Giden SNAT programlama gelen Yük Dengeleme kuralı protokolü temel aktarım belirli protokolüdür. | Birden çok ön uç mevcut olduğunda rastgele seçilmiş tek ön uç.  İç Load Balancer, bir sanal makine hizmet kullanılabilirlik kümesi veya sanal makine ölçek kümesi, varsayılan SNAT kullanılır. |
-| [Giden kuralları](../articles/load-balancer/load-balancer-outbound-rules-overview.md) | Genel IP adresleri veya ortak IP ön ekleri veya her ikisi de kullanarak, bildirim temelli giden NAT yapılandırma yapılandırılabilir giden boşta kalma zaman aşımı (4-120 dakika), özel SNAT bağlantı noktası ayırma | Kullanılamıyor. |
-|  [Boşta kalma TCP Sıfırla](../articles/load-balancer/load-balancer-tcp-reset.md) | Herhangi bir kural TCP boşta kalma zaman aşımı üzerinde (TCP k) sıfırlama etkinleştirme | Kullanılamaz |
+| Arka uç havuzu boyutu | En fazla 1000 örneği destekler. | En fazla 100 örneği destekler. |
+| Arka uç havuzu uç noktaları | Sanal makinelerin karışımlar, kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri dahil olmak üzere tek bir sanal ağdaki tüm sanal makineler. | Tek bir kullanılabilirlik kümesindeki veya sanal makine ölçek kümesindeki sanal makineler. |
+| [Sistem durumu yoklamaları](../articles/load-balancer/load-balancer-custom-probe-overview.md#types) | TCP, HTTP, HTTPS | TCP, HTTP |
+| [Durum araştırma azaltma davranışı](../articles/load-balancer/load-balancer-custom-probe-overview.md#probedown) | TCP bağlantıları bir örnek araştırması üzerinde __ve__ tüm yoklamalar üzerinde etkin kalır. | TCP bağlantıları bir örnek araştırmasına etkin kalır. Tüm yoklamalar kapatıldığında tüm TCP bağlantıları sonlandırılır. |
+| Kullanılabilirlik Alanları | Gelen ve giden trafik için bölge yedekli ve bölgesel ön uçları. Giden akışlar eşleştirmeleri alan hatası. Bölgeler arası yük dengeleme. | Kullanılamaz |
+| Tanılama | Azure Izleyici. Bayt ve paket sayaçları dahil olmak üzere çok boyutlu ölçümler. Durum araştırma durumu. Bağlantı denemeleri (TCP SYN). Giden bağlantı durumu (SNAT başarılı ve başarısız akışlar). Etkin veri düzlemi ölçümleri. | Yalnızca ortak Load Balancer için Azure Log Analytics. SNAT tükenme uyarısı. Arka uç havuzu sistem durumu sayısı. |
+| HA bağlantı noktaları | İç Yük Dengeleyici | Kullanılamaz |
+| Varsayılan olarak güvenli | Genel IP, genel Load Balancer uç noktaları ve iç Load Balancer uç noktaları, bir ağ güvenlik grubu tarafından izin verilmediği takdirde gelen akışlara kapalıdır. | Varsayılan olarak açın. Ağ güvenlik grubu isteğe bağlı. |
+| [Giden bağlantılar](../articles/load-balancer/load-balancer-outbound-connections.md) | Havuz tabanlı giden NAT 'ı [giden kurallarla](../articles/load-balancer/load-balancer-outbound-rules-overview.md)açık bir şekilde tanımlayabilirsiniz. Yük Dengeleme kuralı için geri çevirme başına birden çok ön uç kullanabilirsiniz. Giden bağlantı kullanmak için sanal makine, kullanılabilirlik kümesi veya sanal makine ölçek kümesi için bir giden senaryonun açıkça oluşturulması _gerekir_ . Sanal ağ hizmeti uç noktalarına giden bağlantı tanımlanmadan ulaşılmış ve verilerin işlendiği doğru sayılmaz. Sanal ağ hizmeti uç noktaları olarak kullanılamayan Azure PaaS hizmetleri de dahil olmak üzere tüm genel IP adreslerine giden bağlantı kullanılarak ulaşılmalıdır ve verilerin işlendiği doğru sayılır. Yalnızca bir iç Load Balancer sanal makineye, kullanılabilirlik kümesine veya sanal makine ölçek kümesine hizmet veriyorsa, varsayılan SNAT üzerinden giden bağlantılar kullanılamaz. Bunun yerine [giden kurallarını](../articles/load-balancer/load-balancer-outbound-rules-overview.md) kullanın. Giden SNAT programlama, gelen yük dengeleme kuralının aktarım protokolüne bağlıdır. | Tek ön uç, birden çok ön uç bulunduğunda rastgele seçilir. Yalnızca dahili Load Balancer sanal makineye, kullanılabilirlik kümesine veya sanal makine ölçek kümesine hizmet veriyorsa, varsayılan SNAT kullanılır. |
+| [Giden kuralları](../articles/load-balancer/load-balancer-outbound-rules-overview.md) | Genel IP adreslerini veya genel IP öneklerini veya her ikisini kullanarak bildirim temelli NAT yapılandırması. Yapılandırılabilir giden boşta kalma zaman aşımı (4-120 dakika). Özel SNAT bağlantı noktası ayırma | Kullanılamaz |
+| [Boşta durumunda TCP sıfırlaması](../articles/load-balancer/load-balancer-tcp-reset.md) | Herhangi bir kuralda boşta kalma zaman aşımı durumunda TCP sıfırlamayı (TCP RST) etkinleştir | Kullanılamaz |
 | [Birden çok ön uç](../articles/load-balancer/load-balancer-multivip-overview.md) | Gelen ve [giden](../articles/load-balancer/load-balancer-outbound-connections.md) | Yalnızca gelen |
-| Yönetim işlemleri | Çoğu operations < 30 saniye | 60-90 saniye tipik. |
-| SLA | veri yolu ile iki sağlıklı sanal makine için % 99,99 oranında. | Geçerli değildir. | 
-| Fiyatlandırma | İşlenen veri kuralları sayısına göre gelen ve giden kaynakla ilişkili ücretlendirilir.  | Ücret alınmaz. |
+| Yönetim Işlemleri | Çoğu işlem 30 saniye < | 60-90 + saniye tipik |
+| SLA | iki sağlıklı sanal makineyle veri yolu için% 99,99. | Uygulanamaz | 
+| Fiyatlandırma | Kural sayısına ve kaynakla ilişkili gelen ve giden dışarı alınan verilere göre ücretlendirilir. | Ücretsiz |
 |  |  |  |

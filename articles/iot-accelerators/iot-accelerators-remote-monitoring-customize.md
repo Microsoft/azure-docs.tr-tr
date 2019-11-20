@@ -1,6 +1,6 @@
 ---
-title: Uzaktan izleme çözümü UI - Azure özelleştirme | Microsoft Docs
-description: Bu makalede Uzaktan izleme çözüm Hızlandırıcısını UI için kaynak koduna erişim ve bazı özelleştirmeler nasıl hakkında bilgi sağlar.
+title: Uzaktan Izleme çözümü Kullanıcı arabirimini özelleştirme-Azure | Microsoft Docs
+description: Bu makalede, uzaktan Izleme çözümü Hızlandırıcısı Kullanıcı arabirimine yönelik kaynak koda nasıl erişebileceğiniz ve bazı özelleştirmeler yapabileceğiniz hakkında bilgi sağlanır.
 author: dominicbetts
 manager: timlt
 ms.author: dobett
@@ -8,81 +8,81 @@ ms.service: iot-accelerators
 services: iot-accelerators
 ms.date: 11/09/2018
 ms.topic: conceptual
-ms.openlocfilehash: aed63e332375be4f8ed939cf162545c9f366f329
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: eb3d5fea68b5b1b6e648943cb3dbaab5857e9e07
+ms.sourcegitcommit: 6cff17b02b65388ac90ef3757bf04c6d8ed3db03
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66143464"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68608013"
 ---
-# <a name="customize-the-remote-monitoring-solution-accelerator"></a>Uzaktan izleme çözüm Hızlandırıcısını özelleştirme
+# <a name="customize-the-remote-monitoring-solution-accelerator"></a>Uzaktan Izleme çözüm Hızlandırıcısını özelleştirme
 
-Bu makalede nasıl kaynak koduna erişim ve UI Uzaktan izleme çözüm Hızlandırıcısını özelleştirme hakkında bilgi sağlar.
+Bu makalede, kaynak koda nasıl erişebileceğinizi ve uzaktan Izleme çözümü Hızlandırıcısı Kullanıcı arabirimini nasıl özelleştireceğiniz hakkında bilgi sağlanır.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-## <a name="prepare-a-local-development-environment-for-the-ui"></a>Kullanıcı Arabirimi için bir yerel geliştirme ortamınızı hazırlama
+## <a name="prepare-a-local-development-environment-for-the-ui"></a>Kullanıcı arabirimi için yerel bir geliştirme ortamı hazırlama
 
-Uzaktan izleme çözüm Hızlandırıcısını UI kodunu React.js framework kullanılarak uygulanır. Kaynak kodunda bulabilirsiniz [azure-iot-pcs-remote-monitoring-webui](https://github.com/Azure/azure-iot-pcs-remote-monitoring-webui) GitHub deposu.
+Uzaktan Izleme çözümü Hızlandırıcısı Kullanıcı arabirimi kodu, tepki. js çerçevesi kullanılarak uygulanır. Kaynak kodu [Azure-IoT-PCs-Remote-Monitoring-webui](https://github.com/Azure/azure-iot-pcs-remote-monitoring-webui) GitHub deposunda bulabilirsiniz.
 
-Kullanıcı Arabirimi için değişiklik yapmak için bir kopyasını yerel olarak çalıştırabilirsiniz. Telemetri alma gibi eylemleri tamamlamak için yerel kopyayı çözüm dağıtılan bir örneğine bağlanır.
+Kullanıcı arabiriminde değişiklik yapmak için, bir kopyasını yerel olarak çalıştırabilirsiniz. Telemetriyi alma gibi eylemleri gerçekleştirmek için yerel kopya çözümün dağıtılan örneğine bağlanır.
 
-Aşağıdaki adımlar, kullanıcı Arabirimi geliştirme için yerel bir ortamı ayarlama işlemini özetlemektedir:
+Aşağıdaki adımlarda, UI geliştirmesi için yerel bir ortam ayarlama işlemi ana hatlarıyla verilmiştir:
 
-1. Dağıtım bir **temel** çözüm Hızlandırıcı kullanarak örneğini **bilgisayarları** CLI. Dağıtımınız ve sanal makine için sağlanan kimlik bilgileri adını not edin. Daha fazla bilgi için [CLI kullanarak dağıtma](iot-accelerators-remote-monitoring-deploy-cli.md).
+1. **Bilgisayar** CLI 'sını kullanarak çözüm hızlandırıcının **temel** bir örneğini dağıtın. Dağıtımınızın adını ve sanal makine için verdiğiniz kimlik bilgilerini bir yere unutmayın. Daha fazla bilgi için bkz. [CLI kullanarak dağıtma](iot-accelerators-remote-monitoring-deploy-cli.md).
 
-1. Mikro hizmetler, çözümünüzdeki barındıran sanal makineye SSH erişimini etkinleştirmek için Azure portal veya Azure Cloud Shell kullanın. Örneğin:
+1. Çözümünüzde mikro hizmetleri barındıran sanal makineye SSH erişimini etkinleştirmek için Azure portal veya Azure Cloud Shell kullanın. Örneğin:
 
     ```azurecli-interactive
     az network nsg rule update --name SSH --nsg-name {your solution name}-nsg --resource-group {your solution name} --access Allow
     ```
 
-    Yalnızca test ve geliştirme sırasında SSH erişimini etkinleştirin. SSH, etkinleştirirseniz [kullanmayı bitirdikten hemen sonra bunu devre dışı bırakmanız gerekir](../security/azure-security-network-security-best-practices.md#disable-rdpssh-access-to-virtual-machines).
+    Yalnızca test ve geliştirme sırasında SSH erişimini etkinleştirin. SSH 'yi etkinleştirirseniz, [kullanmayı bitirdikten hemen sonra devre dışı bırakmanız gerekir](../security/fundamentals/network-best-practices.md#disable-rdpssh-access-to-virtual-machines).
 
-1. Azure portal veya Azure Cloud Shell, sanal makinenizin genel IP adresi ve adını bulmak için kullanın. Örneğin:
+1. Sanal makinenizin adını ve genel IP adresini bulmak için Azure portal veya Azure Cloud Shell kullanın. Örneğin:
 
     ```azurecli-interactive
     az resource list --resource-group {your solution name} -o table
     az vm list-ip-addresses --name {your vm name from previous command} --resource-group {your solution name} -o table
     ```
 
-1. Sanal makinenize bağlanmak için SSH kullanın. IP adresi önceki adımda ve çalıştırdığınızda sağladığınız kimlik bilgileri kullanmak **bilgisayarları** çözümü dağıtmak için. `ssh` Komutu Azure Cloud Shell'de kullanılabilir.
+1. Sanal makinenize bağlanmak için SSH kullanın. Önceki adımda bulunan IP adresini ve çözümü dağıtmak için **bilgisayarları** çalıştırdığınızda verdiğiniz kimlik bilgilerini kullanın. `ssh` Komut Azure Cloud Shell kullanılabilir.
 
-1. Bağlanmak yerel kullanıcı Deneyimini izin vermek için sanal makine bash kabuğunda aşağıdaki komutları çalıştırın:
+1. Yerel UX 'in bağlanmasına izin vermek için, sanal makinedeki bash kabuğu 'nda aşağıdaki komutları çalıştırın:
 
     ```sh
     cd /app
     sudo ./start.sh --unsafe
     ```
 
-1. Komut tamamlandıktan ve web sitesini başlatır gördükten sonra sanal makineden kesebilirsiniz.
+1. Komutun tamamlandığını ve Web sitesi başladıktan sonra, sanal makine bağlantısını kesebilirsiniz.
 
-1. Yerel kopyanızı içinde [azure-iot-pcs-remote-monitoring-webui](https://github.com/Azure/azure-iot-pcs-remote-monitoring-webui) havuzu Düzenle **.env** dosya dağıtılan çözümünüzün URL'si eklemek için:
+1. [Azure-IoT-PCs-Remote-Monitoring-webui](https://github.com/Azure/azure-iot-pcs-remote-monitoring-webui) deposunun yerel kopyasında, dağıtılan çözümünüzün URL 'sini eklemek için **. env** dosyasını düzenleyin:
 
     ```config
     NODE_PATH = src/
     REACT_APP_BASE_SERVICE_URL=https://{your solution name}.azurewebsites.net/
     ```
 
-1. Bir komut isteminde, yerel kopyasına gidin `azure-iot-pcs-remote-monitoring-webui` klasör.
+1. Bir komut isteminde, `azure-iot-pcs-remote-monitoring-webui` klasörün yerel kopyasına gidin.
 
-1. Gerekli kitaplıkları yükleyin ve kullanıcı Arabirimi yerel olarak çalıştırmak için aşağıdaki komutları çalıştırın:
+1. Gerekli kitaplıkları yüklemek ve Kullanıcı arabirimini yerel olarak çalıştırmak için aşağıdaki komutları çalıştırın:
 
     ```cmd/sh
     npm install
     npm start
     ```
 
-1. Önceki komutu kullanıcı Arabirimi yerel olarak http çalıştırır:\//localhost:3000 / Pano. Site çalışırken kod düzenleme ve dinamik olarak güncelleştir çıksın.
+1. Önceki komut, Kullanıcı arabirimini http:\//localhost: 3000/Dashboard konumunda yerel olarak çalıştırır. Site çalışırken kodu düzenleyebilir ve dinamik olarak güncelleştirme makalesine bakabilirsiniz.
 
-## <a name="customize-the-layout"></a>Düzenleri özelleştirme
+## <a name="customize-the-layout"></a>Düzeni özelleştirme
 
-Uzaktan izleme çözümünde her sayfa, bir dizi denetimi olarak adlandırılır, oluşan *panelleri* kaynak kodunda. **Pano** sayfa oluşur beş bölmelerden: Genel bakış, harita, uyarılar, Telemetri ve analiz. Her sayfanın ve kendi panellerinde tanımlayan kaynak kodunu bulabilirsiniz [bilgisayarları-remote-monitoring-webui](https://github.com/Azure/pcs-remote-monitoring-webui) GitHub deposu. Örneğin, tanımlar kod **Pano** sayfa düzenini ve panel sayfasında bulunan [src/bileşenleri/sayfaları/dashboard](https://github.com/Azure/pcs-remote-monitoring-webui/tree/master/src/components/pages/dashboard) klasör.
+Uzaktan Izleme çözümünde bulunan her sayfa, kaynak kodda *panel* olarak adlandırılan bir denetim kümesinden oluşur. **Pano** sayfası beş panelden oluşur: Genel bakış, eşleme, uyarılar, telemetri ve analiz. [Bilgisayarlar-Remote-Monitoring-webui](https://github.com/Azure/pcs-remote-monitoring-webui) GitHub deposundaki her bir sayfayı ve bunların panellerini tanımlayan kaynak kodunu bulabilirsiniz. Örneğin, **Pano** sayfasını, yerleşimini ve sayfadaki panelleri tanımlayan kod [src/Components/Pages/Dashboard](https://github.com/Azure/pcs-remote-monitoring-webui/tree/master/src/components/pages/dashboard) klasöründe bulunur.
 
-Çünkü kendi düzen panelleri yönetme ve boyutlandırma, bir sayfanın düzenini kolayca değiştirebilirsiniz. Aşağıdaki değişiklikleri yapın **PageContent** öğesinde `src/components/pages/dashboard/dashboard.js` dosya:
+Panolar kendi düzen ve boyutlandırlamalarını yönettiğinden, sayfanın yerleşimini kolayca değiştirebilirsiniz. `src/components/pages/dashboard/dashboard.js` Dosyadaki **PageContent** öğesinde aşağıdaki değişiklikleri yapın:
 
-* Haritası ve telemetriyi panellerin konumlarını değiştirme.
-* Harita ve analiz paneller göreli genişliğini değiştirin.
+* Harita ve telemetri panellerinin konumlarını değiştirin.
+* Harita ve analiz panellerinin göreli genişliklerini değiştirin.
 
 ```javascript
 <PageContent className="dashboard-container">
@@ -152,9 +152,9 @@ Uzaktan izleme çözümünde her sayfa, bir dizi denetimi olarak adlandırılır
 </PageContent>
 ```
 
-![Panel düzenini değiştir](./media/iot-accelerators-remote-monitoring-customize/layout.png)
+![Panel yerleşimini değiştir](./media/iot-accelerators-remote-monitoring-customize/layout.png)
 
-De aynı paneli birkaç örnek veya çeşitli sürümleri varsa ekleyebilirsiniz, [yinelenen ve bir paneli özelleştirme](#duplicate-and-customize-an-existing-control). Aşağıdaki örnek iki örnek telemetri panel Ekle gösterilmektedir. Bu değişiklikleri yapmak için Düzenle `src/components/pages/dashboard/dashboard.js` dosyası:
+Aynı panelin birkaç örneğini veya [bir paneli çoğaltdıysanız ve özelleştirirseniz](#duplicate-and-customize-an-existing-control), birkaç sürümü de ekleyebilirsiniz. Aşağıdaki örnek, telemetri panelinin iki örneğinin nasıl ekleneceğini gösterir. Bu değişiklikleri yapmak için `src/components/pages/dashboard/dashboard.js` dosyayı düzenleyin:
 
 ```javascript
 <PageContent className="dashboard-container">
@@ -235,29 +235,29 @@ De aynı paneli birkaç örnek veya çeşitli sürümleri varsa ekleyebilirsiniz
 </PageContent>
 ```
 
-Ardından, farklı telemetri her panelinde görüntüleyebilirsiniz:
+Daha sonra her panelde farklı telemetri görüntüleyebilirsiniz:
 
-![Birden fazla telemetri panel](./media/iot-accelerators-remote-monitoring-customize/multiple-telemetry.png)
+![Birden çok telemetri paneli](./media/iot-accelerators-remote-monitoring-customize/multiple-telemetry.png)
 
-## <a name="duplicate-and-customize-an-existing-control"></a>Yinelenen ve varolan bir denetimi özelleştirme
+## <a name="duplicate-and-customize-an-existing-control"></a>Varolan bir denetimi yineleme ve özelleştirme
 
-Aşağıdaki adımlar, var olan bir panel yinelenen, değiştirin ve ardından değiştirilmiş sürümünü nasıl özetlemektedir. Adımları **uyarılar** paneli örnek olarak:
+Aşağıdaki adımlarda, var olan bir paneli yineleme, değiştirme ve değiştirilen sürümü kullanma ana hatlarıyla gösterilmiştir. Adımlar bir örnek olarak **Uyarılar** panelini kullanır:
 
-1. Depo, yerel kopyasında bir kopyasını **uyarılar** klasöründe `src/components/pages/dashboard/panels` klasör. Yeni kopya adı **cust_alerts**.
+1. Deponun yerel kopyasında, `src/components/pages/dashboard/panels` klasöründeki **Uyarılar** klasörünün bir kopyasını oluşturun. Yeni kopyayı **cust_alerts**olarak adlandırın.
 
-1. İçinde **alertsPanel.js** dosyası **cust_alerts** klasöründe olması için sınıfın adını Düzenle **CustAlertsPanel**:
+1. **Cust_alerts** klasöründeki **alertspanel. js** dosyasında, **custalertspanel**olarak kullanılacak sınıfın adını düzenleyin:
 
     ```javascript
     export class CustAlertsPanel extends Component {
     ```
 
-1. Aşağıdaki satırı ekleyin `src/components/pages/dashboard/panels/index.js` dosyası:
+1. Aşağıdaki satırı `src/components/pages/dashboard/panels/index.js` dosyasına ekleyin:
 
     ```javascript
     export * from './cust_alerts';
     ```
 
-1. Değiştirin `alertsPanel` ile `CustAlertsPanel` içinde `src/components/pages/dashboard/dashboard.js` dosyası:
+1. Dosyadaki ile `CustAlertsPanel` `alertsPanel`değiştirin: `src/components/pages/dashboard/dashboard.js`
 
     ```javascript
     import {
@@ -281,11 +281,11 @@ Aşağıdaki adımlar, var olan bir panel yinelenen, değiştirin ve ardından d
     </Cell>
     ```
 
-Artık özgün yerine **uyarılar** adlı bir kopya paneliyle **CustAlerts**. Bu kopyası, özgün ile aynıdır. Artık, kopya değiştirebilirsiniz. Örneğin, sıralama sütunu değiştirme **uyarılar** paneli:
+Şimdi özgün **Uyarılar** panelini **custalerts**adlı bir kopyayla değiştirmiş oldunuz. Bu kopya orijinalile aynıdır. Şimdi kopyayı değiştirebilirsiniz. Örneğin, **Uyarılar** panelinde sütun sıralamasını değiştirmek için:
 
 1. `src/components/pages/dashboard/panels/cust_alerts/alertsPanel.js` dosyasını açın.
 
-1. Sütun tanımları, aşağıdaki kod parçacığında gösterildiği gibi değiştirin:
+1. Sütun tanımlarını aşağıdaki kod parçacığında gösterildiği gibi değiştirin:
 
     ```javascript
     this.columnDefs = [
@@ -302,15 +302,15 @@ Artık özgün yerine **uyarılar** adlı bir kopya paneliyle **CustAlerts**. Bu
     ];
     ```
 
-Yeni sürümünü aşağıdaki ekran görüntüsünde gösterilmektedir **uyarılar** paneli:
+Aşağıdaki ekran görüntüsünde, **Uyarılar** panelinin yeni sürümü gösterilmektedir:
 
-![Uyarılar panelinde güncelleştirildi](./media/iot-accelerators-remote-monitoring-customize/reorder-columns.png)
+![Uyarı bölmesi güncelleştirildi](./media/iot-accelerators-remote-monitoring-customize/reorder-columns.png)
 
-## <a name="customize-the-telemetry-chart"></a>Telemetri grafiği özelleştirme
+## <a name="customize-the-telemetry-chart"></a>Telemetri grafiğini özelleştirme
 
-Dosyaları `src/components/pages/dashboard/panels/telemtry` klasör üzerinde telemetri grafik tanımlayın **Pano** sayfası. Çözüm arka ucu telemetri kullanıcı arabirimini alır `src/services/telemetryService.js` dosya. Aşağıdaki adımlarda, 5 dakika 15 telemetri grafiğe görüntülenecek zaman aralığını değiştirmek gösterilmektedir:
+`src/components/pages/dashboard/panels/telemtry` Klasördeki dosyalar, **Pano** sayfasında telemetri grafiğini tanımlar. Kullanıcı arabirimi, `src/services/telemetryService.js` dosyadaki çözüm arka ucundan Telemetriyi alır. Aşağıdaki adımlarda, telemetri grafiğinde görüntülenecek zaman döneminin 15 ila 5 dakikaya nasıl değiştirileceği gösterilmektedir:
 
-1. İçinde `src/services/telemetryService.js` dosya, çağrılan işlev bulun **getTelemetryByDeviceIdP15M**. Bu işlev bir kopyasını alın ve kopyalama gibi değiştirin:
+1. Dosyasında, getTelemetryByDeviceIdP15M adlı işlevi bulun. `src/services/telemetryService.js` Bu işlevin kopyasını oluşturun ve kopyayı aşağıdaki şekilde değiştirin:
 
     ```javascript
     static getTelemetryByDeviceIdP5M(devices = []) {
@@ -323,21 +323,21 @@ Dosyaları `src/components/pages/dashboard/panels/telemtry` klasör üzerinde te
     }
     ```
 
-1. Telemetri grafik doldurmak için bu yeni işlevi kullanmak için açık `src/components/pages/dashboard/dashboard.js` dosya. Telemetri akışına başlatır satırını bulun ve şu şekilde değiştirin:
+1. Telemetri grafiğini doldurmak üzere bu yeni işlevi kullanmak için `src/components/pages/dashboard/dashboard.js` dosyasını açın. Telemetri akışını başlatan çizgiyi bulun ve aşağıdaki gibi değiştirin:
 
     ```javascript
     const getTelemetryStream = ({ deviceIds = [] }) => TelemetryService.getTelemetryByDeviceIdP5M(deviceIds)
     ```
 
-Telemetri grafik artık beş dakika telemetri verilerini gösterir:
+Telemetri grafiği artık beş dakikalık telemetri verilerini gösterir:
 
 ![Bir gün gösteren telemetri grafiği](./media/iot-accelerators-remote-monitoring-customize/telemetry-period.png)
 
 ## <a name="add-a-new-kpi"></a>Yeni KPI Ekle
 
-**Pano** sayfası görüntüler KPI'ler **Analytics** paneli. Bu KPI'ları hesaplanır `src/components/pages/dashboard/dashboard.js` dosya. KPI'ları tarafından işlenen `src/components/pages/dashboard/panels/analytics/analyticsPanel.js` dosya. Aşağıdaki adımlarda açıklanmıştır hesaplamak ve üzerinde yeni bir KPI değeri işlemek nasıl **Pano** sayfası. Yeni bir yüzde değişikliği uyarı bildirimleri KPI eklemek için gösterilen örnekte bulunur:
+**Pano** sayfasında KPI 'lar **analiz** panelinde görüntülenir. Bu KPI 'ler `src/components/pages/dashboard/dashboard.js` dosyada hesaplanır. KPI 'ler `src/components/pages/dashboard/panels/analytics/analyticsPanel.js` dosya tarafından işlenir. Aşağıdaki adımlarda, **Pano** sayfasında yenı bir KPI değerinin nasıl hesaplanacağı ve işlenmesi anlatılmaktadır. Gösterilen örnek, uyarı uyarıları KPI 'sinde yeni bir yüzde değişikliği eklemektir:
 
-1. `src/components/pages/dashboard/dashboard.js` dosyasını açın. Değiştirme **ilk durum** eklenecek nesne bir **warningAlertsChange** özelliğini aşağıdaki gibi:
+1. `src/components/pages/dashboard/dashboard.js` dosyasını açın. **InitialState** nesnesini şu şekilde bir **Warningalertschange** özelliği içerecek şekilde değiştirin:
 
     ```javascript
     const initialState = {
@@ -357,7 +357,7 @@ Telemetri grafik artık beş dakika telemetri verilerini gösterir:
     };
     ```
 
-1. Değiştirme **currentAlertsStats** eklenecek nesnenin **totalWarningCount** bir özellik olarak:
+1. **Currentalertsstats** nesnesini, bir özellik olarak **totalwarningcount** değerini içerecek şekilde değiştirin:
 
     ```javascript
     return {
@@ -369,7 +369,7 @@ Telemetri grafik artık beş dakika telemetri verilerini gösterir:
     };
     ```
 
-1. Yeni KPI hesaplayın. Hesaplama için kritik uyarı sayısını bulur. Yinelenen kodu ve kopyalama gibi değiştirin:
+1. Yeni KPI 'yi hesaplayın. Kritik uyarı sayısı için hesaplamayı bulun. Kodu çoğaltın ve kopyayı aşağıdaki şekilde değiştirin:
 
     ```javascript
     // ================== Warning Alerts Count - START
@@ -382,7 +382,7 @@ Telemetri grafik artık beş dakika telemetri verilerini gösterir:
     // ================== Warning Alerts Count - END
     ```
 
-1. Yeni dahil **warningAlertsChange** KPI stream'de KPI:
+1. KPI akışına yeni **Warningalertschange** KPI 'sini ekleyin:
 
     ```javascript
     return ({
@@ -400,7 +400,7 @@ Telemetri grafik artık beş dakika telemetri verilerini gösterir:
     });
     ```
 
-1. Yeni dahil **warningAlertsChange** KPI kullanıcı arabirimini oluşturmak için kullanılan durum veri:
+1. Kullanıcı arabirimini oluşturmak için kullanılan durum verilerine yeni **Warningalertschange** KPI 'sini ekleyin:
 
     ```javascript
     const {
@@ -419,7 +419,7 @@ Telemetri grafik artık beş dakika telemetri verilerini gösterir:
     } = this.state;
     ```
 
-1. KPI'ler panele geçirilen verileri güncelleştirin:
+1. KPI 'ler paneline geçirilen verileri güncelleştirin:
 
     ```javascript
     <AnalyticsPanel
@@ -435,15 +435,15 @@ Telemetri grafik artık beş dakika telemetri verilerini gösterir:
       t={t} />
     ```
 
-Yapılan değişiklikler artık bitirdikten `src/components/pages/dashboard/dashboard.js` dosya. Yaptığınız değişiklik aşağıdaki adımlarda açıklanmıştır `src/components/pages/dashboard/panels/analytics/analyticsPanel.js` dosyayı yeni KPI görüntülemek için:
+Artık `src/components/pages/dashboard/dashboard.js` dosyadaki değişiklikleri tamamladınız. Aşağıdaki adımlarda, yeni KPI 'yı göstermek için `src/components/pages/dashboard/panels/analytics/analyticsPanel.js` dosyada yapılacak değişiklikler açıklanır:
 
-1. Yeni KPI değeri şu şekilde almak için kod aşağıdaki satırı değiştirin:
+1. Aşağıdaki kod satırını, yeni KPI değerini şu şekilde almak için değiştirin:
 
     ```javascript
     const { t, isPending, criticalAlertsChange, warningAlertsChange, alertsPerDeviceId, topAlerts, timeSeriesExplorerUrl, error } = this.props;
     ```
 
-1. Yeni KPI değeri şu şekilde görüntülenecek biçimlendirme değiştirin:
+1. Yeni KPI değerini aşağıdaki gibi görüntüleyecek şekilde işaretlemeyi değiştirin:
 
     ```javascript
     <div className="analytics-cell">
@@ -469,13 +469,13 @@ Yapılan değişiklikler artık bitirdikten `src/components/pages/dashboard/dash
     </div>
     ```
 
-**Pano** sayfasında artık yeni KPI değeri görüntüler:
+**Pano** sayfası ŞIMDI yeni KPI değerini görüntülüyor:
 
-![Uyarı KPI](./media/iot-accelerators-remote-monitoring-customize/new-kpi.png)
+![Uyarı KPI 'si](./media/iot-accelerators-remote-monitoring-customize/new-kpi.png)
 
 ## <a name="customize-the-map"></a>Haritayı özelleştirme
 
-Bkz: [Özelleştir harita](https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet/wiki/Developer-Reference-Guide#upgrade-map-key-to-see-devices-on-a-dynamic-map) GitHub sayfasında çözüm içinde eşleme bileşenlerini hakkında ayrıntılar için.
+Çözümdeki harita bileşenlerinin ayrıntıları için GitHub 'da [Haritayı özelleştirme](https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet/wiki/Developer-Reference-Guide#upgrade-map-key-to-see-devices-on-a-dynamic-map) sayfasına bakın.
 
 <!--
 ### Connect an external visualization tool
@@ -484,25 +484,25 @@ See the [Connect an external visualization tool](https://github.com/Azure/azure-
 
 -->
 
-## <a name="other-customization-options"></a>Diğer özelleştirme seçeneklerinin
+## <a name="other-customization-options"></a>Diğer özelleştirme seçenekleri
 
-Daha fazla Uzaktan izleme çözümünde sunu ve görselleştirmeler katmanını değiştirmek için kodu yeniden düzenleyebilirsiniz. İlgili GitHub depoları şunlardır:
+Uzaktan Izleme çözümünde sunum ve görselleştirmeler katmanını daha fazla değiştirmek için kodu düzenleyebilirsiniz. İlgili GitHub depoları şunlardır:
 
-* [Yapılandırma mikro hizmet için Azure IOT çözümleri (.NET)](https://github.com/Azure/remote-monitoring-services-dotnet/tree/master/config)
-* [Yapılandırma mikro hizmet Azure IOT çözümleri (Java)](https://github.com/Azure/remote-monitoring-services-java/tree/master/config)
-* [Azure IOT bilgisayarları uzaktan Web UI'ı izleme](https://github.com/Azure/pcs-remote-monitoring-webui)
+* [Azure IoT çözümleri için yapılandırma mikro hizmeti (.NET)](https://github.com/Azure/remote-monitoring-services-dotnet/tree/master/config)
+* [Azure IoT çözümleri için yapılandırma mikro hizmeti (Java)](https://github.com/Azure/remote-monitoring-services-java/tree/master/config)
+* [Azure IoT BILGISAYARLARı uzaktan Izleme Web Kullanıcı arabirimi](https://github.com/Azure/pcs-remote-monitoring-webui)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, Uzaktan izleme çözüm Hızlandırıcısını web kullanıcı Arabirimi özelleştirmenize yardımcı olacak kaynaklar hakkında bilgi edindiniz. Kullanıcı arabirimini özelleştirme hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+Bu makalede, uzaktan Izleme çözüm hızlandırıcısında Web Kullanıcı arabirimini özelleştirmenize yardımcı olacak kaynaklar hakkında bilgi edindiniz. Kullanıcı arabirimini özelleştirme hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
 
-* [Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimine özel sayfa ekleme](iot-accelerators-remote-monitoring-customize-page.md)
-* [Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimine özel hizmet ekleme](iot-accelerators-remote-monitoring-customize-service.md)
-* [Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimine özel kılavuz ekleme](iot-accelerators-remote-monitoring-customize-grid.md)
-* [Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimine özel bir açılır öğesi Ekle](iot-accelerators-remote-monitoring-customize-flyout.md)
-* [Uzaktan izleme çözüm Hızlandırıcı Web kullanıcı Arabiriminde panoya özel panel ekleme](iot-accelerators-remote-monitoring-customize-panel.md)
+* [Uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimine özel bir sayfa ekleme](iot-accelerators-remote-monitoring-customize-page.md)
+* [Uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimine özel bir hizmet ekleme](iot-accelerators-remote-monitoring-customize-service.md)
+* [Uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimine özel kılavuz ekleme](iot-accelerators-remote-monitoring-customize-grid.md)
+* [Uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimine özel bir açılır pencere ekleyin](iot-accelerators-remote-monitoring-customize-flyout.md)
+* [Uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimindeki panoya özel panel ekleme](iot-accelerators-remote-monitoring-customize-panel.md)
 
-Uzaktan izleme çözüm Hızlandırıcısını hakkında daha fazla kavramsal bilgi için bkz. [Uzaktan izleme mimarisi](iot-accelerators-remote-monitoring-sample-walkthrough.md)
+Uzaktan Izleme çözümü Hızlandırıcısı hakkında daha fazla kavramsal bilgi için bkz. [Uzaktan izleme mimarisi](iot-accelerators-remote-monitoring-sample-walkthrough.md)
 
-Uzaktan izleme çözümü mikro hizmetler özelleştirme hakkında daha fazla bilgi için bkz. [özelleştirme ve yeniden dağıtma bir mikro hizmet](iot-accelerators-microservices-example.md).
+Uzaktan Izleme çözümü mikro hizmetlerini özelleştirme hakkında daha fazla bilgi için bkz. [bir mikro hizmeti özelleştirme ve yeniden dağıtma](iot-accelerators-microservices-example.md).
 <!-- Next tutorials in the sequence -->

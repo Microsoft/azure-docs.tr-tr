@@ -1,6 +1,6 @@
 ---
-title: Bulut uygulama erişimi Azure Active Directory'de koşullu erişim için onaylı istemci uygulamalarını zorunlu kılma | Microsoft Docs
-description: Bulut uygulama erişimi Azure Active Directory'de koşullu erişim için onaylı istemci uygulamalarını gerektiren öğrenin.
+title: Azure Active Directory | için koşullu erişimle Cloud App erişimi için onaylanan istemci uygulamaları gerektirme | Microsoft Docs
+description: Azure Active Directory ' de koşullu erişim ile Cloud App erişimi için onaylanan istemci uygulamaları yapmayı isteme hakkında bilgi edinin.
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
@@ -11,340 +11,259 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: spunukol
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ff4e81f5533622c8afbfb0d7c683c76b530aefec
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: 45eeef7d96f194e224e5b44421e73eb5ee5d9c0d
+ms.sourcegitcommit: f5cc71cbb9969c681a991aa4a39f1120571a6c2e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67509498"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68515143"
 ---
-# <a name="how-to-require-approved-client-apps-for-cloud-app-access-with-conditional-access"></a>Nasıl Yapılır: Koşullu erişim ile bulut uygulaması erişimi için onaylı istemci uygulama gerektir 
+# <a name="how-to-require-approved-client-apps-for-cloud-app-access-with-conditional-access"></a>Nasıl Yapılır: Koşullu erişimle Cloud App erişimi için onaylanan istemci uygulamaları gerektir 
 
-Çalışanlarınızın mobil cihazları hem kişisel hem de iş görevleri için kullanın. Çalışanlarınızın üretken olabilirler, ancak ayrıca veri kayıplarını da önlemek istersiniz. Azure Active Directory (Azure AD) koşullu erişimle şirket verilerinizi koruyabilirsiniz onaylı istemci uygulamaları için bulut uygulamalarınıza erişimi kısıtlayabilirsiniz.  
+Çalışanlarınız hem kişisel hem de iş görevleri için mobil cihazları kullanır. Çalışanlarınızın üretken olduğundan emin olmaya devam ederken, veri kaybını da engellemek isteyebilirsiniz. Azure Active Directory (Azure AD) koşullu erişimi sayesinde, bulut uygulamalarınıza erişimi, Şirket verilerinizi koruyabilecek onaylanan istemci uygulamalarıyla sınırlandırabilirsiniz.  
 
-Bu konu, onaylı istemci uygulamalarını gerektiren koşul erişim ilkelerinin nasıl yapılandırılacağını açıklar.
+Bu konuda, onaylanan istemci uygulamaları gerektiren koşul erişim ilkelerinin nasıl yapılandırılacağı açıklanmaktadır.
 
 ## <a name="overview"></a>Genel Bakış
 
-İle [Azure AD koşullu erişim](overview.md), hassas ayarlamalar yapabilirsiniz kaynaklarınızı yetkili kullanıcıların erişebildiğinden nasıl. Örneğin, bulut uygulamalarınıza güvenilen cihazlara erişimi sınırlayabilirsiniz.
+[Azure AD koşullu erişimi](overview.md)sayesinde yetkili kullanıcıların kaynaklarınıza nasıl erişeceğine ilişkin ince ayar yapabilirsiniz. Örneğin, bulut uygulamalarınıza erişimi güvenilir cihazlarla sınırlayabilirsiniz.
 
-Kullanabileceğiniz [Intune uygulama koruma ilkeleri](https://docs.microsoft.com/intune/app-protection-policy) Şirketinizin verilerini korumaya yardımcı olmak için. Intune uygulama koruma ilkeleri, cihazları bir cihaz Yönetimi çözümüne kaydederek veya kaydetmeden Şirketinizin verilerini korumanıza olanak tanır, mobil cihaz Yönetimi (MDM) çözümü gerektirmez.
+Şirketinizin verilerini korumaya yardımcı olmak için [Intune uygulama koruma ilkelerini](https://docs.microsoft.com/intune/app-protection-policy) kullanabilirsiniz. Intune uygulama koruma ilkeleri, mobil cihaz yönetimi (MDM) çözümü gerektirmez ve bu sayede, cihazları bir cihaz yönetimi çözümüne kaydederek veya kaydetmeden Şirket verilerinizi koruyabilirsiniz.
 
-Azure Active Directory koşullu erişimi Intune uygulama koruma ilkelerini destekleyen istemci uygulamaları için bulut uygulamalarınıza erişimi sınırlamanıza olanak sağlar. Örneğin, erişimi Exchange Online için Outlook uygulamasında kısıtlayabilirsiniz.
+Koşullu erişim Azure Active Directory, bulut uygulamalarınıza erişimi, Intune uygulama koruma ilkelerini destekleyen istemci uygulamalarıyla sınırlamanıza olanak sağlar. Örneğin, Exchange Online 'a erişimi Outlook uygulamasıyla kısıtlayabilirsiniz.
 
-Koşullu erişim terminolojisinde, bu istemci uygulamaları olarak bilinen **onaylı istemci uygulamalar**.  
+Koşullu erişim terminolojisinde, bu istemci uygulamaları **onaylanan istemci uygulamaları**olarak bilinir.  
 
 ![Koşullu Erişim](./media/app-based-conditional-access/05.png)
 
-Onaylı istemci uygulamalarının listesi için bkz. [onaylı istemci uygulaması gereksinimi](technical-reference.md#approved-client-app-requirement).
+Onaylanan istemci uygulamalarının listesi için bkz. [onaylanan istemci uygulaması gereksinimi](technical-reference.md#approved-client-app-requirement).
 
-Diğer ilkeleri ile uygulama tabanlı koşullu erişim ilkeleri gibi birleştirebilirsiniz [cihaz tabanlı koşullu erişim ilkeleri](require-managed-devices.md) kişisel ve kurumsal aygıtlar için veri koruma konusunda esneklik sağlamak için.
+Uygulama tabanlı koşullu erişim ilkelerini, hem kişisel hem de kurumsal cihazların verilerini koruma konusunda esneklik sağlamak için [cihaz tabanlı koşullu erişim ilkeleri](require-managed-devices.md) gibi diğer ilkelerle birleştirebilirsiniz.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu konu, aşina olduğunuzu varsayar:
+Bu konuda, hakkında bilgi sahibi olduğunuz varsayılmaktadır:
 
-- [Onaylı istemci uygulaması gereksinimi](technical-reference.md#approved-client-app-requirement) teknik başvuru.
-- Temel kavramlarını [Azure Active Directory'de koşullu erişim](overview.md).
-- Nasıl yapılır [bir koşullu erişim ilkesini yapılandırma](app-based-mfa.md).
-- [Koşullu erişim ilkeleri geçişini](best-practices.md#policy-migration).
+- [Onaylanan istemci uygulaması gereksinimi](technical-reference.md#approved-client-app-requirement) teknik başvurusu.
+- [Azure Active Directory ' deki Koşullu erişimin](overview.md)temel kavramları.
+- [Koşullu erişim ilkesini yapılandırma](app-based-mfa.md).
+- [Koşullu erişim ilkelerinin geçişi](best-practices.md#policy-migration).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bir uygulama tabanlı koşullu erişim ilkesi oluşturmak için Enterprise Mobility + Security veya bir Azure Active Directory premium aboneliğinizin olması ve kullanıcıların EMS veya Azure AD lisansına sahip olması gerekir. 
+Uygulama tabanlı bir koşullu erişim ilkesi oluşturmak için bir Enterprise Mobility + Security veya Azure Active Directory Premium aboneliğiniz olmalıdır ve kullanıcılar EMS veya Azure AD lisansına sahip olmalıdır. 
 
-## <a name="exchange-online-policy"></a>Exchange Online İlkesi 
+## <a name="exchange-online-policy"></a>Exchange Online ilkesi 
 
-Bu senaryo, bir erişim Exchange Online için uygulama tabanlı koşullu erişim ilkesi oluşur.
+Bu senaryo, Exchange Online 'a erişim için uygulama tabanlı bir koşullu erişim ilkesinden oluşur.
 
-### <a name="scenario-playbook"></a>Senaryo playbook
+### <a name="scenario-playbook"></a>Senaryo PlayBook
 
-Bu senaryoyu olduğunu varsayar. kullanıcı:
+Bu senaryo, bir kullanıcının şu şekilde olduğunu varsayar:
 
-- İOS veya Android üzerinde bir Exchange'e bağlanmak için bir yerel posta uygulaması kullanarak e-posta yapılandırır
-- Erişim yalnızca Outlook uygulamasını kullanırken kullanılabilir olduğunu bildiren bir e-posta alır
-- Uygulama bağlantısını içeren indirir
-- Outlook uygulamasını açar ve Azure AD kimlik bilgileriyle oturum açtığında
-- Authenticator (iOS) veya şirket Portalı'nı (Android) devam etmek için yüklemesi istenir
-- Devam etmek için Outlook uygulamasına yükler uygulama ve can döndürür
-- Bir cihazı kaydetmeleri istenir.
-- E-posta erişemiyor
+- Exchange 'e bağlanmak için iOS veya Android 'de yerel bir posta uygulaması kullanarak e-postayı yapılandırır
+- Erişimin yalnızca Outlook uygulaması kullanılarak kullanılabileceğini gösteren bir e-posta alır
+- Bağlantıyı kullanarak uygulamayı indirir
+- Outlook uygulamasını açar ve Azure AD kimlik bilgileriyle oturum açar
+- Devam etmek için Authenticator (iOS) veya Şirket Portalı (Android) yüklenmesi istenir
+- Uygulamayı yükleyebilir ve devam etmek için Outlook uygulamasına geri dönebilir
+- Bir cihazı kaydetmesi istenir
+- E-postaya erişebiliyor
 
-Herhangi bir Intune uygulama koruma ilkesi olan zaman şirket verilerine erişmek etkinleştirilir ve uygulamayı yeniden başlatın, ek bir PIN vs. kullan (uygulama ve platform için yapılandırılmışsa) kullanıcıya isteyebilir.
+Tüm Intune uygulama koruma ilkeleri, şirket verilerine erişim sırasında etkinleştirilir ve kullanıcıdan uygulamayı yeniden başlatmasını isteyebilir, ek bir PIN (uygulama ve platform için yapılandırılmışsa) kullanabilirsiniz.
 
 ### <a name="configuration"></a>Yapılandırma 
 
-**1. adım: Exchange Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
+**1. adım-Exchange Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-![Koşullu Erişim](./media/app-based-conditional-access/01.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online**.
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/07.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **cihaz platformlarını** ve **istemci uygulamaları**:
-   1. Olarak **cihaz platformlarını**seçin **Android** ve **iOS**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/03.png)
-
-   1. Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve Masaüstü uygulamaları** ve **Modern kimlik doğrulaması istemcileri**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/91.png)
-
-1. Olarak **erişim denetimleri**, ihtiyacınız **(Önizleme) onaylı istemci uygulaması gerektir** seçili.
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **Office 365 Exchange Online**' ı seçmeniz gerekir.
+1. **Durumunda** **Koşullar**olarak, **cihaz platformlarını** ve **istemci uygulamalarını**yapılandırmanız gerekir:
+   1. **Cihaz platformları**olarak **Android** ve **iOS**' ı seçin.
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü uygulamaları** ve **modern kimlik doğrulama istemcileri**' ni seçin.
+1. **Erişim denetimleri**olarak, **onaylanmış istemci uygulaması (Önizleme)** seçeneğini seçmiş olmanız gerekir.
 
    ![Koşullu Erişim](./media/app-based-conditional-access/05.png)
 
-**2. adım: Exchange Online ile Active Sync (EAS) için bir Azure AD koşullu erişim ilkesi yapılandırma**
+**2. adım-Active Sync (EAS) ile Exchange Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-![Koşullu Erişim](./media/app-based-conditional-access/06.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online**.
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/07.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **istemci uygulamaları (Önizleme)** . 
-   1. Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve masaüstü istemciler** ve **Exchange ActiveSync istemcileri**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/92.png)
-
-   1. Olarak **erişim denetimleri**, ihtiyacınız **(Önizleme) onaylı istemci uygulaması gerektir** seçili.
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **Office 365 Exchange Online**' ı seçmeniz gerekir.
+1. **Durumunda** **Koşullar**olarak, **istemci uygulamaları (Önizleme)** yapılandırmanız gerekir. 
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü Istemcileri** ve **Exchange ActiveSync istemcileri**' ni seçin.
+   1. **Erişim denetimleri**olarak, **onaylanmış istemci uygulaması (Önizleme)** seçeneğini seçmiş olmanız gerekir.
 
       ![Koşullu Erişim](./media/app-based-conditional-access/05.png)
 
-**Adım 3 - iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesi yapılandırma**
+**3. adım-iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesini yapılandırma**
 
-![Koşullu Erişim](./media/app-based-conditional-access/09.png)
+Daha fazla bilgi için bkz. [Microsoft Intune uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) .
 
-Bkz: [Intune ile uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) daha fazla bilgi için.
+## <a name="exchange-online-and-sharepoint-online-policy"></a>Exchange Online ve SharePoint Online ilkesi
 
-## <a name="exchange-online-and-sharepoint-online-policy"></a>Exchange Online ve SharePoint Online İlkesi
+Bu senaryo, Exchange Online ve SharePoint Online 'a onaylanan uygulamalarla erişim için mobil uygulama yönetimi ilkesiyle koşullu erişim içerir.
 
-Bu senaryo, mobil uygulama yönetimi ilkesi ile Exchange Online'a erişimi için bir koşullu erişim ve SharePoint Online ile onaylı uygulamalar oluşur.
+### <a name="scenario-playbook"></a>Senaryo PlayBook
 
-### <a name="scenario-playbook"></a>Senaryo playbook
+Bu senaryo, bir kullanıcının şu şekilde olduğunu varsayar:
 
-Bu senaryoyu olduğunu varsayar. kullanıcı:
-
-- Bağlanmak ve kurumsal sitelerini görüntülemek için SharePoint uygulaması kullanmayı dener
-- Outlook uygulaması kimlik bilgileri ile aynı kimlik bilgileri ile oturum dener
-- Yeniden kaydetmeniz gerekmez ve kaynaklara erişin
+- Bağlanmak ve şirket sitelerini görüntülemek için SharePoint uygulamasını kullanmayı dener
+- Outlook uygulaması kimlik bilgileriyle aynı kimlik bilgileriyle oturum açmaya çalışır
+- Kaynaklara yeniden kaydolmak ve kaynaklara erişim sağlamak zorunda değildir
 
 ### <a name="configuration"></a>Yapılandırma
 
-**1. adım: Exchange Online ve SharePoint Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
+**1. adım-Exchange Online ve SharePoint Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-![Koşullu Erişim](./media/app-based-conditional-access/71.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online** ve **Office 365 SharePoint Online**. 
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/02.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **cihaz platformlarını** ve **istemci uygulamaları**:
-   1. Olarak **cihaz platformlarını**seçin **Android** ve **iOS**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/03.png)
-
-   1. Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve masaüstü istemciler** ve **Modern kimlik doğrulaması istemcileri**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/91.png)
-
-1. Olarak **erişim denetimleri**, ihtiyacınız **(Önizleme) onaylı istemci uygulaması gerektir** seçili.
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **office 365 Exchange Online** ve **Office 365 SharePoint Online**' ı seçmeniz gerekir. 
+1. **Durumunda** **Koşullar**olarak, **cihaz platformlarını** ve **istemci uygulamalarını**yapılandırmanız gerekir:
+   1. **Cihaz platformları**olarak **Android** ve **iOS**' ı seçin.
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü istemcileri** ve **modern kimlik doğrulama istemcileri**' ni seçin.
+1. **Erişim denetimleri**olarak, **onaylanmış istemci uygulaması (Önizleme)** seçeneğini seçmiş olmanız gerekir.
 
    ![Koşullu Erişim](./media/app-based-conditional-access/05.png)
 
-**2. adım: Exchange Online ile Active Sync (EAS) için bir Azure AD koşullu erişim ilkesi yapılandırma**
+**2. adım-Active Sync (EAS) ile Exchange Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-![Koşullu Erişim](./media/app-based-conditional-access/06.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online**. Çevrimiçi 
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/07.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **istemci uygulamaları**:
-   1. Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve masaüstü istemciler** ve **Exchange ActiveSync istemcileri**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/92.png)
-
-   1. Olarak **erişim denetimleri**, ihtiyacınız **(Önizleme) onaylı istemci uygulaması gerektir** seçili.
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **Office 365 Exchange Online**' ı seçmeniz gerekir. Çevrimiçi 
+1. **Durumunda** **Koşullar**olarak, **istemci uygulamalarını**yapılandırmanız gerekir:
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü Istemcileri** ve **Exchange ActiveSync istemcileri**' ni seçin.
+   1. **Erişim denetimleri**olarak, **onaylanmış istemci uygulaması (Önizleme)** seçeneğini seçmiş olmanız gerekir.
 
       ![Koşullu Erişim](./media/app-based-conditional-access/05.png)
 
-**Adım 3 - iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesi yapılandırma**
+**3. adım-iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesini yapılandırma**
 
 ![Koşullu Erişim](./media/app-based-conditional-access/09.png)
 
-Bkz: [Intune ile uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) daha fazla bilgi için.
+Daha fazla bilgi için bkz. [Microsoft Intune uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) .
 
-## <a name="app-based-or-compliant-device-policy-for-exchange-online-and-sharepoint-online"></a>Exchange Online ve SharePoint Online için uygulama tabanlı veya uyumlu bir cihaz İlkesi
+## <a name="app-based-or-compliant-device-policy-for-exchange-online-and-sharepoint-online"></a>Exchange Online ve SharePoint Online için uygulama tabanlı veya uyumlu cihaz ilkesi
 
-Bu senaryo, bir uygulama tabanlı veya uyumlu cihaz koşullu erişim ilkesi için Exchange Online'a erişimini oluşur.
+Bu senaryo, Exchange Online 'a erişmek için uygulama tabanlı veya uyumlu bir cihaz koşullu erişim ilkesinden oluşur.
 
-### <a name="scenario-playbook"></a>Senaryo playbook
+### <a name="scenario-playbook"></a>Senaryo PlayBook
 
-Bu senaryoyu olduğunu varsayar:
+Bu senaryo şunları varsayar:
  
-- Bazı kullanıcılar (ile veya olmadan şirket cihazları) zaten kayıtlı
-- Uygulama kaynaklarına erişmek için bir cihazı kaydetme gerek olmayan kaydedilmiş ve kullanarak bir uygulamayı Azure AD'ye kayıtlı kullanıcılar korumalı
-- Kayıtlı kullanıcıların korunan uygulama uygulamasını kullanarak cihazı yeniden kaydetmeniz gerekmez
+- Bazı kullanıcılar zaten kaydolmuş (Şirket cihazlarıyla veya olmayan)
+- Uygulama korumalı bir uygulama kullanılarak Azure AD 'ye kayıtlı ve kayıtlı olmayan kullanıcıların, kaynaklara erişmek için bir cihazı kaydetmesi gerekir
+- Uygulama korumalı uygulamasını kullanan kayıtlı kullanıcıların, cihazı yeniden kaydetmesi gerekmez
 
 ### <a name="configuration"></a>Yapılandırma
 
-**1. adım: Exchange Online ve SharePoint Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
+**1. adım-Exchange Online ve SharePoint Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-![Koşullu Erişim](./media/app-based-conditional-access/62.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online** ve **Office 365 SharePoint Online**. 
-
-     ![Koşullu Erişim](./media/app-based-conditional-access/02.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **cihaz platformlarını** ve **istemci uygulamaları**. 
-   1. Olarak **cihaz platformlarını**seçin **Android** ve **iOS**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/03.png)
-
-   1. Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve masaüstü istemciler** ve **Modern kimlik doğrulaması istemcileri**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/91.png)
-
-1. Olarak **erişim denetimleri**, aşağıdaki seçili olması gerekir:
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **office 365 Exchange Online** ve **Office 365 SharePoint Online**' ı seçmeniz gerekir. 
+1. **Durumunda** **Koşullar**olarak, **cihaz platformlarını** ve **istemci uygulamalarını**yapılandırmanız gerekir. 
+   1. **Cihaz platformları**olarak **Android** ve **iOS**' ı seçin.
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü istemcileri** ve **modern kimlik doğrulama istemcileri**' ni seçin.
+1. **Erişim denetimleri**olarak, aşağıdakilerin seçili olması gerekir:
    - **Cihazın uyumlu olarak işaretlenmesini gerektir**
-   - **(Önizleme) onaylı istemci uygulaması gerektir**
-   - **Seçilen denetimlerden birini gerektir**   
+   - **Onaylanan istemci uygulaması gerektir (Önizleme)**
+   - **Seçili denetimlerden birini gerektir**   
  
       ![Koşullu Erişim](./media/app-based-conditional-access/11.png)
 
-**2. adım: Exchange Online ile Active Sync (EAS) için bir Azure AD koşullu erişim ilkesi yapılandırma**
+**2. adım-Active Sync (EAS) ile Exchange Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-![Koşullu Erişim](./media/app-based-conditional-access/61.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online**. 
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/07.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **istemci uygulamaları**. 
-
-   Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve masaüstü istemciler** ve **Exchange ActiveSync istemcileri**.
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/91.png)
-
-1. Olarak **erişim denetimleri**, ihtiyacınız **(Önizleme) onaylı istemci uygulaması gerektir** seçili.
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **Office 365 Exchange Online**' ı seçmeniz gerekir. 
+1. **Durumunda** **Koşullar**olarak, **istemci uygulamalarını**yapılandırmanız gerekir. 
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü Istemcileri** ve **Exchange ActiveSync istemcileri**' ni seçin.
+1. **Erişim denetimleri**olarak, **onaylanmış istemci uygulaması (Önizleme)** seçeneğini seçmiş olmanız gerekir.
  
    ![Koşullu Erişim](./media/app-based-conditional-access/11.png)
 
-**Adım 3 - iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesi yapılandırma**
+**3. adım-iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesini yapılandırma**
 
 ![Koşullu Erişim](./media/app-based-conditional-access/09.png)
 
-Bkz: [Intune ile uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) daha fazla bilgi için.
+Daha fazla bilgi için bkz. [Microsoft Intune uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) .
 
-## <a name="app-based-and-compliant-device-policy-for-exchange-online-and-sharepoint-online"></a>Exchange Online ve SharePoint Online için uygulama tabanlı ve uyumlu bir cihaz İlkesi
+## <a name="app-based-and-compliant-device-policy-for-exchange-online-and-sharepoint-online"></a>Exchange Online ve SharePoint Online için uygulama tabanlı ve uyumlu cihaz ilkesi
 
-Bu senaryo, bir uygulama tabanlı ve uyumlu bir cihaz koşullu erişim ilkesi için Exchange Online'a erişimini oluşur.
+Bu senaryo, Exchange Online 'a erişmek için uygulama tabanlı ve uyumlu bir cihaz koşullu erişim ilkesinden oluşur.
 
-### <a name="scenario-playbook"></a>Senaryo playbook
+### <a name="scenario-playbook"></a>Senaryo PlayBook
 
-Bu senaryoyu olduğunu varsayar. kullanıcı:
+Bu senaryo, bir kullanıcının şu şekilde olduğunu varsayar:
  
-- İOS veya Android üzerinde bir Exchange'e bağlanmak için bir yerel posta uygulaması kullanarak e-posta yapılandırır
-- Erişimi Cihazınızı kaydedilmesi gerektiğini belirten bir e-posta alır
-- Şirket portalı'nı yükler ve şirket portalında oturum açmaktadır
-- Posta denetler ve Outlook uygulaması kullanmasını istenir.
+- Exchange 'e bağlanmak için iOS veya Android 'de yerel bir posta uygulaması kullanarak e-postayı yapılandırır
+- Erişimin cihazınızın kaydedilmesini gerektirdiğini belirten bir e-posta alır
+- Şirket portalı 'nı indirir ve şirket portalı 'nda oturum açar
+- Postayı denetler ve Outlook uygulamasını kullanması istenir
 - Outlook uygulamasını indirir
-- Outlook uygulamasını açar ve kaydında kullanılan kimlik bilgilerini girer.
-- Kullanıcı e-postaya
+- Outlook uygulamasını açar ve kayıt sırasında kullanılan kimlik bilgilerini girer
+- Kullanıcı e-postaya erişebiliyor
 
-Herhangi bir Intune uygulama koruma İlkesi zaman kurumsal verilere erişim etkinleştirilir ve kullanıcıdan uygulamayı yeniden başlatın, ek bir PIN vs. kullan (uygulama ve platform için yapılandırılmışsa)
+Tüm Intune uygulama koruma ilkeleri, şirket verilerine erişim sırasında etkinleştirilir ve kullanıcıdan uygulamayı yeniden başlatmasını isteyebilir, ek bir PIN (uygulama ve platform için yapılandırılmışsa)
 
 ### <a name="configuration"></a>Yapılandırma
 
-**1. adım: Exchange Online ve SharePoint Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
+**1. adım-Exchange Online ve SharePoint Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-![Koşullu Erişim](./media/app-based-conditional-access/62.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online** ve **Office 365 SharePoint Online**. 
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/02.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **cihaz platformlarını** ve **istemci uygulamaları**. 
-   1. Olarak **cihaz platformlarını**seçin **Android** ve **iOS**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/03.png)
-
-   1. Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve Masaüstü uygulamaları** ve **Modern kimlik doğrulaması istemcileri**.
-
-      ![Koşullu Erişim](./media/app-based-conditional-access/91.png)
-
-1. Olarak **erişim denetimleri**, aşağıdaki seçili olması gerekir:
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **office 365 Exchange Online** ve **Office 365 SharePoint Online**' ı seçmeniz gerekir. 
+1. **Durumunda** **Koşullar**olarak, **cihaz platformlarını** ve **istemci uygulamalarını**yapılandırmanız gerekir. 
+   1. **Cihaz platformları**olarak **Android** ve **iOS**' ı seçin.
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü uygulamaları** ve **modern kimlik doğrulama istemcileri**' ni seçin.
+1. **Erişim denetimleri**olarak, aşağıdakilerin seçili olması gerekir:
    - **Cihazın uyumlu olarak işaretlenmesini gerektir**
-   - **(Önizleme) onaylı istemci uygulaması gerektir**
-   - **Seçilen tüm denetimleri gerekli kıl**   
+   - **Onaylanan istemci uygulaması gerektir (Önizleme)**
+   - **Seçili tüm denetimleri gerektir**   
  
       ![Koşullu Erişim](./media/app-based-conditional-access/13.png)
 
+**2. adım-Active Sync (EAS) ile Exchange Online için bir Azure AD koşullu erişim ilkesi yapılandırma**
 
+Bu adımdaki koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
 
-**2. adım: Exchange Online ile Active Sync (EAS) için bir Azure AD koşullu erişim ilkesi yapılandırma**
-
-Bu adımda koşullu erişim ilkesi için aşağıdaki bileşenleri yapılandırmanız gerekir:
-
-![Koşullu Erişim](./media/app-based-conditional-access/61.png)
-
-1. **Adı** , koşullu erişim ilkesi.
-1. **Kullanıcılar ve gruplar**: Her bir koşullu erişim ilkesi, en az bir kullanıcı veya grup seçili olması gerekir.
-1. **Bulut uygulamaları:** Bulut uygulamaları seçmeniz gerekir. **Office 365 Exchange Online**. 
-
-   ![Koşullu Erişim](./media/app-based-conditional-access/07.png)
-
-1. **Koşullar:** Olarak **koşullar**, yapılandırmanız gereken **istemci uygulamaları (Önizleme)** . 
-
-   Olarak **istemci uygulamaları (Önizleme)** seçin **mobil uygulamalar ve masaüstü istemciler** ve **Exchange ActiveSync istemcileri**.
+1. Koşullu erişim ilkenizin **adı** .
+1. **Kullanıcılar ve gruplar**: Her koşullu erişim ilkesinde en az bir kullanıcı veya grup seçili olmalıdır.
+1. **Bulut uygulamaları:** Bulut uygulamaları olarak **Office 365 Exchange Online**' ı seçmeniz gerekir. 
+1. **Durumunda** **Koşullar**olarak, **istemci uygulamaları (Önizleme)** yapılandırmanız gerekir. 
+   1. **İstemci uygulamaları (Önizleme)** olarak **mobil uygulamalar ve Masaüstü Istemcileri** ve **Exchange ActiveSync istemcileri**' ni seçin.
 
    ![Koşullu Erişim](./media/app-based-conditional-access/92.png)
 
-1. Olarak **erişim denetimleri**, aşağıdaki seçili olması gerekir:
+1. **Erişim denetimleri**olarak, aşağıdakilerin seçili olması gerekir:
    - **Cihazın uyumlu olarak işaretlenmesini gerektir**
-   - **(Önizleme) onaylı istemci uygulaması gerektir**
-   - **Seçilen tüm denetimleri gerekli kıl**   
- 
-      ![Koşullu Erişim](./media/app-based-conditional-access/64.png)
+   - **Onaylanan istemci uygulaması gerektir (Önizleme)**
+   - **Seçili tüm denetimleri gerektir**   
 
-**Adım 3 - iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesi yapılandırma**
+**3. adım-iOS ve Android istemci uygulamaları için Intune uygulama koruma ilkesini yapılandırma**
 
 ![Koşullu Erişim](./media/app-based-conditional-access/09.png)
 
-Bkz: [Intune ile uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) daha fazla bilgi için.
+Daha fazla bilgi için bkz. [Microsoft Intune uygulamaları ve verileri koruma](https://docs.microsoft.com/intune-classic/deploy-use/protect-apps-and-data-with-microsoft-intune) .
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Koşullu erişim ilkesi yapılandırmak için bkz. nasıl bilmek istiyorsanız [gerektiren MFA belirli uygulamalar için Azure Active Directory koşullu erişim ile](app-based-mfa.md).
+Koşullu erişim ilkesini nasıl yapılandıracağınızı öğrenmek isterseniz bkz. [koşullu erişim Azure Active Directory belirli uygulamalar IÇIN MFA gerektirme](app-based-mfa.md).
 
-Ortamınız için koşullu erişim ilkelerini yapılandırmaya hazırsanız bkz [Azure Active Directory'de koşullu erişim için en iyi uygulamalar](best-practices.md). 
+Ortamınız için koşullu erişim ilkelerini yapılandırmaya hazırsanız, [Azure Active Directory Koşullu erişim için en iyi yöntemlere](best-practices.md)bakın. 

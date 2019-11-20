@@ -7,19 +7,19 @@ author: zhangmanling
 manager: erikre
 editor: ''
 ms.assetid: 8cc596a7-3e01-4f76-af7b-a05a1421517e
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 7dfa252c29121adca2ecc77c08b2fca81d56e575
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b8a65d4ae6aaac78e642c851a66b745a940fa0ad
+ms.sourcegitcommit: ccb9a7b7da48473362266f20950af190ae88c09b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61070109"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67593910"
 ---
 # <a name="analyze-edge-node-performance-in-microsoft-azure-cdn"></a>Microsoft Azure CDN’de kenar düğümü performansını çözümleme
 [!INCLUDE [cdn-premium-feature](../../includes/cdn-premium-feature.md)]
@@ -117,7 +117,7 @@ Bu ölçümler amacı genel CDN performansını trafiğiniz için izlemektir.
 | Alan | Açıklama |
 | --- | --- |
 | Aktarım hızı |Başlangıçtan istek sahibine CDN'den içerik transfer ortalama hızını gösterir. |
-| Süre |Ortalama süreyi belirtir (örneğin, web tarayıcısı) istek sahibine bir varlık teslim için geçen milisaniye cinsinden. |
+| Duration |Ortalama süreyi belirtir (örneğin, web tarayıcısı) istek sahibine bir varlık teslim için geçen milisaniye cinsinden. |
 | Sıkıştırılmış istek hızı |CDN'den (edge sunucuları) (örneğin, web tarayıcısı) istemciye teslim edilen isabet yüzdesi sıkıştırılmış biçimde gösterir. |
 | 4xx hata oranı |4xx durum kodları oluşturulan isabet yüzdesini gösterir. |
 | 5XX hata oranı |5xx durum kodu oluşturulan isabet yüzdesini gösterir. |

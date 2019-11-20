@@ -16,12 +16,12 @@ ms.date: 07/11/2017
 ms.author: mimart
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d41ec1f510b028a2ffe2554bfcbd77bc439c4e79
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 23e6a3d0b533dccc3c3111382b014907d5c026ab
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67272957"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67612656"
 ---
 # <a name="an-app-page-shows-an-error-message-after-the-user-signs-in"></a>Kullanıcı oturum açtıktan sonra bir uygulama sayfası, hata iletisi gösterir.
 
@@ -99,7 +99,7 @@ Kullanıcı tanımlayıcısı değeri değiştirmek için aşağıdaki adımlar�
 
 ## <a name="change-the-nameid-format"></a>Nameıd biçimi değiştirme
 
-Uygulama için başka bir biçime bekliyorsa **Nameıd** (kullanıcı tanımlayıcı) özniteliği, bkz: [düzenleme Nameıd](https://docs.microsoft.com/azure/active-directory/develop/active-directory-saml-claims-customization.md#editing-nameid) Nameıd biçimi değiştirmek için.
+Uygulama için başka bir biçime bekliyorsa **Nameıd** (kullanıcı tanımlayıcı) özniteliği, bkz: [düzenleme Nameıd](https://docs.microsoft.com/azure/active-directory/develop/active-directory-saml-claims-customization#editing-nameid) Nameıd biçimi değiştirmek için.
 
 Azure AD biçimi seçen **Nameıd** özniteliği (kullanıcı tanımlayıcısı) tabanlı seçilen değer veya SAML AuthRequest uygulama tarafından istenen biçimi. Daha fazla bilgi için "NameIDPolicy" bölümüne bakın. [çoklu oturum açma SAML Protokolü](https://docs.microsoft.com/azure/active-directory/develop/single-sign-on-saml-protocol#nameidpolicy).
 

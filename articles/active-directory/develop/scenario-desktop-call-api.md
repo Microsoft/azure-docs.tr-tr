@@ -1,6 +1,6 @@
 ---
-title: Masaüstü uygulaması çağrıları API'leri (bir web API'sini çağırma) - web Microsoft kimlik platformu
-description: Web API (web API'si çağırma) çağıran bir masaüstü uygulaması oluşturmayı öğrenin
+title: Web API 'Lerini çağıran masaüstü uygulaması (bir Web API 'SI çağırma)-Microsoft Identity platform
+description: Web API 'Leri çağıran bir masaüstü uygulaması oluşturmayı öğrenin (Web API 'SI çağırma)
 services: active-directory
 documentationcenter: dev-center-name
 author: jmprieur
@@ -11,32 +11,94 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 05/07/2019
+ms.date: 10/30/2019
 ms.author: jmprieur
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4abaf234d3b216e0f67501e5d2f2f5c3f874c5d7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8160ec489f891764b102b5ba23a687b53376f738
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67111237"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73175366"
 ---
-# <a name="desktop-app-that-calls-web-apis---call-a-web-api"></a>Web API - çağıran masaüstü uygulaması web API'si çağırma
+# <a name="desktop-app-that-calls-web-apis---call-a-web-api"></a>Web API 'Lerini çağıran masaüstü uygulaması-bir Web API 'SI çağırma
 
-Bir belirteç olduğuna göre korumalı web API'si çağırabilirsiniz.
+Artık bir belirteciniz olduğuna göre, korumalı bir Web API 'SI çağırabilirsiniz.
 
-## <a name="calling-a-web-api-from-net"></a>.NET web API'si çağırma
+## <a name="calling-a-web-api"></a>Web API'sini çağırma
+
+# <a name="nettabdotnet"></a>[.NET](#tab/dotnet)
 
 [!INCLUDE [Call web API in .NET](../../../includes/active-directory-develop-scenarios-call-apis-dotnet.md)]
 
 <!--
 More includes will come later for Python and Java
 -->
+# <a name="pythontabpython"></a>[Python](#tab/python)
 
-## <a name="calling-several-apis---incremental-consent-and-conditional-access"></a>Çeşitli API'ler - artımlı rızası ve koşullu erişim çağırma
+```Python
+endpoint = "url to the API"
+http_headers = {'Authorization': 'Bearer ' + result['access_token'],
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'}
+data = requests.get(endpoint, headers=http_headers, stream=False).json()
+```
 
-İlk API için bir belirteç alındı sonra aynı kullanıcı için çeşitli API'leri çağırmak gerekiyorsa, yalnızca çağırabilirsiniz `AcquireTokenSilent`, bir belirteç için diğer API'ler saati sessizce çoğu elde edebilirsiniz.
+# <a name="javatabjava"></a>[Java](#tab/java)
+
+```Java
+HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+// Set the appropriate header fields in the request header.
+conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+conn.setRequestProperty("Accept", "application/json");
+
+String response = HttpClientHelper.getResponseStringFromConn(conn);
+
+int responseCode = conn.getResponseCode();
+if(responseCode != HttpURLConnection.HTTP_OK) {
+    throw new IOException(response);
+}
+
+JSONObject responseObject = HttpClientHelper.processResponse(responseCode, response);
+```
+
+# <a name="macostabmacos"></a>[MacOS](#tab/macOS)
+
+## <a name="calling-a-web-api-in-msal-for-ios-and-macos"></a>İOS ve macOS için MSAL içinde bir Web API 'SI çağırma
+
+Belirteçleri elde etmek için yöntemler bir `MSALResult` nesnesi döndürür. `MSALResult`, bir Web API 'sini çağırmak için kullanılabilen bir `accessToken` özelliğini kullanıma sunar. Korunan Web API 'sine erişmek için çağrı yapılmadan önce, erişim belirtecinin HTTP yetkilendirme üstbilgisine eklenmesi gerekir.
+
+Amaç-C:
+
+```objc
+NSMutableURLRequest *urlRequest = [NSMutableURLRequest new];
+urlRequest.URL = [NSURL URLWithString:"https://contoso.api.com"];
+urlRequest.HTTPMethod = @"GET";
+urlRequest.allHTTPHeaderFields = @{ @"Authorization" : [NSString stringWithFormat:@"Bearer %@", accessToken] };
+
+NSURLSessionDataTask *task =
+[[NSURLSession sharedSession] dataTaskWithRequest:urlRequest
+     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {}];
+[task resume];
+```
+
+SWIFT
+
+```swift
+let urlRequest = NSMutableURLRequest()
+urlRequest.url = URL(string: "https://contoso.api.com")!
+urlRequest.httpMethod = "GET"
+urlRequest.allHTTPHeaderFields = [ "Authorization" : "Bearer \(accessToken)" ]
+
+let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) { (data: Data?, response: URLResponse?, error: Error?) in }
+task.resume()
+```
+
+## <a name="calling-several-apis---incremental-consent-and-conditional-access"></a>Çeşitli API 'Leri çağırma-artımlı onay ve koşullu erişim
+
+Aynı kullanıcı için birden çok API çağırmanız gerekiyorsa, ilk API için bir belirteç aldıktan sonra yalnızca `AcquireTokenSilent`çağırabilirsiniz ve diğer API 'Ler için çoğu zaman sessizce bir belirteç alırsınız.
 
 ```CSharp
 var result = await app.AcquireTokenXX("scopeApi1")
@@ -46,10 +108,10 @@ result = await app.AcquireTokenSilent("scopeApi2")
                   .ExecuteAsync();
 ```
 
-Etkileşim gerekli olduğu durumda olduğunda:
+Etkileşimin gerekli olduğu durumlar şunlardır:
 
-- Kullanıcı için ilk API tarafından onaylanan, ancak artık daha fazla kapsam (artımlı onayı) için onay gerekiyor
-- İlk API birden çok öğeli kimlik doğrulama gerektiren olmadı, ancak bir sonraki yapar.
+- Kullanıcı ilk API 'yi kabul etmiş, ancak artık daha fazla kapsam için onay gerektirir (artımlı onay)
+- İlk API çok faktörlü kimlik doğrulaması gerektirmez, ancak bir sonraki tane.
 
 ```CSharp
 var result = await app.AcquireTokenXX("scopeApi1")
@@ -67,8 +129,9 @@ catch(MsalUiRequiredException ex)
                   .ExecuteAsync();
 }
 ```
+---
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Üretim aşamasına geçme](scenario-desktop-production.md)
+> [Üretime taşı](scenario-desktop-production.md)

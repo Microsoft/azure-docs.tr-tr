@@ -1,121 +1,121 @@
 ---
-title: Azure VMware çözümü CloudSimple - özel bir buluta VMware bileşenleri tarafından
-description: VMware bileşenleri üzerine özel buluta nasıl yüklendiğini açıklar
+title: CloudSimple-PRIVATE Cloud VMware bileşenleri tarafından Azure VMware çözümü
+description: VMware bileşenlerinin özel buluta nasıl yüklendiğini açıklar
 author: sharaths-cs
 ms.author: dikamath
-ms.date: 04/30/2019
+ms.date: 08/15/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 62511118edb4f8b5061f90138bac2aa2b5d3cfe3
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: bd83cff243c94ed62014ff95f6ca7c4e878f6af7
+ms.sourcegitcommit: fa4852cca8644b14ce935674861363613cf4bfdf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67165145"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70814577"
 ---
 # <a name="private-cloud-vmware-components"></a>Özel bulut VMware bileşenleri
 
-Özel bir bulut yalıtılmış bir VMware yığınınızın (ESXi konaklarını ve vCenter, Vsan'a ve NSX) olan bir yönetim etki alanındaki bir vCenter sunucusu tarafından yönetilen ortamı.  CloudSimple hizmet VMware Azure konumları Azure çıplak metal altyapısı üzerinde yerel olarak dağıtmanızı sağlar.  Özel bulut, Azure bulut geri kalanı ile tümleştirilmiştir.  Bir özel bulut, aşağıdaki VMware yığın bileşenleri ile dağıtılır:
+Özel bulut, yönetim etki alanındaki bir vCenter sunucusu tarafından yönetilen yalıtılmış bir VMware yığını (ESXi Konakları, vCenter, vSAN ve NSX) ortamıdır.  CloudSimple hizmeti, VMware 'yi Azure konumlarında yerel olarak Azure 'da dağıtmanıza olanak tanır.  Özel bulutlar, Azure bulutunun geri kalanı ile tümleşiktir.  Özel bir bulut aşağıdaki VMware Stack bileşenleriyle dağıtılır:
 
-* **VMware ESXi -** hiper yönetici azure'da adanmış düğümler
-* **VMware vCenter -** Merkezi Yönetimi için vSphere ortam özel bulut Gereci
-* **VMware vSAN -** hiper yakınsama altyapısı çözümünü
-* **VMware NSX veri merkezi -** ağ sanallaştırma ve güvenlik yazılımı  
+* **VMware ESXi-** Azure adanmış düğümlerinde hiper yönetici
+* **VMware vCenter-** Özel bulut vSphere ortamının merkezi yönetimi için gereç
+* **VMware vSAN-** Hiper yakınsanmış altyapı çözümü
+* **VMware NSX veri merkezi-** Ağ sanallaştırma ve güvenlik yazılımı  
 
-## <a name="vmware-component-versions"></a>VMware bileşen sürümü
+## <a name="vmware-component-versions"></a>VMware bileşen sürümleri
 
-Bir özel bulut VMware yığınınızın aşağıdaki yazılım sürümü ile dağıtılır.
+Özel bir bulut VMware yığını aşağıdaki yazılım sürümü ile dağıtılır.
 
 | Bileşen | Version | Lisanslı sürüm |
 |-----------|---------|------------------|
-| ESXi | 6.7U1 | Kurumsal artı |
-| vCenter | 6.7U1 | vCenter standart |
+| ESXi | 6.7 U2 | Kurumsal Plus |
+| vCenter | 6.7 U2 | vCenter Standard |
 | vSAN | 6.7 | Enterprise |
-| NSX veri merkezi | 2.3 | Gelişmiş |
+| NSX veri merkezi | 2.4.1 | Gelişmiş |
 
 ## <a name="esxi"></a>ESXi
 
-Özel bulut oluşturma sırasında VMware ESXi sağlanan CloudSimple düğümlerine yüklenir.  ESXi hiper iş yükü sanal makineleri (VM) dağıtmak için sağlar.  Düğüm, özel bulutunuzda hiper yakınsama altyapısı (işlem ve depolama) sağlar.  Düğümler, özel buluta vSphere kümesinin parçasıdır.  Her düğüm, dört sahip fiziksel ağ arabirimlerinin ağ underlay bağlı.  İki fiziksel ağ arabirimi oluşturmak için kullanılan bir **vSphere dağıtılmış anahtarı (VDS)** vCenter ve iki oluşturmak için kullanılan bir **NSX yönetilen sanal dağıtılmış anahtarı (VDS N)** .  Ağ arabirimleri, yüksek kullanılabilirlik için etkin-etkin modda yapılandırılır.
+VMware ESXi, özel bir bulut oluşturduğunuzda sağlanan CloudSimple düğümlerine yüklenir.  ESXi, iş yükü sanal makinelerini (VM) dağıtmak için hiper yöneticiyi sağlar.  Düğümler, özel bulutunuzda hiper yakınsama altyapısı (işlem ve depolama) sağlar.  Düğümler, özel buluttaki vSphere kümesinin bir parçasıdır.  Her düğüm, ağı düşük düzenlemek için bağlı dört fiziksel ağ arabirimine sahiptir.  İki fiziksel ağ arabirimi, vCenter üzerinde bir **vSphere dağıtılmış anahtarı (VDS)** oluşturmak için kullanılır ve Iki adet **NSX tarafından yönetilen bir sanal dağıtılmış anahtar (N-VDS)** oluşturmak için kullanılır.  Ağ arabirimleri, yüksek kullanılabilirlik için etkin-etkin modda yapılandırılır.
 
 VMware ESXi hakkında daha fazla bilgi edinin
 
-## <a name="vcenter-server-appliance"></a>vCenter server gerecinde
+## <a name="vcenter-server-appliance"></a>vCenter Server gereci
 
-vCenter server gerecinde (VCSA) VMware çözümü CloudSimple tarafından kimlik doğrulaması, yönetim ve düzenleme işlevleri sağlar. Özel bulutunuzu oluştururken VCSA katıştırılmış Platform Hizmetleri denetleyici (PSC) ile dağıtılır.  Özel bulutunuzun dağıttığınızda oluşturduğunuz vSphere kümede VCSA dağıtılır.  Her özel bulut kendi VCSA sahiptir.  Bir özel bulutun genişletme özel buluta VCSA düğümler ekler.
+vCenter Server gereci (VCSA), CloudSimple tarafından VMware çözümü için kimlik doğrulama, yönetim ve düzenleme işlevleri sağlar. Özel bulutunuzu oluşturduğunuzda, katıştırılmış platform hizmetleri denetleyicisi (PSC) ile VCSA dağıtılır.  VCSA, özel bulutunuzu dağıtırken oluşturulan vSphere kümesine dağıtılır.  Her özel bulutun kendi VCSA 'sı vardır.  Özel bulutun genişletilmesi, düğümleri özel buluttaki VCSA 'ya ekler.
 
 ### <a name="vcenter-single-sign-on"></a>vCenter çoklu oturum açma
 
-VCSA katıştırılmış Platform Hizmetleri denetleyicisinde ile ilişkili bir **vCenter çoklu oturum açma etki alanı**.  Etki alanı adı **cloudsimple.local**.  Varsayılan kullanıcı **CloudOwner@cloudsimple.com** vCenter erişmek sizin için oluşturulur.  Şirket içi/Azure active directory'nizde ekleyebilirsiniz [kimlik kaynakları için vCenter](https://docs.azure.cloudsimple.com/set-vcenter-identity/).
+VCSA 'daki katıştırılmış platform hizmetleri denetleyicisi bir **vCenter çoklu oturum açma etki alanıyla**ilişkilendirilir.  Etki alanı adı **cloudsimple. Local**' dir.  VCenter 'a erişmeniz **CloudOwner@cloudsimple.com** için varsayılan bir Kullanıcı oluşturulur.  VCenter için şirket içi/Azure Active Directory [kimlik kaynaklarınızı](set-vcenter-identity.md)ekleyebilirsiniz.
 
-## <a name="vsan-storage"></a>vSAN depolama
+## <a name="vsan-storage"></a>vSAN depolaması
 
-Özel Bulutlar, tamamen flash vsan'ı tam olarak yapılandırılmış depolama, küme yerel ile oluşturulur.  Aynı SKU'ların en az üç düğüm ile vsan'ı veri deposu vSphere küme oluşturmak için gereklidir.  Yinelenenleri kaldırma ve sıkıştırma vSAN veri deposundaki varsayılan olarak etkindir.  VSphere kümedeki her düğümde iki disk grubu oluşturulur. Her disk grubu, bir önbellek diski ve üç kapasite diskleri içerir.
+Özel bulutlar tümüyle yapılandırılan tümü-Flash vSAN depolama, küme yereliyle oluşturulur.  VSAN veri deposu ile vSphere kümesi oluşturmak için aynı SKU 'nun en az üç düğümü gereklidir.  Devre dışı bırakma ve sıkıştırma, varsayılan olarak vSAN veri deposunda etkindir.  VSphere kümesinin her bir düğümünde iki disk grubu oluşturulur. Her disk grubu, bir önbellek diski ve üç kapasite diski içerir.
 
-Varsayılan vSAN saklama İlkesi vSphere kümede oluşturulur ve vSAN veri deposuna uygulanır.  Bu ilke, sanal makine depolama nesneleri nasıl sağlanan ve gerekli hizmet düzeyini garanti etmek için veri deposu içinde ayrılmış belirler.  Saklama ilkesi tanımlar **hata toleransı (FTT)** ve **hata toleransı yöntemi**.  Yeni depolama ilkeleri oluşturabilir ve bunları sanal makinelere uygulayabilirsiniz. SLA korumak için % 25 yedek kapasiteyi vSAN veri deposundaki korunmalıdır.  
+VSphere kümesinde varsayılan bir vSAN depolama ilkesi oluşturulur ve vSAN veri deposuna uygulanır.  Bu ilke, gerekli hizmet düzeyini güvence altına almak için VM depolama nesnelerinin veri deposu içinde nasıl sağlandığını ve ayrılacağını belirler.  Depolama ilkesi, **tolerans (FTT)** ve **hata toleransı yöntemi**hatalarını tanımlar.  Yeni depolama ilkeleri oluşturabilir ve bunları sanal makinelere uygulayabilirsiniz. SLA 'yı sürdürmek için, vSAN veri deposunda% 25 yedek kapasitesinin korunması gerekir.  
 
-### <a name="default-vsan-storage-policy"></a>Varsayılan vSAN saklama İlkesi
+### <a name="default-vsan-storage-policy"></a>Varsayılan vSAN depolama ilkesi
 
-Aşağıdaki tabloda, varsayılan vSAN depolama ilke parametreleri gösterir.
+Aşağıdaki tabloda varsayılan vSAN depolama ilkesi parametreleri gösterilmektedir.
 
-| VSphere küme düğümleri sayısı | FTT | Hata toleransı yöntemi |
+| VSphere kümesindeki düğüm sayısı | FTT | Hata toleransı yöntemi |
 |------------------------------------|-----|--------------------------|
-| 3 ila 4 düğüm | 1 | RAID (yansıtma) - 1, 2 kopya oluşturur |
-| 5-16 düğümleri | 2 | RAID (yansıtma) - 1, 3 kopya oluşturur |
+| 3 ve 4 düğümleri | 1\. | RAID 1 (yansıtma)-2 kopya oluşturur |
+| 5-16 düğümleri | 2 | RAID 1 (yansıtma)-3 kopya oluşturur |
 
 ## <a name="nsx-data-center"></a>NSX veri merkezi
 
-NSX Data Center özel bulutunuzda ağ sanallaştırma, mikro Segmentasyonu ve ağ güvenlik özellikleri sağlar.  Özel bulutunuzun NSX aracılığıyla NSX veri merkezi tarafından desteklenen tüm hizmetleri yapılandırabilirsiniz.  Özel bir bulut oluştururken aşağıdaki NSX bileşenleri yüklenir ve yapılandırılır.
+NSX veri merkezi, özel bulutunuzda ağ sanallaştırma, mikro segmentleme ve ağ güvenliği özellikleri sağlar.  NSX veri merkezi tarafından desteklenen tüm hizmetleri NSX aracılığıyla özel bulutunuzda yapılandırabilirsiniz.  Özel bir bulut oluşturduğunuzda, aşağıdaki NSX bileşenleri yüklenir ve yapılandırılır.
 
 * NSXT Yöneticisi
-* Aktarım bölgeleri
-* Konak ve Edge yukarı bağlantı profili
-* Edge taşıma ve Ext1 Ext2 için mantıksal anahtar
-* ESXi aktarım düğümü için IP havuzu
-* Edge aktarım düğümü için IP havuzu
+* Taşıma bölgeleri
+* Konak ve kenar yukarı bağlantı profili
+* Edge Transport, Ext1 ve Ext2 için mantıksal anahtar
+* ESXi aktarım düğümü için IP Havuzu
+* Sınır taşıma düğümü için IP Havuzu
 * Kenar düğümleri
-* Denetleyici ve Edge VM'ler için benzeşim karşıtlığını DRS kuralı
+* Denetleyici ve uç VM 'Ler için DRS, benzeşim önleme kuralı
 * Katman 0 yönlendirici
-* BGP yönlendiricisinde Tier0 etkinleştir
+* Tier0 yönlendiricisinde BGP 'yi etkinleştir
 
-## <a name="vsphere-cluster"></a>vSphere küme
+## <a name="vsphere-cluster"></a>vSphere kümesi
 
-ESXi ana bilgisayarları, özel bulutun yüksek kullanılabilirlik sağlamak için bir küme olarak yapılandırılır.  Özel bir bulut oluştururken, vSphere yönetim bileşenlerinin ilk kümeye dağıtılır.  Yönetim bileşenler için bir kaynak havuzu oluşturulur ve bu kaynak havuzundaki tüm yönetim Vm'leri dağıtılır. Özel bulut küçültmek için ilk küme silinemiyor.  vSphere küme sağlar yüksek kullanılabilirlik için Vm'leri kullanarak **vSphere HA**.  Tolerans hataları kümedeki kullanılabilir düğüm sayısını temel alır.  Formül kullanabileceğiniz ```Number of nodes = 2N+1``` burada ```N``` hata toleransı sayısıdır.
+ESXi Konakları, özel bulutun yüksek oranda kullanılabilirliğini sağlamak için bir küme olarak yapılandırılır.  Özel bir bulut oluşturduğunuzda, vSphere Yönetim bileşenleri ilk kümede dağıtılır.  Yönetim bileşenleri için bir kaynak havuzu oluşturulur ve tüm yönetim VM 'Leri bu kaynak havuzunda dağıtılır. İlk küme, özel bulutu daraltmak için silinemez.  vSphere kümesi, **VSPHERE ha**kullanan VM 'ler için yüksek kullanılabilirlik sağlar.  Tolerans sorunları, kümedeki kullanılabilir düğümlerin sayısını temel alır.  Kabul edilecek başarısızlık sayısı ```Number of nodes = 2N+1``` ```N``` olan formülünü kullanabilirsiniz.
 
 ### <a name="vsphere-cluster-limits"></a>vSphere kümesi sınırları
 
 | Resource | Sınır |
 |----------|-------|
-| Özel bir bulut oluşturmak için düğüm sayısı alt sınırı (ilk vSphere küme) | 3 |
-| Bir özel bulutta en fazla bir vSphere düğüm sayısını küme | 16 |
-| En fazla özel bulutta düğüm sayısı | 64 |
-| Özel bir bulutta sayısı vSphere kümeleri | 21 |
-| Yeni bir vSphere küme düğümlerinde en düşük sayısı | 3 |
+| Özel bir bulut oluşturmak için en az düğüm sayısı (ilk vSphere kümesi) | 3 |
+| Özel buluttaki bir vSphere kümesindeki en fazla düğüm sayısı | 16 |
+| Özel buluttaki en fazla düğüm sayısı | 64 |
+| Özel buluttaki maksimum vSphere kümesi sayısı | 21 |
+| Yeni bir vSphere kümesindeki düğüm sayısı alt sınırı | 3 |
 
 ## <a name="vmware-infrastructure-maintenance"></a>VMware altyapı Bakımı
 
-Bazen VMware altyapısı yapılandırmada değişiklik yapmak gereklidir. Şu anda, bu aralık 1-2 ayda oluşabilir, ancak sıklığı zaman içinde reddetme beklenir. Bu tür bir bakım genellikle normal tüketim CloudSimple Hizmetleri kesintiye uğratmadan yapılabilir. Bir VMware bakım aralığı sırasında aşağıdaki hizmetleri herhangi bir etkisi çalışmaya devam eder:
+Bazen VMware altyapısının yapılandırmasında değişiklik yapmak gerekir. Şu anda bu aralıklar her 1-2 ayda bir gerçekleşebilir, ancak zamanın zaman içinde reddetmesi beklenir. Bu tür bir bakım genellikle CloudSimple hizmetlerinin normal tüketimi kesintiye uğramadan yapılabilir. Bir VMware bakım aralığı sırasında, aşağıdaki hizmetler herhangi bir etki olmadan çalışmaya devam eder:
 
-* VMware yönetim düzlemi ve uygulamalar
-* vCenter erişim
+* VMware yönetim düzlemi ve uygulamaları
+* vCenter erişimi
 * Tüm ağ ve depolama
-* Tüm Azure trafiğinin
+* Tüm Azure trafiği
 
 ## <a name="updates-and-upgrades"></a>Güncelleştirmeler ve yükseltmeler
 
-CloudSimple yaşam döngüsü yönetimi ve özel bulutta VMware yazılımının (ESXi ve vCenter, PSC ve NSX) sorumludur.
+CloudSimple, özel bulutta VMware yazılımının (ESXi, vCenter, PSC ve NSX) yaşam döngüsü yönetiminden sorumludur.
 
-Yazılım güncelleştirmeleri içerir:
+Yazılım güncelleştirmeleri şunları içerir:
 
-* **Düzeltme ekleri**. Güvenlik düzeltme ekleri veya VMware tarafından yayımlanan hata düzeltmeleri.
-* **Güncelleştirmeleri**. Bir VMware yığın bileşenin podverze değiştirin.
-* **Yükseltmeler**. Bir VMware yığın bileşenin sürümle değiştirin.
+* **Düzeltme ekleri**. VMware tarafından yayınlanan güvenlik düzeltme ekleri veya hata düzeltmeleri.
+* **Güncelleştirmeler**. VMware Stack bileşeninin küçük sürüm değişikliği.
+* **Yükseltmeleri**. VMware Stack bileşeninin ana sürüm değişikliği.
 
-Vmware'den kullanılabilir duruma geldiğinde CloudSimple kritik güvenlik düzeltme eki sınar. SLA'sı CloudSimple bir hafta içinde özel bulut ortamları için güvenlik düzeltme ekini yapar.
+CloudSimple, VMware 'den kullanılabilir hale geldiğinde kritik bir güvenlik düzeltme ekini test eder. SLA 'Sı başına, CloudSimple, güvenlik düzeltme ekini bir hafta içinde özel bulut ortamlarına kaydeder.
 
-Üç aylık bakım güncelleştirmeleri için VMware yazılım bileşenlerini CloudSimple sağlar. VMware yazılım'ın yeni bir ana sürüm kullanılabilir olduğunda CloudSimple yükseltme için uygun bakım penceresi koordine etmek için müşteriler ile çalışır.  
+CloudSimple, VMware yazılım bileşenlerine üç aylık bakım güncelleştirmeleri sağlar. VMware yazılımının yeni bir ana sürümü kullanılabilir olduğunda, CloudSimple, yükseltme için uygun bir bakım penceresini koordine etmek üzere müşterilerle birlikte çalışmaktadır.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [CloudSimple Bakım ve güncelleştirmeler](cloudsimple-maintenance-updates.md)
+* [CloudSimple bakım ve güncelleştirmeleri](cloudsimple-maintenance-updates.md)

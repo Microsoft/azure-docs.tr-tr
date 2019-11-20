@@ -1,94 +1,65 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure DNS Belgeleri
+### YamlMime:Landing
+title: Azure DNS belgeleri
+summary: Azure DNS’i kullanmayı öğrenin. Hızlı başlangıçlar, öğreticiler, örnekler ve diğer belgelerde etki alanı adları için DNS bölgeleri ve kayıtları ayarlama ve bunları yönetme hakkında bilgi sağlanmıştır.
 metadata:
-  title: Azure DNS Belgeleri
-  meta.description: Learn how to manage your DNS records using Azure Domain Name System. Documentation shows how to set up and manage DNS zones and records for domain names.
+  title: Azure DNS belgeleri
+  description: Azure DNS’i kullanmayı öğrenin. Hızlı başlangıçlar, öğreticiler, örnekler ve diğer belgelerde etki alanı adları için DNS bölgeleri ve kayıtları ayarlama ve bunları yönetme hakkında bilgi sağlanmıştır.
   services: dns
-  author: KumudD
-  manager: jeconnoc
-  layout: LandingPage
-  ms.assetid: na
   ms.service: dns
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 6/13/2018
-  ms.author: kumud
-abstract:
-  description: 'Azure DNS’i kullanmayı öğrenin. Hızlı başlangıçlar, öğreticiler, örnekler ve diğer belgelerde etki alanı adları için DNS bölgeleri ve kayıtları ayarlama ve bunları yönetme hakkında bilgi sağlanmıştır.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Etki alanı adları için DNS bölgeleri ve kayıtları oluşturmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_portal.svg'
-            text: Azure portal
-            href: /azure/dns/dns-getstarted-portal
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_powershell.svg'
-            text: Azure PowerShell
-            href: /azure/dns/dns-getstarted-powershell
-          - image:
-              src: 'https://docs.microsoft.com/media/common/cli.svg'
-            text: Azure CLI
-            href: /azure/dns/dns-getstarted-cli
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure DNS’te etki alanınızı barındırmayı, Azure DNS kullanarak bir web uygulamasına yönelik özel DNS kayıtları oluşturmayı ve özel bir DNS bölgesi ve kayıtları oluşturmayı öğrenin.'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/dns/dns-delegate-domain-azure-dns">Azure DNS’te etki alanınızı barındırma</a>
-          - html: <a href="/azure/dns/dns-web-sites-custom-domain">Bir web uygulaması için özel DNS kayıtları oluşturma</a>
-          - html: <a href="/azure/dns/private-dns-getstarted-powershell">Özel bir DNS bölgesi ve kaydı oluşturma</a>
-          - html: <a href="/azure/dns/tutorial-alias-pip">Azure Genel IP adresine başvurmak için diğer ad kaydı yapılandırma</a>
-          - html: <a href="/azure/dns/tutorial-alias-tm">Traffic Manager ile tepe etki alanı adlarını desteklemek için diğer ad kaydı yapılandırma</a>
-          - html: <a href="/azure/dns/tutorial-alias-rr">Bölge kayıtları için diğer ad kaydı yapılandırma</a>
-  - title: Ücretsiz Pluralsight Video Eğitimi
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Yöneticisi
-            href: 'https://go.microsoft.com/fwlink/?linkid=2012827'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://go.microsoft.com/fwlink/?linkid=2012827'
-          - title: Azure Çözüm Mimarı
-            href: 'https://go.microsoft.com/fwlink/?linkid=2012824'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://go.microsoft.com/fwlink/?linkid=2012824'
-          - title: AWS Yöneticileri için Azure Yönetimi
-            href: 'https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents'
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Sık kullanılan görevler için betik örnekleri.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/dns/cli-samples">Azure CLI</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/module/az.dns">PowerShell</a></p><p><a href="/cli/azure/network/traffic-manager">Azure CLI</a></p>
-          - title: Diller
-            html: '<p><a href="/dotnet/api/microsoft.azure.management.dns.models">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.dns">Java</a></p><p><a href="https://azure.github.io/azure-sdk-for-node/azure-arm-dns/latest/">Node.js</a></p><p><a href="https://www.rubydoc.info/gems/azure_mgmt_dns/0.8.0">Ruby</a></p><p><a href="https://docs.microsoft.com/python/api/azure.mgmt.dns">Python</a></p>'
-          - title: REST
-            html: <p><a href="/rest/api/dns/">REST API başvurusu</a></p>
+  author: vhorne
+  ms.author: victorh
+  ms.date: 09/20/2019
+  ms.openlocfilehash: 97ba213c59c463abeccd8ce0fe268d39672210d2
+  ms.sourcegitcommit: f2771ec28b7d2d937eef81223980da8ea1a6a531
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/20/2019
+  ms.locfileid: "71172577"
+landingContent:
+- title: Azure DNS hakkında bilgi edinin
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure DNS nedir?
+      url: dns-overview.md
+- title: Azure DNS bölgesi ve kaydı oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure portalı kullanarak bir Azure DNS bölgesi ve kaydı oluşturma
+      url: dns-getstarted-portal.md
+  - linkListType: tutorial
+    links:
+    - text: Azure DNS’te etki alanınızı barındırma
+      url: dns-delegate-domain-azure-dns.md
+- title: Özel DNS bölgesi dağıtma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Özel DNS nedir?
+      url: private-dns-overview.md
+  - linkListType: concept
+    links:
+    - text: Azure DNS Özel Bölgeleri senaryoları
+      url: private-dns-scenarios.md
+    - text: Azure Özel DNS hakkında SSS
+      url: dns-faq-private.md
+  - linkListType: quickstart
+    links:
+    - text: Azure portal kullanarak Azure DNS’te özel bölge oluşturma
+      url: private-dns-portal.md
+- title: Diğer ad kayıtlarını kullanma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure DNS diğer ad kayıtlarına genel bakış
+      url: dns-alias.md
+  - linkListType: tutorial
+    links:
+    - text: Traffic Manager ile tepe etki alanı adlarını desteklemek için diğer ad kaydı yapılandırma
+      url: tutorial-alias-tm.md
+    - text: Azure genel IP adresine başvurmak için diğer ad kaydı yapılandırma
+      url: tutorial-alias-pip.md
+    - text: Bölge kaynak kaydına başvurmak için diğer ad kaydı oluşturma
+      url: tutorial-alias-rr.md

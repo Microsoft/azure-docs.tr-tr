@@ -9,12 +9,12 @@ ms.assetid: 1e1d443a-48a2-47fb-bc00-bf88274222de
 ms.service: data-lake-analytics
 ms.topic: overview
 ms.date: 06/23/2017
-ms.openlocfilehash: 1f798917548f4a744518b12ba1e2be2095bdf1c2
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 3572c308310c49eed48ccb25dfa7cb0fb161515f
+ms.sourcegitcommit: 19a821fc95da830437873d9d8e6626ffc5e0e9d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60811645"
+ms.lasthandoff: 08/29/2019
+ms.locfileid: "70164504"
 ---
 # <a name="what-is-azure-data-lake-analytics"></a>Azure Data Lake Analytics nedir?
 
@@ -42,7 +42,7 @@ Data Lake Analytics, büyük veri iş yüklerini çalıştırmaya yönelik uygun
     
 ### <a name="works-with-all-your-azure-data"></a>Tüm Azure verilerinizle çalışır
   
-Data Lake Analytics, Azure Data Lake Store ile çalışarak daha yüksek performans, aktarım hızı ve paralelleştirme sağlar; ayrıca Azure Depolama blobları, Azure SQL Veritabanı ve Azure Veri Ambarı ile çalışır.
+Data Lake Analytics en yüksek performans, aktarım hızı ve paralelleştirme için Azure Data Lake Storage ve Azure depolama Blobları, Azure SQL veritabanı, Azure ambarı ile birlikte kullanılabilir.
 
 ### <a name="next-steps"></a>Sonraki adımlar
  

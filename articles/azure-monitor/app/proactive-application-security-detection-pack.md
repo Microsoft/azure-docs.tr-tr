@@ -1,50 +1,45 @@
 ---
-title: Akıllı algılama - Azure Application Insights ile güvenlik algılama paketi | Microsoft Docs
-description: Azure Application Insights ile bir uygulama için olası güvenlik sorunlarını izler.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: ea2a28ed-4cd9-4006-bd5a-d4c76f4ec20b
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Akıllı algılama-Azure Application Insights ile güvenlik algılama paketi | Microsoft Docs
+description: Olası güvenlik sorunları için Azure Application Insights ile uygulamayı izleyin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 12/12/2017
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 90d58d1b22e893e922aa0f3770198fc95f539419
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 12/12/2017
+ms.openlocfilehash: 10c8a38af9e4f04b874bfa75e9e78d241b093117
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64572896"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820655"
 ---
-# <a name="application-security-detection-pack-preview"></a>Uygulama güvenlik algılama paketi (Önizleme)
+# <a name="application-security-detection-pack-preview"></a>Uygulama güvenliği algılama paketi (Önizleme)
 
-Application Insights, otomatik olarak uygulamanız tarafından üretilen telemetri analiz eder ve olası güvenlik sorunlarını algılar. Bu özelliği, olası güvenlik sorunlarını tanımlamak ve düzeltme uygulama tarafından veya gerekli güvenlik önlemleri alarak işlemek olanak tanır.
+Application Insights, uygulamanız tarafından oluşturulan Telemetriyi otomatik olarak analiz eder ve olası güvenlik sorunlarını algılar. Bu özellik, olası güvenlik sorunlarını tanımlamanızı ve uygulamayı düzelterek veya gerekli güvenlik önlemlerini alarak bunları işleyebilmenizi sağlar.
 
-Bu özellik dışında hiçbir özel kurulum gerektiren [telemetri göndermek için uygulamanızı yapılandırma](https://docs.microsoft.com/azure/application-insights/app-insights-usage-overview).
+Bu özellik, [uygulamanızı Telemetriyi gönderecek şekilde yapılandırma](https://docs.microsoft.com/azure/application-insights/app-insights-usage-overview)dışında özel bir kurulum gerektirmez.
 
-## <a name="when-would-i-get-this-type-of-smart-detection-notification"></a>Bu tür bir akıllı algılama bildirim ne zaman elde edersiniz?
-Üç tür algılanan güvenlik sorunları vardır:
-1. Güvenli olmayan bir URL erişimi: uygulamanın bir URL HTTP ve HTTPS erişiliyor. Genellikle, HTTPS isteklerini kabul eden bir URL HTTP isteklerini kabul. Bu, uygulamanızda bir hata veya güvenlik sorununu gösterebilir.
-2. Güvenli olmayan formu: uygulamada bir form (veya başka bir "POST" istek) HTTP yerine HTTPS kullanır. HTTP kullanarak form tarafından gönderilen kullanıcı verilerini tehlikeye atabilir.
-3. Şüpheli kullanıcı etkinliğinden: yaklaşık aynı zamanda uygulama birden çok ülkelerden/bölgelerden aynı kullanıcı tarafından erişiliyor. Örneğin, aynı kullanıcı uygulamayı İspanya ve Amerika Birleşik Devletleri aynı saat içinde erişilebilir. Bu algılama yöntemi, uygulamanızın bir kötü amaçlı olabilecek erişim girişimi gösterir.
+## <a name="when-would-i-get-this-type-of-smart-detection-notification"></a>Bu tür akıllı algılama bildirimini ne zaman alabilirim?
+Algılanan üç güvenlik sorunu türü vardır:
+1. Güvenli olmayan URL erişimi: uygulamadaki bir URL 'ye hem HTTP hem de HTTPS üzerinden erişilir. Genellikle, HTTPS isteklerini kabul eden bir URL, HTTP isteklerini kabul etmemelidir. Bu, uygulamanızda bir hata veya güvenlik sorunu olduğunu gösterebilir.
+2. Güvensiz form: uygulamadaki bir form (veya başka bir "POST" isteği) HTTPS yerine HTTP kullanır. HTTP kullanımı, form tarafından gönderilen Kullanıcı verilerinin güvenliğini tehlikeye atabilir.
+3. Şüpheli kullanıcı etkinliği: uygulamaya, aynı kullanıcı tarafından yaklaşık olarak aynı anda birden çok ülkede/bölgeden erişilir. Örneğin, aynı kullanıcı, Ispanya 'dan uygulamaya ve aynı saat içinde Birleşik Devletler erişti. Bu algılama, uygulamanıza yönelik olabilecek kötü amaçlı bir erişim denemesi olduğunu gösterir.
 
-## <a name="does-my-app-definitely-have-a-security-issue"></a>Uygulamamı kesinlikle bir güvenlik sorunu var mı?
-Hayır, bir bildirim uygulamanızı kesinlikle bir güvenlik sorunu olduğunu anlamına gelmez. Yukarıdaki senaryoların herhangi bir algılama, çoğu durumda, bir güvenlik sorunu olduğunu gösterebilir. Ancak, algılama doğal İş Gerekçesi olabilir ve yok sayılabilir.
+## <a name="does-my-app-definitely-have-a-security-issue"></a>Uygulamamın kesinlikle bir güvenlik sorunu var mı?
+Hayır, bir bildirim, uygulamanızın kesinlikle güvenlik sorunu olduğu anlamına gelmez. Yukarıdaki senaryoların herhangi birini algılamada, çoğu durumda bir güvenlik sorunu olduğunu belirtebilirsiniz. Ancak algılama, doğal bir iş gerekçesini alabilir ve yoksayılabilir.
 
-## <a name="how-do-i-fix-the-insecure-url-access-detection"></a>"Güvenli olmayan bir URL erişimi" algılama nasıl düzeltebilirim?
-1. **Değerlendirme.** Bildirim güvenli olmayan URL'ler ve çoğu URL erişen kullanıcıların sayısını sağlar güvenli erişim tarafından etkilenen. Bu sorun için bir öncelik atamanıza yardımcı olabilir.
-2. **Kapsam.** Hangi kullanıcıların yüzdesi, güvenli olmayan URL'ler erişilebilir? Kaç tane URL'leri etkilendi? Bu bilgiler gelen bildirim elde edilebilir.
-3. **Tanılayın.** Algılama, güvenli olmayan isteklerin listesini ve URL'leri ve sorunu daha ayrıntılı olarak tanılamaya yardımcı olmak için etkilenen kullanıcıların listesini sağlar.
+## <a name="how-do-i-fix-the-insecure-url-access-detection"></a>"Güvensiz URL erişimi" algılamayı Nasıl yaparım?.
+1. **Değerlendirme.** Bildirim, güvenli olmayan URL 'Lere erişen kullanıcıların sayısını ve güvenli olmayan erişimin en çok etkilediği URL 'YI sağlar. Bu, soruna bir öncelik atamanıza yardımcı olabilir.
+2. **Kapsam.** Kullanıcıların güvenli olmayan URL 'Lere ne yüzdesi erişmiş? Kaç URL etkileniyor? Bu bilgiler bildirimden elde edilebilir.
+3. **Tanın.** Algılama, güvenli olmayan isteklerin listesini ve sorunu daha da tanılamanıza yardımcı olması için etkilenen URL 'lerin ve kullanıcıların listesini sağlar.
 
-## <a name="how-do-i-fix-the-insecure-form-detection"></a>"Güvenli form" algılama nasıl düzeltebilirim?
-1. **Değerlendirme.** Bildirim, güvenli olmayan formlar sayısını ve verisini potansiyel olarak aşılmış bir kullanıcı sayısını sağlar. Bu sorun için bir öncelik atamanıza yardımcı olabilir.
-2. **Kapsam.** Hangi formun en büyük sayısını güvenli olmayan iletimleri söz konusuydu ve güvensiz iletimleri zaman içindeki dağılımını nedir? Bu bilgiler gelen bildirim elde edilebilir.
-3. **Tanılayın.** Algılama, güvenli olmayan formlar listesi ve sorunu daha ayrıntılı olarak tanılamaya yardımcı olmak için her form için güvenli aktarımlara sayısı bir dökümünü sağlar.
+## <a name="how-do-i-fix-the-insecure-form-detection"></a>"Güvensiz form" algılamayı Nasıl yaparım? düzeltilsin mi?
+1. **Değerlendirme.** Bildirim, güvenli olmayan formların ve verilerin riskli olma olasılığı olan kullanıcı sayısının sayısını sağlar. Bu, soruna bir öncelik atamanıza yardımcı olabilir.
+2. **Kapsam.** Hangi form, güvensiz aktarımların en büyük sayısına ve zaman içinde güvenli olmayan iletimlerin dağıtımına dahil mi? Bu bilgiler bildirimden elde edilebilir.
+3. **Tanın.** Algılama, sorunu daha da tanılamanıza yardımcı olması için güvenli olmayan formların ve her bir form için güvenli olmayan iletimlerin sayısını sağlar.
 
-## <a name="how-do-i-fix-the-suspicious-user-activity-detection"></a>"Şüpheli kullanıcı etkinliğinden" algılama nasıl düzeltebilirim?
-1. **Değerlendirme.** Bildirim şüpheli davranış gösterdi farklı kullanıcı sayısını sağlar. Bu sorun için bir öncelik atamanıza yardımcı olabilir.
-2. **Kapsam.** Hangi ülkeler/bölgeler üzerinden şüpheli istekleri fırsatlara? Hangi kullanıcı en şüpheli neydi? Bu bilgiler gelen bildirim elde edilebilir.
-3. **Tanılayın.** Algılama, Şüpheli kullanıcıların listesini ve ülkeler/bölgeler sorunu daha ayrıntılı olarak tanılamaya yardımcı olmak için her kullanıcı için listesini sağlar.
+## <a name="how-do-i-fix-the-suspicious-user-activity-detection"></a>"Şüpheli kullanıcı etkinliği" algılamayı Nasıl yaparım?.
+1. **Değerlendirme.** Bildirim, şüpheli davranışı gösteren farklı kullanıcı sayısını sağlar. Bu, soruna bir öncelik atamanıza yardımcı olabilir.
+2. **Kapsam.** Şüpheli istekleri hangi ülkelerde/bölgelerde gerçekleştirsin? En şüpheli Kullanıcı hangisi? Bu bilgiler bildirimden elde edilebilir.
+3. **Tanın.** Bu algılama, sorunun daha fazla tanılanmasına yardımcı olmak için şüpheli kullanıcıların, her kullanıcı için ülke/bölge listesinin listesini sağlar.

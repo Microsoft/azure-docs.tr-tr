@@ -9,23 +9,22 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: overview
 ms.date: 11/15/2017
 ms.author: apimpm
 ms.custom: mvc
-ms.openlocfilehash: 3934dbb01c3b9f3219c5e649d97371850b8daadc
-ms.sourcegitcommit: 2ce4f275bc45ef1fb061932634ac0cf04183f181
+ms.openlocfilehash: 8d7fa8b8119ddf1769b36bcb55831047d6242470
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/07/2019
-ms.locfileid: "65230616"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70073428"
 ---
 # <a name="about-api-management"></a>API Management hakkında
 
-API Management (APIM), tutarlı ve modern API ağ geçitleri mevcut arka uç hizmetleri oluşturmak için kullanılan bir yoldur.
+API Management (APıM), mevcut arka uç hizmetleri için tutarlı ve modern API ağ geçitleri oluşturmanın bir yoludur.
 
-API yönetimi, kuruluşların kendi veri ve hizmet potansiyellerini ortaya çıkarmak üzere API'leri dış, iş ortağı ve iç geliştiricilere yayımlamalarına yardımcı olur. Her yerdeki işletmeler, bir dijital platform olarak işlemlerini genişletmek, yeni kanallar oluşturmak, yeni müşteriler bulmak ve mevcut müşterilerle daha derin etkileşimi yürütmeyi amaçlar. API Management; geliştirici katılımı, iş öngörüleri, analizler, güvenlik ve koruma aracılığıyla başarılı bir API programı yürütmeye ilişkin temel uzmanlıklar sağlar. Azure API Management’i bir arka uç almak ve bunu temel alan tam özellikli bir API programını başlatmak için kullanabilirsiniz.
+API Management kuruluşların, veri ve hizmetlerinin potansiyelini açmak için API 'Leri dış, iş ortağı ve iç geliştiricilere yayımlamalarına yardımcı olur. Her yerdeki işletmeler, bir dijital platform olarak işlemlerini genişletmek, yeni kanallar oluşturmak, yeni müşteriler bulmak ve mevcut müşterilerle daha derin etkileşimi yürütmeyi amaçlar. API Management; geliştirici katılımı, iş öngörüleri, analizler, güvenlik ve koruma aracılığıyla başarılı bir API programı yürütmeye ilişkin temel uzmanlıklar sağlar. Azure API Management’i bir arka uç almak ve bunu temel alan tam özellikli bir API programını başlatmak için kullanabilirsiniz.
 
 Bu makale, APIM içeren yaygın senaryolara genel bakış sağlar.  Ayrıca, APIM sisteminin ana bileşenlerine de kısa bir genel bakış sağlar. Böylece makale, her bir bileşene daha ayrıntılı bir genel bakış sunmuş olur.
 
@@ -61,7 +60,7 @@ Sistem aşağıdaki bileşenlerden oluşur:
   * Bir hesap oluşturma ve API anahtarlarını almak için abone olma.
   * Kendi kullanımlarına ilişkin analize erişme.
 
-Daha fazla bilgi için [bulut tabanlı API Yönetimi: API'lerin gücünden yararlanma](https://j.mp/ms-apim-whitepaper) PDF teknik incelemesi. API Management hakkında CITO Research tarafından hazırlanan tanıtım amaçlı bu teknik inceleme şunları içerir: 
+Daha fazla bilgi için bkz [. bulut tabanlı API Management: API](https://j.mp/ms-apim-whitepaper) 'lerin gücünden yararlanma PDF teknik incelemesi. API Management hakkında CITO Research tarafından hazırlanan tanıtım amaçlı bu teknik inceleme şunları içerir: 
  
  * Yaygın API gereksinimleri ve sorunları
  * API'leri ayırma ve cepheleri sunma
@@ -75,7 +74,7 @@ Daha fazla bilgi için [bulut tabanlı API Yönetimi: API'lerin gücünden yarar
 ## <a name="apis"> </a>API’ler ve işlemler
 API'ler bir API Management hizmet örneğinin temelini oluşturur. Her API geliştiricilere sunulan bir işlemler kümesini temsil eder. Her API, API’yi uygulayan arka uç hizmetine başvuru içerir ve bunun işlemleri arka uç hizmeti tarafından uygulanan işlemlere eşlenir. API Management işlemleri; URL eşleme, sorgu ve yol parametreleri, istek ve yanıt içeriği ve işlem yanıtını önbelleğe alma üzerinde sahip olunan denetim sayesinde yüksek oranda yapılandırılabilir niteliktedir. Hızı sınırı, kotalar ve IP kısıtlama ilkeleri de API veya tek işlem düzeyinde uygulanabilir.
 
-Daha fazla bilgi için bkz. [API oluşturma][How to create APIs] ve [API'ye işlem ekleme][How to add operations to an API].
+Daha fazla bilgi için bkz. [API oluşturma][How to create APIs] ve [API’ye işlem ekleme][How to add operations to an API].
 
 ## <a name="products"> </a> Ürünler
 Ürünler API'lerin geliştiricilerin kullanımına nasıl sunulduğudur. API Management ürünleri bir ya da daha fazla API’ye sahiptir. Başlık, açıklama ve kullanım koşulları ile yapılandırılırlar. Ürünler **Açık** veya **Korumalı** olabilir. Korumalı ürünleri kullanabilmek için bunlara abone olmak gerekir, açık ürünler abonelik olmadan kullanılabilir. Bir ürün, geliştiriciler tarafından kullanılmaya hazır olduğunda yayımlanabilir. Yayımlandıktan sonra, geliştiriciler tarafından görüntülenebilir (ve abone olunan korumalı ürünler söz konusu olduğunda). Abonelik onayı ürün düzeyinde yapılandırılır ve yönetici onayı gerektirebilir ya da otomatik olarak onaylanır.

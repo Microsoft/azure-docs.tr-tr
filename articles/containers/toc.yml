@@ -62,6 +62,19 @@
           href: 'https://docs.microsoft.com/virtualization/windowscontainers/quick-start/quick-start-windows-server'
         - name: Windows Kapsayıcıları hakkında
           href: 'https://docs.microsoft.com/virtualization/windowscontainers/about/index'
+    - name: Azure Red Hat OpenShift
+      href: 'https://docs.microsoft.com/azure/openshift/'
+      items:
+        - name: Azure Red Hat OpenShift nedir?
+          href: ../openshift/intro-openshift.md
+        - name: Öğretici - Azure Red Hat OpenShift kümesi oluşturma ve yönetme
+          items:
+            - name: 1 - Azure Red Hat OpenShift kümesi oluşturma
+              href: ../openshift/tutorial-create-cluster.md
+            - name: 2 - Azure Red Hat OpenShift kümesini ölçeklendirme
+              href: ../openshift/tutorial-scale-cluster.md
+            - name: 3 - Azure Red Hat OpenShift kümesini silme
+              href: ../openshift/tutorial-delete-cluster.md
     - name: Başvuru
       items:
         - name: Azure Container Instances (az container)

@@ -1,326 +1,185 @@
 ---
-title: Önizleme - standart SKU yük dengeleyicide Azure Kubernetes Service (AKS) kullanma
-description: Hizmetlerinizi Azure Kubernetes Service (AKS) ile kullanıma sunmak için standart bir SKU ile bir yük dengeleyici kullanmayı öğrenin.
+title: Azure Kubernetes Service (AKS) içinde standart bir SKU yük dengeleyici kullanma
+description: Azure Kubernetes Service (AKS) ile hizmetlerinizi kullanıma sunmak için standart SKU ile yük dengeleyiciyi nasıl kullanacağınızı öğrenin.
 services: container-service
 author: zr-msft
 ms.service: container-service
 ms.topic: article
-ms.date: 06/25/2019
+ms.date: 09/27/2019
 ms.author: zarhoads
-ms.openlocfilehash: a9cf3db3a15fab5a2f067a146950e02923a20379
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: ef826239bc916b4ccf25785f92397286017d00f7
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67476803"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74171400"
 ---
-# <a name="preview---use-a-standard-sku-load-balancer-in-azure-kubernetes-service-aks"></a>Önizleme - standart SKU yük dengeleyicide Azure Kubernetes Service (AKS) kullanma
+# <a name="use-a-standard-sku-load-balancer-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içinde standart bir SKU yük dengeleyici kullanma
 
-Azure Kubernetes Service (AKS) uygulamalarınıza erişim sağlamak için oluşturabilir ve Azure Load Balancer'ı kullanın. AKS'de çalışan bir yük dengeleyici, iç veya dış yük dengeleyici olarak kullanılabilir. İç yük dengeleyici, bir Kubernetes hizmeti yalnızca AKS kümesi aynı sanal ağda çalışan uygulamalar için erişilebilir hale getirir. Bir dış yük dengeleyici, giriş için bir veya daha fazla genel IP'ler alır ve bir Kubernetes hizmeti dışarıdan genel IP'ler kullanarak erişilebilir hale getirir.
+Azure Kubernetes Service (AKS) içinde `LoadBalancer` türündeki Kubernetes Hizmetleri aracılığıyla uygulamalara erişim sağlamak için bir Azure Load Balancer kullanabilirsiniz. AKS üzerinde çalışan bir yük dengeleyici, iç veya dış yük dengeleyici olarak kullanılabilir. İç yük dengeleyici, bir Kubernetes hizmetini yalnızca AKS kümesi ile aynı sanal ağda çalışan uygulamalar için erişilebilir hale getirir. Dış yük dengeleyici, giriş için bir veya daha fazla genel IP alır ve genel IP 'Leri kullanarak bir Kubernetes hizmetini dışarıdan erişilebilir hale getirir.
 
-Azure Load Balancer iki SKU ile - kullanılabilir *temel* ve *standart*. Varsayılan olarak, *temel* SKU AKS üzerinde bir yük dengeleyici oluşturmak için bir hizmet bildirimi kullanıldığında kullanılır. Kullanarak bir *standart* SKU yük dengeleyicide ek özellikleri ve daha büyük arka uç havuzu boyutunda ve kullanılabilirlik bölgeleri gibi işlevleri sağlar. Arasındaki farkları anlamak önemlidir *standart* ve *temel* yük Dengeleyiciler kullanılacağı seçmeden önce. Bir AKS kümesi oluşturduktan sonra bu küme için yük dengeleyici SKU değiştirilemiyor. Daha fazla bilgi için *temel* ve *standart* SKU'ları, bkz: [Azure yük dengeleyici SKU karşılaştırma][azure-lb-comparison].
+Azure Load Balancer, *temel* ve *Standart*olmak üzere iki SKU 'da kullanılabilir. Varsayılan olarak, bir AKS kümesi oluşturduğunuzda *Standart* SKU kullanılır. *Standart* SKU yük dengeleyici kullanmak, daha büyük bir arka uç havuzu boyutu ve kullanılabilirlik alanları gibi ek özellikler ve işlevler sağlar. Kullanmayı seçmeden önce *Standart* ve *temel* yük dengeleyiciler arasındaki farkları anlamanız önemlidir. Bir AKS kümesi oluşturduktan sonra, bu küme için yük dengeleyici SKU 'sunu değiştiremezsiniz. *Temel* ve *Standart* SKU 'lar hakkında daha fazla bilgi için bkz. [Azure yük dengeleyici SKU karşılaştırması][azure-lb-comparison].
 
-Bu makalede bir Azure Load Balancer ile oluşturup kullanacağınızı gösterilmektedir *standart* SKU ile Azure Kubernetes Service (AKS).
-
-Bu makalede, bir temel kavramlarını Kubernetes ve Azure Load Balancer varsayılır. Daha fazla bilgi için [Kubernetes kavramlarını Azure Kubernetes Service (AKS) için çekirdek][kubernetes-concepts] and [What is Azure Load Balancer?][azure-lb].
-
-Bu özellik şu anda önizleme sürümündedir.
+Bu makalede, Kubernetes ve Azure Load Balancer kavramlarının temel bir şekilde anlaşıldığı varsayılır. Daha fazla bilgi için bkz. [Azure Kubernetes hizmeti (AKS) Için Kubernetes temel kavramları][kubernetes-concepts] ve [Azure Load Balancer nedir?][azure-lb].
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale, Azure CLI Sürüm 2.0.59 çalıştırdığınız gerekir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][install-azure-cli].
+CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale, Azure CLı sürüm 2.0.74 veya üstünü çalıştırıyor olmanızı gerektirir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][install-azure-cli].
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-AKS kümesi hizmet sorumlusu bir mevcut alt ağı veya kaynak grubu kullanıyorsanız, ağ kaynaklarını yönetmek için izniniz gerekiyor. Genel olarak, Ata *ağ Katılımcısı* rolüne temsilci kaynaklar, hizmet sorumlusu. İzinler hakkında daha fazla bilgi için bkz. [temsilci AKS için diğer Azure kaynaklarına erişim][aks-sp].
+Bu makalede, *Standart* SKU 'nun Azure Load Balancer bir aks kümeniz olduğunu varsaymaktadır. AKS kümesine ihtiyacınız varsa bkz. [Azure CLI kullanarak][aks-quickstart-cli] aks hızlı başlangıç veya [Azure Portal kullanımı][aks-quickstart-portal].
 
-SKU yük dengeleyici için ayarlar bir AKS kümesi oluşturmalısınız *standart* varsayılan yerine *temel*. Bir AKS kümesi oluşturma, bir sonraki adımda ele alınmıştır, ancak ilk birkaç Önizleme özelliklerini etkinleştirmek gerekir.
+AKS küme hizmeti sorumlusu Ayrıca mevcut bir alt ağ veya kaynak grubu kullanıyorsanız ağ kaynaklarını yönetme iznine de sahip olmalıdır. Genel olarak, temsilcili kaynaklar üzerindeki hizmet sorumlusu rolüne *ağ katılımcısı* rolünü atayın. İzinler hakkında daha fazla bilgi için bkz. [diğer Azure kaynaklarına AKS erişimi verme][aks-sp].
 
-> [!IMPORTANT]
-> AKS Önizleme özellikleri, Self Servis, kabul etme. Görüş ve hata topluluğumuza toplamak için sağlanır. Önizleme'de, bu özelliklerin üretim kullanılmak üzere geliştirilmiş değildir. Genel Önizleme Özellikleri 'en yüksek çaba' destek kapsamında ayrılır. İş saatleri Pasifik Saat dilimi sırasında (Pasifik Saati) yalnızca AKS teknik destek ekipleri Yardım kullanılabilir. Ek bilgi için lütfen aşağıdaki destek makaleleri bakın:
->
-> * [AKS destek ilkeleri][aks-support-policies]
-> * [Azure desteği SSS][aks-faq]
+### <a name="moving-from-a-basic-sku-load-balancer-to-standard-sku"></a>Temel SKU Load Balancer standart SKU 'ya taşıma
 
-### <a name="install-aks-preview-cli-extension"></a>Aks önizlemesini CLI uzantısını yükleme
+Temel SKU 'nun Load Balancer var olan bir kümeniz varsa, standart SKU Load Balancer sahip bir küme kullanmaya geçiş yaparken dikkat etmeniz önemli davranış farklılıkları vardır.
 
-Azure load balancer'ı kullanmak için standart SKU ihtiyacınız *aks önizlemesini* CLI 0.4.1 uzantı sürümü veya üzeri. Yükleme *aks önizlemesini* uzantısını Azure CLI kullanarak [az uzantısı ekleme][az-extension-add] command, then check for any available updates using the [az extension update][az-extension-update] komut::
+Örneğin, kümeleri geçirmek için mavi/yeşil dağıtımlar yapmak, bir kümenin `load-balancer-sku` türü için yalnızca küme oluşturma zamanında tanımlandıkları yaygın bir uygulamadır. Ancak, *temel SKU* yük dengeleyiciler *Standart* SKU IP adreslerini gerektirdiğinden *Standart* SKU yük dengeleyiciler Ile uyumlu olmayan *temel SKU* IP adreslerini kullanır. Kümeleri Load Balancer SKU 'Larına geçirirken, uyumlu bir IP adresi SKU 'SU olan yeni bir IP adresi gerekir.
 
-```azurecli-interactive
-# Install the aks-preview extension
-az extension add --name aks-preview
-
-# Update the extension to make sure you have the latest version installed
-az extension update --name aks-preview
-```
-
-### <a name="register-aksazurestandardloadbalancer-preview-feature"></a>AKSAzureStandardLoadBalancer önizleme özelliği Kaydet
-
-Bir yük dengeleyici ile kullanabileceğiniz bir AKS kümesi oluşturma *standart* SKU, etkinleştirmelidir *AKSAzureStandardLoadBalancer* özelliği aboneliğinizde bayrağı. *AKSAzureStandardLoadBalancer* özelliği de kullandığı *VMSSPreview* sanal makine ölçek kümeleri'ni kullanarak bir kümeyi oluştururken. Bu özellik, bir küme yapılandırırken en son hizmet geliştirmeleri kümesini sağlar. Zorunlu olsa da etkinleştirmeniz önerilir *VMSSPreview* özelliği de bayrağı.
-
-> [!CAUTION]
-> Bir Abonelikteki bir özellik kaydettiğinizde, bu özellik şu anda kaydını yapamazsınız. Bazı Önizleme özellikleri etkinleştirdikten sonra varsayılan ardından aboneliği için oluşturulan tüm AKS kümeleri için kullanılabilir. Önizleme özellikleri üretim Aboneliklerde etkinleştirmeyin. Önizleme özellikleri test ve geri bildirim toplamak için ayrı bir abonelik kullanın.
-
-Kayıt *VMSSPreview* ve *AKSAzureStandardLoadBalancer* özellik bayraklarını kullanarak [az özelliği kayıt][az-feature-register] komutu aşağıdaki örnekte gösterildiği gibi:
-
-```azurecli-interactive
-az feature register --namespace "Microsoft.ContainerService" --name "VMSSPreview"
-az feature register --namespace "Microsoft.ContainerService" --name "AKSAzureStandardLoadBalancer"
-```
-
-> [!NOTE]
-> Başarıyla kaydettikten sonra oluşturduğunuz herhangi bir AKS kümesinde *VMSSPreview* veya *AKSAzureStandardLoadBalancer* özellik bayrakları Bu önizleme küme deneyimi kullanın. Normal, tam olarak desteklenen kümeleri oluşturmak devam etmek için üretim Aboneliklerde Önizleme özelliklerini etkinleştirme. Önizleme özellikleri test için ayrı bir test veya geliştirme Azure aboneliği kullanın.
-
-Gösterilecek durum için birkaç dakika sürer *kayıtlı*. Kayıt kullanarak durumu denetleyebilirsiniz [az özellik listesi][az-feature-list] komutu:
-
-```azurecli-interactive
-az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/VMSSPreview')].{Name:name,State:properties.state}"
-az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/AKSAzureStandardLoadBalancer')].{Name:name,State:properties.state}"
-```
-
-Hazır olduğunuzda, kayıt yenileme *Microsoft.ContainerService* kullanarak kaynak sağlayıcısını [az provider register][az-provider-register] komutu:
-
-```azurecli-interactive
-az provider register --namespace Microsoft.ContainerService
-```
+Kümeleri geçirme hakkında daha fazla bilgi için, geçiş yaparken göz önünde bulundurmanız gereken önemli konuların bir listesini görüntülemek için [geçiş konuları hakkındaki belgelerimizi](acs-aks-migration.md) ziyaret edin. Aşağıdaki sınırlamalar Ayrıca AKS 'de standart SKU yük dengeleyicileri kullanırken dikkat edilecek önemli davranış farklarıdır.
 
 ### <a name="limitations"></a>Sınırlamalar
 
-Oluştururken ve bir yük dengeleyici ile destekleyen AKS kümeleri yönetme aşağıdaki sınırlamalar geçerlidir *standart* SKU:
+*Standart* SKU ile yük dengeleyiciyi destekleyen aks kümelerini oluşturup yönetirken aşağıdaki sınırlamalar geçerlidir:
 
-* Kullanırken *standart* SKU yük dengeleyici, genel adresleri izin ve gerekir IP oluşturma engeller herhangi bir Azure İlkesi oluşturmaktan kaçının. AKS kümesi otomatik olarak oluşturur bir *standart* genellikle adlı AKS kümesi için SKU ortak IP'sine aynı kaynak grubunda oluşturulan *MC_* başında. AKS atar genel IP'ye *standart* SKU yük dengeleyici. Genel IP, AKS kümesi çıkış trafiği izin vermek için gereklidir. Bu genel IP, AKS önceki sürümleriyle uyumluluğu korumak için farklı denetim düzlemi ve aracı düğümleri de arasındaki bağlantıyı sürdürmek için de gereklidir.
-* Kullanırken *standart* SKU yük dengeleyici için Kubernetes sürümü 1.13.5 kullanmanız gerekir ya da daha büyük.
+* AKS kümesinden giden trafiğe izin vermek için en az bir genel IP veya IP öneki gereklidir. Genel IP veya IP öneki Ayrıca, denetim düzlemi ve aracı düğümleri arasındaki bağlantıyı sürdürmek için ve önceki AKS sürümleriyle uyumluluğu sürdürmek için de gereklidir. *Standart* bir SKU yük dengeleyiciye sahip genel IP 'LERI veya IP öneklerini belirtmek için aşağıdaki seçenekleriniz vardır:
+    * Kendi genel IP 'nizi sağlayın.
+    * Kendi genel IP öneklerinizi sağlayın.
+    * AKS kümesinin, genellikle başlangıçta *Mc_* olarak adlandırılan aks kümesi olarak oluşturulan aynı kaynak grubunda *Standart* SKU genel IP 'leri oluşturmasına izin vermek için en fazla 100 ' a kadar bir sayı belirtin. AKS, genel IP 'yi *Standart* SKU yük dengeleyicisine atar. Varsayılan olarak, genel IP, genel IP öneki veya IP sayısı belirtilmemişse, AKS kümesiyle aynı kaynak grubunda bir genel IP otomatik olarak oluşturulur. Ayrıca, genel adreslere izin vermeniz ve IP oluşturma ile ilgili herhangi bir Azure Ilkesinin oluşturulmasını önetmeniz gerekir.
+* Yük Dengeleyici için *Standart* SKU kullanırken, Kubernetes sürüm *1,13 veya üstünü*kullanmanız gerekir.
+* Yük dengeleyici SKU 'SU tanımlama yalnızca bir AKS kümesi oluşturduğunuzda yapılabilir. Bir AKS kümesi oluşturulduktan sonra yük dengeleyici SKU 'sunu değiştiremezsiniz.
+* Tek bir kümede yalnızca bir tür yük dengeleyici SKU 'SU (temel veya standart) kullanabilirsiniz.
+* *Standart* SKU yük dengeleyiciler yalnızca *Standart* SKU IP adreslerini destekler.
 
-Bu özellik Önizleme aşamasında olduğu sürece, aşağıdaki ek kısıtlamalar uygulanır:
+## <a name="configure-the-load-balancer-to-be-internal"></a>Yük dengeleyiciyi iç olarak yapılandırma
 
-* Kullanırken *standart* SKU yük dengeleyici aks'deki çıkış için kendi genel IP adresi yük dengeleyici için ayarlanamaz. AKS için load balancer'ınız atar IP adresini kullanmanız gerekir.
+Ayrıca yük dengeleyiciyi iç olarak yapılandırabilir ve genel bir IP 'yi kullanıma sunmamalısınız. Yük dengeleyiciyi iç olarak yapılandırmak için, *LoadBalancer* hizmetine bir ek açıklama olarak `service.beta.kubernetes.io/azure-load-balancer-internal: "true"` ekleyin. [Burada][internal-lb-yaml]bir YAML bildiriminin yanı sıra bir iç yük dengeleyici hakkında daha fazla ayrıntı görebilirsiniz.
 
-## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
+## <a name="scale-the-number-of-managed-public-ips"></a>Yönetilen genel IP sayısını ölçeklendirme
 
-Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği mantıksal bir gruptur. Bir kaynak grubu oluştururken konum belirtmeniz istenir. Bu kaynak grubu meta verilerini depolandığı bir konumdur başka bir bölgede kaynak oluşturma sırasında belirtmezseniz kaynaklarınızı Azure üzerinde çalıştırdığı de olabilir. Kullanarak bir kaynak grubu oluşturmanız [az grubu oluşturma][az-group-create] komutu.
+Varsayılan olarak oluşturulan, yönetilen giden genel IP 'Ler ile *Standart* SKU yük dengeleyicisi kullanırken, *yük dengeleyici-yönetilen-IP-Count* parametresini kullanarak yönetilen giden genel IP sayısını ölçeklendirebilirsiniz.
 
-Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
+Var olan bir kümeyi güncelleştirmek için aşağıdaki komutu çalıştırın. Bu parametre, birden çok yönetilen giden genel IP 'si olması için küme oluşturma zamanında de ayarlanabilir.
 
 ```azurecli-interactive
-az group create --name myResourceGroup --location eastus
+az aks update \
+    --resource-group myResourceGroup \
+    --name myAKSCluster \
+    --load-balancer-managed-outbound-ip-count 2
 ```
 
-Aşağıdaki örnek çıkış, başarılı bir şekilde oluşturduğunuz kaynak grubunda gösterir:
+Yukarıdaki örnek, *Myresourcegroup*Içindeki *Myakscluster* kümesi Için yönetilen giden genel IP sayısını *2* ' ye ayarlar. 
 
-```json
-{
-  "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup",
-  "location": "eastus",
-  "managedBy": null,
-  "name": "myResourceGroup",
-  "properties": {
-    "provisioningState": "Succeeded"
-  },
-  "tags": null,
-  "type": null
-}
+Ayrıca, `--load-balancer-managed-outbound-ip-count` parametresini ekleyerek ve istediğiniz değere ayarlayarak, kümenizi oluştururken yönetilen giden genel IP 'lerin ilk sayısını ayarlamak için *Load-dengeleyiciyle yönetilen-IP-Count* parametresini de kullanabilirsiniz. Varsayılan yönetilen giden genel IP sayısı 1 ' dir.
+
+## <a name="provide-your-own-public-ips-or-prefixes-for-egress"></a>Çıkış için kendi genel IP 'Leri veya ön eklerini sağlayın
+
+*Standart* SKU yük dengeleyicisi kullanılırken aks kümesi, aks kümesi için oluşturulan aynı kaynak grubunda ortak IP 'yi otomatik olarak oluşturur ve genel IP 'yi *Standart* SKU yük dengeleyicisine atar. Alternatif olarak, küme oluşturma sırasında kendi genel IP 'nizi atayabilir veya var olan bir kümenin yük dengeleyici özelliklerini güncelleştirebilirsiniz.
+
+Birden çok IP adresi veya ön ek sunarak, tek bir yük dengeleyici nesnesi arkasında IP adresini tanımlarken birden çok yedekleme hizmeti tanımlayabilirsiniz. Belirli düğümlerin çıkış uç noktası, ilişkili oldukları hizmete bağlı olarak değişir.
+
+> [!IMPORTANT]
+> *Standart* SKU 'su yük dengeleyiciniz ile çıkış için *Standart* SKU genel IP 'lerini kullanmanız gerekir. [Az Network public-ip show][az-network-public-ip-show] komutunu kullanarak genel IP 'nizin SKU 'sunda emin olabilirsiniz:
+>
+> ```azurecli-interactive
+> az network public-ip show --resource-group myResourceGroup --name myPublicIP --query sku.name -o tsv
+> ```
+
+Genel IP 'nizin kimliklerini listelemek için [az Network public-ip show][az-network-public-ip-show] komutunu kullanın.
+
+```azurecli-interactive
+az network public-ip show --resource-group myResourceGroup --name myPublicIP --query id -o tsv
 ```
 
-## <a name="create-aks-cluster"></a>AKS kümesi oluşturma
-Bir yük dengeleyici ile destekleyen bir AKS kümesi çalıştırmak için *standart* SKU, kümeniz için ayarlamak gerekli *yük dengeleyici sku* parametresi *standart*. Bu parametre ile bir yük dengeleyici oluşturur *standart* , küme oluşturulduğunda SKU. Çalıştırdığınızda bir *LoadBalancer* hizmet yapılandırmasını kümenizdeki *standart* SK yük dengeleyici, hizmetin yapılandırma ile güncelleştirilir. Kullanım [az aks oluşturma][az-aks-create] adlı bir AKS kümesi oluşturmak için komut *myAKSCluster*.
+Yukarıdaki komut, *Myresourcegroup* kaynak grubundaki *Mypublicıp* genel IP 'nin kimliğini gösterir.
 
-> [!NOTE]
-> *Yük dengeleyici sku* özelliği, yalnızca, küme oluşturulduğunda kullanılabilir. Bir AKS kümesi oluşturulduktan sonra Yük Dengeleyici SKU değiştirilemiyor. Ayrıca, yalnızca tek bir kümede yük dengeleyicinin SKU bir türü kullanabilirsiniz.
+Kümenizi genel IP 'larınız ile güncelleştirmek için, *Load-dengeleyici-giden-IP* parametresi ile *az aks Update* komutunu kullanın.
+
+Aşağıdaki örnek, önceki komuttan gelen kimliklerle *yük dengeleyici-giden-IP* parametresini kullanır.
+
+```azurecli-interactive
+az aks update \
+    --resource-group myResourceGroup \
+    --name myAKSCluster \
+    --load-balancer-outbound-ips <publicIpId1>,<publicIpId2>
+```
+
+*Standart* SKU yük dengeleyicinizle çıkış IÇIN genel IP öneklerini de kullanabilirsiniz. Aşağıdaki örnek, genel IP öneklerinizin kimliklerini listelemek için [az Network public-ip önekini göster][az-network-public-ip-prefix-show] komutunu kullanır:
+
+```azurecli-interactive
+az network public-ip prefix show --resource-group myResourceGroup --name myPublicIPPrefix --query id -o tsv
+```
+
+Yukarıdaki komut, *Myresourcegroup* kaynak grubundaki *Mypublicipprefix* genel IP ön ekinin kimliğini gösterir.
+
+Aşağıdaki örnek, önceki komuttan gelen kimliklerle *yük dengeleyici-giden-IP-önekleri* parametresini kullanır.
+
+```azurecli-interactive
+az aks update \
+    --resource-group myResourceGroup \
+    --name myAKSCluster \
+    --load-balancer-outbound-ip-prefixes <publicIpPrefixId1>,<publicIpPrefixId2>
+```
+
+> [!IMPORTANT]
+> Genel IP 'Ler ve IP önekleri, AKS kümeniz ile aynı aboneliğin aynı bölgede ve bir parçası olmalıdır. 
+
+### <a name="define-your-own-public-ip-or-prefixes-at-cluster-create-time"></a>Küme oluşturma zamanında kendi genel IP veya öneklerinizi tanımlama
+
+Çıkış uç noktaları beyaz listeleme gibi senaryoları desteklemek için küme oluşturma sırasında kendi IP adreslerinizi veya IP öneklerinizi almak isteyebilirsiniz. Kümenin yaşam döngüsünün başlangıcında kendi genel IP 'Leri ve IP öneklerinizi tanımlamak için yukarıda gösterilen aynı parametreleri küme oluşturma adımınıza ekleyin.
+
+Başlangıç aşamasında genel IP 'inizle yeni bir küme oluşturmak için, *Load-dengeleyici-giden-IP* parametresi ile *az aks Create* komutunu kullanın.
 
 ```azurecli-interactive
 az aks create \
     --resource-group myResourceGroup \
     --name myAKSCluster \
-    --enable-vmss \
+    --vm-set-type VirtualMachineScaleSets \
     --node-count 1 \
-    --kubernetes-version 1.14.0 \
     --load-balancer-sku standard \
-    --generate-ssh-keys
+    --generate-ssh-keys \
+    --load-balancer-outbound-ips <publicIpId1>,<publicIpId2>
 ```
 
-Birkaç dakika sonra komut tamamlanır ve küme hakkında JSON ile biçimlendirilmiş bilgiler döndürür.
-
-## <a name="connect-to-the-cluster"></a>Kümeye bağlanma
-
-Bir Kubernetes kümesini yönetmek için kullandığınız [kubectl][kubectl], Kubernetes komut satırı istemcisi. Azure Cloud Shell kullanıyorsanız `kubectl` zaten yüklü. Yüklenecek `kubectl` yerel olarak, [az aks yükleme-cli][az-aks-install-cli] komutu:
-
-```azurecli
-az aks install-cli
-```
-
-Yapılandırmak için `kubectl` Kubernetes kümenize bağlanmak için [az aks get-credentials][az-aks-get-credentials] komutu. Bu komut, kimlik bilgilerini indirir ve Kubernetes CLI'yi bunları kullanacak şekilde yapılandırır.
+Başlangıçta genel IP öneklerinizi içeren yeni bir küme oluşturmak için, *Load-dengeleyici-giden-IP-önekleri* parametresiyle *az aks Create* komutunu kullanın.
 
 ```azurecli-interactive
-az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+az aks create \
+    --resource-group myResourceGroup \
+    --name myAKSCluster \
+    --vm-set-type VirtualMachineScaleSets \
+    --node-count 1 \
+    --load-balancer-sku standard \
+    --generate-ssh-keys \
+    --load-balancer-outbound-ip-prefixes <publicIpPrefixId1>,<publicIpPrefixId2>
 ```
 
-Kümenize bağlantıyı doğrulamak için [kubectl get][kubectl-get] komutunu kullanarak küme düğümleri listesini alın.
+## <a name="show-the-outbound-rule-for-your-load-balancer"></a>Yük dengeleyiciniz için giden kuralı gösterme
+
+Yük dengeleyicide oluşturulan giden kuralı göstermek için [az Network lb Outbound-Rule listesini][az-network-lb-outbound-rule-list] kullanın ve aks kümenizin düğüm kaynak grubunu belirtin:
 
 ```azurecli-interactive
-kubectl get nodes
+NODE_RG=$(az aks show --resource-group myResourceGroup --name myAKSCluster --query nodeResourceGroup -o tsv)
+az network lb outbound-rule list --resource-group $NODE_RG --lb-name kubernetes -o table
 ```
 
-Aşağıdaki örnekte önceki adımlarda oluşturulan tek düğüm gösterilmiştir. Düğüm durumu olduğundan emin olun *hazır*:
-
-```
-NAME                       STATUS   ROLES   AGE     VERSION
-aks-nodepool1-31718369-0   Ready    agent   6m44s   v1.14.0
-```
-
-## <a name="verify-your-cluster-uses-the-standard-sku"></a>Kümenizi kullanan doğrulayın *standart* SKU
-
-Kullanım [az aks show][az-aks-show] kümenizin yapılandırmasını görüntülemek için.
+Önceki komutlarda yük dengeleyiciniz için giden kuralı listelenir, örneğin:
 
 ```console
-$ az aks show --resource-group myResourceGroup --name myAKSCluster
-
-{
-  "aadProfile": null,
-  "addonProfiles": null,
-   ...
-   "networkProfile": {
-    "dnsServiceIp": "10.0.0.10",
-    "dockerBridgeCidr": "172.17.0.1/16",
-    "loadBalancerSku": "standard",
-    ...
+AllocatedOutboundPorts    EnableTcpReset    IdleTimeoutInMinutes    Name             Protocol    ProvisioningState    ResourceGroup
+------------------------  ----------------  ----------------------  ---------------  ----------  -------------------  -------------
+0                         True              30                      aksOutboundRule  All         Succeeded            MC_myResourceGroup_myAKSCluster_eastus  
 ```
 
-Doğrulama *loadBalancerSku* özellik gösterilmiştir olarak *standart*.
-
-## <a name="use-the-load-balancer"></a>Yük Dengeleyici kullanın
-
-Yük Dengeleyici kümenizde kullanmak için hizmet türü ile bir hizmet bildirimi oluşturma *LoadBalancer*. Çalışan yük dengeleyici göstermek için kümenizde çalıştırmak için örnek bir uygulama ile başka bir bildirim oluşturun. Bu örnek uygulama, yük dengeleyici üzerinden kullanıma sunulmuştur ve bir tarayıcı üzerinden görüntülenebilir.
-
-Adlı bir bildirim oluşturmak `sample.yaml` aşağıdaki örnekte gösterildiği gibi:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: azure-vote-back
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: azure-vote-back
-  template:
-    metadata:
-      labels:
-        app: azure-vote-back
-    spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
-      containers:
-      - name: azure-vote-back
-        image: redis
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 250m
-            memory: 256Mi
-        ports:
-        - containerPort: 6379
-          name: redis
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: azure-vote-back
-spec:
-  ports:
-  - port: 6379
-  selector:
-    app: azure-vote-back
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: azure-vote-front
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: azure-vote-front
-  template:
-    metadata:
-      labels:
-        app: azure-vote-front
-    spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
-      containers:
-      - name: azure-vote-front
-        image: microsoft/azure-vote-front:v1
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 250m
-            memory: 256Mi
-        ports:
-        - containerPort: 80
-        env:
-        - name: REDIS
-          value: "azure-vote-back"
-```
-
-Yukarıdaki bildirim iki dağıtım yapılandırır: *azure-vote-front* ve *azure vote arka*. Yapılandırmak için *azure-vote-front* yük dengeleyici kullanılarak açığa dağıtımı adlı bir bildirim oluşturmak `standard-lb.yaml` aşağıdaki örnekte gösterildiği gibi:
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: azure-vote-front
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-  selector:
-    app: azure-vote-front
-```
-
-Hizmet *azure-vote-front* kullanan *LoadBalancer* AKS kümenizde bağlanmak için yük dengeleyici yapılandırmak için tür *azure-vote-front* dağıtım.
-
-Örnek uygulama dağıtırsınız ve yük dengeleyici kullanarak [kubectl uygulamak][kubectl-apply] YAML bildirimlerinizi adını belirtin:
-
-```console
-kubectl apply -f sample.yaml
-kubectl apply -f standard-lb.yaml
-```
-
-*Standart* SKU yük dengeleyicide örnek uygulamayı kullanıma sunmak için artık yapılandırılır. Hizmet ayrıntılarını görüntülemek *azure-vote-front* kullanarak [kubectl alma][kubectl-get] yük dengeleyicinin genel IP görmek için. Yük dengeleyicinin genel IP adresi gösterilir *EXTERNAL-IP* sütun. Bir veya değiştirmek IP adresi için iki dakika sürebilir *\<bekleyen\>* gerçek dış IP adresine, aşağıdaki örnekte gösterildiği gibi:
-
-```
-$ kubectl get service azure-vote-front
-
-NAME                TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
-azure-vote-front    LoadBalancer   10.0.227.198   52.179.23.131   80:31201/TCP   16s
-```
-
-Bir tarayıcıda genel IP gidin ve örnek uygulamayı gördüğünüz doğrulayın. Yukarıdaki örnekte, genel IP olan `52.179.23.131`.
-
-![Azure Vote’a göz atma görüntüsü](media/container-service-kubernetes-walkthrough/azure-vote.png)
-
-> [!NOTE]
-> Ayrıca dahili olarak yük dengeleyici yapılandırmanız ve genel IP açığa çıkarmamak. Yük Dengeleyici dahili olarak yapılandırmak için Ekle `service.beta.kubernetes.io/azure-load-balancer-internal: "true"` için ek açıklama olarak *LoadBalancer* hizmeti. İç yük dengeleyici hakkında da gibi daha fazla ayrıntı bildirimi bir örnek yaml gördüğünüz [burada][internal-lb-yaml].
-
-## <a name="clean-up-the-standard-sku-load-balancer-configuration"></a>Standart SKU yük dengeleyici yapılandırmayı Temizle
-
-Örnek uygulama ve yük dengeleyici yapılandırmasını kaldırmak için kullanmak [kubectl Sil][kubectl-delete]:
-
-```console
-kubectl delete -f sample.yaml
-kubectl delete -f standard-lb.yaml
-```
+Örnek çıktıda *AllocatedOutboundPorts* 0 ' dır. *AllocatedOutboundPorts* DEĞERI, SNAT bağlantı noktası ayırmanın arka uç havuz boyutuna göre otomatik atamaya geri dönmesi anlamına gelir. Daha fazla bilgi için bkz. Azure 'da [giden kuralları][azure-lb-outbound-rules] ve [giden bağlantıları][azure-lb-outbound-connections] Load Balancer.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kubernetes hizmetleri hakkında daha fazla bilgi [Kubernetes Hizmetleri belgeleri][kubernetes-services].
+Kubernetes Services [belgelerindeki][kubernetes-services]Kubernetes hizmetleri hakkında daha fazla bilgi edinin.
 
 <!-- LINKS - External -->
 [kubectl]: https://kubernetes.io/docs/user-guide/kubectl/
@@ -346,9 +205,14 @@ Kubernetes hizmetleri hakkında daha fazla bilgi [Kubernetes Hizmetleri belgeler
 [az-feature-register]: /cli/azure/feature#az-feature-register
 [az-group-create]: /cli/azure/group#az-group-create
 [az-provider-register]: /cli/azure/provider#az-provider-register
+[az-network-lb-outbound-rule-list]: /cli/azure/network/lb/outbound-rule?view=azure-cli-latest#az-network-lb-outbound-rule-list
+[az-network-public-ip-show]: /cli/azure/network/public-ip?view=azure-cli-latest#az-network-public-ip-show
+[az-network-public-ip-prefix-show]: /cli/azure/network/public-ip/prefix?view=azure-cli-latest#az-network-public-ip-prefix-show
 [az-role-assignment-create]: /cli/azure/role/assignment#az-role-assignment-create
 [azure-lb]: ../load-balancer/load-balancer-overview.md
 [azure-lb-comparison]: ../load-balancer/load-balancer-overview.md#skus
+[azure-lb-outbound-rules]: ../load-balancer/load-balancer-outbound-rules-overview.md#snatports
+[azure-lb-outbound-connections]: ../load-balancer/load-balancer-outbound-connections.md#snat
 [install-azure-cli]: /cli/azure/install-azure-cli
 [internal-lb-yaml]: internal-lb.md#create-an-internal-load-balancer
 [kubernetes-concepts]: concepts-clusters-workloads.md

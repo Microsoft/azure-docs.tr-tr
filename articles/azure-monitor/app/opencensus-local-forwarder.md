@@ -1,88 +1,84 @@
 ---
-title: Azure Application Insights OpenCensus dağıtılmış izleme yerel ileticisi'ni (Önizleme) | Microsoft docs
-description: Dağıtılmış OpenCensus izlemeleri ve yayılma Python ve Go gibi diller için Azure Application Insights ilet
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights OpenCensus dağıtılmış izleme yerel ileticisi (Önizleme) | Microsoft docs
+description: Python ve Azure 'da bulunan dillerdeki dağıtılmış izlemeleri ve yayılmaları iletme ve Azure 'a git Application Insights
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: mrbullwinkle
+ms.author: mbullwin
 ms.date: 09/18/2018
 ms.reviewer: nimolnar
-ms.author: mbullwin
-ms.openlocfilehash: a7efe663a75fa29a31e7157c5eab24c2973a3758
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b0d0bc4d711b05dd2206b7437f1f4c7b3444a0c6
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60699345"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72819207"
 ---
-# <a name="local-forwarder-preview"></a>Yerel ileticisi'ni (Önizleme)
+# <a name="local-forwarder-preview"></a>Yerel iletici (Önizleme)
 
-Yerel ileticisi olan Application Insights tarafından toplanan bir aracı veya [OpenCensus](https://opencensus.io/) çeşitli SDK'lar alınan telemetri ve uygulama anlayışları'na yönlendirir. Bu, Windows ve Linux altında çalıştırma yeteneğine sahiptir. Ayrıca macOS altında çalıştırmak mümkün olabilir, ancak resmi olarak şu anda desteklenmiyor.
+Yerel iletici, çeşitli SDK 'lardan Application Insights veya [Opencensus](https://opencensus.io/) telemetrisini toplayan ve Application Insights yönlendiren bir aracıdır. Windows ve Linux altında çalıştırma yeteneğine sahiptir. MacOS altında de çalıştırabilirsiniz, ancak şu anda resmi olarak desteklenmez.
 
-## <a name="running-local-forwarder"></a>Yerel ileticisi çalışıyor
+## <a name="running-local-forwarder"></a>Yerel iletici çalıştırılıyor
 
-Yerel ileticinin olduğu bir [GitHub üzerinde açık kaynaklı proje](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/releases). Birden çok platformda yerel ileticisi'ni çalıştırmak için yol çeşitli vardır.
+Yerel iletici [GitHub üzerinde açık kaynaklı bir projem](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/releases). Birden çok platformda yerel iletici çalıştırmak için çeşitli yollar vardır.
 
 ### <a name="windows"></a>Windows
 
 #### <a name="windows-service"></a>Windows hizmeti
 
-Yerel ileticisi Windows altında çalışan en kolay yolu, bir Windows hizmeti olarak yükleyerek ' dir. Sürüm bir Windows hizmeti yürütülebilir dosyası ile birlikte gelir (*WindowsServiceHost/Microsoft.LocalForwarder.WindowsServiceHost.exe*), kolayca kaydedilebilir işletim sistemi.
+Windows altında yerel iletici çalıştırmanın en kolay yolu Windows hizmeti olarak yüklemek. Yayın, işletim sistemiyle kolayca kaydedilemeyen bir Windows hizmeti yürütülebilir dosyası (*windowsservicehost/Microsoft. LocalForwarder. WindowsServiceHost. exe*) ile birlikte gelir.
 
 > [!NOTE]
-> Yerel ileticisi hizmetinin en az .NET Framework 4.7 gerektirir. Hizmet .NET Framework 4.7 yoksa yükleme, ancak başlatılamıyor. .NET Framework'ün en son sürümüne erişim sağlamak **[.NET Framework Yükleme sayfasını ziyaret edin](
+> Yerel iletici hizmeti en az .NET Framework 4,7 gerektirir. .NET Framework 4,7 yoksa hizmet yüklenir, ancak başlatılmaz. .NET Framework 'nin son sürümüne erişmek için **[.NET Framework indirme sayfasını ziyaret edin](
 https://www.microsoft.com/net/download/dotnet-framework-runtime/net472?utm_source=getdotnet&utm_medium=referral)** .
 
-1. LF indirin. WindowsServiceHost.zip dosyasından [yerel ileticisi sürüm sayfası](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/releases) GitHub üzerinde.
+1. LF 'yi indirin. GitHub 'daki [Yerel iletici yayın sayfasından](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/releases) windowsservicehost. zip dosyası.
 
-    ![Yerel ileticisi yayın indirme sayfasının ekran görüntüsü](./media/opencensus-local-forwarder/001-local-forwarder-windows-service-host-zip.png)
+    ![Yerel iletici yayın indirme sayfasının ekran görüntüsü](./media/opencensus-local-forwarder/001-local-forwarder-windows-service-host-zip.png)
 
-2. Tanıtım kolaylığı için bu örnekte, biz yalnızca yolun .zip dosyasına ayıklayacaktır `C:\LF-WindowsServiceHost`.
+2. Bu örnekte, tanıtım kolaylığı için, yalnızca. zip dosyasını `C:\LF-WindowsServiceHost`yola çıkaracağız.
 
-    Hizmet kaydı ve sistem önyüklemesi yönetici olarak komut satırından aşağıdaki komutu çalıştırın, başlayacak şekilde yapılandırmak için:
+    Hizmeti kaydetmek ve sistem önyüklemesi sırasında başlatılacak şekilde yapılandırmak için komut satırından yönetici olarak aşağıdakileri çalıştırın:
 
     ```
     sc create "Local Forwarder" binpath="C:\LF-WindowsServiceHost\Microsoft.LocalForwarder.WindowsServiceHost.exe" start=auto
     ```
     
-    Bir yanıtı almanız gerekir:
+    Şu yanıtı almalısınız:
     
     `[SC] CreateService SUCCESS`
     
-    Yeni hizmetinizi Hizmetleri GUI türü yoluyla incelemek için ``services.msc``
+    Yeni hizmetinizi hizmetler GUI türü aracılığıyla incelemek için ``services.msc``
         
      ![Yerel iletici hizmetinin ekran görüntüsü](./media/opencensus-local-forwarder/002-services.png)
 
-3. **Sağ** seçin ve yeni yerel ileticisi **Başlat**. Hizmetiniz artık çalışır duruma girer.
+3. Yeni yerel ileticiye **sağ tıklayıp Başlat ' ı** seçin. Hizmetiniz artık çalışır duruma girer.
 
-4. Varsayılan olarak tüm kurtarma eylemleri olmadan hizmeti oluşturulur. Yapabilecekleriniz **sağ** seçip **özellikleri** > **kurtarma** otomatik yanıtlar bir hizmet hatası yapılandırmak için.
+4. Hizmet, varsayılan olarak herhangi bir kurtarma eylemi olmadan oluşturulur. Bir hizmet hatasına otomatik yanıtları yapılandırmak için sağ tıklayıp **özellikler** > **Kurtarma** **' yı** seçebilirsiniz.
 
-    Veya hatalar oluştuğunda, program aracılığıyla için otomatik kurtarma seçeneklerini ayarlamak tercih ederseniz kullanabilirsiniz:
+    Ya da hataların oluşma zaman programlama yoluyla otomatik kurtarma seçeneklerini ayarlamayı tercih ediyorsanız şunları kullanabilirsiniz:
 
     ```
     sc failure "Local Forwarder" reset= 432000 actions= restart/1000/restart/1000/restart/1000
     ```
 
-5. Aynı konumda, ``Microsoft.LocalForwarder.WindowsServiceHost.exe`` olan bu örnekte dosyası ``C:\LF-WindowsServiceHost`` adlı bir dosya var. ``LocalForwarder.config``. Bu, localforwader yapılandırmasını ayarlamak ve iletilen dağıtılmış izleme verilerinizi istediğiniz Application Insights kaynağına ait izleme anahtarını belirtmek izin veren bir xml tabanlı dosyasıdır. 
+5. ``Microsoft.LocalForwarder.WindowsServiceHost.exe`` dosyanız ile aynı konumda, bu örnekte ``LocalForwarder.config``adlı bir dosya ``C:\LF-WindowsServiceHost``. Bu, localforwader yapılandırmasını ayarlamanıza ve dağıtılmış izleme verilerinizin iletilmesini istediğiniz Application Insights kaynağının izleme anahtarını belirtmenize olanak tanıyan bir XML tabanlı dosyadır. 
 
-    Düzenleme sonra ``LocalForwarder.config`` izleme anahtarınızı eklemek için yeniden başlattığınızdan dosya **yerel iletici hizmeti** , değişikliklerin etkili olması için izin vermek için.
+    İzleme anahtarınızı eklemek için ``LocalForwarder.config`` dosyasını düzenledikten sonra, değişikliklerinizin etkili olması için **Yerel Iletici hizmetini** yeniden başlattığınızdan emin olun.
     
-6. İstenen ayarlarınızı yerinde olduğundan ve yerel ileticisi için izleme verilerini beklenen onay olarak dinlediğini doğrulamak için ``LocalForwarder.log`` dosya. Dosyanın sonuna görüntüye benzer bir sonuç görmeniz gerekir:
+6. İstediğiniz ayarların yerinde olduğunu ve yerel ileticinin izleme verilerini beklendiği şekilde dinlediğini onaylamak için ``LocalForwarder.log`` dosyasına bakın. Dosyanın en altında bulunan görüntüye benzer sonuçlar görmeniz gerekir:
 
-    ![Ekran görüntüsü, LocalForwarder.log dosyası](./media/opencensus-local-forwarder/003-log-file.png)
+    ![LocalForwarder. log dosyasının ekran görüntüsü](./media/opencensus-local-forwarder/003-log-file.png)
 
 #### <a name="console-application"></a>Konsol uygulaması
 
-Belirli kullanım örnekleri için yerel iletici bir konsol uygulaması olarak çalıştırmak yararlı olabilir. Sürüm, konsol konağı yürütülebilir aşağıdaki sürümleriyle birlikte gelir:
-* framework bağımlı .NET Core ikili */ConsoleHost/publish/Microsoft.LocalForwarder.ConsoleHost.dll*. Bu ikili çalışan bir .NET Core çalışma zamanı yüklü olmasını gerektirir; Bu indirme sayfasına başvuruda [sayfa](https://www.microsoft.com/net/download/dotnet-core/2.1) Ayrıntılar için.
+Bazı kullanım durumları için, yerel ileticinin bir konsol uygulaması olarak çalıştırılması yararlı olabilir. Yayın, konsol konağının aşağıdaki yürütülebilir sürümleriyle birlikte gelir:
+* çerçeveye bağımlı .NET Core ikili */ConsoleHost/Publish/Microsoft.LocalForwarder.ConsoleHost.dll*. Bu ikiliyi çalıştırmak için .NET Core çalışma zamanının yüklenmesi gerekir; Ayrıntılar için bu indirme [sayfasına](https://www.microsoft.com/net/download/dotnet-core/2.1) bakın.
   ```batchfile
   E:\uncdrop\ConsoleHost\publish>dotnet Microsoft.LocalForwarder.ConsoleHost.dll
   ```
-* ikili dosyaları x86 ve x64 platformları için kendi içinde .NET Core kümesi. Bu işlem, çalıştırmak için .NET Core çalışma zamanı gerektirmez. */ConsoleHost/win-x86/publish/Microsoft.LocalForwarder.ConsoleHost.exe*, */ConsoleHost/win-x64/publish/Microsoft.LocalForwarder.ConsoleHost.exe*.
+* x86 ve x64 platformları için kendi kendine dahil edilen bir .NET Core ikili kümesi. Bunlar .NET Core çalışma zamanının çalıştırılmasını gerektirmez. */ConsoleHost/Win-x86/Publish/Microsoft.LocalForwarder.ConsoleHost.exe*, */ConsoleHost/Win-x64/Publish/Microsoft.LocalForwarder.ConsoleHost.exe*.
   ```batchfile
   E:\uncdrop\ConsoleHost\win-x86\publish>Microsoft.LocalForwarder.ConsoleHost.exe
   E:\uncdrop\ConsoleHost\win-x64\publish>Microsoft.LocalForwarder.ConsoleHost.exe
@@ -90,26 +86,26 @@ Belirli kullanım örnekleri için yerel iletici bir konsol uygulaması olarak �
 
 ### <a name="linux"></a>Linux
 
-Windows gibi yayın konsol konağı yürütülebilir aşağıdaki sürümleriyle birlikte:
-* framework bağımlı .NET Core ikili */ConsoleHost/publish/Microsoft.LocalForwarder.ConsoleHost.dll*. Bu ikili çalışan bir .NET Core çalışma zamanı yüklü olmasını gerektirir; Bu indirme sayfasına başvuruda [sayfa](https://www.microsoft.com/net/download/dotnet-core/2.1) Ayrıntılar için.
+Windows 'da olduğu gibi, sürüm konsol konağının aşağıdaki yürütülebilir sürümleriyle birlikte gelir:
+* çerçeveye bağımlı .NET Core ikili */ConsoleHost/Publish/Microsoft.LocalForwarder.ConsoleHost.dll*. Bu ikiliyi çalıştırmak için .NET Core çalışma zamanının yüklenmesi gerekir; Ayrıntılar için bu indirme [sayfasına](https://www.microsoft.com/net/download/dotnet-core/2.1) bakın.
 
 ```batchfile
 dotnet Microsoft.LocalForwarder.ConsoleHost.dll
 ```
 
-* linux-64 ikili dosyalarını kendi başına bir .NET Core kümesi. Bunu çalıştırmak için .NET Core çalışma zamanı gerektirmez. */ConsoleHost/linux-x64/publish/Microsoft.LocalForwarder.ConsoleHost*.
+* Linux-64 için kendi kendine dahil edilen bir .NET Core ikili kümesi. Bu bir, .NET Core çalışma zamanının çalıştırılmasını gerektirmez. */ConsoleHost/Linux-x64/Publish/Microsoft.LocalForwarder.ConsoleHost*.
 
 ```batchfile
 user@machine:~/ConsoleHost/linux-x64/publish$ sudo chmod +x Microsoft.LocalForwarder.ConsoleHost
 user@machine:~/ConsoleHost/linux-x64/publish$ ./Microsoft.LocalForwarder.ConsoleHost
 ```
 
-Çok sayıda Linux kullanıcıları yerel iletici bir daemon çalıştırmak isteyebilirsiniz. Linux sistemleri Upstart, sysv veya systemd gibi hizmet yönetimi çözümleri çeşitli gelir. İnovasyonunuz ne olursa olsun, belirli bir sürümüdür, onu yerel ileticisi senaryonuz için en uygun bir şekilde çalıştırmak için kullanabilirsiniz.
+Birçok Linux kullanıcısı yerel ileticiyi bir daemon olarak çalıştırmak isteyeceksiniz. Linux sistemleri, hizmet yönetimi için Upstart, SYSV veya systemd gibi çeşitli çözümlerle gelir. Belirli sürümünüz ne olursa olsun, bunu senaryonuz için en uygun şekilde yerel iletici çalıştırmak için kullanabilirsiniz.
 
-Örneğin, bir arka plan programı hizmeti systemd kullanarak oluşturalım. Framework bağımlı sürümü kullanacağız, ancak aynı de kendi içinde bir yapılabilir.
+Örnek olarak, systemd kullanarak bir Daemon hizmeti oluşturalım. Çerçeveye bağımlı sürümü kullanacağız, ancak aynı zamanda bir kendi içinde de aynı şekilde yapılabilir.
 
-* adlı aşağıdaki hizmet dosyası oluşturma *localforwarder.service* ve içine yerleştirileceği */lib/systemd/system*.
-Bu örnek kullanıcı adınızdır SAMPLE_USER ve yerel ileticisi framework bağımlı ikili dosyaları kopyaladıktan varsayılır (gelen */ConsoleHost/yayımlama*) için */home/SAMPLE_USER/LOCALFORWARDER_DIR*.
+* *localforwarder. Service* adlı aşağıdaki hizmet dosyasını oluşturun ve */lib/systemd/System*dizinine yerleştirin.
+Bu örnek, Kullanıcı adınızın SAMPLE_USER olduğunu varsayar ve yerel iletici çerçevesine bağımlı ikili dosyaları ( */consolehost/Publish*) */Home/sample_user/localforwarder_dir*dizinine kopyaladınız.
 
 ```
 # localforwarder.service
@@ -134,27 +130,27 @@ ExecStart=/usr/bin/env dotnet /home/SAMPLE_USER/LOCALFORWARDER_DIR/Microsoft.Loc
 WantedBy=multi-user.target
 ```
 
-* Her önyükleme yerel ileticisi'ni başlatmak için systemd istemek için aşağıdaki komutu çalıştırın
+* Systemd 'yi her önyüklemede yerel ileticinin başlamasını istemek için aşağıdaki komutu çalıştırın
 
 ```
 systemctl enable localforwarder
 ```
 
-* Yerel ileticisi hemen başlatmak için systemd istemek için aşağıdaki komutu çalıştırın
+* Systemd 'nin yerel ileticinin hemen başlamasını istemek için aşağıdaki komutu çalıştırın
 
 ```
 systemctl start localforwarder
 ```
 
-* Hizmet inceleyerek izleyin * *.log* /home/SAMPLE_USER/LOCALFORWARDER_DIR dizindeki dosyaları.
+* /Home/SAMPLE_USER/LOCALFORWARDER_DIR dizinindeki * *. log* dosyalarını inceleyerek hizmeti izleyin.
 
 ### <a name="mac"></a>Mac
-Yerel ileticisi macOS ile çalışabilir, ancak bunu şu anda resmi olarak desteklenmez.
+Yerel iletici macOS ile çalışabilir, ancak şu anda resmi olarak desteklenmez.
 
 ### <a name="self-hosting"></a>Kendi kendine barındırma
-Yerel ileticisi de kendi içindeki .NET uygulama barındırmanıza olanak sağlayan bir standart .NET NuGet paketi olarak dağıtılır.
+Yerel iletici Ayrıca, kendi .NET uygulamanızda barındırmanıza olanak tanıyan bir .NET Standard NuGet paketi olarak dağıtılır.
 
-```C#
+```csharp
 using Library;
 ...
 Host host = new Host();
@@ -169,18 +165,18 @@ host.Stop();
 
 ## <a name="configuring-local-forwarder"></a>Yerel ileticisi yapılandırma
 
-* (Konsol konağına ya da Windows Hizmet Konağı) yerel ileticinin kendi konaklardan birine çalıştırırken bulursunuz **LocalForwarder.config** yanındaki ikili yerleştirilir.
-* Yerel ileticisi NuGet kendi kendine barındırma, aynı biçimde yapılandırmasını kodda sağlanmalıdır (kendi kendine barındırma bölümüne bakın). Yapılandırma sözdizimi için denetleme [LocalForwarder.config](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/blob/master/src/ConsoleHost/LocalForwarder.config) GitHub deposunda. 
+* Yerel ileticinin kendi konaklarından (konsol konağı veya Windows hizmet ana bilgisayarı) birini çalıştırırken, **Localforwarder. config** dosyasının yanına yerleştirilir.
+* Yerel ileticinin NuGet 'i kendi kendine barındırdığında, kodda aynı biçimdeki yapılandırmanın sağlanması gerekir (bkz. Self-hosting üzerinde bölüm). Yapılandırma sözdizimi için GitHub deposundaki [Localforwarder. config dosyasını](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/blob/master/src/ConsoleHost/LocalForwarder.config) denetleyin. 
 
 > [!NOTE]
-> Yapılandırma yayın sürümü farklı, böylece hangi sürümün kullanmakta olduğunuz dikkat edin.
+> Yapılandırma sürümden sürüme değişebilir, bu nedenle kullandığınız sürüme dikkat edin.
 
-## <a name="monitoring-local-forwarder"></a>Yerel ileticisi izleme
+## <a name="monitoring-local-forwarder"></a>Yerel ileticisini izleme
 
-İzlemeleri yazılır yanındaki yerel ileticisi çalışan yürütülebilir dosya sistemi (Ara * *.log* dosyaları). Adıyla bir dosya yerleştirebilirsiniz *NLog.config* yanındaki varsayılanın yerine kendi yapılandırmasını sağlamak için çalıştırılabilir. Bkz: [belgeleri](https://github.com/NLog/NLog/wiki/Configuration-file#configuration-file-format) biçimi açıklaması.
+İzlemeler, yerel iletici çalıştıran yürütülebilir dosyanın yanında dosya sistemine yazılır (* *. log* dosyalarını arayın). Varsayılan bir yapılandırma yerine kendi yapılandırmanızı sağlamak için, yürütülebilir dosyanın yanına *NLog. config* adlı bir dosya yerleştirebilirsiniz. Biçimin açıklaması için [belgelere](https://github.com/NLog/NLog/wiki/Configuration-file#configuration-file-format) bakın.
 
-Herhangi bir yapılandırma dosyası (varsayılan değer olan) sağlanıyorsa, yerel ileticisi bulunabilir varsayılan yapılandırmayı kullanacağı [burada](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/blob/master/src/Common/NLog.config).
+Hiçbir yapılandırma dosyası sağlanmazsa (varsayılan), yerel iletici [burada](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/blob/master/src/Common/NLog.config)bulunan varsayılan yapılandırmayı kullanır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Açık sayım](https://opencensus.io/)
+* [Census 'i açma](https://opencensus.io/)

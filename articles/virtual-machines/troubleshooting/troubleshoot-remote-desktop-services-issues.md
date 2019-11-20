@@ -1,120 +1,119 @@
 ---
-title: Uzak Masaüstü Hizmetleri değil bir Azure sanal makinesinde başlangıç | Microsoft Docs
-description: Bir sanal makineye bağlandığınızda, Uzak Masaüstü Hizmetleri ile ilgili sorunları gidermeyi öğrenin | Microsoft Docs
+title: Azure VM 'de Uzak Masaüstü Hizmetleri başlamıyor | Microsoft Docs
+description: Bir sanal makineye bağlandığınızda Uzak Masaüstü Hizmetleri sorunları nasıl giderebileceğinizi öğrenin | Microsoft Docs
 services: virtual-machines-windows
 documentationCenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/23/2018
 ms.author: genli
-ms.openlocfilehash: 5458a02c09a3600875c7300b27c5a87a735b2f1b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7949bedec2d304cd87fb512b44cd61d6f0894638
+ms.sourcegitcommit: aef6040b1321881a7eb21348b4fd5cd6a5a1e8d8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60318910"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72168946"
 ---
-# <a name="remote-desktop-services-isnt-starting-on-an-azure-vm"></a>Azure sanal makinesine Uzak Masaüstü Hizmetleri başlatma değil
+# <a name="remote-desktop-services-isnt-starting-on-an-azure-vm"></a>Uzak Masaüstü Hizmetleri bir Azure VM üzerinde başlamıyor
 
-Bu makalede, bir Azure sanal makinesine (VM) bağlanın ve Uzak Masaüstü Hizmetleri veya TermService, başlangıç değil ya da başlatılamıyor sorunlarını açıklar.
+Bu makalede, bir Azure sanal makinesine (VM) bağlandığınızda ve Uzak Masaüstü Hizmetleri ya da TermService, başlamadığında veya başlayamıyorsa sorunları gidermeye yönelik konular açıklanmaktadır.
 
 > [!NOTE]  
-> Azure, oluşturmak ve bu kaynaklarla çalışmak için iki farklı dağıtım modeli vardır: [Azure Resource Manager ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makalede Resource Manager dağıtım modeli kullanılarak açıklanır. Bu modeli Klasik dağıtım modeli yerine yeni dağıtımlar için kullanmanızı öneririz.
+> Azure 'da oluşturulacak ve kaynaklarla çalışmak için iki farklı dağıtım modeli vardır: [Azure Resource Manager ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makalede Kaynak Yöneticisi dağıtım modelinin kullanımı açıklanmaktadır. Bu modeli, klasik dağıtım modeli yerine yeni dağıtımlar için kullanmanızı öneririz.
 
-## <a name="symptoms"></a>Belirtiler
+## <a name="symptoms"></a>Belirtileri
 
-Bir VM'ye bağlanmaya çalıştığınızda, aşağıdaki senaryolarda karşılaşırsınız:
+Bir sanal makineye bağlanmaya çalıştığınızda, aşağıdaki senaryolarla karşılaşırsınız:
 
-- VM ekran görüntüsü, işletim sistemini tam olarak yüklenir ve kimlik bilgileri bekleniyor olduğunu gösterir.
+- VM ekran görüntüsü, işletim sisteminin tam olarak yüklendiğini ve kimlik bilgilerini beklediğini gösterir.
 
     ![VM durumunun ekran görüntüsü](./media/troubleshoot-remote-desktop-services-issues/login-page.png)
 
-- Uzaktan olay günlüklerini VM ile Olay Görüntüleyicisi'ni kullanarak görüntüleyin. Uzak Masaüstü Hizmetleri, TermService, başlangıç değil veya başlatılamıyor görürsünüz. Aşağıdaki günlük kaydı, bir örnek verilmiştir:
+- Olay Görüntüleyicisi kullanarak VM 'deki olay günlüklerini uzaktan görüntüleyebilirsiniz. Uzak Masaüstü Hizmetleri, TermService, başlatamaya da başlayamıyor olduğunu görürsünüz. Aşağıdaki günlük bir örnektir:
 
-    **Oturum adı**:      Sistem </br>
-    **Kaynak**:        Hizmet Denetimi Yöneticisi </br>
-    **Tarih**:          16/12/2017 11:19:36: 00</br>
-    **Olay Kimliği**:      7022</br>
-    **Görev kategorisi**: None</br>
-    **Düzey**:         Hata</br>
-    **Anahtar sözcükler**:      Klasik</br>
-    **Kullanıcı**:          Yok</br>
-    **Bilgisayar**: vm.contoso.com</br>
-    **Açıklama**: Uzak Masaüstü Hizmetleri hizmeti başlatılırken askıya alındı. 
+    **Günlük adı**: sistem </br>
+    **Kaynak**: hizmet denetimi Yöneticisi </br>
+    **Tarih**: 12/16/2017 11:19:36</br>
+    **Olay kimliği**: 7022</br>
+    **Görev kategorisi**: yok</br>
+    **Düzey**: hata</br>
+    **Anahtar sözcükler**: klasik</br>
+    **Kullanıcı**: yok</br>
+    **Bilgisayar**: VM.contoso.com</br>
+    **Açıklama**: Uzak Masaüstü Hizmetleri hizmeti başlatılırken askıda kaldı. 
 
-    Seri erişim Konsolu özelliği, aşağıdaki sorguyu çalıştırarak bu hataları aramak için de kullanabilirsiniz: 
+    Ayrıca, aşağıdaki sorguyu çalıştırarak bu hataları aramak için seri erişim konsolu özelliğini de kullanabilirsiniz: 
 
         wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Service Control Manager'] and EventID=7022 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more 
 
 ## <a name="cause"></a>Nedeni
  
-Uzak Masaüstü Hizmetleri sanal makinede çalışmadığından bu sorun oluşur. Nedeni aşağıdaki senaryolara bağlı olabilir: 
+Bu sorun, VM üzerinde Uzak Masaüstü Hizmetleri çalışmadığından oluşur. Nedeni aşağıdaki senaryolara bağlı olabilir: 
 
-- TermService'nin kümesine **devre dışı bırakılmış**. 
-- TermService'nin kilitlenme veya yanıt vermiyor. 
-- TermService hatalı bir yapılandırma için başlangıç nedeniyle değil.
+- TermService hizmeti **devre dışı**olarak ayarlandı. 
+- TermService hizmeti kilitlenme veya yanıt vermiyor. 
+- TermService, yanlış bir yapılandırma nedeniyle başlamıyor.
 
-## <a name="solution"></a>Çözüm
+## <a name="solution"></a>Çözümden
 
-Bu sorunu gidermek için seri Konsolu kullanın. Veya başka [çevrimdışı VM'yi onarın](#repair-the-vm-offline) sanal Makinenin işletim sistemi diskini bir kurtarma sanal Makinesine ekleyerek.
+Bu sorunu gidermek için seri konsolu 'nu kullanın. Ya da VM 'nin işletim sistemi diskini bir kurtarma sanal makinesine ekleyerek [VM 'yi çevrimdışı olarak onarın](#repair-the-vm-offline) .
 
-### <a name="use-serial-console"></a>Seri Konsolu
+### <a name="use-serial-console"></a>Seri konsol kullan
 
-1. Erişim [seri konsol](serial-console-windows.md) seçerek **destek ve sorun giderme** > **seri konsol**. VM'de özelliği etkinleştirilmişse, sanal makine başarıyla bağlanabilirsiniz.
+1. **Destek & sorun giderme** > **seri konsol**' nı seçerek [seri konsoluna](serial-console-windows.md) erişin. Özellik VM 'de etkinse VM 'yi başarıyla bağlayabilirsiniz.
 
-2. CMD örneği için yeni bir kanal oluşturun. Girin **CMD** kanalı başlatmak ve kanal adını almak için.
+2. Bir CMD örneği için yeni bir kanal oluşturun. Kanalı başlatmak ve kanal adını almak için **cmd** girin.
 
-3. CMD örneğini çalıştıran kanala geçin. Bu durumda, kanal 1 olmalıdır:
+3. CMD örneğini çalıştıran kanala geçin. Bu durumda, Kanal 1 olmalıdır:
 
    ```
    ch -si 1
    ```
 
-4. Seçin **Enter** yeniden ve sanal makine için geçerli bir kullanıcı adı ve parola, yerel veya etki alanı kimliği girin.
+4. Yeniden **gir** ' i SEÇIN ve VM için geçerli bir Kullanıcı adı ve parola, yerel veya etkı alanı kimliği girin.
 
-5. Sorgu TermService'nin durumu:
+5. TermService hizmetinin durumunu sorgulama:
 
    ```
    sc query TermService
    ```
 
-6. Hizmet durumunu gösteriyorsa **durduruldu**, hizmeti başlatmayı deneyin:
+6. Hizmet durumu **durduruldu**gösteriyorsa, hizmeti başlatmayı deneyin:
 
     ```
     sc start TermService
      ``` 
 
-7. Hizmet yeniden hizmeti başarıyla başlatıldığını emin olmak için sorgu:
+7. Hizmetin başarıyla başlatıldığından emin olmak için hizmeti tekrar sorgulayın:
 
    ```
    sc query TermService
    ```
-8. Aldığınız hatanın alan çözüm, başlatmak hizmet başarısız olursa izleyin:
+8. Hizmet başlatılamazsa, aldığınız hataya göre çözümü izleyin:
 
-    |  Hata |  Öneri |
+    |  Hata |  bulunmak |
     |---|---|
-    |5 - ERİŞİM REDDEDİLDİ |Bkz: [TermService'nin erişim reddedildi hatası nedeniyle durdurulduğunu](#termservice-service-is-stopped-because-of-an-access-denied-problem). |
-    |1053 - ERROR_SERVICE_REQUEST_TIMEOUT  |Bkz: [TermService'nin devre dışı](#termservice-service-is-disabled).  |  
-    |1058 - ERROR_SERVICE_DISABLED  |Bkz: [TermService'nin kilitlenmesine veya yanıt vermemeye başlıyor](#termservice-service-crashes-or-hangs).  |
-    |1059 - ERROR_CIRCULAR_DEPENDENCY |[Destek ekibiyle iletişime geçin](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için.|
-    |1067 - ERROR_PROCESS_ABORTED  |Bkz: [TermService'nin kilitlenmesine veya yanıt vermemeye başlıyor](#termservice-service-crashes-or-hangs).  |
-    |1068 - ERROR_SERVICE_DEPENDENCY_FAIL|[Destek ekibiyle iletişime geçin](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için.|
-    |1069 - ERROR_SERVICE_LOGON_FAILED  |Bkz: [TermService'nin oturum açma hatası nedeniyle başarısız oluyor](#termservice-service-fails-because-of-logon-failure) |
-    |1070 - ERROR_SERVICE_START_HANG   | Bkz: [TermService'nin kilitlenmesine veya yanıt vermemeye başlıyor](#termservice-service-crashes-or-hangs). |
-    |1077 - ERROR_SERVICE_NEVER_STARTED   | Bkz: [TermService'nin devre dışı](#termservice-service-is-disabled).  |
-    |1079 - ERROR_DIFERENCE_SERVICE_ACCOUNT   |[Destek ekibiyle iletişime geçin](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için. |
-    |1753   |[Destek ekibiyle iletişime geçin](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) sorununuzun hızlıca çözülebilmesi için.   |
+    |5-ERIŞIM ENGELLENDI |Bkz. [bir erişim reddedildi hatası nedeniyle TermService hizmeti durduruldu](#termservice-service-is-stopped-because-of-an-access-denied-problem). |
+    |1053-ERROR_SERVICE_REQUEST_TIMEOUT  |Bkz. [TermService hizmeti devre dışı](#termservice-service-is-disabled).  |  
+    |1058-ERROR_SERVICE_DISABLED  |Bkz. [TermService hizmeti kilitleniyor veya askıda kalıyor](#termservice-service-crashes-or-hangs).  |
+    |1059-ERROR_CIRCULAR_DEPENDENCY |Sorununuzu hızla çözülebilmenizi sağlamak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) .|
+    |1067-ERROR_PROCESS_ABORTED  |Bkz. [TermService hizmeti kilitleniyor veya askıda kalıyor](#termservice-service-crashes-or-hangs).  |
+    |1068-ERROR_SERVICE_DEPENDENCY_FAIL|Sorununuzu hızla çözülebilmenizi sağlamak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) .|
+    |1069-ERROR_SERVICE_LOGON_FAILED  |Bkz. [TermService hizmeti, oturum açma hatası nedeniyle başarısız oluyor](#termservice-service-fails-because-of-logon-failure) |
+    |1070-ERROR_SERVICE_START_HANG   | Bkz. [TermService hizmeti kilitleniyor veya askıda kalıyor](#termservice-service-crashes-or-hangs). |
+    |1077-ERROR_SERVICE_NEVER_STARTED   | Bkz. [TermService hizmeti devre dışı](#termservice-service-is-disabled).  |
+    |1079-ERROR_DIFERENCE_SERVICE_ACCOUNT   |Sorununuzu hızla çözülebilmenizi sağlamak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) . |
+    |1753   |Sorununuzu hızla çözülebilmenizi sağlamak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) .   |
     
-#### <a name="termservice-service-is-stopped-because-of-an-access-denied-problem"></a>Erişim reddedildi bir sorun nedeniyle TermService'nin durduruldu
+#### <a name="termservice-service-is-stopped-because-of-an-access-denied-problem"></a>TermService hizmeti, erişim engellendi sorunu nedeniyle durduruldu
 
-1. Bağlanma [seri konsol](serial-console-windows.md) ve PowerShell örneği açın.
-2. İşlem izleme aracı, aşağıdaki komutu çalıştırarak yükleyin:
+1. [Seri konsoluna](serial-console-windows.md) bağlanın ve bir PowerShell örneği açın.
+2. Aşağıdaki betiği çalıştırarak Işlem Izleyicisi aracını indirin:
 
    ```
    remove-module psreadline  
@@ -124,89 +123,89 @@ Bu sorunu gidermek için seri Konsolu kullanın. Veya başka [çevrimdışı VM'
    $wc.DownloadFile($source,$destination) 
    ```
 
-3. Şimdi bir **procmon** izleme:
+3. Şimdi bir **procmon** izlemesi başlatın:
 
    ```
    procmon /Quiet /Minimized /BackingFile c:\temp\ProcMonTrace.PML 
    ```
 
-4. Veren hizmete problemi **erişim reddedildi**: 
+4. **Erişim izni**veren hizmeti başlatarak sorunu yeniden üretin: 
 
    ```
    sc start TermService 
    ```
 
-   Başarısız olduğunda, işlem İzleyici Sonlandır:
+   Başarısız olduğunda, Işlem Izleyicisi izlemesini sonlandırın:
 
    ```   
    procmon /Terminate 
    ```
 
-5. Dosya toplama **c:\temp\ProcMonTrace.PML**:
+5. **C:\temp\procmontrace. PML**dosyasını toplayın:
 
-    1. [VM'ye veri diski](../windows/attach-managed-disk-portal.md
+    1. [Sanal makineye bir veri diski ekleyin](../windows/attach-managed-disk-portal.md
 ).
-    2. Seri konsol dosyayı yeni bir sürücüye kopyalayın kullanın. Örneğin, `copy C:\temp\ProcMonTrace.PML F:\`. Bu komutta, F bağlanan veri diskinin sürücü harfidir.
-    3. Veri sürücüsü ayırma ve bir çalışan işlem İzleyicisi ubstakke yüklü olan bir VM ekleyebilirsiniz.
+    2. Seri konsolu 'Nu kullanarak dosyayı yeni sürücüye kopyalayabilirsiniz. Örneğin, `copy C:\temp\ProcMonTrace.PML F:\`. Bu komutta, F, ekli veri diskinin sürücü harfidir.
+    3. Veri sürücüsünü ayırın ve Işlem Izleyicisi ubstakke yüklü olan çalışan bir sanal makineye ekleyin.
 
-6. Açık **ProcMonTrace.PML** işlem İzleyicisi'ni kullanarak VM çalışma. Ardından filtre **sonucudur erişim reddedildi**aşağıdaki ekran görüntüsünde gösterildiği gibi:
+6. Çalışan VM 'yi kullanarak **Procmontrace. PML** dosyasını açın. Ardından, aşağıdaki ekran görüntüsünde gösterildiği gibi, sonuca göre filtrele **ERIŞIMI reddedildi**:
 
-    ![İşlem İzleyicisi sonuca göre filtreleme](./media/troubleshoot-remote-desktop-services-issues/process-monitor-access-denined.png)
+    ![Işlem Izleyicisinde sonuca göre filtrele](./media/troubleshoot-remote-desktop-services-issues/process-monitor-access-denined.png)
 
  
-6. Kayıt defteri anahtarlarını, klasörlere veya çıktı dosyaları düzeltin. Genellikle, hizmette kullanılan oturum açma hesabı ACL bu nesnelere erişme izni olmadığından, bu soruna neden olur. Oturum açma hesabı için doğru ACL izni bilmek sağlıklı bir VM'de kontrol edebilirsiniz. 
+6. Kayıt defteri anahtarlarını, klasörlerini veya çıktıda bulunan dosyaları onarın. Genellikle bu sorun, hizmette kullanılan oturum açma hesabının bu nesnelere erişmek için ACL iznine sahip olmaması nedeniyle oluşur. Oturum açma hesabı için doğru ACL iznini bildirmek üzere sağlıklı bir VM 'yi kontrol edebilirsiniz. 
 
-#### <a name="termservice-service-is-disabled"></a>TermService'nin devre dışı bırakıldı
+#### <a name="termservice-service-is-disabled"></a>TermService hizmeti devre dışı
 
-1. Hizmet, varsayılan başlangıç değerine geri yükleme:
+1. Hizmeti varsayılan başlangıç değerine geri yükleyin:
 
    ```
    sc config TermService start= demand 
    ```
 
-2. Hizmetini başlatın:
+2. Hizmeti başlatın:
 
    ```
    sc start TermService
    ```
 
-3. Durumunu yeniden hizmetinin çalıştığından emin olmak için sorgu:
+3. Hizmetin çalıştığından emin olmak için durumunu yeniden sorgulayın:
 
    ```
    sc query TermService 
    ```
 
-4. Uzak Masaüstü kullanarak sanal Makineye bağlanmayı deneyin.
+4. Uzak Masaüstü kullanarak VM 'ye bağlanmayı deneyin.
 
-#### <a name="termservice-service-fails-because-of-logon-failure"></a>TermService'nin oturum açma hatası nedeniyle başarısız olur.
+#### <a name="termservice-service-fails-because-of-logon-failure"></a>TermService hizmeti, oturum açma hatası nedeniyle başarısız oluyor
 
-1. Bu hizmet başlangıç hesabını değiştirdiyseniz, bu sorun oluşur. Bu varsayılan değiştirildi: 
+1. Bu sorun, bu hizmetin başlangıç hesabı değiştiyse oluşur. Bunu varsayılana geri değiştirdi: 
 
         sc config TermService obj= 'NT Authority\NetworkService'
-2. Hizmetini başlatın:
+2. Hizmeti başlatın:
 
         sc start TermService
-3. Uzak Masaüstü kullanarak sanal Makineye bağlanmayı deneyin.
+3. Uzak Masaüstü kullanarak VM 'ye bağlanmayı deneyin.
 
-#### <a name="termservice-service-crashes-or-hangs"></a>TermService'nin kilitlenmesine veya yanıt vermemeye başlıyor
-1. Hizmet durumunu takılıyorsa **başlangıç** veya **durdurma**, sonra hizmeti durdurmayı deneyin: 
+#### <a name="termservice-service-crashes-or-hangs"></a>TermService hizmeti kilitleniyor veya askıda kalıyor
+1. Hizmet durumu **başlatılıyor** veya **durduruluyor**durumunda takıldığında hizmeti durdurmayı deneyin: 
 
         sc stop TermService
-2. Kendi 'svchost' kapsayıcı hizmeti ayırma:
+2. Hizmeti kendi ' Svchost ' kapsayıcısında yalıtın:
 
         sc config TermService type= own
-3. Hizmetini başlatın:
+3. Hizmeti başlatın:
 
         sc start TermService
-4. Hizmet yine de başlatmak, başarısız olduysa [desteğe](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
+4. Hizmet yine de başlamazsa, [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
 
-### <a name="repair-the-vm-offline"></a>VM'yi çevrimdışı onarın
+### <a name="repair-the-vm-offline"></a>VM 'yi çevrimdışı onarma
 
-#### <a name="attach-the-os-disk-to-a-recovery-vm"></a>İşletim sistemi diskini bir kurtarma VM'si ekleme
+#### <a name="attach-the-os-disk-to-a-recovery-vm"></a>İşletim sistemi diskini bir kurtarma VM 'sine iliştirme
 
-1. [İşletim sistemi diskini bir kurtarma VM'si ekleme](../windows/troubleshoot-recovery-disks-portal.md).
-2. Kurtarma VM'sini bir Uzak Masaüstü Bağlantısı'nı başlatın. Bağlı disk olarak işaretlenmiş olduğundan emin olun **çevrimiçi** Disk Yönetimi Konsolu'nda. Ekli işletim sistemi diski için atanan sürücü harfini unutmayın.
-3. Yükseltilmiş bir komut istemi örneği açın (**yönetici olarak çalıştır**). Ardından aşağıdaki betiği çalıştırın. Ekli işletim sistemi diski için atanan sürücü harfini olduğunu varsayıyoruz **F**. Vm'nizde uygun değerle değiştirin. 
+1. [İşletim sistemi diskini bir kurtarma sanal makinesine ekleyin](../windows/troubleshoot-recovery-disks-portal.md).
+2. Kurtarma VM 'sine bir Uzak Masaüstü bağlantısı başlatın. Disk Yönetimi konsolunda, eklenen diskin **çevrimiçi** olarak işaretlendiğinden emin olun. Bağlı işletim sistemi diskine atanan sürücü harfini unutmayın.
+3. Yükseltilmiş bir komut istemi örneği açın (**yönetici olarak çalıştır**). Ardından aşağıdaki betiği çalıştırın. Bağlı işletim sistemi diskine atanan sürücü harfinin **F**olduğunu varsayıyoruz. Bunu sanal makinenizde uygun değerle değiştirin. 
 
    ```
    reg load HKLM\BROKENSYSTEM F:\windows\system32\config\SYSTEM.hiv
@@ -220,8 +219,8 @@ Bu sorunu gidermek için seri Konsolu kullanın. Veya başka [çevrimdışı VM'
    reg add "HKLM\BROKENSYSTEM\ControlSet002\services\TermService" /v type /t REG_DWORD /d 16 /f
    ```
 
-4. [İşletim sistemi diskini ve VM yeniden](../windows/troubleshoot-recovery-disks-portal.md). Daha sonra sorun çözülmüş olup olmadığını denetleyin.
+4. [İşletim sistemi diskini ayırın ve VM 'yi yeniden oluşturun](../windows/troubleshoot-recovery-disks-portal.md). Sonra sorunun çözümlenip çözümlenmediğini denetleyin.
 
-## <a name="need-help-contact-support"></a>Yardım mı gerekiyor? Desteğe başvurun
+## <a name="need-help-contact-support"></a>Yardıma mı ihtiyacınız var? Desteğe başvurun
 
-Hala yardıma ihtiyacınız varsa [desteğe](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) çözümlenen sorununuzun için.
+Hala yardıma ihtiyacınız varsa, sorununuzu çözmeden yararlanmak için [desteğe başvurun](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) .

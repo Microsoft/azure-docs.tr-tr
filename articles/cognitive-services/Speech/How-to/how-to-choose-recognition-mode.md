@@ -1,36 +1,36 @@
 ---
-title: Bing konuşma tanıma modu seçme | Microsoft Docs
+title: Bing Konuşma tanıma modunu seçme | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Bing konuşma dilinde en iyi tanıma modu seçeceğinizi öğrenin.
+description: Bing Konuşma ' de en iyi tanıma modunu seçme.
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 99e69691d9904285ecff356523813b426c98fca2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1860acb571c837a5eb4c75be69a96d1b22682118
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515011"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70965686"
 ---
-# <a name="bing-speech-recognition-modes"></a>Bing konuşma tanıma modları
+# <a name="bing-speech-recognition-modes"></a>Bing Konuşma Tanıma modları
 
 [!INCLUDE [Deprecation note](../../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Bing konuşma metin API'lerine konuşma tanıma birden çok modlarını destekler. Uygulamanız için en iyi tanıma sonuçları üreten modunu seçin.
+Bing Konuşmayı Metne Dönüştürme API 'Leri birçok konuşma tanıma modunu destekler. Uygulamanız için en iyi tanıma sonuçlarını üreten modu seçin.
 
 | Mod | Açıklama |
 |---|---|
-| *etkileşimli* | Etkileşimli kullanıcı uygulama senaryoları için "Komut ve Denetim" tanıma. Kullanıcılar, komutlar bir uygulamaya yönelik kısa deyimlerin konuşun. |
-| *Yazdırma* | Sürekli tanıma dikte senaryolar için. Metni olarak görüntülenmesi uzun cümleler kullanıcılar konuşun. Kullanıcılar daha resmi bir konuşma tarzı benimseyin. |
-| *Konuşma* | İnsanlar arasında yapılan görüşmeler fotoğrafını için sürekli tanıma. Kullanıcılar, daha az resmi bir konuşma tarzı benimseyin ve uzun cümleleri kısa tümcecikleri arasında alternatif.
+| *etkileşimli* | Etkileşimli kullanıcı uygulaması senaryoları için "komut ve denetim" tanıma. Kullanıcılar bir uygulamaya komut olarak tasarlanan kısa tümceleri konuştur. |
+| *etme* | Dikte senaryoları için sürekli tanıma. Kullanıcılar metin olarak görüntülenen daha uzun cümleler konuşabilir. Kullanıcılar daha resmi bir konuşma stili benimseyin. |
+| *görül* | İnsanların arasındaki konuşma konuşmaları için sürekli tanıma. Kullanıcılar daha az resmi bir konuşma stili benimseir ve daha uzun cümleler ve daha kısa ifadeler arasında değişebilir.
 
 > [!NOTE]
-> Bu modu kullanırken geçerli [REST API'leri](../GetStarted/GetStartedREST.md). [İstemci kitaplıkları](../GetStarted/GetStartedClientLibraries.md) tanıma modunu belirtmek üzere farklı parametreler kullanın. Daha fazla bilgi için seçtiğiniz istemci kitaplığı bakın.
+> [REST API 'lerini](../GetStarted/GetStartedREST.md)kullandığınızda bu modlar geçerlidir. [İstemci kitaplıkları](../GetStarted/GetStartedClientLibraries.md) tanıma modunu belirtmek için farklı parametreler kullanır. Daha fazla bilgi için, seçtiğiniz istemci kitaplığına bakın.
 
-Daha fazla bilgi için [tanıma modları](../concepts.md#recognition-modes) sayfası.
+Daha fazla bilgi için bkz. [Tanıma modları](../concepts.md#recognition-modes) sayfası.

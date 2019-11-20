@@ -1,7 +1,7 @@
 ---
-title: Custom Decision Service'i bir uygulamadan - API çağırma
+title: Uygulamadan API çağırma-Özel Karar Alma Hizmeti
 titlesuffix: Azure Cognitive Services
-description: Bir akıllı telefon uygulaması özel karar alma hizmeti API'leri çağırmak nasıl.
+description: Özel Karar Alma Hizmeti API 'Lerini bir smartphone uygulamasından çağırma.
 services: cognitive-services
 author: slivkins
 manager: nitinme
@@ -10,31 +10,32 @@ ms.subservice: custom-decision-service
 ms.topic: conceptual
 ms.date: 05/10/2018
 ms.author: slivkins
-ms.openlocfilehash: 0e5c99aae61fb927ea7f101bab74d661a747f88b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ROBOTS: NOINDEX
+ms.openlocfilehash: 08fbc1716d402c83bc2c33be82cba143c1737a55
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60511559"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707248"
 ---
 # <a name="call-api-from-an-app"></a>Uygulamadan API çağrısı yapma
 
-Azure özel karar alma hizmeti API'lere giden çağrıların smartphone uygulamasından olun. Bu makalede, bazı temel seçeneklerle başlamak açıklanmaktadır.
+Bir smartphone uygulamasından Azure Özel Karar Alma Hizmeti API 'Lerine çağrılar yapın. Bu makalede, bazı temel seçeneklerle nasıl başlamak açıklanmaktadır.
 
-Mutlaka [uygulamanızı kaydetmeniz](custom-decision-service-get-started-register.md), ilk.
+Önce [uygulamanızı](custom-decision-service-get-started-register.md)kaydettiğinizden emin olun.
 
-Custom Decision Service için akıllı uygulamanızdan olun iki API çağrıları vardır: içeriğinizi ve bir ödül bildirmek için ödül API'sine yapılan bir çağrı kişilerinin sıralı bir listesini almak için sıralaması API'sine yapılan bir çağrı. Örnek çağrılarında işte [cURL](https://en.wikipedia.org/wiki/CURL).
+Akıllı telefonlardan Özel Karar Alma Hizmeti için oluşturduğunuz iki API çağrısı vardır: içeriğinizin sıralanmış bir listesini almak için derecelendirme API 'sine yapılan bir çağrı ve bir ödül bildirmek için bir Reward API çağrısı. Örnek çağrılar aşağıda [verilmiştir.](https://en.wikipedia.org/wiki/CURL)
 
-Daha fazla bilgi için bkz [API](custom-decision-service-api-reference.md).
+Daha fazla bilgi için bkz. başvuru [API 'si](custom-decision-service-api-reference.md).
 
-Derecelendirme API çağrısı ile başlayın. Dosya oluşturma `<request.json>`, hangi eylem kimliği olarak ayarlanmış Portalda girdiğiniz Atom akışı ya da bu kimliği karşılık gelen RSS adıdır:
+Derecelendirme API 'SI çağrısıyla başlayın. Eylem kümesi kimliği `<request.json>`olan dosyayı oluşturun. Bu KIMLIK, portalda girdiğiniz karşılık gelen RSS veya Atom akışın adıdır:
 
 ```json
 {"decisions":
      [{ "actionSets":[{"id":{"id":"<actionSetId>"}}] }]}
 ```
 
-Birçok eylemi kümeleri gibi belirtilebilir:
+Birçok eylem kümesi aşağıdaki şekilde belirtilebilir:
 
 ```json
 {"decisions":
@@ -42,13 +43,13 @@ Birçok eylemi kümeleri gibi belirtilebilir:
                      {"id":{"id":"<actionSetId2>"}}] }]}
 ```
 
-Bu JSON dosyası sıralaması isteğin bir parçası gönderilir:
+Bu JSON dosyası daha sonra derecelendirme isteğinin bir parçası olarak gönderilir:
 
 ```shell
 curl -d @<request.json> -X POST https://ds.microsoft.com/api/v2/<appId>/rank --header "Content-Type: application/json"
 ```
 
-Burada, `<appId>` uygulamanızın adını portalı üzerinde kayıtlı. Uygulamanızda oluşturulabilen içerik öğeleri kümesini almanız gerekir. Bir örnek dönüş şuna benzer:
+Burada, `<appId>` uygulamanızın portalda kayıtlı adı vardır. Uygulamanızda işleyebilmeniz için sıralı bir içerik öğeleri kümesi almalısınız. Örnek bir dönüş şöyle görünür:
 
 ```json
 [{ "ranking":[{"id":"actionId3"}, {"id":"actionId1"}, {"id":"actionId2"}],
@@ -59,15 +60,15 @@ Burada, `<appId>` uygulamanızın adını portalı üzerinde kayıtlı. Uygulama
                  {"id":"<actionSetId2>","lastRefresh":"2017-04-30T22:34:25.3401438Z"}]}]
 ```
 
-Dönüş ilk bölümünü sıralanan Eylemler, işlem kimliği tarafından belirtilen bir listesine sahiptir. Bir makale için bir URL işlem kimliğidir. Genel istek de benzersiz bir sahip `<eventId>`, sistem tarafından oluşturulmuş.
+Döndürün ilk bölümünde, eylem kimlikleri tarafından belirtilen sıralı eylemlerin bir listesi bulunur. Bir makale için eylem KIMLIĞI bir URL 'dir. Genel isteğin Ayrıca sistem tarafından oluşturulan benzersiz `<eventId>`bir de vardır.
 
-Daha sonra bu olaydan olan ilk içerik öğesi tıklatıldığında, gözlemlenen belirtebilirsiniz `<actionId3>`. Ardından bir ödül bu bildirebileceğiniz `<eventId>` ödül API aracılığıyla Custom Decision Service için başka bir istek gibi:
+Daha sonra, bu olaydaki ilk içerik öğesine tıkladıysanız, `<actionId3>`yani. Daha sonra, aşağıdaki `<eventId>` gibi başka bir istek ile, ödül API aracılığıyla özel karar alma hizmeti için bir ödül bildirebilirsiniz:
 
 ```shell
 curl -v https://ds.microsoft.com/api/v2/<appId>/reward/<eventId> -X POST
 ```
 
-Son olarak eylem Custom Decision Service tarafından değerlendirilmesi için (Eylemler) makale listesi döndüren API kümesini, vermeniz gerekir. Bir RSS akışı olarak bu API, burada gösterildiği şekilde uygulayın:
+Son olarak, Özel Karar Alma Hizmeti tarafından kabul edilecek makalelerin (Eylemler) listesini döndüren eylem kümesi API 'sini sağlamanız gerekir. Bu API 'yi bir RSS akışı olarak aşağıda gösterildiği gibi uygulayın:
 
 ```xml
 <rss version="2.0">
@@ -84,9 +85,9 @@ Son olarak eylem Custom Decision Service tarafından değerlendirilmesi için (E
 </rss>
 ```
 
-Burada, her üst düzey `<item>` öğesi bir makale açıklar. `<link>` Zorunludur ve bir eylem kimliği Custom Decision Service tarafından kullanılır. Belirtin `<date>` (standart bir biçimde RSS) 15'ten fazla makaleleri belirttiyseniz. En son 15 makaleleri kullanılır. `<title>` İsteğe bağlıdır ve makale için metin güvenlikle ilgili özellikler oluşturmak için kullanılır.
+Burada, her üst düzey `<item>` öğe bir makale açıklar. `<link>` Zorunludur ve özel karar alma hizmeti tarafından bir eylem kimliği olarak kullanılır. 15 `<date>` ' ten fazla makaleleriniz varsa (Standart bir RSS biçiminde) belirtin. En son 15 makale kullanılır. , `<title>` İsteğe bağlıdır ve makale için metinle ilgili özellikler oluşturmak için kullanılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Çalışmak bir [öğretici](custom-decision-service-tutorial-news.md) daha ayrıntılı bir örnek.
-* Başvuru başvurun [API](custom-decision-service-api-reference.md) sağlanan işlevselliği hakkında daha fazla bilgi için.
+* Daha ayrıntılı bir örnek için [öğreticide](custom-decision-service-tutorial-news.md) çalışın.
+* Belirtilen işlevsellik hakkında daha fazla bilgi edinmek için başvuru [API](custom-decision-service-api-reference.md) 'sine başvurun.

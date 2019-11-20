@@ -1,5 +1,5 @@
 ---
-title: Azure geliştirme alanları araçları yükseltme
+title: Azure Dev Spaces araçlarını yükseltme
 titleSuffix: Azure Dev Spaces
 services: azure-dev-spaces
 ms.service: azure-dev-spaces
@@ -9,25 +9,25 @@ ms.date: 07/03/2018
 ms.topic: conceptual
 description: Azure’da kapsayıcılar ve mikro hizmetlerle hızlı Kubernetes geliştirme
 keywords: Docker, Kubernetes, Azure, AKS, Azure Container Service, kapsayıcılar
-ms.openlocfilehash: 4e0a3c5aa849799872371ef1c5ac0867babffebb
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 24a66c5218bb75672ae784b19213116efdb83690
+ms.sourcegitcommit: 2aefdf92db8950ff02c94d8b0535bf4096021b11
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60686434"
+ms.lasthandoff: 09/03/2019
+ms.locfileid: "70232453"
 ---
-# <a name="how-to-upgrade-azure-dev-spaces-tools"></a>Azure geliştirme alanları araçları yükseltme
+# <a name="how-to-upgrade-azure-dev-spaces-tools"></a>Azure Dev Spaces araçlarını yükseltme
 
-Varsa yeni bir yayın ve Azure Dev alanları zaten kullanıyorsanız, Azure geliştirme alanları istemci araçları yükseltmeniz gerekebilir.
+Yeni bir sürüm varsa ve zaten Azure Dev Spaces kullanıyorsanız, Azure Dev Spaces istemci araçlarınızı yükseltmeniz gerekebilir.
 
-## <a name="update-the-azure-cli"></a>Azure CLI'yı güncelleştirme
+## <a name="update-the-azure-cli"></a>Azure CLı 'yı güncelleştirme
 
-En son Azure CLI'yı güncelleştirdiğinizde, ayrıca geliştirme alanları CLI uzantısını en son sürümünü alın.
+En son Azure CLı 'yı güncelleştirdiğinizde, dev Spaces CLı uzantısının en son sürümünü de alırsınız.
 
-Önceki sürümü kaldırmalısınız, yalnızca uygun yükleme bulun gerekmeyen [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest).
+Önceki sürümü kaldırmanız gerekmez, yalnızca [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest)'de uygun indirmeyi bulabilirsiniz.
 
 
-## <a name="update-the-dev-spaces-cli-extension-and-command-line-tools"></a>Komut satırı araçları ve geliştirme alanları CLI uzantısını güncelleştirin
+## <a name="update-the-dev-spaces-cli-extension-and-command-line-tools"></a>Geliştirme alanları CLı uzantısını ve komut satırı araçlarını güncelleştirme
 
 Şu komutu çalıştırın:
 
@@ -35,19 +35,16 @@ En son Azure CLI'yı güncelleştirdiğinizde, ayrıca geliştirme alanları CLI
 az aks use-dev-spaces -n <your-aks-cluster> -g <your-aks-cluster-resource-group> --update
 ```
 
-## <a name="update-the-vs-code-extension"></a>VS Code uzantısını güncelleştirin
+## <a name="update-the-vs-code-extension"></a>VS Code uzantısını güncelleştirme
 
-Yüklendikten sonra uzantı otomatik olarak güncelleştirir. Yeni özellikleri kullanmak için uzantı yeniden yüklemeniz gerekebilir. VS Code'da açın **uzantıları** bölmesinde seçin **Azure geliştirme alanları** uzantıları ve **yeniden**.
+Yüklendikten sonra uzantı otomatik olarak güncelleştirilir. Yeni özellikleri kullanmak için uzantıyı yeniden yüklemeniz gerekebilir. VS Code, **Uzantılar** bölmesini açın, **Azure dev Spaces** uzantıları ' nı seçin ve **yeniden yükle**' yi seçin.
 
 ## <a name="update-the-visual-studio-extension"></a>Visual Studio uzantısını güncelleştirme
 
-Azure geliştirme alanları içeren bir Kubernetes için Visual Studio Araçları için kullanılabilir bir güncelleştirme olduğunda gibi diğer uzantılar ve Güncelleştirmeler ile Visual Studio size bildirecektir. Üstte bir bayrak simgesine aramak için ekranın sağ.
+Diğer uzantılar ve güncelleştirmelerle benzer şekilde, Visual Studio, Azure Dev Spaces de içeren Kubernetes için Visual Studio Araçları için kullanılabilir bir güncelleştirme olduğunda size bildirimde bulunur. Ekranın sağ üst kısmındaki bayrak simgesine bakın.
 
-Visual Studio Araçları'nı güncelleştirmek için seçin **Araçlar > Uzantılar ve güncelleştirmeler** menü öğesi ve sol tarafta, seçim **güncelleştirmeleri**. Bulma **Kubernetes için Visual Studio Araçları** ve **güncelleştirme** düğmesi.
+Visual Studio 'daki araçları güncelleştirmek için **araçlar > Uzantılar ve güncelleştirmeler** menü öğesini seçin ve sol tarafta **güncelleştirmeler**' i seçin. **Kubernetes için Visual Studio Araçları** bulun ve **Güncelleştir** düğmesini seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yeni bir küme oluşturarak yeni araçlarını gözden test edin. Hızlı başlangıçlar ve öğreticilerle en deneyin [Azure geliştirme alanları](/azure/dev-spaces).
-
-> [!WARNING]
-> Tüm en son sürümü kullandığınızdan emin olmak için Azure dağıtımlarınızı oluşturmak için yeni bir küme araçları yükseltme yaptıktan sonra var olan kümelerinde azure geliştirme alanları hemen, yama değil.
+Yeni bir küme oluşturarak yeni araçları test edin. [Azure dev Spaces](/azure/dev-spaces)' de hızlı başlangıç ve öğreticiler deneyin.

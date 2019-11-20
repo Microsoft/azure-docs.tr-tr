@@ -1,6 +1,6 @@
 ---
-title: -Azure HDInsight Azure CLI kullanarak Apache Hadoop kümeleri oluşturma
-description: Platformlar arası Azure CLI kullanarak HDInsight kümeleri oluşturmayı öğrenin.
+title: Azure CLı kullanarak Apache Hadoop kümeleri oluşturma-Azure HDInsight
+description: Platformlar arası Azure CLı kullanarak Azure HDInsight kümeleri oluşturmayı öğrenin.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,18 +8,18 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 05/10/2019
 ms.author: hrasheed
-ms.openlocfilehash: 0a278cd98b0dd6c6d8f0fe9bfee81e5bafd4f543
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 09696f5a3df7cc4170c57b862a11bbd5a82e2bc9
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65597692"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494795"
 ---
-# <a name="create-hdinsight-clusters-using-the-azure-cli"></a>Azure CLI kullanarak HDInsight kümeleri oluşturma
+# <a name="create-hdinsight-clusters-using-the-azure-cli"></a>Azure CLı kullanarak HDInsight kümeleri oluşturma
 
 [!INCLUDE [selector](../../includes/hdinsight-create-linux-cluster-selector.md)]
 
-Azure CLI kullanarak bir HDInsight 3.6 kümesi oluşturarak bu belgeyi gözden geçirme adımları.
+Bu belgedeki adımlar, Azure CLı kullanarak HDInsight 3,6 kümesi oluşturma konusunda yol gösterir.
 
 [!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
@@ -27,13 +27,13 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli) adımlar.
+Azure CLı. Azure CLı 'yı yüklemediyseniz, adımlar için bkz. [Azure CLI 'Yi yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli) .
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
 ## <a name="create-a-cluster"></a>Küme oluşturma
 
-1. Azure aboneliğinizde oturum açın. Azure Cloud Shell'i kullanmak sonra seçmeniz yeterlidir planlıyorsanız **deneyin** kod bloğunun sağ üst köşedeki. Aksi takdirde, aşağıdaki komutu girin:
+1. Azure aboneliğinizde oturum açın. Azure Cloud Shell kullanmayı planlıyorsanız, yalnızca kod bloğunun sağ üst köşesinde **deneyin** seçeneğini belirleyin. Aksi takdirde, aşağıdaki komutu girin:
 
     ```azurecli-interactive
     az login
@@ -42,16 +42,16 @@ Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://
     # az account set --subscription "SUBSCRIPTIONID"
     ```
 
-2. Ortam değişkenlerini ayarlayın. Bu makalede değişkenlerini üzerinde Bash temel alır. Küçük farklılıklar diğer ortamları için gereklidir. Bkz: [az hdınsight oluşturma](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) olası parametre küme oluşturma için tam bir listesi için.
+2. Ortam değişkenlerini ayarlayın. Bu makaledeki değişkenlerin kullanımı Bash 'i temel alır. Diğer ortamlar için hafif Çeşitlemeler gerekecektir. Küme oluşturma için olası parametrelerin tam bir listesi için bkz. [az-HDInsight-Create](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) .
 
     |Parametre | Açıklama |
     |---|---|
-    |`--size`| Kümedeki çalışan düğümü sayısı. Bu makalede değişkenini kullanır `clusterSizeInNodes` geçirilen değeri olarak `--size`. |
-    |`--version`| HDInsight küme sürümü. Bu makalede değişkenini kullanır `clusterVersion` geçirilen değeri olarak `--version`. Ayrıca bkz: [HDInsight sürümleri desteklenen](./hdinsight-component-versioning.md#supported-hdinsight-versions).|
-    |`--type`| HDInsight kümesinin gibi yazın: hadoop, interactivehive, hbase, kafka, storm, spark, rserver, mlservices.  Bu makalede değişkenini kullanır `clusterType` geçirilen değeri olarak `--type`. Ayrıca bkz: [Küme türleri ve yapılandırma](./hdinsight-hadoop-provision-linux-clusters.md#cluster-types).|
-    |`--component-version`|Boşlukla ayrılmış sürümlerinde çeşitli Hadoop bileşenleri, sürümleri ' bileşen sürümü =' biçimi. Bu makalede değişkenini kullanır `componentVersion` geçirilen değeri olarak `--component-version`. Ayrıca bkz: [Hadoop bileşenleri](./hdinsight-component-versioning.md#apache-hadoop-components-available-with-different-hdinsight-versions).|
+    |`--size`| Kümedeki çalışan düğümlerinin sayısı. Bu makale, `--size`aktarılan değer olarak `clusterSizeInNodes` değişkenini kullanır. |
+    |`--version`| HDInsight kümesi sürümü. Bu makale, `--version`aktarılan değer olarak `clusterVersion` değişkenini kullanır. Ayrıca bkz: [desteklenen HDInsight sürümleri](./hdinsight-component-versioning.md#supported-hdinsight-versions).|
+    |`--type`| HDInsight kümesinin türü, örneğin: Hadoop, ınteractivehive, HBase, Kafka, fırtınası, Spark, Rserver, mlservices.  Bu makale, `--type`aktarılan değer olarak `clusterType` değişkenini kullanır. Ayrıca bkz: [küme türleri ve yapılandırması](./hdinsight-hadoop-provision-linux-clusters.md#cluster-types).|
+    |`--component-version`|' Component = Version ' biçimindeki, boşlukla ayrılmış sürümlerde çeşitli Hadoop bileşenlerinin sürümleri. Bu makale, `--component-version`aktarılan değer olarak `componentVersion` değişkenini kullanır. Ayrıca bkz: [Hadoop bileşenleri](./hdinsight-component-versioning.md#apache-hadoop-components-available-with-different-hdinsight-versions).|
 
-    Değiştirin `RESOURCEGROUPNAME`, `LOCATION`, `CLUSTERNAME`, `STORAGEACCOUNTNAME`, ve `PASSWORD` istenen değerleri. İstediğiniz gibi diğer değişkenlerin değerlerini değiştirin. Ardından, CLI komutları girin.
+    `RESOURCEGROUPNAME`, `LOCATION`, `CLUSTERNAME`, `STORAGEACCOUNTNAME`ve `PASSWORD` istenen değerlerle değiştirin. Diğer değişkenlerin değerlerini istediğiniz şekilde değiştirin. Ardından CLı komutlarını girin.
 
     ```azurecli-interactive
     export resourceGroupName=RESOURCEGROUPNAME
@@ -68,7 +68,7 @@ Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://
     export componentVersion=Hadoop=2.7
     ```
 
-3. [Kaynak grubunu oluşturma](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-create) aşağıdaki komutu girerek:
+3. Aşağıdaki komutu girerek [kaynak grubunu oluşturun](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-create) :
 
     ```azurecli-interactive
     az group create \
@@ -76,9 +76,9 @@ Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://
         --name $resourceGroupName
     ```
 
-    Geçerli konumlar listesi için kullanmak `az account list-locations` komutunu ve ardından konumlardan birini kullanın `name` değeri.
+    Geçerli konumların bir listesi için `az account list-locations` komutunu kullanın ve ardından `name` değerindeki konumlardan birini kullanın.
 
-4. [Bir Azure depolama hesabı oluşturma](https://docs.microsoft.com/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create) aşağıdaki komutu girerek:
+4. Aşağıdaki komutu girerek [bir Azure depolama hesabı oluşturun](https://docs.microsoft.com/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create) :
 
     ```azurecli-interactive
     # Note: kind BlobStorage is not available as the default storage account.
@@ -91,7 +91,7 @@ Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://
         --sku Standard_LRS
     ```
 
-5. [Azure depolama hesabından birincil anahtarı ayıklamak](https://docs.microsoft.com/cli/azure/storage/account/keys?view=azure-cli-latest#az-storage-account-keys-list) ve aşağıdaki komutu girerek bir değişkende saklayın:
+5. [Azure Storage hesabından birincil anahtarı ayıklayın](https://docs.microsoft.com/cli/azure/storage/account/keys?view=azure-cli-latest#az-storage-account-keys-list) ve aşağıdaki komutu girerek bir değişkende saklayın:
 
     ```azurecli-interactive
     export AZURE_STORAGE_KEY=$(az storage account keys list \
@@ -100,7 +100,7 @@ Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://
         --query [0].value -o tsv)
     ```
 
-6. [Bir Azure depolama kapsayıcısı oluşturma](https://docs.microsoft.com/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create) aşağıdaki komutu girerek:
+6. Aşağıdaki komutu girerek [bir Azure depolama kapsayıcısı oluşturun](https://docs.microsoft.com/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create) :
 
     ```azurecli-interactive
     az storage container create \
@@ -109,7 +109,7 @@ Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://
         --account-name $AZURE_STORAGE_ACCOUNT
     ```
 
-7. [HDInsight kümesi oluşturma](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) aşağıdaki komutu girerek:
+7. Aşağıdaki komutu girerek [HDInsight kümesini oluşturun](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) :
 
     ```azurecli-interactive
     az hdinsight create \
@@ -130,15 +130,15 @@ Azure CLI. Azure CLI'yi yüklemediyseniz, bkz. [Azure CLI'yı yükleme](https://
     ```
 
     > [!IMPORTANT]  
-    > HDInsight kümeleri, çeşitli türleri, küme için ayarlanan teknoloji ve iş yükü karşılık gelen. Bir küme üzerinde Storm ve HBase gibi birden birleştiren bir küme oluşturmak için desteklenen bir yöntem yoktur.
+    > HDInsight kümeleri, kümenin ayarlanmış olduğu iş yüküne veya teknolojiye karşılık gelen çeşitli türlerde gelir. Bir kümede fırtınası ve HBase gibi birden çok türü birleştiren bir küme oluşturmak için desteklenen bir yöntem yoktur.
 
-    Bu, küme oluşturma işleminin tamamlanması birkaç dakika sürebilir. Genellikle yaklaşık 15.
+    Küme oluşturma işleminin tamamlanması birkaç dakika sürebilir. Genellikle 15 etrafında.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
 Makaleyi tamamladıktan sonra kümeyi silmek isteyebilirsiniz. HDInsight ile, verileriniz Azure Storage’da depolanır, böylece kullanılmadığında bir kümeyi güvenle silebilirsiniz. Ayrıca, kullanılmıyorken dahi HDInsight kümesi için sizden ücret kesilir. Küme ücretleri depolama ücretlerinin birkaç katı olduğundan, kullanılmadığında kümelerin silinmesi mantıklı olandır.
 
-Tüm veya bazı kaynakları kaldırmak için aşağıdaki komutları girin:
+Kaynakları kaldırmak için aşağıdaki komutlardan tümünü veya bazılarını girin:
 
 ```azurecli-interactive
 # Remove cluster
@@ -167,21 +167,21 @@ HDInsight kümeleri oluştururken sorun yaşarsanız bkz. [erişim denetimi gere
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure CLI kullanarak bir HDInsight kümesi başarıyla oluşturuldu, kümenizi ile çalışma hakkında bilgi almak için aşağıdakileri kullanın:
+Azure CLı kullanarak bir HDInsight kümesini başarıyla oluşturduğunuza göre, kümenizle nasıl çalışacağınızı öğrenmek için aşağıdakileri kullanın:
 
-### <a name="apache-hadoop-clusters"></a>Apache Hadoop kümelerini
+### <a name="apache-hadoop-clusters"></a>Apache Hadoop kümeleri
 
-* [Apache Hive, HDInsight ile kullanma](hadoop/hdinsight-use-hive.md)
-* [Apache Pig, HDInsight ile kullanma](hadoop/hdinsight-use-pig.md)
+* [HDInsight ile Apache Hive kullanma](hadoop/hdinsight-use-hive.md)
+* [HDInsight ile Apache Pig kullanma](hadoop/hdinsight-use-pig.md)
 * [HDInsight ile MapReduce kullanma](hadoop/hdinsight-use-mapreduce.md)
 
 ### <a name="apache-hbase-clusters"></a>Apache HBase kümeleri
 
-* [HDInsight üzerinde Apache HBase kullanmaya başlama](hbase/apache-hbase-tutorial-get-started-linux.md)
-* [HDInsight üzerinde Apache HBase için Java uygulamaları geliştirin](hbase/apache-hbase-build-java-maven-linux.md)
+* [HDInsight 'ta Apache HBase ile çalışmaya başlama](hbase/apache-hbase-tutorial-get-started-linux.md)
+* [HDInsight 'ta Apache HBase için Java uygulamaları geliştirme](hbase/apache-hbase-build-java-maven-linux.md)
 
 ### <a name="apache-storm-clusters"></a>Apache Storm kümeleri
 
 * [HDInsight üzerinde Apache Storm için Java topolojileri geliştirme](storm/apache-storm-develop-java-topology.md)
-* [HDInsight üzerinde Apache Storm, Python bileşenlerini kullanma](storm/apache-storm-develop-python-topology.md)
-* [HDInsight üzerinde Apache Storm topolojileri dağıtma ve izleme](storm/apache-storm-deploy-monitor-topology-linux.md)
+* [HDInsight üzerinde Apache Storm Python bileşenlerini kullanma](storm/apache-storm-develop-python-topology.md)
+* [HDInsight üzerinde Apache Storm topolojilerini dağıtma ve izleme](storm/apache-storm-deploy-monitor-topology-linux.md)

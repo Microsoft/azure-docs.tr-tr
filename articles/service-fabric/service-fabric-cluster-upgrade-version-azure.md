@@ -1,9 +1,9 @@
 ---
-title: Bir Azure Service Fabric kümesini yükseltme | Microsoft Docs
-description: Service Fabric kodu ve/veya küme güncelleştirme modunda, sertifikaları, uygulama bağlantı noktaları, işletim sistemi düzeltme ekleri, yapılması ekleme yükseltme ayarı dahil olmak üzere, bir Service Fabric kümesi çalıştıran yapılandırma yükseltin ve benzeri. Yükseltmeleri gerçekleştirildiğinde ne yönde?
+title: Bir kümenin Azure Service Fabric sürümünü yükseltme
+description: Küme güncelleştirme modunu ayarlama, sertifika yükseltme, uygulama bağlantı noktaları ekleme, işletim sistemi düzeltme ekleri yapma gibi bir Service Fabric kümesini çalıştıran Service Fabric kodu ve/veya yapılandırmayı yükseltin. Yükseltmeler gerçekleştirildiğinde ne bekleyebiliriz?
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: ''
 ms.assetid: 15190ace-31ed-491f-a54b-b5ff61e718db
@@ -13,69 +13,69 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/12/2018
-ms.author: aljo
-ms.openlocfilehash: 234bff5049babf0c4b1d036b40201720b2736228
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: atsenthi
+ms.openlocfilehash: 067bf654928240ffe9651d4acf1933a81e631146
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60714734"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74013352"
 ---
-# <a name="upgrade-the-service-fabric-version-of-a-cluster"></a>Service Fabric bir küme sürümünü yükseltin
+# <a name="upgrade-the-service-fabric-version-of-a-cluster"></a>Bir kümenin Service Fabric sürümünü yükseltme
 
-Herhangi bir modern sistemi için upgradability yönelik uzun vadeli ürününüzün başarısını ulaşmak için anahtardır. Bir Azure Service Fabric kümesine sahip, ancak kısmen Microsoft tarafından yönetilen bir kaynaktır. Bu makalede, Azure kümenizde çalışan Service Fabric sürümüne yükseltmek açıklar.
+Tüm modern bir sistem için, ürününüzün uzun süreli başarısını sağlamak üzere yükselme için tasarlanmaya yönelik bir anahtar vardır. Azure Service Fabric kümesi, sahip olduğunuz ancak kısmen Microsoft tarafından yönetilen bir kaynaktır. Bu makalede, Azure kümenizde çalışan Service Fabric sürümünün nasıl yükseltileceği açıklanır.
 
-Kümenizi otomatik yapı yükseltmeleri kümeniz üzerinde olmasını istediğiniz bir desteklenen yapı sürümü seçebilirsiniz veya Microsoft tarafından yayımlanır yayımlanmaz almak için ayarlayabilirsiniz.
+Kümenizi, Microsoft tarafından yayımlandıklarında otomatik yapı yükseltmeleri alacak şekilde ayarlayabilir veya kümenizin açık olmasını istediğiniz desteklenen bir yapı sürümünü seçebilirsiniz.
 
-Portalı "upgradeMode" Küme yapılandırması ayarlama veya canlı bir küme oluşturma veya daha sonra anında Resource Manager kullanarak bunu 
+Bu, portalda "upgradeMode" küme yapılandırmasını ayarlayarak veya dinamik bir kümede oluşturma sırasında veya sonrasında Kaynak Yöneticisi kullanarak yapabilirsiniz 
 
 > [!NOTE]
-> Kümenizi desteklenen yapı sürümü her zaman çalışır durumda tutmak emin olun. Gibi ve biz service fabric yeni bir sürümünü duyurmaktan zaman önceki sürümü en az 60 gün o tarihten sonra destek sonu için işaretlenir. Yeni yayınlar duyurulan [üzerinde service fabric ekibi blogu](https://blogs.msdn.microsoft.com/azureservicefabric/). Yeni sürüm daha sonra seçmek kullanılabilir. 
+> Kümenizin, her zaman desteklenen bir yapı sürümü çalıştırdığından emin olun. Service Fabric 'in yeni bir sürümünün yayınlanmasıyla ilgili olarak, önceki sürüm, bu tarihten en az 60 günden sonra destek sonuna kadar işaretlenir. Yeni yayınlar [Service Fabric ekip blogu '](https://blogs.msdn.microsoft.com/azureservicefabric/)na duyurulur. Yeni sürüm daha sonra seçmek üzere kullanılabilir. 
 > 
 > 
 
-14 gün önce kümenizin çalıştığı, yayın sonu bir uyarı sistem durumu, kümenizin yerleştiren bir sistem durumu olayı oluşturulur. Desteklenen yapı sürümüne yükseltene kadar küme bir uyarı durumunda kalır.
+14 gün önce Kümenizin çalıştığı sürümden önce, kümenizi bir uyarı sistem durumuna yerleştiren bir sistem durumu olayı oluşturulur. Küme, desteklenen bir Fabric sürümüne yükseltene kadar uyarı durumunda kalır.
 
-## <a name="set-the-upgrade-mode-in-the-azure-portal"></a>Azure portalında yükseltme modunu ayarlayın
-Kümeyi oluştururken, kümeyi otomatik veya el ile ayarlayabilirsiniz.
+## <a name="set-the-upgrade-mode-in-the-azure-portal"></a>Azure portal yükseltme modunu ayarlama
+Kümeyi oluştururken kümeyi otomatik veya el ile ayarlayabilirsiniz.
 
 ![Create_Manualmode][Create_Manualmode]
 
-Küme yönetme deneyimini kullanarak otomatik veya el ile dinamik bir kümeye olduğunda, şirket için ayarlayabilirsiniz. 
+Yönetim deneyimini kullanarak, canlı bir kümede kümesini otomatik veya el ile ayarlayabilirsiniz. 
 
-### <a name="upgrading-to-a-new-version-on-a-cluster-that-is-set-to-manual-mode-via-portal"></a>Portal aracılığıyla el ile modu olarak ayarlanmış bir kümede yeni bir sürüme yükseltiliyor.
-Yeni bir sürüme yükseltmek için gerçekleştirmeniz gereken şey kullanılabilir sürüm açılan listeden seçin ve kaydedin. Fabric yükseltmesi otomatik olarak başlatıldı. Küme sistem durumu ilkeleri (düğüm durumu ve sistem kümede çalıştırılan tüm uygulamalar) yükseltme sırasında bağlı.
+### <a name="upgrading-to-a-new-version-on-a-cluster-that-is-set-to-manual-mode-via-portal"></a>Portal aracılığıyla manuel moda ayarlanmış bir kümedeki yeni bir sürüme yükseltme.
+Yeni bir sürüme yükseltmek için, tek yapmanız gereken, açılan listeden kullanılabilir sürümü seçip kaydetmeniz gerekir. Doku yükseltme otomatik olarak açılır. Küme sistem durumu ilkeleri (düğüm durumunun bir birleşimi ve kümede çalışan tüm uygulamaların sistem durumu), yükseltme sırasında öğesine dağıtılır.
 
-Küme sistem durumu ilkeleri karşılanmazsa, yükseltmeyi geri alınır. Daha fazla bilgi için bu belgede aşağı bu özel sistem durumu ilkeleri ayarlama. 
+Küme sistem durumu ilkeleri karşılanmazsa, yükseltme geri alınır. Bu özel durum ilkelerini ayarlama hakkında daha fazla bilgi için bu belgeyi aşağı kaydırın. 
 
-Geri almaya sonuçlandı. sorunları düzelttikten sonra önceki adımları izleyerek yükseltmeyi yeniden başlatmak gerekir.
+Geri alma işlemine neden olan sorunları düzelttikten sonra, daha önce yaptığınız adımları izleyerek yükseltmeyi yeniden başlatmanız gerekir.
 
 ![Manage_Automaticmode][Manage_Automaticmode]
 
-## <a name="set-the-upgrade-mode-using-a-resource-manager-template"></a>Resource Manager şablonu kullanarak yükseltme modunu ayarlayın
-"UpgradeMode" yapılandırma Microsoft.ServiceFabric/clusters kaynak tanımına ekleyin ve aşağıda gösterildiği gibi desteklenen yapı sürümleri "clusterCodeVersion" ayarlayın ve ardından şablonu dağıtmanız. "Elle" veya "Otomatik" "upgradeMode" için geçerli değerler:
+## <a name="set-the-upgrade-mode-using-a-resource-manager-template"></a>Kaynak Yöneticisi şablonu kullanarak yükseltme modunu ayarlama
+"UpgradeMode" yapılandırmasını Microsoft. ServiceFabric/kümeler kaynak tanımına ekleyin ve "clusterCodeVersion" değerini aşağıda gösterildiği gibi desteklenen yapı sürümlerinden birine ayarlayın ve ardından şablonu dağıtın. "UpgradeMode" için geçerli değerler "Manual" veya "Automatic"
 
 ![ARMUpgradeMode][ARMUpgradeMode]
 
-### <a name="upgrading-to-a-new-version-on-a-cluster-that-is-set-to-manual-mode-via-a-resource-manager-template"></a>Resource Manager şablonu aracılığıyla el ile modu olarak ayarlanmış bir kümede yeni bir sürüme yükseltiliyor.
-Küme el ile modunda olduğunda yeni bir sürüme yükseltmek için "clusterCodeVersion"'ı desteklenen bir sürüm olarak değiştirin ve dağıtın. Şablon dağıtımı, doku yükseltmenin kicks başlatıldı otomatik olarak. Küme sistem durumu ilkeleri (düğüm durumu ve sistem kümede çalıştırılan tüm uygulamalar) yükseltme sırasında bağlı.
+### <a name="upgrading-to-a-new-version-on-a-cluster-that-is-set-to-manual-mode-via-a-resource-manager-template"></a>Bir Kaynak Yöneticisi şablonu aracılığıyla el Ile moduna ayarlanmış bir kümedeki yeni bir sürüme yükseltme.
+Küme El Ile modundayken, yeni bir sürüme yükseltmek için, "clusterCodeVersion" öğesini desteklenen bir sürüm olarak değiştirin ve dağıtın. Şablon dağıtımı, doku yükseltmesiyle otomatik olarak açılır. Küme sistem durumu ilkeleri (düğüm durumunun bir birleşimi ve kümede çalışan tüm uygulamaların sistem durumu), yükseltme sırasında öğesine dağıtılır.
 
-Küme sistem durumu ilkeleri karşılanmazsa, yükseltmeyi geri alınır.  
+Küme sistem durumu ilkeleri karşılanmazsa, yükseltme geri alınır.  
 
-Geri almaya sonuçlandı. sorunları düzelttikten sonra önceki adımları izleyerek yükseltmeyi yeniden başlatmak gerekir.
+Geri alma işlemine neden olan sorunları düzelttikten sonra, daha önce yaptığınız adımları izleyerek yükseltmeyi yeniden başlatmanız gerekir.
 
-## <a name="set-custom-health-polices-for-upgrades"></a>Yükseltmeleri için kümesi özel sistem durumu ilkeleri
-Fabric yükseltmesi için özel sistem durumu ilkeleri belirtebilirsiniz. Kümenizi otomatik yapı yükseltmeleri için ayarladığınız sonra bu ilkeler için uygulandığından [otomatik yapı yükseltmeleri Aşama 1](service-fabric-cluster-upgrade.md#fabric-upgrade-behavior-during-automatic-upgrades).
-Kümeniz için el ile yapı yükseltmeleri ayarladıysanız, bu ilkeler, kümenizdeki fabric yükseltmesi hız kazandırın sisteme tetikleme yeni bir sürüm seçmek her zaman uygulanan. İlkeleri geçersiz kılmaz içeriyorsa, varsayılan değerleri kullanılır.
+## <a name="set-custom-health-polices-for-upgrades"></a>Yükseltmeler için özel durum ilkelerini ayarlama
+Doku yükseltme için özel sistem durumu ilkeleri belirtebilirsiniz. Kümenizi otomatik yapı yükseltmeleri olarak ayarladıysanız, bu ilkeler [Otomatik doku yükseltmelerinden 1. aşamasına](service-fabric-cluster-upgrade.md#fabric-upgrade-behavior-during-automatic-upgrades)uygulanır.
+Kümenizi El Ile doku yükseltmeleri için ayarladıysanız, bu ilkeler, kümeinizdeki doku yükseltmesini başlatma amacıyla sistemi tetikleyen yeni bir sürüm seçtiğinizde uygulanır. İlkeleri geçersiz kılamazsınız, varsayılanlar kullanılır.
 
-Özel sistem durumu ilkeleri belirtebilir veya Gelişmiş Yükseltme Ayarları'nı seçerek "fabric yükseltmesi" dikey penceresinin altındaki geçerli ayarları gözden geçirin. Aşağıdaki resme nasıl gözden geçirin. 
+Gelişmiş yükseltme ayarlarını seçerek özel sistem durumu ilkelerini belirtebilir veya "yapı yükseltme" dikey penceresindeki geçerli ayarları gözden geçirebilirsiniz. Nasıl yapılır hakkında aşağıdaki resmi gözden geçirin. 
 
-![Özel durum ilkelerini yönetme][HealthPolices]
+![Özel sistem durumu ilkelerini yönetme][HealthPolices]
 
-## <a name="list-all-available-versions-for-all-environments-for-a-given-subscription"></a>Belirli bir aboneliği için tüm ortamlar için kullanılabilir tüm sürümlerin listesi
+## <a name="list-all-available-versions-for-all-environments-for-a-given-subscription"></a>Belirli bir abonelik için tüm ortamlar için kullanılabilir tüm sürümleri listeleyin
 Aşağıdaki komutu çalıştırın ve buna benzer bir çıktı almalısınız.
 
-"supportExpiryUtc" söyler, zaman belirli bir sürüm süresi doluyor veya süresi dolmuş. En son sürüm geçerli bir tarih yok - değeri olan "9999-12-31T23:59:59.9999999", yalnızca başka bir deyişle, sona erme tarihi öğesi henüz ayarlanmamış.
+"supportExpiryUtc", belirli bir yayının ne zaman sona ertiğine veya süresinin dolduğunu bildirir. En son sürümde geçerli bir tarih yok; "9999-12-31T23:59:59.9999999" değeri vardır; bu, yalnızca sona erme tarihi henüz ayarlanmamış anlamına gelir.
 
 ```REST
 GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/locations/{{location}}/clusterVersions?api-version=2016-09-01
@@ -120,9 +120,9 @@ Output:
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Bazı özelleştirmeyi öğrenin [service fabric kümesi yapı ayarları](service-fabric-cluster-fabric-settings.md)
-* Bilgi edinmek için nasıl [kümenizin ölçeğini daraltma ve genişletme](service-fabric-cluster-scale-up-down.md)
-* Hakkında bilgi edinin [uygulama yükseltmeleri](service-fabric-application-upgrade.md)
+* [Service Fabric kümesi doku ayarlarından](service-fabric-cluster-fabric-settings.md) bazılarını özelleştirmeyi öğrenin
+* [Kümenizi ve dışarı ölçeklendirmeyi nasıl ölçeklentireceğinizi](service-fabric-cluster-scale-up-down.md) öğrenin
+* [Uygulama yükseltmeleri](service-fabric-application-upgrade.md) hakkında bilgi edinin
 
 <!--Image references-->
 [CertificateUpgrade]: ./media/service-fabric-cluster-upgrade/CertificateUpgrade2.png

@@ -1,121 +1,120 @@
 ---
-title: Çözümleyici için dil ve metin işleme - Azure Search
-description: Standart Lucene özel, önceden tanımlanmış veya dile özgü alternatif metin aranabilir alanları değiştirmek için bir dizin için Ata çözümleyicileri varsayılan.
-services: search
-ms.service: search
-ms.topic: conceptual
-ms.date: 03/27/2019
-ms.author: heidist
-manager: cgronlun
+title: Dil ve metin işleme Çözümleyicileri
+titleSuffix: Azure Cognitive Search
+description: Varsayılan standart Lucene öğesini özel, önceden tanımlanmış veya dile özgü alternatifler ile değiştirmek için bir dizinde aranabilir metin alanlarına çözümleyiciler atayın.
 author: HeidiSteen
-ms.custom: seodec2018
-ms.openlocfilehash: f76d944f614f07a4428d4e4100f6a08a375d96dc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+manager: nitinme
+ms.author: heidist
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: 32ac91df042eb29c39cc54b738dbb96aff3104f3
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65795793"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73496497"
 ---
-# <a name="analyzers-for-text-processing-in-azure-search"></a>Metin işleme Azure Search'te çözümleyiciler
+# <a name="analyzers-for-text-processing-in-azure-cognitive-search"></a>Azure Bilişsel Arama metin işleme için çözümleyiciler
 
-Bir *Çözümleyicisi* bir bileşeni olan [tam metin araması motoru](search-lucene-query-architecture.md) sorgu dizeleri ve dizinli belgelerde metin işleme için sorumlu. Farklı Çözümleyicileri metin senaryoya bağlı olarak farklı şekillerde düzenler. Dil Çözümleyicileri diğer Çözümleyicileri karakterleri küçük harflere örneğin dönüştürme gibi daha fazla temel görevleri gerçekleştirirken arama kalitesini iyileştirmek için dil kuralları kullanarak metin işlemenizi. 
+*Çözümleyici* , sorgu dizelerinde ve dizini oluşturulmuş belgelerde metin işlemeden sorumlu [tam metin arama altyapısının](search-lucene-query-architecture.md) bir bileşenidir. Farklı çözümleyiciler, senaryoya bağlı olarak metni farklı şekillerde işleyebilir. Dil Çözümleyicileri, arama kalitesini artırmak için dil kurallarını kullanarak metin işler, diğer çözümleyiciler ise, örneğin, daha küçük harfe dönüştürme gibi daha temel görevler gerçekleştirir. 
 
-Dil Çözümleyicileri en çok kullanıldığını ve bir Azure arama dizininde aranabilir her alana atanan varsayılan dil Çözümleyicisi yoktur. Aşağıdaki Dil Dönüşümleri metin analizi sırasında tipik şunlardır:
+Dil Çözümleyicileri en sık kullanılan ve bir Azure Bilişsel Arama dizininde her aranabilir alana atanan varsayılan dil Çözümleyicisi vardır. Aşağıdaki dil dönüştürmeleri, metin analizi sırasında tipik bir şekilde yapılır:
 
-+ Gerekli olmayan sözcükler (stopword) ve noktalama işaretleri kaldırılır.
-+ İfadeleri ve tire ile ayrılmış sözcüklerin bileşeni parçalara ayrılır.
-+ Büyük küçük harfleri sözcüklerdir.
-+ Böylece bir eşleşme şimdiki bağımsız olarak bulunabilir sözcükleri kök formları azaltılır.
++ Önemli olmayan kelimeler (stopwords) ve noktalama işaretleri kaldırılır.
++ Tümcecikler ve hecelenmiş sözcükler bileşen bölümlerine bölünür.
++ Büyük harfli kelimeler küçük harfle kaldırılır.
++ Sözcükler, zaman hali ne olursa olsun bir eşleşme bulunabilmesi için kök formlara düşürülür.
 
-Dil Çözümleyicileri dönüştürme basit bir metin giriş ya da kök formları bilgi depolanması ve alınması için verimli olan. Dönüştürme, dizini oluşturulurken, dizin oluşturma sırasında ortaya çıkar ve daha sonra yeniden dizin okunduğunda arama sırasında. Büyük olasılıkla hem işlemi için aynı Çözümleyicisi'ni kullanırsanız, beklediğiniz sonuçları edinin.
+Dil Çözümleyicileri, bir metin girişini, bilgi depolama ve alma açısından verimli bir şekilde temel veya kök formlara dönüştürür. Dizin oluşturma sırasında, Dizin oluşturulduğunda ve sonra arama sırasında, Dizin okunarak bir kez dönüştürme gerçekleşir. Her iki işlem için de aynı çözümleyici 'yi kullanıyorsanız, bekleeceğiniz arama sonuçlarını elde etmeniz daha olasıdır.
 
-## <a name="default-analyzer"></a>Varsayılan Çözümleyicisi  
+## <a name="default-analyzer"></a>Varsayılan çözümleyici  
 
-Azure Search kullanan [Apache Lucene standart Çözümleyicisi (standart lucene)](https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html) aşağıdaki öğelere metin sonu varsayılan olarak ["Unicode metin Segment"](https://unicode.org/reports/tr29/) kuralları. Ayrıca, standart Çözümleyicisi tüm karakterleri, küçük harf biçimine dönüştürür. Dizini oluşturulan belgeler hem arama terimlerini analiz dizin oluşturma ve sorgu işleme sırasında gidin.  
+Azure Bilişsel Arama, varsayılan olarak [Apache Lucene standart Çözümleyicisi 'ni (Standart Lucene)](https://lucene.apache.org/core/6_6_1/core/org/apache/lucene/analysis/standard/StandardAnalyzer.html) kullanır ve bu, metni ["Unicode metin segmentleme"](https://unicode.org/reports/tr29/) kurallarından sonra öğelere ayırır. Ayrıca, standart çözümleyici tüm karakterleri küçük harf biçimine dönüştürür. Dizini oluşturulmuş belgeler ve arama terimleri, dizin oluşturma ve sorgu işleme sırasında Analize gider.  
 
-Ayrıca, her aranabilir alan üzerinde otomatik olarak kullanılır. Alan alanlı temelinde Varsayılanı geçersiz kılabilirsiniz. Alternatif Çözümleyicileri olabilir bir [dil Çözümleyicisi](index-add-language-analyzers.md), [özel çözümleyici](index-add-custom-analyzers.md), ya da önceden tanımlanmış bir Çözümleyicisi'nden [kullanılabilir Çözümleyicileri listesi](index-add-custom-analyzers.md#AnalyzerTable).
+Bu, aranabilir her alan için otomatik olarak kullanılır. Alan temelinde varsayılan ayarı geçersiz kılabilirsiniz. Alternatif çözümleyiciler, [kullanılabilir çözümleyiciler listesinden](index-add-custom-analyzers.md#AnalyzerTable)bir [dil Çözümleyicisi](index-add-language-analyzers.md), [özel çözümleyici](index-add-custom-analyzers.md)veya önceden tanımlanmış bir çözümleyici olabilir.
 
 
-## <a name="types-of-analyzers"></a>Çözümleyici türü
+## <a name="types-of-analyzers"></a>Çözümleyiciler türleri
 
-Aşağıdaki liste, Azure Search'te çözümleyiciler hangi kullanılabilir açıklar.
+Aşağıdaki listede Azure Bilişsel Arama 'de hangi çözümleyiciler kullanılabildiği açıklanmaktadır.
 
 | Kategori | Açıklama |
 |----------|-------------|
-| [Standart olarak Lucene çözümleyici](https://lucene.apache.org/core/4_0_0/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html) | Varsayılan. Belirtiminin ya da yapılandırma gereklidir. Bu genel amaçlı Çözümleyicisi çoğu diller ve senaryoları için iyi gerçekleştirir.|
-| Önceden tanımlanmış çözümleyiciler | Tamamlanmış bir ürün olarak kullanılmaya yönelik olarak sunulan-olduğu. <br/>İki tür vardır: özelleştirilmiş ve dili. Bunları "önceden tanımlanmış" kılan, bunları bir yapılandırma veya özelleştirme ile adıyla başvurduğunu olduğu. <br/><br/>[Özelleştirilmiş (dilden) Çözümleyicileri](index-add-custom-analyzers.md#AnalyzerTable) metin girişleri özel işleme ya da en az işleme gerektirdiğinde kullanılır. Önceden tanımlı olmayan dil Çözümleyicileri dahil **Asciifolding**, **anahtar sözcüğü**, **deseni**, **basit**, **Durdur**, **Boşluk**.<br/><br/>[Dil Çözümleyicileri](index-add-language-analyzers.md) , zengin dil desteği için tek tek dillerin gerektiğinde kullanılır. Azure Search, Lucene dil çözümleyicilerini 35 ve 50 Microsoft doğal dil işleme Çözümleyicileri destekler. |
-|[Özel çözümleyiciler](https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search) | Bir kullanıcı tanımlı yapılandırmasını var olan öğeleri, bir belirteç Oluşturucu (gerekli) ve isteğe bağlı filtreler (char veya belirteç) oluşan bir bileşimi ifade eder.|
+| [Standart Lucene Çözümleyicisi](https://lucene.apache.org/core/6_6_1/core/org/apache/lucene/analysis/standard/StandardAnalyzer.html) | Varsayılan. Belirtim veya yapılandırma gerekli değildir. Bu genel amaçlı çözümleyici, çoğu dil ve senaryo için iyi bir performans uygular.|
+| Önceden tanımlanmış çözümleyiciler | Olduğu gibi kullanılması amaçlanan, tamamlanmış bir ürün olarak sunulur. <br/>İki tür vardır: özelleştirilmiş ve dil. Bunları "önceden tanımlanmış" olarak belirlemek, yapılandırma veya özelleştirme olmadan bunlara ada göre başvurmanıza neden olur. <br/><br/>[Özelleştirilmiş (dilden bağımsız) çözümleyiciler](index-add-custom-analyzers.md#AnalyzerTable) , metin girdileri özel işlem veya minimum işleme gerektirdiğinde kullanılır. Dili olmayan önceden tanımlı çözümleyiciler, **Asciifolding**, **anahtar sözcük**, **model**, **Simple**, **stop**, **Whitespace**içerir.<br/><br/>[Dil Çözümleyicileri](index-add-language-analyzers.md) , tek tek diller için zengin dil desteği gerektiğinde kullanılır. Azure Bilişsel Arama, 35 Lucene dil Çözümleyicileri ve 50 Microsoft doğal dil işleme Çözümleyicileri destekler. |
+|[Özel çözümleyiciler](https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search) | , Bir Simgeleştirici (zorunlu) ve isteğe bağlı filtrelerden (char veya token) oluşan, mevcut öğelerin bir birleşiminin Kullanıcı tanımlı yapılandırmasını ifade eder.|
 
-Birkaç Çözümleyici, gibi önceden tanımlanmış **deseni** veya **Durdur**, sınırlı sayıda yapılandırma seçeneği destekler. Bu seçenekleri ayarlamak için etkili bir şekilde özel bir çözümleyici önceden tanımlanmış Çözümleyicisi oluşan oluşturmanız ve diğer seçeneklerden birini belgelenen [önceden tanımlanmış çözümleyici başvurusu](index-add-custom-analyzers.md#AnalyzerTable). Herhangi bir özel yapılandırma ile yeni bir ad yapılandırmanızı gibi sağlamak *myPatternAnalyzer* Lucene deseni Çözümleyicisi'nden ayırmak için.
+**Model** veya **durdurma**gibi önceden tanımlanmış birkaç çözümleyici, sınırlı bir yapılandırma seçenekleri kümesini destekler. Bu seçenekleri ayarlamak için, önceden tanımlanmış çözümleyicisinden ve [önceden tanımlanmış çözümleyici başvurusunda](index-add-custom-analyzers.md#AnalyzerTable)belgelenen alternatif seçeneklerden birine sahip olan özel bir çözümleyici 'yi verimli bir şekilde oluşturursunuz. Tüm özel yapılandırmada olduğu gibi, yeni yapılandırmanızı Lucene model çözümleyicisinden ayırt etmek için *Mypatternanalyzer* gibi bir adla birlikte belirtin.
 
 ## <a name="how-to-specify-analyzers"></a>Çözümleyiciler belirtme
 
-1. (yalnızca özel çözümleyiciler için) Adlandırılmış bir oluşturma **Çözümleyicisi** dizin bölümü. Daha fazla bilgi için [Create Index](https://docs.microsoft.com/rest/api/searchservice/create-index) ve ayrıca [özel çözümleyiciler ekleme](index-add-custom-analyzers.md).
+1. (yalnızca özel çözümleyiciler için) Dizin tanımında adlandırılmış bir **çözümleyici** bölümü oluşturun. Daha fazla bilgi için bkz. [Dizin oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-index) ve ayrıca [özel çözümleyiciler ekleme](index-add-custom-analyzers.md).
 
-2. Üzerinde bir [alan tanımı](https://docs.microsoft.com/rest/api/searchservice/create-index) dizinde ayarlamak alanın **Çözümleyicisi** özelliğini hedef analyzer'ın adı (örneğin, `"analyzer" = "keyword"`. Geçerli değerler, önceden tanımlanmış Çözümleyicisi, dil Çözümleyicisi veya Ayrıca dizin şemasında tanımlanan özel çözümleyici adını içerir. Çözümleyici, dizin hizmetinde oluşturulmadan önce dizin tanımı aşamada atama planlayın.
+2. Dizindeki bir [alan tanımında](https://docs.microsoft.com/rest/api/searchservice/create-index) , alanın **çözümleyici** özelliğini bir hedef Çözümleyicisinin adı (örneğin, `"analyzer" = "keyword"`olarak ayarlayın. Geçerli değerler, dizin şemasında tanımlanmış, önceden tanımlanmış bir çözümleyici, dil Çözümleyicisi veya özel çözümleyici adı içerir. Dizin, hizmette oluşturulmadan önce Dizin tanımı aşamasında Çözümleyicisi atamaya planlayın.
 
-3. İsteğe bağlı olarak, bir yerine **Çözümleyicisi** özelliği, dizin oluşturma ve kullanarak sorgulama için farklı Çözümleyicileri ayarlayabilirsiniz **indexAnalyzer** ve **searchAnalyzer** alan Parametreler. Bu etkinliklerden birini tarafından gerekmeyen belirli bir dönüştürme gerekliyse, farklı Çözümleyicileri veri hazırlığı ve alımı için kullanırsınız.
+3. İsteğe bağlı olarak, bir **çözümleyici** özelliği yerine, dizin oluşturma ve sorgulama Için **ındexanalyzer** ve **searchAnalyzer** alan parametrelerini kullanarak farklı çözümleyiciler ayarlayabilirsiniz. Veri hazırlama ve alma işlemleri için farklı çözümleyiciler kullanacaksınız ve bu etkinliklerden biri başka bir dönüşüm için gerekli değildir.
 
-Atama **Çözümleyicisi** veya **indexAnalyzer** fiziksel olarak önceden oluşturulmuş bir alan için izin verilmiyor. Bu olduğunda belirsiz, Eylemler bir yeniden oluşturma gerektiren bir çözümleme için aşağıdaki tabloya gözden geçirin ve neden.
+Zaten fiziksel olarak oluşturulmuş bir alana **çözümleyici** veya **ındexanalyzer** atamaya izin verilmez. Bunlardan herhangi biri belirsiz ise, hangi eylemlerin yeniden derleme gerektirdiğini ve nedenini belirten bir döküm için aşağıdaki tabloyu gözden geçirin.
  
- | Senaryo | Etkisi | Adımlar |
+ | Senaryo | Etki | Adımlar |
  |----------|--------|-------|
- | Yeni alan ekleme | En az | Alan şemada henüz yoksa, alanın henüz fiziksel olarak bulunmayı dizininizdeki olmadığından yapmak için hiçbir alan düzeltme yoktur. Kullanabileceğiniz [dizin güncelleştirme](https://docs.microsoft.com/rest/api/searchservice/update-index) mevcut bir dizine yeni bir alan eklemek ve [mergeOrUpload](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents) bunu doldurmak üzere.|
- | Ekleme bir **Çözümleyicisi** veya **indexAnalyzer** varolan dizinli alana. | [Yeniden oluşturma](search-howto-reindex.md) | Bu alan için ters dizini sıfırdan oluşturulması gerekir ve bu alanların içeriğini reindexed gerekir. <br/> <br/>Etkin geliştirme aşamasındaki dizinler için [Sil](https://docs.microsoft.com/rest/api/searchservice/delete-index) ve [oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-index) dizinin yeni alanın tanımını seçin. <br/> <br/>Üretimde dizinler için düzeltilmiş tanımı sağlamak ve eskisinin yerine kullanmaya başlamak için yeni bir alan oluşturarak yeniden yayımlanmalarından sonra. Kullanım [dizin güncelleştirme](https://docs.microsoft.com/rest/api/searchservice/update-index) yeni alan eklemek ve [mergeOrUpload](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents) bunu doldurmak üzere. Daha sonra planlanan bir dizin hizmeti, bir parçası olarak kullanılmayan alanları kaldırmak için dizin temizleyebilirsiniz. |
+ | Yeni alan ekle | En az | Alan henüz şemada yoksa, bu alan, dizinde henüz bir fiziksel varlığı olmadığından, yapılacak bir alan düzeltmesi yoktur. Var olan bir dizine yeni bir alan eklemek için [güncelleştirme dizinini](https://docs.microsoft.com/rest/api/searchservice/update-index) kullanabilir ve onu doldurmak Için [mergeorupload](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents) kullanabilirsiniz.|
+ | Var olan bir dizinli alana **çözümleyici** veya **ındexanalyzer** ekleyin. | [derlemesine](search-howto-reindex.md) | Bu alan için ters çevrilen Dizin baştan sona yeniden oluşturulmalıdır ve bu alanların içeriğinin yeniden oluşturulması gerekir. <br/> <br/>Etkin geliştirme altındaki dizinler için, yeni alan tanımını seçmek üzere dizini [silin](https://docs.microsoft.com/rest/api/searchservice/delete-index) ve [oluşturun](https://docs.microsoft.com/rest/api/searchservice/create-index) . <br/> <br/>Üretimde dizinler için, düzeltilen tanımı sağlamak üzere yeni bir alan oluşturarak yeniden derlemeyi erteleyebilirsiniz ve eskisini yerine kullanmaya başlayabilirsiniz. Yeni alanı birleştirmek için [güncelleştirme dizinini](https://docs.microsoft.com/rest/api/searchservice/update-index) kullanın ve doldurmak Için [mergeorupload](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents) kullanın. Daha sonra, planlı dizin hizmeti 'nin bir parçası olarak, eski alanları kaldırmak için dizini temizleyebilirsiniz. |
 
-## <a name="when-to-add-analyzers"></a>Çözümleyiciler ekleme zamanı
+## <a name="when-to-add-analyzers"></a>Çözümleyiciler ne zaman eklenir
 
-En iyi zamanı eklemek ve çözümleyiciler atamak için active geliştirme sırasında bırakarak zaman ve dizinleri yeniden yordamı.
+Çözümleyiciler eklemek ve atamak için en iyi süre, etkin geliştirme sırasında dizinleri bırakma ve yeniden oluşturma işlemi sırasında yapılır.
 
-Bir dizin tanımını solidifies yeni analiz yapıları için bir dizin ekleyebilir, ancak iletmeniz gerekir **allowIndexDowntime** bayrak [dizin güncelleştirme](https://docs.microsoft.com/rest/api/searchservice/update-index) bu hatadan kaçınmak istiyorsanız:
+Dizin tanımı, bir dizine yeni analiz yapıları ekleyebilirsiniz, ancak bu hatadan kaçınmak istiyorsanız [dizini güncelleştirmek](https://docs.microsoft.com/rest/api/searchservice/update-index) Için **Allowındexkesinti** bayrağını geçirmeniz gerekir:
 
-*"Dizin güncelleştirme kapalı kalma süresi neden olacağından izin verilmiyor. Mevcut bir dizine yeni Çözümleyicileri, oluşturma denenmeden, belirteç filtreleri veya karakter filtre eklemek için dizin güncelleştirme isteğinde 'allowIndexDowntime' sorgu parametresi 'true' olarak ayarlayın. Bu işlem, dizini çevrimdışı, dizin oluşturma neden en az birkaç saniye ve başarısız sorgu istekleri için sokar unutmayın. Dizin performans ve yazma kullanılabilirliğini engelliler için dizin güncelleştirildikten sonra birkaç dakika veya daha çok büyük dizinler için uzun olabilir."*
+*"Dizin güncelleştirmesine izin verilmiyor, çünkü kapalı kalma süresine yol açacaktı. Varolan bir dizine yeni çözümleyiciler, belirteçler, belirteç filtreleri veya karakter filtreleri eklemek için, Dizin güncelleştirme isteğinde ' Allowwındexını ' sorgu parametresini ' true ' olarak ayarlayın. Bu işlemin dizininizi en az birkaç saniyede çevrimdışına koyacağına, dizin oluşturma ve sorgu isteklerinizin başarısız olmasına neden olduğunu unutmayın. Dizinin performansı ve yazma kullanılabilirliği, Dizin güncelleştirildikten sonra çok fazla dakika boyunca veya çok büyük dizinler için daha uzun olabilir. "*
 
-Aynı alana bir çözümleyici atamasını yaparken geçerlidir. Bir çözümleyici alanın tanımını bir parçası olduğundan alanı oluştururken, yalnızca ekleyebilirsiniz. Varolan alanlara Çözümleyicileri eklemek istiyorsanız, gerekecektir [bırakın ve yeniden](search-howto-reindex.md) dizini veya istediğiniz çözümleyiciyi ile yeni bir alan ekleyin.
+Bir alana çözümleyici atarken aynı durum geçerlidir. Çözümleyici, alan tanımının ayrılmaz bir parçasıdır, bu nedenle yalnızca alan oluşturulduğunda eklenebilir. Mevcut alanlara çözümleyiciler eklemek istiyorsanız, dizini [bırakıp yeniden oluşturmanız](search-howto-reindex.md) veya çözümleyiciyle istediğiniz yeni bir alan eklemeniz gerekir.
 
-Belirtildiği gibi bir özel durumdur **searchAnalyzer** değişken. Çözümleyiciler belirtmek için üç yolunuz (**Çözümleyicisi**, **indexAnalyzer**, **searchAnalyzer**), yalnızca **searchAnalyzer** özniteliği Varolan bir alanı değiştirilebilir.
+Belirtildiği gibi, **searchAnalyzer** varyantı bir istisnadır. Çözümleyiciler (**çözümleyici**, **ındexanalyzer**, **searchAnalyzer**) belirtmek için üç yol, var olan bir alanda yalnızca **searchAnalyzer** özniteliği değiştirilebilir.
 
-## <a name="recommendations-for-working-with-analyzers"></a>Çözümleyicileriyle çalışmaya yönelik öneriler
+## <a name="recommendations-for-working-with-analyzers"></a>Çözümleyiciler ile çalışmaya yönelik öneriler
 
-Bu bölümde, çözümleyiciler ile çalışma konusunda öneriler sunar.
+Bu bölümde, çözümleyiciler ile nasıl çalışılacağı hakkında öneriler sunulmaktadır.
 
-### <a name="one-analyzer-for-read-write-unless-you-have-specific-requirements"></a>Okuma-yazma için bir çözümleyici belirli gereksinimleriniz yoksa
+### <a name="one-analyzer-for-read-write-unless-you-have-specific-requirements"></a>Belirli gereksinimleriniz yoksa okuma-yazma için bir çözümleyici
 
-Azure arama sayesinde dizinini oluşturmak için farklı Çözümleyicileri belirtin ve arama aracılığıyla ek **indexAnalyzer** ve **searchAnalyzer** alan parametreleri. Belirtilmemişse, çözümleyici kümesi **Çözümleyicisi** özelliği, hem dizinleme ve arama için kullanılır. Varsa `analyzer` olan belirtilmemişse, varsayılan olarak standart Lucene çözümleyici kullanılır.
+Azure Bilişsel Arama, dizin oluşturma ve ek **ındexanalyzer** ve **searchAnalyzer** alan parametreleri aracılığıyla arama için farklı çözümleyiciler belirtmenize olanak tanır. Belirtilmemişse, **çözümleyici** özelliği ile ayarlanan çözümleyici, hem dizin oluşturma hem de arama için kullanılır. `analyzer` belirtilmemişse, varsayılan standart Lucene Çözümleyicisi kullanılır.
 
-Genel bir kural belirli gereksinimleri dair sakınca yoksa aynı Çözümleyicisi hem dizin oluşturma ve sorgulama, için kullanmaktır. Baştan sona test etmeyi unutmayın. Arama ve dizin oluşturma zamanında metin işleme farklılık gösterdiğinde sorgu terimleri ve arama ve dizin oluşturma Çözümleyicisi yapılandırmaları zaman değil hizalanır dizini oluşturulan terimler arasında uyumsuzluk riskini çalıştırın.
+Genel bir kural, aynı çözümleyici 'yi hem dizin oluşturma hem de sorgulama için, belirli gereksinimler aksini belirtmedikçe kullanır. Kapsamlı olarak test ettiğinizden emin olun. Metin işleme, arama ve dizin oluşturma sırasında farklılık gösterdiğinde, arama ve dizin oluşturma Çözümleyicisi yapılandırmalarının hizalanmamış olması durumunda sorgu terimleri ve dizine alınmış terimler arasında uyumsuzluk riskini çalıştırırsınız.
 
 ### <a name="test-during-active-development"></a>Etkin geliştirme sırasında test etme
 
-Standart Çözümleyicisi geçersiz kılan bir dizini yeniden derleme gerektirir. Mümkünse, üretim ortamına dizin çalışırken önce etkin geliştirme sırasında kullanmak için hangi Çözümleyicileri karar verin.
+Standart çözümleyici 'nin geçersiz kılınması, dizin yeniden oluşturmayı gerektirir. Mümkünse, üretime bir dizin vermeden önce, etkin geliştirme sırasında hangi çözümleyicilerin kullanılacağını belirleyin.
 
-### <a name="inspect-tokenized-terms"></a>Parçalanmış koşullarını inceleyin
+### <a name="inspect-tokenized-terms"></a>Simgeleştirilmiş terimleri İncele
 
-Beklenen sonuçları döndürmek bir arama başarısız olursa, büyük olasılıkla terim giriş sorguda ve dizindeki parçalanmış hüküm arasında belirteç tutarsızlıklar senaryodur. Belirteçler aynı olmayan iyileştirilene eşleşme başarısız. Simgeleştirici çıkış incelemek için kullanmanızı öneririz [analiz API](https://docs.microsoft.com/rest/api/searchservice/test-analyzer) araştırma aracı olarak. Yanıt belirteçleri, belirli bir çözümleyici tarafından oluşturulan oluşur.
+Arama beklenen sonuçları döndürmediğinde, en olası senaryo sorgudaki terim girişleri ile dizinde simgeleştirilmiş terimler arasındaki belirteç tutarsızlıklardan oluşur. Belirteçler aynı değilse, Eşleşmeler bir hata ile başarısız olur. Belirteç ayırıcı çıkışını denetlemek için, [API 'yi](https://docs.microsoft.com/rest/api/searchservice/test-analyzer) araştırma aracı olarak Çözümle ' yi kullanmanızı öneririz. Yanıt, belirli bir çözümleyici tarafından oluşturulan belirteçlerden oluşur.
 
 <a name="examples"></a>
 
-## <a name="rest-examples"></a>KALAN örnekler
+## <a name="rest-examples"></a>REST örnekleri
 
-Aşağıdaki örnekler birkaç önemli senaryolar için Çözümleyicisi tanımları gösterir.
+Aşağıdaki örneklerde birkaç anahtar senaryo için çözümleyici tanımları gösterilmektedir.
 
-+ [Özel bir çözümleyici örneği](#Custom-analyzer-example)
-+ [Bir alan örneğe Çözümleyicileri atayın](#Per-field-analyzer-assignment-example)
++ [Özel çözümleyici örneği](#Custom-analyzer-example)
++ [Bir alan örneğine çözümleyiciler atama](#Per-field-analyzer-assignment-example)
 + [Dizin oluşturma ve arama için Çözümleyicileri karıştırma](#Mixing-analyzers-for-indexing-and-search-operations)
 + [Dil Çözümleyicisi örneği](#Language-analyzer-example)
 
 <a name="Custom-analyzer-example"></a>
 
-### <a name="custom-analyzer-example"></a>Özel bir çözümleyici örneği
+### <a name="custom-analyzer-example"></a>Özel çözümleyici örneği
 
-Bu örnekte, özel seçeneklerle bir çözümleyici tanımı gösterilmektedir. Özel seçenekleri char filtreleri ve oluşturma denenmeden belirteci filtreleri için ayrı ayrı adlandırılmış yapıları belirtilen ve ardından Çözümleyicisi tanımında başvurulan. Önceden tanımlanmış öğeleri olarak kullanılan-olduğunu ve yalnızca adı tarafından başvurulan.
+Bu örnek, özel seçeneklerle bir çözümleyici tanımını gösterir. Karakter filtreleri, simgeler ve belirteç filtreleri için özel seçenekler adlandırılmış yapılar olarak ayrı olarak belirtilir ve ardından çözümleyici tanımında başvurulur. Önceden tanımlanmış öğeler, olduğu gibi kullanılır ve yalnızca adı ile başvurulur.
 
-Bu örnekte yürüyen:
+Bu örnekte izlenecek:
 
-* Çözümleyiciler aranabilir bir alanı için alan sınıfının bir özelliği var.
-* Özel bir çözümleyici dizin tanımı'nın bir parçasıdır. Bunu hafifçe (örneğin, bir filtre içinde tek bir seçenek özelleştirme) özelleştirilebilen veya birden fazla yerde özelleştirilebilir.
-* Bu durumda, özel çözümleyici sırayla bir özelleştirilmiş standart simgeleştirici "my_standard_tokenizer" ve belirteç iki filtre kullanır "my_analyzer" olduğu: küçük harf ve özelleştirilmiş asciifolding filtre "my_asciifolding".
-* Ayrıca, 2 özel char Filtreler "map_dash" ve "remove_whitespace" tanımlar. İkincisi tüm boşlukları kaldırır ancak ilk tüm tire alt çizgi ile değiştirir. Alanları eşleme kuralları kodlanmış UTF-8 gerekir. Char filtreleri önce simgeleştirme uygulanır ve sonuçta elde edilen belirteçleri (standart simgeleştirici sonlarını tire ve boşluk ancak alt çizgi) etkiler.
+* Çözümleyiciler, aranabilir bir alan için alan sınıfının bir özelliğidir.
+* Özel çözümleyici, Dizin tanımının bir parçasıdır. Bu, hafif bir şekilde özelleştirilmiş olabilir (örneğin, tek bir filtrenin tek bir seçeneğini özelleştirme) veya birden çok yerde özelleştirilebilir.
+* Bu durumda, özel çözümleyici "my_analyzer" olur ve bu, sırasıyla özelleştirilmiş bir standart belirteç ayırıcı "my_standard_tokenizer" ve iki belirteç filtresi kullanır: küçük ve özelleştirilmiş asciifolding filtresi "my_asciifolding".
+* Ayrıca, "map_dash" ve "remove_whitespace" 2 özel char filtrelerini de tanımlar. İlki tüm tireleri alt çizgi ile değiştirir, ikinci bir tane tüm boşlukları kaldırır. Eşleme kurallarında boşluklar UTF-8 olarak kodlanmalıdır. Char filtreleri simgeleştirme öncesinde uygulanır ve sonuçta elde edilen belirteçleri etkiler (çizgi ve boşluklar üzerinde standart belirteç ayırıcı işaretleri ve alt çizgi üzerinde değil).
 
 ~~~~
   {
@@ -180,11 +179,11 @@ Bu örnekte yürüyen:
 
 <a name="Per-field-analyzer-assignment-example"></a>
 
-### <a name="per-field-analyzer-assignment-example"></a>Alan başına Çözümleyicisi atama örneği
+### <a name="per-field-analyzer-assignment-example"></a>Alan başına çözümleyici atama örneği
 
-Standart Çözümleyicisi varsayılandır. Desen Çözümleyicisi gibi farklı bir önceden tanımlanmış Çözümleyicisi varsayılan yerine istediğinizi varsayalım. Özel seçenekleri emin değilseniz, yalnızca alan tanımı adı belirtmeniz gerekir.
+Standart çözümleyici varsayılandır. Varsayılan değerini, model Çözümleyicisi gibi farklı bir önceden tanımlı çözümleyici ile değiştirmek istediğinizi varsayalım. Özel seçenekleri ayarlamadıysanız, yalnızca alan tanımında adıyla belirtmeniz gerekir.
 
-"Çözümleyicisi" öğesi, alanlar tarafından temelinde standart Çözümleyicisi geçersiz kılar. Genel geçersiz kılma yoktur. Bu örnekte, `text1` deseni Çözümleyicisi kullanır ve `text2`, hangi bir çözümleyici belirtmeyen varsayılan kullanır.
+"Analyzer" öğesi, alan temelinde standart çözümleyici 'yi geçersiz kılar. Genel geçersiz kılma yok. Bu örnekte `text1`, bir çözümleyici belirtmeyen `text2`model Çözümleyicisi ve kullanır.
 
 ~~~~
   {
@@ -215,7 +214,7 @@ Standart Çözümleyicisi varsayılandır. Desen Çözümleyicisi gibi farklı b
 
 ### <a name="mixing-analyzers-for-indexing-and-search-operations"></a>Dizin oluşturma ve arama işlemleri için Çözümleyicileri karıştırma
 
-API'ler farklı Çözümleyicileri için dizin oluşturma ve arama belirtmek için ek dizin özniteliklerini içerir. **SearchAnalyzer** ve **indexAnalyzer** öznitelikleri değiştirerek tek bir çift olarak belirtilmelidir **Çözümleyicisi** özniteliği.
+API 'Ler, dizin oluşturma ve arama için farklı çözümleyiciler belirtmeye yönelik ek dizin öznitelikleri içerir. **SearchAnalyzer** ve **ındexanalyzer** öznitelikleri bir çift olarak belirtilmelidir ve tek **çözümleyici** özniteliği değiştiriliyor.
 
 
 ~~~~
@@ -243,7 +242,7 @@ API'ler farklı Çözümleyicileri için dizin oluşturma ve arama belirtmek iç
 
 ### <a name="language-analyzer-example"></a>Dil Çözümleyicisi örneği
 
-Diğer alanları varsayılan korumak (veya diğer bazı önceden tanımlanmış ya da özel Çözümleyicisi'ni kullanın ancak) farklı dillerde dizeleri içeren alanlar bir dil Çözümleyicisi kullanabilirsiniz. Bir dil Çözümleyicisi kullanırsanız, dizin oluşturma ve arama işlemleri için kullanılmalıdır. Bir dil Çözümleyicisi'ni kullanın alanlar dizinini oluşturmak için farklı Çözümleyicileri ve arama yapamazsınız.
+Farklı dillerdeki dizeleri içeren alanlar dil Çözümleyicisi kullanabilir, diğer alanlar da varsayılan olarak korunur (veya başka bir önceden tanımlanmış veya özel çözümleyici kullanır). Dil Çözümleyicisi kullanıyorsanız, hem dizin oluşturma hem de arama işlemleri için kullanılması gerekir. Dil Çözümleyicisi kullanan alanlarda dizin oluşturma ve arama için farklı çözümleyiciler bulunamaz.
 
 ~~~~
   {
@@ -272,22 +271,22 @@ Diğer alanları varsayılan korumak (veya diğer bazı önceden tanımlanmış 
   }
 ~~~~
 
-## <a name="c-examples"></a>C#örnekleri
+## <a name="c-examples"></a>C#örnekler
 
-.NET SDK kod örneklerini kullanıyorsanız kullanın veya Çözümleyicileri yapılandırmak için bu örnekleri ekleyebilir.
+.NET SDK kod örneklerini kullanıyorsanız, bu örnekleri kullanmak veya çözümleyiciler yapılandırmak için ekleyebilirsiniz.
 
-+ [Yerleşik Çözümleyicisi Ata](#Assign-a-language-analyzer)
-+ [Bir çözümleyici yapılandırın](#Define-a-custom-analyzer)
++ [Yerleşik çözümleyici atama](#Assign-a-language-analyzer)
++ [Çözümleyici yapılandırma](#Define-a-custom-analyzer)
 
 <a name="Assign-a-language-analyzer"></a>
 
-### <a name="assign-a-language-analyzer"></a>Bir dil Çözümleyicisi Ata
+### <a name="assign-a-language-analyzer"></a>Dil Çözümleyicisi atama
 
-Olarak kullanılan tüm Çözümleyicisi-, yapılandırma gerektirmeden ise, bir alan tanımında belirtilir. Bir çözümleyici yapısı oluşturmak için bir gereksinim değildir. 
+Olduğu gibi kullanılan ve yapılandırma olmadan kullanılan çözümleyici, bir alan tanımında belirtilmiştir. Çözümleyici yapısı oluşturma gereksinimi yoktur. 
 
-Bu örnek Microsoft English ve Fransızca Çözümleyicileri açıklama alanlarına atar. Daha büyük bir hotels.cs dosyasında otel sınıfını kullanarak oluşturmak Oteller dizinini tanımını alındığı bir kod parçacığı olan [DotNetHowTo](https://github.com/Azure-Samples/search-dotnet-getting-started/tree/master/DotNetHowTo) örnek.
+Bu örnek, Açıklama alanlarına Microsoft Ingilizce ve Fransızca Çözümleyicileri atar. Bu bir kod parçacığı, otel dizininin daha büyük bir tanımından alınmış ve [Dotnethowto](https://github.com/Azure-Samples/search-dotnet-getting-started/tree/master/DotNetHowTo) örneğinin Hotels.cs dosyasındaki otel sınıfını kullanarak oluşturuluyor.
 
-Çağrı [Çözümleyicisi](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.analyzer?view=azure-dotnet), belirten [AnalyzerName](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.analyzername?view=azure-dotnet) Azure arama'yı desteklenen bir metin Çözümleyicisi sağlayan tür.
+Azure Bilişsel Arama 'de desteklenen bir metin Çözümleyicisi sağlayan [analiz Zeradı](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.analyzername?view=azure-dotnet) türünü belirterek [çözümleyici](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.analyzer?view=azure-dotnet)'yi çağırın.
 
 ```csharp
     public partial class Hotel
@@ -309,11 +308,11 @@ Bu örnek Microsoft English ve Fransızca Çözümleyicileri açıklama alanlar�
 ```
 <a name="Define-a-custom-analyzer"></a>
 
-### <a name="define-a-custom-analyzer"></a>Özel bir çözümleyici tanımlayın
+### <a name="define-a-custom-analyzer"></a>Özel çözümleyici tanımlama
 
-Özelleştirme veya yapılandırma gerekli olduğunda bir çözümleyici yapısı için bir dizin eklemek gerekir. Tanımladığınız sonra önceki örnekte gösterildiği gibi bu alan tanımı ekleyebilirsiniz.
+Özelleştirme veya yapılandırma gerektiğinde, bir dizine çözümleyici yapısı eklemeniz gerekir. Bunu tanımladıktan sonra, bir önceki örnekte gösterildiği gibi alan tanımını ekleyebilirsiniz.
 
-Oluşturma bir [CustomAnalyzer](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.customanalyzer?view=azure-dotnet) nesne. Daha fazla örnek için bkz. [CustomAnalyzerTests.cs](https://github.com/Azure/azure-sdk-for-net/blob/master/src/SDKs/Search/DataPlane/Search.Tests/Tests/CustomAnalyzerTests.cs).
+Bir [CustomAnalyzer](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.customanalyzer?view=azure-dotnet) nesnesi oluşturun. Daha fazla örnek için bkz. [CustomAnalyzerTests.cs](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/search/Microsoft.Azure.Search/tests/Tests/CustomAnalyzerTests.cs).
 
 ```csharp
 {
@@ -337,17 +336,17 @@ Oluşturma bir [CustomAnalyzer](https://docs.microsoft.com/dotnet/api/microsoft.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-+ Sunduğumuz kapsamlı açıklaması gözden [nasıl tam metin araması Azure Search'te çalışır](search-lucene-query-architecture.md). Bu makalede örnekler yüzeyine counter-intuitive görünebilir davranışları açıklamak için kullanılır.
++ [Tam metin aramasının Azure bilişsel arama 'de nasıl çalıştığına](search-lucene-query-architecture.md)ilişkin kapsamlı bir açıklama inceleyin. Bu makalede, yüzeyde sayaç kullanımı kolay olabilecek davranışları açıklamak için örnekleri kullanılmaktadır.
 
-+ Ek sorgu söz dizimi gelen deneyin [arama belgeleri](https://docs.microsoft.com/rest/api/searchservice/search-documents#bkmk_examples) örnek bölümünde veya [Basit Sorgu söz dizimi](query-simple-syntax.md) portalında arama Gezgini.
++ [Belgeleri ara](https://docs.microsoft.com/rest/api/searchservice/search-documents#bkmk_examples) örnek bölümünde veya portalda arama Gezgini 'ndeki [basit sorgu söz diziminde](query-simple-syntax.md) ek sorgu söz dizimini deneyin.
 
-+ Nasıl uygulayabileceğinizi öğrenin [dile özel sözcük temelli çözümleyiciler](index-add-language-analyzers.md).
++ [Dile özgü sözcük Çözümleyicileri çözümleyicilerinin](index-add-language-analyzers.md)nasıl uygulanacağını öğrenin.
 
-+ [Özel çözümleyiciler yapılandırma](index-add-custom-analyzers.md) için en az işleme ya da tek tek alanlarda özel işleme.
++ Tek tek alanlarda en az işlem veya özel işleme için [özel Çözümleyicileri yapılandırın](index-add-custom-analyzers.md) .
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
- [Search belgeleri REST API'si](https://docs.microsoft.com/rest/api/searchservice/search-documents) 
+ [Belgelerde ara REST API](https://docs.microsoft.com/rest/api/searchservice/search-documents) 
 
  [Basit sorgu söz dizimi](query-simple-syntax.md) 
 

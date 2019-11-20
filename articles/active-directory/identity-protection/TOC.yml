@@ -3,65 +3,49 @@
 - name: Genel Bakış
   items:
     - name: Azure AD Kimlik Koruması nedir?
-      href: overview.md
-- name: Hızlı Başlangıçlar
-  items:
-    - name: Oturum riski algılandığında erişimi engelleme
-      href: quickstart-sign-in-risk-policy.md
+      href: overview-identity-protection.md
 - name: Kavramlar
   expanded: false
   items:
-    - name: Güvenlik açıkları nelerdir?
-      href: vulnerabilities.md
-    - name: Bildirimler nelerdir?
-      href: notifications.md
-    - name: Oturum açma deneyiminiz nedir?
-      href: flows.md
+    - name: Güvenliğe genel bakış
+      href: concept-identity-protection-security-overview.md
+    - name: Riskler nelerdir?
+      href: concept-identity-protection-risks.md
+    - name: Kimlik Koruması ilkeleri
+      href: concept-identity-protection-policies.md
+    - name: Oturum açma deneyimi nasıldır?
+      href: concept-identity-protection-user-experience.md
+    - name: Kimlik Koruması ve B2B kullanıcıları
+      href: concept-identity-protection-b2b.md
 - name: Nasıl yapılır kılavuzları
   expanded: true
   items:
-    - name: Kimlik Koruması
+    - name: Bildirimleri yapılandırma
+      href: howto-identity-protection-configure-notifications.md
+    - name: İlke yapılandırması
       items:
-        - name: Azure AD Kimlik Koruması’nı etkinleştirme
-          href: enable.md
         - name: MFA kayıt ilkesini yapılandırma
-          href: howto-mfa-policy.md
-        - name: Oturum açma risk ilkesini yapılandırma
-          href: howto-sign-in-risk-policy.md
-        - name: Kullanıcı riski ilkesini yapılandırma
-          href: howto-user-risk-policy.md
-        - name: Etkin risk olaylarını kapatma
-          href: howto-close-active-risk-events.md
-        - name: Kullanıcıların engelini kaldırma
-          href: howto-unblock-user.md
-        - name: Risk olaylarının benzetimini yapma
-          href: playbook.md
-        - name: SSS
-          href: faqs.md
-    - name: Kimlik Koruması (Yenilendi)
-      items:
-        - name: Genel Bakış
-          href: overview-v2.md
-        - name: Güvenliğe genel bakış
-          href: security-overview.md
-        - name: Riskli kullanıcıları ve oturum açma işlemlerini araştırma
-          href: howto-investigate-risky-users-signins.md
-        - name: Risk olayları ile ilgili geri bildirim gönderme
-          href: howto-provide-risk-event-feedback.md
+          href: howto-identity-protection-configure-mfa-policy.md
         - name: Risk ilkelerini yapılandırma
-          href: howto-configure-risk-policies.md
-        - name: Algılama doğruluğunu geliştirme
-          href: howto-improve-detection-accuracy.md
-        - name: SSS ve bilinen sorunlar
-          href: known-issues.md
+          href: howto-identity-protection-configure-risk-policies.md
+    - name: Risk algılamalarının simülasyonunu oluşturma
+      href: howto-identity-protection-simulate-risk.md
+    - name: Araştırma ve düzeltme
+      items:
+        - name: Riski araştırma
+          href: howto-identity-protection-investigate-risk.md
+        - name: Risk algılamalarını düzeltme ve engellemeyi kaldırma
+          href: howto-identity-protection-remediate-unblock.md
+        - name: Microsoft Graph API’sini kullanma
+          href: howto-identity-protection-graph-api.md
+    - name: Risk algılamaları ile ilgili geri bildirim gönderme
+      href: howto-identity-protection-risk-feedback.md
+    - name: SSS
+      href: troubleshooting-identity-protection-faq.md
 - name: Başvuru
   items:
-    - name: Microsoft Graph API’sini kullanma
-      href: graph-get-started.md
-    - name: Risk olayları
-      href: risk-events-reference.md
     - name: Sözlük
-      href: glossary.md
+      href: reference-identity-protection-glossary.md
 - name: Kaynaklar
   items:
     - name: Azure geri bildirim forumu

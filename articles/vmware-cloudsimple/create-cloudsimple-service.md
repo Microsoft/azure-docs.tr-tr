@@ -1,60 +1,52 @@
 ---
-title: Azure VMware çözümü CloudSimple - hizmet olarak oluşturma
-description: Azure portalında CloudSimple hizmet oluşturmayı açıklar
+title: CloudSimple tarafından Azure VMware çözümü-CloudSimple hizmeti oluşturma
+description: Azure portal CloudSimple hizmetinin nasıl oluşturulacağını açıklar
 author: sharaths-cs
 ms.author: b-shsury
-ms.date: 06/04/2019
+ms.date: 08/19/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: a0ccce6f298270b2751307868fdf85697cb7e8ee
-ms.sourcegitcommit: 1289f956f897786090166982a8b66f708c9deea1
+ms.openlocfilehash: 8648f2c9cc0175050d4b7642f5235d47159ecfaf
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67154959"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72893935"
 ---
-# <a name="create-azure-vmware-solution-by-cloudsimple---service"></a>CloudSimple - hizmet olarak Azure VMware çözümü oluşturun
+# <a name="create-the-azure-vmware-solution-by-cloudsimple-service"></a>CloudSimple hizmeti tarafından Azure VMware çözümünü oluşturma
 
-Azure ile VMware çözümü tarafından CloudSimple kullanmaya başlamak için Azure portalında CloudSimple hizmeti tarafından Azure VMware çözümü oluşturun.
+CloudSimple ile Azure VMware çözümünü kullanmaya başlamak için Azure portal CloudSimple Service tarafından Azure VMware çözümünü oluşturun.
 
-> [!NOTE]
-> CloudSimple hizmet oluşturmadan önce Azure aboneliğinizde Microsoft.VMwareCloudSimple kaynak sağlayıcısını kaydetmeniz gerekir. Bağlantısındaki [Azure aboneliğinize Microsoft.VMwareCloudSimple kaynak sağlayıcısını etkinleştirmek](enable-cloudsimple-service.md).
+## <a name="before-you-begin"></a>Başlamadan önce
 
-## <a name="sign-in-to-azure"></a>Azure'da oturum açma
+Ağ geçidi alt ağı için bir/28 CıDR bloğu ayırın. CloudSimple hizmeti başına bir ağ geçidi alt ağı gerekir ve oluşturulduğu bölge için benzersizdir. Ağ geçidi alt ağı, uç ağ hizmetleri için kullanılır ve/28 CıDR bloğu gerektirir. Ağ geçidi alt ağ adresi alanı benzersiz olmalıdır. CloudSimple ortamıyla iletişim kuran herhangi bir ağla çakışmamalıdır. CloudSimple ile iletişim kuran ağlarda şirket içi ağlar ve Azure sanal ağları bulunur.
 
-[https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
+## <a name="sign-in-to-azure"></a>Azure'da oturum açın
+
+[Azure Portal](https://portal.azure.com)’ında oturum açın.
 
 ## <a name="create-the-service"></a>Hizmeti oluşturma
 
 1. **Tüm Hizmetler**’i seçin.
-
-2. Arama **CloudSimple Hizmetleri**.
-
-    ![Arama CloudSimple hizmeti](media/create-cloudsimple-service-search.png)
-
-3. Seçin **CloudSimple Hizmetleri**.
-
-4. Tıklayın **Ekle** yeni bir hizmet oluşturmak için.
-
-    ![CloudSimple Hizmet Ekle](media/create-cloudsimple-service-add.png)
-
+2. **Cloudsimple Hizmetleri**için arama yapın.
+    CloudSimple hizmetinde arama ![](media/create-cloudsimple-service-search.png)
+3. **Cloudsimple Hizmetleri**' ni seçin.
+4. Yeni bir hizmet oluşturmak için **Ekle** ' ye tıklayın.
+    CloudSimple Service](media/create-cloudsimple-service-add.png) ![ekleyin
 5. CloudSimple hizmetini oluşturmak istediğiniz aboneliği seçin.
-
-6. Hizmeti için kaynak grubunu seçin. Yeni bir kaynak grubu eklemek için tıklatın **Yeni Oluştur**.
-
-7. Hizmetinizi tanımlayabilmek için adı girin.
-
-8. Hizmet ağ geçidi için CIDR girin. / 28 belirtin herhangi biri, mevcut alt ağlar ile çakışmayacak bir alt.  Şirket içi alt ağlar, Azure alt ağlar, bunlar veya herhangi bir CloudSimple alt ağlar planlanmış. Hizmet oluşturulduktan sonra CIDR değiştiremezsiniz.
+6. Hizmet için kaynak grubunu seçin. Yeni bir kaynak grubu eklemek için **Yeni oluştur**' a tıklayın.
+7. Hizmeti tanımlamak için ad girin.
+8. Hizmet ağ geçidi için CıDR girin. Şirket içi alt ağlarınızın, Azure alt ağlarının veya planlı CloudSimple alt ağlarının hiçbiriyle çakışmayacak bir/28 alt ağı belirtin. Hizmet oluşturulduktan sonra CıDR 'yi değiştiremezsiniz.
 
     ![CloudSimple hizmeti oluşturma](media/create-cloudsimple-service.png)
-
-9. **Tamam** düğmesine tıklayın.
+9. **Tamam**’a tıklayın.
 
 Hizmet oluşturulur ve hizmetler listesine eklenir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bilgi edinmek için nasıl [özel bulut oluşturma](https://docs.azure.cloudsimple.com/create-private-cloud/)
-* Bilgi edinmek için nasıl [bir özel bulut ortamı yapılandırma](quickstart-create-private-cloud.md)
+* [Düğüm sağlamayı](create-nodes.md) öğrenin
+* [Özel bulut oluşturmayı](create-private-cloud.md) öğrenin
+* [Özel bir bulut ortamını yapılandırmayı](quickstart-create-private-cloud.md) öğrenin

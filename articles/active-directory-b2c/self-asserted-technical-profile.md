@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory B2C, özel bir ilkede otomatik olarak onaylanan teknik profil tanımlama | Microsoft Docs
-description: Azure Active Directory B2C özel bir ilke otomatik olarak onaylanan bir teknik profili tanımlayın.
+title: Azure Active Directory B2C bir özel ilkede kendi kendine onaylanan bir teknik profil tanımlayın | Microsoft Docs
+description: Azure Active Directory B2C bir özel ilkede kendi kendine onaylanan bir teknik profil tanımlayın.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,34 +10,34 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 3c728660f1a77c02f1e4b5fdeb467a7dbba4e36a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4fec742766cebeb5b1d82655e09af77a888c375c
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66512656"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71063687"
 ---
-# <a name="define-a-self-asserted-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Bir Azure Active Directory B2C özel ilke otomatik olarak onaylanan teknik profil tanımlama
+# <a name="define-a-self-asserted-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Azure Active Directory B2C özel ilkesinde kendi kendine onaylanan teknik profil tanımlama
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Azure Active Directory (Azure AD) B2C kullanıcı giriş sağlamak için burada beklenen tüm etkileşimleri teknik profiller Self onaylanan. Örneğin, bir kaydolma sayfasında, oturum açma sayfası veya parola sıfırlama sayfası.
+Kullanıcının giriş sağlaması beklenen Azure Active Directory B2C (Azure AD B2C) içindeki tüm etkileşimler kendi kendine onaylanan teknik profillerdir. Örneğin, bir kaydolma sayfası, oturum açma sayfası veya parola sıfırlama sayfası.
 
 ## <a name="protocol"></a>Protocol
 
-**Adı** özniteliği **Protokolü** öğesi ayarlanması gerekiyor `Proprietary`. **İşleyici** özniteliği için Azure AD B2C tarafından kullanılan protokol işleyicisi bütünleştirilmiş kodun tam adı içermelidir Self onaylanan: `Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null`
+**Protokol** öğesinin `Proprietary` **Name** özniteliğinin olarak ayarlanması gerekir. **Handler** özniteliği, kendi kendine onaylanan Azure AD B2C tarafından kullanılan protokol işleyici derlemesinin tam adını içermelidir:`Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null`
 
-Aşağıdaki örnek, bir e-posta için otomatik olarak onaylanan teknik profili kaydolma gösterir:
+Aşağıdaki örnek, e-posta kaydı için kendi kendine onaylanan bir teknik profili göstermektedir:
 
 ```XML
 <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
   <DisplayName>Email signup</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
 ```
- 
+
 ## <a name="input-claims"></a>Giriş talepleri
 
-Otomatik olarak onaylanan teknik profili içinde kullanabileceğiniz **InputClaims** ve **InputClaimsTransformations** (çıktı otomatik olarak onaylanan sayfada görüntülenen talep değerini önceden doldurmak için öğeleri Talepler). Örneğin, profil düzenleme ilkesinin kullanıcı yolculuğu ilk Azure AD B2C dizin hizmetinden kullanıcı profili okur, sonra otomatik olarak onaylanan teknik profili, kullanıcı profilinde depolanan kullanıcı verileri ile giriş talepleri ayarlar. Bu talep kullanıcı profilinizden toplanan ve ardından var olan verilere daha sonra düzenleyebilirsiniz kullanıcıya gösterilir.
+Kendi kendine onaylanan bir teknik profilde, otomatik olarak onaylanan sayfada (çıkış talepleri) görünen taleplerin değerini önceden doldurmak için **ınputclaim** ve **ınputclaimstransformations** öğelerini kullanabilirsiniz. Örneğin, profil düzenleme ilkesinde Kullanıcı yolculuğu ilk olarak Azure AD B2C dizin hizmetinden kullanıcı profilini okur, ardından kendi kendini onaylanan teknik profil, giriş taleplerini Kullanıcı profilinde depolanan kullanıcı verileriyle ayarlar. Bu talepler Kullanıcı profilinden toplanır ve sonra var olan verileri düzenleyebilen kullanıcıya sunulur.
 
 ```XML
 <TechnicalProfile Id="SelfAsserted-ProfileUpdate">
@@ -51,15 +51,15 @@ Otomatik olarak onaylanan teknik profili içinde kullanabileceğiniz **InputClai
 ```
 
 
-## <a name="output-claims"></a>Çıkış talep
+## <a name="output-claims"></a>Çıkış talepleri
 
-**OutputClaims** öğesi kullanıcıdan veri toplamak için sunulan talepler bir listesini içerir. Çıkış talep bazı değerleri ile önceden doldurmak için daha önce açıklanan giriş talepleri kullanın. Öğe, varsayılan bir değer de içerebilir. Taleplerde sırasını **OutputClaims** Azure AD B2C ekranında talepleri işler sırasını denetler. **DefaultValue** yalnızca talep hiçbir zaman önce alındıysa özniteliği etkinleşir. Ancak, kullanıcı değeri boş ayrılsa bile bunu önce önceki bir düzenleme adımı ayarlandıysa, varsayılan değer etkili olmaz. Varsayılan değer kullanılmasını zorlamak için ayarlanmış **AlwaysUseDefaultValue** özniteliğini `true`. Bir değer sağlamak için belirli bir çıkış talep zorlamak için ayarlanmış **gerekli** özniteliği **OutputClaims** öğesine `true`.
+**Outputclaim** öğesi, kullanıcıdan veri toplamak için sunulacak taleplerin bir listesini içerir. Çıktı taleplerini bazı değerlerle önceden doldurmak için, daha önce açıklanan giriş taleplerini kullanın. Öğesi de varsayılan bir değer içerebilir. **Outputclaim** 'deki taleplerin sırası, Azure AD B2C ekrandaki talepleri işleme sırasını denetler. **DefaultValue** özniteliği yalnızca talep daha önce ayarlanmamışsa geçerli olur. Ancak, önceki bir düzenleme adımında daha önce ayarlandıysa, Kullanıcı değeri boş bırakırsa bile, varsayılan değer geçerli olmaz. Varsayılan bir değerin kullanımını zorlamak için, **Alwaysusedefaultvalue** özniteliğini olarak `true`ayarlayın. Kullanıcıyı belirli bir çıkış talebi için bir değer sağlamaya zorlamak için, **outputclaim** öğesinin `true` **gerekli** özniteliğini olarak ayarlayın.
 
-**ClaimType** öğesinde **OutputClaims** koleksiyon ayarlamak için gereksinim duyduğu **UserInputType** öğesi herhangi bir kullanıcı için giriş türü gibiAzureADB2Ctarafındandesteklenen`TextBox`veya `DropdownSingleSelect`. Veya **OutputClaim** öğesi ayarlamalısınız bir **DefaultValue**.  
+**Outputclaim** koleksiyonundaki **ClaimType** öğesinin, **userınputtype** öğesini Azure AD B2C `TextBox` tarafından desteklenen herhangi bir kullanıcı giriş türüne ayarlaması gerekir, örneğin veya `DropdownSingleSelect`. Ya da **Outputclaim** öğesinin bir **DefaultValue**ayarlaması gerekir.
 
-**OutputClaimsTransformations** öğe koleksiyonu içerebilir **OutputClaimsTransformation** çıkış talep değiştirmek veya yenilerini oluşturmak için kullanılan öğeleri.
+**Outputclaimstransformations** öğesi, çıkış taleplerini değiştirmek veya yenilerini oluşturmak için kullanılan bir **outputclaimstransreference** öğeleri koleksiyonu içerebilir.
 
-Aşağıdaki çıkış talep her zaman kümesine `live.com`:
+Aşağıdaki çıkış talebi her zaman şu şekilde `live.com`ayarlanır:
 
 ```XML
 <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="live.com" AlwaysUseDefaultValue="true" />
@@ -67,14 +67,14 @@ Aşağıdaki çıkış talep her zaman kümesine `live.com`:
 
 ### <a name="use-case"></a>Kullanım örneği
 
-Çıkış talep için dört senaryo vardır:
+Çıkış talepleri için dört senaryo vardır:
 
-- **Toplama çıkış talep kullanıcıdan** - kullanıcıdan bilgi toplamak gerektiğinde doğum tarihi gibi talep eklemelisiniz **OutputClaims** koleksiyonu. Kullanıcıya sunulan talepler belirtmelisiniz **UserInputType**, gibi `TextBox` veya `DropdownSingleSelect`. Otomatik olarak onaylanan teknik profili, aynı Talep veren bir doğrulama teknik profili varsa, Azure AD B2C kullanıcı talebine sunmaz. Kullanıcının herhangi bir çıkış talep varsa, Azure AD B2C'Teknik profili atlar.
-- **Bir çıkış talep kümesinde bir varsayılan değer ayarlama** - kullanıcıdan veri toplamak veya doğrulama teknik profilinden veriyor. `LocalAccountSignUpWithLogonEmail` Teknik profili kümeleri kendi kendine onaylanan **yürütülen SelfAsserted-girişi** için talep `true`.
-- **Doğrulama teknik profil çıkışı döndürür** -teknik profilinizi bazı talep döndüren bir doğrulama teknik profili çağırabilir. Talep Kabarcık ve kullanıcı yolculuğunda düzenleme sonraki adımlarda dönmek isteyebilirsiniz. Örneğin, yerel bir hesabıyla oturum açtığınızda, otomatik olarak onaylanan teknik profil adlı `SelfAsserted-LocalAccountSignin-Email` adlı doğrulama teknik profili çağırır `login-NonInteractive`. Bu teknik profili, kullanıcı kimlik bilgilerini doğrular ve ayrıca kullanıcı profilini döndürür. 'UserPrincipalName', 'displayName', 'givenName' ve 'Soyadı' gibi.
-- **Talepleri çıkış talep dönüştürme ile çıktı**
+- **Kullanıcıdan çıkış taleplerini toplama** -kullanıcıdan Doğum tarihi gibi bilgileri toplamanız gerektiğinde, isteği **outputclaim** koleksiyonuna eklemeniz gerekir. Kullanıcıya sunulan talepler, `TextBox` veya `DropdownSingleSelect`gibi **userınputtype**belirtmelidir. Kendi kendine onaylanan teknik profil, aynı talebi çıkaran bir doğrulama teknik profili içeriyorsa, Azure AD B2C kullanıcıya talep sunmaz. Kullanıcıya sunmak için herhangi bir çıkış talebi yoksa, Azure AD B2C teknik profili atlar.
+- Kullanıcıdan verileri toplamadan veya doğrulama teknik profilinden verileri döndürmeden **bir çıkış talebinde varsayılan bir değer ayarlama** . Kendi kendini onaylanan teknik profil, **yürütülen-selfasserted-Input** talebini olarak `true`ayarlar. `LocalAccountSignUpWithLogonEmail`
+- **Bir doğrulama teknik profili, çıkış taleplerini döndürür** . Teknik profiliniz, bazı talepler döndüren bir doğrulama teknik profili çağırabilir. Talepleri kabarcığa eklemek ve bunları Kullanıcı yolculuğunda sonraki düzenleme adımlarına döndürmek isteyebilirsiniz. Örneğin, yerel bir hesapla oturum açarken, adlı otomatik olarak onaylanan teknik profil `SelfAsserted-LocalAccountSignin-Email` adlı `login-NonInteractive`doğrulama teknik profilini çağırır. Bu teknik profil, Kullanıcı kimlik bilgilerini doğrular ve kullanıcı profilini de döndürür. ' UserPrincipalName ', ' displayName ', ', ' ve ' soyadı ' gibi.
+- **Talepler çıkış talebi dönüştürmesi aracılığıyla çıktı**
 
-Aşağıdaki örnekte, `LocalAccountSignUpWithLogonEmail` teknik profili gösterir, çıkış talep ve kümeleri kendi kendine onaylanan **yürütülen SelfAsserted-girişi** için `true`. `objectId`, `authenticationSource`, `newUser` Taleplerdir çıktısını `AAD-UserWriteUsingLogonEmail` doğrulama teknik profil ve kullanıcıya gösterilmez.
+Aşağıdaki örnekte, `LocalAccountSignUpWithLogonEmail` kendi kendini onaylanan teknik profil, çıkış taleplerinin kullanımını gösterir ve **yürütülen-selfasserted** `true`-Input ' ı belirler. ,, `AAD-UserWriteUsingLogonEmail` Talepler doğrulama teknik profilinin çıktılardır ve kullanıcıya gösterilmez. `newUser` `objectId` `authenticationSource`
 
 ```XML
 <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
@@ -113,34 +113,34 @@ Aşağıdaki örnekte, `LocalAccountSignUpWithLogonEmail` teknik profili göster
 
 ```
 
-## <a name="persist-claims"></a>Talep Sürdür
+## <a name="persist-claims"></a>Kalıcı talepler
 
-Varsa **PersistedClaims** öğesi eksik, otomatik olarak onaylanan teknik profili, Azure AD B2C'ye verilerini sürdürmez. Bunun yerine, verileri kalıcı hale getirmekten sorumlu olan bir doğrulama teknik profil için bir çağrı yapılır. Örneğin, kaydolma İlkesi kullanan `LocalAccountSignUpWithLogonEmail` teknik profili, yeni kullanıcı profili toplamak için kendi kendine onaylanan. `LocalAccountSignUpWithLogonEmail` Teknik profili içinde Azure AD B2C hesabı oluşturmak için doğrulama teknik profili çağırır.
+**PersistedClaims** öğesi yoksa, kendi kendini onaylanan teknik profil Azure AD B2C verileri kalıcı hale etmez. Bunun yerine, verileri kalıcı hale getirmekten sorumlu bir doğrulama teknik profiline çağrı yapılır. Örneğin, kaydolma ilkesi, yeni kullanıcı profilini toplamak için `LocalAccountSignUpWithLogonEmail` kendi kendine onaylanan teknik profilini kullanır. `LocalAccountSignUpWithLogonEmail` Teknik profil, Azure AD B2C hesabı oluşturmak için doğrulama teknik profilini çağırır.
 
-## <a name="validation-technical-profiles"></a>Doğrulama teknik profiller
+## <a name="validation-technical-profiles"></a>Doğrulama teknik profilleri
 
-Doğrulama teknik profili, bazılarını veya tümünü başvuru teknik profili, çıkış talep doğrulamak için kullanılır. Otomatik olarak onaylanan teknik profil çıkış talep giriş talepleri doğrulama teknik profil yer almalıdır. Doğrulama teknik profili, kullanıcı girişini doğrulayan ve kullanıcıya bir hata döndürebilir. 
+Bir doğrulama teknik profili, başvuru yapan teknik profilin bazı veya tüm çıkış taleplerini doğrulamak için kullanılır. Doğrulama teknik profilinin giriş talepleri, kendi kendini onaylanan teknik profilin çıkış taleplerinde görünmelidir. Doğrulama teknik profili, Kullanıcı girişini doğrular ve kullanıcıya bir hata döndürebilir.
 
-Doğrulama teknik profili gibi herhangi bir teknik profil ilkesi olabilir [Azure Active Directory](active-directory-technical-profile.md) veya [REST API](restful-technical-profile.md) teknik profiller. Önceki örnekte, `LocalAccountSignUpWithLogonEmail` teknik profili doğrulama signinName dizinde mevcut değil. Değilse, doğrulama teknik profili yerel bir hesap oluşturup objectID, authenticationSource newUser döndürür. `SelfAsserted-LocalAccountSignin-Email` Teknik profil çağrıları `login-NonInteractive` kullanıcı kimlik bilgilerini doğrulamak için doğrulama teknik profili.
+Doğrulama teknik profili, ilkede [Azure Active Directory](active-directory-technical-profile.md) veya [REST API](restful-technical-profile.md) teknik profilleri gibi herhangi bir teknik profil olabilir. Önceki örnekte, `LocalAccountSignUpWithLogonEmail` teknik profil, signınname 'in dizinde mevcut olmadığını doğrular. Aksi takdirde, doğrulama teknik profili yerel bir hesap oluşturur ve objectID, authenticationSource, newUser öğesini döndürür. Teknik profil, Kullanıcı kimlik `login-NonInteractive` bilgilerini doğrulamak için doğrulama teknik profilini çağırır. `SelfAsserted-LocalAccountSignin-Email`
 
-Ayrıca, bir REST API teknik profili iş mantığınızı çağrı, giriş talep üzerine veya kullanıcı verilerini daha fazla Kurumsal satır iş kolu uygulaması ile tümleştirerek zenginleştirin. Daha fazla bilgi için [doğrulama teknik profili](validation-technical-profile.md)
+Ayrıca kurumsal iş kolu uygulamasıyla daha fazla tümleştirme yaparak iş mantığınızla birlikte REST API teknik bir profil çağırabilir, giriş taleplerinin üzerine yazabilir veya zenginleştirme Kullanıcı verileri sağlayabilirsiniz. Daha fazla bilgi için bkz. [doğrulama teknik profili](validation-technical-profile.md)
 
 ## <a name="metadata"></a>Meta Veriler
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| setting.showContinueButton | Hayır | Devam düğmesine görüntüler. Olası değerler: `true` (varsayılan), veya `false` |
-| setting.showCancelButton | Hayır | İptal düğmesi görüntüler. Olası değerler: `true` (varsayılan), veya `false` |
-| setting.operatingMode | Hayır | Bu özellik, bir oturum açma sayfası için giriş doğrulama ve hata iletileri gibi bir kullanıcı adı alanı davranışını denetler. Beklenen değer: `Username` veya `Email`. |
-| ContentDefinitionReferenceId | Evet | Tanımlayıcısını [içerik tanımı](contentdefinitions.md) Bu teknik profil ile ilişkili. |
-| EnforceEmailVerification | Hayır | İçin kaydolma veya düzenleme profili, e-posta doğrulama zorlar. Olası değerler: `true` (varsayılan) veya `false`. | 
-| setting.showSignupLink | Hayır | Kaydolun düğmesi görüntüler. Olası değerler: `true` (varsayılan), veya `false` |
-| setting.retryLimit | Hayır | Bir kullanıcının doğrulama teknik profili karşı denetlenir verilerini sağlamak için deneme sayısını denetler. Örneğin, bir kullanıcı zaten var ve sınırına kadar denemeye tutan bir hesapla kaydolmak için çalışır.
-| SignUpTarget | Hayır | Kaydolma hedef exchange tanımlayıcısı. Kullanıcı Kaydolma düğmesine tıkladığında, Azure AD B2C'yi belirtilen exchange tanımlayıcısı yürütür. |
+| Setting. Showdevam düğmesi | Hayır | Devam düğmesini görüntüler. Olası değerler: `true` (varsayılan) veya`false` |
+| Setting. showCancelButton | Hayır | İptal düğmesini görüntüler. Olası değerler: `true` (varsayılan) veya`false` |
+| Setting. operatingMode | Hayır | Oturum açma sayfası için bu özellik, giriş doğrulaması ve hata iletileri gibi Kullanıcı adı alanının davranışını denetler. Beklenen değerler: `Username` veya `Email`. |
+| Contentdefinitionreferenceıd | Evet | Bu teknik profille ilişkili [içerik tanımının](contentdefinitions.md) tanımlayıcısı. |
+| Enforceemaildoğrulaması | Hayır | Kaydolma veya profil düzenleme için, e-posta doğrulamasını uygular. Olası değerler: `true` (varsayılan) veya. `false` |
+| . Showsignyukarı ayarlanıyor | Hayır | Kaydolma düğmesini görüntüler. Olası değerler: `true` (varsayılan) veya`false` |
+| . retryLimit ayarlanıyor | Hayır | Bir kullanıcının bir doğrulama teknik profiline karşı denetlenen verileri sağlamaya kaç kez denendiğini denetler. Örneğin, bir kullanıcı zaten var olan bir hesapla kaydolmaya çalışır ve sınıra ulaşılana kadar denemeye devam eder.
+| SignUpTarget | Hayır | Kaydolma hedefi değişim tanımlayıcısı. Kullanıcı kaydolma düğmesine tıkladığında, Azure AD B2C belirtilen Exchange tanımlayıcısını yürütür. |
 
 ## <a name="cryptographic-keys"></a>Şifreleme anahtarları
 
-**CryptographicKeys** öğesi kullanılmaz.
+**Cryptographickeys** öğesi kullanılmıyor.
 
 
 

@@ -43,19 +43,25 @@
       href: hybrid-azuread-join-plan.md
     - name: Hibrit Azure AD’ye katılıma yönelik denetimli doğrulama
       href: hybrid-azuread-join-control.md
-    - name: Cihaz kimliğini yönetme
+    - name: Cihaz kimliklerini yönetme
       href: device-management-azure-portal.md
     - name: Eski cihazları yönetme
       href: manage-stale-devices.md
     - name: Enterprise State Roaming’i etkinleştirme
       href: enterprise-state-roaming-enable.md
+    - name: Windows Azure VM’leri ve Azure AD
+      href: howto-vm-sign-in-azure-ad-windows.md
+    - name: Sanal masaüstü altyapısı
+      href: howto-device-identity-virtual-desktop-infrastructure.md
     - name: Azure tarafından yönetilen iş istasyonlarını dağıtma
       href: howto-azure-managed-workstation.md
     - name: Cihaz kimliği sorunlarını giderme
       items:
         - name: Hibrit Azure AD’ye katılmış geçerli Windows cihazlarında sorun giderme
           href: troubleshoot-hybrid-join-windows-current.md
-        - name: Hibrit Azure AD’ye katılmış eski Windows cihazlarında sorun giderme
+        - name: dsregcmd kullanarak sorun giderme
+          href: troubleshoot-device-dsregcmd.md
+        - name: Hibrit Azure AD’ye katılmış alt düzey Windows cihazlarında sorun giderme
           href: troubleshoot-hybrid-join-windows-legacy.md
         - name: Enterprise State Roaming sorunlarını giderme
           href: enterprise-state-roaming-troubleshooting.md

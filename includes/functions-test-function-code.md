@@ -4,23 +4,19 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 04/24/2019
 ms.author: glenga
-ms.openlocfilehash: a3f75b7273164abc5318f16e9ab8d9883ff0c0aa
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 44eb25be12b908c8f951cb20948068da3bfc2928
+ms.sourcegitcommit: 8a717170b04df64bd1ddd521e899ac7749627350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188153"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71203166"
 ---
-## <a name="test"></a>Azure'da işlevi test etme
+## <a name="test"></a>Azure 'da işlevi doğrulama
 
-Dağıtılan işlevi test etmek için cURL kullanın. Kullanarak önceki adımda kopyaladığınız URL'ye sorgu dizesi ekleme `&name=<yourname>` aşağıdaki örnekteki gibi bir URL:
+Dağıtılan işlevi doğrulamak için kıvrımlı kullanın. Önceki adımdan kopyaladığınız işlev anahtarı da dahil olmak üzere URL 'yi kullanarak URL 'ye sorgu dizesi `&name=<yourname>` ekleyin.
 
-```bash
-curl https://myfunctionapp.azurewebsites.net/api/httptrigger?code=cCr8sAxfBiow548FBDLS1....&name=<yourname>
-```
+![Azure 'da işlevi çağırmak için kıvrımlı kullanma.](./media/functions-test-function-code/functions-azure-cli-function-test-curl.png) 
 
-![Azure'da işlevi çağırmak için cURL kullanarak.](./media/functions-test-function-code/functions-azure-cli-function-test-curl.png) 
+Ayrıca, işlev anahtarı da dahil olmak üzere kopyalanmış URL 'yi, Web tarayıcınızın adres çubuğuna yapıştırabilirsiniz. Sonra, isteği yürütmeden önce sorgu `&name=<yourname>` dizesini URL 'ye ekleyin.
 
-Ayrıca, web tarayıcınızın adres için kopyalanan URL'yi yapıştırabilirsiniz. Yeniden sorgu dizesini URL'ye `&name=<yourname>` isteği yürütmeden önce URL'si.
-
-![İşlev çağrısı için bir web tarayıcısı kullanma.](./media/functions-test-function-code/functions-azure-cli-function-test-browser.png)  
+![İşlevi çağırmak için bir Web tarayıcısı kullanma.](./media/functions-test-function-code/functions-azure-cli-function-test-browser.png)  

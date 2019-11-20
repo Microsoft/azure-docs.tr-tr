@@ -4,28 +4,27 @@ description: İçinde olamaz VM'ye RDP VM Güvenli Modu'nda önyüklenir çünk�
 services: virtual-machines-windows
 documentationCenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 11/13/2018
 ms.author: genli
-ms.openlocfilehash: 8e108d88282894a7b1bf014146083008bedd483d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 38b0266565969d06f3f1128ce5a92c5268c7c7d2
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60319501"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71088570"
 ---
 #  <a name="cannot-rdp-to-a-vm-because-the-vm-boots-into-safe-mode"></a>VM Güvenli Modu'nda önyüklenir olmadığından bir VM'ye RDP yapılamıyor
 
 Bu makale, size bağlanamıyor Azure Windows sanal makinelerine (VM'ler) sanal makine yapılandırıldığından bir sorunun nasıl çözüleceği güvenli moduna önyükleme.
 
 > [!NOTE]
-> Azure'da oluşturmaya ve kaynaklarla çalışmaya yönelik iki farklı dağıtım modeli vardır: [Resource Manager ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makale, Klasik dağıtım modeli yerine yeni dağıtımlar için kullanmanızı öneririz Resource Manager dağıtım modelini kullanarak kapsar.
+> Azure 'da kaynak oluşturmak ve bunlarla çalışmak için iki farklı dağıtım modeli vardır: [Kaynak Yöneticisi ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makale, Klasik dağıtım modeli yerine yeni dağıtımlar için kullanmanızı öneririz Resource Manager dağıtım modelini kullanarak kapsar.
 
 ## <a name="symptoms"></a>Belirtiler
 
@@ -113,22 +112,22 @@ Döküm günlük ve seri konsol etkinleştirmek için aşağıdaki betiği çal�
     reg unload HKLM\BROKENSYSTEM
     ```
 
-#### <a name="configure-the-windows-to-boot-into-normal-mode"></a>Normal moduna önyüklemesini için Windows yapılandırma
+#### <a name="configure-the-windows-to-boot-into-normal-mode"></a>Windows 'ı normal modda önyüklenecek şekilde yapılandırma
 
 1. Yükseltilmiş bir komut istemi oturumu açın (**yönetici olarak çalıştır**).
-2. Önyükleme yapılandırma verileri kontrol edin. Aşağıdaki komutlar, ekli işletim sistemi diski için atanan sürücü harfini f Değiştir VM'niz için uygun değeri bu sürücü harfiyle olduğunu varsayıyoruz.
+2. Önyükleme yapılandırma verilerini denetleyin. Aşağıdaki komutlarda, bağlı işletim sistemi diskine atanan sürücü harfinin F olduğunu varsaytık. Bu sürücü harfini VM 'niz için uygun değerle değiştirin.
 
         bcdedit /store F:\boot\bcd /enum
-    Tanımlayıcı adı olan bölümünün Not **\windows** klasör. Varsayılan olarak, "Varsayılan" tanımlayıcı adıdır.
+    **\Windows** klasörünün bulunduğu bölümün tanımlayıcı adını unutmayın. Varsayılan olarak, tanımlayıcı adı "varsayılan" ' dır.
 
-    VM yapılandırıldıysa Güvenli Mod'da önyüklemek için ek bir bayrak altında görürsünüz **Windows önyükleme yükleyicisi** adlı bölüm **başlatılmayı**. Görmüyorsanız, **başlatılmayı** bayrağı, bu makaleyi senaryonuz için uygulanmaz.
+    VM yapılandırıldıysa Güvenli Mod'da önyüklemek için ek bir bayrak altında görürsünüz **Windows önyükleme yükleyicisi** adlı bölüm **başlatılmayı**. **Safeboot** bayrağını görmüyorsanız, bu makale senaryonuz için geçerlidir.
 
-    ![Önyükleme tanımlayıcısı hakkında görüntü](./media/troubleshoot-rdp-safe-mode/boot-id.png)
+    ![Önyükleme tanımlayıcısı ile ilgili görüntü](./media/troubleshoot-rdp-safe-mode/boot-id.png)
 
-3. Kaldırma **başlatılmayı** bayrak VM normal moduna önyüklemesini şekilde:
+3. **Safeboot** bayrağını kaldırın, bu nedenle VM normal modda önyüklenir:
 
         bcdedit /store F:\boot\bcd /deletevalue {Default} safeboot
 4. Önyükleme yapılandırma verileri emin olmak için kontrol **başlatılmayı** bayrağı kaldırıldı:
 
         bcdedit /store F:\boot\bcd /enum
-5. [İşletim sistemi diskini ve VM yeniden](../windows/troubleshoot-recovery-disks-portal.md). Daha sonra sorun çözülmüş olup olmadığını denetleyin.
+5. [İşletim sistemi diskini ve VM yeniden](../windows/troubleshoot-recovery-disks-portal.md). Sonra sorunun çözümlenip çözümlenmediğini denetleyin.

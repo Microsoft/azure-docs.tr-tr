@@ -1,6 +1,6 @@
 ---
-title: 'Hızlı Başlangıç: Oluşturma ve Azure HDInsight için Apache Storm topolojisinde izleme'
-description: Bu hızlı başlangıçta, oluşturmayı ve bir Azure HDInsight Apache Storm topolojisinde izlemeyi öğrenin.
+title: 'Hızlı başlangıç: Apache Storm topolojisi oluşturma/yönetme-Azure HDInsight'
+description: Hızlı başlangıçta Azure HDInsight 'ta Apache Storm topolojisi oluşturma ve izleme hakkında bilgi edinin.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,34 +8,34 @@ ms.topic: quickstart
 ms.date: 06/14/2019
 ms.author: hrasheed
 ms.custom: mvc
-ms.openlocfilehash: 12001aef970d3b465a7f5c8e0c7af072b8f4ec80
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 24173b553f30f652caf20b1ec7500fd9c4d2f7a0
+ms.sourcegitcommit: 3486e2d4eb02d06475f26fbdc321e8f5090a7fac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67428455"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73241232"
 ---
-# <a name="quickstart-create-and-monitor-an-apache-storm-topology-in-azure-hdinsight"></a>Hızlı Başlangıç: Oluşturma ve bir Azure HDInsight Apache Storm topolojisinde izleme
+# <a name="quickstart-create-and-monitor-an-apache-storm-topology-in-azure-hdinsight"></a>Hızlı başlangıç: Azure HDInsight 'ta Apache Storm topolojisi oluşturma ve izleme
 
 Apache Storm, veri akışlarını işlemeye yönelik ölçeklenebilir, hataya dayanıklı, dağıtılmış ve gerçek zamanlı bir işlem sistemidir. Azure HDInsight’ta Storm ile büyük veri analizini gerçek zamanlı olarak gerçekleştiren bulut tabanlı bir Storm kümesi oluşturabilirsiniz.
 
-Bu hızlı başlangıçta, bir örnekten Apache kullandığınız [storm-starter](https://github.com/apache/storm/tree/v2.0.0/examples/storm-starter) oluşturun ve var olan Apache Storm kümesine bir Apache Storm topolojisi izlemek için proje.
+Bu hızlı başlangıçta, var olan bir Apache Storm kümesine Apache Storm topolojisi oluşturmak ve izlemek için Apache [fırtınası-başlangıç](https://github.com/apache/storm/tree/v2.0.0/examples/storm-starter) projesinden bir örnek kullanırsınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* HDInsight üzerinde Apache Storm kümesi. Bkz: [Apache Hadoop kümeleri oluşturma Azure portalını kullanarak](../hdinsight-hadoop-create-linux-clusters-portal.md) seçip **Storm** için **küme türü**.
+* HDInsight üzerinde bir Apache Storm kümesi. Bkz. [Azure Portal kullanarak Apache Hadoop kümeleri oluşturma](../hdinsight-hadoop-create-linux-clusters-portal.md) ve **küme türü**için **fırtınası** seçme.
 
-* Bir SSH istemcisi. Daha fazla bilgi için [SSH kullanarak HDInsight (Apache Hadoop) bağlanma](../hdinsight-hadoop-linux-use-ssh-unix.md).
+* Bir SSH istemcisi. Daha fazla bilgi için bkz. [SSH kullanarak HDInsight 'A bağlanma (Apache Hadoop)](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-## <a name="create-the-topology"></a>Topoloji oluşturma
+## <a name="create-the-topology"></a>Topolojiyi oluşturma
 
-1. Storm kümenize bağlanın. Değiştirerek aşağıdaki komutu düzenleyin `CLUSTERNAME` Storm'a adı ile küme ve ardından komutu girin:
+1. Fırtınası kümenize bağlanın. `CLUSTERNAME`, fırtınası kümenizin adıyla değiştirerek aşağıdaki komutu düzenleyin ve ardından şu komutu girin:
 
     ```cmd
     ssh sshuser@CLUSTERNAME-ssh.azurehdinsight.net
     ```
 
-2. **WordCount** örnek konumunda HDInsight kümenize dahil `/usr/hdp/current/storm-client/contrib/storm-starter/`. Topoloji, rastgele tümceler oluşturur ve kelimelerin tekrarlama sayısını belirler. Başlamak için aşağıdaki komutu kullanın **wordcount** topoloji küme üzerinde:
+2. **WORDCOUNT** örneği `/usr/hdp/current/storm-client/contrib/storm-starter/`HDInsight kümenize eklenmiştir. Topoloji rastgele cümleler oluşturur ve sözcüklerin kaç kez meydana geçtiğini sayar. Kümede **WORDCOUNT** topolojisini başlatmak için aşağıdaki komutu kullanın:
 
     ```bash
     storm jar /usr/hdp/current/storm-client/contrib/storm-starter/storm-starter-topologies-*.jar org.apache.storm.starter.WordCountTopology wordcount
@@ -43,42 +43,42 @@ Bu hızlı başlangıçta, bir örnekten Apache kullandığınız [storm-starter
 
 ## <a name="monitor-the-topology"></a>Topolojiyi izleme
 
-Storm çalışan topolojilerle çalışmaya yönelik bir web arabirimi sağlar ve HDInsight kümenize dahil edilir.
+Fırtınası, çalışan topolojilerle çalışmaya yönelik bir Web arabirimi sağlar ve HDInsight kümenize dahildir.
 
 Storm Kullanıcı Arabirimini kullanarak topolojiyi izlemek için aşağıdaki adımları kullanın:
 
 1. Storm kullanıcı arabirimini görüntülemek için bir web tarayıcısı açarak `https://CLUSTERNAME.azurehdinsight.net/stormui` adresine gidin. `CLUSTERNAME` değerini kümenizin adıyla değiştirin.
 
-2. Altında **topoloji özeti**seçin **wordcount** girişi **adı** sütun. Topoloji hakkında bilgiler görüntülenir.
+2. **Topoloji Özeti**altında **ad** sütununda **WORDCOUNT** girişini seçin. Topoloji hakkında bilgiler görüntülenir.
 
-    ![Storm-starter WordCount topoloji bilgilerini içeren Storm Panosu.](./media/apache-storm-quickstart/topology-summary.png)
+    ![Storm-starter WordCount topoloji bilgilerini içeren Storm Panosu.](./media/apache-storm-quickstart/hdi-topology-summary.png)
 
     Yeni sayfa aşağıdaki bilgileri sağlar:
 
     |Özellik | Açıklama |
     |---|---|
     |Topoloji istatistikleri|Topoloji performansı hakkında zaman pencereleri halinde düzenlenmiş temel bilgiler. Belirli bir zaman penceresinin seçilmesi sayfanın diğer bölümlerinde gösterilen bilgiler için zaman penceresini değiştirir.|
-    |Spout|Her bir spout'un döndürdüğü son hata dahil olmak üzere spout'lar hakkında temel bilgiler.|
-    |Cıvatalar|Cıvatalar hakkında temel bilgiler.|
-    |Topoloji yapılandırması|Topoloji yapılandırması hakkında ayrıntılı bilgiler.|
-    |Etkinleştir|Devre dışı bırakılan bir topolojiyi işlemeyi sürdürür.|
-    |Devre dışı bırak|Çalışan topolojiyi duraklatır.|
-    |Yeniden Dengeleme|Topolojinin paralelliğini ayarlar. Kümedeki düğüm sayısını değiştirdikten sonra çalışan topolojileri yeniden dengelemeniz gerekir. Yeniden dengeleme, kümede artan/azalan düğüm sayısını dengelemek üzere paralelliği ayarlamaya imkan tanır. Daha fazla bilgi için [Apache Storm topolojisinin paralelliğini anlama](https://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html).|
-    |sonlandırma|Belirtilen zaman aşımından sonra Storm topolojisini sonlandırır.|
+    |Spout|Her Spout tarafından döndürülen son hata dahil olmak üzere spomalar hakkındaki temel bilgiler.|
+    |Cıvatalar|Cıvatları hakkında temel bilgiler.|
+    |Topoloji yapılandırması|Topoloji yapılandırması hakkında ayrıntılı bilgi.|
+    |Etkinleştir|Devre dışı bırakılan bir topoloji işlemeyi sürdürür.|
+    |Çıkarma|Çalışan bir topolojiyi duraklatır.|
+    |Dengeleme|Topolojinin paralelliğini ayarlar. Kümedeki düğüm sayısını değiştirdikten sonra çalışan topolojileri yeniden dengelemeniz gerekir. Yeniden dengeleme, kümede artan/azalan düğüm sayısını dengelemek üzere paralelliği ayarlamaya imkan tanır. Daha fazla bilgi için bkz. [Apache Storm topolojisinin paralelliğini anlama](https://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html).|
+    |Kapatmayın|Belirtilen zaman aşımından sonra bir fırtınası topolojisini sonlandırır.|
 
 3. Bu sayfada **Spout’lar** veya **Cıvatalar** bölümünden bir giriş seçin. Seçilen bileşen hakkında bilgiler görüntülenir.
 
-    ![Seçili bileşenler hakkında bilgi içeren Storm Panosu.](./media/apache-storm-quickstart/component-summary.png)
+    ![Seçili bileşenler hakkında bilgi içeren Storm Panosu.](./media/apache-storm-quickstart/hdi-component-summary.png)
 
     Yeni sayfa aşağıdaki bilgileri görüntüler:
 
     |Özellik | Açıklama |
     |---|---|
-    |Spout/Cıvata|Bileşen performansı hakkında zaman pencereleri halinde düzenlenmiş temel bilgiler. Belirli bir zaman penceresinin seçilmesi sayfanın diğer bölümlerinde gösterilen bilgiler için zaman penceresini değiştirir.|
-    |Giriş İstatistikleri (yalnızca Cıvata)|Cıvata tarafından kullanılan verileri üreten bileşenler hakkında bilgi.|
-    |Çıkış istatistikleri|Bu Cıvata tarafından yayılan veriler hakkında bilgiler.|
-    |Yürütücü|Bu bileşenin örnekleri hakkında bilgiler.|
-    |Hatalar|Bu bileşen tarafından üretilen hataları.|
+    |Spout/cıvata istatistikleri|Zaman pencereleri halinde düzenlenmiş bileşen performansı hakkındaki temel bilgiler. Belirli bir zaman penceresinin seçilmesi sayfanın diğer bölümlerinde gösterilen bilgiler için zaman penceresini değiştirir.|
+    |Giriş İstatistikleri (yalnızca cıvatlar)|Cıvata tüketilen verileri üreten bileşenler hakkında bilgi.|
+    |Çıkış istatistikleri|Bu cıvata yayılan verilerle ilgili bilgiler.|
+    |Yürütücüler|Bu bileşenin örnekleri hakkında bilgi.|
+    |Hatalar|Bu bileşen tarafından oluşturulan hatalar.|
 
 4. Spout veya cıvata ayrıntılarını görüntülerken bileşenin belirli bir örneğine ilişkin ayrıntıları görmek için **Yürütücüler** bölümündeki **Bağlantı Noktası** sütunundan bir giriş seçin.
 
@@ -101,11 +101,11 @@ Word-count topolojisi için **Topoloji özeti** sayfasına geri dönün ve ardı
 
 Hızlı başlangıcı tamamladıktan sonra kümeyi silmek isteyebilirsiniz. HDInsight ile, verileriniz Azure Storage’da depolanır, böylece kullanılmadığında bir kümeyi güvenle silebilirsiniz. Ayrıca, kullanılmıyorken dahi HDInsight kümesi için sizden ücret kesilir. Küme ücretleri depolama ücretlerinin birkaç katı olduğundan, kullanılmadığında kümelerin silinmesi mantıklı olandır.
 
-Bir kümeyi silmek için bkz: [tarayıcınız, PowerShell veya Azure CLI kullanarak bir HDInsight kümesi silme](../hdinsight-delete-cluster.md).
+Bir kümeyi silmek için bkz. [tarayıcınızı, PowerShell 'i veya Azure CLI 'yı kullanarak HDInsight kümesini silme](../hdinsight-delete-cluster.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, bir örnekten Apache kullanılan [storm-starter](https://github.com/apache/storm/tree/v2.0.0/examples/storm-starter) oluşturun ve var olan Apache Storm kümesine bir Apache Storm topolojisi izlemek için proje. Yönetme ve Apache Storm topolojilerini izleme temel bilgileri öğrenmek için sonraki makaleye ilerleyin.
+Bu hızlı başlangıçta, var olan bir Apache Storm kümesine Apache Storm topolojisi oluşturmak ve izlemek için Apache [fırtınası-başlangıç](https://github.com/apache/storm/tree/v2.0.0/examples/storm-starter) projesinden bir örnek kullandınız. Apache Storm topolojileri yönetme ve izleme hakkında temel bilgileri öğrenmek için sonraki makaleye ilerleyin.
 
 > [!div class="nextstepaction"]
->[Azure HDInsight üzerinde Apache Storm topolojilerini dağıtma ve yönetme](./apache-storm-deploy-monitor-topology-linux.md)
+>[Azure HDInsight 'ta Apache Storm topolojileri dağıtma ve yönetme](./apache-storm-deploy-monitor-topology-linux.md)

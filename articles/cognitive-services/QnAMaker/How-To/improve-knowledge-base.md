@@ -1,119 +1,124 @@
 ---
-title: Bilgi Bankası - soru-cevap Oluşturucu geliştirin
+title: Bilgi Bankası Soru-Cevap Oluşturma geliştirme-
 titleSuffix: Azure Cognitive Services
-description: Etkin öğrenme bilgi bankanızı alternatif sorular, soru ve yanıt çiftinizi için kullanıcı-gönderimler göre önererek kalitesini sağlar. Bu öneriler, ya da sorularınız var ya da bunları reddetmeniz ekleme inceleyin. Bilgi bankanızı otomatik olarak değişmez. Herhangi bir değişikliğin etkili olması için önerileri kabul etmeniz gerekir. Bu öneriler sorular ekleyebilir ancak yoksa değiştirebilir veya de soru kaldırabilirsiniz.
+description: Etkin öğrenme ile bilgi Bankalarınızın kalitesini artırabilirsiniz. Mevcut soruları kaldırmadan veya değiştirmeden gözden geçirin, kabul edin veya reddedin, ekleyin.
 author: diberry
 manager: nitinme
 services: cognitive-services
 ms.service: cognitive-services
 ms.subservice: qna-maker
-ms.topic: article
-ms.date: 06/19/2019
+ms.topic: conceptual
+ms.date: 10/14/2019
 ms.author: diberry
-ms.openlocfilehash: b73884e544ea1b8ee76c8a891048e6a8e17d6ab3
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: add4bbead880fb9b74d342abc1d4b3c0e9475fad
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67204086"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73721187"
 ---
-# <a name="use-active-learning-to-improve-your-knowledge-base"></a>Etkin öğrenme bilgi bankanızı geliştirmek için kullanın
+# <a name="use-active-learning-to-improve-your-knowledge-base"></a>Bilgi bankanızı geliştirmek için etkin öğrenmeyi kullanma
 
-Etkin öğrenme bilgi bankanızı alternatif sorular, soru ve yanıt çiftinizi için kullanıcı-gönderimler göre önererek kalitesini sağlar. Bu öneriler, ya da sorularınız var ya da bunları reddetmeniz ekleme inceleyin. 
+Etkin öğrenme, sorularınızı ve yanıt çiftiyle Kullanıcı Gönderimlerini temel alan alternatif sorular önererek bilgi Bankalarınızın kalitesini iyileştirmenize olanak tanır. Bu önerileri, mevcut sorulara ekleyerek veya reddetmek için gözden geçirin. 
 
-Bilgi bankanızı otomatik olarak değişmez. Herhangi bir değişikliğin etkili olması için önerileri kabul etmeniz gerekir. Bu öneriler sorular ekleyebilir ancak yoksa değiştirebilir veya de soru kaldırabilirsiniz.
+Bilgi tabanınız otomatik olarak değişmez. Değişikliklerin etkili olabilmesi için önerileri kabul etmelisiniz. Bu öneriler, sorular ekler ancak mevcut soruları değiştirmez veya kaldırmaz.
 
-## <a name="what-is-active-learning"></a>Etkin öğrenme nedir?
+## <a name="what-is-active-learning"></a>Etkin öğrenimi nedir?
 
-Soru-cevap Oluşturucu örtük ve açık bir geri bildirim ile soru çeşitlemesini öğrenir.
+Soru-Cevap Oluşturma örtük ve açık geri bildirimlerle yeni soru çeşitlemeleri öğreniyor.
  
-* [Örtük geri bildirim](#how-qna-makers-implicit-feedback-works) – derecelendiricisini kullanıcı soru çok yakın puanlar ile birden çok yanıtlar olduğunda anlar ve bu geri bildirim göz önünde bulundurur. Bunun gerçekleşmesi için herhangi bir şey yapmanız gerekmez.
-* [Açık bir geri bildirim](#how-you-give-explicit-feedback-with-the-train-api) – bilgi bankasından puanları çok az varyasyonu ile birden çok yanıt döndürüldüğünde istemci uygulamayı doğru soruyu hangi soru ise kullanıcıya sorar. Soru-cevap Oluşturucu ile kullanıcının açık geri bildirim gönderilmesini [eğitme API](#train-api). 
+* [Örtük geri bildirim](#how-qna-makers-implicit-feedback-works) : derecelendiricisini, bir Kullanıcı sorusunun çok yakın puanlar içeren birden fazla yanıtı olduğunda ve bunu geri bildirim olarak düşündüğünde anlamıştır. Bunun gerçekleşmesi için herhangi bir şey yapmanız gerekmez.
+* [Açık geri bildirim](#how-you-give-explicit-feedback-with-the-train-api) – bilgi bankasından en az çeşitlere sahip birden çok yanıt döndürülürse, istemci uygulama kullanıcıya doğru soru olduğunu sorar. Kullanıcının açık geri bildirimi, [eğitme API](#train-api)'siyle soru-cevap oluşturma gönderilir. 
 
-Her iki yöntem de derecelendiricisini kümelenir benzer sorgularla sağlar.
+Her iki yöntem de, kümelenmiş benzer sorgularla birlikte derecelendiricisini sağlar.
 
-## <a name="how-active-learning-works"></a>Nasıl etkin works öğrenme
+## <a name="how-active-learning-works"></a>Etkin öğrenme nasıl kullanılır?
 
-Etkin öğrenme, soru-cevap Oluşturucu tarafından döndürülen ilk birkaç yanıtların puanları temel tetiklenir. Puan farklılıkları küçük bir aralık içinde yer alan, ardından sorgu (gibi alternatif bir soru) bir olası öneri her olası soru-cevap çiftlerini kabul edilir. Belirli bir soru-cevap çifti için önerilen soru kabul ettikten sonra diğer çiftleri için reddedilir. Kaydet ve önerileri kabul ettikten sonra eğitmek hatırlamanız gerekir.
+Etkin öğrenme, Soru-Cevap Oluşturma tarafından döndürülen en çok birkaç yanıtın puanlarını temel alarak tetiklenir. Puan farklılıkları küçük bir Aralık içinde yer alıyorsa, sorgu olası bir soru-cevap çiftinin her biri için olası bir öneri (alternatif bir soru olarak) olarak kabul edilir. Belirli bir QnA çifti için önerilen soruyu kabul ettikten sonra, diğer çiftler için reddedilir. Önerileri kabul ettikten sonra, kaydetmeyi ve eğiteyi unutmamanız gerekir.
 
-Etkin öğrenme makul bir miktar ve çeşitli sorgular kullanım uç noktalar burada alma durumlarda en iyi olası öneriler sağlar. 5 veya daha fazla benzer sorguları kümelenir, 30 dakikada kabul etmek veya reddetmek için Bilgi Bankası Tasarımcısı kullanıcı tabanlı soruların soru-cevap Oluşturucu önerir. Tüm öneriler birlikte benzerliğe göre kümelenir ve diğer sorular için en çok istenen önerilerden belirli sorgularının sıklığını üzerinde son kullanıcılar tarafından bağlı görüntülenir.
+Etkin öğrenme, uç noktaların makul bir miktar ve çeşitli kullanım sorguları elde ettiği durumlarda olası en iyi önerileri sağlar. 5 veya daha fazla benzer sorgu kümelenirken, her 30 dakikada bir Soru-Cevap Oluşturma, kabul etmek veya reddetmek için Bilgi Bankası tasarımcısına yönelik kullanıcı tabanlı soruları önerir. Tüm öneriler benzerlik ile birlikte kümelenir ve diğer sorular için en önemli öneriler, son kullanıcılara göre belirli sorguların sıklığına göre görüntülenir.
 
-Sorular soru-cevap Oluşturucu Portalı'nda önerilen sonra gözden geçirip kabul edin ya da bu önerileri Reddet gerekir. Öneriler yönetmek için bir API yoktur.
+Soru-Cevap Oluşturma portalında sorular Önerildikten sonra, bu önerileri gözden geçirmeniz ve kabul etmeniz veya reddetmeniz gerekir. Önerileri yönetmek için bir API yok.
 
-## <a name="how-qna-makers-implicit-feedback-works"></a>Soru-cevap Oluşturucu'nın örtük geri bildirim nasıl çalışır?
+## <a name="how-qna-makers-implicit-feedback-works"></a>Soru-Cevap Oluşturma örtük geri bildirimi nasıl kullanılır?
 
-Soru-cevap Oluşturucu'nın örtük geri bildirim puanı yakınlık belirlemek sonra etkin olarak öğrenmeye önerilerde bulunmak için bir algoritma kullanır. Algoritma yakınlık belirlemek için basit bir hesaplama değil. Aralıkları aşağıdaki örnekte sabit beklenmez, ancak algoritma yalnızca etkisini anlamak için kılavuz olarak kullanılmalıdır.
+Soru-Cevap Oluşturma örtük geri bildirimi, puan yakınlığını ve ardından etkin öğrenme önerilerini sağlamak için bir algoritma kullanır. Yakınlık belirleme algoritması basit bir hesaplama değil. Aşağıdaki örnekteki aralıklar düzeltilmez, ancak algoritmanın yalnızca etkisini anlamak için kılavuz olarak kullanılmalıdır.
 
-Bir sorunun puan % gibi 80, yüksek oranda emin olduğu durumlarda, etkin öğrenim için kabul edilen puanları aralığını yaklaşık %10 içinde geniş. Güvenilirlik puanı azaldıkça %40 gibi puanları aralığını yaklaşık %4 içinde de azaltır. 
+Bir sorunun puanı %80 gibi oldukça emin olduğunda, etkin öğrenme için kabul edilen puanlar aralığı, yaklaşık %10 ' da geniştir. Güven puanı azaldıkça %40, puanlar aralığı da yaklaşık olarak %4 içinde azalır. 
 
-## <a name="how-you-give-explicit-feedback-with-the-train-api"></a>Train API'si ile açık bir geri bildirimde nasıl
+## <a name="how-you-give-explicit-feedback-with-the-train-api"></a>Tren API 'SI ile açık geri bildirim verme
 
-Soru-cevap Oluşturucu'açık geri bildirim yanıtları hakkında en iyi cevabı olduğu alır önemlidir. En iyi cevabı nasıl belirlendiğini size bağlıdır ve dahil edebilirsiniz:
+Soru-Cevap Oluşturma cevapın en iyi yanıt olduğu hakkında açık geri bildirim almak önemlidir. En iyi yanıt nasıl belirlenir ve şunlar olabilir:
 
-* Yanıtları birini seçerek Kullanıcı bildirim.
-* Kabul edilebilir bir belirleme gibi iş mantığı, puan aralığı.  
-* Her iki kullanıcı geri bildirim ve iş mantığı birleşimi.
+* Kullanıcı geri bildirimi, yanıtlardan birini seçme.
+* Kabul edilebilir puan aralığını belirleme gibi iş mantığı.  
+* Hem Kullanıcı geri bildirimi hem de iş mantığı birleşimi.
 
-## <a name="upgrade-your-runtime-version-to-use-active-learning"></a>Etkin öğrenme kullanmak için çalışma zamanı sürümü yükseltme
+## <a name="upgrade-your-runtime-version-to-use-active-learning"></a>Çalışma zamanı sürümünüzü etkin öğrenimi kullanacak şekilde yükseltme
 
-Etkin öğrenme, çalışma zamanı sürümü 4.4.0 ve sonraki sürümlerde desteklenir. Bilgi bankanızı bir önceki sürümünde oluşturulduysa [, çalışma zamanını yükseltme](troubleshooting-runtime.md#how-to-get-latest-qnamaker-runtime-updates) bu özelliği kullanmak için. 
+Etkin öğrenme, çalışma zamanı sürümü 4.4.0 ve üzeri sürümlerde desteklenir. Bilgi tabanınız daha önceki bir sürümde oluşturulduysa, [çalışma alanınızı](set-up-qnamaker-service-azure.md#get-the-latest-runtime-updates) bu özelliği kullanacak şekilde yükseltin. 
 
-## <a name="turn-on-active-learning-to-see-suggestions"></a>Etkin önerileri görmek öğrenme üzerinde Aç
+## <a name="turn-on-active-learning-to-see-suggestions"></a>Önerileri görmek için etkin öğrenmeyi etkinleştirin
 
-Varsayılan olarak etkin olarak öğrenmeye kapalıdır. Bu önerilen bu soruları görmek için etkinleştirin. Etkin öğrenmeyi etkinleştirdikten sonra soru-cevap Oluşturucu için istemci uygulamasından bilgi göndermesine izin gerekir. Daha fazla bilgi için [bir bot GenerateAnswer ve eğitme API'lerini kullanarak mimari akışı](#architectural-flow-for-using-generateanswer-and-train-apis-from-a-bot).
+Etkin öğrenme varsayılan olarak kapalıdır. Önerilen soruları görmek için etkinleştirin. Etkin öğrenmeyi etkinleştirdikten sonra, Soru-Cevap Oluşturma için istemci uygulamasından bilgi göndermeniz gerekir. Daha fazla bilgi için bkz. [GenerateAnswer kullanımı Için mimari akış ve bir bot 'Tan API 'Ler eğitme](#architectural-flow-for-using-generateanswer-and-train-apis-from-a-bot).
 
-1. Seçin **Yayımla** Bilgi Bankası yayımlama. Etkin öğrenme sorguları GenerateAnswer API tahmin uç noktasından yalnızca toplanır. Soru-cevap Oluşturucu Portalı'nda Test bölmesine sorgular, etkin öğrenim etkilemez.
+1. Bilgi Bankası 'nı yayımlamak için **Yayımla** ' yı seçin. Etkin öğrenme sorguları yalnızca GenerateAnswer API tahmin uç noktasından toplanır. Soru-Cevap Oluşturma portalındaki test bölmesi sorguları etkin öğrenmeyi etkilemez.
 
-1. Üzerinde soru-cevap Oluşturucu Portalı'nda öğrenme etkin açmak için sağ üst köşeye select gidin, **adı**Git [ **hizmet ayarları**](https://www.qnamaker.ai/UserSettings).  
+1. Soru-Cevap Oluşturma portalında etkin öğrenimi açmak için sağ üst köşeye gidin, **adınızı**seçin, [**hizmet ayarları**](https://www.qnamaker.ai/UserSettings)' na gidin.  
 
-    ![Etkin öğrenme'nin önerilen soru alternatifleri hizmet ayarları sayfasından etkinleştirin. Sağ üst menüsünde kullanıcı adınızı seçin, sonra hizmet ayarlarını seçin.](../media/improve-knowledge-base/Endpoint-Keys.png)
+    ![Etkin öğrenimi 'nin önerilen soru alternatiflerini hizmet ayarları sayfasından açın. Sağ üst menüdeki Kullanıcı adınızı seçip hizmet ayarları ' nı seçin.](../media/improve-knowledge-base/Endpoint-Keys.png)
 
 
-1. Soru-cevap Oluşturucu hizmetini bulun, sonra geçiş **etkin olarak öğrenmeye**. 
+1. Soru-Cevap Oluşturma hizmeti bulun ve ardından **etkin öğrenimi**değiştirin. 
 
-    [![Hizmet Ayarları sayfasında, etkin öğrenim özelliğini Değiştir. Özellik geçiş yapmak mümkün değilse, hizmetinizi yükseltmeniz gerekebilir.](../media/improve-knowledge-base/turn-active-learning-on-at-service-setting.png)](../media/improve-knowledge-base/turn-active-learning-on-at-service-setting.png#lightbox)
+    [Hizmet ayarları sayfasında ![, etkin öğrenme özelliği ' ne geçiş yapın. Özelliği geçiş yapadıysanız hizmetinizi yükseltmeniz gerekebilir.](../media/improve-knowledge-base/turn-active-learning-on-at-service-setting.png)](../media/improve-knowledge-base/turn-active-learning-on-at-service-setting.png#lightbox)
 
-    Bir kez **etkin olarak öğrenmeye** olan etkin, Bilgi Bankası yeni sorular kullanıcı tarafından gönderilen sorular temel alınarak düzenli aralıklarla önerir. Devre dışı bırakabilirsiniz **etkin olarak öğrenmeye** ayarın açılıp tarafından yeniden.
+    > [!Note]
+    > Önceki görüntüde yer alan tam sürüm yalnızca bir örnek olarak gösterilir. Sürümünüz farklı olabilir. 
 
-## <a name="accept-an-active-learning-suggestion-in-the-knowledge-base"></a>Bilgi Bankası'nda bir etkin olarak öğrenmeye öneriyi kabul edin
+    **Etkin öğrenme** etkinleştirildikten sonra, Bilgi Bankası Kullanıcı tarafından gönderilen sorulara göre düzenli aralıklarla yeni sorular önerir. Ayarı yeniden değiştirerek **etkin öğrenmeyi** devre dışı bırakabilirsiniz.
 
-1. Önerilen sorular görmek için **Düzenle** Bilgi Bankası sayfasında **görüntüleme seçenekleri**, ardından **etkin olarak öğrenmeye önerileri göster**. 
+## <a name="accept-an-active-learning-suggestion-in-the-knowledge-base"></a>Bilgi Bankası 'nda etkin bir öğrenme önerisi kabul etme
 
-    [![Portal Düzenle bölümüne etkin olarak öğrenmeye ait yeni soru seçenekleri görmek için öneriler Göster'i seçin.](../media/improve-knowledge-base/show-suggestions-button.png)](../media/improve-knowledge-base/show-suggestions-button.png#lightbox)
+Etkin öğrenme, öneriyi onayladıktan sonra bilgi bankasını veya Arama Hizmeti değiştirir, ardından Kaydet ve eğitme. Öneriyi onayladıysanız, alternatif bir soru olarak eklenecektir.
 
-1. Bilgi Bankası ile soru ve yanıt çiftleri seçerek yalnızca önerileri göstermek için filtre **önerileri filtreyle**.
+1. Önerilen soruları görmek için Bilgi Bankası **Düzenle** sayfasında, **seçenekleri görüntüle**' yi seçin ve ardından **etkin öğrenme önerilerini göster**' i seçin. 
 
-    [![Filtreyi önerileri geçiş tarafından etkin olarak öğrenmeye ait önerilen soru seçenekleri görüntülemek için kullanın.](../media/improve-knowledge-base/filter-by-suggestions.png)](../media/improve-knowledge-base/filter-by-suggestions.png#lightbox)
+    [Portalın düzenleme bölümünde ![, etkin öğrenmesinin yeni soru alternatiflerini görmek için önerileri göster ' i seçin.](../media/improve-knowledge-base/show-suggestions-button.png)](../media/improve-knowledge-base/show-suggestions-button.png#lightbox)
 
-1. Bir onay işareti ile yeni soru alternatifleri her soru-cevap çifti önerir `✔` , soru kabul etmek için veya bir `x` öneriler reddetmek için. Soru eklemek için onay işaretini seçin. 
+1. Yalnızca önerilere **göre filtrele**' yi seçerek önerileri göstermek için bilgi bankasını soru ve yanıt çiftleri ile filtreleyin.
 
-    [![Etkin öğrenme'nin önerilen soru alternatifleri yeşil onay işareti veya kırmızı Sil işareti'ı seçerek reddetmemize veya seçin.](../media/improve-knowledge-base/accept-active-learning-suggestions.png)](../media/improve-knowledge-base/accept-active-learning-suggestions.png#lightbox)
+    [![önerilere göre filtrele ' ye tıklayarak yalnızca etkin öğrenme 'nın önerilen soru alternatiflerini görüntüleyin.](../media/improve-knowledge-base/filter-by-suggestions.png)](../media/improve-knowledge-base/filter-by-suggestions.png#lightbox)
 
-    Ekleme veya silme _tüm öneriler_ seçerek **tüm eklemek** veya **tümünü Reddet** bağlamsal araç.
+1. Her QnA çifti, bir onay işareti ile yeni soru alternatiflerini `✔`, soruyu kabul etmek için soru veya bir `x` kabul eder. Soruyu eklemek için onay işaretini seçin. 
 
-1. Seçin **kaydedin ve eğitme** Bilgi Bankası'na değişiklikleri kaydedin.
+    [![yeşil onay işaretini veya kırmızı silme işaretini seçerek, etkin öğrenmesinin önerilen soru alternatiflerini seçin veya reddedin.](../media/improve-knowledge-base/accept-active-learning-suggestions.png)](../media/improve-knowledge-base/accept-active-learning-suggestions.png#lightbox)
 
-1. Seçin **Yayımla** listesinden kullanılabilir olması değişikliklere izin vermek üzere [GenerateAnswer API](metadata-generateanswer-usage.md#generateanswer-request-configuration).
+    Bağlam araç çubuğunda Tümünü **Ekle** veya **Tümünü Reddet** ' i seçerek _tüm önerileri_ ekleyebilir veya silebilirsiniz.
 
-    5 veya daha fazla benzer sorguları kümelenir, 30 dakikada bir, soru-cevap Oluşturucu, kabul etme veya reddetme alternatif soruları önerir.
+1. Bilgi Bankası 'ndaki değişiklikleri kaydetmek için **Kaydet ve eğitme '** yi seçin.
+
+1. Değişikliklerin [Generateanswer API](metadata-generateanswer-usage.md#generateanswer-request-configuration)'sinden kullanılabilir olmasını sağlamak için **Yayımla** ' yı seçin.
+
+    5 veya daha fazla benzer sorgu kümelenirken, her 30 dakikada bir Soru-Cevap Oluşturma, kabul etmeniz veya reddetmeniz için alternatif soruları önerir.
 
 
 <a name="#score-proximity-between-knowledge-base-questions"></a>
 
-### <a name="architectural-flow-for-using-generateanswer-and-train-apis-from-a-bot"></a>Bir bot GenerateAnswer ve eğitme API'lerini kullanarak mimari akışı
+### <a name="architectural-flow-for-using-generateanswer-and-train-apis-from-a-bot"></a>Bir bot 'tan GenerateAnswer kullanımı ve API 'Leri eğitmek için mimari akış
 
-Bir bot veya başka bir istemci uygulama aşağıdaki mimari akış etkin öğrenmeyi kullanma kullanmanız gerekir:
+Bir bot veya diğer istemci uygulaması, etkin öğrenimi kullanmak için aşağıdaki mimari akışı kullanmalıdır:
 
-* Bot [Bilgi Bankası'ndaki yanıtı alır](#use-the-top-property-in-the-generateanswer-request-to-get-several-matching-answers) GenerateAnswer API'siyle kullanarak `top` yanıt sayısı alınacağı özellik.
-* Bot, açık bir geri bildirim belirler:
-    * Kullanarak kendi [özel iş mantığı](#use-the-score-property-along-with-business-logic-to-get-list-of-answers-to-show-user), düşük puanlar filtre.
-    * Bot veya istemci uygulaması, kullanıcı için olası yanıtların listesini görüntülemek ve kullanıcının seçili yanıt alın.
-* Bot [soru-cevap Oluşturucu seçili yanıtı geri gönderir](#bot-framework-sample-code) ile [eğitme API](#train-api).
+* Bot, [bilgi bankasındaki yanıtı](#use-the-top-property-in-the-generateanswer-request-to-get-several-matching-answers) , `top` özelliğini kullanarak GENERATEANSWER API 'si ile bir dizi yanıt almak için alır.
+* Bot açık geri bildirimi belirler:
+    * Kendi [özel iş mantığınızı](#use-the-score-property-along-with-business-logic-to-get-list-of-answers-to-show-user)kullanarak düşük puanları filtreleyin.
+    * Bot veya istemci uygulamasında, kullanıcıya olası yanıtların listesini görüntüleyin ve kullanıcının seçili yanıtını alın.
+* Bot, seçili yanıtı, [tren API](#train-api)'siyle [soru-cevap oluşturma geri gönderir](#bot-framework-sample-code) .
 
 
-### <a name="use-the-top-property-in-the-generateanswer-request-to-get-several-matching-answers"></a>Üst özellik GenerateAnswer istekte birden fazla eşleşen yanıtlar almak için kullanın.
+### <a name="use-the-top-property-in-the-generateanswer-request-to-get-several-matching-answers"></a>Birkaç eşleşen yanıt almak için GenerateAnswer isteğindeki top özelliğini kullanın
 
-Soru-cevap Oluşturucu soru, yanıt gönderirken `top` JSON gövdesi özelliğini ayarlar döndürülecek yanıt sayısı. 
+Yanıt için Soru-Cevap Oluşturma bir soru gönderilirken, JSON gövdesinin `top` özelliği döndürülecek yanıt sayısını ayarlar. 
 
 ```json
 {
@@ -123,9 +128,9 @@ Soru-cevap Oluşturucu soru, yanıt gönderirken `top` JSON gövdesi özelliğin
 }
 ```
 
-### <a name="use-the-score-property-along-with-business-logic-to-get-list-of-answers-to-show-user"></a>Kullanıcıya göstermek için yanıtların listesini almak için iş mantığı ile birlikte puanı özelliğini kullanın
+### <a name="use-the-score-property-along-with-business-logic-to-get-list-of-answers-to-show-user"></a>Kullanıcı gösterme yanıtlarının listesini almak için, iş mantığı ile birlikte Score özelliğini kullanın
 
-İstemci uygulaması (örneğin, bir sohbet Robotu) yanıtı aldığında, en üst 3 soruyu döndürülür. Kullanım `score` yakınlık puanları arasında analiz etmek için özellik. Bu yakınlık aralığı kendi iş mantığı tarafından belirlenir. 
+İstemci uygulaması (bir sohbet bot gibi) yanıtı aldığında, ilk 3 soru döndürülür. Puanlar arasındaki yakınlığı çözümlemek için `score` özelliğini kullanın. Bu yakınlık aralığı, kendi iş mantığınızla belirlenir. 
 
 ```json
 {
@@ -164,15 +169,15 @@ Soru-cevap Oluşturucu soru, yanıt gönderirken `top` JSON gövdesi özelliğin
 }
 ```
 
-## <a name="client-application-follow-up-when-questions-have-similar-scores"></a>Benzer puanları sorularınız olduğunda istemci uygulaması izleme
+## <a name="client-application-follow-up-when-questions-have-similar-scores"></a>Soruların benzer puanları olduğu durumlarda istemci uygulaması izleme
 
-İstemci uygulamanızı seçmek bir kullanıcı için bir seçenek ile soruları görüntüler _tek soru_ çoğu kendi amacınıza temsil eder. 
+İstemci uygulamanız, kullanıcının amaç temsil eden _tek soruyu_ seçmesini sağlayan bir seçenekle birlikte soruları görüntüler. 
 
-Kullanıcı mevcut sorulardan birini seçtikten sonra istemci uygulama, kullanıcının seçimini soru-cevap Oluşturucu'nın Train API'sini kullanarak geri bildirim gönderir. Bu geri bildirim tamamlandıktan etkin geri bildirim döngüsü öğrenme. 
+Kullanıcı mevcut sorulardan birini seçtiğinde, istemci uygulaması Soru-Cevap Oluşturma eğitim API 'sini kullanarak kullanıcının tercih ettiği geri bildirim olarak gönderir. Bu geri bildirim, etkin öğrenme geri bildirim döngüsünü tamamlar. 
 
-## <a name="train-api"></a>Train API
+## <a name="train-api"></a>API eğitme
 
-Etkin öğrenme geri bildirim için soru-cevap Oluşturucu ile eğitme API POST isteği gönderilir. API imzası verilmiştir:
+Etkin öğrenme geri bildirimi, API POST isteği ile Soru-Cevap Oluşturma gönderilir. API imzası:
 
 ```http
 POST https://<QnA-Maker-resource-name>.azurewebsites.net/qnamaker/knowledgebases/<knowledge-base-ID>/train
@@ -181,24 +186,24 @@ Content-Type: application/json
 {"feedbackRecords": [{"userId": "1","userQuestion": "<question-text>","qnaId": 1}]}
 ```
 
-|HTTP isteği özelliği|Ad|Tür|Amaç|
+|HTTP istek özelliği|Ad|Tür|Amaç|
 |--|--|--|--|
-|URL rota parametresi|Bilgi Bankası kimliği|string|Bilgi bankanızı GUİD'i.|
-|Ana bilgisayar alt etki alanı|QnAMaker kaynak adı|string|Azure aboneliğinizdeki, soru-cevap Oluşturucu için konak adı. Bilgi Bankası yayımladıktan sonra bu ayarlar sayfasında kullanılabilir. |
-|Üstbilgi|İçerik türü|string|API'ye gönderilen gövdenin medya türü. Varsayılan değerdir: `application/json`|
-|Üstbilgi|Yetkilendirme|string|Uç nokta anahtarınızı (EndpointKey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).|
-|POST gövdesini|JSON nesnesi|JSON|Eğitim geri bildirim|
+|URL yol parametresi|Bilgi Bankası KIMLIĞI|string|Bilgi tabanınız için GUID.|
+|Özel alt etki alanı|QnAMaker kaynak adı|string|Kaynak adı, Soru-Cevap Oluşturma özel alt etki alanı olarak kullanılır. Bu, Bilgi Bankası 'nı yayımladıktan sonra Ayarlar sayfasında bulunur. `host`olarak listelenir.|
+|Üst bilgi|İçerik türü|string|API 'ye gönderilen gövdenin medya türü. Varsayılan değer: `application/json`|
+|Üst bilgi|Yetkilendirme|string|Uç nokta anahtarınız (EndpointKey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).|
+|Gövde gönder|JSON nesnesi|JSON|Eğitim geri bildirimi|
 
-JSON gövdesi birkaç ayar vardır:
+JSON gövdesi çeşitli ayarlara sahiptir:
 
-|JSON gövdesi özelliği|Tür|Amaç|
+|JSON Body özelliği|Tür|Amaç|
 |--|--|--|--|
 |`feedbackRecords`|array|Geri bildirim listesi.|
-|`userId`|string|Önerilen sorular kabul eden kişinin kullanıcı kimliği. Kullanıcı Kimliği biçimi size bağlıdır. Örneğin, bir e-posta adresi geçerli bir kullanıcı kimliği mimarinizdeki olabilir. İsteğe bağlı.|
-|`userQuestion`|string|Kullanıcının sorgu tam metni. Gereklidir.|
-|`qnaID`|number|Bulunan bir soru kimliği [GenerateAnswer yanıt](metadata-generateanswer-usage.md#generateanswer-response-properties). |
+|`userId`|string|Önerilen soruları kabul eden kişinin Kullanıcı KIMLIĞI. Kullanıcı KIMLIĞI biçimi size ait. Örneğin, bir e-posta adresi, mimarinizdeki geçerli bir kullanıcı KIMLIĞI olabilir. İsteğe bağlı.|
+|`userQuestion`|string|Kullanıcının sorgusunun tam metni. Gereklidir.|
+|`qnaID`|number|[Generateanswer yanıtında](metadata-generateanswer-usage.md#generateanswer-response-properties)bulunan soru kimliği. |
 
-Örnek JSON gövdesi aşağıdaki gibi görünür:
+Örnek bir JSON gövdesi şöyle görünür:
 
 ```json
 {
@@ -212,13 +217,13 @@ JSON gövdesi birkaç ayar vardır:
 }
 ```
 
-Başarılı bir yanıt 204 ve JSON yanıt gövdesine durumunu döndürür. 
+Başarılı bir yanıt, 204 durumunu ve hiçbir JSON yanıt gövdesi döndürmez. 
 
-### <a name="batch-many-feedback-records-into-a-single-call"></a>Tek bir çağrı birçok geri bildirim kayıtları toplu
+### <a name="batch-many-feedback-records-into-a-single-call"></a>Tek bir çağrıda toplu işlem birçok geri bildirim kaydı
 
-İstemci tarafı uygulamada, bir robot gibi verileri depolamak sonra tek bir JSON gövdesi içinde çok sayıda kayıt göndermek `feedbackRecords` dizisi. 
+Bir bot gibi istemci tarafı uygulamada, verileri depolayıp `feedbackRecords` dizisindeki tek bir JSON gövdesinde birçok kayıt gönderebilirsiniz. 
 
-Örnek JSON gövdesi aşağıdaki gibi görünür:
+Örnek bir JSON gövdesi şöyle görünür:
 
 ```json
 {
@@ -246,18 +251,18 @@ Başarılı bir yanıt 204 ve JSON yanıt gövdesine durumunu döndürür.
 
 <a name="active-learning-is-saved-in-the-exported-apps-tsv-file"></a>
 
-## <a name="bot-framework-sample-code"></a>Bot framework örnek kod
+## <a name="bot-framework-sample-code"></a>Bot Framework örnek kodu
 
-Kullanıcının sorgu için etkin olarak öğrenmeye kullanılacaksa Train API'sini çağırmak bot framework kodunuzu gerekir. Kod yazmak için iki parçası vardır:
+Kullanıcı sorgusunun etkin öğrenme için kullanılması gerekiyorsa, bot Framework kodunuzun tren API 'sini çağırması gerekir. Yazılacak iki kod parçası vardır:
 
-* Sorgu için etkin olarak öğrenmeye kullanılması gerekip gerekmediğini belirleme
-* Etkin öğrenme için soru-cevap Oluşturucu'nın Train API sorgu geri gönder
+* Sorgunun etkin öğrenme için kullanılması gerekip gerekmediğini belirleme
+* Sorguyu etkin öğrenme için Soru-Cevap Oluşturma eğitme API 'sine geri gönder
 
-İçinde [Azure Bot örnek](https://aka.ms/activelearningsamplebot), bu etkinliklerin her ikisi de programlanmıştır. 
+[Azure bot örneğinde](https://aka.ms/activelearningsamplebot), bu etkinliklerin her ikisi de programlanmıştır. 
 
-### <a name="example-c-code-for-train-api-with-bot-framework-4x"></a>Örnek C# kod eğitimi API ile Bot Framework 4.x
+### <a name="example-c-code-for-train-api-with-bot-framework-4x"></a>Bot C# Framework 4. x Ile API eğitimi için örnek kod
 
-Aşağıdaki kod eğitimi API'si ile soru-cevap Oluşturucu bilgilerini yeniden göndermek nasıl gösterir. Bu [tam kod örneğini](https://github.com/microsoft/BotBuilder-Samples/tree/master/experimental/qnamaker-activelearning/csharp_dotnetcore) Github'da kullanılabilir.
+Aşağıdaki kod, tren API 'siyle Soru-Cevap Oluşturma bilgilerin geri nasıl gönderileceğini gösterir. Bu [kod örneği](https://github.com/microsoft/BotBuilder-Samples/tree/master/experimental/qnamaker-activelearning/csharp_dotnetcore) , GitHub ' da kullanılabilir.
 
 ```csharp
 public class FeedbackRecords
@@ -293,14 +298,14 @@ public class FeedbackRecord
 /// <summary>
 /// Method to call REST-based QnAMaker Train API for Active Learning
 /// </summary>
-/// <param name="host">Endpoint host of the runtime</param>
+/// <param name="endpoint">Endpoint URI of the runtime</param>
 /// <param name="FeedbackRecords">Feedback records train API</param>
 /// <param name="kbId">Knowledgebase Id</param>
 /// <param name="key">Endpoint key</param>
 /// <param name="cancellationToken"> Cancellation token</param>
-public async static void CallTrain(string host, FeedbackRecords feedbackRecords, string kbId, string key, CancellationToken cancellationToken)
+public async static void CallTrain(string endpoint, FeedbackRecords feedbackRecords, string kbId, string key, CancellationToken cancellationToken)
 {
-    var uri = host + "/knowledgebases/" + kbId + "/train/";
+    var uri = endpoint + "/knowledgebases/" + kbId + "/train/";
 
     using (var client = new HttpClient())
     {
@@ -318,9 +323,9 @@ public async static void CallTrain(string host, FeedbackRecords feedbackRecords,
 }
 ```
 
-### <a name="example-nodejs-code-for-train-api-with-bot-framework-4x"></a>Örnek Node.js kodunu Train API ile Bot Framework 4.x 
+### <a name="example-nodejs-code-for-train-api-with-bot-framework-4x"></a>Bot Framework 4. x ile API eğitimi için örnek Node. js kodu 
 
-Aşağıdaki kod eğitimi API'si ile soru-cevap Oluşturucu bilgilerini yeniden göndermek nasıl gösterir. Bu [tam kod örneğini](https://github.com/microsoft/BotBuilder-Samples/blob/master/experimental/qnamaker-activelearning/javascript_nodejs) Github'da kullanılabilir.
+Aşağıdaki kod, tren API 'siyle Soru-Cevap Oluşturma bilgilerin geri nasıl gönderileceğini gösterir. Bu [kod örneği](https://github.com/microsoft/BotBuilder-Samples/blob/master/experimental/qnamaker-activelearning/javascript_nodejs) , GitHub ' da kullanılabilir.
 
 ```javascript
 async callTrain(stepContext){
@@ -361,11 +366,11 @@ async callTrain(stepContext){
 }
 ```
 
-## <a name="active-learning-is-saved-in-the-exported-knowledge-base"></a>Etkin öğrenme dışarı aktarılan Bilgi Bankası'ndaki kaydedilir
+## <a name="active-learning-is-saved-in-the-exported-knowledge-base"></a>Etkin öğrenme, dışarıya kaydedilen Bilgi Bankası 'nda kaydedilir
 
-Uygulamanız etkin olarak öğrenmeye etkin olan ve uygulamayı dışarı aktarma `SuggestedQuestions` tsv dosyası sütununda etkin olarak öğrenmeye verilerini korur. 
+Uygulamanızda etkin öğrenme etkin olduğunda ve uygulamayı dışarı aktardığınızda, TSV dosyasındaki `SuggestedQuestions` sütunu etkin öğrenme verilerini korur. 
 
-`SuggestedQuestions` Sütundur örtük, bilgileri bir JSON nesnesi `autosuggested`ve açık, `usersuggested` geri bildirim. Bu JSON nesnesinin tek bir kullanıcı tarafından gönderilen soru için örneği `help` olan:
+`SuggestedQuestions` sütunu örtük, `autosuggested`ve açık `usersuggested` geri bildirimlerinden oluşan bir JSON nesnesidir. `help` Kullanıcı tarafından gönderilen tek bir soru için bu JSON nesnesine bir örnek:
 
 ```JSON
 [
@@ -384,13 +389,20 @@ Uygulamanız etkin olarak öğrenmeye etkin olan ve uygulamayı dışarı aktarm
 ]
 ```
 
-Bu uygulamayı yeniden içeri aktarın, bilgi toplamak ve öneriler, Bilgi Bankası için önermek etkin olarak öğrenmeye devam eder. 
+REST veya dil tabanlı SDK 'Lardan birini kullanarak bu değişiklikleri gözden geçirmek için GERI yükleme değişiklikleri API 'sini de kullanabilirsiniz:
+* [REST API](https://westus.dev.cognitive.microsoft.com/docs/services/5a93fcf85b4ccd136866eb37/operations/5ac266295b4ccd1554da75fc)
+* [.NET SDK](https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker.alterationsextensions.getasync?view=azure-dotnet)
+
+
+Bu uygulamayı yeniden içeri aktardığınızda, etkin öğrenme bilgileri toplamaya ve bilgi tabanınız için öneriler önermeye devam etmektedir. 
+
+
 
 ## <a name="best-practices"></a>En iyi uygulamalar
 
-Etkin öğrenme kullanırken en iyi yöntemler için bkz: [en iyi uygulamalar](../Concepts/best-practices.md#active-learning).
+Etkin öğrenimi kullanırken en iyi uygulamalar için bkz. [en iyi uygulamalar](../Concepts/best-practices.md#active-learning).
 
 ## <a name="next-steps"></a>Sonraki adımlar
  
 > [!div class="nextstepaction"]
-> [Meta veri GenerateAnswer API ile kullanma](metadata-generateanswer-usage.md)
+> [GenerateAnswer API 'SI ile meta verileri kullanma](metadata-generateanswer-usage.md)

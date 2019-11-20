@@ -1,116 +1,141 @@
 ---
-title: Azure Kubernetes Service (AKS) çıkış trafiği kısıtlama
-description: Hangi bağlantı noktalarını ve adresi denetimi çıkış trafiği Azure Kubernetes Service (AKS) için gerekli olduğunu öğrenin
+title: Azure Kubernetes hizmeti 'nde (AKS) çıkış trafiğini kısıtlama
+description: Azure Kubernetes Service (AKS) ' de çıkış trafiğini denetlemek için hangi bağlantı noktalarının ve adreslerin gerekli olduğunu öğrenin
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
-ms.date: 06/06/2019
-ms.author: iainfou
-ms.openlocfilehash: 52a9ba20b60e8ef6cdb743546cd842e4ee24b3fd
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 08/29/2019
+ms.author: mlearned
+ms.openlocfilehash: 3010973c7d0af784938e9295bb80fc22b7f718f3
+ms.sourcegitcommit: 71db032bd5680c9287a7867b923bf6471ba8f6be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67441928"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71018650"
 ---
-# <a name="preview---limit-egress-traffic-for-cluster-nodes-and-control-access-to-required-ports-and-services-in-azure-kubernetes-service-aks"></a>Önizleme - sınırı çıkış trafiği için küme düğümlerini ve erişimi denetlemek için gerekli bağlantı noktaları ve hizmetler Azure Kubernetes Service (AKS)
+# <a name="control-egress-traffic-for-cluster-nodes-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içindeki küme düğümleri için çıkış trafiğini denetleme
 
-Varsayılan olarak, AKS kümeleri sınırsız (çıkış) giden internet erişimi vardır. Bu ağ erişim düzeyi, düğümleri ve gerektiği gibi dış kaynaklara erişmek için çalıştırdığınız hizmetleri sağlar. Çıkış trafiği kısıtlamak istiyorsanız, bağlantı noktaları ve adres sınırlı sayıda sağlıklı küme bakım görevleri korumak için erişilebilir olmalıdır. Kümenizi, ardından yalnızca Microsoft kapsayıcı kayıt defteri (MCR) veya Azure Container Registry (ACR), genel olmayan dış depolar temel sistem kapsayıcı görüntülerini kullanmak üzere yapılandırılır. Bu gerekli bağlantı noktaları ve adres izin vermek için tercih edilen güvenlik duvarı ve güvenlik kuralları yapılandırmanız gerekir.
+Varsayılan olarak, AKS kümelerinde sınırsız giden (çıkış) internet erişimi vardır. Bu ağ erişimi düzeyi, çalıştırdığınız düğüm ve hizmetlere, gerektiğinde dış kaynaklara erişmek için izin verir. Çıkış trafiğini kısıtlamak istiyorsanız, sağlıklı küme bakım görevlerini sürdürmek için sınırlı sayıda bağlantı noktasına ve adrese erişilebilir olması gerekir. Kümeniz, varsayılan olarak Microsoft Container Registry (MCR) veya Azure Container Registry (ACR) tarafından kullanılan temel sistem kapsayıcısı görüntülerini kullanacak şekilde yapılandırılır. Tercih ettiğiniz güvenlik duvarını ve güvenlik kurallarınızı, bu gerekli bağlantı noktalarına ve adreslere izin verecek şekilde yapılandırın.
 
-Bu makalede, hangi ağ bağlantı noktaları ve tam etki alanı adlarını (FQDN) gerekli ve isteğe bağlı bir AKS kümesindeki çıkış trafiği kısıtlamak isterseniz ayrıntıları.  Bu özellik şu anda önizleme sürümündedir.
+Bu makalede, bir AKS kümesindeki çıkış trafiğini kısıtladığınızda ağ bağlantı noktaları ve tam etki alanı adları (FQDN 'Ler) gerekli ve isteğe bağlı olarak ayrıntılı olarak açıklanmaktadır.
 
 > [!IMPORTANT]
-> AKS Önizleme özellikleri, Self Servis, kabul etme. Görüş ve hata topluluğumuza toplamak için sağlanır. Önizleme'de, bu özelliklerin üretim kullanılmak üzere geliştirilmiş değildir. Genel Önizleme Özellikleri 'en yüksek çaba' destek kapsamında ayrılır. İş saatleri Pasifik Saat dilimi sırasında (Pasifik Saati) yalnızca AKS teknik destek ekipleri Yardım kullanılabilir. Ek bilgi için lütfen aşağıdaki destek makaleleri bakın:
->
-> * [AKS destek ilkeleri][aks-support-policies]
-> * [Azure desteği SSS][aks-faq]
+> Bu belge, yalnızca AKS alt ağını bırakarak trafiğin nasıl kilitleneceği hakkında ele alınmaktadır. AKS 'ler giriş gereksinimlerine sahip değildir.  Ağ güvenlik grupları (NSG 'ler) ve güvenlik duvarları kullanılarak iç alt ağ trafiğinin engellenmesi desteklenmez. Küme içindeki trafiği denetlemek ve engellemek için [ağ ilkelerini][network-policy]kullanın.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Azure CLI Sürüm 2.0.66 gerekir veya daha sonra yüklü ve yapılandırılmış. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][install-azure-cli].
+Azure CLı sürüm 2.0.66 veya sonraki bir sürümün yüklü ve yapılandırılmış olması gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][install-azure-cli].
 
-Çıkış trafiği sınırlayabilirsiniz bir AKS kümesi oluşturmak için önce aboneliğinizde özellik bayrağı etkinleştirin. Bu özellik kaydı MCR veya ACR temel sistem kapsayıcı görüntülerini kullanmak için oluşturduğunuz herhangi bir AKS kümeleri yapılandırır. Kaydedilecek *AKSLockingDownEgressPreview* özellik bayrağı, kullanın [az özelliği kayıt][az-feature-register] komutu aşağıdaki örnekte gösterildiği gibi:
+## <a name="egress-traffic-overview"></a>Çıkış trafiğine genel bakış
 
-> [!CAUTION]
-> Bir Abonelikteki bir özellik kaydettiğinizde, bu özellik şu anda kaydını yapamazsınız. Bazı Önizleme özellikleri etkinleştirdikten sonra varsayılan ardından aboneliği için oluşturulan tüm AKS kümeleri için kullanılabilir. Önizleme özellikleri üretim Aboneliklerde etkinleştirmeyin. Önizleme özellikleri test ve geri bildirim toplamak için ayrı bir abonelik kullanın.
+Yönetim ve operasyonel amaçlar için, bir AKS kümesindeki düğümlerin belirli bağlantı noktalarına ve tam etki alanı adlarına (FQDN) erişmesi gerekir. Bu eylemler, API sunucusuyla iletişim kurmak veya temel Kubernetes küme bileşenlerini ve düğüm güvenliği güncelleştirmelerini indirmek ve yüklemek olabilir. Varsayılan olarak, çıkış (giden) internet trafiği bir AKS kümesindeki düğümler için sınırlandırılmaz. Küme, dış depolardan temel sistem kapsayıcısı görüntülerini alabilir.
 
-```azurecli-interactive
-az feature register --name AKSLockingDownEgressPreview --namespace Microsoft.ContainerService
-```
+AKS kümenizin güvenliğini arttırmak için çıkış trafiğini kısıtlamak isteyebilirsiniz. Küme, MCR veya ACR 'den temel sistem kapsayıcısı görüntülerini çekmek üzere yapılandırılmıştır. Çıkış trafiğini bu şekilde kilitlerseniz, AKS düğümlerinin gerekli dış hizmetlerle doğru iletişim kurmasına izin vermek için belirli bağlantı noktalarını ve FQDN 'leri tanımlayın. Bu yetkili bağlantı noktaları ve FQDN 'Ler olmadan AKS düğümleriniz API sunucusuyla iletişim kuramaz veya çekirdek bileşenleri yükleyemez.
 
-Gösterilecek durum için birkaç dakika sürer *kayıtlı*. Kullanarak kayıt durumu denetleyebilirsiniz [az özellik listesi][az-feature-list] komutu:
+Çıkış trafiğinizi güvenli hale getirmek ve bu gerekli bağlantı noktalarını ve adresleri tanımlamak için [Azure Güvenlik Duvarı][azure-firewall] 'nı veya üçüncü taraf güvenlik duvarı gereçini kullanabilirsiniz. AKS bu kuralları sizin için otomatik olarak oluşturmaz. Aşağıdaki bağlantı noktaları ve adresler, ağ güvenlik duvarınızdaki uygun kuralları oluştururken başvuru içindir.
 
-```azurecli-interactive
-az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/AKSLockingDownEgressPreview')].{Name:name,State:properties.state}"
-```
+> [!IMPORTANT]
+> Çıkış trafiğini kısıtlamak ve tüm çıkış trafiğini zorlamak için Kullanıcı tanımlı yol (UDR) oluşturmak üzere Azure Güvenlik Duvarı 'nı kullandığınızda, giriş trafiğine doğru şekilde izin vermek için güvenlik duvarında uygun bir DNAT kuralı oluşturduğunuzdan emin olun. Azure Güvenlik Duvarı 'nı bir UDR ile kullanmak, asimetrik yönlendirme nedeniyle giriş kurulumunu keser. (AKS alt ağının, güvenlik duvarının özel IP adresine giden bir varsayılan yolu varsa, ancak türünde ortak yük dengeleyici veya Kubernetes hizmeti kullanıyorsanız bu sorun oluşur: LoadBalancer). Bu durumda, gelen yük dengeleyici trafiği genel IP adresi aracılığıyla alınır, ancak döndürülen yol güvenlik duvarının özel IP adresinden geçer. Güvenlik duvarı durum bilgisi olduğundan, güvenlik duvarı kurulu bir oturumun farkında olmadığından döndürülen paketi bırakır. Azure Güvenlik duvarını giriş veya hizmet yük dengeleyicinizle tümleştirmeyi öğrenmek için bkz. Azure [güvenlik duvarını azure standart Load Balancer tümleştirme](https://docs.microsoft.com/azure/firewall/integrate-lb).
+> TCP bağlantı noktası 9000 ve TCP bağlantı noktası 22 trafiğini, çıkış çalışan düğümü IP 'leri ve API sunucusunun IP 'si arasında bir ağ kuralı kullanarak azaltabilirsiniz.
 
-Hazır olduğunuzda, kayıt yenileme *Microsoft.ContainerService* kullanarak kaynak sağlayıcısı [az provider register][az-provider-register] komutu:
+AKS 'de, iki bağlantı noktası ve adres kümesi vardır:
 
-```azurecli-interactive
-az provider register --namespace Microsoft.ContainerService
-```
-
-## <a name="egress-traffic-overview"></a>Çıkış trafiği genel bakış
-
-Yönetim ve işletimsel amaçları için bir AKS kümesindeki düğümlere belirli bağlantı noktalarını ve tam etki alanı adlarını (FQDN) erişmesi gerekir. Bu Eylemler, API sunucusu ile iletişim kurmak veya indir ve ana Kubernetes küme bileşenleri ve düğüm güvenlik güncelleştirmeleri yüklemeyi olabilir. Varsayılan olarak, çıkış (giden) internet trafiği bir AKS kümesindeki düğümler için sınırlı değildir. Küme temel sistemi dış depolardaki kapsayıcı görüntülerini çekerken.
-
-AKS kümenizin güvenliğini artırmak için çıkış trafiği kısıtlamak isteyebilirsiniz. Küme temel sistemi MCR veya ACR için kapsayıcı görüntüleri çekmek için yapılandırılır. Çıkış trafiği bu şekilde kilitlemek, belirli bağlantı noktaları ve doğru şekilde gerekli dış hizmetlerle iletişim AKS düğümleri izin vermek için FQDN'leri tanımlamanız gerekir. Bu yetkili bağlantı noktaları ve FQDN'ler, AKS düğümlerinizi API sunucusu ile iletişim kurmak veya çekirdek bileşenlerini yükleyin.
-
-Kullanabileceğiniz [Azure Güvenlik Duvarı][azure-firewall] veya 3. taraf güvenlik duvarı Gereci, çıkış trafiği güvenli hale getirme ve bunlar gerekli tanımlamak için bağlantı noktaları ve yöneliktir. AKS otomatik olarak bu kurallar, oluşturmaz. Ağ güvenlik duvarınızdan olarak uygun kuralları oluştururken aşağıdaki bağlantı noktaları ve adres için başvuru kaynaklarıdır.
-
-AKS, iki bağlantı noktaları ve adresleri kümesi vardır:
-
-* [Gerekli bağlantı noktaları ve adres için AKS kümeleri](#required-ports-and-addresses-for-aks-clusters) yetkili çıkış trafiği için en düşük gereksinimler ayrıntıları.
-* [İsteğe bağlı önerilen adresler ve bağlantı noktaları AKS kümeleri için](#optional-recommended-addresses-and-ports-for-aks-clusters) gibi Azure İzleyici düzgün çalışmaz senaryoları dışında tüm diğer hizmetler ile tümleştirme için gerekli değildir. Bu isteğe bağlı bağlantı noktaları ve FQDN'ler listesini gözden geçirin ve herhangi bir AKS kümenizde kullanılan bileşenleri ve Hizmetleri yetkilendirmek.
+* [AKS kümelerine yönelik gerekli bağlantı noktaları ve adresler](#required-ports-and-addresses-for-aks-clusters) , yetkili çıkış trafiği için en düşük gereksinimleri ayrıntılarıyla ayrıntılardır.
+* [AKS kümeleri için isteğe bağlı önerilen adresler ve bağlantı noktaları](#optional-recommended-addresses-and-ports-for-aks-clusters) tüm senaryolar için gerekli değildir, ancak Azure izleyici gibi diğer hizmetlerle tümleştirme doğru çalışmaz. İsteğe bağlı bağlantı noktaları ve FQDN 'Ler listesini gözden geçirin ve AKS Kümenizde kullanılan hizmet ve bileşenlerden herhangi birini yetkilendirin.
 
 > [!NOTE]
-> Çıkış trafiği sınırlama, yalnızca özellik bayrağı kaydı etkinleştirme işleminden sonra oluşturulan yeni AKS kümelerinde çalışır. Var olan kümeleri için [Küme yükseltme işlemi][aks-upgrade] kullanarak `az aks upgrade` çıkış trafiği sınırlamak önce komutu.
+> Çıkış trafiğini kısıtlamak yalnızca yeni AKS kümelerinde kullanılabilir. Mevcut kümeler için çıkış trafiğini sınırlandırmadan önce `az aks upgrade` komutunu kullanarak [bir küme yükseltme işlemi gerçekleştirin][aks-upgrade] .
 
-## <a name="required-ports-and-addresses-for-aks-clusters"></a>Gerekli bağlantı noktaları ve AKS küme için adresleri
+## <a name="required-ports-and-addresses-for-aks-clusters"></a>AKS kümeleri için gerekli bağlantı noktaları ve adresler
 
-Şu giden bağlantı noktalarını / ağ kuralları bir AKS kümesi için gereklidir:
+AKS kümesi için aşağıdaki giden bağlantı noktaları/ağ kuralları gereklidir:
 
 * TCP bağlantı noktası *443*
-* TCP bağlantı noktası *9000* ve TCP bağlantı noktası *22* tünel ön pod tünel son API sunucusu ile iletişim kurmak için.
-    * Daha özel almak için bkz: * *.hcp.\< Konum\>. azmk8s.io* ve * *. tun.\< Konum\>. azmk8s.io* aşağıdaki tabloda adresleri.
+* API sunucusuyla iletişim kurmayı gerektiren bir uygulamanız varsa, TCP [ıpaddrofyourapiserver]: 443 gereklidir.  Bu değişiklik küme oluşturulduktan sonra ayarlanabilir.
+* Tünel ön pod için, API sunucusundaki tünel sonuyla iletişim kurmak üzere TCP bağlantı noktası *9000* ve TCP bağlantı noktası *22* .
+    * Daha fazla bilgi almak için * *. HCP öğesine bakın.\< Location\>. azmk8s.io* ve * *. tun.\< Aşağıdaki\>tablodaki location. azmk8s.io* adresleri.
+* API sunucusuna doğrudan erişiyorsanız, DNS için UDP bağlantı noktası *53* de gereklidir.
 
-Aşağıdaki FQDN / uygulama kuralları gereklidir:
+Aşağıdaki FQDN/uygulama kuralları gereklidir:
 
-| FQDN                       | Port      | Kullanım      |
+| FQDN                       | Port      | Bir yönetim grubuna bağlanmak veya bağlı bir yönetim grubunun özelliklerini düzenlemek için Yönetim çalışma alanında      |
 |----------------------------|-----------|----------|
-| *.hcp.\<location\>.azmk8s.io | HTTPS:443, TCP:22, TCP:9000 | API sunucusu uç adresidir. Değiştirin *\<konumu\>* AKS kümenizi dağıtıldığı bölge ile. |
-| *.tun.\<location\>.azmk8s.io | HTTPS:443, TCP:22, TCP:9000 | API sunucusu uç adresidir. Değiştirin *\<konumu\>* AKS kümenizi dağıtıldığı bölge ile. |
-| aksrepos.azurecr.io        | HTTPS:443 | Bu adres, erişim görüntülerini Azure Container Registry (ACR) gereklidir. |
-| *.blob.core.windows.net    | HTTPS:443 | Bu adres, ACR içinde depolanan görüntülerin arka uç deposudur. |
-| mcr.microsoft.com          | HTTPS:443 | Bu adres Microsoft kapsayıcı kayıt defteri (MCR) erişim görüntüleri için gerekli değildir. |
-| *.cdn.mscr.io              | HTTPS:443 | Bu adres Azure içerik teslim ağı (CDN) tarafından desteklenen MCR depolama için gerekli değildir. |
-| Management.Azure.com       | HTTPS:443 | Bu adres, Kubernetes GET/PUT işlemleri için gereklidir. |
-| login.microsoftonline.com  | HTTPS:443 | Bu adres Azure Active Directory kimlik doğrulaması için gerekli değildir. |
-| api.snapcraft.io           | HTTPS:443, HTTP:80 | Bu adres, Linux düğümlerinde ek paketler yüklemek için gereklidir. |
-| ntp.ubuntu.com             | UDP:123   | Bu adres Linux düğümlerinde NTP zaman eşitleme için gerekli değildir. |
-| *.docker.io                | HTTPS:443 | Bu adres, tünel ön için gerekli kapsayıcı görüntülerini çekmek için gereklidir. |
+| *. HCP. \<Location\>. azmk8s.io | HTTPS: 443, TCP: 22, TCP: 9000 | Bu adres, API sunucusu uç noktasıdır. Konumu aks kümenizin dağıtıldığı bölge ile değiştirin. *\<\>* |
+| *. tun. \<Location\>. azmk8s.io | HTTPS: 443, TCP: 22, TCP: 9000 | Bu adres, API sunucusu uç noktasıdır. Konumu aks kümenizin dağıtıldığı bölge ile değiştirin. *\<\>* |
+| aksrepos.azurecr.io        | HTTPS: 443 | Bu adres Azure Container Registry (ACR) içindeki görüntülere erişmek için gereklidir. Bu kayıt defteri, kümenin yükseltilmesi ve ölçeklendirilmesi sırasında kümenin çalışması için gerekli olan üçüncü taraf resimleri/grafikleri (örneğin, ölçüm sunucusu, çekirdek DNS vb.) içerir|
+| *.blob.core.windows.net    | HTTPS: 443 | Bu adres, ACR 'de depolanan görüntülerin arka uç deposudur. |
+| mcr.microsoft.com          | HTTPS: 443 | Bu adres, Microsoft Container Registry (MCR) içindeki görüntülere erişmek için gereklidir. Bu kayıt defteri, kümenin yükseltilmesi ve ölçeklendirilmesi sırasında kümenin çalışması için gerekli olan ilk taraf görüntülerini/grafikleri (örneğin, Moby, vb.) içerir |
+| *.cdn.mscr.io              | HTTPS: 443 | Bu adres, Azure Content Delivery Network (CDN) tarafından desteklenen MCR depolama alanı için gereklidir. |
+| Management.Azure.com       | HTTPS: 443 | Bu adres, Kubernetes GET/PUT işlemleri için gereklidir. |
+| login.microsoftonline.com  | HTTPS: 443 | Bu adres Azure Active Directory kimlik doğrulaması için gereklidir. |
+| ntp.ubuntu.com             | UDP: 123   | Bu adres, Linux düğümlerinde NTP zaman eşitlemesi için gereklidir. |
+| packages.microsoft.com     | HTTPS: 443 | Bu adres, önbelleğe alınmış *apt-get* işlemleri Için kullanılan Microsoft paketleri deposudur.  Örnek paketlere Moby, PowerShell ve Azure CLı dahildir. |
+| acs-mirror.azureedge.net   | HTTPS: 443 | Bu adres, Kubernetes kullanan ve Azure CNı gibi gerekli ikilileri yüklemek için gereken depoya yöneliktir. |
 
-## <a name="optional-recommended-addresses-and-ports-for-aks-clusters"></a>İsteğe bağlı adresler ve bağlantı noktaları AKS kümeleri için önerilen
+## <a name="optional-recommended-addresses-and-ports-for-aks-clusters"></a>AKS kümeleri için isteğe bağlı önerilen adresler ve bağlantı noktaları
 
-* UDP bağlantı noktası *53* DNS
+Aşağıdaki giden bağlantı noktaları/ağ kuralları bir AKS kümesi için isteğe bağlıdır:
 
-Aşağıdaki FQDN / uygulama kuralları düzgün çalışması AKS kümeleri için önerilir:
+AKS kümelerinin doğru çalışması için aşağıdaki FQDN/uygulama kuralları önerilir:
 
-| FQDN                                    | Port      | Kullanım      |
+| FQDN                                    | Port      | Bir yönetim grubuna bağlanmak veya bağlı bir yönetim grubunun özelliklerini düzenlemek için Yönetim çalışma alanında      |
 |-----------------------------------------|-----------|----------|
-| *.ubuntu.com                            | HTTP:80   | Bu adres, güncelleştirmeleri ve gerekli güvenlik düzeltme ekleri indirmek Linux küme düğümleri sağlar. |
-| Packages.microsoft.com                  | HTTPS:443 | Bu adres kullanılan Microsoft paketleri depodur önbelleğe için *apt-get* operations. |
-| dc.services.visualstudio.com            | HTTPS:443 | Doğru ölçümler için önerilen ve Azure İzleyici'nin kullanımını izleme. |
-| *.opinsights.azure.com                  | HTTPS:443 | Doğru ölçümler için önerilen ve Azure İzleyici'nin kullanımını izleme. |
-| *.monitoring.azure.com                  | HTTPS:443 | Doğru ölçümler için önerilen ve Azure İzleyici'nin kullanımını izleme. |
-| gov-prod-policy-data.trafficmanager.net | HTTPS:443 | Bu adres, Azure İlkesi'nin doğru işlem (şu anda önizlemede aks'deki) için kullanılır. |
-| apt.dockerproject.org                   | HTTPS:443 | Bu adres, doğru sürücü yüklemesi ve GPU tabanlı düğümlerde işlemi için kullanılır. |
-| nvidia.github.io                        | HTTPS:443 | Bu adres, doğru sürücü yüklemesi ve GPU tabanlı düğümlerde işlemi için kullanılır. |
+| security.ubuntu.com, azure.archive.ubuntu.com, changelogs.ubuntu.com | HTTP: 80   | Bu adres, Linux küme düğümlerinin gerekli güvenlik düzeltme eklerini ve güncelleştirmelerini indirmesini sağlar. |
+
+## <a name="required-addresses-and-ports-for-gpu-enabled-aks-clusters"></a>GPU etkin AKS kümeleri için gerekli adresler ve bağlantı noktaları
+
+GPU etkin olan AKS kümeleri için aşağıdaki FQDN/uygulama kuralları gereklidir:
+
+| FQDN                                    | Port      | Bir yönetim grubuna bağlanmak veya bağlı bir yönetim grubunun özelliklerini düzenlemek için Yönetim çalışma alanında      |
+|-----------------------------------------|-----------|----------|
+| nvidia.github.io | HTTPS: 443 | Bu adres, GPU tabanlı düğümlerde doğru sürücü yükleme ve işlem için kullanılır. |
+| us.download.nvidia.com | HTTPS: 443 | Bu adres, GPU tabanlı düğümlerde doğru sürücü yükleme ve işlem için kullanılır. |
+| apt.dockerproject.org | HTTPS: 443 | Bu adres, GPU tabanlı düğümlerde doğru sürücü yükleme ve işlem için kullanılır. |
+
+## <a name="required-addresses-and-ports-with-azure-monitor-for-containers-enabled"></a>Kapsayıcılar için Azure Izleyici ile gerekli adresler ve bağlantı noktaları
+
+Aşağıdaki FQDN/uygulama kuralları, kapsayıcılar için Azure Izleyicisi etkinleştirilmiş olan AKS kümeleri için gereklidir:
+
+| FQDN                                    | Port      | Bir yönetim grubuna bağlanmak veya bağlı bir yönetim grubunun özelliklerini düzenlemek için Yönetim çalışma alanında      |
+|-----------------------------------------|-----------|----------|
+| dc.services.visualstudio.com | HTTPS: 443  | Bu, Azure Izleyici kullanarak doğru ölçümler ve izleme telemetrisine yöneliktir. |
+| *.ods.opinsights.azure.com    | HTTPS: 443 | Bu, Azure Izleyici tarafından günlük analizi verilerini almak için kullanılır. |
+| *.oms.opinsights.azure.com | HTTPS: 443 | Bu adres, Log Analytics hizmetinin kimliğini doğrulamak için kullanılan omsagent tarafından kullanılır. |
+|*.microsoftonline.com | HTTPS: 443 | Bu, Azure Izleyici 'ye yönelik kimlik doğrulaması ve ölçüm göndermek için kullanılır. |
+|*. monitoring.azure.com | HTTPS: 443 | Bu, ölçüm verilerini Azure Izleyici 'ye göndermek için kullanılır. |
+
+## <a name="required-addresses-and-ports-for-aks-clusters-with-azure-policy-in-public-preview-enabled"></a>Azure Ilkesi ile AKS kümeleri için gerekli adresler ve bağlantı noktaları (genel önizlemede) etkin
+
+> [!CAUTION]
+> Aşağıdaki özelliklerden bazıları önizleme aşamasındadır.  Bu makaledeki öneriler, özellik genel önizlemeye ve gelecek sürüm aşamasına taşınıyor şekilde değişir.
+
+Azure Ilkesi etkinleştirilmiş AKS kümeleri için aşağıdaki FQDN/uygulama kuralları gereklidir.
+
+| FQDN                                    | Port      | Bir yönetim grubuna bağlanmak veya bağlı bir yönetim grubunun özelliklerini düzenlemek için Yönetim çalışma alanında      |
+|-----------------------------------------|-----------|----------|
+| gov-prod-policy-data.trafficmanager.net | HTTPS: 443 | Bu adres, Azure Ilkesi 'nin doğru çalışması için kullanılır. (Şu anda AKS 'deki önizlemededir) |
+| RAW.githubusercontent.com | HTTPS: 443 | Bu adres, Azure Ilkesinde doğru işlem yapıldığından emin olmak için yerleşik ilkeleri GitHub 'dan çekmek için kullanılır. (Şu anda AKS 'deki önizlemededir) |
+| *. gk. <location>. azmk8s.io | HTTPS: 443 | Azure ilke eklentisi, Denetim sonuçlarını almak için ana sunucuda çalışan Gatekeeper denetim uç noktasına gidin. |
+| dc.services.visualstudio.com | HTTPS: 443 | Azure ilke eklentisi, telemetri verilerini uygulamalar öngörüleri uç noktasına gönderir. |
+
+## <a name="required-by-windows-server-based-nodes-in-public-preview-enabled"></a>Windows Server tabanlı düğümler için gerekli (genel önizlemede) etkin
+
+> [!CAUTION]
+> Aşağıdaki özelliklerden bazıları önizleme aşamasındadır.  Bu makaledeki öneriler, özellik genel önizlemeye ve gelecek sürüm aşamasına taşınıyor şekilde değişir.
+
+Windows Server tabanlı AKS kümeleri için aşağıdaki FQDN/uygulama kuralları gereklidir:
+
+| FQDN                                    | Port      | Bir yönetim grubuna bağlanmak veya bağlı bir yönetim grubunun özelliklerini düzenlemek için Yönetim çalışma alanında      |
+|-----------------------------------------|-----------|----------|
+| onegetcdn.azureedge.net, winlayers.blob.core.windows.net, winlayers.cdn.mscr.io, go.microsoft.com | HTTPS: 443 | Windows ile ilgili ikili dosyaları yüklemek için |
+| mp.microsoft.com, www<span></span>. msftconnecttest.com, ctldl.windowsupdate.com | HTTP: 80 | Windows ile ilgili ikili dosyaları yüklemek için |
+| kms.core.windows.net | TCP: 1688 | Windows ile ilgili ikili dosyaları yüklemek için |
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, hangi bağlantı noktaları ve küme için çıkış trafiği kısıtlamak, izin vermek için adresleri öğrendiniz. Pod'ların kendileri nasıl iletişim kurabilir ve hangi kısıtlamaları da tanımlayabilirsiniz küme içinde sahip oldukları. Daha fazla bilgi için [güvenli ağ ilkeleri kullanarak AKS pod'ları arasındaki trafiği][network-policy].
+Bu makalede, kümenin çıkış trafiğini kısıtladığınızda hangi bağlantı noktalarının ve adreslerin izin verdiklerini öğrendiniz. Ayrıca, ayırımların nasıl iletişim kurabildiğini ve küme içinde sahip oldukları kısıtlamaları tanımlayabilirsiniz. Daha fazla bilgi için bkz. [aks 'deki ağ ilkelerini kullanarak Pod arasındaki trafiği güvenli hale getirme][network-policy].
 
 <!-- LINKS - internal -->
 [aks-quickstart-cli]: kubernetes-walkthrough.md

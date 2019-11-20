@@ -1,61 +1,61 @@
 ---
-title: Windows yüklemesi IOT aracı Önizleme için Azure Güvenlik Merkezi | Microsoft Docs
-description: Azure Güvenlik Merkezi, IOT aracının 32-bit veya 64-bit Windows cihazlarında yükleme hakkında bilgi edinin.
+title: IoT Aracısı için Azure Güvenlik Merkezi 'nin Windows yüklemesi | Microsoft Docs
+description: 32-bit veya 64 bit Windows cihazlarına IoT Aracısı için Azure Güvenlik Merkezi 'nin nasıl yükleneceği hakkında bilgi edinin.
 services: asc-for-iot
-ms.service: ascforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: 2cf6a49b-5d35-491f-abc3-63ec24eb4bc2
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/19/2019
+ms.date: 07/23/2019
 ms.author: mlottner
-ms.openlocfilehash: 64fc576885bb9d9c3c46aafd808db65d2f8ff77f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: acc99f260931de7fd8c7566a3ff6daf43f34c5ef
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65200598"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68597217"
 ---
-# <a name="deploy-an-azure-security-center-for-iot-c-based-security-agent-for-windows"></a>IOT için Azure Güvenlik Merkezi bir dağıtma C#-güvenlik aracı için Windows tabanlı
+# <a name="deploy-an-azure-security-center-for-iot-c-based-security-agent-for-windows"></a>Windows için IoT C#tabanlı güvenlik aracısına yönelik bir Azure Güvenlik Merkezi dağıtma
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-Bu kılavuz, IOT için Azure Güvenlik Merkezi (ASC) yüklemek açıklanmaktadır C#-Windows Güvenlik aracısında bağlı.
+Bu kılavuzda, Windows 'da IoT C#tabanlı güvenlik aracısının Azure Güvenlik Merkezi 'nin nasıl yükleneceği açıklanmaktadır.
 
 Bu kılavuzda şunların nasıl yapıldığını öğrenirsiniz: 
 > [!div class="checklist"]
 > * Yükleme
 > * Dağıtımı doğrulama
-> * Aracıyı kaldırma
+> * Aracıyı Kaldırma
 > * Sorun giderme 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Diğer platformlar ve aracı flavours için [doğru güvenlik aracı seçin](how-to-deploy-agent.md).
+Diğer platformlar ve aracı türleri için bkz. [doğru güvenlik aracısını seçme](how-to-deploy-agent.md).
 
 1. Yüklemek istediğiniz makinede yerel yönetici hakları. 
 
-1. [Bir güvenlik modülünüzü oluşturmak](quickstart-create-security-twin.md) aygıt için.
+1. Cihaz için [bir güvenlik modülü oluşturun](quickstart-create-security-twin.md) .
 
 ## <a name="installation"></a>Yükleme 
 
-Güvenlik aracı yüklemek için aşağıdakileri yapın:
+Güvenlik aracısını yüklemek için aşağıdaki iş akışını kullanın:
 
-1. ASC IOT Windows için yüklenecek C# aracı cihaz üzerinde indirme en son sürümü makinenize ASC ile IOT [GitHub deposu](https://github.com/Azure/Azure-IoT-Security-Agent-CS).
+1. IoT Windows C# Aracısı Için Azure Güvenlik Merkezi ' ni cihaza yükler. IoT [GitHub deposu](https://github.com/Azure/Azure-IoT-Security-Agent-CS)Için Azure Güvenlik Merkezi ' nden makinenize en son sürümü indirin.
 
-2. Paket içeriğini ayıklayın ve/Install klasöre gidin.
+1. Paketin içeriğini ayıklayın ve/Install klasörüne gidin.
 
-3. Windows PowerShell'i yönetici olarak açın. 
-    1. Çalışan izinleri çalıştırarak InstallSecurityAgent komut dosyasına ekleyin. ```Unblock-File .\InstallSecurityAgent.ps1```
+1. Windows PowerShell 'i yönetici olarak açın. 
+1. Şu komutu çalıştırarak ınstallsecurityagent betiğine çalışan izinleri ekleyin:<br>
+    ```
+    Unblock-File .\InstallSecurityAgent.ps1
+    ```
     
-        ve çalıştırın:
+    ardından şunu çalıştırın:
 
     ```
     .\InstallSecurityAgent.ps1 -Install -aui <authentication identity> -aum <authentication method> -f <file path> -hn <host name> -di <device id> -cl <certificate location kind>
@@ -67,32 +67,32 @@ Güvenlik aracı yüklemek için aşağıdakileri yapın:
     .\InstallSecurityAgent.ps1 -Install -aui Device -aum SymmetricKey -f c:\Temp\Key.txt -hn MyIotHub.azure-devices.net -di Mydevice1 -cl store
     ```
     
-    Bkz: [kimlik doğrulamasını yapılandırma](concept-security-agent-authentication-methods.md) kimlik doğrulama parametreleri hakkında daha fazla bilgi.
+    Kimlik doğrulama parametreleri hakkında daha fazla bilgi için bkz. [kimlik doğrulamasını yapılandırma](concept-security-agent-authentication-methods.md).
 
-Bu betik şunları yapar:
+Bu betik aşağıdaki eylemleri yapar:
 
-- Önkoşulları yükler.
+- Önkoşulları kurar.
 
-- Hizmet kullanıcısı (devre dışı etkileşimli oturum açma ile) ekler.
+- Bir hizmet kullanıcısı ekler (etkileşimli oturum açma devre dışı).
 
-- Aracı olarak yükleyen bir **sistem hizmeti**.
+- Aracıyı bir **sistem hizmeti**olarak kurar.
 
-- Aracı belirtilen kimlik doğrulaması parametrelerle yapılandırır.
+- Aracıyı, belirtilen kimlik doğrulama parametreleriyle yapılandırır.
 
 
-Daha fazla bilgi için Get-Help komutu PowerShell'de kullanın. <br>Get-Help örnek:  
+Ek Yardım için PowerShell 'de Get-Help komutunu kullanın <br>Get-Help örneği:  
     ```Get-Help .\InstallSecurityAgent.ps1```
 
-### <a name="verify-deployment-status"></a>Dağıtım durumunu doğrulayın
+### <a name="verify-deployment-status"></a>Dağıtım durumunu doğrula
 
-- Aracı dağıtım durumunu denetleyin:<br>
+- Şunu çalıştırarak aracı dağıtım durumunu denetleyin:<br>
     ```sc.exe query "ASC IoT Agent"```
 
-### <a name="uninstall-the-agent"></a>Aracıyı kaldırma
+### <a name="uninstall-the-agent"></a>Aracıyı Kaldırma
 
 Aracıyı kaldırmak için:
 
-1. Aşağıdaki PowerShell komut dosyasını Çalıştır **-modu** parametresini **kaldırma**.  
+1. Aşağıdaki PowerShell betiğini, **-Mode** parametresi **Uninstall**olarak ayarlanmış şekilde çalıştırın.  
 
     ```
     .\InstallSecurityAgent.ps1 -Uninstall
@@ -100,11 +100,11 @@ Aracıyı kaldırmak için:
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-Aracısı'nı başlatmak başarısız olursa, günlük özelliğini açar (günlüğe kaydetme işlemi *kapalı* varsayılan olarak) daha fazla bilgi için.
+Aracı başlamazsa, daha fazla bilgi almak için günlüğü açın (varsayılan olarak günlüğe kaydetme *kapalıdır* ).
 
-Günlüğü etkinleştirmek için:
+Günlüğe kaydetmeyi açmak için:
 
-1. Bir standart dosya Düzenleyicisi'ni kullanarak düzenlemek için yapılandırma dosyası (General.config) açın.
+1. Standart bir dosya Düzenleyicisi kullanarak düzenleme için yapılandırma dosyasını (genel. config) açın.
 
 1. Aşağıdaki değerleri düzenleyin:
 
@@ -116,16 +116,16 @@ Günlüğü etkinleştirmek için:
    ```
 
     > [!NOTE]
-    > Günlüğe kaydetme kapatma öneririz **kapalı** sorun giderme işlemi tamamlandıktan sonra. Günlüğe kaydetme bırakarak **üzerinde** arttıkça günlük dosyasının boyutunu ve veri kullanımı. 
+    > Sorun giderme işlemi tamamlandıktan sonra oturumu **kapatmayı** öneririz. Günlüğe kaydetmeyi **bırakmak** günlük dosyası boyutunu ve veri kullanımını artırır. 
 
-1. Aşağıdaki PowerShell veya komut satırı'nı çalıştırarak aracıyı yeniden başlatın:
+1. Aşağıdaki PowerShell veya komut satırını çalıştırarak aracıyı yeniden başlatın:
 
     **PowerShell**
      ```
      Restart-Service "ASC IoT Agent"
      ```
      
-   or
+   veya
 
     **CMD**
      ```
@@ -135,12 +135,12 @@ Günlüğü etkinleştirmek için:
 
 1. Hata hakkında daha fazla bilgi için günlük dosyasını gözden geçirin.
 
-   Günlük dosyası konumu: `%WinDir%/System32/IoTAgentLog.log`
+   Günlük dosyası konumu:`%WinDir%/System32/IoTAgentLog.log`
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- ASC IOT hizmeti için okuma [genel bakış](overview.md)
-- ASC hakkında daha fazla bilgi edinmek için IOT [mimarisi](architecture.md)
-- Etkinleştirme [hizmeti](quickstart-onboard-iot-hub.md)
-- Okuma [SSS](resources-frequently-asked-questions.md)
-- Anlamak [uyarıları](concept-security-alerts.md)
+- IoT hizmetine [genel bakış](overview.md) Için Azure Güvenlik Merkezi 'ni okuyun
+- IoT [mimarisi](architecture.md) Için Azure Güvenlik Merkezi hakkında daha fazla bilgi edinin
+- [Hizmeti](quickstart-onboard-iot-hub.md) etkinleştirme
+- [SSS](resources-frequently-asked-questions.md) 'yi okuyun
+- [Uyarıları](concept-security-alerts.md) anlama

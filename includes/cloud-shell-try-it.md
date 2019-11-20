@@ -2,25 +2,33 @@
 author: sptramer
 ms.service: azure
 ms.topic: include
-ms.date: 05/31/2019
+ms.date: 06/13/2019
 ms.author: sttramer
-ms.openlocfilehash: 977caddde316384815c8248dffe243d2a7817226
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: c52e626a8f87ed38ce6684f0ef011de6fef9e0af
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67341542"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74078741"
 ---
-## <a name="open-azure-cloud-shell"></a>Azure Cloud Shell’i açma
+## <a name="use-azure-cloud-shell"></a>Azure Cloud Shell kullanma
 
-Azure Cloud Shell, tarayıcınız üzerinden kullanılan ve Azure'da barındırılan bir etkileşimli Kabuk ortamıdır. Azure Cloud Shell ya da kullanmanızı sağlar `bash` veya `PowerShell` Kabukları çeşitli Azure Hizmetleri ile çalışmak için araçları çalıştırmak için. Azure Cloud Shell, bu makalenin içeriğini yerel ortamınızda herhangi bir yükleme gerekmeden çalıştırmanıza izin için komutları ile önceden yüklenmiş olarak sunulur.
+Azure, tarayıcınız aracılığıyla kullanabileceğiniz etkileşimli bir kabuk ortamı Azure Cloud Shell. Azure hizmetleriyle çalışmak için Cloud Shell ile bash veya PowerShell kullanabilirsiniz. Bu makaledeki kodu, yerel ortamınıza herhangi bir şey yüklemeye gerek kalmadan çalıştırmak için Cloud Shell önceden yüklenmiş komutları kullanabilirsiniz.
 
-Bu makalede Azure Cloud Shell içinde yer alan herhangi bir kodu çalıştırmak için Cloud Shell oturumu açın, kullanmak **kopyalama** düğmesi kodu kopyalayıp Cloud shell'e oturumla yapıştırın için bir kod bloğu üzerinde __Ctrl + Shift + V__ üzerinde Windows ve Linux veya __Cmd + Shift + V__ macOS üzerinde. Yapıştırılan metni otomatik olarak yürütülmedi, bu nedenle basın **Enter** kodu çalıştırmak için.
-
-Azure Cloud Shell ile yeniden başlatabilirsiniz:
+Azure Cloud Shell başlamak için:
 
 | Seçenek | Örnek/bağlantı |
 |-----------------------------------------------|---|
-| Kod bloğunun sağ üst köşesindeki **Deneyin**’i seçin. Bu __değil__ otomatik olarak Cloud shell'e metni kopyalayın. | ![Örneği Azure Cloud Shell için deneyin](./media/cloud-shell-try-it/cli-try-it.png) |
-| Açık [Azure Cloud Shell](https://shell.azure.com) tarayıcınızda. | <a href="https://shell.azure.com" title="Azure Cloud Shell'i Başlat"><img name="launch-cloud-shell" src="https://docs.microsoft.com/azure/includes/media/cloud-shell-try-it/launchcloudshell.png" /></a> |
-| [Azure portalının](https://portal.azure.com) sağ üst köşesindeki menüde yer alan **Cloud Shell** düğmesini seçin. | ![Azure portaldaki Cloud Shell düğmesi](./media/cloud-shell-try-it/cloud-shell-menu.png) |
+| Kod bloğunun sağ üst köşesindeki **Deneyin**’i seçin. **Dene** ' nin seçilmesi, kodu Cloud Shell otomatik olarak kopyalamaz. | ![Azure Cloud Shell için deneme örneği](./media/cloud-shell-try-it/hdi-azure-cli-try-it.png) |
+| [https://shell.azure.com](https://shell.azure.com)gidin veya tarayıcınızda Cloud Shell açmak Için **Cloud Shell Başlat** düğmesini seçin. | [Yeni bir pencerede başlatma Cloud Shell ![](media/cloud-shell-try-it/hdi-launch-cloud-shell.png)](https://shell.azure.com) |
+| [Azure Portal](https://portal.azure.com)sağ üstteki menü çubuğunda **Cloud Shell** düğmesini seçin. | ![Azure portaldaki Cloud Shell düğmesi](./media/cloud-shell-try-it/hdi-cloud-shell-menu.png) |
+
+Bu makaledeki kodu Azure Cloud Shell çalıştırmak için:
+
+1. Cloud Shell başlatın.
+
+1. Kodu kopyalamak için bir kod bloğunda **Kopyala** düğmesini seçin.
+
+1. Windows ve Linux 'ta **Ctrl**+**SHIFT**+**v** ' i seçerek veya macos 'ta **cmd**+**SHIFT**+**v** ' i seçerek kodu Cloud Shell oturumuna yapıştırın.
+
+1. Kodu çalıştırmak için **ENTER** ' u seçin.

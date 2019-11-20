@@ -56,22 +56,35 @@
     - name: SSH hakkındaki sorunları giderme
       href: troubleshoot-ssh-connection.md
     - name: Dosya sistemi hatalarını giderme
-      href: 'https://support.microsoft.com/help/3213321'
+      href: linux-recovery-cannot-start-file-system-errors.md
     - name: Çekirdekle ilgili önyükleme sorunları giderme
       href: 'https://support.microsoft.com/help/4091524'
     - name: Fstab hatalarını giderme
-      href: 'https://support.microsoft.com/help/3206699'
+      href: linux-virtual-machine-cannot-start-fstab-errors.md
     - name: SSH hakkındaki sorunları gidermeyle ilgili ayrıntılar
       href: detailed-troubleshoot-ssh-connection.md
 - name: Genel hata iletileri
   href: error-messages.md
-- name: Windows VM’leriyle ilgili performans sorunları
-  href: performance-diagnostics.md
+- name: Azure VM Performans sorunlarını giderme
   items:
-    - name: PerfInsights’ı kullanma
-      href: how-to-use-perfInsights.md
-    - name: Performans tanılama uzantısı
-      href: performance-diagnostics-vm-extension.md
+    - name: Linux veya Windows'da performans sorunları
+      href: troubleshoot-performance-virtual-machine-linux-windows.md
+    - name: Performans tanılama
+      href: performance-diagnostics.md
+- name: 32 bit işletim sistemleri desteği
+  href: support-32-bit-operating-systems-virtual-machines.md
+- name: PerfInsights
+  items:
+    - name: Windows
+      items:
+        - name: PerfInsights’ı kullanma
+          href: how-to-use-perfinsights.md
+        - name: Performans tanılama uzantısı
+          href: performance-diagnostics-vm-extension.md
+    - name: Linux
+      items:
+        - name: PerfInsights’ı kullanma
+          href: how-to-use-perfinsights-linux.md
 - name: Windows VM aracısını çevrimdışı olarak yükleme
   href: install-vm-agent-offline.md
 - name: Bir VM’yi yeniden dağıtma
@@ -90,30 +103,44 @@
   href: reset-network-interface.md
 - name: VM’yi yeniden başlatma veya yeniden boyutlandırma
   href: restart-resize-error-troubleshooting.md
-- name: Seri konsolu kullanma
+- name: Seri Konsol
   items:
-    - name: Linux VM
+    - name: Seri Konsola genel bakış
+      href: serial-console-overview.md
+    - name: Linux için Seri Konsol
       href: serial-console-linux.md
       items:
         - name: Seri Konsol GRUB/Tek kullanıcı modu
           href: serial-console-grub-single-user-mode.md
         - name: Seri Konsol NMI/SysRq
           href: serial-console-nmi-sysrq.md
-    - name: Windows VM
+    - name: Windows için Seri Konsol
       href: serial-console-windows.md
       items:
         - name: CMD ve PowerShell komutları
           href: serial-console-cmd-ps-commands.md
+    - name: Seri Konsolu etkinleştirme ve devre dışı bırakma
+      href: serial-console-enable-disable.md
+    - name: Seri Konsol içindeki güç seçenekleri
+      href: serial-console-power-options.md
+    - name: Yaygın Seri Konsol hataları
+      href: serial-console-errors.md
 - name: Depolama alanı kaynaklarını silerken karşılaşılan hatalar
   href: storage-resource-deletion-errors.md
 - name: Klasik depolama alanı kaynaklarını silerken karşılaşılan hatalar
   href: storage-classic-cannot-delete-storage-account-container-vhd.md
-- name: Ekli VHD’ler ile VM’lerin beklenmeyen yeniden başlatmaları
-  href: unexpected-reboots-attached-vhds.md
-- name: Windows etkinleştirme sorunları
-  href: troubleshoot-activation-problems.md
-- name: Zorlamalı tünel oluşturmayla ilgili etkinleştirme sorunu
-  href: custom-routes-enable-kms-activation.md
+- name: VM yeniden başlatma sorunlarını giderme
+  items:
+    - name: Ekli VHD’ler ile VM’lerin beklenmeyen yeniden başlatmaları
+      href: unexpected-reboots-attached-vhds.md
+    - name: Sistemin yeniden başlatılma nedenini anlama
+      href: understand-vm-reboot.md
+- name: Windows etkinleştirme
+  items:
+    - name: Windows etkinleştirme sorunları
+      href: troubleshoot-activation-problems.md
+    - name: Zorlamalı tünel oluşturmayla ilgili etkinleştirme sorunu
+      href: custom-routes-enable-kms-activation.md
 - name: 0Uygulama erişimi sorunları
   href: troubleshoot-app-connection.md
 - name: Yeni VM dağıtımları
@@ -147,6 +174,8 @@
 - name: Önyükleme hataları
   href: boot-error-troubleshoot.md
   items:
+    - name: Grub Rescue
+      href: troubleshoot-vm-boot-error.md
     - name: Önyükleme tanılamaları
       href: boot-diagnostics.md
     - name: BitLocker hataları
@@ -167,7 +196,11 @@
   href: troubleshooting-throttling-errors.md
 - name: İç içe geçmiş sanallaştırma kullanımı
   href: troubleshoot-vm-by-use-nested-virtualization.md
-- name: Sistemin yeniden başlatılma nedenini anlama
-  href: understand-vm-reboot.md
 - name: Uzaktan sorun giderme araçları
   href: remote-tools-troubleshoot-azure-vm-issues.md
+- name: Sanal Makine Onarımı
+  items:
+    - name: Azure Sanal Makine onarım komutlarını kullanarak Windows VM'sini onarma
+      href: repair-windows-vm-using-azure-virtual-machine-repair-commands.md
+    - name: Azure Sanal Makine onarım komutlarını kullanarak Linux VM'sini onarma
+      href: repair-linux-vm-using-azure-virtual-machine-repair-commands.md

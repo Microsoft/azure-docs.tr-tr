@@ -1,44 +1,48 @@
 ---
-title: Azure rol tabanlı erişim denetimi (Destek isteklerini oluşturmak ve yönetmek için RBAC) için erişim haklarını denetleme | Microsoft Docs
-description: Azure rol tabanlı erişim denetimi (Destek isteklerini oluşturmak ve yönetmek için RBAC) için erişim haklarını denetleme
+title: Azure 'da destek istekleri oluşturmak için erişim denetimi
+description: Destek isteklerini oluşturmak ve yönetmek için erişim haklarını denetlemek üzere Azure rol tabanlı Access Control (RBAC)
 author: ganganarayanan
 ms.author: gangan
 ms.date: 1/31/2017
 ms.topic: article
-ms.service: azure
+ms.service: azure-supportability
 ms.assetid: 58a0ca9d-86d2-469a-9714-3b8320c33cf5
-ms.openlocfilehash: d98d0637c6d520193b11f4267c59016772ef063a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX,NOFOLLOW
+ms.openlocfilehash: 328f4928aff6a892849ce3e08fe794578b5e03a4
+ms.sourcegitcommit: 8b44498b922f7d7d34e4de7189b3ad5a9ba1488b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60809925"
+ms.lasthandoff: 10/13/2019
+ms.locfileid: "72299267"
 ---
-# <a name="azure-role-based-access-control-rbac-to-control-access-rights-to-create-and-manage-support-requests"></a>Azure rol tabanlı erişim denetimi (Destek isteklerini oluşturmak ve yönetmek için RBAC) için erişim haklarını denetleme
+# <a name="azure-role-based-access-control-rbac-to-control-access-rights-to-create-and-manage-support-requests"></a>Destek isteklerini oluşturmak ve yönetmek için erişim haklarını denetlemek üzere Azure rol tabanlı Access Control (RBAC)
 
-[Rol tabanlı erişim denetimi (RBAC)](https://docs.microsoft.com/azure/role-based-access-control/overview) Azure için ayrıntılı erişim yönetimi sağlar.
-Azure portalında isteği oluşturmayı destekleyen [portal.azure.com](https://portal.azure.com), Azure'nın RBAC modelinde kimin oluşturabilir ve Destek isteklerini yönetin tanımlamak için kullanır.
-Kullanıcıları, grupları ve uygulamaları bir abonelik, kaynak grubu veya bir kaynak olarak belirli bir kapsama, uygun RBAC rolü atanarak erişim verilir.
+> [!IMPORTANT]
+> Azure 'da istekleri desteklemek için erişim haklarını denetlemek üzere bu el ile yapılan yaklaşım, yerleşik bir rolle değiştirilmiştir. Daha fazla bilgi için bkz. [destek Isteği katılımcısı](../role-based-access-control/built-in-roles.md#support-request-contributor). 
 
-Bir örneği ele alalım: Abonelik kapsamında Okuma izinleri olan bir kaynak grubu sahibi Web siteleri, sanal makineler ve alt ağları gibi bir kaynak grubu altındaki tüm kaynakları yönetebilir.
-Ancak, sanal makine kaynağı karşı bir destek isteği oluşturmayı denediğinizde, şu hatayla karşılaşırsanız
+[Rol tabanlı Access Control (RBAC)](https://docs.microsoft.com/azure/role-based-access-control/overview) , Azure için ayrıntılı erişim yönetimine izin vermez.
+Azure portal [portal.azure.com](https://portal.azure.com)destek isteği oluşturma, Azure 'un, destek istekleri oluşturup yönetebileceğini tanımlamak için Azure 'un RBAC modelini kullanır.
+Bir abonelik, kaynak grubu veya kaynak olabilen belirli bir kapsamdaki kullanıcılara, gruplara ve uygulamalara uygun RBAC rolü atanarak erişim verilir.
 
-![Abonelik hata](./media/create-manage-support-requests-using-access-control/subscription-error.png)
+Örnek: abonelik kapsamında okuma izinleri olan bir kaynak grubu sahibi olarak, kaynak grubu altında Web siteleri, sanal makineler ve alt ağlar gibi tüm kaynakları yönetebilirsiniz.
+Ancak, sanal makine kaynağına karşı bir destek isteği oluşturmaya çalıştığınızda, aşağıdaki hatayla karşılaşırsınız
 
-Destek isteği Yönetimi'nde iznine veya destek isteklerini oluşturmak ve yönetmek için abonelik kapsamında destek eylem Microsoft.Support/* sahip bir rol yazmanız gerekir.
+![Abonelik hatası](./media/create-manage-support-requests-using-access-control/subscription-error.png)
 
-Aşağıdaki makalede, Azure portalında destek isteklerini oluşturmak ve yönetmek için Azure'nın özel rol tabanlı erişim denetimi (RBAC) nasıl kullanabileceğinizi açıklar.
+Destek isteği Yönetimi ' nde, destek istekleri oluşturup yönetebilmek için abonelik kapsamında Microsoft. support/* destek eylemine sahip bir rol yazma iznine sahip olmalıdır.
 
-## <a name="getting-started"></a>Başlarken
+Aşağıdaki makalede, Azure portal destek istekleri oluşturmak ve yönetmek için Azure 'un özel rol tabanlı Access Control (RBAC) nasıl kullanabileceğiniz açıklanmaktadır.
 
-Yukarıdaki örneği kullanarak, abonelik sahibi tarafından abonelik üzerinde özel bir RBAC rolü atandıysa, kaynağınız için bir destek isteği oluşturmak mümkün olacaktır.
-[Özel bir RBAC rollerini](https://azure.microsoft.com/documentation/articles/role-based-access-control-custom-roles/) Azure PowerShell, Azure komut satırı arabirimi (CLI) ve REST API'si kullanılarak oluşturulabilir.
+## <a name="getting-started"></a>Başlangıç
 
-Actions özelliği özel bir rol, rol erişim veren Azure işlemleri belirtir.
-Destek isteği yönetimi için özel bir rol oluşturmak için rolü Microsoft.Support/* eylemi olması gerekir
+Yukarıdaki örneği kullanarak, abonelik sahibi tarafından abonelikte özel bir RBAC rolü atandıysa, kaynağınız için bir destek isteği oluşturabilirsiniz.
+Azure PowerShell, Azure komut satırı arabirimi (CLı) ve REST API kullanılarak [özel RBAC rolleri](https://azure.microsoft.com/documentation/articles/role-based-access-control-custom-roles/) oluşturulabilir.
+
+Özel bir rolün Actions özelliği rolün erişim izni verdiği Azure işlemlerini belirtir.
+Destek isteği yönetimi için özel bir rol oluşturmak üzere, rol Microsoft. support/* eylemine sahip olmalıdır
 
 Destek isteklerini oluşturmak ve yönetmek için kullanabileceğiniz özel bir rol örneği aşağıda verilmiştir.
-Biz bu rol "Destek isteği Katılımcısı" adlı ve nasıl özel rolü bu makaledeki diyoruz.
+Bu rolü "destek Isteği katılımcısı" olarak adlandırdık ve bu makalede özel role nasıl başvurduğumuz.
 
 ``` Json
 {
@@ -57,54 +61,54 @@ Biz bu rol "Destek isteği Katılımcısı" adlı ve nasıl özel rolü bu makal
 }
 ```
 
-Özetlenen adımları izleyin [bu videoyu](https://www.youtube.com/watch?v=-PaBaDmfwKI) aboneliğiniz için özel bir rol oluşturma hakkında bilgi edinmek için.
+Aboneliğiniz için özel rol oluşturma hakkında bilgi edinmek için [Bu videoda](https://www.youtube.com/watch?v=-PaBaDmfwKI) özetlenen adımları izleyin.
 
-## <a name="create-and-manage-support-requests-in-the-azure-portal"></a>Azure portalında destek isteklerini oluşturmak ve yönetmek
+## <a name="create-and-manage-support-requests-in-the-azure-portal"></a>Azure portal destek istekleri oluşturma ve yönetme
 
-Bir örneği ele alalım: "Visual Studio MSDN aboneliği." aboneliğin sahibi
-ALi, bir kaynak sahibi bazı bu Abonelikteki kaynak grupları ve okuma izni aboneliğe eşdüzey olur.
-Eşdüzey, ALi, oluşturma ve bu abonelik kapsamındaki kaynaklar için destek biletlerini yönetme olanağı erişmesini istiyor.
+Bir örnek alalım: "Visual Studio MSDN aboneliği" aboneliğine sahip olursunuz.
+Ali, Bu abonelikteki kaynak gruplarının bazılarına kaynak sahibi olan ve abonelik için okuma iznine sahip olan bir eşdir.
+Bu abonelik kapsamındaki kaynaklar için destek bileti oluşturma ve yönetme olanağı olan Joe, eşdüzey verilerinize erişim vermek istiyorsunuz.
 
-1. Aboneliklere Git için ilk adımıdır ve "Ayarlar altında" kullanıcıların listesini görürsünüz. Kullanıcı abonelik üzerinde okuyucu erişimi olan Joe tıklayın ve şimdi kendisine yeni bir özel rol atayın.
+1. İlk adım aboneliğe gidemez. **Ayarlar**' ın altında, kullanıcıların listesini görürsünüz. Abonelik üzerinde okuyucu erişimi olan ali kullanıcısını seçin. Ali 'e yeni bir özel rol atalim.
 
     ![Rol Ekle](./media/create-manage-support-requests-using-access-control/add-role.png)
 
-2. "Ekle" altındaki "Kullanıcılar" dikey penceresinde'yi tıklatın. Özel rol "Destek isteği Katılımcısı" rol listesinden seçin
+2. "Kullanıcılar" dikey penceresinde "Ekle" ye tıklayın. Rol listesinden "destek Isteği katılımcısı" özel rolünü seçin
 
-    ![Destek katkıda bulunan rolü Ekle](./media/create-manage-support-requests-using-access-control/add-support-contributor-role.png)
+    ![Destek katılımcısı rolü Ekle](./media/create-manage-support-requests-using-access-control/add-support-contributor-role.png)
 
-3. Rol adı'nı seçtikten sonra "Kullanıcı Ekle" ye tıklayın ve Can'ın e-posta kimlik bilgilerini girin. "Seç"e tıklayın
+3. Rol adını seçtikten sonra, "Kullanıcı Ekle" ye tıklayın ve ali 'nin e-posta kimlik bilgilerini girin. "Seç"e tıklayın
 
     ![Kullanıcı ekle](./media/create-manage-support-requests-using-access-control/add-users.png)
 
-4. Devam etmek için "Tamam" düğmesini tıklatın
+4. Devam etmek için "Tamam" a tıklayın
 
     ![Erişim Ekle](./media/create-manage-support-requests-using-access-control/add-access.png)
 
-5. "Destek isteği Katılımcısı" sahip olduğunuz abonelik altında yeni eklenen özel rol ile kullanıcı göreceksiniz
+5. Şimdi, sahibi olduğunuz aboneliğin altında yeni eklenen "destek Isteği katılımcısı" özel rolüne sahip kullanıcıyı görürsünüz
 
     ![Kullanıcı eklendi](./media/create-manage-support-requests-using-access-control/user-added.png)
 
-    ALi Portalı'nda oturum açtığında, kendisinin eklendiği abonelik görür.
+    Ali portalda oturum açtığında ali, ali 'nin eklendiği aboneliği görür.
 
-7. ALi, "Yeni destek isteği" "Yardım ve Destek" dikey penceresinden tıklar ve "Visual Studio Ultimate ile MSDN için" destek istekleri oluşturmak
+7. Ali "yardım ve destek" dikey penceresinde "Yeni Destek isteği" öğesini tıklatır ve "Visual Studio Ultimate with MSDN" için destek istekleri oluşturabilir
 
     ![Yeni destek isteği](./media/create-manage-support-requests-using-access-control/new-support-request.png)
 
-8. "Tüm destek istekleri" tıklayarak ALi Bu abonelik için oluşturulan destek istekleri listesi görürsünüz ![durum görünümü ayrıntıları](./media/create-manage-support-requests-using-access-control/case-details-view.png)
+8. "Tüm destek istekleri" ali ' ne tıklamak bu abonelik için oluşturulan Destek isteklerinin listesini görebilir ![Case Ayrıntıları görünümü @ no__t-1
 
-## <a name="remove-support-request-access-in-the-azure-portal"></a>Azure portalında destek isteği erişimi Kaldır
+## <a name="remove-support-request-access-in-the-azure-portal"></a>Azure portal destek isteği erişimini kaldırma
 
-Destek isteklerini oluşturmak ve yönetmek için bir kullanıcı için erişim vermek mümkün olduğu gibi kullanıcı da erişimi kaldırmak mümkündür.
-Oluşturma ve Destek isteklerini yönetin, aboneliklere Git özelliği kaldırmak için "Ayarlar"'a tıklayın ve kullanıcı (Bu durumda, ALi) tıklayın.
-"Destek isteği Katılımcısı" rol adına sağ tıklayın ve "Kaldır" a tıklayın
+Destek isteklerini oluşturmak ve yönetmek için bir kullanıcıya erişim izni verilmesi mümkün olduğu gibi, Kullanıcı erişimini de kaldırmak mümkündür.
 
-![Destek isteği erişimi Kaldır](./media/create-manage-support-requests-using-access-control/remove-support-request-access.png)
+Destek istekleri oluşturma ve yönetme yeteneğini kaldırmak için, aboneliğe gidin, "Ayarlar" a tıklayın ve kullanıcıya (Bu durumda Joe) tıklayın. "Destek Isteği katılımcısı" rol adına sağ tıklayın ve "Kaldır" a tıklayın
 
-ALi portalında bir destek isteği oluşturmak çalışır, kendisi aşağıdaki hatayla karşılaşan
+![Destek isteği erişimini kaldır](./media/create-manage-support-requests-using-access-control/remove-support-request-access.png)
 
-![Abonelik hata-2](./media/create-manage-support-requests-using-access-control/subscription-error-2.png)
+Ali portalda oturum açtığında ve bir destek isteği oluşturmaya çalıştığında, ali aşağıdaki hatayla karşılaşır:
 
-ALi herhangi göremezsiniz he "Tüm destek istekleri" tıkladığında destek istekleri
+![Abonelik hatası-2](./media/create-manage-support-requests-using-access-control/subscription-error-2.png)
 
-![Servis Talebi Ayrıntıları görünümü-2](./media/create-manage-support-requests-using-access-control/case-details-view-2.png)
+Ali, Joe "tüm destek istekleri" seçildiğinde herhangi bir destek isteği göremez
+
+![büyük/küçük harf Ayrıntıları görünümü-2](./media/create-manage-support-requests-using-access-control/case-details-view-2.png)

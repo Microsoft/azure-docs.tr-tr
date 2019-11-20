@@ -1,27 +1,27 @@
 ---
-title: Gönder ve Java - Azure Event Hubs kullanarak olay alma | Microsoft Docs
-description: Bu makalede, olayları gönderen Azure Event Hubs için Java uygulaması oluşturmayla ilgili bir kılavuz sağlar.
+title: Azure 'a veri göndermek için Java kullanın Event Hubs
+description: Bu makalede, Azure Event Hubs olayları gönderen bir Java uygulaması oluşturmaya yönelik izlenecek yol sunulmaktadır.
 services: event-hubs
 author: ShubhaVijayasarathy
 manager: timlt
 ms.service: event-hubs
 ms.workload: core
 ms.topic: article
-ms.custom: seodec18
+ms.custom: seodec18, seo-java-august2019, seo-java-september2019
 ms.date: 04/15/2019
 ms.author: shvija
-ms.openlocfilehash: 0487cac6a0cf7d37befdf0d7cfab33ad6a62cf7f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: be9919950f24dbee7fb8a3f901767c298105bf53
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60822918"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72325463"
 ---
-# <a name="send-events-to-or-receive-events-from-azure-event-hubs-using-java"></a>Olayları göndermek veya Java kullanarak Azure Event Hubs'tan gelen olayları alma
+# <a name="use-java-to-send-events-to-or-receive-events-from-azure-event-hubs"></a>Azure Event Hubs olaylar göndermek veya Azure 'dan olayları almak için Java 'Yı kullanma
 
-Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Olay Hub’larının ayrıntılı genel bakışı için bkz. [Olay Hub’larına genel bakış](event-hubs-about.md) ve [Olay Hub’ları özellikleri](event-hubs-features.md).
+Bu öğreticide, Azure Event Hubs olaylar göndermek veya almak için Java uygulamalarının nasıl oluşturulacağı gösterilmektedir.
 
-Bu öğretici, olayları göndermek veya bir olay hub'ından olay alma için Java uygulamalarını oluşturma işlemi gösterilmektedir. 
+Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı veya işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Event Hubs ayrıntılı genel bakış için bkz. Event Hubs genel bakış ve Event Hubs özellikleri.
 
 > [!NOTE]
 > Bu hızlı başlangıcı [GitHub](https://github.com/Azure/azure-event-hubs/tree/master/samples/Java/Basic/SimpleSend)’dan örnek olarak indirebilir, `EventHubConnectionString` ve `EventHubName` dizelerini olay hub’ınızdaki değerlerle değiştirebilir ve çalıştırabilirsiniz. Alternatif olarak bu öğreticideki adımları izleyerek kendi çözümünüzü de oluşturabilirsiniz.
@@ -31,15 +31,15 @@ Bu öğretici, olayları göndermek veya bir olay hub'ından olay alma için Jav
 Bu öğreticiyi tamamlamak için aşağıdaki önkoşulları karşılamanız gerekir:
 
 - Etkin bir Azure hesabı. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) oluşturun.
-- Java geliştirme ortamı. Bu öğreticide [Eclipse](https://www.eclipse.org/).
-- **Bir Event Hubs ad alanı ve bir olay hub'ı oluşturma**. İlk adımda [Azure portalını](https://portal.azure.com) kullanarak Event Hubs türünde bir ad alanı oluşturun, ardından uygulamanızın olay hub’ı ile iletişim kurması için gereken yönetim kimlik bilgilerini edinin. Bir ad alanı ve olay hub'ı oluşturmak için verilen yordamı izleyin [bu makalede](event-hubs-create.md). Ardından, makaledeki yönergeleri izleyerek olay hub'ı erişim anahtarının değerini alın: [Bağlantı dizesini alma](event-hubs-get-connection-string.md#get-connection-string-from-the-portal). Bu öğreticinin ilerleyen bölümlerinde yazdığınız kod erişim anahtarını kullanın. Varsayılan anahtar adı şöyledir: **RootManageSharedAccessKey**.
+- Bir Java geliştirme ortamı. Bu öğretici, [tutulma](https://www.eclipse.org/)kullanır.
+- **Event Hubs bir ad alanı ve bir olay hub 'ı oluşturun**. İlk adımda [Azure portalını](https://portal.azure.com) kullanarak Event Hubs türünde bir ad alanı oluşturun, ardından uygulamanızın olay hub’ı ile iletişim kurması için gereken yönetim kimlik bilgilerini edinin. Bir ad alanı ve Olay Hub 'ı oluşturmak için [Bu makaledeki](event-hubs-create.md)yordamı izleyin. Ardından, makaledeki yönergeleri izleyerek Olay Hub 'ı için erişim anahtarı değerini alın: [bağlantı dizesi al](event-hubs-get-connection-string.md#get-connection-string-from-the-portal). Bu öğreticide daha sonra yazdığınız kodda erişim anahtarını kullanın. Varsayılan anahtar adı: **RootManageSharedAccessKey**.
 
 ## <a name="send-events"></a>Olayları gönderme 
-Bu bölümde, bir olay hub'ı olayları göndermek için bir Java uygulamasının nasıl oluşturulacağını gösterir. 
+Bu bölümde, Olay Hub 'ına olay göndermek için bir Java uygulaması oluşturma gösterilmektedir. 
 
-### <a name="add-reference-to-azure-event-hubs-library"></a>Azure Event Hubs kitaplığına bir başvuru ekleyin
+### <a name="add-reference-to-azure-event-hubs-library"></a>Azure Event Hubs kitaplığı 'na başvuru ekleme
 
-Event Hubs için Java istemci kitaplığı içindeki Maven projelerinde kullanılabilir [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs%22). Bu kitaplık içinde Maven proje dosyanızda aşağıdaki bağımlılık bildirimi kullanılarak başvurabilirsiniz:
+Event Hubs için Java istemci kitaplığı, [Maven merkezi deposundaki](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs%22)Maven projelerinde kullanıma sunulmuştur. Bu kitaplığa, Maven proje dosyanızda aşağıdaki bağımlılık bildirimini kullanarak başvurabilirsiniz:
 
 ```xml
 <dependency>
@@ -49,13 +49,13 @@ Event Hubs için Java istemci kitaplığı içindeki Maven projelerinde kullanı
 </dependency>
 ```
 
-Derleme ortamlarının farklı türleri için en son JAR dosyalarının açıkça edinebilirsiniz [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs%22).  
+Farklı türlerde derleme ortamları için, [Maven merkezi deposundaki](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs%22)en son yayınlanan jar dosyalarını açıkça alabilirsiniz.  
 
-Basit olay yayımcısı, içeri aktarma *com.microsoft.azure.eventhubs* Event Hubs istemci sınıfları için paket ve *com.microsoft.azure.servicebus* için yardımcı sınıflar gibi paket Azure Service Bus Mesajlaşma istemcisi ile paylaşılan sık karşılaşılan özel durumlar. 
+Basit bir olay yayımcısı için *com. Microsoft. Azure. eventhubs* paketini Event Hubs istemci sınıfları ve *com. Microsoft. Azure. ServiceBus* paketi için, Azure ile paylaşılan ortak özel durumlar gibi yardımcı program sınıfları için içeri aktarın Service Bus mesajlaşma istemcisi. 
 
 ### <a name="write-code-to-send-messages-to-the-event-hub"></a>Olay hub'ına ileti göndermek için kod yazma
 
-Aşağıdaki örnek için önce en sevdiğiniz Java geliştirme ortamında bir konsol/kabuk uygulaması için yeni bir Maven projesi oluşturun. Adlı bir sınıf ekleyin `SimpleSend`ve bu sınıfa aşağıdaki kodu ekleyin:
+Aşağıdaki örnek için önce en sevdiğiniz Java geliştirme ortamında bir konsol/kabuk uygulaması için yeni bir Maven projesi oluşturun. @No__t-0 adlı bir sınıf ekleyin ve aşağıdaki kodu sınıfına ekleyin:
 
 ```java
 import com.google.gson.Gson;
@@ -82,21 +82,21 @@ public class SimpleSend {
  }
 ```
 
-### <a name="construct-connection-string"></a>Bağlantı dizesi oluşturun
+### <a name="construct-connection-string"></a>Bağlantı dizesi oluştur
 
-ConnectionStringBuilder sınıfı Event Hubs istemci örneğine geçirmek için bir bağlantı dizesi değerini oluşturmak için kullanın. Yer tutucuları, ad alanı ve olay hub'ı oluştururken aldığınız değerlerle değiştirin:
+Event Hubs istemci örneğine geçirilecek bir bağlantı dizesi değeri oluşturmak için ConnectionStringBuilder sınıfını kullanın. Yer tutucuları, ad alanını ve Olay Hub 'ını oluştururken elde ettiğiniz değerlerle değiştirin:
 
 ```java
         final ConnectionStringBuilder connStr = new ConnectionStringBuilder()
-                .setNamespaceName("speventhubns") 
-                .setEventHubName("speventhub")
+                .setNamespaceName("<EVENTHUB NAMESPACE") 
+                .setEventHubName("EVENT HUB")
                 .setSasKeyName("RootManageSharedAccessKey")
-                .setSasKey("2+WMsyyy1XmUtEnRsfOmTTyGasfJgsVjGAOIN20J1Y8=");
+                .setSasKey("SHARED ACCESS KEY");
 ```
 
 ### <a name="write-code-to-send-events"></a>Olayları göndermek için kod yazma
 
-Bir dizeyi UTF-8 kodlamasını bayt içine dönüştürerek tekil bir olay oluşturun. Ardından, bağlantı dizesinden yeni bir olay hub'ları istemci örneği oluşturun ve ileti gönder:   
+Bir dizeyi UTF-8 bayt kodlamasıyla dönüştürerek tekil bir olay oluşturun. Sonra, bağlantı dizesinden yeni bir Event Hubs istemci örneği oluşturun ve şu iletiyi gönderin:   
 
 ```java 
         final Gson gson = new GsonBuilder().create();
@@ -136,17 +136,17 @@ Bir dizeyi UTF-8 kodlamasını bayt içine dönüştürerek tekil bir olay oluş
 
 ``` 
 
-Derleme programı çalıştırın ve hiçbir hata olmadığından emin olun.
+Programı derleyin ve çalıştırın ve hata olmadığından emin olun.
 
 Tebrikler! Bir olay hub'ına ileti gönderdiniz.
 
-### <a name="appendix-how-messages-are-routed-to-eventhub-partitions"></a>Ek: EventHub bölümleri iletileri nasıl yönlendirileceğini
+### <a name="appendix-how-messages-are-routed-to-eventhub-partitions"></a>Ek: iletilerin EventHub bölümlerine nasıl yönlendirildiği
 
-İleti tüketiciler tarafından alınır önce bunlar bölümlere ilk yayımcılar tarafından yayımlanan gerekir. Olay hub'ına zaman uyumlu olarak com.microsoft.azure.eventhubs.EventHubClient nesnede sendSync() yöntemi kullanarak ileti yayımlandığında, ileti belirli bir bölüme gönderilebilecek veya hepsini bir kez deneme biçimde için kullanılabilir tüm bölümleri dağıtılmış Bölüm anahtarı veya belirtilen üzerinde bağlı olarak.
+İletiler tüketicilerle alınmadan önce, yayımcılar tarafından önce bölümlere yayımlanmaları gerekir. İletiler, com. Microsoft. Azure. eventhubs. EventHubClient nesnesindeki sendSync () yöntemi kullanılarak Olay Hub 'ına zaman uyumlu olarak yayımlandığında, ileti belirli bir bölüme gönderilebilir veya hepsini bir kez deneme halinde tüm kullanılabilir bölümlere dağıtılabilir Bölüm anahtarının belirlenmediğine bağlı olarak.
 
-Bölüm anahtarını temsil eden bir dize belirtildiğinde, anahtarı için bir olay göndermek için hangi bölümünün belirlemek için karma.
+Bölüm anahtarını temsil eden bir dize belirtildiğinde, olayın hangi bölüme gönderileceğini belirleyen anahtar karma olur.
 
-Bölüm anahtarı olarak ayarlanmadığında, iletileri ardından gidiş-robined kullanılabilen tüm bölümler için olacaktır
+Bölüm anahtarı ayarlanmamışsa, iletiler kullanılabilir tüm bölümlerle gösterilir
 
 ```java
 // Serialize the event into bytes
@@ -168,30 +168,30 @@ eventHubClient.closeSync();
 ```
 
 ## <a name="receive-events"></a>Olayları alma
-Bu öğreticideki kod dayanır [EventProcessorSample kodu github'da](https://github.com/Azure/azure-event-hubs/tree/master/samples/Java/Basic/EventProcessorSample), hangi tam görmek için inceleyebilirsiniz çalışan uygulama.
+Bu öğreticideki kod, [GitHub 'Daki Eventprocessorsample koduna](https://github.com/Azure/azure-event-hubs/tree/master/samples/Java/Basic/EventProcessorSample)dayanır ve bu da tam çalışma uygulamasını görmek için inceleyebilirsiniz.
 
 ### <a name="receive-messages-with-eventprocessorhost-in-java"></a>Java’da EventProcessorHost bulunan iletiler alma
 
-**EventProcessorHost** kalıcı denetim noktalarını yöneterek Event Hubs'a ait alma olaylarını basitleştiren bir Java sınıfıdır ve paralel alımları bu Event Hubs'a ait. Eventprocessorhost'u kullanarak, olayları birden çok alıcı arasında farklı düğümlerde barındırıldığında bile bölebilirsiniz. Bu örnek, tek alıcı için EventProcessorHost’un nasıl kullanıldığını göstermektedir.
+**Eventprocessorhost** , bu Event Hubs kalıcı denetim noktaları ve paralel alma işlemlerini yöneterek Event Hubs olayların alınmasını kolaylaştıran bir Java sınıfıdır. EventProcessorHost ' u kullanarak, farklı düğümlerde barındırıldığında bile birden çok alıcı arasında olayları bölebilirsiniz. Bu örnek, tek alıcı için EventProcessorHost’un nasıl kullanıldığını göstermektedir.
 
 ### <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 
-Eventprocessorhost'u kullanmak için [Azure depolama hesabınız] olan [Azure depolama hesabı]:
+EventProcessorHost 'u kullanmak için [Azure Storage hesabınız] [Azure Storage hesabınız] olması gerekir:
 
-1. Oturum [Azure portalında](https://portal.azure.com), tıklatıp **+ kaynak Oluştur** ekranın sol taraftaki.
-2. **Depolama** ve ardından **Depolama hesabı**’na tıklayın. İçinde **depolama hesabı oluşturma** penceresinde, depolama hesabı için bir ad yazın. Alanları geri kalanını tamamlamak için istediğiniz bölgeyi seçin ve ardından **Oluştur**.
+1. [Azure Portal](https://portal.azure.com)oturum açın ve ekranın sol tarafındaki **kaynak oluştur** ' u seçin.
+2. **Depolama**' yı ve ardından **depolama hesabı**' nı seçin. **Depolama hesabı oluştur** penceresinde, depolama hesabı için bir ad yazın. Kalan alanları tamamlayın, istediğiniz bölgeyi seçin ve ardından **Oluştur**' u seçin.
    
-    ![Depolama hesabı oluştur](./media/event-hubs-dotnet-framework-getstarted-receive-eph/create-storage2.png)
+    ![Azure portal bir depolama hesabı oluşturun](./media/event-hubs-dotnet-framework-getstarted-receive-eph/create-azure-storage-account.png)
 
-3. Yeni oluşturulan depolama hesabına tıklayın ve ardından **erişim anahtarlarını**:
+3. Yeni oluşturulan depolama hesabını seçin ve **erişim anahtarları**' nı seçin:
    
-    ![Erişim anahtarı alma](./media/event-hubs-dotnet-framework-getstarted-receive-eph/create-storage3.png)
+    ![Azure portal erişim anahtarlarınızı alın](./media/event-hubs-dotnet-framework-getstarted-receive-eph/select-azure-storage-access-keys.png)
 
-    Key1 değeri geçici bir konuma kopyalayın. Daha sonra bu öğreticide kullanacaksınız.
+    KEY1 değerini geçici bir konuma kopyalayın. Daha sonra bu öğreticide kullanacaksınız.
 
 ### <a name="create-a-java-project-using-the-eventprocessor-host"></a>EventProcessor Ana Bilgisayarını kullanarak Java projesi oluşturma
 
-Event Hubs için Java istemci kitaplığı içindeki Maven projelerinde kullanılabilir [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs-eph%22)ve Maven proje dosyanızda aşağıdaki bağımlılık bildirimi kullanılarak başvurulabilir: 
+Event Hubs için Java istemci kitaplığı, Maven [Merkezi deposundaki](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs-eph%22)Maven projelerinde kullanılabilir ve Maven proje dosyanızda aşağıdaki bağımlılık bildirimi kullanılarak başvurulabilirler: 
 
 ```xml
 <dependency>
@@ -206,9 +206,9 @@ Event Hubs için Java istemci kitaplığı içindeki Maven projelerinde kullanı
 </dependency>
 ```
 
-Derleme ortamlarının farklı türleri için açıkça [Maven Central Repository] son JAR dosyalarının edinebilirsiniz [https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs-eph%22 ].  
+Farklı türlerde derleme ortamları için, [Maven merkezi deposundaki](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs-eph%22)en son yayınlanan jar dosyalarını açıkça alabilirsiniz.
 
-1. Aşağıdaki örnek için önce en sevdiğiniz Java geliştirme ortamında bir konsol/kabuk uygulaması için yeni bir Maven projesi oluşturun. Sınıf `ErrorNotificationHandler`.     
+1. Aşağıdaki örnek için önce en sevdiğiniz Java geliştirme ortamında bir konsol/kabuk uygulaması için yeni bir Maven projesi oluşturun. Sınıfı `ErrorNotificationHandler` olarak adlandırılır.     
    
     ```java
     import java.util.function.Consumer;
@@ -223,7 +223,7 @@ Derleme ortamlarının farklı türleri için açıkça [Maven Central Repositor
         }
     }
     ```
-2. `EventProcessorSample` adlı yeni bir sınıf oluşturmak için aşağıdaki kodu kullanın. Yer tutucuları olay hub'ı ve depolama hesabı oluştururken kullandığınız değerlerle değiştirin:
+2. `EventProcessorSample` adlı yeni bir sınıf oluşturmak için aşağıdaki kodu kullanın. Yer tutucuları, Olay Hub 'ı ve depolama hesabını oluştururken kullanılan değerlerle değiştirin:
    
    ```java
    package com.microsoft.azure.eventhubs.samples.eventprocessorsample;
@@ -313,7 +313,7 @@ Derleme ortamlarının farklı türleri için açıkça [Maven Central Repositor
            System.out.println("End of sample");
        }
     ```
-3. Adlı bir sınıf oluşturma `EventProcessor`, aşağıdaki kodu kullanarak:
+3. Aşağıdaki kodu kullanarak `EventProcessor` adlı bir sınıf oluşturun:
    
     ```java
     public static class EventProcessor implements IEventProcessor
@@ -378,15 +378,15 @@ Derleme ortamlarının farklı türleri için açıkça [Maven Central Repositor
     }
     ```
 
-Bu öğretici, EventProcessorHost’un tek bir örneğini kullanır. Verimliliği artırmak için birden çok örneğini EventProcessorHost, tercihen ayrı makinelerde çalıştırmanızı öneririz.  Bu işlem de yedeklilik sağlar. Böyle durumlarda, alınan olayların yük dengesi için çeşitli örnekler otomatik olarak birbirleriyle koordine olurlar. Birden çok alıcının her birinin *tüm* olayları işlemesini istiyorsanız **ConsumerGroup** kavramını kullanmalısınız. Olaylar farklı makinelerden alındığında, dağıtıldıkları makineleri (veya rolleri) temel alan EventProcessorHost örnekleri için ad belirtmek yararlı olabilir.
+Bu öğretici, EventProcessorHost’un tek bir örneğini kullanır. Aktarım hızını artırmak için, tercihen farklı makinelerde EventProcessorHost ' un birden çok örneğini çalıştırmanızı öneririz.  Artıklık de sağlar. Böyle durumlarda, alınan olayların yük dengesi için çeşitli örnekler otomatik olarak birbirleriyle koordine olurlar. Birden çok alıcının her birinin *tüm* olayları işlemesini istiyorsanız **ConsumerGroup** kavramını kullanmalısınız. Olaylar farklı makinelerden alındığında, dağıtıldıkları makineleri (veya rolleri) temel alan EventProcessorHost örnekleri için ad belirtmek yararlı olabilir.
 
-### <a name="publishing-messages-to-eventhub"></a>EventHub yayımlama iletileri
+### <a name="publishing-messages-to-eventhub"></a>EventHub 'e Ileti yayımlama
 
-İleti tüketiciler tarafından alınır önce bunlar bölümlere ilk yayımcılar tarafından yayımlanan gerekir. Zaman uyumlu olarak com.microsoft.azure.eventhubs.EventHubClient nesnede sendSync() yöntemi kullanarak olay hub'ına ileti yayımlandığında, ileti için belirli bir bölüme gönderilen ya da tüm kullanılabilir bölümlere dağıtılan'nı hatalarının ayıklanabileceğini belirtmekte yarar bağlı olarak hepsini bir kez deneme şekilde bölüm anahtarını veya belirtilir.
+İletiler tüketicilerle alınmadan önce, yayımcılar tarafından önce bölümlere yayımlanmaları gerekir. Bu, iletiler, com. Microsoft. Azure. eventhubs. EventHubClient nesnesindeki sendSync () yöntemi kullanılarak Olay Hub 'ına zaman uyumlu olarak yayımlandığında, iletinin belirli bir bölüme gönderilmesi veya kullanılabilir tüm bölümler için dağıtılması gerektiğini belirtmekte bir değer. Bölüm anahtarının belirtildiğine bağlı olarak, hepsini bir kez deneme.
 
-Bölüm anahtarını temsil eden bir dize belirtildiğinde anahtar için bir olay göndermek için hangi bölümünün belirlemek üzere karma haline getirilir.
+Bölüm anahtarını temsil eden bir dize belirtildiğinde, olayın hangi bölüme gönderileceğini belirleyen anahtar karma hale getirilir.
 
-Bölüm anahtarı olarak ayarlanmadığında, iletileri ardından gidiş-robined için kullanılabilir tüm bölümleri
+Bölüm anahtarı ayarlanmamışsa, iletiler kullanılabilir tüm bölümler için de gösterilir
 
 ```java
 // Serialize the event into bytes
@@ -404,27 +404,27 @@ eventHubClient.sendSync(sendEvent, partitionKey);
 
 ```
 
-### <a name="implementing-a-custom-checkpointmanager-for-eventprocessorhost-eph"></a>Özel CheckpointManager EventProcessorHost (EPH) için uygulama
+### <a name="implementing-a-custom-checkpointmanager-for-eventprocessorhost-eph"></a>EventProcessorHost (EPH) için özel CheckpointManager uygulama
 
-API, özel bir denetim noktası yöneticinize varsayılan uygulama, kullanım örneği ile uyumlu olmayan senaryolar uygulamak için bir mekanizma sağlar.
+API, varsayılan uygulamanın kullanım durumu ile uyumlu olmadığı senaryolar için özel denetim noktası Yöneticisi 'ni uygulamak için bir mekanizma sağlar.
 
-Varsayılan Denetim Yöneticisi'ni blob depolama kullanır ancak kendi uygulamasıyla EPH tarafından kullanılan kontrol noktası Yöneticisi geçersiz kılarsanız, kontrol noktası Yöneticisi uygulamanızı yedeklemek istediğiniz her depolama kullanabilirsiniz.
+Varsayılan denetim noktası Yöneticisi blob depolamayı kullanır, ancak EPH tarafından kullanılan denetim noktası yöneticisini kendi uygulamanız ile geçersiz kılarsınız, kontrol noktası Yöneticisi uygulamanızı geri almak istediğiniz herhangi bir depoyu kullanabilirsiniz.
 
-Arabirimi com.microsoft.azure.eventprocessorhost.ICheckpointManager uygulayan bir sınıf oluşturma
+Com. Microsoft. Azure. eventprocessorhost. ICheckpointManager arabirimini uygulayan bir sınıf oluşturun
 
-Uygulamanıza özel kontrol noktası Yöneticisi'ni (com.microsoft.azure.eventprocessorhost.ICheckpointManager) kullanın
+Denetim noktası yöneticisinin özel uygulamasını kullanın (com. Microsoft. Azure. eventprocessorhost. ICheckpointManager)
 
-Uygulamanız içinde varsayılan denetim noktası oluşturma mekanizması geçersiz kılmak ve kendi veri deposu (SQL Server, CosmosDB ve Azure önbelleği için Redis gibi) temel kendi kontrol noktaları uygulayın. Kontrol noktası Yöneticisi uygulamanızı yedeklemek için kullanılan depolama tüketici grubu için olayları işlemekte olduğu tüm EPH örnekleri erişilebilir olduğunu öneririz.
+Uygulamanızda, varsayılan denetim noktası mekanizmasını geçersiz kılabilir ve kendi veri deponuzu (SQL Server, CosmosDB ve Redsıs için Azure önbelleği gibi) temel alarak kendi kontrol noktalarınızı uygulayabilirsiniz. Denetim noktası Yöneticisi uygulamanızı geri yüklemek için kullanılan deponun, tüketici grubuna yönelik olayları işleyen tüm EPH örnekleri tarafından erişilebilir olmasını öneririz.
 
-Ortamınızda herhangi bir veri deposu olarak kullanabilirsiniz.
+Ortamınızda kullanılabilir olan herhangi bir veri deposunu kullanabilirsiniz.
 
-Com.microsoft.azure.eventprocessorhost.EventProcessorHost sınıfı, EventProcessorHost için kontrol noktası Yöneticisi geçersiz kılmanıza da olanak sağlayan iki Oluşturucu sağlar.
+Com. Microsoft. Azure. eventprocessorhost. EventProcessorHost sınıfı size EventProcessorHost için denetim noktası yöneticisini geçersiz kılmanıza olanak tanıyan iki Oluşturucu sağlar.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makaleleri okuyun: 
+Aşağıdaki makaleleri okuyun: 
 
 - [EventProcessorHost](event-hubs-event-processor-host.md)
-- [Özellikler ve Azure Event Hubs terminolojisinde](event-hubs-features.md)
+- [Azure Event Hubs'ın özellikleri ve terminolojisi](event-hubs-features.md)
 - [Event Hubs ile ilgili SSS](event-hubs-faq.md)
 

@@ -1,0 +1,167 @@
+- name: Azure IoT Central Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure IoT Central nedir?
+      href: overview-iot-central.md
+    - name: IoT Çözümü seçenekleri
+      href: overview-iot-options.md
+    - name: Kullanıcı arabirimi turu
+      href: overview-iot-central-tour.md
+- name: Hızlı Başlangıçlar
+  expanded: true
+  items:
+    - name: Yeni uygulama oluşturma
+      href: quick-deploy-iot-central.md
+- name: Öğreticiler
+  items:
+    - name: 1 - Yeni bir cihaz türü belirleme
+      href: tutorial-define-device-type.md
+    - name: 2 - Kuralları yapılandırma
+      href: tutorial-configure-rules.md
+    - name: 3 - İşlecin görünümünü özelleştirme
+      href: tutorial-customize-operator.md
+    - name: 4 - Cihazlarınızı izleme
+      href: tutorial-monitor-devices.md
+    - name: 5 - Cihaz ekleme
+      href: tutorial-add-device.md
+- name: Kavramlar
+  items:
+    - name: Mimari
+      href: concepts-architecture.md
+    - name: Bağlantı
+      href: concepts-connectivity.md
+    - name: Uygulama şablonları nedir?
+      href: concepts-app-templates.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Cihazları bağlama
+      items:
+        - name: Node.js (genel) uygulamasını hazırlama ve bağlama
+          href: howto-connect-nodejs.md
+        - name: MXChip IoT DevKit’i hazırlama ve bağlama
+          href: howto-connect-devkit.md
+        - name: Raspberry Pi'yi (Python) hazırlama ve bağlama
+          href: howto-connect-raspberry-pi-python.md
+        - name: 'Raspberry Pi''yi (C#) hazırlama ve bağlama'
+          href: howto-connect-raspberry-pi-csharp.md
+        - name: Windows IoT Core cihazını hazırlama ve bağlama
+          href: howto-connect-windowsiotcore.md
+        - name: SensorTile.box cihazını hazırlama ve bağlama
+          href: howto-connect-sensortile.md
+        - name: Komut satırını kullanarak cihaz bağlantısını izleme
+          href: howto-use-iotc-explorer.md
+    - name: Cihazları yönetme
+      items:
+        - name: Cihaz şablonu ayarlama
+          href: howto-set-up-template.md
+        - name: Cihazlarınızı yönetme
+          href: howto-manage-devices.md
+        - name: İş çalıştırma
+          href: howto-run-a-job.md
+        - name: Cihaz kümelerini kullanma
+          href: howto-use-device-sets.md
+        - name: Cihaz şablonu için sürüm oluşturma
+          href: howto-version-device-template.md
+    - name: İzleme ve analiz
+      items:
+        - name: Telemetri kuralı oluşturma
+          href: howto-create-telemetry-rules.md
+        - name: Olay kuralı oluşturma
+          href: howto-create-event-rules.md
+        - name: Cihaz verilerinizi analiz etme
+          href: howto-create-analytics.md
+    - name: Eylemler ve genişletilebilirlik
+      items:
+        - name: Kurallar üzerinde birden fazla eylemi gruplama
+          href: howto-use-action-groups.md
+        - name: Kurallar üzerinde web kancası eylemleri oluşturma
+          href: howto-create-webhooks.md
+        - name: Microsoft Flow'da iş akışları oluşturma
+          href: howto-add-microsoft-flow.md
+        - name: Azure Logic Apps'te iş akışı oluşturma
+          href: howto-build-azure-logic-apps.md
+        - name: Azure İşlevleri'ni tetikleme
+          href: howto-trigger-azure-functions.md
+        - name: Verilerinizi dışa aktarma
+          items:
+            - name: Event Hubs ve Service Bus'a aktarma
+              href: howto-export-data-event-hubs-service-bus.md
+            - name: Blob Depolama'ya aktarma
+              href: howto-export-data-blob-storage.md
+        - name: Özel kurallar oluşturma
+          href: howto-create-custom-rules.md
+        - name: Özel analiz oluşturma
+          href: howto-create-custom-analytics.md
+        - name: Power BI’da verilerinizi görselleştirme
+          href: howto-connect-powerbi.md
+        - name: Diğer IoT bulutlarına bağlanma
+          href: howto-build-iotc-device-bridge.md
+    - name: Yönetim
+      items:
+        - name: Uygulamanızı yönetme
+          href: howto-administer.md
+        - name: Kullanıcıları ve rolleri yönetme
+          href: howto-manage-users-roles.md
+        - name: Faturanızı görüntüleme
+          href: howto-view-bill.md
+        - name: Uygulama kullanıcı arabirimini özelleştirme
+          href: howto-customize-ui.md
+        - name: Görüntüleri hazırlama ve karşıya yükleme
+          href: howto-prepare-images.md
+        - name: Panonuza kutucuklar ekleme
+          href: howto-add-tiles-to-your-dashboard.md
+        - name: Pano kutucukları kullanma
+          href: howto-use-tiles.md
+        - name: Uygulama şablonlarını kullanma
+          href: howto-use-app-templates.md
+        - name: Azure portalından yönetme
+          href: howto-manage-iot-central-from-portal.md
+        - name: Azure CLI’den yönetme
+          href: howto-manage-iot-central-from-cli.md
+        - name: Azure PowerShell’den yönetme
+          href: howto-manage-iot-central-from-powershell.md
+        - name: CSP olarak uygulama oluşturma ve yönetme
+          href: howto-create-and-manage-applications-csp.md
+    - name: Kişiselleştirme
+      items:
+        - name: Azure IoT Central kişisel panolarını oluşturma
+          href: howto-create-personal-dashboards.md
+        - name: Tercihlerinizi yönetme
+          href: howto-manage-preferences.md
+        - name: Canlı sohbeti açma/kapatma
+          href: howto-show-hide-chat.md
+- name: İlgili
+  items:
+    - name: Çözümler
+      items:
+        - name: IoT Central
+          href: 'https://docs.microsoft.com/microsoft-iot-central/'
+        - name: IoT çözüm hızlandırıcıları
+          href: /azure/iot-accelerators
+    - name: Platform Hizmetleri
+      items:
+        - name: IoT Hub
+          href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
+        - name: IoT Hub Cihazı Sağlama Hizmeti
+          href: /azure/iot-dps
+        - name: IoT Hizmet SDK’ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+        - name: Haritalar
+          href: /azure/azure-maps
+        - name: Time Series Insights
+          href: /azure/time-series-insights
+    - name: IoT Edge
+      items:
+        - name: Azure IoT Edge
+          href: /azure/iot-edge
+        - name: IoT Cihaz SDK'ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+- name: Kaynaklar
+  items:
+    - name: Müşteri verisi istekleri
+      href: iot-central-customer-data-requests.md
+    - name: Desteklenen tarayıcılar
+      href: iot-central-supported-browsers.md

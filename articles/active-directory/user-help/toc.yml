@@ -1,11 +1,19 @@
 - name: Kullanıcı Yardım Belgeleri
-  href: index.md
+  href: index.yml
 - name: İki aşamalı doğrulama yardımı
   items:
     - name: Genel Bakış
       href: user-help-two-step-verification-overview.md
-    - name: Hesabımı ayarlama
-      href: multi-factor-authentication-end-user-first-time.md
+    - name: İki öğeli doğrulama yöntemlerinizi ayarlama
+      items:
+        - name: Genel Bakış
+          href: multi-factor-authentication-end-user-first-time.md
+        - name: Authenticator uygulamasını ayarlama
+          href: multi-factor-authentication-setup-auth-app.md
+        - name: Mobil cihaz ayarlama
+          href: multi-factor-authentication-setup-phone-number.md
+        - name: Ofis telefonu ayarlama
+          href: multi-factor-authentication-setup-office-phone.md
     - name: Ayarlarınızı yönetme
       href: multi-factor-authentication-end-user-manage-settings.md
     - name: Yardım alın
@@ -21,7 +29,7 @@
     - name: Parola sıfırlama için kaydolma
       href: active-directory-passwords-reset-register.md
     - name: Parolanızı sıfırlama
-      href: user-help-reset-password.md
+      href: active-directory-passwords-update-your-own-password.md
 - name: Microsoft Authenticator uygulaması yardımı
   items:
     - name: Genel Bakış
@@ -46,18 +54,22 @@
       href: user-help-auth-app-backup-recovery.md
     - name: SSS
       href: user-help-auth-app-faq.md
-- name: Profilim (önizleme) portalı yardımı
+- name: Hesabım portalı yardımı
   items:
     - name: Genel Bakış
-      href: myprofile-portal-overview.md
+      href: my-account-portal-overview.md
     - name: Güvenlik bilgilerinizi yönetme
       href: user-help-security-info-overview.md
-    - name: Kuruluşlarınızı yönetme
-      href: myprofile-portal-organizations-page.md
     - name: Bağlı cihazlarınızı yönetme
-      href: myprofile-portal-devices-page.md
+      href: my-account-portal-devices-page.md
+    - name: Parolanızı değiştirme
+      href: my-account-change-password-page.md
+    - name: Kuruluşlarınızı yönetme
+      href: my-account-portal-organizations-page.md
     - name: Gizlilikle ilgili bilgilerinizi görüntüleme
-      href: myprofile-portal-privacy-page.md
+      href: my-account-portal-privacy-page.md
+    - name: Son oturum açma etkinliğinizi görüntüleme
+      href: my-account-portal-sign-ins-page.md
 - name: Güvenlik bilgileri (önizleme) yardımı
   items:
     - name: Genel Bakış
@@ -74,6 +86,8 @@
           href: security-info-setup-text-msg.md
         - name: Telefon konuşmalarını ayarlama
           href: security-info-setup-phone-number.md
+        - name: Güvenlik anahtarı ayarlama
+          href: security-info-setup-security-key.md
         - name: E-postayı ayarlama
           href: security-info-setup-email.md
         - name: Güvenlik sorularını ayarlama
@@ -106,3 +120,13 @@
       href: my-apps-portal-end-user-access-reviews.md
     - name: Sorunları giderme
       href: my-apps-portal-end-user-troubleshoot.md
+- name: Uygulamalarım (önizleme) portalı yardımı
+  items:
+    - name: Genel Bakış
+      href: my-applications-portal-overview.md
+    - name: Uygulamalarım portalına erişme ve portalı kullanma
+      href: my-applications-portal-access.md
+    - name: Çalışma alanlarına erişme ve bunları kullanma
+      href: my-applications-portal-workspaces.md
+    - name: Uygulama izinlerini düzenleme veya iptal etme
+      href: my-applications-portal-permissions-saved-accounts.md

@@ -1,140 +1,164 @@
 ---
-title: Azure veri kutusu ağır ayarlamak için öğretici | Microsoft Docs
-description: Kablo ve, Azure veri kutusu ağır bağlanma hakkında bilgi edinin
+title: Azure Data Box Heavy ayarlama öğreticisi| Microsoft Docs
+description: Azure Data Box Heavy için kabloları bağlamayı ve bağlanmayı öğrenin
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: heavy
 ms.topic: tutorial
-ms.date: 06/19/2019
+ms.date: 09/03/2019
 ms.author: alkohli
-ms.openlocfilehash: d4cdc9b6c31c62080fed5a8528577fef72c01c3f
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
-ms.translationtype: MT
+ms.localizationpriority: high
+ms.openlocfilehash: 3b27a4788bd144a8d2d423af1fa23ef09c5379f8
+ms.sourcegitcommit: a4b5d31b113f520fcd43624dd57be677d10fc1c0
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67271713"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70772845"
 ---
-# <a name="tutorial-cable-and-connect-to-your-azure-data-box-heavy-preview"></a>Öğretici: Kablo ve bağlanmak, Azure veri kutusu ağır için (Önizleme)
+::: zone target = "docs"
 
+# <a name="tutorial-cable-and-connect-to-your-azure-data-box-heavy"></a>Öğretici: Azure Data Box Heavy için kabloları bağlama ve bağlanma
 
-Bu öğreticide, kablo, bağlama ve kapatma, Azure veri kutusu yoğun açıklar.
+::: zone-end
+
+::: zone target = "chromeless"
+
+# <a name="get-started-with-azure-data-box-heavy"></a>Azure Data Box Heavy’yi kullanmaya başlayın
+
+::: zone-end
+
+::: zone target = "docs"
+
+Bu öğreticide, Azure Data Box Heavy için kabloları bağlama, bağlanma ve çalıştırma işlemleri açıklanmaktadır.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Veri kutusu ağır kablolarını bağlama
-> * İçin veri kutusu ağır bağlanma
+> * Data Box Heavy’nin kablolarını bağlama
+> * Data Box Heavy’ye bağlanma
 
-## <a name="prerequisites"></a>Önkoşullar
+::: zone-end
+
+::: zone target = "chromeless"
+
+Bu kılavuzda önkoşulları inceleme, cihazınızın kablolarını bağlama ve cihazınızı bağlama, verileri kopyalama, Azure'a yükleme ve sonra yüklenen verileri doğrulama hakkında yönergeler sunulmaktadır.
+
+::: zone-end
+
+## <a name="prerequisites"></a>Ön koşullar
 
 Başlamadan önce aşağıdakilerden emin olun:
 
-1. Tamamladınız [Öğreticisi: Azure veri kutusu ağır sipariş](data-box-heavy-deploy-ordered.md).
-2. Aldığınız, veri kutusu yoğun ve sipariş durumu Portalı'nda **teslim edildi**.
-3. Gözden geçirdim [veri kutusu ağır güvenlik yönergeleri](data-box-safety.md).
-4. Yakınlık bu ayak izine sahip bir cihaz barındırabilecek bir kullanılabilir ağ bağlantısına sahip bir veri merkezinde düz bir siteye erişimi olmalıdır. Bu cihaz, bir rafa monte olamaz.
-5. Depolama Cihazınızı kullanmak için dört üzerindeki olan bağlılığımızı temel güç kablosu aldınız.
-6. Veri merkezi ağına bağlı bir konak bilgisayarınız olmalıdır. Veri kutusu ağır verileri bu bilgisayardan kopyalayın. Ana bilgisayarınızda çalıştırmalısınız bir [desteklenen işletim sistemi](data-box-heavy-system-requirements.md).
+1. [Öğretici: Azure Data Box Heavy sipariş etme](data-box-heavy-deploy-ordered.md)’yi tamamladınız.
+2. Data Box Heavy’yi teslim aldınız ve portaldaki sipariş durumu **Teslim Edildi** oldu.
+3. [Data Box Heavy güvenlik yönergelerini](data-box-safety.md) gözden geçirdiniz.
+4. Bu ayak izine sahip bir cihaza uyum sağlayabilecek kullanılabilir bir ağ bağlantısına yakın olan veri merkezindeki düz bir siteye erişiminizin olması gerekir. Bu cihaz bir rafa bağlanamaz.
+5. Depolama cihazınızla birlikte kullanılacak dört topraklanmış güç kablosu aldınız.
+6. Veri merkezi ağına bağlı bir konak bilgisayarınız olmalıdır. Data Box Heavy, verileri bu bilgisayardan kopyalayacaktır. Ana bilgisayarınızın [Desteklenen bir işletim sistemi](data-box-heavy-system-requirements.md) çalıştırması gerekir.
 7. Veri merkezinizin yüksek hızlı ağı olmalıdır. En az bir adet 10 GbE bağlantınızın olması önemle tavsiye edilir. 
-8. Cihaz için yerel kullanıcı Arabirimi bağlanın ve RJ-45 kablosu ile dizüstü bilgisayar olması gerekir. Dizüstü bilgisayar, her cihazın düğümü kez yapılandırmak için kullanın.
-9. Bir 40 GB/sn kablo veya cihaz düğüm başına 10 GB/sn kablo gerekir.
-    - İle uyumlu kablolar seçin [Mellanox MCX314A-BCCT](https://store.mellanox.com/products/mellanox-mcx314a-bcct-connectx-3-pro-en-network-interface-card-40-56gbe-dual-port-qsfp-pcie3-0-x8-8gt-s-rohs-r6.html) ağ arabirimi.
-    - 40 GB/sn kablosunun, kablo cihazı sonuna QSFP + olması gerekir.
-    - 10 Gbps kablosunun, içine bir QSFP aygıta takılan + uç SFP + bağdaştırıcısı (veya QSA bağdaştırıcısı) ile bir son 10 GB/sn anahtarda takılan SFP + kablo gerekir.
+8. Yerel kullanıcı arabirimine bağlanmak ve cihazı yapılandırmak için RJ-45 kablosu olan bir dizüstü bilgisayar gereklidir. Cihazın her düğümünü bir kez yapılandırmak için dizüstü bilgisayarı kullanın.
+9. Cihaz düğümü başına bir 40 Gb/sn kablo veya 10 Gb/sn kablo gerekir.
+    - [Mellanox MCX314A-BCCT](https://store.mellanox.com/products/mellanox-mcx314a-bcct-connectx-3-pro-en-network-interface-card-40-56gbe-dual-port-qsfp-pcie3-0-x8-8gt-s-rohs-r6.html) ağ arabirimi ile uyumlu kabloları seçin.
+    - 40 Gb/sn kablonun cihaz tarafındaki ucunun QSFP+ olması gerekir.
+    - 10 GB/sn kablo için, bir ucu 10 Gb/sn kabloya bağlanan bir SFP+ kablo ve cihaza takılan uç için QSFP+’dan SFP+’ya bağdaştırıcı (veya QSA bağdaştırıcısı) gerekir.
 
-## <a name="cable-your-device-for-power"></a>Cihazınızın güç bağlantısını yapın
+::: zone target = "docs"
 
-Cihazınızın kablolarını bağlama için aşağıdaki adımları uygulayın.
+## <a name="cable-your-device-for-power"></a>Cihazınızın güç kablolarını bağlama
 
-1. Üzerinde oynanıp oynanmadığını veya başka herhangi bir hasarı olup olmadığını anlamak için cihazı inceleyin. Cihaz kurcalanmış ya da ciddi hasar görmüşse devam etmeyin. [Microsoft Support başvurun](data-box-disk-contact-microsoft-support.md) hemen, cihazın iyi çalışma sırayla olup olmadığını ve yenisini sevk gerekip gerekmediğini değerlendirmenize yardımcı olacak.
-2. Cihaz yükleme siteye taşıyın.
+Cihazınızın kablolarını bağlamak için aşağıdaki adımları uygulayın.
 
-    ![Veri kutusu ağır cihaz yükleme sitesi](media/data-box-heavy-deploy-set-up/data-box-heavy-install-site.png)
+1. Üzerinde oynanıp oynanmadığını veya başka herhangi bir hasarı olup olmadığını anlamak için cihazı inceleyin. Cihaz kurcalanmış ya da ciddi hasar görmüşse devam etmeyin. Cihazın düzgün çalışır durumda olup olmadığını ve yerine başka bir cihazın gönderilmesinin gerekip gerekmediğini değerlendirmenize yardımcı olmaları için hemen [Microsoft Desteği'ne başvurun](data-box-disk-contact-microsoft-support.md).
+2. Cihazı kurulum alanına taşıyın.
 
-3. Aşağıda gösterildiği gibi arka tekerlekler cihazda kilitleyin.
+    ![Data Box Heavy cihaz kurulum alanı](media/data-box-heavy-deploy-set-up/data-box-heavy-install-site.png)
 
-    ![Veri kutusu ağır cihaz tekerlekler kilitli](media/data-box-heavy-deploy-set-up/data-box-heavy-casters-locked.png)
+3. Cihazın arka tekerleklerini aşağıda gösterildiği gibi kilitleyin.
 
-4. Ön ve arka kapı cihazın kilidini düğmelerini bulun. Kilidini açmak ve cihaz tarafında temizleme olana kadar ön kapısı taşıyın. Bu da arka kapı ile yineleyin.
-    Cihaz üzerinden cihazı için en iyi önden arkaya hava akışına izin vermek için işletimsel olduğunda hem kapılarını açık kalmalıdır.
+    ![Data Box Heavy cihaz tekerlekleri kilitli](media/data-box-heavy-deploy-set-up/data-box-heavy-casters-locked.png)
 
-    ![Veri kutusu ağır kapılarını açın](media/data-box-heavy-deploy-set-up/data-box-heavy-doors-open.png)
+4. Cihazın ön ve arka kapılarının kilidini açan düğmeleri bulun. Cihazın yanına yaslanıncaya kadar ön kapıyı açın ve hareket ettirin. Bu işlemi arka kapıyla da yineleyin.
+    Cihazın içinden önden arkaya doğru ideal hava akışını sağlamak için cihaz çalışırken her iki kapının da açık olması gerekir.
 
-5. Cihazın arkasına Tepsisi dört güç kabloları olması gerekir. Kabloların tepsisinden Kaldır ve kenara koyun.
+    ![Data Box Heavy kapıları açık](media/data-box-heavy-deploy-set-up/data-box-heavy-doors-open.png)
 
-    ![Veri kutusu yoğun güç kablosu tepsisinde](media/data-box-heavy-deploy-set-up/data-box-heavy-power-cords-tray.png)
+5. Cihazın arkasında bulunan tepside dört güç kablosu olmalıdır. Tepsideki tüm kabloları çıkarın ve bir kenara koyun.
 
-6. Sonraki adım, cihazın arkasına çeşitli bağlantı noktaları belirlemektir. İki cihaz düğümler **Düğüm1** ve **Düğüm2**. Dört ağ arabirimleri, her düğüme sahip **MGMT**, **Veri1**, **veri2**, **DATA3**. **MGMT** cihazın ilk yapılandırma sırasında yönetimini yapılandırmak için kullanılır. **Veri1**-**DATA3** veri bağlantı noktalarıdır. **MGMT** ve **DATA3** ise 1 GB/sn, bağlantı noktalarının **Veri1**, **veri2** 40 GB/sn bağlantı noktaları veya 10 GB/sn bağlantı noktaları çalışabilir. İki cihaz düğümlerinin alt kısmında iki cihaz düğümler arasında paylaşılan dört güç kaynağı (PSUs) birimleridir. Bu cihaz, yüz tanıma gibi **PSUs** olan **PSU1**, **PSU2**, **PSU3**, ve **PSU4** soldan sağa doğru.
+    ![Data Box Heavy tepsisindeki güç kabloları](media/data-box-heavy-deploy-set-up/data-box-heavy-power-cords-tray.png)
 
-    ![Veri kutusu ağır bağlantı noktaları](media/data-box-heavy-deploy-set-up/data-box-heavy-ports.png)
+6. Sonraki adımda cihazın arkasındaki çeşitli bağlantı noktalarını belirlenmelidir. **NODE1** ve **NODE2** şeklinde iki cihaz düğümü vardır. Her düğümde **MGMT**, **DATA1**, **DATA2**, **DATA3** şeklinde dört ağ arabirimi bulunur. **MGMT**, cihazın ilk yapılandırması sırasında yönetimi yapılandırmak için kullanılır. **DATA1**-**DATA3** veri bağlantı noktalarıdır. **MGMT** ve **DATA3** bağlantı noktaları 1 Gb/sn’dir, **DATA1** ile **DATA2** ise 40 Gb/sn bağlantı noktaları veya 10 Gb/sn bağlantı noktaları olarak çalışabilir. İki cihaz düğümünün en altında, iki cihaz düğümü arasında paylaşılan dört güç kaynağı birimi (PSU) vardır. Yüzünüz bu cihaza dönük olduğunda **PSU’lar** soldan sağa **PSU1**, **PSU2**, **PSU3** ve **PSU4** şeklinde görünür.
 
-7. Aygıt güç kaynakları tüm dört power kabloları bağlayın. Yeşil LED'lerini açın ve yanıp sönme.
-8. Güç düğmelerini ön düzlemi cihaz düğümler üzerinde etkinleştirmek için kullanın. Güç düğmesi mavi ışıkları gelin kadar birkaç saniye basılı tutun. Artık cihaz arkasındaki güç kaynakları için tüm yeşil LED'lerini katı olmalıdır. Cihazın işletim Panosu hata LED'lerini de içerir. LED aydınlatma bir hata, hatalı PSU veya fan veya sürücü ile ilgili bir sorun gösterir.  
+    ![Data Box Heavy bağlantı noktaları](media/data-box-heavy-deploy-set-up/data-box-heavy-ports.png)
 
-    ![Veri kutusu ağır ön ops panelindeki](media/data-box-heavy-deploy-set-up/data-box-heavy-front-ops-panel.png)
+7. Dört güç kablosunun tamamını cihaz güç kaynaklarına bağlayın. Yeşil LED'ler açılır ve yanıp söner.
+8. Cihaz düğümlerini açmak için ön düzlemdeki güç düğmelerini kullanın. Mavi ışıklar açılana kadar güç düğmesini birkaç saniye boyunca basılı tutun. Cihazın arkasında bulunan güç kaynaklarının tüm yeşil LED'leri kesintisiz yanıyor olmalıdır. Cihazın ön işletim panelinde de hata LED'leri bulunur. Hata LED’i yandığında hatalı bir PSU veya bir fan ya da disk sürücüleriyle ilgili bir sorun olduğunu gösterir.  
 
-## <a name="cable-first-node-for-network"></a>Ağ kablosu ilk düğümü
+    ![Data Box Heavy ön işletim paneli](media/data-box-heavy-deploy-set-up/data-box-heavy-front-ops-panel.png)
 
-Cihazın düğümlerinden biri üzerinde kablosu ağ için aşağıdaki adımları uygulayın.
+## <a name="cable-first-node-for-network"></a>Ağ için ilk düğümün kablo bağlantısını yapma
 
-1. Ana bilgisayar 1 GB/sn yönetim bağlantı noktasına bağlanmak için bir CAT 6 RJ-45 ağ kablosu (mavi kablo resim) kullanın.
-2. Veriler için en az bir (1 GB/sn'ye tercih edilir) 40-GB/sn ağ arabirimini bağlamak için bir QSFP + kablosu (fiber veya Bakır) kullanın. 10 Gbps anahtarı kullanıyorsanız, bir SFP + kablosu ile bir QSFP + SFP + bağdaştırıcısına (QSA bağdaştırıcısı) veri için 40 GB/sn ağ arabirimini bağlamak için kullanın.
+Cihazın düğümlerinden birinde, ağ için kablo bağlantısını yapmak üzere aşağıdaki adımları uygulayın.
 
-    ![Kablolu veri kutusu ağır bağlantı noktaları](media/data-box-heavy-deploy-set-up/data-box-heavy-ports-cabled.png)
+1. Ana bilgisayarı 1 Gb/sn yönetim bağlantı noktasına bağlamak için CAT 6 RJ-45 ağ kablosunu (resimdeki mavi kablo) kullanın.
+2. Veriler için en az bir 40 Gb/sn (1 Gb/sn’ye tercih edilir) ağ arabirimi bağlamak üzere bir QSFP+ kablosu (fiber veya bakır) kullanın. 10 Gb/sn'lik bir anahtar kullanılıyorsa, veriler için 40 Gb/sn ağ arabirimini bağlamak üzere QSFP+’dan SFP+’ya bağdaştırıcı (QSA bağdaştırıcısı) ile bir SFP+ kablosu kullanın.
+
+    ![Data Box Heavy bağlantı noktaları kablo bağlantısı](media/data-box-heavy-deploy-set-up/data-box-heavy-ports-cabled.png)
 
     > [!IMPORTANT]
-    > Veri 1 ve veri2 ayarlı ve yerel web kullanıcı Arabiriminde görüntülenen eşleşmiyor.
-    > 40 GB/sn kablo bağdaştırıcısı yolu aşağıda gösterildiği gibi eklendiğinde bağlanır.
+    > DATA 1 ve DATA2 anahtarlanır ve yerel web kullanıcı arabiriminde gösterilenlerle eşleşmez.
+    > Aşağıda gösterildiği gibi takıldığında 40 Gb/sn bağdaştırıcı bağlanır.
 
-    ![Veri kutusu ağır 40 GB/sn kablo bağdaştırıcısı](media/data-box-heavy-deploy-set-up/data-box-heavy-cable-adaptor.png)
+    ![Data Box Heavy 40 Gb/sn kablo bağdaştırıcısı](media/data-box-heavy-deploy-set-up/data-box-heavy-cable-adaptor.png)
 
-## <a name="configure-first-node"></a>İlk düğüm yapılandırma
+## <a name="configure-first-node"></a>İlk düğümü yapılandırma
 
-Yerel yapılandırma ve Azure portalını kullanarak Cihazınızı ayarlamak için aşağıdaki adımları uygulayın.
+Yerel yapılandırma ve Azure portalını kullanarak cihazınızı ayarlamak için aşağıdaki adımları uygulayın.
 
-1. Portaldan cihaz kimlik bilgilerini indirin. **Genel > Cihaz ayrıntıları**’na gidin. **Cihaz parolası**’nı kopyalayın. Bu parolalar, portaldaki belirli bir sırada bağlıdır. Veri kutusu ağır iki düğüm karşılık gelen, iki cihaz seri numaraları görürsünüz. Cihaz Yöneticisi parolasını her iki düğümü aynıdır.
+1. Portaldan cihaz kimlik bilgilerini indirin. **Genel > Cihaz ayrıntıları**’na gidin. **Cihaz parolası**’nı kopyalayın. Bu parolalar portalda belirli bir sıraya bağlıdır. Data Box Heavy’de iki düğüme karşılık iki cihaz seri numarasını göreceksiniz. Her iki düğüm için de cihaz yöneticisi parolası aynıdır.
 
-    ![Veri kutusu ağır cihaz kimlik bilgileri](media/data-box-heavy-deploy-set-up/data-box-heavy-device-credentials.png)
+    ![Data Box Heavy cihazı kimlik bilgileri](media/data-box-heavy-deploy-set-up/data-box-heavy-device-credentials.png)
 
-2. İstemci iş istasyonunuzu CAT6 RJ-45 ağ kablosu aracılığıyla cihazı bağlayın.
-3. Cihaz bir statik IP adresi ile bağlanmak için kullanmakta olduğunuz bilgisayardaki Ethernet bağdaştırıcısını yapılandırın `192.168.100.5` ve alt ağ `255.255.255.0`.
+2. İstemci iş istasyonunuzu CAT6 RJ-45 ağ kablosu aracılığıyla cihaza bağlayın.
+3. Cihazı `192.168.100.5` statik IP adresine ve `255.255.255.0` alt ağına bağlamak için kullanmakta olduğunuz bilgisayarda Ethernet bağdaştırıcısını yapılandırın.
 
-    ![Veri kutusu ağır yerel web kullanıcı Arabirimine bağlanır](media/data-box-heavy-deploy-set-up/data-box-heavy-connect-local-web-ui.png)
+    ![Data Box Heavy, yerel web Kullanıcı arabirimine bağlanır](media/data-box-heavy-deploy-set-up/data-box-heavy-connect-local-web-ui.png)
 
-4. Yerel web kullanıcı Arabirimi cihazın şu URL'de bağlanın: `http://192.168.100.10`. Tıklayın **Gelişmiş** ve ardından **devam 192.168.100.10 (güvenli)** .
+4. Cihazın şu URL’deki yerel web kullanıcı arabirimine bağlanın: `http://192.168.100.10`. **Gelişmiş** ve ardından **192.168.100.10’a ilerle (güvenli değil)** seçeneğine tıklayın.
 5. Yerel web kullanıcı arabiriminin **Oturum açma** sayfasını görürsünüz.
     
-    - Bu sayfadaki düğüm seri numaralarını birini portal kullanıcı arabirimini hem de yerel web kullanıcı Arabirimi eşleşir. Seri numarası eşleme düğüm numarasını not edin. İki düğümü ve iki cihaz seri numaraları portalında vardır. Bu eşleme hangi düğümün hangi seri numarasına karşılık gelen anlamanıza yardımcı olur.
+    - Bu sayfadaki düğüm seri numaralarından biri, hem portal kullanıcı arabirimi hem de yerel web kullanıcı arabiriminde eşleşir. Düğüm numarası ile seri numarası eşlemesini not alın. Portalda iki düğüm ve iki cihaz seri numarası bulunur. Bu eşleme hangi düğümün hangi seri numarasına karşılık geldiğini anlamanıza yardımcı olur.
     - Bu noktada cihaz kilitlidir.
-    - Cihazda oturum için önceki adımda elde ettiğiniz cihaz Yöneticisi parolasını sağlayın. **Oturum aç**’a tıklayın.
+    - Cihazda oturum açmak için önceki adımda edindiğiniz cihaz yöneticisi parolasını sağlayın. **Oturum aç**’a tıklayın.
 
-    ![Veri kutusu ağır yerel web kullanıcı Arabiriminde oturum açın](media/data-box-heavy-deploy-set-up/data-box-heavy-unlock-device.png)
+    ![Data Box Heavy yerel web kullanıcı arabiriminde oturum açın](media/data-box-heavy-deploy-set-up/data-box-heavy-unlock-device.png)
 
-5. Panoda, ağ arabirimleri yapılandırıldığından emin olun. Cihaz düğümünüzü dört ağ arabirimi vardır iki 1 GB/sn ve iki 40 GB/sn. Bir yönetim arabirimi 1 GB/sn arabirim biridir ve bu nedenle değil kullanıcı tarafından yapılandırılabilir. Kalan üç ağ arabirimleri için veri ayrılmış ve kullanıcı tarafından yapılandırılabilir.
+5. Pano’da ağ arabirimlerinin yapılandırıldığından emin olun. Cihaz düğümünüzde ikisi 1 Gb/sn ve ikisi 40 Gb/sn olmak üzere dört ağ arabirimi vardır. 1 Gb/sn arabirimlerden biri bir yönetim arabirimidir ve bu nedenle kullanıcı tarafından yapılandırılamaz. Kalan üç ağ arabirimi verilere ayrılmıştır ve kullanıcı tarafından yapılandırılabilir.
 
 - Ortamınızda DHCP etkinse, ağ arabirimleri otomatik olarak yapılandırılır.
-- DHCP etkin değilse, ağ arabirimleri adresine gidin ve gerekirse statik IP atayın.
+- DHCP etkin değilse, Ağ arabirimlerini ayarla’ya gidin ve gerekirse statik IP’ler atayın.
 
-    ![Veri kutusu ağır Pano düğümü 1](media/data-box-heavy-deploy-set-up/data-box-heavy-dashboard-1.png)
+    ![Data Box Heavy pano düğümü 1](media/data-box-heavy-deploy-set-up/data-box-heavy-dashboard-1.png)
 
-## <a name="configure-second-node"></a>İkinci düğüm yapılandırma
+## <a name="configure-second-node"></a>İkinci düğümü yapılandırma
 
-Ayrıntılı adımların [ilk düğüm yapılandırma](#configure-first-node) cihazın İkinci düğüm için.
+Cihazın ikinci düğümü için [Birinci düğümü yapılandırma](#configure-first-node) bölümünde açıklanan adımları uygulayın.
 
-![Veri kutusu ağır Pano düğümü 2](media/data-box-heavy-deploy-set-up/data-box-heavy-dashboard-2.png)
+![Data Box Heavy pano düğümü 2](media/data-box-heavy-deploy-set-up/data-box-heavy-dashboard-2.png)
 
 Cihaz kurulumu tamamlandıktan sonra cihaz paylaşımlarına bağlanabilir ve verileri bilgisayarınızdan cihaza kopyalayabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Azure veri kutusu ağır konuları hakkında gibi öğrendiniz:
+Bu öğreticide Azure Data Box Heavy ile ilgili aşağıdaki bilgileri öğrendiniz:
 
 > [!div class="checklist"]
-> * Veri kutusu ağır kablolarını bağlama
-> * İçin veri kutusu ağır bağlanma
+> * Data Box Heavy’nin kablolarını bağlama
+> * Data Box Heavy’ye bağlanma
 
-Veri kutusu ağır üzerinde veri kopyalama hakkında bilgi edinmek için sonraki öğreticiye ilerleyin.
+Data Box Heavy'ye verileri kopyalama hakkında bilgi edinmek için sonraki öğreticiye geçin.
 
 > [!div class="nextstepaction"]
 > [Azure Data Box'a verilerinizi kopyalama](./data-box-heavy-deploy-copy-data.md)
+
+::: zone-end

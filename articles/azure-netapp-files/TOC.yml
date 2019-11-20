@@ -21,11 +21,11 @@
       href: azure-netapp-files-metrics.md
     - name: Performans
       items:
-        - name: Azure NetApp Files için performans kıyaslamaları
-          href: azure-netapp-files-performance-benchmarks.md
         - name: Azure NetApp Files için performansla ilgili önemli noktalar
           href: azure-netapp-files-performance-considerations.md
-        - name: Azure NetApp Files kullanarak birim performansı ve ölçümler için karşılaştırma testi
+        - name: Azure NetApp Files için performans kıyaslamaları test sonuçları
+          href: azure-netapp-files-performance-benchmarks.md
+        - name: Azure NetApp Files için performans kıyaslamaları test önerileri
           href: azure-netapp-files-performance-metrics-volumes.md
     - name: Azure NetApp Files için maliyet modeli
       href: azure-netapp-files-cost-model.md
@@ -45,8 +45,12 @@
       href: azure-netapp-files-set-up-capacity-pool.md
     - name: Azure NetApp Files için bir alt ağı temsilci olarak belirleme
       href: azure-netapp-files-delegate-subnet.md
-    - name: Azure NetApp Files için birim oluşturma
+    - name: Azure NetApp Files için SMB birimi oluşturma
+      href: azure-netapp-files-create-volumes-smb.md
+    - name: Azure NetApp Files için NFS birimi oluşturma
       href: azure-netapp-files-create-volumes.md
+    - name: Azure NetApp Files için NFSv 4.1 varsayılan etki alanını yapılandırma
+      href: azure-netapp-files-configure-nfsv41-domain.md
     - name: NFS birimine yönelik dışarı aktarma ilkesini yapılandırma
       href: azure-netapp-files-configure-export-policy.md
     - name: Birimleri yönetme
@@ -61,7 +65,7 @@
       items:
         - name: REST
           href: azure-netapp-files-develop-with-rest-api.md
-        - name: Azure NetApp Files SDK'ları
+        - name: Azure NetApp Files SDK’ları ve CLI araçları
           href: azure-netapp-files-sdk-cli.md
         - name: Azure NetApp Files Kaynak Sağlayıcısı hatalarını giderme
           href: azure-netapp-files-troubleshoot-resource-provider-errors.md

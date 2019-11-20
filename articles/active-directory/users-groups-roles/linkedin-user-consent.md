@@ -1,83 +1,83 @@
 ---
-title: LinkedIn hesabı bağlantıları veri paylaşımı ve onay - Azure Active Directory | Microsoft Docs
-description: LinkedIn ile tümleştirmeyi Azure Active Directory'de Microsoft uygulamaları ile verileri nasıl paylaşır açıklar
+title: LinkedIn veri paylaşımı ve onayı-Azure Active Directory | Microsoft Docs
+description: LinkedIn tümleştirmesinin Azure Active Directory ' deki Microsoft uygulamaları aracılığıyla verileri nasıl paylaştığını açıklar
 services: active-directory
 author: curtand
-manager: mtillman
+manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: users-groups-roles
 ms.topic: article
-ms.date: 03/18/2019
+ms.date: 11/08/2019
 ms.author: curtand
 ms.reviewer: beengen
 ms.custom: it-pro;seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4e6e24f4e726e25ae65ecceaeb161f8e16d61721
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a21c986ccfe96bae5d341e0ba2ee6622d998d076
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60469647"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74025387"
 ---
-# <a name="linkedin-account-connections-data-sharing-and-consent"></a>LinkedIn hesabı bağlantıları veri paylaşımı ve onay
+# <a name="linkedin-account-connections-data-sharing-and-consent"></a>LinkedIn hesap bağlantıları veri paylaşımı ve onayı
 
-Kullanıcılar, Microsoft iş veya Okul hesabı LinkedIn hesabıyla onayı için Active Directory (Azure AD) kuruluşunuzda etkinleştirebilirsiniz. Bir kullanıcı hesaplarına bağlandıktan sonra bilgi ve LinkedIn Öne çıkanlar bazı Microsoft uygulamaları ve Hizmetleri kullanılabilir. Kullanıcılar, geliştirilmiş ve Microsoft gelen bilgilerle zenginleştirilmiş LinkedIn'de ağ deneyimlerini de bekleyebilirsiniz.
+Active Directory (Azure AD) kuruluşunuzdaki kullanıcıların Microsoft iş veya okul hesabını LinkedIn hesabıyla bağlamayı kabul etmek için izin verebilirsiniz. Bir kullanıcı hesaplarını bağladıktan sonra, LinkedIn 'deki bilgiler ve önemli noktalar bazı Microsoft uygulamaları ve Hizmetleri 'nde kullanılabilir. Ayrıca kullanıcılar, LinkedIn 'deki ağ deneyimlerini Microsoft 'tan alınan bilgilerle iyileşme ve zenginleştirmesi için de bekleyebilir.
 
-Microsoft uygulamaları ve Hizmetleri içinde LinkedIn bilgilerini görmek için kullanıcılar kendi Microsoft ve LinkedIn hesaplarınızı bağlamanıza olanak onaylaması gerekir. Kullanıcılar, Outlook, OneDrive veya SharePoint Online bir profil kartında birinin LinkedIn bilgilerini görmek için tıklayın ilk kez kullanıcıların hesaplarını bağlamaları istenir. Deneyimi ve hesaplarına bağlanmak için onay kadar LinkedIn hesabı bağlantıları kullanıcılarınız için tam olarak etkinleştirilmedi.
+Microsoft uygulamaları ve Hizmetleri 'nde LinkedIn bilgilerini görmek için, kullanıcıların kendi Microsoft ve LinkedIn hesaplarını bağlamaya izin verilmelidir. Kullanıcılardan Outlook, OneDrive veya SharePoint Online 'daki bir profil kartında birisinin LinkedIn bilgilerini görmek için hesaplarını ilk kez tıklamaları istenir. LinkedIn hesabı bağlantıları, deneyimi kabul edene ve hesaplarını bağlamaya kadar kullanıcılarınız için tam olarak etkinleştirilmez.
 
 [!INCLUDE [active-directory-gdpr-note](../../../includes/gdpr-hybrid-note.md)]
 
-## <a name="benefits-of-sharing-linkedin-information"></a>LinkedIn bilgi paylaşımı avantajları
+## <a name="benefits-of-sharing-linkedin-information"></a>LinkedIn bilgilerini paylaşma avantajları
 
-Microsoft uygulamaları ve Hizmetleri içinde LinkedIn bilgilerine erişim, kullanıcılarınızın bağlanmak, etkileşim kurun ve iş arkadaşlarınız, müşteriler ve iş ortakları içinden ve kuruluşunuz dışından ile profesyonel ilişkileri oluşturmak kolaylaştırır. Yeni kullanıcılar daha hızlı iş arkadaşlarınızla bağlanma, bunları hakkında daha fazla bilgi ve daha fazla bilgi kolayca erişmesini hız elde edebilirsiniz. Profil Kartı Microsoft uygulamalarında LinkedIn bilgilerini nasıl görünür bir örnek aşağıda verilmiştir:
+Microsoft uygulamaları ve Hizmetleri içindeki LinkedIn bilgilerine erişim sayesinde kullanıcılarınızın, kuruluşunuzun içindeki ve dışındaki iş arkadaşlarınızla, müşterilerle ve iş ortaklarıyla profesyonel ilişkiler oluşturmasını, bu kişilerle ve iş ortaklarına bağlanmasını kolaylaştırır. Yeni kullanıcılar iş arkadaşlarınızla bağlantı kurarak, bunlarla ilgili daha fazla bilgi edinmek ve daha fazla bilgiye kolayca erişmek yoluyla daha hızlı hızlanır. LinkedIn bilgilerinin Microsoft uygulamalarındaki profil kartında nasıl göründüğünü gösteren bir örnek aşağıda verilmiştir:
 
-![Kuruluşunuzda LinkedIn ile tümleştirmeyi etkinleştirme](./media/linkedin-user-consent/display-example.png)
+![Kuruluşunuzda LinkedIn tümleştirmesini etkinleştirme](./media/linkedin-user-consent/display-example.png)
 
-## <a name="enable-and-announce-linkedin-integration"></a>Etkinleştirme ve LinkedIn ile tümleştirmeyi Duyurusu
+## <a name="enable-and-announce-linkedin-integration"></a>LinkedIn Tümleştirmesini Etkinleştirme ve duyurma
 
-Azure Active Directory ayarını kuruluşunuz için yönetmek için yönetici olmanız gerekir. Tüm kullanıcılar için veya belirli bir kullanıcı kümesi için etkinleştirebilirsiniz.
+Kuruluşunuzun ayarını yönetmek için bir Azure Active Directory yöneticisi olmanız gerekir. Bu uygulamayı tüm kullanıcılar için veya belirli bir kullanıcı kümesi için etkinleştirebilirsiniz.
 
-1. Etkinleştirmek veya tümleştirmesini devre dışı bırakmak için adımları izleyin. [onayı için Azure AD kuruluşunuz için LinkedIn ile tümleştirmeyi](linkedin-integration.md).
-2. Kuruluşunuzda LinkedIn ile tümleştirmeyi duyurmaktan, kullanıcılarınız hakkında SSS noktası [Microsoft uygulamaları ve Hizmetleri içinde LinkedIn bilgi](https://support.office.com/article/about-linkedin-information-and-features-in-microsoft-apps-and-services-dc81cc70-4d64-4755-9f1c-b9536e34d381). Makale nerede hakkında bilgi sağlar ve hesapları bağlanma, LinkedIn bilgilerini gösterir.
+1. Tümleştirmeyi etkinleştirmek veya devre dışı bırakmak için [Azure AD kuruluşunuz Için LinkedIn tümleştirmesi onay](linkedin-integration.md)bölümündeki adımları izleyin.
+2. Kuruluşunuzda LinkedIn tümleştirmesini duyurdığınızda, kullanıcılarınızı [Microsoft uygulamaları ve Hizmetleri 'Ndeki LinkedIn bilgileri](https://support.office.com/article/about-linkedin-information-and-features-in-microsoft-apps-and-services-dc81cc70-4d64-4755-9f1c-b9536e34d381)hakkında SSS bölümüne getirin. Makale, LinkedIn bilgisinin nerede görüntüleneceği, hesapların nasıl bağlanacağı ve daha birçok konuda bilgi sağlar.
 
-## <a name="user-consent-for-data-access-in-microsoft-and-linkedin"></a>Kullanıcı onay için Microsoft ve LinkedIn veri erişimi
+## <a name="user-consent-for-data-access-in-microsoft-and-linkedin"></a>Microsoft ve LinkedIn 'de veri erişimi için Kullanıcı onayı
 
-Microsoft Hizmetleri LinkedIn ' erişilen veriler kalıcı olarak depolanmaz. Kişiler dışında LinkedIn ile Microsoft tarafından erişilen veriler kalıcı olarak depolanmaz. Microsoft Contacts depolanan LinkedIn'de kullanıcılar bunları kaldırana kadar açıklandığı [LinkedIn alınan kişileri silme](https://www.linkedin.com/help/linkedin/answer/43377).
+LinkedIn 'ten erişilen veriler, Microsoft hizmetlerinde kalıcı olarak depolanmaz. Microsoft 'tan erişilen veriler, kişiler hariç, LinkedIn ile kalıcı olarak depolanmaz. Microsoft kişileri, [içeri aktarılan kişileri LinkedIn 'ten silme](https://www.linkedin.com/help/linkedin/answer/43377)bölümünde açıklandığı gibi, kullanıcılar onları kaldırana kadar LinkedIn 'de depolanır.
 
-Kullanıcı hesaplarını bağlandığında, bilgi ve LinkedIn ınsights'tan profil kartı gibi bazı Microsoft uygulamaları içinde kullanılabilir. Kullanıcılar, geliştirilmiş ve Microsoft gelen bilgilerle zenginleştirilmiş LinkedIn'de ağ deneyimlerini de bekleyebilirsiniz.
-Bunlar, kuruluşunuzdaki kullanıcılar bağlanmak LinkedIn ile Microsoft iş veya Okul hesapları, iki seçeneğiniz vardır:
+Kullanıcılar hesaplarının hesaplarını, bilgilerini ve içgörüleri, profil kartı gibi bazı Microsoft uygulamalarında kullanılabilir. Ayrıca kullanıcılar, LinkedIn 'deki ağ deneyimlerini Microsoft 'tan alınan bilgilerle iyileşme ve zenginleştirmesi için de bekleyebilir.
+Kuruluşunuzdaki kullanıcılar LinkedIn ve Microsoft iş veya okul hesaplarını bağladığınızda iki seçeneğe sahiptir:
 
-* Her iki hesaplarından erişilecek veri iznini verin. Bu, Microsoft için izin verin veya iş hesabı verilerine erişmek için LinkedIn hesaplarından ve için anlamına gelir [verilere Microsoft iş veya Okul hesabına LinkedIn hesabını](https://www.linkedin.com/help/linkedin/answer/84077).
-* İzin vermek için Microsoft tarafından erişilecek yalnızca LinkedIn verileri iş ve Okul hesabı.
+* Verilere her iki hesaptan de erişilmesine izin verin. Bu, Microsoft veya iş hesabının LinkedIn hesabından verilere erişmesi ve [LinkedIn hesaplarının Microsoft iş veya okul hesabından verilere erişmesi](https://www.linkedin.com/help/linkedin/answer/84077)için izin veren anlamına gelir.
+* Microsoft iş ve okul hesabı tarafından yalnızca LinkedIn verilerine erişim izni verin.
 
-Kullanıcı hesapları bağlantısını kesmek ve herhangi bir zamanda veri erişimi izinlerini kaldırın ve [denetim LinkedIn profillerini nasıl görüntülenen](https://www.linkedin.com/help/linkedin/answer/83), dahil Microsoft uygulamalarında profillerini olup olmadığı görüntülenebilir.
+Kullanıcılar hesapların bağlantısını kesebilir ve veri erişimi izinlerini dilediğiniz zaman kaldırabilir ve kullanıcılar, profillerinin Microsoft uygulamalarında görüntülenip görüntülenemeyeceğini de içeren [kendi LinkedIn profillerinin nasıl görüntülendiğini denetleyebilir](https://www.linkedin.com/help/linkedin/answer/83).
 
-### <a name="linkedin-account-data"></a>LinkedIn hesabı verileri
+### <a name="linkedin-account-data"></a>LinkedIn hesap verileri
 
-Microsoft ve LinkedIn hesaplarınızı bağladığınızda, Microsoft'a göndermenizi aşağıdaki veriler LinkedIn izin ver:
+Microsoft ve LinkedIn hesaplarınızı bağladığınızda, LinkedIn 'in Microsoft 'a aşağıdaki verileri sağlamasına izin verin:
 
-* Profil verileri - LinkedIn kimliğinizi ve kişi bilgilerini, başkalarıyla paylaşmak hakkında bilgiler içerir, [LinkedIn profil](https://www.linkedin.com/help/linkedin/answer/15493).
-* Veri çeken - LinkedIn, ilgi ve gibi'yi kişiler ve konular, kursları grupları, izleyin ve içerik paylaşmak gibi içerir.
-* Abonelikleri veriler - LinkedIn uygulamalara ve hizmetlere ilişkili verilerle birlikte abonelikleri içerir. 
-* Veri bağlantıları - içerir, [LinkedIn ağ](https://www.linkedin.com/help/linkedin/answer/110) profilleri ve 1. derece bağlantılarınızın iletişim bilgileri dahil.
+* Profil verileri-LinkedIn profilinizi, iletişim bilgilerini ve [LinkedIn profilinizde](https://www.linkedin.com/help/linkedin/answer/15493)başkalarıyla paylaştığınız bilgileri içerir.
+* İlgi alanları, ilgilendiğiniz kişiler ve konular, kurslar grupları ve beğendiğiniz içerikler gibi LinkedIn 'teki ilgi alanlarınızı içerir.
+* Abonelik verileri-ilişkili verilerle birlikte LinkedIn uygulamalarına ve hizmetlerine yönelik abonelikleri içerir. 
+* Bağlantı verileri-1. düzey bağlantılarınızın profilleri ve iletişim bilgileri dahil olmak üzere [LinkedIn ağınızı](https://www.linkedin.com/help/linkedin/answer/110) içerir.
 
-Microsoft Hizmetleri LinkedIn ' erişilen veriler kalıcı olarak depolanmaz. Kişisel verileri Microsoft'un kullanımı hakkında daha fazla bilgi için bkz. [Microsoft gizlilik bildirimi](https://privacy.microsoft.com/privacystatement/).
+LinkedIn 'ten erişilen veriler, Microsoft hizmetlerinde kalıcı olarak depolanmaz. Microsoft 'un kişisel veri kullanımı hakkında daha fazla bilgi için bkz. [Microsoft gizlilik bildirimi](https://privacy.microsoft.com/privacystatement/).
 
-### <a name="microsoft-work-or-school-account-data"></a>Microsoft iş veya Okul hesabı verileri
+### <a name="microsoft-work-or-school-account-data"></a>Microsoft iş veya okul hesabı verileri
 
-Microsoft ve LinkedIn hesaplarınızı bağladığınızda, aşağıdaki veriler LinkedIn için Microsoft'a izin ver:
+Microsoft ve LinkedIn hesaplarınızı bağladığınızda Microsoft 'un LinkedIn 'e aşağıdaki verileri sağlamasına izin verebilirsiniz:
 
-* Profil verileri - adınızı, son adı, profil fotoğrafınız, e-posta adresi, Yöneticisi'ni ve yönettiğiniz kişiler gibi bilgileri içerir.
-* Takvim veri - toplantıları, takvimlerinizde etkinlik, süreleri, konumları ve katılımcıların iletişim bilgilerini içerir. Takvim verileri Gündem, içeriği veya toplantı başlığı gibi toplantı hakkında bilgi dahil edilmez.
-* Veri çeken - Cortana ve iş için Bing gibi Microsoft Hizmetleri kullanımınıza yönelik temel hesabınızla ilişkili ilgi alanları içerir.
-* Abonelikleri veriler - Microsoft uygulamaları ve Office 365 gibi hizmetler için kuruluşunuz tarafından sağlanan abonelikleri içerir.
-* Veri kişiler - kişi listelerini, Outlook, Skype ve sık iletişim veya işbirliği kişiler için kişi bilgilerini dahil olmak üzere diğer Microsoft hesabı hizmetlerini içerir. Kişiler depolanan, düzenli olarak içeri aktarılan ve LinkedIn tarafından kullanılan bağlantı önermek daha fazla örnek için klasörlere ve güncelleştirmelerle ilgili kişileri göster yardımcı.
+* Profil verileri-ilk adınız, soyadı, profil fotoğrafınız, e-posta adresiniz, yöneticiniz ve yönettiğiniz kişiler gibi bilgileri içerir.
+* Takvim verileri-takvimlerinizde, saatlerinizde, konumlarında ve katılımcıların iletişim bilgilerinde toplantılar içerir. Toplantı hakkındaki bilgiler, Gündem, içerik veya toplantı başlığı gibi takvim verilerine dahil değildir.
+* İlgi alanları verileri-Cortana ve Bing for Business gibi Microsoft hizmetlerini kullanmanıza göre hesabınızla ilişkili olan ilgi alanlarınızı içerir.
+* Abonelik verileri-kuruluşunuz tarafından sunulan abonelikleri, Office 365 gibi Microsoft uygulamalarına ve hizmetlerine dahil eder.
+* Kişiler verileri-Outlook, Skype ve diğer Microsoft hesabı hizmetlerinde, sık iletişim kurduğunuz veya işbirliği yaptığınız kişilerin iletişim bilgileri de dahil olmak üzere kişi listelerini içerir. Kişiler, LinkedIn tarafından düzenli olarak içeri aktarılır, depolanır ve kullanılır. Örneğin, bağlantılar önermek, kişilerin düzenlenmesine yardımcı olur ve kişiler hakkındaki güncelleştirmeleri gösterebilirsiniz.
 
-Kişiler dışında LinkedIn ile Microsoft tarafından erişilen veriler kalıcı olarak depolanmaz. Kullanıcılar kaldırılıncaya kadar Microsoft Contacts LinkedIn'de depolanır. Daha fazla bilgi edinin [LinkedIn alınan kişileri silme](https://www.linkedin.com/help/linkedin/answer/43377).
+Microsoft 'tan erişilen veriler, kişiler hariç, LinkedIn ile kalıcı olarak depolanmaz. Microsoft kişileri, kullanıcılar onları kaldırana kadar LinkedIn 'e depolanır. [İçeri aktarılan kişileri LinkedIn 'den silme](https://www.linkedin.com/help/linkedin/answer/43377)hakkında daha fazla bilgi edinin.
 
-Kişisel verilerin LinkedIn'ın kullanımı hakkında daha fazla bilgi için bkz. [LinkedIn gizlilik ilkesi](https://www.linkedin.com/legal/privacy-policy). LinkedIn Hizmetleri, veri aktarımı ve depolama için veri Avrupa Birliği ' Amerika Birleşik Devletleri ve arka akabilir ve gizlilik bölümünde anlatıldığı gibi korumalı [Avrupa Birliği veri aktarımları](https://www.linkedin.com/help/linkedin/answer/62533).
+LinkedIn 'in kişisel verileri kullanımı hakkında daha fazla bilgi için bkz. [LinkedIn Gizlilik ilkesi](https://www.linkedin.com/legal/privacy-policy). LinkedIn Hizmetleri, veri aktarımı ve depolama için, veriler Avrupa birleşimden Birleşik Devletler ve geri akabilir ve gizlilik, [Avrupa Birliği veri aktarımları](https://www.linkedin.com/help/linkedin/answer/62533)bölümünde açıklandığı gibi korunur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [İş veya Okul hesabınızla Microsoft uygulamalarında LinkedIn](https://www.linkedin.com/help/linkedin/answer/84077)
+* [İş veya okul hesabınızla Microsoft uygulamalarında LinkedIn](https://www.linkedin.com/help/linkedin/answer/84077)

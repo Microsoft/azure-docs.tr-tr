@@ -9,19 +9,19 @@ ms.date: 03/20/2018
 ms.author: danlep
 ms.custom: include file
 ms.openlocfilehash: da63a5418ab94623f6ce3c9f35a085dd8b198d1a
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 07/26/2019
 ms.locfileid: "67188929"
 ---
 Bu öğreticiyi tamamlamak için aşağıdaki gereksinimleri karşılamanız gerekir:
 
-**Azure CLI**: Daha sonra yerel bilgisayarınızda yüklü veya Azure CLI 2.0.29 sürüm olmalıdır. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekirse bkz. [Azure CLI'yı yükleme][azure-cli-install].
+**Azure CLI**: Yerel bilgisayarınızda Azure CLı sürüm 2.0.29 veya daha yeni bir sürümün yüklü olması gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekirse bkz. [Azure CLI’yı yükleme][azure-cli-install].
 
-**Docker**: Bu öğreticide çekirdek temel bir anlayış gibi kapsayıcılar, kapsayıcı görüntüleri ve temel Docker kavramları varsayılır `docker` komutları. Docker ve kapsayıcı temel bilgileri ile ilgili giriş yapmak için [Docker’a genel bakış][docker-get-started] bölümüne bakın.
+**Docker**: Bu öğreticide kapsayıcılar, kapsayıcı görüntüleri ve temel `docker` komutlar gibi temel Docker kavramlarının temel bir şekilde anlaşıldığı varsayılır. Docker ve kapsayıcı temelleri hakkında bilgi için bkz: [Docker'a genel bakış][docker-get-started].
 
-**Docker altyapısı**: Bu öğreticiyi tamamlamak için Docker altyapısının'ın yerel olarak yüklü olması gerekir. Docker, [macOS][docker-mac], [Windows][docker-windows] ve [Linux][docker-linux] üzerinde Docker ortamını yapılandıran paketler sağlar.
+**Docker altyapısı**: Bu öğreticiyi tamamlayabilmeniz için, Docker altyapısının yerel olarak yüklü olması gerekir. Docker, [MacOS][docker-mac], [Windows][docker-windows]ve [Linux][docker-linux]'ta Docker ortamını yapılandıran paketler sağlar.
 
 > [!IMPORTANT]
 > Azure Cloud shell, Docker programını içermediğinden bu öğreticiyi tamamlamak için *yerel bilgisayarınıza* hem Azure CLI’yi hem de Docker Altyapısı’nı yüklemeniz *gerekir*. Bu öğretici için Azure Cloud Shell kullanamazsınız.

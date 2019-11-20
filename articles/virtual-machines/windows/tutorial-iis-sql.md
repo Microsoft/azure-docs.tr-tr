@@ -1,30 +1,29 @@
 ---
-title: Öğretici - oluşturma Vm'leri bir SQL çalıştıran IIS, .NET ile Azure stack | Microsoft Docs
+title: Öğretici-Azure 'da SQL, IIS, .NET Stack çalıştıran VM 'Ler oluşturma
 description: Bu öğreticide, Azure’daki bir Windows sanal makinesinde Azure SQL, IIS, .NET yığını yüklemeyi öğrenirsiniz.
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 12/05/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 770fa89bc08b448482b4a74d21ee307df8a9f836
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 286d00ce718a34dea15a075984cc3b2a5e4cfec3
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60784937"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74064672"
 ---
-# <a name="tutorial-install-the-sql-iis-net-stack-in-a-windows-vm-with-azure-powershell"></a>Öğretici: Azure PowerShell ile bir Windows VM'de SQL, IIS, .NET yığını yükleme
+# <a name="tutorial-install-the-sql-iis-net-stack-in-a-windows-vm-with-azure-powershell"></a>Öğretici: Azure PowerShell ile SQL, IIS, .NET Stack 'i Windows sanal makinesine yüklemeyin
 
-Bu öğreticide, SQL, IIS, .NET yüklemesini Azure PowerShell kullanarak yığın. Bu yığın, Windows Server 2016’da çalışan, biri IIS ve .NET, diğeri SQL Server’a sahip iki sanal makineden oluşur.
+Bu öğreticide, Azure PowerShell kullanarak bir SQL, IIS, .NET yığını yükleyeceğiz. Bu yığın, Windows Server 2016’da çalışan, biri IIS ve .NET, diğeri SQL Server’a sahip iki sanal makineden oluşur.
 
 > [!div class="checklist"]
 > * VM oluşturma 
@@ -38,9 +37,9 @@ Azure Cloud Shell, bu makaledeki adımları çalıştırmak için kullanabilece�
 
 Cloud Shell'i açmak için kod bloğunun sağ üst köşesinden **Deneyin**'i seçmeniz yeterlidir. İsterseniz [https://shell.azure.com/powershell](https://shell.azure.com/powershell) adresine giderek Cloud Shell'i ayrı bir tarayıcı sekmesinde de başlatabilirsiniz. **Kopyala**’yı seçerek kod bloğunu kopyalayın, Cloud Shell’e yapıştırın ve Enter tuşuna basarak çalıştırın.
 
-## <a name="create-an-iis-vm"></a>Bir IIS sanal makinesi oluşturma 
+## <a name="create-an-iis-vm"></a>IIS VM oluşturma 
 
-Bu örnekte [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) hızlıca bir Windows Server 2016 VM oluşturma ve IIS ve .NET Framework'ü yüklemeyi PowerShell Cloud shell'de cmdlet'i. IIS ve SQL sanal makineleri bir kaynak grubu ile sanal ağ paylaşır, dolayısıyla bu adlara yönelik değişkenler oluştururuz.
+Bu örnekte, PowerShell Cloud Shell [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) cmdlet 'ini hızla bir Windows Server 2016 VM oluşturmak ve ardından ııs ve .NET Framework yüklemek için kullanırız. IIS ve SQL sanal makineleri bir kaynak grubu ile sanal ağ paylaşır, dolayısıyla bu adlara yönelik değişkenler oluştururuz.
 
 
 ```azurepowershell-interactive
@@ -59,7 +58,7 @@ New-AzVm `
     -OpenPorts 80,3389 
 ```
 
-IIS ve .NET framework ile özel betik uzantısı kullanarak yükleme [kümesi AzVMExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmextension) cmdlet'i.
+[Set-Azvmexgersıon](https://docs.microsoft.com/powershell/module/az.compute/set-azvmextension) cmdlet 'i ile özel Betik uzantısı 'Nı kullanarak IIS ve .NET Framework 'ü kurun.
 
 ```azurepowershell-interactive
 Set-AzVMExtension `
@@ -75,7 +74,7 @@ Set-AzVMExtension `
 
 ## <a name="create-another-subnet"></a>Başka bir alt ağ oluşturma
 
-SQL sanal makinesi için ikincil alt ağ oluşturun. [Get-AzVirtualNetwork]{/powershell/module/az.network/get-azvirtualnetwork}. kullanarak Vnet'i alın
+SQL sanal makinesi için ikincil alt ağ oluşturun. [Get-AzVirtualNetwork] {/PowerShell/Module/az.exe Network/Get-azvirtualnetwork} kullanarak vNet 'i alın.
 
 ```azurepowershell-interactive
 $vNet = Get-AzVirtualNetwork `
@@ -83,7 +82,7 @@ $vNet = Get-AzVirtualNetwork `
    -ResourceGroupName $resourceGroup
 ```
 
-Alt ağı kullanmak için bir yapılandırma oluşturmak [Ekle AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/add-azvirtualnetworksubnetconfig).
+[Add-AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/add-azvirtualnetworksubnetconfig)kullanarak alt ağ için bir yapılandırma oluşturun.
 
 
 ```azurepowershell-interactive
@@ -94,7 +93,7 @@ Add-AzVirtualNetworkSubnetConfig `
    -ServiceEndpoint Microsoft.Sql
 ```
 
-Vnet'i yeni alt ağ bilgileriyle ile güncelleştirme [AzVirtualNetwork Ayarla](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetwork)
+[Set-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetwork) kullanarak sanal ağı yeni alt ağ bilgileriyle güncelleştirin
    
 ```azurepowershell-interactive   
 $vNet | Set-AzVirtualNetwork
@@ -118,7 +117,7 @@ New-AzVm `
     -OpenPorts 3389,1401 
 ```
 
-Kullanım [kümesi AzVMSqlServerExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsqlserverextension) eklemek için [SQL Server uzantısı](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension) SQL VM.
+[SQL Server UZANTıSıNı](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension) SQL VM 'ye eklemek için [set-azvmsqlserverextension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsqlserverextension) komutunu kullanın.
 
 ```azurepowershell-interactive
 Set-AzVMSqlServerExtension `

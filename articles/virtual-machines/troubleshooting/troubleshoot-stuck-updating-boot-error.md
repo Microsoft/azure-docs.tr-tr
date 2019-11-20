@@ -1,62 +1,61 @@
 ---
-title: Azure VM başlatma sırasında Windows Update takılı | Microsoft Docs
-description: Bir Azure VM başlatma sırasında Windows takıldığında sorun gidermeyi öğrenin güncelleştirin.
+title: Azure VM başlatması Windows Update konumunda takıldı | Microsoft Docs
+description: Azure VM başlatması Windows Update 'e takıldığında sorunu nasıl giderebileceğinizi öğrenin.
 services: virtual-machines-windows
 documentationCenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: v-jesits
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/09/2018
 ms.author: genli
-ms.openlocfilehash: cff1577eacd0af86d3ad1c99e1eb2164b64318c4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 226151d81319dc4e6f132e76ce2d310f88a484e8
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60443781"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71087030"
 ---
-# <a name="azure-vm-startup-is-stuck-at-windows-update"></a>Azure VM başlatma sırasında Windows takılı güncelleştir
+# <a name="azure-vm-startup-is-stuck-at-windows-update"></a>Azure VM başlatması Windows Update 'te takıldı
 
-Bu makalede, sanal makinenize (VM) başlatma sırasında Windows Update aşamada takıldığında sorunu yardımcı olur. 
+Bu makale, sanal makineniz (VM) başlangıç sırasında Windows Update aşamada takıldığında sorunu çözmeye yardımcı olur. 
 
 > [!NOTE] 
-> Azure'da oluşturmaya ve kaynaklarla çalışmaya yönelik iki farklı dağıtım modeli vardır: [Resource Manager ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makalede, Resource Manager dağıtım modelini incelemektedir. Bu model Klasik dağıtım modeli kullanılarak yerine yeni dağıtımlar için kullanmanızı öneririz.
+> Azure 'da kaynak oluşturmak ve bunlarla çalışmak için iki farklı dağıtım modeli vardır: [Kaynak Yöneticisi ve klasik](../../azure-resource-manager/resource-manager-deployment-model.md). Bu makalede Kaynak Yöneticisi dağıtım modelinin kullanımı ele alınmaktadır. Klasik dağıtım modelini kullanmak yerine bu modeli Yeni dağıtımlar için kullanmanızı öneririz.
 
 ## <a name="symptom"></a>Belirti
 
- Bir Windows VM başlamaz. Ne zaman iade ekran görüntüleri [önyükleme tanılaması](../troubleshooting/boot-diagnostics.md) penceresinde görürsünüz başlangıç güncelleştirme sürecinde takılı kalıyor. Alabileceğiniz iletileri örnekleri şunlardır:
+ Bir Windows VM 'si başlamıyor. [Önyükleme tanılaması](../troubleshooting/boot-diagnostics.md) penceresinde ekran görüntülerini denetlediğinizde, başlatmanın güncelleştirme işleminde takılı olduğunu görürsünüz. Alabileceğiniz ileti örnekleri aşağıda verilmiştir:
 
-- Yükleme Windows ##% bilgisayarınızı kapatmayın. Bu işlem biraz sürebilir koruyun, birkaç kez yeniden başlatılacak
-- Bu işlemi tamamlanana kadar bilgisayarınıza takip edin. # Sayısı güncelleştirme yükleniyor... 
-- Biz değişiklikler geri alınıyor, bilgisayarınızı kapatmayın güncelleştirmeleri tamamlanamadı
-- Hata Yapılandırma Windows güncelleştirmeleri Reverting değişiklikleri bilgisayarınızı kapatmayın
-- Güncelleştirme işlemi uygulama hatası < hata kodu > ###, ### (\Regist...)
-- Önemli hata güncelleştirme işlemleri uygulayarak < hata kodu > ###, ### ($$...)
+- Windows yükleme #%, bilgisayarınızı kapatmayın. Bu işlem, BILGISAYARıNıZ birkaç kez yeniden başlatılacak.
+- Bu işlem tamamlanana kadar BILGISAYARıNıZı açık tutun. #/# Güncelleştirme yükleniyor... 
+- Değişiklikleri geri almak için güncelleştirmeleri tamamlayamadık, bilgisayarınızı kapatmayın
+- Değişiklikleri geri almak için Windows güncelleştirmeleri yapılandırılırken hata, bilgisayarınızı kapatmayın
+- Hata < hata kodu > güncelleştirme işlemleri uygulanıyor # # # # #/# # # # # (\Kayıt defteri)
+- Önemli hata < güncelleştirme işlemleri uygulanıyor > hata kodu # # # # # # # # # # ($ $...)
 
 
 ## <a name="solution"></a>Çözüm
 
-Alıyorsanız güncelleştirmeleri sayısına bağlı olarak yüklü veya yedekleme toplu güncelleştirme işlemi biraz zaman alabilir. VM için 8 saat bu durumda bırakın. VM, yine de bu durumda, bu süreden sonra ise, Azure portalında VM'yi yeniden başlatın ve normalde başlatabilmeniz için bkz. Bu adım işe yaramazsa, aşağıdaki çözümleri deneyin.
+Yüklenen veya toplanan güncelleştirmelerin sayısına bağlı olarak güncelleştirme işlemi biraz zaman alabilir. Bu durumda VM 'yi 8 saat boyunca bırakın. VM bu süre sonunda hala bu durumundaysa, VM 'yi Azure portal yeniden başlatın ve normal bir şekilde başlayıp başlamadığından emin olmanız gerekir. Bu adım işe yaramazsa, aşağıdaki çözümü deneyin.
 
 ### <a name="remove-the-update-that-causes-the-problem"></a>Soruna neden olan güncelleştirmeyi kaldırın
 
-1. Etkilenen sanal makinenin işletim sistemi diskinin anlık yedekleyin. Daha fazla bilgi için [bir diskin anlık görüntüsünü alma](../windows/snapshot-copy-managed-disk.md). 
+1. Etkilenen VM 'nin işletim sistemi diskinin anlık görüntüsünü bir yedekleme olarak alın. Daha fazla bilgi için [bir diskin anlık görüntüsünü alma](../windows/snapshot-copy-managed-disk.md). 
 2. [İşletim sistemi diskini bir kurtarma VM'si ekleme](troubleshoot-recovery-disks-portal-windows.md).
-3. İşletim sistemi diski kurtarma sanal makinesinde bağlandıktan sonra Çalıştır **diskmgmt.msc** Disk Yönetimi'ni açın ve bağlı disk olduğundan emin olmak için **çevrimiçi**. Ekli işletim sistemi diskinin \windows klasörünü bulunduran atanan sürücü harfini not alın. Disk şifreli değilse, bu belgenin sonraki adımlar ile devam etmeden önce disk şifresini çözemez.
+3. İşletim sistemi diski kurtarma sanal makinesine eklendikten sonra, disk yönetimi 'ni açmak için **diskmgmt. msc** ' yi çalıştırın ve ekli diskin **çevrimiçi**olduğundan emin olun. \Windows klasörünü tutan bağlı işletim sistemi diskine atanan sürücü harfini unutmayın. Disk şifrelenirse, bu belgedeki sonraki adımlara geçmeden önce diskin şifresini çözün.
 
-4. Yükseltilmiş bir komut istemi (yönetici olarak çalıştır) örneği açın. Ekli işletim sistemi diskinde güncelleştirme paketleri listesini almak için aşağıdaki komutu çalıştırın:
+4. Yükseltilmiş bir komut istemi örneği açın (yönetici olarak çalıştır). Bağlı işletim sistemi diskinde bulunan güncelleştirme paketlerinin listesini almak için aşağıdaki komutu çalıştırın:
 
         dism /image:<Attached OS disk>:\ /get-packages > c:\temp\Patch_level.txt
 
-    Örneğin, F sürücü ekli işletim sistemi diski ise aşağıdaki komutu çalıştırın:
+    Örneğin, bağlı işletim sistemi diski F sürücüsündeyse aşağıdaki komutu çalıştırın:
 
         dism /image:F:\ /get-packages > c:\temp\Patch_level.txt
-5. C:\temp\Patch_level.txt dosyasını açın ve ardından alt okumak. İçinde güncelleştirme bulun **yükleme bekletiliyor** veya **kaldırma bekleyen** durumu.  Güncelleştirme durumu, bir örnek verilmiştir:
+5. C:\temp\Patch_level.txt dosyasını açın ve ardından aşağıdan yukarıya okuyun. **Yükleme beklemede** veya **kaldırma bekleme** durumunda olan güncelleştirmeyi bulun.  Aşağıda, güncelleştirme durumunun bir örneği verilmiştir:
 
      ```
     Package Identity : Package_for_RollupFix~31bf3856ad364e35~amd64~~17134.345.1.5
@@ -64,7 +63,7 @@ Alıyorsanız güncelleştirmeleri sayısına bağlı olarak yüklü veya yedekl
     Release Type : Security Update
     Install Time :
     ```
-6. Sorunun nedeni güncelleştirmeyi kaldırın:
+6. Soruna neden olan güncelleştirmeyi kaldırın:
     
     ```
     dism /Image:<Attached OS disk>:\ /Remove-Package /PackageName:<PACKAGE NAME TO DELETE>
@@ -76,6 +75,6 @@ Alıyorsanız güncelleştirmeleri sayısına bağlı olarak yüklü veya yedekl
     ```
 
     > [!NOTE] 
-    > Paket boyutuna bağlı olarak, DISM aracı yüklemeyi işlemek için biraz zaman alır. Normal işlem 16 dakika içinde tamamlanır.
+    > Paketin boyutuna bağlı olarak, DıSM aracının yükleme kaldırma işlemi bir süre sürer. Normalde işlem, 16 dakika içinde tamamlanır.
 
-7. [İşletim sistemi diskini ve VM yeniden](troubleshoot-recovery-disks-portal-windows.md#unmount-and-detach-original-virtual-hard-disk). Daha sonra sorun çözülmüş olup olmadığını denetleyin.
+7. [İşletim sistemi diskini ve VM yeniden](troubleshoot-recovery-disks-portal-windows.md#unmount-and-detach-original-virtual-hard-disk). Sonra sorunun çözümlenip çözümlenmediğini denetleyin.

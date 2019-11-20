@@ -1,6 +1,6 @@
 ---
-title: Azure API management ilkesi örneği - dış yetkilendirici kullanarak isteği yetkilendirmek | Microsoft Docs
-description: Azure API management ilke örneği - gösterir kullanan özel veya eski kimlik doğrulama/yetkilendirme mantığı içeren dış yetkilendirici isteklerinin nasıl yetkilendirin.
+title: Azure API Management ilkesi örneği-isteği dış yetkilendirici kullanarak yetkilendir | Microsoft Docs
+description: Azure API Management ilkesi örneği-yetkilendirmeyi, özel veya eski bir kimlik doğrulama/yetkilendirme mantığını kapsüllemek üzere dış yetkilendirmeyle nasıl kullandığını gösterir.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,30 +9,29 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 06/06/2018
 ms.author: apimpm
-ms.openlocfilehash: 65ea8622187d0665e4680f4162ddff0bc01e6eb9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 92836e0bfe43a41ad6547c68bc0b9a326528862c
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60306775"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70074164"
 ---
-# <a name="authorize-requests-using-external-authorizer"></a>Dış yetkilendirici kullanarak istekleri Yetkilendir
+# <a name="authorize-requests-using-external-authorizer"></a>Dış yetkilendirici kullanarak istekleri yetkilendir
 
-Bu makalede, özel kimlik doğrulama/yetkilendirme mantığı içeren bir dış yetkilendirici kullanarak API erişim güvenliğinin nasıl sağlanacağını gösterir bir Azure API management ilke örneği gösterilmektedir. Ayarlama veya ilke kodu düzenleme için açıklanan adımları izleyin [ayarlama veya düzenleme ilke](../set-edit-policies.md). Diğer örnekler için bkz [ilkesi örnekleri](../policy-samples.md).
+Bu makalede, bir dış yetkilici özel kimlik doğrulama/yetkilendirme mantığını kullanarak API erişiminin güvenliğini nasıl güvence altına gösteren bir Azure API Management ilkesi örneği gösterilmektedir. Bir ilke kodu ayarlamak veya düzenlemek için, [Ilke ayarlama veya düzenleme](../set-edit-policies.md)bölümünde açıklanan adımları izleyin. Diğer örnekleri görmek için bkz. [ilke örnekleri](../policy-samples.md).
 
 ## <a name="policy"></a>İlke
 
-Kodun içine yapıştırın **gelen** blok.
+Kodu **gelen** bloğa yapıştırın.
 
 [!code-xml[Main](../../../api-management-policy-samples/examples/Authorize requests using external authorizer.policy.xml)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-APIM ilkeleri hakkında daha fazla bilgi edinin:
+APıM ilkeleri hakkında daha fazla bilgi edinin:
 
-+ [Erişimi kısıtlama ilkeleri](../api-management-access-restriction-policies.md)
++ [Erişim kısıtlama ilkeleri](../api-management-access-restriction-policies.md)
 + [İlke örnekleri](../policy-samples.md)

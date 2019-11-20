@@ -1,6 +1,6 @@
 ---
-title: Azure MultiStorageAccountCombo UI öğesi | Microsoft Docs
-description: Azure portalına yönelik Microsoft.Storage.MultiStorageAccountCombo UI öğesi açıklar.
+title: Azure MultiStorageAccountCombo Kullanıcı arabirimi öğesi | Microsoft Docs
+description: Azure portal için Microsoft. Storage. MultiStorageAccountCombo UI öğesini açıklar.
 services: managed-applications
 documentationcenter: na
 author: tfitzmac
@@ -13,20 +13,23 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/28/2018
 ms.author: tomfitz
-ms.openlocfilehash: 08b65770414e9ee1cb5e478427fe7654b2bb9a78
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e3fb6f474bfe56f54e6dc621a3893e184ebc71d9
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64725437"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74151445"
 ---
-# <a name="microsoftstoragemultistorageaccountcombo-ui-element"></a>Microsoft.Storage.MultiStorageAccountCombo kullanıcı Arabirimi öğesi
-Ortak bir önek ile başlayan adları ile birkaç depolama hesabı oluşturmak için denetimleri grubudur.
+# <a name="microsoftstoragemultistorageaccountcombo-ui-element"></a>Microsoft. Storage. MultiStorageAccountCombo UI öğesi
 
-## <a name="ui-sample"></a>Örnek kullanıcı Arabirimi
-![Microsoft.Storage.MultiStorageAccountCombo](./media/managed-application-elements/microsoft.storage.multistorageaccountcombo.png)
+Ortak bir ön ekiyle başlayan adlara sahip birkaç depolama hesabı oluşturmaya yönelik bir denetim grubu.
+
+## <a name="ui-sample"></a>UI örneği
+
+![Microsoft. Storage. MultiStorageAccountCombo](./media/managed-application-elements/microsoft.storage.multistorageaccountcombo.png)
 
 ## <a name="schema"></a>Şema
+
 ```json
 {
   "name": "element1",
@@ -52,13 +55,6 @@ Ortak bir önek ile başlayan adları ile birkaç depolama hesabı oluşturmak i
 }
 ```
 
-## <a name="remarks"></a>Açıklamalar
-- Değeri `defaultValue.prefix` depolama hesabı adları dizisi oluşturmak için bir veya daha fazla tamsayı ile birleştirilir. Örneğin, varsa `defaultValue.prefix` olduğu **sa** ve `count` olduğu **2**, ardından depolama hesabı adları **sa1** ve **sa2** oluşturulur. Oluşturulan depolama hesabı adları için benzersizlik otomatik olarak doğrulanır.
-- Depolama hesabı adları lexicographically temel alınarak oluşturulan `count`. Örneğin, varsa `count` 10'dur ve depolama hesabı adları iki basamaklı tamsayılar (01, 02, 03) ile bitmelidir.
-- İçin varsayılan değer `defaultValue.prefix` olduğu **null**ve `defaultValue.type` olduğu **Premium_LRS**.
-- Belirtilen değil herhangi bir türü `constraints.allowedTypes` gizli ve belirtilen değil herhangi bir türü `constraints.excludedTypes` gösterilir. `constraints.allowedTypes` ve `constraints.excludedTypes` hem de isteğe bağlıdır, ancak aynı anda kullanılamaz.
-- Depolama hesabı adları oluşturma yanı sıra `count` öğesi için uygun çarpan ayarlamak için kullanılır. Statik bir değer gibi destekler **2**, veya dinamik bir değerin başka bir öğeden `[steps('step1').storageAccountCount]`. Varsayılan değer **1**.
-
 ## <a name="sample-output"></a>Örnek çıktı
 
 ```json
@@ -70,6 +66,15 @@ Ortak bir önek ile başlayan adları ile birkaç depolama hesabı oluşturmak i
 }
 ```
 
+## <a name="remarks"></a>Açıklamalar
+
+- `defaultValue.prefix` değeri, depolama hesabı adları dizisini oluşturmak için bir veya daha fazla tamsayı ile birleştirilir. Örneğin, `defaultValue.prefix` **sa** ve `count` **2**ise, depolama hesabı adları **SA1** ve **SA2** oluşturulur. Oluşturulan depolama hesabı adları otomatik olarak benzersizlik için onaylanır.
+- Depolama hesabı adları `count`göre lexıgrafik olarak oluşturulur. Örneğin, `count` 10 ise, depolama hesabı adları iki basamaklı tamsayılarla biter (01, 02, 03).
+- `defaultValue.prefix` için varsayılan değer **null**ve `defaultValue.type` için **Premium_LRS**.
+- `constraints.allowedTypes` ' de belirtilmeyen herhangi bir tür gizlidir ve `constraints.excludedTypes` belirtilmemiş herhangi bir tür gösterilir. `constraints.allowedTypes` ve `constraints.excludedTypes` her ikisi de isteğe bağlıdır, ancak aynı anda kullanılamaz.
+- Depolama hesabı adları oluşturmaya ek olarak, `count` öğesi için uygun çarpanı ayarlamak üzere kullanılır. **2**gibi bir statik değeri veya `[steps('step1').storageAccountCount]`gibi başka bir öğeden dinamik bir değeri destekler. Varsayılan değer **1**' dir.
+
 ## <a name="next-steps"></a>Sonraki adımlar
-* UI tanımları oluşturma, bir giriş için bkz. [createuidefinition dosyasını kullanmaya başlama](create-uidefinition-overview.md).
-* Ortak Özellikler UI öğelerinin açıklaması için bkz. [CreateUiDefinition öğeleri](create-uidefinition-elements.md).
+
+* UI tanımları oluşturmaya giriş için bkz. [Createuıdefinition ile çalışmaya başlama](create-uidefinition-overview.md).
+* UI öğelerindeki ortak özelliklerin açıklaması için bkz. [Createuıdefinition Elements](create-uidefinition-elements.md).

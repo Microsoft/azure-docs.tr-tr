@@ -1,7 +1,7 @@
 ---
-title: Azure Media Services Video Indexer içerik modellerinin özelleştirme
-titlesuffix: Azure Media Services
-description: Bu makalede her tür özelleştirme avantajlarını açıklayan kavramsal makaleleri için bağlantılar sağlar. Bu makalede ayrıca her model özelleştirme nasıl uygulayacağınıza dair gösteren nasıl yapılır kılavuzlarından bağlantılarını içerir.
+title: Azure Media Services Video Indexer içerik modellerini özelleştirme
+titleSuffix: Azure Media Services
+description: Bu makalede, her özelleştirme türünün avantajlarını açıklayan kavramsal makalelerin bağlantıları verilmektedir. Bu makale ayrıca her bir modelin özelleştirmesini nasıl uygulayabileceğinizi gösteren nasıl yapılır kılavuzlarıyla bağlantı sağlar.
 services: media-services
 author: anikaz
 manager: johndeu
@@ -10,36 +10,40 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 06/26/2019
 ms.author: anzaman
-ms.openlocfilehash: 855004c23df933fc2ebc71455b7b946d667fe7dc
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 9abf9b791cc986bcce49bbd0cf8136a573a149a3
+ms.sourcegitcommit: 65131f6188a02efe1704d92f0fd473b21c760d08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67454054"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70860194"
 ---
-# <a name="customizing-content-models-in-video-indexer"></a>Video Indexer içerik modellerinin özelleştirme
+# <a name="customizing-content-models-in-video-indexer"></a>Video Indexer içerik modellerini özelleştirme
 
-Video Indexer bazı modellerinin belirli kullanım durumunuza uyarlanabilen için özelleştirmenizi sağlar. Bu modeller dahil [markaları](customize-brands-model-overview.md), [dil](customize-language-model-overview.md), ve [kişi](customize-person-model-overview.md). Video Indexer Web sitesi veya API'sini kullanarak bu modeli, bir kolayca özelleştirebilirsiniz.
+Video Indexer, bazı modellerini özel kullanım çalışmanıza uyarlayacak şekilde özelleştirmenizi sağlar. Bu modeller [markalar](customize-brands-model-overview.md), [dili](customize-language-model-overview.md)ve [kişiyi](customize-person-model-overview.md)içerir. Video Indexer Web sitesini veya API 'YI kullanarak bu modelleri kolayca özelleştirebilirsiniz.
 
-Bu makalede her tür özelleştirme avantajlarını açıklayan kavramsal makaleleri için bağlantılar sağlar. Bu makalede ayrıca her model özelleştirme nasıl uygulayacağınıza dair gösteren nasıl yapılır kılavuzlarından bağlantılarını içerir.
- 
-## <a name="brands-model"></a>Markaları modeli
+Bu makale, her özelleştirme türünün avantajlarını açıklayan makalelere bağlantılar sağlar. Makale Ayrıca her bir modelin özelleştirmesini nasıl uygulayabileceğinizi gösteren nasıl yapılır kılavuzlarıyla bağlantı sağlar.
 
-* [Markaları modeline genel bakış özelleştirme](customize-brands-model-overview.md)
-* [Video Indexer Web sitesini kullanarak markaları modeli özelleştirme](customize-brands-model-with-website.md)
-* [Video Indexer API kullanarak markaları modeli özelleştirme](customize-brands-model-with-api.md)
+## <a name="animated-characters"></a>Hareketli karakterler
+
+* [Animasyonlu karakter algılama](animated-characters-recognition.md)
+
+## <a name="brands-model"></a>Markalar modeli
+
+* [Markalar modeline genel bakış](customize-brands-model-overview.md)
+* [Video Indexer Web sitesini kullanarak markalar modelini özelleştirme](customize-brands-model-with-website.md)
+* [Video Indexer API kullanarak markalar modelini özelleştirme](customize-brands-model-with-api.md)
  
 ## <a name="language-model"></a>Dil modeli
 
-* [Dil modeli genel bakış özelleştirme](customize-language-model-overview.md)
-* [Dil modelleri Video Indexer Web sitesini kullanarak özelleştirme](customize-language-model-with-website.md)
-* [Video Indexer API kullanarak dil modelleri özelleştirme](customize-language-model-with-api.md)
+* [Dil modellerini özelleştirmeye genel bakış](customize-language-model-overview.md)
+* [Video Indexer Web sitesini kullanarak dil modellerini özelleştirme](customize-language-model-with-website.md)
+* [Video Indexer API kullanarak dil modellerini özelleştirme](customize-language-model-with-api.md)
  
-## <a name="person-model"></a>Kişi model
+## <a name="person-model"></a>Kişi modeli
 
-* [Dil modeli genel bakış özelleştirme](customize-person-model-overview.md)
-* [Dil modelleri Video Indexer Web sitesini kullanarak özelleştirme](customize-language-model-with-website.md)
-* [Video Indexer API kullanarak dil modelleri özelleştirme](customize-person-model-with-api.md)
+* [Kişi modellerini özelleştirmeye genel bakış](customize-person-model-overview.md)
+* [Video Indexer Web sitesini kullanarak kişi modellerini özelleştirme](customize-person-model-with-website.md)
+* [Video Indexer API kullanarak kişi modellerini özelleştirme](customize-person-model-with-api.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,6 +1,6 @@
 ---
-title: Service Fabric kümesi kapasite planlaması | Microsoft Docs
-description: Service Fabric kümesi kapasite planlaması konuları. NodeType, işlemler, dayanıklılık ve güvenilirlik katmanları
+title: Service Fabric kümesi kapasitesini planlama | Microsoft Docs
+description: Service Fabric küme kapasitesi planlama konuları. Nodetypes, Işlemler, dayanıklılık ve güvenilirlik katmanları
 services: service-fabric
 documentationcenter: .net
 author: ChackDan
@@ -12,205 +12,205 @@ ms.devlang: dotnet
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/27/2018
-ms.author: chackdan
-ms.openlocfilehash: bd76658c939496f27bf3751060c18d17968acd15
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 07/09/2019
+ms.author: pepogors
+ms.openlocfilehash: 1cbbc1fde22262d5841766978d40487f812e0963
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60386809"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333117"
 ---
-# <a name="service-fabric-cluster-capacity-planning-considerations"></a>Service Fabric kümesi kapasite planlaması konuları
-Herhangi bir üretim dağıtımı için kapasite planlaması önemli bir adımdır. Bu işlemin bir parçası olarak dikkate almanız gereken öğelerden bazıları aşağıda verilmiştir.
+# <a name="service-fabric-cluster-capacity-planning-considerations"></a>Service Fabric küme kapasitesi planlama konuları
+Herhangi bir üretim dağıtımı için kapasite planlaması önemli bir adımdır. Bu işlemin bir parçası olarak göz önünde bulundurmanız gereken öğelerden bazıları aşağıda verilmiştir.
 
-* Düğüm türleri kümenizi ile başlatmak için gereken sayısı
-* Her düğüm türünün (boyut, birincil, internet'e yönelik, sayısı VM'ler gibi) özellikleri
+* Kümenizin başlamak için gereken düğüm türlerinin sayısı
+* Her düğüm türünün özellikleri (boyut, birincil, internet 'e yönelik, VM sayısı vb.)
 * Kümenin güvenilirlik ve dayanıklılık özellikleri
 
 > [!NOTE]
-> En düşük düzeyde tüm gözden geçirmeniz gereken **izin** planlaması sırasında ilke değerleri yükseltin. Değerleri uygun şekilde ayarlandığından emin olun ve kümeniz daha sonra değiştirilemez sistem yapılandırma ayarları nedeniyle yazma azaltmak için budur. 
+> Planlama sırasında **Izin verilmeyen** tüm yükseltme ilkesi değerlerini en düşük düzeyde gözden geçirmeniz gerekir. Bu, değerleri uygun şekilde ayarlamış ve değiştirilemeyen sistem yapılandırma ayarları nedeniyle daha sonra kümenizin üzerine yazmayı azalttığınızdan emin olmak için kullanılır. 
 > 
 
-Bize kısaca bu öğelerin her birini gözden geçirin.
+Bu öğelerin her birini kısaca gözden geçirmemize izin verin.
 
-## <a name="the-number-of-node-types-your-cluster-needs-to-start-out-with"></a>Düğüm türleri kümenizi ile başlatmak için gereken sayısı
-Öncelikle, oluşturmakta olduğunuz küme için kullanılacak neler olduğunu şekil gerekir.  Ne tür uygulamaların bu kümesi dağıtmayı planlıyor musunuz? Küme amacına açık değilse, en olası olmayan henüz kapasite planlama işlemi girmek için hazır.
+## <a name="the-number-of-node-types-your-cluster-needs-to-start-out-with"></a>Kümenizin başlamak için gereken düğüm türlerinin sayısı
+İlk olarak, oluşturduğunuz kümenin ne için kullanılacağını belirlemeniz gerekir.  Bu kümeye dağıtmayı planladığınız uygulama türleri nelerdir? Kümenin amacına açık değilseniz, büyük olasılıkla kapasite planlama işlemini girmeye henüz hazırlamadınız.
 
-Düğüm türleri kümenizi ile başlatmak için gereken sayıda kurun.  Her düğüm türü, bir sanal makine ölçek kümesine eşlenir. Daha sonra, her düğüm türünün ölçeği birbirinden bağımsız olarak artırılabilir veya azaltılabilir, her düğüm türünde farklı bağlantı noktası kümeleri açık olabilir ve farklı kapasite ölçümleri yapılabilir. Bu nedenle düğüm türü sayısı kararı temelde aşağıdaki önemli noktalar için gelir:
+Kümenizin başlamak için gereken düğüm türü sayısını oluşturun.  Her düğüm türü bir sanal makine ölçek kümesi ile eşleştirilir. Daha sonra, her düğüm türünün ölçeği birbirinden bağımsız olarak artırılabilir veya azaltılabilir, her düğüm türünde farklı bağlantı noktası kümeleri açık olabilir ve farklı kapasite ölçümleri yapılabilir. Bu nedenle, düğüm türlerinin sayısı temel olarak aşağıdaki noktalara gelir:
 
-* Uygulamanızı birden çok hizmetlere sahip olmadığı ve herhangi biri genel veya internet'e yönelik olmam gerekir mi? Normal uygulama, istemciden gelen giriş alan bir ön uç ağ geçidi hizmeti ve iletişim kuran bir veya daha fazla arka uç Hizmetleri ile ön uç hizmetleri içerir. Bu nedenle bu durumda, en az iki düğüm türleri sonunda.
-* Farklı altyapı gereksinimleri gibi daha büyük RAM veya daha yüksek CPU çevrimleri (uygulamanızı ayarlama yapan) hizmetlerinizi var mı? Örneğin, dağıtmak istediğiniz uygulamanın ön uç hizmeti ve arka uç hizmeti içerdiğini bize varsayın. Ön uç hizmeti (örneğin, D2 VM boyutları) bağlantı noktalarının açık internet'e sahip daha küçük sanal makinelerinde çalıştırabilirsiniz.  Arka uç hizmeti, hesaplama yoğun ve internet olmayan daha büyük Vm'leri (D4, D6, D15 gibi VM boyutlarıyla) çalıştırma gerekiyor ancak yaşıyor.
+* Uygulamanızda birden fazla hizmet var mı ve bunların herkese açık veya internet 'e yönelik olması gerekiyor mu? Tipik uygulamalar, bir istemciden giriş ve ön uç hizmetleriyle iletişim kuran bir veya daha fazla arka uç hizmeti içeren bir ön uç ağ geçidi hizmeti içerir. Bu durumda, en az iki düğüm türüne sahip olursunuz.
+* Hizmetlerinizin (uygulamanızı oluşturan) daha büyük RAM veya daha yüksek CPU döngüleri gibi farklı altyapı gereksinimlerine sahip olması gerekir mi? Örneğin, dağıtmak istediğiniz uygulamanın bir ön uç hizmeti ve arka uç hizmeti içerdiğini varsayalım. Ön uç hizmeti, internet 'e açık bağlantı noktaları olan daha küçük VM 'lerde (D2 gibi VM boyutları) çalıştırılabilir.  Ancak arka uç hizmeti, hesaplama için yoğun ve internet 'e yönelik olmayan daha büyük VM 'lerde (D4, D6, D15 gibi VM boyutları ile) çalıştırılması gerekir.
   
-  Bir düğüm türünde, tüm hizmetleri koymak karar verebilirsiniz ancak bu örnekte, bunları bir kümede iki düğüm türleri ile yerleştirmenizi öneririz.  Bu, her düğüm türü, internet bağlantısı veya VM boyutu gibi farklı özelliklere sahip olmasını sağlar. VM sayısı ölçeklendirilebilir bağımsız olarak da.  
-* Geleceği tahmin etmeyi çünkü bildiğiniz bilgileri gidin ve uygulamalarınız ile başlaması gereken düğüm türleri sayısını seçin. Her zaman ekleyebilir veya daha sonra düğüm türlerini kaldırın. Service Fabric kümesi en az bir düğüm türü olmalıdır.
+  Bu örnekte, tüm hizmetleri tek bir düğüm türüne koymaya karar verseniz de, bunları iki düğüm türüne sahip bir kümeye yerleştirmeniz önerilir.  Bu, her düğüm türünün internet bağlantısı veya VM boyutu gibi farklı özelliklere sahip olmasına olanak sağlar. VM 'lerin sayısı bağımsız olarak ölçeklendirilebilir.  
+* Gelecekte tahmin edemediğinizde, bildiğiniz olgularla ilerleyin ve uygulamalarınızın başlaması gereken düğüm türü sayısını seçin. Düğüm türlerini dilediğiniz zaman daha sonra ekleyebilir veya kaldırabilirsiniz. Service Fabric kümesi en az bir düğüm türüne sahip olmalıdır.
 
 ## <a name="the-properties-of-each-node-type"></a>Her düğüm türünün özellikleri
-**Düğüm türü** bulut hizmetlerindeki roller gibi çalışır görülebilir. Düğüm türleri VM boyutlarını, VM'lerin sayısını ve bunların özelliklerini tanımlayın. Bir Service Fabric kümesinde tanımlanan her düğüm türü eşlenen bir [sanal makine ölçek kümesi](https://docs.microsoft.com/azure/virtual-machine-scale-sets/overview).  
-Her düğüm türü ayrı bir ölçek kümesi ölçeklendirilebilir veya Aşağı bağımsız olarak, farklı bağlantı noktası kümeleri açık olan ve farklı kapasite ölçümleri yapılabilir ' dir. Düğüm türleri ve sanal makine ölçek kümeleri arasındaki ilişkiler hakkında daha fazla bilgi için nasıl örneklerinden birinde RDP için yeni Aç bağlantı noktaları ve benzeri bkz [Service Fabric küme düğümü türlerini](service-fabric-cluster-nodetypes.md).
+**Düğüm türü** Cloud Services rollerle eşdeğer olarak görülebilir. Düğüm türleri, VM boyutlarını, VM sayısını ve bunların özelliklerini tanımlar. Bir Service Fabric kümesinde tanımlanan her düğüm türü, bir [sanal makine ölçek kümesi](https://docs.microsoft.com/azure/virtual-machine-scale-sets/overview)ile eşlenir.  
+Her düğüm türü ayrı bir ölçek kümesidir ve bağımsız olarak yukarı veya aşağı ölçeklendirilebilir, farklı bağlantı noktası kümelerine sahip olabilir ve farklı kapasite ölçümlerine sahip olabilir. Düğüm türleri ve sanal makine ölçek kümeleri arasındaki ilişkiler hakkında daha fazla bilgi için, örneklerden birine RDP ekleyin, yeni bağlantı noktalarını açma ve benzeri, bkz. [küme düğümü türleri Service Fabric](service-fabric-cluster-nodetypes.md).
 
-Service Fabric kümesi birden fazla düğüm türü oluşabilir. Bu olay tek bir birincil düğüm türü küme oluşur ve bir veya daha fazla birincil olmayan düğüm türleri.
+Service Fabric kümesi, birden fazla düğüm türünden oluşabilir. Bu olayda, küme bir birincil düğüm türünden ve bir veya daha fazla birincil olmayan düğüm türünden oluşur.
 
-Tek bir düğüm türü, sanal makine ölçek kümesi SF uygulamalar için başına 100 düğüm ötesinde güvenilir bir şekilde ölçeklendirilemez; güvenilir bir şekilde 100 düğüm büyük gerçekleştirmekten, ek sanal makine ölçek kümeleri eklemenizi gerektirir.
+Tek düğümlü bir tür, SF uygulamaları için sanal makine ölçek kümesi başına 100 düğümden daha güvenli bir şekilde ölçeklendirilemez; 100 düğümden daha güvenilir bir şekilde elde etmek, ek sanal makine ölçek kümeleri eklemenizi gerektirir.
 
 ### <a name="primary-node-type"></a>Birincil düğüm türü
 
-Service Fabric sistem hizmetlerinin (örneğin, Küme Yöneticisi hizmeti veya görüntü Store hizmet) birincil düğüm türünde yerleştirilir. 
+Service Fabric sistem hizmetleri (örneğin, Küme Yöneticisi hizmeti veya Görüntü Deposu hizmeti), birincil düğüm türüne yerleştirilir. 
 
-![İki düğüm türleri olan bir kümenin ekran görüntüsü][SystemServices]
+![İki düğüm türüne sahip bir kümenin ekran görüntüsü][SystemServices]
 
-* **VM boyutu için alt** için birincil düğüm türü tarafından belirlenir **dayanıklılık katmanı** belirleyin. Varsayılan dayanıklılık katmanı Bronz gösterir. Bkz: [kümenin dayanıklılık özelliklerini](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster) daha fazla ayrıntı için.  
-* **En düşük VM sayısı** için birincil düğüm türü tarafından belirlenir **güvenilirlik katmanını** belirleyin. Varsayılan güvenilirlik katmanını Silver ' dir. Bkz: [güvenilirliği kümenin](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-reliability-characteristics-of-the-cluster) daha fazla ayrıntı için.  
+* Birincil düğüm türü için **En düşük sanal makine boyutu** , seçtiğiniz **dayanıklılık katmanına** göre belirlenir. Varsayılan dayanıklılık katmanı bronz. Daha fazla ayrıntı için [kümenin dayanıklılık özelliklerine](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster) bakın.  
+* Birincil düğüm türü için **en az sanal makine sayısı** , seçtiğiniz **güvenilirlik katmanına** göre belirlenir. Varsayılan güvenilirlik katmanı gümüş olur. Daha fazla ayrıntı için [kümenin güvenilirlik özelliklerine](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-reliability-characteristics-of-the-cluster) bakın.  
 
-Azure Resource Manager şablonundan birincil düğüm türü ile yapılandırılmış `isPrimary` altında özniteliği [düğüm türü tanımı](https://docs.microsoft.com/azure/templates/microsoft.servicefabric/clusters#nodetypedescription-object).
+Azure Resource Manager şablondan, birincil düğüm türü, [düğüm türü tanımı](https://docs.microsoft.com/azure/templates/microsoft.servicefabric/clusters#nodetypedescription-object)altında `isPrimary` özniteliğiyle yapılandırılır.
 
-### <a name="non-primary-node-type"></a>Olmayan birincil düğüm türü
+### <a name="non-primary-node-type"></a>Birincil olmayan düğüm türü
 
-Birden çok düğüm türü ile bir kümede, rest, birincil olmayan ve bir birincil düğüm türü yoktur.
+Birden çok düğüm türüne sahip bir kümede, bir birincil düğüm türü vardır ve geri kalan birincil olmayan bir kümedir.
 
-* **VM boyutu için alt** için birincil olmayan düğüm türleri tarafından belirlenir **dayanıklılık katmanı** belirleyin. Varsayılan dayanıklılık katmanı Bronz gösterir. Daha fazla bilgi için [kümenin dayanıklılık özelliklerini](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster).  
-* **En düşük VM sayısı** birincil olmayan düğüm türlerinde biridir. Ancak, bu düğüm türü çalıştırmak istediğiniz uygulama/hizmetleri çoğaltmasına göre bu sayı seçmeniz gerekir. Küme dağıttıktan sonra bir düğüm türünde VM sayısı artırılabilir.
+* Birincil olmayan düğüm türleri için **En düşük VM boyutu** , seçtiğiniz **dayanıklılık katmanına** göre belirlenir. Varsayılan dayanıklılık katmanı bronz. Daha fazla bilgi için, [kümenin dayanıklılık özelliklerine](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster)bakın.  
+* Birincil olmayan düğüm türleri için **En düşük VM sayısı** bir. Ancak bu numarayı, bu düğüm türünde çalıştırmak istediğiniz uygulama/hizmetlerin çoğaltmaları sayısına göre seçmeniz gerekir. Bir düğüm türündeki sanal makine sayısı, kümeyi dağıttıktan sonra artırılabilir.
 
 ## <a name="the-durability-characteristics-of-the-cluster"></a>Kümenin dayanıklılık özellikleri
-Dayanıklılık katmanı, sanal makinelerinizin temel Azure altyapısıyla sahip ayrıcalıkları sisteme belirtmek için kullanılır. Birincil düğüm türü, sistem hizmetleri ve durum bilgisi olan hizmetlerinizin çekirdek gereksinimleri etkileyen tüm VM düzeyi altyapı istek (örneğin, bir VM yeniden başlatma, VM yeniden görüntü oluşturma ya da VM geçişi) duraklatmak Service Fabric bu ayrıcalığı sağlar. Birincil olmayan düğüm türleri bu ayrıcalık, durum bilgisi olan hizmetler için çekirdek gereksinimleri etkileyen tüm VM düzeyi altyapı istekler (örneğin, VM yeniden başlatma, VM yeniden görüntü oluşturma ve VM geçişi) duraklatmak Service Fabric verir.
+Dayanıklılık katmanı, sistem sanal makinelerinizin temel alınan Azure altyapısıyla sahip olduğu ayrıcalıkları göstermek için kullanılır. Bu ayrıcalık, birincil düğüm türünde, sistem hizmetleri ve durum bilgisi olan hizmetleriniz için çekirdek gereksinimlerini etkileyen tüm VM düzeyi altyapı isteklerini (VM yeniden başlatma, VM yeniden görüntüsü veya VM geçişi gibi) duraklatmaya olanak Service Fabric tanır. Birincil olmayan düğüm türlerinde, bu ayrıcalık, durum bilgisi olan hizmetlerinizin çekirdek gereksinimlerini etkileyen tüm VM düzeyi altyapı isteklerini (VM yeniden başlatma, VM yeniden görüntüsü ve VM geçişi gibi) duraklatmaya Service Fabric olanak tanır.
 
-| Dayanıklılık katmanı  | Gerekli en düşük VM sayısı | Desteklenen VM SKU'ları                                                                  | Sanal makine ölçek kümenize yaptığınız güncelleştirmeler                               | Güncelleştirmeleri ve Azure tarafından başlatılan bakım                                                              | 
+| Dayanıklılık katmanı  | Gerekli en az sayıda VM | Desteklenen VM SKU 'Ları                                                                  | Sanal makine ölçek kümesinde yaptığınız güncelleştirmeler                               | Azure tarafından başlatılan güncelleştirmeler ve bakım                                                              | 
 | ---------------- |  ----------------------------  | ---------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Altın             | 5                              | Tek bir müşteriye (örneğin, L32s GS5, G5, DS15_v2, D15_v2) ayrılmış tam düğümlü SKU'ları | Service Fabric kümesi tarafından onaylanmış kadar ertelendi | Önceki hatalardan kurtarmak çoğaltmaları için ek süre vermek amacıyla UD başına 2 saat için duraklatıldı |
-| Gümüş           | 5                              | Sanal makineleri tek çekirdekli veya üzeri                                                        | Service Fabric kümesi tarafından onaylanmış kadar ertelendi | Önemli bir süre boyunca Gecikmeli                                                    |
-| Bronz           | 1                              | Tümü                                                                                | Service Fabric kümesi tarafından Gecikmeli değil           | Önemli bir süre boyunca Gecikmeli                                                    |
+| Gold             | 5                              | Tek bir müşteriye adanmış tam düğümlü SKU 'Lar (örneğin, L32s, GS5, G5, DS15_v2, D15_v2) | Service Fabric kümesi tarafından onaylanana kadar ertelenebilir | Çoğaltmaların daha önceki hatalardan kurtarılmasına imkan tanımak için UD başına 2 saat boyunca duraklatılabilir |
+| Silver           | 5                              | En az 50 GB yerel SSD ile tek çekirdekli veya yukarıdaki VM 'Ler                      | Service Fabric kümesi tarafından onaylanana kadar ertelenebilir | Herhangi bir önemli süre geciktirelemez                                                    |
+| Bronz           | 1                              | En az 50 GB yerel SSD içeren VM 'Ler                                              | Service Fabric kümesi tarafından gecikmeyecek           | Herhangi bir önemli süre geciktirelemez                                                    |
 
 > [!WARNING]
-> Çalışan Bronz dayanıklılığa sahip düğüm türleri elde _ayrıcalıkların olmadığı_. Bu durum bilgisiz iş yüklerinizi etkileyen altyapı işler değil durduruldu veya kaldırılacak geciktirilmiş, hangi iş yüklerinizi etkileyebilecek anlamına gelir. Yalnızca Bronz yalnızca durum bilgisiz iş yükleri çalıştıran düğümü türleri için kullanın. Üretim iş yükleri çalıştıran Silver veya yukarıda önerilir. 
+> Bronz dayanıklılık ile çalışan düğüm türleri _hiçbir ayrıcalık_alamadı. Bu, durum bilgisi olan iş yüklerinizi etkileyen altyapı işlerinin durdurulmayacağı veya gecikmeyeceği anlamına gelir ve bu da iş yüklerinizi etkileyebilir. Yalnızca durum bilgisiz iş yüklerini çalıştıran düğüm türleri için bronz kullanın. Üretim iş yükleri için gümüş veya üzeri çalıştırmanın kullanılması önerilir. 
 > 
-> Herhangi bir dayanıklılık düzeyi ne olursa olsun [ayırmayı kaldırma](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/deallocate) VM ölçek kümesi üzerinde işlem kümesi yok eder
+> Dayanıklılık düzeyinden bağımsız olarak, VM Ölçek kümesindeki [ayırmayı kaldırma](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/deallocate) işlemi kümeyi yok eder
 
-**Silver veya Gold dayanıklılık düzeyleri kullanmanın avantajları**
+**Gümüş veya altın dayanıklılık düzeylerini kullanmanın avantajları**
  
-- Bir ölçeklendirme işlemi gereken adım sayısını azaltır (diğer bir deyişle, düğümü devre dışı bırakma ve kaldırma ServiceFabricNodeState çağırıldı otomatik olarak).
-- Bir müşteri tarafından başlatılan yerinde VM SKU değiştirme işlemi ya da Azure altyapı işlemler nedeniyle veri kaybı riskini azaltır.
+- Bir ölçeklendirme işleminde gerekli adımların sayısını azaltır (yani, Node devre dışı bırakma ve Remove-ServiceFabricNodeState otomatik olarak çağrılır).
+- Müşteri tarafından başlatılan yerinde VM SKU değişiklik işlemi veya Azure altyapı işlemleri nedeniyle veri kaybı riskini azaltır.
 
-**Silver veya Gold dayanıklılık düzeyleri kullanmanın dezavantajları**
+**Gümüş veya altın dayanıklılık düzeylerini kullanmanın dezavantajları**
  
-- Dağıtımlar, sanal makine ölçek kümesi ve diğer ilgili Azure kaynaklarını Gecikmeli, zaman aşımına uğrayabilir veya tamamen sorunları, kümenizdeki veya altyapı düzeyinde tarafından engellendi. 
-- Sayısını artıran [çoğaltma yaşam döngüsü olaylarını](service-fabric-reliable-services-lifecycle.md) (örneğin, birincil takasları) nedeniyle Azure altyapı işlemleri sırasında düğüm deactivations otomatik.
-- Azure platformu yazılım güncelleştirme veya donanım bakım etkinlikleri gerçekleşen sırasında süreler için hizmet düğümlerinde alır. Bu etkinlikleri sırasında devre dışı bırakılması/devre dışı durumuna sahip düğümleri görebilirsiniz. Bu, kümenizin kapasitesi geçici olarak azaltır, ancak kullanılabilirlik kümesi veya uygulamaları etkilememesi gerekir.
+- Sanal makine ölçek kümenize ve diğer ilgili Azure kaynaklarına yapılan dağıtımlar geciktirilebilir, zaman aşımına uğrar veya kümenizde veya altyapı düzeyinde tamamen engellenebilir. 
+- Azure altyapı işlemleri sırasında otomatik düğüm etkinleştirmeleri nedeniyle [çoğaltma yaşam döngüsü olaylarının](service-fabric-reliable-services-lifecycle.md) (örneğin, birincil takas) sayısını artırır.
+- Azure platformu yazılım güncelleştirmeleri veya donanım bakım etkinlikleri gerçekleşirken, düğümleri hizmet dışı bir süre alır. Bu etkinlikler sırasında durumu devre dışı bırakma/devre dışı bırakılmış düğümleri görebilirsiniz. Bu, kümenizin kapasitesini geçici olarak azaltır, ancak kümenizin veya uygulamalarınızın kullanılabilirliğini etkilememelidir.
 
-### <a name="recommendations-for-when-to-use-silver-or-gold-durability-levels"></a>Silver veya Gold dayanıklılık düzeyleri kullanıldığı durumlar için öneriler
+### <a name="recommendations-for-when-to-use-silver-or-gold-durability-levels"></a>Gümüş veya altın dayanıklılık düzeylerinin ne zaman kullanılacağı ile ilgili öneriler
 
-Silver veya Gold dayanıklılık beklediğiniz ölçek için durum bilgisi olan hizmetler barındıran tüm düğüm türleri için kullanın (VM örneği sayısını azaltmak) sık sık ve dağıtım işlemlerini geciktirileceği tercih ediyorsanız ve bu ölçek açma basitleştirme yerine getirilmesini kapasite işlemler. (VM içeren örneklere ekleme) ölçek genişletme senaryoları dayanıklılık katmanı ettiğiniz yürütülmez, yalnızca ölçek de yapar.
+Düzenli olmayan hizmetleri barındıran tüm düğüm türleri için gümüş veya altın dayanıklılık kullanın (VM örneği sayısını azaltır), sık sık ve bu ölçek basitleştirilmesi için bu dağıtım işlemlerinin gecikilmesi ve kapasitesinin azaltılmasını tercih etmeniz önerilir operasyonları. Genişleme senaryoları (VM örnekleri ekleme), dayanıklılık katmanı seçiminize değil, yalnızca ölçeği Ölçeklendir.
 
 ### <a name="changing-durability-levels"></a>Dayanıklılık düzeylerini değiştirme
-- Silver veya Gold dayanıklılık düzeyine sahip düğüm türleri için Bronz düşürülemez.
-- Silver veya Gold Bronz ' yükseltme birkaç saat sürebilir.
-- Dayanıklılık düzeyini değiştirirken, hem Service Fabric uzantısı yapılandırmasında sanal makine ölçek kümesi kaynağınıza ve Service Fabric kümesi kaynağınızın düğüm türü tanımında güncelleştirdiğinizden emin olun. Bu değerlerin eşleşmesi gerekir.
+- Gümüş veya altın dayanıklılık düzeylerine sahip düğüm türleri bronz olarak düşürülemez.
+- Bronz veya altın güze 'a yükseltme birkaç saat sürebilir.
+- Dayanıklılık düzeyini değiştirirken, sanal makine ölçek kümesi kaynağınızın Service Fabric uzantısı yapılandırmasında ve Service Fabric küme kaynağınızın düğüm türü tanımında güncelleştirdiğinizden emin olun. Bu değerlerin eşleşmesi gerekir.
 
-### <a name="operational-recommendations-for-the-node-type-that-you-have-set-to-silver-or-gold-durability-level"></a>Düğümü için işletimsel önerileri için silver veya gold dayanıklılık düzeyi ayarlamak yazın.
+### <a name="operational-recommendations-for-the-node-type-that-you-have-set-to-silver-or-gold-durability-level"></a>Gümüş veya altın dayanıklılık düzeyine ayarladığınız düğüm türü için işletimsel öneriler.
 
-- Küme ve uygulamalar her zaman durumunun iyi kalmasını sağlamak ve uygulamalar için tüm yanıt emin [hizmet çoğaltması yaşam döngüsü olaylarını](service-fabric-reliable-services-lifecycle.md) (derleme çoğaltma takılmış gibi) zamanında.
-- Değiştirme (Ölçek artırma/azaltma) bir sanal makine SKU'su yapmak için daha güvenli şekilde benimseme: Bir sanal makine ölçek kümesi sanal makine SKU'su değiştirme, doğası gereği güvenli olmayan bir işlemdir ve bu nedenle, mümkünse kaçınılmalıdır. Sık karşılaşılan sorunları önlemek için izlemeniz gereken süreç şöyledir.
-    - **Birincil olmayan düğüm türleri için:** Önerilen yeni sanal makine ölçek kümesi oluşturma, yeni sanal makine ölçek kümesi/düğüm türü eklemek ve ardından sıfır olarak teker teker (Bunu yapmak için olan bir düğümü eski sanal makine ölçek kümesi örnek sayısını azaltmak için hizmet yerleştirme kısıtlamasını değiştirme emin düğümlerin kaldırılması kümenin güvenilirlik etkilemez).
-    - **Birincil düğüm türü:** Birincil düğüm türündeki sanal makine SKU'su değiştirmeyin bizim önerilir. Birincil düğüm türü SKU desteklenmiyor değiştiriliyor. Kapasite yeni SKU sebebi, daha fazla örnek eklenmesi önerilir. Bu mümkün değil, yeni küme oluşturma ve [uygulama durumunu geri yükle](service-fabric-reliable-services-backup-restore.md) (varsa) eski kümenizden. Herhangi bir sistem hizmet durumunu geri yüklemek gerekmez, uygulamalarınızı yeni kümenize dağıttığınızda oluşturulur. Durum bilgisiz uygulamaların kümeniz üzerinde çalıştırıyorsanız, uygulamalarınızı yeni kümeye dağıtın.  Geri yüklemek için hiçbir şey vardır. Desteklenmeyen bir rotayı ve sanal makine SKU'su değiştirmek istediğiniz karar verirseniz, ardından belgelenir sanal makine ölçek kümesi yeni SKU yansıtacak şekilde Model tanımı. Kümenizi yalnızca bir düğüm türü varsa, daha sonra durum bilgisi olan tüm uygulamalarınızı tüm yanıt emin olun [hizmet çoğaltması yaşam döngüsü olaylarını](service-fabric-reliable-services-lifecycle.md) vakitli ve hizmet çoğaltma yeniden (yapı içinde çoğaltma takılmış gibi) beş dakikadan kısa bir süre (Gümüş dayanıklılık düzeyi için) süresidir. 
-    
-- En az bir etkin Silver veya Gold dayanıklılık düzeyine sahip tüm sanal makine ölçek kümesi için beş düğüm sayısı korur.
-- Silver veya Gold dayanıklılık düzeyi ile her sanal makine ölçek, Service Fabric kümesi içinde kendi düğüm türüne eşlemeniz gerekir. Birden çok sanal makine ölçek kümeleri, tek bir düğüm türü için eşleme, Service Fabric kümesi ve Azure altyapı arasında koordinasyon gereksinimini olabildiğince düzgün çalışmasını engeller.
-- Rastgele VM örneklerini silmek değil, her zaman sanal makine ölçek kümesi ölçek özelliği aşağı kullanın. Rastgele VM örneklerinin silme işlemi, UD ve FD üzerinden yayılan VM örneğinde dengede değil oluşturma bir olasılığına sahiptir. Bu dengesizliği sistemleri düzgün bir şekilde Yük Dengeleme Hizmeti hizmeti örnekleri çoğaltmaları arasından olanağı olumsuz yönde etkileyebilir.
-- (VM örneklerini kaldırarak) içinde ölçeklendirme yapılır yalnızca bir düğümün aynı anda otomatik ölçeklendirme kullanırken, ardından kuralları ayarlayın. Aynı anda birden fazla örneğini ölçeklendirme güvenli değildir.
-- Silme veya birincil düğüm türünde VM serbest bırakılıyor, hiçbir zaman ne güvenilirlik katmanını gerektirir aşağıda ayrılmış VM sayısı azaltmanız gerekir. Bu işlemler, bir ölçek kümesindeki bir dayanıklılık düzeyi Silver veya Gold ile süresiz olarak engellenir.
+- Kümenizi ve uygulamalarınızı her zaman sağlıklı tutun ve uygulamaların tüm [hizmet çoğaltması yaşam döngüsü olaylarına](service-fabric-reliable-services-lifecycle.md) (derleme içindeki çoğaltma gibi) zamanında yanıt vermesini sağlayın.
+- VM SKU değişikliği yapmak için daha güvenli yollar benimseyin (ölçeği artırma/azaltma): bir sanal makine ölçek kümesinin VM SKU 'sunu değiştirmek için birkaç adım ve dikkat edilmesi gerekir. Yaygın sorunlardan kaçınmak için izleyebileceğiniz süreç aşağıda verilmiştir.
+    - **Birincil olmayan düğüm türleri için:** Yeni sanal makine ölçek kümesi oluşturmanız önerilir, hizmet yerleştirme kısıtlamasını yeni sanal makine ölçek kümesi/düğüm türünü içerecek şekilde değiştirin ve ardından eski sanal makine ölçek kümesi örnek sayısını sıfıra, her seferinde bir düğüm olacak şekilde azaltabilirsiniz (Bunun yapılması gerekir düğümlerin kaldırılması kümenin güvenilirliğini etkilemediğinden emin olun).
+    - **Birincil düğüm türü için:** Seçtiğiniz VM SKU 'SU kapasitese ve daha büyük bir VM SKU 'SU olarak değiştirmek istiyorsanız, [birincil düğüm türü için dikey ölçeklendirmeyle](https://docs.microsoft.com/azure/service-fabric/service-fabric-scale-up-node-type)ilgili kılavuzumuzu izleyin. 
+
+- Dayanıklılık düzeyi Gold veya gümüş etkin olan herhangi bir sanal makine ölçek kümesi için en az beş düğüm sayısını koruyun.
+- Dayanıklılık düzeyi gümüş veya altın sahip her sanal makine ölçek kümesi, Service Fabric kümesinde kendi düğüm türüne eşlenmelidir. Birden çok sanal makine ölçek kümesini tek bir düğüm türüyle eşlemek, Service Fabric kümesi ile Azure altyapısının düzgün çalışmasını engeller.
+- Rastgele VM örneklerini silmeyin, her zaman sanal makine ölçek kümesi ölçek azaltma özelliğini kullanın. Rastgele sanal makine örneklerinin silinmesi, sanal makine örneğinde UD ve FD içinde yer aldığı bir dengesbakiyinin oluşturulmasına bir potansiyeline sahiptir. Bu dengesizliği, sistem hizmet örnekleri/hizmet çoğaltmaları arasında doğru şekilde yük dengelemesi yapabilme yeteneğini olumsuz etkileyebilir.
+- Otomatik ölçeklendirme kullanıyorsanız, içindeki ölçek (sanal makine örneklerinin kaldırılması) gibi kuralları tek seferde yalnızca bir düğüm olarak ayarlayın. Aynı anda birden fazla örneğin ölçeğini azaltma güvenli değildir.
+- Birincil düğüm türünde VM 'Leri silmek veya ayırmayı geri alıyorsa, güvenilirlik katmanının gerektirdiği ayrılmış VM 'lerin sayısını asla azaltmalısınız. Bu işlemler, bir ölçek kümesinde sonsuz veya altın bir dayanıklılık düzeyine kadar süresiz olarak engellenir.
 
 ## <a name="the-reliability-characteristics-of-the-cluster"></a>Kümenin güvenilirlik özellikleri
-Güvenilirlik katmanı çoğaltmaları birincil düğüm türünde bu kümede çalıştırmak istediğiniz sistem hizmetlerinin sayısını ayarlamak için kullanılır. Daha fazla sayıda yineleme, daha güvenilir, kümenizin sistem hizmetleri şunlardır.  
+Güvenilirlik katmanı, birincil düğüm türünde bu kümede çalıştırmak istediğiniz sistem hizmetlerinin çoğaltmaları sayısını ayarlamak için kullanılır. Kopyaların ne kadar fazla olması durumunda, sistem hizmetleri kümenizde daha güvenilir.  
 
-Güvenilirlik katmanı, şu değerleri alabilir:
+Güvenilirlik katmanı aşağıdaki değerleri alabilir:
 
-* Platinum - sistem hizmetlerini çalıştıran bir hedef çoğaltma yedi sayısını ayarlayın.
-* Altın - sistem hizmetlerini çalıştıran bir hedef çoğaltma yedi sayısını ayarlayın.
-* Silver - sistem hizmetlerini çalıştıran bir hedef çoğaltma beş sayısını ayarlayın. 
-* Bronz - sistem hizmetlerini çalıştıran bir hedef çoğaltma üç ayarlayın.
+* Platin bir hedef çoğaltma kümesi sayısı dokuz olan sistem hizmetlerini çalıştırın
+* Gold-sistem hizmetlerini bir hedef çoğaltma kümesi sayısı yedi ile çalıştırın
+* Gümüş-sistem hizmetlerini, hedef çoğaltma kümesi sayısı beş ile çalıştırın 
+* Bronz-sistem hizmetlerini bir hedef çoğaltma kümesi sayısını üç ile çalıştırın
 
 > [!NOTE]
-> Seçtiğiniz güvenilirlik katmanını birincil düğüm türünüz olmalıdır düğüm sayısı alt sınırı belirler. 
+> Seçtiğiniz güvenilirlik katmanı, birincil düğüm türünde olması gereken en az düğüm sayısını belirler. 
 > 
 > 
 
 ### <a name="recommendations-for-the-reliability-tier"></a>Güvenilirlik katmanı için öneriler
 
-Artırır veya azaltırsanız, küme (tüm düğüm türleri VM örnekleri toplamı), kümenizin bir katmandan diğerine güvenilirlik güncelleştirmeniz gerekir. Bunun yapılması, Sistem Hizmetleri çoğaltma değiştirmek için sayınızın Küme yükseltme tetikler. Kümeye düğüm ekleme gibi diğer herhangi bir değişiklik yapmadan önce tamamlamak için devam eden yükseltme için bekleyin.  Service Fabric Explorer veya çalıştırarak yükseltmesinin ilerleme durumunu izleyebilirsiniz [Get-ServiceFabricClusterUpgrade](/powershell/module/servicefabric/get-servicefabricclusterupgrade?view=azureservicefabricps)
+Kümenizin boyutunu (tüm düğüm türlerindeki sanal makine örneklerinin toplamı) artırdığınızda veya azaltırsanız, kümenizin bir katmandan diğerine güvenilirliğini güncelleştirmeniz gerekir. Bunun yapılması, Sistem Hizmetleri çoğaltma kümesi sayısını değiştirmek için gereken küme yükseltmelerini tetikler. Kümede düğüm ekleme gibi başka herhangi bir değişiklik yapmadan önce yükseltme işleminin tamamlanmasını bekleyin.  Service Fabric Explorer veya [Get-ServiceFabricClusterUpgrade](/powershell/module/servicefabric/get-servicefabricclusterupgrade?view=azureservicefabricps) komutunu çalıştırarak yükseltmenin ilerlemesini izleyebilirsiniz
 
-Güvenilirlik katmanı seçme öneri aşağıdadır.  Çekirdek düğüm sayısı da düğümleri güvenilirlik katmanı için en düşük sayısına ayarlayın.  Örneğin, altın güvenilirliğe sahip bir küme için 7 çekirdek düğümleri yoktur.
+Güvenilirlik katmanını seçme önerisi aşağıda verilmiştir.  Çekirdek düğümlerin sayısı, bir güvenilirlik katmanı için en düşük düğüm sayısına de ayarlanır.  Örneğin, altın güvenilirliğe sahip bir küme için 7 çekirdek düğümü vardır.
 
-| **Küme düğümleri sayısı** | **Güvenilirlik katmanı** |
+| **Küme düğümlerinin sayısı** | **Güvenilirlik katmanı** |
 | --- | --- |
-| 1 |Güvenilirlik katmanı parametreyi belirtmezseniz, sistem hesaplar |
+| 1 |Güvenilirlik katmanı parametresini belirtmeyin, sistem bunu hesaplar |
 | 3 |Bronz |
-| 5 veya 6|Gümüş |
-| 7 veya 8 |Altın |
-| 9 ve üstü |Platinum |
+| 5 veya 6|Silver |
+| 7 veya 8 |Gold |
+| 9 ve yukarı |PLA |
 
-## <a name="primary-node-type---capacity-guidance"></a>Birincil düğüm türü - Kapasite Kılavuzu
+## <a name="primary-node-type---capacity-guidance"></a>Birincil düğüm türü-kapasite Kılavuzu
 
-Birincil düğüm türü kapasite planlama Kılavuzu şu şekildedir:
+Birincil düğüm türü kapasitesini planlamaya yönelik rehberlik aşağıda verilmiştir:
 
-- **Tüm üretim iş yüklerini Azure'da çalıştırmak için sanal makine örneği sayısı:** Birincil düğüm türü boyutu için alt 5 ve bir güvenilirlik katmanını, Gümüş belirtmeniz gerekir.  
-- **Test iş yüklerini Azure'da çalıştırmak için sanal makine örneği sayısını** 1 veya 3 en düşük birincil düğüm türü boyutu belirtebilirsiniz. Bir düğüm kümesi çalıştıran özel bir yapılandırma ve bu nedenle, bu küme olarak ölçeklendirilmesini desteklenmiyor. Tek düğümlü bir küme, güvenilirlik ve bu nedenle Resource Manager şablonunuzu, sahip olduğunuz Kaldır/değil söz konusu yapılandırmayı belirtmek (yapılandırma değeri ayarı yok değil yeterli). Portal ayarlanan bir düğüm kümesi ayarlama, daha sonra yapılandırma otomatik olarak dikkate. Bir ile üç düğümlü kümeler, üretim iş yüklerini çalıştırmak için desteklenmez. 
-- **SANAL MAKİNE SKU'SU:** Bunun için genel yoğun dikkate al, yüklemelisiniz seçtiğiniz sanal makine SKU'su planı kümesine yerleştirmek birincil düğüm türü Sistem Hizmetleri çalıştırdığı olduğundan. Ne burada bilmem göstermek-birincil düğüm türü, "Lungs", oxygen, beyin için sağlanan korumanın olduğunu düşündüğünüz bir benzerliği işte ve beyin yeterli oxygen almazsa, bu nedenle, gövde alternatife. 
+- **Azure 'da herhangi bir üretim iş yükünü çalıştırmak için sanal makine örneği sayısı:** Minimum birincil düğüm türü boyutu olarak 5 ve bir gümüş güvenilirlik katmanı belirtmeniz gerekir.  
+- **Azure 'da test iş yüklerini çalıştırmak için sanal makine örneği sayısı** En az 1 veya 3 olan bir birincil düğüm türü boyutu belirtebilirsiniz. Tek düğümlü küme, özel bir yapılandırmayla çalışır ve bu nedenle, bu kümeden ölçek genişletme desteklenmez. Bir düğüm kümesinin güvenilirliği yoktur ve bu nedenle Kaynak Yöneticisi şablonunuzda, bu yapılandırmanın (yapılandırma değerini Ayarlamasız) kaldırılması/belirtmemesi gerekir. Portal üzerinden ayarlanmış bir düğüm kümesi ayarlarsanız, yapılandırma otomatik olarak ele alınır. Üretim iş yüklerini çalıştırmak için bir ve üç düğüm kümesi desteklenmez. 
+- **VM SKU 'su:** Birincil düğüm türü, sistem hizmetlerinin çalıştığı yerdir. bu nedenle, seçtiğiniz VM SKU 'SU kümeye yerleştirmeyi planladığınız genel yükün dikkate alınmalıdır. Burada, "Dug 'ler" olarak birincil düğüm türünü düşündüklerini göstermek için bir benzerleme vurguladı, betiğinizi oxtagen sağlar ve bu nedenle, beciciizin yeterli sayıda oxyıg yoksa gövdeleriniz yeterlidir. 
 
-Küme kapasitesi gereksinimlerini belirlenir olduğundan, kümedeki çalıştırmayı planladığınız iş yüküne göre ancak İşte yardımcı olacak geniş kapsamlı Kılavuzu, belirli iş yükü için nitel Kılavuzu ile çalışmaya başlama sunamıyoruz
+Kümenin kapasite ihtiyaçları kümede çalıştırmayı planladığınız iş yüküne göre belirlendiğinden, size özel iş yükünüz için size nitel Kılavuzu sağlayamıyoruz, ancak size başlamanıza yardımcı olacak geniş bir kılavuz aşağıda verilmiştir
 
 Üretim iş yükleri için: 
 
-- Kümelerinize ayrılması önerilir ikincil NodeType uygulamanızı dağıtmak için birincil NodeType sistem hizmetleri ve yerleştirme kısıtlamaları kullanın.
-- Önerilen sanal makine SKU'su, standart D3 veya standart D3_V2 veya en az 14 GB'lık yerel SSD eşdeğerini değerdir.
-- En düşük desteklenen sanal makine SKU'su standart D1 veya standart D1_V2 ya da en az 14 GB'lık yerel SSD eşdeğerini kullanılır. 
-- 14 GB yerel SSD en düşük gereksinimdir. Bizim en az 50 GB önerilir. Özellikle Windows kapsayıcıları ne zaman çalışan, iş yükleriniz için daha büyük disklerin gereklidir. 
-- Kısmi çekirdek gibi standart A0 VM SKU'ları üretim iş yükleri için desteklenmiyor.
-- Standart A1 SKU, performans nedenleriyle üretim iş yükleri için desteklenmiyor.
-- Düşük öncelikli VM'ler desteklenmez.
+- Kümelerinizi birincil NodeType sistem hizmetlerine ayırmanız önerilir ve uygulamanızı ikincil NodeTypes 'a dağıtmak için yerleştirme kısıtlamalarını kullanın.
+- Önerilen VM SKU 'SU standart D2_V2 veya en az 50 GB yerel SSD ile eşdeğerdir.
+- Desteklenen minimum Use VM SKU 'SU Standard_D2_V3 veya standart D1_V2 ya da en az 50 GB yerel SSD ile eşdeğerdir. 
+- Önerimiz en az 50 GB 'dir. İş yükleriniz için özellikle Windows kapsayıcıları çalıştırırken daha büyük diskler gerekir. 
+- Standart a0 gibi kısmi çekirdek VM SKU 'Ları üretim iş yükleri için desteklenmez.
+- Bir seri VM SKU 'Ları, performans nedenleriyle üretim iş yükleri için desteklenmez.
+- Düşük öncelikli VM 'Ler desteklenmez.
 
 > [!WARNING]
-> Birincil düğüm üzerinde çalışan bir küme VM SKU boyutu değiştirme bir ölçeklendirme işlemi ve belirtilmiştir [sanal makine ölçek kümesi ölçeği genişletme](virtual-machine-scale-set-scale-node-type-scale-out.md) belgeleri.
+> Çalışan bir kümede birincil düğüm VM SKU 'SU boyutunu değiştirme, bir ölçeklendirme işlemidir ve [sanal makine ölçek kümesi ölçek](virtual-machine-scale-set-scale-node-type-scale-out.md) genişletme belgelerinde belgelenmiştir.
 
-## <a name="non-primary-node-type---capacity-guidance-for-stateful-workloads"></a>Olmayan birincil düğüm türü - durum bilgisi olan iş yükleri için kapasite Kılavuzu
+## <a name="non-primary-node-type---capacity-guidance-for-stateful-workloads"></a>Durum bilgisi olan iş yükleri için birincil olmayan düğüm türü-kapasite Kılavuzu
 
-Bu kılavuzu kullanarak Service fabric durum bilgisi olan iş yükleri için olan [güvenilir koleksiyonlar veya reliable Actors](service-fabric-choose-framework.md) birincil olmayan düğüm türü çalıştırmakta olduğunuz.
+Bu kılavuz, Service Fabric güvenilir koleksiyonlarını veya birincil olmayan düğüm türünde çalıştırdığınız [güvenilir aktörleri](service-fabric-choose-framework.md) kullanan durum bilgisi olan iş yükleri içindir.
 
-**Sanal makine örneği sayısını:** Durum bilgisi olan üretim iş yükleri için en az ve hedef çoğaltma sayısının 5 ile çalıştırmanızı önerilir. Bu, kararlı durumda, her hata etki alanı ve yükseltme etki alanında (çoğaltma kümesinden) çoğaltmasıyla düştüğünden emin anlamına gelir. Birincil düğüm türü için tüm güvenilirlik katmanını kavramı, sistem hizmetleri için bu ayarı belirtmek için bir yoldur. Bu nedenle aynı göz önünde bulundurarak, durum bilgisi olan hizmetler için geçerlidir.
+**Sanal makine örneği sayısı:** Durum bilgisi olan üretim iş yükleri için, en az ve hedef çoğaltma sayısı olan 5 ' i çalıştırmanız önerilir. Bu, düzenli bir durumda her hata etki alanındaki bir çoğaltma (bir çoğaltma kümesinden) ve etki alanı yükseltme ile sona erdirmek anlamına gelir. Birincil düğüm türü için tüm güvenilirlik katmanı kavramı, sistem hizmetleri için bu ayarı belirtmenin bir yoludur. Bu nedenle, durum bilgisi olan hizmetleriniz için de aynı dikkat geçerlidir.
 
-Bu nedenle, durum bilgisi olan iş yükleri içinde çalıştırıyorsanız, üretim iş yükleri için en az önerilen olmayan birincil düğüm türü boyutu 5 ise.
+Bu nedenle, üretim iş yükleri için, üzerinde durum bilgisi olan iş yükleri çalıştırıyorsanız, en az önerilen birincil olmayan düğüm türü boyutu 5 ' tir.
 
-**SANAL MAKİNE SKU'SU:** Sanal makine SKU'su, seçtiğiniz her bir düğümüne yerleştirmek için planlama yükü dikkate gerekir, böylece bu düğüm, uygulama hizmetleri çalıştığı, türüdür. Düğüm türü, kapasite ihtiyaçlarını, ancak İşte yardımcı olacak geniş kapsamlı Kılavuzu, belirli iş yükü için nitel Kılavuzu ile çalışmaya başlama sunamıyoruz için kümedeki çalıştırmayı planladığınız iş yüküne göre belirlenir
-
-Üretim iş yükleri için 
-
-- Önerilen sanal makine SKU'su, standart D3 veya standart D3_V2 veya en az 14 GB'lık yerel SSD eşdeğerini değerdir.
-- En düşük desteklenen sanal makine SKU'su standart D1 veya standart D1_V2 ya da en az 14 GB'lık yerel SSD eşdeğerini kullanılır. 
-- Kısmi çekirdek gibi standart A0 VM SKU'ları üretim iş yükleri için desteklenmiyor.
-- Standart A1 SKU, performans nedenleriyle üretim iş yükleri için desteklenmiyor.
-
-## <a name="non-primary-node-type---capacity-guidance-for-stateless-workloads"></a>Olmayan birincil düğüm türü - durum bilgisiz iş yükleri için kapasite Kılavuzu
-
-Bu kılavuz, birincil olmayan düğüm türünde çalışan durum bilgisiz iş yükleri.
-
-**Sanal makine örneği sayısını:** Durum bilgisiz olduğundan üretim iş yükleri için en düşük desteklenen olmayan birincil düğüm türü boyutu 2'dir. Bu, uygulamanızı ve hizmetinizi vererek bir sanal makine örneği kaybı varlığını sürdürmesi için iki durum bilgisiz örneklerini çalıştırmanıza olanak sağlar. 
-
-**SANAL MAKİNE SKU'SU:** Sanal makine SKU'su, seçtiğiniz her bir düğümüne yerleştirmek için planlama yükü dikkate gerekir, böylece bu düğüm, uygulama hizmetleri çalıştığı, türüdür. Düğüm türü Kapasite ihtiyaçlarını, kümede çalıştırmayı planladığınız iş yüküne göre belirlenir. Belirli iş yükünüz için nitel rehberlik sunamıyoruz.  Ancak, başlamanıza yardımcı olmak için geniş kılavuzunu aşağıdadır.
+**VM SKU 'su:** Bu, uygulama hizmetlerinizin çalıştığı düğüm türüdür, bu nedenle, seçtiğiniz VM SKU 'SU her bir düğüme yerleştirmeyi planladığınız en yüksek yükü hesaba almalıdır. Düğüm türünün kapasite ihtiyaçları, kümede çalıştırmayı planladığınız iş yüküne göre belirlenir, bu nedenle size özel iş yükünüz için size nitel Kılavuzu sağlamamız, ancak size başlamanıza yardımcı olacak geniş bir kılavuz aşağıda verilmiştir
 
 Üretim iş yükleri için 
 
-- Önerilen sanal makine SKU'su, standart D3 veya standart D3_V2 veya eşdeğer değerdir. 
-- En düşük desteklenen sanal makine SKU'su standart D1 veya standart D1_V2 veya eşdeğer kullanılır. 
-- Kısmi çekirdek gibi standart A0 VM SKU'ları üretim iş yükleri için desteklenmiyor.
-- Standart A1 SKU, performans nedenleriyle üretim iş yükleri için desteklenmiyor.
+- Önerilen VM SKU 'SU standart D2_V2 veya en az 50 GB yerel SSD ile eşdeğerdir.
+- Desteklenen minimum Use VM SKU 'SU Standard_D2_V3 veya standart D1_V2 ya da en az 50 GB yerel SSD ile eşdeğerdir. 
+- Standart a0 gibi kısmi çekirdek VM SKU 'Ları üretim iş yükleri için desteklenmez.
+- Bir seri VM SKU 'Ları, performans nedenleriyle üretim iş yükleri için desteklenmez.
+
+## <a name="non-primary-node-type---capacity-guidance-for-stateless-workloads"></a>Birincil olmayan düğüm türü-durum bilgisiz iş yükleri için kapasite Kılavuzu
+
+Birincil olmayan düğüm türünde çalıştırdığınız, durum bilgisiz Iş yüklerinin bu kılavuzu.
+
+**Sanal makine örneği sayısı:** Durum bilgisi olmayan üretim iş yükleri için, en düşük desteklenen birincil düğüm türü boyutu 2 ' dir. Bu, uygulamanızın iki durum bilgisi olmayan örneğini çalıştırmanızı ve hizmetinizin bir VM örneği kaybını sürdürmesine olanak tanır. 
+
+**VM SKU 'su:** Bu, uygulama hizmetlerinizin çalıştığı düğüm türüdür, bu nedenle, seçtiğiniz VM SKU 'SU her bir düğüme yerleştirmeyi planladığınız en yüksek yükü hesaba almalıdır. Düğüm türünün kapasite ihtiyaçları, kümede çalıştırmayı planladığınız iş yüküne göre belirlenir. Size özel iş yükünüz için size nitel Kılavuzu sağlayamıyoruz.  Ancak, başlamanıza yardımcı olacak kapsamlı bir kılavuz aşağıda verilmiştir.
+
+Üretim iş yükleri için 
+
+- Önerilen VM SKU 'SU standart D2_V2 veya eşdeğerdir. 
+- Desteklenen minimum Use VM SKU 'SU standart D1 veya standart D1_V2 veya eşdeğerdir. 
+- Standart a0 gibi kısmi çekirdek VM SKU 'Ları üretim iş yükleri için desteklenmez.
+- Bir seri VM SKU 'Ları, performans nedenleriyle üretim iş yükleri için desteklenmez.
 
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Son kapasite planlaması ve bir küme oluşturma sonra aşağıdaki okuyun:
+Kapasite planlamayı tamamladıktan ve bir küme ayarladıktan sonra aşağıdakileri okuyun:
 
 * [Service Fabric küme güvenliği](service-fabric-cluster-security.md)
-* [Service Fabric kümesini ölçekleme](service-fabric-cluster-scaling.md)
-* [Olağanüstü Durum Kurtarma planlaması](service-fabric-disaster-recovery.md)
-* [NodeType sanal makine ölçek ilişkisi](service-fabric-cluster-nodetypes.md)
+* [Service Fabric kümesi ölçeklendirme](service-fabric-cluster-scaling.md)
+* [Olağanüstü durum kurtarma planlaması](service-fabric-disaster-recovery.md)
+* [Nodetypes ile sanal makine ölçek kümesi arasındaki ilişki](service-fabric-cluster-nodetypes.md)
 
 <!--Image references-->
 [SystemServices]: ./media/service-fabric-cluster-capacity/SystemServices.png

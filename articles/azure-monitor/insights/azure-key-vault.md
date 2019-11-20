@@ -1,63 +1,57 @@
 ---
-title: Azure İzleyici'de Azure Key Vault çözümü | Microsoft Docs
-description: Azure anahtar kasası günlükleri gözden geçirmek için Azure İzleyici'de Azure Key Vault çözümünü kullanabilirsiniz.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: 5e25e6d6-dd20-4528-9820-6e2958a40dae
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici 'de çözüm Azure Key Vault | Microsoft Docs
+description: Azure Key Vault günlüklerini gözden geçirmek için Azure Izleyici 'de Azure Key Vault çözümünü kullanabilirsiniz.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 03/27/2019
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 481b643f2f7201a2a1745c7aef9ddd81883da020
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 03/27/2019
+ms.openlocfilehash: 8863280407de5d02b53a203b2b6385477aa9f8ae
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60498534"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899207"
 ---
-# <a name="azure-key-vault-analytics-solution-in-azure-monitor"></a>Azure İzleyici'de Azure Key Vault Analytics çözümü
+# <a name="azure-key-vault-analytics-solution-in-azure-monitor"></a>Azure Izleyici 'de Azure Key Vault Analytics çözümü
 
 ![Key Vault simgesi](media/azure-key-vault/key-vault-analytics-symbol.png)
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Azure Key Vault AuditEvent günlüklerini gözden geçirmek için Azure İzleyici'de Azure Key Vault çözümünü kullanabilirsiniz.
+Azure Key Vault AuditEvent günlüklerini gözden geçirmek için Azure Izleyici 'de Azure Key Vault çözümünü kullanabilirsiniz.
 
-Çözümü kullanmak için Azure anahtar kasası tanılama günlüğünü etkinleştirme ve Log Analytics çalışma alanına tanılama doğrudan gerekir. Günlükler Azure Blob depolama alanına yazmak gerekli değildir.
+Çözümü kullanmak için Azure Key Vault tanılamayı günlüğe kaydetmeyi etkinleştirmeniz ve tanılamayı bir Log Analytics çalışma alanına yönlendirmelidir. Günlükleri Azure Blob depolamaya yazmak gerekli değildir.
 
 > [!NOTE]
-> Ocak 2017'de, günlükleri Key Vault'tan Log Analytics'e gönderme desteklenen yönteminizi değiştirdik. Key Vault çözümü kullanıyorsanız gösterir *(kullanım dışı)* başlığında başvurmak [eski Key Vault çözümünden geçiş](#migrating-from-the-old-key-vault-solution) adımları izlemeniz gerekir.
+> 2017 Ocak 'ta, Key Vault günlüklerin Log Analytics değiştirme biçimi değiştirildi. Kullanmakta olduğunuz Key Vault çözümü başlığında *(kullanım dışı)* görünüyorsa, izlemeniz gereken adımlar için [eski Key Vault çözümünün geçişine](#migrating-from-the-old-key-vault-solution) bakın.
 >
 >
 
-## <a name="install-and-configure-the-solution"></a>Yükleme ve çözüm yapılandırma
-Yükleme ve Azure anahtar kasası çözümü yapılandırmak için aşağıdaki yönergeleri kullanın:
+## <a name="install-and-configure-the-solution"></a>Çözümü yükleyip yapılandırma
+Azure Key Vault çözümünü yüklemek ve yapılandırmak için aşağıdaki yönergeleri kullanın:
 
-1. Açıklanan işlemi kullanın [Azure İzleyici'yi ekleyin çözüm galeri'sinden](../../azure-monitor/insights/solutions.md) Azure Key Vault çözümü Log Analytics çalışma alanınıza eklemek için.
-2. Kullanarak izlemek, Key Vault kaynak için tanılama günlüğünü etkinleştirme [portalı](#enable-key-vault-diagnostics-in-the-portal) veya [PowerShell](#enable-key-vault-diagnostics-using-powershell)
+1. Azure Key Vault çözümünü Log Analytics çalışma alanınıza eklemek için [Çözüm Galerisi Azure izleyici çözümlerini ekleme](../../azure-monitor/insights/solutions.md) bölümünde açıklanan işlemi kullanın.
+2. [Portal](#enable-key-vault-diagnostics-in-the-portal) veya [PowerShell](#enable-key-vault-diagnostics-using-powershell) kullanarak izlemek üzere Key Vault kaynakları için tanılama günlüğünü etkinleştirme
 
-### <a name="enable-key-vault-diagnostics-in-the-portal"></a>Key Vault portalda tanılamayı etkinleştirin
+### <a name="enable-key-vault-diagnostics-in-the-portal"></a>Portalda Key Vault tanılamayı etkinleştirme
 
-1. Azure portalında, izlemek için Key Vault kaynağına gidin
-2. Seçin *tanılama ayarları* aşağıdaki sayfasını açmak için
+1. Azure portal izlemek için Key Vault kaynağına gidin
+2. *Tanılama ayarlarını* seçerek aşağıdaki sayfayı açın
 
-   ![Azure Key Vault kutucuk görüntüsü](media/azure-key-vault/log-analytics-keyvault-enable-diagnostics01.png)
-3. Tıklayın *tanılamayı Aç* aşağıdaki sayfasını açmak için
+   ![Azure Key Vault kutucuğu görüntüsü](media/azure-key-vault/log-analytics-keyvault-enable-diagnostics01.png)
+3. *Tanılamayı* aç ' a tıklayarak aşağıdaki sayfayı açın
 
-   ![Azure Key Vault kutucuk görüntüsü](media/azure-key-vault/log-analytics-keyvault-enable-diagnostics02.png)
-4. Tanılama ayarı için bir ad verin.
-5. Onay kutusunu tıklatın *Log Analytics'e gönderme*
-6. Mevcut bir Log Analytics çalışma alanını seçin veya bir çalışma alanı oluşturma
-7. Etkinleştirmek için *AuditEvent* günlükleri, günlük onay kutusunu tıklayın
-8. Tıklayın *Kaydet* Log Analytics çalışma alanı için tanılama günlüğünü etkinleştirme.
+   ![Azure Key Vault kutucuğu görüntüsü](media/azure-key-vault/log-analytics-keyvault-enable-diagnostics02.png)
+4. Tanılama ayarına bir ad verin.
+5. *Log Analytics gönder* onay kutusuna tıklayın
+6. Mevcut bir Log Analytics çalışma alanını seçin veya bir çalışma alanı oluşturun
+7. *Auditevent* günlüklerini etkinleştirmek Için, günlük altındaki onay kutusuna tıklayın.
+8. Tanılama 'nın Log Analytics çalışma alanına kaydedilmesini sağlamak için *Kaydet* ' e tıklayın.
 
 ### <a name="enable-key-vault-diagnostics-using-powershell"></a>PowerShell kullanarak Key Vault tanılamayı etkinleştirme
-Aşağıdaki PowerShell betiğini nasıl kullanılacağına ilişkin bir örnektir `Set-AzDiagnosticSetting` Key Vault için tanılama günlük kaydını etkinleştirmek için:
+Aşağıdaki PowerShell betiği, Key Vault için tanılama günlüğünü etkinleştirmek üzere `Set-AzDiagnosticSetting` nasıl kullanacağınızı gösteren bir örnek sağlar:
 ```
 $workspaceId = "/subscriptions/d2e37fee-1234-40b2-5678-0b2199de3b50/resourcegroups/oi-default-east-us/providers/microsoft.operationalinsights/workspaces/rollingbaskets"
 
@@ -68,89 +62,89 @@ Set-AzDiagnosticSetting -ResourceId $kv.ResourceId  -WorkspaceId $workspaceId -E
 
 
 
-## <a name="review-azure-key-vault-data-collection-details"></a>Azure Key Vault veri koleksiyonu ayrıntılarını gözden geçirin
-Azure Key Vault çözümü, doğrudan Key Vault'tan tanılama günlükleri toplar.
-Günlükler Azure Blob depolama alanına yazmak gerekli değildir ve hiçbir aracısı için veri koleksiyonu gereklidir.
+## <a name="review-azure-key-vault-data-collection-details"></a>Azure Key Vault veri toplama ayrıntılarını gözden geçirin
+Azure Key Vault çözüm tanılama günlüklerini doğrudan Key Vault toplar.
+Günlükleri Azure Blob depolama alanına yazmak gerekli değildir ve veri toplama için hiçbir aracı gerekmez.
 
-Veri toplama yöntemleri ve Azure anahtar kasası için verileri nasıl toplanır hakkında diğer ayrıntıları aşağıdaki tabloda gösterilmektedir.
+Aşağıdaki tabloda, verilerin Azure Key Vault için nasıl toplandığı hakkında veri toplama yöntemleri ve diğer ayrıntılar gösterilmektedir.
 
-| Platform | Doğrudan aracı | Systems Center Operations Manager Aracısı | Azure | Operations Manager gerekli? | Operations Manager aracısı veri yönetim grubu gönderilir. | Toplama sıklığı |
+| Platform | Doğrudan aracı | Systems Center Operations Manager Aracısı | Azure | Operations Manager gerekli mi? | Yönetim grubu aracılığıyla gönderilen aracı verileri Operations Manager | Toplama sıklığı |
 | --- | --- | --- | --- | --- | --- | --- |
-| Azure |  |  |&#8226; |  |  | geldiğinde |
+| Azure |  |  |&#8226; |  |  | varış noktasında |
 
 ## <a name="use-azure-key-vault"></a>Azure Key Vault kullanma
-Çalıştırdıktan sonra [çözümü yüklemek](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.KeyVaultAnalyticsOMS?tab=Overview), tıklayarak anahtar kasası verisinin **Key Vault Analytics** kutucuğunda Azure İzleyici'den **genel bakış** sayfası. Bu sayfadan açın **Azure İzleyici** tıklayarak menü **daha fazla** altında **Insights** bölümü. 
+[Çözümü yükledikten](https://azuremarketplace.microsoft.com/en-usrketplace/marketplace/apps/Microsoft.KeyVaultAnalyticsOMS?tab=Overview)sonra, Azure Izleyici **genel bakış** sayfasında **Key Vault Analytics** kutucuğuna tıklayarak Key Vault verileri görüntüleyin. **Öngörüler** bölümünün altında **daha fazla** ' ya tıklayarak bu sayfayı **Azure izleyici** menüsünden açın. 
 
-![Azure Key Vault kutucuk görüntüsü](media/azure-key-vault/log-analytics-keyvault-tile.png)
+![Azure Key Vault kutucuğu görüntüsü](media/azure-key-vault/log-analytics-keyvault-tile.png)
 
-Tıkladıktan sonra **Key Vault Analytics** kutucuğunda günlüklerinizi özetlerini görüntüleyin ve ardından aşağıdaki kategorilerde ayrıntıları için ayrıntılara girin:
+**Key Vault Analytics** kutucuğuna tıkladıktan sonra, günlüklerinizin özetlerini görüntüleyebilir ve ardından aşağıdaki kategorilerde Ayrıntılar için ayrıntıya gidebilirsiniz:
 
-* Tüm anahtar kasası işlemleri zaman birimi
-* İşlem birimleri, zaman içinde başarısız oldu
-* İşlem tarafından ortalama işlem gecikme süresi
-* 1000 MS'den fazla Süren işlemlerin sayısı ve 1000 MS'den fazla Süren işlemlerin bir listesi işlemler için hizmet kalitesi
+* Zaman içinde tüm Anahtar Kasası işlemlerinin hacmi
+* Zaman içinde başarısız işlem birimleri
+* İşleme göre ortalama işletimsel gecikme süresi
+* 1000 'den fazla alan işlem sayısı ve 1000 ms 'den fazla işlem yapan işlemler için hizmet kalitesi
 
 ![Azure Key Vault panosunun görüntüsü](media/azure-key-vault/log-analytics-keyvault01.png)
 
 ![Azure Key Vault panosunun görüntüsü](media/azure-key-vault/log-analytics-keyvault02.png)
 
-### <a name="to-view-details-for-any-operation"></a>Herhangi bir işlem ayrıntılarını görüntülemek için
-1. Üzerinde **genel bakış** sayfasında **Key Vault Analytics** Döşe.
-2. Üzerinde **Azure anahtar kasası** Pano, dikey pencereleri biriyle özet bilgilerini gözden geçirin ve bir günlük arama sayfasında ilgili ayrıntılı bilgileri görüntülemek için tıklayın.
+### <a name="to-view-details-for-any-operation"></a>Herhangi bir işlemin ayrıntılarını görüntülemek için
+1. **Genel bakış** sayfasında **Key Vault Analytics** kutucuğuna tıklayın.
+2. **Azure Key Vault** panosunda, dikey pencerelerden birindeki Özet bilgilerini gözden geçirin ve günlük araması sayfasında onunla ilgili ayrıntılı bilgileri görüntülemek için bir tane tıklatın.
 
-    Herhangi bir günlük arama sayfası üzerinde sonuç zaman, ayrıntılı sonuçlarını ve günlük arama geçmişinizi görüntüleyebilirsiniz. Ayrıca, sonuçları daraltmak için modelleri göre filtreleyebilirsiniz.
+    Günlük arama sayfalarında, sonuçları zamana, ayrıntılı sonuçlara ve günlük arama geçmişinize göre görüntüleyebilirsiniz. Ayrıca, sonuçları daraltmak için de modellerle filtre uygulayabilirsiniz.
 
-## <a name="azure-monitor-log-records"></a>Azure İzleyici kayıtlarını günlüğe kaydet
-Azure Key Vault çözümü bir tür olan kayıtları çözümler **KeyVaults** gelen toplanan [AuditEvent günlüklerini](../../key-vault/key-vault-logging.md) Azure tanılama.  Aşağıdaki tabloda bu kayıtları için özellikleri şunlardır:  
+## <a name="azure-monitor-log-records"></a>Azure Izleyici günlük kayıtları
+Azure Key Vault çözümü, Azure Tanılama içindeki [auditevent günlüklerinden](../../key-vault/key-vault-logging.md) toplanan bir tür **Anahtar Kasası** olan kayıtları analiz eder.  Bu kayıtların özellikleri aşağıdaki tabloda verilmiştir:  
 
-| Özellik | Description |
+| Özellik | Açıklama |
 |:--- |:--- |
-| Tür |*AzureDiagnostics* |
-| SourceSystem |*Azure* |
-| callerIpAddress |İsteği yapan istemcinin IP adresi |
-| Kategori | *AuditEvent* |
-| CorrelationId |İstemci tarafı günlüklerini hizmet tarafı (Anahtar Kasası) günlükleriyle ilişkilendirmek için istemcinin geçirebileceği isteğe bağlı bir GUID. |
-| süre (MS) |Milisaniye cinsinden REST API'si isteğini sunmak için geçen süre. İstemci tarafında ölçtüğünüz süre bu süreyle eşleşmeyebilir için bu kez ağ gecikmesini içermez. |
-| httpStatusCode_d |İstek tarafından döndürülen HTTP durum kodu (örneğin, *200*) |
-| id_s |İsteğin benzersiz kimliği |
-| identity_claim_appid_g | Uygulama kimliği GUID |
-| OperationName |Açıklandığı gibi işlem adı [Azure anahtar kasası günlüğü](../../key-vault/key-vault-logging.md) |
-| operationVersion |İstemci tarafından istenen REST API sürümü (örneğin *2015-06-01*) |
-| requestUri_s |İsteğin URI'si |
-| Resource |Anahtar kasasının adı |
-| ResourceGroup |Anahtar kasasının kaynak grubu |
-| ResourceId |Azure Resource Manager Kaynak Kimliği. Anahtar kasası günlükleri için bu anahtar kasası kaynak kimliğidir. |
-| ResourceProvider |*MICROSOFT.KEYVAULT* |
-| ResourceType | *KASALARI* |
-| resultSignature |HTTP durumu (örneğin, *Tamam*) |
-| ResultType |REST API'si isteğinin sonucunu (örneğin, *başarı*) |
-| SubscriptionId |Key Vault içeren aboneliği, Azure abonelik kimliği |
+| `Type` |*AzureDiagnostics* |
+| `SourceSystem` |*Azure* |
+| `CallerIpAddress` |İsteği yapan istemcinin IP adresi |
+| `Category` | *AuditEvent* |
+| `CorrelationId` |İstemci tarafı günlüklerini hizmet tarafı (Anahtar Kasası) günlükleriyle ilişkilendirmek için istemcinin geçirebileceği isteğe bağlı bir GUID. |
+| `DurationMs` |Milisaniye cinsinden REST API'si isteğini sunmak için geçen süre. Bu süre ağ gecikmesini içermez, bu nedenle istemci tarafında ölçmeniz gereken süre bu süre ile eşleşmeyebilir. |
+| `httpStatusCode_d` |İstek tarafından döndürülen HTTP durum kodu (örneğin, *200*) |
+| `id_s` |İsteğin benzersiz KIMLIĞI |
+| `identity_claim_appid_g` | Uygulama KIMLIĞI için GUID |
+| `OperationName` |[Azure Key Vault günlük kaydı](../../key-vault/key-vault-logging.md) bölümünde belgelendiği şekilde işlemin adı |
+| `OperationVersion` |İstemci tarafından istenen REST API sürümü (örneğin *2015-06-01*) |
+| `requestUri_s` |İsteğin URI 'si |
+| `Resource` |Anahtar kasasının adı |
+| `ResourceGroup` |Anahtar kasasının kaynak grubu |
+| `ResourceId` |Azure Resource Manager Kaynak Kimliği. Key Vault günlükleri için, bu Key Vault kaynak KIMLIĞIDIR. |
+| `ResourceProvider` |*MICROSOFT. KEYVAULT* |
+| `ResourceType` | *KASALARı* |
+| `ResultSignature` |HTTP durumu (örneğin, *Tamam*) |
+| `ResultType` |REST API isteğin sonucu (örneğin, *başarılı*) |
+| `SubscriptionId` |Key Vault içeren aboneliğin Azure abonelik KIMLIĞI |
 
 ## <a name="migrating-from-the-old-key-vault-solution"></a>Eski Key Vault çözümünden geçiş
-Ocak 2017'de, günlükleri Key Vault'tan Log Analytics'e gönderme desteklenen yönteminizi değiştirdik. Bu değişiklikler, aşağıdaki avantajları sağlar:
-+ Günlükleri bir depolama hesabı kullanmak zorunda kalmadan bir Log Analytics çalışma alanı için doğrudan yazılır
-+ Ne zaman bunlara Log Analytics'te almalarının günlükleri üretilir saatten daha az gecikme süresi
+2017 Ocak 'ta, Key Vault günlüklerin Log Analytics değiştirme biçimi değiştirildi. Bu değişiklikler aşağıdaki avantajları sağlar:
++ Günlükler, bir depolama hesabı kullanılmasına gerek olmadan doğrudan bir Log Analytics çalışma alanına yazılır
++ Günlüklerin oluşturulduğu zamandan daha az gecikme süresi Log Analytics ' de kullanılabilir
 + Daha az yapılandırma adımı
-+ Azure tanılama her tür için ortak bir biçimi
++ Tüm Azure tanılama türleri için ortak bir biçim
 
-Güncel çözümü kullanmak için:
+Güncelleştirilmiş çözümü kullanmak için:
 
-1. [Key Vault'tan bir Log Analytics çalışma alanınıza doğrudan gönderilecek tanılama Yapılandır](#enable-key-vault-diagnostics-in-the-portal)  
-2. Açıklanan işlemi kullanarak Azure Key Vault çözümü etkinleştirme [çözüm Galerisi'ndeki çözümlerini Azure izleme Ekle](../../azure-monitor/insights/solutions.md)
-3. Tüm kaydedilmiş sorgular, panolar veya yeni veri türü kullanılacağını uyarıları güncelleştirme
-   + Tür farklıdır: KeyVaults AzureDiagnostics için. Kaynak türü, anahtar kasası günlükleri için filtre uygulamak için kullanabilirsiniz.
-   + Yerine: `KeyVaults`, kullanın `AzureDiagnostics | where ResourceType'=="VAULTS"`
-   + Alanlar: (Alan adları büyük-küçük harf duyarlıdır)
-   + Bir son eki olan herhangi bir alan için \_s, \_d veya \_g adı küçük harflere ilk karakteri değiştirme
-   + Bir son eki olan herhangi bir alan için \_o adı, veriler iç içe geçmiş alanı adlarını temel alarak ayrı ayrı alanlara bölünür. Örneğin, arayanın UPN bir alanda depolanır `identity_claim_http_schemas_xmlsoap_org_ws_2005_05_identity_claims_upn_s`
-   + Alan CallerIpAddress CallerIPAddress için değiştirildi.
-   + Alan RemoteIPCountry artık mevcut değil
-4. Kaldırma *Key Vault Analytics (kullanım dışı)* çözüm. PowerShell kullanıyorsanız, `Set-AzureOperationalInsightsIntelligencePack -ResourceGroupName <resource group that the workspace is in> -WorkspaceName <name of the log analytics workspace> -IntelligencePackName "KeyVault" -Enabled $false`
+1. [Tanılamayı doğrudan Key Vault bir Log Analytics çalışma alanına gönderilmek üzere yapılandırın](#enable-key-vault-diagnostics-in-the-portal)  
+2. [Çözüm Galerisi Azure izleyici çözümlerini ekleme](../../azure-monitor/insights/solutions.md) bölümünde açıklanan işlemi kullanarak Azure Key Vault çözümü etkinleştirin
+3. Yeni veri türünü kullanmak için kaydedilen sorguları, panoları veya uyarıları güncelleştirme
+   + Tür şu şekilde değişir: KeyVaults to AzureDiagnostics. Günlük Key Vault filtrelemek için ResourceType öğesini kullanabilirsiniz.
+   + Yerine: `KeyVaults`, `AzureDiagnostics | where ResourceType'=="VAULTS"` kullanın
+   + Alanlar: (alan adları büyük/küçük harfe duyarlıdır)
+   + \_s, \_d veya \_bir sonekine sahip herhangi bir alan için ad içinde ilk karakteri küçük harfe değiştirin
+   + Adında \_o sonekine sahip herhangi bir alan için, veriler iç içe geçmiş alan adlarına göre tek tek alanlara bölünür. Örneğin, çağıranın UPN 'si bir alanda saklanır `identity_claim_http_schemas_xmlsoap_org_ws_2005_05_identity_claims_upn_s`
+   + Alan Callerıpaddress, Callerıpaddress olarak değiştirildi
+   + RemoteIPCountry alanı artık yok
+4. *Key Vault Analytics (kullanım dışı)* çözümünü kaldırın. PowerShell kullanıyorsanız, `Set-AzureOperationalInsightsIntelligencePack -ResourceGroupName <resource group that the workspace is in> -WorkspaceName <name of the log analytics workspace> -IntelligencePackName "KeyVault" -Enabled $false` kullanın
 
-Değişiklik yeni çözümde görünür değil. önce toplanan veriler. Alan adları ve eski türünü kullanarak bu verileri sorgulamak devam edebilirsiniz.
+Değişiklik, yeni çözümde görüntülenmeden önce toplanan veriler görünmez. Eski tür ve alan adlarını kullanarak bu verileri sorgulamaya devam edebilirsiniz.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 [!INCLUDE [log-analytics-troubleshoot-azure-diagnostics](../../../includes/log-analytics-troubleshoot-azure-diagnostics.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kullanım [sorgular Azure İzleyici'de oturum](../../azure-monitor/log-query/log-query-overview.md) ayrıntılı Azure anahtar kasası verilerini görüntülemek için.
+* Ayrıntılı Azure Key Vault verilerini görüntülemek için [Azure izleyici 'de günlük sorgularını](../../azure-monitor/log-query/log-query-overview.md) kullanın.

@@ -10,12 +10,13 @@ ms.subservice: answer-search
 ms.topic: overview
 ms.date: 04/13/2018
 ms.author: rosh
-ms.openlocfilehash: ac1717a8e8a08fcfedc3bc21bb0f03b3e3ca2511
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ROBOTS: NOINDEX
+ms.openlocfilehash: 676b7f63b82a0e7c06264cb6dcbead8c1344a076
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "60721868"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707124"
 ---
 # <a name="what-is-project-answer-search"></a>Proje Yanıt Arama nedir?
 Proje Yanıt Arama API'si soru sorgularına yanıt bulmak için Bing v7 uç noktasını kullanır. "What is the circumference of the earth?" (Dünyanın çevresinin uzunluğu nedir?) gibi bir soruya olgu içeren bir yanıt döndürülür.  Kişi, yer veya nesne sorguları, sorguda tanımlanan varlıkla ilgili bilgileri döndürür. Bu senaryolar sohbet botları, mesajlaşma uygulamaları, okuyucular gibi uygulamalarda yararlı olabilir.  
@@ -25,7 +26,7 @@ Sorgular, sorgu senaryosuna göre yanıt döndürür: Web sayfaları her zaman d
 ## <a name="endpoint"></a>Uç Nokta
 Bir soruya yanıt veya bir kişi, yer ya da nesne hakkında bilgi almak için Yanıt Arama API'si uç noktasına istek gönderebilirsiniz. Farklı belirtimler için üst bilgileri ve URL parametrelerini kullanın.  Geçerli bir belirteçle birlikte *Ocp-Apim-Subscription-Key* üst bilgisini ekleyin.  market parametresi gereklidir. Şu an için yalnızca `en-us` pazarı desteklenmektedir.
 
-Aşağıdaki sorguda sorusunun yanıtlarını alır: "Dünya çevresi nedir?"
+Aşağıdaki sorgu, sorunun yanıtlarını alır: "Dünya çevresi nedir?"
 
 AL:
 ```

@@ -1,61 +1,60 @@
 ---
-title: MPI uygulamaları - Azure Batch çalıştırmak için çok örnekli görevleri kullanma | Microsoft Docs
-description: Azure Batch hizmetinde çok örnekli görev türü kullanarak ileti geçirme arabirimi (MPI) uygulamaları çalıştırma hakkında bilgi edinin.
+title: MPı uygulamalarını çalıştırmak için çok örnekli görevleri kullanma-Azure Batch | Microsoft Docs
+description: Ileti geçirme arabirimi (MPı) uygulamalarını Azure Batch ' deki çok örnekli görev türünü kullanarak yürütmeyi öğrenin.
 services: batch
 documentationcenter: ''
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: 83e34bd7-a027-4b1b-8314-759384719327
 ms.service: batch
-ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: ''
 ms.date: 03/13/2019
 ms.author: lahugh
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 7a4184fa361ba863cdaf916ef4853eda8b6e8188
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1f54f5d5265508bb3716ff4ffd4d1d741d3bfa2e
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65595937"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70094965"
 ---
-# <a name="use-multi-instance-tasks-to-run-message-passing-interface-mpi-applications-in-batch"></a>Batch'de ileti geçirme arabirimi (MPI) uygulamalarını çalıştırmak için çok örnekli görevleri kullanma
+# <a name="use-multi-instance-tasks-to-run-message-passing-interface-mpi-applications-in-batch"></a>Batch 'de Ileti geçirme arabirimi (MPı) uygulamalarını çalıştırmak için çok örnekli görevleri kullanma
 
-Çok örnekli görevler, bir Azure Batch görevi aynı anda birden çok işlem düğümleri üzerinde çalışmak olanak tanır. Bu görevler, yüksek performanslı bilgi işlem senaryoları gibi Batch ileti geçirme arabirimi (MPI) uygulamalarında etkinleştirin. Bu makalede, çok örnekli görevleri kullanma yürütülecek öğrenin [Batch .NET] [ api_net] kitaplığı.
-
-> [!NOTE]
-> Bu makaledeki örnekler, Batch .NET, MS-MPI odaklanın ve Windows işlem düğümleri, ancak burada tartışılan çok örnekli görev kavramları, diğer platformlar ve teknolojiler (Python ve örnek için Linux düğümleri üzerinde Intel MPI) için geçerlidir.
->
->
-
-## <a name="multi-instance-task-overview"></a>Çok örnekli görev genel bakış
-Batch içinde normalde her görev, bir tek işlem düğümde--birden çok görev bir iş göndermek ve Batch hizmeti her görevi bir düğümde yürütülmek zamanlar. Bir görevin yapılandırarak ancak **çok örnekli ayarlar**, bunun yerine bir birincil görev ve ardından birden çok düğümde yürütülen birkaç alt görevler oluşturmak için Batch söyleyin.
-
-![Çok örnekli görev genel bakış][1]
-
-Bir görev çok örnekli ayarlar bir iş gönderdiğinizde, Batch çok örnekli görevler benzersiz birkaç adım gerçekleştirir:
-
-1. Batch hizmeti bir oluşturur **birincil** ve birkaç **görevleri** çok örnekli ayarlara göre. Görevleri (tüm alt birincil) toplam sayısı sayısı ile eşleşen **örnekleri** (işlem düğümleri) çok örnekli ayarlar belirtin.
-2. Batch işlem düğümleri birini atar **ana**ve ana yürütmek için birincil görevi zamanlar. Bu, çok örnekli görev, bir alt düğüm başına ayrılmış işlem düğümleri kalanını yürütmek için görevleri zamanlar.
-3. Birincil ve tüm alt görevlerin indirmek **ortak kaynak dosyaları** çok örnekli ayarlar belirtin.
-4. Sonra ortak kaynak dosyaları yüklenmiş, birincil ve alt görevlere yürütün **koordinasyon komut** çok örnekli ayarlar belirtin. Koordinasyon komutu, genellikle görevin yürütmek için ilgili düğümleri hazırlamak için kullanılır. Bu arka plan hizmetleri başlatılıyor içerebilir (gibi [Microsoft MPI][msmpi_msdn]'s `smpd.exe`) ve düğümler arası iletileri işlemeye hazır olduğu doğrulanıyor.
-5. Birincil görevi yürüten **uygulama komutu** ana düğüm üzerinde *sonra* koordinasyon komutu başarıyla birincil ve tüm alt görevler tarafından tamamlandı. Uygulama komutu, çok örnekli görev komut satırı ve yalnızca birincil görev tarafından yürütülür. İçinde bir [MS MPI][msmpi_msdn]-çözüm, temel burada kullanarak MPI etkinleştirilmiş uygulamanın yürütme budur `mpiexec.exe`.
+Çok örnekli görevler birden çok işlem düğümünde aynı anda bir Azure Batch görevi çalıştırmanızı sağlar. Bu görevler, toplu Işteki Ileti geçirme arabirimi (MPı) uygulamaları gibi yüksek performanslı bilgi işlem senaryolarına olanak tanır. Bu makalede [Batch .net][api_net] kitaplığını kullanarak çok örnekli görevleri yürütmeyi öğreneceksiniz.
 
 > [!NOTE]
-> İşlevsel olarak farklı olsa da, "çok örnekli görev" gibi bir benzersiz görev türü değil [StartTask] [ net_starttask] veya [JobPreparationTask] [ net_jobprep]. Çok örnekli görev yalnızca standart bir Batch görevinde olduğu ([CloudTask] [ net_task] Batch. NET'te), çok örnekli ayarlar yapılandırıldı. Bu makalede, bu diyoruz **çok örnekli görev**.
+> Bu makaledeki örneklerde Batch .NET, MS-MPI ve Windows işlem düğümlerine odaklanılmış olsa da, burada ele alınan çok örnekli görev kavramları diğer platformlar ve teknolojiler için geçerlidir (örneğin, Python ve Intel MPı Linux düğümlerinde).
 >
 >
 
-## <a name="requirements-for-multi-instance-tasks"></a>Çok örnekli görevler için gereksinimleri
-Çok örnekli görevler gerektiren bir havuzla **etkin düğümler arası iletişimin**ile **eşzamanlı görev yürütme devre dışı**. Eşzamanlı görev yürütme devre dışı bırakmak için ayarlanmış [CloudPool.MaxTasksPerComputeNode](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudpool) özelliği 1.
+## <a name="multi-instance-task-overview"></a>Çok örnekli göreve genel bakış
+Batch 'de, her görev normalde tek bir işlem düğümünde yürütülür. bir işe birden çok görev gönderirseniz ve Batch hizmeti her görevi bir düğümde yürütmeye göre zamanlar. Ancak, bir görevin **Çoklu örnek ayarlarını**yapılandırarak, toplu olarak tek bir birincil görev ve daha sonra birden çok düğümde yürütülen birkaç alt görev oluşturmayı öğreneceksiniz.
+
+![Çok örnekli göreve genel bakış][1]
+
+Bir iş için çok örnekli ayarlarla bir görev gönderdiğinizde toplu Işlem, çok örnekli görevlere özgü birkaç adımı gerçekleştirir:
+
+1. Batch hizmeti, çoklu örnek ayarlarına bağlı olarak bir **birincil** ve birkaç **alt görev** oluşturur. Toplam görev sayısı (birincil ve tüm alt görevler), çok örnekli ayarlarda belirttiğiniz **örnek** sayısıyla (işlem düğümleri) eşleşir.
+2. Batch, işlem düğümlerinden birini **ana öğe**olarak belirler ve birincil görevi ana bilgisayarda yürütülecek şekilde zamanlar. Alt görevleri, çok örnekli göreve ayrılan işlem düğümlerinin geri kalanı üzerinde yürütülecek şekilde zamanlar, düğüm başına bir alt görev.
+3. Birincil ve tüm alt görevler, çok örnekli ayarlarda belirttiğiniz **ortak kaynak dosyalarını** indirir.
+4. Ortak kaynak dosyaları indirildikten sonra, birincil ve alt görevler, çoklu örnek ayarlarında belirttiğiniz **koordinasyon komutunu** yürütür. Düzenleme komutu genellikle, görevi yürütmek için düğüm hazırlamak üzere kullanılır. Bu, arka plan hizmetlerinin (örneğin, [Microsoft MPI][msmpi_msdn] `smpd.exe`) başlamasını ve düğümlerin düğümler arası iletileri işlemeye hazırlandığının doğrulanması olabilir.
+5. Birincil görev, düzenleme komutu birincil ve tüm alt görevler tarafından başarıyla tamamlandıktan *sonra* ana düğümde **uygulama komutunu** yürütür. Uygulama komutu, çok örnekli görevin kendisi için komut satırı olur ve yalnızca birincil görev tarafından yürütülür. [MS-MPı][msmpi_msdn]tabanlı bir çözümde, bu, kullanarak `mpiexec.exe`MPI özellikli uygulamanızı yürütebileceğiniz yerdir.
 
 > [!NOTE]
-> Batch [sınırları](batch-quota-limit.md#pool-size-limits) düğümler arası iletişimin etkin olan bir havuz boyutu.
+> İşlevsel farklı olsa da, "Çoklu örnek görevi" [startTask][net_starttask] veya [JobPreparationTask][net_jobprep]gibi benzersiz bir görev türü değildir. Çok örnekli görev, çok örnekli ayarları yapılandırılmış standart bir Batch görevi (Batch .NET 'te[cloudtask][net_task] ) olur. Bu makalede, buna **Çoklu örnek görevi**olarak değineceğiz.
+>
+>
+
+## <a name="requirements-for-multi-instance-tasks"></a>Çok örnekli görevler için gereksinimler
+Çok örnekli görevler, **düğüm içi iletişimin etkin**olduğu bir havuz gerektirir ve **eşzamanlı görev yürütme devre dışı bırakılır**. Eşzamanlı görev yürütmeyi devre dışı bırakmak için [Cloudpool. MaxTasksPerComputeNode](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudpool) özelliğini 1 olarak ayarlayın.
+
+> [!NOTE]
+> Batch, düğüm içi iletişim etkin olan bir havuzun boyutunu [sınırlar](batch-quota-limit.md#pool-size-limits) .
 
 
-Bu kod parçacığı, Batch .NET kitaplığını kullanarak çok örnekli görevleri için bir havuz oluşturma işlemi gösterilmektedir.
+Bu kod parçacığı, Batch .NET kitaplığı kullanılarak çok örnekli görevler için bir havuzun nasıl oluşturulacağını gösterir.
 
 ```csharp
 CloudPool myCloudPool =
@@ -72,11 +71,11 @@ myCloudPool.MaxTasksPerComputeNode = 1;
 ```
 
 > [!NOTE]
-> Düğümler arası iletişimin devre dışı veya ile bir havuzda çok örnekli görev çalıştırmayı denerseniz bir *maxTasksPerNode* 1'den büyük değer, görev hiçbir zaman zamanlanmış--süresiz olarak "etkin" durumda kalır. 
+> İç düğüm iletişimi devre dışı bırakılmış bir havuzda çok örnekli bir görevi çalıştırmayı denerseniz veya 1 ' den büyük bir *Maxtaskspernode* değeri varsa, görev hiçbir şekilde zamanlanmadı; "etkin" durumunda süresiz olarak kalır. 
 
 
-### <a name="use-a-starttask-to-install-mpi"></a>MPI yüklemek için StartTask kullanın
-Bir çok örnekli görev MPI uygulamalarını çalıştırmak için ilk (MS-MPI veya örneğin Intel MPI) MPI uygulama havuzundaki işlem düğümlerinde yüklemeniz gerekir. Bunu kullanmak için iyi bir zamandır bir [StartTask][net_starttask], her bir düğüm bir havuza katıldığında veya yeniden yürütür. Bu kod parçacığı MS MPI kurulum paketi olarak belirten bir StartTask oluşturur bir [kaynak dosyası][net_resourcefile]. Başlangıç görevinin komut satırı kaynak dosyasındaki düğüme İndirildikten sonra yürütülür. Bu durumda, komut satırında, MS-MPI'in bir katılımsız yüklemesi gerçekleştirir.
+### <a name="use-a-starttask-to-install-mpi"></a>MPı 'yi yüklemek için bir StartTask kullanın
+MPı uygulamalarını çok örnekli bir görevle çalıştırmak için, önce havuzdaki işlem düğümlerine bir MPı uygulaması (örneğin, MS-MPı veya Intel MPı) yüklemeniz gerekir. Bu, bir düğüm bir havuza katıldığında veya yeniden başlatıldığında yürütülen bir [startTask][net_starttask]kullanmak için iyi bir zamandır. Bu kod parçacığı, bir [kaynak dosyası][net_resourcefile]olarak MS-MPI kurulum paketini belirten bir startTask oluşturur. Başlangıç görevinin komut satırı, kaynak dosyası düğüme indirildikten sonra yürütülür. Bu durumda, komut satırı MS-MPı 'nin katılımsız bir yüklemesini gerçekleştirir.
 
 ```csharp
 // Create a StartTask for the pool which we use for installing MS-MPI on
@@ -96,24 +95,24 @@ await myCloudPool.CommitAsync();
 ```
 
 ### <a name="remote-direct-memory-access-rdma"></a>Doğrudan uzak bellek erişimi (RDMA)
-Seçeneğini belirlediğinizde bir [RDMA özellikli boyutu](../virtual-machines/windows/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) Batch havuzunuzdaki işlem düğümlerinin A9 gibi MPI uygulamanızı Azure'nın yüksek performanslı, düşük gecikme süreli doğrudan uzak bellek erişimi (RDMA) ağ yararlanabilirsiniz.
+Batch havuzunuzdaki işlem düğümleri için A9 gibi bir [RDMA özellikli bir boyut](../virtual-machines/windows/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) seçtiğinizde, MPI uygulamanız Azure 'un yüksek performanslı, düşük gecikmeli uzak doğrudan bellek ERIŞIMI (RDMA) ağından faydalanabilir.
 
-Aşağıdaki makalelerde "RDMA özellikli" belirtilen boyutları arayın:
+Aşağıdaki makalelerde "RDMA özellikli" olarak belirtilen boyutları arayın:
 
-* **CloudServiceConfiguration** havuzları
+* **Cloudserviceconfiguration** havuzları
 
-  * [Cloud Services boyutları](../cloud-services/cloud-services-sizes-specs.md) (yalnızca Windows)
-* **VirtualMachineConfiguration** havuzları
+  * [Cloud Services Için boyutlar](../cloud-services/cloud-services-sizes-specs.md) (Yalnızca Windows)
+* **Virtualmachineconfiguration** havuzları
 
-  * [Azure'da sanal makine boyutları](../virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) (Linux)
-  * [Azure'da sanal makine boyutları](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) (Windows)
+  * [Azure 'da sanal makineler Için boyutlar](../virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 'Un
+  * [Azure 'da sanal makineler Için boyutlar](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) Pencerelerin
 
 > [!NOTE]
-> RDMA yararlanmak [Linux işlem düğümlerini](batch-linux-nodes.md), kullanmalısınız **Intel MPI** düğümlerinde. 
+> [Linux işlem DÜĞÜMLERINDE](batch-linux-nodes.md)RDMA 'nin avantajlarından yararlanmak Için düğümlerde **Intel MPI** kullanmanız gerekir. 
 >
 
-## <a name="create-a-multi-instance-task-with-batch-net"></a>Batch .NET ile çok örnekli görev oluşturma
-MPI paket yükleme ve havuzu gereksinimleri ele aldığımız, çok örnekli görev oluşturalım. Bu kod parçacığında, bir standart oluştururuz [CloudTask][net_task], yapılandırın, sonra kendi [MultiInstanceSettings] [ net_multiinstance_prop] özelliği. Daha önce bahsedildiği gibi çok örnekli görev farklı görev türü, ancak çok örnekli ayarlar ile yapılandırılmış bir standart toplu görev değil.
+## <a name="create-a-multi-instance-task-with-batch-net"></a>Batch .NET ile çok örnekli bir görev oluşturma
+Artık havuz gereksinimlerini ve MPı paketi yüklemesini kapsadığımıza göre, çok örnekli görevi oluşturalım. Bu kod parçacığında, bir standart [Cloudtask][net_task]oluşturup [multiınstancesettings][net_multiinstance_prop] özelliğini yapılandıracağız. Daha önce belirtildiği gibi, çok örnekli görev ayrı bir görev türü değildir, ancak çok örnekli ayarlarla yapılandırılmış standart bir Batch görevi.
 
 ```csharp
 // Create the multi-instance task. Its command line is the "application command"
@@ -138,10 +137,10 @@ myMultiInstanceTask.MultiInstanceSettings =
 await myBatchClient.JobOperations.AddTaskAsync("mybatchjob", myMultiInstanceTask);
 ```
 
-## <a name="primary-task-and-subtasks"></a>Birincil görevi ve alt görevler
-Çok örnekli ayarlar için bir görev oluşturduğunuzda, görev yürütülecek olan işlem düğümü sayısını belirtin. Görev bir iş gönderdiğinizde, Batch hizmeti bir oluşturur **birincil** görev ve yeterli **görevleri** belirttiğiniz düğüm sayısını birlikte eşleşen.
+## <a name="primary-task-and-subtasks"></a>Birincil görev ve alt görevler
+Bir görev için çoklu örnek ayarlarını oluştururken, görevi yürütecek olan işlem düğümlerinin sayısını belirtirsiniz. Görevi bir işe gönderdiğinizde, Batch hizmeti bir **birincil** görev ve belirttiğiniz düğüm sayısıyla eşleşen çok sayıda **alt** iş oluşturur.
 
-Bu görevler için 0 aralığında bir tamsayı kimliği atanır *numberOfInstances* - 1. Görev Kimliği 0 ile birincil bir görevdir ve diğer tüm kimlikleri görevleridir. Örneğin, bir görev için aşağıdaki çok örnekli ayarlar oluşturursanız, birincil görevin kimliği 0 olması ve alt görevlerin kimlikleri 1-9 gerekir.
+Bu görevlere 0- *Numberofınstances* -1 aralığında bir tamsayı kimliği atanır. Kimliği 0 olan görev birincil görevdir ve diğer tüm kimlikler alt görevlerdir. Örneğin, bir görev için aşağıdaki çok örnekli ayarları oluşturursanız, birincil görevin kimliği 0 olur ve alt görevler 1 ile 9 arasında kimlik içermelidir.
 
 ```csharp
 int numberOfNodes = 10;
@@ -149,37 +148,37 @@ myMultiInstanceTask.MultiInstanceSettings = new MultiInstanceSettings(numberOfNo
 ```
 
 ### <a name="master-node"></a>Ana düğüm
-Çok örnekli görev gönderdiğinizde, Batch hizmeti işlem düğümlerinden biri olarak "Yönetici" düğümü belirler ve ana düğüm üzerinde yürütmek için birincil görevi zamanlar. Alt görevler için çok örnekli görev ayrılan düğümler kalanını yürütmek için zamanlanır.
+Çok örnekli bir görevi gönderdiğinizde, Batch hizmeti işlem düğümlerinden birini "ana" düğüm olarak belirler ve birincil görevi ana düğümde yürütülecek şekilde zamanlar. Alt görevler, çok örnekli göreve ayrılan düğümlerin geri kalanı üzerinde yürütülecek şekilde zamanlanır.
 
 ## <a name="coordination-command"></a>Koordinasyon komutu
-**Koordinasyon komut** alt görevlerin ve birincil yürütülür.
+**Koordinasyon komutu** hem birincil hem de alt görevler tarafından yürütülür.
 
-Koordinasyon komut çağırmayı engelliyor--toplu düzenleme komut için tüm görevleri başarıyla verdi kadar uygulama komutu yürütülmez. Koordinasyon komutu bu nedenle tüm gerekli arka plan hizmetleri başlatın, kullanıma hazır olduğundan emin olun ve sonra çıkın. Örneğin, bu düzenleme komut 7 SMPD hizmet düğümde başlatılır. MS-MPI sürümünü kullanan bir çözüm için kapanır:
+Koordinasyon komutunun çağrılması,--düzenleme komutu tüm alt görevler için başarılı bir şekilde döndürülünceye kadar uygulama komutunu çalıştırmaz. Koordinasyon komutu bu nedenle gerekli arka plan hizmetlerini başlatıp, kullanıma hazırdıklarından emin olun ve ardından çıkış yapın. Örneğin, MS-MPI sürüm 7 kullanan bir çözüm için bu düzenleme komutu, düğümdeki SMPD hizmetini başlatır ve çıkar:
 
 ```
 cmd /c start cmd /c ""%MSMPI_BIN%\smpd.exe"" -d
 ```
 
-Kullanımına dikkat edin `start` bu koordinasyon komutu. Bu gereklidir çünkü `smpd.exe` uygulama hemen sonra yürütmeye döndürmez. Kullanmadan [Başlat] [ cmd_start] komutu, bu düzenleme komut değil döndürür ve bu nedenle çalışmasını uygulama komut engellenebilir.
+Bu koordinasyon komutunda kullanılması `start` gerektiğini aklınızda edin. `smpd.exe` Uygulama yürütmeden hemen sonra dönmediğinden bu gereklidir. [Start][cmd_start] komutunun kullanımı olmadan, bu koordinasyon komutu dönmez ve bu nedenle uygulama komutunun çalışmasını engeller.
 
 ## <a name="application-command"></a>Uygulama komutu
-Koordinasyon komutu yürütmeden birincil görev ve tüm görevleri tamamladıktan sonra çok örnekli görev komut satırı birincil görev tarafından yürütülen *yalnızca*. Bu diyoruz **uygulama komutu** koordinasyon komuttan ayırmak için.
+Birincil görev ve tüm alt görevler koordinasyon komutunu yürütmeyi tamamladığında, çok örnekli görevin komut satırı *yalnızca*birincil görev tarafından yürütülür. Bu **uygulama komutunu** , koordinasyon komutundan ayırt etmek için çağırıyoruz.
 
-MS-MPI uygulamaları için uygulama komutu MPI özellikli uygulamanızla yürütmek için kullanın. `mpiexec.exe`. Örneğin, MS-MPI sürüm 7 kullanarak bir çözüm için bir uygulama komutu şu şekildedir:
+MS-MPı uygulamalarında, MPı özellikli uygulamanızı ile `mpiexec.exe`yürütmek için uygulama komutunu kullanın. Örneğin, MS-MPı sürüm 7 kullanan bir çözüm için uygulama komutu aşağıda verilmiştir:
 
 ```
 cmd /c ""%MSMPI_BIN%\mpiexec.exe"" -c 1 -wdir %AZ_BATCH_TASK_SHARED_DIR% MyMPIApplication.exe
 ```
 
 > [!NOTE]
-> Çünkü MS-MPI's `mpiexec.exe` kullanan `CCP_NODES` değişken varsayılan olarak (bkz [ortam değişkenlerini](#environment-variables)) Yukarıdaki örnek uygulama komut satırı dahil değildir.
+> MS-MPI `mpiexec.exe` varsayılan olarak `CCP_NODES` değişkenini kullandığından (bkz. [ortam değişkenleri](#environment-variables)) Yukarıdaki örnek uygulama komut satırı hariç tutar.
 >
 >
 
 ## <a name="environment-variables"></a>Ortam değişkenleri
-Batch oluşturur birkaç [ortam değişkenlerini] [ msdn_env_var] belirli bir çok örnekli görev için ayrılmış işlem düğümleri üzerinde çok örnekli görevler için. Bunları programları ve betikleri gibi işbirliği ve uygulama komut satırları bu ortam değişkenleri başvurabilirsiniz.
+Batch, çok örnekli bir göreve ayrılan işlem düğümlerinde çok örnekli görevlere özgü birkaç [ortam değişkeni][msdn_env_var] oluşturur. Koordinasyon ve uygulama komut hatlarınız, yürüttikleri betikler ve programlar gibi bu ortam değişkenlerine başvurabilir.
 
-Aşağıdaki ortam değişkenlerini, çok örnekli görevler tarafından kullanılmak üzere Batch hizmeti tarafından oluşturulur:
+Aşağıdaki ortam değişkenleri, Batch hizmeti tarafından çok örnekli görevler tarafından kullanılmak üzere oluşturulur:
 
 * `CCP_NODES`
 * `AZ_BATCH_NODE_LIST`
@@ -188,45 +187,45 @@ Aşağıdaki ortam değişkenlerini, çok örnekli görevler tarafından kullan�
 * `AZ_BATCH_TASK_SHARED_DIR`
 * `AZ_BATCH_IS_CURRENT_NODE_MASTER`
 
-Bunlar tam ayrıntıları ve diğer toplu işlem düğümü ortam değişkenleri, bunların içeriğini ve görünürlük de dahil olmak üzere işlem bkz [işlem düğümü ortam değişkenleri][msdn_env_var].
+Bunlarla ilgili tüm ayrıntılar ve bunların içerikleri ve görünürlüğü dahil diğer toplu işlem düğümü ortam değişkenleri için bkz. [işlem düğümü ortam değişkenleri][msdn_env_var].
 
 > [!TIP]
-> Batch Linux MPI kod örneği birkaç bu ortam değişkenlerinin nasıl kullanılabileceğini örneği içerir. [Koordinasyon cmd] [ coord_cmd_example] ortak uygulama Bash betiğini indirir ve giriş dosyaları Azure Storage'dan, ana düğüm ağ dosya sistemi (NFS) paylaşımında sağlar ve diğer düğümleri yapılandırır çok örnekli görev için NFS istemcisi olarak ayrılmış.
+> Batch Linux MPı kodu örneği, bu ortam değişkenlerinin kaç tane kullanıldığına ilişkin bir örnek içerir. [Koordinasyon-cmd][coord_cmd_example] Bash betiği, Azure depolama 'dan ortak uygulama ve giriş dosyalarını indirir, ana düğümde bir ağ dosya SISTEMI (NFS) paylaşımının yapılmasını sağlar ve çok örnekli görev için ayrılan DIĞER düğümleri NFS istemcileri olarak yapılandırır.
 >
 >
 
 ## <a name="resource-files"></a>Kaynak dosyaları
-Kaynak dosyaları için çok örnekli görevler dikkate alınması gereken iki kümesi vardır: **ortak kaynak dosyaları** , *tüm* görevler indirir (hem birincil hem de ve alt görevler) ve **kaynakdosyaları** çok örnekli görev için kendisini, belirtilen *yalnızca birincil* görev indirmeler.
+Çok örnekli görevler için göz önünde bulundurmanız gereken iki kaynak dosyası kümesi vardır: *Tüm* görevlerin indirmediği *ortak kaynak dosyaları (birincil ve alt görevler) ve çok örnekli görevin kendisi için belirtilen kaynak dosyaları. yalnızca birincil* görev indirilir.
 
-Bir veya daha fazla belirtebilirsiniz **ortak kaynak dosyaları** bir görev için çok örnekli ayarlar. Bu ortak kaynak dosyaları karşıdan yüklenir [Azure depolama](../storage/common/storage-introduction.md) her düğümün içine **görev paylaşılan dizine** birincil ve tüm alt görevler tarafından. Kullanarak, uygulama ve işbirliği komut satırlarından görev paylaşılan dizine erişebilir `AZ_BATCH_TASK_SHARED_DIR` ortam değişkeni. `AZ_BATCH_TASK_SHARED_DIR` Yolu çok örnekli görev için ayrılan tüm düğümlerde özdeş ise, bu nedenle, birincil ve tüm alt görevler arasında koordinasyon tek komut paylaşabilirsiniz. Batch "Uzaktan erişim anlamda dizini paylaşmaz", ancak bağlama kullanın veya ortam değişkenlerini ipucu daha önce belirtildiği gibi noktası paylaşın.
+Bir görev için çoklu örnek ayarlarında bir veya daha fazla **ortak kaynak dosyası** belirtebilirsiniz. Bu ortak kaynak dosyaları, [Azure depolama](../storage/common/storage-introduction.md) 'dan her bir düğümün **görev paylaşılan dizinine** birincil ve tüm alt görevler tarafından indirilir. Görev paylaşılan dizinine, `AZ_BATCH_TASK_SHARED_DIR` ortam değişkenini kullanarak, uygulama ve düzenleme komut satırlarından erişebilirsiniz. `AZ_BATCH_TASK_SHARED_DIR` Yol, çok örnekli göreve ayrılan her düğümde aynıdır, bu sayede birincil ve tüm alt görevler arasında tek bir düzenleme komutu paylaşabilirsiniz. Batch, dizini bir uzaktan erişim açısından "paylaşmaz", ancak ortam değişkenlerinde ipucu içinde daha önce bahsedildiği gibi bir bağlama veya paylaşma noktası olarak kullanabilirsiniz.
 
-Çok örnekli görev için belirttiğiniz kaynak dosyaları, görevin çalışma dizinine yüklenir `AZ_BATCH_TASK_WORKING_DIR`, varsayılan olarak. , Ortak kaynak dosyaları aksine belirtildiği gibi yalnızca birincil görev çok örnekli görev kendisi için belirtilen kaynak dosyalarını indirir.
+Çoklu örnek görevi için belirttiğiniz kaynak dosyaları, varsayılan olarak görevin çalışma dizinine `AZ_BATCH_TASK_WORKING_DIR`indirilir. Belirtildiği gibi, yaygın kaynak dosyalarının aksine yalnızca birincil görev, çok örnekli görevin kendisi için belirtilen kaynak dosyalarını indirir.
 
 > [!IMPORTANT]
-> Her zaman ortam değişkenlerini kullanma `AZ_BATCH_TASK_SHARED_DIR` ve `AZ_BATCH_TASK_WORKING_DIR` , komut satırlarında bu dizinler başvurmak için. Yollarını el ile oluşturmak çalışmayın.
+> Her zaman ortam değişkenlerini `AZ_BATCH_TASK_SHARED_DIR` kullanın ve `AZ_BATCH_TASK_WORKING_DIR` komut satırlarında bu dizinlere başvurun. Yolları el ile oluşturmaya çalışmayın.
 >
 >
 
 ## <a name="task-lifetime"></a>Görev ömrü
-Birincil görev ömrünü, tüm çok örnekli görev ömrünü denetler. Birincil çıktığında tüm görevleri sonlandırılır. Birincil çıkış kodunu, görevin çıkış kodu ve bu nedenle başarısı veya başarısızlığı yeniden deneme amaçlı görev belirlemek için kullanılır.
+Birincil görevin ömrü, tüm çok örnekli görevin ömrünü denetler. Birincil çıkış yapıldığında tüm alt görevler sonlandırılır. Birincil çıkış kodu, görevin çıkış kodudur ve bu nedenle, yeniden deneme amacıyla görevin başarısını veya başarısızlığını belirlemede kullanılır.
 
-Herhangi bir alt görevlerin başarısız olursa sıfır olmayan dönüş kodu ile çıkmak gibi tüm çok örnekli görev başarısız olur. Çok örnekli görev sonra sonlandırıldı ve, yeniden deneme sınırına kadar yeniden denenir.
+Alt görevlerden herhangi biri başarısız olursa, sıfır olmayan bir dönüş koduyla çıkılıyor, örneğin, tüm çok örnekli görev başarısız olur. Daha sonra, yeniden deneme sınırına kadar çok örnekli görev sonlandırılır ve yeniden denenir.
 
-Çok örnekli Görev sildiğinizde, birincil ve tüm alt görevler de Batch hizmeti tarafından silinir. Tüm dizinler eklemeli ve işlem düğümlerinden, standart bir görev olduğu gibi dosyalar silinir.
+Çok örnekli bir görevi sildiğinizde, birincil ve tüm alt görevler de Batch hizmeti tarafından silinir. Tüm alt görev dizinleri ve dosyaları, standart bir görevde olduğu gibi işlem düğümlerinden silinir.
 
-[TaskConstraints] [ net_taskconstraints] bir çok örnekli görev için gibi [MaxTaskRetryCount][net_taskconstraint_maxretry], [MaxWallClockTime] [ net_taskconstraint_maxwallclock], ve [RetentionTime] [ net_taskconstraint_retention] bunlar standart bir görev için birincil ve tüm alt görevleri uygulamak gibi özellikleri dikkate alınır. Ancak, değiştirirseniz [RetentionTime] [ net_taskconstraint_retention] özelliği çok örnekli görev bu değişikliği projeye ekledikten sonra yalnızca birincil göreve uygulanır. Tüm alt görevlerin özgün kullanmaya devam [RetentionTime][net_taskconstraint_retention].
+[Maxtaskretrycount][net_taskconstraint_maxretry], [maxduvar Clocktime][net_taskconstraint_maxwallclock]ve [RetentionTime][net_taskconstraint_retention] özellikleri gibi çok örnekli bir görevin [taskkýsýtlamalarından][net_taskconstraints] bazıları standart bir görevde olduğu gibi kabul edilir ve birincil ve tüm alt görevlere uygulanır. Ancak, iş için çoklu örnek görevi ekledikten sonra [RetentionTime][net_taskconstraint_retention] özelliğini değiştirirseniz, bu değişiklik yalnızca birincil göreve uygulanır. Tüm alt görevler özgün [RetentionTime][net_taskconstraint_retention]kullanmaya devam eder.
 
-Yeni görev bir çok örnekli görev bir parçası ise bir işlem düğümünün son kullanılan görevler listesi bir alt görevin kimliği yansıtır.
+İşlem düğümünün son görev listesi, son görev çok örnekli bir görevin parçasıysa bir alt görevin kimliğini yansıtır.
 
 ## <a name="obtain-information-about-subtasks"></a>Alt görevler hakkında bilgi edinin
-Batch .NET kitaplığını kullanarak görevleri hakkında bilgi edinmek için çağrı [CloudTask.ListSubtasks] [ net_task_listsubtasks] yöntemi. Bu yöntem tüm görevleri hakkında bilgi ve görevler yürütülen işlem düğüm hakkında bilgi döndürür. Bu bilgileri, her bir alt ait kök dizini, Havuz kimliği, geçerli durumunda, çıkış kodu ve diğer belirleyebilirsiniz. Bu bilgi ile birlikte kullanabileceğiniz [PoolOperations.GetNodeFile] [ poolops_getnodefile] alt görevin'ın dosyalarını almak için yöntemi. Bu yöntem birincil görevin (kimliği 0) bilgi döndürmediğine dikkat edin.
+Batch .NET kitaplığı 'nı kullanarak alt görevler hakkında bilgi edinmek için [Cloudtask. Listalt görevler][net_task_listsubtasks] yöntemini çağırın. Bu yöntem, tüm alt görevlerle ilgili bilgileri ve görevleri yürüten işlem düğümü hakkındaki bilgileri döndürür. Bu bilgilerden, her alt görevin kök dizinini, havuz kimliğini, geçerli durumunu, çıkış kodunu ve daha fazlasını belirleyebilirsiniz. Bu bilgileri, alt görevin dosyalarını almak için [Pooloperations. GetNodeFile][poolops_getnodefile] yöntemiyle birlikte kullanabilirsiniz. Bu yöntemin birincil görev (kimlik 0) için bilgi döndürmediğini unutmayın.
 
 > [!NOTE]
-> Aksi belirtilmediği sürece, Batch .NET yöntemleri çalışan birden çok örnek üzerinde [CloudTask] [ net_task] kendisini uygulamak *yalnızca* birincil görev. Örneğin, çağırdığınızda [CloudTask.ListNodeFiles] [ net_task_listnodefiles] bir çok örnekli görev yönteminde, yalnızca birincil görevin dosyalarının döndürülür.
+> Aksi belirtilmediği takdirde, çok örnekli [Cloudtask][net_task] üzerinde çalışan Batch .net metotları *yalnızca* birincil görev için geçerlidir. Örneğin, [cloudtask. ListNodeFiles][net_task_listnodefiles] yöntemini çok örnekli bir görevde çağırdığınızda yalnızca birincil görevin dosyaları döndürülür.
 >
 >
 
-Aşağıdaki kod parçacığı, istek üzerinde yürütülen düğümlerden dosya içerikleri yanı sıra alt bilgi edinmek gösterilmektedir.
+Aşağıdaki kod parçacığı, alt görev bilgilerinin nasıl alınacağını ve yürütüldüğü düğümlerin dosya içeriğini nasıl isteyeceğini gösterir.
 
 ```csharp
 // Obtain the job and the multi-instance task from the Batch service
@@ -266,34 +265,34 @@ await subtasks.ForEachAsync(async (subtask) =>
 ```
 
 ## <a name="code-sample"></a>Kod örneği
-[MultiInstanceTasks] [ github_mpi] github'daki kod örneği, bir çok örnekli görev çalıştırmak amacıyla kullanmak üzere nasıl gösterir bir [MS MPI] [ msmpi_msdn] uygulaması Batch işlem düğümleri. Bağlantısındaki [hazırlık](#preparation) ve [yürütme](#execution) örneği çalıştırmak için.
+GitHub 'daki [Multiınstancetasks][github_mpi] kod örneği, toplu işlem düğümlerinde bir [MS-MPI][msmpi_msdn] uygulamasını çalıştırmak için çok örnekli bir görevin nasıl kullanılacağını gösterir. Örneği çalıştırmak için [hazırlama](#preparation) ve [yürütme](#execution) bölümündeki adımları izleyin.
 
 ### <a name="preparation"></a>Hazırlık
-1. İlk iki adımını izleyin [nasıl derlenip çalıştırılacağı basit bir MS-MPI program][msmpi_howto]. Bu, aşağıdaki adımı önkoşullarını karşılar.
-2. Derleme bir *yayın* sürümünü [MPIHelloWorld] [ helloworld_proj] örnek MPI programı. Çok örnekli görev tarafından işlem düğümlerinde çalıştırılacak programı budur.
-3. İçeren bir ZIP dosyası oluşturma `MPIHelloWorld.exe` (hangi derlediğiniz 2. adım) ve `MSMpiSetup.exe` (indirmiş 1. adım). Sonraki adımda bir uygulama paketi olarak bu ZIP dosyasını karşıya yükleyelim.
-4. Kullanım [Azure portalında] [ portal] toplu oluşturmak için [uygulama](batch-application-packages.md) "MPIHelloWorld" olarak adlandırılan ve sürümü olarak "1.0" önceki adımda oluşturulan zip dosyası belirtin Uygulama paketi. Bkz: [karşıya yüklemek ve uygulamaları yönetmek](batch-application-packages.md#upload-and-manage-applications) daha fazla bilgi için.
+1. [Basit BIR MS-MPı programını derlemek ve çalıştırmak için][msmpi_howto]ilk iki adımı izleyin. Bu, aşağıdaki adım için önkoşulları karşılar.
+2. [Mpihelloworld][helloworld_proj] örnek MPI programının *yayın* sürümünü oluşturun. Bu, işlem düğümlerinde çoklu örnek görevi tarafından çalıştırılacak olan programdır.
+3. (Adım 2 ' i `MPIHelloWorld.exe` yapılandırdığınız) ve `MSMpiSetup.exe` (1. adımı indirdiğiniz) içeren bir ZIP dosyası oluşturun. Sonraki adımda bu zip dosyasını bir uygulama paketi olarak karşıya yüklersiniz.
+4. "MPIHelloWorld" adlı bir Batch [uygulaması](batch-application-packages.md) oluşturmak için [Azure Portal][portal] kullanın ve önceki adımda oluşturduğunuz zip dosyasını uygulama paketinin "1,0" sürümü olarak belirtin. Daha fazla bilgi için bkz. [uygulamaları karşıya yükleme ve yönetme](batch-application-packages.md#upload-and-manage-applications) .
 
 > [!TIP]
-> Derleme bir *yayın* sürümünü `MPIHelloWorld.exe` herhangi bir ek bağımlılıklar eklemek zorunda kalmazsınız (örneğin, `msvcp140d.dll` veya `vcruntime140d.dll`) uygulama paketinizdeki.
+> Uygulama paketinize ek bağımlılıklar ( `MPIHelloWorld.exe` Örneğin, `msvcp140d.dll` veya `vcruntime140d.dll`) eklemeniz gerekmiyorsa, bir yayın sürümü oluşturun.
 >
 >
 
 ### <a name="execution"></a>Yürütme
-1. İndirme [azure-batch-samples] [ github_samples_zip] github'dan.
-2. MultiInstanceTasks açın **çözüm** Visual Studio 2019 içinde. `MultiInstanceTasks.sln` Çözüm dosyası bulunur:
+1. GitHub 'dan [Azure-Batch-Samples][github_samples_zip] ' i indirin.
+2. Visual Studio 2019 ' de Multiınstancetasks **çözümünü** açın. `MultiInstanceTasks.sln` Çözüm dosyası şu konumda bulunur:
 
     `azure-batch-samples\CSharp\ArticleProjects\MultiInstanceTasks\`
-3. Batch ve Storage hesabı kimlik bilgilerinizi girin `AccountSettings.settings` içinde **Microsoft.Azure.Batch.Samples.Common** proje.
-4. **Derleme ve çalıştırma** MultiInstanceTasks çözüm MPI yürütmek için örnek bir Batch havuzundaki işlem düğümlerinde uygulama.
-5. *İsteğe bağlı*: Kullanım [Azure portalında] [ portal] veya [Batch Gezgini] [ batch_labs] örnek havuzu, iş ve görev incelemek için ("MultiInstanceSamplePool"," MultiInstanceSampleJob","MultiInstanceSampleTask") önce kaynakları silin.
+3. `AccountSettings.settings` **Microsoft. Azure. Batch. Samples. Common** projesinde toplu işlem ve depolama hesabı kimlik bilgilerinizi girin.
+4. Bir Batch havuzundaki işlem düğümlerinde MPı örnek uygulamasını yürütmek için Multiınstancetasks çözümünü **derleyin ve çalıştırın** .
+5. *Isteğe bağlı*: Kaynakları silmeden önce örnek havuzunu, işi ve görevi ("Multiınstancesamplepool", "Multiınstancesamplejob", "Multiınstancesampletask") incelemek için [Azure Portal][portal] veya [Batch Explorer][batch_labs] kullanın.
 
 > [!TIP]
-> İndirebileceğiniz [Visual Studio Community] [ visual_studio] ücretsiz Visual Studio yoksa.
+> Visual Studio [Community][visual_studio] 'yi ücretsiz olarak indirebilirsiniz.
 >
 >
 
-Çıktı `MultiInstanceTasks.exe` aşağıdakine benzer:
+`MultiInstanceTasks.exe` Çıkış, aşağıdakine benzer:
 
 ```
 Creating pool [MultiInstanceSamplePool]...
@@ -329,8 +328,8 @@ Sample complete, hit ENTER to exit...
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Microsoft HPC ve Azure Batch ekibi blog anlatılmaktadır [MPI desteklemek için Linux Azure Batch][blog_mpi_linux]ve kullanma hakkında bilgiler yer almaktadır [OpenFOAM] [ openfoam] Batch ile. Python kod örnekleri bulabilirsiniz [OpenFOAM örneği github'daki][github_mpi].
-* Bilgi nasıl [Linux işlem düğümü havuzlarını oluşturma](batch-linux-nodes.md) Azure Batch MPI çözümlerinizi kullanmak için.
+* Microsoft HPC & Azure Batch ekip blogu, [Azure Batch Linux Için MPI desteğini][blog_mpi_linux]ele alır ve Batch Ile [openfom][openfoam] kullanımı hakkında bilgiler içerir. [GitHub 'Da Openfohar örneği][github_mpi]için Python kod örneklerini bulabilirsiniz.
+* Azure Batch MPı çözümlerinizde kullanılmak üzere [Linux işlem düğümü havuzları oluşturmayı](batch-linux-nodes.md) öğrenin.
 
 [helloworld_proj]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/MultiInstanceTasks/MPIHelloWorld
 

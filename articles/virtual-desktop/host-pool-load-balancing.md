@@ -1,41 +1,41 @@
 ---
-title: Windows sanal masaüstü Önizleme konak havuzu Yük Dengeleme yöntemleriyle - Azure
-description: Konak havuzu Yük Dengeleme yöntemlerinin bir Windows sanal masaüstü Önizleme ortamı için.
+title: Windows sanal masaüstü konak havuzu yük dengelemesi-Azure
+description: Windows sanal masaüstü ortamı için konak havuzu Yük Dengeleme yöntemleri.
 services: virtual-desktop
 author: Heidilohr
 ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 03/21/2019
 ms.author: helohr
-ms.openlocfilehash: 8b18224339654c067d8ab9b543fa49a9c7d55ddd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4838a11c3ff54c902e823dcf93ba610f123407a8
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60870532"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606828"
 ---
 # <a name="host-pool-load-balancing-methods"></a>Ana bilgisayar havuzu yük dengeleme yöntemleri
 
-Windows sanal masaüstü Önizleme iki Yük Dengeleme yöntemi destekler. Her bir yöntemin hangi oturumu ana bilgisayarı bir konak havuzdaki bir kaynağa bağlanırken bir kullanıcının oturumunu barındıracak belirler.
+Windows sanal masaüstü iki yük dengeleme yöntemini destekler. Her yöntem, bir konak havuzundaki bir kaynağa bağlandıklarında bir kullanıcının oturumunu hangi oturum konağının barındıracağını belirler.
 
-Windows sanal masaüstü aşağıdaki Yük Dengeleme yöntemleriyle kullanılabilir:
+Aşağıdaki Yük Dengeleme yöntemleri Windows sanal masaüstü 'nde kullanılabilir:
 
-- Avantajlarına ilk Yük Dengeleme, düzgün bir konak havuzdaki oturumu konaklar arasında kullanıcı oturumlarını Dağıt olanak tanır.
-- Derinlik ilk Yük Dengeleme, oturumu ana bilgisayarı bir konak havuzda kullanıcı oturumlarıyla saturate olanak tanır. İlk oturum oturum sınırı eşiğini ulaştığında, yük dengeleyici alt sınırı ve benzeri ulaşana kadar sonraki oturumu ana bilgisayarı ana makine havuzundaki yeni kullanıcı bağlantılarına yönlendirir.
+- Enine ilk yük dengeleme, kullanıcı oturumlarını bir konak havuzundaki oturum ana bilgisayarları arasında eşit olarak dağıtmanızı sağlar.
+- Derinlik-ilk yük dengeleme, bir konak havuzundaki Kullanıcı oturumlarıyla bir oturum konağını doygunluğu sağlar. İlk oturum, oturum sınırı eşiğine ulaştığında, yük dengeleyici, Yeni Kullanıcı bağlantılarını, sınırına ulaşana kadar ana bilgisayar havuzundaki bir sonraki oturum ana bilgisayarına yönlendirir ve bu şekilde devam eder.
 
-Her konak havuzu, yalnızca bir tür Yük Dengeleme yapılandırabilirsiniz, özel. Ancak, her iki Yük Dengeleme yöntemleri olsun, aşağıdaki davranışları havuzu konak paylaşım bulundukları:
+Her konak havuzu, kendisine özgü bir tür yük dengelemeyi yalnızca bir tane yapılandırabilir. Ancak, her iki yük dengeleme yöntemi, hangi konak havuzunun nerede bulundukları, her ikisi de aşağıdaki davranışları paylaşır:
 
-- Bir kullanıcı zaten bir oturumu konak havuzunda varsa ve bu oturumuna bağlanıyor, yük dengeleyicinin başarıyla bunları oturumu ana bilgisayarı, var olan oturumu ile yönlendirilecek. Bu oturumu konağın AllowNewConnections özelliği False olarak ayarlanmış olsa bile bu davranış uygulanır.
-- Bir kullanıcının ana havuzuna zaten bir oturumu yok, yük dengeleyici oturumu konaklar Yük Dengeleme sırasında AllowNewConnections özelliği False olarak ayarlanır düşünün olmaz.
+- Bir kullanıcı zaten konak havuzunda oturum varsa ve bu oturuma yeniden bağlanmışsa, yük dengeleyici bunları mevcut oturumlarıyla birlikte oturum ana bilgisayarına başarıyla yönlendirdirecektir. Bu davranış, oturum konağının AllowNewConnections özelliği false olarak ayarlanmış olsa bile geçerlidir.
+- Bir kullanıcının konak havuzunda oturumu yoksa, yük dengeleyici, yük dengeleme sırasında AllowNewConnections özelliği false olarak ayarlanmış oturum konaklarına göz önünde bulundurmaz.
 
-## <a name="breadth-first-load-balancing-method"></a>Avantajlarına ilk Yük Dengeleme yöntemi
+## <a name="breadth-first-load-balancing-method"></a>Enine-ilk yük dengeleme yöntemi
 
-Yük Dengeleme avantajlarına ilk yöntemi, bu senaryo için en iyi duruma getirmek için kullanıcı bağlantılarını dağıtmak sağlar. Bu yöntem, havuza alınmış sanal masaüstü ortama bağlanan kullanıcılar için en iyi deneyimi sağlamak isteyen kuruluşlar için idealdir.
+Enine ilk yük dengeleme yöntemi, bu senaryoya yönelik iyileştirmek için Kullanıcı bağlantılarını dağıtmanıza olanak tanır. Bu yöntem, havuza alınmış sanal masaüstü ortamlarına bağlanan kullanıcılar için en iyi deneyimi sağlamak isteyen kuruluşlar için idealdir.
 
-Avantajlarına ilk yöntem, ilk yeni bağlantılara izin veren oturum ana sorgular. Yöntemi ardından en az oturumu ana bilgisayarı seçer oturum sayısı. Bağ ise, yöntem sorguda ilk oturum ana bilgisayarı seçer.
+Enine ilk yöntem, yeni bağlantılara izin veren oturum ana bilgisayarlarını ilk kez sorgular. Daha sonra yöntemi, en az oturum sayısı olan oturum konağını seçer. Bir bağ varsa, yöntem sorgudaki ilk oturum konağını seçer.
 
-## <a name="depth-first-load-balancing-method"></a>Derinlik ilk Yük Dengeleme yöntemi
+## <a name="depth-first-load-balancing-method"></a>Derinlik-ilk yük dengeleme yöntemi
 
-Derinlik ilk Yük Dengeleme yöntemi, bu senaryo için en iyi duruma getirmek için bir zaman bir oturumu ana bilgisayarı saturate sağlar. Bu yöntem, bir ana makine havuzu için ayrılan sanal makine sayısı üzerinde daha ayrıntılı denetim istiyorsanız maliyete kuruluşlar için idealdir.
+Derinlik-ilk yük dengeleme yöntemi, bu senaryoyu iyileştirmek için tek seferde bir oturum ana bilgisayarının doygunluğunu görmenizi sağlar. Bu yöntem, bir konak havuzu için ayırdıkları sanal makine sayısı üzerinde daha ayrıntılı denetim yapmak isteyen maliyet açısından bilinçli kuruluşlar için idealdir.
 
-Derinlik ilk yöntem, ilk yeni bağlantılara izin vermek ve maksimum oturum sınırlarını aştığını gitti henüz oturum ana sorgular. Yöntemi daha sonra en yüksek oturum sayısı oturum ana bilgisayarı seçer. Bağ ise, yöntem sorguda ilk oturum ana bilgisayarı seçer.
+İlk olarak kısıtlama yöntemi, yeni bağlantılara izin veren ve en fazla oturum sınırının üzerinde olmayan oturum konaklarını sorgular. Daha sonra yöntemi, en fazla oturum sayısı olan oturum konağını seçer. Bir bağ varsa, yöntem sorgudaki ilk oturum konağını seçer.

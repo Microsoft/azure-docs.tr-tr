@@ -3,45 +3,123 @@
 - name: Genel Bakış
   items:
     - name: Azure Geçişi Hakkında
-      href: migrate-overview.md
+      href: migrate-services-overview.md
+    - name: Yenilikler
+      href: whats-new.md
 - name: Öğreticiler
   items:
-    - name: VMware VM’lerini keşfedin ve değerlendirin
-      href: tutorial-assessment-vmware.md
+    - name: VMware VM’lerini değerlendirme ve geçirme
+      items:
+        - name: VMware’i değerlendirme ve geçişe hazırlama
+          href: tutorial-prepare-vmware.md
+        - name: VMware VM’leri geçiş için değerlendirme
+          href: tutorial-assess-vmware.md
+        - name: VMware VM’leri geçirme
+          items:
+            - name: VMware VM’lere yönelik geçiş seçenekleri hakkında
+              href: server-migrate-overview.md
+            - name: VMware VM'leri aracısız geçiş ile geçirme
+              href: tutorial-migrate-vmware.md
+            - name: VMware VM'leri aracı tabanlı geçiş ile geçirme
+              href: tutorial-migrate-vmware-agent.md
+    - name: Hyper-V VM’lerini değerlendirme ve geçirme
+      items:
+        - name: Hyper-V’yi değerlendirme ve geçişe hazırlama
+          href: tutorial-prepare-hyper-v.md
+        - name: Hyper-V VM’leri geçiş için değerlendirme
+          href: tutorial-assess-hyper-v.md
+        - name: Hyper-V VM’leri Azure’a Geçirme
+          href: tutorial-migrate-hyper-v.md
+    - name: Fiziksel sunucuları değerlendirme ve geçirme
+      items:
+        - name: Fiziksel sunucuları değerlendirme ve geçiş için hazırlama
+          href: tutorial-prepare-physical.md
+        - name: Fiziksel sunucuları değerlendirme
+          href: tutorial-assess-physical.md
+        - name: Fiziksel sunucuları geçirme
+          href: tutorial-migrate-physical-virtual-machines.md
+    - name: İçeri aktarılan sunucuları geçiş için değerlendirme
+      items:
+        - name: İçeri aktarılan sunucuları geçiş için değerlendirme
+          href: tutorial-assess-import.md
 - name: Kavramlar
   items:
-    - name: Toplayıcı hakkında
-      href: concepts-collector.md
-    - name: Toplayıcı sürüm yükseltmeleri
-      href: concepts-collector-upgrade.md
-    - name: Değerlendirme hesaplamaları
+    - name: Sık sorulan sorular
+      href: resources-faq.md
+    - name: Destek matrisleri
+      items:
+        - name: Azure Geçişi için destek matrisi
+          href: migrate-support-matrix.md
+        - name: VMware değerlendirmesi ve geçiş için destek matrisi
+          href: migrate-support-matrix-vmware.md
+        - name: Hyper-V değerlendirmesi ve geçiş için destek matrisi
+          href: migrate-support-matrix-hyper-v.md
+        - name: Fiziksel sunucu değerlendirmesi ve geçişi için destek matrisi
+          href: migrate-support-matrix-physical.md
+    - name: Hyper-V geçiş mimarisi
+      href: hyper-v-migration-architecture.md
+    - name: Aracı tabanlı geçiş mimarisi
+      href: agent-based-migration-architecture.md
+    - name: Azure Geçişi gereci
+      href: migrate-appliance.md
+    - name: Azure Geçişi çoğaltma gereci
+      href: migrate-replication-appliance.md
+    - name: Değerlendirmeler için en iyi yöntemler
+      href: best-practices-assessment.md
+    - name: Değerlendirmelere genel bakış
       href: concepts-assessment-calculation.md
-    - name: Bağımlılık görselleştirme hakkında
+    - name: Bağımlılık görselleştirme
       href: concepts-dependency-visualization.md
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Geçiş örnekleri-Contoso serisi
-      href: contoso-migration-overview.md
-    - name: Büyük bir ortamı keşfetme ve değerlendirme
-      href: how-to-scale-assessment.md
-    - name: Grup makineleri
+    - name: Önceki sürümle çalışma
+      href: migrate-v1.md
+    - name: VMware aletini dağıtma
+      href: how-to-set-up-appliance-vmware.md
+    - name: Hyper-V aletini dağıtma
+      href: how-to-set-up-appliance-hyper-v.md
+    - name: Fiziksel sunucu aleti dağıtma
+      href: how-to-set-up-appliance-physical.md
+    - name: Uygulamaları/rolleri/özellikleri bulma
+      href: how-to-discover-applications.md
+    - name: İlk kez araç ekleme
+      href: how-to-add-tool-first-time.md
+    - name: Değerlendirme araçları ekleme
+      href: how-to-assess.md
+    - name: Değerlendirme için grup makineleri
       href: how-to-create-a-group.md
-    - name: Makine bağımlılıkları kullanan grup makineleri
+    - name: Bağımlılık görselleştirmesi kullanan grup makineleri
       href: how-to-create-group-machine-dependencies.md
-    - name: Grup bağımlılıklarını kullanarak bir grubu daraltma
-      href: how-to-create-group-dependencies.md
+    - name: Aracısız bağımlılık görselleştirmesi kullanan grup makineleri
+      href: how-to-create-group-machine-dependencies-agentless.md
+    - name: Değerlendirme oluşturma
+      href: how-to-create-assessment.md
+    - name: SQL Server veritabanını değerlendirme
+      href: 'https://docs.microsoft.com/sql/dma/dma-assess-sql-data-estate-to-sqldb'
     - name: Bir değerlendirmeyi özelleştirme
       href: how-to-modify-assessment.md
-    - name: Değerlendirmenin ardından makineleri geçirme
-      href: how-to-get-migration-tool.md
+    - name: Geçiş araçları ekleme
+      href: how-to-migrate.md
+    - name: Makineleri geçişe hazırlama
+      href: prepare-for-migration.md
+    - name: Azure Geçişi projesini silme
+      href: how-to-delete-project.md
+- name: Ölçek değerlendirmesi ve geçiş
+  items:
+    - name: Çok sayıda VMware VM’sini değerlendirme
+      href: scale-vmware-assessment.md
+    - name: Çok sayıda Hyper-V VM’sini değerlendirme
+      href: scale-hyper-v-assessment.md
     - name: Çok büyük sayıda VM'nin geçişini otomatikleştirme
       href: how-to-migrate-at-scale.md
+    - name: Geçiş örnekleri (Contoso serisi)
+      href: contoso-migration-overview.md
+- name: Sorun giderme
+  items:
     - name: Azure Geçişi sorunlarını giderme
       href: troubleshooting-general.md
 - name: Kaynaklar
   items:
-    - name: SSS
-      href: resources-faq.md
     - name: Bulut Benimseme Çerçevesi kapsamında geçiş
       href: 'https://docs.microsoft.com/azure/architecture/cloud-adoption/migrate/index'
     - name: REST API

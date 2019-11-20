@@ -1,20 +1,20 @@
 ---
-title: "Hızlı Başlangıç: Azure veri Gezgini'nde verileri Sorgulama"
-description: Bu hızlı başlangıçta Azure Veri Gezgini'ndeki verileri sorgulamayı ve paylaşmayı öğreneceksiniz.
+title: 'Hızlı Başlangıç: Azure Veri Gezgini Web kullanıcı arabiriminde verileri Sorgulama'
+description: Bu hızlı başlangıçta, sorgu ve Azure Veri Gezgini Web kullanıcı arabiriminde veri paylaşma hakkında bilgi edinin.
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
-ms.date: 09/24/2018
-ms.openlocfilehash: 6b371cf9aeb55a92fc72357ad7dc6b2cbddcc058
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 07/04/2019
+ms.openlocfilehash: 145e452a3a914e1026d6da11f2ce38e85fa724f0
+ms.sourcegitcommit: 66237bcd9b08359a6cce8d671f846b0c93ee6a82
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60775699"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67797182"
 ---
-# <a name="quickstart-query-data-in-azure-data-explorer"></a>Hızlı Başlangıç: Azure veri Gezgini'nde verileri Sorgulama
+# <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Hızlı Başlangıç: Azure Veri Gezgini Web kullanıcı arabiriminde verileri Sorgulama
 
 Azure Veri Gezgini, günlük ve telemetri verileri için hızlı ve yüksek oranda ölçeklenebilir veri keşfetme hizmetidir. Azure Veri Gezgini, sorgu çalıştırmanızı ve paylaşmanızı sağlayan bir web uygulaması sunar. Bu uygulama Azure portalda ve tek başına bir web uygulaması olarak sağlanır. Bu makalede uygulamanın birden fazla kümeye bağlanmanızı ve sorgularınızın ayrıntılı bağlantılarını paylaşmanızı sağlayan tek başına sürümünde çalışacaksınız.
 
@@ -191,5 +191,4 @@ Bu hızlı başlangıçta herhangi bir kaynak oluşturmadınız ancak kümelerde
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-> [!div class="nextstepaction"]
-> [Azure Veri Gezgini için sorgu yazma](write-queries.md)
+[Azure Veri Gezgini için sorgu yazma](write-queries.md)

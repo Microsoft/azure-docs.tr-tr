@@ -1,6 +1,6 @@
 ---
-title: Teradata Azure Data Factory kullanarak verileri kopyalama | Microsoft Docs
-description: Data Factory hizmetinin sağlayan Teradata Connector hakkında havuz Data Factory tarafından desteklenen veri depolarının Teradata veritabanından veri kopyalayın öğrenin.
+title: Azure Data Factory kullanarak Teradata Vanndan veri kopyalama
+description: Data Factory hizmetinin Teradata Bağlayıcısı, bir Teradata Vanşdan verileri, havuz olarak Data Factory desteklenen veri depolarına kopyalamanızı sağlar.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -10,62 +10,76 @@ ms.service: data-factory
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.date: 07/02/2019
+ms.date: 10/24/2019
 ms.author: jingwang
-ms.openlocfilehash: 63f28c8b6eaceed12e1f76e9c0c5984e3b63b500
-ms.sourcegitcommit: d3b1f89edceb9bff1870f562bc2c2fd52636fc21
+ms.openlocfilehash: 4074c50aa17bf804696060134e37055a18bd0137
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67561413"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73680099"
 ---
-# <a name="copy-data-from-teradata-using-azure-data-factory"></a>Teradata, Azure Data Factory kullanarak verileri kopyalama
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="copy-data-from-teradata-vantage-by-using-azure-data-factory"></a>Azure Data Factory kullanarak Teradata Vanndan veri kopyalama
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 >
 > * [Sürüm 1](v1/data-factory-onprem-teradata-connector.md)
 > * [Geçerli sürüm](connector-teradata.md)
 
-Bu makalede, kopyalama etkinliği Azure Data Factory'de bir Teradata veritabanından veri kopyalamak için nasıl kullanılacağını özetlenmektedir. Yapılar [kopyalama etkinliği'ne genel bakış](copy-activity-overview.md) kopyalama etkinliği genel bir bakış sunan makalesi.
+Bu makalede, Teradata vanana 'dan veri kopyalamak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı özetlenmektedir. [Kopyalama etkinliğine genel bakış](copy-activity-overview.md)sayfasında oluşturulur.
 
-## <a name="supported-capabilities"></a>Desteklenen özellikler
+## <a name="supported-capabilities"></a>Desteklenen yetenekler
 
-Teradata veritabanından veri tüm desteklenen havuz veri deposuna kopyalayabilirsiniz. Kaynakları/havuz kopyalama etkinliği tarafından desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablo.
+Bu Teradata Bağlayıcısı aşağıdaki etkinlikler için desteklenir:
 
-Özellikle, bu Teradata bağlayıcı'yı destekler:
+- [Desteklenen kaynak/havuz matrisi](copy-activity-overview.md) ile [kopyalama etkinliği](copy-activity-overview.md)
+- [Arama etkinliği](control-flow-lookup-activity.md)
 
-- Teradata **sürüm 14.10, 15.0, 15.10, 16,0, 16.10 ve 16.20**.
-- Kullanarak verileri kopyalama **temel** veya **Windows** kimlik doğrulaması.
-- Teradata kaynak paralel Kopyala. Bkz: [paralel Teradata kopyadan](#parallel-copy-from-teradata) ayrıntıları bölümü.
+Teradata Vana 'dan verileri desteklenen herhangi bir havuz veri deposuna kopyalayabilirsiniz. Kopyalama etkinliği tarafından kaynak/havuz olarak desteklenen veri depolarının listesi için [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats) tablosuna bakın.
+
+Özellikle, bu Teradata Bağlayıcısı şunları destekler:
+
+- Teradata **sürüm 14,10, 15,0, 15,10, 16,0, 16,10 ve 16,20**.
+- **Temel** veya **Windows** kimlik doğrulamasını kullanarak verileri kopyalama.
+- Teradata kaynağından paralel kopyalama. Ayrıntılar için [Teradata 'Dan paralel kopyalama](#parallel-copy-from-teradata) bölümüne bakın.
 
 > [!NOTE]
 >
-> Azure Data Factory, yerleşik bir ODBC sürücüsü tarafından yetkilendirilmiş ve esnek bağlantı seçenekleri yanı sıra kullanıma hazır paralel kopyalama performansını artırmak üzere sunan şirket içinde barındırılan tümleştirme çalışma zamanı v3.18 beri Teradata bağlayıcı yükseltildi. Teradata hala olarak desteklenen tüm mevcut iş yüklerini önceki Teradata Bağlayıcısı'nı kullanarak .NET veri sağlayıcısı tarafından yetkilendirilmiş-olan ancak bundan sonra yeni bir tane kullanmak için önerilir. Yeni yolunu not alın, bağlantılı veri kümesi/service/kopyalama kaynağı farklı bir dizi gerektirir. Yapılandırma ayrıntıları ilgili bölümüne bakın.
+> Şirket içinde barındırılan Integration Runtime v 3.18 yayımlandıktan sonra, Teradata bağlayıcısını Azure Data Factory yükselttiniz. Önceki Teradata bağlayıcısını kullanan tüm mevcut iş yükleri hala desteklenmektedir. Bununla birlikte, yeni iş yükleri için yenisini kullanmak iyi bir fikirdir. Yeni yolun farklı bir bağlı hizmet, veri kümesi ve kopyalama kaynağı kümesi gerektirdiğini unutmayın. Yapılandırma ayrıntıları için aşağıdaki ilgili bölümlere bakın.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Teradata, genel olarak erişilebilir durumda değilse, şirket içinde barındırılan tümleştirme çalışma zamanını oluşturan ayarlayın gerekir. Tümleştirme çalışma zamanı hakkında daha fazla bilgi için bkz. [şirket içinde barındırılan tümleştirme çalışma zamanı](create-self-hosted-integration-runtime.md). Tümleştirme çalışma zamanı 3.18 sürümünden başlayarak, yerleşik bir Teradata sürücü sağlar, bu nedenle herhangi bir sürücü el ile yüklemeniz gerekmez. Sürücü gerektirir "görsel C++ yeniden dağıtılabilir 2012 Update 4" şirket içinde barındırılan IR makinede indirmesine [burada](https://www.microsoft.com/en-sg/download/details.aspx?id=30679) , henüz yüklü değilse.
+[!INCLUDE [data-factory-v2-integration-runtime-requirements](../../includes/data-factory-v2-integration-runtime-requirements.md)]
 
-3\.18 düşük şirket içinde barındırılan IR sürümü için yüklemeniz gerekir. [Teradata için .NET veri sağlayıcısı](https://go.microsoft.com/fwlink/?LinkId=278886) 14 sürümü veya üzeri tümleştirme çalışma zamanı makinesinde. 
+Integration Runtime, 3,18 sürümünden başlayarak yerleşik bir Teradata sürücüsü sağlar. Herhangi bir sürücüyü el ile yüklemeniz gerekmez. Sürücü, şirket içinde barındırılan C++ tümleştirme çalışma zamanı makinesinde "Visual Redistributable 2012 güncelleştirme 4" gerektirir. Henüz yüklemediyseniz, [buradan](https://www.microsoft.com/en-sg/download/details.aspx?id=30679)indirin.
+
+3,18 ' den önceki şirket içinde barındırılan tümleştirme çalışma zamanı sürümü için, tümleştirme çalışma zamanı makinesine Teradata, sürüm 14 veya üzeri [için .net veri sağlayıcısı](https://go.microsoft.com/fwlink/?LinkId=278886)sürümünü yüklemelisiniz. 
 
 ## <a name="getting-started"></a>Başlarken
 
 [!INCLUDE [data-factory-v2-connector-get-started](../../includes/data-factory-v2-connector-get-started.md)]
 
-Aşağıdaki bölümler, Data Factory varlıklarını belirli Teradata bağlayıcıya tanımlamak için kullanılan özellikleri hakkında ayrıntılı bilgi sağlar.
+Aşağıdaki bölümler, Teradata bağlayıcısına özgü Data Factory varlıkları tanımlamak için kullanılan özelliklerle ilgili ayrıntıları sağlar.
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
 
-Bağlı Teradata hizmeti için aşağıdaki özellikleri destekler:
+Teradata bağlı hizmeti aşağıdaki özellikleri destekler:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Type özelliği ayarlanmalıdır: **Teradata** | Evet |
-| connectionString | Teradata veritabanına bağlanmak için gereken bilgileri belirtir. Aşağıdaki örneklere bakın.<br/>Parola Azure anahtar kasası ve çekme koyabilirsiniz `password` yapılandırma bağlantı dizesini dışında. Başvurmak [kimlik bilgilerini Azure Key Vault'ta Store](store-credentials-in-key-vault.md) daha fazla ayrıntı içeren makalesi. | Evet |
-| username | Teradata veritabanına bağlanmak için kullanıcı adı belirtin. Windows kimlik doğrulaması kullanılırken geçerlidir. | Hayır |
-| password | Kullanıcı adı için belirtilen kullanıcı hesabı için parola belirtin. Ayrıca da tercih edebilirsiniz [Azure Key Vault'ta depolanan bir gizli dizi başvuru](store-credentials-in-key-vault.md). <br>Windows kimlik doğrulaması kullanılırken uygulanır veya temel kimlik doğrulaması için parola anahtar Kasası'nda başvuruyor. | Hayır |
-| connectVia | [Integration Runtime](concepts-integration-runtime.md) veri deposuna bağlanmak için kullanılacak. Belirtildiği gibi bir şirket içinde barındırılan tümleştirme çalışma zamanı gereklidir [önkoşulları](#prerequisites). |Evet |
+| type | Type özelliği **Teradata**olarak ayarlanmalıdır. | Evet |
+| connectionString | Teradata örneğine bağlanmak için gereken bilgileri belirtir. Aşağıdaki örneklere bakın.<br/>Ayrıca Azure Key Vault bir parola yerleştirebilir ve `password` yapılandırmasını bağlantı dizesinden dışarı çekebilirsiniz. Daha ayrıntılı bilgi için [Azure Key Vault 'de mağaza kimlik bilgilerini](store-credentials-in-key-vault.md) inceleyin. | Evet |
+| kullanıcı adı | Teradata 'a bağlanmak için bir Kullanıcı adı belirtin. Windows kimlik doğrulaması kullanırken geçerlidir. | Hayır |
+| password | Kullanıcı adı için belirttiğiniz kullanıcı hesabı için bir parola belirtin. Ayrıca, [Azure Key Vault depolanan bir gizli dizi başvurusunu](store-credentials-in-key-vault.md)da seçebilirsiniz. <br>Windows kimlik doğrulaması kullandığınızda veya temel kimlik doğrulaması için Key Vault bir parolaya başvurulduğunda geçerlidir. | Hayır |
+| connectVia | Veri deposuna bağlanmak için kullanılacak [Integration Runtime](concepts-integration-runtime.md) . [Önkoşullar](#prerequisites) bölümünden daha fazla bilgi edinin. Belirtilmemişse, varsayılan Azure Integration Runtime kullanır. |Evet |
 
-**Örnek: temel kimlik doğrulaması kullanma**
+Büyük/küçük harf olarak bağlantı dizesinde ayarlayabileceğiniz daha fazla bağlantı özelliği:
+
+| Özellik | Açıklama | Varsayılan değer |
+|:--- |:--- |:--- |
+| CharacterSet | Oturum için kullanılacak karakter kümesi. Ör. `CharacterSet=UTF16`.<br><br/>Bu değer, Kullanıcı tanımlı bir karakter kümesi veya aşağıdaki önceden tanımlanmış karakter kümelerinden biri olabilir: <br/>-ASCII<br/>-UTF8<br/>-UTF16<br/>- LATIN1252_0A<br/>- LATIN9_0A<br/>- LATIN1_0A<br/>-Shift-JıS (Windows, DOS uyumlu, KANJISJIS_0S)<br/>-EUC (UNIX uyumlu, KANJIEC_0U)<br/>-IBM ana bilgisayar (KANJIEBCDIC5035_0I)<br/>- KANJI932_1S0<br/>-BIG5 (TCHBIG5_1R0)<br/>-GB (SCHGB2312_1T0)<br/>- SCHINESE936_6R0<br/>- TCHINESE950_8R0<br/>-Networkkorece (HANGULKSC5601_2R4)<br/>- HANGUL949_7R0<br/>- ARABIC1256_6A0<br/>- CYRILLIC1251_2A0<br/>- HEBREW1255_5A0<br/>- LATIN1250_1A0<br/>- LATIN1254_7A0<br/>- LATIN1258_8A0<br/>- THAI874_4A0 | Varsayılan değer `ASCII`. |
+| MaxRespSize |SQL istekleri için en büyük yanıt arabelleği boyutu (kilobayt (KBs) cinsinden). Ör. `MaxRespSize=‭10485760‬`.<br/><br/>Teradata veritabanı sürüm 16,00 veya üzeri için en büyük değer 7361536 ' dir. Önceki sürümleri kullanan bağlantılarda en büyük değer 1048576 ' dir. | Varsayılan değer `65536`. |
+
+**Temel kimlik doğrulaması kullanan örnek**
 
 ```json
 {
@@ -83,7 +97,7 @@ Bağlı Teradata hizmeti için aşağıdaki özellikleri destekler:
 }
 ```
 
-**Örnek: Windows kimlik doğrulaması kullanma**
+**Windows kimlik doğrulamasını kullanan örnek**
 
 ```json
 {
@@ -105,9 +119,9 @@ Bağlı Teradata hizmeti için aşağıdaki özellikleri destekler:
 
 > [!NOTE]
 >
-> Aşağıdaki yük ile Teradata için .NET veri sağlayıcısı tarafından sunulan bağlı hizmet Teradata kullandıysanız, hala olarak desteklenmektedir-olan ancak bundan sonra yeni bir tane kullanmak için önerilir.
+> Aşağıdaki yük hala destekleniyor. Bununla birlikte, yeni bir tane kullanmanız gerekir.
 
-**Önceki yükü:**
+**Önceki yük:**
 
 ```json
 {
@@ -133,15 +147,15 @@ Bağlı Teradata hizmeti için aşağıdaki özellikleri destekler:
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
 
-Bölümleri ve veri kümeleri tanımlamak için mevcut özelliklerin tam listesi için veri kümeleri makalesine bakın. Bu bölümde, Teradata veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar.
+Bu bölüm, Teradata veri kümesi tarafından desteklenen özelliklerin bir listesini sağlar. Veri kümelerini tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. [veri kümeleri](concepts-datasets-linked-services.md).
 
-Teradata verileri kopyalamak için aşağıdaki özellikler desteklenir:
+Teradata 'tan veri kopyalamak için aşağıdaki özellikler desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Dataset öğesinin type özelliği ayarlanmalıdır: **TeradataTable** | Evet |
-| database | Teradata veritabanı adı. | Hayır (etkinlik kaynağı "sorgu" belirtilmişse) |
-| table | Teradata veritabanı tablosunun adı. | Hayır (etkinlik kaynağı "sorgu" belirtilmişse) |
+| type | Veri kümesinin Type özelliği `TeradataTable`olarak ayarlanmalıdır. | Evet |
+| veritabanı | Teradata örneğinin adı. | Hayır (etkinlik kaynağı içinde "sorgu" belirtilmişse) |
+| tablosundan | Teradata örneğindeki tablonun adı. | Hayır (etkinlik kaynağı içinde "sorgu" belirtilmişse) |
 
 **Örnek:**
 
@@ -150,20 +164,21 @@ Teradata verileri kopyalamak için aşağıdaki özellikler desteklenir:
     "name": "TeradataDataset",
     "properties": {
         "type": "TeradataTable",
+        "typeProperties": {},
+        "schema": [],        
         "linkedServiceName": {
             "referenceName": "<Teradata linked service name>",
             "type": "LinkedServiceReference"
-        },
-        "typeProperties": {}
+        }
     }
 }
 ```
 
 > [!NOTE]
 >
-> Aşağıdaki gibi "RelationalTable" türü veri kümesi kullanıyorsanız, hala olarak desteklenmektedir-olan ancak bundan sonra yeni bir tane kullanmak için önerilir.
+> `RelationalTable` türü veri kümesi hala destekleniyor. Ancak, yeni veri kümesini kullanmanızı öneririz.
 
-**Önceki yükü:**
+**Önceki yük:**
 
 ```json
 {
@@ -181,31 +196,30 @@ Teradata verileri kopyalamak için aşağıdaki özellikler desteklenir:
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
 
-Bölümleri ve etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları](concepts-pipelines-activities.md) makalesi. Bu bölümde, Teradata kaynak tarafından desteklenen özelliklerin bir listesini sağlar.
+Bu bölüm, Teradata kaynağı tarafından desteklenen özelliklerin bir listesini sağlar. Etkinlikleri tanımlamaya yönelik bölümlerin ve özelliklerin tam listesi için bkz. işlem [hatları](concepts-pipelines-activities.md). 
 
-### <a name="teradata-as-source"></a>Teradata kaynağı olarak
+### <a name="teradata-as-source"></a>Kaynak olarak Teradata
 
-> [!TIP]
->
-> Daha fazla bilgi [paralel Teradata kopyadan](#parallel-copy-from-teradata) bölümünü verimli bir şekilde veri bölümleme kullanılarak Teradata verileri yüklenemedi.
+>[!TIP]
+>Veri bölümleme kullanarak Teradata 'tan verileri verimli bir şekilde yüklemek için [Teradata 'Den paralel kopyadan](#parallel-copy-from-teradata) daha fazla bilgi edinin.
 
-Teradata verileri kopyalamak için kopyalama etkinliği aşağıdaki özellikler desteklenir **kaynak** bölümü:
+Teradata 'tan veri kopyalamak için, etkinlik **kaynağını** kopyalama bölümünde aşağıdaki özellikler desteklenir:
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| type | Kopyalama etkinliği kaynağı öğesinin type özelliği ayarlanmalıdır: **TeradataSource** | Evet |
-| query | Verileri okumak için özel bir SQL sorgusu kullanın. Örneğin: `"SELECT * FROM MyTable"`.<br>Bölümlenmiş yük etkinleştirdiğinizde, sorgunuzda karşılık gelen yerleşik bölüm parametreyle bağlamanız gerekir. Örneklere bakın [paralel Teradata kopyadan](#parallel-copy-from-teradata) bölümü. | Yok (veri kümesi tablosunda belirtilmişse) |
-| partitionOptions | Veri bölümleme Teradata verileri yüklemek için kullanılan seçenekleri belirtir. <br>Değerler: izin ver: **Hiçbiri** (varsayılan), **karma** ve **DynamicRange**.<br>Bölüm seçeneği etkin olduğunda (değil ' None'), lütfen de yapılandırmanız **[ `parallelCopies` ](copy-activity-performance.md#parallel-copy)** kopyalama etkinliği örneğin 4 olarak ayarlama, belirleyen paralel derecede eşzamanlı olarak Teradata verileri yüklemek için Veritabanı. | Hayır |
-| partitionSettings | Veri bölümleme için ayar grubu belirtin. <br>Bölüm seçenek olmadığı durumlarda uygulama `None`. | Hayır |
-| partitionColumnName | Kaynak sütunun adını **Tamsayı türünde** kullanılacak aralığı için paralel bir kopya olarak bölümleyerek. Belirtilmezse, tablonun birincil anahtarı algılandı ve bölüm sütunu kullanılan otomatik olarak oluşturulacak. <br>Bölüm seçeneği olduğunda geçerli `Hash` veya `DynamicRange`. Kaynak verilerini almak için sorgu kullanın, bağlama `?AdfHashPartitionCondition` veya `?AdfRangePartitionColumnName` WHERE yan tümcesinde. Örnekte bakın [paralel Teradata kopyadan](#parallel-copy-from-teradata) bölümü. | Hayır |
-| partitionUpperBound | Veri kopyalamak için bölüm sütunu en büyük değeri. <br>Bölüm seçeneği olduğunda geçerli `DynamicRange`. Kaynak verilerini almak için sorgu kullanın, bağlama `?AdfRangePartitionUpbound` WHERE yan tümcesinde. Örnekte bakın [paralel Teradata kopyadan](#parallel-copy-from-teradata) bölümü. | Hayır |
-| partitionLowerBound | Veri kopyalamak için bölüm sütunu en küçük değeri. <br>Bölüm seçeneği olduğunda geçerli `DynamicRange`. Kaynak verilerini almak için sorgu kullanın, bağlama `?AdfRangePartitionLowbound` WHERE yan tümcesinde. Örnekte bakın [paralel Teradata kopyadan](#parallel-copy-from-teradata) bölümü. | Hayır |
+| type | Kopyalama etkinliği kaynağının Type özelliği `TeradataSource`olarak ayarlanmalıdır. | Evet |
+| sorgu | Verileri okumak için özel SQL sorgusunu kullanın. `"SELECT * FROM MyTable"` bunun bir örneğidir.<br>Bölümlenmiş yükü etkinleştirdiğinizde, sorgunuza karşılık gelen yerleşik bölüm parametrelerini de eklemeniz gerekir. Örnekler için, [Teradata 'Den paralel kopyalama](#parallel-copy-from-teradata) bölümüne bakın. | Hayır (veri kümesindeki tablo belirtilmişse) |
+| partitionOptions | Teradata 'tan veri yüklemek için kullanılan veri bölümleme seçeneklerini belirtir. <br>Değerlere izin ver: **none** (varsayılan), **hash** ve **DynamicRange**.<br>Bir bölüm seçeneği etkinleştirildiğinde (`None`değil), Teradata 'den eşzamanlı olarak veri yükleme ile paralellik derecesi kopyalama etkinliğindeki [`parallelCopies`](copy-activity-performance.md#parallel-copy) ayarı tarafından denetlenir. | Hayır |
+| partitionSettings | Veri bölümleme için ayarların grubunu belirtin. <br>Bölüm seçeneği `None`olmadığında Uygula. | Hayır |
+| partitionColumnName | Paralel kopya için Aralık bölümü veya karma bölümü tarafından kullanılacak kaynak sütunun adını belirtin. Belirtilmemişse, tablonun birincil dizini otomatik olarak algılanır ve bölüm sütunu olarak kullanılır. <br>Bölüm seçeneği `Hash` veya `DynamicRange`olduğunda geçerlidir. Kaynak verileri almak için bir sorgu kullanıyorsanız, ' ın WHERE yan tümcesinde `?AdfHashPartitionCondition` veya `?AdfRangePartitionColumnName`. [Teradata 'Den paralel kopyalama](#parallel-copy-from-teradata) bölümündeki örneğe bakın. | Hayır |
+| partitionüstsınırı | Verilerin kopyalanacağı bölüm sütununun en büyük değeri. <br>Bölüm seçeneği `DynamicRange`olduğunda Uygula. Kaynak verileri almak için sorgu kullanıyorsanız, `?AdfRangePartitionUpbound` WHERE yan tümcesinde kanca. Bir örnek için, [Teradata 'Den paralel kopyalama](#parallel-copy-from-teradata) bölümüne bakın. | Hayır |
+| Partitionalme sınırı | Verilerin kopyalanacağı bölüm sütununun en küçük değeri. <br>Bölüm seçeneği `DynamicRange`olduğunda geçerlidir. Kaynak verileri almak için bir sorgu kullanırsanız, ' ın WHERE yan tümcesinde `?AdfRangePartitionLowbound` kanca. Bir örnek için, [Teradata 'Den paralel kopyalama](#parallel-copy-from-teradata) bölümüne bakın. | Hayır |
 
 > [!NOTE]
 >
-> "RelationalSource" türü kopyalama kaynağı kullandıysanız, hala olarak desteklenmektedir-olduğu halde yeni yerleşik paralel yüklerinin Teradata (bölüm seçenekleri) desteklemiyor. İleride bu yeni bir tane kullanmak için önerilir.
+> `RelationalSource` türü kopyalama kaynağı hala desteklenmektedir, ancak Teradata 'tan yeni yerleşik paralel yüklemeyi (Bölüm seçenekleri) desteklemez. Ancak, yeni veri kümesini kullanmanızı öneririz.
 
-**Örnek: temel sorgu bölümü olmadan'ni kullanarak veri kopyalama**
+**Örnek: bölüm olmadan temel sorgu kullanarak veri kopyalama**
 
 ```json
 "activities":[
@@ -237,23 +251,23 @@ Teradata verileri kopyalamak için kopyalama etkinliği aşağıdaki özellikler
 ]
 ```
 
-## <a name="parallel-copy-from-teradata"></a>Teradata paralel Kopyala
+## <a name="parallel-copy-from-teradata"></a>Teradata 'dan paralel kopya
 
-Veri Fabrikası Teradata Bağlayıcısı muhteşem bir performans ile paralel Teradata verileri kopyalamak için bölümleme yerleşik veri sağlar. Bulabilirsiniz Teradata kaynak kopyalama etkinliği verileri bölümleme Seçenekler ->:
+Data Factory Teradata Bağlayıcısı, Teradata 'den paralel olarak veri kopyalamak için yerleşik veri bölümlendirme sağlar. Kopyalama etkinliğinin **kaynak** tablosunda veri bölümleme seçeneklerini bulabilirsiniz.
 
-![Bölüm seçenekleri](./media/connector-teradata/connector-teradata-partition-options.png)
+![Bölüm seçeneklerinin ekran görüntüsü](./media/connector-teradata/connector-teradata-partition-options.png)
 
-Veri Fabrikası paralel sorgular bölümlenmiş kopyalama etkinleştirdiğinizde, Teradata kaynak bölümler tarafından verileri yüklemek için karşı çalışır. Paralel derece yapılandırılır ve gösterirken **[ `parallelCopies` ](copy-activity-performance.md#parallel-copy)** kopyalama etkinliğinde ayarlama. Örneğin, ayarlarsanız `parallelCopies` dört, eşzamanlı olarak veri fabrikası oluşturur ve dört sorgularını çalıştırır, Teradata veritabanından veri alınırken her bölümü, belirtilen bölüm seçenek ve ayarlar alınarak.
+Bölümlenmiş kopyayı etkinleştirdiğinizde Data Factory, verileri bölümlere göre yüklemek için Teradata kaynağınıza karşı paralel sorgular çalıştırır. Paralel derece kopyalama etkinliğinde [`parallelCopies`](copy-activity-performance.md#parallel-copy) ayarıyla denetlenir. Örneğin, `parallelCopies` dört olarak ayarlarsanız, Data Factory aynı anda, belirtilen bölüm seçeneğiniz ve ayarlarınıza göre dört sorgu üretir ve çalışır ve her sorgu, Teradata 'ınızdan verilerin bir kısmını alır.
 
-Teradata veritabanından özellikle büyük miktarda veri yüklediğinizde bölümleme verilerle paralel kopyasını etkinleştirmek için önerilir. Farklı senaryolar için önerilen yapılandırmaları şunlardır:
+Özellikle, Teradata 'ınızdan büyük miktarda veri yüklediğinizde, veri bölümleme ile paralel kopyayı etkinleştirmeniz önerilir. Farklı senaryolar için önerilen yapılandırma aşağıda verilmiştir. Dosya tabanlı veri deposuna veri kopyalarken, bir klasöre birden çok dosya (yalnızca klasör adını belirt) olarak yazma işlemi geri çağrılır, bu durumda performans tek bir dosyaya yazılmasından daha iyidir.
 
-| Senaryo                                                     | Önerilen ayarları                                           |
+| Senaryo                                                     | Önerilen ayarlar                                           |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Büyük tablosundan tam yük                                   | **Bölüm seçeneği**: Karma. <br><br/>Yürütme sırasında data Factory otomatik olarak PK sütun algılamak, onu karşı karma uygulama ve veri bölümleri tarafından kopyalayın. |
-| Büyük miktarda veri özel sorgu kullanarak yükleme                 | **Bölüm seçeneği**: Karma.<br>**Sorgu**: `SELECT * FROM <TABLENAME> WHERE ?AdfHashPartitionCondition AND <your_additional_where_clause>`.<br>**Bölüm sütunu**: Uygula karma bölüm için kullanılan sütun belirtin. Belirtilmezse, ADF Teradata veri kümesinde belirtilen tablonun PK sütunu otomatik olarak algılar.<br><br>Yürütme, veri fabrikası değiştirme sırasında `?AdfHashPartitionCondition` karma bölüm mantığı ve Teradata Gönder. |
-| Büyük boyutlu bir tamsayı sütunu aralık bölümleme eşit olarak dağıtılmış değerine sahip olan, özel bir sorgu kullanarak verileri yükleme | **Bölüm seçenekleri**: Dinamik aralık bölümü.<br>**Sorgu**: `SELECT * FROM <TABLENAME> WHERE ?AdfRangePartitionColumnName <= ?AdfRangePartitionUpbound AND ?AdfRangePartitionColumnName >= ?AdfRangePartitionLowbound AND <your_additional_where_clause>`.<br>**Bölüm sütunu**: Verileri bölümlemek için kullanılan sütun belirtin. Tamsayı veri türü ile sütun karşı bölümleyebilirsiniz.<br>**Bölüm üst sınır** ve **bölüm alt sınır**: Yalnızca alt ve üst aralık arasında veri almak için bölüm sütunu karşı filtrelemek isteyip istemediğinizi belirtin.<br><br>Yürütme, veri fabrikası değiştirme sırasında `?AdfRangePartitionColumnName`, `?AdfRangePartitionUpbound`, ve `?AdfRangePartitionLowbound` gerçek sütun adı ve değer aralıkları her bölüm ve Teradata için gönderin. <br>Örneğin, bölüm sütunu "ID" alt sınırı 1 ile 4 olarak paralel kopya kümesi ile 80'i olarak üst sınır olarak ayarlarsanız ADF veri alma [21, 40], kimliği [1,20] arasında 4 bölüm tarafından [41, 60] ve [61, 80]. |
+| Büyük tablodan tam yük.                                   | **Bölüm seçeneği**: karma. <br><br/>Yürütme sırasında, Data Factory otomatik olarak PK sütununu algılar, buna karşı bir karma uygular ve verileri bölümlere göre kopyalar. |
+| Özel bir sorgu kullanarak büyük miktarda veriyi yükleyin.                 | **Bölüm seçeneği**: karma.<br>**Sorgu**: `SELECT * FROM <TABLENAME> WHERE ?AdfHashPartitionCondition AND <your_additional_where_clause>`.<br>**Bölüm sütunu**: karma bölüm uygulamak için kullanılan sütunu belirtin. Belirtilmezse, Data Factory Teradata veri kümesinde belirttiğiniz tablonun PK sütununu otomatik olarak algılar.<br><br>Yürütme sırasında, Data Factory `?AdfHashPartitionCondition` karma bölüm mantığı ile değiştirir ve Teradata 'a gönderir. |
+| Aralık bölümlendirme için eşit olarak dağıtılmış değere sahip bir tamsayı sütunu olan özel bir sorgu kullanarak büyük miktarda veri yükleyin. | **Bölüm seçenekleri**: Dinamik Aralık bölümü.<br>**Sorgu**: `SELECT * FROM <TABLENAME> WHERE ?AdfRangePartitionColumnName <= ?AdfRangePartitionUpbound AND ?AdfRangePartitionColumnName >= ?AdfRangePartitionLowbound AND <your_additional_where_clause>`.<br>**Bölüm sütunu**: verileri bölümlemek için kullanılan sütunu belirtin. Tamsayı veri türünde bir sütuna göre bölümleyebilirsiniz.<br>**Bölüm üst sınırı** ve **bölüm alt sınırı**: yalnızca alt ve üst Aralık arasında veri almak için bölüm sütununa karşı filtrelemek istediğinizi belirtin.<br><br>Yürütme sırasında, Data Factory `?AdfRangePartitionColumnName`, `?AdfRangePartitionUpbound`ve `?AdfRangePartitionLowbound` her bölüm için gerçek sütun adı ve değer aralıklarıyla değiştirir ve Teradata 'a gönderir. <br>Örneğin, "ID" adlı bölüm sütununuzu alt sınır 1 ve üst sınır 80 olarak ayarlarsanız, paralel kopya 4 olarak ayarlandıysa Data Factory verileri 4 bölümden alır. Kimlikleri sırasıyla [1, 20], [21, 40], [41, 60] ve [61, 80] arasındadır. |
 
-**Örnek: Sorgu karma bölümü**
+**Örnek: karma bölüm ile sorgulama**
 
 ```json
 "source": {
@@ -266,7 +280,7 @@ Teradata veritabanından özellikle büyük miktarda veri yüklediğinizde böl�
 }
 ```
 
-**Örnek: Sorgu dinamik aralık bölümü**
+**Örnek: Dinamik Aralık bölümü ile sorgulama**
 
 ```json
 "source": {
@@ -281,52 +295,57 @@ Teradata veritabanından özellikle büyük miktarda veri yüklediğinizde böl�
 }
 ```
 
-## <a name="data-type-mapping-for-teradata"></a>Teradata için eşleme veri türü
+## <a name="data-type-mapping-for-teradata"></a>Teradata için veri türü eşlemesi
 
-Teradata veri kopyalama işlemi sırasında aşağıdaki eşlemeler Teradata veri türlerinden Azure veri fabrikası geçici veri türleri için kullanılır. Bkz: [şema ve veri türü eşlemeleri](copy-activity-schema-and-type-mapping.md) eşlemelerini nasıl yapar? kopyalama etkinliği kaynak şema ve veri türü için havuz hakkında bilgi edinmek için.
+Teradata 'tan veri kopyaladığınızda aşağıdaki eşlemeler geçerlidir. Kopyalama etkinliğinin kaynak şemayı ve veri türünü havuza nasıl eşlediğini öğrenmek için bkz. [şema ve veri türü eşlemeleri](copy-activity-schema-and-type-mapping.md).
 
-| Teradata veri türü | Veri Fabrikası geçici veri türü |
+| Teradata veri türü | Data Factory geçici veri türü |
 |:--- |:--- |
 | BigInt |Int64 |
-| Blob |Byte[] |
-| Byte |Byte[] |
-| ByteInt |Int16 |
-| Char |String |
-| Clob |String |
-| Date |DateTime |
-| Decimal |Decimal |
-| Double |Double |
-| Graphic |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Integer |Int32 |
-| Interval Day |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Day To Hour |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Day To Minute |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Day To Second |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Hour |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Hour To Minute |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Hour To Second |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Minute |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Minute To Second |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Month |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Second |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Year |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Interval Year To Month |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Sayı |Double |
-| Süre (tarih) |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Süre (saat) |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Süresi (saat dilimiyle birlikte) |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Süresi (zaman damgası) |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Süre (saat dilimi ile zaman damgası) |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Integer |Int16 |
-| Time |TimeSpan |
-| Time With Time Zone |TimeSpan |
-| Timestamp |DateTime |
-| Timestamp With Time Zone |DateTime |
-| VarByte |Byte[] |
-| VarChar |String |
-| VarGraphic |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
-| Xml |Desteklenmiyor. Kaynak Query'de açık tür dönüştürme uygulanır. |
+| Blob |Byte [] |
+| Bayt |Byte [] |
+| Byteınt |Int16 |
+| Char |Dize |
+| CLOB |Dize |
+| Tarih |DateTime |
+| Kategori |Kategori |
+| Çift |Çift |
+| Sel |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Tamsayı |Int32 |
+| Aralık günü |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık gün-saat |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık gün-dakika |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık gün-saniye |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık saati |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık saat-dakika |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık saat-saniye |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık dakikası |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık dakika-saniye |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık ayı |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık saniye |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık yılı |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Aralık yıl-ay |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Sayı |Çift |
+| Süre (Tarih) |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Süre (saat) |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Süre (saat dilimiyle birlikte) |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Süre (zaman damgası) |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Süre (saat dilimiyle zaman damgası) |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| Small |Int16 |
+| Zaman |TimeSpan |
+| Saat dilimiyle saat |TimeSpan |
+| Zaman damgası |DateTime |
+| Saat dilimi Ile zaman damgası |DateTime |
+| VarByte |Byte [] |
+| VarChar |Dize |
+| VarGraphic |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+| 'Sini |Desteklenmiyor. Kaynak sorgusunda açık tür dönüştürme uygulayın. |
+
+
+## <a name="lookup-activity-properties"></a>Arama etkinliği özellikleri
+
+Özelliklerle ilgili ayrıntıları öğrenmek için [arama etkinliğini](control-flow-lookup-activity.md)denetleyin.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Data Factory kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).
+Data Factory içindeki kopyalama etkinliği tarafından kaynak ve havuz olarak desteklenen veri depolarının listesi için bkz. [desteklenen veri depoları](copy-activity-overview.md#supported-data-stores-and-formats).

@@ -1,6 +1,6 @@
 ---
-title: SQL Server veritabanını Azure SQL veritabanı'nda tek ve havuza bir veritabanına geçirme | Microsoft Docs
-description: SQL Server veritabanını nasıl geçireceğinizi tek bir veritabanı veya elastik havuz Azure SQL veritabanı'nda öğrenin.
+title: Tek/havuza alınmış bir veritabanına veritabanı geçişini SQL Server
+description: Azure SQL veritabanı 'nda tek bir veritabanına veya elastik bir havuza veritabanı geçişi SQL Server hakkında bilgi edinin.
 keywords: veritabanı geçişi,sql server veritabanı geçişi,veritabanı taşıma araçları,veritabanı taşıma,sql veritabanı geçişi
 services: sql-database
 ms.service: sql-database
@@ -11,51 +11,50 @@ ms.topic: conceptual
 author: stevestein
 ms.author: sstein
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 02/11/2019
-ms.openlocfilehash: 1dd7d2fa413a6502dcd5c9db59e376c6586b5fea
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: df1ef21da43bc74809bd9fd71b5dde3906cdb343
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65790305"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820968"
 ---
-# <a name="sql-server-database-migration-to-azure-sql-database"></a>Azure SQL veritabanı için SQL Server veritabanı geçişi
+# <a name="sql-server-database-migration-to-azure-sql-database"></a>Azure SQL veritabanı 'na SQL Server veritabanı geçişi
 
-Bu makalede, Azure SQL veritabanı'nda tek veya havuza alınmış bir veritabanı için SQL Server 2005 veya üzeri veritabanını geçirmek için birincil yöntem hakkında bilgi edinin. Bir yönetilen örneğe geçirme hakkında daha fazla bilgi için bkz: [Azure SQL veritabanı yönetilen örneği SQL Server örneğine geçiş](sql-database-managed-instance-migrate.md). Diğer platformlardan geçirme hakkında geçiş için bilgi [Azure veritabanı Geçiş Kılavuzu](https://datamigration.microsoft.com/).
+Bu makalede, SQL Server 2005 veya üzeri bir veritabanını Azure SQL veritabanı 'nda tek veya havuza alınmış bir veritabanına geçirmeye yönelik birincil yöntemler hakkında bilgi edineceksiniz. Yönetilen bir örneğe geçiş hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı yönetilen örneği 'ne SQL Server örneğine geçirme](sql-database-managed-instance-migrate.md). Diğer platformlardan geçiş hakkında geçiş bilgileri için bkz. [Azure veritabanı geçiş kılavuzu](https://datamigration.microsoft.com/).
 
-## <a name="migrate-to-a-single-database-or-a-pooled-database"></a>Tek bir veritabanı veya havuza alınmış bir veritabanı geçişi
+## <a name="migrate-to-a-single-database-or-a-pooled-database"></a>Tek bir veritabanına veya havuza alınmış bir veritabanına geçirme
 
-Azure SQL veritabanı'nda tek veya havuza alınmış bir veritabanı için SQL Server 2005 veya üzeri veritabanını geçirmek için iki birincil yöntem vardır. İlk yöntem basittir, ancak geçiş sırasında önemli olabilecek bazı kapalı kalma sürelerine neden olabilir. İkinci yöntem daha karmaşık olmasına karşın, geçiş sırasında kapalı kalma süresini önemli ölçüde ortadan kaldırır.
+SQL Server 2005 veya üzeri bir veritabanını Azure SQL veritabanı 'nda tek veya havuza alınmış bir veritabanına geçirmek için iki birincil yöntem vardır. İlk yöntem basittir, ancak geçiş sırasında önemli olabilecek bazı kapalı kalma sürelerine neden olabilir. İkinci yöntem daha karmaşık olmasına karşın, geçiş sırasında kapalı kalma süresini önemli ölçüde ortadan kaldırır.
 
-Kaynak veritabanı kullanarak Azure SQL veritabanı ile uyumlu olmasını sağlamak için ihtiyacınız her iki durumda da [Data Migration Yardımcısı (DMA)](https://www.microsoft.com/download/details.aspx?id=53595). SQL veritabanı V12 yaklaşan [özellik eşliği](sql-database-features.md) dışında sunucu düzeyi ve veritabanları arası işlemlerle ilgili sorunlara, SQL Server ile. [Kısmen desteklenen veya desteklenmeyen işlevleri](sql-database-transact-sql-information.md) kullanan veritabanları ve uygulamalar için SQL Server veritabanının geçirilebilmesi için [bu uyumsuzlukların giderilmesi amacıyla yeniden mühendislik](sql-database-single-database-migrate.md#resolving-database-migration-compatibility-issues) işlemlerinin yapılması gerekir.
+Her iki durumda da, [Data Migration Yardımcısı (DMA)](https://www.microsoft.com/download/details.aspx?id=53595)kullanarak kaynak VERITABANıNıN Azure SQL veritabanı ile uyumlu olduğundan emin olmanız gerekir. SQL Veritabanı V12, sunucu düzeyi ve veritabanları arası işlemlerle ilgili sorunlardan başka SQL Server [özellik eşliği](sql-database-features.md) ile yaklaşılıyor. [Kısmen desteklenen veya desteklenmeyen işlevleri](sql-database-transact-sql-information.md) kullanan veritabanları ve uygulamalar için SQL Server veritabanının geçirilebilmesi için [bu uyumsuzlukların giderilmesi amacıyla yeniden mühendislik](sql-database-single-database-migrate.md#resolving-database-migration-compatibility-issues) işlemlerinin yapılması gerekir.
 
 > [!NOTE]
 > Microsoft Access, Sybase, MySQL Oracle ve DB2 olmak üzere SQL Server harici veritabanlarını Azure SQL Veritabanına geçirmek için bkz. [SQL Server Geçiş Yardımcısı](https://blogs.msdn.microsoft.com/datamigration/2017/09/29/release-sql-server-migration-assistant-ssma-v7-6/).
 
-## <a name="method-1-migration-with-downtime-during-the-migration"></a>1\. yöntem: Geçiş sırasında kapalı kalma süresiyle geçiş
+## <a name="method-1-migration-with-downtime-during-the-migration"></a>Yöntem 1: Geçiş sırasında kapalı kalma süresi ile geçiş
 
- Tek veya havuza alınmış bir veritabanı için bazı kapalı kalma süresi durumsa veya ileride geçiş için bir üretim veritabanının test geçişini gerçekleştiriyorsanız, geçirmek için bu yöntemi kullanın. Bir öğretici için bkz. [bir SQL Server veritabanını geçirme](../dms/tutorial-sql-server-to-azure-sql.md).
+ Bir süre kapalı kalma süresi kazandırabilmeniz veya daha sonra geçiş için bir üretim veritabanının test geçişini gerçekleştiriyorsanız, tek veya havuza alınmış bir veritabanına geçiş yapmak için bu yöntemi kullanın. Bir öğretici için bkz. [SQL Server veritabanını geçirme](../dms/tutorial-sql-server-to-azure-sql.md).
 
-Aşağıdaki liste, tek bir SQL Server veritabanı geçişi için genel iş akışını veya bu yöntemi kullanarak havuza alınmış bir veritabanı içerir. Yönetilen örneğe geçiş için bkz: [yönetilen örneğe geçiş](sql-database-managed-instance-migrate.md).
+Aşağıdaki liste, bu yöntemi kullanarak tek veya havuza alınmış bir veritabanının SQL Server veritabanı geçişinin genel iş akışını içerir. Yönetilen örneğe geçiş için bkz. [yönetilen bir örneğe geçiş](sql-database-managed-instance-migrate.md).
 
   ![VSSSDT geçiş şeması](./media/sql-database-cloud-migrate/azure-sql-migration-sql-db.png)
 
-1. [Değerlendirme](https://docs.microsoft.com/sql/dma/dma-assesssqlonprem) veritabanı için en son sürümünü kullanarak Uyumluluk [Data Migration Yardımcısı (DMA)](https://www.microsoft.com/download/details.aspx?id=53595).
+1. [Data Migration Yardımcısı (DMA)](https://www.microsoft.com/download/details.aspx?id=53595)en son sürümünü kullanarak veritabanını uyumluluk için [değerlendirin](https://docs.microsoft.com/sql/dma/dma-assesssqlonprem) .
 2. Transact-SQL betikleri halinde tüm gerekli düzeltmeleri hazırlayın.
-3. Geçiş gerçekleşirken kaynak veritabanında oluşmasını yeni işlem durdurma ya da Geçirilmekte olan kaynak veritabanının işlemsel olarak tutarlı bir kopyasını olun. Bu ikinci seçeneği gerçekleştirmek için yöntemler şunlardır istemci bağlantısını devre dışı veya oluşturarak bir [veritabanı anlık görüntüsü](https://msdn.microsoft.com/library/ms175876.aspx). Geçişten sonra geçirilen veritabanları geçiş için kesme noktası sonra gerçekleşen değişikliklerle güncelleştirmek için işlem çoğaltma kullanma mümkün olabilir. Bkz: [işlem yükseltme kullanarak geçirme](sql-database-single-database-migrate.md#method-2-use-transactional-replication).  
+3. Geçirilen kaynak veritabanının işlemsel olarak tutarlı bir kopyasını oluşturun veya geçiş gerçekleşirken kaynak veritabanında gerçekleştirilen yeni işlemleri durdurur. Bu ikinci seçeneği yerine getirmek için yöntemler istemci bağlantısını devre dışı bırakmayı veya bir [veritabanı anlık görüntüsü](https://msdn.microsoft.com/library/ms175876.aspx)oluşturmayı içerir. Geçişten sonra, geçirilen veritabanlarını geçiş için kesme noktası sonrasında gerçekleşen değişikliklerle güncelleştirmek için işlemsel çoğaltmayı kullanabilirsiniz. Bkz. [Işlem geçişini kullanarak geçirme](sql-database-single-database-migrate.md#method-2-use-transactional-replication).  
 4. Düzeltmeleri veritabanı kopyasına uygulamak için Transact-SQL betiklerini dağıtın.
-5. [Geçiş](https://docs.microsoft.com/sql/dma/dma-migrateonpremsql) veri geçiş Yardımcısı'nı kullanarak yeni bir Azure SQL veritabanı için veritabanı kopyalama.
+5. Data Migration Yardımcısı kullanarak veritabanı kopyasını yeni bir Azure SQL veritabanına [geçirin](https://docs.microsoft.com/sql/dma/dma-migrateonpremsql) .
 
 > [!NOTE]
-> DMA kullanmak yerine bir BACPAC dosyasını da kullanabilirsiniz. Bkz: [yeni bir Azure SQL veritabanına BACPAC dosyasını içeri aktarma](sql-database-import.md).
+> DMA kullanmak yerine BACPAC dosyasını da kullanabilirsiniz. Bkz. [BACPAC dosyasını yeni bir Azure SQL veritabanına aktarma](sql-database-import.md).
 
 ### <a name="optimizing-data-transfer-performance-during-migration"></a>Geçiş sırasında veri aktarımı performansını en iyi duruma getirme
 
 Aşağıdaki liste, içeri aktarma işlemi sırasında en iyi performans için öneriler içerir.
 
-- En yüksek hizmet katmanı seçin ve işlem boyutu aktarım performansını en üst düzeye çıkarmak için bütçenizin izin verir. Geçiş tamamlandıktan sonra paradan tasarruf etmek için ölçeği azaltabilirsiniz.
-- BACPAC dosyanızı ve hedef veri merkezi arasındaki mesafeyi azaltın.
+- Bütçenizin aktarım performansını en üst düzeye çıkarması için izin verdiği en yüksek hizmet katmanını ve işlem boyutunu seçin. Geçiş tamamlandıktan sonra paradan tasarruf etmek için ölçeği azaltabilirsiniz.
+- BACPAC dosyanız ile hedef veri merkezi arasındaki mesafeyi en aza indirin.
 - Geçiş sırasında otomatik istatistikleri devre dışı bırakma
 - Tabloları ve dizinleri bölümleme
 - Dizini oluşturulmuş görünümleri bırakma ve tamamlandıktan sonra yeniden oluşturma
@@ -65,9 +64,9 @@ Aşağıdaki liste, içeri aktarma işlemi sırasında en iyi performans için �
 
 Geçiş tamamlandıktan sonra tam tarama ile [istatistikleri güncelleştirin](https://msdn.microsoft.com/library/ms187348.aspx).
 
-## <a name="method-2-use-transactional-replication"></a>2\. yöntem: İşlem çoğaltma kullanma
+## <a name="method-2-use-transactional-replication"></a>Yöntem 2: İşlem Çoğaltma Kullanma
 
-Geçiş gerçekleşirken SQL Server veritabanınızı üretimden kaldırmak kabul edilebilir bir durum değilse, geçiş çözümü olarak SQL Server işlem çoğaltmayı kullanabilirsiniz. Bu yöntemi kullanmak için, kaynak veritabanının [işlem çoğaltma gereksinimlerini](https://msdn.microsoft.com/library/mt589530.aspx) karşılaması ve Azure SQL Veritabanı ile uyumlu olması gerekir. Her zaman açık SQL çoğaltma hakkında daha fazla bilgi için bkz. [Always On kullanılabilirlik grupları (SQL Server) için çoğaltma yapılandırma](/sql/database-engine/availability-groups/windows/configure-replication-for-always-on-availability-groups-sql-server).
+Geçiş gerçekleşirken SQL Server veritabanınızı üretimden kaldırmak kabul edilebilir bir durum değilse, geçiş çözümü olarak SQL Server işlem çoğaltmayı kullanabilirsiniz. Bu yöntemi kullanmak için, kaynak veritabanının [işlem çoğaltma gereksinimlerini](https://msdn.microsoft.com/library/mt589530.aspx) karşılaması ve Azure SQL Veritabanı ile uyumlu olması gerekir. Her zaman açık olan SQL çoğaltma hakkında daha fazla bilgi için bkz. [Always on kullanılabilirlik grupları Için çoğaltmayı yapılandırma (SQL Server)](/sql/database-engine/availability-groups/windows/configure-replication-for-always-on-availability-groups-sql-server).
 
 Bu çözümü kullanmak için, Azure SQL Veritabanınızı, geçirmek istediğiniz SQL Server örneğine abone olacak şekilde yapılandırabilirsiniz. Yeni işlemler gerçekleşmeye devam ederken, işlem çoğaltma dağıtıcısı, veritabanındaki eşitlenecek verileri eşitler (yayımcı).
 
@@ -97,7 +96,7 @@ Bu çözümü kullanmak için, Azure SQL Veritabanınızı, geçirmek istediğin
 SQL veritabanına geçiş için bazı ipuçları ve farklılıklar
 
 - Yerel dağıtıcı kullanma
-  - Bunun yapılması sunucuda performans düşüşüne neden olur.
+  - Bunun yapılması sunucuda bir performans etkisi oluşmasına neden olur.
   - Performans etkisi kabul edilemez boyuttaysa başka bir sunucu kullanabilirsiniz, ancak bunun yapılması yönetimi daha karmaşık hale getirir.
 - Bir anlık görüntü klasörü seçerken, seçtiğiniz klasörün çoğaltmak istediğiniz her tabloya ait BCP’yi saklayacak kadar büyük olduğundan emin olun.
 - Anlık görüntü oluşturma işlemi tamamlanana kadar ilişkili tabloları kilitler, bu nedenle anlık görüntünüzü uygun şekilde zamanlayın.
@@ -117,7 +116,7 @@ Kaynak veritabanındaki SQL Server sürümüne ve geçirdiğiniz veritabanının
 İnternet aramasına ve bu kaynaklara ek olarak [MSDN SQL Server topluluk forumlarını](https://social.msdn.microsoft.com/Forums/sqlserver/home?category=sqlserver) veya [StackOverflow](https://stackoverflow.com/) sitesini de kullanabilirsiniz.
 
 > [!IMPORTANT]
-> SQL veritabanı yönetilen örneği sağlar, var olan bir SQL Server örneğini ve veritabanlarını birlikte geçirmek en az için uyumluluk sorunu yok. Bkz: [bir yönetilen örnek nedir](sql-database-managed-instance.md).
+> SQL veritabanı yönetilen örneği, mevcut bir SQL Server örneğini ve veritabanlarını bir uyumluluk sorunu olmadan en düşük düzeyde geçirmenize olanak sağlar. Bkz. [yönetilen örnek nedir](sql-database-managed-instance.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

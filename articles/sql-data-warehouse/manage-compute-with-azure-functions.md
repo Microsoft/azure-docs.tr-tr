@@ -1,31 +1,32 @@
 ---
-title: "Öğretici: Azure SQL veri ambarı'nda Azure işlevleri ile işlemleri yönetme | Microsoft Docs"
+title: 'Öğretici: Azure Işlevleri ile işlem yönetme'
 description: Veri ambarınızın işlemini yönetmek için Azure işlevlerini kullanma.
 services: sql-data-warehouse
-author: KavithaJonnakuti
+author: julieMSFT
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
 ms.subservice: consume
 ms.date: 04/27/2018
-ms.author: kavithaj
+ms.author: jrasnick
 ms.reviewer: igorstan
-ms.openlocfilehash: b94e4c6f178119d6205c302cf35a9effaf2aa885
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: bc350ed092c063dcc7eca479f064114be9eb28f5
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61083948"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73693010"
 ---
-# <a name="use-azure-functions-to-manage-compute-resources-in-azure-sql-data-warehouse"></a>İşlem kaynakları Azure SQL veri ambarı'nda yönetmek için Azure işlevlerini kullanın
+# <a name="use-azure-functions-to-manage-compute-resources-in-azure-sql-data-warehouse"></a>Azure SQL veri ambarı 'nda işlem kaynaklarını yönetmek için Azure Işlevleri 'ni kullanma
 
-Bu öğreticide, Azure SQL veri ambarı'nda bir veri ambarı için işlem kaynaklarını yönetmek için Azure işlevleri kullanır.
+Bu öğretici, Azure SQL veri ambarı 'nda bir veri ambarına yönelik işlem kaynaklarını yönetmek için Azure Işlevleri 'ni kullanır.
 
 Azure İşlevi Uygulamasını SQL Veri Ambarı'yla kullanmak için, veri ambarı örneğinizle aynı abonelik kapsamında katılımcı erişimine sahip bir [Hizmet Sorumlusu Hesabı](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal) oluşturmalısınız. 
 
-## <a name="deploy-timer-based-scaling-with-an-azure-resource-manager-template"></a>Bir Azure Resource Manager şablonuyla Zamanlayıcı tabanlı ölçeklendirme dağıtma
+## <a name="deploy-timer-based-scaling-with-an-azure-resource-manager-template"></a>Azure Resource Manager şablonuyla Zamanlayıcı tabanlı ölçeklendirmeyi dağıtma
 
-Şablonu dağıtmak için aşağıdaki bilgiler gereklidir:
+Şablonu dağıtmak için aşağıdaki bilgilere ihtiyacınız vardır:
 
 - SQL DW örneğinizin içinde bulunduğu kaynak grubunun adı
 - SQL DW örneğinizin içinde bulunduğu mantıksal sunucunun adı
@@ -35,13 +36,13 @@ Azure İşlevi Uygulamasını SQL Veri Ambarı'yla kullanmak için, veri ambarı
 - Hizmet Sorumlusu Uygulama Kimliği
 - Hizmet Sorumlusu Gizli Anahtarı
 
-Yukarıdaki bilgileri aldıktan sonra şu şablonu dağıtın:
+Yukarıdaki bilgilere sahip olduktan sonra bu şablonu dağıtın:
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2Fsql-data-warehouse-samples%2Fmaster%2Farm-templates%2FsqlDwTimerScaler%2Fazuredeploy.json" target="_blank">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
 </a>
 
-Şablonu dağıttıktan sonra üç yeni kaynak bulmalısınız: ücretsiz bir Azure App Service planı, tüketim temelli bir işlev uygulaması planı ve günlüğe kaydetme ve işlem kuyruğunu işleyecek bir depolama hesabı. Dağıtılan işlevlerin gereksinimlerinize uyacak şekilde nasıl değiştirileceğini görmek için okumaya devam edin.
+Şablonu dağıttıktan sonra, üç yeni kaynak bulmanız gerekir: ücretsiz bir Azure App Service planı, tüketim tabanlı bir İşlev Uygulaması planı ve günlüğü ve işlemler kuyruğunu işleyen bir depolama hesabı. Dağıtılan işlevlerin gereksinimlerinize uyacak şekilde nasıl değiştirileceğini görmek için okumaya devam edin.
 
 ## <a name="change-the-compute-level"></a>İşlem düzeyini değiştirme
 
@@ -49,11 +50,11 @@ Yukarıdaki bilgileri aldıktan sonra şu şablonu dağıtın:
 
    ![Şablonla dağıtılan işlevler](media/manage-compute-with-azure-functions/five-functions.png)
 
-2. Zaman ölçeğini artırmak mı yoksa azaltmak mı istediğinize bağlı olarak, *DWScaleDownTrigger*'ı veya *DWScaleUpTrigger*'ı seçin. Açılan menüde, tümleştir'i seçin.
+2. Zaman ölçeğini artırmak mı yoksa azaltmak mı istediğinize bağlı olarak, *DWScaleDownTrigger*'ı veya *DWScaleUpTrigger*'ı seçin. Açılan menüde tümleştirin ' ı seçin.
 
    ![İşlev için Tümleştir'i seçme](media/manage-compute-with-azure-functions/select-integrate.png)
 
-3. Şu anda görüntülenen değer *%ScaleDownTime%* veya *%ScaleUpTime%* olmalıdır. Bu değerler, zamanlamanın [Uygulama Ayarları][Application Settings] altında tanımlanmış değerleri temel alacağını gösterir. Şimdilik bu değeri yoksayar ve tercih edilen zaman sonraki adımlara göre zamanlamayı değiştirebilirsiniz.
+3. Şu anda görüntülenen değer *%ScaleDownTime%* veya *%ScaleUpTime%* olmalıdır. Bu değerler, zamanlamanın [uygulama ayarlarınızda][Application Settings]tanımlanan değerlere göre olduğunu belirtir. Şimdilik, bu değeri yoksayabilir ve sonraki adımlara göre zamanlamayı tercih ettiğiniz zamana dönüştürebilirsiniz.
 
 4. Zamanlama alanında, SQL Veri Ambarı'nın ölçeğinin ne sıklıkta artırılmasını istediğinizi yansıtan zaman CRON ifadesini ekleyin. 
 
@@ -64,10 +65,10 @@ Yukarıdaki bilgileri aldıktan sonra şu şablonu dağıtın:
    {second} {minute} {hour} {day} {month} {day-of-week}
    ```
 
-   Örneğin, *"0 30 9 ** 1-5"* bir tetikleyici hafta içi her gün saat 09: 30'da yansıtır. Daha fazla bilgi için Azure İşlevleri[zamanlama örnekleri][schedule examples] sayfasını ziyaret edin.
+   Örneğin, *"0 30 9 * * 1-5"* bir tetikleyiciyi 9:30 ' da her hafta içinde yansıtır. Daha fazla bilgi için Azure Işlevleri [zamanlama örnekleri][schedule examples]' ni ziyaret edin.
 
 
-## <a name="change-the-time-of-the-scale-operation"></a>Ölçeklendirme işleminin saatini değiştir
+## <a name="change-the-time-of-the-scale-operation"></a>Ölçek işleminin saatini değiştirme
 
 1. İşlev Uygulaması hizmetinize gidin. Şablonu varsayılan değerlerle dağıttıysanız, bu hizmetin adı *DWOperations* olacaktır. İşlev Uygulamanız açıldığında, İşlev Uygulaması Hizmetinize beş işlevin dağıtılmış olduğunu görürsünüz. 
 
@@ -75,7 +76,7 @@ Yukarıdaki bilgileri aldıktan sonra şu şablonu dağıtın:
 
    ![İşlev tetikleyicisi işlem düzeyini değiştirme](media/manage-compute-with-azure-functions/index-js.png)
 
-3. *ServiceLevelObjective*'in değerini istediğiniz düzeyle değiştirin ve Kaydet'e tıklayın. Bu değer tümleştir bölümünde tanımlanan zamanlama dayalı olarak veri ambarı örneğinizi ölçeklendirilebilen işlem düzeyidir.
+3. *ServiceLevelObjective*'in değerini istediğiniz düzeyle değiştirin ve Kaydet'e tıklayın. Bu değer, veri ambarı örneğinizin tümleştirin bölümünde tanımlanan zamanlamaya göre ölçeklendirileceği işlem düzeyidir.
 
 ## <a name="use-pause-or-resume-instead-of-scale"></a>Ölçek yerine duraklatma veya sürdürme kullanma 
 
@@ -92,14 +93,14 @@ Yukarıdaki bilgileri aldıktan sonra şu şablonu dağıtın:
 3. Zamanlamalarını değiştirmek için ilgili tetikleyicilerin *Tümleştir* sekmelerine gidin.
 
    > [!NOTE]
-   > Ölçeklendirme tetikleyiciler ve VM'yi duraklatabilir/sürdürebilirsiniz Tetikleyiciler arasında işlevsel bir fark, kuyruğa gönderilen iletisidir. Daha fazla bilgi için [Yeni Tetikleyici işlevi ekleme][Add a new trigger function].
+   > Ölçeklendirme Tetikleyicileri ve duraklatma/devam Tetikleyicileri arasındaki işlevsel fark, kuyruğa gönderilen iletidir. Daha fazla bilgi için bkz. [Yeni tetikleyici Işlevi ekleme][Add a new trigger function].
 
 
 ## <a name="add-a-new-trigger-function"></a>Yeni tetikleyici işlevi ekleme
 
-Şu anda, şablona dahil edilmiş yalnızca iki ölçeklendirme işlevi vardır. Sahip bu işlevlerin, bir günün Kurs sırasında yalnızca bir kez aşağı ve defa ölçeklendirebilirsiniz. Günde birkaç kez ölçeği veya sonralı farklı bir ölçeklendirme davranışına sahip gibi daha ayrıntılı denetim için başka bir tetikleyici eklemeniz gerekir.
+Şu anda, şablona dahil edilmiş yalnızca iki ölçeklendirme işlevi vardır. Bu işlevlerle, bir gün boyunca yalnızca bir kez ve bir kez ölçeği azaltabilirsiniz. Gün başına birden çok kez ölçekleme veya hafta sonları üzerinde farklı ölçeklendirme davranışına sahip gibi daha ayrıntılı denetim için, başka bir tetikleyici eklemeniz gerekir.
 
-1. Yeni boş bir işlev oluşturun. Seçin *+* işlev şablonu bölmesini görüntülemek için İşlevler konumunuzun yakınındaki düğmesine.
+1. Yeni boş bir işlev oluşturun. İşlev şablonu bölmesini göstermek için işlevlerinizin konumunun yakınında *+* düğmesini seçin.
 
    ![Yeni işlev oluşturma](media/manage-compute-with-azure-functions/create-new-function.png)
 
@@ -115,7 +116,7 @@ Yukarıdaki bilgileri aldıktan sonra şu şablonu dağıtın:
 
    ![Index.js'yi kopyalama](media/manage-compute-with-azure-functions/index-js.png)
 
-5. İşlem Değişkeninizi için istenen davranışı aşağıdaki gibi ayarlayın:
+5. İşlem değişkeninizi istenen davranışa aşağıdaki şekilde ayarlayın:
 
    ```javascript
    // Resume the data warehouse instance
@@ -138,7 +139,7 @@ Yukarıdaki bilgileri aldıktan sonra şu şablonu dağıtın:
 
 ## <a name="complex-scheduling"></a>Karmaşık zamanlama
 
-Bu bölümde kısaca gerekenler gösterilmektedir daha karmaşık zamanlaması duraklatma, sürdürme ve ölçeklendirme özelliklerinin.
+Bu bölüm, duraklatma, devam etmeyi ve ölçeklendirme özelliklerini daha karmaşık bir şekilde planlamak için gereken öğeleri kısaca gösterir.
 
 ### <a name="example-1"></a>Örnek 1:
 
@@ -151,7 +152,7 @@ Gündelik olarak 08:00'da DW600'a ölçeği artırma ve 20:00'da DW200'e ölçe�
 
 ### <a name="example-2"></a>Örnek 2: 
 
-Günlük ölçeği artırma dw1000, sabah 8 saat 4'te bir kez DW600 ölçeğini ve 10 pm da dw200'e ölçeği.
+Günlük ölçeği, 10:00 ' da DW1000 ' ye kadar bir kez ölçeklendirin, 4pm 'de DW600.
 
 | İşlev  | Zamanlama     | İşlem                                |
 | :-------- | :----------- | :--------------------------------------- |

@@ -9,12 +9,12 @@ manager: cgronlund
 ms.custom: include file
 ms.topic: include
 ms.date: 01/25/2019
-ms.openlocfilehash: ba2c8b01861c0ecbc9adeebfcb184cff1b81e816
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: b53d3d6ad5471cfe4ce105a3aace3bc55390a610
+ms.sourcegitcommit: 040abc24f031ac9d4d44dbdd832e5d99b34a8c61
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188989"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69533889"
 ---
-* Tamamlamak [hızlı başlangıç: Azure Machine Learning'i kullanmaya başlamak için bir bulut tabanlı bir not defteri sunucusu kullanmak](../articles/machine-learning/service/quickstart-run-cloud-notebook.md) bir çalışma alanı oluşturma ve not defteri Web sayfasını başlatın. 
+* [Öğreticiyi doldurun: Çalışma alanı oluşturmak ve](../articles/machine-learning/service/tutorial-1st-experiment-sdk-setup.md) Not defteri Web sayfasını başlatmak için ortamı ve çalışma alanını ayarlayın. 
 

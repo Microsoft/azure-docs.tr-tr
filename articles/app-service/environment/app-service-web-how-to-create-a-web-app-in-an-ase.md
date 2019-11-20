@@ -1,6 +1,6 @@
 ---
-title: Bir App Service ortamı v1 - Azure web uygulaması oluşturma
-description: Web apps ve app service planları bir App Service ortamı v1'de oluşturmayı öğrenin
+title: App Service Ortamı v1 'de Web uygulaması oluşturma-Azure
+description: App Service Ortamı v1 'de Web uygulamaları ve App Service planları oluşturmayı öğrenin
 services: app-service
 documentationcenter: ''
 author: ccompy
@@ -10,94 +10,93 @@ ms.assetid: 983ba055-e9e4-495a-9342-fd3708dcc9ac
 ms.service: app-service
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 3e7db670a125f3c5f308107aabfbbab9301b7561
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cc40c2296e583ab93a7c34d709cfbf1334ae3926
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60765184"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70069842"
 ---
-# <a name="create-a-web-app-in-an-app-service-environment-v1"></a>Bir App Service ortamı v1'de bir web uygulaması oluşturma
+# <a name="create-a-web-app-in-an-app-service-environment-v1"></a>App Service Ortamı v1 'de Web uygulaması oluşturma
 
 > [!NOTE]
-> Bu makale, App Service ortamı v1 hakkında yöneliktir.  App Service ortamı, kullanımı daha kolay ve daha güçlü bir altyapı üzerinde çalışan daha yeni bir sürümü var. Yeni sürüm başlama hakkında daha fazla bilgi edinmek için [App Service ortamı giriş](intro.md).
+> Bu makale App Service Ortamı v1 ile ilgilidir.  Daha güçlü altyapıda daha kolay ve çalışır App Service Ortamı daha yeni bir sürümü vardır. Yeni sürüm hakkında daha fazla bilgi edinmek için [App Service ortamı giriş](intro.md)ile başlayın.
 > 
 
 ## <a name="overview"></a>Genel Bakış
-Bu öğreticide, web uygulamaları oluşturmak gösterilir ve App Service planlarında bir [App Service ortamı v1](app-service-app-service-environment-intro.md) (ASE). 
+Bu öğreticide, bir [App Service ortamı v1](app-service-app-service-environment-intro.md) 'de (Ao) Web uygulamaları ve App Service planları oluşturma işlemlerinin nasıl yapılacağı gösterilmektedir. 
 
 > [!NOTE]
-> Bir web uygulamasının nasıl oluşturulacağını öğrenmek istiyor, ancak gerekmeyen bir App Service Ortamı'nda yapmak için bkz: [.NET web uygulaması oluşturma](../app-service-web-get-started-dotnet.md) veya diğer diller ve çerçeveler için ilgili öğreticiler.
+> Bir Web uygulamasının nasıl oluşturulduğunu, ancak bir App Service Ortamı yapmanız gerekmediğini öğrenmek istiyorsanız, bkz. [.NET Web uygulaması oluşturma](../app-service-web-get-started-dotnet.md) veya diğer diller ve çerçeveler için ilgili öğreticilerden biri.
 > 
 > 
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu öğreticide, bir App Service ortamı oluşturmuş olduğunuzu varsayar. Henüz yapmadıysanız bkz [bir App Service ortamı oluşturma](app-service-web-how-to-create-an-app-service-environment.md). 
+Bu öğreticide bir App Service Ortamı oluşturmuş olduğunuz varsayılmaktadır. Henüz yapmadıysanız, bkz. [App Service ortamı oluşturma](app-service-web-how-to-create-an-app-service-environment.md). 
 
 ## <a name="create-a-web-app"></a>Web uygulaması oluşturma
-1. İçinde [Azure portalı](https://portal.azure.com/), tıklayın **kaynak Oluştur > Web + mobil > Web uygulaması**. 
+1. [Azure portalında](https://portal.azure.com/) **> Web uygulaması Web ve mobil > kaynak oluştur ' a**tıklayın. 
    
     ![][1]
 2. Aboneliğinizi seçin.  
    
-    Birden fazla aboneliğiniz varsa App Service Ortamı'nda bir uygulama oluşturmak için ortamı oluştururken kullandığınız aynı aboneliği kullanmanız gerektiğini unutmayın. 
+    Birden çok aboneliğiniz varsa App Service Ortamı bir uygulama oluşturmayı biliyorsanız, ortamı oluştururken kullandığınız aboneliğin aynısını kullanmanız gerekir. 
 3. Kaynak grubunu seçin veya oluşturun.
    
-    *Kaynak grupları* bir birim olarak ilgili Azure kaynaklarını yönetmenizi sağlayan ve kurulurken faydalıdır *rol tabanlı erişim denetimi* uygulamalarınız için (RBAC) kuralları. Daha fazla bilgi için [Azure Resource Manager'a genel bakış][ResourceGroups]. 
+    *Kaynak grupları* , ilgili Azure kaynaklarını birim olarak yönetmenizi sağlar ve uygulamalarınız için *rol tabanlı erişim denetimi* (RBAC) kuralları oluştururken faydalıdır. Daha fazla bilgi için bkz. [Azure Resource Manager’a genel bakış][ResourceGroups]. 
 4. Bir App Service planı seçin ya da oluşturun.
    
-    *App Service planları* web Apps yönetilen kümeleri.  Normal fiyatlandırma seçtiğinizde fiyatın App Service planı yerine tek tek uygulamalar için uygulanır. ASE için ayrılan işlem örnekleri için ödeme bir ASE'de, ASP ile listelenen değil.  Bir web uygulamasının App service'inizin örneği ölçeklendirme örneklerinin artırabileceğinizi planı ve etkiler tüm web uygulamaları ve bu planı.  Site yuvaları veya VNET tümleştirmesi gibi bazı özellikleri, ayrıca plan içindeki miktar kısıtlamaları vardır.  Daha fazla bilgi için [Azure App Service planlarına genel bakış](../overview-hosting-plans.md)
+    *App Service planlar* , Web Apps 'in yönetilen kümeleridir.  Normal olarak, fiyatlandırma ' yı seçtiğinizde, ücretlendirilen fiyat ayrı uygulamalar yerine App Service planına uygulanır. ASA 'da, ASP 'iyle listelendikleriniz yerine asa 'ya ayrılan işlem örnekleri için ödeme yaparsınız.  Bir Web uygulamasının örnek sayısını ölçeklendirmek için App Service planınızın örneklerini ölçeklendirir ve bu plandaki tüm Web uygulamalarını etkiler.  Site yuvaları veya Sanal Ağ Tümleştirmesi gibi bazı özellikler de plan dahilinde miktar kısıtlamalarına sahiptir.  Daha fazla bilgi için bkz. [Azure App Service planlarına genel bakış](../overview-hosting-plans.md)
    
-    Plan adı altında belirtilen konuma bakarak ASE'NİZDE App Service planları tanımlayabilirsiniz.  
+    Plan adı altında belirtilen konuma bakarak AŞIRINIZDEKI App Service planlarını belirleyebilirsiniz.  
    
     ![][5]
    
-    App Service Ortamı'nda zaten bir App Service planı kullanmak istiyorsanız, bu planı seçin. Yeni bir App Service planı oluşturmak istiyorsanız, bu öğreticinin aşağıdaki bölüme bakın [bir App Service ortamında bir App Service planı oluşturma](#createplan).
-5. Web uygulamanız için bir ad girin ve ardından **Oluştur**. 
+    App Service Ortamı zaten var olan bir App Service planını kullanmak istiyorsanız, bu planı seçin. Yeni bir App Service planı oluşturmak istiyorsanız, Bu öğreticinin aşağıdaki bölümüne bakın, [bir App Service Ortamı App Service planı oluşturun](#createplan).
+5. Web uygulamanız için bir ad girin ve ardından **Oluştur**' a tıklayın. 
    
-    Dış VIP ASE'nizi kullanıyorsa, bir ase'de uygulamanın URL'sidir: [*sitename*]. [ *App Service ortamınızın adını*]. yerine p.azurewebsites.net [*sitename*]. azurewebsites.net
+    Ao 'niz bir dış VIP kullanıyorsa Ao 'da bir uygulamanın URL 'SI: [*SiteName*]. [*App Service ortamı*]. p.azurewebsites.net yerine [*sitename*]. azurewebsites.net
    
-    ASE'nizi bir iç VIP sonra bir uygulamanın URL'sini kullanıyorsa ASE olması: [*sitename*]. [ *ASE oluşturma sırasında belirtilen bir alt etki alanı*]   
-    ASE oluşturma sırasında ASP seçtikten sonra aşağıdaki güncelleştirme alt etki alanı görürsünüz **adı**
+    Ao 'niz bir Iç VIP kullanıyorsa, söz konusu Ao 'nun içindeki bir uygulamanın URL 'SI: [*SiteName*]. [*as oluşturma sırasında belirtilen alt etki alanı*]   
+    AIN oluşturma sırasında ASP 'nizi seçtikten sonra, alt etki alanı güncelleştirmesini aşağıda **adı** görürsünüz
 
-## <a name="createplan"></a> Bir App Service planı oluşturma
-Bir App Service ortamında bir App Service planı oluşturduğunuzda, bir ASE'de paylaşılan çalışanlar olarak çalışan seçimlerinizi farklıdır.  Kullanmak zorunda çalışanları ASE için yönetici tarafından ayrılmış olan olaylardır  Bu, yeni bir plan oluşturmak için çalışan havuzunda zaten planlarınızı tüm örneklerin toplam sayısından ASE çalışan havuzuna ayrılan çalışan daha ihtiyacınız olduğunu anlamına gelir.  Planınızı oluşturmak için ASE çalışan havuzunda yeterli çalışanları yoksa, eklenen alacağınız ASE yöneticiniz ile çalışmak gerekir.
+## <a name="createplan"></a>App Service planı oluşturma
+Bir App Service Ortamı App Service planı oluşturduğunuzda, bir AO 'da paylaşılan çalışan olmadığı için çalışan seçenekleriniz farklı olacaktır.  Kullanmanız gereken çalışanlar, yönetici tarafından ATıCı 'e ayrıldıklardır.  Bu, yeni bir plan oluşturmak için, Ao çalışan havuzunuza zaten o çalışan havuzundaki tüm planlarınızda bulunan toplam örnek sayısından daha fazla çalışan olması gerektiğini belirtir.  Açi çalışan havuzunuzdaki planınızı oluşturmak için yeterli çalışanınız yoksa, bunları eklemek için Ao yöneticinizle birlikte çalışmanız gerekir.
 
-Başka bir App Service planlarında barındırılan bir App Service ortamı tarafından fiyatlandırma seçimi olmaması farktır.  App Service ortamı varsa, sistem tarafından kullanılan işlem kaynakları için ödeme yaparsınız ve eklenen planlarının ücretini, o ortamda izniniz yok.  Normalde, bir App Service planı oluşturduğunuzda, fatura belirleyen bir fiyatlandırma planı seçin.  App Service ortamı temelde içerik oluşturabileceğiniz özel bir konuma ' dir.  Ortamı ve içeriğinizi barındıran değil için ödeme yaparsınız.
+Bir App Service Ortamı tarafından barındırılan App Service planlarındaki başka bir farklılık, fiyatlandırma seçiminin olmamasıdır.  Bir App Service Ortamı sahip olduğunuzda, sistem tarafından kullanılan işlem kaynakları için ödeme yaparsınız ve bu ortamdaki planlar için ücret ekleme ücreti yoktur.  Genellikle App Service bir plan oluşturduğunuzda, faturalandırmanızı belirleyen bir fiyatlandırma planı seçersiniz.  App Service Ortamı, aslında içerik oluşturabileceğiniz özel bir konumdur.  Ortamınız için ücret ödeyin ve içeriğinizi barındırmak için ödeme yaparsınız.
 
-Aşağıdaki yönergeler, öğreticinin önceki bölümünde açıklandığı gibi bir web uygulaması oluştururken bir App Service planı oluşturma işlemi gösterilmektedir.
+Aşağıdaki yönergelerde, öğreticinin önceki bölümünde açıklandığı gibi bir Web uygulaması oluştururken bir App Service planının nasıl oluşturulacağı gösterilmektedir.
 
-1. Tıklayın **Yeni Oluştur** planı seçimi Arabirimi içinde ve dışında bir ASE normalde olduğu gibi planınız için bir ad sağlayın.
-2. Konum seçicinizde kullanmak istediğiniz ASE seçin.
+1. Plan seçimi Kullanıcı arabiriminde **Yeni oluştur** ' a tıklayın ve genellıkle bir AO 'un dışında olduğu gibi planınız için bir ad sağlayın.
+2. Konum seçicinizden kullanmak istediğiniz Ao 'yu seçin.
    
-    App Service ortamı, aslında bir özel dağıtım konumu olduğundan, altında konumu gösterir. 
+    App Service Ortamı aslında özel bir dağıtım konumu olduğundan konum altında gösterilir. 
    
     ![][2]
    
-    Bir ASE'de konumu Seçici seçimi yaptıktan sonra App Service planı oluşturma, UI güncelleştirir.  Konum, artık durumda ve fiyatlandırma planı seçici bir çalışan havuzu Seçici ile değiştirilir ASE sistem ve bölge adını gösterir.  
+    Konum seçicideki bir AO seçildikten sonra App Service planı oluşturma Kullanıcı Arabirimi güncelleştirmeleri.  Konum artık açı sisteminin adını ve bulunduğu bölgeyi gösterir ve fiyatlandırma planı seçicisinin bir çalışan havuzu seçiciyle değiştirilmiştir.  
    
     ![][3]
 
-### <a name="selecting-a-worker-pool"></a>Bir çalışan havuzu seçme
-Normalde Azure App Service'te ve App Service ortamı dışında kullanılabilir bir adanmış fiyat planı seçimle 3 işlem boyutu vardır.  Benzer şekilde, ASE çalışan en fazla 3 havuzları tanımlayabilir ve bu çalışan havuzu için kullanılan işlem boyutu belirtin.  Anlamı kiracılar ase'nin işlem boyutu App Service planınız için bir fiyatlandırma planı seçme için bunun yerine, hangi çağrılır seçin bir *çalışan havuzu*.  
+### <a name="selecting-a-worker-pool"></a>Çalışan havuzu seçme
+Normalde Azure App Service ve App Service Ortamı dışında, özel bir fiyat planının seçiminde kullanılabilir 3 işlem boyutu vardır.  Benzer bir şekilde, bir ASE için 3 adede kadar çalışan havuzu tanımlayabilir ve bu çalışan havuzu için kullanılan işlem boyutunu belirtebilirsiniz.  Bu, Ao 'nın kiracılar için, App Service planınız için işlem boyutu olan bir fiyatlandırma planı seçmek yerine, *çalışan havuzu*adı ' nı seçersiniz.  
 
-Çalışan havuzu seçimi kullanıcı Arabirimi, adının altında çalışan havuzu için kullanılan işlem boyutu gösterir.  Kullanılabilir miktarı örnekleri Havuzda kullanılabilir kaç hesaplamak için ifade eder.  Toplam havuzu aslında bu sayıdan daha fazla örneği olabilir, ancak yalnızca kaç olmadığı için bu değeri başvuruyor.  Daha fazla bilgi işlem kaynaklarını eklemek için App Service ortamınızı ayarlamanız gerekip gerekmediğine bakın [App Service ortamınızı yapılandırma](app-service-web-configure-an-app-service-environment.md).
+Çalışan havuzu seçimi Kullanıcı arabirimi, bu çalışan havuzu için kullanılan işlem boyutunu adın altında gösterir.  Kullanılabilir miktar, bu havuzda kullanılmak üzere kaç işlem örneğinin kullanılabilir olduğunu gösterir.  Toplam Havuz gerçekte bu sayıdan daha fazla örneğe sahip olabilir, ancak bu değer, ne kadar çok kullanımda olduğunu ifade eder.  Daha fazla işlem kaynağı eklemek için App Service Ortamı ayarlamanız gerekiyorsa bkz. [App Service ortamı yapılandırma](app-service-web-configure-an-app-service-environment.md).
 
 ![][4]
 
-Bu örnekte, yalnızca iki çalışan havuzları görürsünüz. ASE yönetici, yalnızca ana bu iki çalışan havuzlarına ayrılan olmasıdır.  İçine ayrılmış Vm'leri olduğunda üçüncü gösterebilir.  
+Bu örnekte, kullanılabilir yalnızca iki çalışan havuzu görürsünüz. Bunun nedeni, Ao yöneticisinin yalnızca bu iki çalışan havuzlarında Konakları ayırdığından oluşur.  Üçüncü olarak, kendisine ayrılan VM 'Ler olduğunda bu durum gösterilir.  
 
-## <a name="after-web-app-creation"></a>Sonra Web uygulaması oluşturma
-Web uygulamalarını çalıştırmak ve dikkate alınması gereken bir ASE içindeki App Service planlarının yönetmek için birkaç nokta vardır.  
+## <a name="after-web-app-creation"></a>Web uygulaması oluşturulduktan sonra
+Web uygulamalarını çalıştırmak ve hesaba alınması gereken bir AO 'da App Service planlarını yönetmek için bazı önemli noktalar vardır.  
 
-Daha önce belirtildiği gibi ASE sahibi sistem boyutu için sorumlu olduğunu ve bunun sonucunda bunlar da istenen App Service planları barındırmak için yeterli kapasite olduğundan emin olmak sizin sorumluluğunuzdadır. Kullanılabilir çalışanlar varsa, App Service planınızı oluşturmak mümkün olmayacaktır.  Web uygulamanızın ölçeğini genişletme true budur.  Daha fazla örnek gerekiyorsa çalışan daha eklemek için App Service ortamı yönetim almak gerekir.
+Daha önce belirtildiği gibi, Ace 'nin sahibi sistemin boyutundan sorumludur ve sonuç olarak, istenen App Service planlarını barındırmak için yeterli kapasite olmasını sağlamaktan de sorumludur. Kullanılabilir çalışan yoksa App Service planınızı oluşturabileceksiniz.  Bu, Web uygulamanızı ölçeklendirmek için de geçerlidir.  Daha fazla örneğe ihtiyacınız varsa, daha fazla çalışan eklemek için App Service Ortamı yöneticinize almanız gerekir.
 
-Web uygulaması ve App Service planı oluşturduktan sonra ölçeği iyi bir fikirdir.  Bir ASE her zaman en az 2 örnekleri, uygulamalarınız için hataya dayanıklılık sağlamak için App Service planınızın olması gerekir.  Bir ASE'de App Service planı ölçeklendirme normal App Service planı kullanıcı Arabirimi aracılığıyla aynıdır.  Ölçeklendirme hakkında daha fazla bilgi için [bir App Service ortamında bir web uygulamasını ölçeklendirme](app-service-web-scale-a-web-app-in-an-app-service-environment.md)
+Web uygulamanızı oluşturduktan sonra plan App Service, ölçeği ölçeklendirmek iyi bir fikirdir.  Bir ASE 'de, uygulamalarınız için hataya dayanıklılık sağlamak üzere App Service planınızın en az 2 örneğe sahip olmanız gerekir.  Ao 'da bir App Service planının ölçeklendirilmesi, App Service planı Kullanıcı arabirimindeki normaldir.  Ölçeklendirme hakkında daha fazla bilgi için [App Service ortamı bir Web uygulamasını ölçeklendirme](app-service-web-scale-a-web-app-in-an-app-service-environment.md)
 
 <!--Image references-->
 [1]: ./media/app-service-web-how-to-create-a-web-app-in-an-ase/createaspnewwebapp.png

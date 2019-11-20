@@ -1,23 +1,17 @@
 ---
-title: Farklı bulutlara - Azure Resource Manager şablonları yeniden
+title: Şablonları bulutlar genelinde yeniden kullanma
 description: Azure Resource Manager şablonları, farklı bulut ortamları için tutarlı çalışmasını geliştirin. Yeni veya var olan şablonları Azure Stack için güncelleştirilemiyor.
-services: azure-resource-manager
-documentationcenter: na
 author: marcvaneijk
-ms.service: azure-resource-manager
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 12/09/2018
 ms.author: mavane
 ms.custom: seodec18
-ms.openlocfilehash: 390e49a09136c21f3fd2f6555c0d56fde6e3b267
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 2964bb4365a2c153e7bc82c3292545ad4de985eb
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60388157"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74143778"
 ---
 # <a name="develop-azure-resource-manager-templates-for-cloud-consistency"></a>Azure Resource Manager şablon bulut tutarlılık için geliştirme
 
@@ -47,7 +41,7 @@ Bu kılavuzun geri kalanını yeni ya da güncelleştirme mevcut Azure Resource 
 * Kullandığınız şablon parametreleri hedef bulutlarında çalıştığından emin olmak.
 * Kaynağa özgü özellikleri bulunduğunu doğrulamak hedef bulut.
 
-Azure Resource Manager şablonları bir giriş için bkz [şablon dağıtımı](resource-group-overview.md#template-deployment).
+Azure Resource Manager şablonları bir giriş için bkz [şablon dağıtımı](template-deployment-overview.md).
 
 ## <a name="ensure-template-functions-work"></a>Şablon işlevlerinin çalıştığından emin olmak
 
@@ -61,7 +55,7 @@ Azure Resource Manager özellikleri her zaman genel Azure'a ilk sunulacaktır. Y
 
 1. Depo yerel kopyasını oluşturduktan sonra için hedef Azure Resource Manager PowerShell ile bağlanın.
 
-1. Psm1 modülünü içeri aktarın ve Test AzureRmureRmTemplateFunctions cmdlet'ini yürütün:
+1. Psm1 modülünü içeri aktarın ve test-AzureRmureRmTemplateFunctions cmdlet 'ini yürütün:
 
    ```powershell
    # Import the module
@@ -154,7 +148,7 @@ Taban URI birleştirerek bağlantıları oluşturulan şablonun tamamında (gele
 
 Varsayılan değer için bu yaklaşımı kullanarak `_artifactsLocation` parametresi kullanılır. Bağlı şablonlar, farklı bir konumdan alınacak gerekiyorsa, giriş parametresi dağıtım sırasında varsayılan değeri geçersiz kılmak için kullanılabilir — şablona hiçbir değişikliği gerekli değildir.
 
-### <a name="use-artifactslocation-instead-of-hardcoding-links"></a>_ArtifactsLocation yerine runbook'a kod bağlantıları kullanın.
+### <a name="use-_artifactslocation-instead-of-hardcoding-links"></a>_ArtifactsLocation yerine runbook'a kod bağlantıları kullanın.
 
 İç içe geçmiş şablonlar, URL'de kullanılan yanı sıra `_artifactsLocation` parametresi, ilgili tüm yapıtlar bir dağıtım şablonu için bir temel olarak kullanılır. Bazı VM uzantıları, şablonun dışında depolanan bir komut dosyası için bir bağlantı içerir. Bu uzantılar için şimdilik bağlantıları gerekir. Örneğin, özel betik ve PowerShell DSC uzantı bir dış betik gösterildiği github'da bağlamak: 
 
@@ -211,7 +205,7 @@ Bir yapıtın mutlak URI oluşturmak için tercih edilen yöntem URI şablon iş
 }
 ```
 
-Bu yaklaşımda, yapılandırma betiklerini içeren tüm dağıtım yapıtları şablonu ile aynı konumda saklanabilir. Tüm bağlantıları konumunu değiştirmek için yalnızca farklı temel URL'sini belirtmeniz gerekir _artifactsLocation parametreleri_.
+Bu yaklaşımda, yapılandırma betiklerini içeren tüm dağıtım yapıtları şablonu ile aynı konumda saklanabilir. Tüm bağlantıların konumunu değiştirmek için, yalnızca _Artifactslocation parametreleri_için farklı bır temel URL belirtmeniz gerekir.
 
 ## <a name="factor-in-differing-regional-capabilities"></a>Bölgesel özellikleri farklı etmeni
 

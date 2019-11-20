@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - Windows VM Şifreleme | Microsoft Docs
+title: Azure CLI Betik Örneği - Windows VM Şifreleme
 description: Azure CLI Betik Örneği - Windows VM Şifreleme
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 12/15/2017
 ms.author: cynthn
-ms.openlocfilehash: bfa6eb8264bf64ad63542640b71d5abe13c7bfb5
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: f37288cb028a3965dfa5b880f0f8c7de35728ba9
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60506051"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039853"
 ---
 # <a name="encrypt-a-windows-virtual-machine-in-azure"></a>Azure'da bir Windows sanal makinesi şifreleme
 

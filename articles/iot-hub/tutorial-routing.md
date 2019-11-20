@@ -1,6 +1,6 @@
 ---
-title: Azure CLI ve Azure portalını kullanarak Azure IOT Hub için ileti yönlendirmeyi yapılandırma | Microsoft Docs
-description: Azure CLI ve Azure portalını kullanarak Azure IOT Hub için ileti yönlendirmeyi yapılandırma
+title: Azure CLı kullanarak Azure IoT Hub için ileti yönlendirmeyi yapılandırma
+description: Azure CLı ve Azure portal kullanarak Azure IoT Hub için ileti yönlendirmeyi yapılandırma
 author: robinsh
 manager: philmea
 ms.service: iot-hub
@@ -9,33 +9,35 @@ ms.topic: tutorial
 ms.date: 03/12/2019
 ms.author: robinsh
 ms.custom: mvc
-ms.openlocfilehash: d81b01992bd3bdd49a48a873281d1be1e795497a
-ms.sourcegitcommit: 9e8dfa1169a55c3c8af93a6c5f4e0dace4de48b2
+ms.openlocfilehash: 38a40d628b883c0e7ada824d47d3fdf3d29caf93
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/13/2019
-ms.locfileid: "65556012"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084379"
 ---
-# <a name="tutorial-use-the-azure-cli-and-azure-portal-to-configure-iot-hub-message-routing"></a>Öğretici: IOT Hub ileti yönlendirme yapılandırmak için Azure CLI ve Azure Portalı'nı kullanın
+# <a name="tutorial-use-the-azure-cli-and-azure-portal-to-configure-iot-hub-message-routing"></a>Öğretici: IoT Hub ileti yönlendirmeyi yapılandırmak için Azure CLı ve Azure portal kullanma
 
 [!INCLUDE [iot-hub-include-routing-intro](../../includes/iot-hub-include-routing-intro.md)]
 
 [!INCLUDE [iot-hub-include-routing-create-resources](../../includes/iot-hub-include-routing-create-resources.md)]
 
-## <a name="use-the-azure-cli-to-create-the-base-resources"></a>Temel kaynakları oluşturmak için Azure CLI kullanma
+## <a name="use-the-azure-cli-to-create-the-base-resources"></a>Temel kaynakları oluşturmak için Azure CLı 'yi kullanma
 
-Bu öğretici, temel kaynakları oluşturmak için Azure CLI'yı kullanır ve ardından kullanan [Azure portalında](https://portal.azure.com) ileti yönlendirmeyi yapılandırma ve test için sanal cihaz ayarlama işlemini göstermek için.
+Bu öğretici, temel kaynakları oluşturmak için Azure CLı 'yi kullanır, ardından ileti yönlendirmeyi yapılandırmayı ve test için sanal cihazı ayarlamayı göstermek üzere [Azure Portal](https://portal.azure.com) kullanır.
 
-IOT hub'ı adı ve depolama hesabı adı gibi genel olarak benzersiz olması gereken birkaç kaynak adları vardır. Bunu kolaylaştırmak için bu kaynak adları adlı rastgele alfasayısal bir değer eklenir *randomValue*. RandomValue komut dosyasının üst kısmında bir kez oluşturulur ve komut dosyası gerektiğinde kaynak adları için eklenmiş. Rastgele olmasını istemiyorsanız, boş bir dize veya belirli bir değere ayarlayabilirsiniz.
+Aşağıdaki betiği kopyalayıp Cloud Shell yapıştırın ve ENTER tuşuna basın. Betiği tek seferde bir satır çalıştırır. Bu işlem, depolama hesabı, IoT Hub, Service Bus ad alanı ve Service Bus kuyruğu dahil olmak üzere Bu öğreticinin temel kaynaklarını oluşturur.
 
-Kopyalama, aşağıdaki komut dosyasını Cloud shell'e yapıştırın ve Enter tuşuna basın. Bu betik bir satır aynı anda çalışır. Bu depolama hesabı, IOT hub'ı, Service Bus Namespace ve Service Bus kuyruğu dahil olmak üzere bu öğreticide, temel kaynakları oluşturur.
+IoT Hub adı ve depolama hesabı adı gibi genel olarak benzersiz olması gereken birkaç kaynak adı vardır. Bunun daha kolay olması için, bu kaynak adlarına *rasgelevalue*adlı rastgele bir alfasayısal değer eklenir. Rasgeledeğeri, komut dosyasının en üstünde bir kez oluşturulur ve komut dosyası boyunca gerektiğinde kaynak adlarına eklenir. Rastgele olmasını istemiyorsanız, bunu boş bir dizeye veya belirli bir değere ayarlayabilirsiniz.
 
-Hata ayıklama hakkında bir Not: Bu betik, devamlılık sembol kullanır (ters eğik çizgi `\`) kod daha okunabilir yapmak için. Betik çalıştırılırken bir sorun varsa, boşluk olmayan herhangi bir ters eğik çizgi sonra emin olun.
+> [!TIP]
+> Hata ayıklama hakkında ipucu: Bu betik, betiği daha okunabilir hale getirmek için devamlılık simgesini (ters eğik çizgi `\`) kullanır. Betiği çalıştırırken bir sorun yaşıyorsanız Cloud Shell oturumunuzun `bash` çalıştığından ve ters eğik çizgi dışında boşluk olmadığından emin olun.
+>
 
 ```azurecli-interactive
 # This retrieves the subscription id of the account 
 #   in which you're logged in.
-# This field is used to set up the routing rules.
+# This field is used to set up the routing queries.
 subscriptionID=$(az account show --query id)
 
 # Concatenate this number onto the resources that have to be globally unique.
@@ -118,35 +120,35 @@ az servicebus queue create --name $sbQueueName \
 
 ```
 
-Temel kaynaklar ayarlanır, içinde ileti yönlendirme yapılandırabilirsiniz [Azure portalında](https://portal.azure.com).
+Temel kaynaklar ayarlandığına göre, [Azure Portal](https://portal.azure.com)ileti yönlendirmeyi yapılandırabilirsiniz.
 
 ## <a name="set-up-message-routing"></a>İleti yönlendirmeyi ayarlama
 
 [!INCLUDE [iot-hub-include-create-routing-description](../../includes/iot-hub-include-create-routing-description.md)]
 
-### <a name="route-to-a-storage-account"></a>Bir depolama hesabına yönlendirme
+### <a name="route-to-a-storage-account"></a>Depolama hesabına yönlendirme
 
-Şimdi depolama hesabı için yönlendirmeyi ayarlayın. İleti Yönlendirme bölmesine gider ve bir yol eklersiniz. Yolu eklerken, yol için yeni bir uç nokta tanımlayın. Bu yönlendirme ayarlandıktan sonra nereye iletileri **düzeyi** özelliği **depolama** bir depolama hesabına otomatik olarak yazılır. 
+Şimdi depolama hesabı için yönlendirmeyi ayarlayın. İleti Yönlendirme bölmesine gider ve bir yol eklersiniz. Yolu eklerken, yol için yeni bir uç nokta tanımlayın. Bu yönlendirme ayarlandıktan sonra, **Level** özelliğinin **depolama** olarak ayarlandığı iletiler otomatik olarak bir depolama hesabına yazılır. 
 
 [!INCLUDE [iot-hub-include-blob-storage-format](../../includes/iot-hub-include-blob-storage-format.md)]
 
-1. İçinde [Azure portalında](https://portal.azure.com)seçin **kaynak grupları**, ardından kaynak grubunuzu seçin. Bu öğreticide **ContosoResources** kullanılır.
+1. [Azure Portal](https://portal.azure.com), **kaynak grupları**' nı ve ardından kaynak grubunuzu seçin. Bu öğreticide **ContosoResources** kullanılır.
 
-2. Kaynak listesi altında IOT hub'ı seçin. Bu öğreticide **ContosoTestHub** kullanılır.
+2. Kaynak listesinin altındaki IoT Hub 'ını seçin. Bu öğreticide **ContosoTestHub** kullanılır.
 
-3. Seçin **ileti yönlendirme**. İçinde **ileti yönlendirme** bölmesinde +**Ekle**. Üzerinde **bir yol eklemek** bölmesinde +**Ekle** desteklenen uç noktalar aşağıdaki resimde gösterildiği göstermek için uç nokta alanın yanındaki:
+3. **Ileti yönlendirmeyi**seçin. **Ileti yönlendirme** bölmesinde +**Ekle**' yi seçin. **Yol Ekle** bölmesinde, aşağıdaki resimde gösterildiği gibi desteklenen uç noktaları göstermek Için uç nokta alanının yanındaki +**Ekle** ' yi seçin:
 
-   ![Bir rota için bir uç nokta ekleme işlemini Başlat](./media/tutorial-routing/message-routing-add-a-route-w-storage-ep.png)
+   ![Bir yol için uç nokta eklemeye başlayın](./media/tutorial-routing/message-routing-add-a-route-w-storage-ep.png)
 
-4. **Blob depolama**'yı seçin. Gördüğünüz **depolama uç noktası ekleme** bölmesi.
+4. **Blob depolama**'yı seçin. **Depolama uç noktası Ekle** bölmesini görürsünüz.
 
-   ![Bir uç nokta ekleme](./media/tutorial-routing/message-routing-add-storage-ep.png)
+   ![Uç nokta ekleme](./media/tutorial-routing/message-routing-add-storage-ep.png)
 
-5. Uç nokta için bir ad girin. Bu öğreticide **ContosoStorageEndpoint**.
+5. Uç nokta için bir ad girin. Bu öğretici **Contosostorageendpoint**kullanır.
 
-6. Seçin **bir kapsayıcı seçin**. Bu sizi depolama hesaplarınızın listesine götürür. Hazırlık adımlarında ayarladığınız hesabı seçin. Bu öğreticide **contosostorage** kullanılır. Söz konusu depolama hesabının içindeki kapsayıcıların listesi gösterilir. **Seçin** kapsayıcıyı hazırlama adımları ayarladığınız. Bu öğreticide **contosoresults** kullanılır. Geri **depolama uç noktası ekleme** bölmesi ve yaptığınız seçimleri bakın.
+6. **Kapsayıcı Seç**' i seçin. Bu sizi depolama hesaplarınızın listesine götürür. Hazırlık adımlarında ayarladığınız hesabı seçin. Bu öğreticide **contosostorage** kullanılır. Söz konusu depolama hesabının içindeki kapsayıcıların listesi gösterilir. Hazırlık adımlarında ayarladığınız kapsayıcıyı **seçin** . Bu öğreticide **contosoresults** kullanılır. **Depolama uç noktası Ekle** bölmesine dönüp yaptığınız seçimleri görürsünüz.
 
-7. AVRO veya JSON kodlama ayarlayın. Bu öğretici için kalan alanlarda varsayılan değerleri kullanın. Seçilen bölge JSON kodlama desteklemiyorsa bu alan gri görünür.,
+7. Kodlamayı AVRO veya JSON olarak ayarlayın. Bu öğretici için kalan alanlarda varsayılan değerleri kullanın. Seçilen bölge JSON kodlamasını desteklemiyorsa, bu alan gri renkte görünür.
 
    > [!NOTE]
    > Blob adının biçimini **Blob dosya adı biçimi** ile ayarlayabilirsiniz. Varsayılan değer: `{iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}`. Biçim {iothub}, {partition}, {YYYY}, {MM}, {DD}, {HH} ve {mm} öğelerini içermelidir, sıralama farklı olabilir.
@@ -156,63 +158,63 @@ Temel kaynaklar ayarlanır, içinde ileti yönlendirme yapılandırabilirsiniz [
    > Bloblar Avro biçiminde yazılır.
    >
 
-8. Seçin **Oluştur** depolama uç noktası oluşturma ve yol ekleyin. **Yol ekle** bölmesine dönersiniz.
+8. Depolama uç noktasını oluşturmak ve rotaya eklemek için **Oluştur** ' u seçin. **Yol ekle** bölmesine dönersiniz.
 
 9. Şimdi yönlendirme sorgusu bilgilerinin kalan kısmını tamamlayın. Bu sorgu, az önce uç nokta olarak eklediğiniz depolama kapsayıcısına ileti gönderme ölçütlerini belirtir. Ekrandaki alanları doldurun.
 
-   **Ad**: Yönlendirme sorgunuz için bir ad girin. Bu öğreticide **ContosoStorageRoute**.
+   **Ad**: Yönlendirme sorgunuz için bir ad girin. Bu öğretici **Contosostorageroute**kullanır.
 
-   **Uç nokta**: Bu yeni ayarladığınız uç nokta gösterir.
+   **Uç nokta**: Az önce ayarladığınız uç noktayı gösterir.
 
-   **Veri kaynağı**: Seçin **cihaz Telemetri iletilerini** aşağı açılan listeden.
+   **Veri kaynağı**: Açılan listeden **Cihaz Telemetri İletileri**'ni seçin.
 
-   **Rota etkinleştirme**: Bu alanı mutlaka `enabled`.
+   **Rotayı etkinleştir**: bu alanın `enabled`olarak ayarlandığından emin olun.
    
-   **Yönlendirme sorgusu**: Girin `level="storage"` sorgu dizesi olarak.
+   **Yönlendirme sorgusu**: Sorgu dizesi olarak `level="storage"` girin.
 
-   ![Depolama hesabı için yönlendirme sorgu oluşturma](./media/tutorial-routing/message-routing-finish-route-storage-ep.png)  
+   ![Depolama hesabı için yönlendirme sorgusu oluşturma](./media/tutorial-routing/message-routing-finish-route-storage-ep.png)  
 
    **Kaydet**’i seçin. İşlem bittiğinde İleti Yönlendirme bölmesine döner ve burada depolama için yeni yönlendirme sorgunuzu görebilirsiniz. Yollar bölmesini kapatın; Kaynak grubu sayfasına dönersiniz.
 
-### <a name="route-to-a-service-bus-queue"></a>Bir Service Bus kuyruğuna yönlendirme
+### <a name="route-to-a-service-bus-queue"></a>Service Bus kuyruğuna yönlendirme
 
-Şimdi Service Bus kuyruğu için yönlendirmeyi ayarlayın. İleti Yönlendirme bölmesine gider ve bir yol eklersiniz. Yolu eklerken, yol için yeni bir uç nokta tanımlayın. Bu rota ayarlandıktan sonra nereye iletileri **düzeyi** özelliği **kritik** tetikler sonra bilgileri içeren bir e-posta gönderen bir mantıksal uygulama, Service Bus kuyruğuna yazılır.
+Şimdi Service Bus kuyruğu için yönlendirmeyi ayarlayın. İleti Yönlendirme bölmesine gider ve bir yol eklersiniz. Yolu eklerken, yol için yeni bir uç nokta tanımlayın. Bu yol ayarlandıktan sonra, **Level** özelliğinin **kritik** olarak ayarlandığı Iletiler, bir mantıksal uygulamayı tetikleyen Service Bus kuyruğuna yazılır ve bu da bilgileri içeren bir e-posta gönderir.
 
-1. Kaynak grubunuzun sayfasında, IOT hub'ınızı seçin ve ardından **ileti yönlendirme**.
+1. Kaynak grubu sayfasında, IoT Hub 'ınızı seçip **Ileti yönlendirme**' yi seçin.
 
-2. İçinde **ileti yönlendirme** bölmesinde +**Ekle**.
+2. **Ileti yönlendirme** bölmesinde +**Ekle**' yi seçin.
 
-3. Üzerinde **bir yol eklemek** bölmesinde seçin +**Ekle** uç nokta alanın yanındaki. **Service Bus Kuyruğu**'nu seçin. **Service Bus Uç Noktası Ekle** bölmesini görürsünüz.
+3. **Yol Ekle** bölmesinde, uç nokta alanının yanındaki +**Ekle** ' yi seçin. **Service Bus Kuyruğu**'nu seçin. **Service Bus Uç Noktası Ekle** bölmesini görürsünüz.
 
-   ![Bir service bus uç noktası ekleme](./media/tutorial-routing/message-routing-add-sbqueue-ep.png)
+   ![Service Bus uç noktası ekleme](./media/tutorial-routing/message-routing-add-sbqueue-ep.png)
 
 4. Şu alanları doldurun:
 
-   **Uç nokta adı**: Uç nokta için bir ad girin. Bu öğreticide **ContosoSBQueueEndpoint**.
+   **Uç Nokta Adı**: Uç nokta için bir ad girin. Bu öğretici **Contososbqueueendpoint**kullanır.
    
-   **Service Bus Namespace**: Hazırlama adımları sizin ayarladığınız service bus ad alanı seçmek için açılan listeyi kullanın. Bu öğreticide **ContosoSBNamespace** kullanılır.
+   **Service Bus ad alanı**: hazırlama adımlarında ayarladığınız Service Bus ad alanını seçmek için açılan listeyi kullanın. Bu öğreticide **ContosoSBNamespace** kullanılır.
 
-   **Service Bus kuyruğu**: Service Bus kuyruğuna seçmek için açılan listeyi kullanın. Bu öğreticide **contososbqueue** kullanılır.
+   **Service Bus kuyruğu**: Service Bus kuyruğunu seçmek için açılan listeyi kullanın. Bu öğreticide **contososbqueue** kullanılır.
 
-5. Seçin **Oluştur** Service Bus kuyruk uç noktası eklemek için. **Yol ekle** bölmesine dönersiniz.
+5. Service Bus kuyruğu uç noktasını eklemek için **Oluştur** ' u seçin. **Yol ekle** bölmesine dönersiniz.
 
 6. Şimdi yönlendirme sorgusu bilgilerinin kalan kısmını tamamlarsınız. Bu sorgu, az önce uç nokta olarak eklediğiniz Service Bus kuyruğuna ileti gönderme ölçütlerini belirtir. Ekrandaki alanları doldurun. 
 
-   **Ad**: Yönlendirme sorgunuz için bir ad girin. Bu öğreticide **ContosoSBQueueRoute**. 
+   **Ad**: Yönlendirme sorgunuz için bir ad girin. Bu öğretici **Contososbqueueroute**kullanır. 
 
-   **Uç nokta**: Bu yeni ayarladığınız uç nokta gösterir.
+   **Uç nokta**: Az önce ayarladığınız uç noktayı gösterir.
 
-   **Veri kaynağı**: Seçin **cihaz Telemetri iletilerini** aşağı açılan listeden.
+   **Veri kaynağı**: Açılan listeden **Cihaz Telemetri İletileri**'ni seçin.
 
-   **Yönlendirme sorgusu**: Girin `level="critical"` sorgu dizesi olarak. 
+   **Yönlendirme sorgusu**: Sorgu dizesi olarak `level="critical"` girin. 
 
-   ![Service Bus kuyruğu için yönlendirme sorgu oluşturma](./media/tutorial-routing/message-routing-finish-route-sbq-ep.png)
+   ![Service Bus kuyruğu için bir yönlendirme sorgusu oluşturma](./media/tutorial-routing/message-routing-finish-route-sbq-ep.png)
 
 7. **Kaydet**’i seçin. Yollar bölmesine dönüldüğünde, burada gösterildiği gibi yeni yönlendirme yollarınızın ikisini de görürsünüz.
 
-   ![Yeni ayarladığınız yolları](./media/tutorial-routing/message-routing-show-both-routes.png)
+   ![Az önce ayarladığınız rotalar](./media/tutorial-routing/message-routing-show-both-routes.png)
 
-8. Ayarladığınız seçerek özel uç noktalar görebilirsiniz **özel uç noktalar** sekmesi.
+8. **Özel uç noktalar** sekmesini seçerek ayarladığınız özel uç noktaları görebilirsiniz.
 
    ![Yeni ayarladığınız özel uç nokta](./media/tutorial-routing/message-routing-show-custom-endpoints.png)
 
@@ -224,7 +226,7 @@ Temel kaynaklar ayarlanır, içinde ileti yönlendirme yapılandırabilirsiniz [
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ayarlanan kaynakları ve yapılandırılmış ileti yollarını edindikten sonra IOT hub'ına ileti göndermek ve farklı hedeflere görebileceği hakkında bilgi edinmek için sonraki öğreticiye ilerleyin. 
+Kaynakları ayarlamış olduğunuza ve ileti rotalarına sahip olduğunuza göre, IoT Hub 'ına ileti gönderme ve farklı hedeflere yönlendirilme hakkında bilgi edinmek için sonraki öğreticiye ilerleyin. 
 
 > [!div class="nextstepaction"]
-> [2. Kısım - ileti yönlendirme sonuçlarını görüntüleme](tutorial-routing-view-message-routing-results.md)
+> [Bölüm 2-ileti yönlendirme sonuçlarını görüntüleme](tutorial-routing-view-message-routing-results.md)

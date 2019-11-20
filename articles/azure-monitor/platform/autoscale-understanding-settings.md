@@ -105,13 +105,13 @@ Otomatik ölçeklendirme ayarı şema göstermek için aşağıdaki otomatik öl
 | metricTrigger | metricName | Ölçüm adı. |
 | metricTrigger |  metricResourceUri | Ölçüm yayan kaynağının kaynak kimliği. Çoğu durumda, ölçeği genişletilmiş kaynak ile aynı olur. Bazı durumlarda, farklı olabilir. Örneğin, bir depolama kuyruğuna ileti sayısına dayalı olarak bir sanal makine ölçek kümesi ölçeklendirebilirsiniz. |
 | metricTrigger | timeGrain | Ölçüm örnekleme süresi. Örneğin, **TimeGrain = "PT1M"** istatistiği öğesinde belirtilen toplama yöntemi kullanarak ölçümleri her 1 dakikada toplanması anlamına gelir. |
-| metricTrigger | İstatistik | TimeGrain dönemi içindeki toplama yöntemidir. Örneğin, **istatistik = "Ortalama"** ve **timeGrain = "PT1M"** ortalamasını alarak ölçümleri her 1 dakikada toplanması anlamına gelir. Bu özellik, ölçüm nasıl örneklenir belirler. |
+| metricTrigger | statistic | TimeGrain dönemi içindeki toplama yöntemidir. Örneğin, **istatistik = "Ortalama"** ve **timeGrain = "PT1M"** ortalamasını alarak ölçümleri her 1 dakikada toplanması anlamına gelir. Bu özellik, ölçüm nasıl örneklenir belirler. |
 | metricTrigger | timeWindow | Geri ölçümlerini aramak için süre miktarı. Örneğin, **timeWindow "PT10M" =** otomatik ölçeklendirme her çalıştırıldığında, son 10 dakika ölçümlerini sorgular anlamına gelir. Ölçümlerinizin normalleştirilmiş, zaman penceresi sağlar ve geçici artışlara tepki verilmesini önler. |
 | metricTrigger | timeAggregation | Örneklenen ölçümleri toplamak için kullanılan toplama yöntemidir. Örneğin, **TimeAggregation = "Ortalama"** örneklenen ölçümlerin ortalamasını alarak toplamak. Önceki örnekte, on 1 dakikalık örnekleri almak ve bunları ortalama. |
 | rule | scaleAction | Kuralın metricTrigger tetiklendiğinde gerçekleştirilecek eylem. |
 | scaleAction | direction | "Ölçeği ya da"Azaltmak"için ölçek artırma".|
 | scaleAction | value | Artırmak veya kaynak kapasitesinin azaltmak için ne kadar. |
-| scaleAction | dakikaysa | Sonra bir ölçeklendirme işlemi yeniden ölçeklendirmeden önce beklenecek süre miktarı. Örneğin, varsa **dakikaysa "PT10M" =** , başka bir 10 dakika için yeniden ölçeklendirmek otomatik ölçeklendirme denemez. Dakikaysa eklenmesi veya kaldırılmasını örnekleri sonra ölçümlerin sağlamaktır. |
+| scaleAction | cooldown | Sonra bir ölçeklendirme işlemi yeniden ölçeklendirmeden önce beklenecek süre miktarı. Örneğin, varsa **dakikaysa "PT10M" =** , başka bir 10 dakika için yeniden ölçeklendirmek otomatik ölçeklendirme denemez. Dakikaysa eklenmesi veya kaldırılmasını örnekleri sonra ölçümlerin sağlamaktır. |
 
 ## <a name="autoscale-profiles"></a>Otomatik ölçeklendirme profilleri
 

@@ -1,6 +1,6 @@
 ---
-title: Kopyalama etkinliği'ni kullanarak veri taşıma | Microsoft Docs
-description: "Data Factory işlem hatları veri taşıma hakkında bilgi edinin: Bulut depoları arasında ve bir şirket içi depolama ile bulut deposu arasında veri taşıma. Kopyalama etkinliği'ni kullanın."
+title: Kopyalama etkinliğini kullanarak verileri taşıma
+description: 'Data Factory işlem hatlarında veri taşıma hakkında bilgi edinin: bulut depoları arasında veri geçişi ve şirket içi bir mağaza ile bulut deposu arasında. Kopyalama etkinliğini kullanın.'
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -13,58 +13,58 @@ ms.topic: conceptual
 ms.date: 12/05/2017
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: c188c23f87715b6ba5b90f6015b59f2a347ec0cf
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0f7771c55bfdc837921fb731b29e88c970b5d283
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60486962"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73682643"
 ---
-# <a name="move-data-by-using-copy-activity"></a>Kopyalama etkinliği'ni kullanarak veri taşıma
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="move-data-by-using-copy-activity"></a>Kopyalama etkinliğini kullanarak verileri taşıma
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](data-factory-data-movement-activities.md)
 > * [Sürüm 2 (geçerli sürüm)](../copy-activity-overview.md)
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [V2'de kopyalama etkinliği](../copy-activity-overview.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [v2 'de kopyalama etkinliği](../copy-activity-overview.md).
 
 ## <a name="overview"></a>Genel Bakış
-Azure Data Factory'de şirket içi ve bulut arasında veri kopyalamak için kopyalama etkinliğini kullanabilirsiniz veri depoları. Veri kopyalandıktan sonra daha fazla dönüştürülür ve analiz edilebilir. Kopyalama etkinliği, dönüştürme ve iş zekası (BI) ve uygulama tüketimini analiz sonuçları yayımlamak için de kullanabilirsiniz.
+Azure Data Factory, şirket içi ve bulut veri depoları arasında veri kopyalamak için kopyalama etkinliğini kullanabilirsiniz. Veriler kopyalandıktan sonra, daha fazla dönüştürülebilir ve analiz edilebilir. Ayrıca, iş zekası (BI) ve uygulama tüketimi için dönüştürme ve analiz sonuçlarını yayımlamak için kopyalama etkinliği ' ni de kullanabilirsiniz.
 
-![Kopyalama etkinliği rolü](media/data-factory-data-movement-activities/copy-activity.png)
+![Kopyalama etkinliğinin rolü](media/data-factory-data-movement-activities/copy-activity.png)
 
-Kopyalama etkinliği desteklenen bir güvenli tarafından güvenilir, ölçeklenebilir, ve [dünya çapında hizmet](#global). Bu makalede, veri taşıma Data Factory ve kopyalama etkinliği hakkında ayrıntılı bilgi sağlar.
+Kopyalama etkinliği güvenli, güvenilir, ölçeklenebilir ve [küresel olarak kullanılabilir bir hizmet](#global)tarafından desteklenir. Bu makalede Data Factory ve kopyalama etkinliğinde veri taşıma hakkında ayrıntılı bilgi verilmektedir.
 
-İlk olarak, iki bulut veri depoları arasında ve bir şirket içi veri deposu ile bulut veri deposu arasında veri taşıma nasıl gerçekleştirildiğini görelim.
+İlk olarak, iki bulut veri deposu arasında ve şirket içi veri deposu ile bulut veri deposu arasında veri geçişinin nasıl gerçekleşeceğini görelim.
 
 > [!NOTE]
-> Etkinlikleri hakkında genel bilgi edinmek için [anlama işlem hatları ve etkinlikler](data-factory-create-pipelines.md).
+> Genel olarak etkinlikler hakkında bilgi edinmek için bkz. işlem [hatlarını ve etkinlikleri anlama](data-factory-create-pipelines.md).
 >
 >
 
-### <a name="copy-data-between-two-cloud-data-stores"></a>İki bulut veri depoları arasında veri kopyalama
-Hem kaynak hem de havuz veri depolarına bulutta olduğunda, kopyalama etkinliği, verileri bir kaynaktan havuza kopyalanacak aşağıdaki aşamaları boyunca gider. Kopyalama etkinliği'ni destekleyen hizmet:
+### <a name="copy-data-between-two-cloud-data-stores"></a>İki bulut veri deposu arasında veri kopyalama
+Hem kaynak hem de havuz veri deposu bulutta olduğunda kopyalama etkinliği kaynağı kaynaktan havuza kopyalamak için aşağıdaki aşamalardan geçer. Kopyalama etkinliğini destekleyen hizmet:
 
-1. Kaynak veri deposundan veri okur.
-2. Serileştirme/seri durumundan çıkarma, sıkıştırma/açma, sütun eşleme gerçekleştirir ve dönüştürme yazın. Bunu, giriş veri kümesi, çıktı veri kümesi ve kopyalama etkinliği yapılandırmalarına göre bu işlemleri yapar.
+1. Kaynak veri deposundan verileri okur.
+2. Serileştirme/seriyi kaldırma, sıkıştırma/açma, sütun eşleme ve tür dönüştürme gerçekleştirir. Bu işlemler, giriş veri kümesi, çıkış veri kümesi ve kopyalama etkinliğinin yapılandırmalarına göre yapılır.
 3. Verileri hedef veri deposuna yazar.
 
-Hizmet, veri taşımayı gerçekleştirmek için en uygun bölgeyi otomatik olarak seçer. Bu genellikle bir havuz veri deposuna en yakın bölgedir.
+Hizmet, veri hareketini gerçekleştirmek için en uygun bölgeyi otomatik olarak seçer. Bu bölge genellikle havuz veri deposuna en yakın bir yoldur.
 
-![Bulut buluta kopyalama](./media/data-factory-data-movement-activities/cloud-to-cloud.png)
+![Buluttan buluta kopyalama](./media/data-factory-data-movement-activities/cloud-to-cloud.png)
 
-### <a name="copy-data-between-an-on-premises-data-store-and-a-cloud-data-store"></a>Bir şirket içi veri deposu ile bulut veri deposu arasında veri kopyalama
-Güvenli bir şekilde verileri bir şirket içi veri deposu ile bulut veri deposu arasında taşımak için veri yönetimi ağ geçidi, şirket içi makinenize yükleyin. Veri Yönetimi ağ geçidi karma veri taşıma ve işleme sağlayan bir aracısıdır. Aynı makinede kendisini depolayabilir veya ayrı bir makineye erişim veri deposuna sahip olarak yükleyebilirsiniz.
+### <a name="copy-data-between-an-on-premises-data-store-and-a-cloud-data-store"></a>Şirket içi veri deposu ile bulut veri deposu arasında veri kopyalama
+Şirket içi veri deposu ile bulut veri deposu arasında verileri güvenli bir şekilde taşımak için şirket içi makinenize Veri Yönetimi Ağ Geçidi ' ni yüklersiniz. Veri Yönetimi ağ geçidi, karma veri hareketini ve işlemeyi sağlayan bir aracıdır. Bunu veri deposunun kendisi ile aynı makineye veya veri deposuna erişimi olan ayrı bir makineye yükleyebilirsiniz.
 
-Bu senaryoda, veri yönetimi ağ geçidi serileştirme/seri durumundan çıkarma, sıkıştırma/açma, sütun eşleme gerçekleştirir ve tür dönüştürme. Verileri Azure Data Factory hizmeti geçmez. Bunun yerine, veri yönetimi ağ geçidi hedef deposuna doğrudan verileri yazar.
+Bu senaryoda Veri Yönetimi Gateway, serileştirme/seriyi kaldırma, sıkıştırma/açma, sütun eşleme ve tür dönüştürme işlemlerini gerçekleştirir. Veriler Azure Data Factory hizmeti üzerinden akış yapmaz. Bunun yerine, Veri Yönetimi ağ geçidi, verileri doğrudan hedef depoya yazar.
 
-![Şirket içi-buluta kopyalama](./media/data-factory-data-movement-activities/onprem-to-cloud.png)
+![Şirket içinden buluta kopyalama](./media/data-factory-data-movement-activities/onprem-to-cloud.png)
 
-Bkz: [şirket içi ile bulut arasında veri taşıma veri depoları](data-factory-move-data-between-onprem-and-cloud.md) bir giriş ve gözden geçirme. Bkz: [veri yönetimi ağ geçidi](data-factory-data-management-gateway.md) bu aracı hakkında ayrıntılı bilgi için.
+Giriş ve İzlenecek yol için bkz. Şirket [içi ve bulut veri depoları arasında veri taşıma](data-factory-move-data-between-onprem-and-cloud.md) . Bu aracı hakkında ayrıntılı bilgi için bkz. [veri yönetimi ağ geçidi](data-factory-data-management-gateway.md) .
 
-Veri Yönetimi ağ geçidi'ni kullanarak Azure Iaas sanal makinelerinde (VM'ler) barındırılan veri / desteklenen veri depoları da taşıyabilirsiniz. Bu durumda, kendi veri deposu veya ayrı bir VM veri deposuna erişim sahip aynı VM'de veri yönetimi ağ geçidi yükleyebilirsiniz.
+Ayrıca, Azure IaaS sanal makinelerinde (VM 'Ler) barındırılan desteklenen veri depolarından verileri de Veri Yönetimi ağ geçidi kullanarak taşıyabilirsiniz. Bu durumda, veri deposunun kendisi ile aynı VM 'ye veya veri deposuna erişimi olan ayrı bir VM 'ye Veri Yönetimi ağ geçidi yükleyebilirsiniz.
 
-## <a name="supported-data-stores-and-formats"></a>Desteklenen veri depoları ve biçimler
+## <a name="supported-data-stores-and-formats"></a>Desteklenen veri depoları ve biçimleri
 Data Factory’deki Kopyalama Etkinliği bir kaynak veri deposundan havuz veri deposuna verileri kopyalar. Data Factory aşağıdaki veri depolarını destekler. Herhangi bir kaynaktan gelen veriler herhangi bir havuza yazılabilir. Bir depoya veya depodan veri kopyalama hakkında bilgi edinmek için veri deposuna tıklayın.
 
 > [!NOTE] 
@@ -76,24 +76,24 @@ Data Factory’deki Kopyalama Etkinliği bir kaynak veri deposundan havuz veri d
 > \* taşıyan veri depoları şirket içi veya Azure IaaS üzerinde olabilir ve bir şirket içi/Azure IaaS makinesine [Veri Yönetimi Ağ Geçidi](data-factory-data-management-gateway.md) yüklemenizi gerektirir.
 
 ### <a name="supported-file-formats"></a>Desteklenen dosya biçimleri
-Kopyalama etkinliği için kullanabileceğiniz **olarak dosya kopyalama-olan** iki dosya tabanlı veri depoları arasında atlayabilirsiniz [format bölümünde](data-factory-create-datasets.md) girdi ve çıktı veri kümesi tanımlarında. Verileri verimli bir şekilde tüm serileştirme/seri kaldırma kopyalanır.
+Kopyalama etkinliği 'ni kullanarak dosyaları iki dosya tabanlı veri deposu arasında **olduğu gibi kopyalayabilirsiniz** , hem giriş hem de çıkış veri kümesi tanımlarında [Biçim bölümünü](data-factory-create-datasets.md) atlayabilirsiniz. Veriler, herhangi bir serileştirme/seri durumdan çıkarma yapılmadan verimli bir şekilde kopyalanır.
 
-Kopyalama etkinliği, ayrıca okur ve belirtilen biçimde dosyaları Yazar: **Metin, JSON, Avro, ORC ve Parquet**ve sıkıştırma codec **GZip, Deflate, Bzıp2 ve ZipDeflate** desteklenir. Bkz: [desteklenen dosya ve sıkıştırma biçimleri](data-factory-supported-file-and-compression-formats.md) ayrıntılarla.
+Kopyalama etkinliği aynı zamanda belirtilen biçimlerdeki dosyaları okur ve yazar: **Text, JSON, avro, ORC ve Parquet**ve Compression codec **gzip, söndür, bzip2 ve zipsöndür** desteklenir. Ayrıntılar ile [Desteklenen dosya ve sıkıştırma biçimlerine](data-factory-supported-file-and-compression-formats.md) bakın.
 
-Örneğin, aşağıdaki kopyalama etkinlikleri yapabilirsiniz:
+Örneğin, aşağıdaki kopyalama etkinliklerini yapabilirsiniz:
 
-* Şirket içi SQL Server verileri kopyalayın ve Azure Data Lake Store için ORC biçiminde yazmak.
-* Dosyaları (CSV) metin biçiminde şirket içi dosya sisteminden kopyalama ve Azure Blob Avro biçiminde yazmak.
-* Şirket içi dosya sisteminden sıkıştırılmış dosyaları kopyalayın ve ardından land Azure Data Lake Store için açılamadı.
-* Verileri Azure Blobundan GZip sıkıştırılmış metni (CSV) biçiminde kopyalayın ve Azure SQL veritabanı'na yazın.
+* Verileri şirket içi SQL Server kopyalayın ve Azure Data Lake Store ORC biçiminde yazın.
+* Metin (CSV) biçimindeki dosyaları şirket içi dosya sisteminden kopyalayın ve avro biçiminde Azure Blob 'a yazın.
+* ZIP dosyalarını şirket içi dosya sisteminden kopyalayın ve Azure Data Lake Store ' ye açıp açın.
+* Verileri Azure Blob 'dan GZip sıkıştırılmış metin (CSV) biçiminde kopyalayın ve Azure SQL veritabanı 'na yazın.
 
-## <a name="global"></a>Dünya çapında veri taşıma
-Azure Data Factory yalnızca Batı ABD, Doğu ABD ve Kuzey Avrupa bölgelerinde kullanılabilir. Ancak, kopyalama etkinliği'ni destekleyen hizmet genel olarak aşağıdaki bölgelere ve coğrafyalara kullanılabilir. Dünya çapında topolojisi genellikle bölgeler arası atlama önler verimli veri taşıma sağlar. Bkz: [bölgelere göre Hizmetler](https://azure.microsoft.com/regions/#services) Data Factory veri taşıma bir bölge ve kullanılabilirlik için.
+## <a name="global"></a>Küresel olarak kullanılabilir veri taşıma
+Azure Data Factory yalnızca Batı ABD, Doğu ABD ve Kuzey Avrupa bölgelerinde kullanılabilir. Ancak, kopyalama etkinliğini destekleyen hizmet aşağıdaki bölgelerde ve coğrafi bölgelerde genel olarak kullanılabilir. Genel olarak kullanılabilir topoloji, genellikle bölgeler arası atlamaları önleyen etkili veri hareketini sağlar. Bir bölgedeki Data Factory ve veri hareketinin kullanılabilirliği için bkz. [bölgeye göre hizmetler](https://azure.microsoft.com/regions/#services) .
 
 ### <a name="copy-data-between-cloud-data-stores"></a>Bulut veri depoları arasında veri kopyalama
-Hem kaynak hem de havuz veri depolarına bulutta olduğunda, Data Factory hizmeti dağıtımı verileri taşımak için aynı coğrafyadaki havuza en yakın olan bölgeyi kullanır. Eşleme için aşağıdaki tabloya bakın:
+Hem kaynak hem de havuz veri deposu bulutta olduğunda Data Factory, verileri taşımak için aynı coğrafya içindeki havuza en yakın bölgede bir hizmet dağıtımı kullanır. Eşleme için aşağıdaki tabloya bakın:
 
-| Hedef veri depolarını coğrafyası | Hedef veri deposunun bölgesi | Veri taşıma için kullanılan bölge |
+| Hedef veri depolarının Coğrafya | Hedef veri deposunun bölgesi | Veri taşıma için kullanılan bölge |
 |:--- |:--- |:--- |
 | Amerika Birleşik Devletleri | Doğu ABD | Doğu ABD |
 | &nbsp; | Doğu ABD 2 | Doğu ABD 2 |
@@ -122,29 +122,29 @@ Hem kaynak hem de havuz veri depolarına bulutta olduğunda, Data Factory hizmet
 | Güney Kore | Kore Orta | Kore Orta |
 | &nbsp; | Kore Güney | Kore Orta |
 
-Alternatif olarak, açıkça belirterek kopyalama işlemini gerçekleştirmek için kullanılacak Data Factory hizmetinin bölgeyi belirtebilirsiniz `executionLocation` kopyalama etkinliği'nin altındaki özelliğini `typeProperties`. Bu özellik için desteklenen değerler listelenmiştir yukarıda **bölge veri taşıma için kullanılan** sütun. Verilerinizi bu bölge kopyalama sırasında kablo üzerinden geçer unutmayın. Örneğin arasında kopyalamak için belirtebileceğiniz depolayan Kore'de Azure `"executionLocation": "Japan East"` Japonya bölge üzerinden yönlendirmek için (bkz [JSON örneği](#by-using-json-scripts) başvuru olarak).
+Alternatif olarak, kopyalama etkinliği `typeProperties`altında `executionLocation` özelliği belirterek kopyayı gerçekleştirmek için kullanılacak Data Factory hizmetin bölgesini açıkça belirtebilirsiniz. Bu özellik için desteklenen değerler, **veri taşıma sütunu için kullanılan yukarıdaki bölgede** listelenmiştir. Verileriniz, kopyalama sırasında, bu bölgeden gelen bölge üzerinden gider. Örneğin, Kore 'deki Azure mağazalarını kopyalamak için, Japonya bölgesi üzerinden yönlendirmek üzere `"executionLocation": "Japan East"` belirtebilirsiniz (bkz. başvuru olarak [örnek JSON](#by-using-json-scripts) ).
 
 > [!NOTE]
-> Hedef veri deposunun bölgesi, önceki listede değil veya tespit edilemezse varsayılan olarak kopyalama etkinliği farklı bir bölge gitmek yerine sürece başarısız olursa `executionLocation` belirtilir. Zaman içinde desteklenen bölge listesi genişletilecek.
+> Hedef veri deposunun bölgesi önceki listede yoksa veya algılanamaz ise, `executionLocation` belirtilmediği takdirde, varsayılan olarak kopyalama etkinliği alternatif bir bölge üzerinden geçiş yapmak yerine başarısız olur. Desteklenen bölge listesi zaman içinde genişletilir.
 >
 
-### <a name="copy-data-between-an-on-premises-data-store-and-a-cloud-data-store"></a>Bir şirket içi veri deposu ile bulut veri deposu arasında veri kopyalama
-Ne zaman veri şuraya kopyalanıyor şirket içinde (veya Azure sanal makineler/Iaas) arasında ve bulut depolarına [veri yönetimi ağ geçidi](data-factory-data-management-gateway.md) bir şirket içi veya sanal makinede veri hareketini gerçekleştirir. Veri Hizmeti, bulut üzerinden akmaz kullanılmadıkça [kopyalama aşamalı](data-factory-copy-activity-performance.md#staged-copy) yeteneği. Bu durumda, havuz veri deposuna yazılmadan önce verileri hazırlama Azure Blob Depolama akar.
+### <a name="copy-data-between-an-on-premises-data-store-and-a-cloud-data-store"></a>Şirket içi veri deposu ile bulut veri deposu arasında veri kopyalama
+Veriler şirket içi (veya Azure sanal makineleri/IaaS) ve bulut depoları arasında kopyalanırken [veri yönetimi ağ geçidi](data-factory-data-management-gateway.md) , şirket içi bir makinede veya sanal makinede veri hareketini gerçekleştirir. [Hazırlanmış kopyalama](data-factory-copy-activity-performance.md#staged-copy) özelliğini kullanmadığınız durumlar dışında veriler buluttaki hizmetten akamaz. Bu durumda, veriler havuz veri deposuna yazılmadan önce hazırlama Azure Blob depolama alanı üzerinden akar.
 
 ## <a name="create-a-pipeline-with-copy-activity"></a>Kopyalama etkinliği ile işlem hattı oluşturma
-Çeşitli şekillerde kopyalama etkinliği ile işlem hattı oluşturabilirsiniz:
+Kopyalama etkinliği içeren bir işlem hattını birkaç yolla oluşturabilirsiniz:
 
-### <a name="by-using-the-copy-wizard"></a>Kopyalama Sihirbazı'nı kullanarak
-Data Factory Kopyalama Sihirbazı, kopyalama etkinliği ile işlem hattı oluşturmak için yardımcı olur. Bu işlem hattı veri desteklenen kaynaklardan hedeflere kopyalamanıza olanak sağlayan *JSON yazmadan* bağlı hizmetler, veri kümeleri ve işlem hatları için tanımlar. Bkz: [Data Factory Kopyalama Sihirbazı](data-factory-copy-wizard.md) Sihirbazı hakkında daha fazla ayrıntı için.  
+### <a name="by-using-the-copy-wizard"></a>Kopyalama Sihirbazı 'nı kullanarak
+Data Factory kopyalama Sihirbazı, kopyalama etkinliğine sahip bir işlem hattı oluşturmanıza yardımcı olur. Bu işlem hattı, bağlı hizmetler, veri kümeleri ve işlem hatları için *JSON tanımları yazmadan* desteklenen kaynaklardaki verileri hedeflere kopyalamanızı sağlar. Sihirbazla ilgili ayrıntılar için bkz. [Data Factory kopyalama Sihirbazı](data-factory-copy-wizard.md) .  
 
-### <a name="by-using-json-scripts"></a>JSON betikleri kullanarak
-(Kopyalama etkinliği kullanarak) bir işlem hattı için bir JSON tanımı oluşturmak için Azure portal, Visual Studio veya Azure PowerShell Data Factory Düzenleyicisi'ni kullanabilirsiniz. Ardından, Data Factory'de işlem hattı oluşturmak için dağıtabilirsiniz. Bkz: [Öğreticisi: Bir Azure Data Factory işlem hattında kopyalama etkinliği kullanmak](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) adım adım yönergeleri içeren öğretici.    
+### <a name="by-using-json-scripts"></a>JSON betiklerini kullanarak
+Visual Studio 'da Data Factory düzenleyicisini veya Azure PowerShell bir işlem hattı için JSON tanımı oluşturmak için (kopyalama etkinliğini kullanarak) kullanabilirsiniz. Daha sonra, Data Factory işlem hattını oluşturmak için dağıtabilirsiniz. Adım adım yönergeler için bkz. [öğretici: Azure Data Factory işlem hattındaki kopyalama etkinliği kullanma](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) .    
 
-JSON özellikleri (örneğin, ad, açıklama, girdi ve çıktı tabloları ve ilkeleri), tüm etkinlik türleri için kullanılabilir. Kullanılabilir özellikler `typeProperties` etkinlik bölümünü her etkinlik türü ile farklılık gösterir.
+JSON özellikleri (ad, açıklama, giriş ve çıkış tabloları ve ilkeler gibi) tüm etkinlik türleri için kullanılabilir. Etkinliğin `typeProperties` bölümünde kullanılabilen özellikler her etkinlik türüyle farklılık gösterir.
 
-Kopyalama etkinliği için `typeProperties` bölüm kaynakları türlerine bağlı olarak değişir ve şu havuzlar. Bir kaynak/havuz tıklayın [desteklenen kaynaklar ve havuzlar](#supported-data-stores-and-formats) bölümü, veri deposu için kopyalama etkinliği destekleyen tür özellikleri hakkında bilgi edinin.
+Kopyalama etkinliği için `typeProperties` bölümü, kaynak ve havuz türlerine göre değişir. Bu veri deposu için kopyalama etkinliğinin desteklediği tür özellikleri hakkında bilgi edinmek için [desteklenen kaynaklar ve havuzlar](#supported-data-stores-and-formats) bölümünde bir kaynak/havuz öğesine tıklayın.
 
-Örnek JSON tanımı aşağıda verilmiştir:
+Örnek bir JSON tanımı aşağıda verilmiştir:
 
 ```json
 {
@@ -187,30 +187,30 @@ Kopyalama etkinliği için `typeProperties` bölüm kaynakları türlerine bağl
   }
 }
 ```
-Etkinlik çalıştığında, çıkış veri kümesinde tanımlanan zamanlamaya belirler (örneğin: **günlük**, frekansı **gün**ve aralık olarak **1**). Etkinliğin bir giriş veri kümesinden veri kopyalar (**kaynak**) için bir çıktı veri kümesi (**havuz**).
+Çıktı veri kümesinde tanımlanan zamanlama, etkinliğin ne zaman çalışacağını belirler (örneğin: **günlük**, sıklık, **gün**ve Aralık **1**). Etkinlik, verileri bir giriş veri kümesinden (**kaynak**) çıkış veri kümesine (**Havuz**) kopyalar.
 
-Kopyalama etkinliği için birden fazla girdi veri kümesi belirtebilirsiniz. Bunlar, etkinlik çalıştırılmadan önce bağımlılıkları doğrulamak için kullanılır. Ancak, yalnızca ilk veri kümesindeki verileri hedef dataset nesnesine kopyalanır. Daha fazla bilgi için [zamanlama ve yürütme](data-factory-scheduling-and-execution.md).  
+Aktiviteyi kopyalamak için birden fazla giriş veri kümesi belirtebilirsiniz. Bunlar, etkinlik çalıştırılmadan önce bağımlılıkları doğrulamak için kullanılır. Ancak, hedef veri kümesine yalnızca ilk veri kümesindeki veriler kopyalanır. Daha fazla bilgi için bkz. [zamanlama ve yürütme](data-factory-scheduling-and-execution.md).  
 
 ## <a name="performance-and-tuning"></a>Performans ve ayar
-Bkz: [kopyalama etkinliği performansı ve ayarlama Kılavuzu](data-factory-copy-activity-performance.md), Azure Data factory'deki veri taşıma (kopyalama etkinliği) performansını etkileyen önemli faktörlerin açıklar. Ayrıca, iç test sırasında gözlemlenen performans listeler ve kopyalama etkinliği performansı iyileştirmek için çeşitli yollar ele alınmaktadır.
+Azure Data Factory içindeki veri taşıma (kopyalama etkinliği) performansını etkileyen temel faktörleri açıklayan, [kopyalama etkinliği performansı ve ayarlama Kılavuzu](data-factory-copy-activity-performance.md)' na bakın. Ayrıca, iç test sırasında gözlemlenen performansı listeler ve kopyalama etkinliğinin performansını iyileştirmek için çeşitli yollar tartışır.
 
 ## <a name="fault-tolerance"></a>Hataya dayanıklılık
-Varsayılan olarak, veri ve iadesi başarısız kopyalama kopyalama etkinliği durdurur zaman uyumsuz veri kaynağı ve havuz; arasında karşılaştığınız açıkça atlayıp uyumlu satırları ve yalnızca kopya günlüğünü yapılandırabilirsiniz; ancak bu uyumlu bir veri kopyalamayı yapmak için başarılı oldu. Bkz: [kopyalama etkinliği hataya dayanıklılık](data-factory-copy-activity-fault-tolerance.md) hakkında daha fazla bilgi.
+Varsayılan olarak, kopyalama etkinliği veri kopyalamayı durdurur ve kaynak ve havuz arasında uyumsuz verilerle karşılaşmanız durumunda başarısız olur; uyumsuz satırları atlayıp günlüğe kaydetmek ve yalnızca bu uyumlu verileri kopyalamak için açıkça yapılandırabilmeniz gerekir. Daha fazla ayrıntı için [kopyalama etkinliği hata toleransını](data-factory-copy-activity-fault-tolerance.md) inceleyin.
 
 ## <a name="security-considerations"></a>Güvenlikle ilgili dikkat edilmesi gerekenler
-Bkz: [güvenlik konuları](data-factory-data-movement-security-considerations.md), verilerinizin güvenliğini sağlamak için Azure Data factory'deki veri taşıma hizmetleri kullanan bir güvenlik altyapısı açıklar.
+Verilerinizin güvenliğini sağlamak için Azure Data Factory veri taşıma hizmetlerinin kullandığı güvenlik altyapısını açıklayan [güvenlik konularını](data-factory-data-movement-security-considerations.md)inceleyin.
 
-## <a name="scheduling-and-sequential-copy"></a>Zamanlama ve sıralı kopyalama
-Bkz: [zamanlama ve yürütme](data-factory-scheduling-and-execution.md) zamanlama ve yürütme işleyişi Data Factory hakkında ayrıntılı bilgi. Birden çok kopyalama işlemleri birbiri ardına sıralı/sıralı bir şekilde çalıştırmak mümkündür. Bkz: [sırayla kopyalamak](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline) bölümü.
+## <a name="scheduling-and-sequential-copy"></a>Zamanlama ve sıralı kopya
+Data Factory ' de zamanlama ve yürütmenin nasıl çalıştığına ilişkin ayrıntılı bilgi için bkz. [zamanlama ve yürütme](data-factory-scheduling-and-execution.md) . Birden çok kopyalama işlemini ardışık ve sıralı bir şekilde başka bir şekilde çalıştırmak mümkündür. [Sıralı kopyalama](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline) bölümüne bakın.
 
 ## <a name="type-conversions"></a>Tür dönüştürmeleri
-Farklı veri depolarını farklı yerel tür sistemlerine sahip. Kopyalama etkinliği, aşağıdaki iki adımlı yaklaşım türleriyle havuz için kaynak türünden otomatik tür dönüştürmeleri gerçekleştirir:
+Farklı veri depolarında farklı yerel tür sistemleri vardır. Kopyalama etkinliği, aşağıdaki iki adımlı yaklaşımla kaynak türlerinden havuz türlerine otomatik tür dönüştürmeleri gerçekleştirir:
 
-1. Yerel kaynak türleri için .NET türüne dönüştürün.
-2. Bir .NET türünden bir yerel havuz türüne dönüştürün.
+1. Yerel kaynak türlerinden bir .NET türüne Dönüştür.
+2. .NET türünden yerel havuz türüne dönüştürme.
 
-Bir .NET türü bir veri deposu için bir yerel tür sisteminden eşleme ilgili veri deposu makalesinde bir. (Desteklenen veri depoları tablosundaki belirli bağlantısına tıklayın). Bu eşlemeler, kopyalama etkinliği uygun dönüştürmeleri gerçekleştirir. böylece tablolarınızı oluşturulurken uygun türlerini belirlemek için kullanabilirsiniz.
+Bir yerel tür sisteminden bir veri deposu için .NET türüne eşleme ilgili veri deposu makalesinde bulunur. (Desteklenen veri depoları tablosunda belirli bir bağlantıya tıklayın). Bu eşlemeleri, tablolarınızı oluştururken uygun türleri belirlemede kullanabilirsiniz, böylece kopyalama etkinliği doğru dönüştürmeleri gerçekleştirir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kopyalama etkinliği hakkında daha fazla bilgi edinmek için bkz: [verileri Azure Blob depolama alanından Azure SQL veritabanına kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
-* Bir şirket içi veri deposundan bir bulut veri deposuna veri taşıma hakkında bilgi edinmek için [bulut veri depoları şirket içinden veri taşıma](data-factory-move-data-between-onprem-and-cloud.md).
+* Kopyalama etkinliği hakkında daha fazla bilgi edinmek için bkz. [Azure Blob depolamadan Azure SQL veritabanı 'na veri kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+* Verileri şirket içi veri deposundan bir bulut veri deposuna taşıma hakkında bilgi edinmek için bkz. [verileri Şirket içinden bulut veri depolarına taşıma](data-factory-move-data-between-onprem-and-cloud.md).

@@ -1,5 +1,5 @@
 ---
-title: Azure PowerShell betik örneği - Yönetilen diskin VHD dosyasını farklı bölgedeki bir depolama hesabına aktarma/kopyalama | Microsoft Docs
+title: Azure PowerShell betiği örneği-yönetilen bir diskin VHD 'sini farklı bölgedeki bir depolama hesabına dışarı aktarma/kopyalama
 description: Azure PowerShell betik örneği - Yönetilen diskin VHD dosyasını aynı veya farklı bölgedeki bir depolama hesabına aktarma/kopyalama
 services: virtual-machines-windows
 documentationcenter: storage
@@ -9,18 +9,17 @@ editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 09/17/2018
 ms.author: ramankum
-ms.openlocfilehash: 1bb116f2a2153515f3b61c050f0c952523c13528
-ms.sourcegitcommit: 943af92555ba640288464c11d84e01da948db5c0
+ms.openlocfilehash: 6045f2431441b3fba642db0bc147716a0ea82f17
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/09/2019
-ms.locfileid: "55976637"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039796"
 ---
 # <a name="exportcopy-the-vhd-of-a-managed-disk-to-a-storage-account-in-different-region-with-powershell"></a>PowerShell ile yönetilen diskin VHD dosyasını farklı bölgedeki bir depolama hesabına aktarma/kopyalama
 
@@ -30,7 +29,7 @@ Bu betik yönetilen diskin VHD dosyasını farklı bölgede bulunan bir depolama
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [updated-for-az-vm.md](../../../includes/updated-for-az-vm.md)]
+ 
 
 ## <a name="sample-script"></a>Örnek betik
 

@@ -1,19 +1,15 @@
 ---
 title: Azure’da bir Jenkins sunucusu oluşturma
 description: Jenkins çözüm şablonundan Azure Linux sanal makinesine Jenkins’i yükleyin ve örnek bir Java uygulaması oluşturun.
-ms.service: jenkins
 keywords: jenkins, azure, devops, portal, sanal makine, çözüm şablonu
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.topic: quickstart
 ms.date: 6/7/2017
-ms.openlocfilehash: 6bc0d8a1e938f2b8a97cab486d4679bfc445f6fb
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: ed2c94699df4a4cf4b6428f4e2e52d17144eb77c
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60642443"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158848"
 ---
 # <a name="create-a-jenkins-server-on-an-azure-linux-vm-from-the-azure-portal"></a>Azure portalından Azure Linux VM'de bir Jenkins sunucusu oluşturma
 
@@ -33,7 +29,7 @@ Jenkins, tek bir Jenkins yüklemesinin çok sayıda projeyi barındırması veya
 
 ## <a name="connect-to-jenkins"></a>Jenkins’e bağlanma
 
-Web tarayıcınızda sanal makinenize (örneğin, http://jenkins2517454.eastus.cloudapp.azure.com/)) gidin. Jenkins konsoluna güvenli olmayan HTTP üzerinden erişilemeyeceğinden Jenkins konsoluna bilgisayarınızdan SSH tüneli kullanarak güvenli bir şekilde erişmek için yönergeler bu sayfada sağlanmıştır.
+Web tarayıcınızda sanal makinenize (örneğin, `http://jenkins2517454.eastus.cloudapp.azure.com/`) gidin. Jenkins konsoluna güvenli olmayan HTTP üzerinden erişilemeyeceğinden Jenkins konsoluna bilgisayarınızdan SSH tüneli kullanarak güvenli bir şekilde erişmek için yönergeler bu sayfada sağlanmıştır.
 
 ![Jenkins’in kilidini açma](./media/install-jenkins-solution-template/jenkins-ssh-instructions.png)
 
@@ -71,11 +67,11 @@ Jenkins konsolundan **Yeni iş oluştur**’u seçin, ardından işi **mySampleA
 
 ![Git deposunu tanımlayın](./media/install-jenkins-solution-template/jenkins-job-git-configuration.png) 
 
-**Yapı** sekmesini ve ardından **Yapı ekleme adımı**’nı ve **Gradle betiğini başlat**’ı seçin. **Gradle sarmalayıcıyı kullan**’ı seçin, ardından **Sarmalayıcı konumu**’na `complete` değerini, **Görevler** için `build` değerini girin.
+**Yapı** sekmesini ve ardından **Yapı ekleme adımı**’nı ve **Gradle betiğini başlat**’ı seçin. **Gradle sarmalayıcıyı kullan**’ı seçin, ardından `complete`Sarmalayıcı konumu **’na**  değerini, `build`Görevler**için** değerini girin.
 
 ![Derlemek için Gradle sarmalayıcıyı kullanma](./media/install-jenkins-solution-template/jenkins-job-gradle-config.png) 
 
-**Advanced**'i (Gelişmiş) seçin ve **Root Build script** (Kök Derleme betiği) alanına `complete` değerini girin. **Kaydet**’i seçin.
+**Advanced**'i (Gelişmiş) seçin ve `complete`Root Build script **(Kök Derleme betiği) alanına** değerini girin. **Kaydet**’i seçin.
 
 ![Gradle sarmalayıcısı derleme adımında Gelişmiş ayarları belirleme](./media/install-jenkins-solution-template/jenkins-job-gradle-advances.png) 
 

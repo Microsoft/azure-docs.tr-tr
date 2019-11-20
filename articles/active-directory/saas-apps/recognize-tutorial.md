@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Tanı ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve tanı arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Recognize ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve Recognize arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -15,49 +15,49 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
-ms.openlocfilehash: 82d231eff4690dc060c01d41356933693d08c443
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c0a513ad8fe772839813615d065616f2c911a031
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67093250"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68943337"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-recognize"></a>Öğretici: Tanı ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-recognize"></a>Öğretici: Tanıma Azure Active Directory tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile tanı tümleştirme konusunda bilgi edinin.
-Tanı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, tanılamayı Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Tanılamayı Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Tanı erişimi, Azure AD'de kontrol edebilirsiniz.
-* Otomatik olarak (çoklu oturum açma) için tanı kendi Azure AD hesapları ile oturum açmış, kullanıcıların etkinleştirebilirsiniz.
+* Tanımak için erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla (çoklu oturum açma) tanımak üzere otomatik olarak oturum açmasını sağlayabilirsiniz.
 * Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile tanı yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini tanıma ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Çoklu oturum açma etkin abonelik tanıması
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Çoklu oturum açma etkin aboneliğini tanıma
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Destekler tanımak **SP** tarafından başlatılan
+* Recognize, **SP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-recognize-from-the-gallery"></a>Tanı galeri ekleme
+## <a name="adding-recognize-from-the-gallery"></a>Galeriden tanıma ekleme
 
-Azure AD'de tanı tümleştirmesini yapılandırmak için tanı Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Tanılamayı Azure AD 'ye yönelik olarak yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize tanıma eklemeniz gerekir.
 
-**Galeriden tanı eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden tanıma eklemek için aşağıdaki adımları uygulayın:**
 
 1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
@@ -65,71 +65,71 @@ Azure AD'de tanı tümleştirmesini yapılandırmak için tanı Galeriden yönet
 
     ![Yeni Uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **tanı**seçin **tanı** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **Recognize**yazın, sonuç panelinden **Recognize** ' i seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuçlar listesinde tanıması](common/search-new-app.png)
+     ![Sonuçlar listesinde tanı](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma tanı adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve tanı ilgili kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına göre tanıma ile yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve tanılamada ilgili Kullanıcı arasındaki bağlantı ilişkisinin oluşturulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma tanı ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açmayı tanıma ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
 1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Tanı çoklu oturum açmayı yapılandırma](#configure-recognize-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Tekli oturum açmayı tanıma yapılandırma](#configure-recognize-single-sign-on)** .
 3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
 4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Tanı test kullanıcısı oluşturma](#create-recognize-test-user)**  - kullanıcı Azure AD gösterimini bağlı tanı Britta simon'un bir karşılığı vardır.
+5. Kullanıcı tarafından Azure AD gösterimine bağlı olan, tanıma göre bir Britta Simon 'ın karşılığına sahip olmak için **[Kullanıcı tanıma testi oluşturun](#create-recognize-test-user)** .
 6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile tanı yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı tanıma ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **tanı** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), Uygulama tümleştirmesini **tanı** sayfasında, **Çoklu oturum açma**' yı seçin.
 
     ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
 3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** varsa, bölüm **hizmet sağlayıcısı meta veri dosyası**, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde, **hizmet sağlayıcısı meta verileri dosyanız**varsa, aşağıdaki adımları uygulayın:
 
     >[!NOTE]
-    >Erişmenizi sağlayacak **hizmet sağlayıcısı meta veri dosyası** gelen **Yapılandırma tanı çoklu oturum açma** öğreticinin bölümünde.
+    >**Hizmet sağlayıcı meta veri dosyasını** öğreticinin **tek oturum açma tanıma ' yı yapılandırma** bölümünden alacaksınız.
 
     a. Tıklayın **meta veri dosyasını karşıya yükleme**.
 
-    ![Meta veri dosyasını karşıya yükleyin](common/upload-metadata.png)
+    ![Meta veri dosyasını yükleyin](common/upload-metadata.png)
 
     b. Tıklayarak **klasör logosu** meta veri dosyası seçin ve **karşıya**.
 
     ![meta veri dosyası seçin](common/browse-upload-metadata.png)
 
-    c. Meta veri dosyası başarıyla karşıya yüklendikten sonra **tanımlayıcı** değer elde otomatik temel SAML yapılandırma bölümünde doldurulur.
+    c. Meta veri dosyası başarıyla karşıya yüklendikten sonra, temel SAML yapılandırması bölümünde **tanımlayıcı** değeri otomatik olarak doldurulur.
 
-    ![Etki alanı ve URL'ler tek oturum açma bilgileri tanıması](common/sp-identifier.png)
+    ![Etki alanı ve URL 'Leri tanıma çoklu oturum açma bilgileri](common/sp-identifier.png)
 
-     İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://recognizeapp.com/<your-domain>/saml/sso`
+     **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://recognizeapp.com/<your-domain>/saml/sso`
 
     > [!Note]
-    > Varsa **tanımlayıcı** değeri alınamadı otomatik doldurulur, daha sonra açıklanan SSO ayarları bölümünden hizmet sağlayıcısı meta verileri URL'sini açarak tanımlayıcı değeri alacaktır **tanımak tek yapılandırma Oturum açma** öğreticinin bölümünde. Oturum açma URL değeri, gerçek değil. Değerini gerçek oturum açma URL'si ile güncelleştirin. Kişi [tanımak istemci Destek ekibine](mailto:support@recognizeapp.com) değeri alınamıyor. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > **Tanımlayıcı** değeri otomatik olarak doldurulmazsa, bu tanımlayıcı değeri, daha sonra açıklanan SSO ayarları bölümünden Service Provider meta verileri URL 'sini açarak, öğreticide. Oturum açma URL 'SI değeri gerçek değil. Değeri, gerçek oturum açma URL 'SI ile güncelleştirin. Değeri almak için [istemci destek ekibine](mailto:support@recognizeapp.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+5. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. Üzerinde **tanı kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. **Tanıması ayarla** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
     a. Oturum Açma URL'si:
 
@@ -137,41 +137,41 @@ Azure AD çoklu oturum açma ile tanı yapılandırmak için aşağıdaki adıml
 
     c. Oturum Kapatma URL'si
 
-### <a name="configure-recognize-single-sign-on"></a>Yapılandırma çoklu oturum açma tanıması
+### <a name="configure-recognize-single-sign-on"></a>Yapılandırma çoklu oturum açmayı tanıma
 
-1. Farklı bir web tarayıcı penceresinde tanı Kiracı yönetici olarak oturum açın.
+1. Farklı bir Web tarayıcısı penceresinde, tanı kiracınızda yönetici olarak oturum açın.
 
-2. Sağ üst köşede tıklayın **menü**. Git **şirket Yöneticisi**.
+2. Sağ üst köşede **menü**' ye tıklayın. **Şirket Yöneticisi**' ne gidin.
    
-    ![Çoklu oturum açma üzerinde uygulama tarafı yapılandırma](./media/recognize-tutorial/tutorial_recognize_000.png)
+    ![Uygulama tarafında çoklu oturum açmayı yapılandırma](./media/recognize-tutorial/tutorial_recognize_000.png)
 
-3. Sol gezinti bölmesinde **ayarları**.
+3. Sol gezinti bölmesinde, **Ayarlar**' a tıklayın.
    
-    ![Çoklu oturum açma üzerinde uygulama tarafı yapılandırma](./media/recognize-tutorial/tutorial_recognize_001.png)
+    ![Uygulama tarafında çoklu oturum açmayı yapılandırma](./media/recognize-tutorial/tutorial_recognize_001.png)
 
-4. Aşağıdaki adımları gerçekleştirin **SSO ayarlarını** bölümü.
+4. **SSO ayarları** bölümünde aşağıdaki adımları gerçekleştirin.
    
-    ![Çoklu oturum açma üzerinde uygulama tarafı yapılandırma](./media/recognize-tutorial/tutorial_recognize_002.png)
+    ![Uygulama tarafında çoklu oturum açmayı yapılandırma](./media/recognize-tutorial/tutorial_recognize_002.png)
     
-    a. Olarak **SSO etkinleştirme**seçin **ON**.
+    a. **SSO 'Yu etkinleştirmek**için **Açık**seçeneğini belirleyin.
 
-    b. İçinde **IDP varlık kimliği** metin değerini yapıştırın **Azure AD tanımlayıcısı** , Azure Portalı'ndan kopyaladığınız.
+    b. **IDP VARLıK kimliği** metin kutusunda, Azure Portal KOPYALADıĞıNıZ **Azure AD tanımlayıcısının** değerini yapıştırın.
     
-    c. İçinde **Sso hedef url** metin değerini yapıştırın **oturum açma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    c. **SSO hedef URL** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
     
-    d. İçinde **Slo hedef url** metin değerini yapıştırın **oturum kapatma URL'si** , Azure Portalı'ndan kopyaladığınız. 
+    d. **SLO hedefi URL** metin kutusunda, Azure Portal kopyaladığınız **Logout URL 'si** değerini yapıştırın. 
     
-    e. İndirilen açın **sertifika (Base64)** dosyasını Not Defteri'nde, içeriğini, panoya kopyalayın ve ardından ona yapıştırın **sertifika** metin.
+    e. İndirilen **sertifika (base64)** dosyanızı Not defteri 'nde açın, içeriğini panonuza kopyalayın ve **sertifika** metin kutusuna yapıştırın.
     
-    f. Tıklayın **ayarlarını kaydetmek** düğmesi. 
+    f. **Ayarları Kaydet** düğmesine tıklayın. 
 
-5. Yanında **SSO ayarlarını** bölümünde, altında URL'yi kopyalayın **hizmet sağlayıcısı meta verileri URL'sini**.
+5. **SSO ayarları** bölümünün yanında, URL 'Yi **hizmet sağlayıcısı meta veri URL 'si**altına kopyalayın.
    
-    ![Çoklu oturum açma üzerinde uygulama tarafı yapılandırma](./media/recognize-tutorial/tutorial_recognize_003.png)
+    ![Uygulama tarafında çoklu oturum açmayı yapılandırma](./media/recognize-tutorial/tutorial_recognize_003.png)
 
-6. Açık **meta veri URL'si bağlantı** meta veri belgesini indirmek için boş bir tarayıcı altında. Ardından EntityDescriptor value(entityID) dosyasından kopyalayın ve yapıştırın **tanımlayıcı** metin kutusunda **temel SAML yapılandırma** Azure portalında.
+6. Meta veri belgesini indirmek için boş bir tarayıcı altındaki **metadata URL bağlantısını** açın. Sonra EntityDescriptor değerini (EntityId) dosyadan kopyalayın ve Azure portal **temel SAML yapılandırmasındaki** **tanımlayıcı** metin kutusuna yapıştırın.
     
-    ![Çoklu oturum açma üzerinde uygulama tarafı yapılandırma](./media/recognize-tutorial/tutorial_recognize_004.png)
+    ![Uygulama tarafında çoklu oturum açmayı yapılandırma](./media/recognize-tutorial/tutorial_recognize_004.png)
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
 
@@ -183,75 +183,75 @@ Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcıs
 
 2. Seçin **yeni kullanıcı** ekranın üstünde.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
 3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü brittasimon@yourcompanydomain.extension. Örneğin, BrittaSimon@contoso.com
+    b. **Kullanıcı adı** alanına yazın brittasimon@yourcompanydomain.extension. Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’a tıklayın.
+    d.           **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için tanı erişim vererek Britta Simon etkinleştirin.
+Bu bölümde, tanıma erişim izni vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **tanı**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **tanı**' yı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **tanı**.
+2. Uygulamalar listesinde, **tanı**' yı seçin.
 
-    ![Uygulamalar listesinde tanı bağlantı](common/all-applications.png)
+    ![Uygulamalar listesindeki tanıma bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
     !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
 5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-recognize-test-user"></a>Tanı test kullanıcısı oluşturma
+### <a name="create-recognize-test-user"></a>Tanı testi kullanıcısı oluştur
 
-Tanı açarken Azure AD kullanıcılarının etkinleştirmek için bunların tanı sağlanmalıdır. Tanı söz konusu olduğunda, sağlama bir el ile gerçekleştirilen bir görevdir.
+Azure AD kullanıcılarının tanımasına oturum açmasını sağlamak için, bunların tanınması için sağlanması gerekir. Tanı söz konusu olduğunda, sağlama işlemi el ile gerçekleştirilen bir görevdir.
 
-Bu uygulama SCIM sağlama desteklemez ancak kullanıcılar sağlayan bir alternatif kullanıcı eşitleme sahiptir. 
+Bu uygulama SCıM sağlamasını desteklemez, ancak kullanıcıları sağlayan alternatif bir Kullanıcı eşitlemesi vardır. 
 
 **Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:**
 
-1. Tanı şirket sitenize yönetici olarak oturum açın.
+1. Tanıma şirket sitenizde yönetici olarak oturum açın.
 
-2. Sağ üst köşede tıklayın **menü**. Git **şirket Yöneticisi**.
+2. Sağ üst köşede **menü**' ye tıklayın. **Şirket Yöneticisi**' ne gidin.
 
-3. Sol gezinti bölmesinde **ayarları**.
+3. Sol gezinti bölmesinde, **Ayarlar**' a tıklayın.
 
-4. Aşağıdaki adımları gerçekleştirin **kullanıcı eşitleme** bölümü.
+4. **Kullanıcı eşitleme** bölümünde aşağıdaki adımları gerçekleştirin.
    
-    ![Yeni kullanıcı](./media/recognize-tutorial/tutorial_recognize_005.png "yeni kullanıcı")
+    ![Yeni Kullanıcı](./media/recognize-tutorial/tutorial_recognize_005.png "Yeni Kullanıcı")
    
-    a. Olarak **eşitleme özelliği etkin**seçin **ON**.
+    a. **Eşitleme etkinken** **Açık**' ı seçin.
    
-    b. Olarak **Seç eşitleme sağlayıcısı**seçin **Microsoft / Office 365**.
+    b. **Eşitleme sağlayıcısını Seç**' i seçin ve **Microsoft/Office 365**' ı seçin.
    
-    c. Tıklayın **kullanıcı eşitleme Çalıştır**.
+    c. **Kullanıcı eşitlemesini Çalıştır**' a tıklayın.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli tanı kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama tanı için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde tanıma kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız tanıma göre otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
@@ -259,5 +259,5 @@ Erişim paneli tanı kutucuğa tıkladığınızda, size otomatik olarak SSO'yu 
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

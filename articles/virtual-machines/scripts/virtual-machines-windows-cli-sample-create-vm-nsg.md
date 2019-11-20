@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - İç ve dış NSG ile iki VM oluşturma | Microsoft Docs
+title: Azure CLı betik örneği-iç ve dış NSG ile iki VM oluşturma
 description: Azure CLI Betik Örneği - İç ve dış NSG ile iki VM oluşturma
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: ''
 ms.assetid: ''
@@ -16,12 +16,12 @@ ms.workload: infrastructure
 ms.date: 02/23/2017
 ms.author: rclaus
 ms.custom: mvc
-ms.openlocfilehash: 0afdcef546d53c2caf13828576338c47e03c4fc9
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: eb851b672a3cc9748d1aa5fbe27e4a7fac9d020e
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60505722"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039932"
 ---
 # <a name="secure-network-traffic-between-virtual-machines"></a>Sanal makineler arasındaki ağ trafiğinin güvenliğini sağlama
 

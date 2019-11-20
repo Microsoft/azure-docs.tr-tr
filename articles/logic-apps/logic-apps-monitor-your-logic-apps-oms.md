@@ -1,159 +1,153 @@
 ---
-title: Azure İzleyici günlükleri - Azure Logic Apps ile mantıksal uygulamaları izleme | Microsoft Docs
-description: Insights ve sorun giderme ve mantıksal uygulama çalıştırmalarınızı Azure Log Analytics ile tanılama verilerini hata ayıklama
+title: Azure Izleyici ile mantıksal uygulamaları izleme-Azure Logic Apps
+description: Azure Izleyici günlükleri ile ilgili sorun gidermek ve mantıksal uygulama çalıştırmalarını tanılamak için öngörüleri ve hata ayıklama verilerini alın
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
-author: divyaswarnkar
-ms.author: divswa
-ms.reviewer: jonfan, estfan, LADocs
+author: ecfan
+ms.author: estfan
+ms.reviewer: divswa, LADocs
 ms.topic: article
-ms.date: 10/19/2018
-ms.openlocfilehash: 3f890e6cabd757fdd38374befaaccd1a10c9bd96
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/29/2019
+ms.openlocfilehash: a038a05f03ce7a209ae82203441750749bc6c4c4
+ms.sourcegitcommit: d200cd7f4de113291fbd57e573ada042a393e545
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62106219"
+ms.lasthandoff: 08/29/2019
+ms.locfileid: "70138770"
 ---
-# <a name="monitor-logic-apps-with-azure-monitor-logs"></a>Azure İzleyici günlükleri ile mantıksal uygulamaları izleme
+# <a name="get-insights-and-debugging-data-for-logic-apps-by-using-azure-monitor-logs"></a>Azure Izleyici günlüklerini kullanarak Logic Apps için Öngörüler ve hata ayıklama verileri alın
 
-İzleme ve logic apps hakkında daha zengin hata ayıklama bilgi almak üzere açmak [Azure İzleyici günlükleri](../log-analytics/log-analytics-overview.md) mantıksal uygulamanızı oluşturduğunuzda. Azure İzleyici günlüklerine Logic Apps yönetimi çözümü Azure Portalı'nda yüklediğinizde, logic apps için izleme ve günlüğe kaydetme tanılama sağlar. Bu çözüm, ayrıca mantıksal uygulamanız için toplanan bilgileri durumunu, yürütme süresi, yeniden gönderme durumu ve bağıntı kimlikleri gibi belirli Ayrıntılar ile çalışan sağlar. Bu makale Azure İzleyici günlüklerine üzerinde çalışma zamanı olayları görüntüleyebilir ve mantıksal uygulamanız için veri çalıştıran devre dışı bırakma.
+Mantıksal uygulamalarınız hakkında daha zengin hata ayıklama ayrıntılarını izlemek ve almak için, mantıksal uygulamanızı oluştururken [Azure izleyici günlüklerini](../log-analytics/log-analytics-overview.md) açın. Azure Izleyici günlükleri, Azure portal Logic Apps yönetim çözümünü yüklediğinizde mantıksal uygulamalarınız için tanılama günlüğü ve izleme sağlar. Bu çözüm Ayrıca durum, yürütme süresi, yeniden gönderme görevi durumu ve bağıntı kimlikleri gibi belirli ayrıntılarla mantıksal uygulama çalıştırmaları için toplu bilgiler sağlar. Bu makalede, mantıksal uygulama çalışmalarınız için çalışma zamanı olaylarını ve verilerini görüntüleyebilmeniz için Azure Izleyici günlüklerinin nasıl kullanılacağı gösterilmektedir.
 
-Var olan mantıksal uygulamalar için Azure İzleyici günlüklerine etkinleştirmek için bu adımları izleyin. [tanılama günlük özelliğini açar ve Azure İzleyici günlüklerine logic app çalışma zamanı veri gönderme](../logic-apps/logic-apps-monitor-your-logic-apps.md#azure-diagnostics).
+Bu konu başlığı altında, mantıksal uygulamanızı oluştururken Azure Izleyici günlüklerinin nasıl ayarlanacağı gösterilmektedir. Mevcut Logic Apps için Azure Izleyici günlüklerini açmak üzere [Tanılama günlüğünü açmak ve Azure izleyici günlüklerine mantıksal uygulama çalışma zamanı verilerini göndermek](../logic-apps/logic-apps-monitor-your-logic-apps.md#azure-diagnostics)için aşağıdaki adımları izleyin.
 
 > [!NOTE]
-> Bu sayfa, Microsoft Operations Management Suite (olan OMS ile), bu görevleri gerçekleştirmek adımlar daha önce açıklanan [Ocak 2019 ' devre dışı bırakma](../azure-monitor/platform/oms-portal-transition.md), bu adımlar, bunun yerine Azure Log Analytics ile değiştirir. 
-
-[!INCLUDE [azure-monitor-log-analytics-rebrand](../../includes/azure-monitor-log-analytics-rebrand.md)]
+> Bu sayfa, bu görevleri daha önce [2019 Ocak 'ta kullanımdan kaldırılan](../azure-monitor/platform/oms-portal-transition.md)MICROSOFT OPERATIONS Management SUITE (OMS) ile gerçekleştirmeye yönelik adımları ve Log Analytics teriminin yerini alan [Azure izleyici günlükleri](../azure-monitor/platform/data-platform-logs.md)ile değiştirir. Günlük verileri hala bir Log Analytics çalışma alanında depolanır ve yine de aynı Log Analytics hizmeti tarafından toplanıp çözümlenmektedir. Daha fazla bilgi için bkz. [Azure izleyici terminolojisi değişiklikleri](../azure-monitor/terminology.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Başlamadan önce Log Analytics çalışma alanı gerekir. Bilgi [bir Log Analytics çalışma alanı oluşturma](../azure-monitor/learn/quick-create-workspace.md). 
+Başlamadan önce bir Log Analytics çalışma alanına ihtiyacınız vardır. [Log Analytics çalışma alanı oluşturmayı](../azure-monitor/learn/quick-create-workspace.md)öğrenin.
 
-## <a name="turn-on-diagnostics-logging-when-creating-logic-apps"></a>Mantıksal uygulama oluşturma tanılama günlüğünü etkinleştirme
+## <a name="turn-on-logging-for-new-logic-apps"></a>Yeni mantıksal uygulamalar için günlüğü aç
 
-1. İçinde [Azure portalında](https://portal.azure.com), mantıksal uygulama oluşturun. Seçin **kaynak Oluştur** > **tümleştirme** > **mantıksal uygulama**.
+1. [Azure Portal](https://portal.azure.com), mantıksal uygulamanızı oluşturun. Ana Azure menüsünden **kaynak** > **tümleştirme** > **mantıksal uygulaması**oluştur ' u seçin.
 
-   ![Mantıksal uygulama oluşturma](media/logic-apps-monitor-your-logic-apps-oms/find-logic-apps-azure.png)
+   ![Yeni mantıksal uygulama oluştur](media/logic-apps-monitor-your-logic-apps-oms/create-new-logic-app.png)
 
-1. Altında **mantıksal uygulama oluştur**, gösterildiği gibi şu görevleri gerçekleştirebilirsiniz:
+1. **Mantıksal uygulama**altında şu adımları izleyin:
 
-   1. Mantıksal uygulamanız için bir ad belirtin ve Azure aboneliğinizi seçin. 
+   1. Mantıksal uygulamanız için bir ad girin ve Azure aboneliğinizi seçin.
 
-   1. Oluşturun veya bir Azure kaynak grubu seçin.
+   1. Bir Azure Kaynak grubu oluşturun veya seçin. Mantıksal uygulamanızın konumunu seçin.
 
-   1. Ayarlama **Log Analytics** için **üzerinde**. 
+   1. **Log Analytics**altında **Açık**' ı seçin.
 
-   1. Liste Log Analytics çalışma alanı listeden mantıksal uygulamanız için veri çalıştıran göndermek istediğiniz çalışma alanını seçin. 
+   1. **Log Analytics çalışma alanı** listesinden, mantıksal uygulama çalıştırmalarından verileri göndermek istediğiniz çalışma alanını seçin.
 
-      ![Mantıksal uygulama oluşturma](./media/logic-apps-monitor-your-logic-apps-oms/create-logic-app.png)
+      ![Mantıksal uygulama bilgilerini sağlama](./media/logic-apps-monitor-your-logic-apps-oms/create-logic-app-details.png)
 
-      Bu adımı tamamladıktan sonra Azure artık, mantıksal uygulama oluşturur, Log Analytics çalışma alanıyla ilişkili. 
-      Ayrıca, bu adım ayrıca otomatik olarak çalışma alanınızda Logic Apps yönetim çözümü yükler.
+      Bu adımı tamamladıktan sonra Azure, artık Log Analytics çalışma alanınız ile ilişkilendirilen mantıksal uygulamanızı oluşturur. Ayrıca, bu adım Logic Apps yönetim çözümünü çalışma alanınıza otomatik olarak yüklenir.
 
    1. İşiniz bittiğinde **Oluştur**’u seçin.
 
-1. Mantıksal uygulamanızı görüntülemek için çalıştığında, [bu adımlarla devam edin](#view-logic-app-runs-oms).
+1. Mantıksal uygulama çalıştırmalarını görüntülemek için [Bu adımlarla devam edin](#view-logic-app-runs-oms).
 
-## <a name="install-logic-apps-management-solution"></a>Logic Apps yönetim çözümü yükleme
+## <a name="install-logic-apps-management-solution"></a>Logic Apps yönetimi çözümünü yükler
 
-Mantıksal uygulamanızı oluştururken Azure İzleyici açtığında zaten etkinleştirdiyseniz, bu adımı atlayın. Zaten yüklü Logic Apps yönetimi çözümü vardır.
+Mantıksal uygulamanızı oluştururken Azure Izleyici günlüklerini zaten ayarladıysanız, bu adımı atlayın. Logic Apps Management Solution zaten yüklüdür.
 
-1. [Azure portalda](https://portal.azure.com) **Tüm hizmetler**’i seçin. Arama kutusuna "log analytics" bulup seçin **Log Analytics**.
+1. [Azure portalda](https://portal.azure.com) **Tüm hizmetler**’i seçin. Arama kutusunda, "Log Analytics çalışma alanları" nı bulun ve **Log Analytics çalışma alanları**' nı seçin.
 
-   !["Log Analytics" seçin](./media/logic-apps-monitor-your-logic-apps-oms/find-log-analytics.png)
+   !["Log Analytics çalışma alanları" i seçin](./media/logic-apps-monitor-your-logic-apps-oms/find-log-analytics.png)
 
-1. Altında **Log Analytics**bulup Log Analytics çalışma alanınızı seçin. 
+1. **Log Analytics çalışma alanları**altında, çalışma alanınızı seçin.
 
    ![Log Analytics çalışma alanınızı seçin](./media/logic-apps-monitor-your-logic-apps-oms/select-log-analytics-workspace.png)
 
-1. Altında **Log Analytics ile çalışmaya başlama** > **izleme çözümleri yapılandırma**, seçin **çözümleri görüntülemek**.
+1. Genel Bakış bölmesinde,**izleme çözümlerini yapılandırma** >  **Log Analytics kullanmaya başlama**altında, **çözümleri görüntüle**' yi seçin.
 
-   !["Çözümleri görüntüle" seçin](media/logic-apps-monitor-your-logic-apps-oms/log-analytics-workspace.png)
+   !["Çözümleri görüntüle" seçeneğini belirleyin](media/logic-apps-monitor-your-logic-apps-oms/log-analytics-workspace.png)
 
-1. Genel bakış sayfasında, **Ekle**, açan **yönetim çözümleri** listesi. Bu listeden **Logic Apps Yönetimi**. 
+1. **Genel bakış**' ın altında **Ekle**' yi seçin.
 
-   !["Logic Apps Yönetimi" seçin](./media/logic-apps-monitor-your-logic-apps-oms/add-logic-apps-management-solution.png)
+   !["Ekle" yi seçin](./media/logic-apps-monitor-your-logic-apps-oms/add-logic-apps-management-solution.png)
 
-   Listenin, çözüm bulamazsanız seçin **daha fazla Yükle** çözüm görünene kadar.
+1. **Market** açıldıktan sonra arama kutusuna "Logic Apps Management" yazın ve **Logic Apps yönetim**' i seçin.
 
-1. Seçin **Oluştur**, doğrulamak istediğiniz çözümü yüklemek ve sonra Log Analytics çalışma alanı **Oluştur** yeniden.   
+   !["Logic Apps yönetimi" ni seçin](./media/logic-apps-monitor-your-logic-apps-oms/select-logic-apps-management.png)
 
-   !["" Logic Apps yönetimi için"Oluştur" öğesini seçin.](./media/logic-apps-monitor-your-logic-apps-oms/create-logic-apps-management-solution.png)
+1. Çözüm açıklaması bölmesinde **Oluştur**' u seçin.
 
-   Mevcut bir çalışma alanı kullanmak istemiyorsanız, şu anda yeni bir çalışma alanı da oluşturabilirsiniz.
+   !["Logic Apps yönetimi" için "Oluştur" u seçin](./media/logic-apps-monitor-your-logic-apps-oms/create-logic-apps-management-solution.png)
 
-   İşiniz bittiğinde, Logic Apps yönetim çözümü genel bakış sayfasında görüntülenir. 
+1. Çözümü yüklemek istediğiniz Log Analytics çalışma alanını gözden geçirip onaylayın ve yeniden **Oluştur** ' u seçin.
+
+   !["Logic Apps yönetimi" için "Oluştur" u seçin](./media/logic-apps-monitor-your-logic-apps-oms/confirm-log-analytics-workspace.png)
+
+   Azure, çözümü Log Analytics çalışma alanınızı içeren Azure Kaynak grubuna dağıtduktan sonra, çözüm çalışma alanınızın Özet bölmesinde görünür.
+
+   ![Çalışma alanı Özet bölmesi](./media/logic-apps-monitor-your-logic-apps-oms/workspace-summary-pane-logic-apps-management.png)
 
 <a name="view-logic-app-runs-oms"></a>
 
-## <a name="view-logic-app-run-information"></a>Bilgi görünümü mantıksal uygulama
+## <a name="view-logic-app-run-information"></a>Mantıksal uygulama çalıştırma bilgilerini görüntüle
 
-Mantıksal uygulamanızı çalıştıktan sonra bu çalıştırmaları sayısını ve durum görüntüleyebilirsiniz **Logic Apps Yönetimi** Döşe. 
+Mantıksal uygulamanız çalıştıktan sonra, **Logic Apps yönetim** kutucuğunda Bu çalıştırmaların durumunu ve sayısını görüntüleyebilirsiniz.
 
-1. Log Analytics çalışma alanınıza gidin ve genel bakış sayfasını açın. Seçin **Logic Apps Yönetimi**. 
+1. Log Analytics çalışma alanınıza gidin ve **çalışma alanı Özeti** > **Logic Apps yönetim**' i seçin.
 
-   ![Mantıksal uygulama durumu ve sayımı Çalıştır](media/logic-apps-monitor-your-logic-apps-oms/overview.png)
+   ![Mantıksal uygulama çalıştırma durumu ve sayısı](media/logic-apps-monitor-your-logic-apps-oms/logic-app-runs-summary.png)
 
-   Burada, mantıksal uygulama çalıştırmalarınızı adına veya yürütme durumu göre gruplandırılır. 
-   Bu sayfa ayrıca eylemler veya mantıksal uygulama çalıştırmaları için Tetikleyiciler hatalarıyla ilgili ayrıntıları gösterir.
+   Burada, mantıksal uygulamanız adına veya yürütme durumuna göre gruplandırılır. Bu sayfada Ayrıca, mantıksal uygulama çalıştırmaları için eylemlerdeki veya tetikleyicilere yönelik hataların ayrıntıları gösterilir.
 
-   ![Mantıksal uygulamanız için Özet durum çalıştırır](media/logic-apps-monitor-your-logic-apps-oms/logic-apps-runs-summary.png)
-   
-1. Belirli bir mantıksal uygulama ya da durumu için tüm çalıştırmalarını görüntülemek için bir mantıksal uygulamada veya bir durum için satır seçin.
+   ![Mantıksal uygulama çalışmalarınız için durum özeti](media/logic-apps-monitor-your-logic-apps-oms/logic-app-runs-summary-details.png)
 
-   Belirli bir mantıksal uygulama için tüm çalıştırmalarını gösteren bir örnek aşağıda verilmiştir:
+1. Belirli bir mantıksal uygulama veya durum için tüm çalıştırmaları görüntülemek için, bir mantıksal uygulamanın satırını veya durumunu seçin.
 
-   ![Mantıksal uygulama veya bir durum için çalıştırmalarını görüntüle](media/logic-apps-monitor-your-logic-apps-oms/logic-app-run-details.png)
+   Belirli bir mantıksal uygulama için tüm çalıştırmaları gösteren bir örnek aşağıda verilmiştir:
 
-   Bu sayfa, bu Gelişmiş seçenekler vardır:
+   ![Mantıksal uygulama çalıştırmalarını ve durumunu görüntüleme](media/logic-apps-monitor-your-logic-apps-oms/logic-app-run-details.png)
 
-   * **İzlenen özellikler:**
+   Bu sayfa gelişmiş seçeneklere sahiptir: 
 
-     Bu sütun, Eylemler, mantıksal uygulamanın göre gruplandırılmış izlenen özellikleri gösterir. İzlenen özellikleri görüntülemek için seçin **görünümü**. 
-     İzlenen özellikler aramak için sütun filtresi kullanın.
-   
-     ![Mantıksal uygulama için izlenen özellikleri görüntüleyin](media/logic-apps-monitor-your-logic-apps-oms/logic-app-tracked-properties.png)
+   * **İzlenen Özellikler** sütunu: Eylemlerle gruplanmış olan izlenen özellikleri ayarladığınız bir mantıksal uygulama için bu özellikleri bu sütundan görüntüleyebilirsiniz. Bu izlenen özellikleri görüntülemek için **görüntüle**' yi seçin. İzlenen özelliklerde arama yapmak için sütun filtresini kullanın.
 
-     Yeni eklenen tüm izlenen özellikler, bunlar ilk kez görünmesi 10-15 dakika sürebilir. Bilgi [mantıksal uygulamanız için izlenen Özellikler ekleme](logic-apps-monitor-your-logic-apps.md#azure-diagnostics-event-settings-and-details).
+      ![Mantıksal uygulama için izlenen özellikleri görüntüleme](media/logic-apps-monitor-your-logic-apps-oms/logic-app-tracked-properties.png)
 
-   * **Yeniden gönderin:** Başarısız, bir veya daha fazla mantıksal uygulama çalıştırmaları başarılı, yeniden gönderebilirsiniz veya hala çalışıyor. Çalıştırmaları yeniden gönderin ve istediğiniz onay kutularını seçin **yeniden**. 
+      Yeni eklenen tüm izlenen özellikler ilk kez görüntülenmeden önce 10-15 dakika sürebilir. [Mantıksal uygulamanıza izlenen özellikler eklemeyi](logic-apps-monitor-your-logic-apps.md#azure-diagnostics-event-settings-and-details)öğrenin.
+
+   * Yeniden **Gönder**: Başarısız, başarılı veya çalışır durumda olan bir veya daha fazla Logic Apps çalıştırmasını yeniden gönderebilirsiniz. Yeniden göndermek istediğiniz çalıştırmaların onay kutularını seçin ve ardından yeniden **Gönder**' i seçin.
 
      ![Mantıksal uygulama çalıştırmalarını yeniden gönder](media/logic-apps-monitor-your-logic-apps-oms/logic-app-resubmit.png)
 
-1. Bu sonuçları filtrelemek için hem istemci hem de sunucu tarafı filtreleme gerçekleştirebilirsiniz.
+1. Sonuçlarınızı filtrelemek için hem istemci tarafı hem de sunucu tarafı filtrelemeyi gerçekleştirebilirsiniz.
 
-   * **İstemci tarafı filtresi**: Her sütun için örneğin istediğiniz filtreleri seçin:
+   * **İstemci tarafı filtresi**: Her sütun için istediğiniz filtreleri seçin, örneğin:
 
      ![Örnek sütun filtreleri](media/logic-apps-monitor-your-logic-apps-oms/filters.png)
 
-   * **Sunucu tarafı filtresi**: Belirli bir zaman penceresinin seçin ya da görünen çalışmaları sayısını sınırlamak için sayfanın en üstündeki kapsam denetimi kullanın. Varsayılan olarak, aynı anda yalnızca 1.000 kayıtları görünür.
-   
+   * **Sunucu tarafı filtresi**: Belirli bir zaman penceresi seçmek veya görüntülenen çalıştırmaların sayısını sınırlandırmak için sayfanın üst kısmındaki kapsam denetimini kullanın. Varsayılan olarak, tek seferde yalnızca 1.000 kayıt görünür.
+
      ![Zaman penceresini değiştirme](media/logic-apps-monitor-your-logic-apps-oms/change-interval.png)
- 
-1. Tüm eylemleri ve belirli bir çalıştırma ayrıntılarını görüntülemek için bir mantıksal uygulama çalıştırması için bir satır seçin.
 
-   Belirli bir mantıksal uygulama için çalıştırma için tüm eylemleri gösteren bir örnek aşağıda verilmiştir:
+1. Belirli bir çalıştırmaya ilişkin tüm eylemleri ve bunların ayrıntılarını görüntülemek için, mantıksal uygulama çalıştırmasının satırını seçin.
 
-   ![Bir mantıksal uygulama çalıştırması için eylemleri görüntüleme](media/logic-apps-monitor-your-logic-apps-oms/logic-app-action-details.png)
-   
-1. Tüm sonuçları sayfasında, sonuçları ardındaki sorguyu görüntülemek için veya tüm sonuçları görmek için seçin **bkz tüm**, günlük araması sayfasını açar.
-   
-   ![Tüm sonuçları sayfalarına bakın](media/logic-apps-monitor-your-logic-apps-oms/logic-app-seeall.png)
-   
-   Günlük araması sayfasında
+   Aşağıda, belirli bir mantıksal uygulama çalıştırması için tüm eylemleri ve Tetikleyicileri gösteren bir örnek verilmiştir:
 
-   * Bir tablodaki sorgu sonuçlarını görmek için **tablo**.
+   ![Mantıksal uygulama çalıştırması için eylemleri görüntüleme](media/logic-apps-monitor-your-logic-apps-oms/logic-app-action-details.png)
 
-   * Sorguyu değiştirmek için sorgu dizesini arama çubuğunda düzenleyebilirsiniz. 
-   Daha iyi bir deneyim için seçin **Advanced Analytics**.
+1. Herhangi bir sonuç sayfasında, sonuçların arkasındaki sorguyu görüntülemek veya tüm sonuçları görmek için, **Günlükler** sayfasını açan **Tümünü**göster ' i seçin.
 
-     ![Eylemler ve bir mantıksal uygulama çalıştırması ayrıntılarını görüntüleme](media/logic-apps-monitor-your-logic-apps-oms/log-search-page.png)
-     
-     Log analytics sayfasında güncelleştirme sorguları ve tablodan sonuçları görüntüleyin. Bu sorgu kullanan [Kusto sorgu dili](https://aka.ms/LogAnalyticsLanguageReference), farklı sonuçlar görüntülemek istiyorsanız, düzenleyebilirsiniz. 
+   ![Tüm sonuçları görüntüle](media/logic-apps-monitor-your-logic-apps-oms/logic-app-see-all.png)
 
-     ![log analytics - sorgu görünümü](media/logic-apps-monitor-your-logic-apps-oms/query.png)
+   **Günlükler** sayfasında, şu seçenekleri belirleyebilirsiniz:
+
+   * Sorgu sonuçlarını bir tabloda görüntülemek için **tablo**' yı seçin.
+
+   * Sorgular, farklı sonuçları görüntülemek istiyorsanız düzenleyebileceğiniz [kusto sorgu dilini](https://aka.ms/LogAnalyticsLanguageReference)kullanır. Sorguyu değiştirmek için sorgu dizesini güncelleştirin ve sonuçları tabloda görüntülemek için **Çalıştır** ' ı seçin. 
+
+     ![Log Analytics-sorgu görünümü](media/logic-apps-monitor-your-logic-apps-oms/query.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

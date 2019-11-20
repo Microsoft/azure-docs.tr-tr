@@ -1,6 +1,6 @@
 ---
-title: Self Servis parola sıfırlama için - Azure Active Directory'ye kaydetme | Microsoft Docs
-description: Azure AD Self Servis parola için kimlik doğrulama verilerini kaydetme Sıfırla
+title: Kendi parolanızı sıfırlamak için kaydolun-Azure AD
+description: Kimlik doğrulama verilerinizi Azure AD self servis parola sıfırlama için kaydedin, böylece yönetici yardımı olmadan kendi parolanızı sıfırlayabilirsiniz.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -13,55 +13,55 @@ ms.topic: conceptual
 ms.date: 01/11/2018
 ms.author: lizross
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f113c42ff45811f31eb77a92873fb187dd51ea6b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 796702b2189dcfb001f72913e4a01c0ae01462ad
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60530889"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820442"
 ---
-# <a name="register-for-self-service-password-reset"></a>Self servis parola sıfırlama için kaydolma
+# <a name="register-to-reset-your-own-password"></a>Kendi parolanızı sıfırlamak için kaydolun
 
 > [!IMPORTANT]
-> Oturum açılamıyor çünkü burada misiniz? Öyleyse bkz [iş veya Okul parolanızı sıfırlama](active-directory-passwords-update-your-own-password.md).
+> Oturumunuzu açamıyor musunuz? Bu durumda, bkz. [iş veya okul parolanızı sıfırlama](active-directory-passwords-update-your-own-password.md).
 
-Bir son kullanıcı olarak parolanızı sıfırlama veya Azure Active Directory (Azure AD) Self Servis parola sıfırlama (SSPR) kullanırsanız kendiniz hesabınızın kilidini. Bu işlevi kullanabilmeniz için önce kimlik doğrulama yöntemlerini kaydetmeniz veya yöneticinizin doldurduğu önceden tanımlı kimlik doğrulama yöntemlerini onaylamanız gerekir.
+Son Kullanıcı olarak, Azure Active Directory (Azure AD) self servis parola sıfırlama (SSPR) kullanıyorsanız, parolanızı sıfırlayabilir veya hesabınızı kendiniz açabilirsiniz. Bu işlevi kullanabilmeniz için önce kimlik doğrulama yöntemlerinizi kaydetmeniz veya yöneticinizin doldurduğu önceden tanımlanmış kimlik doğrulama yöntemlerini onaylamanız gerekir.
 
 ## <a name="register-or-confirm-authentication-data-with-sspr"></a>SSPR ile kimlik doğrulama verilerini kaydetme veya onaylama
 
-1. Cihazınızdaki web tarayıcısını açın ve gidin [parola sıfırlama kayıt sayfasına](https://aka.ms/ssprsetup).
-2. Kullanıcı adınızı ve yöneticiniz sağlanan parolayı girin.
-3. BT personelinizin şeyleri nasıl yapılandırdığına bağlı olarak bir veya daha fazla aşağıdaki seçenekleri yapılandırmak ve doğrulamak için kullanılabilir. Yöneticiniz bilgilerinizi kullanma izni varsa, bunlar bazı bilgiler sizin için doldurabilir.
-    * **Ofis telefonu**: Bu seçenek yalnızca yöneticiniz ayarlayabilirsiniz.
-    * **Kimlik doğrulama telefonu**: Erişimi olan başka bir telefon numarası için bu seçeneği ayarlayın. Bir metin veya çağrı alabilen bir cep telefonu buna bir örnektir.
-    * **Kimlik doğrulama e-posta**: Bu seçenek, sıfırlamak istediğiniz parolayı kullanmadan erişebileceğiniz alternatif e-posta adresine ayarlayın.
-    * **Güvenlik sorularını**: Yöneticinizin bu liste soruları yanıtlamanız için onayladığı. Aynı soru veya yanıt birden çok kez kullanılamaz.
-4. Yöneticinizin gerektirdiği bilgileri doğrulayın ve sağlar. Birden fazla seçeneği varsa, birden çok yöntem kaydetmenizi öneririz. Yöntemlerin biri kullanılamadığında Bu size esneklik sağlar. Seyahat ve ofis telefonunuzu erişemiyor bir örnek verilmiştir.
+1. Cihazınızda Web tarayıcısını açın ve [parola sıfırlama kaydı sayfasına](https://aka.ms/ssprsetup)gidin.
+2. Kullanıcı adınızı ve yöneticinizin sağlandığı parolayı girin.
+3. BT personelinizin her şeyi nasıl yapılandırdığına bağlı olarak, aşağıdaki seçeneklerden biri veya daha fazlası, yapılandırıp doğrulamanız için kullanılabilir. Yöneticinizin bilgilerinizi kullanma izni varsa, bazı bilgileri sizin için doldurabilir.
+    * **Ofis telefonu**: yalnızca yöneticiniz bu seçeneği belirleyebilir.
+    * **Kimlik doğrulama telefonu**: Bu seçeneği, erişiminiz olan başka bir telefon numarası olarak ayarlayın. Örnek, bir metin veya çağrı alabilen bir cep telefonunun örneğidir.
+    * **Kimlik doğrulama e-postası**: Bu seçeneği, sıfırlamak istediğiniz parolayı kullanmadan erişebileceğiniz alternatif bir e-posta adresi olarak ayarlayın.
+    * **Güvenlik soruları**: yöneticiniz, yanıtlamanıza yönelik bu soruların listesini onayladı. Aynı soruyu veya yanıtı birden çok kez kullanamazsınız.
+4. Yöneticinizin gerektirdiği bilgileri sağlayın ve doğrulayın. Birden fazla seçenek varsa, birden çok yöntem kaydetmenizi öneririz. Bu, yöntemlerden biri kullanılabilir olmadığında size esneklik sağlar. Bir örnek yolculukta olduğunuz ve ofis telefonunuza erişemedik.
 
-    ![Kimlik doğrulama yöntemlerini kaydedin ve Son'u seçin][Register]
+    ![Kimlik doğrulama yöntemlerini Kaydet ve son ' u seçin][Register]
 
-5. Seçin **son**. SSPR artık gelecekte ihtiyacınız olduğunda kullanabilirsiniz.
+5. **Son**' u seçin. Artık, daha sonra ihtiyacınız olduğunda SSPR 'yi kullanabilirsiniz.
 
-İçin veri girerseniz **kimlik doğrulama telefonu** veya **kimlik doğrulama e-posta**, genel dizinde görünmez değil. Bu verileri yalnızca siz ve yöneticileriniz görebilir. Güvenlik sorularınızın yanıtlarını yalnızca siz görebilirsiniz.
+**Kimlik doğrulama telefonu** veya **kimlik doğrulama e-postası**için veri girerseniz, genel dizinde görünmez. Bu verileri yalnızca siz ve yöneticileriniz görebilir. Yalnızca güvenlik sorularınıza yanıt verebilirsiniz.
 
-Yöneticiler, yine de uygun yöntemleri kayıtlı olduğundan emin olmak için zaman bir süre sonra kimlik doğrulama yöntemlerinizi onaylamanızı gerektirebilir.
+Yöneticileriniz, uygun yöntemlerin kayıtlı olduğundan emin olmak için bir süre sonra kimlik doğrulama yöntemlerinizi onaylamanız gerekebilir.
 
-## <a name="common-problems-and-their-solutions"></a>Sık karşılaşılan sorunlar ve çözümleri
+## <a name="common-problems-and-their-solutions"></a>Yaygın sorunlar ve çözümleri
 
- Bazı yaygın hata durumları ve çözümleri aşağıda verilmiştir:
+ Aşağıda bazı yaygın hata durumları ve çözümleri verilmiştir:
 
-| Bir hata durumu| Hatayı?| Çözüm |
+| Hata durumu| Hangi hatayı görüyorsunuz?| Çözüm |
 | --- | --- | --- |
-| Kullanıcı Kimliğimi girdikten sonra bir "Lütfen sistem yöneticinize başvurun" Sayfa alıyorum | Lütfen yöneticinize başvurun. <br> <br> Kullanıcı hesabınızın parolasının, Microsoft tarafından yönetilmiyor algıladık. Sonuç olarak, otomatik olarak parolanızı sıfırlama belirleyemiyoruz. <br> <br> Daha fazla yardım için BT personelinizin başvurun. | BT personelinizin şirket içi ortamınızda parolanızı yönetir ve, parolasını sıfırlamanıza izin vermiyor bu iletisini görüyorsunuz **hesabınıza erişemiyor** bağlantı. <br> <br> Parolanızı sıfırlamak için doğrudan Yardım için BT personelinizin başvurun. Bunlar bu özellik, verebilmeniz için parolanızı sıfırlamak istediğiniz bildiren olanak tanır.|
-| Kullanıcı Kimliğimi girdikten sonra bir "hesabınızı parola sıfırlama için etkin değil" hatası alıyorum | Hesabınız parola sıfırlama için etkinleştirilmedi. <br> <br> Özür dileriz, ancak BT personeliniz bu hizmeti kullanmak için hesabınızı ayarlamadı. <br> <br> İsterseniz, biz, parolanızı sıfırlaması için kuruluşunuzdaki yönetici başvurabilirsiniz. | BT personelinizin parola sıfırlama kuruluşunuz için etkinleştirilmemiş olduğundan bu iletisini görüyorsunuz **hesabınıza erişemiyor** bağlantı veya bu özelliği kullanmak için lisanslı edilmemiş. <br> <br> Parolanızı sıfırlamak için seçin **yöneticiye başvurun** bağlantı. Şirketinizin e-posta gönderilecek BT personeli. E-posta biliyorsanız, bu özellik, verebilmeniz için parolanızı sıfırlamak istiyorsanız sağlar. |
-| Kullanıcı Kimliğimi girdikten sonra bir "biz hesabınızı doğrulanamadı" hatası alıyorum | Hesabınızı doğrulayamıyor. <br> <br> İsterseniz, biz, parolanızı sıfırlaması için kuruluşunuzdaki yönetici başvurabilirsiniz. | Bu ileti, parola sıfırlama için etkinleştirildiğinden, ancak hizmeti kullanmaya kaydolmadıysanız görüyorsunuz. Parola sıfırlama için kaydolmasını gidin [parola sıfırlama kayıt sayfasına](https://aka.ms/ssprsetup) hesabınıza erişim buldum sonra. <br> <br> Parolanızı sıfırlamak için seçin **yöneticiye başvurun** , şirketinizin e-posta göndermek için bağlantı BT personeli. |
+| Kullanıcı kimliğimi girdikten sonra "lütfen yöneticinize başvurun" sayfasına aldım | Lütfen yöneticinize başvurun. <br> <br> Kullanıcı hesabınızın parolasının Microsoft tarafından yönetilmediğini belirledik. Sonuç olarak, parolanızı otomatik olarak sıfırlayamıyoruz. <br> <br> Daha fazla yardım için BT personelinize başvurun. | BT personeliniz parolanızı şirket içi ortamınızda yönettiğinden ve parolanızı **Hesap bağlantıınızdan** sıfırlamanıza izin vermediğinden bu iletiyi görüyorsunuz. <br> <br> Parolanızı sıfırlamak için doğrudan yardım için BT personelinize başvurun. Bu özelliği sizin yerinize etkinleştirebilmeniz için parolanızı sıfırlamak istediğinizi bilmesini sağlayın.|
+| Kullanıcı kimliğimi girdikten sonra "hesabınız parola sıfırlama için etkinleştirilmemiş" hatası alıyorum | Hesabınız parola sıfırlama için etkinleştirilmemiş. <br> <br> Üzgünüz, ancak BT personeliniz hesabınızı bu hizmetle kullanılmak üzere ayarlamadı. <br> <br> İsterseniz, parolanızı sizin için sıfırlayabilmeniz için kuruluşunuzdaki bir yöneticiye başvururuz. | BT personelinizin kuruluşunuz için parola sıfırlamasını **Hesap bağlantısına erişemediğinden** veya özelliği kullanmak için size lisanslamadığı için bu iletiyi görüyorsunuz. <br> <br> Parolanızı sıfırlamak için **yönetici ile iletişim kurun** bağlantısını seçin. Şirketinizin BT personeline bir e-posta gönderilir. E-posta, parolanızı sıfırlamak istediğinizi ve bu özelliği sizin için etkinleştirebilmesini sağlar. |
+| Kullanıcı kimliğimi girdikten sonra "Hesap Kimliğiniz doğrulanamadı" hatası alıyorum | Hesabınızı doğrulayamıyoruz. <br> <br> İsterseniz, parolanızı sizin için sıfırlayabilmeniz için kuruluşunuzdaki bir yöneticiye başvururuz. | Parola sıfırlama için etkin olduğunuzdan, ancak hizmeti kullanmak için kaydolmadığınız için bu iletiyi görüyorsunuz. Parola sıfırlama için kaydolmak üzere hesabınıza erişim izni verdikten sonra [parola sıfırlama kaydı sayfasına](https://aka.ms/ssprsetup) gidin. <br> <br> Parolanızı sıfırlamak için şirketinizin BT personeline bir e-posta göndermek üzere **yönetici ile iletişim kurun** bağlantısını seçin. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Self Servis parola sıfırlamayı kullanarak parolanızı değiştirme](active-directory-passwords-update-your-own-password.md)
+* [Self servis parola sıfırlama kullanarak parolanızı değiştirme](active-directory-passwords-update-your-own-password.md)
 * [Parola sıfırlama kayıt sayfası](https://aka.ms/ssprsetup)
 * [Parola sıfırlama portalı](https://passwordreset.microsoftonline.com/)
-* [Microsoft hesabınızda oturum açtığınızda olamaz](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant)
+* [Microsoft hesabı oturum açamazsınız](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant)
 
-[Register]: ./media/active-directory-passwords-reset-register/register-2-methods.png "Kayıtlı yöntemleri ve son düğmesini gösteren parola sıfırlama kayıt sayfası"
+[Register]: ./media/active-directory-passwords-reset-register/register-2-methods.png "Kayıtlı yöntemlerin ve son düğmesinin gösterildiği parola sıfırlama kayıt sayfası"
 

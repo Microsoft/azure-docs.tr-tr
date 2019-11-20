@@ -31,8 +31,8 @@ SharePoint için StorSimple bağdaştırıcısını Uzak BLOB Depolama (KKY) sa�
 > SharePoint için StorSimple bağdaştırıcısını, SharePoint Server 2010 uzaktan BLOB Depolama (KKY) destekler. SharePoint Server 2010 dış BLOB Depolama (EBS) desteklemez.
 
 
-* SharePoint için StorSimple bağdaştırıcısını indirmek için Git [SharePoint için StorSimple bağdaştırıcısı] [ 1] Microsoft Download Center'daki.
-* KKY ve KKY sınırlamaları planlama hakkında daha fazla bilgi için Git [SharePoint 2013'te KKY kullanmaya karar vermeden] [ 2] veya [planlama (SharePoint Server 2010) KKY için] [ 3].
+* SharePoint için StorSimple bağdaştırıcısını indirmek için Git [SharePoint için StorSimple bağdaştırıcısı][1] Microsoft Download Center'daki.
+* KKY ve KKY sınırlamaları planlama hakkında daha fazla bilgi için Git [SharePoint 2013'te KKY kullanmaya karar vermeden][2] veya [planlama (SharePoint Server 2010) KKY için][3].
 
 Bu genel bakışta geri kalanını SharePoint ve yükleyip bağdaştırıcısı yapılandırmadan önce bilincinde olmanız gereken SharePoint kapasite ve performans sınırları için StorSimple bağdaştırıcısını rolü kısaca açıklanmaktadır. Bu bilgileri gözden geçirdikten sonra Git [SharePoint yükleme için StorSimple bağdaştırıcısı](#storsimple-adapter-for-sharepoint-installation) bağdaştırıcısı kurulumunu başlatmak için.
 

@@ -149,6 +149,8 @@
       items:
         - name: OPC Twin Mimarisi
           href: overview-opc-twin-architecture.md
+        - name: OPC Vault Mimarisi
+          href: overview-opc-vault-architecture.md
     - name: Nasıl yapılır kılavuzları
       items:
         - name: Bağlı Fabrika
@@ -169,14 +171,14 @@
               href: howto-opc-twin-deploy-dependencies.md
         - name: OPC Vault
           items:
-            - name: OPC Vault'u mevcut projeye dağıtma
-              items:
-                - name: OPC istemcisi ile OPC PLC’nin güvenli iletişimi
-                  href: howto-opc-vault-deploy-existing-client-plc-communication.md
-                - name: Güvenli OPC UA istemci ve OPC UA sunucu uygulaması
-                  href: howto-opc-vault-deploy-existing-client-server-communication.md
-            - name: OPC Vault'u sıfırdan dağıtma
-              href: howto-opc-vault-deploy-scratch.md
+            - name: OPC Vault hizmetini dağıtma
+              href: howto-opc-vault-deploy.md
+            - name: OPC Vault hizmetini yönetme
+              href: howto-opc-vault-manage.md
+            - name: OPC Vault ile OPC UA cihaz iletişiminin güvenliğini sağlama
+              href: howto-opc-vault-secure.md
+            - name: OPC Vault hizmetini güvenli çalıştırma
+              href: howto-opc-vault-secure-ca.md
         - name: OPC Yayımcısı
           items:
             - name: OPC Yayımcısını Yapılandırma
@@ -236,9 +238,7 @@
 - name: Başvuru Mimarisi
   items:
     - name: Genel Bakış
-      href: iot-accelerators-architecture-overview.md
-    - name: İndirme
-      href: 'https://aka.ms/iotrefarchitecture'
+      href: 'https://docs.microsoft.com/azure/architecture/reference-architectures/iot/'
     - name: İş ortağı uygulamaları
       items:
         - name: Intel Connected Logistics Platform
@@ -251,14 +251,16 @@
   items:
     - name: Çözümler
       items:
-        - name: IoT çözüm hızlandırıcıları
-          href: /azure/iot-accelerators
         - name: IoT Central
           href: 'https://docs.microsoft.com/microsoft-iot-central/'
+        - name: IoT çözüm hızlandırıcıları
+          href: /azure/iot-accelerators
     - name: Platform Hizmetleri
       items:
         - name: IoT Hub
           href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
         - name: IoT Hub Cihazı Sağlama Hizmeti
           href: /azure/iot-dps
         - name: IoT Hizmet SDK’ları
@@ -267,18 +269,12 @@
           href: /azure/azure-maps
         - name: Time Series Insights
           href: /azure/time-series-insights
-    - name: Edge
+    - name: IoT Edge
       items:
-        - name: IoT Edge
+        - name: Azure IoT Edge
           href: /azure/iot-edge
         - name: IoT Cihaz SDK'ları
           href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
-    - name: Stream Analytics
-      href: /azure/stream-analytics/
-    - name: Event Hubs
-      href: /azure/event-hubs/
-    - name: Machine Learning
-      href: /azure/machine-learning/
 - name: Kaynaklar
   items:
     - name: Azure Yol Haritası

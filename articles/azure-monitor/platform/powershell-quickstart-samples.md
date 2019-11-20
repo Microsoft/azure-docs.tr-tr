@@ -1,212 +1,211 @@
 ---
-title: Azure İzleyici PowerShell hızlı başlangıç örnekleri
-description: Otomatik ölçeklendirme, uyarılar, Web kancaları ve etkinlik günlüklerini arama gibi Azure İzleyici özelliklerine erişmek için PowerShell'i kullanın.
-author: rboucher
-services: azure-monitor
+title: Azure Izleyici PowerShell hızlı başlangıç örnekleri
+description: Otomatik ölçeklendirme, uyarılar, Web kancaları ve etkinlik günlükleri arama gibi Azure Izleyici özelliklerine erişmek için PowerShell 'i kullanın.
 ms.service: azure-monitor
-ms.topic: conceptual
-ms.date: 2/14/2018
-ms.author: robb
 ms.subservice: ''
-ms.openlocfilehash: ada62fbfa51604a6b3188c27d5c14da40c8ac116
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: conceptual
+author: rboucher
+ms.author: robb
+ms.date: 2/14/2018
+ms.openlocfilehash: d1aa4b4e2d72f10ca73616bc7e69b0d02f13a501
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66400201"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72551843"
 ---
-# <a name="azure-monitor-powershell-quick-start-samples"></a>Azure İzleyici PowerShell hızlı başlangıç örnekleri
-Bu makale, Azure İzleyici özellikleri erişmenize yardımcı olması için PowerShell komutlarını örnek gösterir.
+# <a name="azure-monitor-powershell-quick-start-samples"></a>Azure Izleyici PowerShell hızlı başlangıç örnekleri
+Bu makalede, Azure Izleyici özelliklerine erişmenize yardımcı olacak örnek PowerShell komutları gösterilmektedir.
 
 > [!NOTE]
-> Azure İzleyici "Azure Insights" olarak adlandırılıyordu yeni 25 Eylül 2016'ya kadar adıdır. Ancak, ad alanları ve bu nedenle aşağıdaki komutları hala "ınsights." sözcüğü içerir
+> Azure Izleyici, 25 Eylül 2016 ' e kadar "Azure Insights" adı verilen yeni addır. Ancak, ad alanları ve bu nedenle aşağıdaki komutlar yine de "Öngörüler" sözcüğünü içerir.
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-## <a name="set-up-powershell"></a>PowerShell'i ayarlayın
-Henüz yapmadıysanız, bilgisayarınızda çalıştırmak için PowerShell'i ayarlayın. Daha fazla bilgi için [yükleme ve yapılandırma PowerShell](/powershell/azure/overview).
+## <a name="set-up-powershell"></a>PowerShell 'i ayarlama
+Henüz yapmadıysanız, PowerShell 'i bilgisayarınızda çalışacak şekilde ayarlayın. Daha fazla bilgi için bkz. [PowerShell 'ı yüklemek ve yapılandırmak](/powershell/azure/overview).
 
-## <a name="examples-in-this-article"></a>Bu makaledeki örnekleri
-Makaledeki örnekler, Azure İzleyici cmdlet'lerini nasıl kullanabileceğinizi gösterir. Ayrıca Azure İzleyici PowerShell cmdlet'leri listesini gözden geçirebilirsiniz [Azure İzleyici (Öngörüler) cmdlet'leri](https://docs.microsoft.com/powershell/module/az.applicationinsights).
+## <a name="examples-in-this-article"></a>Bu makaledeki örnekler
+Makalesindeki örneklerde Azure Izleyici cmdlet 'lerini nasıl kullanabileceğiniz gösterilmektedir. Ayrıca Azure izleyici [(Öngörüler) cmdlet 'Lerinde](https://docs.microsoft.com/powershell/module/az.applicationinsights)Azure izleyici PowerShell cmdlet 'lerinin tüm listesini inceleyebilirsiniz.
 
-## <a name="sign-in-and-use-subscriptions"></a>Oturum açın ve aboneliklerini kullanma
+## <a name="sign-in-and-use-subscriptions"></a>Oturum açın ve abonelikleri kullanın
 İlk olarak, Azure aboneliğinizde oturum açın.
 
 ```powershell
 Connect-AzAccount
 ```
 
-Oturum açma ekranı görürsünüz. Hesabınızdaki Tenantıd, bir kez oturum açmak ve varsayılan abonelik kimliği görüntülenir. Tüm Azure cmdlet'lerini varsayılan aboneliğinizi bağlamında çalışır. Erişiminiz Aboneliklerin listesini görüntülemek için aşağıdaki komutu kullanın:
+Bir oturum açma ekranı görürsünüz. Hesabınızda oturum açtıktan sonra Tenantıd ve varsayılan abonelik KIMLIĞI görüntülenir. Tüm Azure cmdlet 'leri varsayılan aboneliğiniz bağlamında çalışır. Erişiminiz olan aboneliklerin listesini görüntülemek için aşağıdaki komutu kullanın:
 
 ```powershell
 Get-AzSubscription
 ```
 
-Çalışma Bağlamınızı görmek için (hangi abonelik komutlarınızı karşı çalıştırılır), aşağıdaki komutu kullanın:
+Çalışma bağlamını görmek için (komutlarınızın hangi abonelikle çalıştırılmakta olduğunu), aşağıdaki komutu kullanın:
 
 ```powershell
 Get-AzContext
 ```
-Çalışma Bağlamınızı farklı bir aboneliğe değiştirmek için aşağıdaki komutu kullanın:
+Çalışma bağlamını farklı bir aboneliğe dönüştürmek için aşağıdaki komutu kullanın:
 
 ```powershell
 Set-AzContext -SubscriptionId <subscriptionid>
 ```
 
 
-## <a name="retrieve-activity-log-for-a-subscription"></a>Etkinlik günlüğü bir abonelik için Al
-Kullanım [Get-AzLog](https://docs.microsoft.com/powershell/module/az.monitor/get-azlog) cmdlet'i.  Bazı genel örnekleri aşağıda verilmiştir. Etkinlik günlüğü, Son 90 gün işlemlerinin tutar. Bir hata iletisi tarihlerden önce bu zaman sonuçlarını kullanma.  
+## <a name="retrieve-activity-log-for-a-subscription"></a>Abonelik için etkinlik günlüğünü alma
+[Get-AzLog](https://docs.microsoft.com/powershell/module/az.monitor/get-azlog) cmdlet 'ini kullanın.  Yaygın olarak kullanılan bazı örnekler aşağıda verilmiştir. Etkinlik günlüğü, son 90 gün işlem içerir. Bu saatten önceki tarihleri kullanmak bir hata mesajı elde ediyor.  
 
-Aşağıdaki komutları kullanmak için ne zaman doğrulamak için geçerli tarih/saat nelerdir bakın:
+Aşağıdaki komutlarda ne zaman kullanılacağını doğrulamak için geçerli tarih/saat ne olduğunu öğrenin:
 ```powershell
 Get-Date
 ```
 
-Bu zaman/sunmak için tarihten günlük girişlerini alın:
+Bu saatten/tarihten itibaren günlük girişlerini al:
 
 ```powershell
 Get-AzLog -StartTime 2019-03-01T10:30
 ```
 
-Günlük girişlerini arasında bir saat/tarih aralığı alın:
+Bir zaman/tarih aralığı arasındaki günlük girişlerini al:
 
 ```powershell
 Get-AzLog -StartTime 2019-01-01T10:30 -EndTime 2015-01-01T11:30
 ```
 
-Günlük girişlerini belirli bir kaynak grubundan alın:
+Belirli bir kaynak grubundaki günlük girdilerini al:
 
 ```powershell
 Get-AzLog -ResourceGroup 'myrg1'
 ```
 
-Bir saat/tarih aralığı arasında belirli kaynak sağlayıcısından günlük girişlerini alın:
+Belirli bir kaynak sağlayıcısından bir zaman/tarih aralığı arasında günlük girişleri al:
 
 ```powershell
 Get-AzLog -ResourceProvider 'Microsoft.Web' -StartTime 2015-01-01T10:30 -EndTime 2015-01-01T11:30
 ```
 
-Belirli bir çağıranın ile tüm günlük girişlerini alın:
+Belirli bir çağıran tüm günlük girişlerini al:
 
 ```powershell
 Get-AzLog -Caller 'myname@company.com'
 ```
 
-Aşağıdaki komut, etkinlik günlüğünde son 1000 olayları alır:
+Aşağıdaki komut, etkinlik günlüğünden son 1000 olayı alır:
 
 ```powershell
 Get-AzLog -MaxRecord 10
 ```
 
-`Get-AzLog` diğer birçok parametrelerini destekler. Bkz: `Get-AzLog` daha fazla bilgi için başvuru.
+`Get-AzLog` diğer birçok parametreyi destekler. Daha fazla bilgi için `Get-AzLog` başvurusuna bakın.
 
 > [!NOTE]
-> `Get-AzLog` yalnızca 15 günlük geçmişi sağlar. Kullanarak **- MaxRecords** parametresi, 15 gün dışında bir son N olayları, sorgulamaya olanak sağlar. 15 günden eski erişim olayları için REST API veya SDK'sını (SDK'sını kullanarak C# örneği) kullanın. Dahil etmezseniz **StartTime**, varsayılan değer ise **EndTime** eksi bir saat. Dahil etmezseniz **EndTime**, geçerli zamanı varsayılan değeridir. Tüm saatler UTC biçimindedir.
+> `Get-AzLog` yalnızca 15 gün geçmiş bir geçmişi sağlar. **-MaxRecords** parametresini kullanmak, son N olayı, 15 günden daha fazla sorgulamanızı sağlar. 15 günden eski olaylara erişmek için REST API veya SDK 'yı kullanın (C# Örneğin, SDK 'yı kullanarak). **StartTime**'i eklemezseniz, varsayılan değer **bitişsaati** eksi bir saattir. **Bitişsaati**eklemezseniz, varsayılan değer geçerli süredir. Her zaman UTC 'de.
 > 
 > 
 
-## <a name="retrieve-alerts-history"></a>Uyarı geçmişini alma
-Tüm Uyarı olayları görüntülemek için aşağıdaki örnekleri kullanarak Azure Resource Manager günlükleri sorgulayabilir.
+## <a name="retrieve-alerts-history"></a>Uyarı geçmişini al
+Tüm uyarı olaylarını görüntülemek için aşağıdaki örnekleri kullanarak Azure Resource Manager günlüklerini sorgulayabilirsiniz.
 
 ```powershell
 Get-AzLog -Caller "Microsoft.Insights/alertRules" -DetailedOutput -StartTime 2015-03-01
 ```
 
-Belirli bir uyarı kuralı geçmişini görüntülemek için kullanabileceğiniz `Get-AzAlertHistory` cmdlet'i, uyarı kuralı kaynak Kimliğinde geçirme.
+Belirli bir uyarı kuralının geçmişini görüntülemek için, uyarı kuralının kaynak KIMLIĞI ' ni geçirerek `Get-AzAlertHistory` cmdlet 'ini kullanabilirsiniz.
 
 ```powershell
 Get-AzAlertHistory -ResourceId /subscriptions/s1/resourceGroups/rg1/providers/microsoft.insights/alertrules/myalert -StartTime 2016-03-1 -Status Activated
 ```
 
-`Get-AzAlertHistory` Cmdlet'i çeşitli parametreleri destekler. Daha fazla bilgi için bkz: [Get-AlertHistory](https://msdn.microsoft.com/library/mt282453.aspx).
+@No__t_0 cmdlet 'i çeşitli parametreleri destekler. Daha fazla bilgi için bkz. [Get-AlertHistory](https://msdn.microsoft.com/library/mt282453.aspx).
 
 ## <a name="retrieve-information-on-alert-rules"></a>Uyarı kuralları hakkında bilgi alma
-Aşağıdaki komutların tümü "montest" adlı bir kaynak grubu üzerinde işlevi görür.
+Aşağıdaki komutların tümü, "montest" adlı bir kaynak grubu üzerinde çalışır.
 
-Uyarı kuralı tüm özelliklerini görüntüleyin:
+Uyarı kuralının tüm özelliklerini görüntüleyin:
 
 ```powershell
 Get-AzAlertRule -Name simpletestCPU -ResourceGroup montest -DetailedOutput
 ```
 
-Bir kaynak grubundaki tüm uyarıları Al:
+Bir kaynak grubundaki tüm uyarıları al:
 
 ```powershell
 Get-AzAlertRule -ResourceGroup montest
 ```
 
-Tüm uyarı kuralı için bir hedef kaynak kümesini alır. Örneğin, bir VM'de tüm uyarı kuralları ayarlayın.
+Hedef kaynak için ayarlanan tüm uyarı kurallarını alın. Örneğin, bir VM 'de ayarlanan tüm uyarı kuralları.
 
 ```powershell
 Get-AzAlertRule -ResourceGroup montest -TargetResourceId /subscriptions/s1/resourceGroups/montest/providers/Microsoft.Compute/virtualMachines/testconfig
 ```
 
-`Get-AzAlertRule` diğer parametreleri destekler. Bkz: [Get-AlertRule](https://msdn.microsoft.com/library/mt282459.aspx) daha fazla bilgi için.
+`Get-AzAlertRule` diğer parametreleri destekler. Daha fazla bilgi için bkz. [Get-AlertRule](https://msdn.microsoft.com/library/mt282459.aspx) .
 
 ## <a name="create-metric-alerts"></a>Ölçüm uyarıları oluşturma
-Kullanabileceğiniz `Add-AlertRule` cmdlet'ini oluşturmak, güncelleştirmek veya bir uyarı kuralı devre dışı bırakın.
+Bir uyarı kuralı oluşturmak, güncelleştirmek veya devre dışı bırakmak için `Add-AlertRule` cmdlet 'ini kullanabilirsiniz.
 
-E-posta ve Web kancası özellikleri kullanarak oluşturabileceğiniz `New-AzAlertRuleEmail` ve `New-AzAlertRuleWebhook`sırasıyla. Uyarı kuralı cmdlet'te, bu özellikler için eylem olarak atayın. **eylemleri** uyarı kuralı bir özelliğidir.
+Sırasıyla `New-AzAlertRuleEmail` ve `New-AzAlertRuleWebhook` kullanarak e-posta ve Web kancası özellikleri oluşturabilirsiniz. Uyarı kuralı cmdlet 'inde, bu özellikleri uyarı kuralının **Eylemler** özelliğine eylem olarak atayın.
 
-Aşağıdaki tabloda, bir ölçüm kullanarak bir uyarı oluşturmak için kullanılan değerleri ve parametreler açıklanmaktadır.
+Aşağıdaki tabloda, ölçüm kullanılarak bir uyarı oluşturmak için kullanılan parametreler ve değerler açıklanmaktadır.
 
-| Parametre | value |
+| parametresinin | değer |
 | --- | --- |
-| Ad |simpletestdiskwrite |
-| Bu uyarı kuralının konumu |East US |
-| ResourceGroup |montest |
-| TargetResourceId |/subscriptions/s1/resourceGroups/montest/providers/Microsoft.Compute/virtualMachines/testconfig |
-| Oluşturulan uyarının MetricName |\PhysicalDisk (_Total) \Disk Yazma/sn. Bkz: `Get-MetricDefinitions` cmdlet'i tam ölçüm adları almak nasıl hakkında |
-| İşleci |GreaterThan |
-| Eşik değerini (sayısı/sn, bu ölçümün) |1 |
-| Pencereboyutu (ss: dd: biçimi) |00:05:00 |
-| Toplayıcı (istatistiği ölçümün ortalama sayısı, bu durumda kullanır) |Average |
-| özel e-postaları (dize dizisi) |'foo@example.com','bar@example.com' |
-| sahipleri, Katkıda Bulunanlar ve okuyucular için e-posta Gönder |-SendToServiceOwners |
+| Adı |simpletestdiskwrite |
+| Bu uyarı kuralının konumu |Doğu ABD |
+| adlı yönetilen örnek, |montest |
+| Targetresourceıd |/subscriptions/s1/resourceGroups/montest/providers/Microsoft.Compute/virtualMachines/testconfig |
+| Oluşturulan uyarının MetricName |\Fiziksel disk (_Total) \Disk yazma/sn. Tam ölçüm adlarını alma hakkında `Get-MetricDefinitions` cmdlet 'ini inceleyin |
+| işlecinde |GreaterThan |
+| Eşik değeri (Bu ölçümün içindeki Count/SEC) |1 |
+| WindowSize (SS: DD: ss biçimi) |00:05:00 |
+| toplayıcı (Bu örnekte ortalama sayı kullanan ölçüm istatistiği) |Ortalama |
+| özel e-postalar (dize dizisi) |' foo@example.com ', ' bar@example.com ' |
+| sahipler, katkıda bulunanlar ve okuyucular için e-posta gönderin |-SendToServiceOwners |
 
-Bir e-posta eylem oluşturun
+E-posta eylemi oluşturma
 
 ```powershell
 $actionEmail = New-AzAlertRuleEmail -CustomEmail myname@company.com
 ```
 
-Bir Web kancası Eylem oluştur
+Web kancası eylemi oluşturma
 
 ```powershell
 $actionWebhook = New-AzAlertRuleWebhook -ServiceUri https://example.com?token=mytoken
 ```
 
-Klasik bir sanal makine üzerindeki CPU % ölçüm uyarı kuralı oluşturun
+Klasik bir VM 'de CPU% Ölçümü üzerinde uyarı kuralı oluştur
 
 ```powershell
 Add-AzMetricAlertRule -Name vmcpu_gt_1 -Location "East US" -ResourceGroup myrg1 -TargetResourceId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.ClassicCompute/virtualMachines/my_vm1 -MetricName "Percentage CPU" -Operator GreaterThan -Threshold 1 -WindowSize 00:05:00 -TimeAggregationOperator Average -Action $actionEmail, $actionWebhook -Description "alert on CPU > 1%"
 ```
 
-Uyarı kuralı alma
+Uyarı kuralını alma
 
 ```powershell
 Get-AzAlertRule -Name vmcpu_gt_1 -ResourceGroup myrg1 -DetailedOutput
 ```
 
-Belirli özellikleri için bir uyarı kuralı zaten varsa Ekle uyarı cmdlet de kuralı güncelleştirir. Bir uyarı kuralı devre dışı bırakmak için parametresini içerecek **- DisableRule**.
+Verilen özellikler için zaten bir uyarı kuralı varsa, uyarı Ekle cmdlet 'i de kuralı güncelleştirir. Bir uyarı kuralını devre dışı bırakmak için **-DisableRule**parametresini ekleyin.
 
 ## <a name="get-a-list-of-available-metrics-for-alerts"></a>Uyarılar için kullanılabilir ölçümlerin bir listesini alın
-Kullanabileceğiniz `Get-AzMetricDefinition` belirli bir kaynak için tüm ölçümleri listesini görüntülemek için cmdlet'i.
+Belirli bir kaynağın tüm ölçümlerinin listesini görüntülemek için `Get-AzMetricDefinition` cmdlet 'ini kullanabilirsiniz.
 
 ```powershell
 Get-AzMetricDefinition -ResourceId <resource_id>
 ```
 
-Aşağıdaki örnek, ölçüm adı içeren bir tablo ve onun için birim oluşturur.
+Aşağıdaki örnek, için ölçüm adı ve birim içeren bir tablo oluşturur.
 
 ```powershell
 Get-AzMetricDefinition -ResourceId <resource_id> | Format-Table -Property Name,Unit
 ```
 
-Tam listesi için kullanılabilir seçenekleri `Get-AzMetricDefinition` kullanılabilir [Get-MetricDefinitions](https://msdn.microsoft.com/library/mt282458.aspx).
+@No__t_0 için kullanılabilir seçeneklerin tam listesi [Get-MetricDefinitions](https://msdn.microsoft.com/library/mt282458.aspx)' de bulunabilir.
 
 ## <a name="create-and-manage-activity-log-alerts"></a>Etkinlik günlüğü uyarıları oluşturma ve yönetme
-Kullanabileceğiniz `Set-AzActivityLogAlert` cmdlet'i bir etkinlik günlüğü uyarısı ayarlamak için. Etkinlik günlüğü Uyarısı, önce koşullarınızı koşulları bir sözlük olarak tanımlayın, ardından bu koşullara kullanan bir uyarı oluşturmak, gerektirir.
+Bir etkinlik günlüğü uyarısı ayarlamak için `Set-AzActivityLogAlert` cmdlet 'ini kullanabilirsiniz. Bir etkinlik günlüğü uyarısı, koşullarınızı öncelikle koşulların bir sözlüğü olarak tanımlamanızı ve sonra bu koşulları kullanan bir uyarı oluşturmanızı gerektirir.
 
 ```powershell
 
@@ -219,135 +218,135 @@ Set-AzActivityLogAlert -Location 'Global' -Name 'alert on VM create' -ResourceGr
 
 ```
 
-Ek Web kancası özellikleri isteğe bağlıdır. Bir etkinlik günlüğü uyarısı kullanarak içerikleri geri dönebilirsiniz `Get-AzActivityLogAlert`.
+Ek Web kancası özellikleri isteğe bağlıdır. @No__t_0 kullanarak bir etkinlik günlüğü uyarısının içeriğini geri alabilirsiniz.
 
-## <a name="create-and-manage-autoscale-settings"></a>Oluşturma ve otomatik ölçeklendirme ayarlarını yönetme
-Bir kaynak (bir Web uygulaması, VM, bulut hizmeti veya sanal makine ölçek kümesi), yalnızca bir otomatik ölçeklendirme ayarı için yapılandırılmış olabilir.
-Ancak, her otomatik ölçeklendirme ayarı, birden çok profil olabilir. Örneğin, bir performans tabanlı ölçek profili ve ikinci bir zamanlama tabanlı profil için. Her profil yapılandırılmış birden çok kural bulunabilir. Otomatik ölçeklendirme hakkında daha fazla bilgi için bkz: [otomatik ölçeklendirme bir uygulamayı nasıl](../../cloud-services/cloud-services-how-to-scale-portal.md).
+## <a name="create-and-manage-autoscale-settings"></a>Otomatik ölçeklendirme ayarları oluşturma ve yönetme
+Bir kaynak (Web uygulaması, VM, bulut hizmeti veya sanal makine ölçek kümesi) için yapılandırılmış yalnızca bir otomatik ölçeklendirme ayarı olabilir.
+Ancak, her otomatik ölçeklendirme ayarının birden çok profili olabilir. Örneğin, bir performans tabanlı ölçek profili için bir tane ve bir zamanlama tabanlı profil için ikinci bir tane. Her profilde, üzerinde birden fazla kural yapılandırılabilir. Otomatik ölçeklendirme hakkında daha fazla bilgi için bkz. [bir uygulamayı otomatik ölçeklendirme](../../cloud-services/cloud-services-how-to-scale-portal.md).
 
 Kullanılacak adımlar şunlardır:
 
-1. Kuralları oluşturun.
-2. Oluşturduğunuz kurallar, daha önce profillere eşleme profillerini oluşturun.
-3. İsteğe bağlı: Otomatik ölçeklendirme bildirimleri için Web kancası ve e-posta özelliklerini yapılandırarak oluşturun.
-4. Önceki adımlarda oluşturulan bildirimleri ve profilleri eşleyerek hedef kaynak üzerinde bir ada sahip bir otomatik ölçeklendirme ayarı oluşturun.
+1. Kural oluştur.
+2. Daha önce oluşturduğunuz kuralları profillerde eşleyerek profil oluşturun.
+3. İsteğe bağlı: Web kancasını ve e-posta özelliklerini yapılandırarak otomatik ölçeklendirme bildirimleri oluşturun.
+4. Önceki adımlarda oluşturduğunuz profilleri ve bildirimleri eşleyerek hedef kaynakta bir ada sahip bir otomatik ölçeklendirme ayarı oluşturun.
 
-Aşağıdaki örnekler, bir sanal makine ölçek kümesi için CPU kullanımı ölçümü kullanarak temel bir Windows işletim sistemi için bir otomatik ölçeklendirme ayarı nasıl oluşturabileceğinizi gösterir.
+Aşağıdaki örneklerde, CPU kullanım ölçümünü kullanarak bir Windows işletim sistemi için bir sanal makine ölçek kümesi için otomatik ölçeklendirme ayarını nasıl oluşturacağınız gösterilmektedir.
 
-İlk olarak, örnek sayısı artışı ile ölçek genişletme, bir kural oluşturun.
+İlk olarak, bir örnek sayısı artmış olacak şekilde genişletmek için bir kural oluşturun.
 
 ```powershell
 $rule1 = New-AzAutoscaleRule -MetricName "Percentage CPU" -MetricResourceId /subscriptions/s1/resourceGroups/big2/providers/Microsoft.Compute/virtualMachineScaleSets/big2 -Operator GreaterThan -MetricStatistic Average -Threshold 60 -TimeGrain 00:01:00 -TimeWindow 00:10:00 -ScaleActionCooldown 00:10:00 -ScaleActionDirection Increase -ScaleActionValue 1
 ```        
 
-Ardından, bir örnek sayısını azaltma ile azaltmak için bir kural oluşturun.
+Sonra, örnek sayısı azalmasını içeren, ölçeklendirmek için bir kural oluşturun.
 
 ```powershell
 $rule2 = New-AzAutoscaleRule -MetricName "Percentage CPU" -MetricResourceId /subscriptions/s1/resourceGroups/big2/providers/Microsoft.Compute/virtualMachineScaleSets/big2 -Operator GreaterThan -MetricStatistic Average -Threshold 30 -TimeGrain 00:01:00 -TimeWindow 00:10:00 -ScaleActionCooldown 00:10:00 -ScaleActionDirection Decrease -ScaleActionValue 1
 ```
 
-Ardından, kural için bir profil oluşturun.
+Ardından, kurallar için bir profil oluşturun.
 
 ```powershell
 $profile1 = New-AzAutoscaleProfile -DefaultCapacity 2 -MaximumCapacity 10 -MinimumCapacity 2 -Rules $rule1,$rule2 -Name "My_Profile"
 ```
 
-Bir Web kancası özellik oluşturun.
+Web kancası özelliği oluştur.
 
 ```powershell
 $webhook_scale = New-AzAutoscaleWebhook -ServiceUri "https://example.com?mytoken=mytokenvalue"
 ```
 
-E-posta ve daha önce oluşturduğunuz Web kancası dahil olmak üzere otomatik ölçeklendirme ayarı için bildirim özelliği oluşturun.
+Daha önce oluşturduğunuz e-posta ve Web kancası dahil, otomatik ölçeklendirme ayarı için bildirim özelliğini oluşturun.
 
 ```powershell
 $notification1= New-AzAutoscaleNotification -CustomEmails ashwink@microsoft.com -SendEmailToSubscriptionAdministrators SendEmailToSubscriptionCoAdministrators -Webhooks $webhook_scale
 ```
 
-Son olarak, daha önce oluşturduğunuz profili eklemek için otomatik ölçeklendirme ayarı oluşturun. 
+Son olarak, daha önce oluşturduğunuz profili eklemek için otomatik ölçeklendirme ayarını oluşturun. 
 
 ```powershell
 Add-AzAutoscaleSetting -Location "East US" -Name "MyScaleVMSSSetting" -ResourceGroup big2 -TargetResourceId /subscriptions/s1/resourceGroups/big2/providers/Microsoft.Compute/virtualMachineScaleSets/big2 -AutoscaleProfiles $profile1 -Notifications $notification1
 ```
 
-Otomatik ölçeklendirme ayarlarını yönetme hakkında daha fazla bilgi için bkz. [Get-AutoscaleSetting](https://msdn.microsoft.com/library/mt282461.aspx).
+Otomatik ölçeklendirme ayarlarını yönetme hakkında daha fazla bilgi için bkz. [Get-otomatik Scalesetting](https://msdn.microsoft.com/library/mt282461.aspx).
 
 ## <a name="autoscale-history"></a>Otomatik ölçeklendirme geçmişi
-Aşağıdaki örnek nasıl yeni bir otomatik ölçeklendirme ve uyarı olayları görüntüleyebileceğiniz gösterir. Otomatik ölçeklendirme geçmişini görüntülemek için etkinliği günlük araması'nı kullanın.
+Aşağıdaki örnek, son otomatik ölçeklendirme ve uyarı olaylarını nasıl görüntüleyekullanabileceğinizi gösterir. Otomatik ölçeklendirme geçmişini görüntülemek için etkinlik günlüğü aramasını kullanın.
 
 ```powershell
 Get-AzLog -Caller "Microsoft.Insights/autoscaleSettings" -DetailedOutput -StartTime 2015-03-01
 ```
 
-Kullanabileceğiniz `Get-AzAutoScaleHistory` cmdlet'i otomatik ölçeklendirme geçmişi alınamadı.
+Otomatik ölçeklendirme geçmişini almak için `Get-AzAutoScaleHistory` cmdlet 'ini kullanabilirsiniz.
 
 ```powershell
 Get-AzAutoScaleHistory -ResourceId /subscriptions/s1/resourceGroups/myrg1/providers/microsoft.insights/autoscalesettings/myScaleSetting -StartTime 2016-03-15 -DetailedOutput
 ```
 
-Daha fazla bilgi için [Get-AutoscaleHistory](https://msdn.microsoft.com/library/mt282464.aspx).
+Daha fazla bilgi için bkz. [Get-oto Scalehistory](https://msdn.microsoft.com/library/mt282464.aspx).
 
-### <a name="view-details-for-an-autoscale-setting"></a>Bir otomatik ölçeklendirme ayarı için ayrıntıları görüntüle
-Kullanabileceğiniz `Get-Autoscalesetting` otomatik ölçeklendirme ayarı hakkında daha fazla bilgi almak için cmdlet'i.
+### <a name="view-details-for-an-autoscale-setting"></a>Otomatik ölçeklendirme ayarının ayrıntılarını görüntüleme
+Otomatik ölçeklendirme ayarı hakkında daha fazla bilgi almak için `Get-Autoscalesetting` cmdlet 'ini kullanabilirsiniz.
 
-Aşağıdaki örnek, kaynak grubu 'myrg1' tüm otomatik ölçeklendirme ayarları hakkında ayrıntılı bilgi gösterir.
+Aşağıdaki örnek, ' myrg1 ' kaynak grubundaki tüm otomatik ölçeklendirme ayarları hakkındaki ayrıntıları gösterir.
 
 ```powershell
 Get-AzAutoscalesetting -ResourceGroup myrg1 -DetailedOutput
 ```
 
-Aşağıdaki örnek, tüm otomatik ölçeklendirme ayarlarını 'myrg1' kaynak grubu ve özellikle 'MyScaleVMSSSetting' adlı otomatik ölçeklendirme ayarı hakkındaki ayrıntıları gösterir.
+Aşağıdaki örnek, ' myrg1 ' kaynak grubundaki tüm otomatik ölçeklendirme ayarları ve özellikle ' hayal Calevmsssetting ' adlı otomatik ölçeklendirme ayarı hakkındaki ayrıntıları gösterir.
 
 ```powershell
 Get-AzAutoscalesetting -ResourceGroup myrg1 -Name MyScaleVMSSSetting -DetailedOutput
 ```
 
-### <a name="remove-an-autoscale-setting"></a>Otomatik ölçeklendirme ayarını kaldırın
-Kullanabileceğiniz `Remove-Autoscalesetting` bir otomatik ölçeklendirme ayarı silmeye yönelik cmdlet'i.
+### <a name="remove-an-autoscale-setting"></a>Otomatik ölçeklendirme ayarını kaldırma
+Bir otomatik ölçeklendirme ayarını silmek için `Remove-Autoscalesetting` cmdlet 'ini kullanabilirsiniz.
 
 ```powershell
 Remove-AzAutoscalesetting -ResourceGroup myrg1 -Name MyScaleVMSSSetting
 ```
 
 ## <a name="manage-log-profiles-for-activity-log"></a>Etkinlik günlüğü için günlük profillerini yönetme
-Oluşturabileceğiniz bir *günlük profili* ve dışarı aktarma, etkinlik günlüğü verileri bir depolama hesabı ve veri saklama için yapılandırabilirsiniz. İsteğe bağlı olarak olay Hub'ınıza da veri akışını yapabilirsiniz. Bu özellik şu anda Önizleme aşamasındadır ve yalnızca abonelik başına bir günlük profilini oluşturabilirsiniz. Günlük profilleri oluşturup yönetmek için geçerli aboneliğiniz ile aşağıdaki cmdlet'leri kullanın. Ayrıca, belirli bir abonelik seçebilirsiniz. PowerShell varsayılan olarak mevcut aboneliğe olsa da, her zaman bu kullanarak değiştirebileceğiniz `Set-AzContext`. Etkinlik günlüğü bu Abonelikteki bir depolama hesabına veya olay hub'ı için rota verileri için yapılandırabilirsiniz. Veri, JSON biçimindeki blob dosyaları olarak yazılır.
+Bir *günlük profili* oluşturabilir ve etkinlik günlüğünden verileri bir depolama hesabına aktarabilir ve veri saklama alanını yapılandırabilirsiniz. İsteğe bağlı olarak, verileri olay hub 'ınıza da akışla aktarabilirsiniz. Bu özellik şu anda önizleme aşamasındadır ve her abonelik için yalnızca bir günlük profili oluşturabilirsiniz. Günlük profillerini oluşturmak ve yönetmek için şu cmdlet 'leri geçerli aboneliğiniz ile birlikte kullanabilirsiniz. Ayrıca, belirli bir aboneliği seçebilirsiniz. PowerShell varsayılan olarak geçerli aboneliğe izin verse de, `Set-AzContext` kullanarak her zaman değiştirebilirsiniz. Bu abonelik içindeki herhangi bir depolama hesabına veya Olay Hub 'ına veri yönlendirmek için etkinlik günlüğü yapılandırabilirsiniz. Veriler blob dosyası olarak JSON biçiminde yazılır.
 
-### <a name="get-a-log-profile"></a>Günlük profilini Al
-Var olan günlük profillerinizi getirilecek kullanın `Get-AzLogProfile` cmdlet'i.
+### <a name="get-a-log-profile"></a>Günlük profili al
+Mevcut günlük profillerinizi getirmek için `Get-AzLogProfile` cmdlet 'ini kullanın.
 
-### <a name="add-a-log-profile-without-data-retention"></a>Veri saklama olmayan bir günlük profili Ekle
+### <a name="add-a-log-profile-without-data-retention"></a>Veri saklama olmadan bir günlük profili ekleme
 ```powershell
-Add-AzLogProfile -Name my_log_profile_s1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -Locations global,westus,eastus,northeurope,westeurope,eastasia,southeastasia,japaneast,japanwest,northcentralus,southcentralus,eastus2,centralus,australiaeast,australiasoutheast,brazilsouth,centralindia,southindia,westindia
+Add-AzLogProfile -Name my_log_profile_s1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -Location global,westus,eastus,northeurope,westeurope,eastasia,southeastasia,japaneast,japanwest,northcentralus,southcentralus,eastus2,centralus,australiaeast,australiasoutheast,brazilsouth,centralindia,southindia,westindia
 ```
 
-### <a name="remove-a-log-profile"></a>Günlük profilini Kaldır
+### <a name="remove-a-log-profile"></a>Günlük profilini kaldırma
 ```powershell
 Remove-AzLogProfile -name my_log_profile_s1
 ```
 
-### <a name="add-a-log-profile-with-data-retention"></a>Veri saklama ile bir günlük profili Ekle
-Belirtebileceğiniz **- Retentionındays** özelliği ile veri nerede tutulur, pozitif bir tamsayı olarak gün sayısı.
+### <a name="add-a-log-profile-with-data-retention"></a>Veri saklama ile bir günlük profili ekleme
+**-Retentionındays** özelliğini, verilerin korunduğu pozitif bir tamsayı olarak gün sayısıyla belirtebilirsiniz.
 
 ```powershell
-Add-AzLogProfile -Name my_log_profile_s1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -Locations global,westus,eastus,northeurope,westeurope,eastasia,southeastasia,japaneast,japanwest,northcentralus,southcentralus,eastus2,centralus,australiaeast,australiasoutheast,brazilsouth,centralindia,southindia,westindia -RetentionInDays 90
+Add-AzLogProfile -Name my_log_profile_s1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -Location global,westus,eastus,northeurope,westeurope,eastasia,southeastasia,japaneast,japanwest,northcentralus,southcentralus,eastus2,centralus,australiaeast,australiasoutheast,brazilsouth,centralindia,southindia,westindia -RetentionInDays 90
 ```
 
-### <a name="add-log-profile-with-retention-and-eventhub"></a>Elde tutma ve EventHub ile günlük profili Ekle
-Veri depolama hesabına yönlendirme yanı sıra, ayrıca, bir olay Hub'ına akışını yapabilirsiniz. Bu önizleme sürümünde depolama hesabı yapılandırması zorunludur, ancak olay hub'ı yapılandırma isteğe bağlıdır.
+### <a name="add-log-profile-with-retention-and-eventhub"></a>Bekletme ve EventHub ile günlük profili ekleme
+Verilerinizi depolama hesabına yönlendirmeye ek olarak, bir olay hub 'ına da akış gönderebilirsiniz. Bu önizleme sürümünde depolama hesabı yapılandırması zorunludur, ancak olay hub 'ı yapılandırması isteğe bağlıdır.
 
 ```powershell
-Add-AzLogProfile -Name my_log_profile_s1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Locations global,westus,eastus,northeurope,westeurope,eastasia,southeastasia,japaneast,japanwest,northcentralus,southcentralus,eastus2,centralus,australiaeast,australiasoutheast,brazilsouth,centralindia,southindia,westindia -RetentionInDays 90
+Add-AzLogProfile -Name my_log_profile_s1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Location global,westus,eastus,northeurope,westeurope,eastasia,southeastasia,japaneast,japanwest,northcentralus,southcentralus,eastus2,centralus,australiaeast,australiasoutheast,brazilsouth,centralindia,southindia,westindia -RetentionInDays 90
 ```
 
-## <a name="configure-diagnostics-logs"></a>Tanılama günlüklerini Yapılandır
-Çoğu Azure hizmeti, ek günlükleri ve aşağıdakilerden birini veya daha fazlasını yapabilirsiniz telemetri sağlar: 
- - Azure depolama hesabınızdaki verileri kaydetmek için yapılandırılması
- - Event Hubs için gönderildi
+## <a name="configure-diagnostics-logs"></a>Tanılama günlüklerini yapılandırma
+Birçok Azure hizmeti, aşağıdakilerden birini veya birkaçını yapabiliriz ek Günlükler ve telemetri sağlar: 
+ - verileri Azure depolama hesabınıza kaydetmek üzere yapılandırılmış olmalıdır
+ - Event Hubs gönderildi
  - Log Analytics çalışma alanına gönderilir. 
 
-İşlemi yalnızca bir kaynak düzeyinde gerçekleştirilebilir. Depolama hesabına veya olay hub'ı tanılama ayarı yapılandırıldığı aynı bölgede hedef kaynak olarak mevcut olmalıdır.
+İşlem yalnızca bir kaynak düzeyinde gerçekleştirilebilir. Depolama hesabı veya Olay Hub 'ı, tanılama ayarının yapılandırıldığı hedef kaynakla aynı bölgede bulunmalıdır.
 
-### <a name="get-diagnostic-setting"></a>Tanılama ayarını Al
+### <a name="get-diagnostic-setting"></a>Tanılama ayarını al
 ```powershell
 Get-AzDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Logic/workflows/andy0315logicapp
 ```
@@ -358,38 +357,38 @@ Tanılama ayarını devre dışı bırak
 Set-AzDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Logic/workflows/andy0315logicapp -StorageAccountId /subscriptions/s1/resourceGroups/Default-Storage-WestUS/providers/Microsoft.Storage/storageAccounts/mystorageaccount -Enable $false
 ```
 
-Tanılama ayarı bekletme olmadan etkinleştirin
+Tanılama ayarını bekletme olmadan etkinleştir
 
 ```powershell
 Set-AzDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Logic/workflows/andy0315logicapp -StorageAccountId /subscriptions/s1/resourceGroups/Default-Storage-WestUS/providers/Microsoft.Storage/storageAccounts/mystorageaccount -Enable $true
 ```
 
-Tanılama ayarı saklama süresi etkinleştirin
+Tanılama ayarını bekletme ile etkinleştir
 
 ```powershell
 Set-AzDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Logic/workflows/andy0315logicapp -StorageAccountId /subscriptions/s1/resourceGroups/Default-Storage-WestUS/providers/Microsoft.Storage/storageAccounts/mystorageaccount -Enable $true -RetentionEnabled $true -RetentionInDays 90
 ```
 
-Tanılama ayarı olan belirli günlük kategorisi için bekletme etkinleştirin
+Belirli bir günlük kategorisi için bekletme ile tanılama ayarını etkinleştir
 
 ```powershell
 Set-AzDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Network/networkSecurityGroups/viruela1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/sakteststorage -Categories NetworkSecurityGroupEvent -Enable $true -RetentionEnabled $true -RetentionInDays 90
 ```
 
-Event Hubs için tanılama ayarını etkinleştirin
+Event Hubs için tanılama ayarını etkinleştir
 
 ```powershell
 Set-AzDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Network/networkSecurityGroups/viruela1 -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Enable $true
 ```
 
-Log Analytics için tanılama ayarını etkinleştirin
+Log Analytics için tanılama ayarını etkinleştir
 
 ```powershell
 Set-AzDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Network/networkSecurityGroups/viruela1 -WorkspaceId /subscriptions/s1/resourceGroups/insights-integration/providers/providers/microsoft.operationalinsights/workspaces/myWorkspace -Enabled $true
 
 ```
 
-Çalışma alanı kimliği özelliği Not *kaynak kimliği* çalışma alanının. Aşağıdaki komutu kullanarak Log Analytics çalışma alanınızın kaynak kimliği elde edebilirsiniz:
+Çalışma alanı kimliği özelliğinin, çalışma alanının *kaynak kimliğini* aldığını unutmayın. Aşağıdaki komutu kullanarak Log Analytics çalışma alanınızın kaynak KIMLIĞINI elde edebilirsiniz:
 
 ```powershell
 (Get-AzOperationalInsightsWorkspace).ResourceId

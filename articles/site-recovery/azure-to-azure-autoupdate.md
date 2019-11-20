@@ -1,72 +1,73 @@
 ---
-title: Azure'dan Azure'a olağanüstü durum kurtarma mobilite hizmetinin otomatik güncelleştirme | Microsoft Docs
-description: Azure Site Recovery kullanarak Azure sanal makineleri çoğaltırken Mobility hizmetini otomatik güncelleştirme genel bakış.
+title: Mobility hizmetinin Azure Site Recovery otomatik güncelleştirmesi
+description: Azure Site Recovery kullanarak Azure VM 'Leri çoğaltılırken Mobility hizmetinin otomatik güncelleştirmesine genel bakış.
 services: site-recovery
 author: rajani-janaki-ram
 manager: rochakm
 ms.service: site-recovery
 ms.topic: article
-ms.date: 05/20/2019
+ms.date: 10/24/2019
 ms.author: rajanaki
-ms.openlocfilehash: 1d36145b2a38c0f1106b4468eab226996e270ae1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9479ccce534f9c9d48a0aa08d4ea887bc4f30acb
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65922128"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74078855"
 ---
-# <a name="automatic-update-of-the-mobility-service-in-azure-to-azure-replication"></a>Azure'dan Azure'a çoğaltma Mobility hizmetini otomatik güncelleştirme
+# <a name="automatic-update-of-the-mobility-service-in-azure-to-azure-replication"></a>Azure 'dan Azure 'a çoğaltma için Mobility hizmetini otomatik güncelleştirme
 
-Azure Site Recovery aylık bir yayın temposudur sorunları giderin ve yenilerini ekleyebileceğiniz mevcut özellikleri geliştirmek için kullanır. Hizmetle güncel kalmalarını düzeltme dağıtım için her ay planlamanız gerekir. Her yükseltme ile ilişkili ek yükten kaçınmak için bunun yerine bileşen güncelleştirmeleri yönetmek Site Recovery izin verebilirsiniz.
+Azure Site Recovery, herhangi bir sorunu gidermek ve mevcut özellikleri geliştirmek ya da yenilerini eklemek için aylık bir sürüm temposunda kullanır. Hizmetle güncel kalmasını sağlamak için her ay yama dağıtımını planlamanız gerekir. Her yükseltmeyle ilişkili ek yükün oluşmasını önlemek için Site Recovery bileşen güncelleştirmelerini yönetmesine izin verebilirsiniz.
 
-Belirtildiği gibi [Azure'dan Azure'a olağanüstü durum kurtarma mimarisi](azure-to-azure-architecture.md), Mobility hizmeti, tüm Azure sanal makinelerinde için çoğaltma etkin olan, Vm'leri bir Azure bölgesinden diğerine çoğaltılırken (VM'ler) yüklenir. Otomatik güncelleştirmeleri kullandığınızda her yeni sürümü Mobility hizmeti uzantısı güncelleştirir.
+[Azure 'Dan Azure 'a olağanüstü durum kurtarma mimarisi](azure-to-azure-architecture.md)bölümünde belirtildiği gibi Mobility hizmeti, çoğaltmanın etkinleştirildiği tüm Azure sanal makinelerine (VM) yüklenir ve VM 'Leri bir Azure bölgesinden diğerine çoğaltırken. Otomatik güncelleştirmeleri kullandığınızda, her yeni sürüm Mobility hizmeti uzantısını güncelleştirir.
  
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="how-automatic-updates-work"></a>Otomatik Güncelleştirmeler çalışma
+## <a name="how-automatic-updates-work"></a>Otomatik güncelleştirmeler nasıl çalışır?
 
-Güncelleştirmelerini yönetmek için Site Recovery kullandığınızda, genel bir runbook (Azure Hizmetleri tarafından kullanılan) kasa ile aynı abonelikte oluşturulan bir Otomasyon hesabı aracılığıyla dağıtır. Her bir kasa bir Otomasyon hesabı kullanır. Runbook her VM için etkin otomatik güncelleştirmeleri bir kasa içinde olup olmadığını denetler ve daha yeni bir sürüm varsa, Mobility hizmeti uzantısı yükseltir.
+Güncelleştirmeleri yönetmek için Site Recovery kullandığınızda, kasa ile aynı abonelikte oluşturulan bir Otomasyon hesabı aracılığıyla küresel bir runbook (Azure hizmetleri tarafından kullanılır) dağıtır. Her kasa bir Otomasyon hesabı kullanır. Runbook, etkin otomatik güncelleştirmeler için bir kasadaki her bir VM 'yi denetler ve daha yeni bir sürüm varsa Mobility hizmeti uzantısını yükseltir.
 
-Günlük olarak saat 12: 00'da çoğaltılan sanal makinenin coğrafi saat dilimindeki varsayılan runbook zamanlaması yinelenir. Otomasyon hesabı aracılığıyla runbook zamanlaması da değiştirebilirsiniz.
+Varsayılan runbook zamanlaması, çoğaltılan VM 'nin coğrafi bölge saat diliminde 12:00 ' de günlük olarak yinelenir. Ayrıca, Otomasyon hesabı aracılığıyla runbook zamanlamasını değiştirebilirsiniz.
 
 > [!NOTE]
-> Güncelleştirme paketi 35 ile başlayarak, güncelleştirmeleri için kullanılacak mevcut bir Otomasyon hesabı seçebilirsiniz. Bu güncelleştirmeden önce Site Recovery varsayılan olarak bu hesabı oluşturuldu. Bu seçenek, bir sanal makine için çoğaltmayı etkinleştirdiğinizde, kullanılabilir. Ayarı değiştirirseniz, aynı kasaya korunan tüm Azure Vm'leri için geçerli olur.
+> Güncelleştirme paketi 35 ' den başlayarak, güncelleştirmeler için kullanılacak mevcut bir Otomasyon hesabı seçebilirsiniz. Bu güncelleştirmeden önce, Site Recovery varsayılan olarak bu hesabı oluşturdunuz. Yalnızca bir sanal makine için çoğaltmayı etkinleştirdiğinizde bu seçeneği belirleyebilirsiniz. Bu, çoğaltılan bir VM için kullanılamaz. Seçtiğiniz ayar aynı kasada korunan tüm Azure VM 'Leri için geçerlidir.
  
-> Otomatik Güncelleştirmeler'i açarak değil, Azure sanal makineleriniz yeniden başlatılması veya devam eden çoğaltma etkilemez.
+> Otomatik güncelleştirmeleri açmak, Azure sanal makinelerinizin yeniden başlatılmasını gerektirmez veya devam eden çoğaltmayı etkiler.
 
-> Faturalama Otomasyon hesabında iş bir ay içinde kullanılan iş çalışma zamanı dakika sayısını temel alır. Varsayılan olarak, bir Otomasyon hesabı için ücretsiz birim olarak 500 dakika dahildir. İş yürütme için bir dakika her gün hakkında birkaç saniye sürer ve ücretsiz birimler ele alınmıştır.
+> Otomasyon hesabı 'nda iş faturalaması, bir ayda kullanılan iş çalışma zamanı dakikalarının sayısına bağlıdır. Varsayılan olarak, 500 dakika bir Otomasyon hesabı için serbest birimler olarak dahil edilir. İş yürütme, her gün yaklaşık bir dakika boyunca birkaç saniye sürer ve serbest birimler olarak ele alınmıştır.
 
 | Dahil edilen ücretsiz birimler (her ay) | Fiyat |
 |---|---|
-| Proje çalışma zamanı 500 dakika | ₹0.14 / dakika
+| İş çalışma zamanı 500 dakika | ₹ 0.14/dakika
 
 ## <a name="enable-automatic-updates"></a>Otomatik güncelleştirmeleri etkinleştir
 
-Site Recovery, aşağıdaki yollarla güncelleştirmeleri yönetmek izin verebilirsiniz.
+Site Recovery güncelleştirmeleri aşağıdaki yollarla yönetmesine izin verebilirsiniz.
 
-### <a name="manage-as-part-of-the-enable-replication-step"></a>Etkinleştirme çoğaltma adımının bir parçası yönetme
+### <a name="manage-as-part-of-the-enable-replication-step"></a>Çoğaltmayı etkinleştir adımının bir parçası olarak yönetin
 
-Başlangıç ya da bir sanal makine için çoğaltmayı etkinleştirdiğinizde [VM görünümünden](azure-to-azure-quickstart.md) veya [kurtarma Hizmetleri kasasından](azure-to-azure-how-to-enable-replication.md), Site Recovery, Site Recovery uzantı için güncelleştirmeleri yönetme veya yönetmek ya da izin verebilirsiniz el ile.
+VM veya [Kurtarma Hizmetleri kasasından](azure-to-azure-how-to-enable-replication.md) [başlayan bir](azure-to-azure-quickstart.md) VM için çoğaltmayı etkinleştirdiğinizde, Site Recovery Site Recovery uzantısı için güncelleştirmeleri yönetmesine veya el ile yönetmeye izin verebilirsiniz.
 
 ![Uzantı ayarları](./media/azure-to-azure-autoupdate/enable-rep.png)
 
-### <a name="toggle-the-extension-update-settings-inside-the-vault"></a>İki durumlu uzantısı kasa içinde ayarlarını güncelleştirme
+### <a name="toggle-the-extension-update-settings-inside-the-vault"></a>Kasa içindeki uzantı güncelleştirme ayarlarını değiştirin
 
-1. Kasa içinde Git **Yönet** > **Site Recovery altyapısı**.
-2. Altında **Azure sanal makineleri için** > **uzantı güncelleştirme ayarları**, açma **yönetmek için Site Recovery izin** Aç/Kapat. El ile yönetmek için kapatın. 
+1. Kasanın içinde > **Site Recovery altyapısını** **Yönet** ' e gidin.
+2. **Azure sanal makineler** > **uzantı güncelleştirme ayarları**' nın altında, geçişi **yönetmeye izin ver Site Recovery** açın. El ile yönetmek için devre dışı bırakın. 
 3. **Kaydet**’i seçin.
 
 ![Uzantı güncelleştirme ayarları](./media/azure-to-azure-autoupdate/vault-toggle.png)
 
 > [!Important]
-> Seçeneğini belirlediğinizde **yönetmek için Site Recovery izin**, ayarı karşılık gelen kasayı tüm vm'lere uygulanır.
+> **Yönetilecek Site Recovery Izin ver**' i seçtiğinizde, bu ayar ilgili kasadaki tüm sanal makinelere uygulanır.
 
 
 > [!Note]
-> Her iki seçenek, güncelleştirmeleri yönetmek için kullanılan Otomasyon hesabının bildirir. Bu özellik bir kasaya ilk kez kullanıyorsanız, varsayılan olarak yeni bir Otomasyon hesabı oluşturulur. Alternatif olarak, ayar özelleştirebilir ve mevcut bir Otomasyon hesabı seçin. Tüm sonraki etkinleştir çoğaltmalar aynı kasaya daha önce oluşturulmuş bir kullanın.
+> Her iki seçenek de güncelleştirmeleri yönetmek için kullanılan Otomasyon hesabını bilgilendirir. Bu özelliği bir kasada ilk kez kullanıyorsanız, varsayılan olarak yeni bir Otomasyon hesabı oluşturulur. Alternatif olarak, ayarı özelleştirebilir ve var olan bir Otomasyon hesabı seçebilirsiniz. Aynı kasadaki tüm sonraki etkin çoğaltmalar, daha önce oluşturulmuş olanı kullanır. Şu anda açılan listede yalnızca kasada aynı kaynak grubundaki Otomasyon hesapları listelenir.  
 
-Bir özel Otomasyon hesabı için aşağıdaki betiği kullanın:
+> [!IMPORTANT]
+> Aşağıdaki betiğin özel bir Otomasyon hesabı Için bir Otomasyon hesabı bağlamında çalıştırılması gerekir, aşağıdaki betiği kullanın:
 
 ```azurepowershell
 param(
@@ -505,44 +506,44 @@ Write-Tracing -Level Succeeded -Message ("Modify cloud pairing completed.") -Dis
 
 ### <a name="manage-updates-manually"></a>Güncelleştirmeleri el ile yönetin
 
-1. Sanal makinelerinizde yüklü olan Mobility hizmetinin yeni güncelleştirmeler varsa, aşağıdaki bildirim görürsünüz: "Yeni Site recovery çoğaltma aracısı güncelleştirmesi kullanılabilir. Yüklemek için tıklayın"
+1. Sanal makinelerinize yüklü Mobility hizmeti için yeni güncelleştirmeler varsa, şu bildirimi görürsünüz: "Yeni Site Recovery çoğaltma Aracısı güncelleştirmesi var. Yüklemek için tıklayın "
 
-     ![Çoğaltılan öğeler penceresi](./media/vmware-azure-install-mobility-service/replicated-item-notif.png)
-2. Sanal makine seçimi sayfasını açmak için bildirimi seçin.
-3. Yükseltin ve ardından istediğiniz Vm'leri seçin **Tamam**. Seçilen her VM için güncelleştirme Mobility hizmetini başlar.
+     ![Çoğaltılan Öğeler penceresi](./media/vmware-azure-install-mobility-service/replicated-item-notif.png)
+2. VM seçim sayfasını açmak için bildirimi seçin.
+3. Yükseltmek istediğiniz VM 'Leri seçin ve ardından **Tamam**' ı seçin. Mobility hizmetini Güncelleştir seçili her VM için başlatılır.
 
      ![Çoğaltılan öğeler VM listesi](./media/vmware-azure-install-mobility-service/update-okpng.png)
 
 
-## <a name="common-issues-and-troubleshooting"></a>Sık karşılaşılan sorunlar ve sorun giderme
+## <a name="common-issues-and-troubleshooting"></a>Yaygın sorunlar ve sorun giderme
 
-Otomatik Güncelleştirmeler ile'ilgili bir sorun varsa, altında bir hata bildirimi görürsünüz **yapılandırma sorunlarını** kasa panosunda.
+Otomatik güncelleştirmelerle ilgili bir sorun varsa, kasa panosundaki **yapılandırma sorunları** altında bir hata bildirimi görürsünüz.
 
-Otomatik Güncelleştirmeler etkinleştirilemedi, aşağıdaki yaygın hatalar ve önerilen eylemler bakın:
+Otomatik güncelleştirmeleri etkinleştiremediğimiz takdirde aşağıdaki yaygın hatalara ve önerilen eylemlere bakın:
 
-- **Hata**: Bir Azure farklı çalıştır hesabı (hizmet sorumlusu) oluşturma ve hizmet sorumlusu için katkıda bulunan rolü verme izniniz yok.
+- **Hata**: Azure farklı çalıştır hesabı (hizmet sorumlusu) oluşturma ve hizmet sorumlusuna katkıda bulunan rolü verme izinleriniz yok.
 
-   **Önerilen eylem**: Oturum açma hesabını katkıda bulunan olarak atandığından emin olun ve yeniden deneyin. Gerekli izinler bölümünde başvurmak [Azure AD'yi kaynaklara erişebilen uygulaması ve hizmet sorumlusu oluşturmak için portalı kullanma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions) izinleri atama hakkında daha fazla bilgi için.
+   **Önerilen eylem**: oturum açan hesabın katkı olarak atandığından emin olun ve yeniden deneyin. İzinleri atama hakkında daha fazla bilgi için [kaynaklara erişebilen bir Azure AD uygulaması ve hizmet sorumlusu oluşturmak için portalı kullanma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions) konusundaki gerekli izinler bölümüne bakın.
  
-   Otomatik Güncelleştirmeler etkinleştirdikten sonra çoğu sorunları kendiniz düzeltmek istiyorsanız seçin **onarım**. Onarma düğmesi kullanılamıyorsa, uzantı güncelleştirme ayarlar bölmesinde görüntülenen hata iletisini bakın.
+   Otomatik güncelleştirmeleri etkinleştirdikten sonra birçok sorunu gidermek için, **Onar**' ı seçin. Onar düğmesi kullanılamıyorsa, uzantı güncelleştirme ayarları bölmesinde hata iletisine bakın.
 
-   ![Site kurtarma hizmetini onarma düğmesi uzantısını güncelleştirme ayarları](./media/azure-to-azure-autoupdate/repair.png)
+   ![Uzantı güncelleştirme ayarlarındaki Site Recovery hizmeti onarma düğmesi](./media/azure-to-azure-autoupdate/repair.png)
 
-- **Hata**: Farklı Çalıştır hesabının kurtarma Hizmetleri kaynağına erişim izni yok.
+- **Hata**: farklı çalıştır hesabının kurtarma hizmetleri kaynağına erişim izni yok.
 
-    **Önerilen eylem**: Silin ve ardından [farklı çalıştır hesabını yeniden oluşturma](https://docs.microsoft.com/azure/automation/automation-create-runas-account). Veya Otomasyon farklı çalıştır hesabı Azure Active Directory uygulamasının kurtarma Hizmetleri kaynağına erişimi olduğundan emin olun.
+    **Önerilen eylem**: [Farklı Çalıştır hesabını silin ve yeniden oluşturun](https://docs.microsoft.com/azure/automation/automation-create-runas-account). Ya da Otomasyon farklı çalıştır hesabının Azure Active Directory uygulamasının kurtarma hizmetleri kaynağına erişimi olduğundan emin olun.
 
-- **Hata**: Farklı Çalıştır hesabı bulunamadı. Ya da bunlardan biri silinmiş veya oluşturulmamış: Azure Active Directory uygulaması, hizmet sorumlusu, rol, Otomasyon sertifikası varlığı, Otomasyon bağlantısı varlığı; ya da parmak izi sertifika ve bağlantı arasındaki aynı değil. 
+- **Hata**: Run as hesabı bulunamadı. Bunlardan biri silinmiş veya oluşturulmamış-Azure Active Directory uygulama, hizmet sorumlusu, rol, Otomasyon sertifikası varlığı, Otomasyon bağlantı varlığı veya Parmak Izi sertifika ile bağlantı arasında aynı değil. 
 
-    **Önerilen eylem**: Silin ve ardından [farklı çalıştır hesabını yeniden oluşturma](https://docs.microsoft.com/azure/automation/automation-create-runas-account).
+    **Önerilen eylem**: [Farklı Çalıştır hesabını silin ve yeniden oluşturun](https://docs.microsoft.com/azure/automation/automation-create-runas-account).
 
--  **Hata**: Otomasyon hesabı tarafından kullanılan sertifika farklı çalıştır Azure dolmak üzere olduğu. 
+-  **Hata**: Otomasyon hesabı tarafından kullanılan Azure farklı çalıştır sertifikası sona ermek üzere. 
 
-    Farklı Çalıştır hesabı için oluşturulan otomatik olarak imzalanan sertifika, oluşturma tarihinden itibaren bir yıl süresi dolar. Sertifikayı süresi dolmadan önce herhangi bir zamanda yenileyebilirsiniz. E-posta bildirimleri için kaydolduysanız, sizin bir eylem gerektiğinde e-posta alırsınız. Bu hata, sona erme tarihi önce 2 ay gösterilir ve sertifikanın süresi doldu, önemli bir hata değişir. Sertifikanın süresi dolduktan sonra aynı yenileme kadar otomatik güncelleştirme işlevsel olmayacaktır.
+    Farklı Çalıştır hesabı için oluşturulan otomatik olarak imzalanan sertifika, oluşturma tarihinden itibaren bir yıl dolar. Sertifikayı süresi dolmadan önce herhangi bir zamanda yenileyebilirsiniz. E-posta bildirimlerine kaydolduysanız, sizin tarafınızdan bir eylem gerektiğinde e-postalar da alacaksınız. Bu hata, sona erme tarihinden iki ay önce gösterilir ve sertifikanın süresi dolmuşsa kritik bir hataya değişir. Sertifikanın süresi dolduktan sonra, aynı şekilde yenileene kadar otomatik güncelleştirme işlevsel olmayacaktır.
 
-   **Önerilen eylem**: 'Onar' ve 'Sertifikayı Yenile' sonra bu sorunu çözmek için tıklatın.
+   **Önerilen eylem**: Bu sorunu çözmek Için ' Onar ' ve ardından ' Sertifikayı Yenile ' seçeneğine tıklayın.
     
-   ![yenileme-cert](media/azure-to-azure-autoupdate/automation-account-renew-runas-certificate.PNG)
+   ![Yenile-CERT](media/azure-to-azure-autoupdate/automation-account-renew-runas-certificate.PNG)
 
 > [!NOTE]
-> Lütfen sertifikayı yenilemek sonra geçerli durumuyla güncelleştirilir, böylece bu sayfayı yenileyin.
+> Sertifikayı yeniledikten sonra, geçerli durumun güncelleştirilmesini sağlamak için lütfen sayfayı yenileyin.

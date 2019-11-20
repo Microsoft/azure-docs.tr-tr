@@ -1,6 +1,6 @@
 ---
-title: Media Services platformunda medya analizi | Microsoft Docs
-description: Medya analizi Kurumsal ölçekte, uyumluluk, güvenlik ve küresel erişim konuşma ve bilgisayar işleme Hizmetleri koleksiyonunu genel Önizlemesi'ne genel bakış
+title: Media Services platformunda Media Analytics | Microsoft Docs
+description: Media Analytics genel önizlemesine genel bakış, kurumsal ölçekte konuşma ve görüntü işleme hizmetleri koleksiyonu, uyumluluk, güvenlik ve küresel erişim
 services: media-services
 documentationcenter: ''
 author: juliako
@@ -12,67 +12,79 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 03/14/2019
-ms.author: milanga;juliako;johndeu
-ms.openlocfilehash: ceaf4d3db71d99c3e87157f9847312fdf4000026
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/13/2019
+ms.author: juliako
+ms.reviewer: milanga; johndeu
+ms.openlocfilehash: 66edbc872fe5f1d4320107aa21ed2792bdd4fecc
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65991799"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083881"
 ---
-# <a name="media-analytics-on-the-media-services-platform"></a>Media Services platformunda medya analizi 
+# <a name="media-analytics-on-the-media-services-platform"></a>Media Services platformunda Media Analytics 
 
+## <a name="retirement-plans"></a>Emeklilik planları
+
+> [!IMPORTANT]
+> Aşağıdaki eski medya işlemcileri 2020 ' de kullanımdan kaldırılacak, aşağıdaki tablodaki ayrıntılara bakın. 
+
+|Medya işlemci adı|Emeklilik tarihi|Ek notlar|
+|---|---|
+|[Azure Media Indexer 2](media-services-process-content-with-indexer2.md)| 1 Ocak 2020|Bu medya işlemcisi [Azure Media Services video Indexer](https://docs.microsoft.com/azure/media-services/video-indexer/)ile değiştirilmeyecektir. Daha fazla bilgi için, bkz. [Azure Media Indexer 2 ' den Azure Media Services video Indexer geçiş](migrate-indexer-v1-v2.md).|
+|[Azure Media Indexer](media-services-index-content.md)|1 Ekim 2020|Bu medya işlemcisi [Azure Media Services video Indexer](https://docs.microsoft.com/azure/media-services/video-indexer/)ile değiştirilmeyecektir. Daha fazla bilgi için bkz. [Azure Media Indexer 'den Azure Media Services 'ye geçirme video Indexer](migrate-indexer-v1-v2.md)
+ 
 ## <a name="overview"></a>Genel Bakış
-Kuruluşların çalışanlarına eğitmek, kendi müşterilerle etkileşim kurun ve iş işlevleri belge için tercih edilen ortam video kullanmaktadır. Bulut bilgi işlem depolamak, akış ve bu büyük medya dosyalarını erişmek için bir yol sağlar. Ancak, video içeriğinin bir şirketin kitaplığı büyüdükçe ihtiyaç duyduğu ınsights içeriğini ayıklanması, eşit oranda etkili bir yöntem. 
 
-Bu artan ihtiyacı karşılamak için Azure Media Services, Azure medya analizi sunar. Medya Analizi, kuruluş ve işletmelerin video dosyalarından eyleme dönüştürülebilir öngörüler türetmesini kolaylaştıran bir grup konuşma ve görme bileşenidir. Medya analizi, temel Media Services platform bileşenleri kullanılarak, medya işleme günde bir ölçekte işleyebilir.
+Daha fazla kuruluş, çalışanları eğitme, müşterilerine katılım ve iş işlevlerini belgelemek için tercih edilen ortam olarak videoyu kullanıyor. Bulut bilgi işlem, bu büyük medya dosyalarını depolamak, akışa almak ve bunlara erişmek için bir yol sağlar. Ancak, bir şirketin video içeriği kitaplığı büyüdükçe içerikten içgörüler elde etmek için eşit derecede etkili bir yöntem gerekir. 
 
-Medya Analizi ile geliştiriciler uygulamalarına Gelişmiş video işlevleri hızlı bir şekilde sunabiliyoruz. Kurumsal ortamlar tam ölçekli, uyumluluk, güvenlik ve küresel erişim büyük kuruluşlar tarafından gerekli olan sağlar.
+Bu büyüyen gereksinimi karşılamak için Azure Media Services Azure Media Analytics sunar. Medya Analizi, kuruluş ve işletmelerin video dosyalarından eyleme dönüştürülebilir öngörüler türetmesini kolaylaştıran bir grup konuşma ve görme bileşenidir. Çekirdek Media Services platform bileşenleri kullanılarak oluşturulan Media Analytics, medya işlemeyi günde bir ölçekte işleyebilir.
 
-Aşağıdaki diyagramda, medya analizi ve Media Services platformunda diğer başlıca parçaları gösterilmektedir. 
+Media Analytics, geliştiriciler gelişmiş video işlevlerini hızla uygulamalara getirebilir. Büyük kuruluşlar için gereken tam ölçek, uyumluluk, güvenlik ve küresel erişim sunan kurumsal ortamlara sahiptir.
+
+Aşağıdaki diyagramda Media Services platformunun Media Analytics ve diğer ana kısımları gösterilmektedir. 
 
 ![VoD iş akışı](./media/media-services-analytics-overview/media-services-analytics-overview01.png)
 
-Medya Analizi medya işlemcileri MP4 veya JSON dosyaları üretir. Medya işlemcisi bir MP4 dosyası oluşturur, dosyayı aşamalı olarak indirebilirsiniz. Medya işlemcisi bir JSON dosyası oluşturur, dosyayı Azure Blob depolamadan indirebilirsiniz. 
+Medya Analizi medya işlemcileri MP4 veya JSON dosyaları üretir. Medya işlemcisi bir MP4 dosyası üretirse dosyayı aşamalı olarak indirebilirsiniz. Bir medya işlemcisi bir JSON dosyası üretirse, dosyayı Azure Blob depolamadan indirebilirsiniz. 
 
-## <a name="media-analytics-services"></a>Medya analizi Hizmetleri
+## <a name="media-analytics-services"></a>Media Analytics hizmetleri
 
 ### <a name="indexer"></a>Dizinleyici
-Azure Media Indexer ile aranabilir içerik ve Kapalı Açıklamalı Altyazı parçaları oluşturma yapabilirsiniz. Azure Media Indexer 2 Önizleme önceki sürüme kıyasla daha hızlı dizinleme ve daha geniş dil desteği vardır. İngilizce, İspanyolca, Fransızca, Almanca, İtalyanca, Çince, Portekizce ve Arapça desteklenen diller şunlardır. Ayrıntılı bilgi ve örnekler için bkz. [Azure Media Indexer 2 ile video işleme](media-services-process-content-with-indexer2.md).
+Azure Media Indexer, içeriği aranabilir hale getirebilirsiniz ve kapalı açıklamalı altyazı parçaları oluşturabilirsiniz. Önceki sürümle karşılaştırıldığında, Azure Media Indexer 2 önizlemesinde daha hızlı Dizin oluşturma ve daha geniş dil desteği vardır. Desteklenen diller arasında Ingilizce, Ispanyolca, Fransızca, Almanca, Italyanca, Çince, Portekizce ve Arapça bulunur. Ayrıntılı bilgi ve örnekler için bkz. [Azure Media Indexer 2 Ile işlem videoları](media-services-process-content-with-indexer2.md).
 ### <a name="motion-detector"></a>Hareket Algılayıcısı
-Hareket algılayıcısı, sabit bir arka plan ile bir video hareket algılama için kullanabilirsiniz. Bu hatalı pozitif sonuç ekleme işlemlerini kaydedecek tarafından algılanan hareket olayları denetlemek mümkün kılar. Ayrıntılı bilgi ve örnekler için bkz. [hareket algılama için Azure medya analizi](media-services-motion-detection.md).
+Hareket algılayıcısının, sabit arka planların bulunduğu bir videodaki hareketi algılamak için kullanabilirsiniz. Bu, gözetim kameraları tarafından algılanan hareket olaylarında hatalı pozitif sonuçlar olup olmadığını denetlemeyi mümkün kılar. Ayrıntılı bilgi ve örnekler için bkz. [Azure Media Analytics Için hareket algılama](media-services-motion-detection.md).
 ### <a name="face-detector"></a>Yüz Algılayıcısı
-Yüz algılayıcısı kullanarak, kişilerin yüzlerini ve duygularına mutluluk, üzüntü ve şaşkınlık gibi algılayabilir. Bu, toplamak ve bir olay katılan kişilerin tepkiler çözümleme dahil olmak üzere daha sonra açıklanan birkaç faydalı sektör uygulamaları içerir. Ayrıntılı bilgi ve örnekler için bkz. [Azure medya analizi için yüz ve duygu algılama](media-services-face-and-emotion-detection.md).
+Yüz algılayıcısı 'nı kullanarak, insanlardan ve bu kişilerin yüzlerinin yanı sıra, mutluluklar ve sürpriz dahil olmak üzere kişilerin yüzlerini ve bunların özelliklerini algılayabilirsiniz Bu, daha sonra bir olaya katılan kişilerin yeniden eylemlerini toplama ve çözümleme dahil olmak üzere, daha sonra açıklanan birkaç faydalı sektör uygulamasına sahiptir. Ayrıntılı bilgi ve örnekler için bkz. [Azure Media Analytics Için yüz ve duygu algılama](media-services-face-and-emotion-detection.md).
 ### <a name="video-summarization"></a>Video özetleme
-Video özetleme otomatik olarak kaynak videodaki ilginç parçacıkları'i seçerek uzun videoların özetlerini oluşturmanıza yardımcı olabilir. Bu özellik, uzun bir videoda beklenmesi gerekenler hızlı bir bakış sağlamak istediğinizde yararlıdır. Ayrıntılı bilgi ve örnekler için bkz. [kullanımı Azure medya Video video özeti oluşturma küçük resimleri](media-services-video-summarization.md).
+Video özetleme, kaynak videodan ilgi çekici parçacıkları otomatik olarak seçerek uzun videoların özetlerini oluşturmanıza yardımcı olabilir. Bu özellik, uzun bir videoda beklendiklere ilişkin hızlı bir genel bakış sağlamak istediğinizde yararlı olur. Ayrıntılı bilgi ve örnekler için bkz. [video özeti oluşturmak için Azure Media video Thumbnails kullanma](media-services-video-summarization.md).
 ### <a name="optical-character-recognition"></a>Optik karakter tanıma
-Azure medya OCR (optik karakter tanıma) ile metin içerikli videoları düzenlenebilir, aranabilir dijital metne dönüştürebilirsiniz. Ardından, anlamlı meta verileri ayıklama medyanızın video sinyalinden otomatik hale getirebilirsiniz.
-### <a name="scalable-face-redaction"></a>Ölçeklenebilir yüz flulaştırma
-Azure Media Redactor, bulutta ölçeklenebilir yüz flulaştırma sunan medya analizi Medya işleyicisi ' dir. Yüz flulaştırma kullanarak seçilen kişilerin yüzlerini bulanıklaştıran için videonuzu değiştirebilirsiniz. Yüz flulaştırma hizmet haber medya veya kamu güvenliği söz konusu olduğunda kullanmak isteyebilirsiniz. El ile özgürlüğü saat birden fazla yüzeye içeren görüntülerini, birkaç dakika sürebilir, ancak bu hizmet ile yalnızca birkaç basit adımda yüz flulaştırma alır. Daha fazla bilgi için [özgürlüğü Azure medya Analizi ile yüzleri](media-services-face-redaction.md) makalesi.
+Azure Media OCR (optik karakter tanıma) ile video dosyalarındaki metin içeriğini düzenlenebilir ve aranabilir dijital metinlere dönüştürebilirsiniz. Daha sonra, medyanızın video sinyalinden anlamlı meta verilerin ayıklanmasını otomatik hale getirebilirsiniz.
+### <a name="scalable-face-redaction"></a>Ölçeklenebilir yüz redaksiyon
+Azure Media Redactor, bulutta ölçeklenebilir yüz redaksiyon sağlayan bir Media Analytics medya işlemcisidir. Yüz redaksiyon kullanarak, seçili kişilerin yüzlerini bulanıklaştırmak için videonuzu değiştirebilirsiniz. Haber ortamında yüz redaksiyon hizmetini veya genel güvenlik dahil edildiğinde kullanmak isteyebilirsiniz. Birden çok yüz içeren birkaç dakikalık bir çekimi, el ile redaksiyonda zaman alabilir, ancak bu hizmette, yüz redaksiyon yalnızca birkaç basit adım sürer. Daha fazla bilgi için, [Azure Media Analytics ile yüzeyleri redaksiyona](media-services-face-redaction.md) bakın.
 ### <a name="content-moderation"></a>İçerik Denetleme
-Azure Content Moderator, videolarınız için makine Yardımlı resim denetimi kullanmanıza olanak sağlar. Örneğin videolardaki yetişkinlere yönelik veya müstehcen içerikleri tespit edip belirlenen içeriklerin moderasyon ekibiniz tarafından gözden geçirilmesini isteyebilirsiniz. El ile videolar için istenmeyen içeriği yönetme bir zaman alabilir ve pahalı bir görevdir. Bu hizmet ve ilişkili İnceleme araçları ile verimli ve hesaplı bir şekilde en iyi sonuçlar için İnsan içinde--döngüsü özelliği olan makine Yardımlı resim denetimi birleştirin. Daha fazla bilgi için bkz. [videolarınızı Azure Content Moderator ile işleme](media-services-content-moderation.md) makalesi.
+Azure Content Moderator, videolarınız için makine destekli denetleme kullanmanıza olanak sağlar. Örneğin videolardaki yetişkinlere yönelik veya müstehcen içerikleri tespit edip belirlenen içeriklerin moderasyon ekibiniz tarafından gözden geçirilmesini isteyebilirsiniz. İstenmeyen içerik için videoları el ile moderalıme, zaman alan ve pahalı bir görevdir. Bu hizmet ve ilişkili gözden geçirme araçlarıyla, en iyi sonuçlar için verimli ve uygun maliyetli bir şekilde, makine destekli denetleme özelliğini her ne kadar verimli bir şekilde birleştirmelisiniz. Daha fazla bilgi edinmek için bkz. [Azure Content moderator videolarınızı işleme](media-services-content-moderation.md) makalesi.
 
 ## <a name="common-scenarios"></a>Genel senaryolar
-Medya analizi, kuruluşların yardımcı olur ve işletmelerin video ait yeni öngörüleri elde ve daha etkili bir şekilde video içeriğinin büyük birimleri yönetin. Çeşitli senaryolar şunlardır:
+Media Analytics, kuruluşların ve kuruluşların videodan yeni Öngörüler iletmelerine ve büyük hacimlerde video içeriğini daha verimli bir şekilde yönetmesine yardımcı olabilir. İşte birkaç senaryo:
 
-* **Çağrı merkezleri**. Gelişinden bile sosyal medya ile müşteri çağrı merkezi müşteri hizmetlerine işlemleri büyük bir yüzdesini yine de kolaylaştırır. Bu ses verilerinde daha yüksek müşteri memnuniyeti elde etmek için analiz müşteri bilgileri, büyük bir miktarını kodlanır. Media Indexer'ı kullanarak, kuruluşlar, metni ayıklayın ve arama dizinleri ve panolar oluşturun. Ardından bunlar yaygın şikayetlerinden, şikayetlerinin kaynakları ve diğer ilgili verileri zeka ayıklayabilirsiniz.
-* **Kullanıcı tarafından oluşturulan içerik denetleme**. Polis bölümlerine haber medya kuruluşlarının birçok kuruluşun kullanıcı tarafından oluşturulan medya video ve görüntü gibi kabul genel kullanıma yönelik portallar vardır. İçerik hacmi nedeniyle beklenmedik olaylar artırılabilir. Bu senaryolarda, site için içerik etkili el ile incelemeleri yürütmek zordur. Müşteriler, uygun olan içerik odaklanmak için içerik denetimi hizmette güvenebilirsiniz.
+* **Çağrı merkezleri**. Sosyal medya kasayına karşın müşteri çağrı merkezleri, müşteri hizmetleri işlemlerinin büyük bir yüzdesini de kolaylaştırmaya devam eder. Bu ses verilerinde kodlanan, daha yüksek müşteri memnuniyetini sağlamak üzere çözümlenebilecek büyük miktarda müşteri bilgisi olacaktır. Media Indexer kullanarak kuruluşlar metin ayıklayabilir ve arama dizinlerini ve panoları oluşturabilir. Daha sonra, yaygın şikayetler, şikayet kaynakları ve diğer ilgili veriler hakkında zeka bilgileri ayıklayabilir.
+* **Kullanıcı tarafından oluşturulan içerik denetleme**. Haber medyasından, polie departmanlarına kadar birçok kuruluşun video ve görüntü gibi kullanıcı tarafından oluşturulan medyayı kabul eden, herkese açık portalları vardır. İçerik hacmi, beklenmeyen olaylar nedeniyle ani olabilir. Bu senaryolarda, uygun şekilde, uygun bir şekilde içeriğe yönelik olarak el ile gözden geçirmeler yapmak zordur. Müşteriler, uygun içeriğe odaklanmak için içerik denetleme hizmetine güvenebilirler.
 
-## <a name="media-analytics-media-processors"></a>Medya analizi medya işlemcileri
-Bu bölümde, medya analizi medya işlemcileri listeler ve .NET veya REST medya işlemci (MP) nesnesini almak için nasıl kullanılacağını gösterir.
+## <a name="media-analytics-media-processors"></a>Media Analytics medya işlemcileri
+Bu bölümde, Media Analytics medya işlemcileri listelenir ve medya işlemcisi (MP) nesnesini almak için .NET veya REST 'in nasıl kullanılacağı gösterilir.
 
-### <a name="mp-names"></a>MP adı
-* Azure Media Indexer 2-Önizleme
+### <a name="mp-names"></a>MP adları
+* Azure Media Indexer 2 Preview
 * Azure Media Indexer
 * Azure Media Face Detector
 * Azure Media Motion Detector
 * Azure Media Video Thumbnails
 * Azure Media OCR
-* Azure medya Content Moderator
+* Azure Media Content Moderator
 
 ### <a name="net"></a>.NET
-Aşağıdaki işlev belirtilen MP adlarını alır ve bir MP nesnesi döndürür.
+Aşağıdaki işlev, belirtilen MP adlarından birini alır ve bir MP nesnesi döndürür.
 
     static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
     {
@@ -121,14 +133,14 @@ Yanıt:
        ]
     }
 
-## <a name="demos"></a>Tanıtımlar
-Bkz: [Azure medya analizi tanıtımları](https://azuremedialabs.azurewebsites.net/demos/Analytics.html).
+## <a name="demos"></a>Demolar
+Bkz. [Azure Media Analytics gösterileri](https://azuremedialabs.azurewebsites.net/demos/Analytics.html).
 
 ## <a name="provide-feedback"></a>Geri bildirimde bulunma
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
 
-## <a name="related-articles"></a>İlgili makaleler
-Bkz: [medya Hizmetleri analizi duyuru](https://azure.microsoft.com/blog/introducing-azure-media-analytics/).
+## <a name="related-articles"></a>İlgili makaleler:
+Bkz. [Media Services Analytics duyurusu](https://azure.microsoft.com/blog/introducing-azure-media-analytics/).
 
 <!-- Images -->
 

@@ -1,84 +1,101 @@
 ---
-title: ASP.NET Core uygulamaları - Azure App Service'ı yapılandırma | Microsoft Docs
-description: ASP.NET Core uygulamaları, Azure App Service'te çalışacak şekilde yapılandırma hakkında bilgi edinin
+title: ASP.NET Core uygulamalarını Yapılandırma-Azure App Service | Microsoft Docs
+description: ASP.NET Core uygulamalarını Azure App Service içinde çalışacak şekilde nasıl yapılandıracağınızı öğrenin
 services: app-service
 documentationcenter: ''
 author: cephalin
-manager: jpconnock
+manager: gwallace
 editor: ''
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 03/28/2019
+ms.date: 08/13/2019
 ms.author: cephalin
-ms.openlocfilehash: f2781e3cc2433f73ba7ff33e5c452e29de746adf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b05120148d3b82829c465effbcdc948da950aaf0
+ms.sourcegitcommit: 5b76581fa8b5eaebcb06d7604a40672e7b557348
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65956210"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68990254"
 ---
-# <a name="configure-a-linux-aspnet-core-app-for-azure-app-service"></a>Bir Linux yapılandırma ASP.NET Core uygulaması Azure App Service için
+# <a name="configure-a-linux-aspnet-core-app-for-azure-app-service"></a>Azure App Service için bir Linux ASP.NET Core uygulaması yapılandırma
 
-ASP.NET Core uygulamaları, derlenmiş ikili dosyaları dağıtılmalıdır. Visual Studio yayımlama aracını çözüm derlenir ve App Service dağıtım altyapısı, kod deposundaki ilk dağıtır ve ardından ikili dosyaları derler derlenmiş ikili dosyaları doğrudan dağıtır.
+ASP.NET Core uygulamalar derlenmiş ikili dosyalar olarak dağıtılmalıdır. Visual Studio yayımlama aracı çözümü oluşturur ve ardından derlenmiş ikilileri doğrudan dağıtır, ancak App Service dağıtım motoru önce kod deposunu dağıtır ve ardından ikilileri derler.
 
-Bu kılavuz, App Service'te yerleşik bir Linux kapsayıcı kullanan geliştiriciler temel kavramları ve ASP.NET Core için yönergeler sağlar. Azure App Service daha önce kullanmadıysanız izleyin [ASP.NET Core hızlı](quickstart-dotnetcore.md) ve [ASP.NET Core ile SQL veritabanı Öğreticisi](tutorial-dotnetcore-sqldb-app.md) ilk.
+Bu kılavuzda, App Service yerleşik bir Linux kapsayıcısını kullanan ASP.NET Core geliştiricilere yönelik temel kavramlar ve yönergeler sağlanmaktadır. Azure App Service hiç kullanmadıysanız, önce [ASP.NET Core hızlı başlangıç](quickstart-dotnetcore.md) ve [ASP.NET Core SQL veritabanı öğreticisiyle](tutorial-dotnetcore-sqldb-app.md) izleyin.
 
-## <a name="show-net-core-version"></a>.NET Core sürümünün Göster
+## <a name="show-net-core-version"></a>.NET Core sürümünü göster
 
-Geçerli .NET Core sürümünün göstermek için aşağıdaki komutu çalıştırın [Cloud Shell](https://shell.azure.com):
+Geçerli .NET Core sürümünü göstermek için [Cloud Shell](https://shell.azure.com)aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
 az webapp config show --resource-group <resource-group-name> --name <app-name> --query linuxFxVersion
 ```
 
-Tüm desteklenen .NET Core sürümleri göstermek için aşağıdaki komutu çalıştırın [Cloud Shell](https://shell.azure.com):
+Desteklenen tüm .NET Core sürümlerini göstermek için [Cloud Shell](https://shell.azure.com)aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
 az webapp list-runtimes --linux | grep DOTNETCORE
 ```
 
-## <a name="set-net-core-version"></a>.NET Core sürümü Ayarla
+## <a name="set-net-core-version"></a>.NET Core sürümünü ayarla
 
-Aşağıdaki komutu çalıştırın [Cloud Shell](https://shell.azure.com) 2.1 için .NET Core sürümünüzü ayarlamak için:
+.NET Core sürümünü 2,1 olarak ayarlamak için [Cloud Shell](https://shell.azure.com) aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
 az webapp config set --name <app-name> --resource-group <resource-group-name> --linux-fx-version "DOTNETCORE|2.1"
 ```
 
-## <a name="access-environment-variables"></a>Ortam değişkenlerine erişme
+## <a name="access-environment-variables"></a>Ortam değişkenlerine erişin
 
-Uygulama hizmetinde [uygulama ayarlarını belirlemek](../configure-common.md?toc=%2fazure%2fapp-service%2fcontainers%2ftoc.json#configure-app-settings) , uygulama kodunuz dışında. Ardından, standart ASP.NET deseni kullanarak erişebilirsiniz:
+App Service, uygulama ayarlarınızı uygulama kodunuzun dışında [ayarlayabilirsiniz](../configure-common.md?toc=%2fazure%2fapp-service%2fcontainers%2ftoc.json#configure-app-settings) . Daha sonra, standart ASP.NET Core bağımlılığı ekleme modelini kullanarak herhangi bir sınıfta bunlara erişebilirsiniz:
 
 ```csharp
 include Microsoft.Extensions.Configuration;
-// retrieve App Service app setting
-System.Configuration.ConfigurationManager.AppSettings["MySetting"]
-// retrieve App Service connection string
-Configuration.GetConnectionString("MyDbConnection")
+
+namespace SomeNamespace 
+{
+    public class SomeClass
+    {
+        private IConfiguration _configuration;
+    
+        public SomeClass(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+    
+        public SomeMethod()
+        {
+            // retrieve App Service app setting
+            var myAppSetting = _configuration["MySetting"];
+            // retrieve App Service connection string
+            var myConnString = _configuration.GetConnectionString("MyDbConnection");
+        }
+    }
+}
 ```
 
-Aynı ada sahip App Service ve bir uygulama ayarı yapılandırırsanız *Web.config*, App Service değer Web.config değerine göre önceliklidir. Uygulamayı yerel olarak hata ayıklama Web.config değeri sağlar, ancak App Service değeri ürün üretim ayarlarla uygulamayı çalıştırma olanak tanır. Bağlantı dizeleri gibi çalışır. Bu şekilde kod deponuzu dışında uygulama gizli dizilerini korumak ve kodunuzu değiştirmeden uygun değerleri erişim.
+App Service ve *appSettings. JSON*' de aynı ada sahip bir uygulama ayarı yapılandırırsanız, örneğin, App Service değeri *appSettings. JSON* değerine göre önceliklidir. Yerel *appSettings. JSON* değeri, uygulamada yerel olarak hata ayıklamanıza olanak tanır, ancak App Service değeri, uygulamayı üretim ayarları ile birlikte çalıştırmanıza olanak sağlar. Bağlantı dizeleri aynı şekilde çalışır. Bu şekilde, uygulamanızın gizli dizilerini kod deponuzun dışında tutabilir ve kodunuzda değişiklik yapmadan uygun değerlere erişebilirsiniz.
 
-## <a name="get-detailed-exceptions-page"></a>Ayrıntılı özel durumlar sayfası
+## <a name="get-detailed-exceptions-page"></a>Ayrıntılı özel durumlar sayfası al
 
-ASP.NET uygulamanızı Visual Studio hata ayıklayıcıda bir özel durum oluşturur, tarayıcı ayrıntılı özel durum sayfasında görüntüler, ancak App Service'te bu sayfa tarafından genel değiştirilir **HTTP 500** hata veya **bir hata oluştu İsteğiniz işleniyor.** İleti. App Service'te ayrıntılı özel durum sayfasında görüntüleyin, ekleyin `ASPNETCORE_ENVIRONMENT` uygulama ayarı için aşağıdaki komutu çalıştırarak uygulamanızı <a target="_blank" href="https://shell.azure.com" >Cloud Shell</a>.
+ASP.NET uygulamanız Visual Studio hata ayıklayıcısında bir özel durum oluşturduğunda, tarayıcıda ayrıntılı bir özel durum sayfası görüntülenir, ancak bu sayfa App Service bir genel **HTTP 500** hatası ile değiştirilirken veya **isteğiniz işlenirken bir hata oluştu.** İleti. Ayrıntılı özel durum sayfasını App Service göstermek için, <a target="_blank" href="https://shell.azure.com" >Cloud Shell</a>aşağıdaki komutu `ASPNETCORE_ENVIRONMENT` çalıştırarak uygulama ayarını uygulamanıza ekleyin.
 
 ```azurecli-interactive
 az webapp config appsettings set --name <app-name> --resource-group <resource-group-name> --settings ASPNETCORE_ENVIRONMENT="Development"
 ```
 
-## <a name="detect-https-session"></a>HTTPS oturumu algılayın
+## <a name="detect-https-session"></a>HTTPS oturumunu Algıla
 
-App Service'te [SSL sonlandırma](https://wikipedia.org/wiki/TLS_termination_proxy) tüm HTTPS isteklerini, şifrelenmemiş HTTP istekleri olarak uygulamanızı ulaşmak için Ağ Yük Dengeleyiciler, olur. Uygulama mantığınız kullanıcı veya şifrelenir, istekleri bilmeniz gerekiyorsa iletilen üstbilgileri Ara yazılımında yapılandırma *Startup.cs*:
+App Service, [SSL sonlandırması](https://wikipedia.org/wiki/TLS_termination_proxy) ağ yükü dengeleyicilerde gerçekleşinceye kadar, tüm https istekleri UYGULAMANıZA şifrelenmemiş HTTP istekleri olarak ulaşacak. Uygulama mantığınızın kullanıcı isteklerinin şifrelenip şifrelenmediğini bilmeleri gerekiyorsa, Iletilen üstbilgiler ara yazılımını *Startup.cs*içinde yapılandırın:
 
-- Ara yazılımla yapılandırma [ForwardedHeadersOptions](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.forwardedheadersoptions) iletecek şekilde `X-Forwarded-For` ve `X-Forwarded-Proto` üst bilgilerinde `Startup.ConfigureServices`.
-- Özel IP adresi aralıkları ara yazılım, App Service yük dengeleyici güvenebilir bilinen ağa ekleyin.
-- Çağırma [UseForwardedHeaders](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.forwardedheadersextensions.useforwardedheaders) yönteminde `Startup.Configure` diğer middlewares çağırmadan önce.
+- İçindeki `X-Forwarded-For` veüst`X-Forwarded-Proto` bilgilerini iletmek için, yazılım yazılımını [forwardedheadersoptions ile](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.forwardedheadersoptions) yapılandırın`Startup.ConfigureServices`.
+- Bilinen ağlara özel IP adresi aralıkları ekleyin, böylece ara yazılım App Service yük dengeleyiciye güvenebilirler.
+- Diğer middlewares çağrılmadan önce içinde `Startup.Configure` [useforwardedheaders](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.forwardedheadersextensions.useforwardedheaders) yöntemini çağırın.
 
-Üç tüm öğeleri bir araya getirildiğinde, kodunuz aşağıdaki örnekteki gibi görünür:
+Üç öğeyi birlikte koymak, kodunuz aşağıdaki örneğe benzer şekilde görünür:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -107,24 +124,24 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 Daha fazla bilgi için [proxy sunucuları ile çalışma ve yük Dengeleyiciler için ASP.NET Core yapılandırma](https://docs.microsoft.com/aspnet/core/host-and-deploy/proxy-load-balancer).
 
-## <a name="deploy-multi-project-solutions"></a>Birden çok proje çözümü dağıtma
+## <a name="deploy-multi-project-solutions"></a>Çoklu proje çözümlerini dağıtma
 
-Dağıtım altyapısı ile bir ASP.NET depo dağıtırken bir *.csproj* proje kök dizininde, motorun dosya dağıtır. Bir ASP.NET deposuyla dağıtırken bir *.sln* ilk Web sitesini veya Web uygulama projesi App Service uygulaması bulduğu kök dizininde altyapısı dosyasını seçer. İstediğiniz projeyi seçin değil altyapısı için mümkündür.
+Dağıtım altyapısına kök dizinde bir *. csproj* dosyası ile bir ASP.net deposu dağıttığınızda, motor projeyi dağıtır. Kök dizinde *. sln* dosyası ile bir ASP.net deposu dağıttığınızda, altyapı, App Service uygulaması olarak bulduğu Ilk Web sitesini veya Web uygulaması projesini seçer. Altyapının istediğiniz projeyi seçmeme olasılığı vardır.
 
-Bir çoklu proje çözümü dağıtmak için App Service'te iki farklı şekilde kullanmak için projeyi belirtebilirsiniz:
+Çoklu projeli bir çözümü dağıtmak için, App Service ' de kullanmak üzere projeyi iki farklı şekilde belirtebilirsiniz:
 
-### <a name="using-deployment-file"></a>.Deployment dosyası kullanma
+### <a name="using-deployment-file"></a>. Deployment dosyasını kullanma
 
-Ekleme bir *.deployment* depo köküne dosya ve aşağıdaki kodu ekleyin:
+Depo köküne bir *. Deployment* dosyası ekleyin ve aşağıdaki kodu ekleyin:
 
 ```
 [config]
 project = <project-name>/<project-name>.csproj
 ```
 
-### <a name="using-app-settings"></a>Uygulama ayarlarını kullanarak
+### <a name="using-app-settings"></a>Uygulama ayarlarını kullanma
 
-İçinde <a target="_blank" href="https://shell.azure.com">Azure Cloud Shell</a>, aşağıdaki CLI komutunu çalıştırarak App Service uygulamanız için bir uygulama ayarı ekleyin. Değiştirin  *\<-adı >* ,  *\<kaynak grubu adı >* , ve  *\<proje adı >* uygun değerlerle .
+<a target="_blank" href="https://shell.azure.com">Azure Cloud Shell</a>, aşağıdaki CLI komutunu çalıştırarak App Service uygulamanıza bir uygulama ayarı ekleyin. *\<App-name >* ,  *\<Resource-Group-name >* ve  *\<proje-name >* uygun değerlerle değiştirin.
 
 ```azurecli-interactive
 az webapp config appsettings set --name <app-name> --resource-group <resource-group-name> --settings PROJECT="<project-name>/<project-name>.csproj"
@@ -134,7 +151,7 @@ az webapp config appsettings set --name <app-name> --resource-group <resource-gr
 
 [!INCLUDE [Access diagnostic logs](../../../includes/app-service-web-logs-access-no-h.md)]
 
-## <a name="open-ssh-session-in-browser"></a>Tarayıcıda SSH oturum aç
+## <a name="open-ssh-session-in-browser"></a>SSH oturumunu tarayıcıda aç
 
 [!INCLUDE [Open SSH session in browser](../../../includes/app-service-web-ssh-connect-builtin-no-h.md)]
 

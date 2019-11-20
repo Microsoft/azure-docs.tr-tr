@@ -1,6 +1,6 @@
 ---
-title: Yeniden etkinleştirme devre dışı Azure Öğrenci aboneliğinde | Microsoft Docs
-description: Neden, Öğrenciler için Azure aboneliği devre dışı açıklar ve bunu yeniden etkinleştirme.
+title: Devre dışı bırakılan Öğrenciler için Microsoft Azure aboneliğini yeniden etkinleştirme | Microsoft Docs
+description: Öğrenciler için Microsoft Azure aboneliğinizin neden devre dışı bırakıldığını ve nasıl yeniden etkinleştirileceğini açıklar.
 services: ''
 documentationcenter: ''
 author: amberbhargava
@@ -16,45 +16,45 @@ ms.date: 03/01/2018
 ms.author: banders
 ROBOTS: NOINDEX
 ms.openlocfilehash: 7d41e9b7774bf8840db9e729d3aa9371f5bac04f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
-ms.translationtype: MT
+ms.sourcegitcommit: 3e7646d60e0f3d68e4eff246b3c17711fb41eeda
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
+ms.lasthandoff: 09/11/2019
 ms.locfileid: "60615913"
 ---
-# <a name="why-is-my-azure-for-students-subscription-disabled-and-how-do-i-reactivate-it"></a>Neden Azure Öğrenci abonelik devre dışı olduğunu ve nasıl yeniden?
+# <a name="why-is-my-azure-for-students-subscription-disabled-and-how-do-i-reactivate-it"></a>Öğrenciler için Microsoft Azure aboneliğim neden devre dışı bırakıldı ve nasıl yeniden etkinleştirebilirim?
 
-Öğrenciler için Azure aboneliği, kredinizin tamamını kullandınız, kredinizin süresi doldu veya aboneliğinizi yanlışlıkla iptal için devre dışı. Hangi sorunu için geçerlidir ve aboneliğinizi yeniden nasıl elde edeceğinizi öğrenin bakın.
+Tüm kredinizi kullandığınız, kredinizin süresi dolduğu veya aboneliğinizi yanlışlıkla iptal ettiğiniz için Öğrenciler için Microsoft Azure aboneliğiniz devre dışı bırakılabilir. Sizin için hangi sorunun geçerli olduğunu ve aboneliği nasıl yeniden etkinleştirebileceğinizi öğrenin.
 
-## <a name="youve-used-all-of-your-credit"></a>Kredinizin tamamını kullandınız
+## <a name="youve-used-all-of-your-credit"></a>Tüm kredinizi kullandınız
 
-Öğrenciler için Azure hesabınızı, 100 ABD Doları kredi ve 12 ay boyunca Ücretsiz Hizmetler sınırlı bir miktar sunar. Ve ücretsiz hizmet miktarları aşan tüm kullanımlar, krediden çıkarılır. Kredinizi dolmadan sonra Azure hizmetlerinizi ve abonelik devre dışı bırakır. Azure hizmetlerini kullanmaya devam etmek için aboneliğinizi Kullandıkça Öde aboneliğine başvurarak yükseltmelisiniz [Azure Destek](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade). Yükseltmeden sonra aboneliğinizi, yine de Ücretsiz Hizmetler, kaydolma tarihten itibaren 12 ay boyunca erişimine sahiptir. Yalnızca Ücretsiz Hizmetler ve miktarların dışında kullanım için ücretlendirilirsiniz.
+Öğrenciler için Microsoft Azure hesabı size 12 ay boyunca 100 ABD doları kredi ve sınırlı sayıda ücretsiz hizmet sunar. Ücretsiz hizmetleri ve miktarları aşan tüm kullanımlar, kredinizden düşülür. Krediniz bittiğinde Azure hizmetlerinizi ve aboneliğinizi devre dışı bırakır. Azure hizmetlerini kullanmaya devam etmek için [Azure desteğine](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) başvurarak aboneliğinizi kullandıkça öde aboneliğine yükseltmeniz gerekir. Yükseltme sonrasında aboneliğinizin yine kayıt tarihini izleyen 12 ay boyunca ücretsiz hizmetlere erişimi olacaktır. Yalnızca ücretsiz hizmetleri ve miktarları aşan kullanım için ücretlendirilirsiniz.
 
-Kalan kredinizi denetleyebilirsiniz [Microsoft Azure Sponsorships portalına](https://www.microsoftazuresponsorships.com/balance)
+[Microsoft Azure Sponsorluğu portalından](https://www.microsoftazuresponsorships.com/balance) ne kadar krediniz kaldığını denetleyebilirsiniz
 
-1. Azure Öğrenci hesabı kimlik bilgilerini kullanarak oturum açın.
-2. Bakiye sayfanın kullanılan ve kalan kredi hakkında bilgi verir. Kredi grafiğin altına, kredi sona erme tarihi bulabilirsiniz.  
+1. Öğrenciler için Microsoft Azure hesabı kimlik bilgilerinizi kullanarak oturum açın.
+2. Bakiye sayfası, kullanılan ve kalan kredi hakkında bilgi verir. Kredi grafiğinin altında kredinizin son kullanma tarihini görebilirsiniz.  
    
-    ![Abonelik Öğrenciler için Azure kredi bilgileri gösteren ekran görüntüsü](./media/billing-azurestudents-subscription-disabled/azurestudents-credit-balance.png)
+    ![Öğrenciler için Microsoft Azure aboneliğine ilişkin kredi bilgilerini gösteren ekran görüntüsü](./media/billing-azurestudents-subscription-disabled/azurestudents-credit-balance.png)
 
-3. Azure kredinizi kullanan Hizmetleri kullanımını denetlemek için **kullanım** ardından sol gezinti bölmesinden, Öğrenciler için Azure aboneliği seçin.
+3. Azure kredinizi kullanan hizmetlerin kullanımını denetlemek için, soldaki gezinti bölmesinden **Kullanım**’ı seçin, ardından Öğrenciler için Microsoft Azure aboneliğinizi seçin.
 
-    ![Öğrenciler için Azure için kullanım bilgilerini gösteren ekran görüntüsü](./media/billing-azurestudents-subscription-disabled/azurestudents-credit-usage.png)
+    ![Öğrenciler için Microsoft Azure kredisinin kullanım bilgilerini gösteren ekran görüntüsü](./media/billing-azurestudents-subscription-disabled/azurestudents-credit-usage.png)
 
-Tablo şu sütunları içerir:
+Tablo aşağıdaki sütunları içerir:
 
-* **Hizmet adı:** Azure kredinizi tüketiyor hizmeti.
-* **Hizmet kaynağı:** Tüketilen hizmeti için ölçü birimi.
-* **Harcama:** Hizmette harcanan USD($) kredi tutarı.
+* **Hizmet Adı:** Azure kredinizi kullanan hizmet.
+* **Hizmet Kaynağı:** Kullanılmakta olan hizmet için ölçü birimi.
+* **Harcama:** Hizmette harcanan ABD Doları cinsinden kredi tutarı.
 
-## <a name="your-credit-has-expired"></a>Krediniz tükendi
+## <a name="your-credit-has-expired"></a>Kredinizin süresi doldu
 
-Öğrenciler için Azure, 12 ayın sonunda sona erer. Kredinizin süresi sona erdiğinde, Azure aboneliğiniz devre dışı bırakır. Azure hizmetlerini kullanmaya devam etmek için aboneliğinizi Kullandıkça Öde aboneliğine başvurarak yükseltmelisiniz [Azure Destek](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade). Yükseltmeden sonra kullanmakta olduğunuz tüm hizmetleri için Kullandıkça Öde tarifesine göre Azure'un ücretlendirdiği.
+Öğrenciler için Microsoft Azure kredinizin süresi 12 ay sonunda sona erer. Kredinizin süresi dolduktan sonra Azure, aboneliğinizi devre dışı bırakır. Azure hizmetlerini kullanmaya devam etmek için [Azure desteğine](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) başvurarak aboneliğinizi Kullandıkça Öde aboneliğine yükseltmeniz gerekir. Yükseltmeden sonra Azure, kullanmakta olduğunuz hizmetler için kullandıkça öde fiyatlarıyla sizi ücretlendirir.
 
-## <a name="youve-accidentally-canceled-your-subscription"></a>Aboneliğinizi yanlışlıkla iptal ettik
+## <a name="youve-accidentally-canceled-your-subscription"></a>Aboneliğinizi yanlışlıkla iptal ettiniz
 
-Öğrenciler için Azure aboneliği yanlışlıkla iptal ettik, yeniden iletişim kurarak etkinleştirebilirsiniz [Azure Destek](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade). Yeniden etkinleştirin. sonra kalan kredi ve 12 ay boyunca Ücretsiz Hizmetler kaydolma tarihinizden erişimini çözümlenmedi.
+Öğrenciler için Microsoft Azure aboneliğinizi yanlışlıkla iptal ettiyseniz, [Azure desteğine](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) başvurarak yeniden etkinleştirebilirsiniz. Yeniden etkinleştirdikten sonra, kayıt tarihinizden itibaren 12 ay boyunca kalan kredilere ve ücretsiz hizmetlere erişiminiz devam eder.
 
-## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun.
+## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bize ulaşın.
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://go.microsoft.com/fwlink/?linkid=2083458).
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).

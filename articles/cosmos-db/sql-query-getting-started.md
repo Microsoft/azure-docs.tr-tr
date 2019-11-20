@@ -1,33 +1,33 @@
 ---
-title: Azure Cosmos DB'de SQL sorguları kullanmaya başlama
-description: SQL sorgulara giriş
+title: Azure Cosmos DB 'de SQL sorguları ile çalışmaya başlama
+description: SQL sorgularına giriş
 author: timsander1
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 06/21/2019
 ms.author: tisande
-ms.openlocfilehash: 87b275806c06443e37e9e92c35a38b4cde378322
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: 8de5140d0146ccbb18f41867e1c716aa2f3897b7
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342697"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71001901"
 ---
-# <a name="getting-started-with-sql-queries"></a>SQL sorguları ile çalışmaya başlama
+# <a name="getting-started-with-sql-queries"></a>SQL sorgularıyla çalışmaya başlama
 
-Azure Cosmos DB SQL API hesabı, bir JSON sorgu dili yapılandırılmış sorgu dili (SQL) kullanarak sorgulama öğeleri destekler. Azure Cosmos DB Sorgu dilinin tasarım hedefleri vardır:
+Azure Cosmos DB SQL API hesapları, Yapılandırılmış Sorgu Dili (SQL) kullanan öğeleri JSON sorgu dili olarak sorgulamayı destekler. Azure Cosmos DB sorgu dilinin tasarım amaçları şunlardır:
 
-* Yeni bir sorgu dili inventing yerine en bilinen ve en popüler sorgu dillerinden biri, SQL destekler. SQL, JSON öğelerinin üzerine zengin sorgu için biçimsel bir programlama modeli sağlar.  
+* Yeni bir sorgu dili almak yerine, en tanıdık ve popüler sorgu dillerinden biri olan SQL 'i destekler. SQL, JSON öğeleri üzerinde zengin sorgular için resmi bir programlama modeli sağlar.  
 
-* JavaScript'in programlama modeli için sorgu dili temel olarak kullanın. JavaScript'in tür sistemi, ifade değerlendirmesi ve işlev çağrısını SQL API'sinin kökleri var. Projeksiyonlar ilişkisel, hiyerarşik gezinme JSON öğeleri arasında kendinden birleştirmeler, uzamsal sorgular ve gibi kullanıcı tanımlı işlevler (UDF'ler) çağrılmasını tamamen JavaScript'te yazılmış bu kökleri özellikler için doğal bir programlama modeli sağlar.
+* Sorgu dili için temel olarak JavaScript 'in programlama modelini kullanın. JavaScript 'in tür sistemi, ifade değerlendirmesi ve işlev çağırma SQL API 'sinin köklerdir. Bu kökler, ilişkisel projeksiyonlar, JSON öğelerinde hiyerarşik gezinti, kendinden birleşimler, uzamsal sorgular ve tamamen JavaScript 'te yazılmış Kullanıcı tanımlı işlevlerin (UDF 'ler) çağrılması gibi özellikler için doğal bir programlama modeli sağlar.
 
-## <a name="upload-sample-data"></a>Örnek verileri karşıya yükleme
+## <a name="upload-sample-data"></a>Örnek verileri karşıya yükle
 
-SQL API Cosmos DB hesabınızdaki adlı bir kapsayıcı oluşturma `Families`. İki basit JSON öğelerinin kapsayıcısında oluşturun. Bu veri kümesi kullanarak Azure Cosmos DB sorgu docs çoğu örnek sorgu çalıştırabilirsiniz.
+SQL API Cosmos DB hesabınızda adlı `Families`bir kapsayıcı oluşturun. Kapsayıcıda iki basit JSON öğesi oluşturun. Bu veri kümesini kullanarak Azure Cosmos DB sorgu docs ' de örnek sorguların çoğunu çalıştırabilirsiniz.
 
 ### <a name="create-json-items"></a>JSON öğeleri oluşturma
 
-Aşağıdaki kod, iki basit JSON öğeleri aileleri hakkında oluşturur. Andersen ve Wakefield ailesi için basit JSON öğelerinin üst, alt öğeleri ve bunların Evcil Hayvanlar, adresi ve kayıt bilgileri içerir. İlk öğenin dizeleri, sayı, Boole, diziler ve iç içe özellikler vardır.
+Aşağıdaki kod, aileler hakkında iki basit JSON öğesi oluşturur. Andersen ve Wakefield ailelerinin basit JSON öğeleri, ebeveynler, alt öğeler, adresler ve kayıt bilgilerini içerir. İlk öğede dizeler, sayılar, Boole değerleri, diziler ve iç içe geçmiş özellikler vardır.
 
 
 ```json
@@ -52,7 +52,7 @@ Aşağıdaki kod, iki basit JSON öğeleri aileleri hakkında oluşturur. Anders
 }
 ```
 
-İkinci öğe kullanan `givenName` ve `familyName` yerine `firstName` ve `lastName`.
+İkinci öğe `givenName` ve`firstName` `familyName` yerine`lastName`ve kullanır.
 
 ```json
 {
@@ -84,11 +84,11 @@ Aşağıdaki kod, iki basit JSON öğeleri aileleri hakkında oluşturur. Anders
 }
 ```
 
-### <a name="query-the-json-items"></a>JSON öğeleri sorgu
+### <a name="query-the-json-items"></a>JSON öğelerini sorgulama
 
-JSON verilerini Azure Cosmos DB SQL sorgu dili önemli yönlerini bazıları anlamak için bazı sorguları deneyin.
+Azure Cosmos DB SQL sorgu dilinin bazı önemli yönlerini anlamak için JSON verilerinde birkaç sorgu deneyin.
 
-Aşağıdaki sorgu öğeleri döndürür. burada `id` alan eşleşme `AndersenFamily`. Olduğundan bir `SELECT *` sorgu, sorgu çıktısı olan tam JSON öğesi. SELECT söz dizimi hakkında daha fazla bilgi için bkz. [SELECT deyimi](sql-query-select.md). 
+Aşağıdaki sorgu, `id` alanın eşleştiği `AndersenFamily`öğeleri döndürür. `SELECT *` Sorgu olduğundan, sorgunun çıktısı tamamlanmış JSON öğesidir. Sözdizimi Seç hakkında daha fazla bilgi için bkz. [select deyimleri](sql-query-select.md). 
 
 ```sql
     SELECT *
@@ -96,7 +96,7 @@ Aşağıdaki sorgu öğeleri döndürür. burada `id` alan eşleşme `AndersenFa
     WHERE f.id = "AndersenFamily"
 ```
 
-Sorgu sonuçlarını şunlardır: 
+Sorgu sonuçları şunlardır: 
 
 ```json
     [{
@@ -118,7 +118,7 @@ Sorgu sonuçlarını şunlardır:
     }]
 ```
 
-Aşağıdaki sorgu, farklı bir şekle JSON çıkışını yeniden biçimlendirir. Yeni bir JSON sorgu projeleri `Family` nesne iki seçilen alan ile `Name` ve `City`, Adres Şehir durumu aynı olduğunda. Bu durumda "NY, NY" eşleşir.
+Aşağıdaki sorgu JSON çıkışını farklı bir şekle yeniden biçimlendirir. Sorgu, seçili iki `Family` `Name` alana sahip yeni bir JSON nesnesi ve `City`adres şehri durum ile aynı olduğunda. "NY, NY" Bu durumda eşleşir.
 
 ```sql
     SELECT {"Name":f.id, "City":f.address.city} AS Family
@@ -126,7 +126,7 @@ Aşağıdaki sorgu, farklı bir şekle JSON çıkışını yeniden biçimlendiri
     WHERE f.address.city = f.address.state
 ```
 
-Sorgu sonuçlarını şunlardır:
+Sorgu sonuçları şunlardır:
 
 ```json
     [{
@@ -137,7 +137,7 @@ Sorgu sonuçlarını şunlardır:
     }]
 ```
 
-Aşağıdaki sorgu ailedeki verilen adlarını, çocukların döndürür, `id` eşleşen `WakefieldFamily`ve şehre göre sıralı.
+Aşağıdaki sorgu, aile içindeki alt öğelerin verilen tüm adlarını (şehre göre `id` sıralanmış `WakefieldFamily`olan) döndürür.
 
 ```sql
     SELECT c.givenName
@@ -147,7 +147,7 @@ Aşağıdaki sorgu ailedeki verilen adlarını, çocukların döndürür, `id` e
     ORDER BY f.address.city ASC
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -158,18 +158,18 @@ Sonuçlar şu şekildedir:
 
 ## <a name="remarks"></a>Açıklamalar
 
-Önceki örneklerde, Cosmos sorgu dili çeşitli yönlerini gösterir:  
+Yukarıdaki örneklerde Cosmos DB sorgu dilinin çeşitli yönleri gösterilmektedir:  
 
-* SQL API'si, JSON değerleri üzerinde çalışır olduğundan, satır ve sütun yerine ağaç şeklinde varlıklarla ilgilenir. Rastgele herhangi derinliği ağaç düğümleri gibi başvurabilirsiniz `Node1.Node2.Node3…..Nodem`iki parçalı başvurusunu benzer `<table>.<column>` ANSI SQL.
+* SQL API 'SI JSON değerleri üzerinde çalıştığından, satırlar ve sütunlar yerine Ağaç şekilli varlıklarla ilgilenir. Ağaç düğümlerine, ANSI SQL `Node1.Node2.Node3…..Nodem` `<table>.<column>` ' in iki parçalı başvurusuna benzer şekilde herhangi bir rastgele derinlikte başvurabilirsiniz.
 
-* Sorgu dili şemasız verilerle çalışır çünkü tür sistemi dinamik olarak bağlı olmalıdır. Farklı türlerde farklı öğeye aynı ifadesi üretebilir. Bir sorgunun sonucu, geçerli bir JSON değer, ancak bir sabit şemasına olmasını garanti yoktur.  
+* Sorgu dili şeless verilerle çalıştığından, tür sistemi dinamik olarak bağlanmalıdır. Farklı türlerde farklı öğeye aynı ifadesi üretebilir. Bir sorgunun sonucu geçerli bir JSON değeridir, ancak sabit bir şema olması garanti edilmez.  
 
-* Azure Cosmos DB, yalnızca Katı JSON öğelerini destekler. Tür sistemi ve ifadeleri yalnızca JSON türleri ile dağıtılacak kısıtlanır. Daha fazla bilgi için [JSON belirtimi](https://www.json.org/).  
+* Azure Cosmos DB, yalnızca Katı JSON öğelerini destekler. Tür sistemi ve ifadeleri yalnızca JSON türleriyle uğraşmak üzere kısıtlanmıştır. Daha fazla bilgi için bkz. [JSON belirtimi](https://www.json.org/).  
 
-* Bir Cosmos DB kapsayıcısında JSON öğelerinin şemasız bir koleksiyondur. Birincil anahtar ve yabancı anahtar ilişkileri tarafından değil, içinde ve kapsayıcı öğeleri arasında ilişkiler kapsamlarına göre örtük olarak yakalanır. Bu özellik, bu makalenin sonraki bölümlerinde ele alınan içi öğesi birleştirme için önemlidir.
+* Cosmos kapsayıcısı, JSON öğelerinin şema içermeyen bir koleksiyonudur. Kapsayıcı öğeleri içindeki ve içindeki ilişkiler, birincil anahtar ve yabancı anahtar ilişkilerine göre değil, kapsama göre örtük olarak yakalanır. Bu özellik, bu makalenin ilerleyen kısımlarında açıklanan öğe içi birleşimler için önemlidir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Cosmos DB'ye giriş](introduction.md)
-- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmosdb-dotnet)
+- [Azure Cosmos DB giriş](introduction.md)
+- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3)
 - [SELECT yan tümcesi](sql-query-select.md)

@@ -1,133 +1,93 @@
 ---
-title: Önceden oluşturulmuş sıralı varlık
-titleSuffix: Azure
-description: Bu makale, Language Understanding (LUIS) önceden oluşturulmuş sıralı varlık bilgileri içerir.
+title: Sıralı önceden oluşturulmuş varlık-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Bu makale Language Understanding (LUSıS) içindeki sıralı önceden oluşturulmuş varlık bilgilerini içerir.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 06/25/2019
+ms.topic: conceptual
+ms.date: 10/14/2019
 ms.author: diberry
-ms.openlocfilehash: 16529c8334ae9f2eed5715abb22dcbcdbebec7c4
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: b2a2d9e78a0b152da14bb737079cf0dfdef0dc05
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67485121"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73491245"
 ---
-# <a name="ordinal-prebuilt-entity-for-a-luis-app"></a>Bir LUIS uygulaması için önceden oluşturulmuş sıralı varlık
-Sıra numarası olduğu bir nesne kümesi içinde sayısal bir gösterimi: `first`, `second`, `third`. Bu varlık zaten eğitildi çünkü uygulama hedefleri için sıralı içeren örnek Konuşma ekleme gerekmez. Sıralı varlık içerisinde desteklendiği [çok kültür](luis-reference-prebuilt-entities.md). 
+# <a name="ordinal-prebuilt-entity-for-a-luis-app"></a>Bir LUSıS uygulaması için sıralı önceden oluşturulmuş varlık
+Sıra numarası, küme içindeki bir nesnenin sayısal bir gösterimidir: `first`, `second`, `third`. Bu varlık zaten eğitiltiğinden, uygulama hedefleri için sıra içeren örnek bir değer eklemeniz gerekmez. Sıralı varlık [birçok kültürde](luis-reference-prebuilt-entities.md)desteklenir. 
 
-## <a name="types-of-ordinal"></a>Sıra türü
-Sıra yönetilen [tanıyıcıları metin](https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-Numbers.yaml#L45) GitHub deposu
+## <a name="types-of-ordinal"></a>Sıra türleri
+Sıra, [Tanıyıcılar-metin](https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-Numbers.yaml#L45) GitHub deposundan yönetilir
 
-## <a name="resolution-for-prebuilt-ordinal-entity"></a>Önceden oluşturulmuş sıralı varlık için çözümleme
+## <a name="resolution-for-prebuilt-ordinal-entity"></a>Önceden oluşturulmuş sıralı varlık için çözüm
 
-### <a name="api-version-2x"></a>API sürüm 2.x
+Sorgu için aşağıdaki varlık nesneleri döndürülür:
 
-Aşağıdaki örnek, çözünürlüğünü gösterir **builtin.ordinal** varlık.
+`Order the second option`
+
+#### <a name="v3-responsetabv3"></a>[V3 yanıtı](#tab/V3)
+
+Aşağıdaki JSON, `verbose` parametresi `false`olarak ayarlanmıştır:
 
 ```json
-{
-  "query": "Order the second option",
-  "topScoringIntent": {
-    "intent": "OrderFood",
-    "score": 0.9993253
-  },
-  "intents": [
-    {
-      "intent": "OrderFood",
-      "score": 0.9993253
-    },
-    {
-      "intent": "None",
-      "score": 0.05046708
-    }
-  ],
-  "entities": [
-    {
-      "entity": "second",
-      "type": "builtin.ordinal",
-      "startIndex": 10,
-      "endIndex": 15,
-      "resolution": {
-        "value": "2"
-      }
-    }
-  ]
+"entities": {
+    "ordinal": [
+        2
+    ]
 }
 ```
-
-### <a name="preview-api-version-3x"></a>Önizleme API sürümü 3.x
-
-Aşağıdaki JSON ile olan `verbose` parametresini `false`:
+#### <a name="v3-verbose-responsetabv3-verbose"></a>[V3 ayrıntılı yanıt](#tab/V3-verbose)
+Aşağıdaki JSON, `verbose` parametresi `true`olarak ayarlanmıştır:
 
 ```json
-{
-    "query": "Order the second option",
-    "prediction": {
-        "normalizedQuery": "order the second option",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.7124502
-            }
-        },
-        "entities": {
-            "ordinal": [
-                {
-                    "offset": 2,
-                    "relativeTo": "start"
-                }
-            ]
-        }
-    }
-}
-```
-
-Aşağıdaki JSON ile olan `verbose` parametresini `true`:
-
-```json
-{
-    "query": "Order the second option",
-    "prediction": {
-        "normalizedQuery": "order the second option",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.7124502
-            }
-        },
-        "entities": {
-            "ordinal": [
-                {
-                    "offset": 2,
-                    "relativeTo": "start"
-                }
-            ],
-            "$instance": {
-                "ordinal": [
-                  {
-                    "type": "builtin.ordinal",
-                    "text": "second",
-                    "startIndex": 10,
-                    "length": 6,
-                    "modelTypeId": 2,
-                    "modelType": "Prebuilt Entity Extractor",
-                    "recognitionSources": [
-                        "model"
-                    ]
-                  }
+"entities": {
+    "ordinal": [
+        2
+    ],
+    "$instance": {
+        "ordinal": [
+            {
+                "type": "builtin.ordinal",
+                "text": "second",
+                "startIndex": 10,
+                "length": 6,
+                "modelTypeId": 2,
+                "modelType": "Prebuilt Entity Extractor",
+                "recognitionSources": [
+                    "model"
                 ]
             }
-        }
+        ]
     }
 }
 ```
+
+#### <a name="v2-responsetabv2"></a>[V2 yanıtı](#tab/V2)
+
+Aşağıdaki örnek, **yerleşik. Ordinal** varlığının çözünürlüğünü gösterir.
+
+```json
+"entities": [
+  {
+    "entity": "second",
+    "type": "builtin.ordinal",
+    "startIndex": 10,
+    "endIndex": 15,
+    "resolution": {
+      "value": "2"
+    }
+  }
+]
+```
+* * * 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hakkında bilgi edinin [OrdinalV2](luis-reference-prebuilt-ordinal-v2.md), [telefon numarası](luis-reference-prebuilt-phonenumber.md), ve [sıcaklık](luis-reference-prebuilt-temperature.md) varlıklar. 
+[V3 tahmin uç noktası](luis-migration-api-v3.md)hakkında daha fazla bilgi edinin.
+
+[OrdinalV2](luis-reference-prebuilt-ordinal-v2.md), [telefon numarası](luis-reference-prebuilt-phonenumber.md)ve [sıcaklık](luis-reference-prebuilt-temperature.md) varlıkları hakkında bilgi edinin. 

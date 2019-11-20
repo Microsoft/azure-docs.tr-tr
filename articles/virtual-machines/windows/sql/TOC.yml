@@ -2,7 +2,9 @@
   items:
     - name: SQL Server VM nedir?
       href: virtual-machines-windows-sql-server-iaas-overview.md
-    - name: Sürüm notları
+    - name: Hangi SQL seçeneğini belirlemeliyim?
+      href: ../../../sql-database/sql-database-paas-vs-sql-server-iaas.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fsql%2ftoc.json&bc=%2fazure%2fvirtual-machines%2fwindows%2fsql%2fbreadcrumb%2ftoc.json
+    - name: Belge değişiklikleri
       href: virtual-machines-windows-sql-server-iaas-release-notes.md
 - name: Hızlı Başlangıçlar
   items:
@@ -34,6 +36,8 @@
           href: virtual-machines-windows-sql-automated-backup-v2.md
     - name: Yönetim
       items:
+        - name: Ayrılmış konak
+          href: virtual-machines-windows-sql-dedicated-host.md
         - name: Azure portal ile
           href: virtual-machines-windows-sql-manage-portal.md
         - name: SQL 2008 ve R2 için genişletilmiş destek
@@ -58,16 +62,31 @@
           href: virtual-machines-windows-portal-sql-server-provision.md
         - name: Azure PowerShell kullanma
           href: virtual-machines-windows-ps-sql-create.md
-    - name: SQL VM için lisanslama modelini değiştirme
-      href: virtual-machines-windows-sql-ahb.md
+    - name: SQL VM RP ile kaydolma
+      displayName: 'resource provider, registration'
+      items:
+        - name: Tek VM
+          href: virtual-machines-windows-sql-register-with-resource-provider.md
+        - name: Birden fazla VM'yi toplu kaydetme
+          href: virtual-machines-windows-sql-bulk-register-with-resource-provider.md
+    - name: Yönetme
+      items:
+        - name: Lisanslama modeli
+          displayName: 'ahb, ahub, payg, change, modify, update'
+          href: virtual-machines-windows-sql-ahb.md
+        - name: Sürüm
+          displayName: 'change, modify, update'
+          href: virtual-machines-windows-sql-change-edition.md
+        - name: Yedekleme ve geri yükleme için Azure Depolama
+          href: virtual-machines-windows-use-storage-sql-server-backup-restore.md
     - name: Geçiş
       items:
-        - name: SQL Server veritabanını geçirme
+        - name: SQL Server veritabanından VM'ye
           href: virtual-machines-windows-migrate-sql.md
+        - name: Yeni bir bölgeye yönelik VM
+          href: virtual-machines-windows-sql-move-different-region.md
     - name: Yüksek Kullanılabilirliği Yapılandırma
       items:
-        - name: Yedekleme ve geri yükleme için Azure Depolama’yı Kullanma
-          href: virtual-machines-windows-use-storage-sql-server-backup-restore.md
         - name: AlwaysOn kullanılabilirlik grubu
           items:
             - name: Azure SQL VM CLI
@@ -90,8 +109,10 @@
                   href: virtual-machines-windows-portal-sql-ps-alwayson-int-listener.md
         - name: Yük Devretme Kümesi Örneği
           items:
-            - name: Yapılandırma
+            - name: Depolama Alanları Doğrudan ile
               href: virtual-machines-windows-portal-sql-create-failover-cluster.md
+            - name: Premium Dosya Paylaşımı ile
+              href: virtual-machines-windows-portal-sql-create-failover-cluster-premium-file-share.md
 - name: Başvuru
   items:
     - name: Azure PowerShell
@@ -110,8 +131,6 @@
       href: virtual-machines-windows-sql-server-iaas-faq.md
     - name: Fiyatlandırma
       href: virtual-machines-windows-sql-server-pricing-guidance.md
-    - name: PaaS mi yoksa IaaS mi?
-      href: ../../../sql-database/sql-database-paas-vs-sql-server-iaas.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fsql%2ftoc.json
     - name: SQL Server Veri Araçları (SSDT)
       href: 'https://docs.microsoft.com/sql/ssdt/download-sql-server-data-tools-ssdt'
     - name: SQL Server Management Studio (SSMS)

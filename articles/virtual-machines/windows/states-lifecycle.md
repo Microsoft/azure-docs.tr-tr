@@ -1,31 +1,30 @@
 ---
-title: Yaşam döngüsü ve azure'da Windows VM durumları | Microsoft Docs
-description: Bir Windows sanal makinenin Azure dahil olmak üzere çeşitli durumları bir VM açıklamalarında yaşam döngüsüne genel bakış herhangi bir zamanda olabilir.
+title: Azure 'da bir Windows sanal makinesinin yaşam döngüsü ve durumları
+description: Azure 'daki bir Windows VM 'nin yaşam döngüsüne genel bakış, bir VM 'nin herhangi bir zamanda içinde bulunabileceği çeşitli durumların açıklamalarını de içerebilir.
 services: virtual-machines-windows
 documentationcenter: ''
 author: shandilvarun
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 08/09/2018
 ms.author: vashan
-ms.openlocfilehash: 921da2808757255a2a39ae8e7b927dbfde2fc627
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f7823d0e34fb6a79e79e9feab8eea77785b3d0da
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60583574"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74068221"
 ---
-# <a name="virtual-machines-lifecycle-and-states"></a>Sanal makine yaşam döngüsü ve durumlar
+# <a name="virtual-machines-lifecycle-and-states"></a>Sanal makinelerin yaşam döngüsü ve durumları
 
 [!INCLUDE [virtual-machines-common-states-lifecycle](../../../includes/virtual-machines-common-states-lifecycle.md)]
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-VM'nizi izleme hakkında daha fazla bilgi için bkz: [Azure sanal makinelerini izlemek nasıl](monitor.md).
+VM 'nizi izleme hakkında daha fazla bilgi edinmek için bkz. [Azure 'da sanal makineleri izleme](monitor.md).

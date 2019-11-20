@@ -1,6 +1,6 @@
 ---
-title: B2B Kurumsal tümleştirme - Azure Logic Apps için XML doğrulama | Microsoft Docs
-description: XML şemaları için Azure Logic Apps Enterprise Integration Pack ile B2B çözümleri ile doğrula
+title: B2B kurumsal tümleştirme için XML 'yi doğrulama-Azure Logic Apps
+description: Enterprise Integration Pack ile Azure Logic Apps şemaları kullanarak XML doğrulama
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -8,53 +8,62 @@ author: divyaswarnkar
 ms.author: divswa
 ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
-ms.assetid: d700588f-2d8a-4c92-93eb-e1e6e250e760
-ms.date: 07/08/2016
-ms.openlocfilehash: 8db0dbadd944007ff953f9ea69695bf988ffebb7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/21/2019
+ms.openlocfilehash: 7813dcb375ff4a123b1314f8f9db453b1f0b187e
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60996351"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72680218"
 ---
-# <a name="validate-xml-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Enterprise Integration Pack ile Azure Logic apps'teki B2B Kurumsal tümleştirme için XML doğrulama
+# <a name="validate-xml-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Enterprise Integration Pack ile Azure Logic Apps B2B kurumsal tümleştirme için XML 'i doğrulama
 
-Genellikle B2B senaryolarda, bir anlaşma ortak veri işleme başlamadan önce kullanıcılar exchange ileti geçerli emin olmanız gerekir. Enterprise Integration Pack kullanımı XML doğrulama Bağlayıcısı'nı kullanarak belgeleri önceden tanımlanmış bir şemaya karşı doğrulayabilir.
+B2B senaryolarında genellikle, bir anlaşmada bulunan ticari iş ortaklarının, herhangi bir veri işleme başlamadan önce, değiş tokuş ettikleri iletilerin geçerli olduğundan emin olması gerekir. Enterprise Integration Pack ile kullanılabilen XML doğrulama eylemini kullanarak önceden tanımlanmış bir şemaya karşı belgeleri doğrulayabilirsiniz.
 
-## <a name="validate-a-document-with-the-xml-validation-connector"></a>XML doğrulaması Bağlayıcısı ile bir belgeyi doğrula
+## <a name="prerequisites"></a>Önkoşullar
 
-1. Bir mantıksal uygulama oluşturma ve [app tümleştirme hesabı'na bağlantı](../logic-apps/logic-apps-enterprise-integration-accounts.md "öğrenmek için mantıksal uygulama tümleştirme hesabı bağlamak") XML verileri doğrulamak için kullanmak istediğiniz şema sahiptir.
+* Azure aboneliği. Henüz bir aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-2. Ekleme bir **isteği - zaman bir HTTP isteği alındığında** mantıksal uygulamanızın tetikleyicisi.
+* XML doğrulama eylemini kullanmak istediğiniz boş veya mevcut bir mantıksal uygulama. Logic Apps 'e yeni başladıysanız, [Azure Logic Apps](../logic-apps/logic-apps-overview.md) ve [hızlı başlangıç: Ilk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)' yı gözden geçirin.
 
-    ![](./media/logic-apps-enterprise-integration-xml-validation/xml-1.png)
+* Azure aboneliğinizle ilişkili bir [tümleştirme hesabı](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md) , XML doğrulama eylemini kullanmayı planladığınız mantıksal uygulamayla BAĞLANTıLıDıR ve XML içeriğini doğrulamak için kullanmak istediğiniz şemayı içerir. Hem mantıksal uygulamanız hem de tümleştirme hesabınız aynı konumda veya Azure bölgesinde bulunmalıdır.
 
-3. Eklenecek **XML doğrulama** eylemi seçin **Eylem Ekle**.
+## <a name="add-xml-validation-action"></a>XML doğrulama eylemi Ekle
 
-4. Tüm Eylemler, istediğiniz bir filtre uygulamak için girin *xml* arama kutusuna. Seçin **XML doğrulama**.
+1. [Azure Portal](https://portal.azure.com)mantıksal uygulama tasarımcısında mantıksal uygulamanızı açın.
 
-    ![](./media/logic-apps-enterprise-integration-xml-validation/xml-2.png)
+1. Boş bir mantıksal uygulamanız varsa, mantıksal uygulama Tasarımcısı ' nda, arama kutusuna filtreniz olarak `HTTP request` girin ve **BIR http isteği alındığında** tetikleyiciyi seçin. Aksi halde, bir sonraki adımla devam edin.
 
-5. Doğrulamak istediğiniz XML içeriği belirtmek için seçin **içerik**.
+1. İş akışınızın son adımında **yeni adım**' ı seçin.
 
-    ![](./media/logic-apps-enterprise-integration-xml-validation/xml-1-5.png)
+   Varolan adımlar arasında bir eylem eklemek için işaretçinizi, artı işaretinin ( **+** ) görünmesi için bu adımları bağlayan oka taşıyın. Bu artı işaretini seçin ve ardından **Eylem Ekle**' yi seçin.
 
-6. Doğrulamak istediğiniz içerik gövde etiketini seçin.
+1. **Eylem seçin**altında, **yerleşik**' i seçin. Arama kutusuna filtreniz olarak `xml validation` girin. Eylemler listesinden **XML doğrulaması**' nı seçin.
 
-    ![](./media/logic-apps-enterprise-integration-xml-validation/xml-3.png)
+   !["XML doğrulaması" eylemini bul ve Seç](./media/logic-apps-enterprise-integration-xml-validation/select-xml-validation-action.png)
 
-7. Önceki doğrulamak için kullanmak istediğiniz şema belirtmek için *içeriği* giriş öğesini **şema adı**.
+1. Doğrulamak istediğiniz XML içeriğini belirtmek için, **içerik** kutusunun içine tıklayarak dinamik içerik listesinin görünmesini sağlayın.
 
-    ![](./media/logic-apps-enterprise-integration-xml-validation/xml-4.png)
+   ![Dinamik içerik listesini aç](./media/logic-apps-enterprise-integration-xml-validation/open-dynamic-content-list.png)
 
-8. Çalışmanızı kaydedin  
+   Dinamik içerik listesi, iş akışında yer alan önceki adımlardan çıkışları temsil eden özellik belirteçlerini gösterir. Listede beklenen bir özellik gösterilmiyorsa, **daha fazla**göster ' i seçebileceğiniz tetikleyiciyi veya eylem başlığını kontrol edin.
 
-    ![](./media/logic-apps-enterprise-integration-xml-validation/xml-5.png)
+1. Dinamik içerik listesinden, doğrulamak istediğiniz içeriğe sahip olan özelliği seçin.
 
-Şimdi, doğrulama Bağlayıcınızı ayarı ile gerçekleştirilir. Gerçek bir uygulamada, SalesForce gibi bir satır iş kolu (LOB) uygulaması doğrulanmış veri depolamak isteyebilirsiniz. Salesforce'a doğrulanmış çıkış göndermek için bir eylem ekleme.
+   Bu örnek, tetikleyiciden gelen **gövde** çıkışını seçer.
 
-Doğrulama işleminizi test etmek için HTTP uç noktaya bir istek olun.
+   ![Doğrulanacak içeriği seçin](./media/logic-apps-enterprise-integration-xml-validation/select-content-to-validate.png)
+
+1. Doğrulama için kullanmak istediğiniz şemayı belirtmek için, **şema adı** listesini açın ve bağlı tümleştirme hesabınıza eklediğiniz doğrulama şemasını seçin.
+
+   ![Doğrulama için kullanılacak şemayı seçin](./media/logic-apps-enterprise-integration-xml-validation/select-validation-schema.png)
+
+1. Mantıksal uygulamanızı kaydedin.
+
+   Artık doğrulama ayarınızı ayarlamayı tamamladınız. Gerçek bir dünya uygulamasında, doğrulanan verileri SalesForce gibi bir iş kolu (LOB) uygulamasında depolamak isteyebilirsiniz. Doğrulanan çıktıyı Salesforce 'a göndermek için bir eylem ekleyin.
+
+1. Doğrulama eyleminizi test etmek için, mantıksal uygulamanızın iş akışını tetiklemek üzere bir istek gönderebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Enterprise Integration Pack hakkında daha fazla bilgi](../logic-apps/logic-apps-enterprise-integration-overview.md "Enterprise Integration Pack hakkında bilgi edinin")   
 
+* [Enterprise Integration Pack](../logic-apps/logic-apps-enterprise-integration-overview.md) hakkında daha fazla bilgi edinin

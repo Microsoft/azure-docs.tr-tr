@@ -11,20 +11,20 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 17cea353df0337b062b89cd440f79f7869450f8d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9289bfe9e90186896a753e5853d81d2f06669917
+ms.sourcegitcommit: 07700392dd52071f31f0571ec847925e467d6795
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67113214"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70125190"
 ---
-# <a name="tutorial-use-risk-events-to-trigger-multi-factor-authentication-and-password-changes"></a>Öğretici: Tetikleyici çok faktörlü kimlik doğrulaması ve parola değişiklikleri için risk olayları kullanın
+# <a name="tutorial-use-risk-detections-to-trigger-multi-factor-authentication-and-password-changes"></a>Öğretici: Multi-Factor Authentication ve parola değişikliklerini tetiklemek için risk algılamalarını kullanma
 
 Bu öğreticide Azure AD Premium P2 ile sunulan ve bir izleme ve raporlama aracından fazlası olan Azure Active Directory (Azure AD) Kimlik Koruması özelliklerini etkinleştireceksiniz. Kuruluşunuzun kimliklerini korumak için riskli davranışlar karşısında otomatik olarak harekete geçen risk tabanlı ilkeler yapılandırabilirsiniz. Bu ilkeler erişimi otomatik olarak engelleyebilir veya parola değişikliği isteme ve Multi-Factor Authentication kullanılmasını zorlama gibi düzeltme işlemleri başlatabilir.
 
-Azure AD kimlik koruması ilkeleri var olan koşullu erişim ilkelerine ek olarak, ek bir koruma katmanı kullanılabilir. Kullanıcılarınız bu ilkelerin kullanılmasını gerektiren riskli davranışları tetiklemeyebilir ancak yönetici olarak onların koruma altında olduğunu bilirsiniz.
+Azure AD Kimlik Koruması İlkeleri, ek bir koruma katmanı olarak mevcut koşullu erişim ilkelerine ek olarak kullanılabilir. Kullanıcılarınız bu ilkelerin kullanılmasını gerektiren riskli davranışları tetiklemeyebilir ancak yönetici olarak onların koruma altında olduğunu bilirsiniz.
 
-Risk olayı tetikleyebilecek bazı durumlar şunlardır:
+Risk algılamayı tetikleyeetkileyebilecek bazı öğeler şunlardır:
 
 * Sızan kimlik bilgilerine sahip kullanıcılar
 * Anonim IP adreslerinden oturum açma işlemleri
@@ -52,7 +52,7 @@ Risk tabanlı ilkeleri etkinleştirmek oldukça kolay bir işlemdir. Aşağıdak
 
 ### <a name="enable-users-to-register-for-multi-factor-authentication"></a>Kullanıcıların Multi-Factor Authentication'a kaydolmasını sağlama
 
-Azure AD kimlik koruması, kullanıcılarınızın çok faktörlü kimlik doğrulamasına kayıtlı ve geçerli kayıt durumunu kolayca belirlemenize yardımcı olabilecek bir varsayılan ilke içerir. Bu ilkeyi etkinleştirdiğinizde kullanıcılarınızın Multi-Factor Authentication ile oturum açması gerekmez ancak ön kayıt yapmaları istenir.
+Azure AD Kimlik Koruması, kullanıcılarınızın Multi-Factor Authentication kaydolabilme ve geçerli kayıt durumunu kolayca belirlemesine yardımcı olabilecek bir varsayılan ilke içerir. Bu ilkeyi etkinleştirdiğinizde kullanıcılarınızın Multi-Factor Authentication ile oturum açması gerekmez ancak ön kayıt yapmaları istenir.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 1. **Tüm hizmetler**'e tıklayıp **Azure AD Kimlik Koruması**'na gidin.
@@ -61,7 +61,7 @@ Azure AD kimlik koruması, kullanıcılarınızın çok faktörlü kimlik doğru
    1. Bu ilkeyi ayarladığınızda tüm kullanıcılarınızın Multi-Factor Authentication kullanmaya hazırlanmak için gerekli yöntemleri kaydetmeleri gerekir.
 1. **Kaydet**’e tıklayın.
 
-   ![MFA için oturum açma işleminde kaydolmalarını iste](./media/tutorial-risk-based-sspr-mfa/risk-based-require-mfa-registration.png)
+   ![Kullanıcıların oturum açma sırasında MFA 'ya kaydolmesini gerektir](./media/tutorial-risk-based-sspr-mfa/risk-based-require-mfa-registration.png)
 
 ### <a name="enable-risk-based-password-changes"></a>Risk tabanlı parola değişikliğini etkinleştirme
 

@@ -1,44 +1,44 @@
 ---
-title: Gönder ve Git - Azure Event Hubs kullanarak olay alma | Microsoft Docs
-description: Bu makalede, Azure Event Hubs'dan olayları gönderen bir Go uygulaması oluşturmak için bir kılavuz sağlar.
+title: 'Hızlı başlangıç: go-Azure Event Hubs kullanarak olay gönderme ve alma'
+description: 'Hızlı başlangıç: Bu makale, Azure Event Hubs olayları gönderen bir go uygulaması oluşturmaya yönelik bir yol sağlar.'
 services: event-hubs
 author: ShubhaVijayasarathy
 manager: kamalb
 ms.service: event-hubs
 ms.workload: core
-ms.topic: article
+ms.topic: quickstart
 ms.custom: seodec18
-ms.date: 04/15/2019
+ms.date: 11/05/2019
 ms.author: shvija
-ms.openlocfilehash: 823ebc985c77785f8b48d12d5919dbbd1b2b1459
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e5f52d0ddbf9a66d974732d6d98ca8a5b09cc2d0
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60821683"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73720578"
 ---
-# <a name="send-events-to-or-receive-events-from-event-hubs-using-go"></a>Olayları gönderme veya Git kullanarak Event Hubs'dan olayları alma
+# <a name="quickstart-send-events-to-or-receive-events-from-event-hubs-using-go"></a>Hızlı başlangıç: go kullanarak Event Hubs olay gönderme veya olayları alma
 Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Olay Hub’larının ayrıntılı genel bakışı için bkz. [Olay Hub’larına genel bakış](event-hubs-about.md) ve [Olay Hub’ları özellikleri](event-hubs-features.md).
 
-Bu öğretici, olayları bir event hub'ından gönderemeyecek ya olaylara Git uygulamaları yazmak açıklar. 
+Bu öğreticide, Olay Hub 'ından olay göndermek veya olayları almak üzere go uygulamalarının nasıl yazılacağı açıklanır. 
 
 > [!NOTE]
 > Bu hızlı başlangıcı [GitHub](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/eventhubs)’dan örnek olarak indirebilir, `EventHubConnectionString` ve `EventHubName` dizelerini olay hub’ınızdaki değerlerle değiştirebilir ve çalıştırabilirsiniz. Alternatif olarak bu öğreticideki adımları izleyerek kendi çözümünüzü de oluşturabilirsiniz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğreticiyi tamamlamak için aşağıdaki önkoşulları karşılamanız gerekir:
 
-- Yerel olarak yüklü gidin. İzleyin [bu yönergeleri](https://golang.org/doc/install) gerekirse.
+- Yerel olarak yüklü gidin. Gerekirse [Bu yönergeleri](https://golang.org/doc/install) izleyin.
 - Etkin bir Azure hesabı. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap][] oluşturun.
-- **Bir Event Hubs ad alanı ve bir olay hub'ı oluşturma**. Kullanım [Azure portalında](https://portal.azure.com) Event Hubs türünde bir ad alanı oluşturma, ardından uygulamanızın olay hub'ı ile iletişim kurmak için gereken yönetim kimlik bilgilerini edinin. Bir ad alanı ve olay hub'ı oluşturmak için verilen yordamı izleyin [bu makalede](event-hubs-create.md).
+- **Event Hubs bir ad alanı ve bir olay hub 'ı oluşturun**. Event Hubs türünde bir ad alanı oluşturmak ve uygulamanızın Olay Hub 'ı ile iletişim kurması için gereken yönetim kimlik bilgilerini almak için [Azure Portal](https://portal.azure.com) kullanın. Bir ad alanı ve Olay Hub 'ı oluşturmak için [Bu makaledeki](event-hubs-create.md)yordamı izleyin.
 
 ## <a name="send-events"></a>Olayları gönderme
-Bu bölümde, olayları olay hub'ına göndermek için bir Go uygulaması oluşturma işlemini gösterir. 
+Bu bölümde, olayları bir olay hub 'ına göndermek için bir Go uygulamasının nasıl oluşturulacağı gösterilmektedir. 
 
-### <a name="install-go-package"></a>Go paketini yükle
+### <a name="install-go-package"></a>Go paketini yükler
 
-Go için Event Hubs ile paketi `go get` veya `dep`. Örneğin:
+`go get` veya `dep`ile Event Hubs için go paketini alın. Örneğin:
 
 ```bash
 go get -u github.com/Azure/azure-event-hubs-go
@@ -50,9 +50,9 @@ dep ensure -add github.com/Azure/azure-event-hubs-go
 dep ensure -add github.com/Azure/azure-amqp-common-go
 ```
 
-### <a name="import-packages-in-your-code-file"></a>Kod dosyanızın içinde paketleri içeri aktarma
+### <a name="import-packages-in-your-code-file"></a>Kod dosyanızdaki paketleri içeri aktarın
 
-Git paketleri içeri aktarmak için aşağıdaki kod örneği kullanın:
+Go paketlerini içeri aktarmak için aşağıdaki kod örneğini kullanın:
 
 ```go
 import (
@@ -63,7 +63,7 @@ import (
 
 ### <a name="create-service-principal"></a>Hizmet sorumlusu oluşturma
 
-Yönergeleri izleyerek yeni bir hizmet sorumlusu oluşturma [Azure, Azure CLI 2.0 ile hizmet sorumlusu oluşturma](/cli/azure/create-an-azure-service-principal-azure-cli). Sağlanan kimlik bilgilerini aşağıdaki adlara sahip ortamınızdaki kaydedin. Go için Azure SDK'sı hem de Event Hubs paketleri, bu değişken adlarını aramak için yapılandırılmış:
+Azure [clı 2,0 Ile Azure hizmet sorumlusu oluşturma](/cli/azure/create-an-azure-service-principal-azure-cli)bölümündeki yönergeleri izleyerek yeni bir hizmet sorumlusu oluşturun. Aşağıdaki adlarla, belirtilen kimlik bilgilerini ortamınıza kaydedin. Hem Go için Azure SDK hem de Event Hubs paketleri bu değişken adlarını aramak üzere önceden yapılandırılmıştır:
 
 ```bash
 export AZURE_CLIENT_ID=
@@ -72,7 +72,7 @@ export AZURE_TENANT_ID=
 export AZURE_SUBSCRIPTION_ID= 
 ```
 
-Şimdi bu kimlik bilgilerini kullanır, Event Hubs istemcisi için bir yetkilendirme sağlayıcısı oluşturun:
+Şimdi, Event Hubs istemciniz için bu kimlik bilgilerini kullanan bir yetkilendirme sağlayıcısı oluşturun:
 
 ```go
 tokenProvider, err := aad.NewJWTProvider(aad.JWTProviderWithEnvironmentVars())
@@ -83,7 +83,7 @@ if err != nil {
 
 ### <a name="create-event-hubs-client"></a>Event Hubs istemcisi oluşturma
 
-Aşağıdaki kod, Event Hubs istemcisi oluşturur:
+Aşağıdaki kod bir Event Hubs istemcisi oluşturur:
 
 ```go
 hub, err := eventhubs.NewHub("namespaceName", "hubName", tokenProvider)
@@ -96,7 +96,7 @@ if err != nil {
 
 ### <a name="write-code-to-send-messages"></a>İleti göndermek için kod yazma
 
-Aşağıdaki kod parçacığında, etkileşimli bir terminalden göndermek (1) için ya da programınızdan iletileri gönderme (2) için kullanın:
+Aşağıdaki kod parçacığında, bir terminalden etkileşimli olarak ileti göndermek için (1) veya (2) öğesini kullanarak ileti gönderebilirsiniz:
 
 ```go
 // 1. send messages at the terminal
@@ -113,9 +113,9 @@ ctx = context.Background()
 hub.Send(ctx, eventhubs.NewEventFromString("hello Azure!"))
 ```
 
-### <a name="extras"></a>Ek Özellikler
+### <a name="extras"></a>Özellikler
 
-Bölüm kimlikleri, olay hub'ında alın:
+Olay Hub 'ınızdaki bölümlerin kimliklerini alın:
 
 ```go
 info, err := hub.GetRuntimeInformation(ctx)
@@ -125,21 +125,21 @@ if err != nil {
 log.Printf("got partition IDs: %s\n", info.PartitionIDs)
 ```
 
-Olay hub'ına olayları göndermek için uygulamayı çalıştırın. 
+Olayları Olay Hub 'ına göndermek için uygulamayı çalıştırın. 
 
 Tebrikler! Bir olay hub'ına ileti gönderdiniz.
 
 ## <a name="receive-events"></a>Olayları alma
 
-### <a name="create-a-storage-account-and-container"></a>Bir depolama hesabı ve kapsayıcı oluşturma
+### <a name="create-a-storage-account-and-container"></a>Depolama hesabı ve kapsayıcı oluşturma
 
-Durum kiraları bölümleri ve kontrol noktaları gibi olay akışı paylaşılır kullanarak bir Azure depolama kapsayıcısı alıcılar arasında. Go SDK'sı ile bir depolama hesabı ve kapsayıcı oluşturabilirsiniz, ancak yönergeleri izleyerek bir tane de oluşturabilirsiniz [Azure depolama hesapları hakkında](../storage/common/storage-create-storage-account.md).
+Olay akışındaki bölüm ve denetim noktalarında kiralamalar gibi durum, Azure depolama kapsayıcısı kullanılarak alıcılar arasında paylaşılır. Go SDK ile bir depolama hesabı ve kapsayıcı oluşturabilirsiniz, ancak [Azure depolama hesapları hakkındaki](../storage/common/storage-create-storage-account.md)yönergeleri izleyerek de bir tane oluşturabilirsiniz.
 
-Yapıtları depolama ile Go SDK oluşturmak için örnekleri kullanılabilir [Git deposu örnekleri](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/storage) ve Bu öğretici için karşılık gelen örnek.
+Go SDK ile depolama yapıtları oluşturma örnekleri, [Go örnekleri](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/storage) deposunda ve Bu öğreticiye karşılık gelen örnekte bulunabilir.
 
-### <a name="go-packages"></a>Paketleri gidin
+### <a name="go-packages"></a>Go paketleri
 
-İletileri almak için Event hubs ile Git paketleri al `go get` veya `dep`:
+İletileri almak için `go get` veya `dep`Event Hubs için go paketlerini alın:
 
 ```bash
 go get -u github.com/Azure/azure-event-hubs-go/...
@@ -153,9 +153,9 @@ dep ensure -add github.com/Azure/azure-amqp-common-go
 dep ensure -add github.com/Azure/go-autorest
 ```
 
-### <a name="import-packages-in-your-code-file"></a>Kod dosyanızın içinde paketleri içeri aktarma
+### <a name="import-packages-in-your-code-file"></a>Kod dosyanızdaki paketleri içeri aktarın
 
-Git paketleri içeri aktarmak için aşağıdaki kod örneği kullanın:
+Go paketlerini içeri aktarmak için aşağıdaki kod örneğini kullanın:
 
 ```go
 import (
@@ -169,7 +169,7 @@ import (
 
 ### <a name="create-service-principal"></a>Hizmet sorumlusu oluşturma
 
-Yönergeleri izleyerek yeni bir hizmet sorumlusu oluşturma [Azure, Azure CLI 2.0 ile hizmet sorumlusu oluşturma](/cli/azure/create-an-azure-service-principal-azure-cli). Sağlanan kimlik bilgilerini aşağıdaki adlara sahip ortamınızdaki kaydedin: Hem Azure SDK'sı için Git ve Event Hubs paketini önceden yapılandırılmış bu değişken adları için aranacak.
+Azure [clı 2,0 Ile Azure hizmet sorumlusu oluşturma](/cli/azure/create-an-azure-service-principal-azure-cli)bölümündeki yönergeleri izleyerek yeni bir hizmet sorumlusu oluşturun. Aşağıdaki adlarla, belirtilen kimlik bilgilerini ortamınıza kaydedin: hem Go için Azure SDK hem de Event Hubs paketi bu değişken adlarını aramak üzere önceden yapılandırılmıştır.
 
 ```bash
 export AZURE_CLIENT_ID=
@@ -178,7 +178,7 @@ export AZURE_TENANT_ID=
 export AZURE_SUBSCRIPTION_ID= 
 ```
 
-Ardından, bu kimlik bilgilerini kullanır, Event Hubs istemcisi için bir yetkilendirme sağlayıcısı oluşturun:
+Daha sonra, Event Hubs istemciniz için bu kimlik bilgilerini kullanan bir yetkilendirme sağlayıcısı oluşturun:
 
 ```go
 tokenProvider, err := aad.NewJWTProvider(aad.JWTProviderWithEnvironmentVars())
@@ -187,9 +187,9 @@ if err != nil {
 }
 ```
 
-### <a name="get-metadata-struct"></a>Yapı meta verilerini al
+### <a name="get-metadata-struct"></a>Meta veri yapısını al
 
-Bir yapı ile Azure Go SDK'sı kullanarak Azure ortamınızda hakkındaki meta verileri alın. Sonraki işlemlerin bu yapı doğru Uç noktalara bulmak için kullanın.
+Azure go SDK 'sını kullanarak Azure ortamınız hakkında meta veriler içeren bir struct alın. Sonraki işlemler, doğru uç noktaları bulmak için bu yapıyı kullanır.
 
 ```go
 azureEnv, err := azure.EnvironmentFromName("AzurePublicCloud")
@@ -198,9 +198,9 @@ if err != nil {
 }
 ```
 
-### <a name="create-credential-helper"></a>Kimlik bilgisi Yardımcısını oluşturma 
+### <a name="create-credential-helper"></a>Kimlik bilgisi Yardımcısı oluştur 
 
-Depolama için bir paylaşılan erişim imzası (SAS) kimlik bilgisi oluşturmak için önceki Azure Active Directory (AAD) kimlik bilgilerini kullanan bir kimlik bilgisi Yardımcısını oluşturun. Son parametre olarak daha önce kullanılan aynı ortam değişkenlerini kullanmak için bu oluşturucu bildirir:
+Depolama için bir paylaşılan erişim Imzası (SAS) kimlik bilgisi oluşturmak üzere önceki Azure Active Directory (AAD) kimlik bilgilerini kullanan bir kimlik bilgisi Yardımcısı oluşturun. Son parametre, bu oluşturucuya daha önce kullanılan ortam değişkenlerini kullanmasını söyler:
 
 ```go
 cred, err := storageLeaser.NewAADSASCredential(
@@ -214,11 +214,11 @@ if err != nil {
 }
 ```
 
-### <a name="create-a-check-pointer-and-a-leaser"></a>Bir onay işaretçi ve bir leaser oluşturma 
+### <a name="create-a-check-pointer-and-a-leaser"></a>Bir denetim işaretçisi ve Leaser oluşturma 
 
-Oluşturma bir **leaser**, belirli bir alıcı bir bölüm kiralama sorumlu ve **işaretçi denetleyin**, diğer alıcılar başlayabilmesi için bir ileti akışı denetim noktaları yazmak için sorumlu doğru uzaklığı okunuyor.
+Belirli bir alıcıya bölüm kiralamadan sorumlu bir **Leaser**oluşturun ve diğer alıcıların doğru sapmayı okumaya başlayabilmesi için ileti akışı için denetim noktaları yazmaktan sorumlu bir **Denetim işaretçisi**oluşturun.
 
-Şu anda bir tek **StorageLeaserCheckpointer** olan kullanılabilir, aynı depolama kapsayıcısını hem kiraları ve kontrol noktaları yönetmek için kullanır. Depolama hesabı ve kapsayıcı adları yanı sıra **StorageLeaserCheckpointer** önceki adımı ve doğru şekilde kapsayıcısına erişmek için Azure ortamı struct oluşturulan kimlik bilgileri gerekiyor.
+Şu anda, hem kiralamaları hem de kontrol noktalarını yönetmek için aynı depolama kapsayıcısını kullanan tek bir **Storageleasercheckpointer** vardır. Depolama hesabı ve kapsayıcı adlarına ek olarak, **Storageleasercheckpointer** , önceki adımda oluşturulan kimlik bilgilerini ve kapsayıcıya doğru şekilde erişmek için Azure ortam yapısını gerektirir.
 
 ```go
 leaserCheckpointer, err := storageLeaser.NewStorageLeaserCheckpointer(
@@ -231,9 +231,9 @@ if err != nil {
 }
 ```
 
-### <a name="construct-event-processor-host"></a>Olay işleyicisi ana bilgisayarı oluşturun
+### <a name="construct-event-processor-host"></a>Olay Işlemcisi Konağı oluştur
 
-Artık bir EventProcessorHost şu şekilde oluşturmak için gerekli parça var. Aynı **StorageLeaserCheckpointer** daha önce açıklandığı gibi bir leaser ve onay işaretçi olarak kullanılır:
+Artık aşağıdaki gibi bir EventProcessorHost oluşturmak için gereken parçalara sahipsiniz. Aynı **Storageleasercheckpointer** , daha önce açıklandığı gibi hem Leaser hem de Check işaretçisi olarak kullanılır:
 
 ```go
 ctx := context.Background()
@@ -250,9 +250,9 @@ if err != nil {
 defer p.Close(context.Background())
 ```
 
-### <a name="create-handler"></a>İşleyici oluşturun 
+### <a name="create-handler"></a>İşleyici oluştur 
 
-Artık bir işleyici oluşturun ve Event Processor Host ile kaydedin. Ana bilgisayar başlatıldığında, bu ve diğer belirtilen işleyicileri gelen iletiler için geçerlidir:
+Şimdi bir işleyici oluşturun ve olay işleyicisi ana bilgisayarı ile kaydedin. Konak başlatıldığında, bu ve diğer belirtilen işleyicileri gelen iletilere uygular:
 
 ```go
 handler := func(ctx context.Context, event *eventhubs.Event) error {
@@ -269,9 +269,9 @@ if err != nil {
 
 ### <a name="write-code-to-receive-messages"></a>İleti almak için kod yazma
 
-Her şeyi, olay işlemcisi konağı ile başlayabilirsiniz `Start(context)` kalıcı olarak çalışan veya ile tutmak `StartNonBlocking(context)` yalnızca iletileri kullanılabilir olduğu sürece çalıştırılacak.
+Her şey ayarlandığında, kalıcı olarak çalışmasını önlemek için olay Işlemcisi konağını `Start(context)` başlatabilir veya yalnızca iletiler kullanılabildiği sürece bu `StartNonBlocking(context)` çalıştırabilirsiniz.
 
-Bu öğreticide başlar ve şu şekilde çalışır; bir örnek için GitHub örnek görmek `StartNonBlocking`:
+Bu öğretici aşağıdaki şekilde başlatılır ve çalışır; `StartNonBlocking`kullanarak bir örnek için GitHub örneğine bakın:
 
 ```go
 ctx := context.Background()
@@ -282,10 +282,10 @@ if err != nil {
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makaleleri okuyun:
+Aşağıdaki makaleleri okuyun:
 
 - [EventProcessorHost](event-hubs-event-processor-host.md)
-- [Özellikler ve Azure Event Hubs terminolojisinde](event-hubs-features.md)
+- [Azure Event Hubs'ın özellikleri ve terminolojisi](event-hubs-features.md)
 - [Event Hubs ile ilgili SSS](event-hubs-faq.md)
 
 

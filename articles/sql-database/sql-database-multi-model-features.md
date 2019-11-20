@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı çok model özellikleri | Microsoft Docs
-description: Azure SQL veritabanı, aynı veritabanında birden çok veri modelleri ile çalışmanıza olanak sağlar.
+title: Çok modelli özellikler
+description: Azure SQL veritabanı, aynı veritabanında birden çok veri modeli ile çalışmanıza olanak sağlar.
 services: sql-database
 ms.service: sql-database
 ms.subservice: development
@@ -10,121 +10,120 @@ ms.topic: conceptual
 author: jovanpop-msft
 ms.author: jovanpop
 ms.reviewer: ''
-manager: craigg
 ms.date: 12/17/2018
-ms.openlocfilehash: 84efdb0297a2dc69497baee5fb746fb51d02b1b7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2e8519fa8d96b7fe016b9da4ba84ce481a57d94e
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64939512"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73802824"
 ---
-# <a name="multi-model-capabilities-of-azure-sql-database"></a>Azure SQL veritabanı çok modelli özellikleri
+# <a name="multi-model-capabilities-of-azure-sql-database"></a>Azure SQL veritabanı 'nın çok modelli özellikleri
 
-Çok modelli veritabanları depolamak ve ilişkisel veri, grafikler, JSON/XML belgeleri, anahtar-değer çiftleri, vb. gibi birden çok veri biçimini temsil verilerle çalışmanıza olanak sağlar.
+Çok modelli veritabanları, ilişkisel veriler, grafikler, JSON/XML belgeleri, anahtar-değer çiftleri vb. gibi birden çok veri biçiminde temsil edilen verileri depolamanızı ve bunlarla çalışmanızı sağlar.
 
-## <a name="when-to-use-multi-model-capabilities"></a>Çok modelli özellikleri kullanmak ne zaman
+## <a name="when-to-use-multi-model-capabilities"></a>Çok modelli yetenekler ne zaman kullanılır?
 
-Azure SQL veritabanı, çeşitli genel amaçlı uygulamalar için en iyi durumda en iyi performans sağlayan ilişkisel modeli ile çalışmak üzere tasarlanmıştır. Ancak, Azure SQL veritabanı, ilişkisel veri için yalnızca sınırlı değildir. Azure SQL veritabanı, ilişkisel model tümleştirildiği ilişkisel olmayan biçimleri çeşitli kullanmanıza olanak sağlar.
-Azure SQL veritabanı çok modelli özellikleri aşağıdaki durumlarda kullanmayı düşünmeniz gerekir:
-- Bazı bilgiler varsa veya NoSQL modelleri ve sizin için daha iyi uyacak yapıları ayrı bir NoSQL veritabanı kullanmak istemiyorsanız.
-- Verilerinizi çoğunu ilişkisel modeli için uygundur ve bazı bölümlerini bir NoSQL verilerinizi modellemek gerekir.
-- Zengin Transact-SQL dili de sorgulanması ve çözümlenmesi ilişkisel ve NoSQL veri yararlanın ve çeşitli araçları ve SQL dil kullanan uygulamalar ile tümleştirmek istediğiniz.
-- Veritabanı özellikleri gibi uygulamak istediğiniz [bellek içi teknolojileri](sql-database-in-memory.md) , analiz performansını artırmak veya NoSQL veri strucutres işleme [işlemsel çoğaltma](sql-database-managed-instance-transactional-replication.md) veya [okunabilir çoğaltma](sql-database-read-scale-out.md) üzerinde başka bir yerde verilerinizi bir kopyasını oluşturun ve birincil veritabanından analitik bazı iş yüklerini boşaltma.
+Azure SQL veritabanı, çeşitli genel amaçlı uygulamalar için çoğu durumda en iyi performansı sağlayan ilişkisel modelle çalışacak şekilde tasarlanmıştır. Ancak, Azure SQL veritabanı yalnızca ilişkisel verilerle sınırlı değildir. Azure SQL veritabanı, ilişkisel modele sıkı bir şekilde tümleştirilmiş, ilişkisel olmayan çeşitli biçimleri kullanmanıza olanak sağlar.
+Aşağıdaki durumlarda Azure SQL veritabanı 'nın birden çok modelli yeteneklerini kullanmayı göz önünde bulundurmanız gerekir:
+- NoSQL modellerine daha iyi uyan bazı bilgi veya yapılar vardır ve ayrı NoSQL veritabanı kullanmak istemezsiniz.
+- Verilerinizin çoğunluğu ilişkisel model için uygundur ve NoSQL stilinde verilerinizin bazı parçalarını modelleyebilirsiniz.
+- Hem ilişkisel hem de NoSQL verilerini sorgulamak ve analiz etmek için zengin Transact-SQL dilinden yararlanmak ve bunu SQL dilini kullanan çeşitli araçlar ve uygulamalarla bütünleştirmek istiyorsunuz.
+- NoSQL Veri yapılarınızın analitik veya işlemesinin performansını artırmak üzere [bellek içi teknolojiler](sql-database-in-memory.md) gibi veritabanı özelliklerini uygulamak, verilerinizin kopyasını oluşturmak için [İşlemsel çoğaltma](sql-database-managed-instance-transactional-replication.md) veya [okunabilir çoğaltmalar](sql-database-read-scale-out.md) kullanın diğer bir deyişle, birincil veritabanından bazı analitik iş yüklerinin yükünü devretmek.
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure SQL, çok modelli aşağıdaki özellikleri sağlar:
-- [Grafik özellikleri](#graph-features) grafik ile Gelişmiş standart Transact-SQL sorguları kullanın ve verilerinizi temsil eden düğümler ve kenarlar kümesi olarak tanır `MATCH` grafik verilerini sorgulamak için işleci.
-- [JSON özellikleri](#json-features) , JSON belgelerini tablolarında yerleştirme, JSON belgeleri ve ilişkili verileri dönüştürme sağlar. JSON belgelerini ayrıştırma işlevleri ile Gelişmiş standart Transact-SQL dili kullanın ve olmayan Kümelenmiş dizinler, columnstore dizinleri veya bellek için iyileştirilmiş tablolar, sorgularınızı iyileştirmeniz için kullanın.
-- [Uzamsal Özellikler](#spatial-features) coğrafi ve geometrik verilerini depolamak, uzamsal dizinler kullanarak bunları dizin ve uzamsal sorgular kullanarak verileri almak sağlar.
-- [XML özelliklerini](#xml-features) depolamak ve veritabanınızdaki XML verileri dizin ve XML verileri ile çalışmak için yerel XQuery/XPath işlemlerini kullanmak olanak sağlar. Azure SQL veritabanı, XML verilerini işleme yerleşik XML sorgu altyapısı özelleştirilmiş.
-- [Anahtar-değer çiftleri](#key-value-pairs) anahtar-değer paris, iki sütunlu tabloları olarak yerel olarak modellenebilir olduğundan özel özellikler açıkça desteklenmez.
+Azure SQL aşağıdaki çok modelli özellikleri sağlar:
+- [Grafik özellikleri](#graph-features) , verilerinizi düğüm ve kenar kümesi olarak temsil etmeniz ve grafik verilerini sorgulamak için Graph `MATCH` işleciyle geliştirilmiş standart Transact-SQL sorguları kullanmanızı sağlar.
+- [JSON özellikleri](#json-features) , JSON belgelerini tablolara yerleştirmeniz, ILIŞKISEL verileri JSON belgelerine dönüştürebilmeniz ve tam tersi de sağlar. Sorguları iyileştirmek için JSON işlevleriyle geliştirilmiş standart Transact-SQL dilini kullanabilir ve kümelenmemiş dizinler, columnstore dizinleri ya da bellek için iyileştirilmiş tablolar kullanabilirsiniz.
+- [Uzamsal Özellikler](#spatial-features) , coğrafi ve geometrik verileri depolamanıza, uzamsal dizinleri kullanarak dizinlemenize ve uzamsal sorgular kullanarak verileri almanıza olanak sağlar.
+- XML [özellikleri](#xml-features) , veritabanınıza XML verilerini depolayıp DIZINLERINIZI ve XML verileriyle çalışmak Için yerel XQuery/XPath işlemlerini kullanmanızı sağlar. Azure SQL veritabanı, XML verilerini işleyen özelleştirilmiş yerleşik XML sorgu motoruna sahiptir.
+- Anahtar-değer çiftleri, iki sütunlu tablolar olarak yerel olarak modellendirildiğinden, [anahtar-değer çiftleri](#key-value-pairs) özel özellikler olarak açıkça desteklenmez.
 
   > [!Note]
-  > Veritabanında depolanan tüm verilere erişmek için aynı Transact-SQL sorgusuna JSON yolu ifadesini, XQuery/XPath ifadeleri, uzamsal işlevler ve grafik sorgu ifadeleri kullanabilirsiniz. Ayrıca, herhangi bir aracı veya Transact-SQL sorguları yürütebilir programlama dili de sorgu arabirimi çok modelli verilere erişmek için kullanabilirsiniz. Gibi çok modelli veritabanlarına kıyasla önemli bir fark budur [Azure Cosmos DB](/azure/cosmos-db/) farklı veri modelleri için özel bir API sağlar.
+  > Veritabanında depoladığınız tüm verilere erişmek için aynı Transact-SQL sorgusunda JSON yol ifadesini, XQuery/XPath ifadelerini, uzamsal işlevleri ve Graph-Query ifadelerini de kullanabilirsiniz. Ayrıca, Transact-SQL sorgularını yürüteerişebilen herhangi bir araç veya programlama dili, çok modelli verilere erişmek için bu sorgu arabirimini de kullanabilir. Bu, farklı veri modelleri için özelleştirilmiş API sağlayan [Azure Cosmos DB](/azure/cosmos-db/) gibi çok modelli veritabanlarıyla karşılaştırıldığında önemli farktır.
 
-Aşağıdaki bölümlerde, Azures SQL veritabanı çok modelli en önemli özellikleri hakkında bilgi edinebilirsiniz.
+Aşağıdaki bölümlerde, SQL veritabanı 'nın en önemli çok modelli özellikleri hakkında bilgi edinebilirsiniz.
 
 ## <a name="graph-features"></a>Grafik özellikleri
 
-Azure SQL veritabanı, veritabanında çok-çok ilişkileri modellemek için grafik veritabanı işlevleri sunar. Bir grafik düğümleri (veya köşelerini) bir koleksiyonudur ve kenarlar (veya ilişkileri). Bir varlığa (örneğin, bir kişi veya kuruluş) bir düğümü temsil eder ve bir kenarı (örneğin, beğenilerin veya arkadaş) bağlanan iki düğüm arasındaki bir ilişkiyi temsil eder. Bir grafik veritabanı benzersiz hale özelliklerinden bazıları şunlardır:
-- Kenarları veya ilişkileri birinci sınıf bir grafik veritabanı içinde varlıklardır ve öznitelikleri veya özellikleri kendileriyle ilişkili.
-- Tek bir kenar birden çok düğüm bir grafik veritabanı, esnek bir şekilde bağlanabilirsiniz.
-- Desen eşleştirme ve çok atlamalı Gezinti sorguları kolayca ifade edebilirsiniz.
-- Geçişli kapatma ve çok biçimli sorgu kolayca ifade edebilirsiniz.
+Azure SQL veritabanı, veritabanında çok-çok ilişkilerini modelleyebilir grafik veritabanı özellikleri sunar. Grafik, düğümlerin (veya köşelerin) ve kenarlarının (ya da ilişkilerin) bir koleksiyonudur. Düğüm, bir varlığı (örneğin, bir kişi veya kuruluş) temsil eder ve bir kenar, bağlandığı iki düğüm (örneğin, beğeni veya arkadaşları) arasındaki ilişkiyi temsil eder. Grafik veritabanının benzersiz olmasını sağlayan bazı özellikler şunlardır:
+- Kenarlar veya ilişkiler bir grafik veritabanındaki ilk sınıf varlıklardır ve bunlarla ilişkili özniteliklere veya özelliklere sahip olabilir.
+- Tek bir kenar, bir grafik veritabanında birden çok düğümü esnek bir şekilde bağlanabilir.
+- Model eşleştirme ve çok atlamalı gezinti sorgularını kolayca ifade edebilirsiniz.
+- Geçişli kapanış ve Polimorfik sorguları kolayca ifade edebilirsiniz.
 
-Graf ilişkileri ve grafik sorgu işlevleri Transact-SQL ile Tümleştirildi ve temel veritabanı yönetim sistemi olarak SQL Server'ı kullanmanın avantajları alma.
-[Grafik işleme](https://docs.microsoft.com/sql/relational-databases/graphs/sql-graph-overview) olduğundan çekirdek SQL Server veritabanı altyapısı özelliği var. işleme Graph hakkında daha fazla bilgi bulabilirsiniz.
+Grafik ilişkileri ve grafik sorgu özellikleri Transact-SQL ile tümleşiktir ve temel veritabanı yönetim sistemi olarak SQL Server kullanmanın avantajlarını alır.
+[Grafik işleme](https://docs.microsoft.com/sql/relational-databases/graphs/sql-graph-overview) , çekirdek SQL Server veritabanı altyapısı özelliğidir, bu nedenle burada grafik işleme hakkında daha fazla bilgi edinebilirsiniz.
 
-### <a name="when-to-use-a-graph-capability"></a>Graf özellikten yararlanabilmek ne zaman
+### <a name="when-to-use-a-graph-capability"></a>Grafik özelliği ne zaman kullanılır?
 
-Bir şey yok bir grafik veritabanı ulaşabilir, hangi ilişkisel veritabanı kullanarak elde edemiyor. Ancak, bir grafik veritabanı bazı sorgular express daha kolay yapabilirsiniz. Kararınız birinin yerine diğerini seçmek için aşağıdaki etmenlere dayalı olabilir:
+Bir grafik veritabanının elde edilebileceği, ilişkisel bir veritabanı kullanılarak ulaşılabilecek bir şey yok. Ancak, bir grafik veritabanı belirli sorguları hızlı bir şekilde ifade edebilir. Diğeri arasından birini seçme kararınız aşağıdaki etkenlere bağlı olabilir:
 
-- Bu nedenle HierarchyId kullanılamaz bir düğümü birden çok üst öğeye burada sahip olabilir hiyerarşik veri modeli
-- Modeli vardır, uygulamanızın karmaşık çok-çok ilişkisi; var Uygulama geliştikçe yeni ilişkiler eklenir.
-- Birbirine bağlı veri ve ilişkilerini analiz etmeniz.
+- Bir düğümün birden çok üst öğesi olabilecek hiyerarşik verileri modelleyin, bu nedenle HierarchyId kullanılamaz
+- Modelde, uygulamanızın çok-çok ilişkileri karmaşık; Uygulama geliştikçe yeni ilişkiler eklenir.
+- Bağlantılı verileri ve ilişkileri analiz etmeniz gerekir.
 
 ## <a name="json-features"></a>JSON özellikleri
 
-Azure SQL veritabanı sağlar ayrıştırma ve JavaScript nesne gösterimi ' gösterilen veri sorgulama [(JSON)](https://www.json.org/) biçimlendirmek ve JSON metni olarak, ilişkisel verilerinizi dışarı aktarın.
+Azure SQL veritabanı, JavaScript Nesne Gösterimi [(JSON)](https://www.json.org/) biçiminde temsil edilen verileri ayrıştırabilmenizi ve sorgulamanızı ve ILIŞKISEL verilerinizi JSON metni olarak dışarı aktarmanızı sağlar.
 
-JSON, modern web ve mobil uygulamalarda veri değişimi için kullanılan popüler veri biçimidir. JSON, yarı yapılandırılmış verileri gibi NoSQL veritabanları veya günlük dosyalarını depolamak için de kullanılır [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/). Sonuçlar JSON metni olarak biçimlendirilmiş veya verileri kabul birçok REST web hizmetleri JSON tarafından biçimlendirilmiş. Çoğu Azure Hizmetleri gibi [Azure Search](https://azure.microsoft.com/services/search/), [Azure depolama](https://azure.microsoft.com/services/storage/), ve [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) döndürür veya JSON tüketen bir REST uç noktaları vardır.
+JSON, Modern Web ve mobil uygulamalarda veri alışverişi için kullanılan popüler bir veri biçimidir. JSON, yarı yapılandırılmış verileri günlük dosyalarında veya [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/)gibi NoSQL veritabanlarında depolamak için de kullanılır. Birçok REST Web hizmeti, JSON metni olarak biçimlendirilen sonuçları döndürür veya JSON olarak biçimlendirilen verileri kabul eder. [Azure bilişsel arama](https://azure.microsoft.com/services/search/), [azure depolama](https://azure.microsoft.com/services/storage/)ve [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) gibi birçok Azure HIZMETI, JSON döndüren veya tüketen REST uç noktalarına sahiptir.
 
-Azure SQL veritabanı, JSON ile kolayca çalışmanızı ve veritabanınızı modern Hizmetleri ile tümleştirme sağlar. Azure SQL veritabanı, JSON verileri ile çalışmak için aşağıdaki işlevleri sağlar:
+Azure SQL veritabanı, JSON verileriyle kolayca çalışmanıza ve veritabanınızı modern hizmetlerle tümleştirmenize imkan tanır. Azure SQL veritabanı, JSON verileriyle çalışmak için aşağıdaki işlevleri sağlar:
 
-![JSON işlevleri](./media/sql-database-json-features/image_1.png)
+![JSON Işlevleri](./media/sql-database-json-features/image_1.png)
 
-JSON metnini varsa JSON'dan veri ayıklama veya yerleşik işlevleri kullanarak JSON düzgün biçimlendirildiğini doğrulayın [JSON_VALUE](https://msdn.microsoft.com/library/dn921898.aspx), [JSON_QUERY](https://msdn.microsoft.com/library/dn921884.aspx), ve [ISJSON](https://msdn.microsoft.com/library/dn921896.aspx). [Json_modıfy](https://msdn.microsoft.com/library/dn921892.aspx) işlevi değeri JSON metnine içinde güncelleştirmenize olanak tanır. Daha gelişmiş sorgulama ve analiz için [OPENJSON](https://msdn.microsoft.com/library/dn921885.aspx) işlevi bir dizi satır bir JSON nesne dizisi dönüştürme. Herhangi bir SQL sorgu döndürülen sonuç kümesi üzerinde çalıştırılabilir. Son olarak, bir [FOR JSON](https://msdn.microsoft.com/library/dn921882.aspx) olanak sağlayan yan tümcesi biçimlendirme ilişkisel tabloları JSON metni olarak depolanan veriler.
+JSON metinleriniz varsa JSON 'dan veri ayıklayabilir veya [JSON_VALUE](https://msdn.microsoft.com/library/dn921898.aspx), [JSON_QUERY](https://msdn.microsoft.com/library/dn921884.aspx)ve [ıSJSON](https://msdn.microsoft.com/library/dn921896.aspx)yerleşik işlevlerini kullanarak JSON 'ın düzgün biçimlendirildiğinden emin olabilirsiniz. [JSON_MODIFY](https://msdn.microsoft.com/library/dn921892.aspx) IşLEVI, JSON metni içindeki değeri güncelleştirmenizi sağlar. Daha gelişmiş sorgulama ve çözümleme için, [openjson](https://msdn.microsoft.com/library/dn921885.aspx) işlevi BIR dizi JSON nesnesini bir dizi satır içine dönüştürebilir. Döndürülen sonuç kümesinde herhangi bir SQL sorgusu çalıştırılabilir. Son olarak, ilişkisel Tablolarınızda depolanan verileri JSON metni olarak biçimlendirmenize imkan tanıyan bir [for JSON](https://msdn.microsoft.com/library/dn921882.aspx) yan tümcesi vardır.
 
-Daha fazla bilgi için [JSON verilerini azure SQL veritabanı ile nasıl çalışılacağını](sql-database-json-features.md).
-[JSON](https://docs.microsoft.com/sql/relational-databases/json/json-data-sql-server) olduğundan çekirdek SQL Server veritabanı altyapısı özelliği var. JSON özelliği hakkında daha fazla bilgi bulabilirsiniz.
+Daha fazla bilgi için bkz. [Azure SQL veritabanı 'NDA JSON verileriyle çalışma](sql-database-json-features.md).
+[JSON](https://docs.microsoft.com/sql/relational-databases/json/json-data-sql-server) , bir veritabanı altyapısı özelliği SQL Server olduğundan JSON özelliği hakkında daha fazla bilgi edinebilirsiniz.
 
-### <a name="when-to-use-a-json-capability"></a>Ne zaman bir JSON özellik kullanılır?
+### <a name="when-to-use-a-json-capability"></a>JSON özelliği ne zaman kullanılır?
 
-Belge modelleri yerine ilişkisel model belli başlı bazı senaryolarda kullanılabilir:
-- Yüksek normalleştirme şemasının nesnelerin tüm alanlar aynı anda erişim veya hiçbir zaman nesneleri normalleştirilmiş bölümlerini güncelleştirmek için önemli avantajlar getirmek değil. Ancak, normalleştirilmiş modeli çok sayıda veri almak için katılmak için gereken tabloları nedeniyle, sorguların karmaşıklığı artırır.
-- Yerel olarak iletişim veya veri modelleri kullanım JSON belgeleri olan ve ilişkisel veri, JSON ve dönüştüren ek Katmanlar tanıtmak istemediğiniz uygulamalar ile çalışıyoruz.
-- Veri modelinizi XML'deki normalleştirilmesi alt tablolar veya varlık nesne değeri desenleri basitleştirmek gerekir.
-- Yükleme veya verileri ayrıştırmak için bazı ek aracı olmadan JSON biçiminde depolanan verileri dışarı aktarmak gerekir.
+Belge modelleri, bazı belirli senaryolarda ilişkisel modeller yerine kullanılabilir:
+- Tek seferde tüm nesne alanlarına erişirken veya nesnelerin normalleştirilmiş kısımlarını hiçbir zaman güncelleştirmeyeceğinden şemanın yüksek düzeyde normalleştirilmesi önemli avantajlar getirmez. Ancak, verileri almak için katılmanız gereken çok sayıda tablo olması nedeniyle, normalleştirilmiş model, sorgularınızın karmaşıklığını artırır.
+- JSON belgelerini yerel olarak kullanan uygulamalarla çalışıyorsunuz iletişim veya veri modelleridir ve ilişkisel verileri JSON ve tam tersi dönüştüren ek katmanlar tanıtmak istemezsiniz.
+- Alt tabloları veya varlık-nesne-değer düzenlerini yeniden normalleştirerek veri modelinizi basitleştirmeniz gerekir.
+- Verileri çözümleyen ek bir araç olmadan JSON biçiminde depolanan verileri yüklemeniz veya dışarı aktarmanız gerekir.
 
 ## <a name="spatial-features"></a>Uzamsal Özellikler
 
-Uzamsal veriler fiziksel konuma ve nesneleri geometrik şeklin ilgili bilgileri temsil eder. Bu nesneler noktası konumu veya ülkeler/bölgeler, yolların veya bellek gibi daha karmaşık nesneler olabilir.
+Uzamsal veriler, geometrik nesnelerin fiziksel konumu ve şekli hakkındaki bilgileri temsil eder. Bu nesneler, nokta konumları veya ülkeler/bölgeler, yollar veya Lakes gibi daha karmaşık nesneler olabilir.
 
-Azure SQL veritabanı, geometri veri türü ve coğrafi veriler'e yazın, iki uzamsal veri türleri - destekler.
-- Geometri türü Euclidean (düz) bir koordinat sisteminde verileri temsil eder.
-- Coğrafi konum türü bir gidiş-dünya koordinat sistemi verileri temsil eder.
+Azure SQL veritabanı iki uzamsal veri türünü destekler-geometri veri türü ve Coğrafya veri türü.
+- Geometri türü, bir Euclidean (düz) koordinat sistemindeki verileri temsil eder.
+- Coğrafya türü, bir yuvarlak dünya koordinat sistemindeki verileri temsil eder.
 
-Azure SQL veritabanı'nda aşağıdaki gibi kullanılabilir uzamsal nesneleri sayıda [noktası](https://docs.microsoft.com/sql/relational-databases/spatial/point), [LineString](https://docs.microsoft.com/sql/relational-databases/spatial/linestring), [Çokgen](https://docs.microsoft.com/sql/relational-databases/spatial/polygon)vb.
+Azure SQL veritabanı 'nda [Point](https://docs.microsoft.com/sql/relational-databases/spatial/point), [LineString](https://docs.microsoft.com/sql/relational-databases/spatial/linestring), [Çokgen](https://docs.microsoft.com/sql/relational-databases/spatial/polygon)gibi birçok uzamsal nesne vardır.
 
-Azure SQL veritabanı ayrıca sağlayan özelleştirilmiş [uzaysal dizinler](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-indexes-overview) uzamsal sorgularınızı performansını artırmak için kullanılabilir.
+Azure SQL veritabanı, uzamsal Sorgularınızın performansını geliştirmek için kullanılabilecek özelleştirilmiş [uzamsal dizinler](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-indexes-overview) de sağlar.
 
-[Uzamsal Destek](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server) çekirdek SQL Server veritabanı altyapısı özelliği olduğundan, uzamsal özelliği hakkında daha fazla bilgi bulabilirsiniz.
+[Uzamsal destek](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server) , temel SQL Server veritabanı altyapısı özelliğidir. bu sayede, burada uzamsal özelliği hakkında daha fazla bilgi edinebilirsiniz.
 
 ## <a name="xml-features"></a>XML özellikleri
 
-SQL Server, yarı yapılandırılmış veri yönetimi için zengin uygulamalar geliştirmeye yönelik güçlü bir platform sağlar. XML için destek, SQL Server'daki tüm bileşenleri tümleşik ve aşağıdakileri içerir:
+SQL Server, yarı yapılandırılmış veri yönetimi için zengin uygulamalar geliştirmeye yönelik güçlü bir platform sağlar. For XML desteği SQL Server içindeki tüm bileşenlerle tümleşiktir ve şunları içerir:
 
-- Xml veri türü. XML değerleri, yerel olarak bir xml veri türü sütununda XML şema koleksiyonu göre belirlenmiş veya sol türsüz depolanabilir. XML sütunu dizine ekleyebilir.
-- XML veri sütunları ve xml türünde değişkenler, depolanan bir XQuery sorgusunu belirtme olanağı. Veritabanınızda kullanan herhangi bir veri modeli erişim herhangi bir Transact-SQL sorgu XQuery işlevleri kullanılabilir.
-- XML belgeleri kullanarak tüm öğeler otomatik olarak dizinini [birincil XML dizini](https://docs.microsoft.com/sql/relational-databases/xml/xml-indexes-sql-server#primary-xml-index) veya kullanılarak dizine tam yollarını belirtin [ikincil XML dizini](https://docs.microsoft.com/sql/relational-databases/xml/xml-indexes-sql-server#secondary-xml-indexes).
-- Bu OPENROWSET XML veri toplu yüklenmesine izin verir.
+- XML veri türü. Xml değerleri, bir XML şemaları koleksiyonuna göre yazılabilecek bir XML veri türü sütununda yerel olarak depolanabilir veya sola yazılmamış olabilir. XML sütununu dizinlemek için.
+- XML veri türünde sütunlarda ve değişkenlerde depolanan XML verilerinde bir XQuery sorgusu belirtme özelliği. XQuery işlevleri, veritabanınızda kullandığınız herhangi bir veri modeline erişen herhangi bir Transact-SQL sorgusunda kullanılabilir.
+- [BIRINCIL XML dizinini](https://docs.microsoft.com/sql/relational-databases/xml/xml-indexes-sql-server#primary-xml-index) kullanarak XML belgelerindeki tüm öğeleri otomatik olarak dizine alarak, [İkincil xml dizini](https://docs.microsoft.com/sql/relational-databases/xml/xml-indexes-sql-server#secondary-xml-indexes)kullanılarak dizin oluşturulması gereken tam yolları belirtin.
+- XML verilerinin toplu yüklenmesine izin veren OPENROWSET.
 - İlişkisel verileri XML biçimine dönüştürün.
 
-[XML](https://docs.microsoft.com/sql/relational-databases/xml/xml-data-sql-server) olduğundan çekirdek SQL Server veritabanı altyapısı özelliği, XML özellik var. hakkında daha fazla bilgi bulabilirsiniz.
+[XML](https://docs.microsoft.com/sql/relational-databases/xml/xml-data-sql-server) , temel SQL Server veritabanı altyapısı özelliğidir, bu nedenle burada xml özelliği hakkında daha fazla bilgi edinebilirsiniz.
 
-### <a name="when-to-use-an-xml-capability"></a>Ne zaman bir XML özellik kullanılır?
+### <a name="when-to-use-an-xml-capability"></a>XML özelliği ne zaman kullanılır?
 
-Belge modelleri yerine ilişkisel model belli başlı bazı senaryolarda kullanılabilir:
-- Yüksek normalleştirme şemasının nesnelerin tüm alanlar aynı anda erişim veya hiçbir zaman nesneleri normalleştirilmiş bölümlerini güncelleştirmek için önemli avantajlar getirmek değil. Ancak, normalleştirilmiş modeli çok sayıda veri almak için katılmak için gereken tabloları nedeniyle, sorguların karmaşıklığı artırır.
-- Yerel olarak kullanım XML belgeleri iletişim veya veri modelleri olan ve ilişkisel verileri XML ve dönüştüren ek Katmanlar tanıtmak istemediğiniz uygulamalar ile çalışıyoruz.
-- Veri modelinizi XML'deki normalleştirilmesi alt tablolar veya varlık nesne değeri desenleri basitleştirmek gerekir.
-- Yükleme veya verileri ayrıştırmak için bazı ek aracı olmadan XML biçiminde depolanan verileri dışarı aktarmak gerekir.
+Belge modelleri, bazı belirli senaryolarda ilişkisel modeller yerine kullanılabilir:
+- Tek seferde tüm nesne alanlarına erişirken veya nesnelerin normalleştirilmiş kısımlarını hiçbir zaman güncelleştirmeyeceğinden şemanın yüksek düzeyde normalleştirilmesi önemli avantajlar getirmez. Ancak, verileri almak için katılmanız gereken çok sayıda tablo olması nedeniyle, normalleştirilmiş model, sorgularınızın karmaşıklığını artırır.
+- XML belgelerinin yerel olarak kullanıldığı uygulamalarla çalışıyorsunuz iletişim veya veri modelleridir ve ilişkisel verileri XML ve tam tersi dönüştüren ek katmanlar tanıtmak istemezsiniz.
+- Alt tabloları veya varlık-nesne-değer düzenlerini yeniden normalleştirerek veri modelinizi basitleştirmeniz gerekir.
+- Verileri çözümleyen ek bir araç olmadan XML biçiminde depolanan verileri yüklemeniz veya dışarı aktarmanız gerekir.
 
 ## <a name="key-value-pairs"></a>Anahtar-değer çiftleri
 
-Azure SQL veritabanı özel türleri veya anahtar-değer çiftleri standart ilişkisel tabloları anahtar-değer yapıları yerel olarak temsil edilebilir beri destekleyen yapıları gerekmez:
+Anahtar-değer yapıları standart ilişkisel tablolar olarak yerel olarak temsil edilemediğinden, Azure SQL veritabanı 'nın anahtar-değer çiftlerini destekleyen özel türleri veya yapıları yoktur:
 
 ```sql
 CREATE TABLE Collection (
@@ -133,12 +132,12 @@ CREATE TABLE Collection (
 )
 ```
 
-Bu anahtar-değer yapısı kısıtlama olmadan kendi gereksinimlerinize uyacak şekilde özelleştirebilirsiniz. Örneğin, değer yerine XML belgesi olabilir `nvarchar(max)` türü, değer JSON belgesini ise, koyabilir `CHECK` JSON içeriği geçerliliğini doğrular kısıtlaması. Herhangi bir sayıda ek sütunlar bir anahtarda ilgili değerleri yerleştirme, hesaplanan sütunlar ekleyip basitleştirmek ve veri erişimini iyileştirmek için dizinler, tablonun vb. daha iyi performans almak için belleği ve iyileştirilmiş yalnızca şema tablo olarak tanımlayın.
+Bu anahtar-değer yapısını, herhangi bir kısıtlama olmadan gereksinimlerinize uyacak şekilde özelleştirebilirsiniz. Örnek olarak, değer JSON belgesi ise `nvarchar(max)` türü yerine XML belgesi olabilir, JSON içeriğinin geçerliliğini doğrulayan `CHECK` kısıtlaması koyabilirsiniz. Ek sütunlarda bir anahtarla ilgili herhangi bir sayıda değer koyabilirsiniz, veri erişimini basitleştirmek ve iyileştirmek için hesaplanmış sütunlar ve dizinler ekleyebilirsiniz, daha iyi performans sağlamak için tabloyu bellek/en iyileştirilmiş şema tablosu olarak tanımlayın, vb.
 
-Bkz: [BWin benzeri görülmemiş bir performans ve ölçek elde etmek için bellek içi OLTP nasıl kullandığını](https://blogs.msdn.microsoft.com/sqlcat/20./../how-bwin-is-using-sql-server-2016-in-memory-oltp-to-achieve-unprecedented-performance-and-scale/) kendi ASP.NET önbelleğe alma için 1.200.000 elde çözüm toplu işlemleri nasıl ilişkisel bir örnek olarak, saniye başına model etkin olarak kullanılabilir uygulamada bir anahtar-değer çifti çözüm.
+Bkz. [BWin 'Nın bellek ıçı OLTP kullanarak](https://blogs.msdn.microsoft.com/sqlcat/20../../how-bwin-is-using-sql-server-2016-in-memory-oltp-to-achieve-unprecedented-performance-and-scale/) , bir saniyede 1.200.000 toplu işi elde eden bir örnek olarak, ilişkisel modelin, içinde anahtar-değer çifti çözümü olarak nasıl etkili bir şekilde kullanılabileceğini gösteren ASP.NET önbelleğe alma çözümü Sonuç.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure SQL veritabanları, çok modelli özellikleri, ayrıca Azure SQL veritabanı ve SQL Server arasında paylaşılan temel SQL Server veritabanı altyapısı özellikleri değildir. Bu özellikler hakkında daha fazla bilgi edinmek için SQL ilişkisel veritabanı belge sayfaları ziyaret edin:
+Azure SQL veritabanlarında çok modelli özellikler ayrıca Azure SQL veritabanı ve SQL Server arasında paylaşılan temel SQL Server veritabanı altyapısı özellikleridir. Bu özellikler hakkında daha fazla bilgi edinmek için SQL Ilişkisel veritabanı belge sayfalarını ziyaret edin:
 
 * [Grafik işleme](https://docs.microsoft.com/sql/relational-databases/graphs/sql-graph-overview)
 * [JSON verileri](https://docs.microsoft.com/sql/relational-databases/json/json-data-sql-server)

@@ -1,57 +1,56 @@
 ---
-title: Windows Server için Azure hibrit avantajı | Microsoft Docs
-description: Şirket içi lisanslarını Azure'a taşımalarına olanak, Windows Yazılım Güvencesi avantajları en üst düzeye öğrenin
+title: Windows Server için Azure Hibrit Teklifi
+description: Azure 'a şirket içi lisanslar getirmek için Windows yazılım güvencesi avantajlarınızı nasıl en üst düzeye çıkaracağınızı öğrenin
 services: virtual-machines-windows
 documentationcenter: ''
-author: xujing
-manager: jeconnoc
+author: xujing-ms
+manager: gwallace
 editor: ''
 ms.assetid: 332583b6-15a3-4efb-80c3-9082587828b0
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 4/22/2018
-ms.author: xujing-ms
-ms.openlocfilehash: 64eb89612765f9a47d0eaac2b9cbceb6341c4155
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: xujing
+ms.openlocfilehash: 40697925d399962399da499e0469198a0e997f66
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64681278"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74038637"
 ---
 # <a name="azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure Hibrit Teklifi
-Yazılım Güvencesi olan müşteriler için Windows Server için Azure hibrit avantajı, şirket içi Windows Server lisanslarınızı kullanın ve Windows sanal makineler, düşük bir maliyet karşılığında Azure üzerinde çalıştırmak sağlar. Windows işletim sistemi ile yeni sanal makineleri dağıtmak için Windows Server için Azure hibrit Avantajı'nı kullanabilirsiniz. Bu makale Windows Server için Azure hibrit avantajı ile yeni VM'ler dağıtmayı ve varolan nasıl güncelleştirebilirsiniz adımları üzerinden Vm'leri çalıştıran gider. Windows Server için Azure hibrit Avantajı hakkında daha fazla bilgi için bkz: Lisans ve maliyet tasarrufu [Windows Server için Azure hibrit avantajı lisans sayfası](https://azure.microsoft.com/pricing/hybrid-use-benefit/).
+Yazılım güvencesi olan müşteriler için, Windows Server Azure Hibrit Avantajı, şirket içi Windows Server lisanslarınızı kullanmanıza ve Azure 'da Windows sanal makinelerini daha düşük bir maliyetle çalıştırmanıza olanak sağlar. Windows işletim sistemi ile yeni sanal makineler dağıtmak için Windows Server Azure Hibrit Avantajı kullanabilirsiniz. Bu makalede, Windows Server için Azure Hibrit Avantajı ile yeni VM 'Leri dağıtma ve var olan çalışan VM 'Leri güncelleştirme adımları ele alınarak devam edebilir. Windows Server Lisanslama ve maliyet tasarrufları için Azure Hibrit Avantajı hakkında daha fazla bilgi için, bkz. [Windows Server Lisanslama için Azure hibrit avantajı sayfası](https://azure.microsoft.com/pricing/hybrid-use-benefit/).
 
 > [!Important]
 > 2 işlemcili her lisans veya 16 çekirdekli lisans kümelerinin her biri, 8 çekirdekli iki örnek veya 16 çekirdekli bir örnek kullanma hakkına sahiptir. Standard Sürüm için Azure Hibrit Teklifi lisansları, şirket içinde ya da Azure’da yalnızca bir kez kullanılabilir. Datacenter Sürümü avantajları, aynı anda hem şirket içinde hem de Azure’da kullanım olanağı sunar.
 >
 
 > [!Important]
-> Windows Server için Azure hibrit avantajı ile Windows Server işletim sistemi çalıştıran tüm Vm'leri kullanarak artık desteklenen SQL Server gibi ek yazılımlar veya üçüncü taraf Market yazılımları ile Vm'leri de dahil olmak üzere tüm bölgelerde. 
+> Windows Server işletim sistemi çalıştıran herhangi bir VM ile Windows Server için Azure Hibrit Avantajı kullanmak, SQL Server veya üçüncü taraf Market yazılımları gibi ek yazılıma sahip VM 'Ler de dahil olmak üzere tüm bölgelerde desteklenmektedir. 
 >
 
 > [!NOTE]
-> Klasik VM'ler için yalnızca dağıtma yeni VM'den şirket içi özel görüntüleri üzerinde desteklenir. Bu makalede desteklenen özelliklerden yararlanmak için Klasik VM'ler için Resource Manager modeli geçirmeniz gerekir.
+> Klasik VM 'Ler için, yalnızca şirket içi özel görüntülerden yeni VM dağıtımı desteklenir. Bu makalede desteklenen özelliklerden faydalanmak için, önce klasik VM 'Leri Kaynak Yöneticisi modele geçirmeniz gerekir.
 >
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-## <a name="ways-to-use-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure hibrit Avantajı'nı kullanma yolları
-Windows sanal makinelerini, Azure karma avantajı ile kullanmak için birkaç yolu vardır:
+## <a name="ways-to-use-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure Hibrit Avantajı kullanmanın yolları
+Windows sanal makinelerini Azure Hibrit Avantajı kullanmanın birkaç yolu vardır:
 
-1. Sağlanan Windows Server görüntüleri Azure Market'te birinden Vm'leri dağıtabilirsiniz.
-2. Özel bir VM'yi karşıya yükleme ve bir Resource Manager şablonu veya Azure PowerShell kullanarak dağıtma
-3. Geçiş ve Azure karma avantajı ile çalışan arasında varolan bir VM'yi dönüştürebilir veya Windows Server için isteğe bağlı ücreti ödersiniz
-4. Windows Server için Azure hibrit avantajı üzerinde sanal makine ölçek kümesi de uygulayabilirsiniz
+1. Azure Marketi 'nde, sağlanmış Windows Server görüntülerinden birindeki VM 'Leri dağıtabilirsiniz
+2. Özel bir VM 'yi karşıya yükleyebilir ve bir Kaynak Yöneticisi şablonu kullanarak dağıtabilirsiniz Azure PowerShell
+3. Mevcut VM 'yi Azure Hibrit Avantajı ile çalıştırma arasında açıp dönüştürebilirsiniz veya Windows Server için isteğe bağlı maliyet ödeyebilirsiniz
+4. Ayrıca, sanal makine ölçek kümesindeki Windows Server için Azure Hibrit Avantajı de uygulayabilirsiniz
 
 
-## <a name="create-a-vm-with-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure hibrit avantajı ile VM oluşturma
-Tüm Windows Server tabanlı işletim sistemi görüntüleri Windows Server için Azure hibrit avantajı için desteklenir. Azure platformu desteği görüntüleri kullanmayı veya kendi özel Windows Server görüntülerini karşıya yükleme. 
+## <a name="create-a-vm-with-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure Hibrit Avantajı VM oluşturma
+Windows Server için Azure Hibrit Avantajı için tüm Windows Server işletim sistemi tabanlı görüntüler desteklenir. Azure platform destek görüntülerini kullanabilir veya kendi özel Windows Server görüntülerinizi yükleyebilirsiniz. 
 
 ### <a name="portal"></a>Portal
-Windows Server için Azure hibrit avantajı ile bir VM oluşturmak için "para tasarrufu" bölümü altında iki durumlu düğmeyi kullanın.
+Windows Server için Azure Hibrit Avantajı bir sanal makine oluşturmak için, "para tasarrufu" bölümünün altındaki geçişi kullanın.
 
 ### <a name="powershell"></a>PowerShell
 
@@ -75,7 +74,7 @@ az vm create \
 ```
 
 ### <a name="template"></a>Şablon
-Resource Manager şablonlarınızı, ek bir parametre içinde `licenseType` belirtilmesi gerekir. Daha fazla bilgi edinebilirsiniz [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md)
+Kaynak Yöneticisi şablonlarınız içinde ek bir `licenseType` parametresi belirtilmelidir. [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md) hakkında daha fazla bilgi edinebilirsiniz
 ```json
 "properties": {
     "licenseType": "Windows_Server",
@@ -84,18 +83,18 @@ Resource Manager şablonlarınızı, ek bir parametre içinde `licenseType` beli
     }
 ```
 
-## <a name="convert-an-existing-vm-using-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure hibrit Avantajı'nı kullanarak mevcut bir VM'ye dönüştürme
-Windows Server için Azure hibrit avantajı yararlanmak için dönüştürmek istediğiniz varolan bir VM'yi varsa, aşağıdaki yönergeleri izleyerek sanal makinenin lisans türü güncelleştirebilirsiniz.
+## <a name="convert-an-existing-vm-using-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure Hibrit Avantajı kullanarak var olan bir VM 'yi dönüştürme
+Windows Server Azure Hibrit Avantajı avantajlarından yararlanmak için dönüştürmek istediğiniz mevcut bir VM 'niz varsa, aşağıdaki yönergeleri izleyerek sanal makinenizin lisans türünü güncelleştirebilirsiniz.
 
 > [!NOTE]
-> VM'de lisans türünü değiştirerek sistemin yeniden başlatma veya hizmet interuption neden neden olmaz.  Bu yalnızca bir meta veri bayrak bir güncelleştirmedir.
+> VM 'deki lisans türünü değiştirmek sistemin yeniden başlatılmasına veya hizmet görüşmesine neden olmasına neden olmaz.  Meta veri bayrağına yalnızca bir güncelleştirmedir.
 > 
 
 ### <a name="portal"></a>Portal
-VM dikey portalından Azure hibrit avantajı "Yapılandırma" seçeneğini belirleyerek kullanmak için VM'yi güncelleştirin ve "Azure hibrit avantajı" seçeneğini değiştirir
+Portal VM dikey penceresinde, "yapılandırma" seçeneğini belirleyerek ve "Azure hibrit avantajı" seçeneğini değiştirerek sanal makineyi Azure Hibrit Avantajı kullanacak şekilde güncelleştirebilirsiniz.
 
 ### <a name="powershell"></a>PowerShell
-- Windows Server için Azure hibrit avantajı için mevcut Windows Server Vm'lerinin Dönüştür
+- Mevcut Windows Server VM 'lerini Windows Server için Azure Hibrit Avantajı Dönüştür
 
     ```powershell
     $vm = Get-AzVM -ResourceGroup "rg-name" -Name "vm-name"
@@ -103,7 +102,7 @@ VM dikey portalından Azure hibrit avantajı "Yapılandırma" seçeneğini belir
     Update-AzVM -ResourceGroupName rg-name -VM $vm
     ```
     
-- Kullandıkça Öde dön teklifi'nden yararlanarak Windows Server Vm'lerinin Dönüştür
+- Windows Server VM 'lerini Kullandıkça Öde 'e geri dönme
 
     ```powershell
     $vm = Get-AzVM -ResourceGroup "rg-name" -Name "vm-name"
@@ -112,20 +111,20 @@ VM dikey portalından Azure hibrit avantajı "Yapılandırma" seçeneğini belir
     ```
     
 ### <a name="cli"></a>CLI
-- Windows Server için Azure hibrit avantajı için mevcut Windows Server Vm'lerinin Dönüştür
+- Mevcut Windows Server VM 'lerini Windows Server için Azure Hibrit Avantajı Dönüştür
 
     ```azurecli
     az vm update --resource-group myResourceGroup --name myVM --set licenseType=Windows_Server
     ```
 
-### <a name="how-to-verify-your-vm-is-utilizing-the-licensing-benefit"></a>VM'nize nasıl, lisans avantajından yararlanarak
-PowerShell, Resource Manager şablonu veya portal üzerinden sanal makinenizin dağıttıktan sonra aşağıdaki yöntemlerden ayarında doğrulayabilirsiniz.
+### <a name="how-to-verify-your-vm-is-utilizing-the-licensing-benefit"></a>VM 'nizin lisans avantajını kullandığını doğrulama
+VM 'nizi PowerShell, Kaynak Yöneticisi Şablon ya da Portal aracılığıyla dağıttıktan sonra, aşağıdaki yöntemlerde ayarı doğrulayabilirsiniz.
 
 ### <a name="portal"></a>Portal
-VM dikey portaldan aç/kapa Windows Server için Azure hibrit avantajı için "Yapılandırma" sekmesini seçerek görüntüleyebilirsiniz.
+Portal VM dikey penceresinde, "yapılandırma" sekmesini seçerek Windows Server için Azure Hibrit Avantajı geçişi 'ni görüntüleyebilirsiniz.
 
 ### <a name="powershell"></a>PowerShell
-Aşağıdaki örnek, tek bir VM için lisans türünü gösterir.
+Aşağıdaki örnekte, tek bir VM için lisans türü gösterilmektedir
 ```powershell
 Get-AzVM -ResourceGroup "myResourceGroup" -Name "myVM"
 ```
@@ -137,7 +136,7 @@ Location                 : westus
 LicenseType              : Windows_Server
 ```
 
-Bu çıktı karşılaştırır Windows Server için Azure hibrit avantajı lisanslama olmadan dağıtılan aşağıdaki VM ile:
+Bu çıktı, Windows Server Lisansı için Azure Hibrit Avantajı olmadan dağıtılan aşağıdaki VM ile karşıttır:
 ```powershell
 Type                     : Microsoft.Compute/virtualMachines
 Location                 : westus
@@ -150,14 +149,14 @@ az vm get-instance-view -g MyResourceGroup -n MyVM --query "[?licenseType=='Wind
 ```
 
 > [!NOTE]
-> VM'de lisans türünü değiştirerek sistemin yeniden başlatma veya hizmet interuption neden neden olmaz. Bu bayrağı yalnızca lisans meta veri olur.
+> VM 'deki lisans türünü değiştirmek sistemin yeniden başlatılmasına veya hizmet görüşmesine neden olmasına neden olmaz. Yalnızca meta veri lisanslama bayrağıdır.
 >
 
-## <a name="list-all-vms-with-azure-hybrid-benefit-for-windows-server-in-a-subscription"></a>Windows Server için Azure hibrit avantajı ile tüm VM'lerin bir abonelikte listesi
-Windows Server için Azure hibrit avantajı ile dağıtılan tüm sanal makinelerin sayısı ve görmek için aboneliğinizden aşağıdaki komutu çalıştırabilirsiniz:
+## <a name="list-all-vms-with-azure-hybrid-benefit-for-windows-server-in-a-subscription"></a>Bir abonelikte Windows Server için Azure Hibrit Avantajı tüm VM 'Leri listeleme
+Windows Server için Azure Hibrit Avantajı ile dağıtılan tüm sanal makineleri görmek ve saymak için aboneliğinizden aşağıdaki komutu çalıştırabilirsiniz:
 
 ### <a name="portal"></a>Portal
-Sanal makine veya sanal makine ölçek kümesi kaynak dikey penceresinden tablo sütununda "Azure hibrit avantajı" içerecek şekilde yapılandırarak tüm VM ve lisans türü listesini görüntüleyebilirsiniz. VM ayarı 'Enabled "'olabilir,"Etkin değil"veya"Desteklenmiyor"durumu.
+Sanal makine veya sanal makine ölçek kümeleri kaynak dikey penceresinde, tablo sütununu "Azure Hibrit Avantajı" içerecek şekilde yapılandırarak tüm VM 'lerinizin ve lisanslama türünün bir listesini görüntüleyebilirsiniz. VM ayarı "etkin", "etkin değil" veya "desteklenmiyor" durumunda olabilir.
 
 ### <a name="powershell"></a>PowerShell
 ```powershell
@@ -170,10 +169,10 @@ $vms | ?{$_.LicenseType -like "Windows_Server"} | select ResourceGroupName, Name
 az vm list --query "[?licenseType=='Windows_Server']" -o table
 ```
 
-## <a name="deploy-a-virtual-machine-scale-set-with-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure hibrit avantajı ile bir sanal makine ölçek kümesini dağıtma
-İçinde sanal makine ölçek kümesi Resource Manager şablonları, ek bir parametre `licenseType` , VirtualMachineProfile özelliği içinde belirtilmelidir. Oluşturma sırasında bunu veya ARM şablonu aracılığıyla, PowerShell, Azure CLI veya REST ölçek kümenizi için güncelleştirin.
+## <a name="deploy-a-virtual-machine-scale-set-with-azure-hybrid-benefit-for-windows-server"></a>Windows Server için Azure Hibrit Avantajı bir sanal makine ölçek kümesi dağıtma
+Sanal Makine Ölçek Kümesi Kaynak Yöneticisi şablonlarında, VirtualMachineProfile özelliği içinde ek bir parametre `licenseType` belirtilmelidir. ARM şablonu, PowerShell, Azure CLı veya REST aracılığıyla ölçek kümesi oluşturma veya güncelleştirme sırasında bunu yapabilirsiniz.
 
-Aşağıdaki örnek, bir Windows Server 2016 Datacenter görüntüsü ile ARM şablonu kullanır:
+Aşağıdaki örnek ARM şablonunu bir Windows Server 2016 Datacenter görüntüsüyle kullanır:
 ```json
 "virtualMachineProfile": {
     "storageProfile": {
@@ -194,12 +193,12 @@ Aşağıdaki örnek, bir Windows Server 2016 Datacenter görüntüsü ile ARM ş
             "adminPassword": "[parameters('adminPassword')]"
     }
 ```
-Ayrıca kullanma hakkında daha fazla bilgi edinebilirsiniz [değiştirme bir sanal makine ölçek kümesi](../../virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set.md) ölçek kümenizi güncelleştirmek daha yollarını ayarlayın.
+Ayrıca, ölçek kümesini güncelleştirme hakkında daha fazla yol için [bir sanal makine ölçek kümesini değiştirme](../../virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set.md) hakkında daha fazla bilgi edinebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Daha fazla bilgi edinin [Azure karma avantajı ile tasarruf etme](https://azure.microsoft.com/pricing/hybrid-use-benefit/)
-- Daha fazla bilgi edinin [Azure hibrit avantajı için sık sorulan sorular](https://azure.microsoft.com/pricing/hybrid-use-benefit/faq/)
-- Daha fazla bilgi edinin [ayrıntılı kılavuz lisanslama Windows Server için Azure hibrit avantajı](https://docs.microsoft.com/windows-server/get-started/azure-hybrid-benefit)
-- Daha fazla bilgi edinin [Windows Server için Azure hibrit avantajı ve Azure Site Recovery olun Azure uygulamalarını geçirme daha uygun maliyetli](https://azure.microsoft.com/blog/hybrid-use-benefit-migration-with-asr/)
-- Daha fazla bilgi edinin [çok Kiracılı barındırma sağ ile azure'da Windows 10](https://docs.microsoft.com/azure/virtual-machines/windows/windows-desktop-multitenant-hosting-deployment)
-- Daha fazla bilgi edinin [kullanarak Resource Manager şablonları](../../azure-resource-manager/resource-group-overview.md)
+- [Azure hibrit avantajı ile tasarruf etme](https://azure.microsoft.com/pricing/hybrid-use-benefit/) hakkında daha fazla bilgi edinin
+- [Azure hibrit avantajı hakkında sık sorulan sorular](https://azure.microsoft.com/pricing/hybrid-use-benefit/faq/) hakkında daha fazla bilgi edinin
+- [Windows Server Lisanslama ayrıntılı Kılavuzu için Azure hibrit avantajı](https://docs.microsoft.com/windows-server/get-started/azure-hybrid-benefit) hakkında daha fazla bilgi edinin
+- Windows Server Azure Hibrit Avantajı hakkında daha fazla bilgi edinin [ve Azure Site Recovery Azure 'a uygulama geçirmeyi daha da verimli hale getirin](https://azure.microsoft.com/blog/hybrid-use-benefit-migration-with-asr/)
+- [Azure 'Da çok kiracılı barındırma Ile Windows 10](https://docs.microsoft.com/azure/virtual-machines/windows/windows-desktop-multitenant-hosting-deployment) hakkında daha fazla bilgi edinin
+- [Kaynak Yöneticisi şablonlarını kullanma](../../azure-resource-manager/resource-group-overview.md) hakkında daha fazla bilgi edinin

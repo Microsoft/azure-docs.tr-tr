@@ -1,56 +1,87 @@
 ---
-title: Azure portalını güvenli liste URL'leri | Microsoft Docs
-description: Azure portalı ve sunduğu hizmetler ile iletişim kurmak için Ara sunucu atlamanın bu URL'leri eklemek
+title: Azure portal URL 'Lerini güvenli listeleyin | Microsoft Docs
+description: Azure portal ve hizmetleriyle iletişim kurmak için bu URL 'Leri ara sunucu geçişine ekleyin
 services: azure-portal
 keywords: ''
 author: kfollis
 ms.author: kfollis
-ms.date: 06/13/2019
+ms.date: 09/13/2019
 ms.topic: conceptual
 ms.service: azure-portal
 manager: mtillman
-ms.openlocfilehash: 87ec600a2f6c4a560ec7cbb064b561fa76e2b615
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: 9618d99495e65231de22eb719355e2ca75a17600
+ms.sourcegitcommit: 3fa4384af35c64f6674f40e0d4128e1274083487
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67304960"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71218047"
 ---
-# <a name="safelist-the-azure-portal-urls-on-your-firewall-or-proxy-server"></a>Azure portalını güvenli liste güvenlik duvarı veya Ara sunucunuzun URL'leri
+# <a name="safelist-the-azure-portal-urls-on-your-firewall-or-proxy-server"></a>Güvenlik duvarınızdaki veya proxy sunucunuzdaki Azure portal URL 'Lerini listeleyin
 
-İyi performans ve yerel veya geniş alan ağınızı ve Azure bulut arasında bağlantı için Azure portalına yönelik güvenlik kısıtlamalarını atlamak için şirket içi güvenlik cihazları yapılandırmak URL'leri. Ağ yöneticileri, proxy sunucuları, güvenlik duvarları ve diğer cihazların güvenliğini sağlamaya yardımcı olmak ve kullanıcıların İnternet'e erişme denetim vermek için genellikle dağıtın. Ancak, kullanıcıların korumaya yönelik kurallar bazen engelleyebilir veya ile Azure arasındaki iletişimi de dahil olmak üzere yasal işle ilgili internet trafiğini yavaşlatmaz. Ağınız ve Azure portalı ve sunduğu hizmetler arasında bağlantı iyileştirmek için Azure portalında eklediğiniz öneririz, güvenli liste URL'si.
+Yerel veya geniş alan ağınız ile Azure bulutu arasında iyi performans ve bağlantı sağlamak için şirket içi güvenlik cihazlarını, Azure portal URL 'Lerinin güvenlik kısıtlamalarını atlayacak şekilde yapılandırın. Ağ yöneticileri, kullanıcıların İnternet 'e nasıl erişebileceği konusunda güvenli hale getirmek ve denetim sağlamak için genellikle proxy sunucuları, güvenlik duvarları veya diğer cihazları dağıtır. Ancak, kullanıcıları korumak için tasarlanan kurallar, siz ve Azure arasındaki iletişimler de dahil olmak üzere, işletmeyle ilgili yasal internet trafiğini engelleyebilir veya yavaşlatır. Ağınızla Azure portal ve hizmetleri arasındaki bağlantıyı iyileştirmek için, SafeList verilerinize Azure portal URL eklemenizi öneririz.
 
-## <a name="azure-portal-urls-for-proxy-bypass"></a>Azure portalında URL'ler için proxy atlama
+## <a name="azure-portal-urls-for-proxy-bypass"></a>Proxy atlama için Azure portal URL 'Leri
 
-Proxy sunucusu veya güvenlik duvarı kısıtlamalarını atlamak için bu uç noktalarına ağ trafiğine izin vermek için aşağıda listelenmiş URL'lere ekleyin:
+Azure portal için güvenli listeye yönelik URL uç noktaları, kuruluşunuzun dağıtıldığı Azure bulutuna özgüdür. Bulutunuzu seçin, sonra bu uç noktalara yönelik ağ trafiğinin kısıtlamaları atlamasına izin vermek için proxy sunucunuza veya güvenlik duvarına URL listesini ekleyin.
 
-* *.aadcdn.microsoftonline-p.com
-* *.aimon.applicationinsights.io
-* *.azure.com
-* *.azuredatalakestore.net
-* *.azureedge.net
-* *.exp.azure.com
-* *.ext.azure.com
-* *.gfx.ms
-* *.account.microsoft.com
-* *.hosting.portal.azure.net
-* *.marketplaceapi.microsoft.com
-* *.microsoftonline.com
-* *.msauth.net
-* *.msftauth.net
-* *.portal.azure.com
-* *.portalext.visualstudio.com
-* *.sts.microsoft.com
-* *.vortex.data.microsoft.com
-* *.vscommerce.visualstudio.com
-* *.vssps.visualstudio.com
-* *.wpc.azureedge.net
+#### <a name="public-cloudtabpublic-cloud"></a>[Genel bulut](#tab/public-cloud)
+```
+*.aadcdn.microsoftonline-p.com
+*.aka.ms
+*.applicationinsights.io
+*.azure.com
+*.azure.net
+*.azureafd.net
+*.azure-api.net
+*.azuredatalakestore.net
+*.azureedge.net
+*.loganalytics.io
+*.microsoft.com
+*.microsoftonline.com
+*.microsoftonline-p.com
+*.msauth.net
+*.msftauth.net
+*.trafficmanager.net
+*.visualstudio.com
+*.windows.net
+*.windows-int.net
+```
+
+#### <a name="us-government-cloudtabus-government-cloud"></a>[ENGELL Kamu Bulutu](#tab/us-government-cloud)
+```
+*.azure.us
+*.loganalytics.us
+*.microsoft.us
+*.microsoftonline.us
+*.msauth.net
+*.usgovcloudapi.net
+*.usgovtrafficmanager.net
+*.windowsazure.us
+```
+
+#### <a name="china-government-cloudtabchina-government-cloud"></a>[Çin Devlet bulutu](#tab/china-government-cloud)
+```
+*.azure.cn
+*.microsoft.cn
+*.microsoftonline.cn
+*.chinacloudapi.cn
+*.trafficmanager.cn
+*.chinacloudsites.cn
+*.windowsazure.cn
+```
+---
 
 > [!NOTE]
-> Bu uç noktaları için trafiği, HTTP (80) ve HTTPS (443) için standart TCP bağlantı noktaları kullanır.
+> Bu uç noktalara giden trafik, HTTP (80) ve HTTPS (443) için standart TCP bağlantı noktalarını kullanır.
 >
 >
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Güvenli liste IP adreslerine ihtiyacınız var? Listesini indirme [Microsoft Azure veri merkezi IP aralıkları](https://www.microsoft.com/download/details.aspx?id=41653).
-* Ek URL'leri ve IP adresleri diğer Microsoft Hizmetleri kullanımı için bağlantı. Microsoft 365 Hizmetleri için ağ bağlantısını en iyi duruma getirmek için bkz: [ağınızı ayarlamak için Office 365](/office365/enterprise/set-up-network-for-office-365).
+IP adreslerini güvenli listeye almanız mı gerekiyor? Bulutunuz için Microsoft Azure veri merkezi IP aralıklarının listesini indirin:
+
+* [Dünya çapında](https://www.microsoft.com/download/details.aspx?id=56519)
+* [ENGELL Devlet](https://www.microsoft.com/download/details.aspx?id=57063)
+* [Almanya](https://www.microsoft.com/download/details.aspx?id=57064)
+* [Çin](https://www.microsoft.com/download/details.aspx?id=57062)
+
+Diğer Microsoft Hizmetleri, bağlantı için ek URL 'Ler ve IP adresleri kullanır. Microsoft 365 hizmetleri için ağ bağlantısını iyileştirmek için bkz. [ağınızı Office 365 Için ayarlama](/office365/enterprise/set-up-network-for-office-365).

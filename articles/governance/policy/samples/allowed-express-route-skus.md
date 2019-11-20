@@ -1,20 +1,16 @@
 ---
-title: Örnek - izin verilen ExpressRoute SKU'ları
-description: Bu örnek ilke tanımını ExpressRoute kullanan onaylı bir SKU gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-Izin verilen ExpressRoute SKU 'Ları
+description: Bu örnek ilke tanımı, ExpressRoute 'un onaylanmış bir SKU kullanmasını gerektirir.
 ms.date: 01/29/2019
-ms.author: dacoulte
-ms.openlocfilehash: c5974764adc76d4de3fc1e3cf30eacead7221f31
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: a9fa0e98a2973cbaa689358c0922b0eda23dd042
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60547253"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74072019"
 ---
-# <a name="sample---allowed-expressroute-skus"></a>Örnek - izin verilen ExpressRoute SKU'ları
+# <a name="sample---allowed-expressroute-skus"></a>Örnek-Izin verilen ExpressRoute SKU 'Ları
 
 Bu ilke, ExpressRoute’un onaylı bir SKU kullanmasını gerektirir. İzin verilen bir SKU dizisi belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke, ExpressRoute’un onaylı bir SKU kullanmasını gerektirir. İzin veri
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fexpress-route-skus%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FNetwork%2Fexpress-route-skus%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

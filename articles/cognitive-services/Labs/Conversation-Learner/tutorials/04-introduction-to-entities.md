@@ -1,7 +1,7 @@
 ---
-title: Konuşma Öğrenici sahip bir Model - Microsoft Bilişsel hizmetler varlık kullanma | Microsoft Docs
+title: Conversation Learner modeliyle varlıkları kullanma-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici modeliyle varlıkları kullanmayı öğrenin.
+description: Conversation Learner modeliyle varlıkların nasıl kullanılacağını öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,85 +10,86 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: 3d9e2498a23ad49eb014cb0f81c819f3f63eef5c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: cba12b6c09c1bdbf4e8f7841676a609c34109d93
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66387819"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707332"
 ---
-# <a name="introduction-to-entities"></a>Varlıkları giriş
+# <a name="introduction-to-entities"></a>Varlıklara giriş
 
-Bu öğretici, varlıklar, varlıkların eleyerek, gerekli varlıkları ve kullanımlarını konuşma Öğrenici içinde tanıtır.
+Bu öğreticide varlıklar, niteleyen varlıklar, gerekli varlıklar ve kullanımları Conversation Learner içinde kullanıma sunulmuştur.
 
 ## <a name="video"></a>Video
 
-[![Varlıkları öğretici Önizleme giriş](https://aka.ms/cl_Tutorial_v3_IntroEntities_Preview)](https://aka.ms/cl_Tutorial_v3_IntroEntities)
+[![Varlıklara giriş öğreticisi Önizleme](https://aka.ms/cl_Tutorial_v3_IntroEntities_Preview)](https://aka.ms/cl_Tutorial_v3_IntroEntities)
 
 ## <a name="requirements"></a>Gereksinimler
 
-Bu öğreticide, genel öğretici Bot çalışıyor olması gerekir
+Bu öğreticide, genel öğretici bot 'ın çalışıyor olması gerekir
 
     npm run tutorial-general
 
 ## <a name="details"></a>Ayrıntılar
 
-Varlıkları kendi görevi, ayıklama kullanıcı konuşma veya özel kod tarafından atama yoluyla gerçekleştirmek için robot gereken bilgileri yakalayın. Varlıkları kendileri de olan açıkça sınıflandırıldığı "Gerekli" veya "Eleyerek." olarak tarafından eylemi kullanılabilirliği kısıtlayabilirsiniz
+Varlıklar, Kullanıcı aralarından ayıklama veya özel kodla atama yoluyla, bot 'ın görevini gerçekleştirmesi için gereken bilgi parçalarını yakalar. Varlıklar Ayrıca, açıkça "gerekli" veya "ayırt edici" olarak sınıflandırılmak üzere eylem kullanılabilirliğini kısıtlayabilir.
 
-- Modelin bellekte eylemin kullanılabilir çalışması için gerekli varlıkları bulunması gerekir
-- Varlıkları eleyerek gerekir *değil* modelin bellek kullanılabilir olması eylem için sırada bulunması
+- Eylemin kullanılabilmesi için gerekli varlıkların modelin belleğinde mevcut olması gerekir
+- Eylemin kullanılabilir olması için uygun olmayan varlıkların modelin belleğinde mevcut *olmaması* gerekir
 
-Bu öğreticide, özel varlıklar üzerinde odaklanır. Birden çok değerli, değişkeni yoksayılamaz varlıkları ve programlı varlıkları önceden eğitilmiş, diğer öğreticileri, sunulmuştur.
+Bu öğretici özel varlıklara odaklanır. Önceden eğitilen, çok değerli, Negatiftablo varlıkları ve programlı varlıklar diğer öğreticilerde tanıtılmıştır.
 
 ## <a name="steps"></a>Adımlar
 
 ### <a name="create-the-model"></a>Model oluşturma
 
-1. Web kullanıcı Arabiriminde "Yeni modeli."'a tıklayın.
-2. "IntroToEntities" "Name" alanına yazın ve ENTER tuşuna basın.
+1. Web Kullanıcı arabiriminde "yeni model" e tıklayın.
+2. "Ad" alanına "IntroToEntities" yazın ve ENTER tuşuna basın.
 3. "Oluştur" düğmesine tıklayın.
 
 ### <a name="entity-creation"></a>Varlık oluşturma
 
-1. Sol panelde, "Varlık" sonra "Yeni varlık" düğmesine tıklayın.
-2. "Özel olarak eğitilen" seçin "Varlık türü."
-3. "City", "Varlık adı." yazın
+1. Sol bölmede, "varlıklar" ve ardından "yeni varlık" düğmesine tıklayın.
+2. "Varlık türü" için "özel eğitimli" seçeneğini belirleyin.
+3. "Varlık adı" için "şehir" yazın.
 4. "Oluştur" düğmesine tıklayın.
 
 > [!NOTE]
-> 'Özel eğitilen' varlık türü bu varlık, diğer varlık türlerinden farklı olarak düşünürler anlamına gelir.
+> ' Özel eğitilen ' varlık türü, diğer varlık türlerinin aksine bu varlığın eğitilbileceği anlamına gelir.
 
-### <a name="create-the-actions"></a>Eylem oluşturma
+### <a name="create-the-actions"></a>Eylemleri oluşturma
 
-1. Sol panelde, "Eylemler" sonra "Yeni Eylem" düğmesine tıklayın.
-2. "Botun yanıt..." alanı, "İstediğiniz hangi şehirde bilmiyorum." yazın
-3. "City" "Varlıkları eleyerek" alanına yazın
+1. Sol bölmede, "eylemler" e ve ardından "yeni eylem" düğmesine tıklayın.
+2. "Bot 'un yanıtı..." alanına "istediğiniz şehri bilmiyorum" yazın.
+3. "Niteleyen varlıklar" alanına "şehir" yazın.
 4. "Oluştur" düğmesine tıklayın.
 
 > [!NOTE]
-> "City" varlık "Eleyerek varlıklara" ekleme "city" varlık Botun bellekte tanımlandığında Botun göz önünde bulundurarak bu eylemi elemek.
+> "Şehir" varlığının "niteleyen varlıklara" eklenmesi, "şehir" varlığı bot 'un belleğinde tanımlandığında bu eylemi bot 'ın önünde bulacaktır.
 
-Şimdi, ikinci bir eylem oluşturun.
+Şimdi ikinci bir eylem oluşturun.
 
-1. Sol panelde, "Eylemler" sonra "Yeni Eylem" düğmesine tıklayın.
-2. "Botun yanıt..." alanı, "$city, hava durumu, büyük olasılıkla güneşli sağlıyor." yazın
+1. Sol bölmede, "eylemler" e ve ardından "yeni eylem" düğmesine tıklayın.
+2. "Bot 'un yanıtı..." alanı, "$city Hava durumu büyük olasılıkla Sunny." yazın.
 3. "Oluştur" düğmesine tıklayın.
 
 > [!NOTE]
-> "city" varlık yanıt başvuruya göre gerekli varlıkları listesinde otomatik olarak eklendi.
+> "Şehir" varlığı, yanıtta başvuruya göre gerekli varlıklar listesinde otomatik olarak eklenmiştir.
 
 ![](../media/tutorial3_actions.PNG)
 
 ### <a name="train-the-model"></a>Modeli eğitme
 
-1. Sol panelde, "İletişim kutuları eğitme" ve ardından "Yeni Train iletişim kutusu" düğmesine tıklayın.
-2. Sohbet panelinde nerede yazacaktır "Yazın, iletinizi...", "hello" yazın
-    - Bu, konuşma kullanıcı tarafı benzetimini yapar.
-3. "Puan Eylemler" düğmesine tıklayın.
-4. Yanıtı seçin, "İstediğiniz hangi şehirde bilmiyorum."
-5. "Seattle", kullanıcı olarak yanıtlayın.
-6. "Puan Eylemler" düğmesine tıklayın.
-7. Yanıtı seçin, "$city, hava durumu, büyük olasılıkla güneşli sağlıyor."
+1. Sol bölmede "Iletişim kutularını eğitme" düğmesine ve ardından "yeni eğitme Iletişim kutusu" düğmesine tıklayın.
+2. Sohbet panelinde "iletinizi yazın..." ifadesini yazıp "Merhaba" yazın.
+    - Bu, kullanıcının konuşmanın tarafına benzetir.
+3. "Eylemleri puan" düğmesine tıklayın.
+4. "Hangi şehri istediğinizi bilmiyorum" yanıtını seçin.
+5. Kullanıcı olarak, "Seattle" ile yanıtlayın.
+6. "Eylemleri puan" düğmesine tıklayın.
+7. Yanıt ' ı seçin, "$city Hava durumu büyük olasılıkla Sunny."
 8. "Kaydet" düğmesine tıklayın.
 
 ![](../media/tutorial3_entities.PNG)

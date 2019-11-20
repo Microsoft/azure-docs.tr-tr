@@ -1,6 +1,6 @@
 ---
-title: Azure DevTest labs'deki bir VM için bir yapıt ekleyin | Microsoft Docs
-description: Azure DevTest labs'deki bir laboratuvara içindeki bir sanal makineye bir yapıt eklemeyi öğrenin
+title: Azure DevTest Labs bir sanal makineye yapıt ekleme | Microsoft Docs
+description: Azure DevTest Labs bir laboratuvarda bir sanal makineye yapıt ekleme hakkında bilgi edinin
 services: devtest-lab,virtual-machines
 documentationcenter: na
 author: spelluru
@@ -14,58 +14,58 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/25/2019
 ms.author: spelluru
-ms.openlocfilehash: 19a7d6052091f8889a88c61793186b7bf7d9d869
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 27fec279582d845972b87ac635c87c16c239924e
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60304287"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73901321"
 ---
-# <a name="add-an-artifact-to-a-vm"></a>Bir VM'ye bir yapıt ekleme
-Bir VM oluştururken, mevcut yapıtı için ekleyebilirsiniz. Bu yapılar herhangi birinden olabilir [genel DevTest Labs Git deposu](https://github.com/Azure/azure-devtestlab/tree/master/Artifacts) veya kendi Git deposundan. Bu makalede Azure portalı ve Azure PowerShell kullanarak yapıt Ekle gösterilmektedir. 
+# <a name="add-an-artifact-to-a-vm"></a>VM’ye yapıt ekleme
+Bir VM oluştururken, var olan yapıtları buna ekleyebilirsiniz. Bu yapıtlar, [ortak DevTest Labs git deposundan](https://github.com/Azure/azure-devtestlab/tree/master/Artifacts) veya kendi git deponuzdan olabilir. Bu makalede, Azure portal yapılarını ve Azure PowerShell kullanarak nasıl ekleyeceğiniz gösterilmektedir. 
 
-Azure DevTest Labs *yapıtları* belirtmenizi sağlar *eylemleri* VM hazırlandığında Windows PowerShell komut dosyaları çalıştırmak, Bash komutları çalıştırma ve yazılım yükleme gibi gerçekleştirilir. Yapıt *parametreleri* belirli senaryonuz için yapıt özelleştirmenize olanak sağlar.
+Azure DevTest Labs *yapıtlar* , Windows PowerShell betikleri çalıştırma, Bash komutlarını çalıştırma ve yazılım yükleme gıbı, VM sağlandığında gerçekleştirilen *eylemleri* belirtmenize olanak tanır. Yapıt *parametreleri* , belirli senaryonuz için yapıtı özelleştirmenize olanak sağlar.
 
-Özel yapıtlar oluşturma hakkında bilgi edinmek için bkz: [Özel yapıtlar oluşturma](devtest-lab-artifact-author.md).
+Özel yapıtlar oluşturma hakkında bilgi edinmek için bkz. [özel yapıtlar oluşturma](devtest-lab-artifact-author.md).
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="use-azure-portal"></a>Azure portalı kullanma 
-1. [Azure Portal](https://go.microsoft.com/fwlink/p/?LinkID=525040) oturum açın.
-1. Seçin **tüm hizmetleri**ve ardından **DevTest Labs** listeden.
-1. Çalışmak istediğiniz sanal Makineyi içeren Laboratuvar labs listesinden seçin.  
-1. Seçin **sanal makinelerim**.
-1. İstediğiniz VM'yi seçin.
-1. Seçin **yapıtları yönetme**. 
-1. Seçin **yapıları uygulamak**.
-1. Üzerinde **yapıları uygulamak** bölmesinde istediğiniz sanal Makineye eklemek için yapıt seçin.
-1. Üzerinde **yapıt ekleme** bölmesinde gerekli parametre değerlerini ve ihtiyaç duyduğunuz herhangi bir isteğe bağlı parametreler girin.  
-1. Seçin **Ekle** yapıt ekleme ve dönmek için **yapıları uygulamak** bölmesi.
-1. Sanal Makineniz için gerektiği şekilde yapıtları eklemeye devam edebilirsiniz.
-1. Yapıtları ekledikten sonra [yapıtlar çalıştırılma sırasını değiştirmek](#change-the-order-in-which-artifacts-are-run). Aynı zamanda geri gidebilirsiniz [görüntülemek veya değiştirmek yapı](#view-or-modify-an-artifact).
-1. Ekleme yapıtları işiniz bittiğinde seçin **Uygula**
+1. [Azure portalında](https://go.microsoft.com/fwlink/p/?LinkID=525040) oturum açın.
+1. **Tüm hizmetler**' i seçin ve ardından listeden **DevTest Labs** ' i seçin.
+1. Laboratuvarlar listesinden, çalışmak istediğiniz VM 'yi içeren Laboratuvarı seçin.  
+1. **Sanal makinelerimi**seçin.
+1. İstediğiniz VM 'yi seçin.
+1. **Yapıtları Yönet**' i seçin. 
+1. **Yapıtları Uygula**' yı seçin.
+1. **Yapıtları Uygula** BÖLMESINDE, VM 'ye eklemek istediğiniz yapıtı seçin.
+1. **Yapıt Ekle** bölmesinde gerekli parametre değerlerini ve ihtiyacınız olan tüm isteğe bağlı parametreleri girin.  
+1. Yapıtı eklemek için **Ekle** ' yi seçin ve **yapıtları Uygula** bölmesine dönün.
+1. VM 'niz için gereken yapıtları eklemeye devam edin.
+1. Yapılarınızı ekledikten sonra [yapıtların çalıştırıldığı sırayı değiştirebilirsiniz](#change-the-order-in-which-artifacts-are-run). Ayrıca, [bir yapıtı görüntülemek veya değiştirmek](#view-or-modify-an-artifact)için geri dönebilirsiniz.
+1. Yapıtları eklemeyi tamamladığınızda **Uygula** ' yı seçin.
 
-### <a name="change-the-order-in-which-artifacts-are-run"></a>Yapıtları çalıştırdığınız sırasını değiştirme
-Varsayılan olarak, yapıları eylemleri VM'ye eklenen sırayla yürütülür. Aşağıdaki adımlar, yapılar çalıştığı sırasını değiştirme göstermektedir.
+### <a name="change-the-order-in-which-artifacts-are-run"></a>Yapıtların çalıştırıldığı sırayı değiştirme
+Varsayılan olarak, yapıtların eylemleri VM 'ye eklendikleri sırada yürütülür. Aşağıdaki adımlarda yapıtların çalıştırıldığı sıranın nasıl değiştirileceği gösterilmektedir.
 
-1. Üst kısmındaki **yapıları uygulamak** bölmesinde, sanal Makineye eklenmiş olan yapıların sayısını gösteren bağlantıyı seçin.
+1. **Yapıtları Uygula** bölmesinin en üstünde, VM 'ye eklenmiş yapıların sayısını belirten bağlantıyı seçin.
    
-    ![VM'ye eklenen yapıların sayısı](./media/devtest-lab-add-vm-with-artifacts/devtestlab-add-artifacts-blade-selected-artifacts.png)
-1. Üzerinde **seçili yapıtları** bölmesinde sürükleyip yapıtlar istenen sıralar. Yapıt sürükleyerek sorun yaşıyorsanız, yapıt sol taraftan sürükleyerek emin olun. 
+    ![VM 'ye eklenen yapıt sayısı](./media/devtest-lab-add-vm-with-artifacts/devtestlab-add-artifacts-blade-selected-artifacts.png)
+1. **Seçilen yapılar** bölmesinde, yapıtları istediğiniz sırada sürükleyin ve bırakın. Yapıtı sürüklerken sorun yaşıyorsanız, yapıtın sol tarafından sürüklediğinizden emin olun. 
 1. Tamamladığınızda **Tamam**’ı seçin.  
 
-### <a name="view-or-modify-an-artifact"></a>Görüntüleme veya bir yapıt değiştirme
-Aşağıdaki adımlar, görüntülemek veya bir yapı parametrelerini değiştirme göstermektedir:
+### <a name="view-or-modify-an-artifact"></a>Yapıtı görüntüleme veya değiştirme
+Aşağıdaki adımlarda, bir yapının parametrelerinin nasıl görüntüleneceği veya değiştirileceği gösterilmektedir:
 
-1. Üst kısmındaki **yapıları uygulamak** bölmesinde, sanal Makineye eklenmiş olan yapıların sayısını gösteren bağlantıyı seçin.
+1. **Yapıtları Uygula** bölmesinin en üstünde, VM 'ye eklenmiş yapıların sayısını belirten bağlantıyı seçin.
    
-    ![VM'ye eklenen yapıların sayısı](./media/devtest-lab-add-vm-with-artifacts/devtestlab-add-artifacts-blade-selected-artifacts.png)
-1. Üzerinde **seçili yapıtları** bölmesinde, görüntülemek veya düzenlemek istediğiniz yapıyı seçin.  
-1. Üzerinde **yapıt ekleme** bölmesinde, tüm gereken değişiklikler ve seçin **Tamam** kapatmak için **yapıt ekleme** bölmesi.
-1. Seçin **Tamam** kapatmak için **seçili yapıtları** bölmesi.
+    ![VM 'ye eklenen yapıt sayısı](./media/devtest-lab-add-vm-with-artifacts/devtestlab-add-artifacts-blade-selected-artifacts.png)
+1. **Seçilen yapılar** bölmesinde, görüntülemek veya düzenlemek istediğiniz yapıtı seçin.  
+1. **Yapıt Ekle** bölmesinde, gerekli değişiklikleri yapın ve **Tamam** ' ı seçerek **yapıt Ekle** bölmesini kapatın.
+1. **Seçilen yapılar** bölmesini kapatmak için **Tamam ' ı** seçin.
 
 ## <a name="use-powershell"></a>PowerShell kullanma
-Aşağıdaki komut, belirtilen yapıt belirtilen VM için geçerlidir. [Invoke-AzResourceAction](/powershell/module/az.resources/invoke-azresourceaction) işlemi gerçekleştiren bir komuttur.  
+Aşağıdaki betik belirtilen yapıyı belirtilen VM 'ye uygular. [Invoke-AzResourceAction](/powershell/module/az.resources/invoke-azresourceaction) komutu, işlemi gerçekleştiren bir işlemdir.  
 
 ```powershell
 #Requires -Module Az.Resources
@@ -90,7 +90,7 @@ param
 Set-AzContext -SubscriptionId $SubscriptionId | Out-Null
  
 # Get the lab resource group name
-$resourceGroupName = (Find-AzResource -ResourceType 'Microsoft.DevTestLab/labs' | Where-Object { $_.Name -eq $DevTestLabName}).ResourceGroupName
+$resourceGroupName = (Get-AzResource -ResourceType 'Microsoft.DevTestLab/labs' | Where-Object { $_.Name -eq $DevTestLabName}).ResourceGroupName
 if ($resourceGroupName -eq $null) { throw "Unable to find lab $DevTestLabName in subscription $SubscriptionId." }
 
 # Get the internal repo name
@@ -164,9 +164,9 @@ if ($virtualMachine -ne $null) {
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yapıları üzerine aşağıdaki makalelere bakın:
+Yapıtlar hakkında aşağıdaki makalelere bakın:
 
-- [Laboratuvarınız için zorunlu yapıtları belirtin](devtest-lab-mandatory-artifacts.md)
+- [Laboratuvarınız için zorunlu yapıtlar belirtin](devtest-lab-mandatory-artifacts.md)
 - [Özel yapıtlar oluşturma](devtest-lab-artifact-author.md)
-- [Bir laboratuvara yapıt deposu ekleme](devtest-lab-artifact-author.md)
+- [Laboratuvara yapıt deposu ekleme](devtest-lab-artifact-author.md)
 - [Yapıt hatalarını tanılama](devtest-lab-troubleshoot-artifact-failure.md)

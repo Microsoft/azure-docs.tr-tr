@@ -1,21 +1,22 @@
 ---
-title: "Öğretici: azure'da Docker kayıt defteri coğrafi olarak çoğaltılmış uygulaması dağıtma"
-description: İki farklı Azure bölgelerine coğrafi olarak çoğaltılmış Azure kapsayıcı kayıt defterinden bir kapsayıcı görüntüsü kullanarak Linux tabanlı bir web uygulaması dağıtın. Üç bölümden oluşan bir serinin ikinci bölümü.
+title: Öğretici-uygulamayı coğrafi olarak çoğaltılan Azure Container Registry dağıtma
+description: Coğrafi olarak çoğaltılan bir Azure Container Registry 'den bir kapsayıcı görüntüsü kullanarak Linux tabanlı bir Web uygulamasını iki farklı Azure bölgesine dağıtın. Üç bölümden oluşan bir serinin ikinci bölümü.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: tutorial
 ms.date: 08/20/2018
 ms.author: danlep
 ms.custom: seodec18, mvc
-ms.openlocfilehash: e5a38e2b6550d763f30c2462944b154f76bbe92c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 0aebc31e1b8e6849d4cc0aeccc0e0a79edf0e65d
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60508257"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73931409"
 ---
-# <a name="tutorial-deploy-a-web-app-from-a-geo-replicated-azure-container-registry"></a>Öğretici: Coğrafi çoğaltmalı Azure container registry'den web uygulaması dağıtma
+# <a name="tutorial-deploy-a-web-app-from-a-geo-replicated-azure-container-registry"></a>Öğretici: coğrafi olarak çoğaltılan bir Azure Container Registry 'den Web uygulaması dağıtma
 
 Bu, üç bölümden oluşan bir öğretici serisinin ikinci bölümüdür. [Birinci bölümde](container-registry-tutorial-prepare-registry.md), özel bir coğrafi olarak çoğaltılmış kapsayıcı kayıt defteri oluşturuldu, kaynaktan bir kapsayıcı görüntüsü derlendi ve kayıt defterine gönderildi. Bu makalede, kapsayıcıyı farklı Azure bölgelerinde bulunan iki Web App örneğine dağıtarak coğrafi olarak çoğaltılmış kayıt defterinin ağa yakın özelliğinden yararlanacaksınız. Ardından her bir örnek, kapsayıcı görüntüsünü en yakın kayıt defterinden çeker.
 
@@ -53,8 +54,12 @@ Bu adımda, *Batı ABD* bölgesinde bir Kapsayıcılar için Web App örneği ol
 |---|---|
 | **Site Adı** | Web uygulaması için genel benzersiz bir ad. Bu örnekte, web uygulamasının içinden dağıtıldığı bölgeyi ve kayıt defterini kolayca belirlemek için `<acrName>-westus` biçimini kullanıyoruz. |
 | **Kaynak Grubu** | **Var olanı kullan** > `myResourceGroup` |
-| **Uygulama hizmeti planı/Konumu** | **Batı ABD** bölgesinde `plan-westus` adlı yeni bir plan oluşturun. |
-| **Görüntü** | `acr-helloworld:v1`
+| **Uygulama hizmeti planı/Konumu** | `plan-westus`Batı ABD**bölgesinde** adlı yeni bir plan oluşturun. |
+| **Görüntü** | `acr-helloworld:v1` |
+| **İşletim sistemi** | Linux |
+
+> [!NOTE]
+> Kapsayıcılı uygulamanızı dağıtmak için yeni bir App Service planı oluşturduğunuzda, uygulamanızı barındırmak için varsayılan bir plan otomatik olarak seçilir. Varsayılan plan, işletim sistemi ayarına bağlıdır.
 
 **Oluştur**’u seçerek, web uygulamasını *Batı ABD* bölgesine sağlayın.
 
@@ -82,8 +87,9 @@ Coğrafi olarak çoğaltılmış kapsayıcı kayıt defterinizden Docker görün
 |---|---|
 | **Site Adı** | Web uygulaması için genel benzersiz bir ad. Bu örnekte, web uygulamasının içinden dağıtıldığı bölgeyi ve kayıt defterini kolayca belirlemek için `<acrName>-eastus` biçimini kullanıyoruz. |
 | **Kaynak Grubu** | **Var olanı kullan** > `myResourceGroup` |
-| **Uygulama hizmeti planı/Konumu** | **Doğu ABD** bölgesinde `plan-eastus` adlı yeni bir plan oluşturun. |
-| **Görüntü** | `acr-helloworld:v1`
+| **Uygulama hizmeti planı/Konumu** | `plan-eastus`Doğu ABD**bölgesinde** adlı yeni bir plan oluşturun. |
+| **Görüntü** | `acr-helloworld:v1` |
+| **İşletim sistemi** | Linux |
 
 **Oluştur**’u seçerek, web uygulamasını *Doğu ABD* bölgesine sağlayın.
 

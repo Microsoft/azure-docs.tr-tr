@@ -1,6 +1,6 @@
 ---
-title: Dağıtım planı - Azure Active Directory Self Servis parola sıfırlama
-description: Stratejisi başarılı uygulama Azure AD Self Servis parola sıfırlama
+title: Self servis parola sıfırlama dağıtım planı-Azure Active Directory
+description: Azure AD self servis parola sıfırlama işleminin başarılı uygulanması stratejisi
 services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
@@ -11,239 +11,239 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8b566bfc3f6c49f6cb9fe31f166356f6ae351e38
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: b648d6f914b5e3004ea3b62019bbec33e5a4871d
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67440931"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74081531"
 ---
-# <a name="deploy-azure-ad-self-service-password-reset"></a>Dağıtma Azure AD Self Servis parola sıfırlama
+# <a name="deploy-azure-ad-self-service-password-reset"></a>Azure AD self servis parola sıfırlamayı dağıtma
 
-Self Servis parola sıfırlama (SSPR), çalışanlar BT personeli bağlanmaya gerek kalmadan parolalarını sıfırlamak sağlayan bir Azure Active Directory özelliğidir. Çalışanlar, kaydolması gerekir veya Self Servis parola sıfırlama hizmetini kullanmadan önce kayıtlı olması. Kayıt sırasında çalışan bir veya daha fazla kimlik doğrulama yöntemleri ve kuruluşun etkin seçer.
+> [!NOTE]
+> Bu kılavuzda, self servis parola sıfırlama ve nasıl dağıtılacağı açıklanmaktadır. Hesabınıza geri dönmek için self servis parola sıfırlama aracı 'nı arıyorsanız [https://aka.ms/sspr](https://aka.ms/sspr)gidin. 
 
-SSPR hızlı bir şekilde Engellemesi alın ve nerede veya günün saatini ne olursa olsun çalışmaya devam etmek çalışanların sağlar. Kullanıcıların kendilerini engellemesini izin vererek, kuruluşunuzda parola güvenlikle ilgili en yaygın sorunlar için yüksek destek maliyetlerini ve üretken olmayan saat azaltabilir.
+Self servis parola sıfırlama (SSPR), çalışanların BT personeline başvurmanız gerekmeden parolalarını sıfırlamalarını sağlayan bir Azure Active Directory özelliğidir. Çalışanlar, hizmet kullanılmadan önce self servis parola sıfırlama için kaydolmalıdır veya kaydolmalıdır. Kayıt sırasında çalışan, kuruluşu tarafından etkinleştirilen bir veya daha fazla kimlik doğrulama yöntemi seçer.
 
-Hızlı bir şekilde başka bir uygulama veya hizmet kuruluşunuzdaki yanı sıra SSPR dağıtarak kaydolun kullanıcıların yardımcı olur. Bu işlem, oturum açma işlemleri büyük miktarda oluşturur ve kayıt artıracak.
+SSPR, çalışanların engellerini hızlı bir şekilde engellemesini ve nerede nerede veya günün saati olmaksızın çalışmaya devam etmesine olanak sağlar. Kuruluşunuz, kullanıcıların kendi kendilerine engellemeyi kaldırmaya izin vererek, en yaygın parolayla ilgili sorunlara yönelik üretken olmayan süreyi ve yüksek destek maliyetlerini azaltabilir.
 
-SSPR dağıtmadan önce kuruluşların kaç parola ilgili Yardım Masası çağrılarının sorun zaman ve her çağrı, ortalama maliyeti üzerinden sıfırlama belirlemek isteyebilirsiniz. SSPR kuruluşunuza getiriyor değeri göstermek için bu verileri dağıtım sonrası kullanabilirler.  
+Kullanıcıların, kuruluşunuzda başka bir uygulama veya hizmetle birlikte SSPR 'yi dağıtarak hızla kaydolmasıyla yardım edin. Bu eylem, büyük bir oturum açma hacmi oluşturur ve kayıt işlemini yeniden dener.
 
-## <a name="how-sspr-works"></a>SSPR nasıl çalışır?
+SSPR 'yi dağıtmadan önce kuruluşlar, zaman içinde hangi parola sıfırlama ile ilgili yardım masası çağrılarının gerçekleştiği ve her çağrının ortalama maliyetinin sayısını tespit etmek isteyebilir. Bu veri dağıtımını, SSPR 'nin kuruluşunuza göre göstereceği değeri göstermek için kullanabilirler.  
 
-1. Bir kullanıcı, parola sıfırlama çalıştığında, önceden kaydedilmiş kimlik doğrulama yöntemi veya kimliklerini kanıtlamak için yöntemleri doğrulamanız gerekir.
-1. Ardından kullanıcının yeni bir parola girer.
-   1. Yalnızca bulut kullanıcıları için yeni parola Azure Active Directory'de depolanır. Daha fazla bilgi için bkz [nasıl sspr'nin](concept-sspr-howitworks.md#how-does-the-password-reset-portal-work).
-   1. Karma kullanıcılar için parola, Azure AD Connect hizmeti aracılığıyla şirket içi Active Directory'ye geri yazılır. Daha fazla bilgi için bkz [parola geri yazma nedir](concept-sspr-writeback.md#how-password-writeback-works).
+## <a name="how-sspr-works"></a>SSPR 'nin çalışması
 
-## <a name="licensing-considerations"></a>Lisans hakkında önemli noktalar
+1. Bir Kullanıcı bir parolayı sıfırlamaya çalıştığında, kimliklerini kanıtlamak için önceden kaydedilmiş kimlik doğrulama yöntemini veya yöntemlerini doğrulamalıdır.
+1. Ardından Kullanıcı yeni bir parola girer.
+   1. Yalnızca bulutta bulunan kullanıcılar için yeni parola Azure Active Directory depolanır. Daha fazla bilgi için [SSPR 'Nin nasıl çalıştığı](concept-sspr-howitworks.md#how-does-the-password-reset-portal-work)makalesine bakın.
+   1. Karma kullanıcılar için parola, Azure AD Connect hizmeti aracılığıyla şirket içi Active Directory geri yazılır. Daha fazla bilgi için [parola geri yazma nedir](concept-sspr-writeback.md#how-password-writeback-works)makalesine bakın.
 
-Azure Active Directory lisansı kullanıcı başına anlamı her kullanıcının kullanabileceklerini özellikler için uygun bir lisansı olması gerekir.
+## <a name="licensing-considerations"></a>Lisanslama konuları
 
-- Yalnızca bulutta yer alan kullanıcılar için Self Servis parola sıfırlamayı ile Azure AD temel veya üstü kullanılabilir.
-- Self Servis parola gerektiren karma ortamlar için Azure AD Premium P1 veya üzeri ile şirket içi geri yazma sıfırlama.
+Azure Active Directory, Kullanıcı başına lisanslanır, her kullanıcının kullandıkları özellikler için uygun bir lisansa sahip olması anlamına gelir.
 
-Lisanslama hakkında daha fazla bilgi bulunabilir [Azure Active Directory fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/active-directory/)
+Lisanslama hakkında daha fazla bilgiyi [Azure Active Directory fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/active-directory/) bulabilirsiniz
 
-## <a name="enable-combined-registration-for-sspr-and-mfa"></a>Birleşik kayıt SSPR ve mfa'yı etkinleştir
+## <a name="enable-combined-registration-for-sspr-and-mfa"></a>SSPR ve MFA için Birleşik kaydı etkinleştir
 
-Microsoft, kuruluşların SSPR ve çok faktörlü kimlik doğrulaması için birleşik kayıt deneyimi etkinleştirmenizi önerir. Bu birleşik kayıt deneyimi etkinleştirdiğinizde kullanıcılar her iki özellikleri etkinleştirmek için yalnızca bir kez kayıt bilgileri seçmeniz gerekir.
+Microsoft, kuruluşların SSPR ve Multi-Factor Authentication için Birleşik kayıt deneyimini etkinleştirmesini önerir. Bu Birleşik kayıt deneyimini etkinleştirdiğinizde, kullanıcıların her iki özelliği de etkinleştirmek için kayıt bilgilerini yalnızca bir kez seçmesini gerekir.
 
-![Birleştirilmiş güvenlik bilgileri kayıt](./media/howto-sspr-deployment/combined-security-info.png)
+![Birleşik güvenlik bilgileri kaydı](./media/howto-sspr-deployment/combined-security-info.png)
 
-Birleşik kayıt deneyimi kuruluşlar kullanılacak SSPR ve Azure multi-Factor Authentication'ı etkinleştirmek için gerekli değildir. Birleşik kayıt deneyimi daha iyi bir kullanıcı deneyimi, geleneksel tek tek bileşenlere kıyasla kuruluşların sağlar. Makalesinde birleşik kayıt ve nasıl etkinleştirileceği hakkında daha fazla bilgi bulunabilir [birleştirilmiş güvenlik bilgileri kayıt (Önizleme)](concept-registration-mfa-sspr-combined.md)
+Birleşik kayıt deneyimi, kuruluşların hem SSPR hem de Azure Multi-Factor Authentication kullanımını etkinleştirmesini gerektirmez. Birleşik kayıt deneyimi, kuruluşların geleneksel ayrı bileşenlerle karşılaştırıldığında daha iyi bir kullanıcı deneyimi sağlar. Birleşik kayıt ve nasıl etkinleştirileceği hakkında daha fazla bilgi için, [Birleşik güvenlik bilgileri kaydı (Önizleme)](concept-registration-mfa-sspr-combined.md) makalesinde bulabilirsiniz
 
-## <a name="plan-the-configuration"></a>Yapılandırmasını planlama
+## <a name="plan-the-configuration"></a>Yapılandırmayı planlayın
 
-Aşağıdaki ayarlar, önerilen değerleri ile birlikte SSPR'ı etkinleştirmek için gereklidir.
+SSPR 'yi önerilen değerlerle birlikte etkinleştirmek için aşağıdaki ayarlar gereklidir.
 
 | Alan | Ayar | Değer |
 | --- | --- | --- |
-| **SSPR özellikleri** | Self Servis parola sıfırlama etkinleştirildi | **Seçili** için pilot grup / **tüm** üretim için |
-| **Kimlik doğrulama yöntemleri** | Kaydolma için gereken kimlik doğrulama yöntemleri | Her zaman 1 sıfırlama için gerekenden daha fazla |
+| **SSPR özellikleri** | Self servis parola sıfırlama etkin | Pilot için **Seçili** grup ve **üretim için** |
+| **Kimlik doğrulama yöntemleri** | Kaydolmak için gereken kimlik doğrulama yöntemleri | Sıfırlama için her zaman 1 daha fazla |
 |   | Sıfırlamak için gereken kimlik doğrulama yöntemleri | Bir veya iki |
-| **Kayıt** | Kullanıcılardan oturum açarken kaydolmalarını iste | Evet |
-|   | Kullanıcıların kendi kimlik doğrulama bilgilerini yeniden doğrulamaları istemeden önce geçen gün sayısı | 90 – 180 gün |
-| **Bildirimleri** | Parola sıfırlamayı kullanıcılara bildir | Evet |
-|   | Diğer yöneticiler parolalarını sıfırladığında tüm yöneticilere bildir | Evet |
-| **Özelleştirme** | Yardım Masası bağlantısını Özelleştir | Evet |
-|   | Özel bir Yardım Masası e-posta veya URL | Destek sitesi veya e-posta adresi |
-| **Şirket içi tümleştirme** | Parolalar şirket içi geri yazma AD | Evet |
-|   | Kullanıcıların hesap kilidini açma parolasını sıfırlama olmadan izin ver | Evet |
+| **Kayıt** | Kullanıcılardan oturum açarken kaydolmalarını iste | Yes |
+|   | Kullanıcılardan kimlik doğrulama bilgilerini yeniden onaylamasını istemeden önce geçen gün sayısı | 90 – 180 gün |
+| **Bildirimler** | Parola sıfırlamayı kullanıcılara bildir | Yes |
+|   | Diğer yöneticiler parolalarını sıfırladığında tüm yöneticilere bildir | Yes |
+| **Liş** | Yardım masası bağlantısını Özelleştir | Yes |
+|   | Özel yardım masası e-postası veya URL 'SI | Destek sitesi veya e-posta adresi |
+| **Şirket içi tümleştirme** | Parolaları şirket içi AD 'ye geri yazma | Yes |
+|   | Kullanıcıların, parolayı sıfırlamadan hesabın kilidini açma izni ver | Yes |
 
 ### <a name="sspr-properties-recommendations"></a>SSPR özellikleri önerileri
 
-Self Servis parola sıfırlama etkinleştirirken, pilot aşamasında kullanılacak bir güvenlik grubu seçin.
+Self servis parola sıfırlama etkinleştirildiğinde, pilot sırasında kullanılacak bir güvenlik grubu seçin.
 
-Hizmet daha geniş kapsamda başlatmak planlama yaparken, kuruluşunuzdaki herkes için SSPR zorlamak için tüm seçeneğini kullanmanızı öneririz. Tüm, uygun Azure AD güvenlik grubunu veya AD grubu Azure AD'ye eşitlenmiş olarak ayarlanamıyor
+Hizmeti daha geniş bir şekilde başlatmayı planlarken, kuruluştaki herkes için SSPR 'yi zorlamak üzere ALL seçeneğini kullanmanızı öneririz. Tümü olarak ayarlanamıyor, uygun Azure AD güvenlik grubunu veya Azure AD ile eşitlenen AD grubunu seçin.
 
 ### <a name="authentication-methods"></a>Kimlik doğrulama yöntemleri
 
-En az bir sıfırlamak için gereken sayıdan fazla kaydetmek için gereken kimlik doğrulama yöntemleri ayarlayın. Sıfırlamak gerektiğinde birden fazla izin vererek kullanıcıların esnekliği sağlar.
+Sıfırlamak için gereken sayıdan en az bir daha fazlasına kaydolmak için gereken kimlik doğrulama yöntemlerini ayarlayın. Birden çok izin verilmesi, kullanıcıların sıfırlanması gerektiğinde esneklik sağlar.
 
-Ayarlama **sıfırlamak için gereken yöntemlerin sayısı** kuruluşunuz için uygun bir seviyeye. İki güvenlik duruşunuzu artırabilirsiniz ancak bir en az uyuşmazlıkları gerektirir.
+Kuruluşunuza uygun bir düzeye **sıfırlamak için gereken yöntem sayısını** ayarlayın. Biri en az artışla ihtiyaç duyurken, ikisi de güvenlik duruşunuzu artırabilir.
 
-Bkz: [kimlik doğrulama yöntemleri nelerdir](concept-authentication-methods.md) hangi kimlik doğrulama yöntemleri SSPR, önceden tanımlı güvenlik soruları ve özelleştirilmiş güvenlik sorularını oluşturma için kullanılabilen daha ayrıntılı bilgi için.
+SSPR, önceden tanımlanmış güvenlik soruları ve özelleştirilmiş güvenlik soruları oluşturma için hangi kimlik doğrulama yöntemlerinin kullanılabildiği hakkında ayrıntılı bilgi için bkz. [kimlik doğrulama yöntemleri nedir](concept-authentication-methods.md) .
 
 ### <a name="registration-settings"></a>Kayıt ayarları
 
-Ayarlama **oturum açarken kaydolmalarını iste** için **Evet**. Bu ayar tüm kullanıcılar korunmasını sağlamak kullanıcıların oturum açarken kaydetmeye zorlanır anlamına gelir.
+Kullanıcıların **Evet** **'de oturum açarken kaydolmasını gerektir** ayarını belirleyin. Bu ayar, kullanıcıların oturum açarken kaydolması zorunlu olduğu, tüm kullanıcıların korunduğundan emin olmak anlamına gelir.
 
-Ayarlama **kullanıcıların kendi kimlik doğrulama bilgilerini yeniden doğrulamaları istemeden önce geçen gün sayısını** için arasında **90** ve **180** gün, kuruluşunuz bir iş yoksa gereksinimi kısa bir zaman dilimi için.
+Kuruluşunuzun daha kısa bir zaman dilimine yönelik bir iş ihtiyacı yoksa, kullanıcılardan kimlik doğrulama bilgilerini **90** ile **180** gün arasında **yeniden onaylamasını istemeden önce geçen gün sayısını** ayarlayın.
 
 ### <a name="notifications-settings"></a>Bildirim ayarları
 
-Hem yapılandırma **parola sıfırlamayı kullanıcılara bildir** ve **diğer yöneticiler parolalarını sıfırladığında tüm Yöneticilere bildirilsin** için **Evet**. Seçme **Evet** hem de kullanıcıların kendi parolalarını sıfırlama ve tüm yöneticileri yönetici zaman uyumlu bir parola değişikliklerini haberdar olduğunuzu sağlayarak güvenliği artırır. Kullanıcı veya yönetici böyle bir bildirim alırsınız ve bunlar değişiklik başlattınız değil, hemen olası bir güvenlik ihlali rapor edebilirsiniz.
+**Parola sıfırlamaları için kullanıcılara bildir** ' i ve **diğer yöneticiler parolasını Evet olarak sıfırladığında tüm yöneticilere bildir** 'i yapılandırın. Her ikisinde de **Evet** ' i seçmek, kullanıcıların parolası sıfırlandığında haberdar olmasını sağlayarak güvenliği artırır ve bir yönetici bir parolayı değiştirdiğinde tüm yöneticilerin farkında olur. Kullanıcılar veya Yöneticiler böyle bir bildirim alıyorsa ve değişikliği başlatmadığından, olası bir güvenlik ihlaline anında rapor verebilir.
 
 ### <a name="customization"></a>Özelleştirme
 
-Özelleştirme için kritik **Yardım Masası e-posta veya URL** kullanıcıları sorunlarla hızlı bir şekilde Yardım Al emin olmak için. Sık kullanılan Yardım Masası e-posta adresi veya web sayfası, kullanıcılarınızın aşina olduğu için bu seçeneği ayarlayın.
+Sorun yaşayan kullanıcıların hızla yardım almasını sağlamak için Yardım **Masası e-postasını veya URL 'yi** özelleştirmek önemlidir. Bu seçeneği, kullanıcılarınızın tanıdık olduğu ortak bir yardım masası e-posta adresi veya Web sayfası olarak ayarlayın.
 
 ### <a name="on-premises-integration"></a>Şirket içi tümleştirme
 
-Karma bir ortamınız varsa, emin **parolalarını şirket içi geri yazma AD** ayarlanır **Evet**. Ayrıca, daha fazla esneklik sağlar gibi Evet'e parolayı sıfırlamadan hesabının kilidini açmak için izin ver kullanıcıların ayarlayın.
+Karma ortamınız varsa, Şirket **ıçı ad 'ye geri yazma parolalarının** **Evet**olarak ayarlandığından emin olun. Ayrıca, daha fazla esneklik sağladığı için kullanıcıların parolayı sıfırlamadan hesabı açmaya Izin ver seçeneğini Evet olarak ayarlayın.
 
 ### <a name="changingresetting-passwords-of-administrators"></a>Yöneticilerin parolalarını değiştirme/sıfırlama
 
-Yönetici hesapları, yükseltilmiş izinlerle özel hesaplarıdır. Bunların güvenliğini sağlamak için yöneticilerin parolaları değiştirmek için aşağıdaki kısıtlamalar uygulanır:
+Yönetici hesapları, yükseltilmiş izinlere sahip özel hesaplardır. Bunların güvenliğini sağlamak için aşağıdaki kısıtlamalar, yöneticilerin parolalarını değiştirmek için geçerlidir:
 
-- Şirket içi Kurumsal yöneticileri veya etki alanı yöneticileri SSPR aracılığıyla kullanıcının parolasını sıfırlayamazsınız. Bunlar, yalnızca kendi şirket içi ortamda parolasını değiştirebilirsiniz. Bu nedenle, Azure AD'ye AD yönetici hesapları değil eşitleme şirket öneririz.
-- Yönetici gizli sorular ve yanıtlar parola sıfırlama için bir yöntem olarak kullanamazsınız.
+- Şirket içi kuruluş yöneticileri veya etki alanı yöneticileri, SSPR üzerinden parolalarını sıfırlayamaz. Yalnızca kendi şirket içi ortamlarında parolalarını değiştirebilirler. Bu nedenle, şirket içi AD yönetici hesaplarını Azure AD 'ye eşitetmememiz önerilir.
+- Yönetici Parola sıfırlama yöntemi olarak yanıt & gizli soruları kullanamaz.
 
-### <a name="environments-with-multiple-identity-management-systems"></a>Birden çok kimlik yönetimi sistemlerinde ortamlarla
+### <a name="environments-with-multiple-identity-management-systems"></a>Birden çok kimlik yönetimi sistemine sahip ortamlar
 
-Yönetim sistemleri ortamında Oracle AM gibi şirket içi kimlik yöneticileri gibi birden çok kimliği varsa, SiteMinder, veya diğer sistemler ve parolaları Active Directory ile yazılmış bir aracı gibi kullanarak diğer sistemlere eşitlenmesi gerekebilir Parola değiştirme bildirim hizmetini (PCNS) ile Microsoft Identity Manager (MIM). Daha karmaşık bu senaryo hakkında bilgi bulmak için bkz [bir etki alanı denetleyicisinde MIM parola değiştirme bildirimi Hizmeti'ni dağıtma](https://docs.microsoft.com/microsoft-identity-manager/deploying-mim-password-change-notification-service-on-domain-controller).
+Bir ortamda, Oracle har, Sitedefteri veya diğer sistemler gibi şirket içi kimlik yöneticileri gibi birden çok kimlik yönetimi sistemi varsa, Active Directory yazılan parolaların, şunun gibi bir araç kullanılarak diğer sistemlerle eşitlenmesi gerekebilir Parola değiştirme bildirimi hizmeti (PCNS) Microsoft Identity Manager (MıM). Bu daha karmaşık senaryoda daha fazla bilgi bulmak için, [bir etki alanı denetleyicisinde MIM parola değiştirme bildirimi hizmetini dağıtma](https://docs.microsoft.com/microsoft-identity-manager/deploying-mim-password-change-notification-service-on-domain-controller)makalesine bakın.
 
-## <a name="plan-deployment-and-support-for-sspr"></a>Dağıtım ve SSPR için destek planı
+## <a name="plan-deployment-and-support-for-sspr"></a>SSPR için dağıtımı ve desteği planlayın
 
-### <a name="engage-the-right-stakeholders"></a>Doğru proje katılımcıları etkileşim kurun
+### <a name="engage-the-right-stakeholders"></a>Doğru paydaşlara katılın
 
-Teknoloji projeleri başarısız olursa, bunlar genellikle etkisi, sonuçları ve sorumlulukları eşleşmeyen beklentiler nedeniyle bunu yapar. Bu sorunları önlemek için doğru proje katılımcıları ilgi çekici ve paydaşlara ve proje giriş ve Sorumluluk belgeleme tarafından anlaşılan projenin proje Katılımcısı rollerinde iyi olduğundan emin olun.
+Teknoloji projeleri başarısız olduğunda, genellikle etki, sonuç ve sorumlulukların eşleşmeyen beklentileri nedeniyle bu, genellikle bu şekilde yapılır. Bu girişlerin oluşmasını önlemek için, doğru proje hissedarlarını belirttiğinizden emin olun ve projedeki paydaş rollerinin, paydaşlar ve proje giriş ve sorumluluklarını belgeleyerek iyi anlaşıldığından emin olun.
 
 ### <a name="communications-plan"></a>İletişim planı
 
-İletişim, herhangi bir yeni hizmeti başarısı için önemlidir. Proaktif bir şekilde hizmetin nasıl kullanılacağını ve herhangi bir şey beklendiği gibi çalışmazsa Yardım almak için yapabileceklerini Kullanıcılarınızla iletişim kurar. Gözden geçirme [Self Servis parola sıfırlama Microsoft İndirme merkezinde ürün malzemeleri](https://www.microsoft.com/download/details.aspx?id=56768) son kullanıcı iletişim stratejinizi planlayın ilişkin fikirler için.
+İletişim, her yeni hizmetin başarısı için önemlidir. Hizmetin nasıl kullanılacağı ve beklenildiği gibi çalışmadıklarında yardım almak için neler yapabilecekleri hakkında daha etkin bir şekilde iletişim kurun. Son Kullanıcı iletişim stratejinizi nasıl planlayabileceğiniz hakkında fikir edinmek için [Microsoft İndirme Merkezi ' nde self servis parola sıfırlama dağıtım malzemelerini](https://www.microsoft.com/download/details.aspx?id=56768) gözden geçirin.
 
 ### <a name="testing-plan"></a>Test planı
 
-Dağıtımınızın beklendiği gibi çalıştığından emin olmak için uygulama doğrulamak için kullanacağınız test çalışmalarını bir dizi planlamanız gerekir. Aşağıdaki tablo, kuruluşunuzun, ilkelere dayalı sonuçları beklenen belge için kullanabileceğiniz bazı yararlı test senaryoları içerir.
+Dağıtımınızın beklendiği gibi çalıştığından emin olmak için, uygulamayı doğrulamak üzere kullanacağınız bir test çalışmaları kümesi planlamanız gerekir. Aşağıdaki tabloda, ilkelerinize göre beklenen sonuçları belgelemek için kullanabileceğiniz bazı yararlı test senaryoları yer almaktadır.
 
 | Kurum başarı hikayesi | Beklenen sonuç |
 | --- | --- |
-| SSPR portalı kurumsal ağ içinden erişilebilir | Kuruluşunuz tarafından belirlenen |
-| SSPR portalı kurumsal ağ dışından erişilebilir | Kuruluşunuz tarafından belirlenen |
-| Kullanıcı parola sıfırlama için etkinleştirilmediğinde tarayıcısından kullanıcı parolası sıfırlama | Kullanıcı parola sıfırlama işlem akışında erişmesi mümkün değil |
-| Kullanıcı parola sıfırlama için kayıtlı değil, tarayıcı kullanıcı parolası sıfırlama | Kullanıcı parola sıfırlama işlem akışında erişmesi mümkün değil |
-| Parola sıfırlama kaydı ne zaman içinde kullanıcı işaretlerini zorlanır | Kullanıcıdan güvenlik bilgilerini kaydetme istenir. |
-| Parola sıfırlama kaydı ne zaman içinde kullanıcı işaretlerini tamamlandı | Güvenlik bilgileri kaydetmek için kullanıcıya sorulmaz |
-| Kullanıcı bir lisans olmadığında SSPR portalı erişilebilir | Erişilebilir |
-| Kullanıcı kaydolduktan sonra Windows 10 AADJ veya H + AADJ cihaz kilit ekranında kullanıcı parolası sıfırlama | Kullanıcı parolasını sıfırlayabilirsiniz. |
-| SSPR kaydı ve kullanım verileri neredeyse gerçek zamanlı olarak yöneticiler tarafından kullanılabilir | Denetim günlükleri kullanılabilir |
+| SSPR portalına kurumsal ağ içinden erişilebilir | Kuruluşunuz tarafından belirlenir |
+| SSPR portalına şirket ağı dışından erişilebilir | Kuruluşunuz tarafından belirlenir |
+| Kullanıcı parola sıfırlama için etkin olmadığında Kullanıcı parolasını tarayıcıdan sıfırlayın | Kullanıcı parola sıfırlama akışına erişemiyor |
+| Kullanıcı parola sıfırlama için kaydolmadıysanız Kullanıcı parolasını tarayıcıdan sıfırlayın | Kullanıcı parola sıfırlama akışına erişemiyor |
+| Parola sıfırlama kaydı uygulandığında kullanıcı oturum açar | Kullanıcıdan güvenlik bilgilerini kaydetmesi istenir |
+| Parola sıfırlama kaydı tamamlandığında Kullanıcı oturum açar | Kullanıcıdan güvenlik bilgilerini kaydetmesi istenmez |
+| Kullanıcının lisansı olmadığında SSPR portalına erişilebilir | Erişilebilir |
+| Kullanıcı kaydolduktan sonra Windows 10 ASıFATı veya H + ASıFATı cihaz kilidi ekranından Kullanıcı parolasını sıfırlama | Kullanıcı, parolayı sıfırlayabilir |
+| SSPR kaydı ve kullanım verileri, neredeyse gerçek zamanlı olarak yöneticiler tarafından kullanılabilir | Denetim günlükleri aracılığıyla kullanılabilir |
 
 ### <a name="support-plan"></a>Destek planı
 
-SSPR kullanıcı sorunları genellikle oluşturmaz ancak destek personeli kaynaklanabilecek sorunlarla başa çıkmak için hazır olması önemlidir.
+SSPR tipik olarak Kullanıcı sorunları oluşturmadığından, ortaya çıkabilecek sorunları ele almak için destek personelinin hazırlanabileceği önemlidir.
 
-Yönetici değiştirebilir veya Azure AD Portalı aracılığıyla son kullanıcılar için parola sıfırlama sırasında bir Self Servis destek işlem sorunu çözmenize yardımcı olması daha iyidir.
+Yönetici Azure AD portalı aracılığıyla son kullanıcıların parolasını değiştirebilir veya sıfırlayabileceğinden, sorunu bir self servis destek süreci aracılığıyla çözmeye yardımcı olmak daha iyidir.
 
-Bu belgenin işlem kılavuzu bölümünde, destek ve olası nedenlerin listesini oluşturmak ve çözüm Kılavuzu oluşturun.
+Bu belgenin işletimsel kılavuz bölümünde, destek durumlarının ve olası nedenlerinden oluşan bir liste oluşturun ve çözüm için bir kılavuz oluşturun.
 
-### <a name="auditing-and-reporting"></a>Denetim ve Raporlama
+### <a name="auditing-and-reporting"></a>Denetim ve raporlama
 
-Dağıtımdan sonra birçok kuruluşun öğrenmek istediğiniz nasıl ya da (SSPR) Self Servis parola sıfırlama, gerçekten kullanılıyor. Azure Active Directory (Azure AD) sağladığı raporlama özelliği önceden oluşturulmuş raporları kullanarak soruları yanıtlamanıza yardımcı olur.
+Dağıtımdan sonra, birçok kuruluş, kendi kendine parola sıfırlama (SSPR) hizmetinin nasıl veya ne sıklıkta kullanıldığını öğrenmek ister. Azure Active Directory (Azure AD) tarafından sağlanan raporlama özelliği, önceden oluşturulmuş raporları kullanarak soruları yanıtlamanıza yardımcı olur.
 
-Kayıt ve parola sıfırlama denetim günlüklerini 30 gün boyunca kullanılabilir. Şirket içinde güvenlik denetimi daha uzun bekletme süresi gerekiyorsa, bu nedenle, günlükleri dışarı aktarılmalı ve bir SIEM aracına gibi tüketilen sağlamanız [Azure Gözcü](../../sentinel/connect-azure-active-directory.md), Splunk veya ArcSight.
+Kayıt ve parola sıfırlama için denetim günlükleri 30 gün boyunca kullanılabilir. Bu nedenle, bir kuruluş içindeki güvenlik denetimi daha uzun bekletme gerektiriyorsa, günlüklerin [Azure Sentinel](../../sentinel/connect-azure-active-directory.md), splunk veya arctıma gıbı bır SIEM aracına aktarılması ve kullanılması gerekir.
 
-Bir tablodaki bir aşağıdaki gibi yedekleme zamanlaması, sistem ve sorumlu taraflar belgeleyin. Denetim ve raporlama yedeklemeler ayrı gerekmeyebilir, ancak bir sorundan kurtulmak ayrı bir yedekleme olması gerekir.
+Aşağıdaki gibi bir tabloda, yedekleme zamanlaması, sistem ve sorumlu taraflar belgeleyebilirsiniz. Ayrı denetim ve raporlama yedeklemeleri gerekmez, ancak bir sorundan kurtarabileceğiniz ayrı bir yedeğiniz olması gerekir.
 
-|   | İndirme sıklığı | Hedef sistem | Sorumlu kişi |
+|   | İndirme sıklığı | Hedef sistem | Sorumlu parti |
 | --- | --- | --- | --- |
-| Denetim yedekleme |   |   |   |
-| Raporlama yedekleme |   |   |   |
+| Denetim yedeklemesi |   |   |   |
+| Raporlama yedeklemesi |   |   |   |
 | Olağanüstü durum kurtarma yedeklemesi |   |   |   |
 
 ## <a name="implementation"></a>Uygulama
 
-Uygulama, üç aşamada gerçekleşir:
+Uygulama üç aşamada gerçekleşir:
 
-- Kullanıcıları ve lisansları yapılandırın
-- Azure AD SSPR kayıt ve Self Servis için yapılandırma
-- Azure AD Connect parola geri yazma için yapılandırma
+- Kullanıcıları ve lisansları yapılandırma
+- Kayıt ve self servis için Azure AD SSPR 'yi yapılandırma
+- Parola geri yazma için Azure AD Connect yapılandırma
 
-### <a name="communicate-the-change"></a>Değişikliği iletişim
+### <a name="communicate-the-change"></a>Değişikliği iletişim kurma
 
-Planlama aşamasında geliştirilen iletişim planı uygulaması başlar.
+Planlama aşamasında geliştirdiğiniz iletişim planının uygulamasını başlatın.
 
-### <a name="ensure-groups-are-created-and-populated"></a>Gruplar oluşturulur ve doldurulur emin olun.
+### <a name="ensure-groups-are-created-and-populated"></a>Grupların oluşturulduğundan ve doldurulduğundan emin olun
 
-Planlama parola kimlik doğrulama yöntemleri bölümüne bakın ve gruplara pilot veya üretim uygulaması için kullanılabilir ve tüm uygun kullanıcıları gruplara eklenen emin olun.
+Parola kimlik doğrulama yöntemlerini planlama bölümüne başvurun ve pilot veya üretim uygulaması için grupların kullanılabilir olduğundan ve tüm uygun kullanıcıların gruplara eklendiğinden emin olun.
 
-### <a name="apply-licenses"></a>Uygulama lisansları
+### <a name="apply-licenses"></a>Lisansları Uygula
 
-Uygulamak için seçeceğiz grupları Azure AD olmalıdır premium lisansı atanmış. Doğrudan gruba lisans atayabilirsiniz veya PowerShell veya grup tabanlı lisanslama ile var olan lisans ilkeleri gibi kullanabilirsiniz.
+Uygulayacağınızı seçtiğiniz gruplara Azure AD Premium lisansı atanmış olmalıdır. Lisansları doğrudan gruba atayabilir veya PowerShell veya grup tabanlı lisanslama gibi mevcut lisans ilkelerini kullanabilirsiniz.
 
-Kullanıcılara, gruplara lisans atama hakkında bilgi makalesinde bulunabilir [Azure Active Directory'de Grup üyeliği kullanıcılara lisans atama](../users-groups-roles/licensing-groups-assign.md).
+Kullanıcı gruplarına lisans atama hakkında bilgiler, [Azure Active Directory ' de grup üyeliğine göre kullanıcılara lisans atama](../users-groups-roles/licensing-groups-assign.md)hakkında bilgi bulabilirsiniz.
 
-### <a name="configure-sspr"></a>SSPR yapılandırma
+### <a name="configure-sspr"></a>SSPR 'yi yapılandırma
 
-#### <a name="enable-groups-for-sspr"></a>Gruplar için SSPR etkinleştirme
+#### <a name="enable-groups-for-sspr"></a>SSPR için grupları etkinleştir
 
-1. Erişim Azure portalı ile bir yönetici hesabı.
-1. Tüm hizmetler seçin ve filtre kutusuna Azure Active Directory ve Azure Active Directory'ı seçin.
-1. Active Directory dikey penceresinde, parola sıfırlama seçin.
-1. Özellikler bölmesinde seçili seçin. Tüm kullanıcıların Tümünü Seç etkin istiyorsanız.
-1. Varsayılan parola sıfırlama İlkesi dikey penceresi, ilk grup adını yazın, seçmek ve ardından ekranın alt kısmındaki Seç'e tıklayın ve ekranın en üstünde Kaydet'seçeneğini belirleyin.
-1. Bu işlem, her grup için yineleyin.
+1. Azure portal bir yönetici hesabıyla erişin.
+1. Tüm hizmetler ' i seçin ve filtre kutusunda Azure Active Directory yazın ve Azure Active Directory ' ı seçin.
+1. Active Directory dikey penceresinde parola sıfırlama ' yı seçin.
+1. Özellikler bölmesinde, seçili ' ı seçin. Tüm kullanıcıların etkinleştirilmesini istiyorsanız tüm ' ı seçin.
+1. Varsayılan parola sıfırlama ilkesi dikey penceresinde, ilk grubun adını yazın, seçin ve ardından ekranın en altında bulunan Seç ' e tıklayın ve ekranın en üstünde bulunan Kaydet ' i seçin.
+1. Her grup için bu işlemi tekrarlayın.
 
-#### <a name="configure-the-authentication-methods"></a>Kimlik doğrulama yöntemlerini yapılandırın
+#### <a name="configure-the-authentication-methods"></a>Kimlik doğrulama yöntemlerini yapılandırma
 
-Bu belgenin planlama parola kimlik doğrulama yöntemleri bölümünden planlama başvuru.
+Bu belgenin parola kimlik doğrulama yöntemlerinden planlama bölümündeki planlamaya başvurun.
 
-1. Kayıt seçin, altında register when signing in, Evet'i seçin ve ardından süresi dolmadan önce gün sayısını ayarlayın zorunlu tutun ve Kaydet'ı seçin.
-1. Bildirim, seçin ve planınızı yapılandırmak ve Kaydet'ı seçin.
-1. Özelleştirme, seçin ve planınızı yapılandırma ve kaydetme'ı seçin.
-1. Şirket içi tümleştirme seçin ve planınızı yapılandırma ve kaydetme'ı seçin.
+1. Kayıt ' ı seçin, oturum açarken kullanıcının kaydolmasını ıste ' nin altında Evet ' i seçin ve ardından süre dolduktan önceki gün sayısını ayarlayın ve ardından Kaydet ' i seçin.
+1. Bildirim ' ı seçin ve planınız başına yapılandırın ve ardından Kaydet ' i seçin.
+1. Özelleştirmeyi seçin ve planınız başına yapılandırın ve ardından Kaydet ' i seçin.
+1. Şirket içi tümleştirme ' i seçin ve planınız başına yapılandırın ve ardından Kaydet ' i seçin.
 
-### <a name="enable-sspr-in-windows"></a>SSPR Windows içinde etkinleştir
+### <a name="enable-sspr-in-windows"></a>Windows 'da SSPR 'yi etkinleştirme
 
-1803 veya üzeri sürümü çalıştıran ya da Azure AD'ye katılan Windows 10 cihazları veya hibrit Azure AD'ye katılmış Windows oturum açma ekranında parolalarını sıfırlayabilir. Bilgi ve bu özelliği yapılandırma adımları makalesinde bulunan [sıfırlama oturum açma ekranından Azure AD parola](tutorial-sspr-windows.md)
+Azure AD 'ye katılmış veya hibrit Azure AD 'ye katılmış Windows 10 1803 cihazları, Windows oturum açma ekranında parolalarını sıfırlayabilirler. Bu özelliği yapılandırma bilgileri ve adımları, [oturum açma ekranından Azure AD parola sıfırlama](tutorial-sspr-windows.md) makalesinde bulunabilir.
 
-### <a name="configure-password-writeback"></a>Parola geri yazmayı yapılandırın
+### <a name="configure-password-writeback"></a>Parola geri yazmayı yapılandırma
 
-Makalesinde bulunabilir kuruluşunuz için parola geri yazmayı yapılandırma adımları [nasıl yapılır: Parola geri yazmayı yapılandırın](howto-sspr-writeback.md).
+Kuruluşunuz için parola geri yazma özelliğini yapılandırma adımları makalede [nasıl yapılır: parola geri yazma 'Yı yapılandırma](howto-sspr-writeback.md)makalesinde bulabilirsiniz.
 
-## <a name="manage-sspr"></a>SSPR'ı yönetme
+## <a name="manage-sspr"></a>SSPR 'yi Yönet
 
-Self Servis parola sıfırlama ile ilişkili özellikleri yönetmek için gerekli rolleri.
+Self servis parola sıfırlama ile ilişkili özellikleri yönetmek için gerekli roller.
 
-| İş rolü/kişi | Azure AD rolüne (gerekirse) |
+| İş rolü/kişi | Azure AD rolü (gerekirse) |
 | :---: | :---: |
-| Düzey 1 Yardım Masası | Parola Yöneticisi |
-| Düzey 2 Yardım Masası | Kullanıcı Yöneticisi |
-| SSPR yönetici | Genel yönetici |
+| Düzey 1 yardım masası | Parola Yöneticisi |
+| Düzey 2 yardım masası | Kullanıcı Yöneticisi |
+| SSPR Yöneticisi | Genel yönetici |
 
 ### <a name="support-scenarios"></a>Destek senaryoları
 
-Destek ekibi başarınızı etkinleştirmek için kullanıcılarınızdan gelen aldığınız sorular temel bir SSS oluşturabilirsiniz. Aşağıdaki tabloda, destek senaryoları içerir.
+Destek ekibi başarısını etkinleştirmek için, kullanıcılarınızın aldığınız sorulara dayalı bir SSS oluşturabilirsiniz. Aşağıdaki tablo, yaygın destek senaryolarını içerir.
 
 | Senaryolar | Açıklama |
 | --- | --- |
-| Kullanıcının kayıtlı kimlik doğrulama yöntemleri kullanılabilir yok | Bir kullanıcının parolasını sıfırlamak çalışıyor, ancak herhangi bir kimlik doğrulama yöntemi yok kullanılabilir kayıtlı (örnek: evde, cep telefonlarına sola ve e-postalarına erişemez) |
-| Kullanıcı bir metin alma değil veya kendi office veya cep telefonu çağrısı | Bir kullanıcı, metin veya çağrı aracılığıyla kendi kimliğini doğrulamak çalışıyor ancak bir metin/çağrı almıyor. |
-| Kullanıcı parola sıfırlama portalı erişemiyor | Bir kullanıcı parolalarını sıfırlamak istiyor, ancak parola sıfırlama için etkinleştirilmedi ve parolaları güncelleştirmek için sayfayı etkinleştirilemez. |
-| Kullanıcı yeni bir parola ayarlanamıyor | Bir kullanıcı, parola sıfırlama işlem akışında sırasında doğrulama tamamlanır ancak yeni bir parola ayarlanamaz. |
-| Kullanıcı parola sıfırlama bağlantısı, bir Windows 10 cihazında görmez | Windows 10 kilit ekranından parolasını sıfırlamak bir kullanıcı çalışıyor ancak cihaz ya da Azure AD'ye katılmış değil ya da Intune cihaz ilkesi etkin değil |
+| Kullanıcının kayıtlı bir kimlik doğrulama yöntemi yok | Kullanıcı parolasını sıfırlamaya çalışıyor ancak kaydoldukları kimlik doğrulama yöntemlerinden hiçbirine sahip değil (örnek: kendi cep telefonlarını evde ve e-postaya erişemez) |
+| Kullanıcı Office veya cep telefonunda bir metin veya çağrı almıyor | Kullanıcı, kimliğini metin veya çağrı yoluyla doğrulamaya çalışıyor ancak bir metin/çağrı almıyor. |
+| Kullanıcı parola sıfırlama portalına erişemiyor | Kullanıcı parolasını sıfırlamak istiyor ancak parola sıfırlama için etkin değil, bu nedenle parolaları güncelleştirmek için sayfaya erişemez. |
+| Kullanıcı yeni bir parola ayarlayamadı | Kullanıcı parola sıfırlama akışı sırasında doğrulamayı tamamlar, ancak yeni bir parola ayarlayamaz. |
+| Kullanıcı bir Windows 10 cihazında parola sıfırlama bağlantısı görmez | Kullanıcı Windows 10 kilit ekranından parolayı sıfırlamaya çalışıyor, ancak cihaz Azure AD 'ye katılmadı ya da Intune cihaz ilkesi etkinleştirilmemiş |
 
-Ek sorun giderme amacıyla aşağıdaki gibi bilgileri eklemek isteyebilirsiniz.
+Ek sorun giderme için aşağıdakiler gibi bilgileri de dahil etmek isteyebilirsiniz.
 
-- Hangi grupların SSPR için etkinleştirilir.
-- Hangi kimlik doğrulama yöntemleri yapılandırılır.
-- Ya da şirket ağının ilgili erişim ilkeleri.
-- Sık karşılaşılan senaryolara yönelik sorun giderme adımları.
+- SSPR için hangi gruplar etkinleştirilir.
+- Hangi kimlik doğrulama yöntemlerinin yapılandırıldığı.
+- Şirket ağı üzerinde veya üzerinde ilgili erişim ilkeleri.
+- Yaygın senaryolar için sorun giderme adımları.
 
-Ayrıca çevrimiçi Belgelerimizi en yaygın SSPR senaryolar için genel sorun giderme adımlarını anlamak için Self Servis parola sıfırlamayı giderme başvurabilirsiniz.
+Ayrıca, en yaygın SSPR senaryolarıyla ilgili genel sorun giderme adımlarını anlamak için self servis parola sıfırlama sorunlarını gidermeye yönelik çevrimiçi belgelerimize da bakabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure AD parola koruması uygulamayı düşünün](concept-password-ban-bad.md)
+- [Azure AD parola korumasını uygulamayı deneyin](concept-password-ban-bad.md)
 
-- [Azure AD akıllı kilitleme uygulamayı düşünün](howto-password-smart-lockout.md)
+- [Azure AD akıllı kilitleme 'yi uygulamayı düşünün](howto-password-smart-lockout.md)

@@ -1,6 +1,6 @@
 ---
-title: Üst bilgi tabanlı kimlik doğrulaması ile PingAccess için Azure AD uygulama proxy'si | Microsoft Docs
-description: Üst bilgi tabanlı kimlik doğrulamasını desteklemek için PingAccess ve uygulama ara sunucusu ile uygulama yayımlayın.
+title: Azure AD Uygulama Ara Sunucusu için PingAccess ile üst bilgi tabanlı kimlik doğrulaması | Microsoft Docs
+description: Üst bilgi tabanlı kimlik doğrulamasını desteklemek için, PingAccess ve uygulama proxy 'Si ile uygulama yayımlayın.
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -11,160 +11,161 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 05/08/2019
+ms.date: 10/24/2019
 ms.author: celested
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7c43498a7829a43fad331841aca045f52ae680be
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: ec115e0fa76e695809ba140202d5f13a319d33dd
+ms.sourcegitcommit: f7f70c9bd6c2253860e346245d6e2d8a85e8a91b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67481480"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73062727"
 ---
-# <a name="header-based-authentication-for-single-sign-on-with-application-proxy-and-pingaccess"></a>Üst bilgi tabanlı kimlik doğrulaması için uygulama proxy'si ile PingAccess ile çoklu oturum açma
+# <a name="header-based-authentication-for-single-sign-on-with-application-proxy-and-pingaccess"></a>Uygulama proxy 'Si ve PingAccess ile çoklu oturum açma için üst bilgi tabanlı kimlik doğrulaması
 
-Azure AD müşterileriniz uygulamanızın daha fazla erişebilmesi için azure Active Directory (Azure AD) uygulama proxy'si ile PingAccess ortak çalışma yürütmektedir. PingAccess genişletir [mevcut uygulama proxy'si teklifleri](application-proxy.md) üst bilgileri için kimlik doğrulaması kullanan uygulamalar için çoklu oturum açma erişimi eklenecek.
+Azure Active Directory (Azure AD) uygulama proxy 'Si, Azure AD müşterilerinizin uygulamalarınıza daha fazlasına erişebilmeleri için PingAccess ile işbirliği yaptı. PingAccess, [mevcut uygulama proxy tekliflerini](application-proxy.md) , kimlik doğrulaması için üst bilgiler kullanan uygulamalara çoklu oturum açma erişimi içerecek şekilde genişletir.
 
 ## <a name="whats-pingaccess-for-azure-ad"></a>Azure AD için PingAccess nedir?
 
-Azure AD için PingAccess ile kimlik doğrulaması için üst bilgi kullanan uygulamalar, kullanıcılar erişim ve çoklu oturum açma (SSO) verebilirsiniz. Uygulama Ara sunucusu, bu uygulamaları diğer, Azure AD kimlik doğrulaması yapmak için kullanarak ve ardından bağlayıcı hizmetini üzerinden trafiği geçirerek gibi davranır. PingAccess uygulamaları önünde yer alır ve Azure AD'den erişim belirteci bir üstbilgisine çevirir. Uygulama kimlik doğrulaması okuyabilmesi biçiminde alır.
+Azure AD için PingAccess sayesinde kullanıcılara kimlik doğrulaması için üst bilgi kullanan uygulamalara erişim ve çoklu oturum açma (SSO) izni verebilirsiniz. Uygulama proxy 'Si, erişimi doğrulamak ve bağlayıcı hizmeti üzerinden trafiği geçirmek için Azure AD kullanarak bu uygulamaları başka bir şekilde değerlendirir. PingAccess uygulamaların önünde bulunur ve erişim belirtecini Azure AD 'den bir üstbilgiye dönüştürür. Daha sonra uygulama, kimlik doğrulamasını okuyabilirler biçiminde alır.
 
-Kurumsal uygulamalarınıza kullanmak oturum açtığında, kullanıcılar farklı bir şey fark olmaz. Bunlar yine de her yerde her cihazda çalışabilirsiniz. Bunlar yine de yükleri otomatik olarak dengelemek şekilde uygulama ara sunucusu bağlayıcıları doğrudan bakılmaksızın kendi kimlik doğrulama türü, tüm uygulamalar için uzaktan trafiği.
+Kullanıcılarınız şirket uygulamalarınızı kullanmak için oturum açtıklarında farklı hiçbir şey yapmaz. Herhangi bir cihazdaki herhangi bir yerden çalışmaya devam edebilirler. Uygulama proxy bağlayıcıları, uzak trafiği kimlik doğrulama türlerine bakılmaksızın tüm uygulamalara yönlendirdiklerinden, yükleri otomatik olarak dengelemeye devam eder.
 
-## <a name="how-do-i-get-access"></a>Erişimi nasıl alabilirim?
+## <a name="how-do-i-get-access"></a>Nasıl yaparım? erişim mi?
 
-Bu senaryo Azure Active Directory ve PingAccess iş ortaklığı geldiğinden, iki hizmet için Lisansınızın olması gerekir. Ancak, en fazla 20 uygulamaları kapsayan temel bir PingAccess lisansı Azure Active Directory Premium abonelikleri içerir. 20'den fazla üst bilgi tabanlı uygulamaları yayımlamak gerekiyorsa, PingAccess ek lisans satın alabilirsiniz.
+Bu senaryo Azure Active Directory ve PingAccess arasındaki bir iş ortaklığından geldiğinden, her iki hizmet için de lisansa sahip olmanız gerekir. Ancak Azure Active Directory Premium abonelikler, 20 ' ye kadar uygulamayı kapsayan temel bir PingAccess lisansını içerir. 20 ' den fazla üst bilgi tabanlı uygulama yayımlamanız gerekiyorsa, PingAccess 'ten ek bir lisans satın alabilirsiniz.
 
 Daha fazla bilgi için bkz. [Azure Active Directory sürümleri](../fundamentals/active-directory-whatis.md).
 
-## <a name="publish-your-application-in-azure"></a>Uygulamanızı Azure'da yayımlayın
+## <a name="publish-your-application-in-azure"></a>Uygulamanızı Azure 'da yayımlayın
 
-Bu makale, bu senaryo ile bir uygulama ilk kez yayımlamak üzere kişiler için yazılmıştır. Yayımlama adımları gerçekleşen yanı sıra, uygulama proxy'si ve PingAccess ile çalışmaya başlama sırasında size kılavuzluk eder. Her iki hizmet zaten yapılandırdınız ancak yayımlama adımları tazelemek istiyorsanız, atlamak [uygulamanızı Azure ad uygulama ara sunucusu ile ekleme](#add-your-application-to-azure-ad-with-application-proxy) bölümü.
+Bu makale, kullanıcıların bu senaryoya ilk kez bir uygulama yayımlamasına yöneliktir. Yayımlama adımlarının açıklanmasının yanı sıra, uygulama proxy 'Si ve PingAccess ile çalışmaya başlama konusunda size rehberlik eder. Her iki hizmeti de zaten yapılandırdıysanız, ancak yayımlama adımlarında bir yenileyici isterseniz, uygulama [proxy 'si ile uygulamanızı Azure AD 'ye ekleme](#add-your-application-to-azure-ad-with-application-proxy) bölümüne atlayın.
 
 > [!NOTE]
-> Bu senaryo Azure AD arasındaki iş ortaklığı olduğundan ve PingAccess, alan yönergelerden bazılarını var Ping Identity sitesinde.
+> Bu senaryo Azure AD ve PingAccess arasında bir ortaklık olduğundan, bazı yönergeler ping kimlik sitesinde bulunur.
 
-### <a name="install-an-application-proxy-connector"></a>Uygulama Ara sunucusu bağlayıcısını yükleme
+### <a name="install-an-application-proxy-connector"></a>Uygulama proxy bağlayıcısını yükler
 
-Uygulama Ara sunucusu, etkin ve bir bağlayıcı zaten yüklü, etkinleştirdiyseniz bu bölümü atlayın ve Git [uygulamanızı Azure ad uygulama ara sunucusu ile ekleme](#add-your-application-to-azure-ad-with-application-proxy).
+Uygulama proxy 'Si etkinse ve bir bağlayıcıyı zaten yüklediyseniz, bu bölümü atlayabilir ve uygulama [proxy 'si ile uygulamanızı Azure AD 'ye ekleyebilirsiniz](#add-your-application-to-azure-ad-with-application-proxy).
 
-Uygulama Ara sunucusu Bağlayıcısı'nı yayımladığınız uygulamalarda uzak çalışanlarınız gelen trafiği yönlendiren bir Windows Server hizmetidir. Daha ayrıntılı yükleme yönergeleri için bkz. [Öğreticisi: Azure Active Directory Uygulama proxy'si aracılığıyla uzaktan erişim için şirket içi uygulama ekleme](application-proxy-add-on-premises-application.md).
+Uygulama proxy Bağlayıcısı, uzak çalışanlarınızdan gelen trafiği yayımlanan uygulamalarınıza yönlendiren bir Windows Server hizmetidir. Daha ayrıntılı yükleme yönergeleri için bkz. [öğretici: Azure Active Directory Içindeki uygulama proxy 'si aracılığıyla uzaktan erişim için şirket içi uygulama ekleme](application-proxy-add-on-premises-application.md).
 
-1. Oturum [Azure Active Directory portalında](https://aad.portal.azure.com/) uygulama yöneticisi olarak. **Azure Active Directory Yönetim Merkezi** sayfası görüntülenir.
-2. Seçin **Azure Active Directory** > **uygulama proxy'si** > **bağlayıcı hizmeti indir**. **Uygulama Proxy Bağlayıcısı indirme** sayfası görüntülenir.
+1. [Azure Active Directory portalında](https://aad.portal.azure.com/) uygulama Yöneticisi olarak oturum açın. **Azure Active Directory Yönetim Merkezi** sayfası görüntülenir.
+1. **Azure Active Directory** > **uygulama proxy 'si** > **Bağlayıcısı hizmetini indirin**' ı seçin. **Uygulama proxy Bağlayıcısı indirme** sayfası açılır.
 
-   ![Uygulama Ara sunucusu Bağlayıcısı indirme](./media/application-proxy-configure-single-sign-on-with-ping-access/application-proxy-connector-download.png)
-3. Yükleme yönergelerini izleyin.
+   ![Uygulama proxy Bağlayıcısı indirme](./media/application-proxy-configure-single-sign-on-with-ping-access/application-proxy-connector-download.png)
 
-Bağlayıcıyı indirdiğinizde otomatik olarak etkinleştirmelisiniz uygulama proxy'si dizininiz için ancak Aksi takdirde, seçebileceğiniz **uygulama ara sunucusunu etkinleştirme**.
+1. Yükleme yönergelerini izleyin.
 
-### <a name="add-your-application-to-azure-ad-with-application-proxy"></a>Uygulamanızı Azure ad uygulama ara sunucusu ile ekleme
+Bağlayıcının indirilmesi, dizininiz için otomatik olarak uygulama proxy 'Si sağlamalıdır, ancak yoksa, **uygulama proxy 'Sini etkinleştir**seçeneğini belirleyebilirsiniz.
 
-Azure portalında atmanız gereken iki eylemler vardır. İlk olarak, uygulama ara sunucusu ile uygulamanızı yayımlamak gerekir. Ardından, bazı PingAccess adımları sırasında kullanabileceğiniz uygulamayla ilgili bilgileri toplamak gerekir.
+### <a name="add-your-application-to-azure-ad-with-application-proxy"></a>Uygulamanızı Azure AD 'ye uygulama proxy 'Si ile ekleme
+
+Azure portal gerçekleştirmeniz gereken iki eylem vardır. İlk olarak, uygulamanızı uygulama proxy 'Si ile yayımlamanız gerekir. Ardından, PingAccess adımları sırasında kullanabileceğiniz uygulama hakkında bazı bilgiler toplamanız gerekir.
 
 #### <a name="publish-your-application"></a>Uygulamanızı yayımlama
 
-İlk uygulamanızı yayımlamak zorunda kalırsınız. Bu eylem içerir:
+Önce uygulamanızı yayımlamanız gerekir. Bu eylem şunları içerir:
 
-- Şirket içi uygulamanızı Azure AD'ye ekleme
-- Uygulamayı test etme ve üst bilgi tabanlı SSO seçmek için kullanıcı atama
-- Uygulamanın yeniden yönlendirme URL'si ayarlama
-- Kullanıcıların ve diğer uygulamalara şirket içi uygulamanız için izinleri veriliyor
+- Şirket içi uygulamanızı Azure AD 'ye ekleme
+- Uygulamayı test etmek ve üst bilgi tabanlı SSO 'yu seçmek için kullanıcı atama
+- Uygulamanın yeniden yönlendirme URL 'sini ayarlama
+- Şirket içi uygulamanızı kullanmak için kullanıcılar ve diğer uygulamalar için izin verme
 
 Kendi şirket içi uygulamanızı yayımlamak için:
 
-1. Son bölümde Aksi takdirde oturum [Azure Active Directory portalında](https://aad.portal.azure.com/) uygulama yöneticisi olarak.
-1. Seçin **kurumsal uygulamalar** > **yeni uygulama** > **şirket içi uygulama**. **Kendi şirket içi uygulamanızı ekleme** sayfası görüntülenir.
+1. Son bölümde yapmadıysanız, uygulama Yöneticisi olarak [Azure Active Directory portalında](https://aad.portal.azure.com/) oturum açın.
+1. **Kurumsal uygulamaları** > **Yeni uygulama** ' yı seçin > **Şirket içi bir uygulama ekleyin**. **Kendi şirket içi uygulamanızı ekleyin** sayfası görüntülenir.
 
-   ![Kendi şirket içi uygulamanızı ekleme](./media/application-proxy-configure-single-sign-on-with-ping-access/add-your-own-on-premises-application.png)
-1. Yeni uygulamanız hakkındaki bilgilerle gerekli alanları doldurun. Ayarları için aşağıdaki yönergeleri kullanın.
+   ![Kendi şirket içi uygulamanızı ekleyin](./media/application-proxy-configure-single-sign-on-with-ping-access/add-your-own-on-premises-application.png)
+1. Gerekli alanları yeni uygulamanızla ilgili bilgilerle doldurun. Ayarlar için aşağıdaki kılavuzu kullanın.
 
    > [!NOTE]
-   > Bu adımın daha ayrıntılı bir kılavuz için bkz. [şirket içi bir uygulamayı Azure AD'ye ekleme](application-proxy-add-on-premises-application.md#add-an-on-premises-app-to-azure-ad).
+   > Bu adım hakkında daha ayrıntılı yönergeler için bkz. [Azure AD 'ye şirket içi uygulama ekleme](application-proxy-add-on-premises-application.md#add-an-on-premises-app-to-azure-ad).
 
-   1. **İç URL**: Normalde şirket ağında olduğunuzda, sizi uygulamanın oturum açma sayfasına götürür URL'sini sağlayın. Bu senaryo için bağlayıcı PingAccess proxy uygulamanın ön sayfa olarak ele almanız gerekir. Bu biçimi kullanın: `https://<host name of your PingAccess server>:<port>`. Varsayılan olarak 3000 bağlantı noktasıdır, ancak PingAccess yapılandırabilirsiniz.
+   1. **Iç URL**: Normalde, şirket ağı üzerinde olduğunuzda uygulamanın oturum açma sayfasına götüren URL 'yi sağlarsınız. Bu senaryoda, bağlayıcının PingAccess proxy 'sini uygulamanın ön sayfası olarak işlemesi gerekir. Şu biçimi kullanın: `https://<host name of your PingAccess server>:<port>`. Bağlantı noktası varsayılan olarak 3000 ' dir, ancak bunu PingAccess 'te yapılandırabilirsiniz.
 
       > [!WARNING]
-      > Bu tür çoklu oturum açma için iç URL kullanmalısınız `https` ve `http`.
+      > Bu çoklu oturum açma türü için, iç URL `https` kullanmalıdır ve `http`kullanamaz.
 
-   1. **Ön kimlik doğrulama yöntemi**: Seçin **Azure Active Directory**.
-   1. **Bilgilerde URL'yi çevir**: Seçin **Hayır**.
+   1. **Ön kimlik doğrulama yöntemi**: **Azure Active Directory**seçin.
+   1. **Üst bilgilerdeki URL 'Yi çevir**: **Hayır**' ı seçin.
 
    > [!NOTE]
-   > Bu ilk uygulamanızı ise, bağlantı noktası 3000 başlatıp PingAccess yapılandırmanızı değiştirirseniz bu ayarını güncelleştirmek için geri dönen kullanın. Sonraki uygulamalar için bağlantı noktası PingAccess yapılandırdığınız dinleyici eşleşmesi gerekir. Daha fazla bilgi edinin [dinleyicileri PingAccess içinde](https://documentation.pingidentity.com/pingaccess/pa31/index.shtml#Listeners.html).
+   > İlk uygulamanız bu ise, bağlantı noktası 3000 ' u kullanarak başlangıç yapın ve PingAccess yapılandırmanızı değiştirirseniz bu ayarı güncelleştirmek için geri dönün. Sonraki uygulamalarda, bağlantı noktasının PingAccess 'te yapılandırdığınız dinleyiciyle eşleşmesi gerekir. [PingAccess 'teki dinleyiciler](https://support.pingidentity.com/s/document-item?bundleId=pingaccess-52&topicId=reference/ui/pa_c_Listeners.html)hakkında daha fazla bilgi edinin.
 
 1. **Add (Ekle)** seçeneğini belirleyin. Yeni uygulama için genel bakış sayfası görüntülenir.
 
-Şimdi uygulamayı test etmek için kullanıcı atama ve üst bilgi tabanlı çoklu oturum açma seçin:
+Şimdi uygulama testi için bir Kullanıcı atayın ve üst bilgi tabanlı çoklu oturum açma seçeneğini belirleyin:
 
-1. Uygulama kenar çubuğundan seçin **kullanıcılar ve gruplar** > **Kullanıcı Ekle** > **kullanıcılar ve gruplar (\<numarası > Seçili)** . Aralarından seçim yapabileceğiniz kullanıcıların ve grupların listesi görünür.
+1. Uygulama kenar çubuğundan **Kullanıcılar ve gruplar** ' ı seçin > **Kullanıcı Ekle** > **kullanıcılar ve gruplar (\<> sayı seçili)** . Aralarından seçim yapabileceğiniz kullanıcılar ve grupların listesi görüntülenir.
 
    ![Kullanıcıların ve grupların listesini gösterir](./media/application-proxy-configure-single-sign-on-with-ping-access/users-and-groups.png)
 
-1. Uygulamayı test etmek için bir kullanıcı seçip **seçin**. Bu test hesabı şirket içi uygulamaya erişimi olduğundan emin olun.
+1. Uygulama testi için bir kullanıcı seçin ve **Seç**' i seçin. Bu sınama hesabının şirket içi uygulamaya erişimi olduğundan emin olun.
 1. **Ata**'yı seçin.
-1. Uygulama kenar çubuğundan seçin **çoklu oturum açma** > **üst bilgi tabanlı**.
+1. Uygulama kenar çubuğundan, **üst bilgi tabanlı** > **Çoklu oturum açma** seçeneğini belirleyin.
 
    > [!TIP]
-   > Bu üst bilgi tabanlı çoklu oturum açma kullanarak ilk kez ise, PingAccess yüklemeniz gerekir. Azure aboneliğinizi PingAccess yüklemenizle birlikte otomatik olarak ilişkilendirilir emin olmak için PingAccess indirmek için bu tek oturum açma sayfasında bağlantıyı kullanın. Şimdi indirme sitesi açmak veya bu sayfada daha sonra tekrar deneyin.
+   > Üst bilgi tabanlı çoklu oturum açma 'yı ilk kez kullanıyorsanız PingAccess 'i yüklemeniz gerekir. Azure aboneliğinizin PingAccess yüklemenizin otomatik olarak ilişkilendirildiğinden emin olmak için bu çoklu oturum açma sayfasındaki bağlantıyı kullanarak PingAccess 'i indirin. İndirme sitesini şimdi açabilir veya daha sonra bu sayfaya geri dönebilirsiniz.
 
-   ![Üst bilgi tabanlı oturum açma ekranını ve PingAccess gösterir](./media/application-proxy-configure-single-sign-on-with-ping-access/sso-header.png)
+   ![Üst bilgi tabanlı oturum açma ekranını ve PingAccess 'i gösterir](./media/application-proxy-configure-single-sign-on-with-ping-access/sso-header.png)
 
 1. **Kaydet**’i seçin.
 
-Ardından, yeniden yönlendirme URL'si dış URL'nizi ayarlanır emin olun:
+Yeniden yönlendirme URL 'nizin dış URL 'niz olarak ayarlandığından emin olun:
 
-1. Gelen **Azure Active Directory Yönetim Merkezi** kenar seçme **Azure Active Directory** > **uygulama kayıtları**. Uygulamaların listesi görüntülenir.
+1. **Azure Active Directory Yönetim Merkezi** kenar çubuğundan **Azure Active Directory** > **uygulama kayıtları**' yı seçin. Uygulamaların listesi görüntülenir.
 1. Uygulamanızı seçin.
-1. Yanındaki bağlantıyı seçin **yeniden yönlendirme URI'leri**, yeniden yönlendirme URI'leri zaman ayarlanan web ve genel istemcilerinin sayısını gösteren. **\<Uygulama adı >-kimlik doğrulaması** sayfası görüntülenir.
-1. Daha önce uygulamaya atanmış bir dış URL içinde olup olmadığını denetleyin **yeniden yönlendirme URI'leri** listesi. Değilse, dış URL'yi ekleyin artık, bir yeniden yönlendirme URI'si türünü kullanan **Web**seçip **Kaydet**.
+1. Web ve genel istemciler için ayarlanan yeniden yönlendirme URI 'lerinin sayısını göstererek **yeniden yönlendirme URI**'lerinin yanındaki bağlantıyı seçin. **\<uygulama adı >-kimlik doğrulama** sayfası görüntülenir.
+1. Daha önce uygulamanıza atadığınız dış URL 'nin **yeniden yönlendirme URI 'leri** listesinde olup olmadığını denetleyin. Değilse, bir **Web**yeniden yönlendirme URI 'si türü kullanarak dış URL 'yi hemen ekleyin ve **Kaydet**' i seçin.
 
-Son olarak, şirket içi uygulamanız kullanıcıların okuma erişimi ve diğer uygulamalara okuma/yazma erişimine sahip olacak şekilde ayarlayın:
+Son olarak, kullanıcıların okuma erişiminin olması ve diğer uygulamaların okuma/yazma erişimine sahip olması için şirket içi uygulamanızı ayarlayın:
 
-1. Gelen **uygulama kayıtları** , uygulamanız için kenar seçin **API izinleri** > **bir izin eklemek**  >   **Microsoft API'leri** > **Microsoft Graph**. **İstek API izinleri** sayfasındaki **Microsoft Graph** görünür API'ler için Windows Azure Active Directory içerir.
+1. Uygulamanızın **uygulama kayıtları** kenar çubuğundan, **API izinleri** ' ni seçin > **Microsoft apı 'leri** > **izin ekleyin** > **Microsoft Graph**. Windows Azure Active Directory için API 'Leri içeren **Microsoft Graph** için **istek API 'si izinleri** sayfası görüntülenir.
 
-   ![İstek API izinleri sayfası gösterilir.](./media/application-proxy-configure-single-sign-on-with-ping-access/required-permissions.png)
+   ![API izinleri ıste sayfasını gösterir](./media/application-proxy-configure-single-sign-on-with-ping-access/required-permissions.png)
 
-1. Seçin **temsilci izinleri** > **kullanıcı** > **User.Read**.
-1. Seçin **uygulama izinleri** > **uygulama** > **Application.ReadWrite.All**.
-1. Seçin **izinleri eklemek**.
-1. İçinde **API izinleri** sayfasında **vermek için yönetici onayı \<dizin adınız >** .
+1. **Kullanıcı > ** **kullanıcı. Read** > **temsilci izinleri** seçin.
+1. **Uygulama > Application** **. ReadWrite. All** > uygulama **izinleri** seçin.
+1. **Izin Ekle**' yi seçin.
+1. **API izinleri** sayfasında, **dizin adınızın > \<Için yönetici onayı ver**' i seçin.
 
-#### <a name="collect-information-for-the-pingaccess-steps"></a>PingAccess adımlar için bilgi toplama
+#### <a name="collect-information-for-the-pingaccess-steps"></a>PingAccess adımları için bilgi toplayın
 
-Bu üç parça bilgi (PingAccess uygulamanızla ayarlamak için tüm GUID'ler) toplamak gerekir:
+Uygulamanızı PingAccess ile ayarlamak için bu üç bilgi parçasını (tüm GUID 'Leri) toplamanız gerekir:
 
-| Azure AD alanının adı | PingAccess alan adı | Veri biçimi |
+| Azure AD alanının adı | PingAccess alanının adı | Veri biçimi |
 | --- | --- | --- |
-| **Uygulama (istemci) kimliği** | **İstemci kimliği** | GUID |
-| **(Kiracı) dizin kimliği** | **Veren** | GUID |
-| `PingAccess key` | **İstemci gizli anahtarı** | Rastgele dize |
+| **Uygulama (istemci) KIMLIĞI** | **İstemci KIMLIĞI** | 'INI |
+| **Dizin (kiracı) KIMLIĞI** | **Enden** | 'INI |
+| `PingAccess key` | **İstemci parolası** | Rastgele dize |
 
 Bu bilgileri toplamak için:
 
-1. Gelen **Azure Active Directory Yönetim Merkezi** kenar seçme **Azure Active Directory** > **uygulama kayıtları**. Uygulamaların listesi görüntülenir.
-1. Uygulamanızı seçin. **Uygulama kayıtları** sayfası uygulamanızın görünür.
+1. **Azure Active Directory Yönetim Merkezi** kenar çubuğundan **Azure Active Directory** > **uygulama kayıtları**' yı seçin. Uygulamaların listesi görüntülenir.
+1. Uygulamanızı seçin. Uygulamanızın **uygulama kayıtları** sayfası görüntülenir.
 
-   ![Bir uygulama için kayıt genel bakış](./media/application-proxy-configure-single-sign-on-with-ping-access/registration-overview-for-an-application.png)
+   ![Bir uygulama için kayda genel bakış](./media/application-proxy-configure-single-sign-on-with-ping-access/registration-overview-for-an-application.png)
 
-1. Yanındaki **uygulama (istemci) kimliği** değeri, select **Panoya Kopyala** simgesini, daha sonra kopyalayın ve kaydedin. Bu değer daha sonra PingAccess'ın istemci kimliği belirtin.
-1. Sonraki **dizin (Kiracı) kimliği** değeri, aynı zamanda seçin **Panoya Kopyala**, daha sonra kopyalayın ve kaydedin. Bu değer daha sonra PingAccess'ın veren belirtin.
-1. Kenar **uygulama kayıtları** uygulamanız için seçin **sertifikalarını ve gizli dizilerini** > **yeni gizli**. **İstemci gizli dizi eklemek** sayfası görüntülenir.
+1. **Uygulama (istemci) kimliği** değerinin yanındaki **Panoya Kopyala** simgesini seçin, sonra kopyalayıp kaydedin. Bu değeri daha sonra PingAccess 'in istemci KIMLIĞI olarak belirtirsiniz.
+1. **Dizin (kiracı) kimliği** değeri ' nin ardından, **Panoya Kopyala**' yı seçin, sonra da kopyalayın ve kaydedin. Bu değeri daha sonra PingAccess 'in veren olarak belirtirsiniz.
+1. Uygulamanızın **uygulama kayıtları** kenar çubuğundan, **yeni Istemci parolası** > **Sertifikalar ve gizlilikler** ' ı seçin. **İstemci parolası Ekle** sayfası görüntülenir.
 
-   ![İstemci gizli Sayfası Ekle gösterir](./media/application-proxy-configure-single-sign-on-with-ping-access/add-a-client-secret.png)
+   ![İstemci parolası ekleme sayfasını gösterir](./media/application-proxy-configure-single-sign-on-with-ping-access/add-a-client-secret.png)
 
-1. İçinde **açıklama**, türü `PingAccess key`.
-1. Altında **Expires**, PingAccess anahtarını ayarlamak nasıl seçin: **1 yıl içinde**, **2 yıl içinde**, veya **hiçbir zaman**.
-1. **Add (Ekle)** seçeneğini belirleyin. PingAccess anahtar istemci gizli tablosunda görünür bir rastgele bu autofills içinde dize **değer** alan.
-1. PingAccess anahtarının yanındaki **değer** alanın, Seç **Panoya Kopyala** simgesini, daha sonra kopyalayın ve kaydedin. Bu değer daha sonra PingAccess'ın gizli belirtin.
+1. **Açıklama**alanına `PingAccess key`yazın.
+1. **Süre sonu**altında, pingaccess tuşunun nasıl ayarlanacağını seçin: **1 yılda**, **2 yıl içinde**veya **hiçbir zaman**.
+1. **Add (Ekle)** seçeneğini belirleyin. PingAccess tuşu, istemci gizli dizileri tablosunda, **değer** alanı ' nı tekrar dolduran rastgele bir dize ile görünür.
+1. PingAccess tuşunun **değer** alanının yanındaki **Panoya Kopyala** simgesini seçin, sonra kopyalayıp kaydedin. Bu değeri daha sonra PingAccess 'in istemci gizli anahtarı olarak belirtirsiniz.
 
-### <a name="update-graphapi-to-send-custom-fields-optional"></a>Özel alanlar (isteğe bağlı) göndermek için GraphAPI güncelleştir
+### <a name="update-graphapi-to-send-custom-fields-optional"></a>Özel alanlar göndermek için Graphapı 'yi güncelleştirme (isteğe bağlı)
 
-İçindeki diğer belirteç gönderen bir özel talep gerekiyorsa access_token PingAccess tarafından tüketilen, Ayarla `acceptMappedClaims` uygulama alanına `True`. Graph Gezgini kullanabilirsiniz veya bu değişikliği yapmak için Azure AD portalının uygulama bildirimi.
+PingAccess tarafından tüketilen access_token içindeki diğer belirteçleri gönderen özel bir talebe ihtiyacınız varsa `acceptMappedClaims` uygulama alanını `True`olarak ayarlayın. Bu değişikliği yapmak için Graph Explorer veya Azure AD portalının uygulama bildirimini kullanabilirsiniz.
 
-**Bu örnek Graph Gezgini kullanır:**
+**Bu örnek, Graf Gezginini kullanır:**
 
 ```
 PATCH https://graph.windows.net/myorganization/applications/<object_id_GUID_of_your_application>
@@ -174,20 +175,20 @@ PATCH https://graph.windows.net/myorganization/applications/<object_id_GUID_of_y
 }
 ```
 
-**Bu örnekte [Azure Active Directory portalında](https://aad.portal.azure.com/) güncelleştirilecek `acceptMappedClaims` alan:**
+**Bu örnek, `acceptMappedClaims` alanını güncelleştirmek için [Azure Active Directory portalını](https://aad.portal.azure.com/) kullanır:**
 
-1. Oturum [Azure Active Directory portalında](https://aad.portal.azure.com/) uygulama yöneticisi olarak.
-1. Seçin **Azure Active Directory** > **uygulama kayıtları**. Uygulamaların listesi görüntülenir.
+1. [Azure Active Directory portalında](https://aad.portal.azure.com/) uygulama Yöneticisi olarak oturum açın.
+1. **Azure Active Directory** > **uygulama kayıtları**' yı seçin. Uygulamaların listesi görüntülenir.
 1. Uygulamanızı seçin.
-1. Kenar **uygulama kayıtları** uygulamanızın, seçin sayfasında **bildirim**. Uygulamanızın kayıt bildirim JSON kodunu görünür.
-1. Arama `acceptMappedClaims` alan ve değere değiştirin `True`.
+1. Uygulamanızın **uygulama kayıtları** sayfasının kenar çubuğundan **bildirim**' ı seçin. Uygulamanızın kaydı için bildirim JSON kodu görüntülenir.
+1. `acceptMappedClaims` alanını arayın ve değeri `True`olarak değiştirin.
 1. **Kaydet**’i seçin.
 
-### <a name="use-of-optional-claims-optional"></a>İsteğe bağlı taleplerin (isteğe bağlı) kullanın
+### <a name="use-of-optional-claims-optional"></a>İsteğe bağlı talepler kullanımı (isteğe bağlı)
 
-İsteğe bağlı bir talep, her kullanıcı ve Kiracı standard-but-not-included-by-default talep eklemenize olanak sağlar. Uygulama bildirimini değiştirerek, uygulamanız için isteğe bağlı bir talep yapılandırabilirsiniz. Daha fazla bilgi için bkz. [Azure AD uygulama bildirim makaleyi anlama](https://docs.microsoft.com/azure/active-directory/develop/reference-app-manifest/)
+İsteğe bağlı talepler, her kullanıcı ve kiracının sahip olduğu standart, ancak dahil olmayan talepler eklemenize olanak tanır. Uygulama bildirimini değiştirerek uygulamanız için isteğe bağlı talepler yapılandırabilirsiniz. Daha fazla bilgi için bkz [. Azure AD uygulama bildirimini anlama makalesi](https://docs.microsoft.com/azure/active-directory/develop/reference-app-manifest/)
 
-PingAccess tüketecektir access_token ile e-posta adresi eklemek için örnek:
+PingAccess 'in kullanacağı access_token 'e e-posta adresi eklemek için örnek:
 ```
     "optionalClaims": {
         "idToken": [],
@@ -203,16 +204,16 @@ PingAccess tüketecektir access_token ile e-posta adresi eklemek için örnek:
     },
 ```
 
-### <a name="use-of-claims-mapping-policy-optional"></a>Talep eşleme ilkesi (isteğe bağlı) kullanın
+### <a name="use-of-claims-mapping-policy-optional"></a>Talep eşleme ilkesi kullanımı (isteğe bağlı)
 
-[Talep eşleme ilkesi (Önizleme)](https://docs.microsoft.com/azure/active-directory/develop/active-directory-claims-mapping#claims-mapping-policy-properties/) AzureAD içinde yok öznitelikler için. ADFS veya kullanıcı nesneleri tarafından desteklenen ek özel talep ekleyerek, eski şirket içi uygulamaları buluta geçirmek talep eşleme sağlar
+AzureAD içinde mevcut olmayan öznitelikler için [talep eşleme ilkesi (Önizleme)](https://docs.microsoft.com/azure/active-directory/develop/active-directory-claims-mapping#claims-mapping-policy-properties) . Talep eşleme, ADFS veya Kullanıcı nesneleriniz tarafından desteklenen ek özel talepler ekleyerek eski şirket içi uygulamaları buluta geçirmenize olanak sağlar
 
-Uygulamanızın özel talep kullanın ve ek alanları dahil olmak üzere seçtiğiniz emin olması da [bir özel talep İlkesi eşlemesi oluşturulur ve uygulamaya atanan](../develop/active-directory-claims-mapping.md#claims-mapping-policy-assignment).
+Uygulamanızın özel bir talep kullanmasını ve ek alanlar içermesini sağlamak için [özel bir talep eşleme ilkesi oluşturduğunuzdan ve uygulamaya atandığından](../develop/active-directory-claims-mapping.md#claims-mapping-policy-assignment)emin olun.
 
 > [!NOTE]
-> Bir özel talep kullanmak için tanımlanan ve uygulamaya atanan özel bir ilke olmalıdır. Bu ilke, tüm gerekli özel öznitelikler içermelidir.
+> Özel bir talep kullanmak için, tanımlanmış ve uygulamaya atanmış özel bir ilkeniz olması gerekir. Bu ilke tüm gerekli özel öznitelikleri içermelidir.
 >
-> İlke tanımı ve PowerShell, Azure AD Graph Gezgini ya da Microsoft Graph aracılığıyla atanabilecek yapabilirsiniz. PowerShell'de bunları yapıyorsanız, ilk kullanmanız gerekebilir `New-AzureADPolicy` ve uygulama ile atamak `Add-AzureADServicePrincipalPolicy`. Daha fazla bilgi için [talep eşleme ilke ataması](../develop/active-directory-claims-mapping.md#claims-mapping-policy-assignment).
+> PowerShell, Azure AD Graph Explorer veya Microsoft Graph aracılığıyla ilke tanımı ve atama yapabilirsiniz. PowerShell 'de yapıyorsanız, önce `New-AzureADPolicy` kullanmanız ve ardından `Add-AzureADServicePrincipalPolicy`ile uygulamaya atamanız gerekebilir. Daha fazla bilgi için bkz. [talep eşleme ilkesi ataması](../develop/active-directory-claims-mapping.md#claims-mapping-policy-assignment).
 
 Örnek:
 ```powershell
@@ -221,26 +222,26 @@ $pol = New-AzureADPolicy -Definition @('{"ClaimsMappingPolicy":{"Version":1,"Inc
 Add-AzureADServicePrincipalPolicy -Id "<<The object Id of the Enterprise Application you published in the previous step, which requires this claim>>" -RefObjectId $pol.Id
 ```
 
-### <a name="enable-pingaccess-to-use-custom-claims"></a>Özel talepler kullanmak PingAccess etkinleştir
+### <a name="enable-pingaccess-to-use-custom-claims"></a>Özel talepler kullanmak için PingAccess 'i etkinleştir
 
-Özel talepler kullanmak PingAccess ek talep kullanan uygulamaya bekliyorsanız ancak gerekli, isteğe bağlı etkinleştirmektir.
+Özel talepler kullanmak için PingAccess 'in etkinleştirilmesi isteğe bağlıdır, ancak uygulamanın ek talepler kullanmasını beklemeniz durumunda gereklidir.
 
-Aşağıdaki adımda PingAccess yapılandıracağınız, Web oturumu oluşturur (Ayarlar -> erişim -> Web oturumları) olmalıdır **istek profili** seçimi ve **kullanıcı özniteliklerini Yenile** kümesine **yok**
+Aşağıdaki adımda PingAccess 'i yapılandırırken, oluşturduğunuz Web oturumunun (Ayarlar-> Erişim-> Web oturumları) **Istek profili** seçiminin seçili olması ve **Kullanıcı özniteliklerinin yenilemeyecek** **şekilde** yenilenmesi gerekir
 
-## <a name="download-pingaccess-and-configure-your-application"></a>PingAccess indirin ve uygulamanızı yapılandırın
+## <a name="download-pingaccess-and-configure-your-application"></a>PingAccess 'i indirme ve uygulamanızı yapılandırma
 
-Tüm Azure Active Directory kurulum adımlarını tamamladığınıza göre PingAccess yapılandırmaya geçebilirsiniz.
+Tüm Azure Active Directory kurulum adımlarını tamamladığınıza göre, PingAccess 'i yapılandırmak için üzerinde geçiş yapabilirsiniz.
 
-Ayrıntılı adımlar için bu senaryonun PingAccess parçası Ping Identity belgelerinde devam edin. Bölümündeki yönergeleri [Microsoft Azure AD uygulama proxy'si kullanarak yayımlanmış uygulamaları korumak Azure AD için PingAccess yapılandırma](https://docs.pingidentity.com/bundle/paaad_m_ConfigurePAforMSAzureADSolution_paaad43/page/pa_c_PAAzureSolutionOverview.html) Ping Identity web sitesinde.
+Bu senaryonun PingAccess bölümüne ilişkin ayrıntılı adımlar, ping kimliği belgelerinde devam eder. Ping kimliği Web sitesindeki [Microsoft Azure AD uygulama proxy 'si kullanılarak yayınlanan uygulamaları korumak Için Azure AD Için PingAccess yapılandırma](https://support.pingidentity.com/s/document-item?bundleId=pingaccess-52&topicId=agents/azure/pa_c_PAAzureSolutionOverview.html) bölümündeki yönergeleri izleyin.
 
-Bu adımlar PingAccess yükleyin ve PingAccess hesabınızı ayarlayın (zaten yoksa) yardımcı olur. Ardından, bir Azure AD Openıd Connect (OIDC) bağlantı oluşturmak için bir belirteç sağlayıcısı ile ayarlamanız **dizin (Kiracı) kimliği** Azure AD Portalı'ndan kopyaladığınız değeri. Ardından, üzerinde PingAccess web oturumu oluşturmak için kullandığınız **uygulama (istemci) kimliği** ve `PingAccess key` değerleri. Bundan sonra kimlik eşlemeyi ayarlamanız ve bir sanal ana bilgisayar, site ve uygulama oluşturun.
+Bu adımlar PingAccess 'i yüklemenize ve bir PingAccess hesabı ayarlamanıza yardımcı olur (henüz bir hesabınız yoksa). Ardından, bir Azure AD OpenID Connect (OıDC) bağlantısı oluşturmak için Azure AD portalından kopyaladığınız **Dizin (kiracı) kimliği** değeri ile bir belirteç sağlayıcısı ayarlarsınız. Ardından, PingAccess üzerinde bir Web oturumu oluşturmak için **uygulama (istemci) kimliği** ve `PingAccess key` değerlerini kullanırsınız. Bundan sonra kimlik eşlemeyi ayarlayabilir ve sanal bir konak, site ve uygulama oluşturabilirsiniz.
 
-### <a name="test-your-application"></a>Uygulamanızı test edin
+### <a name="test-your-application"></a>Uygulamanızı test etme
 
-Tüm adımları tamamladıktan sonra uygulamanız ve çalışıyor olması gerekir. Test etmek için bir tarayıcı açın ve uygulamayı Azure'da yayımladığınızda, oluşturduğunuz dış URL'sine gidin. Uygulamaya atanan test hesapla oturum açın.
+Tüm bu adımları tamamladığınızda uygulamanız çalışır duruma gelmelidir. Test etmek için bir tarayıcı açın ve uygulamayı Azure 'da yayımladığınızda oluşturduğunuz dış URL 'ye gidin. Uygulamaya atadığınız test hesabıyla oturum açın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Microsoft Azure AD uygulama proxy'si kullanarak yayımlanmış uygulamaları korumak Azure AD için PingAccess yapılandırın](https://docs.pingidentity.com/bundle/paaad_m_ConfigurePAforMSAzureADSolution_paaad43/page/pa_c_PAAzureSolutionOverview.html)
-- [Azure Active Directory'de uygulamalar için çoklu oturum açma](what-is-single-sign-on.md)
-- [Uygulama proxy'si sorunlarını ve hata iletileri sorunlarını giderme](application-proxy-troubleshoot.md)
+- [Microsoft Azure AD uygulama proxy 'Si kullanılarak yayımlanan uygulamaları korumak için Azure AD için PingAccess 'i yapılandırma](https://support.pingidentity.com/s/document-item?bundleId=pingaccess-52&topicId=agents/azure/pa_c_PAAzureSolutionOverview.html)
+- [Azure Active Directory uygulamalarda çoklu oturum açma](what-is-single-sign-on.md)
+- [Uygulama proxy 'Si sorunlarını ve hata iletilerini sorun giderme](application-proxy-troubleshoot.md)

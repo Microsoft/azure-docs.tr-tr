@@ -1,416 +1,333 @@
 ---
 title: Takım için görevleri takım veri bilimi işlemi takıma sağlama
-description: Bir ekip lideri bir veri bilimi takım projesi üzerinde görevleri bir özetini için veri bilimi ekip tamamlanması bekleniyor.
+description: Ekip veri bilimi süreç ekibi üzerinde bir takım için görevlere ilişkin ayrıntılı bir anlatım
 author: marktab
 manager: cgronlun
 editor: cgronlun
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 11/13/2017
+ms.date: 09/23/2019
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 45be3d7f865c7b72ae62efbf99dbbb4594b1846f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9c6d0fcc20afc613094f10e9f3fb7c917ec6fa73
+ms.sourcegitcommit: e9936171586b8d04b67457789ae7d530ec8deebe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60811788"
+ms.lasthandoff: 09/27/2019
+ms.locfileid: "71327242"
 ---
-# <a name="tasks-for-the-team-lead-in-the-team-data-science-process-team"></a>Takım için görevleri takım veri bilimi işlemi takıma sağlama
+# <a name="tasks-for-the-team-lead-on-a-team-data-science-process-team"></a>Takım veri bilimi süreç ekibi üzerinde ekip liderine yönelik görevler
 
-Bu konuda anahatları ekip lideri olan görevleri için veri bilimi ekip tamamlanması bekleniyor. Hedefi üzerinde standartlaştırır ekip işbirliği ortamı oluşturmaktır [Team Data Science Process](overview.md) (TDSP). TDSP Tahmine dayalı analiz çözümlerini ve akıllı uygulamaları etkili bir şekilde sunmak için bir Çevik, yinelemeli bir veri bilimi metodolojisidir ' dir. İşbirliği ve takım öğrenme geliştirmeye yardımcı olmak için tasarlanmıştır. Yapıları yönelik geliştirdikleri başarılı şirketler tamamen yardımcı olmak için veri bilimi girişimlerini gerekli sektörün yanı sıra hem Microsoft'un kendi analiz programlarının avantajlarından ve en iyi bir distillation işlemidir. Bu işlemi, standart personel rolleri ve veri bilimi ekibi tarafından işlenen ilişkilendirilen görevlerinin bir özetini görmek [Team Data Science Process rolleri ve görevleri](roles-tasks.md).
+Bu makalede, bir *ekibin* veri bilimi ekibi için tamamladığı görevler açıklanmaktadır. Ekip lideri hedefi, [ekip veri bilimi işlemini](overview.md) (TDSP) standartlaştırmaya yönelik işbirliği yapan bir ekip ortamı kurmaya yönelik. TDSP, işbirliğinin ve Team Learning 'in artırılmasına yardımcı olmak için tasarlanmıştır. 
 
-A **ekibine Liderlikte** kurumsal bir veri bilimi birimindeki ekibi yönetir. Takım birden çok veri bilimcileri oluşur. Yalnızca az sayıda veri bilimcileri, veri bilimi birimle için **Grup Yöneticisi** ve **ekibine Liderlikte** aynı kişiye olabilir veya kendi görev için bir yedek temsilci seçebilecek. Ancak görevlerin kendileri değiştirmeyin. Bu ortamı ayarlamak için takım liderleri tarafından tamamlanacak görevler için iş akışını aşağıdaki şekilde gösterilen:
+TDSP, tahmine dayalı analiz çözümlerini ve akıllı uygulamaları verimli bir şekilde sunmak için çevik ve yinelemeli bir veri bilimi metodolojisidir. Süreç, Microsoft 'un ve sektördeki en iyi uygulama ve yapıların, şirketlerin analiz programlarının avantajlarından tamamen yararlanmalarına yardımcı olmak için veri bilimi girişimlerinin başarılı bir şekilde uygulanması için gerekli olan en iyi yöntem ve yapıların bir bölümünü açığa çıkarın. TDSP üzerinde standartlaştırarak bir veri bilimi ekibi için personel rollerinin ve ilişkili görevlerin bir özeti için bkz. [Team Data Science işlem rolleri ve görevleri](roles-tasks.md).
 
-![1](./media/team-lead-tasks/team-leads-1-creating-teams.png)
+Bir ekip lideri, bir kuruluşun veri bilimi birimindeki çeşitli veri bilimlerinden oluşan bir ekibi yönetir. Veri bilimi biriminin boyutuna ve yapısına bağlı olarak, [Grup Yöneticisi](group-manager-tasks.md) ve ekip lideri aynı kişi olabilir ya da görevlerini yedeklerin kapılarına devredebilir. Ancak görevlerin kendileri değiştirmeyin. 
 
->[AZURE.NOTE] 1\. ve 2 segmentini blokları görevleri kod ana bilgisayar platformu Azure DevOps kullanıyorsanız ve kendi ekibiniz için ayrı bir Azure DevOps projesi bulunmasını gereklidir. Bu görevler tamamlandıktan sonra ekibinizin tüm depolar bu projesi altında oluşturulabilir. 
+Aşağıdaki diyagramda ekip lideri bir takım ortamını ayarlamak için tamamlandıkça ekip lideri görevlere ilişkin iş akışı gösterilmektedir:
 
-Aşağıdaki bölümde belirttiğiniz görev grubu yöneticisi tarafından karşılanan birkaç önkoşul sonra beş asıl görevler vardır (bazı isteğe bağlı) Bu öğreticinin tamamlanması. Bu görevler, bu konu başlığının bölümleri numaralı ana karşılık gelir:
+![Ekip lideri görev iş akışı](./media/team-lead-tasks/team-leads-1-creating-teams.png)
 
-1. Oluşturma bir **proje** grubun Azure DevOps Hizmetleri grubunun ve projedeki iki takım depolarını:
-    - **ProjectTemplate depo** 
-    - **TeamUtilities depo**
-2. Takım temel **ProjectTemplate** depodan **GroupProjectTemplate** grubu yöneticiniz tarafından ayarlanan deposu. 
-3. Takım veri ve analiz kaynaklarını oluşturun:
-    - Takım özgü yardımcı programları ekleme **TeamUtilities** depo. 
-    - (İsteğe bağlı) Oluşturma bir **Azure dosya depolama** takımın tamamı için yararlı olabilecek veri varlıkları depolamak için kullanılacak. 
-4. (İsteğe bağlı) Azure dosya depolama bağlama **veri bilimi sanal makinesi** (DSVM) takım sağlama ve veri varlıklarını ekleyin.
-5. Ayarlanan **güvenlik denetimi** göre takım üyeleri ekleme ve kendi ayrıcalıklarını yapılandırın.
+1. Azure DevOps 'da grubun kuruluşunda bir **Takım projesi** oluşturun. 
+  
+1. Varsayılan takım deposunu **Ekipçlikleri**olarak yeniden adlandırın.
+  
+1. Takım projesinde yeni bir **Teamtemplate** deposu oluşturun. 
+  
+1. Grubun **Grouputilities** ve **groupprojecttemplate** depolarındaki içerikleri **ekipte** , ekip **şablonu** depolarında içeri aktarın. 
+  
+1. Takım üyeleri ekleyerek ve izinlerini yapılandırarak **güvenlik denetimini** ayarlayın.
+  
+1. Gerekirse, takım verileri ve analiz kaynakları oluşturun:
+   - **Ekipte izin deposuna ekibe** özel yardımcı programlar ekleyin. 
+   - Tüm takım için yararlı olabilecek veri varlıklarını depolamak için **Azure dosya depolama alanı** oluşturun. 
+   - Azure dosya depolama alanını ekip lideri **veri bilimi sanal makinesi** (dsvm) ile bağlayın ve bu verilere veri varlıkları ekleyin.
 
->[AZURE.NOTE] Azure DevOps aşağıdaki yönergeleri kullanarak TDSP takım ortamını ayarlamak için gerekli olan adımları genel çizgileriyle belirtin. Biz, biz Microsoft'ta TDSP nasıl uygulama olduğundan, Azure DevOps ile bu görevleri gerçekleştirmek üzere nasıl belirtin. Grubunuz için başka bir kod barındırma platformu kullanılıyorsa, ekip lideri tarafından genellikle tamamlanması gereken görevler değiştirmeyin. Ancak bu görevleri tamamlamak için yol farklı zordur.
+Aşağıdaki öğreticide, ayrıntılı adımlarda adım adım gösterilmektedir.
 
-## <a name="repositories-and-directories"></a>Depoları ve dizinler
+> [!NOTE] 
+> Bu makalede, Microsoft 'ta TDSP 'nin uygulanması nedeniyle bir TDSP ekip ortamı ayarlamak için Azure DevOps ve DSVM kullanılmaktadır. Takımınız diğer kod barındırma veya geliştirme platformlarını kullanıyorsa, ekip sağlama görevleri aynıdır, ancak bunları tamamlamaya yönelik yol farklı olabilir.
 
-Bu konuda, kısaltılmış depoları ve dizinler için kullanılır. Bu adlar dizinlerini ve depoları işlemleri izlemenizi kolaylaştırır. Bu gösterim (**R** Git depoları ve **D** DSVM'ye yerel dizinler için) aşağıdaki bölümlerde kullanılır:
+## <a name="prerequisites"></a>Önkoşullar
 
-- **R1**: **GroupProjectTemplate** Azure DevOps grubu sunucunuzda, Grup Yöneticisi ayarladığınız Git deposunda.
-- **R3**: Takım **ProjectTemplate** ayarladığınız Git deposunda.
-- **R4**: **TeamUtilities** ayarladığınız Git deposunda.
-- **D1**: Yerel dizin R1 kopyalandı ve D3 için kopyalanır.
-- **D3**: Yerel dizin R3 ' kopyalanabilir, özelleştirme ve R3 için kopyalanır.
-- **D4**: Yerel dizin R4 kopyalanan, özelleştirme ve yeniden R4 için kopyalanır.
+Bu öğreticide, aşağıdaki kaynakların ve izinlerin [Grup yöneticiniz](group-manager-tasks.md)tarafından ayarlandığı varsayılır:
 
-Bu öğreticide depolar ve dizin için belirtilen adlar hedefiniz daha büyük bir veri bilimi grup içinde kendi ekibiniz için ayrı bir proje oluşturmaktır varsayımına üzerinde sağlanmıştır. Ancak, ekip lideri açık diğer seçenekleri mevcuttur:
+- Veri biriminiz için Azure DevOps **organizasyonu**
+- **Groupprojecttemplate** ve **Grouputilities** depoları, Microsoft TDSP ekibinin **ProjectTemplate** ve **yardımcı program** depoları içeriğiyle doldurulmuştur
+- Takımınız için projeler ve depolar oluşturmanız için kuruluşunuzun hesabındaki izinler
 
-- Grubun tamamını tek bir proje oluşturmayı seçebilirsiniz. Ardından tüm veri bilimi ekipleri tüm projelerden bu projenin altında olacaktır. Bunu başarmak için tek bir proje oluşturmak için bu yönergeleri izlemek için bir git yönetici belirleyebilirsiniz. Bu senaryo, örneğin geçerli olabilir:
-    -  birden çok veri bilimi ekipleri sahip olmayan bir küçük veri bilimi grubu 
-    -  yine de grup düzeyinde sprint planlama gibi etkinliklerle arası işbirliğini en iyi duruma getirmek istediği daha büyük bir veri bilimi Grup birden çok veri bilimi ekipleri ile. 
-- Takımlar team özel proje şablonları veya ekibe özgü yardımcı programlar tüm grup için tek projesi altındaki sahip olmayı seçebilirsiniz. Bu durumda, takım liderleri, proje şablonu depoları ve/veya takım yardımcı programları depolarını aynı projesi altındaki oluşturmanız gerekir. Bu depolar ad *< TeamName\>ProjectTemplate* ve *< TeamName\>yardımcı programları*, örneğin, *TeamJohnProjectTemplate*ve *TeamJohnUtilities*. 
+Depoları kopyalayabilir ve yerel makinenizde veya DSVM 'de içeriklerini değiştirebilir veya Azure dosya depolama alanını ayarlayıp DSVM 'nize bağlayabilmek için şunlar gerekir:
 
-Herhangi bir durumda, takım liderleri takım üyelerinin hangi şablon ve yardımcı programlar depolar ayarlama ve proje ve yardımcı programlar depoların kopyalanması benimsemeniz bilmeniz bildirmeniz gerekir. Proje liderleri izlemelidir [bir veri bilimi takım projesi neden görevlerde](project-lead-tasks.md) ayrı projeler olmadığını altında tek bir proje veya proje depoları oluşturmak için. 
+- Azure aboneliği.
+- Git makinenizde yüklü. DSVM kullanıyorsanız git önceden yüklüdür. Aksi takdirde bkz [platformları ve araçlarıyla ek](platforms-and-tools.md#appendix).
+- DSVM 'yi, Azure 'da oluşturulan ve yapılandırılan Windows veya Linux DSVM 'yi kullanmak istiyorsanız. Daha fazla bilgi ve yönergeler için [veri bilimi sanal makinesi belgelerine](/azure/machine-learning/data-science-virtual-machine/)bakın.
+- Bir Windows DSVM için, makinenizde yüklü [Git kimlik bilgileri Yöneticisi (GCM)](https://github.com/Microsoft/Git-Credential-Manager-for-Windows) . *README.MD* dosyasında, **indir ve yükle** bölümüne gidin ve **en son yükleyiciyi**seçin. Yükleyici sayfasından *. exe* yükleyicisini indirin ve çalıştırın. 
+- Bir Linux DSVM için, DSVM 'niz üzerinde ayarlanan ve Azure DevOps 'a eklenen bir SSH ortak anahtarı. Daha fazla bilgi ve yönergeler için [platformlar ve araçlar EKINDE](platforms-and-tools.md#appendix) **SSH ortak anahtarı oluşturma** bölümüne bakın. 
 
+## <a name="create-a-team-project-and-repositories"></a>Takım projesi ve depoları oluşturma
 
-## <a name="0-prerequisites"></a>0. Önkoşullar
+Bu bölümde, grubunuzun Azure DevOps kuruluşunda aşağıdaki kaynakları oluşturursunuz:
 
-Özetlenen, Grup Yöneticisi atanan görevlerin tamamlayarak önkoşullara uyduğunuzdan [grup yöneticisi görevleri için bir veri bilimi ekip](group-manager-tasks.md). Burada özetlemek gerekirse, aşağıdaki gereksinimleri ekip sağlama görevlerini başlamadan önce yerine getirmeniz gerekir: 
+- Azure DevOps 'daki **myTeam** projesi
+- **Teamtemplate** deposu
+- **Ekipçlikleri** deposu
 
-- **Azure DevOps Services grubunda** (veya barındırma platformu başka bir kod grubu hesabı), Grup Yöneticisi ayarlandı.
-- **GroupProjectTemplate depo** (R1) ayarlanmış grubu hesabınızdaki barındırma platformu kullanmayı planladığınız kod, grup yöneticisi tarafından.
-- Size verilmiş olması **yetkili** grubu hesabınızda ekibiniz için depo oluşturun.
-- Git makinenizde yüklü olması gerekir. Bir veri bilimi sanal makinesi (DSVM) kullanıyorsanız, Git önceden yüklenmiş ve hazırsınız demektir. Aksi takdirde bkz [platformları ve araçlarıyla ek](platforms-and-tools.md#appendix).  
-- Kullanıyorsanız bir **Windows DSVM**, ihtiyacınız [Git Credential Manager'ı (GCM)](https://github.com/Microsoft/Git-Credential-Manager-for-Windows) makinenizde yüklü. README.md dosyasında doğru aşağı kaydırın **indirme ve yükleme** tıklayın ve bölüm *en son yükleyicisi*. Bu en son yükleyici sayfasına götürür. .Exe yükleyiciyi buradan indirin ve çalıştırın. 
-- Kullanıyorsanız **Linux DSVM'sini**, bir SSH ortak anahtarı üzerinde DSVM oluşturma ve Grup Azure DevOps hizmetlerinizi ekleyin. SSH hakkında daha fazla bilgi için bkz: **oluşturma SSH ortak anahtarı** konusundaki [platformları ve araçlarıyla ek](platforms-and-tools.md#appendix). 
-    
-## <a name="1-create-a-project-and-repositories"></a>1. Bir proje oluşturup depoları
+Bu öğreticideki depolar ve dizinler için belirtilen adlar, büyük veri bilimi kuruluşunuzda kendi ekibiniz için ayrı bir proje kurmak istediğinizi varsayar. Bununla birlikte, tüm grup, Grup Yöneticisi veya kuruluş yöneticisi tarafından oluşturulan tek bir proje altında çalışmayı tercih edebilir. Ardından, tüm veri bilimi takımları bu tek proje kapsamında depolar oluşturur. Bu senaryo için geçerli olabilir:
+- Birden çok veri bilimi ekibi olmayan küçük bir veri bilimi grubu. 
+- Aynı şekilde, grup düzeyi Sprint planlaması gibi etkinliklerle ekip içi işbirliğini iyileştirmek isteyen birden fazla veri bilimi ekibine sahip daha büyük bir veri bilimi grubu. 
 
-Azure DevOps, kodunuzu barındırma sürüm oluşturma ve işbirliği platformu olarak kullanıyorsanız bu adımı tamamlayın. Bu bölümde, Azure DevOps hizmetlerinde grubunuzun üç yapıları oluşturma bulunur:
+Ekipler tek bir grup projesi altında, takımlarına özgü depolara sahip olmasını tercih ediyorsanız, ekip müşteri adayları  *\<TeamName > şablonu* ve  *\<TeamName > yardımcı programları*gibi adlara sahip depolar oluşturmamalıdır. Örneğin: *Teamatemplate* ve *teamautilities*. 
 
-- **MyTeam** , Azure DevOps projesi
-- **MyProjectTemplate** depo (**R3**) üzerinde Git
-- **MyTeamUtilities** depo (**R4**) üzerinde Git
+Herhangi bir durumda, takımın, takım üyelerinin hangi şablon ve yardımcı program depoları ayarlayabileceklerini ve kopyalayabileceklerini bilmesini sağlamak gerekir. Proje liderleri, ayrı projeler veya tek bir proje kapsamında olmak üzere, [bir veri bilimi ekibinin proje depoları oluşturması için proje sağlama görevlerini](project-lead-tasks.md) izlemelidir. 
 
 ### <a name="create-the-myteam-project"></a>MyTeam projesi oluşturma
 
-- Grubunuzun Azure DevOps Services giriş sayfası URL'de Git `https://<Azure DevOps Services Name\>.visualstudio.com`. 
-- Tıklayın **yeni** bir proje oluşturmaktır. 
-
-    ![2](./media/team-lead-tasks/team-leads-2-create-new-team.png)
-
-- Bir oluşturma proje penceresi isteyen proje adı girin (**MyTeam** Bu örnekte). Seçtiğinizden emin olun **Çevik** olarak **işlem şablonu** ve **Git** olarak **sürüm denetimi**. 
-
-    ![3](./media/team-lead-tasks/team-leads-3-create-new-team-2.png)
-
-- Tıklayın **proje oluştur**. Projenizi **MyTeam** 1 dakikadan az oluşturulur. 
-
-- Projeye **MyTeam** olan oluşturulan tıklayın **proje Git** düğme, projenizin giriş sayfasına yeniden yönlendirilmesi için. 
-
-    ![4](./media/team-lead-tasks/team-leads-4-create-new-team-3.png)
-
-- Görürseniz bir **Tebrikler!** açılan pencere tıklayın **kod ekleme** (kırmızı kutu içinde düğme). ' A tıklayıp **kod** (kutusunda sarı). Bu projenizin Git deposu sayfasına yönlendirir. 
-
-    ![5](./media/team-lead-tasks/team-leads-5-team-project-home.png)
-
-### <a name="create-the-myprojecttemplate-repository-r3-on-git"></a>Git (R3) MyProjectTemplate depo oluşturma
-
-- Projenizin Git deposu sayfasında depo adının yanındaki aşağı oku **MyTeam**seçip **depoları Yönet...** .
-
-    ![6](./media/team-lead-tasks/team-leads-6-rename-team-project-repo.png)
-
-- Üzerinde **sürüm denetimi** sekmesini projenizi Denetim Masası ' nı **MyTeam**, ardından **depoyu yeniden adlandır...** . 
-
-    ![7](./media/team-lead-tasks/team-leads-7-rename-team-project-repo-2.png)
-
-- Depoya yeni bir ad giriş **MyTeam depoyu yeniden adlandırabilir** penceresi. Bu örnekte, *MyTeamProjectTemplate*. Benzer bir şey seçebileceğiniz *< takım adınızı\>ProjectTemplate*. Tıklayın **Yeniden Adlandır** devam etmek için.
-
-    ![8](./media/team-lead-tasks/team-leads-8-rename-team-project-repo-3.png)
-
-### <a name="create-the-myteamutilities-repository-r4-on-git"></a>Git (R4) MyTeamUtilities depo oluşturma
-
-- Yeni bir havuz oluşturmak için *< takım adınızı\>yardımcı programları* projenizi altına tıklayın **yeni havuz...**  üzerinde **sürüm denetimi** projenizin Denetim Masası sekmesinde.  
-
-    ![9](./media/team-lead-tasks/team-leads-9-create-team-utilities.png)
-
-- İçinde **yeni depo Oluştur** , açılır penceresi bu depo için bir ad belirtin. Bu örnekte biz olarak adlandırın *MyTeamUtilities*, olduğu **R4** bizim gösterimde. Aşağıdaki gibi seçin *< takım adınızı\>yardımcı programları*. Seçtiğinizden emin olun **Git** için **türü**. ' A tıklayarak **Oluştur** devam etmek için.
-
-    ![10](./media/team-lead-tasks/team-leads-10-create-team-utilities-2.png)
-
-- Projenizi altında oluşturulan iki yeni Git depolarını gördüğünüzü onaylayın **MyTeam**. Bu örnekte: 
-
-- **MyTeamProjectTemplate** (R3) 
-- **MyTeamUtilities** (R4).
-
-    ![11](./media/team-lead-tasks/team-leads-11-two-repo-in-team.png)
-
-
-## <a name="2-seed-your-projecttemplate-and-teamutilities-repositories"></a>2. ProjectTemplate ve TeamUtilities depolarınızı temel
-
-Dengeli dağıtım yordam dizinleri yerel DSVM'ye Ara hazırlama siteler olarak kullanır. Özelleştirmeniz gerekirse, **ProjectTemplate** ve **TeamUtilities** depoları bazı belirli karşılamak için ekip ihtiyaçlarını, aşağıdaki yordamın sondan adımında bunu. İçeriği sağlamak için kullanılan adımlarla bir özeti aşağıda verilmiştir **MyTeamProjectTemplate** ve **MyTeamUtilities** bir veri bilimi team için depoları. Her bir adımı alt bölümlere dengeli dağıtım yordamda karşılık gelir:
-
-- Yerel dizine grubu depoyu Kopyala: yerel D1 -> için kopyalanan R1 - takım
-- Yerel dizine takım depoları kopyalayarak: R3 & yerel D3 & D4 -> için kopyalanan R4 - takım
-- Grup proje şablonu içeriğini yerel takım klasörüne kopyalayın:  D1 - D3 -> için kopyalanan içeriği
-- Yerel D3 & D4 özelleştirme (isteğe bağlı)
-- Yerel dizin içeriğini, takım depolarını gönderin: D3 & D4 - içeriğini Ekle -> için R3 & R4 takım
-
-
-### <a name="initialize-the-team-repositories"></a>Takım depolarını Başlat
-
-Bu adımda, proje şablonu deponuzu grubu proje şablonu depodan Başlat:
-
-- **MyTeamProjectTemplate** depo (**R3**) öğesinden, **GroupProjectTemplate** (**R1**) depo
-
-
-### <a name="clone-group-repositories-into-local-directories"></a>Yerel dizine grubu depoları kopyalayın
-
-Bu yordama başlamadan için:
-
-- Yerel makinenizde dizinleri oluşturun:
-    - İçin **Windows**: **C:\GitRepos\GroupCommon** ve **C:\GitRepos\MyTeam**
-    - İçin **Linux**: **GitRepos\GroupCommon** ve **GitRepos\MyTeam** giriş dizininize üzerinde 
-- Dizinine değiştirin **GitRepos\GroupCommon**.
-- Yerel makinenize işletim sistemi üzerinde uygun şekilde aşağıdaki komutu çalıştırın.
-
-**Windows**
-
-    git clone https://<Your Azure DevOps Services name>.visualstudio.com/GroupCommon/_git/GroupProjectTemplate
-    
-
-![12](./media/team-lead-tasks/team-leads-12-create-two-group-repos.png)
-
-**Linux**
-    
-    git clone ssh://<Your Azure DevOps Services name>@<Your Azure DevOps Services name>.visualstudio.com:22/GroupCommon/_git/GroupProjectTemplate
-    
-    
-![13](./media/team-lead-tasks/team-leads-13-clone_two_group_repos_linux.png)
-
-Bu komutlar kopyalama, **GroupProjectTemplate** Grup Azure DevOps hizmetleriniz için yerel bir dizine (R1) deposunda **GitRepos\GroupCommon** yerel makinenizde. Kopyalama, dizin sonra **GroupProjectTemplate** (D1) dizininde oluşturulan **GitRepos\GroupCommon**. Burada, Grup Yöneticisi bir proje oluşturduğunuz varsayıyoruz **GroupCommon**ve **GroupProjectTemplate** altında bu proje bir depodur. 
-
-
-### <a name="clone-your-team-repositories-into-local-directories"></a>Takım depolarınızı yerel dizine kopyalama
-
-Bu komutlar kopyalama, **MyTeamProjectTemplate** (R3) ve **MyTeamUtilities** (R4) depoları, proje altında **MyTeam** Grup Azure DevOps hizmetlerinizi üzerinde **MyTeamProjectTemplate** (D3) ve **MyTeamUtilities** (D4) dizinlerde **GitRepos\MyTeam** yerel makinenizde. 
-
-- Dizinine değiştirin **GitRepos\MyTeam**
-- Yerel makinenize işletim sistemi üzerinde uygun olarak aşağıdaki komutları çalıştırın. 
-
-**Windows**
-
-    git clone https://<Your Azure DevOps Services name>.visualstudio.com/<Your Team Name>/_git/MyTeamProjectTemplate
-    git clone https://<Your Azure DevOps Services name>.visualstudio.com/<Your Team Name>/_git/MyTeamUtilities
-
-![14](./media/team-lead-tasks/team-leads-14-clone_two_empty_team_repos.png)
-        
-**Linux**
-    
-    git clone ssh://<Your Azure DevOps Services name>@<Your Azure DevOps Services name>.visualstudio.com:22/<Your Team Name>/_git/MyTeamProjectTemplate
-    git clone ssh://<Your Azure DevOps Services name>@<Your Azure DevOps Services name>.visualstudio.com:22/<Your Team Name>/_git/MyTeamUtilities
-    
-![15](./media/team-lead-tasks/team-leads-15-clone_two_empty_team_repos_linux.png)
-
-Kopyalama, iki dizin sonra **MyTeamProjectTemplate** (D3) ve **MyTeamUtilities** (D4) dizininde oluşturulur **GitRepos\MyTeam**. Biz Burada şablon ve yardımcı programlar depoları, proje adlı kabul **MyTeamProjectTemplate** ve **MyTeamUtilities**. 
-
-### <a name="copy-the-group-project-template-content-to-the-local-project-template-directory"></a>Grup proje şablonu içeriğini yerel proje şablonu dizinine kopyalayın.
-
-Yerel içeriği kopyalamak için **GroupProjectTemplate** yerel klasöre (D1) **MyTeamProjectTemplate** (D3), aşağıdaki Kabuk betikleri birini çalıştırın: 
-
-#### <a name="from-the-powershell-command-line-for-windows"></a>PowerShell için Windows komut satırı       
-
-    wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/tdsp_local_copy_win.ps1" -outfile "tdsp_local_copy_win.ps1"
-    .\tdsp_local_copy_win.ps1 2
-
-    
-![16](./media/team-lead-tasks/team-leads-16-local_copy_team_lead_new.png)
-
-#### <a name="from-the-linux-shell-for-the-linux-dsvm"></a>İçin Linux kabuğundan **Linux DSVM'sini**
-    
-    wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/tdsp_local_copy_linux.sh"
-    bash tdsp_local_copy_linux.sh 2
-    
-![17](./media/team-lead-tasks/team-leads-17-local-copy-team-lead-linux-new.png)
-
-Betikleri .git dizini içeriğini hariç tutun. Betikleri sağlamak ister **tamamlamak yolları** kaynak dizini D1 ve hedef dizin D3.
-        
-
-### <a name="customize-your-project-template-or-team-utilities-optional"></a>Özelleştirme, proje şablonu veya takım hizmet programları (isteğe bağlı)
-
-Özelleştirme, **MyTeamProjectTemplate** (D3) ve **MyTeamUtilities** (gerekirse, Kurulum işlemi bu aşamada D4). 
-
-- Ekibinizin belirli gereksinimlerini karşılayacak şekilde D3 içeriğini özelleştirmek istiyorsanız, şablon belgeleri değiştirin ya da dizin yapısını değiştirebilirsiniz.
-
-- Ekibiniz tüm takımınızla paylaşmak istediğiniz bazı yardımcı programlar geliştirdiyseniz, kopyalayın ve bu yardımcı programlar D4 dizinine yapıştırın. 
-
-
-### <a name="push-local-directory-content-to-team-repositories"></a>Yerel dizin içeriğini team depolara itme
-
-İçeriği (isteğe bağlı olarak özelleştirilmiş) yerel dizinler D3 ve D4 R3 ve R4 takım depolarını eklemek için bir Windows PowerShell konsolundan ya da Linux kabuğundan aşağıdaki git bash komutları çalıştırın. Komutları çalıştırmak **GitRepos\MyTeam\MyTeamProjectTemplate** dizin.
-
-    git status
-    git add .
-    git commit -m"push from DSVM"
-    git push
-    
-![18](./media/team-lead-tasks/team-leads-18-push-to-group-server-2.png)
-
-Bu betik çalıştırıldığında grubunuzun Azure DevOps Hizmetleri MyTeamProjectTemplate deposundaki dosyaları neredeyse anlık olarak eşitlenir.
-
-![19](./media/team-lead-tasks/team-leads-19-push-to-group-server-showed-up.png)
-
-Şimdi aynı dört git komutları kümesini çalıştırmak **GitRepos\MyTeam\MyTeamUtilities** dizin. 
-
-> [AZURE.NOTE]Bu bir Git deposuna işleme ilk kez kullanıyorsanız, genel parametrelerini yapılandırmanıza gerek *user.name* ve *user.email* çalıştırmadan önce `git commit` komutu. Aşağıdaki iki komutu çalıştırın:
-        
-    git config --global user.name <your name>
-    git config --global user.email <your email address>
- 
-> Birden çok Git deposu için yürütülmekte olan, her birine işlemesini oluştururken aynı ad ve e-posta adresi kullanın. Git etkinliklerinizi birden çok depolara göre izlemek için Power BI panoları oluşturduğunuzda aynı ad ve e-posta adresi kullanarak daha sonra uygun kanıtlar.
-
-![20](./media/team-lead-tasks/team-leads-20-git-config-name.png)
-
-
-## <a name="3-create-team-data-and-analytics-resources-optional"></a>3. Takım veri ve analiz kaynaklarını (isteğe bağlı) oluşturma
-
-Veri ve analiz kaynakları tüm takımınızla paylaşma performans ve maliyet avantajları vardır: takım üyelerinin projelerini paylaşılan kaynaklar üzerinde yürütmek, bütçeleriyle ilgili kaydetme ve daha verimli bir şekilde işbirliği yapın. Bu bölümde, Azure dosya depolama oluşturma hakkında yönergeler sağlarız. Sonraki bölümde, Azure dosya depolama bağlama yerel makinenize nasıl konusunda yönerge sağlar. Azure HDInsight Spark kümeleri, gibi Azure veri bilimi sanal makineleri, diğer kaynakları paylaşma hakkında daha fazla bilgi için bkz [platformları ve araçlarıyla](platforms-and-tools.md). Bu konu, gereksinimleriniz için uygun olan kaynaklara seçme konusunda bir veri bilimi açısından rehberlik sağlar ve ürün sayfaları ve yayımladık diğer ilgili ve kullanışlı öğreticileri için bağlar.
-
->[AZURE.NOTE] Veri gönderme çapraz önlemek için yavaş ve pahalı olabilir, veri merkezleri, kaynak grubu, depolama hesabı ve Azure VM (örneğin, DSVM) aynı Azure veri merkezinde olduğundan emin olun. 
-
-Ekibiniz için Azure dosya depolama alanı oluşturmak için aşağıdaki komut dosyasını çalıştırın. Ekibiniz için Azure dosya depolama, takımınız için kullanışlı olan veri varlıkları depolamak için kullanılabilir. Komut dosyaları ister Azure hesabı ve abonelik bilgilerinizi için bu nedenle bu kimlik bilgilerini girmek için hazır olması. 
-
-### <a name="create-azure-file-storage-with-powershell-from-windows"></a>Azure dosya depolama ile Windows Powershell'den oluşturma
-
-Bu betik, komut satırı bir PowerShell üzerinden çalıştırın:
-
-    wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/CreateFileShare.ps1" -outfile "CreateFileShare.ps1"
-    .\CreateFileShare.ps1
-
-![21](./media/team-lead-tasks/team-leads-21-create-fileshare-win.png)   
-
-İstendiğinde Microsoft Azure hesabınızda oturum açın:
-
-![22](./media/team-lead-tasks/team-leads-22-file-create-s1.png)
-
-Kullanmak istediğiniz Azure aboneliğini seçin:
-
-![23](./media/team-lead-tasks/team-leads-23-file-create-s2.png)
-
-Veya, seçili abonelik altında yeni bir depolama hesabını seçin:
-
-![24](./media/team-lead-tasks/team-leads-24-file-create-s3.png)
-
-Azure dosya depolama alanı oluşturmak için adını girin. Düşük yalnızca büyük küçük harf karakterler, sayılar ve - kabul edilir:
-
-![25](./media/team-lead-tasks/team-leads-25-file-create-s4.png)
-
-Bağlama ve oluşturulduktan sonra bu depolama paylaşımını kolaylaştırmak için Azure dosya depolama bilgileri bir metin dosyasına kaydedin ve konumuna yolunu not edin. Özellikle, bu dosya, sonraki bölümde, Azure sanal makinelerine Azure dosya depolama alanınızı bağlamak gerekir. 
-
-Bu metin dosyasını ProjectTemplate deponuza iade etmek için iyi bir uygulamadır. Dizinine koymak için önerdiğimiz **Docs\DataDictionaries**. Bu nedenle, bu veri varlığını, takımınızdaki tüm projeleri tarafından erişilebilir. 
-
-![26](./media/team-lead-tasks/team-leads-26-file-create-s5.png)
-
-
-### <a name="create-azure-file-storage-with-a-linux-script"></a>Azure dosya depolama ile bir Linux komut dosyası oluşturma
-
-Bu betik, Linux kabuğundan çalıştırın:
-
-    wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/CreateFileShare.sh"
-    bash CreateFileShare.sh
-
-Bu ekrandaki yönergeleri izleyerek Microsoft Azure hesabınızda oturum açın:
-
-![27](./media/team-lead-tasks/team-leads-27-file-create-linux-s1.png)
-
-Kullanmak istediğiniz Azure aboneliğini seçin:
-
-![28](./media/team-lead-tasks/team-leads-28-file-create-linux-s2.png)
-
-Veya, seçili abonelik altında yeni bir depolama hesabını seçin:
-
-![29](./media/team-lead-tasks/team-leads-29-file-create-linux-s3.png)
-
-Oluşturmak için Azure dosya depolama, yalnızca küçük harf karakter, sayı adını girin ve - kabul edilir:
-
-![30](./media/team-lead-tasks/team-leads-30-file-create-linux-s4.png)
-
-Oluşturulduktan sonra bu depolama alanına erişilirken kolaylaştırmak için Azure dosya depolama bilgileri bir metin dosyasına kaydedin ve konumuna yolunu not edin. Özellikle, bu dosya, sonraki bölümde, Azure sanal makinelerine Azure dosya depolama alanınızı bağlamak gerekir.
-
-Bu metin dosyasını ProjectTemplate deponuza iade etmek için iyi bir uygulamadır. Dizinine koymak için önerdiğimiz **Docs\DataDictionaries**. Bu nedenle, bu veri varlığını, takımınızdaki tüm projeleri tarafından erişilebilir. 
-
-![31](./media/team-lead-tasks/team-leads-31-file-create-linux-s5.png)
-
-
-## <a name="4-mount-azure-file-storage-optional"></a>4. Azure dosya depolama bağlama (isteğe bağlı)
-
-Azure dosya depolama başarıyla oluşturulduktan sonra aşağıdaki PowerShell ya da Linux komut dosyalarından birini kullanarak yerel makinenize bağlanabilir.
-
-### <a name="mount-azure-file-storage-with-powershell-from-windows"></a>Azure dosya depolama bağlama ile Windows Powershell'den
-
-    wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/AttachFileShare.ps1" -outfile "AttachFileShare.ps1"
-    .\AttachFileShare.ps1
-    
-Açtıktan değil ise, ilk oturum istenir. 
-
-Tıklayın **Enter** veya **y** dosyasını açın ve ardından Giriş bir Azure dosya depolama bilgileri varsa istendiğinde devam etmek için ***tamamlamak yolu ve adı** oluşturduğunuz dosyanın önceki adımı. Bir Azure dosya depolama bağlama bilgileri, dosya ve sonraki adıma geçmek hazır olduğunu doğrudan okunur.
-
-![32](./media/team-lead-tasks/team-leads-32-attach-s1.png)
-
-> [AZURE.NOTE] Azure dosya depolama bilgilerini içeren bir dosya yoksa, bu bölümün sonunda bilgileri klavye girişi için adımları sağlanır.
-
-Ardından, sanal makineye eklenecek sürücü adını girmeniz istenir. Varolan sürücü adlarının bir listesini, ekranda yazdırılır. Zaten listede var olmayan bir sürücü adı sağlamanız gerekir.
-
-![33](./media/team-lead-tasks/team-leads-33-attach-s2.png)
-
-Yeni bir F sürücü makinenize başarıyla bağlı olduğunu onaylayın.
-
-![34](./media/team-lead-tasks/team-leads-34-attach-s3.png)
-
-**Azure dosya depolama bilgilerini el ile girmek nasıl:** Bir metin dosyasını Azure dosya depolama bilgilerinizi yoksa, aşağıdaki ekranda gerekli olan abonelik, depolama hesabı ve Azure dosya depolama bilgileri yazmak için yönergeleri izleyin:
-
-![35](./media/team-lead-tasks/team-leads-35-attach-s4.png)
-
-Tür adı'nda depolama hesabı Azure dosya depolama oluşturulduğu, Azure aboneliği seçin ve Azure dosya depolama adını yazın:
-
-![36](./media/team-lead-tasks/team-leads-36-attach-s5.png)
-
-### <a name="mount-azure-file-storage-with-a-linux-script"></a>Azure dosya depolama bağlama ile bir Linux betiği
-
-    wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/AttachFileShare.sh"
-    bash AttachFileShare.sh
-
-![37](./media/team-lead-tasks/team-leads-37-attach-s1-linux.png)
-
-Açtıktan değil ise, ilk oturum istenir. 
-
-Tıklayın **Enter** veya **y** dosyasını açın ve ardından Giriş bir Azure dosya depolama bilgileri varsa istendiğinde devam etmek için ***tamamlamak yolu ve adı** oluşturduğunuz dosyanın önceki adımı. Bir Azure dosya depolama bağlama bilgileri, dosya ve sonraki adıma geçmek hazır olduğunu doğrudan okunur.
-
-![38](./media/team-lead-tasks/team-leads-38-attach-s2-linux.png)
-
-Ardından, sanal makineye eklenecek sürücü adını girmeniz istenir. Varolan sürücü adlarının bir listesini, ekranda yazdırılır. Zaten listede var olmayan bir sürücü adı sağlamanız gerekir.
-
-![39](./media/team-lead-tasks/team-leads-39-attach-s3-linux.png)
-
-Yeni bir F sürücü makinenize başarıyla bağlı olduğunu onaylayın.
-
-![40](./media/team-lead-tasks/team-leads-40-attach-s4-linux.png)
-
-**Azure dosya depolama bilgilerini el ile girmek nasıl:** Bir metin dosyasını Azure dosya depolama bilgilerinizi yoksa, aşağıdaki ekranda gerekli olan abonelik, depolama hesabı ve Azure dosya depolama bilgileri yazmak için yönergeleri izleyin:
-
-- Giriş **n**.
-- Azure dosya depolama önceki adımda oluşturulduğu abonelik adı dizinini seçin:
-
-    ![41](./media/team-lead-tasks/team-leads-41-attach-s5-linux.png)
-
-- Depolama hesabı türü ve abonelik altında Azure dosya depolama adını seçin:
-
-    ![42](./media/team-lead-tasks/team-leads-42-attach-s6-linux.png)
-
-- Tüm mevcut olanlardan farklı olmalıdır makinenize eklenecek sürücü adını girin:
-
-    ![43](./media/team-lead-tasks/team-leads-43-attach-s7-linux.png)
-
-
-## <a name="5-set-up-security-control-policy"></a>5. Güvenlik denetimi İlkesi ayarlama 
-
-Grup Azure DevOps hizmetlerinizi'nın giriş sayfasından tıklayın **dişli simgesini** sağ üst köşesinde kullanıcı adınızı yanında, ardından **güvenlik** sekmesi. Üyeleri takım çeşitli izinlerle buraya ekleyebilirsiniz.
-
-![44](./media/team-lead-tasks/team-leads-44-add-team-members.png)
+Takımınız için ayrı bir proje oluşturmak için:
+
+1. Web tarayıcınızda, URL *https:\//\<sunucu adı >/\<kuruluş adı >* konumundaki grubunuzun Azure DevOps kuruluş giriş sayfasına gidin ve **Yeni proje**' yi seçin. 
+   
+   ![Yeni proje seçin](./media/team-lead-tasks/team-leads-2-create-new-team.png)
+   
+1. **Proje oluştur** iletişim kutusunda, **Proje adı**' nın altındaki *myTeam*adını girin ve **Gelişmiş**' i seçin. 
+   
+1. **Sürüm denetimi**altında **Git**' i seçin ve **iş öğesi işlemi**altında **çevik**' i seçin. Ardından **Oluştur**’u seçin. 
+   
+   ![Proje oluşturma](./media/team-lead-tasks/team-leads-3-create-new-team-2.png)
+   
+Takım projesi **Özet** sayfası açılarak sayfa URL 'si *https\/:/\<sunucu adı >/\<kuruluş adı >/\<takım adı >* .
+
+### <a name="rename-the-myteam-default-repository-to-teamutilities"></a>MyTeam varsayılan deposunu Ekipçonelikler olarak yeniden adlandırın
+
+1. **MyTeam** Project **Summary** sayfasında, **hangi hizmete başlamak istersiniz?** altında, **Depo**' yı seçin. 
+   
+   ![Depoları seçin](./media/team-lead-tasks/team-leads-6-rename-team-project-repo.png)
+   
+1. **MyTeam** Deposu sayfasında, sayfanın üst kısmındaki **myTeam** deposunu seçin ve açılan listeden **depoları Yönet** ' i seçin. 
+   
+   ![Depoları Yönet ' i seçin](./media/team-lead-tasks/team-leads-7-rename-team-project-repo-2.png)
+1. **Proje ayarları** sayfasında, **myTeam** deposunun yanındaki **...** öğesini seçin ve ardından **Depoyu yeniden adlandır**' ı seçin. 
+   
+   ![Depoyu yeniden adlandır ' ı seçin](./media/team-lead-tasks/team-leads-8-rename-team-project-repo-3.png)
+   
+1. **MyTeam Repository 'Yi yeniden adlandır** açılır penceresinde *ekipçlikleri*girin ve **Yeniden Adlandır**' ı seçin. 
+
+### <a name="create-the-teamtemplate-repository"></a>TeamTemplate deposunu oluşturma
+
+1. **Proje ayarları** sayfasında **yeni depo** ' yı seçin. 
+   
+   ![Yeni depo Seç](./media/team-lead-tasks/team-leads-9-create-team-utilities.png)
+   
+   Ya da, **mytakım** projesi **Özeti** sayfasının sol gezinti menüsünden depo ' yı seçin, sayfanın üst kısmındaki bir **depoyu seçin ve** açılan menüden **yeni depo** ' ı seçin.
+   
+1. **Yeni depo oluştur** Iletişim kutusunda **tür**altında **Git** ' in seçildiğinden emin olun. **Depo adı**altında *teamtemplate* ' i girip **Oluştur**' u seçin.
+   
+   ![Depo oluştur](./media/team-lead-tasks/team-leads-10-create-team-utilities-2.png)
+   
+1. Proje ayarları sayfanızda iki depo **Ekipçinin** ve **Takım şablonunun şablonunu** görebilecekleri onaylayın. 
+   
+   ![İki takım deposu](./media/team-lead-tasks/team-leads-11-two-repo-in-team.png)
+
+### <a name="import-the-contents-of-the-group-common-repositories"></a>Grubun içeriğini içeri aktarma ortak depoları
+
+Ekip depolarınızı grup yöneticiniz tarafından ayarlanan ortak depoların içeriğiyle doldurmak için:
+
+1. **MyTeam** Project giriş sayfamınızda sol gezinti bölmesinde bulunan **Depo** ' yı seçin. **MyTeam** şablonunun bulunamadığını belirten bir ileti alırsanız, **Aksi halde bağlantıyı seçin, varsayılan teamtemplate deponuza gidin.** 
+   
+   Varsayılan **Teamtemplate** deposu açılır. 
+   
+1. **Teamtemplate boş** sayfasında **içeri aktar**' ı seçin. 
+   
+   ![Içeri aktar 'ı seçin](./media/team-lead-tasks/import-repo.png)
+   
+1. **Git deposunu Içeri aktar** iletişim kutusunda, **kaynak türü**olarak **Git** ' i seçin ve **kopya URL**'si altında grup ortak şablon deponuzun URL 'sini girin. URL, *https: \/ @ no__t-2 @ no__t-3sunucu adı >/\<kuruluş adı >/_git/\<repository adı >* . Örneğin: *https: \//dev. Azure. com/Databilimenceunit/GroupCommon/_Git/GroupProjectTemplate*. 
+   
+1. **Içeri aktar**' ı seçin. Grup şablonu deponuzun içeriği takım şablonu deponuza aktarılır. 
+   
+   ![Grup ortak şablon deposunu içeri aktar](./media/team-lead-tasks/import-repo-2.png)
+   
+1. Projenizin **depoları** sayfasının üst kısmında, açılır ve **ekip** oluşturma deposunu seçin.
+   
+1. Grup ortak yardımcı programları deponuzun (örneğin, *Grouputilities*) içeriğini **ekipte** izin deponuza aktarmak için içeri aktarma işlemini tekrarlayın. 
+   
+İki takım depolarınızdan her biri artık ilgili grup ortak deposundaki dosyaları içerir. 
+
+### <a name="customize-the-contents-of-the-team-repositories"></a>Ekip depolarının içeriğini özelleştirme
+
+Takımınızın belirli ihtiyaçlarını karşılamak üzere ekip depolarınızın içeriğini özelleştirmek istiyorsanız, bunu şimdi yapabilirsiniz. Dosyaları değiştirebilir, dizin yapısını değiştirebilir veya dosya ve klasör ekleyebilirsiniz.
+
+Doğrudan Azure DevOps 'da dosya veya klasörleri değiştirmek, karşıya yüklemek veya oluşturmak için:
+
+1. **MyTeam** Project **Summary** sayfasında, **Repos**' u seçin. 
+   
+1. Sayfanın üst kısmında, özelleştirmek istediğiniz depoyu seçin.
+
+1. Depo dizin yapısında, değiştirmek istediğiniz klasöre veya dosyaya gidin. 
+   
+   - Yeni klasör veya dosya oluşturmak için **Yeni**' nin yanındaki oku seçin. 
+     
+     ![Yeni dosya oluştur](./media/team-lead-tasks/new-file.png)
+     
+   - Dosyaları karşıya yüklemek için, **karşıya dosya yükle**' yi seçin. 
+     
+     ![Dosyaları karşıya yükleme](./media/team-lead-tasks/upload-files.png)
+     
+   - Varolan dosyaları düzenlemek için dosyasına gidin ve ardından **Düzenle**' yi seçin. 
+     
+     ![Bir dosyayı düzenleme](./media/team-lead-tasks/edit-file.png)
+     
+1. Dosya ekledikten veya düzenledikten sonra, **Yürüt**' ü seçin.
+   
+   ![Değişiklikleri Kaydet](./media/team-lead-tasks/commit.png)
+
+Yerel makinenizdeki veya DSVM 'nizin depolarıyla çalışmak için, önce depoları yerel makinenize kopyalar veya *klonlayın* , sonra değişikliklerinizi oluşturup paylaşılan ekip depolarına gönderirsiniz. 
+
+Depoları kopyalamak için:
+
+1. **MyTeam** Project **Summary** sayfasında, **Repos**' ı seçin ve sayfanın en üstünde, kopyalamak istediğiniz depoyu seçin.
+   
+1. Depo sayfasında sağ üstteki **kopya** ' ı seçin.
+   
+1. **Depoyu Kopyala** iletişim kutusunda, **komut satırı**altında, BIR SSH bağlantısı Için http bağlantısı veya **SSH** için **https** ' yi seçin ve kopya URL 'sini panonuza kopyalayın.
+   
+   ![Kopya URL 'sini Kopyala](./media/team-lead-tasks/clone.png)
+   
+1. Yerel makinenizde aşağıdaki dizinleri oluşturun:
+   
+   - Windows için: **C:\GitRepos\MyTeam**
+   - Linux için **$Home/gitrepos/myTeam** 
+   
+1. Oluşturduğunuz dizine geçin.
+   
+1. Git Bash 'de, `git clone <clone URL>` \<kopya URL 'si > **kopyalama** iletişim kutusundan kopyaladığınız URL olduğunda komutunu çalıştırın.
+   
+   Örneğin, **Ekipçtilities** deposunu yerel makinenizde *myTeam* dizinine kopyalamak için aşağıdaki komutlardan birini kullanın. 
+   
+   **HTTPS bağlantısı:**
+   
+   ```bash
+   git clone https://DataScienceUnit@dev.azure.com/DataScienceUnit/MyTeam/_git/TeamUtilities
+   ```
+   
+   **SSH bağlantısı:**
+   
+   ```bash
+   git clone git@ssh.dev.azure.com:v3/DataScienceUnit/MyTeam/TeamUtilities
+   ```
+
+Deponuzun yerel kopyasına istediğiniz değişiklikleri yaptıktan sonra, değişiklikleri kaydedin ve paylaşılan ekip depolarına gönderin. 
+
+Yerel **GitRepos\MyTeam\TeamTemplate** veya **GitRepos\MyTeam\TeamUtilities** dizininizden aşağıdaki git Bash komutlarını çalıştırın.
+
+```bash
+git add .
+git commit -m "push from local"
+git push
+```
+
+> [!NOTE]
+> Git deposuna ilk kez çalışıyorsanız, `git commit` komutu çalıştırmadan önce *User.Name* ve *User. email* genel parametrelerini yapılandırmanız gerekebilir. Aşağıdaki iki komutu çalıştırın:
+> 
+> `git config --global user.name <your name>`
+> 
+> `git config --global user.email <your email address>`
+> 
+> Birden çok git deposuna çalışıyorsanız, hepsi için aynı adı ve e-posta adresini kullanın. Aynı ad ve e-posta adresinin kullanılması, git etkinliklerinizi birden çok depoda izlemek üzere Power BI panolar oluştururken kullanışlıdır.
+
+## <a name="add-team-members-and-configure-permissions"></a>Takım üyeleri ekleme ve izinleri yapılandırma
+
+Takıma üye eklemek için:
+
+1. Azure DevOps 'da, **myTeam** Project giriş sayfasından sol gezinden **proje ayarları** ' nı seçin. 
+   
+1. **Proje ayarları** sol gezinti listesinden **takımlar**' ı seçin, ardından **takımlar** sayfasında, **myTeam ekibini**seçin. 
+   
+   ![Takımları yapılandırma](./media/team-lead-tasks/teams.png)
+   
+1. **Takım profili** sayfasında **Ekle**' yi seçin.
+   
+   ![MyTeam ekibine Ekle](./media/team-lead-tasks/add-to-team.png)
+   
+1. **Kullanıcı ve Grup Ekle** iletişim kutusunda, gruba eklenecek üyeleri arayıp seçin ve ardından **Değişiklikleri Kaydet**' i seçin. 
+   
+   ![Kullanıcı ve grup ekle](./media/team-lead-tasks/add-users.png)
+   
+
+Takım üyeleri için izinleri yapılandırmak için:
+
+1. **Proje ayarları** sol gezinti listesinden **izinler**' i seçin. 
+   
+1. **İzinler** sayfasında, üye eklemek istediğiniz grubu seçin. 
+   
+1. Bu grubun sayfasında, **Üyeler**' i seçin ve ardından **Ekle**' yi seçin. 
+   
+1. **Üyeleri davet et** açılan penceresinde, gruba eklenecek üyeleri arayıp seçin ve ardından **Kaydet**' i seçin. 
+   
+   ![Üyelere izin verme](./media/team-lead-tasks/grant-permissions.png)
+
+## <a name="create-team-data-and-analytics-resources"></a>Ekip verileri ve analiz kaynakları oluşturma
+
+Bu adım isteğe bağlıdır, ancak takımınızın tamamında veri ve analiz kaynaklarının paylaşılması performansı ve maliyet avantajlarına sahiptir. Ekip üyeleri, projelerini paylaşılan kaynaklarda yürütebilir, bütçelerde kaydedebilir ve daha verimli işbirliği yapabilir. Azure dosya depolaması oluşturabilir ve bunu, ekip üyeleriyle paylaşmak için DSVM 'nize bağlayabilirsiniz. 
+
+Azure HDInsight Spark kümeleri gibi ekibinizle diğer kaynakları paylaşma hakkında bilgi için bkz. [platformlar ve araçlar](platforms-and-tools.md). Bu konu, gereksinimlerinize uygun kaynakları seçerken bir veri bilimi perspektifinden yönergeler ve ürün sayfaları ile diğer ilgili ve yararlı öğreticilerin bağlantılarını sağlar.
+
+>[!NOTE]
+> Veri merkezlerinde verileri, yavaş ve maliyetli olabilecek veri iletmemek için Azure Kaynak grubunuzun, depolama hesabınızın ve DSVM 'nizin tümünün aynı Azure bölgesinde barındırıldığından emin olun. 
+
+### <a name="create-azure-file-storage"></a>Azure dosya depolaması oluşturma
+
+1. Tüm ekibiniz için yararlı olan veri varlıkları için Azure dosya depolaması oluşturmak üzere aşağıdaki betiği çalıştırın. Betik sizden Azure abonelik bilgilerinizi ister. bu nedenle girmeye hazırlanın. 
+
+   - Bir Windows makinesinde, PowerShell komut isteminden betiği çalıştırın:
+     
+     ```powershell
+     wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/CreateFileShare.ps1" -outfile "CreateFileShare.ps1"
+     .\CreateFileShare.ps1
+     ```
+     
+   - Linux makinesinde, Linux kabuğundan betiği çalıştırın:
+     
+     ```shell
+     wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/CreateFileShare.sh"
+     bash CreateFileShare.sh
+     ```
+   
+1. İstendiğinde Microsoft Azure hesabınızda oturum açın ve kullanmak istediğiniz aboneliği seçin.
+   
+1. Kullanılacak depolama hesabını seçin veya seçtiğiniz abonelik altında yeni bir tane oluşturun. Azure dosya depolama adı için küçük harf karakterler, sayılar ve kısa çizgiler kullanabilirsiniz.
+   
+1. Depolamayı bağlamayı ve paylaşmayı kolaylaştırmak için, ENTER tuşuna basın veya *Y* girin. Azure dosya depolama bilgilerini geçerli dizininizdeki bir metin dosyasına kaydedin. Bu metin dosyasını, **Docs\DataDictionaries**altında ideal olarak, **teamtemplate** deponuza iade edebilir, böylece ekibinizdeki tüm projeler erişebilir. Ayrıca, sonraki bölümde Azure dosya depolama alanınızı Azure DSVM 'nize bağlamak için dosya bilgilerine de ihtiyacınız vardır. 
+   
+### <a name="mount-azure-file-storage-on-your-local-machine-or-dsvm"></a>Azure dosya depolama alanını yerel makinenize veya DSVM 'ye bağlama
+
+1. Azure dosya depolama alanınızı yerel makinenize veya DSVM 'nize bağlamak için aşağıdaki betiği kullanın.
+   
+   - Bir Windows makinesinde, PowerShell komut isteminden betiği çalıştırın:
+     
+     ```powershell
+     wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/AttachFileShare.ps1" -outfile "AttachFileShare.ps1"
+     .\AttachFileShare.ps1
+     ```
+     
+   - Linux makinesinde, Linux kabuğundan betiği çalıştırın:
+     
+     ```shell
+     wget "https://raw.githubusercontent.com/Azure/Azure-MachineLearning-DataScience/master/Misc/TDSP/AttachFileShare.sh"
+     bash AttachFileShare.sh
+     ```
+   
+1. Önceki adımda bir Azure dosya depolama bilgileri dosyası kaydettiyseniz, devam etmek için ENTER tuşuna basın veya *Y* girin. Oluşturduğunuz dosyanın tüm yolunu ve adını girin. 
+   
+   Azure dosya depolama bilgi dosyanız yoksa, *n*girin ve aboneliğinizi, Azure depolama hesabınızı ve Azure dosya depolama bilgilerini girmek için yönergeleri izleyin.
+   
+1. Dosya paylaşımının bağlanması için bir yerel veya TDSP sürücüsünün adını girin. Ekran, mevcut sürücü adlarının listesini görüntüler. Zaten mevcut olmayan bir sürücü adı sağlayın.
+   
+1. Yeni sürücünün ve depolamanın makinenize başarıyla bağlandığından emin olun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Team Data Science Process tarafından tanımlanan görevleri ve rolleri ayrıntılı açıklamaları için bağlantılar şunlardır:
+Team Data Science Işlemi tarafından tanımlanan diğer roller ve görevler hakkında ayrıntılı açıklamaların bağlantıları aşağıda verilmiştir:
 
 - [Bir veri bilimi takım için Grup yöneticisi görevleri](group-manager-tasks.md)
-- [Bir veri bilimi takım için takım sağlama görevleri](team-lead-tasks.md)
 - [Proje için bir veri bilimi ekibi müşteri adayı görevleri](project-lead-tasks.md)
-- [Bir veri bilimi takım için proje bağımsız katılımcıları](project-ic-tasks.md)
+- [Bir veri bilimi ekibi için projeye bireysel katkıda bulunan görevleri](project-ic-tasks.md)

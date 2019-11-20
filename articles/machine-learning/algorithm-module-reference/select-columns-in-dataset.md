@@ -1,111 +1,110 @@
 ---
-title: 'Veri kümesindeki sütunları seçin: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Aşağı Akış işlemlerinde kullanılacak sütunların bir alt kümesini seçmek için Azure Machine Learning hizmeti modülünde Dataset Sütunları Seç kullanmayı öğrenin.
+title: 'Veri kümesindeki sütunları seçin: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Aşağı akış işlemlerinde kullanılacak sütunların bir alt kümesini seçmek için Azure Machine Learning içindeki sütunları seçme modülünde nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: e7407f62bd3401411d56076b298bd8cd134ece62
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 3511c448298aa96c95dc970d1d192869c127eb0d
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65028103"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73497656"
 ---
-# <a name="select-columns-in-dataset-module"></a>Veri kümesi modülünde sütunları seçin
+# <a name="select-columns-in-dataset-module"></a>Veri kümesi modülündeki sütunları seçme
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Aşağı Akış işlemlerinde kullanılacak sütunların bir alt kümesini seçmek için bu modülü kullanın. Modül fiziksel kaynak kümesinden sütunları kaldırmaz; Bunun yerine, bir veritabanı gibi bir sütun alt kümesi oluşturur *görünümü* veya *projeksiyon*.
+Aşağı akış işlemlerinde kullanılacak sütunların bir alt kümesini seçmek için bu modülü kullanın. Modül, kaynak veri kümesinden sütunları fiziksel olarak kaldırmaz; Bunun yerine, bir veritabanı *görünümü* veya *projeksiyonu*gibi sütunların bir alt kümesini oluşturur.
 
-Bu modül, bir aşağı akış işlem için kullanılabilir sütunları sınırlamak gerektiğinde veya gereksiz sütunları kaldırarak veri kümesi boyutunu küçültmek istiyorsanız kullanışlıdır.
+Bu modül, bir aşağı akış işlemi için kullanılabilir sütunları sınırlandırmanız gerektiğinde veya gereksiz sütunları kaldırarak veri kümesinin boyutunu azaltmak istediğinizde faydalıdır.
 
-Farklı bir sırada belirtmiş olsanız da, veri kümesindeki sütunları çıktısı özgün veriler olduğu gibi aynı sırayla alınır.
+Veri kümesindeki sütunlar, farklı bir düzende belirtseniz bile, özgün verilerle aynı sırada çıktılardır.
 
 ## <a name="how-to-use"></a>Nasıl kullanılır
 
-Bu modül, hiç parametre yok. Sütun seçiciyi dahil etmek veya hariç tutmak için sütunları seçmek için kullanın.
+Bu modülün parametresi yok. Dahil edilecek veya hariç tutulacak sütunları seçmek için sütun seçiciyi kullanın.
 
-### <a name="choose-columns-by-name"></a>Sütun adına göre seçme
+### <a name="choose-columns-by-name"></a>Sütunları ada göre seçin
 
-Sütun adına göre seçmek modülünde birden çok seçenek vardır: 
+Modülde ada göre sütun seçmek için birden çok seçenek vardır: 
 
 + Filtre ve arama
 
-    Tıklayın **ada göre** seçeneği.
+    **Ada göre** seçeneğine tıklayın.
 
-    Kullanılabilir sütunlar listesi zaten doldurulmuş bir veri kümesi bağlandıysanız görüntülenmesi gerekir. Hiçbir sütun görünüyorsa, sütun listesinde görüntülemek üzere Yukarı Akış modülleri çalıştırmak gerekebilir.
+    Zaten doldurulmuş bir veri kümesini bağladıysanız, kullanılabilir sütunların bir listesi görünmelidir. Hiçbir sütun görünmezse, sütun listesini görüntülemek için yukarı akış modüllerini çalıştırmanız gerekebilir.
 
-    Listeyi filtrelemek için arama kutusuna yazın. Örneğin, yazdığınız harfi `w` arama kutusuna, listede harfi içeren sütun adları gösterecek şekilde filtrelenir `w`.
+    Listeyi filtrelemek için, arama kutusuna yazın. Örneğin, arama kutusuna `w` harfini yazarsanız, liste, `w`harfini içeren sütun adlarını gösterecek şekilde filtrelenir.
 
-    Sütun seçin ve listenin sağ bölmede seçili sütunları taşımak için sağ ok düğmesine tıklayın.
+    Sütunlar ' ı seçin ve sağ taraftaki bölmedeki seçili sütunları listeye taşımak için sağ ok düğmesine tıklayın.
 
-    + Sütun adları sürekli aralığı seçmek için basın **SHIFT + tıklatma**.
-    + Tek tek sütun seçimi eklemek için basın **Ctrl + tıklama**.
+    + Sürekli sütun adları aralığını seçmek için **SHIFT + tıklama**tuşlarına basın.
+    + Seçime ayrı sütunlar eklemek için **CTRL + tıklama**tuşlarına basın.
 
-    Kaydedip kapatmak için onay işareti düğmesine tıklayın.
+    Kaydetmek ve kapatmak için onay işareti düğmesine tıklayın.
 
-+ Diğer kurallarla birlikte adları kullanma
++ Diğer kurallarla birlikte adları kullanın
 
-    Tıklayın **kuralları ile** seçeneği.
+    **Kurallar ile** seçeneğine tıklayın.
     
-    Gibi belirli veri türünde sütunlar gösteren bir kural seçin.
+    Belirli bir veri türünün sütunlarını gösterme gibi bir kural seçin.
 
-    Ardından adıyla seçim listesine eklenecek sütunları bu tür tek tek tıklayın.
+    Ardından, seçim listesine eklemek için bu türden tek tek sütunları ada göre seçin.
 
-+ Sütun adlarının virgülle ayrılmış bir listesini yapıştırın veya yazın
++ Sütun adlarının virgülle ayrılmış bir listesini yazın veya yapıştırın
 
-    Veri kümeniz genişse, dizinleri daha kolay olabilir veya tek tek seçme sütunlar yerine adları listesi oluşturulan. Hazırladığınız listede önceden varsayılarak:
+    Veri kümeniz genişse, sütunları tek tek seçmek yerine dizinleri veya oluşturulmuş adların listesini kullanmak daha kolay olabilir. Listeyi önceden hazırladığınıza varsayılarak:
 
-    1. Tıklayın **kuralları ile** seçeneği. 
-    2. Seçin **hiçbir sütun**seçin **INCLUDE**ve ardından kırmızı bir ünlem işareti metin kutusunun içine tıklayın. 
-    3. Daha önce doğrulanmış sütun adlarının virgülle ayrılmış bir listesini yazın ya da yapıştırın. Herhangi bir sütun geçersiz bir ada sahipse, modülü şekilde önceden adları kontrol ettiğinizden emin olamaz.
+    1. **Kurallar ile** seçeneğine tıklayın. 
+    2. **Sütun yok**' u seçin, **Ekle**' yi seçin ve sonra kırmızı ünlem işaretiyle metin kutusunun içine tıklayın. 
+    3. Önceden doğrulanan sütun adlarının virgülle ayrılmış bir listesini içine yapıştırın veya yazın. Herhangi bir sütunda geçersiz bir ad varsa modülü kaydedemezsiniz, bu nedenle adları önceden denetlediğinizden emin olun.
     
-    Bu yöntem, dizin değerlerini kullanarak bir sütun listesini belirtmek için de kullanabilirsiniz. 
+    Bu yöntemi, dizin değerlerini kullanarak sütunların bir listesini belirtmek için de kullanabilirsiniz. 
 
-### <a name="choose-by-type"></a>Türüne göre seçin
+### <a name="choose-by-type"></a>Türe göre seçin
 
-Kullanırsanız **kuralları ile** seçeneği, birden çok koşul sütunu seçimlere uygulayabilirsiniz. Örneğin, yalnızca bir sayısal veri türünde sütunlar özelliği almak gerekebilir.
+**WıTH Rules** seçeneğini kullanırsanız, sütun seçimlerinde birden çok koşul uygulayabilirsiniz. Örneğin, bir sayısal veri türünün yalnızca özellik sütunlarını almanız gerekebilir.
 
-**ŞUNUNLA Başla** seçeneği, başlangıç noktanız belirler ve sonuçları anlamak için önemlidir. 
+**Ile başla** seçeneği Başlangıç noktanızı belirler ve sonuçları anlamak için önemlidir. 
 
-+ Seçerseniz **tüm sütunları** seçeneği, tüm sütunlar listesine eklenir. Daha sonra kullanmanız gerekir **hariç** seçeneğini *Kaldır* belirli koşullara uyan sütunları. 
++ **Tüm sütunlar** seçeneğini belirlerseniz, tüm sütunlar listeye eklenir. Ardından, belirli koşullara uyan sütunları *kaldırmak* için **Dışla** seçeneğini kullanmanız gerekir. 
 
-    Örneğin, tüm sütunları ile başlayın ve ardından ada veya türe göre sütunları kaldırın.
+    Örneğin, tüm sütunlarla başlayabilir ve ardından sütunları ada veya türe göre kaldırabilirsiniz.
 
-+ Seçerseniz **Hayır sütunları** seçeneği, sütun listesi boş başlatır. Koşulları ardından belirttiğiniz *Ekle* sütun listesi. 
++ **Sütun yok** seçeneğini belirlerseniz, sütun listesi boş olarak başlar. Daha sonra listeye sütun *eklemek* için koşulları belirtirsiniz. 
 
-    Birden çok kural uygularsanız, her durumdur **eklenebilir**. Örneğin, hiçbir sütun ile başlayın ve ardından tüm sayısal sütunları elde etmek üzere bir kural eklemek varsayalım. Otomobil fiyat kümesinde, 16 sütunlarında sonuçlanır. Ardından, tıkladığınız **+** yeni koşul Ekle ve oturum **tüm özellikler**. Sonuç veri kümesini, tüm sayısal sütunları yanı sıra bazı dize özelliği sütunlar dahil olmak üzere tüm özellik sütunları içerir.
+    Birden çok kural uygularsanız, her koşul **eklenebilir**. Örneğin, herhangi bir sütun olmadan başlamanızı ve sonra tüm sayısal sütunları almak için bir kural eklemenizi söyleyin. Otomobil fiyat veri kümesinde, 16 sütun sonucu oluşur. Ardından, yeni bir koşul eklemek için **+** işaretine tıklayıp **tüm özellikleri dahil et**' i seçin. Elde edilen veri kümesi, bazı dize özelliği sütunları da dahil olmak üzere tüm sayısal sütunları ve tüm özellik sütunlarını içerir.
 
-### <a name="choose-by-column-index"></a>Sütun dizini tarafından seçin
+### <a name="choose-by-column-index"></a>Sütun dizinine göre seçin
 
-Özgün veri kümesi içindeki sütun sıra sütun dizini belirtir.
+Sütun dizini, özgün veri kümesindeki sütunun sırasını ifade eder.
 
-+ Sütunları sırayla 1'den başlayarak numaralandırılır.  
-+ Bir dizi sütunları almak için bir kısa çizgi kullanın. 
-+ Gibi açık uçlu belirtimleri `1-` veya `-3` izin verilmez.
-+ Yinelenen dizin değerleri (veya sütun adları) izin verilmez ve hataya neden.
++ Sütunlar 1 ' den başlayarak ardışık olarak numaralandırılır.  
++ Bir dizi sütun almak için kısa çizgi kullanın. 
++ `1-` veya `-3` gibi açık uçlu belirtimlerde izin verilmez.
++ Yinelenen Dizin değerlerine (veya sütun adlarına) izin verilmez ve bir hata oluşmasına neden olabilir.
 
-Örneğin, veri kümenizin en az sekiz sütuna sahip olduğu varsayılırsa, birden çok bitişik olmayan sütunları döndürmek için aşağıdaki örnekleri hiçbirinde yapıştırabilirsiniz: 
+Örneğin, veri kümenizin en az sekiz sütunu olduğu varsayıldığında, birden çok bitişik olmayan sütun döndürmek için aşağıdaki örneklerden herhangi birini yapıştırabilirsiniz: 
 
 + `8,1-4,6`
 + `1,3-8`
 + `1,3-6,4` 
 
-Son örnek hatayla sonuçlanmaz; Ancak, tek bir sütun örneği döndürür `4`.
+Son örnek bir hatayla sonuçlanmaz; Ancak, `4`sütunun tek bir örneğini döndürür.
 
 
 
-### <a name="change-order-of-columns"></a>Sütunların sırasını değiştirme
+### <a name="change-order-of-columns"></a>Sütunların sırasını değiştir
 
-Seçenek **izin yinelemeleri ve sütun sırasını seçimdeki korumak** boş bir liste ile başlar ve belirttiğiniz ada veya dizine göre sütunları ekler. Her zaman, "doğal sıra" sütunları döndürür, diğer seçenekleri aksine bu seçeneği sütunları sırayla isimlendirdiğiniz çıkarır veya onları listeleyin. 
+**Seçimdeki yinelenen öğelere Izin ver ve sütun sırasını koru** seçeneği boş bir listeyle başlar ve ad ya da dizine göre belirttiğiniz sütunları ekler. Sütunları her zaman "doğal sırasıyla" döndüren diğer seçeneklerin aksine, bu seçenek sütunları ad veya listeettiğiniz sırada çıkarır. 
 
-Örneğin, Sütun1, Sütun2, Col3 ve Sütun4 sütunları içeren bir veri kümesinde, sütunların sırasını ters ve sütun 2,, aşağıdaki listelerden birini belirterek bırakın:
+Örneğin, Sütun1, Col2, Col3 ve col4 sütunlarına sahip bir veri kümesinde aşağıdaki listelerden birini belirterek sütunların sırasını ters çevirebilirsiniz ve sütun 2 ' yi dışarıda bırakabilirsiniz:
 
 + `Col4, Col3, Col1`
 + `4,3,1`
@@ -113,4 +112,4 @@ Seçenek **izin yinelemeleri ve sütun sırasını seçimdeki korumak** boş bir
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

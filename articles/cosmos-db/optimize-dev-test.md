@@ -1,43 +1,43 @@
 ---
-title: Azure Cosmos DB'de test ve geliştirme için en iyi duruma getirme
-description: Bu makale, Azure Cosmos DB geliştirme ve hizmet ücretsiz test için birden çok seçenek nasıl sağladığını açıklar.
-author: rimman
+title: Azure Cosmos DB 'de geliştirme ve test için iyileştirme
+description: Bu makalede, Azure Cosmos DB hizmetinin ücretsiz olarak geliştirilmesi ve test edilmesi için birden çok seçenek sunan açıklanmaktadır.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/21/2019
-ms.author: rimman
-ms.openlocfilehash: f9cb18b66def144b84de708351743832d1831fbf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 992d165d323aab79bb7b5475aa396d4432691530
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65967271"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754892"
 ---
-# <a name="optimize-development-and-testing-cost-in-azure-cosmos-db"></a>Geliştirme ve test maliyeti Azure Cosmos DB'de en iyi duruma getirme
+# <a name="optimize-development-and-testing-cost-in-azure-cosmos-db"></a>Azure Cosmos DB geliştirme ve test maliyetini iyileştirin
 
-Bu makalede, Azure Cosmos DB geliştirme ve ücretsiz maliyet test için kullanılacak farklı seçenekler açıklanır.
+Bu makalede, ücretsiz olarak geliştirme ve test için Azure Cosmos DB kullanmanın farklı seçenekleri açıklanmaktadır.
 
-## <a name="azure-cosmos-db-emulator-locally-downloadable-version"></a>Azure Cosmos DB öykünücüsü'nü (yerel olarak indirilebilir sürümü)
+## <a name="azure-cosmos-db-emulator-locally-downloadable-version"></a>Azure Cosmos DB öykünücüsü (yerel olarak indirilebilir sürüm)
 
-[Azure Cosmos DB öykünücüsü'nü](local-emulator.md) Azure Cosmos DB bulut hizmeti taklit eden yerel bir indirilebilen sürümüdür. Yazma ve bile hiçbir ağ bağlantısı olması ve masraf olmadan Azure Cosmos DB API'leri kullanan kodu test edebilirsiniz. Azure Cosmos DB öykünücüsü'nü bulut hizmeti yüksek uygunluğa sahip geliştirme amacıyla yerel bir ortam sağlar. Geliştirin ve bir Azure aboneliği oluşturmadan uygulamanızı yerel olarak test edin. Uygulamanızı buluta dağıtmak, bulutta Azure Cosmos DB uç noktasına bağlanmak için bağlantı dizesini güncelleştirme hazır olduğunuzda, herhangi bir değişiklik gereklidir. Ayrıca [bir CI/CD işlem hattı ile Azure Cosmos DB öykünücüsü'nü ayarlama](tutorial-setup-ci-cd.md) Azure DevOps, testleri çalıştırmak için görev oluşturun. Ziyaret ederek oluşturabileceğinize dair [Azure Cosmos DB öykünücüsü'nü](local-emulator.md) makalesi.
+[Azure Cosmos DB öykünücüsü](local-emulator.md) , Azure Cosmos DB bulut hizmetini taklit eden, yerel olarak indirilebilir bir sürümdür. Ağ bağlantınız olmasa ve herhangi bir ücret ödemeden bile Azure Cosmos DB API 'Leri kullanan kodu yazabilir ve test edebilirsiniz. Azure Cosmos DB öykünücü, bulut hizmeti için yüksek uygunluğa sahip geliştirme amacıyla yerel bir ortam sağlar. Azure aboneliği oluşturmadan uygulamanızı yerel olarak geliştirebilir ve test edebilirsiniz. Uygulamanızı buluta dağıtmaya hazırsanız, bağlantı dizesini buluttaki Azure Cosmos DB uç noktasına bağlanacak şekilde güncelleştirin, başka bir değişiklik yapmanız gerekmez. Ayrıca, testleri çalıştırmak için Azure DevOps 'da [Azure Cosmos DB öykünücü derleme göreviyle BIR CI/CD işlem hattı da ayarlayabilirsiniz](tutorial-setup-ci-cd.md) . [Azure Cosmos DB öykünücü](local-emulator.md) makalesini ziyaret ederek çalışmaya başlayın.
 
 ## <a name="try-azure-cosmos-db-for-free"></a>Azure Cosmos DB’yi ücretsiz deneyin
 
-[Azure Cosmos DB'yi ücretsiz deneyin](https://azure.microsoft.com/try/cosmosdb/) ücretsiz bir veritabanı ve koleksiyon oluşturma ve Azure Cosmos DB bulutta denemenizi olanak tanıyan ücretsiz olarak deneyim. Kayıt için Azure için veya yoksa herhangi bir maliyet ödersiniz. Try Azure Cosmos DB hesapları, şu anda 30 gün gibi sınırlı bir süre için kullanılabilir. Bunları istediğiniz zaman yenileyebilirsiniz. Azure Cosmos DB'yi deneyin hesapları Azure Cosmos DB değerlendirmek, derleme ve hızlı başlangıçlarını veya öğreticilerini kullanarak bir uygulamayı test yapmayı kolaylaştırır. Tanıtım oluşturma veya birim masraf olmadan testi gerçekleştirin. Kullanarak Azure Cosmos DB'yi ücretsiz hesapları için deneyin, anahtar teslim küresel dağıtım, SLA'ları ve tutarlılık modelleri de dahil olmak üzere ücretsiz, Azure Cosmos DB'nin premium özelliklerini değerlendirebilir. En fazla 25 Azure Cosmos kapsayıcılar ve 10.000 RU/sn aktarım hızı ile bir veritabanı oluşturabilirsiniz. Bir Azure hesabına abone olma ya da kredi kartınızı kullanarak olmadan, örnek uygulamayı çalıştırabilirsiniz. Azure Cosmos DB ile deneyin ücretsiz olarak, çok bölgeli bir Azure Cosmos hesabı oluşturabilir ve üzerinde yalnızca birkaç dakika içinde bir uygulamayı çalıştırın. Başlamak için bkz: [Azure Cosmos DB'yi ücretsiz deneyin](https://azure.microsoft.com/try/cosmosdb/) sayfası.
+[Ücretsiz Azure Cosmos DB](https://azure.microsoft.com/try/cosmosdb/) , veritabanı ve koleksiyonlar oluşturmanıza ve Bulutta Azure Cosmos DB denemeye olanak sağlayan ücretsiz bir ücret deneyimidir. Azure 'a kaydolmanız veya herhangi bir maliyet ödemeniz gerekmez. Deneme Azure Cosmos DB hesapları, şu anda 30 gün sınırlı bir süre için kullanılabilir. Bunları dilediğiniz zaman yenileyebilirsiniz. Azure Cosmos DB hesapları, hızlı başlangıçlara veya öğreticilerle bir uygulamayı değerlendirmeyi Azure Cosmos DB, derlemeyi ve test yapmayı kolaylaştırır. Herhangi bir ücret ödemeden bir demo oluşturabilir veya birim testi yapabilirsiniz. Ücretsiz hesaplar için TRY Azure Cosmos DB kullanarak, anahtar genel dağıtım, SLA 'Lar ve tutarlılık modelleri de dahil olmak üzere Azure Cosmos DB Premium yeteneklerini ücretsiz olarak değerlendirebilirsiniz. En fazla 25 Azure Cosmos kapsayıcıyla ve 10.000 RU/sn işleme sahip bir veritabanı oluşturabilirsiniz. Örnek uygulamayı bir Azure hesabına abone olmadan veya kredi kartınızı kullanarak çalıştırabilirsiniz. Deneme Azure Cosmos DB ücretsiz olarak, çok bölgeli bir Azure Cosmos hesabı oluşturabilir ve bir uygulamayı yalnızca birkaç dakikada çalıştırabilirsiniz. Başlamak için bkz. [ücretsiz sayfa için Azure Cosmos DB deneyin](https://azure.microsoft.com/try/cosmosdb/) .
 
 ## <a name="azure-free-account"></a>Azure Ücretsiz Hesabı
 
-Azure Cosmos DB dahil [ücretsiz Azure hesabı](https://azure.microsoft.com/free), sunan Azure KREDİLERİ ve kaynaklarına ücretsiz belirli bir zaman aralığı için. Azure Cosmos DB için özellikle, bu ücretsiz hesaba yılın tamamı için 5 GB'lık depolama ve sağlanan aktarım hızı 400 Ru'ya sunar. Bu deneyim, kolayca Azure Cosmos DB özelliklerini test etmek veya sıfır maliyetle diğer Azure hizmetleriyle tümleştirme herhangi bir geliştirici sağlar. Azure ücretsiz hesabı ile ilk 30 gün içinde harcayabileceğiniz 200 ABD Doları değerinde kredi alın. Yükseltene kadar hizmetleri kullanmaya olsa bile, ücret ödemezsiniz. Başlamak için ziyaret [ücretsiz Azure hesabı](https://azure.microsoft.com/free) sayfası.
+Azure Cosmos DB, Azure kredileri ve kaynakları belirli bir süre boyunca ücretsiz olarak sunan [Azure Ücretsiz hesabına](https://azure.microsoft.com/free)dahildir. Özellikle Azure Cosmos DB için bu ücretsiz hesap, tüm yıl boyunca 5 GB depolama ve 400 ru iş hacmi sunmaktadır. Bu deneyim, herhangi bir geliştiricinin Azure Cosmos DB özelliklerini kolayca test etmesini veya diğer Azure hizmetleriyle sıfır maliyetle tümleştirmesini sağlar. Azure Ücretsiz hesabıyla, ilk 30 gün boyunca harcayabileceğiniz bir $200 kredisi alırsınız. Yükseltmeyi seçinceye kadar Hizmetleri kullanmaya başlasanız bile, ücretlendirilmezsiniz. Başlamak için [Azure Ücretsiz hesap](https://azure.microsoft.com/free) sayfasını ziyaret edin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağıdaki makaleleri ile öykünücü veya ücretsiz Azure Cosmos DB hesapları kullanmaya başlayabilirsiniz:
+Aşağıdaki makalelerde öykünücü veya ücretsiz Azure Cosmos DB hesaplarını kullanmaya başlamanızı sağlayabilirsiniz:
 
-* Daha fazla bilgi edinin [en iyi duruma getirme için geliştirme ve test etme](optimize-dev-test.md)
-* Daha fazla bilgi edinin [Azure Cosmos DB faturanızı anlama](understand-your-bill.md)
-* Daha fazla bilgi edinin [aktarım hızı maliyeti en iyi duruma getirme](optimize-cost-throughput.md)
-* Daha fazla bilgi edinin [depolama maliyetini en iyi duruma getirme](optimize-cost-storage.md)
-* Daha fazla bilgi edinin [okuma ve yazma işlemleri maliyetini en iyi duruma getirme](optimize-cost-reads-writes.md)
-* Daha fazla bilgi edinin [sorguları maliyetini en iyi duruma getirme](optimize-cost-queries.md)
-* Daha fazla bilgi edinin [çok bölgeli Azure Cosmos hesapları maliyetini en iyi duruma getirme](optimize-cost-regions.md)
+* [Geliştirme ve test Için iyileştirme](optimize-dev-test.md) hakkında daha fazla bilgi edinin
+* [Azure Cosmos DB Faturanızı Anlama](understand-your-bill.md) hakkında daha fazla bilgi edinin
+* [Verimlilik maliyetini iyileştirme](optimize-cost-throughput.md) hakkında daha fazla bilgi edinin
+* [Depolama maliyetini iyileştirme](optimize-cost-storage.md) hakkında daha fazla bilgi edinin
+* [Okuma ve yazma maliyetlerini iyileştirme](optimize-cost-reads-writes.md) hakkında daha fazla bilgi edinin
+* [Sorguların maliyetini En Iyi duruma getirme](optimize-cost-queries.md) hakkında daha fazla bilgi edinin
+* [Çok bölgeli Azure Cosmos hesaplarının maliyetini En Iyi duruma getirme](optimize-cost-regions.md) hakkında daha fazla bilgi edinin
 

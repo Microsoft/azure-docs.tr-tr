@@ -3,21 +3,21 @@ title: Azure Hızlı Başlangıç - Batch işi çalıştırma - CLI
 description: Azure CLI ile bir Batch işi çalıştırmayı hızlı bir şekilde öğrenin.
 services: batch
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 ms.service: batch
 ms.devlang: azurecli
 ms.topic: quickstart
 ms.date: 07/03/2018
 ms.author: lahugh
 ms.custom: mvc
-ms.openlocfilehash: df56fd00d5a5ff2f9e9000b39939d0f33b3737d5
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 72c3244fbd9c8d547e35c31f0cd6e659e367e21a
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66127501"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68322504"
 ---
-# <a name="quickstart-run-your-first-batch-job-with-the-azure-cli"></a>Hızlı Başlangıç: Azure CLI ile ilk Batch işinizi çalıştırma
+# <a name="quickstart-run-your-first-batch-job-with-the-azure-cli"></a>Hızlı Başlangıç: Azure CLı ile ilk Batch işinizi çalıştırma
 
 Azure CLI, komut satırından veya betik içindeki Azure kaynaklarını oluşturmak ve yönetmek için kullanılır. Bu hızlı başlangıçta, Azure CLI’sini kullanarak bir Batch hesabı, bir işlem düğümleri (sanal makine) *havuzu* ve havuz üzerinde *görevler* çalıştıran bir *iş* oluşturma işlemi gösterilmektedir. Her örnek görev, havuz düğümlerinden biri üzerinde temel bir komut çalıştırır. Bu hızlı başlangıcı tamamladıktan sonra, Batch hizmetinin temel kavramlarını anlayacak ve Batch’i daha büyük ölçekte daha gerçekçi iş yükleri ile denemeye hazır olacaksınız.
 
@@ -27,7 +27,7 @@ Azure CLI, komut satırından veya betik içindeki Azure kaynaklarını oluştur
 
 CLI'yi yerel olarak yükleyip kullanmayı seçerseniz bu hızlı başlangıç için Azure CLI 2.0.20 veya sonraki bir sürümünü kullanmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli). 
 
-## <a name="create-a-resource-group"></a>Kaynak grubu oluşturun
+## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
 [az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
 
@@ -95,7 +95,7 @@ az batch pool show --pool-id mypool \
 
 Havuzun durumu değişirken iş ve görevleri oluşturmak için aşağıdaki adımlarla devam edin. Ayırma durumu `steady` olduğunda ve düğümler çalıştığında havuz tamamen görev çalıştırmaya hazır olur. 
 
-## <a name="create-a-job"></a>İş oluştur
+## <a name="create-a-job"></a>Bir iş oluşturma
 
 Bir havuza sahip olduktan sonra üzerinde çalıştıracak bir iş oluşturun.  Batch işi bir veya daha fazla görevin mantıksal grubudur. Bir iş, öncelik gibi görevler arasında ortak olan ayarları ve görevlerin çalıştırılacağı havuzu içerir. [az toplu işlem işi oluşturma](/cli/azure/batch/job#az-batch-job-create) komutunu kullanarak Batch işi oluşturma. Aşağıdaki örnek, *mypool* havuzunda *myjob* adlı işi oluşturur. Başlangıçta iş hiçbir görev içermez.
 

@@ -16,12 +16,12 @@ ms.topic: tutorial
 ms.date: 04/03/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 54c3ae22b9cc2e447960b9e3527bbbb0afae3e54
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3c7f8c8efcad0a07a3d3a56925866b10d94f82ed
+ms.sourcegitcommit: 920ad23613a9504212aac2bfbd24a7c3de15d549
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67095093"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "68227473"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-pagedna"></a>Öğretici: PageDNA ile Azure Active Directory Tümleştirme
 
@@ -171,7 +171,7 @@ Bu bölümde, Azure portalında Britta Simon adlı bir test kullanıcısı oluş
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için PageDNA erişim vererek Britta Simon etkinleştirin.
+Bu bölümde, kullanıcının kullanıcı erişimi için PageDNA vererek, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
 
 1. Azure portalında **kurumsal uygulamalar** > **tüm uygulamaları** > **PageDNA**.
 
@@ -212,3 +212,4 @@ Seçtiğinizde, **PageDNA** uygulamalarım portalında, otomatik olarak kendisi 
 * [Azure Active Directory'de uygulamalar için çoklu oturum açma](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
 * [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+

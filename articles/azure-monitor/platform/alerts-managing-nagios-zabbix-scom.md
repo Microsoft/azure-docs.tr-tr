@@ -1,35 +1,34 @@
 ---
-title: SCOM, Zabbix ve Nagios Azure İzleyici'de Uyarıları yönetme
-description: SCOM, Zabbix ve Nagios Azure İzleyici'de Uyarıları yönetme
-author: anantr
-services: monitoring
+title: Azure Izleyici 'de System Center Operations Manager, Zabbix ve Nagios 'tan gelen uyarıları yönetme
+description: Azure Izleyici 'de System Center Operations Manager, Zabbix ve Nagios 'tan gelen uyarıları yönetme
 ms.service: azure-monitor
-ms.topic: conceptual
-ms.date: 09/24/2018
-ms.author: anantr
 ms.subservice: alerts
-ms.openlocfilehash: 48fb9d8eaf2003834a420b48d649c830c608fd6e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: conceptual
+author: anantr
+ms.author: robb
+ms.date: 09/24/2018
+ms.openlocfilehash: 0e774633542f9b7f8b7de9f8f187821bfbe6b9cf
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60712998"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555624"
 ---
-# <a name="manage-alerts-from-scom-zabbix-and-nagios-in-azure-monitor"></a>SCOM, Zabbix ve Nagios Azure İzleyici'de Uyarıları yönetme
+# <a name="manage-alerts-from-system-center-operations-manager-zabbix-and-nagios-in-azure-monitor"></a>Azure Izleyici 'de System Center Operations Manager, Zabbix ve Nagios 'tan gelen uyarıları yönetme
 
-Artık, System Center Operations Manager'da Nagios ve Zabbix uyarıları görüntüleyebilirsiniz [Azure İzleyici](https://aka.ms/azure-alerts-overview). Bu uyarılar tümleştirmeler Nagios/Zabbix sunucuları veya System Center Operations Manager ile Log Analytics'e gelir. 
+Artık, [Azure izleyici](https://aka.ms/azure-alerts-overview)'de Nagios, Zabbix ve System Center Operations Manager uyarılarını görüntüleyebilirsiniz. Bu uyarılar Nagios/Zabbix sunucularıyla tümleştirmelere veya Log Analytics System Center Operations Manager. 
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu kayıtları toplamak için gerekli yapılandırmayı gerçekleştirmelidir, böylece herhangi bir kayıt Log Analytics deposunda bir tür uyarılarla Azure İzleyici ile içe.
-1. İçin **Nagios** ve **Zabbix** uyarıları [bu sunucuları yapılandırmak](https://docs.microsoft.com/azure/log-analytics/log-analytics-linux-agents) için [uyarıları göndermek](https://docs.microsoft.com/azure/azure-monitor/platform/data-sources-alerts-nagios-zabbix?toc=%2Fazure%2Fazure-monitor%2Ftoc.json) Log analytics'e.
-1. İçin **System Center Operations Manager** uyarıları [Operations Manager yönetim grubunuzu Log Analytics çalışma alanınıza bağlanmak](https://docs.microsoft.com/azure/log-analytics/log-analytics-om-agents). Aşağıdaki dağıtma [uyarı Yönetimi](https://docs.microsoft.com/azure/azure-monitor/platform/alert-management-solution) çözümleri Azure Market çözüm. Bunu yaptıktan sonra System Center Operations Manager'da oluşturulan herhangi bir uyarı Log Analytics'e aktarılır.
+Bir uyarı türünde Log Analytics deposundaki tüm kayıtlar Azure Izleyici 'ye içeri aktarıldığından, bu kayıtları toplamak için gereken yapılandırmayı gerçekleştirmeniz gerekir.
+1. **Nagios** ve **Zabbix** uyarıları için, [Bu sunucuları](https://docs.microsoft.com/azure/log-analytics/log-analytics-linux-agents) Log Analytics [uyarıları gönderecek](https://docs.microsoft.com/azure/azure-monitor/platform/data-sources-alerts-nagios-zabbix?toc=%2Fazure%2Fazure-monitor%2Ftoc.json) şekilde yapılandırın.
+1. **System Center Operations Manager** uyarılar için [Operations Manager yönetim grubunuzu Log Analytics çalışma alanınıza bağlayın](https://docs.microsoft.com/azure/log-analytics/log-analytics-om-agents). Bunu izleyerek [uyarı yönetimi](https://docs.microsoft.com/azure/azure-monitor/platform/alert-management-solution) çözümünü Azure çözüm marketi ' nden dağıtın. İşiniz bittiğinde, System Center Operations Manager oluşturulan tüm uyarılar Log Analytics içine aktarılır.
 
-## <a name="view-your-alert-instances"></a>Uyarı örneklerinizi görüntüleyebilir
-Log Analytics'na aktarma yapılandırdıktan sonra bu hizmetleri izleme uyarı örneklerden görüntüleme başlayabilirsiniz [Azure İzleyici](https://aka.ms/azure-alerts-overview). Azure İzleyicisi'nde mevcut olduklarından sonra [uyarı örneklerinizi yönetin](https://aka.ms/managing-alert-instances), [Bu uyarılar üzerinde oluşturulan akıllı grupları yönetme](https://aka.ms/managing-smart-groups) ve [uyarıları ve akıllı gruplarıdurumunudeğiştirme](https://aka.ms/managing-alert-smart-group-states).
+## <a name="view-your-alert-instances"></a>Uyarı örneklerinizi görüntüleme
+İçeri aktarmayı Log Analytics yapılandırdıktan sonra, [Azure izleyici](https://aka.ms/azure-alerts-overview)'de bu izleme hizmetlerinden uyarı örneklerini görüntülemeye başlayabilirsiniz. Azure Izleyici 'de mevcut olduktan sonra, [Uyarı örneklerinizi yönetebilir](https://aka.ms/managing-alert-instances), [Bu uyarılarda oluşturulan akıllı grupları yönetebilir](https://aka.ms/managing-smart-groups) ve [uyarılarınızın ve akıllı grupların durumunu değiştirebilirsiniz](https://aka.ms/managing-alert-smart-group-states).
 
 > [!NOTE]
->  1. Bu çözüm yalnızca Azure İzleyicisi'nde SCOM/Zabbix/Nagios tetiklenen uyarı örneklerinin görüntülemenize izin verir. Uyarı kuralı yapılandırması yalnızca ilgili izleme araçları içinde görüntülenen/düzenlenmiş olabilir. 
->  1. Tetiklenme tüm uyarı örnekleri hem de Azure İzleyici ve Azure Log Analytics kullanılabilir. Şu anda arasında iki seçin veya yalnızca belirli uyarıları harekete alma için hiçbir yolu yoktur.
->  1. Temel alınan telemetri türü kullanılamadığından SCOM, Zabbix ve Nagios tüm uyarıların sinyal türü "Bilinmeyen" vardır.
->  1. Nagios uyarılar olmayan durum bilgisi olan – örneğin [izleme koşulu](https://aka.ms/azure-alerts-overview) uyarının "Fired" "Çözülmüş" geçer değil. Bunun yerine "Fired" ve "Çözülmüş" ayrı uyarı örneklerinin görüntülenir. 
+>  1. Bu çözüm yalnızca Azure Izleyici 'de System Center Operations Manager/Zabbix/Nagios tetiklenen uyarı örneklerini görüntülemenize izin verir. Uyarı kuralı yapılandırması, yalnızca ilgili izleme araçlarında görüntülenebilir/düzenlenebilir. 
+>  1. Tetiklenen tüm uyarı örnekleri hem Azure Izleyici 'de hem de Azure Log Analytics kullanılabilir. Şu anda, yalnızca belirtilen iki veya daha fazla tetiklenen uyarı arasından seçim yapmanın bir yolu yoktur.
+>  1. System Center Operations Manager, Zabbix ve Nagios 'ın tüm uyarıları, temeldeki telemetri türü kullanılamadığından "bilinmiyor" sinyal türüne sahip.
+>  1. Nagios uyarıları durum bilgisi değildir; Örneğin, bir uyarının [izleme koşulu](https://aka.ms/azure-alerts-overview) "tetiklenir" durumundan "çözümlendi" durumuna geçmeyecektir. Bunun yerine, her ikisi de ayrı bir uyarı örneği olarak "tetiklenir" ve "çözümlendi" görüntülenir. 
 

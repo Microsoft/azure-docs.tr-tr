@@ -1,6 +1,6 @@
 ---
-title: Veri aktarımı için bir Azure çözümü seçme | Microsoft Docs
-description: Veri boyutları ve kullanılabilir ağ bant genişliği, ortamınızdaki göre veri aktarımı için bir Azure çözümünü nasıl seçeceğinizi öğrenin
+title: Veri aktarımı için bir Azure çözümü seçin | Microsoft Docs
+description: Ortamınızdaki veri boyutlarına ve kullanılabilir ağ bant genişliğine bağlı olarak veri aktarımı için bir Azure çözümü seçme hakkında bilgi edinin
 services: storage
 author: alkohli
 ms.service: storage
@@ -8,79 +8,79 @@ ms.subservice: blobs
 ms.topic: article
 ms.date: 06/03/2019
 ms.author: alkohli
-ms.openlocfilehash: 56470c08f0ac940dae42821ae61846f1c86d52eb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 838d65da90ec0daef69375e5a75bcb497a0c3512
+ms.sourcegitcommit: d3dced0ff3ba8e78d003060d9dafb56763184d69
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66479522"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69900397"
 ---
 # <a name="choose-an-azure-solution-for-data-transfer"></a>Veri aktarımı için bir Azure çözümü seçin
 
-Bu makalede bazı genel Azure veri aktarımına genel bakış çözümleri sağlar. Makale ayrıca kullanıma ortamınızı aktarmak istediğiniz veri boyutu, ağ bant genişliğini bağlı olarak önerilen seçeneklere bağlantılarını içerir.
+Bu makalede, bazı yaygın Azure veri aktarımı çözümlerine genel bakış sunulmaktadır. Makale Ayrıca ortamınızdaki ağ bant genişliğine ve aktarmak istediğiniz verilerin boyutuna bağlı olarak önerilen seçeneklere bağlantı sağlar.
 
-## <a name="types-of-data-movement"></a>Veri taşıma türü
+## <a name="types-of-data-movement"></a>Veri taşıma türleri
 
-Veri aktarımı, çevrimdışı veya ağ bağlantısı üzerinden olabilir. Çözümünüzü yapılandırmanıza bağlı olarak seçin:
+Veri aktarımı çevrimdışı veya ağ bağlantısı üzerinden olabilir. Çözümünüze bağlı olarak çözümünüzü seçin:
 
-- **Veri boyutu** -veri aktarımı için hedeflenen boyutu
-- **Aktarım sıklığı** -tek seferlik veya düzenli aralıklarla veri alımı ve
-- **Ağ** – verileri için kullanılabilir bant genişliği ortamınıza aktarın.
+- **Veri boyutu** -aktarım için tasarlanan verilerin boyutu,
+- **Aktarım sıklığı** -bir kerelik veya düzenli veri alımı ve
+- **Ağ** – ortamınızda veri aktarımı için kullanılabilir bant genişliği.
 
-Veri taşıma, aşağıdaki türde olabilir:
+Veri taşıma aşağıdaki türlerde olabilir:
 
-- **Sprint'in cihazları kullanarak çevrimdışı aktarımı** -fiziksel dağıtılamasa cihazlar çevrimdışı tek seferde toplu veri aktarımı yapmak istediğinizde kullanın. Microsoft, bir disk veya güvenli bir özel cihaz size gönderir. Alternatif olarak, satın alın ve kendi disklerinizi gönderin. Cihaza veri kopyalayın ve ardından nerede veriler karşıya yüklendikten Azure'a gönderin.  Bu durum için kullanılabilir seçenekler, Data Box Disk, Data Box, veri kutusu yoğun ve içeri/dışarı aktarma (kendi diskler kullanan) bulunur.
+- **Sevk özellikli cihazlar kullanılarak çevrimdışı aktarma** -çevrimdışı bir kerelik toplu veri aktarımı yapmak istediğinizde fiziksel olarak sevk özellikli cihazları kullanın. Microsoft size bir disk veya güvenli bir özel cihaz gönderir. Alternatif olarak, kendi disklerinizi satın alabilir ve gönderebilirsiniz. Verileri cihaza kopyalar ve ardından verilerin karşıya yüklendiği Azure 'a gönderilir.  Bu durum için kullanılabilen seçenekler Data Box Disk, Data Box, Data Box Heavy ve Içeri/dışarı aktarma (kendi disklerinizi kullanın).
 
-- **Ağ aktarım** -verilerinizi ağ bağlantınız üzerinden Azure'a aktarın. Bu, birçok bakımdan yapılabilir.
+- **Ağ aktarımı** -verilerinizi ağ bağlantınız üzerinden Azure 'a aktarırsınız. Bu, birçok şekilde yapılabilir.
 
-    - **Grafik arabirim** -bazen sadece birkaç dosya aktarımı ve veri aktarımı otomatik hale getirmek gerekmez, Azure Depolama Gezgini gibi bir grafik arabirim araç veya bir web tabanlı inceleme aracı Azure portalında seçebilirsiniz.
-    - **Komut dosyası veya programlı aktarımı** -biz sağlayın veya bizim REST API'ler/SDK'lar doğrudan çağrı en iyi duruma getirilmiş yazılım araçlarını kullanabilirsiniz. AzCopy, Azure PowerShell ve Azure CLI kullanılabilir komut satırı araçları şunlardır. Programlama arabirimi, .NET, Java, Python, düğüm/JS, C++, Go, PHP veya Ruby için Sdk'lardan birini kullanın.
-    - **Şirket içi cihazlar** -biz, veri merkezinde yer alır ve ağ üzerinden veri aktarımı iyileştirir bir fiziksel veya sanal cihaz sağlayın. Bu cihazlar, sık kullanılan dosyaları yerel önbelleğini de sağlar. Fiziksel cihazın veri kutusu Edge ve sanal cihaz ağ geçidiyle kutusu. Hem kalıcı olarak şirket içinde çalıştırın ve ağ üzerinden Azure'a bağlanın.
-    - **Yönetilen veri işlem hattı** -düzenli olarak çeşitli Azure Hizmetleri, şirket içi veya iki birleşimi arasında dosyaları aktarmak için bir bulut işlem hattı ayarlayın. Azure Data Factory, ayarlamak ve veri işlem hatlarını yönetmek ve analiz için verilerin dönüştürmek için kullanın.
+    - **Grafik arabirim** -zaman zaman yalnızca birkaç dosya aktarırsanız ve veri aktarımını otomatikleştirmeniz gerekmiyorsa, Azure Portal Azure Depolama Gezgini veya Web tabanlı bir araştırma aracı gibi bir grafik arabirim aracı seçebilirsiniz.
+    - **Betikleştirilmiş veya programlı aktarma** -REST API 'Leri/SDK 'lerimizi doğrudan sağladığımız veya arayduğumuz iyileştirilmiş yazılım araçlarını kullanabilirsiniz. Kullanılabilir komut dosyalı araçlar AzCopy, Azure PowerShell ve Azure CLı 'larıdır. Programlama arabirimi için, .NET, Java, Python, Node/JS, C++, Go, php veya Ruby Için SDK 'lardan birini kullanın.
+    - **Şirket içi cihazlarda** , veri merkezinizde bulunan fiziksel veya sanal bir cihaz sağlıyoruz ve ağ üzerinden veri aktarımını en iyi duruma getirir. Bu cihazlar, sık kullanılan dosyaların yerel bir önbelleğini de sağlar. Fiziksel cihaz Data Box Edge ve sanal cihaz Data Box Gateway. Her ikisi de şirket içinde kalıcı olarak çalışır ve ağ üzerinden Azure 'a bağlanır.
+    - **Yönetilen veri işlem hattı** -çeşitli Azure Hizmetleri, şirket içi veya ikisinin birleşimi arasında düzenli olarak dosya aktarmak için bir bulut işlem hattı ayarlayabilirsiniz. Veri işlem hatlarını ayarlamak ve yönetmek için Azure Data Factory kullanın, verileri analiz için taşıma ve dönüştürme.
 
-Aşağıdaki görselde veri boyutu, aktarımı ve aktarım sıklığı için hedeflenen aktarımı için kullanılabilir ağ bant genişliği bağlı Araçlar çeşitli Azure veri aktarımı seçmek için yönergeleri gösterilmektedir.
+Aşağıdaki görselde aktarım için kullanılabilir ağ bant genişliğine, aktarım için tasarlanan veri boyutuna ve aktarım sıklığının sıklığına bağlı olarak çeşitli Azure veri aktarım araçları 'nı seçme yönergeleri gösterilmektedir.
 
-![Azure veri aktarım araçları](media/storage-choose-data-transfer-solution/azure-data-transfer-options-3.png)
+![Azure veri aktarımı araçları](media/storage-choose-data-transfer-solution/azure-data-transfer-options-3.png)
 
-**Üst sınırları çevrimdışı aktarımı cihazların - Data Box Disk, Data Box ve veri kutusu ağır bir cihaz türünde birden fazla siparişi yerleştirerek genişletilebilir.*
+**Çevrimdışı aktarım cihazlarının üst sınırları-Data Box Disk, Data Box ve Data Box Heavy, bir cihaz türünün birden çok siparişi yerleştirilerek genişletilebilir.*
 
-## <a name="selecting-a-data-transfer-solution"></a>Bir veri aktarım çözümü seçme
+## <a name="selecting-a-data-transfer-solution"></a>Veri aktarımı çözümü seçme
 
-Bir veri aktarım çözümü seçmenize yardımcı olması için aşağıdaki soruları yanıtlayın:
+Bir veri aktarımı çözümü seçmenize yardımcı olması için aşağıdaki soruları yanıtlayın:
 
-- Kullanılabilir ağ bant genişliği sınırlı veya var olmayan ve büyük veri kümelerini aktarmak istersiniz?
+- Kullanılabilir ağ bant genişliğiniz sınırlı veya mevcut değil ve büyük veri kümelerini aktarmak istiyor musunuz?
   
-    Yanıt Evet ise, bkz: [Senaryo 1: Olmadan büyük veri kümelerini aktarma veya düşük ağ bant genişliği](storage-solution-large-dataset-low-network.md).
-- Büyük veri kümeleri, ağ üzerinden aktarmak istediğiniz ve bir orta yüksek ağ bant genişliğine sahip?
+    Yanıt Evet ise, bkz.: [Senaryo 1: Büyük veri kümelerini veya düşük ağ bant genişliğine](storage-solution-large-dataset-low-network.md)sahip bir şekilde aktarın.
+- Büyük veri kümelerini ağ üzerinden aktarmak istiyor musunuz ve orta düzeyde yüksek ağ bant genişliğine sahip olabilirsiniz misiniz?
 
-    Yanıt Evet ise, bkz: [Senaryo 2: Büyük veri kümeleriyle Orta yüksek ağ bant genişliğini aktarım](storage-solution-large-dataset-moderate-high-network.md).
-- Bazen ağ üzerinden yalnızca birkaç dosya aktarmak istiyor musunuz?
+    Yanıt Evet ise, bkz.: [Senaryo 2: Büyük veri kümelerini orta ve yüksek ağ bant genişliğine](storage-solution-large-dataset-moderate-high-network.md)aktarın.
+- Tek zaman ağ üzerinden yalnızca birkaç dosya aktarmak istiyor musunuz?
 
-    Yanıt Evet ise bkz [Senaryo 3: Orta ağ bant genişliği sınırlı küçük veri kümelerini aktarma](storage-solution-small-dataset-low-moderate-network.md).
-- Zaman içinde nokta veri aktarımı için düzenli aralıklarla arıyorsunuz?
+    Yanıt Evet ise, [bkz. Senaryo 3: Orta düzeyde ağ bant genişliğine](storage-solution-small-dataset-low-moderate-network.md)sahip küçük veri kümelerini aktarın.
+- Düzenli aralıklarla belirli bir noktaya veri aktarımı mı arıyorsunuz?
 
-    Yanıt Evet ise, özetlenen komut dosyası/programlı seçenekleri kullanın [Senaryo 4: Düzenli aralıklarla veri aktarımları](storage-solution-periodic-data-transfer.md).
-- Devam eden, sürekli veri aktarımı için mı arıyorsunuz?
+    Yanıt Evet ise, Senaryo 4 ' te [özetlenen komut dosyalı/programlı seçenekleri kullanın: Düzenli veri aktarımları](storage-solution-periodic-data-transfer.md).
+- Devam eden, sürekli veri aktarımı mi arıyorsunuz?
 
-    Yanıt Evet ise, seçenekleri kullanın [Senaryo 4: Düzenli aralıklarla veri aktarımları](storage-solution-periodic-data-transfer.md).
+    Yanıt Evet ise, Senaryo 4 ' [teki seçenekleri kullanın: Düzenli veri aktarımları](storage-solution-periodic-data-transfer.md).
  
 
-## <a name="data-transfer-feature-in-azure-portal"></a>Azure portalında veri aktarımı özelliği
+## <a name="data-transfer-feature-in-azure-portal"></a>Azure portal veri aktarımı özelliği
 
-Azure depolama hesabınızı seçin ve portal azure'da da gidebilirsiniz **veri aktarımı** özelliği. Ortamınızdaki ağ bant genişliğini, aktarmak istediğiniz veri boyutu ve sıklığı veri aktarımı sağlar. En iyi veri çözümleri, sağladığınız bilgileri için karşılık gelen aktarım görürsünüz. 
+Ayrıca, Azure portal 'de Azure depolama hesabınıza gidebilir ve **veri aktarımı** özelliğini seçebilirsiniz. Ortamınızda ağ bant genişliğini, aktarmak istediğiniz verilerin boyutunu ve veri aktarımı sıklığını belirtin. Verdiğiniz bilgilere karşılık gelen en iyi veri aktarımı çözümlerini görürsünüz. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Depolama Gezgini giriş yapın](https://azure.microsoft.com/resources/videos/introduction-to-microsoft-azure-storage-explorer/).
-- [AzCopy genel bir bakış edinin](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-v10).
-- [Azure PowerShell'i Azure depolama ile kullanma](https://docs.microsoft.com/azure/storage/common/storage-powershell-guide-full)
-- [Azure CLI ile Azure depolama kullanma](https://docs.microsoft.com/azure/storage/common/storage-azure-cli)
+- [Azure Depolama Gezgini bir giriş alın](https://azure.microsoft.com/resources/videos/introduction-to-microsoft-azure-storage-explorer/).
+- [AzCopy 'e genel bakış konusunu okuyun](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-v10).
+- [Azure depolama ile Azure PowerShell kullanma](https://docs.microsoft.com/azure/storage/common/storage-powershell-guide-full)
+- [Azure depolama ile Azure CLı kullanma](https://docs.microsoft.com/azure/storage/common/storage-azure-cli)
 - Hakkında bilgi edinin:
 
-    - [Azure Data Box, Azure Data Box Disk ve Azure veri kutusu ağır çevrimdışı aktarımları](https://docs.microsoft.com/azure/databox/).
-    - [Azure veri kutusu ağ geçidi ve Azure veri kutusu Edge çevrimiçi aktarımları](https://docs.microsoft.com/azure/databox-online/).
-- [Azure Data Factory nedir öğrenin](https://docs.microsoft.com/azure/data-factory/copy-activity-overview).
-- Veri aktarımı için REST API'lerini kullanma
+    - [Çevrimdışı aktarımlar için Azure Data Box, Azure Data Box disk ve Azure Data Box Heavy](https://docs.microsoft.com/azure/databox/).
+    - [Çevrimiçi aktarımlar için Azure Data Box Gateway ve Azure Data Box Edge](https://docs.microsoft.com/azure/databox-online/).
+- [Azure Data Factory ne olduğunu öğrenin](https://docs.microsoft.com/azure/data-factory/copy-activity-overview).
+- Veri aktarmak için REST API 'Lerini kullanma
 
-    - [. NET'te](https://docs.microsoft.com/dotnet/api/overview/azure/storage)
-    - [Java'da](https://docs.microsoft.com/java/api/overview/azure/storage/client)
+    - [.NET 'te](https://docs.microsoft.com/dotnet/api/overview/azure/storage)
+    - [Java 'da](https://docs.microsoft.com/java/api/overview/azure/storage)

@@ -8,12 +8,12 @@ ms.service: event-grid
 ms.topic: conceptual
 ms.date: 01/04/2019
 ms.author: spelluru
-ms.openlocfilehash: ad9c2d492f70a697ef0e7dc3b7ed03b9938f2468
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 08fa9ada97c652ca609a499da1c8e87f7e4487db
+ms.sourcegitcommit: 1572b615c8f863be4986c23ea2ff7642b02bc605
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66162031"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67786619"
 ---
 # <a name="query-event-grid-subscriptions"></a>Event Grid aboneliklerini sorgulama 
 
@@ -46,7 +46,7 @@ Bir Azure aboneliği için Event grid abonelikleri almak için konu türü sağl
 Azure CLI için şunu kullanın:
 
 ```azurecli-interactive
-az eventgrid event-subscription list --topic-type-name "Microsoft.Resources.Subscriptions"
+az eventgrid event-subscription list --topic-type-name "Microsoft.Resources.Subscriptions" --location global
 ```
 
 PowerShell için şunu kullanın:
@@ -60,7 +60,7 @@ Event grid abonelikleri için bir Azure aboneliğinde tüm kaynak gruplarını a
 Azure CLI için şunu kullanın:
 
 ```azurecli-interactive
-az eventgrid event-subscription list --topic-type-name "Microsoft.Resources.ResourceGroups"
+az eventgrid event-subscription list --topic-type-name "Microsoft.Resources.ResourceGroups" --location global
 ```
 
 PowerShell için şunu kullanın:
@@ -74,7 +74,7 @@ Belirtilen kaynak grubu için Event grid abonelikleri almak için bir parametre 
 Azure CLI için şunu kullanın:
 
 ```azurecli-interactive
-az eventgrid event-subscription list --resource-group myResourceGroup
+az eventgrid event-subscription list --resource-group myResourceGroup --location global
 ```
 
 PowerShell için şunu kullanın:

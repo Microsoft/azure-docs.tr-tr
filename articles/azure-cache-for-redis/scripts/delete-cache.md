@@ -1,26 +1,19 @@
 ---
-title: Azure CLI betik örneği - bir Azure önbelleği için Redis Delete | Microsoft Docs
+title: Azure CLI betik örneği - bir Azure önbelleği için Redis Delete
 description: Azure CLI betik örneği - bir Azure önbelleği için Redis Delete
-services: cache
-documentationcenter: ''
 author: yegu-ms
-manager: jhubbard
-editor: ''
 tags: azure-service-management
-ms.assetid: 7beded7a-d2c9-43a6-b3b4-b8079c11de4a
 ms.service: cache
 ms.devlang: azurecli
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: tbd
+ms.topic: sample
 ms.date: 08/30/2017
 ms.author: yegu
-ms.openlocfilehash: d02d3196c2cbc130a2e88061df514b0bf681b1bf
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a2884fd326b6091680b8d81a905f3ee3320a2740
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60240781"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74121209"
 ---
 # <a name="delete-an-azure-cache-for-redis"></a>Bir Azure önbelleği için Redis Sil
 

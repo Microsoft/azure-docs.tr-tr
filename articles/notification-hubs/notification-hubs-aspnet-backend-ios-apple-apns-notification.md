@@ -1,10 +1,10 @@
 ---
-title: Azure Notification hubs'ı kullanarak, belirli kullanıcılara anında iletme bildirimleri gönderme | Microsoft Docs
+title: Azure Notification Hubs kullanarak belirli kullanıcılara anında iletme bildirimleri gönderin | Microsoft Docs
 description: Azure Notification Hubs kullanarak belirli kullanıcılara anında iletme bildirimleri göndermeyi öğrenin.
 documentationcenter: ios
-author: jwargo
-manager: patniko
-editor: spelluru
+author: sethm
+manager: femila
+editor: jwargo
 services: notification-hubs
 ms.assetid: 1f7d1410-ef93-4c4b-813b-f075eed20082
 ms.service: notification-hubs
@@ -13,19 +13,21 @@ ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
 ms.date: 01/04/2019
-ms.author: jowargo
-ms.openlocfilehash: 9b6c0715cb85e245aba94adfb8b33d0d07ece9a9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 01/04/2019
+ms.openlocfilehash: 48135ea614bbab4ca6649a83895ae5f632918c61
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60880493"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72387467"
 ---
-# <a name="tutorial-push-notifications-to-specific-users-using-azure-notification-hubs"></a>Öğretici: Azure Notification hubs'ı kullanarak belirli kullanıcılara anında iletme bildirimleri
+# <a name="tutorial-send-push-notifications-to-specific-users-using-azure-notification-hubs"></a>Öğretici: Azure Notification Hubs kullanarak belirli kullanıcılara anında iletme bildirimleri gönderme
 
 [!INCLUDE [notification-hubs-selector-aspnet-backend-notify-users](../../includes/notification-hubs-selector-aspnet-backend-notify-users.md)]
 
-Bu öğreticide, belirli bir cihazdaki belirli bir uygulama kullanıcısına anında iletme bildirimleri göndermek için Azure Notification Hubs’ı nasıl kullanacağınız gösterilmektedir. Bir ASP.NET Webapı arka ucunu istemcilerin kimliğini doğrulamak ve bildirimleri oluşturmak için yönergeler konuda gösterildiği gibi kullanılan [, uygulama arka ucundan kaydetme](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend).
+Bu öğreticide, belirli bir cihazdaki belirli bir uygulama kullanıcısına anında iletme bildirimleri göndermek için Azure Bildirim Hub'larını nasıl kullanacağınız gösterilir. ASP.NET bir WebAPI arka ucu, istemcilerin kimliğini doğrulamak ve [uygulama arka ucunuzun kayıt](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend)kılavuzunda gösterildiği gibi bildirimler oluşturmak için kullanılır.
 
 Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
 
@@ -40,33 +42,33 @@ Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticide oluşturduğunuz ve bildirim hub'ınıza açıklandığı gibi yapılandırılmış varsayılır [Notification hubs'ı (iOS) ile çalışmaya başlama](notification-hubs-ios-apple-push-notification-apns-get-started.md). Bu öğretici ayrıca için önkoşuldur [güvenli (iOS) anında iletme](notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) öğretici.
-Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile çalışmaya başlama anında iletme](../app-service-mobile/app-service-mobile-ios-get-started-push.md).
+Bu öğreticide, Bildirim Hub 'ınızı [Notification Hubs (iOS) Ile çalışmaya](notification-hubs-ios-apple-push-notification-apns-get-started.md)başlama konusunda açıklandığı gibi oluşturduğunuzu ve yapılandırdığınızı varsaymaktadır. Bu öğretici Ayrıca [güvenli gönderim (iOS)](notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) öğreticisinin önkoşuludur.
+Arka uç hizmetiniz olarak Mobile Apps kullanmak istiyorsanız, [Push Ile çalışmaya başlama Mobile Apps](../app-service-mobile/app-service-mobile-ios-get-started-push.md)bakın.
 
 [!INCLUDE [notification-hubs-aspnet-backend-notifyusers](../../includes/notification-hubs-aspnet-backend-notifyusers.md)]
 
 ## <a name="modify-your-ios-app"></a>İOS uygulamanızı değiştirme
 
-1. Oluşturduğunuz tek sayfalı uygulamayı görüntüle açın [Notification hubs'ı (iOS) ile çalışmaya başlama](notification-hubs-ios-apple-push-notification-apns-get-started.md) öğretici.
+1. [Notification Hubs (iOS) Ile çalışmaya başlama](notification-hubs-ios-apple-push-notification-apns-get-started.md) öğreticisinde oluşturduğunuz tek sayfalı görünüm uygulamasını açın.
 
    > [!NOTE]
-   > Bu bölümde, projenize bir boş kuruluş adı ile yapılandırılmış olduğunu varsayar. Aksi durumda, tüm sınıf adları için kuruluşunuzun adı önüne eklediğinizden gerekir.
+   > Bu bölümde, projenizin boş bir kuruluş adıyla yapılandırıldığı varsayılır. Aksi takdirde, kuruluşunuzun adını tüm sınıf adlarına eklemeniz gerekir.
 
-2. İçinde `Main.storyboard` nesne kitaplığından ekran görüntüsünde gösterilen bileşenleri ekleyin.
+2. @No__t-0 dosyasında, ekran görüntüsünde gösterilen bileşenleri nesne kitaplığından ekleyin.
 
-    ![Xcode arabirim oluşturucu görsel taslağı Düzenle][1]
+    ![Xcode Interface Builder 'da görsel taslağı Düzenle][1]
 
-   * **Kullanıcı adı**: Bir yer tutucu metinle UITextField *kullanıcı adı girin*hemen sonuçları etiket ve sol ve sağ kenar boşlukları kısıtlı Gönder altına ve gönderme sonuçları etiket altında.
-   * **Parola**: Bir yer tutucu metinle UITextField *parolasını girin*, hemen altındaki kullanıcı adını metin alanı ve sol ve sağ kenar boşlukları ve username metin alanı altında kısıtlanmış. Denetleme **güvenli metin girişi** özniteliği denetçi'deki altında seçeneği *dönüş anahtar*.
-   * **Oturum açma**: Bir UIButton hemen parola metin alanı etiketlenmiş ve işaretini kaldırın **etkin** öznitelikleri denetçi'deki altında seçeneği *denetim içeriği*
-   * **WNS**: Etiket ve Windows bildirim hizmeti bildirim hub'ında ayarlanmış göndermeyi etkinleştirmek için geçin. Bkz: [Windows başlarken](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md) öğretici.
-   * **GCM**: Etiket ve Google Cloud Messaging için bildirim hub'ında ayarlanmış ise gönderilmesine izin vermek için geçiş yapabilirsiniz. Bkz: [Android Başlarken](notification-hubs-android-push-notification-google-gcm-get-started.md) öğretici.
-   * **APNS**: Etiket ve Apple Platform Bildirim Hizmeti'ne bildirimi gönderilmesine izin vermek için anahtar.
-   * **Alıcı Username:A** yer tutucu metinle UITextField *alıcı kullanıcı adı etiketi*hemen GCM etiket ve sol ve sağ kenar boşlukları ve GCM etiketinin altına kısıtlanmış.
+   * **Kullanıcı adı**: yer tutucu metnine sahip bir UITextField, gönder sonuçlarının hemen altındaki *Kullanıcı adı*' nı girin ve sol ve sağ kenar boşluklarına ve bu sonuçları gönder etiketinin altına göre kısıtlanmıştır.
+   * **Parola**: yer tutucu metin Içeren bir UITextField, Kullanıcı adı metin alanının hemen altındaki *parolayı girin*ve sol ve sağ kenar boşluklarıyla ve Kullanıcı adı metin alanının altına sınırlanır. *Dönüş anahtarı*altında, öznitelik denetçisinde **güvenli metin girişi** seçeneğini işaretleyin.
+   * **Oturum aç**: parola metin alanının hemen altındaki etiketli bir uıbutton ve *Denetim-Içerik* altındaki öznitelikler denetçisinde **etkin** seçeneğinin işaretini kaldırın
+   * **WNS**: Bu, hub 'da ayarlandıysa bildirim Windows bildirim hizmeti gönderilmesini etkinleştirmek için etiketleyip geçiş yapın. Bkz. [Windows](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md) Başlangıç Öğreticisi.
+   * **GCM**: hub 'da ayarlandıysa Google Cloud Messaging bildirimin gönderilmesini sağlamak için etiket ve geçiş yapın. Bkz. [Android Başlarken](notification-hubs-android-push-notification-google-gcm-get-started.md) öğreticisi.
+   * **APNs**: bildirimin Apple platform bildirim hizmetine gönderilmesini sağlamak için etiket ve anahtar.
+   * **Alıcı Kullanıcı adı:** yalnızca GCM etiketinin hemen altında yer tutucu metin, *alıcı Kullanıcı adı etiketi*olan bir uitextfield ve sol ve sağ kenar boşluklarıyla ve GCM etiketinin altında kısıtlanmış.
 
-     Bazı bileşenler eklenmiştir [Notification hubs'ı (iOS) ile çalışmaya başlama](notification-hubs-ios-apple-push-notification-apns-get-started.md) öğretici.
+     Bazı bileşenler [Notification Hubs kullanmaya başlama (iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md) öğreticisine eklenmiştir.
 
-3. **CTRL** bileşenlerden görünüme sürükleyin `ViewController.h` ve bu yeni çıkışlar ekleyin.
+3. **CTRL** içindeki bileşenlerden `ViewController.h` ' e sürükleyin ve bu yeni aykırı değerleri ekleyin.
 
     ```objc
     @property (weak, nonatomic) IBOutlet UITextField *UsernameField;
@@ -86,13 +88,13 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     - (IBAction)LogInAction:(id)sender;
     ```
 
-4. İçinde `ViewController.h`, aşağıdaki `#define` içeri aktarma Deyimlerinizde sonra. Yedek `<Enter Your Backend Endpoint>` yer tutucusunu önceki bölümde, uygulamanızın arka ucuna dağıtmak için kullanılan hedef URL ile. Örneğin, `http://your_backend.azurewebsites.net`.
+4. @No__t-0 ' da, içeri aktarma deyimlerinizi izleyerek aşağıdaki `#define` ' i ekleyin. @No__t-0 yer tutucusunu, önceki bölümde uygulamanızın arka ucunu dağıtmak için kullandığınız hedef URL ile değiştirin. Örneğin, `http://your_backend.azurewebsites.net`.
 
     ```objc
     #define BACKEND_ENDPOINT @"<Enter Your Backend Endpoint>"
     ```
 
-5. Projenizde, adlı yeni bir Cocoa Touch sınıfı oluşturmak `RegisterClient` oluşturduğunuz ASP.NET arka uç ile arabirim oluşturmak için. Öğesinden devralan sınıf oluşturma `NSObject`. Ardından aşağıdaki kodu ekleyin `RegisterClient.h`.
+5. Projenizde, oluşturduğunuz ASP.NET arka ucu ile arabirimine `RegisterClient` adlı yeni bir Cocoa Touch sınıfı oluşturun. @No__t-0 ' dan devralan sınıfı oluşturun. Ardından, `RegisterClient.h` ' a aşağıdaki kodu ekleyin.
 
     ```objc
     @interface RegisterClient : NSObject
@@ -107,7 +109,7 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     @end
     ```
 
-6. İçinde `RegisterClient.m`, güncelleştirme `@interface` bölümü:
+6. @No__t-0 ' da `@interface` bölümünü güncelleştirin:
 
     ```objc
     @interface RegisterClient ()
@@ -125,7 +127,7 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     @end
     ```
 
-7. Değiştirin `@implementation` aşağıdaki kodla RegisterClient.m bölümünde:
+7. RegisterClient. d içindeki `@implementation` bölümünü aşağıdaki kodla değiştirin:
 
     ```objc
     @implementation RegisterClient
@@ -286,11 +288,11 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     @end
     ```
 
-    Bu kod Kılavuzu makalede açıklanan mantığını uygulayan [, uygulama arka ucundan kaydetme](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend) REST gerçekleştirmek için nsurlsession'ı kullanarak, uygulama arka ucunuza çağırır ve tarafından döndürülen NSUserDefaults RegistrationId yerel olarak depolamak için bildirim hub'ı.
+    Bu kod, uygulama arka ucunuza REST çağrıları gerçekleştirmek üzere NSURLSession kullanarak [uygulama arka Ucinizden kayıt yaptırarak](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend) açıklanan mantığı uygular ve NSUserDefaults, Bildirim Hub 'ı tarafından döndürülen RegistrationId 'yi yerel olarak depolar.
 
-    Bu sınıf özelliği gerektirir `authorizationHeader` düzgün çalışması için ayarlanacak. Bu özellik ayarlanır `ViewController` oturum açma sonrasında sınıfı.
+    Bu sınıf, düzgün şekilde çalışması için `authorizationHeader` özelliğinin ayarlanmasını gerektirir. Bu özellik, oturum açma işleminden sonra `ViewController` sınıfı tarafından ayarlanır.
 
-8. İçinde `ViewController.h`, ekleme bir `#import` bildirimi `RegisterClient.h`. Ardından cihaz belirteci için bir bildirim Ekle ve başvuru bir `RegisterClient` örneğini `@interface` bölümü:
+8. @No__t-0 ' da, `RegisterClient.h` için bir `#import` açıklaması ekleyin. Ardından, `@interface` bölümünde cihaz belirteci ve `RegisterClient` örneğine başvuru için bir bildirim ekleyin:
 
     ```objc
     #import "RegisterClient.h"
@@ -299,7 +301,7 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     @property (strong, nonatomic) RegisterClient* registerClient;
     ```
 
-9. Özel yöntem bildiriminde ViewController.m içinde ekleme `@interface` bölümü:
+9. ViewController. d ' de `@interface` bölümüne özel bir yöntem bildirimi ekleyin:
 
     ```objc
     @interface ViewController () <UITextFieldDelegate, NSURLConnectionDataDelegate, NSXMLParserDelegate>
@@ -312,9 +314,9 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     ```
 
     > [!NOTE]
-    > Aşağıdaki kod parçacığında, bir güvenli kimlik doğrulama düzeni değildir, uygulanması yerine kullanmalısınız `createAndSetAuthenticationHeaderWithUsername:AndPassword:` örn kayıt istemci sınıfı tarafından kullanılacak bir kimlik doğrulama belirteci oluşturur, özel kimlik doğrulama mekanizması ile OAuth, Active Directory.
+    > Aşağıdaki kod parçacığı güvenli bir kimlik doğrulama düzeni değildir, kayıt istemci sınıfı (örneğin OAuth,) tarafından kullanılacak kimlik doğrulama belirteci üreten özel kimlik doğrulama mekanizmasıyla `createAndSetAuthenticationHeaderWithUsername:AndPassword:` uygulamasını yerine geçirmeniz gerekir. Active Directory.
 
-10. Ardından `@implementation` bölümünü `ViewController.m`, cihaz belirtecini ve kimlik doğrulama üst bilgisi ayarlamak için bir uygulama ekler aşağıdaki kodu ekleyin.
+10. Ardından, `ViewController.m` ' in `@implementation` bölümünde, cihaz belirtecinin ve kimlik doğrulama üstbilgisinin ayarlanmasına yönelik uygulamayı ekleyen aşağıdaki kodu ekleyin.
 
     ```objc
     -(void) setDeviceToken: (NSData*) deviceToken
@@ -341,9 +343,9 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     }
     ```
 
-    Cihaz belirteci ayarlama Oturum Aç düğmesini nasıl sağladığını dikkat edin. Uygulama arka ucu ile anında iletme bildirimleri için Görünüm Denetleyicisi oturum açma eyleminin bir parçası olarak kaydettirir olmasıdır. Bu nedenle, cihaz belirteci düzgün şekilde ayarlandığını gösterdiğinde kadar erişilebilir olacak şekilde oturum eylem istemezsiniz. Eski ikinci önce olur sürece anında iletme kaydı oturum açma işlemi birbirinden ayırın.
+    Cihaz belirtecinin ayarlanması, oturum açma düğmesine nasıl izin verdiğine dikkat edin. Bunun nedeni, oturum açma eyleminin bir parçası olduğu için, görünüm denetleyicisi uygulama arka ucuna anında iletme bildirimleri kaydeder. Bu nedenle, cihaz belirteci düzgün şekilde kuruluncaya kadar oturum açma eyleminin erişilebilir olmasını istemezsiniz. Daha önce, ikincisinde daha önce olduğu sürece, anında iletme kaydından oturum açma bilgilerini ayrışırsınız.
 
-11. Eylem yöntemi için uygulamak için aşağıdaki kod parçacıklarının ViewController.m içinde kullanın, **oturum** düğmesi ve ASP.NET arka uç kullanarak bildirim iletisini göndermek için bir yöntem.
+11. ViewController. d ' de, **oturum açma** düğinizde eylem yöntemini ve ASP.net arka ucunu kullanarak bildirim iletisini göndermek için bir yöntemi uygulamak üzere aşağıdaki kod parçacıklarını kullanın.
 
     ```objc
     - (IBAction)LogInAction:(id)sender {
@@ -418,7 +420,7 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     }
     ```
 
-12. Güncelleştirme eylemi için **bildirim gönder** düğmesine ASP.NET arka ucu kullanan ve bir anahtar tarafından etkin bir PNS gönderin.
+12. ASP.NET arka ucunu kullanmak ve bir anahtar tarafından etkinleştirilen tüm PNS 'ye göndermek için **bildirim gönder** düğmesine yönelik eylemi güncelleştirin.
 
     ```objc
     - (IBAction)SendNotificationMessage:(id)sender
@@ -444,7 +446,7 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     }
     ```
 
-13. İçinde `ViewDidLoad` işlev, oluşturmak üzere aşağıdakileri eklemeniz `RegisterClient` örneği ve, metin alanları için temsilci Ayarla.
+13. @No__t-0 işlevinde, `RegisterClient` örneğini oluşturmak ve metin alanlarınız için temsilciyi ayarlamak üzere aşağıdakini ekleyin.
 
     ```objc
     self.UsernameField.delegate = self;
@@ -453,7 +455,7 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     self.registerClient = [[RegisterClient alloc] initWithEndpoint:BACKEND_ENDPOINT];
     ```
 
-14. Şimdi `AppDelegate.m`, yöntemin tüm içeriğini kaldırın `application:didRegisterForPushNotificationWithDeviceToken:` aşağıdaki (Görünüm denetleyicisi APNs alınan son cihaz belirteci içerdiğinden emin olmak için) ile değiştirin:
+14. Şimdi `AppDelegate.m` ' da, `application:didRegisterForPushNotificationWithDeviceToken:` yönteminin tüm içeriğini kaldırın ve aşağıdaki ile değiştirin (görünüm denetleyicisinin APNs 'dan alınan en son cihaz belirtecini içerdiğinden emin olmak için):
 
     ```objc
     // Add import to the top of the file
@@ -467,7 +469,7 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
     }
     ```
 
-15. Son olarak, `AppDelegate.m`, aşağıdaki yöntemi olduğundan emin olun:
+15. Son olarak `AppDelegate.m` ' da, aşağıdaki yönteme sahip olduğunuzdan emin olun:
 
     ```objc
     - (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
@@ -478,17 +480,17 @@ Mobile Apps arka uç hizmetinize kullanmak istiyorsanız, bkz. [Mobile Apps ile 
 
 ## <a name="test-the-application"></a>Uygulamayı test etme
 
-1. Xcode'da, uygulamayı fiziksel bir iOS cihazında (anında iletme bildirimleri simülatörde çalışmaz) çalıştırın.
-2. İOS uygulama kullanıcı ARABİRİMİNDEKİ'da, kullanıcı adı ve parola için aynı değeri girin. Ardından **oturum**.
+1. XCode 'da uygulamayı fiziksel bir iOS cihazında çalıştırın (anında iletme bildirimleri Benzetici içinde çalışmaz).
+2. İOS uygulama kullanıcı arabiriminde, hem Kullanıcı adı hem de parola için aynı değeri girin. Sonra **oturum aç**' a tıklayın.
 
-    ![iOS uygulamayı test etme][2]
+    ![iOS test uygulaması][2]
 
-3. Kayıt başarılı size bildiren bir açılır pencere görmeniz gerekir. **Tamam** düğmesine tıklayın.
+3. Kayıt başarısını bildiren bir açılır pencere görmeniz gerekir. **Tamam**’a tıklayın.
 
-    ![iOS test görüntülenen bildirimi][3]
+    ![iOS test bildirimi görüntülendi][3]
 
-4. İçinde **alıcı kullanıcı adı etiketi* metin alanında, başka bir CİHAZDAN kaydı ile kullanılan kullanıcı adı etiketi girin.
-5. Bir bildirim iletisi girin ve tıklayın **bildirim gönder**. Bir kayıt alıcı kullanıcı adı etiketi olan cihazlar bildirim iletisini alırsınız. Bu, yalnızca bu kullanıcılara gönderilir.
+4. **Alıcı Kullanıcı adı etiketi* metin alanına, başka bir cihazdan kayıtla kullanılan Kullanıcı adı etiketini girin.
+5. Bir bildirim iletisi girin ve **bildirim gönder**' e tıklayın. Yalnızca alıcı Kullanıcı adı etiketiyle kayıt olan cihazlar bildirim iletisini alır. Yalnızca bu kullanıcılara gönderilir.
 
     ![iOS test etiketli bildirimi][4]
 

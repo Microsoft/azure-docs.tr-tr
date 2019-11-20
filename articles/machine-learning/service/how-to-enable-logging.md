@@ -1,7 +1,6 @@
 ---
-title: Azure Machine Learning hizmetinde günlüğe kaydetmeyi etkinleştir
-titleSuffix: Azure Machine Learning service
-description: SDK'sı özgü işlevini kullanarak yanı sıra Python günlük paketi hem varsayılan kullanarak Azure Machine Learning hizmetinde günlüğü etkinleştirme hakkında bilgi edinin.
+title: Azure Machine Learning oturum açmayı etkinleştir
+description: Hem varsayılan Python günlüğü paketini hem de SDK 'ya özgü işlevselliği kullanarak Azure Machine Learning oturum açmayı nasıl etkinleştireceğinizi öğrenin.
 ms.author: trbye
 author: trevorbye
 services: machine-learning
@@ -9,29 +8,30 @@ ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
 ms.reviewer: trbye
-ms.date: 02/20/2019
-ms.openlocfilehash: 0d75b983ad6d3b6256852335dc523b481bbe046f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 07/12/2019
+ms.openlocfilehash: 91e00b8e1d13f69ae3ba446bcbc09f06f387c439
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60819266"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73931127"
 ---
-# <a name="enable-logging-in-azure-machine-learning-service"></a>Azure Machine Learning hizmetinde günlüğe kaydetmeyi etkinleştir
+# <a name="enable-logging-in-azure-machine-learning"></a>Azure Machine Learning oturum açmayı etkinleştir
+[!INCLUDE [applies-to-skus](../../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Azure Machine Learning Python SDK'sı, hem yerel günlüğe kaydetme ve çalışma alanınıza Portalı'nda oturum SDK özgü işlevini kullanarak yanı sıra varsayılan Python günlüğü paketini kullanarak günlüğe kaydetme etkinleştirmenize izin verir. Günlükleri, geliştiricilerin uygulama durumuyla ilgili gerçek zamanlı bilgi sağlamak ve bir hata veya uyarı Tanılama ile yardımcı olabilir. Bu makalede, aşağıdaki alanlarda günlüğü etkinleştirme farklı yollarını öğrenin:
+Azure Machine Learning Python SDK 'Sı, hem varsayılan Python günlüğü paketini hem de yerel günlüğe kaydetme ve portalda çalışma alanınıza oturum açmak için SDK 'ya özgü işlevselliği kullanarak günlüğü etkinleştirmenizi sağlar. Günlükler geliştiricilere uygulama durumu hakkında gerçek zamanlı bilgiler sağlar ve hataları veya uyarıları tanılamanıza yardımcı olabilir. Bu makalede, aşağıdaki alanlarda günlüğü etkinleştirmenin farklı yollarını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Eğitim modelleri ve işlem hedefleri
 > * Görüntü oluşturma
-> * Dağıtılan modellerinde
+> * Dağıtılan modeller
 > * Python `logging` ayarları
 
-[Bir Azure Machine Learning hizmeti çalışma alanı oluşturma](setup-create-workspace.md). Kullanım [Kılavuzu](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py) SDK daha fazla bilgi için.
+[Azure Machine Learning çalışma alanı oluşturun](how-to-manage-workspace.md). SDK hakkında daha fazla bilgi için [Kılavuzu](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py) kullanın.
 
-## <a name="training-models-and-compute-target-logging"></a>Eğitim modelleri ve hedef günlük işlem
+## <a name="training-models-and-compute-target-logging"></a>Eğitim modelleri ve işlem hedefi günlüğü
 
-Model eğitimi işlemi sırasında günlük kaydını etkinleştirmek için birden çok yolu vardır ve sık karşılaşılan tasarım desenleri gösterilen örneklerden konacaktır. Kolayca çalıştırma ile ilgili veriler bulutta çalışma alanınızı kullanarak oturum açabilirsiniz `start_logging` işlevini `Experiment` sınıfı.
+Model eğitimi işlemi sırasında günlüğü etkinleştirmenin birden çok yolu vardır ve gösterilen örneklerde yaygın tasarım desenleri gösterilmektedir. `Experiment` sınıfında `start_logging` işlevini kullanarak, çalıştırmaya ilişkin verileri bulutta çalışma alanınıza kolayca kaydedebilirsiniz.
 
 ```python
 from azureml.core import Experiment
@@ -41,9 +41,9 @@ run = exp.start_logging()
 run.log("test-val", 10)
 ```
 
-Başvuru belgelerine bakın [çalıştırma](https://docs.microsoft.com/python/api/azureml-core/azureml.core.run(class)?view=azure-ml-py) ek günlükler işlevler için sınıf.
+Ek günlüğe kaydetme işlevlerine yönelik [Run](https://docs.microsoft.com/python/api/azureml-core/azureml.core.run(class)?view=azure-ml-py) sınıfı için başvuru belgelerine bakın.
 
-Uygulama durumu yerel olarak günlüğe eğitim ilerleme sırasında etkinleştirmek için `show_output` parametresi. Ayrıntılı günlük kaydını etkinleştirme, eğitim işlem yanı sıra herhangi bir uzak kaynaklar hakkında bilgi ayrıntılarını görmek veya hedef işlem olanak tanır. Denemeyi gönderme sırasında günlük kaydını etkinleştirmek için aşağıdaki kodu kullanın.
+Eğitim süreci sırasında uygulama durumunun yerel günlük kaydını etkinleştirmek için `show_output` parametresini kullanın. Ayrıntılı günlüğün etkinleştirilmesi, eğitim sürecinin ayrıntılarını ve uzak kaynaklar veya işlem hedefleri hakkındaki bilgileri görmenizi sağlar. Deneme gönderimi sırasında günlüğe kaydetmeyi etkinleştirmek için aşağıdaki kodu kullanın.
 
 ```python
 from azureml.core import Experiment
@@ -52,19 +52,19 @@ experiment = Experiment(ws, experiment_name)
 run = experiment.submit(config=run_config_object, show_output=True)
 ```
 
-Parametrenin aynısını kullanabilirsiniz `wait_for_completion` elde edilen çalıştırmaya işlevi.
+Ayrıca, sonuç çalıştırmasında `wait_for_completion` işlevinde aynı parametreyi de kullanabilirsiniz.
 
 ```python
 run.wait_for_completion(show_output=True)
 ```
 
-SDK varsayılan python bir günlük paketi belirli senaryolar için eğitim kullanarak da destekler. Aşağıdaki örnek bir günlük tutma düzeyini sağlayan `INFO` içinde bir `AutoMLConfig` nesne.
+SDK Ayrıca, eğitim için belirli senaryolarda varsayılan Python günlük paketi ' ni kullanmayı da destekler. Aşağıdaki örnek, bir `AutoMLConfig` nesnesindeki `INFO` günlüğe kaydetme düzeyini mümkün bir şekilde sunar.
 
 ```python
 from azureml.train.automl import AutoMLConfig
 import logging
 
-automated_ml_config = AutoMLConfig(task = 'regression',
+automated_ml_config = AutoMLConfig(task='regression',
                                    verbosity=logging.INFO,
                                    X=your_training_features,
                                    y=your_training_labels,
@@ -73,33 +73,35 @@ automated_ml_config = AutoMLConfig(task = 'regression',
                                    primary_metric="spearman_correlation")
 ```
 
-Ayrıca `show_output` kalıcı işlem hedefi oluşturulurken parametre. Parametreyi belirtin `wait_for_completion` işlem hedef oluşturma sırasında günlük kaydını etkinleştirmek için işlevi.
+Kalıcı bir işlem hedefi oluştururken `show_output` parametresini de kullanabilirsiniz. İşlem hedefi oluşturma sırasında günlüğe kaydetmeyi etkinleştirmek için `wait_for_completion` işlevinde parametresini belirtin.
 
 ```python
 from azureml.core.compute import ComputeTarget
 
-compute_target = ComputeTarget.attach(workspace=ws, name="example", attach_configuration=config)
+compute_target = ComputeTarget.attach(
+    workspace=ws, name="example", attach_configuration=config)
 compute.wait_for_completion(show_output=True)
 ```
 
-## <a name="logging-during-image-creation"></a>Görüntü oluşturma işlemi sırasında günlük kaydı
+## <a name="logging-during-image-creation"></a>Görüntü oluşturma sırasında günlüğe kaydetme
 
-Görüntü oluşturma sırasında günlük kaydını etkinleştirme derleme işlemi sırasında hataları görmenizi sağlayacak. Ayarlama `show_output` üzerinde param `wait_for_deployment()` işlevi.
+Görüntü oluşturma sırasında günlüğe kaydetmenin etkinleştirilmesi, derleme işlemi sırasında herhangi bir hata görmenizi sağlar. `wait_for_deployment()` işlevindeki `show_output` param ' i ayarlayın.
 
 ```python
 from azureml.core.webservice import Webservice
 
 service = Webservice.deploy_from_image(deployment_config=your_config,
-                                            image=image,
-                                            name="example-image",
-                                            workspace=ws)
+                                       image=image,
+                                       name="example-image",
+                                       workspace=ws
+                                       )
 
 service.wait_for_deployment(show_output=True)
 ```
 
-## <a name="logging-for-deployed-models"></a>Dağıtılan modellerinde günlüğe kaydetme
+## <a name="logging-for-deployed-models"></a>Dağıtılan modeller için günlüğe kaydetme
 
-Daha önceden dağıtılan web hizmeti günlüklerini almak için hizmeti yüklemek ve kullanmak `get_logs()` işlevi. Günlükleri, dağıtım sırasında oluşan hataları hakkında ayrıntılı bilgiler içeriyor olabilir.
+Daha önce dağıtılan bir Web hizmetinden günlükleri almak için hizmeti yükleyin ve `get_logs()` işlevini kullanın. Günlükler, dağıtım sırasında oluşan hatalar hakkında ayrıntılı bilgiler içerebilir.
 
 ```python
 from azureml.core.webservice import Webservice
@@ -109,17 +111,17 @@ service = Webservice(name="service-name", workspace=ws)
 logs = service.get_logs()
 ```
 
-Ayrıca özel oturum yığın izlemeler web hizmetiniz için izleme istek/yanıt süreleri, hata oranları ve özel durumları tanır Application Insights'ı etkinleştirerek. Çağrı `update()` Application Insights'ı etkinleştirmek için mevcut bir web hizmetini işlevi.
+Ayrıca, istek/yanıt sürelerini, hata oranlarını ve özel durumları izlemenize olanak tanıyan Application Insights etkinleştirerek Web hizmetiniz için özel yığın izlemelerini günlüğe kaydedebilirsiniz. Application Insights etkinleştirmek için mevcut bir Web hizmetindeki `update()` işlevini çağırın.
 
 ```python
 service.update(enable_app_insights=True)
 ```
 
-Bkz: [yapılır](how-to-enable-app-insights.md) Azure portalında Application Insights ile çalışma konusunda daha fazla bilgi için.
+Azure Machine Learning Studio 'da Application Insights nasıl çalışılacağı hakkında daha fazla bilgi için bkz. [nasıl yapılır](how-to-enable-app-insights.md) .
 
-## <a name="python-native-logging-settings"></a>Python yerel günlük ayarları
+## <a name="python-native-logging-settings"></a>Python yerel günlük kaydı ayarları
 
-Belirli günlükleri SDK'sında hata ayıklama için günlük tutma düzeyini ayarlamaya yönlendiren bir hata içeriyor olabilir. Günlüğe kaydetme düzeyini ayarlamak için komut dosyanıza aşağıdaki kodu ekleyin.
+SDK 'daki belirli günlüklerde, günlüğe kaydetme düzeyini hata ayıklama olarak ayarlamanıza olanak tanıyan bir hata bulunabilir. Günlüğe kaydetme düzeyini ayarlamak için betiğe aşağıdaki kodu ekleyin.
 
 ```python
 import logging

@@ -1,192 +1,189 @@
 ---
-title: Azure İzleyici'de DNS analizi çözümü | Microsoft Docs
-description: Ayarlama ve DNS altyapısında güvenlik, performans ve işlem öngörüleri toplamak için Azure İzleyici'de DNS analizi çözümü kullanın.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: f44a40c4-820a-406e-8c40-70bd8dc67ae7
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici 'de çözüm DNS Analizi | Microsoft Docs
+description: Güvenlik, performans ve işlemlerde DNS altyapısına Öngörüler toplamak için Azure Izleyici 'de DNS Analizi çözümünü ayarlayın ve kullanın.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 03/20/2018
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 6dd5872d5ec3e79e3c76b1807aea946015fb0eac
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 03/20/2018
+ms.openlocfilehash: a4123ed4633cbb8195639766e7b23e3ea9f14e71
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60496500"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899101"
 ---
-# <a name="gather-insights-about-your-dns-infrastructure-with-the-dns-analytics-preview-solution"></a>DNS analizi Önizleme çözümü, DNS altyapısıyla ilgili Öngörüler toplayın
+# <a name="gather-insights-about-your-dns-infrastructure-with-the-dns-analytics-preview-solution"></a>DNS Analizi Preview çözümüyle DNS altyapınız hakkında Öngörüler toplayın
 
-![DNS analizi simgesi](./media/dns-analytics/dns-analytics-symbol.png)
+![DNS Analizi simgesi](./media/dns-analytics/dns-analytics-symbol.png)
 
-Bu makalede, ayarlama ve Azure DNS analizi çözümü, DNS altyapısı güvenlik, performans ve işlemleri hakkında Öngörüler elde etmek Azure İzleyici'de kullanın. açıklar.
+Bu makalede, güvenlik, performans ve işlemlerde DNS altyapısına Öngörüler toplamak için Azure Izleyici 'de Azure DNS Analytics çözümünün nasıl ayarlanacağı ve kullanılacağı açıklanmaktadır.
 
-DNS analiz etmenize yardımcı olur:
+DNS Analizi şunları yapmanıza yardımcı olur:
 
-- Kötü amaçlı etki alanı adlarını çözümlemeye çalışan istemcileri belirleyin.
-- Eski kaynak kayıtları belirleyin.
-- Sık sık sorgulanan etki alanı adlarını ve DNS sık iletişim kuran istemcileri belirleyin.
-- DNS sunucularındaki istek yükünü görüntüleme.
-- Dinamik DNS kayıt hataları görüntüleyin.
+- Kötü amaçlı etki alanı adlarını çözümlemeye çalışır olan istemcileri belirler.
+- Eski kaynak kayıtlarını tanımla.
+- Sık sorgulanan etki alanı adlarını ve DNS istemcilerini belirler.
+- DNS sunucularındaki istek yükünü görüntüleyin.
+- Dinamik DNS kaydı başarısızlıklarını görüntüleyin.
 
-Çözüm, toplar, çözümler ve Windows DNS Analitik ve Denetim günlükleri ve diğer ilgili verileri, DNS sunucularından ilişkilendirir.
+Bu çözüm, Windows DNS analitik ve denetim günlüklerini ve DNS sunucularınızdaki diğer ilgili verileri toplar, analiz eder ve ilişkilendirir.
 
 ## <a name="connected-sources"></a>Bağlı kaynaklar
 
-Aşağıdaki tabloda bu çözüm tarafından desteklenen bağlı kaynaklar açıklanmaktadır:
+Aşağıdaki tabloda, bu çözüm tarafından desteklenen bağlı kaynaklar açıklanmaktadır:
 
 | **Bağlı kaynak** | **Destek** | **Açıklama** |
 | --- | --- | --- |
-| [Windows aracıları](../platform/agent-windows.md) | Evet | Çözüm, Windows aracılarından DNS bilgilerini toplar. |
-| [Linux aracıları](../learn/quick-collect-linux-computer.md) | Hayır | Çözüm, doğrudan Linux aracılarından DNS bilgi toplamaz. |
-| [System Center Operations Manager yönetim grubu](../platform/om-agents.md) | Evet | Çözüm, bağlı Operations Manager yönetim grubundaki aracılardan DNS bilgilerini toplar. Azure İzleyici Operations Manager Aracısı'ndan doğrudan bir bağlantı gerekli değildir. Verileri yönetim grubundan Log Analytics çalışma alanına iletilir. |
-| [Azure depolama hesabı](../platform/collect-azure-metrics-logs.md) | Hayır | Azure depolama çözümü tarafından kullanılmaz. |
+| [Windows aracıları](../platform/agent-windows.md) | Yes | Bu çözüm, Windows aracılarından DNS bilgilerini toplar. |
+| [Linux aracıları](../learn/quick-collect-linux-computer.md) | Hayır | Çözüm, doğrudan Linux aracılarından DNS bilgileri toplamaz. |
+| [System Center Operations Manager yönetim grubu](../platform/om-agents.md) | Yes | Çözüm, bağlı bir Operations Manager yönetim grubundaki aracılardan DNS bilgilerini toplar. Operations Manager aracısından Azure Izleyici 'ye doğrudan bağlantı gerekli değildir. Veriler, yönetim grubundan Log Analytics çalışma alanına iletilir. |
+| [Azure depolama hesabı](../platform/collect-azure-metrics-logs.md) | Hayır | Azure depolama, çözüm tarafından kullanılmıyor. |
 
-### <a name="data-collection-details"></a>Veri koleksiyonu ayrıntıları
+### <a name="data-collection-details"></a>Veri toplama ayrıntıları
 
-Çözüm, Log Analytics aracısını yüklendiği DNS sunucularından DNS envanteri ve DNS ilgili olay verilerini toplar. Bu veriler daha sonra Azure İzleyici karşıya ve çözüm panosunda görüntülenen. DNS sunucuları, bölge ve kaynak kayıtları sayısı gibi envanterle ilişkili veri DNS PowerShell cmdlet'lerini çalıştırarak toplanır. Verileri iki günde bir kez güncelleştirilir. İlgili olay verileri neredeyse gerçek zamanlı olarak toplanan [analiz ve Denetim günlükleri](https://technet.microsoft.com/library/dn800669.aspx#enhanc) Gelişmiş DNS günlüğe kaydetme ve tanılama Windows Server 2012 R2 tarafından sağlanan.
+Çözüm, bir Log Analytics aracısının yüklendiği DNS sunucularından DNS envanterini ve DNS olay ile ilgili verileri toplar. Bu veriler daha sonra Azure Izleyici 'ye yüklenir ve çözüm panosunda görüntülenir. DNS PowerShell cmdlet 'leri çalıştırılarak, DNS sunucularının, bölgelerin ve kaynak kayıtlarının sayısı gibi stokla ilgili veriler toplanır. Veriler her iki günde bir güncelleştirilir. Olayla ilgili veriler, Windows Server 2012 R2 'de Gelişmiş DNS günlüğü ve tanılama tarafından verilen [analitik ve denetim günlüklerinden](https://technet.microsoft.com/library/dn800669.aspx#enhanc) gerçek zamanlı olarak toplanır.
 
 ## <a name="configuration"></a>Yapılandırma
 
 Çözümü yapılandırmak için aşağıdaki bilgileri kullanın:
 
-- Olmalıdır bir [Windows](../platform/agent-windows.md) veya [Operations Manager](../platform/om-agents.md) aracıyı izlemek istediğiniz her bir DNS sunucusunda.
-- DNS analizi çözümü Log Analytics çalışma alanınızdan ekleyebileceğiniz [Azure Marketi](https://aka.ms/dnsanalyticsazuremarketplace). Açıklanan işlemi ayrıca kullanabileceğiniz [Azure İzleyici'yi ekleyin çözüm galeri'sinden](solutions.md).
+- İzlemek istediğiniz her DNS sunucusunda bir [Windows](../platform/agent-windows.md) veya [Operations Manager](../platform/om-agents.md) aracısına sahip olmanız gerekir.
+- DNS Analizi çözümünü [Azure Marketi](https://aka.ms/dnsanalyticsazuremarketplace)'nden Log Analytics çalışma alanınıza ekleyebilirsiniz. Ayrıca, [Çözüm Galerisi Azure izleyici çözümlerini ekleme](solutions.md)bölümünde açıklanan süreci de kullanabilirsiniz.
 
-Çözüm, daha fazla yapılandırma gerek olmadan veri toplamaya başlar. Ancak, veri toplamayı Özelleştir için şu yapılandırmayı kullanabilirsiniz.
+Çözüm, daha fazla yapılandırmaya gerek kalmadan veri toplamaya başlar. Ancak, veri toplamayı özelleştirmek için aşağıdaki yapılandırmayı kullanabilirsiniz.
 
 ### <a name="configure-the-solution"></a>Çözümü yapılandırma
 
-Çözüm panosunda **yapılandırma** DNS analizi yapılandırma sayfasını açın. Yaptığınız değişikliklerin iki tür vardır:
+Çözüm panosunda **yapılandırma** ' ya tıklayarak DNS Analizi yapılandırma sayfasını açın. Yapabileceğiniz iki yapılandırma değişikliği türü vardır:
 
-- **Güvenilen etki alanı adları**. Çözüm, tüm arama sorguları işlemez. Bu, etki alanı adı son eklerini bir beyaz liste tutar. Bu beyaz liste etki alanı adı sonekleri eşleşen etki alanı adlarını çözümlemeye arama sorguları, çözüm tarafından işlenmez. Azure İzleyici gönderilen verilerin iyileştirmek için izin verilenler listesinde etki alanı adları işlenmiyor yardımcı olur. Varsayılan Güvenilenler listesinde popüler genel etki alanı adları, www.google.com ve www.facebook.com gibi içerir. Kaydırarak tam varsayılan listesini görüntüleyebilir.
+- **Beyaz listelenmiş etki alanı adları**. Çözüm, tüm arama sorgularını işlemez. Etki alanı adı soneklerinin beyaz bir listesini tutar. Bu beyaz listedeki etki alanı adı sonekleri ile eşleşen etki alanı adlarına çözümlenerek arama sorguları çözüm tarafından işlenmez. Beyaz listeye alınan etki alanı adlarının işlenmemesi, Azure Izleyici 'ye gönderilen verileri iyileştirmenize yardımcı olur. Varsayılan beyaz liste, www.google.com ve www.facebook.com gibi popüler genel etki alanı adlarını içerir. Kaydırma yaparak, tüm varsayılan listeyi görüntüleyebilirsiniz.
 
-  Arama Öngörüler için görüntülemek istediğiniz herhangi bir etki alanı adı soneki eklemek üzere listeden değiştirebilirsiniz. İçin arama öngörülerini görüntülemek istemediğiniz herhangi bir etki alanı adı sonekini de kaldırabilirsiniz.
+  Arama öngörülerini görüntülemek istediğiniz herhangi bir etki alanı adı sonekini eklemek için listeyi değiştirebilirsiniz. Ayrıca, arama öngörülerini görüntülemek istemediğiniz tüm etki alanı adı sonekini da kaldırabilirsiniz.
 
-- **Sık iletişim kuran istemci eşiği**. Arama istekleri sayısının vurgulanmış için eşiğini aşan DNS istemcileri **DNS istemcileri** dikey penceresi. Varsayılan Eşik 1000'dir. Eşik düzenleyebilirsiniz.
+- **Kative Istemci eşiği**. Arama istekleri sayısının eşiğini aşan DNS istemcileri **DNS istemcileri** dikey penceresinde vurgulanır. Varsayılan eşik 1.000 ' dir. Eşiği düzenleyebilirsiniz.
 
-    ![İzin verilenler listesinde etki alanı adları](./media/dns-analytics/dns-config.png)
+    ![Beyaz listelenmiş etki alanı adları](./media/dns-analytics/dns-config.png)
 
 ## <a name="management-packs"></a>Yönetim paketleri
 
-Log Analytics çalışma alanınıza bağlanmak için Microsoft Monitoring Agent'ı kullanıyorsanız, aşağıdaki yönetim paketi yüklenir:
+Log Analytics çalışma alanınıza bağlanmak için Microsoft Monitoring Agent kullanıyorsanız, aşağıdaki yönetim paketi yüklenir:
 
-- Microsoft DNS veri toplayıcı akıllı paketi (Microsoft.IntelligencePacks.Dns)
+- Microsoft DNS veri toplayıcı zekası paketi (Microsoft. ıntelligencepacks. DNS)
 
-Operations Manager yönetim grubunuzu Log Analytics çalışma alanınıza bağlıysa, bu çözümü eklediğinizde, aşağıdaki yönetim paketlerini Operations Manager'da yüklenir. Gerekli yapılandırma veya bakım bu yönetim paketlerinin yoktur:
+Operations Manager yönetim grubunuz Log Analytics çalışma alanınıza bağlıysa, bu çözümü eklediğinizde aşağıdaki yönetim paketleri Operations Manager yüklenir. Bu yönetim paketlerinin gerekli bir yapılandırması veya bakımı yoktur:
 
-- Microsoft DNS veri toplayıcı akıllı paketi (Microsoft.IntelligencePacks.Dns)
-- Microsoft System Center Advisor DNS Analizi Yapılandırması (Microsoft.IntelligencePack.Dns.Configuration)
+- Microsoft DNS veri toplayıcı zekası paketi (Microsoft. ıntelligencepacks. DNS)
+- Microsoft System Center Advisor DNS Analizi yapılandırması (Microsoft. ıntelligencepack. DNS. Configuration)
 
 Çözüm yönetim paketlerini güncelleştirme hakkında daha fazla bilgi için bkz. [Operations Manager'ı Log Analytics’e Bağlama](../platform/om-agents.md).
 
-## <a name="use-the-dns-analytics-solution"></a>DNS analizi çözümü kullanın
+## <a name="use-the-dns-analytics-solution"></a>DNS Analizi çözümünü kullanma
 
 [!INCLUDE [azure-monitor-solutions-overview-page](../../../includes/azure-monitor-solutions-overview-page.md)]
 
 
-DNS kutucuğu, verilerin toplandığı DNS sunucularının sayısını içerir. Ayrıca, istemciler tarafından son 24 saatte kötü niyetli alanları çözmek için yapılan isteklerinin sayısı da içerir. Kutucuğa tıkladığınızda, çözüm panosu açılır.
+DNS kutucuğu, verilerin toplandığı DNS sunucusu sayısını içerir. Ayrıca, son 24 saat içindeki kötü amaçlı etki alanlarını çözümlemek için istemciler tarafından yapılan isteklerin sayısını da içerir. Kutucuğa tıkladığınızda çözüm panosu açılır.
 
-![DNS analizi kutucuğu](./media/dns-analytics/dns-tile.png)
+![DNS Analizi kutucuğu](./media/dns-analytics/dns-tile.png)
 
 ### <a name="solution-dashboard"></a>Çözüm panosu
 
-Çözüm Panosu, çözümün çeşitli özelliklerinin özetlenen bilgileri gösterir. Ayrıca, adli analiz ve tanılama için ayrıntılı görünüm bağlantılarını içerir. Varsayılan olarak, son yedi güne ait veriler gösterilir. Tarih ve saat aralığı kullanarak değiştirebileceğiniz **tarih-saat seçimi denetimi**, aşağıdaki görüntüde gösterildiği gibi:
+Çözüm panosu, çözümün çeşitli özelliklerine ilişkin özetlenen bilgileri gösterir. Ayrıca, adli analiz ve Tanılama için ayrıntılı görünüme bağlantılar da içerir. Veriler, son yedi gün için varsayılan olarak gösterilir. Tarih ve saat aralığını, aşağıdaki görüntüde gösterildiği gibi **Tarih-Saat seçim denetimini**kullanarak değiştirebilirsiniz:
 
 ![Zaman seçim denetimi](./media/dns-analytics/dns-time.png)
 
-Çözüm Panosu aşağıdaki dikey pencereleri gösterilir:
+Çözüm Panosu aşağıdaki dikey pencereleri gösterir:
 
-**DNS güvenliği**. Kötü amaçlı etki alanları ile iletişim kurmaya çalıştığınız DNS istemcileri bildirir. Microsoft tehdit bilgileri akışlarından kullanarak DNS analizi istemci kötü amaçlı etki alanlarına erişmeye çalıştığınız IP'ler algılayabilir. Çoğu durumda, kötü amaçlı yazılımdan etkilenen aygıtların "dışarı"komut ve Denetim"merkezi kötü amaçlı etki alanının için kötü amaçlı yazılım etki alanı adını çözümleme olarak arama".
+**DNS güvenliği**. Kötü amaçlı etki alanlarıyla iletişim kurmaya çalışan DNS istemcilerini raporlar. DNS Analizi, Microsoft Threat Intelligence akışlarını kullanarak, kötü amaçlı etki alanlarına erişmeye çalışan istemci IP 'lerini algılayabilir. Çoğu durumda, kötü amaçlı yazılımdan etkilenen cihazlar kötü amaçlı yazılım etki alanı adını çözümleyerek kötü amaçlı etki alanının "komut ve denetim" merkezine "çevirme".
 
-![DNS güvenlik dikey penceresi](./media/dns-analytics/dns-security-blade.png)
+![DNS güvenliği dikey penceresi](./media/dns-analytics/dns-security-blade.png)
 
-Bir istemci IP listesinde tıkladığınızda, günlük araması açılır ve ilgili sorgu arama ayrıntılarını gösterir. Aşağıdaki örnekte, DNS analizi iletişimi ile yapıldığını algılamıştır bir [Ircbot](https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Backdoor:Win32/IRCbot):
+Listedeki bir istemci IP 'sini tıklattığınızda, günlük araması açılır ve ilgili sorgunun arama ayrıntılarını gösterir. Aşağıdaki örnekte, DNS Analizi bir [IRCBot](https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Backdoor:Win32/IRCbot)ile iletişimin yapıldığını algıladı:
 
-![Ircbot gösteren günlük arama sonuçları](./media/dns-analytics/ircbot.png)
+![IRCBot 'ı gösteren günlük arama sonuçları](./media/dns-analytics/ircbot.png)
 
-Bilgileri tanımlamanıza yardımcı olur:
+Bilgiler şunları belirlemenize yardımcı olur:
 
-- İstemci iletişimi başlatılan IP.
-- Çözümlenen kötü amaçlı IP ile etki alanı adı.
-- IP adresleri etki alanı adını çözer.
+- İletişimi başlatan istemci IP 'si.
+- Kötü amaçlı IP 'ye çözümlenen etki alanı adı.
+- Etki alanı adının çözümlediği IP adresleri.
 - Kötü amaçlı IP adresi.
 - Sorunun önem derecesi.
-- Kötü amaçlı IP kara nedeni.
-- Algılama zamanı.
+- Kötü amaçlı IP listeleme nedeni.
+- Algılama süresi.
 
-**Sorgulanan etki alanları**. Ortamınızda DNS istemcileri tarafından sorgulanan en sık kullanılan etki alanı adlarını sağlar. Sorgulanan etki alanı adlarının listesini görüntüleyebilirsiniz. Ayrıca belirli bir etki alanı adı günlük araması'nda arama isteği ayrıntılara detaya gidebilirsiniz.
+**Sorgulanan etki alanları**. , Ortamınızdaki DNS istemcileri tarafından sorgulanmakta olan en sık kullanılan etki alanı adlarını sağlar. Sorgulanan tüm etki alanı adlarının listesini görebilirsiniz. Ayrıca, günlük aramasında belirli bir etki alanı adının arama isteği ayrıntılarına gidebilirsiniz.
 
-![Etki alanları sorgulanan dikey penceresi](./media/dns-analytics/domains-queried-blade.png)
+![Sorgulanan etki alanları dikey penceresi](./media/dns-analytics/domains-queried-blade.png)
 
-**DNS istemcileri**. İstemcilerin raporları *eşiği ihlal* için seçilen bir zaman dönemi içindeki sorgularının sayısı. Tüm DNS istemcilerini ve onlar tarafından günlük aramasında yapılan sorguları ayrıntılarını listesini görüntüleyebilirsiniz.
+**DNS istemcileri**. Seçilen dönemdeki sorgu sayısı için *eşiğe ulaşan* istemcileri bildirir. Tüm DNS istemcilerinin listesini ve bunların günlük aramasında yaptığı sorguların ayrıntılarını görebilirsiniz.
 
-![DNS Clıents dikey](./media/dns-analytics/dns-clients-blade.png)
+![DNS Istemcileri dikey penceresi](./media/dns-analytics/dns-clients-blade.png)
 
-**Dinamik DNS kayıtları**. Kayıt hataları rapor adı. Tüm kayıt hataları adresi [kaynak kayıtları](https://en.wikipedia.org/wiki/List_of_DNS_record_types) (tür A ve AAAA) istemci kayıt istekleri IP'ler birlikte vurgulanır. Sonra bu bilgileri, aşağıdaki adımları izleyerek kayıt hatası kök nedenini bulmak için de kullanabilirsiniz:
+**Dınamık DNS kayıtları**. Rapor adı kayıt sorunları. Adres [kaynak kayıtları](https://en.wikipedia.org/wiki/List_of_DNS_record_types) (tür A ve AAAA) için tüm kayıt hatalarının kayıt isteklerini gerçekleştiren Istemci IP 'leri ile birlikte vurgulanacaktır. Daha sonra bu bilgileri kullanarak kayıt hatasının kök nedenini bulmak için şu adımları izleyin:
 
-1. İstemci güncelleştirilmeye çalışılırken ad için yetkiliyse bölge bulun.
+1. İstemcinin güncelleştirmeye çalıştığı ad için yetkili olan bölgeyi bulun.
 
-1. Çözüm bölge Envanter bilgilerini kullanın.
+1. Bu bölgenin envanter bilgilerini denetlemek için çözümü kullanın.
 
-1. Dinamik güncelleştirme bölgesi için etkin olduğunu doğrulayın.
+1. Bölgenin dinamik güncelleştirmesinin etkinleştirildiğini doğrulayın.
 
-1. Veya bölgenin güvenli dinamik güncelleştirme için yapılandırılmış olup olmadığını denetleyin.
+1. Bölgenin güvenli dinamik güncelleştirme için yapılandırılıp yapılandırılmadığını denetleyin.
 
     ![Dinamik DNS kayıtları dikey penceresi](./media/dns-analytics/dynamic-dns-reg-blade.png)
 
-**Ad kaydı istekleri**. Üst kutucuk DNS dinamik güncelleştirme isteklerinin başarılı ve başarısız bir eğilim çizgisi gösterir. Daha düşük kutucuk hataları sayısına göre sıralanmış, DNS sunucularına başarısız DNS güncelleştirme istekleri gönderen üst 10 istemcileri de listeler.
+**Ad kayıt istekleri**. Üstteki kutucuk, başarılı ve başarısız DNS dinamik güncelleştirme istekleri için bir eğilim çizgisi gösterir. Alt kutucuk, DNS sunucularına başarısız DNS güncelleştirme istekleri gönderen ilk 10 istemciyi, hata sayısına göre sıralanmış olarak listeler.
 
-![Ad kaydı istekleri dikey penceresi](./media/dns-analytics/name-reg-req-blade.png)
+![Ad kayıt istekleri dikey penceresi](./media/dns-analytics/name-reg-req-blade.png)
 
-**Örnek DDI analiz sorguları**. Ham analiz verileri doğrudan getiren en yaygın arama sorgularının listesini içerir.
+**Örnek DDI Analizi sorguları**. Ham analiz verilerini doğrudan getiren en yaygın arama sorgularının bir listesini içerir.
 
 
 ![Örnek sorgular](./media/dns-analytics/queries.png)
 
-Özel raporlama için kendi sorgularınızı oluşturmak için başlangıç noktası olarak bu sorguları kullanabilirsiniz. Sorguların sonuçlarını görüntüleyen DNS Analytics günlük araması sayfaya bağlantı:
+Bu sorguları, özelleştirilmiş raporlama için kendi sorgularınızı oluşturmak için başlangıç noktası olarak kullanabilirsiniz. Sorgular, sonuçların görüntülendiği DNS Analizi günlük arama sayfasına bağlanır:
 
-- **DNS sunucuları listesi**. Kendi ilişkili FQDN, etki alanı adı, orman adı ve sunucu IP'leri ile tüm DNS sunucularının bir listesini gösterir.
-- **DNS bölgelerinin listesi**. Tüm DNS bölgelerinin ilişkili bölge adı, dinamik güncelleştirme durumu, ad sunucularını ve DNSSEC imzalama durumu ile bir listesini gösterir.
-- **Kullanılmayan kaynak kayıtlarını**. Tüm kullanılmayan/eski kaynak kayıtlarının bir listesini gösterir. Bu liste, kaynak kayıt adı, kaynak kaydı türü, ilişkili bir DNS sunucusu, kayıt oluşturma süresi ve bölge adını içerir. Artık kullanımda olan DNS kaynak kayıtları tanımlamak için bu listeyi kullanabilirsiniz. Bu bilgilere dayanarak, DNS sunucularından girişler daha sonra kaldırabilirsiniz.
-- **DNS sunucuları sorgu yükü**. DNS sunucularınızda DNS iş yükünün bir perspektif alabilmeniz bilgileri gösterir. Bu bilgiler sunucular için kapasite planlamaya yardımcı olabilir. Gidebilirsiniz **ölçümleri** görünümü değiştirmek için bir grafik görselleştirmesi için sekmesinde. Bu görünüm, DNS yük DNS sunucularınızın nasıl dağıtıldığını anlamanıza yardımcı olur. Bu DNS sorgusu her sunucu için oranı eğilimleri gösterir.
+- **DNS sunucularının listesi**. İlişkili FQDN, etki alanı adı, Orman adı ve sunucu IP 'Leri ile tüm DNS sunucularının listesini gösterir.
+- **DNS bölgeleri listesi**. İlişkili bölge adı, dinamik güncelleştirme durumu, ad sunucuları ve DNSSEC imzalama durumuyla tüm DNS bölgelerinin listesini gösterir.
+- **Kullanılmayan kaynak kayıtları**. Kullanılmayan/eski kaynak kayıtlarının listesini gösterir. Bu liste, kaynak kayıt adı, kaynak kayıt türü, ilişkili DNS sunucusu, kayıt oluşturma süresi ve bölge adını içerir. Artık kullanımda olmayan DNS kaynak kayıtlarını belirlemek için bu listeyi kullanabilirsiniz. Bu bilgilere bağlı olarak, bu girdileri DNS sunucularından kaldırabilirsiniz.
+- **DNS sunucuları sorgu yükü**. DNS sunucularınızda DNS yükünün perspektifini alabilmeniz için bilgileri gösterir. Bu bilgiler sunucular için kapasiteyi planlamada size yardımcı olabilir. Görünümü grafik görselleştirmeye dönüştürmek için **ölçümler** sekmesine gidebilirsiniz. Bu görünüm, DNS yükünün DNS sunucularınız genelinde nasıl dağıtıldığını anlamanıza yardımcı olur. Her sunucu için DNS sorgu hız eğilimlerini gösterir.
 
-    ![DNS sunucuları sorgu günlük arama sonuçları](./media/dns-analytics/dns-servers-query-load.png)
+    ![DNS sunucuları sorgu günlüğü arama sonuçları](./media/dns-analytics/dns-servers-query-load.png)
 
-- **DNS bölgeleri sorgu yükü**. Çözüm tarafından yönetilen DNS sunucularında tüm bölgeleri DNS bölgesi sorgu başına saniye istatistiklerini gösterir. Tıklayın **ölçümleri** sonuçlarını grafik bir görselleştirmeye ayrıntılı kayıtları görünümü değiştirmek için sekmesinde.
-- **Yapılandırma olayları**. Tüm DNS yapılandırma değişikliği olayları ve ilişkili iletilerini gösterir. Daha sonra bu olayları olay, olay kimliği, DNS sunucusunun saatini temel alan filtre veya görev Kategorisi'ne. Verileri, belirli DNS sunucularına yönelik olarak belirli zamanlarda yapılan değişiklikleri denetim yardımcı olabilir.
-- **DNS analitik günlüğü**. Çözüm tarafından yönetilen DNS sunucularında tüm analitik olaylarını gösterir. Daha sonra bu olayları olay, olay kimliği, DNS sunucusunun saatini temel alan filtre arama sorgu ve sorgu türünü görev Kategorisi'ne yapılan istemci IP adresi. DNS sunucusu analitik olaylarını etkinlik DNS sunucusunda izlemeyi etkinleştirin. Sunucu tarafından gönderilen veya alınan DNS bilgilerini her zaman analitik bir olay günlüğe kaydedilir.
+- **Sorgu yükü DNS bölgeleri**. Çözüm tarafından yönetilmekte olan DNS sunucularındaki tüm bölgelerin, DNS bölge-sorgu/saniye istatistiklerini gösterir. Ayrıntılı kayıtlardan görünümü sonuçların grafik görselleştirmesine değiştirmek için **ölçümler** sekmesine tıklayın.
+- **Yapılandırma olayları**. Tüm DNS yapılandırma değişikliği olaylarını ve ilişkili iletileri gösterir. Daha sonra bu olayları olay, olay KIMLIĞI, DNS sunucusu veya görev kategorisi zamanına göre filtreleyebilirsiniz. Veriler belirli zamanlarda belirli DNS sunucularında yapılan değişiklikleri denetlemeye yardımcı olabilir.
+- **DNS analitik günlüğü**. Çözüm tarafından yönetilen tüm DNS sunucularındaki tüm analitik olayları gösterir. Daha sonra bu olayları olay, olay KIMLIĞI, DNS sunucusu, arama sorgusunu yapan istemci IP ve sorgu türü görev kategorisi temelinde filtreleyebilirsiniz. DNS sunucusu analitik olayları, DNS sunucusunda etkinlik izlemeyi etkinleştirir. Sunucunun DNS bilgilerini göndermesi veya aldığı her seferinde bir analitik olay günlüğe kaydedilir.
 
-### <a name="search-by-using-dns-analytics-log-search"></a>DNS analizi günlük araması'nı kullanarak arama
+### <a name="search-by-using-dns-analytics-log-search"></a>DNS Analizi günlük aramasını kullanarak ara
 
-Günlük araması sayfasında, bir sorgu oluşturabilirsiniz. Model denetimlerini kullanarak arama sonuçlarınızı filtreleyebilirsiniz. Dönüştürme, filtre ve raporlamak için Gelişmiş sorgu sonuçlarınız üzerinde de oluşturabilirsiniz. Aşağıdaki sorgular kullanarak başlatın:
+Günlük araması sayfasında, bir sorgu oluşturabilirsiniz. , Model denetimlerini kullanarak arama sonuçlarınızı filtreleyebilirsiniz. Sonuçlarınızı dönüştürmek, filtrelemek ve raporlamak için gelişmiş sorgular da oluşturabilirsiniz. Aşağıdaki sorguları kullanarak başlayın:
 
-1. İçinde **arama sorgu kutusu**, türü `DnsEvents` çözüm tarafından yönetilen DNS sunucuları tarafından oluşturulan tüm DNS olayları görüntülemek için. Sonuçları arama sorguları, dinamik kayıtları ve yapılandırma değişiklikleri ile ilgili tüm olaylar için günlük verileri listeleyin.
+1. **Arama sorgusu kutusuna**, çözüm tarafından yönetilen DNS sunucuları tarafından oluşturulan tüm DNS olaylarını görüntülemek için `DnsEvents` yazın. Sonuçlar, arama sorguları, dinamik kayıtlar ve yapılandırma değişiklikleriyle ilgili tüm olaylar için günlük verilerini listeler.
 
     ![DnsEvents günlük araması](./media/dns-analytics/log-search-dnsevents.png)  
 
-    a. Arama sorguları için günlük verileri görüntülemek için seçin **LookUpQuery** olarak **alt** sol tarafı denetim Filtresi. Seçili süre için tüm arama sorgu olaylarını listeleyen bir tablo görüntülenir.
+    a. Arama sorgularının günlük verilerini görüntülemek için, sol taraftaki model denetiminden **alt tür** filtresi olarak **lookupquery** ' yi seçin. Seçilen zaman dilimi için tüm arama sorgusu olaylarını listeleyen bir tablo görüntülenir.
 
-    b. Dinamik kayıtları için günlük verileri görüntülemek için seçin **DynamicRegistration** olarak **alt** sol tarafı denetim Filtresi. Seçili süre için tüm dinamik kayıt olaylarını listeleyen bir tablo görüntülenir.
+    b. Dinamik kayıtlara ait günlük verilerini görüntülemek için, sol taraftaki model denetiminden **alt tür** filtresi olarak **dynamicregistration** ' u seçin. Seçilen zaman dilimi için tüm dinamik kayıt olaylarını listeleyen bir tablo görüntülenir.
 
-    c. Yapılandırma değişiklikleri için günlük verileri görüntülemek için seçin **ConfigurationChange** olarak **alt** sol tarafı denetim Filtresi. Seçili süre için tüm yapılandırma değişikliği olaylarını listeleyen bir tablo görüntülenir.
+    c. Yapılandırma değişikliklerinin günlük verilerini görüntülemek için, sol taraftaki model denetiminden **alt tür** filtresi olarak **ConfigurationChange** ' ı seçin. Seçilen zaman dilimi için tüm yapılandırma değişikliği olaylarını listeleyen bir tablo görüntülenir.
 
-1. İçinde **arama sorgu kutusu**, türü `DnsInventory` tüm DNS envanterle ilişkili veri çözümü tarafından yönetilen DNS sunucuları görüntülemek için. Sonuçlar, DNS sunucuları, DNS bölgeleri ve kaynak kayıtları için günlük verileri listeler.
+1. **Arama sorgusu kutusuna**, çözüm tarafından yönetilen DNS sunucuları IÇIN tüm DNS envanteriyle ilgili verileri görüntülemek üzere `DnsInventory` yazın. Sonuçlar, DNS sunucuları, DNS bölgeleri ve kaynak kayıtları için günlük verilerini listeler.
 
-    ![DnsInventory günlük araması](./media/dns-analytics/log-search-dnsinventory.png)
+    ![Dnsınventory günlük araması](./media/dns-analytics/log-search-dnsinventory.png)
+    
+## <a name="troubleshooting"></a>Sorun giderme
+
+Ortak sorun giderme adımları:
+
+1. Eksik DNS arama verileri-bu sorunu gidermek Için yapılandırmayı sıfırlamayı veya portalda yalnızca yapılandırma sayfasını yüklemeyi deneyin. Sıfırlamak için, bir ayarı başka bir değerle değiştirmeniz, sonra yeniden özgün değere değiştirmeniz ve yapılandırmayı kaydetmeniz yeterlidir.
 
 ## <a name="feedback"></a>Geri Bildirim
 
-Geri bildirim size iki yolu vardır:
-
-- **UserVoice**. DNS analizi özellikleri üzerinde çalışmak için fikir gönderin. Ziyaret [Log Analytics UserVoice sayfa](https://aka.ms/dnsanalyticsuservoice).
-- **Bizim kohort katılın**. Her zaman yeni müşteriler yeni özelliklere erken erişim elde eder ve DNS analizi geliştirmemize yardımcı olmak için sunduğumuz kohortlar katılın etmeyle ilgilenen duyuyoruz. Bizim kohortlar katılımının ilgileniyorsanız doldurun [bu kısa bir ankete](https://aka.ms/dnsanalyticssurvey).
+Geri bildirim sağlamak için [Log Analytics UserVoice sayfasını](https://aka.ms/dnsanalyticsuservoice) ziyaret ederek DNS analizi özellikleri üzerinde çalışmak üzere fikirler gönderin. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Sorgu günlükleri](../log-query/log-query-overview.md) ayrıntılı DNS günlük kayıtları görüntülemek için.
+Ayrıntılı DNS günlüğü kayıtlarını görüntülemek için [sorgu günlükleri](../log-query/log-query-overview.md) .

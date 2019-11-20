@@ -1,87 +1,87 @@
 ---
-title: Yükleme ve Azure HDInsight üzerinde Giraph kullanma
-description: Komut dosyası Eylemleri'ni kullanarak HDInsight kümelerinde Giraph yüklemeyi öğrenin. Giraph grafik içinde Apache Hadoop Azure bulutunda işleme yapmak için kullanabilirsiniz.
+title: Azure HDInsight 'ta Giraph 'yi yükleyip kullanma
+description: Betik eylemleri kullanarak HDInsight kümelerine Giraph 'yi yüklemeyi öğrenin. Giraph 'yi kullanarak Azure bulutundaki Apache Hadoop grafik işleme gerçekleştirebilirsiniz.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 04/22/2019
-ms.openlocfilehash: aa13d8dfc65f020f3f27183423913933cd0b9404
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f1ca536ffa2166df4ef6cf51654b7b410e72ea66
+ms.sourcegitcommit: dd69b3cda2d722b7aecce5b9bd3eb9b7fbf9dc0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64697596"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70962047"
 ---
-# <a name="install-apache-giraph-on-hdinsight-hadoop-clusters-and-use-giraph-to-process-large-scale-graphs"></a>HDInsight Hadoop kümeleri üzerinde Apache giraph'ı yükleyin ve büyük ölçekli grafikleri işlemek için Giraph kullanma
+# <a name="install-apache-giraph-on-hdinsight-hadoop-clusters-and-use-giraph-to-process-large-scale-graphs"></a>HDInsight Hadoop kümelerine Apache Giraph 'yi yükler ve büyük ölçekli grafikleri işlemek için Giraph kullanma
 
-Bir HDInsight kümesi üzerinde Apache giraph'ı yüklemeyi öğrenin. HDInsight betik eylemi özelliği, bir bash betiğini çalıştırarak kümeniz özelleştirmenizi sağlar. Betikler, sırasında ve Küme oluşturulduktan sonra kümeleri özelleştirmek için kullanılabilir.
+Bir HDInsight kümesine Apache Giraph 'yi yüklemeyi öğrenin. HDInsight 'ın betik eylemi özelliği, bir bash betiği çalıştırarak kümenizi özelleştirmenizi sağlar. Betikler, küme oluşturma sırasında ve sonrasında kümeleri özelleştirmek için kullanılabilir.
 
-## <a name="whatis"></a>Giraph nedir
+## <a name="whatis"></a>Giraph nedir?
 
-[Apache giraph'ı](https://giraph.apache.org/) grafik Hadoop kullanarak işleme yapmanıza olanak tanır ve Azure HDInsight ile kullanılabilir. Grafik nesneler arasındaki ilişkileri modellemek. Örneğin, büyük bir ağda bulunan yönlendiriciler arasındaki bağlantıları Internet veya sosyal ağlarda kişiler arasındaki ilişkileri gibi. Grafik işleme nedeni hakkında bir grafta nesneleri arasındaki ilişkileri gibi sağlar:
+[Apache Giraph](https://giraph.apache.org/) , Hadoop kullanarak grafik işleme gerçekleştirmenize olanak tanır ve Azure HDInsight ile kullanılabilir. Nesneler arasındaki model ilişkilerini grafik olarak tanımlar. Örneğin, Internet gibi büyük bir ağdaki yönlendiriciler veya sosyal ağlardaki insanlar arasındaki ilişkiler arasındaki bağlantılar. Grafik işleme, bir grafikteki nesneler arasındaki ilişkilerle ilgili nedenleri sağlar; örneğin:
 
-* Geçerli ilişkilerinizi tabanlı olası arkadaş tanımlayıcı.
+* Mevcut ilişkilerinizi temel alarak olası arkadaşları tanımlama.
 
-* Bir ağda iki bilgisayar arasındaki en kısa yolu tanımlama.
+* Bir ağdaki iki bilgisayar arasındaki en kısa yolu tanımlama.
 
-* Web sayfalarının sayfası boyut hesaplanıyor.
+* Web sayfalarının sayfa sırasını hesaplama.
 
 > [!WARNING]  
-> HDInsight kümesi ile sağlanan bileşenler tam olarak desteklenir: Microsoft Support yalıtmak ve bu bileşenler için ilgili sorunları gidermek için yardımcı olur.
+> HDInsight kümesiyle birlikte sunulan bileşenler tam olarak desteklenir-Microsoft Desteği bu bileşenlerle ilgili sorunları yalıtmaya ve çözmeye yardımcı olur.
 >
-> Giraph gibi özel bileşenler daha fazla sorun giderme konusunda yardımcı olması için ticari açıdan makul destek alırsınız. Microsoft Support ve sorunu çözmek için mümkün olabilir. Aksi durumda, bu teknoloji için derin bir uzmanlık bulunduğu açık kaynaklı topluluklar başvurmalısınız. Örneğin, gibi kullanılan birçok topluluk siteleri vardır: [HDInsight için MSDN Forumu](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=hdinsight), [ https://stackoverflow.com ](https://stackoverflow.com). Apache projeleri proje siteleri de [ https://apache.org ](https://apache.org), örneğin: [Hadoop](https://hadoop.apache.org/).
+> Giraph gibi özel bileşenler, sorunu gidermeye yardımcı olmak için ticari olarak makul destek alır. Microsoft Desteği sorunu çözebiliyor olabilir. Aksi takdirde, bu teknolojinin derin uzmanlığı bulunan açık kaynaklı topluluklara başvurmalısınız. Örneğin, şu şekilde kullanılabilecek birçok topluluk sitesi vardır: [HDInsight Için MSDN Forumu](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=hdinsight), [https://stackoverflow.com](https://stackoverflow.com). Ayrıca Apache projelerinin üzerinde [https://apache.org](https://apache.org)proje siteleri vardır, örneğin: [Hadoop](https://hadoop.apache.org/).
 
 
-## <a name="what-the-script-does"></a>Betik yapar
+## <a name="what-the-script-does"></a>Betiğin ne yapar
 
-Bu betik, aşağıdaki eylemleri gerçekleştirir:
+Bu betik aşağıdaki eylemleri gerçekleştirir:
 
-* Giraph için yükler. `/usr/hdp/current/giraph`
+* Giraph 'yi yükleme`/usr/hdp/current/giraph`
 
-* Kopya `giraph-examples.jar` kümeniz için varsayılan depolama (WASB) dosyası: `/example/jars/giraph-examples.jar`
+* `giraph-examples.jar` Dosyanızı kümeniz için varsayılan depolama alanına (için) kopyalar:`/example/jars/giraph-examples.jar`
 
-## <a name="install"></a>Betik eylemleri kullanılarak giraph'ı yükleme
+## <a name="install"></a>Betik eylemlerini kullanarak Giraph 'yi yükler
 
-Bir HDInsight kümesi üzerinde Giraph'ı yüklemek için örnek betik, aşağıdaki konumda kullanılabilir:
+Bir HDInsight kümesine Giraph yüklemek için örnek betik şu konumda bulunabilir:
 
     https://hdiconfigactions.blob.core.windows.net/linuxgiraphconfigactionv01/giraph-installer-v01.sh
 
-Bu bölümde, örnek betik Azure portalını kullanarak kümeyi oluştururken kullanmak hakkında yönergeler açıklanmaktadır.
+Bu bölüm, Azure portal kullanarak küme oluştururken örnek betiğin nasıl kullanılacağına ilişkin yönergeler sağlar.
 
 > [!NOTE]  
-> Betik eylemi, aşağıdaki yöntemlerden birini kullanarak uygulanabilir:
+> Bir betik eylemi, aşağıdaki yöntemlerden herhangi biri kullanılarak uygulanabilir:
 > * Azure PowerShell
-> * The Azure CLI
-> * HDInsight .NET SDK'sı
+> * Azure CLI
+> * HDInsight .NET SDK 'Sı
 > * Azure Resource Manager şablonları
 > 
-> Betik eylemleri zaten kümelerini çalıştırmak için de uygulayabilirsiniz. Daha fazla bilgi için [özelleştirme HDInsight kümeleri ile betik eylemleri](hdinsight-hadoop-customize-cluster-linux.md).
+> Zaten çalışan kümelere betik eylemleri de uygulayabilirsiniz. Daha fazla bilgi için bkz. [HDInsight kümelerini betik eylemleriyle özelleştirme](hdinsight-hadoop-customize-cluster-linux.md).
 
-1. Adımları kullanarak bir küme oluşturmaya başlayın [oluşturma Linux tabanlı HDInsight kümeleri](hdinsight-hadoop-create-linux-clusters-portal.md), ancak oluşturma tamamlamayın.
+1. [Linux tabanlı HDInsight kümeleri oluşturma](hdinsight-hadoop-create-linux-clusters-portal.md)' daki adımları kullanarak bir küme oluşturmaya başlayın, ancak oluşturma işleminin tamamlamayın.
 
-2. İçinde **isteğe bağlı yapılandırma** bölümünden **betik eylemleri**ve aşağıdaki bilgileri sağlayın:
+2. **Isteğe bağlı yapılandırma** bölümünde **betik eylemleri**' ni seçin ve aşağıdaki bilgileri sağlayın:
 
-   * **AD**: Betik eylemi için bir kolay ad girin.
+   * **AD**: Betik eylemi için kolay bir ad girin.
 
-   * **BETİK URI'Sİ**: https://hdiconfigactions.blob.core.windows.net/linuxgiraphconfigactionv01/giraph-installer-v01.sh
+   * **BETİK URI 'Sİ**: https://hdiconfigactions.blob.core.windows.net/linuxgiraphconfigactionv01/giraph-installer-v01.sh
 
-   * **HEAD**: Bu giriş kontrol edin.
+   * **BAŞ**: Bu girdiyi işaretleyin.
 
-   * **ÇALIŞAN**: Bu giriş işaretlemeden bırakın.
+   * **ÇALIŞAN**: Bu girdiyi işaretlenmemiş olarak bırakın.
 
-   * **ZOOKEEPER**: Bu giriş işaretlemeden bırakın.
+   * **ZOOKEEPER**: Bu girdiyi işaretlenmemiş olarak bırakın.
 
-   * **PARAMETRELERİ**: Bu alanı boş bırakın.
+   * **PARAMETRELER**: Bu alanı boş bırakın.
 
-3. Sayfanın alt kısmında **betik eylemleri**, kullanın **seçin** yapılandırmayı kaydetmek için düğme. Son olarak, **seçin** düğme alttaki **isteğe bağlı yapılandırma** isteğe bağlı yapılandırma bilgilerini kaydetmek için bölümü.
+3. **Betik eylemlerinin**en altında, yapılandırmayı kaydetmek için **Seç** düğmesini kullanın. Son olarak, isteğe bağlı yapılandırma bilgilerini kaydetmek için **Isteğe bağlı yapılandırma** bölümünün altındaki **Seç** düğmesini kullanın.
 
-4. Açıklandığı gibi kümeyi oluştururken devam [oluşturma Linux tabanlı HDInsight kümeleri](hdinsight-hadoop-create-linux-clusters-portal.md).
+4. [Linux tabanlı HDInsight kümeleri oluşturma](hdinsight-hadoop-create-linux-clusters-portal.md)bölümünde açıklandığı gibi Kümeyi oluşturmaya devam edin.
 
-## <a name="usegiraph"></a>Giraph HDInsight içinde nasıl kullanabilirim?
+## <a name="usegiraph"></a>HDInsight 'ta Giraph 'yi kullanmak Nasıl yaparım? mı?
 
-Küme oluşturulduktan sonra Giraph dahil SimpleShortestPathsComputation örneği çalıştırmak için aşağıdaki adımları kullanın. Bu örnekte temel [Pregel](https://people.apache.org/~edwardyoon/documents/pregel.pdf) grafikteki nesneler arasındaki en kısa yolu bulmak için uygulama.
+Küme oluşturulduktan sonra, Giraph ile birlikte gelen Simplekısaltestpathshesaplama örneğini çalıştırmak için aşağıdaki adımları kullanın. Bu örnek, bir grafikteki nesneler arasındaki en kısa yolu bulmak için temel bir [Pregel](https://people.apache.org/~edwardyoon/documents/pregel.pdf) uygulamasını kullanır.
 
 1. SSH kullanarak HDInsight kümesine bağlanma:
 
@@ -91,7 +91,7 @@ Küme oluşturulduktan sonra Giraph dahil SimpleShortestPathsComputation örneğ
 
     Bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md).
 
-2. Adlı bir dosya oluşturmak için aşağıdaki komutu kullanın **tiny_graph.txt**:
+2. **Tiny_graph. txt**adlı bir dosya oluşturmak için aşağıdaki komutu kullanın:
 
     ```bash
     nano tiny_graph.txt
@@ -107,49 +107,49 @@ Küme oluşturulduktan sonra Giraph dahil SimpleShortestPathsComputation örneğ
     [4,0,[[3,4],[2,4]]]
     ```
 
-    Bu veri biçimi kullanarak bir yönlü graf nesneler arasındaki ilişkiyi tanımlayan `[source_id, source_value,[[dest_id], [edge_value],...]]`. Her satırı arasında bir ilişki temsil eden bir `source_id` nesnesi ve bir veya daha fazla `dest_id` nesneleri. `edge_value` , Güç veya bağlantı uzaklığı olarak düşünülebilir `source_id` ve `dest\_id`.
+    Bu veriler, biçimlendirme `[source_id, source_value,[[dest_id], [edge_value],...]]`kullanılarak, yönlendirilmiş bir grafikteki nesneler arasındaki ilişkiyi açıklar. Her satır, bir `source_id` nesne ile bir veya daha fazla `dest_id` nesne arasındaki ilişkiyi temsil eder. , `edge_value` `source_id` Ve arasındaki`dest\_id`bağlantının gücü veya uzaklığı olarak düşünülebilir.
 
-    Çıkış çizilmiş ve nesneler arasındaki uzaklık değeri (veya ağırlık) kullanarak, verileri Aşağıdaki diyagramda gibi görünebilir:
+    Çizilmiş ve nesneler arasındaki mesafe olarak değer (veya ağırlık) kullanıldığında, veriler aşağıdaki diyagram gibi görünebilir:
 
-    ![tiny_graph.txt arasında değişen mesafenin satırlarla bir daire olarak çizilir.](./media/hdinsight-hadoop-giraph-install-linux/giraph-graph.png)
+    ![tiny_graph. txt, aralarında değişen mesafe çizgileri olan daireler olarak çizilir](./media/hdinsight-hadoop-giraph-install-linux/hdinsight-giraph-graph.png)
 
-3. Dosyayı kaydetmek için kullanın **Ctrl + X**, ardından **Y**ve son olarak **Enter** dosya adını kabul etmek için.
+3. Dosyayı kaydetmek için **CTRL + X**, sonra **Y**ve son olarak, dosya adını kabul etmek için **ENTER** tuşunu kullanın.
 
-4. Birincil depolama, HDInsight kümeniz içine verileri depolamak için aşağıdakileri kullanın:
+4. HDInsight kümeniz için verileri birincil depolamaya depolamak için aşağıdakileri kullanın:
 
     ```bash
     hdfs dfs -put tiny_graph.txt /example/data/tiny_graph.txt
     ```
 
-5. Aşağıdaki komutu kullanarak SimpleShortestPathsComputation örneği çalıştırın:
+5. Şu komutu kullanarak Simplekısaltestpathshesaplama örneğini çalıştırın:
 
     ```bash
     yarn jar /usr/hdp/current/giraph/giraph-examples.jar org.apache.giraph.GiraphRunner org.apache.giraph.examples.SimpleShortestPathsComputation -ca mapred.job.tracker=headnodehost:9010 -vif org.apache.giraph.io.formats.JsonLongDoubleFloatDoubleVertexInputFormat -vip /example/data/tiny_graph.txt -vof org.apache.giraph.io.formats.IdWithValueTextOutputFormat -op /example/output/shortestpaths -w 2
     ```
 
-    Bu komutla birlikte kullanılan parametreler aşağıdaki tabloda açıklanmıştır:
+    Bu komutla kullanılan parametreler aşağıdaki tabloda açıklanmıştır:
 
    | Parametre | Ne yapar? |
    | --- | --- |
-   | `jar` |Örnekler içeren jar dosyasını. |
+   | `jar` |Örnekleri içeren jar dosyası. |
    | `org.apache.giraph.GiraphRunner` |Örnekleri başlatmak için kullanılan sınıf. |
-   | `org.apache.giraph.examples.SimpleShortestPathsCoputation` |Kullanılan örnek. Bu örnekte, grafikteki tüm kimlikleri kimliği 1 ila en kısa yolu hesaplar. |
-   | `-ca mapred.job.tracker` |Kümenin baş düğümüne. |
-   | `-vif` |Girdi verilerini kullanmaya giriş biçimi. |
-   | `-vip` |Giriş veri dosyasını. |
-   | `-vof` |Çıkış biçimi. Bu örnek, kodu ve düz metin olarak değeri. |
+   | `org.apache.giraph.examples.SimpleShortestPathsCoputation` |Kullanılan örnek. Bu örnekte, 1 KIMLIĞI ve grafikteki diğer tüm kimlikler arasındaki en kısa yolu hesaplar. |
+   | `-ca mapred.job.tracker` |Küme için baş düğümüne. |
+   | `-vif` |Giriş verileri için kullanılacak giriş biçimi. |
+   | `-vip` |Giriş veri dosyası. |
+   | `-vof` |Çıkış biçimi. Bu örnekte, ID ve değer düz metin olarak. |
    | `-op` |Çıkış konumu. |
-   | `-w 2` |Kullanmak için çalışan sayısı. Bu örnekte, 2. |
+   | `-w 2` |Kullanılacak çalışanların sayısı. Bu örnekte, 2. |
 
-    Bu ve Giraph örnekleri ile kullanılan diğer parametreleri hakkında daha fazla bilgi için bkz. [Giraph hızlı](https://giraph.apache.org/quick_start.html).
+    Bunlar hakkında daha fazla bilgi ve Giraph örnekleri ile kullanılan diğer parametreler için bkz. [Giraph hızlı](https://giraph.apache.org/quick_start.html)başlangıcı.
 
-6. İş tamamlandıktan sonra sonuçları depolanan **/example/out/shortestpaths** dizin. Çıkış dosyası adı şununla **bölümü-m -** ve birinci, ikinci, vb. dosya belirten bir sayı ile bitmelidir. Çıkışı görüntülemek için aşağıdaki komutu kullanın:
+6. İş tamamlandıktan sonra sonuçlar **/example/Out/kısaltestpaths** dizininde depolanır. Çıkış dosyası adları, **kısım-b** ile başlar ve birinci, ikinci, vb. dosyayı belirten bir sayıyla biter. Çıktıyı görüntülemek için aşağıdaki komutu kullanın:
 
     ```bash
     hdfs dfs -text /example/output/shortestpaths/*
     ```
 
-    Çıktı aşağıdaki metne benzer görünür:
+    Çıktı aşağıdaki metne benzer şekilde görünür:
 
         0    1.0
         4    5.0
@@ -157,12 +157,12 @@ Küme oluşturulduktan sonra Giraph dahil SimpleShortestPathsComputation örneğ
         1    0.0
         3    1.0
 
-    Örnek sabit kodlanmış başlamak SimpleShortestPathComputation nesne kimliği 1 ve diğer nesnelerin en kısa yolu bulmak. Çıkış biçiminde olan `destination_id` ve `distance`. `distance` Nesne kimliği 1 ile hedef kimliğini arasında imkansız kenarlarına değer (veya ağırlık)
+    Simplekısaltestpathhesaplama örneği, nesne KIMLIĞI 1 ile başlamak ve diğer nesnelerin en kısa yolunu bulmak için sabit kodlanmış bir örnektir. Çıktı, `destination_id` ve `distance`biçimindedir. , `distance` Nesne kimliği 1 ile hedef kimliği arasındaki kenarlarının değeri (veya ağırlığı) olur.
 
-    Bu verileri görselleştirme, kısa yolları kimliği 1 ile tüm diğer nesneler arasında seyahat sonuçları doğrulayabilirsiniz. En kısa yolu kimliği 4 kimliği 1 ila 5'tir. Bu değer arasındaki toplam uzaklıktır <span style="color:orange">kimliği 1 ile 3</span>, ardından <span style="color:red">kimliği 3 ve 4</span>.
+    Bu verileri görselleştirerek, KIMLIK 1 ve diğer tüm nesneler arasındaki en kısa yolu taşıyarak sonuçları doğrulayabilirsiniz. KIMLIK 1 ve KIMLIK 4 arasındaki en kısa yol 5 ' tir. Bu değer <span style="color:orange">1 ile 3</span>arasındaki toplam uzaklığın ve <span style="color:red">kimlik 3 ve 4</span>' ü arasındadır.
 
-    ![Nesneler arasında çizilmiş kısa yolları daireler olarak çizme](./media/hdinsight-hadoop-giraph-install-linux/giraph-graph-out.png)
+    ![Nesnelerin arasına çizilmiş en kısa yolların bulunduğu daireler](./media/hdinsight-hadoop-giraph-install-linux/hdinsight-giraph-graph-out.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Yükleme ve HDInsight kümelerinde Hue kullanma](hdinsight-hadoop-hue-linux.md).
+* [HDInsight kümelerinde ton 'U yükleyip kullanın](hdinsight-hadoop-hue-linux.md).

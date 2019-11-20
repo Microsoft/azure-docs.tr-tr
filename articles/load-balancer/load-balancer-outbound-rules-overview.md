@@ -1,24 +1,23 @@
 ---
-title: Azure Load Balancer giden kuralları
-titlesuffix: Azure Load Balancer
-description: Giden kuralları giden ağ adresi çevirisi tanımlamak için kullanın
+title: Giden kuralları-Azure Load Balancer
+description: Bu öğrenme yoluyla giden ağ adresi çevirileri tanımlamak için giden kurallarını kullanmaya başlayın.
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
 ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/19/2018
-ms.author: kumud
-ms.openlocfilehash: 52fafa7e9dd46b6c78af3776797bae48b22ea8df
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 7/17/2019
+ms.author: allensu
+ms.openlocfilehash: 316b28faa458b03431cb48f02a8087116415b061
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64698441"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075899"
 ---
 # <a name="load-balancer-outbound-rules"></a>Yük Dengeleyici giden kuralları
 
@@ -34,7 +33,7 @@ Giden kuralları denetimine izin ver:
 - genel IP adresleri, hangi sanal makinelerin çevrilmesi gerekir. 
 - nasıl [giden SNAT bağlantı noktaları](load-balancer-outbound-connections.md#snat) ayrılmalıdır.
 - Giden çeviri sağlamak için hangi protokollerin.
-- Giden bağlantı boşta kalma zaman aşımı için (4-120 dakika) kullanmak için hangi süresi.
+- giden bağlantı boşta kalma zaman aşımı (4-120 dakika) için kullanılacak süre.
 - boşta kalma zaman aşımı (genel Önizleme) üzerinde bir TCP Sıfırla'ı gönderilip gönderilmeyeceğini belirtir. 
 
 Giden kuralları genişletin [Senaryo 2](load-balancer-outbound-connections.md#lb) içinde açıklanan [giden bağlantılar](load-balancer-outbound-connections.md) olarak kalır makale ve senaryo öncelik-olduğu.
@@ -69,9 +68,9 @@ API sürümü "2018-07-01", şu şekilde yapılandırılmış bir giden kuralı 
 
 Yalnızca tek bir genel IP adresi ile bir giden kuralı kullanılabilse giden kuralları için giden NAT'ın ölçeklendirme yapılandırma yükünü Büyük ölçekli senaryolar için plan için birden çok IP adresi kullanabilirsiniz ve giden kuralları azaltmak için kullanabileceğiniz [SNAT tükenmesi](load-balancer-outbound-connections.md#snatexhaust) saldırıya desenleri.  
 
-Ön uç tarafından sağlanan her ek IP adresi SNAT bağlantı noktalarını kullanmak için yük dengeleyici 51.200 kısa ömürlü bağlantı noktaları sağlar. Gelen NAT kuralları Yük Dengeleme veya tek bir ön uç olsa da, giden kuralı ön uç kavramımız genişletir ve Kural başına birden çok ön uç sağlar.  Kural başına birden çok ön uç, kullanılabilir SNAT bağlantı noktaları miktarı her genel IP adresi ile çarpılır ve büyük senaryolar desteklenir.
+Ön uç tarafından sağlanan her ek IP adresi, Load Balancer SNAT bağlantı noktası olarak kullanılacak olan 64.000 kısa ömürlü bağlantı noktaları sağlar. Gelen NAT kuralları Yük Dengeleme veya tek bir ön uç olsa da, giden kuralı ön uç kavramımız genişletir ve Kural başına birden çok ön uç sağlar.  Kural başına birden çok ön uç, kullanılabilir SNAT bağlantı noktaları miktarı her genel IP adresi ile çarpılır ve büyük senaryolar desteklenir.
 
-Ayrıca, kullanabileceğiniz bir [genel IP öneki](https://aka.ms/lbpublicipprefix) bir giden kuralı ile doğrudan.  Genel IP'si kullanan, kolay ölçeklendirme ve Azure dağıtımınızı kaynaklanan akış Basitleştirilmiş güvenilir listeye için ön ek sağlar. Genel bir IP adresi ön eki doğrudan başvurmak için yük dengeleyici kaynak içinde bir ön uç IP yapılandırması yapılandırabilirsiniz.  Bu yük dengeleyicinin genel IP öneki özel denetime sağlar ve giden kuralı, giden bağlantılar için genel IP öneki içinde yer alan tüm genel IP adresleri otomatik olarak kullanacak.  Her IP adresi genel IP öneki aralığında SNAT bağlantı noktaları kullanılacak yük dengeleyici için IP adresi başına 51.200 kısa ömürlü bağlantı noktaları sağlar.   
+Ayrıca, kullanabileceğiniz bir [genel IP öneki](https://aka.ms/lbpublicipprefix) bir giden kuralı ile doğrudan.  Genel IP'si kullanan, kolay ölçeklendirme ve Azure dağıtımınızı kaynaklanan akış Basitleştirilmiş güvenilir listeye için ön ek sağlar. Genel bir IP adresi ön eki doğrudan başvurmak için yük dengeleyici kaynak içinde bir ön uç IP yapılandırması yapılandırabilirsiniz.  Bu yük dengeleyicinin genel IP öneki özel denetime sağlar ve giden kuralı, giden bağlantılar için genel IP öneki içinde yer alan tüm genel IP adresleri otomatik olarak kullanacak.  Genel IP öneki aralığı içindeki IP adreslerinden her biri, Load Balancer SNAT bağlantı noktası olarak kullanılacak IP adresi başına 64.000 kısa ömürlü bağlantı noktaları sağlar.   
 
 Genel IP önekten giden kuralı genel IP öneki tam denetimi olmalıdır gibi bu seçeneği tercih edildiğinde oluşturulan genel IP adresi kaynakların sahip olamaz.  Daha iyi tanecikli denetim gerekiyorsa, genel IP önekten ayrı genel IP adresi kaynağı oluşturma ve birden çok genel IP adresleri ayrı ayrı bir giden kuralı ön uç için atayın.
 
@@ -84,13 +83,13 @@ Bağlantı noktalarını VM (NIC IP yapılandırması) başına 10.000 SNAT ayı
 
           "allocatedOutboundPorts": 10000
 
-Her bir giden kuralı tüm ön ortak IP adresini kullanmak için en fazla 51.200 kısa ömürlü bağlantı noktaları SNAT bağlantı noktaları katkıda bulunur.  Yük Dengeleyici SNAT katları 8 bağlantı noktası ayırır. 8 katı olmayan bir değer sağlarsanız, yapılandırma işlemi reddedilir.  Genel IP adresleri sayısına göre bulunandan daha fazla SNAT bağlantı noktaları ayırmak çalışırsanız, yapılandırma işlemi reddedilir.  Örneğin, VM ve 7 VM başına 10.000 bağlantı noktaları ayırdığınızda bir arka uç havuzu tek bir genel IP adresi paylaşımında yapabileceği, yapılandırma reddedilen (7 x 10.000 SNAT bağlantı noktaları > 51,200 SNAT bağlantı noktaları).  Daha fazla genel IP adresleri ön uç senaryoyu etkinleştirmek için bir giden kuralı ekleyebilirsiniz.
+Giden bir kuralın tüm ön uçlarından gelen her genel IP adresi, SNAT bağlantı noktaları olarak kullanılmak üzere 64.000 kısa ömürlü bağlantı noktasına kadar katkıda bulunur.  Yük Dengeleyici SNAT katları 8 bağlantı noktası ayırır. 8 katı olmayan bir değer sağlarsanız, yapılandırma işlemi reddedilir.  Genel IP adresleri sayısına göre bulunandan daha fazla SNAT bağlantı noktaları ayırmak çalışırsanız, yapılandırma işlemi reddedilir.  Örneğin, VM başına 10.000 bağlantı noktası ve arka uç havuzunda 7 VM 'Ler ayırırsanız tek bir genel IP adresi paylaşabilir, yapılandırma reddedilir (7 x 10.000 SNAT bağlantı noktaları > 64.000 SNAT bağlantı noktaları).  Daha fazla genel IP adresleri ön uç senaryoyu etkinleştirmek için bir giden kuralı ekleyebilirsiniz.
 
-Geri döndürebilirsiniz [otomatik SNAT bağlantı noktası ayırma arka uç havuz boyutunu temel alarak](load-balancer-outbound-connections.md#preallocatedports) 0 bağlantı noktası numarası belirterek.
+Geri döndürebilirsiniz [otomatik SNAT bağlantı noktası ayırma arka uç havuz boyutunu temel alarak](load-balancer-outbound-connections.md#preallocatedports) 0 bağlantı noktası numarası belirterek. Bu durumda, ilk 50 sanal makine örnekleri 1024 bağlantı noktalarını alacak şekilde, 51-100 sanal makine örnekleri tabloya göre 512 ve bu şekilde devam eder.
 
 ### <a name="idletimeout"></a> Denetim giden akış boşta kalma zaman aşımı
 
-Giden kuralları giden akış boşta kalma zaman aşımını denetleme ve uygulamanızın ihtiyaçlarını eşleştirmek için bir yapılandırma parametresi sağlayın.  4 dakikalık varsayılan giden boşta kalma zaman aşımı.  Parametresi, 120 dakika boşta kalma zaman aşımı için bu belirli bir kural eşleşen akışlar için belirli ile 4 arasında bir değer kabul eder.
+Giden kuralları giden akış boşta kalma zaman aşımını denetleme ve uygulamanızın ihtiyaçlarını eşleştirmek için bir yapılandırma parametresi sağlayın.  4 dakikalık varsayılan giden boşta kalma zaman aşımı.  Parametresi, belirli bir kuralla eşleşen akışlar için boşta kalma zaman aşımı için dakika sayısı kadar olan 4 ila 120 arasında bir değer kabul eder.
 
 Giden boşta kalma zaman aşımı 1 saate ayarlamak için aşağıdaki parametresini kullanın:
 
@@ -162,7 +161,7 @@ Kullanılacak Yük Dengeleme kuralı için istemiyorsanız için gereken giden [
 
 Giden kuralları ayarlamak için kullanılabileceğiniz [otomatik SNAT bağlantı noktası ayırma arka uç havuz boyutunu temel alarak](load-balancer-outbound-connections.md#preallocatedports).
 
-Örneğin, tek bir genel IP adresi için giden NAT paylaşımı iki sanal makine varsa, varsayılan 1024 bağlantı noktalarından SNAT tükenmesi yaşıyorsanız ayrılan SNAT bağlantı noktası sayısını artırmak isteyebilirsiniz. Her genel IP adresi kadar 51.200 kısa ömürlü bağlantı noktaları katkıda bulunabilir.  Tek bir genel IP adresi ön uç ile bir giden kuralı yapılandırırsanız, arka uç havuzundaki vm'lere 51.200 SNAT noktalarının toplam dağıtabilirsiniz.  İki VM için 25.600 SNAT bağlantı noktaları en fazla bir giden kuralı (2 x 25,600 = 51,200) ile ayrılabilir.
+Örneğin, tek bir genel IP adresi için giden NAT paylaşımı iki sanal makine varsa, varsayılan 1024 bağlantı noktalarından SNAT tükenmesi yaşıyorsanız ayrılan SNAT bağlantı noktası sayısını artırmak isteyebilirsiniz. Her genel IP adresi en fazla 64.000 kısa ömürlü bağlantı noktasına katkıda bulunabilir.  Tek bir genel IP adresi ön ucuna sahip bir giden kuralı yapılandırırsanız, arka uç havuzundaki sanal makinelere Toplam 64.000 SNAT bağlantı noktası dağıtabilirsiniz.  İki VM için, en fazla 32.000 SNAT bağlantı noktası bir giden kuralla ayrılabilir (2x 32.000 = 64.000).
 
 Gözden geçirme [giden bağlantılar](load-balancer-outbound-connections.md) hakkında bilgi [SNAT](load-balancer-outbound-connections.md#snat) bağlantı noktalarını ayrılan ve kullanılır.
 
@@ -193,22 +192,22 @@ Giden bağlantı açıkça bildirilen kadar iç bir Standard Load Balancer kulla
    1. Yük Dengeleme kuralı giden SNAT devre dışı bırakın.
    2. Aynı yük Dengeleyicide bir giden kuralı yapılandırın.
    3. Sanal makineleriniz tarafından zaten kullanılan arka uç havuzu yeniden kullanın.
-   4. "Protokol" belirtin: "Tüm" kapsamında giden kuralı.
+   4. Belirtin "protokol": "All" giden kuralı bir parçası olarak.
 
 - Yalnızca gelen NAT kuralları kullanıldığında, giden NAT sağlanır.
 
    1. Vm'leri bir arka uç havuzuna yerleştirin.
    2. Genel IP adresleri veya ortak IP öneki ile bir veya daha fazla ön uç IP yapılandırmaları tanımlar.
    3. Aynı yük Dengeleyicide bir giden kuralı yapılandırın.
-   4. "Protokol" belirtin: Giden kuralı bir parçası olarak "Tüm"
+   4. "Protokol" belirtin: giden kuralı bir parçası olarak "Tüm"
 
 ## <a name="limitations"></a>Sınırlamalar
 
-- En fazla ön uç IP adresi başına kullanılabilir kısa ömürlü bağlantı noktaları 51,200 sayısıdır.
-- 4 ila 120 dakika (240 için 7200 saniye) yapılandırılabilir giden boşta kalma zaman aşımı aralığı.
+- Ön uç IP adresi başına kullanılabilir en fazla kısa ömürlü bağlantı noktası sayısı 64.000 ' dir.
+- Yapılandırılabilir giden boşta kalma zaman aşımı aralığı 4 ila 120 dakikadır (240 ila 7200 saniye).
 - Yük Dengeleyici giden NAT için ICMP desteklemiyor
 - Portal, yapılandırma veya giden kuralları görüntülemek için kullanılamaz.  Bunun yerine şablonları, REST API, Az CLI 2. 0'ı veya PowerShell kullanın.
-- Giden kuralları, yalnızca birincil NIC ve birincil IP yapılandırması için uygulanabilir.
+- Giden kuralları, yalnızca bir NIC 'in birincil IP yapılandırmasına uygulanabilir.  Birden çok NIC desteklenir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

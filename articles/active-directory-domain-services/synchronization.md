@@ -1,132 +1,138 @@
 ---
-title: 'Azure Active Directory etki alanı Hizmetleri: Yönetilen etki alanlarında eşitleme | Microsoft Docs'
-description: Azure Active Directory Domain Services yönetilen etki alanındaki eşitleme anlama
+title: Eşitlemenin nasıl çalıştığı Azure AD Domain Services | Microsoft Docs
+description: Eşitleme işleminin, bir Azure AD kiracısından veya şirket içi Active Directory Domain Services ortamından Azure Active Directory Domain Services yönetilen bir etki alanına yönelik nesneler ve kimlik bilgileri için nasıl çalıştığını öğrenin.
 services: active-directory-ds
-documentationcenter: ''
 author: iainfoulds
 manager: daveba
-editor: curtand
 ms.assetid: 57cbf436-fc1d-4bab-b991-7d25b6e987ef
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: conceptual
-ms.date: 05/22/2019
+ms.date: 10/31/2019
 ms.author: iainfou
-ms.openlocfilehash: 475817985885cdd6023e72f20ecf35a3ca582924
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 7d4546a6d2de01575825154ab30a909b76b3fc89
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67472437"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73474481"
 ---
-# <a name="synchronization-in-an-azure-ad-domain-services-managed-domain"></a>Azure AD Domain Services yönetilen etki alanı eşitleme
-Aşağıdaki diyagram, eşitleme Azure AD Domain Services yönetilen etki alanlarını nasıl çalıştığını gösterir.
+# <a name="how-objects-and-credentials-are-synchronized-in-an-azure-ad-domain-services-managed-domain"></a>Azure AD Domain Services yönetilen bir etki alanında nesneleri ve kimlik bilgilerini eşitleme
 
-![Azure AD Etki Alanı Hizmetleri'nde eşitleme](./media/active-directory-domain-services-design-guide/sync-topology.png)
+Azure Active Directory Domain Services (AD DS) yönetilen etki alanındaki nesneler ve kimlik bilgileri etki alanı içinde yerel olarak oluşturulabilir veya bir Azure Active Directory (Azure AD) kiracısından eşitlenebilir. Azure AD DS ilk kez dağıttığınızda, Azure AD 'den nesneleri çoğaltmaya yönelik otomatik tek yönlü bir eşitleme yapılandırılır ve başlatılır. Bu tek yönlü eşitleme arka planda çalışmaya devam eder ve Azure AD DS yönetilen etki alanını Azure AD 'deki değişikliklerle güncel tutar. Azure AD DS 'den Azure AD 'ye geri eşitleme gerçekleşmez.
 
-## <a name="synchronization-from-your-on-premises-directory-to-your-azure-ad-tenant"></a>Azure AD kiracınız için şirket içi dizininizden eşitleme
-Azure AD Connect eşitleme grup üyelikleri kullanıcı hesaplarını eşitlemek için kullanılır ve Azure AD kiracınız için kimlik bilgisi karma hale getirir. Kullanıcı öznitelikleri gibi UPN'nin hesaplar ve şirket içi SID (güvenlik tanımlayıcısı) eşitlenir. Azure AD Domain Services'ı kullanırsanız, NTLM ve Kerberos kimlik doğrulaması için gereken eski bir kimlik bilgisi karmalarının Azure AD kiracınıza de eşitlenir.
+Karma bir ortamda, şirket içi AD DS etki alanındaki nesneler ve kimlik bilgileri Azure AD Connect kullanılarak Azure AD ile eşitlenebilir. Bu nesneler Azure AD 'ye başarıyla eşitlendiğinde, otomatik arka plan eşitleme, bu nesneleri ve kimlik bilgilerini Azure AD DS yönetilen etki alanını kullanarak uygulamalar için kullanılabilir hale getirir.
 
-Geri yazma yapılandırırsanız, Azure AD dizininizde gerçekleşen değişiklikler geri şirket içi Active Directory'nize eşitlenir. Örneğin, Azure AD Self Servis parola Yönetimi'ni kullanarak parolanızı değiştirirseniz, şirket içinde değiştirilen parolayı güncelleştirilir AD etki alanı.
+Aşağıdaki diyagramda, eşitlemenin Azure AD DS, Azure AD ve isteğe bağlı bir şirket içi AD DS ortamı arasında nasıl çalıştığı gösterilmektedir:
 
-> [!NOTE]
-> Düzeltmeleri tüm bilinen hataların olduğundan emin olmak için her zaman Azure AD Connect'in en son sürümünü kullanın.
->
->
+![Azure AD Domain Services yönetilen bir etki alanı için eşitlemeye genel bakış](./media/active-directory-domain-services-design-guide/sync-topology.png)
 
-## <a name="synchronization-from-your-azure-ad-tenant-to-your-managed-domain"></a>Azure AD kiracınızdan yönetilen Etki Alanınızla eşitleme
-Kullanıcı hesapları, Grup üyeliklerinin ve kimlik bilgisi karmalarının Azure AD kiracınızdan Azure AD Domain Services yönetilen Etki Alanınızla eşitlenir. Bu eşitleme işlemi otomatik olarak gerçekleşir. Yapılandırma, izleme veya bu eşitleme işlemi, yönetimi gerekmez. İlk eşitleme birkaç gün Azure AD dizininizdeki nesneleri sayısına bağlı olarak birkaç saat sürebilir. İlk eşitleme tamamlandıktan sonra yönetilen etki alanınızda güncelleştirilecek Azure AD'de yapılan değişiklikler için yaklaşık 20-30 dakika sürer. Bu eşitleme aralığı parola değişiklikleri uygular veya için öznitelikler Azure AD'de yapılan değişiklikler.
+## <a name="synchronization-from-azure-ad-to-azure-ad-ds"></a>Azure AD 'den Azure AD DS eşitleme
 
-Eşitleme işlemi, aynı zamanda bir-way/doğası gereği tek yönlü. Yönetilen etki alanınıza büyük ölçüde oluşturduğunuz özel OU'lar dışında salt okunur. Bu nedenle, kullanıcı öznitelikleri, kullanıcı parolalarını veya yönetilen etki alanı içinde grup üyeliği değişiklik yapamazsınız. Sonuç olarak, yönetilen etki alanınızdan değişikliklerin Azure AD kiracınız için geri ters eşitleme yoktur.
+Kullanıcı hesapları, grup üyelikleri ve kimlik bilgisi karmaları Azure AD 'den Azure AD DS bir şekilde eşitlenir. Bu eşitleme işlemi otomatiktir. Bu eşitleme işlemini yapılandırmanız, izlemeniz veya yönetmeniz gerekmez. İlk eşitleme, Azure AD dizinindeki nesne sayısına bağlı olarak birkaç güne kadar birkaç saat sürebilir. İlk eşitleme tamamlandıktan sonra, Azure AD 'de parola veya öznitelik değişiklikleri gibi yapılan değişiklikler otomatik olarak Azure AD DS eşitlenir.
 
-## <a name="synchronization-from-a-multi-forest-on-premises-environment"></a>Çok ormanlı şirket içi ortamdan eşitleme
-Çoğu kuruluş birden fazla hesap ormanına oluşan bir oldukça karmaşık şirket içi kimlik altyapınızı vardır. Azure AD Connect eşitleme kullanıcıları, grupları ve kimlik bilgisi karmalarının Azure AD kiracınıza Çoklu orman ortamlarından destekler.
+Eşitleme işlemi tasarım tarafından tek yönlü/tek yönlü olur. Azure AD DS 'den Azure AD 'ye geri yapılan değişikliklerin geriye doğru eşitlenmesi yoktur. Azure AD DS yönetilen etki alanı, oluşturabileceğiniz özel OU 'Lar dışında büyük ölçüde salt okunurdur. Azure AD DS yönetilen bir etki alanı içindeki Kullanıcı özniteliklerinde, Kullanıcı parolalarında veya grup üyeliklerinde değişiklik yapamazsınız.
 
-Buna karşılık, Azure AD kiracınıza kadar bir daha basit ve düz ad alanıdır. Kullanıcının Azure AD tarafından güvenliği sağlanan uygulamalar güvenilir bir şekilde erişmesini sağlamak için kullanıcı hesapları farklı ormanlardaki genelinde UPN çakışmalarını çözme. Azure AD kiracınıza benzeyen, Azure AD Domain Services yönetilen etki alanı ayılarının kapatın. Yönetilen etki alanınızda düz bir OU yapısı görürsünüz. Tüm kullanıcı hesapları ve grupları farklı şirket içi etki alanları veya ormanlar eşitlenmekte olan rağmen 'AADDC Users' kapsayıcısı içinde depolanır. Hiyerarşik bir OU yapılandırılmış şirket içi yapı. Yönetilen etki alanınıza hala basit düz bir OU yapısına sahiptir.
+## <a name="attribute-synchronization-and-mapping-to-azure-ad-ds"></a>Öznitelik eşitleme ve Azure AD DS eşleme
 
-## <a name="exclusions---what-isnt-synchronized-to-your-managed-domain"></a>Dışlamalar - ne yönetilen Etki Alanınızla eşitlenmemiş
-Aşağıdaki nesneler veya öznitelikleri, Azure AD kiracınız veya yönetilen etki alanınıza eşitlenmedi:
+Aşağıdaki tabloda bazı yaygın öznitelikler ve bunların Azure AD DS nasıl eşitlendikleri listelenmektedir.
 
-* **Hariç tutulan öznitelikleri:** Azure AD Connect kullanarak şirket içi etki alanınızdan Azure AD kiracınız ile eşitlenmesini belirli öznitelikleri dışlamak isteyebilirsiniz. Hariç tutulan bu öznitelikler, yönetilen etki alanında kullanılamaz.
-* **Grup ilkeleri:** Şirket içi etki alanınızda yapılandırılan Grup ilkeleri, yönetilen Etki Alanınızla eşitlenmez.
-* **Sysvol paylaşımı:** Benzer şekilde, yönetilen etki alanınıza şirket içi etki alanınızdaki Sysvol paylaşımının içeriğini eşitlenmez.
-* **Bilgisayar nesneleri için:** Bilgisayar nesneleri, şirket içi etki alanına katılmış bilgisayarlar için yönetilen Etki Alanınızla eşitlenmez. Bu bilgisayarlar değil, yönetilen etki alanınız ile güven ilişkisi olan ve şirket içi etki alanınıza yalnızca ait. Yönetilen etki alanında yalnızca, açıkça etki alanının yönetilen etki alanına katılmış bilgisayarları için bilgisayar nesneleri bulun.
-* **Kullanıcılar ve gruplar için SID Geçmişi öznitelikleri:** Birincil kullanıcı ve birincil grup SID şirket etki alanınızdan yönetilen Etki Alanınızla eşitlenir. Ancak, kullanıcılar ve gruplar için mevcut SIDHistory öznitelikleri, yönetilen etki alanınıza şirket içi etki alanınızdan eşitlenmez.
-* **Kuruluş birimi (OU) yapıları:** Tanımlanan şirket içi etki alanınızdaki kuruluş birimlerini, yönetilen Etki Alanınızla eşitleme yapmayın. Yönetilen etki alanınızda iki yerleşik OU'lar vardır. Varsayılan olarak, yönetilen etki alanınıza düz bir OU yapısı vardır. Ancak tercih edebilirsiniz [yönetilen etki alanınızda özel bir OU oluşturun](create-ou.md).
-
-## <a name="how-specific-attributes-are-synchronized-to-your-managed-domain"></a>Yönetilen etki alanınızla eşitlenen belirli öznitelikler nasıl
-Aşağıdaki tabloda, bazı ortak öznitelikleri listeler ve yönetilen Etki Alanınızla nasıl eşitleneceğini açıklar.
-
-| Yönetilen etki alanınızda özniteliği | source | Notlar |
+| Azure AD DS özniteliği | Kaynak | Notlar |
 |:--- |:--- |:--- |
-| UPN |Azure AD kiracınızda kullanıcının UPN özniteliği |Azure AD kiracınızdan UPN özniteliğini, yönetilen Etki Alanınızla olarak eşitlenir. Bu nedenle, yönetilen Etki Alanınızla oturum açmak için en güvenilir yol UPN'nizi kullanıyor. |
-| SAMAccountName |Kullanıcının mailNickname Azure AD kiracınızda özniteliği veya otomatik olarak oluşturulan |SAMAccountName özniteliğinin Azure AD kiracınızda mailNickname özniteliğinden kaynaklanıyor. Birden çok kullanıcı hesapları aynı mailNickname özniteliğine sahipse, SAMAccountName otomatik olarak üretilir. Kullanıcının mailNickname veya UPN önek 20 karakterden uzun ise, SAMAccountName SAMAccountName özniteliklerde 20 karakter sınırını karşılamak için otomatik oluşturulmuş olur. |
-| Parolalar |Azure AD kiracınızdan kullanıcı parolası |(Ek kimlik bilgileri olarak da bilinir) NTLM veya Kerberos kimlik doğrulaması için gereken kimlik bilgisi karmalarını Azure AD kiracınızdan eşitlenir. Azure AD kiracınıza eşitlenmiş bir kiracı ise, bu kimlik bilgilerini şirket etki alanınızdan elde edilir. |
-| Birincil kullanıcı/Grup SID |Otomatik olarak oluşturulan |Birincil SID kullanıcı/grup hesapları için yönetilen etki alanınız otomatik olarak üretilir. Bu öznitelik, birincil kullanıcı/Grup SID'si şirket içi nesnesinin eşleşmiyor AD etki alanı. Bu uyuşmazlık, yönetilen etki alanı farklı bir SID ad alanı, şirket içi etki sahip olmasıdır. |
-| Kullanıcılar ve gruplar için SID Geçmişi |Şirket içi birincil kullanıcı ve Grup SID'si |Yönetilen etki alanınız içindeki kullanıcılar ve gruplar için SID Geçmişi özniteliği, ilgili birincil kullanıcı veya grup SID şirket içi etki alanınızda eşleşecek şekilde ayarlanır. Bu özellik, yeniden ACL kaynaklarına gerekmediğinden lift-and-shift ile taşıma şirket içi uygulamaların yönetilen etki alanında kolaylaştırmak yardımcı olur. |
+| 'LE | Azure AD kiracısında kullanıcının *UPN* özniteliği | Azure AD kiracısındaki UPN özniteliği Azure AD DS olarak eşitlenir. Azure AD DS yönetilen bir etki alanında oturum açmak için en güvenilir yol UPN 'yi kullanmaktır. |
+| Hesap | Azure AD kiracısında kullanıcının *Mailrumuz* özniteliği veya otomatik olarak oluşturulur | *SAMAccountName* ÖZNITELIĞI Azure AD kiracısındaki *mailrumuz* özniteliğinden kaynaklıdır. Birden çok kullanıcı hesabının *Mailrumuz* özniteliği varsa, *sAMAccountName* otomatik olarak oluşturulur. Kullanıcının *Mailrumuz* veya *UPN* ön eki 20 karakterden uzunsa, *sAMAccountName öznitelikleri üzerinde* 20 karakter sınırını karşılamak için *sAMAccountName* otomatik olarak oluşturulur. |
+| Parolalar | Azure AD kiracısından kullanıcının parolası | NTLM veya Kerberos kimlik doğrulaması için gereken eski parola karmaları Azure AD kiracısından eşitlenir. Azure AD kiracısı Azure AD Connect kullanılarak karma eşitleme için yapılandırılırsa, bu parola karmaları şirket içi AD DS ortamından kaynaklıdır. |
+| Birincil Kullanıcı/Grup SID 'SI | Otomatik olarak oluşturulan | Kullanıcı/Grup hesapları için birincil SID Azure AD DS otomatik olarak oluşturulur. Bu öznitelik, bir şirket içi AD DS ortamındaki nesnenin birincil Kullanıcı/Grup SID 'SI ile eşleşmiyor. Bu uyumsuzluk, Azure AD DS yönetilen etki alanının şirket içi AD DS etki alanından farklı bir SID Ad alanına sahip olmasından kaynaklanır. |
+| Kullanıcılar ve gruplar için SID geçmişi | Şirket içi birincil kullanıcı ve Grup SID 'SI | Azure AD DS içindeki kullanıcılar ve gruplar için *SIDHistory* özniteliği, şirket içi AD DS ortamındaki karşılık gelen birincil kullanıcı veya Grup SID 'si ile eşleşecek şekilde ayarlanır. Bu özellik, kaynakları yeniden ACL 'lere ihtiyaç duymazsanız, şirket içi uygulamaların Azure AD DS üzerinde geçiş ve kaydırma işlemlerini daha kolay hale getirmeye yardımcı olur. |
 
-> [!NOTE]
-> **UPN biçimini kullanarak yönetilen etki alanına oturum açın:** SAMAccountName özniteliğini, yönetilen etki alanınıza bazı kullanıcı hesapları için otomatik olarak oluşturulmuş olabilir. Birden çok kullanıcı aynı mailNickname özniteliğine sahip veya kullanıcıların aşırı uzun UPN ön ekleri varsa, bu kullanıcılar için SAMAccountName otomatik olarak oluşturulmuş olabilir. Bu nedenle, SAMAccountName biçimi (örneğin, ' CONTOSO100\joeuser') her zaman etki alanında oturum açmak için güvenilir bir yol değil. Kullanıcıların otomatik olarak oluşturulan SAMAccountName kendi UPN önekten farklı olabilir. UPN biçimini kullanın (örneğin, 'joeuser@contoso100.com') için yönetilen etki alanında güvenilir bir şekilde oturum açmak için.
+> [!TIP]
+> **Yönetilen etki alanında UPN biçimini kullanarak oturum açın** `CONTOSO\driley`gibi *sAMAccountName* özniteliği, Azure AD DS yönetilen bir etki alanındaki bazı Kullanıcı hesapları için otomatik olarak oluşturulabilir. Kullanıcıların otomatik olarak oluşturulan *sAMAccountName* 'i UPN öneklerinden farklı olabilir, bu nedenle oturum açmak için her zaman güvenilir bir yol yoktur.
+>
+> Örneğin, birden çok kullanıcının aynı *Mailrumuz* özniteliği varsa veya kullanıcılar AŞıRı uzun UPN öneklerine sahip ise, bu kullanıcılara ait *sAMAccountName* otomatik olarak oluşturulabilir. Azure AD DS yönetilen bir etki alanında güvenilir bir şekilde oturum açmak için `driley@contoso.com`gibi UPN biçimini kullanın.
 
 ### <a name="attribute-mapping-for-user-accounts"></a>Kullanıcı hesapları için öznitelik eşlemesi
-Aşağıdaki tabloda, Azure AD kiracınızda nesneleri yönetilen etki alanınıza karşılık gelen özniteliklerle eşitlenen bir kullanıcı için nasıl özel öznitelikler gösterilmektedir.
 
-| Azure AD kiracınıza kullanıcı özniteliği | Yönetilen etki alanınıza kullanıcı özniteliği |
+Aşağıdaki tabloda, Azure AD 'deki Kullanıcı nesneleri için belirli özniteliklerin Azure AD DS ilgili özniteliklerle nasıl eşitlendiği gösterilmektedir.
+
+| Azure AD 'de Kullanıcı özniteliği | Azure AD DS kullanıcı özniteliği |
 |:--- |:--- |
-| accountEnabled |userAccountControl (ayarlar veya bit ACCOUNT_DISABLED temizler) |
-| city |m |
-| Ülke |Ortak |
-| Bölüm |Bölüm |
-| displayName |displayName |
-| facsimileTelephoneNumber |facsimileTelephoneNumber |
-| givenName |givenName |
-| İş Unvanı |başlık |
-| posta |posta |
-| mailNickname |msDS-AzureADMailNickname |
-| mailNickname |SAMAccountName (bazen otomatik olarak oluşturulmuş olabilir) |
-| Mobil |Mobil |
-| Nesne Kimliği |msDS-AzureADObjectId |
-| onPremiseSecurityIdentifier |SID Geçmişi |
-| passwordPolicies |userAccountControl (ayarlar veya bit DONT_EXPIRE_PASSWORD temizler) |
+| AccountEnabled |userAccountControl (ACCOUNT_DISABLED bitini ayarlar veya temizler) |
+| city |Girişindeki |
+| Ülke |\ |
+| Bölüme |Bölüme |
+| DisplayName |DisplayName |
+| facsimileTelephoneNumber 'dir |facsimileTelephoneNumber 'dir |
+| GivenName |GivenName |
+| JobTitle |Başlığın |
+| - |- |
+| MailNickname |msDS-Azureadmailtakma ad |
+| MailNickname |SAMAccountName (bazen otomatik olarak oluşturulabilir) |
+| Mo |Mo |
+| uzantının |msDS-Azureadobjectıd |
+| onPremiseSecurityIdentifier |Sıdhistory |
+| passwordPolicies |userAccountControl (DONT_EXPIRE_PASSWORD bitini ayarlar veya temizler) |
 | physicalDeliveryOfficeName |physicalDeliveryOfficeName |
-| posta kodu |posta kodu |
+| PostalCode |PostalCode |
 | preferredLanguage |preferredLanguage |
-| state |St |
+| durum |Oluşan |
 | streetAddress |streetAddress |
 | Soyadı |sn |
-| telephoneNumber |telephoneNumber |
+| TelephoneNumber 'dır |TelephoneNumber 'dır |
 | userPrincipalName |userPrincipalName |
 
 ### <a name="attribute-mapping-for-groups"></a>Gruplar için öznitelik eşlemesi
-Aşağıdaki tabloda, Azure AD kiracınızda nesneler, yönetilen etki alanınıza karşılık gelen özniteliklerle eşitlenir grubu için nasıl özel öznitelikler gösterilmektedir.
 
-| Azure AD kiracınızda grubu özniteliği | Yönetilen etki alanınıza grubu özniteliği |
+Aşağıdaki tabloda, Azure AD 'deki grup nesnelerinin belirli özniteliklerinin Azure AD DS ilgili özniteliklerle nasıl eşitlendiği gösterilmektedir.
+
+| Azure AD 'de Grup özniteliği | Azure AD DS 'de Grup özniteliği |
 |:--- |:--- |
-| displayName |displayName |
-| displayName |SAMAccountName (bazen otomatik olarak oluşturulmuş olabilir) |
-| posta |posta |
-| mailNickname |msDS-AzureADMailNickname |
-| Nesne Kimliği |msDS-AzureADObjectId |
-| onPremiseSecurityIdentifier |SID Geçmişi |
+| DisplayName |DisplayName |
+| DisplayName |SAMAccountName (bazen otomatik olarak oluşturulabilir) |
+| - |- |
+| MailNickname |msDS-Azureadmailtakma ad |
+| uzantının |msDS-Azureadobjectıd |
+| onPremiseSecurityIdentifier |Sıdhistory |
 | securityEnabled |groupType |
 
-## <a name="password-hash-synchronization-and-security-considerations"></a>Parola Karması eşitleme ve güvenlik konuları
-Azure AD Etki Alanı Hizmetleri'ni etkinleştirdiğinizde, Azure AD dizininizi oluşturur ve parola karmalarının NTLM ve Kerberos uyumlu biçimlerde depolar. 
+## <a name="synchronization-from-on-premises-ad-ds-to-azure-ad-and-azure-ad-ds"></a>Şirket içi AD DS Azure AD 'ye ve Azure AD DS eşitleme
 
-Mevcut bulut kullanıcı hesapları için Azure AD düz metin parolalarını hiçbir zaman depolar bu yana bu karmaları otomatik olarak oluşturulamaz. Bu nedenle Microsoft gerektirir [parolalarını sıfırlama/değiştirme için bulut kullanıcıları](active-directory-ds-getting-started-password-sync.md) sırada oluşturulan ve Azure AD'de depolanan kendi parola karmaları için. Parola karmalarının Azure AD Domain Services'ı etkinleştirdikten sonra Azure AD'de oluşturulan bulut kullanıcı hesabı için oluşturulur ve NTLM ve Kerberos uyumlu biçimlerinde depolanır. 
+Azure AD Connect, şirket içi AD DS ortamından Azure AD 'ye Kullanıcı hesaplarını, grup üyeliklerini ve kimlik bilgisi karmalarını eşitlemeye yönelik olarak kullanılır. UPN ve şirket içi güvenlik tanımlayıcısı (SID) gibi kullanıcı hesaplarının öznitelikleri eşitlenir. Azure AD Domain Services kullanarak oturum açmak için NTLM ve Kerberos kimlik doğrulaması için gereken eski parola karmaları da Azure AD 'ye eşitlenir.
 
-Kullanıcı hesaplarını gelen eşitlenen için şirket içi Azure AD Connect Sync kullanarak AD yapmanız [NTLM ve Kerberos uyumlu biçimde parola karmaları eşitlemek için Azure AD Connect yapılandırma](active-directory-ds-getting-started-password-sync-synced-tenant.md).
+Geri yazma 'yı yapılandırırsanız Azure AD 'den yapılan değişiklikler şirket içi AD DS ortamına eşitlenir. Örneğin, bir Kullanıcı Azure AD self servis parola yönetimi kullanarak parolasını değiştirirse, parola şirket içi AD DS ortamında geri güncelleştirilir.
 
-NTLM ve Kerberos uyumlu parola karmaları, Azure AD'de her zaman şifrelenmiş olarak depolanır. Bu karmalar, yalnızca Azure AD Domain Services sahip şifre çözme anahtarları erişim şekilde şifrelenir. Başka bir hizmet veya bileşen Azure AD'de şifre çözme anahtarları erişimi vardır. Şifreleme anahtarları benzersiz başına Azure AD kiracınız var. Azure AD Domain Services yönetilen etki alanınız için etki alanı denetleyicilerinde parola karmalarının eşitler. Bu parola karmaları depolanır ve bu etki alanı denetleyicileri Windows Server AD etki alanı denetleyicilerinde güvenli parolaları nasıl depolandığını ve benzer güvenli. Bu yönetilen etki alanı denetleyicileri için diskler, bekleme sırasında şifrelenir.
+> [!NOTE]
+> Bilinen tüm hatalara yönelik düzeltmelerinizi sağlamak için her zaman Azure AD Connect en son sürümünü kullanın.
 
-## <a name="objects-that-are-not-synchronized-to-your-azure-ad-tenant-from-your-managed-domain"></a>Azure AD kiracınız için yönetilen etki alanınızdan eşitlenmez nesneleri
-Bu makalenin önceki bölümde açıklandığı gibi yönetilen etki alanınızdan Azure AD kiracınız için yeniden eşitleme yoktur. Tercih edebilirsiniz [özel kuruluş birimi (OU) oluşturun](create-ou.md) yönetilen etki alanınızda. Ayrıca, diğer OU'ları, kullanıcıları, grupları veya bu özel OU içinde hizmet hesapları oluşturabilirsiniz. Hiçbir özel OU içinde oluşturulan nesneler, Azure AD kiracınıza eşitlenir. Bu nesneler, yalnızca yönetilen etki alanınız içinde kullanmak için kullanılabilir. Bu nedenle, bu nesneler, Azure AD PowerShell cmdlet'leri, Azure AD Graph API'si veya Azure AD Yönetimi kullanıcı Arabirimi kullanarak görünür değildir.
+### <a name="synchronization-from-a-multi-forest-on-premises-environment"></a>Çok ormanlı şirket içi ortamdan eşitleme
 
-## <a name="related-content"></a>İlgili İçerik
-* [Özellikler - Azure AD etki alanı Hizmetleri](active-directory-ds-features.md)
-* [Dağıtım senaryoları - Azure AD Domain Services](scenarios.md)
-* [Azure AD Domain Services ilgili ağ konuları](network-considerations.md)
-* [Azure AD Domain Services ile çalışmaya başlama](create-instance.md)
+Birçok kuruluşun birden çok orman içeren oldukça karmaşık bir şirket içi AD DS ortamı vardır. Azure AD Connect, çok ormanlı ortamlardan Azure AD 'ye kullanıcıların, grupların ve kimlik bilgisi karmalarının eşitlenmesini destekler.
+
+Azure AD daha basit ve düz bir ad alanına sahiptir. Kullanıcıların Azure AD tarafından güvenli hale getirilmiş uygulamalara güvenilir bir şekilde erişmesini sağlamak için, farklı ormanlardaki Kullanıcı hesapları genelinde UPN çakışmalarını çözün. Azure AD DS yönetilen etki alanları, Azure AD 'ye benzer bir düz OU yapısı kullanır. Şirket içinde hiyerarşik bir OU yapısını yapılandırmış olsanız bile, tüm Kullanıcı hesapları ve grupları *Aaddc kullanıcıları* kapsayıcısında depolanır. Bu, şirket içinde hiyerarşik bir OU yapısını yapılandırsanız bile, farklı şirket içi etki alanlarından veya ormanlardan eşitlenmemesine karşın. Azure AD DS yönetilen etki alanı tüm hiyerarşik OU yapılarını düzleştirir.
+
+Daha önce açıklandığı gibi Azure AD DS 'den Azure AD 'ye geri eşitleme yoktur. Azure AD DS 'de [özel bir kuruluş birimi (OU)](create-ou.md) ve ardından bu özel OU 'lar içindeki kullanıcılar, gruplar veya hizmet hesapları oluşturabilirsiniz. Özel OU 'Larda oluşturulan nesnelerden hiçbiri Azure AD 'ye geri eşitlenir. Bu nesneler yalnızca Azure AD DS yönetilen etki alanı içinde kullanılabilir ve Azure AD PowerShell cmdlet 'leri, Azure AD Graph API veya Azure AD Yönetim kullanıcı arabirimi kullanılarak görülemez.
+
+## <a name="what-isnt-synchronized-to-azure-ad-ds"></a>Azure ile eşitlenmemiş AD DS
+
+Aşağıdaki nesneler veya öznitelikler, şirket içi AD DS ortamından Azure AD veya Azure AD DS arasında eşitlenmez:
+
+* **Dışlanan öznitelikler:** Azure AD Connect kullanarak belirli özniteliklerin Azure AD 'ye eşitlenmesini, şirket içi AD DS ortamından dışlamayı seçebilirsiniz. Bu Dışlanan öznitelikler daha sonra Azure AD DS 'de kullanılamaz.
+* **Grup ilkeleri:** Şirket içi AD DS ortamda yapılandırılan Grup Ilkeleri Azure AD DS ile eşitlenmez.
+* **SYSVOL klasörü:** Şirket içi AD DS ortamındaki *SYSVOL* klasörünün içeriği Azure AD DS ile eşitlenmez.
+* **Bilgisayar nesneleri:** Şirket içi AD DS ortamına katılmış bilgisayarlar için bilgisayar nesneleri Azure AD DS ile eşitlenmez. Bu bilgisayarların Azure AD DS yönetilen etki alanı ile bir güven ilişkisi yoktur ve yalnızca şirket içi AD DS ortamına aittir. Azure AD DS 'de yalnızca yönetilen etki alanına açıkça etki alanına katılmış bilgisayarlar için bilgisayar nesneleri gösterilir.
+* **Kullanıcılar ve gruplar Için Sıdhistory öznitelikleri:** Şirket içi AD DS ortamından birincil kullanıcı ve birincil Grup SID 'Leri Azure AD DS ile eşitlenir. Ancak, kullanıcılar ve gruplar için mevcut *SIDHistory* öznitelikleri, şirket içi AD DS ortamından Azure AD DS ile eşitlenmez.
+* **Kuruluş birimleri (OU) yapıları:** Şirket içi AD DS ortamda tanımlanan kuruluş birimleri Azure AD DS ile eşitlenmez. Azure AD DS, biri kullanıcılar ve diğeri bilgisayarlar için olmak üzere iki yerleşik OU vardır. Azure AD DS yönetilen etki alanının düz bir OU yapısı vardır. [Yönetilen etki alanında özel bır OU oluşturmayı](create-ou.md)tercih edebilirsiniz.
+
+## <a name="password-hash-synchronization-and-security-considerations"></a>Parola karması eşitleme ve güvenlik konuları
+
+Azure AD DS etkinleştirdiğinizde, NTLM + Kerberos kimlik doğrulaması için eski parola karmaları gereklidir. Azure AD, şifresiz metin parolalarını depolamaz, bu nedenle mevcut kullanıcı hesapları için bu karmaların otomatik olarak oluşturulması gerekir. Oluşturulup depolandıktan sonra NTLM ve Kerberos uyumlu parola karmaları her zaman Azure AD 'de şifreli bir şekilde depolanır. Şifreleme anahtarları her bir Azure AD kiracısına özeldir. Bu karmalar, yalnızca Azure AD DS şifre çözme anahtarlarına erişime sahip olacak şekilde şifrelenir. Azure AD 'de başka bir hizmet veya bileşen şifre çözme anahtarlarına erişemez. Eski parola karmaları daha sonra Azure AD DS yönetilen bir etki alanı için etki alanı denetleyicilerine eşitlenir. Azure AD DS içindeki bu yönetilen etki alanı denetleyicileri için diskler, bekleyen olarak şifrelenir. Bu parola karmaları, parolaların şirket içi AD DS ortamında nasıl depolandığı ve güvenliğinin sağlandığı gibi bu etki alanı denetleyicilerinde saklanır ve güvenlik altına alınır.
+
+Yalnızca bulut Azure AD ortamlarında, gerekli parola karmalarının Azure AD 'de oluşturulup depolanması için [Kullanıcıların parolalarını sıfırlaması/değiştirmesi gerekir](tutorial-create-instance.md#enable-user-accounts-for-azure-ad-ds) . Azure AD Domain Services etkinleştirildikten sonra Azure AD 'de oluşturulan herhangi bir bulut Kullanıcı hesabı için, parola karmaları oluşturulup NTLM ve Kerberos uyumlu biçimlerinde depolanır. Bu yeni hesapların parolalarını sıfırlaması/değiştirmesi, eski parola karmalarının oluşturulmasını gerektirmez.
+
+Azure AD Connect kullanılarak şirket içi AD DS ortamından eşitlenen hibrit Kullanıcı hesapları için, [NTLM ve Kerberos uyumlu biçimlerdeki parola karmalarını eşitlenecek Azure AD Connect yapılandırmanız](tutorial-configure-password-hash-sync.md)gerekir.
+
+## <a name="next-steps"></a>Sonraki adımlar
+
+Parola eşitlemesinin ayrıntıları hakkında daha fazla bilgi için bkz. [Parola karması eşitlemesi Azure AD Connect ile çalışma](../active-directory/hybrid/how-to-connect-password-hash-synchronization.md?context=/azure/active-directory-domain-services/context/azure-ad-ds-context).
+
+Azure AD DS kullanmaya başlamak için, [yönetilen bir etki alanı oluşturun](tutorial-create-instance.md).

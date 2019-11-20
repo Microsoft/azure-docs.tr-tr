@@ -1,54 +1,51 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure üzerinde Chef Software belgeleri
+summary: Azure kaynaklarını dağıtmak ve yönetmek için Chef Software ürünlerini kullanmayı öğrenin.
 metadata:
-  title: 'Azure üzerinde Chef Software belgeleri - Öğreticiler, örnekler, başvuru ve kaynaklar'
-  description: 'Chef Software, Linux ve Windows için fiziksel ve sanal sunucu yapılandırmalarının yönetilmesine olanak sağlayan bir DevOps otomasyon platformu sunar. Hızlı başlangıç kılavuzları ve öğreticilerle kod olarak altyapı (IaC) tariflerini otomatikleştirmenin yanı sıra Azure üzerinde sanal makineleri yönetmek ve dağıtmak için Chef Software ürünlerini kullanmayı öğrenin.'
+  title: Azure üzerinde Chef Software belgeleri
+  description: Azure kaynaklarını dağıtmak ve yönetmek için Chef Software ürünlerini kullanmayı öğrenin.
+  services: azure
   ms.service: chef
-  keywords: 'chef, azure, devops, öğreticiler, örnekler, başvuru'
-  author: tomarchermsft
-  manager: jeconnoc
+  ms.topic: landing-page
+  author: TomArcherMsft
   ms.author: tarcher
-  ms.topic: landing page
-  ms.date: 08/27/2018
-abstract:
-  description: 'Chef Software, Linux ve Windows için fiziksel ve sanal sunucu yapılandırmalarının yönetilmesine olanak sağlayan bir DevOps otomasyon platformu sunar. Hızlı başlangıç kılavuzları ve öğreticilerle kod olarak altyapı (IaC) tariflerini otomatikleştirmenin yanı sıra Azure üzerinde sanal makineleri yönetmek ve dağıtmak için Chef Software ürünlerini kullanmayı öğrenin.'
-  aside:
-    image:
-      alt: Chef logosu
-      height: 133
-      width: 48
-      src: media/chef.png
-    title: null
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Chef’i yükleyip yapılandırın ve Azure’da bir Linux sanal makinesi oluşturmak için kullanın.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/media/index/azure_dev-9.svg
-            text: Chef’i yükleme ve yapılandırma
-            href: ./chef-extension-portal.md
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Chef Software araçlarını kullanarak Azure işlem ve ağ altyapısı oluşturmayı ve yönetmeyi öğrenin.
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/virtual-machines/windows/chef-automation">Chef ile Azure Sanal Makine dağıtımını otomatikleştirin</a>.
-  - title: Kaynaklar ve Araçlar
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Chef Automate
-            html: '<p><a href="https://docs.chef.io/chef_automate.html">Chef Automate genel bakışı</a></p> <p><a href="https://docs.chef.io/install_chef_automate.html">Chef Automate yükleme kılavuzu</a></p> <p><a href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/chef-software.chef-automate">Azure Market’te Chef Automate</a></p>'
-          - title: Chef Software araçları
-            html: '<p><a href="https://marketplace.visualstudio.com/items?itemName=chef-software.vsts-chef-tasks">Chef Azure DevOps uzantısı</a></p> <p><a href="https://marketplace.visualstudio.com/items?itemName=chef-software.vsts-habitat-tasks">Habitat Azure DevOps uzantısı</a></p>'
-          - title: Chef Software haberleri
-            html: '<p><a href="https://blog.chef.io/">Chef Software blogu</a></p>'
+  ms.date: 09/17/2019
+  ms.openlocfilehash: 615f2cb8e60ec21417e4b65a0bcaaa72629f34ea
+  ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/18/2019
+  ms.locfileid: "71086798"
+landingContent:
+- title: Azure üzerinde Chef Software hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure üzerinde Chef hakkında
+      url: chef-overview.md
+    - text: Azure üzerinde Habitat hakkında
+      url: chef-habitat-overview.md
+    - text: Azure üzerinde InSpec hakkında
+      url: chef-inspec-overview.md
+  - linkListType: architecture
+    links:
+    - text: Azure Chef Uzantısı
+      url: https://docs.chef.io/azure_portal.html#azure-chef-extension
+- title: Chef Software ürünlerini yükleme ve yapılandırma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure portalı kullanarak Chef’i yükleme
+      url: chef-extension-portal.md
+  - linkListType: download
+    links:
+    - text: Chef Azure DevOps Services uzantısı
+      url: https://marketplace.visualstudio.com/items?itemName=chef-software.vsts-chef-tasks
+    - text: Habitat Azure DevOps Services uzantısı
+      url: https://marketplace.visualstudio.com/items?itemName=chef-software.vsts-habitat-tasks
+- title: Sanal Makineleri yönetme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Windows VM oluşturma
+      url: /azure/virtual-machines/windows/chef-automation?/azure/chef/toc.json&bc=/azure/bread/toc.json

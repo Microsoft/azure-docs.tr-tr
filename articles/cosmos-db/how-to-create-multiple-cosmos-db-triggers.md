@@ -1,50 +1,50 @@
 ---
-title: Birden çok bağımsız Azure Cosmos DB Tetikleyicileri oluşturma
-description: Birden çok bağımsız Azure Cosmos DB olaya dayalı mimariler Azure işlevleri'ni oluşturmak için tetikleyici yapılandırmayı öğrenin.
+title: Cosmos DB için birden çok bağımsız Azure Işlevleri tetikleyicisi oluşturma
+description: Olay odaklı mimariler oluşturmak için Cosmos DB için birden çok bağımsız Azure Işlev tetikleyicisi yapılandırma hakkında bilgi edinin.
 author: ealsur
 ms.service: cosmos-db
-ms.topic: sample
-ms.date: 05/23/2019
+ms.topic: conceptual
+ms.date: 07/17/2019
 ms.author: maquaran
-ms.openlocfilehash: 722da9f0112d63af52be8c9c3a746f6da9638bac
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: 987136bf8aba1313e1bef21f58691bf9a860ea32
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "66241941"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70093370"
 ---
-# <a name="create-multiple-azure-cosmos-db-triggers"></a>Birden çok Azure Cosmos DB Tetikleyicileri oluşturma
+# <a name="create-multiple-azure-functions-triggers-for-cosmos-db"></a>Cosmos DB için birden çok Azure Işlevleri tetikleyicisi oluşturun
 
-Bu makalede, birden çok Cosmos DB paralel olarak çalışır ve bağımsız olarak değişikliklerine tepki tetikleyici nasıl yapılandırılacağını açıklar.
+Bu makalede Cosmos DB için birden çok Azure Işlev tetikleyicisi, paralel olarak çalışacak şekilde nasıl yapılandırabileceğiniz ve değişikliklere bağımsız olarak yanıt verme işlemleri açıklanmaktadır.
 
-![Azure Cosmos DB tetikleyicisi ile çalışma ve kiralarını kapsayıcıyı paylaşan sunucusuz olay tabanlı İşlevler](./media/change-feed-functions/multi-trigger.png)
+![Cosmos DB için Azure Işlevleri tetikleyicisiyle çalışan sunucusuz olay tabanlı Işlevler ve kiralamalar kapsayıcısı paylaşma](./media/change-feed-functions/multi-trigger.png)
 
 ## <a name="event-based-architecture-requirements"></a>Olay tabanlı mimari gereksinimleri
 
-Sunucusuz mimarileri ile derleme yaparken [Azure işlevleri](../azure-functions/functions-overview.md), sahip [önerilen](../azure-functions/functions-best-practices.md#avoid-long-running-functions) yerine büyük uzun süre çalışan işlevler birlikte çalışan küçük işlevi kümeleri oluşturmak için.
+[Azure işlevleri](../azure-functions/functions-overview.md)ile sunucusuz mimariler oluştururken, büyük uzun süre çalışan işlevler yerine birlikte çalışan küçük işlev kümeleri oluşturmanız [önerilir](../azure-functions/functions-best-practices.md#avoid-long-running-functions) .
 
-Kullanarak olay temelli sunucusuz akışlar derleme sırasında [Azure Cosmos DB tetikleyicisi](./change-feed-functions.md), belirli bir yeni bir olay olduğunda birden çok şey yapmak istediğiniz senaryoya çalıştıracaksınız [Azure Cosmos kapsayıcı](./databases-containers-items.md#azure-cosmos-containers). Tetiklemek istediğiniz eylemleri, birbirinden bağımsız için ideal çözüm olacaktır **eylem başına bir Cosmos DB tetikleyicisi oluşturma** yapmak, tüm değişikliklerin aynı Azure Cosmos kapsayıcısı üzerinde dinleme istiyorsunuz.
+[Cosmos DB Için Azure işlevleri tetikleyicisini](./change-feed-functions.md)kullanarak olay tabanlı sunucusuz akışlar oluştururken, belirli bir [Azure Cosmos kapsayıcısında](./databases-containers-items.md#azure-cosmos-containers)yeni bir olay olduğunda birden çok işlem yapmak istediğiniz senaryoya göre çalışacaktır. Tetiklemek istediğiniz eylemler diğerinden bağımsız ise, ideal çözüm, her **işlem için Cosmos DB her bir Azure işlevi tetikleyicisi oluşturmak** , böylece tüm değişiklikleri aynı Azure Cosmos kapsayıcısında dinlemek olacaktır.
 
-## <a name="optimizing-containers-for-multiple-triggers"></a>Kapsayıcılar için birden çok tetikleyici en iyi duruma getirme
+## <a name="optimizing-containers-for-multiple-triggers"></a>Birden çok tetikleyici için kapsayıcıları iyileştirme
 
-Verilen *gereksinimleri* Cosmos DB tetikleyicisi, ihtiyacımız olarak da adlandırılır, durumunu depolamak için ikinci bir kapsayıcı *kiraları kapsayıcı*. Bu, her bir Azure işlevi için ayrı kiraları kapsayıcı gerektiğini anlama geliyor?
+Cosmos DB için Azure Işlevleri tetikleyicisinin *gereksinimleri* verildiğinde, *kiralamalar kapsayıcısı*olarak da bilinen durumu depolamak için ikinci bir kapsayıcıya ihtiyacımız var. Bu, her bir Azure Işlevi için ayrı bir kiralama kapsayıcısına ihtiyacınız olduğu anlamına geliyor mu?
 
-Burada, iki seçeneğiniz vardır:
+Burada iki seçeneğiniz vardır:
 
-* Oluşturma **bir işlev başına kapsayıcı kiralar**: Kullanmakta olduğunuz sürece, bu yaklaşım ek maliyetler çevirebilir bir [paylaşılan aktarım hızı veritabanı](./set-throughput.md#set-throughput-on-a-database). Kapsayıcı düzeyinde en düşük aktarım hızı 400 olduğunu unutmayın [istek birimi](./request-units.md), ve kiraları kapsayıcı söz konusu olduğunda, yalnızca yüklenmekte olan durumunu korumak ve ilerleme durumunu kontrol noktasına kullanılır.
-* Sahip **bir kira kapsayıcı ve paylaşın** tüm işlevler için: Birden çok Azure işlevleri aynı sağlanan aktarım hızı paylaşıp olanak tanıdığından bu ikinci seçeneği kapsayıcı, sağlanan istek birimi daha iyi kullanımı sağlar.
+* **İşlev başına bir kira kapsayıcısı**oluştur: Bu yaklaşım, [paylaşılan bir üretilen iş veritabanı](./set-throughput.md#set-throughput-on-a-database)kullanmadığınız müddetçe ek maliyetlere çevirebilir. Kapsayıcı düzeyindeki en düşük aktarım hızı 400 [Istek birimi](./request-units.md)olduğunu ve kiralamalar kapsayıcısı durumunda yalnızca ilerlemeyi kontrol etmek ve durumu korumak için kullanıldığını unutmayın.
+* **Tek bir kira kapsayıcısına** sahip olmak ve tüm işlevleriniz için paylaşmak için: Bu ikinci seçenek, birden fazla Azure Işlevinin aynı sağlanan aktarım hızını paylaşmasına ve kullanmasına olanak sağladığından, kapsayıcıda sağlanan Istek birimlerinin daha iyi kullanımını sağlar.
 
-Bu makalenin amacı, ikinci seçenek gerçekleştirmek için size rehberlik etmektir.
+Bu makalenin amacı, ikinci seçeneği gerçekleştirmenize yardımcı olmaktır.
 
-## <a name="configuring-a-shared-leases-container"></a>Paylaşılan kiraları kapsayıcı yapılandırma
+## <a name="configuring-a-shared-leases-container"></a>Paylaşılan kiralamalar kapsayıcısı yapılandırma
 
-Paylaşılan kiraları kapsayıcı yapılandırmak için almanız gereken, Tetikleyicileri yalnızca ek yapılandırma eklemektir `LeaseCollectionPrefix` [özniteliği](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---c-attributes) kullanıyorsanız C# veya `leaseCollectionPrefix` [özniteliği](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---javascript-example)JavaScript kullanıyorsa. Öznitelik değeri, hangi, belirli bir tetikleyici bir mantıksal tanımlayıcısı olmalıdır.
+Paylaşılan kiralamalar kapsayıcısını yapılandırmak için tetikleyicilerinde yapmanız gereken tek ek yapılandırma, JavaScript kullanıyorsanız `LeaseCollectionPrefix` C# veya `leaseCollectionPrefix` [özniteliğini](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---javascript-example) kullanıyorsanız [özniteliği](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---c-attributes) eklemektir. Özniteliğin değeri, belirli bir tetikleyicinin mantıksal tanımlayıcısı olmalıdır.
 
-Örneğin, üç Tetikleyiciler varsa: e-postaları, gerçekleştirilmiş bir görünüm oluşturmak için bir toplama yapan, diğeri değişiklikleri başka bir depolama alanına gönderen gönderen bir sonra analiz etmek için atayabilir `LeaseCollectionPrefix` birinci için "e-postaların" " İkinci ve üçüncü bir "analiz" gerçekleştirilmiş".
+Örneğin, üç tetikleyici varsa: e-posta gönderen bir, gerçekleştirilmiş bir görünüm oluşturmak için bir toplama yapan diğeri ve değişiklikleri başka bir depolama alanına Gönderen bir, daha sonra analiz edilmek üzere "e-postaların" öğesini ilk birine `LeaseCollectionPrefix` atayabilirsiniz " İkincisine "ve" analiz "ile üçüncü bir arasında gerçekleştirilmiş.
 
-Üç tetikler önemli bir parçası olan **aynı kiraları kapsayıcı yapılandırması kullanabilirsiniz** (hesap, veritabanı ve kapsayıcı adı).
+Önemli bölüm, üç tetikleyicinin de **aynı kira kapsayıcı yapılandırmasını** (hesap, veritabanı ve kapsayıcı adı) kullanmasına yönelik bir addır.
 
-Kullanarak bir çok basit kod örnekleri `LeaseCollectionPrefix` özniteliğini C#, şuna benzer:
+' Deki `LeaseCollectionPrefix` C#özniteliği kullanarak çok basit kod örnekleri şöyle görünür:
 
 ```cs
 using Microsoft.Azure.Documents;
@@ -78,7 +78,7 @@ public static void MaterializedViews([CosmosDBTrigger(
 }
 ```
 
-Ve JavaScript için yapılandırma üzerinde uygulanabilir `function.json` dosyası ile `leaseCollectionPrefix` özniteliği:
+Ve JavaScript için, bu yapılandırmayı `function.json` dosyasına, `leaseCollectionPrefix` özniteliğiyle birlikte uygulayabilirsiniz:
 
 ```json
 {
@@ -104,10 +104,10 @@ Ve JavaScript için yapılandırma üzerinde uygulanabilir `function.json` dosya
 ```
 
 > [!NOTE]
-> Paylaşılan kiraları kapsayıcınızın sağlanan istek birimi üzerinde her zaman izleyin. Bunu paylaşan her tetikleyici için kullanmakta olduğunuz Azure işlevleri sayısı arttıkça, sağlanan aktarım hızı artırmak ihtiyacınız olabilecek şekilde aktarım hızı ortalama tüketimi artacaktır.
+> Paylaşılan Kiralama kapsayıcınızda sağlanan Istek birimlerindeki her zaman izleyin. Bu uygulamayı paylaşan her tetikleyici, üretilen iş verimini artırır, bu nedenle onu kullanan Azure Işlevlerinin sayısını artırdıkça sağlanan aktarım hızını artırmanız gerekebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Tam yapılandırma için bkz: [Azure Cosmos DB tetikleyicisi](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---configuration)
-* Genişletilmiş denetleyin [örnekleri listesi](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---example) tüm diller için.
-* Azure Cosmos DB ile Azure işlevleri ile sunucusuz tarifleri ziyaret [GitHub deposu](https://github.com/ealsur/serverless-recipes/tree/master/cosmosdbtriggerscenarios) daha fazla örnek için.
+* [Cosmos DB Için Azure işlevleri tetikleyicisinin](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---configuration) tam yapılandırmasına bakın
+* Tüm dillerin genişletilmiş [örnek listesini](../azure-functions/functions-bindings-cosmosdb-v2.md#trigger---example) denetleyin.
+* Daha fazla örnek için Azure Cosmos DB ve Azure Işlevleri [GitHub deposu](https://github.com/ealsur/serverless-recipes/tree/master/cosmosdbtriggerscenarios) Ile sunucusuz tariflerini ziyaret edin.

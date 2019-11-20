@@ -1,50 +1,44 @@
 ---
-title: Uyarı yönetimi çözümü Azure Log analytics'te | Microsoft Docs
-description: Log analytics'teki uyarı yönetimi çözümü tüm uyarıları ortamınız analiz etmenize yardımcı olur.  Log Analytics içinde oluşturulan sağlamlaştırmak uyarıların yanı sıra, bu uyarılar bağlı System Center Operations Manager yönetim gruplarından Log Analytics'e içeri aktarır.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: tysonn
-ms.assetid: fe5d534e-0418-4e2f-9073-8025e13271a8
-ms.service: log-analytics
+title: Azure Log Analytics Uyarı Yönetimi çözümü | Microsoft Docs
+description: Log Analytics Uyarı Yönetimi çözümü ortamınızdaki tüm uyarıları çözümlemenize yardımcı olur.  Log Analytics içinde oluşturulan uyarıların birleştirimesinin yanı sıra, bağlantılı System Center Operations Manager yönetim gruplarından gelen uyarıları Log Analytics 'e aktarır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 01/19/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 06532369efb802606eb13a4b38a8579a3528f999
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 01/19/2018
+ms.openlocfilehash: fe484d8b5a06946b844acb5e506ec4dcc99ebc23
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60777036"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72932719"
 ---
-# <a name="alert-management-solution-in-azure-log-analytics"></a>Azure Log analytics'teki uyarı yönetimi çözümü
+# <a name="alert-management-solution-in-azure-log-analytics"></a>Azure Log Analytics Uyarı Yönetimi çözümü
 
 ![Uyarı Yönetimi simgesi](media/alert-management-solution/icon.png)
 
 > [!NOTE]
->  Destekleyen gelişmiş yetenekleri için artık azure İzleyici [uygun ölçekte uyarılarınızı yönetme](https://aka.ms/azure-alerts-overview), tarafından oluşturulan dahil olmak üzere [izleme araçları SCOM, Zabbix veya Nagios gibi](https://aka.ms/managing-alerts-other-monitoring-services).
+>  Azure Izleyici, [System Center Operations Manager, Zabbix veya Nagios gibi izleme araçlarıyla](https://aka.ms/managing-alerts-other-monitoring-services)oluşturulanlar da dahil olmak üzere, [uyarılarınızı ölçeklendirmeye](https://aka.ms/azure-alerts-overview)yönelik gelişmiş özellikleri desteklemektedir.
 >  
 
 
-Uyarı yönetimi çözümü tüm uyarıları Log Analytics deponuzdaki analiz etmenize yardımcı olur.  Bu uyarılar bir çeşitli kaynaklardan kaynaklar dahil olmak üzere gelmiş olabilir [Log Analytics tarafından oluşturulan](../../azure-monitor/platform/alerts-overview.md) veya [Nagios veya Zabbix içeri aktarılan](../../azure-monitor/learn/quick-collect-linux-computer.md). Çözüm ayrıca uyarılar herhangi aktarır [bağlı System Center Operations Manager Yönetim grupları](../../azure-monitor/platform/om-agents.md).
+Uyarı Yönetimi çözümü, Log Analytics Deponuzdaki tüm uyarıları çözümlemenize yardımcı olur.  Bu uyarılar, [Log Analytics tarafından oluşturulan](../../azure-monitor/platform/alerts-overview.md) veya [Nagios ya da Zabbix 'ten içeri aktarılan](../../azure-monitor/learn/quick-collect-linux-computer.md)kaynaklar dahil olmak üzere çeşitli kaynaklardan gelmiş olabilir. Çözüm Ayrıca, [bağlı System Center Operations Manager yönetim gruplarından](../../azure-monitor/platform/om-agents.md)gelen uyarıları içeri aktarır.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Çözüm herhangi bir kayıt türü ile Log Analytics deposunda çalışır **uyarı**, ne olursa olsun bu kayıtları toplamak için gerekli bir yapılandırmadır gerçekleştirmeniz gerekir.
+Çözüm, Log Analytics deposundaki kayıtlarla birlikte **çalışarak, bu**kayıtları toplamak için hangi yapılandırmanın gerekli olduğunu yapmanız gerekir.
 
-- Log Analytics uyarılarını için [uyarı kuralları oluşturma](../../azure-monitor/platform/alerts-overview.md) doğrudan depoda uyarı kayıtları oluşturmak için.
-- Nagios ve Zabbix uyarıları için [bu sunucuları yapılandırmak](../../azure-monitor/learn/quick-collect-linux-computer.md) uyarıları Log Analytics'e göndermek için.
-- System Center Operations Manager uyarıları için [Operations Manager yönetim grubunuzu Log Analytics çalışma alanınıza bağlanmak](../../azure-monitor/platform/om-agents.md).  System Center Operations Manager'da oluşturulan tüm uyarılar, Log Analytics'e aktarılır.  
+- Log Analytics uyarılar için, doğrudan depoda uyarı kayıtları oluşturmak üzere [Uyarı kuralları oluşturun](../../azure-monitor/platform/alerts-overview.md) .
+- Nagios ve Zabbix uyarıları için, [Bu sunucuları](../../azure-monitor/learn/quick-collect-linux-computer.md) Log Analytics Uyarıları gönderecek şekilde yapılandırın.
+- System Center Operations Manager uyarılar için [Operations Manager yönetim grubunuzu Log Analytics çalışma alanınıza bağlayın](../../azure-monitor/platform/om-agents.md).  System Center Operations Manager oluşturulan tüm uyarılar Log Analytics içine aktarılır.  
 
 ## <a name="configuration"></a>Yapılandırma
-Uyarı yönetimi çözümü açıklanan işlemi kullanarak Log Analytics çalışma alanınıza eklemek [çözüm ekleme](../../azure-monitor/insights/solutions.md). Başka bir yapılandırma işlemi gerekmez.
+Çözüm [ekleme](../../azure-monitor/insights/solutions.md)bölümünde açıklanan işlemi kullanarak Log Analytics çalışma alanınıza uyarı yönetimi çözümünü ekleyin. Başka bir yapılandırma işlemi gerekmez.
 
 ## <a name="management-packs"></a>Yönetim paketleri
-Ardından System Center Operations Manager yönetim grubunuzun Log Analytics çalışma alanınıza bağlıysa, bu çözümü eklediğinizde, aşağıdaki yönetim paketlerini System Center Operations Manager'da yüklenir.  Yapılandırma veya bakım gerekli yönetim paketleri yoktur.
+System Center Operations Manager yönetim grubunuz Log Analytics çalışma alanınıza bağlıysa, bu çözümü eklediğinizde aşağıdaki yönetim paketleri System Center Operations Manager yüklenir.  Gerekli yönetim paketlerinin yapılandırması veya bakımı yok.
 
-* Microsoft System Center Advisor uyarı Yönetimi (Microsoft.IntelligencePacks.AlertManagement)
+* Microsoft System Center Advisor Uyarı Yönetimi (Microsoft. ıntelligencepacks. AlertManagement)
 
 Çözüm yönetim paketlerini güncelleştirme hakkında daha fazla bilgi için bkz. [Operations Manager'ı Log Analytics’e Bağlama](../../azure-monitor/platform/om-agents.md).
 
@@ -54,74 +48,74 @@ Aşağıdaki tabloda bu çözüm tarafından desteklenen bağlı kaynaklar açı
 
 | Bağlı Kaynak | Destek | Açıklama |
 |:--- |:--- |:--- |
-| [Windows aracıları](agent-windows.md) | Hayır |Doğrudan Windows aracıları uyarılar oluşturmaz.  Log Analytics uyarılarını, olaylarından oluşturulabilir ve Windows aracıları toplanan performans verileri. |
-| [Linux aracıları](../../azure-monitor/learn/quick-collect-linux-computer.md) | Hayır |Doğrudan Linux aracıları uyarılar oluşturmaz.  Log Analytics uyarılarını olayları ve performans verilerinden Linux aracılarından toplanan oluşturulabilir.  Nagios ve Zabbix uyarıları Linux Aracısı gerektiren bu sunuculardan toplanır. |
-| [System Center Operations Manager yönetim grubu](../../azure-monitor/platform/om-agents.md) |Evet |Operations Manager aracıları üzerinde oluşturulan uyarıların yönetim grubu için teslim ve sonra Log Analytics'e iletilir.<br><br>Operations Manager aracılarının doğrudan Log analytics'e bağlantı gerekli değildir. Uyarı verileri yönetim grubundan Log Analytics deposuna iletilir. |
+| [Windows aracıları](agent-windows.md) | Hayır |Doğrudan Windows aracıları uyarı oluşturmaz.  Log Analytics uyarılar, Windows aracılarından toplanan olaylar ve performans verilerinden oluşturulabilir. |
+| [Linux aracıları](../../azure-monitor/learn/quick-collect-linux-computer.md) | Hayır |Doğrudan Linux aracıları uyarı oluşturmaz.  Log Analytics uyarılar, Linux aracılarından toplanan olaylar ve performans verilerinden oluşturulabilir.  Nagios ve Zabbix uyarıları, Linux Aracısı gerektiren sunuculardan toplanır. |
+| [System Center Operations Manager yönetim grubu](../../azure-monitor/platform/om-agents.md) |Yes |Operations Manager aracılarında oluşturulan uyarılar yönetim grubuna teslim edilir ve sonra Log Analytics iletilir.<br><br>Operations Manager aracılarından Log Analytics doğrudan bir bağlantı gerekli değildir. Uyarı verileri yönetim grubundan Log Analytics deposuna iletilir. |
 
 
 ### <a name="collection-frequency"></a>Toplama sıklığı
-- Depoda depolanan hemen sonra çözüme var olan uyarı kayıt.
-- Uyarı verileri Operations Manager yönetim grubundan üç dakikada Log Analytics'e gönderilir.  
+- Uyarı kayıtları, depoda depolandıklarında çözüm için kullanılabilir.
+- Uyarı verileri, her üç dakikada bir Log Analytics Operations Manager yönetim grubundan gönderilir.  
 
 ## <a name="using-the-solution"></a>Çözümü kullanma
-Uyarı yönetimi çözümü, Log Analytics çalışma alanınıza eklediğinizde **uyarı Yönetimi** kutucuk, panonuza eklenir.  Bu kutucuk, sayı ve grafik temsilini son 24 saat içinde oluşturulan etkin uyarıların sayısını görüntüler.  Bu zaman aralığını değiştiremezsiniz.
+Uyarı Yönetimi çözümünü Log Analytics çalışma alanınıza eklediğinizde **uyarı yönetimi** kutucuğu panonuza eklenir.  Bu kutucuk, son 24 saat içinde oluşturulan geçerli etkin uyarı sayısının sayısını ve grafik temsilini görüntüler.  Bu zaman aralığını değiştiremezsiniz.
 
 ![Uyarı Yönetimi kutucuğu](media/alert-management-solution/tile.png)
 
-Tıklayarak **uyarı Yönetimi** açmak için kutucuğa **uyarı Yönetimi** Pano.  Pano aşağıdaki tabloda gösterilen sütunları içerir.  Her bir sütunun Belirtilen kapsam ve zaman aralığı için söz konusu sütunun ölçütlerle eşleşen sayısına göre en çok kullanılan 10 uyarılar listeler.  Tıklayarak listenin tamamını sağlayan bir günlük araması çalıştırabilirsiniz **tümünü gör** alt sütun veya sütun başlığına tıklayarak.
+**Uyarı yönetimi** panosunu açmak için **uyarı yönetimi** kutucuğuna tıklayın.  Pano aşağıdaki tabloda gösterilen sütunları içerir.  Her sütunda, belirtilen kapsam ve zaman aralığı için sütunun ölçütlerine uyan ilk 10 uyarı, sayıma göre listelenir.  Listenin en altında bulunan **Tümünü görüntüle ' ye** tıklayarak veya sütun başlığına tıklayarak, tüm listeyi sağlayan bir günlük araması çalıştırabilirsiniz.
 
 | Sütun | Açıklama |
 |:--- |:--- |
-| Kritik Uyarılar |Tüm uyarılar ile uyarı adına göre gruplandırılmış kritik bir önem düzeyi.  Bu uyarı için tüm kayıtları döndüren bir günlük araması çalıştırmak için bir uyarı adına tıklayın. |
-| Uyarı Bildirimleri |Tüm uyarı uyarı uyarı adına göre gruplandırılmış bir önem derecesi.  Bu uyarı için tüm kayıtları döndüren bir günlük araması çalıştırmak için bir uyarı adına tıklayın. |
-| Etkin SCOM Uyarıları |Tüm uyarıları Operations Manager'dan dışında herhangi bir durumu ile toplanan *kapalı* uyarının kaynağına göre gruplandırılmış. |
-| Tüm etkin uyarıları |Tüm uyarılar ile uyarı adına göre gruplandırılmış tüm önem derecesi. Yalnızca Operations Manager uyarıları ile herhangi bir durumu dışında içeren *kapalı*. |
+| Kritik Uyarılar |Uyarı adına göre gruplandırılmış kritik önem derecesine sahip tüm uyarılar.  Bu uyarının tüm kayıtlarını döndüren bir günlük araması çalıştırmak için bir uyarı adına tıklayın. |
+| Uyarı uyarıları |Uyarı adına göre gruplandırılmış bir uyarı önem derecesine sahip tüm uyarılar.  Bu uyarının tüm kayıtlarını döndüren bir günlük araması çalıştırmak için bir uyarı adına tıklayın. |
+| Etkin System Center Operations Manager uyarıları |Uyarıyı oluşturan kaynağa *kapalı* olarak gruplandırılmış dışında bir durum ile Operations Manager toplanan tüm uyarılar. |
+| Tüm etkin uyarılar |Uyarı adına göre gruplandırılan tüm önem derecesine sahip tüm uyarılar. Yalnızca *kapalı*dışında bir durum Operations Manager uyarıları içerir. |
 
-Sağa kaydırdığınızda Pano gerçekleştirmek için tıklayabilirsiniz birkaç yaygın sorguları listeler bir [günlük araması](../../azure-monitor/log-query/log-query-overview.md) uyarı verileri için.
+Sağa kaydırırsanız panoda, uyarı verileri için [günlük araması](../../azure-monitor/log-query/log-query-overview.md) gerçekleştirmek üzere tıkladığınız birkaç ortak sorgu listelenir.
 
-![Uyarı Yönetim Panosu](media/alert-management-solution/dashboard.png)
+![Uyarı Yönetimi panosu](media/alert-management-solution/dashboard.png)
 
 
 ## <a name="log-analytics-records"></a>Log Analytics kayıtları
-Uyarı yönetimi çözümü türünde herhangi bir kayıt çözümler **uyarı**.  Log Analytics tarafından oluşturulan veya Nagios veya Zabbix toplanan uyarılar çözüm tarafından doğrudan toplanmadı.
+Uyarı Yönetimi çözümü, bir **Uyarı**türü ile tüm kayıtları analiz eder.  Nagios veya Zabbix öğesinden Log Analytics tarafından oluşturulan veya toplanan uyarılar doğrudan çözüm tarafından toplanmaz.
 
-Çözüm, uyarıları System Center Operations Manager'dan içe ve her bir türü ile ilgili bir kayıt oluşturur **uyarı** ve Analytics'teki **OpsManager**.  Bu kayıtlar aşağıdaki tabloda özelliklere sahiptir:  
+Çözüm, uyarıları System Center Operations Manager içeri aktarır ve her biri için bir **Uyarı** türü ve **Opsmanager**dir için karşılık gelen bir kayıt oluşturur.  Bu kayıtlar aşağıdaki tablodaki özelliklere sahiptir:  
 
-| Özellik | Description |
+| Özellik | Açıklama |
 |:--- |:--- |
-| Tür |*Uyarı* |
-| SourceSystem |*OpsManager* |
-| AlertContext |XML biçiminde oluşturulacak uyarıya neden veri öğesi ayrıntıları. |
-| AlertDescription |Uyarı ayrıntılı açıklaması. |
-| Alertıd |Uyarı GUİD'si. |
-| AlertName |Uyarının adı. |
-| AlertPriority |Uyarı öncelik düzeyi. |
-| AlertSeverity |Uyarı önem derecesi. |
-| AlertState |Uyarı çözümleme durumu son. |
-| LastModifiedBy |Uyarıyı son değiştiren kullanıcı adı. |
-| ManagementGroupName |Uyarının verildiği yeri yönetim grubunun adı. |
-| RepeatCount |Aynı aynı uyarının verildiği sayısı, çözümlenen bu yana nesne izlediniz. |
-| ResolvedBy |Uyarıyı çözümleyen kullanıcı adı. Uyarı henüz çözümlenmedi, boş. |
-| SourceDisplayName |Uyarıyı üreten izleme nesnesinin görünen adı. |
-| SourceFullName |Uyarıyı üreten izleme nesnesi tam adı. |
-| TicketId |System Center Operations Manager ortamı biletleri için uyarı atamak için bir işlem ile tümleşikse uyarı için bilet kimliği.  Boş yok biletin kimliği atanır. |
-| TimeGenerated |Tarihi ve uyarının oluşturulduğu saat. |
-| TimeLastModified |Tarihi ve uyarının son değiştirilme saati. |
-| TimeRaised |Tarihi ve uyarının verildiği saat. |
-| TimeResolved |Tarih ve saat, uyarı çözümlendi. Uyarı henüz çözümlenmedi, boş. |
+| `Type` |*Daki* |
+| `SourceSystem` |*OpsManager* |
+| `AlertContext` |Uyarının XML biçiminde oluşturulmasına neden olan veri öğesinin ayrıntıları. |
+| `AlertDescription` |Uyarının ayrıntılı açıklaması. |
+| `AlertId` |Uyarının GUID 'SI. |
+| `AlertName` |Uyarının adı. |
+| `AlertPriority` |Uyarının öncelik düzeyi. |
+| `AlertSeverity` |Uyarının önem düzeyi. |
+| `AlertState` |Uyarının en son çözümlenme durumu. |
+| `LastModifiedBy` |Uyarıyı son değiştiren kullanıcının adı. |
+| `ManagementGroupName` |Uyarının oluşturulduğu yönetim grubunun adı. |
+| `RepeatCount` |Çözümlenmesinden bu yana aynı izlenen nesne için aynı uyarının üretilme sayısı. |
+| `ResolvedBy` |Uyarıyı çözen kullanıcının adı. Uyarı henüz çözümlenmediyse boştur. |
+| `SourceDisplayName` |Uyarıyı oluşturan izleme nesnesinin görünen adı. |
+| `SourceFullName` |Uyarıyı oluşturan izleme nesnesinin tam adı. |
+| `TicketId` |System Center Operations Manager ortamı, uyarılar için bilet atamaya yönelik bir işlemle tümleşikse, uyarının bilet KIMLIĞI.  Bilet KIMLIĞI atanmamış boş değer yok. |
+| `TimeGenerated` |Uyarının oluşturulduğu tarih ve saat. |
+| `TimeLastModified` |Uyarının en son değiştirildiği tarih ve saat. |
+| `TimeRaised` |Uyarının oluşturulduğu tarih ve saat. |
+| `TimeResolved` |Uyarının çözümlendiği tarih ve saat. Uyarı henüz çözümlenmediyse boştur. |
 
 ## <a name="sample-log-searches"></a>Örnek günlük aramaları
-Aşağıdaki tabloda bu çözüm tarafından toplanan uyarı kayıtlarına ilişkin örnek günlük aramaları sağlar: 
+Aşağıdaki tabloda, bu çözüm tarafından toplanan uyarı kayıtları için örnek günlük aramaları sunulmaktadır: 
 
 | Sorgu | Açıklama |
 |:---|:---|
-| Uyarı &#124; burada Analytics'teki "OpsManager" ve AlertSeverity == "error" ve TimeRaised == > ago(24h) |Son 24 saatte oluşturulan kritik uyarılar |
-| Uyarı &#124; burada AlertSeverity "uyarı" ve TimeRaised == > ago(24h) |Son 24 saatte oluşturulan uyarı bildirimleri |
-| Uyarı &#124; burada Analytics'teki "OpsManager" ve AlertState ==! "Kapalı" ve TimeRaised = > ago(24h) &#124; sayısı özetlemek = count() SourceDisplayName tarafından |Son 24 saatte oluşturulan etkin uyarılara sahip kaynaklar |
-| Uyarı &#124; burada Analytics'teki "OpsManager" ve AlertSeverity == "error" ve TimeRaised == > ago(24h) ve AlertState! = "Kapalı" |Son 24 hala etkin olan saatte oluşturulan kritik uyarılar |
-| Uyarı &#124; burada Analytics'teki "OpsManager" ve TimeRaised == > ago(24h) ve AlertState "Kapalı" == |Son 24 artık kapatılan saatte oluşturulan uyarılar |
-| Uyarı &#124; burada Analytics'teki "OpsManager" ve TimeRaised == > ago(1d) &#124; sayısı özetlemek = count() AlertSeverity tarafından |Önem derecesine göre gruplandırılmış halde, son 1 günde oluşturulan uyarılar |
-| Uyarı &#124; burada Analytics'teki "OpsManager" ve TimeRaised == > ago(1d) &#124; RepeatCount desc göre sırala |Yineleme sayısına göre sıralanmış halde, son 1 günde oluşturulan uyarılar |
+| Uyarı &#124; dir = = "OpsManager" ve Alertönem derecesi = = "Error" ve TimeRaised > önce (24h) |Son 24 saatte oluşturulan kritik uyarılar |
+| Alertönem derecesi = = "Warning" ve TimeRaised > önce (24 h) olduğunda uyarır &#124; |Son 24 saat boyunca oluşan uyarı uyarıları |
+| Dir &#124; = = "OpsManager" ve AlertState! = "Closed" ve TimeRaised > önce (24h) &#124; özetleme Count = Count () tarafından sourcedisplayname 'e göre uyarı |Son 24 saatte oluşturulan etkin uyarılara sahip kaynaklar |
+| Dir &#124; = = "OpsManager" ve Alertönem derecesi = = "Error" ve timeraised > önce (24h) ve AlertState! = "Closed" olduğunda uyarır |Son 24 saat içinde hala etkin olan kritik uyarılar |
+| Dir &#124; = = "OpsManager" ve TimeRaised > önce (24h) ve AlertState = = "Closed" olduğunda uyarır |Son 24 saatte oluşturulan ve şu anda kapatılan uyarılar |
+| Dir &#124; = = "OpsManager" ve TimeRaised > önce (1D) &#124; özetleme Count = Count () ile alertönem derecesine sahip uyarı |Son 1 gün boyunca önem derecesine göre gruplandırılmış uyarılar |
+| Dir &#124; = = "OpsManager" ve TimeRaised > önce (1D) &#124; repeatCount DESC olarak sıralama uyarısı |Son 1 gün içinde oluşturulan ve yineleme sayısı değeri tarafından sıralanan uyarılar |
 
 
 

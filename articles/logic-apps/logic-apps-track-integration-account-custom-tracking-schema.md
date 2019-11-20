@@ -58,7 +58,7 @@ Bu makalede, mantıksal uygulamanızı dışında Katmanlar kullanabileceğiniz 
 
 | Özellik | Gerekli | Tür | Açıklama |
 | --- | --- | --- | --- |
-| sourceType | Evet |   | Çalıştırma kaynağı türü. İzin verilen değerler **Microsoft.Logic/workflows** ve **özel**. |
+| sourceType | Evet |   | Çalıştırma kaynağı türü. İzin verilen değerler **Microsoft.Logic/workflows** ve **custom**. |
 | source | Evet |   | Kaynak türü ise **Microsoft.Logic/workflows**, kaynak bilgileri bu şemayı izlemesi gerekir. Kaynak türü ise **özel**, bir JToken şemadır. |
 | systemId | Evet | String | Mantıksal uygulama sistem kimliği |
 | runId | Evet | String | Mantıksal uygulama çalıştırması kimliği. |

@@ -1,7 +1,7 @@
 ---
-title: Bing haber arama API'si için sorguları gönderme
-titlesuffix: Azure Cognitive Services
-description: Bing haber arama API'sine arama istekleri gönderme hakkında bilgi edinin.
+title: Bing Haber Arama API'si sorguları gönderme
+titleSuffix: Azure Cognitive Services
+description: Bing Haber Arama API'si, Web 'de ilgili haberler öğeleri için arama yapmanızı sağlar. API 'ye arama sorguları gönderme hakkında daha fazla bilgi edinmek için bu makaleyi kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,20 +10,20 @@ ms.subservice: bing-news-search
 ms.topic: quickstart
 ms.date: 06/27/2019
 ms.author: aahi
-ms.openlocfilehash: ce3cada557c4e32fe8b0ba3a85e574fe049889f5
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: 6be3d95c06862529881be2cbf2e4d74b44908e67
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67542730"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111527"
 ---
-# <a name="sending-queries-to-the-bing-news-search-api"></a>Bing haber arama API'si için sorguları gönderme
+# <a name="sending-queries-to-the-bing-news-search-api"></a>Bing Haber Arama API'si sorguları gönderme
 
-Bing haber arama API'si ilgili Haberler öğeleri için web aramanızı sağlar. API için arama sorguları gönderme hakkında daha fazla bilgi için bu makaleyi kullanın.
+Bing Haber Arama API'si, Web 'de ilgili haberler öğeleri için arama yapmanızı sağlar. API 'ye arama sorguları gönderme hakkında daha fazla bilgi edinmek için bu makaleyi kullanın.
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../../includes/cognitive-services-bing-news-search-signup-requirements.md)]
 
-## <a name="sending-a-request"></a>Bir isteği gönderiliyor
+## <a name="sending-a-request"></a>İstek gönderiliyor
 
 Yalnızca haber arama sonuçlarını almak için aşağıdaki uç noktaya bir GET isteği gönderirsiniz:
 
@@ -60,7 +60,7 @@ X-MSEdge-ClientID: <blobFromPriorResponseGoesHere>
 Host: api.cognitive.microsoft.com
 ```
 
-## <a name="bing-news-search-api-response"></a>Bing haber arama API'si yanıtı
+## <a name="bing-news-search-api-response"></a>Bing Haber Arama API'si yanıtı
 
 Aşağıda, bir önceki isteğin yanıtı gösterilmektedir. Örnek ayrıca yanıt üst bilgilerini de göstermektedir.
 
@@ -284,7 +284,7 @@ BingAPIs-Market: en-US
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Bing haber arama nedir? ](../search-the-web.md). 
-* [Günümüzün üst haberleri alın](search-for-news.md#get-todays-top-news)
-* [Kategoriye göre haberleri alın](search-for-news.md#get-news-by-category)
-* [Popüler haberleri alın](search-for-news.md#get-trending-news)
+* [Bing haber arama nedir?](../search-the-web.md). 
+* [Bugünün en iyi haberlerini alın](search-for-news.md#get-todays-top-news)
+* [Kategoriye göre haberleri al](search-for-news.md#get-news-by-category)
+* [Popüler haberleri al](search-for-news.md#get-trending-news)

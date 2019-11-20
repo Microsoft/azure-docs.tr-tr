@@ -1,5 +1,5 @@
 ---
-title: Bir Azure çözümü Öğreticisi - Azure IOT cihazlarınızdan izleyin | Microsoft Docs
+title: Uzaktan Izleme çözümünde cihazları izleme-Azure | Microsoft Docs
 description: Bu öğreticide Uzaktan İzleme çözümü hızlandırıcısını kullanarak IoT cihazlarınızı izlemeyi öğreneceksiniz.
 author: dominicbetts
 manager: timlt
@@ -9,14 +9,14 @@ services: iot-accelerators
 ms.date: 03/08/2019
 ms.topic: tutorial
 ms.custom: mvc
-ms.openlocfilehash: d6d850fa8f896809318be77529e10abddaf6ea9a
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 400a71b11fde210b889d938041e88c5ebe73c1dc
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61452432"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890863"
 ---
-# <a name="tutorial-monitor-your-iot-devices"></a>Öğretici: IOT cihazlarınızı izleme
+# <a name="tutorial-monitor-your-iot-devices"></a>Öğretici: IoT cihazlarınızı izleme
 
 Bu öğreticide bağlı IoT cihazlarınızı izlemek için Uzaktan İzleme çözümü hızlandırıcısını kullanacaksınız. Çözüm panosunu kullanarak telemetri verilerini, cihaz bilgilerini, uyarıları ve KPI'leri görüntüleyeceksiniz.
 

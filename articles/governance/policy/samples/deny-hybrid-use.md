@@ -1,20 +1,16 @@
 ---
-title: Örnek - hibrit kullanım teklifi Reddet
-description: Bu örnek ilke tanımını kullanımı Azure karma kullanma Avantajı (AHUB), yasaklar.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-karma kullanım teklifi reddetme
+description: Bu örnek ilke tanımı, Azure hibrit kullanım avantajı 'nın (AHUB) kullanımını yasaklar.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 4523fb5d3ac1e91606650a9c359e46e3b697d1b5
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 441f3bc75dc066684f201deabe34b2dfd962e0ca
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545308"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74070919"
 ---
-# <a name="sample---deny-hybrid-use-benefit"></a>Örnek - hibrit kullanım teklifi Reddet
+# <a name="sample---deny-hybrid-use-benefit"></a>Örnek-karma kullanım teklifi reddetme
 
 Azure Hibrit Kullanım Teklifi (AHUB) kullanımını engeller. Şirket içi lisans kullanımına izin vermek istemediğiniz zaman kullanın.
 
@@ -28,7 +24,7 @@ Azure Hibrit Kullanım Teklifi (AHUB) kullanımını engeller. Şirket içi lisa
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Fdeny-hybrid-use-benefit%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Fdeny-hybrid-use-benefit%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

@@ -1,6 +1,6 @@
 ---
-title: Azure CLI betik örneği - Yönetilen kaynak grubu alma ve VM’leri yeniden boyutlandırma | Microsoft Docs
-description: Azure CLI betik örneği - Yönetilen kaynak grubu alma ve VM’leri yeniden boyutlandırma
+title: Yönetilen kaynak grubunu al & VM 'Leri yeniden boyutlandırma-Azure CLı
+description: Azure yönetilen uygulamasında yönetilen bir kaynak grubu alan Azure CLı örnek betiği sağlar. Betik, VM 'Leri yeniden boyutlandırır.
 services: managed-applications
 documentationcenter: na
 author: tfitzmac
@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/25/2017
 ms.author: tomfitz
-ms.openlocfilehash: bbf03a0d53769c93a8aab304d3128ae0cc875a8f
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: ccf853f33eea054b450563747646f3d9ec560aa3
+ms.sourcegitcommit: f29fec8ec945921cc3a89a6e7086127cc1bc1759
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61365903"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72528911"
 ---
 # <a name="get-resources-in-a-managed-resource-group-and-resize-vms-with-azure-cli"></a>Azure CLI ile bir yönetilen kaynak grubundaki kaynakları alma ve VM’leri yeniden boyutlandırma
 

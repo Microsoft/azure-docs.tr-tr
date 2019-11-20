@@ -1,19 +1,18 @@
 ---
-title: 'Bağlantı hattı eşlemesi - sıfırlama ExpressRoute:  Azure | Microsoft Docs'
+title: 'Azure ExpressRoute: devre eşlemesini sıfırlama'
 description: Nasıl devre dışı bırakın ve ExpressRoute devre eşlemeleri etkinleştirin.
 services: expressroute
 author: charwen
 ms.service: expressroute
 ms.topic: conceptual
-ms.date: 08/15/2018
+ms.date: 10/25/2019
 ms.author: charwen
-ms.custom: seodec18
-ms.openlocfilehash: 8541362a16c7d12a0e3a4cf009ed9cd5faf9f1cd
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 2810dfc4cb41dcf11eb59ce3c87e6f7d6b2d5f65
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60366309"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083493"
 ---
 # <a name="reset-expressroute-circuit-peerings"></a>ExpressRoute devre eşlemeleri Sıfırla
 
@@ -21,11 +20,11 @@ Bu makalede devre dışı bırakma ve PowerShell kullanarak ExpressRoute bağlan
 
 Burada, ExpressRoute eşlemeleri sıfırlama yararlı birkaç senaryo vardır.
 * Olağanüstü durum kurtarma tasarımı ve uygulaması test edin. Örneğin, iki ExpressRoute devreniz vardır. Bir devrenin eşlikleri devre dışı bırakabilir ve ağ trafiğinizin diğer devreye yük devretmek için zorla.
-* Çift yönlü iletme algılama (BFD) Azure özel eşleme ExpressRoute bağlantı hattı, şirket etkinleştirin. ExpressRoute devreniz 1 Ağustos 2018'den sonra oluşturduysanız BFD varsayılan olarak etkindir. Bağlantı hattınız önce oluşturulduysa BFD etkin değildi. Eşlemeyi devre dışı bırakma ve bu bırakılmış BFD etkinleştirebilirsiniz. BFD Azure özel eşleme yalnızca desteklendiğini unutulmamalıdır.
+* Azure özel eşleme veya ExpressRoute devrenizin Microsoft eşlemesi üzerinde çift yönlü Iletme algılamasını (BFD) etkinleştirin. ExpressRoute bağlantı hattı 1 2018 Ağustos 'Tan sonra, ExpressRoute bağlantı hattı ' den sonra 1 2019 oluşturulduysa, BFD varsayılan olarak Azure özel eşleme 'de etkinleştirilir. Bağlantı hattınız önce oluşturulduysa BFD etkin değildi. Eşlemeyi devre dışı bırakma ve bu bırakılmış BFD etkinleştirebilirsiniz. 
 
 ### <a name="working-with-azure-powershell"></a>Azure PowerShell ile çalışma
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
 [!INCLUDE [expressroute-cloudshell](../../includes/expressroute-cloudshell-powershell-about.md)]
 

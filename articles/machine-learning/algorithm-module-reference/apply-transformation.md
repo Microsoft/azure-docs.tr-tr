@@ -1,50 +1,49 @@
 ---
-title: 'Dönüştürme geçerlidir: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Girdi veri kümesi üzerinde önceden hesaplanan bir dönüştürme göre değiştirmek için Azure Machine Learning hizmetinde uygulama dönüştürme modülü kullanmayı öğrenin.
+title: 'Dönüştürme uygula: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Önceden hesaplanan bir dönüşüme göre giriş veri kümesini değiştirmek için Azure Machine Learning dönüştürme modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 810f375642af49814049589cb83ad17fea578b13
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 19385870d184654d902cd40b45d4be3646c87b46
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65028718"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73493898"
 ---
-# <a name="apply-transformation-module"></a>Dönüştürme modülü Uygula
+# <a name="apply-transformation-module"></a>Dönüştürme modülünü Uygula
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Girdi veri kümesi üzerinde önceden hesaplanan bir dönüştürme göre değiştirmek için bu modülü kullanın.  
+Bir giriş veri kümesini önceden hesaplanan bir dönüşüme göre değiştirmek için bu modülü kullanın.  
   
-Örneğin, z puanları kullanarak eğitim verilerinizi normalleştirmek için kullanılan **Normalleştir veri** modülü Hesaplandı z-puanı değeri eğitim Puanlama aşamasında de için kullanmak istediğiniz. Azure Machine Learning'de normalleştirme yöntemi bir dönüştürme ve ardından kullanarak kaydedebilirsiniz **uygulamak dönüştürme** Puanlama önce giriş verilerini z puanı uygulamak için.
+Örneğin, **normalize verileri** modülünü kullanarak eğitim verilerinizi normalleştirmek için z puanları kullandıysanız, Puanlama aşamasında eğitim için hesaplanmış z puanı değerini de kullanmak istersiniz. Azure Machine Learning ' de, normalleştirme yöntemini bir dönüşüm olarak kaydedebilir ve sonra, Puanlama yapmadan önce giriş verilerine z puanı uygulamak için **dönüştürme uygula** ' yı kullanabilirsiniz.
   
-Azure Machine Learning oluşturmak ve ardından özel dönüştürmeler birçok farklı türde uygulamak için destek sağlar. Örneğin, kaydedin ve dönüştürmeler için daha sonra yeniden isteyebilirsiniz:  
+Azure Machine Learning birçok farklı özel dönüştürme türü oluşturma ve uygulama desteği sağlar. Örneğin, dönüştürmeleri kaydetmek ve sonra yeniden kullanmak isteyebilirsiniz:  
   
-- Kaldırın veya değiştirin kullanarak eksik değerleri **eksik verileri temizleme**
-- Kullanarak verileri Normalleştir **veri normalleştirin**
+- Eksik değerleri Temizleme, eksik **verileri silme** veya değiştirme
+- Verileri **Normalleştir kullanarak verileri** normalleştirin
   
 
-## <a name="how-to-use-apply-transformation"></a>Geçerli dönüştürme kullanma  
+## <a name="how-to-use-apply-transformation"></a>Dönüştürme uygula kullanımı  
   
-1. Ekleme **uygulamak dönüştürme** denemenizi modülü. Bu modül altında bulabilirsiniz **Machine Learning**, **puanı** kategorisi. 
+1. İşlem hattınızda **dönüştürme modülünü Uygula** ' yı ekleyin. Bu modülü, **puan** kategorisinde **Machine Learning**altında bulabilirsiniz. 
   
-2. Girdi olarak kullanmak için mevcut bir dönüştürme bulun.  Önceden kaydedilen dönüşümleri bulunabilir **dönüştüren** sol gezinti bölmesinde grubu.  
+2. Giriş olarak kullanmak için mevcut bir dönüştürmeyi bulun.  Daha önce kaydedilen dönüşümler sol gezinti bölmesindeki **dönüşümler** grubunda bulunabilir.  
   
    
   
-3. Dönüştürmek istediğiniz veri kümesine bağlanın. Veri kümesi, tam olarak aynı şemaya (sütunları, sütun adları, veri türleri sayısı) dönüştürme ilk tasarlanmış veri kümesi olması gerekir.  
+3. Dönüştürmek istediğiniz veri kümesini bağlayın. Veri kümesi, dönüştürmenin ilk tasarlandığı veri kümesiyle tam olarak aynı şemaya (sütun, sütun adı, veri türleri) sahip olmalıdır.  
   
-4. Başka bir parametre dönüştürme tanımlarken, tüm özelleştirme bitti beri ayarlamanız gerekir.  
+4. Dönüştürme tanımlanırken tüm özelleştirmeler yapıldığından başka parametre ayarlanması gerekmez.  
   
-5. Yeni veri kümesine bir dönüştürme uygulamak için denemeyi çalıştırın.  
+5. Yeni veri kümesine bir dönüşüm uygulamak için işlem hattını çalıştırın.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

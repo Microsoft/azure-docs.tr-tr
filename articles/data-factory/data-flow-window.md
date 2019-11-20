@@ -1,51 +1,51 @@
 ---
-title: Azure veri fabrikası veri akışı penceresi dönüştürme eşlemesi
-description: Azure veri fabrikası veri akışı penceresi dönüştürme eşlemesi
+title: Azure Data Factory eşleme veri akışı pencere dönüştürmesi
+description: Azure Data Factory eşleme veri akışı pencere dönüştürmesi
 author: kromerm
 ms.author: makromer
 ms.reviewer: douglasl
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 01/30/2019
-ms.openlocfilehash: 6f3f06ff54fc76416ba63f4f09835897d546f8dc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 222f97afd4346b9e4980e41303aeb683f431cd68
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61349963"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72387086"
 ---
-# <a name="azure-data-factory-window-transformation"></a>Azure veri fabrikası penceresi dönüştürme
+# <a name="azure-data-factory-window-transformation"></a>Azure Data Factory pencere dönüştürmesi
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
 
-Burada, veri akışlarını pencere tabanlı toplamalar sütunların tanımlayacaksınız penceresi dönüşümdür. İfade Oluşturucu'da, farklı türde veri veya zaman windows (SQL OVER yan) temelinde toplamalar tanımlayabilirsiniz sağlama, GECİKME, NTILE, CUMEDIST, sıralama, vb. gibi.). Çıkışınızda bu toplamalar içeren yeni bir alan oluşturuldu. Ayrıca isteğe bağlı gruplandırma ölçütü alanları ekleyebilirsiniz.
 
-![Pencere seçenekleri](media/data-flow/windows1.png "windows 1")
+Pencere dönüştürmesi, veri akışlarınızın pencere tabanlı toplamalarını tanımlayacaksınız. Ifade Oluşturucu 'da, müşteri adayı, öteleme, NTILE, CUMEDIST, derece, vb. gibi veri veya zaman pencerelerini (SQL OVER yan tümcesi) temel alan farklı toplamalar türlerini tanımlayabilirsiniz. Çıktındaki bu toplamaları içeren yeni bir alan oluşturulacaktır. İsteğe bağlı group by alanlarını da dahil edebilirsiniz.
 
-## <a name="over"></a>Üzerinden
-Pencere dönüşümünüzü sütun verileri bölümleme ayarlayın. SQL eşdeğerdir ```Partition By``` Over yan tümcesinde SQL. Bir hesaplama veya bir bölümleme için kullanılacak bir ifade oluşturmak istiyorsanız, sütun adının üzerine gelerek yapın ve "hesaplanan sütun" seçin.
+![Pencere seçenekleri](media/data-flow/windows1.png "Windows 1")
 
-![Pencere seçenekleri](media/data-flow/windows4.png "windows 4")
+## <a name="over"></a>Avantajları
+Pencere dönüştürmelerinizin sütun verilerinin bölümlenmesini ayarlayın. SQL eşdeğeri SQL içindeki Over yan tümcesindeki ```Partition By``` ' dır. Bölümleme için kullanmak üzere bir hesaplama oluşturmak veya bir ifade oluşturmak isterseniz, bunu sütun adının üzerine gelerek ve "hesaplanan sütun" seçeneğini belirleyerek yapabilirsiniz.
+
+![Pencere seçenekleri](media/data-flow/windows4.png "Windows 4")
 
 ## <a name="sort"></a>Sırala
-Over yan tümcesi başka bir parçası ayarlama ```Order By```. Bu sıralama veri sıralama ayarlar. Calculate değeri bir ifade sıralamak için bu sütun alanı oluşturabilirsiniz.
+Over yan tümcesinin başka bir bölümü ```Order By``` olarak ayarlanıyor. Bu, veri sıralama sıralamasını ayarlar. Ayrıca, bu sütun alanında sıralama için bir hesaplama değeri için bir ifade oluşturabilirsiniz.
 
-![Pencere seçenekleri](media/data-flow/windows5.png "windows 5")
+![Pencere seçenekleri](media/data-flow/windows5.png "Windows 5")
 
-## <a name="range-by"></a>Tarafından aralığı
-Ardından, pencere çerçevesi, Unbounded veya sınırlanmış olarak ayarlayın. Bir sınırsız pencere çerçevesi ayarlamak için kaydırıcıyı Unbounded için her iki End'i ayarlayın. Ardından, Unbounded ve Current Row arasında bir ayarı seçerseniz, uzaklığı başlangıç ayarlayın ve değerleri son gerekir. Her iki değer, pozitif tam sayılar olacaktır. Verilerinizden göreli sayılar veya değerini kullanabilirsiniz.
+## <a name="range-by"></a>Aralık ölçütü
+Sonra pencere çerçevesini sınırsız veya sınırlı olarak ayarlayın. Sınırsız bir pencere çerçevesi ayarlamak için, her iki uçta da kaydırıcıyı sınırsız olarak ayarlayın. Sınırsız ve geçerli satır arasında bir ayar seçerseniz, başlangıç ve bitiş değerlerini uzaklığa göre ayarlamanız gerekir. Her iki değer de pozitif tamsayılar olacaktır. Verilerinizin göreli numaralarını veya değerlerini kullanabilirsiniz.
 
-Pencere kaydırıcıyı ayarlamak için iki değere sahiptir: geçerli satır ve geçerli satırda sonraki değerler önce değerleri. Başlangıç ve bitiş uzaklığı kaydırıcı üzerinde iki seçiciler eşleşir.
+Pencere kaydırıcısının ayarlanacak iki değeri vardır: geçerli satırdan önceki değerler ve geçerli satırdan sonraki değerler. Başlangıç ve bitiş boşluğu, kaydırıcıda iki seçicinin eşleşir.
 
-![Pencere seçenekleri](media/data-flow/windows6.png "windows 6")
+![Pencere seçenekleri](media/data-flow/windows6.png "Windows 6")
 
-## <a name="window-columns"></a>Penceresi sütunları
-Son olarak, verilerle windows boyut, sayısı, MIN, MAX kullanmak istediğiniz toplamalar tanımlamak için ifade oluşturucu, YOĞUN derece, müşteri adayı, GECİKME, vb. kullanın.
+## <a name="window-columns"></a>Pencere sütunları
+Son olarak, SıRALAMA, sayı, MIN, MAX, yoğun sıra, müşteri adayı, GECIKME, vb. gibi veri pencereleri ile kullanmak istediğiniz toplamaları tanımlamak için Ifade oluşturucusunu kullanın.
 
-![Pencere seçenekleri](media/data-flow/windows7.png "windows 7")
+![Pencere seçenekleri](media/data-flow/windows7.png "Windows 7")
 
-Toplama ve ADF veri akışı ifade dili ifade Oluşturucu ile kullanmak için analitik işlevler tam listesini burada listelenir: https://aka.ms/dataflowexpressions.
+Ön planda, ADF veri akışı Ifade dilinde kullanabileceğiniz toplama ve analitik işlevlerin tam listesi aşağıda listelenmiştir: https://aka.ms/dataflowexpressions.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Basit grup olarak bir toplama için arıyorsanız kullanın [toplama dönüşümü](data-flow-aggregate.md)
+Basit bir grup toplamayı arıyorsanız, [toplu dönüştürmeyi](data-flow-aggregate.md) kullanın

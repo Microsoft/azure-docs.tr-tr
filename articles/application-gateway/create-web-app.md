@@ -1,22 +1,23 @@
 ---
-title: Azure Application Gateway - PowerShell ile Web uygulamaları koruma
+title: PowerShell kullanarak App Service yapılandırma
+titleSuffix: Azure Application Gateway
 description: Bu makalede, mevcut veya yeni bir application gateway üzerinde web uygulamalarını arka uç ana bilgisayarları olarak yapılandırmaya ilişkin yönergeler verilmektedir.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: article
-ms.date: 10/16/2018
+ms.date: 11/15/2019
 ms.author: victorh
-ms.openlocfilehash: dcf21fe111ab742074ab4fe580a021338e1f7c43
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4198c83a167ad8f2d52f4393c39625948e18e6e3
+ms.sourcegitcommit: a170b69b592e6e7e5cc816dabc0246f97897cb0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62122226"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74089506"
 ---
-# <a name="configure-app-service-with-application-gateway"></a>Application Gateway ile App Service'ı yapılandırma
+# <a name="configure-app-service-with-application-gateway-using-powershell"></a>PowerShell kullanarak Application Gateway App Service yapılandırma
 
-Uygulama ağ geçidi, bir App Service uygulaması veya diğer çok kiracılı hizmeti arka uç havuzu üyesi olarak olmasını sağlar. Bu makalede, bir App Service uygulaması ile uygulama ağ geçidi yapılandırmayı öğrenin. İlk örnekte, arka uç havuzu üyesi olarak web uygulamasını kullanmak için mevcut bir application gateway’i nasıl yapılandıracağınız gösterilmektedir. İkinci örnekte, arka uç havuzu üyesi olarak web uygulaması ile yeni bir application gateway’i nasıl oluşturacağınız gösterilmektedir.
+Application Gateway, arka uç havuzu üyesi olarak bir App Service uygulamasına veya diğer çok kiracılı bir hizmete sahip etmenize olanak tanır. Bu makalede, Application Gateway bir App Service uygulaması yapılandırmayı öğreneceksiniz. İlk örnekte, arka uç havuzu üyesi olarak web uygulamasını kullanmak için mevcut bir application gateway’i nasıl yapılandıracağınız gösterilmektedir. İkinci örnekte, arka uç havuzu üyesi olarak web uygulaması ile yeni bir application gateway’i nasıl oluşturacağınız gösterilmektedir.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
@@ -157,12 +158,12 @@ DnsSettings              : {
                             }
 ```
 
-## <a name="restrict-access"></a>Erişimi kısıtlama
+## <a name="restrict-access"></a>Erişimi kısıtla
 
-Bu örneklerde dağıtılan web uygulamaları doğrudan Internet'ten erişilebilen genel IP adresleri kullanın. Bu, yeni bir özellik hakkında öğrenirken sorun giderme ve yeni şeyler çalışırken yardımcı olur. Ancak, bir özellik üretim ortamında dağıtmak istiyorsanız, daha fazla kısıtlama eklemek isteyeceksiniz.
+Bu örneklerde dağıtılan Web uygulamaları, doğrudan Internet 'ten erişilebilen genel IP adreslerini kullanır. Bu, yeni bir özellik öğrenirken ve yeni şeyler gerçekleştirmeye çalışırken sorun gidermeye yardımcı olur. Ancak bir özelliği üretime dağıtmayı planlıyorsanız, daha fazla kısıtlama eklemek isteyeceksiniz.
 
-Web uygulamalarınız için erişimi kısıtlayabilir tek bir yolu [Azure App Service statik IP kısıtlamaları](../app-service/app-service-ip-restrictions.md). Örneğin, yalnızca uygulama ağ geçidinden trafiği alır, böylece web uygulaması kısıtlayabilirsiniz. Uygulama ağ geçidi VIP erişimi olan tek adres olarak listelemek için app service IP kısıtlama özelliğini kullanın.
+Web uygulamalarınıza erişimi kısıtlayabilmeniz için bir yol [STATIK IP kısıtlamaları Azure App Service](../app-service/app-service-ip-restrictions.md)kullanmaktır. Örneğin, Web uygulamasını yalnızca uygulama ağ geçidinden trafik alacak şekilde kısıtlayabilirsiniz. Uygulama ağ geçidi VIP 'sini erişimi olan tek adres olarak listelemek için App Service IP kısıtlaması özelliğini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yeniden yönlendirmeyi yapılandırma işlemleri gerçekleştirmeyi öğreneceksiniz: [PowerShell ile Application Gateway için yeniden yönlendirmeyi yapılandırma](redirect-overview.md).
+Yeniden yönlendirmeyi yapılandırma hakkında bilgi almak için bkz. [PowerShell ile Application Gateway için yeniden yönlendirmeyi yapılandırma](redirect-overview.md).

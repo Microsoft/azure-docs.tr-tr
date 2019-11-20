@@ -1,9 +1,9 @@
 ---
-title: Azure Service Fabric CLI - sfctl chaos schedule | Microsoft Docs
-description: Service Fabric CLI'sını sfctl chaos zamanlama komutlarını açıklamaktadır.
+title: Azure Service Fabric CLı-sfctl Chaos zamanlaması | Microsoft Docs
+description: CLı sfctl Chaos zamanlama komutlarını Service Fabric açıklar.
 services: service-fabric
 documentationcenter: na
-author: Christina-Kang
+author: jeffj6123
 manager: chackdan
 editor: ''
 ms.assetid: ''
@@ -12,75 +12,75 @@ ms.devlang: cli
 ms.topic: reference
 ms.tgt_pltfrm: na
 ms.workload: multiple
-ms.date: 12/06/2018
-ms.author: bikang
-ms.openlocfilehash: dc3dd06b5feac1f66598cd65fa79f447a1bbd9be
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 9/17/2019
+ms.author: jejarry
+ms.openlocfilehash: 443a8186ac6e57360105e59e30f84db997cd2251
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60837513"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72897549"
 ---
 # <a name="sfctl-chaos-schedule"></a>sfctl chaos schedule
-Alın ve kaos zamanlamasını ayarlayın.
+Chaos zamanlamasını alın ve ayarlayın.
 
 ## <a name="commands"></a>Komutlar
 
 |Komut|Açıklama|
 | --- | --- |
-| Al | Ne zaman ve nasıl çalıştırılacağını Chaos tanımlama Chaos zamanlama alın. |
-| set | Kaos tarafından kullanılan zamanlamasını ayarlayın. |
+| Al | Chaos 'ın ne zaman ve nasıl çalıştırılacağını tanımlayan Chaos zamanlamasını alın. |
+| set | Chaos tarafından kullanılan zamanlamayı ayarlayın. |
 
-## <a name="sfctl-chaos-schedule-get"></a>sfctl chaos zamanlamasını Al
-Ne zaman ve nasıl çalıştırılacağını Chaos tanımlama Chaos zamanlama alın.
+## <a name="sfctl-chaos-schedule-get"></a>sfctl Chaos zamanlaması al
+Chaos 'ın ne zaman ve nasıl çalıştırılacağını tanımlayan Chaos zamanlamasını alın.
 
-Kaos zamanlama kullanımda ve ne zaman ve nasıl Chaos çalıştırılacağını tanımlayan Chaos zamanlama sürümünü alır.
-
-### <a name="arguments"></a>Bağımsız Değişkenler
-
-|Bağımsız Değişken|Açıklama|
-| --- | --- |
-| --zaman aşımı -t | Sunucu zaman aşımı saniye.  Varsayılan\: 60. |
-
-### <a name="global-arguments"></a>Genel bağımsız değişkenleri
-
-|Bağımsız Değişken|Açıklama|
-| --- | --- |
-| --hata ayıklama | Tüm hata ayıklama günlüklerini göster için günlüğün ayrıntı düzeyini artırır. |
-| ---h Yardım | Bu yardım iletisini ve çıkış gösterir. |
-| --Çıktı -o | Çıkış biçimi.  İzin verilen değerler\: json, jsonc, tablo, tsv.  Varsayılan\: json. |
-| --Sorgu | JMESPath sorgu dizesi. HTTP bkz\://jmespath.org/ daha fazla bilgi ve örnekler. |
-| --verbose | Günlüğün ayrıntı düzeyini artırır. Kullanımı--tam hata ayıklama günlükleri için hata ayıklama. |
-
-## <a name="sfctl-chaos-schedule-set"></a>sfctl chaos zamanlaması Ayarla
-Kaos tarafından kullanılan zamanlamasını ayarlayın.
-
-Chaos çalıştırmaları Chaos bir zamanlamaya göre otomatik olarak zamanlar. Sağlanan giriş zamanlama sürümde sunucuda Chaos zamanlamasını eşleşmelidir. Sunucu sürümünde sağlanan sürüm eşleşmiyorsa, Chaos zamanlama güncelleştirilmez. Sunucu sürümünde sağlanan sürüm eşleşiyorsa, Chaos zamanlama güncelleştirilir ve Chaos zamanlamaya göre sunucu sürümü oluşturan bir ve dön 0 sarar 2.147.483.647 sonra artırılır. Bu çağrı yapıldığında Chaos çalışıyorsa, çağrı başarısız olur.
+Kullanımdaki Chaos zamanlamasının sürümünü ve Chaos 'ın ne zaman ve nasıl çalıştırılacağını tanımlayan Chaos zamanlamasını alır.
 
 ### <a name="arguments"></a>Bağımsız Değişkenler
 
 |Bağımsız Değişken|Açıklama|
 | --- | --- |
-| --chaos parametreleri sözlüğü | JSON dizesi adlarının bir eşleme işleri tarafından kullanılacak ChaosParameters temsil eden bir liste kodlanmış. |
-| --expiry-date-utc | Tarih ve saat için ne zaman durdurulacağını Chaos zamanlamak için zamanlamayı kullanma.  Default\: 9999-12-31T23\:59\:59.999Z. |
-| --jobs | JSON olarak kodlanmış listesinde ChaosScheduleJobs ne zaman çalıştırılacağını Chaos temsil eden ve Chaos ile çalıştırmak için hangi parametrelere sahip. |
-| --Başlangıç tarihi utc | Tarih ve saat zamanlama Chaos zamanlamak için kullanmaya başlamak ne zaman.  Varsayılan\: 1601-01-01T00\:00\:00.000Z. |
-| --zaman aşımı -t | Sunucu zaman aşımı saniye.  Varsayılan\: 60. |
-| --version | Zamanlama sürüm sayısı. |
+| --timeout-t | İşlemi saniye cinsinden gerçekleştirmek için sunucu zaman aşımı. Bu zaman aşımı, istemcinin istenen işlemin tamamlanmasını beklemek istediği süreyi belirtir. Bu parametre için varsayılan değer 60 saniyedir.  Varsayılan\: 60. |
 
-### <a name="global-arguments"></a>Genel bağımsız değişkenleri
+### <a name="global-arguments"></a>Genel bağımsız değişkenler
 
 |Bağımsız Değişken|Açıklama|
 | --- | --- |
-| --hata ayıklama | Tüm hata ayıklama günlüklerini göster için günlüğün ayrıntı düzeyini artırır. |
-| ---h Yardım | Bu yardım iletisini ve çıkış gösterir. |
-| --Çıktı -o | Çıkış biçimi.  İzin verilen değerler\: json, jsonc, tablo, tsv.  Varsayılan\: json. |
-| --Sorgu | JMESPath sorgu dizesi. HTTP bkz\://jmespath.org/ daha fazla bilgi ve örnekler. |
-| --verbose | Günlüğün ayrıntı düzeyini artırır. Kullanımı--tam hata ayıklama günlükleri için hata ayıklama. |
+| --Hata Ayıkla | Tüm hata ayıklama günlüklerini göstermek için günlük ayrıntı düzeyini artırın. |
+| --Yardım-h | Bu yardım iletisini gösterin ve çıkın. |
+| --çıkış-o | Çıkış biçimi.  İzin verilen değerler JSON, jsonc, tablo, TSV\:.  JSON\: varsayılan. |
+| --sorgu | JMESPath sorgu dizesi. Daha fazla bilgi ve örnek için bkz. http\://jmespath.org/. |
+| --ayrıntılı | Günlük ayrıntı düzeyini artırın. Tam hata ayıklama günlükleri için--Debug kullanın. |
+
+## <a name="sfctl-chaos-schedule-set"></a>sfctl Chaos zamanlama kümesi
+Chaos tarafından kullanılan zamanlamayı ayarlayın.
+
+Chaos, Chaos zamanlaması temelinde otomatik olarak çalıştırmalar zamanlar. Belirtilen sürüm sunucudaki sürümle eşleşiyorsa, Chaos zamanlaması güncelleştirilecektir. Chaos zamanlaması güncelleştirilirken, sunucudaki sürüm 1 artırılır. Sunucu üzerindeki sürüm, büyük bir sayıya ulaştıktan sonra tekrar 0 olarak kaydırılır. Bu çağrı yapıldığında Chaos çalışıyorsa, çağrı başarısız olur.
+
+### <a name="arguments"></a>Bağımsız Değişkenler
+
+|Bağımsız Değişken|Açıklama|
+| --- | --- |
+| --Chaos-Parameters-sözlük | Iş tarafından kullanılacak bir dize adları ile ChaosParameters eşlemesini temsil eden JSON kodlu liste. |
+| --süre sonu-tarih-UTC | Chaos zamanlamak için zamanlamanın ne zaman durdurulacağını durdurulacağı tarih ve saat.  Varsayılan\: 9999-31-31T23\:59\:59.999 Z. |
+| --işler | Chaos 'ın ne zaman çalıştırılacağını temsil eden ve ile Chaos 'in hangi parametreleri çalıştıracağınızı temsil eden JSON kodlu bir liste. |
+| --başlangıç-tarih-UTC | Chaos zamanlamak için zamanlamayı kullanmanın bitiş tarihi ve saati.  Varsayılan\: 1601-01-01T00\:00\:00.000 Z. |
+| --timeout-t | Varsayılan\: 60. |
+| --sürüm | Zamanlamanın sürüm numarası. |
+
+### <a name="global-arguments"></a>Genel bağımsız değişkenler
+
+|Bağımsız Değişken|Açıklama|
+| --- | --- |
+| --Hata Ayıkla | Tüm hata ayıklama günlüklerini göstermek için günlük ayrıntı düzeyini artırın. |
+| --Yardım-h | Bu yardım iletisini gösterin ve çıkın. |
+| --çıkış-o | Çıkış biçimi.  İzin verilen değerler JSON, jsonc, tablo, TSV\:.  JSON\: varsayılan. |
+| --sorgu | JMESPath sorgu dizesi. Daha fazla bilgi ve örnek için bkz. http\://jmespath.org/. |
+| --ayrıntılı | Günlük ayrıntı düzeyini artırın. Tam hata ayıklama günlükleri için--Debug kullanın. |
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki komut, 2016-01-01 başlayıp 2038-01-Chaos 24 saat, haftada 7 gün günün çalıştıran 01 sona erme tarihi (geçerli zamanlama sürümde 0 varsayılarak) zamanlamasını ayarlar. Kaos kümede bu süre için zamanlanır.
+Aşağıdaki komut, bir zamanlamayı (geçerli zamanlamanın 0 ' dır), 2016-01-01 tarihinde başlayan ve gün 24 saat, haftanın 7 günü çalışan 2038-01-01 tarihinde sona erecek şekilde ayarlar. Chaos bu süre için kümede zamanlanır.
 
     sfctl chaos schedule set --version 0 --start-date-utc "2016-01-01T00:00:00.000Z" --expiry-date-utc "2038-01-01T00:00:00.000Z"
     --chaos-parameters-dictionary
@@ -146,5 +146,5 @@ Aşağıdaki komut, 2016-01-01 başlayıp 2038-01-Chaos 24 saat, haftada 7 gün 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Ayarlanan](service-fabric-cli.md) Service Fabric CLI.
-- Service Fabric CLI kullanarak kullanmayı öğrenin [örnek betikleri](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Service Fabric CLı 'yi [ayarlayın](service-fabric-cli.md) .
+- [Örnek betikleri](/azure/service-fabric/scripts/sfctl-upgrade-application)kullanarak Service Fabric CLI 'nın nasıl kullanılacağını öğrenin.

@@ -1,55 +1,56 @@
 ---
-title: Azure Container ınstances'da bir emptyDir birim bağlama
-description: Azure Container ınstances'da bir kapsayıcı grubundaki kapsayıcı arasında veri paylaşımı için bir emptyDir birim bağlama hakkında bilgi edinin
+title: Azure Container Instances bir emptyDir birimi bağlama
+description: Azure Container Instances bir kapsayıcı grubundaki kapsayıcılar arasında veri paylaşmak için emptyDir birimini nasıl bağlayacağınızı öğrenin
 services: container-instances
 author: dlepow
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
 ms.date: 02/08/2018
 ms.author: danlep
-ms.openlocfilehash: 98a72123a05fa7d8dc16be7ddb787f2a2cf7e4d1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0dbe26ff1e00e1912cfd63e8383695ca794dd037
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60563129"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68325456"
 ---
-# <a name="mount-an-emptydir-volume-in-azure-container-instances"></a>Azure Container ınstances'da bir emptyDir birim bağlama
+# <a name="mount-an-emptydir-volume-in-azure-container-instances"></a>Azure Container Instances bir emptyDir birimi bağlama
 
-Bağlama öğrenin bir *emptyDir* Azure Container ınstances'da bir kapsayıcı grubundaki kapsayıcı arasında veri paylaşımı için birim.
+Azure Container Instances bir kapsayıcı grubundaki kapsayıcılar arasında veri paylaşmak için *Emptydir* birimini nasıl bağlayacağınızı öğrenin.
 
 > [!NOTE]
-> Bağlama bir *emptyDir* birim şu anda Linux kapsayıcıları için kısıtlanmış. Tüm özellikleri Windows kapsayıcılarına getirmek için çalışmamız esnasında, geçerli platform farklılıklarını [Azure Kapsayıcı Örnekleri için kotalar ve bölge kullanılabilirliği](container-instances-quotas.md) bölümünde bulabilirsiniz.
+> Bir *Emptydir* birimi bağlamak Şu anda Linux kapsayıcılarıyla kısıtlıdır. Tüm özellikleri Windows kapsayıcılarına getirmek için çalıştık, ancak geçerli platform farklarını [genel bakışta](container-instances-overview.md#linux-and-windows-containers)bulabilirsiniz.
 
-## <a name="emptydir-volume"></a>emptyDir birim
+## <a name="emptydir-volume"></a>emptyDir birimi
 
-*EmptyDir* birim kapsayıcı grubundaki her kapsayıcı için erişilebilir yazılabilir bir dizin sağlar. Grup kapsayıcılarında okuyup biriminde aynı dosyaları yazabilir ve her bir kapsayıcıdaki aynı veya farklı yolları kullanarak bağlanabilir.
+*Emptydir* birimi bir kapsayıcı grubundaki her bir kapsayıcıya erişilebilen yazılabilir bir dizin sağlar. Gruptaki kapsayıcılar birimdeki aynı dosyaları okuyabilir ve yazabilir ve her kapsayıcıda aynı veya farklı yollar kullanılarak bağlanabilir.
 
-Bazı örnek kullanım bir *emptyDir* birim:
+Bir *Emptydir* birimi için bazı örnekler kullanılmıştır:
 
-* Boş alan
-* Uzun süre çalışan görevleri sırasında denetim noktası oluşturma
-* Sepet kapsayıcısı tarafından alınır ve bir uygulama kapsayıcısı tarafından sunulan data Store
+* Karalama alanı
+* Uzun süre çalışan görevler sırasında işaret noktası oluşturma
+* Bir sepet kapsayıcısı tarafından alınan ve uygulama kapsayıcısı tarafından sunulan verileri depolayın
 
-Verileri bir *emptyDir* birim kapsayıcı kilitlenmeleri kalıcıdır. Kapsayıcılar yeniden başlatılır, ancak garanti edilmez verileri kalıcı hale getirmek için bir *emptyDir* birim.
+*Emptydir* birimindeki veriler, kapsayıcı Kilitlenmelerinde kalıcı hale getirilir. Ancak yeniden başlatılan kapsayıcılar, verileri bir *Emptydir* biriminde kalıcı hale getirmek için garanti edilmez.
 
-## <a name="mount-an-emptydir-volume"></a>EmptyDir birim bağlama
+## <a name="mount-an-emptydir-volume"></a>EmptyDir birimi bağlama
 
-Bir kapsayıcı örneğine bir emptyDir birimi bağlamak için kullanarak dağıtmalısınız bir [Azure Resource Manager şablonu](/azure/templates/microsoft.containerinstance/containergroups).
+Bir boş dizin birimini bir kapsayıcı örneğine bağlamak için bir [Azure Resource Manager şablonu](/azure/templates/microsoft.containerinstance/containergroups)kullanarak dağıtmanız gerekir.
 
-İlk olarak, doldurmak `volumes` kapsayıcı grubu dizisinde `properties` şablon bölümü. İçinde istediğiniz bağlamak kapsayıcı grubundaki her kapsayıcı için sonraki *emptyDir* birim doldurmak `volumeMounts` içindeki dizi `properties` kapsayıcı tanımının bölümü.
+Önce, `volumes` diziyi şablonun kapsayıcı grubu `properties` bölümünde doldurun. Ardından, `volumeMounts` *Dizin birimini bağlamak* istediğiniz kapsayıcı grubundaki her bir kapsayıcı için, diziyi `properties` kapsayıcı tanımının bölümünde doldurun.
 
-Örneğin, aşağıdaki Resource Manager şablonu oluşan iki kapsayıcı bir kapsayıcı grubu oluşturur her hangi takar *emptyDir* birim:
+Örneğin, aşağıdaki Kaynak Yöneticisi şablonu, her biri *Emptydir* birimini bağlayan iki kapsayıcıyı içeren bir kapsayıcı grubu oluşturur:
 
 <!-- https://github.com/Azure/azure-docs-json-samples/blob/master/container-instances/aci-deploy-volume-emptydir.json -->
 [!code-json[volume-emptydir](~/azure-docs-json-samples/container-instances/aci-deploy-volume-emptydir.json)]
 
-Kapsayıcı örneği dağıtımıyla bir Azure Resource Manager şablonu ile bir örneğini görmek için bkz: [Azure Container ınstances'da çok kapsayıcılı grupları dağıtma](container-instances-multi-container-group.md).
+Azure Resource Manager şablonuyla kapsayıcı örneği dağıtımına bir örnek görmek için bkz. [Azure Container Instances birden çok Kapsayıcılı grupları dağıtma](container-instances-multi-container-group.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure Container ınstances'da diğer birim türleri bağlama işlemleri gerçekleştirmeyi öğreneceksiniz:
+Azure Container Instances diğer birim türlerini nasıl bağlayacağınızı öğrenin:
 
 * [Azure kapsayıcı durumlarda bir Azure dosya paylaşımını bağlama](container-instances-volume-azure-files.md)
-* [Azure Container ınstances'da bir gitRepo birimi](container-instances-volume-gitrepo.md)
-* [Azure Container ınstances'da bir gizli birimi](container-instances-volume-secret.md)
+* [Azure Container Instances bir gitRepo birimi bağlama](container-instances-volume-gitrepo.md)
+* [Azure Container Instances bir gizli birimi bağlama](container-instances-volume-secret.md)

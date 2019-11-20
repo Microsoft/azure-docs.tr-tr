@@ -1,68 +1,69 @@
 ---
-title: Bulut iş ortağı portalında kullanıcıları yönetme | Azure Market
-description: Bulut iş ortağı portalında kullanıcıları yönetme
+title: Bulut İş Ortağı Portalı kullanıcıları yönetme | Azure Marketi
+description: Bulut iş ortağı portalı 'nda kullanıcıları yönetme
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 manager: pbutlerm
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/01/2019
 ms.author: pabutler
-ms.openlocfilehash: 21c49ad0d73721dd204a7a3899d11cf10d43521b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4dc9fdf94ba6311f1b59c61ec686628a728e2510
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942062"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826631"
 ---
-# <a name="managing-users-on-the-cloud-partner-portal"></a>Bulut iş ortağı portalında kullanıcıları yönetme
+# <a name="managing-users-on-the-cloud-partner-portal"></a>Bulut İş Ortağı Portalı kullanıcıları yönetme
 
-[Bulut iş ortağı portalı](https://cloudpartner.azure.com) rol tabanlı erişimi olan kullanıcılar için sanal makine teklifler eklemenize olanak tanır. Birden çok kişinin teklifler çalışırken erişim ve izinleri yönetmek için yardımcı olur.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com) , sanal makine tekliflerine rol tabanlı erişime sahip kullanıcılar eklemenize olanak sağlar. Birden çok kişi teklifler üzerinde çalışırken erişimi ve izinleri yönetmeye yardımcı olur.
 
-## <a name="add-users-and-assign-roles"></a>Kullanıcı ekleme ve Rolleri Ata 
+## <a name="add-users-and-assign-roles"></a>Kullanıcı ekleme ve rol atama 
 
-Kullanıcı ekleme ve teklif yayımlamak için rolleri atamak için aşağıdaki adımları kullanın.
+Kullanıcıları eklemek ve teklif yayımlamaya yönelik rolleri atamak için aşağıdaki adımları kullanın.
 
-1. Tıklayın **kullanıcılar** sol tarafındaki gezinme bölmesinde sekmesinde.
+1. Sol taraftaki Gezinti bölmesindeki **Kullanıcılar** sekmesine tıklayın.
 
-    ![Kullanıcılar sekmesine](./media/userstab.png)
-
-
-2. Tıklayın **kullanıcı ekleme**.
-
-    ![Kullanıcı Ekle seçeneğini belirleme](./media/adduser.png)
+    ![Kullanıcılar sekmesi](./media/userstab.png)
 
 
-3. Kullanıcının e-posta adresini yazın ve bir rol atamasını seçin.  Yeni bir kullanıcı bir "sahip" veya "katılımcı" olarak ekleyebilirsiniz.
+2. **Kullanıcı Ekle**' ye tıklayın.
 
-    **e-posta**: E-posta adreslerini teklifini yayımlamanın üzerinde çalışan takım arkadaşları ekleyin. Microsoft hesapları (Outlook, Hotmail ve canlı) ve kuruluş kimlikleri desteklenir.
+    ![Kullanıcı Ekle ' yi seçin](./media/adduser.png)
 
-    - Bir "takım/Grup e-posta diğer adı/güvenlik grubu" eklemek kuruluştan ayrılmadan tek karşı koruma sağlamak için.
-    - Bu e-posta kimlikleri bulut iş ortağı portalında sağlanan Microsoft gelen tüm iletişimi için izlenen emin olun.
+
+3. Kullanıcının e-posta adresini yazın ve bir rol ataması seçin.  Yeni kullanıcıyı "Owner" veya "katkıda bulunan" olarak ekleyebilirsiniz.
+
+    **E-posta**: teklifi yayımlamak için çalışacak ekip mates e-posta adreslerini ekleyin. Microsoft hesapları (Outlook, hotmail ve canlı) ve kuruluş kimlikleri desteklenir.
+
+    - Kuruluştan ayrılmaya karşı korumak için bir "ekip/grup e-posta diğer adı/güvenlik grubu" ekleyin.
+    - Bulut İş Ortağı Portalı belirtilen e-posta kimliklerinin Microsoft 'tan gelen tüm iletişimler için izlendiğinden emin olun.
     
-    ![Rol atama](./media/assignrole.png)
+    ![Rol ata](./media/assignrole.png)
 
-    **Rol**: Uygun kullanıcı rol türü tanımlamak için aşağıdaki tabloya bakın.
+    **Rol**: uygun Kullanıcı rolü türünü tanımlamak için aşağıdaki tabloya bakın.
 
     ![Rol düzeyi](./media/roleaccesslevel.png)
 
-    Yalnızca Azure ödeme ve Azure müşteri sekmeleri sahipleri erişebilir [satıcı Insights](../../cloud-partner-portal-orig/si-getting-started.md).
+    Yalnızca sahipler, Azure ödeme ve Azure müşteri sekmelerine [satıcı öngörülerine](../../cloud-partner-portal-orig/si-getting-started.md)erişebilir.
 
 
-4. Yeni kullanıcıyı eklemek istediğiniz yayımcı adını seçin ve ardından kullanıcı ekleme tamamlamak için Ekle'ye tıklayın.
+4. Yeni kullanıcıya eklemek istediğiniz yayımcı adını seçin ve ardından Kullanıcı ekleme ' ye tıklayarak Ekle ' ye tıklayın.
 
     > [!NOTE]
-    > "Yayımcı adları için e-postanızı eklendiği sahibi veya katkıda bulunanı" görünecektir aşağı açılan listesinde **yayımcı** seçimi.
+    > E-postanız bir sahip veya katkıda bulunan olarak eklendiği "yayımcı adları", **Publisher** 'ın seçim için aşağı açılan listesinde görünür.
 
 
-    ![Rol - select yayımcı Ata](./media/assignselectpublisher.png)
+    ![Rol atama-yayımcı seçin](./media/assignselectpublisher.png)
 
 
-## <a name="delete-an-existing-user"></a>Mevcut bir kullanıcının Sil
+## <a name="delete-an-existing-user"></a>Mevcut bir kullanıcıyı silme
 
-Mevcut bir kullanıcıyı kaldırmak için kendi e-posta için arama **kullanıcılar** sekmesini ve sonra basın **Sil** sağ taraftaki düğmeyi.
+Var olan bir kullanıcıyı kaldırmak için **Kullanıcılar** sekmesinden e-postalarını arayın ve sağ taraftaki **Sil** düğmesine basın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Portala kullanabilirsiniz [yayımcı profillerini yönetme](./cpp-manage-publisher-profile.md).
+Portalı, [Yayımcı profillerini yönetmek](./cpp-manage-publisher-profile.md)için de kullanabilirsiniz.

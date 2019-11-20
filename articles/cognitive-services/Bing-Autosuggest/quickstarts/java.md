@@ -1,30 +1,30 @@
 ---
-title: "Hızlı Başlangıç: Bing otomatik öneri REST API'si ve Java ile arama sorguları önerin"
-titlesuffix: Azure Cognitive Services
-description: Hızlı arama terimlerini önerme başlatmayı öğrenin Bing otomatik öneri API'si ile gerçek zamanlı.
+title: 'Hızlı Başlangıç: Bing Otomatik Öneri REST API ve Java ile arama sorguları önerin'
+titleSuffix: Azure Cognitive Services
+description: Bing Otomatik Öneri API'si ile gerçek zamanlı olarak arama terimleri önerme hakkında hızlı bir başlangıç yapmayı öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 02/20/2019
+ms.date: 07/26/2019
 ms.author: aahi
-ms.openlocfilehash: f41e81d948bfa482a016e3770a705344f9c26b0c
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 0a0fb1e8f79587223ae1f25ca8a7e0d6dc7cc5bb
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66390444"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68565833"
 ---
-# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-java"></a>Hızlı Başlangıç: Bing otomatik öneri REST API'si ve Java ile arama sorguları önerin
+# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-java"></a>Hızlı Başlangıç: Bing Otomatik Öneri REST API ve Java ile arama sorguları önerin
 
 
-Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu Hızlı Başlangıç'ı çağırır kullanın. Bu basit bir Java uygulaması, API için bir kısmi arama sorgusu gönderir ve aramalar için öneriler döndürür. Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir. Bu örnek için kaynak kodu kullanılabilir [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingAutosuggestv7.java)
+Bing Otomatik Öneri API'si çağrı yapmaya başlamak ve JSON yanıtını almak için bu hızlı başlangıcı kullanın. Bu basit Java uygulaması, API 'ye kısmi bir arama sorgusu gönderir ve aramalar için öneriler döndürür. Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir. Bu örneğe ilişkin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingAutosuggestv7.java) 'da kullanılabilir
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Java geliştirme Kit(JDK)](https://www.oracle.com/technetwork/java/javase/downloads/)
+* [Java Development Kit (JDK)](https://www.oracle.com/technetwork/java/javase/downloads/)
 * [Gson kitaplığı](https://github.com/google/gson)
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../../includes/cognitive-services-bing-autosuggest-signup-requirements.md)]
@@ -44,7 +44,7 @@ Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu 
     import com.google.gson.JsonParser;
     ```
 
-2. Abonelik anahtarınız, API konak ve yol değişkenlerinin, [pazara kod](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes)ve bir arama sorgusu.
+2. Abonelik anahtarınız, API ana bilgisayarı ve yolu, [Pazar kodunuz](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes)ve bir arama sorgusu için değişkenler oluşturun.
     
     ```java
     static String subscriptionKey = "enter key here";
@@ -57,7 +57,7 @@ Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu 
 
 ## <a name="format-the-response"></a>Yanıtı biçimlendirme
 
-Adlı bir yöntem oluşturma `prettify()` Bing Video API'den döndürülen yanıtı biçimlendirmek için. Gson kitaplığın kullanın `JsonParser` bir JSON dizesinde alıp bir nesnesine dönüştürmek için. Ardından `GsonBuilder()` ve `toJson()` biçimlendirilmiş dize oluşturmak için.
+Bing video API 'sinden `prettify()` döndürülen yanıtı biçimlendirmek için adlı bir yöntem oluşturun. Bir JSON dizesini alıp nesneye dönüştürmek `JsonParser` için gson Kitaplığı ' nı kullanın. Ardından, `GsonBuilder()` biçimli `toJson()` dizeyi oluşturmak için ve kullanın.
 
 ```java
 // pretty-printer for JSON; uses GSON parser to parse and re-serialize
@@ -69,11 +69,11 @@ public static String prettify(String json_text) {
 }
 ```
 
-## <a name="construct-and-send-the-search-request"></a>Oluşturun ve arama isteği gönder
+## <a name="construct-and-send-the-search-request"></a>Arama isteğini oluşturun ve gönderin
 
-1. Adlı yeni bir yöntem oluşturma `get_suggestions()` ve aşağıdaki adımları gerçekleştirin:
+1. Adlı `get_suggestions()` yeni bir yöntem oluşturun ve aşağıdaki adımları gerçekleştirin:
 
-   1. İsteğiniz URL'sini, API'nizi birleştirerek oluşturmak konak, yol ve arama sorgunuz kodlama. URL unutmayın-eklenmesinden önce sorgu kodlayın. Pazar koda ekleyerek parametreleri dize sorgunuz için oluşturma `mkt=` parametresi ve sorgunuzu `q=` parametresi.
+   1. API konağını, yolunuzu birleştirerek ve arama sorgunuzu kodlayıp kodlayarak isteğiniz için URL 'YI oluşturun. Sorguyu eklemeden önce URL 'yi kodlediğinizden emin olun. `mkt=` Parametreye piyasa kodu ekleyerek ve sorgunuzu `q=` parametresine ekleyerek sorgunuz için bir parametre dizesi oluşturun.
     
       ```java
   
@@ -84,7 +84,7 @@ public static String prettify(String json_text) {
       }
       ```
     
-   2. Yeni bir istek URL'si, API ana bilgisayar, yol ve yukarıda oluşturulan parametreleri ile oluşturun. 
+   2. Yukarıda oluşturulan API ana bilgisayarı, yolu ve parametreleri ile istek için yeni bir URL oluşturun. 
     
        ```java
        //...
@@ -92,7 +92,7 @@ public static String prettify(String json_text) {
        //...
        ```
     
-   3. Oluşturma bir `HttpsURLConnection` nesne ve kullanmak `openConnection()` bir bağlantı oluşturmak için. İstek yöntemini ayarla `GET`, abonelik anahtarınızı ekleyin `Ocp-Apim-Subscription-Key` başlığı.
+   3. Bir `HttpsURLConnection` nesne oluşturun ve bir bağlantı `openConnection()` oluşturmak için öğesini kullanın. İstek yöntemini olarak `GET`ayarlayın ve abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin.
 
       ```java
        //...
@@ -103,7 +103,7 @@ public static String prettify(String json_text) {
        //...
       ```
 
-   4. API yanıtı okunan bir `StringBuilder`. Yanıt yakalandıktan sonra kapatmak `InputStreamReader` akışla aktarma ve yanıtı döndürür.
+   4. API yanıtında bir `StringBuilder`öğesine okuyun. Yanıt yakalandıktan sonra `InputStreamReader` akışı kapatın ve yanıtı döndürün.
 
        ```java
        //...
@@ -119,7 +119,7 @@ public static String prettify(String json_text) {
        return response.toString();
        ```
 
-2. Uygulamanızın ana işlev çağrısında `get_suggestions()`ve yanıt kullanarak yazdırma `prettify()`.
+2. Uygulamanızın ana işlevinde, kullanarak `get_suggestions()` `prettify()`yanıtı çağırın ve yazdırın.
     
     ```java
     public static void main(String[] args) {

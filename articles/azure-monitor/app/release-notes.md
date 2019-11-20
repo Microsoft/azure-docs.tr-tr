@@ -1,34 +1,26 @@
 ---
 title: Azure Application Insights için sürüm notları | Microsoft Docs
-description: Application Insights SDK'ları için en son güncelleştirmeleri.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 9cd2ecdb-c2b9-4e4a-b6aa-beb0c2ca4ffc
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+description: Application Insights SDK 'Ları için en son güncelleştirmeler.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 05/17/2017
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: ad8aa9f5e37ab4d3df730cbb58fec0994bcbd509
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 05/17/2017
+ms.openlocfilehash: 7083ecf01666deecccada9ab0c93e88af53d252b
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66255957"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74173644"
 ---
 # <a name="sdk-release-notes---application-insights"></a>SDK Sürüm Notları - Application Insights
-Ayrıntılı sürüm notları ve güncelleştirme yönergeleri için SDK'larımızda şunlardır:
+SDK 'larımızla ilgili ayrıntılı sürüm notları ve güncelleştirme yönergeleri aşağıda verilmiştir:
 
-* [ASP.NET Web sunucusu SDK](https://github.com/Microsoft/ApplicationInsights-server-dotnet/releases)
-* [.NET Core SDK](https://github.com/Microsoft/ApplicationInsights-dotnet/releases) 
-* [.NET günlük bağdaştırıcıları](https://github.com/Microsoft/ApplicationInsights-dotnet-logging/releases)
-* [ASP.NET Core](https://github.com/Microsoft/ApplicationInsights-aspnet5/releases)
+* [.NET SDK 'Ları (ASP.NET, ASP.Net Core ve günlük bağdaştırıcıları dahil)](https://github.com/Microsoft/ApplicationInsights-dotnet/releases) 
 * [Java](https://github.com/Microsoft/ApplicationInsights-Java)
 * [JavaScript](https://github.com/Microsoft/ApplicationInsights-JS/commits/master)
 * [Diğer platformlar](https://github.com/Microsoft/ApplicationInsights-Home)
 
-Ayrıca okuma bizim [blogları](https://azure.microsoft.com/blog/tag/application-insights/) ve [hizmet güncelleştirmeleri](https://azure.microsoft.com/updates/?service=application-insights) Application Insights hizmetine bir bütün olarak önemli geliştirmeleri özetler.
+Application Insights hizmetindeki önemli geliştirmeleri bir bütün olarak özetleyen [Bloglarımızı](https://azure.microsoft.com/blog/tag/application-insights/) ve [hizmet güncelleştirmelerinizi](https://azure.microsoft.com/updates/?service=application-insights) de okuyun.
 

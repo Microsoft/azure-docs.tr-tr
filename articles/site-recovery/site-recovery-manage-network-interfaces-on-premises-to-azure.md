@@ -1,71 +1,72 @@
 ---
-title: Azure'da şirket içi olağanüstü durum kurtarma için Azure Site recovery'de ağ arabirimleri yönetme | Microsoft Docs
-description: Ağ arabirimleri için Azure Site Recovery ile şirket içi olağanüstü durum kurtarmayı yönetme işlemi açıklanır
+title: Azure Site Recovery ile şirket içi olağanüstü durum kurtarma için ağ bağdaştırıcılarını yönetme
+description: Azure 'da şirket içi olağanüstü durum kurtarma için ağ arabirimlerinin Azure Site Recovery ile nasıl yönetileceğini açıklar
 author: mayurigupta13
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 4/9/2019
 ms.author: mayg
-ms.openlocfilehash: 5d5dd7bc3f6b60c2f9d7c2179f2bd356ca101dc4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2a4752b501e40f9e8a4f3bc82cb2533c11f9e526
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61471783"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954599"
 ---
-# <a name="manage-virtual-machine-network-interfaces-for-on-premises-disaster-recovery-to-azure"></a>Sanal makine ağ arabirimleri, Azure'da şirket içi olağanüstü durum kurtarma için yönetme
-Azure sanal makineler'de (VM) bağlı en az bir ağ arabirimi olması gerekir. Birçok ağ arabirimleri VM boyutu destekler bağlı olarak olabilir.
+# <a name="manage-vm-network-interfaces-for-on-premises-disaster-recovery-to-azure"></a>Azure 'da şirket içi olağanüstü durum kurtarma için VM ağ arabirimlerini yönetme
 
-Varsayılan olarak, bir Azure sanal makinesine bağlı ilk ağ arabiriminin birincil ağ arabirimi olarak tanımlanır. Sanal makinedeki diğer tüm ağ arabirimleri, ikincil ağ arabirimlerine ' dir. Ayrıca varsayılan olarak, sanal makineden giden tüm trafiği birincil ağ arabiriminin birincil IP yapılandırması için atanan IP adresi kullanıma gönderilir.
+Azure 'daki bir sanal makineye (VM) en az bir ağ arabirimi eklenmiş olmalıdır. VM boyutunun desteklediğinden, kendisine bağlı çok sayıda ağ arabirimi olabilir.
 
-Bir şirket içi ortamda sanal makineler veya sunucuları farklı ağ ortamında birden çok ağ arabirimine sahip olabilir. Farklı ağlarda genellikle, yükseltme ve Bakım internet erişimi gibi belirli işlemlerin gerçekleştirilmesi için kullanılır. Geçiş ya da Azure'a bir şirket içi ortama yük devretmeyi aynı sanal makine ağ arabirimleri tüm aynı sanal ağa bağlanması gereken aklınızda bulundurun.
+Varsayılan olarak, bir Azure sanal makinesine bağlı ilk ağ arabirimi, birincil ağ arabirimi olarak tanımlanır. Sanal makinedeki diğer tüm ağ arabirimleri ikincil ağ arabirimlerdir. Ayrıca, varsayılan olarak, sanal makinedeki tüm giden trafik, birincil ağ arabiriminin birincil IP yapılandırmasına atanan IP adresine gönderilir.
 
-Varsayılan olarak, Azure Site Recovery, birçok şirket içi sunucunun bağlı olarak bir Azure sanal makinesinde arabirimleri ağ olarak oluşturur. Çoğaltılmış sanal makine ayarları altında ağ arabirimi ayarlarını düzenleyerek geçişi veya yük devretme sırasında yedekli ağ arabirimlerini oluşturma önleyebilirsiniz.
+Şirket içi bir ortamda, sanal makineler veya sunucular, ortamda farklı ağlar için birden çok ağ arabirimine sahip olabilir. Farklı ağlar genellikle yükseltmeler, bakım ve internet erişimi gibi belirli işlemleri gerçekleştirmek için kullanılır. Şirket içi bir ortamdan Azure 'a geçiş yaparken veya yük devrettikten sonra, aynı sanal makinede bulunan ağ arabirimlerinin tümünün aynı sanal ağa bağlı olması gerektiğini aklınızda bulundurun.
 
-## <a name="select-the-target-network"></a>Hedef ağ seçin
+Azure Site Recovery, varsayılan olarak, Azure sanal makinesinde şirket içi sunucuya bağlı olarak çok sayıda ağ arabirimi oluşturur. Çoğaltma veya yük devretme sırasında, çoğaltılan sanal makinenin ayarları altındaki Ağ arabirimi ayarlarını düzenleyerek yedek ağ arabirimleri oluşturmaktan kaçınabilirsiniz.
 
-VMware ve fiziksel makineler için ve Hyper-V (olmadan System Center Virtual Machine Manager) sanal makineler için tek tek sanal makineler için hedef sanal ağ da belirtebilirsiniz. Virtual Machine Manager ile yönetilen Hyper-V sanal makinelerini için [ağ eşlemesini](site-recovery-network-mapping.md) kaynak Virtual Machine Manager sunucusundaki VM ağlarını eşlemek ve hedef Azure ağları.
+## <a name="select-the-target-network"></a>Hedef ağı seçin
 
-1. Altında **çoğaltılan öğeler** bir kurtarma Hizmetleri Kasası'nda çoğaltılan bu öğe için ayarlara erişmek için herhangi bir çoğaltılan öğeyi seçin.
+VMware ve fiziksel makineler için ve Hyper-V (System Center Virtual Machine Manager olmadan) sanal makineler için, hedef sanal ağı ayrı sanal makineler için belirtebilirsiniz. Virtual Machine Manager ile yönetilen Hyper-V sanal makineleri için, bir kaynak Virtual Machine Manager sunucusundaki VM ağlarını eşlemek ve Azure ağlarını hedeflemek için [ağ eşleme](site-recovery-network-mapping.md) kullanın.
 
-2. Seçin **işlem ve ağ** çoğaltılan öğe için ağ ayarlarını erişmek için sekmesinde.
+1. Kurtarma Hizmetleri kasasındaki **çoğaltılan öğeler** altında, çoğaltılan öğenin ayarlarına erişmek için çoğaltılan öğeleri seçin.
 
-3. Altında **ağ özellikleri**, bulunan ağ arabirimleri listesinden bir sanal ağ seçin.
+2. Çoğaltılan öğenin ağ ayarlarına erişmek için **işlem ve ağ** sekmesini seçin.
+
+3. **Ağ özellikleri**altında, kullanılabilir ağ arabirimleri listesinden bir sanal ağ seçin.
 
     ![Ağ ayarları](./media/site-recovery-manage-network-interfaces-on-premises-to-azure/compute-and-network.png)
 
-Hedef ağ değiştirme, tüm ağ arabirimleri, belirli bir sanal makine için etkiler.
+Hedef ağın değiştirilmesi söz konusu sanal makineye ait tüm ağ arabirimlerini etkiler.
 
-Virtual Machine Manager Bulutları için ağ eşlemesini değiştirmek için tüm sanal makineleri ve ağ arabirimlerini etkiler.
+Virtual Machine Manager bulutları için Ağ eşlemesini değiştirme tüm sanal makineleri ve bunların ağ arabirimlerini etkiler.
 
-## <a name="select-the-target-interface-type"></a>Hedef arabirim türü seçin
+## <a name="select-the-target-interface-type"></a>Hedef arabirim türünü seçin
 
-Altında **ağ arabirimleri** bölümünü **işlem ve ağ** bölmesinde, görüntülemek ve ağ arabirimi ayarları düzenleyin. Hedef ağ arabirim türü de belirtebilirsiniz.
+**İşlem ve ağ** bölmesinin **ağ arabirimleri** bölümünde, ağ arabirimi ayarlarını görüntüleyebilir ve düzenleyebilirsiniz. Hedef ağ arabirim türünü de belirtebilirsiniz.
 
-- A **birincil** ağ arabirimi yük devretme için gereklidir.
-- Seçilen diğer tüm ağ arabirimleri, varsa **ikincil** ağ arabirimleri.
-- Seçin **kullanmayın** oluşturma yük devretme sırasında bir ağ arabirimi dışlanacak.
+- Yük devretme için bir **birincil** ağ arabirimi gerekir.
+- Varsa, diğer tüm seçili ağ arabirimleri **İkincil** ağ arabirimlerdir.
+- Yük devretmede bir ağ arabirimini oluşturmadan dışlamak için **kullanmayın** ' ı seçin.
 
-Çoğaltmayı etkinleştirirken varsayılan olarak, Site Recovery tüm algılanan ağ arabirimleri üzerinde şirket içi sunucunun seçer. Bir olarak işaretler **birincil** ve tüm diğer olarak **ikincil**. Şirket içi sunucuya eklendi sonraki arabirimlerden işaretlenmiş **kullanmayın** varsayılan olarak. Daha fazla ağ arabirimi eklerken, doğru Azure sanal makine hedef boyutu gerekli ağ arabirimlerinin uyum sağlamak için seçildiğinden emin olun.
+Varsayılan olarak, çoğaltmayı etkinleştirirken Site Recovery, şirket içi sunucuda algılanan tüm ağ arabirimlerini seçer. Bunlardan birini **birincil** olarak, diğerlerinin tümünü **İkincil**olarak işaretler. Şirket içi sunucuya eklenen sonraki tüm arabirimler varsayılan olarak **kullanılmaz** . Daha fazla ağ arabirimi eklerken, gereken tüm ağ arabirimlerine uyum sağlamak için doğru Azure sanal makine hedef boyutunun seçildiğinden emin olun.
 
-## <a name="modify-network-interface-settings"></a>Ağ arabirimi ayarlarını değiştirme
+## <a name="modify-network-interface-settings"></a>Ağ arabirimi ayarlarını değiştir
 
-Çoğaltılan öğenin ağ arabirimleri için IP adresi ve alt ağ değiştirebilirsiniz. Bir IP adresi belirtilmezse, Site Recovery ağ arabirimi yük devretme sırasında alt ağdan sonraki kullanılabilir IP adresi atar.
+Çoğaltılan bir öğenin ağ arabirimlerinin alt ağını ve IP adresini değiştirebilirsiniz. Bir IP adresi belirtilmemişse, Site Recovery yük devretme sırasında alt ağdan ağ arabirimine bir sonraki kullanılabilir IP adresini atayacaktır.
 
-1. Ağ arabirimi ayarlarını açmak için herhangi bir mevcut ağ arabirimi seçin.
+1. Ağ arabirimi ayarlarını açmak için kullanılabilir ağ arabirimini seçin.
 
-2. İstenen alt ağ, kullanılabilir alt ağlar listesinden seçin.
+2. Kullanılabilir alt ağlar listesinden istenen alt ağı seçin.
 
-3. İstenen IP adresini (gerektiği gibi) girin.
+3. İstenen IP adresini girin (gerektiğinde).
 
     ![Ağ arabirimi ayarları](./media/site-recovery-manage-network-interfaces-on-premises-to-azure/network-interface-settings.png)
 
-4. Seçin **Tamam** düzenlenmesini tamamlamayı ve dönmek için **işlem ve ağ** bölmesi.
+4. Düzenlemeden **sonra işlem ve ağ** bölmesine geri dönmek için **Tamam** ' ı seçin.
 
-5. Diğer ağ arabirimleri için 1-4 arası adımları yineleyin.
+5. Diğer ağ arabirimleri için 1-4 adımlarını yineleyin.
 
-6. Seçin **Kaydet** tüm değişiklikleri kaydedin.
+6. Tüm değişiklikleri kaydetmek için **Kaydet** ' i seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-  [Daha fazla bilgi edinin](../virtual-network/virtual-network-network-interface-vm.md) Azure sanal makineleri için ağ arabirimleri hakkında.
+  Azure sanal makineleri için ağ arabirimleri hakkında [daha fazla bilgi edinin](../virtual-network/virtual-network-network-interface-vm.md) .

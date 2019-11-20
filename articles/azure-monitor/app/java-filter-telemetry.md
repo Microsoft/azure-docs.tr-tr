@@ -1,41 +1,37 @@
 ---
-title: Java web uygulamanızı Azure Application Insights telemetri filtreleme | Microsoft Docs
-description: Olay İzleme gerekmez filtreleyerek telemetri trafiğini azaltır.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Java Web uygulamanızda Azure Application Insights telemetrisini filtreleme | Microsoft Docs
+description: İzlemeniz gerekmeyen olayları filtreleyerek telemetri trafiğini azaltın.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 3/14/2019
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 9cf939b241da01be55c1b2ba5f00a5131ab94c06
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 3/14/2019
+ms.openlocfilehash: de2a7c73b87254a6fd2e6c5dc942a9c93d28c2d4
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67061168"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72819368"
 ---
-# <a name="filter-telemetry-in-your-java-web-app"></a>Java web uygulamanıza telemetri filtreleme
+# <a name="filter-telemetry-in-your-java-web-app"></a>Java Web uygulamanızda telemetri filtreleme
 
-Filtreleri telemetri seçmek için bir yol sağlar, uygulamanızın [Java web uygulaması, Application Insights'a gönderir](java-get-started.md). Kullanabileceğiniz bazı Giden kutusu filtreler vardır ve kendi özel filtreler de yazabilirsiniz.
+Filtreler, [Java Web uygulamanızın Application Insights gönderdiği](java-get-started.md)Telemetriyi seçmek için bir yol sağlar. Kullanabileceğiniz bazı hazır olmayan filtreler vardır ve kendi özel filtrelerinizi de yazabilirsiniz.
 
-Kullanıma hazır filtreler aşağıdakileri içerir:
+Kullanıma hazır filtreler şunları içerir:
 
-* Önem düzeyi izleme
-* Belirli URL'lere, anahtar sözcükler veya yanıt kodları
-* Hızlı yanıtlar - diğer bir deyişle, istekleri için uygulamanızı hızlı bir şekilde yanıt verdi.
+* İzleme önem düzeyi
+* Belirli URL 'Ler, anahtar sözcükler veya yanıt kodları
+* Hızlı yanıtlar-diğer bir deyişle, uygulamanızın hızla yanıt verdiği istekleriniz
 * Belirli olay adları
 
 > [!NOTE]
-> Filtreler, uygulamanızın ölçümleri eğme. Örneğin, yavaş yanıtlar tanılamak için hızlı yanıt süresi atmak için bir filtre ayarlamanız, karar verebilirsiniz. Ancak, Application Insights tarafından bildirilen ortalama yanıt sürelerinin ardından true hızından daha yavaş olur ve isteklerinin sayısı gerçek sayısından daha küçük farkında olmanız gerekir.
-> Bu bir konudur kullanırsanız [örnekleme](../../azure-monitor/app/sampling.md) yerine.
+> Filtreler uygulamanızın ölçümlerini eğriltin. Örneğin, yavaş yanıtları tanılamak için hızlı yanıt sürelerini atmak üzere bir filtre ayarlayacağınıza karar verebilirsiniz. Ancak, Application Insights tarafından raporlanan ortalama yanıt sürelerinin gerçek hızından daha yavaş olacağını ve istek sayısının gerçek sayıdan küçük olacağını bilmeniz gerekir.
+> Bu sorun olursa bunun yerine [örnekleme](../../azure-monitor/app/sampling.md) kullanın.
 
 ## <a name="setting-filters"></a>Filtre ayarlama
 
-Applicationınsights.XML içinde ekleme bir `TelemetryProcessors` bölümü şu örnekteki gibi:
+ApplicationInsights. xml dosyasında aşağıdaki örneğe benzer bir `TelemetryProcessors` bölümü ekleyin:
 
 
 ```XML
@@ -88,11 +84,11 @@ Applicationınsights.XML içinde ekleme bir `TelemetryProcessors` bölümü şu 
 
 
 
-[Tam yerleşik işlemci inceleyin](https://github.com/Microsoft/ApplicationInsights-Java/tree/master/core/src/main/java/com/microsoft/applicationinsights/internal/processor).
+[Yerleşik işlemcilerin tam kümesini inceleyin](https://github.com/Microsoft/ApplicationInsights-Java/tree/master/core/src/main/java/com/microsoft/applicationinsights/internal/processor).
 
-## <a name="built-in-filters"></a>Yerleşik filtreleri
+## <a name="built-in-filters"></a>Yerleşik filtreler
 
-### <a name="metric-telemetry-filter"></a>Ölçüm Telemetri filtreleme
+### <a name="metric-telemetry-filter"></a>Ölçüm telemetri filtresi
 
 ```XML
 
@@ -101,10 +97,10 @@ Applicationınsights.XML içinde ekleme bir `TelemetryProcessors` bölümü şu 
            </Processor>
 ```
 
-* `NotNeeded` -Özel ölçüm adları virgülle ayrılmış listesi.
+* Özel Ölçüm adlarının virgülle ayrılmış listesi `NotNeeded`.
 
 
-### <a name="page-view-telemetry-filter"></a>Sayfa görünümü Telemetrisini filtresi
+### <a name="page-view-telemetry-filter"></a>Sayfa görüntüleme telemetri filtresi
 
 ```XML
 
@@ -115,12 +111,12 @@ Applicationınsights.XML içinde ekleme bir `TelemetryProcessors` bölümü şu 
            </Processor>
 ```
 
-* `DurationThresholdInMS` -Süresi sayfanın yüklenmesi için geçen süre için ifade eder. Bu ayarlanırsa, bu saatten daha hızlı yüklenen sayfaları raporlanmaz.
-* `NotNeededNames` -Sayfa adları virgülle ayrılmış listesi.
-* `NotNeededUrls` -Parçalarla ilgili URL virgülle ayrılmış listesi. Örneğin, `"home"` "home" URL'de bulunan tüm sayfaları filtreler.
+* `DurationThresholdInMS` süresi, sayfanın yüklenmesi için geçen süreyi ifade eder. Bu ayarlanırsa, bu süreden daha hızlı yüklenen sayfalar raporlanmaz.
+* sayfa adlarının virgülle ayrılmış listesi `NotNeededNames`.
+* URL parçalarının `NotNeededUrls` virgülle ayrılmış listesi. Örneğin, URL 'de "giriş" olan tüm sayfaları filtreler `"home"`.
 
 
-### <a name="request-telemetry-filter"></a>İstek Telemetri filtresi
+### <a name="request-telemetry-filter"></a>Telemetri filtresi iste
 
 
 ```XML
@@ -134,11 +130,11 @@ Applicationınsights.XML içinde ekleme bir `TelemetryProcessors` bölümü şu 
 
 
 
-### <a name="synthetic-source-filter"></a>Yapay Kaynak Filtresi
+### <a name="synthetic-source-filter"></a>Yapay kaynak filtresi
 
-SyntheticSource özelliğinde değerlere sahip tüm telemetri filtreler. Bunlar, robotlar ve örümcekler kullanılabilirlik testleri gelen istekleri içerir.
+SyntheticSource özelliğinde değerleri olan tüm Telemetriyi filtreler. Bunlar, botların ve kullanılabilirlik testlerinin isteklerini içerir.
 
-Tüm yapay istekler için telemetri filtreleyin:
+Tüm yapay istekler için telemetri filtreleme:
 
 
 ```XML
@@ -146,7 +142,7 @@ Tüm yapay istekler için telemetri filtreleyin:
            <Processor type="SyntheticSourceFilter" />
 ```
 
-Telemetri yapay belirli kaynaklar için filtreleyin:
+Belirli yapay kaynaklar için telemetri filtreleme:
 
 
 ```XML
@@ -156,11 +152,11 @@ Telemetri yapay belirli kaynaklar için filtreleyin:
            </Processor>
 ```
 
-* `NotNeeded` -Yapay kaynak adları virgülle ayrılmış listesi.
+* yapay kaynak adları `NotNeeded` virgülle ayrılmış listesi.
 
 ### <a name="telemetry-event-filter"></a>Telemetri olay filtresi
 
-Özel olayları filtreler (kullanarak oturum [TrackEvent()](../../azure-monitor/app/api-custom-events-metrics.md#trackevent)).
+Özel olayları filtreler ( [Trackevent ()](../../azure-monitor/app/api-custom-events-metrics.md#trackevent)kullanılarak günlüğe kaydedilir).
 
 
 ```XML
@@ -171,12 +167,12 @@ Telemetri yapay belirli kaynaklar için filtreleyin:
 ```
 
 
-* `NotNeededNames` -Olay adları virgülle ayrılmış listesi.
+* `NotNeededNames`, olay adlarının virgülle ayrılmış listesi.
 
 
-### <a name="trace-telemetry-filter"></a>İzleme Telemetri filtreleme
+### <a name="trace-telemetry-filter"></a>Telemetri filtresini izleme
 
-Günlük izlemeleri filtreleri (kullanarak oturum [TrackTrace()](../../azure-monitor/app/api-custom-events-metrics.md#tracktrace) veya [günlüğe kaydetme çerçevesi Toplayıcı](java-trace-logs.md)).
+Günlük izlemelerini filtreler ( [Tracktrace ()](../../azure-monitor/app/api-custom-events-metrics.md#tracktrace) veya bir [günlük çerçevesi toplayıcısı](java-trace-logs.md)kullanılarak günlüğe kaydedilir).
 
 ```XML
 
@@ -185,20 +181,20 @@ Günlük izlemeleri filtreleri (kullanarak oturum [TrackTrace()](../../azure-mon
            </Processor>
 ```
 
-* `FromSeverityLevel` Geçerli değerler şunlardır:
-  *  Kapalı - tüm izlemeleri Filtrele
-  *  İzleme - filtre yok. İzleme düzeyi eşit
-  *  BİLGİ - out izleme düzeyi filtresi
-  *  Uyarı - filtre izleme ve bilgileri
-  *  HATA - out UYAR, bilgi, izleme filtresi
-  *  Kritik - tüm kritik filtresi
+* `FromSeverityLevel` geçerli değerler şunlardır:
+  *  KAPALı-tüm izlemeleri filtreleme
+  *  TRACE-filtreleme yok. Izleme düzeyine eşit
+  *  BILGI-Izleme düzeyini filtrele
+  *  UYAR-Izleme ve BILGI filtreleme
+  *  HATA-uyarı filtreleme, BILGI, Izleme
+  *  KRITIK-tüm KRITIK bir filtre
 
 
-## <a name="custom-filters"></a>Özel Filtreler
+## <a name="custom-filters"></a>Özel filtreler
 
-### <a name="1-code-your-filter"></a>1. Filtreniz kod
+### <a name="1-code-your-filter"></a>1. filtrenizi kodlayın
 
-Kodunuzda uygulayan bir sınıf oluşturma `TelemetryProcessor`:
+Kodunuzda `TelemetryProcessor`uygulayan bir sınıf oluşturun:
 
 ```Java
 
@@ -235,9 +231,9 @@ Kodunuzda uygulayan bir sınıf oluşturma `TelemetryProcessor`:
 ```
 
 
-### <a name="2-invoke-your-filter-in-the-configuration-file"></a>2. Yapılandırma dosyası, filtre çağırma
+### <a name="2-invoke-your-filter-in-the-configuration-file"></a>2. yapılandırma dosyasında filtrenizi çağırma
 
-Applicationınsights.XML içinde:
+ApplicationInsights. xml dosyasında:
 
 ```XML
 
@@ -254,9 +250,9 @@ Applicationınsights.XML içinde:
 
 ```
 
-### <a name="3-invoke-your-filter-java-spring"></a>3. Filtreniz (Java Spring) Çağır
+### <a name="3-invoke-your-filter-java-spring"></a>3. filtrenizi çağırma (Java Spring)
 
-Spring framework tabanlı uygulamalar için özel telemetri işlemci bir çekirdeklere ana uygulama sınıfınızda kaydedilmesi gerekir. Uygulama başlatıldığında bunlar autowired olacaktır.
+Yay çerçevesini temel alan uygulamalar için, özel telemetri işlemcilerin ana uygulama sınıfınıza bir çekirdeklere olarak kaydedilmesi gerekir. Daha sonra uygulama başladığında bu kullanıcılar bu şekilde yeniden kablolu olur.
 
 ```Java
 @Bean
@@ -265,15 +261,15 @@ public TelemetryProcessor successFilter() {
 }
 ```
 
-Kendi filtre parametrelerinde oluşturmanız gerekecektir `application.properties` ve özel filtrenizle bu parametreleri geçirmek için Spring Boot'ın te dış yapılandırma framework yararlanın. 
+Bu parametreleri özel Filtrenizle iletmek için `application.properties` içinde kendi filtre parametrelerinizi oluşturmanız ve Spring Boot 'ın externalized Configuration Framework 'ten yararlanmak gerekir. 
 
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-*My filtresi çalışmıyor.*
+*Filtreim çalışmıyor.*
 
-* Geçerli parametre değerleri sağladığınızdan denetleyin. Örneğin, süreleri tamsayılar olmalıdır. Geçersiz değerler yok sayılacak filtre neden olur. Filtrenizi özel bir oluşturucu veya set yöntemi bir özel durum oluşturursa, göz ardı edilir.
+* Geçerli parametre değerleri sağladıysanız emin olun. Örneğin, süreler tamsayı olmalıdır. Geçersiz değerler filtrenin yoksayılmasına neden olacak. Özel filtreniz bir Oluşturucu veya ayarlama yönteminden bir özel durum oluşturursa, yok sayılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Örnekleme](../../azure-monitor/app/sampling.md) -örnekleme ölçümlerinizi eğme olmayan alternatif olarak göz önünde bulundurun.
+* [Örnekleme](../../azure-monitor/app/sampling.md) -örneklerinizi eğmez bir alternatif olarak örnekleme yapmayı düşünün.

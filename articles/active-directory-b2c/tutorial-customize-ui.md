@@ -1,6 +1,6 @@
 ---
-title: Öğretici - özelleştirebilir kullanıcı deneyimleri - Azure Active Directory B2C | Microsoft Docs
-description: Azure portalını kullanarak uygulamalarınızı Azure Active Directory B2C, kullanıcı arabirimini özelleştirmeyi öğrenin.
+title: Öğretici-kullanıcı deneyimleri arabirimini özelleştirme-Azure Active Directory B2C | Microsoft Docs
+description: Azure Active Directory B2C Azure portal kullanarak uygulamalarınızın Kullanıcı arabirimini özelleştirmeyi öğrenin.
 services: B2C
 author: mmacy
 manager: celestedg
@@ -10,73 +10,73 @@ ms.topic: conceptual
 ms.date: 02/01/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 4c0fdbee2c5108dd3203217cb721576703b3faca
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 08edf6e841dc7d389573d5e5b5ea7e043f750e76
+ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66512091"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71291102"
 ---
-# <a name="tutorial-customize-the-interface-of-user-experiences-in-azure-active-directory-b2c"></a>Öğretici: Azure Active Directory B2C kullanıcı deneyimleri arabirimini özelleştirme
+# <a name="tutorial-customize-the-interface-of-user-experiences-in-azure-active-directory-b2c"></a>Öğretici: Azure Active Directory B2C Kullanıcı deneyimlerinin arabirimini özelleştirme
 
-Daha yaygın kullanıcı deneyimleri için gibi kaydolma, oturum açma ve profil düzenleme, kullanabileceğiniz [kullanıcı akışları](active-directory-b2c-reference-policies.md) Azure Active Directory (Azure AD) B2C'de. Bu öğreticide bilgiler edinin yardımcı olur nasıl [kullanıcı arabirimini (UI) özelleştirmek](customize-ui-overview.md) kendi HTML ve CSS dosyaları kullanarak bu deneyimleri.
+Kaydolma, oturum açma ve profil düzenlemesi gibi daha yaygın kullanıcı deneyimleri için [Kullanıcı akışlarını](active-directory-b2c-reference-policies.md) Azure Active Directory B2C (Azure AD B2C) kullanabilirsiniz. Bu öğreticideki bilgiler, kendi HTML ve CSS dosyalarınızı kullanarak bu deneyimlerin [Kullanıcı arabirimini (UI)](customize-ui-overview.md) nasıl özelleştireceğinizi öğrenmenize yardımcı olur.
 
 Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
-> * UI özelleştirme dosyaları oluşturma
-> * Güncelleştirme dosyaları kullanmak için kullanıcı akışı
-> * Özelleştirilmiş UI testi
+> * UI özelleştirme dosyaları oluştur
+> * Dosyaları kullanmak için kullanıcı akışını güncelleştirme
+> * Özelleştirilmiş kullanıcı arabirimini test etme
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-[Kullanıcı akışı Oluştur](tutorial-create-user-flows.md) etkinleştirme kullanıcıların kaydolmak ve uygulamanız için oturum açın.
+Kullanıcıların uygulamanızda kaydolup oturum açmasını sağlamak için [bir Kullanıcı akışı oluşturun](tutorial-create-user-flows.md) .
 
-## <a name="create-customization-files"></a>Özelleştirme dosyaları oluşturma
+## <a name="create-customization-files"></a>Özelleştirme dosyaları oluştur
 
-Bir Azure depolama hesabı ve kapsayıcı oluşturur ve ardından kapsayıcıda temel HTML ve CSS dosyaları yerleştirebilirsiniz.
+Bir Azure depolama hesabı ve kapsayıcısı oluşturup, temel HTML ve CSS dosyalarını kapsayıcıya yerleştirebilirsiniz.
 
 ### <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 
-Bu öğretici için birçok yolla dosyalarınızı depolayabilirsiniz olsa da, onları depolamak [Azure Blob Depolama](../storage/blobs/storage-blobs-introduction.md).
+Dosyalarınızı birçok şekilde depolayabilmenize karşın, bu öğreticide bunları [Azure Blob depolama](../storage/blobs/storage-blobs-introduction.md)alanında depoaktarabilirsiniz.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Azure aboneliğinizi içeren dizine kullandığınızdan emin olun. Seçin **dizin ve abonelik filtresi** üst menüdeki ve aboneliğinizi içeren dizini seçin. Bu dizin, Azure B2C kiracınızın içerdiğinden hesaptan farklıdır.
-3. Tüm hizmetleri Azure portalının sol üst köşedeki seçin, arayın ve seçin **depolama hesapları**. 
+2. Azure aboneliğinizi içeren dizini kullandığınızdan emin olun. Üstteki menüden **Dizin + abonelik** filtresini seçin ve aboneliğinizi içeren dizini seçin. Bu dizin, Azure B2C kiracınızı içeren olandan farklı.
+3. Azure portal sol üst köşesindeki tüm hizmetler ' i seçin, **depolama hesapları**' nı arayıp seçin.
 4. **Add (Ekle)** seçeneğini belirleyin.
-5. Altında **kaynak grubu**seçin **Yeni Oluştur**yeni kaynak grubu için bir ad girin ve ardından **Tamam**.
+5. **Kaynak grubu**altında **Yeni oluştur**' u seçin, yeni kaynak grubu için bir ad girin ve ardından **Tamam**' a tıklayın.
 6. Depolama hesabı için bir ad girin. Seçtiğiniz ad Azure’da benzersiz olmalı, uzunluğu 3 ile 24 karakter arasında olmalı ve yalnızca sayı ile küçük harf içermelidir.
-7. Depolama hesabının konumu seçin veya varsayılan konumu kabul edin. 
-8. Diğer tüm varsayılan değerleri kabul edin, seçin **gözden geçir + Oluştur**ve ardından **Oluştur**.
-9. Depolama hesabı oluşturulduktan sonra seçin **kaynağa Git**.
+7. Depolama hesabının konumunu seçin veya varsayılan konumu kabul edin.
+8. Diğer tüm varsayılan değerleri kabul edin, **gözden geçir + oluştur**' u seçin ve ardından **Oluştur**' a tıklayın.
+9. Depolama hesabı oluşturulduktan sonra **Kaynağa Git**' i seçin.
 
 ### <a name="create-a-container"></a>Bir kapsayıcı oluşturma
 
-1. Depolama hesabı genel bakış sayfasında **Blobları**.
-2. Seçin **kapsayıcı**, kapsayıcı için bir ad girin, seçin **Blob (yalnızca BLOB'lar için anonim okuma erişimi)** ve ardından **Tamam**.
+1. Depolama hesabının genel bakış sayfasında, Bloblar ' ıseçin.
+2. **Kapsayıcı**' yı seçin, kapsayıcı için bir ad girin, blob ' u seçin **(yalnızca blob 'lar için anonim okuma erişimi)** ve ardından **Tamam**' a tıklayın.
 
 ### <a name="enable-cors"></a>CORS'yi etkinleştirme
 
- Bir tarayıcıda Azure AD B2C kod modern ve standart bir yaklaşım, bir kullanıcı akışı belirttiğiniz URL'den özel içerik yüklemek için kullanır. Çıkış noktaları arası kaynak paylaşımı (CORS) başka etki alanlarından istenmesi için bir web sayfasında sınırlı kaynaklar sağlar.
+ Bir tarayıcıda Azure AD B2C kod, Kullanıcı akışında belirttiğiniz bir URL 'den özel içerik yüklemek için modern ve standart bir yaklaşım kullanır. Çıkış noktaları arası kaynak paylaşımı (CORS), bir Web sayfasındaki kısıtlanmış kaynakların diğer etki alanlarından istenmesinin yapılmasına izin verir.
 
-1. Menüde **CORS**.
-2. İçin **çıkış noktaları**, girin `https://your-tenant-name.b2clogin.com`. Değiştirin `your-tenant-name` Azure AD B2C kiracınızın adı. Örneğin, `https://fabrikam.b2clogin.com`. Kiracı adınızın girerken tamamen küçük harf kullanmanız gerekir.
-3. İçin **izin verilen yöntemleri**, her ikisini de seçin `GET` ve `OPTIONS`.
-4. İçin **izin verilen üstbilgileri**, yıldız işareti (*) girin.
-5. İçin **kullanıma sunulan üst bilgiler**, yıldız işareti (*) girin.
-6. İçin **Maksimum yaş**, 200 girin.
+1. Menüsünde **CORS**' yi seçin.
+2. **Izin verilen çıkış noktaları**için `https://your-tenant-name.b2clogin.com`girin. Değiştirin `your-tenant-name` Azure AD B2C kiracınızın adı. Örneğin, `https://fabrikam.b2clogin.com`. Kiracı adınızı girerken tüm küçük harfleri kullanmanız gerekir.
+3. **İzin verilen Yöntemler**için, `GET``PUT`ve `OPTIONS`seçin.
+4. **Izin verilen üst bilgiler**için bir yıldız işareti (*) girin.
+5. **Gösterilen üstbilgiler**için bir yıldız işareti (*) girin.
+6. **Maksimum yaş**için 200 girin.
 
-    ![CORS'yi etkinleştirme](./media/tutorial-customize-ui/enable-cors.png)
+    ![Azure Blob depolama 'daki CORS yapılandırma sayfası Azure portal](./media/tutorial-customize-ui/enable-cors.png)
 
 5. **Kaydet**’e tıklayın.
 
-### <a name="create-the-customization-files"></a>Özelleştirme dosyaları oluşturma
+### <a name="create-the-customization-files"></a>Özelleştirme dosyalarını oluşturma
 
-Oturum açma deneyimi, kullanıcı arabirimini özelleştirmek için basit bir HTML ve CSS dosyası oluşturarak başlayın. Dilediğiniz gibi ancak sahip olmalıdır, HTML yapılandırabileceğiniz bir **div** tanımlayıcısına sahip öğe `api`. Örneğin, `<div id="api"></div>`. Azure AD B2C öğeye eklediği `api` sayfası görüntülendiğinde, kapsayıcı.
+Kaydolma deneyiminin Kullanıcı arabirimini özelleştirmek için, basit bir HTML ve CSS dosyası oluşturarak başlayın. HTML 'nizi istediğiniz şekilde yapılandırabilirsiniz, ancak tanımlayıcı `api`içeren bir **div** öğesi olmalıdır. Örneğin, `<div id="api"></div>`. Sayfa görüntülenirken öğeleri `api` kapsayıcıya Azure AD B2C çıkartır.
 
-1. Yerel bir klasörde aşağıdaki dosyayı oluşturun ve, değiştirdiğinizden emin olun `your-storage-account` depolama hesabı adını ve `your-container` oluşturduğunuz kapsayıcı adı. Örneğin, `https://store1.blob.core.windows.net/b2c/style.css`.
+1. Yerel bir klasörde aşağıdaki dosyayı oluşturun ve depolama hesabının adına ve `your-storage-account` `your-container` oluşturduğunuz kapsayıcının adına değişiklik yaptığınızdan emin olun. Örneğin, `https://store1.blob.core.windows.net/b2c/style.css`.
 
     ```html
     <!DOCTYPE html>
@@ -85,17 +85,17 @@ Oturum açma deneyimi, kullanıcı arabirimini özelleştirmek için basit bir H
         <title>My B2C Application</title>
         <link rel="stylesheet" href="https://your-storage-account.blob.core.windows.net/your-container/style.css">
       </head>
-      <body>  
+      <body>
         <h1>My B2C Application</h1>
         <div id="api"></div>
       </body>
     </html>
     ```
 
-    Sayfa, istediğiniz herhangi bir şekilde tasarlanabilir ancak **API** DIV öğesi, oluşturduğunuz tüm HTML özelleştirme dosyası için gereklidir. 
+    Sayfa istediğiniz şekilde tasarlanabilir, ancak oluşturduğunuz herhangi bir HTML özelleştirme dosyası için **API** div öğesi gereklidir.
 
-3. Dosyayı Farklı Kaydet *özel ui.html*.
-4. Kaydolma veya oturum açma sayfasında, Azure AD B2C eklediği öğeleri dahil olmak üzere tüm öğeleri merkezi aşağıdaki basit CSS oluşturun.
+3. Dosyayı *Custom-ui. html*olarak kaydedin.
+4. Kaydolma veya oturum açma sayfasındaki tüm öğeleri, satır içine alan Azure AD B2C öğeler de dahil olmak üzere, aşağıdaki basit CSS 'yi oluşturun.
 
     ```css
     h1 {
@@ -103,7 +103,7 @@ Oturum açma deneyimi, kullanıcı arabirimini özelleştirmek için basit bir H
       text-align: center;
     }
     .intro h2 {
-      text-align: center; 
+      text-align: center;
     }
     .entry {
       width: 300px ;
@@ -111,7 +111,7 @@ Oturum açma deneyimi, kullanıcı arabirimini özelleştirmek için basit bir H
       margin-right: auto ;
     }
     .divider h2 {
-      text-align: center; 
+      text-align: center;
     }
     .create {
       width: 300px ;
@@ -120,49 +120,49 @@ Oturum açma deneyimi, kullanıcı arabirimini özelleştirmek için basit bir H
     }
     ```
 
-5. Dosyayı Farklı Kaydet *style.css*.
+5. Dosyayı *Style. css*olarak kaydedin.
 
-### <a name="upload-the-customization-files"></a>Özelleştirme dosyaları karşıya yükleme
+### <a name="upload-the-customization-files"></a>Özelleştirme dosyalarını karşıya yükle
 
-Bu öğreticide, Azure AD B2C bunlara erişebilmesi için depolama hesabında oluşturulan dosyalarını depolar.
+Bu öğreticide, Azure AD B2C, depolama hesabında oluşturduğunuz dosyaları depoladığınızda, bu sayede bunlara erişebilir.
 
-1. Seçin **tüm hizmetleri** Azure portalının sol üst köşedeki arayın ve seçin **depolama hesapları**.
-2. Oluşturduğunuz depolama hesabını seçin, **Blobları**ve ardından oluşturduğunuz kapsayıcıyı seçin.
-3. Seçin **karşıya**, bulun ve seçin *özel ui.html* dosya ve ardından **karşıya**.
+1. Azure portal sol üst köşesindeki **tüm hizmetler** ' i seçin, **depolama hesapları**' nı arayıp seçin.
+2. Oluşturduğunuz depolama hesabını seçin, Bloblar 'ı seçin ve ardından oluşturduğunuz kapsayıcıyı seçin.
+3. **Karşıya yükle**' yi seçin, *Custom-ui. html* dosyasını seçin ve ardından **karşıya yükle**' ye tıklayın.
 
-    ![Özelleştirme dosyaları karşıya yükleme](./media/tutorial-customize-ui/upload-blob.png)
+    ![Karşıya yükleme düğmesi ve vurgulanan dosyalar için portalda blob sayfasını karşıya yükle](./media/tutorial-customize-ui/upload-blob.png)
 
-4. Daha sonra öğreticide kullanmak üzere karşıya yüklediğiniz dosyanın URL'sini kopyalayın.
-5. İçin 3 ve 4 adımı yineleyin *style.css* dosya.
+4. Daha sonra öğreticide kullanmak üzere karşıya yüklediğiniz dosyanın URL 'sini kopyalayın.
+5. *Style. css* dosyası için 3. ve 4. adımı yineleyin.
 
-## <a name="update-the-user-flow"></a>Kullanıcı akışı güncelleştir
+## <a name="update-the-user-flow"></a>Kullanıcı akışını güncelleştirme
 
-1. Seçin **tüm hizmetleri** Azure portalı ve ardından arayın ve seçin, sol üst köşedeki **Azure AD B2C**.
-2. Seçin **kullanıcı akışları (ilke)** ve ardından *B2C_1_signupsignin1* kullanıcı akışı.
-3. Seçin **sayfa düzenleri**ve ardından altındaki **birleşik kaydolma veya oturum açma sayfası**, tıklayın **Evet** için **özel sayfa içeriği kullan**.
-4. İçinde **özel sayfa URI'si**, URI'sini girin *özel ui.html* daha önce kaydettiğiniz dosya.
-5. Sayfanın üst kısmında seçin **Kaydet**.
+1. Azure portal sol üst köşesindeki **tüm hizmetler** ' i seçin ve ardından **Azure AD B2C**' i arayıp seçin.
+2. **Kullanıcı akışları ' nı (ilkeler)** seçin ve ardından *B2C_1_signupsignin1* Kullanıcı akışını seçin.
+3. **Sayfa düzenlerini**seçin ve ardından **Birleşik kaydolma veya oturum açma sayfası**altında, **özel sayfa içeriğini kullanmak**için **Evet** ' i tıklatın.
+4. **Özel sayfa URI 'si**içinde, daha önce kaydettiğiniz *Custom-ui. html* dosyasının URI 'sini girin.
+5. Sayfanın en üstünde **Kaydet**' i seçin.
 
-## <a name="test-the-user-flow"></a>Kullanıcı akışı test edin
+## <a name="test-the-user-flow"></a>Kullanıcı akışını test etme
 
-1. Azure AD B2C kiracınızı seçin **kullanıcı akışları** seçip *B2C_1_signupsignin1* kullanıcı akışı.
-2. Sayfanın üst kısmında tıklayın **kullanıcı akışı çalıştırma**.
-3. Tıklayın **kullanıcı akışı çalıştırma** düğmesi.
+1. Azure AD B2C kiracınızda **Kullanıcı akışları** ' nı seçin ve *B2C_1_signupsignin1* Kullanıcı akışı ' nı seçin.
+2. Sayfanın üst kısmında, **Kullanıcı akışını Çalıştır**' a tıklayın.
+3. **Kullanıcı akışını Çalıştır** düğmesine tıklayın.
 
-    ![Kaydolma veya oturum açma kullanıcı akışı çalıştırma](./media/tutorial-customize-ui/run-user-flow.png)
+    ![Kaydolma veya oturum açma Kullanıcı akışı için Kullanıcı akış sayfasını Çalıştır](./media/tutorial-customize-ui/run-user-flow.png)
 
-    Oluşturduğunuz CSS dosyasını temel alan bir sayfa Orta öğeleriyle aşağıdaki örneğe benzer görmeniz gerekir:
+    Aşağıdaki örneğe benzer bir sayfa, oluşturduğunuz CSS dosyasına göre ortalanan öğeleri görmeniz gerekir:
 
-    ![Kullanıcı akışı sonuçları](./media/tutorial-customize-ui/run-now.png) 
+    ![Özel UI öğeleriyle kaydolma veya oturum açma sayfasını gösteren Web tarayıcısı](./media/tutorial-customize-ui/run-now.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, öğrendiğiniz nasıl yapılır:
+Bu makalede, şu şekilde nasıl yapılacağını öğrendiniz:
 
 > [!div class="checklist"]
-> * UI özelleştirme dosyaları oluşturma
-> * Güncelleştirme dosyaları kullanmak için kullanıcı akışı
-> * Özelleştirilmiş UI testi
+> * UI özelleştirme dosyaları oluştur
+> * Dosyaları kullanmak için kullanıcı akışını güncelleştirme
+> * Özelleştirilmiş kullanıcı arabirimini test etme
 
 > [!div class="nextstepaction"]
-> [Azure Active Directory B2C'de dil özelleştirme](active-directory-b2c-reference-language-customization.md)
+> [Azure Active Directory B2C dil özelleştirmesi](active-directory-b2c-reference-language-customization.md)

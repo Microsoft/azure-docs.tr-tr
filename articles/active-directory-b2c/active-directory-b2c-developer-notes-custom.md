@@ -1,6 +1,6 @@
 ---
-title: Özel ilkeler - Azure Active Directory B2C için Geliştirici Notları | Microsoft Docs
-description: Yapılandırma ve Azure AD B2C ile özel ilkelerinin korunması geliştiriciler için notlar.
+title: Özel ilkeler için geliştirici notları-Azure Active Directory B2C | Microsoft Docs
+description: Özel ilkelerle Azure AD B2C yapılandırma ve sürdürme hakkında geliştiricilere yönelik notlar.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,111 +10,112 @@ ms.topic: conceptual
 ms.date: 03/18/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 1d0be4ec2ed8feb308839377e0494ef2f4b78368
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3f8d1ac217647ee292338da875671ef8bd3f79db
+ms.sourcegitcommit: 920ad23613a9504212aac2bfbd24a7c3de15d549
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66510206"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "68227206"
 ---
-# <a name="developer-notes-for-custom-policies-in-azure-active-directory-b2c"></a>Özel ilkeleri Azure Active Directory B2C için Geliştirici Notları
+# <a name="developer-notes-for-custom-policies-in-azure-active-directory-b2c"></a>Azure Active Directory B2C özel ilkeler için geliştirici notları
 
-Özel ilke yapılandırmasının Azure Active Directory B2C'de genel kullanıma sunulmuştur. Yapılandırma, bu yöntem, Gelişmiş kimlik geliştiricileri karmaşık kimlik çözümleri oluşturma yöneliktir. Özel ilkeleri kimlik deneyimi çerçevesi gücünü Azure AD B2C kiracıları içinde kullanılabilir hale getirir. Gelişmiş kimlik geliştiriciler özel ilkeleri kullanarak Tamamlanıyor kılavuzlarına ve başvuru belgeleri okuma biraz zaman yatırım planlamanız gerekir.
+Azure Active Directory B2C özel ilke yapılandırması genel kullanıma sunulmuştur. Bu yapılandırma yöntemi, karmaşık kimlik çözümleri oluşturan gelişmiş kimlik geliştiricilerine yöneliktir. Özel ilkeler, kimlik deneyimi çerçevesinin gücünü Azure AD B2C kiracılarda kullanılabilir hale getirir.
+Özel ilkeleri kullanan gelişmiş kimlik geliştiricileri, yürüme-kılavuzlarına ve başvuru belgelerini okumayı tamamlamak için bir süre yatırmaya planlanmalıdır.
 
-Özel ilke seçenekleri çoğunu artık genel kullanıma açık olsa da, teknik profil türleri ve içerik tanımı yazılım yaşam döngüsünün farklı aşamalarında API'lerden gibi temel özellikleri vardır. Çok daha fazlası geliyor. Aşağıdaki tabloda daha ayrıntılı bir düzeyde kullanılabilirlik düzeyini belirtir.  
+Kullanılabilir özel ilke seçeneklerinin büyük bir kısmında genel kullanıma sunuldu olsa da, teknik profil türleri ve yazılım yaşam döngüsünün farklı aşamalarında bulunan içerik tanımı API 'Leri gibi temel yetenekler vardır. Çok daha fazlası geliyor. Aşağıdaki tabloda daha ayrıntılı bir düzeyde kullanılabilirlik düzeyi belirtilir.
 
-## <a name="features-that-are-generally-available"></a>Genel kullanıma sunulan özellikler
+## <a name="features-that-are-generally-available"></a>Genel kullanıma açık olan özellikler
 
-- Özel ilkeler kullanarak yazar ve karşıya yükleme özel kimlik doğrulama kullanıcı yolculuklarından.  
-    - Kullanıcı yolculuklarından değişimleri adım adım talep sağlayıcıları arasında açıklanmaktadır.  
-    - Koşullu dallanmayı içinde kullanıcı yolculuklarından tanımlayın.  
-- Kendi özel kimlik doğrulama kullanıcı yolculuklarından Hizmetleri REST API özellikli birlikte.  
-- Openıdconnect protokolünü ile uyumlu olan kimlik sağlayıcıları ile federasyona eklemek.  
-- SAML 2.0 protokolü kullanan kimlik sağlayıcıları ile federasyona eklemek.   
+- Özel ilkeler kullanarak özel kimlik doğrulama Kullanıcı yolculukları yazın ve karşıya yükleyin.
+    - Talep sağlayıcıları arasındaki değişimleri adım adım kabul eden kullanıcı hakkındaki adımları açıklama.
+    - Kullanıcı yolculukları 'nda koşullu dallanma tanımlayın.
+- Özel kimlik doğrulama Kullanıcı yolculukları 'nda REST API özellikli hizmetlerle birlikte çalışır.
+- Openıdconnect protokolüyle uyumlu kimlik sağlayıcılarıyla federasyona bağlayın.
+- SAML 2,0 protokolüne bağlı kimlik sağlayıcılarıyla federasyona ayırın.
 
-## <a name="responsibilities-of-custom-policy-feature-set-developers"></a>Özel ilke özellik kümesini geliştiricilerin sorumlulukları
+## <a name="responsibilities-of-custom-policy-feature-set-developers"></a>Özel ilke özelliğinin sorumlulukları-geliştiricilerin set
 
-El ile ilke yapılandırması, temel alınan platformu Azure AD B2C'yi ve benzersiz bir güven framework oluşturulmasını sonuçlarında alt düzey erişim verir. Özel kimlik sağlayıcıları, güven ilişkilerini birçok olası permütasyon ile dış hizmetler ve adım adım iş akışı tümleştirmeleri tasarım ve yapılandırma sistemli bir yaklaşım gerektirir. 
+El ile ilke yapılandırması, Azure AD B2C temel alınan platforma alt düzey erişim sağlar ve benzersiz bir güven çerçevesinin oluşturulmasına neden olur. Özel kimlik sağlayıcılarının, güven ilişkilerinin, dış hizmetlerle tümleştirmelerin yanı sıra adım adım iş akışlarının tasarımı ve yapılandırması için methodical yaklaşımı olması gerekir.
 
-Özel ilke özellik kümesi kullanan geliştiriciler, aşağıdaki yönergelere uymanız gerekir:
+Özel ilke özelliği kümesini kullanan geliştiriciler aşağıdaki yönergelere uymalıdır:
 
-- Özel ilkeler ve anahtar/gizli yönetim yapılandırma dili ile Windows'un öğrenin. Daha fazla bilgi için [TrustFrameworkPolicy](trustframeworkpolicy.md). 
-- Senaryolar ve özel tümleştirmeler sahipliğini al. Çalışmanızı belge ve canlı site kuruluşunuz hakkında bilgilendirin.  
-- Sistemli senaryo testi gerçekleştirin. 
-- Yazılım geliştirme ve en az bir geliştirme ve test ortamının en iyi yöntemler ve bir üretim ortamı hazırlama izleyin. 
-- Kimlik sağlayıcıları ve Hizmetleri ile tümleştirme yeni gelişmeler hakkında bilgi sahibi olmak. Örneğin, gizli dizileri ve zamanlanmış hem de zamanlanmamış değişikliklerin hizmetine değişiklikleri takip edin. 
-- Etkin izleme işlevini ayarlama ve üretim ortamlarında yanıt verme hızını izleyin. Application Insights ile tümleştirme hakkında daha fazla bilgi için bkz. [Azure Active Directory B2C: Günlükleri toplama](active-directory-b2c-custom-guide-eventlogger-appins.md). 
-- İlgili kişi e-posta adreslerini Azure aboneliğinde güncel kalmasını sağlayın ve Microsoft Canlı site takım e-postaları yanıt vermeye devam edebilir. 
-- Microsoft Canlı site ekibi tarafından Bunu yapmak için önerilir, zamanında gerekeni yapın.
+- Özel ilkelerin ve anahtar/gizli dizi yönetiminin yapılandırma dili hakkında bilgi sahibi olun. Daha fazla bilgi için bkz. [TrustFrameworkPolicy](trustframeworkpolicy.md).
+- Senaryoların ve özel tümleştirmelerin sahipliğini alın. Çalışmanızı belgeleyin ve canlı site kuruluşunuza bildirin.
+- Methodical senaryo testi gerçekleştirin.
+- En az bir geliştirme ve test ortamı ve bir üretim ortamı ile yazılım geliştirme ve hazırlama en iyi uygulamalarını izleyin.
+- İle tümleştirdiğinizde, kimlik sağlayıcılarının ve hizmetlerin yeni geliştirmeleri hakkında bilgi sahibi olun. Örneğin, gizli değişiklikler ve hizmette zamanlanan ve zamanlanmamış değişiklikler üzerinde değişiklik takip edin.
+- Etkin izlemeyi ayarlayın ve üretim ortamlarının yanıt hızını izleyin. Application Insights tümleştirme hakkında daha fazla bilgi için bkz [. Azure Active Directory B2C: Günlükler](active-directory-b2c-custom-guide-eventlogger-appins.md)toplanıyor.
+- İletişim e-posta adreslerini Azure aboneliğinde güncel tutun ve Microsoft canlı site ekibi e-postalarına yanıt vermeye devam edin.
+- Microsoft Live-site ekibi tarafından bunu yapmanız önerilir.
 
-## <a name="terms-for-features-in-public-preview"></a>Genel Önizleme özelliklerine yönelik terimleri
+## <a name="terms-for-features-in-public-preview"></a>Genel önizlemede özellikler için terimler
 
-- Genel Önizleme özellikleri yalnızca değerlendirme amacıyla kullanmanızı öneririz. 
-- Hizmet düzeyi sözleşmeleri (SLA'lar) genel Önizleme özellikleri için geçerli değildir.
-- Genel Önizleme özellikleri için destek istekleri normal destek kanalları Dosyalanan. 
+- Genel Önizleme özelliklerini yalnızca değerlendirme amacıyla kullanmanızı öneririz.
+- Hizmet düzeyi sözleşmeleri (SLA 'Lar) Genel Önizleme özellikleri için geçerlidir.
+- Genel Önizleme özelliklerine yönelik destek istekleri, normal destek kanalları aracılığıyla dosyalanır.
 
-## <a name="features-by-stage-and-known-issues"></a>Aşama ve bilinen sorunlar göre Özellikler
+## <a name="features-by-stage-and-known-issues"></a>Aşamalara ve bilinen sorunlara göre Özellikler
 
-Özel ilke/kimlik deneyimi çerçevesi özellikleri sürekli ve hızlı geliştirilme aşamasındadır. Aşağıdaki tabloda, özellikleri ve bileşen kullanılabilirliği için kullanılan bir dizindir.
+Özel ilke/kimlik deneyimi çerçevesi özellikleri sabit ve hızlı geliştirme aşamasındadır. Aşağıdaki tablo, özelliklerin ve bileşen kullanılabilirliğinin bir dizinidir.
 
-### <a name="identity-providers-tokens-protocols"></a>Kimlik sağlayıcıları, belirteçleri, protokolleri
+### <a name="identity-providers-tokens-protocols"></a>Kimlik sağlayıcıları, belirteçler, protokoller
 
 | Özellik | Geliştirme | Önizleme | GA | Notlar |
-|-------- | ----------- | ------- | -- | ----- |
-| IDP Openıdconnect |  |  | X | Örneğin, Google +.  |
-| IDP OAUTH2 |  |  | X | Örneğin, Facebook.  |
-| IDP-OAUTH1 (twitter) |  | X |  | Örneğin, Twitter. |
-| IDP-OAUTH1 (twitter ex) |  |  |  | Desteklenmiyor |
+|-------- | :-----------: | :-------: | :--: | ----- |
+| IDP-Openıdconnect |  |  | X | Örneğin, Google +.  |
+| IDP-OAUTH2 |  |  | X | Örneğin, Facebook.  |
+| IDP-OAUTH1 (Twitter) |  | X |  | Örneğin, Twitter. |
+| IDP-OAUTH1 (ex-Twitter) |  |  |  | Desteklenmiyor |
 | IDP-SAML |  |   | X | Örneğin, Salesforce, ADFS. |
-| IDP WSFED | X |  |  |  |
+| IDP-WSBES | X |  |  |  |
 | Bağlı olan taraf OAUTH1 |  |  |  | Desteklenmiyor. |
 | Bağlı olan taraf OAUTH2 |  |  | X |  |
-| Bağlı olan taraf OIDC |  |  | X |  |
+| Bağlı olan taraf OıDC |  |  | X |  |
 | Bağlı olan taraf SAML | X |  |  |  |
-| Bağlı olan taraf WSFED | X |  |  |  |
-| REST API ile temel ve sertifika kimlik doğrulaması |  |  | X | Örneğin, Azure Logic Apps. |
+| Bağlı olan taraf wsbes | X |  |  |  |
+| Temel ve sertifika kimlik doğrulaması ile REST API |  |  | X | Örneğin, Azure Logic Apps. |
 
 ### <a name="component-support"></a>Bileşen desteği
 
 | Özellik | Geliştirme | Önizleme | GA | Notlar |
-| ------- | ----------- | ------- | -- | ----- |
+| ------- | :-----------: | :-------: | :--: | ----- |
 | Azure Multi Factor Authentication |  |  | X |  |
-| Yerel dizin olarak Azure Active Directory |  |  | X |  |
-| Azure e-posta alt sistemi için e-posta doğrulama |  |  | X |  |
-| Çok dil desteği|  |  | X |  |
-| Koşul doğrulamaları |  |  | X | Örneğin, parola karmaşıklığını. |
-| Üçüncü taraf e-posta hizmeti sağlayıcıları kullanma | X |  |  |  |
+| Yerel Dizin olarak Azure Active Directory |  |  | X |  |
+| Eposta doğrulaması için Azure e-posta alt sistemi |  |  | X |  |
+| Çoklu dil desteği|  |  | X |  |
+| Koşul doğrulamaları |  |  | X | Örneğin, parola karmaşıklığı. |
+| Üçüncü taraf e-posta hizmeti sağlayıcılarını kullanma | X |  |  |  |
 
 ### <a name="content-definition"></a>İçerik tanımı
 
 | Özellik | Geliştirme | Önizleme | GA | Notlar |
-| ------- | ----------- | ------- | -- | ----- |
-| Hata sayfası, api.error |  |  | X |  |
-| IDP Seçimi sayfasında, api.idpselections |  |  | X |  |
-| Kaydolma, IDP seçimi api.idpselections.signup |  |  | X |  |
-| Parolayı unuttum api.localaccountpasswordreset |  |  | X |  |
-| Yerel hesap oturum açma api.localaccountsignin |  |  | X |  |
-| Yerel hesap kaydolma, api.localaccountsignup |  |  | X |  |
-| MFA sayfası, api.phonefactor |  |  | X |  |
-| Otomatik olarak onaylanan sosyal hesap kaydolma, api.selfasserted |  |  | X |  |
-| Profil güncelleştirmesi, kendi kendine onaylanan api.selfasserted.profileupdate |  |  | X |  |
-| Birleşik kaydolma veya oturum açma sayfasında, "disableSignup" parametresiyle bir api.signuporsignin |  |  | X |  |
-| JavaScript / sayfa sözleşme |  | X |  |  |
+| ------- | :-----------: | :-------: | :--: | ----- |
+| Hata sayfası, api. Error |  |  | X |  |
+| IDP seçim sayfası, api. ıdpseçimlerin |  |  | X |  |
+| Kaydolma, api. ıdpseçimlerin. Signup için ıDP seçimi |  |  | X |  |
+| Parolayı unuttum, api. localaccountpasswordreset |  |  | X |  |
+| Yerel hesap oturum açma, api. localaccountsignın |  |  | X |  |
+| Yerel hesap kaydolma, api. localaccountsignup |  |  | X |  |
+| MFA sayfası, API. phonefactor |  |  | X |  |
+| Kendi kendini onaylanan sosyal hesap kaydolma, API. selfasted |  |  | X |  |
+| Kendi kendini onaylanan profil güncelleştirmesi, api. selfasserted. profileUpdate |  |  | X |  |
+| Birleşik kaydolma veya oturum açma sayfası, api. signuporsignın "disableSignup" parametresiyle |  |  | X |  |
+| JavaScript/sayfa düzeni |  | X |  |  |
 
-### <a name="app-ief-integration"></a>Uygulama IEF tümleştirme
+### <a name="app-ief-integration"></a>App-ıEF tümleştirmesi
 
 | Özellik | Geliştirme | Önizleme | GA | Notlar |
-| ------- | ----------- | ------- | -- | ----- |
-| Sorgu dizesi parametresi domain_hint |  |  | X | Kullanılabilir talebi olarak için IDP geçirilebilir. |
-| Sorgu dizesi parametresi login_hint |  |  | X | Kullanılabilir talebi olarak için IDP geçirilebilir. |
-| JSON client_assertion UserJourney Ekle | X |  |  | Kullanımdan kaldırılacaktır. |
-| JSON id_token_hint UserJourney Ekle |  | X |  | JSON geçirmek için İleri Git yaklaşım. |
-| IDP BELİRTECİ uygulamaya geçirin |  | X |  | Örneğin, Facebook'tan uygulaması. |
+| ------- | :-----------: | :-------: | :--: | ----- |
+| Sorgu dizesi parametre domain_hint |  |  | X | Talep olarak kullanılabilir, ıDP 'ye geçirilebilir. |
+| Sorgu dizesi parametre login_hint |  |  | X | Talep olarak kullanılabilir, ıDP 'ye geçirilebilir. |
+| Client_assertion aracılığıyla Kullanıcı yolculuğuna JSON ekleyin | X |  |  | Kullanım dışı olacaktır. |
+| JSON 'ı id_token_hint olarak Useryolculuğa Ekle |  | X |  | JSON geçişine git-ilet yaklaşımı. |
+| IDP BELIRTECINI uygulamaya geçir |  | X |  | Örneğin, Facebook 'tan uygulamaya. |
 
 ### <a name="session-management"></a>Oturum yönetimi
 
 | Özellik | Geliştirme | Önizleme | GA | Notlar |
-| ------- | ----------- | ------- | -- | ----- |
+| ------- | :-----------: | :-------: | :--: | ----- |
 | SSO oturum sağlayıcısı |  |  | X |  |
 | Dış oturum açma oturumu sağlayıcısı |  |  | X |  |
 | SAML SSO oturum sağlayıcısı |  |  | X |  |
@@ -123,18 +124,19 @@ El ile ilke yapılandırması, temel alınan platformu Azure AD B2C'yi ve benzer
 ### <a name="security"></a>Güvenlik
 
 | Özellik | Geliştirme | Önizleme | GA | Notlar |
-|-------- | ----------- | ------- | -- | ----- |
-| İlke anahtarları, el ile karşıya yükleme oluşturun |  |  | X |  |
-| İlke anahtarları - RSA/Cert, gizli dizileri |  |  | X |  |
-| İlkeyi karşıya yükleme |  |  | X |  |
+|-------- | :-----------: | :-------: | :--: | ----- |
+| İlke anahtarları-oluştur, El Ile, karşıya yükle |  |  | X |  |
+| İlke anahtarları-RSA/CERT, gizlilikler |  |  | X |  |
+| İlke karşıya yükleme |  |  | X |  |
 
 ### <a name="developer-interface"></a>Geliştirici arabirimi
 
 | Özellik | Geliştirme | Önizleme | GA | Notlar |
-| ------- | ----------- | ------- | -- | ----- |
-| Azure portalı-IEF UX |  |  | X |  |
-| Application Insights UserJourney günlükleri |  | X |  | Geliştirme sırasında sorun giderme için kullanılır.  |
-| Application Insights olay günlükleri (aracılığıyla düzenleme adımlarının) |  | X |  | Kullanıcı akışları üretimde izlemek için kullanılır. |
+| ------- | :-----------: | :-------: | :--: | ----- |
+| Azure portalı-ıEF UX |  |  | X |  |
+| Application Insights Kullanıcı yolculuğu günlükleri |  | X |  | Geliştirme sırasında sorun giderme için kullanılır.  |
+| Olay günlüklerini Application Insights (düzenleme adımları aracılığıyla) |  | X |  | Üretimde Kullanıcı akışlarını izlemek için kullanılır. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Özel ilkeler ve kullanıcı akışları ile farklar hakkında daha fazla bilgi](active-directory-b2c-overview-custom.md).
+
+[Özel ilkeler ve Kullanıcı akışlarının farkları](active-directory-b2c-overview-custom.md)hakkında daha fazla bilgi edinin.

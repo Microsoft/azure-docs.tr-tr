@@ -1,19 +1,19 @@
 ---
-title: 'Öğretici: Azure SignalR hizmeti kimlik doğrulaması ile Azure işlevleri'
-description: Bu öğreticide, Azure işlevleri bağlama için Azure SignalR hizmeti istemcilerin kimliğini doğrulamak öğrenin
+title: 'Öğretici: Azure Işlevleri ile kimlik doğrulama-Azure SignalR'
+description: Bu öğreticide, Azure Işlevleri bağlama için Azure SignalR hizmeti istemcilerinin kimliğini nasıl doğrulayacağınızı öğreneceksiniz.
 author: sffamily
 ms.service: signalr
 ms.topic: tutorial
 ms.date: 03/01/2019
 ms.author: zhshang
-ms.openlocfilehash: 28fb3295ef02d508ef04299398a61ea59828df35
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: dfa17720b34962611d240aa7c35ba8092bf99082
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60253969"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158136"
 ---
-# <a name="tutorial-azure-signalr-service-authentication-with-azure-functions"></a>Öğretici: Azure SignalR hizmeti kimlik doğrulaması ile Azure işlevleri
+# <a name="tutorial-azure-signalr-service-authentication-with-azure-functions"></a>Öğretici: Azure İşlevleri ile Azure SignalR Hizmeti kimlik doğrulaması
 
 Azure İşlevleri, App Service Kimlik Doğrulaması ve SignalR Hizmeti ile kimlik doğrulaması ve özel mesajlaşma özelliklerine sahip bir sohbet odası oluşturma öğreticisi.
 
@@ -45,9 +45,9 @@ Bu öğreticiyi oluşturmak için aşağıdaki yazılımlar gereklidir.
 
 Azure İşlevleri uygulamasını yerel ortamda derleyecek ve test edeceksiniz. Uygulama, Azure'da önceden oluşturulması gereken bir SignalR Hizmeti örneğine erişecek.
 
-1. Yeni bir Azure kaynağı oluşturmak için **Kaynak oluştur** (**+**) düğmesine tıklayın.
+1. Yeni bir Azure kaynağı oluşturmak için **Kaynak oluştur** ( **+** ) düğmesine tıklayın.
 
-1. **SignalR Hizmeti** araması yapın ve sonuçlardan seçin. **Oluştur**’a tıklayın.
+1. **SignalR Hizmeti** araması yapın ve sonuçlardan seçin. **Oluştur**’ tıklayın.
 
     ![Yeni SignalR Service](media/signalr-tutorial-authenticate-azure-functions/signalr-quickstart-new.png)
 
@@ -56,13 +56,13 @@ Azure İşlevleri uygulamasını yerel ortamda derleyecek ve test edeceksiniz. U
     | Ad | Değer |
     |---|---|
     | Kaynak adı | SignalR Hizmeti örneği için benzersiz bir ad |
-    | Kaynak grubu | Benzersiz bir adla yeni bir kaynak grubu oluşturun |
-    | Location | Size yakın bir konum seçin |
+    | Kaynak grubu | Benzersiz bir ada sahip yeni bir kaynak grubu oluşturun |
+    | Konum | Size yakın bir konum seçin |
     | Fiyatlandırma Katmanı | Ücretsiz |
 
-1. **Oluştur**’a tıklayın.
+1. **Oluştur**’ tıklayın.
 
-1. Örneği dağıtıldıktan sonra portalda açın ve kendi ayarları sayfasını bulun. Hizmet Modu ayarını *sunucusuz*.
+1. Örnek dağıtıldıktan sonra portalda açın ve ayarlar sayfasını bulun. Hizmet modu ayarını *sunucusuz*olarak değiştirin.
 
     ![SignalR hizmeti modu](media/signalr-concept-azure-functions/signalr-service-mode.png)
 
@@ -75,7 +75,7 @@ Azure İşlevleri uygulamasını yerel ortamda derleyecek ve test edeceksiniz. U
 
 1. VS Code Azure İşlevleri uzantısını kullanarak ana proje klasöründe bir İşlev uygulaması başlatın.
    1. Menüden **Görünüm > Komut Paleti** yolunu izleyerek (kısayol `Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) VS Code'da Komut Paletini açın.
-   1. Arama **Azure işlevleri: Yeni proje oluşturma** komut ve bu seçeneği belirleyin.
+   1. **Azure İşlevleri: Yeni Proje Oluştur** komutunu arayın ve seçin.
    1. Ana proje klasörü görünmelidir. Bu klasörü seçin (veya "Gözat" düğmesini kullanarak bulun).
    1. Dil seçmeniz istendiğinde **JavaScript**'i seçin.
 
@@ -85,7 +85,7 @@ Azure İşlevleri uygulamasını yerel ortamda derleyecek ve test edeceksiniz. U
 
 Bu öğreticide Azure SignalR Hizmeti ile etkileşim kurmak için Azure İşlevleri bağlamaları kullanılır. Diğer bağlamalar gibi SignalR Hizmeti bağlamaları da kullanılabilmesi için Azure İşlevleri Temel Araçları CLI aracılığıyla yüklenmesi gereken bir uzantı olarak sunulur.
 
-1. Bir terminal seçerek VS Code'da açın **Görüntüle > Terminal** menüsünden (Ctrl -\`).
+1. Menüden **> terminali görüntüle** ' ye (Ctrl-\`) seçerek vs Code bir Terminal açın.
 
 1. Geçerli dizinin ana proje dizini olduğundan emin olun.
 
@@ -124,7 +124,7 @@ Azure İşlevleri çalışma zamanını yerel ortamda çalıştırma ve hata ay�
    * `Host` bölümü yerel İşlevler ana bilgisayarı için bağlantı noktası ve CORS ayarlarını yapılandırır (Azure'da çalışırken bu ayarın bir etkisi yoktur).
 
        > [!NOTE]
-       > İçerik sunmak için genellikle Canlı sunucu yapılandırılmış `http://127.0.0.1:5500`. Farklı bir URL kullanıyor veya farklı bir HTTP sunucusu değişiklik kullandığınız bulursanız `CORS` doğru kaynağı yansıtacak şekilde ayarı.
+       > Canlı sunucu genellikle `http://127.0.0.1:5500`içerik sunacak şekilde yapılandırılmıştır. Farklı bir URL kullandığını veya farklı bir HTTP sunucusu kullandığınızı fark ederseniz `CORS` ayarını doğru kaynağı yansıtacak şekilde değiştirin.
 
      ![SignalR Hizmeti anahtarını alma](media/signalr-tutorial-authenticate-azure-functions/signalr-get-key.png)
 
@@ -134,14 +134,14 @@ Azure İşlevleri çalışma zamanını yerel ortamda çalıştırma ve hata ay�
 
 ## <a name="create-a-function-to-authenticate-users-to-signalr-service"></a>Kullanıcıların SignalR Hizmetinde kimlik doğrulamasını sağlayacak işlevi oluşturma
 
-Sohbet uygulaması tarayıcıda ilk açıldığında Azure SignalR Hizmetine bağlanmak için gerekli bağlantı kimlik bilgilerine ihtiyaç duyar. Adlı bir HTTP ile tetiklenen işlev oluşturacaksınız *anlaşma* işlev uygulamanıza Bu bağlantı bilgisini döndürür.
+Sohbet uygulaması tarayıcıda ilk açıldığında Azure SignalR Hizmetine bağlanmak için gerekli bağlantı kimlik bilgilerine ihtiyaç duyar. Bu bağlantı bilgilerini döndürmek için işlev uygulamanızda *Negotiate* ADLı bir http ile tetiklenen işlev oluşturacaksınız.
 
 > [!NOTE]
-> Bu işlev adlandırılmalıdır *anlaşma* SignalR istemcisi ile biten bir uç nokta gerektiriyor. `/negotiate`.
+> SignalR istemcisi `/negotiate`biten bir uç nokta gerektirdiğinden bu işlev, *Negotiate* olarak adlandırılmalıdır.
 
 1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
-1. Arayın ve seçin **Azure işlevleri: İşlev oluşturma** komutu.
+1. **Azure İşlevleri: İşlev Oluştur** komutunu arayın ve seçin.
 
 1. İstendiğinde aşağıdaki bilgileri girin.
 
@@ -149,12 +149,12 @@ Sohbet uygulaması tarayıcıda ilk açıldığında Azure SignalR Hizmetine ba�
     |---|---|
     | İşlev uygulamasının klasörü | Ana proje klasörünü seçin |
     | Şablon | HTTP Tetikleyicisi |
-    | Ad | Anlaşma |
+    | Ad | 'Nin |
     | Yetkilendirme düzeyi | Anonim |
 
-    Adlı bir klasör **anlaşma** oluşturulur, yeni işlev içerir.
+    Yeni işlevi içeren **Negotiate** adlı bir klasör oluşturulur.
 
-1. Açık **negotiate/function.json** işlevi bağlamalarını yapılandırmak için. Dosyanın içeriğini aşağıdaki kodla değiştirin. Bu kod bir istemcinin `chat` adlı Azure SignalR Hizmeti hub'ına bağlanması için geçerli kimlik bilgileri oluşturan bir giriş bağlaması ekler.
+1. İşlev için bağlamaları yapılandırmak üzere **Negotiate/function. JSON** açın. Dosyanın içeriğini aşağıdaki kodla değiştirin. Bu kod bir istemcinin `chat` adlı Azure SignalR Hizmeti hub'ına bağlanması için geçerli kimlik bilgileri oluşturan bir giriş bağlaması ekler.
 
     ```json
     {
@@ -182,9 +182,9 @@ Sohbet uygulaması tarayıcıda ilk açıldığında Azure SignalR Hizmetine ba�
     }
     ```
 
-    `signalRConnectionInfo` bağlamasındaki `userId` özelliği kimliği doğrulanmış SignalR Hizmeti bağlantısı oluşturmak için kullanılır. Yerel ortamda geliştirme için bu özelliği boş bırakın. İşlev uygulaması Azure'a dağıtıldığında bu özelliği kullanacaksınız.
+    `userId` bağlamasındaki `signalRConnectionInfo` özelliği kimliği doğrulanmış SignalR Hizmeti bağlantısı oluşturmak için kullanılır. Yerel ortamda geliştirme için bu özelliği boş bırakın. İşlev uygulaması Azure'a dağıtıldığında bu özelliği kullanacaksınız.
 
-1. Açık **negotiate/index.js** işlevinin gövdesi görüntülemek için. Dosyanın içeriğini aşağıdaki kodla değiştirin.
+1. İşlevin gövdesini görüntülemek için **anlaş/index. js** ' yi açın. Dosyanın içeriğini aşağıdaki kodla değiştirin.
 
     ```javascript
     module.exports = async function (context, req, connectionInfo) {
@@ -192,7 +192,7 @@ Sohbet uygulaması tarayıcıda ilk açıldığında Azure SignalR Hizmetine ba�
     };
     ```
 
-    Bu işlev giriş bağlamasındaki SignalR bağlantısı bilgilerini alır ve HTTP yanıtı gövdesinde istemciye döndürür. SignalR istemcisi, SignalR hizmet örneğine bağlanmak için bu bilgileri kullanır.
+    Bu işlev giriş bağlamasındaki SignalR bağlantısı bilgilerini alır ve HTTP yanıtı gövdesinde istemciye döndürür. SignalR istemcisi bu bilgileri SignalR hizmeti örneğine bağlanmak için kullanır.
 
 ## <a name="create-a-function-to-send-chat-messages"></a>Sohbet iletisi göndermek için işlev oluşturma
 
@@ -200,7 +200,7 @@ Web uygulaması, sohbet iletisi göndermek için bir HTTP API'sine ihtiyaç duya
 
 1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
-1. Arayın ve seçin **Azure işlevleri: İşlev oluşturma** komutu.
+1. **Azure İşlevleri: İşlev Oluştur** komutunu arayın ve seçin.
 
 1. İstendiğinde aşağıdaki bilgileri girin.
 
@@ -244,7 +244,7 @@ Web uygulaması, sohbet iletisi göndermek için bir HTTP API'sine ihtiyaç duya
     ```
     Bu kod özgün işlevde iki değişiklik yapar:
     * Yolu `messages` olarak değiştirir ve HTTP tetikleyicisini **POST** HTTP metoduyla sınırlar.
-    * Bir SignalR hizmet çıktı bağlaması adlı bir SignalR hizmeti hub'a bağlanan tüm istemciler için işlev tarafından döndürülen bir ileti gönderir ekler `chat`.
+    * `chat`adlı bir SignalR hizmeti merkezine bağlı tüm istemcilere işlev tarafından döndürülen bir ileti gönderen bir SignalR hizmeti çıkış bağlaması ekler.
 
 1. Dosyayı kaydedin.
 
@@ -289,7 +289,7 @@ Sohbet uygulamasının arabirimi, Vue JavaScript çerçevesiyle oluşturulan bas
 
 1. **F5** tuşuna basarak işlev uygulamasını yerel ortamda çalıştırın ve bir hata ayıklayıcısı ekleyin.
 
-1. İle **index.html** açın, VS Code komut paletini açarak Canlı sunucuyu başlatın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) seçerek **Canlı sunucusu: Canlı sunucusuyla açık**. Canlı Sunucu uygulamayı bir tarayıcıda açar.
+1. **index.html** dosyası açıkken VS Code komut paletini açarak (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) ve **Canlı Sunucu: Canlı Sunucu ile Aç**'ı seçerek Canlı Sunucuyu başlatın. Canlı Sunucu uygulamayı bir tarayıcıda açar.
 
 1. Uygulama açılır. Sohbet kutusuna ileti yazıp Enter tuşuna basın. Yeni iletileri görmek için uygulamayı yenileyin. Kimlik doğrulaması yapılandırılmadığından tüm iletiler "anonim" olarak gönderilir.
 
@@ -301,17 +301,17 @@ Buraya kadar işlev uygulamasını ve sohbet uygulamasını yerel ortamda çalı
 
 1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
-1. Arayın ve seçin **Azure: Oturum** komutu.
+1. **Azure: Oturum aç** komutunu bulun ve seçin.
 
 1. Yönergeleri izleyerek tarayıcınızda oturum açma işlemlerini tamamlayın.
 
 ### <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 
-Bir Azure depolama hesabı, Azure'da çalışan bir işlev uygulaması gereklidir. Ayrıca, Azure Depolama'nın statik Web sitelerine özelliğini kullanarak UI sohbet için web sayfası barındıracak.
+Azure depolama hesabı, Azure 'da çalışan bir işlev uygulaması için gereklidir. Ayrıca, Azure Storage 'ın statik Web siteleri özelliğini kullanarak sohbet kullanıcı arabirimi için Web sayfasını barıncaksınız.
 
-1. Azure portalında tıklayarak **kaynak Oluştur** (**+**) yeni bir Azure kaynağı oluşturma düğmesi.
+1. Azure portal yeni bir Azure kaynağı oluşturmak için **kaynak oluştur** ( **+** ) düğmesine tıklayın.
 
-1. Seçin **depolama** kategori seçip **depolama hesabı**.
+1. **Depolama** kategorisini seçin ve **depolama hesabı**' nı seçin.
 
 1. Aşağıdaki bilgileri girin.
 
@@ -320,27 +320,27 @@ Bir Azure depolama hesabı, Azure'da çalışan bir işlev uygulaması gereklidi
     | Abonelik | SignalR hizmet örneğini içeren aboneliği seçin |
     | Kaynak grubu | Aynı kaynak grubunu seçin |
     | Kaynak adı | Depolama hesabı için benzersiz bir ad |
-    | Location | Diğer kaynaklar olarak aynı konumu seçin |
+    | Konum | Diğer kaynaklarınızla aynı konumu seçin |
     | Performans | Standart |
     | Hesap türü | StorageV2 (genel amaçlı V2) |
     | Çoğaltma | Yerel olarak yedekli depolama (LRS) |
     | Erişim katmanı | Sık Erişimli |
 
-1. Tıklayın **gözden geçir + Oluştur**, ardından **Oluştur**.
+1. **Gözden geçir + oluştur**ve sonra **Oluştur**' a tıklayın.
 
-### <a name="configure-static-websites"></a>Statik Web sitelerini yapılandırın
+### <a name="configure-static-websites"></a>Statik Web sitelerini yapılandırma
 
-1. Depolama hesabı oluşturulduktan sonra Azure portalında açın.
+1. Depolama hesabı oluşturulduktan sonra, Azure portal açın.
 
-1. Seçin **statik Web sitesi**.
+1. **Statik Web sitesi**seçin.
 
-1. Seçin **etkin** kullanarak statik Web sitesi özelliğini etkinleştirin.
+1. Statik Web sitesi özelliğini etkinleştirmek için **etkin** ' i seçin.
 
-1. İçinde **dizin belgesi adı**, girin *index.html*.
+1. **Dizin belgesi adı**' nda *index. html*girin.
 
-1. **Kaydet**’e tıklayın.
+1. **Save (Kaydet)** düğmesine tıklayın.
 
-1. A **birincil uç noktayı** görünür. Bu değeri not edin. Bu işlev uygulamasını yapılandırmanız gerekecektir.
+1. **Birincil uç nokta** görünür. Bu değeri aklınızda edin. İşlev uygulamasını yapılandırmak için gerekli olacaktır.
 
 ### <a name="configure-function-app-for-authentication"></a>İşlev uygulamasını kimlik doğrulaması için yapılandırma
 
@@ -348,9 +348,9 @@ Bir Azure depolama hesabı, Azure'da çalışan bir işlev uygulaması gereklidi
 
 İleti gönderirken uygulama bağlı tüm istemcilere veya yalnızca belirli bir kullanıcı için kimliği doğrulanmış olan istemcilere gönderme seçenekleri arasında seçim yapabilir.
 
-1. VS Code'da açın **negotiate/function.json**.
+1. VS Code ' de **anlaş/function. JSON**' ı açın.
 
-1. *SignalRConnectionInfo* bağlamasının *userId* özelliğine bir [bağlama ifadesi](https://docs.microsoft.com/azure/azure-functions/functions-triggers-bindings) ekleyin: `{headers.x-ms-client-principal-name}`. Bu ifade değeri kimliği doğrulanmış kullanıcının kullanıcı adı olarak ayarlar. Öznitelik şimdi aşağıdaki gibi görünmelidir.
+1. [SignalRConnectionInfo](https://docs.microsoft.com/azure/azure-functions/functions-triggers-bindings) bağlamasının *userId* özelliğine bir *bağlama ifadesi* ekleyin: `{headers.x-ms-client-principal-name}`. Bu ifade değeri kimliği doğrulanmış kullanıcının kullanıcı adı olarak ayarlar. Öznitelik şimdi aşağıdaki gibi görünmelidir.
 
     ```json
     {
@@ -365,9 +365,9 @@ Bir Azure depolama hesabı, Azure'da çalışan bir işlev uygulaması gereklidi
 1. Dosyayı kaydedin.
 
 
-### <a name="deploy-function-app-to-azure"></a>İşlev uygulamasını Azure'a dağıtma
+### <a name="deploy-function-app-to-azure"></a>İşlev uygulamasını Azure 'a dağıtma
 
-1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) seçip **Azure işlevleri: İşlev uygulamasına dağıtın**.
+1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) ve **Azure İşlevleri: İşlev Uygulamasına Dağıt** komutunu seçin.
 
 1. İstendiğinde aşağıdaki bilgileri girin.
 
@@ -386,7 +386,7 @@ Bir Azure depolama hesabı, Azure'da çalışan bir işlev uygulaması gereklidi
 
 1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
-1. Arayın ve seçin **Azure işlevleri: Karşıya yükleme yerel ayarları** komutu.
+1. **Azure İşlevleri: Yerel ayarları karşıya yükle** komutunu arayın ve seçin.
 
 1. İstendiğinde aşağıdaki bilgileri girin.
 
@@ -405,11 +405,11 @@ App Service Kimlik Doğrulaması; Azure Active Directory, Facebook, Twitter, Mic
 
 1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
-1. Arayın ve seçin **Azure işlevleri: Açık portalında** komutu.
+1. **Azure İşlevleri: Portalda aç** komutunu arayın ve seçin.
 
 1. İşlev uygulamasını Azure portalda açmak için aboneliği ve işlev uygulaması adını seçin.
 
-1. Portalda açılmış işlev uygulamasında bulun **Platform özellikleri** sekmesinde **kimlik doğrulama/yetkilendirme**.
+1. Portalda açılan işlev uygulamasında **platform özellikleri** sekmesini bulun, **kimlik doğrulama/yetkilendirme**' yi seçin.
 
 1. App Service Kimlik Doğrulama ayarını **Açık** duruma getirin.
 
@@ -445,7 +445,7 @@ Web uygulamasını Azure Blob Depolama'nın statik web siteleri özelliğini kul
 
 1. VS Code komut paletini açın (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
-1. Arayın ve seçin **Azure Depolama: Statik Web sitesine dağıtma** komutu.
+1. **Azure depolama: statik Web sitesine dağıt** komutuna arayın ve seçin.
 
 1. Aşağıdaki değerleri girin:
 
@@ -453,25 +453,25 @@ Web uygulamasını Azure Blob Depolama'nın statik web siteleri özelliğini kul
     |---|---|
     | Abonelik | Aboneliğinizi seçme |
     | Depolama hesabı | Daha önce oluşturduğunuz depolama hesabını seçin |
-    | Dağıtılacak klasör | Seçin **Gözat** seçip *içeriği* klasörü |
+    | Dağıtılacak klasör | **Araştır** ' ı seçin ve *içerik* klasörünü seçin |
 
-Dosyaları *içeriği* klasörü için statik Web sitesi artık dağıtılmalıdır.
+*İçerik* klasöründeki dosyalar artık statik Web sitesine dağıtılmalıdır.
 
 ### <a name="enable-function-app-cross-origin-resource-sharing-cors"></a>İşlev uygulamasında çıkış noktaları arası kaynak paylaşımını (CORS) etkinleştirme
 
 **local.settings.json** dosyasında CORS seçeneği mevcut olsa da Azure'daki işlev uygulamasına yüklenmez. Bunu ayrıca ayarlamanız gerekir.
 
-1. İşlev uygulaması, Azure portalında açın.
+1. İşlev uygulamasını Azure portal açın.
 
-1. Altında **Platform özellikleri** sekmesinde **CORS**.
+1. **Platform özellikleri** sekmesinde **CORS**' yi seçin.
 
     ![CORS'yi bulun](media/signalr-tutorial-authenticate-azure-functions/signalr-find-cors.png)
 
-1. İçinde *çıkış noktaları* bölümünde, statik Web sitesi ile bir giriş ekleyin *birincil uç noktayı* değeri (sondaki kaldırmak */*).
+1. *Izin verilen* kaynaklar bölümünde, değer olarak statik Web sitesi *birincil uç noktasına* sahip bir giriş ekleyin (sondaki */* kaldırın).
 
-1. İşlev uygulamanızı SignalR JavaScript SDK'sı için sırayla bir tarayıcıdan çağrı, kimlik bilgilerini CORS desteğini etkinleştirilmesi gerekir. "Etkinleştirme erişim-denetim-Allow-Credentials" onay kutusunu işaretleyin.
+1. SignalR JavaScript SDK 'Sı, işlev uygulamanızı bir tarayıcıdan çağırmak için, CORS 'de kimlik bilgileri desteğinin etkinleştirilmesi gerekir. "Erişim-denetim-Izin-kimlik bilgilerini etkinleştir" onay kutusunu seçin.
 
-    ![Access-Control-Allow-Credentials'ı Etkinleştir](media/signalr-tutorial-authenticate-azure-functions/signalr-cors-credentials.png)
+    ![Erişim-denetim-Izin-kimlik bilgilerini etkinleştir](media/signalr-tutorial-authenticate-azure-functions/signalr-cors-credentials.png)
 
 1. CORS ayarlarını kalıcı hale getirmek için **Kaydet**'e tıklayın.
 

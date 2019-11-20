@@ -1,33 +1,33 @@
 ---
-title: Veri işlem örnekleri - Azure Logic Apps | Microsoft Docs
-description: Azure Logic apps'te veri işlem eylem tanımları için kod örnekleri
+title: Veri işlemi örnekleri-Azure Logic Apps
+description: Azure Logic Apps veri işlemi eylemleri için kod örnekleri
 services: logic-apps
 ms.service: logic-apps
+ms.suite: integration
 author: ecfan
 ms.author: estfan
-manager: jeconnoc
-ms.topic: reference
-ms.date: 07/25/2018
+manager: carmonm
 ms.reviewer: klam, LADocs
-ms.suite: integration
-ms.openlocfilehash: 8de70e8df50b79f27c19c74307d9321ff8cd1eb5
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.topic: reference
+ms.date: 09/01/2019
+ms.openlocfilehash: d692d943249c9fc6b46ed6eb1ddff3f07152f5b6
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67203106"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71179157"
 ---
-# <a name="data-operation-code-samples-for-azure-logic-apps"></a>Azure Logic Apps için veri işlem kod örnekleri
+# <a name="data-operation-code-samples-for-azure-logic-apps"></a>Azure Logic Apps için veri işlemi kodu örnekleri
 
-Makalede, veri işlem eylem tanımları için kod örnekleri şunlardır [veri işlemleri](../logic-apps/logic-apps-perform-data-operations.md). Örnekleri kendi mantıksal uygulamanın temel iş akışı tanımı, Azure aboneliği ve API bağlantıları ile deneyin istiyorsanız, bu örnekler için kullanabilirsiniz. Yalnızca kopyalayın ve kod görünümü Düzenleyicisi mantıksal uygulamanızın iş akışı tanımı için bu eylemi tanımları yapıştırın ve ardından, belirli bir iş akışı tanımlarını değiştirin. 
+Makalede veri işlemi eylem tanımlarının kod örnekleri aşağıda verilmiştir, [veri Işlemleri gerçekleştirin](../logic-apps/logic-apps-perform-data-operations.md). Bu örnekleri, kendi mantıksal uygulamanızın temel alınan iş akışı tanımı, Azure aboneliği ve API bağlantıları ile örnekleri denemek istediğinizde kullanabilirsiniz. Bu eylem tanımlarını kopyalayın ve mantıksal uygulamanızın iş akışı tanımı için kod görünümü düzenleyicisine yapıştırın ve ardından belirli iş akışınız için tanımları değiştirin. 
 
-JavaScript nesne gösterimi (JSON) standartlarını temel alarak, bu eylem tanımları alfabetik sırada görünür. Ancak, Logic Apps Tasarımcısı'nda her tanım, iş akışı içinde doğru sırayla çünkü görünür her eylem tanımının `runAfter` özelliği çalışma sırasını belirtir. 
+JavaScript Nesne Gösterimi (JSON) standartlarına dayalı olarak, bu eylem tanımları alfabetik sırada görünür. Ancak, mantıksal uygulama tasarımcısında her bir tanım iş akışınız dahilinde doğru sırada görünür, çünkü her bir eylem tanımının `runAfter` özelliği çalışma sırasını belirtir.
 
 <a name="compose-action-example"></a>
 
 ## <a name="compose"></a>Oluştur
 
-Denemek için [ **Compose** eylem örnek](../logic-apps/logic-apps-perform-data-operations.md#compose-action), kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
+[ **Oluşturma** eylemi örneğini](../logic-apps/logic-apps-perform-data-operations.md#compose-action)denemek için kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
 
 ```json
 "actions": {
@@ -95,9 +95,9 @@ Denemek için [ **Compose** eylem örnek](../logic-apps/logic-apps-perform-data-
 
 <a name="create-csv-table-action-example"></a>
 
-## <a name="create-csv-table"></a>CSV tablosu oluşturma
+## <a name="create-csv-table"></a>CSV tablosu oluştur
 
-Denemek için [ **CSV tablosu oluştur** eylem örnek](../logic-apps/logic-apps-perform-data-operations.md#create-csv-table-action), kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
+[ **CSV tablosu oluşturma** eylem örneğini](../logic-apps/logic-apps-perform-data-operations.md#create-csv-table-action)denemek için kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
 
 ```json
 "actions": {
@@ -140,9 +140,9 @@ Denemek için [ **CSV tablosu oluştur** eylem örnek](../logic-apps/logic-apps-
 
 <a name="create-html-table-action-example"></a>
 
-## <a name="create-html-table"></a>HTML tablosu oluşturma
+## <a name="create-html-table"></a>HTML tablosu oluştur
 
-Denemek için [ **HTML tablosu oluştur** eylem örnek](../logic-apps/logic-apps-perform-data-operations.md#create-html-table-action), kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
+[ **HTML tablosu oluşturma** eylem örneğini](../logic-apps/logic-apps-perform-data-operations.md#create-html-table-action)denemek için kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
 
 ```json
 "actions": {
@@ -185,9 +185,9 @@ Denemek için [ **HTML tablosu oluştur** eylem örnek](../logic-apps/logic-apps
 
 <a name="filter-array-action-example"></a>
 
-## <a name="filter-array"></a>Diziyi filtreleme
+## <a name="filter-array"></a>Diziyi filtrele
 
-Denemek için [ **filtre dizisi** eylem örnek](../logic-apps/logic-apps-perform-data-operations.md#filter-array-action), kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
+[ **Filtre dizisi** eylem örneğini](../logic-apps/logic-apps-perform-data-operations.md#filter-array-action)denemek için kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
 
 ```json
 "actions": {
@@ -226,9 +226,9 @@ Denemek için [ **filtre dizisi** eylem örnek](../logic-apps/logic-apps-perform
 
 <a name="join-action-example"></a>
 
-## <a name="join"></a>Katıl
+## <a name="join"></a>Birleştir
 
-Denemek için [ **katılın** eylem örnek](../logic-apps/logic-apps-perform-data-operations.md#join-action), kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
+[ **JOIN** eylemi örneğini](../logic-apps/logic-apps-perform-data-operations.md#join-action)denemek için kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
 
 ```json
 "actions": {
@@ -267,9 +267,9 @@ Denemek için [ **katılın** eylem örnek](../logic-apps/logic-apps-perform-dat
 
 <a name="parse-json-action-example"></a>
 
-## <a name="parse-json"></a>Parse JSON
+## <a name="parse-json"></a>JSON Ayrıştır
 
-Denemek için [ **JSON Ayrıştır** eylem örnek](../logic-apps/logic-apps-perform-data-operations.md#parse-json-action), kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
+[ **JSON** eylemi örneğini ayrıştırmayı](../logic-apps/logic-apps-perform-data-operations.md#parse-json-action)denemek için kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
 
 ```json
 "actions": {
@@ -328,7 +328,7 @@ Denemek için [ **JSON Ayrıştır** eylem örnek](../logic-apps/logic-apps-perf
 
 ## <a name="select"></a>Seçim
 
-Denemek için [ **seçin** eylem örnek](../logic-apps/logic-apps-perform-data-operations.md#select-action), kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
+[ **Seçim** eylemi örneğini](../logic-apps/logic-apps-perform-data-operations.md#select-action)denemek için kullanabileceğiniz eylem tanımları aşağıda verilmiştir:
 
 ```json
 "actions": {
@@ -367,11 +367,6 @@ Denemek için [ **seçin** eylem örnek](../logic-apps/logic-apps-perform-data-o
 },
 ```
 
-## <a name="get-support"></a>Destek alın
-
-* Sorularınız için [Azure Logic Apps forumunu](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps) ziyaret edin.
-* Özelliklerle ilgili fikirlerinizi göndermek veya gönderilmiş olanları oylamak için [Logic Apps kullanıcı geri bildirimi sitesini](https://aka.ms/logicapps-wish) ziyaret edin.
-
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Veri işlemleri](../logic-apps/logic-apps-perform-data-operations.md)
+* [Veri işlemleri gerçekleştirme](../logic-apps/logic-apps-perform-data-operations.md)

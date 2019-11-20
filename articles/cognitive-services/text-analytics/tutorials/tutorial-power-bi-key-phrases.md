@@ -1,5 +1,5 @@
 ---
-title: 'Öğretici: Power BI ile metin analizi Bilişsel hizmet tümleştirme'
+title: 'Öğretici: Metin Analizi bilişsel hizmet ile Power BI tümleştirin'
 titleSuffix: Azure Cognitive Services
 description: Power BI'da depolanan metindeki anahtar ifadeleri ayıklamak için Metin Analizi'ni nasıl kullanacağınızı öğrenin.
 services: cognitive-services
@@ -8,16 +8,16 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: tutorial
-ms.date: 02/13/2019
+ms.date: 07/30/2019
 ms.author: aahi
-ms.openlocfilehash: 24767f73e3e1409f81262ad57f3fd5152a4ec319
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 97245a10602f763c3269218d87c6b1a5ba309817
+ms.sourcegitcommit: 992e070a9f10bf43333c66a608428fcf9bddc130
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60828487"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71241020"
 ---
-# <a name="tutorial-integrate-power-bi-with-the-text-analytics-cognitive-service"></a>Öğretici: Power BI ile metin analizi Bilişsel hizmet tümleştirme
+# <a name="tutorial-integrate-power-bi-with-the-text-analytics-cognitive-service"></a>Öğretici: Metin Analizi bilişsel hizmet ile Power BI tümleştirin
 
 Microsoft Power BI Desktop, verilerinize bağlanmanıza, verilerinizi dönüştürmenize ve görselleştirmenize olanak sağlayan ücretsiz bir uygulamadır. Microsoft Azure Bilişsel Hizmetler’in parçası olan Metin Analizi hizmeti, doğal dil işleme özelliği sağlar. Ham yapılandırılmamış veriler olduğunda, en önemli ifadeleri ayıklayabilir, yaklaşımı analiz edebilir ve markalar gibi iyi bilindik varlıkları belirleyebilir. Birlikte bu araçlar, müşterilerinizin ne hakkında konuştuğunu ve bu konuda nasıl hissettiğini hızlıca görmenize yardımcı olabilir.
 
@@ -36,7 +36,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 - Microsoft Power BI Desktop. [Ücretsiz olarak indirin](https://powerbi.microsoft.com/get-started/).
 - Bir Microsoft Azure hesabı. [Ücretsiz bir deneme başlatın](https://azure.microsoft.com/free/) veya [oturum açın](https://portal.azure.com/).
 - Metin Analizi API’si ile Bilişsel Hizmetler API’si hesabı. Yoksa, [kaydolup](../../cognitive-services-apis-create-account.md) 5000 işlem/ay ücretsiz katmanını kullanabilirsiniz (bu öğreticiyi tamamlamak için [fiyatlandırma ayrıntılarına](https://azure.microsoft.com/pricing/details/cognitive-services/text-analytics/) bakın).
-- Kayıt sırasında sizin için oluşturulan [Metin Analizi erişim anahtarı](../how-tos/text-analytics-how-to-access-key.md).
+- Kayıt sırasında sizin için oluşturulan [Metin Analizi erişim anahtarı](../../cognitive-services-apis-create-account.md#get-the-keys-for-your-resource).
 - Müşteri yorumları. [Örnek verilerimizi](https://aka.ms/cogsvc/ta) veya kendi verilerinizi kullanabilirsiniz. Bu öğreticide, örnek verilerimizi kullandığınız varsayılır.
 
 ## <a name="load-customer-data"></a>Müşteri verilerini yükleme
@@ -94,7 +94,7 @@ Metin Analizi hizmetinin [Anahtar İfadeler API](https://westus.dev.cognitive.mi
 | | |
 | - | - |
 | `id`  | İstekte bu belge için yer alan benzersiz tanımlayıcı. Yanıtta da bu alan bulunur. Böylece, birden fazla belge işlemeniz halinde, ayıklanan anahtar ifadeleri bu ifadelerin kaynağı olan belge ile kolayca eşleyebilirsiniz. Bu öğreticide, istek başına yalnızca bir belge işlediğinizden, `id` değerini, her bir istek için aynı olacak şekilde doğrudan yazabilirsiniz.|
-| `text`  | İşlenecek metin. Bu alanın değeri, [önceki bölümde](#PreparingData) oluşturduğunuz ve konu satırını ve yorum metnini birlikte içeren `Merged` sütunundan gelir. Bu veriler yaklaşık 5.120 karakterden uzun anahtar tümcecikleri API'sini gerektirir.|
+| `text`  | İşlenecek metin. Bu alanın değeri, [önceki bölümde](#PreparingData) oluşturduğunuz ve konu satırını ve yorum metnini birlikte içeren `Merged` sütunundan gelir. Anahtar tümceleri API 'SI bu verilerin yaklaşık 5.120 karakterden uzun olmaması gerekir.|
 | `language` | Belgenin yazıldığı doğal dilin kodu. Örnek verilerdeki tüm iletiler İngilizce’dir, bu nedenle bu alan için `en` değerini doğrudan yazabilirsiniz.|
 
 ## <a name="create-a-custom-function"></a>Özel işlev oluşturma
@@ -103,7 +103,7 @@ Metin Analizi hizmetinin [Anahtar İfadeler API](https://westus.dev.cognitive.mi
 Artık Power BI ve Metin Analizi’ni tümleştirecek özel işlevi oluşturmaya hazırsınız. İşlev, işlenecek metni bir parametre olarak alır. Verileri gerekli JSON biçimine/biçiminden dönüştürür ve Anahtar İfadeler API’sine HTTP isteğinde bulunur. Daha sonra işlev, API’deki yanıtı ayrıştırır ve ayıklanan anahtar ifadelerin virgülle ayrılmış bir listesini içerir.
 
 > [!NOTE]
-> Power BI Desktop özel işlevleri [Power Query M formül dilinde](https://msdn.microsoft.com/library/mt211003.aspx) (veya kısaca "M") yazılır. M, [F#](https://docs.microsoft.com/dotnet/fsharp/) temelindeki işlevsel bir programlama dilidir. Bu öğreticiyi tamamlamanız için programcı olmanız gerekmese de gerekli kod aşağıda verilmiştir.
+> Power BI Desktop özel işlevleri [Power Query M formül dilinde](https://docs.microsoft.com/powerquery-m/power-query-m-reference) (veya kısaca "M") yazılır. M, [F#](https://docs.microsoft.com/dotnet/fsharp/) temelindeki işlevsel bir programlama dilidir. Bu öğreticiyi tamamlamanız için programcı olmanız gerekmese de gerekli kod aşağıda verilmiştir.
 
 Power BI Desktop’ta, halen Sorgu Düzenleyicisi penceresinde bulunduğunuzdan emin olun. Aksi takdirde, **Ana Sayfa** şeridini seçin ve **Dış veri** grubunda **Sorguları Düzenle**’ye tıklayın.
 
@@ -114,13 +114,14 @@ Sorgular listesinde, başlangıçta `Query1` olarak adlandırılan yeni bir sorg
 Şimdi **Ana Sayfa** şeridindeki **Sorgu** grubunda **Gelişmiş Düzenleyici**’ye tıklayarak Gelişmiş Düzenleyici penceresini açın. Pencerede bulunan kodu silin ve aşağıdaki kodu yapıştırın. 
 
 > [!NOTE]
-> Aşağıdaki örneklerde, Metin Analizi API’si uç noktasının `https://westus.api.cognitive.microsoft.com` ile başladığı varsayılır. Metin Analizi, 13 farklı bölgede abonelik oluşturmanıza olanak sağlar. Hizmete farklı bir bölgede kaydolduysanız lütfen seçtiğiniz bölgeye yönelik uç noktayı kullandığınızdan emin olun. [Azure portalda](https://azure.microsoft.com/features/azure-portal/) oturum açıp Metin Analizi aboneliğinizi ve sonra Genel Bakış sayfasını seçerek bu uç noktayı bulabilirsiniz.
+> Aşağıdaki örnek uç noktayı, metin analizi kaynağınız `<your-custom-subdomain>`için oluşturulan uç noktayla değiştirin (içeren). [Azure Portal](https://azure.microsoft.com/features/azure-portal/)oturum açıp metin analizi aboneliğinizi seçip seçerek `Quick start`bu uç noktayı bulabilirsiniz.
+
 
 ```fsharp
 // Returns key phrases from the text in a comma-separated list
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.1/keyPhrases",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics" & "/v2.1/keyPhrases",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -144,7 +145,7 @@ Power BI Desktop’ta Sorgu Düzenleyicisi penceresinde `FabrikamComments` sorgu
 
 Özel İşlev Çağır iletişim kutusu görüntülenir. **Yeni sütun adı** bölümüne `keyphrases` girin. **İşlev sorgusu** bölümünde, oluşturduğunuz özel işlevi (`KeyPhrases`) seçin.
 
-İletişim kutusunda yeni bir alan görüntülenir: **metin (isteğe bağlı)**. Bu alan, Anahtar İfadeler API’sinin `text` parametresi için değer sağlamak amacıyla hangi sütunu kullanmak istediğimizi sorar. (`language` ve `id` parametreleri için değerleri önceden doğrudan yazdığınızı unutmayın.) Açılan menüden `Merged` ([daha önce](#PreparingData) konu ve ileti alanlarını birleştirerek oluşturduğumuz sütun) seçeneğini belirleyin.
+İletişim kutusunda yeni bir alan görüntülenir: **metin (isteğe bağlı)** . Bu alan, Anahtar İfadeler API’sinin `text` parametresi için değer sağlamak amacıyla hangi sütunu kullanmak istediğimizi sorar. (`language` ve `id` parametreleri için değerleri önceden doğrudan yazdığınızı unutmayın.) Açılan menüden `Merged` ([daha önce](#PreparingData) konu ve ileti alanlarını birleştirerek oluşturduğumuz sütun) seçeneğini belirleyin.
 
 ![[Özel işlev çağırma]](../media/tutorials/power-bi/invoke-custom-function.png)
 
@@ -164,7 +165,8 @@ Her şey hazırsa Power BI, tablodaki her bir satır için bir kez özel işlevi
 > [!NOTE]
 > Metin Analizi hizmeti, erişim anahtarınızı kullanarak kimliğinizi doğruladığından `Anonymous` seçeneğini belirlersiniz, bu nedenle Power BI’ın HTTP isteği için kimlik bilgileri sağlaması gerekmez.
 
-![[kimlik doğrulamasını anonim olarak ayarlama]](../media/tutorials/power-bi/access-web-content.png)
+> [!div class="mx-imgBorder"]
+> ![[kimlik doğrulaması anonim olarak ayarlanıyor]](../media/tutorials/power-bi/access-web-content.png)
 
 Anonim erişimi seçtiğiniz halde Kimlik Bilgilerini Düzenle bandını görüyorsanız, `KeyPhrases` [özel işlevdeki](#CreateCustomFunction) koda Metin Analizi erişim anahtarınızı yapıştırmayı unutmuş olabilirsiniz.
 
@@ -188,7 +190,7 @@ Power BI Desktop kısa bir süre içinde gerekli HTTP isteklerini yapar. Tabloda
 > [!NOTE]
 > Kelime bulutu oluşturmak için her bir yorumun tam metni yerine neden ayıklanan anahtar ifadeleri kullanmalı? Anahtar ifadeler bize yalnızca müşteri yorumlarında yer alan *en sık kullanılan* sözcükleri değil, *önemli* sözcükleri de sunar. Ayrıca sonuçta elde edilen buluttaki sözcük boyutlandırması, bir kelimenin nispeten az sayıda yorumda sık olarak kullanılmasına göre şekillenmez.
 
-Henüz yapmadıysanız, Word Cloud özel görselini yükleyin. Çalışma alanının sağ tarafındaki Görsel Öğeler bölmesinde, üç nokta (**...**) simgesine tıklayın ve **Marketten içe aktarın** seçeneğini belirleyin. Ardından, "cloud" araması yapın ve Word Cloud görselinin yanındaki **Ekle** düğmesine tıklayın. Power BI, Sözcük Bulutu görselini yükler ve başarıyla yüklendiğini size bildirir.
+Henüz yapmadıysanız, Word Cloud özel görselini yükleyin. Çalışma alanının sağ tarafındaki Görsel Öğeler bölmesinde, üç nokta ( **...** ) simgesine tıklayın ve **Marketten içe aktarın** seçeneğini belirleyin. Ardından, "cloud" araması yapın ve Word Cloud görselinin yanındaki **Ekle** düğmesine tıklayın. Power BI, Sözcük Bulutu görselini yükler ve başarıyla yüklendiğini size bildirir.
 
 ![[özel görsel ekleme]](../media/tutorials/power-bi/add-custom-visuals.png)<br><br>
 
@@ -223,7 +225,7 @@ Aşağıdaki Yaklaşım Analizi işlevi, metinde ifade edilen yaklaşımın ne �
 // Returns the sentiment score of the text, from 0.0 (least favorable) to 1.0 (most favorable)
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.1/sentiment",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/sentiment",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -240,7 +242,7 @@ Dil Algılama işlevine ilişkin iki sürüm aşağıda verilmiştir. İlk sür�
 // Returns the two-letter language code (for example, 'en' for English) of the text
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.1/languages",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/languages",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -254,7 +256,7 @@ in  language
 // Returns the name (for example, 'English') of the language in which the text is written
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.1/languages",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/languages",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -274,7 +276,7 @@ Son olarak, sunulmuş olan Anahtar İfade Ayıklama işlevinin, virgülle ayrıl
 // Returns key phrases from the text as a list object
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.1/keyPhrases",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/keyPhrases",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -294,7 +296,7 @@ Metin Analizi hizmeti, Power Query M formül dili veya Power BI hakkında daha f
 > [Metin Analizi API'si başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-V2-1/operations/56f30ceeeda5650db055a3c6)
 
 > [!div class="nextstepaction"]
-> [Power Query M başvurusu](https://msdn.microsoft.com/library/mt211003.aspx)
+> [Power Query M başvurusu](https://docs.microsoft.com/powerquery-m/power-query-m-reference)
 
 > [!div class="nextstepaction"]
 > [Power BI belgeleri](https://powerbi.microsoft.com/documentation/powerbi-landing-page/)

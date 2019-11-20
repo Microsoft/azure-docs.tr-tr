@@ -12,13 +12,14 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2019
-ms.author: willzhan;kilroyh;yanmf;juliako
-ms.openlocfilehash: 336552c142e504ae7296314512f00688e30d032e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: willzhan
+ms.reviewer: kilroyh;yanmf;juliako
+ms.openlocfilehash: 6004e08f5f30c7f3c63bb87437147db15da5e335
+ms.sourcegitcommit: de47a27defce58b10ef998e8991a2294175d2098
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61466586"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "69016772"
 ---
 # <a name="design-of-a-content-protection-system-with-access-control-using-azure-media-services"></a>Azure Media Services kullanarak erişim denetimini içeren bir içerik koruma sistemi tasarımı 
 
@@ -60,7 +61,7 @@ Aşağıdaki tabloda, her DRM tarafından desteklenen tarayıcılar ve yerel pla
 | **İstemci Platformu** | **Yerel DRM desteği** | **Tarayıcı/uygulama** | **Akış biçimlerinde** |
 | --- | --- | --- | --- |
 | **Akıllı TV, işleci STB, OTT STB** |PlayReady öncelikle ve/veya Widevine ve/veya diğer |Linux, Opera, WebKit, diğer |Çeşitli biçimleri |
-| **Windows 10 cihazları (Windows PC, Windows tabletler, Windows Phone, Xbox)** |PlayReady |Microsoft Edge/IE11/EME<br/><br/><br/>Evrensel Windows Platformu |TİRE (HLS için PlayReady desteklenmez)<br/><br/>DASH, kesintisiz akış (HLS için PlayReady desteklenmez) |
+| **Windows 10 cihazları (Windows PC, Windows tabletler, Windows Phone, Xbox)** |PlayReady |Microsoft Edge/ıE11/EME<br/><br/><br/>Evrensel Windows Platformu |TİRE (HLS için PlayReady desteklenmez)<br/><br/>DASH, kesintisiz akış (HLS için PlayReady desteklenmez) |
 | **Android cihazlar (telefonlar, tabletler, TV)** |Widevine |Chrome/EME |DASH, HLS |
 | **iOS (iPhone, iPad), OS X istemcileri ve Apple TV** |FairPlay |Safari 8 +/ EME |HLS |
 
@@ -130,11 +131,11 @@ Bu etkenler neden önemlidir?
 
 Lisans dağıtımı için genel bulut kullanırsanız, kalıcı ve kalıcı olmayan lisans lisans teslim maliyeti doğrudan bir etkiye sahip. Aşağıdaki iki farklı tasarım durumlarda göstermek için hizmet eder:
 
-* Aylık aboneliği: Kalıcı lisans ve 1-çok içerik anahtarı varlık eşleme kullanın. Örneğin, çocukların tüm film için tek bir içerik anahtarı şifreleme için kullanırız. Bu durumda:
+* Aylık abonelik: Kalıcı bir lisans ve 1 ' den fazla içerik arasında anahtardan varlığa eşleme kullanın. Örneğin, çocukların tüm film için tek bir içerik anahtarı şifreleme için kullanırız. Bu durumda:
 
     Lisans tüm çocukları filmler/cihaz için istenen toplam sayısı = 1
 
-* Aylık aboneliği: Kalıcı olmayan bir lisans ve içerik anahtarı varlık arasında 1-1 eşleme kullanın. Bu durumda:
+* Aylık abonelik: Kalıcı olmayan bir lisans ve içerik anahtarı ve varlık arasında 1--1 eşleme kullanın. Bu durumda:
 
     Tüm çocukları filmler/cihaz için istenen lisans sayısı [izlenen filmler sayısı] = [oturum sayısı] x
 
@@ -256,7 +257,7 @@ Uygulama sorunları ile ilgili Yardım için aşağıdaki sorun giderme bilgiler
 
 * Ayrıcalıkları verme grup üyeliğini talep. Azure AD uygulama bildirimi dosyasında aşağıdaki olduğundan emin olun: 
 
-    "groupMembershipClaims": "Tüm" (varsayılan değer null olur)
+    "Groupmembershipclaim": "All" (varsayılan değer null)
 
 * Kısıtlama gereksinimleri oluşturduğunuzda uygun TokenType ayarlayın.
 
@@ -335,7 +336,7 @@ Kaydolun ve Azure AD'de işaretçi uygulamayı yapılandırmak için aşağıdak
 
 2. Kaynak uygulama için yeni bir anahtar ekleyin.
 
-3. Uygulama bildirim dosyasını güncelleştirin, böylece groupMembershipClaims özelliği "groupMembershipClaims" değerine sahip: "Tüm".
+3. Groupmembershipclaim özelliğinin "Groupmembershipclaim" değerine sahip olması için uygulama bildirim dosyasını güncelleştirin: "Tümü".
 
 4. Bölümünde player web uygulamasına işaret eden Azure AD uygulama **diğer uygulamalara izinler**, 1. adımda eklenen kaynak uygulama ekleyin. Altında **izin temsilci**seçin **erişim [resource_name]** . Bu seçenek, kaynak uygulama erişim erişim belirteçleri oluşturmak için web uygulamaya izin verir. Visual Studio ve Azure web uygulaması geliştirme, hem yerel hem de dağıtılan sürümü web uygulaması için bunu.
 
@@ -367,13 +368,13 @@ Bir müşteri Jwt'ler sağlamak için özel STS kullanmayı seçebilirsiniz. Ned
 
 Güvenlik anahtarları iki tür vardır:
 
-* Simetrik anahtar: Aynı anahtar oluşturmak ve bir JWT doğrulamak için kullanılır.
-* Asimetrik anahtar: Genel-özel anahtar çifti x X509 sertifika JWT'nin şifrelemek/oluşturmak için bir özel anahtarla ve ortak anahtar belirteci doğrulamak için kullanılır.
+* Simetrik anahtar: Aynı anahtar, bir JWT oluşturmak ve doğrulamak için kullanılır.
+* Asimetrik anahtar: X509 sertifikasında ortak özel anahtar çifti, bir JWT şifrelemek/oluşturmak için özel anahtarla ve belirteci doğrulamak için ortak anahtarla birlikte kullanılır.
 
 > [!NOTE]
 > .NET Framework kullanırsanız / C# geliştirme platformu olarak X509 bir asimetrik güvenlik anahtarı için kullanılan sertifika bir anahtar uzunluğu en az 2048 olması gerekir. Bu sınıf .NET Framework System.IdentityModel.Tokens.X509AsymmetricSecurityKey gereksinimdir. Aksi takdirde, şu özel durum oluşturulur:
 > 
-> IDX10630: 'İmzalama System.IdentityModel.Tokens.X509AsymmetricSecurityKey', '2048' bitten küçük olamaz.
+> IDX10630: İmzalama için ' System. IdentityModel. Tokens. X509AsymmetricSecurityKey ', ' 2048 ' bitten küçük olamaz.
 
 ## <a name="the-completed-system-and-test"></a>Tamamlanmış Sistem ve test
 Böylece bir oturum açma hesabı geçmeden önce temel resim davranış olabilir. Bu bölüm size aşağıdaki senaryolarda tamamlanmış uçtan uca sistemde yardımcı olur:
@@ -407,15 +408,15 @@ Yazarlar için eklediğiniz veya oluşturduğunuz bir hesap başvurabilirsiniz.
 
 Aşağıdaki ekran görüntüleri, farklı bir etki alanı hesapları tarafından kullanılan farklı oturum açma sayfalarını gösterir:
 
-**Özel Azure AD Kiracı etki alanı hesabı**: Özelleştirilmiş oturum açma sayfasına özel Azure ad Kiracı etki alanı.
+**Özel Azure AD kiracı etki alanı hesabı**: Özel Azure AD kiracı etki alanının özelleştirilmiş oturum açma sayfası.
 
 ![Özel Azure AD Kiracı etki alanı hesabı](./media/media-services-cenc-with-multidrm-access-control/media-services-ad-tenant-domain1.png)
 
-**Akıllı kart Microsoft etki alanı hesabıyla**: Microsoft Kurumsal özelleştirilmiş oturum açma sayfasına iki öğeli kimlik doğrulaması ile BT.
+**Akıllı kart Ile Microsoft etki alanı hesabı**: İki öğeli kimlik doğrulama ile Microsoft kurumsal BT tarafından özelleştirilmiş oturum açma sayfası.
 
 ![Özel Azure AD Kiracı etki alanı hesabı](./media/media-services-cenc-with-multidrm-access-control/media-services-ad-tenant-domain2.png)
 
-**Microsoft hesabı**: Oturum açma sayfası Tüketiciler için Microsoft hesabı.
+**Microsoft hesabı**: Tüketiciler için Microsoft hesabı oturum açma sayfası.
 
 ![Özel Azure AD Kiracı etki alanı hesabı](./media/media-services-cenc-with-multidrm-access-control/media-services-ad-tenant-domain3.png)
 

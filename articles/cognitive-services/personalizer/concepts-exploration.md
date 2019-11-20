@@ -1,54 +1,47 @@
 ---
-title: Araştırma - Personalizer
+title: Araştırma-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: Kullanıcı davranışını değiştiren gibi araştırması ile Personalizer iyi sonuçlar göndermeye devam edebilir. Bir araştırma ayarını seçerek bir iş Kullanıcı etkileşimlerine oranı hakkında ile keşfetmek için modeli geliştirmek için kararıdır.
+description: Araştırmayla, kişiselleştirmede Kullanıcı davranışı değiştikçe bile iyi sonuçlar sunmaya devam edebiliyor. Bir araştırma ayarı seçmek, modeli geliştirmek için ile araştırılacak kullanıcı etkileşimlerinin oranı hakkında bir iş karardır.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
-ms.date: 05/13/2019
-ms.author: edjez
-ms.openlocfilehash: 0e11dd962f4cc1ff9b1938b309a1b405dbf20232
-ms.sourcegitcommit: 6ea7f0a6e9add35547c77eef26f34d2504796565
+ms.topic: conceptual
+ms.date: 10/23/2019
+ms.author: diberry
+ms.openlocfilehash: 0b69c1fb070431ad61858322dce461f6496c35d7
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65607073"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490812"
 ---
-# <a name="exploration-and-exploitation"></a>Araştırma ve kötüye kullanımlara
+# <a name="exploration-and-exploitation"></a>Araştırma ve yararlanma
 
-Kullanıcı davranışını değiştiren gibi araştırması ile Personalizer iyi sonuçlar göndermeye devam edebilir.
+Araştırmayla, kişiselleştirmede Kullanıcı davranışı değiştikçe bile iyi sonuçlar sunmaya devam edebiliyor.
 
-Personalizer derece bir çağrı aldığında, bir RewardActionID, aşağıdakilerden birini döndürür:
-* Geçerli makine öğrenme modeli temelinde en olası kullanıcı davranışı eşleşecek şekilde yararlanılması kullanır.
-* İçinde olasılığı en yüksek dereceli eylemi eşleşmeyen araştırma kullanır.
+Kişiselleştirici bir derecelendirme çağrısı aldığında, bir Rewarterctionıd döndürür:
+* , Geçerli makine öğrenimi modeline bağlı olarak en olası kullanıcı davranışını eşleştirmek için yararlanma kullanır.
+* En yüksek olasılığa sahip eylemle eşleşmeyen araştırma kullanır.
 
-<!--
-Returning the most probable action is called *exploit* behavior. Returning a different action is called *exploration*.
--->
-Personalizer şu anda kullandığı algoritma adı verilen *epsilon doyumsuz* keşfetmek için. 
+Kişiselleştirici Şu anda, araştırmak için *Epsilon doyumsuz* adlı bir algoritma kullanıyor. 
 
-## <a name="choosing-an-exploration-setting"></a>Bir inceleme ayarı seçme
+## <a name="choosing-an-exploration-setting"></a>Araştırma ayarı seçme
 
-Azure portalının içinde araştırması için trafik yüzdesi yapılandırma **ayarları** Personalizer sayfası. Bu ayar, keşfi gerçekleştirmek derece çağrıları yüzdesini belirler. 
+Kişiselleştirici için Azure portal **yapılandırma** sayfasında araştırma için kullanılacak trafik yüzdesini yapılandırırsınız. Bu ayar, araştırmayı gerçekleştiren derece çağrılarının yüzdesini belirler. 
 
-Personalizer keşfedin veya bu olasılık derece her çağrıda ile yararlanma belirler. Bu davranışı bazı a farklıdır / bir işlemden belirli kullanıcı kimlikleri kilitleme B çerçeveleri.
+Kişiselleştirici, her bir derecelendirme çağrısında bu olasılığa göz atın veya bu olasılığa karşı faydalanıp yararlanamaz. Bu, belirli kullanıcı kimlikleri üzerinde bir işlemi kilitleyen bazı A/B çerçevelerinden farklı bir davranıştır.
 
-## <a name="best-practices-for-choosing-an-exploration-setting"></a>Bir inceleme ayarı seçmek için en iyi yöntemler
+## <a name="best-practices-for-choosing-an-exploration-setting"></a>Araştırma ayarı seçmek için en iyi uygulamalar
 
-<!--
-@edjez - you say what not to do, but make no recommendations of what **to** do. 
--->
+Bir araştırma ayarı seçmek, modeli geliştirmek için ile araştırılacak kullanıcı etkileşimlerinin oranı hakkında bir iş karardır. 
 
-Bir araştırma ayarını seçerek bir iş Kullanıcı etkileşimlerine oranı hakkında ile keşfetmek için modeli geliştirmek için kararıdır. 
+Sıfır ayarı, Kişiselleştiriciye ait avantajların çoğunu Ifade eder. Bu ayar ile, kişiselleştirici daha iyi kullanıcı etkileşimleri bulma için Kullanıcı etkileşimi kullanmaz. Bu, stagof, Drın ve son olarak daha düşük performans modeli oluşturulmasına yol açar.
 
-Sıfır ayarı Personalizer avantajlarının birçoğundan faydalanılmasını negate. Bu ayar, daha iyi Kullanıcı etkileşimlerine bulmak için hiçbir kullanıcı etkileşimlerine Personalizer kullanır. Bu model stagnation, kayması ve sonuçta düşük performansa neden olur.
+Çok yüksek bir ayar, Kullanıcı davranışından öğrenmesinin avantajlarından yararlanır. %100 olarak ayarlandığında, sabit bir rastgele seçim yapılır ve kullanıcıların öğrenildiği tüm davranışlar sonucu etkilemez.
 
-Çok yüksek bir ayar, kullanıcı davranışından öğrenme avantajlarını negate. % 100'e ayarlanması, sabit bir rastgele seçim anlamına gelir ve kullanıcıların öğrenilen herhangi bir davranış, sonucu etkiler değil.
-
-Olup Personalizer keşfetme veya kötüye görüntülediğiniz tabanlı uygulama davranışını değiştirilmemesi önemlidir. Bu, sonuçta olası performans azalır sapmaları öğrenme yol açar.
+Kişiselleştirmenin araştırıp mi yararlandığına göre uygulama davranışını değiştirmemelidir. Bu, son olarak olası performansı azaltabilecek bir şekilde öğrenmeye yol açacaktı.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

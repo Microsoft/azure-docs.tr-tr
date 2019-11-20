@@ -1,107 +1,107 @@
 ---
-title: Sistemin test sonuçlarını ve dağıtım - özel Translator görüntüleyin
+title: Sistem testi sonuçlarını ve dağıtımı görüntüleme-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Eğitim başarılı olduğunda, eğitim sonuçlarınızı çözümlemek için sistem testleri gözden geçirin. Dağıtım isteği eğitim modeli için eğitim Sonuçlardan memnun kalırsanız yerleştirin.
+description: Eğitim başarılı olduğunda, eğitim sonuçlarınızı çözümlemek için Sistem testlerini gözden geçirin. Eğitim sonuçlarıyla memnunsanız eğitilen model için bir dağıtım isteği koyun.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: ec15851ae7ff59a752fbf0d823d87aa6e68f10e9
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: f5e1a21f24fdd2458d4803d6ed1675455fa5037d
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67442491"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68595609"
 ---
 # <a name="view-system-test-results"></a>Sistem test sonuçlarını görüntüleme
 
-Eğitim başarılı olduğunda, eğitim sonuçlarınızı çözümlemek için sistem testleri gözden geçirin. Dağıtım isteği eğitim modeli için eğitim Sonuçlardan memnun kalırsanız yerleştirin.
+Eğitim başarılı olduğunda, eğitim sonuçlarınızı çözümlemek için Sistem testlerini gözden geçirin. Eğitim sonuçlarıyla memnunsanız eğitilen model için bir dağıtım isteği koyun.
 
 ## <a name="system-test-results-page"></a>Sistem test sonuçları sayfası
 
-Bir proje seçin ve ardından bu projenin modelleri sekmesini seçin, son olarak test sekmesini seçin ve kullanmak istediğiniz modelini bulun.
+Bir proje seçin, ardından projenin modeller sekmesini seçin, kullanmak istediğiniz modeli bulun ve son olarak test sekmesini seçin.
 
-Test sekmesi, gösterir:
+Test sekmesi şunları gösterir:
 
-1.  **Sistem Test sonuçları:** Eğitimleri test işleminin sonucu. Test işleminin BLEU puanı üretir.
+1.  **Sistem Test Sonuçları:** Test sürecinin sonuçları. Test süreci BLEU Puanını üretir.
 
-    **Tümce sayısı:** Kaç paralel cümleler test kümesi kullanıldı.
+    **Tümce sayısı:** Test kümesinde kaç tane paralel tümce kullanıldı.
 
-     **BLEU puan:** BLEU puan modeli için eğitim tamamlandıktan sonra oluşturulur.
+     **BLEU puanı:** Eğitim tamamlandıktan sonra bir model için üretilen BLEU puanı.
 
-    **Durum:** Test işlemi tamamlandığında veya ilerleme durumunu gösterir.
+    **Durumlarına** Test işleminin tamamlanıp tamamlanmadığını veya devam ettiğini gösterir.
 
     ![Sistem test sonuçları](media/how-to/how-to-system-test-results.png)
 
-2.  Sistemin test sonuçlarına tıklayın ve test sonuç Ayrıntıları sayfası sayfasına yönlendirileceksiniz. Bu sayfa, makine çevirisi test veri kümesini parçası olan tümcelerin gösterir.
+2.  Sistem test sonuçlarına tıklayın ve bu işlem sizi test sonucu ayrıntıları sayfasına götürür. Bu sayfada, test veri kümesinin parçası olan Tümcelerin makine çevirisi gösterilmektedir.
 
-3.  Test sonuç ayrıntıları sayfasındaki tablonun - çiftindeki her dil için iki sütun vardır. Kaynak dili için sütun çevrilemeyen cümlenin gösterir. Her bir satırdaki iki cümle hedef dil için sütun içerir.
+3.  Test sonucu ayrıntıları sayfasındaki tabloda iki sütun bulunur. çiftteki her dil için bir tane. Kaynak dilin sütunu, çevrilecek tümceyi gösterir. Hedef dilin sütunu her satırda iki cümle içerir.
 
-    **Ref:** Bu cümleyi test veri kümesinde belirtilen kaynak cümlenin başvuru çevrilmesidir.
+    **Ref** Bu cümle, kaynak cümlenin test veri kümesinde verilen başvuru dönüştürmesidir.
 
-    **MT:** Bu cümleyi eğitim yürütülen sonra oluşturulan model tarafından yapılan kaynak cümle otomatik çevrilmesidir.
+    **DEMI** Bu cümle, eğitim gerçekleştirildikten sonra oluşturulan model tarafından gerçekleştirilen kaynak cümlenin otomatik dönüştürmesidir.
 
-    ![Sistemin test sonuçları karşılaştırma](media/how-to/how-to-system-test-results-2.png)
+    ![Sistem test sonuçları karşılaştırması](media/how-to/how-to-system-test-results-2.png)
 
-## <a name="download-test"></a>Test yükle
+## <a name="download-test"></a>Testi indir
 
-Zip dosyasını indirmek için indirme çevirilerini bağlantıya tıklayın. Makine çevirileri sınama veri kümesi kaynağı tümcelerin zip içerir.
+Bir zip dosyası indirmek için çevirileri Indir bağlantısına tıklayın. ZIP, test veri kümesindeki kaynak cümlelerin makine çevirilerini içerir.
 
-![Test yükle](media/how-to/how-to-system-test-download.png)
+![Testi indir](media/how-to/how-to-system-test-download.png)
 
-Bu indirilen ZIP arşivini üç dosyalarını içerir.
+Bu indirilen ZIP arşivi üç dosya içerir.
 
-1.  **custom.mt.txt:** Bu dosya, kaynak dili cümle hedef kullanıcının verileriyle eğitilen model tarafından yapılan dilde makine çevirileri içerir.
+1.  **Custom. mt. txt:** Bu dosya, kullanıcının verileriyle eğitilen model tarafından gerçekleştirilen hedef dilde kaynak dil cümlelerini makine çevirileri içerir.
 
-2.  **Ref.txt:** Bu dosya, kullanıcı tarafından sağlanan Çeviriler kaynak dili cümle hedef dilde içerir.
+2.  **ref. txt:** Bu dosya, hedef dilde kaynak dil cümlelerini Kullanıcı tarafından sağlanmış çevirileri içerir.
 
-3.  **Source.txt:** Bu dosya, kaynak dili cümlelerde içerir.
+3.  **kaynak. txt:** Bu dosya, kaynak dilde cümleler içeriyor.
 
-    ![İndirilen sistem test sonuçları](media/how-to/how-to-download-system-test.png)
+    ![İndirilen sistem testi sonuçları](media/how-to/how-to-download-system-test.png)
 
 ## <a name="deploy-a-model"></a>Model dağıtma
 
-Bir dağıtım talep için:
+Dağıtım istemek için:
 
-1.  Bir proje seçin, modelleri sekmesine gidin.
+1.  Bir proje seçin, modeller sekmesine gidin.
 
-2. Başarıyla eğitilen bir modeli için "Dağıt" düğmesini gösterir, yoksa dağıtılmış.
+2. Başarılı bir eğitilen modelde, dağıtılmamışsa "Dağıt" düğmesi görüntülenir.
 
     ![Model dağıtma](media/how-to/how-to-deploy-model.png)
 
-3.  Tıklayarak dağıtma.
-4.  Seçin **dağıtıldı** için olduğu bölgelerin istediğiniz modelinizin dağıtılması ve Kaydet'e tıklayın. Seçebileceğiniz **dağıtıldı** birden çok bölgeye yönelik.
+3.  Dağıt ' a tıklayın.
+4.  Modelinizin dağıtılmasını istediğiniz bölge (ler) **i seçin ve** Kaydet ' e tıklayın. Birden çok bölge için **Dağıtılmış** ' ı seçebilirsiniz.
 
     ![Model dağıtma](media/how-to/how-to-deploy-model-regions.png)
 
-5.  Model durumu "Durum" sütununda görüntüleyebilirsiniz.
+5.  Modelinizin durumunu "durum" sütununda görüntüleyebilirsiniz.
 
 >[!Note]
->Özel Translator, zaman içinde herhangi bir noktada bir çalışma alanı 10 dağıtılan modelleri destekler.
+>Özel çevirmen, herhangi bir zamanda bir çalışma alanı içinde 10 dağıtılan modeli destekler.
 
-## <a name="update-deployment-settings"></a>Güncelleştirme dağıtım ayarları
+## <a name="update-deployment-settings"></a>Dağıtım ayarlarını Güncelleştir
 
-Dağıtım ayarları güncelleştirmek için:
+Dağıtım ayarlarını güncelleştirmek için:
 
-1.  Bir projeyi seçin ve Git **modelleri** sekmesi.
+1.  Bir proje seçin ve **modeller** sekmesine gidin.
 
-2. Başarıyla dağıtılan bir model için bunu gösterir bir **güncelleştirme** düğmesi.
+2. Başarıyla dağıtılan bir model için bir **güncelleştirme** düğmesi gösterir.
 
     ![Model dağıtma](media/how-to/how-to-update-undeploy-model.png)
 
-3.  Seçin **güncelleştirme**.
-4.  Seçin **dağıtıldı** veya **Undeployed** dağıtılan veya dağıtımı geri modelinizi istediğiniz olduğu bölgelerin için ardından **Kaydet**.
+3.  **Güncelleştir**' i seçin.
+4.  Modelinizin dağıtılmasını veya dağıtılmasını istediğiniz bölge (ler) i için **dağıtılan** veya **dağıtılan** ' ı seçin ve ardından **Kaydet**' e tıklayın.
 
     ![Model dağıtma](media/how-to/how-to-undeploy-model.png)
 
 >[!Note]
->Seçerseniz **Undeployed** tüm bölgeler için model tüm bölgelerden dağıtımı geri ve dağıtılmamış bir duruma getirir. Kullanım için artık kullanılamıyor.
+>Tüm bölgeler için **dağıtımı geri al** ' ı seçerseniz, model tüm bölgelerden dağıtılır ve Dağıtılmamış duruma konur. Artık kullanım için kullanılamaz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Dağıtılan özel çeviri modeliniz aracılığıyla kullanmaya başlama [Microsoft Translator Text API v3 sürümüne](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl).
-- Bilgi [ayarlarının nasıl yönetileceğini](how-to-manage-settings.md) çalışma alanınızı paylaşmak için abonelik anahtarınızı yönetme.
-- Bilgi [çalışma ve projeyi geçirmek nasıl](how-to-migrate.md) gelen [Microsoft Translator Hub](https://hub.microsofttranslator.com)
+- Çalışma alanınızı paylaşmak için [ayarları yönetmeyi](how-to-manage-settings.md) öğrenin, abonelik anahtarını yönetin.
+- [Çalışma alanınızı ve projenizi](how-to-migrate.md) [Microsoft Translator hub 'ından](https://hub.microsofttranslator.com) nasıl geçirebileceğinizi öğrenin

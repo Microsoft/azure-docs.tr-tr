@@ -1,75 +1,90 @@
 ---
 title: .NET ile Azure Dosyaları için geliştirme | Microsoft Docs
 description: Dosya verilerini depolamak için Azure Dosyaları'nı kullanan .NET uygulamaları ve hizmetlerini geliştirmeyi öğrenin.
-services: storage
 author: roygara
 ms.service: storage
 ms.devlang: dotnet
 ms.topic: conceptual
-ms.date: 11/22/2017
+ms.date: 10/7/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 38bafdb4753b41a9c8acd599e6b7215e1777c6cd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6f2159ddf3e3039dc0c38fc8f942c508ac177f06
+ms.sourcegitcommit: d773b5743cb54b8cbcfa5c5e4d21d5b45a58b081
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65779475"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72038157"
 ---
 # <a name="develop-for-azure-files-with-net"></a>.NET ile Azure Dosyaları için geliştirme
 
 [!INCLUDE [storage-selector-file-include](../../../includes/storage-selector-file-include.md)]
 
-Bu öğretici, dosya verilerini depolamak için [Azure Dosyaları](storage-files-introduction.md) kullanan uygulamalar geliştirmek üzere .NET kullanmayla ilgili temel bilgileri gösterir. Bu öğretici, .NET ve Azure Dosyaları ile temel eylemler gerçekleştirmek üzere basit bir konsol uygulaması oluşturur:
+Bu öğretici, dosya verilerini depolamak için [Azure Dosyaları](storage-files-introduction.md) kullanan uygulamalar geliştirmek üzere .NET kullanmayla ilgili temel bilgileri gösterir. Bu öğretici, .NET ve Azure dosyaları ile temel eylemleri yapmak üzere basit bir konsol uygulaması oluşturur:
 
-* Dosyanın içeriğini alma
-* Dosya paylaşımı için kota (en fazla boyut) ayarlama.
+* Bir dosyanın içeriğini alın.
+* Dosya paylaşımının en büyük boyutunu veya *kotasını* ayarlayın.
 * Paylaşımda tanımlı bir paylaşılan erişim ilkesi kullanan bir dosya için paylaşılan erişim imzası (SAS anahtarı) oluşturma.
 * Bir dosyayı aynı depolama hesabındaki başka bir dosyaya kopyalama.
 * Bir dosyayı aynı depolama hesabındaki bir bloba kopyalama.
-* Sorun giderme için Azure Storage Ölçümleri’ni kullanacağız.
+* Sorun giderme için Azure depolama ölçümlerini kullanın.
 
-Azure Dosyaları hakkında daha fazla bilgi için bkz. [Azure Dosyaları'na Giriş](storage-files-introduction.md).
+Azure dosyaları hakkında daha fazla bilgi edinmek için bkz. [Azure dosyaları nedir?](storage-files-introduction.md)
 
 [!INCLUDE [storage-check-out-samples-dotnet](../../../includes/storage-check-out-samples-dotnet.md)]
 
 ## <a name="understanding-the-net-apis"></a>.NET API'lerini anlama
 
-Azure dosyaları istemci uygulamalarına iki geniş yaklaşım sağlar: Sunucu İleti Bloğu (SMB) ve REST. .NET içinde bu yaklaşımlar `System.IO` ve `WindowsAzure.Storage` API'leri tarafından soyutlanır.
+Azure Dosyaları istemci uygulamalarına iki geniş yaklaşım sağlar: Sunucu İleti Bloğu (SMB) ve REST. .NET içinde `System.IO` ve `WindowsAzure.Storage` API 'Leri bu yaklaşımları soyutlar.
 
-API | Kullanılması gereken durumlar | Notlar
+eklentisi | Kullanılması gereken durumlar | Notlar
 ----|-------------|------
-[System.IO](https://docs.microsoft.com/dotnet/api/system.io) | Uygulamanız: <ul><li>SMB üzerinden dosya okuma/yazmaya ihtiyaç duyuyor</li><li>Azure Dosyaları hesabınıza 445 bağlantı noktası üzerinden erişimi olan bir cihazda çalışıyor</li><li>Dosya paylaşımının yönetim ayarlarından herhangi birini yönetmesi gerekmiyor</li></ul> | SMB üzerinden Azure Dosyaları ile dosya G/Ç kodlaması genellikle herhangi bir ağ dosya paylaşımı ya da yerel depolama cihazı ile G/Ç kodlaması işlemiyle aynıdır. .NET içindeki dosya G/Ç dahil birkaç özelliğe giriş için [bu öğreticiye](https://docs.microsoft.com/dotnet/csharp/tutorials/console-teleprompter) bakın.
-[Microsoft.Azure.Storage.File](https://docs.microsoft.com/dotnet/api/overview/azure/storage#client-library) | Uygulamanız: <ul><li>Güvenlik duvarı veya ISS kısıtlamaları nedeniyle bağlantı noktası 445’te SMB üzerinden Azure Dosyalarına erişemiyor</li><li>Bir dosya paylaşımının kotasını ayarlama veya paylaşılan bir erişim imzası oluşturma gibi yönetim işlevleri gerektiriyor</li></ul> | Bu makalede dosya G/Ç için REST ile (SMB yerine) `Microsoft.Azure.Storage.File` kullanımı ve dosya paylaşımının yönetimi gösterilmektedir.
+[System.IO](https://docs.microsoft.com/dotnet/api/system.io) | Uygulamanız: <ul><li>SMB kullanarak dosyaları okuma/yazma gerekir</li><li>Azure Dosyaları hesabınıza 445 bağlantı noktası üzerinden erişimi olan bir cihazda çalışıyor</li><li>Dosya paylaşımının yönetim ayarlarından herhangi birini yönetmesi gerekmiyor</li></ul> | SMB üzerinden Azure dosyaları ile uygulanan dosya g/ç, genellikle herhangi bir ağ dosya paylaşımıyla veya yerel depolama cihazındaki g/ç ile aynıdır. .NET 'teki dosya g/ç dahil olmak üzere çeşitli özelliklere giriş için, bkz. [konsol uygulaması](https://docs.microsoft.com/dotnet/csharp/tutorials/console-teleprompter) öğreticisi.
+[Microsoft. Azure. Storage. File](https://docs.microsoft.com/dotnet/api/overview/azure/storage#client-library) | Uygulamanız: <ul><li>Güvenlik duvarı veya ISS kısıtlamaları nedeniyle 445 numaralı bağlantı noktasında SMB kullanılarak Azure dosyalarına erişilemiyor</li><li>Bir dosya paylaşımının kotasını ayarlama veya paylaşılan bir erişim imzası oluşturma gibi yönetim işlevleri gerektiriyor</li></ul> | Bu makalede, dosya paylaşımının SMB ve yönetimi yerine REST kullanılarak dosya g/ç için `Microsoft.Azure.Storage.File` kullanımı gösterilmektedir.
 
 ## <a name="create-the-console-application-and-obtain-the-assembly"></a>Konsol uygulaması oluşturma ve derleme alma
-Visual Studio'da yeni bir Windows konsol uygulaması oluşturun. Aşağıdaki adımlar Visual Studio 2017’de konsol uygulaması oluşturmayı gösterir, ancak adımlar, diğer Visual Studio sürümlerindekilerle aynıdır.
 
-1. **Dosya** > **Yeni** > **Proje**’yi seçin
-2. **Yüklü** > **Şablonlar** > **Visual C#**  > **Windows Klasik Masaüstü** öğesini seçin
-3. **Konsol Uygulaması (.NET Framework)** öğesini seçin
-4. **Ad:** alanına uygulamanız için bir ad girin
-5. **Tamam**’ı seçin
+Visual Studio'da yeni bir Windows konsol uygulaması oluşturun. Aşağıdaki adımlarda, Visual Studio 2019 ' de bir konsol uygulamasının nasıl oluşturulacağı gösterilmektedir. Adımlar Visual Studio’nun diğer sürümlerinde de benzerdir.
 
-Bu öğreticideki tüm kod örnekleri konsol uygulamanızın `Program.cs` dosyasındaki `Main()` yöntemine eklenebilir.
+1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur**' u seçin.
+1. **Yeni proje oluştur**' da, Için C#konsol uygulaması (.NET Framework) öğesini seçin ve ardından **İleri**' yi seçin.
+1. **Yeni projenizi yapılandırın**bölümünde uygulama için bir ad girin ve **Oluştur**' u seçin.
 
-Azure depolama istemci Kitaplığı'ndaki bir Azure bulut hizmeti veya web uygulaması da dahil olmak üzere, .NET uygulaması ve Masaüstü ve mobil uygulamaları herhangi bir türü kullanabilirsiniz. Bu kılavuzda, sadeleştirmek için konsol uygulaması kullanmaktayız.
+Bu öğreticideki tüm kod örneklerini konsol uygulamanızın `Program.cs` dosyasının `Main()` metoduna ekleyebilirsiniz.
+
+Azure Storage istemci kitaplığı 'nı herhangi bir .NET uygulaması türünde kullanabilirsiniz. Bu türler, bir Azure bulut hizmeti veya Web uygulaması, masaüstü ve mobil uygulamalar içerir. Bu kılavuzda, sadeleştirmek için konsol uygulaması kullanmaktayız.
 
 ## <a name="use-nuget-to-install-the-required-packages"></a>Gereken paketleri yüklemek için NuGet kullanma
-Bu öğreticiyi tamamlamak için projenizde başvurmanız gereken iki paket vardır:
 
-* [.NET için Microsoft Azure depolama ortak kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.Storage.Common/): Bu paket depolama hesabınızdaki ortak kaynaklarına programlı erişim sağlar.
-* [.NET için Microsoft Azure depolama blobu Kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/): Bu paket depolama hesabınızdaki Blob kaynaklarına programlı erişim sağlar.
-* [.NET için Microsoft Azure Yapılandırma Yöneticisi Kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.ConfigurationManager/): Bu paket, uygulamanızın nerede çalıştığına bakmaksızın yapılandırma dosyasındaki bağlantı dizesini ayrıştırmak için bir sınıf sağlar.
+Bu öğreticiyi tamamlayabilmeniz için projenizdeki bu paketlere başvurun:
+
+* [.NET için Microsoft Azure Depolama ortak kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.Storage.Common/)
+  
+  Bu paket, Depolama hesabınızdaki ortak kaynaklara programlı erişim sağlar.
+* [.NET için Microsoft Azure Depolama blob kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)
+
+  Bu paket, Depolama hesabınızdaki blob kaynaklarına programlı erişim sağlar.
+* [.NET için Microsoft Azure Depolama dosya kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.Storage.File/)
+
+  Bu paket, Depolama hesabınızdaki dosya kaynaklarına programlı erişim sağlar.
+* [.NET için Microsoft Azure Configuration Manager kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.ConfigurationManager/)
+
+  Bu paket, uygulamanızın çalıştığı her yerde yapılandırma dosyasında bir bağlantı dizesini ayrıştırmak için bir sınıf sağlar.
 
 Her iki paketi de almak için NuGet kullanabilirsiniz. Şu adımları uygulayın:
 
-1. **Çözüm Gezgini**'nde projenize sağ tıklayın ve **NuGet Paketlerini Yönet**’i seçin.
-2. Çevrimiçi olarak "WindowsAzure.Storage" ifadesini arayın ve Depolama İstemci Kitaplığı’nı ve bağımlılıklarını yüklemek için **Yükle**’ye tıklayın.
-3. Çevrimiçi olarak "WindowsAzure.ConfigurationManager" ifadesini arayın ve Azure Yapılandırma Yöneticisi’ni yüklemek için **Yükle**’ye tıklayın.
+1. **Çözüm Gezgini**, projenize sağ tıklayın ve **NuGet Paketlerini Yönet**' i seçin.
+1. **NuGet Paket Yöneticisi**' nde, **Araştır**' ı seçin. Sonra **Microsoft. Azure. Storage. blob**' u arayıp seçin ve ardından **Install**' ı seçin.
 
-## <a name="save-your-storage-account-credentials-to-the-appconfig-file"></a>Depolama hesabı kimlik bilgilerinizi app.config dosyasına kaydetme
-Sonraki adımda, kimlik bilgilerinizi projenizin app.config dosyasına kaydedin. app.config dosyasını aşağıdaki örneğe benzeyecek şekilde düzenleyin. `myaccount` değerini depolama hesabınızın adıyla ve `mykey` değerini depolama hesabınızın anahtarıyla değiştirin.
+   Bu adım paketini ve bağımlılıklarını yüklenir.
+1. Bu paketleri arayın ve yükler:
+
+   * **Microsoft. Azure. Storage. Common**
+   * **Microsoft. Azure. Storage. File**
+   * **Microsoft. Azure. ConfigurationManager**
+
+## <a name="save-your-storage-account-credentials-to-the-appconfig-file"></a>Depolama hesabı kimlik bilgilerinizi App. config dosyasına kaydetme
+
+Ardından, kimlik bilgilerinizi projenizin `App.config` dosyasına kaydedin. **Çözüm Gezgini**' de, `App.config` ' e çift tıklayın ve dosyayı aşağıdaki örneğe benzer olacak şekilde düzenleyin. @No__t-0 değerini depolama hesabı adınızla ve `mykey` ' i depolama hesabı anahtarınızla değiştirin.
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -87,7 +102,8 @@ Sonraki adımda, kimlik bilgilerinizi projenizin app.config dosyasına kaydedin.
 > Azure depolama öykünücüsünün en son sürümü Azure Dosyaları'nı desteklemez. Bağlantı dizeniz, Azure Dosyaları ile çalışmak için buluttaki bir Azure Depolama hesabını hedeflemelidir.
 
 ## <a name="add-using-directives"></a>Using yönergeleri ekleme
-Çözüm Gezgini’nde `Program.cs` dosyasını açın ve aşağıdaki using yönergelerini dosyanın üst tarafına ekleyin.
+
+**Çözüm Gezgini**' de, `Program.cs` dosyasını açın ve aşağıdaki using yönergelerini dosyanın en üstüne ekleyin.
 
 ```csharp
 using Microsoft.Azure; // Namespace for Azure Configuration Manager
@@ -99,7 +115,8 @@ using Microsoft.Azure.Storage.File; // Namespace for Azure Files
 [!INCLUDE [storage-cloud-configuration-manager-include](../../../includes/storage-cloud-configuration-manager-include.md)]
 
 ## <a name="access-the-file-share-programmatically"></a>Dosya paylaşımına programlamayla erişme
-Şimdi, bağlantı dizesini almak için aşağıdaki kodu `Main()` yöntemine (yukarıda gösterilen koddan sonra) ekleyin. Bu kod, daha önce oluşturduğumuz dosyaya başvuru alır ve bu dosyanın içeriğini konsol penceresine çıkarır.
+
+Sonra, bağlantı dizesini almak için yukarıda gösterilen koddan sonra `Main()` yöntemine aşağıdaki içeriği ekleyin. Bu kod, daha önce oluşturduğumuz dosyaya bir başvuru alır ve içeriğini çıkarır.
 
 ```csharp
 // Create a CloudFileClient object for credentialed access to Azure Files.
@@ -136,9 +153,10 @@ if (share.Exists())
 Çıkışı görmek konsol uygulamasını çalıştırın.
 
 ## <a name="set-the-maximum-size-for-a-file-share"></a>Dosya paylaşımı için boyut üst sınırını ayarlama
-Azure Depolama İstemci Kitaplığı'nın 5.x sürümünden başlayarak, dosya paylaşımı için gigabayt cinsinden kota (veya boyut üst sınırı) ayarlayabilirsiniz. Paylaşımda halihazırda ne kadar verinin depolandığını da kontrol edebilirsiniz.
 
-Paylaşım için kota ayarlayarak paylaşımda depolanan toplam dosya boyutunu kısıtlayabilirsiniz. Paylaşımdaki toplam dosya boyutu belirlediğiniz kotayı aşarsa, istemciler mevcut dosyaların boyutunu artıramaz veya boş olmamaları halinde yeni dosyalar oluşturamaz.
+Azure Storage Istemci kitaplığı 'nın 5. x sürümünden başlayarak, bir dosya paylaşımının kotasını (en büyük boyut) ayarlayabilirsiniz. Paylaşımda halihazırda ne kadar verinin depolandığını da kontrol edebilirsiniz.
+
+Bir paylaşımın kotasının ayarlanması, paylaşımda depolanan dosyaların toplam boyutunu sınırlar. Paylaşımdaki dosyaların toplam boyutu paylaşımdaki kota kümesini aşarsa, istemciler mevcut dosyaların boyutunu artırabilir. İstemciler, bu dosyalar boş olmadığı takdirde yeni dosyalar oluşturamaz.
 
 Aşağıdaki örnekte, paylaşımdaki mevcut kullanımını nasıl kontrol edileceği veya paylaşım için nasıl kota ayarlanacağı gösterilmiştir.
 
@@ -173,9 +191,10 @@ if (share.Exists())
 ```
 
 ### <a name="generate-a-shared-access-signature-for-a-file-or-file-share"></a>Dosya veya dosya paylaşımı için paylaşılan erişim imzası oluşturma
-Azure Storage İstemci Kitaplığı’nın 5.x sürümünden başlayarak, bir dosya paylaşımı veya yalnızca dosya için paylaşılan erişim imzası (SAS) oluşturabilirsiniz. Ayrıca, paylaşılan erişim imzalarını yönetmek için dosya paylaşımında bir paylaşılan erişim ilkesi oluşturabilirsiniz. Gizliliğinin tehlikeye girdiği durumlarda SAS’yi iptal etme aracı olarak kullanılabilmesi nedeniyle bir paylaşılan erişim ilkesi oluşturmanız önerilir.
 
-Aşağıdaki örnekte, paylaşım için bir paylaşılan erişim ilkesi oluşturulur, daha sonra bu ilke paylaşımdaki bir dosyada bulunan SAS için sınırlamalar sağlamak amacıyla kullanılır.
+Azure Storage İstemci Kitaplığı’nın 5.x sürümünden başlayarak, bir dosya paylaşımı veya yalnızca dosya için paylaşılan erişim imzası (SAS) oluşturabilirsiniz. Ayrıca, paylaşılan erişim imzalarını yönetmek için dosya paylaşımında bir paylaşılan erişim ilkesi oluşturabilirsiniz. Güvenlik açığı varsa SAS 'yi iptal etmenizi sağladığından, paylaşılan erişim ilkesi oluşturmanızı öneririz.
+
+Aşağıdaki örnek, bir paylaşımda paylaşılan erişim ilkesi oluşturur. Örnek, paylaşımdaki bir dosyadaki bir SAS için kısıtlamalar sağlamak üzere bu ilkeyi kullanır.
 
 ```csharp
 // Parse the connection string for the storage account.
@@ -221,19 +240,21 @@ if (share.Exists())
 }
 ```
 
-Paylaşılan erişim imzaları oluşturma ve kullanma hakkında daha fazla bilgi için bkz. [kullanarak paylaşılan erişim imzaları (SAS)](../common/storage-dotnet-shared-access-signature-part-1.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json).
+Paylaşılan erişim imzaları oluşturma ve kullanma hakkında daha fazla bilgi için bkz. [paylaşılan erişim Imzası nasıl kullanılır](../common/storage-sas-overview.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json#how-a-shared-access-signature-works).
 
 ## <a name="copy-files"></a>Dosyaları kopyalama
-Azure Storage İstemci Kitaplığı’nın 5.x sürümünden başlayarak, bir dosyayı başka bir dosyaya, bir dosyayı başka bir bloba veya bir blobu bir dosyaya kopyalayabilirsiniz. Sonraki bölümlerde, bu kopyalama işlemlerini programlamayla nasıl gerçekleştirebileceğinizi göstereceğiz.
 
-Bir dosyayı diğer bir dosyaya veya bir blobu bir dosyaya ya da tam tersini yapmak için AzCopy’i de kullanabilirsiniz. Bkz. [AzCopy Komut Satırı Yardımcı Programı ile veri aktarımı](../common/storage-use-azcopy.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json).
+Azure Storage İstemci Kitaplığı’nın 5.x sürümünden başlayarak, bir dosyayı başka bir dosyaya, bir dosyayı başka bir bloba veya bir blobu bir dosyaya kopyalayabilirsiniz. Sonraki bölümlerde, bu kopyalama işlemlerinin programlı bir şekilde nasıl yapılacağını gösteririz.
+
+AzCopy komutunu Ayrıca bir dosyayı başka bir dosyaya kopyalamak veya bir blobu bir dosyaya ya da başka bir yolla kopyalamak için de kullanabilirsiniz. Bkz. [AzCopy ile çalışmaya başlama](../common/storage-use-azcopy.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json).
 
 > [!NOTE]
 > Bir blobu dosyaya veya bir dosyayı bloba kopyalamak için aynı depolama hesabında kopyalama yapıyor olsanız da kaynak nesnesi erişimini yetkilendirmek amacıyla bir paylaşılan erişim imzası (SAS) kullanmanız gerekir.
-> 
-> 
+>
 
-**Dosyayı başka bir dosyaya kopyalama** Aşağıdaki örnekte, bir dosya aynı paylaşımdaki başka bir dosyaya kopyalanır. Bu kopyalama işlemi aynı depolama hesabındaki dosyaları kopyaladığı için, kopyalama işlemini gerçekleştirmek üzere Paylaşılan Anahtar kimlik doğrulaması kullanabilirsiniz.
+### <a name="copy-a-file-to-another-file"></a>Dosyayı başka bir dosyaya kopyalama
+
+Aşağıdaki örnekte, bir dosya aynı paylaşımdaki başka bir dosyaya kopyalanır. Bu kopyalama işlemi aynı depolama hesabındaki dosyalar arasında kopya yaptığından, kopyalamayı yapmak için paylaşılan anahtar kimlik doğrulaması kullanabilirsiniz.
 
 ```csharp
 // Parse the connection string for the storage account.
@@ -277,7 +298,9 @@ if (share.Exists())
 }
 ```
 
-**Dosyayı bir bloba kopyalama** Aşağıdaki örnekte, bir dosya oluşturulur ve aynı depolama hesabındaki bir bloba kopyalanır. Örnekte, kaynak dosya için hizmetin kopyalama sırasında kaynak dosyaya erişimi yetkilendirmek üzere kullandığı bir SAS oluşturulur.
+### <a name="copy-a-file-to-a-blob"></a>Dosyayı bir bloba kopyalama
+
+Aşağıdaki örnekte, bir dosya oluşturulur ve aynı depolama hesabındaki bir bloba kopyalanır. Örnekte, kaynak dosya için hizmetin kopyalama sırasında kaynak dosyaya erişimi yetkilendirmek üzere kullandığı bir SAS oluşturulur.
 
 ```csharp
 // Parse the connection string for the storage account.
@@ -325,10 +348,11 @@ Console.WriteLine("Destination blob contents: {0}", destBlob.DownloadText());
 
 Aynı şekilde, bir blobu bir dosyaya kopyalayabilirsiniz. Kaynak dosya bir blob ise, kopyalama sırasında bu bloba erişimi yetkilendirmesi için bir SAS oluşturun.
 
-## <a name="share-snapshots"></a>Paylaşım anlık görüntüleri
-Azure depolama istemci Kitaplığı'nın 8.5 sürümünden başlayarak, bir paylaşım anlık görüntüsü oluşturabilirsiniz. Ayrıca paylaşım anlık görüntülerini listeleyebilir, onlara göz atabilir ve paylaşım anlık görüntülerini silebilirsiniz. Paylaşım anlık görüntüleri salt okunur olduğundan paylaşım anlık görüntüleri üzerinde yazma işlemi gerçekleştirilemez.
+## <a name="share-snapshots"></a>Anlık görüntü paylaşma
 
-**Paylaşım anlık görüntüsü oluşturma**
+Azure Storage Istemci kitaplığı sürüm 8,5 ' den başlayarak bir paylaşma anlık görüntüsü oluşturabilirsiniz. Ayrıca paylaşım anlık görüntülerini listeleyebilir, onlara göz atabilir ve paylaşım anlık görüntülerini silebilirsiniz. Paylaşım anlık görüntüleri salt okunur olduğundan paylaşım anlık görüntüleri üzerinde yazma işlemi gerçekleştirilemez.
+
+### <a name="create-share-snapshots"></a>Paylaşma anlık görüntüleri oluşturma
 
 Aşağıdaki örnekte dosya paylaşım anlık görüntüsü oluşturulmaktadır.
 
@@ -340,7 +364,8 @@ CloudFileShare myShare = fClient.GetShareReference(baseShareName);
 var snapshotShare = myShare.Snapshot();
 
 ```
-**Paylaşım anlık görüntülerini listeleme**
+
+### <a name="list-share-snapshots"></a>Paylaşım anlık görüntülerini listeleme
 
 Aşağıdaki örnekte bir paylaşım üzerindeki paylaşım anlık görüntüleri listelenmektedir.
 
@@ -348,7 +373,7 @@ Aşağıdaki örnekte bir paylaşım üzerindeki paylaşım anlık görüntüler
 var shares = fClient.ListShares(baseShareName, ShareListingDetails.All);
 ```
 
-**Paylaşım anlık görüntüleri içindeki dosyalara ve dizinlere göz atma**
+### <a name="browse-files-and-directories-within-share-snapshots"></a>Paylaşma anlık görüntüleri içindeki dosyalara ve dizinlere gözatamıyorum
 
 Aşağıdaki örnekte paylaşım anlık görüntüleri içindeki dosyalara ve dizinlere göz atılmaktadır.
 
@@ -358,40 +383,36 @@ var rootDirectory = mySnapshot.GetRootDirectoryReference();
 var items = rootDirectory.ListFilesAndDirectories();
 ```
 
-**Paylaşımları ve paylaşım anlık görüntülerini listeleme ve dosya paylaşımlarını veya paylaşım anlık görüntülerindeki dosyaları geri yükleme** 
+### <a name="list-shares-and-share-snapshots-and-restore-file-shares-or-files-from-share-snapshots"></a>Paylaşımları listeleme ve anlık görüntüleri paylaşma ve dosya paylaşımlarını veya dosyaları paylaşım anlık görüntülerinden geri yükleme
 
-Bir dosya paylaşımının anlık görüntüsünü alarak daha sonra içindeki dosyaları veya dosya paylaşımının tamamını kurtarabilirsiniz. 
+Bir dosya paylaşımının anlık görüntüsünü alarak daha sonra içindeki dosyaları veya dosya paylaşımının tamamını kurtarabilirsiniz.
 
-Bir dosya paylaşımının paylaşım anlık görüntülerini sorgulayarak bir dosya paylaşım anlık görüntüsündeki dosyayı geri yükleyebilirsiniz. Ardından belirli bir paylaşım ekran görüntüsüne ait olan bir dosyayı alabilir ve bu sürümü doğrudan okuyup karşılaştırmak veya geri yüklemek için kullanabilirsiniz.
+Bir dosya paylaşımının paylaşım anlık görüntülerini sorgulayarak bir dosya paylaşım anlık görüntüsündeki dosyayı geri yükleyebilirsiniz. Ardından, belirli bir paylaşılan anlık görüntüye ait olan bir dosyayı alabilirsiniz. Bu sürümü, doğrudan okumak ve karşılaştırmak ya da geri yüklemek için kullanın.
 
 ```csharp
 CloudFileShare liveShare = fClient.GetShareReference(baseShareName);
 var rootDirOfliveShare = liveShare.GetRootDirectoryReference();
-
-       var dirInliveShare = rootDirOfliveShare.GetDirectoryReference(dirName);
+var dirInliveShare = rootDirOfliveShare.GetDirectoryReference(dirName);
 var fileInliveShare = dirInliveShare.GetFileReference(fileName);
 
-           
 CloudFileShare snapshot = fClient.GetShareReference(baseShareName, snapshotTime);
 var rootDirOfSnapshot = snapshot.GetRootDirectoryReference();
-
-       var dirInSnapshot = rootDirOfSnapshot.GetDirectoryReference(dirName);
+var dirInSnapshot = rootDirOfSnapshot.GetDirectoryReference(dirName);
 var fileInSnapshot = dir1InSnapshot.GetFileReference(fileName);
 
 string sasContainerToken = string.Empty;
-       SharedAccessFilePolicy sasConstraints = new SharedAccessFilePolicy();
-       sasConstraints.SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24);
-       sasConstraints.Permissions = SharedAccessFilePermissions.Read;
-       //Generate the shared access signature on the container, setting the constraints directly on the signature.
+SharedAccessFilePolicy sasConstraints = new SharedAccessFilePolicy();
+sasConstraints.SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24);
+sasConstraints.Permissions = SharedAccessFilePermissions.Read;
+
+//Generate the shared access signature on the container, setting the constraints directly on the signature.
 sasContainerToken = fileInSnapshot.GetSharedAccessSignature(sasConstraints);
 
 string sourceUri = (fileInSnapshot.Uri.ToString() + sasContainerToken + "&" + fileInSnapshot.SnapshotTime.ToString()); ;
 fileInliveShare.StartCopyAsync(new Uri(sourceUri));
-
 ```
 
-
-**Paylaşım anlık görüntülerini silme**
+### <a name="delete-share-snapshots"></a>Paylaşma anlık görüntülerini Sil
 
 Aşağıdaki örnekte dosya paylaşım anlık görüntüsü silinmektedir.
 
@@ -399,21 +420,22 @@ Aşağıdaki örnekte dosya paylaşım anlık görüntüsü silinmektedir.
 CloudFileShare mySnapshot = fClient.GetShareReference(baseShareName, snapshotTime); mySnapshot.Delete(null, null, null);
 ```
 
-## <a name="troubleshooting-azure-files-using-metrics"></a>Ölçümleri kullanarak Azure Dosyaları sorunlarını giderme
+## Ölçümleri kullanarak Azure dosyaları sorunlarını giderme<a name="troubleshooting-azure-files-using-metrics"></a>
+
 Artık Azure Depolama Analizi, Azure Dosyaları için ölçümleri destekliyor. Ölçüm verilerini kullanarak istekleri ve tanılama sorunlarını izleyebilirsiniz.
 
-Azure dosyaları için ölçümleri etkinleştirebilirsiniz [Azure portalında](https://portal.azure.com). Ayrıca, REST API veya Depolama İstemci Kitaplığı'ndaki analoglarından biri aracılığıyla Dosya Hizmeti Özelliklerini Ayarla işlemine çağrı yaparak ölçümleri programlamayla etkinleştirebilirsiniz.
+[Azure Portal](https://portal.azure.com)Azure dosyaları için ölçümleri etkinleştirebilirsiniz. Ayrıca, depolama Istemci kitaplığındaki bir REST API veya analoglarından biri ile dosya hizmeti özelliklerini ayarlama işlemini çağırarak ölçümleri programlı bir şekilde etkinleştirebilirsiniz.
 
 Aşağıdaki kodda, Azure Dosyaları için ölçümleri etkinleştirmek üzere .NET için Depolama İstemcisi Kitaplığı'nı nasıl kullanacağınız gösterilmiştir.
 
-İlk olarak, yukarıda eklediğiniz yönergelere ek olarak aşağıdaki `using` yönergelerini `Program.cs` dosyanıza ekleyin:
+İlk olarak, aşağıdaki `using` yönergelerini `Program.cs` dosyanıza, yukarıdaki eklendikleriyle birlikte ekleyin:
 
 ```csharp
 using Microsoft.Azure.Storage.File.Protocol;
 using Microsoft.Azure.Storage.Shared.Protocol;
 ```
 
-Azure Blobları, Azure Tablosu ve Azure Kuyruklarının `Microsoft.Azure.Storage.Shared.Protocol` ad alanındaki paylaşılan `ServiceProperties` türünü kullanmasına rağmen, Azure Dosyaları'nın `Microsoft.Azure.Storage.File.Protocol` ad alanında bulunan kendi `FileServiceProperties` türünü kullandığına dikkat edin. Aşağıdaki kodların derlenebilmesi için her iki ad alanına da kodunuzdan başvurulmuş olması gerekir.
+Azure Blobları, Azure tabloları ve Azure Kuyrukları `Microsoft.Azure.Storage.Shared.Protocol` ad alanında paylaşılan `ServiceProperties` türünü kullanmasına rağmen, Azure dosyaları `Microsoft.Azure.Storage.File.Protocol` ad alanındaki `FileServiceProperties` türü kendi türünü kullanır. Kodunuzda her iki ad alanına da başvurmanız gerekir, ancak aşağıdaki kodun derlenmesi için.
 
 ```csharp
 // Parse your storage connection string from your application's configuration file.
@@ -456,26 +478,31 @@ Console.WriteLine(serviceProperties.MinuteMetrics.RetentionDays);
 Console.WriteLine(serviceProperties.MinuteMetrics.Version);
 ```
 
-Uçtan uca sorun giderme kılavuzu için [Azure Dosyaları Sorun Giderme Makalesine](storage-troubleshoot-windows-file-connection-problems.md) de bakabilirsiniz.
+Herhangi bir sorunla karşılaşırsanız, bkz. [Windows 'Da Azure dosyaları sorunlarını giderme](storage-troubleshoot-windows-file-connection-problems.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Dosyaları hakkında daha fazla bilgi edinmek için şu bağlantılara göz atın.
+
+Azure dosyaları hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
 ### <a name="conceptual-articles-and-videos"></a>Kavramsal makaleler ve videolar
+
 * [Azure Dosyaları: Windows ve Linux için uyumlu bulut SMB dosya sistemi](https://azure.microsoft.com/documentation/videos/azurecon-2015-azure-files-storage-a-frictionless-cloud-smb-file-system-for-windows-and-linux/)
-* [Azure Dosyaları'nı Linux ile kullanma](storage-how-to-use-files-linux.md)
+* [Linux ile Azure dosyaları kullanma](storage-how-to-use-files-linux.md)
 
 ### <a name="tooling-support-for-file-storage"></a>File Storage için araç desteği
-* [Microsoft Azure Depolama ile AzCopy kullanma](../common/storage-use-azcopy.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json)
+
+* [AzCopy ile çalışmaya başlama](../common/storage-use-azcopy.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json)
 * [Azure Depolama ile Azure CLI kullanma](../common/storage-azure-cli.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json#create-and-manage-file-shares)
-* [Azure Dosyaları sorunlarını giderme](https://docs.microsoft.com/azure/storage/storage-troubleshoot-file-connection-problems)
+* [Windows’ta Azure Dosyalar sorunlarını giderme](https://docs.microsoft.com/azure/storage/storage-troubleshoot-file-connection-problems)
 
 ### <a name="reference"></a>Başvuru
-* [.NET başvurusu için Depolama İstemci Kitaplığı](https://msdn.microsoft.com/library/azure/dn261237.aspx)
-* [Dosya Hizmeti REST API başvurusu](https://msdn.microsoft.com/library/azure/dn167006.aspx)
 
-### <a name="blog-posts"></a>Blog yazıları
-* [Azure Dosyaları genel kullanıma sunulmuştur](https://azure.microsoft.com/blog/azure-file-storage-now-generally-available/)
-* [Azure Dosyaları İncelemesi](https://azure.microsoft.com/blog/inside-azure-file-storage/)
-* [Microsoft Azure Dosya Hizmeti’ne Giriş](https://blogs.msdn.com/b/windowsazurestorage/archive/2014/05/12/introducing-microsoft-azure-file-service.aspx)
+* [.NET için Azure depolama API 'Leri](/dotnet/api/overview/azure/storage)
+* [Dosya hizmeti REST API](/rest/api/storageservices/File-Service-REST-API)
+
+### <a name="blog-posts"></a>Blog gönderileri
+
+* [Azure dosya depolama genel kullanıma sunuldu](https://azure.microsoft.com/blog/azure-file-storage-now-generally-available/)
+* [Azure Dosya Depolama İncelemesi](https://azure.microsoft.com/blog/inside-azure-file-storage/)
+* [Microsoft Azure dosyaları hizmetine giriş](https://blogs.msdn.com/b/windowsazurestorage/archive/2014/05/12/introducing-microsoft-azure-file-service.aspx)
 * [Microsoft Azure Dosyaları ile kalıcı bağlantılar](https://blogs.msdn.com/b/windowsazurestorage/archive/2014/05/27/persisting-connections-to-microsoft-azure-files.aspx)

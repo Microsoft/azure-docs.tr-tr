@@ -1,64 +1,63 @@
 ---
-title: Performans düşüşü - Azure App Service'e giderme | Microsoft Docs
-description: Bu makale, Azure App Service'te uygulama yavaş performans sorunlarını gidermenize yardımcı olur.
+title: Performans düşüşü sorunlarını giderme-Azure App Service | Microsoft Docs
+description: Bu makale, Azure App Service ' deki yavaş uygulama performansı sorunlarını gidermenize yardımcı olur.
 services: app-service\web
 documentationcenter: ''
 author: cephalin
 manager: erikre
 editor: ''
 tags: top-support-issue
-keywords: Web uygulaması performansını yavaş uygulama uygulaması yavaş
+keywords: Web uygulaması performansı, yavaş uygulama, uygulama yavaş
 ms.assetid: b8783c10-3a4a-4dd6-af8c-856baafbdde5
 ms.service: app-service-web
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 08/03/2016
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: 2d17991854f13f889c4e8c3a8c6f18e933655546
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3f7389022eaee4268d5d4fc5439b64d7f7f1bf07
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62128458"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70066537"
 ---
-# <a name="troubleshoot-slow-app-performance-issues-in-azure-app-service"></a>Azure App Service'te uygulama yavaş performans sorunlarını giderme
-Bu makale, uygulama yavaş performans sorunlarını gidermenize yardımcı olur. [Azure App Service](https://go.microsoft.com/fwlink/?LinkId=529714).
+# <a name="troubleshoot-slow-app-performance-issues-in-azure-app-service"></a>Azure App Service 'de yavaş uygulama performansı sorunlarını giderme
+Bu makale, [Azure App Service](https://go.microsoft.com/fwlink/?LinkId=529714)' deki yavaş uygulama performansı sorunlarını gidermenize yardımcı olur.
 
-Bu makalede herhangi bir noktada daha fazla yardıma ihtiyacınız olursa, üzerinde Azure uzmanlarıyla iletişime geçebilirsiniz [Azure MSDN ve Stack Overflow forumları](https://azure.microsoft.com/support/forums/). Alternatif olarak, bir Azure destek olayına dosya. Git [Azure Destek sitesi](https://azure.microsoft.com/support/options/) tıklayın **destek al**.
+Bu makalenin herhangi bir noktasında daha fazla yardıma ihtiyacınız varsa, [MSDN Azure ve Stack Overflow forumlarında](https://azure.microsoft.com/support/forums/)Azure uzmanlarıyla iletişim kurun. Alternatif olarak, bir Azure destek olayı da oluşturabilirsiniz. [Azure destek sitesine](https://azure.microsoft.com/support/options/) gidin ve **Destek Al**'a tıklayın.
 
 ## <a name="symptom"></a>Belirti
-Uygulama sayfaları yükü yavaş göz atarken ve bazen zaman aşımı.
+Uygulamaya gözatarken Sayfalar yavaş yüklenir ve bazen zaman aşımına uğramaktadır.
 
 ## <a name="cause"></a>Nedeni
-Bu sorun genellikle gibi uygulama düzeyinde sorunlarını tarafından kaynaklanır:
+Bu sorun genellikle uygulama düzeyi sorunlarından kaynaklanır, örneğin:
 
-* ağ isteklerine uzun sürüyor
-* verimli olan uygulama kodu veya veritabanı sorguları
-* yüksek bellek/CPU kullanarak uygulama
-* bir özel durum nedeniyle kilitlenme uygulama
+* uzun zaman alan ağ istekleri
+* uygulama kodu veya veritabanı sorguları verimsiz
+* yüksek bellek/CPU kullanan uygulama
+* uygulama bir özel durum nedeniyle çökme
 
 ## <a name="troubleshooting-steps"></a>Sorun giderme adımları
-Sorun giderme sırayla üç ayrı görevlere ayrılabilir:
+Sorun giderme üç farklı göreve sıralı sırayla ayrılabilir:
 
-1. [İnceleyin ve uygulama davranışını izleme](#observe)
-2. [Veri toplama](#collect)
-3. [Sorunu gidermek](#mitigate)
+1. [Uygulama davranışını gözlemleyin ve izleyin](#observe)
+2. [Veri topla](#collect)
+3. [Sorunu azaltma](#mitigate)
 
 [App Service](overview.md) her adımda çeşitli seçenekler sunar.
 
 <a name="observe" />
 
-### <a name="1-observe-and-monitor-application-behavior"></a>1. İnceleyin ve uygulama davranışını izleme
-#### <a name="track-service-health"></a>Hizmet durumu izleme
-Microsoft Azure hizmet kesintisi veya performans düşüşü olduğundan her zaman publicizes. Hizmetinin durumunu takip edebilirsiniz [Azure portalında](https://portal.azure.com/). Daha fazla bilgi için [hizmet durumunu izleme](../monitoring-and-diagnostics/insights-service-health.md).
+### <a name="1-observe-and-monitor-application-behavior"></a>1. Uygulama davranışını gözlemleyin ve izleyin
+#### <a name="track-service-health"></a>Hizmet durumunu izleme
+Her bir hizmet kesintisi veya performans düşüşü olduğunda Microsoft Azure publicleştirir. [Azure Portal](https://portal.azure.com/)hizmetin sistem durumunu izleyebilirsiniz. Daha fazla bilgi için bkz. [hizmet durumunu izleme](../monitoring-and-diagnostics/insights-service-health.md).
 
 #### <a name="monitor-your-app"></a>Uygulamanızı izleme
-Bu seçenek, uygulamanızı herhangi bir sorun olması durumunda öğrenmek sağlar. Uygulamanızın dikey penceresinde **istekler ve hatalar** Döşe. **Ölçüm** dikey ekleyebileceğiniz tüm ölçümleri gösterir.
+Bu seçenek, uygulamanızda herhangi bir sorun olup olmadığını bulmanıza olanak sağlar. Uygulamanızın dikey penceresinde **İstekler ve hatalar** kutucuğuna tıklayın. **Ölçüm** dikey penceresi, ekleyebileceğiniz tüm ölçümleri gösterir.
 
-Uygulamanız için izleme isteyebilirsiniz ölçümlerin bazıları
+Uygulamanız için izlemek isteyebileceğiniz bazı ölçümler şunlardır
 
 * Ortalama bellek çalışma kümesi
 * Ortalama yanıt süresi
@@ -70,105 +69,105 @@ Uygulamanız için izleme isteyebilirsiniz ölçümlerin bazıları
 
 Daha fazla bilgi için bkz.
 
-* [Azure App Service'te uygulamaları izleme](web-sites-monitor.md)
+* [Azure App Service uygulamaları izleme](web-sites-monitor.md)
 * [Uyarı bildirimleri alma](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
 
 #### <a name="monitor-web-endpoint-status"></a>Web uç noktası durumunu izleme
-Uygulamanızı çalıştırıyorsanız, **standart** fiyatlandırma katmanı, App Service iki uç nokta üç coğrafi konumlardan izlemenize izin verir.
+Uygulamanızı **Standart** fiyatlandırma katmanında çalıştırıyorsanız, App Service üç coğrafi konumdan iki uç noktayı izlemenizi sağlar.
 
-Uç nokta izleme web testleri test yanıt süresi ve web URL'leri süresinin coğrafi olarak dağıtılmış konumlardan yapılandırır. Test çalışma süresi ve yanıt süresi her konumdan belirlemek için web URL'si bir HTTP GET işlemi gerçekleştirir. Yapılandırılmış her yere beş dakikada bir test çalıştırır.
+Uç nokta izleme, Web URL 'lerinin yanıt süresini ve çalışma süresini test eden coğrafi olarak dağıtılmış konumlardan Web testlerini yapılandırır. Test, her konumdan yanıt süresini ve çalışma süresini belirleyebilmek için Web URL 'sinde bir HTTP GET işlemi gerçekleştirir. Her yapılandırılmış konum her beş dakikada bir test çalıştırır.
 
-HTTP yanıt kodları kullanılarak izlenen çalışma süresi ve yanıt süresi, milisaniye cinsinden ölçülür. HTTP yanıt kodu 400'e eşit veya daha büyük ise ya da yanıtın 30 saniyeden uzun sürerse izleme testi başarısız. Bir uç nokta izleme testlerinin belirtilen tüm konumlarda başarılı olması için kullanılabilir olarak kabul edilir.
+Çalışma süresi HTTP yanıt kodları kullanılarak izlenir ve yanıt süresi milisaniye cinsinden ölçülür. HTTP yanıt kodu 400 değerinden büyük veya bu değere eşitse veya Yanıt 30 saniyeden uzun sürerse izleme testi başarısız olur. İzleme sınamaları belirtilen konumların tümünde başarılı olursa bir uç nokta kullanılabilir olarak kabul edilir.
 
-Bunu ayarlamak için bkz: [Azure App Service'te uygulamaları izleme](web-sites-monitor.md).
+Ayarlamak için, bkz. [Azure App Service uygulamaları izleme](web-sites-monitor.md).
 
-Ayrıca bkz [yanı sıra uç nokta izleme - Stefan Schackow ile Azure Web siteleri tutma](https://channel9.msdn.com/Shows/Azure-Friday/Keeping-Azure-Web-Sites-up-plus-Endpoint-Monitoring-with-Stefan-Schackow) uç nokta izleme bir video için.
+Ayrıca bkz. Azure Web sitelerini ve uç nokta Izlemeyi, uç nokta izlemeye yönelik bir video için [Stefan Schackow Ile koruma](https://channel9.msdn.com/Shows/Azure-Friday/Keeping-Azure-Web-Sites-up-plus-Endpoint-Monitoring-with-Stefan-Schackow) .
 
 #### <a name="application-performance-monitoring-using-extensions"></a>Uzantıları kullanarak uygulama performansı izleme
-Kullanarak da uygulama performansınızı izleyebilirsiniz bir *site uzantısı*.
+Ayrıca, bir *site uzantısı*kullanarak uygulama performansınızı izleyebilirsiniz.
 
-Her App Service uygulaması site uzantısı dağıtılan araçları güçlü bir dizi kullanmanıza olanak sağlayan bir genişletilebilen yönetim uç noktası sağlar. Uzantılara şunlar dahildir: 
+Her App Service uygulaması, site uzantıları olarak dağıtılan güçlü bir araç kümesini kullanmanıza olanak sağlayan genişletilebilir bir yönetim uç noktası sağlar. Uzantılar şunları içerir: 
 
-- Kaynak kod düzenleyicilerinden ister [Azure DevOps](https://www.visualstudio.com/products/what-is-visual-studio-online-vs.aspx). 
-- Yönetim Araçları gibi bir MySQL veritabanına bağlı kaynaklar için bir uygulama için bağlı.
+- [Azure DevOps](https://www.visualstudio.com/products/what-is-visual-studio-online-vs.aspx)gibi kaynak kodu düzenleyicileri. 
+- Bir uygulamaya bağlı MySQL veritabanı gibi bağlı kaynaklar için yönetim araçları.
 
-[Azure Application Insights](https://azure.microsoft.com/services/application-insights/) olduğu bir performans izleme de kullanılabilir olan site uzantısı. Application Insights'ı kullanmak için bir SDK'sı ile kodunuzu yeniden oluşturun. Ayrıca, ek verilere erişim sağlayan bir uzantı yükleyebilirsiniz. SDK'sı, uygulamanızın daha ayrıntılı performans ve kullanımı izlemek için kod yazmanıza olanak sağlar. Daha fazla bilgi için [web uygulamalarının performansını izleme](../azure-monitor/app/web-monitor-performance.md).
+[Azure Application Insights](https://azure.microsoft.com/services/application-insights/) , aynı zamanda kullanılabilen bir performans izleme site uzantısıdır. Application Insights kullanmak için, kodunuzu bir SDK ile yeniden derleyin. Ek verilere erişim sağlayan bir uzantı da yükleyebilirsiniz. SDK, uygulamanızın kullanımını ve performansını daha ayrıntılı olarak izlemek için kod yazmanıza olanak tanır. Daha fazla bilgi için bkz. [Web uygulamalarında performansı izleme](../azure-monitor/app/web-monitor-performance.md).
 
 <a name="collect" />
 
 ### <a name="2-collect-data"></a>2. Veri toplama
-App Service, web sunucusunu hem web uygulamasının içinden bilgileri günlüğe kaydetme için tanılama işlevi sağlar. Bilgiler, web sunucusu tanılama ve uygulama tanılama olarak ayrılmıştır.
+App Service, hem Web sunucusundan hem de Web uygulamasından günlüğe bilgi günlüğü için tanılama işlevselliği sağlar. Bilgiler, Web sunucusu tanılama ve Uygulama Tanılama ile ayrılmıştır.
 
-#### <a name="enable-web-server-diagnostics"></a>Web sunucusu tanılamayı etkinleştirme
-Etkinleştirmek veya günlükleri aşağıdaki türde devre dışı bırakabilirsiniz:
+#### <a name="enable-web-server-diagnostics"></a>Web sunucusu tanılamayı etkinleştir
+Aşağıdaki türlerde günlükleri etkinleştirebilir veya devre dışı bırakabilirsiniz:
 
-* **Ayrıntılı hata günlüğü** -ayrıntılı hata bilgileri belirten bir hata (durum kodu 400 veya üzeri) HTTP durum kodları için. Bu sunucunun döndürülen hata kodu neden belirlemek yardımcı olabilecek bilgiler içerebilir.
-* **Başarısız istek izleme** -ayrıntılı bir izleme isteği ve her bir bileşende geçen süre işlemek için kullanılan IIS bileşenlerini de dahil olmak üzere, başarısız isteklerle bilgileri. Bu, uygulama performansını artırmak veya belirli bir HTTP hatası neden olan yalıtmak çalışıyorsanız yararlı olabilir.
-* **Web sunucusu günlüğe kaydetme** -HTTP işlemlerini W3C Genişletilmiş günlük dosyası biçimini kullanarak hakkında bilgi. Bu, işlenen isteklerin veya özel bir IP adresinden kaç isteklerdir sayısı gibi genel uygulama ölçümlerini belirlerken kullanışlıdır.
+* **Ayrıntılı hata günlüğü** -http durum kodları için hata belirten ayrıntılı hata bilgileri (durum kodu 400 veya üzeri). Bu, sunucunun neden hata kodunu döndürmediğini belirlemede yardımcı olabilecek bilgiler içerebilir.
+* **Başarısız Istek izleme** -isteği işlemek IÇIN kullanılan IIS bileşenlerinin izlenmesi ve her bileşende geçen süre dahil olmak üzere başarısız istekler hakkında ayrıntılı bilgiler. Bu, uygulama performansını arttırmaya veya belirli bir HTTP hatasına neden olan hataları ayırmaya çalışıyorsanız yararlı olabilir.
+* **Web sunucusu günlüğü** -W3C Genişletilmiş günlük dosyası BIÇIMINI kullanarak http işlemleri hakkında bilgiler. Bu, işlenen istek sayısı veya belirli bir IP adresinden kaç istek olduğu gibi genel uygulama ölçümlerinin saptanmasında yararlıdır.
 
-#### <a name="enable-application-diagnostics"></a>Uygulama tanılamayı etkinleştirme
-App Service'ten, uygulamanızı Visual Studio'dan Canlı ya da daha fazla bilgi ve izlemeleri günlüğe kaydetmek için uygulama kodunu değiştirmeniz profili uygulama performans verilerini toplamak için birkaç seçenek vardır. Uygulama ve izlemeden gözlemlenen zorunda ne kadar erişim aracı tabanlı seçenekleri seçebilirsiniz.
+#### <a name="enable-application-diagnostics"></a>Uygulama tanılamayı etkinleştir
+App Service 'den uygulama performans verilerini toplamak, uygulamanızın Visual Studio 'dan canlı olarak profilini oluşturup daha fazla bilgi ve izlemeleri günlüğe kaydetmek için uygulama kodunuzu değiştirmek için çeşitli seçenekler vardır. Uygulamaya sahip olduğunuz erişime ve izleme araçlarından gözlemlerinizi temel alan seçenekleri belirleyebilirsiniz.
 
-##### <a name="use-application-insights-profiler"></a>Application Insights Profiler ' ı kullanın
-Ayrıntılı performans izlemeleri yakalama başlatmak Application Insights Profiler etkinleştirebilirsiniz. En fazla yakalanan izlere erişebilirsiniz beş sorunları araştırmak için gerektiğinde gün önce gerçekleşmiş geçmiş. Azure Portal'da uygulamanın Application Insights kaynağına erişimi olduğu sürece, bu seçeneği seçebilirsiniz.
+##### <a name="use-application-insights-profiler"></a>Application Insights Profiler kullan
+Application Insights Profiler, ayrıntılı performans izlemelerini yakalamaya başlamak için etkinleştirebilirsiniz. Geçmişte oluşan sorunları araştırmanız gerektiğinde, beş güne kadar yakalanan izlemelere erişebilirsiniz. Azure portal üzerindeki uygulamanın Application Insights kaynağına erişiminiz olduğu sürece bu seçeneği belirleyebilirsiniz.
 
-Application Insights Profiler, hangi kod satırının yavaş yanıtlar neden gösteren yanıt süresi içinde her bir web çağrısı ve izlemeler için istatistikler sağlar. App Service uygulaması belirli kod içinde bir yüksek performanslı yazılmaz çünkü bazen yavaş yolu. Kilit çakışması veritabanı paralel ve istenmeyen çalıştırılabilir sıralı kod örnekleri içerir. Bu performans sorunlarını kodda kaldırma uygulamanın performansı artırır ancak ayrıntılı izlemelerini ve günlüklerini ayarlama olmadan algılanması zor olur. Application Insights Profiler ' ı tarafından toplanan izlemeleri, uygulamayı yavaşlatan kod satırlarını tanımlama yardımcı olur ve App Service uygulamaları için bu zorluğun üstesinden gelmek.
+Application Insights Profiler, her bir Web çağrısının yanıt süresine ilişkin istatistikleri ve hangi kod satırının yavaş yanıtlara neden olduğunu gösteren izlemeleri sağlar. Bazı durumlarda, bazı kodlar performanslı bir şekilde yazılmadığından App Service uygulama yavaş olur. Örnek olarak, paralel ve istenmeyen veritabanı kilitleme çekişmeleri içinde çalıştırılabilen sıralı kod verilebilir. Koddaki bu engelleri kaldırma, uygulamanın performansını artırır, ancak ayrıntılı izlemeler ve Günlükler ayarlamadan tespit etmek zordur. Application Insights Profiler tarafından toplanan izlemeler, uygulamayı yavaşlatan ve App Service uygulamalar için bu zorluk ortadan kaldırarak kod satırlarını tanımlamaya yardımcı olur.
 
- Daha fazla bilgi için [Azure App Service Application Insights ile canlı uygulamalarında profil oluşturma](../azure-monitor/app/profiler.md).
+ Daha fazla bilgi için bkz. [Application Insights ile Azure App Service 'da canlı uygulamalar profili oluşturma](../azure-monitor/app/profiler.md).
 
-##### <a name="use-remote-profiling"></a>Uzaktan profil oluşturma kullanın
-Azure App Service web apps, API apps, mobil arka uçlar ve Web işleri uzaktan profil oluşturulabilir. Uygulama kaynak erişimi ve sorunu yeniden oluşturmak nasıl bildiğiniz ya da tam zaman aralığını biliyorsanız, performans sorunu olur, bu seçeneği belirleyin.
+##### <a name="use-remote-profiling"></a>Uzaktan profil oluşturma kullan
+Azure App Service, Web Apps, API Apps, mobil arka uçlar ve WebJobs uygulamalarında uzaktan profil oluşturulabilir. Uygulama kaynağına erişiminiz varsa ve sorunu nasıl yeniden üreteceğimizi ya da performans sorununun tam zaman aralığını biliyorsanız bu seçeneği belirleyin.
 
-Uzak profil oluşturma işleminin CPU kullanımını yüksek olduğunda, işlem beklenenden daha yavaş çalışıyor veya HTTP isteklerin gecikme süresi Normalden yüksek yaparsanız uzaktan işleminizi profil ve işlem çözümlemek için CPU örnekleme çağrı yığınlarını alma yararlıdır etkinlik ve kod etkin yolları.
+Uzaktan profil oluşturma işlemi, işlemin CPU kullanımı yüksekse ve işleminiz beklenenden yavaş çalışıyorsa veya HTTP isteklerinin gecikmesi normalden fazlaysa, işleminizi uzaktan oluşturup işlem çözümlemek için CPU örnekleme çağrı yığınlarını alabilirsiniz etkinlik ve kod etkin yolları.
 
-Daha fazla bilgi için [Azure App Service'te uzaktan profil oluşturma desteği](https://azure.microsoft.com/blog/remote-profiling-support-in-azure-app-service).
+Daha fazla bilgi için bkz. [Azure App Service uzaktan profil oluşturma desteği](https://azure.microsoft.com/blog/remote-profiling-support-in-azure-app-service).
 
-##### <a name="set-up-diagnostic-traces-manually"></a>Tanılama izlemeleri el ile ayarlama
-Web uygulama kaynak koduna erişiminiz varsa, uygulama Tanılama web uygulaması tarafından üretilen bilgileri yakalamanıza olanak sağlar. ASP.NET uygulamalarında kullanabileceğiniz `System.Diagnostics.Trace` uygulama tanılama günlüğüne bilgileri günlüğe kaydetmek için sınıf. Ancak, kodu değiştirin ve uygulamanızı yeniden dağıtmanız gerekir. Uygulamanızı bir sınama ortamında çalışıyorsa bu yöntem tavsiye edilir.
+##### <a name="set-up-diagnostic-traces-manually"></a>Tanılama izlemelerini el ile ayarlama
+Web uygulaması kaynak koduna erişiminiz varsa, Application Diagnostics bir Web uygulaması tarafından üretilen bilgileri yakalamanızı sağlar. ASP.NET uygulamaları, uygulama tanılama `System.Diagnostics.Trace` günlüğüne bilgi kaydetmek için sınıfını kullanabilir. Ancak, kodu değiştirmeniz ve uygulamanızı yeniden dağıtmanız gerekir. Uygulamanız bir sınama ortamında çalışıyorsa bu yöntem önerilir.
 
-Günlüğe kaydetme için uygulamanızı yapılandırma hakkında ayrıntılı yönergeler için bkz. [Azure App Service'teki uygulamalar için tanılama günlüğünü etkinleştirme](troubleshoot-diagnostic-logs.md).
+Uygulamanızı günlüğe kaydetmeye yönelik yapılandırma hakkında ayrıntılı yönergeler için, bkz. [Azure App Service uygulamalar için tanılama günlüğünü etkinleştirme](troubleshoot-diagnostic-logs.md).
 
 #### <a name="use-the-diagnostics-tool"></a>Tanılama aracını kullanma
-App Service uygulamanızı yapılandırma gerektirmeden gidermenize yardımcı olması için akıllı ve etkileşimli bir deneyim sağlar. Uygulamanızla bir sorunla karşılaşırsanız çalıştırdığınızda, Tanılama aracını daha kolay ve hızlı bir şekilde ve sorunu gidermek için doğru bilgileri size yol göstermesi sorunun ne olduğunu gösterir.
+App Service, yapılandırma gerekmeden uygulamanızdaki sorunları gidermenize yardımcı olacak akıllı ve etkileşimli bir deneyim sağlar. Uygulamanız ile ilgili sorunlar yaşıyorsanız, Tanılama Aracı, sorunu daha kolay ve hızlı bir şekilde gidermeye ve çözmeye yönelik doğru bilgilere kılavuzluk etmek için nelerin yanlış olduğunu gösterir.
 
-App Service tanılamasını erişmek için App Service uygulamanızı veya App Service Ortamı'nda gidin [Azure portalında](https://portal.azure.com). Sol gezinti bölmesinde, tıklayarak **tanılayın ve sorunlarını çözmek**.
+App Service tanılama 'ya erişmek için App Service uygulamanıza veya [Azure portal](https://portal.azure.com)App Service ortamı gidin. Sol gezinti bölmesinde, **sorunları Tanıla ve çöz**' e tıklayın.
 
 #### <a name="use-the-kudu-debug-console"></a>Kudu hata ayıklama konsolunu kullanma
-App Service, hata ayıklama için keşfetmek, ortamınız hakkında bilgi almak için JSON uç noktaları yanı sıra, dosyaları karşıya yükleme için kullanabileceğiniz bir hata ayıklama konsoluna ile birlikte gelir. Bu konsolu olarak adlandırılan *Kudu konsolunu* veya *SCM Pano* uygulamanız için.
+App Service, hata ayıklama, keşfetme, yükleme dosyaları ve ortamınız hakkında bilgi almak için JSON uç noktaları için kullanabileceğiniz bir hata ayıklama konsoluyla birlikte gelir. Bu konsola *kudu konsolu* veya uygulamanız Için *SCM panosu* adı verilir.
 
-Bağlantı giderek bu panoya erişebilirsiniz **https://&lt;uygulama adınız >.scm.azurewebsites.net/** .
+Bu panoya, **>. scm. azurewebsites. net/&lt;adlı uygulamanızın adını https://** bağlantısına giderek erişebilirsiniz.
 
-Kudu sağlayan şeylerden bazıları şunlardır:
+Kudu 'nin sağladığı işlemlerden bazıları şunlardır:
 
-* Uygulamanız için ortam ayarları
+* uygulamanız için ortam ayarları
 * günlük akışı
 * Tanılama dökümü
-* hata ayıklama konsolunu Powershell cmdlet'leri ve temel DOS komutlarını çalıştırabilirsiniz.
+* PowerShell cmdlet 'lerini ve temel DOS komutlarını çalıştırabileceğiniz hata ayıklama konsolu.
 
-Başka bir kullanışlı Kudu durumunda, uygulamanız, ilk şans özel durumları atma Kudu kullanabilirsiniz ve bellek oluşturmak için Procdump SysInternals aracı dökümleri, özelliğidir. Bu bellek dökümlerini işleminin anlık görüntüler ve genellikle uygulamanızla daha karmaşık sorunları gidermenize yardımcı olabilir.
+Kudu 'nin başka bir faydalı özelliği de, uygulamanızın ilk şans özel durumlarını oluşturması durumunda kudu ve SysInternals aracı ProcDump ' i kullanarak bellek dökümleri oluşturabilir. Bu bellek dökümleri işlemin anlık görüntüleridir ve genellikle uygulamanızla ilgili karmaşık sorunları gidermenize yardımcı olabilir.
 
-Kudu içinde kullanılabilen özellikler hakkında daha fazla bilgi için bkz. [bilmeniz gereken Azure DevOps Araçları](https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/).
+Kudu 'de kullanılabilen özellikler hakkında daha fazla bilgi için, bkz. [bilmeniz gereken Azure DevOps araçları](https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/).
 
 <a name="mitigate" />
 
-### <a name="3-mitigate-the-issue"></a>3. Sorunu gidermek
-#### <a name="scale-the-app"></a>Uygulamasını ölçeklendirme
-Azure App Service'te daha yüksek performans ve aktarım hızı, uygulamanızı çalıştıran ölçeği ayarlayabilirsiniz. Uygulama ölçeklendirme iki ilgili eylemleri içerir: App Service planınızın değiştirilmesi daha yüksek bir fiyatlandırma katmanına ve daha yüksek bir fiyatlandırma katmanına geçirildikten sonra belirli ayarları yapılandırma.
+### <a name="3-mitigate-the-issue"></a>3. Sorunu azaltma
+#### <a name="scale-the-app"></a>Uygulamayı ölçeklendirme
+Azure App Service, daha fazla performans ve verimlilik için uygulamanızı çalıştırdığınız ölçeği ayarlayabilirsiniz. Bir uygulamanın ölçeğini değiştirmek, iki ilgili eylemi içerir: App Service planınızı daha yüksek bir fiyatlandırma katmanına değiştirme ve belirli ayarları daha yüksek fiyatlandırma katmanına geçtikten sonra yapılandırma.
 
-Ölçeklendirme hakkında daha fazla bilgi için bkz. [bir uygulamasını Azure App Service'te ölçeklendirme](web-sites-scale.md).
+Ölçeklendirme hakkında daha fazla bilgi için bkz. [Azure App Service bir uygulamayı ölçeklendirme](manage-scale-up.md).
 
-Ayrıca, birden fazla örneğinde uygulamanızı çalıştırmak seçebilirsiniz. Ölçeği genişletme yalnızca ile daha fazla işleme yeteneği sağlar, ancak Ayrıca, belirli bir miktarda hataya dayanıklılık sağlar. İşlemin bir örneği üzerinde kalırsa diğer örneklerin isteklerine hizmet vermeye devam edin.
+Ayrıca, uygulamanızı birden fazla örnekte çalıştırmayı seçebilirsiniz. Genişletme yalnızca daha fazla işleme özelliği sağlamaz, ancak size bazı hata toleransı sağlar. İşlem bir örnekte daha fazla olursa, diğer örnekler istekleri sunmaya devam eder.
 
-El ile veya otomatik olarak ölçeklendirme ayarlayabilirsiniz.
+Ölçeklendirmeyi El Ile veya otomatik olarak ayarlayabilirsiniz.
 
-#### <a name="use-autoheal"></a>AutoHeal kullanın
-AutoHeal (yapılandırma değişiklikleri, istekler, bellek tabanlı sınırları veya bir isteğin yürütülmesi için gereken süre gibi) seçtiğiniz ayarlara bağlı uygulamanız için çalışan işlemi geri dönüştürür. Çoğu zaman, Geri Dönüşüm işlemi bir sorundan en hızlı yoludur. Uygulamayı doğrudan Azure portalının içinden her zaman yeniden başlatabilirsiniz, ancak AutoHeal bunu otomatik olarak sizin için halleder. Tek yapmak için ihtiyacınız olan kök Web.config dosyasında, uygulamanız için bazı tetikleyiciler ekleyin. Uygulamanızı .NET uygulaması olsa bile, bu ayarları aynı şekilde çalışır.
+#### <a name="use-autoheal"></a>Oto Heal kullanma
+Oto Heal, seçtiğiniz ayarlara göre (yapılandırma değişiklikleri, istekler, bellek tabanlı sınırlar veya bir isteği yürütmek için gereken süre gibi) uygulamanızın çalışan işlemini geri dönüştürür. Çoğu zaman, bir sorunu kurtarmanın en hızlı yoludur. Uygulamayı her zaman doğrudan Azure portal içinden yeniden başlatabilseniz de, Otomatik Heal bunu sizin için otomatik olarak yapar. Yapmanız gereken tek şey, uygulamanız için kök Web. config dosyasında bazı Tetikleyiciler eklemektir. Bu ayarlar, uygulamanız .NET uygulaması olmasa bile aynı şekilde çalışır.
 
-Daha fazla bilgi için [Azure Web siteleri otomatik onarım](https://azure.microsoft.com/blog/auto-healing-windows-azure-web-sites/).
+Daha fazla bilgi için bkz. [Otomatik Düzeltme Azure Web siteleri](https://azure.microsoft.com/blog/auto-healing-windows-azure-web-sites/).
 
-#### <a name="restart-the-app"></a>Uygulamayı yeniden başlatın
-Yeniden başlatma genellikle tek seferlik sorunları en basit yoludur. Üzerinde [Azure portalında](https://portal.azure.com/), uygulamanızın dikey penceresinde, durdurmak veya uygulamanızı yeniden seçeneğiniz vardır.
+#### <a name="restart-the-app"></a>Uygulamayı yeniden başlatma
+Yeniden başlatma, genellikle tek seferlik sorunlardan kurtulmanın en kolay yoludur. [Azure Portal](https://portal.azure.com/)uygulamanızın dikey penceresinde uygulamanızı durdurma veya yeniden başlatma seçenekleriniz vardır.
 
- ![Performans sorunlarını çözmek için uygulamayı yeniden başlatın](./media/app-service-web-troubleshoot-performance-degradation/2-restart.png)
+ ![performans sorunlarını çözmek için uygulamayı yeniden başlatın](./media/app-service-web-troubleshoot-performance-degradation/2-restart.png)
 
-Ayrıca, uygulamanızı Azure Powershell kullanarak da yönetebilirsiniz. Daha fazla bilgi için bkz. [Azure PowerShell'i Azure Resource Manager ile kullanma](../powershell-azure-resource-manager.md).
+Uygulamanızı Azure PowerShell kullanarak da yönetebilirsiniz. Daha fazla bilgi için bkz. [Azure PowerShell'i Azure Resource Manager ile kullanma](../powershell-azure-resource-manager.md).

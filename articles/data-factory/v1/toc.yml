@@ -22,8 +22,6 @@
       items:
         - name: Kopyalama Sihirbazı
           href: data-factory-copy-data-wizard-tutorial.md
-        - name: Azure portalı
-          href: data-factory-copy-activity-tutorial-using-azure-portal.md
         - name: Visual Studio
           href: data-factory-copy-activity-tutorial-using-visual-studio.md
         - name: Azure PowerShell
@@ -78,7 +76,7 @@
               href: data-factory-azure-documentdb-connector.md
             - name: Azure Data Lake Storage Gen1
               href: data-factory-azure-datalake-connector.md
-            - name: Azure Search
+            - name: Azure Bilişsel Arama
               href: data-factory-azure-search-connector.md
             - name: Azure SQL Veritabanı
               href: data-factory-azure-sql-connector.md

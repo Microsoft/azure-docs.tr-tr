@@ -1,82 +1,97 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Batch Belgeleri
+### YamlMime:Landing
+title: Azure Batch belgeleri
+summary: Azure Batch, büyük ölçekli uygulamaları bulutta verimli bir şekilde çalıştırır. Altyapıyı yönetmek zorunda kalmadan, işlem yoğunluklu görevleri zamanlayın ve çözümünüze yönelik kaynakları dinamik bir şekilde ayarlayın.
 metadata:
-  title: 'Batch Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: 'Büyük ölçekli paralel ve yüksek performanslı bilgi işlem (HPC) uygulamalarını bulutta verimli bir şekilde çalıştırmak için Batch’i kullanın. Altyapıyı el ile yapılandırmanıza veya yönetmenize gerek kalmadan uygulamalarınızın paralel veya yüksek ölçekli olarak yürütülmesine yönelik Azure işlem kaynaklarını tanımlayın. İşlem yoğunluklu görevleri zamanlayın ve gereksinimlerinize göre işlem kaynaklarını dinamik olarak ekleyin veya kaldırın. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, Azure Batch’i kullanmayı öğrenin.'
+  title: Azure Batch belgeleri
+  description: Azure Batch, büyük ölçekli uygulamaları bulutta verimli bir şekilde çalıştırır. Altyapıyı yönetmek zorunda kalmadan, işlem yoğunluklu görevleri zamanlayın ve çözümünüze yönelik kaynakları dinamik bir şekilde ayarlayın.
   services: batch
-  author: czeumault
-  manager: carolz
   ms.service: batch
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 11/30/2017
-  ms.author: carolz
-abstract:
-  description: 'Büyük ölçekli paralel ve yüksek performanslı bilgi işlem (HPC) uygulamalarını bulutta verimli bir şekilde çalıştırmak için Batch’i kullanın. Altyapıyı el ile yapılandırmanıza veya yönetmenize gerek kalmadan uygulamalarınızın paralel veya yüksek ölçekli olarak yürütülmesine yönelik Azure işlem kaynaklarını tanımlayın. İşlem yoğunluklu görevleri zamanlayın ve gereksinimlerinize göre işlem kaynaklarını dinamik olarak ekleyin veya kaldırın. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, Azure Batch’i kullanmayı öğrenin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure’daki ilk Batch işinizi çalıştırmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_cligeneric.svg'
-            text: Azure CLI
-            href: quick-create-cli
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_portal.svg'
-            text: Azure Portal
-            href: quick-create-portal
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_NET.svg'
-            text: .NET
-            href: quick-run-dotnet
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_python.svg'
-            text: Python
-            href: quick-run-python
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Batch’te işlem yoğunluklu iş yüklerini çalıştırmayı öğrenin.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="tutorial-parallel-dotnet">.NET SDK ile paralel dosya işleme</a>
-          - html: <a href="tutorial-parallel-python">Python SDK ile paralel dosya işleme</a>
-          - html: <a href="tutorial-rendering-cli">Arnold ile sahne işlemesi</a>
-          - html: <a href="tutorial-r-doazureparallel">Paralel R benzetimi</a>
-  - title: Örnekler
-    items:
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="cli-samples">Azure CLI</a>
-  - title: Ücretsiz Pluralsight Video Eğitimi
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: 'Microsoft Azure Batch, Kullanmaya Başlama'
-            href: 'https://app.pluralsight.com/library/courses/microsoft-azure-batch-getting-started/table-of-contents'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://app.pluralsight.com/library/courses/microsoft-azure-batch-getting-started/table-of-contents'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/cli/azure/batch">Azure CLI</a></p><p><a href="/powershell/module/az.batch">Azure PowerShell</a></p>
-          - title: Diller
-            html: <p><a href="/dotnet/api/overview/azure/batch">.NET</a></p><p><a href="/java/api/overview/azure/batch">Java</a></p><p><a href="/javascript/api/overview/azure/batch">Node.js</a></p><p><a href="/python/api/overview/azure/batch">Python</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/batchservice">Batch Hizmeti REST API’si</a></p><p><a href="/rest/api/batchmanagement/">Batch Yönetimi REST API’si</a></p>
+  author: laurenhughes
+  ms.author: lahugh
+  ms.date: 09/23/2019
+  ms.openlocfilehash: d7bc942451968e4c1f87aa6ea6a64cd8ce5c03ae
+  ms.sourcegitcommit: f29fec8ec945921cc3a89a6e7086127cc1bc1759
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/17/2019
+  ms.locfileid: "72527995"
+landingContent:
+- title: Azure Batch hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Batch nedir?
+      url: batch-technical-overview.md
+  - linkListType: learn
+    links:
+    - text: Ücretsiz Pluralsight video eğitimi
+      url: https://app.pluralsight.com/library/courses/microsoft-azure-batch-getting-started/table-of-contents
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure CLI
+      url: quick-create-cli.md
+    - text: Azure Portal
+      url: quick-create-portal.md
+    - text: .NET API’si
+      url: quick-run-dotnet.md
+    - text: Python API
+      url: quick-run-python.md
+  - linkListType: concept
+    links:
+    - text: Geliştirici özellikleri
+      url: batch-api-basics.md
+- title: Adım adım kılavuzlar
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Paralel dosya işleme - .NET
+      url: tutorial-parallel-dotnet.md
+    - text: Paralel dosya işleme - Python
+      url: tutorial-parallel-python.md
+    - text: Batch ve İşlevler ile OCR
+      url: tutorial-batch-functions.md
+    - text: Arnold ile sahne işlemesi
+      url: tutorial-rendering-cli.md
+    - text: Batch Explorer'ı kullanarak işleme
+      url: tutorial-rendering-batchexplorer-blender.md
+    - text: Paralel R benzetimi
+      url: tutorial-r-doazureparallel.md
+- title: Kaynakları ayarlama ve yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Batch hesabı oluşturma
+      url: batch-account-create-portal.md
+    - text: Havuz oluşturma ve yönetme
+      url: batch-custom-images.md
+    - text: Görevleri eşzamanlı çalıştırma
+      url: batch-parallel-node-tasks.md
+    - text: Uygulama paketlerini kullanma
+      url: batch-application-packages.md
+  - linkListType: concept
+    links:
+    - text: Desteklenen VM boyutları
+      url: batch-pool-vm-sizes.md
+    - text: Kotalar ve sınırlar
+      url: batch-quota-limit.md
+- title: API başvurusu
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure CLI
+      url: https://docs.microsoft.com/cli/azure/batch?view=azure-cli-latest
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.batch/?view=azps-2.6.0
+    - text: .NET
+      url: https://docs.microsoft.com/dotnet/api/overview/azure/batch?view=azure-dotnet
+    - text: Java
+      url: https://docs.microsoft.com/java/api/overview/azure/batch?view=azure-java-stable
+    - text: Node.js
+      url: https://docs.microsoft.com/javascript/api/overview/azure/batch?view=azure-node-latest
+    - text: Python
+      url: https://docs.microsoft.com/python/api/overview/azure/batch?view=azure-python
+    - text: REST
+      url: https://docs.microsoft.com/rest/api/batchservice/

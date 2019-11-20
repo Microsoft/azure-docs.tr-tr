@@ -1,46 +1,46 @@
 ---
-title: VM uzantısı yükleme kısıtlamak için Azure İlkesi'ni kullanın | Microsoft Docs
-description: Azure İlkesi uzantısı dağıtımları kısıtlamak için kullanın.
+title: VM Uzantısı yüklemesini kısıtlamak için Azure Ilkesini kullanma
+description: Uzantı dağıtımlarını kısıtlamak için Azure Ilkesini kullanın.
 services: virtual-machines-linux
 documentationcenter: ''
-author: roiyz-msft
-manager: jeconnoc
+author: axayjo
+manager: gwallace
 editor: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 03/23/2018
-ms.author: roiyz;cynthn
-ms.openlocfilehash: dfaeff5e8f90e72645293d15c454f78f17b08fb0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: akjosh
+ms.reviewer: cynthn
+ms.openlocfilehash: 428db340ce43463939ce71ffadd4188060f3e732
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64717673"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073106"
 ---
-# <a name="use-azure-policy-to-restrict-extensions-installation-on-windows-vms"></a>Uzantıları Yükleme Windows vm'lerinde kısıtlamak için Azure İlkesi'ni kullanın
+# <a name="use-azure-policy-to-restrict-extensions-installation-on-windows-vms"></a>Windows VM 'lerinde uzantıları yüklemeyi kısıtlamak için Azure Ilkesini kullanma
 
-Kullanımı veya Windows Vm'lerinizi belirli uzantılarını yüklenmesini engellemek istiyorsanız, uzantıları VM'ler için bir kaynak grubu içinde kısıtlamak için PowerShell kullanarak Azure ilkesi oluşturabilirsiniz. 
+Windows sanal makinelerinizdeki belirli uzantıların kullanımını veya yüklenmesini engellemek isterseniz, bir kaynak grubu içindeki VM 'Ler için uzantıları kısıtlamak üzere PowerShell kullanarak bir Azure ilkesi oluşturabilirsiniz. 
 
-Bu öğreticide, Azure PowerShell'in en son sürüme sürekli olarak güncelleştirilen Cloud Shell içinde kullanılır. 
+Bu öğretici, en son sürüme sürekli olarak güncellenen Cloud Shell içinde Azure PowerShell kullanır. 
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-## <a name="create-a-rules-file"></a>Kurallar dosyası oluşturma
+## <a name="create-a-rules-file"></a>Bir kural dosyası oluşturma
 
-Hangi uzantıların yüklü kısıtlamak için ihtiyacınız bir [kural](../../governance/policy/concepts/definition-structure.md#policy-rule) uzantısı tanımlamak için mantığını sağlamak için.
+Hangi uzantıların yüklenebileceğini kısıtlamak için, uzantıyı belirlemek için mantığı sağlamak üzere bir [kuralınız](../../governance/policy/concepts/definition-structure.md#policy-rule) olması gerekir.
 
-Bu örnekte Azure Cloud Shell'de kurallar dosyası oluşturarak 'Microsoft.Compute' tarafından yayımlanan uzantılarını reddetmek gösterilmektedir, ancak PowerShell'de yerel olarak çalışıyorsanız, ayrıca bir yerel dosya oluşturun ve yolunu değiştirin ($home/clouddrive) yoluyla makinenizde yerel dosya.
+Bu örnek, Azure Cloud Shell ' de bir kural dosyası oluşturarak ' Microsoft. COMPUTE ' tarafından yayımlanan uzantıların nasıl reddedileceğini gösterir, ancak PowerShell 'de yerel olarak çalışıyorsanız, yerel bir dosya oluşturabilir ve yolu ($home/CloudDrive), makinenizde yerel dosya.
 
-İçinde bir [Cloud Shell](https://shell.azure.com/powershell), türü:
+[Cloud Shell](https://shell.azure.com/powershell), şunu yazın:
 
 ```azurepowershell-interactive
 nano $home/clouddrive/rules.json
 ```
 
-Kopyalayın ve aşağıdaki .json dosyaya yapıştırın.
+Aşağıdaki. json dosyasını kopyalayıp dosyaya yapıştırın.
 
 ```json
 {
@@ -66,21 +66,21 @@ Kopyalayın ve aşağıdaki .json dosyaya yapıştırın.
 }
 ```
 
-İşiniz bittiğinde, isabet **Ctrl + O** ardından **Enter** dosyayı kaydetmek için. İsabet **Ctrl + X** çıkış ve dosyayı kapatın.
+İşiniz bittiğinde, **CTRL + O** tuşlarına basın ve dosyayı kaydetmek için **girin** . Dosyayı kapatmak ve çıkmak için **CTRL + X** tuşlarına basın.
 
-## <a name="create-a-parameters-file"></a>Bir parametre dosyası oluşturma
+## <a name="create-a-parameters-file"></a>Parametre dosyası oluşturma
 
-Ayrıca gerekir bir [parametreleri](../../governance/policy/concepts/definition-structure.md#parameters) engellemek için uzantıları listesinde geçirme için kullanabilmeniz için bir yapı oluşturur dosya. 
+Ayrıca, engellenecek uzantılar listesini geçirmek için kullanabileceğiniz bir yapı oluşturan [Parametreler](../../governance/policy/concepts/definition-structure.md#parameters) dosyasına ihtiyacınız vardır. 
 
-Bu örnekte Cloud shell'de VM'ler için bir parametre dosyası oluşturma işlemi gösterilmektedir, ancak PowerShell'de yerel olarak çalışıyorsanız, ayrıca bir yerel dosya oluşturun ve yolunu değiştirin ($home/clouddrive) ile makinenizde yerel dosya yolu.
+Bu örnek, Cloud Shell VM 'Ler için bir parametre dosyası oluşturmayı gösterir, ancak PowerShell 'de yerel olarak çalışıyorsanız, yerel bir dosya oluşturabilir ve yolu ($home/CloudDrive), makinenizde yerel dosyanın yoluyla değiştirebilirsiniz.
 
-İçinde [Cloud Shell](https://shell.azure.com/powershell), türü:
+[Cloud Shell](https://shell.azure.com/powershell), şunu yazın:
 
 ```azurepowershell-interactive
 nano $home/clouddrive/parameters.json
 ```
 
-Kopyalayın ve aşağıdaki .json dosyaya yapıştırın.
+Aşağıdaki. json dosyasını kopyalayıp dosyaya yapıştırın.
 
 ```json
 {
@@ -95,13 +95,13 @@ Kopyalayın ve aşağıdaki .json dosyaya yapıştırın.
 }
 ```
 
-İşiniz bittiğinde, isabet **Ctrl + O** ardından **Enter** dosyayı kaydetmek için. İsabet **Ctrl + X** çıkış ve dosyayı kapatın.
+İşiniz bittiğinde, **CTRL + O** tuşlarına basın ve dosyayı kaydetmek için **girin** . Dosyayı kapatmak ve çıkmak için **CTRL + X** tuşlarına basın.
 
-## <a name="create-the-policy"></a>İlke oluşturma
+## <a name="create-the-policy"></a>İlkeyi oluşturma
 
-Bir ilke tanımı, kullanmak istediğiniz yapılandırmayı depolamak için kullanılan bir nesnedir. İlke tanımı, ilke tanımlamak için kuralları ve parametre dosyalarını kullanır. Kullanarak ilke tanımı oluşturma [yeni AzPolicyDefinition](https://docs.microsoft.com/powershell/module/az.resources/new-azpolicydefinition) cmdlet'i.
+İlke tanımı, kullanmak istediğiniz yapılandırmayı depolamak için kullanılan bir nesnedir. İlke tanımı, ilkeyi tanımlamak için kuralları ve parametreler dosyalarını kullanır. [New-AzPolicyDefinition](https://docs.microsoft.com/powershell/module/az.resources/new-azpolicydefinition) cmdlet 'ini kullanarak bir ilke tanımı oluşturun.
 
- İlke kuralları ve parametreleri, oluşturduğunuz ve .json dosyaları halinde, cloud shell'de depolanan dosyalarıdır.
+ İlke kuralları ve parametreleri, oluşturduğunuz ve bulut kabuğunuzda. JSON dosyaları olarak depoladığınız dosyalardır.
 
 
 ```azurepowershell-interactive
@@ -116,11 +116,11 @@ $definition = New-AzPolicyDefinition `
 
 
 
-## <a name="assign-the-policy"></a>İlke atama
+## <a name="assign-the-policy"></a>İlkeyi ata
 
-Bu örnekte kullanarak bir kaynak grubu İlkesi atar [yeni AzPolicyAssignment](https://docs.microsoft.com/powershell/module/az.resources/new-azpolicyassignment). Herhangi bir VM oluşturduğunuz **myResourceGroup** kaynak grubu VM erişim aracı veya özel betik uzantıları yüklemek mümkün olmayacaktır. 
+Bu örnek, ilkeyi [New-AzPolicyAssignment](https://docs.microsoft.com/powershell/module/az.resources/new-azpolicyassignment)kullanarak bir kaynak grubuna atar. **Myresourcegroup** kaynak grubunda oluşturulan herhangi bir sanal makıne, VM erişim Aracısı veya özel Betik uzantıları 'nı yükleyemeyecektir. 
 
-Kullanım [Get-AzSubscription | Format-Table](https://docs.microsoft.com/powershell/module/az.accounts/get-azsubscription) yerine bir örnek kullanmak için abonelik Kimliğinizi almak için cmdlet.
+[Get-AzSubscription | kullanın ](https://docs.microsoft.com/powershell/module/az.accounts/get-azsubscription)ABONELIK kimliğinizi örnekteki bir yerde kullanmak üzere almak için biçim tablosu cmdlet 'i.
 
 ```azurepowershell-interactive
 $scope = "/subscriptions/<subscription id>/resourceGroups/myResourceGroup"
@@ -139,9 +139,9 @@ $assignment = New-AzPolicyAssignment `
 $assignment
 ```
 
-## <a name="test-the-policy"></a>Test İlkesi
+## <a name="test-the-policy"></a>İlkeyi test etme
 
-İlkeyi test etmek için VM erişimi uzantısı kullanmayı deneyin. Şu iletiyle başarısız olması "Set-AzVMAccessExtension: Kaynak 'myVMAccess' ilke tarafından izin verilmedi."
+İlkeyi test etmek için VM erişimi uzantısını kullanmayı deneyin. Aşağıdakiler, "set-Azvmaccessextenma: ' myVMAccess ' kaynağının ilke tarafından izin vermedi." iletisini vererek başarısız olması gerekir. "
 
 ```azurepowershell-interactive
 Set-AzVMAccessExtension `
@@ -151,19 +151,19 @@ Set-AzVMAccessExtension `
    -Location EastUS 
 ```
 
-"Şablon dağıtımı ilke ihlali nedeniyle başarısız." parola değiştirme Portalı'nda, başarısız olması İleti.
+Portalda parola değişikliği "ilke ihlali nedeniyle şablon dağıtımı başarısız oldu." hatasıyla başarısız olmalıdır. İleti.
 
-## <a name="remove-the-assignment"></a>Atamasını Kaldır
+## <a name="remove-the-assignment"></a>Atamayı kaldırma
 
 ```azurepowershell-interactive
 Remove-AzPolicyAssignment -Name not-allowed-vmextension-windows -Scope $scope
 ```
 
-## <a name="remove-the-policy"></a>İlke Kaldır
+## <a name="remove-the-policy"></a>İlkeyi kaldır
 
 ```azurepowershell-interactive
 Remove-AzPolicyDefinition -Name not-allowed-vmextension-windows
 ```
     
 ## <a name="next-steps"></a>Sonraki adımlar
-Daha fazla bilgi için [Azure İlkesi](../../governance/policy/overview.md).
+Daha fazla bilgi için bkz. [Azure İlkesi](../../governance/policy/overview.md).

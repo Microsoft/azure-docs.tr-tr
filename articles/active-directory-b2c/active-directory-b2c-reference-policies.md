@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory B2C kullanıcı akışlarında | Microsoft Docs
-description: Azure Active Directory B2C çeşitli kullanıcı akışları oluşturma ve Genişletilebilir ilke çerçevesi hakkında daha fazla bilgi edinin.
+title: Azure Active Directory B2C Kullanıcı akışları | Microsoft Docs
+description: Azure Active Directory B2C Genişletilebilir ilke çerçevesi ve çeşitli Kullanıcı akışları oluşturma hakkında daha fazla bilgi edinin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,30 +10,30 @@ ms.topic: conceptual
 ms.date: 11/30/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 54677dc0771f65b7636b4d1cac77f53f9c04a09d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 08da04a8bf167c99ef2384a9714034ae1865bec1
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66508931"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71065368"
 ---
-# <a name="user-flows-in-azure-active-directory-b2c"></a>Azure Active Directory B2C'de kullanıcı akışları
+# <a name="user-flows-in-azure-active-directory-b2c"></a>Azure Active Directory B2C Kullanıcı akışları
 
-Azure Active Directory (Azure AD) B2C'in Genişletilebilir ilke çerçevesi hizmet çekirdek gücünü ' dir. İlkeleri tam olarak açıklayan kimlik deneyimleri gibi kaydolma, oturum açma ve profil düzenleme. Yardımcı olması için en yaygın kimlik görevleri ayarlayın, adlı önceden tanımlanmış, yapılandırılabilir ilkeleri Azure AD B2C portal içerir **kullanıcı akışları**. 
+Azure Active Directory B2C Genişletilebilir ilke çerçevesi (Azure AD B2C), hizmetin temel kuvvetsidir. İlkeler kaydolma, oturum açma veya profil düzenlemesi gibi kimlik deneyimlerini tamamen anlatmaktadır. En yaygın kimlik görevlerini ayarlamanıza yardımcı olması için Azure AD B2C portalı, **Kullanıcı akışları**adlı önceden tanımlanmış ve yapılandırılabilir ilkeler içerir.
 
 ## <a name="what-are-user-flows"></a>Kullanıcı akışları nelerdir?
 
-Kullanıcı akışı, aşağıdaki ayarları yapılandırarak uygulamalarınızın davranışları denetlemenize olanak sağlar:
+Bir Kullanıcı akışı, aşağıdaki ayarları yapılandırarak uygulamalarınızdaki davranışları denetlemenizi sağlar:
 
-- Hesap türleri için oturum açma, sosyal medya hesaplarını gibi kullanılan ister bir Facebook veya yerel hesaplar
-- Ad, posta kodu gibi tüketici toplanmasına ve boyutu ayakkabı öznitelikleri
+- Facebook veya yerel hesaplar gibi sosyal hesaplar gibi, oturum açma için kullanılan hesap türleri
+- Tüketiciden toplanacak öznitelikler (örneğin, ilk ad, posta kodu ve ayakkabı boyutu)
 - Azure Multi-Factor Authentication
-- Kullanıcı arabirimini özelleştirme
-- Bir belirtecinde talep olarak uygulamanın aldığı bilgileri 
+- Kullanıcı arabiriminin özelleştirilmesi
+- Uygulamanın bir belirteçte talepler olarak aldığı bilgiler
 
-Kiracınızda farklı türdeki çok sayıda kullanıcı akışları oluşturabilir ve bunları uygulamalarınızda gerektiğinde kullanın. Kullanıcı akışları uygulamalar arasında yeniden kullanılabilir. Bu esnekliğin tanımlama ve kimlik deneyimi değişikliğiyle veya hiç değişiklik kodunuzda değişiklik sağlar. Uygulamanız, bir kullanıcı akışı parametre içeren bir standart HTTP kimlik doğrulama isteği'ni kullanarak bir kullanıcı akışı tetikler. Özelleştirilmiş [belirteci](active-directory-b2c-reference-tokens.md) bir yanıt aldı. 
+Kiracınızda farklı türlerde birçok kullanıcı akışı oluşturabilir ve bunları gerektiği şekilde uygulamalarınızda kullanabilirsiniz. Kullanıcı akışları, uygulamalar arasında yeniden kullanılabilir. Bu esneklik, kodunuzda en az değişiklik yapmadan kimlik deneyimlerini tanımlamanızı ve değiştirmenizi sağlar. Uygulamanız, bir Kullanıcı akış parametresi içeren standart bir HTTP kimlik doğrulama isteği kullanarak bir Kullanıcı akışı tetikler. Özelleştirilmiş bir [belirteç](active-directory-b2c-reference-tokens.md) yanıt olarak alınır.
 
-Aşağıdaki örnekler, kullanılacak kullanıcı akışını belirtir "p" sorgu dizesi parametresi gösterir:
+Aşağıdaki örneklerde, kullanılacak kullanıcı akışını belirten "p" sorgu dizesi parametresi gösterilmektedir:
 
 ```
 https://contosob2c.b2clogin.com/contosob2c.onmicrosoft.com/oauth2/v2.0/authorize?
@@ -61,30 +61,30 @@ client_id=2d4d11a2-f814-46a7-890a-274a72a7309e      // Your registered Applicati
 
 ## <a name="user-flow-versions"></a>Kullanıcı akışı sürümleri
 
-Yeni Azure portalında [kullanıcı akışları sürümleri](user-flow-versions.md) her zaman eklenir. Azure AD B2C ile çalışmaya başlama, kullanıcı akışları kullanmak için önerilen test. Yeni bir kullanıcı Akış oluşturduğunuzda, seçtiğiniz gelen gereksinim duyduğunuz kullanıcı akışı **önerilen** sekmesi.
+Azure portal, [Kullanıcı akışlarının yeni sürümleri](user-flow-versions.md) her zaman ekleniyor. Azure AD B2C kullanmaya başladığınızda, test ettiğiniz Kullanıcı akışları kullanmanız önerilir. Yeni bir Kullanıcı akışı oluşturduğunuzda **Önerilen** sekmesinden ihtiyacınız olan kullanıcı akışını seçersiniz.
 
-Aşağıdaki kullanıcı akışları şu anda önerilir:
+Şu anda aşağıdaki Kullanıcı akışları önerilir:
 
-- **Kaydolma ve oturum açma** -hem de tek bir yapılandırma ile kaydolma ve oturum açma deneyimlerini işler. Kullanıcılar, bağlama bağlı olarak doğru yolunu gerektiriyordu. Üzerinden bu kullanıcı akışını kullanmanız önerilir bir **kaydolma** kullanıcı akışı veya **oturum** kullanıcı akışı.
-- **Profil düzenleme** -kullanıcıların kendi profil bilgilerini düzenlemesine olanak sağlar.
-- **Parola sıfırlama** -olup olmadığını ve kullanıcıların kendi parolalarını sıfırlayabilir nasıl yapılandırmanızı sağlar.
+- Kaydolma ve oturum açma deneyimlerinin her ikisi de tek bir yapılandırmayla kaydolun **ve oturum açın** . Kullanıcılar, bağlama göre doğru yolun altına alınır. Bu kullanıcı akışını bir **kaydolma** Kullanıcı akışı veya **oturum açma** Kullanıcı akışı üzerinden kullanmanız önerilir.
+- **Profil düzenleme** -kullanıcıların profil bilgilerini düzenlemesine olanak sağlar.
+- **Parola sıfırlama** -kullanıcıların parolalarını sıfırlayıp sıfırlayamayacağını ve bunların nasıl sıfırlanamayacağını yapılandırmanıza olanak sağlar.
 
-## <a name="linking-user-flows"></a>Bağlama kullanıcı akışları
+## <a name="linking-user-flows"></a>Kullanıcı akışlarını bağlama
 
-A **kaydolma veya oturum açma** yerel hesapların olan kullanıcı akışı içeren bir **parolanızı mı unuttunuz?** bağlantı deneyimi'nın ilk sayfasında. Bu bağlantıya tıkladığınızda otomatik olarak tetikleyici parola kullanıcı akışını sıfırlamak değil. 
+Yerel hesaplarla **kaydolma veya oturum açma** Kullanıcı akışı, deneyimin ilk sayfasında **parolayı unuttum?** bağlantısını içerir. Bu bağlantıya tıkladığınızda parola sıfırlama Kullanıcı akışı otomatik olarak tetiklenemez.
 
-Bunun yerine, hata kodu `AADB2C90118` uygulamanıza döndürülür. Bu hata kodu parolasını sıfırlar bir kullanıcıya akış çalıştırarak işlemek uygulamanız gerekir. Bir örnek görmek için göz atın. bir [basit ASP.NET örnek](https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-DotNet-SUSI) kullanıcı akışlarını bağlamayı gösterir.
+Bunun yerine, hata kodu `AADB2C90118` uygulamanıza döndürülür. Uygulamanızın, parolayı sıfırlayan belirli bir kullanıcı akışını çalıştırarak bu hata kodunu işlemesi gerekir. Bir örneği görmek için, Kullanıcı akışlarının bağlantısını gösteren [basit bir ASP.net örneğine](https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-DotNet-SUSI) göz atın.
 
-## <a name="email-address-storage"></a>E-posta adresi depolama
+## <a name="email-address-storage"></a>E-posta adresi depolaması
 
-Bir e-posta adresi, bir kullanıcı akışı bir parçası olarak gerekli olabilir. Sosyal kimlik sağlayıcısı ile kullanıcı kimliğini doğrular, e-posta adresi depolanan **otherMails** özelliği. Ardından bir yerel hesap kullanıcı adı temel alıyorsa, e-posta adresi bir güçlü kimlik doğrulama ayrıntısı özelliğinde depolanır. Yerel bir hesap, bir e-posta adresine göre sonra e-posta adresi depolanan **signInNames** özelliği.
- 
-E-posta adresi, tüm durumlarda doğrulanacak garanti yoktur. Kiracı Yöneticisi, yerel hesaplar için temel ilkeleri e-posta doğrulamayı devre dışı bırakabilirsiniz. E-posta adresi doğrulama etkin olsa bile adresleri doğrulanabilir değil, bir sosyal kimlik sağlayıcısından gelen ve bunlar değiştirilmemiştir.
- 
-Yalnızca **otherMails** ve **signInNames** özellikleri, Active Directory Graph API'si sunulur. E-posta adresi güçlü kimlik doğrulama ayrıntısı özelliğinde kullanılabilir değil.
+Bir Kullanıcı akışının parçası olarak bir e-posta adresi gerekebilir. Kullanıcı bir sosyal kimlik sağlayıcısı ile kimlik doğrulaması gerçekleştiriyorsa, e-posta adresi, **Otherpostalarını** özelliğinde depolanır. Yerel bir hesap Kullanıcı adını temel alıyorsa, e-posta adresi güçlü bir kimlik doğrulama ayrıntısı özelliğinde depolanır. Yerel bir hesap bir e-posta adresini temel alıyorsa, e-posta adresi **Signınnames** özelliğinde depolanır.
+
+Bu durumda e-posta adresinin doğrulanması garanti edilmez. Bir kiracı yöneticisi, yerel hesaplar için temel ilkelerde e-posta doğrulamayı devre dışı bırakabilir. E-posta adresi doğrulama etkin olsa bile, bir sosyal kimlik sağlayıcısından geliyorsa ve değiştirilmedikleri durumlarda adresler doğrulanmaz.
+
+Yalnızca **Otherpostalarını** ve **signınnames** özellikleri Active Directory Graph API aracılığıyla sunulur. Güçlü kimlik doğrulama ayrıntısı özelliğindeki e-posta adresi kullanılamıyor.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Önerilen kullanıcı akışları oluşturmak için yönergeleri izleyin. [Öğreticisi: Kullanıcı akışı Oluştur](tutorial-create-user-flows.md).
+Önerilen Kullanıcı akışlarını oluşturmak için [öğreticideki yönergeleri izleyin: Bir Kullanıcı akışı](tutorial-create-user-flows.md)oluşturun.
 
 

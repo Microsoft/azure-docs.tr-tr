@@ -1,6 +1,6 @@
 ---
-title: Azure API management ilke örneği - arka uç hizmetine istek bağlamı bilgi gönder | Microsoft Docs
-description: Azure API management ilke örneği - arka uç hizmetine istek bağlamı bilgi gönderme işlemini gösterir.
+title: Azure API yönetim ilkesi örneği-istek bağlamı bilgilerini arka uç hizmetine gönder | Microsoft Docs
+description: Azure API Management ilkesi örneği-istek bağlamı bilgilerinin arka uç hizmetine nasıl gönderileceğini gösterir.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,30 +9,29 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 10/13/2017
 ms.author: apimpm
-ms.openlocfilehash: 3369f3b3349e8daf9ff540b824c10bbd618a1147
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cc770ff700155f8ab32bbbd6737c9dad7bc6e664
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60859962"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70067516"
 ---
-# <a name="send-request-context-information-to-the-backend-service"></a>İstek bağlamını arka uç hizmetine gönderin
+# <a name="send-request-context-information-to-the-backend-service"></a>İstek bağlamı bilgilerini arka uç hizmetine gönder
 
-Bu makalede, istek bağlamını arka uç hizmetine göndermek nasıl oluşturulduğunu gösteren bir Azure API Yönetimi İlkesi örnek gösterilmektedir. Ayarlama veya ilke kodu düzenleme için açıklanan adımları izleyin [ayarlama veya düzenleme ilke](../set-edit-policies.md). Diğer örnekler için bkz [ilkesi örnekleri](../policy-samples.md).
+Bu makalede, istek bağlamı bilgilerinin arka uç hizmetine nasıl gönderileceğini gösteren bir Azure API yönetim ilkesi örneği gösterilmektedir. Bir ilke kodu ayarlamak veya düzenlemek için, [Ilke ayarlama veya düzenleme](../set-edit-policies.md)bölümünde açıklanan adımları izleyin. Diğer örnekleri görmek için bkz. [ilke örnekleri](../policy-samples.md).
 
 ## <a name="policy"></a>İlke
 
-Kodun içine yapıştırın **gelen** blok.
+Kodu **gelen** bloğa yapıştırın.
 
 [!code-xml[Main](../../../api-management-policy-samples/examples/Send request context information to the backend service.policy.xml)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-APIM ilkeleri hakkında daha fazla bilgi edinin:
+APıM ilkeleri hakkında daha fazla bilgi edinin:
 
 + [Dönüştürme ilkeleri](../api-management-transformation-policies.md)
 + [İlke örnekleri](../policy-samples.md)

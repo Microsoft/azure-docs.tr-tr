@@ -1,23 +1,24 @@
 ---
-title: Canlı izleyin | Azure Market
-description: Go Live API işlem listeleme Canlı teklif başlatır.
+title: Canlı git | Azure Marketi
+description: Go Live API 'SI teklifi canlı Listeleme işlemini başlatır.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: ac56f86bad132f3e00a4b5c2507d65c0722c628c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 30500e9dfae9411563fc727290d0569998ba3550
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935484"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819679"
 ---
-<a name="go-live"></a>Canlı izleyin
+<a name="go-live"></a>Canlı git
 =======
 
-Bu API, bir uygulamayı üretime göndermeden işlemi başlatır. Bu işlem genellikle uzun ömürlü. Bu çağrı bildirim e-posta listesinden kullanan [Yayımla](./cloud-partner-portal-api-publish-offer.md) API işlemi.
+Bu API, bir uygulamayı üretime iletme işlemini başlatır. Bu işlem genellikle uzun süredir çalışır. Bu çağrı, API 'yi [Yayımla](./cloud-partner-portal-api-publish-offer.md) işlemindeki bildirim e-posta listesini kullanır.
 
  `POST  https://cloudpartner.azure.com/api/publishers/<publisherId>/offers/<offerId>/golive?api-version=2017-10-31` 
 
@@ -26,13 +27,13 @@ Bu API, bir uygulamayı üretime göndermeden işlemi başlatır. Bu işlem gene
 
 |  **Ad**      |   **Açıklama**                                                           | **Veri türü** |
 |  --------      |   ---------------                                                           | ------------- |
-| publisherId    | Örneğin, almak teklif için yayımcı tanımlayıcısı `contoso`       |  String       |
-| OfferId        | Teklif almak için teklif tanımlayıcısı                                   |  String       |
-| API sürümü    | API'nin en son sürümü                                                   |  Tarih         |
+| PublisherId    | Örneğin `contoso` alma teklifinin yayımcı tanımlayıcısı       |  Dize       |
+| OfferId        | Alma teklifinin teklif tanımlayıcısı                                   |  Dize       |
+| api sürümü    | API 'nin en son sürümü                                                   |  Tarih         |
 |  |  |  |
 
 
-<a name="header"></a>Üstbilgi
+<a name="header"></a>Üst bilgi
 ------
 
 |  **Ad**       |     **Değer**       |
@@ -54,15 +55,15 @@ Bu API, bir uygulamayı üretime göndermeden işlemi başlatır. Bu işlem gene
 
 |  **Ad**             |      **Değer**                                                            |
 |  --------             |      ----------                                                           |
-| İşlem konumu    |  Geçerli işlemin durumunu belirlemek için sorgu URL'si            |
+| İşlem-konum    |  İşlemin geçerli durumunu öğrenmek için Sorgulanacak URL            |
 |  |  |
 
 
 ### <a name="response-status-codes"></a>Yanıt durum kodları
 
-| **Kod** |  **Açıklama**                                                                        |
+| **Kodudur** |  **Açıklama**                                                                        |
 | -------- |  ----------------                                                                        |
-|  202     | `Accepted` -İstek başarıyla kabul edildi. İşlem durumunu izlemek için bir konum yanıtı içerir. |
-|  400     | `Bad/Malformed request` -Ek hata bilgileri, yanıt gövdesi içinde bulunur. |
-|  404     |  `Not found` -Belirtilen varlık yok.                                       |
+|  202     | `Accepted`-istek başarıyla kabul edildi. Yanıt, işlem durumunu izlemek için bir konum içerir. |
+|  400     | `Bad/Malformed request`-yanıt gövdesi içinde ek hata bilgileri bulunur. |
+|  404     |  `Not found`-belirtilen varlık yok.                                       |
 |  |  |

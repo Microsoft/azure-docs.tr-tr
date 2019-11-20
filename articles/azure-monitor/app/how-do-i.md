@@ -1,163 +1,167 @@
 ---
-title: Nasıl... yapabilirim Azure Application Insights | Microsoft Docs
-description: Application ınsights'ta SSS.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 48b2b644-92e4-44c3-bc14-068f1bbedd22
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Nasıl yaparım?... Azure Application Insights | Microsoft Docs
+description: Application Insights SSS.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 04/04/2017
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 5e22a3f3b362811fd87460ec41b61a990f4d83fb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 04/04/2017
+ms.openlocfilehash: 61bd5898c494018a2bacbd894d4dc2aac97f53b4
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60902115"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73928411"
 ---
 # <a name="how-do-i--in-application-insights"></a>Application Insights’ta nasıl ... yapabilirim?
-## <a name="get-an-email-when-"></a>E-posta...
-### <a name="email-if-my-site-goes-down"></a>Sitem kalırsa e-posta
-Ayarlanmış bir [kullanılabilirlik web testi](../../azure-monitor/app/monitor-web-app-availability.md).
+## <a name="get-an-email-when-"></a>Şu durumlarda bir e-posta alın...
+### <a name="email-if-my-site-goes-down"></a>Sitemin kapanması durumunda e-posta
+Bir [kullanılabilirlik Web testi](../../azure-monitor/app/monitor-web-app-availability.md)ayarlayın.
 
-### <a name="email-if-my-site-is-overloaded"></a>Sitem aşırı yüklüyse e-posta
-Ayarlanmış bir [uyarı](../../azure-monitor/app/alerts.md) üzerinde **sunucu yanıt süresi**. Bir eşik değeri 1 ve 2 saniye arasında çalışmalıdır.
+### <a name="email-if-my-site-is-overloaded"></a>Sitemin aşırı yüklenmiş olması durumunda e-posta
+**Sunucu yanıt süresi**üzerinde bir [Uyarı](../../azure-monitor/app/alerts.md) ayarlayın. 1 ile 2 saniye arasında bir eşik çalışmalıdır.
 
 ![](./media/how-do-i/030-server.png)
 
-Uygulamanızı hata kodları döndürme tarafından yükü işaretlerini de gösterebilir. Bir uyarı ayarlayın **başarısız istekler**.
+Uygulamanız hata kodları döndürerek zorlamaların işaretlerini de gösterebilir. **Başarısız isteklerde**bir uyarı ayarlayın.
 
-Bir uyarı ayarlamak istiyorsanız **sunucu özel durumları**, yapmanız gerekebilir [bazı ek kurulum](../../azure-monitor/app/asp-net-exceptions.md) verileri görmek için.
+**Sunucu özel durumları**üzerinde bir uyarı ayarlamak isterseniz, verileri görmek için [bazı ek kurulum](../../azure-monitor/app/asp-net-exceptions.md) yapmanız gerekebilir.
 
-### <a name="email-on-exceptions"></a>Özel durumları e-posta
-1. [Özel durum izleme işlevini ayarlama](../../azure-monitor/app/asp-net-exceptions.md)
-2. [Uyarı ayarlama](../../azure-monitor/app/alerts.md) ölçüm özel durum sayısı
+### <a name="email-on-exceptions"></a>Özel durumlarla ilgili e-posta
+1. [Özel durum izlemeyi ayarlama](../../azure-monitor/app/asp-net-exceptions.md)
+2. Özel durum sayısı ölçümünde [bir uyarı ayarlayın](../../azure-monitor/app/alerts.md)
 
-### <a name="email-on-an-event-in-my-app"></a>Uygulamamı bir koşulda e-posta
-Belirli bir olay meydana geldiğinde bir e-posta almak istediğiniz varsayalım. Application Insights sunmaz bu özelliği doğrudan, ancak bunu [bir ölçüm eşiği aştığında bir uyarı gönder](../../azure-monitor/app/alerts.md).
+### <a name="email-on-an-event-in-my-app"></a>Uygulamamda bir olay üzerinde e-posta
+Belirli bir olay gerçekleştiğinde bir e-posta almak istediğinizi varsayalım. Application Insights bu özelliği doğrudan sağlamaz, ancak bir [ölçüm bir eşiği aştığında uyarı gönderebilir](../../azure-monitor/app/alerts.md).
 
-Uyarılar, üzerinde ayarlanabilir [özel ölçümler](../../azure-monitor/app/api-custom-events-metrics.md#trackmetric), ancak değil özel olaylar. Olay gerçekleştiğinde bir ölçüm artırmak için bazı kodlar yazma:
+Özel etkinliklerde değil, [özel ölçümler](../../azure-monitor/app/api-custom-events-metrics.md#trackmetric)üzerinde de uyarı ayarlanabilir. Olay gerçekleştiğinde bir ölçümü artırmak için kod yazın:
 
     telemetry.TrackMetric("Alarm", 10);
 
-veya:
+Veya
 
     var measurements = new Dictionary<string,double>();
     measurements ["Alarm"] = 10;
     telemetry.TrackEvent("status", null, measurements);
 
-İki durumlu uyarılar olduğundan, düşük bir değere sona erdirilmesi uyarıyı göz önüne aldığınızda göndermek zorunda:
+Uyarıların iki durumu olduğu için, uyarıyı sonlandırdığınızda düşük bir değer göndermeniz gerekir:
 
     telemetry.TrackMetric("Alarm", 0.5);
 
-Grafik oluşturma [ölçüm Gezgini](../../azure-monitor/app/metrics-explorer.md) , uyarı görmek için:
+Alarmlarınızı görmek için [ölçüm Gezgininde](../../azure-monitor/app/metrics-explorer.md) bir grafik oluşturun:
 
 ![](./media/how-do-i/010-alarm.png)
 
-Artık ölçüm kısa bir süre için bir orta değer olduğunda harekete geçirmek için bir uyarı ayarlayın:
+Şimdi, ölçüm kısa bir süre için bir orta değerin üzerine gittiğinde harekete geçmek üzere bir uyarı ayarlayın:
 
 ![](./media/how-do-i/020-threshold.png)
 
-Ortalama süresi için en düşük ayarlayın.
+Ortalama süreyi minimum olarak ayarlayın.
 
-Ölçüm yukarıda gittiğinde hem eşiğin altında e-posta alırsınız.
+Hem ölçüm hem de eşiğin altına gittiğinde e-posta alacaksınız.
 
 Dikkat edilmesi gereken bazı noktalar:
 
-* Bir uyarı ("uyarı" ve "iyi durumda") iki durum vardır. Yalnızca bir ölçüm alındığında durumu değerlendirilir.
-* Durum değiştiğinde bir e-posta gönderilir. Her ikisi de yüksek göndermek zorunda neden ve düşük değer ölçümleri budur.
-* Uyarı değerlendirmek için ortalama önceki dönem boyunca alınan değerleri alınır. Bir ölçüm alınan her seferinde, ayarladığınız süresinden daha sık e-posta gönderilmesi için gerçekleşir.
-* "Uyarı" ve "iyi" e-postalar gönderilir olduğundan, iki durumlu koşulu olarak kesin olay yeniden yapmayı mı düşünüyorsunuz göz önünde bulundurun isteyebilirsiniz. Örneğin, bir "iş tamamlandı" olay yerine, başlangıç ve bitiş bir işin e-postaları nereden bir "devam eden işi" koşula sahipsiniz.
+* Bir uyarının iki durumu vardır ("uyarı" ve "sağlıklı"). Durum yalnızca bir ölçüm alındığında değerlendirilir.
+* Yalnızca durum değiştiğinde bir e-posta gönderilir. Bu nedenle hem yüksek hem de düşük değerli ölçümleri göndermeniz gerekir.
+* Uyarıyı değerlendirmek için, önceki dönem içindeki alınan değerlerin ortalaması alınır. Bu, bir ölçüm her alındığında oluşur, böylece e-postalar ayarladığınız dönemden daha sık gönderilebilir.
+* E-postalar hem "uyarı" hem de "sağlıklı" olarak gönderildiğinden, tek kararlı olayınızı iki durumlu bir koşul olarak yeniden düşünmek isteyebilirsiniz. Örneğin, bir "iş tamamlandı" olayı yerine bir işin başlangıcında ve sonunda e-posta aldığınız "devam eden iş" koşulu vardır.
 
 ### <a name="set-up-alerts-automatically"></a>Uyarıları otomatik olarak ayarlama
-[Yeni uyarılar oluşturmak için PowerShell kullanma](../../azure-monitor/app/alerts.md#automation)
+[PowerShell kullanarak yeni uyarılar oluşturma](../../azure-monitor/app/alerts.md#automation)
 
-## <a name="use-powershell-to-manage-application-insights"></a>Application Insights'ı yönetmek için PowerShell'i kullanma
-* [Yeni kaynaklar oluşturma](../../azure-monitor/app/powershell-script-create-resource.md)
-* [Yeni uyarılar oluşturun](../../azure-monitor/app/alerts.md#automation)
+## <a name="use-powershell-to-manage-application-insights"></a>Application Insights yönetmek için PowerShell 'i kullanma
+* [Yeni kaynaklar oluşturma](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource#creating-a-resource-automatically)
+* [Yeni uyarılar oluşturma](../../azure-monitor/app/alerts.md#automation)
 
-## <a name="separate-telemetry-from-different-versions"></a>Farklı sürümlerine ait ayrı telemetri
+## <a name="separate-telemetry-from-different-versions"></a>Farklı sürümlerden telemetri ayırın
 
-* Bir uygulamada birden çok rol: Tek bir Application Insights kaynağı kullanın ve filtre [cloud_Rolename](../../azure-monitor/app/app-map.md).
-* Geliştirme, test ve yayın sürümleri ayırma: Farklı Application Insgihts kaynakları kullanın. İzleme anahtarları web.config yerden devam edebiliyorduk. [Daha fazla bilgi edinin](../../azure-monitor/app/separate-resources.md)
-* Raporlama derleme sürümleri: Bir telemetri Başlatıcısı aracılığıyla bir özellik ekleyin. [Daha fazla bilgi edinin](../../azure-monitor/app/separate-resources.md)
+* Bir uygulamada birden çok rol: tek bir Application Insights kaynağı kullanın ve [cloud_Rolename](../../azure-monitor/app/app-map.md)filtreleyin.
+* Geliştirme, test ve yayın sürümlerini ayırma: farklı Application Insights kaynakları kullanın. Web. config dosyasından izleme anahtarlarını seçin. [Daha fazla bilgi](../../azure-monitor/app/separate-resources.md)
+* Derleme sürümlerini raporlama: telemetri başlatıcısı kullanarak özellik ekleme. [Daha fazla bilgi](../../azure-monitor/app/separate-resources.md)
 
-## <a name="monitor-backend-servers-and-desktop-apps"></a>Arka uç sunucularının ve Masaüstü uygulamaları izleme
-[Windows Server SDK modülü kullanmak](../../azure-monitor/app/windows-desktop.md).
+## <a name="monitor-backend-servers-and-desktop-apps"></a>Arka uç sunucularını ve masaüstü uygulamalarını izleme
+[Windows Server SDK modülünü kullanın](../../azure-monitor/app/windows-desktop.md).
 
 ## <a name="visualize-data"></a>Verileri görselleştirme
-#### <a name="dashboard-with-metrics-from-multiple-apps"></a>Birden fazla uygulama ölçümleri içeren Pano
-* İçinde [ölçüm Gezgini'nde](../../azure-monitor/app/metrics-explorer.md)grafiğinizi özelleştirin ve bir sık kullanılan olarak kaydedebilirsiniz. Azure panosuna sabitleyin.
+#### <a name="dashboard-with-metrics-from-multiple-apps"></a>Birden çok uygulama ölçümlerinden oluşan Pano
+* [Ölçüm Gezgini](../../azure-monitor/app/metrics-explorer.md)' nde, grafiğinizi özelleştirin ve sık kullanılan olarak kaydedin. Azure panosuna sabitleyin.
 
-#### <a name="dashboard-with-data-from-other-sources-and-application-insights"></a>Diğer kaynakları ve Application Insights verilerini içeren Pano
-* [Telemetri Power BI'a aktarma](../../azure-monitor/app/export-power-bi.md ).
+#### <a name="dashboard-with-data-from-other-sources-and-application-insights"></a>Diğer kaynaklardaki ve Application Insights verileri içeren Pano
+* [Telemetriyi Power BI dışa aktarın](../../azure-monitor/app/export-power-bi.md ).
 
-Or
+Veya
 
-* SharePoint, SharePoint web bölümleri verileri görüntüleme panonuz olarak kullanın. [SQL'e aktarma için sürekli dışarı aktarma ve Stream Analytics kullanın](../../azure-monitor/app/code-sample-export-sql-stream-analytics.md).  PowerView için bir SharePoint web bölümü oluşturma ve veritabanı incelemek için PowerView kullanın.
+* SharePoint Web bölümlerinde verileri görüntüleyerek pano olarak SharePoint 'i kullanın. [SQL 'e aktarmak için sürekli dışarı aktarma ve Stream Analytics kullanın](../../azure-monitor/app/code-sample-export-sql-stream-analytics.md).  PowerView kullanarak veritabanını inceleyin ve PowerView için bir SharePoint Web bölümü oluşturun.
 
 <a name="search-specific-users"></a>
 
-### <a name="filter-out-anonymous-or-authenticated-users"></a>Anonim veya kimliği doğrulanmış kullanıcıları Filtrele
-Kullanıcılarınız oturum açarsanız, ayarlayabileceğiniz [kimliği doğrulanmış kullanıcı kimliği](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users). (Bunu otomatik olarak gerçekleşmez.)
+### <a name="filter-out-anonymous-or-authenticated-users"></a>Anonim veya kimliği doğrulanmış kullanıcıları filtreleme
+Kullanıcılarınız oturum açtığında, [kimliği doğrulanmış kullanıcı kimliğini](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users)ayarlayabilirsiniz. (Otomatik olarak gerçekleşmez.)
 
-Ardından şunları yapabilirsiniz:
+Daha sonra şunları yapabilirsiniz:
 
-* Belirli bir kullanıcı kimliklerine göre ara
+* Belirli kullanıcı kimliklerinde ara
 
 ![](./media/how-do-i/110-search.png)
 
-* Anonim veya kimliği doğrulanmış kullanıcılara ölçütleri Filtrele
+* Ölçümleri anonim veya kimliği doğrulanmış kullanıcılara göre filtreleyin
 
 ![](./media/how-do-i/115-metrics.png)
 
-## <a name="modify-property-names-or-values"></a>Özellik adlarını ve değerleri değiştirme
-Oluşturma bir [filtre](../../azure-monitor/app/api-filtering-sampling.md#filtering). Bu, değiştirme veya uygulamanızdan Application Insights'a gönderilmeden önce telemetri filtreleme sağlar.
+## <a name="modify-property-names-or-values"></a>Özellik adlarını veya değerlerini değiştirme
+[Filtre](../../azure-monitor/app/api-filtering-sampling.md#filtering)oluşturun. Bu, Application Insights ' ye uygulamadan gönderilmeden önce Telemetriyi değiştirmenize veya filtrelemenize olanak tanır.
 
-## <a name="list-specific-users-and-their-usage"></a>Belirli kullanıcılar ve kullanımları listeler
-Yalnızca isterseniz [belirli kullanıcılar için arama](#search-specific-users), ayarlayabileceğiniz [kimliği doğrulanmış kullanıcı kimliği](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users).
+## <a name="list-specific-users-and-their-usage"></a>Belirli kullanıcıları ve bunların kullanımını listeleme
+Yalnızca [belirli kullanıcıları aramak](#search-specific-users)istiyorsanız [KIMLIĞI doğrulanmış kullanıcı kimliğini](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users)ayarlayabilirsiniz.
 
-Hangi sayfaların gibi verileri içeren bir liste istiyorsanız, bunlar bakın veya ne sıklıkta oturum açtıklarında, iki seçeneğiniz vardır:
+Hangi sayfaların baktığınıza veya ne sıklıkla oturum açtıklarında, verileri içeren bir kullanıcı listesi istiyorsanız iki seçeneğiniz vardır:
 
-* [Küme kimliği doğrulanmış kullanıcı kimliği](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users), [dışarı aktarmak için bir veritabanı](../../azure-monitor/app/code-sample-export-sql-stream-analytics.md) var. kullanıcı verilerinizi analiz etmek için uygun araçları kullanın.
-* Az sayıda kullanıcı varsa, özel olayları veya ölçüm değeri veya olay adı istediğiniz verileri kullanarak ve kullanıcı kimliği özelliği olarak ayarlayarak ölçümleri gönderin. Sayfa görünümlerini çözümlemek için standart JavaScript trackPageView çağrısı değiştirin. Sunucu tarafı telemetri analiz etmek için kullanıcı kimliği için tüm sunucu telemetri eklemek için bir telemetri Başlatıcısı kullanın. Bundan sonra filtreleyin ve bölümlendirin ölçümleri ve kullanıcı kimliği üzerinde aramalar yapabilirsiniz.
+* [Kimliği doğrulanmış kullanıcı kimliğini ayarlayın](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users), [bir veritabanına aktarın](../../azure-monitor/app/code-sample-export-sql-stream-analytics.md) ve kullanıcı verilerinizi burada analiz etmek için uygun araçları kullanın.
+* Yalnızca az sayıda kullanıcınız varsa, ölçüm değeri veya olay adı olarak ilgilendiğiniz verileri kullanarak özel olayları ve ölçümleri gönderin, ve kullanıcı KIMLIĞINI bir özellik olarak ayarlama. Sayfa görünümlerini çözümlemek için standart JavaScript trackPageView çağrısını değiştirin. Sunucu tarafı Telemetriyi çözümlemek için, kullanıcı KIMLIĞINI tüm sunucu telemetrisine eklemek üzere bir telemetri başlatıcısı kullanın. Daha sonra Kullanıcı KIMLIĞINDE ölçümleri ve aramaları filtreleyebilir ve segmentleyebilirsiniz.
 
-## <a name="reduce-traffic-from-my-app-to-application-insights"></a>Application ınsights'ı uygulamamı trafiği azaltmak
-* İçinde [Applicationınsights.config](../../azure-monitor/app/configuration-with-applicationinsights-config.md), tüm modülleri gerek yoktur, bu tür bir performans sayacı Toplayıcı devre dışı bırakın.
-* Kullanım [örnekleme ve filtreleme](../../azure-monitor/app/api-filtering-sampling.md) SDK konumunda.
-* Web sayfalarınızda Ajax çağrılarının sayısı sınırı her sayfa görüntülemesindeki bildirdi. Kod parçacığında sonra `instrumentationKey:...` , Ekle: `,maxAjaxCallsPerView:3` (veya uygun bir sayı).
-* Kullanıyorsanız [TrackMetric](../../azure-monitor/app/api-custom-events-metrics.md#trackmetric), ölçüm değerleri toplu işlerin toplam sonuç göndermeden önce işlem. Bir aşırı yüklemesini sağlayan için TrackMetric() yoktur.
+## <a name="reduce-traffic-from-my-app-to-application-insights"></a>Uygulamamın trafiğini Application Insights için azaltma
+* [ApplicationInsights. config](../../azure-monitor/app/configuration-with-applicationinsights-config.md)dosyasında, gerek olmayan tüm modülleri (performans sayacı toplayıcısı gibi) devre dışı bırakın.
+* SDK 'da [örnekleme ve filtrelemeyi](../../azure-monitor/app/api-filtering-sampling.md) kullanın.
+* Web sayfalarınızda, her sayfa görünümü için raporlanan Ajax çağrılarının sayısını sınırlayın. Kod parçacığında `instrumentationKey:...` sonrasında: `,maxAjaxCallsPerView:3` (veya uygun bir sayı) ekleyin.
+* [Trackmetric](../../azure-monitor/app/api-custom-events-metrics.md#trackmetric)kullanıyorsanız, sonucu göndermeden önce ölçüm değerleri toplu iş toplamını hesaplayın. Bunun için sağlayan TrackMetric () aşırı yüklemesi vardır.
 
-Daha fazla bilgi edinin [fiyatlandırma ve kotaları](../../azure-monitor/app/pricing.md).
+[Fiyatlandırma ve Kotalar](../../azure-monitor/app/pricing.md)hakkında daha fazla bilgi edinin.
 
-## <a name="disable-telemetry"></a>Telemetri devre dışı bırak
-İçin **dinamik olarak durdurmak ve başlatmak** sunucudan telemetri iletimini ve koleksiyon:
+## <a name="disable-telemetry"></a>Telemetrisi devre dışı bırak
+Sunucudan telemetri toplamayı ve iletimini **dinamik olarak durdurmak ve başlatmak** için:
 
-```
+### <a name="aspnet-classic-applications"></a>ASP.NET klasik uygulamalar
 
+```csharp
     using  Microsoft.ApplicationInsights.Extensibility;
 
     TelemetryConfiguration.Active.DisableTelemetry = true;
 ```
 
+### <a name="other-applications"></a>Diğer uygulamalar
+Konsol veya ASP.NET Core uygulamalarında `TelemetryConfiguration.Active` Singleton kullanılması önerilmez.
+`TelemetryConfiguration` örneği kendiniz oluşturduysanız `DisableTelemetry` `true`olarak ayarlayın.
 
+ASP.NET Core uygulamalar için, [ASP.NET Core bağımlılık ekleme](/aspnet/core/fundamentals/dependency-injection/)kullanarak `TelemetryConfiguration` örneğe erişebilirsiniz. Lütfen [ASP.NET Core uygulamalar Için ApplicationInsights](../../azure-monitor/app/asp-net-core.md) makalesinde daha fazla ayrıntı bulabilirsiniz.
 
-İçin **seçili standart Toplayıcı devre dışı** - örnek, performans sayaçları, HTTP istekleri ve bağımlılıkları - silin veya ilgili satırları açıklama [Applicationınsights.config](../../azure-monitor/app/api-custom-events-metrics.md). Örneğin, kendi TrackRequest veri göndermek istiyorsanız bunu.
+## <a name="disable-selected-standard-collectors"></a>Seçili standart toplayıcıyı devre dışı bırak
+Standart toplayıcıları devre dışı bırakabilirsiniz (örneğin, performans sayaçları, HTTP istekleri veya bağımlılıklar)
 
-## <a name="view-system-performance-counters"></a>Görünümü sistem performans sayaçları
-Ölçüm Gezgini'nde gösterebilirsiniz ölçümler arasında sistem performans sayaçları kümesidir. Adlı önceden tanımlanmış bir dikey pencere yoktur **sunucuları** birkaç tanesinin görüntüler.
+* **ASP.NET uygulamaları** - [ApplicationInsights. config](../../azure-monitor/app/configuration-with-applicationinsights-config.md) dosyasında ilgili satırları silin veya açıklama alın
+* **ASP.NET Core uygulamalar** - [ApplicationInsights ASP.NET Core](../../azure-monitor/app/asp-net-core.md#configuring-or-removing-default-telemetrymodules) telemetri modülleri yapılandırma seçeneklerini izleyin
 
-![Application Insights kaynağınızı açın ve sunucular](./media/how-do-i/121-servers.png)
+## <a name="view-system-performance-counters"></a>Sistem performans sayaçlarını görüntüleme
+Ölçüm Gezgini 'nde gösterebilmeniz için ölçümler arasında bir sistem performans sayaçları kümesi vardır. Bunlardan birkaçını görüntüleyen **sunucular** başlıklı önceden tanımlanmış bir dikey pencere vardır.
 
-### <a name="if-you-see-no-performance-counter-data"></a>Performans sayacı verisi görürseniz
-* **IIS sunucusu** kendi makinenizde veya bir VM'de. [Durum İzleyicisi yükleme](../../azure-monitor/app/monitor-performance-live-website-now.md).
-* **Azure web sitesi** -performans sayaçları henüz desteklemiyoruz. Standart bir parçası olarak Azure web sitesi Denetim Masası'nı alabilirsiniz birkaç ölçüm vardır.
-* **UNIX sunucusu** - [toplanan yükleyin](../../azure-monitor/app/java-collectd.md)
+![Application Insights kaynağınızı açın ve sunucular ' a tıklayın.](./media/how-do-i/121-servers.png)
 
-### <a name="to-display-more-performance-counters"></a>Daha fazla performans sayaçlarını görüntülemek için
-* İlk olarak, [yeni bir grafik ekleyin](../../azure-monitor/app/metrics-explorer.md) ve sayaç sunuyoruz temel kümesinde olup olmadığına bakın.
-* Aksi halde [performansı sayaç modülü tarafından toplanan kümesi sayaç eklemek](../../azure-monitor/app/performance-counters.md).
+### <a name="if-you-see-no-performance-counter-data"></a>Performans sayacı verisi görmüyorsanız
+* Kendi makinenizde veya bir VM 'de **IIS sunucusu** . [Durum İzleyicisi 'ı yükler](../../azure-monitor/app/monitor-performance-live-website-now.md).
+* **Azure Web sitesi** -henüz performans sayaçlarını desteklemiyoruz. Azure Web sitesi Denetim Masası 'nın standart bir parçası olarak alabileceğiniz birkaç ölçüm vardır.
+* **UNIX Server** - [yüklemesi toplanan](../../azure-monitor/app/java-collectd.md)
+
+### <a name="to-display-more-performance-counters"></a>Daha fazla performans sayacı görüntüleme
+* İlk olarak, [Yeni bir grafik ekleyin](../../azure-monitor/app/metrics-explorer.md) ve sayacın sunduğumuz temel bir küme içinde olup olmadığını görün.
+* Aksi takdirde, [sayacı performans sayacı modülü tarafından toplanan kümesine ekleyin](../../azure-monitor/app/performance-counters.md).

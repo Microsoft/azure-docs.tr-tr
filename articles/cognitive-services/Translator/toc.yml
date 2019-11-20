@@ -9,77 +9,17 @@
     - name: Hızlı Başlangıçlar
       items:
         - name: Metin çevirme
-          items:
-            - name: 'C#, REST'
-              href: quickstart-csharp-translate.md
-            - name: 'Go, REST'
-              href: quickstart-go-translate.md
-            - name: 'Java, REST'
-              href: quickstart-java-translate.md
-            - name: 'Node.js, REST'
-              href: quickstart-nodejs-translate.md
-            - name: 'Python, REST'
-              href: quickstart-python-translate.md
+          href: quickstart-translate.md
         - name: Metni başka dildi yazma
-          items:
-            - name: 'C#, REST'
-              href: quickstart-csharp-transliterate.md
-            - name: 'Go, REST'
-              href: quickstart-go-transliterate.md
-            - name: 'Java, REST'
-              href: quickstart-java-transliterate.md
-            - name: 'Node.js, REST'
-              href: quickstart-nodejs-transliterate.md
-            - name: 'Python, REST'
-              href: quickstart-python-transliterate.md
-        - name: Dili tanımlama
-          items:
-            - name: 'C#, REST'
-              href: quickstart-csharp-detect.md
-            - name: 'Go, REST'
-              href: quickstart-go-detect.md
-            - name: 'Java, REST'
-              href: quickstart-java-detect.md
-            - name: 'Node.js, REST'
-              href: quickstart-nodejs-detect.md
-            - name: 'Python, REST'
-              href: quickstart-python-detect.md
+          href: quickstart-transliterate.md
+        - name: Dili algılama
+          href: quickstart-detect.md
         - name: Sözcük çevirileri arama
-          items:
-            - name: 'C#, REST'
-              href: quickstart-csharp-dictionary.md
-            - name: 'Go, REST'
-              href: quickstart-go-dictionary.md
-            - name: 'Java, REST'
-              href: quickstart-java-dictionary.md
-            - name: 'Node.js, REST'
-              href: quickstart-nodejs-dictionary.md
-            - name: 'Python, REST'
-              href: quickstart-python-dictionary.md
+          href: quickstart-dictionary.md
         - name: Desteklenen dilleri alma
-          items:
-            - name: 'C#, REST'
-              href: quickstart-csharp-languages.md
-            - name: 'Go, REST'
-              href: quickstart-go-languages.md
-            - name: 'Java, REST'
-              href: quickstart-java-languages.md
-            - name: 'Node.js, REST'
-              href: quickstart-nodejs-languages.md
-            - name: 'Python, REST'
-              href: quickstart-python-languages.md
+          href: quickstart-languages.md
         - name: Tümce uzunluğu belirleme
-          items:
-            - name: 'C#, REST'
-              href: quickstart-csharp-sentences.md
-            - name: 'Go, REST'
-              href: quickstart-go-sentences.md
-            - name: 'Java, REST'
-              href: quickstart-java-sentences.md
-            - name: 'Node.js, REST'
-              href: quickstart-nodejs-sentences.md
-            - name: 'Python, REST'
-              href: quickstart-python-sentences.md
+          href: quickstart-sentences.md
     - name: Öğreticiler
       items:
         - name: 'Translator Metin Çevirisi için WPF uygulaması oluşturma, C#'
@@ -106,6 +46,12 @@
           href: prevent-translation.md
         - name: Dinamik sözlük özelliğini kullanma
           href: dynamic-dictionary.md
+        - name: Kapsayıcıları kullanma
+          items:
+            - name: Kapsayıcıları yükleme ve çalıştırma
+              href: how-to-install-containers.md
+            - name: Kapsayıcıları yapılandırma
+              href: translator-text-container-config.md
         - name: Güvenlik duvarı arkasında çeviri yapma
           href: firewalls.md
     - name: Örnekler
@@ -158,8 +104,6 @@
           href: 'https://aka.ms/TranslatorGitHub'
         - name: SSS
           href: 'https://www.microsoft.com/translator/faq.aspx'
-        - name: Bilgi Bankası
-          href: 'https://cognitive.uservoice.com/knowledgebase/topics/132647-translator'
         - name: Dil ve bölge desteği
           href: language-support.md
         - name: Fiyatlandırma
@@ -172,8 +116,6 @@
           href: request-limits.md
         - name: Stack Overflow
           href: 'https://stackoverflow.com/questions/tagged/microsoft-translator'
-        - name: UserVoice
-          href: 'https://cognitive.uservoice.com/forums/558796-translator'
 - name: Özel Çevirmen
   items:
     - name: Genel Bakış
@@ -238,5 +180,3 @@
           href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
         - name: Stack Overflow
           href: 'https://stackoverflow.com/questions/tagged/microsoft-translator'
-        - name: UserVoice
-          href: 'https://cognitive.uservoice.com/knowledgebase/articles/1855897-custom-translator-preview-resource-guide'

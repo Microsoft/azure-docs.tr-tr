@@ -1,44 +1,103 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Blueprints hizmeti belgeleri
+### YamlMime:Landing
+title: Azure Blueprints belgeleri
+summary: Resource Manager şablonları, rol tabanlı erişim denetimleri ve ilkeler gibi yapıtları tek bir şema tanımında paketleyerek dağıtımları basitleştirin.
 metadata:
-  title: 'Azure Blueprints Belgeleri - Öğreticiler, API Başvurusu'
-  description: 'Azure Blueprints, Azure ortamınızda yapıt oluşturmak, tanımlamak ve dağıtmak için kullanılan bir Azure hizmetidir.'
-  author: DCtheGeek
-  manager: carmonm
+  title: Azure Blueprints belgeleri
+  description: Resource Manager şablonları, rol tabanlı erişim denetimleri ve ilkeler gibi yapıtları tek bir şema tanımında paketleyerek dağıtımları basitleştirin.
   ms.service: blueprints
   ms.topic: landing-page
-  ms.date: 03/26/2019
+  ms.collection: collection
+  author: DCtheGeek
   ms.author: dacoulte
-abstract:
-  description: 'Azure Blueprints kaynakları, rol tabanlı erişim denetimlerini ve ilkeleri sağlamaya yönelik Azure Resource Manager şablonları gibi birleştirilebilir yapıtlar kullanarak bulut ortamlarını tekrarlanabilir şekilde dağıtmanıza ve güncelleştirmenize yardımcı olur.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Azure’da şema tanımları oluşturma, atama ve yönetmeyi öğrenin.'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              alt: Azure Portal
-              src: ./media/portal.svg
-            text: Azure Portal
-            href: create-blueprint-portal.md
-          - image:
-              alt: REST
-              src: ./media/rest.svg
-            text: REST
-            href: create-blueprint-rest-api.md
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: '<p><a href="/powershell/module/az.blueprint/#blueprint">Azure PowerShell</a></p>'
-          - title: Diller
-            html: <p><a href="/dotnet/api/overview/azure/blueprints/management">.NET için Azure SDK</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/blueprints/">API Başvurusu</a></p>
+  ms.date: 09/01/2019
+  ms.openlocfilehash: 44d21c07a81dc3fe5912137691b67af1a3e910e2
+  ms.sourcegitcommit: 6794fb51b58d2a7eb6475c9456d55eb1267f8d40
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/04/2019
+  ms.locfileid: "70239216"
+landingContent:
+- title: Azure Blueprints hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Blueprints nedir?
+      url: ./overview.md
+    - text: Dağıtım aşamaları
+      url: ./concepts/deployment-stages.md
+    - text: Şema yaşam döngüsü
+      url: ./concepts/lifecycle.md
+  - linkListType: video
+    links:
+    - text: Azure Friday - Azure Blueprints’e Genel Bakış
+      url: https://channel9.msdn.com/Shows/Azure-Friday/An-overview-of-Azure-Blueprints
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Yeni şema oluşturma (portal)
+      url: ./create-blueprint-portal.md
+    - text: Yeni şema oluşturma (PowerShell)
+      url: ./create-blueprint-powershell.md
+    - text: Yeni şema oluşturma (REST API)
+      url: ./create-blueprint-rest-api.md
+  - linkListType: tutorial
+    links:
+    - text: Şema örneği kullanma
+      url: ./tutorials/create-from-sample.md
+  - linkListType: deploy
+    links:
+    - text: Şema örnekleri dizini
+      url: ./samples/index.md
+- title: Şemaları özelleştirme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Dinamik parametreler
+      url: ./concepts/parameters.md
+    - text: Dizi yapıtları
+      url: ./concepts/sequencing-order.md
+    - text: Dağıtılan kaynakları kilitleme
+      url: ./concepts/resource-locking.md
+  - linkListType: tutorial
+    links:
+    - text: Kilitlerle yeni kaynakları koruma
+      url: ./tutorials/protect-new-resources.md
+- title: "'Ölçeğe uygun' olarak geliştirme"
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Mevcut şemaları güncelleştirme
+      url: ./how-to/update-existing-assignments.md
+    - text: Atamaları PowerShell ile yönetme
+      url: ./how-to/manage-assignments-ps.md
+    - text: PowerShell ile içeri ve dışarı aktarma
+      url: ./how-to/import-export-ps.md
+    - text: Şema İşleçleri uygulama
+      url: ./how-to/configure-for-blueprint-operator.md
+    - text: Şemaları Kod Olarak Yönetme
+      url: https://github.com/Azure/azure-blueprints/blob/master/README.md
+- title: Dahil olun
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Azure İdaresi YouTube Kanalı
+      url: https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ
+    - text: Ürün özelliği isteyin
+      url: https://feedback.azure.com/forums/915958-azure-governance
+    - text: Azure İdaresi için Teknoloji Topluluğu
+      url: https://techcommunity.microsoft.com/t5/Azure-Governance/bd-p/AzureGovernance
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Şemaya özgü işlevler
+      url: ./reference/blueprint-functions.md
+    - text: PowerShell modülü (PSGallery)
+      url: https://www.powershellgallery.com/packages/Az.Blueprint
+    - text: Azure PowerShell
+      url: /powershell/module/az.blueprint/#blueprint
+    - text: REST API
+      url: /rest/api/blueprints/
+    - text: .NET
+      url: /dotnet/api/overview/azure/blueprints/management

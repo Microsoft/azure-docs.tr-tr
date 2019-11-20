@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - İşletim sistemi diskini bağlama | Microsoft Docs
+title: Azure CLI Betik Örneği - İşletim sistemi diskini bağlama
 description: Azure CLI Betik Örneği - İşletim sistemi diskini bağlama
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
@@ -16,12 +16,12 @@ ms.workload: infrastructure
 ms.date: 02/27/2017
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 6f2d4c9a7871e0917b33407605abe1389eb4420e
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 292d67dafa768c82041a2cae8e6d888ee5d9050b
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60679349"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037603"
 ---
 # <a name="troubleshoot-a-vms-operating-system-disk"></a>VM işletim sistemi diski ile ilgili sorun giderme
 

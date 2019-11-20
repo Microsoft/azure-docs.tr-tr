@@ -37,25 +37,121 @@
       href: tutorial-govern-resources.md
       displayName: scope policy RBAC lock tag
     - name: 11 - VM’leri izleme ve güncelleştirme
-      href: tutorial-monitoring.md
-    - name: 12 - VM güvenliğini yönetme
+      href: tutorial-config-management.md
+    - name: 12 - VM’leri izleme
+      href: tutorial-monitor.md
+    - name: 13 - VM güvenliğini yönetme
       href: tutorial-azure-security.md
-    - name: 13 - SQL\IIS\.NET yığını kurma
+    - name: 14 - SQL\IIS\.NET yığını kurma
       href: tutorial-iis-sql.md
-    - name: 14 - SSL ile web sunucusunun güvenliğini sağlama
+    - name: 15 - SSL ile web sunucusunun güvenliğini sağlama
       href: tutorial-secure-web-server.md
 - name: Örnekler
   items:
-    - name: PowerShell
+    - name: PowerShell dizini
       href: powershell-samples.md
-    - name: Azure CLI
+    - name: PowerShell
+      items:
+        - name: Oluştur
+          items:
+            - name: Hızlı
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-vm-quick.md
+            - name: Tam olarak yapılandırılmış VM
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-vm.md
+            - name: Yüksek oranda kullanılabilir VM
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-nlb-vm.md
+            - name: Özel betik örneği
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-vm-iis.md
+            - name: DSC kullanma
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-iis-using-dsc.md
+            - name: VHD karşıya yüklemesinden VM
+              href: ./../scripts/virtual-machines-windows-powershell-upload-generalized-script.md
+            - name: Bir işletim sistemi diski iliştirme
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-vm-from-managed-os-disks.md
+            - name: Anlık görüntüden VM
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-vm-from-snapshot.md
+        - name: Depolamayı yönetme
+          items:
+            - name: VHD'den yönetilen disk oluşturma
+              href: ../scripts/virtual-machines-windows-powershell-sample-create-managed-disk-from-vhd.md
+            - name: Anlık görüntüden yönetilen disk oluşturma
+              href: ../scripts/virtual-machines-windows-powershell-sample-create-managed-disk-from-snapshot.md
+            - name: Yönetilen diski çoğaltma
+              href: ../scripts/virtual-machines-windows-powershell-sample-copy-managed-disks-to-same-or-different-subscription.md
+            - name: Anlık görüntüyü bir depolama hesabına VHD olarak dışarı aktarma
+              href: ../scripts/virtual-machines-windows-powershell-sample-copy-snapshot-to-storage-account.md
+            - name: Yönetilen diskin VHD’sini bir depolama hesabına dışarı aktarma
+              href: ../scripts/virtual-machines-windows-powershell-sample-copy-managed-disks-vhd.md
+            - name: VHD’den anlık görüntü oluşturma
+              href: ../scripts/virtual-machines-windows-powershell-sample-create-snapshot-from-vhd.md
+            - name: Anlık görüntü kopyalama
+              href: ../scripts/virtual-machines-windows-powershell-sample-copy-snapshot-to-same-or-different-subscription.md
+        - name: Güvenlik
+          items:
+            - name: VM’yi ve veri disklerini şifreleme
+              href: ./../scripts/virtual-machines-windows-powershell-sample-encrypt-vm.md?
+        - name: İzleme
+          items:
+            - name: Azure İzleyici
+              href: ./../scripts/virtual-machines-windows-powershell-sample-create-vm-oms.md
+            - name: Bir abonelikteki tüm VM’lerle ilgili ayrıntıları toplama
+              href: ../scripts/virtual-machines-powershell-sample-collect-vm-details.md
+    - name: Azure CLI dizini
       href: cli-samples.md
+    - name: CLI
+      items:
+        - name: Oluştur
+          items:
+            - name: Hızlı
+              href: ./../scripts/virtual-machines-windows-cli-sample-create-vm-quick-create.md
+            - name: Tam olarak yapılandırılmış VM
+              href: ./../scripts/virtual-machines-windows-cli-sample-create-vm.md
+            - name: Yüksek oranda kullanılabilir VM
+              href: ./../scripts/virtual-machines-windows-cli-sample-nlb.md
+            - name: Özel betik örneği
+              href: ./../scripts/virtual-machines-windows-cli-sample-create-vm-iis.md
+            - name: DSC yapılandırması kullanma
+              href: ./../scripts/virtual-machines-windows-cli-sample-create-iis-using-dsc.md
+        - name: Depolamayı yönetme
+          items:
+            - name: VHD'den yönetilen disk oluşturma
+              href: ../scripts/virtual-machines-windows-cli-sample-create-managed-disk-from-vhd.md
+            - name: Anlık görüntüden yönetilen disk oluşturma
+              href: ../scripts/virtual-machines-windows-cli-sample-create-managed-disk-from-snapshot.md
+            - name: Yönetilen diski kopyalama
+              href: ../scripts/virtual-machines-windows-cli-sample-copy-managed-disks-to-same-or-different-subscription.md
+            - name: Anlık görüntüyü depolama hesabına VHD olarak dışarı aktarma
+              href: ../scripts/virtual-machines-windows-cli-sample-copy-snapshot-to-storage-account.md
+            - name: Yönetilen diskin VHD’sini bir depolama hesabına dışarı aktarma
+              href: ../scripts/virtual-machines-windows-cli-sample-copy-managed-disks-vhd.md
+            - name: Anlık görüntüyü kopyalama
+              href: ../scripts/virtual-machines-windows-cli-sample-copy-snapshot-to-same-or-different-subscription.md
+        - name: Ağ
+          items:
+            - name: VM’ler arasındaki ağ trafiğinin güvenliğini sağlama
+              href: ./../scripts/virtual-machines-windows-cli-sample-create-vm-nsg.md
+        - name: Güvenlik
+          items:
+            - name: VM’yi ve veri disklerini şifreleme
+              href: ./../scripts/virtual-machines-windows-cli-sample-encrypt-vm.md
+            - name: İzleme
+              items:
+                - name: Azure İzleyici
+                  href: ./../scripts/virtual-machines-windows-cli-sample-create-vm-oms.md
 - name: Kavramlar
   items:
     - name: Azure Resource Manager
-      href: ../../azure-resource-manager/resource-group-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
-    - name: Bölgeler ve kullanılabilirlik
-      href: regions-and-availability.md
+      href: ../../azure-resource-manager/resource-group-overview.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
+    - name: Bölgeler
+      href: regions.md
+    - name: Kullanılabilirlik ve performans
+      items:
+        - name: Kullanılabilirlik
+          href: availability.md
+        - name: Birlikte bulunma
+          href: co-location.md
+        - name: Ağ performansı
+          href: ../..//virtual-network/virtual-network-optimize-network-bandwidth.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
     - name: VM türleri ve boyutları
       href: sizes.md
       items:
@@ -94,12 +190,24 @@
         - name: Önceki nesiller
           href: sizes-previous-gen.md
           displayName: D-series Ds-series A-series Basic
+        - name: Yalıtılmış boyutlar
+          href: isolation.md
         - name: Azure işlem birimleri (ACU)
           href: acu.md
         - name: Kıyaslama puanları
           href: compute-benchmark-scores.md
         - name: vCPU kotaları
           href: quotas.md
+        - name: Ayrılmış örnekler
+          items:
+            - name: VM'ler için ön ödeme yapma
+              href: prepay-reserved-vm-instances.md
+            - name: Azure ayırmaları nedir?
+              href: ../../billing/billing-save-compute-costs-reservations.md
+            - name: Sanal makine örneği boyut esnekliği
+              href: reserved-vm-instance-size-flexibility.md
+    - name: Ayrılmış konaklar
+      href: dedicated-hosts.md
     - name: Bakım ve güncelleştirmeler
       href: maintenance-and-updates.md
     - name: Disk depolama
@@ -108,8 +216,12 @@
           href: managed-disks-overview.md
         - name: IaaS VM’leri için disk türü seçme
           href: disks-types.md
+        - name: Şifreleme
+          href: disk-encryption.md
         - name: Yüksek performansa uygun tasarım yapma
           href: premium-storage-performance.md
+        - name: Disk genişletme
+          href: disk-bursting.md
         - name: Diskler için ölçeklenebilirlik hedefleri
           href: disk-scalability-targets.md
         - name: Diskler için yedekleme ve olağanüstü durum kurtarma
@@ -119,11 +231,17 @@
     - name: Ağ
       href: network-overview.md
     - name: Ölçek kümeleri
-      href: ../../virtual-machine-scale-sets/overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+      href: ../../virtual-machine-scale-sets/overview.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
     - name: Altyapı otomasyonu
       href: infrastructure-automation.md
-    - name: Güvenlik ve ilke
-      href: security-policy.md
+    - name: Güvenlik
+      items:
+        - name: Güvenlik ve ilke
+          href: security-policy.md
+        - name: Azure Disk Şifrelemesi
+          href: disk-encryption-overview.md
+        - name: Yerleşik güvenlik denetimleri
+          href: virtual-machines-windows-security-controls.md
     - name: Durumlar ve yaşam döngüsü
       href: states-lifecycle.md
     - name: İzleme
@@ -136,6 +254,12 @@
   items:
     - name: VM oluşturma
       items:
+        - name: Ayrılmış konakları kullanma
+          items:
+            - name: PowerShell
+              href: dedicated-hosts-powershell.md
+            - name: Portal
+              href: dedicated-hosts-portal.md
         - name: 'C# kullanma'
           href: csharp.md
         - name: Özelleştirilmiş disk kullanma
@@ -163,15 +287,40 @@
           href: windows-desktop-multitenant-hosting-deployment.md
     - name: VM’leri koruma
       items:
+        - name: Öneriler
+          href: security-recommendations.md
         - name: Tam zamanında erişim
           href: ../../security-center/security-center-just-in-time.md
         - name: Şifreleme
-          href: encrypt-disks.md
-          displayName: encryption
+          items:
+            - name: Windows için disk şifreleme senaryoları
+              href: disk-encryption-windows.md
+            - name: Azure CLI ile VM şifreleme
+              href: disk-encryption-cli-quickstart.md
+            - name: PowerShell ile VM şifreleme
+              href: disk-encryption-powershell-quickstart.md
+            - name: Azure portalıyla VM şifreleme
+              href: disk-encryption-portal-quickstart.md
+            - name: Azure Disk Şifrelemesi için anahtar kasası
+              href: disk-encryption-key-vault.md
+            - name: Disk şifrelemesi örnek betikleri
+              href: disk-encryption-sample-scripts.md
+            - name: Disk şifrelemesi sorunlarını giderme
+              href: disk-encryption-troubleshooting.md
+            - name: Disk şifrelemesi hakkında SSS
+              href: disk-encryption-faq.md
+            - name: Disk şifrelemesi - önceki sürüm (AAD)
+              items:
+                - name: Genel Bakış
+                  href: disk-encryption-overview-aad.md
+                - name: Azure Disk Şifrelemesi için anahtar kasası
+                  href: disk-encryption-key-vault-aad.md
+                - name: Windows için disk şifreleme senaryoları
+                  href: disk-encryption-windows-aad.md
         - name: WinRM kullanma
           href: winrm.md
         - name: Erişim denetimleri kullanma
-          href: ../../role-based-access-control/overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+          href: ../../role-based-access-control/overview.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: İlkeleri kullanma
           href: policy.md
         - name: Anahtar kasası oluşturma
@@ -179,25 +328,25 @@
     - name: VM’leri koruma
       items:
         - name: VM’leri yedekleme
-          href: ../../backup/backup-introduction-to-azure-backup.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+          href: ../../backup/backup-introduction-to-azure-backup.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
           items:
             - name: Tek bir VM’yi yedekleme
-              href: ../../backup/quick-backup-vm-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+              href: ../../backup/quick-backup-vm-cli.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: Birden fazla VM’yi yedekleme
-              href: ../../backup/tutorial-backup-vm-at-scale.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+              href: ../../backup/tutorial-backup-vm-at-scale.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: Diski geri yükleme
-              href: ../../backup/tutorial-restore-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+              href: ../../backup/tutorial-restore-disk.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: Dosyaları tek tek geri yükleme
-              href: ../../backup/tutorial-restore-files.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+              href: ../../backup/tutorial-restore-files.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: VM'ler için olağanüstü durum kurtarmayı ayarlama
-          href: ../../site-recovery/site-recovery-overview.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+          href: ../../site-recovery/site-recovery-overview.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
           items:
             - name: VM'ler için olağanüstü durum kurtarmayı etkinleştirme
-              href: ../../site-recovery/azure-to-azure-tutorial-enable-replication.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+              href: ../../site-recovery/azure-to-azure-tutorial-enable-replication.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: VM'ler için olağanüstü durum kurtarma tatbikatı çalıştırma
-              href: ../../site-recovery/azure-to-azure-tutorial-dr-drill.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+              href: ../../site-recovery/azure-to-azure-tutorial-dr-drill.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: VM'nin yükünü başka bir bölgeye devretme
-              href: ../../site-recovery/azure-to-azure-tutorial-failover-failback.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+              href: ../../site-recovery/azure-to-azure-tutorial-failover-failback.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
     - name: VM’leri yönetme
       items:
         - name: VM kullanımı
@@ -233,18 +382,20 @@
           href: mitigate-se.md
         - name: Zamanlanmış olaylar
           href: scheduled-events.md
+        - name: Zamanlanmış olayları izleme
+          href: scheduled-event-service.md
         - name: Meta verileri izleme
           href: instance-metadata-service.md
         - name: İç içe yerleştirilmiş sanallaştırmayı etkinleştirme
           href: nested-virtualization.md
-    - name: Maliyetleri yönetme
+    - name: VM’leri izleme
       items:
-        - name: VM'ler için ön ödeme yapma - Azure ayırmaları
-          href: prepay-reserved-vm-instances.md
-        - name: Azure ayırmaları nedir?
-          href: ../../billing/billing-save-compute-costs-reservations.md
-        - name: Sanal makine örneği boyut esnekliği
-          href: reserved-vm-instance-size-flexibility.md
+        - name: VM'ler için Azure İzleyici
+          href: ../../azure-monitor/insights/vminsights-overview.md
+        - name: Ölçüm uyarıları oluşturma
+          href: ../../azure-monitor/platform/alerts-metric.md
+        - name: Günlük uyarıları oluşturma
+          href: ../../azure-monitor/platform/alerts-log.md
     - name: Görüntüleri Kullanma
       items:
         - name: Paylaşılan görüntüler
@@ -256,17 +407,15 @@
             - name: Portal
               href: shared-images-portal.md
             - name: CLI
-              href: ../linux/shared-images.md
-            - name: Portal
-              href: shared-images-portal.md
-            - name: Görüntüleri kiracılar arasında paylaşma
+              href: ../linux/shared-images.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
+            - name: Paylaşım için uygulama kaydı
               href: share-images-across-tenants.md
             - name: Paylaşılan görüntü sorunlarını giderme
               href: troubleshooting-shared-images.md
         - name: Görüntü oluşturucu (önizleme)
           items:
             - name: Genel Bakış
-              href: ../linux/image-builder-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+              href: ../linux/image-builder-overview.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: Azure CLI kullanma
               href: image-builder.md
             - name: Görüntü galerileri için derleme
@@ -274,9 +423,9 @@
             - name: Mevcut görüntüyü güncelleştirme
               href: image-builder-gallery-update-image-version.md
             - name: Betikleri depolama
-              href: ../linux/image-builder-user-assigned-identity.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+              href: ../linux/image-builder-user-assigned-identity.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: Şablon başvurusu
-              href: ../linux/image-builder-json.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+              href: ../linux/image-builder-json.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
             - name: Sorun giderme
               href: 'https://github.com/danielsollondon/azvmimagebuilder/blob/master/troubleshootingaib.md'
         - name: Görüntüleri bulma ve kullanma
@@ -296,12 +445,16 @@
     - name: Kullanılabilirlik ve ölçek
       items:
         - name: Sanal Makine Ölçek Kümeleri
-          href: ../../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+          href: ../../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: Yüksek kullanılabilirlik
           href: manage-availability.md
+        - name: Yakınlık yerleştirme grubu oluşturma
+          items:
+            - name: Portal
+              href: proximity-placement-groups-portal.md
+            - name: PowerShell
+              href: proximity-placement-groups.md
         - name: Dikey olarak ölçeklendirme
-          href: vertical-scaling-automation.md
-        - name: Kullanılabilirlik alanında VM oluşturma
           items:
             - name: PowerShell
               href: create-powershell-availability-zone.md
@@ -350,10 +503,16 @@
           href: detach-disk.md
         - name: Şablon ile diskleri dağıtma
           href: using-managed-disks-template-deployments.md
+        - name: Diske VHD yükleme - PowerShell
+          href: disks-upload-vhd-to-managed-disk-powershell.md
         - name: Bir diski yeniden boyutlandırma
           href: expand-os-disk.md
+        - name: Diskleri yönetmek için Depolama Gezgini kullanma
+          href: disks-use-storage-explorer-managed-disks.md
         - name: Bir diskin anlık görüntüsünü alma
           href: snapshot-copy-managed-disk.md
+        - name: Artımlı anlık görüntü oluşturma
+          href: disks-incremental-snapshots.md
         - name: Yönetilmeyen diskleri yedekleme
           href: incremental-snapshots.md
         - name: Geçiş ve dönüştürme
@@ -370,7 +529,7 @@
           items:
             - name: Yazma hızlandırıcıyı etkinleştirme
               href: how-to-enable-write-accelerator.md
-            - name: Ultra SSD'leri etkinleştirme
+            - name: Ultra diskleri kullanma
               href: disks-enable-ultra-ssd.md
             - name: Disk kıyaslama
               href: disks-benchmarks.md
@@ -384,7 +543,7 @@
       href: ps-common-network-ref.md
       items:
         - name: Sanal ağ oluşturma
-          href: ../../virtual-network/virtual-networks-create-vnet-arm-pportal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+          href: ../../virtual-network/virtual-networks-create-vnet-arm-pportal.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: Bağlantı noktalarını VM’ye açma
           items:
             - name: Azure portal
@@ -392,15 +551,15 @@
             - name: Azure PowerShell
               href: nsg-quickstart-powershell.md
         - name: Genel IP adresi atama
-          href: ../../virtual-network/virtual-network-deploy-static-pip-arm-portal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+          href: ../../virtual-network/virtual-network-deploy-static-pip-arm-portal.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: Birden çok NIC kullanma
           href: multiple-nics.md
         - name: Hızlandırılmış ağ kullanma
-          href: ../../virtual-network/create-vm-accelerated-networking-powershell.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+          href: ../../virtual-network/create-vm-accelerated-networking-powershell.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: Genel DNS adı atama
           href: portal-create-fqdn.md
         - name: DNS çözümleme
-          href: ../../dns/dns-for-azure-services.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+          href: ../../dns/dns-for-azure-services.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
     - name: Yönetilen kimlikleri yapılandırma
       items:
         - name: Portal
@@ -422,9 +581,9 @@
         - name: Aboneliği veya kaynak grubunu değiştirme
           href: move-vm.md
         - name: Bölgeleri taşıma
-          href: ../../site-recovery/azure-to-azure-tutorial-migrate.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+          href: ../../site-recovery/azure-to-azure-tutorial-migrate.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: Kullanılabilirlik alanına taşıma
-          href: ../../site-recovery/move-azure-vms-avset-azone.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json
+          href: ../../site-recovery/move-azure-vms-avset-azone.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: AWS’Den ve şirket içi VM’lerden geçiş
           href: on-prem-to-azure.md
           items:
@@ -433,7 +592,7 @@
             - name: Amazon Web Services’dan (AWS)
               href: aws-to-azure.md
             - name: Azure Site Recovery’yi kullanma
-              href: ../../site-recovery/site-recovery-migrate-to-azure.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+              href: ../../site-recovery/site-recovery-migrate-to-azure.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
         - name: Klasik’ten Azure Resource Manager’a geçiş
           href: migration-classic-resource-manager-overview.md
           items:
@@ -475,7 +634,7 @@
 - name: Kaynaklar
   items:
     - name: Yazar şablonları
-      href: ../../azure-resource-manager/resource-group-authoring-templates.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json
+      href: ../../azure-resource-manager/resource-group-authoring-templates.md?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
     - name: Microsoft Learn ile becerilerinizi geliştirin
       href: /learn/browse/?products=azure-virtual-machines
     - name: Azure Yol Haritası

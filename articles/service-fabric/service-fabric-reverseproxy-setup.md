@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric kümesi ters Proxy'yi | Microsoft Docs
-description: Ayarlama ve Service Fabric'in ters proxy ayarlarını yapılandırma hakkında bilgi edinin.
+title: Azure Service Fabric ters proxy ayarlama | Microsoft Docs
+description: Service Fabric ters proxy 'sini ayarlamayı ve yapılandırmayı anlayın.
 services: service-fabric
 documentationcenter: na
 author: jimacoMS2
@@ -8,50 +8,49 @@ manager: chackdan
 editor: ''
 ms.assetid: ''
 ms.service: service-fabric
-ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 11/13/2018
-ms.author: v-jamebr
-ms.openlocfilehash: 7f1b6f955dd3f59f6c17403b536cf99d666aab08
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: pepogors
+ms.openlocfilehash: a80eb1ba341a1b15da7ad59203a1d25284d03fd0
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60393019"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72933907"
 ---
-# <a name="set-up-and-configure-reverse-proxy-in-azure-service-fabric"></a>Ayarlama ve Azure Service Fabric ters proxy ayarlarını yapılandırma
-Ters proxy, bulmak ve http uç noktaları olan diğer hizmetlerle iletişim kurma bir Service Fabric kümesinde çalışan mikro hizmetler yardımcı olan isteğe bağlı bir Azure Service Fabric hizmetidir. Daha fazla bilgi için bkz. [ters proxy Azure Service fabric'te](service-fabric-reverseproxy.md). Bu makalede ayarlama ve kümedeki ters Ara sunucu yapılandırma gösterilmektedir. 
+# <a name="set-up-and-configure-reverse-proxy-in-azure-service-fabric"></a>Azure Service Fabric ters proxy ayarlama ve yapılandırma
+Ters proxy, bir Service Fabric kümesinde çalışan mikro hizmetlerin HTTP uç noktalarına sahip diğer hizmetleri bulmasına ve iletişim kurmasına yardımcı olan isteğe bağlı bir Azure Service Fabric hizmetidir. Daha fazla bilgi edinmek için bkz. [Azure Service Fabric 'de ters proxy](service-fabric-reverseproxy.md). Bu makalede, kümenizde ters proxy 'nin nasıl ayarlanacağı ve yapılandırılacağı gösterilir. 
 
-## <a name="enable-reverse-proxy-using-azure-portal"></a>Azure portalını kullanarak ters Proxy'yi Etkinleştir
+## <a name="enable-reverse-proxy-using-azure-portal"></a>Azure portal kullanarak ters proxy 'yi etkinleştirme
 
-Azure portalında yeni bir Service Fabric kümesi oluşturduğunuzda, ters proxy etkinleştirmek için bir seçenek sunar. Ters proxy portalı üzerinden kullanmak için mevcut kümesi yükseltemezsiniz. 
+Azure portal, yeni bir Service Fabric kümesi oluşturduğunuzda ters proxy 'yi etkinleştirme seçeneği sunar. Mevcut bir kümeyi Portal üzerinden ters proxy kullanacak şekilde yükseltemezsiniz. 
 
-Ters Proxy'yi yapılandırmak için olduğunda, [Azure portalını kullanarak küme oluşturma](./service-fabric-cluster-creation-via-portal.md), aşağıdakileri yaptığınızdan emin olun:
+[Azure Portal kullanarak bir küme oluşturduğunuzda](./service-fabric-cluster-creation-via-portal.md)ters proxy 'yi yapılandırmak için aşağıdakileri yaptığınızdan emin olun:
 
-1. İçinde **2. adım: Küme Yapılandırması**altında **düğüm türü yapılandırması**seçin **etkinleştir ters proxy**.
+1. **2. Adım: küme yapılandırması**altında, **düğüm türü yapılandırması**altında, **ters proxy 'yi etkinleştir**' i seçin.
 
-   ![Portal ters Proxy'yi Etkinleştir](./media/service-fabric-reverseproxy-setup/enable-rp-portal.png)
-2. (İsteğe bağlı) Güvenli ters Proxy'yi yapılandırmak için bir SSL sertifikası'nı yapılandırmanız gerekir. İçinde **3. adım: Güvenlik**, **küme güvenlik ayarlarını yapılandırın**altında **yapılandırma türü**seçin **özel**. Ardından, altında **Ters Proxy SSL sertifikası**seçin **bir ters proxy SSL sertifikası dahil** ve sertifika ayrıntılarınızı girin.
+   ![Portalda ters proxy 'yi etkinleştir](./media/service-fabric-reverseproxy-setup/enable-rp-portal.png)
+2. Seçim Güvenli ters proxy 'yi yapılandırmak için bir SSL sertifikası yapılandırmanız gerekir. **Adım 3: güvenlik**, **küme güvenlik ayarlarını yapılandırma**bölümünde, **yapılandırma türü**altında **özel**' i seçin. Ardından, **ters proxy SSL sertifikası**' nın altında, **ters proxy Için SSL sertifikası Ekle** ' yi seçin ve sertifika ayrıntılarınızı girin.
 
-   ![Portalda güvenli ters proxy ayarlarını yapılandırma](./media/service-fabric-reverseproxy-setup/configure-rp-certificate-portal.png)
+   ![Portalda güvenli ters proxy 'yi yapılandırma](./media/service-fabric-reverseproxy-setup/configure-rp-certificate-portal.png)
 
-   Kümeyi oluşturduğunuzda ters proxy ile bir sertifika yapılandırmak isterseniz, bu nedenle daha sonra küme kaynak grubu için Resource Manager şablonu aracılığıyla yapabilirsiniz. Daha fazla bilgi için bkz. [Azure Resource Manager şablonları aracılığıyla ters Proxy'yi Etkinleştir](#enable-reverse-proxy-via-azure-resource-manager-templates).
+   Kümeyi oluştururken ters proxy 'yi bir sertifika ile yapılandırmamayı seçerseniz, daha sonra kümenin kaynak grubu için Kaynak Yöneticisi şablonu aracılığıyla bunu yapabilirsiniz. Daha fazla bilgi için bkz. [Azure Resource Manager şablonları aracılığıyla ters proxy 'Yi etkinleştirme](#enable-reverse-proxy-via-azure-resource-manager-templates).
 
-## <a name="enable-reverse-proxy-via-azure-resource-manager-templates"></a>Azure Resource Manager şablonları aracılığıyla ters Proxy'yi Etkinleştir
+## <a name="enable-reverse-proxy-via-azure-resource-manager-templates"></a>Azure Resource Manager şablonları aracılığıyla ters proxy 'yi etkinleştirme
 
-Azure'da kümeler için Service Fabric ters proxy etkinleştirmek için Azure Resource Manager şablonu kullanabilirsiniz. Kümeyi oluşturduğunuzda veya daha sonraki bir zamanda küme güncelleştirerek etkinleştirmek, ters proxy etkinleştirebilirsiniz. 
+Azure üzerindeki kümeler için, Service Fabric ' de ters proxy 'yi etkinleştirmek üzere Azure Resource Manager şablonunu kullanabilirsiniz. Kümeyi oluşturduğunuzda ters proxy 'yi etkinleştirebilir veya kümeyi daha sonra güncelleştirerek etkinleştirin. 
 
-Yeni bir küme için yapabilecekleriniz [özel bir Resource Manager şablonu oluşturma](service-fabric-cluster-creation-via-arm.md) veya örnek şablonu kullanabilirsiniz. 
+Yeni bir küme için [özel bir kaynak yöneticisi şablonu oluşturabilir](service-fabric-cluster-creation-via-arm.md) veya örnek bir şablon kullanabilirsiniz. 
 
-Bir Azure kümesinde için güvenli ters proxy ayarlarını yapılandırmanıza yardımcı olabilecek örnek Resource Manager şablonları bulabilirsiniz [güvenli Ters Proxy örnek şablonları](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/ReverseProxySecureSample) GitHub üzerinde. Başvurmak [HTTPS Ters Proxy Yapılandırma güvenli bir küme içinde](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/ReverseProxySecureSample/README.md#configure-https-reverse-proxy-in-a-secure-cluster) ve benioku dosyasındaki yönergeleri ve şablonları bir sertifikayla güvenli ters proxy ayarlarını yapılandırma ve sertifika geçişi işlemek için kullanılacak.
+GitHub 'daki [güvenli ters proxy örnek şablonlarında](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Reverse-Proxy-Sample) bir Azure kümesi için güvenli ters proxy 'yi yapılandırmanıza yardımcı olabilecek örnek kaynak yöneticisi şablonlar bulabilirsiniz. Güvenli ters proxy 'yi bir sertifikayla yapılandırmak ve sertifika rollover 'ı işlemek amacıyla kullanılacak yönergeler ve şablonlar için, BENIOKU dosyasındaki [güvenli bir kümede https ters proxy 'Yi yapılandırma](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Reverse-Proxy-Sample/README.md#configure-https-reverse-proxy-in-a-secure-cluster) konusuna bakın.
 
-Var olan bir küme için küme kaynağı için Resource Manager şablonu dışarı aktarabilirsiniz kullanarak grup [Azure portalında](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-export-template), [PowerShell](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-export-template-powershell), veya [Azure CLI](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-export-template-cli).
+Mevcut bir küme için, [Azure Portal](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-export-template), [POWERSHELL](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-export-template-powershell)veya [Azure CLI](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-export-template-cli)kullanarak kümenin kaynak grubu için Kaynak Yöneticisi şablonunu dışarı aktarabilirsiniz.
 
-Resource Manager şablonu oluşturduktan sonra aşağıdaki adımlarla ters proxy etkinleştirebilirsiniz:
+Kaynak Yöneticisi şablonunuz olduktan sonra, ters proxy 'yi aşağıdaki adımlarla etkinleştirebilirsiniz:
 
-1. Ters proxy için bir bağlantı noktasını tanımlamak [parametreler bölümü](../azure-resource-manager/resource-group-authoring-templates.md) şablonu.
+1. Şablonun [Parametreler bölümündeki](../azure-resource-manager/resource-group-authoring-templates.md) ters proxy için bir bağlantı noktası tanımlayın.
 
     ```json
     "SFReverseProxyPort": {
@@ -62,9 +61,9 @@ Resource Manager şablonu oluşturduktan sonra aşağıdaki adımlarla ters prox
         }
     },
     ```
-2. Her bir nodetype nesneleri için bağlantı noktasını belirtin [ **Microsoft.ServiceFabric/clusters** ](https://docs.microsoft.com/azure/templates/microsoft.servicefabric/clusters) [kaynak türü bölümüne](../azure-resource-manager/resource-group-authoring-templates.md).
+2. [**Microsoft. ServiceFabric/kümeler**](https://docs.microsoft.com/azure/templates/microsoft.servicefabric/clusters) [kaynak türü bölümündeki](../azure-resource-manager/resource-group-authoring-templates.md)NodeType nesnelerinin her biri için bağlantı noktasını belirtin.
 
-    Bağlantı noktası, parametre adı, reverseProxyEndpointPort tanımlanır.
+    Bağlantı noktası, Smarproxyendpointport parametre adı tarafından tanımlanır.
 
     ```json
     {
@@ -84,7 +83,7 @@ Resource Manager şablonu oluşturduktan sonra aşağıdaki adımlarla ters prox
         ...
     }
     ```
-3. SSL sertifikaları için ters proxy bağlantı noktası üzerinde yapılandırmak için sertifikaya eklemek ***reverseProxyCertificate*** özelliğinde **Microsoft.ServiceFabric/clusters** [kaynak türü bölüm](../resource-group-authoring-templates.md).
+3. Ters proxy 'nin bağlantı noktasında SSL sertifikalarını yapılandırmak için, sertifikayı **Microsoft. ServiceFabric/kümeler** [kaynak türü bölümündeki](../resource-group-authoring-templates.md) ***smarproxycertificate*** özelliğine ekleyin.
 
     ```json
     {
@@ -107,8 +106,8 @@ Resource Manager şablonu oluşturduktan sonra aşağıdaki adımlarla ters prox
     }
     ```
 
-### <a name="supporting-a-reverse-proxy-certificate-thats-different-from-the-cluster-certificate"></a>Küme sertifikası farklı bir ters proxy sertifikasını destekleme
- Ters proxy sertifikasını kümenin güvenliğini sertifikasından farklıysa, ardından daha önce belirtilen sertifika sanal makine üzerinde yüklenmeli ve Service Fabric erişebilmesi erişim denetim listesine (ACL) eklendi. Bu yapılabilir [ **Microsoft.Compute/virtualMachineScaleSets** ](https://docs.microsoft.com/azure/templates/microsoft.compute/virtualmachinescalesets) [kaynak türü bölümüne](../resource-group-authoring-templates.md). Yükleme için sertifika için osProfile ekleyin. ACL sertifika şablonu uzantısı bölümünü güncelleştirebilirsiniz.
+### <a name="supporting-a-reverse-proxy-certificate-thats-different-from-the-cluster-certificate"></a>Küme sertifikasından farklı bir ters proxy sertifikası destekleme
+ Ters proxy sertifikası, kümenin güvenliğini sağlayan sertifikadan farklıysa, daha önce belirtilen sertifikanın sanal makinede yüklü olması ve Service Fabric erişebilmesi için erişim denetim listesine (ACL) eklenmiş olması gerekir. Bu işlem, [**Microsoft. COMPUTE/virtualMachineScaleSets**](https://docs.microsoft.com/azure/templates/microsoft.compute/virtualmachinescalesets) [kaynak türü bölümünde](../resource-group-authoring-templates.md)yapılabilir. Yükleme için sertifikayı osProfile ekleyin. Şablonun uzantı bölümü ACL 'deki sertifikayı güncelleştirebilir.
 
   ```json
   {
@@ -160,15 +159,15 @@ Resource Manager şablonu oluşturduktan sonra aşağıdaki adımlarla ters prox
     }
   ```
 > [!NOTE]
-> Var olan bir kümede ters proxy etkinleştirmek için küme sertifikası farklı sertifikaları kullandığınızda, ters proxy sertifikasını yükleyin ve ters proxy etkinleştirmeden önce küme üzerinde bir ACL güncelleştirin. Tamamlamak [Azure Resource Manager şablonu](service-fabric-cluster-creation-via-arm.md) belirtilen ayarları kullanarak dağıtım daha önce ters proxy etkinleştirmek için bir dağıtım başlamadan önce adımları 1-3.
+> Mevcut bir kümede ters proxy 'yi etkinleştirmek için küme sertifikasından farklı sertifikalar kullandığınızda, ters proxy 'yi etkinleştirmeden önce ters proxy sertifikasını yükledikten sonra kümedeki ACL 'yi güncelleştirin. 1-3 adımlarında ters proxy 'yi etkinleştirmek üzere bir dağıtımı başlatmaya başlamadan önce, daha önce bahsedilen ayarları kullanarak [Azure Resource Manager şablonu](service-fabric-cluster-creation-via-arm.md) dağıtımını doldurun.
 
-## <a name="enable-reverse-proxy-on-standalone-clusters"></a>Tek başına kümeler üzerinde ters Proxy'yi Etkinleştir
+## <a name="enable-reverse-proxy-on-standalone-clusters"></a>Tek başına kümelerde ters proxy 'yi etkinleştir
 
-Tek başına kümeler için ters proxy ClusterConfig.json dosyasında etkinleştirin. Ters proxy küme oluşturma veya var olan bir küme yapılandırmasını yükselterek etkinleştirebilirsiniz. ClusterConfig.json dosyalarında ayarları hakkında daha fazla bilgi edinmek için [tek başına küme ayarlarını](./service-fabric-cluster-manifest.md).
+Tek başına kümeler için, ClusterConfig. json dosyasında ters proxy 'yi etkinleştirirsiniz. Küme oluşturulurken ters proxy 'yi etkinleştirebilir veya var olan bir kümenin yapılandırmasını yükselterek. ClusterConfig. JSON dosyalarında kullanılabilen ayarlar hakkında daha fazla bilgi edinmek için bkz. [tek başına küme ayarları](./service-fabric-cluster-manifest.md).
 
-Aşağıdaki adımlar ters proxy etkinleştirmek için kullanılacak ayarları gösterir ve isteğe bağlı olarak, ters proxy X.509 sertifikası ile güvenli hale getirmek için. 
+Aşağıdaki adımlarda, ters proxy 'yi etkinleştirmek için kullanılacak ayarlar ve isteğe bağlı olarak, bir X. 509.440 sertifikasıyla ters proxy 'yi güvenli hale getirmek için kullanabileceğiniz ayarlar gösterilmektedir. 
 
-1. Ters proxy etkinleştirmek için **reverseProxyEndpointPort** altında düğüm türü için değer **özellikleri** küme yapılandırmasını. Ters proxy 19081 "NodeType0" türüne sahip düğümleri için uç nokta bağlantı noktası ayarı aşağıdaki JSON'u göstermektedir:
+1. Ters proxy 'yi etkinleştirmek için, küme yapılandırması 'ndaki **Özellikler** altında bulunan düğüm türü Için **Smarproxyendpointport** değerini ayarlayın. Aşağıdaki JSON, "NodeType0" türüne sahip düğümler için ters proxy uç noktası bağlantı noktasını 19081 olarak ayarlamayı gösterir:
 
    ```json
        "properties": {
@@ -184,8 +183,8 @@ Aşağıdaki adımlar ters proxy etkinleştirmek için kullanılacak ayarları g
           ...
        }
    ```
-2. (İsteğe bağlı) Güvenli bir ters proxy için bir sertifikaya yapılandırma **güvenlik** bölümüne **özellikleri**. 
-   - Geliştirme veya test ortamı için kullanabileceğiniz **ReverseProxyCertificate** ayarı:
+2. Seçim Güvenli bir ters proxy için, **Özellikler**altında **güvenlik** bölümünde bir sertifika yapılandırın. 
+   - Geliştirme veya test ortamı için, **Smarproxycertificate** ayarını kullanabilirsiniz:
 
       ```json
           "properties": {
@@ -205,7 +204,7 @@ Aşağıdaki adımlar ters proxy etkinleştirmek için kullanılacak ayarları g
               ...
           }
       ```
-   - Bir üretim ortamı için **ReverseProxyCertificateCommonNames** ayarı önerilir:
+   - Bir üretim ortamında, **Smarproxycertificatecommonnames** ayarı önerilir:
 
       ```json
           "properties": {
@@ -229,40 +228,40 @@ Aşağıdaki adımlar ters proxy etkinleştirmek için kullanılacak ayarları g
           }
       ```
 
-   Ve hakkında daha fazla yapılandırma bir tek başına küme yanı sıra ters proxy güvenliğini sağlamak için kullanılan sertifikaları yapılandırma hakkında daha fazla ayrıntı için sertifikaları yönetme bilgi edinmek için [X509 sertifika tabanlı güvenlik](./service-fabric-windows-cluster-x509-security.md).
+   Tek başına bir küme için sertifika yapılandırma ve yönetme hakkında daha fazla bilgi edinmek ve ters proxy 'yi güvenli hale getirmek için kullanılan sertifikaları yapılandırma hakkında daha fazla ayrıntı için bkz. [x509 sertifika tabanlı güvenlik](./service-fabric-windows-cluster-x509-security.md).
 
-Ters proxy etkinleştirmek için ClusterConfig.json dosyanızı değiştirdiğiniz sonra yönergeleri izleyin [küme yapılandırmasını yükseltme](service-fabric-cluster-config-upgrade-windows-server.md) kümenize değişiklikleri göndermek için.
+Ters proxy 'yi etkinleştirmek için ClusterConfig. JSON dosyanızı değiştirdikten sonra, değişiklikleri kümenize göndermek için [küme yapılandırmasını yükseltme](service-fabric-cluster-config-upgrade-windows-server.md) bölümündeki yönergeleri izleyin.
 
 
-## <a name="expose-reverse-proxy-on-a-public-port-through-azure-load-balancer"></a>Ters proxy Azure Load Balancer üzerinden bir genel bağlantı noktasını kullanıma sunma
+## <a name="expose-reverse-proxy-on-a-public-port-through-azure-load-balancer"></a>Azure Load Balancer aracılığıyla, genel bir bağlantı noktasında ters proxy kullanıma sunma
 
-Ters dışından Ara sunucuya Azure kümesine yönelik olarak, Azure Load Balancer kuralları ve bir Azure sistem durumu araştırması için ters proxy bağlantı noktası ayarlayın. Bu adımlar, kümeyi oluşturduktan sonra herhangi bir zamanda Azure portalı ya da Resource Manager şablonu kullanarak gerçekleştirilebilir. 
+Ters proxy 'yi bir Azure kümesi dışından ele almak için, ters proxy bağlantı noktası için Azure Load Balancer kuralları ve bir Azure sistem durumu araştırması ayarlayın. Bu adımlar, kümeyi oluşturduktan sonra herhangi bir zamanda Azure portal veya Kaynak Yöneticisi şablonu kullanılarak gerçekleştirilebilir. 
 
 > [!WARNING]
-> Yük Dengeleyici ters proxy bağlantı noktası yapılandırdığınızda, bir HTTP uç noktasını açığa tüm mikro Hizmetleri kümedeki küme dışında'ten adreslenebilir. Başka bir deyişle, mikro hizmetler iç olacak şekilde tasarlanmış belirlenen kötü niyetli bir kullanıcı tarafından keşfedilebilir olabilir. Bu, potansiyel olarak yararlanılabilir ciddi güvenlik açıklarını sunar; Örneğin:
+> Load Balancer ' de ters proxy 'nin bağlantı noktasını yapılandırdığınızda, kümedeki bir HTTP uç noktasını kullanıma sunan tüm mikro hizmetler, küme dışından adreslenemez. Diğer bir deyişle, mikro hizmetlerin iç olduğu, belirlenen kötü amaçlı kullanıcı tarafından bulunabilir olabileceği anlamına gelir. Bu potansiyel olarak yararlanılabilen ciddi güvenlik açıkları sunmaktadır. Örneğin:
 >
-> * Kötü niyetli bir kullanıcı, sürekli olarak yeterli saldırı yüzeyini yok. bir iç hizmet çağırarak bir hizmet reddi saldırısı başlatabilir.
-> * Kötü niyetli bir kullanıcının istenmeyen davranışla bir iç hizmet için hatalı biçimlendirilmiş paketlerini teslim edebilir.
-> * İç olacak şekilde tasarlanmış bir hizmet, böylece kötü niyetli bir kullanıcı için bu hassas bilgileri gösterme, küme dışındaki hizmetlere açığa amaçlanmaz özel veya hassas bilgiler döndürebilir. 
+> * Kötü niyetli bir Kullanıcı, yeterince sıkı bir saldırı yüzeyi olmayan bir iç hizmeti tekrar çağırarak bir hizmet reddi saldırısı başlatabilir.
+> * Kötü niyetli bir Kullanıcı, dahili bir hizmete hatalı oluşturulmuş paketler sunabilir ve bu durum istenmeden davranışa neden olabilir.
+> * İç olması amaçlanan bir hizmet, küme dışındaki hizmetlere sunulmayan özel veya hassas bilgileri döndürebilir ve bu nedenle bu hassas bilgileri kötü amaçlı bir kullanıcıya ortaya çıkarabiliriz. 
 >
-> Tam olarak anlamak ve kümenizi ve ters proxy bağlantı noktası genel yapmadan önce bunun üzerinde çalışan uygulamalar için olası güvenlik sonuçları azaltmak emin olun. 
+> Ters proxy bağlantı noktasını genel yapmadan önce kümeniz ve üzerinde çalışan uygulamalar için olası güvenlik kollerini tam olarak anladığınızdan ve azaltmanıza emin olun. 
 >
 
-Ters proxy tek başına küme için genel olarak kullanıma sunmak istiyorsanız, bunu bir şekilde kümeyi barındıran sistemde bağlıdır ve bu makalenin kapsamı dışındadır. Ancak, genel olarak, ters proxy gösterme hakkında yukarıdaki uyarı hala geçerlidir.
+Tek başına bir küme için ters proxy 'yi genel kullanıma sunmak istiyorsanız, bunu yaptığınız yol, kümeyi barındıran sisteme bağlı olur ve bu makalenin kapsamı dışındadır. Ancak, ters proxy genel kullanıma sunulmasına ilişkin önceki uyarı, hala geçerlidir.
 
-### <a name="expose-the-reverse-proxy-using-azure-portal"></a>Azure portalını kullanarak bir ters proxy kullanıma sunma 
+### <a name="expose-the-reverse-proxy-using-azure-portal"></a>Azure portal kullanarak ters proxy 'yi kullanıma sunma 
 
-1. Azure portalında kümenizin kaynak grubuna tıklayın ve ardından kümenizin yük dengeleyiciye tıklayın.
-2. Sistem durumu araştırması için ters proxy bağlantı noktası yük dengeleyici penceresinin sol bölmede altında eklemek için **ayarları**, tıklayın **sistem durumu araştırmalarının**. Ardından **Ekle** pencere durumu üst kısmında araştırmaları ve ters proxy bağlantı noktası ayrıntılarını girin ve ardından tıklayın **Tamam**. Kümeyi oluştururken değiştirmediğiniz sürece varsayılan olarak, 19081, ters proxy bağlantı noktasıdır.
+1. Azure portal, kümenizin kaynak grubuna ve ardından kümeniz için yük dengeleyiciye tıklayın.
+2. Ters proxy bağlantı noktası için bir sistem durumu araştırması eklemek üzere, yük dengeleyici penceresinin sol bölmesinde, **Ayarlar**' ın altında, **sistem durumu araştırmaları**' na tıklayın. Sonra, sistem durumu araştırmaları penceresinin en üstündeki **Ekle** ' ye tıklayın ve ters proxy bağlantı noktasının ayrıntılarını girin ve ardından **Tamam**' a tıklayın. Varsayılan olarak, kümeyi oluştururken değiştirmediğiniz müddetçe, ters proxy bağlantı noktası 19081 ' dir.
 
    ![Ters proxy sistem durumu araştırmasını yapılandırma](./media/service-fabric-reverseproxy-setup/lb-rp-probe.png)
-3. Ters proxy bağlantı noktası, yük dengeleyici penceresinin sol bölmede altında ortaya çıkarmak için yük dengeleyici kuralını eklemek için **ayarları**, tıklayın **Yük Dengeleme kuralları**. Ardından **Ekle** üst kısmında, Yük Dengeleme kuralları penceresi ve ters proxy bağlantı noktası ayrıntılarını girin. Ayarladığınızdan emin olun **bağlantı noktası** , istediğiniz, kullanıma sunulan ters proxy bağlantı noktası değerine **arka uç bağlantı noktası** ters proxy, etkinleştirildiğinde ayarladığınız bağlantı noktasının değerini ve **Durumaraştırması** önceki adımda yapılandırdığınız durum araştırması için değer. Uygun bir şekilde tıklayın diğer alanları **Tamam**.
+3. Ters proxy bağlantı noktasını kullanıma sunmak için bir Load Balancer kuralı eklemek üzere, yük dengeleyici penceresinin sol bölmesinde, **Ayarlar**altında **Yük Dengeleme kuralları**' na tıklayın. Ardından Yük Dengeleme kuralları penceresinin en üstündeki **Ekle** ' ye tıklayın ve ters proxy bağlantı noktasının ayrıntılarını girin. **Bağlantı noktası** değerini, ters proxy 'nin açık olmasını istediğiniz bağlantı noktasına, **arka uç bağlantı noktası** değerini, ters proxy 'yi etkinleştirdiğinizde ayarladığınız bağlantı noktasına ve **sistem durumu araştırma** değerini, önceki adımda yapılandırdığınız durum araştırmasına ayarladığınızdan emin olun. Diğer alanları uygun şekilde ayarlayın ve **Tamam**' a tıklayın.
 
-   ![Ters proxy için yük dengeleyici kuralı yapılandırma](./media/service-fabric-reverseproxy-setup/lb-rp-rule.png)
+   ![Ters proxy için yük dengeleyici kuralını yapılandırma](./media/service-fabric-reverseproxy-setup/lb-rp-rule.png)
 
-### <a name="expose-the-reverse-proxy-via-resource-manager-templates"></a>Ters proxy Resource Manager şablonları aracılığıyla kullanıma sunma
+### <a name="expose-the-reverse-proxy-via-resource-manager-templates"></a>Kaynak Yöneticisi şablonları aracılığıyla ters proxy 'yi kullanıma sunma
 
-Aşağıdaki JSON içinde kullanılan aynı şablonu başvuran [Azure Resource Manager şablonları aracılığıyla ters Proxy'yi Etkinleştir](#enable-reverse-proxy-via-azure-resource-manager-templates). Resource Manager şablonu oluşturma veya var olan bir küme için bir şablonu dışarı aktarma hakkında bilgi edinmek için belgenin, bölümüne bakın.  Değişiklik [ **Microsoft.Network/loadBalancers** ](https://docs.microsoft.com/azure/templates/microsoft.network/loadbalancers) [kaynak türü bölümüne](../resource-group-authoring-templates.md).
+Aşağıdaki JSON, [Azure Resource Manager şablonları aracılığıyla ters proxy 'Yi etkinleştirmek](#enable-reverse-proxy-via-azure-resource-manager-templates)için kullanılan şablona başvurur. Kaynak Yöneticisi şablonu oluşturma veya var olan bir küme için bir şablonu dışarı aktarma hakkında bilgi için belgenin bu bölümüne bakın.  Değişiklikler [**Microsoft. Network/loadBalancers**](https://docs.microsoft.com/azure/templates/microsoft.network/loadbalancers) [Resource Type bölümünde](../resource-group-authoring-templates.md)yapılır.
 
     ```json
     {
@@ -308,11 +307,11 @@ Aşağıdaki JSON içinde kullanılan aynı şablonu başvuran [Azure Resource M
     ```
 
 
-## <a name="customize-reverse-proxy-behavior-using-fabric-settings"></a>Yapı ayarları kullanarak ters proxy davranışını özelleştirme
+## <a name="customize-reverse-proxy-behavior-using-fabric-settings"></a>Doku ayarlarını kullanarak ters proxy davranışını özelleştirme
 
-Ters proxy aracılığıyla Azure veya tek başına kümeler için ClusterConfig.json dosyasında barındırılan kümeleri için Resource Manager şablonunda yapı ayarları davranışını özelleştirebilirsiniz. Ters proxy davranışını denetleyen ayarları yerleştirilir [ **Applicationgateway'inin/Http** ](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) konusundaki **fabricSettings** Kümebölümünde**özellikleri** bölümü. 
+Ters proxy 'nin davranışını Azure 'da barındırılan kümeler için Kaynak Yöneticisi şablonundaki doku ayarları aracılığıyla veya tek başına kümeler için ClusterConfig. json dosyasında özelleştirebilirsiniz. Ters proxy davranışını denetleyen ayarlar, küme **özellikleri** bölümünde **Fabricsettings** bölümündeki [**applicationgateway/http**](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümünde bulunur. 
 
-Örneğin, değerini ayarlayabilirsiniz **DefaultHttpRequestTimeout** aşağıdaki JSON olduğu gibi 180 saniye için ters proxy istekleri için zaman aşımını ayarlamak için:
+Örneğin, **DefaultHttpRequestTimeout** değerini, ters proxy 'ye yönelik isteklerin zaman AŞıMıNı aşağıdaki JSON 'daki gibi 180 saniyeye ayarlanacak şekilde ayarlayabilirsiniz:
 
    ```json
    {
@@ -332,10 +331,10 @@ Ters proxy aracılığıyla Azure veya tek başına kümeler için ClusterConfig
    }
    ``` 
 
-Yapı ayarları Azure kümeleri için güncelleştirme hakkında daha fazla bilgi için bkz. [Resource Manager şablonlarını kullanarak küme ayarlarını özelleştirme](service-fabric-cluster-config-upgrade-azure.md). Tek başına kümeler için bkz: [tek başına kümeler için küme ayarlarını Özelleştir](service-fabric-cluster-config-upgrade-windows-server.md). 
+Azure kümeleri için doku ayarlarını güncelleştirme hakkında daha fazla bilgi için bkz. [Kaynak Yöneticisi şablonları kullanarak küme ayarlarını özelleştirme](service-fabric-cluster-config-upgrade-azure.md). Tek başına kümeler için bkz. [tek başına kümeler için küme ayarlarını özelleştirme](service-fabric-cluster-config-upgrade-windows-server.md). 
 
-Birkaç yapı ayarları ters proxy ve hizmetler arasında güvenli iletişim kurmak amacıyla kullanılır. Bu ayarlar hakkında ayrıntılı bilgi için bkz. [güvenli hizmet ters proxy ile bağlanma](service-fabric-reverseproxy-configure-secure-communication.md).
+Ters proxy ve hizmetler arasında güvenli iletişim kurmaya yardımcı olması için çeşitli yapı ayarları kullanılır. Bu ayarlar hakkında ayrıntılı bilgi için bkz. [ters ara sunucu ile güvenli bir hizmete bağlanma](service-fabric-reverseproxy-configure-secure-communication.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Güvenli HTTP hizmetine ileten ters proxy ile ayarlama](service-fabric-reverseproxy-configure-secure-communication.md)
-* Ters proxy yapılandırma seçenekleri için bkz. [Applicationgateway'inin/Http özelleştirme Service Fabric küme ayarları bölümünde](service-fabric-cluster-fabric-settings.md#applicationgatewayhttp).
+* [Ters ara sunucu ile güvenli HTTP hizmeti için yönlendirmeyi ayarlama](service-fabric-reverseproxy-configure-secure-communication.md)
+* Ters proxy yapılandırma seçenekleri için [Service Fabric kümesi ayarlarını özelleştirme konusunun Applicationgateway/http bölümüne](service-fabric-cluster-fabric-settings.md#applicationgatewayhttp)bakın.

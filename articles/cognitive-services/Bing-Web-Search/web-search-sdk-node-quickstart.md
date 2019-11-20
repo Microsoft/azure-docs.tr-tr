@@ -1,5 +1,5 @@
 ---
-title: "Hızlı Başlangıç: Bing Web araması SDK'sı için Node.js kullanma"
+title: "Hızlı başlangıç: Node.js için Bing Web Araması SDK'sını kullanma"
 titleSuffix: Azure Cognitive Services
 description: Bing Web Araması SDK'sı, Bing Web Araması özelliklerini Node.js uygulamanızla tümleştirmeyi kolaylaştırır. Bu hızlı başlangıçta istemci başlatmayı, istek göndermeyi ve yanıtı yazdırmayı öğreneceksiniz.
 services: cognitive-services
@@ -10,14 +10,14 @@ ms.subservice: bing-web-search
 ms.topic: quickstart
 ms.date: 03/12/2019
 ms.author: aahi
-ms.openlocfilehash: 96848e30c13d226978a6be1a1786e9ed2b4ab7c2
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 79f0630c65aa438ac5d831b03842cc74b609cd3b
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60498925"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74132743"
 ---
-# <a name="quickstart-use-the-bing-web-search-sdk-for-nodejs"></a>Hızlı Başlangıç: Bing Web araması SDK'sı için Node.js kullanma
+# <a name="quickstart-use-the-bing-web-search-sdk-for-nodejs"></a>Hızlı başlangıç: Node.js için Bing Web Araması SDK'sını kullanma
 
 Bing Web Araması SDK'sı, Bing Web Araması özelliklerini Node.js uygulamanızla tümleştirmeyi kolaylaştırır. Bu hızlı başlangıçta istemci başlatmayı, istek göndermeyi ve yanıtı yazdırmayı öğreneceksiniz.
 
@@ -111,4 +111,4 @@ Bu projeyi tamamladıktan sonra abonelik anahtarınızı program kodundan kaldı
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [Azure Node SDK başvurusu](https://docs.microsoft.com/javascript/api/azure-cognitiveservices-websearch/)
+* [Azure Node SDK başvurusu](https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-websearch/)

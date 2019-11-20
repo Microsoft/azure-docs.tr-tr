@@ -1,40 +1,40 @@
 ---
-title: Azure Kubernetes Service (AKS) çıkış trafiği için statik IP adresi
-description: Azure Kubernetes Service (AKS) kümesini çıkış trafiği için bir statik genel IP adresi oluşturulacağı ve kullanılacağı hakkında bilgi edinin
+title: Azure Kubernetes Service (AKS) içindeki çıkış trafiği için statik IP adresi
+description: Azure Kubernetes Service (AKS) kümesinde çıkış trafiği için statik bir genel IP adresi oluşturma ve kullanma hakkında bilgi edinin
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 03/04/2019
-ms.author: iainfou
-ms.openlocfilehash: 6612d801804cdd1e092b50977230f24b378e64ba
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: mlearned
+ms.openlocfilehash: 67471d688e64244067a7537bc87c379da4a69c03
+ms.sourcegitcommit: 800f961318021ce920ecd423ff427e69cbe43a54
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60466435"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68696373"
 ---
-# <a name="use-a-static-public-ip-address-for-egress-traffic-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) çıkış trafiği için bir statik genel IP adresi kullanın
+# <a name="use-a-static-public-ip-address-for-egress-traffic-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) ' de çıkış trafiği için statik bir genel IP adresi kullanın
 
-Varsayılan olarak, Azure Kubernetes Service (AKS) kümesini çıkış IP adresinden rastgele atanır. Örneğin dış hizmetlere erişim için bir IP adresi tanımlamak, ihtiyacınız olduğunda bu yapılandırma ideal değildir. Bunun yerine, hizmet erişim için izin verilenler listesinde olabilir statik bir IP adresi atamanız gerekebilir.
+Varsayılan olarak, bir Azure Kubernetes Service (AKS) kümesinden çıkış IP adresi rastgele atanır. Örneğin, dış hizmetlere erişim için bir IP adresi belirlemeniz gerektiğinde bu yapılandırma ideal değildir. Bunun yerine, hizmet erişimi için beyaz listeye eklenebilir statik bir IP adresi atamanız gerekebilir.
 
-Bu makalede oluşturma ve çıkış trafiği bir AKS kümesindeki ile kullanmak için bir statik genel IP adresi kullanma gösterilmektedir.
+Bu makalede, bir AKS kümesinde çıkış trafiği ile kullanmak üzere statik bir genel IP adresi oluşturma ve kullanma işlemlerinin nasıl yapılacağı gösterilir.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu makalede, var olan bir AKS kümesi olduğunu varsayar. AKS hızlı bir AKS kümesi gerekirse bkz [Azure CLI kullanarak] [ aks-quickstart-cli] veya [Azure portalını kullanarak][aks-quickstart-portal].
+Bu makalede, mevcut bir AKS kümeniz olduğunu varsaymaktadır. AKS kümesine ihtiyacınız varsa bkz. [Azure CLI kullanarak][aks-quickstart-cli] aks hızlı başlangıç veya [Azure Portal kullanımı][aks-quickstart-portal].
 
-Ayrıca Azure CLI Sürüm 2.0.59 gerekir veya daha sonra yüklü ve yapılandırılmış. Çalıştırma `az --version` sürümü bulmak için. Gerekirse yüklemek veya yükseltmek bkz [Azure CLI yükleme][install-azure-cli].
+Ayrıca Azure CLı sürüm 2.0.59 veya üzeri yüklü ve yapılandırılmış olmalıdır. Sürümü `az --version` bulmak için ' i çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse bkz. [Azure CLI 'Yı yüklemek][install-azure-cli].
 
-## <a name="egress-traffic-overview"></a>Çıkış trafiği genel bakış
+## <a name="egress-traffic-overview"></a>Çıkış trafiğine genel bakış
 
-Bir AKS kümesi giden trafiği izleyen [Azure Load Balancer kuralları][outbound-connections]. İlk Kubernetes hizmeti türü önce `LoadBalancer` oluşturulur, aracı düğümleri bir AKS kümesindeki herhangi bir Azure Load Balancer havuzunun parçası değildir. Bu yapılandırmada hiçbir örnek düzeyi genel IP adresi düğümler var. Azure, yapılandırılabilir veya belirleyici olmayan ortak kaynak IP adresine giden akış çevirir.
+Bir AKS kümesinden giden trafik [Azure Load Balancer kuralları][outbound-connections]izler. Türündeki `LoadBalancer` ilk Kubernetes hizmeti oluşturulmadan önce, bir aks kümesindeki aracı düğümleri hiçbir Azure Load Balancer havuzunun parçası değildir. Bu yapılandırmada, düğümlerin örnek düzeyi genel IP adresi yok. Azure, giden akışı, yapılandırılamaz veya belirleyici olmayan bir ortak kaynak IP adresine çevirir.
 
-Bir kez türünde bir Kubernetes hizmet `LoadBalancer` oluşturulur, aracı düğümleri, bir Azure yük dengeleyici havuzuna eklenir. Giden akış için Azure, ilk genel IP adresini yük dengeleyici üzerinde yapılandırılmış çevirir. Bu genel IP adresi, yalnızca o kaynak kullanım ömrü için geçerlidir. Kubernetes LoadBalancer hizmet silerseniz, IP adresi ve ilişkili yük dengeleyici da silinir. Belirli bir IP adresi atamak veya bilgisayarına Kubernetes Hizmetleri için bir IP adresi korumak istiyorsanız, oluşturun ve bir statik genel IP adresini kullanın.
+Türü `LoadBalancer` bir Kubernetes hizmeti oluşturulduktan sonra, aracı düğümleri bir Azure Load Balancer havuzuna eklenir. Giden akış için, Azure onu yük dengeleyicide yapılandırılan ilk genel IP adresine çevirir. Bu genel IP adresi yalnızca söz konusu kaynağın kullanım ömrü için geçerlidir. Kubernetes LoadBalancer hizmetini silerseniz ilişkili yük dengeleyici ve IP adresi de silinir. Belirli bir IP adresi atamak veya yeniden dağıtılan Kubernetes Hizmetleri için bir IP adresi korumak istiyorsanız statik bir genel IP adresi oluşturabilir ve kullanabilirsiniz.
 
 ## <a name="create-a-static-public-ip"></a>Statik genel IP oluşturma
 
-AKS ile kullanım için bir statik genel IP adresi oluşturduğunuzda, IP adresi kaynağı oluşturulmalıdır **düğüm** kaynak grubu. Kaynak grubu adını alın [az aks show] [ az-aks-show] komut ve ekleme `--query nodeResourceGroup` sorgu parametresi. Aşağıdaki örnek, düğüm kaynak grubu için AKS kümesinin adını alır. *myAKSCluster* kaynak grubu adında *myResourceGroup*:
+[Az aks Show][az-aks-show] komutuyla kaynak grubu adını alın ve `--query nodeResourceGroup` sorgu parametresini ekleyin. Aşağıdaki örnek, *Myresourcegroup*kaynak grubu adı altında *Myakscluster* adlı aks kümesi için düğüm kaynak grubunu alır:
 
 ```azurecli-interactive
 $ az aks show --resource-group myResourceGroup --name myAKSCluster --query nodeResourceGroup -o tsv
@@ -42,7 +42,7 @@ $ az aks show --resource-group myResourceGroup --name myAKSCluster --query nodeR
 MC_myResourceGroup_myAKSCluster_eastus
 ```
 
-Şimdi bir statik genel IP adresiyle oluşturmak [az ağ genel IP oluşturma] [ az-network-public-ip-create] komutu. Düğüm kaynak grubu adı, önceki komutta alınan ve ardından bir adı IP adresi kaynağı, gibi belirtmek *myAKSPublicIP*:
+Şimdi [az Network public IP Create][az-network-public-ip-create] komutuyla bir STATIK genel IP adresi oluşturun. Önceki komutta elde edilen düğüm kaynak grubu adını ve sonra da *Myakspublicıp*gibi IP adresi kaynağı için bir ad belirtin:
 
 ```azurecli-interactive
 az network public-ip create \
@@ -51,7 +51,7 @@ az network public-ip create \
     --allocation-method static
 ```
 
-Aşağıdaki sıkıştırılmış örneğe çıktıda gösterildiği gibi IP adresi gösterilir:
+Aşağıdaki sıkıştırılmış örnek çıktıda gösterildiği gibi IP adresi gösterilir:
 
 ```json
 {
@@ -65,7 +65,7 @@ Aşağıdaki sıkıştırılmış örneğe çıktıda gösterildiği gibi IP adr
   }
 ```
 
-Genel IP adresini kullanarak daha sonra alabilirsiniz [az ağ genel IP listesi] [ az-network-public-ip-list] komutu. Düğüm kaynak grubunun adını belirtin ve ardından sorgu *IPADDRESS* aşağıdaki örnekte gösterildiği gibi:
+Daha sonra [az Network public-IP List][az-network-public-ip-list] komutunu kullanarak genel IP adresini alabilirsiniz. Düğüm kaynak grubunun adını belirtin ve sonra aşağıdaki örnekte gösterildiği gibi *IPAddress* için sorgulama yapın:
 
 ```azurecli-interactive
 $ az network public-ip list --resource-group MC_myResourceGroup_myAKSCluster_eastus --query [0].ipAddress --output tsv
@@ -73,9 +73,9 @@ $ az network public-ip list --resource-group MC_myResourceGroup_myAKSCluster_eas
 40.121.183.52
 ```
 
-## <a name="create-a-service-with-the-static-ip"></a>Statik IP adresiyle bir hizmet oluşturma
+## <a name="create-a-service-with-the-static-ip"></a>Statik IP ile bir hizmet oluşturma
 
-Statik genel IP adresiyle bir hizmet oluşturmak için Ekle `loadBalancerIP` özelliği ve değerini bir statik genel IP adresi için YAML bildirimi. Adlı bir dosya oluşturun `egress-service.yaml` aşağıdaki YAML'ye kopyalayın. Önceki adımda oluşturulan kendi genel IP adresi sağlayın.
+Statik genel IP adresine sahip bir hizmet oluşturmak için, `loadBalancerIP` özelliği ve statik genel IP adresinin değerini YAML bildirimine ekleyin. Aşağıdaki YAML 'de `egress-service.yaml` adlı bir dosya oluşturun ve kopyalayın. Önceki adımda oluşturulan kendi genel IP adresinizi sağlayın.
 
 ```yaml
 apiVersion: v1
@@ -89,31 +89,31 @@ spec:
   - port: 80
 ```
 
-Hizmet oluşturup dağıtımla `kubectl apply` komutu.
+`kubectl apply` Komutuyla hizmeti ve dağıtımı oluşturun.
 
 ```console
 kubectl apply -f egress-service.yaml
 ```
 
-Bu hizmet, Azure yük Dengeleyicide yeni bir ön uç IP yapılandırır. Diğer yoksa IP'ler, ardından yapılandırılmış **tüm** çıkış trafiği, bu adresi artık kullanmalıdır. Azure Load Balancer üzerinde birden çok adresi yapılandırıldığında, çıkış, yük dengeleyicide ilk IP kullanır.
+Bu hizmet Azure Load Balancer yeni bir ön uç IP 'yi yapılandırır. Yapılandırılmış başka bir IP yoksa, **Tüm** çıkış trafiği artık bu adresi kullanmalıdır. Azure Load Balancer birden çok adres yapılandırıldığında, çıkış o yük dengeleyicideki ilk IP 'yi kullanır.
 
-## <a name="verify-egress-address"></a>Çıkış adresini doğrulayın
+## <a name="verify-egress-address"></a>Çıkış adresini doğrula
 
-Statik genel IP adresi kullanılır, DNS Arama hizmeti gibi kullanabileceğinizi doğrulamak için `checkip.dyndns.org`.
+Statik ortak IP adresinin kullanıldığını doğrulamak için, gibi DNS arama hizmeti `checkip.dyndns.org`kullanabilirsiniz.
 
-Başlatma ve ekleme için temel bir *Debian* pod:
+Başlangıç ve temel bir deni Pod 'a iliştirme:
 
 ```console
 kubectl run -it --rm aks-ip --image=debian --generator=run-pod/v1
 ```
 
-Kapsayıcı içindeki bir web sitesinden erişmek için `apt-get` yüklemek için `curl` kapsayıcıya alın.
+Kapsayıcının içinden bir Web sitesine erişmek için, kapsayıcıya yüklemek `apt-get` `curl` için kullanın.
 
 ```console
 apt-get update && apt-get install curl -y
 ```
 
-Artık erişmek için curl kullanın *checkip.dyndns.org* site. Aşağıdaki örnek çıktıda gösterildiği çıkış IP adresi gösterilir. Bu IP adresi ile eşleşen oluşturulur ve yük dengeleyici hizmet için tanımlanan statik genel IP adresi:
+Artık *checkip.dyndns.org* sitesine erişmek için kıvrımlı kullanın. Çıkış IP adresi, aşağıdaki örnek çıktıda gösterildiği gibi görüntülenir. Bu IP adresi, loadBalancer hizmeti için oluşturulan ve tanımlanan statik genel IP adresiyle eşleşir:
 
 ```console
 $ curl -s checkip.dyndns.org
@@ -123,7 +123,7 @@ $ curl -s checkip.dyndns.org
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure Load Balancer birden çok genel IP adreslerinde koruma önlemek için bunun yerine bir giriş denetleyicisini kullanabilirsiniz. Giriş denetleyicileri, URI taşıyabilmenizi sağlar ve Yukarı Akış SSL/TLS şifreleme için SSL/TLS sonlandırma, destek gibi ek avantajlar sunacak. Daha fazla bilgi için [AKS içinde bir temel giriş denetleyicisine oluşturma][ingress-aks-cluster].
+Azure Load Balancer birden çok genel IP adresinin korunmasından kaçınmak için, bunun yerine bir giriş denetleyicisi kullanabilirsiniz. Giriş denetleyicileri SSL/TLS sonlandırma, URI yeniden için destek ve yukarı akış SSL/TLS şifrelemesi gibi ek avantajlar sağlar. Daha fazla bilgi için bkz. [AKS 'de temel giriş denetleyicisi oluşturma][ingress-aks-cluster].
 
 <!-- LINKS - internal -->
 [az-network-public-ip-create]: /cli/azure/network/public-ip#az-network-public-ip-create

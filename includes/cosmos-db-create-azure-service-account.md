@@ -5,18 +5,14 @@ services: cosmos-db
 author: MarkMcGeeAtAquent
 ms.service: cosmos-db
 ms.topic: include
-ms.date: 04/06/2018
+ms.date: 10/07/2019
 ms.author: mimig
 ms.custom: include file
-ms.openlocfilehash: 5d779694ac107931b610f9d91a24dd715669aecd
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: be3637870edc4900059f02392536194a910e9e41
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188121"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72818651"
 ---
-Azure Tablosu depolaması veya Azure Cosmos DB kullanarak tablolarla çalışabilirsiniz. Hizmetler arasındaki farklar hakkında daha fazla bilgi edinmek için [Tablo teklifleri](../articles/cosmos-db/table-introduction.md#table-offerings)'ni okuyun. Kullanacağınız hizmet için bir hesap oluşturmanız gerekir. 
-
-
-
-
+Azure Tablosu depolaması veya Azure Cosmos DB kullanarak tablolarla çalışabilirsiniz. Hizmetler arasındaki farklar hakkında daha fazla bilgi edinmek için bkz. [tablo teklifleri](../articles/cosmos-db/table-introduction.md#table-offerings). Kullanacağınız hizmet için bir hesap oluşturmanız gerekir.

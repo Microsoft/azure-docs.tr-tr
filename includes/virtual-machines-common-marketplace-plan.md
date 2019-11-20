@@ -2,28 +2,28 @@
 title: include dosyası
 description: include dosyası
 services: virtual-machines-windows, virtual-machines-linux
-author: dlepow
+author: cynthn
 ms.service: multiple
 ms.topic: include
 ms.date: 10/09/2018
-ms.author: danlep
+ms.author: cynthn
 ms.custom: include file
-ms.openlocfilehash: 4d2235eaea457c89d01a632afa5dd5a862bec344
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 8e0e549f88caf4a541642bab77faf54b5e536b29
+ms.sourcegitcommit: f2771ec28b7d2d937eef81223980da8ea1a6a531
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188363"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71175002"
 ---
-## <a name="deploy-an-image-with-marketplace-terms"></a>Görüntüyü Market koşullarıyla dağıtma
+## <a name="deploy-an-image-with-marketplace-terms"></a>Market koşullarına sahip bir görüntü dağıtma
 
-Bazı VM görüntüleri Azure Market'te ek lisansa sahip ve programlı olarak dağıtmadan önce kabul etmelisiniz satın alma koşulları.  
+Azure Marketi 'ndeki bazı sanal makine görüntülerinin, programlama yoluyla dağıtmadan önce kabul etmeniz gereken ek lisans ve satın alma koşulları vardır.  
 
-Böyle bir görüntüden bir VM dağıtmak için hem görüntünün koşullarını kabul edin ve programlamalı dağıtımını etkinleştirmek gerekir. Yalnızca abonelik başına kez yapmanız gerekir. Daha sonra her zaman dağıttığınız bir VM'den programlı olarak da ihtiyacınız belirtmek için görüntü *satın alma planı* parametreleri.
+Bu tür bir görüntüden bir VM dağıtmak için, hem görüntünün koşullarını kabul etmeniz hem de programlı dağıtımı etkinleştirmeniz gerekir. Bunu her abonelik için yalnızca bir kez yapmanız gerekir. Bundan sonra, görüntüden program aracılığıyla bir VM dağıttığınızda, *satın alma planı* parametreleri de belirtmeniz gerekir.
 
-Aşağıdaki bölümlerde show nasıl yapılır:
+Aşağıdaki bölümlerde aşağıdakilerin nasıl yapılacağı gösterilmektedir:
 
-* Bir Market görüntüsü ek lisans koşulları olup Bul 
-* Program aracılığıyla koşullarını kabul edin
-* Program aracılığıyla bir sanal makine dağıttığınızda satın alma planı parametrelerini belirtin
+* Market görüntüsünün ek lisans koşullarına sahip olup olmadığını öğrenin 
+* Koşulları programlama yoluyla kabul etme
+* Bir VM 'yi program aracılığıyla dağıtırken satın alma planı parametreleri sağlama
 

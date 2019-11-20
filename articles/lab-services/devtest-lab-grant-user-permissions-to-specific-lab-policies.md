@@ -1,6 +1,6 @@
 ---
-title: Özel Laboratuvar ilkelerini kullanıcı izin verme | Microsoft Docs
-description: DevTest Labs her kullanıcının ihtiyaçlarına göre özel Laboratuvar ilkelerini kullanıcı izinleri verme konusunda bilgi edinin
+title: Belirli laboratuvar ilkelerine Kullanıcı izinleri verme | Microsoft Docs
+description: Her kullanıcının ihtiyaçlarına bağlı olarak DevTest Labs 'deki belirli laboratuvar ilkelerine Kullanıcı izinleri verme hakkında bilgi edinin
 services: devtest-lab,virtual-machines,lab-services
 documentationcenter: na
 author: spelluru
@@ -12,46 +12,46 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/17/2018
+ms.date: 10/07/2019
 ms.author: spelluru
-ms.openlocfilehash: 70469a9e8737a9df18628951a061c97081c74080
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9b31f3e68fbabc32f301fdcd8066a3bfbf1c2dbd
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62127387"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72028443"
 ---
-# <a name="grant-user-permissions-to-specific-lab-policies"></a>Özel Laboratuvar ilkelerini kullanıcı izinleri verme
+# <a name="grant-user-permissions-to-specific-lab-policies"></a>Belirli laboratuvar ilkelerine Kullanıcı izinleri verme
 ## <a name="overview"></a>Genel Bakış
-Bu makalede belirli Laboratuvar ilkesini kullanıcılara izinler vermek için PowerShell kullanılması gösterilmektedir. Bu şekilde, izinleri her kullanıcının ihtiyaçlarına göre uygulanabilir. Örneğin, belirli bir kullanıcı VM ilke ayarları, ancak maliyet ilkeleri değiştirme olanağı vermek isteyebilirsiniz.
+Bu makalede, PowerShell kullanarak kullanıcılara belirli bir laboratuvar ilkesi için izinler verme konusu gösterilmektedir. Bu şekilde, izinler her kullanıcının ihtiyaçlarına göre uygulanabilir. Örneğin, belirli bir kullanıcıya VM ilkesi ayarlarını değiştirme yeteneği vermek isteyebilirsiniz, ancak maliyet ilkelerini etkilemez.
 
-## <a name="policies-as-resources"></a>İlkeleri kaynakları olarak
-Bölümünde açıklandığı gibi [Azure rol tabanlı erişim denetimi](../role-based-access-control/role-assignments-portal.md) makalede RBAC kaynakların Azure için ayrıntılı erişim yönetimi sağlar. RBAC kullanarak, DevOps, görevleri ayırabilir ve işlerini yapmak için ihtiyaçları olan kullanıcılara sadece erişim miktarını verin.
+## <a name="policies-as-resources"></a>Kaynaklar olarak ilkeler
+[Azure rol tabanlı Access Control](../role-based-access-control/role-assignments-portal.md) makalesinde ele alındığı gibi RBAC, Azure için kaynakların ayrıntılı erişim yönetimine izin verebilir. RBAC kullanarak, DevOps ekibinizdeki görevleri ayırabilirsiniz ve yalnızca işlerini gerçekleştirmesi için ihtiyaç duydukları kullanıcılara erişim miktarını verebilirsiniz.
 
-DevTest Labs'de RBAC eylem sağlayan bir kaynak türünü ilkedir **Microsoft.DevTestLab/labs/policySets/policies/** . Her bir laboratuvar İlkesi İlkesi kaynak türündeki bir kaynaktır ve RBAC rolü için kapsam olarak atanabilir.
+DevTest Labs 'de, ilke **Microsoft. DevTestLab/Labs/policySets/policies/** RBAC eylemini sağlayan bir kaynak türüdür. Her laboratuvar ilkesi, Ilke kaynak türündeki bir kaynaktır ve bir RBAC rolüne kapsam olarak atanabilir.
 
-Örneğin, kullanıcıların okuma/yazma izni vermek için **izin verilen VM boyutları** İlkesi ile çalışır, özel bir rol oluşturmanız **Microsoft.DevTestLab/labs/policySets/policies/** eylemi ve ardından uygun kullanıcıları bu özel rolü kapsamında atayın **Microsoft.DevTestLab/labs/policySets/policies/AllowedVmSizesInLab**.
+Örneğin, **Izin VERILEN VM boyutları** ilkesine kullanıcılara okuma/yazma izni vermek Için, **Microsoft. devtestlab/Labs/policysets/policies/** Action ile çalışan özel bir rol oluşturursunuz ve ardından uygun kullanıcıları bu kullanıcılara atayabilirsiniz Bu özel rol **Microsoft. DevTestLab/Labs/policySets/policies/AllowedVmSizesInLab**kapsamında.
 
-Özel RBAC rolleri hakkında daha fazla bilgi için bkz: [özel roller erişim denetimi](../role-based-access-control/custom-roles.md).
+RBAC 'deki özel roller hakkında daha fazla bilgi edinmek için bkz. [özel roller erişim denetimi](../role-based-access-control/custom-roles.md).
 
-## <a name="creating-a-lab-custom-role-using-powershell"></a>PowerShell kullanarak Laboratuvar özel rol oluşturma
-Başlamak için şunları yapmanız gerekir [Azure PowerShell'i yükleme](/powershell/azure/install-az-ps). 
+## <a name="creating-a-lab-custom-role-using-powershell"></a>PowerShell kullanarak laboratuvar özel rolü oluşturma
+Başlamak için [Azure PowerShell yüklemeniz](/powershell/azure/install-az-ps)gerekir. 
 
-Azure PowerShell cmdlet'leri ayarladıktan sonra aşağıdaki görevleri gerçekleştirebilirsiniz:
+Azure PowerShell cmdlet 'lerini ayarladıktan sonra, aşağıdaki görevleri gerçekleştirebilirsiniz:
 
-* Bir kaynak sağlayıcısı için tüm işlemler/eylemler listesi
-* Belirli bir roldeki eylemler listesi:
+* Bir kaynak sağlayıcısı için tüm işlemleri/eylemleri listeleme
+* Belirli bir roldeki eylemleri listeleyin:
 * Özel rol oluşturma
 
-Aşağıdaki PowerShell Betiği örnekleri bu görevlerin nasıl gerçekleştirileceği gösterilmektedir:
+Aşağıdaki PowerShell betiği, bu görevlerin nasıl gerçekleştirileceğini gösteren örnekler gösterir:
 
-    ‘List all the operations/actions for a resource provider.
+    # List all the operations/actions for a resource provider.
     Get-AzProviderOperation -OperationSearchString "Microsoft.DevTestLab/*"
 
-    ‘List actions in a particular role.
+    # List actions in a particular role.
     (Get-AzRoleDefinition "DevTest Labs User").Actions
 
-    ‘Create custom role.
+    # Create custom role.
     $policyRoleDef = (Get-AzRoleDefinition "DevTest Labs User")
     $policyRoleDef.Id = $null
     $policyRoleDef.Name = "Policy Contributor"
@@ -61,10 +61,10 @@ Aşağıdaki PowerShell Betiği örnekleri bu görevlerin nasıl gerçekleştiri
     $policyRoleDef.Actions.Add("Microsoft.DevTestLab/labs/policySets/policies/*")
     $policyRoleDef = (New-AzRoleDefinition -Role $policyRoleDef)
 
-## <a name="assigning-permissions-to-a-user-for-a-specific-policy-using-custom-roles"></a>Bir kullanıcıya özel rolleri kullanarak belirli bir ilke için izinler atama
-Özel rollerinizi tanımladınız sonra bunları kullanıcılara atayabilirsiniz. Bir kullanıcıya özel bir rol atamak için önce edinmeniz gerekir **objectID** o bir kullanıcıyı temsil eden. Bunu yapmak için kullanın **Get-AzADUser** cmdlet'i.
+## <a name="assigning-permissions-to-a-user-for-a-specific-policy-using-custom-roles"></a>Özel rolleri kullanarak belirli bir ilke için kullanıcıya izin atama
+Özel rollerinizi tanımladıktan sonra kullanıcılara atayabilirsiniz. Bir kullanıcıya özel bir rol atamak için, önce bu kullanıcıyı temsil eden **ObjectID** 'yi edinmeniz gerekir. Bunu yapmak için **Get-AzADUser** cmdlet 'ini kullanın.
 
-Aşağıdaki örnekte, **objectID** , *SomeUser* 05DEFF7B-0AC3-4ABF-B74D-6A72CD5BF3F3 kullanıcıdır.
+Aşağıdaki örnekte, *Someuser* kullanıcısının **ObjectID** 17DEFF7B-0AC3-4ABF-B74D-6A72CD5BF3F3 ' dir.
 
     PS C:\>Get-AzADUser -SearchString "SomeUser"
 
@@ -72,11 +72,11 @@ Aşağıdaki örnekte, **objectID** , *SomeUser* 05DEFF7B-0AC3-4ABF-B74D-6A72CD5
     -----------                    ----                           --------
     someuser@hotmail.com                                          05DEFF7B-0AC3-4ABF-B74D-6A72CD5BF3F3
 
-Yapılandırmasını tamamladıktan **objectID** kullanıcı ve bir özel rol adı için kullanıcı bu rolü atayabilirsiniz **yeni AzRoleAssignment** cmdlet:
+Kullanıcı için **ObjectID** ve özel bir rol adı olduktan sonra, bu rolü **New-azroleatama** cmdlet 'i ile kullanıcıya atayabilirsiniz:
 
     PS C:\>New-AzRoleAssignment -ObjectId 05DEFF7B-0AC3-4ABF-B74D-6A72CD5BF3F3 -RoleDefinitionName "Policy Contributor" -Scope /subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroupName>/providers/Microsoft.DevTestLab/labs/<LabName>/policySets/default/policies/AllowedVmSizesInLab
 
-Önceki örnekte, **AllowedVmSizesInLab** İlkesi kullanılır. Herhangi birini kullanabilmeniz için ilkeler:
+Önceki örnekte, **AllowedVmSizesInLab** ilkesi kullanılır. Aşağıdaki ilkeleri kullanabilirsiniz:
 
 * MaxVmsAllowedPerUser
 * MaxVmsAllowedPerLab
@@ -86,7 +86,7 @@ Yapılandırmasını tamamladıktan **objectID** kullanıcı ve bir özel rol ad
 [!INCLUDE [devtest-lab-try-it-out](../../includes/devtest-lab-try-it-out.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bir kez dikkate alınması gereken sonraki adımlardan birkaçı şunlardır belirli Laboratuvar ilkeleri, kullanıcı izinlerini verdiyseniz:
+Belirli laboratuvar ilkelerine Kullanıcı izinleri verdikten sonra, göz önünde bulundurmanız gereken birkaç adım aşağıda verilmiştir:
 
 * [Laboratuvara erişimin güvenliğini sağlama](devtest-lab-add-devtest-user.md)
 * [Laboratuvar ilkeleri belirleme](devtest-lab-set-lab-policy.md)

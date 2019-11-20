@@ -2,8 +2,8 @@
 title: Ayrılmış HSM nedir? -Ayrılmış HSM azure | Microsoft Docs
 description: Azure ayrılmış HSM genel bakış 140-2 Düzey 3 sertifika anahtarı depolama alanı kapasitesini FIPS karşılayan Azure sağlar.
 services: dedicated-hsm
-author: barclayn
-manager: barbkess
+author: msmbaldwin
+manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.workload: identity
@@ -12,83 +12,83 @@ ms.devlang: na
 ms.topic: overview
 ms.custom: mvc, seodec18
 ms.date: 12/07/2018
-ms.author: barclayn
-ms.openlocfilehash: 88a49c9c124c5399749d2b60595d7f5c7ec77b20
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.author: mbaldwin
+ms.openlocfilehash: dd5ce117645ef2b368bbf8f0e441770d6e746b5b
+ms.sourcegitcommit: 7c5a2a3068e5330b77f3c6738d6de1e03d3c3b7d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "62118001"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70881084"
 ---
 # <a name="what-is-azure-dedicated-hsm"></a>Azure Ayrılmış HSM nedir?
 
-Azure ayrılmış HSM azure'da şifreleme anahtarı depolama alanı sağlayan bir Azure hizmetidir. Ayrılmış HSM en katı güvenlik gereksinimleri karşılar. FIPS 140-2 Düzey 3 doğrulanmış cihazlar ve HSM gerecinin eksiksiz ve özel denetim ihtiyaç duyan müşteriler için ideal çözümdür. 
+Azure ayrılmış HSM azure'da şifreleme anahtarı depolama alanı sağlayan bir Azure hizmetidir. Ayrılmış HSM en katı güvenlik gereksinimleri karşılar. FIPS 140-2 düzey 3 tarafından doğrulanan cihazlar ve HSM gerecinin tam ve dışlamalı denetimini gerektiren müşteriler için ideal bir çözümdür. 
 
- HSM cihazlarına genel olarak çeşitli Azure bölgeleri arasında dağıtılır. Bunlar kolayca cihazların bir çift olarak sağlanabilir ve yüksek kullanılabilirlik için yapılandırılır. HSM cihazlarına bölge düzeyinde yük devretme karşı güvence altına almak için bölge arasında da sağlanabilir. Microsoft teslim ayrılmış HSM hizmetini kullanarak [SafeNet Luna ağ HSM 7 (Model A790)](https://safenet.gemalto.com/data-encryption/hardware-security-modules-hsms/safenet-network-hsm/) Gemalto gereçten. Bu cihaz en yüksek düzeyde performans ve şifreleme tümleştirme seçenekleri sunar. 
+ HSM cihazları, çeşitli Azure bölgelerinde küresel olarak dağıtılır. Bunlar, cihaz çifti olarak kolayca sağlanabilir ve yüksek kullanılabilirlik için yapılandırılabilir. Ayrıca, bölgesel düzeyde yük devretmeye karşı güvence altına almak için bölgeler arasında HSM cihazları sağlanabilir. Microsoft, Gemalto 'dan [SafeNet Luna ağ HSM 7 (model A790)](https://safenet.gemalto.com/data-encryption/hardware-security-modules-hsms/safenet-network-hsm/) gereci kullanarak adanmış HSM hizmetini sunar. Bu cihaz en yüksek düzeyde performans ve şifreleme tümleştirme seçenekleri sunar. 
 
-Sağlanan sonra HSM cihazlarına doğrudan bir müşterinin sanal ağa bağlanır. Noktadan siteye veya siteden siteye VPN bağlantısı yapılandırırken şirket içi uygulama ve yönetim araçları tarafından da erişilebilir. Müşteriler, yazılım ve yapılandırıp Gemalto'nın destek Portalı'ndan HSM cihazları yönetmek için belgeleri edinin.
+Bunlar sağlandıktan sonra, HSM cihazları doğrudan bir müşterinin sanal ağına bağlanır. Ayrıca, Noktadan siteye veya siteden siteye VPN bağlantısı yapılandırdığınızda şirket içi uygulama ve yönetim araçları tarafından da erişilebilir. Müşteriler, HSM cihazlarını Gemalto 'ın destek portalından yapılandırmak ve yönetmek için yazılım ve belgeleri alırlar.
 
-## <a name="why-use-azure-dedicated-hsm"></a>Azure ayrılmış HSM neden kullanmalısınız?
+## <a name="why-use-azure-dedicated-hsm"></a>Azure ayrılmış HSM neden kullanılmalıdır?
 
-### <a name="fips-140-2-level-3-compliance"></a>FIPS 140-2 Düzey 3 uyumluluk
+### <a name="fips-140-2-level-3-compliance"></a>FIPS 140-2 düzey-3 uyumluluğu
 
-Birçok kuruluşun katı sektör düzenlemelerinin şifreleme anahtarı depolama alanı karşıladığından bu dikte sahip [FIPS 140-2-3. düzey](https://csrc.nist.gov/publications/detail/fips/140/2/final) gereksinimleri. Microsoft'un çok kiracılı Azure Key Vault hizmetine şu anda yalnızca FIPS 140-2 Düzey 2 sertifika sağlar. Azure ayrılmış HSM, finansal hizmet sektöründe, devlet kurumları ve başkaları tarafından FIPS 140-2-3. düzey gereksinimleri karşılaması gerekir gerçek bir gereksinimi karşılar.
+Birçok kuruluşun, şifreleme anahtarı depolamanın [fıps 140-2 düzey 3](https://csrc.nist.gov/publications/detail/fips/140/2/final) gereksinimlerini karşıladığını belirten katı sektör düzenlemeleri vardır. Microsoft 'un çok kiracılı Azure Key Vault hizmeti şu anda yalnızca FIPS 140-2 düzey 2 sertifikası sağlıyor. Azure adanmış HSM, finansal hizmetler sektörünün, devlet kurumlarının ve FIPS 140-2 düzey 3 gereksinimlerini karşılaması gereken diğer kişilere gerçek bir ihtiyacı karşılar.
 
 ### <a name="single-tenant-devices"></a>Tek kiracılı cihazlar
 
-Birçok müşterimizin tek kiracılı şifreleme depolama cihazının gereksinim. Azure ayrılmış HSM hizmeti, Microsoft'un Global olarak dağıtılmış veri merkezlerinden oluşan bir fiziksel CİHAZDAN sağlamak bunları sağlar. Müşteriye sağlandıktan sonra yalnızca ilgili müşterinin cihaza erişebilirsiniz.
+Birçok müşterimizin tek kiracılı şifreleme depolama cihazının gereksinim. Azure ayrılmış HSM hizmeti, Microsoft 'un genel olarak dağıtılmış veri merkezlerinden birinden fiziksel bir cihaz sağlamasını sağlar. Müşteriye sağlandıktan sonra, yalnızca söz konusu müşteri cihaza erişebilir.
 
 ### <a name="full-administrative-control"></a>Tam yönetim denetimi
 
-Birçok müşteri tam yönetimsel denetime gerektirir ve şahıs cihazlarını yönetim amaçları için erişim. Bir cihaz sağlandıktan sonra yalnızca müşterinin cihaz yönetim veya uygulama düzeyinde erişimi vardır.
+Birçok müşteri, yönetim amacıyla cihazlarına tam yönetim denetimi ve tek tek erişim gerektirir. Bir cihaz sağlandıktan sonra, yalnızca müşterinin cihaza yönetici veya uygulama düzeyinde erişimi vardır.
 
- Microsoft, müşteri ilk kez bu noktada, müşteri parolayı değiştirir. cihaz eriştikten sonra hiçbir yönetimsel denetime sahiptir. Bu noktadan itibaren müşterinin bir true tek kiracılı tam yönetimsel denetime ve uygulama yönetimi özelliği ' dir. Microsoft, seri bağlantı noktası aracılığıyla telemetri için izleme düzeyi erişim (Yönetici rolü değil) korur. Bu erişim sıcaklık ve güç kaynağı durumu fanı sistem durumu gibi donanım izleyiciler kapsar. 
+ Müşterinin cihaza ilk kez eriştiği bir yönetim denetimi yoktur, bu noktada müşterinin parolayı değiştirdiği anlamına gelir. Bu noktadan itibaren müşteri, tam yönetim denetimi ve uygulama yönetimi özelliği olan gerçek bir tek kiracıya sahiptir. Microsoft, seri bağlantı noktası bağlantısı aracılığıyla telemetri için izleyici düzeyinde erişimi (yönetici rolü değil) korur. Bu erişim sıcaklık, güç kaynağı ve fan sistem durumu gibi donanım izleyicilerini içerir. 
  
- Müşteri, gerekli izleme devre dışı bırakmak ücretsizdir. Ancak, bunu devre dışı bırakırsanız, bunlar Microsoft önleyici sağlık durumu uyarılar alınmayacak.
+ Müşteri, gerekli olan bu izlemeyi devre dışı bırakmak için ücretsizdir. Ancak devre dışı bırakırsanız, Microsoft 'tan öngörülü sistem durumu uyarıları almaz.
 
 ### <a name="high-performance"></a>Yüksek performans
 
-Gemalto cihazın çeşitli nedenlerle için bu hizmeti seçildi. Geniş bir şifreleme algoritması desteği, çeşitli desteklenen işletim sistemleri ve kapsamlı API desteği sunar. Dağıtılan belirli bir modeli için RSA 2048 saniye başına 10.000 işlem ile mükemmel performans sunar. Bu benzersiz uygulama örnekleri için kullanılabilecek 10 bölümlerini destekler. Bu, düşük gecikme süreli, yüksek kapasite ve yüksek aktarım hızı cihaz cihazdır.
+Bu hizmet için farklı nedenlerle Gemalto cihazı seçildi. Geniş kapsamlı bir şifreleme algoritması desteği, desteklenen çeşitli işletim sistemleri ve geniş API desteği sunar. Dağıtılan özel model, RSA-2048 için saniyede 10.000 işlem ile mükemmel performans sunar. Bu benzersiz uygulama örnekleri için kullanılabilecek 10 bölümlerini destekler. Bu cihaz düşük gecikme süreli, yüksek kapasiteli ve yüksek performanslı bir cihazdır.
 
-### <a name="unique-cloud-based-offering"></a>Benzersiz bulut tabanlı teklif
+### <a name="unique-cloud-based-offering"></a>Bulut tabanlı benzersiz teklif
 
-Microsoft, müşterilerin benzersiz bir dizi için belirli bir gereksiniminiz tanınan. Bu yeni müşterilere FIPS 140-2 Düzey 3 doğrulandı ve böyle bir kapsamını bulut tabanlı sunar ve şirket içi uygulama tümleştirme adanmış bir HSM hizmetini sunan tek bulut sağlayıcısıdır.
+Microsoft, benzersiz bir müşteri kümesine yönelik belirli bir ihtiyacı fark. Bu, FIPS 140-2 düzey 3 tarafından doğrulanan özel bir HSM hizmeti sunan ve bulut tabanlı ve şirket içi uygulama tümleştirmesinin bir kapsamını sunan, yeni müşteriler sunan tek bulut sağlayıcıdır.
 
 ## <a name="is-azure-dedicated-hsm-right-for-you"></a>Azure ayrılmış HSM sizin için doğru mu?
 
-Azure ayrılmış HSM, büyük ölçekli bir kuruluşun belirli bir türü için benzersiz gereksinimlerini karşılar özel bir hizmettir. Sonuç olarak, Azure müşterilerine getirerek bu hizmet için kullanım profili sığmayacak beklenmektedir. Çok daha uygun ve uygun maliyetli olması için Azure Key Vault hizmetini bulur. Gereksinimleriniz için uygun olduğuna karar vermenize yardımcı olması için aşağıdaki ölçütleri belirledik.
+Azure ayrılmış HSM, belirli bir büyük ölçekli kuruluş türü için benzersiz gereksinimlere yönelik özel bir hizmettir. Sonuç olarak, Azure müşterilerinin toplu 'un bu hizmet için kullanım profiline uymayacak olması beklenmektedir. Birçok, daha uygun ve uygun maliyetli bir Azure Key Vault hizmeti bulur. Gereksinimlerinize uygun olup olmadığına karar vermenize yardımcı olması için aşağıdaki ölçütleri belirledik.
 
-### <a name="best-fit"></a>En uygun
+### <a name="best-fit"></a>En iyi sığdırma
 
-Azure ayrılmış HSM doğrudan ve tek HSM cihazlarına erişimi gerektiren "lift-and-shift" senaryolar için çok uygundur. Örneklere şunlar dahildir:
+Azure adanmış HSM, en çok HSM cihazlarına doğrudan ve tek erişimli erişimi gerektiren "yükseltme ve-kaydırma" senaryoları için uygundur. Örneklere şunlar dahildir:
 
 - Geçirme uygulamaları için Azure sanal makineleri şirket içi
-- AWS bulut HSM Klasik hizmet (Amazon bu hizmetin yeni müşteriler teklifidir değil) kullanan sanal makineler için Amazon AWS EC2'den uygulamalarını geçirme
-- Çalışan yazılım Apache/Ngnix SSL yük boşaltma, Oracle TDE ve Azure sanal Makineler'de ADCS gibi verdiği 
+- AWS bulut HSM klasik hizmetini kullanan sanal makinelere (Amazon, bu hizmeti yeni müşterilere sunmadığından), Amazon AWS EC2 'tan uygulama geçirme
+- Apache/Ngnx SSL boşaltması, Oracle TDE ve Azure sanal makinelerinde ADC gibi, Sarmalanan bir sarmalanmış yazılım çalıştırma 
 
 ### <a name="not-a-fit"></a>Uygun değil
 
-Azure ayrılmış HSM aşağıdaki senaryo türü için uygun değil: Microsoft bulut ile tümleşik olmayan müşteri tarafından yönetilen anahtarlar (örneğin, Azure Information Protection, Azure Disk şifrelemesi, Azure Data Lake Store, Azure depolama, Azure SQL veritabanı ve Office 365 için müşteri anahtarı) ile söz konusu destek Şifreleme Hizmetleri Azure ayrılmış HSM.
+Azure ayrılmış HSM aşağıdaki senaryo türü için uygun değildir: İle tümleşik olmayan, müşteri tarafından yönetilen anahtarlarla şifrelemeyi destekleyen Microsoft bulut Hizmetleri (Azure Information Protection, Azure disk şifrelemesi, Azure Data Lake Store, Azure depolama, Azure SQL veritabanı ve Office 365 için müşteri anahtarı) Azure ayrılmış HSM.
 
-### <a name="it-depends"></a>Duruma göre değişir
+### <a name="it-depends"></a>Bağlı
 
-Azure ayrılmış HSM sizin için uygun olup olmadığını, gereksinimleri ve yapamaz veya ödün bulunabilecek karmaşık bir karışımını üzerinde bağlıdır. FIPS 140-2 Düzey 3 gereksinim buna bir örnektir. Bu gereksinim için ortaktır ve ayrılmış HSM şu anda, toplantı için kullanılabilecek tek seçenektir. Bu mandated gereksinimleri ilgili değilse, genellikle, Azure anahtar kasası ve HSM ayrılmış arasında bir seçim ise. Bir karar vermeden önce gereksinimlerinizi değerlendirin.
+Azure ayrılmış HSM 'nin sizin için çalışıp çalışmadığına göre, gereksinimlerinize ve yapamayacaksınız. FIPS 140-2 düzey 3 gereksinimi bir örnektir. Bu gereksinim ortaktır ve adanmış HSM Şu anda bu uygulamayı toplantı için tek seçenektir. Bu uygulanan gereksinimleri ilgili değilse, genellikle Azure Key Vault ve adanmış HSM arasında bir seçimdir. Karar vermeden önce gereksinimlerinizi değerlendirin.
 
-Seçeneklerinizi Tart gerekecektir durumlar şunlardır: 
+Seçenekleriniz için gereken durumlar şunlardır: 
 
-- Bir müşterinin Azure sanal makinesinde çalışan yeni kod
-- Azure sanal makine'de SQL Server TDE
+- Müşterinin Azure sanal makinesinde çalışan yeni kod
+- Azure sanal makinesinde TDE SQL Server
 - Azure depolama istemci tarafı şifreleme
 - SQL Server ve Azure SQL DB her zaman şifreli
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu yüksek oranda özelleştirilmiş bir hizmettir. Bu nedenle, tam olarak bu belge kümesindeki fiyatlandırması, destek ve hizmet düzeyi sözleşmeleri gibi temel kavramları anlamanız önerilir. 
+Bu, son derece özelleştirilmiş bir hizmettir. Bu nedenle, fiyatlandırma, destek ve hizmet düzeyi sözleşmeleri dahil olmak üzere bu belge kümesindeki temel kavramları tam olarak anlamanız önerilir. 
 
-[Gemalto tümleştirme kılavuzlarını](https://safenet.gemalto.com/partners/microsoft/) HSM'ler var olan bir sanal ağ ortamına sağlamayı kolaylaştırmak yardımcı olur. Var olan dağıtım Mimarinizi ayarlama işlemini belirlemenize yardımcı olmak için nasıl yapılır kılavuzlarından de olur.
+[Gemalto tümleştirme kılavuzlarından](https://safenet.gemalto.com/partners/microsoft/) , HSM 'lerin mevcut bir sanal ağ ortamına sağlanması kolaylaştırılmasına yardımcı olur. Ayrıca, dağıtım mimarinizi nasıl ayarlayabileceğiniz konusunda yardım almak için nasıl yapılır kılavuzlarından de yer vardır.
 
 * [Yüksek kullanılabilirlik](high-availability.md)
-* [fiziksel güvenlik](physical-security.md)
+* [Fiziksel güvenlik](physical-security.md)
 * [Ağ](networking.md)
 * [Desteklenebilirliği](supportability.md)
 * [İzleme](monitoring.md)

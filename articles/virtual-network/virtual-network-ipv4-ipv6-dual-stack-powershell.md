@@ -1,7 +1,7 @@
 ---
-title: Azure sanal ağında - PowerShell IPv6 ikili yığını uygulama dağıtma
+title: Azure-PowerShell 'de temel Load Balancer kullanarak IPv6 ikili yığın uygulaması dağıtma
 titlesuffix: Azure Virtual Network
-description: Bu makalede nasıl dağıtılacağı Azure Powershell kullanarak Azure sanal ağı bir IPv6 ikili yığını uygulamada gösterir.
+description: Bu makalede, Azure PowerShell kullanarak Azure sanal ağ 'da IPv6 ikili yığın uygulamasının nasıl dağıtılacağı gösterilmektedir.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -11,36 +11,41 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 04/22/2019
+ms.date: 07/08/2019
 ms.author: kumud
-ms.openlocfilehash: 5ef051f42f3d092cc1d88008eaa8af981684ac6c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0ce051892cde9cb50b43a6d4f66ed3d461e71285
+ms.sourcegitcommit: dcf3e03ef228fcbdaf0c83ae1ec2ba996a4b1892
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66730050"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "70011442"
 ---
-# <a name="deploy-an-ipv6-dual-stack-application-in-azure---powershell-preview"></a>Azure - PowerShell (Önizleme) IPv6 ikili yığını uygulama dağıtma
+# <a name="deploy-an-ipv6-dual-stack-application-using-basic-load-balancer---powershell-preview"></a>Temel Load Balancer PowerShell (Önizleme) kullanarak bir IPv6 çift yığın uygulaması dağıtma
 
-Bu makalede, azure'da çift yığın sanal ağ ve alt ağ, bir yük dengeleyici ön uç çift (IPv4 + IPv6) yapılandırmalar, ikili bir IP yapılandırmasına sahip NIC ile VM içeren bir ikili yığın (IPv4 + IPv6) uygulamasının nasıl dağıtılacağı gösterir ağ güvenlik grubu ve genel IP'ler.
+Bu makalede, çift yığın sanal ağı ve alt ağı içeren bir çift yığın (IPv4 + IPv6) uygulamasını temel Load Balancer dağıtma, Çift (IPv4 + IPv6) ön uç yapılandırmalarına sahip temel bir Load Balancer, ve içeren NIC 'leri olan sanal makineler Çift IP yapılandırması, ağ güvenlik grubu ve genel IP 'Ler.
+
+Standart Load Balancer kullanarak bir çift yığın (ıPV4 + IPv6) uygulaması dağıtmak için, bkz. [Azure PowerShell kullanarak standart Load Balancer bir IPv6 ikili yığın uygulaması dağıtma](virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-powershell.md).
 
 > [!Important]
-> Azure sanal ağ için IPv6 desteği şu anda genel Önizleme aşamasındadır. Bu önizleme bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Ayrıntılar için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Azure sanal ağ için IPv6 desteği şu anda genel önizlemededir. Bu önizleme bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Ayrıntılar için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-PowerShell'i yerel olarak yükleyip kullanmayı tercih ederseniz bu makale Azure PowerShell modülü sürüm 6.9.0 gerekir veya üzeri. Yüklü sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-Az-ps). PowerShell'i yerel olarak çalıştırıyorsanız Azure bağlantısı oluşturmak için `Connect-AzAccount` komutunu da çalıştırmanız gerekir.
+PowerShell 'i yerel olarak yükleyip kullanmayı tercih ederseniz, bu makale Azure PowerShell modülü sürümü 6.9.0 veya üstünü gerektirir. Yüklü sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-Az-ps). PowerShell'i yerel olarak çalıştırıyorsanız Azure bağlantısı oluşturmak için `Connect-AzAccount` komutunu da çalıştırmanız gerekir.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Azure'da bir çift yığın uygulaması dağıtmadan önce aboneliğiniz için aşağıdaki Azure PowerShell kullanarak bu önizleme özelliğini yapılandırmanız gerekir:
+Azure 'da bir çift yığın uygulamasını dağıtmadan önce, aşağıdaki Azure PowerShell kullanarak aboneliğinizi bu önizleme özelliği için yapılandırmanız gerekir:
 
-Şu şekilde kaydedin:
+Aşağıdaki gibi kaydolun:
+
 ```azurepowershell
 Register-AzProviderFeature -FeatureName AllowIPv6VirtualNetwork -ProviderNamespace Microsoft.Network
+Register-AzProviderFeature -FeatureName AllowIPv6CAOnStandardLB -ProviderNamespace Microsoft.Network
 ```
-Özellik kaydı tamamlanması 30 dakika kadar sürer. Aşağıdaki Azure PowerShell komutunu çalıştırarak, kayıt durumunu kontrol edebilirsiniz: Kayıt üzerinde aşağıdaki gibi denetleyin:
+Özellik kaydının tamamlanabilmesi 30 dakika kadar sürer. Aşağıdaki Azure PowerShell komutunu çalıştırarak kayıt durumunuzu kontrol edebilirsiniz: Kaydı aşağıdaki gibi denetleyin:
 ```azurepowershell
 Get-AzProviderFeature -FeatureName AllowIPv6VirtualNetwork -ProviderNamespace Microsoft.Network
+Get-AzProviderFeature -FeatureName AllowIPv6CAOnStandardLB -ProviderNamespace Microsoft.Network
 ```
 Kayıt tamamlandıktan sonra aşağıdaki komutu çalıştırın:
 
@@ -50,7 +55,7 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Network
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-İkili yığın sanal ağ oluşturabilmeniz için önce bir kaynak grubu oluşturmanız gerekir [yeni AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Aşağıdaki örnekte adlı bir kaynak grubu oluşturur *myRGDualStack* içinde *Doğu ABD* konumu:
+Çift yığın Sanal ağınızı oluşturabilmeniz için, [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup)ile bir kaynak grubu oluşturmanız gerekir. Aşağıdaki örnek, *Doğu ABD* konumunda *Myrgdualstack* adlı bir kaynak grubu oluşturur:
 
 ```azurepowershell-interactive
    $rg = New-AzResourceGroup `
@@ -58,8 +63,8 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Network
   -Location "east us"
 ```
 
-## <a name="create-ipv4-and-ipv6-public-ip-addresses"></a>IPv4 ve IPv6 genel IP adresi oluşturma
-Sanal makinelerinize Internet'ten erişmek için yük dengeleyicinin genel IP adresleri IPv4 ve IPv6 gereklidir. Genel IP adresi ile oluşturma [yeni AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress). Aşağıdaki örnekte adlı IPv4 ve IPv6 genel IP adresi oluşturur *dsPublicIP_v4* ve *dsPublicIP_v6* içinde *dsRG1* kaynak grubu:
+## <a name="create-ipv4-and-ipv6-public-ip-addresses"></a>IPv4 ve IPv6 genel IP adresleri oluşturma
+Sanal makinelerinize Internet 'ten erişmek için yük dengeleyici için IPv4 ve IPv6 genel IP adreslerinin olması gerekir. [New-Azpublicıpaddress](/powershell/module/az.network/new-azpublicipaddress)Ile genel IP adresleri oluşturun. Aşağıdaki örnek *dsRG1* kaynak grubunda *dsPublicIP_v4* ve *dsPublicIP_v6* adlı IPv4 ve IPv6 genel IP adresi oluşturur:
 
 ```azurepowershell-interactive
 $PublicIP_v4 = New-AzPublicIpAddress `
@@ -76,7 +81,7 @@ $PublicIP_v6 = New-AzPublicIpAddress `
   -AllocationMethod Dynamic `
   -IpAddressVersion IPv6
 ```
-RDP bağlantısı kullanarak sanal makinelerinizde erişmek için bir IPv4 genel IP adresleri ile sanal makineler için oluşturma [yeni AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress).
+RDP bağlantısı kullanarak sanal makinelerinize erişmek için, [New-Azpublicıpaddress](/powershell/module/az.network/new-azpublicipaddress)ile sanal makineler IÇIN bir ıPV4 genel IP adresi oluşturun.
 
 ```azurepowershell-interactive
   $RdpPublicIP_1 = New-AzPublicIpAddress `
@@ -96,11 +101,11 @@ RDP bağlantısı kullanarak sanal makinelerinizde erişmek için bir IPv4 genel
 
 ## <a name="create-basic-load-balancer"></a>Temel Yük Dengeleyici Oluşturma
 
-Bu bölümde, çift ön uç IP (IPv4 ve IPv6) ve yük dengeleyici için arka uç adres havuzu yapılandırmanız ve ardından bir temel yük dengeleyici oluşturun.
+Bu bölümde, yük dengeleyici için çift ön uç IP (IPv4 ve IPv6) ve arka uç adres havuzunu yapılandırır ve ardından temel bir Load Balancer oluşturursunuz.
 
 ### <a name="create-front-end-ip"></a>Ön uç IP oluşturma
 
-Bir ön uç IP ile oluşturma [yeni AzLoadBalancerFrontendIpConfig](/powershell/module/az.network/new-azloadbalancerfrontendipconfig). Aşağıdaki örnek, IPv4 ve IPv6 ön uç IP yapılandırmaları adlı oluşturur *dsLbFrontEnd_v4* ve *dsLbFrontEnd_v6*:
+[New-Azloadbalancerfrontendıpconfig](/powershell/module/az.network/new-azloadbalancerfrontendipconfig)ile bir ön uç IP 'si oluşturun. Aşağıdaki örnek, *dsLbFrontEnd_v4* ve *dsLbFrontEnd_v6*adlı IPv4 ve IPv6 ön uç IP yapılandırması oluşturur:
 
 ```azurepowershell-interactive
 $frontendIPv4 = New-AzLoadBalancerFrontendIpConfig `
@@ -113,9 +118,9 @@ $frontendIPv6 = New-AzLoadBalancerFrontendIpConfig `
 
 ```
 
-### <a name="configure-back-end-address-pool"></a>Arka uç adres havuzu Yapılandır
+### <a name="configure-back-end-address-pool"></a>Arka uç adres havuzunu yapılandırma
 
-İle bir arka uç adres havuzu oluşturun [yeni AzLoadBalancerBackendAddressPoolConfig](/powershell/module/az.network/new-azloadbalancerbackendaddresspoolconfig). Bu arka uç havuzu kalan adımlarda VM'ler iliştirin. Aşağıdaki örnekte adlı arka uç adres havuzları oluşturur *dsLbBackEndPool_v4* ve *dsLbBackEndPool_v6* hem IPv4 hem de IPv6 NIC yapılandırmaları ile sanal makineleri eklemek için:
+[New-Azloadbalancerbackendadddresspoolconfig](/powershell/module/az.network/new-azloadbalancerbackendaddresspoolconfig)ile arka uç adres havuzu oluşturun. VM 'Ler, kalan adımlarda bu arka uç havuzuna ekler. Aşağıdaki örnek, *dsLbBackEndPool_v4* ve *dsLbBackEndPool_v6* adlı arka uç adres havuzlarını hem ıPV4 hem de IPv6 NIC yapılandırmalarına sahip VM 'leri içerecek şekilde oluşturur:
 
 ```azurepowershell-interactive
 $backendPoolv4 = New-AzLoadBalancerBackendAddressPoolConfig `
@@ -127,9 +132,9 @@ $backendPoolv6 = New-AzLoadBalancerBackendAddressPoolConfig `
 
 ### <a name="create-a-load-balancer-rule"></a>Yük dengeleyici kuralı oluşturma
 
-Trafiğin VM’lere dağıtımını tanımlamak için bir yük dengeleyici kuralı kullanılır. Gerekli kaynak ve hedef bağlantı noktalarının yanı sıra gelen trafik için ön uç IP yapılandırması ve trafiği almak için arka uç IP havuzu tanımlamanız gerekir. Yalnızca sağlıklı olduğundan emin olmak için trafiği sanal makineleri almak, isteğe bağlı olarak bir sistem durumu araştırması tanımlayabilirsiniz. Temel yük dengeleyici hem IPv4 hem de IPv6 uç noktaları vm'lerde sistem durumunu değerlendirmek için bir IPv4 araştırması kullanır. Standart load balancer sistem durumu araştırmaları açıkça IPv6 için destek içerir.
+Trafiğin VM’lere dağıtımını tanımlamak için bir yük dengeleyici kuralı kullanılır. Gerekli kaynak ve hedef bağlantı noktalarının yanı sıra gelen trafik için ön uç IP yapılandırması ve trafiği almak için arka uç IP havuzu tanımlamanız gerekir. Yalnızca sağlıklı VM 'Lerin trafik aldığından emin olmak için isteğe bağlı olarak bir sistem durumu araştırması tanımlayabilirsiniz. Temel yük dengeleyici, VM 'lerde hem IPv4 hem de IPv6 uç noktaları için sistem durumunu değerlendirmek üzere bir IPv4 araştırması kullanır. Standart yük dengeleyici, açıkça IPv6 sistem durumu araştırmaları desteği içerir.
 
-İle bir yük dengeleyici kuralı oluşturma [Ekle AzLoadBalancerRuleConfig](/powershell/module/az.network/add-azloadbalancerruleconfig). Aşağıdaki örnekte adlı yük dengeleyici kuralları oluşturur *dsLBrule_v4* ve *dsLBrule_v6* ve noktasında trafiği dengeler *TCP* bağlantı noktası *80* için IPv4 ve IPv6 ön uç IP yapılandırması:
+[Add-AzLoadBalancerRuleConfig](/powershell/module/az.network/add-azloadbalancerruleconfig)ile bir yük dengeleyici kuralı oluşturun. Aşağıdaki örnek, *dsLBrule_v4* ve *dsLBrule_v6* adlı yük dengeleyici kuralları oluşturur ve *TCP* bağlantı noktası *80* üzerindeki trafiği IPv4 ve IPv6 ön uç IP yapılandırmalarına dengeler:
 
 ```azurepowershell-interactive
 $lbrule_v4 = New-AzLoadBalancerRuleConfig `
@@ -149,9 +154,9 @@ $lbrule_v6 = New-AzLoadBalancerRuleConfig `
   -BackendPort 80
 ```
 
-### <a name="create-load-balancer"></a>Yük dengeleyici oluşturma
+### <a name="create-load-balancer"></a>Yük dengeleyici oluştur
 
-Basic Load Balancer ile oluşturma [AzLoadBalancer yeni](/powershell/module/az.network/new-azloadbalancer). Aşağıdaki örnek, genel bir temel yük adlı dengeleyici oluşturur *myLoadBalancer* kullanarak IPv4 ve IPv6 ön uç IP yapılandırmaları, arka uç havuzları ve önceki adımlarda oluşturulan Yük Dengeleme kuralları:
+[New-AzLoadBalancer](/powershell/module/az.network/new-azloadbalancer)ile temel Load Balancer oluşturun. Aşağıdaki örnek, önceki adımlarda oluşturduğunuz IPv4 ve IPv6 ön uç IP yapılandırması, arka uç havuzları ve yük dengeleme kurallarını kullanarak *Myloadbalancer* adlı bir genel temel Load Balancer oluşturur:
 
 ```azurepowershell-interactive
 $lb = New-AzLoadBalancer `
@@ -166,11 +171,11 @@ $lb = New-AzLoadBalancer `
 ```
 
 ## <a name="create-network-resources"></a>Ağ kaynakları oluşturma
-Vm'leri dağıtmadan ve dengeleyicinizi test edebilirsiniz önce destekleyici ağ kaynakları - oluşturmalısınız kullanılabilirlik kümesi, ağ güvenlik grubu, sanal ağ ve sanal NIC. 
-### <a name="create-an-availability-set"></a>Kullanılabilirlik kümesi oluşturma
+Bazı VM 'Leri dağıtmadan ve dengeleyicinizi test etmeden önce, destekleyici ağ kaynakları (kullanılabilirlik kümesi, ağ güvenlik grubu, sanal ağ ve sanal NIC 'Ler) oluşturmanız gerekir. 
+### <a name="create-an-availability-set"></a>Kullanılabilirlik kümesi oluştur
 Uygulamanızın yüksek oranda kullanılabilir olmasını sağlamak için VM’lerinizi bir kullanılabilirlik kümesine yerleştirin.
 
-Bir kullanılabilirlik kümesi oluşturma [yeni AzAvailabilitySet](/powershell/module/az.compute/new-azavailabilityset). Aşağıdaki örnek *myAvailabilitySet* adında bir kullanılabilirlik kümesi oluşturur:
+[New-AzAvailabilitySet](/powershell/module/az.compute/new-azavailabilityset)ile bir kullanılabilirlik kümesi oluşturun. Aşağıdaki örnek *myAvailabilitySet* adında bir kullanılabilirlik kümesi oluşturur:
 
 ```azurepowershell-interactive
 $avset = New-AzAvailabilitySet `
@@ -182,13 +187,13 @@ $avset = New-AzAvailabilitySet `
   -Sku aligned
 ```
 
-### <a name="create-network-security-group"></a>Ağ güvenlik grubu oluşturma
+### <a name="create-network-security-group"></a>Ağ güvenlik grubu oluştur
 
-Sanal ağınızdaki gelen ve giden iletişimi yöneten kurallar için ağ güvenlik grubu oluşturun.
+VNET 'iniz içindeki gelen ve giden iletişimi yönetecek kurallar için bir ağ güvenlik grubu oluşturun.
 
 #### <a name="create-a-network-security-group-rule-for-port-3389"></a>3389 numaralı bağlantı noktası için ağ güvenlik grubu kuralı oluşturma
 
-Bağlantı noktası 3389 ile RDP bağlantılarına izin verecek şekilde bir ağ güvenlik grubu kuralı oluşturma [yeni AzNetworkSecurityRuleConfig](/powershell/module/az.network/new-aznetworksecurityruleconfig).
+[New-AzNetworkSecurityRuleConfig](/powershell/module/az.network/new-aznetworksecurityruleconfig)ile 3389 bağlantı noktası üzerinden RDP bağlantılarına izin veren bir ağ güvenlik grubu kuralı oluşturun.
 
 ```azurepowershell-interactive
 $rule1 = New-AzNetworkSecurityRuleConfig `
@@ -205,7 +210,7 @@ $rule1 = New-AzNetworkSecurityRuleConfig `
 ```
 #### <a name="create-a-network-security-group-rule-for-port-80"></a>80 numaralı bağlantı noktası için ağ güvenlik grubu kuralı oluşturma
 
-Bağlantı noktası 80 üzerinden internet bağlantılarına izin verecek şekilde bir ağ güvenlik grubu kuralı oluşturma [yeni AzNetworkSecurityRuleConfig](/powershell/module/az.network/new-aznetworksecurityruleconfig).
+[New-AzNetworkSecurityRuleConfig](/powershell/module/az.network/new-aznetworksecurityruleconfig)ile 80 bağlantı noktası üzerinden internet bağlantılarına izin vermek için bir ağ güvenlik grubu kuralı oluşturun.
 
 ```azurepowershell-interactive
 $rule2 = New-AzNetworkSecurityRuleConfig `
@@ -222,7 +227,7 @@ $rule2 = New-AzNetworkSecurityRuleConfig `
 ```
 #### <a name="create-a-network-security-group"></a>Ağ güvenlik grubu oluşturma
 
-Bir ağ güvenlik grubu oluşturun [yeni AzNetworkSecurityGroup](/powershell/module/az.network/new-aznetworksecuritygroup).
+[New-AzNetworkSecurityGroup](/powershell/module/az.network/new-aznetworksecuritygroup)ile bir ağ güvenlik grubu oluşturun.
 
 ```azurepowershell-interactive
 $nsg = New-AzNetworkSecurityGroup `
@@ -233,7 +238,7 @@ $nsg = New-AzNetworkSecurityGroup `
 ```
 ### <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
-İle sanal ağ oluşturma [yeni AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork). Aşağıdaki örnek *mySubnet* alt ağına sahip *myVnet* adında bir sanal ağ oluşturur:
+[New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork)ile bir sanal ağ oluşturun. Aşağıdaki örnek *mySubnet* alt ağına sahip *myVnet* adında bir sanal ağ oluşturur:
 
 ```azurepowershell-interactive
 # Create dual stack subnet
@@ -252,7 +257,7 @@ $vnet = New-AzVirtualNetwork `
 
 ### <a name="create-nics"></a>NIC’leri oluşturma
 
-Sanal NIC ile oluşturma [yeni AzNetworkInterface](/powershell/module/az.network/new-aznetworkinterface). Aşağıdaki örnek iki sanal NIC hem de IPv4 ve IPv6 yapılandırmalarla oluşturur. (Sonraki adımlarda uygulamanız için oluşturduğunuz her bir VM için bir sanal NIC).
+[New-Aznetworkınterface](/powershell/module/az.network/new-aznetworkinterface)Ile sanal NIC 'ler oluşturun. Aşağıdaki örnek, hem IPv4 hem de IPv6 yapılandırmalarına sahip iki sanal NIC oluşturur. (Sonraki adımlarda uygulamanız için oluşturduğunuz her bir VM için bir sanal NIC).
 
 ```azurepowershell-interactive
   $Ip4Config=New-AzNetworkInterfaceIpConfig `
@@ -299,13 +304,13 @@ VM’ler için [Get-Credential](https://msdn.microsoft.com/powershell/reference/
 $cred = get-credential -Message "DUAL STACK VNET SAMPLE:  Please enter the Administrator credential to log into the VMs."
 ```
 
-İle Vm'leri oluşturabilirsiniz artık [New-AzVM](/powershell/module/az.compute/new-azvm). Aşağıdaki örnek, zaten mevcut değilse iki VM ve gerekli olan sanal ağ bileşenlerini oluşturur. 
+Artık [New-AzVM](/powershell/module/az.compute/new-azvm)Ile VM 'leri oluşturabilirsiniz. Aşağıdaki örnekte, zaten mevcut değilse iki VM ve gerekli sanal ağ bileşenleri oluşturulur. 
 
 ```azurepowershell-interactive
 $vmsize = "Standard_A2"
 $ImagePublisher = "MicrosoftWindowsServer"
 $imageOffer = "WindowsServer"
-$imageSKU = "2016-Datacenter"
+$imageSKU = "2019-Datacenter"
 
 $vmName= "dsVM1"
 $VMconfig1 = New-AzVMConfig -VMName $vmName -VMSize $vmsize -AvailabilitySetId $avset.Id 3> $null | Set-AzVMOperatingSystem -Windows -ComputerName $vmName -Credential $cred -ProvisionVMAgent 3> $null | Set-AzVMSourceImage -PublisherName $ImagePublisher -Offer $imageOffer -Skus $imageSKU -Version "latest" 3> $null | Set-AzVMOSDisk -Name "$vmName.vhd" -CreateOption fromImage  3> $null | Add-AzVMNetworkInterface -Id $NIC_1.Id  3> $null 
@@ -316,8 +321,8 @@ $VMconfig2 = New-AzVMConfig -VMName $vmName -VMSize $vmsize -AvailabilitySetId $
 $VM2 = New-AzVM -ResourceGroupName $rg.ResourceGroupName  -Location $rg.Location  -VM $VMconfig2
 ```
 
-## <a name="determine-ip-addresses-of-the-ipv4-and-ipv6-endpoints"></a>IPv4 ve IPv6 bitiş IP adreslerini belirler
-Bu dağıtımla kullanılan IP'ler özetlemek için kaynak grubundaki tüm ağ arabirim nesnelerini almak `get-AzNetworkInterface`. Ayrıca, IPv4 ve IPv6 uç noktaları ile Load Balancer'ın ön uç adreslerini edinin `get-AzpublicIpAddress`.
+## <a name="determine-ip-addresses-of-the-ipv4-and-ipv6-endpoints"></a>IPv4 ve IPv6 bitiş noktalarının IP adreslerini belirleme
+Bu dağıtımda `get-AzNetworkInterface`kullanılan IP 'yi özetlemek için kaynak grubundaki tüm ağ arabirimi nesnelerini alın. Ayrıca, ile `get-AzpublicIpAddress`IPv4 ve IPv6 bitiş noktaları için Load Balancer ön uç adreslerini alın.
 
 ```azurepowershell-interactive
 $rgName= "dsRG1"
@@ -351,23 +356,23 @@ foreach ($NIC in $NICsInRG) {
  
   (get-AzpublicIpAddress -resourcegroupname $rgName | where { $_.name -notlike "RdpPublicIP*" }).IpAddress
 ```
-Aşağıdaki şekilde, özel IPv4 ve IPv6 adresleri iki VM ve yük dengeleyici ön uç IPv4 ve IPv6 IP adreslerini listeleyen örnek çıktı gösterilmektedir.
+Aşağıdaki şekilde, iki VM 'nin özel IPv4 ve IPv6 adreslerini ve Load Balancer ön uç IPv4 ve IPv6 IP adreslerini listeleyen bir örnek çıktı gösterilmektedir.
 
-![Azure'da, ikili yığın (IPv4/IPv6) uygulama dağıtımının IP özeti](./media/virtual-network-ipv4-ipv6-dual-stack-powershell/dual-stack-application-summary.png)
+![Azure 'da ikili yığın (IPv4/IPv6) uygulama dağıtımının IP Özeti](./media/virtual-network-ipv4-ipv6-dual-stack-powershell/dual-stack-application-summary.png)
 
-## <a name="view-ipv6-dual-stack-virtual-network-in-azure-portal"></a>IPv6 ikili yığını sanal ağ, Azure portalında görüntüleme
-Azure portalında sanal ağ IPv6 ikili yığını gibi görüntüleyebilirsiniz:
-1. Portalın arama çubuğunda girin *dsVnet*.
-2. Arama sonuçlarında **myVirtualNetwork** göründüğünde seçin. Böylece **genel bakış** adlı çift yığın sanal ağ sayfasının *dsVnet*. Çift yığın sanal ağı iki NIC adlı çift yığın alt ağda bulunan IPv4 ve IPv6 yapılandırmaları gösterir *dsSubnet*.
+## <a name="view-ipv6-dual-stack-virtual-network-in-azure-portal"></a>Azure portal 'de IPv6 çift yığın sanal ağını görüntüleme
+IPv6 çift yığın sanal ağını Azure portal içinde aşağıdaki gibi görüntüleyebilirsiniz:
+1. Portalın arama çubuğunda *Dsvnet*' i girin.
+2. Arama sonuçlarında **myVirtualNetwork** göründüğünde seçin. Bu, *Dsvnet*adlı çift yığın sanal ağının **genel bakış** sayfasını başlatır. Çift yığın sanal ağı, hem IPv4 hem de IPv6 yapılandırmalarına sahip ve *Dssubnet*adlı çift yığın alt ağında bulunan iki NIC 'yi gösterir.
 
-  ![IPv6 ikili yığını azure'da sanal ağ](./media/virtual-network-ipv4-ipv6-dual-stack-powershell/dual-stack-vnet.png)
+  ![Azure 'da IPv6 çift yığın sanal ağı](./media/virtual-network-ipv4-ipv6-dual-stack-powershell/dual-stack-vnet.png)
 
 > [!NOTE]
-> Azure portalında Azure sanal ağ için IPv6 kullanılabilir Bu önizleme sürümü için ise salt okunurdur.
+> Azure sanal ağ için IPv6, bu önizleme sürümünde salt okunurdur Azure portal kullanılabilir.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) komutunu kaynak grubunu, VM'yi ve tüm ilgili kaynakları.
+Artık gerekli değilse, [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) komutunu kullanarak kaynak grubunu, VM 'yi ve tüm ilgili kaynakları kaldırabilirsiniz.
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name dsRG1
@@ -375,4 +380,4 @@ Remove-AzResourceGroup -Name dsRG1
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, bir çift ön uç IP yapılandırması (IPv4 ve IPv6) ile bir temel yük dengeleyici oluşturulur. Aynı zamanda yük dengeleyicinin arka uç havuzuna eklenmiş olan çift IP yapılandırmaları (IPv4 + IPv6) NIC birlikte iki sanal makine oluşturursunuz. Azure sanal ağlarda IPv6 desteği hakkında daha fazla bilgi için bkz: [Azure sanal ağ için IPv6 nedir?](ipv6-overview.md)
+Bu makalede, bir temel Load Balancer bir çift ön uç IP yapılandırması (IPv4 ve IPv6) oluşturdunuz. Ayrıca, yük dengeleyicinin arka uç havuzuna eklenen çift IP yapılandırmalarına (ıPV4 + IPv6) sahip NIC 'Leri dahil eden iki sanal makine oluşturmuş olursunuz. Azure sanal ağlarında IPv6 desteği hakkında daha fazla bilgi edinmek için bkz. [Azure sanal ağ Için IPv6 nedir?](ipv6-overview.md)

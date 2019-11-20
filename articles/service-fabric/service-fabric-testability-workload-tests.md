@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric uygulamalarında hata benzetimleri gerçekleştirme | Microsoft Docs
-description: Hizmetlerinizi zarif ve yaşanmamasını arızalarına karşı zorlaştırmak nasıl.
+title: Azure Service Fabric uygulamalarında hata benzetimi yapma | Microsoft Docs
+description: Hizmetlerinizi doğru ve düzgün olmayan hatalara karşı nasıl harlaştırmak.
 services: service-fabric
 documentationcenter: .net
 author: anmolah
@@ -14,25 +14,25 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/15/2017
 ms.author: anmola
-ms.openlocfilehash: ceb6ad1a6a1182d78c473b8b0387c365eb660065
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bbb89b66231c949627c7ffbf99ebe9b5dd379ca2
+ms.sourcegitcommit: e72073911f7635cdae6b75066b0a88ce00b9053b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60865281"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68348710"
 ---
 # <a name="simulate-failures-during-service-workloads"></a>Hizmet iş yükleri sırasında hata benzetimleri yapma
-Azure Service fabric'te Test Edilebilirlik senaryoları, geliştiricilerin tek hataları ne yapılacağı hakkında endişe duymamanızı olanak sağlar. Burada bir açık istemci iş yükü ve hataları Interleaving gerekebilecek senaryo vardır. İstemci iş yükü ve hataları Interleaving hata gerçekleştiğinde hizmet aslında bir eylem gerçekleştiriyor sağlar. Test Edilebilirlik sağlar denetim düzeyini göz önünde bulundurulduğunda, bu iş yükü yürütmeye kesin noktalarda olabilir. Bu endüksiyon farklı durumlarda uygulama hatalarını, hataları bulabilir ve kalitesini geliştirin.
+Azure 'daki test Service Fabric senaryoları, geliştiricilerin bireysel hatalarıyla ilgilenme konusunda endişelenmelerine olanak tanır. Ancak, istemci iş yükünün ve hatalarının açık bir şekilde aramasının gerekebileceği senaryolar vardır. İstemci iş yükünün ve hatalarının araya getirilmesi, hata oluştuğunda hizmetin gerçekten bir eylem gerçekleştirmesini sağlar. Test edilebilirlik 'nın sağladığı denetim düzeyi verildiğinde, bunlar iş yükü yürütmesinin kesin noktalarında olabilir. Bu hata, uygulamadaki farklı durumlardaki hataları bulabilir ve kaliteyi iyileştirebilir.
 
-## <a name="sample-custom-scenario"></a>Özel örnek senaryosu
-Bu test, iş yüküyle karışır bir senaryo gösterilmektedir [zarif ve yaşanmamasını hataları](service-fabric-testability-actions.md#graceful-vs-ungraceful-fault-actions). Hataları, ortada hizmet işlemleri ya da en iyi sonuçlar için işlem başlattığı.
+## <a name="sample-custom-scenario"></a>Örnek özel senaryo
+Bu test, iş yükünü [düzgün ve düzgün olmayan hatalarla](service-fabric-testability-actions.md#graceful-vs-ungraceful-fault-actions)karşılıklı bırakan bir senaryoyu gösterir. Hatalar, hizmet işlemlerinin ortasında veya en iyi sonuçlar için işlem olarak bildirilmelidir.
 
-Dört iş yükleri ortaya koyan bir hizmet örneği atalım: A, B, C ve d Her iş akışları için karşılık gelen ve işlem, depolama veya bir karışımı olabilir. Basitleştirmek amacıyla, biz Bu örnekte iş yüklerinin ölçeğini soyut. Bu örnekte yürütülen farklı hatalar şunlardır:
+Dört iş yükü sunan bir hizmetin örneğini inceleyelim: A, B, C ve D. Her biri bir iş akışı kümesine karşılık gelir ve işlem, depolama veya karıştırma olabilir. Basitlik sağlamak için örneğimizde iş yüklerini Özet olarak ekleyeceğiz. Bu örnekte yürütülen farklı hatalar şunlardır:
 
-* RestartNode: Makinenin yeniden başlatılması benzetimini yapmak için yaşanmamasını hatası.
-* RestartDeployedCodePackage: Hizmet ana bilgisayarı işlemi benzetimini yapmak için yaşanmamasını hata kilitleniyor.
-* RemoveReplica: Yineleme kaldırma benzetimini yapmak için normal hata.
-* MovePrimary: Service Fabric yük dengeleyici tarafından tetiklenen bir yineleme taşır benzetimini yapmak için normal hata.
+* RestartNode: Makinenin yeniden başlatılmasının benzetimini yapmak için düzgün olmayan hata.
+* RestartDeployedCodePackage: Hizmet ana bilgisayarı işleminin çökmesinin benzetimini yapmak için düzgün olmayan hata.
+* RemoveReplica: Çoğaltma kaldırma benzetimi için düzgün hatası.
+* MovePrimary Service Fabric yük dengeleyici tarafından tetiklenen çoğaltma hareketlerinin benzetimini yapmak için düzgün hatası.
 
 ```csharp
 // Add a reference to System.Fabric.Testability.dll and System.Fabric.dll.
@@ -116,7 +116,7 @@ class Test
             // Run the selected random fault.
             await RunFaultAsync(applicationName, fault, replicaSelector, fabricClient);
             // Validate the health and stability of the service.
-            await fabricClient.ServiceManager.ValidateServiceAsync(serviceName, maxServiceStabilizationTime);
+            await fabricClient.TestManager.ValidateServiceAsync(serviceName, maxServiceStabilizationTime);
 
             // Wait for the workload to finish successfully.
             await workloadTask;
@@ -128,16 +128,16 @@ class Test
         switch (fault)
         {
             case ServiceFabricFaults.RestartNode:
-                await client.ClusterManager.RestartNodeAsync(selector, CompletionMode.Verify);
+                await client.FaultManager.RestartNodeAsync(selector, CompletionMode.Verify);
                 break;
             case ServiceFabricFaults.RestartCodePackage:
-                await client.ApplicationManager.RestartDeployedCodePackageAsync(applicationName, selector, CompletionMode.Verify);
+                await client.FaultManager.RestartDeployedCodePackageAsync(applicationName, selector, CompletionMode.Verify);
                 break;
             case ServiceFabricFaults.RemoveReplica:
-                await client.ServiceManager.RemoveReplicaAsync(selector, CompletionMode.Verify, false);
+                await client.FaultManager.RemoveReplicaAsync(selector, CompletionMode.Verify, false);
                 break;
             case ServiceFabricFaults.MovePrimary:
-                await client.ServiceManager.MovePrimaryAsync(selector.PartitionSelector);
+                await client.FaultManager.MovePrimaryAsync(selector.PartitionSelector);
                 break;
         }
     }

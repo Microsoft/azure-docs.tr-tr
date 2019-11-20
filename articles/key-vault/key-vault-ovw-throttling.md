@@ -3,18 +3,18 @@ title: Azure Key Vault azaltma kılavuzu
 description: Key Vault azaltma, kaynakların aşırı kullanımını önlemek için eş zamanlı çağrılar sayısını sınırlar.
 services: key-vault
 author: msmbaldwin
-manager: barbkess
+manager: rkarlin
 tags: ''
 ms.service: key-vault
 ms.topic: conceptual
 ms.date: 05/10/2018
 ms.author: mbaldwin
-ms.openlocfilehash: 06b96ac6ea0202b74638b9331d754c0e0cc28ad0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f10f40551701cafd94692afc0916972b1fd73aff
+ms.sourcegitcommit: 7c5a2a3068e5330b77f3c6738d6de1e03d3c3b7d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64695239"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70883054"
 ---
 # <a name="azure-key-vault-throttling-guidance"></a>Azure Key Vault azaltma kılavuzu
 
@@ -31,7 +31,7 @@ Kaynakları kötüye kullanımı önlemesi ve Key Vault'un istemciler için hizm
 
 ## <a name="how-to-throttle-your-app-in-response-to-service-limits"></a>Nasıl kısıtlanacağını uygulamanızın yanıt olarak hizmet sınırları
 
-Aşağıdaki **en iyi uygulamalar** hizmetinizi kısıtlanan olduğunda uygulamanız gerekir:
+Aşağıda, hizmetiniz kısıtlandığınızda uygulamanız gereken **en iyi yöntemler** verilmiştir:
 - İstek başına işlemlerin sayısını azaltın.
 - İstekleri sıklığını azaltın.
 - Hemen yeniden deneme kaçının. 
@@ -112,7 +112,7 @@ Uygulamanızın hata işleme uygularken, istemci tarafı azaltma ihtiyacına alg
 ```
 
 
-Bu kodu kullanarak C istemci olarak\# uygulamasıdır basit. Aşağıdaki örnekte gösterildiği nasıl HttpClient sınıfını kullanma.
+Bu kodun bir istemci C\# uygulamasında kullanılması basittir. Aşağıdaki örnekte, HttpClient sınıfının nasıl kullanıldığı gösterilmektedir.
 
 ```csharp
 public async Task<Cart> GetCartItems(int page)
@@ -131,7 +131,7 @@ public async Task<Cart> GetCartItems(int page)
 }
 ```
 
-Bu kod yalnızca bir kavram kanıtı uygun olduğunu unutmayın. 
+Bu kodun yalnızca kavram kanıtı olarak uygun olduğunu unutmayın. 
 
 ### <a name="recommended-client-side-throttling-method"></a>Önerilen istemci-tarafı azaltma yöntemi
 

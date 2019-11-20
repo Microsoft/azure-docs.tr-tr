@@ -1,151 +1,152 @@
 ---
-title: Azure Market SaaS uygulamaları teknik yayımlama Kılavuzu
-description: Adım adım kılavuz ve SaaS uygulamaları için Azure Marketi yayımlama yayımlama denetim listeleri
+title: Azure Market SaaS uygulamaları teknik Yayımlama Kılavuzu
+description: Azure Market 'Te SaaS uygulamaları yayımlamak için adım adım kılavuz ve yayımlama denetim listeleri
 services: Marketplace, Compute, Storage, Networking, Blockchain, Security, SaaS
 author: keithcharlie
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 07/09/2018
-ms.author: keithcharlie
-ms.openlocfilehash: d2b44b89443b5e7e82d303e1447533546d27ec9a
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.author: kevidal
+ms.openlocfilehash: c213bbcb3c7859aa4718916aafab970b3ffd4613
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67445737"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73813035"
 ---
-# <a name="saas-applications-offer-publishing-guide"></a>SaaS uygulamaları sunma yayımlama Kılavuzu
+# <a name="saas-applications-offer-publishing-guide"></a>SaaS uygulamaları için Yayımlama Kılavuzu
 
-SaaS uygulamaları, üç farklı eylem çağrı Market'te yayımlanabilir: "Benimle iletişim kurun," "Şimdi deneyin" ve "şimdi edinin." Bu kılavuz, her biri için gereksinimleri dahil olmak üzere bu üç seçenek açıklar. 
+SaaS uygulamaları, "benimle Iletişime geçin", "Şimdi deneyin" ve "Şimdi al" eylemine yönelik üç farklı çağrıya sahip Market 'te yayımlanabilir. Bu kılavuzda, her biri için gereksinimler dahil olmak üzere bu üç seçenek açıklanmaktadır. 
 
-## <a name="offer-overview"></a>Teklif genel bakış  
+## <a name="offer-overview"></a>Teklifin genel bakış  
 
-SaaS uygulamalarını hem Azure Vitrinler geçerli kullanılabilir seçenekler aşağıdaki tabloda açıklanmıştır:
+SaaS uygulamaları, Azure Storets 'de kullanılabilir geçerli seçenekleri açıklar:
 
-| StoreFront seçeneği | Listeleme | Deneme/Transact |  
+| Storefront seçeneği | Döküm | Deneme/Transact |  
 | --- | --- | --- |  
-| AppSource | Evet (benimle iletişime geçin) | Evet (Power BI/Dynamics) |
-| Azure Market | Hayır | Evet (SaaS uygulamaları) |   
+| AppSource | Evet (benimle Iletişim kurun) | Evet (PowerBI/Dynamics) |
+| Azure Marketi | Hayır | Evet (SaaS uygulamaları) |   
 
-**Listesi:**  Bir kişi bana Teklif türü ve deneme veya işlem düzeyi katılım uygun olmadığı durumlarda kullanılır liste yayımlama seçeneği oluşur. Bu yaklaşımın avantajı işletmenizi artırmak için anlaşmalar kapatılabilir müşteri adayları alma hemen başlamak bir çözüm içinde pazara açılma olan yayımcı sunmasıdır.  
-**Deneme/işlem:**  Müşteri, doğrudan satın almanız veya çözümünüz için bir deneme sürümü iste seçeneği vardır. Bir deneme sürümü deneyimi sağlama çalışmaları müşterilerine sunulan katılım düzeyini artırır ve satın almadan önce çözümünüzü incelemek müşterilerin sağlar. Bir deneme sürümü deneyimi ile vitrinler yükseltme daha iyi olasılığı vardır ve müşterilerle yaşadığımız daha zengin ve daha fazla müşteri adaylarını beklemelisiniz. Deneme ücretsiz destek deneme süresi boyunca en az içermelidir.  
+**Liste:**  Listeleme yayımlama seçeneği, bir kişi kullanım teklifi türü içerir ve deneme ya da Işlem düzeyinde katılım uygulanabilir olmadığında kullanılır. Bu yaklaşımın avantajı, işletmeden bir çözüm sunan yayımcıların, işinizi artırma konusunda anlaşabilecek müşteri adaylarını hemen almaya başlamasını sağlar.  
+**Deneme/işlem:**  Müşterinin çözümünüz için bir deneme süresi doğrudan satın alma veya isteme seçeneği vardır. Deneme deneyimini sağlamak, müşterilere sunulan katılım düzeyini artırır ve müşterilerin satın almadan önce çözümünüzü araştırmalarını sağlar. Deneme deneyimiyle, daha fazla bilgi sahibi olursunuz ve müşteri görevlendirmelerden daha fazla ve daha zengin müşteri adayları beklemeniz gerekir. Denemeler, deneme süresi boyunca en az ücretsiz destek içermelidir.  
 
 | SaaS uygulamaları teklifi | İş Gereksinimleri | Teknik Gereksinimler |  
 | --- | --- | --- |  
 | **Bize Ulaşın** | Evet | Hayır |  
-| **Power BI / Dynamics** | Evet | Evet (Azure AD tümleştirmesi) |  
+| **PowerBI/Dynamics** | Evet | Evet (Azure AD tümleştirmesi) |  
 | **SaaS Uygulamaları**| Evet | Evet (Azure AD tümleştirmesi) |     
 
 ## <a name="saas-list"></a>SaaS listesi
 
-Bir SaaS dökümüyle hiçbir deneme ve fatura hiçbir işlevsellik için eylem çağrısı "Kişi Me." olan 
+Deneme olmayan bir SaaS listesi için eyleme yapılan çağrı ve faturalandırma işlevleri "bana başvur" dir. 
 
-Bir SaaS uygulaması listelemek için Azure Active Directory'yi yapılandırma gerekmez. 
-
-|Gereksinimler  |Ayrıntılar  |
-|---------|---------|
-|Uygulamanız bir SaaS teklifidir.  |   Sunan bir SaaS çözümünüz olduğu ve çok kiracılı bir SaaS ürün sunar.      |
-
-
-## <a name="saas-trial"></a>SaaS denemesi
-
-Bir çözüm veya bir boş--çalışırsanız, hizmet olarak yazılım (SaaS) kullanarak app-deneme bağlı. Ücretsiz deneme teklifleri sınırlı kullanımlı veya sınırlı süreli bir deneme hesabı olarak sunulan. 
-
+SaaS uygulamasını listelemek için Azure Active Directory yapılandırmanız gerekmez. 
 
 |Gereksinimler  |Ayrıntılar  |
 |---------|---------|
-|Uygulamanız bir SaaS teklifidir.  |   Sunan bir SaaS çözümünüz olduğu ve çok kiracılı bir SaaS ürün sunar.      |
-|Uygulamanız AAD etkin değil     |   Müşteri etki alanınıza yeniden yönlendirilmiş ve müşteri ile doğrudan transact       |
+|Uygulamanız bir SaaS sunumudur  |   Çözümünüz bir SaaS sunumudur ve çok kiracılı bir SaaS ürünü sunuyoruz.      |
 
 
-## <a name="saas-trial-technical-requirements"></a>SaaS deneme teknik gereksinimler
+## <a name="saas-trial"></a>SaaS deneme sürümü
 
-SaaS uygulamalarına yönelik teknik gereksinimler basittir. Yayımcılar, yalnızca Azure Active yayımlanacak Directory'nizle (Azure AD) tümleştirilebilmesi için gereklidir. Azure AD tümleştirmesi uygulamalarıyla iyi belgelenmiştir ve SDK'ları ve kaynakları bunu gerçekleştirmek için Microsoft sağlar.  
+Ücretsiz, hizmet olarak yazılım (SaaS) tabanlı deneme sürümünü kullanarak bir çözüm veya uygulama sağlarsınız. Ücretsiz deneme teklifleri, sınırlı kullanım veya sınırlı süreli bir deneme hesabı olarak sunulabilir. 
 
-Başlatmak için diğer girişimler işten yalıtmak olanak tanıyan, Azure Marketi'nde yayımlama için adanmış bir aboneliğe sahip olmanızı öneririz. Bunu yaptıktan sonra SaaS uygulamanızı geliştirme işini başlatmak için bu abonelikte dağıtmaya başlayabilir.  
 
-Aşağıdaki sitelerde en iyi Azure Active Directory belgeler, örnekler ve yönergeler bulunur: 
+|Gereksinimler  |Ayrıntılar  |
+|---------|---------|
+|Uygulamanız bir SaaS sunumudur  |   Çözümünüz bir SaaS sunumudur ve çok kiracılı bir SaaS ürünü sunuyoruz.      |
+|Uygulamanız AAD etkin     |   Müşteri, etki alanına yeniden yönlendirilir ve müşteriyle doğrudan Transact       |
 
-* [Azure Active Directory Geliştirici Kılavuzu](https://docs.microsoft.com/azure/active-directory/develop/active-directory-developers-guide)
+
+## <a name="saas-trial-technical-requirements"></a>SaaS deneme teknik gereksinimleri
+
+SaaS uygulamaları için teknik gereksinimler basittir. Yayımcıların yalnızca yayımlanacak Azure Active Directory (Azure AD) ile tümleştirilmesi gerekir. Uygulamalarla Azure AD tümleştirmesi iyi şekilde belgelenmiştir ve Microsoft bu işlemi gerçekleştirmek için birden çok SDK ve kaynak sağlar.  
+
+Başlamak için, Azure Market yayımlaması için adanmış bir aboneliğiniz olması ve işi diğer girişimlerden ayırmanıza olanak öneririz. Bu işlem tamamlandıktan sonra, geliştirme işini başlatmak için SaaS uygulamanızı bu abonelikte dağıtmaya başlayabilirsiniz.  
+
+En iyi Azure Active Directory belge, örnek ve kılavuz aşağıdaki sitelerde bulunur: 
+
+* [Geliştirici Kılavuzu Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-developers-guide)
 
 * [Azure Active Directory ile tümleştirme](https://docs.microsoft.com/azure/active-directory/develop/active-directory-how-to-integrate)
 
-* [Uygulamaları Azure Active Directory ile tümleştirme](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications)
+* [Uygulamaları Azure Active Directory tümleştirme](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications)
 
-* [Azure yol haritası - güvenlik ve kimlik](https://azure.microsoft.com/roadmap/?category=security-identity)
+* [Azure yol haritası-güvenlik ve kimlik](https://azure.microsoft.com/roadmap/?category=security-identity)
 
-Video öğreticiler için aşağıdakileri gözden geçirin:
+Video öğreticileri için aşağıdakileri gözden geçirin:
 
-* [Azure Active Directory kimlik doğrulaması ile Vittorio Bertocci'nin](https://channel9.msdn.com/Shows/XamarinShow/Episode-27-Azure-Active-Directory-Authentication-with-Vittorio-Bertocci?term=azure%20active%20directory%20integration)
+* [Vittorio Bertoccı ile Azure Active Directory kimlik doğrulaması](https://channel9.msdn.com/Shows/XamarinShow/Episode-27-Azure-Active-Directory-Authentication-with-Vittorio-Bertocci?term=azure%20active%20directory%20integration)
 
-* [Azure Active Directory kimlik teknik bilgilendirme - bölüm 1 / 2](https://channel9.msdn.com/Blogs/MVP-Enterprise-Mobility/Azure-Active-Directory-Identity-Technical-Briefing-Part-1-of-2?term=azure%20active%20directory%20integration)
+* [Azure Active Directory Identity teknik Briing-Bölüm 1/2](https://channel9.msdn.com/Blogs/MVP-Enterprise-Mobility/Azure-Active-Directory-Identity-Technical-Briefing-Part-1-of-2?term=azure%20active%20directory%20integration)
 
-* [Azure Active Directory kimlik teknik bilgilendirme - 2 2. Bölüm](https://channel9.msdn.com/Blogs/MVP-Azure/Azure-Active-Directory-Identity-Technical-Briefing-Part-2-of-2?term=azure%20active%20directory%20integration)
+* [Azure Active Directory Identity teknik Brileme-2. Bölüm](https://channel9.msdn.com/Blogs/MVP-Azure/Azure-Active-Directory-Identity-Technical-Briefing-Part-2-of-2?term=azure%20active%20directory%20integration)
 
-* [Microsoft Azure Active Directory ile uygulamaları oluşturma](https://channel9.msdn.com/Blogs/Windows-Development-for-the-Enterprise/Building-Apps-with-Microsoft-Azure-Active-Directory?term=azure%20active%20directory%20integration)
+* [Microsoft Azure Active Directory ile uygulama oluşturma](https://channel9.msdn.com/Blogs/Windows-Development-for-the-Enterprise/Building-Apps-with-Microsoft-Azure-Active-Directory?term=azure%20active%20directory%20integration)
 
-* [Microsoft Azure Active Directory odaklanmış videoları](https://azure.microsoft.com/resources/videos/index/?services=active-directory)
+* [Microsoft Azure videoların Active Directory odaklı](https://azure.microsoft.com/resources/videos/index/?services=active-directory)
 
-Ücretsiz Azure Active Directory eğitim kullanılabilir  
-* [Microsoft Azure için BT uzmanları içerik serisi: Azure Active Directory](https://mva.microsoft.com/training-courses/microsoft-azure-for-it-pros-content-series-azure-active-directory-16754?l=N0e23wtxC_2106218965)
+Ücretsiz Azure Active Directory eğitimi şurada bulunabilir:  
+* [BT uzmanları için Microsoft Azure Içerik serisi: Azure Active Directory](https://mva.microsoft.com/training-courses/microsoft-azure-for-it-pros-content-series-azure-active-directory-16754?l=N0e23wtxC_2106218965)
 
-Ayrıca, Azure Active Directory Hizmet güncelleştirmeleri denetlemek için site sağlar   
+Ayrıca, Azure Active Directory hizmet güncelleştirmelerini denetlemek için bir site sağlar   
 * [Azure AD hizmet güncelleştirmeleri](https://azure.microsoft.com/updates/?product=active-directory)
 
-## <a name="using-azure-active-directory-to-enable-trials"></a>Deneme için Azure Active Directory kullanma  
+## <a name="using-azure-active-directory-to-enable-trials"></a>Denemeleri etkinleştirmek için Azure Active Directory kullanma  
 
-Microsoft Azure AD ile tüm Market kullanıcılarının kimliğini doğrulayan şekilde kimliği doğrulanmış bir kullanıcı Market'teki deneme listenizi aracılığıyla tıklar ve deneme ortamınıza yeniden yönlendirildiğinde, kullanıcı doğrudan bir deneme gerek kalmadan sağlayabileceğiniz bir ek oturum açma adımı. Uygulamanız kimlik doğrulaması sırasında Azure AD'den aldığı belirteci sağlama deneyimini otomatikleştirmek ve dönüştürme olasılığını artırmak sağlayarak uygulamanızı, bir kullanıcı hesabı oluşturmak için kullanabileceğiniz değerli kullanıcı bilgilerini içerir. Belirteç hakkında daha fazla bilgi için bkz: [örnek belirteçleri](https://docs.microsoft.com/azure/active-directory/develop/active-directory-token-and-claims) .
+Microsoft, tüm Market kullanıcılarının kimliğini Azure AD ile doğrular. bu nedenle, kimliği doğrulanmış bir Kullanıcı Market 'teki deneme listesini tıklatır ve deneme ortamınıza yeniden yönlendiriliyorsa, kullanıcıyı doğrudan bir denemeye ek oturum açma adımı. Kimlik doğrulama sırasında uygulamanızın Azure AD 'den aldığı belirteç, uygulamanızda bir kullanıcı hesabı oluşturmak için kullanabileceğiniz değerli Kullanıcı bilgilerini, sağlama deneyimini otomatikleştirmenizi ve dönüştürme olasılığını artırmanızı sağlar. Belirteç hakkında daha fazla bilgi için bkz. [örnek belirteçleri](https://docs.microsoft.com/azure/active-directory/develop/active-directory-token-and-claims) .
 
-Uygulamanızı veya deneme 1-tıklatma kimlik doğrulamasını etkinleştirmek için Azure AD kullanarak şunları yapar:  
-* Deneme sürümü için müşteri deneyimini Market kolaylaştırır.  
-* 'Ürün içi deneyimi' görünümünü tutar bile, kullanıcı Market'ten, etki alanı veya deneme ortamı yönlendirilir.  
-* Ek bir oturum açma adımına olmadığından yeniden yönlendirme üzerinde abandonment olasılığını azaltır.  
-* Azure AD kullanıcılarının büyük popülasyonu dağıtım engellerini azaltır.  
+1 ' i etkinleştirmek için Azure AD kullanma-uygulamanıza kimlik doğrulaması veya deneme sürümü şunları yapar:  
+* Müşteri deneyimini Market 'ten deneme sürümüne kadar kolaylaştırın.  
+* Kullanıcı Market 'ten etki alanı veya deneme ortamınıza yeniden yönlendirildiğinde bile, bir ' ürün içi deneyim ' hisini korur.  
+* Ek bir oturum açma adımı olmadığından yeniden yönlendirmeye bırakma olasılığını düşürür.  
+* Azure AD kullanıcılarının büyük popülasyonu için dağıtım sınırlamalarını azaltır.  
 
-## <a name="certifying-your-azure-ad-integration-for-marketplace"></a>Azure AD tümleştirmenizi Market için sertifikalandırma  
+## <a name="certifying-your-azure-ad-integration-for-marketplace"></a>Market için Azure AD tümleştirmenizi onaylama  
 
-Uygulamanızı tek kiracılı veya çok kiracılı olup olmamasına bağlı olarak birkaç farklı şekilde, Azure AD tümleştirmesi onaylamak ve yeni için Azure AD Federasyon çoklu oturum açma (SSO)'yı mı zaten desteklemektedir.  
+Uygulamanızın tek kiracılı veya çok kiracılı olmasına ve Azure AD Federasyon çoklu oturum açma (SSO) için yeni mi olduğunuza, yoksa zaten desteğe bağlı olarak, Azure AD tümleştirmenizi birkaç farklı yolla onaylayın.  
 
 **Çok kiracılı uygulamalar için:**  
 
-Azure AD destekliyorsa, aşağıdakileri yapın:
-1.  Azure portalında uygulamanızı kaydetme
-2.  Çok kiracılı desteği özelliği 'tek tıklamayla' deneme sürümü deneyimi almak için Azure AD'de etkinleştirin. Daha fazla bilgi bulunabilir [burada](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications).  
+Zaten Azure AD 'yi destekliyorsa şunları yapın:
+1.  Uygulamanızı Azure portal kaydetme
+2.  ' Tek tıklamayla ' deneme deneyimi almak için Azure AD 'de çok kiracılı destek özelliğini etkinleştirin. Daha ayrıntılı bilgi [burada](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications)bulunabilir.  
 
-Azure AD Federasyon SSO için yeni başladıysanız, aşağıdakileri yapın: 
-1.  Azure portalında uygulamanızı kaydetme
-2.  Azure AD kullanarak SSO geliştirme [Openıd Connect](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-openid-connect-code) veya [OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-oauth-code).
-3.  Çok kiracılılık desteğini etkinleştir 'tek tıklamayla' deneme sürümü deneyimi daha ayrıntılı bilgi almak için AAD özelliğinde bulunabilir [burada](https://docs.microsoft.com/azure/active-directory/develop/active-directory-devhowto-appsource-certified).  
+Azure AD Federasyon SSO 'yu yeni kullanıyorsanız şunları yapın: 
+1.  Uygulamanızı Azure portal kaydetme
+2.  [OpenID Connect](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-openid-connect-code) veya [OAuth 2,0](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-oauth-code)kullanarak Azure AD ile SSO geliştirin.
+3.  AAD 'de çok kiracılı destek özelliğini etkinleştirme ' tek tıklamayla ' deneme deneyimini almak için [burada](https://docs.microsoft.com/azure/active-directory/develop/active-directory-devhowto-appsource-certified)daha fazla bilgi bulabilirsiniz.  
 
-**Tek kiracılı bir uygulama için aşağıdaki seçeneklerden birini kullanın:**  
-* Kullanıcılar Konuk kullanıcılar'ı kullanarak dizininize eklemek [Azure B2B](https://docs.microsoft.com/azure/active-directory/active-directory-b2b-what-is-azure-ad-b2b)
-* 'Benimle iletişim kurun' kullanarak denemeler müşteriler için el ile sağlama
-* Bir başına Müşterisi 'Test Sürüşü' geliştirin
-* SSO ile çok kiracılı örnek bir demo uygulaması derleme
+**Tek kiracılı uygulama için aşağıdaki seçeneklerden herhangi birini kullanın:**  
+* [Azure B2B](https://docs.microsoft.com/azure/active-directory/active-directory-b2b-what-is-azure-ad-b2b) kullanarak dizininize Konuk Kullanıcı olarak Kullanıcı ekleme
+* ' Benimle Iletişim kurun ' kullanarak müşteriler için denemeleri el ile sağlayın
+* Müşteri başına ' test sürücüsü ' geliştirin
+* SSO ile çok kiracılı örnek Tanıtım uygulaması oluşturma
 
-## <a name="saas-subscriptions"></a>SaaS abonelikler
+## <a name="saas-subscriptions"></a>SaaS abonelikleri
 
-SaaS tabanlı, teknik çözümünüz olarak bir abonelik satın almak müşteri etkinleştirmek için SaaS uygulama Teklif türü kullanın. SaaS uygulamanız için aşağıdaki gereksinimler karşılanmalıdır:
-- Fiyat ve faturanızı hizmet düz, aylık fiyatı.
-- Yükseltme veya hizmet dilediğiniz zaman iptal etmek için bir yöntem sağlar.
-Microsoft commerce işlemi'ni barındırır. Microsoft, müşterinizin sizin adınıza düzenler. Bir SaaS uygulaması bir abonelik kullanmak için kendi Abonelik Yönetim hizmeti API'si etkinleştirmeniz gerekir. Abonelik Yönetimi Hizmeti API'nizi, Azure Resource Manager API'leri ile doğrudan iletişim kurması gerekir. Abonelik Yönetimi Hizmeti API, hizmet sağlama, yükseltme ve iptal etme desteklemesi gerekir.
+Müşterinizin SaaS tabanlı, teknik çözümünüzü bir abonelik olarak satın almasını sağlamak için SaaS uygulaması teklif türünü kullanın. SaaS uygulamanız için aşağıdaki gereksinimlerin karşılanması gerekir:
+- Hizmeti bir sabit (aylık veya yıllık) veya Kullanıcı başına ücret ile ücretlendirilir.
+- Hizmeti dilediğiniz zaman yükseltmek veya iptal etmek için bir yöntem sağlar.
+Microsoft, ticaret hareketini barındırır. Microsoft, müşterinizin adına fatura. Bir SaaS uygulamasını abonelik olarak sunmak için SaaS karşılama API 'Leriyle tümleştirmeniz gerekir.  Hizmetinizin sağlama, yükseltme ve iptal etme desteği gerekir.
 
 | Gereksinim | Ayrıntılar |  
 |:--- |:--- |  
-|Faturalama ve ölçüm | Teklifiniz, aylık bir sabit ücretle fiyatlandırılır. Kullanım tabanlı fiyatlandırma ve kullanım tabanlı "true-yukarı" özellikleri şu anda desteklenmiyor. |  
-|İptal etme | Teklifinizi istediğiniz zaman müşteri tarafından iptal edilebilir. |  
-|İşlem giriş sayfası | Kullanıcılar nerede oluşturabilir ve SaaS hizmet hesaplarını yönetmek bir Azure ortak markalı işlem giriş sayfası barındırabileceğiniz. |   
-| Abonelik API | Oluşturmak, güncelleştirmek ve bir kullanıcı hesabı ve hizmet planını silmek için SaaS abonelikle etkileşime hizmet kullanıma sunar. 24 saat içinde kritik API değişiklikleri desteklenmesi gerekir. Kritik olmayan API değişiklikleri düzenli olarak kullanıma sunulacaktır. |  
+|Faturalandırma ve ölçüm | Teklifiniz, yayımlamadan önce seçtiğiniz fiyatlandırma modeline (sabit fiyat veya Kullanıcı başına) göre fiyatlandırılır.  Düz oran modeli kullanıyorsanız, isteğe bağlı olarak, sabit fiyata dahil edilen kullanım için müşterileri ücretlendirmeden kullanılan ek boyutları ekleyebilirsiniz. |  
+|İptal | Teklifiniz herhangi bir zamanda müşteri tarafından iptal edilir. |  
+|İşlem giriş sayfası | Kullanıcıların SaaS hizmet hesabını oluşturup yönetebilecekleri bir Azure ortak markalı işlem giriş sayfası barındırabilirsiniz. |   
+| Abonelik API 'SI | Bir kullanıcı hesabı ve hizmet planı oluşturmak, güncelleştirmek ve silmek için SaaS aboneliğiyle etkileşime girebilen bir hizmeti kullanıma sunacaksınız. Kritik API değişikliklerinin 24 saat içinde desteklenmesi gerekir. Kritik olmayan API değişiklikleri düzenli olarak serbest bırakılır. |  
 
 >[!Note]
->Bulut çözümü sağlayıcıları (CSP) iş ortağı kanalı katılımı kullanıma sunuldu.  Lütfen [bulut çözüm sağlayıcıları](./cloud-solution-providers.md) teklifinizi Microsoft CSP aracılığıyla pazarlama hakkında daha fazla bilgi için iş ortağı kanalı.
+>Bulut çözümü sağlayıcıları (CSP) iş ortağı kanalı kabul etme artık kullanılabilir.  Teklifinizi Microsoft CSP iş ortağı kanalları aracılığıyla pazarlama hakkında daha fazla bilgi için lütfen bkz. [bulut çözümü sağlayıcıları](./cloud-solution-providers.md) .
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Zaten yapmadıysanız,
+Daha önce yapmadıysanız,
 
-- [Kayıt](https://azuremarketplace.microsoft.com/sell) Market'te.
+- Market 'e [kaydolun](https://azuremarketplace.microsoft.com/sell) .
 
-Kayıtlı ve yeni bir teklif oluşturur veya mevcut bir proje üzerinde çalışmaya,
+Kaydolduysanız ve yeni bir teklif oluşturuyor ya da mevcut bir teklif üzerinde çalışıyorsanız,
 
-- [Bulut iş ortağı portalında oturum açın](https://cloudpartner.azure.com) oluşturmak veya teklifiniz tamamlayın.
-- Bkz: [Azure SaaS uygulaması teklif](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer) daha fazla bilgi için.
+- Teklifinizin oluşturulması veya tamamlanabilmesi için [bulut iş ortağı portalı oturum açın](https://cloudpartner.azure.com) .
+- Daha fazla bilgi için bkz. [Azure SaaS uygulaması teklifi](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer) .

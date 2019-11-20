@@ -1,20 +1,20 @@
 ---
-author: wesmc7777
+author: yegu-ms
 ms.service: redis-cache
 ms.topic: include
 ms.date: 11/09/2018
-ms.author: wesmc
-ms.openlocfilehash: 8ebf5ddfa118e0aeadeab0c00a981871a4b5708e
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.author: yegu
+ms.openlocfilehash: 61e93e3700b9a396d2ac4fdcbb51fc5c874cf9cb
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188942"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68286325"
 ---
 .NET uygulamaları, önbellek istemcisi uygulamalarının yapılandırmasını basitleştiren bir NuGet paketi kullanarak Visual Studio’da yapılandırılabilecek **StackExchange.Redis** Cache istemcisi kullanabilir. 
 
 > [!NOTE]
-> Daha fazla bilgi için [StackExchange.Redis](http://github.com/StackExchange/StackExchange.Redis) GitHub sayfası ve [StackExchange.Azure önbelleği için Redis istemcisi belgeleri](http://github.com/StackExchange/StackExchange.Redis#documentation).
+> Daha fazla bilgi için bkz. [StackExchange. redsıs](https://github.com/StackExchange/StackExchange.Redis) GitHub sayfası ve [redsıs Istemci belgeleri için StackExchange. Azure önbelleği](https://github.com/StackExchange/StackExchange.Redis#documentation).
 >
 >
 

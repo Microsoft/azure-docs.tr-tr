@@ -1,48 +1,105 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Kaynak Grafı hizmeti belgeleri
+### YamlMime:Landing
+title: Azure Kaynak Grafiği belgeleri
+summary: Bulut kaynaklarınızın tümünü keşfedin ve bulut envanterinizi daha verimli bir şekilde yönetin
 metadata:
-  title: 'Azure Kaynak Grafiği Belgeleri - Öğreticiler, API Başvurusu'
-  description: 'Azure Kaynak Grafiği, büyük ölçekteki kaynaklarda karmaşık sorgular çalıştırılmasını sağlayan bir Azure hizmetidir.'
-  author: DCtheGeek
-  manager: carmonm
+  title: Azure Kaynak Grafiği belgeleri
+  description: Bulut kaynaklarınızın tümünü keşfedin ve bulut envanterinizi daha verimli bir şekilde yönetin
   ms.service: resource-graph
   ms.topic: landing-page
-  ms.date: 05/06/2019
+  ms.collection: collection
+  author: DCtheGeek
   ms.author: dacoulte
-abstract:
-  description: Azure Kaynak Grafı belgeleri büyük ölçekteki kaynaklarınızı keşfetmek için yapılandırma gerçekleştirmenize ve sorgu dilini öğrenmenize yardımcı olur.
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Kaynak Grafiğini yapılandırın ve ilk sorgunuzu çalıştırın.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              alt: Azure CLI
-              src: ./media/cli.svg
-            text: Azure CLI
-            href: first-query-azurecli.md
-          - image:
-              alt: Azure PowerShell
-              src: ./media/powershell.svg
-            text: Azure PowerShell
-            href: first-query-powershell.md
-  - title: Geri Bildirim
-    items:
-      - type: paragraph
-        text: 'Bu özellikle ilgili geri bildirimde bulunmak veya sorgularla ilgili yardım almak için Azure portalında <b>Azure İlkesi</b> <b>Kaynak Grafiği (önizleme)</b> sayfasını ziyaret edin ve geri bildirim seçeneğine tıklayın. Ayrıca <a href="https://feedback.azure.com/forums/915958-azure-governance">UserVoice</a> sayfasından bize önerilerinizi gönderebilirsiniz.'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/cli/azure/ext/resource-graph/graph">Azure CLI</a></p><p><a href="/powershell/module/az.resourcegraph/">Azure PowerShell</a></p>
-          - title: Diller
-            html: '<p><a href="/dotnet/api/Microsoft.Azure.Management.ResourceGraph">.NET için Azure SDK</a></p><p><a href="https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceGraph/">.NET için Azure SDK (NuGet)</a></p><p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2019-04-01/resourcegraph">Go için Azure SDK</a></p><p><a href="/java/api/overview/azure/resourcegraph/management?view=azure-java-stable">Java için Azure SDK</a></p><p><a href="https://search.maven.org/artifact/com.microsoft.azure.resourcegraph.v2019_04_01/azure-mgmt-resourcegraph/1.0.0-beta/jar">Java (Maven) için Azure SDK</a></p><p><a href="/javascript/api/@azure/arm-resourcegraph">Node için Azure SDK</a></p><p><a href="/python/api/azure-mgmt-resourcegraph/azure.mgmt.resourcegraph">Python için Azure SDK</a></p><p><a href="https://rubygems.org/gems/azure_mgmt_resourcegraph">Ruby (Gem) için Azure SDK</a></p>'
-          - title: REST
-            html: '<p><a href="/rest/api/azureresourcegraph/resources/resources">API Başvurusu</a></p><p><a href="https://github.com/Azure/azure-rest-api-specs/tree/master/specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2019-04-01">2019-04-01 (OpenAPI)</a></p>'
+  ms.date: 09/01/2019
+  ms.openlocfilehash: e98ffdd41547b9c1f7cbfeebfd8dad798c382fc8
+  ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/23/2019
+  ms.locfileid: "72821368"
+landingContent:
+- title: Azure Kaynak Grafı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Kaynak Grafı nedir?
+      url: ./overview.md
+  - linkListType: concept
+    links:
+    - text: Sorgu dilini gözden geçirme
+      url: ./concepts/query-language.md
+  - linkListType: how-to-guide
+    links:
+    - text: Kaynak değişikliklerini alma
+      url: ./how-to/get-resource-changes.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: İlk sorgu (portal)
+      url: ./first-query-portal.md
+    - text: İlk sorgu (PowerShell)
+      url: ./first-query-powershell.md
+    - text: İlk sorgu (CLI)
+      url: ./first-query-azurecli.md
+    - text: Sorguları paylaşma (portal)
+      url: ./tutorials/create-share-query.md
+  - linkListType: concept
+    links:
+    - text: Kaynak Grafı ile keşfedin
+      url: ./concepts/explore-resources.md
+  - linkListType: deploy
+    links:
+    - text: Başlangıç sorgu örnekleri
+      url: ./samples/starter.md
+    - text: Gelişmiş sorgu örnekleri
+      url: ./samples/advanced.md
+- title: "'Ölçeğe uygun' olarak kullanma"
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Büyük veri kümeleriyle çalışma
+      url: ./concepts/work-with-data.md
+    - text: Kısıtlanan istekler için yönergeler
+      url: ./concepts/guidance-for-throttled-requests.md
+- title: Dahil olun
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Azure İdaresi YouTube Kanalı
+      url: https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ
+    - text: Ürün özelliği isteyin
+      url: https://feedback.azure.com/forums/915958-azure-governance?category_id=345061
+    - text: Azure İdaresi için Teknoloji Topluluğu
+      url: https://techcommunity.microsoft.com/t5/Azure-Governance/bd-p/AzureGovernance
+- title: Başvuru - İndirmeler
+  linkLists:
+  - linkListType: download
+    links:
+    - text: OpenAPI - 2019-04-01
+      url: https://github.com/Azure/azure-rest-api-specs/tree/master/specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2019-04-01
+    - text: .NET için SDK - NuGet
+      url: https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceGraph/
+    - text: Java için SDK - Maven
+      url: https://search.maven.org/artifact/com.microsoft.azure.resourcegraph.v2019_04_01/azure-mgmt-resourcegraph/1.0.0-beta/jar
+    - text: Ruby için SDK - Gem
+      url: https://rubygems.org/gems/azure_mgmt_resourcegraph
+- title: Başvuru - SDK’lar
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure PowerShell
+      url: /powershell/module/az.resourcegraph/
+    - text: Azure CLI
+      url: /cli/azure/ext/resource-graph/graph
+    - text: .NET
+      url: /dotnet/api/Microsoft.Azure.Management.ResourceGraph
+    - text: Başlayın
+      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2019-04-01/resourcegraph
+    - text: Java
+      url: /java/api/overview/azure/resourcegraph/management?view=azure-java-stable
+    - text: Node
+      url: /javascript/api/@azure/arm-resourcegraph
+    - text: Python
+      url: /python/api/azure-mgmt-resourcegraph/azure.mgmt.resourcegraph
+    - text: REST
+      url: /rest/api/azure-resourcegraph/

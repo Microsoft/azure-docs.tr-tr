@@ -1,6 +1,6 @@
 ---
-title: Güvenli bir şekilde yeniden bağlanma end - App Service ortamından Azure kaynakları
-description: Bir App Service ortamından arka uç kaynaklarına güvenli bir şekilde bağlanma hakkında bilgi edinin.
+title: App Service ortamından Azure ile arka uç kaynaklarına güvenli bağlanma-Azure
+description: App Service Ortamı arka uç kaynaklarına güvenli bir şekilde bağlanma hakkında bilgi edinin.
 services: app-service
 documentationcenter: ''
 author: stefsch
@@ -10,85 +10,84 @@ ms.assetid: f82eb283-a6e7-4923-a00b-4b4ccf7c4b5b
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 10/04/2016
 ms.author: stefsch
 ms.custom: seodec18
-ms.openlocfilehash: aea51234d26e5dbaef836419c2a13a12f8083e6f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: adb7c246a9f8c8d202d45b58f4d22eeb8d51a773
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62130713"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70069973"
 ---
-# <a name="connect-securely-to-back-end-resources-from-an-app-service-environment"></a>Güvenli bir şekilde yeniden bağlanma son kaynaklardan bir App Service ortamı
+# <a name="connect-securely-to-back-end-resources-from-an-app-service-environment"></a>App Service ortamından arka uç kaynaklarına güvenli bir şekilde bağlanma
 ## <a name="overview"></a>Genel Bakış
-App Service ortamı, her zaman oluşturulduğundan **ya da** bir Azure Resource Manager sanal ağı **veya** Klasik dağıtım modeli [sanal ağ] [ virtualnetwork], App Service ortamı giden bağlantılar diğer arka uç kaynaklarına yalnızca sanal ağ üzerinden flow.  Haziran 2016'da yapılan son değişikliği ile ase genel adres aralıkları ya da RFC1918 adres alanları (yani özel adresler) kullanan sanal ağlara dağıtılabilir.  
+Bir App Service Ortamı her zaman bir Azure Resource Manager sanal ağda **veya** klasik dağıtım modeli [sanal ağında][virtualnetwork]oluşturulduğundan, bir App Service ortamı giden bağlantıları diğer arka uç kaynaklarına sanal ağ üzerinden özel olarak akabilir.  Haziran 2016 ' de yapılan son değişikliklerle birlikte, ASE 'ler ortak adres aralıkları veya RFC1918 adres alanları (örn. özel adresler) kullanan sanal ağlara da dağıtılabilir.  
 
-Örneğin, bağlantı noktası 1433'ü kilitli ile sanal makine bir kümede çalışan bir SQL Server olabilir.  Uç nokta yalnızca aynı sanal ağ diğer kaynaklara erişime izin verecek şekilde ACLd olabilir.  
+Örneğin, 1433 numaralı bağlantı noktasına sahip bir sanal makine kümesinde çalışan bir SQL Server olabilir.  Uç nokta, yalnızca aynı sanal ağdaki diğer kaynaklardan erişime izin vermek için ACLd olabilir.  
 
-Başka bir örnek olarak, hassas uç noktalar şirket içi çalışabilir ve ya da Azure'a bağlanması [siteden siteye] [ SiteToSite] veya [Azure ExpressRoute] [ ExpressRoute] bağlantıları.  Sonuç olarak, yalnızca kaynak siteden siteye veya ExpressRoute tüneller bağlı sanal ağlarda bulunan şirket içi Uç noktalara erişebilir olacaktır.
+Diğer bir örnek olarak, hassas uç noktalar şirket içinde çalışabilir ve Azure 'a [siteden siteye][SiteToSite] veya [Azure ExpressRoute][ExpressRoute] bağlantıları aracılığıyla bağlı olabilir.  Sonuç olarak, yalnızca siteden siteye veya ExpressRoute tünellerini bağlı sanal ağlardaki kaynaklar şirket içi uç noktalara erişebilir.
 
-Tüm bu senaryolar için bir App Service ortamında çalışan uygulamalar çeşitli sunucuları ve kaynakları güvenli bir şekilde bağlamak mümkün olacaktır.  Bir App Service Ortamı'nda özel uç noktalar aynı sanal ağda çalışan uygulamalardan giden trafik (veya aynı sanal ağa bağlı), sanal ağ üzerinden yalnızca akış olacaktır.  Özel uç noktalarına giden trafiği genel Internet üzerinden akışı değil.
+Bu senaryoların tümünde, bir App Service Ortamı çalışan uygulamalar çeşitli sunuculara ve kaynaklara güvenli bir şekilde bağlanabiliyor.  Aynı sanal ağdaki (ya da aynı sanal ağa bağlı) bir App Service Ortamı çalıştıran uygulamalardan giden trafik, yalnızca sanal ağ üzerinden akacaktır.  Özel uç noktalara giden trafik, genel Internet üzerinden akmaz.
 
-Bir uyarı, uç noktalarına bir sanal ağ içindeki App Service Ortamı'ndan giden trafiği için geçerlidir.  App Service ortamları bulunan sanal makinelerin uç noktalarına ulaşamıyor **aynı** App Service ortamı alt.  App Service ortamları yalnızca App Service ortamı tarafından özel kullanım için ayrılmış bir alt ağa dağıtılır sürece bu normalde bir sorunu olmamalıdır.
+Bir desteklenmediği uyarısıyla, bir sanal ağ içindeki uç noktalara App Service Ortamı giden trafiğe uygulanır.  App Service ortamlar, App Service Ortamı **aynı** alt ağda bulunan sanal makinelerin uç noktalarına ulaşamaz.  Bu, App Service ortamların yalnızca App Service Ortamı tarafından özel kullanım için ayrılmış bir alt ağa dağıtıldığı sürece normalde bir sorun olmaması gerekir.
 
 [!INCLUDE [app-service-web-to-api-and-mobile](../../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## <a name="outbound-connectivity-and-dns-requirements"></a>Giden bağlantı ve DNS gereksinimleri
-Bir App Service düzgün çalışması ortamı için çeşitli uç noktalarına giden erişim gerektirir. Tam bir ASE tarafından kullanılan dış uç noktaları "Ağ bağlantısı gerekli" bölümünde listesidir [ExpressRoute için ağ yapılandırması](app-service-app-service-environment-network-configuration-expressroute.md#required-network-connectivity) makalesi.
+App Service Ortamı düzgün bir şekilde çalışması için, çeşitli uç noktalara giden erişim gerekir. AX tarafından kullanılan dış uç noktaların tam listesi [ExpressRoute Için ağ yapılandırması](app-service-app-service-environment-network-configuration-expressroute.md#required-network-connectivity) makalesinin "gerekli ağ bağlantısı" bölümünde bulunur.
 
-App Service ortamları sanal ağ için yapılandırılmış geçerli bir DNS altyapısına gerektirir.  App Service ortamı oluşturulduktan sonra herhangi bir nedenle DNS yapılandırmasını değiştirilirse, geliştiricilerin yeni DNS yapılandırmasını seçmek için bir App Service ortamı zorlayabilirsiniz.  Portalda App Service ortamı yönetim dikey penceresinin üstünde bulunan "Restart" simgesini kullanarak sıralı bir ortamı yeniden harekete yeni DNS yapılandırmasını seçmek için ortamı neden olur.
+App Service ortamları, sanal ağ için yapılandırılmış geçerli bir DNS altyapısı gerektirir.  Bir App Service Ortamı oluşturulduktan sonra DNS yapılandırması değiştirilirse, geliştiriciler bir App Service Ortamı yeni DNS yapılandırmasını çekmeye zorlayabilir.  Portalda App Service Ortamı Yönetim dikey penceresinin en üstünde bulunan "yeniden Başlat" simgesi kullanılarak sıralı bir ortamı yeniden başlatmanın tetiklenmesi, ortamın yeni DNS yapılandırmasını başlatmasına neden olur.
 
-Özel DNS sunucuları vnet üzerinde App Service ortamı oluşturmadan önce önceden kurulum olması önerilir.  App Service ortamı oluşturma sırasında bir sanal ağın DNS yapılandırması değiştiyse, App Service ortamı oluşturma işlemi başarısız olmasıyla sonuçlanır.  Benzer bir damarlı içinde özel bir DNS sunucusu bir VPN ağ geçidi diğer ucundaki var ve DNS sunucusu erişilemez veya kullanılamaz, App Service ortamı oluşturma işlemi de başarısız olur.
+Ayrıca, VNET üzerindeki özel DNS sunucularının, bir App Service Ortamı oluşturmadan önce bir süre önce kurulumunu da öneririz.  Bir App Service Ortamı oluşturulurken bir sanal ağın DNS yapılandırması değiştirilirse, bu, App Service Ortamı oluşturma işleminin başarısız olmasına neden olur.  Benzer bir Vein içinde, bir VPN ağ geçidinin diğer ucunda özel bir DNS sunucusu varsa ve DNS sunucusu ulaşılamaz durumdaysa veya kullanılamıyorsa, App Service Ortamı oluşturma işlemi de başarısız olur.
 
-## <a name="connecting-to-a-sql-server"></a>Bir SQL Server'a bağlanma
-Yaygın olarak kullanılan SQL Server yapılandırması 1433 numaralı bağlantı noktasını dinleyen bir uç nokta vardır:
+## <a name="connecting-to-a-sql-server"></a>SQL Server bağlanma
+Ortak bir SQL Server yapılandırmasında 1433 numaralı bağlantı noktasında dinleme yapan bir uç nokta vardır:
 
 ![SQL Server uç noktası][SqlServerEndpoint]
 
-Bu uç noktaya trafiği kısıtlamak için iki yaklaşım vardır:
+Bu uç noktayla trafiği kısıtlamak için iki yaklaşım vardır:
 
-* [Ağ erişim denetimi listelerini] [ NetworkAccessControlLists] (ağ ACL'leri)
+* [Ağ Access Control listeleri][NetworkAccessControlLists] (Ağ ACL 'Leri)
 * [Ağ güvenlik grupları][NetworkSecurityGroups]
 
-## <a name="restricting-access-with-a-network-acl"></a>Bir ağ ACL ile erişimi kısıtlama
-1433 numaralı bağlantı noktasını kullanarak bir ağ erişim denetimi listesi güvenliği sağlanabilir.  Beyaz istemci aşağıdaki örnekte, bir sanal ağın içinde kaynaklanan adresleri ve diğer tüm istemciler için erişim engellenir.
+## <a name="restricting-access-with-a-network-acl"></a>Ağ ACL 'SI Ile erişimi kısıtlama
+Bağlantı noktası 1433, bir ağ erişim denetimi listesi kullanılarak güvenli hale getirilir.  Aşağıdaki örnek, bir sanal ağın içinden gelen istemci adreslerini beyaz listeler ve diğer tüm istemcilere erişimi engeller.
 
-![Ağ erişim denetimi listesi örneği][NetworkAccessControlListExample]
+![Ağ Access Control listesi örneği][NetworkAccessControlListExample]
 
-SQL Server için SQL Server örneği kullanarak bağlanabilir olarak App Service Ortamı'nda aynı sanal ağda çalışan uygulamalar **VNet iç** SQL Server sanal makine için IP adresi.  
+SQL Server ile aynı sanal ağda App Service Ortamı çalıştıran uygulamalar, SQL Server sanal makine için **VNET iç** IP adresini kullanarak SQL Server örneğine bağlanabilir.  
 
-Aşağıdaki örnek bağlantı dizesi, özel IP adresini kullanarak SQL Server başvuruyor.
+Aşağıdaki örnek bağlantı dizesi, kendi özel IP adresini kullanarak SQL Server başvurur.
 
     Server=tcp:10.0.1.6;Database=MyDatabase;User ID=MyUser;Password=PasswordHere;provider=System.Data.SqlClient
 
-Sanal makine ortak uç nokta da olsa da, ağ ACL nedeniyle genel IP adresini kullanarak bağlantı denemeleri reddedilir. 
+Sanal makinede ortak bir uç nokta de olsa da, ağ ACL 'si nedeniyle genel IP adresini kullanan bağlantı girişimleri reddedilir. 
 
-## <a name="restricting-access-with-a-network-security-group"></a>Bir ağ güvenlik grubu ile erişimi kısıtlama
-Bir ağ güvenlik grubuyla erişim güvenliğini sağlamak için alternatif bir yaklaşımdır.  Ayrı sanal makinelere veya sanal makinesi içeren bir alt ağ için ağ güvenlik grupları uygulanabilir.
+## <a name="restricting-access-with-a-network-security-group"></a>Ağ güvenlik grubuyla erişimi kısıtlama
+Erişimin güvenliğini sağlamaya yönelik alternatif bir yaklaşım da ağ güvenlik grubudur.  Ağ güvenlik grupları ayrı sanal makinelere veya sanal makineler içeren bir alt ağa uygulanabilir.
 
-İlk kez bir ağ güvenlik grubu oluşturulması gerekir:
+İlk olarak bir ağ güvenlik grubunun oluşturulması gerekir:
 
     New-AzureNetworkSecurityGroup -Name "testNSGexample" -Location "South Central US" -Label "Example network security group for an app service environment"
 
-Erişimini yalnızca VNet iç trafik bir ağ güvenlik grubuyla çok basit bir işlemdir.  Varsayılan bir ağ güvenlik grubu kuralları yalnızca aynı sanal ağdaki diğer ağ istemcilerden gelen erişime izin.
+Yalnızca VNet iç trafiğine erişimi kısıtlamak, bir ağ güvenlik grubuyla çok basittir.  Bir ağ güvenlik grubundaki varsayılan kurallar yalnızca aynı sanal ağdaki diğer ağ istemcilerinden erişime izin verir.
 
-SQL Server'a erişim sonucunda kilitlemek, kendi varsayılan kurallarla bir ağ güvenlik grubu ya da SQL Server ya da sanal makineleri içeren alt ağın çalışan sanal makineler için uygulanan kadar kolaydır.
+Sonuç olarak SQL Server erişimi, SQL Server çalıştıran sanal makinelere ya da sanal makineleri içeren alt ağa varsayılan kuralları ile bir ağ güvenlik grubu uygulamak kadar basittir.
 
-Aşağıdaki örnekte, bir ağ güvenlik grubu içeren alt ağa uygulanır:
+Aşağıdaki örnek, kapsayan alt ağa bir ağ güvenlik grubu uygular:
 
     Get-AzureNetworkSecurityGroup -Name "testNSGExample" | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName 'testVNet' -SubnetName 'Subnet-1'
 
-Sonuç bir VNet iç erişim verirken dış erişimi engelleyen güvenlik kurallar kümesidir:
+Nihai sonuç, dış erişimi engelleyen bir güvenlik kuralları kümesidir ve VNet iç erişimine izin verir:
 
 ![Varsayılan ağ güvenlik kuralları][DefaultNetworkSecurityRules]
 
 ## <a name="getting-started"></a>Başlarken
-App Service ortamları ile çalışmaya başlamak için bkz: [App Service Ortamı'na giriş][IntroToAppServiceEnvironment]
+App Service ortamlarıyla çalışmaya başlamak için bkz. [giriş App Service ortamı][IntroToAppServiceEnvironment]
 
-App Service ortamınıza gelen trafiği denetleme etrafında daha fazla bilgi için bkz [bir App Service ortamına gelen trafiği denetleme][ControlInboundASE]
+App Service Ortamı gelen trafiği denetleme hakkında daha fazla bilgi için bkz. [bir App Service ortamı gelen trafiği denetleme][ControlInboundASE]
 
 [!INCLUDE [app-service-web-try-app-service](../../../includes/app-service-web-try-app-service.md)]
 

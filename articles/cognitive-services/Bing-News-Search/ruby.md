@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Ruby ile bir haber arama ve Bing haber arama REST API'si işlemleri"
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, Ruby kullanarak Bing haber arama REST API'si için bir istek göndermek için kullanın ve bir JSON yanıtı alırsınız.
+title: 'Hızlı Başlangıç: Ruby ve Bing Haber Arama REST API bir haber araması gerçekleştirin'
+titleSuffix: Azure Cognitive Services
+description: Bing Haber Arama REST API Ruby kullanarak bir istek göndermek ve bir JSON yanıtı almak için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -11,22 +11,22 @@ ms.topic: quickstart
 ms.date: 6/19/2019
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: 5db8d9055ff973c3de1b995340d77004d889aa3d
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: ab16a54269c2afe820d9d17d1400152d078186ed
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67272738"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68423682"
 ---
-# <a name="quickstart-perform-a-news-search-using-ruby-and-the-bing-news-search-rest-api"></a>Hızlı Başlangıç: Ruby ve Bing haber arama REST API'si kullanarak bir haber arama yapın
+# <a name="quickstart-perform-a-news-search-using-ruby-and-the-bing-news-search-rest-api"></a>Hızlı Başlangıç: Ruby ve Bing Haber Arama REST API kullanarak bir haber araması gerçekleştirin
 
-Bu hızlı başlangıçta, bir JSON yanıtı alıp Bing haber arama API'si, ilk çağrı yapmak için kullanın. Bu basit bir JavaScript uygulaması, API için bir arama sorgusu gönderir ve sonuçları işler.
+Bing Haber Arama API'si ilk çağrısını yapmak ve bir JSON yanıtı almak için bu hızlı başlangıcı kullanın. Bu basit JavaScript uygulaması, API 'ye bir arama sorgusu gönderir ve sonuçları işler.
 
-Bu uygulama Python'da yazılmıştır, ancak bir RESTful Web API'si, uyumlu, çoğu programlama dilinden hizmet. Bu örneğin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/ruby/Search/BingNewsSearchv7.rb)’da mevcuttur.
+Bu uygulama Python 'da yazıldığı sırada API, bir veya daha fazla programlama dili ile uyumlu bir Web hizmeti hizmetidir. Bu örneğin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/ruby/Search/BingNewsSearchv7.rb)’da mevcuttur.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Ruby [2.4 veya sonraki bir sürümü](https://www.ruby-lang.org/en/downloads/)
+* Ruby [2,4 veya üzeri](https://www.ruby-lang.org/en/downloads/)
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../includes/cognitive-services-bing-news-search-signup-requirements.md)]
 
@@ -42,7 +42,7 @@ Ayrıca bkz: [Bilişsel hizmetler fiyatlandırması - Bing arama API'si](https:/
     require 'json'
     ```
 
-2. API uç noktası, haber arama URL'si, abonelik anahtarınız için değişkenler oluşturun ve arama terimi.
+2. API uç noktası, haber arama URL 'SI, abonelik anahtarınız ve arama terimiyle ilgili değişkenler oluşturun.
 
     ```ruby
     accessKey = "enter key here"
@@ -64,9 +64,9 @@ response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https'
 end
 ```
 
-## <a name="process-and-print-the-json-response"></a>İşlem ve JSON yanıtı yazdırma
+## <a name="process-and-print-the-json-response"></a>JSON yanıtını işleme ve yazdırma
 
-Yanıt alındıktan sonra JSON Ayrıştır ve yanıt gövdesi hem kendi üst bilgileri yazdırın:
+Yanıt alındıktan sonra, JSON 'u ayrıştırarak hem yanıt gövdesini hem de onun üst bilgilerini yazdırabilirsiniz:
 
 ```ruby
 puts "\nRelevant Headers:\n\n"
@@ -179,4 +179,4 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Signle sayfaya uygulaması oluşturma](tutorial-bing-news-search-single-page-app.md)
+> [Bir signle sayfalı uygulama oluşturma](tutorial-bing-news-search-single-page-app.md)

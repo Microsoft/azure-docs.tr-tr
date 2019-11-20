@@ -1,6 +1,6 @@
 ---
-title: Azure hızlı başlangıç - Azure portalını kullanarak Event Hubs adanmış kümesi oluşturma | Microsoft Docs
-description: Bu hızlı başlangıçta, Azure portalını kullanarak bir Azure Event Hubs kümesi oluşturmayı öğrenin.
+title: Azure hızlı başlangıç-Azure portal kullanarak Event Hubs adanmış küme oluşturma
+description: Bu hızlı başlangıçta, Azure portal kullanarak Azure Event Hubs kümesi oluşturmayı öğreneceksiniz.
 services: event-hubs
 documentationcenter: ''
 author: xurui203
@@ -8,104 +8,104 @@ manager: ''
 ms.service: event-hubs
 ms.topic: quickstart
 ms.custom: mvc
-ms.date: 05/02/2019
+ms.date: 11/05/2019
 ms.author: xurui
-ms.openlocfilehash: 269ecca8683229a56d40dfacc354abbd7ce10762
-ms.sourcegitcommit: 6932af4f4222786476fdf62e1e0bf09295d723a1
+ms.openlocfilehash: bde6844962561232e4af51f2b4e803d49bf5398e
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66688576"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73720632"
 ---
-# <a name="quickstart-create-a-dedicated-event-hubs-cluster-using-azure-portal"></a>Hızlı Başlangıç: Azure portalını kullanarak Event Hubs ayrılmış küme oluşturma 
-Event Hubs kümeleri, En zorlu akış ihtiyaçları olan müşteriler için tek kiracılı dağıtımları sunar. Bu teklif, garantili % 99,99 SLA'sı vardır ve fiyatlandırma katmanı yalnızca bizim adanmış üzerinde kullanılabilir. Bir [Event Hubs kümesi](event-hubs-dedicated-overview.md) giriş milyonlarca olay garantili kapasite ve subsecond gecikme süresi ile saniyede yapabilir. Bir küme içinde oluşturulan ad alanları ve olay hub'ları ve daha fazlasını standart teklifi, ancak herhangi bir giriş sınır tüm özellikleri içerir. Adanmış teklif ayrıca popüler içerir [Event Hubs yakalama](event-hubs-capture-overview.md) özelliği otomatik olarak batch ve günlük veri akışlarını izin vererek, hiçbir ek ücret ödemeden [Azure Blob Depolama](../storage/blobs/storage-blobs-introduction.md) veya [ Azure Data Lake depolama Gen 1](../data-lake-store/data-lake-store-overview.md).
+# <a name="quickstart-create-a-dedicated-event-hubs-cluster-using-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak adanmış Event Hubs kümesi oluşturma 
+Event Hubs kümeler en zorlu akış gereksinimlerine sahip müşteriler için tek kiracılı dağıtımlar sağlar. Bu teklif,% 99,99 SLA garanti etti ve yalnızca adanmış fiyatlandırma katmanımızda kullanılabilir. Bir [Event Hubs kümesi](event-hubs-dedicated-overview.md) , garantili kapasiteye ve alt saniyelik gecikmeye göre saniyede milyonlarca olayı alabilir. Bir küme içinde oluşturulan ad alanları ve Olay Hub 'ları, tüm giriş limitleri olmadan standart teklifin tüm özelliklerini ve daha fazlasını içerir. Adanmış teklif, ek bir ücret ödemeden popüler [Event Hubs yakalama](event-hubs-capture-overview.md) özelliğini de içerir, böylece veri akışlarını otomatik olarak [Azure Blob depolama alanına](../storage/blobs/storage-blobs-introduction.md) veya [Azure Data Lake Storage Gen 1](../data-lake-store/data-lake-store-overview.md)' e otomatik olarak günlüğe kaydedebilirsiniz.
 
-Adanmış kümeleri sağlanan ve tarafından faturalandırılır **kapasite birimleri (cu)** , CPU ve bellek kaynakları önceden ayrılmış bir miktarı. Her küme için 1, 2, 4, 8, 12, 16 veya 20 cu satın alabilirsiniz. Bu hızlı başlangıçta biz, Azure portalı üzerinden bir 1 CU Event Hubs kümesi oluşturmada size yol gösterir.
+Adanmış kümeler, önceden ayrılmış bir CPU ve bellek kaynakları miktarı olan **Kapasite birimleri (cu düzeyinde kapsanır)** tarafından sağlanır ve faturalandırılır. Her küme için 1, 2, 4, 8, 12, 16 veya 20 cu düzeyinde kapsanır satın alabilirsiniz. Bu hızlı başlangıçta, Azure portal aracılığıyla 1 CU Event Hubs kümesi oluşturma konusunda size yol göstereceğiz.
 
 > [!NOTE]
-> Bu Self Servis deneyimi'te önizlemesi şu anda kullanılabilir [Azure portalı](https://aka.ms/eventhubsclusterquickstart). Adanmış teklif hakkında sorularınız varsa lütfen iletişime geçmekten [Event Hubs ekibine](mailto:askeventhubs@microsoft.com).
+> Bu self servis deneyimi şu anda [Azure portalında](https://aka.ms/eventhubsclusterquickstart)önizleme sürümünde sunulmaktadır. Adanmış teklif hakkında sorularınız varsa, lütfen [Event Hubs ekibine](mailto:askeventhubs@microsoft.com)ulaşın.
 
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 Bu hızlı başlangıcı tamamlamak için aşağıdakileri yaptığınızdan emin olun:
 
-- Bir Azure hesabı. Biri yoksa [bir hesabı satın](https://azure.microsoft.com/pricing/purchase-options/pay-as-you-go/) başlamadan önce. Bu özellik, ücretsiz bir Azure hesabı ile desteklenmez. 
-- [Visual Studio](https://visualstudio.microsoft.com/vs/) 2017 Güncelleştirmesi (sürüm 15.3, 26730.01) 3 veya üzeri.
+- Bir Azure hesabı. Bir hesabınız yoksa, başlamadan önce [bir hesap satın alın](https://azure.microsoft.com/pricing/purchase-options/pay-as-you-go/) . Bu özellik ücretsiz bir Azure hesabıyla desteklenmez. 
+- [Visual Studio](https://visualstudio.microsoft.com/vs/) 2017 güncelleştirme 3 (sürüm 15,3, 26730,01) veya üzeri.
 - [.NET Standard SDK'sı](https://dotnet.microsoft.com/download), sürüm 2.0 veya üzeri.
-- [Bir kaynak grubu oluşturduk](../event-hubs/event-hubs-create.md#create-a-resource-group).
+- [Kaynak grubu oluşturuldu](../event-hubs/event-hubs-create.md#create-a-resource-group).
 
-## <a name="create-an-event-hubs-dedicated-cluster"></a>Event Hubs adanmış kümesi oluşturma
-Bir olay hub'ları kümesi bir veya daha fazla ad alanı oluşturabileceğiniz benzersiz içeriğin kapsamını belirleyen bir kapsayıcı sağlar. Bu Self Servis portalı deneyiminin Önizleme aşamasında 1 oluşturabilirsiniz CU kümeleri bölgelerde. 1'den daha büyük bir kümeye ihtiyacınız varsa, CU oluşturulduktan sonra kümenizi ölçeklendirmek için Azure destek isteği göndermek.
+## <a name="create-an-event-hubs-dedicated-cluster"></a>Event Hubs Ayrılmış kümesi oluşturma
+Event Hubs kümesi, bir veya daha fazla ad alanı oluşturabileceğiniz benzersiz bir kapsam kapsayıcısı sağlar. Portalın self servis deneyiminin bu önizleme aşamasında, select bölgelerinde 1 CU kümeleri oluşturabilirsiniz. 1 ' den büyük bir kümeye ihtiyacınız varsa, oluşturma işleminden sonra kümenizi ölçeklendirmek için bir Azure destek isteği gönderebilirsiniz.
 
-Azure portalını kullanarak kaynak grubunuzda bir küme oluşturmak için aşağıdaki adımları tamamlayın:
+Kaynak grubunuzda Azure portal kullanarak bir küme oluşturmak için lütfen aşağıdaki adımları izleyin:
 
-1. İzleyin [bu bağlantıyı](https://aka.ms/eventhubsclusterquickstart) Azure portalında bir küme oluşturmak için. Buna karşılık, seçin **tüm hizmetleri** sol gezinti bölmesinden, ardından "Event Hubs kümeleri" Arama çubuğuna yazın ve "Event Hubs kümeleri" sonuçlar listesinden seçin.
-2. Üzerinde **küme oluşturma** sayfasında, aşağıdakileri yapılandırın:
-    1. Girin bir **küme adı**. Adın kullanılabilirliği sistem tarafından hemen denetlenir.
-    2. Seçin **abonelik** kümeyi oluşturmak istediğiniz.
-    3. Seçin **kaynak grubu** kümeyi oluşturmak istediğiniz.
-    4. Seçin bir **konumu** küme için. Tercih edilen bir bölgeye gri renkte, geçici olarak kapasitesi dışında olan ve gönderebilmek için bir [destek isteği](#submit-a-support-request) Event Hubs ekibine.
-    5. Seçin **sonraki: Etiketleri** sayfanın alt kısmındaki düğmesi. Sistemin kaynakları tam olarak sağlaması için birkaç dakika beklemeniz gerekebilir.
+1. Azure portal bir küme oluşturmak için [Bu bağlantıyı](https://aka.ms/eventhubsclusterquickstart) izleyin. Buna karşılık, sol gezinti bölmesinden **tüm hizmetler** ' i seçin, sonra arama çubuğuna "Event Hubs kümeleri" yazın ve sonuçlar listesinden "Event Hubs kümeler" ' ı seçin.
+2. **Küme oluştur** sayfasında, aşağıdakileri yapılandırın:
+    1. **Küme için bir ad**girin. Adın kullanılabilirliği sistem tarafından hemen denetlenir.
+    2. Kümeyi oluşturmak istediğiniz **aboneliği** seçin.
+    3. Kümeyi oluşturmak istediğiniz **kaynak grubunu** seçin.
+    4. Küme için bir **konum** seçin. Tercih ettiğiniz bölge gri ise, geçici olarak kapasitesinin dışında olur ve Event Hubs ekibine bir [destek isteği](#submit-a-support-request) gönderebilirsiniz.
+    5. Sayfanın alt kısmındaki **Sonraki: Etiketler** düğmesini seçin. Sistemin kaynakları tam olarak sağlaması için birkaç dakika beklemeniz gerekebilir.
 
-        ![Event Hubs kümesi - temel sayfa oluşturma](./media/event-hubs-dedicated-cluster-create-portal/create-event-hubs-clusters-basics-page.png)
-3. Üzerinde **etiketleri** sayfasında, aşağıdakileri yapılandırın:
-    1. Girin bir **adı** ve **değer** eklemek istediğiniz etiketi. Bu adım **isteğe bağlıdır**.  
-    2. Seçin **gözden geçir + Oluştur** düğmesi.
+        ![Event Hubs kümesi oluşturma-temel bilgiler sayfası](./media/event-hubs-dedicated-cluster-create-portal/create-event-hubs-clusters-basics-page.png)
+3. **Etiketler** sayfasında, aşağıdakileri yapılandırın:
+    1. Eklemek istediğiniz etiket için bir **ad** ve bir **değer** girin. Bu adım **isteğe bağlıdır**.  
+    2. **Gözden geçir + oluştur** düğmesini seçin.
 
-        ![Event Hubs kümesi sayfası - etiketler sayfası oluşturma](./media/event-hubs-dedicated-cluster-create-portal/create-event-hubs-clusters-tags-page.png)
-4. Üzerinde **gözden geçir + Oluştur** sayfasında, ayrıntıları gözden geçirin ve seçin **Oluştur**. 
+        ![Event Hubs kümesi sayfası oluştur-Etiketler sayfası](./media/event-hubs-dedicated-cluster-create-portal/create-event-hubs-clusters-tags-page.png)
+4. **Gözden geçir + oluştur** sayfasında, ayrıntıları gözden geçirin ve **Oluştur**' u seçin. 
 
-    ![Event Hubs kümesi sayfası - gözden geçirmesi oluşturma + sayfası oluşturma](./media/event-hubs-dedicated-cluster-create-portal/create-event-hubs-clusters-review-create-page.png)
+    ![Event Hubs kümesi oluşturma sayfası-gözden geçir + Oluştur sayfası](./media/event-hubs-dedicated-cluster-create-portal/create-event-hubs-clusters-review-create-page.png)
 
-## <a name="create-a-namespace-and-event-hub-within-a-cluster"></a>Bir küme içinde bir ad alanı ve olay hub'ı oluşturma
+## <a name="create-a-namespace-and-event-hub-within-a-cluster"></a>Küme içinde bir ad alanı ve Olay Hub 'ı oluşturma
 
-1. Bir küme içinde bir ad alanı oluşturmak için **Event Hubs kümesi** sayfa seçin, kümeniz **+ Namespace** üstteki menüden.
+1. Küme içinde bir ad alanı oluşturmak için, kümenizin **Event Hubs küme** sayfasında, üstteki menüden **+ ad alanı** ' nı seçin.
 
-    ![Küme Yönetimi sayfası - ad alanı düğmesi ekleme](./media/event-hubs-dedicated-cluster-create-portal/cluster-management-page-add-namespace-button.png)
-2. Ad alanı sayfası oluşturma üzerinde aşağıdaki adımları uygulayın:
-    1. Girin bir **ad alanı adı**.  Sistem adı olup olmadığını denetler.
-    2. Ad alanına aşağıdaki özellikleri devralır:
+    ![Küme yönetim sayfası-ad alanı Ekle düğmesi](./media/event-hubs-dedicated-cluster-create-portal/cluster-management-page-add-namespace-button.png)
+2. Ad alanı oluştur sayfasında, aşağıdaki adımları uygulayın:
+    1. **Ad alanı için bir ad**girin.  Sistem, adın kullanılabilir olup olmadığını denetler.
+    2. Ad alanı aşağıdaki özellikleri devralır:
         1. Abonelik Kimliği
         2. Kaynak Grubu
-        3. Location
+        3. Konum
         4. Küme Adı
-    3. Seçin **Oluştur** ad alanı oluşturmak için. Artık kümenize yönetebilirsiniz.  
+    3. Ad alanını oluşturmak için **Oluştur** ' u seçin. Artık kümenizi yönetebilirsiniz.  
 
         ![Küme sayfasında ad alanı oluşturma](./media/event-hubs-dedicated-cluster-create-portal/create-namespace-cluster-page.png)
-3. Ad alanınız oluşturulduktan sonra [bir olay hub'ı oluşturma](event-hubs-create.md#create-an-event-hub) gibi bir ad alanı içinde normalde oluşturursunuz. 
+3. Ad alanınız oluşturulduktan sonra, normal olarak bir ad alanı içinde oluşturduğunuz için [bir olay hub 'ı oluşturabilirsiniz](event-hubs-create.md#create-an-event-hub) . 
 
 
 ## <a name="submit-a-support-request"></a>Destek talebi gönderme
 
-Oluşturma veya, tercih edilen bir bölgeye kullanılabilir değilse, sonra kümenizin boyutunu değiştirmek istiyorsanız, lütfen aşağıdaki adımları izleyerek bir destek isteği gönderin:
+Oluşturulduktan sonra kümenizin boyutunu değiştirmek isterseniz veya tercih ettiğiniz bölge kullanılamıyorsa, lütfen şu adımları izleyerek bir destek isteği gönderebilirsiniz:
 
-1. İçinde [Azure portalında](https://portal.azure.com)seçin **Yardım + Destek** sol menüden.
-2. Seçin **+ yeni destek isteği** destek menüsünde.
+1. [Azure Portal](https://portal.azure.com)' de, sol menüden **Yardım + Destek** ' i seçin.
+2. Destek menüsünden **+ Yeni destek isteği ' ni** seçin.
 3. Destek sayfasında, aşağıdaki adımları izleyin:
-    1. İçin **sorun türü**seçin **teknik** aşağı açılan listeden.
+    1. **Sorun türü**için, açılan listeden **Teknik** ' i seçin.
     2. **Abonelik** bölümünde aboneliğinizi seçin.
-    3. İçin **hizmet**seçin **Hizmetlerim**ve ardından **Event Hubs**.
-    4. İçin **kaynak**, zaten varsa, kümenizi seçin, aksi takdirde seçin **genel soru/kaynak kullanılamıyor**.
-    5. İçin **sorun türü**seçin **kota**.
-    6. İçin **sorun alt**, aşağı açılan listeden değerleri aşağıdakilerden birini seçin:
-        1. Seçin **ayrılmış SKU için istek** bölgenizde desteklenmesi özelliğin istemek için.
-        2. Seçin **ölçeği Artır veya ayrılmış küme aşağı ölçeklendirme isteği** adanmış kümenizin ölçeğini artırabilir veya istiyorsanız. 
-    7. İçin **konu**, sorunu açıklayın.
+    3. **Hizmet**Için **Hizmetlerim**' i seçin ve ardından **Event Hubs**' yi seçin.
+    4. **Kaynak**için zaten varsa kümenizi seçin, aksi takdirde **genel soru/kaynak kullanılamıyor**' ı seçin.
+    5. **Sorun türü**için **Kota**' i seçin.
+    6. **Sorun alt türü**için, açılan listeden aşağıdaki değerlerden birini seçin:
+        1. Bölgede desteklenecek özelliği istemek için **ADANMıŞ SKU isteği** seçin.
+        2. Adanmış kümenizin ölçeğini genişletmek veya daraltmak istiyorsanız **ayrılmış kümeyi** ölçeği büyütme veya küçültme isteği ' ni seçin. 
+    7. **Konu**için sorunu betimleyen.
 
         ![Destek bileti sayfası](./media/event-hubs-dedicated-cluster-create-portal/support-ticket.png)
 
- ## <a name="delete-a-dedicated-cluster"></a>Ayrılmış küme silme
+ ## <a name="delete-a-dedicated-cluster"></a>Adanmış kümeyi silme
  
-1. Kümeyi silmek için işaretleyin **Sil** üstteki menüden. Kümeniz oluşturulduktan sonra en az 4 saatlik kullanım için faturalandırılır unutmayın. 
-2. Kümeyi silmek istiyorsanız onaylayan bir ileti görüntülenir.
-3. Tür **küme adını** seçip **Sil** kümeyi silmek için.
+1. Kümeyi silmek için üstteki menüden **Sil** ' i seçin. Lütfen kümenizin, oluşturulduktan sonra en az 4 saat kullanım için faturalandırılacağını unutmayın. 
+2. Kümeyi silmek istediğinizi onaylayan bir ileti görüntülenir.
+3. Kümeyi silmek için **kümenin adını** yazın ve **Sil** ' i seçin.
 
-    ![Küme sayfayı Sil](./media/event-hubs-dedicated-cluster-create-portal/delete-cluster-page.png)
+    ![Küme sayfasını Sil](./media/event-hubs-dedicated-cluster-create-portal/delete-cluster-page.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, bir olay hub'ları kümesi oluşturuldu. Gönderin ve bir olay hub'ından olay alma ve bir Azure depolama veya Azure Data Lake Store olaylarını yakalamak adım adım yönergeler için aşağıdaki öğreticilere bakın:
+Bu makalede bir Event Hubs kümesi oluşturdunuz. Olay Hub 'ından olay gönderme ve alma ve olayları Azure depolama veya Azure Data Lake Store yakalama hakkında adım adım yönergeler için aşağıdaki öğreticilere bakın:
 
-- [.NET Core üzerinde olayları alıp göndermek](event-hubs-dotnet-standard-getstarted-send.md)
-- [Event Hubs yakalama özelliğini etkinleştirmek için Azure portalını kullanma](event-hubs-capture-enable-through-portal.md)
-- [Azure olay hub'ları için Apache Kafka kullanın](event-hubs-for-kafka-ecosystem-overview.md)
+- [.NET Core 'da olay gönderme ve alma](event-hubs-dotnet-standard-getstarted-send.md)
+- [Event Hubs yakalamayı etkinleştirmek için Azure portal kullanma](event-hubs-capture-enable-through-portal.md)
+- [Apache Kafka için Azure Event Hubs kullanma](event-hubs-for-kafka-ecosystem-overview.md)

@@ -3,17 +3,17 @@ title: Azure IoT Hub Cihazı Sağlama Hizmeti’ne Genel Bakış | Microsoft Doc
 description: Bu makale Azure’da Cihaz Sağlama Hizmeti ve IoT Hub ile cihaz sağlamayı açıklar
 author: nberdy
 ms.author: nberdy
-ms.date: 12/05/2017
+ms.date: 04/04/2019
 ms.topic: overview
 ms.service: iot-dps
 services: iot-dps
 manager: briz
-ms.openlocfilehash: 89e0b6b5bedf36c89bf3a54f4baf42f7019625c0
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 8331161cde9e7717834dabd2228848de40f7be23
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60746164"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68360305"
 ---
 # <a name="provisioning-devices-with-azure-iot-hub-device-provisioning-service"></a>Azure IoT Hub Cihazı Sağlama Hizmeti ile cihaz sağlama
 Microsoft Azure, tüm IoT çözüm ihtiyaçlarınız için zengin bir tümleşik genel bulut hizmetleri kümesi sağlar. IoT Hub Cihazı Sağlama Hizmeti doğru IoT hub’a, kullanıcı müdahalesi gerektirmeden tam zamanında sağlama olanağı sunan bir yardımcı hizmettir. Bu sayede müşteriler milyonlarca cihazı güvenli ve ölçeklenebilir bir şekilde sağlayabilir.
@@ -96,7 +96,7 @@ Diğer tüm Azure IoT hizmetleri gibi Cihaz Sağlama Hizmeti de birden fazla iş
 
 Cihaz Sağlama Hizmeti, hizmet işlemleri için yalnızca HTTPS bağlantılarını destekler.
 
-## <a name="regions"></a>Bölgeler
+## <a name="regions"></a>Regions
 Cihaz Sağlama Hizmeti birçok bölgede kullanılabilir. Tüm hizmetler için mevcut ve yeni duyurulan bölgelerin güncel listesi [Azure Bölgeleri](https://azure.microsoft.com/regions/) sayfasında yer almaktadır. Cihaz Sağlama Hizmeti’nin kullanılabilirliğini [Azure Durumu](https://azure.microsoft.com/status/) sayfasından kontrol edebilirsiniz.
 
 > [!NOTE]
@@ -108,8 +108,9 @@ Cihaz Sağlama Hizmeti için %99,9 Hizmet Düzeyi Sözleşmesi mevcuttur, [SLA�
 ## <a name="quotas"></a>Kotalar
 Her Azure aboneliği varsayılan kota sınırları içerir ve bu sınırlar, IoT çözümünüzün kapsamını etkileyebilir. Abonelik başına geçerli sınır, 10 Cihaz Sağlama Hizmeti/abonelik şeklindedir.
 
-Kota sınırları hakkındaki diğer ayrıntılar için:
+[!INCLUDE [azure-iotdps-limits](../../includes/iot-dps-limits.md)]
 
+Kota sınırları hakkındaki diğer ayrıntılar için:
 * [Azure Aboneliği Hizmet Sınırları](../azure-subscription-service-limits.md)
 
 ## <a name="related-azure-components"></a>İlgili Azure bileşenleri

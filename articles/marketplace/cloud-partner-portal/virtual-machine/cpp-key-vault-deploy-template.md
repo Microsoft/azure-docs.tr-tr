@@ -1,22 +1,23 @@
 ---
-title: Azure Key Vault dağıtım şablonu | Azure Market
-description: Yeni bir Azure Key Vault örneği dağıtmak için gereken Azure Resource Manager şablonu listeler.
+title: Azure Key Vault dağıtım şablonu | Azure Marketi
+description: Yeni bir Azure Key Vault örneği dağıtmak için gereken Azure Resource Manager şablonunu listeler.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 11/29/2018
 ms.author: pabutler
-ms.openlocfilehash: 053a9f8ddfcc523532597d9e73aa095bf9110d72
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: befed70b6858ebc8aaab7ebe200bb8082a430bab
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938610"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824059"
 ---
 # <a name="key-vault-deployment-template"></a>Anahtar kasası dağıtım şablonu
 
-Aşağıdaki Azure Resource Manager şablonu yeni bir Azure Key Vault örneği tanımlar.  Bu makalede kullanılan [Oluştur anahtar kasası sertifikası](cpp-create-key-vault-cert.md). 
+Aşağıdaki Azure Resource Manager şablonu yeni bir Azure Key Vault örneği tanımlar.  [Anahtar Kasası sertifikası oluşturma](cpp-create-key-vault-cert.md)makalesinde kullanılır. 
 
 ```json
 {

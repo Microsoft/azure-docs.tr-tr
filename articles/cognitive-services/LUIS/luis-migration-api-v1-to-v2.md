@@ -1,28 +1,28 @@
 ---
 title: v1-v2 API'si geçişi
 titleSuffix: Azure Cognitive Services
-description: Sürüm 1 uç noktası ve konuşma tanıma API'leri yazma kullanım dışı bırakılmıştır. Sürüm 2 uç nokta ve yazma API'leri geçirme anlamak için bu kılavuzu kullanın.
+description: Sürüm 1 uç noktası ve yazma Language Understanding API 'Leri kullanım dışıdır. Sürüm 2 uç noktası ve yazma API 'Lerine nasıl geçiş yapılacağını anlamak için bu kılavuzu kullanın.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
+ms.topic: conceptual
 ms.date: 04/02/2019
 ms.author: diberry
-ms.openlocfilehash: a4e176552fcbab9d54da696439c7e46750be3944
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2f67bf0951ef8928297c71e8fc9f924cf05c63f4
+ms.sourcegitcommit: 13a289ba57cfae728831e6d38b7f82dae165e59d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65522357"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68932685"
 ---
-# <a name="api-v1-to-v2-migration-guide-for-luis-apps"></a>API v1 için LUIS uygulamaları v2 Geçiş Kılavuzu
-Sürüm 1 [uç nokta](https://aka.ms/v1-endpoint-api-docs) ve [yazma](https://aka.ms/v1-authoring-api-docs) API'leri kullanım dışı bırakılmıştır. 2\. sürüme geçirme anlamak için bu kılavuzu kullanın [uç nokta](https://go.microsoft.com/fwlink/?linkid=2092356) ve [yazma](https://go.microsoft.com/fwlink/?linkid=2092087) API'leri. 
+# <a name="api-v1-to-v2-migration-guide-for-luis-apps"></a>LUSıS uygulamaları için API v1-v2 geçiş kılavuzu
+Sürüm 1 [uç noktası](https://aka.ms/v1-endpoint-api-docs) ve [yazma](https://aka.ms/v1-authoring-api-docs) API 'leri kullanım dışıdır. 2\. sürüme geçirme anlamak için bu kılavuzu kullanın [uç nokta](https://go.microsoft.com/fwlink/?linkid=2092356) ve [yazma](https://go.microsoft.com/fwlink/?linkid=2092087) API'leri. 
 
 ## <a name="new-azure-regions"></a>Yeni Azure bölgeleri
-LUIS sahip yeni [bölgeleri](https://aka.ms/LUIS-regions) LUIS API'leri için sağlanan. LUIS, bölge grupları için farklı bir portal sağlar. Uygulama sorgu beklediğiniz aynı bölgede yazılması gerekir. Uygulamaları bölgeleri otomatik olarak geçirilmez. Tek bir bölge sonra almak üzere başka bir yeni bölgede kullanılabilir olması için uygulamanın verilecek.
+LUIS sahip yeni [bölgeleri](https://aka.ms/LUIS-regions) LUIS API'leri için sağlanan. LUSıS, bölge grupları için farklı bir portal sağlar. Uygulama sorgu beklediğiniz aynı bölgede yazılması gerekir. Uygulamaları bölgeleri otomatik olarak geçirilmez. Tek bir bölge sonra almak üzere başka bir yeni bölgede kullanılabilir olması için uygulamanın verilecek.
 
 ## <a name="authoring-route-changes"></a>Rota değişiklikleri yazma
 Yazma API rota değiştirilen kullanımından **prog** kullanımına yol **API** rota.
@@ -35,7 +35,7 @@ Yazma API rota değiştirilen kullanımından **prog** kullanımına yol **API**
 
 
 ## <a name="endpoint-route-changes"></a>Uç nokta rota değişiklikleri
-API uç noktası, farklı bir yanıt yanı sıra yeni sorgu dizesi parametreleri vardır. Ayrıntılı bayrağı true ise, puanı, bağımsız olarak tüm hedefleri topScoringIntent yanı sıra bir ıntents adlı bir dizi döndürülür.
+Endpoint API 'sinin yeni sorgu dizesi parametreleri ve farklı bir yanıt vardır. Ayrıntılı bayrağı true ise, puanı, bağımsız olarak tüm hedefleri topScoringIntent yanı sıra bir ıntents adlı bir dizi döndürülür.
 
 | version | Rota Al |
 |--|--|
@@ -153,7 +153,7 @@ LUIS önerir mevcut konuşma [konuşma uç noktası](luis-how-to-review-endpoint
 |/ luis/api/v2.0/apps/customprebuiltdomains/{culture}  |Al|
 
 ## <a name="importing-1x-app-into-2x"></a>1\.x uygulama 2.x alma
-Dışarı aktarılan 1.x uygulamanın JSON içine aktarmadan önce değiştirmeniz gereken bazı alanlar vardır [LUIS] [ LUIS] 2.0. 
+Aktarılan 1. x uygulamasının JSON 'ı, [luın][LUIS] 2,0 'e aktarmadan önce değiştirmeniz gereken bazı alanlara sahiptir. 
 
 ### <a name="prebuilt-entities"></a>Önceden oluşturulmuş varlıklar 
 [Önceden oluşturulmuş varlıklarla](luis-prebuilt-entities.md) değiştirilmiştir. V2 kullandığınızdan emin olun önceden oluşturulmuş varlıklar. Bu kullanarak içerir [datetimeV2](luis-reference-prebuilt-datetimev2.md), datetime yerine. 

@@ -1,95 +1,143 @@
 ---
-title: Azure Active Directory B2C - bir Azure aboneliğine bağlama | Microsoft Docs
-description: Bir Azure aboneliği ile Azure AD B2C kiracısı için faturalama için adım adım kılavuzu.
+title: Azure Active Directory B2C için faturalandırma modeli
+description: Azure AD B2C's aylık etkin kullanıcıları (MAU) Faturalandırma modeli ve belirli bir Azure aboneliği için faturalandırmayı etkinleştirme hakkında bilgi edinin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
 ms.service: active-directory
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 01/24/2019
+ms.date: 10/25/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: d2440b638a9c8eb27505b747d26917de8032e6cd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 844b62f9575249c7b99672e9e67c94cea7ec9f99
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66510137"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72931480"
 ---
-# <a name="link-an-azure-subscription-to-an-azure-active-directory-b2c-tenant"></a>Bir Azure Active Directory B2C kiracıma bir Azure aboneliği
+# <a name="billing-model-for-azure-active-directory-b2c"></a>Azure Active Directory B2C için faturalandırma modeli
+
+Azure Active Directory B2C (Azure AD B2C) kullanımı, bağlantılı bir Azure aboneliğine faturalandırılır ve aylık etkin kullanıcılar (MAU) Faturalandırma modelini kullanır. Bir Azure AD B2C kaynağını aboneliğe bağlamayı ve MAU faturalandırma modelinin aşağıdaki bölümlerde nasıl çalıştığını öğrenin.
 
 > [!IMPORTANT]
-> En son Azure Active Directory (Azure AD) B2C için fiyatlandırma ve faturalama kullanımı hakkında bilgi için [Azure AD B2C fiyatlandırma](https://azure.microsoft.com/pricing/details/active-directory-b2c/).
+> Bu makale fiyatlandırma bilgisi içermez. Kullanım faturalaması ve fiyatlandırmayla ilgili en son bilgiler için bkz. [Azure Active Directory B2C fiyatlandırması](https://azure.microsoft.com/pricing/details/active-directory-b2c/).
 
-Azure AD B2C için kullanım ücretleri, bir Azure aboneliğine faturalandırılır. Azure AD B2C kiracısı oluşturulduğunda, Kiracı Yöneticisi açıkça Azure AD B2C kiracısı bir Azure aboneliğine bağlamak gerekir. Bu makalede, nasıl gösterir.
+## <a name="monthly-active-users-mau-billing"></a>Aylık etkin kullanıcı (MAU) Faturalandırma
 
-> [!NOTE]
-> Bir Azure AD B2C kiracısıyla bağlantılı bir aboneliği Azure AD B2C kullanımı veya ek Azure AD B2C kaynaklar dahil olmak üzere diğer Azure kaynakları faturalandırma için kullanılabilir.  Diğer Azure Hizmetleri tabanlı lisans ya da Azure AD B2C kiracısı içinde Office 365 lisansı eklemek için kullanılamaz.
+Azure AD B2C faturalandırma, aylık etkin kullanıcı (MAU) Faturalandırma olarak bilinen bir takvim ayında kimlik doğrulama etkinliği olan benzersiz kullanıcı sayısı üzerinden Ücretlendirilebilir.
 
-Abonelik bağlantısını içinde ' % s'hedef Azure aboneliğinin bir Azure AD B2C "kaynak" oluşturarak elde edilir. Diğer Azure kaynakları (örneğin, VM'ler, veri depolama için LogicApps) ile birlikte tek bir Azure aboneliği içindeki birçok Azure AD B2C "Kaynaklar" oluşturulabilir. Aboneliğin ilişkili olduğu Azure AD kiracısı giderek Abonelikteki kaynakların tümünü görebilirsiniz.
+**01 kasım 2019**tarihinden itibaren, yeni oluşturulan Azure AD B2C kiracıların tümü aylık etkin kullanıcılar (Mau) üzerinden faturalandırılır. 01 Kasım 2019 tarihinde veya sonrasında [bir aboneliğe bağlı](#link-an-azure-ad-b2c-tenant-to-a-subscription) mevcut kiracılar, aylık etkin kullanıcılar (Mau) başına faturalandırılır.
 
-Azure bulut çözümü sağlayıcıları (CSP) abonelikleri Azure AD B2C'de desteklenir. Azure AD B2C için ve tüm Azure kaynakları için API'leri veya Azure portalını kullanarak işlevselliği kullanılabilir. CSP'ye abonelik yöneticileri bağlantı taşıyın ve tüm Azure kaynakları için yaptı aynı şekilde Azure AD B2C ile ilişkileri silin. Rol tabanlı erişim denetimi kullanarak yönetim Azure AD B2C Azure AD B2C kiracısı ile bir Azure CSP aboneliği arasındaki ilişkilendirmeyi etkilenmez. Rol tabanlı erişim denetimi, Kiracı tabanlı rolleri, abonelik tabanlı roller kullanılarak elde edilir.
+01 Kasım 2019 ' den önceki bir aboneliğe bağlanmış mevcut bir Azure AD B2C kiracınız varsa, aşağıdakilerden birini seçebilirsiniz:
 
-Devam etmek için geçerli bir Azure aboneliği gereklidir.
+* Aylık etkin kullanıcılar (MAU) Faturalandırma modeline yükseltin veya
+* Kimlik doğrulama başına faturalandırma modelinde kal
 
-## <a name="create-an-azure-ad-b2c-tenant"></a>Azure AD B2C kiracısı oluşturma
+### <a name="upgrade-to-monthly-active-users-billing-model"></a>Aylık etkin kullanıcılara faturalama modeline yükselt
 
-Öncelikle [bir Azure AD B2C kiracısı oluşturmayı](active-directory-b2c-get-started.md) aboneliği bağlamak istiyor. Azure AD B2C kiracısı oluşturduysanız bu adımı atlayın.
+Azure AD B2C kaynağına yönetici erişimi olan Azure abonelik sahipleri MAU faturalandırma modeline geçebilir. Faturalandırma seçenekleri Azure AD B2C kaynağınız içinde yapılandırılır.
 
-## <a name="open-azure-portal-in-the-azure-ad-tenant-that-shows-your-azure-subscription"></a>Azure aboneliğinizi gösteren Azure AD kiracısında Azure portalını Aç
+Aylık etkin kullanıcılar (MAU) faturalandırmaya geçiş geri **alınamaz**. Bir Azure AD B2C kaynağını MAU tabanlı faturalandırma modeline dönüştürdükten sonra, bu kaynağı kimlik doğrulaması başına faturalandırma modeline döndüremezsiniz.
 
-Azure aboneliğinizi gösteren Azure AD kiracısına gidin. Açık [Azure portalında](https://portal.azure.com), kullanmak istediğiniz Azure aboneliğini gösteren Azure AD kiracısına geçiş.
+Mevcut bir Azure AD B2C kaynağı için MAU faturalandırmaya geçiş yapmak için şu adımları uygulayın:
 
-![Azure AD kiracınıza geçiş yapma](./media/active-directory-b2c-how-to-enable-billing/SelectAzureADTenant.png)
+1. [Azure Portal](https://portal.azure.com) abonelik sahibi olarak oturum açın.
+1. Üstteki menüden **Dizin + abonelik** filtresi ' ni seçin ve ardından Mau faturalandırmaya yükseltmek istediğiniz Azure AD B2C dizini seçin.<br/>
+    Azure portal](media/active-directory-b2c-how-to-enable-billing/portal-mau-01-select-b2c-directory.png) dizin ve abonelik filtresi ![
+1. Sol menüden **Azure AD B2C**' yi seçin. Ya da **tüm hizmetler** ' i seçin ve **Azure AD B2C**seçin.
+1. Azure AD B2C kiracının **genel bakış** sayfasında **kaynak adı**' nın altındaki bağlantıyı seçin. Azure AD kiracınızdaki Azure AD B2C kaynağına yönlendirilirsiniz.<br/>
+    Azure portal ![Azure AD B2C kaynak bağlantısı vurgulandı](media/active-directory-b2c-how-to-enable-billing/portal-mau-02-b2c-resource-link.png)
+1. Azure AD B2C kaynağın **genel bakış** sayfasında, **faturalandırılabilir birimler**altında, **kimlik doğrulaması başına (Mau 'ya geçin)** bağlantısını seçin.<br/>
+    ![MAU bağlantısının Azure portal vurgulanmış olarak değiştirilmesi](media/active-directory-b2c-how-to-enable-billing/portal-mau-03-change-to-mau-link.png)
+1. MAU faturalandırmayı yükseltmeyi gerçekleştirmek için **Onayla** ' yı seçin.<br/>
+    Azure portal](media/active-directory-b2c-how-to-enable-billing/portal-mau-04-confirm-change-to-mau.png) ![MAU tabanlı faturalandırma onay iletişim kutusu
 
-## <a name="find-azure-ad-b2c-in-the-azure-marketplace"></a>Azure Market'te Azure AD B2C'yi bulun
+### <a name="what-to-expect-when-you-transition-to-mau-billing-from-per-authentication-billing"></a>Kimlik doğrulama başına faturalandırma 'den MAU faturalandırmaya geçiş yaptığınızda bekleneceğleriniz
 
-Tıklayın **kaynak Oluştur** düğmesi. **Markette ara** alanına `B2C` yazın.
+MAU tabanlı ölçüm, siz, abonelik/kaynak sahibi, değişikliği onaylamak için etkin duruma gelir. Aylık faturanızda, değişiklik yapılıncaya kadar faturalandırılan kimlik doğrulaması birimleri ve değişiklik ile başlayan yeni MAU birimleri yansıtılacaktır.
 
-![Aramaya Market alan düğmesi vurgulanmış ve Azure AD B2C metin Ekle](../../includes/media/active-directory-b2c-create-tenant/find-azure-ad-b2c.png)
+Geçiş ayı sırasında kullanıcılar çift sayılmaz. Değişiklikten önce kimlik doğrulayan benzersiz etkin kullanıcılar, bir takvim ayında kimlik doğrulama ücreti başına ücretlendirilir. Aynı kullanıcılar, aboneliğin fatura döngüsünün geri kalanı için MAU hesaplamasına dahil edilmez. Örnek:
 
-Sonuç listesinden **Azure AD B2C**.
+* Contoso B2C kiracısında 1.000 kullanıcısı vardır. 250 Kullanıcı belirli bir ayda etkindir. Abonelik Yöneticisi, ayın 10 ' da, kimlik doğrulamasından bağımsız olarak aylık etkin kullanıcılara (MAU) göre değişir.
+* 1\.10 ' un faturalandırılması, kimlik doğrulama modeli kullanılarak faturalandırılır.
+  * Bu süre boyunca 100 Kullanıcı oturum açtığında (1-10), bu kullanıcılar *ay için ücretli*olarak etiketlenir.
+* 10 ' dan (geçiş geçerlilik süresi) faturalama, MAU fiyatı üzerinden faturalandırılır.
+  * Bu süre boyunca ek 150 Kullanıcı oturum açtığında (10-30), yalnızca ek 150 faturalandırılır.
+  * İlk 100 kullanıcının devam eden etkinliği, takvim ayının geri kalanı için faturalandırmayı etkilemez.
 
-![Sonuç listesinde Azure AD B2C seçili](../../includes/media/active-directory-b2c-create-tenant/find-azure-ad-b2c-result.png)
+Geçişin fatura dönemi boyunca, abonelik sahibi büyük olasılıkla Azure aboneliği faturalandırma ekstresinde her iki yöntem için de (kimlik doğrulaması başına ve MAU başına) giriş olarak görünür:
 
-Azure AD B2C hakkında ayrıntılar gösterilir. Yeni Azure Active Directory B2C kiracınızı yapılandırmaya başlamak için **Oluştur** düğmesine tıklayın.
+* Kimlik doğrulama başına yansıtan değişikliğin Tarih/saate kadar olan kullanım için bir giriş.
+* Aylık etkin kullanıcıları (MAU) yansıtan değişiklikten sonra kullanım için bir giriş.
 
-Kaynak oluşturma ekranında seçin **Azure Aboneliğimi bağlantı var olan bir Azure AD B2C Kiracısına**.
+Azure AD B2C için kullanım faturalaması ve fiyatlandırmayla ilgili en son bilgiler için bkz. [Azure Active Directory B2C fiyatlandırması](https://azure.microsoft.com/pricing/details/active-directory-b2c/).
 
-## <a name="create-an-azure-ad-b2c-resource-within-the-azure-subscription"></a>Azure aboneliğindeki bir Azure AD B2C kaynağı oluşturun
+## <a name="link-an-azure-ad-b2c-tenant-to-a-subscription"></a>Azure AD B2C kiracıyı aboneliğe bağlama
 
-Kaynak oluşturma iletişim kutusunda, açılır listeden bir Azure AD B2C kiracısı seçin. Tüm genel Yöneticisi ve zaten bir aboneliğe bağlı değil o olan kiracılar görürsünüz.
+Azure Active Directory B2C (Azure AD B2C) için kullanım ücretleri bir Azure aboneliğine faturalandırılır. Azure AD B2C kiracı oluşturulduğunda, kiracı yöneticisinin Azure AD B2C kiracıyı açık bir şekilde bir Azure aboneliğine bağlanması gerekir.
 
-Azure AD B2C kaynak adı, Azure AD B2C kiracısı etki alanı adını eşleştirmek için seçilmiş.
+Abonelik bağlantısı, hedef Azure aboneliği içinde bir Azure AD B2C *kaynağı* oluşturularak elde edilir. Birçok Azure AD B2C kaynak, sanal makineler, depolama hesapları ve Logic Apps gibi diğer Azure kaynaklarıyla birlikte tek bir Azure aboneliğinde oluşturulabilir. Aboneliğin ilişkilendirildiği Azure Active Directory (Azure AD) kiracısına giderek bir abonelik içindeki kaynakların tümünü görebilirsiniz.
 
-Abonelik için Yöneticisi olduğunuz bir etkin Azure aboneliği seçin.
+Azure AD B2C kiracıya bağlı bir abonelik, ek Azure AD B2C kaynakları da dahil olmak üzere Azure AD B2C kullanım veya diğer Azure kaynaklarının faturalandırılması için kullanılabilir. Azure AD B2C kiracının içindeki diğer Azure lisans tabanlı Hizmetleri veya Office 365 lisanslarını eklemek için kullanılamaz.
 
-Bir kaynak grubu ve kaynak grubu konumu seçin. Seçimin Burada, Azure AD B2C Kiracı konumu, performans veya faturalama durumu herhangi bir etkisi yoktur.
+### <a name="prerequisites"></a>Önkoşullar
 
-![B2C kaynağı oluşturma](./media/active-directory-b2c-how-to-enable-billing/createresourceb2c.png)
+* [Azure aboneliği](https://azure.microsoft.com/free/)
+* Aboneliğe bağlamak istediğiniz [Azure AD B2C kiracı](active-directory-b2c-get-started.md)
+  * Kiracı Yöneticisi olmanız gerekir
+  * Kiracının zaten bir aboneliğe bağlı olmaması gerekir
 
-## <a name="manage-your-azure-ad-b2c-tenant-resources"></a>Azure AD B2C kiracısı kaynaklarınızı yönetin
+### <a name="create-the-link"></a>Bağlantıyı oluşturma
 
-Azure aboneliğinde bir Azure AD B2C kaynağı başarıyla oluşturulduktan sonra yeni bir kaynak türü "B2C kiracısı diğer Azure kaynaklarınızın yanı sıra eklendi" görmeniz gerekir.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.
+1. Üst menüden **Dizin + abonelik** filtresi ' ni seçin ve ardından kullanmak istediğiniz Azure aboneliğini içeren dizini seçin (Azure AD B2C kiracıyı içeren dizin*değil* ).
+1. **Kaynak oluştur**' u seçin, **Market alanını ara** alanına `Active Directory B2C` girin ve **Azure Active Directory B2C**' ı seçin.
+1. **Oluştur**’u seçin
+1. **Mevcut bir Azure AD B2C kiracıyı Azure aboneliğime bağla**' yı seçin.
+1. Açılan listeden bir **Azure AD B2C kiracı** seçin. Yalnızca genel yöneticisi olduğunuz ve bir aboneliğe henüz bağlanmamış olan kiracılar gösterilir. **Azure AD B2C kaynak adı** alanı seçtiğiniz Azure AD B2C kiracının etki alanı adıyla doldurulur.
+1. Yönetici olduğunuz etkin bir Azure **aboneliğini** seçin.
+1. **Kaynak grubu**altında **Yeni oluştur**' u seçin ve **kaynak grubu konumunu**belirtin. Buradaki kaynak grubu ayarları Azure AD B2C kiracı konumunuzu, performansını veya faturalandırma durumunu etkilemez.
+1. **Oluştur**'u seçin.
+    Azure portal Azure AD B2C kaynak oluşturma sayfasını ![](./media/active-directory-b2c-how-to-enable-billing/portal-01-create-b2c-resource-page.png)
 
-Bu kaynak için kullanabilirsiniz:
+Azure AD B2C kiracısı için bu adımları tamamladıktan sonra Azure aboneliğiniz, varsa Azure doğrudan veya Kurumsal Anlaşma ayrıntılarınıza uygun olarak faturalandırılır.
 
-- Faturalama bilgileri gözden geçirmek için abonelik gidin.
-- Azure AD B2C kiracınıza gitmek
-- Destek talebi gönderme
-- Azure AD B2C Kiracı kaynak başka bir Azure aboneliğine veya başka bir kaynak grubuna taşıyın.
+### <a name="manage-your-azure-ad-b2c-tenant-resources"></a>Azure AD B2C kiracı kaynaklarınızı yönetin
 
-![B2C kaynağı ayarları](./media/active-directory-b2c-how-to-enable-billing/b2cresourcesettings.png)
+Bir Azure aboneliğinde Azure AD B2C kaynağını oluşturduktan sonra, diğer Azure kaynaklarınızla "B2C kiracısı" türünde yeni bir kaynak göründüğünü görmeniz gerekir.
 
-## <a name="known-issues"></a>Bilinen Sorunlar
+Bu kaynağı kullanarak şunları yapabilirsiniz:
 
-### <a name="self-imposed-restrictions"></a>Kendi kendine kıldığını kısıtlamaları
+* Fatura bilgilerini gözden geçirmek için aboneliğe gidin
+* Azure AD B2C kiracının kiracı KIMLIĞINI GUID biçiminde al
+* Azure AD B2C kiracınıza gidin
+* Destek talebi gönderme
+* Azure AD B2C kiracı kaynağınızı başka bir Azure aboneliğine veya kaynak grubuna taşıyın
 
-Bir kullanıcı Azure kaynak oluşturma için bölgesel bir kısıtlama oluşturulmuş. Bu kısıtlama, Azure AD B2C kaynağı oluşturulmasını engelleyebilir. Azaltmak için lütfen bu kısıtlama hafifletin.
+![Azure portal B2C kaynak ayarları sayfası](./media/active-directory-b2c-how-to-enable-billing/portal-02-b2c-resource-overview.png)
+
+### <a name="regional-restrictions"></a>Bölgesel kısıtlamalar
+
+Aboneliğinizde Azure kaynak oluşturma için bölgesel kısıtlamalar yaptıysanız, bu kısıtlama Azure AD B2C kaynağını oluşturmanızı engelleyebilir.
+
+Bu sorunu azaltmak için bölgesel kısıtlamalarınızı rahatlaın.
+
+## <a name="azure-cloud-solution-providers-csp-subscriptions"></a>Azure bulut çözümü sağlayıcıları (CSP) abonelikleri
+
+Azure bulut çözümü sağlayıcıları (CSP) abonelikleri Azure AD B2C desteklenir. İşlevsellik, Azure AD B2C ve tüm Azure kaynakları için API 'Ler veya Azure portal kullanılarak kullanılabilir. CSP aboneliği yöneticileri diğer Azure kaynaklarıyla yapılan Azure AD B2C ilişkilerini bağlayabilir, taşıyabilir ve silebilir.
+
+Rol tabanlı erişim denetimi kullanan Azure AD B2C yönetimi, Azure AD B2C kiracısı ile Azure CSP aboneliği arasındaki ilişkilendirmeden etkilenmez. Rol tabanlı erişim denetimi, abonelik tabanlı roller değil, kiracı tabanlı roller kullanılarak elde edilir.
+
+## <a name="change-the-azure-ad-b2c-tenant-billing-subscription"></a>Azure AD B2C kiracı faturalandırma aboneliğini değiştirin
+
+Kaynak ve hedef abonelikler aynı Azure Active Directory kiracısında mevcutsa Azure AD B2C kiracılar başka bir aboneliğe taşınabilir.
+
+Azure AD B2C kiracınız gibi Azure kaynaklarını başka bir aboneliğe taşımayı öğrenmek için bkz. [kaynakları yeni kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/resource-group-move-resources.md).
+
+Taşımayı başlatmadan önce, böyle bir taşımanın sınırlamalarını ve gereksinimlerini tam olarak anlamak için makalenin tamamını okuduğunuzdan emin olun. Kaynak taşıma yönergelerine ek olarak, bir taşıma öncesi denetim listesi ve taşıma işleminin nasıl doğrulanacağı gibi kritik bilgileri de içerir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu adımları her Azure AD B2C kiracılarınız için tamamlandıktan sonra Azure aboneliğinizi, Azure Direct veya Kurumsal Anlaşma ayrıntılarını uygun olarak faturalandırılır.
-
-Seçili Azure aboneliğiniz kullanım ve fatura ayrıntılarını gözden geçirebilirsiniz. Ayrıntılı günlük olarak günlük kullanım raporları kullanarak da gözden geçirebilirsiniz [kullanım raporlama API'sini](active-directory-b2c-reference-usage-reporting-api.md).
+Seçilen bir Azure aboneliğinde kullanım ve faturalandırma ayrıntılarını gözden geçirmeye ek olarak, [kullanım Raporlama API](active-directory-b2c-reference-usage-reporting-api.md)'sini kullanarak ayrıntılı günlük kullanım raporlarını gözden geçirebilirsiniz.

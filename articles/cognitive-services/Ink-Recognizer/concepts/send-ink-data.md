@@ -1,36 +1,36 @@
 ---
-title: Mürekkep verisi mürekkep tanıyıcı API'ye gönderin
-titlesuffix: Azure Cognitive Services
-description: Farklı uygulamalar için mürekkep çözümleyici API'si çağırma hakkında bilgi edinin
+title: Mürekkep Tanıma API’sine mürekkep verisi gönderme
+titleSuffix: Azure Cognitive Services
+description: Farklı uygulamalar için mürekkep Çözümleyicisi API 'sini çağırma hakkında bilgi edinin
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: ink-recognizer
-ms.topic: tutorial
+ms.topic: conceptual
 ms.date: 05/02/2019
 ms.author: erhopf
-ms.openlocfilehash: 5a212c7332d085c15baabef8650572162c47903d
-ms.sourcegitcommit: 4b9c06dad94dfb3a103feb2ee0da5a6202c910cc
+ms.openlocfilehash: 0ad961495d44f13522a3c02224a5612aaedaf076
+ms.sourcegitcommit: 32242bf7144c98a7d357712e75b1aefcf93a40cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/02/2019
-ms.locfileid: "65027099"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70274483"
 ---
-# <a name="send-ink-data-to-the-ink-recognizer-api"></a>Mürekkep verisi mürekkep tanıyıcı API'ye gönderin 
+# <a name="send-ink-data-to-the-ink-recognizer-api"></a>Mürekkep Tanıma API’sine mürekkep verisi gönderme 
 
-Dijital Mürekkep giriş el yazısı ve çizim gibi dijital temsillerini etkinleştirme teknolojileri ifade eder. Bu genellikle, bir ekran kalemi gibi giriş cihazların hareketleri yakalayan dönüştürücü kullanarak da sağlanır. Zengin dijital mürekkep deneyimleri sağlamak cihazların devam ederken, yapay zeka ve makine öğrenimi yazılı şekil ve metinler her bağlamda tanınmasını sağlar. Mürekkep tanıyıcı API mürekkep vuruşları Gönder ve bunlar hakkında ayrıntılı bilgi almak sağlar. 
+Dijital mürekkep oluşturma, el yazısı ve çizim gibi girdilerin dijital sunumunun yapılmasını sağlayan teknolojilere başvurur. Bu, genellikle ekran kalemi gibi giriş cihazlarının hareketlerini yakalayan bir çizim tablası kullanılarak elde edilir. Cihazlar zengin dijital mürekkep oluşturma deneyimleri sunmaya devam ederken yapay zeka ve makine öğrenimi, yazılı metin ve şekillerin tüm bağlamlarda tanınmasını sağlar. Mürekkep tanıyıcı API 'SI mürekkep vuruşları göndermenizi ve bunlarla ilgili ayrıntılı bilgi almanızı sağlar. 
 
-## <a name="the-ink-recognizer-api-vs-ocr-services"></a>Mürekkep tanıyıcı API vs. OCR Hizmetleri
+## <a name="the-ink-recognizer-api-vs-ocr-services"></a>Mürekkep tanıyıcı API 'SI ile OCR Hizmetleri
 
-Mürekkep tanıyıcı API, optik karakter tanıma (OCR) kullanmaz. El yazısı ve metin tanıma sağlamak için görüntüleri piksel verilerden OCR Hizmetleri işleyin. Bu, bazen çevrimdışı tanıma denir. Bunun yerine, mürekkep tanıyıcı API giriş cihazının kullanıldıkça yakalanan dijital mürekkep vuruşu veri gerektirir. Dijital Mürekkep verilerin bu şekilde işleme OCR hizmetlerine kıyasla daha doğru tanıma sonuçlar üretebilir. 
+Mürekkep tanıyıcı API 'SI, optik karakter tanıma (OCR) kullanmaz. OCR Hizmetleri, el yazısı ve metin tanıma sağlamak için görüntülerden piksel verilerini işler. Bu bazen çevrimdışı tanıma olarak adlandırılır. Bunun yerine, mürekkep tanıyıcı API 'SI, giriş cihazı kullanıldığı için yakalanan dijital mürekkep konturu verileri gerektirir. Dijital mürekkep verilerini bu şekilde işlemek, OCR Hizmetleri ile karşılaştırıldığında daha doğru tanıma sonuçları üretebilir. 
 
-## <a name="sending-ink-data"></a>Mürekkep verisi gönderme
+## <a name="sending-ink-data"></a>Mürekkep verileri gönderiliyor
 
-Mürekkep tanıyıcı API için ne zaman yükseltilmiş algılama surface dokunduğu andan Giriş bir cihaz tarafından oluşturulan mürekkep vuruşlarını temsil eden X ve Y koordinatları gerektirir. Her vuruş noktalarının virgülle ayrılmış değer bir dize olmalıdır ve aşağıdaki örnekteki gibi biçimlendirilmiş JSON biçiminde. Ayrıca, her bir mürekkep vuruşu her istekte benzersiz bir kimliği olması gerekir. Kimliği aynı istek içinde yinelenir API'si bir hata döndürür. İçin en doğru tanıma sonuçları, ondalık ayırıcıdan sonra en az sekiz basamağı vardır. ' % S'orijin (0,0) tuvalin mürekkep tuvalin sol üst köşesindeki varsayılır.
+Mürekkep tanıyıcı API 'SI, bir giriş cihazı tarafından oluşturulan mürekkep konturlarını temsil eden X ve Y koordinatlarını, yükseltilmemiş olduğu zaman algılama yüzeyine dokunduğu andan itibaren gösterir. Her konturun noktaları, virgülle ayrılmış değerler dizesi olmalıdır ve aşağıdaki örnekte olduğu gibi JSON 'da biçimlendirilmelidir. Ayrıca, her mürekkep vuruşunun her istekte benzersiz bir KIMLIĞI olmalıdır. KIMLIK aynı istek içinde yinelenirse, API bir hata döndürür. En doğru tanıma sonuçları için, ondalık ayırıcıdan sonra en az sekiz basamak vardır. Tuvalin başlangıç noktası (0, 0), mürekkep tuvalinin sol üst köşesinden varsayılır.
 
 > [!NOTE]
-> Aşağıdaki örnek, geçerli bir JSON değil. Tam bir mürekkep tanıyıcı JSON istek bulabilirsiniz [GitHub](https://go.microsoft.com/fwlink/?linkid=2089909).
+> Aşağıdaki örnek geçerli bir JSON değil. [GitHub](https://go.microsoft.com/fwlink/?linkid=2089909)'da tam bir mürekkep tanıyıcı JSON isteği bulabilirsiniz.
  
 ```json
 {
@@ -56,40 +56,40 @@ Mürekkep tanıyıcı API için ne zaman yükseltilmiş algılama surface dokund
 }
 ```
 
-## <a name="ink-recognizer-response"></a>Mürekkep tanıyıcı yanıt
+## <a name="ink-recognizer-response"></a>Mürekkep tanıyıcı yanıtı
 
-Mürekkep tanıyıcı API mürekkep içeriği, tanınan nesneler hakkında bir analiz yanıtı döndürür. Yanıt farklı mürekkep vuruşlarını arasındaki ilişkileri tanımlayan tanıma birimleri içerir. Örneğin, ayrı, ayrı şekiller oluşturma strokes farklı biriminde yer alır. Her birim tanınan nesnenin koordinatları ve diğer çizim öznitelikleri dahil olmak üzere kendi mürekkep vuruşlarını hakkında ayrıntılı bilgiler içerir.
+Mürekkep tanıyıcı API 'SI, mürekkep içeriğinden tanınan nesneler hakkında bir çözümleme yanıtı döndürür. Yanıt, farklı mürekkep vuruşları arasındaki ilişkileri tanımlayan tanıma birimlerini içerir. Örneğin, ayrı ayrı şekiller oluşturan konturlar farklı birimlerde yer alır. Her birim, tanınan nesne, koordinatları ve diğer çizim özniteliklerini içeren mürekkep vuruşları hakkında ayrıntılı bilgiler içerir.
 
-## <a name="shapes-recognized-by-the-ink-recognizer-api"></a>Mürekkep tanıyıcı API'sı tarafından tanınan şekiller
+## <a name="shapes-recognized-by-the-ink-recognizer-api"></a>Mürekkep tanıyıcı API 'SI tarafından tanınan şekiller
 
-Mürekkep tanıyıcı API not alma en sık kullanılan şekilleri tanımlayabilirsiniz. Aşağıdaki resim bazı temel örnekler gösterilmektedir. Şekiller ve API'sı tarafından tanınan diğer mürekkep içerik tam listesi için bkz: [API Başvurusu makalesinde](https://go.microsoft.com/fwlink/?linkid=2089907). 
+Mürekkep tanıyıcı API 'SI, notta en yaygın olarak kullanılan şekilleri tanımlayabilir. Aşağıdaki görüntüde bazı temel örnekler gösterilmektedir. API tarafından tanınan şekillerin ve diğer mürekkep içeriğinin tam listesi için [API başvurusu makalesine](https://go.microsoft.com/fwlink/?linkid=2089907)bakın. 
 
-![Mürekkep tanıyıcı API'sı tarafından tanınan şekiller listesi](../media/shapes.png)
+![Mürekkep tanıyıcı API 'SI tarafından tanınan şekillerin listesi](../media/shapes.png)
 
-## <a name="recommended-calling-patterns"></a>Önerilen arama desenleri
+## <a name="recommended-calling-patterns"></a>Önerilen çağırma desenleri
 
-Uygulamanızı göre farklı desenleri mürekkep tanıyıcı REST API'si çağırabilirsiniz. 
+Uygulamanıza göre farklı desenlerdeki mürekkep tanıyıcı REST API çağırabilirsiniz. 
 
 ### <a name="user-initiated-api-calls"></a>Kullanıcı tarafından başlatılan API çağrıları
 
-Kullanıcı girişi (örneğin, bir not alma veya ek açıklama uygulaması) alan bir uygulama oluşturuyorsanız, ne zaman denetim vermek isteyebilirsiniz ve hangi mürekkep mürekkep tanıyıcı API'ye gönderilen. Metin ve şekiller hem tuval üzerinde mevcut olduğundan ve kullanıcılar her için farklı eylemler gerçekleştirmesini istiyorsanız bu işlev özellikle yararlı olur. Kullanıcıların seçim API'ye gönderilen (örneğin, bir Serbest Şekil veya başka bir geometrik seçim aracını) Seçimi özellikleri eklemeyi düşünün.  
+Kullanıcı girişi alan bir uygulama oluşturuyorsanız (örneğin, bir not alma veya ek açıklama uygulaması), bu kullanıcılara mürekkep tanıyıcı API 'sine ne zaman ve hangi mürekkebin gönderileceğini denetlemek isteyebilirsiniz. Bu işlevsellik, metin ve şekillerin her ikisi de tuvalde varsa ve kullanıcılar her biri için farklı eylemler gerçekleştirmek istedikleri zaman yararlıdır. Kullanıcıların API 'ye ne gönderileceğini seçmesini sağlayan seçim özelliklerini (kement veya diğer geometrik seçim aracı gibi) eklemeyi düşünün.  
 
 ### <a name="app-initiated-api-calls"></a>Uygulama tarafından başlatılan API çağrıları
 
-Ayrıca, bir zaman aşımından sonra uygulama aramanız mürekkep tanıyıcı API sahip olabilir. Mürekkep vuruşlarını geçerli API için düzenli olarak göndererek, tanıma sonuçları API'SİNİN yanıt süresi artırırken oluşturuldukları olarak depolayabilirsiniz. Örneğin, tamamlandıktan sonra kullanıcı algılama API'sine el yazısı metin satırı gönderebilirsiniz. 
+Ayrıca, uygulamanızın bir zaman aşımından sonra mürekkep tanıyıcı API 'sini çağırmasını sağlayabilirsiniz. Geçerli mürekkep vuruşlarını API 'ye düzenli olarak göndererek, tanıma sonuçlarını API 'nin yanıt süresini geliştirirken oluşturuldukları sırada saklayabilirsiniz. Örneğin, Kullanıcı tarafından tamamlandığını algıladıktan sonra API 'ye bir satır el yazısı metin gönderebilirsiniz. 
 
-Birbirleriyle ilgili olarak tanıma sonuçları önceden sahip mürekkep vuruşlarını özellikleri hakkında bilgi sağlar. Örneğin, aynı kelimenin, satır, liste, paragraf veya şekli oluşturmak için hangi vuruşların gruplandırılır. Bu bilgileri, uygulamanızın mürekkep seçimi özellikleri strokes grupları örneğin aynı anda seçmek erişebildiklerinden geliştirebilirsiniz.
+Tanınma sonuçlarının daha fazla olması, mürekkep vuruşlarının birbirleriyle ilgili özellikleri hakkında bilgi verir. Örneğin, aynı sözcük, çizgi, liste, paragraf veya şekli biçimlendirmek için hangi vuruşların gruplandığını. Bu bilgiler, örneğin, bir defada vuruş grupları seçebilerek uygulamanızın mürekkep seçimi özelliklerini geliştirebilir.
 
-## <a name="integrate-the-ink-recognizer-api-with-windows-ink"></a>Mürekkep tanıyıcı API Windows mürekkep ile tümleştirin
+## <a name="integrate-the-ink-recognizer-api-with-windows-ink"></a>Windows Ink ile mürekkep tanıyıcı API 'sini tümleştirme
 
-[Windows Ink](https://docs.microsoft.com/windows/uwp/design/input/pen-and-stylus-interactions) cihazları farklı bir dizi dijital mürekkep deneyimleri etkinleştirmek için Araçlar ve teknolojiler sağlar. Windows Ink platform görüntülemek ve dijital mürekkep vuruşlarını yorumlamak uygulamalar oluşturmak için mürekkep tanıma API'si ile birleştirebilirsiniz.
+[Windows Ink](https://docs.microsoft.com/windows/uwp/design/input/pen-and-stylus-interactions) , farklı bir cihaz yelpazilerinde dijital mürekkep deneyimlerini etkinleştirmek için araçlar ve teknolojiler sağlar. Dijital mürekkep vuruşlarını görüntüleyen ve yorumlayan uygulamalar oluşturmak için Windows Ink platformunu mürekkep tanıyıcı API 'SI ile birleştirebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Mürekkep tanıyıcı API'si nedir?](../overview.md)
-* [Mürekkep tanıyıcı REST API Başvurusu](https://go.microsoft.com/fwlink/?linkid=2089907)
+* [Mürekkep tanıyıcı API nedir?](../overview.md)
+* [Mürekkep tanıyıcı REST API başvurusu](https://go.microsoft.com/fwlink/?linkid=2089907)
 
-* Dijital mürekkep vuruşu veri kullanarak gönderme başlatın:
+* Şunu kullanarak dijital mürekkep konturu verileri göndermeye başla:
     * [C#](../quickstarts/csharp.md)
     * [Java](../quickstarts/java.md)
     * [JavaScript](../quickstarts/javascript.md)

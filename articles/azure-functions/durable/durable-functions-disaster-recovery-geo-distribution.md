@@ -1,93 +1,92 @@
 ---
-title: Olağanüstü durum kurtarma ve coğrafi dağıtım, dayanıklı işlevler - Azure
-description: Olağanüstü durum kurtarma ve coğrafi dağıtım, dayanıklı işlevler hakkında bilgi edinin.
+title: Dayanıklı İşlevler-Azure 'da olağanüstü durum kurtarma ve coğrafi dağıtım
+description: Dayanıklı İşlevler ' de olağanüstü durum kurtarma ve coğrafi dağıtım hakkında bilgi edinin.
 services: functions
 author: MS-Santi
 manager: jeconnoc
 keywords: ''
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
 ms.date: 04/25/2018
 ms.author: azfuncdf
-ms.openlocfilehash: 1363dd3c620789b9f3c8ce1dbe0892ee61d66051
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f242a16bc89e6b229efa42b88ebd20ca174e2516
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60741377"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098063"
 ---
 # <a name="disaster-recovery-and-geo-distribution"></a>Olağanüstü durum kurtarma ve coğrafi dağıtım
 
 ## <a name="overview"></a>Genel Bakış
 
-Dayanıklı işlevler içinde tüm durumu, Azure Depolama'da kalıcı hale getirilir. A [görev hub](durable-functions-task-hubs.md) düzenlemeleri için kullanılan Azure Storage kaynakları için mantıksal bir kapsayıcıdır. Aynı görev hub'ına ait oldukları zaman orchestrator ve etkinlik işlevleri yalnızca birbiriyle etkileşim kurabilir.
-Açıklanan senaryoları kullanılabilirliğini artırmak ve olağanüstü durum kurtarma etkinlikleri sırasında kapalı kalma süresini en aza indirmek için dağıtım seçenekleri önerin.
+Dayanıklı İşlevler, Azure depolama 'da tüm durum kalıcı hale getirilir. [Görev hub 'ı](durable-functions-task-hubs.md) , Azure depolama kaynakları için, düzenleme için kullanılan mantıksal bir kapsayıcıdır. Orchestrator ve Activity işlevleri aynı görev merkezine ait olduklarında yalnızca birbirleriyle etkileşim kurabilir.
+Açıklanan senaryolar kullanılabilirliği artırmak ve olağanüstü durum kurtarma etkinlikleri sırasında kapalı kalma süresini en aza indirmek için dağıtım seçenekleri önerin.
 
-Azure Depolama'nın kullanımı kılavuzluk edilir olduğundan bu senaryolar Aktif-Pasif yapılandırmada, temel dikkat edin önemlidir. Bu düzen, bir yedekleme (pasif) işlev uygulaması farklı bir bölgeye dağıtmaya dayalıdır. Traffic Manager birincil (etkin) işlev uygulaması için kullanılabilirlik izleyeceksiniz. Birincil başarısız olursa üzerinde yedekleme işlev uygulaması ile başarısız olur. Daha fazla bilgi için [Traffic Manager](https://azure.microsoft.com/services/traffic-manager/)'s [öncelik trafik yönlendirme yöntemi.](../../traffic-manager/traffic-manager-routing-methods.md#priority-traffic-routing-method)
+Bu senaryoların, Azure Storage kullanımı tarafından sunulduğundan, etkin-Pasif yapılandırmalara dayalı olduğunu fark etmek önemlidir. Bu model, farklı bir bölgeye yedek (pasif) işlev uygulaması dağıtmaktan oluşur. Traffic Manager, birincil (etkin) işlev uygulamasını kullanılabilirlik için izler. Birincil işlem başarısız olursa yedekleme işlevi uygulamasına yük devreder. Daha fazla bilgi için bkz [](https://azure.microsoft.com/services/traffic-manager/). Traffic Manager [Öncelik trafiği-yönlendirme yöntemi.](../../traffic-manager/traffic-manager-routing-methods.md#priority-traffic-routing-method)
 
 >[!NOTE]
 >
-> - Önerilen Aktif-Pasif yapılandırmayı bir istemci her zaman HTTP üzerinden yeni düzenlemeleri tetiklemeniz mümkün olmasını sağlar. Ancak, aynı depolama alanı paylaşımı iki işlev uygulamaları sahip söz konusu kümelerdeki arka plan işlemesi her ikisi de aynı kuyruk iletileri için rekabet arasında dağıtılır. Bu yapılandırma, ikincil bir işlev uygulaması için ek kullanım maliyetleri doğurur.
-> - Temel alınan depolama hesabı ve görev hub birincil bölgede oluşturulur ve her iki işlev uygulamaları tarafından paylaşılır.
-> - Nedenle dağıtılan tüm işlev uygulamalarını HTTP üzerinden etkinleştirilmekte olan söz konusu olduğunda aynı işlevi erişim anahtarlarını paylaşın gerekir. İşlevler çalışma zamanı gösteren bir [yönetim API'si](https://github.com/Azure/azure-functions-host/wiki/Key-management-API) tüketiciler programlı olarak ekleme, silme ve işlev tuşlarını güncelleştirmek etkinleştirir.
+> - Önerilen etkin-Pasif yapılandırma, bir istemcinin HTTP aracılığıyla her zaman yeni düzenlemeleri tetikleyebilmesini sağlar. Ancak, iki işlev uygulamasının aynı depolamayı paylaştığı bir sonucu olarak, arka plan işleme her ikisi arasında dağıtılır ve aynı kuyruklarda iletiler için rekabet edilir. Bu yapılandırma, ikincil işlev uygulaması için eklenen çıkış maliyetlerinde yer doğurur.
+> - Temel alınan depolama hesabı ve görev hub 'ı birincil bölgede oluşturulur ve her iki işlev uygulaması tarafından paylaşılır.
+> - Redundantly dağıtılan tüm işlev uygulamaları, HTTP aracılığıyla etkinleştirilme durumunda aynı işlev erişim anahtarlarını paylaşmalıdır. Işlevler çalışma zamanı, tüketicilerin program aracılığıyla işlev anahtarlarını eklemesini, silmesini ve güncelleştirmesini sağlayan bir [Yönetim API 'si](https://github.com/Azure/azure-functions-host/wiki/Key-management-API) sunar.
 
-## <a name="scenario-1---load-balanced-compute-with-shared-storage"></a>Senaryo 1 - paylaşılan depolama ile işlem yük dengeli
+## <a name="scenario-1---load-balanced-compute-with-shared-storage"></a>Senaryo 1-paylaşılan depolama ile yük dengeli işlem
 
-Azure bilgi işlem altyapısı başarısız olursa, işlev uygulamasını kullanılamaz hale gelebilir. Tür kapalı kalma süresi olasılığını en aza indirmek için bu senaryo için farklı bölgelere dağıtılan iki işlev uygulamaları kullanır.
-Traffic Manager, birincil işlev uygulamasında sorunları algılar ve otomatik olarak ikincil bölgedeki işlev uygulaması için trafiği yönlendirmek için yapılandırılır. Bu işlev uygulaması, aynı Azure depolama hesabını ve görev Hub paylaşır. Bu nedenle, işlev uygulamalarını durumunu kaybolmaz ve normal olarak çalışmaya devam. Azure Traffic Manager sistem durumu birincil bölgeye geri yüklendikten sonra bu işlev uygulaması yönlendirme isteklerini otomatik olarak başlatılacak.
+Azure 'daki işlem altyapısı başarısız olursa, işlev uygulaması kullanılamaz hale gelebilir. Bu gibi kapalı kalma olasılığını en aza indirmek için, bu senaryo farklı bölgelere dağıtılan iki işlev uygulaması kullanır.
+Traffic Manager, birincil işlev uygulamasındaki sorunları tespit etmek ve trafiği ikincil bölgedeki işlev uygulamasına otomatik olarak yeniden yönlendirmek üzere yapılandırılır. Bu işlev uygulaması aynı Azure Depolama hesabını ve görev hub 'ını paylaşır. Bu nedenle, işlev uygulamalarının durumu kaybedilmez ve iş normal şekilde sürdürülür. Sistem durumu birincil bölgeye geri yüklendikten sonra Azure Traffic Manager, istekleri bu işlev uygulamasına otomatik olarak yönlendirmeye başlar.
 
-![Diyagram gösteren Senaryo 1.](./media/durable-functions-disaster-recovery-geo-distribution/durable-functions-geo-scenario01.png)
+![Senaryo 1 ' i gösteren diyagram.](./media/durable-functions-disaster-recovery-geo-distribution/durable-functions-geo-scenario01.png)
 
-Bu dağıtım senaryosu kullanırken çeşitli avantajları vardır:
+Bu dağıtım senaryosu kullanılırken birçok avantaj vardır:
 
-- Bilgi işlem altyapısı başarısız olursa, iş durumu kaybı olmadan bölge üzerinden başarısız devam edebilir.
-- Traffic Manager otomatik yük devretme sağlıklı bir işlev uygulaması için otomatik olarak yapar.
-- Kesinti çözümlendikten sonra traffic Manager otomatik olarak birincil işlev uygulaması için trafiği yeniden oluşturur.
+- İşlem altyapısı başarısız olursa, iş, yük devretme bölgesinde durum kaybı olmadan sürdürülür.
+- Traffic Manager, otomatik olarak sağlıklı işlev uygulamasına otomatik yük devretme işlemini gerçekleştirir.
+- Traffic Manager, kesinti düzeltildikten sonra birincil işlev uygulamasına trafiği otomatik olarak yeniden oluşturur.
 
-Ancak, bu senaryoyu kullanarak göz önünde bulundurun:
+Ancak, bu senaryonun kullanılması şunları göz önünde bulundurun:
 
-- İşlev uygulamasını özel bir App Service planı kullanarak dağıtılmışsa, veri merkezi bilgi işlem altyapısı, başarısız çoğaltma maliyetleri artırır.
-- Bu senaryo, bilgi işlem altyapısı sırasında kesintileri kapsar, ancak depolama hesabı ' % s'işlev uygulaması için hata tek noktasını olmaya devam eder. Bir depolama kesintisi ise, uygulama bir kapalı kalma süresi düşer.
-- İşlev uygulaması, yükü devredilirse bölgeler arasında kendi depolama hesabına erişir olduğundan daha yüksek gecikme süresiyle olacaktır.
-- Farklı bir bölgede olduğu depolama hizmetine erişim bulunduğu ağa çıkış trafiği nedeniyle daha yüksek maliyet doğurur.
-- Bu senaryo, Traffic Manager'ı bağlıdır. Dikkate [Traffic Manager nasıl çalışır](../../traffic-manager/traffic-manager-how-it-works.md), süre kadar dayanıklı işlevi kullanan bir istemci uygulaması, işlev uygulaması adresi trafik Yöneticisi'nden yeniden sorgula gerekiyor olabilir.
+- İşlev uygulaması ayrılmış bir App Service planı kullanılarak dağıtılırsa, işlem altyapısını yük devretmek için çoğaltma maliyetlerini artırır.
+- Bu senaryo, işlem altyapısındaki kesintileri ele alır, ancak depolama hesabı, işlev uygulaması için tek hata noktası olmaya devam eder. Depolama kesintisi varsa, uygulama kesinti süresi yaşar.
+- İşlev uygulaması yük devretmede başarısız olursa, bölgeler arasında depolama hesabına erişim olacağı için gecikme süresi artacaktır.
+- Depolama hizmetine, bulunduğu farklı bir bölgeden, ağ çıkış trafiği nedeniyle daha yüksek maliyetli bir şekilde erişme.
+- Bu senaryo Traffic Manager bağımlıdır. [Traffic Manager nasıl çalıştığını](../../traffic-manager/traffic-manager-how-it-works.md)göz önünde bulundurarak, dayanıklı bir işlevi tüketen bir istemci uygulamasının Traffic Manager işlev uygulama adresini yeniden sorgulayabilmesini gerektiren bir zaman olabilir.
 
-## <a name="scenario-2---load-balanced-compute-with-regional-storage"></a>Senaryo 2 - bölgesel depolama ile işlem yük dengeli
+## <a name="scenario-2---load-balanced-compute-with-regional-storage"></a>Senaryo 2-bölgesel depolama ile yük dengeli işlem
 
-Yukarıdaki senaryo, yalnızca büyük küçük bilgi işlem altyapısı hata kapsar. Depolama hizmeti başarısız olursa, işlev uygulamasının bir kesintisi neden olur.
-Dayanıklı işlevler sürekli çalışmasını sağlamak için bu senaryo, her bir bölgeye işlev uygulamalarını dağıtılan sanal yerel depolama hesabı kullanır.
+Yukarıdaki senaryo yalnızca işlem altyapısındaki hata durumunu ele alır. Depolama hizmeti başarısız olursa, işlev uygulamasının kesintiye neden olur.
+Dayanıklı işlevlerin sürekli çalışmasını sağlamak için bu senaryo, işlev uygulamalarının dağıtıldığı her bölgede yerel bir depolama hesabı kullanır.
 
-![Diyagram gösteren Senaryo 2.](./media/durable-functions-disaster-recovery-geo-distribution/durable-functions-geo-scenario02.png)
+![Senaryo 2 ' nin gösterildiği diyagram.](./media/durable-functions-disaster-recovery-geo-distribution/durable-functions-geo-scenario02.png)
 
-Bu yaklaşım önceki senaryoya göre geliştirmeleri içerir:
+Bu yaklaşım, önceki senaryoya yönelik iyileştirmeler ekler:
 
-- İşlev uygulaması başarısız olursa, Traffic Manager, ikincil bölgeye yük devretme üstlenir. Bununla birlikte, işlev uygulaması, kendi depolama hesabında kullandığından, dayanıklı işlevler çalışmaya devam.
-- Bir yük devretme sırasında yoktur hiçbir ek gecikme başarısız bölge, işlev uygulaması ve depolama hesabı aynı konumda olduğundan.
-- Depolama katmanı hatası hataları, başarısız bir yeniden yönlendirme bölge sırayla tetikleyecek dayanıklı işlevler neden olur. İşlev uygulaması ve depolama bölge başına yalıtılmış olduğundan, yeniden dayanıklı işlevler çalışmaya devam eder.
+- İşlev uygulaması başarısız olursa, Traffic Manager ikincil bölgeye yük devretme işlemini gerçekleştirir. Ancak, işlev uygulaması kendi depolama hesabını temel aldığından, dayanıklı işlevler çalışmaya devam eder.
+- Yük devretme sırasında, işlev uygulaması ve depolama hesabı birlikte bulunduğundan, yük devretme bölgesinde ek bir gecikme yoktur.
+- Depolama katmanının başarısızlığı, dayanıklı işlevlerde hatalara neden olur. Bu, sırasıyla yük devretme bölgesine yeniden yönlendirme tetikleyecektir. Aynı şekilde, işlev uygulaması ve depolama alanı her bölge için yalıtılmış olduğundan, dayanıklı işlevler çalışmaya devam edecektir.
 
-Bu senaryo için önemli noktalar:
+Bu senaryoya ilişkin önemli noktalar:
 
-- İşlev uygulamasını özel bir uygulama hizmeti planı kullanarak dağıtılmışsa, veri merkezi bilgi işlem altyapısı, başarısız çoğaltma maliyetleri artırır.
-- Geçerli durumu, yürütmek anlamına gelir yük devretti değildir ve belirttiğinizde işlevleri başarısız olur. Bu yeniden deneme/yeniden çalışma için istemci uygulaması olan.
+- İşlev uygulaması ayrılmış bir AppService planı kullanılarak dağıtılırsa, işlem altyapısını yük devretmek için çoğaltma maliyetlerini artırır.
+- Geçerli durum yük devretmez, bu da yürütmenin yürütülmesi ve CheckIn işlevinin başarısız olacağını gösterir. İşi yeniden denemek/yeniden başlatmak için istemci uygulamasına kadar.
 
-## <a name="scenario-3---load-balanced-compute-with-grs-shared-storage"></a>Senaryo 3 - GRS paylaşılan depolama ile işlem yük dengeli
+## <a name="scenario-3---load-balanced-compute-with-grs-shared-storage"></a>Senaryo 3-GRS paylaşılan depolama ile yük dengeli işlem
 
-Bu senaryo bir paylaşılan depolama hesabı uygulama ilk senaryoda değişikliktir. Coğrafi çoğaltmanın etkinleştirilmiş olduğu depolama hesabı oluşturduğunuz ana fark.
-İşlevsel olarak, bu senaryo ıaas'nin Senaryo 1 sağlar, ancak ek veriler kurtarma avantajları sağlar:
+Bu senaryo, paylaşılan depolama hesabı uygulayan ilk senaryonun üzerinde yapılan bir değişikliktir. Depolama hesabının coğrafi çoğaltma etkin olarak oluşturulduğu temel fark.
+İşlevsellik, bu senaryo Senaryo 1 ile aynı avantajları sağlar, ancak ek veri kurtarma avantajları sağlar:
 
-- Coğrafi olarak yedekli depolama (GRS) ve okuma erişimli GRS (RA-GRS), depolama hesabınız için kullanılabilirliği en üst düzeye.
-- Bir bölgede kesinti depolama hizmetinin ise, olasılık depolama ikincil bölgeye yük devretti gerekir, veri merkezi işlemlerini belirleyin biridir. Bu durumda, depolama hesabı erişim coğrafi olarak çoğaltılmış kopyalama depolama hesabının, kullanıcı müdahalesi olmadan şeffaf bir şekilde yönlendirilirsiniz.
-- Bu durumda, birkaç dakikada bir gerçekleşir depolama hesabının son çoğaltma kadar dayanıklı işlevler durumu korunur.
+- Coğrafi olarak yedekli depolama (GRS) ve Okuma Erişimli GRS (RA-GRS), depolama hesabınız için kullanılabilirliği en üst düzeye çıkarır.
+- Depolama hizmeti 'nin bir bölge kesintisi varsa, olasılıklardan biri, veri merkezi işlemlerinin, depolama alanının ikincil bölgeye yük devretmeli olduğunu belirlemesidir. Bu durumda, depolama hesabı erişimi, Kullanıcı müdahalesi olmadan depolama hesabının coğrafi olarak çoğaltılan kopyasına saydam olarak yönlendirilir.
+- Bu durumda, dayanıklı işlevlerin durumu depolama hesabının en son çoğaltmasına kadar saklanır ve bu işlem birkaç dakikada bir gerçekleşir.
 
-Diğer bir senaryolarında olduğu gibi önemli noktalar vardır:
+Diğer senaryolarda olduğu gibi önemli noktalar da vardır:
 
-- Yük devretme çoğaltma, veri merkezi işleci tarafından gerçekleştirilir ve biraz zaman alabilir. O zamana kadar işlev uygulaması, bir kesinti düşer.
-- Coğrafi çoğaltmalı depolama hesapları kullanmaya yönelik daha yüksek bir maliyet yoktur.
-- GRS zaman uyumsuz olarak gerçekleşir. En son işlem bazıları çoğaltma işleminin gecikme nedeniyle kaybolmuş olabilir.
+- Çoğaltmaya yük devretme, veri merkezi işleçleri tarafından yapılır ve bu işlem biraz zaman alabilir. Bu saate kadar, işlev uygulaması bir kesinti olduğunu etkilemeyecektir.
+- Coğrafi olarak çoğaltılan depolama hesaplarını kullanmanın maliyeti artar.
+- GRS zaman uyumsuz olarak gerçekleştirilir. Çoğaltma işleminin gecikmesi nedeniyle en son işlemlerden bazıları kaybolmuş olabilir.
 
-![Diyagram gösteren Senaryo 3.](./media/durable-functions-disaster-recovery-geo-distribution/durable-functions-geo-scenario03.png)
+![Senaryo 3 ' ü gösteren diyagram.](./media/durable-functions-disaster-recovery-geo-distribution/durable-functions-geo-scenario03.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi edinebilirsiniz [tasarlama yüksek oranda kullanılabilir RA-GRS'yi kullanarak uygulamaları](../../storage/common/storage-designing-ha-apps-with-ragrs.md)
+[RA-GRS kullanarak yüksek oranda kullanılabilir uygulamalar tasarlama](../../storage/common/storage-designing-ha-apps-with-ragrs.md) hakkında daha fazla bilgi edinebilirsiniz

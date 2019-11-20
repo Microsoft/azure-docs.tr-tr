@@ -1,7 +1,7 @@
 ---
-title: Birden çok giriş - Microsoft Genomics kullanarak iş akışı gönderme
-titleSuffix: Azure
-description: Bu makalede, giriş dosyanız varsa birden fazla FASTQ veya BAM dosyaları aynı örnekten alınan Microsoft Genomics hizmetine bir iş akışı gönderme adımları gösterilmektedir. Zaten yüklü msgen istemcisini yüklediğiniz ve hizmet aracılığıyla örnek verileri başarıyla çalıştırdığınız.
+title: Birden çok giriş kullanarak iş akışı gönderme
+titleSuffix: Microsoft Genomics
+description: Bu makalede, giriş dosyanız aynı örnekten birden fazla FASTQ veya Baa dosyası olduğunda Microsoft Genomiks hizmetine bir iş akışı gönderme işlemi gösterilmektedir.
 services: genomics
 ms.service: genomics
 author: grhuynh
@@ -9,31 +9,31 @@ manager: cgronlund
 ms.author: grhuynh
 ms.topic: conceptual
 ms.date: 02/05/2018
-ms.openlocfilehash: 399b1ed735ce1b7a3fca1d27155863f6bfa18776
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b426015906a8e17674123c0c3ad2fccb9c43798f
+ms.sourcegitcommit: 961468fa0cfe650dc1bec87e032e648486f67651
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60780887"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72248561"
 ---
-# <a name="submit-a-workflow-using-multiple-inputs-from-the-same-sample"></a>Aynı örnekten birden fazla giriş kullanarak iş akışı gönderme
+# <a name="submit-a-workflow-using-multiple-inputs-from-the-same-sample"></a>Aynı örnekten birden çok giriş kullanarak iş akışı gönderme
 
-Bu makalede birden fazla FASTQ veya BAM dosyası giriş dosyanız varsa Microsoft Genomics hizmetine bir iş akışı gönderme adımları gösterilmektedir **aynı örnekten alınan**. Örneğin, sıralayıcı üzerinde birden çok şeritte **aynı örneği** çalıştırdıysanız, sıralayıcı her şerit için bir çift FASTQ dosyası çıkarabilir. Hizalama ve varyant aramadan önce bu FASTQ dosyalarını birleştirmek yerine, bu girişlerin tümünü `msgen` istemcisine doğrudan gönderebilirsiniz. `msgen` istemcisinin çıktıları, .bam, .bai, .vcf dosyalarından oluşan **tek bir küme** olur. 
+Bu makalede, giriş dosyanız **aynı örnekten gelen**bırden çok fastq veya Baa dosyası olduğunda Microsoft Genomiks hizmetine bir iş akışı gönderme işlemi gösterilmektedir. Örneğin, Sıralayıcı 'daki birden fazla kulvarda **aynı örneği** çalıştırdıysanız, Sıralayıcı her Lane için BIR ÇIFT fastq dosyası çıktısı verebilir. Bu FASTQ dosyalarını hizalama ve varyant çağrılmadan önce eklemek yerine, tüm bu girdileri `msgen` istemcisine doğrudan gönderebilirsiniz. @No__t-0 istemcisinden alınan çıkış,. Bad,. Bai,. vcf dosyası dahil olmak üzere tek bir dosya **kümesi** olacaktır. 
 
-Ancak aynı gönderide FASTQ ve BAM dosyalarını bir arada **kullanamayacağınızı** unutmayın. Ayrıca, birden çok kişiden birden çok FASTQ veya BAM dosyası **gönderemezsiniz**. 
+Bununla birlikte, aynı gönderim içinde FASTQ ve BAI dosyalarını karıştırmayacağınızı unutmayın. Ayrıca, birden çok bireden birden fazla FASTQ veya Baa **dosyası gönderemezsiniz.** 
 
-Bu makalede `msgen` istemcisini yükleyip çalıştırdığınız ve Azure Depolama’yı kullanma konusunda bilgi sahibi olduğunuz kabul edilmektedir. Sağlanan örnek verileri kullanarak bir iş akışı başarıyla gönderdiyseniz, bu makalede ile devam etmek hazır olursunuz. 
+Bu makalede, `msgen` istemcisini zaten yüklediğinizi ve çalıştırdığınız ve Azure depolama 'yı kullanma hakkında bilgi sahibi olduğunuz varsayılır. Belirtilen örnek verileri kullanarak bir iş akışını başarıyla gönderdiyseniz, bu makaleye devam etmeye hazırsınızdır. 
 
 
-## <a name="multiple-bam-files"></a>Birden fazla BAM dosyası
+## <a name="multiple-bam-files"></a>Birden çok Baa dosyası
 
-### <a name="upload-your-input-files-to-azure-storage"></a>Giriş dosyalarınızı Azure depolamaya yükleme
-Giriş olarak *reads.bam*, *additional_reads.bam* ve *yet_more_reads.bam* olmak üzere birden fazla BAM dosyasına sahip olduğunuzu ve bunları *myaccount* adlı Azure depolama hesabınıza yüklediğinizi düşünelim. API URL'sine ve erişim anahtarına sahipsiniz. **https://<span></span>myaccount.blob.core<span></span>.windows<span></span>.net<span></span>/outputs<span></span>** içinde iki çıkış olmasını istiyorsunuz.
+### <a name="upload-your-input-files-to-azure-storage"></a>Giriş dosyalarınızı Azure Storage 'a yükleme
+Giriş olarak birden çok BAM dosyası olduğunu, *. bam*, *additional_reads. bam*ve *yet_more_reads. bam*dosyalarını okuduğunu ve Azure 'daki *myaccount* depolama hesabınıza yüklediğinizi varsayalım. API URL 'SI ve erişim anahtarınız vardır. **<span></span>Https://myaccount. blob. Core<span></span>. Windows<span></span>.net<span></span>/çıkışları<span></span>** içinde çıkış almak istiyorsunuz.
 
 
 ### <a name="submit-your-job-to-the-msgen-client"></a>İşinizi `msgen` istemcisine gönderme 
 
-Birden fazla BAM dosyasını adlarını --input-blob-name-1 komutuna bağımsız değişken olarak ileterek gönderebilirsiniz. Tüm dosyaların aynı örnekten gelmesi gerektiğini ancak sıralamanın önemli olmadığını unutmayın. Aşağıda Windows ile Unix’te komut satırında ve yapılandırma dosyası kullanılarak gerçekleştirilen örnek gönderimlere yer verilmiştir. Kodun daha anlaşılır olması için satır sonları eklenmiştir:
+Tüm adlarını--input-blob-Name-1 bağımsız değişkenine geçirerek birden çok Bad dosyası gönderebilirsiniz. Tüm dosyaların aynı örnekten gelmesi gerektiğini, ancak sırası önemli olmadığına dikkat edin. Aşağıdaki bölümde, Windows 'daki bir komut satırından, Unix 'de ve bir yapılandırma dosyası kullanılırken örnek teslimleri ayrıntılı olarak verilmiştir. Açıklık için satır sonları eklenmiştir:
 
 
 Windows için:
@@ -53,7 +53,7 @@ msgen submit ^
 ```
 
 
-Unix için
+UNIX için
 
 ```
 msgen submit \
@@ -70,7 +70,7 @@ msgen submit \
 ```
 
 
-Yapılandırma dosyası kullanmayı tercih ediyorsanız şu bileşenleri dahil etmeniz gerekir:
+Bir yapılandırma dosyası kullanmayı tercih ediyorsanız, şunları içerir:
 
 ``` config.txt
 api_url_base:                     <Genomics API URL>
@@ -85,20 +85,20 @@ output_storage_account_key:       <storage access key to "myaccount">
 output_storage_account_container: outputs
 ```
 
-`config.txt` dosyasını şu çağrıyla gönderin: `msgen submit -f config.txt`
+@No__t-0 dosyasını bu çağrıdan gönder: `msgen submit -f config.txt`
 
 
-## <a name="multiple-paired-fastq-files"></a>Birden fazla eşleştirilmiş FASTQ dosyası
+## <a name="multiple-paired-fastq-files"></a>Birden çok eşleştirilmiş FASTQ dosyası
 
-### <a name="upload-your-input-files-to-azure-storage"></a>Giriş dosyalarınızı Azure depolamaya yükleme
-Giriş olarak *reads_1.fq.gz* ve *reads_2.fq.gz*, *additional_reads_1.fq.gz* ve *additional_reads_2.fq.gz* ile *yet_more_reads_1.fq.gz* ve *yet_more_reads_2.fq.gz* olmak üzere birden fazla eşleştirilmiş FASTQ dosyasına sahip olduğunuzu düşünelim. Bunları *myaccount* adlı Azure depolama hesabınıza yüklediniz. API URL'sine ve erişim anahtarına sahipsiniz. **https://<span></span>myaccount.blob.core<span></span>.windows<span></span>.net<span></span>/outputs<span></span>** içinde iki çıkış olmasını istiyorsunuz.
+### <a name="upload-your-input-files-to-azure-storage"></a>Giriş dosyalarınızı Azure Storage 'a yükleme
+Giriş, *reads_1. FQ. gz* ve *reads_2. FQ. gz*, *additional_reads_1. FQ. gz* ve *additional_reads_2. FQ. gz*ve *yet_more_reads_1. FQ. gz* ve yet_more_reads_ olarak birden fazla eşleştirilmiş fastq dosyanız olduğunu varsayalım  *2. FQ. gz*. Bunları Azure 'daki *myaccount* depolama hesabınıza yüklediniz ve siz de KULLANABILIRSINIZ. API URL 'si ve erişim anahtarınız vardır. **<span></span>Https://myaccount. blob. Core<span></span>. Windows<span></span>.net<span></span>/çıkışları<span></span>** içinde çıkış almak istiyorsunuz.
 
 
 ### <a name="submit-your-job-to-the-msgen-client"></a>İşinizi `msgen` istemcisine gönderme 
 
-Eşleştirilmiş FASTQ dosyalarının aynı örneğe ait olması ve bir arada işlenmesi gerekir.  Dosya adlarının sırası --input-blob-name-1 ve --input-blob-name-2 komutlarına bağımsız değişken olarak ilettiğinizde önemlidir. 
+Eşleştirilmiş FASTQ dosyalarının yalnızca aynı örnekten gelmesi gerekmez, ancak aynı zamanda birlikte işlenmeleri gerekir.  Dosya adlarının sırası--input-blob-Name-1 ve--input-blob-Name-2 ' ye bağımsız değişken olarak geçirildiğinde önemlidir. 
 
-Aşağıda Windows ile Unix’te komut satırında ve yapılandırma dosyası kullanılarak gerçekleştirilen örnek gönderimlere yer verilmiştir. Kodun daha anlaşılır olması için satır sonları eklenmiştir:
+Aşağıdaki bölümde, Windows 'daki bir komut satırından, Unix 'de ve bir yapılandırma dosyası kullanılırken örnek teslimleri ayrıntılı olarak verilmiştir. Açıklık için satır sonları eklenmiştir:
 
 
 Windows için:
@@ -119,7 +119,7 @@ msgen submit ^
 ```
 
 
-Unix için:
+UNIX için:
 
 ```
 msgen submit \
@@ -137,7 +137,7 @@ msgen submit \
 ```
 
 
-Yapılandırma dosyası kullanmayı tercih ediyorsanız şu bileşenleri dahil etmeniz gerekir:
+Bir yapılandırma dosyası kullanmayı tercih ediyorsanız, şunları içerir:
 
 ```
 api_url_base:                     <Genomics API URL>
@@ -153,7 +153,7 @@ output_storage_account_key:       <storage access key to "myaccount">
 output_storage_account_container: outputs
 ```
 
-`config.txt` dosyasını şu çağrıyla gönderin: `msgen submit -f config.txt`
+@No__t-0 dosyasını bu çağrıdan gönder: `msgen submit -f config.txt`
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede birden fazla BAM dosyasını veya eşleştirilmiş FASTQ dosyalarını Azure Depolama'ya yükleyip `msgen` python istemcisi üzerinden Microsoft Genomiks hizmetine bir iş akışı gönderdiniz. İş akışının gönderilmesi ve Microsoft Genomiks hizmetiyle kullanabileceğiniz diğer komutlar hakkında daha fazla bilgi için bkz. [SSS](frequently-asked-questions-genomics.md). 
+Bu makalede, birden çok BAı dosyasını veya eşleştirilmiş FASTQ dosyalarını Azure depolama 'ya yüklediniz ve `msgen` Python istemcisi üzerinden Microsoft Genomiks hizmetine bir iş akışı gönderdiniz. İş akışı gönderme ve Microsoft Genomiks hizmetiyle kullanabileceğiniz diğer komutlar hakkında daha fazla bilgi için bkz. [SSS](frequently-asked-questions-genomics.md). 

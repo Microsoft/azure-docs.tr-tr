@@ -1,37 +1,37 @@
 ---
-title: MySQL için Azure veritabanı'nda bağlantı mimarisi
-description: MySQL için Azure veritabanı sunucunuza için bağlantı mimarisini açıklar.
+title: MySQL için Azure veritabanı 'nda bağlantı mimarisi
+description: MySQL için Azure veritabanı sunucunuza yönelik bağlantı mimarisini açıklar.
 author: kummanish
 ms.author: manishku
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 05/22/2019
-ms.openlocfilehash: 7a7ac843960e253b3172d1ed22fe5b59633897dc
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 664d3d4333f8c34a8c5dc6648da2beccc4d7a6a2
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67062471"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73498446"
 ---
-# <a name="connectivity-architecture-in-azure-database-for-mysql"></a>MySQL için Azure veritabanı'nda bağlantı mimarisi
-Bu makalede, trafiği Azure veritabanınızı MySQL örneği için hem içinde hem de Azure dışındaki istemcilerden yönlendirildiği nasıl bağlantı mimarisi de MySQL için Azure veritabanı açıklanmaktadır.
+# <a name="connectivity-architecture-in-azure-database-for-mysql"></a>MySQL için Azure veritabanı 'nda bağlantı mimarisi
+Bu makalede, MySQL için Azure veritabanı bağlantı mimarisinin yanı sıra trafiğin Azure 'daki ve dışındaki istemcilerden gelen MySQL için Azure veritabanı örneğine nasıl yönlendirildiği açıklanmaktadır.
 
 ## <a name="connectivity-architecture"></a>Bağlantı mimarisi
-MySQL için Azure veritabanınıza bağlantı sunucunuzun bizim kümelerdeki fiziksel konuma yönlendirme gelen bağlantıları sorumlu olduğu bir ağ geçidi üzerinden kurulur. Aşağıdaki diyagram, trafik akışını gösterir.
+MySQL için Azure veritabanı 'na bağlantı, gelen bağlantıları kümelerimize ait fiziksel konuma yönlendirmekten sorumlu bir ağ geçidiyle oluşturulur. Aşağıdaki diyagramda trafik akışı gösterilmektedir.
 
 ![Bağlantı mimarisine genel bakış](./media/concepts-connectivity-architecture/connectivity-architecture-overview-proxy.png)
 
-İstemci olarak veritabanına bağlanmak, bunların ağ geçidine bağlayan bir bağlantı dizesini alın. Bu ağ geçidi 3306 numaralı bağlantı noktasını dinleyen bir genel IP adresi vardır. Veritabanı kümesi içinde trafik, MySQL için uygun Azure veritabanı'na iletilir. Bu nedenle, Kurumsal ağlardan gibi sunucunuza bağlanması için ağ geçitleriyle ulaşmak giden trafiğe izin vermek için istemci tarafı Güvenlik Duvarı'nı açmak gereklidir. Aşağıda, bölge başına ağ geçitleriyle tarafından kullanılan IP adresleri, tam listesini bulabilirsiniz.
+İstemci veritabanına bağlandığında, ağ geçidine bağlanan bir bağlantı dizesi alırlar. Bu ağ geçidinin 3306 numaralı bağlantı noktasını dinleyen bir genel IP adresi vardır. Veritabanı kümesi içinde trafik, MySQL için uygun Azure veritabanına iletilir. Bu nedenle, şirket ağları gibi sunucunuza bağlanmak için, giden trafiğin ağ geçitlerimize ulaşmasını sağlamak üzere istemci tarafı güvenlik duvarını açmanız gerekir. Aşağıda, bölge başına ağ geçitlerimiz tarafından kullanılan IP adreslerinin tamamen bir listesini bulabilirsiniz.
 
-## <a name="azure-database-for-mysql-gateway-ip-addresses"></a>Ağ geçidi IP adreslerini MySQL için Azure veritabanı
-Aşağıdaki tablo, tüm veri bölgeleri ağ geçidi MySQL için Azure veritabanı'nın birincil ve ikincil IP'ler listeler. Birincil IP adresi geçerli bir ağ geçidi IP adresini ve ikinci IP adresini bir yük devretme IP adresi birincil başarısız olması durumunda. Belirtildiği gibi müşterilerin her iki IP adreslerine giden izin vermelidir. Bağlantıları kabul etmek üzere MySQL için Azure veritabanı tarafından etkinleştirilene kadar ikinci IP adresini hizmetlerin üzerinde dinlemez.
+## <a name="azure-database-for-mysql-gateway-ip-addresses"></a>MySQL için Azure veritabanı ağ geçidi IP adresleri
+Aşağıdaki tabloda, tüm veri bölgeleri için MySQL için Azure veritabanı Gateway 'in birincil ve ikincil IP 'Leri listelenmektedir. Birincil IP adresi, ağ geçidinin geçerli IP adresidir ve ikinci IP adresi birincil hata durumunda bir yük devretme IP adresidir. Belirtildiği gibi, müşteriler her iki IP adresine de giden trafiği izin vermelidir. İkinci IP adresi, MySQL için Azure veritabanı tarafından bağlantıları kabul etmek üzere etkinleştirilinceye kadar hiçbir hizmet üzerinde dinleme yapmaz.
 
 | **Bölge adı** | **Birincil IP adresi** | **İkincil IP adresi** |
 |:----------------|:-------------|:------------------------|
 | Avustralya Doğu | 13.75.149.87 | 40.79.161.1 |
 | Avustralya Güneydoğu | 191.239.192.109 | 13.73.109.251 |
 | Güney Brezilya | 104.41.11.5 | |
-| Orta Kanada | 40.85.224.249 | |
+| Kanada Orta | 40.85.224.249 | |
 | Doğu Kanada | 40.86.226.166 | |
 | Orta ABD | 23.99.160.139 | 13.67.215.62 |
 | Çin Doğu 1 | 139.219.130.35 | |
@@ -46,7 +46,7 @@ Aşağıdaki tablo, tüm veri bölgeleri ağ geçidi MySQL için Azure veritaban
 | Hindistan Orta | 104.211.96.159 | |
 | Hindistan Güney | 104.211.224.146 | |
 | Hindistan Batı | 104.211.160.80 | |
-| Japonya Doğu | 191.237.240.43 | 13.78.61.196 |
+| Doğu Japonya | 191.237.240.43 | 13.78.61.196 |
 | Japonya Batı | 191.238.68.11 | 104.214.148.156 |
 | Kore Orta | 52.231.32.42 | |
 | Kore Güney | 52.231.200.86 |  |
@@ -54,6 +54,9 @@ Aşağıdaki tablo, tüm veri bölgeleri ağ geçidi MySQL için Azure veritaban
 | Kuzey Avrupa | 191.235.193.75 | 40.113.93.91 |
 | Orta Güney ABD | 23.98.162.75 | 13.66.62.124 |
 | Güneydoğu Asya | 23.100.117.95 | 104.43.15.0 |
+| Güney Afrika Kuzey | 102.133.152.0 | |
+| Güney Afrika Batı | 102.133.24.0 | |
+| BAE Kuzey | 65.52.248.0 | |
 | Birleşik Krallık Güney | 51.140.184.11 | |
 | Birleşik Krallık Batı | 51.141.8.11| |
 | Batı Avrupa | 191.237.232.75 | 40.68.37.158 |
@@ -62,10 +65,10 @@ Aşağıdaki tablo, tüm veri bölgeleri ağ geçidi MySQL için Azure veritaban
 ||||
 
 > [!NOTE]
-> *Doğu ABD 2* üçüncül bir IP adresi de sahip `52.167.104.0`.
+> *Doğu ABD 2* Ayrıca `52.167.104.0`BIR üçüncül IP adresine sahiptir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Oluşturma ve Azure veritabanı Azure portalını kullanarak MySQL için güvenlik duvarı kurallarını yönetme](./howto-manage-firewall-using-portal.md)
-* [Oluşturma ve Azure veritabanı Azure CLI kullanarak MySQL için güvenlik duvarı kurallarını yönetme](./howto-manage-firewall-using-cli.md)
+* [Azure portal kullanarak MySQL için Azure Güvenlik duvarı kuralları oluşturma ve yönetme](./howto-manage-firewall-using-portal.md)
+* [Azure CLı kullanarak MySQL için Azure Güvenlik duvarı kuralları oluşturma ve yönetme](./howto-manage-firewall-using-cli.md)
 

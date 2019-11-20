@@ -1,45 +1,44 @@
 ---
-title: Azure Kubernetes Service (AKS) veya diğer Kubernetes izlemek için Application ınsights'ı kullanmak barındırılan uygulamalar - Azure İzleyici | Microsoft Docs
-description: Azure İzleyici hizmeti kafes teknolojisi, Istio, Kubernetes kümenizde uygulama, barındırılan Kubernetes herhangi bir uygulama için izleme sağlamak için kullanır. Bu, kümenizde çalışan pod'ların gelen ve gelen ve giden istekleri ilgili Application Insights telemetri toplamak sağlar.
-services: application-insights
-author: tokaplan
-manager: carmonm
-ms.service: application-insights
+title: Azure Kubernetes hizmeti (AKS) veya diğer Kubernetes barındırılan uygulamalarını izlemek için Application Insights kullanın-Azure Izleyici | Microsoft Docs
+description: Azure Izleyici, Kubernetes barındırılan uygulamalar için uygulama izlemeye olanak sağlamak üzere Kubernetes kümenizdeki hizmet kafes teknolojisini kullanır. Bu, kümenizde çalışan ve bu kaynaklardan gelen ve giden isteklerle ilgili Application Insights telemetri toplamanıza olanak tanır.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 04/25/2019
+author: tokaplan
 ms.author: alkaplan
-ms.openlocfilehash: c94d589875195207ec6f71c35ad077cac281fda5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 04/25/2019
+ms.openlocfilehash: 3056b6c56be32cf5c054c4526a88157650a3e30b
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65555826"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820771"
 ---
-# <a name="zero-instrumentation-application-monitoring-for-kubernetes-hosted-applications"></a>Barındırılan uygulamalarını sıfır izleme uygulama için Kubernetes izleme
+# <a name="zero-instrumentation-application-monitoring-for-kubernetes-hosted-applications"></a>Kubernetes barındırılan uygulamalar için sıfır izleme uygulaması izleme
 
 > [!IMPORTANT]
-> Bu işlevsellik şu anda genel Önizleme aşamasındadır.
+> Bu işlevsellik şu anda genel önizlemededir.
 > Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
 > Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-Azure İzleyici hizmeti kafes teknik Kubernetes kümenizde kutusu uygulama herhangi bir barındırılan Kubernetes uygulamasını izleme dışında sağlamak artık yararlanır. Varsayılan gibi Application Insight Özellikler [Uygulama Haritası](../../azure-monitor/app/app-map.md) bağımlılıklarınızı, model [Canlı ölçümleri Stream](../../azure-monitor/app/live-stream.md) gerçek zamanlı izleme, güçlü görselleştirmelerle [varsayılan Pano](../../azure-monitor/app/overview-dashboard.md), [ölçüm Gezgini'nde](../../azure-monitor/platform/metrics-getting-started.md), ve [çalışma kitapları](../../azure-monitor/app/usage-workbooks.md). Bu özellik, Kubernetes iş yüklerini seçili bir Kubernetes ad alanı içindeki tüm kullanıcılar nokta performans sorunlarını ve hata noktalarına yardımcı olur. Azure İzleyici mevcut hizmet kafes yatırımlarınızı Istio gibi teknolojilerle üzerinde büyük harf yaparak, uygulamanızın kodunda herhangi bir değişiklik yapılmadan otomatik izleme eklenmiş uygulama izleme sağlar.
+Azure Izleyici, Kubernetes barındırılan uygulamalar için kullanıma hazır uygulama izlemeyi sağlamak üzere Kubernetes kümenizdeki hizmet ağı teknik ' i 'nden yararlanır. Bağımlılıklarınızı modellemek için [uygulama Haritası](../../azure-monitor/app/app-map.md) gibi varsayılan uygulama Insight özellikleriyle, gerçek zamanlı izleme için [canlı ölçüm akışı](../../azure-monitor/app/live-stream.md) , [varsayılan pano](../../azure-monitor/app/overview-dashboard.md)Ile güçlü görselleştirmeler, [Ölçüm Gezgini](../../azure-monitor/platform/metrics-getting-started.md)ve [ Çalışma kitapları](../../azure-monitor/app/usage-workbooks.md). Bu özellik, kullanıcıların seçili bir Kubernetes ad alanı içindeki Kubernetes iş yüklerinin tamamında performans sorunlarını ve hata etkin noktalarını belirleyebilmenize yardımcı olur. Azure Izleyici, mevcut hizmet ağı yatırımlarınızı, Istio gibi teknolojilerle büyük harfle sunarak, uygulamanızın kodunda herhangi bir değişiklik yapılmadan otomatik olarak izlenen uygulama izlemeyi sağlar.
 
 > [!NOTE]
-> Bu, Kubernetes üzerinde uygulama izleme yapmak için birçok yolu biridir. Kubernetes kullanarak barındırılan herhangi bir uygulama da işaretleyebilir [Application Insights SDK'sı](../../azure-monitor/azure-monitor-app-hub.md) hizmet kafes gerek kalmadan. Kubernetes ile kullanabileceğiniz bir SDK uygulamada ölçümlü izleme olmadan izlemek için aşağıdaki yöntemi.
+> Bu, Kubernetes üzerinde uygulama izleme gerçekleştirmenin birçok yöntemlerinden biridir. Ayrıca, bir hizmet ağı gerekmeden [Application Insights SDK 'yı](../../azure-monitor/azure-monitor-app-hub.md) kullanarak Kubernetes 'te barındırılan herhangi bir uygulamayı da denetleyebilirsiniz. Bir SDK ile uygulamayı işaretlemeden Kubernetes 'i izlemek için aşağıdaki yöntemi kullanabilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- A [Kubernetes kümesi](https://docs.microsoft.com/azure/aks/concepts-clusters-workloads).
-- Konsolunda çalıştırmak için kümeye erişim *kubectl*.
-- Bir [Application Insight kaynak](create-new-resource.md)
-- Bir hizmet kafes vardır. Kümenize dağıtılan Istio yoksa, şunları öğrenebilirsiniz nasıl [yükleyip Istio Azure Kubernetes Service'teki](https://docs.microsoft.com/azure/aks/istio-install).
+- Bir [Kubernetes kümesi](https://docs.microsoft.com/azure/aks/concepts-clusters-workloads).
+- *Kubectl*çalıştırmak için kümeye konsol erişimi.
+- Bir [Application Insight kaynağı](create-new-resource.md)
+- Hizmet ağı vardır. Kümenizin güncel bir dağıtımı yoksa, [Azure Kubernetes hizmeti 'Nde istio 'yu yüklemeyi ve kullanmayı](https://docs.microsoft.com/azure/aks/istio-install)öğrenebilirsiniz.
 
-## <a name="capabilities"></a>Özellikler
+## <a name="capabilities"></a>Yetenekler
 
-Kubernetes için barındırılan uygulamaları izlemeyi sıfır izleme uygulaması kullanılarak kullanmanız mümkün olacaktır:
+Kubernetes barındırılan uygulamalar için sıfır izleme uygulama izlemeyi kullanarak şunları kullanabilirsiniz:
 
 - [Uygulama Eşlemesi](../../azure-monitor/app/app-map.md)
-- [Stream Canlı ölçümleri](../../azure-monitor/app/live-stream.md)
+- [Canlı Akış ölçümleri](../../azure-monitor/app/live-stream.md)
 - [Panolar](../../azure-monitor/app/overview-dashboard.md)
 - [Ölçüm Gezgini](../../azure-monitor/platform/metrics-getting-started.md)
 - [Dağıtılmış izleme](../../azure-monitor/app/distributed-tracing.md)
@@ -47,38 +46,38 @@ Kubernetes için barındırılan uygulamaları izlemeyi sıfır izleme uygulamas
 
 ## <a name="installation-steps"></a>Yükleme adımları
 
-Çözümü etkinleştirmek için biz aşağıdaki adımları gerçekleştiriyor:
-- (Zaten dağıtıldıysa) uygulamayı dağıtın.
-- Uygulama hizmeti kafes parçası olduğundan emin olun.
-- Toplanan telemetri gözlemleyin.
+Çözümü etkinleştirmek için aşağıdaki adımları gerçekleştiririz:
+- Uygulamayı dağıtın (önceden dağıtılmamışsa).
+- Uygulamanın hizmet ağı 'nın bir parçası olduğundan emin olun.
+- Toplanan Telemetriyi gözlemleyin.
 
-### <a name="configure-your-app-to-work-with-a-service-mesh"></a>Bir hizmet kafes ile çalışmak için uygulamanızı yapılandırın
+### <a name="configure-your-app-to-work-with-a-service-mesh"></a>Uygulamanızı bir hizmet ağıyla çalışacak şekilde yapılandırma
 
-Istio destekleyen iki yöntemle [bir pod ölçümlü izleme yapma](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/).
-Çoğu durumda, uygulamanızla birlikte içeren bir Kubernetes ad alanı işaretlemek kolay *istio ekleme* etiketi:
+İstio, [Pod](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/)'ın iki yolunu destekler.
+Çoğu durumda, uygulama içeren Kubernetes ad alanını *istio-ekleme* etiketiyle işaretlemek en kolay yoldur:
 
 ```console
 kubectl label namespace <my-app-namespace> istio-injection=enabled
 ```
 
 > [!NOTE]
-> Hizmet kafes asansörler veri kablo kapalı olduğundan, biz şifrelenmiş trafik müdahale edemez. Küme bırakmamasını trafiği için şifrelenmemiş bir protokol (örneğin, HTTP) kullanın. Şifrelenmelidir dış trafiğini göz önünde bulundurun [SSL sonlandırma ayarı](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) giriş denetleyicisine.
+> Hizmet ağı, verileri tel kapatığında, şifrelenmiş trafiği ele geçirilemez. Kümeden ayrılmadan trafik için şifrelenmemiş bir protokol (örneğin, HTTP) kullanın. Şifrelenmesi gereken dış trafik için, giriş denetleyicisinde [SSL sonlandırmasını ayarlamayı](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) göz önünde bulundurun.
 
-Hizmet kafes dışında çalışan uygulamalar etkilenmez.
+Hizmet ağı dışında çalışan uygulamalar etkilenmez.
 
 ### <a name="deploy-your-application"></a>Uygulamanızı dağıtma
 
-- Uygulamanızı dağıtmak *uygulama ad Alanım* ad alanı. Uygulama zaten dağıtılmışsa ve yukarıda açıklanan otomatik sepet ekleme yöntemi izlediyseniz, pod'ları, sepet Istio eklediği emin olmak için yeniden oluşturmanız gerekecek; sıralı güncelleştirme başlatın veya tek tek pod'ları silin ve yeniden oluşturulması bekleyin.
-- Uygulamanızı uyumlu ile olun [Istio gereksinimleri](https://istio.io/docs/setup/kubernetes/prepare/requirements/).
+- Uygulamanızı *-App-Namespace* ad alanına dağıtın. Uygulama zaten dağıtılmışsa ve yukarıda açıklanan otomatik sepet ekleme yöntemini izlediyseniz, Mao 'nun arabasını yeniden oluşturmasını sağlamak için pod 'yi yeniden oluşturmanız gerekir; bir sıralı güncelleştirme başlatın veya bağımsız bir dizin silin ve yeniden oluşturulması için bekleyin.
+- Uygulamanızın [Istio gereksinimleriyle](https://istio.io/docs/setup/kubernetes/prepare/requirements/)uyumlu olduğundan emin olun.
 
-### <a name="deploy-zero-instrumentation-application-monitoring-for-kubernetes-hosted-apps"></a>Kubernetes için barındırılan uygulamaları izlemeyi sıfır izleme uygulaması dağıtma
+### <a name="deploy-zero-instrumentation-application-monitoring-for-kubernetes-hosted-apps"></a>Kubernetes barındırılan uygulamalar için sıfır izleme uygulaması izlemeyi dağıtma
 
-1. İndirin ve ayıklayın bir [ *Application Insights bağdaştırıcısı* yayın](https://github.com/Microsoft/Application-Insights-Istio-Adapter/releases/).
-2. Gidin */src/kubernetes/* yayın klasörün içindeki.
-3. Düzen *application-insights-istio-mixer-adapter-deployment.yaml*
-    - değeri Düzenle *ISTIO_MIXER_PLUGIN_AI_INSTRUMENTATIONKEY* telemetri içerecek şekilde, Azure portalındaki Application Insights kaynağına ait izleme anahtarını içeren ortam değişkeni.
-    - Gerekirse, değerini düzenlemek *ISTIO_MIXER_PLUGIN_WATCHLIST_NAMESPACES* ad alanları için istediğiniz izlemeyi etkinleştirmek, virgülle ayrılmış listesini içeren ortam değişkeni. Tüm ad alanlarını izlemek için boş bırakın.
-4. Uygulama *her* YAML dosyası bulundu altında *src/kubernetes/* aşağıdakileri çalıştırarak (hala içinde olmalıdır */src/kubernetes/* ):
+1. [ *Application Insights bağdaştırıcısı* sürümünü](https://github.com/Microsoft/Application-Insights-Istio-Adapter/releases/)indirip ayıklayın.
+2. Yayın klasörü içinde */src/Kubernetes/* adresine gidin.
+3. *Uygulama düzenleme-iço-karıştırıcı-bağdaştırıcı-Deployment. YAML*
+    - *ISTIO_MIXER_PLUGIN_AI_INSTRUMENTATIONKEY* ortam değişkeninin değerini, telemetriyi içerecek Azure Portal Application Insights kaynağın izleme anahtarını içerecek şekilde düzenleyin.
+    - Gerekirse, *ISTIO_MIXER_PLUGIN_WATCHLIST_NAMESPACES* ortam değişkeninin değerini, izlemeyi etkinleştirmek istediğiniz ad uzaylarının virgülle ayrılmış bir listesini içerecek şekilde düzenleyin. Tüm ad alanlarını izlemek için boş bırakın.
+4. *Src/Kubernetes* altında bulunan *her* YAML dosyasını, aşağıdakileri çalıştırarak uygulayın (yine de */src/Kubernetes/* içinde olmalıdır):
 
    ```console
    kubectl apply -f .
@@ -86,57 +85,57 @@ Hizmet kafes dışında çalışan uygulamalar etkilenmez.
 
 ### <a name="verify-deployment"></a>Dağıtımı doğrulama
 
-- Application Insights bağdaştırıcısı dağıtılan emin olun:
+- Application Insights bağdaştırıcının dağıtıldığından emin olun:
 
   ```console
   kubectl get pods -n istio-system -l "app=application-insights-istio-mixer-adapter"
   ```
 > [!NOTE]
-> Bazı durumlarda, ayarlama ince ayar gereklidir. Dahil etmek veya toplanmakta olan tek bir pod için telemetri hariç tutmak için kullanın *appinsights/monitoring.enabled* bu pod etiketi. Bu, tüm ad alanı tabanlı yapılandırma üzerinde önceliğe sahip olacaktır. Ayarlama *appinsights/monitoring.enabled* için *true* pod dahil etmek ve *false* dışlamak istediğiniz.
+> Bazı durumlarda, ince ayar ayarlama gereklidir. Tek bir pod 'ın toplanmasına yönelik Telemetriyi dahil etmek veya hariç tutmak için, bu pod üzerinde *appınsights/Monitoring. Enabled* etiketini kullanın. Bu, ad alanı tabanlı tüm yapılandırma üzerinde önceliğe sahip olacaktır. *Appınsights/Monitoring* 'ı, Pod öğesini içerecek şekilde *true* , hariç tutmak için *false* olarak ayarlayın.
 
 ### <a name="view-application-insights-telemetry"></a>Application Insights telemetrisini görüntüleme
 
-- Uygulama izleme düzgün çalıştığını doğrulamak için bir örnek isteği oluşturun.
-- 3-5 dakika içinde Azure Portalı'nda görünmesi telemetri görmeye başlamanız gerekir. Kullanıma mutlaka *Uygulama Haritası* portalında Application Insights kaynağınıza bölümü.
+- İzlemenin düzgün çalıştığını doğrulamak için uygulamanıza yönelik örnek bir istek oluşturun.
+- 3-5 dakika içinde, Azure portal Telemetriyi görmeye başlamanız gerekir. Portalda Application Insights kaynağınızın *uygulama Haritası* bölümünü kullanıma aldığınızdan emin olun.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-Aşağıdaki sorun giderme akış telemetri Azure portalında görünmüyor kullanılacak bekleniyor.
+Aşağıda, telemetri Azure portal beklendiği gibi görünmediği zaman, kullanılacak sorun giderme akışı verilmiştir.
 
-1. Uygulama yük altındayken ve gönderme/düz HTTP istekleri alma emin olun. Telemetri, kablo yükseltilmiş olduğundan, şifrelenmiş trafik desteklenmiyor. Gelen veya giden isteği yoksa olacaktır telemetri yok ya da.
-2. Doğru izleme anahtarını sağlandığından emin olmak *ISTIO_MIXER_PLUGIN_AI_INSTRUMENTATIONKEY* ortam değişkeninde *application-insights-istio-mixer-adapter-deployment.yaml*. İzleme anahtarı bulunur *genel bakış* Azure portalında Application Insights kaynağı sekmesi.
-3. Doğru Kubernetes ad alanı sağlanır olun *ISTIO_MIXER_PLUGIN_WATCHLIST_NAMESPACES* ortam değişkeninde *application-insights-istio-mixer-adapter-deployment.yaml*. Tüm ad alanlarını izlemek için boş bırakın.
-4. Uygulamanızın pod'ları tarafından Istio sepet olarak eklenen olun. Sepet Istio'nın her pod var olduğunu doğrulayın.
+1. Uygulamanın yük altında olduğundan ve isteklerin düz HTTP olarak gönderilmesini/alınmasını sağlayın. Telemetriden yükseltilmemiş olduğundan, şifrelenmiş trafik desteklenmez. Gelen veya giden istekler yoksa, hiçbir telemetri olmaz.
+2. *Application-Insights-istio-MIXER-Adapter-Deployment. YAML*içindeki *ISTIO_MIXER_PLUGIN_AI_INSTRUMENTATIONKEY* ortam değişkeninde doğru izleme anahtarının sağlandığından emin olun. İzleme anahtarı, Azure portal Application Insights kaynağın *genel bakış* sekmesinde bulunur.
+3. *Application-Insights-istio-MIXER-Adapter-Deployment. YAML*içindeki *ISTIO_MIXER_PLUGIN_WATCHLIST_NAMESPACES* ortam değişkeninde doğru Kubernetes ad alanının sağlandığından emin olun. Tüm ad alanlarını izlemek için boş bırakın.
+4. Uygulamanızın yer aldığından, Istio tarafından dışarıdan eklenmiş olduğundan emin olun. Her pod üzerinde, Icar 'ın yer aldığı yer olduğunu doğrulayın.
 
    ```console
    kubectl describe pod -n <my-app-namespace> <my-app-pod-name>
    ```
-   Adlı bir kapsayıcı olduğundan emin olun *istio proxy* pod'u çalıştıran.
+   Pod üzerinde çalışan bir *IO-proxy* adlı kapsayıcı olduğunu doğrulayın.
 
-5. Application Insights bağdaştırıcının izlemeleri görüntüleyin.
+5. Application Insights bağdaştırıcısının izlemelerini görüntüleyin.
 
    ```console
    kubectl get pods -n istio-system -l "app=application-insights-istio-mixer-adapter"
    kubectl logs -n istio-system application-insights-istio-mixer-adapter-<fill in from previous command output>
    ```
 
-   Alınan telemetri öğelerinin sayısını dakikada bir kez güncelleştirilir. Bu dakika dakika içinde - değil geçerseniz telemetri yok Istio tarafından bağdaştırıcısına gönderiliyor.
-   Herhangi bir hata günlüğüne bakın.
-6. Bunu kurulmuşsa, *Kubernetes için Application Insight* bağdaştırıcısı yok iletilir ve telemetri, neden, veri bağdaştırıcısına göndermeme anlamaya Istio'nın Mixer günlüklerini kontrol edin:
+   Alınan telemetri öğelerinin sayısı bir dakika sonra güncelleştirilir. Dakikada dakika büyümezse, bir teleo tarafından bağdaştırıcıya bir telemetri gönderilmez.
+   Günlükteki hataları arayın.
+6. *Kubernetes bağdaştırıcısı Için Application* Insights 'ın beslenmesini denetlüdüyse, bağdaştırıcıya nasıl veri göndermediğini anlamak için Ise 'nin karıştırıcı günlüklerini denetleyin:
 
    ```console
    kubectl get pods -n istio-system -l "istio=mixer,app=telemetry"
    kubectl logs -n istio-system istio-telemetry-<fill in from previous command output> -c mixer
    ```
-   Özellikle iletişimleri ile ilgili hataları arayın *applicationinsightsadapter* bağdaştırıcısı.
+   Özellikle *applicationınsi,* ile iletişimlerle ilgili herhangi bir hata olup olmadığına bakın.
 
 ## <a name="faq"></a>SSS
 
-Bu projede ilerlemesi için en son bilgi için ziyaret [Istio Mixer projenin GitHub için Application Insights bağdaştırıcısı](https://github.com/Microsoft/Application-Insights-Istio-Adapter/blob/master/SETUP.md#faq).
+Bu projedeki ilerleme durumu hakkında en son bilgiler için, [Istio karıştırıcı projesinin GitHub Application Insights bağdaştırıcısını](https://github.com/Microsoft/Application-Insights-Istio-Adapter/blob/master/SETUP.md#faq)ziyaret edin.
 
 ## <a name="uninstall"></a>Kaldırma
 
-Ürünü için kaldırma *her* YAML dosyası bulundu altında *src/kubernetes/* çalıştırın:
+Ürünü kaldırmak için *src/Kubernetes/* Run altında bulunan *her* bir YAML dosyası için:
 
 ```console
 kubectl delete -f <filename.yaml>
@@ -145,4 +144,4 @@ kubectl delete -f <filename.yaml>
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure İzleyici ve kapsayıcıları birlikte nasıl ziyaret çalıştığı hakkında daha fazla bilgi edinmek için [kapsayıcılara genel bakış için Azure İzleyici](../../azure-monitor/insights/container-insights-overview.md)
+Azure Izleyici ve kapsayıcısının birlikte nasıl çalıştığı hakkında daha fazla bilgi edinmek için [bkz. kapsayıcılar Için Azure izleyici genel bakış](../../azure-monitor/insights/container-insights-overview.md)

@@ -1,136 +1,138 @@
 ---
-title: Azure veri kutusu Edge için C# IOT Edge Modülü | Microsoft Docs
-description: Veri kutusu Ucunuzdaki dağıtılabilir bir C# IOT Edge modülü geliştirme konusunda bilgi edinin.
+title: C#Azure Data Box Edge için IoT Edge modülü | Microsoft Docs
+description: Data Box Edge dağıtılabilecek IoT Edge bir C# modül geliştirmeyi öğrenin.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: article
-ms.date: 03/19/2019
+ms.date: 08/06/2019
 ms.author: alkohli
-ms.openlocfilehash: c2803ba598895834bb197f4a06ff0635354fcaca
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f57a0431bbdafee2d38038d0039b47a34e5454c7
+ms.sourcegitcommit: 9fba13cdfce9d03d202ada4a764e574a51691dcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64680888"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71315828"
 ---
-# <a name="develop-a-c-iot-edge-module-to-move-files-on-data-box-edge"></a>Geliştirme bir C# IOT Edge modülü, veri kutusu edge'de dosyaları taşıma
+# <a name="develop-a-c-iot-edge-module-to-move-files-on-data-box-edge"></a>Dosyaları Data Box Edge C# taşımak için IoT Edge modülünü geliştirme
 
-Bu makalede veri kutusu Edge Cihazınızı dağıtım için bir IOT Edge modülü oluşturma adımları. Azure Data Box Edge verileri işlemenizi ve ağ üzerinden Azure'a göndermenizi sağlayan bir depolama çözümüdür.
+Bu makalede, Data Box Edge cihazınızdan dağıtım için IoT Edge modülü oluşturma adımları anlatılmaktadır. Azure Data Box Edge verileri işlemenizi ve ağ üzerinden Azure'a göndermenizi sağlayan bir depolama çözümüdür.
 
-Verileri Azure'a taşıdık şekilde dönüştürmek için Azure IOT Edge modülleri, veri kutusu Edge ile kullanabilirsiniz. Bu makalede kullanılan modül bir bulut paylaşımı veri kutusu Edge Cihazınızda yerel paylaşımından bir dosyayı kopyalama mantığını uygular.
+Verileri Azure 'a taşındıktan sonra dönüştürmek için Data Box Edge Azure IoT Edge modüller kullanabilirsiniz. Bu makalede kullanılan modül, bir dosyayı yerel bir paylaşımdan Data Box Edge cihazınızdaki bir bulut paylaşımında kopyalama mantığını uygular.
 
 Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Modüllerinizi (Docker görüntüleri) yönetmek için bir kapsayıcı kayıt defteri oluşturun.
-> * Veri kutusu Edge Cihazınızda dağıtmak için bir IOT Edge modülünü oluşturun.
+> * Modüllerinizi depolamak ve yönetmek için bir kapsayıcı kayıt defteri oluşturun (Docker görüntüleri).
+> * Data Box Edge cihazınızda dağıtmak için bir IoT Edge modülü oluşturun.
 
 
-## <a name="about-the-iot-edge-module"></a>IOT Edge modülü hakkında
+## <a name="about-the-iot-edge-module"></a>IoT Edge modülü hakkında
 
-Veri kutusu Edge cihazınıza dağıtabilir ve IOT Edge modüllerini çalıştırın. Edge, temelde, belirli bir görevi gerçekleştirmek için gibi bir CİHAZDAN bir ileti alma, bir iletiyi dönüştürmek veya bir IOT Hub'ına ileti göndermek Docker kapsayıcıları modüllerdir. Bu makalede, bir bulut paylaşımına veri kutusu Edge Cihazınızda yerel bir paylaşımdan dosyaları kopyalayan bir modül oluşturur.
+Data Box Edge cihazınız, IoT Edge modülleri dağıtabilir ve çalıştırabilir. Edge modülleri, bir cihazdan ileti alma, ileti dönüştürme veya bir IoT Hub ileti gönderme gibi belirli bir görevi gerçekleştiren Docker kapsayıcılarıdır. Bu makalede, dosyaları yerel bir paylaşımdan Data Box Edge cihazınızda bir bulut paylaşımıyla kopyalayan bir modül oluşturacaksınız.
 
-1. Dosyalar, veri kutusu Edge Cihazınızda yerel paylaşıma yazılır.
-2. Dosya olay Oluşturucu yerel paylaşıma yazılan her dosya için bir dosya olayı oluşturur. Bir dosya değiştirildiğinde dosya olaylar da oluşturulur. Dosya olayları, sonra IOT Edge Hub'ına (IOT Edge çalışma zamanı) gönderilir.
-3. IOT Edge Özel Modül dosya için göreli bir yol da içeren bir dosya olay nesnesi oluşturmak için dosya olayını işler. Modül göreli dosya yolu kullanarak mutlak bir yol oluşturur ve dosyayı yerel paylaşımından bulut paylaşıma kopyalar. Modül, ardından dosyayı yerel paylaşımından siler.
+1. Dosyalar, Data Box Edge cihazınızda yerel paylaşıma yazılır.
+2. Dosya olay Oluşturucusu, yerel paylaşıma yazılan her dosya için bir dosya olayı oluşturur. Dosya olayları, bir dosya değiştirildiğinde de oluşturulur. Dosya olayları daha sonra IoT Edge hub 'ına gönderilir (IoT Edge çalışma zamanında).
+3. IoT Edge özel modül dosya olayını, dosya için göreli yol da içeren bir dosya olay nesnesi oluşturacak şekilde işler. Modül göreli dosya yolunu kullanarak mutlak bir yol oluşturur ve dosyayı yerel paylaşımdan bulut paylaşımıyla kopyalar. Modül daha sonra dosyayı yerel paylaşımdan siler.
 
-![Veri kutusu Edge üzerinde Azure IOT Edge modülü nasıl çalışır?](./media/data-box-edge-create-iot-edge-module/how-module-works-1.png)
+![Azure IoT Edge modülün nasıl çalıştığı Data Box Edge](./media/data-box-edge-create-iot-edge-module/how-module-works-1.png)
 
-Dosyayı bulut paylaşımda olduktan sonra Azure depolama hesabınıza otomatik olarak karşıya.
+Dosya bulut paylaşımından olduktan sonra otomatik olarak Azure depolama hesabınıza yüklenir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Başlamadan önce aşağıdakilere sahip olduğunuzdan emin olun:
 
-- Çalışan bir veri kutusu Edge cihazı.
+- Çalıştıran bir Data Box Edge cihaz.
 
-    - Cihaz Ayrıca, ilişkili bir IOT hub'ı kaynak vardır.
-    - Cihaz bilgi işlem rolü yapılandırılmış bir sınır vardır.
-    Daha fazla bilgi için Git [işlem yapılandırma](data-box-edge-deploy-configure-compute.md#configure-compute) veri kutusu Ucunuzdaki için.
+    - Cihazda ayrıca ilişkili bir IoT Hub kaynağı vardır.
+    - Cihazda sınır hesaplama rolü yapılandırıldı.
+    Daha fazla bilgi için Data Box Edge [Işlem yapılandırma](data-box-edge-deploy-configure-compute.md#configure-compute) bölümüne gidin.
 
-- Aşağıdaki geliştirme kaynaklarıdır:
+- Aşağıdaki geliştirme kaynakları:
 
     - [Visual Studio Code](https://code.visualstudio.com/).
     - [Visual Studio Code için C# (OmniSharp tarafından desteklenen) uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
     - [Visual Studio Code için Azure IoT Edge uzantısı](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-edge).
     - [.NET Core 2.1 SDK'sı](https://www.microsoft.com/net/download).
-    - [Docker CE](https://store.docker.com/editions/community/docker-ce-desktop-windows). Yazılımı karşıdan yüklenip kurulacak bir hesap oluşturmanız gerekebilir.
+    - [Docker CE](https://store.docker.com/editions/community/docker-ce-desktop-windows). Yazılımı indirmek ve yüklemek için bir hesap oluşturmanız gerekebilir.
 
 ## <a name="create-a-container-registry"></a>Kapsayıcı kayıt defteri oluşturma
 
-Azure kapsayıcı kayıt defteri, Azure’da özel Docker kapsayıcısı görüntülerinizi depolayıp yönetebileceğiniz özel bir Docker kayıt defteridir. Sağlanan iki popüler Docker kayıt defteri hizmetler bulutta, Azure Container Registry ve Docker Hub ' dir. Bu makalede, kapsayıcı kayıt defteri kullanır.
+Azure kapsayıcı kayıt defteri, Azure’da özel Docker kapsayıcısı görüntülerinizi depolayıp yönetebileceğiniz özel bir Docker kayıt defteridir. Bulutta bulunan iki popüler Docker kayıt defteri hizmeti Azure Container Registry ve Docker Hub 'lardır. Bu makale Container Registry kullanır.
 
 1. [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
-2. Seçin **kaynak Oluştur > kapsayıcıları > kapsayıcı kayıt defteri**. **Oluştur**’a tıklayın.
-3. Sağlar:
+2. **Container Registry > kaynak > kapsayıcıları oluştur**' u seçin. **Oluştur**’a tıklayın.
+3. Girmelisiniz
 
-   1. Benzersiz bir **kayıt defteri adı** Azure'un içinde 5-50 alfasayısal karakterler içeriyor.
-   2. Seçin bir **abonelik**.
-   3. Yeni oluşturduğunuz veya mevcut bir **kaynak grubu**.
-   4. Bir **Konum** seçin. Veri kutusu Edge kaynakla ilişkilendirilmiş olduğundan bu konum aynı olmasını öneririz.
+   1. Azure 'da 5 ile 50 alfasayısal karakter içeren benzersiz bir **kayıt defteri adı** .
+   2. Bir **abonelik**seçin.
+   3. Yeni oluşturun veya var olan bir **kaynak grubunu**seçin.
+   4. Bir **Konum** seçin. Bu konumun Data Box Edge kaynağıyla ilişkili ile aynı olmasını öneririz.
    5. **Yönetici kullanıcı** ayarını **Etkinleştir**'e getirin.
-   6. SKU kümesine **temel**.
+   6. SKU 'YU **temel**olarak ayarlayın.
 
       ![Kapsayıcı kayıt defteri oluşturma](./media/data-box-edge-create-iot-edge-module/create-container-registry-1.png)
  
 4. **Oluştur**’u seçin.
 5. Kapsayıcı kayıt defteriniz oluşturulduktan sonra, bu kayıt defterine gidin ve **Erişim anahtarları**'nı seçin.
 
-    ![Erişim anahtarı alma](./media/data-box-edge-create-iot-edge-module/get-access-keys-1.png)
+    ![Erişim anahtarları al](./media/data-box-edge-create-iot-edge-module/get-access-keys-1.png)
  
-6. **Oturum açma sunucusu**, **Kullanıcı adı** ve **Parola** değerlerini kopyalayın. Bu değerleri daha sonra Docker görüntüsünü kayıt defterinize yayımlama ve Azure IOT Edge çalışma zamanı için kayıt defteri kimlik bilgilerini eklemek için kullanırsınız.
+6. **Oturum açma sunucusu**, **Kullanıcı adı** ve **Parola** değerlerini kopyalayın. Bu değerleri daha sonra Docker görüntüsünü Kayıt defterinize yayımlamak ve Azure IoT Edge çalışma zamanına kayıt defteri kimlik bilgilerini eklemek için kullanın.
 
 
 ## <a name="create-an-iot-edge-module-project"></a>IoT Edge modülü projesi oluşturma
 
-Aşağıdaki adımlar üzerinde .NET Core 2.1 SDK dayalı bir IOT Edge modülü projesi oluşturur. Proje, Visual Studio Code ve Azure IOT Edge uzantısını kullanır.
+Aşağıdaki adımlarda, .NET Core 2,1 SDK temel alınarak bir IoT Edge modülü projesi oluşturulur. Proje Visual Studio Code ve Azure IoT Edge uzantısını kullanır.
 
 ### <a name="create-a-new-solution"></a>Yeni çözüm oluşturma
 
 Kendi yazacağınız kodla özelleştirebileceğiniz bir C# çözüm şablonu oluşturun.
 
-1. Visual Studio Code'da seçin **Görüntüle > komut paleti** VS Code komut paletini açın.
-2. Komut Paleti'nde girin ve şu komutu çalıştırın **Azure: Oturum** ve Azure hesabınızda oturum açmak için yönergeleri izleyin. Oturumu önceden açtıysanız bu adımı atlayabilirsiniz.
-3. Komut Paleti'nde girin ve şu komutu çalıştırın **Azure IOT Edge: Yeni bir IOT Edge çözüm**. Komut paletinde çözümünüzü oluşturmak için aşağıdaki bilgileri girin:
+1. Visual Studio Code ' de, VS Code komut paletini açmak için **> komut paleti görüntüle** ' yi seçin.
+2. Komut paletinde Azure komutunu **girip çalıştırın: Oturum açın** ve Azure hesabınızda oturum açmak için yönergeleri izleyin. Oturumu önceden açtıysanız bu adımı atlayabilirsiniz.
+3. Komut paletinde, komutunu **girin ve Azure IoT Edge çalıştırın: Yeni IoT Edge çözümü**. Komut paletinde çözümünüzü oluşturmak için aşağıdaki bilgileri girin:
 
     1. Çözümü oluşturmak istediğiniz klasörü seçin.
     2. Çözümünüz için bir ad girin veya varsayılan **EdgeSolution** adını kabul edin.
     
-        ![1 yeni çözüm oluşturma](./media/data-box-edge-create-iot-edge-module/create-new-solution-1.png)
+        ![Yeni çözüm oluştur 1](./media/data-box-edge-create-iot-edge-module/create-new-solution-1.png)
 
     3. Modül şablonu olarak **C# Module** girişini seçin.
-    4. Varsayılan modül adı atamak istediğiniz adı ile değiştirin, bu durumda, **FileCopyModule**.
+    4. Varsayılan modül adını atamak istediğiniz adla değiştirin, bu durumda **Filecopymodule**olur.
     
-        ![2 yeni çözüm oluşturma](./media/data-box-edge-create-iot-edge-module/create-new-solution-2.png)
+        ![Yeni çözüm oluştur 2](./media/data-box-edge-create-iot-edge-module/create-new-solution-2.png)
 
-    5. Görüntü deposu olarak ilk modülünüzde için önceki bölümde oluşturulan kapsayıcı kayıt defteri belirtin. **localhost:5000** yerine kopyaladığınız oturum açma sunucusu değerini yazın.
+    5. Önceki bölümde, ilk modülünüzün görüntü deposu olarak oluşturduğunuz kapsayıcı kayıt defterini belirtin. **localhost:5000** yerine kopyaladığınız oturum açma sunucusu değerini yazın.
 
-        Son dize şuna benzer `<Login server name>/<Module name>`. Bu örnekte, dizedir: `mycontreg2.azurecr.io/filecopymodule`.
+        Son dize gibi `<Login server name>/<Module name>`görünür. Bu örnekte, dize: `mycontreg2.azurecr.io/filecopymodule`.
 
-        ![3 yeni çözüm oluşturma](./media/data-box-edge-create-iot-edge-module/create-new-solution-3.png)
+        ![Yeni çözüm oluştur 3](./media/data-box-edge-create-iot-edge-module/create-new-solution-3.png)
 
-4. Git **Dosya > Klasör Aç**.
+4. **Dosya > klasörü aç**' a gidin.
 
-    ![Yeni çözüm 4 oluşturma](./media/data-box-edge-create-iot-edge-module/create-new-solution-4.png)
+    ![Yeni çözüm oluştur 4](./media/data-box-edge-create-iot-edge-module/create-new-solution-4.png)
 
-5. Bulun ve üzerine **EdgeSolution** daha önce oluşturduğunuz klasör. VS Code penceresinin, IOT Edge çözüm çalışma alanı ile beş düzey bileşenleri yükler. Düzenlemeyeceği **.vscode** klasöründe **.gitignore** dosyası **.env** dosyasını ve **deployment.template.json** bu makaledeki.
+5. Daha önce oluşturduğunuz **EdgeSolution** klasörüne gidin ve bu klasöre gelin. VS Code pencere, IoT Edge çözüm çalışma alanınızı beş üst düzey bileşeni ile yükler. . **Vscode** klasörünü,. **gitignore** dosyasını, **. env** dosyasını ve **dağıtım. Template. JSON** dosyasını bu makalede düzenleyemezsiniz.
     
-    Değişiklik yalnızca modülleri klasöründe bileşendir. Bu klasör, modül olarak bir kapsayıcı görüntüsü oluşturmak için Docker dosya ve modülü için C# kodu içerir.
+    Değiştirdiğiniz tek bileşen modüller klasörüdür. Bu klasörde modülünüzü C# kapsayıcı görüntüsü olarak derlemek için modülünüzün ve Docker dosyalarınızın kodu bulunur.
 
-    ![5 yeni çözüm oluşturma](./media/data-box-edge-create-iot-edge-module/create-new-solution-5.png)
+    ![Yeni çözüm oluştur 5](./media/data-box-edge-create-iot-edge-module/create-new-solution-5.png)
 
 ### <a name="update-the-module-with-custom-code"></a>Modülü özel kodla güncelleştirme
 
-1. VS Code Gezgininde açın **modülleri > FileCopyModule > Program.cs**.
-2. Üst kısmındaki **FileCopyModule ad alanı**, aşağıdaki ekleyin, daha sonra kullanılan türler için using deyimleri. **Microsoft.Azure.Devices.Client.Transport.Mqtt** IOT Edge Hub'ına ileti göndermek için bir protokoldür.
+1. VS Code Gezgini 'nde, **> FileCopyModule > modülleri**' ni açın.
+2. **Filecopymodule ad alanının**en üstünde, daha sonra kullanılan türler için aşağıdaki using deyimlerini ekleyin. **Microsoft. Azure. Devices. Client. Transport. MQTT** , IoT Edge hub 'ına ileti göndermek için bir protokoldür.
 
     ```
-    using Microsoft.Azure.Devices.Client.Transport.Mqtt;
-    using Newtonsoft.Json;
+    namespace FileCopyModule
+    {
+        using Microsoft.Azure.Devices.Client.Transport.Mqtt;
+        using Newtonsoft.Json;
     ```
-3. Ekleme **InputFolderPath** ve **OutputFolderPath** Program sınıfına değişken.
+3. **Inputfolderpath** ve **Outputfolderpath** değişkenini program sınıfına ekleyin.
 
     ```
     class Program
@@ -140,11 +142,11 @@ Kendi yazacağınız kodla özelleştirebileceğiniz bir C# çözüm şablonu ol
             private const string OutputFolderPath = "/home/output";
     ```
 
-4. Ekleme **MessageBody** Program sınıfına sınıfı. Bu sınıflar gelen iletilerin gövdesi için beklenen şemayı tanımlar.
+4. Önceki adımdan hemen sonra, ileti gövdesini tanımlamak için **Fileevent** sınıfını ekleyin.
 
     ```
     /// <summary>
-    /// The MessageBody class defines the expected schema for the body of incoming messages. 
+    /// The FileEvent class defines the body of incoming messages. 
     /// </summary>
     private class FileEvent
     {
@@ -156,7 +158,7 @@ Kendi yazacağınız kodla özelleştirebileceğiniz bir C# çözüm şablonu ol
     }
     ```
 
-5. **Init** yöntemindeki kod, bir **ModuleClient** nesnesi oluşturur ve yapılandırır. Bu nesne, ileti göndermek ve almak için MQTT protokolünü kullanarak yerel Azure IOT Edge çalışma zamanı için bağlanmak bir modül sağlar. Init yönteminde kullanılan bağlantı dizesi modüle IOT Edge çalışma zamanı tarafından sağlanır. Kod bir IOT Edge hub'ı iletileri alacak şekilde bir FileCopy geri çağırma kaydeder **input1** uç noktası.
+5. **Init yönteminde**, kod bir **moduleclient** nesnesi oluşturur ve yapılandırır. Bu nesne, modülün ileti göndermek ve almak için MQTT protokolünü kullanarak yerel Azure IoT Edge çalışma zamanına bağlanmasını sağlar. Init yönteminde kullanılan bağlantı dizesi, IoT Edge çalışma zamanı tarafından modüle sağlanır. Kod, **input1** uç noktası aracılığıyla bir IoT Edge hub 'ından ileti almak Için bir dosya kopyası geri çağırması kaydeder. **Init metodunu** aşağıdaki kodla değiştirin.
 
     ```
     /// <summary>
@@ -178,11 +180,11 @@ Kendi yazacağınız kodla özelleştirebileceğiniz bir C# çözüm şablonu ol
     }
     ```
 
-6. Ekleme kodunu **FileCopy**.
+6. **Pipemessage yöntemi** için kodu kaldırın ve onun yerine, **FileCopy**için kodu ekleyin.
 
     ```
         /// <summary>
-        /// This method is called whenever the module is sent a message from the IoT Edge Hub. 
+        /// This method is called whenever the module is sent a message from the IoT Edge Hub.
         /// This method deserializes the file event, extracts the corresponding relative file path, and creates the absolute input file path using the relative file path and the InputFolderPath.
         /// This method also forms the absolute output file path using the relative file path and the OutputFolderPath. It then copies the input file to output file and deletes the input file after the copy is complete.
         /// </summary>
@@ -236,41 +238,42 @@ Kendi yazacağınız kodla özelleştirebileceğiniz bir C# çözüm şablonu ol
     ```
 
 7. Bu dosyayı kaydedin.
+8. Ayrıca, bu proje için [varolan bir kod örneğini indirebilirsiniz](https://azure.microsoft.com/resources/samples/data-box-edge-csharp-modules/?cdn=disable) . Daha sonra, kaydettiğiniz dosyayı bu örnekteki **program.cs** dosyasına göre doğrulayabilirsiniz.
 
 ## <a name="build-your-iot-edge-solution"></a>IoT Edge çözümünüzü derleyin
 
-Önceki bölümde IOT Edge çözümünü oluşturan ve kod dosyalarını yerel paylaşımından bulut paylaşımı kopyalamak FileCopyModule eklenir. Şimdi çözümü kapsayıcı görüntüsü olarak derlemeniz ve kapsayıcı kayıt defterine göndermeniz gerekiyor.
+Önceki bölümde, dosyaları yerel paylaşımdan bulut paylaşımıyla kopyalamak için bir IoT Edge çözümü oluşturdunuz ve FileCopyModule 'e kod eklediniz. Şimdi çözümü kapsayıcı görüntüsü olarak derlemeniz ve kapsayıcı kayıt defterine göndermeniz gerekiyor.
 
-1. VSCode içinde terminale gidin > Yeni yeni bir Visual Studio Code tümleşik Terminalini açmak için Terminal.
-2. Tümleşik terminalde aşağıdaki komutu girerek Docker'da oturum açın.
+1. VSCode 'da, yeni bir Visual Studio Code tümleşik Terminal açmak için Terminal > yeni Terminal ' a gidin.
+2. Tümleşik terminalde aşağıdaki komutu girerek Docker 'da oturum açın.
 
     `docker login <ACR login server> -u <ACR username>`
 
-    Kapsayıcı kayıt defterinizden kopyaladığınız kullanıcı adını ve oturum açma sunucusu kullanın. 
+    Kapsayıcı Kayıt defterinizden kopyaladığınız oturum açma sunucusunu ve Kullanıcı adını kullanın.
 
-    ![Oluşturun ve IOT Edge çözüm gönderin](./media/data-box-edge-create-iot-edge-module/build-iot-edge-solution-1.png)
+    ![IoT Edge çözümü oluşturun ve gönderin](./media/data-box-edge-create-iot-edge-module/build-iot-edge-solution-1.png)
 
-2. Parola istendiğinde parolayı girin. Oturum açma sunucusu, kullanıcı adı ve paroladan değerlerini de alabilirsiniz **erişim anahtarlarını** Azure portalındaki kapsayıcı kayıt defterinizde.
+2. Parola istendiğinde parolayı girin. Ayrıca, oturum açma sunucusu, Kullanıcı adı ve parola değerlerini, Azure portal kapsayıcı kayıt defterinizde **erişim tuşlarından** alabilirsiniz.
  
-3. Kimlik bilgileri sağlanan sonra Azure kapsayıcı kayıt defterinizde modülü görüntünüzü gönderebilirsiniz. VS Code Gezgininde sağ **module.json** seçin ve dosya **derleme ve anında iletme IOT Edge çözüm**.
+3. Kimlik bilgileri sağlandığında modül görüntünüzü Azure Container Registry 'nize gönderebilirsiniz. VS Code Gezgini ' nde, **Module. JSON** dosyasına sağ tıklayın ve **IoT Edge çözümü oluştur ve Gönder**' i seçin.
 
-    ![Oluşturun ve IOT Edge çözüm gönderin](./media/data-box-edge-create-iot-edge-module/build-iot-edge-solution-2.png)
+    ![IoT Edge çözümü oluşturun ve gönderin](./media/data-box-edge-create-iot-edge-module/build-iot-edge-solution-2.png)
  
-    Çözümünüzü derlemek için Visual Studio Code size, tümleşik terminalde iki komutu çalıştırır: docker derleme ve docker gönderme. Bu iki komut kodunuzu derler, CSharpModule.dll ile kapsayıcı oluşturur ve ardından kodu, çözümü başlatırken belirttiğiniz kapsayıcı kayıt defterine gönderir.
+    Çözümünüzü derlemek için Visual Studio Code söylemeniz durumunda, tümleşik terminalde iki komut çalıştırılır: Docker Build ve Docker Push. Bu iki komut kodunuzu derler, CSharpModule.dll ile kapsayıcı oluşturur ve ardından kodu, çözümü başlatırken belirttiğiniz kapsayıcı kayıt defterine gönderir.
 
-    Modül platformu seçin istenir. Seçin *amd64* Linux için karşılık gelen.
+    Modül platformunu seçmeniz istenir. Linux 'a karşılık gelen *AMD64* öğesini seçin.
 
     ![Platform seçin](./media/data-box-edge-create-iot-edge-module/select-platform.png)
 
     > [!IMPORTANT] 
     > Yalnızca Linux modülleri desteklenir.
 
-    Aşağıdaki uyarıyı gözardı edebileceğiniz görebilirsiniz:
+    Yoksayabilirsiniz aşağıdaki uyarıyı görebilirsiniz:
 
-    *Program.cs(77,44): CS1998 Uyarı: Bu zaman uyumsuz yöntem 'await' işleçleri olmadığından ve zaman uyumlu çalışacak. 'Await' işleci, API çağrıları engelleyici olmayan await kullanmayı göz önünde bulundurun veya 'Task.Run(...) await' arka plan iş parçacığında CPU bağımlı iş yapma.*
+    *Program. cs (77, 44): uyarı CS1998: Bu zaman uyumsuz yöntemde ' await ' işleçleri yok ve zaman uyumlu olarak çalışacak. Engelleyici olmayan API çağrılarını beklemek için ' await ' işlecini veya bir arka plan iş parçacığında CPU 'ya bağlı çalışma yapmak için ' await Task. Run (...) ' kullanmayı düşünün.*
 
-4. VS Code tümleşik terminalinde etiketle tam kapsayıcı görüntü adresini görebilirsiniz. Görüntü adresi biçiminde module.json dosyasındaki bilgileri oluşturulur `<repository>:<version>-<platform>`. Bu makalede gibi görünmelidir `mycontreg2.azurecr.io/filecopymodule:0.0.1-amd64`.
+4. VS Code tümleşik terminalinde etiketle tam kapsayıcı görüntü adresini görebilirsiniz. Görüntü adresi, Module. JSON dosyasındaki biçimdeki `<repository>:<version>-<platform>`bilgilerden oluşturulur. Bu makalede, şöyle `mycontreg2.azurecr.io/filecopymodule:0.0.1-amd64`görünmelidir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Dağıtma ve bu modülü veri kutusu Edge üzerinde çalıştırmak için adımları görmek [bir modül ekleyecek](data-box-edge-deploy-configure-compute.md#add-a-module).
+Bu modülü Data Box Edge dağıtmak ve çalıştırmak için, [modül ekleme](data-box-edge-deploy-configure-compute.md#add-a-module)içindeki adımlara bakın.

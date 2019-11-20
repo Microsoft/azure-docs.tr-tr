@@ -1,5 +1,5 @@
 ---
-title: 'Hızlı Başlangıç: Proje yanıt arama varlık sorgusu'
+title: 'Hızlı Başlangıç: Proje yanıtı arama varlık sorgusu'
 titlesuffix: Azure Cognitive Services
 description: Yanıt Arama Projesindeki Varlık sorguları
 services: cognitive-services
@@ -10,12 +10,13 @@ ms.subservice: answer-search
 ms.topic: quickstart
 ms.date: 04/16/2018
 ms.author: rosh
-ms.openlocfilehash: c9f2a476353b1807bbb1c8c13dc8b8e2cdbb4ae4
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ROBOTS: NOINDEX
+ms.openlocfilehash: b1dbfcfe85a7847b593553bd06cbc22cc62d2e2e
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60688631"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68705461"
 ---
 # <a name="quickstart-query-for-entities"></a>Hızlı Başlangıç: Varlıklar için sorgu
 
@@ -112,14 +113,14 @@ Yanıt `entities` bilgisini içerir. `entityScenario` ve `entityTypeHints` alanl
 
 Sorgu ilgiliyse bir liste döndürebilir.
 
-**Sorgu:** Aşağıdaki sorgu endangered türler listesini bulur:
+**Sorgu:** Aşağıdaki sorgu, bir Endangered türler listesi bulur:
 
 ```
 https://api.labs.cognitive.microsoft.com/answerSearch/v7.0/search?q=list+of+endangered+species
 
 ```
 
-**Yanıt:** Yanıt için görünen tablo değerleri olarak biçimlendirilmiş bir liste aşağıdakileri içerir:
+**Yanıtıyla** Yanıt, tablo değerleri olarak görüntülenmek üzere biçimlendirilen bir liste içerir:
 ```
   "facts": {
     "id": "https://www.bingapis.com/api/v7/#Facts",

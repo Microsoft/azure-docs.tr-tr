@@ -1,46 +1,51 @@
 ---
-title: Mobile Apps ile Android uygulamanıza anında iletme bildirimleri ekleme | Microsoft Docs
-description: Mobile Apps, Android uygulamasına anında iletme bildirimleri göndermek için nasıl kullanılacağını öğrenin.
+title: Mobile Apps | Android uygulamanıza anında iletme bildirimleri ekleyin | Microsoft Docs
+description: Android uygulamanıza anında iletme bildirimleri göndermek için Mobile Apps kullanmayı öğrenin.
 services: app-service\mobile
 documentationcenter: android
 manager: crdun
 editor: ''
-author: conceptdev
+author: elamalani
 ms.assetid: 9058ed6d-e871-4179-86af-0092d0ca09d3
 ms.service: app-service-mobile
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-android
 ms.devlang: java
 ms.topic: article
-ms.date: 11/17/2017
-ms.author: crdun
-ms.openlocfilehash: 352e64664e6796fb4e0a7941de91ef4045076aed
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 06/25/2019
+ms.author: emalani
+ms.openlocfilehash: 539859ba73c8a26d6f7e8f25b9e7453d987a52bd
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62104620"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72389020"
 ---
 # <a name="add-push-notifications-to-your-android-app"></a>Android uygulamanıza anında iletme bildirimleri ekleme
 
 [!INCLUDE [app-service-mobile-selector-get-started-push](../../includes/app-service-mobile-selector-get-started-push.md)]
 
+> [!NOTE]
+> Visual Studio App Center mobil uygulama dağıtımında merkezi konumdaki uçtan uca ve tümleşik hizmetleri destekler. Geliştiriciler Sürekli Tümleştirme ve Teslim işlem hattını ayarlamak için **Oluşturma**, **Test** ve **Dağıtım** hizmetlerini kullanabilir. Uygulama dağıtıldıktan sonra, geliştiriciler **Analiz** ve **Tanılama** hizmetlerini kullanarak uygulamanın durumunu ve kullanımını izleyebilir, **Gönderme** hizmetini kullanarak kullanıcılarla etkileşim kurabilir. Geliştiriciler ayrıca kullanıcıların kimliğini doğrulamak için **Kimlik Doğrulaması**'ndan ve uygulama verilerini bulutta kalıcı hale getirmek ve eşitlemek için **Veri** hizmetinden yararlanabilir.
+>
+> Mobil uygulamanızda bulut hizmetlerini tümleştirmek istiyorsanız bugün [App Center](https://appcenter.ms/signup?utm_source=zumo&utm_medium=Azure&utm_campaign=zumo%20doc) kaydolun.
+
 ## <a name="overview"></a>Genel Bakış
 
-Bu öğreticide, anında iletme bildirimleri ekleme [Android Hızlı Başlangıç] anında iletme bildirimi kayıt eklenen her zaman cihaza gönderilir, böylece proje.
+Bu öğreticide, bir kayıt her eklendiğinde cihaza anında iletme bildirimi gönderilmesi için [Android hızlı başlangıç] projesine anında iletme bildirimleri eklersiniz.
 
-İndirilen hızlı başlangıç sunucu projesi kullanmazsanız, anında iletme bildirimi uzantı paketi gerekir. Daha fazla bilgi için [Azure Mobile Apps için .NET arka uç sunucu SDK'sı ile çalışma](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md).
+İndirilen hızlı başlangıç sunucusu projesini kullanmıyorsanız, anında iletme bildirimi uzantı paketine ihtiyacınız vardır. Daha fazla bilgi için bkz. [Azure için .net arka uç sunucu SDK 'sı Mobile Apps çalışma](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Aşağıdakiler gerekir:
+Şunlar gerekir:
 
-* Projenizin arka uç bağlı olarak bir IDE:
+* Projenizin arka ucuna bağlı olarak bir IDE:
 
-  * [Android Studio](https://developer.android.com/sdk/index.html) bu uygulamanın bir Node.js arka ucu varsa.
-  * [Visual Studio Community 2013](https://go.microsoft.com/fwLink/p/?LinkID=391934) veya bu uygulamanın bir Microsoft .NET arka ucu varsa sonraki bir sürümü.
-* Android 2.3 veya üstü, Google deposu düzeltme 27 veya daha yeni ve Google Play Services 9.0.2 veya üstü Firebase Cloud Messaging için.
-* Tamamlamak [Android Hızlı Başlangıç].
+  * Bu uygulamanın bir Node. js arka ucu varsa [Android Studio](https://developer.android.com/sdk/index.html) .
+  * [Visual Studio Community 2013](https://go.microsoft.com/fwLink/p/?LinkID=391934) veya sonraki bir sürümü, bu uygulamanın bir Microsoft .net arka ucu varsa.
+* Android 2,3 veya üzeri, Google Repository düzeltmesi 27 veya üzeri ve Firebase Cloud Messaging için Google Play Hizmetleri 9.0.2 veya üzeri.
+* [Android hızlı başlangıç]doldurun.
 
 ## <a name="create-a-project-that-supports-firebase-cloud-messaging"></a>Firebase Cloud Messaging'i destekleyen bir proje oluşturma
 
@@ -50,47 +55,47 @@ Aşağıdakiler gerekir:
 
 [!INCLUDE [app-service-mobile-configure-notification-hub](../../includes/app-service-mobile-configure-notification-hub.md)]
 
-## <a name="configure-azure-to-send-push-notifications"></a>Anında iletme bildirimleri göndermek için Azure'ı yapılandırma
+## <a name="configure-azure-to-send-push-notifications"></a>Azure 'ı anında iletme bildirimleri gönderecek şekilde yapılandırma
 
 [!INCLUDE [app-service-mobile-android-configure-push](../../includes/app-service-mobile-android-configure-push-for-firebase.md)]
 
-## <a name="enable-push-notifications-for-the-server-project"></a>Sunucu projesi için anında iletme bildirimlerini etkinleştirme
+## <a name="enable-push-notifications-for-the-server-project"></a>Sunucu projesi için anında iletme bildirimlerini etkinleştir
 
 [!INCLUDE [app-service-mobile-dotnet-backend-configure-push-google](../../includes/app-service-mobile-dotnet-backend-configure-push-google.md)]
 
-## <a name="add-push-notifications-to-your-app"></a>Uygulamanıza anında iletme bildirimleri ekleme
+## <a name="add-push-notifications-to-your-app"></a>Uygulamanıza anında iletme bildirimleri ekleyin
 
-Bu bölümde, istemci Android uygulamanızı anında iletme bildirimleri işlemek için güncelleştirin.
+Bu bölümde, anında iletme bildirimlerini işleyecek istemci Android uygulamanızı güncelleştirmeniz gerekir.
 
 ### <a name="verify-android-sdk-version"></a>Android SDK sürümünü doğrula
 
 [!INCLUDE [app-service-mobile-verify-android-sdk-version](../../includes/app-service-mobile-verify-android-sdk-version.md)]
 
-Sonraki adımınız, Google Play Hizmetleri yüklemektir. Firebase Cloud Messaging olan bazı en düşük API düzeyi gereksinimlerini geliştirme ve test amacıyla, hangi **minSdkVersion** özellik bildiriminde uygun olması gerekir.
+Sonraki adımınız Google Play hizmetleri yüklemektir. Firebase Cloud Messaging, geliştirme ve test için en düşük API düzeyi gereksinimlerine sahiptir ve bu, bildirimdeki **Minsdkversion** özelliği ile uyumlu olmalıdır.
 
-Eski bir cihazla sınıyorsanız başvurun [Firebase'i Android projenize ekleyin.] nasıl düşük, bu değer ayarlayabilir ve uygun şekilde ayarlanmış belirlemek için.
+Daha eski bir cihazla test ediyorsanız, bu değeri nasıl ayarlayameyeceğinizi ve uygun şekilde ayarlamayı öğrenmek için [Android projenize Firebase ekleyin] ' e başvurun.
 
-### <a name="add-firebase-cloud-messaging-to-the-project"></a>Firebase Cloud Messaging projeye Ekle
+### <a name="add-firebase-cloud-messaging-to-the-project"></a>Projeye Firebase bulut Iletileri ekleyin
 
 [!INCLUDE [Add Firebase Cloud Messaging](../../includes/app-service-mobile-add-firebase-cloud-messaging.md)]
 
-### <a name="add-code"></a>Kod ekleme
+### <a name="add-code"></a>Kod Ekle
 
 [!INCLUDE [app-service-mobile-android-getting-started-with-push](../../includes/app-service-mobile-android-getting-started-with-push.md)]
 
 ## <a name="test-the-app-against-the-published-mobile-service"></a>Uygulamayı yayımlanan mobil hizmete karşı test etme
 
-Bir Android telefonla bir USB kablosuyla doğrudan ekleyerek veya öykünücüde sanal cihazı kullanarak uygulamayı test edebilirsiniz.
+Uygulamayı, USB kablosuyla doğrudan bir Android telefonu ekleyerek veya öykünücüsünde bir sanal cihaz kullanarak test edebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticiyi tamamladığınıza göre aşağıdaki öğreticilerden birine açın etmeden göz önünde bulundurun:
+Bu öğreticiyi tamamladığınıza göre, aşağıdaki öğreticilerden birine devam etmeyi göz önünde bulundurun:
 
-* [Android uygulamanıza kimlik doğrulaması ekleme](app-service-mobile-android-get-started-users.md).
-  Todolist hızlı başlangıç projesi Android desteklenen kimlik sağlayıcısı kullanarak kimlik doğrulaması ekleme hakkında bilgi edinin.
-* [Android uygulamanız için çevrimdışı eşitlemeyi etkinleştirme](app-service-mobile-android-get-started-offline-data.md).
-  Mobile Apps arka ucu kullanarak uygulamanıza çevrimdışı destek eklemeyi öğrenin. Çevrimdışı Eşitleme ile kullanıcılar mobil uygulama ile etkileşim kurabilir&mdash;görüntüleme, ekleme veya verileri değiştirme&mdash;hiçbir ağ bağlantısı olduğunda bile.
+* [Android uygulamanıza kimlik doğrulaması ekleyin](app-service-mobile-android-get-started-users.md).
+  Desteklenen bir kimlik sağlayıcısı kullanarak Android 'de ToDoList hızlı başlangıç projesine nasıl kimlik doğrulaması ekleneceğini öğrenin.
+* [Android uygulamanız için çevrimdışı eşitlemeyi etkinleştirin](app-service-mobile-android-get-started-offline-data.md).
+  Mobile Apps arka ucu kullanarak uygulamanıza çevrimdışı destek eklemeyi öğrenin. Çevrimdışı eşitleme sayesinde, kullanıcılar bir mobil uygulama olan @ no__t-0görüntüleme, ekleme veya değiştirme, ağ bağlantısı olmadığında bile @ no__t-1verileri ile etkileşime geçebilir.
 
 <!-- URLs -->
 [Android hızlı başlangıç]: app-service-mobile-android-get-started.md
-[Firebase'i Android projenize ekleyin.]: https://firebase.google.com/docs/android/setup
+[Android projenize Firebase ekleyin]: https://firebase.google.com/docs/android/setup

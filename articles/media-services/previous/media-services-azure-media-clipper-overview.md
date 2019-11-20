@@ -1,62 +1,62 @@
 ---
-title: Azure Media Clipper'ı ile küçük resimleri oluşturun | Microsoft Docs
-description: Medya klipleri varlıklarından oluşturmaya yönelik bir araç olan Azure Media Clipper'ne genel bakış
+title: Azure Medya Clipper ile klipler oluşturma | Microsoft Docs
+description: Varlıklardan medya klipleri oluşturmaya yönelik bir araç olan Azure Media Clipper 'a genel bakış
 services: media-services
-keywords: clip;subclip;encoding;media
-author: dbgeorge
-manager: jasonsue
-ms.author: dwgeo
+keywords: klip; alt klip; kodlama; medya
+author: Juliako
+manager: femila
+ms.author: juliako
 ms.date: 03/14/2019
 ms.topic: article
 ms.service: media-services
-ms.openlocfilehash: 35f1f359b44af00000ccd9047673b80ca541d376
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 51f85dffd48e451b477018ef20491f8619a30f25
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61243876"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685005"
 ---
-# <a name="create-clips-with-azure-media-clipper"></a>Küçük resimleri ile Azure Media Clipper'ı oluşturma 
+# <a name="create-clips-with-azure-media-clipper"></a>Azure Medya Clipper ile klipler oluşturma 
 
-Azure Media Clipper'ı kullanıcılarının medya klipler oluşturmak için bir arabirim sağlamak, web geliştiricilerin sağlayan ücretsiz bir JavaScript kitaplığıdır. Bu araç, herhangi bir web sayfasında tümleştirilebilir ve varlıklar yükleniyor ve kırpma işlerini gönderme için API'ler sağlar.
+Azure Medya Clipper, Web geliştiricilerinin kullanıcılarına medya klipleri oluşturmak için bir arabirim sağlamasına olanak tanıyan ücretsiz bir JavaScript kitaplığıdır. Bu araç herhangi bir Web sayfasıyla tümleştirilebilir ve varlıkları yüklemek ve kırpma işleri göndermek için API 'Ler sağlar.
 
-Azure Media Clipper'ı ile yapabilecekleriniz:
-- Öncesi Kurşun trim ve sonrası maskeleme görüntüsü gelen arşivleri Canlı 
-- AMS Canlı etkinlikler, Canlı arşivlerinizin ya da fMP4 VOD dosyaları VIDEO oluştur 
-- Videoları birden çok kaynaktan birleştirme 
-- AMS'yi medya varlıklarınızı Özet klipler oluşturmak 
-- Çerçeve doğrulukla videoları küçük 
-- Resim grubu (GOP) doğrulukla mevcut canlı ve VOD varlıklar üzerinde dinamik bildirim filtreleri oluşturma 
-- Kodlama işleri media services hesabınızı varlıkları karşı üretir
+Azure Media Clipper şunları yapmanızı sağlar:
+- Canlı arşivlerden, ön kurşun ve kurşun gönderiyi kırpın 
+- AMS canlı olayları, canlı arşivleri veya fMP4 VOD dosyalarından video vurguları oluşturun 
+- Birden çok kaynaktan videoları birleştirme 
+- AMS medya varlıklarınızdan Özet klipler oluşturun 
+- Çerçeve doğruluğu ile videoları kırpın 
+- Resim grubu (GOP) doğruluğu ile mevcut canlı ve VOD varlıkları üzerinde dinamik bildirim filtreleri oluşturun 
+- Media Services hesabınızdaki varlıklara karşı kodlama işleri üretin
 
-Yeni özellikleri istemek için fikirleri ya da geribildirim sağlamak, Gönder [Azure Media Services için UserVoice](https://aka.ms/amsvoice/). Varsa ve belirli sorunları, soru veya hataları, Media Services bırakma ekip bir satırı Bul amcinfo@microsoft.com.
+Yeni özellikler istemek, fikir ve geri bildirim sağlamak, [Azure Media Services Için UserVoice](https://aka.ms/amsvoice/)'a gönderin. Ve belirli sorunlarla karşılaşırsanız, sorularınız varsa veya herhangi bir hata bulursanız, Media Services ekibine amcinfo@microsoft.combir satır bırakın.
 
-Aşağıdaki görüntüde Clipper arabirimi gösterir: ![Azure Media Clipper'ı](media/media-services-azure-media-clipper-overview/media-services-azure-media-clipper-interface.PNG)
+Aşağıdaki görüntüde Clipper arabirimi gösterilmektedir: Azure Media Clipper ![](media/media-services-azure-media-clipper-overview/media-services-azure-media-clipper-interface.PNG)
 
 ## <a name="release-notes"></a>Sürüm notları
-Clipper blog gönderisinde, çeşitli bilinen sorunlar ve changelog Clipper'ı en son sürümü için aşağıdaki listeye bakın:
+Clipper 'ın en son sürümü için Web günlüğü gönderisi, bilinen çeşitli sorunlar ve CHANGELOG için aşağıdaki listeye bakın:
 - [Blog gönderisi](https://azure.microsoft.com/blog/azure-media-clipper/)
-- [Bilinen sorunların listesi](https://amp.azure.net/libs/amc/latest/docs/known_issues.html)
-- [Changelog](https://amp.azure.net/libs/amc/latest/docs/changelog.html)
+- [Bilinen sorunlar listesi](https://amp.azure.net/libs/amc/latest/docs/known_issues.html)
+- [CHANGELOG](https://amp.azure.net/libs/amc/latest/docs/changelog.html)
 
 ## <a name="browser-support"></a>Tarayıcı desteği
-Azure Media Clipper'ı modern HTML5 teknolojiler kullanılarak oluşturulmuştur ve aşağıdaki tarayıcılardan destekler:
+Azure Medya Clipper, modern HTML5 teknolojileri kullanılarak oluşturulmuştur ve aşağıdaki tarayıcıları destekler:
 
-- Microsoft Edge 13+
-- Internet Explorer 11+
-- Chrome 54+
-- Safari 10+
-- Firefox 50+
+- Microsoft Edge 13 +
+- Internet Explorer 11 +
+- Chrome 54 +
+- Safari 10 +
+- Firefox 50 +
 
 > [!NOTE]
-> Yalnızca HTML5 kayıttan yürütme akışları Azure Media Services tarafından şu anda desteklenmiyor.
+> Şu anda yalnızca Azure Media Services akışlarının HTML5 kayıttan yürütülmesi destekleniyor.
 
 ## <a name="language-support"></a>Dil desteği
-Clipper pencere 18 aşağıdaki dillerde kullanılabilir:
+Clipper pencere öğesi aşağıdaki 18 dilde kullanılabilir:
 - Çince (Basitleştirilmiş)
-- seçenekleri yerine
+- Çince (Geleneksel)
 - Çekçe
-- Hollanda dili, Flemish
+- Felemenkçe, Flemish
 - Türkçe
 - Fransızca
 - Almanca
@@ -73,4 +73,4 @@ Clipper pencere 18 aşağıdaki dillerde kullanılabilir:
 - Türkçe
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Media Clipper'ı kullanmaya başlamak için okuma [Başlarken](media-services-azure-media-clipper-getting-started.md) pencere dağıtma hakkında daha fazla ayrıntı için makaleyi.
+Azure Medya Clipper 'ı kullanmaya başlamak için, pencere öğesinin nasıl dağıtılacağı hakkındaki ayrıntılar için [Başlarken](media-services-azure-media-clipper-getting-started.md) makalesini okuyun.

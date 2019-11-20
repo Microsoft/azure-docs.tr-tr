@@ -1,6 +1,6 @@
 ---
-title: Oluşturma bir App Service ortamı v1 - Azure
-description: Bir app service ortamı v1 oluşturma akış açıklaması
+title: App Service Ortamı v1 oluşturma-Azure
+description: App Service ortamı v1 için oluşturma akışı açıklaması
 services: app-service
 documentationcenter: ''
 author: ccompy
@@ -10,72 +10,71 @@ ms.assetid: 81bd32cf-7ae5-454b-a0d2-23b57b51af47
 ms.service: app-service
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 9bc796c4d0d449f72dc3234bc2825554eafaf77f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 017c79ec1341c85f3bd08393dd5553f90a2f6cef
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62128897"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70069751"
 ---
-# <a name="how-to-create-an-app-service-environment-v1"></a>Oluşturma bir App Service ortamı v1 
+# <a name="how-to-create-an-app-service-environment-v1"></a>App Service Ortamı v1 oluşturma 
 
 > [!NOTE]
-> Bu makale, App Service ortamı v1 hakkında yöneliktir. App Service ortamı, kullanımı daha kolay ve daha güçlü bir altyapı üzerinde çalışan daha yeni bir sürümü var. Yeni sürüm başlama hakkında daha fazla bilgi edinmek için [App Service ortamı giriş](intro.md).
+> Bu makale App Service Ortamı v1 ile ilgilidir. Daha güçlü altyapıda daha kolay ve çalışır App Service Ortamı daha yeni bir sürümü vardır. Yeni sürüm hakkında daha fazla bilgi edinmek için [App Service ortamı giriş](intro.md)ile başlayın.
 > 
 
 ### <a name="overview"></a>Genel Bakış
-App Service ortamı (ASE), çok kiracılı Damgalar içinde kullanılabilir olmayan bir Gelişmiş Yapılandırma özelliği sunan Azure App Service Premium hizmet seçeneğidir. ASE özelliği, Azure App Service'in bir müşterinin sanal ağa temelde dağıtır. Okuma App Service ortamları tarafından sunulan daha yüksek bir anlayış kazanmak için [bir App Service ortamı nedir] [ WhatisASE] belgeleri.
+App Service Ortamı (Ao), çok kiracılı damgalar içinde kullanılamayan gelişmiş bir yapılandırma özelliği sunan Azure App Service bir Premium hizmet seçeneğidir. Ao özelliği, temel olarak Azure App Service müşterinin sanal ağına dağıtır. App Service ortamları tarafından sunulan yetenekler hakkında daha fazla bilgi edinmek için [App Service ortamı][WhatisASE] belgelerini okuyun.
 
-### <a name="before-you-create-your-ase"></a>ASE'NİZİN oluşturmadan önce
-Değiştiremezsiniz koca farkında olmak önemlidir. Oluşturulduktan sonra ASE'nizi hakkında değiştiremezsiniz. Bu yönleri şunlardır:
+### <a name="before-you-create-your-ase"></a>ATıCı 'nizi oluşturmadan önce
+Değiştiremeyeceği şeyleri unutmamak önemlidir. Oluşturulduktan sonra Ao 'niz hakkında değişiklik değiştiremezsiniz:
 
 * Location
-* Abonelik
+* Subscription
 * Kaynak Grubu
-* Kullanılan sanal ağ
+* Kullanılan VNet
 * Kullanılan alt ağ 
 * Alt ağ boyutu
 
-Bir sanal ağ seçme ve bir alt ağ belirtme yaptığınızda emin gelecekteki büyümesine uyum sağlayacak kadar büyük. 
+VNet 'i seçerken ve bir alt ağ belirttiğinizde, gelecekteki büyümeye yetecek kadar büyük olduğundan emin olun. 
 
-### <a name="creating-an-app-service-environment-v1"></a>Service ortamı v1 uygulama oluşturma
-Bir App Service ortamı v1 oluşturmak için Azure Marketi için arama yapabilirsiniz ***App Service ortamı v1***, veya Git **kaynak Oluştur** -> **Web + mobil**  ->  **App Service ortamı**. Bir ASEv1 oluşturmak için:
+### <a name="creating-an-app-service-environment-v1"></a>App Service Ortamı v1 oluşturma
+App Service ortamı v1 oluşturmak için Azure Marketi 'nde ***App Service ortamı v1***için arama yapabilir veya **kaynak** -> **Web ve mobil** -> **App Service ortamı**oluşturma ' ya gidebilirsiniz. Bir ASEv1 oluşturmak için:
 
-1. ASE'NİZİN adını sağlayın. ASE için belirttiğiniz ad, ASE içinde oluşturulan uygulamalar için kullanılır. Ase'nin adı appsvcenvdemo ise, alt etki alanı adı şu şekilde olacaktır: *appsvcenvdemo.p.azurewebsites.net*. Bu nedenle adlı bir uygulama oluşturduysanız *mytestapp*, adresindeki adreslenebilir *mytestapp.appsvcenvdemo.p.azurewebsites.net*. Boşluk ASE'nizi adını kullanamaz. Etki alanı adı, adında büyük harf karakterler kullanırsanız, adı toplam küçük harfli sürümünü olacaktır. Bir ILB kullanırsanız, ASE adınız alt etki alanı içinde kullanılmaz, ancak bunun yerine ASE oluşturma sırasında açıkça belirtilir.
+1. ATıCı 'nizin adını sağlayın. ATıCı için belirttiğiniz ad, Ao 'da oluşturulan uygulamalar için kullanılacaktır. Ao 'nun adı appsvcenvdemo ise, alt etki alanı adı şöyle olacaktır: *appsvcenvdemo.p.azurewebsites.net*. Bu nedenle *mytestapp*adlı bir uygulama oluşturduysanız, *mytestapp.appsvcenvdemo.p.azurewebsites.net*adresinde adreslenebilir. ASA 'nın adında boşluk kullanamazsınız. Adında büyük harfli karakterler kullanırsanız, etki alanı adı bu adın toplam küçük harfli sürümü olacaktır. ILB kullanıyorsanız Ao adınız alt etki alanında kullanılmaz, ancak bunun yerine Ao oluşturma sırasında açıkça belirtilir.
    
     ![][1]
-2. Aboneliğinizi seçin. ASE'NİZİN kullandığınız abonelik, bu ASE içinde oluşturduğunuz tüm uygulamalar için de geçerli olacaktır. Başka bir abonelikte bir vnet'e ASE'nizi yerleştirilemiyor.
-3. Seçin veya yeni bir kaynak grubu belirtin. ASE'niz için kullanılan kaynak grubunu, sanal ağ için kullanılan aynı olması gerekir. Önceden var olan bir sanal ağ'ı seçerseniz ASE'niz için kaynak grubu seçimi, ağınızın yansıtacak şekilde güncelleştirilir.
+2. Aboneliğinizi seçin. ATıCı 'niz için kullandığınız abonelik, bu Ao 'da oluşturduğunuz tüm uygulamalar için de geçerlidir. ASE 'nizi başka bir abonelikte yer alan bir sanal ağa yerleştirebilirsiniz.
+3. Yeni bir kaynak grubu seçin veya belirtin. ASE 'niz için kullanılan kaynak grubu, VNet 'iniz için kullanılan aynı olmalıdır. Önceden var olan bir sanal ağı seçerseniz, ASE 'niz için kaynak grubu seçimi sanal ağınızın içeriğini yansıtacak şekilde güncelleştirilir.
    
     ![][2]
-4. Sanal ağ ve konum seçimlerinizi yapın. Önceden var olan bir VNet seçin veya yeni bir VNet oluşturun seçebilirsiniz. Ardından yeni bir sanal ağ seçerseniz bir ad ve konum belirtin. Yeni sanal ağ adres aralığı 192.168.250.0/23 ve adlı bir alt ağ gerekir **varsayılan** 192.168.250.0/24 tanımlanır. Ayrıca, önceden mevcut olan bir Klasik veya Resource Manager sanal ağı seçebilirsiniz. VIP türü seçimi, ASE'NİZİN doğrudan internet'ten (Dış) erişilebilen bir iç yük dengeleyici (ILB) kullanıyorsa veya belirler. Bunları okuyun hakkında daha fazla bilgi edinmek için [bir App Service ortamı ile bir iç Load Balancer'ı kullanarak][ILBASE]. Dış VIP türü seçerseniz, sistem IPSSL amacıyla oluşturulur kaç dış IP adreslerini seçebilirsiniz. Dahili seçerseniz ASE'niz kullanan alt etki alanı belirtmek gerekir. Ase'ler kullanan sanal ağlara dağıtılabilir *ya da* genel adres aralıklarının *veya* RFC1918 adres alanları (yani özel adresler). Ortak adres aralığı ile bir sanal ağ kullanmak için önceden sanal ağ oluşturmanız gerekir. Önceden var olan bir sanal ağ seçtiğinizde ASE oluşturma sırasında yeni bir alt ağ oluşturmanız gerekir. **Portalda, önceden oluşturulmuş bir alt ağ kullanamazsınız. Resource manager şablonu kullanarak ASE'nizi oluşturmak istiyorsanız, önceden mevcut olan bir alt ağ ile bir ASE oluşturabilirsiniz.** Bir ASE şablon kullanımdan buradaki bilgileri oluşturmak için [şablondan bir App Service ortamı oluşturma] [ ILBAseTemplate] ve burada [şablondanbirILBAppServiceortamıoluşturma] [ASEfromTemplate].
+4. Sanal ağınızı ve konum seçimlerinizi yapın. Yeni bir VNet oluşturmayı veya önceden var olan VNet 'i seçebilirsiniz. Yeni bir VNet seçerseniz, bir ad ve konum belirtebilirsiniz. Yeni VNet 192.168.250.0/23 adres aralığına ve **varsayılan** olarak 192.168.250.0/24 olarak tanımlanmış bir alt ağa sahip olacaktır. Ayrıca, önceden var olan bir klasik veya Kaynak Yöneticisi sanal ağı seçebilirsiniz. VIP türü seçimi, Ao 'un Internet 'ten (dış) doğrudan erişilebildiğini veya bir Iç Load Balancer (ıLB) kullanıp kullanmadığını belirler. Bunlar hakkında daha fazla bilgi edinmek için [App Service ortamı bir iç Load Balancer kullanarak][ILBASE]okuyun. Dış VIP türünü seçerseniz, IP 'nin ıPSSL amaçları için kaç tane dış IP adresi oluşturduğunu seçebilirsiniz. Dahili ' ı seçerseniz, ATıCı 'nizin kullanacağı alt etki alanını belirtmeniz gerekir. ASEs, ortak adres aralıkları *veya* RFC1918 adres alanları (örn. özel adresler) kullanan sanal ağlara dağıtılabilir. Bir sanal ağı ortak adres aralığıyla birlikte kullanmak için, VNet 'i daha önce oluşturmanız gerekir. Önceden var olan bir VNet seçtiğinizde, ASE oluşturma sırasında yeni bir alt ağ oluşturmanız gerekir. **Portalda önceden oluşturulmuş bir alt ağ kullanamazsınız. Bir Resource Manager şablonu kullanarak ATıCı 'nizi oluşturursanız, önceden var olan bir alt ağ ile Ao oluşturabilirsiniz.** Bir şablondan ATıCı oluşturmak için buradaki bilgileri kullanın, [şablondan bir App Service ortamı oluşturup][ILBAseTemplate] buradan bir [ILB App Service ortamı][ASEfromTemplate]oluşturun.
 
 ### <a name="details"></a>Ayrıntılar
-Bir ASE 2 ön uçlar ve 2 çalışan ile oluşturulur. Ön uçlar HTTP/HTTPS uç noktaları olarak davranır ve uygulamalarınızı rolleri olan çalışanlar için trafiği göndermek. ASE oluşturulduktan sonra miktarı ayarlamak ve bu kaynak havuzlarının otomatik ölçeklendirme kurallarını bile ayarlama yapabilirsiniz. El ile ölçeklendirme etrafında daha fazla bilgi için yönetim ve izleme bir App Service ortamı buraya gidin: [Bir App Service ortamını yapılandırma][ASEConfig] 
+Ao, 2 ön uçlar ve 2 çalışan ile oluşturulur. Ön uçlar, HTTP/HTTPS uç noktaları olarak davranır ve uygulamalarınızı barındıran roller olan çalışanlara trafik gönderir. ASE oluşturulduktan sonra miktarı ayarlayabilir ve hatta bu kaynak havuzlarında otomatik ölçeklendirme kuralları ayarlayabilirsiniz. App Service Ortamı el ile ölçeklendirmeyle ilgili daha fazla ayrıntı için, bir yönetimi ve izleme: [App Service Ortamı yapılandırma][ASEConfig] 
 
-Bir ASE yalnızca ASE tarafından kullanılan alt ağ içinde bulunabilir. Alt ağ, ASE'nin dışında her şey için kullanılamaz
+Ao tarafından kullanılan alt ağda yalnızca bir AO bulunabilir. Alt ağ, asa dışında bir şey için kullanılamaz
 
-### <a name="after-app-service-environment-v1-creation"></a>App Service ortamı v1 oluşturulduktan sonra
-ASE oluşturulduktan sonra ayarlayabilirsiniz:
+### <a name="after-app-service-environment-v1-creation"></a>App Service Ortamı v1 oluşturulduktan sonra
+Ao oluşturulduktan sonra şunları yapabilirsiniz:
 
-* Ön uçlar miktarı (en düşük: 2)
-* Çalışanları miktarı (en düşük: 2)
-* IP SSL için kullanılabilir IP adreslerinin miktar
-* Ön uçlar veya çalışanlar tarafından kullanılan kaynak boyutları işlem (P2 ön uç en küçük boyut'dır)
+* Ön uçların miktarı (minimum: 2)
+* Çalışan miktarı (minimum: 2)
+* IP SSL için kullanılabilir IP adresi miktarı
+* Ön uçlar veya çalışanlar tarafından kullanılan işlem kaynak boyutları (ön uç en küçük boyutu P2 ' dir)
 
-El ile ölçeklendirme, yönetim ve burada App Service ortamları izleme ile ilgili daha fazla ayrıntı vardır: [Bir App Service ortamını yapılandırma][ASEConfig] 
+App Service ortamların el ile ölçeklendirilmesi, yönetimi ve izlenmesi konusunda daha fazla ayrıntı vardır: [App Service Ortamı yapılandırma][ASEConfig] 
 
-Otomatik ölçeklendirme hakkında bilgi için buraya bir kılavuz vardır: [Bir App Service ortamı için otomatik ölçeklendirmeyi yapılandırma][ASEAutoscale]
+Otomatik ölçeklendirme hakkında daha fazla bilgi için burada bir kılavuz vardır: [App Service Ortamı için otomatik ölçeklendirmeyi yapılandırma][ASEAutoscale]
 
-Özelleştirme veritabanı ve depolama gibi kullanılabilir olmayan ek bağımlılıklar vardır. Bunlar Azure tarafından işlenen ve sistemiyle birlikte gelir. Sistem deposu tüm App Service ortamı için 500 GB'a kadar destekler ve veritabanı tarafından sistem ölçeği gerektiği gibi Azure tarafından ayarlanır.
+Veritabanı ve depolama gibi özelleştirme için kullanılamayan ek bağımlılıklar vardır. Bunlar Azure tarafından işlenir ve sistemle birlikte gelir. Sistem depolama, tüm App Service Ortamı en fazla 500 GB destekler ve veritabanı, sistem ölçeğinde bir şekilde Azure tarafından ayarlanır.
 
 ## <a name="getting-started"></a>Başlarken
-App Service ortamı v1 ile çalışmaya başlamak için bkz: [App Service ortamı v1'e giriş][WhatisASE]
+App Service Ortamı v1 'yi kullanmaya başlamak için bkz [. App Service ortamı v1 'ye giriş][WhatisASE]
 
 [!INCLUDE [app-service-web-try-app-service](../../../includes/app-service-web-try-app-service.md)]
 

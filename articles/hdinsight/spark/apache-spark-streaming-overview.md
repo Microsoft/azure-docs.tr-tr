@@ -1,6 +1,6 @@
 ---
-title: Akış Azure HDInsight Spark
-description: HDInsight Spark kümelerinde Spark akış uygulamaları kullanma
+title: Azure HDInsight 'ta Spark akışı
+description: HDInsight Spark kümelerinde Apache Spark akışlı uygulamalar kullanma.
 ms.service: hdinsight
 author: hrasheed-msft
 ms.author: hrasheed
@@ -8,53 +8,53 @@ ms.reviewer: jasonh
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 03/11/2019
-ms.openlocfilehash: 19d77d4aa49008232a01cd3ac2761a796505a35c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f990e5eb2761f1743c2731f499ecc341990edf53
+ms.sourcegitcommit: fa4852cca8644b14ce935674861363613cf4bfdf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64712003"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70813985"
 ---
-# <a name="overview-of-apache-spark-streaming"></a>Akış Apache Spark'a genel bakış
+# <a name="overview-of-apache-spark-streaming"></a>Apache Spark akışa genel bakış
 
-[Apache Spark](https://spark.apache.org/) akış sağlayan veri akışı işleme giriş olayı herhangi bir Garantisi ile HDInsight Spark kümelerinde tam bir kez işlenir bile bir düğüm hatası oluşur. Spark Stream çok çeşitli Azure Event Hubs, bir Azure IOT Hub gibi çeşitli kaynaklardan giriş verileri alan bir uzun süre çalışan iş [Apache Kafka](https://kafka.apache.org/), [Apache Flume](https://flume.apache.org/), Twitter, [ZeroMQ ](http://zeromq.org/), ham TCP yuvaları veya izlemeyi [Apache Hadoop YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) dosya sistemleri. Yalnızca olay temelli bir işlemin aksine bir Spark Stream giriş verisi gibi bir 2 saniyelik dilim zaman pencereleri halinde toplu işlemleri ve ardından her toplu işin eşlemesini kullanarak veri dönüşümleri, azaltmak, katılın ve işlemleri ayıklayın. Spark Stream ardından dönüştürülmüş verileri için dosya sistemleri, veritabanları, panolar ve konsol yazıyor.
+[Apache Spark](https://spark.apache.org/) Akış, HDInsight Spark kümelerinde veri akışı işleme sağlar ve bu da herhangi bir giriş olayının, bir düğüm hatası oluşması durumunda bile tam olarak bir kez işlenmesini güvence altına alır. Spark akışı, Azure Event Hubs, Azure IoT Hub, [Apache Kafka](https://kafka.apache.org/), [Apache flome](https://flume.apache.org/), Twitter, [ZEROMQ](http://zeromq.org/), ham TCP yuvaları veya Apache izleme dahil olmak üzere çok çeşitli kaynaklardan giriş verilerini alan uzun süredir çalışan bir işdir [ Hadoop YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) dosya sistemleri. Yalnızca olay odaklı bir işlemden farklı olarak, bir Spark akışı, verileri 2 saniyelik bir dilim gibi zaman pencereleri olarak işler ve ardından harita, azaltma, JOIN ve ayıkla işlemlerini kullanarak her bir veri kümesini dönüştürür. Spark akışı daha sonra dönüştürülen verileri filesystems, veritabanları, panolar ve konsola yazar.
 
-![Stream, HDInsight ve akış Spark ile işleme](./media/apache-spark-streaming-overview/hdinsight-spark-streaming.png)
+![HDInsight ve Spark streaming ile akış Işleme](./media/apache-spark-streaming-overview/hdinsight-spark-streaming.png)
 
-Spark akış uygulamaları bir saniyenin her toplamak için beklemesi gereken *micro-batch* toplu işleme için gönderme önce olay. Buna karşılık, olay temelli bir uygulamayı hemen her olay işler. Spark Streaming gecikme süresi genellikle birkaç altında saniyedir. Mikro toplu yaklaşımın avantajları şunlardır: daha verimli veri işleme ve daha basit toplama hesaplamalar.
+Spark akış uygulamaları, bu toplu işi işlenmek üzere göndermeden önce her bir *mikro-toplu* olay toplamanız gerekir. Buna karşılık, olay temelli bir uygulama her olayı hemen işler. Spark akış gecikmesi genellikle birkaç saniye altında. Mikro Batch yaklaşımının avantajları daha verimli veri işleme ve daha basit toplu hesaplamalardır.
 
-## <a name="introducing-the-dstream"></a>DStream ile tanışın
+## <a name="introducing-the-dstream"></a>DStream 'e giriş
 
-Spark akışı gelen verileri kullanarak, sürekli bir akış temsil eden bir *ayrılmış stream* bir DStream çağrılır. Giriş kaynaklarından olay hub'ları veya Kafka gibi veya başka bir DStream üzerinde dönüşümler uygulayarak bir DStream oluşturulabilir.
+Spark akışı, DStream adlı ayrılmış bir *akış* kullanılarak gelen verilerin sürekli akışını temsil eder. Event Hubs veya Kafka gibi giriş kaynaklarından bir DStream oluşturulabilir veya başka bir DStream 'e dönüşümler uygulayabilirsiniz.
 
-Bir DStream bir ham olay verilerinizi en üstünde bir soyutlama katmanı sağlar. 
+DStream, Ham olay verilerinin üzerine bir soyutlama katmanı sağlar. 
 
-Tek bir olay ile Başlat, bağlı bir thermostat okurken bir sıcaklık varsayalım. Bu olay Spark akışı uygulamanızı geldiğinde olay birden çok düğümde burada çoğaltılır, güvenilir bir şekilde depolanır. Herhangi bir tek düğüm hatası olay kaybına neden olmayan bu hataya dayanıklılık sağlar. Spark core, burada her düğüm, kendi verileri bellek içinde en iyi performans için genellikle tutar kümedeki birden fazla düğümde verileri dağıtan bir veri yapısı kullanır. Bu veri yapısını adlı bir *dayanıklı Dağıtılmış veri kümesi* (RDD).
+Tek bir olayla başlayın ve bağlı bir termostat 'dan bir sıcaklık okuyun. Bu olay Spark akış uygulamanıza ulaştığında, olay, birden çok düğümde çoğaltılan güvenilir bir şekilde depolanır. Bu hata toleransı, tek bir düğümün başarısızlığının olaylarınızın kaybına neden olmamasını sağlar. Spark Core, kümedeki birden çok düğüme veri dağıtan bir veri yapısı kullanır ve bu durumda her düğüm en iyi performans için genellikle kendi verilerini bellek içinde tutar. Bu veri yapısına dayanıklı bir *Dağıtılmış veri kümesi* (RDD) adı verilir.
 
-Adlı bir kullanıcı tanımlı zaman çerçevesi içinde toplanan olayları her RDD temsil *toplu iş aralığı*. Her toplu iş aralığı sona erdiğinde gibi bu aralığın tüm verileri içeren yeni bir RDD oluşturulur. Rdd sürekli kümesi bir DStream toplanır. Örneğin, uzun bir ikinci toplu iş aralığı ise, DStream toplu, saniyede alınan tüm veriler içeren ikinci her içeren bir RDD yayar. DStream işlerken sıcaklık olay bu toplu birinde görünür. Uygulama Spark akışı, olayları içeren toplu işler ve sonuçta her RDD içinde depolanan veriler üzerinde çalışır.
+Her RDD, *toplu iş aralığı*olarak adlandırılan Kullanıcı tanımlı bir zaman diliminde toplanan olayları temsil eder. Her toplu iş aralığı geçtiğinde, bu aralıktaki tüm verileri içeren yeni bir RDD oluşturulur. Sürekli RDDs kümesi bir DStream 'e toplanır. Örneğin, toplu iş aralığı bir ikinci uzunsa DStream, saniye içinde alınan tüm verileri içeren bir RDD 'yi içeren bir toplu işlem yayar. DStream işlenirken, sıcaklık olayı Bu toplu işlemlerden birinde görünür. Spark akış uygulaması olayları içeren toplu işleri işler ve sonunda her bir RDD 'de depolanan veriler üzerinde işlem yapar.
 
-![Örnek DStream sıcaklık olayları](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-example.png)
+![Sıcaklık olayları ile örnek DStream](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-example.png)
 
-## <a name="structure-of-a-spark-streaming-application"></a>Uygulama Spark akışı yapısı
+## <a name="structure-of-a-spark-streaming-application"></a>Spark akış uygulamasının yapısı
 
-Uygulama Spark akışı alma kaynaklardan gelen verileri alır, veriyi işlemek için dönüşümleri uygular ve sonra verileri bir veya daha fazla hedefe gönderir uzun süre çalışan bir uygulamasıdır. Uygulama Spark akışı yapısını, statik bir bölümü ve dinamik bir bölümü vardır. Veriler, veri yapmak için hangi işleme gelir ve burada statik bölümünü tanımlayan sonuçları tamamlamalıdır. Dinamik bölümü, bir durdurma sinyali beklenirken uygulaması çalışıyor.
+Spark akış uygulaması, alma kaynaklarından veri alan uzun süredir çalışan bir uygulamadır, verileri işlemek için dönüşümler uygular ve ardından verileri bir veya daha fazla hedefe iter. Spark akış uygulamasının yapısının statik bir bölümü ve dinamik bir bölümü vardır. Statik bölüm, verilerin nereden geldiğini, verilerde ne tür işlemleri yapılacağını ve sonuçların nereye gidebileceğini tanımlar. Dinamik bölüm uygulamayı süresiz olarak çalıştırıyor ve durdurma sinyali bekliyor.
 
-Örneğin, aşağıdaki basit uygulama, metin satırının üzerinde bir TCP yuva alır ve her bir sözcüğün kaç kez sayar.
+Örneğin, aşağıdaki basit uygulama bir TCP yuvası üzerinde bir metin satırı alır ve her sözcüğün kaç kez göründüğünü sayar.
 
-### <a name="define-the-application"></a>Uygulama tanımlama
+### <a name="define-the-application"></a>Uygulamayı tanımlama
 
-Mantıksal uygulama tanımı dört adım vardır:
+Uygulama mantığı tanımında dört adım vardır:
 
-1. Bir StreamingContext oluşturun.
-2. Bir DStream StreamingContext oluşturun.
-3. Dönüşümler DStream için geçerlidir.
-4. Sonuçları gönderir.
+1. Streammingcontext oluşturun.
+2. Streammingcontext öğesinden bir DStream oluşturun.
+3. DStream 'e dönüşümler uygulayın.
+4. Sonuçların çıkışını yapın.
 
-Bu tanımı statiktir ve uygulamayı çalıştırana kadar hiçbir veriler işlenir.
+Bu tanım statiktir ve uygulamayı çalıştırana kadar hiçbir veri işlenmeyecektir.
 
-#### <a name="create-a-streamingcontext"></a>Bir StreamingContext oluşturma
+#### <a name="create-a-streamingcontext"></a>Streammingcontext oluşturma
 
-Bir StreamingContext kümenize işaret zamanda sparkcontext öğesini oluşturun. Bir StreamingContext oluştururken, toplu işin boyutunu saniye cinsinden, örneğin belirtin:  
+Kümenizi işaret eden mini olmayan bağlamdan bir StreamingContext oluşturun. Bir StreamingContext oluştururken, toplu işlemin boyutunu saniye cinsinden belirtirsiniz, örneğin:  
 
 ```
 import org.apache.spark._
@@ -63,17 +63,17 @@ import org.apache.spark.streaming._
 val ssc = new StreamingContext(sc, Seconds(1))
 ```
 
-#### <a name="create-a-dstream"></a>Bir DStream oluşturma
+#### <a name="create-a-dstream"></a>DStream oluşturma
 
-Giriş kaynağınız için bir giriş DStream StreamingContext örneği ile oluşturun. Bu durumda, uygulama için bağlı bir HDInsight kümesi için varsayılan depolama alanı yeni dosyaları görünümünü izliyor.
+StreamingContext örneği ile giriş kaynağınız için bir giriş DStream oluşturun. Bu durumda, uygulama HDInsight kümesine eklenen varsayılan depolama alanındaki yeni dosyaların görünümünü izliyor.
 
 ```
 val lines = ssc.textFileStream("/uploads/Test/")
 ```
 
-#### <a name="apply-transformations"></a>Dönüşüm Uygulama
+#### <a name="apply-transformations"></a>Dönüşümleri Uygula
 
-İşleme, dönüşümler üzerinde DStream uygulayarak uygulayın. Bu uygulama, tek satırlık bir metin dosyasından bir zaman alır, her satırı içinde sözcükleri böler ve sonra her bir sözcüğün kaç kez sayısını map-reduce deseni kullanır.
+DStream 'e dönüşümler uygulayarak işlemi uygulayabilirsiniz. Bu uygulama, dosyadaki bir seferde bir metin satırı alır, her satırı sözcüklere böler ve ardından bir eşlem azaltma deseninin her sözcüğün kaç kez görüneceğini saymasını sağlar.
 
 ```
 val words = lines.flatMap(_.split(" "))
@@ -81,9 +81,9 @@ val pairs = words.map(word => (word, 1))
 val wordCounts = pairs.reduceByKey(_ + _)
 ```
 
-#### <a name="output-results"></a>Çıktı sonuçları
+#### <a name="output-results"></a>Çıkış sonuçları
 
-Dönüşüm sonuçları çıkış işlemleri uygulayarak hedef sistemleri için anında. Bu durumda, hesaplama ile her çalıştırma sonucunu konsol çıkışında yazdırılır.
+Çıkış işlemleri uygulayarak dönüştürme sonuçlarını hedef sistemlere gönderin. Bu durumda, hesaplama aracılığıyla her bir çalıştırmanın sonucu konsol çıktısında yazdırılır.
 
 ```
 wordCounts.print()
@@ -91,16 +91,16 @@ wordCounts.print()
 
 ### <a name="run-the-application"></a>Uygulamayı çalıştırma
 
-Akış uygulama başlatma ve sonlandırma sinyal alınana kadar çalıştırın.
+Akış uygulamasını başlatın ve sonlandırma sinyali alınana kadar çalıştırın.
 
 ```
 ssc.start()
 ssc.awaitTermination()
 ```
 
-Spark Stream API ile olay kaynakları, dönüşümler ve çıkış işlemleri desteklediği hakkında ayrıntılı bilgi için bkz. [Apache Spark akış Programlama Kılavuzu](https://people.apache.org/~pwendell/spark-releases/latest/streaming-programming-guide.html).
+Spark Stream API 'SI ile birlikte, desteklediği olay kaynakları, dönüştürmeler ve çıkış işlemleri ile ilgili ayrıntılar için bkz. [akış programlama kılavuzu Apache Spark](https://people.apache.org/~pwendell/spark-releases/latest/streaming-programming-guide.html).
 
-Aşağıdaki örnek uygulama içinde çalıştırabilmeniz için kendi içinde bir [Jupyter not defteri](apache-spark-jupyter-notebook-kernels.md). Bu örnekte beş saniyede bir sayaç ve milisaniye olarak geçerli süre değerini çıkarır DummySource sınıfında sahte veri kaynağı oluşturur. Yeni bir StreamingContext nesnesi, bir toplu iş aralığı 30 saniye sahiptir. Her bir toplu işi oluşturulduğunda akış uygulaması üretilen RDD inceler, bir Spark DataFrame için RDD dönüştürür ve DataFrame üzerinde geçici bir tablo oluşturur.
+Aşağıdaki örnek uygulama kendi içinde bulunur, bu nedenle onu bir [Jupyter Notebook](apache-spark-jupyter-notebook-kernels.md)içinde çalıştırabilirsiniz. Bu örnek, DummySource sınıfında her beş saniyede bir sayacın değerini ve geçerli saati milisaniye olarak çıkaran bir sahte veri kaynağı oluşturur. Yeni bir StreamingContext nesnesi 30 saniyelik bir toplu iş aralığına sahiptir. Bir toplu iş her oluşturulduğunda, akış uygulaması oluşturulan RDD 'yi inceler, RDD 'yi Spark veri çerçevesine dönüştürür ve DataFrame üzerinde geçici bir tablo oluşturur.
 
 ```
 class DummySource extends org.apache.spark.streaming.receiver.Receiver[(Int, Long)](org.apache.spark.storage.StorageLevel.MEMORY_AND_DISK_2) {
@@ -145,14 +145,14 @@ stream.foreachRDD { rdd =>
 ssc.start()
 ```
 
-Yukarıdaki uygulamayı başlatmadan sonra yaklaşık 30 saniye bekleyin.  Ardından, örneğin bu SQL sorgusunu kullanarak düzenli aralıklarla toplu işinde var olan değerleri geçerli kümesini görmek için veri çerçevesi sorgulayabilirsiniz:
+Yukarıdaki uygulamayı başlattıktan yaklaşık 30 saniye bekleyin.  Daha sonra, örneğin bu SQL sorgusunu kullanarak, toplu işte bulunan geçerli değer kümesini görmek için veri çerçevesini düzenli aralıklarla sorgulayabilirsiniz.
 
 ```sql
 %%sql
 SELECT * FROM demo_numbers
 ```
 
-Sonuçta çıktı aşağıdaki gibi görünür:
+Elde edilen çıktı aşağıdakine benzer:
 
 | value | time |
 | --- | --- |
@@ -163,19 +163,19 @@ Sonuçta çıktı aşağıdaki gibi görünür:
 |14 | 1497314485327 |
 |15 | 1497314490346 |
 
-DummySource 5 saniyede bir değer oluşturur ve uygulama, her 30 saniyede bir toplu iş yayar altı değerleri vardır.
+DummySource her 5 saniyede bir değer oluşturduğundan ve uygulama her 30 saniyede bir toplu iş yaydığı için altı değer vardır.
 
-## <a name="sliding-windows"></a>Kayan windows
+## <a name="sliding-windows"></a>Kayan pencereler
 
-Örneğin, son iki saniye içinde bir ortalama sıcaklık almak bazı süre boyunca, DStream üzerinde toplama hesaplamalar gerçekleştirmek için kullanabileceğiniz *kayan pencere* Spark akışı ile dahil edilen işlemler. Bir süre bir kayan pencereye sahip (Pencere uzunluğunun) ve pencerenin içeriği olan aralığı (slayt aralığı) değerlendirilir.
+DStream 'de belirli bir süre içinde toplu hesaplamalar gerçekleştirmek için örneğin, son iki saniye boyunca ortalama bir sıcaklık almak için Spark akışı ile birlikte gelen *kayan pencere* işlemlerini kullanabilirsiniz. Kayan pencerenin süresi (pencere uzunluğu) ve pencere içeriğinin değerlendirildiği zaman aralığı (Slayt aralığı) vardır.
 
-Windows kaydırma binebilir, örneğin, saniyede bir slayt iki saniye olarak uzunluğunu içeren bir pencere tanımlayabilirsiniz. Bunun anlamı, her zaman bir toplama hesaplamayı pencerenin önceki penceresinin son bir saniye verilerden yanı sıra bir sonraki ikinci yeni veriler içerir.
+Kayan pencereler çakışabilir, örneğin, iki saniyelik uzunlukla bir pencere tanımlayabilir ve bu slaytlar her bir saniyede bir yer alabilir. Bu, bir toplama hesaplaması gerçekleştirdiğiniz her seferinde, bir önceki pencerenin son bir saniyesinin yanı sıra bir sonraki ikinci birindeki tüm yeni verileri de içerecektir.
 
-![Sıcaklık olaylarla ilk penceresi örneği](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-window-01.png)
+![Sıcaklık olayları ile örnek Ilk pencere](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-window-01.png)
 
-![Örnek penceresiyle kayan sonra sıcaklık olayları](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-window-02.png)
+![Kayan sonra sıcaklık olayları içeren örnek pencere](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-window-02.png)
 
-Aşağıdaki örnek, bir dakikalık süre ve bir dakikada slayt içeren bir pencere toplu işlerin toplanması için DummySource kullanan kodu güncelleştirir.
+Aşağıdaki örnek, toplu işlemleri tek dakikalık bir ve bir dakikalık slaytla bir pencereye toplamak için DummySource kullanan kodu günceller.
 
 ```
 class DummySource extends org.apache.spark.streaming.receiver.Receiver[(Int, Long)](org.apache.spark.storage.StorageLevel.MEMORY_AND_DISK_2) {
@@ -220,11 +220,11 @@ stream.window(org.apache.spark.streaming.Minutes(1)).foreachRDD { rdd =>
 ssc.start()
 ```
 
-İlk dakikanın, 12 giriş - her iki toplu işlerin penceresinde toplanan altı girişler vardır.
+İlk dakika sonra, pencerede toplanan iki toplu işlem için altı giriş olan 12 girdi vardır.
 
 | value | time |
 | --- | --- |
-| 1 | 1497316294139 |
+| 1\. | 1497316294139 |
 | 2 | 1497316299158
 | 3 | 1497316304178
 | 4 | 1497316309204
@@ -237,22 +237,22 @@ ssc.start()
 | 11 | 1497316344339
 | 12 | 1497316349361
 
-Spark akış API'de kayan pencere işlevleri penceresi, countByWindow reduceByWindow ve countByValueAndWindow içerir. Bu işlevler hakkında daha fazla bilgi için bkz: [DStreams dönüşümler](https://people.apache.org/~pwendell/spark-releases/latest/streaming-programming-guide.html#transformations-on-dstreams).
+Spark akış API 'SI ile birlikte bulunan kayan pencere işlevleri, pencere, countByWindow, reduceByWindow ve countByValueAndWindow. Bu işlevlerle ilgili ayrıntılar için bkz. [DStreams üzerindeki dönüşümler](https://people.apache.org/~pwendell/spark-releases/latest/streaming-programming-guide.html#transformations-on-dstreams).
 
 ## <a name="checkpointing"></a>Denetim noktası oluşturma
 
-Dayanıklılık ve hataya dayanıklılık sağlamak üzere akış işleme düğüm hataları karşılaşıldığında bile kesintiye uğramadan devam edebileceğinizden emin olmak için denetim noktası Spark Streaming seçeneğini kullanır. HDInsight Spark kontrol noktalarını kalıcı depolama (Azure Depolama'da veya Data Lake depolama) oluşturur. Bu kontrol noktalarının yapılandırması, uygulama ve sıraya alınmış ancak henüz işlenmemiş toplu işlemler tarafından tanımlanan işlemleri gibi akış uygulaması hakkındaki meta verileri depolar. Bazı durumlarda, verileri daha hızlı bir şekilde mevcut Rdd Spark tarafından yönetilen nedir verileri durumunu yeniden Rdd kaydetme kontrol noktalarını de içerecektir.
+Spark akışı, dayanıklılık ve hataya dayanıklılık sağlamak için, akış işlemenin düğüm hatası durumunda bile kesintisiz bir şekilde devam edebilmesinin sağlaması için denetim noktası kullanır. HDInsight 'ta Spark, dayanıklı depolama (Azure Storage veya Data Lake Storage) için denetim noktaları oluşturur. Bu kontrol noktaları, akış uygulaması hakkında yapılandırma, uygulama tarafından tanımlanan işlemler ve kuyruğa alınan ancak henüz işlenmemiş tüm toplu işler hakkında meta verileri depolar. Bazı durumlarda, denetim noktaları, Spark tarafından yönetilen RDDs 'de mevcut olan verilerin durumunu daha hızlı bir şekilde yeniden oluşturmak için, verileri RDDs 'ye kaydetmeyi de kapsar.
 
-## <a name="deploying-spark-streaming-applications"></a>Spark akış uygulamaları dağıtma
+## <a name="deploying-spark-streaming-applications"></a>Spark akış uygulamalarını dağıtma
 
-Genellikle bir JAR dosyasına yerel olarak Spark akışı bir uygulama oluşturun ve ardından HDInsight üzerinde Spark HDInsight kümenize bağlı varsayılan depolama alanı için JAR dosyasını kopyalayarak dağıtın. Uygulamanızı bir POST işlemi'ni kullanarak kümenizi LIVY REST API'ler kullanılabilir başlayabilirsiniz. Gönderinin gövdesi olan ana yöntem tanımlar ve akış uygulaması ve isteğe bağlı olarak kaynak gereksinimlerini (örneğin, yürütücüler, bellek ve çekirdek sayısı) işin çalışan sınıfın adı, JAR yol sağlayan bir JSON belgesini içerir. , ve uygulama kodunuzun herhangi bir yapılandırma ayarı gerektirir.
+Genellikle bir JAR dosyasına yerel olarak bir Spark akış uygulaması derleyin ve ardından JAR dosyasını HDInsight üzerinde Spark 'a dağıtarak, JAR dosyasını HDInsight kümenize bağlı varsayılan depolama alanına kopyalarsınız. Bir POST işlemi kullanarak, uygulamanızı kümenizde bulunan LIVY REST API 'Leriyle başlatabilirsiniz. GÖNDERI gövdesi, JAR 'nizin yolunu sağlayan bir JSON belgesi, ana yöntemi, akış uygulamasını tanımlayan ve çalıştıran sınıfın adı ve isteğe bağlı olarak işin kaynak gereksinimleri (yürütme sayısı, bellek ve çekirdek sayısı gibi) içerir ve uygulama kodunuzun gerektirdiği tüm yapılandırma ayarlarını.
 
-![Bir Spark akışı uygulamasını dağıtma](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-livy.png)
+![Spark akış uygulaması dağıtma](./media/apache-spark-streaming-overview/hdinsight-spark-streaming-livy.png)
 
-Tüm uygulamaların durumunu, ayrıca bir LIVY uç noktasına karşı bir GET isteğiyle denetlenebilir. Son olarak, LIVY uç nokta karşı bir silme isteği göndererek çalışan bir uygulamayı sonlandırabilirsiniz. LIVY API hakkında daha fazla bilgi için bkz: [Apache LIVY ile uzak işler](apache-spark-livy-rest-interface.md)
+Tüm uygulamaların durumu, bir al uç noktasına karşı bir GET isteğiyle de denetlenebilir. Son olarak, çalışan bir uygulamayı, LIVY uç noktasına karşı SILME isteği vererek sonlandırabilirsiniz. LIVY API 'SI ile ilgili ayrıntılar için bkz. [Apache Livy Ile uzak işler](apache-spark-livy-rest-interface.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [HDInsight Apache Spark kümesi oluşturma](../hdinsight-hadoop-create-linux-clusters-portal.md)
+* [HDInsight 'ta Apache Spark kümesi oluşturma](../hdinsight-hadoop-create-linux-clusters-portal.md)
 * [Apache Spark akış Programlama Kılavuzu](https://people.apache.org/~pwendell/spark-releases/latest/streaming-programming-guide.html)
-* [Apache Spark işleri Apache LIVY ile uzaktan başlatma](apache-spark-livy-rest-interface.md)
+* [Apache LIVY ile Apache Spark işleri uzaktan başlatın](apache-spark-livy-rest-interface.md)

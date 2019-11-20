@@ -24,16 +24,28 @@
   items:
     - name: Windows Sanal Masaüstü kaynaklarına bağlanma
       items:
-        - name: Windows 10 veya Windows 7'den bağlanma
+        - name: Windows Masaüstü istemcisine bağlanma
           href: connect-windows-7-and-10.md
-        - name: Web tarayıcısından bağlanma
+        - name: Web istemcisiyle bağlanma
           href: connect-web.md
+        - name: Android istemcisiyle bağlanma
+          href: connect-android.md
+        - name: macOS istemcisiyle bağlanma
+          href: connect-macos.md
+        - name: iOS istemcisiyle bağlanma
+          href: connect-ios.md
     - name: Azure Resource Manager şablonuyla ana bilgisayar havuzu oluşturma
       href: create-host-pools-arm-template.md
     - name: PowerShell ile ana bilgisayar havuzu oluşturma
       href: create-host-pools-powershell.md
-    - name: Ana bilgisayar havuzu için kullanıcı profili paylaşımı ayarlama
+    - name: Windows Sanal Masaüstü’nde Windows 7 sanal makinesi dağıtma
+      href: deploy-windows-7-virtual-machine.md
+    - name: Windows Sanal Masaüstü oturum sahiplerine Windows lisansı uygulama
+      href: apply-windows-license.md
+    - name: Dosya paylaşımı kullanarak ana bilgisayar havuzu için profil kapsayıcısı oluşturma
       href: create-host-pools-user-profile.md
+    - name: Azure NetApp Files kullanarak ana bilgisayar havuzu için profil kapsayıcısı oluşturma
+      href: create-fslogix-profile-container.md
     - name: Windows Sanal Masaüstü yük dengeleme yöntemini yapılandırma
       href: configure-host-pool-load-balancing.md
     - name: Ana VHD görüntüsünü hazırlama ve özelleştirme
@@ -42,32 +54,50 @@
       href: install-office-on-wvd-master-image.md
     - name: Windows Sanal Masaüstü için GPU'yu yapılandırma
       href: configure-vm-gpu.md
-    - name: Oturum ana bilgisayarlarını otomatik olarak ölçeklendirme
+    - name: Oturum konaklarını dinamik olarak ölçeklendirme
       href: set-up-scaling-script.md
     - name: Windows Sanal Masaüstü kullanıcıları için akışı özelleştirme
       href: customize-feed-for-virtual-desktop-users.md
     - name: RDP Özelliklerini Özelleştirme
       href: customize-rdp-properties.md
+    - name: Tanılama aracını dağıtma
+      href: deploy-diagnostics.md
 - name: Kavramlar
   items:
     - name: Windows Sanal Masaüstü ortamı
       href: environment-setup.md
+    - name: Uzak oturumlar için bant genişliği önerileri
+      href: bandwidth-recommendations.md
+    - name: Kullanıcı bağlantı gecikmesini belirleme
+      href: connection-latency.md
     - name: Windows Sanal Masaüstü'ne temsilci erişimi
       href: delegated-access-virtual-desktop.md
     - name: Ana bilgisayar havuzu yük dengeleme yöntemleri
       href: host-pool-load-balancing.md
     - name: FSLogix profil kapsayıcıları ve Azure dosyaları
       href: fslogix-containers-azure-files.md
+    - name: FSLogix profil kapsayıcıları için depolama seçenekleri
+      href: store-fslogix-profile.md
+    - name: İş ortağı tümleştirmeleri
+      href: partners.md
+    - name: Windows 10 Enterprise çoklu oturum hakkında SSS
+      href: windows-10-multisession-faq.md
+    - name: Veri konumları
+      href: data-locations.md
 - name: Sorun giderme
   items:
     - name: 'Sorun çözümüne genel bakış, geri bildirim ve destek'
       href: troubleshoot-set-up-overview.md
-    - name: Tanılama özelliğiyle sorunları belirleme
+    - name: Sorunları belirleme ve tanılama
       href: diagnostics-role-service.md
     - name: Kiracı ve ana bilgisayar havuzu oluşturma
       href: troubleshoot-set-up-issues.md
     - name: Oturum ana bilgisayarı sanal makine yapılandırması
       href: troubleshoot-vm-configuration.md
+    - name: Windows Sanal Masaüstü’nde Windows 7 sanal makinesiyle ilgili sorunları giderme
+      href: troubleshoot-windows-7-vm.md
+    - name: Windows Sanal Masaüstü yönetim aracı sorunlarını giderme
+      href: troubleshoot-management-tool.md
     - name: Uzak Masaüstü istemcisi bağlantıları
       href: troubleshoot-client-connection.md
     - name: Windows Sanal Masaüstü PowerShell
@@ -78,7 +108,17 @@
   items:
     - name: PowerShell
       href: /powershell/windows-virtual-desktop/overview
+    - name: REST API
+      href: /rest/api/virtual-desktop/
 - name: Kaynaklar
   items:
+    - name: Deneyim tahmin aracı
+      href: 'https://azure.microsoft.com/services/virtual-desktop/assessment/'
+    - name: Fiyatlandırma hesaplayıcı
+      href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Teknik Topluluk destek grubu
       href: 'https://techcommunity.microsoft.com/t5/Windows-Virtual-Desktop/bd-p/WindowsVirtualDesktop'
+    - name: UserVoice forumu
+      href: 'https://windowsvirtualdesktop.uservoice.com/forums/921118-general'
+    - name: Microsoft 365 yol haritası
+      href: 'https://aka.ms/wvdroadmap'

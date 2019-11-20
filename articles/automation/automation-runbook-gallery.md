@@ -1,6 +1,6 @@
 ---
-title: Azure Otomasyonu Runbook ve modül galerileri
-description: Runbook'ları ve Microsoft ve topluluk modülleri yükleme ve Azure Otomasyonu ortamınızda kullanmak için kullanılabilir.  Bu makalede, bu kaynaklara nasıl erişebileceğinizi açıklanır ve runbook'larınızı Galeriye katkıda bulunma.
+title: Azure Otomasyonu için Runbook ve modül galerileri
+description: Microsoft ve topluluk runbook 'ları ve modülleri, Azure Otomasyonu ortamınızda yükleyip kullanabilmeniz için kullanılabilir.  Bu makalede, bu kaynaklara nasıl erişebileceğiniz ve Runbook 'larınızın galeriye nasıl katkıda bulunduğu açıklanır.
 services: automation
 ms.service: automation
 ms.subservice: process-automation
@@ -9,98 +9,108 @@ ms.author: robreed
 ms.date: 03/20/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: fcf48cfdb43473f99b139f0a0a07a5ace9a91642
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: d1ef652747dccdcb0e04ac8032dd47e2ebaa6bf2
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67476956"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73886902"
 ---
-# <a name="runbook-and-module-galleries-for-azure-automation"></a>Azure Otomasyonu Runbook ve modül galerileri
+# <a name="runbook-and-module-galleries-for-azure-automation"></a>Azure Otomasyonu için Runbook ve modül galerileri
 
-Azure Automation'da kendi runbook'ları ve modüller oluşturmak yerine, Microsoft ve topluluk tarafından zaten oluşturulduğundan senaryoları erişebilirsiniz.
+Azure Otomasyonu 'nda kendi runbook 'larınızı ve modüllerinizi oluşturmak yerine, Microsoft ve Community tarafından önceden oluşturulmuş senaryolara erişebilirsiniz.
 
-PowerShell runbook'ları alabilirsiniz ve [modülleri](#modules-in-powershell-gallery) PowerShell Galerisi'ndeki ve [Python runbook'ları](#python-runbooks) Komut Merkezi Galerisi. Topluluğa bir runbook Galerisine ekleme bakın, sizin geliştirdiğiniz senaryoları paylaşarak da katkıda bulunabilir
+Betik Merkezi galerisindeki PowerShell Galerisi ve [Python runbook](#python-runbooks) 'lardan PowerShell runbook 'ları ve [modülleri](#modules-in-powershell-gallery) alabilirsiniz. Ayrıca, geliştirdiğiniz senaryoları paylaşarak topluluğa katkıda bulunabilirsiniz, bkz. galeriye runbook ekleme
 
-## <a name="runbooks-in-powershell-gallery"></a>PowerShell Galerisi runbook'ları
+## <a name="runbooks-in-powershell-gallery"></a>PowerShell Galerisi runbook 'lar
 
-[PowerShell Galerisi](https://www.powershellgallery.com/packages) runbook'ları çeşitli Microsoft ve Azure Automation'a aktarabilirsiniz topluluk sağlar. Kullanmak için bir runbook'u Galeriden indirin veya runbook'ları galerisinden ya da Azure portalında Otomasyon hesabınızdan doğrudan alabilirsiniz.
+[PowerShell Galerisi](https://www.powershellgallery.com/packages) , Microsoft 'un yanı sıra Azure Otomasyonu 'na aktarabileceğiniz topluluk için çeşitli runbook 'lar sağlar. Bir tane kullanmak için, Galeriden bir runbook indirin veya Runbook 'tan veya Azure portal Otomasyon hesabınızdan doğrudan runbook 'ları içeri aktarabilirsiniz.
 
-Azure portalını kullanarak yalnızca PowerShell Galerisi'nden doğrudan içeri aktarabilirsiniz. PowerShell kullanarak bu işlevi yerine getiremez.
+Azure portal kullanarak yalnızca PowerShell Galerisi doğrudan içeri aktarabilirsiniz. PowerShell kullanarak bu işlevi gerçekleştiremezsiniz.
 
 > [!NOTE]
-> PowerShell Galerisi'nden alma ve yükleme ve bir üretim ortamında çalıştırırken dikkatli runbook'ları içeriğini doğrulamalıdır.
+> PowerShell Galerisi aldığınız tüm runbook 'ların içeriğini doğrulamanız ve bunları bir üretim ortamına yüklemek ve çalıştırmak için çok dikkatli olmanız gerekir.
 
-### <a name="to-import-a-powershell-runbook-from-the-runbook-gallery-with-the-azure-portal"></a>Azure portalı ile Runbook Galerisi PowerShell runbook'u içeri aktarmak için
+### <a name="to-import-a-powershell-runbook-from-the-runbook-gallery-with-the-azure-portal"></a>Runbook galerisinden bir PowerShell runbook 'unu Azure portal içeri aktarmak için
 
 1. Azure portalında, Otomasyon hesabınızı açın.
-2. Altında **süreç otomasyonu**, tıklayarak **Runbook'lar Galerisi**
-3. Seçin **kaynağı: PowerShell Galerisi**.
-4. Ayrıntılarını görüntülemek için seçin ve istediğiniz galeri öğesini bulun. Sol tarafta, yayımcı ve türü için ek arama parametrelerini girebilirsiniz.
+2. **Işlem Otomasyonu**altında **runbook 'lar Galerisi** ' ne tıklayın.
+3. **Kaynak seçin: PowerShell Galerisi**.
+4. İstediğiniz Galeri öğesini bulun ve ayrıntılarını görüntülemek için seçin. Sol tarafta yayımcı için ek arama parametreleri girebilir ve yazın.
 
-   ![Galerisi'ne göz atın](media/automation-runbook-gallery/browse-gallery.png)
+   ![Galeriye gözatamıyorum](media/automation-runbook-gallery/browse-gallery.png)
 
-5. Tıklayarak **kaynak projeyi görüntüle** öğeyi görüntülemek için [TechNet Komut Merkezi](https://gallery.technet.microsoft.com/).
-6. Bir öğe almak için ayrıntılarını görüntülemek ve ardından ona tıklayın **alma** düğmesi.
+5. Öğeyi [TechNet Betik Merkezi](https://gallery.technet.microsoft.com/)' nde görüntülemek için **kaynak projeyi görüntüle** ' ye tıklayın.
+6. Bir öğeyi içeri aktarmak için, ayrıntılarını görüntülemek ve ardından **Içeri aktar** düğmesine tıklayın.
 
    ![İçeri Aktar düğmesi](media/automation-runbook-gallery/gallery-item-detail.png)
 
-7. İsteğe bağlı olarak, runbook adını değiştirin ve ardından **Tamam** runbook'u içeri aktarmak için.
-8. Runbook görünür **runbook'ları** Otomasyon hesabı için sekmesinde.
+7. İsteğe bağlı olarak, runbook 'un adını değiştirin ve ardından runbook 'u içeri aktarmak için **Tamam** ' ı tıklatın.
+8. Runbook, Otomasyon hesabı için **runbook 'lar** sekmesinde görünür.
 
-### <a name="adding-a-powershell-runbook-to-the-gallery"></a>Bir PowerShell runbook Galerisine ekleme
+### <a name="adding-a-powershell-runbook-to-the-gallery"></a>Galeriye PowerShell runbook 'u ekleme
 
-Microsoft, runbook'ları diğer müşteriler için yararlı olabilecek düşündüğünüz PowerShell Galerisi eklemenizi önerir. PowerShell Galerisi, PowerShell modülleri ve PowerShell betiklerini kabul eder. Bir runbook tarafından ekleyebilirsiniz [PowerShell Galerisi'nden yükleme](/powershell/gallery/how-to/publishing-packages/publishing-a-package).
+Microsoft, diğer müşteriler için yararlı olacağını düşündüğünüz PowerShell Galerisi runbook eklemenizi önerir. PowerShell Galerisi PowerShell modüllerini ve PowerShell betiklerini kabul eder. Bir runbook 'u [PowerShell Galerisi yükleyerek](/powershell/gallery/how-to/publishing-packages/publishing-a-package)ekleyebilirsiniz.
 
 > [!NOTE]
-> Grafik runbook'ları, PowerShell Galerisi'nde desteklenmez.
+> Grafik runbook 'ları PowerShell Galerisi desteklenmez.
 
-## <a name="modules-in-powershell-gallery"></a>PowerShell Galerisi modülleri
+## <a name="modules-in-powershell-gallery"></a>PowerShell Galerisi modüller
 
-PowerShell modülleri larınızda kullanabileceğiniz cmdlet'leri içeren ve Azure Automation'da yükleyebilmek için var olan modüller kullanılabilir [PowerShell Galerisi](https://www.powershellgallery.com). Azure portalında bu Galeriden başlatın ve bunları doğrudan Azure Automation'a yükleyin. Bunları indirmek ve bunları el ile yükleyin.  
+PowerShell modülleri, runbook 'larınızda kullanabileceğiniz cmdlet 'leri içerir ve Azure Otomasyonu 'nda yükleyebileceğiniz mevcut modüller [PowerShell Galerisi](https://www.powershellgallery.com)kullanılabilir. Bu galeriyi Azure portal başlatabilir ve doğrudan Azure Otomasyonu 'na yükleyebilirsiniz. Ayrıca, bunları indirip el ile yükleyebilirsiniz.
 
-### <a name="to-import-a-module-from-the-automation-module-gallery-with-the-azure-portal"></a>Otomasyon modülü Galerisi'nden Azure portalıyla bir modülü içeri aktarmak için
+### <a name="to-import-a-module-from-the-automation-module-gallery-with-the-azure-portal"></a>Otomasyon modülü galerisinden bir modülü Azure portal içeri aktarmak için
 
 1. Azure portalında, Otomasyon hesabınızı açın.
-2. Seçin **modülleri** altında **paylaşılan kaynakları** modüllerin listesini açın.
-3. Tıklayın **Galeriye Gözat** sayfanın üst.
+2. Modüllerin listesini açmak için **paylaşılan kaynaklar** altındaki **modüller** ' i seçin.
+3. Sayfanın üst kısmından **tarayıcı Galerisi** ' ne tıklayın.
 
    ![Modül Galerisi](media/automation-runbook-gallery/modules-blade.png)
 
-4. Üzerinde **Galeriye Gözat** sayfasında, aşağıdaki alanlara göre arama:
+4. **Galeriye gözatamıyorum** sayfasında, aşağıdaki alanlara göre arama yapabilirsiniz:
 
    * Modül adı
-   * Tags
-   * Yazar
+   * Etiketler
+   * Yazma
    * Cmdlet/DSC kaynak adı
 
-5. İlginizi çeken bir modül bulup ayrıntılarını görüntülemek için seçin.  
+5. İlgilendiğiniz bir modül bulun ve ayrıntılarını görüntülemek için seçin.
 
-   Belirli bir modül olarak ayrıntıya daha fazla bilgi görüntüleyebilirsiniz. Bu bilgiler gerekli PowerShell Galerisi yönelik bir bağlantı içerir. bağımlılıklar ve tüm cmdlet'leri veya modülünde DSC kaynakları.
+   Belirli bir modülün detayına göre daha fazla bilgi görüntüleyebilirsiniz. Bu bilgiler PowerShell Galerisi, tüm gerekli bağımlılıkları ve modülün içerdiği tüm cmdlet 'leri ya da DSC kaynaklarını geri bir bağlantı içerir.
 
-   ![PowerShell modül ayrıntıları](media/automation-runbook-gallery/gallery-item-details-blade.png)
+   ![PowerShell modülü ayrıntıları](media/automation-runbook-gallery/gallery-item-details-blade.png)
 
-6. Doğrudan Azure Automation'a modülü yüklemek için tıklayın **alma** düğmesi.
-7. Üzerinde İçe Aktar düğmesini tıklattığınızda **alma** bölmesinde almak üzere olduğunuz modül adı görürsünüz. Tüm bağımlılıkların yüklü değilse, **Tamam** düğmesi etkinleştirilir. Bağımlılıkları kayıpsa, bu modül içeri aktarmadan önce bu bağımlılıkların almanız gerekir.
-8. Üzerinde **alma** sayfasında **Tamam** modülü içeri aktarın. Azure Automation hesabınız için bir modül alırken, modül ve cmdlet'ler hakkındaki meta verileri ayıklar. Her etkinlik ayıklanacak sonun bu işlem birkaç dakika sürebilir.
-9. Tamamlanıp tamamlanmadığını modülü dağıtılmakta bir ilk bildirimi ve başka bir bildirim alırsınız.
-10. Modül içeri aktardıktan sonra kullanılabilir etkinlikleri görebilirsiniz. Runbook'ları ve Desired State Configuration kaynaklarını kullanabilirsiniz.
-
-> [!NOTE]
-> Yalnızca PowerShell core desteği modülleri, Azure Automation'da desteklenmez ve Azure portalında içeri aktarılan veya PowerShell Galerisi'nden doğrudan dağıtılabilir.
-
-## <a name="python-runbooks"></a>Python runbook'ları
-
-Python runbook'ları kullanılabilir [Komut Merkezi Galerisi](https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=RootCategory&f%5B0%5D.Value=WindowsAzure&f%5B1%5D.Type=ProgrammingLanguage&f%5B1%5D.Value=Python&f%5B1%5D.Text=Python&sortBy=Date&username=). Komut Merkezi Galerisi Python runbook'larına tıklayarak katkıda bulunabilir **bir katkı karşıya**. Ne zaman olun etiket ekleme **Python** katkılarınız karşıya yüklenirken.
+6. Modülü doğrudan Azure Otomasyonu 'na yüklemek için **Içeri aktar** düğmesine tıklayın.
+7. İçeri Aktar düğmesine **tıkladığınızda içeri aktarma bölmesinde içeri** aktarmak üzere olduğunuz modül adını görürsünüz. Tüm bağımlılıklar yüklüyse, **Tamam** düğmesi etkinleştirilir. Bağımlılıklarınız eksikse, bu modülü içeri aktarmadan önce bu bağımlılıkları içeri aktarmanız gerekir.
+8. **İçeri** aktarma sayfasında, modülü içeri aktarmak için **Tamam** ' ı tıklatın. Azure Otomasyonu hesabınıza bir modül içeri aktarırken, modül ve cmdlet 'ler hakkında meta verileri ayıklar. Bu eylem, her etkinliğin ayıklanması gerektiğinden birkaç dakika sürebilir.
+9. Modülün dağıtılmakta olduğu bir başlangıç bildirimi ve tamamlandığında başka bir bildirim alırsınız.
+10. Modül içeri aktarıldıktan sonra, kullanılabilir etkinlikleri görebilirsiniz. Runbook 'larınızda ve Istenen durum yapılandırmanızda kaynaklarını kullanabilirsiniz.
 
 > [!NOTE]
-> İçeriği karşıya yükleme için [betik Merkezi](https://gallery.technet.microsoft.com/scriptcenter) en az 100 noktaları gereklidir. 
+> Yalnızca PowerShell Core 'u destekleyen modüller Azure Otomasyonu 'nda desteklenmez ve Azure portal içeri aktarılamaz ya da doğrudan PowerShell Galerisi dağıtılır.
 
-## <a name="requesting-a-runbook-or-module"></a>Bir runbook veya modül isteme
+## <a name="python-runbooks"></a>Python runbook 'Ları
 
-İstekleri gönderebilirsiniz [User Voice](https://feedback.azure.com/forums/246290-azure-automation/).  İhtiyaç duyarsanız bir runbook yazma ile veya PowerShell ile ilgili sorularınız varsa soru gönderin bizim [Forumu](https://social.msdn.microsoft.com/Forums/windowsazure/home?forum=azureautomation&filter=alltypes&sort=lastpostdesc).
+Python runbook 'Ları, [betik Merkezi galerisinde](https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=RootCategory&f%5B0%5D.Value=WindowsAzure&f%5B1%5D.Type=ProgrammingLanguage&f%5B1%5D.Value=Python&f%5B1%5D.Text=Python&sortBy=Date&username=)bulunur. **Bir katkıyı karşıya yükle**' ye tıklayarak Python runbook 'Larını betik merkezi galerisine katkıda bulabilirsiniz. Bunu yaptığınızda, katkılarınızı karşıya yüklerken **Python** etiketini eklemediğinizden emin olun.
+
+> [!NOTE]
+> [Komut dosyası merkezine](https://gallery.technet.microsoft.com/scriptcenter) içerik yüklemek için en az 100 noktası gereklidir.
+
+## <a name="requesting-a-runbook-or-module"></a>Runbook veya modül isteme
+
+İstekleri [Kullanıcı seslerine](https://feedback.azure.com/forums/246290-azure-automation/)gönderebilirsiniz.  Bir Runbook yazma veya PowerShell hakkında sorularınız konusunda yardıma ihtiyacınız varsa [forumumuza](https://social.msdn.microsoft.com/Forums/windowsazure/home?forum=azureautomation&filter=alltypes&sort=lastpostdesc)soru gönderin.
+
+## <a name="common-solutions-available-in-the-runbook-gallery"></a>Runbook galerisinde kullanılabilen ortak çözümler
+
+Aşağıdaki liste, yaygın senaryolar için çözümler sağlayan birkaç runbook içerir. Azure Otomasyonu ekibi tarafından oluşturulan runbook 'ların tam listesi için bkz. [Azureautomationteam profile](https://www.powershellgallery.com/profiles/AzureAutomationTeam).
+
+* [Update-ModulesInAutomationToLatestVersion](https://www.powershellgallery.com/packages/Update-ModulesInAutomationToLatestVersion/) -bir Otomasyon hesabındaki tüm modüllerin PowerShell Galerisi en son sürümünü içeri aktarır.
+* [Enable-AzureDiagnostics](https://www.powershellgallery.com/packages/Enable-AzureDiagnostics/) -bu betik, Azure Tanılama ve Log Analytics iş durumu ve iş akışlarını Içeren Azure Otomasyonu günlüklerini alacak şekilde yapılandırır.
+* [Copy-ıtemfrolaurevm](https://www.powershellgallery.com/packages/Copy-ItemFromAzureVM/) -bu Runbook bir Windows Azure sanal makinesinden uzak bir dosyayı kopyalar.
+* [Copy-ıtemfrolaurevm](https://www.powershellgallery.com/packages/Copy-ItemToAzureVM/) -bu Runbook bir Azure sanal makinesine yerel bir dosya kopyalar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Runbook'larını kullanmaya başlamak için bkz: [Azure Otomasyonu'nda runbook yönetme](manage-runbooks.md)
-* PowerShell ve PowerShell iş akışı runbook'ları ile farklarını anlamak için bkz: [Learning PowerShell iş akışı](automation-powershell-workflow.md)
+* Runbook 'ları kullanmaya başlamak için bkz. [Azure Otomasyonu 'nda runbook 'U yönetme](manage-runbooks.md)
+* Runbook 'larla PowerShell ve PowerShell Iş akışı arasındaki farkları anlamak için bkz. [PowerShell iş akışını öğrenme](automation-powershell-workflow.md)
+* Dil başvurusu ve öğrenme modülleri de dahil olmak üzere PowerShell hakkında daha fazla bilgi için [PowerShell belgelerine](https://docs.microsoft.com/powershell/scripting/overview)bakın.

@@ -1,6 +1,6 @@
 ---
-title: Azure automation'da ilk Python runbook'um
-description: Test ve basit bir Python runbook yayımlama oluşturma adımlarını anlatan öğretici.
+title: Azure Automation 'da ilk Python runbook 'im
+description: Basit bir Python runbook 'u oluşturma, test etme ve yayımlamayı adım adım gösteren öğretici.
 services: automation
 ms.service: automation
 ms.subservice: process-automation
@@ -9,14 +9,14 @@ ms.author: robreed
 ms.date: 03/19/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: a030005d73df61c31c5aa1c2e1b56e52b03a56e3
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 626f446c18acf1f07f458fb1b4238f182546e479
+ms.sourcegitcommit: b4f201a633775fee96c7e13e176946f6e0e5dd85
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67478500"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72596940"
 ---
-# <a name="my-first-python-runbook"></a>İlk Python runbook'um
+# <a name="my-first-python-runbook"></a>İlk Python runbook 'um
 
 > [!div class="op_single_selector"]
 > - [Grafik](automation-first-runbook-graphical.md)
@@ -24,10 +24,10 @@ ms.locfileid: "67478500"
 > - [PowerShell İş Akışı](automation-first-runbook-textual.md)
 > - [Python](automation-first-runbook-textual-python2.md)
 
-Bu öğreticide oluşturulmasını adım adım göstermektedir bir [Python runbook](automation-runbook-types.md#python-runbooks) Azure automation'da. Test edin ve yayımlayın, basit bir runbook ile başlayacağız. Ardından, bir Azure sanal makinesini başlatmayı içeren bir örnekle, bu runbook’u gerçekten Azure kaynaklarını yönetmek üzere değiştirin. Son olarak, runbook'u daha sağlam runbook parametreleri ekleyerek yapmanızı ister.
+Bu öğreticide, Azure Otomasyonu 'nda bir [Python runbook](automation-runbook-types.md#python-runbooks) oluşturma işlemi adım adım açıklanmaktadır. Test ve yayımladığınız basit bir runbook 'u kullanmaya başlayabilirsiniz. Ardından, bir Azure sanal makinesini başlatmayı içeren bir örnekle, bu runbook’u gerçekten Azure kaynaklarını yönetmek üzere değiştirin. Son olarak, runbook parametreleri ekleyerek runbook 'u daha sağlam hale getirebilirsiniz.
 
 > [!NOTE]
-> Python runbook'u başlatmak için bir Web kancası kullanma desteklenmiyor.
+> Python runbook 'u başlatmak için Web kancası kullanılması desteklenmez.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -39,27 +39,27 @@ Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
 
 ## <a name="create-a-new-runbook"></a>Yeni runbook oluştur
 
-Metnini veren basit bir runbook oluşturmaya başlayın *Hello World*.
+*Merhaba Dünya*metin çıkışı veren basit bir runbook oluşturarak başlayın.
 
 1. Azure portalında, Otomasyon hesabınızı açın.
 
     Automation hesabı sayfası size bu hesaptaki kaynakların hızlı bir görünümünü sağlar. Birkaç varlığınız zaten olmalıdır. Bu varlıkların çoğu, yeni bir Otomasyon hesabına otomatik olarak dahil edilen modüllerdir. Burada ayrıca [önkoşullarda](#prerequisites) belirtilen Kimlik Bilgileri varlığınız da bulunmalıdır.<br>
 
 1. Runbook’ların listesini açmak için **İŞLEM YÖNETİMİ** altında **Runbooklar**’ı seçin.
-1. Seçin **+ runbook Ekle** yeni bir runbook oluşturmak için.
-1. Runbook adını verin *MyFirstRunbook-Python*.
-1. Bu durumda, oluşturacağız bir [Python runbook](automation-runbook-types.md#python-runbooks) seçin **Python 2** için **Runbook türü**.
+1. Yeni bir runbook oluşturmak için **+ runbook Ekle** ' yi seçin.
+1. Runbook *'A Myfirstrunbook-Python*adını verin.
+1. Bu durumda, bir [Python runbook](automation-runbook-types.md#python-runbooks) oluşturacaksınız, bu nedenle **runbook türü**için **Python 2** ' yi seçin.
 1. Runbook’u oluşturmak için **Oluştur**’a tıklayın ve metin düzenleyicisini açın.
 
-## <a name="add-code-to-the-runbook"></a>Runbook'a kod ekleme
+## <a name="add-code-to-the-runbook"></a>Runbook 'a kod ekleme
 
-Şimdi metin "Merhaba Dünya" yazdırmak için basit bir komut ekleyin:
+Şimdi "Merhaba Dünya" metnini yazdırmak için basit bir komut eklersiniz:
 
 ```python
 print("Hello World!")
 ```
 
-Tıklayın **Kaydet** runbook'u kaydetmek.
+Runbook 'u kaydetmek için **Kaydet** ' e tıklayın.
 
 ## <a name="test-the-runbook"></a>Runbook'u test etme
 
@@ -68,42 +68,42 @@ Runbook’u üretimde kullanılabilir hale getirmek üzere yayımlamadan önce d
 1. Test bölmesini açmak için **Test bölmesi**’ne tıklayın.
 1. Testi başlatmak için **Başlat**’a tıklayın. Etkinleştirilen tek seçenek bu olmalıdır.
 1. Bir [runbook işi](automation-runbook-execution.md) oluşturulur ve durumu görüntülenir.
-   İş durumu, bulutta bir runbook çalışanının kullanılabilir hale gelmesinin beklendiğini gösteren şekilde *Sırada* olarak başlar. Bu taşınır *başlangıç* bir çalışan işi talep ettiğinde ve ardından *çalıştıran* runbook gerçekten çalışmaya başladığında.
-1. Runbook işi tamamlandığında çıktısı görüntülenir. Bu durumda, görmelisiniz *Hello World*.
+   İş durumu, bulutta bir runbook çalışanının kullanılabilir hale gelmesinin beklendiğini gösteren şekilde *Sırada* olarak başlar. Bir çalışan işi talep ettiği zaman *başlayacak* ve ardından runbook gerçekten çalışmaya başladığında *çalışır* .
+1. Runbook işi tamamlandığında çıktısı görüntülenir. Bu durumda *Merhaba Dünya*görmeniz gerekir.
 1. Tuvale geri dönmek için Test bölmesini kapatın.
 
-## <a name="publish-and-start-the-runbook"></a>Yayımlama ve runbook'u Başlat
+## <a name="publish-and-start-the-runbook"></a>Runbook 'u yayımlama ve başlatma
 
-Oluşturduğunuz runbook hala taslak modundadır. Üretimde çalıştırılabilmesi için önce yayımlanması gerekir.
-Bir runbook yayımladığınızda Taslak sürümü mevcut yayımlanmış sürümün üzerine yazın.
-Bu durumda, runbook oluşturduğunuz çünkü bir yayımlanan sürümü henüz mevcut değil.
+Oluşturduğunuz runbook hala taslak modunda. Bunu üretimde çalıştırmadan önce yayımlamanız gerekir.
+Bir runbook yayımladığınızda, var olan yayımlanmış sürümün üzerine taslak sürümünü yazın.
+Bu durumda, henüz runbook 'u oluşturduğunuz için yayınlanmış bir sürümdür.
 
 1. Runbook’u yayımlamak için **Yayımla**’ya tıklayın ve sorulduğunda **Evet**’e tıklayın.
-1. Runbook'ta görüntülemek için sola kaydırırsanız **runbook'ları** bölmesi artık gösterir bir **yazma durumu** , **yayımlanan**.
-1. Bölmeyi görüntülemek üzere geri sağa kaydırın **MyFirstRunbook-Python**.
-   Üst kısımdaki seçenekler runbook'u başlatmamıza ya da gelecekte bir zamanda başlatmak üzere olanak tanır.
-2. Runbook'u başlatmak için bu nedenle tıklatın istediğiniz **Başlat** ve ardından **Tamam** Runbook'u Başlat dikey penceresi açıldığında.
-3. Oluşturduğunuz runbook işi için bir iş bölmesi açılır. Bu bölme kapatılabilir, ancak işin ilerleme durumunu izleyebilmek için bu durumda, açık bırakın.
-1. İş durumu gösterilen **iş özeti** ve ne zaman, runbook test gördüğümüz durumların aynısıdır.
-2. Runbook durumu olarak *Tamamlandı* gösterilince **Çıktı**’ya tıklayın. Çıktı bölmesi açılır ve gördüğünüz, *Hello World*.
+1. Şimdi runbook 'u runbook **'lar** bölmesinde görüntülemek için sola kaydırırsanız, **yayımlanmış**bir **yazma durumu** gösterir.
+1. **Myfirstrunbook-Python**bölmesini görüntülemek için sağa kaydırın.
+   Üstteki seçenekler runbook 'u başlatmamıza, runbook 'u görüntülemenize veya gelecekte bir süre sonra başlayacak şekilde zamanlamaya izin verir.
+2. Runbook 'u başlatmak istiyorsunuz, bu nedenle **Başlat** ' a tıklayın ve Runbook 'u Başlat dikey penceresi açıldığında **Tamam** ' a tıklayın.
+3. Oluşturduğunuz runbook işi için bir iş bölmesi açılır. Bu bölmeyi kapatabilirsiniz, ancak bu durumda, işin ilerlemesini izlemek için açık bırakmalısınız.
+1. İş durumu **Iş özetinde** gösterilir ve Runbook 'u test ettiğinizde gördüğünüz durumları eşleştirir.
+2. Runbook durumu olarak *Tamamlandı* gösterilince **Çıktı**’ya tıklayın. Çıkış bölmesi açılır ve *Merhaba Dünya*bakabilirsiniz.
 3. Çıktı bölmesini kapatın.
 4. Runbook işine ait Akışlar bölmesini açmak için **Tüm Günlükler**’e tıklayın. Çıktı akışında yalnızca *Merhaba Dünya* metnini görmelisiniz, ancak bu bölmede, runbook bunlara yazıyorsa Ayrıntılı ve Hata gibi runbook işine yönelik diğer akışlar da gösterilebilir.
-5. Akışlar bölmesini ve Python MyFirstRunbook bölmesine dönmek için iş bölmesini kapatın.
+5. MyFirstRunbook-Python bölmesine dönmek için akışlar bölmesini ve Iş bölmesini kapatın.
 6. Bu runbook’a ait İşler bölmesini açmak için **İşler**’e tıklayın. Bu bölmede, bu runbook tarafından oluşturulan tüm işler listelenir. İşi yalnızca bir kez çalıştırdığınız için sadece bir işin listelendiğini görmeniz gerekir.
 7. Runbook’u başlattığınızda, görüntülediğiniz iş bölmesini açmak için bu işe tıklayabilirsiniz. Böylece zaman içinde geri dönerek, belirli bir runbook için oluşturulan herhangi bir işin ayrıntılarını görüntüleyebilirsiniz.
 
 ## <a name="add-authentication-to-manage-azure-resources"></a>Azure kaynaklarını yönetmek için kimlik doğrulaması ekleme
 
 Runbook uygulamanızı test ettiniz ve yayımladınız, ancak şu ana kadar faydalı bir şey yapmadı. Bu runbook’un Azure kaynaklarını yönetmesini istiyorsunuz.
-Azure kaynaklarını yönetmek için Otomasyon hesabınızdan kimlik bilgilerini kullanarak kimlik doğrulaması yapmak betik vardır. Yardımcı olmak için kullanabileceğiniz [Azure Otomasyonu yardımcı programı paket](https://github.com/azureautomation/azure_automation_utility) kimlik doğrulaması ve Azure kaynaklarıyla etkileşim kurmak daha kolay.
+Azure kaynaklarını yönetmek için betiğin Otomasyon hesabınızdaki kimlik bilgilerini kullanarak kimlik doğrulaması yapması gerekir. Size yardımcı olmak için [Azure Otomasyonu yardımcı programını](https://github.com/azureautomation/azure_automation_utility) kullanarak Azure kaynaklarıyla kimlik doğrulaması ve etkileşim kurmayı kolaylaştırın.
 
 > [!NOTE]
-> Otomasyon hesabının hizmet asıl özellik için bir çalıştırma olarak sertifika olması burada ile oluşturulmuş olmalıdır.
-> Otomasyon hesabınız ile hizmet sorumlusu oluşturulmamışsa açıklanan yöntemi kullanarak doğrulayabilir [Python için Azure yönetim kitaplıkları ile kimlik doğrulama](https://docs.microsoft.com/python/azure/python-sdk-azure-authenticate).
+> Otomasyon hesabı, bir farklı çalıştır sertifikası olmak için hizmet sorumlusu özelliği ile oluşturulmuş olmalıdır.
+> Otomasyon hesabınız hizmet sorumlusu ile oluşturulmadıysa, [Python Için Azure Yönetim kitaplıkları Ile kimlik doğrulama](/azure/python/python-sdk-azure-authenticate)konusunda açıklanan yöntemi kullanarak kimlik doğrulaması yapabilirsiniz.
 
-1. Tıklayarak metin düzenleyicisini açın **Düzenle** MyFirstRunbook-Python bölmesinde.
+1. MyFirstRunbook-Python bölmesinde **Düzenle** ' ye tıklayarak metinsel düzenleyiciyi açın.
 
-2. Azure'da kimlik doğrulaması yapmak için aşağıdaki kodu ekleyin:
+2. Azure 'da kimlik doğrulaması yapmak için aşağıdaki kodu ekleyin:
 
    ```python
    import os
@@ -144,11 +144,11 @@ Azure kaynaklarını yönetmek için Otomasyon hesabınızdan kimlik bilgilerini
    azure_credential = get_automation_runas_credential(runas_connection)
    ```
 
-## <a name="add-code-to-create-python-compute-client-and-start-the-vm"></a>İşlem Python istemcisi oluşturma ve sanal Makineyi başlatmak için kod ekleyin
+## <a name="add-code-to-create-python-compute-client-and-start-the-vm"></a>Python Işlem istemcisi oluşturmak ve VM 'yi başlatmak için kod ekleme
 
-Azure Vm'lerle çalışmak için bir örneğini oluşturmak [Python için Azure işlem istemci](https://docs.microsoft.com/python/api/azure.mgmt.compute.computemanagementclient?view=azure-python).
+Azure VM 'leriyle çalışmak için [Python Için Azure işlem istemcisinin](https://docs.microsoft.com/python/api/azure-mgmt-compute/azure.mgmt.compute.computemanagementclient)bir örneğini oluşturun.
 
-İşlem istemci VM'yi başlatmak için kullanın. Runbook için aşağıdaki kodu ekleyin:
+VM 'yi başlatmak için Işlem istemcisini kullanın. Aşağıdaki kodu runbook 'a ekleyin:
 
 ```python
 # Initialize the compute management client with the RunAs credential and specify the subscription to work against.
@@ -164,17 +164,17 @@ async_vm_start = compute_client.virtual_machines.start(
 async_vm_start.wait()
 ```
 
-Burada _MyResourceGroup_ VM içeren kaynak grubunun adıdır ve _TestVM_ başlatmak istediğiniz VM'nin adıdır.
+Burada _Myresourcegroup_ , VM 'yi içeren kaynak grubunun adıdır ve _Testvm_ , başlatmak istediğiniz VM 'nin adıdır.
 
-Test ve sanal makine başlatılmadan yeniden görmek için runbook'u çalıştırın.
+VM 'nin başlatıldığını görmek için Runbook 'u yeniden test edin ve çalıştırın.
 
-## <a name="use-input-parameters"></a>Giriş parametreleri kullanma
+## <a name="use-input-parameters"></a>Giriş parametrelerini kullanma
 
-Runbook, şu anda sabit kodlanmış değerler için kaynak grubunu ve VM adlarını kullanır.
-Artık bu değerleri giriş parametrelerini alır kod ekleyelim.
+Runbook Şu anda kaynak grubunun ve VM 'nin adları için sabit kodlanmış değerler kullanıyor.
+Şimdi Giriş parametrelerinden bu değerleri alan kodu ekleyelim.
 
-Kullandığınız `sys.argv` parametre değerlerini almak için değişkeni.
-Aşağıdaki kodu runbook'a hemen art arda ekleme `import` ifadeleri:
+Parametre değerlerini almak için `sys.argv` değişkenini kullanırsınız.
+Aşağıdaki kodu diğer `import` deyimlerden hemen sonra runbook 'a ekleyin:
 
 ```python
 import sys
@@ -183,10 +183,10 @@ resource_group_name = str(sys.argv[1])
 vm_name = str(sys.argv[2])
 ```
 
-Bu aktarır `sys` modülü ve kaynak grubu ve VM adlarını tutmak için iki değişkeni oluşturur.
-Dikkat edin bağımsız değişken listesinin öğe `sys.argv[0]`, komut dosyası adı ve kullanıcı tarafından giriş değil.
+Bu, `sys` modülünü içeri aktarır ve kaynak grubunu ve VM adlarını tutmak için iki değişken oluşturur.
+Bağımsız değişken listesinin öğesi `sys.argv[0]`, betiğin adı olduğunu ve Kullanıcı tarafından giriş olmadığına dikkat edin.
 
-Artık runbook giriş parametresi değerleri, sabit kodlanmış değerler yerine kullanmak için son iki satırlık değiştirebilirsiniz:
+Artık runbook 'un son iki satırını, sabit kodlanmış değerler kullanmak yerine giriş parametresi değerlerini kullanacak şekilde değiştirebilirsiniz:
 
 ```python
 async_vm_start = compute_client.virtual_machines.start(
@@ -194,17 +194,41 @@ async_vm_start = compute_client.virtual_machines.start(
 async_vm_start.wait()
 ```
 
-Python runbook'u başlattığınızda (üzerinde **Test** sayfası veya yayımlanan bir runbook olarak), parametreler için değerleri girin **Runbook'u Başlat** altındaki **parametreleri** .
+Bir Python runbook 'u başlattığınızda ( **Test** sayfasında veya yayımlanan runbook olarak **) parametreler ' ın altındaki** **runbook 'u Başlat** sayfasında parametrelerin değerlerini girebilirsiniz.
 
-İlk kutusunda bir değer girildiğinde başlattıktan sonra ikinci bir görünür ve devam şekilde, böylece gerekli sayıda parametre değerlerini girin.
+İlk kutuya bir değer girmeyi başlattıktan sonra, gereken sayıda parametre değeri girebileceğiniz şekilde ikinci olarak bir görünür ve bu şekilde devam eder.
 
-Komut dosyası kullanılabilir değerler `sys.argv` eklediğiniz kod olduğu gibi bir dizi.
+Bu değerler, az önce eklediğiniz koddaki gibi `sys.argv` dizisi olarak betikte kullanılabilir.
 
-İlk parametresi için değer olarak, kaynak grubu adını ve ikinci parametre değeri olarak başlatmak için VM adını girin.
+İlk parametrenin değeri olarak kaynak grubunuzun adını ve ikinci parametrenin değeri olarak başlatılacak VM 'nin adını girin.
 
 ![Parametre değerlerini girin](media/automation-first-runbook-textual-python/runbook-python-params.png)
 
-Tıklayın **Tamam** runbook'u başlatın. Runbook'u çalıştırır ve belirttiğiniz VM'yi başlatır.
+Runbook 'u başlatmak için **Tamam** ' ı tıklatın. Runbook çalışır ve belirttiğiniz VM 'yi başlatır.
+
+## <a name="error-handling-in-python"></a>Python 'da hata Işleme
+
+Ayrıca, Python runbook 'larınızdan **Uyarı**, **hata**ve **hata ayıklama** akışları gibi çeşitli akışlar almak için aşağıdaki kuralları da kullanabilirsiniz.
+
+```python
+print("Hello World output") 
+print("ERROR: - Hello world error")
+print("WARNING: - Hello world warning")
+print("DEBUG: - Hello world debug")
+print("VERBOSE: - Hello world verbose")
+```
+
+Aşağıdaki örnek, `try...except` bloğunda kullanılan bu kuralı gösterir.
+
+```python
+try:
+    raise Exception('one', 'two')
+except Exception as detail:
+    print 'ERROR: Handling run-time error:', detail
+```
+
+> [!NOTE]
+> **sys. stderr** , Azure Otomasyonu 'nda desteklenmez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -212,5 +236,5 @@ Tıklayın **Tamam** runbook'u başlatın. Runbook'u çalıştırır ve belirtti
 - Grafik runbook'ları kullanmaya başlamak için bkz. [İlk grafik runbook uygulamam](automation-first-runbook-graphical.md)
 - PowerShell iş akışı runbook'larını kullanmaya başlamak için bkz. [İlk PowerShell iş akışı runbook uygulamam](automation-first-runbook-textual.md)
 - Runbook türleri, avantajları ve sınırlamaları hakkında daha fazla bilgi için bkz. [Azure Automation runbook türleri](automation-runbook-types.md)
-- Python ile Azure geliştirme hakkında bilgi edinmek için [Python geliştiricileri için Azure](https://docs.microsoft.com/python/azure/?view=azure-python)
-- Örnek Python 2 runbook'ları görüntülemek için bkz: [Azure Otomasyon GitHub](https://github.com/azureautomation/runbooks/tree/master/Utility/Python)
+- Python ile Azure için geliştirme hakkında bilgi edinmek için bkz. [Python geliştiricileri Için Azure](/azure/python/)
+- Örnek Python 2 runbook 'larını görüntülemek için bkz. [Azure Otomasyonu GitHub](https://github.com/azureautomation/runbooks/tree/master/Utility/Python)

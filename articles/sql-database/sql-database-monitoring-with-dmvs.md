@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı Dmv'leri kullanarak performans izleme | Microsoft Docs
-description: Algılama ve dinamik yönetim görünümlerini kullanarak Microsoft Azure SQL veritabanı izlemek için genel performans sorunlarını tanılayın öğrenin.
+title: DMVs kullanarak performansı izleme
+description: Microsoft Azure SQL Veritabanı izlemek için dinamik yönetim görünümlerini kullanarak sık karşılaşılan performans sorunlarını algılamayı ve tanılamayı öğrenin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: performance
@@ -10,49 +10,48 @@ ms.topic: conceptual
 author: juliemsft
 ms.author: jrasnick
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 12/19/2018
-ms.openlocfilehash: 371632a28d22583f8b206e4d8b9d2b6b4e510ab0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bea6a572e55f1a79515c385fd7b79881c54ae65e
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62103772"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73802914"
 ---
-# <a name="monitoring-performance-azure-sql-database-using-dynamic-management-views"></a>Azure SQL veritabanı performansı izleme dinamik yönetim görünümlerini kullanarak
+# <a name="monitoring-performance-azure-sql-database-using-dynamic-management-views"></a>Dinamik yönetim görünümlerini kullanarak performans Azure SQL veritabanı 'nı izleme
 
-Microsoft Azure SQL veritabanı, engellenen veya uzun süre çalışan sorguları, kaynak darboğazları, zayıf sorgu planlarına ve benzeri tarafından kaynaklanabilir performans sorunları tanılamak için dinamik yönetim görünümlerini kümesini sağlar. Bu konuda, dinamik yönetim görünümlerini kullanarak sık karşılaşılan performans sorunlarını algılamak nasıl hakkında bilgiler sağlar.
+Microsoft Azure SQL Veritabanı, dinamik yönetim görünümlerinin bir alt kümesinin, Engellenen veya uzun süreli sorgular, kaynak engelleri, kötü sorgu planları vb. nedeniyle oluşan performans sorunlarını tanılamasına olanak sağlar. Bu konuda, dinamik yönetim görünümlerini kullanarak yaygın performans sorunlarının nasıl algılanabileceği hakkında bilgi verilmektedir.
 
-SQL veritabanı, kısmen dinamik yönetim görünümlerini üç kategoriye destekler:
+SQL veritabanı, dinamik yönetim görünümlerinin üç kategorisini kısmen destekler:
 
-- Veritabanı ile ilgili dinamik yönetimi görünümleri.
-- Yürütme ile ilgili dinamik yönetimi görünümleri.
-- İşlemle ilgili dinamik yönetimi görünümleri.
+- Veritabanıyla ilgili dinamik yönetim görünümleri.
+- Yürütmeye ilişkin dinamik yönetim görünümleri.
+- İşlemle ilgili dinamik yönetim görünümleri.
 
-Dinamik Yönetim görünümlerini hakkında ayrıntılı bilgi için bkz. [dinamik yönetim görünümleri ve işlevleri (Transact-SQL)](https://msdn.microsoft.com/library/ms188754.aspx) SQL Server Books Online.
+Dinamik yönetim görünümleri hakkında ayrıntılı bilgi için SQL Server Books Online 'da [dinamik yönetim görünümleri ve işlevleri (Transact-SQL)](https://msdn.microsoft.com/library/ms188754.aspx) konusuna bakın. 
 
 ## <a name="permissions"></a>İzinler
 
-SQL veritabanı'nda dinamik yönetim görünümünü sorgulama gerektiren **VIEW DATABASE STATE** izinleri. **VIEW DATABASE STATE** izin geçerli veritabanı içindeki tüm nesneler hakkında bilgi döndürür.
-Vermek **VIEW DATABASE STATE** izin, belirli bir veritabanı kullanıcısı da aşağıdaki sorguyu çalıştırın:
+SQL veritabanında, dinamik bir yönetim görünümünü sorgulamak için **VERITABANı durumunu görüntüle** izinleri gerekir. **VERITABANı durumunu görüntüle** izni, geçerli veritabanı içindeki tüm nesneler hakkında bilgi döndürür.
+Belirli bir veritabanı kullanıcısına **VERITABANı durumunu görüntüle** iznini vermek için aşağıdaki sorguyu çalıştırın:
 
 ```sql
 GRANT VIEW DATABASE STATE TO database_user;
 ```
 
-Şirket içi SQL Server örneğinde, dinamik yönetim görünümlerini sunucu durumu bilgilerini döndürür. SQL veritabanı'nda, bunlar, yalnızca geçerli mantıksal veritabanı ile ilgili bilgi döndürür.
+Şirket içi SQL Server örneğinde, dinamik yönetim görünümleri sunucu durum bilgilerini döndürür. SQL veritabanı 'nda yalnızca geçerli mantıksal veritabanınızla ilgili bilgileri döndürür.
 
-## <a name="identify-cpu-performance-issues"></a>CPU performans sorunlarını belirleme
+## <a name="identify-cpu-performance-issues"></a>CPU performans sorunlarını tanımla
 
-CPU kullanımı % 80'in uzun süre için aşağıdaki sorun giderme adımları göz önünde bulundurun:
+CPU tüketimi, uzun süre boyunca %80 üzerinde ise, aşağıdaki sorun giderme adımlarını göz önünde bulundurun:
 
 ### <a name="the-cpu-issue-is-occurring-now"></a>CPU sorunu şimdi gerçekleşiyor
 
-Sorun şu anda meydana geliyorsa, iki olası senaryo vardır:
+Sorun şu anda gerçekleşirse, iki olası senaryo vardır:
 
-#### <a name="many-individual-queries-that-cumulatively-consume-high-cpu"></a>Üst üste yüksek CPU kullanan çok sayıda tek sorgu
+#### <a name="many-individual-queries-that-cumulatively-consume-high-cpu"></a>Yüksek CPU kullanan çok sayıda tekil sorgu
 
-Top sorgusu karmaları tanımlamak için aşağıdaki sorguyu kullanın:
+En üstteki sorgu karmalarını belirlemek için aşağıdaki sorguyu kullanın:
 
 ```sql
 PRINT '-- top 10 Active CPU Consuming Queries (aggregated)--';
@@ -65,7 +64,7 @@ FROM(SELECT query_stats.query_hash, SUM(query_stats.cpu_time) 'Total_Request_Cpu
 ORDER BY Total_Request_Cpu_Time_Ms DESC;
 ```
 
-#### <a name="long-running-queries-that-consume-cpu-are-still-running"></a>CPU kullanan uzun süren sorgular hala çalışıyor
+#### <a name="long-running-queries-that-consume-cpu-are-still-running"></a>CPU kullanan uzun süre çalışan sorgular hala çalışıyor
 
 Bu sorguları tanımlamak için aşağıdaki sorguyu kullanın:
 
@@ -78,9 +77,9 @@ ORDER BY cpu_time DESC;
 GO
 ```
 
-### <a name="the-cpu-issue-occurred-in-the-past"></a>Geçmişte CPU sorun oluştu
+### <a name="the-cpu-issue-occurred-in-the-past"></a>Geçmişte CPU sorunu oluştu
 
-Geçmişte sorun oluştu ve kök neden çözümlemesi, kullanın [Query Store](https://docs.microsoft.com/sql/relational-databases/performance/monitoring-performance-by-using-the-query-store). Veritabanı erişimi olan kullanıcılar, Query Store verileri sorgulamak için T-SQL kullanabilirsiniz.  Query Store varsayılan yapılandırmaları 1 saatlik bir ayrıntı düzeyi kullanın.  Bir etkinlik için yüksek CPU kullanan sorguları aramak için aşağıdaki sorguyu kullanın. Bu sorgu, en çok 15 CPU kullanan sorguları döndürür.  Değiştirmeyi unutmayın `rsi.start_time >= DATEADD(hour, -2, GETUTCDATE()`:
+Sorun geçmişte oluştuysa ve kök neden çözümlemesi yapmak istiyorsanız [sorgu deposu](https://docs.microsoft.com/sql/relational-databases/performance/monitoring-performance-by-using-the-query-store)' nu kullanın. Veritabanı erişimi olan kullanıcılar, sorgu deposu verilerini sorgulamak için T-SQL kullanabilir.  Sorgu deposu varsayılan yapılandırması 1 saat ayrıntı düzeyi kullanır.  Yüksek CPU kullanan sorgulara yönelik etkinliklere bakmak için aşağıdaki sorguyu kullanın. Bu sorgu, en üstteki 15 CPU kullanan sorguları döndürür.  `rsi.start_time >= DATEADD(hour, -2, GETUTCDATE()`değiştirmeyi unutmayın:
 
 ```sql
 -- Top 15 CPU consuming queries by query hash
@@ -101,27 +100,27 @@ WHERE OD.RN<=15
 ORDER BY total_cpu_millisec DESC;
 ```
 
-Sorunlu sorguları tanımladıktan sonra bunu CPU kullanımını azaltmak için bu sorgularınızı ayarlamak zamanı geldi.  Sorgularınızı ayarlamak için zamanınız yoksa, sorunu çözmek için veritabanının SLO'ı yükseltmeyi seçebilirsiniz.
+Sorunlu sorguları tanımladıktan sonra, CPU kullanımını azaltmak için bu sorguları ayarlamaya zaman atalım.  Sorguları ayarlamaya yönelik bir zaman yoksa, bu sorunu geçici olarak çözmek için veritabanının SLO 'yu yükseltmeyi de tercih edebilirsiniz.
 
-## <a name="identify-io-performance-issues"></a>G/ç performans sorunlarını belirleme
+## <a name="identify-io-performance-issues"></a>GÇ performans sorunlarını tanımla
 
-G/ç performans sorunlarını tanımlamak için kullanıldığında, g/ç sorunlarını ile ilişkili üst bekleme türleri şunlardır:
+GÇ performans sorunlarını tanımlarken, GÇ sorunlarıyla ilişkili en üstteki bekleme türleri şunlardır:
 
 - `PAGEIOLATCH_*`
 
-  Veri dosyası g/ç sorunları için (dahil olmak üzere `PAGEIOLATCH_SH`, `PAGEIOLATCH_EX`, `PAGEIOLATCH_UP`).  Bekleme tür adı varsa **GÇ** içinde GÇ soruna işaret. Yoksa hiçbir **GÇ** sayfa Mandal bekleme adı, onu farklı bir sorun (örneğin, tempdb Çekişme) türüne işaret.
+  Veri dosyası GÇ sorunları (`PAGEIOLATCH_SH`, `PAGEIOLATCH_EX`, `PAGEIOLATCH_UP`dahil) için.  Bekleme türü adında **GÇ** varsa, bir GÇ sorununa işaret eder. Sayfa mandal bekleme adında **GÇ** yoksa, farklı bir sorun türüne (örneğin, tempdb çekişmesi) işaret eder.
 
 - `WRITE_LOG`
 
-  İşlem günlüğü g/ç sorunları için.
+  İşlem günlüğü GÇ sorunları için.
 
-### <a name="if-the-io-issue-is-occurring-right-now"></a>Şu anda GÇ sorunu meydana geliyorsa
+### <a name="if-the-io-issue-is-occurring-right-now"></a>GÇ sorunu şu anda gerçekleşirse
 
-Kullanım [sys.dm_exec_requests](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql) veya [sys.dm_os_waiting_tasks](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-os-waiting-tasks-transact-sql) görmek için `wait_type` ve `wait_time`.
+`wait_type` ve `wait_time`görmek için [sys. dm_exec_requests](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql) veya [sys. dm_os_waiting_tasks](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-os-waiting-tasks-transact-sql) kullanın.
 
-#### <a name="identify-data-and-log-io-usage"></a>Verileri tanımlamak ve günlük GÇ kullanımını
+#### <a name="identify-data-and-log-io-usage"></a>Veri ve günlük GÇ kullanımını tanımla
 
-Veri GÇ kullanımını oturum üzere aşağıdaki sorguyu kullanın. Veri veya günlük GÇ % 80'in ise, kullanıcılar, SQL veritabanı hizmet katmanı için kullanılabilir GÇ kullanmış anlamına gelir.
+Veri ve günlük GÇ kullanımını belirlemek için aşağıdaki sorguyu kullanın. Veri veya günlük GÇ %80 ' den fazla ise, kullanıcılar SQL veritabanı hizmet katmanı için kullanılabilir GÇ 'yi kullanmışdır.
 
 ```sql
 SELECT end_time, avg_data_io_percent, avg_log_write_percent
@@ -129,14 +128,14 @@ FROM sys.dm_db_resource_stats
 ORDER BY end_time DESC;
 ```
 
-GÇ sınırına ulaşıldı, iki seçeneğiniz vardır:
+GÇ sınırına ulaşıldığında, iki seçeneğiniz vardır:
 
-- 1\. seçenek: İşlem boyutunu yükseltebilir veya hizmet katmanını
-- 2\. seçenek: Belirleyin ve çoğu g/ç kullanan sorguları ayarlayabilirsiniz.
+- Seçenek 1: işlem boyutunu veya hizmet katmanını yükseltme
+- 2\. seçenek: en fazla GÇ kullanan sorguları belirleyip ayarlayın.
 
-#### <a name="view-buffer-related-io-using-the-query-store"></a>Query Store kullanarak görünüm arabellek ilgili GÇ
+#### <a name="view-buffer-related-io-using-the-query-store"></a>Sorgu deposunu kullanarak arabelleğin ilgili GÇ görüntüleme
 
-Seçenek 2 için aşağıdaki sorguyu arabellek ilgili g/ç için Query Store karşı son iki saat izlenen etkinliği görüntülemek için kullanabilirsiniz:
+2\. seçenek için, izlenen etkinliğin son iki saatini görüntülemek üzere arabelleğin ilgili GÇ için sorgu deposunda aşağıdaki sorguyu kullanabilirsiniz:
 
 ```sql
 -- top queries that waited on buffer
@@ -157,9 +156,9 @@ ORDER BY total_wait_time_ms DESC;
 GO
 ```
 
-#### <a name="view-total-log-io-for-writelog-waits"></a>Görünüm toplam günlük g/ç için WRITELOG bekler
+#### <a name="view-total-log-io-for-writelog-waits"></a>WRITELOG Wait için toplam günlük GÇ görüntüleme
 
-Bekleme türü ise `WRITELOG`, toplam günlük GÇ deyimi tarafından görüntülemek için aşağıdaki sorguyu kullanın:
+Bekleme türü `WRITELOG`ise, toplam log ıO for bildirisini görüntülemek için aşağıdaki sorguyu kullanın:
 
 ```sql
 -- Top transaction log consumers
@@ -236,21 +235,21 @@ ORDER BY total_log_bytes_used DESC;
 GO
 ```
 
-## <a name="identify-tempdb-performance-issues"></a>Tanımlamak `tempdb` performans sorunları
+## <a name="identify-tempdb-performance-issues"></a>`tempdb` performans sorunlarını tanımla
 
-G/ç performans sorunlarını tanımlamak için kullanıldığında, üst bekleyin ilişkilendirilmiş türleri `tempdb` konular `PAGELATCH_*` (değil `PAGEIOLATCH_*`). Ancak, `PAGELATCH_*` beklediği değil her zaman anlama sahip olduğunuz `tempdb` Çekişme.  Bu bekleyin, ayrıca, aynı veri sayfasını hedefleyen eş zamanlı istek nedeniyle kullanıcı nesnesi veri sayfası çakışması olduğunu anlamına gelebilir. Daha fazla onaylamak için `tempdb` çekişmesini kullanım [sys.dm_exec_requests](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql) wait_resource değeri ile başlayan onaylamak için `2:x:y` 2 olduğu `tempdb` veritabanı kimliği `x` dosya kimliği ve `y` sayfa kimliği.  
+GÇ performans sorunlarını tanımlarken, `tempdb` sorunlarıyla ilişkili en üstteki bekleme türleri `PAGELATCH_*` (`PAGEIOLATCH_*`değil). Ancak `PAGELATCH_*` wait, her zaman `tempdb` çekişmeye sahip olduğunuz anlamına gelir.  Bu bekleme aynı zamanda aynı veri sayfasını hedefleyen eşzamanlı istekler nedeniyle Kullanıcı nesnesi veri sayfası çekişmesini de ifade edebilir. `tempdb` çekişmeyi daha fazla onaylamak için [sys. dm_exec_requests](https://docs.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql) kullanarak wait_resource `2:x:y` DEĞERIN veritabanı kimliği, `tempdb` Ise dosya kimliği ve `x` Ise sayfa kimliğidir.`y`  
 
-Tempdb çakışma için dayanan uygulama kodu yeniden yazın ya da azaltmak için ortak bir yöntemi olan `tempdb`.  Ortak `tempdb` kullanım alanları şunlardır:
+Tempdb çekişmesi için ortak bir yöntem, `tempdb`bağımlı olan uygulama kodunu azaltmaktır veya yeniden yazmaktır.  Ortak `tempdb` kullanım alanlarında şunlar bulunur:
 
 - Geçici tablolar
 - Tablo değişkenleri
-- Tablo değerli Parametreler
-- Sürüm deposu kullanım (özellikle ilişkili olan işlemler uzun süre çalışan)
-- Sıralar, karma birleştirmeler ve biriktiricileri sorgu planlarına sahip sorgular
+- tablo değerli parametreler
+- Sürüm deposu kullanımı (özellikle uzun süren işlemlerle ilişkili)
+- Sıralamayı, karma birleştirmeleri ve biriktiricileri kullanan sorgu planlarına sahip sorgular
 
-### <a name="top-queries-that-use-table-variables-and-temporary-tables"></a>Tablo değişkenleri ve geçici tablolar kullanan en sık kullanılan sorgular
+### <a name="top-queries-that-use-table-variables-and-temporary-tables"></a>Tablo değişkenlerini ve geçici tabloları kullanan popüler sorgular
 
-Tablo değişkenleri ve geçici tablolar kullanan üst sorguları tanımlamak için aşağıdaki sorguyu kullanın:
+Tablo değişkenlerini ve geçici tabloları kullanan en iyi sorguları belirlemek için aşağıdaki sorguyu kullanın:
 
 ```sql
 SELECT plan_handle, execution_count, query_plan
@@ -273,9 +272,9 @@ FROM(SELECT DISTINCT plan_handle, [Database], [Schema], [table]
     JOIN #tmpPlan AS t2 ON t.plan_handle=t2.plan_handle;
 ```
 
-### <a name="identify-long-running-transactions"></a>Uzun süre çalışan işlemleri tanımlayın
+### <a name="identify-long-running-transactions"></a>Uzun süre çalışan işlemleri tanımla
 
-Uzun tanımlamak için aşağıdaki sorguyu kullanın, işlem çalışıyor. Uzun süre çalışan işlem sürüm deposuna temizleme engelleyin.
+Uzun süre çalışan işlemleri tanımlamak için aşağıdaki sorguyu kullanın. Uzun süre çalışan işlemler, sürüm deposunu temizlemeyi önler.
 
 ```sql
 SELECT DB_NAME(dtr.database_id) 'database_name',
@@ -331,13 +330,13 @@ WHERE atr.transaction_type != 2
 ORDER BY start_time ASC;
 ```
 
-## <a name="identify-memory-grant-wait-performance-issues"></a>GRANT bekleyin performans sorunlarını belleği tanımlayın
+## <a name="identify-memory-grant-wait-performance-issues"></a>Bellek verme bekleme performans sorunlarını tanımla
 
-En üst türü bekleyin ise `RESOURCE_SEMAHPORE` ve bir yüksek CPU kullanımı sorunu yoksa, bekleme sorunu vermek bellek olabilir.
+En iyi bekleme türü `RESOURCE_SEMAHPORE` ve yüksek CPU kullanım sorununuz yoksa, bir bellek verme sorunu bekliyor olabilir.
 
-### <a name="determine-if-a-resourcesemahpore-wait-is-a-top-wait"></a>Olup bir `RESOURCE_SEMAHPORE` üst bekleme bekleyin
+### <a name="determine-if-a-resource_semahpore-wait-is-a-top-wait"></a>`RESOURCE_SEMAHPORE` bekleme bir en çok bekleme olup olmadığını belirleme
 
-Belirlemek için aşağıdaki sorguyu kullanın. bir `RESOURCE_SEMAHPORE` üst bekleme bekleyin
+Bir `RESOURCE_SEMAHPORE` bekleme en çok bekleme olup olmadığını anlamak için aşağıdaki sorguyu kullanın
 
 ```sql
 SELECT wait_type,
@@ -350,9 +349,9 @@ GROUP BY wait_type
 ORDER BY SUM(wait_time) DESC;
 ```
 
-### <a name="identity-high-memory-consuming-statements"></a>Kimlik yüksek bellek tüketen deyimleri
+### <a name="identity-high-memory-consuming-statements"></a>Kimlik yüksek bellek tüketen deyimler
 
-Yüksek bellek tüketen deyimleri tanımlamak için aşağıdaki sorguyu kullanın:
+Yüksek bellek kullanan deyimleri belirlemek için aşağıdaki sorguyu kullanın:
 
 ```sql
 SELECT IDENTITY(INT, 1, 1) rowId,
@@ -386,9 +385,9 @@ FROM cte
 ORDER BY SerialDesiredMemory DESC;
 ```
 
-### <a name="identify-the-top-10-active-memory-grants"></a>İlk 10 etkin bellek izinler tanımlayın
+### <a name="identify-the-top-10-active-memory-grants"></a>İlk 10 etkin bellek verdiğini tanımla
 
-İlk 10 etkin bellek verir tanımlamak için aşağıdaki sorguyu kullanın:
+En iyi 10 etkin belleği veren izinleri tanımlamak için aşağıdaki sorguyu kullanın:
 
 ```sql
 SELECT TOP 10
@@ -460,9 +459,9 @@ FROM sys.dm_exec_requests AS r
 ORDER BY mg.granted_memory_kb DESC;
 ```
 
-## <a name="calculating-database-and-objects-sizes"></a>Veritabanı ve nesneleri boyutları hesaplanıyor
+## <a name="calculating-database-and-objects-sizes"></a>Veritabanı ve nesne boyutlarını hesaplama
 
-Aşağıdaki sorgu veritabanınızın (megabayt cinsinden) boyutunu döndürür:
+Aşağıdaki sorgu veritabanınızın boyutunu döndürür (megabayt cinsinden):
 
 ```sql
 -- Calculates the size of the database.
@@ -472,7 +471,7 @@ WHERE type_desc = 'ROWS';
 GO
 ```
 
-Aşağıdaki sorgu, veritabanınızda (megabayt cinsinden) tek tek nesnelerin boyutunu döndürür:
+Aşağıdaki sorgu, veritabanınızdaki ayrı nesnelerin (megabayt cinsinden) boyutunu döndürür:
 
 ```sql
 -- Calculates the size of individual database objects.
@@ -483,10 +482,10 @@ GROUP BY sys.objects.name;
 GO
 ```
 
-## <a name="monitoring-connections"></a>Bağlantı izleme
+## <a name="monitoring-connections"></a>İzleme bağlantıları
 
-Kullanabileceğiniz [sys.dm_exec_connections](https://msdn.microsoft.com/library/ms181509.aspx) belirli bir Azure SQL veritabanı sunucusu ve her bağlantı ayrıntıları için kurulan bağlantılar hakkında bilgi almak için görünümü. Ayrıca, [sys.dm_exec_sessions](https://msdn.microsoft.com/library/ms176013.aspx) görünümü, tüm etkin kullanıcı bağlantıları ve iç görevler hakkında bilgi alırken yararlıdır.
-Aşağıdaki sorgu, geçerli bağlantı hakkında bilgi alır:
+Belirli bir Azure SQL veritabanı sunucusuna kurulan bağlantılar ve her bağlantının ayrıntıları hakkında bilgi almak için [sys. dm_exec_connections](https://msdn.microsoft.com/library/ms181509.aspx) görünümünü kullanabilirsiniz. Ayrıca, [sys. dm_exec_sessions](https://msdn.microsoft.com/library/ms176013.aspx) görünümü tüm etkin kullanıcı bağlantıları ve iç görevler hakkında bilgi alırken faydalıdır.
+Aşağıdaki sorgu geçerli bağlantı hakkındaki bilgileri alır:
 
 ```sql
 SELECT
@@ -502,22 +501,22 @@ WHERE c.session_id = @@SPID;
 ```
 
 > [!NOTE]
-> Yürütülürken **sys.dm_exec_requests** ve **sys.dm_exec_sessions görünümleri**, varsa **VIEW DATABASE STATE** izni veritabanında, tüm çalıştırma görürsünüz. oturumlarının veritabanında; Aksi takdirde, yalnızca mevcut oturum bakın.
+> **Sys. dm_exec_requests** ve **sys. dm_exec_sessions görünümlerini**YÜRÜTÜRKEN, veritabanında **veritabanı durumunu görüntüle** izniniz varsa, veritabanında yürütülen tüm oturumları görürsünüz; Aksi takdirde, yalnızca geçerli oturumu görürsünüz.
 
 ## <a name="monitor-resource-use"></a>Kaynak kullanımını izleme
 
-Kaynak kullanımı kullanarak izleyebileceğiniz [SQL veritabanı sorgu performansı İçgörüleri](sql-database-query-performance.md) ve [Query Store](https://msdn.microsoft.com/library/dn817826.aspx).
+[SQL veritabanı sorgu performansı içgörüleri](sql-database-query-performance.md) ve [sorgu deposu](https://msdn.microsoft.com/library/dn817826.aspx)kullanarak kaynak kullanımını izleyebilirsiniz.
 
-Bu iki görünüm kullanarak kullanımını da izleyebilirsiniz:
+Ayrıca, bu iki görünümü kullanarak kullanımı izleyebilirsiniz:
 
-- [sys.dm_db_resource_stats](https://msdn.microsoft.com/library/dn800981.aspx)
-- [sys.resource_stats](https://msdn.microsoft.com/library/dn269979.aspx)
+- [sys. dm_db_resource_stats](https://msdn.microsoft.com/library/dn800981.aspx)
+- [sys. resource_stats](https://msdn.microsoft.com/library/dn269979.aspx)
 
-### <a name="sysdmdbresourcestats"></a>sys.dm_db_resource_stats
+### <a name="sysdm_db_resource_stats"></a>sys. dm_db_resource_stats
 
-Kullanabileceğiniz [sys.dm_db_resource_stats](https://msdn.microsoft.com/library/dn800981.aspx) her SQL veritabanı'nda görüntüle. **Sys.dm_db_resource_stats** son kaynak kullanım verilerini hizmet katmanına göre görüntüler. Ortalama CPU, veri GÇ, günlük yazma ve bellek yüzdelerini her 15 saniyede kaydedilir ve 1 saat boyunca korunur.
+[Sys. dm_db_resource_stats](https://msdn.microsoft.com/library/dn800981.aspx) görünümünü her SQL veritabanında kullanabilirsiniz. **Sys. dm_db_resource_stats** görünümü, hizmet katmanına göre son kaynak kullanım verilerini gösterir. CPU, veri GÇ, günlük yazma ve bellek için Ortalama yüzdeler, 15 saniyede bir kaydedilir ve 1 saat boyunca sürdürülür.
 
-Bu görünüm, kaynak kullanımını daha ayrıntılı göz sağladığından, kullanın **sys.dm_db_resource_stats** herhangi bir geçerli durumu çözümlemesi için ilk ya da sorun giderme. Örneğin, bu sorgu, geçerli veritabanı için ortalama ve en yüksek kaynak kullanımı son bir saat içinde gösterir:
+Bu görünüm kaynak kullanımına daha ayrıntılı bir bakış sağladığından, geçerli durum analizi veya sorun giderme için önce **sys. dm_db_resource_stats** kullanın. Örneğin, bu sorgu, son saat içindeki geçerli veritabanı için Ortalama ve en yüksek kaynak kullanımını gösterir:
 
 ```sql
 SELECT  
@@ -532,26 +531,26 @@ SELECT
 FROM sys.dm_db_resource_stats;  
 ```
 
-Diğer sorgular için örneklere bakın [sys.dm_db_resource_stats](https://msdn.microsoft.com/library/dn800981.aspx).
+Diğer sorgular için [sys. dm_db_resource_stats](https://msdn.microsoft.com/library/dn800981.aspx)içindeki örneklere bakın.
 
-### <a name="sysresourcestats"></a>sys.resource_stats
+### <a name="sysresource_stats"></a>sys. resource_stats
 
-[Sys.resource_stats](https://msdn.microsoft.com/library/dn269979.aspx) görünümünde **ana** veritabanı, belirli bir hizmet katmanında SQL veritabanınızın performansını izlemek ve boyutu işlem yardımcı olabilecek ek bilgiler vardır. Veriler her 5 dakikada bir toplanan ve yaklaşık 14 gün boyunca tutulur. Bu görünüm, SQL veritabanınızı kaynakları nasıl kullandığını daha uzun vadeli bir geçmiş analize yararlı olur.
+**Ana** veritabanındaki [sys. resource_stats](https://msdn.microsoft.com/library/dn269979.aspx) görünümünde, belirli hizmet KATMANıNDA ve işlem boyutunda SQL veritabanınızın performansını izlemenize yardımcı olabilecek ek bilgiler bulunur. Veriler her 5 dakikada bir toplanır ve yaklaşık 14 gün boyunca korunur. Bu görünüm, SQL veritabanınızın kaynakları nasıl kullandığını daha uzun vadeli bir geçmiş analizi için yararlıdır.
 
-Aşağıdaki grafikte CPU kaynak kullanımı için bir Premium veritabanının P2 işlem boyutu ile her saat için bir hafta içinde gösterilmektedir. Bu grafik Pazartesi günü başlar, 5 iş günü gösterir ve ardından hafta gösterir, uygulama üzerinde çok az olur.
+Aşağıdaki grafikte, bir haftada her saat için P2 işlem boyutuyla bir Premium veritabanı için CPU kaynak kullanımı gösterilmektedir. Bu grafik Pazartesi günü başlar, 5 iş günü gösterir ve uygulamada çok daha az gerçekleştiğinde bir hafta sonu gösterir.
 
 ![SQL veritabanı kaynak kullanımı](./media/sql-database-performance-guidance/sql_db_resource_utilization.png)
 
-Verileri, bu veritabanı şu anda en yüksek CPU yükü yok. yalnızca yüzde 50'işlem CPU kullanım P2 göreli boyutu (Salı günü öğle saati). CPU uygulamanın kaynak profilinde baskın faktörü ise, P2 iş yükü her zaman en uygun olduğunu garanti etmek için doğru işlem boyutu olduğunu karar verebilirsiniz. Bir uygulama, zaman içinde artmasına bekliyorsanız, böylece uygulama hiç olmadığı kadar performans düzeyi sınırına ulaşmadığınız olmayan bir ek kaynak arabelleği sağlamak için iyi bir fikirdir. İşlem boyutu artırmak istiyorsanız, bir veritabanı istekleri özellikle gecikmeye duyarlı ortamlarda etkili bir şekilde işlemek için yeterli güce sahip olmadığında ortaya çıkabilir müşteri görünür hatalarının önüne geçmek yardımcı olabilir. Örnek Web sayfalarını veritabanı çağrıları sonuçlarına göre boyar uygulamanın desteklediği bir veritabanıdır.
+Bu veritabanında Şu anda, P2 işlem boyutuna (Salı günü Orta gün) göre yüzde 50 ' luk CPU 'nun en yüksek CPU yükü vardır. CPU, uygulamanın kaynak profilinde baskın bir faktörse, iş yükünün her zaman uygun olmasını sağlamak için P2 doğru işlem boyutu olduğuna karar verebilirsiniz. Bir uygulamanın zaman içinde büyümesini bekleseniz, uygulamanın performans düzeyi sınırına ulaşmaması için ek bir kaynak arabelleğinin olması iyi bir fikirdir. İşlem boyutunu artırdıysanız, bir veritabanı istekleri etkili bir şekilde işlemek için yeterli güce sahip olmadığında, özellikle de gecikme süresine duyarlı ortamlarda oluşabilecek, müşteri tarafından görünen hatalardan kaçınmanıza yardımcı olabilirsiniz. Veritabanı çağrılarının sonuçlarına göre Web sayfalarını boyayan bir uygulamayı destekleyen bir veritabanıdır.
 
-Diğer uygulama türleri aynı grafikte farklı yorumlayabilir. Örneğin, uygulamanın her gün Bordro veri işlemeye çalışır ve aynı grafiğe varsa, bu tür bir "toplu" modeli P1 bilgi işlem boyutta ince ayar yapabilirsiniz. İşlem boyutu 100 Dtu'yu kıyasla 200 dtu'ya varan P2, P1 işlem boyutu vardır. P1 işlem boyutu, boyut P2 yarım performansını işlem sağlar. Bu nedenle, P2 CPU kullanımı yüzde 50, P1, CPU kullanımı yüzde 100'e eşittir. Uygulama zaman aşımları yoksa bugün Bitti, bir işin 2 saat veya 2.5 tamamlamak için saat sürüyor olup olmaması önemli değil. Bu kategorideki bir uygulama, büyük olasılıkla P1 işlem boyutu kullanabilirsiniz. Böylece tüm "büyük yoğun" troughs birine gün içinde sığdırmaya kaynak kullanımının düşük olduğunda günde süreler olması, bir avantajlarından yararlanabilirsiniz. İşleri her gün zamanında bitirebilir sürece P1 işlem boyutu için bu türden uygulamayı (ve tasarruf), iyi olabilir.
+Diğer uygulama türleri aynı grafiği farklı şekilde yorumlayabilir. Örneğin, bir uygulama her gün Bordro verilerini işlemeye çalışırsa ve aynı grafiğe sahipse, bu tür "Batch işi" modeli P1 işlem boyutunda ince bir işlem gösterebilir. P1 işlem boyutunun, P2 işlem boyutundaki 200 DTU ile karşılaştırıldığında 100 DTU vardır. P1 işlem boyutu, P2 işlem boyutu performansının yarısını sağlar. Bu nedenle, P2 cinsinden CPU kullanımı yüzdesi ' nde 50, P1 ' de yüzde 100 CPU kullanımı. Uygulamanın zaman aşımları yoksa, bugün yapılacağından, bir işin 2 saat veya 2,5 saat sürer. Bu kategorideki bir uygulama büyük olasılıkla P1 işlem boyutunu kullanabilir. Kaynak kullanımı düşük olduğunda gün içinde zaman dilimi olduğunu düşündüğünde, "büyük tepe" nın, gün içinde Troughs daha sonraki bir arasında taşma süresi vardır. P1 işlem boyutu, işlerin her gün bitebilmesi koşuluyla, bu tür bir uygulama (ve tasarruf) için uygun olabilir.
 
-Tüketilen kaynak bilgilerini active her veritabanı için Azure SQL veritabanı kullanıma sunan **sys.resource_stats** görünümünü **ana** her bir sunucudaki veritabanı. Tablodaki verileri için 5 dakikalık aralıklarla toplanır. Temel, standart ve Premium hizmet katmanlarıyla veri tabloda, bu verileri neredeyse gerçek zamanlı analiz yerine geçmiş çözümleme için daha yararlı olacak şekilde görünmesini fazla 5 dakika sürebilir. Sorgu **sys.resource_stats** bir veritabanının en son geçmişini görmek için görüntüleyin ve doğrulamak için mi ayırma, seçtiğiniz gerektiğinde istediğiniz performans teslim.
+Azure SQL veritabanı, her bir sunucuda **ana** veritabanının **sys. resource_stats** görünümündeki her etkin veritabanı için tüketilen kaynak bilgilerini gösterir. Tablodaki veriler 5 dakikalık aralıklar için toplanır. Temel, standart ve Premium hizmet katmanlarıyla, verilerin tabloda görünmesi 5 dakikadan uzun sürebilir, bu nedenle bu veriler, neredeyse gerçek zamanlı analizler yerine geçmiş analize yönelik daha kullanışlı olabilir. Bir veritabanının son geçmişini görmek ve seçtiğiniz rezervasyonun gerektiğinde istediğiniz performansı teslim edilip edilmeyeceğini doğrulamak için **sys. resource_stats** görünümünü sorgulayın.
 
 > [!NOTE]
-> İçin bağlanmalıdır **ana** SQL veritabanı sunucunuzun sorgu için veritabanı **sys.resource_stats** ilişkin aşağıdaki örneklerde.
+> Aşağıdaki örneklerde **sys. resource_stats** sorgulamak Için SQL veritabanı sunucunuzun **ana** veritabanına bağlı olmanız gerekir.
 
-Bu örnekte, bu görünümdeki veriler nasıl sunulur gösterir:
+Bu örnek, bu görünümdeki verilerin nasıl sunulduğunu gösterir:
 
 ```sql
 SELECT TOP 10 *
@@ -560,11 +559,11 @@ WHERE database_name = 'resource1'
 ORDER BY start_time DESC
 ```
 
-![Sys.resource_stats Katalog görünümü](./media/sql-database-performance-guidance/sys_resource_stats.png)
+![Sys. resource_stats Katalog görünümü](./media/sql-database-performance-guidance/sys_resource_stats.png)
 
-Sonraki örnek, kullanabileceğiniz farklı yolları gösterir **sys.resource_stats** Katalog görünümü, SQL veritabanı kaynak kullanımı hakkında bilgi almak için:
+Sonraki örnekte, SQL veritabanınızın kaynakları nasıl kullandığı hakkında bilgi almak için **sys. resource_stats** katalog görünümünü kullanmanın farklı yolları gösterilmektedir:
 
-1. Geçen hafta kaynakta aramak için veritabanı userdb1 için kullanın, bu sorguyu çalıştırabilirsiniz:
+1. Veritabanı userdb1 için geçen haftaki kaynak kullanımına bakmak için bu sorguyu çalıştırabilirsiniz:
 
     ```sql
     SELECT *
@@ -574,7 +573,7 @@ Sonraki örnek, kullanabileceğiniz farklı yolları gösterir **sys.resource_st
     ORDER BY start_time DESC;
     ```
 
-2. İş yükünüz işlem boyutu ne kadar iyi uyduğunu değerlendirmek için kaynak ölçümleri her yönüyle detaya gerekir: CPU, okuma, yazma, çalışan sayısı ve oturum sayısı. İşte bir düzeltilmiş kullanarak sorgu **sys.resource_stats** bu kaynak ölçümleri ortalama ve maksimum değerler bildirmek için:
+2. İş yükünüzün işlem boyutuna ne kadar iyi uyduğunu değerlendirmek için, kaynak ölçümlerinin her bir yönüyle ayrıntıya inmelisiniz: CPU, okuma, yazma, çalışan sayısı ve oturum sayısı. Bu kaynak ölçümlerinin ortalama ve en büyük değerlerini raporlamak için **sys. resource_stats** kullanan düzeltilmiş bir sorgu aşağıda verilmiştir:
 
     ```sql
     SELECT
@@ -592,11 +591,11 @@ Sonraki örnek, kullanabileceğiniz farklı yolları gösterir **sys.resource_st
     WHERE database_name = 'userdb1' AND start_time > DATEADD(day, -7, GETDATE());
     ```
 
-3. Bu her kaynak ölçümü ile ortalama ve maksimum değerleri hakkında bilgi iş yükünüz, seçtiğiniz işlem boyuta ne kadar iyi uyduğunu değerlendirebilirsiniz. Genellikle, değerleri ortalama **sys.resource_stats** karşı hedef boyutu kullanmak iyi bir temel sağlar. Bu, birincil ölçüm Sopası olmalıdır. Örneğin, standart hizmet katmanı S2 işlem boyutu ile kullanıyor olabilir. Ortalama CPU ve g/ç okuma için yüzde kullanın ve yüzde 40'a yazma olan, çalışan ortalama sayısı 50 altına olduğu ve ortalama oturum sayısı 200. İş yükünüz S1 işlem boyutuna sığdırmaya. Veritabanınızı çalışan ve oturumu sınırları uygun olup olmadığını görmek kolay bir işlemdir. Bir veritabanı içine bir alt işlem boyutu CPU, okuma ve yazma işlemleri bölme bakımından en uygun olup olmadığını görmek için daha düşük DTU sayısını işlem boyutu, geçerli işlem boyutu DTU sayısı ve ardından sonucu 100 ile çarpın:
+3. Her kaynak ölçüsünün ortalama ve en yüksek değerleriyle ilgili bu bilgilerle, iş yükünüzün seçtiğiniz işlem boyutuna ne kadar iyi uyduğunu değerlendirebilirsiniz. Genellikle, **sys. resource_stats** içindeki ortalama değerler, hedef boyutunda kullanmak için iyi bir taban çizgisi sağlar. Bu, birincil ölçüm çubuğu olmalıdır. Bir örnek için, S2 işlem boyutuyla standart hizmet katmanını kullanıyor olabilirsiniz. CPU ve GÇ okuma ve yazma işlemleri için Ortalama kullanım yüzdesi %40, ortalama çalışan sayısı 50 ' in altında ve ortalama oturum sayısı 200 ' in altında. İş yükünüz, S1 işlem boyutuna uygun hale gelebilir. Veritabanınızın çalışan ve oturum sınırlarına uygun olup olmadığını kolayca görebilirsiniz. Bir veritabanının CPU, okuma ve yazma işlemlerinde daha düşük bir işlem boyutuna uygun olup olmadığını görmek için, düşük işlem boyutunun DTU numarasını geçerli işlem boyutunuzu DTU numarası ile bölün ve sonucu 100 ile çarpın:
 
     ```S1 DTU / S2 DTU * 100 = 20 / 50 * 100 = 40```
 
-    İkisi arasındaki göreli performans farkı boyutları yüzde cinsinden işlem sonucudur. İş yükünüz, kaynak kullanımınızı bu miktarı aşmıyorsa, daha düşük işlem boyutuna sığdırmaya. Ancak, kaynak kullanımı değerlerinin tüm aralıklarına bakın ve belirlemek, yüzde olarak, ne sıklıkta, veritabanı iş yükünüzü daha düşük işlem boyutuna sığdırmaya gerekir. Aşağıdaki sorgu uygun yüzdesi eşiği Biz bu örnekte hesaplanan yüzde 40'ın temel kaynak boyut başına verir:
+    Sonuç, yüzde cinsinden iki işlem boyutu arasındaki göreli performans farklılığı. Kaynak kullanımı bu miktarı aşmazsa, iş yükünüz daha düşük işlem boyutuna sığabilecek. Bununla birlikte, tüm kaynak kullanım değerleri aralıklarına bakmanız ve veritabanı iş yükünüzün daha düşük bilgi işlem boyutuna ne sıklıkta uyduğunu belirlemeniz gerekir. Aşağıdaki sorgu, bu örnekte hesaplandığımız %40 eşiğine bağlı olarak kaynak boyutu başına sığdırma yüzdesini verir:
 
    ```sql
     SELECT
@@ -607,15 +606,15 @@ Sonraki örnek, kullanabileceğiniz farklı yolları gösterir **sys.resource_st
     WHERE database_name = 'userdb1' AND start_time > DATEADD(day, -7, GETDATE());
     ```
 
-    Veritabanı Hizmet katmanına bağlı olarak, iş yükünüzü daha düşük işlem boyuta uygun olup olmadığını karar verebilirsiniz. Veritabanı iş yükü hedefiniz yüzde 99,9 ise ve önceki sorgunun tüm üç kaynak boyutlar yüzde 99, 9'dan büyük değerleri döndürür, yükünüz büyük olasılıkla daha düşük işlem boyutuna sığar.
+    Veritabanı hizmet katmanınıza göre, iş yükünüzün daha düşük işlem boyutuna uygun olup olmadığına karar verebilirsiniz. Veritabanı iş yükü hedefiniz yüzde 99,9 ise ve önceki sorgu üç kaynak boyutu için yüzde 99,9 ' den daha büyük değerler döndürürse, iş yükünüz büyük olasılıkla daha düşük bilgi işlem boyutuna uyum altına ar.
 
-    Ayrıca uygun yüzdesiyle bakarak hedefiniz karşılamak için sonraki daha yüksek işlem boyutu için mi taşımalısınız Öngörüler sağlar. Örneğin, geçen hafta için aşağıdaki CPU kullanımı userdb1 gösterir:
+    Aynı yüzdeyi göz altına almak, amacınızı karşılamak için bir sonraki daha yüksek işlem boyutuna geçmeniz gerekip gerekmediğini de size fikir verir. Örneğin, userdb1, önceki hafta için aşağıdaki CPU kullanımını gösterir:
 
-   | Ortalama CPU yüzdesi | En fazla CPU yüzdesi |
+   | Ortalama CPU yüzdesi | En yüksek CPU yüzdesi |
    | --- | --- |
-   | 24.5 |100.00 |
+   | 24,5 |100,00 |
 
-    Ortalama CPU iyi veritabanının işlem boyutuna sığdırmaya işlem boyutu sınırını çeyreği hakkındadır. Ancak, veritabanı işlem boyutu sınırına ulaştığında en büyük değeri gösterir. Sonraki daha yüksek işlem boyutu için taşımanız gerekiyor mu? Birden çok kez, iş yükü ulaştığında yüzde 100 konuları ele ve ardından veritabanı iş yükü hedefiniz karşılaştırır.
+    Ortalama CPU, işlem boyutu sınırının bir çeyreği ile ilgilidir ve veritabanının işlem boyutuna da uyum sağlayacak. Ancak en büyük değer, veritabanının işlem boyutu sınırına ulaştığını gösterir. Sonraki daha yüksek işlem boyutuna geçmeniz gerekiyor mu? İş yükünüzün kaç kez yüzde 100 ' e ulaştığını inceleyin ve ardından veritabanı iş yükü hedefiniz ile karşılaştırın.
 
     ```sql
     SELECT
@@ -626,22 +625,22 @@ Sonraki örnek, kullanabileceğiniz farklı yolları gösterir **sys.resource_st
         WHERE database_name = 'userdb1' AND start_time > DATEADD(day, -7, GETDATE());
     ```
 
-    Bu sorgu, bir değer döndürürse yüzde 99, 9'den küçük üç kaynak boyutların hiçbiri için sonraki daha yüksek işlem boyutu taşımayı deneyin veya SQL veritabanı üzerindeki yükü azaltmak için uygulama ayarlamayı tekniklerini kullanın.
+    Bu sorgu, üç kaynak boyutundan herhangi biri için yüzde 99,9 ' dan düşük bir değer döndürürse, sonraki daha yüksek işlem boyutuna geçmeyi ya da SQL veritabanı üzerindeki yükü azaltmak için uygulama ayarlama tekniklerini kullanmayı düşünün.
 
-4. Bu alıştırmada, tahmin edilen iş yükü artışı da gelecekte değerlendirir.
+4. Bu alıştırma, gelecekte öngörülen iş yükünüzün artışını de dikkate alır.
 
 Elastik havuzlar için bu bölümde açıklanan olan tekniklerle havuzda bulunan tek veritabanlarını izleyebilirsiniz. Ancak havuzu bir bütün olarak da izleyebilirsiniz. Bilgi için bkz. [Elastik havuz izleme ve yönetme](sql-database-elastic-pool-manage-portal.md).
 
-### <a name="maximum-concurrent-requests"></a>Maksimum eşzamanlı istekler
+### <a name="maximum-concurrent-requests"></a>Maksimum eşzamanlı istek sayısı
 
-Eş zamanlı istek sayısını görmek için bu Transact-SQL sorgusu SQL veritabanınızda çalıştırın:
+Eşzamanlı isteklerin sayısını görmek için SQL veritabanınızda Bu Transact-SQL sorgusunu çalıştırın:
 
     ```sql
     SELECT COUNT(*) AS [Concurrent_Requests]
     FROM sys.dm_exec_requests R;
     ```
 
-Şirket içi SQL Server veritabanı iş yükü analiz etmek için analiz etmek istediğiniz belirli veritabanında filtrelemek için bu sorguyu değiştirin. Örneğin, bu Transact-SQL sorgusu Veritabanım adlı bir şirket içi veritabanı varsa, bu veritabanında eş zamanlı istek sayısını döndürür:
+Şirket içi SQL Server veritabanının iş yükünü çözümlemek için, bu sorguyu çözümlemek istediğiniz belirli veritabanına göre filtrelemek üzere değiştirin. Örneğin, MyDatabase adlı bir şirket içi veritabanınız varsa, bu Transact-SQL sorgusu söz konusu veritabanındaki eşzamanlı isteklerin sayısını döndürür:
 
     ```sql
     SELECT COUNT(*) AS [Concurrent_Requests]
@@ -650,25 +649,25 @@ Eş zamanlı istek sayısını görmek için bu Transact-SQL sorgusu SQL veritab
     AND D.name = 'MyDatabase';
     ```
 
-Zaman içinde bir anlık görüntü yalnızca tek bir noktada budur. İş yükü ve eş zamanlı istek gereksinimlerini daha iyi anlamak için zaman içinde çok sayıda toplamak gerekir.
+Bu, tek bir noktadaki yalnızca bir anlık görüntüdür. İş yükünüzü ve eşzamanlı istek gereksinimlerinizi daha iyi anlamak için zaman içinde birçok örnek toplamanız gerekir.
 
-### <a name="maximum-concurrent-logins"></a>En fazla eşzamanlı oturum açma
+### <a name="maximum-concurrent-logins"></a>Maksimum eşzamanlı oturum açma
 
-Oturumlarının sıklığı hakkında bir fikir edinmek için kullanıcı ve uygulama desenleri analiz edebilirsiniz. Ayrıca, bu ya da bu makalede ele diğer sınırlamaları aldığınızı değil emin emin olmak için bir test ortamında gerçek dünyadaki yüklerin da çalıştırabilirsiniz. Tek bir sorgu veya eşzamanlı oturum açma sayıları göstermek, dinamik yönetim görünümünü (DMV) veya geçmiş yok.
+Kullanıcı ve uygulama desenlerinizi çözümleyerek oturum açma sıklığının bir fikrini alabilirsiniz. Ayrıca, bu makalede tartıştığımız bu veya diğer sınırlara ulaştığınızdan emin olmak için bir test ortamında gerçek dünya yüklerini çalıştırabilirsiniz. Eşzamanlı oturum açma sayısını veya geçmişi gösterebilmeyen tek bir sorgu veya dinamik yönetim görünümü (DMV) yoktur.
 
-Hizmet, birden çok istemci aynı bağlantı dizesi kullanıyorsanız, her oturum açma kimliğini doğrular. Aynı anda 10 kullanıcı aynı kullanıcı adı ve parola kullanarak bir veritabanına bağlanmak, 10 eşzamanlı oturum açma olacaktır. Bu sınır, oturum açma ve kimlik doğrulama süresi geçerlidir. Eşzamanlı oturum açma sayısı hiçbir zaman 10 kullanıcıları sırayla veritabanına bağlanmak, 1'den büyük olacaktır.
+Birden çok istemci aynı bağlantı dizesini kullanıyorsa, hizmet her oturum açmanın kimliğini doğrular. 10 Kullanıcı aynı anda bir veritabanına aynı Kullanıcı adı ve parola kullanarak bağlanırsa, 10 eşzamanlı oturum açma işlemleri olur. Bu sınır yalnızca oturum açma ve kimlik doğrulama süresi boyunca geçerlidir. Aynı 10 kullanıcının veritabanına sırayla bağlanması halinde, eşzamanlı oturum açma sayısı 1 ' den büyük olmaz.
 
 > [!NOTE]
 > Şu anda, bu sınır elastik havuzlardaki veritabanları için geçerli değildir.
 
 ### <a name="maximum-sessions"></a>En fazla oturum sayısı
 
-Geçerli etkin oturumları sayısını görmek için bu Transact-SQL sorgusu SQL veritabanınızda çalıştırın:
+Geçerli etkin oturumların sayısını görmek için SQL veritabanınızda Bu Transact-SQL sorgusunu çalıştırın:
 
     SELECT COUNT(*) AS [Sessions]
     FROM sys.dm_exec_connections
 
-Bir şirket içi SQL Server iş yükü çözümlediğiniz, belirli bir veritabanı üzerinde odaklanmak için sorguyu değiştirin. Bu sorguyu Azure SQL veritabanı'na taşıma düşünüyorsanız veritabanı için olası oturum gereksinimlerini belirlemenize yardımcı olur.
+Şirket içi SQL Server iş yükünü analiz ediyorsanız, sorguyu belirli bir veritabanına odaklanmak üzere değiştirin. Bu sorgu, Azure SQL veritabanı 'na taşımayı düşünüyorsanız, veritabanı için olası oturum ihtiyaçlarını belirlemenize yardımcı olur.
 
     SELECT COUNT(*)  AS [Sessions]
     FROM sys.dm_exec_connections C
@@ -676,17 +675,17 @@ Bir şirket içi SQL Server iş yükü çözümlediğiniz, belirli bir veritaban
     INNER JOIN sys.databases D ON (D.database_id = S.database_id)
     WHERE D.name = 'MyDatabase'
 
-Yeniden, bu sorguları zaman içinde nokta sayısını döndürür. Zaman içinde birden fazla örnek toplarsanız kullanmak en iyi anlama oturumunuz sahip olacaksınız.
+Yine, bu sorgular bir zaman noktası sayısı döndürür. Zaman içinde birden çok örnek topluyorsanız, oturum kullanımı en iyi şekilde öğrenirsiniz.
 
-SQL veritabanı analiz için geçmişe dönük İstatistikler oturumları sorgulayarak alabileceğiniz [sys.resource_stats](https://msdn.microsoft.com/library/dn269979.aspx) görüntüleme ve İnceleme **active_session_count** sütun.
+SQL veritabanı analizi için, sys 'yi sorgulayarak oturumlarla ilgili geçmiş istatistikleri alabilirsiniz [. resource_stats](https://msdn.microsoft.com/library/dn269979.aspx) **active_session_count** sütununu görüntüleyip gözden geçirebilirsiniz.
 
 ## <a name="monitoring-query-performance"></a>Sorgu performansını izleme
 
-Yavaş veya uzun süre çalışan sorguların önemli sistem kaynakları kullanabilir. Bu bölümde, birkaç ortak sorgu performansı sorunlarını algılamak için dinamik yönetim görünümlerini nasıl yapılacağı açıklanır. Sorun giderme, eski ancak yine de yararlı bir başvuru [SQL Server 2008'de performans sorunlarını giderme](https://download.microsoft.com/download/D/B/D/DBDE7972-1EB9-470A-BA18-58849DB3EB3B/TShootPerfProbs2008.docx) Microsoft TechNet makalesi.
+Yavaş veya uzun süre çalışan sorgular önemli sistem kaynaklarını kullanabilir. Bu bölümde, yaygın olarak karşılaşılan bazı sorgu performans sorunlarını algılamak için dinamik yönetim görünümlerinin nasıl kullanılacağı gösterilmektedir. Sorun giderme için daha eski ancak hâlâ yararlı olan başvuru, Microsoft TechNet 'teki [SQL Server 2008 makalesinde sorun giderme performansı sorunları](https://download.microsoft.com/download/D/B/D/DBDE7972-1EB9-470A-BA18-58849DB3EB3B/TShootPerfProbs2008.docx) .
 
-### <a name="finding-top-n-queries"></a>İlk N sorgularını bulma
+### <a name="finding-top-n-queries"></a>İlk N sorguyu bulma
 
-Aşağıdaki örnek, ortalama CPU süresine göre sıralanmış ilk beş sorgu hakkındaki bilgileri döndürür. Mantıksal eşdeğer sorgular tarafından toplam kaynak tüketimi gruplanması Bu örnekte sorgu, sorgu karmasına göre toplar.
+Aşağıdaki örnek, ortalama CPU zamanına göre derecelendirilen ilk beş sorgu hakkında bilgi döndürür. Bu örnek, sorguları kendi sorgu karmalarına göre toplar, böylece mantıksal olarak eşdeğer sorguların birikimli kaynak tüketimine göre gruplanmasıdır.
 
     ```sql
     SELECT TOP 5 query_stats.query_hash AS "Query Hash",
@@ -707,11 +706,11 @@ Aşağıdaki örnek, ortalama CPU süresine göre sıralanmış ilk beş sorgu h
 
 ### <a name="monitoring-blocked-queries"></a>Engellenen sorguları izleme
 
-Yavaş veya uzun süre çalışan sorgular, aşırı kaynak tüketimi için katkıda bulunan ve engellenen sorguların sonucu olabilir. Engelleme nedeni, zayıf uygulama tasarımı, hatalı sorgu planlarına, kullanışlı dizinleri ve benzeri olmaması olabilir. Azure SQL veritabanı'nda geçerli kilitleme etkinliği hakkında bilgi almak için sys.dm_tran_locks görünümü kullanabilirsiniz. Örnek kod için bkz: [sys.dm_tran_locks (Transact-SQL)](https://msdn.microsoft.com/library/ms190345.aspx) SQL Server Books Online.
+Yavaş veya uzun süre çalışan sorgular aşırı kaynak tüketimine katkıda bulunabilir ve engellenen sorguların sonucu olabilir. Engellemenin nedeni kötü uygulama tasarımı, hatalı sorgu planları, faydalı dizinlerin bulunmaması vb. olabilir. Azure SQL veritabanınızdaki geçerli kilitleme etkinliği hakkında bilgi almak için sys. dm_tran_locks görünümünü kullanabilirsiniz. Örneğin, bkz. SQL Server Books Online 'da [sys. dm_tran_locks (Transact-SQL)](https://msdn.microsoft.com/library/ms190345.aspx) .
 
-### <a name="monitoring-query-plans"></a>Sorgu planlarına izleme
+### <a name="monitoring-query-plans"></a>Sorgu planlarını izleme
 
-Bir verimsiz bir sorgu planı, CPU tüketimi da artırabilir. Aşağıdaki örnekte [sys.dm_exec_query_stats](https://msdn.microsoft.com/library/ms189741.aspx) hangi sorgu toplu en çok CPU kullanan belirlemek için görüntüleme.
+Verimsiz bir sorgu planı, CPU tüketimini de artırabilir. Aşağıdaki örnek, hangi sorgunun en birikimli CPU 'YU kullandığını belirleyebilmek için [sys. dm_exec_query_stats](https://msdn.microsoft.com/library/ms189741.aspx) görünümünü kullanır.
 
     ```sql
     SELECT
@@ -735,4 +734,4 @@ Bir verimsiz bir sorgu planı, CPU tüketimi da artırabilir. Aşağıdaki örne
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-[SQL Database'e giriş](sql-database-technical-overview.md)
+[SQL veritabanı 'na giriş](sql-database-technical-overview.md)

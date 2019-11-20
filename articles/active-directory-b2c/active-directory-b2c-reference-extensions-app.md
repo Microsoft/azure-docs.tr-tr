@@ -7,15 +7,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 9/06/2017
+ms.date: 09/06/2017
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: d9fbceee8fb0e565df668406f09df27272318dd0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e5d38d8d791c6b932d8a28a898f2e2b80caff7ac
+ms.sourcegitcommit: cf438e4b4e351b64fd0320bf17cc02489e61406a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66509476"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67654065"
 ---
 # <a name="azure-ad-b2c-extensions-app"></a>Azure AD B2C: Uzantılar uygulaması
 
@@ -40,7 +40,7 @@ B2c-extensions-app yanlışlıkla sildiyseniz, kurtarma için 30 gününüz vard
 1. Siteye silinen uygulamayı geri yüklemek istediğiniz Azure AD B2C dizini için genel yönetici olarak oturum açın. Bu genel yönetici, aşağıdakine benzer bir e-posta adresi olmalıdır: `username@{yourTenant}.onmicrosoft.com`.
 1. Bir HTTP GET URL'sinde sorun `https://graph.windows.net/myorganization/deletedApplications` api-version ile 1.6 =. Bu işlem, tüm son 30 gün içinde silinmiş olan uygulamaları listeler.
 1. 'B2c-uzantısı-app' ve kopya ile adı başladığı listesinde uygulamanın bulur, `objectid` özellik değeri.
-1. Bir HTTP POST URL'sinde sorun `https://graph.windows.net/myorganization/deletedApplications/{OBJECTID}/restore`. Değiştirin `{OBJECTID}` URL'si ile bir kısmı `objectid` önceki adımdan. 
+1. Bir HTTP POST URL'sinde sorun `https://graph.windows.net/myorganization/deletedApplications/{OBJECTID}/restore`. Değiştirin `{OBJECTID}` URL'si ile bir kısmı `objectid` önceki adımdan.
 
 Artık yapabilmelisiniz [geri yüklenen uygulama görmek](#verifying-that-the-extensions-app-is-present) Azure portalında.
 

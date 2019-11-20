@@ -1,7 +1,7 @@
 ---
-title: Gereksinimleri - proje URL önizlemesi görüntülemek ve kullanın
+title: Kullanım ve görüntüleme gereksinimleri-proje URL 'SI önizlemesi
 titlesuffix: Azure Cognitive Services
-description: Proje URL'si Önizleme API uç noktası için gereksinimleri görüntülemek ve kullanın.
+description: Proje URL 'si önizleme API uç noktası için kullanımı ve görüntüleme gereksinimleri.
 services: cognitive-services
 author: mikedodaro
 manager: nitinme
@@ -10,16 +10,17 @@ ms.subservice: url-preview
 ms.topic: conceptual
 ms.date: 03/16/2018
 ms.author: rosh
-ms.openlocfilehash: 8078fe17ae3b282887f4bceb1bb10b34d6a007f4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 38707a0914a48b6a13f519d5e076457319363a92
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60832175"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707026"
 ---
-# <a name="project-url-preview-use-and-display-requirements"></a>Proje URL'si Önizleme kullanın ve gereksinimleri görüntüleme
+# <a name="project-url-preview-use-and-display-requirements"></a>Proje URL 'SI önizleme kullanımı ve görüntüleme gereksinimleri
 
-Yalnızca önizleme parçacıkları ve küçük resim görüntüleriyle köprülü son kullanıcı tarafından başlatılan URL sosyal medya, sohbet Robotu veya benzer teklifleri Paylaşımı kaynak sitelerini görüntülemek için proje URL'sini Önizleme verileri kullanın. Gerekir değil kopyalayın, saklamak veya proje URL'si Önizlemesi'nden aldığınız herhangi bir veri önbelleği. Web sitesi ya da içerik sahipleri alabileceğiniz önizlemelerini devre dışı bırakmak için tüm istekleri sahip olmanız gerekir.
+Yalnızca proje URL önizlemesindeki verileri, kaynak sitelerine köprü uygulanmış önizleme kod parçacıklarını ve küçük resim görüntülerini, sosyal medya, sohbet bot veya benzer tekliflerde Son Kullanıcı tarafından başlatılan URL paylaşımını görüntülemek için kullanın. Proje URL 'SI önizlemeden aldığınız verileri kopyalamamanız, depolamamanız veya önbelleğe almamanız gerekir. Web sitesi veya içerik sahiplerinden alabileceğiniz önizlemeleri devre dışı bırakmak için herhangi bir isteği dikkate almalısınız.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [URL Önizlemesi'ne genel bakış](overview.md)
+- [URL önizlemesine genel bakış](overview.md)

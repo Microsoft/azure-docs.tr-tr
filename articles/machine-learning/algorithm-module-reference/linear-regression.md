@@ -1,147 +1,146 @@
 ---
-title: 'Doğrusal regresyon: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Doğrusal regresyon modülü Azure Machine Learning hizmetinde bir doğrusal regresyon modeli kullanmak için bir deneme oluşturmak için kullanmayı öğrenin.
+title: 'Doğrusal regresyon: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Ardışık düzende kullanmak üzere doğrusal regresyon modeli oluşturmak için Azure Machine Learning doğrusal regresyon modülünü kullanmayı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 040f726a703d34a95bae7d5b7cdd766655c62a4e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 688bf923c07d9417b002b7cab6e3c0a0c8d20dae
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65029723"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73497740"
 ---
-# <a name="linear-regression-module"></a>Doğrusal regresyon Modülü
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+# <a name="linear-regression-module"></a>Doğrusal regresyon modülü
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Bir doğrusal regresyon modeli kullanmak için bir deneme oluşturmak için bu modülü kullanın.  Doğrusal regresyon, bir veya daha fazla bağımsız değişken ve sayısal sonucu veya bağımlı değişken arasında doğrusal bir ilişki kurmak çalışır. 
+İşlem hattında kullanılmak üzere doğrusal regresyon modeli oluşturmak için bu modülü kullanın.  Doğrusal regresyon bir veya daha fazla bağımsız değişken ile sayısal bir sonuç veya bağımlı değişken arasında doğrusal bir ilişki kurmaya çalışır. 
 
-Bir doğrusal regresyon yöntemi tanımlamak için bu modülü kullanın ve ardından etiketlenmiş bir veri kümesi kullanan bir modeli eğitin. Eğitilen modelin ardından tahminlerde bulunmak üzere kullanılabilir.
+Bu modülü, doğrusal bir regresyon yöntemi tanımlamak ve sonra etiketli bir veri kümesi kullanarak bir modeli eğitebilmeniz için kullanırsınız. Daha sonra eğitilen model, tahminleri yapmak için kullanılabilir.
 
 ## <a name="about-linear-regression"></a>Doğrusal regresyon hakkında
 
-Doğrusal regresyon machine learning'de benimsenen ve uydurur ve hata ölçmek için birçok yeni yöntem ile geliştirilmiş bir ortak istatistiksel yöntemidir. En temel anlamda regresyon sayısal hedefi tahmin anlamına gelir. Basit bir model için temel bir Tahmine dayalı görevi istediğinizde doğrusal regresyon yine de iyi bir seçimdir. Doğrusal regresyon, ayrıca de yüksek boyutlu, seyrek veri karmaşıklığı eksik kümeleri üzerinde çalışmaya eğilimi gösterir.
+Doğrusal regresyon, Machine Learning 'de benimsenen yaygın istatistiksel bir yöntemdir ve satır ve ölçü hatasına yönelik birçok yeni yöntemle geliştirilmiştir. En basit anlamda, regresyon bir sayısal hedefin tahminini ifade eder. Temel bir tahmine dayalı görev için basit bir model istediğinizde doğrusal regresyon hala iyi bir seçimdir. Doğrusal regresyon, yüksek boyutlu, karmaşıklık olmayan seyrek veri kümeleri üzerinde iyi çalışma eğilimi gösterir.
 
-Azure Machine Learning, regresyon modelleri, doğrusal regresyon yanı sıra çeşitli destekler. Ancak, "regresyon" terimi gevşek yorumlanabilir ve gerileme diğer araçlarla sağlanan bazı türleri desteklenmez.
+Azure Machine Learning, doğrusal gerileme ek olarak çeşitli gerileme modellerini destekler. Ancak, "gerileme" terimi gevşek olarak yorumlanamaz ve diğer araçlarda sunulan bazı gerileme türleri desteklenmez.
 
-+ Klasik regresyon problemi tek bir bağımsız değişken ve bağımlı bir değişken gerektirir. Bu adlandırılır *basit regresyon*.  Bu modül, basit bir regresyon destekler.
++ Klasik gerileme sorunu, tek bir bağımsız değişken ve bağımlı bir değişken içerir. Bu *basit gerileme*olarak adlandırılır.  Bu modül basit gerileme destekler.
 
-+ *Birden çok doğrusal regresyon* iki veya daha fazla bağımsız katkıda bulunan tek bir bağımsız değişkenin değişken içerir. İçinde birden fazla giriş tek bir sayısal sonucu tahmin etmek için kullanılan sorunları da verilir *çok değişkenli doğrusal regresyon*.
++ *Birden çok doğrusal gerileme* , tek bir bağımlı değişkene katkıda bulunan iki veya daha fazla bağımsız değişken içerir. Tek bir sayısal sonucu tahmin etmek için birden çok girişin kullanıldığı sorunlara çok *sayıda doğrusal regresyon*de denir.
 
-    **Doğrusal regresyon** modülü, bu sorunları çözebilir, çoğu diğer regresyon modülü gibi.
+    Bu sorunları diğer regresyon modüllerinin çoğunda olduğu gibi, **Doğrusal regresyon** modülü de çözebilir.
 
-+ *Birden çok etiket regresyon* tek bir modelde birden çok bağımlı değişkenler hakkında tahminde görevdir. Örneğin, birden çok etiket Lojistik regresyon, bir örnek için birden çok farklı etiketler atanabilir. (Bu bir tek sınıf değişkeni içinde birden çok düzeyi tahmin görevini farklıdır.)
++ *Çoklu etiket gerileme* , tek bir modelde birden çok bağımlı değişkeni tahmin etme görevleridir. Örneğin, çok etiketli lojistik regresyonda birden çok farklı etikete bir örnek atanabilir. (Bu, tek bir sınıf değişkeni içindeki birden çok düzeyi tahmin etme görevinden farklıdır.)
 
-    Bu tür bir gerileme, Azure Machine Learning'de desteklenmiyor. Birden fazla değişken tahmin etmek için tahmin etmek istediğiniz her bir çıktı için ayrı bir learner oluşturun.
+    Bu regresyon türü Azure Machine Learning desteklenmez. Birden çok değişkeni tahmin etmek için, tahmin etmek istediğiniz her bir çıktı için ayrı bir öğrenici oluşturun.
 
-Yıl boyunca istatistikçiler regresyon için giderek daha fazla gelişmiş yöntemleri geliştirme. Bu, doğrusal regresyon için bile geçerlidir. Bu modül hatası ölçmek ve regresyon satırın sığması için iki yöntemi destekler: normal kareler yöntemi ve bir gradyan düşüşü.
+İstatistikçilerin yıllar için, gerileme için giderek gelişmiş gelişmiş yöntemler geliştirmiştir. Bu, doğrusal regresyon için de geçerlidir. Bu modül, hatayı ölçmek ve gerileme satırına uyması için iki yöntemi destekler: normal en az kareler yöntemi ve gradyan tanımı.
 
-- **Gradyan düşüşü** model eğitim işleminin her adımında bir hata miktarı en aza indiren bir yöntemdir. Gradyan düşüşü birçok çeşidi vardır ve kendi en iyi duruma getirme çeşitli öğrenme sorunları için kapsamlı bir şekilde eğitim. Bu seçeneği seçerseniz **çözüm yöntemi**, adım boyutunu denetlemek için parametreleri çeşitli öğrenme oranı ayarlayın ve VS. Bu seçenek, aynı zamanda bir tümleşik bir parametre tarama kullanımını destekler.
+- **Gradyan tanımı** , model eğitimi sürecinin her adımında hata miktarını en aza indiren bir yöntemdir. Gradara üzerinde birçok çeşitte ve çeşitli öğrenme sorunları için en iyi duruma getirme işlemi, kapsamlı araştırdık. **Çözüm yöntemi**için bu seçeneği belirlerseniz, adım boyutunu, öğrenme oranını ve benzerlerini denetlemek için çeşitli parametreler ayarlayabilirsiniz. Bu seçenek ayrıca tümleşik bir parametre süpürme kullanımını destekler.
 
-- **Sıradan kareler** doğrusal regresyon en sık kullanılan teknikleri biridir. Örneğin, kareler çözümleme araç takımı Microsoft Excel için kullanılan yöntemin olur.
+- **Normal en az kareler** , doğrusal Regresyondaki en yaygın olarak kullanılan tekniklerin biridir. Örneğin, en az kare, Microsoft Excel için analiz araç takımı 'nda kullanılan yöntemidir.
 
-    Sıradan kareler karesi alınmış hata en aza indirerek model uyarlama ve gerçek değer mesafe tahmin edilen satırına karesini toplamı olarak hata hesaplar kaybı işlevi başvurur. Bu yöntem, giriş ve bağımlı değişkenin arasında güçlü bir doğrusal ilişki varsayar.
+    Normal en az kareler, hatayı gerçek değerden tahmin edilen satıra kadar olan uzaklık karenin toplamı olarak hesaplayan kayıp işlevini ifade eder ve kare içinde hatayı en aza indirerek modele uyar. Bu yöntem, girişler ve bağımlı değişken arasında güçlü doğrusal bir ilişki olduğunu varsayar.
 
-## <a name="configure-linear-regression"></a>Doğrusal regresyon yapılandırın
+## <a name="configure-linear-regression"></a>Doğrusal regresyon yapılandırma
 
-Bu modül, farklı seçeneklerle bir regresyon modeli sığdırma için iki yöntemi destekler:
+Bu modül, farklı seçeneklerle bir gerileme modeline sığdırma için iki yöntemi destekler:
 
-+ [Çevrimiçi bir gradyan düşüşü kullanarak bir regresyon modeli oluşturun](#bkmk_GradientDescent)
++ [Çevrimiçi degradeyi kullanarak regresyon modeli oluşturma](#bkmk_GradientDescent)
 
-    Gradyan düşüşü, daha karmaşık olan veya çok küçük bir eğitim veri değişken sayısı verilen olan modeller için daha iyi bir kaybı işlevidir.
-
-
-
-+ [Sıradan kareler kullanarak bir regresyon modeli Sığdır](#bkmk_OrdinaryLeastSquares)
-
-    Küçük veri kümeleri için sıradan kareler seçmek en iyisidir. Bu, Excel'e benzer sonuçlar vermesi gerekir.
-
-## <a name="bkmk_OrdinaryLeastSquares"></a> Sıradan kareler kullanarak bir regresyon modeli oluşturun
-
-1. Ekleme **doğrusal regresyon modeli** denemenizde arabirimi modülü.
-
-    Bu modülde bulabilirsiniz **Machine Learning** kategorisi. Genişletin **modeli Başlat**, genişletin **regresyon**ve ardından sürükleyin **doğrusal regresyon modeli** denemenizi modülü.
-
-2. İçinde **özellikleri** bölmesinde, **çözüm yöntemi** açılan listesinden **sıradan kareler**. Bu seçenek, regresyon çizgisini bulmak için kullanılan hesaplama yöntemini belirtir.
-
-3. İçinde **L2 Kurallaştırma ağırlık**, ağırlık L2 Kurallaştırma için kullanılacak değeri yazın. Overfitting önlemek için sıfır olmayan bir değer kullanmanızı öneririz.
-
-     Düzenli hale getirme modeli sığdırma nasıl etkilediği hakkında daha fazla bilgi için bu makaleye bakın: [L1 ve Machine Learning için L2 düzenleme](https://msdn.microsoft.com/magazine/dn904675.aspx)
-
-4. Seçeneğini **INCLUDE ıntercept terimi**, kesme noktası için kullanım dönemi görüntülemek istiyorsanız.
-
-    Regresyon formülü gözden geçirmeniz gerekmiyorsa, bu seçeneğin işaretini kaldırın.
-
-5. İçin **rastgele sayı doldurma**, isteğe bağlı olarak modeli tarafından kullanılan rastgele sayı üreticisinin sağlamak için bir değer yazın.
-
-    Bir çekirdek değerini kullanarak, farklı aynı denemenin çalıştırmaları arasında aynı sonuçları korumak istiyorsanız kullanışlıdır. Aksi takdirde, varsayılan sistem saatinden bir değer kullanmaktır.
+    Gradyan tanımı, daha karmaşık olan veya çok az eğitim verilerine sahip olan modeller için daha iyi bir kayıp işlevidir.
 
 
-7. Ekleme [modeli eğitme](./train-model.md) modülü, denemenize ve etiketlenmiş bir veri kümesine bağlanın.
 
-8. Denemeyi çalıştırın.
++ [Normal en az kare kullanarak regresyon modelini sığdırma](#bkmk_OrdinaryLeastSquares)
 
-## <a name="results-for-ordinary-least-squares-model"></a>Sıradan kareler model için sonuçları
+    Küçük veri kümeleri için en iyisi, normal en az kare seçer. Bu, Excel 'e benzer sonuçlar vermelidir.
 
-Alıştırma tamamlandıktan sonra:
+## <a name="bkmk_OrdinaryLeastSquares"></a>Normal en az kare kullanarak regresyon modeli oluşturma
 
-+ Modelin parametreleri görüntülemek için trainer çıkış sağ tıklayıp **Görselleştir**.
+1. Tasarımcıdaki ardışık düzene **Doğrusal regresyon modeli** modülünü ekleyin.
 
-+ Tahminde bulunmak için eğitilen modele bağlanmak [Score Model](./score-model.md) modülüyle bir veri kümesi yeni değerler. 
+    Bu modülü **Machine Learning** kategorisinde bulabilirsiniz. **Modeli Başlat**' ı genişletin, **regresyon**' i genişletin ve sonra **Doğrusal regresyon modeli** modülünü işlem hattınızla sürükleyin.
+
+2. **Özellikler** bölmesinde, **çözüm yöntemi** açılan listesinde, **normal en az kareler**' i seçin. Bu seçenek, regresyon çizgisini bulmak için kullanılan hesaplama yöntemini belirtir.
+
+3. **L2 düzenleme ağırlığı**' nda, L2 düzenleme için ağırlık olarak kullanılacak değeri yazın. Fazla sığdırmayı önlemek için sıfır olmayan bir değer kullanmanızı öneririz.
+
+     Düzenleme model sığdırmayı nasıl etkilediği hakkında daha fazla bilgi edinmek için şu makaleye bakın: [L1 ve L2 düzenleme Machine Learning](https://msdn.microsoft.com/magazine/dn904675.aspx)
+
+4. Kesme terimini görüntülemek istiyorsanız, **kesme terimini Ekle**seçeneğini belirleyin.
+
+    Regresyon formülünü gözden geçirmeniz gerekmiyorsa bu seçeneğin işaretini kaldırın.
+
+5. **Rastgele sayı**çekirdeği için, model tarafından kullanılan rastgele sayı oluşturucuyu temel alarak isteğe bağlı olarak bir değer yazabilirsiniz.
+
+    Aynı işlem hattının farklı çalıştırmaları üzerinde aynı sonuçların bakımını yapmak istiyorsanız, çekirdek değeri kullanmak faydalıdır. Aksi takdirde, varsayılan olarak sistem saatinden bir değer kullanılır.
 
 
-## <a name="bkmk_GradientDescent"></a> Çevrimiçi bir gradyan düşüşü kullanarak bir regresyon modeli oluşturun
+7. İşlem hattınızla [model eğitimi](./train-model.md) modülünü ekleyin ve etiketli bir veri kümesini bağlayın.
 
-1. Ekleme **doğrusal regresyon modeli** denemenizde arabirimi modülü.
+8. İşlem hattını çalıştırma.
 
-    Bu modülde bulabilirsiniz **Machine Learning** kategorisi. Genişletin **modeli Başlat**, genişletme **regresyon**, sürükleyin **doğrusal regresyon modeli** denemenizi Modülü
+## <a name="results-for-ordinary-least-squares-model"></a>Normal en az kareler modelinin sonuçları
 
-2. İçinde **özellikleri** bölmesinde, **çözüm yöntemi** açılan listesinde **çevrimiçi bir gradyan düşüşü** regresyon çizgisini bulmak için kullanılan hesaplama yöntemi olarak.
+Eğitim tamamlandıktan sonra:
 
-3. İçin **Oluştur trainer modu**, veya önceden tanımlanmış bir parametre kümesi ile modeli eğitmek istediğiniz bir parametre tarama kullanarak model en iyi duruma getirmek isteyip istemediğinizi belirtin.
++ Modelin parametrelerini görüntülemek için, eğitmen çıktısına sağ tıklayın ve **Görselleştir**' i seçin.
 
-    + **Tek bir parametre**: Nasıl doğrusal regresyon ağı yapılandırmak istediğinizi biliyorsanız, bağımsız değişken olarak belirli bir değerler kümesi sağlayabilirsiniz.
++ Tahmine dayalı hale getirmek için eğitilen modeli, yeni değerlerin bir veri kümesiyle birlikte [puan modeli](./score-model.md) modülüne bağlayın. 
+
+
+## <a name="bkmk_GradientDescent"></a>Çevrimiçi degradeyi kullanarak regresyon modeli oluşturma
+
+1. Tasarımcıdaki ardışık düzene **Doğrusal regresyon modeli** modülünü ekleyin.
+
+    Bu modülü **Machine Learning** kategorisinde bulabilirsiniz. **Modeli Başlat**' ı genişletin, **regresyon**' i genişletin ve **Doğrusal regresyon modeli** modülünü ardışık düzene sürükleyin
+
+2. **Özellikler** bölmesinde, **çözüm yöntemi** açılan listesinde, regresyon çizgisini bulmak için kullanılan hesaplama yöntemi olarak **çevrimiçi gradyan** ' ı seçin.
+
+3. **Oluşturma modu**için, modeli önceden tanımlanmış bir parametre kümesiyle eğmek istediğinizi veya bir parametre süpürme kullanarak modeli iyileştirmek isteyip istemediğinizi belirtin.
+
+    + **Tek parametre**: doğrusal regresyon ağını nasıl yapılandırmak istediğinizi biliyorsanız bağımsız değişken olarak belirli bir değer kümesi sağlayabilirsiniz.
 
    
-4. İçin **öğrenme oranı**, stokastik iyileştirici için öğrenme oranı belirtin.
+4. **Öğrenme oranı**için, stochastik gradyan için en iyi duruma getirme için ilk öğrenme oranını belirtin.
 
-5. İçin **eğitim dönemlerinde sayısı**, algoritma kaç kez gösteren bir değer örneklerle yineleme türü. Az sayıda örnek veri kümeleri için bu sayı yakınsama ulaşana kadar büyük olmalıdır.
+5. **Eğitim dönemlerinde sayısı**için, algoritmanın örneklerle kaç kez yineolmayacağını belirten bir değer yazın. Az sayıda örneğe sahip veri kümelerinde bu sayı yakınsama için büyük olmalıdır.
 
-6. **Özellikleri Normalleştir**: Modeli eğitmek için kullanılan sayısal verileri zaten normalleştirilmiş, bu seçeneğin işaretini kaldırın. Varsayılan olarak, tüm sayısal girişler 0 ile 1 arasında bir aralığa modülü normalleştirir.
+6. **Özellikleri Normalleştir**: modeli eğleştirmek için kullanılan sayısal verileri zaten normalleştirmeniz durumunda bu seçeneğin seçimini kaldırabilirsiniz. Varsayılan olarak, modül tüm sayısal girdileri 0 ile 1 arasında bir aralığa normalleştirir.
 
     > [!NOTE]
     > 
-    > Yeni verilerle Puanlama için kullanılan aynı normalleştirme yöntemi uygulanacağını unutmayın.
+    > Puanlama için kullanılan yeni verilere aynı normalleştirme yöntemini uygulamayı unutmayın.
 
-7. İçinde **L2 Kurallaştırma ağırlık**, ağırlık L2 Kurallaştırma için kullanılacak değeri yazın. Overfitting önlemek için sıfır olmayan bir değer kullanmanızı öneririz.
+7. **L2 düzenleme ağırlığı**' nda, L2 düzenleme için ağırlık olarak kullanılacak değeri yazın. Fazla sığdırmayı önlemek için sıfır olmayan bir değer kullanmanızı öneririz.
 
-    Düzenli hale getirme modeli sığdırma nasıl etkilediği hakkında daha fazla bilgi için bu makaleye bakın: [L1 ve Machine Learning için L2 düzenleme](https://msdn.microsoft.com/magazine/dn904675.aspx)
-
-
-9. Seçeneğini **azaltma öğrenme oranı**yinelemeler ilerlemesi azaltmak için öğrenme oranı istiyorsanız.  
-
-10. İçin **rastgele sayı doldurma**, isteğe bağlı olarak modeli tarafından kullanılan rastgele sayı üreticisinin sağlamak için bir değer yazın. Bir çekirdek değerini kullanarak, farklı aynı denemenin çalıştırmaları arasında aynı sonuçları korumak istiyorsanız kullanışlıdır.
+    Düzenleme model sığdırmayı nasıl etkilediği hakkında daha fazla bilgi edinmek için şu makaleye bakın: [L1 ve L2 düzenleme Machine Learning](https://msdn.microsoft.com/magazine/dn904675.aspx)
 
 
-12. Etiketlenmiş bir veri kümesi ve eğitim modüllerinden birini ekleyin.
+9. Öğrenme oranının yineleme ilerleme durumunu azaltmasını istiyorsanız, **öğrenme oranını azalt**seçeneğini belirleyin.  
 
-    Bir parametre tarama kullanmıyorsanız kullanın [modeli eğitme](train-model.md) modülü.
+10. **Rastgele sayı**çekirdeği için, model tarafından kullanılan rastgele sayı oluşturucuyu temel alarak isteğe bağlı olarak bir değer yazabilirsiniz. Aynı işlem hattının farklı çalıştırmaları üzerinde aynı sonuçların bakımını yapmak istiyorsanız, çekirdek değeri kullanmak faydalıdır.
 
-13. Denemeyi çalıştırın.
 
-## <a name="results-for-online-gradient-descent"></a>Çevrimiçi bir gradyan düşüşü sonuçları
+12. Etiketli bir veri kümesi ve eğitim modülleriyle bir tane ekleyin.
 
-Alıştırma tamamlandıktan sonra:
+    Bir parametre süpürme kullanmıyorsanız, [model eğitme](train-model.md) modülünü kullanın.
 
-+ Tahminde bulunmak için eğitilen modele bağlanmak [Score Model](./score-model.md) modülü, yeni giriş verileriyle birlikte.
+13. İşlem hattını çalıştırma.
+
+## <a name="results-for-online-gradient-descent"></a>Çevrimiçi gradyan sonuçları
+
+Eğitim tamamlandıktan sonra:
+
++ Tahmine dayalı hale getirmek için eğitilen modeli, yeni giriş verileriyle birlikte [puan modeli](./score-model.md) modülüne bağlayın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

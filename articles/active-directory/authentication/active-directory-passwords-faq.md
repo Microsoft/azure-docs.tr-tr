@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory SSS - Self Servis parola sıfırlama
-description: Sık sorulan sorular hakkında Azure AD Self Servis parola sıfırlama
+title: Self servis parola sıfırlama hakkında SSS-Azure Active Directory
+description: Azure AD self servis parola sıfırlama hakkında sık sorulan sorular
 services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
@@ -11,269 +11,269 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f98b72d9b5e59155bb7215181fd1ecd336126ee6
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 4001f3c88b676a2786159946a8981823e18ea5f6
+ms.sourcegitcommit: 32242bf7144c98a7d357712e75b1aefcf93a40cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67440965"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70274411"
 ---
 # <a name="password-management-frequently-asked-questions"></a>Parola yönetimi hakkında sık sorulan sorular
 
-Bazı sık sorulan sorular (SSS) parola sıfırlama için ilgili her şey için aşağıda verilmiştir.
+Aşağıda, parola sıfırlama ile ilgili tüm şeyler için sık sorulan bazı sorular (SSS) verilmiştir.
 
-Azure Active Directory (Azure AD) hakkında genel bir sorum varsa ve burada cevaplanmamış, Self Servis parola sıfırlama (SSPR), sorabileceğiniz topluluktan Yardım almak için üzerinde [Azure AD Forumu](https://social.msdn.microsoft.com/Forums/en-US/home?forum=WindowsAzureAD). Mühendisler, ürün yöneticileri, MVP'ler ve sizin gibi BT uzmanları, topluluk üyeleri içerir.
+Burada yanıtlanmayan Azure Active Directory (Azure AD) ve self servis parola sıfırlama (SSPR) hakkında genel bir sorunuz varsa, [Azure AD Forumu](https://social.msdn.microsoft.com/Forums/en-US/home?forum=WindowsAzureAD)hakkında yardım almak için topluluğa soru sorabilirsiniz. Topluluk üyeleri; mühendisler, ürün yöneticileri, MVP 'ler ve BT uzmanlarına yönelik BT profesyonellerini içerir.
 
-Bu SSS, aşağıdaki bölümlere ayrılmıştır:
+Bu SSS aşağıdaki bölümlere ayrılır:
 
-* [Parola hakkında sorular sıfırlama kaydı](#password-reset-registration)
+* [Parola sıfırlama kaydı hakkında sorular](#password-reset-registration)
 * [Parola sıfırlama ile ilgili sorular](#password-reset)
 * [Parola değiştirme hakkında sorular](#password-change)
 * [Parola yönetimi raporları hakkında sorular](#password-management-reports)
-* [Parola geri yazma hakkında sorular](#password-writeback)
+* [Parola geri yazma ile ilgili sorular](#password-writeback)
 
 ## <a name="password-reset-registration"></a>Parola sıfırlama kaydı
 
-* **S:  Kullanıcılarımın parola sıfırlama verileri kendi kaydedebilir miyim?**
+* **S:  Kullanıcılarım kendi parola sıfırlama verilerini kaydedebilirler mi?**
 
-  > **C:** Evet. Parola sıfırlama etkinleştirildi ve lisansına sahip olduğunuz sürece, kullanıcılar parola sıfırlama kayıt portalı gidebilirsiniz (https://aka.ms/ssprsetup) kimlik doğrulama bilgilerini kaydetmek için. Kullanıcılar ayrıca erişim panelinden kaydetme (https://myapps.microsoft.com). Erişim panelinden kaydedilecek için ihtiyaç duydukları kendi profil resminizi seçin, **profili**ve ardından **parola sıfırlama için kaydolmasını** seçeneği.
+  > **C:** Evet. Parola sıfırlama etkin olduğu ve lisansladığı sürece, kullanıcılar, kimlik doğrulama bilgilerini kaydetmek https://aka.ms/ssprsetup) için parola sıfırlama kayıt portalına gidebilir. Kullanıcılar ayrıca erişim paneli (https://myapps.microsoft.com). Erişim paneli 'ne kaydolmak için profil resmini seçmesini, **profil**' i ve ardından **parola sıfırlama için kaydol** seçeneğini belirlemeniz gerekir.
   >
   >
-* **S:  Parola'etkin değilse sıfırlamak için bir grup ve herkes için benim kullanıcılar gerekli yeniden kaydetmeniz etkinleştirmeye karar?**
+* **S:  Bir grup için parola sıfırlamayı etkinleştirdiğimde ve Kullanıcılarım için izin verme izni varsa, Kullanıcılarım için yeniden kayıt gerekli midir?**
 
-  > **C:** Hayır. Kimlik doğrulama verilerini doldurulmuş kullanıcılar yeniden kaydolmak için gerekli değildir.
+  > **C:** Hayır. Kimlik doğrulama verilerinin doldurulduğu kullanıcıların yeniden kaydedilmesi gerekmez.
   >
   >
-* **S:  Kullanıcılarım adına parola sıfırlama verileri tanımlamak?**
+* **S:  Kullanıcılarım adına parola sıfırlama verilerini tanımlayabilir miyim?**
 
-  > **C:** Evet, PowerShell, Azure AD Connect ile bunu yapabilirsiniz [Azure portalında](https://portal.azure.com), veya [Microsoft 365 Yönetim merkezini](https://admin.microsoft.com). Daha fazla bilgi için [veri kullanılan Azure AD Self Servis parola sıfırlama](howto-sspr-authenticationdata.md).
+  > **C:** Evet, bunu Azure AD Connect, PowerShell, [Azure Portal](https://portal.azure.com)veya [Microsoft 365 Yönetim Merkezi](https://admin.microsoft.com)ile yapabilirsiniz. Daha fazla bilgi için bkz. [Azure AD self servis parola sıfırlama tarafından kullanılan veriler](howto-sspr-authenticationdata.md).
   >
   >
-* **S:  Verileri şirket içi güvenlik sorusunun eşitleyebilirim?**
+* **S:  Şirket içinden güvenlik soruları için verileri eşitleyebilir miyim?**
 
-  > **C:** Hayır, bu bugün mümkün değildir.
+  > **C:** Hayır, bu, bugün mümkün değildir.
   >
   >
-* **S:  Kullanıcılar diğer kullanıcılar bu verileri göremez bir şekilde veri kaydedebilir miyim?**
+* **S:  Kullanıcılarım, verileri diğer kullanıcıların göremez bu şekilde kaydedebilir misiniz?**
 
-  > **C:** Evet. Kullanıcılar kaydettiğinizde parola kullanarak verileri sıfırlama kayıt portalı, verileri yalnızca genel Yöneticiler ve kullanıcı için görünür olan özel kimlik doğrulama alanları kaydedilir.
+  > **C:** Evet. Kullanıcılar, parola sıfırlama kayıt portalını kullanarak veri kaydettirebilir, veriler yalnızca genel Yöneticiler ve Kullanıcı için görünür olan özel kimlik doğrulama alanlarına kaydedilir.
   >
   >
-* **S:  Kullanıcılarımın parola sıfırlama kullanabilmeniz için önce kaydedilmesi gerekir mi?**
+* **S:  Kullanıcılarınızın parola sıfırlamayı kullanabilmesi için kaydolmaları gerekir mi?**
 
-  > **C:** Hayır. Kendi adınıza yeterli kimlik doğrulama bilgilerini tanımlarsanız, kullanıcıların kaydetmek zorunda kalmaması. Uygun alanları dizinde depolanan verileri doğru şekilde biçimlendirildiğini sürece parola sıfırlama işleminin çalıştığı.
+  > **C:** Hayır. Adına yeterli kimlik doğrulama bilgileri tanımlarsanız, kullanıcıların kaydolması gerekmez. Parola sıfırlama, dizinde uygun alanlarda depolanan verileri doğru şekilde biçimlendirmiş olduğunuz sürece işe yarar.
   >
   >
-* **S:  Eşitleme veya miyim kullanıcılar adına kimlik doğrulama telefonu, kimlik doğrulama e-posta veya alternatif kimlik doğrulama telefon alanlarını ayarlayın?**
+* **S:  Kimlik doğrulama telefonunu, kimlik doğrulama e-postasını veya diğer kimlik doğrulama telefon alanlarını Kullanıcılarım adına eşitleyebilir veya ayarlayabilir miyim?**
 
-  > **C:** Bir genel yönetici tarafından ayarlanabilir alanlar makalesinde tanımlanan [SSPR veri gereksinimleri](howto-sspr-authenticationdata.md).
+  > **C:** Genel yönetici tarafından ayarlanamayacak alanlar [SSPR veri gereksinimleri](howto-sspr-authenticationdata.md)makalesinde tanımlanmıştır.
   >
   >
-* **S:  Kayıt portalı kullanıcılarımın göstermek için hangi seçeneklerin nasıl belirliyor?**
+* **S:  Kayıt portalı, Kullanıcılarımı hangi seçenekleri gösterecek şekilde nasıl belirlenir?**
 
-  > **C:** Parola sıfırlama kayıt portalı, kullanıcılarınız için etkinleştirdiğiniz yalnızca yönelik seçenekleri gösterir. Bu seçenekler altında bulunan **kullanıcı parolası sıfırlama İlkesi** dizininizin bölüm **yapılandırma** sekmesi. Güvenlik sorularını etkinleştirmezseniz, örneğin, ardından kullanıcılar için bu seçenek kaydedilecek yükümlü değiliz.
+  > **C:** Parola sıfırlama kayıt portalı, yalnızca kullanıcılarınız için etkinleştirdiğiniz seçenekleri gösterir. Bu seçenekler, dizininizin **Yapılandır** sekmesinin **Kullanıcı parolası sıfırlama ilkesi** bölümünde bulunur. Örneğin, güvenlik sorularını etkinleştirmezseniz kullanıcılar bu seçeneğe kaydolayamaz.
   >
   >
-* **S:  Ne zaman bir kullanıcı olarak kabul edilir kayıtlı?**
+* **S:  Kullanıcı ne zaman kayıtlı olarak kabul edilir?**
 
-  > **C:** Bir kullanıcı isteneceği zaman SSPR için kayıtlı olarak kabul edilir en az **sıfırlamak için gereken yöntemlerin sayısı** , ayarladığınız parolayı [Azure portalında](https://portal.azure.com).
+  > **C:** Bir Kullanıcı, [Azure Portal](https://portal.azure.com)ayarlamış olduğunuz bir parolayı **sıfırlamak Için gereken yöntem sayısını** en az kaydettiklerinde SSPR için kayıtlı olarak kabul edilir.
   >
   >
 
 ## <a name="password-reset"></a>Parola sıfırlama
 
-* **S:  Kullanıcılar birden çok kısa bir süre içinde bir parola sıfırlama girişimlerine karşı engelliyor mu?**
+* **S:  Kullanıcıların, bir parolayı kısa bir süre içinde birden çok kez sıfırlamasına engel misiniz?**
 
-  > **C:** Evet, kötüye korumak için parola sıfırlamayı yerleşik güvenlik özellikleri de vardır. 
+  > **C:** Evet, parola sıfırlamanın kötüye kullanılmasına karşı korunması için yerleşik güvenlik özellikleri vardır. 
   >
-  > Kullanıcılar, bunlar için 24 kilitli önce bir 24 saatlik süre içinde yalnızca beş parola sıfırlama girişimlerine deneyebilirsiniz. 
+  > Kullanıcılar 24 saat boyunca kilitlenmeden önce, 24 saat içinde yalnızca beş parola sıfırlama denemesi deneyebilir. 
   >
-  > Kullanıcılar, bir telefon numarası doğrulama, bir SMS göndermek veya güvenlik sorularını ve yanıtlarını önce bunlar için 24 kilitli bir saat içinde yalnızca beş kez doğrulamak deneyebilirsiniz. 
+  > Kullanıcılar bir telefon numarasını doğrulamaya, SMS gönderebilecek veya güvenlik sorularını ve yanıtlarını 24 saat boyunca kilitlerinden önce bir saat içinde yalnızca beş kez doğrulamaya çalışabilir. 
   >
-  > Kullanıcılar, en fazla 10 kez bunlar 24 saat için kilitli önce 10 dakikalık bir süre içinde bir e-posta gönderebilir.
+  > Kullanıcılar, 24 saat boyunca kilitlenmeden önce 10 dakikalık bir süre içinde en fazla 10 kez e-posta gönderebilir.
   >
-  > Sayaç, bir kullanıcının parolasını sıfırlar sonra sıfırlanır.
+  > Kullanıcı parolasını sıfırladığında sayaçlar sıfırlanır.
   >
   >
-* **S:  Bir e-posta, SMS veya telefon görüşmesi parola sıfırlaması almak için ne kadar beklemeli midir?**
+* **S:  Parola sıfırlamalarından e-posta, SMS veya telefon araması almayı ne kadar beklemeliyim?**
 
-  > **C:** İçindeki e-posta, SMS mesajları ve telefon aramaları bir dakikadan ulaşacak. 5-20 saniye normal bir durumdur.
-  > Bu zaman çerçevesinde bildirimini almazsanız:
-  > * Klasörünüzü kontrol edin.
-  > * Numarası veya e-posta iletişim kurulan bir beklediğiniz olup olmadığını denetleyin.
-  > * Kimlik doğrulama verileri dizine doğru olup olmadığını denetleyin biçimlendirilmiş, örneğin, + 1 4255551234 veya *kullanıcı\@contoso.com*. 
-* **S:  Parola sıfırlamada hangi dilleri destekleniyor mu?**
+  > **C:** E-postaların, SMS iletilerinin ve telefon aramalarının bir dakika içinde gelmesi gerekir. Normal durum 5 ila 20 saniyedir.
+  > Bu zaman çerçevesinde bildirim almazsanız:
+  > * Önemsiz klasörünüzü denetleyin.
+  > * İletişim kurulan numaranın veya e-postanın beklediğinizi doğrulayın.
+  > * Dizindeki kimlik doğrulama verilerinin doğru biçimlendirildiğinden emin olun, örneğin + 1 4255551234 veya *Kullanıcı\@contoso.com*. 
+* **S:  Parola sıfırlama hangi dilleri destekler?**
 
-  > **C:** Kullanıcı Arabirimi, parola sıfırlama sesli aramalar ve SMS mesajları Office 365'te desteklenen dillerde yerelleştirilmiş.
+  > **C:** Parola sıfırlama kullanıcı arabirimi, SMS iletileri ve sesli çağrılar, Office 365 ' de desteklenen dillerde yerelleştirilir.
   >
   >
-* **S:  Kuruluş ayarlarım, parola sıfırlama deneyiminde hangi bölümlerinin markalı öğeleri dizinimdeki marka sekmesinde yapılandırma kullanıcının?**
+* **S:  Dizin yapılandırma sekmesimde kurumsal marka öğelerini ayarlandığımda, parola sıfırlama deneyiminin hangi bölümleri markalı alır?**
 
-  > **C:** Parola sıfırlama portalı, kuruluşunuzun logosu görünür ve "yöneticinize başvurun" bağlantısı, bir özel e-posta veya URL işaret edecek şekilde yapılandırmanıza olanak tanır. Parola sıfırlama tarafından gönderilen e-posta, e-postanın gövdesinde, kuruluşunuzun logosu, renk ve adını içerir ve bu belirli ad için ayarlardan özelleştirilebilir.
+  > **C:** Parola sıfırlama portalı, kuruluşunuzun logosunu gösterir ve özel bir e-posta veya URL 'yi işaret etmek için "yöneticinize başvurun" bağlantısını yapılandırmanıza olanak tanır. Parola sıfırlama tarafından gönderilen herhangi bir e-posta, kuruluşunuzun logosu, renkleri ve adını e-posta gövdesinde içerir ve bu belirli bir ada ait ayarlardan özelleştirilir.
   >
   >
-* **S:  Kullanıcılarım parolalarını sıfırlamak için yapılması gerekenler hakkında bilgilendirme nasıl?**
+* **S:  Kullanıcılarımı parolalarını sıfırlamamak üzere nereden gönderebilirim?**
 
-  > **C:** Öneri bazılarını deneyin bizim [SSPR dağıtım](howto-sspr-deployment.md#communications-plan) makalesi.
+  > **C:** [SSPR dağıtım](howto-sspr-deployment.md#communications-plan) makalemizden bazı önerilerden bazılarını deneyin.
   >
   >
-* **S:  Bu sayfa bir mobil CİHAZDAN kullanabilir miyim?**
+* **S:  Bu sayfayı bir mobil cihazdan kullanabilir miyim?**
 
-  > **C:** Evet, bu sayfayı mobil cihazlarda çalışır.
+  > **C:** Evet, Bu sayfa mobil cihazlarda çalışmaktadır.
   >
   >
-* **S:  Kullanıcıların parolalarını sıfırladığında yerel Active Directory hesaplarının kilidini açma destekliyorsunuz?**
+* **S:  Kullanıcılar parolalarını sıfırlarladıktan sonra yerel Active Directory hesaplarının kilidinin açılmasını destekliyor musunuz?**
 
-  > **C:** Evet. Azure AD Connect parola geri yazma dağıttıysanız, kullanıcı parolalarını sıfırlar, yöneticiler parolalarını sıfırladığında bu kullanıcı hesabının kilidi otomatik olarak kaldırılır.
+  > **C:** Evet. Kullanıcı parolasını sıfırladığında, parola geri yazma işlemi Azure AD Connect aracılığıyla dağıtılmışsa, bu kullanıcının hesabı, parolasını sıfırladığında otomatik olarak açılır.
   >
   >
-* **S:  Parola sıfırlama doğrudan my kullanıcının masaüstü oturum açma deneyiminin içinde nasıl tümleştirebilirim?**
+* **S:  Parola sıfırlamayı doğrudan kullanıcının masaüstü oturum açma deneyimiyle nasıl tümleştirebilirim?**
 
-  > **C:** Bir Azure AD Premium müşterisiyseniz, Microsoft Identity Manager'ı hiçbir ek ücret ödemeden yükleyin ve şirket içi parola sıfırlama çözümü dağıtın.
+  > **C:** Azure AD Premium müşteriyseniz, ek ücret ödemeden Microsoft Identity Manager yükleyebilir ve şirket içi parola sıfırlama çözümünü dağıtabilirsiniz.
   >
   >
-* **S:  Farklı yerel ayarlar için farklı güvenlik sorularını ayarlayabilirim?**
+* **S:  Farklı yerel ayarlar için farklı güvenlik soruları ayarlayabilir miyim?**
 
-  > **C:** Hayır, bu bugün mümkün değildir.
+  > **C:** Hayır, bu, bugün mümkün değildir.
   >
   >
-* **S:  Güvenlik soruları kimlik doğrulama seçeneği için ne kadar fazla soruyu yapılandırabilirim?**
+* **S:  Güvenlik soruları kimlik doğrulama seçeneği için kaç soru yapılandırabilirim?**
 
-  > **C:** En fazla 20 özel güvenlik soruları, yapılandırabileceğiniz [Azure portalında](https://portal.azure.com).
+  > **C:** [Azure Portal](https://portal.azure.com)en fazla 20 özel güvenlik sorusu yapılandırabilirsiniz.
   >
   >
-* **S:  Güvenlik sorularını ne olabilir?**
+* **S:  Güvenlik soruları ne kadar süreyle olabilir?**
 
-  > **C:** Güvenlik sorularını 3 ila 200 karakter uzunluğunda olabilir.
+  > **C:** Güvenlik soruları 3 ile 200 karakter uzunluğunda olabilir.
   >
   >
-* **S:  Güvenlik sorularını yanıtlar ne olabilir?**
+* **S:  Güvenlik soruları için ne kadar yanıt olabilir?**
 
-  > **C:** Yanıtlar, 3-40 karakter uzunluğunda olabilir.
+  > **C:** Yanıtlar 3 ile 40 karakter uzunluğunda olabilir.
   >
   >
-* **S:  Yinelenen reddedilen güvenlik sorularının yanıtlarının misiniz?**
+* **S:  Güvenlik sorularının yinelenen yanıtları reddedildi mi?**
 
-  > **C:** Evet, yinelenen güvenlik sorularının yanıtlarının reddeder.
+  > **C:** Evet, güvenlik sorularına yinelenen yanıtları reddeyoruz.
   >
   >
-* **S:  Bir kullanıcı birden çok kez aynı Güvenlik sorusu kaydedebilir miyim?**
+* **S:  Kullanıcı aynı güvenlik sorusunu birden çok kez kaydedebilir mi?**
 
-  > **C:** Hayır. Bir kullanıcı belirli bir sorunun kaydettikten sonra bu soruyu ikinci kez kayda alınamıyor.
+  > **C:** Hayır. Bir Kullanıcı belirli bir soruyu kaydettikten sonra, bu soruya ikinci kez kaydolamazlar.
   >
   >
-* **S:  Güvenlik sorusu kaydı için en az bir sınır belirleyin ve sıfırlamak mümkündür?**
+* **S:  Kayıt ve sıfırlama için en düşük güvenlik soruları sınırını ayarlamak mümkün mü?**
 
-  > **C:** Evet, kaydı ve sıfırlama için başka bir sınırı ayarlanabilir. Üç ile beş güvenlik sorularını kaydı için gerekli olabilir, ve üç ile beş soru sıfırlama için gerekli olabilir.
+  > **C:** Evet, bir sınır kayıt için, diğeri de sıfırlama için ayarlanabilir. Kayıt için üç ila beş güvenlik sorusu gerekli olabilir ve sıfırlama için üç ila beş soru gerekebilir.
   >
   >
-* **S:  Sıfırlama için güvenlik sorularını kullan gerektirmek my ilke yapılandırdım ancak farklı şekilde yapılandırılması için Azure yöneticileri gibi görünüyor.**
+* **S:  Kullanıcılardan sıfırlamaya yönelik güvenlik sorularını kullanmasını gerektirmek için İlkemi yapılandırdım, ancak Azure yöneticileri farklı şekilde yapılandırılmış gibi görünüyor.**
 
-  > **C:** Bu beklenen bir davranıştır. Microsoft, tüm Azure yöneticisi rolleri için varsayılan olarak güçlü ve iki aşamalı parola sıfırlama ilkesi uygular. Bu, yöneticilerin güvenlik sorularını kullanmasını önler. Bu ilkede hakkında daha fazla bilgi bulabilirsiniz [parola ilkeleri ve kısıtlamaları, Azure Active Directory'de](concept-sspr-policy.md) makalesi.
+  > **C:** Bu beklenen davranıştır. Microsoft, tüm Azure yöneticisi rolleri için varsayılan olarak güçlü ve iki aşamalı parola sıfırlama ilkesi uygular. Bu, yöneticilerin güvenlik sorularını kullanmasını önler. Bu ilkeyle ilgili daha fazla bilgiyi, [Azure Active Directory makalesinde parola ilkeleri ve kısıtlamalarında](concept-sspr-policy.md) bulabilirsiniz.
   >
   >
-* **S:  Nasıl bir kullanıcı en fazla sıfırlamak için gereken soru sayısı kaydedildiyse, güvenlik soruları sıfırlama sırasında seçilir?**
+* **S:  Bir Kullanıcı sıfırlamak için gereken en fazla soru sayısından daha fazla kaydolmışsa, sıfırlama sırasında güvenlik soruları nasıl seçilidir?**
 
-  > **C:** *N* Güvenlik sorusu seçili rastgele bir kullanıcı, where, kayıtlı sorular toplam sayısı yetersiz *N* için ayarlanmış olduğu **sıfırlamakiçingerekensorularınsayısı** seçeneği. Örneğin, kullanıcı beş güvenlik sorularını kaydetmiş olduğunu, ancak yalnızca üç parola sıfırlama için gerekli olan üç beş soru rastgele seçilir ve sıfırlama sırasında sunulur. Kullanıcı soruların yanıtlarını alırsa sözcüğüne, soru önlemek için yanlış seçim işlemi üzerinden başlatır.
+  > **C:** *N* bir kullanıcının kaydolduğu soruların toplam sayısı ( *n* ), sıfırlama seçeneği için **gereken soruların sayısı** için ayarlanan miktar olan her bir kullanıcı için en fazla sayıda güvenlik sorusu seçilir. Örneğin, bir Kullanıcı beş güvenlik sorusu kaydettirirse, ancak parolayı sıfırlamak için yalnızca üçü gerekliyse, beş sorudan üçü rastgele seçilir ve sıfırlama sırasında sunulur. Kullanıcı, soru-cevap işlemini engellemek için seçim işleminin yeniden başladığı yanlış soruların yanıtlarını alırsa.
   >
   >
-* **S:  E-posta ve SMS bir kerelik geçiş kodlarını geçerli ne kadar?**
+* **S:  E-posta ve SMS tek seferlik geçiş kodlarını ne kadar süreyle geçerlidir?**
 
-  > **C:** Parola sıfırlama için oturum ömrünü 15 dakikadır. Parola sıfırlama işleminin başlangıcından kullanıcının parolasını sıfırlamak için 15 dakika gerekir. Bu süre dolduktan sonra e-posta ve SMS bir kerelik geçiş kodu geçersiz.
+  > **C:** Parola sıfırlama için oturum ömrü 15 dakikadır. Parola sıfırlama işleminin başından, kullanıcının parolasını sıfırlaması 15 dakika sürer. Parola sıfırlama oturumu sırasında e-posta ve SMS One-saat geçiş kodu 5 dakika için geçerlidir.
   >
   >
-* **S:  Ben, kullanıcıların kendi parolalarını sıfırlama engelleyebilir miyim?**
+* **S:  Kullanıcıların parolalarını sıfırlamalarını engelleyebilir miyim?**
 
-  > **C:** Evet, SSPR'ı etkinleştirmek için bir grubu kullanıyorsanız, tek bir kullanıcı parolalarını sıfırlamalarına olanak tanır grubundan kaldırabilirsiniz. Genel yönetici kullanıcı, kullanıcılar parolalarını sıfırlamalarını korur ve bu devre dışı bırakılamaz.
+  > **C:** Evet, SSPR 'yi etkinleştirmek için bir grup kullanıyorsanız, kullanıcıların parolalarını sıfırlamasına olanak tanıyan tek bir kullanıcıyı gruptan çıkarabilirsiniz. Kullanıcı genel yöneticisidir, parolasını sıfırlama özelliğini korur ve bu devre dışı bırakılamaz.
   >
   >
 
-## <a name="password-change"></a>Parola değiştirme
+## <a name="password-change"></a>Parola değişimi
 
-* **S:  Kullanıcılar parolalarını değiştirmek için nereye?**
+* **S:  Kullanıcılarınızın parolalarını değiştirmek için nereye gitmesi gerekir?**
 
-  > **C:** Kullanıcıların parolalarını değiştirmesi gördüğünüz her yerde bunlar kendi profil resminizi veya simge gibi sağ üst köşedeki kendi [Office 365](https://portal.office.com) portalı veya [erişim paneli](https://myapps.microsoft.com) karşılaşır. Kullanıcıların kendi parolalarını değiştirmesi [erişim paneli profili sayfasını](https://account.activedirectory.windowsazure.com/r#/profile). Kullanıcılar ayrıca, parolalarının süresi dolmuş parolalarını otomatik olarak Azure AD oturum açma sayfasının değiştirmeyi sorulabilir. Son olarak, kullanıcılar için göz atabilir [Azure AD parola değiştirme portalı](https://account.activedirectory.windowsazure.com/ChangePassword.aspx) doğrudan parolalarını geçmek istiyorsanız.
+  > **C:** Kullanıcılar, [Office 365](https://portal.office.com) portalının veya [erişim paneli](https://myapps.microsoft.com) deneyimlerinin sağ üst köşesinde olduğu gibi, kendi parolalarını kendi profil resmini veya simgesini görürler her yerde değiştirebilir. Kullanıcılar, [erişim paneli profili sayfasından](https://account.activedirectory.windowsazure.com/r#/profile)parolalarını değiştirebilir. Kullanıcıların parolalarının geçerliliği dolmuşsa Azure AD oturum açma sayfasında parolalarını otomatik olarak değiştirmesi istenebilir. Son olarak, kullanıcılar parolalarını değiştirmek istediklerinde [Azure AD parola değiştirme portalına](https://account.activedirectory.windowsazure.com/ChangePassword.aspx) doğrudan gözatabilirler.
   >
   >
-* **S:  Şirket içi parolalarını süresi dolduğunda kullanıcılar Office Portalı'nda bildirim alabilir?**
+* **S:  Şirket içi parolasının süresi dolarsa Kullanıcılarım Office portalında bilgilendirilir mi?**
 
-  > **C:** Active Directory Federasyon Hizmetleri (AD FS) kullanıyorsanız Evet, bu bugün mümkündür. AD FS kullanıyorsanız, yönergeleri izleyin [parola ilkesi talepleri AD FS ile gönderme](https://technet.microsoft.com/windows-server-docs/identity/ad-fs/operations/configure-ad-fs-to-send-password-expiry-claims?f=255&MSPPError=-2147217396) makalesi. Parola Karması eşitleme kullanırsanız, bu bugün mümkün değildir. Bu nedenle bizim için deneyimleri buluta süre sonu bildirimleri göndermek mümkün değildir biz şirket içi dizinlere parola ilkelerinden eşitleme. Her iki durumda da filtrelenebilir [parolaları PowerShell aracılığıyla dolmak üzere kullanıcıları bilgilendir](https://social.technet.microsoft.com/wiki/contents/articles/23313.notify-active-directory-users-about-password-expiry-using-powershell.aspx).
+  > **C:** Evet, bu, Active Directory Federasyon Hizmetleri (AD FS) (AD FS) kullanıyorsanız bugün mümkündür. AD FS kullanıyorsanız, [parola ilkesi taleplerini AD FS Ile gönderme](https://technet.microsoft.com/windows-server-docs/identity/ad-fs/operations/configure-ad-fs-to-send-password-expiry-claims?f=255&MSPPError=-2147217396) makalesindeki yönergeleri izleyin. Parola karması eşitlemesi kullanıyorsanız, bu, bugün mümkün değildir. Şirket içi dizinlerden parola ilkelerini eşitliyoruz, bu nedenle bulut deneyimlerine süre sonu bildirimleri göndermemiz mümkün değildir. Her iki durumda da, [parolalarının, PowerShell aracılığıyla kullanım süresini dolacak olan kullanıcılara bildirimde bulunur](https://social.technet.microsoft.com/wiki/contents/articles/23313.notify-active-directory-users-about-password-expiry-using-powershell.aspx).
   >
   >
-* **S:  Ben, kullanıcıların parolasını değiştirmesini engelleyebilir miyim?**
+* **S:  Kullanıcıların parolalarını değiştirmelerini engelleyebilir miyim?**
 
-  > **C:** Yalnızca bulutta yer alan kullanıcılar için parola değişiklikleri engellenemez. Şirket içi kullanıcılar için ayarladığınız **kullanıcı parolayı değiştiremez** seçili seçeneği. Seçili kullanıcıların parolalarını değiştiremezsiniz.
+  > **C:** Yalnızca bulutta bulunan kullanıcılar için parola değişiklikleri engellenemez. Şirket içi kullanıcılar için, **Kullanıcı parolayı değiştiremez** seçeneğini belirleyebilirsiniz. Seçilen kullanıcılar parolalarını değiştiremezler.
   >
   >
 
 ## <a name="password-management-reports"></a>Parola yönetimi raporları
 
-* **S:  Parola yönetimi raporları gösterilecek verileri ne kadar sürüyor?**
+* **S:  Verilerin parola yönetimi raporlarında gösterilmesi ne kadar sürer?**
 
-  > **C:** Veri parola yönetimi raporları, 5-10 dakika içinde görüntülenmesi gerekir. Bazı durumlarda, işlemin bir saat için görüntülenecek sürebilir.
+  > **C:** Veriler, parola yönetimi raporlarında 5 ila 10 dakika içinde görünmelidir. Bazı örneklerde, görünmesi bir saat kadar sürebilir.
   >
   >
-* **S:  Parola yönetim raporlarını filtre nasıl sağlayabilirsiniz?**
+* **S:  Parola yönetimi raporlarını nasıl filtreleyebilirim?**
 
-  > **C:** Parola yönetimi raporları filtrelemek için raporun üst kısmındaki sütun etiketleri aşırı sağındaki küçük Büyüteç'i seçin. Daha zengin filtreleme yapmak istiyorsanız, Excel raporunu indirin ve bir PivotTable oluşturun.
+  > **C:** Parola yönetimi raporlarını filtrelemek için, raporun üst kısmına yakın bir şekilde sütun etiketlerinin Extreme 'e kadar küçük Büyüteç Camı ' nı seçin. Daha zengin filtreleme yapmak istiyorsanız, raporu Excel 'e indirebilir ve Pivot tablosu oluşturabilirsiniz.
   >
   >
-* **S: Parola yönetimi raporları depolanan olayları sayısı nedir?**
+* **S: Parola yönetimi raporlarında depolanan en fazla olay sayısı nedir?**
 
-  > **C:** En fazla 75.000 parola sıfırlama veya parola sıfırlama kayıt olaylarını geri 30 gün içinde sunulan ürünün kendinde kapsayan parola yönetim raporlarını depolanır. Bu sayı daha fazla olay içerecek şekilde genişletmek için çalışıyoruz.
+  > **C:** En çok 75.000 parola sıfırlama veya parola sıfırlama kayıt olayları, parola yönetimi raporlarında, 30 güne kadar geri yayılmaktadır. Bu numarayı daha fazla olay içerecek şekilde genişletmek için çalışıyoruz.
   >
   >
-* **S:  Parola yönetimi raporları geride nasıl gidiyor?**
+* **S:  Parola yönetimi raporları ne kadar geri getirilir?**
 
-  > **C:** Parola yönetimi raporları, son 30 gün içinde gerçekleşen işlemleri gösterir. Şu an için bu verileri arşivlemek istiyorsanız, raporları düzenli aralıklarla indirebilir ve bunları farklı bir konuma kaydedin.
+  > **C:** Parola yönetimi raporları, son 30 gün içinde gerçekleşen işlemleri gösterir. Şimdilik, bu verileri arşivlemek gerekirse, raporları düzenli aralıklarla indirebilir ve ayrı bir konuma kaydedebilirsiniz.
   >
   >
-* **S:  Parola yönetimi raporlarda görüntülenen satır sayısı var mı?**
+* **S:  Parola yönetimi raporlarında görünebilen en fazla satır sayısı var mı?**
 
-  > **C:** Evet. Kullanıcı Arabiriminde gösterilir veya indirilen en fazla 75.000 satır parola yönetim raporlarını birini görünebilir.
+  > **C:** Evet. Parola Yönetim raporlarında, Kullanıcı arabiriminde gösterildiklerinde veya indirilip indirilmediğinden, en fazla 75.000 satır görünebilir.
   >
   >
-* **S:  Parola sıfırlama veya raporlama verilerini kayıt erişmek için bir API var mı?**
+* **S:  Parola sıfırlama veya kayıt raporlama verilerine erişmek için bir API var mı?**
 
-  > **C:** Evet. Veri akışı raporlama parola sıfırlama nasıl erişebileceğinizi öğrenmek için bkz [parola sıfırlama raporlama olayları program aracılığıyla erişmeyi öğrenin](https://msdn.microsoft.com/library/azure/mt126081.aspx#BKMK_SsprActivityEvent).
+  > **C:** Evet. Parola sıfırlama raporlama veri akışına nasıl erişebileceğinizi öğrenmek için bkz. [parola sıfırlama raporlama olaylarına nasıl programlama yoluyla erişim hakkında bilgi edinin](https://msdn.microsoft.com/library/azure/mt126081.aspx#BKMK_SsprActivityEvent).
   >
   >
 
 ## <a name="password-writeback"></a>Parola geri yazma
 
-* **S:  Parola geri yazma, perde arkasında nasıl çalışır?**
+* **S:  Parola geri yazma, arka planda nasıl çalışır?**
 
-  > **C:** Makaleye göz atın [parola geri yazma nasıl çalıştığını](howto-sspr-writeback.md) , etkinleştirdiğinizde ne olacak bir açıklama için parola geri yazma ve sistem üzerinden verilerin nasıl aktığını şirket içi ortamınıza geri.
+  > **C:** Parola geri yazma özelliğini etkinleştirdiğinizde ve verilerin sistem aracılığıyla şirket içi ortamınıza geri nasıl akacağını öğrenmek için [parola geri yazma özelliğinin nasıl çalıştığını](howto-sspr-writeback.md) öğrenin.
   >
   >
-* **S:  Parola geri yazma çalışması ne kadar sürüyor? Olan var. bir eşitleme gecikme ile parola karma eşitlemesi gibi?**
+* **S:  Parola geri yazma ne kadar sürer? Parola karması eşitlemesine benzer bir eşitleme gecikmesi var mı?**
 
-  > **C:** Parola geri yazma anlık. Bu, parola karması eşitleme tamamen farklı bir şekilde çalıştığı zaman uyumlu bir işlem hattı olur. Parola geri yazma kullanıcılara kendi parola sıfırlama başarısını hakkında gerçek zamanlı geri bildirim almak veya işlemi değiştirme olanağı sağlar. Ortalama başarılı bir parola geri yazma için 500 MS'nin altında zamandır.
+  > **C:** Parola geri yazma işlemi anında. Bu, Parola karması eşitlemesine göre temelde farklı şekilde çalışır olan zaman uyumlu bir ardışık düzen. Parola geri yazma, kullanıcıların parola sıfırlama veya değiştirme işleminin başarısı hakkında gerçek zamanlı geri bildirim almasına izin verir. Parolanın başarılı bir şekilde geri yazma işlemi için Ortalama süre 500 MS altındadır.
   >
   >
-* **S:  Şirket içi Hesabımı devre dışı ise nasıl my bulut hesabı ve etkilenen erişim nedir?**
+* **S:  Şirket içi Hesabım devre dışıysa, bulut hesabım ve erişim nasıl etkilenir?**
 
-  > **C:** Şirket içi Kimliğinizi devre dışı bırakıldı, bulut kimliği ve erişim aynı zamanda Azure AD Connect aracılığıyla sonraki eşitleme aralıkta devre dışı bırakılır. Varsayılan olarak, bu eşitleme her 30 dakikadır.
+  > **C:** Şirket içi KIMLIĞINIZ devre dışıysa, bulut KIMLIĞINIZ ve erişim, Azure AD Connect aracılığıyla bir sonraki eşitleme aralığında da devre dışı bırakılır. Varsayılan olarak, bu eşitleme 30 dakikada bir olur.
   >
   >
-* **S:  Şirket içi Hesabımı, bir şirket içi Active Directory parola ilkesi tarafından kısıtlanmış, SSPR parolamı değiştirdiğimde Bu ilke uyma mu?**
+* **S:  Şirket içi Hesabım, şirket içi Active Directory parola ilkesi tarafından kısıtlanmamışsa, parolamı değiştirdiğimde Bu ilkeyi SSPR 'ye uyar mi?**
 
-  > **C:** Evet, SSPR kullanır ve şirket içi Active Directory parola ilkesi tarafından uyduğundan. Bu ilke, tipik bir Active Directory etki alanı parola ilkesi yanı sıra, bir kullanıcıya hedeflenen tüm tanımlanmış, hassas parola ilkelerini içerir.
+  > **C:** Evet, SSPR şirket içi Active Directory parola ilkesiyle ilgili ve bunları kullanır. Bu ilke, bir kullanıcıya hedeflenmiş, tanımlı ve hassas parola ilkelerinin yanı sıra tipik Active Directory etki alanı parola ilkesini de içerir.
   >
   >
-* **S:  Hesapları yoksa parola geri yazma hangi türde çalışır?**
+* **S:  Parola geri yazma ne tür hesaplar için çalışır?**
 
-  > **C:** Parola geri yazma çalışan şirket içi Active Directory'den Azure AD'ye eşitlenen kullanıcı hesapları için de dahil olmak üzere Federasyon, parola karma eşitleme ve geçiş Autentication kullanıcılar.
+  > **C:** Parola geri yazma, şirket içi Active Directory, Federasyon, Parola karması eşitlenmiş ve doğrudan geçiş autentication kullanıcıları dahil olmak üzere Azure AD 'ye eşitlenen Kullanıcı hesapları için geçerlidir.
   >
   >
-* **S:  Parola geri yazma etki alanımın parola ilkelerini zorunlu kılıyor mu?**
+* **S:  Parola geri yazma, etki alanım 'ın parola ilkeleriyle zorlanır mi?**
 
-  > **C:** Evet. Parola geri yazma özelliğini parola geçerlilik süresi, geçmiş, karmaşıklık, filtreler ve yerel etki alanınızda parolaları yerinde bırakabilecek herhangi bir kısıtlama uygular.
+  > **C:** Evet. Parola geri yazma, parola yaşı, geçmiş, karmaşıklık, filtreler ve yerel etki alanındaki parolalara göre yerine koyabileceğiniz diğer tüm kısıtlamaları uygular.
   >
   >
-* **S:  Parola geri yazma güvenli mi?  Ben hesabınızın ele geçirilmesi gerekmez nasıl mutlaka?**
+* **S:  Parola geri yazma güvenli mi?  Korsanın izinsiz sürmemesi için nasıl emin olabilirim?**
 
-  > **C:** Evet, parola geri yazma güvenlidir. Parola geri yazma hizmeti tarafından uygulanan birden çok güvenlik katmanı hakkında daha fazla bilgi için kullanıma [parola geri yazma güvenlik](concept-sspr-writeback.md#password-writeback-security) konusundaki [parola geri yazma genel bakış](howto-sspr-writeback.md) makalesi.
+  > **C:** Evet, parola geri yazma güvenli. Parola geri yazma hizmeti tarafından uygulanan birden çok güvenlik katmanı hakkında daha fazla bilgi edinmek için [parola geri yazma genel bakış](howto-sspr-writeback.md) makalesindeki [parola geri yazma güvenliği](concept-sspr-writeback.md#password-writeback-security) bölümüne bakın.
   >
   >
 

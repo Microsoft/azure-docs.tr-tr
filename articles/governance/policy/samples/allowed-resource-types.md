@@ -1,20 +1,16 @@
 ---
-title: Örnek - izin verilen kaynak türleri
-description: Bu örnek ilke tanımını yalnızca onaylanan kaynak türleri dağıtılan sağlar.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-Izin verilen kaynak türleri
+description: Bu örnek ilke tanımı yalnızca onaylanan kaynak türlerinin dağıtılmasını sağlar.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 9235f771abeaa5ccf053f697707aeb32115c7f01
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 16f941cfca419b3fce86101bf8df1b6850858cc9
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545953"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076421"
 ---
-# <a name="sample---allowed-resource-types"></a>Örnek - izin verilen kaynak türleri
+# <a name="sample---allowed-resource-types"></a>Örnek-Izin verilen kaynak türleri
 
 Bu ilke, yalnızca onaylanan kaynak türlerinin dağıtılmasını güvence altına alır. İzin verilen kaynak türü dizisini belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke, yalnızca onaylanan kaynak türlerinin dağıtılmasını güvence alt�
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2Fbuilt-in-policy%2Fallowed-resourcetypes%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2Fbuilt-in-policy%2Fallowed-resourcetypes%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

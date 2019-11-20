@@ -1,42 +1,36 @@
 ---
-title: Azure İzleyici günlük sorguları dizeler ile çalışma | Microsoft Docs
-description: Bu makalede, sorgu ve Azure İzleyici'de günlük verilerini analiz etmek için Azure portalında Azure İzleyici Log Analytics kullanmaya yönelik bir öğretici sağlar.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici günlük sorgularıyla dizelerle çalışma | Microsoft Docs
+description: Bu makalede, Azure izleyici 'de günlük verilerini sorgulamak ve çözümlemek için Azure portal Azure Izleyici Log Analytics kullanmaya yönelik bir öğretici sunulmaktadır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 08/16/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 718b12c8a66d66a75796f88ef31b5f0f62abbbc4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 08/16/2018
+ms.openlocfilehash: 82ac27e10a74dc99adb7615d604502e696aa9edb
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60519638"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72894317"
 ---
-# <a name="working-with-json-and-data-structures-in-azure-monitor-log-queries"></a>JSON ve veri yapıları Azure İzleyici günlük sorguları içinde çalışma
+# <a name="working-with-json-and-data-structures-in-azure-monitor-log-queries"></a>Azure Izleyici günlük sorgularındaki JSON ve veri yapıları ile çalışma
 
 > [!NOTE]
-> Tamamlamanız gereken [Azure İzleyici Log Analytics ile çalışmaya başlama](get-started-portal.md) ve [Azure İzleyici günlük sorguları ile çalışmaya başlama](get-started-queries.md) dersin tamamlamadan önce.
+> Bu dersi tamamlamadan önce [Azure izleyici Log Analytics kullanmaya başlama](get-started-portal.md) ve [Azure izleyici günlük sorgularını](get-started-queries.md) kullanmaya başlama işlemini tamamlamanız gerekir.
 
 [!INCLUDE [log-analytics-demo-environment](../../../includes/log-analytics-demo-environment.md)]
 
-İç içe nesneler içeren bir dizi veya anahtar-değer çiftlerinin bir eşlem içindeki diğer nesnelerin nesnelerdir. Bu nesneler, JSON dize olarak temsil edilir. Bu makale, JSON verilerini almak ve iç içe geçmiş nesnelerde analiz etmek için nasıl kullanıldığını açıklar.
+İç içe geçmiş nesneler, bir dizideki diğer nesneleri veya anahtar-değer çiftlerinin haritasını içeren nesnelerdir. Bu nesneler JSON dizeleri olarak temsil edilir. Bu makalede, JSON 'ın verileri almak ve iç içe nesneleri çözümlemek için nasıl kullanıldığı açıklanmaktadır.
 
-## <a name="working-with-json-strings"></a>JSON dizeler ile çalışma
-Kullanım `extractjson` belirli bir JSON öğesi bilinen bir yolda erişmek için. Bu işlev, aşağıdaki kuralları kullanan bir yol ifadesi gerektirir.
+## <a name="working-with-json-strings"></a>JSON dizeleriyle çalışma
+Bilinen bir yoldaki belirli bir JSON öğesine erişmek için `extractjson` kullanın. Bu işlev, aşağıdaki kuralları kullanan bir yol ifadesi gerektirir.
 
-- _$_ kök klasörü belirtmek için
-- Aşağıdaki örneklerde gösterildiği gibi dizinleri ve öğeleri başvurmak için köşeli ayraç veya nokta gösterimi kullanın.
+- kök klasöre başvurmak için _$_
+- Aşağıdaki örneklerde gösterildiği gibi dizin ve öğelere başvurmak için köşeli ayracı veya nokta gösterimini kullanın.
 
 
-Öğeleri ayırmak için dizinler ve nokta için köşeli ayraç kullanın:
+Dizinler ve noktalar için köşeli ayraçları kullanın öğeleri ayırın:
 
 ```Kusto
 let hosts_report='{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}';
@@ -44,7 +38,7 @@ print hosts_report
 | extend status = extractjson("$.hosts[0].status", hosts_report)
 ```
 
-Bu yalnızca köşeli ayraçlar gösterimini kullanarak aynı sonucu.
+Bu, yalnızca köşeli ayraç gösterimi ile aynı sonuçdır:
 
 ```Kusto
 let hosts_report='{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}';
@@ -52,7 +46,7 @@ print hosts_report
 | extend status = extractjson("$['hosts'][0]['status']", hosts_report)
 ```
 
-Yalnızca bir öğe yoksa yalnızca nokta gösterimi kullanabilirsiniz:
+Yalnızca bir öğe varsa yalnızca nokta gösterimini kullanabilirsiniz:
 
 ```Kusto
 let hosts_report='{"location":"North_DC", "status":"running", "rate":5}';
@@ -61,10 +55,10 @@ print hosts_report
 ```
 
 
-## <a name="working-with-objects"></a>Nesneler ile çalışma
+## <a name="working-with-objects"></a>Nesnelerle çalışma
 
-### <a name="parsejson"></a>parsejson
-Birden çok öğe, json yapısındaki erişmek için dinamik bir nesne erişmek kolaydır. Kullanım `parsejson` metin verilerine dinamik bir nesne olarak atanamadı. Dinamik bir türe dönüştürülen ek işlevleri ve verileri çözümlemek için kullanılabilir.
+### <a name="parsejson"></a>parseJSON
+JSON yapınız içindeki birden çok öğeye erişmek için, dinamik bir nesne olarak erişmek daha kolay olur. Metin verilerini dinamik bir nesneye dönüştürmek için `parsejson` kullanın. Dinamik bir türe dönüştürüldükten sonra, verileri çözümlemek için ek işlevler kullanılabilir.
 
 ```Kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
@@ -75,7 +69,7 @@ print hosts_object
 
 
 ### <a name="arraylength"></a>arraylength
-Kullanım `arraylength` bir dizideki öğelerin sayısını:
+Dizideki öğelerin sayısını saymak için `arraylength` kullanın:
 
 ```Kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
@@ -84,7 +78,7 @@ print hosts_object
 ```
 
 ### <a name="mvexpand"></a>mvexpand
-Kullanım `mvexpand` bir nesnenin özelliklerini farklı satırlara ayırmak için.
+Bir nesnenin özelliklerini ayrı satırlara bölmek için `mvexpand` kullanın.
 
 ```Kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
@@ -95,7 +89,7 @@ print hosts_object
 ![mvexpand](media/json-data-structures/mvexpand.png)
 
 ### <a name="buildschema"></a>buildschema
-Kullanım `buildschema` bir nesnenin tüm değerleri admits şeması get yapılmaya:
+Bir nesnenin tüm değerlerini admits şemayı almak için `buildschema` kullanın:
 
 ```Kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
@@ -103,7 +97,7 @@ print hosts_object
 | summarize buildschema(hosts_object)
 ```
 
-Bir şema JSON biçiminde çıktı.
+Çıktı JSON biçimindeki bir şemadır:
 ```json
 {
     "hosts":
@@ -117,9 +111,9 @@ Bir şema JSON biçiminde çıktı.
     }
 }
 ```
-Bu çıkış nesnesi alanları ve eşleşen veri türlerini açıklar. 
+Bu çıktı, nesne alanlarının adlarını ve bunların eşleşen veri türlerini açıklar. 
 
-İç içe geçmiş nesnelerde aşağıdaki örnekte olduğu gibi farklı şemalar sahip olabilir:
+İç içe geçmiş nesneler aşağıdaki örnekte olduğu gibi farklı şemalara sahip olabilir:
 
 ```Kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"status":"stopped", "rate":"3", "range":100}]}');
@@ -128,15 +122,15 @@ print hosts_object
 ```
 
 
-![Şema derleme](media/json-data-structures/buildschema.png)
+![Derleme şeması](media/json-data-structures/buildschema.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure İzleyici'de günlük sorguları kullanmaya yönelik diğer dersler bakın:
+Azure Izleyici 'de günlük sorgularını kullanmaya yönelik diğer derslere bakın:
 
 - [Dize işlemleri](string-operations.md)
 - [Tarih ve saat işlemleri](datetime-operations.md)
 - [Toplama işlevleri](aggregations.md)
-- [Gelişmiş toplamaları](advanced-aggregations.md)
+- [Gelişmiş toplamalar](advanced-aggregations.md)
 - [Gelişmiş sorgu yazma](advanced-query-writing.md)
-- [Birleşimler](joins.md)
-- [Grafikler](charts.md)
+- [Birleştirmeler](joins.md)
+- [Grafik](charts.md)

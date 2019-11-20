@@ -1,272 +1,287 @@
 ---
-title: Hadoop - Azure HDInsight için yüksek kullanılabilirlik
-description: Nasıl HDInsight kümeleri güvenilirlik ve kullanılabilirlik ek bir baş düğüm tarafından öğrenin. Nasıl bu yanı sıra Ambari ve, Hive gibi Hadoop Hizmetleri tek tek her baş düğümüne SSH kullanarak bağlamak için etkiliyor öğrenin.
-ms.reviewer: jasonh
+title: Hadoop için yüksek kullanılabilirlik-Azure HDInsight
+description: HDInsight kümelerinin ek bir baş düğüm kullanarak güvenilirliği ve kullanılabilirliği nasıl artıracağınızı öğrenin. Bunun, her bir baş düğüme tek tek nasıl bağlanacağınızı, örneğin, hem ambarı hem de Hive gibi Hadoop hizmetlerini nasıl etkilediği hakkında bilgi edinin.
 author: hrasheed-msft
-keywords: hadoop yüksek kullanılabilirlik
+ms.author: hrasheed
+ms.reviewer: jasonh
+keywords: Hadoop yüksek kullanılabilirlik
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.topic: conceptual
-ms.date: 04/24/2019
-ms.author: hrasheed
-ms.openlocfilehash: 6cb72730ef3dbef81e2b2c9bc1c5cfd3bbd88b65
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/28/2019
+ms.openlocfilehash: 8b914b8ffe995cf31f8a22b6f80250431facc770
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64704932"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73682241"
 ---
-# <a name="availability-and-reliability-of-apache-hadoop-clusters-in-hdinsight"></a>Kullanılabilirliği ve güvenilirliği HDInsight Apache Hadoop kümelerini
+# <a name="availability-and-reliability-of-apache-hadoop-clusters-in-hdinsight"></a>HDInsight 'ta Apache Hadoop kümelerinin kullanılabilirliği ve güvenilirliği
 
-HDInsight kümeleri, kullanılabilirlik ve Apache Hadoop Hizmetleri ve çalışan işleri güvenilirliğini artırmak için iki baş düğümü sağlar.
+HDInsight kümeleri, çalıştıran Apache Hadoop Hizmetleri ve işlerin kullanılabilirliğini ve güvenilirliğini artırmak için iki baş düğüm sağlar.
 
-Hadoop Hizmetleri ve veri kümesindeki birden çok düğüm arasında çoğaltarak yüksek kullanılabilirlik ve güvenilirlik elde eder. Ancak standardı dağıtımlarla hadoop genellikle yalnızca tek bir baş düğüm gerekir. Herhangi bir kesinti tek bir baş düğüm, küme çalışmayı durdurmasına neden olabilir. HDInsight, Hadoop'ın kullanılabilirliği ve güvenilirliği iyileştirmek için iki baş sağlar.
+Hadoop, bir kümedeki birden çok düğümdeki Hizmetleri ve verileri çoğaltarak yüksek kullanılabilirlik ve güvenilirlik elde eder. Ancak, Hadoop 'un standart dağıtımları genellikle yalnızca tek bir baş düğüme sahiptir. Tek baş düğümden herhangi bir kesinti, kümenin çalışmayı durdurmasına neden olabilir. HDInsight, Hadoop 'un kullanılabilirliğini ve güvenilirliğini artırmak için iki headnode sağlar.
 
-## <a name="availability-and-reliability-of-nodes"></a>Kullanılabilirlik ve güvenilirlik düğümleri
+## <a name="availability-and-reliability-of-nodes"></a>Düğümlerin kullanılabilirliği ve güvenilirliği
 
-Azure sanal Makineler'i kullanarak bir HDInsight kümesindeki düğümlere uygulanır. Aşağıdaki bölümlerde, HDInsight ile kullanılan tek tek düğüm türleri açıklanmaktadır. 
+HDInsight kümesindeki düğümler Azure sanal makineleri kullanılarak uygulanır. Aşağıdaki bölümlerde HDInsight ile kullanılan tek düğüm türleri ele alınmaktadır.
 
 > [!NOTE]  
-> Tüm düğüm türleri, bir küme türü için kullanılır. Örneğin, bir Hadoop küme türü, herhangi bir Nimbus düğümü yok. HDInsight küme türleri tarafından kullanılan düğümler hakkında daha fazla bilgi için küme türleri bölümüne bakın. [oluşturma Linux tabanlı Hadoop kümeleri HDInsight](hdinsight-hadoop-provision-linux-clusters.md#cluster-types) belge.
+> Küme türü için tüm düğüm türleri kullanılmaz. Örneğin, bir Hadoop kümesi türünün herhangi bir Nimbus düğümü yoktur. HDInsight küme türleri tarafından kullanılan düğümler hakkında daha fazla bilgi için bkz. [HDInsight 'Ta Linux tabanlı Hadoop kümeleri oluşturma](hdinsight-hadoop-provision-linux-clusters.md#cluster-types) ' nın küme türleri bölümü.
 
 ### <a name="head-nodes"></a>Baş düğümler
 
-Hadoop Hizmetleri yüksek kullanılabilirliğini sağlamak için iki baş düğüm HDInsight sağlar. İki baş düğüm, aynı anda etkin ve HDInsight kümesi içinde çalışır. Apache HDFS veya Apache Hadoop YARN gibi bazı hizmetler, belirli bir zamanda yalnızca 'bir baş düğüm üzerinde etkin'. HiveServer2 ya da Hive meta veri deposu gibi diğer hizmetleri aynı anda iki baş düğümler üzerinde etkindir.
+HDInsight, Hadoop Hizmetleri üzerinde yüksek kullanılabilirlik sağlamak için iki baş düğüm sağlar. Her iki baş düğüm de aynı anda HDInsight kümesi içinde etkin ve çalışır. Apache, veya Apache Hadoop YARN gibi bazı hizmetler, belirli bir zamanda yalnızca bir baş düğümde bulunan ' etkin' ' dir. HiveServer2 veya Hive meta veri deposu gibi diğer hizmetler aynı anda her iki baş düğümde de etkindir.
 
-Baş düğüm (ve diğer düğümleri HDInsight) ana bilgisayar adı düğümün bir parçası olarak sayısal bir değer var. Örneğin, `hn0-CLUSTERNAME` veya `hn4-CLUSTERNAME`.
+Baş düğümlerin (ve HDInsight 'taki diğer düğümlerin), düğümün ana bilgisayar adının bir parçası olarak sayısal bir değeri vardır. Örneğin, `hn0-CLUSTERNAME` veya `hn4-CLUSTERNAME`.
 
 > [!IMPORTANT]  
-> Sayısal değer, bir düğüm birincil veya ikincil ile ilişkilendirmeyin. Sayısal değer yalnızca her düğüm için benzersiz bir ad sağlamak için mevcuttur.
+> Sayısal değeri bir düğümün birincil veya ikincil olup olmadığı ile ilişkilendirmeyin. Sayısal değer yalnızca her düğüm için benzersiz bir ad sağlamak üzere mevcuttur.
 
 ### <a name="nimbus-nodes"></a>Nimbus Düğümleri
 
-Nimbus düğümleri ile Apache Storm kümelerini mevcuttur. Nimbus düğümleri dağıtma ve çalışan düğümleri arasında işleme izleme Hadoop Jobtracker'a benzer bir işlevsellik sağlar. HDInsight için Storm kümeleri iki Nimbus düğümü sağlar.
+Nimbus düğümleri Apache Storm kümeleriyle kullanılabilir. Nimbus düğümleri, çalışan düğümleri arasında işlemeyi dağıtarak ve izleyerek Hadoop JobTracker 'e benzer işlevler sağlar. HDInsight, fırtınası kümeleri için iki Nimbus düğümü sağlar
 
 ### <a name="apache-zookeeper-nodes"></a>Apache Zookeeper düğümleri
 
-[ZooKeeper](https://zookeeper.apache.org/) düğümleri öncü seçimi baş düğümlere ana Hizmetleri için kullanılır. Hizmetler, veri (çalışan) düğümleri ve ağ geçitleri hangi baş düğüm ana hizmet etkin olduğunu bilmeniz sağlamak için de kullanılır. Varsayılan olarak, HDInsight üç ZooKeeper düğümü sağlar.
+[ZooKeeper](https://zookeeper.apache.org/) düğümleri, baş düğümlerdeki ana hizmetlerin öncü seçimi için kullanılır. Ayrıca, bu hizmetler, veri (çalışan) düğümlerinin ve ağ geçitlerinin, ana hizmetin hangi başlık düğümüne etkin olduğunu bilmesini sağlamak için de kullanılır. HDInsight, varsayılan olarak üç ZooKeeper düğümü sağlar.
 
 ### <a name="worker-nodes"></a>Çalışan düğümleri
 
-Bir işi kümeye gönderildiğinde çalışan düğümleri gerçek veri analizi gerçekleştirebilir. Bir çalışan düğümü başarısız olursa, görevin yapmakta olduğu başka bir çalışan düğümüne gönderilir. Varsayılan olarak, dört alt düğüm HDInsight oluşturur. Bu sayı sırasında hem Küme oluşturulduktan sonra ihtiyaçlarınıza uyacak şekilde değiştirebilirsiniz.
+Çalışan düğümleri, kümeye bir iş gönderildiğinde gerçek veri analizini gerçekleştirir. Bir çalışan düğümü başarısız olursa, gerçekleştirdiği görev başka bir çalışan düğümüne gönderilir. HDInsight, varsayılan olarak dört çalışan düğümü oluşturur. Bu numarayı, küme oluşturma sırasında ve sonrasında gereksinimlerinize uyacak şekilde değiştirebilirsiniz.
 
-### <a name="edge-node"></a>Uç düğüm
+### <a name="edge-node"></a>Kenar düğümü
 
-Bir kenar düğümü, veri analizi kümedeki etkin bir şekilde almaz. Hadoop ile çalışırken, geliştiriciler veya veri bilimcileri tarafından kullanılır. Kenar düğümüne kümedeki diğer düğümlere aynı Azure sanal ağ içinde yer alan ve diğer tüm düğümlere doğrudan erişebilirsiniz. Kenar düğümüne kritik Hadoop Hizmetleri veya analiz işleri uzağa kaynakları yapmadan kullanılabilir.
+Bir Edge düğümü, küme içindeki veri analizine etkin bir şekilde katılmaz. Bu, Hadoop ile çalışırken geliştiriciler veya veri bilimcileri tarafından kullanılır. Edge düğümü, kümedeki diğer düğümlerle aynı Azure sanal ağında yer alabilir ve diğer tüm düğümlere doğrudan erişebilir. Edge düğümü, önemli Hadoop hizmetlerinden veya analiz işlerinin dışında, kaynakları almadan kullanılabilir.
 
-Şu anda, ML Hizmetleri HDInsight üzerinde kenar düğümüne varsayılan olarak sağlayan tek bir küme türü budur. Kenar düğümüne HDInsight üzerinde ML Hizmetleri için kullanılan işleme için kümeye göndermeden önce düğümünde yerel olarak test R kodu.
+Şimdilik, HDInsight üzerindeki ML Hizmetleri varsayılan olarak bir kenar düğümü sağlayan tek küme türüdür. HDInsight üzerinde ML Hizmetleri için, Edge düğümü, dağıtılmış işleme için kümeye göndermeden önce düğüm üzerinde yerel olarak test R kodu kullanır.
 
-Bir kenar düğümü diğer küme türleri ile kullanma hakkında daha fazla bilgi için bkz: [HDInsight içinde kenar düğümlerini kullanma](hdinsight-apps-use-edge-node.md) belge.
+Diğer küme türleriyle bir Edge düğümü kullanma hakkında daha fazla bilgi için bkz. [HDInsight 'ta Edge düğümlerini kullanma](hdinsight-apps-use-edge-node.md) belgesi.
 
-## <a name="accessing-the-nodes"></a>Düğümleri erişme
+## <a name="accessing-the-nodes"></a>Düğümlere erişme
 
-Genel bir ağ geçidi üzerinden kümeye internet üzerinden erişim sağlanır. Baş düğümlerine bağlanmak için erişim sınırlıdır ve (varsa varsa) kenar düğümüne. Baş düğümler üzerinde çalışan hizmetlere erişimi birden çok baş düğüm sağlayarak parametreden değil. Ortak ağ geçidi istekleri istenen hizmeti barındıran baş düğüme yönlendirir. Apache Ambari şu anda ikincil baş düğüm üzerinde barındırılıyorsa, örneğin, ağ geçidi gelen istekleri için Ambari bu düğüme yönlendirir.
+Internet üzerinden kümeye erişim, genel bir ağ geçidi üzerinden sağlanır. Erişim, baş düğümlere ve varsa kenar düğümüne bağlanmak için sınırlıdır. Baş düğümlerde çalışan hizmetlere erişim, birden fazla baş düğüm olmadan etkilenmez. Ortak ağ geçidi, istekleri istenen hizmeti barındıran baş düğüme yönlendirir. Örneğin, Apache ambarı Şu anda ikincil baş düğümünde barındırılıyorsa, ağ geçidi, ambarı için gelen istekleri bu düğüme yönlendirir.
 
-Ortak ağ geçidi üzerinden erişim bağlantı noktası 443 (HTTPS), 22 ve 23 sınırlıdır.
+Ortak ağ geçidi üzerinden erişim 443 (HTTPS), 22 ve 23 bağlantı noktalarıyla sınırlıdır.
 
-* Bağlantı noktası __443__ Ambari ve diğer web kullanıcı Arabirimi veya REST API'leri baş düğümler üzerinde barındırılan erişmek için kullanılır.
+|Bağlantı noktası |Açıklama |
+|---|---|
+|443|Baş düğümlerde barındırılan ambarı ve diğer Web Kullanıcı arabirimine veya REST API 'Lerine erişmek için kullanılır.|
+|22|SSH ile birincil baş düğüme veya kenar düğümüne erişmek için kullanılır.|
+|23|SSH ile ikincil baş düğüme erişmek için kullanılır. Örneğin `ssh username@mycluster-ssh.azurehdinsight.net`, **MyCluster**adlı kümenin birincil baş düğümüne bağlanır.|
 
-* Bağlantı noktası __22__ birincil baş düğüme ya da SSH ile kenar düğümüne erişmek için kullanılır.
+SSH kullanma hakkında daha fazla bilgi için bkz. [HDInsight Ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md) belgesi.
 
-* Bağlantı noktası __23__ SSH ile ikincil baş düğümüne erişmek için kullanılır. Örneğin, `ssh username@mycluster-ssh.azurehdinsight.net` adlı Küme için birincil baş düğüme bağlanan **mycluster**.
+### <a name="internal-fully-qualified-domain-names-fqdn"></a>İç tam etki alanı adları (FQDN)
 
-SSH kullanma hakkında daha fazla bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md) belge.
+HDInsight kümesindeki düğümlerin iç IP adresi ve yalnızca kümeden erişilebilen bir FQDN vardır. İç FQDN veya IP adresini kullanarak kümedeki hizmetlere erişirken, hizmete erişirken kullanılacak IP veya FQDN 'yi doğrulamak için ambarı 'nı kullanmanız gerekir.
 
-### <a name="internal-fully-qualified-domain-names-fqdn"></a>Dahili tam etki alanı adlarını (FQDN)
+Örneğin, Apache Oozie hizmeti yalnızca bir baş düğümde çalışabilir ve bir SSH oturumundan `oozie` komutunun kullanılması, hizmetin URL 'sini gerektirir. Bu URL, aşağıdaki komutu kullanarak ambarı 'ndan alınabilir:
 
-Bir iç IP adresi ve kümeden erişilebilir yalnızca FQDN bir HDInsight kümesindeki düğümlere sahip. İç FQDN veya IP adresini kullanarak kümedeki hizmetlerin erişirken, IP veya FQDN hizmeti erişirken kullanılacak doğrulamak için Ambari kullanmanız gerekir.
+```bash
+export password='PASSWORD'
+export clusterName="CLUSTERNAME"
 
-Örneğin, Apache Oozie hizmet yalnızca bir baş düğüm ve kullanarak çalışabilen `oozie` komutu bir SSH oturumundan hizmetin URL'sini gerektirir. Bu URL, aşağıdaki komutu kullanarak Ambari'den alınabilir:
+curl -u admin:$password "https://$clusterName.azurehdinsight.net/api/v1/clusters/$clusterName/configurations?type=oozie-site&tag=TOPOLOGY_RESOLVED" | grep oozie.base.url
+```
 
-    curl -u admin:PASSWORD "https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/configurations?type=oozie-site&tag=TOPOLOGY_RESOLVED" | grep oozie.base.url
+Bu komut, `oozie` komutuyla kullanılacak iç URL 'YI içeren aşağıdakine benzer bir değer döndürür:
 
-Bu komut bir değer ile kullanmak üzere iç URL içeren aşağıdaki komutu benzer döndürür `oozie` komutu:
+```output
+"oozie.base.url": "http://hn0-CLUSTERNAME-randomcharacters.cx.internal.cloudapp.net:11000/oozie"
+```
 
-    "oozie.base.url": "http://hn0-CLUSTERNAME-randomcharacters.cx.internal.cloudapp.net:11000/oozie"
+REST API ambarı ile çalışma hakkında daha fazla bilgi için bkz. [HDInsight 'ı Apache ambarı REST API kullanarak izleme ve yönetme](hdinsight-hadoop-manage-ambari-rest-api.md).
 
-Ambari REST API'si ile çalışma hakkında daha fazla bilgi için bkz. [izleme ve yönetme Apache Ambari REST API'yi kullanarak HDInsight](hdinsight-hadoop-manage-ambari-rest-api.md).
+### <a name="accessing-other-node-types"></a>Diğer düğüm türlerine erişme
 
-### <a name="accessing-other-node-types"></a>Diğer düğüm türleri erişme
+Aşağıdaki yöntemleri kullanarak internet üzerinden doğrudan erişilemeyen düğümlere bağlanabilirsiniz:
 
-İnternet üzerinden aşağıdaki yöntemler kullanılarak doğrudan erişilebilir olmayan düğüm bağlanabilirsiniz:
+|Yöntem |Açıklama |
+|---|---|
+|SSH|SSH kullanarak bir baş düğüme bağlandıktan sonra, kümedeki diğer düğümlere bağlanmak için baş düğümden SSH kullanabilirsiniz. Daha fazla bilgi için [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md) belgesine bakın.|
+|SSH tüneli|İnternet 'e açık olmayan düğümlerden birinde barındırılan bir Web hizmetine erişmeniz gerekiyorsa, bir SSH tüneli kullanmanız gerekir. Daha fazla bilgi için [HDInsight Ile SSH tüneli kullanma](hdinsight-linux-ambari-ssh-tunnel.md) belgesine bakın.|
+|Azure Sanal Ağ|HDInsight kümeniz bir Azure sanal ağının parçasıysa, aynı sanal ağ üzerindeki herhangi bir kaynak kümedeki tüm düğümlere doğrudan erişebilir. Daha fazla bilgi için bkz. [HDInsight için sanal ağ planlaması](hdinsight-plan-virtual-network-deployment.md) belgesi.|
 
-* **SSH**: Bir baş düğüm için SSH kullanarak bağlandıktan sonra SSH baş düğümünden kümedeki diğer düğümlere bağlanmak için kullanabilirsiniz. Daha fazla bilgi için [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md) belgesine bakın.
+## <a name="how-to-check-on-a-service-status"></a>Hizmet durumunu denetleme
 
-* **SSH tüneli**: İnternet'e açık değil düğümlerinden biri üzerinde barındırılan bir web hizmetine erişmesi gerekiyorsa, bir SSH tüneli kullanmanız gerekir. Daha fazla bilgi için [HDInsight ile SSH tüneli kullanma](hdinsight-linux-ambari-ssh-tunnel.md) belge.
+Baş düğümlerde çalışan hizmetlerin durumunu denetlemek için, ambarı Web Kullanıcı arabirimi veya ambarı REST API kullanın.
 
-* **Azure sanal ağı**: HDInsight kümenizi Azure sanal ağının parçası ise, aynı sanal ağdaki herhangi bir kaynağa kümedeki tüm düğümlere doğrudan erişebilirsiniz. Daha fazla bilgi için [Azure sanal ağ kullanarak HDInsight genişletmek](hdinsight-extend-hadoop-virtual-network.md) belge.
+### <a name="ambari-web-ui"></a>Ambarı Web Kullanıcı arabirimi
 
-## <a name="how-to-check-on-a-service-status"></a>Bir hizmet durumunu kontrol etme
+Ambarı Web Kullanıcı arabirimi `https://CLUSTERNAME.azurehdinsight.net`görüntülenebilir. **CLUSTERNAME** değerini kümenizin adıyla değiştirin. İstenirse, kümenizin HTTP Kullanıcı kimlik bilgilerini girin. Varsayılan HTTP Kullanıcı adı **yönetici** ve parola, kümeyi oluştururken girdiğiniz paroladır.
 
-Baş düğümler üzerinde çalışan hizmetler durumunu denetlemek için Ambari Web kullanıcı arabirimini veya Ambari REST API'yi kullanın.
+Ambarı sayfasına geldiğinizde, yüklü hizmetler sayfanın solunda listelenir.
 
-### <a name="ambari-web-ui"></a>Ambari Web UI
+![Apache ambarı yüklü hizmetler](./media/hdinsight-high-availability-linux/hdinsight-installed-services.png)
 
-Ambari Web kullanıcı arabirimini görülebilir `https://CLUSTERNAME.azurehdinsight.net`. **CLUSTERNAME** değerini kümenizin adıyla değiştirin. İstenirse, kümeniz için HTTP kullanıcısı kimlik bilgilerini girin. Varsayılan HTTP kullanıcı adı **yönetici** ve kümeyi oluştururken girdiğiniz parola paroladır.
+Durumu göstermek için bir hizmetin yanında görünebilen bir dizi simge vardır. Bir hizmetle ilgili tüm uyarılar, sayfanın üst kısmındaki **Uyarılar** bağlantısı kullanılarak görüntülenebilir.  Ambarı önceden tanımlanmış birkaç uyarı sunar.
 
-Ambari sayfada geldiğinde, yüklü hizmetlerin sayfanın sol tarafında listelenir.
-
-![Yüklü hizmetleri](./media/hdinsight-high-availability-linux/services.png)
-
-Bir dizi durumunu göstermek için bir hizmet yanındaki görünebilir simgeler vardır. Kullanarak bir hizmet için ilgili bir uyarı görüntülenebilir **uyarılar** sayfanın üstündeki bağlantısı.  Ambari, önceden tanımlanmış çeşitli uyarılar sağlar.
-
-Aşağıdaki uyarılar, bir kümenin kullanılabilirliğini izlemek yardımcı olur:
+Aşağıdaki uyarılar bir kümenin kullanılabilirliğini izlemeye yardımcı olur:
 
 | Uyarı adı                               | Açıklama                                                                                                                                                                                  |
 |------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Ölçüm İzleyici durumu                    | Bu uyarı izleme durumu komut dosyası tarafından belirlenen şekilde ölçümleri izleme işleminin durumunu gösterir.                                                                                   |
-| Ambari aracı sinyali                   | Sunucu bir aracı kişiyle kaybederse, bu uyarı tetiklenir.                                                                                                                        |
-| ZooKeeper sunucusu işlemi                 | ZooKeeper sunucu işlemi kadar belirlenen ve ağ üzerinde dinleme yoksa, bu konak düzeyinde uyarı tetiklenir.                                                               |
-| IOCache meta verileri sunucu durumu           | IOCache meta veri sunucusu belirlenen kadar ve istemci isteklerine yanıt yoksa, bu konak düzeyinde uyarı tetiklenir                                                            |
-| JournalNode Web UI                       | JournalNode Web kullanıcı arabirimini ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                                 |
-| Spark2 Thrift sunucusu                     | Spark2 Thrift sunucusu kadar belirlenemiyorsa, bu konak düzeyinde uyarı tetiklenir.                                                                                                |
-| Geçmiş sunucu işlemi                   | Geçmiş sunucu işlemi kadar oluşturulmuş ve ağ üzerinde dinleme yoksa, bu konak düzeyinde uyarı tetiklenir.                                                                |
-| Geçmiş sunucu Web kullanıcı Arabirimi                    | Geçmiş sunucu Web kullanıcı arabirimini ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                              |
-| ResourceManager Web kullanıcı Arabirimi                   | ResourceManager Web kullanıcı arabirimini ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                             |
-| NodeManager sistem durumu özeti               | Sağlıksız NodeManagers varsa bu hizmet düzeyi uyarı tetiklenir                                                                                                                    |
-| Uygulama zaman çizelgesi Web kullanıcı Arabirimi                      | Uygulama zaman çizelgesi sunucusu Web kullanıcı arabirimini ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                         |
-| DataNode sistem durumu özeti                  | Sağlıksız DataNodes varsa bu hizmet düzeyi uyarı tetiklenir                                                                                                                       |
-| NameNode Web kullanıcı Arabirimi                          | NameNode Web kullanıcı arabirimini ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                                    |
-| ZooKeeper yük devretme denetleyicisi işlemi    | ZooKeeper yük devretme denetleyicisi işlemi kadar Onaylandı ve ağ üzerinde dinleme yoksa, bu konak düzeyinde uyarı tetiklenir.                                                   |
-| Oozie Server Web UI                      | Web kullanıcı arabirimini Oozie sunucu ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                                |
-| Oozie sunucu durumu                      | Oozie sunucunun kadar belirlenen ve istemci isteklerine yanıt yoksa, bu konak düzeyinde uyarı tetiklenir.                                                                      |
-| Hive meta veri deposu işlemi                   | Hive meta veri deposu işlemi kadar belirlenen ve ağ üzerinde dinleme yoksa, bu konak düzeyinde uyarı tetiklenir.                                                                 |
-| HiveServer2 işlemi                      | HiveServer kadar belirlenen ve istemci isteklerine yanıt yoksa, bu konak düzeyinde uyarı tetiklenir.                                                                        |
-| WebHCat sunucu durumu                    | Templeton da sunucu durumu iyi değilse, bu konak düzeyinde uyarı tetiklenir.                                                                                                            |
-| Yüzde ZooKeeper sunucusu yok      | Kümedeki sunucuların ZooKeeper aşağı sayısı kritik yapılandırılan eşik değerinden büyükse, bu uyarı tetiklenir. Bu, ZooKeeper işlem denetimlerin sonuçlarını toplar.     |
-| Spark2 Livy sunucusu                       | Livy2 sunucunun kadar belirlenemiyorsa, bu konak düzeyinde uyarı tetiklenir.                                                                                                        |
-| Spark2 geçmiş sunucusu                    | Spark2 geçmiş sunucusu kadar belirlenemiyorsa, bu konak düzeyinde uyarı tetiklenir.                                                                                               |
-| Ölçüm toplama işlemi                | Ölçümleri Toplayıcı üzerinde yapılandırılan bağlantı noktası için eşik eşit saniye sayısı kadar Onaylandı ve dinleme yoksa, bu uyarı tetiklenir.                                 |
-| Ölçümleri Toplayıcı - HBase ana işlem | Ölçümleri Toplayıcı'nın HBase master işlemleri kadar Onaylandı ve saniyeler içinde verilen yapılandırılmış bir kritik eşik için ağda dinleme yoksa, bu uyarı tetiklenir. |
-| Yüzde ölçümleri izleyiciler kullanılabilir       | Ölçümleri izleme işlemleri yukarı değildir ve yapılandırılmış uyarı ve kritik eşiklerini için ağda dinleme yüzdesi değilse bu uyarı tetiklenir.                             |
-| Yüzde NodeManagers kullanılabilir           | Sayısını NodeManagers aşağı kümedeki kritik yapılandırılan eşik değerinden büyükse, bu uyarı tetiklenir. Bunu NodeManager işlem denetimlerin sonuçlarını toplar.        |
-| NodeManager sistem durumu                       | Bu konak düzeyinde uyarı NodeManager bileşeninden kullanılabilir düğüm durumu özelliği denetler.                                                                                              |
-| NodeManager Web UI                       | NodeManager Web kullanıcı arabirimini ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                                 |
-| NameNode yüksek kullanılabilirlik sistem durumu        | Etkin NameNode ya da bekleme NameNode çalışmıyorsa, bu hizmet düzeyi uyarısı tetiklenir.                                                                                     |
-| DataNode işlemi                         | Bağımsız DataNode işlemlere kadar oluşturulmuş ve ağ üzerinde dinleme yoksa, bu konak düzeyinde uyarı tetiklenir.                                                         |
-| DataNode Web kullanıcı Arabirimi                          | DataNode Web kullanıcı arabirimini ulaşılamaz durumdaysa bu konak düzeyinde uyarı tetiklenir.                                                                                                                    |
-| Yüzde JournalNodes kullanılabilir           | Sayısını JournalNodes aşağı kümedeki kritik yapılandırılan eşik değerinden büyükse, bu uyarı tetiklenir. Bunu JournalNode işlem denetimlerin sonuçlarını toplar.        |
-| Yüzde DataNodes kullanılabilir              | Sayısını DataNodes aşağı kümedeki kritik yapılandırılan eşik değerinden büyükse, bu uyarı tetiklenir. Bunu DataNode işlem denetimlerin sonuçlarını toplar.              |
-| Zeppelin sunucu durumu                   | Zeppelin sunucunun kadar belirlenen ve istemci isteklerine yanıt yoksa, bu konak düzeyinde uyarı tetiklenir.                                                                   |
-| HiveServer2 etkileşimli işlem          | HiveServerInteractive kadar belirlenen ve istemci isteklerine yanıt yoksa, bu konak düzeyinde uyarı tetiklenir.                                                             |
-| LLAP uygulama                         | LLAP uygulama kadar belirlenen ve isteklere yanıt yoksa, bu uyarı tetiklenir.                                                                                    |
+| Ölçüm Izleyici durumu                    | Bu uyarı, izleme durumu betiği tarafından belirlendiği şekilde ölçüm Izleyici işleminin durumunu gösterir.                                                                                   |
+| Ambarı aracı sinyali                   | Bu uyarı, sunucuda bir aracıyla ilgili iletişim kesildiğinde tetiklenir.                                                                                                                        |
+| ZooKeeper sunucusu Işlemi                 | Bu ana bilgisayar düzeyi uyarı, ZooKeeper sunucu işleminin ağa açık ve dinleme için belirlenemediği durumlarda tetiklenir.                                                               |
+| IOCache meta veri sunucusu durumu           | IOCache meta veri sunucusunun istemci isteklerine yanıt verip vermediğini belirlenemediği durumlarda bu konak düzeyi uyarısı tetiklenir                                                            |
+| JournalNode Web Kullanıcı arabirimi                       | Bu konak düzeyi uyarısı, JournalNode Web Kullanıcı arabirimine ulaşılamıyorsa tetiklenir.                                                                                                                 |
+| Spark2 Thrift sunucusu                     | Bu konak düzeyi uyarısı, Spark2 Thrift sunucusu etkin olarak belirlenemiyorsa tetiklenir.                                                                                                |
+| Geçmiş sunucu Işlemi                   | Bu konak düzeyi uyarısı, geçmiş sunucusu işleminin ağ üzerinde dinlenecek ve dinlemek için kurulamazsa tetiklenir.                                                                |
+| Geçmiş sunucusu Web Kullanıcı arabirimi                    | Bu konak düzeyi uyarı, geçmiş sunucusu Web Kullanıcı arabirimine ulaşılamıyorsa tetiklenir.                                                                                                              |
+| `ResourceManager` Web Kullanıcı arabirimi                   | `ResourceManager` Web Kullanıcı arabirimine ulaşılamıyorsa bu konak düzeyi uyarı tetiklenir.                                                                                                             |
+| NodeManager sistem durumu Özeti               | Sağlıksız NodeManager varsa, bu hizmet düzeyi uyarı tetiklenir                                                                                                                    |
+| Uygulama zaman çizelgesi Web Kullanıcı arabirimi                      | Bu konak düzeyi uyarı, uygulama zaman çizelgesi sunucusu Web Kullanıcı arabirimine ulaşılamıyorsa tetiklenir.                                                                                                         |
+| Dadtanode sistem durumu Özeti                  | Sağlıksız bir kades varsa, bu hizmet düzeyi uyarı tetiklenir                                                                                                                       |
+| Süs Code Web Kullanıcı arabirimi                          | Bu konak düzeyi uyarısı, süs Code Web Kullanıcı arabirimine ulaşılamıyorsa tetiklenir.                                                                                                                    |
+| ZooKeeper yük devretme denetleyicisi Işlemi    | Bu ana bilgisayar düzeyi uyarı, ZooKeeper yük devretme denetleyicisi işleminin ağ üzerinde çalışıyor ve dinlemek için onaylanmazsa tetiklenir.                                                   |
+| Oozie sunucusu Web Kullanıcı arabirimi                      | Bu konak düzeyi uyarı, Oozie sunucu Web Kullanıcı arabirimine ulaşılamıyorsa tetiklenir.                                                                                                                |
+| Oozie sunucu durumu                      | Bu konak düzeyi uyarısı, Oozie sunucusunun istemci isteklerine yanıt verip vermeyeceğini tespit edilebilir ise tetiklenir.                                                                      |
+| Hive meta veri deposu Işlemi                   | Bu konak düzeyi uyarısı, Hive meta veri deposu işlemi, ağı dinleyerek ve dinlemeden saptanamıyor.                                                                 |
+| HiveServer2 Işlemi                      | Bu konak düzeyi uyarısı, HiveServer 'ın istemci isteklerine yanıt verip vermediğini tespit edilebilir ise tetiklenir.                                                                        |
+| WebHCat sunucu durumu                    | `templeton` sunucusu durumu sağlıklı değilse bu konak düzeyi uyarısı tetiklenir.                                                                                                            |
+| Kullanılabilir ZooKeeper sunucusu yüzdesi      | Kümedeki aşağı ZooKeeper sunucularının sayısı yapılandırılan kritik eşikten büyükse bu uyarı tetiklenir. ZooKeeper işlem denetimlerinin sonuçlarını toplar.     |
+| Spark2 Livy sunucusu                       | Bu konak düzeyi uyarı, Livy2 sunucusu çalışır olarak belirlenemiyorsa tetiklenir.                                                                                                        |
+| Spark2 geçmiş sunucusu                    | Bu ana bilgisayar düzeyi uyarı, Spark2 geçmiş sunucusunun olarak belirlenemediği takdirde tetiklenir.                                                                                               |
+| Ölçüm toplayıcı Işlemi                | Bu uyarı, ölçüm toplayıcısının yapılandırılmış bağlantı noktasında eşiğe eşit olması onaylanmazsa tetiklenemez ve dinlenemez.                                 |
+| Ölçüm toplayıcısı-HBase Master Işlemi | Bu uyarı, ölçüm toplayıcısının HBase ana işlemlerinin, saniye olarak verilen yapılandırılmış kritik eşik için ağ üzerinde çalışmaya ve dinlemek onaylanmazsa tetiklenir. |
+| Kullanılabilir ölçüm Izleyicileri yüzdesi       | Bu uyarı, ölçüm Izleme işlemlerinin bir yüzdesi, yapılandırılan uyarı ve kritik eşikler için ağda dinlemediğinde tetiklenir.                             |
+| Kullanılabilir düğüm yöneticileri yüzdesi           | Bu uyarı, kümedeki aşağı aşağı NodeManager sayısı yapılandırılan kritik eşikten fazlaysa tetiklenir. NodeManager işlem denetimlerinin sonuçlarını toplar.        |
+| NodeManager sistem durumu                       | Bu konak düzeyinde uyarı, NodeManager bileşeninden kullanılabilen düğüm durumu özelliğini denetler.                                                                                              |
+| NodeManager Web Kullanıcı arabirimi                       | NodeManager Web Kullanıcı arabirimine ulaşılamıyorsa bu konak düzeyi uyarısı tetiklenir.                                                                                                                 |
+| Süs Yot yüksek kullanılabilirlik durumu        | Bu hizmet düzeyi uyarı, etkin bir süs Code veya standby süs ODE çalışmıyorsa tetiklenir.                                                                                     |
+| Dadtanode Işlemi                         | Bu ana bilgisayar düzeyi uyarı, tek tek bir ağ üzerinde bir işlem ve ağ üzerinde dinleme yapmak üzere ayrı bir Davode işlemi kurulamazsa tetiklenir.                                                         |
+| Dadtanode Web Kullanıcı arabirimi                          | Bu konak düzeyi uyarısı, Dadtanode Web Kullanıcı arabirimine ulaşılamıyorsa tetiklenir.                                                                                                                    |
+| Kullanılabilir JournalNodes yüzdesi           | Bu uyarı, kümedeki aşağı yönelik JournalNodes sayısı yapılandırılan kritik eşikten fazlaysa tetiklenir. Bu, JournalNode işlem denetimlerinin sonuçlarını toplar.        |
+| Kullanılabilir gün yüzdesi              | Bu uyarı, kümedeki aşağı doğru eşik sayısı yapılandırılan kritik eşikten büyükse tetiklenir. Bu, Davtanode işlem denetimlerinin sonuçlarını toplar.              |
+| Zeppelin sunucu durumu                   | Bu konak düzeyi uyarısı, Zeppelin sunucusunun istemci isteklerine yanıt verip vermeyeceğini tespit edilebilir ise tetiklenir.                                                                   |
+| HiveServer2 etkileşimli Işlemi          | Hiveserverınteractive 'in istemci isteklerine yanıt verip vermediğini tespit etmediği durumlarda bu konak düzeyi uyarısı tetiklenir.                                                             |
+| LLAP uygulaması                         | Bu uyarı, LLAP uygulamasının isteklere yanıt verip vermeyeceğini tespit edilebilir ise tetiklenir.                                                                                    |
 
-Daha fazla bilgi görüntülemek için her hizmeti seçebilirsiniz.
+Hakkında daha fazla bilgi görüntülemek için her bir hizmeti seçebilirsiniz.
 
-Hizmet sayfasını durumu ve her hizmetin yapılandırma bilgileri sağlarken, hangi baş düğümde hizmeti çalışan bilgi sağlamaz. Bu bilgileri görüntülemek için kullanın **konakları** sayfanın üstündeki bağlantısı. Bu sayfa, baş düğümler dahil olmak üzere, küme içindeki konaklar görüntüler.
+Hizmet sayfası her bir hizmetin durumu ve yapılandırması hakkında bilgi sağladığından, hizmetin üzerinde çalıştığı baş düğüm hakkında bilgi sağlamaz. Bu bilgileri görüntülemek için sayfanın üst kısmındaki **konaklar** bağlantısını kullanın. Bu sayfa, baş düğümler de dahil olmak üzere küme içindeki Konakları görüntüler.
 
-![Konaklar listesine](./media/hdinsight-high-availability-linux/hosts.png)
+![Apache ambarı baş düğümüne ana bilgisayar listesi](./media/hdinsight-high-availability-linux/hdinsight-hosts-list.png)
 
-Baş düğümlerinden biri için bağlantıyı seçerek ilgili düğümde çalışan bileşenleri ve hizmetleri görüntüler.
+Baş düğümlerden birine yönelik bağlantıyı seçmek o düğümde çalışan hizmetleri ve bileşenleri görüntüler.
 
-![Bileşen Durumu](./media/hdinsight-high-availability-linux/nodeservices.png)
+![Apache ambarı bileşen durumu](./media/hdinsight-high-availability-linux/hdinsight-node-services.png)
 
-Ambari kullanarak daha fazla bilgi için bkz: [İzleyici ve HDInsight Apache Ambari Web kullanıcı arabirimini kullanarak yönetme](hdinsight-hadoop-manage-ambari.md).
+Ambarı kullanma hakkında daha fazla bilgi için bkz. [Apache ambarı Web Kullanıcı arabirimini kullanarak HDInsight 'ı izleme ve yönetme](hdinsight-hadoop-manage-ambari.md).
 
-### <a name="ambari-rest-api"></a>Ambari REST API
+### <a name="ambari-rest-api"></a>Ambarı REST API
 
-Ambari REST API internet üzerinden kullanılabilir. HDInsight ortak ağ geçidi şu anda REST API'sini barındıran baş düğüme Yönlendirme isteklerini işler.
+REST API ambarı Internet üzerinden kullanılabilir. HDInsight genel ağ geçidi, yönlendirme isteklerini REST API Şu anda barındırmakta olan baş düğüme işler.
 
-Ambari REST API aracılığıyla bir hizmetin durumunu denetlemek için aşağıdaki komutu kullanabilirsiniz:
+Bir hizmetin durumunu REST API ambarı aracılığıyla denetlemek için aşağıdaki komutu kullanabilirsiniz:
 
-    curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services/SERVICENAME?fields=ServiceInfo/state
+```bash
+curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services/SERVICENAME?fields=ServiceInfo/state
+```
 
-* Değiştirin **parola** ile HTTP (Yönetici) kullanıcı hesabının parolası.
+* **Parolayı** http Kullanıcı (yönetici) hesabı parolasıyla değiştirin.
 * **CLUSTERNAME** değerini kümenin adıyla değiştirin.
-* Değiştirin **SERVICENAME** durumunu denetlemek istediğiniz hizmetin adı.
+* **HizmetAdı** durumunu denetlemek istediğiniz hizmetin adıyla değiştirin.
 
-Örneğin, durumunu denetlemek için **HDFS** adlı bir küme hizmetinin **mycluster**, bir parola ile **parola**, şu komutu kullanırsınız:
+Örneğin, **MyCluster**adlı bir kümede, bir **parola parolasıyla**, **Bu hizmetin durumunu** denetlemek için aşağıdaki komutu kullanabilirsiniz:
 
-    curl -u admin:password https://mycluster.azurehdinsight.net/api/v1/clusters/mycluster/services/HDFS?fields=ServiceInfo/state
+```bash
+curl -u admin:password https://mycluster.azurehdinsight.net/api/v1/clusters/mycluster/services/HDFS?fields=ServiceInfo/state
+```
 
-Yanıt aşağıdaki JSON ile benzer:
+Yanıt aşağıdaki JSON ile benzerdir:
 
-    {
-      "href" : "http://hn0-CLUSTERNAME.randomcharacters.cx.internal.cloudapp.net:8080/api/v1/clusters/mycluster/services/HDFS?fields=ServiceInfo/state",
-      "ServiceInfo" : {
-        "cluster_name" : "mycluster",
-        "service_name" : "HDFS",
-        "state" : "STARTED"
-      }
+```json
+{
+    "href" : "http://hn0-CLUSTERNAME.randomcharacters.cx.internal.cloudapp.net:8080/api/v1/clusters/mycluster/services/HDFS?fields=ServiceInfo/state",
+    "ServiceInfo" : {
+    "cluster_name" : "mycluster",
+    "service_name" : "HDFS",
+    "state" : "STARTED"
     }
+}
+```
 
-URL bize adlı bir baş düğüm üzerinde şu anda hizmetinin çalışıp çalışmadığını gösterir. **hn0 CLUSTERNAME**.
+URL, hizmetin **hn0-clustername**adlı bir baş düğümde çalışmakta olduğunu bize söyler.
 
-Durum bize Hizmet şu anda çalışıyor gösterir veya **başlatıldı**.
+Durum, hizmetin Şu anda çalıştığını veya **başlatıldığını**söyler.
 
-Hangi hizmetlerin kümeye yüklü bilmiyorsanız listesini almak için aşağıdaki komutu kullanabilirsiniz:
+Kümede hangi hizmetlerin yüklü olduğunu bilmiyorsanız, bir liste almak için aşağıdaki komutu kullanabilirsiniz:
 
-    curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services
+```bash
+curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services
+```
 
-Ambari REST API'si ile çalışma hakkında daha fazla bilgi için bkz. [izleme ve yönetme Apache Ambari REST API'yi kullanarak HDInsight](hdinsight-hadoop-manage-ambari-rest-api.md).
+REST API ambarı ile çalışma hakkında daha fazla bilgi için bkz. [HDInsight 'ı Apache ambarı REST API kullanarak izleme ve yönetme](hdinsight-hadoop-manage-ambari-rest-api.md).
 
 #### <a name="service-components"></a>Hizmet bileşenleri
 
-Hizmetleri, ayrı ayrı durumunu denetlemek istediğiniz bileşenleri içeriyor olabilir. Örneğin, HDFS, NameNode bileşeni içerir. Bir bileşen hakkında bilgi görüntülemek için komut şöyle olabilir:
+Hizmetler, tek tek durumunu denetlemek istediğiniz bileşenleri içerebilir. Örneğin,,, bir süs Code bileşeni içerir. Bir bileşen hakkındaki bilgileri görüntülemek için, komut şöyle olur:
 
-    curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services/SERVICE/components/component
+```bash
+curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services/SERVICE/components/component
+```
 
-Hangi bileşenlerin bir hizmeti tarafından sağlanan bilmiyorsanız listesini almak için aşağıdaki komutu kullanabilirsiniz:
+Bir hizmet tarafından hangi bileşenlerin sağlandığını bilmiyorsanız, bir liste almak için aşağıdaki komutu kullanabilirsiniz:
 
-    curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services/SERVICE/components/component
+```bash
+curl -u admin:PASSWORD https://CLUSTERNAME.azurehdinsight.net/api/v1/clusters/CLUSTERNAME/services/SERVICE/components/component
+```
 
-## <a name="how-to-access-log-files-on-the-head-nodes"></a>Baş düğümler hakkında günlük dosyalarına erişmek nasıl
+## <a name="how-to-access-log-files-on-the-head-nodes"></a>Baş düğümlerdeki günlük dosyalarına erişme
 
 ### <a name="ssh"></a>SSH
 
-Altında bir baş düğüm SSH üzerinden bağlıyken, günlük dosyalarını bulunabilir **/var/log**. Örneğin, **/var/log/hadoop-yarn/yarn** için YARN günlükleri içerir.
+SSH aracılığıyla bir baş düğüme bağlıyken günlük dosyaları **/var/log**altında bulunabilir. Örneğin, **/var/log/Hadoop-Yarn/Yarn** Yarn için günlükleri içerir.
 
-Hem de günlüklerini denetlemeniz gerekir böylece her bir baş düğüm benzersiz günlük girişlerini olabilir.
+Her bir baş düğüm benzersiz günlük girişlerine sahip olabilir, bu nedenle günlükleri her ikisinde de denetlemeniz gerekir.
 
 ### <a name="sftp"></a>SFTP
 
-Ayrıca, SSH Dosya Aktarım Protokolü veya güvenli dosya aktarım protokolünü (SFTP) kullanarak baş düğümüne bağlanın ve günlük dosyalarını doğrudan karşıdan yüklemek.
+Ayrıca SSH Dosya Aktarım Protokolü veya güvenli Dosya Aktarım Protokolü (SFTP) kullanarak baş düğüme bağlanabilir ve günlük dosyalarını doğrudan indirebilirsiniz.
 
-Benzer şekilde, bir SSH istemcisi kullanarak, ne zaman, kümeye bağlanarak SSH kullanıcı hesabı adını ve küme SSH adresini sağlamanız gerekir. Örneğin, `sftp username@mycluster-ssh.azurehdinsight.net`. İstendiğinde hesabı için parolayı belirtin veya bir ortak anahtarınızı kullanarak sağlamak `-i` parametresi.
+SSH istemcisi kullanmaya benzer şekilde, kümeye bağlanırken SSH kullanıcı hesabı adını ve kümenin SSH adresini sağlamanız gerekir. Örneğin, `sftp username@mycluster-ssh.azurehdinsight.net`. İstendiğinde hesabın parolasını sağlayın veya `-i` parametresini kullanarak bir ortak anahtar sağlayın.
 
-Bağlantı kurulduktan sonra ile sunulan bir `sftp>` istemi. Bu İstemi'nden dizinleri değiştirebilirsiniz yükleme ve dosyaları indirme. Örneğin, aşağıdaki komutları dizinleri **/var/log/hadoop/hdfs** dizin ve ardından indirme dizindeki tüm dosyaları.
+Bağlandıktan sonra bir `sftp>` istemiyle karşılaşırsınız. Bu istem içinden dizinleri değiştirebilir, karşıya yükleyebilir ve dosyaları indirebilirsiniz. Örneğin, aşağıdaki komutlar dizinleri **/var/log/Hadoop/HDFS** diziniyle değiştirir ve sonra dizindeki tüm dosyaları indirir.
 
     cd /var/log/hadoop/hdfs
     get *
 
-Kullanılabilir komutların listesini girin `help` adresindeki `sftp>` istemi.
+Kullanılabilir komutların listesi için `sftp>` istemine `help` girin.
 
 > [!NOTE]  
-> SFTP kullanarak bağlı dosya sistemi görselleştirmenize olanak tanıyan grafik arabirimleri vardır. Örneğin, [MobaXTerm](https://mobaxterm.mobatek.net/) Windows Gezgini için benzer bir arabirim kullanarak dosya sistemine göz atmanızı sağlar.
+> Ayrıca, SFTP kullanarak bağlıyken dosya sistemini görselleştirmenize imkan tanıyan grafiksel arabirimler de vardır. Örneğin, [MobaXterm](https://mobaxterm.mobatek.net/) , Windows Gezgini ' ne benzer bir arabirim kullanarak dosya sistemine gözatmanızı sağlar.
 
 ### <a name="ambari"></a>Ambari
 
 > [!NOTE]  
-> Ambari kullanarak günlük dosyalarına erişmek için bir SSH tüneli kullanmanız gerekir. Bireysel hizmet web arabirimleri Internet üzerinde herkese açık değildir. SSH tüneli kullanma hakkında daha fazla bilgi için bkz. [SSH tünel oluşturmayı kullanma](hdinsight-linux-ambari-ssh-tunnel.md) belge.
+> Ambarı kullanarak günlük dosyalarına erişmek için bir SSH tüneli kullanmanız gerekir. Bireysel hizmetlerin Web arabirimleri, Internet üzerinde herkese açık bir şekilde gösterilmez. SSH tüneli kullanma hakkında daha fazla bilgi için bkz. [SSH tüneli kullanma](hdinsight-linux-ambari-ssh-tunnel.md) belgesi.
 
-Ambari Web kullanıcı arabirimini (örneğin, YARN için) günlüklerini görüntülemek istediğiniz hizmeti seçin. Ardından **hızlı bağlantılar** hangi baş düğüm için günlükleri görüntülemek için seçin.
+Ambarı web kullanıcı arabiriminden, günlükleri görüntülemek istediğiniz hizmeti seçin (örneğin, YARN). Ardından, günlüklerin görüntüleneceği baş düğümü seçmek için **hızlı bağlantılar** ' ı kullanın.
 
-![Günlükleri görüntülemek için hızlı bağlantıları kullanma](./media/hdinsight-high-availability-linux/viewlogs.png)
+![Günlükleri görüntülemek için hızlı bağlantıları kullanma](./media/hdinsight-high-availability-linux/quick-links-view-logs.png)
 
 ## <a name="how-to-configure-the-node-size"></a>Düğüm boyutunu yapılandırma
 
-Bir düğümün boyutu yalnızca küme oluşturma sırasında seçilir. HDInsight üzerinde farklı VM boyutlarının listesini bulabilirsiniz [HDInsight fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/hdinsight/).
+Bir düğümün boyutu yalnızca küme oluşturma sırasında seçilebilir. HDInsight [fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/hdinsight/)HDInsight için KULLANILABILIR farklı VM boyutlarının listesini bulabilirsiniz.
 
-Bir küme oluştururken, düğümlerin boyutunu belirtebilirsiniz. Aşağıdaki bilgileri boyutu kullanarak belirleme konusunda rehberlik sağlar [Azure portalında][preview-portal], [Azure PowerShell modülü Az][azure-powershell], ve [Azure CLI][azure-cli]:
+Bir küme oluştururken düğümlerin boyutunu belirtebilirsiniz. Aşağıdaki bilgiler [Azure Portal](https://portal.azure.com/), [Azure PowerShell modül az](/powershell/azureps-cmdlets-docs)ve [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)kullanarak boyutun nasıl belirtilbileceğine ilişkin yönergeler sağlar:
 
-* **Azure portalında**: Bir küme oluştururken, küme tarafından kullanılan düğümlerin boyutu ayarlayabileceğiniz:
+* **Azure Portal**: bir küme oluştururken, küme tarafından kullanılan düğümlerin boyutunu ayarlayabilirsiniz:
 
-    ![Düğüm boyutu seçimi ile küme oluşturma Sihirbazı'nı görüntüsü](./media/hdinsight-high-availability-linux/headnodesize.png)
+    ![Düğüm boyutu seçimiyle küme oluşturma Sihirbazı görüntüsü](./media/hdinsight-high-availability-linux/hdinsight-headnodesize.png)
 
-* **Azure CLI**: Kullanırken [az hdınsight oluşturma](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) komutunu kullanarak baş, çalışan ve ZooKeeper düğümleri boyutu ayarlayabileceğiniz `--headnode-size`, `--workernode-size`, ve `--zookeepernode-size` parametreleri.
+* **Azure CLI**: [`az hdinsight create`](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) komutunu kullanırken, `--headnode-size`, `--workernode-size`ve `--zookeepernode-size` parametrelerini kullanarak baş, çalışan ve ZooKeeper düğümlerinin boyutunu ayarlayabilirsiniz.
 
-* **Azure PowerShell**: Kullanırken [yeni AzHDInsightCluster](https://docs.microsoft.com/powershell/module/az.hdinsight/new-azhdinsightcluster) cmdlet'ini kullanarak baş, çalışan ve ZooKeeper düğümleri boyutunu ayarlayabilirsiniz `-HeadNodeSize`, `-WorkerNodeSize`, ve `-ZookeeperNodeSize` parametreleri.
+* **Azure PowerShell**: [New-AzHDInsightCluster](https://docs.microsoft.com/powershell/module/az.hdinsight/new-azhdinsightcluster) cmdlet 'ini kullanırken, `-HeadNodeSize`, `-WorkerNodeSize`ve `-ZookeeperNodeSize` parametrelerini kullanarak baş, çalışan ve ZooKeeper düğümlerinin boyutunu ayarlayabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu belgede belirtilen noktalar hakkında daha fazla bilgi için aşağıdaki bağlantıları kullanın.
+Bu makalede ele alınan öğeler hakkında daha fazla bilgi edinmek için bkz.:
 
-* [Apache Ambari REST başvurusu](https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md)
-* [Azure CLI'yi yükleme ve yapılandırma](https://docs.microsoft.com//cli/azure/install-azure-cli?view=azure-cli-latest)
-* [Azure PowerShell modülünün Az yüklenmesi ve yapılandırılması](/powershell/azure/overview)
-* [Apache Ambari kullanarak HDInsight'ı yönetme](hdinsight-hadoop-manage-ambari.md)
-* [Linux tabanlı HDInsight kümeleri hazırlama](hdinsight-hadoop-provision-linux-clusters.md)
-
-[preview-portal]: https://portal.azure.com/
-[azure-powershell]: /powershell/azureps-cmdlets-docs
-[azure-cli]: ../cli-install-nodejs.md
+* [Apache ambarı REST başvurusu](https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md)
+* [Azure CLı 'yı yükleyip yapılandırma](https://docs.microsoft.com//cli/azure/install-azure-cli?view=azure-cli-latest)
+* [Azure PowerShell modülünü yükleyip yapılandırın az](/powershell/azure/overview)
+* [Apache ambarı kullanarak HDInsight 'ı yönetme](hdinsight-hadoop-manage-ambari.md)
+* [Linux tabanlı HDInsight kümeleri sağlama](hdinsight-hadoop-provision-linux-clusters.md)

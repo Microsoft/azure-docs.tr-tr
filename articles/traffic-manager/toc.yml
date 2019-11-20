@@ -10,6 +10,8 @@
       href: quickstart-create-traffic-manager-profile.md
     - name: Traffic Manager profili oluşturma - PowerShell
       href: quickstart-create-traffic-manager-profile-powershell.md
+    - name: Traffic Manager profili oluşturma - Azure CLI
+      href: quickstart-create-traffic-manager-profile-cli.md
 - name: Öğreticiler
   items:
     - name: Düşük gecikme süresi için trafiği yönlendirme
@@ -87,6 +89,12 @@
       href: traffic-manager-powershell-arm.md
     - name: İnternet etki alanınızı Traffic Manager’a yönlendirme
       href: traffic-manager-point-internet-domain.md
+    - name: Alt ağ geçersiz kılma
+      items:
+        - name: Alt ağ geçersiz kılmayı yapılandırma - Azure CLI
+          href: traffic-manager-subnet-override-cli.md
+        - name: Alt ağ geçersiz kılmayı yapılandırma - PowerShell
+          href: traffic-manager-subnet-override-powershell.md
     - name: Sorun giderme
       items:
         - name: Azure Traffic Manager’da düşürülmüş durum için sorun giderme

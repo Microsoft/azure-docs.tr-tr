@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory kullanarak verileri DB2'den taşıma | Microsoft Docs
-description: Azure Data Factory kopyalama etkinliği'ni kullanarak bir şirket içi DB2 veritabanından veri taşıma konusunda bilgi edinin
+title: Azure Data Factory kullanarak DB2 'den veri taşıma
+description: Azure Data Factory kopyalama etkinliğini kullanarak şirket içi DB2 veritabanından veri taşımayı öğrenin
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -13,118 +13,118 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 72c88ef10bf1df217ec6e24ac744d0b30386b4a3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0d066e66e4b9600eb5734ef2f3c6031dbc44f17a
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60824023"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73666595"
 ---
-# <a name="move-data-from-db2-by-using-azure-data-factory-copy-activity"></a>Azure Data Factory kopyalama etkinliği'ni kullanarak DB2 verileri taşıma
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="move-data-from-db2-by-using-azure-data-factory-copy-activity"></a>Azure Data Factory kopyalama etkinliğini kullanarak DB2 verilerini taşıyın
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](data-factory-onprem-db2-connector.md)
 > * [Sürüm 2 (geçerli sürüm)](../connector-db2.md)
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [DB2 Bağlayıcısı V2'de](../connector-db2.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [v2 'de DB2 Bağlayıcısı](../connector-db2.md).
 
 
-Bu makalede, kopyalama etkinliği Azure Data Factory'de bir şirket içi DB2 veritabanından bir veri deposuna veri kopyalamak için nasıl kullanabileceğinizi açıklar. Desteklenen bir havuz olarak listelenen tüm deposuna veri kopyalama [Data Factory veri taşıma etkinlikleri](data-factory-data-movement-activities.md#supported-data-stores-and-formats) makalesi. Bu konu, kopyalama etkinliği'ni kullanarak veri taşıma genel bir bakış sunar ve desteklenen veri deposu birleşimlerini listeler Data Factory makalesinde oluşturur. 
+Bu makalede, şirket içi bir DB2 veritabanından bir veri deposuna veri kopyalamak için Azure Data Factory kopyalama etkinliğini nasıl kullanabileceğiniz açıklanır. Verileri [Data Factory veri taşıma etkinlikleri](data-factory-data-movement-activities.md#supported-data-stores-and-formats) makalesinde desteklenen bir havuz olarak listelenen herhangi bir depoya kopyalayabilirsiniz. Bu konu, kopyalama etkinliğini kullanarak veri hareketine genel bakış sunan ve desteklenen veri deposu kombinasyonlarını listeleyen Data Factory makalesinde oluşturulur. 
 
-Data Factory şu anda yalnızca bir DB2 veritabanına verileri destekler bir [desteklenen havuz veri deposu](data-factory-data-movement-activities.md#supported-data-stores-and-formats). Diğer veriler veri taşıma, bir DB2 veritabanında desteklenmeyen depolar.
+Data Factory Şu anda yalnızca bir DB2 veritabanından [desteklenen havuz veri deposuna](data-factory-data-movement-activities.md#supported-data-stores-and-formats)veri taşımayı destekliyor. Verileri diğer veri depolarından DB2 veritabanına taşıma desteklenmez.
 
-## <a name="prerequisites"></a>Önkoşullar
-Data Factory destekler kullanarak bir şirket içi DB2 veritabanına bağlanma [veri yönetimi ağ geçidi](data-factory-data-management-gateway.md). Ağ geçidi veri işlem hattı, verileri taşımak için ayarlamak adım adım yönergeler için bkz: [buluta şirket içinden veri taşıma](data-factory-move-data-between-onprem-and-cloud.md) makalesi.
+## <a name="prerequisites"></a>Ön koşullar
+Data Factory, [veri yönetimi ağ geçidini](data-factory-data-management-gateway.md)kullanarak ŞIRKET içi DB2 veritabanına bağlanmayı destekler. Verilerinizi taşımak için ağ geçidi veri işlem hattını ayarlamaya yönelik adım adım yönergeler için, [verileri Şirket içinden buluta taşıma](data-factory-move-data-between-onprem-and-cloud.md) makalesine bakın.
 
-DB2 Azure Iaas sanal makinesinde barındırılan olsa bile bir ağ geçidi gereklidir. Veri deposu olarak aynı Iaas VM ağ geçidi yükleyebilirsiniz. Ağ geçidi veritabanına bağlanabilir, farklı bir sanal ağ geçidi yükleyebilirsiniz.
+DB2, Azure IaaS VM üzerinde barındırıldığında bile bir ağ geçidi gerekir. Ağ geçidini, veri deposuyla aynı IaaS sanal makinesine yükleyebilirsiniz. Ağ Geçidi veritabanına bağlanabilcan, ağ geçidini farklı bir VM 'ye yükleyebilirsiniz.
 
-Veri Yönetimi ağ geçidi yerleşik bir DB2 sürücüsü sağlar. böylece DB2 veri kopyalamak için bir sürücüyü el ile yüklemeniz gerekmez.
+Veri yönetimi ağ geçidi yerleşik bir DB2 sürücüsü sağladığından verileri DB2 'den kopyalamak için el ile bir sürücü yüklemeniz gerekmez.
 
 > [!NOTE]
-> Bağlantı ve ağ geçidiyle ilgili sorunları giderme ipuçları için bkz: [ağ geçidiyle ilgili sorunları giderme](data-factory-data-management-gateway.md#troubleshooting-gateway-issues) makalesi.
+> Bağlantı ve ağ geçidi sorunlarını giderme hakkında ipuçları için bkz. [ağ geçidi sorunlarını giderme](data-factory-data-management-gateway.md#troubleshooting-gateway-issues) makalesi.
 
 
 ## <a name="supported-versions"></a>Desteklenen sürümler
-Data Factory DB2 Bağlayıcısı aşağıdaki IBM DB2 platformlara ve sürümlere 9, 10 ve 11 dağıtılmış ilişkisel veritabanı mimarisi (DRDA) SQL Erişim Yöneticisi sürümleri destekler:
+Data Factory DB2 Bağlayıcısı, dağıtılmış Ilişkisel veritabanı mimarisi (DRDA) SQL Access Manager sürümleri 9, 10 ve 11 olan aşağıdaki IBM DB2 platformunu ve sürümlerini destekler:
 
-* IBM DB2 z/OS sürümü 11.1 için
-* IBM DB2 z/OS sürümü 10.1 için
-* IBM DB2'i (AS400) sürüm 7.2 için
-* IBM DB2'i (AS400) sürüm 7.1 için
-* IBM DB2 Linux, UNIX ve Windows (LUW) sürüm 11
-* IBM DB2 sürüm 10.5 LUW için
-* IBM DB2 sürüm 10.1 LUW için
+* Z/ç için IBM DB2 sürüm 11,1
+* Z/ç için IBM DB2 sürüm 10,1
+* İ (AS400) sürüm 7,2 için IBM DB2
+* İ (AS400) sürüm 7,1 için IBM DB2
+* Linux, UNIX ve Windows (LUW) için IBM DB2 sürüm 11
+* LUW için IBM DB2 sürüm 10,5
+* LUW için IBM DB2 sürüm 10,1
 
 > [!TIP]
-> "Bir SQL deyimi yürütme isteğine karşılık gelen paket bulunamadı. hata iletisi alırsanız SQLSTATE 51002 SQLCODE =-805, = "normal kullanıcı işletim sistemi için gerekli paket oluşturulmaz nedenidir. Bu sorunu çözmek için DB2 sunucu türü için bu yönergeleri izleyin:
-> - DB2 için i (AS400): Kopyalama etkinliği çalıştırmadan önce için normal bir kullanıcı koleksiyonu oluşturma power user olanak tanır. Koleksiyonu oluşturmak için komutu kullanın: `create collection <username>`
-> - DB2 z/OS veya LUW için: Yüksek ayrıcalıklı bir hesap--power user veya paket yetkilileri ve bağlama BINDADD, kopya bir kez çalıştırmak için izinleri verme YÜRÜTMEK için genel--yönetici kullanın. Gerekli paket kopyalama sırasında otomatik olarak oluşturulur. Daha sonra sonraki kopyalama çalışmalarınız için normal kullanıcıya geri geçiş yapabilirsiniz.
+> "Hata iletisini alırsanız, bir SQL deyimindeki yürütme isteğine karşılık gelen paket bulunamadı. SQLSTATE = 51002 SQLCODE =-805, "Bu neden, işletim sistemindeki normal kullanıcı için gerekli bir paket oluşturulmaz. Bu sorunu çözmek için DB2 sunucunuzun türü için şu yönergeleri izleyin:
+> - I için DB2 (AS400): bir Power User 'ın kopyalama etkinliğini çalıştırmadan önce normal kullanıcı için koleksiyon oluşturmasına Izin verin. Koleksiyonu oluşturmak için şu komutu kullanın: `create collection <username>`
+> - Z/OS veya LUW için DB2: yüksek ayrıcalıklı bir hesap kullanın--paket yetkilileri ve BIND, BINERDD olan bir Power User veya yönetici, kopyayı bir kez çalıştırmak için ortak izinlere yürütme IZNI verır. Gerekli paket, kopyalama sırasında otomatik olarak oluşturulur. Daha sonra, sonraki kopya çalışmalarınız için normal kullanıcıya dönebilirsiniz.
 
 ## <a name="getting-started"></a>Başlarken
-Farklı araç ve API'leri kullanarak bir şirket içi DB2 veri deposundan veri taşımak için bir kopyalama etkinlikli bir işlem hattı oluşturabilirsiniz: 
+Farklı araçlar ve API 'Ler kullanarak şirket içi DB2 veri deposundan veri taşımak için kopyalama etkinliği ile bir işlem hattı oluşturabilirsiniz: 
 
-- Bir işlem hattı oluşturmanın en kolay yolu, Azure Data Factory Kopyalama Sihirbazı'nı kullanmaktır. Hızlı bir kılavuz Kopyalama Sihirbazı'nı kullanarak bir işlem hattı oluşturma hakkında bilgi için bkz: [Öğreticisi: Kopyalama Sihirbazı'nı kullanarak bir işlem hattı oluşturma](data-factory-copy-data-wizard-tutorial.md). 
-- Azure portalı, Visual Studio, Azure PowerShell, Azure Resource Manager şablonu, .NET API ve REST API dahil olmak üzere bir işlem hattı oluşturmak için araçlar da kullanabilirsiniz. Kopyalama etkinliği ile işlem hattı oluşturmak adım adım yönergeler için bkz: [kopyalama etkinliği Öğreticisi](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md). 
+- İşlem hattı oluşturmanın en kolay yolu Azure Data Factory kopyalama Sihirbazı ' nı kullanmaktır. Kopyalama Sihirbazı 'nı kullanarak bir işlem hattı oluşturmaya yönelik hızlı bir anlatım için, bkz [: kopyalama sihirbazını kullanarak işlem hattı oluşturma](data-factory-copy-data-wizard-tutorial.md). 
+- Ayrıca, Visual Studio, Azure PowerShell, Azure Resource Manager şablonu, .NET API ve REST API dahil bir işlem hattı oluşturmak için araçları da kullanabilirsiniz. Kopyalama etkinliği ile işlem hattı oluşturmaya yönelik adım adım yönergeler için, [kopyalama etkinliği öğreticisine](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md)bakın. 
 
-API'ler ve Araçlar kullanmanıza bakılmaksızın, bir havuz veri deposu için bir kaynak veri deposundan veri taşıyan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirin:
+Araçları veya API 'Leri kullanıp kullanmayacağınızı bir kaynak veri deposundan havuz veri deposuna veri taşınan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirirsiniz:
 
-1. Giriş bağlantı ve veri depolarında veri fabrikanıza çıktı bağlı hizmetleri oluşturun.
-2. Kopyalama işleminin girdi ve çıktı verilerini temsil eden veri kümeleri oluşturun. 
-3. Bir veri kümesini girdi ve çıktı olarak bir veri kümesini alan kopyalama etkinliği ile işlem hattı oluşturma. 
+1. Giriş ve çıkış veri depolarını veri fabrikanıza bağlamak için bağlı hizmetler oluşturun.
+2. Kopyalama işlemi için girdi ve çıktı verilerini temsil edecek veri kümeleri oluşturun. 
+3. Bir veri kümesini girdi olarak ve bir veri kümesini çıkış olarak alan kopyalama etkinliği ile bir işlem hattı oluşturun. 
 
-Data Factory bağlı için JSON tanımları, kopyalama Sihirbazı'nı kullandığınızda, hizmetler, veri kümeleri ve işlem hattı varlıkları otomatik olarak sizin için oluşturulur. Araç veya API'lerden (dışında .NET API'si) kullandığınızda, Data Factory varlıkları JSON biçimini kullanarak tanımlayın. JSON örneği: DB2 kopyalama verileri Azure Blob Depolama, şirket içi DB2 veri deposundan veri kopyalamak için kullanılan Data Factory varlıkları için JSON tanımları gösterir.
+Kopyalama Sihirbazı 'nı kullandığınızda, Data Factory bağlı hizmetler, veri kümeleri ve işlem hattı varlıkları için JSON tanımları sizin için otomatik olarak oluşturulur. Araçları veya API 'Leri (.NET API hariç) kullandığınızda, Data Factory varlıklarını JSON biçimini kullanarak tanımlarsınız. JSON örneği: DB2 'den Azure Blob depolama 'ya veri kopyalama, şirket içi DB2 veri deposundan veri kopyalamak için kullanılan Data Factory varlıkların JSON tanımlarını gösterir.
 
-Aşağıdaki bölümler belirli bir DB2 veri deposuna Data Factory varlıkları tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılı bilgi sağlar.
+Aşağıdaki bölümlerde, bir DB2 veri deposuna özgü Data Factory varlıkları tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılar sağlanmaktadır.
 
 ## <a name="db2-linked-service-properties"></a>DB2 bağlı hizmeti özellikleri
-Aşağıdaki tabloda bir DB2 bağlı hizmeti için özel JSON özellikleri listeler.
+Aşağıdaki tabloda, bir DB2 bağlantılı hizmetine özgü JSON özellikleri listelenmektedir.
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| **type** |Bu özellik ayarlanmalıdır **OnPremisesDb2**. |Evet |
-| **Sunucu** |DB2 sunucunun adı. |Evet |
-| **Veritabanı** |DB2 veritabanı adı. |Evet |
-| **Şema** |DB2 veritabanında şemasının adı. Bu özellik, büyük/küçük harf duyarlıdır. |Hayır |
-| **authenticationType** |DB2 veritabanına bağlanmak için kullanılan kimlik doğrulaması türü. Olası değerler şunlardır: Anonim, temel ve Windows. |Evet |
-| **Kullanıcı adı** |Temel veya Windows kimlik doğrulamasını kullanıyorsanız kullanıcı hesabı adı. |Hayır |
-| **Parola** |Kullanıcı hesabının parolası. |Hayır |
-| **gatewayName** |Data Factory hizmetinin şirket içi DB2 veritabanına bağlanmak için kullanması gereken ağ geçidi adı. |Evet |
+| **type** |Bu özellik **OnPremisesDb2**olarak ayarlanmalıdır. |Evet |
+| **Server** |DB2 sunucusunun adı. |Evet |
+| **veritabanınızı** |DB2 veritabanının adı. |Evet |
+| **manızı** |DB2 veritabanındaki şemanın adı. Bu özellik büyük/küçük harfe duyarlıdır. |Hayır |
+| **authenticationType** |DB2 veritabanına bağlanmak için kullanılan kimlik doğrulaması türü. Olası değerler şunlardır: anonim, temel ve Windows. |Evet |
+| **nitelen** |Temel veya Windows kimlik doğrulamasını kullanıyorsanız Kullanıcı hesabının adı. |Hayır |
+| **parolayı** |Kullanıcı hesabının parolası. |Hayır |
+| **gatewayName** |Data Factory hizmetinin şirket içi DB2 veritabanına bağlanmak için kullanması gereken ağ geçidinin adı. |Evet |
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
-Bölümleri ve veri kümeleri tanımlamak için kullanılabilir özellikler listesi için bkz. [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Bölümler, gibi **yapısı**, **kullanılabilirlik**ve **ilke** tüm veri kümesi türleri (Azure SQL, Azure Blob Depolama, Azure tablo depolama için bir veri kümesi için JSON benzerdir vb.).
+Veri kümelerini tanımlamaya yönelik bölümlerin ve özelliklerin listesi için bkz. [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Tüm veri kümesi türleri (Azure SQL, Azure Blob depolama, Azure Tablo depolama, vb.) için **Yapı**, **kullanılabilirlik**ve **ilke** gibi bölümler de benzerdir.
 
-**TypeProperties** bölümünde her veri kümesi türü için farklıdır ve verilerin veri deposundaki konumu hakkında bilgi sağlar. **TypeProperties** türü için bir veri kümesi bölümünü **RelationalTable**, özelliği var. Bu DB2 veri kümesi içerir:
+**Typeproperties** bölümü her bir veri kümesi türü için farklıdır ve veri deposundaki verilerin konumu hakkında bilgi sağlar. DB2 veri kümesini içeren **Relationaltable**türünde bir veri kümesinin **typeproperties** bölümü aşağıdaki özelliğe sahiptir:
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| **TableName** |Bağlı hizmetini ifade eder DB2 veritabanı tablosunun adı. Bu özellik, büyük/küçük harf duyarlıdır. |Hayır (varsa **sorgu** türünde bir kopyalama etkinliği özelliği **RelationalSource** belirtilir) |
+| **tableName** |DB2 veritabanı örneğindeki bağlı hizmetin başvurduğu tablonun adı. Bu özellik büyük/küçük harfe duyarlıdır. |Hayır ( **Relationalsource** türünde kopyalama etkinliğinin **sorgu** özelliği belirtilmişse) |
 
-## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
-Bölümleri ve kopyalama etkinlikleri tanımlamak için kullanılabilir özellikler listesi için bkz. [işlem hatları oluşturma](data-factory-create-pipelines.md) makalesi. Kopyalama etkinliğinin özellikleri, aşağıdaki gibi **adı**, **açıklama**, **girişleri** tablo **çıkarır** tablo ve **İlkesi**, tüm etkinlik türleri için kullanılabilir. Kullanılabilir özellikler **typeProperties** etkinlik bölümünde her bir etkinlik türü için farklılık gösterir. Kopyalama etkinliği için özellikleri veri kaynağı ve havuz türlerine bağlı olarak farklılık gösterir.
+## <a name="copy-activity-properties"></a>Kopyalama etkinliği özellikleri
+Kopyalama etkinliklerini tanımlamaya yönelik bölümlerin ve özelliklerin bir listesi için, işlem [hatları oluşturma](data-factory-create-pipelines.md) makalesine bakın. **Ad**, **Açıklama**, **giriş** tablosu, **Çıkış** tablosu ve **ilke**gibi kopyalama etkinliği özellikleri tüm etkinlik türleri için kullanılabilir. Etkinliğin **Typeproperties** bölümünde kullanılabilen özellikler her etkinlik türü için farklılık gösterir. Kopyalama etkinliği için özellikler veri kaynağı ve havuz türlerine göre değişir.
 
-Kopyalama etkinliği kaynak türü olduğunda için **RelationalSource** (DB2 içeren), aşağıdaki özellikler kullanılabilir **typeProperties** bölümü:
+Kopyalama etkinliği için, kaynak **Relationalsource** (DB2 dahil) türünde olduğunda, **typeproperties** bölümünde aşağıdaki özellikler mevcuttur:
 
 | Özellik | Açıklama | İzin verilen değerler | Gerekli |
 | --- | --- | --- | --- |
-| **query** |Verileri okumak için özel sorgu kullanın. |SQL sorgu dizesi. Örneğin, `"query": "select * from "MySchema"."MyTable""` |Hayır (varsa **tableName** özellik kümesinin belirtilen) |
+| **sorgulayamadı** |Verileri okumak için özel sorguyu kullanın. |SQL sorgu dizesi. Örneğin, `"query": "select * from "MySchema"."MyTable""` |Hayır (bir veri kümesinin **TableName** özelliği belirtilmişse) |
 
 > [!NOTE]
-> Şema ve tablo adları büyük/küçük harfe duyarlıdır. Sorgu deyiminde özellik adları kullanarak alın "" (çift tırnak).
+> Şema ve tablo adları büyük/küçük harfe duyarlıdır. Sorgu ifadesinde, "" (çift tırnak) kullanarak özellik adlarını çevrelemek.
 
-## <a name="json-example-copy-data-from-db2-to-azure-blob-storage"></a>JSON örneği: DB2'den Azure Blob depolama alanına veri kopyalama
-Bu örnekte kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz örnek JSON tanımları sağlar, [Azure portalında](data-factory-copy-activity-tutorial-using-azure-portal.md), [Visual Studio](data-factory-copy-activity-tutorial-using-visual-studio.md), veya [Azure PowerShell](data-factory-copy-activity-tutorial-using-powershell.md). Örnek, DB2 veritabanından Blob depolama alanına veri kopyalama işlemini göstermektedir. Ancak, veriler için kopyalanabilir [desteklenen tüm veriler, Havuz türü depolamak](data-factory-data-movement-activities.md#supported-data-stores-and-formats) kullanarak Azure Data Factory kopyalama etkinliği.
+## <a name="json-example-copy-data-from-db2-to-azure-blob-storage"></a>JSON örneği: DB2 'den Azure Blob depolamaya veri kopyalama
+Bu örnek, [Visual Studio](data-factory-copy-activity-tutorial-using-visual-studio.md)'yu kullanarak bir işlem hattı oluşturmak için KULLANABILECEĞINIZ örnek JSON tanımlarını sağlar veya [Azure PowerShell](data-factory-copy-activity-tutorial-using-powershell.md). Örnek, bir DB2 veritabanından blob depolamaya nasıl veri kopyalanacağını gösterir. Ancak, veriler Azure Data Factory kopyalama etkinliği kullanılarak [desteklenen herhangi bir veri deposu havuzu türüne](data-factory-data-movement-activities.md#supported-data-stores-and-formats) kopyalanabilir.
 
-Örnek, aşağıdaki Data Factory varlıklarını sahiptir:
+Örnek aşağıdaki Data Factory varlıklara sahiptir:
 
-- Bir DB2 bağlı hizmet türü [OnPremisesDb2](data-factory-onprem-db2-connector.md)
-- Bir Azure Blob Depolama bağlantılı hizmet türü [AzureStorage](data-factory-azure-blob-connector.md#linked-service-properties)
-- Girdi [veri kümesi](data-factory-create-datasets.md) türü [RelationalTable](data-factory-onprem-db2-connector.md#dataset-properties)
-- Bir çıkış [veri kümesi](data-factory-create-datasets.md) türü [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties)
-- A [işlem hattı](data-factory-create-pipelines.md) kullanan bir kopyalama etkinlikli [RelationalSource](data-factory-onprem-db2-connector.md#copy-activity-properties) ve [BlobSink](data-factory-azure-blob-connector.md#copy-activity-properties) özellikleri
+- [OnPremisesDb2](data-factory-onprem-db2-connector.md) türünde bir DB2 bağlı hizmeti
+- [Azurestorage](data-factory-azure-blob-connector.md#linked-service-properties) türünde bir Azure Blob depolama bağlı hizmeti
+- [Relationaltable](data-factory-onprem-db2-connector.md#dataset-properties) türünde bir giriş [veri kümesi](data-factory-create-datasets.md)
+- [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties) türünde bir çıkış [veri kümesi](data-factory-create-datasets.md)
+- [Relationalsource](data-factory-onprem-db2-connector.md#copy-activity-properties) ve [blobsink](data-factory-azure-blob-connector.md#copy-activity-properties) özelliklerini kullanan kopyalama etkinliğine sahip bir işlem [hattı](data-factory-create-pipelines.md)
 
-Örnek verileri DB2 veritabanına bir sorgu sonucunda Azure blobuna saatlik kopyalar. Örnekte kullanılan JSON özellikleri varlık tanımlarını bölümlerde açıklanmıştır.
+Örnek, bir sorgudaki verileri bir DB2 veritabanında saatlik olarak bir Azure blobuna kopyalar. Örnekte kullanılan JSON özellikleri, varlık tanımlarını izleyen bölümlerde açıklanmıştır.
 
-İlk adım olarak yükleyin ve bir veri ağ geçidi yapılandırın. Yönergeler [Bulut ve şirket içi konumlar arasında veri taşıma](data-factory-move-data-between-onprem-and-cloud.md) makalesi.
+İlk adım olarak, bir veri ağ geçidi yükleyip yapılandırın. Yönergeler, [Şirket içi konumlar ve bulut makaleleri arasında hareketli verilerde](data-factory-move-data-between-onprem-and-cloud.md) yer alır.
 
 **DB2 bağlı hizmeti**
 
@@ -146,7 +146,7 @@ Bu örnekte kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz �
 }
 ```
 
-**Azure Blob Depolama bağlı hizmeti**
+**Azure Blob depolama bağlı hizmeti**
 
 ```json
 {
@@ -162,9 +162,9 @@ Bu örnekte kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz �
 
 **DB2 giriş veri kümesi**
 
-Örnek, DB2 "zaman serisi verilerinin ve" TIMESTAMP"etiketli bir sütunda MyTable" adlı bir tablo oluşturduğunuz varsayılır.
+Örnek, DB2 içinde, zaman serisi verileri için "timestamp" etiketli bir sütun içeren "MyTable" adlı bir tablo oluşturduğunuzu varsayar.
 
-**Dış** özelliği "true" Bu ayar, bu veri kümesi dış veri fabrikasına ve veri fabrikasında bir etkinliği tarafından üretilen değil, Data Factory hizmetinin sizi bilgilendirir. Dikkat **türü** özelliği **RelationalTable**.
+**External** özelliği "true" olarak ayarlanır. Bu ayar, bu veri kümesinin veri fabrikasında dış olduğunu ve veri fabrikasındaki bir etkinlik tarafından üretilmediğini Data Factory hizmetine bildirir. **Type** özelliğinin **relationaltable**olarak ayarlandığını unutmayın.
 
 
 ```json
@@ -192,7 +192,7 @@ Bu örnekte kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz �
 
 **Azure Blob çıktı veri kümesi**
 
-Veriler yazılır yeni bir blob için saatte ayarlayarak **sıklığı** "Hour" özelliğini ve **aralığı** özelliği 1. **FolderPath** özelliğinin blob dinamik olarak değerlendirilmesi için temel üzerinde işlenmekte olan dilimin başlangıç zamanı. Yıl, ay, gün ve saat bölümlerini başlangıç zamanı klasör yolu kullanır.
+**Sıklık** özelliği "Hour" ve **Interval** özelliği 1 olarak ayarlanarak, veriler her saat yeni bir bloba yazılır. Blob için **FolderPath** özelliği, işlenmekte olan dilimin başlangıç zamanına göre dinamik olarak değerlendirilir. Klasör yolu başlangıç zamanının yıl, ay, gün ve saat kısımlarını kullanır.
 
 ```json
 {
@@ -252,7 +252,7 @@ Veriler yazılır yeni bir blob için saatte ayarlayarak **sıklığı** "Hour" 
 
 **Kopyalama etkinliği için işlem hattı**
 
-İşlem hattını saatte bir çalışacak şekilde zamanlanmış olan ve belirtilen giriş ve çıkış veri kümesi için yapılandırılmış bir kopyalama etkinliği içeriyor. İşlem hattının JSON tanımında **kaynak** türü ayarlandığında **RelationalSource** ve **havuz** türü ayarlandığında **BlobSink**. SQL sorgusu için belirtilen **sorgu** özelliği "Siparişler" tablosundan verileri seçer.
+İşlem hattı, belirtilen giriş ve çıkış veri kümelerini kullanmak üzere yapılandırılmış ve her saat çalışacak şekilde zamanlanan bir kopyalama etkinliği içerir. İşlem hattının JSON tanımında, **kaynak** türü **relationalsource** olarak ayarlanır ve **Havuz** türü **blobsink**olarak ayarlanır. **Sorgu** özelliği IÇIN belirtilen SQL sorgusu "Orders" tablosundan verileri seçer.
 
 ```json
 {
@@ -298,62 +298,62 @@ Veriler yazılır yeni bir blob için saatte ayarlayarak **sıklığı** "Hour" 
 }
 ```
 
-## <a name="type-mapping-for-db2"></a>DB2 için tür eşlemesi
-Belirtildiği gibi [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesi, kopyalama etkinliği, türü, aşağıdaki iki adımlı yaklaşım kullanarak havuz için kaynak türünden otomatik tür dönüştürmeleri gerçekleştirir:
+## <a name="type-mapping-for-db2"></a>DB2 için tür eşleme
+[Veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde belirtildiği gibi, kopyalama etkinliği aşağıdaki iki adımlı yaklaşımı kullanarak kaynak türünden havuz türüne otomatik tür dönüştürmeleri gerçekleştirir:
 
-1. Yerel kaynak türünden bir .NET türüne dönüştürün
-2. Bir .NET türünden bir yerel havuz türüne dönüştürün
+1. Yerel bir kaynak türünden .NET türüne dönüştürme
+2. .NET türünden yerel havuz türüne dönüştürme
 
-Kopyalama etkinliği verileri DB2 türünden bir .NET türe dönüştürdüğünü şu eşlemeler kullanılır:
+Kopyalama etkinliği verileri bir DB2 türünden .NET türüne dönüştürdüğünde aşağıdaki eşlemeler kullanılır:
 
-| DB2 veritabanı türü | .NET framework türü |
+| DB2 veritabanı türü | .NET Framework türü |
 | --- | --- |
-| Integer |Int16 |
-| Integer |Int32 |
+| Small |Int16 |
+| Tamsayı |Int32 |
 | BigInt |Int64 |
-| Real |Single |
-| Double |Double |
-| Float |Double |
-| Ondalık |Decimal |
-| DecimalFloat |Decimal |
-| Numeric |Decimal |
+| Real |Tek |
+| Çift |Çift |
+| Float |Çift |
+| Kategori |Kategori |
+| DecimalFloat |Kategori |
+| rakamlardan |Kategori |
 | Tarih |DateTime |
 | Zaman |TimeSpan |
-| Timestamp |DateTime |
-| Xml |Byte[] |
-| Char |String |
-| VarChar |String |
-| LongVarChar |String |
-| DB2DynArray |String |
-| binary |Byte[] |
-| VarBinary |Byte[] |
-| LongVarBinary |Byte[] |
-| Graphic |String |
-| VarGraphic |String |
-| LongVarGraphic |String |
-| Clob |String |
-| Blob |Byte[] |
-| DbClob |String |
-| Integer |Int16 |
-| Integer |Int32 |
+| Zaman damgası |DateTime |
+| 'Sini |Byte [] |
+| Char |Dize |
+| VarChar |Dize |
+| LongVarChar |Dize |
+| DB2DynArray |Dize |
+| ý |Byte [] |
+| Ikili |Byte [] |
+| LongVarBinary |Byte [] |
+| Sel |Dize |
+| VarGraphic |Dize |
+| LongVarGraphic |Dize |
+| CLOB |Dize |
+| Blob |Byte [] |
+| DbClob |Dize |
+| Small |Int16 |
+| Tamsayı |Int32 |
 | BigInt |Int64 |
-| Real |Single |
-| Double |Double |
-| Float |Double |
-| Ondalık |Decimal |
-| DecimalFloat |Decimal |
-| Numeric |Decimal |
+| Real |Tek |
+| Çift |Çift |
+| Float |Çift |
+| Kategori |Kategori |
+| DecimalFloat |Kategori |
+| rakamlardan |Kategori |
 | Tarih |DateTime |
 | Zaman |TimeSpan |
-| Timestamp |DateTime |
-| Xml |Byte[] |
-| Char |String |
+| Zaman damgası |DateTime |
+| 'Sini |Byte [] |
+| Char |Dize |
 
-## <a name="map-source-to-sink-columns"></a>Sütunları havuz için kaynak eşlemesi
-Kaynak veri kümesindeki sütunları havuz veri kümesi sütunlara eşlemeyle ilgili bilgi edinmek için bkz: [Azure Data factory'de veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
+## <a name="map-source-to-sink-columns"></a>Kaynağı havuz sütunlarına eşleyin
+Kaynak veri kümesindeki sütunların havuz veri kümesindeki sütunlara nasıl eşlendiğini öğrenmek için, bkz. [Azure Data Factory veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
 
-## <a name="repeatable-reads-from-relational-sources"></a>İlişkisel kaynaklar tekrarlanabilir okuma
-İlişkisel veri deposundan veri kopyaladığınızda, Yinelenebilirlik istenmeyen sonuçlar önlemek için göz önünde bulundurun. Azure Data Factory'de bir dilim el ile çalıştırabilirsiniz. Yeniden deneme de yapılandırabilirsiniz **ilke** özelliği için bir hata oluştuğunda bir dilimi yeniden çalıştırmak için bir veri kümesi. Aynı veri dilimi yeniden çalıştırmak kaç kez ne olursa olsun ve dilimi yeniden çalıştırmak nasıl bağımsız olarak okunur emin olun. Daha fazla bilgi için [Repeatable okur ilişkisel kaynaklardan](data-factory-repeatable-copy.md#repeatable-read-from-relational-sources).
+## <a name="repeatable-reads-from-relational-sources"></a>İlişkisel kaynaklardan tekrarlanabilir okuma
+İlişkisel bir veri deposundan verileri kopyaladığınızda, istenmeyen sonuçlardan kaçınmak için yinelenebilirlik aklınızda bulundurun. Azure Data Factory, bir dilimi el ile yeniden çalıştırabilirsiniz. Bir hata oluştuğunda bir dilimi yeniden çalıştırmak için bir veri kümesi için yeniden deneme **ilkesi** özelliğini de yapılandırabilirsiniz. Aynı verilerin, dilimin kaç kez yeniden çalıştırıldığına ve dilimi yeniden çalıştırma şeklinden bağımsız olarak okuduğunuzdan emin olun. Daha fazla bilgi için bkz. [ilişkisel kaynaklardan tekrarlanabilir okumalar](data-factory-repeatable-copy.md#repeatable-read-from-relational-sources).
 
 ## <a name="performance-and-tuning"></a>Performans ve ayar
-Kopyalama etkinliği ve performansı iyileştirmek için yollar performansını etkileyen önemli faktörlerin öğrenin [kopyalama etkinliği performansı ve ayarlama Kılavuzu](data-factory-copy-activity-performance.md).
+Kopyalama etkinliğinin performansını etkileyen anahtar faktörleri ve [kopyalama etkinliği performansı ve ayarlama Kılavuzu](data-factory-copy-activity-performance.md)' nda performansı iyileştirme yolları hakkında bilgi edinin.

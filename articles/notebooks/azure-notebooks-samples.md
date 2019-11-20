@@ -1,47 +1,46 @@
 ---
-title: Azure not defterleri için örnek Jupyter Notebook
-description: Örnekleri, bulut Hizmetleri ücretsiz Azure defterlerinde çalıştıran Jupyter not defterleri deneyimi için harika bir yoludur.
+title: Azure Notebooks için örnek Jupyıter Not defterleri
+description: Örnekler, ücretsiz Azure Notebooks bulut hizmetlerinde çalışan Jupyıter not defterlerini deneyimetmenin harika bir yoludur.
 services: app-service
 documentationcenter: ''
 author: kraigb
-manager: douge
+manager: barbkess
 ms.assetid: 07e95905-0f1b-49ce-a0f9-820f61952278
 ms.service: azure-notebooks
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 01/11/2019
 ms.author: kraigb
-ms.openlocfilehash: 50e24ce29b5378b3aa930c54824fd444cd823b46
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 715db36921427dc0ac5dcdad24c2c026b1ea1326
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60631840"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73496684"
 ---
-# <a name="discover-and-use-sample-notebooks"></a>Bulma ve örnek not defterlerini kullanma
+# <a name="discover-and-use-sample-notebooks"></a>Örnek not defterlerini bulma ve kullanma
 
-Internet, Azure not defterlerine kolayca getirebilir ilginç ve yararlı Jupyter not defterleri birçok koleksiyonu vardır. Bu makalede, önemli örnekleri bir listesini sağlar.
+Internet, Azure Notebooks kolayca getirebilmeniz için çok sayıda ilginç ve yararlı jupi Not defteri koleksiyonuna sahiptir. Bu makale, önemli bir örnek listesi sağlar.
 
-Keşfetmek istediğiniz bir not defteri belirledikten sonra öğrenmek isteyeceksiniz bazı ayrıntılar aşağıda verilmiştir:
+Araştırmak istediğiniz bir not defterini tanımladıktan sonra, anlamak istediğiniz bazı ayrıntılar aşağıda verilmiştir:
 
-- Bir not defteri Azure not defterlerinde ise, kullanın **kopya** kendi hesabında kopyalanmasına projenin Proje panosunu düğmesi.
-- Bazı not defterlerini çalıştırmak için belirli paketi gerektirir. Hizmetini kullanıyor olsanız da `!pip install` (Python) veya `install.packages` bir not kendisini defterinden paketleri yüklemek için (R) ayrıca [uygun bir ortam ile bir Azure not defterleri projesi yapılandırma](configure-manage-azure-notebooks-projects.md).
+- Bir not defteri zaten Azure Notebooks, kendi hesabınızda projenin bir kopyasını oluşturmak için Proje panosundaki **Kopyala** düğmesini kullanın.
+- Bazı Not defterleri belirli paketlerin çalıştırılmasını gerektirir. Bir not defterinden paket yüklemek için `!pip install` (Python) veya `install.packages` (R) kullanabilirsiniz, ancak [uygun ortamla bir Azure Notebooks projesi de yapılandırabilirsiniz](configure-manage-azure-notebooks-projects.md).
 
-## <a name="great-sample-notebooks"></a>Büyük örnek Not Defterleri
+## <a name="great-sample-notebooks"></a>Harika örnek Not defterleri
 
-- [Azure not defterleri için başlangıç kümesi](https://notebooks.azure.com/#sample-redirect) tanıtımlar için Python, R, içerir ve F#, veri erişimi, Azure Machine Learning Hizmetleri ve birkaç veri bilimi alıştırmaları gösteren not defterleri ile birlikte.
-- [Jupyter not defterleri giriş](https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb) (jupyter.org)
-- [Veri bilimi giriş](https://github.com/jakevdp/PythonDataScienceHandbook/tree/master/notebooks) Jake Vanderplas tarafından.
-- [İlgi çekici not defterlerini Galerisi](https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks) (GitHub üzerinde Jupyter Proje)
+- [Azure Notebooks başlangıç kümesi](https://notebooks.azure.com/#sample-redirect) , Python, R ve F#, veri erişimi, Azure Machine Learning ve birkaç veri bilimi öğesini gösteren Not defterleriyle ilgili tanıtımları içerir.
+- [Jupyıter not defterlerine giriş](https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb) (Jupyter.org)
+- Jake Vanderplas tarafından [veri bilimi 'Ne giriş](https://github.com/jakevdp/PythonDataScienceHandbook/tree/master/notebooks) .
+- [İlginç not defterleri Galerisi](https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks) (GitHub 'da jupi Projesi)
 - [nbviewer.jupyter.org](https://nbviewer.jupyter.org)
-- Fizik yönergesinden [fizik bölümü, İngiliz College London'dan,](https://notebooks.azure.com/cvanbreu/libraries)
+- [Londra 'Daki fizik Üniversitesinden](https://notebooks.azure.com/cvanbreu/libraries) fizik yönergesi
 - [Azure Machine Learning kullanmaya başlama örnekleri](https://notebooks.azure.com/azureml/projects/azureml-getting-started)
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
-- [Nasıl yapılır: Yapılandırma ve projeleri yönetme](configure-manage-azure-notebooks-projects.md)
-- [Nasıl yapılır: Veri dosyaları ile çalışma](work-with-project-data-files.md)
-- [Nasıl yapılır: Veri kaynaklarına erişim](access-data-resources-jupyter-notebooks.md)
-- [Nasıl yapılır: Azure Machine Learning Hizmetleri kullanma](use-machine-learning-services-jupyter-notebooks.md)
+- [Nasıl yapılır: projeleri yapılandırma ve yönetme](configure-manage-azure-notebooks-projects.md)
+- [Nasıl yapılır: veri dosyalarıyla çalışma](work-with-project-data-files.md)
+- [Nasıl yapılır: veri kaynaklarına erişme](access-data-resources-jupyter-notebooks.md)
+- [Nasıl yapılır: Azure Machine Learning kullanma](use-machine-learning-services-jupyter-notebooks.md)

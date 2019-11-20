@@ -1,6 +1,6 @@
 ---
-title: Azure haritalar web harita denetimi ile çalışmaya başlama | Microsoft Docs
-description: Azure haritalar harita denetimi istemci tarafı Javascript kitaplığı kullanmayı öğrenin.
+title: Azure haritalar 'da Web harita denetimi ile çalışmaya başlama | Microsoft Docs
+description: Azure haritalar harita denetimi istemci tarafı JavaScript kitaplığını nasıl kullanacağınızı öğrenin.
 author: walsehgal
 ms.author: v-musehg
 ms.date: 10/08/2018
@@ -8,44 +8,50 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: timlt
-ms.openlocfilehash: aa923fa7e2d5e673e6a2db2b349e54d433d1817b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ceb3b7315439aced7f781e8de5e62b49fd83818c
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65957282"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73833808"
 ---
 # <a name="use-the-azure-maps-map-control"></a>Azure haritalar harita denetimini kullanma
 
-Harita denetimi istemci tarafı Javascript kitaplığı, haritalar ve katıştırılmış Azure haritalar işlevselliği web veya mobil uygulama oluşturmak sağlar.
+Harita Denetimi istemci tarafı JavaScript kitaplığı, haritalar ve katıştırılmış Azure haritaları işlevlerini Web veya mobil uygulamanıza işletirmesini sağlar.
 
-## <a name="create-a-new-map-in-a-web-page"></a>Bir web sayfasında yeni bir eşleme oluşturma
+## <a name="create-a-new-map-in-a-web-page"></a>Web sayfasında yeni eşleme oluşturma
 
-Harita denetimi istemci tarafı Javascript kitaplığını kullanarak bir web sayfasında bir harita ekleyebilir.
+Harita Denetimi istemci tarafı JavaScript kitaplığını kullanarak bir Web sayfasına harita ekleyebilirsiniz.
 
 1. Yeni bir HTML dosyası oluşturun.
 
-2. Azure haritalar Web SDK'sını yükleyin. Bu yapılabilir; iki seçenekten birini kullanma
+2. Azure Haritalar Web SDK 'sını yükleyin. Bu, iki seçenekten biri kullanılarak yapılabilir;
 
-    a. Stil sayfası ve komut dosyası başvuruları URL uç noktaları ekleyerek Azure haritalar Web SDK'sı genel barındırılan CDN sürümünü kullanmanız `<head>` öğesi:
+    a. URL uç noktalarını, dosyanın `<head>` öğesindeki stil sayfasına ve betik başvurularına ekleyerek Azure Maps web SDK 'sının küresel olarak barındırılan CDN sürümünü kullanın:
 
     ```HTML
     <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
     <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
     ```
 
-    b. Alternatif olarak, Azure haritalar Web SDK kaynak kodu kullanarak yerel olarak yükleme [azure haritalar denetimi](https://www.npmjs.com/package/azure-maps-control) NPM paketini ve uygulamanızı barındırın. Bu paket ayrıca TypeScript tanımları içerir.
+    b. Alternatif olarak, Azure Maps web SDK kaynak kodunu [Azure-Maps-Control](https://www.npmjs.com/package/azure-maps-control) NPM paketini kullanarak yerel olarak yükleyin ve uygulamanızla birlikte barındırın. Bu paket TypeScript tanımlarını da içerir.
 
-    > npm yükleme azure haritalar-denetim
+    > NPM Install Azure-Maps-Control
 
-    Azure haritalar stil sayfası ve komut dosyası kaynak başvuruları başvuruları eklersiniz `<head>` öğesi:
+    Ardından, Azure Maps stil sayfasına ve betik kaynağı başvurularına başvuruları dosyanın `<head>` öğesine ekleyin:
 
     ```HTML
-    <link rel="stylesheet" href="node_modules/azure-maps-control/dist/css/atlas.min.css" type="text/css">
-    <script src="node_modules/azure-maps-control/dist/js/atlas.min.js"></script>
+    <link rel="stylesheet" href="node_modules/azure-maps-control/dist/atlas.min.css" type="text/css"> 
+    <script src="node_modules/azure-maps-control/dist/atlas.min.js"></script>
     ```
 
-3. Sayfanın tam gövdesi doldurması harita işlemek için aşağıdakileri ekleyin `<style>` öğesine `<head>` öğesi.
+    >[!Note]
+    > TypeScript tanımları uygulamanıza şu eklenerek aktarılabilir:
+    > ```Javascript
+    > import * as atlas from 'azure-maps-control';
+    > ```
+
+3. Haritayı sayfanın tam gövdesini dolduracak şekilde işlemek için, aşağıdaki `<style>` öğesini `<head>` öğesine ekleyin.
 
     ```HTML
     <style>
@@ -60,7 +66,7 @@ Harita denetimi istemci tarafı Javascript kitaplığını kullanarak bir web sa
     </style>
     ```
 
-4. Sayfanın gövdesi ekleme bir `<div>` öğesi ve ona bir `id` , **myMap**.
+4. Sayfanın gövdesinde, bir `<div>` öğesi ekleyin ve bir **myMap**`id` verin.
 
     ```HTML
     <body>
@@ -68,7 +74,7 @@ Harita denetimi istemci tarafı Javascript kitaplığını kullanarak bir web sa
     </body>
     ```
 
-5. Harita denetimi başlatmak için html gövdesinde yeni bir bölüm tanımlayın ve bir betik oluşturabilir. Geçirin `id` harita `<div>` veya `HTMLElement` (örneğin, `document.getElementById('myMap')`) örneğini oluştururken birinci parametre olarak `Map` sınıfı. Eşlemesini kullanarak kimlik doğrulaması yapmak için kendi Azure haritalar hesabı anahtarı veya Azure Active Directory (AAD) kimlik bilgilerini kullanan [kimlik doğrulama seçenekleri](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.authenticationoptions). Bir hesap oluşturun veya, anahtar, bkz: bulmak gerekiyorsa [Azure haritalar hesabı ve anahtarları yönetme](how-to-manage-account-keys.md). **Dil** seçeneği harita etiketlerini ve denetimler için kullanılacak dili belirtir. Desteklenen diller hakkında daha fazla bilgi için bkz. [desteklenen diller](supported-languages.md). Bir abonelik anahtarı kimlik doğrulaması için kullanılıyorsa.
+5. Harita denetimini başlatmak için, HTML gövdesinde yeni bir bölüm tanımlayın ve bir betik oluşturun. `Map` sınıfının bir örneğini oluştururken eşleme `<div>` `id` veya `HTMLElement` (örneğin, `document.getElementById('myMap')`) ilk parametre olarak geçirin. [Kimlik doğrulama seçeneklerini](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.authenticationoptions)kullanarak haritanın kimliğini doğrulamak Için kendi Azure haritalar hesap anahtarınızı veya Azure ACTIVE DIRECTORY (AAD) kimlik bilgilerinizi kullanın. Bir hesap oluşturmanız veya anahtarınızı bulmanız gerekiyorsa bkz. [Azure Maps hesabınızı ve anahtarlarınızı yönetme](how-to-manage-account-keys.md). **Dil** seçeneği, harita etiketleri ve denetimleri için kullanılacak dili belirtir. Desteklenen diller hakkında daha fazla bilgi için bkz. [desteklenen diller](supported-languages.md). Kimlik doğrulaması için bir abonelik anahtarı kullanılıyorsa.
 
     ```HTML
     <script type="text/javascript">
@@ -84,7 +90,7 @@ Harita denetimi istemci tarafı Javascript kitaplığını kullanarak bir web sa
     </script>
     ```
 
-    Azure Active Directory (AAD) kimlik doğrulaması için kullanıyorsanız:
+    Kimlik doğrulaması için Azure Active Directory (AAD) kullanıyorsanız:
 
     ```HTML
     <script type="text/javascript">
@@ -96,15 +102,17 @@ Harita denetimi istemci tarafı Javascript kitaplığını kullanarak bir web sa
                 authType: 'aad',
                 clientId: '<Your AAD Client Id>',
                 aadAppId: '<Your AAD App Id>',
-                aadTenant: 'msft.ccsctp.net'
+                aadTenant: '<Your AAD Tenant Id>'
             }
         });
     </script>
     ```
 
-    Daha fazla bilgi için [Azure Haritalar ile kimlik doğrulaması](azure-maps-authentication.md) daha fazla ayrıntı için.
+    Azure haritalar ile Azure Active Directory (AAD) nasıl tümleştirileceğini gösteren örneklerin listesi [burada](https://github.com/Azure-Samples/Azure-Maps-AzureAD-Samples)bulunabilir. 
+    
+    Daha fazla bilgi için bkz. [Azure Maps Ile kimlik doğrulama](azure-maps-authentication.md) belgesi.
 
-6. İsteğe bağlı olarak, şu meta etiketini öğeleri yararlı sayfanıza gidin ekleme bulabilirsiniz:
+6. İsteğe bağlı olarak, aşağıdaki meta etiketi öğelerini sayfanızın baş bir sayfasına eklemeyi yararlı bulabilirsiniz:
 
     ```HTML
     <!-- Ensures that IE and Edge uses the latest version and doesn't emulate an older version -->
@@ -114,7 +122,7 @@ Harita denetimi istemci tarafı Javascript kitaplığını kullanarak bir web sa
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     ```
 
-7. Hepsini HTML dosyanızın şu kod gibi görünmelidir:
+7. HTML dosyanızın tümünü bir araya getirmek aşağıdaki koda benzer bir şekilde görünmelidir:
 
     ```HTML
     <!DOCTYPE html>
@@ -164,19 +172,66 @@ Harita denetimi istemci tarafı Javascript kitaplığını kullanarak bir web sa
     </html>
     ```
 
-8. Web tarayıcınızda dosyasını açın ve işlenmiş harita görüntüleyin. Bu, şu kod gibi görünmelidir:
+8. Web tarayıcınızda dosyasını açın ve işlenmiş Haritayı görüntüleyin. Aşağıdaki kod gibi görünmelidir:
 
-    <iframe height="700" style="width: 100%;" scrolling="no" title="Harita Denetimi'ni kullanma" src="//codepen.io/azuremaps/embed/yZpEYL/?height=557&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">Kalem bkz <a href='https://codepen.io/azuremaps/pen/yZpEYL/'>harita denetimini kullanma</a> Azure haritalar tarafından (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) üzerinde <a href='https://codepen.io'>CodePen</a>.
+    <iframe height="700" style="width: 100%;" scrolling="no" title="Harita denetimini kullanma" src="//codepen.io/azuremaps/embed/yZpEYL/?height=557&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true"><a href='https://codepen.io'>Codepen</a>üzerinde Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) Ile <a href='https://codepen.io/azuremaps/pen/yZpEYL/'>harita denetimini kullanma</a> kalemine bakın.
     </iframe>
+
+## <a name="localizing-the-map"></a>Haritayı yerelleştirme
+
+Azure haritalar haritanın dilini ve bölgesel görünümünü ayarlamanın iki farklı yolunu sağlar. İlk seçenek, bu bilgileri genel `atlas` ad alanına eklemektir. Bu, uygulamanızdaki tüm harita denetim örneklerinin bu ayarları varsayılan ayarlarına neden olur. Aşağıdaki dil, dili Fransızca ("fr-FR") ve bölgesel görünüm olarak "Auto" olarak ayarlar:
+
+```javascript
+atlas.setLanguage('fr-FR');
+atlas.setView('Auto');
+```
+
+İkinci seçenek, aşağıdaki gibi eşleme yüklenirken bu bilgileri eşleme seçeneklerine iletmektir:
+
+```javascript
+map = new atlas.Map('myMap', {
+    language: 'fr-FR',
+    view: 'Auto',
+
+    authOptions: {
+        authType: 'aad',
+        clientId: '<Your AAD Client Id>',
+        aadAppId: '<Your AAD App Id>',
+        aadTenant: '<Your AAD Tenant Id>'
+    }
+});
+```
+
+> [!Note]
+> Web SDK ile aynı sayfada farklı dil ve bölge ayarlarıyla birden çok eşleme örneği yüklemek mümkündür. Ayrıca, eşlemenin `setStyle` işlevi kullanılarak bu ayarlar, eşleme yüklendikten sonra da güncelleştirebilir. 
+
+Aşağıda, dil "fr-FR" olarak ayarlanan ve bölgesel görünüm "Auto" olarak ayarlanmış bir Azure Maps örneği verilmiştir.
+
+![Fransızca 'da etiketleri gösteren harita resmi](./media/how-to-use-map-control/websdk-localization.png)
+
+Desteklenen dillerin ve bölgesel görünümlerin tamamen listesi [burada](supported-languages.md)belgelenmiştir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Oluşturma ve bir haritayla etkileşim kurabilir öğrenin:
+Bir harita oluşturmayı ve bununla nasıl etkileşime gireceğini öğrenin:
 
 > [!div class="nextstepaction"]
-> [Bir eşleme oluşturma](map-create.md)
+> [Harita oluşturma](map-create.md)
 
-Bir eşlem stili hakkında bilgi edinin:
+Bir haritanın stilini nasıl ayarlayacağınızı öğrenin:
 
 > [!div class="nextstepaction"]
-> [Harita stil seçin](choose-map-style.md)
+> [Harita stili seçin](choose-map-style.md)
+
+Haritanızda daha fazla veri eklemek için:
+
+> [!div class="nextstepaction"]
+> [Harita oluşturma](map-create.md)
+
+> [!div class="nextstepaction"]
+> [Kod örnekleri](https://docs.microsoft.com/samples/browse/?products=azure-maps)
+
+Azure Active Directory (AAD) Azure Maps ile nasıl tümleştirileceğini gösteren örneklerin listesi için bkz.:
+
+> [!div class="nextstepaction"]
+> [AAD kimlik doğrulama örnekleri](https://github.com/Azure-Samples/Azure-Maps-AzureAD-Samples)

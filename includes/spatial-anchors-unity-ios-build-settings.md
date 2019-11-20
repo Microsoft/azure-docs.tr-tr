@@ -4,25 +4,20 @@ ms.service: azure-spatial-anchors
 ms.topic: include
 ms.date: 1/29/2019
 ms.author: rgarcia
-ms.openlocfilehash: f66a3653bc85925349dde84551310fd24f4c9336
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: cfd5cf77b9df8cdd5b856a0b36b9010077a7078a
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188056"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68562493"
 ---
-Açık **Build Settings** seçerek **dosya** > **Build Settings**.
+**Dosya**  derlemeayarları'nıseçerek > derleme ayarlarını açın.
 
-İçinde **Platform** bölümünden **iOS**.
+**Platform** bölümünde **iOS**' u seçin.
 
-Seçin **anahtar platformu** platforma değiştirmek için **iOS**. Unity iOS desteği bileşenleri eksik iseler yüklemenizi isteyebilir.
+Platformu **iOS**olarak değiştirmek Için **platformu Değiştir** ' i seçin. Unity, eksik olmaları durumunda iOS destek bileşenlerini yüklemenizi isteyebilir.
 
-![Unity yapı Ayarları penceresi](./media/spatial-anchors-unity/unity-ios-build-settings.png)
+![Unity derleme ayarları penceresi](./media/spatial-anchors-unity/unity-ios-build-settings.png)
 
-Kapat **Build Settings** penceresi.
+**Derleme ayarları** penceresini kapatın.
 
-### <a name="download-and-import-the-unity-arkit-plugin"></a>İndirme ve Unity ARKit eklenti içeri aktarma
-
-İndirme [Unity ARKit eklentisi sürüm 2.0.0](https://bitbucket.org/Unity-Technologies/unity-arkit-plugin/get/v2.0.0.zip) ve arşivini ayıklayın.
-
-İçeriğini kopyalayın `Assets` ayıklanan Unity ARKit eklenti klasörü klasöründen örneğe ait `Assets` klasör.

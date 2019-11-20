@@ -1,6 +1,6 @@
 ---
-title: "Azure AD Connect: Federasyon seçeneğinden PHS için Azure AD'ye geçirme | Microsoft Docs"
-description: Bu makalede, karma kimlik ortamınızı Federasyon seçeneğinden parola karması eşitleme için taşıma hakkında bilgi bulunur.
+title: "Azure AD Connect: Azure AD için Federasyondan PHS 'e geçiş | Microsoft Docs"
+description: Bu makalede, karma kimlik ortamınızı Federasyondan Parola karması eşitlemesine taşıma hakkında bilgi bulunur.
 services: active-directory
 author: billmath
 manager: daveba
@@ -12,88 +12,88 @@ ms.date: 05/31/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9ce9c0c6d4f9002b061afd2ad09f02266d452979
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9603cdf11373891aaa3541330cb7f65c09352496
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67109256"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818900"
 ---
-# <a name="migrate-from-federation-to-password-hash-synchronization-for-azure-active-directory"></a>Federasyon seçeneğinden parola karması eşitleme için Azure Active Directory geçirme
+# <a name="migrate-from-federation-to-password-hash-synchronization-for-azure-active-directory"></a>Azure Active Directory için Federasyondan Parola karması eşitlemesine geçiş
 
-Bu makalede, parola karması eşitleme için Active Directory Federasyon Hizmetleri (AD FS) kuruluş etki alanlarınızı taşımak açıklar.
+Bu makalede, kuruluş etki alanlarınızı Active Directory Federasyon Hizmetleri (AD FS) (AD FS) ' dan Parola karması eşitlemesine nasıl taşıyacağınız açıklanır.
 
-Yapabilecekleriniz [bu makalede indirme](https://aka.ms/ADFSTOPHSDPDownload).
+[Bu makaleyi indirebilirsiniz](https://aka.ms/ADFSTOPHSDPDownload).
 
-## <a name="prerequisites-for-migrating-to-password-hash-synchronization"></a>Parola Karması eşitleme için geçiş için Önkoşullar
+## <a name="prerequisites-for-migrating-to-password-hash-synchronization"></a>Parola karması eşitlemesine geçiş için Önkoşullar
 
-Parola Karması eşitleme kullanarak AD FS geçiş için aşağıdaki önkoşullar gereklidir.
+AD FS kullanarak parola karması eşitlemesini kullanarak geçiş yapmak için aşağıdaki Önkoşullar gereklidir.
 
-### <a name="update-azure-ad-connect"></a>Güncelleştirme Azure AD'ye bağlanma
+### <a name="update-azure-ad-connect"></a>Güncelleştirme Azure AD Connect
 
-Başarıyla parola karması eşitleme için geçiş adımlarını gerçekleştirmek için minimum olarak olmalıdır [Azure AD connect](https://www.microsoft.com/download/details.aspx?id=47594) 1.1.819.0. Bu sürümü, oturum açma dönüştürme yapılır ve dakika potansiyel olarak saat bulut kimlik doğrulaması Federasyon seçeneğinden geçirmek için toplam süreyi azaltır şekilde önemli değişiklikler içerir.
+Parola karması eşitlemesine geçiş adımlarını başarılı bir şekilde gerçekleştirmek için gereken en düşük düzeyde [Azure AD Connect](https://www.microsoft.com/download/details.aspx?id=47594) 1.1.819.0 olmalıdır. Bu sürüm, oturum açma dönüştürme işleminin gerçekleştirilmesi için önemli değişiklikler içerir ve federasyondan bulut kimlik doğrulamasına kadar olan süreyi dakika olarak geçirmek için genel süreyi azaltır.
 
 
 > [!IMPORTANT]
-> Eski belgelere, araçları ve etki alanları için yönetilen kimlik Federasyon kimlik dönüştürdüğünüzde, kullanıcı dönüştürme gerekli olduğunu blogları okuyabilir. *Kullanıcıların dönüştürme* artık gerekli değildir. Microsoft, belgeleri ve araçları, bu değişikliği yansıtacak şekilde güncelleştirmek için çalışmaktadır.
+> Etki alanlarını Federasyon kimliğinden yönetilen kimliğe dönüştürürken, Kullanıcı dönüştürmesinin gerekli olduğu güncel olmayan belge, araç ve bloglarda okuyabilirsiniz. *Kullanıcıları dönüştürme* artık gerekli değildir. Microsoft bu değişikliği yansıtmak için belge ve araçları güncelleştirmek üzere çalışmaktadır.
 
-Azure AD Connect güncelleştirmek için adımları tamamlamanız [Azure AD Connect: En son sürüme yükseltme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-upgrade-previous-version).
+Azure AD Connect güncelleştirmek için Azure AD Connect şu adımları uygulayın [: en son sürüme yükseltme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-upgrade-previous-version).
 
-### <a name="password-hash-synchronization-required-permissions"></a>Parola Karması eşitleme gerekli izinler
+### <a name="password-hash-synchronization-required-permissions"></a>Parola karması eşitleme gerekli izinler
 
-Hızlı ayarları veya özel bir yükleme kullanarak Azure AD Connect yapılandırabilirsiniz. Özel yükleme seçeneğini kullandıysanız [gerekli izinler](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-accounts-permissions) için parola karması eşitleme, bir yerde olmayabilir.
+Azure AD Connect, hızlı ayarları veya özel bir yüklemeyi kullanarak yapılandırabilirsiniz. Özel yükleme seçeneğini kullandıysanız, Parola karması eşitleme için [gerekli izinler](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-accounts-permissions) yerinde olmayabilir.
 
-Azure AD Connect Active Directory etki alanı Hizmetleri (AD DS) hizmet hesabı, parola karmalarını eşitleyecek şekilde aşağıdaki izinleri gerektirir:
+Azure AD Connect Active Directory Domain Services (AD DS) hizmet hesabı, parola karmalarını eşitlemeye yönelik aşağıdaki izinleri gerektirir:
 
-* Dizin Değişikliklerini Çoğaltma
-* Çoğaltma Directory yapılan tüm değişiklikler
+* Dizin Değişikliklerini Çoğalt
+* Dizin değişikliklerini çoğaltma
 
-Şimdi bu izinleri ormandaki tüm etki alanları için yerinde olduğunu doğrulamak için iyi bir zamandır.
+Bu izinlerin ormandaki tüm etki alanları için hazır olduğunu doğrulamak için artık iyi bir zamandır.
 
-### <a name="plan-the-migration-method"></a>Geçiş yöntemi planlama
+### <a name="plan-the-migration-method"></a>Geçiş yöntemini planlayın
 
-Federal Kimlik Yönetimi'nden parola karma eşitlemesi ve sorunsuz çoklu oturum açma (SSO) geçirmek için iki yöntemleri seçebilirsiniz. Kullandığınız yöntem, nasıl AD FS örneğinizin özgün yapılandırmasında üzerinde bağlıdır.
+Federal Kimlik yönetiminden Parola karması eşitlemesine ve sorunsuz çoklu oturum açma (SSO) ' ya geçiş yapmak için iki yöntemden birini tercih edebilirsiniz. Kullandığınız yöntem, AD FS örneğinizin ilk olarak nasıl yapılandırıldığına bağlıdır.
 
-* **Azure AD Connect**. Azure AD Connect kullanarak özgün AD FS yapılandırdıysanız, *gerekir* parola karması eşitleme için Azure AD Connect Sihirbazı'nı kullanarak değiştirin.
+* **Azure AD Connect**. Başlangıçta Azure AD Connect kullanarak AD FS yapılandırdıysanız Azure AD Connect Sihirbazı 'nı kullanarak parola karması eşitlemesine geçiş yapmanız *gerekir* .
 
-   Azure AD Connect otomatik olarak çalıştırır **kümesi MsolDomainAuthentication** kullanıcı oturum açma yöntemini değiştirdiğinizde cmdlet'i. Azure AD Connect, tüm doğrulanmış Federasyon etki alanlarını Azure AD kiracınızda otomatik olarak unfederates.
+   Azure AD Connect, Kullanıcı oturum açma yöntemini değiştirdiğinizde **Set-MsolDomainAuthentication** cmdlet 'ini otomatik olarak çalıştırır. Azure AD Connect, Azure AD kiracınızdaki tüm doğrulanmış Federasyon etki alanlarını otomatik olarak kaldırır.
 
    > [!NOTE]
-   > Şu anda, ilk olarak AD FS'yi yapılandırmak için Azure AD Connect kullandıysanız, kullanıcı oturum açma için parola karması eşitleme değiştirdiğinizde, kiracınızdaki tüm etki alanları unfederating kaçınamazsınız. ‎
-* **PowerShell ile Azure AD Connect**. Yalnızca, ilk olarak AD FS'yi Azure AD Connect kullanarak yapılandırmadıysanız, bu yöntemi kullanabilirsiniz. Bu seçenek için Azure AD Connect Sihirbazı aracılığıyla kullanıcı oturum açma yöntemini yine de değiştirmeniz gerekir. Çekirdek bu seçenekle Sihirbazı otomatik olarak çalışmıyor fark **kümesi MsolDomainAuthentication** cmdlet'i. Bu seçenek belirtilmişse, hangi etki alanlarının dönüştürülür ve hangi sırada tam denetim sahibi.
+   > Şu anda, AD FS yapılandırmak için ilk olarak Azure AD Connect kullandıysanız, Kullanıcı oturum açma parolasını Parola karması eşitlemesi olarak değiştirdiğinizde kiracınızdaki tüm etki alanlarını Federasyondan kurtulabilirsiniz. ‎
+* **PowerShell ile Azure AD Connect**. Bu yöntemi yalnızca, Azure AD Connect kullanarak AD FS ilk olarak yapılandırmazsanız kullanabilirsiniz. Bu seçenek için yine de Azure AD Connect Sihirbazı aracılığıyla Kullanıcı oturum açma yöntemini değiştirmeniz gerekir. Bu seçenekle ilgili temel fark, sihirbazın **Set-MsolDomainAuthentication** cmdlet 'ini otomatik olarak çalıştırmaz. Bu seçenekle, hangi etki alanlarının ve hangi sırada dönüştürüldüğü üzerinde tam denetime sahip olursunuz.
 
-Hangi yöntemi kullanmanız gerektiğini anlamak için aşağıdaki bölümlerde yer alan adımları tamamlayın.
+Hangi yöntemi kullanacağınızı anlamak için aşağıdaki bölümlerde bulunan adımları uygulayın.
 
-#### <a name="verify-current-user-sign-in-settings"></a>Geçerli kullanıcı oturum açma ayarlarını doğrulayın
+#### <a name="verify-current-user-sign-in-settings"></a>Geçerli Kullanıcı oturum açma ayarlarını doğrulama
 
-Geçerli kullanıcı oturum açma ayarlarınızı doğrulamak için:
+Geçerli Kullanıcı oturum açma ayarlarınızı doğrulamak için:
 
-1. Oturum [Azure AD portalında](https://aad.portal.azure.com/) bir genel yönetici hesabını kullanarak.
-2. İçinde **kullanıcı oturum açma** bölümünde, aşağıdaki ayarları doğrulayın:
-   * **Federasyon** ayarlanır **etkin**.
-   * **Sorunsuz çoklu oturum açma** ayarlanır **devre dışı bırakılmış**.
-   * **Geçişli kimlik doğrulaması** ayarlanır **devre dışı bırakılmış**.
+1. Genel yönetici hesabı kullanarak [Azure AD portalında](https://aad.portal.azure.com/) oturum açın.
+2. **Kullanıcı oturum açma** bölümünde aşağıdaki ayarları doğrulayın:
+   * **Federasyon** , **etkin**olarak ayarlandı.
+   * **Kesintisiz çoklu oturum açma** **devre dışı**olarak ayarlanmıştır.
+   * **Geçişli kimlik doğrulaması** **devre dışı**olarak ayarlanır.
 
-   ![Oturum açma Azure AD Connect kullanıcı bölümündeki ayarları görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image1.png)
+   ![Azure AD Connect Kullanıcı oturum açma bölümündeki ayarların ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image1.png)
 
-#### <a name="verify-the-azure-ad-connect-configuration"></a>Azure AD Connect yapılandırmasını doğrula
+#### <a name="verify-the-azure-ad-connect-configuration"></a>Azure AD Connect yapılandırmasını doğrulama
 
-1. Azure AD Connect, Azure AD Connect sunucunuzda açın. Seçin **yapılandırma**.
-2. Üzerinde **ek görevler** sayfasında **geçerli yapılandırmayı görüntüleme**ve ardından **sonraki**.<br />
+1. Azure AD Connect sunucunuzda Azure AD Connect açın. **Yapılandır**' ı seçin.
+2. **Ek görevler** sayfasında, **geçerli yapılandırmayı görüntüle**' yi seçin ve ardından **İleri**' yi seçin.<br />
 
-   ![Ek Görevler sayfasında seçtiğiniz görünümü geçerli yapılandırma seçeneğinin ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image2.png)<br />
-3. Üzerinde **çözümünüzü İnceleme** sayfa, Not **parola karması eşitleme** durumu.<br /> 
+   ![Ek görevler sayfasında seçilen geçerli yapılandırmayı görüntüle seçeneğinin ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image2.png)<br />
+3. **Çözümünüzü gözden geçirin** sayfasında **Parola karması eşitleme** durumunu aklınızda edin.<br /> 
 
-   * Varsa **parola karması eşitleme** ayarlanır **devre dışı bırakılmış**, etkinleştirmek için bu makaledeki adımları tamamlayın.
-   * Varsa **parola karması eşitleme** ayarlanır **etkin**, bölümü atlayabilirsiniz **1. adım: Parola karma eşitlemesini etkinleştirme** bu makaledeki.
-4. Üzerinde **çözümünüzü İnceleme** sayfasında, kaydırma **Active Directory Federasyon Hizmetleri (AD FS)** .<br />
+   * **Parola karması eşitlemesi** **devre dışı**olarak ayarlandıysa, etkinleştirmek için bu makaledeki adımları izleyin.
+   * **Parola karması eşitlemesi** **etkin**olarak ayarlandıysa, bu makaledeki **1. Adım: parola karma eşitlemesini etkinleştirme** bölümüne atlayabilirsiniz.
+4. **Çözümünüzü gözden geçirin** sayfasında Active Directory Federasyon Hizmetleri (AD FS) ' ye kaydırın **(AD FS)** .<br />
 
-   * AD FS yapılandırması bu bölümünde görünüyorsa, güvenli bir şekilde Azure AD Connect kullanarak AD FS başlangıçta yapılandırıldığını kabul edilebilir. Azure AD Connect kullanarak yönetilen kimlik için Federasyon kimlik etki alanlarınızı dönüştürebilirsiniz **değiştirme kullanıcı oturum açma** seçeneği. İşlem bölümünde ayrıntılı olarak verilmiştir **seçenek A: Geçiş Federasyon seçeneğinden parola karması eşitleme için Azure AD Connect kullanarak**.
-   * AD FS geçerli ayarları listede yoksa, el ile etki alanlarınızı Federal Kimlik için yönetilen kimlik PowerShell kullanarak dönüştürmeniz gerekir. Bu işlem hakkında daha fazla bilgi için bkz **seçenek B: Geçiş Federasyon seçeneğinden parola karması eşitleme için Azure AD Connect ve PowerShell kullanarak**.
+   * Bu bölümde AD FS yapılandırması görüntülenirse, AD FS özgün olarak Azure AD Connect kullanarak yapılandırıldığını varsayabilirsiniz. Azure AD Connect **Kullanıcı oturum açma** seçeneğini kullanarak etki alanlarınızı, Federasyon kimliğinden yönetilen kimliğe dönüştürebilirsiniz. İşlem, **A: Azure AD Connect kullanarak Federasyondan Parola karması eşitlemesine geçiş yapın**.
+   * Geçerli ayarlarda AD FS listelenmemişse, PowerShell kullanarak etki alanlarınızı, Federasyon kimliğinden yönetilen kimliğe el ile dönüştürmeniz gerekir. Bu işlem hakkında daha fazla bilgi için, **B: Azure AD Connect ve PowerShell kullanarak Federasyondan Parola karması eşitlemesine geçiş**bölümüne bakın.
 
-### <a name="document-current-federation-settings"></a>Belge geçerli federasyon ayarları
+### <a name="document-current-federation-settings"></a>Geçerli Federasyon ayarlarını belgele
 
-Geçerli federasyon ayarlarını bulmak için çalıştırın **Get-msoldomainfederationsettings komutunu** cmdlet:
+Geçerli Federasyon ayarlarınızı bulmak için **Get-MsolDomainFederationSettings** cmdlet 'ini çalıştırın:
 
 ``` PowerShell
 Get-MsolDomainFederationSettings -DomainName YourDomain.extention | fl *
@@ -105,285 +105,285 @@ Get-MsolDomainFederationSettings -DomainName YourDomain.extention | fl *
 Get-MsolDomainFederationSettings -DomainName Contoso.com | fl *
 ```
 
-Federasyon tasarım ve dağıtım belgeleri için özelleştirilmiş herhangi bir ayarı doğrulayın. Özelleştirmeler için özellikle şunlara dikkat **PreferredAuthenticationProtocol**, **SupportsMfa**, ve **PromptLoginBehavior**.
+Federasyon tasarımınız ve dağıtım belgeleriniz için özelleştirilmiş olabilecek tüm ayarları doğrulayın. Özellikle, **Preferredauthenticationprotocol**, **Supportsmfa**ve **promptloginbehavior**içindeki özelleştirmeleri arayın.
 
 Daha fazla bilgi için şu makalelere bakın:
 
-* [AD FS istemi = oturum açma parametresi desteği](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/ad-fs-prompt-login)
+* [AD FS Prompt = oturum açma parametresi desteği](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/ad-fs-prompt-login)
 * [Set-MsolDomainAuthentication](https://docs.microsoft.com/powershell/module/msonline/set-msoldomainauthentication?view=azureadps-1.0)
 
 > [!NOTE]
-> Varsa **SupportsMfa** ayarlanır **True**, kullanıcı kimlik doğrulaması akışı bir ikinci faktör challenge eklenmek üzere bir şirket içi multi-Factor authentication çözümünü kullanıyorsanız. Kimlik doğrulaması bu etki alanından dönüştürmeden sonra Azure AD kimlik doğrulama senaryoları için çalışır Federasyon oluşturan bu ayar artık yönetilen. Federasyon devre dışı bıraktıktan sonra ilişki için şirket içi Federasyon sunucusu ve bu, şirket içi MFA bağdaştırıcıları içerir. 
+> **Supportsmfa** **değeri true**olarak ayarlanırsa, Kullanıcı kimlik doğrulama akışına ikinci öğeli bir sınama eklemek için bir şirket içi Multi-Factor Authentication çözümü kullanıyorsunuz. Bu kurulum, bu etki alanını federe bilgisayardan yönetilen kimlik doğrulamasına dönüştürdükten sonra artık Azure AD kimlik doğrulama senaryolarında çalışmaz. Federasyonu devre dışı bıraktıktan sonra şirket içi Federasyonla ilişkiyi ve bu şirket içi MFA bağdaştırıcılarını içerir. 
 >
-> Bunun yerine, bulut tabanlı Azure multi-Factor Authentication hizmeti ile aynı işlevi gerçekleştirmek için kullanın. Devam etmeden önce multi-Factor authentication gereksinimlerini dikkatlice değerlendirin. Etki alanlarınızı dönüştürmeden önce Azure multi-Factor Authentication, lisans etkileri ve kullanıcı kayıt işleminin nasıl kullanılacağını anlamak emin olun.
+> Bunun yerine, aynı işlevi gerçekleştirmek için Azure Multi-Factor Authentication bulut tabanlı hizmetini kullanın. Devam etmeden önce Multi-Factor Authentication gereksinimlerinizi dikkatle değerlendirin. Etki alanlarınızı dönüştürmeden önce Azure Multi-Factor Authentication, lisanslama etkilerini ve Kullanıcı kayıt işlemini nasıl kullanacağınızı anladığınızdan emin olun.
 
-#### <a name="back-up-federation-settings"></a>Federasyon ayarlarını yedekle
+#### <a name="back-up-federation-settings"></a>Federasyon ayarlarını yedekleme
 
-Bu makalede açıklanan işlemleri sırasında AD FS grubunuzdaki diğer bağlı taraflar için hiçbir değişiklik yapılmadı olsa da, geçerli bir geçerli yedek geri yükleyebilirsiniz, AD FS grubunun sahip olmasını öneririz. Ücretsiz Microsoft kullanarak geçerli bir geçerli yedek oluşturabilir [AD FS hızlı geri yükleme aracı](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/ad-fs-rapid-restore-tool). AD FS, yedekleme ve var olan bir grubu geri yüklemek veya yeni bir grup oluşturmak için Aracı'nı kullanabilirsiniz.
+Bu makalede açıklanan süreçler sırasında AD FS grubunuzdaki diğer bağlı olan taraflardan hiçbir değişiklik yapılmasa da, geri yükleyebilmeniz için AD FS grubunuzun geçerli geçerli yedeğine sahip olmanız önerilir. Ücretsiz Microsoft [AD FS hızlı geri yükleme aracını](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/ad-fs-rapid-restore-tool)kullanarak geçerli geçerli bir yedekleme oluşturabilirsiniz. Aracı AD FS yedeklemek ve var olan bir grubu geri yüklemek ya da yeni bir grup oluşturmak için kullanabilirsiniz.
 
-AD FS hızlı geri yükleme aracı en az kullanmayı tercih ederseniz, Microsoft Office 365 kimlik platformu taraf güveni ve eklediğiniz tüm ilişkili özel talep kuralları dışarı aktarmanız gerekir. Aşağıdaki PowerShell örneğini kullanarak ilişkili talep kuralları ve bağlı olan taraf güveni dışarı aktarabilirsiniz:
+En azından AD FS hızlı geri yükleme aracı 'nı kullanmayı tercih ederseniz, Microsoft Office 365 kimlik platformu bağlı olan taraf güvenini ve eklediğiniz tüm ilişkili özel talep kurallarını dışarı aktarmanız gerekir. Aşağıdaki PowerShell örneğini kullanarak bağlı olan taraf güvenini ve ilişkili talep kurallarını dışarı aktarabilirsiniz:
 
 ``` PowerShell
 (Get-AdfsRelyingPartyTrust -Name "Microsoft Office 365 Identity Platform") | Export-CliXML "C:\temp\O365-RelyingPartyTrust.xml"
 ```
 
-## <a name="deployment-considerations-and-using-ad-fs"></a>Dağıtım hakkında önemli noktalar ve AD FS kullanma
+## <a name="deployment-considerations-and-using-ad-fs"></a>Dağıtım konuları ve AD FS kullanımı
 
-Bu bölümde, AD FS kullanımı ile ilgili dikkat edilecekler ve Ayrıntılar açıklanmaktadır.
+Bu bölümde AD FS kullanımı ile ilgili dağıtım konuları ve ayrıntıları açıklanmaktadır.
 
-### <a name="current-ad-fs-use"></a>Geçerli AD FS kullanma
+### <a name="current-ad-fs-use"></a>Geçerli AD FS kullanımı
 
-Yönetilen kimliğe federe kimlik dönüştürmeden önce yakından şu anda Azure AD, Office 365 için AD FS'yi kullanın ve diğer uygulamalar (bağlı olan taraf güvenleri) bakın. Özellikle, aşağıdaki tabloda açıklanan senaryoları göz önünde bulundurun:
+Federasyon kimliğinden yönetilen kimliğe dönüştürmeden önce Azure AD, Office 365 ve diğer uygulamalar (bağlı olan taraf güvenleri) için AD FS Şu anda nasıl kullantığınızdan yakından bakın. Özellikle, aşağıdaki tabloda açıklanan senaryoları göz önünde bulundurun:
 
-| Eğer | Ardından |
+| Eğer | Ni |
 |-|-|
-| AD FS ile diğer uygulamaları kullanmaya devam etmek plan (Azure AD dışındaki ve Office 365). | Etki alanlarınızı dönüştürdükten sonra hem AD FS hem de Azure AD'den kullanacaksınız. Kullanıcı deneyimini düşünün. Bazı senaryolarda, kullanıcıların iki kez kimlik doğrulaması için gerekli olabilir: bir kez (burada bir kullanıcı Office 365 gibi diğer uygulamalara SSO erişimi alır) Azure AD'ye ve yeniden yine de AD FS bağlı olan taraf güveni olarak bağlanmış olan tüm uygulamalar için. |
-| AD FS örneğinizi yoğun olarak özelleştirilmiş ve onload.js dosyasındaki belirli özelleştirme ayarları kullanır (örneğin, kullanıcılar yalnızca kullanın, böylece oturum açma deneyimini değiştirdiyseniz, bir **SamAccountName** kullanıcı adı biçimi yerine bir kullanıcı asıl adı (UPN) veya Kurumunuz yoğun olarak oturum açma deneyimini markalı). Azure AD'de onload.js dosya yinelenemez. | Devam etmeden önce Azure AD geçerli özelleştirme gereksinimlerinizi karşıladığını doğrulamanız gerekir. Daha fazla bilgi ve yönergeler için AD FS markası ve AD FS özelleştirmesi bölümlere bakın.|
-| AD FS kimlik doğrulama istemcilerini önceki sürümlerini engellemek için kullanın.| Bir bileşimini kullanarak kimlik doğrulama istemcilerini önceki sürümlerini engelle AD FS denetimleri değiştirmeyi göz önüne alın [koşullu erişim denetimleri](https://docs.microsoft.com/azure/active-directory/conditional-access/conditions) ve [Exchange Online istemci erişim kuralları](https://aka.ms/EXOCAR). |
-| Kullanıcıları AD FS'ye kimlik doğrulaması sırasında bir şirket içi multi-Factor authentication server çözümünü – çok faktörlü kimlik doğrulaması yapmalarını gerektirir.| Bir yönetilen kimlik etki alanında bir çok faktörlü kimlik doğrulaması sınaması aracılığıyla şirket içi multi-Factor authentication çözümünü kimlik doğrulaması akışı eklenemiyor. Ancak, etki alanı dönüştürüldükten sonra Azure multi-Factor Authentication hizmeti çok faktörlü kimlik doğrulaması için kullanabilirsiniz.<br /><br /> Kullanıcılarınızın şu anda Azure çok faktörlü kimlik doğrulaması kullanmıyorsanız, tek seferlik kullanıcı kayıt adımı gereklidir. Hazırlama ve kullanıcılarınız için planlanan kayıt iletişim gerekir. |
-| Şu anda Office 365 erişimi denetlemek için erişim denetim ilkeleri (AuthZ kuralları) AD FS'de kullanın.| İlkeleri eşdeğer Azure AD ile değiştirmeyi göz önüne alın [koşullu erişim ilkeleri](https://docs.microsoft.com/azure/active-directory/active-directory-conditional-access-azure-portal) ve [Exchange Online istemci erişim kuralları](https://aka.ms/EXOCAR).|
+| Diğer uygulamalarla AD FS kullanmayı planlayın (Azure AD ve Office 365 dışında). | Etki alanlarınızı dönüştürdükten sonra hem AD FS hem de Azure AD 'yi kullanırsınız. Kullanıcı deneyimini göz önünde bulundurun. Bazı senaryolarda, kullanıcıların iki kez kimlik doğrulaması yapması gerekebilir: Azure AD 'ye (bir Kullanıcı, Office 365 gibi diğer uygulamalara SSO erişimi alır) ve hala bağlı olan taraf güveni olarak AD FS bağlı olan tüm uygulamalar için. |
+| AD FS örneğiniz çok büyük bir özelleştirilmiş ve OnLoad. js dosyasındaki belirli özelleştirme ayarlarına bağımlıdır (örneğin, oturum açma deneyimini değiştirdiyseniz, kullanıcıların Kullanıcı sorumlusu yerine yalnızca Kullanıcı adı için **sAMAccountName** biçimi kullanması gerekir) Ad (UPN) veya kuruluşunuz, oturum açma deneyimini yoğun bir şekilde markalandırmıştır. OnLoad. js dosyası Azure AD 'de yinelenemez. | Devam etmeden önce Azure AD 'nin geçerli özelleştirme gereksinimlerinizi karşılayabildiğini doğrulamanız gerekir. Daha fazla bilgi ve yönergeler için AD FS marka ve AD FS özelleştirme bölümlerine bakın.|
+| Kimlik doğrulama istemcilerinin önceki sürümlerini engellemek için AD FS kullanırsınız.| [Koşullu erişim denetimleri](https://docs.microsoft.com/azure/active-directory/conditional-access/conditions) ve [Exchange Online istemci erişim kurallarından](https://aka.ms/EXOCAR)oluşan bir birleşimi kullanarak, kimlik doğrulama istemcilerinin önceki sürümlerini engelleyen AD FS denetimlerini değiştirmeyi düşünün. |
+| Kullanıcıların AD FS kimlik doğrulaması yapıldığında, şirket içi Multi-Factor Authentication sunucusu çözümüne karşı kullanıcıların Multi-Factor Authentication gerçekleştirmesini zorunlu kılabilirsiniz.| Yönetilen bir kimlik etki alanında, kimlik doğrulama akışına şirket içi Multi-Factor Authentication çözümü aracılığıyla çok faktörlü kimlik doğrulama sınaması ekleyemezsiniz. Ancak, etki alanı dönüştürüldükten sonra çok faktörlü kimlik doğrulaması için Azure Multi-Factor Authentication hizmetini kullanabilirsiniz.<br /><br /> Kullanıcılarınız Şu anda Azure Multi-Factor Authentication kullanmıyorsanız, bir kerelik Kullanıcı kaydı adımı gereklidir. Kullanıcılarınıza planlı kaydı hazırlamanız ve bu kayıtları iletmeli. |
+| Office 365 erişimini denetlemek için şu anda AD FS 'de erişim denetim ilkeleri (AuthZ kuralları) kullanıyorsunuz.| Aynı Azure AD [koşullu erişim ilkeleri](https://docs.microsoft.com/azure/active-directory/active-directory-conditional-access-azure-portal) ve [Exchange Online istemci erişim kuralları](https://aka.ms/EXOCAR)ile ilkeleri değiştirmeyi göz önünde bulundurun.|
 
-### <a name="common-ad-fs-customizations"></a>Ortak AD FS özelleştirmelerini
+### <a name="common-ad-fs-customizations"></a>Ortak AD FS özelleştirmeleri
 
-Bu bölümde, ortak AD FS özelleştirmelerini açıklanmaktadır.
+Bu bölümde, yaygın AD FS özelleştirmeler açıklanmaktadır.
 
-#### <a name="insidecorporatenetwork-claim"></a>InsideCorporateNetwork talep
+#### <a name="insidecorporatenetwork-claim"></a>InsideCorporateNetwork talebi
 
-AD FS sorunları **InsideCorporateNetwork** kimlik doğrulaması kullanıcı şirket ağı içinde olup olmadığını talep. Bu talep ardından Azure AD'ye geçirilebilir. Talep, kullanıcının ağ konumuna göre çok faktörlü kimlik doğrulamasını atlamak için kullanılır. Bu işlevsellik şu anda AD FS'de etkin olup olmadığını belirlemek öğrenmek için bkz. [güvenilen IP'leri Federasyon kullanıcıları için](https://docs.microsoft.com/azure/multi-factor-authentication/multi-factor-authentication-get-started-adfs-cloud).
+Kimliği doğrulanan kullanıcı kurumsal ağın içindeyse, AD FS **InsideCorporateNetwork** talebini yayınlar. Bu talep daha sonra Azure AD 'ye geçirilebilirler. Talep, kullanıcının ağ konumuna göre çok faktörlü kimlik doğrulamasını atlamak için kullanılır. AD FS ' de bu işlevselliğin etkin olup olmadığını belirlemeyi öğrenmek için bkz. [Federasyon kullanıcıları Için güvenilen IP 'ler](https://docs.microsoft.com/azure/multi-factor-authentication/multi-factor-authentication-get-started-adfs-cloud).
 
-**InsideCorporateNetwork** talep, parola karma eşitlemesini alanlarınızı dönüştürüldükten sonra kullanılamaz. Kullanabileceğiniz [Azure AD'de adlandırılmış Konumlar](https://docs.microsoft.com/azure/active-directory/active-directory-named-locations) bu işlevselliği değiştirilecek.
+**InsideCorporateNetwork** talebi, etki alanlarınız Parola karması eşitlemesine dönüştürüldükten sonra kullanılamaz. Bu işlevi değiştirmek için [Azure AD 'de adlandırılmış konumlar](https://docs.microsoft.com/azure/active-directory/active-directory-named-locations) kullanabilirsiniz.
 
-Adlandırılmış konumlar yapılandırdıktan sonra dahil etmek veya hariç ağ için yapılandırılmış olan tüm koşullu erişim ilkeleri güncelleştirmelisiniz **tüm Güvenilen Konumlar** veya **MFA güvenilen IP'ler** değerler Yeni adlandırılmış konumlar yansıtır.
+Adlandırılmış konumları yapılandırdıktan sonra, ağ **tüm güvenilen konumları** veya **MFA güvenilir IP** değerlerini dahil etmek veya hariç tutmak Için yapılandırılmış tüm koşullu erişim ilkelerini yeni adlandırılmış konumları yansıtacak şekilde güncelleştirmeniz gerekir.
 
-Hakkında daha fazla bilgi için **konumu** koşullu erişim koşulu için bkz: [Active Directory koşullu erişimi konumlarındaki](https://docs.microsoft.com/azure/active-directory/active-directory-conditional-access-locations).
+Koşullu erişimde **konum** koşulu hakkında daha fazla bilgi için bkz. [Active Directory Koşullu erişim konumları](https://docs.microsoft.com/azure/active-directory/active-directory-conditional-access-locations).
 
-#### <a name="hybrid-azure-ad-joined-devices"></a>Hibrit Azure AD'ye katılmış cihazları
+#### <a name="hybrid-azure-ad-joined-devices"></a>Karma Azure AD 'ye katılmış cihazlar
 
-Bir cihazı Azure AD'ye Ekle, cihazları, güvenlik ve uyumluluğa yönelik standartlarınızı erişim karşıladığını zorlayan koşullu erişim kuralları oluşturabilirsiniz. Ayrıca, kullanıcılar bir cihaza bir kurumsal iş veya Okul hesabı yerine kişisel bir hesap kullanarak oturum açabilir. Kullandığınızda hibrit Azure AD'ye katılmış cihazlarda, Active Directory etki alanına katılmış cihazlarınızı Azure AD'ye Katıl için. Ortamınız federe bu özelliği kullanmak için ayarlanan.
+Bir cihazı Azure AD 'ye katdığınızda, cihazların güvenlik ve uyumluluk için erişim standartlarınızı karşıladığından emin olan koşullu erişim kuralları oluşturabilirsiniz. Ayrıca, kullanıcılar kişisel hesap yerine kuruluş iş veya okul hesabı kullanarak bir cihazda oturum açabilirler. Karma Azure AD 'ye katılmış cihazları kullandığınızda Active Directory etki alanına katılmış cihazlarınızı Azure AD 'ye ekleyebilirsiniz. Federal ortamınız bu özelliği kullanacak şekilde ayarlanmış olabilir.
 
-Bu karma birleştirme, etki alanları için Windows 10 istemcileri için parola karması eşitlemeyi dönüştürüldükten sonra etki alanına katılmış cihazlar için çalışmaya devam edebilmesini sağlamak üzere Active Directory bilgisayar hesapları için Azure AD eşitleme için Azure AD Connect kullanmanız gerekir. 
+Etki alanlarınız, Windows 10 istemcileri için Parola karması eşitlemesine dönüştürüldükten sonra etki alanına katılmış tüm cihazlarda çalışmaya devam ettiğinden emin olmak için, Active Directory bilgisayarı eşitlemek üzere Azure AD Connect cihaz seçeneklerini kullanmanız gerekir hesapları Azure AD 'ye. 
 
-Windows 8 ve Windows 7 bilgisayar hesapları için karma birleştirme bilgisayar Azure AD'ye kaydetme sorunsuz çoklu oturum açma kullanır. Eşitleme Windows 8 ve Windows 10 cihazları için yaptığınız gibi Windows 7 bilgisayar hesaplarını gerekmez. Ancak, bunlar kendilerini sorunsuz çoklu oturum açma kullanarak kaydedebilirsiniz, böylece bir güncelleştirilmiş workplacejoin.exe dosyası (.msi dosyası) aracılığıyla Windows 8 ve Windows 7 istemcileri için dağıtmanız gerekir. [.Msi dosyasını indirme](https://www.microsoft.com/download/details.aspx?id=53554).
+Windows 8 ve Windows 7 bilgisayar hesaplarında, karma birleşimi bilgisayarı Azure AD 'ye kaydetmek için sorunsuz SSO kullanır. Windows 10 cihazları için yaptığınız gibi Windows 8 ve Windows 7 bilgisayar hesaplarını eşitlemeniz gerekmez. Ancak, güncelleştirilmiş bir workplacejoın. exe dosyasını (. msi dosyası aracılığıyla) Windows 8 ve Windows 7 istemcilerine dağıtmanız gerekir, böylece bunları sorunsuz SSO kullanarak kaydedebilirler. [. Msi dosyasını indirin](https://www.microsoft.com/download/details.aspx?id=53554).
 
-Daha fazla bilgi için [yapılandırma hibrit Azure AD'ye katılmış cihazları](https://docs.microsoft.com/azure/active-directory/device-management-hybrid-azuread-joined-devices-setup).
+Daha fazla bilgi için bkz. [karma Azure AD 'ye katılmış cihazları yapılandırma](https://docs.microsoft.com/azure/active-directory/device-management-hybrid-azuread-joined-devices-setup).
 
-#### <a name="branding"></a>Markalama
+#### <a name="branding"></a>Olanağı
 
-Varsa, kuruluşunuzun [, AD FS oturum sayfalarının özelleştirilmiş](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/ad-fs-user-sign-in-customization) kuruluşa daha ilgili bilgileri görüntülemek için benzer yapmayı düşünün [Azure AD oturum açma sayfası özelleştirmeleri](https://docs.microsoft.com/azure/active-directory/customize-branding).
+Kuruluşunuz, kuruluşa daha uygun bilgileri göstermek için [AD FS oturum açma sayfalarınızı özelleştirmiş](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/ad-fs-user-sign-in-customization) ve [Azure AD oturum açma sayfasında benzer özelleştirmeler](https://docs.microsoft.com/azure/active-directory/customize-branding)yapmayı düşünün.
 
-Benzer özelleştirmeleri kullanılabilir olsa da, dönüştürme işleminden sonra oturum açma sayfalarındaki görsel bazı değişiklikler beklenmelidir. Kullanıcılara, iletişimin beklenen değişiklikleri hakkında bilgi sağlamak isteyebilirsiniz.
+Benzer özelleştirmeler kullanılabilir olsa da, oturum açma sayfalarındaki bazı görsel değişiklikler dönüştürmeden sonra beklenmelidir. Kullanıcılara yönelik iletişimlerdeki beklenen değişiklikler hakkında bilgi vermek isteyebilirsiniz.
 
 > [!NOTE]
-> Kuruluşunuzun markasını yalnızca Azure Active Directory Premium veya temel lisansı satın aldıysanız veya bir Office 365 lisansınız varsa kullanılabilir.
+> Kuruluş markası yalnızca Azure Active Directory için Premium veya temel lisans satın aldıysanız veya Office 365 lisansınız varsa kullanılabilir.
 
-## <a name="plan-deployment-and-support"></a>Dağıtım ve Destek planı
+## <a name="plan-deployment-and-support"></a>Dağıtım ve Destek planlaması
 
-Dağıtım ve destek için planlama yapmanıza yardımcı olması için bu bölümdeki açıklanan görevleri tamamlayın.
+Dağıtım ve Destek planlaması yapmanıza yardımcı olması için bu bölümde açıklanan görevleri doldurun.
 
-### <a name="plan-the-maintenance-window"></a>Bakım penceresi planlama
+### <a name="plan-the-maintenance-window"></a>Bakım penceresini planlayın
 
-Etki alanı dönüştürme işlemi görece hızlı olsa da, Azure AD etki alanı dönüştürme tamamlandıktan sonra en fazla dört saat için AD FS sunucularınızın bazı kimlik doğrulama istekleri göndermeye devam edebilir. Bu dört saatlik penceresi sırasında ve çeşitli hizmet tarafı önbellekler bağlı olarak, Azure AD kimlik doğrulamaları bu kabul etmeyebilir. Kullanıcılar, bir hata alabilirsiniz. Kullanıcı yine de başarılı olabilir karşı AD FS kimlik doğrulaması, ancak Azure AD'ye artık kabul kullanıcının verilen belirteç çünkü bu federasyon güveni artık kaldırılır.
+Etki alanı dönüştürme işlemi nispeten hızlı olsa da, Azure AD, etki alanı dönüştürme işlemi tamamlandıktan sonra AD FS sunucularınıza en fazla dört saat sonra bazı kimlik doğrulama istekleri gönderilmeye devam edebilir. Bu dört saatlik pencere sırasında ve çeşitli hizmet tarafı önbelleklerine bağlı olarak, Azure AD bu kimlik doğrulamaları kabul etmeyebilir. Kullanıcılar bir hata alabilir. Kullanıcı hala AD FS göre kimlik doğrulaması yapabilir, ancak Azure AD artık kullanıcının verilen belirtecini kabul etmez çünkü bu, Federasyon güveni kaldırılmıştır.
 
-Hizmet tarafı önbelleği temizlenmeden önce bu dönüştürme sonrası penceresi sırasında hizmetler bir web tarayıcısı üzerinden erişim yalnızca kullanıcılar etkilenmez. Eski istemcileri (Exchange ActiveSync, Outlook 2010/2013) Exchange Online kimlik bilgilerini önbelleğini belirli bir süre için tuttuğu etkilenen beklenen değildir. Önbellek sessizce kullanıcının yeniden kimlik doğrulamaya zorlayabilir kullanılır. Kullanıcının AD FS için döndürülecek yok. Bu istemciler için cihazda depolanan kimlik bilgileri, bu önbelleğe temizlendikten sonra kendilerini sessizce sağlamalarını için kullanılır. Kullanıcıların etki alanı dönüştürme işlemi sonucunda herhangi bir parola istemi almak için beklenen değildir. 
+Hizmet tarafı önbelleği temizlenmeden önce bu dönüştürme sonrası pencere sırasında hizmetlere yalnızca bir Web tarayıcısı üzerinden erişen kullanıcılar etkilenir. Exchange Online, kimlik bilgilerinin bir süre önbellekte tutulmasını sağladığından eski istemcilerin (Exchange ActiveSync, Outlook 2010/2013) etkilenmemesi beklenmez. Önbellek, kullanıcıyı sessizce yeniden kimlik doğrulaması yapmak için kullanılır. Kullanıcının AD FS döndürmesi gerekmez. Bu istemciler için cihazda depolanan kimlik bilgileri, önbelleğe alınmış bu onay edildikten sonra sessizce yeniden kimlik doğrulaması yapmak için kullanılır. Kullanıcıların, etki alanı dönüştürme işleminin sonucu olarak herhangi bir parola istemi alması beklenmez. 
 
-Modern kimlik doğrulaması istemcileri (Office 2016 ve Office 2013, iOS ve Android uygulamaları) erişmeye devam etmek için AD FS döndürmek yerine kaynakları için yeni erişim belirteçleri almak için geçerli bir yenileme belirteci kullanın. Bu istemciler etki alanı dönüştürme işleminden kaynaklanan herhangi bir parola istemi için ayrıcalıklı. İstemcilerin, ek yapılandırma çalışmaya devam eder.
+Modern kimlik doğrulama istemcileri (Office 2016 ve Office 2013, iOS ve Android Uygulamaları) AD FS için geri dönmek yerine kaynaklara devam etmek için yeni erişim belirteçleri elde etmek üzere geçerli bir yenileme belirteci kullanır. Bu istemciler, etki alanı dönüştürme işleminden kaynaklanan tüm parola istemlerine karşı silinir. İstemciler ek yapılandırma olmadan çalışmaya devam edecektir.
 
 > [!IMPORTANT]
-> AD FS, ortamı kapatın veya Bulut kimlik doğrulaması kullanarak, tüm kullanıcılar başarıyla doğrulanabilir doğrulayana kadar Office 365 bağlı olan taraf güveni kaldırma kullanmayın.
+> Tüm kullanıcıların bulut kimlik doğrulamasını kullanarak başarıyla kimlik doğrulaması yapabileceği doğrulayana kadar AD FS ortamınızı kapatmayın veya Office 365 bağlı olan taraf güvenini kaldırmayın.
 
-### <a name="plan-for-rollback"></a>Geri alma planlama
+### <a name="plan-for-rollback"></a>Geri alma planı
 
-Hızlı bir şekilde çözümlenemiyor önemli bir sorun yaşarsanız, çözümü için Federasyon geri karar verebilirsiniz. Dağıtımınızın beklendiği gibi değil atarsanız yapmanız gerekenler planlamanız önemlidir. Dağıtım sırasında etki alanı veya kullanıcı dönüştürme başarısız olursa veya Federasyon hizmetine geri almak gerekiyorsa, herhangi bir kesinti azaltmak ve kullanıcılarınızın üzerindeki etkisini azaltmak nasıl anlamanız gerekir.
+Hızlıca çözemeyeceğinize ilişkin önemli bir sorunla karşılaşırsanız, çözümü federasyona geri almayı seçebilirsiniz. Dağıtımınız istenen şekilde kullanıma sunulmazsa ne yapılacağını planlamanız önemlidir. Dağıtım sırasında etki alanının veya kullanıcıların dönüştürülmesi başarısız olursa veya federasyona geri dönmeniz gerekirse, herhangi bir kesinti gereksinimini hafifletmek ve kullanıcılarınızın etkisini azaltmak zorundasınız.
 
 #### <a name="to-roll-back"></a>Geri almak için
 
-Geri alma için planlamak için belirli dağıtım ayrıntıları Federasyon tasarım ve dağıtım belgelerini denetleyin. İşlem, bu görevleri içermelidir:
+Geri alma planlamak için, belirli dağıtım ayrıntılarınız için Federasyon tasarımı ve dağıtım belgelerini kontrol edin. İşlem şu görevleri içermelidir:
 
-* Kullanarak yönetilen etki alanlarını Federasyon etki alanları için dönüştürme **dönüştürme MSOLDomainToFederated** cmdlet'i.
-* Gerekirse, ek yapılandırma kuralları talepleri.
+* **Convert-Msoldomaintofedere** cmdlet 'ini kullanarak yönetilen etki alanlarını Federasyon etki alanlarına dönüştürme.
+* Gerekirse, ek talep kurallarını yapılandırın.
 
-### <a name="plan-communications"></a>İletişimi planlama
+### <a name="plan-communications"></a>İletişimleri planlayın
 
-Dağıtım ve Destek planlamanın önemli bir bölümü kullanıcılarınızın proaktif olarak yaklaşan değişiklikler hakkında bilgi sahibi olduğundan emin olmaktır. Kullanıcılar, bunları gerekli nedir ve ne bunlar karşılaşabilirsiniz önceden bilmeniz gerekir. 
+Dağıtım ve desteğin planlanmasına ilişkin önemli bir bölüm, kullanıcılarınızın yaklaşan değişiklikler hakkında bilinçli olarak bilgilendirilmesi sağlamaktır. Kullanıcılar, ne yaşayabileceklerini ve bunların ne yapılması gerektiğini önceden bilmelidir. 
 
-Parola Karması eşitleme hem sorunsuz çoklu oturum açma dağıtıldıktan sonra kullanıcı oturum açma deneyimi Azure AD değişiklikleri Office 365 ve kimlik doğrulamalarının diğer kaynaklara erişmek için. Kullanıcılar ağ dışındayken yalnızca Azure AD oturum açma sayfasına bakın. Bu kullanıcılar dönük web uygulaması Ara sunucusu tarafından sunulan form tabanlı sayfasına yeniden yönlendirilen değildir.
+Parola karması eşitlemesi ve sorunsuz SSO dağıtıldıktan sonra, Office 365 ' a ve Azure AD değişiklikleri aracılığıyla kimliği doğrulanan diğer kaynaklara erişmek için Kullanıcı oturum açma deneyimi. Ağ dışındaki kullanıcılar yalnızca Azure AD oturum açma sayfasını görür. Bu kullanıcılar, dışarıdan yönelik Web uygulaması ara sunucuları tarafından sunulan form tabanlı sayfaya yönlendirilmez.
 
-İletişim stratejinizi aşağıdaki öğeleri içerir:
+İletişim stratejinize aşağıdaki öğeleri ekleyin:
 
-* Kullanarak yaklaşan ve yayımlanan işlevselliği konusunda kullanıcıları bilgilendirin:
-   * E-posta ve diğer şirket içi iletişim kanallarını.
-   * Görsel ve posterler gibi.
-   * Yönetici, live veya diğer iletişimler.
-* Kullanan iletişimleri özelleştireceğim belirlemek ve iletişim gönderecek kimin ve ne zaman.
+* Şunları kullanarak kullanıcılara yaklaşan ve yayınlanmış işlevleri bildirin:
+   * E-posta ve diğer iç iletişim kanalları.
+   * Posterler gibi görseller.
+   * Executive, Live veya diğer iletişimler.
+* Kimlerin iletişimleri ve iletişimleri kimin ne zaman özelleştireceğinizi ve ne zaman gönderileceğini saptayın.
 
 ## <a name="implement-your-solution"></a>Çözümünüzü uygulama
 
-Çözümünüzü planladığınız. Şimdi, bunu şimdi uygulayabilirsiniz. Uygulama aşağıdaki bileşenleri içerir:
+Çözümünüzü planladıktan sonra. Şimdi uygulamayı şimdi uygulayabilirsiniz. Uygulama aşağıdaki bileşenleri içerir:
 
-* Parola karma eşitlemesini etkinleştirme.
-* Sorunsuz çoklu oturum açma için hazırlık yapılıyor.
-* Oturum açma yöntemi, parola karma eşitlemesi ve sorunsuz çoklu oturum açmayı etkinleştirme değiştiriliyor.
+* Parola karması eşitlemesi etkinleştiriliyor.
+* Sorunsuz SSO için hazırlanıyor.
+* Oturum açma yöntemini Parola karması eşitlemesine değiştirme ve sorunsuz SSO 'yu etkinleştirme.
 
-### <a name="step-1-enable-password-hash-synchronization"></a>1\. adım: Parola karma eşitlemesini etkinleştirme
+### <a name="step-1-enable-password-hash-synchronization"></a>1\. Adım: parola karma eşitlemesini etkinleştirme
 
-Bu çözümü uygulamak için ilk adım, Azure AD Connect Sihirbazı'nı kullanarak parola karması eşitlemeyi etkinleştirmektir. Parola Karması eşitleme Federasyon kullanan ortamlarda olanak veren isteğe bağlı bir özelliktir. Kimlik doğrulaması akışı üzerinde hiçbir etkisi yoktur. Bu durumda, Azure AD Connect parola karmalarının Federasyon kullanarak oturum açın kullanıcıları etkilemeden eşitleme başlar.
+Bu çözümü uygulamak için ilk adım, Azure AD Connect Sihirbazı 'nı kullanarak parola karması eşitlemesini etkinleştirmektir. Parola karması eşitleme, Federasyon kullanan ortamlarda etkinleştirebilmeniz için isteğe bağlı bir özelliktir. Kimlik doğrulama akışı üzerinde hiçbir etkisi yoktur. Bu durumda Azure AD Connect, Federasyon kullanarak oturum açan kullanıcıları etkilemeden parola karmalarını eşitlemeye başlar.
 
-Bu nedenle, etki alanınızın oturum açma yöntemi değiştirmeden önce hazırlama görevi iyi bu adımı tamamlamanızı öneririz. Ardından, parola karması eşitleme düzgün çalıştığını doğrulamak için bol zaman sahip olacaksınız.
+Bu nedenle, etki alanının oturum açma yöntemini değiştirmeden önce bu adımı bir hazırlık görevi olarak tamamlamanızı öneririz. Daha sonra, Parola karması eşitlemesinin doğru şekilde çalıştığını doğrulamak için de bir zaman vardır.
 
-Parola Karması eşitlemeyi etkinleştirmek için:
+Parola karması eşitlemesini etkinleştirmek için:
 
-1. Azure AD Connect sunucusunda Azure AD Connect Sihirbazı'nı açın ve ardından **yapılandırma**.
-2. Seçin **eşitleme seçeneklerini özelleştirme**ve ardından **sonraki**.
-3. Üzerinde **Azure ad Connect** sayfasında, kullanıcı adı ve bir genel yönetici hesabının parolasını girin.
-4. Üzerinde **dizinlerinizi bağlama** sayfasında **sonraki**.
-5. Üzerinde **etki alanı ve OU filtreleme** sayfasında **sonraki**.
-6. Üzerinde **isteğe bağlı özellikler** sayfasında **parola eşitleme**ve ardından **sonraki**.
+1. Azure AD Connect sunucusunda, Azure AD Connect Sihirbazı ' nı açın ve ardından **Yapılandır**' ı seçin.
+2. **Eşitleme seçeneklerini Özelleştir**' i seçin ve ardından **İleri**' yi seçin.
+3. **Azure AD 'ye Bağlan** sayfasında, bir genel yönetici hesabının kullanıcı adını ve parolasını girin.
+4. **Dizinlerinizi bağlama** sayfasında **İleri**' yi seçin.
+5. **Etki alanı ve OU filtreleme** sayfasında **İleri**' yi seçin.
+6. **Isteğe bağlı özellikler** sayfasında **parola eşitleme**' yi seçin ve ardından **İleri**' yi seçin.
  
-   ![İsteğe bağlı özellikler sayfasında seçtiğiniz parola eşitleme seçeneğinin ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image6.png)<br />
-7. Seçin **sonraki** kalan sayfalarında. Son sayfasında, seçin **yapılandırma**.
-8. Azure AD Connect parola karmalarının sonraki eşitlemede eşitleme başlar.
+   ![Isteğe bağlı özellikler sayfasında seçilen parola eşitleme seçeneğinin ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image6.png)<br />
+7. Kalan sayfalarda **İleri ' yi** seçin. Son sayfada **Yapılandır**' ı seçin.
+8. Azure AD Connect, sonraki eşitlemede parola karmalarını eşitlemeye başlar.
 
-Parola Karması eşitleme etkinleştirildikten sonra Azure AD Connect eşitleme kapsamı yeniden karma haline getirilen ve Azure AD'ye yazılan tüm kullanıcılar için parola karma hale getirir. Kullanıcıların sayısına bağlı olarak, bu işlem, dakika veya birkaç saat sürebilir.
+Parola karması eşitlemesi etkinleştirildikten sonra, Azure AD Connect eşitleme kapsamındaki tüm kullanıcılar için parola karmaları yeniden karma hale getirilir ve Azure AD 'ye yazılır. Kullanıcı sayısına bağlı olarak, bu işlem dakika veya birkaç saat sürebilir.
 
-Planlama amacıyla, 20.000 kullanıcı yaklaşık 1 saat içindeki işlenen tahmin etmelidir.
+Planlama amacıyla, yaklaşık 20.000 kullanıcının 1 saat içinde işlendiğini tahmin etmelisiniz.
 
-Parola Karması eşitleme düzgün çalıştığını doğrulamak için tamamlayın **sorun giderme** görev Azure AD Connect Sihirbazı'nda:
+Parola karma eşitlemesinin düzgün çalıştığını doğrulamak için Azure AD Connect sihirbazındaki **sorun giderme** görevini doldurun:
 
-1. Yönetici seçeneği Çalıştır'ı kullanarak Azure AD Connect sunucunuzda yeni bir Windows PowerShell oturumu açın.
-2. Çalıştırma `Set-ExecutionPolicy RemoteSigned` veya `Set-ExecutionPolicy Unrestricted`.
-3. Azure AD Connect Sihirbazı'nı başlatın.
-4. Git **ek görevler** sayfasında **sorun giderme**ve ardından **sonraki**.
-5. Üzerinde **sorun giderme** sayfasında **başlatma** PowerShell'de sorun giderme menü başlatmak için.
-6. Ana menüden **parola karması eşitleme sorunlarını giderme**.
-7. Alt menüden seçin **parola karması eşitleme hiç çalışmıyor**.
+1. Yönetici olarak çalıştır seçeneğini kullanarak Azure AD Connect sunucunuzda yeni bir Windows PowerShell oturumu açın.
+2. `Set-ExecutionPolicy RemoteSigned` veya `Set-ExecutionPolicy Unrestricted`çalıştırın.
+3. Azure AD Connect Sihirbazı 'nı başlatın.
+4. **Ek görevler** sayfasına gidin, **sorun gider**' i seçin ve ardından **İleri**' yi seçin.
+5. **Sorun giderme** sayfasında, PowerShell 'de sorun giderme menüsünü başlatmak için **Başlat** ' ı seçin.
+6. Ana menüde, **Parola karması eşitlemesini sorun gider**' i seçin.
+7. Alt menüde **Parola karması eşitleme**' yi seçin.
 
-Sorunlarını gidermek için bkz: [Azure AD Connect eşitlemesi ile parola karması eşitleme sorunlarını giderme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnectsync-troubleshoot-password-hash-synchronization).
+Sorun giderme sorunları için bkz. [Azure AD Connect Sync ile parola karması eşitleme sorunlarını giderme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnectsync-troubleshoot-password-hash-synchronization).
 
-### <a name="step-2-prepare-for-seamless-sso"></a>2\. adım: Sorunsuz çoklu oturum açma için hazırlama
+### <a name="step-2-prepare-for-seamless-sso"></a>2\. Adım: sorunsuz SSO için hazırlanma
 
-Cihazlarınızı sorunsuz çoklu oturum açmayı kullanmak, Active Directory'de Grup İlkesi'ni kullanarak bir Azure AD URL'si kullanıcıların intranet bölgesi ayarlarına eklemeniz gerekir.
+Cihazlarınızın sorunsuz SSO kullanması için, Active Directory ' de bir Grup İlkesi kullanarak kullanıcıların intranet bölgesi ayarlarına bir Azure AD URL 'SI eklemeniz gerekir.
 
-Varsayılan olarak, web tarayıcıları otomatik olarak doğru bölgeyi hesaplamak internet veya intranet, bir URL'den. Örneğin, **http:\/\/contoso /** eşler intranet bölgesine ve **http:\/\/intranet.contoso.com** (çünkü Internet bölgesine eşler URL bir dönem bulunur). Yalnızca açıkça URL için tarayıcının intranet bölgesine eklerseniz tarayıcılar Kerberos biletleri Azure AD URL'yi gibi bir bulut uç noktasına gönderin.
+Varsayılan olarak, Web tarayıcıları bir URL 'den Internet veya intranet gibi doğru bölgeyi otomatik olarak hesaplar. Örneğin, **http:\/\/contoso/** intranet bölgesine eşlenir ve **http:\/\/intranet.contoso.com** Maps for Internet Zone (URL bir nokta içerdiğinden). Tarayıcılar, yalnızca URL 'YI tarayıcının intranet bölgesine eklediğinizde Azure AD URL 'SI gibi bir bulut uç noktasına Kerberos bileti gönderir.
 
-Adımlarını tamamlamanız [dağıtmadan](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-sso-quick-start) cihazlarınıza gerekli değişiklikleri.
+Cihazlarınızda gerekli değişiklikleri [almak](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-sso-quick-start) için adımları izleyin.
 
 > [!IMPORTANT]
-> Bu değişiklik, kullanıcıların Azure AD'de oturum biçimini değiştirmez. Ancak, devam etmeden önce bu yapılandırma tüm cihazlarınıza uygulama önemlidir. Bu yapılandırmayı almadığını cihazlarda oturum kullanıcılar yalnızca bir kullanıcı adı ve Azure AD'de oturum açmak için parola girmesini gerekir.
+> Bu değişikliğin yapılması, kullanıcılarınızın Azure AD 'de oturum açma biçimini değiştirmez. Ancak, devam etmeden önce bu yapılandırmayı tüm cihazlarınıza uygulamanız önemlidir. Bu yapılandırmayı almamış cihazlarda oturum açan kullanıcıların, Azure AD 'de oturum açmak için bir Kullanıcı adı ve parola girmesi gerekir.
 
-### <a name="step-3-change-the-sign-in-method-to-password-hash-synchronization-and-enable-seamless-sso"></a>3\. adım: Oturum açma yöntemi, parola karma eşitlemesini değiştirmek ve sorunsuz çoklu oturum açmayı etkinleştir
+### <a name="step-3-change-the-sign-in-method-to-password-hash-synchronization-and-enable-seamless-sso"></a>3\. Adım: oturum açma yöntemini Parola karması eşitlemesi olarak değiştirme ve sorunsuz SSO 'yu etkinleştirme
 
-Parola Karması eşitleme için oturum açma yöntemini değiştirme ve sorunsuz çoklu oturum açmayı etkinleştirmek için iki seçeneğiniz vardır.
+Parola karması eşitlemesi ve sorunsuz SSO 'yu etkinleştirmek için oturum açma yöntemini değiştirmek üzere iki seçeneğiniz vardır.
 
-#### <a name="option-a-switch-from-federation-to-password-hash-synchronization-by-using-azure-ad-connect"></a>Seçenek A: Federasyon seçeneğinden parola karması eşitleme için Azure AD Connect kullanarak geçiş
+#### <a name="option-a-switch-from-federation-to-password-hash-synchronization-by-using-azure-ad-connect"></a>Seçenek A: Azure AD Connect kullanarak Federasyondan Parola karması eşitlemeye geçiş yapın
 
-Başlangıçta Azure AD Connect kullanarak AD FS ortamınızı yapılandırılmıştır, bu yöntemi kullanın. Bu yöntemi kullanamazsınız, *yaramadı* ilk olarak Azure AD Connect kullanarak AD FS ortamınızı yapılandırın.
+AD FS ortamınızı başlangıçta Azure AD Connect kullanarak yapılandırdıysanız bu yöntemi kullanın. AD FS *ortamınızı ilk olarak* Azure AD Connect kullanarak yapılandırmadıysanız bu yöntemi kullanamazsınız.
 
 İlk olarak, oturum açma yöntemini değiştirin:
 
-1. Azure AD Connect sunucusunda Azure AD Connect Sihirbazı'nı açın.
-2. Seçin **değiştirme kullanıcı oturum açma**ve ardından **sonraki**. 
+1. Azure AD Connect sunucusunda, Azure AD Connect sihirbazını açın.
+2. **Kullanıcı oturumunu Değiştir**' i seçin ve ardından **İleri**' yi seçin. 
 
-   ![Ekran görüntüsü değişiklik kullanıcı oturum açma sayfasında seçenek ek görevler](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image7.png)<br />
-3. Üzerinde **Azure ad Connect** sayfasında, kullanıcı adı ve bir genel yönetici hesabının parolasını girin.
-4. Üzerinde **kullanıcı oturum açma** sayfasında **parola karması eşitleme düğmesini**. Seçtiğinizden emin olun **kullanıcı hesaplarını dönüştürme** onay kutusu. Seçeneği kullanım dışı bırakılmıştır. Seçin **çoklu oturum açmayı etkinleştirme**ve ardından **sonraki**.
+   ![Ek görevler sayfasında Kullanıcı oturum açma değiştirme seçeneğinin ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image7.png)<br />
+3. **Azure AD 'ye Bağlan** sayfasında, bir genel yönetici hesabının kullanıcı adını ve parolasını girin.
+4. **Kullanıcı oturum açma** sayfasında **Parola karması eşitleme düğmesini**seçin. **Kullanıcı hesaplarını dönüştürmeyin** onay kutusunu seçtiğinizden emin olun. Seçeneği kullanım dışıdır. **Çoklu oturum açmayı etkinleştir**' i seçin ve ardından **İleri**' yi seçin.
 
-   ![Oturum açmayı etkinleştir tek sayfasının ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image8.png)<br />
+   ![Çoklu oturum açmayı etkinleştir sayfasının ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image8.png)<br />
 
    > [!NOTE]
-   > Azure AD Connect sürümü 1.1.880.0, başlangıç **sorunsuz çoklu oturum açma** onay kutusu varsayılan olarak seçilidir.
+   > Azure AD Connect Version 1.1.880.0 ile başlayarak, **sorunsuz çoklu oturum açma** onay kutusu varsayılan olarak seçilidir.
 
    > [!IMPORTANT]
-   > Bu kullanıcı dönüştürme belirtmek uyarılar güvenle yok sayabilirsiniz ve tam parola karması eşitleme Federasyon seçeneğinden bulut kimlik doğrulaması için dönüştürmek için gerekli adımlar verilmiştir. Bu adımları artık gerekli olmadığını unutmayın. Azure AD Connect ve, en son sürümünü çalıştırdığınızdan emin olun, bu uyarılar görmeye devam ediyorsanız bu kılavuzun en son sürümünü kullanıyorsanız. Daha fazla bilgi için konudaki [güncelleştirme Azure AD Connect](#update-azure-ad-connect).
+   > Kullanıcı dönüştürme ve tam Parola karması eşitlemesinin, Federasyondan bulut kimlik doğrulamasına dönüştürmek için gerekli adımları belirten uyarıları güvenle yoksayabilirsiniz. Bu adımların artık gerekli olmadığına unutmayın. Bu uyarıları hala görüyorsanız, en son Azure AD Connect sürümünü çalıştırdığınızdan ve bu kılavuzun en son sürümünü kullandığınızdan emin olun. Daha fazla bilgi için [güncelleştirme Azure AD Connect](#update-azure-ad-connect)bölümüne bakın.
 
-5. Üzerinde **çoklu oturum açmayı etkinleştirme** sayfa, etki alanı yöneticisi hesabının kimlik bilgilerini girin ve ardından **sonraki**.
+5. **Çoklu oturum açmayı etkinleştir** sayfasında, etki alanı yöneticisi hesabının kimlik bilgilerini girin ve ardından **İleri**' yi seçin.
 
-   ![Oturum açmayı etkinleştir tek sayfasının ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image9.png)<br />
+   ![Çoklu oturum açmayı etkinleştir sayfasının ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image9.png)<br />
 
    > [!NOTE]
-   > Etki alanı yönetici hesabı kimlik bilgilerini sorunsuz çoklu oturum açmayı etkinleştirmek için gereklidir. İşlemini bu yükseltilmiş izinler gerektiren aşağıdaki eylemleri gerçekleştirir. Etki alanı yönetici hesabı kimlik bilgileri, Azure AD CONNECT'te veya Azure AD'de depolanmaz. Etki alanı yönetici hesabı kimlik bilgileri yalnızca özelliği etkinleştirmek için kullanılır. İşlem başarıyla tamamlandığında, kimlik bilgileri atılır.
+   > Sorunsuz SSO 'yu etkinleştirmek için etki alanı yönetici hesabı kimlik bilgileri gereklidir. İşlem bu yükseltilmiş izinleri gerektiren aşağıdaki eylemleri tamamlar. Etki alanı yönetici hesabı kimlik bilgileri Azure AD Connect veya Azure AD 'de depolanmaz. Etki alanı yöneticisi hesabı kimlik bilgileri yalnızca özelliği açmak için kullanılır. İşlem başarıyla tamamlandığında kimlik bilgileri atılır.
    >
-   > 1. (Azure AD temsil eden) AZUREADSSOACC adlı bir bilgisayar hesabı, şirket içi Active Directory Örneğinizde oluşturulur.
-   > 2. Bilgisayar hesabının Kerberos şifre çözme anahtarı güvenli bir şekilde Azure AD ile paylaşılır.
-   > 3. Azure AD oturum açma sırasında kullanılan iki URL temsil etmek için iki Kerberos hizmet asıl adı (SPN) oluşturulur.
+   > 1. Şirket içi Active Directory örneğiniz için AZUREADSSOACC adlı bir bilgisayar hesabı (Azure AD 'yi temsil eder) oluşturulur.
+   > 2. Bilgisayar hesabının Kerberos şifre çözme anahtarı Azure AD ile güvenli bir şekilde paylaşılır.
+   > 3. Azure AD oturum açma sırasında kullanılan iki URL 'yi temsil eden iki Kerberos hizmet asıl adı (SPN) oluşturulur.
 
-6. Üzerinde **yapılandırma için hazır** sayfasında, aşağıdakileri sağlayın **Yapılandırma tamamlandığında eşitleme işlemini başlatmak** onay kutusu seçilidir. Ardından, **yapılandırma**.
+6. **Yapılandırmaya hazırlanma** sayfasında, **yapılandırma tamamlandığında eşitleme işlemini başlat** onay kutusunun işaretli olduğundan emin olun. Ardından **Yapılandır**' ı seçin.
 
-      ![Ekran görüntüsü sayfasını yapılandırmak için hazır](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image10.png)<br />
+      ![Yapılandırmaya hazırlanma sayfasının ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image10.png)<br />
 
    > [!IMPORTANT]
-   > Bu noktada, tüm Federasyon etki alanları, yönetilen kimlik doğrulamasına değişecektir. Parola Karması eşitleme yeni kimlik doğrulama yöntemidir.
+   > Bu noktada, tüm Federasyon etki alanlarınız yönetilen kimlik doğrulamasına göre değişir. Parola karması eşitleme, yeni kimlik doğrulama yöntemidir.
 
-7. Azure AD portalında **Azure Active Directory** > **Azure AD Connect**.
+7. Azure AD portalında **Azure Active Directory** > **Azure AD Connect**' yı seçin.
 8. Bu ayarları doğrulayın:
-   * **Federasyon** ayarlanır **devre dışı bırakılmış**.
-   * **Sorunsuz çoklu oturum açma** ayarlanır **etkin**.
-   * **Parola Eşitleme** ayarlanır **etkin**.<br /> 
+   * **Federasyon** **devre dışı**olarak ayarlandı.
+   * **Kesintisiz çoklu oturum açma** **özelliği etkin**olarak ayarlanmıştır.
+   * **Parola eşitleme** **etkin**olarak ayarlandı.<br /> 
 
-   ![Oturum açma kullanıcı bölümünde ayarları gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image11.png)<br />
+   ![Kullanıcı oturum açma bölümündeki ayarları gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image11.png)<br />
 
-Atlamak [test ve sonraki adımları](#testing-and-next-steps).
+[Teste ve sonraki adımlara](#testing-and-next-steps)atlayın.
 
    > [!IMPORTANT]
-   > Bu bölümü atlayın **seçenek B: Geçiş Federasyon seçeneğinden parola karması eşitleme için Azure AD Connect ve PowerShell kullanarak**. Oturum açma yöntemi, parola karma eşitlemesini değiştirmek ve sorunsuz çoklu oturum açmayı etkinleştirmek için bir seçeneği seçerseniz, bu bölümdeki adımları geçerli değildir.
+   > Bölüm **seçeneği B: Azure AD Connect ve PowerShell kullanarak Federasyondan Parola karması eşitlemesine geçiş yapın**. Bu bölümdeki adımlar, oturum açma yöntemini Parola karması eşitlemesine değiştirmek ve sorunsuz SSO 'yu etkinleştirmek için seçeneğini belirlediyseniz uygulanmaz.
 
-#### <a name="option-b-switch-from-federation-to-password-hash-synchronization-using-azure-ad-connect-and-powershell"></a>Seçenek B: Federasyon seçeneğinden parola karması eşitleme için Azure AD Connect ve PowerShell kullanarak geçiş
+#### <a name="option-b-switch-from-federation-to-password-hash-synchronization-using-azure-ad-connect-and-powershell"></a>Seçenek B: Azure AD Connect ve PowerShell kullanarak Federasyondan Parola karması eşitlemesine geçiş yapma
 
-Başlangıçta, Azure AD Connect kullanarak Federasyon etki alanlarınızı yapılandırmadıysanız, bu seçeneği kullanın. Bu işlem sırasında sorunsuz SSO ve, etki alanlarından yönetilen Federasyon oluşturan bir anahtar sağlar.
+İlk olarak Azure AD Connect kullanarak Federal etki alanlarınızı yapılandırmadıysanız bu seçeneği kullanın. Bu işlem sırasında, sorunsuz SSO 'yu etkinleştirir ve etki alanlarınızı federe 'dan yönetilene geçirebilirsiniz.
 
-1. Azure AD Connect sunucusunda Azure AD Connect Sihirbazı'nı açın.
-2. Seçin **değiştirme kullanıcı oturum açma**ve ardından **sonraki**.
-3. Üzerinde **Azure ad Connect** sayfasında, bir genel yönetici hesabı için kullanıcı adı ve parola girin.
-4. Üzerinde **kullanıcı oturum açma** sayfasında **parola karması eşitleme** düğmesi. Seçin **çoklu oturum açmayı etkinleştirme**ve ardından **sonraki**.
+1. Azure AD Connect sunucusunda, Azure AD Connect sihirbazını açın.
+2. **Kullanıcı oturumunu Değiştir**' i seçin ve ardından **İleri**' yi seçin.
+3. **Azure AD 'ye Bağlan** sayfasında, bir genel yönetici hesabının kullanıcı adını ve parolasını girin.
+4. **Kullanıcı oturum açma** sayfasında **Parola karması eşitleme** düğmesini seçin. **Çoklu oturum açmayı etkinleştir**' i seçin ve ardından **İleri**' yi seçin.
 
-   Parola Karması eşitlemeyi etkinleştirmeden önce: ![Do gösteren ekran görüntüsü kullanıcı oturum açma sayfasında seçenek yapılandırmazsanız](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image12.png)<br />
+   Parola karma eşitlemesini etkinleştirmeden önce: Kullanıcı oturum açma sayfasında yapılandırmayın seçeneğini gösteren ekran görüntüsü ![](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image12.png)<br />
 
-   Parola Karması eşitlemeyi etkinleştirdikten sonra: ![Kullanıcı oturum açma sayfasında yeni seçenekleri gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image13.png)<br />
+   Parola karma eşitlemesini etkinleştirdikten sonra: Kullanıcı oturum açma sayfasında yeni seçenekleri gösteren ekran görüntüsü ![](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image13.png)<br />
    
    > [!NOTE]
-   > Azure AD Connect sürümü 1.1.880.0, başlangıç **sorunsuz çoklu oturum açma** onay kutusu varsayılan olarak seçilidir.
+   > Azure AD Connect Version 1.1.880.0 ile başlayarak, **sorunsuz çoklu oturum açma** onay kutusu varsayılan olarak seçilidir.
 
-5. Üzerinde **çoklu oturum açmayı etkinleştirme** sayfasında bir etki alanı yönetici hesabı için kimlik bilgilerini girin ve ardından **sonraki**.
+5. **Çoklu oturum açmayı etkinleştir** sayfasında, bir etki alanı yönetici hesabının kimlik bilgilerini girin ve ardından **İleri**' yi seçin.
 
    > [!NOTE]
-   > Etki alanı yönetici hesabı kimlik bilgilerini sorunsuz çoklu oturum açmayı etkinleştirmek için gereklidir. İşlemini bu yükseltilmiş izinler gerektiren aşağıdaki eylemleri gerçekleştirir. Etki alanı yönetici hesabı kimlik bilgileri, Azure AD CONNECT'te veya Azure AD'de depolanmaz. Etki alanı yönetici hesabı kimlik bilgileri yalnızca özelliği etkinleştirmek için kullanılır. İşlem başarıyla tamamlandığında, kimlik bilgileri atılır.
+   > Sorunsuz SSO 'yu etkinleştirmek için etki alanı yönetici hesabı kimlik bilgileri gereklidir. İşlem bu yükseltilmiş izinleri gerektiren aşağıdaki eylemleri tamamlar. Etki alanı yönetici hesabı kimlik bilgileri Azure AD Connect veya Azure AD 'de depolanmaz. Etki alanı yöneticisi hesabı kimlik bilgileri yalnızca özelliği açmak için kullanılır. İşlem başarıyla tamamlandığında kimlik bilgileri atılır.
    >
-   > 1. (Azure AD temsil eden) AZUREADSSOACC adlı bir bilgisayar hesabı, şirket içi Active Directory Örneğinizde oluşturulur.
-   > 2. Bilgisayar hesabının Kerberos şifre çözme anahtarı güvenli bir şekilde Azure AD ile paylaşılır.
-   > 3. Azure AD oturum açma sırasında kullanılan iki URL temsil etmek için iki Kerberos hizmet asıl adı (SPN) oluşturulur.
+   > 1. Şirket içi Active Directory örneğiniz için AZUREADSSOACC adlı bir bilgisayar hesabı (Azure AD 'yi temsil eder) oluşturulur.
+   > 2. Bilgisayar hesabının Kerberos şifre çözme anahtarı Azure AD ile güvenli bir şekilde paylaşılır.
+   > 3. Azure AD oturum açma sırasında kullanılan iki URL 'yi temsil eden iki Kerberos hizmet asıl adı (SPN) oluşturulur.
 
-6. Üzerinde **yapılandırma için hazır** sayfasında, aşağıdakileri sağlayın **Yapılandırma tamamlandığında eşitleme işlemini başlatmak** onay kutusu seçilidir. Ardından, **yapılandırma**.
+6. **Yapılandırmaya hazırlanma** sayfasında, **yapılandırma tamamlandığında eşitleme işlemini başlat** onay kutusunun işaretli olduğundan emin olun. Ardından **Yapılandır**' ı seçin.
 
-   ![Hazır sayfasını yapılandırmak için Yapılandır düğmesini gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image15.png)<br />
-   Seçtiğinizde, **yapılandırma** düğme, sorunsuz çoklu oturum açma önceki adımda belirtildiği şekilde yapılandırılır. Daha önce etkin olduğundan, parola karması eşitleme yapılandırması değiştirilmez.
+   yapılandırmaya hazırlanma sayfasında Yapılandır düğmesini gösteren ekran görüntüsü ![](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image15.png)<br />
+   **Yapılandır** düğmesini seçtiğinizde, önceki adımda gösterildiği gıbı sorunsuz SSO yapılandırılır. Parola karması eşitleme yapılandırması daha önce etkinleştirildiğinden değiştirilmedi.
 
    > [!IMPORTANT]
-   > Yolu için hiçbir değişiklik yapılmaz kullanıcılar oturum şu an.
+   > Şu anda kullanıcıların oturum açması için herhangi bir değişiklik yapılmaz.
 
-7. Bu ayarlar Azure AD Portalı'nda doğrulayın:
-   * **Federasyon** ayarlanır **etkin**.
-   * **Sorunsuz çoklu oturum açma** ayarlanır **etkin**.
-   * **Parola Eşitleme** ayarlanır **etkin**.
+7. Azure AD portalında şu ayarları doğrulayın:
+   * **Federasyon** , **etkin**olarak ayarlandı.
+   * **Kesintisiz çoklu oturum açma** **özelliği etkin**olarak ayarlanmıştır.
+   * **Parola eşitleme** **etkin**olarak ayarlandı.
 
-   ![Oturum açma kullanıcı bölümünde ayarları gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image16.png)
+   ![Kullanıcı oturum açma bölümündeki ayarları gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image16.png)
 
-#### <a name="convert-domains-from-federated-to-managed"></a>Yönetilen Federasyon oluşturan etki alanlarından Dönüştür
+#### <a name="convert-domains-from-federated-to-managed"></a>Etki alanlarını federe 'dan yönetilene dönüştürme
 
-Bu noktada, Federasyon hala etkinse ve operasyonel etki. Dağıtıma devam etmek için her etki alanı dönüştürülecek kullanıcı kimlik doğrulaması aracılığıyla parola karma eşitlemesini zorlamak için yönetilen Federasyon oluşturan gerekir.
+Bu noktada, Federasyon hala etkin ve etki alanlarınız için çalışır durumda. Dağıtıma devam etmek için, her etki alanının, Parola karması eşitlemesi aracılığıyla Kullanıcı kimlik doğrulamasını zorlamak üzere federe 'dan yönetilene dönüştürülmesi gerekir.
 
 > [!IMPORTANT]
-> Tüm etki alanları aynı anda dönüştürmeniz gerekmez. Test üretim kiracınızın etki alanı ile başlayamaz veya en düşük kullanıcı sayısı olan, etki alanı ile başlamak isteyebilirsiniz.
+> Tüm etki alanlarını aynı anda dönüştürmeniz gerekmez. Üretim kiracınızda bir test etki alanı ile başlatmayı veya en düşük Kullanıcı sayısı olan etki alanı ile başlatmayı seçebilirsiniz.
 
-Dönüştürme, Azure AD PowerShell modülünü kullanarak tamamlayın:
+Azure AD PowerShell modülünü kullanarak dönüştürmeyi doldurun:
 
-1. PowerShell'de genel yönetici hesabını kullanarak Azure AD'de oturum açın.
-2. İlk etki alanı dönüştürmek için aşağıdaki komutu çalıştırın:
+1. PowerShell 'de, genel yönetici hesabı kullanarak Azure AD 'de oturum açın.
+2. İlk etki alanını dönüştürmek için aşağıdaki komutu çalıştırın:
 
    ``` PowerShell
    Set-MsolDomainAuthentication -Authentication Managed -DomainName <domain name>
    ```
 
-3. Azure AD portalında **Azure Active Directory** > **Azure AD Connect**.
-4. Etki alanı için aşağıdaki komutu çalıştırarak yönetilen dönüştürülmüş olduğunu doğrulayın:
+3. Azure AD portalında **Azure Active Directory** > **Azure AD Connect**' yı seçin.
+4. Aşağıdaki komutu çalıştırarak etki alanının yönetilmek üzere dönüştürülmüş olduğunu doğrulayın:
 
    ``` PowerShell
    Get-MsolDomain -DomainName <domain name>
@@ -391,88 +391,88 @@ Dönüştürme, Azure AD PowerShell modülünü kullanarak tamamlayın:
 
 ## <a name="testing-and-next-steps"></a>Test ve sonraki adımlar
 
-Parola Karması eşitleme doğrulamak ve dönüştürme işlemini tamamlamak için aşağıdaki görevleri tamamlayın.
+Parola karması eşitlemesini doğrulamak ve dönüştürme işlemini bitirebilmesi için aşağıdaki görevleri doldurun.
 
-### <a name="test-authentication-by-using-password-hash-synchronization"></a>Parola Karması eşitleme kullanarak kimlik doğrulamasını Sına 
+### <a name="test-authentication-by-using-password-hash-synchronization"></a>Parola karması eşitlemesini kullanarak kimlik doğrulamasını test etme 
 
-Kiracınızın Federasyon kimliği kullanıldığında, kullanıcıların AD FS ortamınız için Azure AD oturum açma sayfasından yönlendirildiniz. Kiracı parola karması eşitleme yerine şirket dışı kimlik doğrulaması kullanmak üzere yapılandırılmış, kullanıcıları AD FS'ye yönlendirilen değildir. Kullanıcıların doğrudan Azure AD oturum açma sayfasında bunun yerine, oturum açın.
+Kiracınızda Federal Kimlik kullanılıyorsa, kullanıcılar Azure AD oturum açma sayfasından AD FS ortamınıza yeniden yönlendirilir. Artık kiracı, Federasyon kimlik doğrulaması yerine parola karması eşitlemesini kullanacak şekilde yapılandırıldığına göre, kullanıcılar AD FS 'a yönlendirilmez. Bunun yerine, kullanıcılar doğrudan Azure AD oturum açma sayfasında oturum açabilirler.
 
-Parola Karması eşitleme test etmek için:
+Parola karması eşitlemesini sınamak için:
 
-1. Sorunsuz çoklu oturum açma oturumunuzu otomatik olarak değil, Internet Explorer InPrivate modunda açın.
+1. Sorunsuz SSO 'nun oturumunuzu otomatik olarak açmasını sağlamak için Internet Explorer 'ı InPrivate modda açın.
 2. Office 365 oturum açma sayfasına gidin ([https://portal.office.com](https://portal.office.com/)).
-3. Bir kullanıcının UPN girin ve ardından **sonraki**. Kim, şirket içi Active Directory örneğinden eşitlendi ve daha önce şirket dışı kimlik doğrulaması kullanan bir karma kullanıcının UPN'sini girdiğinizden emin olun. Kullanıcı adı ve parola, girdiğiniz bir sayfa görüntülenir:
+3. Bir Kullanıcı UPN 'si girin ve ardından **İleri**' yi seçin. Şirket içi Active Directory örneğinden eşitlenmiş bir karma kullanıcının UPN 'sini girdiğinizden ve daha önce federal kimlik doğrulamasını kullanmış olduğunuzdan emin olun. Kullanıcı adını ve parolayı girdiğiniz bir sayfa görüntülenir:
 
-   ![Oturum açma sayfasında, bir kullanıcı adı girmeniz gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image18.png)
+   ![Kullanıcı adı gireceğiniz oturum açma sayfasını gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image18.png)
 
-   ![Bir parola girmenizi oturum açma sayfasını gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image19.png)
+   ![Parola girebileceğiniz oturum açma sayfasını gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image19.png)
 
-4. Parolayı girin ve seçin sonra **oturum**, Office 365 portalına yönlendirilirsiniz.
+4. Parolayı girdikten ve **oturum aç**' ı seçtikten sonra Office 365 portalına yönlendirilirsiniz.
 
    ![Office 365 portalını gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image20.png)
 
 
-### <a name="test-seamless-sso"></a>Sorunsuz çoklu oturum açma testi
+### <a name="test-seamless-sso"></a>Sorunsuz SSO 'yu test etme
 
-1. Şirket ağına bağlı bir etki alanına katılmış bir makinede oturum açın.
-2. Internet Explorer veya Chrome, aşağıdaki URL'ler (Değiştir "contoso" etki alanınız ile) birine gidin:
+1. Şirket ağına bağlı olan, etki alanına katılmış bir makinede oturum açın.
+2. Internet Explorer veya Chrome 'da aşağıdaki URL 'Lerden birine gidin ("contoso" yerine etki alanınızı değiştirin):
 
    * https:\/\/myapps.microsoft.com/contoso.com
    * https:\/\/myapps.microsoft.com/contoso.onmicrosoft.com
 
-   Kullanıcı kısa ", oturum açmaya çalışırken." iletisini gösteren Azure AD oturum açma sayfasına yönlendirilir Kullanıcı, bir kullanıcı adı veya parola için istemde değil.<br />
+   Kullanıcı, "oturumunuzu açmaya çalışırken" iletisini gösteren Azure AD oturum açma sayfasına kısaca yönlendirilir. Kullanıcıdan Kullanıcı adı veya parola istenmez.<br />
 
-   ![Azure AD oturum açma sayfası ve iletiyi gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image21.png)<br />
-3. Kullanıcı yönlendirilir ve erişim paneli için başarıyla oturum açıldı:
+   ![Azure AD oturum açma sayfasını ve iletisini gösteren ekran görüntüsü](media/plan-migrate-adfs-password-hash-sync/migrating-adfs-to-phs_image21.png)<br />
+3. Kullanıcı yeniden yönlendirildi ve erişim panelinde başarıyla oturum açıldı:
 
    > [!NOTE]
-   > Sorunsuz çoklu oturum açma etki alanı İpucu (örneğin, myapps.microsoft.com/contoso.com) destekleyen Office 365 hizmetleri üzerinde çalışır. Şu anda, Office 365 portalında (portal.office.com) etki alanı ipuçlarını desteklemez. Kullanıcıların UPN girmeniz gerekir. Sorunsuz çoklu oturum açma, bir UPN girildikten sonra kullanıcı adına bir Kerberos anahtarı alır. Kullanıcıyı parola girmeye gerek kalmadan açmıştır.
+   > Sorunsuz SSO, etki alanı ipucunu (örneğin, myapps.microsoft.com/contoso.com) destekleyen Office 365 hizmetlerinde çalışmaktadır. Şu anda Office 365 Portalı (portal.office.com), etki alanı ipuçlarını desteklemez. Kullanıcıların bir UPN girmesi gerekir. Bir UPN girildikten sonra sorunsuz SSO Kullanıcı adına Kerberos bileti alır. Kullanıcı parola girmeden oturum açtı.
 
    > [!TIP]
-   > Dağıtmayı göz önünde bulundurun [hibrit Azure AD'ye Katıl Windows 10'da](https://docs.microsoft.com/azure/active-directory/device-management-introduction) geliştirilmiş SSO bir deneyim için.
+   > Gelişmiş bir SSO deneyimi için [Windows 10 ' da Azure AD hibrit katılımı](https://docs.microsoft.com/azure/active-directory/device-management-introduction) dağıtımı yapmayı düşünün.
 
-### <a name="remove-the-relying-party-trust"></a>Bağlı olan taraf güveni kaldırma
+### <a name="remove-the-relying-party-trust"></a>Bağlı olan taraf güvenini kaldırma
 
-Tüm kullanıcılar ve istemcilerin başarıyla aracılığıyla Azure AD kimlik doğrulama yapıyorsunuz olduğunu doğruladıktan sonra Office 365 bağlı olan taraf güveni kaldırmak güvenlidir.
+Tüm kullanıcıların ve istemcilerin Azure AD aracılığıyla başarıyla kimlik doğruladığını doğruladıktan sonra, Office 365 bağlı olan taraf güvenini kaldırmak güvenlidir.
 
-Diğer amaçlar için AD FS kullanmıyorsanız (diğer bir deyişle, diğer bağlı olan taraf güveni için), AD FS bu noktada yetkisini almak güvenlidir.
+Başka amaçlar için AD FS kullanmıyorsanız (diğer bir deyişle, diğer bağlı olan taraf güvenleri için), bu noktada AD FS yetkisini almak güvenlidir.
 
-### <a name="rollback"></a>Geri alma
+### <a name="rollback"></a>Etkin
 
-Önemli bir sorun keşfedin ve hızlı bir şekilde çözümlenemiyor çözümü için Federasyon geri seçebilirsiniz.
+Büyük bir sorun keşfettiğiniz ve bunu hızlı çözümleyemezse, çözümü federasyona geri almayı seçebilirsiniz.
 
-Federasyon tasarım ve dağıtım için belirli dağıtım ayrıntıları belgelerine bakın. İşlem, bu görevleri içermelidir:
+Dağıtım ayrıntılarınız için Federasyon tasarımı ve dağıtım belgelerine bakın. İşlem şu görevleri içermelidir:
 
-* Yönetilen etki alanlarını Federasyon kimlik doğrulaması kullanarak dönüştürme **dönüştürme MSOLDomainToFederated** cmdlet'i.
+* **Convert-Msoldomaintofedere** cmdlet 'ini kullanarak yönetilen etki alanlarını federal kimlik doğrulamasına dönüştürün.
 * Gerekirse, ek talep kurallarını yapılandırın.
 
-### <a name="sync-userprincipalname-updates"></a>Eşitleme userPrincipalName güncelleştirmeleri
+### <a name="sync-userprincipalname-updates"></a>UserPrincipalName güncelleştirmelerini Eşitle
 
-Tarihsel olarak, güncelleştirmeleri **UserPrincipalName** bu koşulların her ikisinin de doğru olduğu sürece şirket içi ortamdan eşitleme hizmeti kullanan bir öznitelik engellenir:
+Geçmişte, bu koşulların her ikisi de doğru olmadığı müddetçe, şirket içi ortamdan eşitleme hizmetini kullanan **userPrincipalName** özniteliğinde yapılan güncelleştirmeler engellenir:
 
-* Kullanıcı, bir yönetilen kimlik (Federasyon olmayan) etki alanında değil.
-* Kullanıcının bir lisansı atanmamış.
+* Kullanıcı yönetilen (Federe olmayan) bir kimlik etki alanıdır.
+* Kullanıcıya bir lisans atanmadı.
 
-Doğrulamak veya bu özelliği etkinleştirmek öğrenmek için bkz: [userPrincipalName güncelleştirmeleri eşitleme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnectsyncservice-features).
+Bu özelliği doğrulama veya açma hakkında bilgi edinmek için bkz: [userPrincipalName güncelleştirmelerini eşitleme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnectsyncservice-features).
 
 ### <a name="troubleshooting"></a>Sorun giderme
 
-Sırasında veya değişiklikten sonra yönetilen için Federasyon seçeneğinden kaynaklanan kimlik doğrulama sorunları gidermek nasıl destek ekibinize anlamanız gerekir. Kendilerini tanıyın genel sorun giderme adımları ve yalıtmak ve sorunu çözmek için yardımcı olabilecek uygun eylemleri ile destek ekibinize yardımcı olması için aşağıdaki sorun giderme belgelerini kullanın.
+Destek ekibiniz, sırasında veya Federasyondan yönetilene yapılan değişiklikten sonra ortaya çıkan tüm kimlik doğrulama sorunlarını nasıl giderebileceğinizi anlamalıdır. Destek ekibinizin, sorunu yalıtmak ve çözmek için ortak sorun giderme adımlarını ve uygun eylemleri öğrenmesini sağlamak için aşağıdaki sorun giderme belgelerini kullanın.
 
 [Azure Active Directory parola karması eşitleme sorunlarını giderme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnectsync-troubleshoot-password-hash-synchronization)
 
 [Azure Active Directory sorunsuz çoklu oturum açma sorunlarını giderme](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-troubleshoot-sso)
 
-## <a name="roll-over-the-seamless-sso-kerberos-decryption-key"></a>Sorunsuz SSO Kerberos şifre çözme anahtarını başa döndürmek
+## <a name="roll-over-the-seamless-sso-kerberos-decryption-key"></a>Kusursuz SSO Kerberos şifre çözme anahtarını atla
 
-Sık Kerberos şifre çözme anahtarı (Azure AD temsil eden) AZUREADSSOACC bilgisayar hesabının geri almak önemlidir. Şirket içi Active Directory ormanınızda AZUREADSSOACC bilgisayar hesabı oluşturulur. Active Directory etki alanı üyeleri parola değişiklikleri gönderir biçimindeki hizalamak için en azından her 30 gün Kerberos şifre çözme anahtarı alma önemle öneririz. El ile geçiş yapmanız gerekir böylece AZUREADSSOACC bilgisayar hesabı nesnesine ekli ilişkili cihaz yoktur.
+Sıklıkla AZUREADSSOACC bilgisayar hesabının (Azure AD 'yi temsil eden) Kerberos şifre çözme anahtarını ele almanız önemlidir. AZUREADSSOACC Computer hesabı şirket içi Active Directory ormanınızda oluşturulur. Active Directory etki alanı üyelerinin parola değişikliklerini göndermesi için en az 30 günde bir Kerberos şifre çözme anahtarını almanızı kesinlikle öneririz. AZUREADSSOACC bilgisayar hesabı nesnesine bağlı ilişkili cihaz yok, bu nedenle geçişi el ile gerçekleştirmeniz gerekir.
 
-Azure AD Connect'i çalıştıran şirket içi sunucuda sorunsuz SSO Kerberos şifre çözme anahtarı geçişi başlatın.
+Azure AD Connect çalıştıran şirket içi sunucuda sorunsuz SSO Kerberos şifre çözme anahtarının başa aktarımını başlatın.
 
-Daha fazla bilgi için [nasıl miyim geri AZUREADSSOACC bilgisayar hesabının Kerberos şifre çözme anahtarı?](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-sso-faq).
+Daha fazla bilgi için bkz. [AZUREADSSOACC Computer hesabının Kerberos şifre çözme anahtarı üzerinden nasıl yaparım? alma](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-sso-faq).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Hakkında bilgi edinin [Azure AD Connect tasarım kavramları](plan-connect-design-concepts.md).
-* Seçin [doğru kimlik doğrulaması](https://docs.microsoft.com/azure/security/azure-ad-choose-authn).
-* Hakkında bilgi edinin [desteklenen topolojiler](plan-connect-design-concepts.md).
+* [Azure AD Connect tasarım kavramları](plan-connect-design-concepts.md)hakkında bilgi edinin.
+* [Doğru kimlik doğrulamasını](https://docs.microsoft.com/azure/security/fundamentals/choose-ad-authn)seçin.
+* [Desteklenen topolojiler](plan-connect-design-concepts.md)hakkında bilgi edinin.

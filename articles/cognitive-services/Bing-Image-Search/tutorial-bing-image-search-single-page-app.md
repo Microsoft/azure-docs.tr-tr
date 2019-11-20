@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-image-search
 ms.topic: tutorial
-ms.date: 03/04/2019
+ms.date: 07/12/2019
 ms.author: aahi
-ms.openlocfilehash: 10bcbb4c1957735b0ddad6c97325c32be19ddcdb
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 7b530b3d415761956cbdb45fdc92bfed55a1bae5
+ms.sourcegitcommit: 10251d2a134c37c00f0ec10e0da4a3dffa436fb3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66383393"
+ms.lasthandoff: 07/13/2019
+ms.locfileid: "67868250"
 ---
 # <a name="tutorial-create-a-single-page-app-using-the-bing-image-search-api"></a>Öğretici: Bing resim arama API'si kullanarak tek sayfalı uygulama oluşturma
 
@@ -369,7 +369,7 @@ Bu işleyici işlevleri aşağıdaki parametreleri kabul eder:
     }, // relatedSearches renderer omitted
 ```
 
-Küçük resim görüntüsünün `height` ve `width` öğesi, hem `<img>` etiketinde hem de küçük resim URL’sindeki `h` ve `w` alanlarında kullanılır. Böylece Bing’in tam olarak o boyutta [bir küçük resim](resize-and-crop-thumbnails.md) döndürmesi sağlanır.
+Küçük resim görüntüsünün `height` ve `width` öğesi, hem `<img>` etiketinde hem de küçük resim URL’sindeki `h` ve `w` alanlarında kullanılır. Böylece Bing’in tam olarak o boyutta [bir küçük resim](../bing-web-search/resize-and-crop-thumbnails.md) döndürmesi sağlanır.
 
 ## <a name="persisting-client-id"></a>Kalıcı istemci kimliği
 
@@ -386,7 +386,7 @@ Tarayıcı güvenlik ilkeleri (CORS) `X-MSEdge-ClientID` üst bilgisinin JavaScr
 > [!NOTE]
 > Üretim ortamındaki bir Web uygulamasında, isteği sunucu tarafından gerçekleştirmeniz gerekir. Aksi takdirde, Bing Arama API’si anahtarınızın Web sayfasına eklenmesi gerekir ve bu durumda kaynağı görüntüleyen herkes tarafından görülebilir. API abonelik anahtarınız altında gerçekleştirilen tüm kullanım, yetkisiz tarafların yaptığı istekler bile size faturalandırılır; dolayısıyla anahtarınızı açıklamamanız önemlidir.
 
-Geliştirme amacıyla, Bing Web Araması API’si isteğini CORS ara sunucusu aracılığıyla yapabilirsiniz. Böyle bir ara sunucudan gelen yanıtta, yanıt üst bilgilerini beyaz listeye alan ve JavaScript’in kullanımına sunan `Access-Control-Expose-Headers` üst bilgisi bulunur.
+Geliştirme amacıyla, Bing Web Araması API’si isteğini CORS ara sunucusu aracılığıyla yapabilirsiniz. Böyle bir ara sunucu yanıtı sahip bir `Access-Control-Expose-Headers` üst bilgisi yanıt üst bilgilerini sağlar ve JavaScript için kullanılabilir hale getirir.
 
 Öğretici uygulamamızın istemci kimliği üst bilgisine erişebilmesi için CORS ara sunucusu kolayca yüklenebilir. İlk olarak, henüz yüklemediyseniz [Node.js'yi yükleyin](https://nodejs.org/en/download/). Ardından komut penceresinde aşağıdaki komutu yürütün:
 

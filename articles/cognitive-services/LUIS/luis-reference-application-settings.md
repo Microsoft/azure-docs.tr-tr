@@ -1,35 +1,35 @@
 ---
-title: Uygulama ayarları
+title: Uygulama ayarları-LUSıS
 titleSuffix: Azure Cognitive Services
-description: Dil anlama uygulamalar için uygulama ayarları anlayın.
+description: Azure bilişsel hizmetler dil dilleri uygulamaları için uygulama ayarları, uygulama ve portalda depolanır.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 05/29/2019
+ms.topic: conceptual
+ms.date: 11/12/2019
 ms.author: diberry
-ms.openlocfilehash: a8a1f6fe9372d013d310c557161ceb813b8a478b
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: bae4f09b539e26ca8c0d4ce97999776dc0911601
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67163646"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73961784"
 ---
 # <a name="application-settings"></a>Uygulama ayarları
 
-Bu uygulama ayarlarını depolanan [dışarı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c40) uygulama ve [güncelleştirilmiş](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/versions-update-application-version-settings) REST API'leri ile. Uygulama sürümü ayarlarınızı değiştirme, uygulama eğitim durumunuz için deneyimsiz sıfırlar.
+Bu uygulama ayarları, [dışarıya](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c40) kaydedilen uygulamada DEPOLANıR ve REST API 'leri ile [güncelleştirilir](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/versions-update-application-version-settings) . Uygulama sürümü ayarlarınızı değiştirmek, uygulama eğitim durumunuzu eğitilen olarak sıfırlar.
 
 |Ayar|Varsayılan değer|Notlar|
 |--|--|--|
-|NormalizePunctuation|True|Noktalama işaretleri kaldırır.|
-|NormalizeDiacritics|True|Vurgu kaldırır.|
+|Normalizenoktalama|True|Noktalama işaretlerini kaldırır.|
+|NormalizeDiacritics|True|Aksanları kaldırır.|
 
-## <a name="diacritics-normalization"></a>Vurgu normalleştirme 
+## <a name="diacritics-normalization"></a>Aksanların normalleştirilmesi 
 
-Utterance normalleştirme LUIS JSON uygulama dosyanıza Aksanlar için açma `settings` parametresi.
+`settings` parametresindeki lusıs JSON uygulama dosyanıza Aksanlar için söylenişi normalleştirmesini açın.
 
 ```JSON
 "settings": [
@@ -37,18 +37,18 @@ Utterance normalleştirme LUIS JSON uygulama dosyanıza Aksanlar için açma `se
 ] 
 ```
 
-Aşağıdaki konuşma Aksanları normalleştirme konuşma nasıl etkilediğini gösterir:
+Aşağıdaki söyleyenlerdeki aksanların normalleştirmeyi nasıl etkilediği gösterilmektedir:
 
-|İle Aksanları false olarak ayarlayın|Vurgu kümesiyle true|
+|Aksanların yanlış olarak ayarlandığı|Aksanların değeri true olarak ayarlandı|
 |--|--|
 |`quiero tomar una piña colada`|`quiero tomar una pina colada`|
 |||
 
 ### <a name="language-support-for-diacritics"></a>Aksanlar için dil desteği
 
-#### <a name="brazilian-portuguese-pt-br-diacritics"></a>Portekizce (Brezilya) `pt-br` Vurgu
+#### <a name="brazilian-portuguese-pt-br-diacritics"></a>Portekizce (Brezilya) `pt-br` vurguları
 
-|Vurgu false olarak ayarlayın.|Vurgu false olarak ayarlayın.|
+|Aksanların değeri false olarak ayarlandı|Aksanların değeri true olarak ayarlandı|
 |-|-|
 |`á`|`a`|
 |`â`|`a`|
@@ -64,9 +64,9 @@ Aşağıdaki konuşma Aksanları normalleştirme konuşma nasıl etkilediğini g
 |`ú`|`u`| 
 |||
 
-#### <a name="dutch-nl-nl-diacritics"></a>Felemenkçe `nl-nl` Vurgu
+#### <a name="dutch-nl-nl-diacritics"></a>Felemenkçe `nl-nl` aksanlar
 
-|Vurgu false olarak ayarlayın.|Vurgu false olarak ayarlayın.|
+|Aksanların değeri false olarak ayarlandı|Aksanların değeri true olarak ayarlandı|
 |-|-|
 |`á`|`a`|
 |`à`|`a`|
@@ -81,11 +81,11 @@ Aşağıdaki konuşma Aksanları normalleştirme konuşma nasıl etkilediğini g
 |`ü`|`u`|
 |||
 
-#### <a name="french-fr--diacritics"></a>Fransızca `fr-` Vurgu
+#### <a name="french-fr--diacritics"></a>Fransızca `fr-` aksanlar
 
-Bu, Fransızca ve Kanada subcultures içerir.
+Bu hem Fransızca hem de Kanada alt kültürlerini içerir.
 
-|Vurgu false olarak ayarlayın.|Vurgu false olarak ayarlayın.|
+|Aksanların değeri false olarak ayarlandı|Aksanların değeri true olarak ayarlandı|
 |--|--|
 |`é`|`e`|
 |`à`|`a`|
@@ -102,17 +102,17 @@ Bu, Fransızca ve Kanada subcultures içerir.
 |`ü`|`u`| 
 |`ÿ`|`y`| 
 
-#### <a name="german-de-de-diacritics"></a>Almanca `de-de` Vurgu
+#### <a name="german-de-de-diacritics"></a>Almanya `de-de` aksanlar
 
-|Vurgu false olarak ayarlayın.|Vurgu false olarak ayarlayın.|
+|Aksanların değeri false olarak ayarlandı|Aksanların değeri true olarak ayarlandı|
 |--|--|
 |`ä`|`a`|
 |`ö`|`o`| 
 |`ü`|`u`| 
 
-#### <a name="italian-it-it-diacritics"></a>İtalyanca `it-it` Vurgu
+#### <a name="italian-it-it-diacritics"></a>İtalyanca `it-it` aksanlar
 
-|Vurgu false olarak ayarlayın.|Vurgu false olarak ayarlayın.|
+|Aksanların değeri false olarak ayarlandı|Aksanların değeri true olarak ayarlandı|
 |--|--|
 |`à`|`a`|
 |`è`|`e`|
@@ -125,11 +125,11 @@ Bu, Fransızca ve Kanada subcultures içerir.
 |`ù`|`u`|
 |`ú`|`u`|
 
-#### <a name="spanish-es--diacritics"></a>İspanyolca `es-` Vurgu
+#### <a name="spanish-es--diacritics"></a>İspanyolca `es-` aksanlar
 
-Bu, İspanyolca ve Kanada Meksika içerir.
+Buna hem İspanyolca hem de Kanada Meksika dahildir.
 
-|Vurgu false olarak ayarlayın.|Vurgu false olarak ayarlayın.|
+|Aksanların değeri false olarak ayarlandı|Aksanların değeri true olarak ayarlandı|
 |-|-|
 |`á`|`a`|
 |`é`|`e`|
@@ -140,9 +140,9 @@ Bu, İspanyolca ve Kanada Meksika içerir.
 |`ñ`|`u`|
 
 
-## <a name="punctuation-normalization"></a>Noktalama işaretleri normalleştirme
+## <a name="punctuation-normalization"></a>Noktalama normalleştirmesi
 
-LUIS JSON uygulama dosyanıza noktalama utterance normalleştirme açma `settings` parametresi.
+Noktalama işaretleri için `settings` parametresindeki LUSıS JSON uygulama dosyanıza noktalama işareti normalleştirmesini açın.
 
 ```JSON
 "settings": [
@@ -150,16 +150,16 @@ LUIS JSON uygulama dosyanıza noktalama utterance normalleştirme açma `setting
 ] 
 ```
 
-Aşağıdaki konuşma Aksanları konuşma nasıl etkilediğini gösterir:
+Aşağıdaki noktalamalar, noktalama işaretlerinin nasıl etkilediğini göstermektedir:
 
-|İle Aksanları false olarak ayarlayın|İle Aksanları true olarak ayarlayın|
+|Noktalama işareti yanlış olarak ayarlandı|Noktalama işareti doğru olarak ayarlandı|
 |--|--|
 |`Hmm..... I will take the cappuccino`|`Hmm I will take the cappuccino`|
 |||
 
-### <a name="punctuation-removed"></a>Noktalama işaretleri kaldırılmış
+### <a name="punctuation-removed"></a>Noktalama kaldırıldı
 
-Aşağıdaki noktalama işareti ile kaldırılır `NormalizePunctuation` ayarlanır true.
+Aşağıdaki noktalama işaretleri, `NormalizePunctuation` true olarak ayarlandığında kaldırılır.
 
 |Noktalama işaretleri|
 |--|

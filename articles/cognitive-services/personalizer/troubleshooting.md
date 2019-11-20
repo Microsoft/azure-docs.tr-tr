@@ -1,33 +1,33 @@
 ---
-title: Sorun giderme
+title: Sorun giderme-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: Bu makalede Personalizer hakkında sorular sorun giderme bulunabilir.
-author: edjez
+description: Bu makale, kişiselleştirici hakkında sık sorulan sorun giderme sorularına yanıtlar içerir.
+author: diberry
 manager: nitinme
 services: cognitive-services
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: article
+ms.topic: conceptual
 ms.date: 06/15/2019
-ms.author: edjez
-ms.openlocfilehash: 5136bd295c12c4439a894b4dcf0b868d32ce43ca
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.author: diberry
+ms.openlocfilehash: 5911cba54d7dd0eb1a5621112b41e2fc40fa68eb
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67313142"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73953174"
 ---
-# <a name="personalizer-troubleshooting"></a>Personalizer sorunlarını giderme
+# <a name="personalizer-troubleshooting"></a>Kişiselleştirici sorunlarını giderme
 
-Bu makale, Personalizer ilgili sorun giderme sık sorulan soruların yanıtlarını içerir.
+Bu makale, kişiselleştirici hakkında sık sorulan sorun giderme sorularına yanıtlar içerir.
 
 ## <a name="learning-loop"></a>Öğrenme döngüsü
 
-### <a name="the-learning-loop-doesnt-seem-to-learn-how-do-i-fix-this"></a>Bilgi edinmek için öğrenme döngüsü görülüyor. Bunu nasıl düzeltirim?
+### <a name="the-learning-loop-doesnt-seem-to-learn-how-do-i-fix-this"></a>Öğrenme döngüsü öğreniyor gibi görünüyor. Bu Nasıl yaparım? düzeltilsin mi?
 
-Derece çağrıları etkin şekilde önceliklendirmek önce öğrenme döngüsü birkaç bin ödül çağrıları gerekir. 
+Öğrenme döngüsünün, derece çağrıları etkin bir şekilde önceliklendirilmesi için birkaç bin yeniden çağrısı gerekir. 
 
-Nasıl öğrenme döngünüzü şu anda davrandığını hakkında emin değilseniz çalıştırma bir [çevrimdışı değerlendirme](concepts-offline-evaluation.md)ve düzeltilmiş öğrenme ilke uygulayın. 
+Öğrenme döngünüz Şu anda çalışır durumda olduğundan emin değilseniz, [çevrimdışı bir değerlendirme](concepts-offline-evaluation.md)çalıştırın ve düzeltilen öğrenme ilkesini uygulayın. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

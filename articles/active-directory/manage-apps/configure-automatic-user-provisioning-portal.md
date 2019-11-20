@@ -1,6 +1,6 @@
 ---
-title: Kullanıcı Yönetimi Azure Active Directory'de kurumsal uygulamalar için hazırlama | Microsoft Docs
-description: Kullanıcı hesabı Azure Active Directory'yi kullanarak kurumsal uygulamalar için sağlama yönetmeyi öğrenin
+title: Azure Active Directory 'de kurumsal uygulamalar için Kullanıcı sağlama yönetimi | Microsoft Docs
+description: Azure Active Directory kullanarak kurumsal uygulamalar için Kullanıcı hesabı sağlamayı yönetmeyi öğrenin
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -15,89 +15,79 @@ ms.date: 04/01/2019
 ms.author: mimart
 ms.reviewer: arvinh
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6bf265f51f2fea16f90dd0bcf2891bd9bed5cef8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 26b00670ad93cceab8f570d3a5f56bd095fa80b5
+ms.sourcegitcommit: 9fba13cdfce9d03d202ada4a764e574a51691dcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65963580"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71315265"
 ---
-# <a name="managing-user-account-provisioning-for-enterprise-apps-in-the-azure-portal"></a>Azure portalının kurumsal uygulamalar için sağlama kullanıcı hesabı yönetme
+# <a name="managing-user-account-provisioning-for-enterprise-apps-in-the-azure-portal"></a>Azure portal kurumsal uygulamalar için Kullanıcı hesabı sağlamayı yönetme
 
-Bu makalede nasıl kullanılacağını [Azure portalında](https://portal.azure.com) hesabı otomatik kullanıcı hazırlama ve onu destekleyen uygulamalar için sağlamayı yönetme. Otomatik kullanıcı hesabı sağlama ve nasıl çalıştığı hakkında daha fazla bilgi için bkz: [sağlama kaldırmayı Azure Active Directory ile SaaS uygulamalarına kullanıcı sağlamayı otomatikleştirin ve](user-provisioning.md).
+Bu makalede, tarafından desteklenen uygulamalar için otomatik Kullanıcı hesabı sağlamayı ve sağlamayı kaldırmayı yönetmek üzere [Azure Portal](https://portal.azure.com) nasıl kullanılacağı açıklanır. Otomatik Kullanıcı hesabı sağlama ve nasıl çalıştığı hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory Ile SaaS uygulamalarına Kullanıcı sağlamayı ve sağlamayı kaldırmayı otomatikleştirme](user-provisioning.md).
 
-## <a name="finding-your-apps-in-the-portal"></a>Portalda uygulamalarınızı bulma
+## <a name="finding-your-apps-in-the-portal"></a>Portaldaki uygulamalarınızı bulma
 
-Azure Active Directory portalında görüntülemek ve bir dizinde çoklu oturum açma için yapılandırılmış olan tüm uygulamaları yönetmek için kullanın. Kurumsal uygulamalar, dağıtıldığı ve kuruluşunuzda kullanılan uygulamalardır. Kurumsal uygulamalarınızı yönetmek ve görüntülemek için aşağıdaki adımları izleyin:
+Bir dizinde çoklu oturum açma için yapılandırılmış tüm uygulamaları görüntülemek ve yönetmek için Azure Active Directory portalını kullanın. Kurumsal uygulamalar, kuruluşunuz içinde dağıtılan ve kullanılan uygulamalardır. Kurumsal uygulamalarınızı görüntülemek ve yönetmek için aşağıdaki adımları izleyin:
 
-1. Açık [Azure Active Directory portalında](https://aad.portal.azure.com).
+1. [Azure Active Directory portalını](https://aad.portal.azure.com)açın.
+1. Sol bölmeden **Kurumsal uygulamalar** ' ı seçin. Galeriden eklenen uygulamalar dahil olmak üzere, yapılandırılan tüm uygulamaların bir listesi gösterilir.
+1. Kaynak bölmesini yüklemek için herhangi bir uygulamayı seçin, burada raporları görüntüleyebilir ve uygulama ayarlarını yönetebilirsiniz.
+1. Seçili uygulama için Kullanıcı hesabı sağlama ayarlarını yönetmek üzere **sağlamayı** seçin.
 
-1. Seçin **kurumsal uygulamalar** sol bölmeden. Galeriden eklenen uygulamaları dahil olmak üzere tüm yapılandırılmış uygulamaların bir listesi gösterilir.
-
-1. Raporları görüntülemek ve uygulama ayarlarını yönetme, kaynak bölmesini yüklemek için herhangi bir uygulama seçin.
-
-1. Seçin **sağlama** hazırlama ayarları seçili uygulama için kullanıcı hesabını yönetmek için.
-
-   ![Uygulama kaynağı bölmesi](./media/configure-automatic-user-provisioning-portal/enterprise-apps-provisioning.png)
+   ![Kullanıcı hesabı sağlama ayarlarını yönetmek için sağlama ekranı](./media/configure-automatic-user-provisioning-portal/enterprise-apps-provisioning.png)
 
 ## <a name="provisioning-modes"></a>Sağlama modları
 
-**Sağlama** Bölmesi ile başlayan bir **modu** menüsünde, desteklenen bir kurumsal uygulama için sağlama modu gösterir ve bunları yapılandırmanıza olanak sağlar. Kullanılabilir seçenekler şunlardır:
+**Sağlama** bölmesi, bir kurumsal uygulama için desteklenen sağlama modlarını gösteren bir **mod** menüsüyle başlar ve bunları yapılandırmanıza olanak tanır. Mevcut seçenekler şunlardır:
 
-* **Otomatik** -bu seçenek, Azure AD API tabanlı otomatik sağlama veya bu uygulamaya yönelik kullanıcı hesaplarının sağlamayı destekleyip desteklemediğini gösterilir. Bu mod, yöneticiler yardımcı olan bir arabirim görüntülemek için seçin:
+* **Otomatik** -Bu seçenek, Azure AD bu uygulamaya yönelik Kullanıcı HESAPLARıNıN otomatik API tabanlı sağlamasını veya sağlamasını destekliyorsa görüntülenir. Yöneticilere yardımcı olacak bir arabirim göstermek için bu modu seçin:
 
-  * Uygulamanın kullanıcı yönetimi API'sine bağlanmak için Azure AD'yi yapılandırma
-  * Hesap Eşleştirmeleri ve nasıl kullanıcı hesabı verileri Azure AD akışını tanımlamanızı iş akışları oluşturma ve uygulama
-  * Sağlama hizmetini Azure AD'yi yönetme
+  * Azure AD 'yi uygulamanın kullanıcı yönetimi API 'sine bağlanacak şekilde yapılandırma
+  * Kullanıcı hesabı verilerinin Azure AD ile uygulama arasında nasıl akacağınızı tanımlayan hesap eşlemeleri ve iş akışları oluşturun
+  * Azure AD sağlama hizmetini yönetme
 
-* **El ile** -bu seçenek, Azure AD kullanıcı hesaplarının bu uygulama için otomatik sağlamayı desteklemeyen gösterilir. Bu durumda, uygulama kayıtları depolanan kullanıcı hesabı (içerebilen SAML tam zamanında sağlama) bu uygulama tarafından sağlanan kullanıcı yönetimi ve sağlama yeteneklerine dayalı bir dış işlemi kullanılarak yönetilmesi gerekir.
+* **El ile** -Bu seçenek, Azure AD tarafından bu uygulamaya otomatik olarak Kullanıcı hesaplarının sağlanması desteği yoksa gösterilir. Bu durumda, uygulamada depolanan kullanıcı hesabı kayıtları, bu uygulama tarafından sunulan Kullanıcı yönetimi ve sağlama özelliklerine (SAML Just-In-Time sağlamayı içerebilir) bağlı olarak bir dış işlem kullanılarak yönetilmelidir.
 
-## <a name="configuring-automatic-user-account-provisioning"></a>Hesap otomatik kullanıcı sağlamayı yapılandırma
+## <a name="configuring-automatic-user-account-provisioning"></a>Otomatik Kullanıcı hesabı sağlamayı yapılandırma
 
-Seçin **otomatik** yönetici kimlik bilgileri, başlatma ve durdurma, eşlemeler ve eşitleme ayarlarını belirtmek için seçeneği.
+Yönetici kimlik bilgileri, eşlemeler, başlatma ve durdurma ve eşitleme için ayarları belirtmek üzere **Otomatik** seçeneğini belirleyin.
 
-### <a name="admin-credentials"></a>Yönetici kimlik bilgileri
+### <a name="admin-credentials"></a>Yönetici Kimlik Bilgileri
 
-Genişletin **yönetici kimlik bilgileri** uygulamanın kullanıcı yönetimi API'sine bağlanmak Azure AD için gerekli kimlik bilgilerini girmek için. Gerekli giriş uygulamaya bağlı olarak değişir. Kimlik bilgisi türlerinin ve belirli uygulamalar için gereksinimleri hakkında bilgi edinmek için bkz. [belirli bir uygulama için yapılandırma öğreticisini](user-provisioning.md).
+Azure AD 'nin uygulamanın kullanıcı yönetim API 'sine bağlanması için gereken kimlik bilgilerini girmek üzere **yönetici kimlik bilgileri** ' ni genişletin. Gerekli giriş uygulamaya bağlı olarak değişir. Belirli uygulamalar için kimlik bilgisi türleri ve gereksinimleri hakkında bilgi edinmek için ilgili [uygulamanın yapılandırma öğreticisine](user-provisioning.md)bakın.
 
-Seçin **Bağlantıyı Sına** Azure sağlayarak kimlik bilgilerini test etmek için uygulamaya bağlanmak için AD girişim sağlanan kimlik bilgilerini kullanarak uygulama sağlama.
+Sağlanan kimlik bilgilerini kullanarak Azure AD 'nin uygulamanın sağlama uygulamasına bağlanmasını sağlayarak kimlik bilgilerini test etmek için **Bağlantıyı Sına** ' yı seçin.
 
 ### <a name="mappings"></a>Eşlemeler
 
-Genişletin **eşlemeleri** görüntüleme ve Azure AD arasında akış kullanıcı özniteliklerini düzenleyin ve kullanıcı hesaplarını sağlandığında veya güncelleştirildiğinde, hedef uygulama.
+Kullanıcı hesapları sağlandığında veya güncelleştirilirken Azure AD ile hedef uygulama arasında akan Kullanıcı özniteliklerini görüntülemek ve düzenlemek için **eşlemeler** ' i genişletin.
 
-Önceden yapılandırılmış bir Azure AD kullanıcı nesnelerinin ve her SaaS uygulamasının kullanıcı nesneleri arasında eşleme yoktur. Bazı uygulamalar diğer grupların veya kişilerin gibi nesnelerin türlerini yönetin. Bir eşleme burada görüntüleyebilir ve bunları özelleştirme sağa eşleme düzenleyicisini açmak için tablo seçin.
+Azure AD Kullanıcı nesneleri ile her bir SaaS uygulamasının Kullanıcı nesneleri arasında önceden yapılandırılmış bir eşlemeler kümesi vardır. Bazı uygulamalar, gruplar veya kişiler gibi diğer nesne türlerini yönetir. Eşleme düzenleyicisini sağ tarafta açmak için tabloda bir eşleme seçin; burada bunları görüntüleyebilir ve özelleştirebilirsiniz.
 
-![Uygulama kaynağı bölmesi](./media/configure-automatic-user-provisioning-portal/enterprise-apps-provisioning-mapping.png)
+![Öznitelik eşleme ekranını gösterir](./media/configure-automatic-user-provisioning-portal/enterprise-apps-provisioning-mapping.png)
 
-Desteklenen özelleştirmeleri içerir:
+Desteklenen özelleştirmeler şunlardır:
 
-* Etkinleştirme ve SaaS uygulamasının kullanıcı nesnesi Azure AD kullanıcı nesnesini gibi belirli nesneler için eşlemelerini devre dışı bırakma.
-* Uygulamanın kullanıcı nesnesini Azure AD'ye kullanıcı nesneden akış öznitelikleri düzenleme. Öznitelik eşlemesi hakkında daha fazla bilgi için bkz. [öznitelik eşlemesi türlerini anlama](customize-application-attributes.md#understanding-attribute-mapping-types).
-* Azure AD hedeflenen uygulamaya çalışan sağlama eylemleri filtreleme. Azure AD'ye tam eşitleme sahip olmak yerine çalıştırma eylemleri sınırlayabilirsiniz. 
+* SaaS uygulamasının kullanıcı nesnesine Azure AD Kullanıcı nesnesi gibi belirli nesneler için eşlemeleri etkinleştirme ve devre dışı bırakma.
+* Azure AD kullanıcı nesnesinden uygulamanın kullanıcı nesnesine akan öznitelikleri düzenleyebilirsiniz. Öznitelik eşlemesi hakkında daha fazla bilgi için bkz. [öznitelik eşleme türlerini anlama](customize-application-attributes.md#understanding-attribute-mapping-types).
+* Azure AD 'nin hedeflenen uygulama üzerinde çalıştığı sağlama eylemlerini filtreleme. Azure AD 'nin nesneleri tamamen eşitlemesini yapmak yerine, çalıştırılan eylemleri sınırlayabilirsiniz.
 
-  Örneğin, yalnızca belirli **güncelleştirme** ve var olan kullanıcı hesaplarını bir uygulamada, ancak yenilerini oluşturmaz Azure AD'ye yalnızca güncelleştirmeler. Yalnızca belirli **Oluştur** ve Azure, yalnızca yeni kullanıcı hesaplarını oluşturur ancak mevcut olanları güncelleştirmez. Bu özellik, hesap oluşturma için farklı eşlemeler oluşturun ve iş akışları güncelleştirme yöneticileri olanak sağlar.
+  Örneğin yalnızca **güncelleştirme** ' yi seçin ve Azure AD yalnızca bir uygulamadaki mevcut kullanıcı hesaplarını güncelleştirir ancak yenilerini oluşturmaz. Yalnızca **Oluştur** ' u seçin ve Azure yalnızca yeni kullanıcı hesapları oluşturur, ancak varolanları güncelleştirmez. Bu özellik, yöneticilerin hesap oluşturma ve güncelleştirme iş akışları için farklı eşlemeler oluşturmalarına olanak tanır.
 
-* Yeni bir öznitelik eşlemesi ekleniyor. Seçin **yeni eşleme Ekle** kısmındaki **eşleme özniteliği** bölmesi. Doldurun **özniteliğini Düzenle** seçin ve form **Tamam** yeni eşleme listesine eklenecek. 
+* Yeni bir öznitelik eşlemesi ekleniyor. **Öznitelik eşleme** bölmesinin alt kısmındaki **Yeni eşleme Ekle** ' yi seçin. Yeni eşlemeyi listeye eklemek için **özniteliği Düzenle** formunu doldurun ve **Tamam** ' ı seçin.
 
 ### <a name="settings"></a>Ayarlar
 
-Azure AD seçilen uygulama için hizmet sağlama başlatıp durdurabilirsiniz **ayarları** alanının **sağlama** ekran. Sağlama önbelleği temizlemek ve hizmeti yeniden başlatmak seçebilirsiniz.
+**Hazırlama** ekranının **Ayarlar** alanında SEÇILI uygulama için Azure AD sağlama hizmetini başlatabilir ve durdurabilirsiniz. Sağlama önbelleğini kaldırmayı ve hizmeti yeniden başlatmayı da tercih edebilirsiniz.
 
-Sağlama için bir uygulama ilk kez etkinleştiriliyor, hizmette değiştirerek kapatma **sağlama durumu** için **üzerinde**. Bu değişiklik, bir ilk eşitleme çalıştırmak Azure AD sağlama hizmeti neden olur. Atanan kullanıcılar okur **kullanıcılar ve gruplar** bölümü, hedef uygulama için bunları sorgular ve ardından Azure AD'de tanımlanan sağlama eylemleri çalıştırır **eşlemeleri** bölümü. Yönetilmeyen hesapları hiçbir zaman atama için kapsamda olan hedef uygulamalarının içinde işlemler sağlamayı tarafından etkilenmez. Bu nedenle bu işlem sırasında sağlama hizmeti, yönetmekte olduğu, hangi kullanıcı hesaplarını ilgili önbelleğe alınan verileri depolar. İlk eşitlemeden sonra sağlama hizmeti, kullanıcı ve Grup nesneleri otomatik olarak bir on dakikalık aralıklarla eşitler.
+Hazırlama işlemi bir uygulama için ilk kez etkinleştiriliyorsa, **sağlama durumunu** **Açık**olarak değiştirerek hizmeti açın. Bu değişiklik, Azure AD sağlama hizmeti 'nin bir başlangıç döngüsünü çalıştırmasına neden olur. **Kullanıcılar ve gruplar** bölümünde atanan kullanıcıları okur, hedef uygulamayı kendileri için sorgular ve ardından Azure AD **eşlemeleri** bölümünde tanımlanan sağlama eylemlerini çalıştırır. Bu işlem sırasında, sağlama hizmeti, hangi kullanıcı hesaplarının yönettiği hakkında önbelleğe alınmış verileri depolar, bu nedenle atama için kapsamda olmayan hedef uygulamalar içinde yönetilmeyen hesaplar, sağlama işlemlerinden etkilenmez. İlk döngüden sonra sağlama hizmeti, Kullanıcı ve Grup nesnelerini 40 dakikalık bir aralıkta otomatik olarak eşitler.
 
-Değişiklik **sağlama durumu** için **kapalı** sağlama hizmeti duraklatmak için. Bu durumda, Azure değil oluşturmak, güncelleştirmek veya uygulamada herhangi bir kullanıcı veya grup nesneleri kaldırın. Değişiklik durumu geri **üzerinde** ve hizmet kaldığı seçer.
+Sağlama hizmetini duraklatmak için **sağlama durumunu** **kapalı** olarak değiştirin. Bu durumda, Azure uygulamadaki hiçbir Kullanıcı veya Grup nesnesini oluşturmaz, güncelleştirmez veya kaldırmaz. Durumu yeniden **Açık** olarak değiştirin ve hizmet kaldığınız yerden gelir.
 
-Seçin **geçerli durumu temizleyin ve eşitlemeyi yeniden başlatın** onay kutusunu seçip **Kaydet** için:
+**Geçerli durumu temizle ve eşitlemeyi yeniden Başlat** onay kutusunu seçin ve **Kaydet** ' i seçin:
 
-* Sağlama Hizmeti Durdur
-* Azure AD yönetiminin hangi hesapların ilgili önbelleğe alınan verileri dökümü
-* Hizmetleri yeniden başlatmak ve ilk eşitlemeyi yeniden çalıştırın
+* Sağlama hizmetini durdur
+* Hizmetleri yeniden başlatın ve ilk döngüyü yeniden çalıştırın
 
-Bu seçenek, sağlama dağıtım işlemini baştan başlatmak yöneticileri sağlar.
-
-### <a name="synchronization-details"></a>Eşitleme ayrıntıları
-
-Bu bölümde, sağlama hizmeti uygulama ve kaç kullanıcı ve Grup nesneleri yönettiği karşı çalıştırıldı ilk ve son kez dahil olmak üzere sağlama hizmetinin işlemi hakkında ek ayrıntılar sağlar.
-
-Bir bağlantı için sağlanan **sağlama etkinliği raporunu**, tüm kullanıcıları içeren bir günlük sağlar ve oluşturulmuş, güncelleştirilmiş ve kaldırılan arasında Azure AD grupları ve hedef uygulama. Bir bağlantı için de sağlanır **hata raporu sağlama**, daha ayrıntılı hata iletilerini kullanıcı ve okumak için oluşturulan'başarısız oldu. Grup nesnelerini sağlayan güncelleştirilmiş veya kaldırılamaz.
+Bu seçenek, yöneticilerin sağlama dağıtım işlemini yeniden başlatmasını sağlar.

@@ -1,67 +1,66 @@
 ---
-title: Azure Analysis Services PowerShell ile yönetme | Microsoft Docs
-description: PowerShell ile Azure Analysis Services yönetimi.
+title: PowerShell ile Azure Analysis Services yönetme | Microsoft Docs
+description: Sunucu oluşturma, işlemleri askıya alma veya hizmet düzeyini değiştirme gibi yaygın yönetim görevleri için Azure Analysis Services PowerShell cmdlet 'lerini açıklar.
 author: minewiskan
-manager: kfile
 ms.service: azure-analysis-services
 ms.topic: reference
-ms.date: 07/01/2019
+ms.date: 10/28/2019
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: a958c33e173c881a3ad09a49fe9f71ddb0c9df56
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: 2c8f4c0541d97a189087af692658cfe794eaaf7e
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508951"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73572704"
 ---
-# <a name="manage-azure-analysis-services-with-powershell"></a>Azure Analysis Services PowerShell ile yönetme
+# <a name="manage-azure-analysis-services-with-powershell"></a>PowerShell ile Azure Analysis Services yönetme
 
-Bu makalede, Azure Analysis Services sunucusu ve veritabanı yönetim görevlerini gerçekleştirmek için kullanılan PowerShell cmdlet'lerini açıklanır. 
+Bu makalede, Azure Analysis Services sunucu ve veritabanı yönetim görevlerini gerçekleştirmek için kullanılan PowerShell cmdlet 'leri açıklanır. 
 
-Oluşturma veya sunucu silme, askıya alma veya sürdürme sunucu işlemleri veya hizmet düzeyi (katman) değiştirme gibi sunucu kaynak yönetimi görevlerinde Azure Analysis Services cmdlet'lerini kullanın. Veritabanını yönetme ile ilgili diğer görevler, ekleme veya Rol üyeleri, işleme veya dahil edilen SQL Server Analysis Services ile aynı SqlServer modülündeki cmdlet'ler bölümleme gibi.
+Sunucu oluşturma veya silme, sunucu işlemlerini askıya alma veya sürdürme veya hizmet düzeyi (katman) Azure Analysis Services cmdlet 'lerini değiştirme gibi sunucu kaynak yönetimi görevleri. Rol üyeleri ekleme veya kaldırma gibi veritabanlarını yönetmeye yönelik diğer görevler, SQL Server Analysis Services ile aynı SqlServer modülüne dahil edilen cmdlet 'leri kullanır.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="permissions"></a>İzinler
 
-Çoğu PowerShell görevleri, yönettiğiniz Analysis Services sunucusunda yönetici ayrıcalıkları gerektirir. Zamanlanmış PowerShell görevleri katılımsız işlemlerdir. Hesap veya hizmet sorumlusu Zamanlayıcı tarafından çalıştırılan Analysis Services sunucusunda yönetici ayrıcalıkları olmalıdır. 
+Çoğu PowerShell görevi, yönettiğiniz Analysis Services sunucuda yönetici ayrıcalıklarına sahip olmanızı gerektirir. Zamanlanmış PowerShell görevleri katılımsız işlemlerdir. Zamanlayıcı 'yı çalıştıran hesap veya hizmet sorumlusu Analysis Services sunucuda yönetici ayrıcalıklarına sahip olmalıdır. 
 
-Azure PowerShell cmdlet'lerini kullanarak sunucu işlemleri için hesabınızı veya Zamanlayıcı çalıştıran hesabı da kaynak sahibi rolüne ait olmalıdır [Azure rol tabanlı Access Control (RBAC)](../role-based-access-control/overview.md). 
+Azure PowerShell cmdlet 'lerini kullanan sunucu işlemlerinde, hesabınız veya zamanlayıcı çalıştıran hesap, [Azure rol tabanlı Access Control (RBAC)](../role-based-access-control/overview.md)içindeki kaynak için sahip rolüne ait olmalıdır. 
 
 ## <a name="resource-and-server-operations"></a>Kaynak ve sunucu işlemleri 
 
-Modül - yükleme [Az.AnalysisServices](https://www.powershellgallery.com/packages/Az.AnalysisServices)   
-Belgeleri - [Az.AnalysisServices başvurusu](/powershell/module/az.analysisservices)
+Modülü Install- [az. AnalysisServices](https://www.powershellgallery.com/packages/Az.AnalysisServices)   
+Belgeler- [az. AnalysisServices başvurusu](/powershell/module/az.analysisservices)
 
 ## <a name="database-operations"></a>Veritabanı işlemleri
 
-Azure Analysis Services veritabanı işlemleri aynı SqlServer modülündeki SQL Server Analysis Services'i kullanın. Ancak, tüm cmdlet'leri, Azure Analysis Services için desteklenir. 
+Azure Analysis Services veritabanı işlemleri SQL Server Analysis Services aynı SqlServer modülünü kullanır. Ancak, Azure Analysis Services için tüm cmdlet 'ler desteklenmez. 
 
-SqlServer modülündeki bir Tablosal Model betik dili (TMSL) sorgu veya betik kabul eden genel amaçlı Invoke-ASCmd cmdlet yanı sıra görev özgü veritabanı yönetimi cmdlet'leri sağlar. Aşağıdaki SqlServer modülündeki cmdlet'ler, Azure Analysis Services için desteklenir.
+SqlServer modülü, göreve özgü veritabanı yönetim cmdlet 'lerinin yanı sıra bir tablosal model betik dili (TMSL) sorgusu veya betiği kabul eden genel amaçlı Invoke-ASCmd cmdlet 'ini sağlar. Azure Analysis Services için SqlServer modülündeki aşağıdaki cmdlet 'ler desteklenir.
 
-Modül - yükleme [SqlServer](https://www.powershellgallery.com/packages/SqlServer)   
-Belgeleri - [SqlServer başvurusu](/powershell/module/sqlserver)
+Modül yüklemesi- [SqlServer](https://www.powershellgallery.com/packages/SqlServer)   
+Belgeler- [SqlServer başvurusu](/powershell/module/sqlserver)
 
-### <a name="supported-cmdlets"></a>Desteklenen cmdlet'leri
+### <a name="supported-cmdlets"></a>Desteklenen Cmdlet 'ler
 
 |Cmdlet|Açıklama|
 |------------|-----------------| 
-|[RoleMember ekleyin](https://docs.microsoft.com/powershell/module/sqlserver/Add-RoleMember)|Üye veritabanı rolüne ekleyin.| 
-|[Yedekleme ASDatabase](https://docs.microsoft.com/powershell/module/sqlserver/backup-asdatabase)|Bir Analysis Services veritabanını yedekleyin.|  
-|[Remove-RoleMember](https://docs.microsoft.com/powershell/module/sqlserver/remove-rolemember)|Üye veritabanı rolden kaldırma.|   
-|[Çağırma ASCmd](https://docs.microsoft.com/powershell/module/sqlserver/invoke-ascmd)|TMSL betiğini yürütün.|
-|[Invoke-ProcessASDatabase](https://docs.microsoft.com/powershell/module/sqlserver/invoke-processasdatabase)|Bir veritabanı işlemi.|  
-|[Çağırma ProcessPartition](https://docs.microsoft.com/powershell/module/sqlserver/invoke-processpartition)|Bir bölüm işleyin.| 
-|[Çağırma ProcessTable](https://docs.microsoft.com/powershell/module/sqlserver/invoke-processtable)|İşlem bir tablo.|  
-|[Bölüm birleştirme](https://docs.microsoft.com/powershell/module/sqlserver/merge-partition)|Bir bölümü birleştirin.|  
+|[Add-Rolemebir](https://docs.microsoft.com/powershell/module/sqlserver/Add-RoleMember)|Bir veritabanı rolüne üye ekleyin.| 
+|[Yedekleme-ASDatabase](https://docs.microsoft.com/powershell/module/sqlserver/backup-asdatabase)|Analysis Services bir veritabanını yedekleyin.|  
+|[Remove-Rolemeoda](https://docs.microsoft.com/powershell/module/sqlserver/remove-rolemember)|Bir üyeyi veritabanı rolünden kaldırın.|   
+|[Invoke-ASCmd](https://docs.microsoft.com/powershell/module/sqlserver/invoke-ascmd)|Bir TMSL betiği yürütün.|
+|[Invoke-ProcessASDatabase](https://docs.microsoft.com/powershell/module/sqlserver/invoke-processasdatabase)|Bir veritabanını işleyin.|  
+|[Invoke-ProcessPartition](https://docs.microsoft.com/powershell/module/sqlserver/invoke-processpartition)|Bir bölümü işleyin.| 
+|[Invoke-ProcessTable](https://docs.microsoft.com/powershell/module/sqlserver/invoke-processtable)|Bir tabloyu işleyin.|  
+|[Birleştirme-bölüm](https://docs.microsoft.com/powershell/module/sqlserver/merge-partition)|Bölüm birleştirme.|  
 |[Geri yükleme-ASDatabase](https://docs.microsoft.com/powershell/module/sqlserver/restore-asdatabase)|Bir Analysis Services veritabanını geri yükleyin.| 
   
 
 ## <a name="related-information"></a>İlgili bilgiler
 
 * [SQL Server PowerShell](https://docs.microsoft.com/sql/powershell/sql-server-powershell)      
-* [SQL Server PowerShell modülünü indirin](https://docs.microsoft.com/sql/ssms/download-sql-server-ps-module)   
-* [SSMS'yi indirin](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms)   
-* [PowerShell galerisinde SqlServer modülündeki](https://www.powershellgallery.com/packages/SqlServer)    
-* [Tablosal Model programlama uyumluluk düzeyi 1200 ve üzeri](/sql/analysis-services/tabular-model-programming-compatibility-level-1200/tabular-model-programming-for-compatibility-level-1200)
+* [PowerShell modülünü indir SQL Server](https://docs.microsoft.com/sql/ssms/download-sql-server-ps-module)   
+* [SSMS 'yi indir](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms)   
+* [PowerShell Galerisi içinde SqlServer modülü](https://www.powershellgallery.com/packages/SqlServer)    
+* [Uyumluluk düzeyi 1200 ve üzeri için tablolu model programlama](https://docs.microsoft.com/analysis-services/tabular-model-programming-compatibility-level-1200/tabular-model-programming-for-compatibility-level-1200)

@@ -1,76 +1,75 @@
 ---
-title: Ortak PowerShell komutları için Azure sanal makineler | Microsoft Docs
-description: Oluşturma ve yönetme, azure'da Windows VM'ler başlamanıza yardımcı olmak için ortak PowerShell komutları.
+title: Azure sanal makineleri için ortak PowerShell komutları
+description: Azure 'da Windows VM 'lerinizi oluşturmaya ve yönetmeye başlamanızı sağlamak için ortak PowerShell komutları.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ba3839a2-f3d5-4e19-a5de-95bfb1c0e61e
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 06/01/2018
 ms.author: cynthn
-ms.openlocfilehash: 64f7e614b72d7d966eaec7acb84a68e8df3698a2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e61d0840f66dad2e1bf91512281d9171771f7ca9
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64691053"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74032901"
 ---
-# <a name="common-powershell-commands-for-creating-and-managing-azure-virtual-machines"></a>Ortak PowerShell komutları için oluşturma ve Azure sanal makineleri yönetme
+# <a name="common-powershell-commands-for-creating-and-managing-azure-virtual-machines"></a>Azure sanal makineleri oluşturmak ve yönetmek için kullanılan genel PowerShell komutları
 
-Bu makale, oluşturma ve Azure aboneliğinizdeki sanal makineleri yönetmek için kullanabileceğiniz Azure PowerShell komutlarının bazı kapsar.  Daha ayrıntılı belirli komut satırı anahtarları ve seçenekleri konusunda yardım için kullanabileceğiniz **Get-Help** *komut*.
+Bu makalede, Azure aboneliğinizdeki sanal makineleri oluşturmak ve yönetmek için kullanabileceğiniz Azure PowerShell komutlarının bazıları ele alınmaktadır.  Belirli komut satırı anahtarları ve seçenekleriyle ilgili daha ayrıntılı yardım için **Get-Help** *komutunu*kullanabilirsiniz.
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-Birden fazla komutlar bu makaledeki çalışıyorsa bu değişkenler için yararlı olabilir:
+Bu değişkenler, bu makaledeki komutlardan birden fazlasını çalıştırdığınızda sizin için yararlı olabilir:
 
-- $location - sanal makine konumu. Kullanabileceğiniz [Get-AzLocation](https://docs.microsoft.com/powershell/module/az.resources/get-azlocation) bulmak için bir [coğrafi](https://azure.microsoft.com/regions/) için çalışır.
-- $myResourceGroup - sanal makineyi içeren kaynak grubunun adı.
-- $myVM - sanal makinenin adı.
+- $location-sanal makinenin konumu. Sizin için uygun bir [coğrafi bölge](https://azure.microsoft.com/regions/) bulmak için [Get-azlocation](https://docs.microsoft.com/powershell/module/az.resources/get-azlocation) ' i kullanabilirsiniz.
+- $myResourceGroup-sanal makineyi içeren kaynak grubunun adı.
+- $myVM-sanal makinenin adı.
 
-## <a name="create-a-vm---simplified"></a>Basitleştirilmiş bir VM - oluşturma
-
-| Görev | Komut |
-| ---- | ------- |
-| Basit bir VM oluşturma | [Yeni-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) -$myVM adı <BR></BR><BR></BR> Yeni-AzVM sahip bir dizi *Basitleştirilmiş* parametreleri, tüm gerekli olan tek bir ad olduğu. Değer için - ad tüm yeni bir VM oluşturmak için gereken kaynakları adı olarak kullanılacaktır. Daha fazla belirtebilirsiniz, ancak gereken budur.|
-| Özel görüntüden VM oluşturma | Yeni-AzVm - ResourceGroupName $myResourceGroup-adı "Myımage" $myVM IMAGENAME-$location konumu  <BR></BR><BR></BR>Kendi oluşturmuş olmanız gerekir [yönetilen bir görüntü](capture-image-resource.md). Birden çok, bir görüntü kullanabilirsiniz birbirinin aynısı olan Vm'leri. |
-
-
-
-## <a name="create-a-vm-configuration"></a>Bir VM yapılandırması oluşturun
+## <a name="create-a-vm---simplified"></a>VM oluşturma-Basitleştirilmiş
 
 | Görev | Komut |
 | ---- | ------- |
-| Bir VM yapılandırması oluşturun |$vm = [yeni AzVMConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azvmconfig) - VMName $myVM - VMSize "Standard_D1_v1"<BR></BR><BR></BR>VM yapılandırması tanımlayın veya VM için ayarları güncelleştirmek için kullanılır. Yapılandırma ve VM adını başlatılır ve kendi [boyutu](sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). |
-| Yapılandırma ayarları Ekle |$vm = [kümesi AzVMOperatingSystem](https://docs.microsoft.com/powershell/module/az.compute/set-azvmoperatingsystem) - VM $vm-Windows - ComputerName $myVM-$cred - ProvisionVMAgent kimlik bilgisi - EnableAutoUpdate<BR></BR><BR></BR>İşletim sistemi ayarları dahil olmak üzere [kimlik bilgilerini](https://technet.microsoft.com/library/hh849815.aspx) yeni AzVMConfig kullanarak daha önce oluşturduğunuz yapılandırma nesnesine eklenmelidir. |
-| Bir ağ arabirimi ekleyin |$vm = [Ekle AzVMNetworkInterface](https://docs.microsoft.com/powershell/module/az.compute/Add-AzVMNetworkInterface) - VM $vm-kimliği $nic Kimliği<BR></BR><BR></BR>Bir VM olmalıdır bir [ağ arabirimi](../virtual-machines-windows-ps-create.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) bir sanal ağda iletişim kurabilmek için. Ayrıca [Get-AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.compute/add-azvmnetworkinterface) var olan bir ağ arabirimi nesnesi alınamıyor. |
-| Platform görüntüsü belirtin |$vm = [kümesi AzVMSourceImage](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsourceimage) - VM $vm - PublisherName "publisher_name"-"publisher_offer" Teklif - Skus "product_sku"-"son" sürüm<BR></BR><BR></BR>[Görüntü bilgilerini](cli-ps-findimage.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) yeni AzVMConfig kullanarak daha önce oluşturduğunuz yapılandırma nesnesine eklenmelidir. Bu komuttan döndürülen nesne yalnızca işletim sistemi diski, bir platform görüntüsü kullanmasına izin kümesi kullanılır. |
-| VM oluşturma |[Yeni-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) - ResourceGroupName $myResourceGroup-konum $location - VM $vm<BR></BR><BR></BR>Tüm kaynaklar oluşturulan bir [kaynak grubu](../../azure-resource-manager/manage-resource-groups-powershell.md). Bu komutu çalıştırmadan önce yeni AzVMConfig, Set-AzVMOperatingSystem, Set-AzVMSourceImage, AzVMNetworkInterface Ekle ve Set-AzVMOSDisk çalıştırın. |
-| Bir VM'yi güncelleştirin |[Update-AzVM](https://docs.microsoft.com/powershell/module/az.compute/update-azvm) - ResourceGroupName $myResourceGroup - VM $vm<BR></BR><BR></BR>Get-AzVM kullanarak geçerli VM yapılandırmasını almak, VM nesnesini yapılandırma ayarlarını değiştirin ve ardından bu komutu çalıştırın. |
+| Basit VM oluşturma | [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) -adı $myVM <BR></BR><BR></BR> New-AzVM, hepsi gereken tek bir ad olduğu *Basitleştirilmiş* parametreler kümesine sahiptir. -Name değeri, yeni bir VM oluşturmak için gereken tüm kaynakların adı olarak kullanılacaktır. Daha fazlasını belirtebilirsiniz, ancak bu gereklidir.|
+| Özel görüntüden VM oluşturma | New-AzVm-ResourceGroupName $myResourceGroup-adı $myVM ImageName "MyImage"-Location $location  <BR></BR><BR></BR>Kendi [yönetilen görüntünüzü](capture-image-resource.md)zaten oluşturmuş olmanız gerekir. Birden çok ve özdeş VM oluşturmak için bir görüntü kullanabilirsiniz. |
 
-## <a name="get-information-about-vms"></a>VM'ler hakkında bilgi edinin
+
+
+## <a name="create-a-vm-configuration"></a>VM yapılandırması oluşturma
 
 | Görev | Komut |
 | ---- | ------- |
-| Bir abonelikte Vm'leri listeleme |[Get-AzVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvm) |
-| Bir kaynak grubundaki Vm'leri listeleme |Get-AzVM - ResourceGroupName $myResourceGroup<BR></BR><BR></BR>Aboneliğinizde kaynak gruplarının bir listesini almak için kullanın [Get-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/get-azresourcegroup). |
-| VM hakkında bilgi alma |Get-AzVM - ResourceGroupName $myResourceGroup-$myVM adı |
+| VM yapılandırması oluşturma |$vm = [New-AzVMConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azvmconfig) -vmname $MyVM-vmsize "Standard_D1_v1"<BR></BR><BR></BR>VM yapılandırması VM ayarlarını tanımlamak veya güncelleştirmek için kullanılır. Yapılandırma, VM adı ve [boyutu](sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)ile başlatılır. |
+| Yapılandırma ayarları ekle |$vm = [set-AzVMOperatingSystem](https://docs.microsoft.com/powershell/module/az.compute/set-azvmoperatingsystem) -VM $VM-Windows-ComputerName $MyVM-Credential $cred-ProvisionVMAgent-enableotomatik güncelleştirme<BR></BR><BR></BR>Yeni-AzVMConfig kullanarak daha önce oluşturduğunuz yapılandırma nesnesine [kimlik bilgileri](https://technet.microsoft.com/library/hh849815.aspx) de dahil olmak üzere işletim sistemi ayarları eklenir. |
+| Ağ arabirimi ekleme |$vm = [Add-Azvmnetworkınterface](https://docs.microsoft.com/powershell/module/az.compute/Add-AzVMNetworkInterface) -VM $vm kimliği $Nic. Numarasını<BR></BR><BR></BR>Bir VM 'nin bir sanal ağda iletişim kurmak için bir [ağ arabirimi](../virtual-machines-windows-ps-create.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) olmalıdır. Ayrıca, var olan bir ağ arabirimi nesnesini almak için [Get-Aznetworkınterface](https://docs.microsoft.com/powershell/module/az.compute/add-azvmnetworkinterface) ' i de kullanabilirsiniz. |
+| Platform görüntüsü belirtme |$vm = [set-Azvmsourceımage](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsourceimage) -VM $VM-publishername "publisher_name"-teklif "publisher_offer"-sku "product_sku"-sürüm "en son"<BR></BR><BR></BR>Yeni-AzVMConfig kullanarak daha önce oluşturduğunuz yapılandırma nesnesine [görüntü bilgileri](cli-ps-findimage.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) eklenir. Bu komuttan döndürülen nesne yalnızca bir platform görüntüsü kullanmak için işletim sistemi diski ayarladığınızda kullanılır. |
+| VM oluşturma |[New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) -resourcegroupname $MyResourceGroup-location $LOCATION-VM $VM<BR></BR><BR></BR>Tüm kaynaklar bir [kaynak grubunda](../../azure-resource-manager/manage-resource-groups-powershell.md)oluşturulur. Bu komutu çalıştırmadan önce New-AzVMConfig, set-AzVMOperatingSystem, set-Azvmsourceımage, Add-Azvmnetworkınterface ve set-AzVMOSDisk komutunu çalıştırın. |
+| VM güncelleştirme |[Update-AzVM](https://docs.microsoft.com/powershell/module/az.compute/update-azvm) -resourcegroupname $MYRESOURCEGROUP-VM $VM<BR></BR><BR></BR>Get-AzVM kullanarak geçerli VM yapılandırmasını alın, VM nesnesindeki yapılandırma ayarlarını değiştirin ve ardından bu komutu çalıştırın. |
+
+## <a name="get-information-about-vms"></a>VM 'Ler hakkında bilgi alın
+
+| Görev | Komut |
+| ---- | ------- |
+| Bir abonelikteki VM 'Leri listeleme |[Get-AzVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvm) |
+| Bir kaynak grubundaki VM 'Leri listeleme |Get-AzVM-ResourceGroupName $myResourceGroup<BR></BR><BR></BR>Aboneliğinizdeki kaynak gruplarının bir listesini almak için [Get-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/get-azresourcegroup)komutunu kullanın. |
+| VM hakkında bilgi alma |Get-AzVM-ResourceGroupName $myResourceGroup-adı $myVM |
 
 ## <a name="manage-vms"></a>VM’leri yönetme
 | Görev | Komut |
 | --- | --- |
-| VM başlatma |[Start-AzVM](https://docs.microsoft.com/powershell/module/az.compute/start-azvm) - ResourceGroupName $myResourceGroup-$myVM adı |
-| VM durdurma |[Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) - ResourceGroupName $myResourceGroup-$myVM adı |
-| Çalışan bir sanal Makineyi yeniden başlatın |[Yeniden başlatma-AzVM](https://docs.microsoft.com/powershell/module/az.compute/restart-azvm) - ResourceGroupName $myResourceGroup-$myVM adı |
-| VM silme |[Remove-AzVM](https://docs.microsoft.com/powershell/module/az.compute/remove-azvm) - ResourceGroupName $myResourceGroup-$myVM adı |
+| VM başlatma |[Start-AzVM](https://docs.microsoft.com/powershell/module/az.compute/start-azvm) -resourcegroupname $MyResourceGroup-adı $myVM |
+| VM durdurma |[Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) -resourcegroupname $MyResourceGroup-adı $myVM |
+| Çalışan bir VM 'yi yeniden başlatma |[Restart-AzVM](https://docs.microsoft.com/powershell/module/az.compute/restart-azvm) -resourcegroupname $MyResourceGroup-adı $myVM |
+| VM silme |[Remove-AzVM](https://docs.microsoft.com/powershell/module/az.compute/remove-azvm) -resourcegroupname $MyResourceGroup-adı $myVM |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Bir sanal makine oluşturmak için temel adımları görmek [Resource Manager ve PowerShell kullanarak bir Windows VM oluşturma](../virtual-machines-windows-ps-create.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+* [Kaynak Yöneticisi ve PowerShell kullanarak WINDOWS VM oluşturma](../virtual-machines-windows-ps-create.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)bölümünde sanal makine oluşturmaya yönelik temel adımlara bakın.
 

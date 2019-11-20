@@ -1,9 +1,9 @@
-- name: Machine Learning Studio Belgeleri
+- name: Machine Learning Studio (klasik) Belgeleri
   href: index.yml
 - name: Genel Bakış
   expanded: true
   items:
-    - name: Machine Learning Studio
+    - name: Machine Learning Studio (klasik)
       displayName: overview
       href: what-is-ml-studio.md
     - name: ML ürünlerimizi karşılaştırın
@@ -106,16 +106,14 @@
       items:
         - name: Algoritma seçme
           href: algorithm-choice.md
-        - name: Algoritma bilgi sayfası
-          href: algorithm-cheat-sheet.md
         - name: Algoritma örnekleri
           displayName: 'infographic, studio basics'
           href: basics-infographic-with-algorithm-examples.md
     - name: Modelleri dağıtma
       items:
         - name: Bir web hizmetini dağıtma
-          displayName: 'publish, multiple regions'
-          href: publish-a-machine-learning-web-service.md
+          displayName: 'deploy, multiple regions'
+          href: deploy-a-machine-learning-web-service.md
         - name: Nasıl çalışır?
           href: model-progression-experiment-to-web-service.md
         - name: Dağıtım için hazırlanma
@@ -153,11 +151,11 @@
           href: azure-ml-customer-churn-scenario.md
         - name: Yaklaşım analizi
           href: text-analytics-module-tutorial.md
-        - name: Excel'den Studio'ya analiz aktarma
-          href: linear-regression-in-azure.md
+        - name: Excel'den Studio'ya (klasik) analiz aktarma
+          href: use-case-excel-studio.md
     - name: Müşteri verilerini silme ve dışarı aktarma
       items:
-        - name: Studio verileri
+        - name: Studio (klasik) verileri
           displayName: export
           href: export-delete-personal-data-dsr.md
         - name: Galeri verileri

@@ -1,6 +1,6 @@
 ---
 title: Microsoft Authenticator uygulamasına genel bakış - Azure Active Directory | Microsoft Docs
-description: Nedir, dahil olmak üzere Microsoft Authenticator uygulaması hakkında nasıl çalıştığını ve hangi bilgilerin içeriğin bu bölüme dahil öğrenin.
+description: Ne olduğu, nasıl çalıştığı ve içeriğin bu bölümüne hangi bilgilerin dahil olduğu dahil olmak üzere Microsoft Authenticator uygulaması hakkında bilgi edinin.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -12,75 +12,78 @@ ms.topic: overview
 ms.date: 01/24/2019
 ms.author: lizross
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4b47b0c5af98198d829c4658877acae2edff5455
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: d3766436851cb2f31fa7bb070402191e03ad9ad1
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60473728"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68382339"
 ---
 # <a name="what-is-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulaması nedir?
 
 >[!Important]
 >Bu içerik kullanıcılara yöneliktir. Yöneticiyseniz, Azure Active Directory (Azure AD) ortamınızı ayarlama ve yönetme hakkında daha fazla bilgi için [Azure Active Directory Belgelerine](https://docs.microsoft.com/azure/active-directory) bakabilirsiniz.
 
-Microsoft Authenticator uygulamasını hesaplarınıza iki aşamalı doğrulama kullanırsanız oturum yardımcı olur. İki Faktörlü doğrulama özellikle hassas bilgileri görüntülerken hesaplarınızı daha güvenli bir şekilde erişmenize yardımcı olur. Parolaları bu nedenle Unutulan, çalınması veya ele geçirilen, iki Faktörlü doğrulama kesmek diğer kişiler için daha zor hale getirerek hesabınızın korunmasına yardımcı olan bir ek güvenlik adımdır.
+Microsoft Authenticator uygulaması, iki öğeli doğrulama kullanırsanız hesaplarınızda oturum açmanıza yardımcı olur. İki öğeli doğrulama, özellikle de hassas bilgileri görüntülerken hesaplarınıza güvenli bir şekilde erişmenize yardımcı olur. Parolaların unutulabileceği, çalındığı veya güvenliği aşılmış olabileceğinden, iki öğeli doğrulama, diğer kişilerin kesintiye uğraması için hesabınızı korumanıza yardımcı olan ek bir güvenlik adımıdır.
 
-Microsoft Authenticator uygulamasını birden çok yolla kullanabilirsiniz:
+Microsoft Authenticator uygulamasını, aşağıdakiler dahil olmak üzere birden çok şekilde kullanabilirsiniz:
 
-- Sonra kullanıcı adı ve parolanızla oturum kimlik doğrulaması için bir istem yanıt verir.
+- Kullanıcı adınızla ve parolanızla oturum açtıktan sonra kimlik doğrulama istemine yanıtlayın.
 
-- Parmak izi, yüz tanıma veya PIN kullanıcı adınızı, kimlik doğrulayıcı uygulamasını ve mobil Cihazınızı kullanarak parola girmeden oturum.
+- Kullanıcı adınızı, kimlik doğrulayıcı uygulamanızı ve mobil cihazınızı parmak izinizle, yüzizine veya PIN 'iniz ile kullanarak oturum açın.
 
-- Kimlik doğrulayıcısı uygulamalarını destekleyen herhangi bir hesabı için bir kod Oluşturucu.
+- Kimlik doğrulayıcı uygulamalarını destekleyen diğer hesaplar için kod Oluşturucu olarak.
 
 > [!Important]
-> Microsoft Authenticator uygulamasını iki Faktörlü doğrulama kullanır ve zamana bağlı bir kerelik parola (TOTP) standartlarını destekleyen herhangi bir hesabı ile çalışır.
+> Microsoft Authenticator uygulama, iki öğeli doğrulama kullanan herhangi bir hesapla birlikte çalışarak, zaman tabanlı bir kerelik parola (TOTP) standartlarını destekler.
+>
+> Kuruluşunuz, oturum açmak ve kurumsal verilerinize ve belgelerinize erişmek için bir doğrulayıcı uygulaması kullanmanızı gerektirebilir. Kullanıcı adınız uygulamada görünebilse de, kayıt işlemini tamamlayana kadar hesap aslında doğrulama yöntemi olarak davranacak şekilde ayarlanamaz. Daha fazla bilgi için bkz. [iş veya okul hesabınızı ekleme](user-help-auth-app-add-work-school-account.md).
 > 
-> Kuruluşunuzun oturum açma ve kuruluş verilerini ve belgelerine erişmek için bir kimlik doğrulayıcı uygulama kullanmanızı gerektirebilir. Kullanıcı adınızı uygulamada gibi görünse de, hesap gerçekten kayıt işlemi tamamlanana kadar bir doğrulama yöntemi olarak davranacak şekilde ayarlanmamış. Daha fazla bilgi için [iş veya Okul hesabınızı eklemek](user-help-auth-app-add-work-school-account.md).
-> 
-> Hesabınızda oturum açarken sorun yaşıyorsanız, bkz. [olamaz oturum açtığınızda Microsoft hesabınızı](https://support.microsoft.com/help/12429) Yardım. Aldığınız olduğunda yapılması gerekenler hakkında daha fazla bilgi alın ["Bu Microsoft hesabı mevcut değil"](https://support.microsoft.com/help/13811) iletisi, Microsoft hesabınızda oturum açın.
+> Hesabınızda oturum açarken sorun yaşıyorsanız, yardım için [Microsoft hesabı oturum açma](https://support.microsoft.com/help/12429) konusunda bilgi için bkz. Microsoft hesabı oturum açmaya çalıştığınızda ["bu Microsoft hesabı yok"](https://support.microsoft.com/help/13811) iletisini aldığınızda yapılacaklar hakkında daha fazla bilgi alın.
 
 ## <a name="terminology"></a>Terminoloji
 
-|Sözleşme Dönemi|Açıklama|
-|----|-----------|
-|İki Faktörlü doğrulama |Özellikle, parola ve PIN gibi doğrulama bilgilerini yalnızca iki parça kullanmanızı gerekli hale getirmiş doğrulama işlemi. Microsoft Authenticator uygulamasını hem standart iki Faktörlü doğrulama ve parolasız oturum açma destekler.|
-|Çok faktörlü kimlik doğrulaması (MFA)|Multi-Factor authentication, kullanmanızı gerektiren tüm iki aşamalı doğrulama, *en az* doğrulama bilgileri, kuruluşunuzun gereksinimlerine göre iki parça.|
-|Microsoft hesabı (olarak da bilinen MSA)|Erişmek için tüketici yönelimli Microsoft ürünlerinde ve bulut Hizmetleri, Outlook, OneDrive, Xbox LIVE veya Office 365 gibi kendi kişisel hesapları oluşturun. Microsoft hesabınızı oluşturulur ve Microsoft tarafından çalıştırılan Microsoft tüketici kimlik hesap sistemi depolanır.|
-|İş veya okul hesabı|Kuruluşunuz iş veya Okul hesabınızı oluşturur (gibi alain@contoso.com) ve Microsoft Azure, Windows Intune ve Office 365 gibi büyük olasılıkla kısıtlı kaynaklarına erişim iç izin vermek için.|
-|Doğrulama kodu|Eklenen her hesap altında kimlik doğrulayıcı uygulamasında görüntülenen altı rakamlı kodu. Birisi bir kod birden çok kez tüketmesini her 30 saniyede doğrulama kodunu değiştirir. Bir kerelik geçiş kodu (OTP) olarak da bilinen budur.|
+| Terim|Açıklama|
+| ----|-----------|
+| İki öğeli doğrulama | Bir parola ve PIN gibi özellikle yalnızca iki doğrulama bilgisi parçasını kullanmanızı gerektiren bir doğrulama işlemi. Microsoft Authenticator uygulaması hem standart iki öğeli doğrulamayı hem de passwordless oturum açmayı destekler. |
+| Multi-factor authentication (MFA) | İki öğeli kimlik doğrulama işlemi, kuruluşunuzun gereksinimlerine bağlı olarak, *en az* iki adet doğrulama bilgileri kullanmanızı gerektiren Multi-Factor Authentication ' dır. |
+| Microsoft hesabı (olarak da bilinen MSA) | Müşteri odaklı Microsoft ürünlerine ve Outlook, OneDrive, Xbox LIVE veya Office 365 gibi bulut hizmetlerine erişim sağlamak için kendi kişisel hesaplarınızı oluşturursunuz. Microsoft hesabınızı oluşturulur ve Microsoft tarafından çalıştırılan Microsoft tüketici kimlik hesap sistemi depolanır. |
+| İş veya okul hesabı | Kuruluşunuz, Microsoft Azure, Windows Intune ve Office 365 gibi iç alain@contoso.comve potansiyel olarak kısıtlanmış kaynaklara erişmenizi sağlamak için iş veya okul hesabınızı (gibi) oluşturur. |
+| Doğrulama kodu | Her eklenen hesap altında kimlik doğrulayıcı uygulamasında görünen altı basamaklı kod. Doğrulama kodu, birinin bir kodu birden çok kez kullanmasını önlemek için 30 saniyede bir değişir. Bu, tek seferlik geçiş kodu (OTP) olarak da bilinir. |
 
-## <a name="how-two-factor-verification-works-with-the-app"></a>İki aşamalı doğrulama uygulamayı nasıl çalışır?
-İki Microsoft Authenticator uygulaması ile doğrulama çalışır aşağıdaki yollarla faktörü:
+## <a name="how-two-factor-verification-works-with-the-app"></a>İki öğeli doğrulamanın uygulamayla nasıl çalıştığı
 
-- **Bildirim.** Sizin oturum içinde iş veya Okul hesabı veya kişisel Microsoft hesabınız için cihazın kullanıcı adı ve parola yazın ve ardından Microsoft Authenticator uygulamasını isteyen bir bildirim gönderir **oturumonaylama**. Seçin **Onayla** oturum açma denemesi tanımak durumunda. Aksi takdirde seçin **Reddet**. Seçerseniz **Reddet**, ayrıca istek sahte olarak işaretleyebilirsiniz.
+İki öğeli doğrulama Microsoft Authenticator uygulamayla aşağıdaki yollarla çalışmaktadır:
 
-- **Doğrulama kodu.** Sizin oturum içinde iş veya Okul hesabı veya kişisel Microsoft hesabınız için cihazın kullanıcı adı ve parola yazın ve ardından ilişkili doğrulama kodu kopyalayın **hesapları** Microsoft ekranı Authenticator uygulaması. Doğrulama kodunu bir kerelik geçiş kodu (OTP) kimlik doğrulaması de denir.
+- **Uyarıyı.** İş veya okul hesabınız ya da kişisel Microsoft hesabı için oturum açmak istediğiniz cihaza Kullanıcı adınızı ve parolanızı yazın ve ardından Microsoft Authenticator uygulama, **oturum açmayı onaylamanızı**isteyen bir bildirim gönderir. Oturum açma girişimini tanıdıysanız **Onayla** ' yı seçin. Aksi takdirde **Reddet**' i seçin. **Reddet**' i seçerseniz, isteği sahte olarak da işaretleyebilirsiniz.
 
-- **Parolasız oturum açın.** Cihazın içine ya da iş veya Okul hesabı veya kişisel Microsoft hesabınızla oturum açtığınızdan ve ardından, parmak izi, yüz tanıma veya PIN kullanarak olduğunu doğrulamak için mobil Cihazınızı kullanmak adınızı yazın. Bu yöntem için parolanızı girmeniz gerekmez.
+- **Doğrulama kodu.** İş veya okul hesabınız ya da kişisel Microsoft hesabı için oturum açmak istediğiniz cihaza Kullanıcı adınızı ve parolanızı yazın ve ardından Microsoft Authenticator uygulamasının **hesaplar** ekranından ilişkili doğrulama kodunu kopyalayın. Doğrulama kodu, tek seferlik geçiş kodu (OTP) kimlik doğrulaması olarak da bilinir.
 
-### <a name="whether-to-use-your-devices-biometric-capabilities"></a>Cihazınızın biyometrik özellikleri kullanıp kullanmayacağınızı
-Kimlik doğrulama işlemini tamamlamak için bir PIN kullanıyorsanız, bunun yerine cihazınızın parmak izi veya yüz tanıma (Biyometri) özelliklerini kullanmak için Microsoft Authenticator uygulamasını ayarlayabilirsiniz. Bu ilk defa ayarlayabilirsiniz authenticator uygulamasını cihaz biyometrik yeteneklerinizi PIN'iniz yerine kimlik olarak kullanmak için seçeneği belirleyerek hesabınızı doğrulamak için kullanın.
+- **Parolasız oturum açma.** İş veya okul hesabınız ya da kişisel Microsoft hesabı için oturum açarken kullandığınız cihaza Kullanıcı adınızı yazın ve ardından parmak izinizi, yüzünüzü veya PIN 'inizi kullanarak bunu doğrulamak için mobil cihazınızı kullanın. Bu yöntem için parolanızı girmeniz gerekmez.
 
-## <a name="who-decides-if-you-use-this-feature"></a>Olan bu özellik kullanırsanız karar verir?
-Hesap türüne bağlı olarak, iki Faktörlü doğrulama kullanmalısınız veya kendiniz karar verebilirsiniz olabilir, kuruluşunuzun karar verebilirsiniz.
+### <a name="whether-to-use-your-devices-biometric-capabilities"></a>Cihazınızın biyometrik yeteneklerini kullanıp kullanmayacağınızı belirtir
 
-- **İş veya Okul hesabı.** Bir iş veya Okul hesabı kullanıyorsanız (örneğin, alain@contoso.com), kuruluşunuz için belirli doğrulama yöntemleriyle birlikte, iki Faktörlü doğrulama kullanmanız gerekir olduğu. İş veya Okul hesabınız için Microsoft Authenticator uygulamasını ekleme hakkında daha fazla bilgi için bkz. [, iş veya Okul hesapları ekleme](user-help-auth-app-add-work-school-account.md).
+Kimlik doğrulama işlemini gerçekleştirmek için bir PIN kullanırsanız, Microsoft Authenticator uygulamasını bunun yerine cihazınızın parmak izi veya yüz tanıma (biyometrik) yeteneklerini kullanmak için ayarlayabilirsiniz. Bunu, bilgisayarınızı doğrulamak için kimlik doğrulayıcı uygulamasını ilk kez kullandığınızda, PIN 'iniz yerine cihaz Biyometri yeteneklerini kimlik olarak kullanma seçeneğini belirleyerek ayarlayabilirsiniz.
 
-- **Kişisel Microsoft hesabı.** Kişisel Microsoft hesaplarınız için iki aşamalı doğrulama ayarlamak seçebilirsiniz (örneğin, alain@outlook.com). Kişisel Microsoft hesabınızı ekleme hakkında daha fazla bilgi için bkz. [kişisel hesaplarınız ekleme](user-help-auth-app-add-personal-ms-account.md).
+## <a name="who-decides-if-you-use-this-feature"></a>Bu özelliği kullanıp kullanmayacağına karar veriyor musunuz?
 
-- **Microsoft olmayan hesaplar.** Microsoft dışı hesaplarınız için iki aşamalı doğrulama ayarlamak seçebilirsiniz (örneğin, alain@gmail.com). Microsoft olmayan hesapların kullanamayabilir terimi, iki aşamalı doğrulama, ancak özelliğin Bul olmalıdır **güvenlik** veya **oturum** ayarları. Microsoft Authenticator uygulamasını TOTP standartlarını destekleyen herhangi bir hesaplarıyla çalışır. Microsoft olmayan hesapların ekleme hakkında daha fazla bilgi için bkz. [ekleyin, Microsoft olmayan hesapların](user-help-auth-app-add-non-ms-account.md).
+Kuruluşunuz, hesap türüne bağlı olarak iki öğeli doğrulama kullanmanız gerektiğine karar verebilir veya kendiniz karar veremeyebilirsiniz.
+
+- **İş veya Okul hesabı.** Bir iş veya okul hesabı kullanıyorsanız (örneğin, alain@contoso.com), bu, belirli doğrulama yöntemleriyle birlikte iki öğeli doğrulama kullanmanız gerekip gerekmediğini kuruluşunuza göre yapılır. Microsoft Authenticator uygulamasına iş veya okul hesabınızı ekleme hakkında daha fazla bilgi için bkz. [iş veya okul hesaplarınızı ekleme](user-help-auth-app-add-work-school-account.md).
+
+- **Kişisel Microsoft hesabı.** Kişisel Microsoft hesaplarınız için iki öğeli doğrulama ayarlamayı seçebilirsiniz (örneğin, alain@outlook.com). Kişisel Microsoft hesabı ekleme hakkında daha fazla bilgi için bkz. [Kişisel hesaplarınızı ekleme](user-help-auth-app-add-personal-ms-account.md).
+
+- **Microsoft hesabı olmayan.** Microsoft dışı hesaplarınız için iki öğeli doğrulama ayarlamayı tercih edebilirsiniz (örneğin, alain@gmail.com). Microsoft dışı hesaplarınız, iki öğeli doğrulama terimini kullanamaz, ancak **güvenlik** veya **oturum açma** ayarları içinde özelliği bulabilmelisiniz. Microsoft Authenticator uygulama, TOTP standartlarını destekleyen hesaplarla birlikte çalışmaktadır. Microsoft dışı hesaplarınız ekleme hakkında daha fazla bilgi için bkz. [Microsoft dışı hesaplarınız ekleme](user-help-auth-app-add-non-ms-account.md).
 
 ## <a name="in-this-section"></a>Bu bölümde
 
-|Makale |Açıklama |
-|------|------------|
-|[Uygulamayı indirme ve yükleme](user-help-auth-app-download-install.md)|Nerede tanımlar ve nasıl alınacağını ve Android ve iOS çalıştıran cihazlar için Microsoft Authenticator uygulamasını yükleyin.|
-|[İş veya Okul hesapları ekleme](user-help-auth-app-add-work-school-account.md)|Çeşitli iş veya Okul ve kişisel hesaplar için Microsoft Authenticator uygulamasını eklemeyi açıklar.|
-|[Kişisel hesaplarınızın Ekle](user-help-auth-app-add-personal-ms-account.md)|Kişisel Microsoft hesaplarınız için Microsoft Authenticator uygulamasını eklemeyi açıklar.|
-|[Microsoft olmayan hesapların Ekle](user-help-auth-app-add-non-ms-account.md)|Microsoft dışı hesaplarınız için Microsoft Authenticator uygulamasını eklemeyi açıklar.|
-|[Hesaplarınızı el ile Ekle](user-help-auth-app-add-account-manual.md)|Sağlanan QR kodunu tarayın yapamıyorsanız el ile hesaplarınızı Microsoft Authenticator uygulamasına eklemeyi açıklar.|
-|[Uygulamayı kullanarak oturum açın](user-help-auth-app-sign-in.md)|Microsoft Authenticator uygulamasını kullanarak, çeşitli hesaplarında oturum açıklar.|
-|[Hesap kimlik bilgilerini yedekleme ve kurtarma](user-help-auth-app-backup-recovery.md)| Microsoft Authenticator uygulamasını kullanarak hesap kimlik bilgilerinizi yedekleme ve kurtarma hakkında bilgi sağlar.|
-|[Microsoft Authenticator uygulaması hakkında SSS](user-help-auth-app-faq.md)|Uygulamayla ilgili sık sorulan soruların yanıtlarını sunar.|
+| Makale | Açıklama |
+| ------ | ------------ |
+| [Uygulamayı indirme ve yükleme](user-help-auth-app-download-install.md) | Android ve iOS çalıştıran cihazlar için Microsoft Authenticator uygulamasının nereden ve nasıl alınacağını ve yükleneceğini açıklar. |
+| [İş veya okul hesaplarınızı ekleyin](user-help-auth-app-add-work-school-account.md) | Çeşitli iş veya okul ve kişisel hesaplarınızın Microsoft Authenticator uygulamasına nasıl ekleneceğini açıklar. |
+| [Kişisel hesaplarınızı ekleyin](user-help-auth-app-add-personal-ms-account.md) | Kişisel Microsoft hesaplarınızın Microsoft Authenticator uygulamasına nasıl ekleneceğini açıklar. |
+| [Microsoft dışı hesaplarınızı ekleyin](user-help-auth-app-add-non-ms-account.md) | Microsoft dışı hesaplarınızın Microsoft Authenticator uygulamasına nasıl ekleneceğini açıklar. |
+| [Hesaplarınızı el ile ekleyin](user-help-auth-app-add-account-manual.md) | Belirtilen QR kodunu tarayamıyorsanız, hesaplarınızın Microsoft Authenticator uygulamasına el ile nasıl ekleneceğini açıklar. |
+| [Uygulamayı kullanarak oturum açın](user-help-auth-app-sign-in.md) | Microsoft Authenticator uygulamasını kullanarak çeşitli hesaplarınızda nasıl oturum açılacağını açıklar.|
+| [Hesap kimlik bilgilerini yedekleme ve kurtarma](user-help-auth-app-backup-recovery.md) | Microsoft Authenticator uygulamasını kullanarak hesap kimlik bilgilerinizi yedekleme ve kurtarma hakkında bilgi sağlar. |
+| [Microsoft Authenticator uygulaması hakkında SSS](user-help-auth-app-faq.md) | Uygulamayla ilgili sık sorulan soruların yanıtlarını sunar. |

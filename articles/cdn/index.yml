@@ -5,14 +5,12 @@ metadata:
   title: 'Azure CDN Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
   description: 'Azure Content Delivery Network (CDN), yüksek bant genişliğine sahip içerik sunmaya yönelik genel bir CDN çözümüdür. Azure’da veya başka bir konumda barındırılabilir. Azure CDN sayesinde en yakın POP sunucusunu kullanarak Azure Blob depolama alanından, web uygulamasından veya herhangi bir genel erişime açık web sunucusundan yüklenen statik nesneleri önbelleğe alabilirsiniz. Azure CDN, çeşitli ağ ve yönlendirme iyileştirmelerinden yararlanarak, önbelleğe alınamayan dinamik içeriği hızlandırabilir.'
   services: cdn
-  author: czeumault
-  manager: carolz
-  ms.service: cdn
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  author: twooley
+  manager: twooley
+  ms.service: azure-cdn
   ms.topic: landing-page
   ms.date: 06/08/2018
-  ms.author: carolz
+  ms.author: twooley
 abstract:
   description: 'Azure Content Delivery Network (CDN), yüksek bant genişliğine sahip içerik sunmaya yönelik genel bir CDN çözümüdür. Azure’da veya başka bir konumda barındırılabilir. Azure CDN sayesinde en yakın POP sunucusunu kullanarak Azure Blob depolama alanından, web uygulamasından veya herhangi bir genel erişime açık web sunucusundan yüklenen statik nesneleri önbelleğe alabilirsiniz. Azure CDN, çeşitli ağ ve yönlendirme iyileştirmelerinden yararlanarak, önbelleğe alınamayan dinamik içeriği hızlandırabilir.'
 sections:

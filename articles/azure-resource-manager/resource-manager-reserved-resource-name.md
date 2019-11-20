@@ -1,32 +1,22 @@
 ---
-title: Azure ayrılmış kaynak yapılan ad hatalarını | Microsoft Docs
-description: Ayrılmış bir sözcük içeren bir kaynak adı sağlanırken hataları gidermek nasıl açıklar.
-services: azure-resource-manager
-documentationcenter: ''
-author: tfitzmac
-manager: timlt
-editor: ''
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
+title: Ayrılmış kaynak adı hataları
+description: Ayrılmış bir sözcük içeren bir kaynak adı sağlarken hataların nasıl çözümleneceğini açıklar.
 ms.topic: troubleshooting
 ms.date: 11/08/2017
-ms.author: tomfitz
-ms.openlocfilehash: 922389b7c6c1bb7ad1d9b8f6ec35ccc1c5656723
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e76f4bf9bfee7de6e7523d69acf1388d2dd80e93
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64683947"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150456"
 ---
-# <a name="resolve-reserved-resource-name-errors"></a>Ayrılmış kaynak adı hataları çözün
+# <a name="resolve-reserved-resource-name-errors"></a>Ayrılmış kaynak adı hatalarını çözümle
 
-Bu makalede, ayrılmış bir sözcük adını içeren bir kaynak dağıtım yaparken karşılaştığınız hata.
+Bu makalede, adında ayrılmış bir sözcük içeren bir kaynağı dağıttığınızda karşılaştığınız hata açıklanır.
 
 ## <a name="symptom"></a>Belirti
 
-Genel bir uç nokta kullanılabilir olan bir kaynak dağıtım yaparken aşağıdaki hata iletisini alabilirsiniz:
+Ortak bir uç nokta aracılığıyla kullanılabilen bir kaynak dağıtıldığında, şu hatayı alabilirsiniz:
 
 ```
 Code=ReservedResourceName;
@@ -35,47 +25,47 @@ Message=The resource name <resource-name> or a part of the name is a trademarked
 
 ## <a name="cause"></a>Nedeni
 
-Genel bir uç nokta içeren kaynak adı ayrılmış bir sözcük veya ticari kullanamazsınız.
+Ortak uç noktası olan kaynaklar, adında ayrılmış kelimeleri veya ticari markaları kullanamaz.
 
 Aşağıdaki sözcükler ayrılmıştır:
 
-* ERİŞİM
-* AZURE
-* BING
+* ERIŞMESINI
+* MAVISI
+* CıLARı
 * BIZSPARK
-* BIZTALK
+* BıZ
 * CORTANA
 * DIRECTX
-* DOTNET
-* DYNAMICS
+* OLMALı
+* CRM
 * EXCEL
-* EXCHANGE
+* DEĞIŞIMI
 * FOREFRONT
-* GROOVE
+* ĞA
 * HOLOLENS
 * HYPERV
 * KINECT
-* LYNC
+* Kurumsal
 * MSDN
 * O365
 * OFFICE
 * OFFICE365
-* ONEDRIVE
-* ONENOTE
-* OUTLOOK
-* POWERPOINT
+* KLASÖR
+* 'TA
+* OFFICE
+* PROGRAMLARıNDA
 * SHAREPOINT
-* SKYPE KURUMSAL
-* VISIO
+* TOPLANTıSıNA
+* \
 * VISUALSTUDIO
 
-Aşağıdaki sözcükler, tam bir sözcük veya bir alt dize adı olarak kullanılamaz:
+Aşağıdaki sözcükler, adında tam bir sözcük veya alt dize olarak kullanılamaz:
 
-* OTURUM AÇMA
+* LOGıN
 * MICROSOFT
-* WINDOWS
-* XBOX
+* PENCERELERIN
+* YENILIKLER
 
 ## <a name="solution"></a>Çözüm
 
-Ayrılmış sözcükler birini kullanmayan bir ad sağlayın.
+Ayrılmış sözcüklerden birini kullanmayan bir ad sağlayın.

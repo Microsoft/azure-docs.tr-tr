@@ -1,146 +1,94 @@
 ---
-title: Azure Kubernetes Service (AKS) kümesi ölçeklendiriciyi kullanmak
-description: Kümenizi Azure Kubernetes Service (AKS) kümesi içinde uygulama taleplerini karşılamak üzere otomatik olarak ölçeklendirmek için küme ölçeklendiriciyi kullanmayı öğrenin.
+title: Azure Kubernetes Service (AKS) içindeki küme otomatik Scaler 'ı kullanma
+description: Bir Azure Kubernetes Service (AKS) kümesindeki uygulama taleplerini karşılamak üzere kümenizi otomatik olarak ölçeklendirmek için küme otomatik olarak nasıl kullanacağınızı öğrenin.
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
-ms.date: 05/31/2019
-ms.author: iainfou
-ms.openlocfilehash: c4fe05c96b1006a7d110caa019619ce8be396fe8
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
+ms.date: 07/18/2019
+ms.author: mlearned
+ms.openlocfilehash: 8ce5d2965d0127eec01620c702d7d83bd0b39416
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67491566"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73885772"
 ---
-# <a name="preview---automatically-scale-a-cluster-to-meet-application-demands-on-azure-kubernetes-service-aks"></a>Önizleme - Azure Kubernetes Service'teki (AKS) uygulama taleplerini karşılamak üzere küme otomatik olarak ölçeklendirme
+# <a name="automatically-scale-a-cluster-to-meet-application-demands-on-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) üzerinde uygulama taleplerini karşılamak için bir kümeyi otomatik olarak ölçeklendirme
 
-Azure Kubernetes Service (AKS) uygulama taleplerini tutmak için iş yüklerinizi çalıştırmak düğüm sayısını ayarlamanız gerekebilir. Küme otomatik ölçeklendiricinin bileşeni için kaynak kısıtlamaları nedeniyle zamanlanamaz kümenizi pod'ların izleyebilirsiniz. Sorunlar tespit edildiğinde, uygulama talebi karşılamak için düğüm sayısı artar. Düğümler, daha sonra gerektiğinde azalan düğüm sayısını ile pod'ları, çalışan bir olmaması için de düzenli olarak denetlenir. Bu özelliği otomatik olarak ölçeği artırın veya azaltın, AKS kümenizdeki düğüm sayısını, verimli ve ekonomik bir küme çalıştırmanıza olanak tanır.
+Azure Kubernetes Service 'te (AKS) uygulama taleplerine devam etmek için, iş yüklerinizi çalıştıran düğümlerin sayısını ayarlamanız gerekebilir. Küme otomatik Scaler bileşeni, kümenizde kaynak kısıtlamaları nedeniyle zamanlanabilecek Pod 'leri izleyebilir. Sorunlar algılandığında, bir düğüm havuzundaki düğümlerin sayısı uygulama talebini karşılayacak şekilde artmıştır. Düğümler, düğüm sayısıyla daha sonra gerektiği şekilde azaldıkça, bir yük eksikliği olmaması için düzenli olarak kontrol edilir. AKS kümenizdeki düğüm sayısını otomatik olarak ölçeklendirme veya azaltma yeteneği, verimli ve ekonomik bir küme çalıştırmanızı sağlar.
 
-Bu makalede etkinleştirin ve bir AKS kümesindeki Küme ölçeklendiriciyi yönetme gösterilmektedir. Küme ölçeklendiriciyi tek düğüm havuzu AKS kümeleriyle'te önizlemesi yalnızca test edilmelidir.
-
-> [!IMPORTANT]
-> AKS Önizleme özellikleri, Self Servis, kabul etme. Görüş ve hata topluluğumuza toplamak için sağlanır. Önizleme'de, bu özelliklerin üretim kullanılmak üzere geliştirilmiş değildir. Genel Önizleme Özellikleri 'en yüksek çaba' destek kapsamında ayrılır. İş saatleri Pasifik Saat dilimi sırasında (Pasifik Saati) yalnızca AKS teknik destek ekipleri Yardım kullanılabilir. Ek bilgi için lütfen aşağıdaki destek makaleleri bakın:
->
-> * [AKS destek ilkeleri][aks-support-policies]
-> * [Azure desteği SSS][aks-faq]
+Bu makalede, bir AKS kümesinde Küme otomatik olarak nasıl etkinleştirileceği ve yönetileceği gösterilmektedir. 
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu makalede, Azure CLI Sürüm 2.0.65 gerekir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli-install].
-
-### <a name="install-aks-preview-cli-extension"></a>Aks önizlemesini CLI uzantısını yükleme
-
-Küme ölçeklendiriciyi kullanmak için gerekir *aks önizlemesini* CLI 0.4.1 uzantı sürümü veya üzeri. Yükleme *aks önizlemesini* uzantısını Azure CLI kullanarak [az uzantısı ekleme][az-extension-add] command, then check for any available updates using the [az extension update][az-extension-update] komut::
-
-```azurecli-interactive
-# Install the aks-preview extension
-az extension add --name aks-preview
-
-# Update the extension to make sure you have the latest version installed
-az extension update --name aks-preview
-```
-
-### <a name="register-scale-set-feature-provider"></a>Ölçek kümesi özelliği sağlayıcısını Kaydet
-
-Ölçek kullanan bir AKS oluşturmak için ayarlar, ayrıca, aboneliğinizde özellik bayrağı etkinleştirmeniz gerekir. Kaydedilecek *VMSSPreview* özellik bayrağı, kullanın [az özelliği kayıt][az-feature-register] komutu aşağıdaki örnekte gösterildiği gibi:
-
-> [!CAUTION]
-> Bir Abonelikteki bir özellik kaydettiğinizde, bu özellik şu anda kaydını yapamazsınız. Bazı Önizleme özellikleri etkinleştirdikten sonra varsayılan ardından aboneliği için oluşturulan tüm AKS kümeleri için kullanılabilir. Önizleme özellikleri üretim Aboneliklerde etkinleştirmeyin. Önizleme özellikleri test ve geri bildirim toplamak için ayrı bir abonelik kullanın.
-
-```azurecli-interactive
-az feature register --name VMSSPreview --namespace Microsoft.ContainerService
-```
-
-Gösterilecek durum için birkaç dakika sürer *kayıtlı*. Kayıt kullanarak durumu denetleyebilirsiniz [az özellik listesi][az-feature-list] komutu:
-
-```azurecli-interactive
-az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/VMSSPreview')].{Name:name,State:properties.state}"
-```
-
-Hazır olduğunuzda, kayıt yenileme *Microsoft.ContainerService* kullanarak kaynak sağlayıcısını [az provider register][az-provider-register] komutu:
-
-```azurecli-interactive
-az provider register --namespace Microsoft.ContainerService
-```
+Bu makalede, Azure CLı sürüm 2.0.76 veya üstünü çalıştırıyor olmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli-install].
 
 ## <a name="limitations"></a>Sınırlamalar
 
-Oluştururken ve küme ölçeklendiriciyi kullanmak AKS kümelerini yönetme aşağıdaki sınırlamalar geçerlidir:
+Küme otomatik Scaler 'ı kullanan AKS kümelerini oluşturup yönetirken aşağıdaki sınırlamalar geçerlidir:
 
-* HTTP uygulama yönlendirme eklenti kullanılamaz.
+* HTTP uygulama yönlendirme eklentisi kullanılamıyor.
 
-## <a name="about-the-cluster-autoscaler"></a>Küme otomatik ölçeklendiricinin hakkında
+## <a name="about-the-cluster-autoscaler"></a>Küme otomatik yüklemesi hakkında
 
-Uygulama talepleri değişen gibi kümeleri workday arasındaki Akşam veya hafta, genellikle otomatik olarak ölçeklendirmek için bir yol gerekir. ayarlamak için. AKS kümeleri iki yoldan biriyle ölçeklendirebilirsiniz:
+Workday ve akşam ya da bir hafta sonu arasındaki uygulama taleplerini değiştirmek üzere ayarlamak için kümeler genellikle otomatik olarak ölçeklendirilmesi için bir yönteme ihtiyaç duyar. AKS kümeleri, iki şekilde ölçeklendirebilir:
 
-* **Ölçeklendiriciyi küme** gözcüler düğümlerinde kaynak kısıtlamaları nedeniyle zamanlanamaz pod'ları için. Küme otomatik olarak sonra arttıkça düğüm sayısı.
-* **Yatay pod otomatik ölçeklendiricinin** ölçümleri sunucunun, kaynak talebi, pod'ları izlemek için içindeki bir Kubernetes kümesi kullanır. Bir hizmet daha fazla kaynak gerekiyorsa, talebi karşılamak için pod'ların sayısını otomatik olarak artırılır.
+* **Küme otomatik yüklemesi** , kaynak kısıtlamaları nedeniyle düğümlerde zamanlanabilecek düğüm sayısını izler. Küme daha sonra düğümlerin sayısını otomatik olarak arttırır.
+* **Yatay Pod otomatik Scaler** , Kubernetes kümesinde ölçüm sunucusunu kullanarak pods 'nin kaynak talebini izler. Bir uygulamanın daha fazla kaynağa ihtiyacı varsa, yığınların sayısı talebi karşılamak üzere otomatik olarak artar.
 
-![Küme otomatik ölçeklendiricinin ve yatay pod otomatik ölçeklendiricinin genellikle gerekli uygulama taleplerini desteklemek için birlikte çalışır](media/autoscaler/cluster-autoscaler.png)
+![Küme otomatik olarak ve yatay Pod otomatik Scaler, gerekli uygulama taleplerini desteklemek için genellikle birlikte çalışır](media/autoscaler/cluster-autoscaler.png)
 
-Yatay pod otomatik ölçeklendiricinin hem de küme ölçeklendirici, pod'ların ve gerektiğinde düğüm sayısını sonra düşürebilir. Bir süre için kullanılmayan kapasite olduğunda küme ölçeklendiriciyi düğüm sayısını azaltır. Pod'ları tarafından küme ölçeklendiriciyi kaldırılacak bir düğümde, başka bir yerde kümeye güvenli bir şekilde zamanlanır. Küme ölçeklendirici, pod'ların taşınamıyor durumunda ölçeği küçültebilirsiniz edilemiyor, aşağıdaki durumlarda olduğu gibi olabilir:
+Hem yatay Pod otomatik Scaler hem de Cluster otomatik Scaler, gereken düğüm sayısını ve düğümleri de azaltabilir. Küme otomatik yüklemesi, bir süre için kullanılmayan kapasiteden fazla düğüm sayısını düşürür. Küme otomatik olarak kaldırılacak bir düğümdeki düğüm, kümede başka bir yerde güvenle zamanlanır. Küme otomatik olarak, aşağıdaki durumlarda olduğu gibi, Pod taşınmadığı takdirde ölçeği ölçeklendiremeyebilir:
 
-* Bir pod doğrudan oluşturulur ve denetleyici nesne, böyle bir dağıtım veya çoğaltma kümesi tarafından yedeklenmiyor.
-* Pod kesintisi bütçe (PDB) fazla kısıtlayıcı ve belirli bir eşiğin altına düşen olması için pod'ların sayısını izin vermez.
-* Bir pod düğüm Seçici veya başka bir düğümde zamanladıysanız gerçekleştirilemez benzeşim karşıtlığı kullanır.
+* Doğrudan oluşturulup oluşturulan bir pod, bir dağıtım veya çoğaltma kümesi gibi bir denetleyici nesnesi tarafından yedeklenmez.
+* Pod kesinti bütçesi (pdb) çok kısıtlayıcıdır ve pod sayısının belirli bir eşiğin altına düşmeye izin vermez.
+* Pod, farklı bir düğümde zamanlanırsa, düğüm seçicileri veya benzeşim önleme kullanır.
 
-Nasıl küme ölçeklendiriciyi ölçeğini olabilir hakkında daha fazla bilgi için bkz. [pod'ların can ne tür bir düğüm kaldırmasını küme ölçeklendiriciyi önlemek?][autoscaler-scaledown]
+Küme otomatik olarak ölçeklendirilmesine nasıl ölçeklenebileceğinize ilişkin daha fazla bilgi için bkz [. küme otomatik Scaler 'ın bir düğümü kaldırmasını engelleyebilir][autoscaler-scaledown]
 
-Küme otomatik ölçeklendiricinin ölçek olayları ve kaynak eşikleri arasında zaman aralıkları gibi şeyler için başlangıç parametreleri kullanır. Bu parametreler Azure platformu tarafından tanımlanır ve ayarlamak için şu anda kullanıma sunulmaz. Hangi parametreler hakkında daha fazla bilgi için küme ölçeklendiriciyi kullanır, bkz: [küme ölçeklendiriciyi parametreleri nelerdir?][autoscaler-parameters].
+Küme otomatik yüklemesi, ölçek olayları ve kaynak eşikleri arasındaki zaman aralıkları gibi şeyler için başlangıç parametrelerini kullanır. Bu parametreler Azure platformu tarafından tanımlanır ve şu anda ayarlamanız için sunulmamaktadır. Kümenin otomatik olarak kullandığı parametreler hakkında daha fazla bilgi için bkz. [küme otomatik Scaler parametreleri nedir?][autoscaler-parameters].
 
-İki autoscalers birlikte çalışabilir ve genellikle bir kümede hem de dağıtılır. Birleştirildiğinde yatay pod otomatik ölçeklendiricinin üzerinde çalışan uygulama talebi karşılamak için gerekli pod'ların sayısını odaklanmıştır. Küme otomatik ölçeklendiricinin zamanlanmış pod'ların desteklemek için gereken düğüm üzerinde çalışan odaklanmıştır.
+Küme ve yatay Pod otomatik scalers birlikte çalışabilir ve genellikle bir kümede dağıtılır. Birleştirildiğinde, yatay Pod otomatik Scaler, uygulama talebini karşılamak için gereken sayıda Pod çalıştırmaya odaklanılmıştır. Küme otomatik yüklemesi, zamanlanmış pods 'yi desteklemek için gereken düğüm sayısını çalıştırmaya odaklanır.
 
 > [!NOTE]
-> Küme otomatik ölçeklendiricinin kullandığınızda el ile ölçeklendirme devre dışı bırakılır. Gerekli düğüm sayısını belirlemek küme ölçeklendiriciyi olanak tanır. Kümenizi, el ile ölçeklendirme istiyorsanız [küme ölçeklendiriciyi devre dışı](#disable-the-cluster-autoscaler).
+> Küme otomatik ölçeklendirme kullandığınızda el ile ölçekleme devre dışıdır. Küme otomatik olarak gerekli düğüm sayısını belirlemesine izin verin. Kümenizi el ile ölçeklendirmek isterseniz, [küme otomatik Scaler ' ı devre dışı bırakın](#disable-the-cluster-autoscaler).
 
-## <a name="create-an-aks-cluster-and-enable-the-cluster-autoscaler"></a>AKS kümesi oluşturma ve küme ölçeklendiriciyi etkinleştir
+## <a name="create-an-aks-cluster-and-enable-the-cluster-autoscaler"></a>AKS kümesi oluşturma ve küme otomatik Scaler 'ı etkinleştirme
 
-Bir AKS kümesi oluşturmak ihtiyacınız varsa [az aks oluşturma][az-aks-create] komutu. Belirtin bir *--kubernetes sürümü* , karşıladığını veya önceki özetlendiği gibi gerekli en düşük sürüm numarası [başlamadan önce](#before-you-begin) bölümü. Etkinleştirmek ve küme ölçeklendiriciyi yapılandırmak için kullanın *--enable-kümesi-otomatik ölçeklendiricinin* parametresi ve bir düğüm belirtin *--min-count* ve *--sayısı üst sınırı*.
+AKS kümesi oluşturmanız gerekiyorsa, [az aks Create][az-aks-create] komutunu kullanın. Küme için düğüm havuzunda küme otomatik listesini etkinleştirmek ve yapılandırmak için *--Enable-Cluster-otomatik Scaler* parametresini kullanın ve bir düğüm belirtin *--Min-Count* ve *--Max-Count*.
 
 > [!IMPORTANT]
-> Küme otomatik ölçeklendiricinin Kubernetes bileşendir. AKS kümesi bir sanal makine ölçek kümesi düğümleri kullansa da, yoksa el ile etkinleştirmeniz veya Azure portalında veya Azure CLI kullanarak ölçek kümesi ölçeklendirme ayarlarını düzenleyin. Kubernetes küme ölçeklendiriciyi gerekli ölçek ayarları yönetmenize olanak tanır. Daha fazla bilgi için [AKS kaynakları MC_ kaynak grubunda değişiklik yapabilirsiniz?](faq.md#can-i-modify-tags-and-other-properties-of-the-aks-resources-in-the-mc_-resource-group)
+> Küme otomatik yüklemesi, bir Kubernetes bileşenidir. AKS kümesi düğümler için bir sanal makine ölçek kümesi kullansa da, Azure portal ölçek kümesi otomatik ölçek ayarlarını el ile etkinleştirmeyin veya Azure CLı kullanarak ayarları düzenleyin. Kubernetes kümesi otomatik olarak gerekli ölçek ayarlarını yönetmesine izin verin. Daha fazla bilgi için bkz. [düğüm kaynak grubundaki AKS kaynaklarını değiştirebilir miyim?](faq.md#can-i-modify-tags-and-other-properties-of-the-aks-resources-in-the-node-resource-group)
 
-Aşağıdaki örnek sanal makine ölçek kümesi ve etkin küme ölçeklendiriciyi ile bir AKS kümesi oluşturur ve en az *1* ve en fazla *3* düğümleri:
+Aşağıdaki örnek, bir sanal makine ölçek kümesi tarafından desteklenen tek düğümlü havuz içeren bir AKS kümesi oluşturur. Ayrıca küme için düğüm havuzunda küme otomatik Scaler 'ı ve en az *1* ve en fazla *3* düğüm ayarlar:
 
 ```azurecli-interactive
 # First create a resource group
-az group create --name myResourceGroup --location canadaeast
+az group create --name myResourceGroup --location eastus
 
 # Now create the AKS cluster and enable the cluster autoscaler
 az aks create \
   --resource-group myResourceGroup \
   --name myAKSCluster \
   --node-count 1 \
-  --enable-vmss \
+  --vm-set-type VirtualMachineScaleSets \
+  --load-balancer-sku standard \
   --enable-cluster-autoscaler \
   --min-count 1 \
   --max-count 3
 ```
 
-Kümeyi oluşturmak ve küme ölçeklendiriciyi ayarlarını yapılandırmak için birkaç dakika sürer.
+Kümeyi oluşturmak ve küme otomatik Scaler ayarlarını yapılandırmak birkaç dakika sürer.
 
-### <a name="enable-the-cluster-autoscaler-on-an-existing-aks-cluster"></a>Mevcut bir AKS kümesinde Küme ölçeklendiriciyi etkinleştir
+## <a name="change-the-cluster-autoscaler-settings"></a>Küme otomatik Scaler ayarlarını değiştirme
 
-Önceki özetlenen gereksinimleri karşılayan mevcut bir AKS kümesinde Küme ölçeklendiriciyi etkinleştirebilirsiniz [başlamadan önce](#before-you-begin) bölümü. Kullanım [az aks güncelleştirme][az-aks-update] komut ve tercih *--etkin küme ölçeklendiriciyi*, ardından bir düğüm belirtin *--min-count* ve *--sayısı üst sınırı* . Aşağıdaki örnek, en az kullanan mevcut bir kümede küme ölçeklendiriciyi etkinleştirir *1* ve en fazla *3* düğümleri:
+> [!IMPORTANT]
+> AKS kümenizde birden fazla düğüm havuzunuz varsa, [birden çok aracı havuzu ile otomatik ölçeklendirmeyi](#use-the-cluster-autoscaler-with-multiple-node-pools-enabled)atlayın. Birden çok aracı havuzu içeren kümeler, `az aks`yerine düğüm havuzuna özgü özellikleri değiştirmek için `az aks nodepool` komut kümesinin kullanılmasını gerektirir.
 
-```azurecli-interactive
-az aks update \
-  --resource-group myResourceGroup \
-  --name myAKSCluster \
-  --enable-cluster-autoscaler \
-  --min-count 1 \
-  --max-count 3
-```
+Önceki adımda, bir AKS kümesi oluşturmak veya var olan bir düğüm havuzunu güncelleştirmek için, küme otomatik algılama en düşük düğüm sayısı *1*olarak ayarlanmıştır ve en fazla düğüm sayısı *3*olarak ayarlanmıştır. Uygulamanız değiştikçe değişiklik yaparken, küme otomatik Scaler düğüm sayısını ayarlamanız gerekebilir.
 
-En düşük düğüm sayısı mevcut kümedeki düğüm sayısını daha büyükse ek düğümler oluşturulması birkaç dakika sürer.
-
-## <a name="change-the-cluster-autoscaler-settings"></a>Küme otomatik ölçeklendiricinin ayarlarını değiştirme
-
-Oluşturulacak veya güncelleştirilecek var olan bir AKS kümesi önceki adımda küme ölçeklendiriciyi en düşük düğüm sayısı ayarlandı *1*, ve en yüksek düğüm sayısı ayarlandı *3*. Uygulamanızı taleplerini değiştirin, küme ölçeklendiriciyi düğüm sayısı ayarlamanız gerekebilir.
-
-Düğüm sayısını değiştirmek için kullanın [az aks güncelleştirme][az-aks-update] komut ve minimum ve maksimum değer belirtin. Aşağıdaki örnek kümeleri *--min-count* için *1* ve *--sayısı üst sınırı* için *5*:
+Düğüm sayısını değiştirmek için [az aks Update][az-aks-update] komutunu kullanın.
 
 ```azurecli-interactive
 az aks update \
@@ -151,16 +99,16 @@ az aks update \
   --max-count 5
 ```
 
+Yukarıdaki örnek, *Myakscluster* içindeki tek düğümlü havuzda küme otomatik Scaler ' nı en az *1* ve en fazla *5* düğüm olarak güncelleştirir.
+
 > [!NOTE]
-> Önizleme sırasında küme için ayarlanmış daha yüksek bir en düşük düğüm sayısı ayarlanamıyor. Örneğin, en küçük sayısı ayarlamak şu anda varsa *1*, en küçük sayısı güncelleştirilemiyor *3*.
+> Düğüm havuzu için şu anda ayarlanmış olandan daha yüksek bir düğüm sayısı ayarlayamazsınız. Örneğin, şu anda en az *1*olarak ayarlandıysa, en az sayıyı *3*olarak güncelleştiremezsiniz.
 
-Uygulama ve hizmetlerinizin performansını izlemek ve küme ölçeklendiriciyi düğüm sayıları gereken performansı eşleşecek şekilde ayarlayın.
+Uygulamalarınızın ve hizmetlerinizin performansını izleyin ve küme otomatik Scaler düğüm sayılarını gerekli performansla eşleşecek şekilde ayarlayın.
 
-## <a name="disable-the-cluster-autoscaler"></a>Küme otomatik ölçeklendiricinin devre dışı bırak
+## <a name="disable-the-cluster-autoscaler"></a>Küme otomatik Scaler 'ı devre dışı bırakma
 
-Artık küme ölçeklendiriciyi kullanmak istemiyorsanız, bunu kullanarak devre dışı bırakabilirsiniz [az aks güncelleştirme][az-aks-update] komutu. Küme otomatik ölçeklendiricinin devre dışı bırakıldığında düğümleri kaldırılmaz.
-
-Küme otomatik ölçeklendiricinin kaldırmak için belirtin *--devre dışı bırakma küme ölçeklendiriciyi* parametresi, aşağıdaki örnekte gösterildiği gibi:
+Artık küme otomatik özelliğini kullanmak istemiyorsanız, *--Disable-Cluster-otomatik Scaler* parametresini belirterek [az aks Update][az-aks-update] komutunu kullanarak devre dışı bırakabilirsiniz. Küme otomatik yüklemesi devre dışı bırakıldığında düğümler kaldırılmaz.
 
 ```azurecli-interactive
 az aks update \
@@ -169,11 +117,72 @@ az aks update \
   --disable-cluster-autoscaler
 ```
 
-Küme kullanarak el ile ölçekleyebilir [az aks ölçek][az-aks-scale] komutu. Yatay pod otomatik ölçeklendiricinin kullanırsanız, bu özelliği devre dışı küme ölçeklendiriciyi ile çalışmaya devam eden, ancak pod'ların düğümünde kaynaklarını tüm kullanımda olduğunda zamanlanmış kurulamıyor bitirebilirsiniz.
+[Az aks Scale][az-aks-scale] komutunu kullanarak küme otomatik Scaler 'ı devre dışı bıraktıktan sonra kümenizi el ile ölçekleyebilirsiniz. Yatay Pod otomatik Scaler ' ı kullanırsanız, bu özellik küme otomatik olarak devre dışı bırakılmış olarak çalışmaya devam eder, ancak tüm düğüm kaynakları kullanımda ise, Pod çalışmayabilir.
+
+## <a name="re-enable-a-disabled-cluster-autoscaler"></a>Devre dışı bırakılan bir kümeyi otomatik olarak yeniden etkinleştirin
+
+Küme otomatik olarak var olan bir kümede yeniden etkinleştirmek istiyorsanız, [az aks Update][az-aks-update] komutunu kullanarak, *--Enable-Cluster-otomatik Scaler*, *--Min-Count*ve *--Max-Count* parametrelerini belirterek yeniden etkinleştirebilirsiniz.
+
+## <a name="retrieve-cluster-autoscaler-logs-and-status"></a>Küme otomatik gizleme günlüklerini ve durumunu alma
+
+Otomatik Scaler olaylarını tanılamak ve hatalarını ayıklamak için, Günlükler ve durum otomatik Scaler eklentisi 'nden alınabilir.
+
+AKS, küme otomatik denetimini sizin adınıza yönetir ve yönetilen denetim düzlemine çalıştırır. Ana düğüm günlüklerinin bir sonuç olarak görüntülenmek üzere yapılandırılması gerekir.
+
+Günlüklerin küme otomatik olarak gönderildiği bir şekilde yapılandırılması için Log Analytics aşağıdaki adımları izleyin.
+
+1. Küme-otomatik Scaler günlüklerini Log Analytics 'e göndermek için tanılama günlükleri için bir kural ayarlayın. [Yönergeler burada ayrıntılı olarak verilmiştir](https://docs.microsoft.com/azure/aks/view-master-logs#enable-diagnostics-logs), "Logs" seçeneklerini seçerken `cluster-autoscaler` kutusunu kontrol edin.
+1. Azure portal aracılığıyla kümenizdeki "Günlükler" bölümüne tıklayın.
+1. Aşağıdaki örnek sorguyu Log Analytics olarak girin:
+
+```
+AzureDiagnostics
+| where Category == "cluster-autoscaler"
+```
+
+Alınacak Günlükler olduğu sürece, aşağıdakine benzer Günlükler görmeniz gerekir.
+
+![Log Analytics günlükleri](media/autoscaler/autoscaler-logs.png)
+
+Küme otomatik olarak, `cluster-autoscaler-status`adlı bir configmap 'e sistem durumu da yazar. Bu günlükleri almak için aşağıdaki `kubectl` komutunu yürütün. Küme otomatik olarak yapılandırılmış her düğüm havuzu için bir sistem durumu bildirilir.
+
+```
+kubectl get configmap -n kube-system cluster-autoscaler-status -o yaml
+```
+
+Otomatik olarak kaydedilen öğeler hakkında daha fazla bilgi edinmek için [Kubernetes/otomatik Scaler GitHub PROJESINDE](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#ca-doesnt-work-but-it-used-to-work-yesterday-why)SSS makalesini okuyun.
+
+## <a name="use-the-cluster-autoscaler-with-multiple-node-pools-enabled"></a>Birden çok düğüm havuzu etkin olan küme otomatik Scaler 'ı kullanma
+
+Küme otomatik Scaler, [birden çok düğüm havuzu](use-multiple-node-pools.md) etkinleştirilmiş olarak birlikte kullanılabilir. Birden çok düğüm havuzunun nasıl etkinleştirileceğini ve var olan bir kümeye ek düğüm havuzları nasıl ekleneceğini öğrenmek için bu belgeyi izleyin. Her iki özelliği birlikte kullanırken kümedeki her bir düğüm havuzunda küme otomatik Scaler ' ı etkinleştirir ve her birine benzersiz otomatik ölçeklendirme kuralları geçirebilir.
+
+Aşağıdaki komut, bu belgede daha önce [ilk yönergeleri](#create-an-aks-cluster-and-enable-the-cluster-autoscaler) izlediğinizi ve mevcut düğüm havuzunun en büyük sayısını *3* ' ten *5*' e kadar güncelleştirmek istediğinizi varsayar. Mevcut bir düğüm havuzunun ayarlarını güncelleştirmek için [az aks nodepool Update][az-aks-nodepool-update] komutunu kullanın.
+
+```azurecli-interactive
+az aks nodepool update \
+  --resource-group myResourceGroup \
+  --cluster-name myAKSCluster \
+  --name nodepool1 \
+  --update-cluster-autoscaler \
+  --min-count 1 \
+  --max-count 5
+```
+
+Küme otomatik Scaler, [az aks nodepool Update][az-aks-nodepool-update] ile devre dışı bırakılabilir ve `--disable-cluster-autoscaler` parametresi geçirilerek.
+
+```azurecli-interactive
+az aks nodepool update \
+  --resource-group myResourceGroup \
+  --cluster-name myAKSCluster \
+  --name nodepool1 \
+  --disable-cluster-autoscaler
+```
+
+Küme otomatik olarak var olan bir kümede yeniden etkinleştirmek istiyorsanız, [az aks nodepool Update][az-aks-nodepool-update] komutunu kullanarak, *--Enable-Cluster-otomatik Scaler*, *--Min-Count*ve *--Max-Count* parametrelerini belirterek yeniden etkinleştirebilirsiniz .
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede otomatik olarak AKS düğümleri sayısının ölçeğini nasıl oluşturulacağını gösterir. Yatay pod otomatik ölçeklendiricinin, uygulamanızı çalıştıran pod'ların sayısını otomatik olarak ayarlamak için de kullanabilirsiniz. Yatay pod otomatik ölçeklendiricinin kullanma adımları için bkz [ölçeklendirme uygulamaları AKS][aks-scale-apps].
+Bu makalede, AKS düğümlerinin sayısını otomatik olarak ölçeklendirirsiniz. Ayrıca, uygulamanızı çalıştıran Pod sayısını otomatik olarak ayarlamak için yatay Pod otomatik Scaler ' yı da kullanabilirsiniz. Yatay Pod otomatik Scaler 'ı kullanma adımları için bkz. [aks 'de Uygulamaları ölçeklendirme][aks-scale-apps].
 
 <!-- LINKS - internal -->
 [aks-upgrade]: upgrade-cluster.md
@@ -193,5 +202,6 @@ Bu makalede otomatik olarak AKS düğümleri sayısının ölçeğini nasıl olu
 
 <!-- LINKS - external -->
 [az-aks-update]: https://github.com/Azure/azure-cli-extensions/tree/master/src/aks-preview
+[az-aks-nodepool-update]: https://github.com/Azure/azure-cli-extensions/tree/master/src/aks-preview#enable-cluster-auto-scaler-for-a-node-pool
 [autoscaler-scaledown]: https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-types-of-pods-can-prevent-ca-from-removing-a-node
 [autoscaler-parameters]: https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-the-parameters-to-ca

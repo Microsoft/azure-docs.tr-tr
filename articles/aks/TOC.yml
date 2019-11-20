@@ -21,17 +21,17 @@
       items:
         - name: Draft kullanma
           href: kubernetes-draft.md
-        - name: Java kullanma (VS Code ve CLI)
-          href: ../dev-spaces/quickstart-java.md
-          maintainContext: true
-        - name: .NET Core kullanma (VS Code ve CLI)
+        - name: Visual Studio Code'u ve Azure Dev Spaces'i kullanma
           href: ../dev-spaces/quickstart-netcore.md
           maintainContext: true
-        - name: .NET Core kullanma (Visual Studio 2017)
+        - name: Visual Studio'yu ve Azure Dev Spaces'i kullanma
           href: ../dev-spaces/quickstart-netcore-visualstudio.md
           maintainContext: true
-        - name: Node.js kullanma (VS Code ve CLI)
-          href: ../dev-spaces/quickstart-nodejs.md
+        - name: CLI'yı ve Azure Dev Spaces'i kullanma
+          href: ../dev-spaces/quickstart-cli.md
+          maintainContext: true
+        - name: Azure Dev Spaces'i takım geliştirmesi için kullanma
+          href: ../dev-spaces/quickstart-team-development.md
           maintainContext: true
 - name: Öğreticiler
   items:
@@ -100,6 +100,10 @@
       href: acs-aks-migration.md
     - name: Desteklenen Kubernetes sürümü
       href: supported-kubernetes-versions.md
+    - name: Konak işletim sisteminde Güvenliği Sağlamlaştırma
+      href: security-hardened-vm-host-image.md
+    - name: Azure Kubernetes Service Tanılamasına Genel Bakış
+      href: concepts-diagnostics.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Küm işlemleri
@@ -116,17 +120,19 @@
         - name: AKS kümesini silme
           href: '/cli/azure/aks#az-aks-delete'
           maintainContext: true
+        - name: AKS kümesi ile ACR'yi tümleştirme
+          href: cluster-container-registry-integration.md
         - name: Sanal düğümler oluşturma
           items:
             - name: Azure CLI kullanma
               href: virtual-nodes-cli.md
             - name: Azure portalı kullanma
               href: virtual-nodes-portal.md
-        - name: Sanal Kubelet kullanma
-          href: virtual-kubelet.md
-        - name: Küme Otomatik Ölçeklendiricisi kullanma (önizleme)
+        - name: Küme Otomatik Ölçeklendiricisi kullanma
           href: cluster-autoscaler.md
-        - name: Birden çok düğüm havuzu kullanma (önizleme)
+        - name: Kullanılabilirlik Alanlarını kullanma
+          href: availability-zones.md
+        - name: Birden fazla düğüm havuzu kullanma
           href: use-multiple-node-pools.md
         - name: Terraform ile AKS’yi dağıtma
           href: ../terraform/terraform-create-k8s-cluster-with-tf-and-aks.md
@@ -145,6 +151,8 @@
           href: azure-files-volume.md
         - name: NFS Sunucusu - Statik
           href: azure-nfs-volume.md
+        - name: Azure NetApp Files
+          href: azure-netapp-files.md
     - name: Ağ yapılandırması
       items:
         - name: Sanal ağ oluşturma veya mevcut bir sanal ağı kullanma
@@ -155,7 +163,7 @@
               href: configure-azure-cni.md
         - name: İç yük dengeleyici oluşturma
           href: internal-lb.md
-        - name: Standart Load Balancer kullanma (önizleme)
+        - name: Standart Load Balancer kullanma
           href: load-balancer-standard.md
         - name: Statik IP adresi kullanma
           href: static-ip.md
@@ -183,19 +191,21 @@
       items:
         - name: Hizmet sorumlusu oluşturma
           href: kubernetes-service-principal.md
+        - name: Yönetilen kimlikleri kullanma (önizleme)
+          href: use-managed-identity.md
         - name: Küme yapılandırma dosyasına erişimi sınırlama
           href: control-kubeconfig-access.md
         - name: Ağ ilkeleri ile pod trafiğinin güvenliğini sağlama
           href: use-network-policies.md
         - name: Pod güvenlik ilkelerini kullanma (önizleme)
           href: use-pod-security-policies.md
-        - name: API sunucusu tarafından yetkilendirilen IP aralıklarını tanımlama (önizleme)
+        - name: API sunucusu tarafından yetkilendirilen IP aralıklarını tanımlama
           href: api-server-authorized-ip-ranges.md
         - name: Azure İlkesi ile dağıtımları denetleme (önizleme)
           href: ../governance/policy/concepts/rego-for-aks.md?toc=/azure/aks/toc.json
         - name: Küme hizmet sorumlusu kimlik bilgilerini güncelleştirme
           href: update-credentials.md
-        - name: Küme çıkış trafiğini kısıtlama ve denetleme (önizleme)
+        - name: Küme çıkış trafiğini kısıtlama ve denetleme
           href: limit-egress-traffic.md
         - name: Azure Active Directory tümleştirmesini etkinleştirme
           items:
@@ -205,9 +215,9 @@
               href: azure-ad-integration.md
         - name: Azure AD tümleştirmesiyle Kubernetes RBAC kullanma
           href: azure-ad-rbac.md
-        - name: ACR ile kimlik doğrulama
-          href: ../container-registry/container-registry-auth-aks.md
           maintainContext: true
+        - name: Sertifikaları döndürme
+          href: certificate-rotation.md
     - name: İzleme ve günlüğe kaydetme
       items:
         - name: Kapsayıcılar için Azure İzleyici
@@ -217,8 +227,8 @@
           href: view-master-logs.md
         - name: Kubelet günlüklerini görüntüleme
           href: kubelet-logs.md
-        - name: Gerçek zamanlı kapsayıcı günlüklerini görüntüleme (önizleme)
-          href: ../azure-monitor/insights/container-insights-live-logs.md
+        - name: Kapsayıcı verilerini gerçek zamanlı olarak görüntüleme
+          href: ../azure-monitor/insights/container-insights-livedata-overview.md
           maintainContext: true
     - name: Windows Server kapsayıcılarını kullanma (önizleme)
       items:
@@ -296,15 +306,33 @@
           href: spark-job.md
         - name: GPU'ları kullanma
           href: gpu-cluster.md
-        - name: Istio'yu kullanma
-          items:
-            - name: Yükleme ve yapılandırma
-              href: istio-install.md
-            - name: Akıllı yönlendirme ve kısıtlı dağıtım sürümleri
-              href: istio-scenario-routing.md
         - name: PostgreSQL için Azure Veritabanı kullanma
           href: ../postgresql/concepts-aks.md
           maintainContext: true
+    - name: Hizmet ağı seçme ve dağıtma
+      items:
+        - name: Hizmet Ağları hakkında
+          href: servicemesh-about.md
+        - name: Istio'yu kullanma
+          items:
+            - name: Istio hakkında
+              href: servicemesh-istio-about.md
+            - name: Yükleme ve yapılandırma
+              href: servicemesh-istio-install.md
+            - name: Senaryo - Akıllı yönlendirme ve kısıtlı dağıtım sürümleri
+              href: servicemesh-istio-scenario-routing.md
+        - name: Linkerd kullanma
+          items:
+            - name: Linkerd hakkında
+              href: servicemesh-linkerd-about.md
+            - name: Yükleme ve yapılandırma
+              href: servicemesh-linkerd-install.md
+        - name: Consul kullanma
+          items:
+            - name: Consul hakkında
+              href: servicemesh-consul-about.md
+            - name: Yükleme ve yapılandırma
+              href: servicemesh-consul-install.md
     - name: DevOps
       items:
         - name: AKS kümeleri oluşturmak için Ansible kullanma
@@ -315,6 +343,10 @@
         - name: Azure DevOps Projesi
           href: ../devops-project/azure-devops-project-aks.md
           maintainContext: true
+        - name: Dağıtım Merkezi Başlatıcısı
+          href: deployment-center-launcher.md
+        - name: Kubernetes için GitHub Eylemleri
+          href: ../aks/kubernetes-action.md
     - name: Sorun giderme
       items:
         - name: Genel sorunlar

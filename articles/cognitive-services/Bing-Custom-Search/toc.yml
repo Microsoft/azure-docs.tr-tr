@@ -31,6 +31,8 @@
               href: sdk-csharp-quick-start.md
             - name: Python’u kullanma
               href: sdk-python-quickstart.md
+            - name: Java'yı kullanma
+              href: sdk-java-quickstart.md
 - name: Öğreticiler
   items:
     - name: Özel Arama web sayfası derleme
@@ -56,9 +58,11 @@
     - name: Özel otomatik öneri deneyimini yapılandırma
       href: define-custom-suggestions.md
     - name: İsabet vurgulamayı gerçekleştirme
-      href: hit-highlighting.md
-    - name: Web sayfalarında ilerleme
-      href: page-webpages.md
+      href: ../Bing-Web-Search/hit-highlighting.md
+      maintainContext: true
+    - name: Arama sonuçları sayfalarında gezinme
+      href: ../Bing-Web-Search/paging-search-results.md
+      maintainContext: true
 - name: Başvuru
   items:
     - name: Bing Özel Otomatik Öneri API Başvurusu
@@ -77,13 +81,13 @@
         - name: .NET
           href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingcustomsearch?view=azure-dotnet'
         - name: Java - Özel Arama
-          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customsearch?view=azure-java-stable'
+          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingcustomsearch?view=azure-java-stable'
         - name: Java - Özel Görüntü Arama
-          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customimagesearch?view=azure-java-stable'
+          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingcustomimagesearch?view=azure-java-stable'
         - name: Python
           href: 'https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/customsearch?view=azure-python'
         - name: Node.js
-          href: 'https://docs.microsoft.com/javascript/api/azure-cognitiveservices-customsearch/?view=azure-node-latest'
+          href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-customsearch/?view=azure-node-latest'
         - name: Go - Özel Arama
           href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/customsearch'
         - name: Go - Özel Görüntü Arama

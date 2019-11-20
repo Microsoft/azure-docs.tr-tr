@@ -1,6 +1,6 @@
 ---
-title: PowerShell ve Azure HDInsight'ı kullanarak Apache Sqoop işleri çalıştırma
-description: Apache Sqoop alma ve bir Apache Hadoop kümesi ile bir Azure SQL veritabanı arasında için bir iş istasyonundan Azure PowerShell'i kullanmayı öğrenin.
+title: PowerShell ve Azure HDInsight kullanarak Apache Sqoop işleri çalıştırma
+description: Bir Apache Hadoop kümesi ile Azure SQL veritabanı arasında Apache Sqoop içeri aktarma ve dışarı aktarma çalıştırmak için bir iş istasyonundan Azure PowerShell nasıl kullanacağınızı öğrenin.
 ms.reviewer: jasonh
 author: hrasheed-msft
 ms.service: hdinsight
@@ -8,29 +8,31 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 04/11/2019
 ms.author: hrasheed
-ms.openlocfilehash: f178d07666eda3552c18f581a926305e76ecb697
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 6cb3e91bed4f16cf1e30c535b5ed667fc690dd53
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67450139"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73499268"
 ---
-# <a name="run-apache-sqoop-jobs-by-using-azure-powershell-for-apache-hadoop-in-hdinsight"></a>Apache Sqoop işleri, HDInsight, Apache Hadoop için Azure PowerShell kullanarak çalıştırma
+# <a name="run-apache-sqoop-jobs-by-using-azure-powershell-for-apache-hadoop-in-hdinsight"></a>HDInsight 'ta Apache Hadoop için Azure PowerShell kullanarak Apache Sqoop işleri çalıştırma
 [!INCLUDE [sqoop-selector](../../../includes/hdinsight-selector-use-sqoop.md)]
 
-Azure HDInsight'ı almak ve bir HDInsight kümesi ve bir Azure SQL veritabanı veya SQL Server veritabanı arasında veri vermek için Apache Sqoop'u işleri çalıştırmak için Azure PowerShell kullanmayı öğrenin. Bu örnek verileri dışarı aktarır `/tutorials/usesqoop/data/sample.log` varsayılan depolama hesabı ve ardından bir tabloya adlı içeri aktarmalar `log4jlogs` bir SQL Server veritabanında. Bu makalede devamı niteliğindedir [HDInsight, Hadoop ile Apache Sqoop'u kullanma](./hdinsight-use-sqoop.md).
+HDInsight kümesi ile Azure SQL veritabanı veya SQL Server veritabanı arasında veri içeri ve dışarı aktarmak için Azure HDInsight 'ta Apache Sqoop işleri çalıştırmak üzere Azure PowerShell nasıl kullanacağınızı öğrenin. Bu örnek, verileri varsayılan depolama hesabından `/tutorials/usesqoop/data/sample.log` dışa aktarır ve sonra onu SQL Server veritabanında `log4jlogs` adlı bir tabloya aktarır. Bu makalede, [HDInsight 'Ta Hadoop Ile Apache Sqoop kullanma](./hdinsight-use-sqoop.md)işlemi devam ediyor.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
+[!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
+
 Bu makaleye başlamadan önce aşağıdaki öğelere sahip olmanız gerekir:
 
-* Azure PowerShell ile bir iş istasyonu [AZ modül](https://docs.microsoft.com/powershell/azure/overview) yüklü.
+* Azure PowerShell [az Module](https://docs.microsoft.com/powershell/azure/overview) yüklü bir iş istasyonu.
 
-* Tamamlanmasından [test ortamını ayarlama](./hdinsight-use-sqoop.md#create-cluster-and-sql-database) gelen [HDInsight, Hadoop ile Apache Sqoop'u kullanma](./hdinsight-use-sqoop.md).
+* [Test ortamını ayarlama](./hdinsight-use-sqoop.md#create-cluster-and-sql-database) , [HDInsight 'Ta Hadoop Ile Apache Sqoop kullanın](./hdinsight-use-sqoop.md).
 
 
-## <a name="run-apache-sqoop-by-using-powershell"></a>Apache Sqoop PowerShell kullanarak çalıştırma
-Aşağıdaki PowerShell betiğini kaynak dosyanın önceden işler ve Azure SQL veritabanı tablosuna dışarı `log4jlogs`. Değiştirin `CLUSTERNAME`, `CLUSTERPASSWORD`, ve `SQLPASSWORD` önkoşul kullanılan değerlerle.
+## <a name="run-apache-sqoop-by-using-powershell"></a>PowerShell kullanarak Apache Sqoop çalıştırma
+Aşağıdaki PowerShell betiği, kaynak dosyayı ön işleme alabilir ve ardından onu tablo `log4jlogs`bir Azure SQL veritabanına aktarır. `CLUSTERNAME`, `CLUSTERPASSWORD`ve `SQLPASSWORD`, önkoşullardan kullandığınız değerlerle değiştirin.
 
 ```powershell 
 <#------ BEGIN USER INPUT ------#>
@@ -170,16 +172,16 @@ Get-AzHDInsightJobOutput `
 ```
 
 ## <a name="limitations"></a>Sınırlamalar
-Linux tabanlı HDInsight aşağıdaki sınırlamalar sunar:
+Linux tabanlı HDInsight aşağıdaki sınırlamaları sunar:
 
-* Toplu dışarı aktarın: Microsoft SQL Server veya Azure SQL veritabanı için verileri dışarı aktarmak için kullanılan Sqoop bağlayıcı toplu ekleme şu anda desteklemiyor.
+* Toplu dışa aktarma: Microsoft SQL Server veya Azure SQL veritabanı 'na veri aktarmak için kullanılan Sqoop Bağlayıcısı Şu anda toplu eklemeleri desteklememektedir.
 
-* Toplu işleme: Kullanarak `-batch` ne zaman geçiş ekler gerçekleştirir, Sqoop, birden çok eklemeleri toplu INSERT işlemler yerine gerçekleştirir. 
+* Toplu işleme: ekleme işlemi gerçekleştirdiğinde, `-batch` anahtarını kullanarak, INSERT işlemlerini toplu olarak gerçekleştirmek yerine Sqoop birden çok ekleme gerçekleştirir. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Artık Sqoop kullanmayı öğrendiniz. Daha fazla bilgi için bkz:
+Şimdi Sqoop 'yi nasıl kullanacağınızı öğrendiniz. Daha fazla bilgi için bkz:
 
-* [HDInsight ile Apache Oozie kullanma](../hdinsight-use-oozie-linux-mac.md): İçinde bir Oozie iş akışının Sqoop eylemini kullanın.
-* [HDInsight için verileri karşıya](../hdinsight-upload-data.md): HDInsight veya Azure Blob depolamaya veri yüklemek için diğer yöntemler bulun.
+* [HDInsight Ile Apache Oozie kullanma](../hdinsight-use-oozie-linux-mac.md): bir Oozie Iş akışında Sqoop eylemini kullanın.
+* [HDInsight 'a veri yükleme](../hdinsight-upload-data.md): HDInsight 'A veya Azure Blob depolamaya veri yüklemek için diğer yöntemleri bulun.
 
 [sqoop-user-guide-1.4.4]: https://sqoop.apache.org/docs/1.4.4/SqoopUserGuide.html

@@ -1,7 +1,7 @@
 ---
-title: 'Öğretici: R ile Tahmine dayalı bir modeli eğitmek için verileri hazırlama'
+title: "Öğretici: R 'de tahmine dayalı bir model eğitme için veri hazırlama"
 titleSuffix: Azure SQL Database Machine Learning Services (preview)
-description: R ile Azure SQL veritabanı Machine Learning Hizmetleri (Önizleme) ile Tahmine dayalı bir modeli eğitmek için bir Azure SQL veritabanından veri bölümünde bu üç bölümlü öğretici serisinin birinci hazırlamanız.
+description: Bu üç bölümden oluşan öğretici serisinin birinci bölümünde, Azure SQL veritabanı Machine Learning Services (Önizleme) ile R 'deki tahmine dayalı bir modeli eğitebilmeniz için verileri bir Azure SQL veritabanından hazırlarsınız.
 services: sql-database
 ms.service: sql-database
 ms.subservice: machine-learning
@@ -12,44 +12,46 @@ author: garyericson
 ms.author: garye
 ms.reviewer: davidph
 manager: cgronlun
-ms.date: 05/02/2019
-ms.openlocfilehash: aa9c41ee34a50ab9b1409357bfe7d123166601bf
-ms.sourcegitcommit: 59fd8dc19fab17e846db5b9e262a25e1530e96f3
+ms.date: 07/26/2019
+ms.openlocfilehash: c1271d5b63fa796fe44b7a40c364953464a87539
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65978741"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68596673"
 ---
-# <a name="tutorial-prepare-data-to-train-a-predictive-model-in-r-with-azure-sql-database-machine-learning-services-preview"></a>Öğretici: R ile Azure SQL veritabanı Machine Learning Hizmetleri (Önizleme) ile Tahmine dayalı bir modeli eğitmek için verileri hazırlama
+# <a name="tutorial-prepare-data-to-train-a-predictive-model-in-r-with-azure-sql-database-machine-learning-services-preview"></a>Öğretici: Azure SQL veritabanı Machine Learning Services (Önizleme) ile R 'de tahmine dayalı bir model eğitme için veri hazırlama
 
-R ile Azure SQL veritabanı Machine Learning Hizmetleri (Önizleme) ile Tahmine dayalı bir modeli eğitmek için bir Azure SQL veritabanından veri bölümünde bu üç bölümlü öğretici serisinin birinci hazırlamanız.
+Bu üç bölümden oluşan öğretici serisinin birinci kısmında, R kullanarak bir Azure SQL veritabanından veri alıp hazırlarsınız. Bu serinin ilerleyen kısımlarında, Azure SQL veritabanı Machine Learning Services (Önizleme) ile R 'de tahmine dayalı bir makine öğrenimi modeli eğitmek ve dağıtmak için bu verileri kullanacaksınız.
 
-Bu öğretici serisinin bir kayak kiralama işletme sahibi ve gelecekteki bir tarihte gerekir bisiklet sayısını tahmin etmek istediğiniz hayal edin. Bu bilgiler, stok, personel ve tesis hazır olun yardımcı olur.
+Bu öğretici serisi için, bir kayak kiralama işiniz olduğunu düşünün ve gelecekteki bir tarihte sahip olduğunuz Kiralama sayısını tahmin etmek istiyorsunuz. Bu bilgiler, stoklarınızı, personelinizi ve tesislerinizi hazır hale getirmenize yardımcı olur.
 
-Bu makalede, öğreneceksiniz nasıl yapılır:
+Bu serinin bir ve ikinci kısımlarında, verilerinizi hazırlamak ve makine öğrenimi modelini eğtirecek RStudio 'da bazı R betikleri geliştirirsiniz. Ardından, üçüncü kısmında, saklı yordamları kullanarak bu R betiklerini bir SQL veritabanı içinde çalıştıracaksınız.
+
+Bu makalede aşağıdakileri nasıl yapacağınızı öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Örnek bir veritabanı bir Azure SQL veritabanı'na aktarma
-> * Verileri Azure SQL veritabanı'ndan R kullanarak bir veri çerçevesine yükleyin.
-> * Bazı sütunlar kategorik olarak belirleyerek verileri hazırlama
+> * R kullanarak örnek bir veritabanını Azure SQL veritabanı 'na aktarma
+> * Verileri Azure SQL veritabanından R veri çerçevesine yükleme
+> * Bazı sütunları kategorik olarak tanımlayarak R 'de verileri hazırlama
 
-İçinde [bölüm iki](sql-database-tutorial-predictive-model-build-compare.md), oluşturma ve birden çok modeli eğitmek ve sonra en doğru olanı seçin öğreneceksiniz.
+[İkinci bölümde](sql-database-tutorial-predictive-model-build-compare.md), R 'de birden çok makine öğrenimi modeli oluşturup eğitme ve en doğru olanı seçme hakkında bilgi edineceksiniz.
 
-İçinde [üçüncü kısmı](sql-database-tutorial-predictive-model-deploy.md), model bir veritabanında saklamak ve ardından yeni verileri temel alan tahmin yapabileceği bir saklı yordam oluşturma hakkında bilgi edineceksiniz.
+[Üçüncü kısımda](sql-database-tutorial-predictive-model-deploy.md), modeli bir veritabanında nasıl depolayacağınızı öğrenirsiniz ve sonra bir ve iki bölümde geliştirdiğiniz R betiklerinden saklı yordamlar oluşturabilirsiniz. Saklı yordamlar yeni verilere göre tahmine dayalı hale getirmek için bir SQL veritabanında çalışır.
 
 [!INCLUDE[ml-preview-note](../../includes/sql-database-ml-preview-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure aboneliğiniz yoksa, azure aboneliği - [hesap oluşturma](https://azure.microsoft.com/free/) başlamadan önce.
+* Azure aboneliği-Azure aboneliğiniz yoksa başlamadan önce [bir hesap oluşturun](https://azure.microsoft.com/free/) .
 
-* Machine Learning Hizmetleri ile Azure SQL veritabanı sunucusu etkin - genel Önizleme süresince Microsoft ekleme ve mevcut veya yeni veritabanlarınız için makine öğrenimi etkinleştir. Bağlantısındaki [Önizleme için kaydolun](sql-database-machine-learning-services-overview.md#signup).
+* Machine Learning Services etkinleştirilmiş Azure SQL veritabanı sunucusu-genel önizleme sırasında, Microsoft, mevcut veya yeni veritabanlarınız için sizi kullanıma sunulacaktır ve makine öğrenimini etkinleştirecektir. [Önizlemeye kaydolma](sql-database-machine-learning-services-overview.md#signup)adımlarını izleyin.
 
-* RevoScaleR package - bakın [RevoScaleR](https://docs.microsoft.com/sql/advanced-analytics/r/ref-r-revoscaler?view=sql-server-2017#versions-and-platforms) için bu paketi yerel olarak yüklemek Seçenekler.
+* Iptal paketi-bu paketi yerel olarak yüklemek için seçenekler için [iptal](https://docs.microsoft.com/sql/advanced-analytics/r/ref-r-revoscaler?view=sql-server-2017#versions-and-platforms) 'e bakın.
 
-* R IDE - Bu öğreticide [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/).
+* R IDE-Bu öğretici [rstudio Desktop](https://www.rstudio.com/products/rstudio/download/)kullanır.
 
-* Bu öğreticide SQL sorgu aracı - varsayılır kullanmakta olduğunuz [Azure veri Studio](https://docs.microsoft.com/sql/azure-data-studio/what-is) veya [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/sql-server-management-studio-ssms) (SSMS).
+* SQL sorgu aracı-Bu öğreticide [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/what-is) veya [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/sql-server-management-studio-ssms) (SSMS) kullandığınız varsayılır.
 
 ## <a name="sign-in-to-the-azure-portal"></a>Azure portalında oturum açın
 
@@ -57,21 +59,21 @@ Bu makalede, öğreneceksiniz nasıl yapılır:
 
 ## <a name="import-the-sample-database"></a>Örnek veritabanını içeri aktarma
 
-Bu öğreticide kullanılan örnek veri kümesi için kaydedilmiş bir **.bacpac** veritabanı yedek dosyasını indirin ve kullanın.
+Bu öğreticide kullanılan örnek veri kümesi, indirmeniz ve kullanmanız için bir **. bacpac** veritabanı yedekleme dosyasına kaydedildi.
 
-1. Dosya indirme [TutorialDB.bacpac](https://sqlchoice.blob.core.windows.net/sqlchoice/static/TutorialDB.bacpac).
+1. [Tutorialdb 'yi. bacpac](https://sqlchoice.blob.core.windows.net/sqlchoice/static/TutorialDB.bacpac)dosyasını indirin.
 
-1. Bölümündeki yönergeleri izleyin [bir Azure SQL veritabanı oluşturmak için bir BACPAC dosyasını içeri aktarma](https://docs.microsoft.com/azure/sql-database/sql-database-import), bu ayrıntıları kullanarak:
+1. Aşağıdaki ayrıntıları kullanarak bir [Azure SQL veritabanı oluşturmak IÇIN BACPAC dosyasını Içeri aktarma](https://docs.microsoft.com/azure/sql-database/sql-database-import)bölümündeki yönergeleri izleyin:
 
-   * Alınacak **TutorialDB.bacpac** indirdiğiniz dosya
-   * Genel Önizleme sırasında seçin **5. nesil/sanal çekirdek** yeni veritabanı için yapılandırma
-   * "Tutorialdb'yi" Yeni veritabanı adı
+   * İndirdiğiniz **tutorialdb 'yi. bacpac** dosyasından içeri aktarma
+   * Genel Önizleme sırasında yeni veritabanı için **5. nesil/sanal çekirdek** yapılandırmasını seçin
+   * "Tutorialdb 'yi" adlı yeni veritabanını adlandırın
 
-## <a name="load-the-data-into-a-data-frame"></a>Verileri bir veri çerçevesine yükleyin
+## <a name="load-the-data-into-a-data-frame"></a>Verileri bir veri çerçevesine yükleme
 
-R verilerini kullanmak için verileri Azure SQL veritabanı'ndan veri çerçevesine yükleme (`rentaldata`).
+Verileri R 'de kullanmak için, verileri Azure SQL veritabanından bir veri çerçevesine (`rentaldata`) yüklersiniz.
 
-RStudio içinde yeni bir RScript dosyası oluşturun ve aşağıdaki betiği çalıştırın. Değiştirin **sunucu**, **UID**, ve **PWD** kendi bağlantı bilgileriyle.
+RStudio 'da yeni bir RScript dosyası oluşturun ve aşağıdaki betiği çalıştırın. **Sunucu**, **UID**ve **PWD** bilgilerini kendi bağlantı bilgileriniz ile değiştirin.
 
 ```r
 #Define the connection string to connect to the TutorialDB database
@@ -93,7 +95,7 @@ head(rentaldata);
 str(rentaldata);
 ```
 
-Aşağıdakine benzer bir sonuç görmeniz gerekir.
+Aşağıdakine benzer sonuçlar görmeniz gerekir.
 
 ```results
    Year  Month  Day  RentalCount  WeekDay  Holiday  Snow
@@ -115,8 +117,8 @@ $ Snow       : num  0 0 0 0 0 0 0 0 0 0 ...
 
 ## <a name="prepare-the-data"></a>Verileri hazırlama
 
-Bu örnek veritabanındaki hazırlık çoğunu zaten yapıldığını, ancak burada bir daha fazla hazırlık yaparsınız.
-Üç sütun olarak tanımlamak için aşağıdaki R betiğini kullanın *kategorileri* veri türlerini değiştirerek *faktörü*.
+Bu örnek veritabanında, hazırlığının büyük bir kısmında zaten yapılmış olsa da daha fazla hazırlık yapacaksınız.
+Veri türlerini *faktör*olarak değiştirerek üç sütunu *Kategori* olarak tanımlamak için aşağıdaki R betiğini kullanın.
 
 ```r
 #Changing the three factor columns to factor types
@@ -128,7 +130,7 @@ rentaldata$WeekDay <- factor(rentaldata$WeekDay);
 str(rentaldata);
 ```
 
-Aşağıdakine benzer bir sonuç görmeniz gerekir.
+Aşağıdakine benzer sonuçlar görmeniz gerekir.
 
 ```results
 data.frame':      453 obs. of  7 variables:
@@ -141,28 +143,28 @@ $ Holiday    : Factor w/ 2 levels "0","1": 2 1 1 1 1 1 1 1 1 1 ...
 $ Snow       : Factor w/ 2 levels "0","1": 1 1 1 1 1 1 1 1 1 1 ...
 ```
 
-Eğitim verileri artık hazır.
+Veriler artık eğitim için hazırlandı.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu öğreticiyle devam etmeyecekseniz, Azure SQL veritabanı sunucunuzdan Tutorialdb'yi veritabanını silin.
+Bu öğreticiye devam edemeyecekinizden Tutorialdb 'yi veritabanını Azure SQL veritabanı sunucusundan silin.
 
-Azure portalında aşağıdaki adımları izleyin:
+Azure portal, aşağıdaki adımları izleyin:
 
-1. Azure portalında sol taraftaki menüden seçin **tüm kaynakları** veya **SQL veritabanları**.
-1. İçinde **ada göre Filtrele...**  alanına **Tutorialdb'yi**ve aboneliğinizi seçin.
-1. Tutorialdb'yi veritabanınızı seçin.
+1. Azure portal sol taraftaki menüden **tüm kaynaklar** ' ı veya **SQL veritabanları**' nı seçin.
+1. **Ada göre filtrele...** alanına **tutorialdb 'yi**girin ve aboneliğinizi seçin.
+1. Tutorialdb 'yi veritabanınızı seçin.
 1. **Genel Bakış** sayfasında **Sil**’i seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Serinin Bu öğretici serisinde, bu adımlar tamamlandı:
+Bu öğretici serisinin birinci kısmında, şu adımları tamamladınız:
 
-* Bir veritabanı yedekleme dosyasını bir Azure SQL veritabanı'na aktarma
-* Verileri Azure SQL veritabanı'ndan R kullanarak bir veri çerçevesine yükleyin.
-* Bazı sütunlar kategoriler olarak belirleyerek verileri hazırlama
+* R kullanarak örnek bir veritabanını Azure SQL veritabanı 'na aktarma
+* Verileri Azure SQL veritabanından R veri çerçevesine yükleme
+* Bazı sütunları kategorik olarak tanımlayarak R 'de verileri hazırlama
 
-Bir machine learning Tutorialdb'yi veritabanından veri kullanan modeli oluşturmak için Bu öğretici serisinin oluşan izleyin:
+Tutorialdb 'yi veritabanından veri kullanan bir Machine Learning modeli oluşturmak için, bu öğretici serisinin ikinci bölümünü izleyin:
 
 > [!div class="nextstepaction"]
-> [Öğretici: R ile Azure SQL veritabanı Machine Learning Hizmetleri (Önizleme) ile Tahmine dayalı bir model oluşturma](sql-database-tutorial-predictive-model-build-compare.md)
+> [Öğretici: R 'de Azure SQL veritabanı Machine Learning Services tahmine dayalı model oluşturma (Önizleme)](sql-database-tutorial-predictive-model-build-compare.md)

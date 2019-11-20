@@ -1,5 +1,7 @@
-- name: Event Grid Belgeleri
+- name: Azure Event Grid Belgeleri
   href: index.yml
+- name: IoT Edge üzerinde Event Grid’e geçiş belgeleri
+  href: edge/pub-sub-events-webhook-local.md
 - name: Genel Bakış
   items:
     - name: Event Grid nedir?
@@ -25,6 +27,8 @@
           href: custom-event-quickstart-powershell.md
         - name: Portal
           href: custom-event-quickstart-portal.md
+    - name: Olay işleyicisi olarak Azure İşlevleri
+      href: custom-event-to-function.md
     - name: Olay işleyicisi olarak kuyruk depolama
       href: custom-event-to-queue-storage.md
     - name: Olay işleyicisi olarak Event Hubs
@@ -84,7 +88,7 @@
     - name: Resource Manager şablonları
       href: template-samples.md
     - name: Kod örnekleri
-      href: 'https://azure.microsoft.com/resources/samples/?sort=0&service=event-grid'
+      href: 'https://docs.microsoft.com/samples/browse/?term=Event%20Grid'
 - name: Kavramlar
   items:
     - name: Event Grid kavramları
@@ -109,6 +113,8 @@
       href: post-to-custom-topic.md
     - name: HTTP uç noktasında olayları alma
       href: receive-events.md
+    - name: AAD ile güvenli web kancası
+      href: secure-webhook-delivery.md
     - name: Teslim edilemeyen ileti ve yeniden deneme
       href: manage-event-delivery.md
     - name: Olayları filtreleme
@@ -127,6 +133,8 @@
       href: how-to-event-domains.md
     - name: İstemci tarafı yük devretmeyi uygulama
       href: custom-disaster-recovery.md
+    - name: Sorun giderme hataları
+      href: troubleshoot-errors.md
 - name: Başvuru
   items:
     - name: Azure CLI
@@ -158,6 +166,8 @@
           href: event-schema-event-hubs.md
         - name: IoT Hub
           href: event-schema-iot-hub.md
+        - name: Key Vault
+          href: event-schema-key-vault.md
         - name: Media Services
           href: ../media-services/latest/media-services-event-schemas.md?toc=%2fazure%2fevent-grid%2ftoc.json
         - name: Kaynak grupları
@@ -168,6 +178,10 @@
           href: event-schema-azure-maps.md
         - name: Uygulama Yapılandırması
           href: event-schema-app-configuration.md
+        - name: Azure SignalR
+          href: event-schema-azure-signalr.md
+        - name: Azure Machine Learning
+          href: event-schema-machine-learning.md
     - name: Şablon kaynakları
       items:
         - name: Olay abonelikleri

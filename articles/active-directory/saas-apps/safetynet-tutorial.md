@@ -1,228 +1,150 @@
 ---
-title: 'Öğretici: SafetyNet ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve SafetyNet arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: SafetyNet ile Azure Active Directory tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve SafetyNet arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
-ms.reviewer: joflore
+manager: mtillman
+ms.reviewer: barbkess
 ms.assetid: caa96ea2-da21-4529-8fab-0e06367beb40
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 04/16/2018
+ms.topic: tutorial
+ms.date: 08/07/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4fadebc689f10b40131bb0feb12d846d3bdde704
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8b94592f78a3aba46406d25d95de3a8847831eeb
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62104705"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68880190"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-safetynet"></a>Öğretici: SafetyNet ile Azure Active Directory Tümleştirme
+# <a name="tutorial-integrate-safetynet-with-azure-active-directory"></a>Öğretici: SafetyNet 'i Azure Active Directory tümleştirin
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile SafetyNet tümleştirme konusunda bilgi edinin.
+Bu öğreticide, SafetyNet 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. SafetyNet 'i Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-SafetyNet Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+* Azure AD 'de SafetyNet 'e erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla otomatik olarak oturum açabilmesi için bu kullanıcıları etkinleştirin.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-- SafetyNet erişimi, Azure AD'de kontrol edebilirsiniz.
-- Otomatik olarak imzalanan için SafetyNet (çoklu oturum açma) ile Azure AD hesaplarına açma, kullanıcılarınızın etkinleştirebilirsiniz.
-- Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
-
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](../manage-apps/what-is-single-sign-on.md).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile SafetyNet yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-- Azure AD aboneliği
-- Bir SafetyNet çoklu oturum açma etkin aboneliği
-
-> [!NOTE]
-> Bu öğreticideki adımları test etmek için üretim ortamı kullanarak önermiyoruz.
-
-Bu öğreticideki adımları test etmek için bu önerileri izlemelidir:
-
-- Gerekli olmadıkça, üretim ortamında kullanmayın.
-- Azure AD deneme ortamı yoksa, şunları yapabilirsiniz [bir aylık deneme sürümü edinin](https://azure.microsoft.com/pricing/free-trial/).
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* SafetyNet çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
-Bu öğreticide, Azure AD çoklu oturum açma bir test ortamında test edin. Bu öğreticide özetlenen senaryo iki temel yapı taşları oluşur:
 
-1. SafetyNet galeri ekleme
-1. Yapılandırma ve test Azure AD çoklu oturum açma
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-## <a name="adding-safetynet-from-the-gallery"></a>SafetyNet galeri ekleme
-Azure AD'de SafetyNet tümleştirmesini yapılandırmak için SafetyNet Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+* SafetyNet **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler
 
-**Galeriden SafetyNet eklemek için aşağıdaki adımları gerçekleştirin:**
+## <a name="adding-safetynet-from-the-gallery"></a>Galeriden SafetyNet ekleme
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi. 
+SafetyNet 'in Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize SafetyNet eklemeniz gerekir.
 
-    ![Azure Active Directory düğmesi][1]
-
-1. Gidin **kurumsal uygulamalar**. Ardından **tüm uygulamaları**.
-
-    ![Kurumsal uygulamalar dikey penceresi][2]
-    
-1. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
-
-    ![Yeni Uygulama düğmesi][3]
-
-1. Arama kutusuna **SafetyNet**seçin **SafetyNet** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
-
-    ![Sonuç listesinde SafetyNet](./media/safetynet-tutorial/tutorial_safetynet_addfromgallery.png)
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **SafetyNET** yazın.
+1. Sonuçlar panelinden **SafetyNET** ' i seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Bu bölümde, yapılandırın ve Azure AD çoklu oturum açma "Britta Simon" adlı bir test kullanıcı tabanlı SafetyNet sınayın.
+**B. Simon**adlı bir test kullanıcısını kullanarak Azure AD SSO 'Yu SafetyNet ile yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ve SafetyNet içindeki ilgili Kullanıcı arasında bir bağlantı ilişkisi kurmanız gerekir.
 
-Tek iş için oturum açma için Azure AD ne SafetyNet karşılığı kullanıcı için bir kullanıcı Azure AD'de olduğunu bilmeniz gerekir. Diğer bir deyişle, bir Azure AD kullanıcısının SafetyNet ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+Azure AD SSO 'yu SafetyNet ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-Yapılandırma ve Azure AD çoklu oturum açma SafetyNet ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[SafetyNet SSO 'Yu yapılandırın](#configure-safetynet-sso)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+5. User 'ın Azure AD gösterimine bağlı olan SafetyNet 'te B. Simon 'ın bir karşılığı olacak şekilde **[SafetyNET test kullanıcısı oluşturun](#create-safetynet-test-user)** .
+6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-1. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-1. **[SafetyNet test kullanıcısı oluşturma](#create-a-safetynet-test-user)**  - kullanıcı Azure AD gösterimini bağlı SafetyNet Britta simon'un bir karşılığı vardır.
-1. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-1. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin ve SafetyNet uygulamanızda çoklu oturum açmayı yapılandırın.
+1. [Azure Portal](https://portal.azure.com/), **SafetyNET** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-**Azure AD çoklu oturum açma ile SafetyNet yapılandırmak için aşağıdaki adımları gerçekleştirin:**
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-1. Azure portalında, üzerinde **SafetyNet** uygulama tümleştirme sayfasını tıklatın **çoklu oturum açma**.
+1. **Temel SAML yapılandırması** bölümünde, **IDP** tarafından başlatılan modda uygulamayı yapılandırmak istiyorsanız aşağıdaki alanlar için değerleri girin:
 
-    ![Çoklu oturum açma bağlantısı yapılandırma][4]
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.predictivesolutions.com/sp`
 
-1. Üzerinde **çoklu oturum açma** iletişim kutusunda **modu** olarak **SAML tabanlı oturum açma** çoklu oturum açmayı etkinleştirmek için.
- 
-    ![Çoklu oturum açma iletişim kutusu](./media/safetynet-tutorial/tutorial_safetynet_samlbase.png)
+    b. **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.predictivesolutions.com/CRMApp/saml/SSO`
 
-1. Üzerinde **SafetyNet etki alanı ve URL'ler** bölümünde, uygulamada yapılandırmak istiyorsanız aşağıdaki adımları gerçekleştirin **IDP** başlatılan modu:
+1. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    ![SafetyNet etki alanı ve URL'ler tek oturum açma bilgileri](./media/safetynet-tutorial/tutorial_safetynet_url.png)
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.predictivesolutions.com`
 
-    a. İçinde **tanımlayıcı** metin kutusuna bir URL şu biçimi kullanarak: `https://<subdomain>.predictivesolutions.com/sp`
+    > [!NOTE]
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı, yanıt URL 'SI ve oturum açma URL 'SI ile güncelleştirin. Bu değerleri almak için [SafetyNET istemci destek ekibine](mailto:dev@predictivesolutions.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-    b. İçinde **yanıt URL'si** metin kutusuna bir URL şu biçimi kullanarak: `https://<subdomain>.predictivesolutions.com/CRMApp/saml/SSO`
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **uygulama Federasyon meta verileri URL 'sini** kopyalamak ve bilgisayarınıza kaydetmek için Kopyala düğmesine tıklayın.
 
-1. Denetleme **Gelişmiş URL ayarlarını göster** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+    ![Sertifika indirme bağlantısı](common/copy-metadataurl.png)
 
-    ![SafetyNet etki alanı ve URL'ler tek oturum açma bilgileri](./media/safetynet-tutorial/tutorial_safetynet_url1.png)
+### <a name="configure-safetynet-sso"></a>SafetyNet SSO 'yu yapılandırma
 
-    İçinde **oturum açma URL'si** metin kutusuna bir URL şu biçimi kullanarak: `https://<subdomain>.predictivesolutions.com`
-     
-    > [!NOTE] 
-    > Bu değerler gerçek değildir. Bu değerler gerçek tanımlayıcısı, yanıt URL'si ve oturum açma URL'si ile güncelleştirin. İlgili kişi [SafetyNet istemci Destek ekibine](mailto:dev@predictivesolutions.com) bu değerleri almak için.
-
-1. Üzerinde **SAML imzalama sertifikası** bölümünde, kopyalamak için Kopyala düğmesine **uygulama Federasyon meta verileri URL'sini** kopyalayıp Not Defteri'ne yapıştırın.
-
-    ![Sertifika indirme bağlantısı](./media/safetynet-tutorial/tutorial_safetynet_certificate.png)
-
-1. Tıklayın **Kaydet** düğmesi.
-
-    ![Çoklu oturum açma Kaydet düğmesi yapılandırın](./media/safetynet-tutorial/tutorial_general_400.png)
-
-1. Çoklu oturum açmayı yapılandırma **SafetyNet** tarafını göndermek için ihtiyacınız **uygulama Federasyon meta verileri URL'sini** için [SafetyNet Destek ekibine](mailto:dev@predictivesolutions.com). Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
+**SafetyNET** tarafında çoklu oturum açmayı yapılandırmak Için, **uygulama Federasyon meta veri URL 'Sini** [SafetyNET destek ekibine](mailto:dev@predictivesolutions.com)göndermeniz gerekir. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-   ![Bir Azure AD test kullanıcısı oluşturma][100]
-
-**Azure AD'de bir test kullanıcısı oluşturmak için aşağıdaki adımları gerçekleştirin:**
-
-1. Azure portalında, sol bölmede, tıklayın **Azure Active Directory** düğmesi.
-
-    ![Azure Active Directory düğmesi](./media/safetynet-tutorial/create_aaduser_01.png)
-
-1. Kullanıcıların listesini görüntülemek için Git **kullanıcılar ve gruplar**ve ardından **tüm kullanıcılar**.
-
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](./media/safetynet-tutorial/create_aaduser_02.png)
-
-1. Açmak için **kullanıcı** iletişim kutusu, tıklayın **Ekle** en üstündeki **tüm kullanıcılar** iletişim kutusu.
-
-    ![Ekle düğmesi](./media/safetynet-tutorial/create_aaduser_03.png)
-
-1. İçinde **kullanıcı** iletişim kutusunda, aşağıdaki adımları gerçekleştirin:
-
-    ![Kullanıcı iletişim kutusu](./media/safetynet-tutorial/create_aaduser_04.png)
-
-    a. İçinde **adı** kutusuna **BrittaSimon**.
-
-    b. İçinde **kullanıcı adı** Britta Simon kullanıcı e-posta adresini yazın.
-
-    c. Seçin **Göster parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
-
-    d. **Oluştur**’a tıklayın.
- 
-### <a name="create-a-safetynet-test-user"></a>SafetyNet test kullanıcısı oluşturma
-
-Bu bölümde, Britta Simon SafetyNet adlı bir kullanıcı oluşturun. Çalışmak [SafetyNet Destek ekibine](mailto:dev@predictivesolutions.com) SafetyNet platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Seçin **yeni kullanıcı** ekranın üstünde.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına, username@companydomain.extensiongirin. Örneğin: `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1.           **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için SafetyNet erişim vererek Britta Simon etkinleştirin.
+Bu bölümde, SafetyNet 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-![Kullanıcı rolü atayın][200] 
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **SafetyNET**' i seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-**Britta Simon SafetyNet için atamak için aşağıdaki adımları gerçekleştirin:**
+   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-1. Azure portalında uygulama görünümü açtığınız dizin görünümüne gidin ve Git **kurumsal uygulamalar** ardından **tüm uygulamaları**.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![Kullanıcı Ata][201] 
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-1. Uygulamalar listesinde **SafetyNet**.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    ![Uygulamalar listesinde SafetyNet bağlantı](./media/safetynet-tutorial/tutorial_safetynet_app.png)  
+### <a name="create-safetynet-test-user"></a>SafetyNet test kullanıcısı oluşturma
 
-1. Soldaki menüde **kullanıcılar ve gruplar**.
+Bu bölümde, SafetyNet içinde Britta Simon adlı bir Kullanıcı oluşturacaksınız. SafetyNET platformunda kullanıcıları eklemek için [SafetyNET destek ekibi](mailto:dev@predictivesolutions.com) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı][202]
-
-1. Tıklayın **Ekle** düğmesi. Ardından **kullanıcılar ve gruplar** üzerinde **atama Ekle** iletişim.
-
-    ![Atama Ekle bölmesi][203]
-
-1. Üzerinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** kullanıcıları listesinde.
-
-1. Tıklayın **seçin** düğmesini **kullanıcılar ve gruplar** iletişim.
-
-1. Tıklayın **atama** düğmesini **atama Ekle** iletişim.
-    
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
+### <a name="test-sso"></a>Test SSO 'SU
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim panelinde SafetyNet kutucuğa tıkladığınızda, otomatik olarak SafetyNet uygulamanıza açan.
-Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](../user-help/active-directory-saas-access-panel-introduction.md). 
+Erişim panelinde SafetyNet kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız SafetyNet ' te otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](tutorial-list.md)
-* [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-
-<!--Image references-->
-
-[1]: ./media/safetynet-tutorial/tutorial_general_01.png
-[2]: ./media/safetynet-tutorial/tutorial_general_02.png
-[3]: ./media/safetynet-tutorial/tutorial_general_03.png
-[4]: ./media/safetynet-tutorial/tutorial_general_04.png
-
-[100]: ./media/safetynet-tutorial/tutorial_general_100.png
-
-[200]: ./media/safetynet-tutorial/tutorial_general_200.png
-[201]: ./media/safetynet-tutorial/tutorial_general_201.png
-[202]: ./media/safetynet-tutorial/tutorial_general_202.png
-[203]: ./media/safetynet-tutorial/tutorial_general_203.png
-
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

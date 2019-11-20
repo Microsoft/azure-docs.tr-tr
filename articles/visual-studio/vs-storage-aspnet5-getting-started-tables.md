@@ -1,9 +1,9 @@
 ---
-title: Tablo depolama ve Visual Studio ile çalışmaya başlama nasıl bağlı hizmetler (ASP.NET Core) | Microsoft Docs
-description: Nasıl bir ASP.NET Core projesi Visual Studio'da Azure tablo depolama ile Visual Studio kullanarak bir depolama hesabına bağlandıktan sonra başlamak bağlı hizmetler
+title: Visual Studio kullanarak tablo depolamayı kullanmaya başlama (ASP.NET Core)
+description: Visual Studio bağlı hizmetler 'i kullanarak bir depolama hesabına bağlandıktan sonra Visual Studio 'da bir ASP.NET Core projesinde Azure Tablo depolama ile çalışmaya başlama
 services: storage
 author: ghogen
-manager: douge
+manager: jillfra
 ms.assetid: c3c451d1-71ff-4222-a348-c41c98a02b85
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
@@ -12,30 +12,31 @@ ms.workload: azure-vs
 ms.topic: conceptual
 ms.date: 11/14/2017
 ms.author: ghogen
-ms.openlocfilehash: 1f90ce71084ba3acbf5a0aec5c7b8e9683323766
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ROBOTS: NOINDEX,NOFOLLOW
+ms.openlocfilehash: d209f8117b1e061877daf2f8d316bd01ed4f84cd
+ms.sourcegitcommit: 8b44498b922f7d7d34e4de7189b3ad5a9ba1488b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60362127"
+ms.lasthandoff: 10/13/2019
+ms.locfileid: "72298822"
 ---
-# <a name="how-to-get-started-with-azure-table-storage-and-visual-studio-connected-services"></a>Azure tablo depolama ve Visual Studio ile çalışmaya başlama nasıl bağlı hizmetler
+# <a name="how-to-get-started-with-azure-table-storage-and-visual-studio-connected-services"></a>Azure Tablo depolama ve Visual Studio bağlı hizmetlerini kullanmaya başlama
 
 [!INCLUDE [storage-try-azure-tools-tables](../../includes/storage-try-azure-tools-tables.md)]
 
-Bu makalede oluşturduğunuz veya Visual Studio kullanarak bir ASP.NET Core projesi bir Azure depolama hesabında başvurulan sonra Visual Studio'da Azure tablo depolama kullanmaya başlama işlemini açıklamaktadır **bağlı hizmetler** özelliği. **Bağlı hizmetler** işlemi projenizde Azure depolamaya erişmek için uygun NuGet paketlerini yükler ve proje yapılandırma dosyalarınızı depolama hesabı için bağlantı dizesi ekler. (Bkz [depolama belgeleri](https://azure.microsoft.com/documentation/services/storage/) Azure depolama hakkında genel bilgiler.)
+Bu makalede, Visual Studio **bağlı hizmetler** özelliğini kullanarak bir ASP.NET Core projesinde Azure Storage hesabı oluşturduktan veya başvurduktan sonra Visual Studio 'Da Azure Table Storage 'ı kullanmaya nasıl başlacağınız açıklanır. **Bağlı hizmetler** işlemi, projenizde Azure depolama 'ya erişmek ve depolama hesabı için bağlantı dizesini proje yapılandırma dosyalarınıza eklemek üzere uygun NuGet paketlerini yükleyerek ekler. (Azure depolama hakkında genel bilgi için bkz. [depolama belgeleri](https://azure.microsoft.com/documentation/services/storage/) .)
 
-Azure Table storage hizmeti büyük miktarlarda yapısal veriyi depolamanızı sağlar. Kimliği doğrulanmış çağrılarından içindeki ve Azure Bulutu dışındaki kabul eden bir NoSQL veri deposu hizmetidir. Azure tabloları, yapılandırılmış ve ilişkisel olmayan verilerin depolanması için idealdir. Azure tablo depolama kullanma hakkında daha fazla genel bilgi için bkz: [.NET kullanarak Azure tablo depolama ile çalışmaya başlama](../storage/storage-dotnet-how-to-use-tables.md).
+Azure Tablo depolama hizmeti, büyük miktarlarda yapılandırılmış verileri depolamanıza olanak sağlar. Hizmet, Azure bulutunun içinden ve dışından kimliği doğrulanmış çağrılar kabul eden bir NoSQL veri deposudur. Azure tabloları, yapılandırılmış ve ilişkisel olmayan verilerin depolanması için idealdir. Azure Tablo Depolamayı kullanma hakkında daha fazla genel bilgi için bkz. [.NET kullanarak Azure Tablo Depolamayı kullanmaya başlama](../storage/storage-dotnet-how-to-use-tables.md).
 
-Başlamak için önce depolama hesabınızdaki bir tablo oluşturun. Bu makalede daha sonra C# dilinde bir tablo oluşturma ve ekleme, değiştirme, okuma ve tablo girdilerini kaldırma gibi temel tablo işlemlerini nasıl gerçekleştireceğinizi gösterir.  Kod, .NET için Azure depolama istemci kitaplığı kullanır. ASP.NET hakkında daha fazla bilgi için bkz: [ASP.NET](https://www.asp.net).
+Başlamak için önce depolama hesabınızda bir tablo oluşturun. Bu makale daha sonra ' de C# bir tablo oluşturmayı ve tablo girişlerini ekleme, değiştirme, okuma ve kaldırma gibi temel tablo işlemlerini gerçekleştirmeyi gösterir.  Kod, .NET için Azure Storage Istemci kitaplığı 'nı kullanır. ASP.NET hakkında daha fazla bilgi için bkz. [ASP.net](https://www.asp.net).
 
-Bazı Azure depolama API'leri uyumsuzdur ve bu makalede kod zaman uyumsuz yöntemler kullanıldığını varsayar. Bkz: [zaman uyumsuz programlama](https://docs.microsoft.com/dotnet/csharp/async) daha fazla bilgi için.
+Bazı Azure depolama API 'Leri zaman uyumsuzdur ve bu makaledeki kodda zaman uyumsuz yöntemlerin kullanıldığı varsayılır. Daha fazla bilgi için bkz. [zaman uyumsuz programlama](https://docs.microsoft.com/dotnet/csharp/async) .
 
-## <a name="access-tables-in-code"></a>Kod erişim tablolarında
+## <a name="access-tables-in-code"></a>Koddaki erişim tabloları
 
-ASP.NET Core projeleri tablolarında erişmek için Azure tablo depolaması erişen tüm C# kaynak dosyaları için aşağıdaki öğeleri ekleyin gerekir.
+ASP.NET Core projelerindeki tablolara erişmek için, Azure Tablo depolamaya erişen tüm C# kaynak dosyalarına aşağıdaki öğeleri eklemeniz gerekir.
 
-1. Gerekli Ekle `using` ifadeleri:
+1. Gerekli `using` deyimlerini ekleyin:
 
     ```csharp
     using Microsoft.WindowsAzure.Storage;
@@ -43,7 +44,7 @@ ASP.NET Core projeleri tablolarında erişmek için Azure tablo depolaması eri�
     using System.Threading.Tasks;
     ```
 
-1. Alma bir `CloudStorageAccount` depolama hesap bilgilerini temsil eden nesne. Depolama hesabınızı ve appSettings.json depolama bağlantı dizesinde bulabilirsiniz hesap anahtarı adını kullanarak, aşağıdaki kodu kullanın:
+1. Depolama hesabı bilgilerinizi temsil eden `CloudStorageAccount` nesnesi alın. Depolama hesabınızın adını ve appSettings. JSON içindeki depolama bağlantı dizesinde bulabileceğiniz hesap anahtarını kullanarak aşağıdaki kodu kullanın:
 
     ```csharp
         CloudStorageAccount storageAccount = new CloudStorageAccount(
@@ -51,23 +52,23 @@ ASP.NET Core projeleri tablolarında erişmek için Azure tablo depolaması eri�
                 "<name>", "<account-key>"), true);
     ```
 
-1. Alma bir `CloudTableClient` depolama hesabınızda tablosu nesnelerini başvurmak için:
+1. Depolama hesabınızdaki tablo nesnelerine başvurmak için `CloudTableClient` nesnesi alın:
 
     ```csharp
     // Create the table client.
     CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
     ```
 
-1. Alma bir `CloudTable` belirli bir tablo ve varlıklar başvurmak için başvuru nesnesi:
+1. Belirli bir tablo ve varlığa başvurmak için `CloudTable` başvuru nesnesi alın:
 
     ```csharp
     // Get a reference to a table named "peopleTable"
     CloudTable peopleTable = tableClient.GetTableReference("peopleTable");
     ```
 
-## <a name="create-a-table-in-code"></a>Kod içinde bir tablo oluşturma
+## <a name="create-a-table-in-code"></a>Kod içinde tablo oluşturma
 
-Azure tablo oluşturmak için zaman uyumsuz bir yöntem oluşturmak ve içine çağırmak `CreateIfNotExistsAsync()`:
+Azure tablosu oluşturmak için zaman uyumsuz bir yöntem oluşturun ve içinde `CreateIfNotExistsAsync()` ' ı çağırın:
 
 ```csharp
 async void CreatePeopleTableAsync()
@@ -79,7 +80,7 @@ async void CreatePeopleTableAsync()
     
 ## <a name="add-an-entity-to-a-table"></a>Tabloya bir varlık ekleme
 
-Tabloya bir varlık eklemek için varlığınızın özelliklerini tanımlayan bir sınıf oluşturun. Aşağıdaki kod adlı bir varlık sınıfı tanımlar `CustomerEntity` , müşterinin ad son adı ve satır anahtarı bölüm anahtarı olarak kullanır.
+Bir tabloya varlık eklemek için, varlığınızın özelliklerini tanımlayan bir sınıf oluşturursunuz. Aşağıdaki kod, satır anahtarı olarak müşterinin adını ve bölüm anahtarı olarak soyadı ' nı kullanan `CustomerEntity` adlı bir varlık sınıfını tanımlar.
 
 ```csharp
 public class CustomerEntity : TableEntity
@@ -98,7 +99,7 @@ public class CustomerEntity : TableEntity
 }
 ```
 
-Tablo varlıkları kullanın ilgili işlemler `CloudTable` daha önce oluşturduğunuz nesne [erişim kodu tablolarında](#access-tables-in-code). `TableOperation` Nesneyi temsil ediyor, işlemin gerçekleştirilmesi için. Aşağıdaki kod örneğinde nasıl oluşturulacağını gösterir. bir `CloudTable` nesnesi ve bir `CustomerEntity` nesne. İşlemi hazırlamak için bir `TableOperation` müşteri varlığını tabloya yerleştirmek üzere oluşturulur. Son olarak, işlem çağrılarak çalıştırılır `CloudTable.ExecuteAsync`.
+Varlıklar ile ilgili tablo işlemleri, [kod Içindeki erişim tablolarında](#access-tables-in-code)daha önce oluşturduğunuz `CloudTable` nesnesini kullanır. @No__t-0 nesnesi, yapılacak işlemi temsil eder. Aşağıdaki kod örneği, `CloudTable` nesnesinin ve `CustomerEntity` nesnesinin nasıl oluşturulacağını gösterir. İşlemi hazırlamak için, müşteri varlığını tabloya eklemek üzere bir `TableOperation` oluşturulur. Son olarak, işlem `CloudTable.ExecuteAsync` çağırarak yürütülür.
 
 ```csharp
 // Create a new customer entity.
@@ -115,7 +116,7 @@ await peopleTable.ExecuteAsync(insertOperation);
 
 ## <a name="insert-a-batch-of-entities"></a>Toplu işlem varlık yerleştirme
 
-Birden çok varlık, bir tek bir yazma işleminde bir tabloya ekleyebilirsiniz. Aşağıdaki kod örneği iki varlık nesnesi ("Jeff Smith" ve "Ben Smith") oluşturur, eklenmeye bir `TableBatchOperation` kullanarak nesne `Insert` yöntemi, ve sonra işlemi çağrılarak başlatılır `CloudTable.ExecuteBatchAsync`.
+Tek bir yazma işleminde bir tabloya birden çok varlık ekleyebilirsiniz. Aşağıdaki kod örneği iki varlık nesnesi oluşturur ("Jeff Smith" ve "Ben Smith"), `Insert` metodunu kullanarak bunları `TableBatchOperation` nesnesine ekler ve sonra işlemi `CloudTable.ExecuteBatchAsync` çağırarak başlatır.
 
 ```csharp
 // Create the batch operation.
@@ -139,9 +140,9 @@ batchOperation.Insert(customer2);
 await peopleTable.ExecuteBatchAsync(batchOperation);
 ```
 
-## <a name="get-all-of-the-entities-in-a-partition"></a>Tüm varlıklar bir bölümde Al
+## <a name="get-all-of-the-entities-in-a-partition"></a>Bir bölümdeki tüm varlıkları al
 
-Bir bölümdeki varlıkların tümü için bir tabloyu sorgulamak üzere kullanmak bir `TableQuery` nesne. Aşağıdaki kod örneği, ‘Smith’in bölüm anahtarı olduğu varlıklar için bir filtre belirtir. Bu örnek sorgu sonuçlarındaki her varlığın alanlarını konsola yazdırır.
+Bir bölümdeki tüm varlıklar için bir tabloyu sorgulamak üzere `TableQuery` nesnesi kullanın. Aşağıdaki kod örneği, ‘Smith’in bölüm anahtarı olduğu varlıklar için bir filtre belirtir. Bu örnek sorgu sonuçlarındaki her varlığın alanlarını konsola yazdırır.
 
 ```csharp
 // Construct the query operation for all customer entities where PartitionKey="Smith".
@@ -162,9 +163,9 @@ do
 } while (token != null);
 ```
 
-## <a name="get-a-single-entity"></a>Tek bir varlık alma
+## <a name="get-a-single-entity"></a>Tek bir varlık alın
 
-Tek, belirli bir varlığı almak için sorgu yazabilirsiniz. Aşağıdaki kod bir `TableOperation` adlı 'Ben Smith' müşterisini belirlemek nesne. Yöntemi yalnızca bir varlık yerine bir koleksiyon, döndürülen değer döndürür ve `TableResult.Result` olduğu bir `CustomerEntity` nesne. Bir sorguda hem Bölüm hem de satır anahtarını belirterek olan en hızlı yolu, tek bir varlık kümesinden varlık alma `Table` hizmeti.
+Tek, belirli bir varlığı almak için bir sorgu yazabilirsiniz. Aşağıdaki kod, ' Ben Smith ' adlı bir müşteriyi belirtmek için `TableOperation` nesnesini kullanır. Yöntemi bir koleksiyon yerine yalnızca bir varlık döndürür ve `TableResult.Result` ' daki döndürülen değer bir `CustomerEntity` nesnesidir. Bir sorguda hem bölüm hem de satır anahtarlarının belirtilmesi, `Table` hizmetinden tek bir varlık almanın en hızlı yoludur.
 
 ```csharp
 // Create a retrieve operation that takes a customer entity.
@@ -182,7 +183,7 @@ else
 
 ## <a name="delete-an-entity"></a>Bir varlığı silme
 
-Bunu bulduktan sonra bir varlığı silebilirsiniz. Aşağıdaki kod arar ve "Ben Smith" adlı bir müşteri varlığı siler:
+Bulduğunuz bir varlığı, bulduktan sonra silebilirsiniz. Aşağıdaki kod, "Ben Smith" adlı bir müşteri varlığını arar ve siler:
 
 ```csharp
 // Create a retrieve operation that expects a customer entity.

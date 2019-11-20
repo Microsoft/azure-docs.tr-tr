@@ -1,6 +1,6 @@
 ---
-title: Microsoft Authenticator uygulamasını - Azure Active Directory için iş veya Okul hesabınızı ekleyin | Microsoft Docs
-description: İki aşamalı doğrulama için Microsoft Authenticator uygulaması için iş veya Okul hesabınızı eklemek nasıl.
+title: Bir kimlik doğrulayıcı uygulamasına iş veya okul hesabı ekleme-Azure AD
+description: İki öğeli doğrulama için iş veya okul hesabınızı Microsoft Authenticator uygulamasına ekleme.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -12,45 +12,49 @@ ms.date: 01/24/2019
 ms.author: lizross
 ms.reviewer: olhaun
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 231f3c44344f4119bab6e1efb5546e6fded0c784
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c7c9fa41a1278f0e1e54a06c3930e3bbc3d3d3ae
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60473880"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73803730"
 ---
-# <a name="add-your-work-or-school-account"></a>İş veya Okul hesabınızı ekleyin
-Kuruluşunuz iki Faktörlü doğrulama kullanıyorsa, iş veya Okul hesabınızı doğrulama yöntemlerinden biri olarak Microsoft Authenticator uygulamasını kullanmak için ayarlayabilirsiniz.
+# <a name="add-your-work-or-school-account"></a>İş veya okul hesabınızı ekleyin
+
+Kuruluşunuz iki öğeli doğrulama kullanıyorsa, iş veya okul hesabınızı doğrulama yöntemlerinden biri olarak Microsoft Authenticator uygulamayı kullanacak şekilde ayarlayabilirsiniz.
 
 >[!Important]
->Hesabınızı ekleyebilmeniz için önce indirin ve Microsoft Authenticator uygulamasını yüklemeniz gerekir. Henüz yapmadıysanız adımları [uygulamayı yükleyip](user-help-auth-app-download-install.md) makalesi.
+>Hesabınızı ekleyebilmeniz için önce Microsoft Authenticator uygulamasını indirmeniz ve kurmanız gerekir. Henüz yapmadıysanız, [uygulamayı indirme ve yükleme](user-help-auth-app-download-install.md) makalesindeki adımları izleyin.
 
-## <a name="add-your-work-or-school-account"></a>İş veya Okul hesabınızı ekleyin
+## <a name="add-your-work-or-school-account"></a>İş veya okul hesabınızı ekleyin
 
-1. Bilgisayarınızda Git [ek güvenlik doğrulaması](https://aka.ms/mfasetup) sayfası.
-
-    >[!Note]
-    >Görmüyorsanız **ek güvenlik doğrulaması** sayfasında mümkündür yöneticinize güvenlik bilgisi (Önizleme) deneyimi bırakmış. Bu durumda, yönergeleri izlemelidir [authenticator uygulamasını kullanmak için güvenlik bilgileri ' ayarlamak](security-info-setup-auth-app.md) bölümü. Durum bu değilse, kuruluşunuzun yardım masasına başvurmanız gerekecektir. Güvenlik bilgileri hakkında daha fazla bilgi için bkz: [güvenlik bilgisi (Önizleme) genel bakış](user-help-security-info-overview.md).
-
-2. Yanındaki kutuyu işaretleyin **Authenticator uygulamasını**ve ardından **yapılandırma**.
-
-    **Mobil uygulama yapılandırma** sayfası görüntülenir.
-    
-    ![QR kodunu sağlayan ekranı](./media/user-help-auth-app-download-install/auth-app-barcode.png)
-
-3. Microsoft Authenticator uygulamasını açın, **Hesap Ekle** gelen **özelleştirme ve Denetim** simgesini sağ üst köşede ve ardından **iş veya Okul hesabı**.
-
-4. QR kodu taraması için cihazınızın kamerasının kullanın **mobil uygulama yapılandırma** bilgisayarınızda ekran ve ardından **Bitti**.
+1. Bilgisayarınızda [ek güvenlik doğrulama](https://aka.ms/mfasetup) sayfasına gidin.
 
     >[!Note]
-    >Kameranız QR kodunu yakalamak üzere yapamıyorsa, hesap bilgilerinizi iki adımlı doğrulama için Microsoft Authenticator uygulamasını el ile ekleyebilirsiniz. Daha fazla bilgi ve bunu nasıl için bkz: [el ile hesabınızı eklemek](user-help-auth-app-add-account-manual.md).
+    >**Ek güvenlik doğrulama** sayfasını görmüyorsanız, yöneticiniz güvenlik bilgileri (Önizleme) deneyimini açmış olabilir. Bu durumda, [bir Authenticator uygulaması kullanmak için güvenlik bilgilerini ayarlama](security-info-setup-auth-app.md) bölümündeki yönergeleri izlemelisiniz. Böyle bir durum söz konusu değilse, yardım almak için kuruluşunuzun yardım masasına başvurmanız gerekir. Güvenlik bilgileri hakkında daha fazla bilgi için bkz. [güvenlik bilgileri (Önizleme) genel bakış](user-help-security-info-overview.md).
 
-5. Gözden geçirme **hesapları** hesabınızı emin olmak için Cihazınızda ekranında, sağ ve ilişkili altı basamaklı doğrulama kodu olduğunu. Ek güvenlik için her 30 saniyede birisi bir kod birden çok kez tüketmesini doğrulama kodunu değiştirir.
+2. **Authenticator uygulaması**' nın yanındaki kutuyu işaretleyin ve ardından **Yapılandır**' ı seçin.
+
+    **Mobil uygulamayı Yapılandır** sayfası görünür.
+
+    ![QR kodu sağlayan ekran](./media/user-help-auth-app-download-install/auth-app-barcode.png)
+
+3. Microsoft Authenticator uygulamasını açın, sağ üst köşedeki **Özelleştir ve denetim** simgesinden **Hesap Ekle** ' yi seçin ve sonra **iş veya okul hesabı**' nı seçin.
+
+    >[!Note]
+    >Microsoft Authenticator uygulamasını ilk kez ayarlıyorsanız, uygulamanın kameranıza erişmesine izin verip vermeyeceğinizi (iOS) veya uygulamanın resim almasına ve video (Android) kaydetmesine izin verip vermeyeceğinizi soran bir istem alabilirsiniz. Bir sonraki adımda QR kodunun bir resmini almak için, kimlik doğrulayıcı uygulamasının kameranıza erişebilmesi için **Izin ver** ' i seçmeniz gerekir. Kameraya izin vermezseniz, kimlik doğrulayıcı uygulamasını ayarlamaya devam edebilirsiniz, ancak kod bilgilerini el ile eklemeniz gerekir. Kodu el ile ekleme hakkında daha fazla bilgi için bkz. [uygulamaya el ile hesap ekleme](user-help-auth-app-add-account-manual.md).
+
+4. Bilgisayarınızda **mobil uygulama yapılandırma** ekranından QR kodunu taramak için cihazınızın kamerayı kullanın ve ardından **bitti**' yi seçin.
+
+    >[!Note]
+    >Kameranız QR kodunu yakalayamaz, iki öğeli doğrulama için hesap bilgilerinizi Microsoft Authenticator uygulamasına el ile ekleyebilirsiniz. Daha fazla bilgi ve nasıl yapılacağı hakkında daha fazla bilgi için, bkz. [hesabınızı el ile ekleme](user-help-auth-app-add-account-manual.md).
+
+5. Hesabınızın doğru olduğundan ve altı basamaklı bir doğrulama kodu olduğundan emin olmak için cihazınızdaki uygulamanın **hesaplar** ekranını gözden geçirin. Ek güvenlik için, doğrulama kodu her 30 saniyede bir kullanıcının kodu birden çok kez kullanmasını önler.
 
     ![Hesaplar ekranı](./media/user-help-auth-app-download-install/auth-app-accounts.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Hesaplarınız için uygulamayı ekledikten sonra kimlik doğrulayıcı uygulamasını Cihazınızda kullanarak oturum açabilirsiniz. Daha fazla bilgi için [uygulamayı kullanarak oturum](user-help-auth-app-sign-in.md).
+- Hesaplarınızı uygulamaya ekledikten sonra, cihazınızda kimlik doğrulayıcı uygulamasını kullanarak oturum açabilirsiniz. Daha fazla bilgi için bkz. [uygulamayı kullanarak oturum açma](user-help-auth-app-sign-in.md).
 
-- İOS çalıştıran cihazlar için hesap kimlik bilgilerinizi da yedekleyebilirsiniz ve hesaplarınızı sırası gibi uygulama ayarlarını bulutla ilgili. Daha fazla bilgi için [yedekleme ve Kurtarma Microsoft Authenticator uygulaması ile](user-help-auth-app-backup-recovery.md).
+- İOS çalıştıran cihazlarda, hesap kimlik bilgilerinizi ve hesaplarınızın sırası gibi ilgili uygulama ayarlarınızı buluta da yedekleyebilirsiniz. Daha fazla bilgi için bkz. [Microsoft Authenticator App Ile yedekleme ve kurtarma](user-help-auth-app-backup-recovery.md).

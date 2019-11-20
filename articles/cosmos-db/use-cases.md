@@ -1,129 +1,104 @@
 ---
-title: Yaygın kullanım örnekleri ve senaryoları için Azure Cosmos DB
-description: 'Azure Cosmos DB için beş kullanım örnekleri hakkında üst bilgi: kullanıcı oluşturulan içerik, olay günlüğü, veri Kataloğu, kullanıcı tercihlerini veri ve nesnelerin interneti (IOT).'
+title: Azure Cosmos DB için yaygın kullanım örnekleri ve senaryolar
+description: 'Azure Cosmos DB için en iyi beş kullanım durumu hakkında bilgi edinin: Kullanıcı tarafından oluşturulan içerik, olay günlüğü, Katalog verileri, Kullanıcı tercihleri verileri ve Nesnelerin İnterneti (IoT).'
 ms.service: cosmos-db
 author: SnehaGunda
 ms.author: sngun
 ms.topic: conceptual
 ms.date: 05/21/2019
-ms.openlocfilehash: 28a4cc854842b66a9fb61134e3ca9ac9a5f38fed
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: de2bc551547706fb820813e57996e77bf49148d1
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65965598"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73888928"
 ---
-# <a name="common-azure-cosmos-db-use-cases"></a>Yaygın Azure Cosmos DB kullanım örnekleri
-Bu makalede, Azure Cosmos DB için bazı ortak kullanım durumları için genel bir bakış sağlar.  Cosmos DB ile Uygulamanızı geliştirirken bu makaledeki önerileri bir başlangıç noktası olarak hizmet eder.   
+# <a name="common-azure-cosmos-db-use-cases"></a>Ortak Azure Cosmos DB kullanım örnekleri
+Bu makalede Azure Cosmos DB yönelik birkaç yaygın kullanım durumuna genel bakış sunulmaktadır.  Bu makaledeki öneriler, Cosmos DB uygulamanızı geliştirirken başlangıç noktası olarak görev yapar.   
 
-Bu makaleyi okuduktan sonra aşağıdaki soruları yanıtlamak mümkün olacaktır: 
+Bu makaleyi okuduktan sonra aşağıdaki soruları cevaplayabilirsiniz: 
 
-* Azure Cosmos DB için yaygın kullanım örnekleri nelerdir?
+* Azure Cosmos DB için genel kullanım örnekleri nelerdir?
 * Perakende uygulamaları için Azure Cosmos DB kullanmanın avantajları nelerdir?
-* Azure Cosmos DB, nesnelerin interneti (IOT) sistemleri için bir veri deposu olarak kullanmanın avantajları nelerdir?
-* Web ve mobil uygulamaları için Azure Cosmos DB kullanmanın avantajları nelerdir?
+* Nesnelerin İnterneti (IoT) sistemleri için veri deposu olarak Azure Cosmos DB kullanmanın avantajları nelerdir?
+* Web ve mobil uygulamalar için Azure Cosmos DB kullanmanın avantajları nelerdir?
 
 ## <a name="introduction"></a>Giriş
-[Azure Cosmos DB](../cosmos-db/introduction.md) Microsoft'un Global olarak dağıtılmış veritabanı hizmetidir. Hizmet, esnek bir biçimde (ve birbirinden bağımsız olarak) herhangi sayıda coğrafi bölgesinde aktarım hızını ve depolamayı ölçeklendirme müşterilerin izin vermek için tasarlanmıştır. Azure Cosmos DB, ilk Global olarak dağıtılmış veritabanı hizmeti pazarında bugün kapsamlı sunmaya [hizmet düzeyi sözleşmeleri](https://azure.microsoft.com/support/legal/sla/cosmos-db/) aktarım hızı, gecikme süresi, kullanılabilirlik ve tutarlılık. 
+[Azure Cosmos DB](../cosmos-db/introduction.md) , Microsoft 'un genel olarak dağıtılmış veritabanı hizmetidir. Hizmet, müşterilerin herhangi bir sayıda coğrafi bölgede esnek (ve bağımsız olarak) işleme ve depolamayı ölçeklendirmesine izin verecek şekilde tasarlanmıştır. Azure Cosmos DB, günümüzde Market, gecikme süresi, kullanılabilirlik ve tutarlılık dahil olmak üzere kapsamlı [hizmet düzeyi sözleşmeleri](https://azure.microsoft.com/support/legal/sla/cosmos-db/) sunan ilk genel olarak dağıtılmış veritabanı hizmetidir. 
 
-Azure Cosmos DB çok çeşitli uygulamalar ve kullanım örnekleri kullanılan bir genel dağıtılmış, çok modelli veritabanıdır. Herhangi bir için iyi bir seçenek olup [sunucusuz](https://azure.com/serverless) gereken milisaniye sipariş düşük yanıt süreleri ve hızlı bir şekilde ve küresel olarak ölçeklemek gereken uygulama. Birçok veri modelini destekler (anahtar-değer, belgeler, grafikler ve sütunlu) ve veriler için birçok API'lere erişim de dahil olmak üzere [Azure Cosmos DB'nin MongoDB API'si](mongodb-introduction.md), [SQL API](documentdb-introduction.md), [Gremlin API](graph-introduction.md), ve [tablolar API'SİNİN](table-introduction.md) yerel olarak ve Genişletilebilir bir şekilde. 
+Azure Cosmos DB, çok çeşitli uygulamalarda ve kullanım durumlarında kullanılan küresel bir dağıtılmış, çok modelli veritabanıdır. En az milisaniyelik yanıt süreleriyle ihtiyacı olan ve hızlı ve küresel olarak ölçeklendirilmesi gereken [sunucusuz](https://azure.com/serverless) bir uygulama için iyi bir seçimdir. Birden çok veri modelini (anahtar-değer, belge, grafik ve sütun) ve veri erişimi için [Azure Cosmos DB, MongoDB](mongodb-introduction.md), [SQL API](documentdb-introduction.md), [Gremlin API](graph-introduction.md)ve [tablo API 'si](table-introduction.md) yerel olarak ve genişletilebilir bir şekilde bir çok API 'yi destekler. 
 
-Azure Cosmos DB'nin genel kullanımına açma hedefimizde sahip yüksek performanslı uygulamalar için uygun hale bazı öznitelikleri şunlardır:
+Aşağıda, genel Ambition ile yüksek performanslı uygulamalar için iyi uygun hale gelen Azure Cosmos DB öznitelikleri verilmiştir.
 
-* Azure Cosmos DB, verilerinizi yüksek kullanılabilirlik ve ölçeklenebilirlik için yerel olarak bölümler. Azure Cosmos DB kullanılabilirlik, aktarım hızı, düşük gecikme süresi ve tutarlılık tutarlılıkla tek bölgeli tüm hesaplar ve çok bölgeli tüm hesaplar için % 99,99 oranında garanti sunar ve üzerinde çok bölgeli tüm veritabanı hesaplarında % 99,999 okunabilirlik.
-* Azure Cosmos DB, düşük gecikme süreli milisaniye sipariş yanıt süresi, SSD destekli depolama sahiptir.
-* Tam esneklik ve düşük maliyet / performans oranı için nihai, tutarlı ön ek, oturum ve sınırlanmış eskime tutarlılığı gibi tutarlılık düzeyleri için Azure Cosmos DB'nin desteği sağlar. Hiçbir veritabanı hizmeti olarak Azure Cosmos DB kadar esneklik düzeyleri tutarlılık sunar. 
-* Azure Cosmos DB, depolamayı ve aktarım hızını bağımsız olarak ölçümleri bir esnek veri kullanımı kolay fiyatlandırma modeline sahiptir.
-* Azure Cosmos DB'nin ayrılmış aktarım hızı modeli, CPU/bellek/IOPS temel alınan donanım yerine okuma/yazma sayısı bakımından düşünme olanak tanır.
-* Çok büyük bir istek birimlerine günlük trilyonlarca sırasına göre ölçeği azure Cosmos DB'nin tasarım olanak tanır.
+* Azure Cosmos DB yüksek kullanılabilirlik ve ölçeklenebilirlik için verilerinizi yerel olarak bölümlendirir. Azure Cosmos DB, kullanılabilirlik, aktarım hızı, düşük gecikme süresi ve tüm tek bölge hesapları ve gevşek tutarlılık ile tüm çok bölgeli hesaplar için% 99,99 garanti sağlar ve tüm çok bölgeli veritabanı hesaplarında% 99,999 okuma kullanılabilirliği sağlanır.
+* Azure Cosmos DB, düşük Gecikmeli yanıt süresi sırasına sahip SSD özellikli depolamaya sahiptir.
+* Azure Cosmos DB nihai, tutarlı ön ek, oturum ve sınırlı stalet gibi tutarlılık düzeylerine yönelik destek sayesinde tam esneklik ve düşük maliyetli performans oranı sağlanır. Bir veritabanı hizmeti, düzeyler tutarlılığı Azure Cosmos DB kadar esneklik sunar. 
+* Azure Cosmos DB, depolama ve aktarım hızını bağımsız olarak kapsayan esnek, veri kullanımı kolay bir fiyatlandırma modeline sahiptir.
+* Azure Cosmos DB için ayrılan aktarım hızı modeli, temel alınan donanımın CPU/bellek/IOPS 'si yerine okuma/yazma işlemlerinin sayısını düşünmenize olanak tanır.
+* Azure Cosmos DB tasarımı, günde çok sayıda istek hacimlerde çok büyük istek birimlerine ölçeklendirmenize olanak tanır.
 
-Bu öznitelikler faydalı web, mobil, oyun ve IOT uygulamaları düşük yanıt süreleri gerekir ve okuma ve yazma işlemleri büyük miktarda ele almanız gerekir.
+Bu öznitelikler, az yanıt süresi gerektiren Web, mobil, oyun ve IoT uygulamalarında faydalıdır ve çok büyük miktarlarda okuma ve yazma işlemlerini ele almanız gerekir.
 
 ## <a name="iot-and-telematics"></a>IoT ve telematikler
-IOT kullanım örnekleri, yaygın olarak nasıl bunlar, işlem, içe alma, bazı desen ve veri depolayın.  İlk olarak, bu sistemler çeşitli gezinin cihaz sensörlerden alınan verilerin ani artışlara alabilen gerekir. Ardından, bu sistemler işleyebilir ve gerçek zamanlı Öngörüler akış verilerini analiz edin. Verileri toplu analiz için soğuk depolama için ardından arşivlenir. Microsoft Azure IOT için uygulanabilir zengin Hizmetleri Azure Cosmos DB, Azure Event Hubs, Azure Stream Analytics, Azure bildirim hub'ı, Azure Machine Learning, Azure HDInsight ve Power BI dahil olmak üzere kullanım sunar. 
+IoT kullanım örnekleri, verileri alma, işleme ve depolama gibi bazı desenleri yaygın olarak paylaşır.  İlk olarak, bu sistemlerin çeşitli yerel ayarlara ait cihaz sensörlerinden veri alımı gerekir. Ardından, bu sistemler gerçek zamanlı içgörüler elde etmek için akış verilerini işler ve analiz eder. Veriler daha sonra Batch Analytics için soğuk depolamaya arşivlenir. Microsoft Azure, Azure Cosmos DB, Azure Event Hubs, Azure Stream Analytics, Azure Notification Hub, Azure Machine Learning, Azure HDInsight ve Power BI gibi IoT kullanım durumları için uygulanabilen zengin hizmetler sunar. 
 
-![Azure Cosmos DB IOT başvuru mimarisi](./media/use-cases/iot.png)
+![Azure Cosmos DB IoT başvuru mimarisi](./media/use-cases/iot.png)
 
-Düşük gecikme süresi ile yüksek aktarım hızı veri alımı sunduğu veri ani artışlara Azure olay hub'ları tarafından aktarılabilir. İçin gerçek zamanlı öngörülere işlenmesi gereken alınan verileri gerçek zamanlı analiz için Azure Stream Analytics'e funneled. Geçici sorgulama için Azure Cosmos DB'ye veri yüklenebilir. Azure Cosmos DB'ye veriler yüklendikten sonra veri sorgulanacağı hazırdır. Ayrıca, yeni veri ve mevcut verilerde yapılan değişiklikleri değişiklik akışı üzerinde okunabilir. Değişiklik akışı kalıcı bir ise, Cosmos DB kapsayıcıları yapılan sıralı bir düzende depolayan günlük ekleme. Tüm veriler veya yalnızca Azure Cosmos DB'de veri değişiklikleri, başvuru verileri gerçek zamanlı analiz parçası olarak kullanılabilir. Ayrıca, veriler daha fazla iyileştirilmektedir ve Azure Cosmos DB veri için HDInsight Pig, Hive veya Map/Reduce işleri bağlanarak işlenen.  Daraltılmış veri Azure Cosmos DB geri yüklenir ve raporlama için.   
+Düşük gecikme süresine sahip yüksek aktarım hızı veri alımı sağladığından Azure Event Hubs veri kaynakları tarafından alınabilir. Gerçek zamanlı içgörüler için işlenmesi gereken veriler gerçek zamanlı analizler için Azure Stream Analytics. Veriler, geçici sorgulama için Azure Cosmos DB yüklenebilir. Veriler Azure Cosmos DB ' ye yüklendikten sonra, veriler sorgulanmaya uygulanabilir. Ayrıca, yeni veriler ve mevcut verilerde yapılan değişiklikler değişiklik akışında okunabilir. Değişiklik akışı, yalnızca Cosmos kapsayıcılarındaki değişiklikleri sıralı sırada depolayan kalıcı, yalnızca bir Append günlüğü. Tüm veriler veya yalnızca Azure Cosmos DB verilerde yapılan değişiklikler gerçek zamanlı analizler için başvuru verileri olarak kullanılabilir. Ayrıca, veriler, Pig, Hive veya eşleme/azaltma işleri için Azure Cosmos DB verileri HDInsight 'a bağlayarak daha sonra yeniden görüntülenebilir ve işlenebilir.  Daha sonra raporlama için Azure Cosmos DB arka arkaya veriler yüklenir.   
 
-Azure Cosmos DB, EventHubs ve Storm kullanarak örnek bir IOT çözüm için bkz: [hdınsight storm örnekleri GitHub deposunda](https://github.com/hdinsight/hdinsight-storm-examples/).
+Azure Cosmos DB, EventHubs ve fırtınası kullanan örnek bir IoT çözümü için [GitHub 'da HDInsight-fırtınası-örnekler deposuna](https://github.com/hdinsight/hdinsight-storm-examples/)bakın.
 
-IOT için Azure teklifleri hakkında daha fazla bilgi için bkz. [kendi nesnelerin interneti oluşturma](https://www.microsoft.com/en-us/internet-of-things). 
+IoT için Azure teklifleri hakkında daha fazla bilgi için bkz. [öğelerinizi Internet 'Te oluşturma](https://www.microsoft.com/en-us/internet-of-things). 
 
 ## <a name="retail-and-marketing"></a>Perakende ve pazarlama
-Azure Cosmos DB, Windows Store ve XBox Live çalıştıran Microsoft'un kendi e-ticaret platformları, yaygın olarak kullanılır. Olay kaynağını belirleme sipariş işleme komut zincirlerini ve kataloğu verilerini depolamak için perakende sektöründe de kullanılır.
+Azure Cosmos DB, Microsoft 'un Windows Mağazası ve XBox Live çalıştıran kendi e-ticaret platformlarında yaygın olarak kullanılır. Ayrıca, katalog verilerini depolamak için perakende sektöründe ve işlem hatları sırasında olay kaynağını belirleme için de kullanılır.
 
-Kataloğu veri kullanım senaryoları, depolama ve sorgulama kişiler, yerler ve ürünleri gibi varlıklar için bir dizi içerir. Bazı Kataloğu veri kullanıcı hesapları, ürün kataloglarını, IOT cihazı kayıt defterlerini ve fatura malzemeleri sistemlerinin örnekleridir. Bu veriler için öznitelikler değişebilir ve zaman içinde uygulama gereksinimlerine uyacak şekilde değiştirebilirsiniz.
+Katalog veri kullanımı senaryoları, kişiler, Yerlerim ve ürünler gibi varlıklar için bir dizi özniteliğin depolanmasını ve sorgulanmasını içerir. Katalog verilerine ilişkin bazı örnekler Kullanıcı hesapları, ürün katalogları, IoT cihaz kayıt defterleri ve ürün reçeteleri sistemleridir. Bu verilerin öznitelikleri farklılık gösterebilir ve uygulama gereksinimlerine uyacak zaman içinde değişebilir.
 
-Bir ürün kataloğu örneği için bir otomotiv parçaları tedarikçi göz önünde bulundurun. Her bölüm kendi öznitelikleri paylaşan tüm bölümleri ortak öznitelikleri yanı sıra olabilir. Ayrıca, özel bir bölümü için öznitelikler, yeni bir modeli yayınlandığında aşağıdaki yıl değiştirebilirsiniz. Azure Cosmos DB, esnek şemalar ve hiyerarşik veri destekler ve bu nedenle, ürün kataloğu verilerini depolamak için uygundur.
+Bir Oto için bölüm sağlayıcısı için bir ürün kataloğu örneği düşünün. Her parçanın, tüm parçaların paylaştığı ortak özniteliklere ek olarak kendi öznitelikleri olabilir. Ayrıca, belirli bir bölümün öznitelikleri, yeni bir model yayınlandığında aşağıdaki yılı değiştirebilir. Azure Cosmos DB esnek şemaları ve hiyerarşik verileri destekler ve bu nedenle ürün kataloğu verilerini depolamak için uygundur.
 
-![Azure Cosmos DB perakende Kataloğu başvuru mimarisi](./media/use-cases/product-catalog.png)
+![Azure Cosmos DB Retail Catalog başvuru mimarisi](./media/use-cases/product-catalog.png)
 
-Azure Cosmos DB, için güç aktivita typu EventDriven mimarileri kullanarak olay kaynağını belirleme için sık sık kullanılır, [değişiklik akışını](change-feed.md) işlevselliği. Değişiklik akışı, aşağı akış mikro Hizmetleri güvenilir bir şekilde ve artımlı olarak ekler ve bir Azure Cosmos DB için yapılan güncelleştirmeler (örneğin, sipariş olayları) okuma yeteneği sağlar. Durum değiştirme olayları ve birçok mikro hizmetler arasında sürücü sipariş işleme iş akışı kalıcı olay deposuna bir ileti aracısı olarak sağlamak için bu işlevi yararlanılabilir (hangi uygulanabilir olarak [sunucusuz Azure işlevleri](https://azure.com/serverless)).
+Azure Cosmos DB, genellikle [değişiklik akışı](change-feed.md) işlevselliğini kullanarak güç olayı odaklı mimarilere yönelik olay kaynağı olarak kullanılır. Değişiklik akışı, aşağı akış mikro hizmetleri 'nin bir Azure Cosmos DB yapılan eklemeleri ve güncelleştirmeleri (örneğin, sipariş olayları) güvenilir ve artımlı olarak okumasına olanak sağlar. Bu işlevsellik, kalıcı bir olay mağazasının durum değiştirme olayları ve çok sayıda mikro hizmet arasında ( [sunucusuz Azure işlevleri](https://azure.com/serverless)olarak uygulanabilecek) sürücü sırası işleme iş akışını sağlamak için bir ileti Aracısı olarak yararlanılabilir olabilir.
 
-![Azure Cosmos DB ile işlem hattı başvuru mimarisi sıralama](./media/use-cases/event-sourcing.png)
+![Azure Cosmos DB sıralama işlem hattı başvuru mimarisi](./media/use-cases/event-sourcing.png)
 
-Ayrıca, Apache Spark işleri aracılığıyla büyük veri analizi için HDInsight ile Azure Cosmos DB'de depolanan verileri tümleştirilebilir. Azure Cosmos DB için Spark Bağlayıcısı hakkında daha fazla bilgi için bkz: [HDInsight ve Cosmos DB ile bir Spark işi çalıştırma](spark-connector.md).
+Ayrıca, Azure Cosmos DB depolanan veriler, Apache Spark işleri aracılığıyla büyük veri analizi için HDInsight ile tümleştirilebilir. Azure Cosmos DB Spark Bağlayıcısı hakkında daha fazla bilgi için bkz. [Cosmos DB ve HDInsight Ile Spark Işi çalıştırma](spark-connector.md).
 
 ## <a name="gaming"></a>Oyun
-Veritabanı katmanı, oyun uygulamaları, önemli bir bileşenidir. Modern oyunlar grafik işleme mobile/konsol istemcilerde gerçekleştirir, ancak bulutta oyun içi istatistikler, sosyal medya tümleştirmesine ve yüksek puan tabloları gibi özelleştirilmiş ve kişiselleştirilmiş içerik sağlamak için kullanır. Oyunlar genellikle okuma için tek milisaniyelik gecikme süreleri gerektiren ve oyun içi deneyimi bir ilgi çekici sağlamak için yazar. Oyun veritabanını hızlı ve istek hızları büyük artış işleme sırasında yeni oyun başlatır ve özellik güncelleştirmeleri olması gerekir.
+Veritabanı katmanı, oyun uygulamalarının önemli bir bileşenidir. Modern Oyunlar Mobil/konsol istemcilerinde grafik işleme gerçekleştirir, ancak oyun içi istatistikler, sosyal medya tümleştirme ve yüksek puanı olan öncü kartlar gibi özelleştirilmiş ve kişiselleştirilmiş içerikler sunmak için buluta bağımlıdır. Oyunlar, her zaman ilgi çekici bir oyun deneyimi sağlamak için okuma ve yazma işlemleri için tek milisaniyelik gecikme süreleri gerektirir. Bir oyun veritabanının hızlı olması ve yeni oyun başlatma ve özellik güncelleştirmeleri sırasında istek hızlarında büyük ani artışlar işleyebilmeleri gerekir.
 
-Azure Cosmos DB gibi oyunlar tarafından kullanılan [The Walking Dead: No Man's Land](https://azure.microsoft.com/blog/the-walking-dead-no-mans-land-game-soars-to-1-with-azure-documentdb/) tarafından [sonraki oyunları](https://www.nextgames.com/), ve [Halo 5: Veli](https://azure.microsoft.com/blog/how-halo-5-guardians-implemented-social-gameplay-using-azure-documentdb/). Azure Cosmos DB, Oyun geliştiriciler için aşağıdaki avantajları sağlar:
+Azure Cosmos DB, yürüyen ölü gibi Oyunlar tarafından kullanılır: [sonraki oyunlara](https://www.nextgames.com/)ve [Halo 5: velileri](https://azure.microsoft.com/blog/how-halo-5-guardians-implemented-social-gameplay-using-azure-documentdb/)tarafından [hiçbir Man 'ın ARAI](https://azure.microsoft.com/blog/the-walking-dead-no-mans-land-game-soars-to-1-with-azure-documentdb/) . Azure Cosmos DB, oyun geliştiricileri için aşağıdaki avantajları sağlar:
 
-* Azure Cosmos DB performans ölçeklenmesine olanak sağlayan esnek bir şekilde aşağı veya yukarı. Bu, tek bir API çağrısı yaparak güncelleştirme profili ve düzinelerce gelen istatistikleri eşzamanlı oyuncular milyonlarca işlemek oyunlar sağlar.
-* Azure Cosmos DB milisaniyelik okuma destekler ve oyun sırasında tüm aksamalar önlemeye yardımcı olmak yazar.
-* Azure Cosmos DB'nin otomatik dizin oluşturma sağlayan gerçek zamanlı birden çok farklı özelliklere göre filtre uygulamak için örneğin, oyuncuların kendi iç player kimlikleri tarafından bulun veya kendi GameCenter, Facebook, Google kimlikleri veya sorgu tabanlı bir guild player üyeliği. Karmaşık dizin oluşturma veya parçalama altyapısı oluşturmaya gerek kalmadan bu mümkündür.
-* Oyun içi sohbet iletileri, oynatıcı guild üyelikleri, tamamlanan zorlukları, yüksek puan tabloları ve sosyal grafikleri de dahil olmak üzere sosyal özelliklerini esnek bir şema ile uygulamak daha kolaydır.
-* Bir yönetilen platform-bir hizmet olarak (PaaS) olarak Azure Cosmos DB, minimal kurulumu ve yönetimi için hızlı yineleme izin vermek için çalışma ve pazarlama süresini azaltmak gereklidir.
+* Azure Cosmos DB, performansının ölçeğini artırma veya azaltma esnek sağlar. Bu, oyunların tek bir API çağrısı yaparak düzinelerce ve milyonlarca eşzamanlı oyuncuya ait profil ve istatistikleri güncelleştirme işlemesini sağlar.
+* Azure Cosmos DB, oyun yürütme sırasında herhangi bir lags kullanmaktan kaçınmak için milisaniyelik okuma ve yazma işlemlerini destekler.
+* Azure Cosmos DB otomatik dizin oluşturma, birden çok farklı özelliğe karşı gerçek zamanlı olarak filtrelemeye olanak tanır. Örneğin, kendi iç oynatıcı kimliklerine ya da oyun merkezi, Facebook, Google kimliklerini veya bir Guild 'de oynatıcı üyeliğine bağlı olarak sorgu veya sorgu için oyuncuları bulun. Bu, karmaşık dizin oluşturma veya parçalama altyapısı oluşturmadan mümkündür.
+* Oyun içi sohbet iletileri, oynatıcı Guld üyelikleri, tamamlanan sorunlar, yüksek puanı olan en yüksek puan ve sosyal grafikler, esnek bir şema ile daha kolay bir şekilde uygulanır.
+* Yönetilen bir hizmet olarak platform (PaaS) olarak Azure Cosmos DB hızlı yineleme için en az kurulum ve yönetim çalışması gerekir ve pazara ulaşma süresini azaltır.
 
-![Azure Cosmos DB oyun başvuru mimarisi](./media/use-cases/gaming.png)
+![Azure Cosmos DB Gaming Reference mimarisi](./media/use-cases/gaming.png)
 
 ## <a name="web-and-mobile-applications"></a>Web uygulamaları ve mobil uygulamalar
-Azure Cosmos DB, web ve mobil uygulamaları içinde yaygın olarak kullanılır ve üçüncü taraf hizmetleri ile zengin, kişiselleştirilmiş deneyimler oluşturmak için tümleştirme sosyal etkileşimleri modellemek için oldukça uygundur. Cosmos DB SDK'ları kullanılan yapı zengin iOS ve Android uygulamaları popüler kullanarak olabilir [Xamarin framework](mobile-apps-with-xamarin.md).  
+Azure Cosmos DB genellikle Web ve mobil uygulamalarda kullanılır ve sosyal etkileşimleri modellemeye, üçüncü taraf hizmetlerle tümleştirilmesine ve zengin kişiselleştirilmiş deneyimler oluşturmaya yönelik oldukça uygundur. Cosmos DB SDK 'Ları, popüler [Xamarin çerçevesini](mobile-apps-with-xamarin.md)kullanarak zengin IOS ve Android uygulamaları oluşturmak için kullanılabilir.  
 
 ### <a name="social-applications"></a>Sosyal uygulamalar
-Azure Cosmos DB için ortak kullanım durumu depolamak ve kullanıcı tarafından oluşturulan içerikler (UGC) sorgulamak için web, mobil ve sosyal medya uygulamalarını gösterir. Bazı UGC sohbet oturumları, tweetleri, blog gönderileri, derecelendirmeleri ve açıklamaları örnekleridir. Genellikle, sosyal medya uygulamalarda UGC serbest biçimli metin, özellikleri, etiketler ve katı yapısı tarafından sınırlanan değil ilişkileri hızının birleşimidir. Sohbetleri gibi içerik, yorumları ve gönderileri Cosmos DB'de dönüşümlerini veya karmaşık nesne ilişkisel eşleme katmanlara gerek kalmadan depolanabilir.  Veri özellikleri, eklenemez veya geliştiriciler uygulama kodu, bu nedenle hızlı geliştirme yükseltme yineleme gibi gereksinimlerini karşılamak için kolayca değiştirilemez.  
+Azure Cosmos DB için yaygın olarak kullanılan bir kullanım örneği, Web, mobil ve sosyal medya uygulamaları için Kullanıcı tarafından oluşturulan içeriği (UGC) depolamanıza ve sorgulayamaz. Bazı UGC örnekleri sohbet oturumları, çimler, blog gönderileri, derecelendirmeler ve açıklamalardır. Genellikle, sosyal medya uygulamalarında UıGC, ggıd yapısıyla sınırlı olmayan, serbest biçimli metin, özellikler, Etiketler ve ilişkilerin bir karışımdır. Sohbetleri gibi içerik, yorumları ve gönderileri Cosmos DB'de dönüşümlerini veya karmaşık nesne ilişkisel eşleme katmanlara gerek kalmadan depolanabilir.  Veri özellikleri, geliştiriciler uygulama kodu üzerinde yineleme yaparken gereksinimlere kolayca eklenebilir veya değiştirilebilir, böylece hızlı geliştirmeyi yükseltmektedir.  
 
-Üçüncü taraf sosyal ağlarla tümleştirme uygulamaları bu ağlardan şemaları değişen yanıt vermesi gerekir. Verileri Cosmos DB'de varsayılan olarak otomatik olarak dizine gibi verileri dilediğiniz zaman sorgulanması hazırdır. Bu nedenle, bu uygulamaları kendi gereksinimlerine göre projeksiyonlar alınacak esnekliğine sahipsiniz.
+Üçüncü taraf sosyal ağlarla tümleşen uygulamalar bu ağlardan değişen şemaları vermelidir. Veriler Cosmos DB varsayılan olarak otomatik olarak dizinlendiğinden, veriler istediğiniz zaman sorgulanmaya hazır olur. Bu nedenle, bu uygulamaların ilgili ihtiyaçlarına göre projeksiyonal esnekliği vardır.
 
-Sosyal uygulamalar birçoğu, global bir ölçekte alıştırmanızı ve öngörülemeyen kullanım düzenlerine gösteriyor. Veri deposunun ölçeklendirme esneklik, kullanım talebini eşleştirmek için uygulama katmanı olarak gereklidir.  Bir Cosmos DB hesabı altında ek veri bölümlerine ekleyerek ölçeği genişletebilirsiniz.  Ayrıca, birden çok bölgede başka bir Cosmos DB hesabı da oluşturabilirsiniz. Cosmos DB hizmetini bölge kullanılabilirliği için bkz: [Azure bölgeleri](https://azure.microsoft.com/regions/#services).
+Birçok sosyal uygulamalar küresel ölçekte çalışır ve tahmin edilemeyen kullanım desenleri oluşturabilir. Veri deposunun ölçeklendirilmesi, uygulama katmanı kullanım talebini eşleşecek şekilde ölçeklendirildiği için önemlidir.  Cosmos DB bir hesap altına ek veri bölümleri ekleyerek ölçeği değiştirebilirsiniz.  Ayrıca, birden çok bölgede daha fazla Cosmos DB hesap oluşturabilirsiniz. Cosmos DB hizmet bölgesi kullanılabilirliği için bkz. [Azure bölgeleri](https://azure.microsoft.com/regions/#services).
 
-![Azure Cosmos DB web uygulaması başvuru mimarisi](./media/use-cases/apps-with-global-reach.png)
+![Azure Cosmos DB Web uygulaması başvuru mimarisi](./media/use-cases/apps-with-global-reach.png)
 
 ### <a name="personalization"></a>Kişiselleştirme
-Günümüzde, modern uygulamalar, karmaşık görünümleri ve deneyimleri ile gelir. Kullanıcı tercihleri veya ruh yemek ve gereksinimlerini markalama genellikle dinamik şunlardır. Bu nedenle, uygulamaları etkili bir şekilde kullanıcı Arabirimi öğeleri ve deneyimlerini hızla oluşturmasına imkan kişiselleştirilmiş ayarları alabilmesi gerekir. 
+Günümüzde, modern uygulamalar karmaşık görünümler ve deneyimlerle gelir. Bunlar genellikle dinamik, kullanıcı tercihlerine veya Moods ve marka ihtiyaçlarına göre yapılır. Bu nedenle, uygulamaların kullanıcı arabirimi öğelerini ve deneyimleri hızla işlemesini sağlamak için kişiselleştirilmiş ayarları etkili bir şekilde alabilmesi gerekir. 
 
-JSON, Cosmos DB tarafından desteklenen bir biçim, yalnızca basit değildir ancak JavaScript tarafından kolayca yorumlanabilir UI düzen verilerini göstermek için etkili bir biçimidir. Cosmos DB, hızlı okuma yazma gecikme süresi düşük ile izin ver ayarlanabilir tutarlılık düzeyi sunar. Bu nedenle, Cosmos DB'de JSON belgeleri olarak kişiselleştirilmiş ayarları dahil olmak üzere kullanıcı Arabirimi düzen verilerini depolamak, kablo bu verileri almak için etkili bir anlamına gelir.
+Cosmos DB tarafından desteklenen bir biçim olan JSON, UI düzen verilerini yalnızca hafif olmadığından ve JavaScript tarafından kolayca yorumlanabilecek şekilde temsil edecek biçimde etkili bir biçimdir. Cosmos DB, düşük gecikmeli yazmalar ile hızlı okuma olanağı sağlayan, ayarlanabilir tutarlılık düzeyleri sunar. Bu nedenle, kişiselleştirilmiş ayarlar dahil olmak üzere Kullanıcı arabirimi düzen verilerini Cosmos DB JSON belgeleri olarak depolamak, bu verilerin hatta hatta olması için etkili bir araçtır.
 
-![Azure Cosmos DB web uygulaması başvuru mimarisi](./media/use-cases/personalization.png)
+![Azure Cosmos DB Web uygulaması başvuru mimarisi](./media/use-cases/personalization.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Cosmos DB'yi kullanmaya başlamak için izleyin bizim [hızlı başlangıçlar](create-sql-api-dotnet.md), bu yol, bir hesap ve Cosmos DB'yi kullanmaya başlama oluşturma işleminde. 
 
-Veya daha fazla bilgi istiyorsanız, Cosmos DB kullanan müşteriler hakkında aşağıdaki müşteri hikayeleri kullanılabilir:
+* Azure Cosmos DB kullanmaya başlamak için [hızlı başlangıç](create-sql-api-dotnet.md)deneyimimizi izleyin. Bu, bir hesap oluşturma ve Cosmos DB kullanmaya başlama konusunda size yol gösterir.
 
-* [Jet.com](https://jet.com). E-ticaret girişimcisi, üst diken, Microsoft bulutunda çalışıyor, Cosmos DB global bir ölçekte yararlanır.
-* [Asos.com'un](https://www.asos.com/). Asos.com'un bir İngiliz çevrimiçi moda ve koyabileceğiniz deposudur. Asos, öncelikle genç yetişkinlere yönelik, üzerinde 850 markalar ve bunun yanı sıra kendi dizi giysi ve Donatılar satar.
-* [Toyota](https://www.toyota.com/). Toyota Motor Japonca bir otomotiv üreticisi bir şirkettir. Toyota, Cosmos DB küresel IOT uygulama için kullanılabilir.
-* [Citrix](https://customers.microsoft.com/story/citrix). Azure Service Fabric ve Azure Cosmos DB'yi kullanarak çoklu oturum açma çözümü Citrix geliştirir
-* [TEXA](https://customers.microsoft.com/story/texaspa) TEXA'ın Devrim niteliğindeki IOT çözüm vehicle sahipleri için saat, para, doğalgaz yardımcı olur — ve büyük olasılıkla yaşar.
-* [Domino'nın Pizza](https://www.dominos.com). Domino'nın Pizza Inc. bir Amerikan pizza Restoran zinciri olur.
-* [Johnson denetimleri](https://www.johnsoncontrols.com). Johnson denetimler, genel büyük teknoloji ve çok çeşitli müşteriler 150'den fazla ülkede/bölgede hizmet çok endüstriyel lider ' dir.
-* [Microsoft Windows, Evrensel Store, Azure IOT Hub, Xbox Live ve diğer Internet ölçeğindeki Hizmetler](https://azure.microsoft.com/blog/how-azure-documentdb-planet-scale-nosql-helps-run-microsoft-s-own-businesses/). Nasıl Microsoft Azure Cosmos DB'yi kullanarak yüksek düzeyde ölçeklenebilir hizmetler oluşturur.
-* [Microsoft Data ve analiz ekibi](https://customers.microsoft.com/story/microsoftdataandanalytics). Microsoft'un veri ve analiz ekibi, Azure Cosmos DB ile dünya ölçeğinde büyük veri koleksiyonu sağlar
-* [Sulekha.com](https://customers.microsoft.com/story/sulekha-uses-azure-documentdb-to-connect-customers-and-businesses-across-india). Sulekha, müşteriler ve işletmeler Hindistan bağlanmak için Azure Cosmos DB kullanır.
-* [NewOrbit](https://customers.microsoft.com/story/neworbit-takes-flight-with-azure-documentdb). Azure Cosmos DB ile uçuş NewOrbit alır.
-* [Affinio](https://customers.microsoft.com/doclink/affinio-switches-from-aws-to-azure-documentdb-to-harness-social-data-at-scale). Affinio, sosyal verilerden uygun ölçekte yararlanmasına için Azure Cosmos DB için AWS'den geçer.
-* [Sonraki oyunları](https://azure.microsoft.com//blog/the-walking-dead-no-mans-land-game-soars-to-1-with-azure-documentdb/). Kullanılmayan yürüyen: No Man's Land oyunu, Azure Cosmos DB tarafından desteklenen #1 numaraya yükseliyor.
-* [Halo](https://azure.microsoft.com/blog/how-halo-5-guardians-implemented-social-gameplay-using-azure-documentdb/). Nasıl Halo 5, Azure Cosmos DB kullanarak sosyal oyun deneyimini uygulanır.
-* [Cortana Analytics Galerisi](https://azure.microsoft.com/blog/cortana-analytics-gallery-a-scalable-community-site-built-on-azure-documentdb/). Cortana Analytics Galerisi - Azure Cosmos DB üzerinde oluşturulmuş ölçeklenebilir topluluk sitesi.
-* [Meltem](https://customers.microsoft.com/Pages/CustomerStory.aspx?recid=18602). Entegratörü önde gelen esnek bulut teknolojileri birkaç dakika içinde çok uluslu firmaları genel bilgiler sağlar.
-* [Haber Cumhuriyeti](https://customers.microsoft.com/Pages/CustomerStory.aspx?recid=18639). Katılımcı vatandaşlar için bilgi amaçlı ile haberi zeka ekleme. 
-* [SGS International](https://customers.microsoft.com/Pages/CustomerStory.aspx?recid=18653). Dünya genelinde tutarlı rengini büyük markaların kartlarını SGS için etkinleştirin. Ve Azure'a SGS kapatır.
-* [Telenor](https://customers.microsoft.com/Pages/CustomerStory.aspx?recid=18608). Küresel lider Telenor hızına ile Bulutu kullanıyor. 
-* [XOMNI](https://customers.microsoft.com/Pages/CustomerStory.aspx?recid=18667). Deponun geleceğin hızlı arama ve kolay veri akışı üzerinde çalışır.
-* [Nucleo](https://customers.microsoft.com/story/azure-based-software-platform-breaks-down-barriers-bet). Azure tabanlı bir yazılım platformu, işletmelere ve müşteriler arasındaki engelleri ayırır
-* [Weka](https://customers.microsoft.com/story/weka-smart-fridge-improves-vaccine-management-so-more-people-can-be-protected-against-diseases). Weka akıllı Fridge daha fazla insanın hastalıklara karşı korunması için aşı yönetimini geliştirdi
-* [Turuncu Tribes](https://customers.microsoft.com/story/theres-more-to-that-food-app-than-meets-the-eye-or-the-mouth). Gıda uygulamanın göz veya konuşurken karşılayıp daha çok daha fazlası vardır.
-* [Real Madrid'in](https://customers.microsoft.com/story/real-madrid-brings-the-stadium-closer-to-450-million-f). Real Madrid stadyumu 450 milyon Microsoft Cloud ile ayağına getiriyor.
-* [Tuku](https://customers.microsoft.com/story/tuku-makes-car-buying-fun-with-help-from-azure-services). Azure hizmetlerinin yardımıyla eğlenceli satın araba TUKU yapar
+* Azure Cosmos DB kullanarak müşteriler hakkında daha fazla bilgi edinmek istiyorsanız [Müşteri örnek olay incelemeleri](https://azure.microsoft.com/case-studies/?service=cosmos-db) sayfasına bakın.

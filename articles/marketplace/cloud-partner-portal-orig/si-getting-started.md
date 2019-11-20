@@ -1,63 +1,64 @@
 ---
-title: Satıcı Insights'ı kullanmaya başlama
-description: Bulut iş ortağı Portalı'nın satıcı öngörü özelliği giriş.
+title: Satıcı öngörüleri ile çalışmaya başlama
+description: Bulut İş Ortağı Portalı 'nin satıcı öngörüleri özelliğine giriş.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/14/2018
 ms.author: pabutler
-ms.openlocfilehash: 6c903c87bc153864381a3f1763afaeeb7796090a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d335525a23ca2e1442ae009dcfbc062bff8cc77d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943054"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824760"
 ---
-<a name="getting-started-with-seller-insights"></a>Satıcı Insights'ı kullanmaya başlama
+<a name="getting-started-with-seller-insights"></a>Satıcı öngörüleri ile çalışmaya başlama
 ====================================
 
-Bu makalede, içinde bulunan satıcı Insights özelliğini anlatılmaktadır [bulut iş ortağı portalı](https://cloudpartner.azure.com/#insights).
+Bu makalede, [bulut iş ortağı portalı](https://cloudpartner.azure.com/#insights)dahilinde sunulan satıcı öngörüleri özelliği ele alınmaktadır.
 
 
-<a name="insights-tour"></a>Insights turu
+<a name="insights-tour"></a>Öngörüler turu
 -------------
 
-Bulut iş ortağı portalı, Azure ve VS Market müşterileri ve kullanımı ile ilgili Öngörüler sunar. Çeşitli veri ve en büyük olasılıkla etkileşime gireceğini ınsights hızlı bir genel bakış aşağıda verilmiştir.
+Bulut İş Ortağı Portalı, Azure ve VS Market müşterileriniz ve kullanımınız ile ilgili öngörüler sunar. En iyi şekilde etkileşimde bulunabileceğine ilişkin çeşitli veri ve Öngörüler hakkında hızlı bir genel bakış sunulmaktadır.
 
 <a name="top-navigation-bar"></a>Üst gezinti çubuğu
 ------------------
 
-Seçtikten sonra **Insights** sol menü çubuğundan ınsights modüllerine erişiminiz belirten üst kısımdaki gezinti çubuğunda görürsünüz.
+Sol menü çubuğundan **Öngörüler** ' i seçtikten sonra, en üstte hangi öngörülere erişiminizin olduğunu gösteren bir gezinti çubuğu görürsünüz.
 
-1.  **Özet** - bu grafik, sekme gösterir eğilimler ve verinin değerleri olan yayımcılar tarafından sonra en çok Aranan.
+1.  **Özet** -Bu sekme, yayımcılar tarafından daha sonra aranan verilerin grafiklerini, eğilimlerini ve değerlerini gösterir.
 
-2.  **Ödeme** -Bu sekme, ödemeler ve graflar ve indirilebilir biçimleri ilgili işlemleri hakkında bilgileri gösterir.
+2.  **Ödeme** -Bu sekmede, grafikler ve indirilebilir biçimlerdeki ödemeler ve ilgili işlemler hakkındaki bilgiler gösterilir.
 
-3.  **Siparişler & kullanımı** -grafikleri ve indirilebilir biçimlerinde Bu sekme siparişlerini ve kullanım bilgilerini gösterir.
+3.  **& kullanımı siparişler** -Bu sekme, grafikler ve indirilebilir biçimlerdeki sipariş ve kullanım bilgilerini gösterir.
 
-4.  **Müşteri** -Bu sekme, müşterilerinizin ve kendi satın alma hakkında bilgi gösterir.
+4.  **Müşteri** -Bu sekme, müşterileriniz ve satın alımlarınız hakkındaki bilgileri gösterir.
 
-5.  **Dağıtım** -Bu sekme hem grafik hem de olay düzeyi biçimlerini dağıtım başarı ve hata bilgilerini gösterir.
+5.  **Dağıtım** -Bu sekme, hem grafiklerde hem de olay düzeyi biçimlerinde dağıtım başarı ve başarısızlık bilgilerini gösterir.
 
-6.  **İndirmeler** -daha kolay ve daha az aksatıcı bir yeni yükleme deneyimi ile büyük veri kümelerinin indiriliyor.
+6.  **İndirmeler** -büyük veri kümelerini indirme, yeni bir indirme deneyimiyle daha kolay ve daha az karışıklığa sahiptir.
 
-Yalnızca yukarıda listelenen modülleri sınırlı sayıda görebilirsiniz bulabilirsiniz.
-Yalnızca kullanıcılar *sahibi* izinleri görebilirsiniz **ödeme** ve **müşteri** hassas müşteri ve şirket bilgilerini nedeniyle modüller. Bir sahip rolü Bu modüllere erişmesi gerekiyorsa, izinleri değiştirmek için kuruluşunuz içinde çalışın.
+Yukarıda listelenen modüllerin yalnızca sınırlı bir kümesini görebileceğinizi fark edebilirsiniz.
+Yalnızca *sahibi* izinlerine sahip kullanıcılar, önemli müşteri ve şirket bilgileri nedeniyle **ödeyin** ve **Müşteri** modüllerini görebilir. Bu modüllere erişmeniz gerekiyorsa İzinlerinizi değiştirmek için kuruluşunuzun içindeki bir sahip rolüyle çalışın.
 
 
-<a name="tips"></a>İpuçları:
+<a name="tips"></a>Uçları
 -----
 
--   En çok ilgilendiğiniz bilgi görüntülemek için tarih ayarladığınızdan emin olun.
--   Satıcı Insights tarafından sağlanan bilgilere ek analizler yapmak için işlem düzeyinde veri indirin.
--   Ödeme veya müşteri bilgileri arıyorsanız, bir sahip rolü ve katkıda bulunan rolü oturum açtığınızdan emin olun. Kullanıcı izinleri hakkında daha fazla bilgi için bkz: [kullanıcıları yönetme](./cloud-partner-portal-manage-users.md).
+-   En çok ilgilendiğiniz bilgileri görüntülemek için tarihleri ayarladığınızdan emin olun.
+-   Satıcı öngörüleri tarafından belirtilen bilgiler üzerinde ek analizler gerçekleştirmek için işlem düzeyi verilerini indirin.
+-   Ödeme veya müşteri bilgilerini arıyorsanız, katkıda bulunan bir rol değil, sahip rolü olarak oturum açtığınızdan emin olun. Kullanıcı izinleri hakkında daha fazla bilgi için bkz. [kullanıcıları yönetme](./cloud-partner-portal-manage-users.md).
 
 
 <a name="finding-more-help"></a>Daha fazla yardım bulma
 -----------------
 
-- [Satıcı Insights tanımları](./si-insights-definitions-v4.md) -Ölçümler ve verileri için tanımları Bul
+- [Satıcı öngörüleri tanımları](./si-insights-definitions-v4.md) -ölçümler ve veriler için tanımları bulun
 
-- [Satıcı Insights'ı kullanmaya başlama](./si-getting-started.md) -satıcı öngörü özelliği giriş.
+- [Satıcı öngörüleri ile çalışmaya](./si-getting-started.md) başlama-satıcı öngörüleri özelliğine giriş.
 

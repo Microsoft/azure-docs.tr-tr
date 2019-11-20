@@ -1,74 +1,74 @@
 ---
-title: Service Fabric Mesh için mevcut bir .NET uygulamasını kapsayıcılı hale getirme | Microsoft Docs
-description: Mevcut bir .NET uygulaması için Kafes desteği eklendi
+title: Service Fabric ağ için mevcut bir .NET uygulamasını kapsayıdık | Microsoft Docs
+description: Tam .NET Framework kullanan ASP.NET ve konsol projelerine Service Fabric kafes kapsayıcı düzenleme desteği ekleyin.
 services: service-fabric-mesh
-keywords: Service fabric kafes kapsayıcılı hale getirme
+keywords: Service Fabric ağı Kapsayıcılı hale getirme
 author: dkkapur
 ms.author: dekapur
 ms.date: 11/08/2018
 ms.topic: conceptual
 ms.service: service-fabric-mesh
 manager: chakdan
-ms.openlocfilehash: cb4e327e1c8c0a653cb94233f568b4847494c439
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 070d07316c0ff06a45e76936e75cb5345548e78f
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60419467"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73686284"
 ---
-# <a name="containerize-an-existing-net-app-for-service-fabric-mesh"></a>Service Fabric Mesh için mevcut bir .NET uygulamasını kapsayıcılı hale getirme
+# <a name="containerize-an-existing-net-app-for-service-fabric-mesh"></a>Service Fabric ağ için mevcut bir .NET uygulamasını kapsayıize edin
 
-Bu makalede, var olan bir .NET uygulaması için Service Fabric Mesh kapsayıcı düzenleme desteği ekleme gösterir.
+Bu makalede, var olan bir .NET uygulamasına Service Fabric kafes kapsayıcısı düzenleme desteğinin nasıl ekleneceği gösterilmektedir.
 
-Visual Studio 2017'de tam .NET framework için ASP.NET ve konsol projeleri kapsayıcı desteği ekleyebilirsiniz.
+Visual Studio 2017 ' de, tam .NET Framework kullanan ASP.NET ve konsol projelerine kapsayıcı desteği ekleyebilirsiniz.
 
 > [!NOTE]
-> .NET **çekirdek** projeleri şu anda desteklenmez.
+> .NET **Core** projeleri Şu anda desteklenmiyor.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturabilirsiniz.
 
-* Emin olun [geliştirme ortamınızı ayarlama](service-fabric-mesh-howto-setup-developer-environment-sdk.md). Bu, Service Fabric çalışma zamanını, SDK, Docker, Visual Studio 2017, yükleme ve yerel küme oluşturma içerir.
+* [Geliştirme ortamınızı ayarladığınızdan](service-fabric-mesh-howto-setup-developer-environment-sdk.md)emin olun. Bu, Service Fabric çalışma zamanı, SDK, Docker, Visual Studio 2017 ' i yüklemeyi ve yerel bir küme oluşturmayı içerir.
 
-## <a name="open-an-existing-net-app"></a>Mevcut bir .NET uygulamasını açın.
+## <a name="open-an-existing-net-app"></a>Mevcut bir .NET uygulamasını açın
 
 Kapsayıcı düzenleme desteği eklemek istediğiniz uygulamayı açın.
 
-Bir örnek deneyin istiyorsanız, kullanabileceğiniz [elektronik mağaza](https://github.com/MikkelHegn/ContainersSFLab) kod örneği. Kendi proje için şu adımları uygulayabilir, bu makalenin geri kalanında bu projeye kullanıyoruz varsayar.
+Bir örnek denemek isterseniz [eShop](https://github.com/MikkelHegn/ContainersSFLab) kod örneğini kullanabilirsiniz. Bu makalenin geri kalanı, bu projeyi kullandığımızda, bu adımları kendi projenize uygulayabileceğiniz varsayırsınız.
 
-Bir kopyasını alın **elektronik mağaza** proje:
+**EShop** projesinin bir kopyasını alın:
 
 ```git
 git clone https://github.com/MikkelHegn/ContainersSFLab.git
 ```
 
-Bu, Visual Studio 2017 açık exe'yi **ContainersSFLab\eShopLegacyWebFormsSolution\eShopLegacyWebForms.sln**.
+Yüklendikten sonra Visual Studio 2017 Open **Containerssflab\eshoplegacywebformssolution\eshoplegacywebforms.sln**içinde.
 
-## <a name="add-container-support"></a>Kapsayıcı desteği eklendi
+## <a name="add-container-support"></a>Kapsayıcı desteği ekle
  
-Kapsayıcı düzenleme desteği, Service Fabric Mesh araçları kullanarak aşağıdaki gibi mevcut bir ASP.NET veya konsol projeye ekleyin:
+Service Fabric kafes araçlarını kullanarak mevcut bir ASP.NET veya konsol projesine kapsayıcı düzenleme desteğini aşağıdaki gibi ekleyin:
 
-Visual Studio Çözüm Gezgini'nde proje adına sağ tıklayın (örnekte **eShopLegacyWebForms**) ve ardından **Ekle** > **kapsayıcı Düzenleyicisi desteği** .
-**Kapsayıcı Düzenleyicisi desteği Ekle** iletişim kutusu görüntülenir.
+Visual Studio Çözüm Gezgini 'nde, proje adına (örneğin, **Eshoplegacywebforms**) sağ tıklayın ve ardından > **kapsayıcı Orchestrator desteği** **Ekle** ' yi seçin.
+**Kapsayıcı Orchestrator desteği ekle** iletişim kutusu görünür.
 
-![Visual Studio kapsayıcı orchestrator iletişim Ekle](./media/service-fabric-mesh-howto-containerize-vs/add-container-orchestration-support.png)
+![Visual Studio kapsayıcı Orchestrator iletişim kutusu Ekle](./media/service-fabric-mesh-howto-containerize-vs/add-container-orchestration-support.png)
 
-Seçin **Service Fabric Mesh** açılır listeden ve ardından **Tamam**.
+Açılan listeden **Service Fabric kafes** ' i seçin ve ardından **Tamam**' a tıklayın.
 
-Aracı'nı, ardından Docker yüklü olduğu, bir Dockerfile projenize ekler ve projeniz için bir docker görüntüsü aşağı çeker doğrular.  
-Bir Service Fabric Mesh uygulaması projesi çözümünüze eklenir. İçerdiği, ağ profilleri ve yapılandırma dosyalarını Yayımla. Projenin adı 'sonuna kadar Örneğin, birleştirilmiş uygulama', proje adıyla aynıdır **eShopLegacyWebFormsApplication**. 
+Araç daha sonra Docker 'ın yüklü olduğunu doğrular, projenize bir Dockerfile ekler ve projeniz için bir Docker görüntüsü çeker.  
+Çözümünüze bir Service Fabric kafes uygulama projesi eklenir. Ağ yayımlama profillerinizi ve yapılandırma dosyalarını içerir. Projenin adı, projenin adı ile aynıdır (örneğin, **Eshoplegacywebformsapplication**gibi). 
 
-Yeni Mesh projede iki görürsünüz klasörleri farkında olmalıdır:
-- **Uygulama kaynaklarını** ağı gibi ek ağ kaynakları tanımlayan YAML dosyaları içerir.
-- **Hizmet kaynaklarının** dağıttığınızda uygulamanızı nasıl çalışması gerektiğini tanımlayan bir service.yaml dosyası içerir.
+Yeni kafes projesinde, dikkat etmeniz gereken iki klasör görürsünüz:
+- Ağ gibi ek kafes kaynaklarını tanımlayan YAML dosyalarını içeren **uygulama kaynakları** .
+- Uygulamanızın dağıtıldığında nasıl çalışacağını açıklayan bir Service. YAML dosyası içeren **hizmet kaynakları** .
 
-Uygulamanız için kapsayıcı düzenleme desteği eklendikten sonra basabilirsiniz **F5** yerel kümenizde Service Fabric Mesh .NET uygulamanızda hata ayıklama. Service Fabric Mesh küme üzerinde çalışan Elektronik Mağaza ASP.NET uygulaması şu şekildedir: 
+Uygulamanıza kapsayıcı düzenleme desteği eklendikten sonra, Yerel Service Fabric ağ kümenizde .NET uygulamanızda hata ayıklamak için **F5** 'e basabilirsiniz. Service Fabric bir ağ kümesinde çalışan eShop ASP.NET uygulaması aşağıda verilmiştir: 
 
-![Elektronik Mağaza uygulaması](./media/service-fabric-mesh-howto-containerize-vs/eshop-running.png)
+![eShop uygulaması](./media/service-fabric-mesh-howto-containerize-vs/eshop-running.png)
 
-Azure Service Fabric Mesh için artık uygulama yayımlayabilirsiniz.
+Artık uygulamayı Azure Service Fabric ağı 'nda yayımlayabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Service Fabric Mesh için bir uygulama yayımlama bakın: [Öğretici-bir Service Fabric Mesh uygulaması dağıtma](service-fabric-mesh-tutorial-deploy-service-fabric-mesh-app.md)
+Bkz. Service Fabric kafeste uygulama yayımlama: [öğretici-Service Fabric bir kafes uygulaması dağıtma](service-fabric-mesh-tutorial-deploy-service-fabric-mesh-app.md)

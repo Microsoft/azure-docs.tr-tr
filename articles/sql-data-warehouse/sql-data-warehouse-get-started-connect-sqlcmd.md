@@ -1,8 +1,8 @@
 ---
-title: Azure SQL Veri Ambarı'na Bağlanma sqlcmd | Microsoft Belgeleri
-description: Bağlanmak ve bir Azure SQL Data Warehouse'u sorgulamak için SQLCMD komut satırı yardımcı programını kullanın.
+title: Sqlcmd ile bağlanma
+description: Azure SQL veri ambarına bağlanmak ve bu ambarı sorgulamak için sqlcmd komut satırı yardımcı programını kullanın.
 services: sql-data-warehouse
-author: XiaoyuL-Preview
+author: XiaoyuMSFT
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
@@ -10,12 +10,13 @@ ms.subservice: development
 ms.date: 04/17/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.openlocfilehash: 72760c5123703a664695c1be4d286a38e96ecc3f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: e4b432e0be0cdded5089965b9d272aa82e31bd36
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65873312"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685742"
 ---
 # <a name="connect-to-sql-data-warehouse-with-sqlcmd"></a>sqlcmd ile SQL Data Warehouse'a bağlanma
 > [!div class="op_single_selector"]
@@ -27,19 +28,19 @@ ms.locfileid: "65873312"
 > 
 > 
 
-Bir Azure SQL Veri Ambarı’na bağlanmak ve sorgu göndermek için [sqlcmd][sqlcmd] komut satırı yardımcı programını kullanın.  
+Azure SQL veri ambarına bağlanmak ve bu ambarı sorgulamak için [sqlcmd][sqlcmd] komut satırı yardımcı programını kullanın.  
 
 ## <a name="1-connect"></a>1. Bağlan
-**Sqlcmd** kullanmaya başlamadan önce komut istemini açın ve [sqlcmd][sqlcmd] öğesinden sonra SQL Veri Ambarı veritabanınızın bağlantı dizesini girin. Bağlantı dizesi için aşağıdaki parametreler gereklidir:
+[Sqlcmd][sqlcmd] kullanmaya başlamadan önce komut istemini açın ve **sqlcmd** öğesinden sonra SQL Veri Ambarı veritabanınızın bağlantı dizesini girin. Bağlantı dizesi için aşağıdaki parametreler gereklidir:
 
-* **Server (-S):** Sunucu biçiminde `<`sunucu adı`>`. database.windows.net
-* **Veritabanı (-d):** Veritabanı adı.
-* **Enable Quoted tanımlayıcıları (-ı):** Bir SQL Data Warehouse örneğine bağlanmak için tırnak işaretli tanımlayıcıların etkinleştirilmesi gerekir.
+* **Server (-S):** `<`Sunucu Adı`>`.database.windows.net biçiminde belirtilmiş sunucu
+* **Database (-d):** Veritabanı adı.
+* **Tırnak İşaretli Tanımlayıcıları Etkinleştir (-I):** Bir SQL Veri Ambarı örneğine bağlanmak için tırnak işaretli tanımlayıcıların etkinleştirilmesi gerekir.
 
 SQL Server Kimlik Doğrulamasını kullanmak için kullanıcı adı/parola parametrelerini eklemeniz gerekir:
 
-* **Kullanıcı (-U):** Biçimindeki sunucu kullanıcısı `<`kullanıcı`>`
-* **Parola (-P):** Kullanıcıyla ilişkili parola.
+* **User (-U):** `<`Kullanıcı`>` biçimindeki sunucu kullanıcısı
+* **Password (-P):** Kullanıcıyla ilişkili parola.
 
 Örneğin, bağlantı dizeniz aşağıdaki gibi görünebilir:
 
@@ -62,7 +63,7 @@ C:\>sqlcmd -S MySqlDw.database.windows.net -d Adventure_Works -G -I
 > 
 > 
 
-## <a name="2-query"></a>2. Sorgu
+## <a name="2-query"></a>2. sorgu
 Bağlantının ardından desteklenen herhangi bir Transact-SQL deyimini örnekte yayımlayabilirsiniz.  Bu örnekte sorgular etkileşimli modda gönderilir.
 
 ```sql
@@ -83,7 +84,7 @@ sqlcmd -S MySqlDw.database.windows.net -d Adventure_Works -U myuser -P myP@sswor
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Sqlcmd’de kullanılabilen seçenekler hakkında daha fazla bilgi için bkz. [sqlcmd belgeleri][sqlcmd].
+Sqlcmd 'de kullanılabilen seçenekler hakkında daha fazla bilgi için bkz. [sqlcmd belgeleri][sqlcmd] .
 
 <!--Image references-->
 

@@ -1,65 +1,69 @@
 ---
-title: Çevrimdışı değerlendirme
-titleSuffix: Personalizer - Azure Cognitive Services
-description: Çevrimdışı bir değerlendirme ile öğrenme Döngüsü Analiz etmeyi öğrenin
+title: Çevrimdışı değerlendirme gerçekleştirme-kişiselleştirici
+titleSuffix: Azure Cognitive Services
+description: Bu makalede, uygulamanızın verimliliğini ölçmek ve öğrenme döngünüzü çözümlemek için çevrimdışı değerlendirmeyi nasıl kullanacağınız gösterilmektedir.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
-ms.date: 05/07/2019
-ms.author: edjez
-ms.openlocfilehash: e99a8242e438ef5a8ab7fd917724450f8080bb41
-ms.sourcegitcommit: 4b9c06dad94dfb3a103feb2ee0da5a6202c910cc
+ms.topic: conceptual
+ms.date: 10/23/2019
+ms.author: diberry
+ms.openlocfilehash: c2aec0db2d1f9865188f2749a0eeb765a14d04ed
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/02/2019
-ms.locfileid: "65027064"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73952988"
 ---
-# <a name="how-to-analyze-your-learning-loop-with-an-offline-evaluation"></a>Çevrimdışı bir değerlendirme ile öğrenme döngüsü analiz etme
+# <a name="analyze-your-learning-loop-with-an-offline-evaluation"></a>Çevrimdışı değerlendirmede öğrenme döngünüzü çözümleyin
 
+Çevrimdışı değerlendirmeyi tamamlamayı ve sonuçları anlamayı öğrenin.
 
-Çevrimdışı bir değerlendirmesini tamamlamak ve sonuçları anlama hakkında bilgi edinin.
+Çevrimdışı değerlendirmeler, etkin kişiselleştirmenin uygulamanızın varsayılan davranışıyla nasıl karşılaştırıldığını ölçmenize olanak tanır, kişiselleştirmeye en çok katkıda bulunan özellikleri öğrenin ve yeni makine öğrenimi değerlerini otomatik olarak bulabilir.
 
-Çevrimdışı değerlendirmelere izin ver ölçmek için uygulamanızın varsayılan davranışı için etkili Personalizer karşılaştırılır nasıl hangi özellikler kişiselleştirmeyi en katkıda bulunuyorsanız öğrenin ve yeni machine learning ayarları keşfedin otomatik olarak.
-
-Hakkında bilgi edinin [çevrimdışı değerlendirmeleri](concepts-offline-evaluation.md) daha fazla bilgi için.
+Daha fazla bilgi edinmek için [çevrimdışı değerlendirmeler](concepts-offline-evaluation.md) hakkında bölümünü okuyun.
 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-1. Yapılandırılmış bir Personalizer döngü olmalıdır
-1. Personalizer döngü 50. 000'en az olayları, anlamlı değerlendirme sonuçlarını günlüklerinde olması gerekir.
+* Yapılandırılmış bir kişiselleştirici döngüsü
+* Kişiselleştirme döngüsünün temsili bir veri miktarına sahip olması gerekir. bunun için, en az 50.000 olay üzerinde anlamlı değerlendirme sonuçları elde etmenizi öneririz. İsteğe bağlı olarak, aynı değerlendirmede karşılaştırmak ve test yapmak için daha önce de daha önce _öğrendiğiniz öğrenme ilkesi_ dosyalarını vermiş olabilirsiniz.
 
-İsteğe bağlı olarak, ayrıca daha önce dışarı aktardığı _ilke öğrenme_ karşılaştırın ve test aynı veriyi değerlendirmede dosyaları.
+## <a name="steps-to-start-a-new-offline-evaluation"></a>Yeni bir çevrimdışı değerlendirme başlatma adımları
 
-## <a name="steps-to-start-a-new-offline-evaluation"></a>Yeni bir çevrimdışı değerlendirmesi başlamak için adımları
+1. [Azure Portal](https://azure.microsoft.com/free/), kişiselleştirme kaynağınızı bulun.
+1. Azure portal **değerlendirmeler** bölümüne gidin ve **değerlendirme oluştur**' u seçin.
+    Azure portal ![, * * Değerlendirmeler * * bölümüne gidin ve * * değerlendirme oluştur * * seçeneğini belirleyin.](./media/offline-evaluation/create-new-offline-evaluation.png)
+1. Aşağıdaki değerleri yapılandırın:
 
-1. Azure portalında kişiselleştirme döngü kaynağınızı bulun.
-1. "Değerlendirme" bölümüne gidin.
-1. Yeni değerlendirme üzerinde tıklayın
-1. Çevrimdışı değerlendirme için bir başlangıç ve bitiş tarihi seçin. Bu, veriyi değerlendirmede kullanılacak veri aralığını belirtin geçmişteki tarihler vardır. Bu veri günlükleri belirtildiği gibi mevcut olmalıdır [veri saklama](how-to-settings.md) ayarı.
-1. İsteğe bağlı olarak, kendi öğrenme ilke karşıya yükleyebilirsiniz. 
-1. Belirtin. Bu süre içinde gözlemlenen kullanıcı davranışa göre en iyi duruma getirilmiş bir öğrenme İlkesi Personalizer oluşturmanız gerekir.
-1. Değerlendirmeyi Başlat
+    * Değerlendirme adı
+    * Başlangıç ve bitiş tarihi-bunlar geçmişte, değerlendirmede kullanılacak veri aralığını belirten tarihlerdir. [Veri saklama](how-to-settings.md) değerinde belirtildiği gibi bu verilerin günlüklerde bulunması gerekir.
+    * İyileştirme bulma, **Evet** olarak ayarlandı
+
+    ![Çevrimdışı değerlendirme ayarlarını seçin](./media/offline-evaluation/create-an-evaluation-form.png)
+
+1. **Tamam ' ı**seçerek değerlendirmeyi başlatın. 
 
 ## <a name="results"></a>Sonuçlar
 
-Değerlendirmeleri çalıştırılacak karşılaştırmak için ilkeleri öğrenme sayısı İşlenecek veri miktarına bağlı olarak uzun zaman alabilir ve iyileştirme olup istendi.
+İşlenecek veri miktarına, Karşılaştırılacak öğrenme ilkesi sayısına ve bir iyileştirmenin istenip istenmediğine bağlı olarak, değerlendirmelere çalıştırılması uzun zaman alabilir.
 
-Tamamlandığında, aşağıdaki sonuçları görebilirsiniz:
+Tamamlandıktan sonra değerlendirme listesinden değerlendirmeyi seçebilirsiniz. 
 
-1. Karşılaştırmalar Learning dahil olmak üzere ilkelerin:
-    * **Online İlkesi**: Geçerli öğrenme ilke Personalizer içinde kullanılır.
-    * **Taban çizgisi**: Uygulamanın varsayılan (derece çağrılarında gönderilen ilk eylemi tarafından belirlendiği)
-    * **Rastgele ilke**: Sanal bir sıralama davranışını, her zaman sağlanan olanlardan eylemlerin rastgele seçim döndürür.
-    * **Özel ilkeler**: Ek öğrenme ilkeler, değerlendirme başlatırken karşıya yüklendi.
-    * **İlke en iyi duruma getirilmiş**: Değerlendirme en iyi duruma getirilmiş bir ilke Bul seçeneği ile başladıysanız, ayrıca Karşılaştırılacak ve, geçerli bir değiştirme indirin veya çevrimiçi öğrenme ilke yapmak mümkün olacaktır.
+Öğrenme Ilkelerinin karşılaştırmaları şunları içerir:
 
-1. Verimliliğini [özellikleri](concepts-features.md) Eylemler, bağlam.
+* **Çevrimiçi ilke**: kişiselleştirici içinde kullanılan geçerli öğrenme ilkesi
+* **Taban çizgisi**: uygulamanın varsayılan (derece çağrılarında gönderilen ilk eylem tarafından belirlendiği şekilde),
+* **Rastgele ilke**: sağlanan uygulamalardan her zaman rastgele eylem seçimi döndüren sanal bir sıra davranışı.
+* **Özel ilkeler**: değerlendirme başlatıldığında karşıya yüklenen ek öğrenme ilkeleri.
+* **Iyileştirilmiş ilke**: değerlendirme, iyileştirilmiş bir ilkeyi bulma seçeneği ile başlatıldıysa, bu da karşılaştırılır ve bunu indirebilir veya çevrimiçi öğrenme ilkesi haline getirmek için geçerli olanı değiştirin.
 
+![Çevrimdışı değerlendirme ayarlarının sonuç grafiği](./media/offline-evaluation/evaluation-results.png)
 
-## <a name="more-information"></a>Daha Fazla Bilgi
+Eylemler ve bağlam [özelliklerinin](concepts-features.md) verimliliği.
 
-* Bilgi [nasıl çevrimdışı Değerlendirme çalışma](concepts-offline-evaluation.md).
+## <a name="next-steps"></a>Sonraki adımlar
+
+* [Çevrimdışı değerlendirmelerinin nasıl çalıştığını](concepts-offline-evaluation.md)öğrenin.

@@ -1,33 +1,25 @@
 ---
-title: Azure Resource Manager şablon başvurusu yazılımınız | Microsoft Docs
+title: Şablon başvurusunu kullanma
 description: Şifrelenmiş depolama hesabında dağıtmak için bir şablon oluşturmak için Azure Resource Manager şablon başvurusu kullanır.
-services: azure-resource-manager
-documentationcenter: ''
 author: mumian
-manager: dougeby
-editor: tysonn
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 03/04/2019
 ms.topic: tutorial
 ms.author: jgao
 ms.custom: seodec18
-ms.openlocfilehash: 81c02c5e39e23b49291561821b0732227feb5c05
-ms.sourcegitcommit: 61c8de2e95011c094af18fdf679d5efe5069197b
+ms.openlocfilehash: 8957f661665811679c088de7ac4a4b026e9d28c7
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "62103657"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149360"
 ---
-# <a name="tutorial-utilize-the-azure-resource-manager-template-reference"></a>Öğretici: Azure Resource Manager şablon başvurusu kullanma
+# <a name="tutorial-utilize-the-azure-resource-manager-template-reference"></a>Öğretici: Azure Resource Manager şablon başvurusu kullanır.
 
 Şablon şema bilgilerini bulmayı ve bu bilgileri kullanarak Azure Resource Manager şablonu oluşturmayı öğrenin.
 
 Bu öğreticide Azure Hızlı Başlangıç şablonları arasından temel bir şablon kullanırsınız. Şablon başvuru belgelerini kullanarak şablonu özelleştirecek ve şifrelenmiş bir Depolama hesabı kullanmasını sağlayacaksınız.
 
-![Resource Manager şablon başvurusu şifrelenmiş depolama hesabında dağıtma](./media/resource-manager-tutorial-create-encrypted-storage-accounts/resource-manager-template-tutorial-deploy-encrypted-storage-account.png)
+![Kaynak Yöneticisi Şablon başvurusu şifrelenmiş depolama hesabı dağıt](./media/resource-manager-tutorial-create-encrypted-storage-accounts/resource-manager-template-tutorial-deploy-encrypted-storage-account.png)
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
@@ -44,7 +36,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](htt
 
 Bu makaleyi tamamlamak için gerekenler:
 
-* [Resource Manager Araçları uzantısı](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#prerequisites) içeren [Visual Studio Code](https://code.visualstudio.com/).
+* [Resource Manager Araçları uzantısı](https://code.visualstudio.com/) içeren [Visual Studio Code](./resource-manager-quickstart-create-templates-use-visual-studio-code.md#prerequisites).
 
 ## <a name="open-a-quickstart-template"></a>Hızlı başlangıç şablonunu açma
 
@@ -57,7 +49,7 @@ Bu makaleyi tamamlamak için gerekenler:
     https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-storage-account-create/azuredeploy.json
     ```
 3. Dosyayı açmak için **Aç**’ı seçin.
-4. Dosyayı yerel bilgisayarınıza **azuredeploy.json** olarak kaydetmek için **Dosya**>**Farklı Kaydet**’i seçin.
+4. Dosyayı yerel bilgisayarınıza **azuredeploy.json** olarak kaydetmek için >Dosya**Farklı Kaydet**’i seçin.
 
 ## <a name="understand-the-schema"></a>Şemayı anlama
 
@@ -78,9 +70,9 @@ Bu makaleyi tamamlamak için gerekenler:
 
 ## <a name="find-the-template-reference"></a>Şablon başvurusunu bulma
 
-1. Gözat [Azure şablon başvurusu](https://docs.microsoft.com/azure/templates/).
-2. İçinde **başlığa göre filtreleme** kutusuna **depolama hesapları**.
-3. Seçin **başvuru/şablon başvurusu/depolama/&lt;sürüm > / depolama hesapları** aşağıdaki ekran görüntüsünde gösterildiği gibi:
+1. [Azure şablon başvurusuna](https://docs.microsoft.com/azure/templates/)gidin.
+2. **Başlığa göre filtrele** kutusuna **depolama hesapları**' nı girin.
+3. Aşağıdaki ekran görüntüsünde gösterildiği gibi **referans/şablon başvurusu/depolama/&lt;sürümü >/Storage hesaplarını** seçin:
 
     ![Resource Manager şablon başvurusu depolama hesabı](./media/resource-manager-tutorial-create-encrypted-storage-accounts/resource-manager-template-resources-reference-storage-accounts.png)
 

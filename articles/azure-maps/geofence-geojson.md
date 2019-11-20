@@ -1,6 +1,6 @@
 ---
-title: Azure haritalar Döndürürüz GeoJSON veri biçiminde | Microsoft Docs
-description: Azure haritalar Döndürürüz GeoJSON veri biçimi hakkında bilgi edinin
+title: Azure haritalar 'da bölge bölge coğrafi JSON verisi biçimi | Microsoft Docs
+description: Azure haritalar 'da bölge bölge coğrafi JSON veri biçimi hakkında bilgi edinin
 author: walsehgal
 ms.author: v-musehg
 ms.date: 02/14/2019
@@ -8,41 +8,41 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.openlocfilehash: d4b6c8289ae7c22521fc433c928f2b25a56c87ef
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5946180c161a38a30f44e235ce0b626fd70a5400
+ms.sourcegitcommit: 97605f3e7ff9b6f74e81f327edd19aefe79135d2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64723580"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70735135"
 ---
-# <a name="geofencing-geojson-data"></a>Bölge sınırlaması GeoJSON veri
+# <a name="geofencing-geojson-data"></a>Bölge sınırlaması coğrafi JSON verileri
 
-Azure haritalar [alma Döndürürüz](/rest/api/maps/spatial/getgeofence) ve [POST Döndürürüz](/rest/api/maps/spatial/postgeofence) API'leri yakınlığını sağlanan döndürürüz göreli koordinat veya sınırlar kümesini almanıza olanak sağlar. Bu makalede Azure haritalar alın ve POST API'sini kullanılabilir döndürürüz verileri hazırlama işlemi açıklanmaktadır.
+Azure haritalar [bölge](/rest/api/maps/spatial/getgeofence) sınırlaması ve [son bölge](/rest/api/maps/spatial/postgeofence) API 'leri, belirtilen bölge veya bir sınırlama kümesine göre bir koordinat yakınlığını almanızı sağlar. Bu makalede, Azure haritalar GET ve POST API 'sinde kullanılabilen bölge verilerinin nasıl hazırlanacağı anlatılmaktadır.
 
-Bölge sınırının veya bölge sınırlarını dizi verilerini tarafından temsil edilen `Feature` nesne ve `FeatureCollection` nesnesine `GeoJSON` tanımlanan biçimi [rfc7946](https://tools.ietf.org/html/rfc7946). Bu ek olarak:
+Bölge ölçütü veya bölge `Feature` kümesi verileri, [rfc7946](https://tools.ietf.org/html/rfc7946)içinde tanımlanan `GeoJSON` biçimdeki nesne ve `FeatureCollection` nesne tarafından temsil edilir. Bunlara ek olarak:
 
-* GeoJSON nesne türü olabilir bir `Feature` nesnesi veya bir `FeatureCollection` nesne.
-* Geometri nesnesi tür olabilir bir `Point`, `MultiPoint`, `LineString`, `MultiLineString`, `Polygon`, `MultiPolygon`, ve `GeometryCollection`.
-* Tüm özellik değerleri içermesi gereken bir `geometryId`, döndürürüz tanımlamak için kullanılır.
-* İle özellik `Point`, `MultiPoint`, `LineString`, `MultiLineString` içermelidir `radius` özellikleri. `radius` değer metre cinsinden ölçülen `radius` değer aralıklarına 1 10000.
-* İle özellik `polygon` ve `multipolygon` geometri türü, bir RADIUS özelliğe sahip değildir.
-* `validityTime` kullanıcının sağlayan isteğe bağlı bir özellik, süre sonu zamanı ve geçerlilik döndürürüz veriler için zaman aralığı ayarlayın. Belirtilmezse, veriler hiçbir zaman süresi dolar ve her zaman geçerlidir.
-* `expiredTime` Sona erme tarihi ve saati bölge sınırlaması veri. Varsa değerini `userTime` istekte olduğu daha sonra bu değeri veri süresi dolmuş verisi olarak kabul edilir ve yok sorgulanır karşılık gelen döndürürüz. Hangi veri dahil edilecek bu bölge sınırının, geometryId üzerine `expiredGeofenceGeometryId` döndürürüz yanıt içindeki dizi.
-* `validityPeriod` Süre döndürürüz geçerlilik listesi verilmiştir. Varsa değerini `userTime` talep düştüğünde geçerlilik süresinin dışında karşılık gelen döndürürüz verileri geçersiz olarak kabul edilir ve yok sorgulanır. Bu bölge sınırının verilerin geometryId dahil `invalidPeriodGeofenceGeometryId` döndürürüz yanıt içindeki dizi. Aşağıdaki tabloda GeçerlilikSüresi öğenin özelliklerini gösterir.
+* Geojson nesne türü bir `Feature` nesne `FeatureCollection` veya nesne olabilir.
+* `Point`Geometri nesne türü `MultiPoint` ,`Polygon` `GeometryCollection`, ,,,,veolabilir.`MultiLineString` `LineString` `MultiPolygon`
+* Tüm özellik özellikleri, geofence `geometryId`'yi tanımlamak için kullanılan bir içermelidir.
+* `Point`Özelliği ,`MultiPoint` ,,`radius` ,, özelliklerinde içermesi gerekir.`MultiLineString` `LineString` `radius`değer ölçü cinsinden ölçülür, `radius` değer 1 ile 10000 arasında değişir.
+* `polygon` Ve`multipolygon` geometri türündeki özellik bir Radius özelliğine sahip değil.
+* `validityTime`, Kullanıcı bölge verileri için süresi dolmuş süreyi ve geçerlilik süresi dönemini ayarlamaya olanak sağlayan isteğe bağlı bir özelliktir. Belirtilmemişse, verilerin süresi süresiz olur ve her zaman geçerlidir.
+* , `expiredTime` Bölge sınırlaması verilerinin son kullanma tarihi ve saati. İstekteki değeri `userTime` bu değerden daha sonra ise, karşılık gelen bölge verileri, süre dolmayan veriler olarak değerlendirilir ve sorgulanmaz. Bu durumda, bu bölge verilerinin geometryıd 'si, bölge sınırı yanıtı içinde `expiredGeofenceGeometryId` diziye dahil edilir.
+* , `validityPeriod` Geofence 'ın geçerlilik zaman döneminin bir listesidir. İstekteki değeri `userTime` geçerlilik süresinin dışında kalırsa, ilgili bölge verileri geçersiz olarak kabul edilir ve sorgulanmaz. Bu bölge verilerinin geometryıd 'si, bölge sınırı Response içindeki `invalidPeriodGeofenceGeometryId` diziye dahil edilmiştir. Aşağıdaki tabloda validityPeriod öğesinin özellikleri gösterilmektedir.
 
-| Ad | Type | Gerekli  | Açıklama |
+| Name | Type | Gerekli  | Açıklama |
 | :------------ |:------------: |:---------------:| :-----|
-| startTime | DateTime  | true | Başlangıç tarihi geçerlilik süresini süre. |
-| endTime   | DateTime  | true |  Bitiş tarihi geçerlilik süresini süre. |
-| recurrenceType | string | false |   Yinelenme Türü süresi. Değer olabilir `Daily`, `Weekly`, `Monthly`, veya `Yearly`. Varsayılan değer `Daily`.|
-| businessDayOnly | Boolean | false |  Verileri yalnızca iş gün boyunca geçerli olup olmadığını gösterir. Varsayılan değer `false`.|
+| startTime | Datetime  | true | Geçerlilik zaman döneminin başlangıç tarihi saati. |
+| endTime   | Datetime  | true |  Geçerlilik zaman döneminin bitiş tarihi. |
+| Numaralarına | dize | false |   Dönemin yinelenme türü. Değer `Daily` `Weekly` ,,`Yearly`veya olabilir. `Monthly` Varsayılan değer `Daily`.|
+| yalnızca BusinessDay | Boole değeri | false |  Verilerin yalnızca iş günleri için geçerli olup olmadığını belirtin. Varsayılan değer `false`.|
 
 
-* Tüm koordinat değerleri [enlem, boylam] temsil edilir tanımlanan `WGS84`.
-* Her bir özellik içeren `MultiPoint`, `MultiLineString`, `MultiPolygon` , veya `GeometryCollection`, özellikler, tüm öğelere uygulanır. Örneğin: Tüm noktaları `MultiPoint` aynı RADIUS birden çok bir daire döndürürüz oluşturmak için kullanır.
-* Noktası daire senaryoda bir daire geometri kullanarak temsil edilebilen bir `Point` geometri nesnesi özellikleri ayrıntılı olarak [genişletme GeoJSON geometriler](https://docs.microsoft.com/azure/azure-maps/extend-geojson).      
+* Tüm koordinat değerleri içinde `WGS84`tanımlanmış [Boylam, Enlem] olarak gösterilir.
+* `MultiPoint` ,`MultiLineString`,, Veya`GeometryCollection`içeren her özellik için, özellikler tüm öğelere uygulanır. `MultiPolygon` Örneğin: İçindeki `MultiPoint` tüm noktaları, birden çok daire bölge oluşturmak için aynı yarıçapı kullanır.
+* Nokta-daire senaryosunda, bir daire geometrisi, `Point` [geojson geometrileri genişletilerek](https://docs.microsoft.com/azure/azure-maps/extend-geojson)ayrıntılı Properties ile bir geometri nesnesi kullanılarak gösterilebilir.      
 
-Örnek istek gövdesi içinde bir daire döndürürüz geometri olarak temsil edilen bir bölge sınırının için aşağıdadır `GeoJSON` merkez noktası ve bir RADIUS kullanarak. 2018-10-yinelenen hafta sonu dışında her gün 22 09: 00 için 17: 00, geçerli dönemin döndürürüz verilerin başlatılır. `expiredTime` Bu bölge sınırının veri değerlendirilir süresi dolduğunda, varsa gösterir `userTime` istekte daha olduğu `2019-01-01`.  
+Aşağıda, bir orta nokta ve yarıçap `GeoJSON` kullanan bir daire bölge alanı geometrisi olarak temsil edilen bölge için örnek bir istek gövdesi verilmiştir. Bölge verilerinin geçerli dönemi 2018-10-22, 00 ila 17:00, hafta sonu hariç her gün yinelenir. `expiredTime``userTime` istekte`2019-01-01`daha sonra olması durumunda bu bölge verilerinin zaman aşımına geçeceğini belirtir.  
 
 ```json
 {

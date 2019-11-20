@@ -27,7 +27,7 @@ Bu bölümde, ikinci bir hizmet oluşturacağınız `mywebapi`ve `webfrontend` b
 ![Birden çok kapsayıcı](media/common/multi-container.png)
 
 ### <a name="download-sample-code-for-mywebapi"></a>*mywebapi* için örnek kod indirme
-Zamandan kazanmak adına örnek kodu bir GitHub deposundan indirelim. https://github.com/Azure/dev-spaces adresine gidip **Kopyala veya İndir**’i seçerek GitHub deposunu indirin. Bu bölümün kodu `samples/dotnetcore/getting-started/mywebapi` konumundadır.
+Zamandan kazanmak adına örnek kodu bir GitHub deposundan indirelim. [https://github.com/Azure/dev-spaces](https://github.com/Azure/dev-spaces ) adresine gidip **Kopyala veya İndir**’i seçerek GitHub deposunu indirin. Bu bölümün kodu `samples/dotnetcore/getting-started/mywebapi` konumundadır.
 
 ### <a name="run-mywebapi"></a>*mywebapi* hizmetini çalıştırın
 1. *Ayrı bir VS Code penceresinde* `mywebapi` klasörünü açın.

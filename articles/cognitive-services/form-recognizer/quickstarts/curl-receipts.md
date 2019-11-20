@@ -1,60 +1,60 @@
 ---
-title: 'Hızlı Başlangıç: CURL - Form tanıyıcı kullanarak giriş verilerini ayıklama'
+title: 'Hızlı başlangıç: kıvrımlı biçimli tanıyıcı kullanarak makbuz verilerini ayıklama'
 titleSuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, satış makbuzuna görüntülerden verileri ayıklamak için Form tanıyıcı REST API ile cURL kullanacaksınız.
+description: Bu hızlı başlangıçta, satış alındıları görüntülerinden veri ayıklamak için, biçim tanıyıcı REST API kıvrımlı olarak kullanacaksınız.
 author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
-ms.subservice: form-recognizer
+ms.subservice: forms-recognizer
 ms.topic: quickstart
 ms.date: 07/01/2019
 ms.author: pafarley
-ms.openlocfilehash: f9111dcb1f85b28a688282f792540128e7146a6b
-ms.sourcegitcommit: d2785f020e134c3680ca1c8500aa2c0211aa1e24
+ms.openlocfilehash: c533949cf0ce69ddc5237dd893dd75e43447c4a9
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67566186"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72931594"
 ---
-# <a name="quickstart-extract-receipt-data-using-the-form-recognizer-rest-api-with-curl"></a>Hızlı Başlangıç: Form tanıyıcı REST API ile cURL kullanarak giriş verilerini ayıklama
+# <a name="quickstart-extract-receipt-data-using-the-form-recognizer-rest-api-with-curl"></a>Hızlı başlangıç: biçim tanıyıcı ile REST API kullanarak alış verilerini ayıklama
 
-Bu hızlı başlangıçta, ayıklayın ve satış makbuzuna ilgili bilgileri tanımlamak için Azure Form tanıyıcı REST API ile cURL kullanacaksınız.
+Bu hızlı başlangıçta, satış girişlerinde ilgili bilgileri ayıklamak ve tanımlamak için Azure form tanıyıcısı 'nı kıvrımlı REST API kullanacaksınız.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu hızlı başlangıcı tamamlamak için şunlara sahip olmalısınız:
-- Form tanıyıcı sınırlı erişim önizlemesine erişebilirsiniz. Önizleme erişim elde etmek için doldurun ve gönderme [Form tanıyıcı erişim isteği](https://aka.ms/FormRecognizerRequestAccess) formu.
-- [cURL](https://curl.haxx.se/windows/) yüklü.
-- Görüntüyü bir giriş için bir URL. Kullanabileceğiniz bir [örnek görüntü](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/contoso-receipt.png?raw=true) Bu Hızlı Başlangıç için.
+Bu hızlı başlangıcı tamamlayabilmeniz için şunları yapmanız gerekir:
+- Form tanıyıcı sınırlı erişim önizlemesine erişim. Önizlemeye erişim sağlamak için [form tanıyıcı erişim isteği](https://aka.ms/FormRecognizerRequestAccess) formunu doldurun ve gönderebilirsiniz.
+- [kıvrımlı](https://curl.haxx.se/windows/) yüklendi.
+- Bir makbuz görüntüsünün URL 'SI. Bu hızlı başlangıç için [örnek bir görüntü](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/contoso-receipt.png?raw=true) kullanabilirsiniz.
 
-## <a name="create-a-form-recognizer-resource"></a>Form tanıyıcı kaynak oluştur
+## <a name="create-a-form-recognizer-resource"></a>Form tanıyıcı kaynağı oluşturma
 
 [!INCLUDE [create resource](../includes/create-resource.md)]
 
-## <a name="analyze-a-receipt"></a>Bir giriş analiz edin
+## <a name="analyze-a-receipt"></a>Okundu bilgisi Analizi
 
-Bir giriş analiz etmeye başlamak için çağrı **analiz giriş** aşağıdaki cURL komutu kullanarak API. Komutu çalıştırmadan önce şu değişiklikleri yapın:
+Bir alındısı analizine başlamak için aşağıdaki kıvrımlı komutunu kullanarak **Çözümleme alındı** API 'sini çağırabilirsiniz. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
 
-1. Değiştirin `<Endpoint>` Form tanıyıcı abonelik anahtarınızı aldığınız uç noktası ile. Form tanıyıcı kaynağınızda bulabilirsiniz **genel bakış** sekmesi.
-1. Değiştirin `<your receipt URL>` Giriş resminin URL adresine sahip.
-1. Değiştirin `<subscription key>` önceki adımda kopyaladığınız abonelik anahtarı.
+1. `<Endpoint>`, form tanıyıcı aboneliğinizle edindiğiniz uç noktayla değiştirin.
+1. `<your receipt URL>`, bir makbuz resminin URL adresiyle değiştirin.
+1. `<subscription key>`, önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
 
 ```bash
 curl -i -X POST "https://<Endpoint>/formrecognizer/v1.0-preview/prebuilt/receipt/asyncBatchAnalyze" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: <subscription key>" --data-ascii "{ \"url\": \"<your receipt URL>\"}"
 ```
 
-Size gönderilecektir bir `202 (Success)` içeren yanıt bir **işlemi konumu** başlığı. İşlemin durumunu sorgulamak ve sonuçları almak için kullanabileceğiniz bir işlem kimliği bu üstbilgisinin değerini içerir. Aşağıdaki örnekte, sonra dize `operations/` işlem kimliğidir.
+**Işlem konumu** üst bilgisi içeren `202 (Success)` bir yanıt alırsınız. Bu üstbilginin değeri, işlemin durumunu sorgulamak ve sonuçları almak için kullanabileceğiniz bir işlem KIMLIĞI içerir. Aşağıdaki örnekte, `operations/` sonraki dize işlem KIMLIĞIDIR.
 
 ```console
 https://cognitiveservice/formrecognizer/v1.0-preview/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb
 ```
 
-## <a name="get-the-receipt-results"></a>Giriş sonuçlar elde edin
+## <a name="get-the-receipt-results"></a>Makbuz sonuçlarını alma
 
-Çağırdıktan sonra **analiz giriş** API'sini çağırırsınız **giriş sonuç alma** API işlemi ve Ayıklanan veriler durumunu almak için.
+**Çözümleme alındı** API 'sini çağırdıktan sonra, işlemin durumunu ve ayıklanan verileri almak Için **alma sonucu** API 'sini çağırın.
 
-1. Değiştirin `<operationId>` önceki adımdan gelen işlem Kimliğine sahip.
+1. `<operationId>`, önceki adımdaki işlem KIMLIĞIYLE değiştirin.
 1. `<subscription key>` değerini abonelik anahtarınızla değiştirin.
 
 ```bash
@@ -63,11 +63,11 @@ curl -X GET "https://<Endpoint>/formrecognizer/v1.0-preview/prebuilt/receipt/ope
 
 ### <a name="examine-the-response"></a>Yanıtı inceleme
 
-Size gönderilecektir bir `200 (Success)` JSON çıkışını yanıtıyla. İlk alanı `"status"`, işlemin durumunu gösterir. İşlem tamamlandığında `"recognitionResults"` alan her alınmasından ayıklanan metin satırı içeriyor ve `"understandingResults"` alan kaydınızda en uygun bölümleri için anahtar/değer bilgilerini içerir. İşlemi tam değilse, değeri `"status"` olacaktır `"Running"` veya `"NotStarted"`, ve tekrar API'yi çağırması gerekir el ile veya bir komut dosyası aracılığıyla. Bir saniye veya daha fazla çağrıları arasında bir aralık öneririz.
+JSON çıkışıyla `200 (Success)` bir yanıt alacaksınız. `"status"`ilk alan, işlemin durumunu gösterir. İşlem tamamlandıysa, `"recognitionResults"` alanı alış irsaliyesinden ayıklanan her metin satırını içerir ve `"understandingResults"` alanı, girişin en ilgili bölümleri için anahtar/değer bilgilerini içerir. İşlem tamamlanmadıysa, `"status"` değeri `"Running"` veya `"NotStarted"`olur ve API 'yi el ile veya bir komut dosyası aracılığıyla tekrar çağırmanız gerekir. Çağrılar arasında bir saniye veya daha fazla Aralık önerilir.
 
-Aşağıdaki giriş resmi ve karşılık gelen kendi JSON çıkışa bakın. Çıkış okunabilir olması için kısaltıldı.
+Aşağıdaki makbuz görüntüsüne ve buna karşılık gelen JSON çıktısına bakın. Çıktı okunabilirlik için kısaltıldı.
 
-![Contoso Mağazası'ndan bir giriş](../media/contoso-receipt.png)
+![Contoso mağazasından alındı](../media/contoso-receipt.png)
 
 ```json
 {
@@ -182,7 +182,7 @@ Aşağıdaki giriş resmi ve karşılık gelen kendi JSON çıkışa bakın. Ç�
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, Form tanıyıcı REST API ile cURL satış giriş içeriğini ayıklamak için kullanılır. Ardından, daha fazla ayrıntılı Form tanıyıcı API'sini keşfetmek için başvuru belgelerine bakın.
+Bu hızlı başlangıçta, bir satış girişinin içeriğini ayıklamak için, biçim tanıyıcı ' i kıvrımlı REST API kullandınız. Sonra, form tanıyıcı API 'sini daha ayrıntılı incelemek için başvuru belgelerine bakın.
 
 > [!div class="nextstepaction"]
 > [REST API başvuru belgeleri](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api/operations/AnalyzeReceipt)

@@ -1,11 +1,10 @@
 ---
-title: Azure Güvenlik Merkezi'nde kullanıcı verilerini yönetme | Microsoft Docs
-description: " Azure Güvenlik Merkezi'nde kullanıcı verilerini yönetmeyi öğrenin. "
+title: Azure Güvenlik Merkezi 'nde Kullanıcı verilerini yönetme | Microsoft Docs
+description: " Azure Güvenlik Merkezi 'nde Kullanıcı verilerini yönetmeyi öğrenin. "
 services: security-center
 documentationcenter: na
-author: rkarlin
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: 411d7bae-c9d4-4e83-be63-9f2f2312b075
 ms.service: security-center
 ms.devlang: na
@@ -13,92 +12,92 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/23/2018
-ms.author: rkarlin
-ms.openlocfilehash: fcec410df631a58b76878a4cb327ca2fb04a2105
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: memildin
+ms.openlocfilehash: 0d05650ff349cb9e9750b0cefe0de217a986b32a
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60703481"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72254601"
 ---
-# <a name="manage-user-data-in-azure-security-center"></a>Azure Güvenlik Merkezi'nde kullanıcı verilerini yönetme
-Bu makalede, Azure Güvenlik Merkezi kullanıcı verilerini nasıl yönetebileceğiniz hakkında bilgi sağlar. Kullanıcı verilerini yönetme erişimi, silmek veya verileri dışarı aktarma özelliğini içerir.
+# <a name="manage-user-data-in-azure-security-center"></a>Azure Güvenlik Merkezi 'nde Kullanıcı verilerini yönetme
+Bu makalede, Azure Güvenlik Merkezi 'nde Kullanıcı verilerini nasıl yönetebileceğinizi gösteren bilgiler sağlanmaktadır. Kullanıcı verilerini yönetmek, verilere erişme, verileri silme veya dışa aktarma olanağını içerir.
 
 [!INCLUDE [gdpr-intro-sentence.md](../../includes/gdpr-intro-sentence.md)]
 
-Güvenlik Merkezi kullanıcı Okuyucu, sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi, araç içinde müşteri verilerine erişebilir. Bkz: [Azure rol tabanlı erişim denetimi için yerleşik roller](../role-based-access-control/built-in-roles.md) Okuyucu, sahibi ve katkıda bulunan rolleri hakkında daha fazla bilgi edinmek için. Bkz: [Azure aboneliği yöneticileri](../billing/billing-add-change-azure-subscription-administrator.md) hesap yöneticisi rolü hakkında daha fazla bilgi edinmek için.
+Okuyucu, sahip, katkıda bulunan veya hesap yöneticisinin rolünü atayan bir güvenlik merkezi kullanıcısına araç içindeki müşteri verilerine erişim sağlayabilir. Hesap Yöneticisi rolü hakkında daha fazla bilgi edinmek için bkz. [Azure rol tabanlı erişim denetimi Için yerleşik roller](../role-based-access-control/built-in-roles.md) , okuyucu, sahip ve katkıda bulunan rolleri hakkında daha fazla bilgi edinin. Bkz. [Azure abonelik yöneticileri](../billing/billing-add-change-azure-subscription-administrator.md).
 
-## <a name="searching-for-and-identifying-personal-data"></a>Arama ve kişisel verileri tanımlama
-Güvenlik Merkezi kullanıcı kişisel verilerini Azure portalından görüntüleyebilirsiniz. Güvenlik Merkezi, yalnızca e-posta adresi ve telefon numaraları gibi güvenlik kişi ayrıntılarını da depolar. Bkz: [Azure Güvenlik Merkezi'nde güvenlik kişi ayrıntılarını sağlama](security-center-provide-security-contact-details.md) daha fazla bilgi için.
+## <a name="searching-for-and-identifying-personal-data"></a>Kişisel verileri arama ve tanımlama
+Bir güvenlik merkezi kullanıcısı, kişisel verilerini Azure portal aracılığıyla görüntüleyebilir. Güvenlik Merkezi yalnızca e-posta adresleri ve telefon numaraları gibi güvenlik iletişim bilgilerini depolar. Daha fazla bilgi için bkz. [Azure Güvenlik Merkezi 'nde güvenlik iletişim bilgilerini sağlama](security-center-provide-security-contact-details.md).
 
-Azure portalında bir kullanıcı yalnızca zaman VM erişim özelliği Güvenlik Merkezi'nin kullanarak izin verilen IP yapılandırmaları görüntüleyebilir. Daha fazla bilgi için bkz. [Tam zamanında özelliğini kullanarak sanal makine erişimini yönetme](security-center-just-in-time.md).
+Azure portal, bir Kullanıcı, güvenlik merkezi 'nin tam zamanında VM erişimi özelliğini kullanarak izin verilen IP yapılandırmalarının görüntülemesini sağlayabilir. Daha fazla bilgi için bkz. [tam zamanında sanal makine erişimini yönetme](security-center-just-in-time.md).
 
-Azure portalında bir kullanıcı IP adreslerini ve saldırganın ayrıntılarını da dahil olmak üzere Güvenlik Merkezi tarafından sağlanan güvenlik uyarılarını görüntüleyebilirsiniz. Bkz: [yönetme ve Azure Güvenlik Merkezi'nde güvenlik uyarılarını yanıtlama](security-center-managing-and-responding-alerts.md) daha fazla bilgi için.
+Azure portal, bir Kullanıcı, Güvenlik Merkezi tarafından sunulan ve IP adresleri ve saldırgan ayrıntıları dahil güvenlik uyarılarını görüntüleyebilir. Daha fazla bilgi için bkz. [Azure Güvenlik Merkezi 'nde güvenlik uyarılarını yönetme ve yanıtlama](security-center-managing-and-responding-alerts.md).
 
-## <a name="classifying-personal-data"></a>Kişisel veri sınıflandırma
-Güvenlik Merkezi'nin güvenlik ilgili kişi özelliğinde bulunan kişisel verileri sınıflandırmak gerekmez. Kaydedilen veriler e-posta adresi (veya birden çok e-posta adresi) olduğu ve bir telefon numarası. [Kişi verileri](security-center-provide-security-contact-details.md) Güvenlik Merkezi tarafından doğrulanır.
+## <a name="classifying-personal-data"></a>Kişisel verileri sınıflandırma
+Güvenlik Merkezi 'nin güvenlik ilgili kişisi özelliğinde bulunan kişisel verileri sınıflandırmanız gerekmez. Kaydedilen veriler bir e-posta adresi (veya birden fazla e-posta adresi) ve telefon numarasıdır. [İletişim verileri](security-center-provide-security-contact-details.md) Güvenlik Merkezi tarafından onaylanır.
 
-IP adreslerini sınıflandırmak ve bağlantı noktası numaraları Güvenlik Merkezi tarafından kaydedilen gerekmez [zamanında](security-center-just-in-time.md) özelliği.
+Güvenlik Merkezi 'nin [tam zamanında](security-center-just-in-time.md) özelliği tarafından kaydedilen IP adreslerini ve bağlantı noktası numaralarını sınıflandırmanıza gerek yoktur.
 
-Bir kullanıcıya yönetici rolü atanan yalnızca kişisel verileri göre sınıflandırabilirsiniz [uyarılarını görüntüleme](security-center-managing-and-responding-alerts.md) Güvenlik Merkezi'nde.
+Yalnızca yönetici rolü atanan bir Kullanıcı, güvenlik merkezi 'ndeki [uyarıları görüntüleyerek](security-center-managing-and-responding-alerts.md) kişisel verileri sınıflandırabilir.
 
-## <a name="securing-and-controlling-access-to-personal-data"></a>Güvenliğini sağlama ve kişisel verilere erişimi denetleme
-Güvenlik Merkezi kullanıcı Okuyucu, sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi erişim [güvenlik ilgili kişi verilerini](security-center-provide-security-contact-details.md).
+## <a name="securing-and-controlling-access-to-personal-data"></a>Kişisel verilere erişimi güvenli hale getirme ve denetleme
+Okuyucu, sahip, katkıda bulunan veya hesap yöneticisinin rolünü atayan bir güvenlik merkezi kullanıcısına [güvenlik ilgili kişi verilerine](security-center-provide-security-contact-details.md)erişim sağlayabilir.
 
-Güvenlik Merkezi kullanıcı Okuyucu, sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi erişim kendi [zamanında](security-center-just-in-time.md) ilkeleri.
+Okuyucu, sahip, katkıda bulunan veya hesap yöneticisinin rolünü atayan bir güvenlik merkezi kullanıcısı, [tam zamanında](security-center-just-in-time.md) ilkelerine erişebilir.
 
-Güvenlik Merkezi kullanıcı Okuyucu, sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi görüntüleyebilir, [uyarılar](security-center-managing-and-responding-alerts.md).
+Okuyucu, sahip, katkıda bulunan veya hesap yöneticisinin rolüne atanan bir güvenlik merkezi kullanıcısı [uyarılarını](security-center-managing-and-responding-alerts.md)görüntüleyebilir.
 
 ## <a name="updating-personal-data"></a>Kişisel verileri güncelleştirme
-Güvenlik Merkezi kullanıcı sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi güncelleştirebilir [güvenlik ilgili kişi verilerini](security-center-provide-security-contact-details.md) Azure portal aracılığıyla.
+Sahip, katkıda bulunan veya hesap yöneticisinin rolünü atayan bir güvenlik merkezi kullanıcısına Azure portal aracılığıyla [güvenlik iletişim verileri](security-center-provide-security-contact-details.md) güncelleştirebilir.
 
-Güvenlik Merkezi kullanıcı sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi güncelleştirebilir, [yalnızca zaman ilkelerinde](security-center-just-in-time.md).
+Sahip, katkıda bulunan veya hesap yöneticisinin rolüne atanan bir güvenlik merkezi kullanıcısı, [tam zamanında ilkelerini](security-center-just-in-time.md)güncelleştirebilir.
 
-Bir Hesap Yöneticisi, uyarı olayları düzenleyemezsiniz. Bir [uyarı olayı](security-center-managing-and-responding-alerts.md) güvenlik verileri olarak kabul edilir ve salt okunur.
+Hesap Yöneticisi uyarı olaylarını düzenleyemez. Bir [uyarı olayı](security-center-managing-and-responding-alerts.md) güvenlik verileri olarak değerlendirilir ve salt okunurdur.
 
 ## <a name="deleting-personal-data"></a>Kişisel verileri silme
-Güvenlik Merkezi kullanıcı sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi silebilirsiniz [güvenlik ilgili kişi verilerini](security-center-provide-security-contact-details.md) Azure portal aracılığıyla.
+Sahip, katkıda bulunan veya hesap yöneticisinin rolünü atayan bir güvenlik merkezi kullanıcısına Azure portal aracılığıyla [güvenlik iletişim verileri](security-center-provide-security-contact-details.md) silinebilir.
 
-Güvenlik Merkezi kullanıcı sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi silebilirsiniz [yalnızca zaman ilkelerinde](security-center-just-in-time.md) Azure portal aracılığıyla.
+Sahip, katkıda bulunan veya hesap yöneticisinin rolüne atanan bir güvenlik merkezi kullanıcısı, Azure portal aracılığıyla [tam zamanında ilkeleri](security-center-just-in-time.md) silebilir.
 
-Güvenlik Merkezi kullanıcı uyarı olayları nelze odstranit. Güvenlik ihtiyaçlarını temel alarak nedeniyle bir [uyarı olayı](security-center-managing-and-responding-alerts.md) yalnızca veri okuma olarak kabul edilir.
+Bir güvenlik merkezi kullanıcısı uyarı olaylarını silemiyor. Güvenlik nedenleriyle, bir [uyarı olayı](security-center-managing-and-responding-alerts.md) salt okunurdur verileri kabul edilir.
 
 ## <a name="exporting-personal-data"></a>Kişisel verileri dışarı aktarma
-Güvenlik Merkezi kullanıcı Okuyucu, sahibi, katkıda bulunan rolü atanmış veya Hesap Yöneticisi dışarı aktarabilir [güvenlik ilgili kişi verilerini](security-center-provide-security-contact-details.md) tarafından:
+Okuyucu, sahip, katkıda bulunan veya hesap yöneticisinin rolünü atayan bir güvenlik merkezi kullanıcısına, [güvenlik ilgili kişi verilerini](security-center-provide-security-contact-details.md) şu şekilde dışarı aktarabilirsiniz:
 
-- Azure portalından bir kopyasını gerçekleştirme
-- Azure REST API çağrısı, GET HTTP yürütülüyor:
+- Azure portal kopyalama
+- Azure REST API çağrısı yürütülüyor, HTTP Al:
   ```HTTP
   GET https://<endpoint>/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts?api-version={api-version}
   ```
 
-Hesap Yöneticisi, rolü atanmış bir güvenlik merkezi kullanıcı verebilirsiniz [yalnızca zaman ilkelerinde](security-center-just-in-time.md) içeren IP adresleri tarafından:
+Hesap Yöneticisi rolünü atayan bir güvenlik merkezi kullanıcısı, IP adreslerini içeren [tam zamanında ilkelerini şu şekilde](security-center-just-in-time.md) dışarı aktarabilir:
 
-- Azure portalından bir kopyasını gerçekleştirme
-- Azure REST API çağrısı, GET HTTP yürütülüyor:
+- Azure portal kopyalama
+- Azure REST API çağrısı yürütülüyor, HTTP Al:
   ```HTTP
   GET https://<endpoint>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Security/locations/{location}/jitNetworkAccessPolicies/default?api-version={api-version}
   ```
 
-Bir hesap yöneticisi tarafından uyarı ayrıntılarını dışarı aktarabilirsiniz:
+Hesap Yöneticisi uyarı ayrıntılarını şu şekilde dışarı aktarabilir:
 
-- Azure portalından bir kopyasını gerçekleştirme
-- Azure REST API çağrısı, GET HTTP yürütülüyor:
+- Azure portal kopyalama
+- Azure REST API çağrısı yürütülüyor, HTTP Al:
   ```HTTP
   GET https://<endpoint>/subscriptions/{subscriptionId}/providers/microsoft.Security/alerts?api-version={api-version}
   ```
 
-Bkz: [güvenlik uyarıları alın (alma koleksiyonu)](https://msdn.microsoft.com/library/mt704050.aspx) daha fazla bilgi için.
+Daha fazla bilgi için bkz. [güvenlik uyarılarını edinme (KOLEKSIYONU al)](https://msdn.microsoft.com/library/mt704050.aspx).
 
-## <a name="restricting-the-use-of-personal-data-for-profiling-or-marketing-without-consent"></a>Profil oluşturma veya izniniz olmadan pazarlama için kişisel verilerin kullanımı kısıtlama
-Güvenlik Merkezi kullanıcı silerek geri çevirmek seçebilirsiniz, [güvenlik ilgili kişi verilerini](security-center-provide-security-contact-details.md).
+## <a name="restricting-the-use-of-personal-data-for-profiling-or-marketing-without-consent"></a>Onay olmadan profil oluşturma veya pazarlama için kişisel verilerin kullanımını kısıtlama
+Bir güvenlik merkezi kullanıcısı, [güvenlik iletişim verilerini](security-center-provide-security-contact-details.md)silerek devre dışı bırakabilirsiniz.
 
-[Yalnızca zaman verilerindeki](security-center-just-in-time.md) tanımlanabilen olmayan verileri kabul edilir ve 30 gün boyunca tutulur.
+[Tam zamanında veriler](security-center-just-in-time.md) tanınabilir olmayan veriler olarak değerlendirilir ve 30 gün boyunca tutulur.
 
-[Uyarı veri](security-center-managing-and-responding-alerts.md) güvenlik verileri olarak kabul edilir ve iki yıllık bir dönem için korunur.
+[Uyarı verileri](security-center-managing-and-responding-alerts.md) , güvenlik verileri olarak değerlendirilir ve iki yıl boyunca korunur.
 
-## <a name="auditing-and-reporting"></a>Denetim ve Raporlama
-Denetim Günlükleri güvenlik iletişim, tam zamanında ve güncelleştirmeleri tutulur uyarı [Azure etkinlik günlüklerini](../azure-monitor/platform/activity-logs-overview.md).
+## <a name="auditing-and-reporting"></a>Denetim ve raporlama
+Güvenlik kişisinin denetim günlükleri, tam zamanında ve uyarı güncelleştirmeleri [Azure etkinlik günlüklerinde](../azure-monitor/platform/activity-logs-overview.md)saklanır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Kullanıcı verileri yönetme hakkında daha fazla bilgi için bkz. [Azure Güvenlik Merkezi soruşturma bulunan kullanıcı verilerini yönetme](security-center-investigation-user-data.md).
+Kullanıcı verilerini yönetme hakkında daha fazla bilgi için bkz. [Azure Güvenlik Merkezi araştırmada bulunan Kullanıcı verilerini yönetme](security-center-investigation-user-data.md).

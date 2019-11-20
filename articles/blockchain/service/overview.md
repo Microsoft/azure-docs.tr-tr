@@ -1,83 +1,83 @@
 ---
-title: Azure Blockchain hizmetine genel bakış
-description: Azure Blockchain hizmetine genel bakış
+title: Azure blok zinciri hizmetine genel bakış
+description: Azure blok zinciri hizmetine genel bakış
 services: azure-blockchain
-keywords: Blok zinciri
+keywords: blok zinciri
 author: PatAltimore
 ms.author: patricka
 ms.date: 05/02/2019
-ms.topic: article
+ms.topic: overview
 ms.service: azure-blockchain
 ms.reviewer: janders
 manager: femila
-ms.openlocfilehash: e370916d420a7bc4cd16d021c69a2f8609093d30
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9fcf75a07d1caf7b411c315d11ce984cbe35df75
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65544713"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73577191"
 ---
-# <a name="what-is-azure-blockchain-service"></a>Azure Blockchain hizmeti nedir?
+# <a name="what-is-azure-blockchain-service"></a>Azure Blok Zinciri Hizmeti nedir?
 
-Azure Blockchain kullanıcılar büyütün ve uygun ölçekte azure'da blok zinciri ağları olanağı sağlayan tam olarak yönetilen kayıt defteri hizmeti hizmetidir. Hem altyapı Yönetimi yanı sıra blok zinciri ağ idare birleşik denetimi sağlayarak, Azure Blockchain hizmeti sunar:
+Azure blok zinciri hizmeti, kullanıcılara blok zinciri ağlarını Azure 'da büyüyerek büyütüp çalıştırabilme olanağı sağlayan, tam olarak yönetilen bir muhasebe hizmetidir. Hem altyapı yönetimi hem de blok zinciri ağ yönetimi için Birleşik denetim sağlayarak Azure blok zinciri hizmeti şunları sağlar:
 
 * Basit ağ dağıtımı ve işlemleri
 * Yerleşik konsorsiyum yönetimi
-* Nitelikli akıllı anlaşmalar aşina olduğunuz geliştirme araçları ile geliştirme
+* Tanıdık geliştirme araçlarıyla akıllı sözleşmeler geliştirin
 
-Azure Blockchain hizmeti, birden çok kayıt defteri protokol desteklemek için tasarlanmıştır. Şu anda Ethereum desteği sağladığı [çekirdek](https://www.jpmorgan.com/Quorum) muhasebe kullanarak [IBFT](https://github.com/jpmorganchase/quorum/wiki/Quorum-Consensus) fikir birliğine varılmış mekanizması.
+Azure blok zinciri hizmeti birden çok defter protokolünü destekleyecek şekilde tasarlanmıştır. Şu anda, [iBFT](https://github.com/jpmorganchase/quorum/wiki/Quorum-Consensus) konsensus mekanizması kullanılarak Ethereum [çekirdek](https://www.jpmorgan.com/Quorum) defterine yönelik destek sağlar.
 
-Bu özellikler neredeyse hiç yönetim gerektirmez ve tümüyle ek ücret ödemeden sağlanır. Uygulama geliştirme ve iş mantığı yerine zamanınızı ve kaynaklarınızı sanal makine ve altyapı Yönetimi odaklanabilirsiniz. Ayrıca, yeni beceriler edinmek zorunda kalmadan çözümlerinizi sunmak için tercih ettiğiniz platform ve açık kaynaklı araçları geliştirmeye devam edebilirsiniz.
+Bu özellikler neredeyse hiç yönetim gerektirmez ve tümüyle ek ücret ödemeden sağlanır. Sanal makineleri ve altyapıyı yönetmek için zaman ve kaynak ayırmak yerine, uygulama geliştirme ve iş mantığına odaklanırsınız. Ayrıca, yeni beceriler öğrenmek zorunda kalmadan çözümlerinizi teslim etmek için seçtiğiniz açık kaynak araçları ve platformuyla uygulamanızı geliştirmeye devam edebilirsiniz.
 
-## <a name="network-deployment-and-operations"></a>Ağ dağıtımı ve işlemleri
+## <a name="network-deployment-and-operations"></a>Ağ dağıtımı ve işlemler
 
-Azure Blockchain Hizmeti'ni dağıtma Azure blok zinciri uzantıyı kullanarak Visual Studio kod yanı sıra Azure portalı, Azure CLI aracılığıyla yapılabilir.  Hem işlem hem de doğrulayıcının düğüm, hizmet tarafından yönetilen depolama yanı sıra güvenlik yalıtımı için Azure sanal ağları sağlama dahil olmak üzere dağıtım basitleştirilmiştir.  Ayrıca, yeni bir blok zinciri üye dağıtırken kullanıcılar ayrıca oluşturmak veya Konsorsiyumu katılın.  Farklı Azure aboneliklerinden başka bir işlemle bir paylaşılan uygun blok zinciri güvenli bir şekilde iletişim kurabilmesi birden çok tarafları Konsorsiyum etkinleştirin.  Bu Basitleştirilmiş Dağıtım güne ilişkin dakika, blok zinciri ağ dağıtımı azaltır.
+Azure blok zinciri hizmeti 'nin dağıtımı, Azure blok zinciri uzantısını kullanan Azure portal, Azure CLı ve Visual Studio Code aracılığıyla yapılabilir.  Dağıtım basitleştirilerek, hem işlem hem de Doğrulayıcı düğümlerinin sağlanması, güvenlik yalıtımı için Azure sanal ağları ve hizmet tarafından yönetilen depolamanın sağlanması dahildir.  Ayrıca, yeni bir blok zinciri üyesi dağıttığınızda, kullanıcılar bir konsorsiyumun de oluşturulmasını veya katılıyor.  Consortiums, farklı Azure aboneliklerindeki birden fazla tarafın paylaşılan bir blok zincirinde birbirleriyle güvenli bir şekilde iletişim kurabilmelerini sağlar.  Bu basitleştirilmiş dağıtım, blok zinciri ağ dağıtımını gün ve dakika olarak azaltır.
 
 ### <a name="performance-and-service-tiers"></a>Performans ve hizmet katmanları
 
-Azure Blockchain hizmeti iki hizmet katmanı sunmaktadır: *Temel* ve *standart*. Her katman farklı performans ve basit geliştirme desteği ve test iş yüklerini en çok yüksek düzeyde yeteneklerini üretim blockchain dağıtımları ölçeği sunar. Her iki katmanda en az bir işlem düğümü ve bir doğrulayıcı (Temel) veya iki Doğrulayıcı düğümü (standart) içerir.
+Azure blok zinciri hizmeti iki hizmet katmanı sunar: *temel* ve *Standart*. Her katman, hafif geliştirme ve test iş yüklerini desteklemek için farklı performans ve yetenekler sunarak çok büyük ölçekli üretim blok zinciri dağıtımlarını destekler. Her iki katmanda de en az bir işlem düğümü ve bir doğrulayıcı düğümü (temel) veya iki Doğrulayıcı düğüm (Standart) bulunur.
 
 ![Fiyatlandırma katmanları](./media/overview/pricing-tiers.png)
 
-İki Doğrulayıcı düğüm sunan yanı sıra *standart* Katman 2 sunar *sanal çekirdekler* işlem ve Doğrulayıcı her düğüm için temel katmanı 1 sanal çekirdek yapılandırma sunar ancak.  İşlem ve Doğrulayıcı düğümler için 2 sanal çekirdek sunarak, kalan 1 sanal çekirdek, blok zinciri iş yüklerini üretim için en uygun performansı sağlamaya diğer altyapı ile ilgili hizmetler için kullanılabilse de 1 sanal çekirdek çekirdek muhasebe ayrılabilir. Fiyatlandırma ayrıntıları hakkında daha fazla bilgi için bkz: [Azure blok zinciri Service fiyatlandırması](https://azure.microsoft.com/pricing/details/blockchain-service).
+*Standart* katman, iki Doğrulayıcı düğüm sunumuna ek olarak her işlem ve doğrulayıcı düğümü Için 2 *sanal çekirdek* sağlarken, temel katmanda 1 sanal çekirdek yapılandırması sunulur.  İşlem ve doğrulayıcı düğümleri için 2 sanal çekirdek sunarak, 1 sanal çekirdek çekirdek defterine ayrılabilir, çünkü kalan 1 sanal çekirdek, altyapı ile ilgili diğer hizmetler için kullanılabilir ancak üretim blok zinciri iş yükleri için en iyi performansı sağlar. Fiyatlandırma ayrıntıları hakkında daha fazla bilgi için bkz. [Azure blok zinciri hizmeti fiyatlandırması](https://azure.microsoft.com/pricing/details/blockchain-service).
 
-### <a name="security-and-maintenance"></a>Güvenlik ve Bakım
+### <a name="security-and-maintenance"></a>Güvenlik ve bakım
 
-İlk blok zinciri üyelik sağlandıktan sonra ek işlem düğümleri, üye eklemek için imkanına sahip olursunuz.  Varsayılan olarak, işlem düğümleri aracılığıyla güvenlik duvarı kurallarını güvenli olduğundan ve erişimi için yapılandırılmış gerekir.  Ayrıca, tüm işlem düğümleri TLS üzerinden Hareket halindeki verileri şifreleyin.  Güvenlik duvarı kuralları, temel kimlik doğrulaması, erişim anahtarlarını yanı sıra Azure Active Directory Tümleştirme dahil olmak üzere işlem düğümü erişiminin güvenliğini sağlamak için birden çok seçenek vardır. Daha fazla bilgi için [işlem düğümleri yapılandırma](configure-transaction-nodes.md) ve [Azure Active Directory erişimini yapılandırma](configure-aad.md).
+İlk blok zinciri üyesini sağlamaktan sonra, üyeye ek işlem düğümleri ekleyebilirsiniz.  Varsayılan olarak, işlem düğümleri güvenlik duvarı kuralları aracılığıyla güvenli hale getirilir ve erişim için yapılandırılması gerekir.  Ayrıca, tüm işlem düğümleri TLS aracılığıyla hareket halindeki verileri şifreler.  İşlem düğümü erişiminin güvenliğini sağlamak için güvenlik duvarı kuralları, temel kimlik doğrulaması, erişim anahtarları ve Azure Active Directory tümleştirme gibi birden çok seçenek mevcuttur. Daha fazla bilgi için bkz. [işlem düğümlerini yapılandırma](configure-transaction-nodes.md) ve [Azure Active Directory erişimi yapılandırma](configure-aad.md).
 
-Yönetilen bir hizmet olarak blockchain üyenin düğümlerin işletim sistemi ve kayıt defteri yazılım yığını güncelleştirmeleri, yüksek kullanılabilirlik için (yalnızca standart katman) yapılandırılmış, DevOps çoğunu ortadan en son konak ile düzeltme eki Azure blok zinciri hizmeti sağlar. Geleneksel Iaas blok zinciri düğümleri için gereklidir.  Düzeltme eki uygulama ve güncelleştirmeler hakkında daha fazla bilgi için bkz. [desteklenen Azure blok zinciri hizmet muhasebe sürümleri](ledger-versions.md).
+Yönetilen bir hizmet olarak, Azure blok zinciri hizmeti, blok zinciri üyesinin düğümlerine en son ana bilgisayar işletim sistemi ve genel muhasebe yazılım yığın güncelleştirmeleriyle birlikte düzeltme eki uygulanmış ve yüksek kullanılabilirlik için yapılandırılmış (yalnızca Standart katman), DevOps 'un çoğunu ortadan kaldıran sağlar geleneksel IaaS blok zinciri düğümleri için gereklidir.  Düzeltme eki uygulama ve güncelleştirme hakkında daha fazla bilgi için bkz. [desteklenen Azure blok zinciri hizmeti muhasebe sürümleri](ledger-versions.md).
 
 ### <a name="monitoring-and-logging"></a>İzleme ve günlüğe kaydetme
 
-Ayrıca, Azure Blockchain hizmet düğümlerinin CPU, bellek ve depolama kullanımı hakkında Öngörüler yanı sıra, işlemler ve İncelenmiş blokları gibi ağ etkinliği blok zinciri faydalı içgörüler sağlayan Azure İzleyici hizmeti aracılığıyla zengin ölçümleri sağlar, işlem sıra derinliğini, hem de etkin bağlantılar.  Ölçümler, görünümler, blok zinciri uygulamanız için önemli olan öngörüleri sağlayacak özelleştirilebilir.  Ayrıca, kullanıcıların bir e-posta veya SMS mesajı göndermek için bir mantıksal uygulama, Azure işlevi çalıştıran veya özel tanımlı bir Web kancası gönderme gibi eylemleri tetiklemek uyarılar aracılığıyla eşikleri tanımlanabilir.
+Ayrıca, Azure blok zinciri hizmeti, düğümlerin CPU, bellek ve depolama kullanımına ilişkin Öngörüler sağlayan Azure Izleyici hizmeti aracılığıyla zengin ölçümler sağlarken, işlemler ve bloklar gibi blok zinciri ağ etkinliğine yönelik yardımcı öngörüler sağlar. işlem sırası derinliğinin yanı sıra etkin bağlantılar.  Ölçümler, blok zinciri uygulamanız için önemli olan öngörülere görünümler sunacak şekilde özelleştirilebilir.  Ayrıca, eşikler, kullanıcıların bir e-posta veya kısa mesaj gönderme, bir Logic App, Azure Işlevi çalıştırma veya özel tanımlanmış bir Web kancasına gönderme gibi eylemleri tetiklemelerine olanak sağlayan uyarılar aracılığıyla tanımlanabilir.
 
 ![Ölçümler](./media/overview/metrics.png)
 
-Azure Log Analytics, kullanıcıların çekirdek muhasebe ya da diğer önemli bilgiler gibi çalıştı bağlantıları işlem düğümlerine ilgili günlüklerini görüntüleyebilirsiniz.
+Kullanıcılar, Azure Log Analytics aracılığıyla çekirdek Muhasebeyle ilgili günlükleri veya işlem düğümlerine bağlantı girişimi gibi diğer önemli bilgileri görüntüleyebilir.
 
 ## <a name="built-in-consortium-management"></a>Yerleşik konsorsiyum yönetimi
 
-İlk blok zinciri üyelik dağıtırken katılın veya yeni bir konsorsiyum oluşturun.  Konsorsiyumu, idare ve çok taraflı bir işlemde transact blockchain üyeleri arasında bağlantı yönetmek için kullanılan mantıksal bir gruptur.  Azure blok zinciri hizmeti aracılığıyla hangi eylemleri üyeleri consortium sürebilir belirlemek için önceden tanımlanmış akıllı sözleşmeler, yerleşik idare denetimleri sağlar.  Bu idare denetimleri gerektiği şekilde consortium yönetici tarafından özelleştirilebilir. Yeni consortium oluşturduğunuzda, blok zinciri diğer taraflar, consortium katılmaya davet özelliğini etkinleştirme varsayılan yönetici Consortium üyesidir.  Yalnızca daha önce davet edildiniz varsa Konsorsiyumu katılabilirsiniz.  Konsorsiyumu eklerken, blok zinciri üyelik consortium'ın Yöneticisi tarafından yerleştirdiniz idare denetimleri tabidir.
+İlk blok zinciri üyesini dağıttığınızda, yeni bir konsorsiya katılırsanız ya da oluşturursunuz.  Konsorsiyum, çok taraflı bir işlemle Transact blok zinciri üyeleri arasındaki idare ve bağlantıyı yönetmek için kullanılan mantıksal bir gruptur.  Azure blok zinciri hizmeti, konsorsiyumun hangi eylemlerin yapabileceğini belirleyen önceden tanımlı akıllı sözleşmeler aracılığıyla yerleşik idare denetimleri sağlar.  Bu idare denetimleri, konsorsiyumun Yöneticisi tarafından gerektiği şekilde özelleştirilebilir. Yeni bir konsorsiyum oluşturduğunuzda, blockzincirinizin üyesi konsorsiyumun varsayılan yöneticisidir ve diğer taraflara konsorsiyume katılması için davet etme olanağı sağlar.  Yalnızca daha önce davet edildiyseniz bir konsorsiya katabilirsiniz.  Bir konsorsiya katılırken, blok zinciri üyesi, konsorsiyumun Yöneticisi tarafından yerine yerleştirilen idare denetimlerine tabidir.
 
-![Consortium Yönetimi](./media/overview/consortium.png)
+![Konsorsiyum yönetimi](./media/overview/consortium.png)
 
-Ekleme ve Konsorsiyumu üyeler kaldırılırken gibi yönetim işlemlerini consortium, PowerShell ve REST API erişilebilir. Genel arabirimler kullanarak yerine değiştirme ve nitelikli akıllı anlaşmalar solidity tabanlı gönderme Konsorsiyumu programlı olarak yönetebilirsiniz. Daha fazla bilgi için [consortium Yönetim](consortium.md).
+Bir konsorsiyumde üye ekleme ve kaldırma gibi konsorsiyum yönetim eylemlerine PowerShell ve bir REST API erişebilirsiniz. Solidity tabanlı akıllı sözleşmeleri değiştirmek ve göndermek yerine ortak arabirimleri kullanarak bir konsorsiyunuzu programlı bir şekilde yönetebilirsiniz. Daha fazla bilgi için bkz. [konsorsiyum yönetimi](consortium.md).
 
-## <a name="develop-using-familiar-development-tools"></a>Aşina olduğunuz geliştirme araçlarını kullanarak geliştirme
+## <a name="develop-using-familiar-development-tools"></a>Tanıdık geliştirme araçlarını kullanarak geliştirme
 
-Ethereum uygulamalarınız için yaptığınız gibi açık kaynaklı çekirdek Ethereum defterini bağlı olarak, uygulamaları Azure blok zinciri hizmeti için aynı şekilde geliştirebilirsiniz. Sektörün önde gelen iş ortaklarıyla çalışma, Azure blok zinciri Geliştirme Seti Visual Studio Code uzantısı Truffle nitelikli akıllı anlaşmalar oluşturun Suite gibi tanıdık araçlarından yararlanarak geliştiricilerin sağlar. Azure blok zinciri Geliştirme Seti eklentiyi kullanarak, geliştiriciler oluşturma veya bağlanın ve mevcut consortium oluşturmak ve dağıtmak, akıllı sözleşmeler tüm tek bir IDE içinden. Azure Blockchain Visual Studio Code uzantısı'nı kullanarak oluşturabilir veya, oluşturabilir ve akıllı sözleşmelerinizi tek bir IDE içinden dağıtmak için mevcut bir konsorsiyum bağlanın. Daha fazla bilgi için [VS Code Marketi'nde Azure blok zinciri Geliştirme Seti](https://aka.ms/vscodebcextension) ve [Azure blok zinciri Geliştirme Seti Kullanıcı Kılavuzu](https://aka.ms/vscodebcextensionwiki ).
+Açık kaynaklı çekirdek Ethereum defterine bağlı olarak, mevcut Ethereum uygulamalarında yaptığınız şekilde Azure blok zinciri hizmeti için uygulama geliştirebilirsiniz. Önde gelen sektör ortaklarıyla çalışan Azure blok zinciri geliştirme seti Visual Studio Code uzantısı, geliştiricilerin akıllı sözleşmeleri oluşturmak için Truffle paketi gibi tanıdık araçlardan yararlanmasını sağlar. Geliştiriciler, Azure blok zinciri geliştirme seti uzantısını kullanarak akıllı sözleşmelerinizi tek bir IDE 'den derleyip dağıtabilmeniz için ve var olan konsorsiyumunu oluşturabilir veya buna bağlanabilir. Azure blok zinciri Visual Studio Code uzantısını kullanarak, akıllı sözleşmelerinizi tek bir IDE 'den derleyip dağıtabilmeniz için mevcut bir konsorsiyum oluşturabilir veya bağlanabilirsiniz. Daha fazla bilgi için, VS Code marketi ve [Azure blok zinciri Geliştirme Seti Kullanıcı kılavuzunda](https://aka.ms/vscodebcextensionwiki ) [Azure blok zinciri geliştirme seti](https://aka.ms/vscodebcextension) ' ne bakın.
 
 ## <a name="support-and-feedback"></a>Destek ve geri bildirim
 
-İhtiyaç duyarsanız veya geri bildirimde bulunmak?
+Yardıma mı ihtiyacınız var?
 
-* Ziyaret [Azure blok zinciri blogu](https://azure.microsoft.com/blog/topics/blockchain/), [Microsoft Tech Community](https://techcommunity.microsoft.com/t5/Blockchain/bd-p/AzureBlockchain), ve [Azure blok zinciri Forumu](https://social.msdn.microsoft.com/Forums/home?forum=azureblockchain).
+* [Azure blok zinciri blogu](https://azure.microsoft.com/blog/topics/blockchain/), [Microsoft Tech Community](https://techcommunity.microsoft.com/t5/Blockchain/bd-p/AzureBlockchain)ve [Azure blok zinciri forumunu](https://social.msdn.microsoft.com/Forums/home?forum=azureblockchain)ziyaret edin.
 * Görüş bildirmek veya yeni özellikler istemek için [UserVoice](https://feedback.azure.com/forums/921130-azure-blockchain-service) aracılığıyla bir giriş oluşturun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Başlamak için bir hızlı başlangıcı deneyin veya bu kaynaklar daha ayrıntılı bilgi edinin.
-* [Azure portalını kullanarak blok zinciri üye oluşturmak](create-member.md) veya [Azure CLI kullanarak bir blok zinciri üye oluştur](create-member-cli.md)
+Başlamak için bir hızlı başlangıç yapın veya bu kaynaklardan daha fazla ayrıntı bulun.
+* [Azure Portal kullanarak bir blok zinciri üyesi oluşturun](create-member.md) veya [Azure CLI kullanarak bir blok zinciri üyesi oluşturun](create-member-cli.md)
 * Maliyet karşılaştırmaları ve hesaplayıcıları için bkz. [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/blockchain-service).
-* İlk kullanıp uygulamanızın derleme [Azure blok zinciri Geliştirme Seti](https://github.com/Azure-Samples/blockchain-devkit)
-* Azure Blockchain VSCode uzantısı [Kullanıcı Kılavuzu](https://github.com/Microsoft/vscode-azure-blockchain-ethereum/wiki)
+* [Azure blok zinciri geliştirme setini](https://github.com/Azure-Samples/blockchain-devkit) kullanarak ilk uygulamanızı oluşturma
+* Azure blok zinciri VSCode uzantısı [Kullanıcı Kılavuzu](https://github.com/Microsoft/vscode-azure-blockchain-ethereum/wiki)

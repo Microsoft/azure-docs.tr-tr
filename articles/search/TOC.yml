@@ -1,22 +1,30 @@
-- name: Azure Search Belgeleri
+- name: Azure Bilişsel Arama Belgeleri
   href: index.yml
 - name: Genel Bakış
-  items:
-    - name: Azure Search nedir?
-      href: search-what-is-azure-search.md
-- name: Hızlı Başlangıçlar
   expanded: true
+  items:
+    - name: Azure Bilişsel Arama nedir?
+      href: search-what-is-azure-search.md
+    - name: Yenilikler
+      href: whats-new.md
+- name: Hızlı Başlangıçlar
   items:
     - name: Hizmet oluşturma
       href: search-create-service-portal.md
     - name: Portal
       items:
-        - name: Dizini yükleme ve sorgulama
+        - name: Arama dizini oluşturma
           href: search-get-started-portal.md
-        - name: AI ile zenginleştirme (bilişsel arama)
+        - name: Bilişsel beceri kümesi oluşturma
           href: cognitive-search-quickstart-blob.md
+        - name: Bilgi deposu oluşturma
+          href: knowledge-store-create-portal.md
     - name: 'C#'
       href: search-get-started-dotnet.md
+    - name: Java
+      href: search-get-started-java.md
+    - name: Node.js
+      href: search-get-started-nodejs.md
     - name: Postman
       href: search-get-started-postman.md
     - name: PowerShell
@@ -25,7 +33,7 @@
       href: search-get-started-python.md
 - name: Öğreticiler
   items:
-    - name: İlk uygulamanızı oluşturma
+    - name: 'İlk C# uygulamanızı oluşturma'
       items:
         - name: 1 - Temel arama sayfası
           href: tutorial-csharp-create-first-app.md
@@ -53,26 +61,38 @@
           href: cognitive-search-tutorial-blob-python.md
 - name: Örnekler
   items:
-    - name: Azure kod örnekleri
-      href: 'https://azure.microsoft.com/resources/samples/?service=search'
+    - name: 'C# örnekleri'
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure-search&languages=csharp'
+    - name: Java örnekleri
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure-search&languages=java'
+    - name: JavaScript örnekleri
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure-search&languages=javascript'
+    - name: Python örnekleri
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure-search&languages=python'
+    - name: REST örnekleri
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure-search&languages=rest'
 - name: Eğitim
   items:
-    - name: Bilgi Bankası araştırma bootcamp
-      href: 'https://azure.github.io/LearnAI-KnowledgeMiningBootcamp/'
+    - name: Giriş (Microsoft Learn)
+      href: 'https://docs.microsoft.com/learn/modules/intro-to-azure-search/'
     - name: Uygulamalara arama ekleme (Pluralsight)
       href: 'https://www.pluralsight.com/courses/azure-adding-search-abilities-apps'
-    - name: Microsoft Azure Geliştirici kursu (Pluralsight)
+    - name: Geliştirici kursu (Pluralsight)
       href: 'https://www.pluralsight.com/courses/microsoft-azure-textual-content-search-enabling'
 - name: Kavramlar
   items:
     - name: Tam metin arama
       href: search-lucene-query-architecture.md
-    - name: Bilişsel Arama
+    - name: Yapay zeka zenginleştirme
       href: cognitive-search-concept-intro.md
+    - name: Beceri kümeleri
+      href: cognitive-search-working-with-skillsets.md
     - name: Bilgi deposu
       href: knowledge-store-concept-intro.md
     - name: Yansıtmalar
       href: knowledge-store-projection-overview.md
+    - name: Artımlı dizin oluşturma
+      href: cognitive-search-incremental-indexing-conceptual.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Planlama
@@ -99,7 +119,7 @@
           href: search-security-trimming-for-azure-search.md
         - name: AAD kimlikleri üzerinde filtreleme
           href: search-security-trimming-for-azure-search-with-aad.md
-        - name: Şifreleme anahtarlarını yönetme (önizleme)
+        - name: Şifreleme anahtarlarını yönetme
           href: search-security-manage-encryption-keys.md
     - name: Geliştirme
       items:
@@ -107,12 +127,10 @@
           href: search-api-versions.md
         - name: .NET’te geliştirme
           href: search-howto-dotnet-sdk.md
-        - name: Node.js’de geliştirme
-          href: search-get-started-nodejs.md
-        - name: Java’da geliştirme
-          href: search-get-started-java.md
         - name: SDK’yı yükseltme
           items:
+            - name: .NET SDK 10.0
+              href: search-dotnet-sdk-migration-version-10.md
             - name: .NET SDK 9.0
               href: search-dotnet-sdk-migration-version-9.md
             - name: .NET SDK 5.0
@@ -131,6 +149,8 @@
           href: search-what-is-an-index.md
         - name: Dizin oluşturma (portal)
           href: search-create-index-portal.md
+        - name: Çok dilli bir dizin oluşturma
+          href: search-language-support.md
         - name: Çözümleyiciler
           items:
             - name: Çözümleyici ekleme
@@ -154,10 +174,8 @@
         - name: Karmaşık veri türlerini modelleme
           href: search-howto-complex-data-types.md
         - name: İlişkisel verileri modelleme
-          href: search-example-adventureworks-modeling.md
-        - name: Çok düzeyli modeller
-          href: search-example-adventureworks-multilevel-faceting.md
-    - name: Veri yükleme
+          href: index-sql-relational-data.md
+    - name: Tüm verileri dizinleme
       items:
         - name: Verileri içeri aktarmaya genel bakış
           href: search-what-is-data-import.md
@@ -169,7 +187,23 @@
           href: search-howto-large-index.md
         - name: Eş zamanlı güncelleştirmeleri tanımlama
           href: search-howto-concurrency.md
-    - name: Dizin oluşturucularla veri yükleme
+    - name: Azure Blob verilerini dizinleme
+      items:
+        - name: Blob verileriyle AI kullanma
+          href: search-blob-ai-integration.md
+        - name: Tam metin araması ekleme
+          href: search-blob-storage-integration.md
+        - name: Blob dizin oluşturucu ayarlama
+          href: search-howto-indexing-azure-blob-storage.md
+        - name: Azure Data Lake Storage 2. Nesil dizin oluşturucuyu ayarlama
+          href: search-howto-index-azure-data-lake-storage.md
+        - name: Bire çok blobları dizinleme
+          href: search-howto-index-one-to-many-blobs.md
+        - name: CSV bloblarını dizine ekleme
+          href: search-howto-index-csv-blobs.md
+        - name: JSON bloblarını dizine ekleme
+          href: search-howto-index-json-blobs.md
+    - name: '"Dizin oluşturucular" ile dizinleme'
       items:
         - name: Dizin oluşturuculara genel bakış
           href: search-indexer-overview.md
@@ -179,26 +213,16 @@
           href: search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md
         - name: Azure Cosmos DB dizinleyici
           href: search-howto-index-cosmosdb.md
-        - name: Azure Blob Depolama dizin oluşturucu
-          items:
-            - name: Blob dizin oluşturucu ayarlama
-              href: search-howto-indexing-azure-blob-storage.md
-            - name: Bire çok blobları dizinleme
-              href: search-howto-index-one-to-many-blobs.md
-            - name: CSV bloblarını dizine ekleme
-              href: search-howto-index-csv-blobs.md
-            - name: JSON bloblarını dizine ekleme
-              href: search-howto-index-json-blobs.md
         - name: Zamanlama dizin oluşturucuları
           href: search-howto-schedule-indexers.md
         - name: Alanları eşleme
           href: search-indexer-field-mappings.md
+        - name: SQL Yönetilen Örneğine bağlanma
+          href: search-howto-connecting-azure-sql-mi-to-azure-search-using-indexers.md
         - name: SQL Server VM’lerine bağlanma
           href: search-howto-connecting-azure-sql-iaas-to-azure-search-using-indexers.md
         - name: Dizin oluşturucuları izleme
           href: search-howto-monitor-indexers.md
-        - name: Yaygın sorunları giderme
-          href: search-indexer-troubleshooting.md
     - name: AI ile zenginleştirme
       items:
         - name: Bilişsel Hizmetler kaynağı iliştirme
@@ -213,6 +237,8 @@
               href: cognitive-search-output-field-mapping.md
             - name: Görüntülerdeki bilgileri işleme ve ayıklama
               href: cognitive-search-concept-image-scenarios.md
+            - name: Artımlı dizin ayarlama
+              href: search-howto-incremental-index.md
         - name: Özel beceriler
           items:
             - name: Özel becerileri tümleştirme
@@ -221,31 +247,35 @@
               href: cognitive-search-create-custom-skill-example.md
             - name: Örnek - Kapsayıcılar
               href: 'https://go.microsoft.com/fwlink/?linkid=2089500'
-        - name: Sorun giderme ipuçları
+        - name: Tasarım ipuçları
           href: cognitive-search-concept-troubleshooting.md
         - name: Belge bağlantıları
           href: cognitive-search-resources-documentation.md
-    - name: Bilgi deposu (önizleme)
+        - name: Bilgi deposu
+          items:
+            - name: REST ve Postman kullanarak oluşturma
+              href: knowledge-store-create-rest.md
+            - name: Depolama Gezgini ile görüntüleme
+              href: knowledge-store-view-storage-explorer.md
+            - name: Power BI ile bağlanma
+              href: knowledge-store-connect-power-bi.md
+    - name: Belgeleri sorgulama
       items:
-        - name: Nasıl kullanmaya başlarım
-          href: knowledge-store-howto.md
-    - name: Verileri sorgulama
-      items:
-        - name: Temel bir sorgu oluşturma
+        - name: Sorgu türleri ve oluşturma
           href: search-query-overview.md
-        - name: Arama Gezgini (portal)
+        - name: Basit bir sorgu oluşturma
+          href: search-query-simple-examples.md
+        - name: Tam Lucene söz dizimini kullanma
+          href: search-query-lucene-examples.md
+        - name: Arama Gezgini'ni kullanma (portal)
           href: search-explorer.md
         - name: Basit sorgu söz dizimi
           href: query-simple-syntax.md
         - name: Tam Lucene sorgu söz dizimi
           href: query-lucene-syntax.md
-        - name: Örnekler (basit söz dizimi)
-          href: search-query-simple-examples.md
-        - name: Örnekler (tam Lucene)
-          href: search-query-lucene-examples.md
-        - name: moreLikeThis (önizleme)
+        - name: moreLikeThis sorgu parametresi
           href: search-more-like-this.md
-    - name: Filtreleri kullanma
+    - name: Filtreleri uygulama
       items:
         - name: Filtrelere genel bakış
           href: search-filters.md
@@ -257,26 +287,28 @@
           href: search-query-troubleshoot-collection-filters.md
         - name: Koleksiyon filtrelerini anlama
           href: search-query-understand-collection-filters.md
+        - name: Çok düzeyli model örneği
+          href: search-example-adventureworks-multilevel-faceting.md
     - name: Sonuçları işleme
       items:
         - name: Sayfayla ilgili özellikler
           href: search-pagination-page-layout.md
-    - name: İlgi düzeyini ayarlama
-      items:
-        - name: Puanlama profili ekleme
+        - name: İlgi düzeyini ayarlama (puanlama profilleri)
           href: index-add-scoring-profiles.md
-    - name: Yönetim
+    - name: Yönetme ve izleme
       items:
         - name: Portal yönetimi
           href: search-manage.md
         - name: PowerShell yönetimi
           href: search-manage-powershell.md
-    - name: İzleme
-      items:
         - name: Etkinliği izleme ve günlüğe kaydetme
           href: search-monitor-usage.md
-        - name: Arama trafiği analizi
-          href: search-traffic-analytics.md
+    - name: Sorun giderme
+      items:
+        - name: Dizin oluşturucu sorunları
+          href: search-indexer-troubleshooting.md
+        - name: Dizin oluşturucu hataları ve uyarıları
+          href: cognitive-search-common-errors-warnings.md
 - name: Başvuru
   items:
     - name: Azure CLI
@@ -330,8 +362,6 @@
           href: cognitive-search-skill-keyphrases.md
         - name: Dil Algılama
           href: cognitive-search-skill-language-detection.md
-        - name: Adlandırılmış Varlık Tanıma
-          href: cognitive-search-skill-named-entity-recognition.md
         - name: Varlık Tanıma
           href: cognitive-search-skill-entity-recognition.md
         - name: Metin Birleştirme
@@ -340,6 +370,8 @@
           href: cognitive-search-skill-textsplit.md
         - name: Yaklaşım
           href: cognitive-search-skill-sentiment.md
+        - name: Metin Çevirisi
+          href: cognitive-search-skill-text-translation.md
         - name: Görüntü Analizi
           href: cognitive-search-skill-image-analysis.md
         - name: OCR
@@ -348,18 +380,25 @@
           href: cognitive-search-skill-shaper.md
         - name: Koşullu
           href: cognitive-search-skill-conditional.md
-        - name: Kullanım Dışı Bırakılmış Beceriler
-          href: cognitive-search-skill-deprecated.md
+        - name: Belge Ayıklama
+          href: cognitive-search-skill-document-extraction.md
     - name: Özel beceriler
       items:
         - name: Özel Web API'si
           href: cognitive-search-custom-skill-web-api.md
+    - name: Kullanım Dışı Bırakılmış Beceriler
+      href: cognitive-search-skill-deprecated.md
+      items:
+        - name: Adlandırılmış Varlık Tanıma
+          href: cognitive-search-skill-named-entity-recognition.md
 - name: Kaynaklar
   items:
     - name: Azure Topluluk Desteği
       href: 'https://azure.microsoft.com/support/community/?product=search'
     - name: Azure Güncelleştirmeleri
       href: 'https://azure.microsoft.com/updates/?product=search'
+    - name: Geri Bildirim Forumu (UserVoice)
+      href: 'https://feedback.azure.com/forums/263029-azure-search'
     - name: Tanıtım siteleri
       items:
         - name: Finansal dosyalar tanıtımı

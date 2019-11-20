@@ -5,21 +5,23 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: include
-ms.date: 02/12/2019
+ms.date: 09/23/2019
 ms.author: tamram
 ms.custom: include file
-ms.openlocfilehash: 124f5c01b7718f729094de1c02391946ff50cef4
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 8908ded31b96aac50db1fc25e92c2c0a8e960453
+ms.sourcegitcommit: 3fa4384af35c64f6674f40e0d4128e1274083487
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188447"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71219052"
 ---
-Yerel olarak yedekli depolama (LRS), en az %99,999999999 (11 dokuzlu) sağlayan belirli bir yıl boyunca nesnelerin dayanıklılık. LRS, verilerinizi depolama Ölçek birimine çoğaltarak bu nesne dayanıklılık sağlar. Depolama hesabınızı oluşturduğunuz bölge içinde bulunan bir veri merkezi depolama ölçek birimi barındırır. Tüm çoğaltmalar için verileri yalnızca yazıldıktan sonra bir LRS depolama hesabı için bir yazma isteği başarıyla döndürür. Her çoğaltma ayrı hata etki alanları ve yükseltme etki alanlarının bir depolama ölçek birimi içinde bulunur.
+Yerel olarak yedekli depolama (LRS), verilerinizi tek bir veri merkezi içinde üç kez çoğaltır. LRS, belirli bir yıl boyunca nesnelerin en az% 99,999999999 (11 nines) dayanıklılığı sağlar. LRS, en düşük maliyetli çoğaltma seçeneğidir ve diğer seçeneklere kıyasla en az dayanıklılık sağlar.
 
-Bir depolama ölçek birimi, raflar depolama düğümünden bir koleksiyonudur. Hata etki alanı (FD) temsil eden bir fiziksel birimi hata düğümleri grubudur. Hata etki alanı aynı fiziksel dolaba Sürgülü ait düğümleri olarak düşünün. Bir yükseltme etki alanını (UD) birlikte (ürün) bir hizmet yükseltme işlemi sırasında yükseltilir düğümleri grubudur. Çoğaltmalar, UD ve Fd'ler bir depolama ölçek birimi içinde yayılır. Bu mimari, tek bir raf üstü bir donanım hatası etkilerse veya düğüm, hizmet yükseltme sırasında yükseltildiğinde verilerinizin kullanılabilir olmasını sağlar.
+Veri merkezi düzeyinde bir olağanüstü durum oluşursa (örneğin, yangın veya taşması), LRS kullanan bir depolama hesabındaki tüm çoğaltmalar kaybolabilir veya kurtarılamaz olabilir. Bu riski azaltmak için Microsoft, bölgesel olarak yedekli depolama (ZRS), coğrafi olarak yedekli depolama (GRS) veya coğrafi bölge-yedekli depolama (GZRS) kullanmanızı önerir.
 
-LRS, düşük maliyetli çoğaltma seçeneği ve diğer seçenekleri karşılaştırıldığında en düşük dayanıklılık sunar. Tüm çoğaltmalar, (örneğin, yangın veya taşmasını)'de bir veri merkezi düzeyinde olağanüstü durum oluşursa, kayıp veya kurtarılamaz olabilir. Bu riski azaltmak için Microsoft bölgesel olarak yedekli depolama (ZRS) veya coğrafi olarak yedekli depolama (GRS) kullanmanızı önerir.
+LRS depolama hesabına yönelik yazma isteği, yalnızca veriler üç kopyaya yazıldıktan sonra başarıyla döndürülür.
 
-* Uygulamanızın veri kaybı meydana gelirse, kolayca yeniden verilerini depolayan, LRS için kullanmamayı seçebilirsiniz.
-* Bazı uygulamalar, yalnızca veri İdaresi gereksinimleri nedeniyle bir ülke/bölge içinde veri çoğaltmak için kısıtlanır. Bazı durumlarda, başka bir ülke/bölge eşleştirilmiş bölgelerin GRS hesapları için çoğaltılan verileri arasında olabilir. Eşleştirilmiş bölgeler hakkında daha fazla bilgi için bkz. [Azure bölgeleri](https://azure.microsoft.com/regions/).
+Aşağıdaki senaryolarda LRS 'yi kullanmak isteyebilirsiniz:
+
+* Uygulamanız veri kaybı oluşursa kolayca yeniden oluşturabileceğiniz verileri depoluyorsa LRS 'yi kabul edebilirsiniz.
+* Bazı uygulamalar veri idare gereksinimleri nedeniyle yalnızca bir ülke/bölge dahilinde verileri çoğaltmaya kısıtlıdır. Bazı durumlarda, GRS hesapları için verilerin çoğaltılacağı eşleştirilmiş bölgeler başka bir ülkede/bölgede olabilir. Eşleştirilmiş bölgeler hakkında daha fazla bilgi için bkz. [Azure bölgeleri](https://azure.microsoft.com/regions/).

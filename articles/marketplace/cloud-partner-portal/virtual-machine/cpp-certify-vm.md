@@ -1,78 +1,79 @@
 ---
-title: Azure Market VM görüntünüzü sertifika
-description: Azure Marketi sertifikası için bir VM görüntüsü gönderme ve test açıklanmaktadır.
+title: Azure Marketi için VM görüntünüzü onaylama
+description: Azure Market sertifikası için bir VM görüntüsünü test etme ve gönderme hakkında bilgiler sağlar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: pbutlerm
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 09/26/2018
 ms.author: pabutler
-ms.openlocfilehash: 0dbf1abbb91f9e5c3bd2d042c57f87591d52c9cd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4088864db4bf861d07821f5a0287336d8431f889
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938492"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826516"
 ---
-# <a name="certify-your-vm-image"></a>VM görüntünüzdeki Onayla
+# <a name="certify-your-vm-image"></a>VM görüntünüzü onaylama
 
-Sanal makinenize (VM) oluşturup sonra test ve sanal makine görüntüsünü Azure Marketi sertifikası için gönderin. Bu makalede alınacağı açıklanmaktadır *Azure sertifikası için sertifika Test aracı*, VM görüntünüz onaylamak için bu aracı kullanma ve doğrulama sonuçlarını Vhd'lerinizin bulunduğu Azure kapsayıcısına karşıya yükleme. 
-
-
-## <a name="download-and-run-the-certification-test-tool"></a>Sertifika sınama aracını indirme ve çalıştırma
-
-Azure sertifikası için sertifika Test aracı yerel bir Windows makinede çalışır, ancak bir Windows Azure tabanlı veya Linux VM'i sınar.  Kullanıcı VM görüntüsü, Microsoft Azure ile uyumlu olduğunu doğrular; yönelik yönerge ve VHD'nizi hazırlamaya etrafında gereksinimlerin karşılanmış olduğunu. Aracın çıktısı, karşıya yükleyecek bir uyumluluk raporudur [bulut iş ortağı portalı](https://cloudpartner.azure.com) VM sertifika istemek için.
-
-1. İndirme ve yükleme son [Azure sertifikası için sertifika Test aracı](https://www.microsoft.com/download/details.aspx?id=44299). 
-2. Sertifika Aracı'nı açın ve ardından **teni Test Başlat**.
-3. Gelen **Test bilgileri** ekranında, girin bir **Test adı** test çalıştırması için.
-4. Seçin **Platform** , VM'niz için ya da `Windows Server` veya `Linux`. Diğer seçenekleri, platform seçimi etkiler.
-5. Bu veritabanı hizmeti, sanal Makinenizin kullanıyorsanız seçin **Azure SQL veritabanı için Test** onay kutusu.
-
-   ![Sertifika test aracı başlangıç sayfası](./media/publishvm_025.png)
+Sanal makinenizi (VM) oluşturup dağıttıktan sonra, VM görüntüsünü Azure Market sertifikası için test etmeniz ve göndermeniz gerekir. Bu makalede, *Azure Sertifikalı sertifika sınama aracı 'nın*nereden alınacağı, sanal makine görüntünüzü onaylamak için bu aracın nasıl kullanılacağı ve doğrulama sonuçlarının VHD 'Nizin bulunduğu Azure kapsayıcısına nasıl yükleneceği açıklanmaktadır. 
 
 
-## <a name="connect-the-certification-tool-to-a-vm-image"></a>Sertifika aracı bir VM görüntüsüne bağlama
+## <a name="download-and-run-the-certification-test-tool"></a>Sertifika test aracını indirme ve çalıştırma
 
-  Aracı ile Windows tabanlı Vm'leri bağlanır [PowerShell](https://docs.microsoft.com/powershell/) ve Linux Vm'leri ile bağlandığı [SSH.Net](https://www.ssh.com/ssh/protocol/).
+Azure Sertifikalı sertifika test aracı yerel bir Windows makinesinde çalışır, ancak Azure tabanlı bir Windows veya Linux VM 'yi sınar.  Bu, VHD 'nizi hazırlamaya yönelik yönergelerin ve gereksinimlerin karşılandığından emin olmak için, Kullanıcı VM Görüntünüzün Microsoft Azure uyumlu olduğunu doğrular. Aracın çıktısı, VM sertifikası istemek için [bulut iş ortağı portalı](https://cloudpartner.azure.com) yükleyecek olan bir uyumluluk rapordur.
 
-### <a name="connect-the-certification-tool-to-a-linux-vm-image"></a>Sertifika Aracı'nı bir Linux VM görüntüsüne bağlama
+1. [Azure Sertifikalı en son sertifika test aracı](https://www.microsoft.com/download/details.aspx?id=44299)'nı indirip yükleyin. 
+2. Sertifika aracını açın ve ardından **Yeni test Başlat**' a tıklayın.
+3. **Test bilgileri** ekranında, test çalıştırması Için bir **Test adı** girin.
+4. VM 'niz için `Windows Server` ya da `Linux`**platformunu** seçin. Platform seçiminiz, kalan seçenekleri etkiler.
+5. VM 'niz bu veritabanı hizmetini kullanıyorsa **Azure SQL veritabanı Için test** onay kutusunu seçin.
 
-1. Seçin **SSH kimlik doğrulaması** modu: `Password Authentication` veya `key File Authentication`.
-2. Parola tabanlı kimlik doğrulama kullanılıyorsa için değerleri girin **VM DNS adı**, **kullanıcı adı**, ve **parola**.  İsteğe bağlı olarak, varsayılan değiştirebilirsiniz **SSH bağlantı noktası** sayı.
-
-     ![Linux VM görüntüsü parola kimlik doğrulaması](./media/publishvm_026.png)
-
-3. Anahtar dosya tabanlı kimlik doğrulaması kullanıyorsanız, için değerleri girin **VM DNS adı**, **kullanıcı adı**, ve **özel anahtarı** konumu.  İsteğe bağlı olarak, kaynağı bir **parola** veya varsayılan değeri değiştirmek **SSH bağlantı noktası** sayı.
-
-     ![Linux VM görüntüsü dosyası kimlik doğrulaması](./media/publishvm_027.png)
-
-### <a name="connect-the-certification-tool-to-a-windows-based-vm-image"></a>**Sertifika aracı bir Windows tabanlı VM görüntüsüne bağlama**
-1. Tam girin **VM DNS adı** (örneğin, `MyVMName.Cloudapp.net`).
-2. İçin değerler girin **kullanıcı adı** ve **parola**.
-
-   ![Windows VM görüntüsünün parola kimlik doğrulaması](./media/publishvm_028.png)
+   ![Sertifika test aracı ilk sayfası](./media/publishvm_025.png)
 
 
-## <a name="run-a-certification-test"></a>Bir sertifika testi Çalıştır
+## <a name="connect-the-certification-tool-to-a-vm-image"></a>Sertifika aracını bir VM görüntüsüne bağlama
 
-Parametre değerlerini, sertifika aracı, VM görüntünüz için sağladığınız sonra seçin **Test Bağlantısı** sanal makinenize yönelik geçerli bir bağlantı sağlamak için. Bağlantı doğrulandıktan sonra seçin **sonraki** testi başlatmak için.  Test tamamlandıktan sonra test sonuçları (başarılı/başarısız/uyarı) ile bir tablo görüntülenir.  Aşağıdaki örnek, bir Linux sanal makinesi test için test sonuçlarını gösterir. 
+  Araç, [PowerShell](https://docs.microsoft.com/powershell/) ile Windows tabanlı VM 'lere bağlanır ve [SSH.net](https://www.ssh.com/ssh/protocol/)üzerinden Linux VM 'lerine bağlanır.
+
+### <a name="connect-the-certification-tool-to-a-linux-vm-image"></a>Sertifika aracını bir Linux VM görüntüsüne bağlama
+
+1. **SSH kimlik doğrulama** modunu seçin: `Password Authentication` veya `key File Authentication`.
+2. Parola tabanlı kimlik doğrulaması kullanıyorsanız, **VM DNS adı**, **Kullanıcı adı**ve **parola**değerlerini girin.  İsteğe bağlı olarak, varsayılan **SSH bağlantı noktası** numarasını değiştirebilirsiniz.
+
+     ![Linux VM görüntüsünün parola doğrulaması](./media/publishvm_026.png)
+
+3. Anahtar dosya tabanlı kimlik doğrulaması kullanıyorsanız, **VM DNS adı**, **Kullanıcı adı**ve **özel anahtar** konumu değerlerini girin.  İsteğe bağlı olarak, bir **parola** sağlayabilir veya varsayılan **SSH bağlantı noktası** numarasını değiştirebilirsiniz.
+
+     ![Linux VM görüntüsünün dosya kimlik doğrulaması](./media/publishvm_027.png)
+
+### <a name="connect-the-certification-tool-to-a-windows-based-vm-image"></a>**Sertifika aracını Windows tabanlı bir VM görüntüsüne bağlama**
+1. Tam **VM DNS adını** girin (örneğin, `MyVMName.Cloudapp.net`).
+2. **Kullanıcı adı** ve **parola**değerlerini girin.
+
+   ![Windows VM görüntüsünün parola doğrulaması](./media/publishvm_028.png)
+
+
+## <a name="run-a-certification-test"></a>Sertifika testi çalıştırma
+
+VM Görüntünüz için sertifika aracında parametre değerlerini verdikten sonra, sanal makinenize geçerli bir bağlantı sağlamak için **Bağlantıyı Sına** ' yı seçin. Bir bağlantı doğrulandıktan sonra, testi başlatmak için **İleri** ' yi seçin.  Test tamamlandığında, test sonuçları (başarılı/başarısız/uyarı) ile bir tablo görüntülenir.  Aşağıdaki örnek, bir Linux VM testi için test sonuçlarını gösterir. 
 
 ![Linux VM görüntüsü için sertifika test sonuçları](./media/publishvm_029.png)
 
-Testler başarısız olursa, görüntüsüdür *değil* sertifikalı. Bu durumda, hata iletileri ve gereksinimleri gözden geçirin, istenen değişiklikleri yapmak ve testi yeniden çalıştırın. 
+Testlerin herhangi biri başarısız olursa, görüntünüz sertifikalı *değildir* . Bu durumda, gereksinimleri ve hata iletilerini gözden geçirin, belirtilen değişiklikleri yapın ve testi yeniden çalıştırın. 
 
-VM görüntünüzdeki hakkında ek bilgi sağlamak için gereklidir otomatik test sonra **anketi** ekran.  Bu, tamamlaması gereken iki sekme içerir.  **Genel değerlendirmesi** sekmesini içeren **True/False** soru ise **çekirdek özelleştirme** birden fazla seçimi ve serbest biçimli sorular içerir.  Her iki sekmede hakkında sorular tamamlamanız ve ardından seçin **sonraki**.
+Otomatik testten sonra, sanal makine görüntünüz hakkında **Soru formu** ekranında ek bilgi sağlamanız gerekir.  Gerçekleştirmeniz gereken iki sekme içerir.  **Genel değerlendirme** sekmesi **doğru/yanlış** soruları Içerir, ancak **çekirdek özelleştirmesi** birden çok seçim ve serbest biçimli soru içerir.  Her iki sekmede de soruları tamamladıktan sonra **İleri**' yi seçin.
 
-![Sertifika aracı anketi](./media/publishvm_030.png)
+![Sertifika araç Anketi](./media/publishvm_030.png)
 
-Son ekran bir Linux VM görüntüsü için SSH erişim bilgileri ve özel durumlar arıyorsanız başarısız tüm değerlendirmesi için bir açıklama gibi ek bilgileri girmenize olanak tanır. 
+Son ekran, bir Linux VM görüntüsü için SSH erişim bilgileri ve özel durumlar aradıysanız başarısız olan değerlendirmelere açıklama gibi ek bilgiler sağlamanıza olanak sağlar. 
 
-Son olarak, tıklayın **rapor oluştur** test sonuçlarını indirerek ve anketi verdiğiniz yanıtlar için ayrıca günlük dosyaları yürütülen test çalışmalarını. Vhd'leriniz ile aynı kapsayıcıda sonuçları kaydedin.
+Son olarak, anket yanıtlarınıza ek olarak yürütülen test çalışmalarının test sonuçlarını ve günlük dosyalarını indirmek için **rapor oluştur** ' a tıklayın. Sonuçları VHD 'niz ile aynı kapsayıcıya kaydedin.
 
-![Sertifika, test sonuçları Kaydet](./media/publishvm_031.png)
+![Sertifika test sonuçlarını Kaydet](./media/publishvm_031.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sonra [Tekdüzen Kaynak Tanımlayıcıları (URI) her bir VHD oluşturmak](./cpp-get-sas-uri.md) Market'te gönderdiğiniz. 
+Ardından, Market 'e gönderdiğiniz [her VHD için bir Tekdüzen Kaynak tanımlayıcısı (URI)](./cpp-get-sas-uri.md) oluşturacaksınız. 

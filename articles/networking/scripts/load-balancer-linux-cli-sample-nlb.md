@@ -1,12 +1,10 @@
 ---
-title: Azure CLI betiği örneği - yüksek kullanılabilirlik için Yük Dengeleme trafiği vm'lere | Microsoft Docs
-description: Azure CLI betik örneği - yüksek kullanılabilirlik için Vm'lere Yük Dengeleme trafiği
+title: HA için VM 'lere trafik yükünü dengelemek-Azure CLı-Azure Load Balancer
+description: Bu örnekle, yüksek kullanılabilirlik için VM 'lere Yük Dengeleme trafiğini kullanmaya başlayın.
 services: load-balancer
 documentationcenter: load-balancer
-author: KumudD
-manager: timlt
-editor: tysonn
-tags: ''
+author: asudbring
+manager: KumudD
 ms.assetid: ''
 ms.service: load-balancer
 ms.devlang: azurecli
@@ -14,15 +12,15 @@ ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 07/07/2017
-ms.author: kumud
-ms.openlocfilehash: 916e9e1f7287757f19e93ecf7b8cc38f556e2dc8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: allensu
+ms.openlocfilehash: 8712cd1cff9e3a6623b67e1b39a19df7c6d0172e
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60564655"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74067056"
 ---
-# <a name="load-balance-traffic-to-vms-for-high-availability"></a>Yüksek kullanılabilirlik için Vm'lere Yük Dengeleme trafiği
+# <a name="load-balance-traffic-to-vms-for-high-availability"></a>Yüksek kullanılabilirlik için VM 'lere Yük Dengeleme trafiği
 
 Bu betik örneği, yüksek oranda kullanılabilir ve yük dengeli bir yapılandırmada yapılandırılmış birkaç Ubuntu sanal makinesini çalıştırmak için gereken her şeyi oluşturur. Betiği çalıştırdıktan sonra bir Azure Kullanılabilirlik Kümesine eklenmiş ve bir Azure Load Balancer üzerinden erişilebilen üç sanal makineniz olur. 
 

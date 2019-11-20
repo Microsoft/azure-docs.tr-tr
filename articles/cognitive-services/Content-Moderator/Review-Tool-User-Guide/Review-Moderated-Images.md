@@ -1,59 +1,59 @@
 ---
-title: Gözden geçirme aracı - Content Moderator içerik incelemeleri kullanın
-titlesuffix: Azure Cognitive Services
-description: İnceleme aracını görüntüleri bir web Portalı'nda gözden geçirmek İnsan Moderatörler nasıl olanak tanıdığını öğrenin.
+title: Inceleme aracında içerik incelemeleri kullanma-Content Moderator
+titleSuffix: Azure Cognitive Services
+description: Inceleme aracının bir Web portalındaki görüntüleri gözden geçirmesine nasıl izin verdiğini öğrenin.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: mikemcca
 ms.service: cognitive-services
 ms.subservice: content-moderator
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/15/2019
-ms.author: sajagtap
-ms.openlocfilehash: a482ecf4a0d321525ab7e392695d2c4c0eebeadc
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: pafarley
+ms.openlocfilehash: b02324923e3f004395105b8e04165390cb950fe7
+ms.sourcegitcommit: 38251963cf3b8c9373929e071b50fd9049942b37
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60629058"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73044122"
 ---
-# <a name="create-human-reviews"></a>İncelemelere oluşturma
+# <a name="create-human-reviews"></a>İnsan incelemeleri oluşturma
 
-Bu kılavuzda, nasıl ayarlanacağını öğreneceksiniz [incelemeleri](../review-api.md#reviews) gözden geçirme Aracı Web sitesi. Gözden geçirmeler depolayın ve değerlendirmek İnsan Moderatörler içeriğini görüntüler. Moderatörler, uygulanan etiket alter ve uygun şekilde kendi özel etiketler. Bir kullanıcı bir gözden geçirme tamamlandığında, sonuçları bir belirtilen geri çağırma uç noktasına gönderilir ve içeriği siteden kaldırılır.
+Bu kılavuzda Inceleme Aracı Web sitesinde [İncelemeleri](../review-api.md#reviews) ayarlamayı öğreneceksiniz. , İnsan moderatör 'nin değerlendirilmesine yönelik depolamayı ve görüntüleme içeriğini gözden geçirir. Moderatör, uygulanan etiketleri değiştirebilir ve kendi özel etiketlerini uygun şekilde uygulayabilir. Bir Kullanıcı bir gözden geçirmeyi tamamladığında, sonuçlar belirtilen geri çağırma uç noktasına gönderilir ve içerik siteden kaldırılır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Oturum açma veya hesap üzerinde Content Moderator oluşturmak [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/) site.
+- Content Moderator [İnceleme aracı](https://contentmoderator.cognitive.microsoft.com/) sitesinde oturum açın veya hesap oluşturun.
 
 ## <a name="image-reviews"></a>Görüntü incelemeleri
 
-1. Git [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/)seçin **deneyin** sekme ve gözden geçirmek için bazı görüntüleri karşıya yükleyin.
-1. Karşıya yüklenen görüntüleri işleme tamamladıktan sonra Git **gözden geçirme** sekmenize **görüntü**.
+1. [İnceleme aracına](https://contentmoderator.cognitive.microsoft.com/)gidin, **dene** sekmesini seçin ve gözden geçirmek için bazı görüntüleri karşıya yükleyin.
+1. Karşıya yüklenen görüntülerin işlenmesi tamamlandıktan sonra, **gözden geçir** sekmesine gidin ve **görüntü**öğesini seçin.
 
-    ![İnceleme aracını gözden görüntü seçeneğinin vurgulandığı gösteren chrome tarayıcısı](images/review-images-1.png)
+    ![Görüntüyü gözden geçir seçeneğinin vurgulandığı İnceleme aracını gösteren Chrome tarayıcısı](images/review-images-1.png)
 
-    Otomatik denetleme işlemi tarafından atanmış olan tüm etiketleri görüntüler. Diğer gözden geçirenler, gözden geçirme aracı gönderdiğiniz görüntüleri görünmez.
+    Görüntüler, otomatik denetleme işlemi tarafından atanan etiketlerle birlikte görüntülenir. Inceleme aracı aracılığıyla gönderdiğiniz görüntüler diğer gözden geçirenler için görünür değildir.
 
-1. İsteğe bağlı olarak, taşıma **görüntülemek için gözden geçirmeleri** ekranında görüntülenen görüntülerinin sayısını ayarlamak için kaydırıcıyı (1). Tıklayarak **etiketli** veya **etiketlenmemiş** görüntüleri buna göre sıralamak için düğmeler (2). Açıp geçiş yapmak için bir etiket paneli (3) tıklayın.
+1. İsteğe bağlı olarak, ekranda görüntülenen görüntü sayısını ayarlamak için Incelemeleri (1) **ekran** kaydırıcısının üzerine taşıyın. Görüntüleri uygun şekilde sıralamak için **etiketli** veya **etiketlenmemiş** düğmelere (2) tıklayın. Bir etiket paneline (3) tıklayarak açın veya kapatın.
 
-    ![İnceleme aracını gözden geçirme için etiketli görüntülerle gösteren chrome tarayıcısı](images/review-images-2.png)
+    ![İnceleme için etiketli görüntülerle Inceleme aracını gösteren Chrome tarayıcısı](images/review-images-2.png)
 
-1. Görüntünün üzerinde daha fazla bilgi için üç noktayı seçip küçük resme tıklayın **ayrıntıları görüntüle**. Görüntü ile bir alt atayabilirsiniz **Taşı** seçeneği (bkz [takımlar](./configure.md#manage-team-and-subteams) alt ekipler hakkında daha fazla bilgi için bölümü).
+1. Bir görüntüyle ilgili daha fazla bilgi görmek için küçük resimdeki üç noktaya tıklayın ve **Ayrıntıları görüntüle**' yi seçin. **Git** seçeneğiyle bir alt takıma bir görüntü atayabilirsiniz (alt takımlar hakkında daha fazla bilgi edinmek için [takımlar](./configure.md#manage-team-and-subteams) bölümüne bakın).
 
-    ![Seçeneğinin vurgulandığı görüntü görünümü ayrıntıları](images/review-images-3.png)
+    ![Ayrıntıları görüntüle seçeneğinin vurgulandığı bir görüntü](images/review-images-3.png)
 
-1. Görüntü denetimi bilgilerin ayrıntıları sayfasındaki göz atın.
+1. Ayrıntılar sayfasında görüntü denetleme bilgilerine bakın.
 
-    ![Ayrı bir bölmesinde listelenen denetimi ayrıntıları içeren bir görüntü](images/review-images-4.png)
+    ![Ayrı bir bölmede, denetleme ayrıntıları içeren bir görüntü](images/review-images-4.png)
 
-1. Gözden geçirdikten ve gerektiğinde etiketi atamaları güncelleştirildi bitince **sonraki** , incelemeleri göndermek için. Gönderdikten sonra yaklaşık beş saniyeden tıklayın zorunda **önceki** düğmesine önceki ekrana dönün ve resimleri yeniden gözden geçirin. Bundan sonra artık gönderme kuyrukta görüntüleridir ve **önceki** düğmesi kullanılabilir artık.
+1. Etiket atamalarını gerektiğinde inceledikten ve güncelleştirdikten sonra, gözden geçirlerinizi göndermek için **İleri** ' ye tıklayın. ' İ gönderdikten sonra **, önceki ekrana** dönüp görüntüleri yeniden gözden geçirmek için beş saniyelik bir süre daha görürsünüz. Bundan sonra, görüntüler artık gönderme kuyruğunda değildir ve **önceki** düğmesi artık kullanılamaz.
 
 ## <a name="text-reviews"></a>Metin incelemeleri
 
-Metin, görüntü incelemeleri işlevine benzer şekilde inceler. İçeriği karşıya yükleme, yerine, yalnızca yazma veya metin (en fazla 1024 karakter) yapıştırın. Ardından, Content Moderator metin analiz eder ve etiketleri (küfür ve kişisel veriler gibi diğer denetimi bilgileri) ek olarak uygular. Metin incelemeleri siz uygulanan etiketler geçiş veya gözden geçirme göndermeden önce özel etiketler.
+Metin İncelemeleri, görüntü incelemeleriyle benzer şekilde çalışır. İçeriği karşıya yüklemek yerine yalnızca metin (en fazla 1.024 karakter) yazmanız veya yapıştırmanız gerekir. Ardından Content Moderator, metni analiz eder ve etiketleri uygular (küfür ve kişisel veriler gibi diğer denetleme bilgilerine ek olarak). Metin incelemelerinde, uygulanan etiketleri açıp/veya gözden geçirmeyi göndermeden önce özel etiketler uygulayabilirsiniz.
 
-![Metin bir Chrome tarayıcı penceresinde gözden geçirme aracı gösteren ekran görüntüsü bayrağı](../images/reviewresults_text.png)
+![Chrome tarayıcı penceresinde bayraklı metni gösteren İnceleme aracının ekran görüntüsü](../images/reviewresults_text.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu kılavuzda, ayarlamak ve Content Moderator gözden geçirmeleri kullanma hakkında bilgi edindiniz [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com). Ardından, bkz: [REST API Kılavuzu](../try-review-api-review.md) veya [.NET SDK'sı Kılavuzu](../moderation-reviews-quickstart-dotnet.md) incelemeleri programlı oluşturmayı öğrenin.
+Bu kılavuzda, Content Moderator [Gözden geçirme aracından](https://contentmoderator.cognitive.microsoft.com)İncelemeleri ayarlamayı ve kullanmayı öğrendiniz. Ardından, programlama yoluyla nasıl İnceleme oluşturacağınızı öğrenmek için [REST API Kılavuzu](../try-review-api-review.md) veya [.NET SDK hızlı](../dotnet-sdk-quickstart.md) başlangıcı bölümüne bakın.

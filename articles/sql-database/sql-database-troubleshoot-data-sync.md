@@ -1,6 +1,6 @@
 ---
-title: Azure SQL Data Sync sorunlarını giderme | Microsoft Docs
-description: Azure SQL Data Sync ile ilgili yaygın sorunları gidermeyi öğrenin.
+title: SQL Data Sync sorunlarını giderme
+description: Azure SQL Data Sync ile ilgili sık karşılaşılan sorunları nasıl giderebileceğinizi öğrenin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: data-movement
@@ -10,252 +10,251 @@ ms.topic: conceptual
 author: allenwux
 ms.author: xiwu
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 12/20/2018
-ms.openlocfilehash: 4e2808378834a0270586ce674e1043ca443320c5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 8e223d0c6243bfddc1e5a56867c4c69de5e2a62e
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60331205"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73822447"
 ---
-# <a name="troubleshoot-issues-with-sql-data-sync"></a>SQL Data Sync ile ilgili sorunları giderme
+# <a name="troubleshoot-issues-with-sql-data-sync"></a>SQL Data Sync sorunlarını giderme
 
-Bu makalede, Azure SQL Data Sync ile ilgili bilinen sorunlar giderilir açıklar. Bir sorun için bir çözüm varsa, burada sağlanır.
+Bu makalede, Azure SQL Data Sync ile ilgili bilinen sorunların nasıl giderileceği açıklanmaktadır. Bir sorun için çözüm varsa, burada sağlanır.
 
 SQL Data Sync hizmetine genel bakış için bkz. [Azure SQL Data Sync ile birden fazla bulut ve şirket içi veritabanı arasında veri eşitleme](sql-database-sync-data.md).
 
 > [!IMPORTANT]
-> Azure SQL Data Sync mu **değil** şu anda Azure SQL veritabanı yönetilen örneği destekler.
+> Azure SQL Data Sync Şu anda Azure SQL veritabanı yönetilen **örneğini desteklemez.**
 
 ## <a name="sync-issues"></a>Eşitleme sorunları
 
-- [İstemci Aracısı ile ilişkili olan şirket içi veritabanları için portal UI eşitleme başarısız](#sync-fails)
+- [İstemci aracısıyla ilişkili şirket içi veritabanları için Portal Kullanıcı arabiriminde eşitleme başarısız oluyor](#sync-fails)
 
-- [Eşitleme grubunuza işleme durumda takılmasına neden olabilir](#sync-stuck)
+- [Eşitleme grubum işleme durumunda takıldı](#sync-stuck)
 
-- [Tablolarımın içinde hatalı veri görüyorum](#sync-baddata)
+- [Tablomda hatalı veri görüyorum](#sync-baddata)
 
-- [Başarılı bir eşitlemeden sonra tutarsız birincil anahtar veri görüyorum](#sync-pkdata)
+- [Başarılı bir eşitlemeden sonra tutarsız birincil anahtar verileri görüyorum](#sync-pkdata)
 
-- [Önemli bir performans düşüşü görüyorum](#sync-perf)
+- [Performans açısından önemli bir düşme görüyorum](#sync-perf)
 
-- [Bu iletiyi görüyorum: "Sütununa NULL değer eklenemiyor \<sütun >. Sütun null değerlere izin vermiyor." Bunun anlamı nedir ve nasıl düzeltebilirim?](#sync-nulls)
+- [Şu iletiyi görüyorum: "NULL değeri sütun \<sütununa eklenemiyor >. Sütun null değerlere izin vermiyor. " Bu ne anlama geliyor ve nasıl çözebilirim?](#sync-nulls)
 
-- [Veri eşitleme, döngüsel başvurular nasıl işliyor? Diğer bir deyişle, ne zaman aynı verileri birden çok eşitleme gruplarında eşitlenen ve bunun sonucunda değişir mi?](#sync-circ)
+- [Veri eşitleme, dairesel başvuruları nasıl işler? Diğer bir deyişle, aynı veriler birden çok eşitleme grubunda eşitlendiğinde ve sonuç olarak değişene devam ediyor mu?](#sync-circ)
 
-### <a name="sync-fails"></a> İstemci Aracısı ile ilişkili olan şirket içi veritabanları için portal UI eşitleme başarısız
+### <a name="sync-fails"></a>İstemci aracısıyla ilişkili şirket içi veritabanları için Portal Kullanıcı arabiriminde eşitleme başarısız oluyor
 
-İstemci Aracısı ile ilişkili olan şirket içi veritabanları için SQL Data Sync portalında UI eşitleme başarısız. Aracıyı çalıştıran yerel bilgisayarda System.IO.ıoexception hataları olay günlüğüne bakın. Hataları, diskte yeterli alan olduğunu varsayalım.
+İstemci aracısıyla ilişkili şirket içi veritabanları için SQL Data Sync Portal Kullanıcı arabiriminde eşitleme başarısız olur. Aracıyı çalıştıran yerel bilgisayarda, olay günlüğünde System. ıO. IOException hatalarını görürsünüz. Hatalar, diskte yeterli alan olduğunu söylüyor.
 
-- **Neden**. Sürücü yeterli alan yok.
+- **Neden**. Sürücüde yeterli alan yok.
 
-- **Çözüm**. % TEMP % dizininde bulunduğu sürücüde daha fazla alan oluşturun.
+- **Çözümleme**. % TEMP% dizininin bulunduğu sürücüde daha fazla alan oluşturun.
 
-### <a name="sync-stuck"></a> Eşitleme grubunuza işleme durumda takılmasına neden olabilir
+### <a name="sync-stuck"></a>Eşitleme grubum işleme durumunda takıldı
 
-SQL Data Sync'deki bir eşitleme grubuna uzun bir süre içinde işleme durumu kaldırıldı. Yanıt vermiyor **Durdur** komut ve günlükleri göster yeni giriş yok.
+SQL Data Sync içindeki bir eşitleme grubu uzun süredir işleme durumunda. **Stop** komutuna yanıt vermez ve Günlükler yeni giriş göstermez.
 
-Aşağıdaki koşullardan herhangi biri işleme durumunda takılması bir eşitleme grubu neden olabilir:
+Aşağıdaki koşullardan herhangi biri, bir eşitleme grubunun işleme durumunda takılmasına yol açabilir:
 
 - **Neden**. İstemci aracısı çevrimdışı
 
-- **Çözüm**. İstemci aracısının çevrimiçi olduğundan emin olun ve işlemi yeniden deneyin.
+- **Çözümleme**. İstemci aracısının çevrimiçi olduğundan emin olun ve işlemi yeniden deneyin.
 
 - **Neden**. İstemci aracısı yüklü değil veya eksik.
 
-- **Çözüm**. İstemci aracısı yüklü değilse veya eksikse:
+- **Çözümleme**. İstemci aracısı yüklü değilse veya eksikse:
 
     1. Aracı XML dosyası mevcutsa, dosyayı SQL Data Sync yükleme klasöründen kaldırın.
     1. Aracıyı bir şirket içi bilgisayara yükleyin (aynı bilgisayar veya farklı bir bilgisayar olabilir). Ardından, portalda çevrimdışı olarak gösterilen aracı için oluşturulan aracı anahtarını gönderin.
 
 - **Neden**. SQL Data Sync hizmeti durduruldu.
 
-- **Çözüm**. SQL Data Sync hizmetini yeniden başlatın.
+- **Çözümleme**. SQL Data Sync hizmetini yeniden başlatın.
 
-    1. İçinde **Başlat** menüsünde **Hizmetleri**.
-    1. Arama sonuçlarında seçin **Hizmetleri**.
-    1. Bulma **SQL Data Sync** hizmeti.
-    1. Hizmet durumu ise **durduruldu**hizmet adını sağ tıklatın ve ardından **Başlat**.
+    1. **Başlat** menüsünde, **Hizmetler**' i arayın.
+    1. Arama sonuçlarında **Hizmetler**' i seçin.
+    1. **SQL Data Sync** hizmetini bulun.
+    1. Hizmet durumu **durdurulmuşsa**, hizmet adına sağ tıklayın ve ardından **Başlat**' ı seçin.
 
 > [!NOTE]
-> Yukarıdaki bilgiler eşitleme grubunuz işleme durumu dışında hareket etmediği Microsoft Support eşitleme grubunuz durumunu sıfırlayabilirsiniz. Eşitleme grubu durumunda, buna sıfırlama [Azure SQL veritabanının Forumu](https://social.msdn.microsoft.com/Forums/azure/home?forum=ssdsgetstarted), bir gönderi oluşturun. İletide, abonelik Kimliğiniz ve sıfırlanması gerekiyor grubu için eşitleme grubu kimliği içerir. Bir Microsoft Support mühendisi gönderiniz için yanıt vereceğini ve bunu ne zaman durumu sıfırlandı size bildirir.
+> Yukarıdaki bilgiler eşitleme grubunuzu işleme durumundan taşımazsa, Microsoft Desteği eşitleme grubunuzun durumunu sıfırlayabilir. Eşitleme grubunuzun durumunu sıfırlamasını sağlamak için [Azure SQL veritabanı forumundaki](https://social.msdn.microsoft.com/Forums/azure/home?forum=ssdsgetstarted)bir gönderi oluşturun. Gönderinizden, sıfırlanması gereken grubun abonelik KIMLIĞINI ve eşitleme grubu KIMLIĞINI dahil edin. Microsoft Desteği mühendis gönderinize yanıt verir ve durumun ne zaman sıfırlandığını size verir.
 
-### <a name="sync-baddata"></a> Tablolarımın içinde hatalı veri görüyorum
+### <a name="sync-baddata"></a>Tablomda hatalı veri görüyorum
 
-Aynı ada sahip olan ancak farklı veritabanı şemalardan olan tabloları eşitleme dahil edilirse, eşitleme sonrasında hatalı tablolardaki verileri görürsünüz.
+Aynı ada sahip olan ancak farklı veritabanı şemalarından gelen tablolar bir eşitlemeye dahil ise, eşitlemeden sonra tablolardaki hatalı verileri görürsünüz.
 
-- **Neden**. SQL Data Sync sağlama işlemi, aynı ada sahip olan ancak farklı şemalarda olan tablolar için aynı izleme tablolarını kullanır. Bu nedenle, her iki tablodaki değişiklik izleme tabloda yansıtılır. Bu, eşitleme sırasında hatalı veri değişiklikleri neden olur.
+- **Neden**. SQL Data Sync sağlama işlemi, aynı ada sahip ancak farklı şemalarda bulunan tablolar için aynı izleme tablolarını kullanır. Bu nedenle, her iki tablodaki değişiklikler aynı izleme tablosuna yansıtılmıştır. Bu, eşitleme sırasında hatalı veri değişikliklerine neden olur.
 
-- **Çözüm**. Farklı şemalara bir veritabanında tabloları ait olsa bile eşitleme söz konusu olan tablo adları farklı olduğundan emin olun.
+- **Çözümleme**. Tablolar bir veritabanındaki farklı şemalara ait olsa bile, bir eşitlemede yer alan tabloların adlarının farklı olduğundan emin olun.
 
-### <a name="sync-pkdata"></a> Başarılı bir eşitlemeden sonra tutarsız birincil anahtar veri görüyorum
+### <a name="sync-pkdata"></a>Başarılı bir eşitlemeden sonra tutarsız birincil anahtar verileri görüyorum
 
-Eşitleme başarılı olarak bildirildi ve günlük başarısız veya Atlanan satır gösterir, ancak birincil anahtar veri eşitleme grubundaki veritabanları arasında tutarsız olup olmadığına bakın.
+Eşitleme başarılı olarak bildirilir ve günlük başarısız veya Atlanan satırları gösterir, ancak birincil anahtar verilerinin eşitleme grubundaki veritabanları arasında tutarsız olduğunu gözlemleyebilirsiniz.
 
-- **Neden**. Tasarım gereği oluşur. Birincil anahtarı nerede değiştirildi satırlardaki tutarsız veri değişiklikleri tüm birincil anahtar sütunu sonuçlanır.
+- **Neden**. Bu sonuç tasarıma göre yapılır. Birincil anahtar sütunundaki değişiklikler, birincil anahtarın değiştirildiği satırlarda tutarsız veriler oluşmasına neden oldu.
 
-- **Çözüm**. Bu sorunu önlemek için birincil anahtar sütunu içinde hiç veri değiştirildiğinde emin olun. Gerçekleştikten sonra bu sorunu gidermek için tüm uç noktalarından tutarsız veri eşitleme grubunda bulunan satır silin. Ardından, satır takın.
+- **Çözümleme**. Bu sorunu engellemek için, birincil anahtar sütununda hiçbir veri değişmediğinden emin olun. Bu sorunu gerçekleştirdikten sonra onarmak için, eşitleme grubundaki tüm uç noktaların tutarsız verileri olan satırı silin. Sonra satırı yeniden ekleyin.
 
-### <a name="sync-perf"></a> Önemli bir performans düşüşü görüyorum
+### <a name="sync-perf"></a>Performans açısından önemli bir düşme görüyorum
 
-Performansınızı önemli ölçüde büyük olasılıkla veri eşitleme UI bile burada açılamıyor noktasına düşürür.
+Performansı önemli ölçüde düşürür, muhtemelen veri eşitleme Kullanıcı arabirimini bile açamazsınız.
 
-- **Neden**. Bir eşitleme döngüsü en olası nedeni. Eşitleme ile eşitleme grubu A tarafından eşitleme eşitleme grubu A'daki ardından tetikler tarafından eşitleme eşitleme grubu B, tetiklendiğinde bir eşitleme döngüsü gerçekleşir. Gerçek durum daha karmaşık olabilir ve birden fazla iki eşitleme grubu döngüsünde gerektirebilir. Sorun bir döngüsel eşitlemeyi tetikleme olan başka bir çakışan eşitleme gruplarına göre neden olur.
+- **Neden**. En olası neden bir eşitleme döngüsüdür. Eşitleme grubu tarafından eşitleme, A eşitleme grubu B tarafından eşitleme tetiklediği zaman bir eşitleme döngüsü meydana gelir ve ardından eşitleme grubu A ile eşitleme tetikler. Asıl durum daha karmaşık olabilir ve döngüde ikiden fazla eşitleme grubu içerebilir. Bu sorun, bir eşitlemeden çakışan eşitleme gruplarının neden olduğu bir eşitlemenin dairesel olarak tetiklenmesi olabilir.
 
-- **Çözüm**. En iyi önleme açıklanmıştır. Eşitleme gruplarınızı döngüsel başvurular olmadığından emin olun. Bir eşitleme grubu tarafından eşitlenen herhangi bir satırın başka bir eşitleme grubu ile eşitlenemiyor.
+- **Çözümleme**. En iyi çözüm engeldir. Eşitleme gruplarında döngüsel başvurular olmadığından emin olun. Bir eşitleme grubu tarafından eşitlenen herhangi bir satır başka bir eşitleme grubu tarafından eşitlenemez.
 
-### <a name="sync-nulls"></a> Bu iletiyi görüyorum: "Sütununa NULL değer eklenemiyor \<sütun >. Sütun null değerlere izin vermiyor." Bunun anlamı nedir ve nasıl düzeltebilirim? 
-Bu hata iletisini iki aşağıdaki sorunlardan biri oluştuğunu gösterir:
--  Bir tabloda bir birincil anahtar yok. Bu sorunu gidermek için birincil anahtarı eşitleniyor tüm tabloları ekleyin.
--  CREATE INDEX deyiminde WHERE yan tümcesi yoktur. Veri eşitleme, bu durum işlemiyor. Bu sorunu gidermek için WHERE yan tümcesini kaldırın veya tüm veritabanları için el ile değişiklik. 
+### <a name="sync-nulls"></a>Şu iletiyi görüyorum: "NULL değeri sütun \<sütununa eklenemiyor >. Sütun null değerlere izin vermiyor. " Bu ne anlama geliyor ve nasıl çözebilirim? 
+Bu hata iletisi aşağıdaki iki sorunlardan birinin oluştuğunu gösterir:
+-  Tablonun birincil anahtarı yok. Bu sorunu onarmak için, eşitmekte olduğunuz tüm tablolara birincil bir anahtar ekleyin.
+-  CREATE INDEX deyiminizde WHERE yan tümcesi vardır. Veri eşitleme bu koşulu işlemez. Bu sorunu onarmak için WHERE yan tümcesini kaldırın veya değişiklikleri tüm veritabanlarında el ile yapın. 
  
-### <a name="sync-circ"></a> Veri eşitleme, döngüsel başvurular nasıl işliyor? Diğer bir deyişle, ne zaman aynı verileri birden çok eşitleme gruplarında eşitlenen ve bunun sonucunda değişir mi?
-Veri eşitleme, döngüsel başvurular işlemiyor. Kaçınma emin olun. 
+### <a name="sync-circ"></a>Veri eşitleme, dairesel başvuruları nasıl işler? Diğer bir deyişle, aynı veriler birden çok eşitleme grubunda eşitlendiğinde ve sonuç olarak değişene devam ediyor mu?
+Veri eşitleme döngüsel başvuruları işlemez. Kaçındığınızdan emin olun. 
 
-## <a name="client-agent-issues"></a>İstemci aracı sorunları
+## <a name="client-agent-issues"></a>İstemci Aracısı sorunları
 
-İstemci Aracısı ile ilgili sorunları gidermek için bkz: [veri eşitleme Aracısı sorunlarını giderme sorunları](sql-database-data-sync-agent.md#agent-tshoot).
+İstemci aracısıyla ilgili sorunları gidermek için bkz. [veri eşitleme Aracısı sorunlarını giderme](sql-database-data-sync-agent.md#agent-tshoot).
 
-## <a name="setup-and-maintenance-issues"></a>Kurulum ve Bakım konuları
+## <a name="setup-and-maintenance-issues"></a>Kurulum ve bakım sorunları
 
-- ["Disk alanı yetersiz" iletisi alıyorum](#setup-space)
+- ["Disk dışı alan" iletisi alıyorum](#setup-space)
 
-- [Eşitleme grubunuza silemiyorum](#setup-delete)
+- [Eşitleme grubumu silemiyorum](#setup-delete)
 
-- [Bir şirket içi SQL Server veritabanı kaydı silinemiyor](#setup-unreg)
+- [Şirket içi SQL Server veritabanının kaydını silemiyor](#setup-unreg)
 
-- [Sistem hizmetlerini başlatmak için yeterli ayrıcalıklara sahip değilsiniz](#setup-perms)
+- [Sistem hizmetlerini başlatmak için yeterli ayrıcalıklara sahip değil](#setup-perms)
 
-- [Bir veritabanı "Süresi geçmiş" durumunda](#setup-date)
+- [Bir veritabanında "güncel olmayan" durumu vardır](#setup-date)
 
-- [Bir eşitleme grubu bir "Süresi geçmiş" durumunda](#setup-date2)
+- [Bir eşitleme grubunda "güncel olmayan" durum bulunur](#setup-date2)
 
-- [Kaldırma veya Aracısı durduruluyor üç dakika içinde bir eşitleme grubu silinemiyor](#setup-delete2)
+- [Bir eşitleme grubu, aracıyı kaldırmak veya durdurmak için üç dakika içinde silinemez](#setup-delete2)
 
-- [Kayıp veya bozuk bir veritabanı geri yükleyebilirim ne olur?](#setup-restore)
+- [Kayıp veya bozuk bir veritabanını geri yüklerken ne olur?](#setup-restore)
 
-### <a name="setup-space"></a> "Disk alanı yetersiz" iletisi alıyorum
+### <a name="setup-space"></a>"Disk dışı alan" iletisi alıyorum
 
-- **Neden**. Silinecek kalan dosyaları gereksiniminiz varsa "disk alanı yetersiz" iletisi görüntülenir. Bu tarafından virüsten koruma yazılımı kaynaklanabilir veya dosya açık olduğunda silme işlemleri çalıştı.
+- **Neden**. Soltover dosyalarının silinmesi gerekiyorsa "disk alanı yetersiz" iletisi görünebilir. Bu, virüsten koruma yazılımından kaynaklanıyor olabilir veya silme işlemleri denendiğinde dosyalar açık olur.
 
-- **Çözüm**. % Temp % klasöründe eşitleme dosyaları el ile silin (`del \*sync\* /s`). Daha sonra alt dizinleri % temp % klasörünü silin.
+- **Çözümleme**. % Temp% klasöründe (`del \*sync\* /s`) bulunan eşitleme dosyalarını el ile silin. Ardından,% Temp% klasöründeki alt dizinleri silin.
 
 > [!IMPORTANT]
-> Eşitleme işlemi devam ederken dosyalarla silmeyin.
+> Eşitleme sürerken hiçbir dosyayı silmeyin.
 
-### <a name="setup-delete"></a> Eşitleme grubunuza silemiyorum
+### <a name="setup-delete"></a>Eşitleme grubumu silemiyorum
 
-Eşitleme grubunu silme denemesi başarısız olur. Aşağıdaki senaryolardan herhangi bir eşitleme grubunu silmek için hatasına neden olabilir:
+Bir eşitleme grubunu silme denemeniz başarısız olur. Aşağıdaki senaryolardan herhangi biri, bir eşitleme grubunun silinmesine neden olabilecek bir hata oluşabilir:
 
 - **Neden**. İstemci aracısı çevrimdışı.
 
-- **Çözüm**. İstemci Aracısı çevrimiçi olduğundan emin olun ve işlemi yeniden deneyin.
+- **Çözümleme**. İstemci aracısının çevrimiçi olduğundan emin olup yeniden deneyin.
 
 - **Neden**. İstemci aracısı yüklü değil veya eksik.
 
-- **Çözüm**. İstemci aracısı yüklü değilse veya eksikse:  
+- **Çözümleme**. İstemci aracısı yüklü değilse veya eksikse:  
     a. Aracı XML dosyası mevcutsa, dosyayı SQL Data Sync yükleme klasöründen kaldırın.  
     b. Aracıyı bir şirket içi bilgisayara yükleyin (aynı bilgisayar veya farklı bir bilgisayar olabilir). Ardından, portalda çevrimdışı olarak gösterilen aracı için oluşturulan aracı anahtarını gönderin.
 
-- **Neden**. Bir veritabanının çevrimdışı olduğundan.
+- **Neden**. Bir veritabanı çevrimdışı.
 
-- **Çözüm**. SQL veritabanları ve SQL Server veritabanları çevrimiçi olduğundan emin olun.
+- **Çözümleme**. SQL veritabanlarınızın ve SQL Server veritabanlarının tümünün çevrimiçi olduğundan emin olun.
 
-- **Neden**. Eşitleme grubu sağlama veya eşitleniyor.
+- **Neden**. Eşitleme grubu sağlanıyor veya eşitleniyor.
 
-- **Çözüm**. Sağlama veya eşitleme işlemi tamamlanana kadar bekleyin ve sonra eşitleme grubu silme işlemini yeniden deneyin.
+- **Çözümleme**. Sağlama veya eşitleme işlemi bitene kadar bekleyin ve ardından eşitleme grubunu silmeyi yeniden deneyin.
 
-### <a name="setup-unreg"></a> Bir şirket içi SQL Server veritabanı kaydı silinemiyor
+### <a name="setup-unreg"></a>Şirket içi SQL Server veritabanının kaydını silemiyor
 
-- **Neden**. Büyük olasılıkla zaten silinmiş olan bir veritabanı kaydını çalışıyorsunuz.
+- **Neden**. Büyük olasılıkla, zaten silinmiş olan bir veritabanının kaydını silmeye çalışıyorsunuz.
 
-- **Çözüm**. Bir şirket içi SQL Server veritabanı kaydını kaldırmak için veritabanını seçin ve ardından **zorla silme**.
+- **Çözümleme**. Şirket içi SQL Server veritabanının kaydını silmek için veritabanını seçin ve sonra **silmeyi zorla**' yı seçin.
 
-  Veritabanı eşitleme gruptan kaldırmak bu işlem başarısız olursa:
+  Bu işlem veritabanını eşitleme grubundan kaldıramazsa:
 
-  1. Durdur ve istemci Aracısı konak hizmeti yeniden başlatın:  
-    a. Seçin **Başlat** menüsü.  
-    b. Arama kutusuna **services.msc**.  
-    c. İçinde **programlar** bölümünü arama sonuçları bölmesinde çift **Hizmetleri**.  
-    d. Sağ **SQL Data Sync** hizmeti.  
-    e. Hizmeti çalışıyorsa durdurun.  
-    f. Hizmete sağ tıklayın ve ardından **Başlat**.  
-    g. Veritabanı hala kayıtlı olup olmadığını denetleyin. Artık kayıtlı değilse, hazırsınız. Aksi halde, sonraki adımla devam edin.
-  1. İstemci Aracısı uygulamasını (SqlAzureDataSyncAgent) açın.
-  1. Seçin **bilgilerini Düzenle**, veritabanı için kimlik bilgilerini girin.
-  1. Kayıt silme ile devam edin.
+  1. İstemci Aracısı ana bilgisayar hizmetini durdurup yeniden başlatın:  
+    a. **Başlat** menüsünü seçin.  
+    b. Arama kutusuna **Services. msc**yazın.  
+    c. Arama sonuçları bölmesinin **Programlar** bölümünde **Hizmetler**' e çift tıklayın.  
+    d. **SQL Data Sync** hizmetine sağ tıklayın.  
+    e. Hizmet çalışıyorsa, uygulamayı durdurun.  
+    f. Hizmete sağ tıklayın ve ardından **Başlat**' ı seçin.  
+    g. Veritabanının hala kayıtlı olup olmadığını denetleyin. Artık kayıtlı değilse işiniz yapılır. Aksi halde, bir sonraki adımla devam edin.
+  1. İstemci Aracısı uygulamasını açın (SqlAzureDataSyncAgent).
+  1. **Kimlik bilgilerini düzenle**' yi seçin ve ardından veritabanı için kimlik bilgilerini girin.
+  1. Kayıt silme işlemine devam edin.
 
-### <a name="setup-perms"></a> Sistem hizmetlerini başlatmak için yeterli ayrıcalıklara sahip değilsiniz
+### <a name="setup-perms"></a>Sistem hizmetlerini başlatmak için yeterli ayrıcalıklara sahip değil
 
-- **Neden**. Bu hata, iki durumda gerçekleşir:
-  -   Kullanıcı adı ve/veya parola yanlış.
+- **Neden**. Bu hata iki durumda oluşur:
+  -   Kullanıcı adı ve/veya parola hatalı.
   -   Belirtilen kullanıcı hesabı, hizmet olarak oturum açmak için yeterli ayrıcalıklara sahip değil.
 
-- **Çözüm**. Kullanıcı hesabı için log-üzerinde-bir hizmet olarak kimlik bilgileri verin:
+- **Çözümleme**. Kullanıcı hesabına hizmet olarak oturum açma kimlik bilgileri verin:
 
-  1. Git **Başlat** > **Denetim Masası** > **Yönetimsel Araçlar** > **yerel güvenlik ilkesi**  >  **Yerel ilke** > **Kullanıcı Hakları Yönetimi**.
-  1. Seçin **hizmet oturum açma**.
-  1. İçinde **özellikleri** iletişim kutusunda, kullanıcı hesabını ekleyin.
-  1. Seçin **Uygula**ve ardından **Tamam**.
+  1.  > **Denetim Masası** ' **na gidin** > **Yönetim araçları** > yerel **güvenlik ilkesi** > **yerel ilke** > **Kullanıcı Rights Management**.
+  1. **Hizmet olarak oturum aç '** ı seçin.
+  1. **Özellikler** iletişim kutusunda Kullanıcı hesabını ekleyin.
+  1. **Uygula**’yı ve sonra **Tamam**’ı seçin.
   1. Tüm pencereleri kapatın.
 
-### <a name="setup-date"></a> Bir veritabanı "Süresi geçmiş" durumunda
+### <a name="setup-date"></a>Bir veritabanında "güncel olmayan" durumu vardır
 
-- **Neden**. SQL Data Sync çevrimdışı hizmetinden 45 gün veya daha fazla (veritabanı çevrimdışı olduğu zamandan sayılan gibi) için olan veritabanlarını kaldırır. Bir veritabanı 45 gün veya daha fazla bilgi için çevrimdışı ise ve daha sonra yeniden çevrimiçi olduktan durumundadır **güncel**.
+- **Neden**. SQL Data Sync, hizmetten 45 gün veya daha fazlası için çevrimdışı olan veritabanlarını kaldırır (veritabanının çevrimdışı olduğu zamandan itibaren sayılır). Bir veritabanı 45 gün veya daha uzun bir süre sonra yeniden çevrimiçi duruma gelirse, durumu **güncel**değildir.
 
-- **Çözüm**. Önlemek bir **güncel** veritabanlarınızı hiçbiri 45 gün veya daha fazla bilgi için çevrimdışı olmasını sağlayarak durumu.
+- **Çözümleme**. Veritabanlarının hiçbirinin 45 gün veya daha uzun süre çevrimdışı çalışmamasını sağlayarak **güncel** olmayan bir durumu önleyebilirsiniz.
 
-  Bir veritabanının durumu ise **güncel**:
+  Veritabanının durumu **güncel**değilse:
 
-  1. Olan veritabanını Kaldır bir **güncel** eşitleme grubu durumu.
-  1. Veritabanı ekleme eşitleme grubuna yeniden.
+  1. Eşitleme grubundan **güncel** olmayan bir durumu olan veritabanını kaldırın.
+  1. Veritabanını yeniden eşitleme grubuna ekleyin.
 
   > [!WARNING]
-  > Çevrimdışı durumdayken bu veritabanına yapılan tüm değişiklikleri kaybedersiniz.
+  > Çevrimdışıyken bu veritabanında yapılan tüm değişiklikleri kaybedersiniz.
 
-### <a name="setup-date2"></a> Bir eşitleme grubu bir "Süresi geçmiş" durumunda
+### <a name="setup-date2"></a>Bir eşitleme grubunda "güncel olmayan" durum bulunur
 
-- **Neden**. Tüm saklama süresi 45 gün için uygulanacak bir veya daha fazla değişiklik başarısız olursa, bir eşitleme grubu güncel olmayan hale gelebilir.
+- **Neden**. Bir veya daha fazla değişiklik 45 günlük bekletme dönemi boyunca uygulanmayabilir, bir eşitleme grubu güncel hale gelebilir.
 
-- **Çözüm**. Önlemek için bir **güncel** bir eşitleme grubu durumu, Eşitleme işleri düzenli olarak Geçmiş Görüntüleyicisi'nde sonuçları inceleyin. Araştırmak ve uygulamak için başarısız olan değişiklikleri çözün.
+- **Çözümleme**. Bir eşitleme grubunun **güncel** durumundan kaçınmak için, geçmiş görüntüleyicisinde eşitleme işlerinizin sonuçlarını düzenli olarak inceleyin. Uygulanmanıza neden olan değişiklikleri araştırın ve çözümleyin.
 
-  Bir eşitleme grubunun durumu ise **güncel**, eşitleme grubunu silip yeniden oluşturun.
+  Eşitleme grubunun durumu **güncel**değilse, eşitleme grubunu silip yeniden oluşturun.
 
-### <a name="setup-delete2"></a> Kaldırma veya Aracısı durduruluyor üç dakika içinde bir eşitleme grubu silinemiyor
+### <a name="setup-delete2"></a>Bir eşitleme grubu, aracıyı kaldırmak veya durdurmak için üç dakika içinde silinemez
 
-Kaldırma veya ilişkili SQL Data Sync istemci Aracısı durduruluyor üç dakika içinde bir eşitleme grubu silinemiyor.
+İlişkili SQL Data Sync istemci aracısını kaldırmak veya durdurmak için bir eşitleme grubunu üç dakika içinde silemezsiniz.
 
-- **Çözüm**.
+- **Çözümleme**.
 
-  1. İlişkili eşitleme aracıları çevrimiçi durumdayken eşitleme grubu Kaldır (önerilir).
-  1. Aracı çevrimdışı, ancak yüklenir, şirket içi bilgisayarda çevrimiçi duruma getirin. Olarak görünmesi için aracı durumunu bekleyin **çevrimiçi** SQL Data Sync portalında. Ardından, eşitleme grubunu kaldırın.
-  1. Kaldırılıp kaldırılmadığını çünkü aracı çevrimdışıysa:  
+  1. İlişkili eşitleme aracıları çevrimiçi iken bir eşitleme grubunu kaldırın (önerilir).
+  1. Aracı çevrimdışıysa, ancak yüklüyse şirket içi bilgisayarda çevrimiçi duruma getirin. SQL Data Sync portalında aracının durumunu **çevrimiçi** olarak görünmesini bekleyin. Ardından, eşitleme grubunu kaldırın.
+  1. Kaldırılmış olduğundan, aracı çevrimdışıysa:  
     a.  Aracı XML dosyası mevcutsa, dosyayı SQL Data Sync yükleme klasöründen kaldırın.  
     b.  Aracıyı bir şirket içi bilgisayara yükleyin (aynı bilgisayar veya farklı bir bilgisayar olabilir). Ardından, portalda çevrimdışı olarak gösterilen aracı için oluşturulan aracı anahtarını gönderin.  
-    c. Eşitleme grubu silmeyi deneyin.
+    c. Eşitleme grubunu silmeyi deneyin.
 
-### <a name="setup-restore"></a> Kayıp veya bozuk bir veritabanı geri yükleyebilirim ne olur?
+### <a name="setup-restore"></a>Kayıp veya bozuk bir veritabanını geri yüklerken ne olur?
 
-Kayıp veya bozuk bir veritabanı bir yedeklemeden geri yüklerseniz, bir yakınsaması veri veritabanının ait olduğu eşitleme grupları olabilir.
+Bir yedeklemeden kayıp veya bozuk bir veritabanını geri yüklerseniz, veritabanının ait olduğu eşitleme gruplarında veri yakınsaması olabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-SQL Data Sync hakkında daha fazla bilgi için bkz:
+SQL Data Sync hakkında daha fazla bilgi için bkz.:
 
--   Genel Bakış - [verileri Eşitle birden fazla Bulut ve şirket içi veritabanı arasında Azure SQL Data Sync ile](sql-database-sync-data.md)
--   Data Sync'i Ayarla
-    - Portalda - [Öğreticisi: Azure SQL veritabanı ve SQL Server arasında verileri eşitlemek amacıyla şirket içi SQL Data Sync'i Ayarla](sql-database-get-started-sql-data-sync.md)
+-   Genel Bakış- [Azure SQL Data Sync ile birden çok bulut ve şirket içi veritabanı arasında veri eşitleme](sql-database-sync-data.md)
+-   Veri eşitlemesini ayarlama
+    - Portalda- [öğreticide, Azure SQL veritabanı ve şirket içi SQL Server arasında veri eşitlemek için SQL Data Sync ayarlama](sql-database-get-started-sql-data-sync.md)
     - PowerShell ile
         -  [PowerShell kullanarak birden çok Azure SQL veritabanı arasında eşitleme](scripts/sql-database-sync-data-between-sql-databases.md)
         -  [PowerShell kullanarak bir Azure SQL Veritabanı ile SQL Server şirket içi veritabanı arasında eşitleme](scripts/sql-database-sync-data-between-azure-onprem.md)
--   Veri Eşitleme Aracısı - [veri Aracısı Azure SQL Data Sync için eşitleme](sql-database-data-sync-agent.md)
--   En iyi uygulamalar - [en iyi uygulamalar için Azure SQL Data Sync](sql-database-best-practices-data-sync.md)
--   İzleyici - [SQL Data Sync'i Azure İzleyici ile izleme günlükleri](sql-database-sync-monitor-oms.md)
--   Eşitleme şemasını güncelleştirmek
-    -   Transact-SQL ile- [Azure SQL Data Sync şema değişikliklerinin çoğaltmayı otomatik hale getirme](sql-database-update-sync-schema.md)
-    -   PowerShell ile- [var olan bir eşitleme grubunda eşitleme şemasını güncelleştirmek için PowerShell kullanma](scripts/sql-database-sync-update-schema.md)
+-   Veri eşitleme Aracısı- [Azure SQL Data Sync Için veri eşitleme Aracısı](sql-database-data-sync-agent.md)
+-   En iyi uygulamalar- [Azure SQL Data Sync Için en iyi yöntemler](sql-database-best-practices-data-sync.md)
+-   İzleyici- [Azure izleyici günlükleri ile izleyici SQL Data Sync](sql-database-sync-monitor-oms.md)
+-   Eşitleme şemasını güncelleştirme
+    -   Transact-SQL- [Azure SQL Data Sync şema değişikliklerinin çoğaltılmasını otomatikleştirin](sql-database-update-sync-schema.md)
+    -   PowerShell ile- [varolan bir eşitleme grubundaki eşitleme şemasını güncelleştirmek Için PowerShell kullanın](scripts/sql-database-sync-update-schema.md)
 
-SQL veritabanı hakkında daha fazla bilgi için bkz:
+SQL veritabanı hakkında daha fazla bilgi için bkz.
 
 -   [SQL Veritabanı'na Genel Bakış](sql-database-technical-overview.md)
 -   [Veritabanı Yaşam Döngüsü Yönetimi](https://msdn.microsoft.com/library/jj907294.aspx)

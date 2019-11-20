@@ -1,6 +1,6 @@
 ---
-title: Service Bus konu başlıklarını (Ruby) kullanma | Microsoft Docs
-description: Azure'da Service Bus konuları ve abonelikleri kullanmayı öğrenin. Kod örnekleri, Ruby uygulamalarına yönelik yazılır.
+title: 'Hızlı başlangıç: Service Bus konuları kullanma (Ruby)'
+description: "Hızlı başlangıç: Azure 'da Service Bus konuları ve abonelikleri nasıl kullanacağınızı öğrenin. Ruby uygulamaları için kod örnekleri yazılmıştır."
 services: service-bus-messaging
 documentationcenter: ruby
 author: axisc
@@ -11,40 +11,40 @@ ms.service: service-bus-messaging
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: ruby
-ms.topic: article
-ms.date: 04/15/2019
+ms.topic: quickstart
+ms.date: 11/05/2019
 ms.author: aschhab
-ms.openlocfilehash: b2a05a4695ee80873a2d7464c0a1cf4d46ed30f5
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: b5401eae844ed2113a9fbc07c8b3ad8601709d43
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67543645"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718937"
 ---
-# <a name="how-to-use-service-bus-topics-and-subscriptions-with-ruby"></a>Service Bus konuları ve abonelikleri ile Ruby kullanma
+# <a name="quickstart-how-to-use-service-bus-topics-and-subscriptions-with-ruby"></a>Hızlı başlangıç: Ruby ile Service Bus konuları ve abonelikleri kullanma
  
 [!INCLUDE [service-bus-selector-topics](../../includes/service-bus-selector-topics.md)]
 
-Bu makalede, Service Bus konuları ve abonelikleri Ruby uygulamalardan kullanmayı açıklar. Kapsanan senaryolar şunlardır:
+Bu makalede, Ruby uygulamalarından Service Bus konularının ve aboneliklerinin nasıl kullanılacağı açıklanır. Kapsanan senaryolar şunlardır:
 
-- Konuları ve abonelikleri oluşturma 
+- Konular ve abonelikler oluşturma 
 - Abonelik filtreleri oluşturma 
-- Bir konu başlığına ileti gönderme 
-- Abonelikten ileti alma
+- Konuya ileti gönderme 
+- Bir abonelikten ileti alma
 - Konuları ve abonelikleri silme
 
 
-## <a name="prerequisites"></a>Önkoşullar
-1. Azure aboneliği. Bu öğreticiyi tamamlamak için bir Azure hesabınızın olması gerekir. Etkinleştirebilir, [Visual Studio veya MSDN abone Avantajlarınızı](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A85619ABF) veya kaydolmak için bir [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A85619ABF).
-2. İzleyeceğiniz adımlar [hızlı başlangıç: Bir Service Bus konusu ve konu için Abonelik oluşturmak için Azure portal'ı kullanmanızı](service-bus-quickstart-topics-subscriptions-portal.md) bir Service Bus'ı oluşturmak için **ad alanı** ve **bağlantı dizesi**. 
+## <a name="prerequisites"></a>Ön koşullar
+1. Azure aboneliği. Bu öğreticiyi tamamlamak için bir Azure hesabınızın olması gerekir. [Visual Studio veya MSDN abonesi avantajlarınızı](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A85619ABF) etkinleştirebilir veya [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A85619ABF)için kaydolabilirsiniz.
+2. Hızlı başlangıç içindeki adımları izleyin: bir Service Bus **ad alanı** oluşturmak ve **bağlantı dizesini**almak için [Azure Portal Service Bus konu başlığı ve abonelikleri oluşturmak üzere kullanın](service-bus-quickstart-topics-subscriptions-portal.md) . 
 
     > [!NOTE]
-    > Oluşturacağınız bir **konu** ve **abonelik** kullanarak konuya **Ruby** Bu hızlı başlangıçta. 
+    > Bu hızlı başlangıçta **Ruby** kullanarak konu için bir **Konu** ve bir **abonelik** oluşturacaksınız. 
 
 [!INCLUDE [service-bus-ruby-setup](../../includes/service-bus-ruby-setup.md)]
 
 ## <a name="create-a-topic"></a>Konu başlığı oluşturma
-**Azure::ServiceBusService** nesnesi konuları ile çalışmanıza olanak sağlar. Aşağıdaki kod oluşturur bir **Azure::ServiceBusService** nesne. Bir konu oluşturmak için kullanın `create_topic()` yöntemi. Aşağıdaki örnek, bir konu oluşturur veya tüm hataları yazdırır.
+**Azure:: ServiceBusService** nesnesi konularda çalışmanıza olanak sağlar. Aşağıdaki kod bir **Azure:: ServiceBusService** nesnesi oluşturur. Bir konu oluşturmak için `create_topic()` yöntemi kullanın. Aşağıdaki örnek bir konu oluşturur veya hataları yazdırır.
 
 ```ruby
 azure_service_bus_service = Azure::ServiceBus::ServiceBusService.new(sb_host, { signer: signer})
@@ -55,7 +55,7 @@ rescue
 end
 ```
 
-De geçirebilirsiniz bir **Azure::ServiceBus::Topic** nesne, Canlı ya da en büyük sıra boyutu ileti süresi gibi varsayılan konu ayarlarını geçersiz kılmanıza olanak sağlayan ek seçeneklere sahip. Aşağıdaki örnek, en büyük sıra boyutu 5 GB ve saat 1 dakika için canlı olarak ayarlanması gösterir:
+Ayrıca, ileti Süresi canlı veya en yüksek sıra boyutu gibi varsayılan konu ayarlarını geçersiz kılmanızı sağlayan ek seçeneklerle bir **Azure:: ServiceBus:: topic** nesnesi geçirebilirsiniz. Aşağıdaki örnek, en büyük sıra boyutu olarak 5 GB ve 1 dakikalık yaşam süresi ayarlanmasını gösterir:
 
 ```ruby
 topic = Azure::ServiceBus::Topic.new("test-topic")
@@ -66,29 +66,29 @@ topic = azure_service_bus_service.create_topic(topic)
 ```
 
 ## <a name="create-subscriptions"></a>Abonelik oluşturma
-Konu abonelikleri ile de oluşturulur **Azure::ServiceBusService** nesne. Abonelikler adlandırılır ve aboneliğin sanal kuyruğuna teslim ileti kümesini sınırlayan isteğe bağlı bir filtre içerebilir.
+**Azure:: ServiceBusService** nesnesiyle birlikte konu abonelikleri de oluşturulur. Abonelikler adlandırılır ve aboneliğin sanal kuyruğuna teslim edilen ileti kümesini kısıtlayan isteğe bağlı bir filtreye sahip olabilir.
 
-Varsayılan olarak, abonelikleri kalıcıdır. Ya da bunlar kadar var olmaya devam etmek için veya ilişkili konu ile silindi. Uygulamanız mantıksal bir abonelik oluşturmak için içeriyorsa, ilk getSubscription yöntemi kullanarak abonelik zaten var olup denetlemelisiniz.
+Abonelikler, varsayılan olarak kalıcıdır. Bunlar, ya da ilişkili oldukları konu silinene kadar var olmaya devam eder. Uygulamanız bir abonelik oluşturmak için mantık içeriyorsa, öncelikle getSubscription yöntemi kullanılarak aboneliğin zaten mevcut olup olmadığını denetlemelidir.
 
-Otomatik olarak ayarlayarak silinmiş abonelikleri olabilir [AutoDeleteOnIdle özelliği](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle).
+Otomatik [Deleteonıdle özelliği](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle)ayarlanarak aboneliklerin otomatik olarak silinmesini sağlayabilirsiniz.
 
 ### <a name="create-a-subscription-with-the-default-matchall-filter"></a>Varsayılan (MatchAll) filtreyle abonelik oluşturma
-Yeni bir abonelik oluşturulurken filtre belirtilmezse **MatchAll** filtre (varsayılan) kullanılır. Zaman **MatchAll** filtresinin kullanılacağının, konu başlığında yayımlanan tüm iletiler aboneliğin sanal kuyruğuna yerleştirilir. Aşağıdaki örnek "tüm iletileri" adlı bir abonelik oluşturulur ve varsayılan **MatchAll** filtre.
+Yeni bir abonelik oluşturulduğunda bir filtre belirtilmemişse, **Matchall** filtresi (varsayılan) kullanılır. **Matchall** filtresi kullanıldığında, konuya yayınlanan tüm iletiler aboneliğin sanal kuyruğuna yerleştirilir. Aşağıdaki örnek, "All-Messages" adlı bir abonelik oluşturur ve varsayılan **Matchall** filtresini kullanır.
 
 ```ruby
 subscription = azure_service_bus_service.create_subscription("test-topic", "all-messages")
 ```
 
 ### <a name="create-subscriptions-with-filters"></a>Filtre içeren abonelik oluşturma
-Hangi belirtmenize olanak sağlayan filtreler de tanımlayabilirsiniz konu başlığına gönderilen iletilerin görünmesini içinde belirli bir abonelik.
+Ayrıca, bir konuya gönderilen iletilerin belirli bir abonelik içinde gösterilmesi gerektiğini belirtmenize imkan tanıyan filtreler de tanımlayabilirsiniz.
 
-En esnek filtre türü, abonelikler tarafından desteklenen **Azure::ServiceBus::SqlFilter**, SQL92 kümesini uygular. SQL filtreleri, konu başlığında yayımlanan iletilerin özelliklerinde çalışır. SQL Filtresi ile kullanılabilen ifadeler hakkında daha fazla ayrıntı için gözden [SqlFilter](service-bus-messaging-sql-filter.md) söz dizimi.
+Abonelikler tarafından desteklenen en esnek filtre türü, SQL92 alt kümesini uygulayan **Azure:: ServiceBus:: SqlFilter**' dir. SQL filtreleri, konu başlığında yayımlanan iletilerin özelliklerinde çalışır. Bir SQL filtresiyle kullanılabilecek ifadeler hakkında daha fazla ayrıntı için [sqlfilter](service-bus-messaging-sql-filter.md) sözdizimini gözden geçirin.
 
-Filtreleri kullanarak için bir abonelik ekleyebilmeniz için `create_rule()` yöntemi **Azure::ServiceBusService** nesne. Bu yöntem, mevcut bir aboneliğe yeni filtreler eklemenize olanak sağlar.
+**Azure:: ServiceBusService** nesnesinin `create_rule()` yöntemini kullanarak bir aboneliğe filtre ekleyebilirsiniz. Bu yöntem, mevcut bir aboneliğe yeni filtreler eklemenize olanak sağlar.
 
-Varsayılan filtre tüm yeni abonelikler için otomatik olarak uygulanan olduğundan, öncelikle varsayılan filtreyi kaldırmanız gerekir veya **MatchAll** , belirttiğiniz diğer filtreleri geçersiz kılar. Varsayılan kural kullanarak kaldırabilirsiniz `delete_rule()` metodunda **Azure::ServiceBusService** nesne.
+Varsayılan filtre tüm yeni aboneliklere otomatik olarak uygulandığından, önce varsayılan filtreyi kaldırmanız gerekir, yoksa **Matchall** , belirtebileceğiniz diğer filtreleri geçersiz kılar. **Azure:: ServiceBusService** nesnesindeki `delete_rule()` yöntemini kullanarak varsayılan kuralı kaldırabilirsiniz.
 
-Aşağıdaki örnek "iletileri yüksek" adlı bir abonelik oluşturur bir **Azure::ServiceBus::SqlFilter** , yalnızca özel bir bulunduran iletileri seçen `message_number` özelliği 3'ten büyük:
+Aşağıdaki örnekte, yalnızca 3 ' ten büyük özel bir `message_number` özelliğine sahip iletileri seçen bir **Azure:: ServiceBus:: SqlFilter** ile "yüksek iletiler" adlı bir abonelik oluşturulur:
 
 ```ruby
 subscription = azure_service_bus_service.create_subscription("test-topic", "high-messages")
@@ -102,7 +102,7 @@ rule.filter = Azure::ServiceBus::SqlFilter.new({
 rule = azure_service_bus_service.create_rule(rule)
 ```
 
-Benzer şekilde, aşağıdaki örnekte adlı bir abonelik oluşturur `low-messages` ile bir **Azure::ServiceBus::SqlFilter** , yalnızca bulunduran iletileri seçen bir `message_number` özelliğini daha az veya eşit 3:
+Benzer şekilde, aşağıdaki örnekte, yalnızca 3 ' ten küçük veya buna eşit bir `message_number` özelliğine sahip iletileri seçen **Azure:: ServiceBus:: SqlFilter** ile `low-messages` adlı bir abonelik oluşturulur:
 
 ```ruby
 subscription = azure_service_bus_service.create_subscription("test-topic", "low-messages")
@@ -116,12 +116,12 @@ rule.filter = Azure::ServiceBus::SqlFilter.new({
 rule = azure_service_bus_service.create_rule(rule)
 ```
 
-Ne zaman bir ileti hemen gönderilir `test-topic`, bu her zaman olması girmediklerinden abone alıcılar için `all-messages` konu aboneliği ve seçmeli olarak teslim edilen alıcılar abone için `high-messages` ve `low-messages` (bağlı olarak konu abonelikleri ileti içeriği).
+`test-topic`bir ileti gönderildiğinde, her zaman `all-messages` konu aboneliğine abone olan alıcılar için dağıtılır ve `high-messages` ve `low-messages` konu aboneliklerine abone olan alıcılar için seçmeli olarak dağıtılır (iletiye bağlı olarak) içerik).
 
 ## <a name="send-messages-to-a-topic"></a>Konu başlığına ileti gönderme
-Bir Service Bus konusuna bir ileti göndermek için uygulamanızı kullanmalısınız `send_topic_message()` metodunda **Azure::ServiceBusService** nesne. Service Bus konu başlıklarına gönderilen iletiler örnekleridir **Azure::ServiceBus::BrokeredMessage** nesneleri. **Azure::ServiceBus::BrokeredMessage** nesneleri olan bir standart özellikler kümesi (gibi `label` ve `time_to_live`), bir uygulamaya özgü özel özellikleri tutmak için kullanılan sözlüğü ve dize verileri gövdesi içerir. Bir uygulama iletisinin gövdesini dize değeri geçirerek ayarlayabilirsiniz `send_topic_message()` yöntemi ve tüm gerekli standart özellikleri varsayılan değerlerle doldurulur.
+Service Bus bir konuya ileti göndermek için uygulamanızın **Azure:: ServiceBusService** nesnesinde `send_topic_message()` metodunu kullanması gerekir. Service Bus konularına gönderilen iletiler **Azure:: ServiceBus:: BrokeredMessage** nesnelerinin örnekleridir. **Azure:: ServiceBus:: BrokeredMessage** nesneleri, bir dizi standart özelliğe sahiptir (`label` ve `time_to_live`gibi), uygulamaya özgü özel özellikleri tutmak için kullanılan bir sözlük ve dize verileri gövdesi. Bir uygulama, `send_topic_message()` yöntemine bir dize değeri geçirerek ileti gövdesini ayarlayabilir ve gerekli tüm standart özellikler varsayılan değerlere göre doldurulur.
 
-Aşağıdaki örnek nasıl beş test iletisi göndereceğinizi gösterir `test-topic`. `message_number` Her ileti özel özellik değerini değişen döngü yinelemeyi (hangi abonelik aldığı belirler):
+Aşağıdaki örnek, `test-topic`beş test iletisinin nasıl gönderileceğini gösterir. Her iletinin `message_number` özel özellik değeri, döngünün yinelemesinde değişiklik gösterir (hangi aboneliğin bunu alacağını belirler):
 
 ```ruby
 5.times do |i|
@@ -133,14 +133,14 @@ end
 
 Service Bus konu başlıkları, [Standart katmanda](service-bus-premium-messaging.md) maksimum 256 KB ve [Premium katmanda](service-bus-premium-messaging.md) maksimum 1 MB ileti boyutunu destekler. Standart ve özel uygulama özelliklerini içeren üst bilginin maksimum dosya boyutu 64 KB olabilir. Konu başlığında tutulan ileti sayısına ilişkin bir sınır yoktur ancak konu başlığı tarafından tutulan iletilerin toplam boyutu için uç sınır vardır. Bu konu başlığı boyutu, üst sınır 5 GB olacak şekilde oluşturulma zamanında belirlenir.
 
-## <a name="receive-messages-from-a-subscription"></a>Abonelikten ileti alma
-Kullanarak bir abonelik iletilerin alındığı `receive_subscription_message()` metodunda **Azure::ServiceBusService** nesne. Varsayılan olarak, iletiler read(peak) ve abonelikten silmeden kilitli. Okuma ve ayarlayarak abonelikten ileti silme `peek_lock` seçeneğini **false**.
+## <a name="receive-messages-from-a-subscription"></a>Bir abonelikten ileti alma
+**Azure:: ServiceBusService** nesnesindeki `receive_subscription_message()` yöntemi kullanılarak bir abonelikten iletiler alınır. Varsayılan olarak, iletiler, abonelikten silinmeksizin salt okunurdur (yoğun) ve kilitlidir. `peek_lock` seçeneğini **yanlış**olarak ayarlayarak iletiyi aboneliğden okuyabilir ve silebilirsiniz.
 
-Varsayılan davranışı, okuma ve silme ayrıca, atlanan iletilere uygulamaları desteklemek mümkün kılar bir iki aşamalı işlemi yapar. Service Bus bir istek aldığında bir sonraki kullanılacak iletiyi bulur, diğer tüketicilerin bu iletiyi almasını engellemek için kilitler ve ardından uygulamaya döndürür. Uygulama iletiyi işlemeyi tamamladıktan sonra (veya güvenilir bir şekilde işlemek üzere depolar sonra) çağırarak alma işleminin ikinci aşamasını tamamlar `delete_subscription_message()` yöntemi ve iletiyi bir parametre olarak silinmesini sağlar. `delete_subscription_message()` Yöntemi iletiyi kullanılıyor olarak işaretler ve abonelikten kaldırır.
+Varsayılan davranış, iki aşamalı bir işlemi okumayı ve silmeyi, ayrıca eksik iletilere izin verilmeyen uygulamaları desteklemeyi olanaklı hale getirir. Service Bus bir istek aldığında bir sonraki kullanılacak iletiyi bulur, diğer tüketicilerin bu iletiyi almasını engellemek için kilitler ve ardından uygulamaya döndürür. Uygulama iletiyi işlemeyi tamamladıktan (veya gelecekteki işlemler için güvenilir bir şekilde depolar), `delete_subscription_message()` yöntemini çağırarak ve bir parametre olarak silinecek iletiyi sağlayarak alma işleminin ikinci aşamasını tamamlar. `delete_subscription_message()` yöntemi iletiyi tüketildiği gibi işaretler ve abonelikten kaldırır.
 
-Varsa `:peek_lock` parametrenin ayarlanmış **false**, okuma ve ileti silme basit model haline gelir ve içinde bir uygulama tolere edebilen bir hata oluştuğunda bir iletinin işlenmemesine senaryolarda en iyi şekilde çalışır. Hangi tüketici alma isteği bildirdiğini ve ardından işlenmeden önce kilitleniyor bir senaryo düşünün. Service Bus iletiyi kullanılıyor olarak işaretlediğinden, uygulama yeniden başlatılıp iletileri tekrar kullanmaya başladığında ardından onu çökmenin öncesinde kullanılan iletiyi eksik.
+`:peek_lock` parametresi **false**olarak ayarlandıysa, iletiyi okumak ve silmek en basit model haline gelir ve bir hata oluştuğunda bir uygulamanın bir iletiyi işlememesinin kabul edebildiği senaryolar için en iyi sonucu verir. Tüketicinin alma isteğini yaptığı ve işlemeden önce çöktüğü bir senaryo düşünün. Service Bus ileti tüketildiği gibi işaretlendiğinden, uygulama yeniden başlatıldığında ve iletileri yeniden kullanmaya başladığında, kilitlenme öncesinde tüketilen iletiyi kaçırmıştır.
 
-Aşağıdaki örnek nasıl ileti alındı ve işlenen kullanarak gösterir `receive_subscription_message()`. Örneğin ilk alır ve bir ileti siler `low-messages` kullanarak abonelik `:peek_lock` kümesine **false**, başka bir ileti aldıktan sonra `high-messages` ve ardından iletiyi kullanaraksiler`delete_subscription_message()`:
+Aşağıdaki örnek, iletilerin `receive_subscription_message()`kullanılarak nasıl alınacağını ve işlenebileceğinizi gösterir. Örnek, `low-messages` aboneliğinden önce `:peek_lock` **false**olarak ayarlanmış bir ileti alır ve siler, ardından `high-messages` başka bir ileti alır ve `delete_subscription_message()`kullanarak iletiyi siler:
 
 ```ruby
 message = azure_service_bus_service.receive_subscription_message(
@@ -151,33 +151,33 @@ azure_service_bus_service.delete_subscription_message(message)
 ```
 
 ## <a name="how-to-handle-application-crashes-and-unreadable-messages"></a>Uygulama çökmelerini ve okunmayan iletileri giderme
-Service Bus, uygulamanızda gerçekleşen hataları veya ileti işlenirken oluşan zorlukları rahat bir şekilde ortadan kaldırmanıza yardımcı olmak için işlevsellik sağlar. Alıcı uygulamanın iletiyi işlemek için herhangi bir nedenle silemiyor sonra çağırabilirsiniz `unlock_subscription_message()` metodunda **Azure::ServiceBusService** nesne. Service Bus'ın Abonelikteki iletinin kilidini açmasına ve iletiyi aynı kullanıcı uygulama veya başka bir kullanıcı uygulama tarafından tekrar alınabilir hale neden olur.
+Service Bus, uygulamanızda gerçekleşen hataları veya ileti işlenirken oluşan zorlukları rahat bir şekilde ortadan kaldırmanıza yardımcı olmak için işlevsellik sağlar. Bir alıcı uygulamasının iletiyi bazı nedenlerle işleyemeyeceği takdirde **Azure:: ServiceBusService** nesnesinde `unlock_subscription_message()` yöntemi çağırabilir. Service Bus, aboneliğin içindeki iletinin kilidini açmasının yanı sıra, aynı uygulama ya da başka bir Kullanıcı uygulama tarafından tekrar alınabilir hale gelmesine neden olur.
 
-Ayrıca abonelikte kilitlenen iletiye ilişkin bir zaman aşımı yoktur ve uygulamanın iletiyi işleyemezse (örneğin, uygulama çökerse) önce kilit zaman aşımı süresi dolduktan sonra Service Bus ileti otomatik olarak kilidini açar ve tekrar alınabilir hale.
+Ayrıca, abonelik içinde kilitlenen bir iletiyle ilişkili bir zaman aşımı vardır. uygulama, kilit zaman aşımı dolmadan önce iletiyi işleyemezse (örneğin, uygulama çökerse), Service Bus otomatik olarak iletinin kilidini açar ve yeniden alınmak üzere kullanılabilir hale getirin.
 
-Uygulama iletiyi ancak önce çökmesi durumunda, `delete_subscription_message()` yöntemi çağrılır, ardından yeniden başlatıldığında ileti uygulamaya yeniden teslim. Genellikle adlı *en az bir kez işlenmesini*; diğer bir deyişle, her ileti en az bir kez işlenir ancak belirli durumlarda aynı ileti yeniden teslim edilebilir. Senaryo yinelenen işlemeyi kabul etmiyorsa yinelenen ileti teslimine izin vermek için uygulama geliştiricilerin uygulamaya ilave bir mantık eklemesi gerekir. Bu mantık, genellikle kullanılarak gerçekleştirilir `message_id` özelliğini iletinin teslim denemeleri arasında sabit kalır.
+İleti işlendikten sonra, ancak `delete_subscription_message()` yöntemi çağrılmadan önce uygulamanın çöktüğü durumda, yeniden başlatıldığında ileti uygulamaya yeniden gönderilir. Genellikle *en az bir kez işleme*olarak adlandırılır; diğer bir deyişle, her ileti en az bir kez işlenir ancak belirli durumlarda aynı ileti yeniden teslim edilebilir. Senaryo yinelenen işlemeyi kabul etmiyorsa yinelenen ileti teslimine izin vermek için uygulama geliştiricilerin uygulamaya ilave bir mantık eklemesi gerekir. Bu mantık genellikle iletinin `message_id` özelliği kullanılarak elde edilir ve bu da teslim girişimleri arasında sabit kalır.
 
 ## <a name="delete-topics-and-subscriptions"></a>Konu başlıklarını ve abonelikleri silme
-Konuları ve abonelikleri kalıcı sürece [AutoDeleteOnIdle özelliği](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle) ayarlanır. Olabilirler aracılığıyla silindi [Azure portalında][Azure portal] veya programlama yoluyla. Aşağıdaki örnekte adlı konu nasıl silineceği `test-topic`.
+[Oto Deleteonıdle özelliği](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle) ayarlanmadığı için konular ve abonelikler kalıcıdır. [Azure Portal][Azure portal] veya program aracılığıyla silinebilirler. Aşağıdaki örnek, `test-topic`adlı konunun nasıl silineceğini gösterir.
 
 ```ruby
 azure_service_bus_service.delete_topic("test-topic")
 ```
 
-Bir konu başlığı silindiğinde bu konu başlığıyla kaydedilen tüm abonelikler de silinir. Ayrıca, abonelikler bağımsız olarak da silinebilir. Aşağıdaki kodu adlı abonelik nasıl silineceği `high-messages` gelen `test-topic` konu:
+Bir konu başlığı silindiğinde bu konu başlığıyla kaydedilen tüm abonelikler de silinir. Ayrıca, abonelikler bağımsız olarak da silinebilir. Aşağıdaki kod, `test-topic` konusunun `high-messages` adlı aboneliğin nasıl silineceğini göstermektedir:
 
 ```ruby
 azure_service_bus_service.delete_subscription("test-topic", "high-messages")
 ```
 
 > [!NOTE]
-> Service Bus kaynakları ile yönetebileceğiniz [hizmet veri yolu Gezgini](https://github.com/paolosalvatori/ServiceBusExplorer/). Hizmet veri yolu Gezgini, bir Service Bus ad alanınıza bağlanın ve mesajlaşma varlıkları kolay bir şekilde yönetmek kullanıcıların sağlar. Araç, içeri/dışarı aktarma işlevleri veya konu, kuyruklar, abonelikler, geçiş hizmetleri, bildirim hub'ları ve olay hub'ları test etme olanağı gibi gelişmiş özellikler sağlar. 
+> Service Bus kaynaklarını [Service Bus Explorer](https://github.com/paolosalvatori/ServiceBusExplorer/)ile yönetebilirsiniz. Service Bus gezgin, kullanıcıların bir Service Bus ad alanına bağlanmasına ve mesajlaşma varlıklarını kolay bir şekilde yönetmesine olanak tanır. Araç içeri/dışarı aktarma işlevselliği gibi gelişmiş özellikler ya da konu, kuyruk, abonelik, geçiş Hizmetleri, Bildirim Hub 'ları ve Olay Hub 'larını test etme yeteneği sağlar. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Hizmet veri yolu konuları hakkındaki temel bilgileri öğrendiniz, daha fazla bilgi için bu bağlantıları izleyin.
+Service Bus konuların temellerini öğrendiğinize göre, daha fazla bilgi edinmek için bu bağlantıları izleyin.
 
-* Bkz: [kuyruklar, konular ve abonelikler](service-bus-queues-topics-subscriptions.md).
+* Bkz. [Kuyruklar, konular ve abonelikler](service-bus-queues-topics-subscriptions.md).
 * [SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sqlfilter) için API başvurusu
-* Ziyaret [Ruby için Azure SDK'sı](https://github.com/Azure/azure-sdk-for-ruby) github deposu.
+* GitHub 'daki [Ruby deposu Için Azure SDK 'sını](https://github.com/Azure/azure-sdk-for-ruby) ziyaret edin.
 
 [Azure portal]: https://portal.azure.com

@@ -1,102 +1,91 @@
 ---
-title: 'Öğretici: SAP NetWeaver ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: SAP NetWeaver ile Azure Active Directory arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Öğretici: SAP NetWeaver ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve SAP NetWeaver arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
+manager: mtillman
+ms.reviewer: celested
 ms.assetid: 1b9e59e3-e7ae-4e74-b16c-8c1a7ccfdef3
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 02/11/2019
+ms.date: 08/14/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 01a70bfbb169090fbdf4b5f8e00af6895f69c964
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d79c953f22bfe587f740bc29050796834309186a
+ms.sourcegitcommit: 1c9858eef5557a864a769c0a386d3c36ffc93ce4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67091911"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71103359"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-sap-netweaver"></a>Öğretici: SAP NetWeaver ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-sap-netweaver"></a>Öğretici: SAP NetWeaver ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile SAP NetWeaver tümleştirme konusunda bilgi edinin.
-SAP NetWeaver'ı Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide SAP NetWeaver 'ı Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. SAP NetWeaver 'i Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* SAP NetWeaver erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) SAP NetWeaver için oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de SAP NetWeaver 'e erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla SAP NetWeaver 'ta otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-SAP NetWeaver ile Azure AD tümleştirmesini yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* SAP NetWeaver çoklu oturum açmayı abonelik etkin.
-* SAP NetWeaver V7.20 en az gerekli
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* SAP NetWeaver çoklu oturum açma (SSO) etkin aboneliği.
+* SAP NetWeaver V 7.20 en az gereklidir
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+SAP NetWeaver, **SAML** (**SP tarafından başlatılan SSO**) ve **OAuth**'ı destekler. Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz. 
 
-* SAP NetWeaver'ı destekleyen **SP** tarafından başlatılan
+> [!NOTE]
+> Uygulamayı, kurumsal gereksiniminize göre SAML ya da OAuth içinde yapılandırın. 
 
-## <a name="adding-sap-netweaver-from-the-gallery"></a>SAP NetWeaver galeri ekleme
+## <a name="adding-sap-netweaver-from-the-gallery"></a>Galeriden SAP NetWeaver ekleme
 
-Azure AD'de SAP NetWeaver tümleştirmesini yapılandırmak için SAP NetWeaver Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+SAP NetWeaver 'ın Azure AD 'ye tümleştirilmesini yapılandırmak için, Gallery 'den yönetilen SaaS uygulamaları listenize SAP NetWeaver eklemeniz gerekir.
 
-**SAP NetWeaver Galeriden eklemek için aşağıdaki adımları gerçekleştirin:**
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **SAP NetWeaver** yazın.
+1. Sonuçlar panelinden **SAP NetWeaver** ' ı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+## <a name="configure-and-test-azure-ad-single-sign-on-for-sap-netweaver"></a>SAP NetWeaver için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-    ![Azure Active Directory düğmesi](common/select-azuread.png)
+**B. Simon**adlı bir test KULLANıCıSı kullanarak SAP NetWeaver Ile Azure AD SSO 'yu yapılandırın ve test edin. SSO 'nun çalışması için, SAP NetWeaver 'deki bir Azure AD kullanıcısı ve ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+Azure AD SSO 'yu SAP NetWeaver ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+1. Kullanıcılarınızın bu özelliği kullanmasını sağlamak için **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** .
+    1. B. Simon ile Azure AD çoklu oturum açma sınamasını test etmek için **[bir Azure AD test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** .
+    1. Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek üzere **[Azure AD test kullanıcısını atayın](#assign-the-azure-ad-test-user)** .
+1. Uygulama tarafında SSO ayarlarını yapılandırmak için **[SAML kullanarak SAP NetWeaver 'ı yapılandırın](#configure-sap-netweaver-using-saml)** .
+    1. SAP NetWeaver 'ın Azure AD gösterimine bağlı olan SAP NetWeaver 'de buna karşılık gelen B. Simon 'a sahip olması için **[SAP test kullanıcısı oluşturun](#create-sap-netweaver-test-user)** .
+1. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[test SSO 'su](#test-sso)** .
+1. Uygulama tarafında OAuth ayarlarını yapılandırmak için, **[OAuth IÇIN SAP NetWeaver 'ı yapılandırın](#configure-sap-netweaver-for-oauth)** .
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-4. Arama kutusuna **SAP NetWeaver**seçin **SAP NetWeaver** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+SAP NetWeaver ile Azure AD çoklu oturum açmayı yapılandırmak için aşağıdaki adımları uygulayın:
 
-     ![Sonuç listesinde SAP NetWeaver](common/search-new-app.png)
+1. Yeni bir Web tarayıcı penceresi açın ve SAP NetWeaver şirket sitenizde yönetici olarak oturum açın
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+1. **Http** ve **https** hizmetlerinin etkin olduğundan ve uygun bağlantı noktalarının **Smick** T-Code ' a atandığından emin olun.
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma SAP NetWeaver tabanlı adlı bir test kullanıcı ile test etme **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ile SAP NetWeaver ilgili kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+1. SSO 'nun gerekli olduğu ve HTTP güvenlik oturumu yönetimini etkinleştirmesi gereken SAP System (T01) iş istemcisinde oturum açın.
 
-Yapılandırma ve Azure AD çoklu oturum açma SAP NetWeaver ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
-
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[SAP NetWeaver çoklu oturum açmayı yapılandırma](#configure-sap-netweaver-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[SAP NetWeaver test kullanıcısı oluşturma](#create-sap-netweaver-test-user)**  - kullanıcı Azure AD gösterimini bağlı olduğu SAP NetWeaver Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
-
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
-
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
-
-SAP NetWeaver ile Azure AD çoklu oturum açmayı yapılandırmak için aşağıdaki adımları gerçekleştirin:
-
-1. Yeni bir web tarayıcı penceresi ve günlük SAP NetWeaver şirket sitenize yönetici olarak açın.
-
-2. Emin olun **http** ve **https** Hizmetleri etkin ve uygun bağlantı noktalarının atanır **SMICM** T-kod.
-
-3. SAP SSO gerekli olduğu sisteminin (T01) iş istemcide oturum açan ve HTTP güvenlik oturumu yönetimini etkinleştirin.
-
-    a. İşlem kodu Git **SICF_SESSIONS**. Geçerli değerler ile tüm ilgili profil parametreleri gösterir. Bunlar aşağıda görünmesi:-
+    a. Işlem kodu **SICF_SESSIONS**' e gidin. Geçerli değerlerle ilgili tüm profil parametrelerini görüntüler. Şu şekilde görünür:-
     ```
     login/create_sso2_ticket = 2
     login/accept_sso2_ticket = 1
@@ -109,275 +98,298 @@ SAP NetWeaver ile Azure AD çoklu oturum açmayı yapılandırmak için aşağı
     rdisp/autothtime = 60
     ```
     >[!NOTE]
-    > Yukarıda, kuruluşunuzun gereksinimlerine uygun parametreleri ayarlayın, parametreleri verilen yalnızca bir gösterge olarak burada.
+    > Kuruluş gereksinimlerinize göre yukarıdaki parametreleri ayarlayın, yukarıdaki parametrelere yalnızca gösterge olarak verilirler.
 
-    b. Parametrelerinde SAP sisteminin örnek/varsayılan profil ayarlamak ve SAP sistemi yeniden başlatma gerekli.
+    b. Gerekirse, parametreleri ayarla SAP sisteminin örnek/varsayılan profilinde ve SAP sistemini yeniden başlatın.
 
-    c. Çift ilgili istemci HTTP güvenlik oturumu etkinleştirmek için tıklayın.
+    c. HTTP güvenlik oturumunu etkinleştirmek için ilgili istemciye çift tıklayın.
 
     ![Sertifika indirme bağlantısı](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_profileparameter.png)
 
-    d. SICF hizmetleri etkinleştirin:
+    d. SıCF hizmetlerini aşağıdan etkinleştirin:
     ```
     /sap/public/bc/sec/saml2
     /sap/public/bc/sec/cdc_ext_service
     /sap/bc/webdynpro/sap/saml2
     /sap/bc/webdynpro/sap/sec_diag_tool (This is only to enable / disable trace)
     ```
-4. İşlem kodu Git **SAML2** iş istemcisinde SAP sistemi T01/122. Bu, bir kullanıcı arabirimi bir tarayıcıda açılır. Bu örnekte, biz 122 SAP business istemcisi varsayılır.
+1. SAP System [T01/122.368] iş istemcisinde Transaction Code **SAML2** 'a gidin. Bir tarayıcıda Kullanıcı arabirimini açar. Bu örnekte, SAP Business Client 122 olarak kabul ediyoruz.
 
     ![Sertifika indirme bağlantısı](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_sapbusinessclient.png)
 
-5. Kullanıcı adı ve kullanıcı arabiriminde girin ve parola sağlayın **Düzenle**.
+1. Kullanıcı arabirimine girmek için Kullanıcı adınızı ve parolanızı girip **Düzenle**' ye tıklayın.
 
     ![Sertifika indirme bağlantısı](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_userpwd.png)
 
-6. Değiştirin **sağlayıcı adı** T01122 için gelen `http://T01122` tıklayın **Kaydet**.
+1. **Sağlayıcı adını** T01122 olarak değiştirin ve `http://T01122` **Kaydet**' e tıklayın.
 
     > [!NOTE]
-    > Varsayılan sağlayıcı adı ile gelir olarak `<sid><client>` biçimi ancak Azure AD'ye bekliyor adı biçiminde `<protocol>://<name>`, sağlayıcı adı olarak korumak için önerilen `https://<sid><client>` Azure AD'de yapılandırmak birden fazla SAP NetWeaver ABAP altyapıları izin vermek için.
+    > Varsayılan olarak, `<protocol>://<name>`sağlayıcı adı biçim `<sid><client>` olarak gelir, ancak Azure AD, Azure AD 'de birden çok SAP NetWeaver ABAP altyapısına izin `https://<sid><client>` verecek şekilde, sağlayıcı adının korunmasını öneren, biçiminde ad bekler.
 
     ![Sertifika indirme bağlantısı](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_providername.png)
 
-7. **Hizmet sağlayıcısı meta verileri oluşturuluyor**: - şu yapılandırma ile işiniz bittiğinde **yerel sağlayıcı** ve **güvenilir sağlayıcılar** ayarları SAML 2.0 kullanıcı arabiriminde, sonraki adım için olacaktır (Bu, tüm ayarlarını, kimlik doğrulaması bağlamı ve diğer yapılandırmalarda SAP içerir) hizmet sağlayıcısının meta veri dosyası oluşturur. Bu dosyayı oluşturduktan sonra bunu Azure AD'de yüklemeniz gerekir.
+1. **Hizmet sağlayıcı meta verileri oluşturuluyor**:-SAML 2,0 Kullanıcı arabiriminde **yerel sağlayıcı** ve **Güvenilen sağlayıcılar** ayarlarını yapılandırma ile işiniz bittiğinde, sonraki adım hizmet sağlayıcının meta veri dosyasını oluşturmak için kullanılır ( Tüm ayarları, kimlik doğrulama bağlamlarını ve SAP 'deki diğer konfigürasyonları içerir). Bu dosya oluşturulduktan sonra Azure AD 'ye yüklemesi gerekir.
 
     ![Sertifika indirme bağlantısı](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_generatesp.png)
 
-    a. Git **yerel sağlayıcı sekmesi**.
+    a. **Yerel sağlayıcı sekmesine**gidin.
 
-    b. Tıklayarak **meta verileri**.
+    b. **Meta veriler**' e tıklayın.
 
-    c. Oluşturulan Kaydet **meta verileri XML dosyası** bilgisayarınızdaki ve bunu karşıya **temel SAML yapılandırma** otomatik olarak doldurmak için bölümü **tanımlayıcı** ve  **Yanıt URL'si** Azure portalında değerleri.
+    c. Oluşturulan **meta VERI XML dosyasını** bilgisayarınıza kaydedin ve Azure Portal **tanımlayıcı** ve **yanıt URL 'si** DEğERLERINI otomatik olarak doldurmak için **temel SAML yapılandırması** bölümüne yükleyin.
 
-8. İçinde [Azure portalında](https://portal.azure.com/), **SAP NetWeaver** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+1. [Azure Portal](https://portal.azure.com/), **SAP NetWeaver** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-9. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+1. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımı uygulayın:
 
-10. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
-
-    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
-
-11. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
-
-    a. Tıklayın **meta veri dosyasını karşıya yükleme** yüklenecek **hizmet sağlayıcısı meta veri dosyası** , daha önce aldığınız.
-
-    ![Meta veri dosyasını karşıya yükleyin](common/upload-metadata.png)
+    a. Daha önce edindiğiniz **Service Provider meta veri dosyasını**karşıya yüklemek için **meta veri dosyasını karşıya yükle** ' ye tıklayın.
 
     b. Tıklayarak **klasör logosu** meta veri dosyası seçin ve **karşıya**.
 
-    ![meta veri dosyası seçin](common/browse-upload-metadata.png)
+    c. Meta veri dosyası başarıyla karşıya yüklendikten sonra **tanımlayıcı** ve **yanıt URL** değerleri, **temel SAML yapılandırması** bölüm metin kutusunda aşağıda gösterildiği gibi otomatik olarak doldurulur:
 
-    c. Meta veri dosyası başarıyla karşıya yüklendikten sonra **tanımlayıcı** ve **yanıt URL'si** değerlerini alma otomatik olarak doldurulmuş **temel SAML yapılandırma** bölümünde gösterildiği gibi metin kutusu Aşağıda:
-
-    ![SAP NetWeaver etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier-reply.png)
-
-    d. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<your company instance of SAP NetWeaver>`
+    d. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<your company instance of SAP NetWeaver>`
 
     > [!NOTE]
-    > Kendi örneklerine yapılandırılmış yanlış yanıt URL'sinin bir hata bildirimi, bazı müşterilerin gördük. Herhangi bir hata alırsanız, PowerShell Betiği bir iş yaklaşık Örneğiniz için doğru yanıt URL'sini ayarlamak için kullanabilirsiniz.:
+    > Örnekleri için yapılandırılmış yanlış yanıt URL 'SI hatası bildiren birkaç müşteriyi gördük. Bu tür bir hata alırsanız, örneğiniz için doğru yanıt URL 'sini ayarlamak için aşağıdaki PowerShell betiğini geçici bir çözüm olarak kullanabilirsiniz.:
     > ```
     > Set-AzureADServicePrincipal -ObjectId $ServicePrincipalObjectId -ReplyUrls "<Your Correct Reply URL(s)>"
     > ``` 
-    > ServicePrincipal nesne kimliği kendiniz ayarlanması ya da, ayrıca burada geçirebilirsiniz.
+    > ServicePrincipal nesne KIMLIĞI ilk olarak sizin tarafınızdan ayarlanacak ya da bunu da buraya geçirebilmeniz gerekir.
 
-12. SAP NetWeaver uygulaması belirli bir biçimde SAML onaylamalarını bekliyor. Bu uygulama için aşağıdaki talepleri yapılandırın. Bu öznitelikleri değerlerini yönetebilirsiniz **kullanıcı öznitelikleri** uygulama tümleştirme sayfasında bölümü. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için düğmeyi **kullanıcı öznitelikleri** iletişim.
+1. SAP NetWeaver uygulaması, SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde SAML onayları bekler. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir. Kullanıcı öznitelikleri iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![image](common/edit-attribute.png)
 
-13. İçinde **kullanıcı taleplerini** bölümünde **kullanıcı öznitelikleri** iletişim kutusunda, SAML belirteci özniteliği yukarıdaki görüntüde gösterilen şekilde yapılandırın ve aşağıdaki adımları gerçekleştirin:
+1. **Kullanıcı öznitelikleri** Iletişim kutusundaki **Kullanıcı talepleri** bölümünde, YUKARıDAKI görüntüde gösterildiği gibi SAML belirteci özniteliğini yapılandırın ve aşağıdaki adımları gerçekleştirin:
 
-    a. Tıklayın **düzenleme simgesi** açmak için **yönetmek, kullanıcı talepleri** iletişim.
+    a. **Kullanıcı taleplerini Yönet** iletişim kutusunu açmak için **Düzenle simgesine** tıklayın.
 
     ![image](./media/sapnetweaver-tutorial/nameidattribute.png)
 
     ![image](./media/sapnetweaver-tutorial/nameidattribute1.png)
 
-    b. Gelen **dönüştürme** listesinden **ExtractMailPrefix()** .
+    b. **Dönüştürme** listesinden **Extractmailprefix ()** öğesini seçin.
 
-    c. Gelen **parametresi 1** listesinden **user.userprinicipalname**.
+    c. **Parameter 1** listesinden **User. userprinicipalname**öğesini seçin.
 
     d. **Kaydet**’e tıklayın.
 
-14. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **Federasyon meta veri XML**  bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **Federasyon meta verileri XML** 'i bulun ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-    ![Sertifika indirme bağlantısı](common/metadataxml.png)
+   ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-15. Üzerinde **SAP NetWeaver ' ayarlamak** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+1. **SAP NetWeaver ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
-
-    a. Oturum Açma URL'si:
-
-    b. Azure Ad tanımlayıcısı
-
-    c. Oturum Kapatma URL'si
-
-### <a name="configure-sap-netweaver-single-sign-on"></a>SAP NetWeaver tek oturum açmayı yapılandırın
-
-1. SAP sistemine oturum açma ve işlem kodu SAML2 gidin. SAML yapılandırma ekranında ile yeni bir tarayıcı penceresi açar.
-
-2. Sağlayıcı (Azure AD) uç noktalar için güvenilen kimlik yapılandırmak için Git **Güvenilen Yayımcılar** sekmesi.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_samlconfig.png)
-
-3. Tuşuna **Ekle** seçip **meta veri dosyasını karşıya yükle** bağlam menüsünden.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_uploadmetadata.png)
-
-4. Azure portalından indirdiğiniz meta veri dosyasını karşıya yükleyin.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_metadatafile.png)
-
-5. Sonraki ekranda diğer adı yazın. Örneğin aadsts ve ENTER tuşuna **sonraki** devam etmek için.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_aliasname.png)
-
-6. Emin olun, **Özet algoritması** olmalıdır **SHA-256'yı** ve herhangi bir değişiklik gerektirmez ve basın **sonraki**.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_identityprovider.png)
-
-7. Üzerinde **tek oturum açma uç noktaları**, kullanın **HTTP POST** tıklatıp **sonraki** devam etmek için.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_httpredirect.png)
-
-8. Üzerinde **çoklu oturum kapatma uç noktaları** seçin **HTTPRedirect** tıklatıp **sonraki** devam etmek için.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_httpredirect1.png)
-
-9. Üzerinde **Yapıt uç noktaları**, basın **sonraki** devam etmek için.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_artifactendpoint.png)
-
-10. Üzerinde **kimlik doğrulama gereksinimleri**, tıklayın **son**.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_authentication.png)
-
-11. Go için sekmesinde **güvenilen bir sağlayıcı** > **Kimlik Federasyonu** (Alttan ekranın). **Düzenle**‘ye tıklayın.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_trustedprovider.png)
-
-12. Tıklayın **Ekle** altında **Kimlik Federasyonu** sekme (alt pencere).
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_addidentityprovider.png)
-
-13. Açılır penceresinden seçmek **belirtilmemiş** gelen **Nameıd desteklenen biçimler** ve Tamam'a tıklayın.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_nameid.png)
-
-14. Unutmayın **kullanıcı kimliği kaynak** ve **kullanıcı kimliği eşleme modunu** değerleri SAP kullanıcısı ve Azure AD talep arasındaki bağlantıyı belirler.  
-
-    #### <a name="scenario-sap-user-to-azure-ad-user-mapping"></a>Senaryo: Azure AD kullanıcı eşleme SAP kullanıcı.
-
-    a. SAP Nameıd ayrıntıları ekran görüntüsü.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/nameiddetails.png)
-
-    b. Azure AD'den gerekli talep bahseden bir ekran görüntüsü.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/claimsaad1.png)
-
-    #### <a name="scenario-select-sap-user-id-based-on-configured-email-address-in-su01-in-this-case-email-id-should-be-configured-in-su01-for-each-user-who-requires-sso"></a>Senaryo: SU01 yapılandırılan e-posta adresini temel alarak SAP kullanıcı kimliğini seçin. Bu durumda e-posta kimliği su01 SSO gerektiren her bir kullanıcı için yapılandırılmalıdır.
-
-    a.  SAP Nameıd ayrıntıları ekran görüntüsü.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_nameiddetails1.png)
-
-    b. Azure AD'den gerekli talep bahseden bir ekran görüntüsü.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/claimsaad2.png)
-
-15. Tıklayın **Kaydet** ve ardından **etkinleştirme** kimlik sağlayıcısı etkinleştirmek için.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/configuration1.png)
-
-16. Tıklayın **Tamam** kez istenir.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/configuration2.png)
+   ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
-
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
-
-2. Seçin **yeni kullanıcı** ekranın üstünde.
-
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
-
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
-
-    ![Kullanıcı iletişim kutusu](common/user-properties.png)
-
-    a. İçinde **adı** alana **BrittaSimon**.
-  
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
-    Örneğin, BrittaSimon@contoso.com
-
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
-
-    d. **Oluştur**’a tıklayın.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Seçin **yeni kullanıcı** ekranın üstünde.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+    1. **Ad** alanına `B.Simon` girin.  
+    1. **Kullanıcı adı** alanına, username@companydomain.extensiongirin. Örneğin: `B.Simon@contoso.com`.
+    1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+    1. **Oluştur**'a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, SAP NetWeaver için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Bu bölümde, SAP NetWeaver 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **SAP NetWeaver**.
-
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
-
-2. Uygulamalar listesinde **SAP NetWeaver**.
-
-    ![Uygulamalar listesini SAP NetWeaver bağlantıdaki](common/all-applications.png)
-
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde **SAP NetWeaver**' ı seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
     !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![Atama Ekle bölmesi](common/add-assign-user.png)
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+## <a name="configure-sap-netweaver-using-saml"></a>SAML kullanarak SAP NetWeaver yapılandırma
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+1. SAP sisteminde oturum açın ve işlem kodu SAML2 ' e gidin. SAML Yapılandırması ekranı ile yeni tarayıcı penceresi açar.
 
-### <a name="create-sap-netweaver-test-user"></a>SAP NetWeaver test kullanıcısı oluşturma
+2. Güvenilen kimlik sağlayıcısı (Azure AD) için uç noktaları yapılandırmak için **güvenilir sağlayıcılar** sekmesine gidin.
 
-Bu bölümde, Britta Simon SAP NetWeaver adlı bir kullanıcı oluşturun. Lütfen şirket içi SAP Uzman takımınızın iş veya SAP NetWeaver platform kullanıcıları eklemek için kuruluş SAP iş ortağınız ile çalışır.
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_samlconfig.png)
 
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
+3. **Ekle** ' ye basın ve bağlam menüsünden **meta veri dosyasını karşıya yükle** ' yi seçin.
 
-1. Azure AD kimlik sağlayıcısı etkinleştirildikten sonra SSO denetlemek için URL'ye erişilirken deneyin (kullanıcı adı ve parola için herhangi bir istem olacaktır)
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_uploadmetadata.png)
+
+4. Azure portal indirdiğiniz meta veri dosyasını karşıya yükleyin.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_metadatafile.png)
+
+5. Sonraki ekranda, diğer adı yazın. Örneğin, aadsts ve devam etmek için **İleri** ' ye basın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_aliasname.png)
+
+6. **Özet algoritmanız** için **SHA-256** olmalı ve herhangi bir değişiklik gerektirmediğinden emin olun ve **İleri**' ye basın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_identityprovider.png)
+
+7. **Çoklu oturum açma uç noktalarında**, **http post** ' u kullanın ve devam etmek için **İleri** ' ye tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_httpredirect.png)
+
+8. **Çoklu oturum kapatma uç noktalarında** **httpredirect** seçeneğini belirleyin ve devam etmek için **İleri** 'yi tıklatın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_httpredirect1.png)
+
+9. **Yapıt uç noktalarında**devam etmek için **İleri** ' ye basın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_artifactendpoint.png)
+
+10. **Kimlik doğrulama gereksinimleri**' nde **son**' a tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_authentication.png)
+
+11. Sekmeye **Güvenilen sağlayıcı** > **kimliği Federasyonu** ' ne gidin (ekranın altından). **Düzenle**‘ye tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_trustedprovider.png)
+
+12. **Kimlik Federasyonu** sekmesi (alt pencere) altında **Ekle** ' ye tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_addidentityprovider.png)
+
+13. Açılır pencerede, **desteklenen NameID biçimlerinden** **belirtilmemiş** ' i seçin ve Tamam ' a tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_nameid.png)
+
+14. **Kullanıcı kimliği kaynağı** ve **Kullanıcı kimliği eşleme modu** değerlerinin SAP kullanıcısı ile Azure AD talebi arasındaki bağlantıyı belirleyeceğini unutmayın.  
+
+    #### <a name="scenario-sap-user-to-azure-ad-user-mapping"></a>Senaryo: SAP kullanıcısı için Azure AD kullanıcı eşlemesi.
+
+    a. NameID ayrıntıları SAP ekranının ekran görüntüsü.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/nameiddetails.png)
+
+    b. Azure AD 'den gerekli talepler ekran görüntüsü.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/claimsaad1.png)
+
+    #### <a name="scenario-select-sap-user-id-based-on-configured-email-address-in-su01-in-this-case-email-id-should-be-configured-in-su01-for-each-user-who-requires-sso"></a>Senaryo: SU01 ' de yapılandırılmış e-posta adresine göre SAP Kullanıcı KIMLIĞI ' ni seçin. Bu durumda, SSO gerektiren her kullanıcı için e-posta KIMLIĞI su01 ' de yapılandırılmalıdır.
+
+    a.  NameID ayrıntıları SAP ekranının ekran görüntüsü.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/tutorial_sapnetweaver_nameiddetails1.png)
+
+    b. Azure AD 'den gerekli talepler ekran görüntüsü.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/claimsaad2.png)
+
+15. **Kaydet** ' e tıklayın ve kimlik sağlayıcısını etkinleştirmek için **Etkinleştir** ' e tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/configuration1.png)
+
+16. İstendiğinde **Tamam** ' a tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/configuration2.png)
+
+    ### <a name="create-sap-netweaver-test-user"></a>SAP NetWeaver test kullanıcısı oluşturma
+
+    Bu bölümde, SAP NetWeaver 'de B. Simon adlı bir Kullanıcı oluşturacaksınız. SAP NetWeaver platformunda kullanıcıları eklemek için lütfen şirket içi SAP uzman takımınızdan çalışın veya kuruluşunuzun SAP iş ortağınızla birlikte çalışın.
+
+## <a name="test-sso"></a>Test SSO 'SU
+
+1. Kimlik sağlayıcısı Azure AD etkinleştirildikten sonra, SSO 'yu denetlemek için aşağıdaki URL 'ye erişmeyi deneyin (Kullanıcı adı & parolasını sorma)
 
     `https://<sapurl>/sap/bc/bsp/sap/it00/default.htm`
 
-    (veya) aşağıdaki URL'yi kullanın
+    (veya) aşağıdaki URL 'YI kullanın
 
     `https://<sapurl>/sap/bc/bsp/sap/it00/default.htm`
 
     > [!NOTE]
-    > Sapurl gerçek SAP konak adı ile değiştirin.
+    > Sapurl 'yi gerçek SAP ana bilgisayar adıyla değiştirin.
 
-2. Yukarıdaki URL için belirtilen ekranın altına almalıdır. En fazla ulaşabilir, sayfanın bir altında Azure AD SSO başarıyla kuruldu.
+2. Yukarıdaki URL, sizi belirtilen ekranın altına götürebilmelidir. Aşağıdaki sayfaya erişebilseniz, Azure AD SSO Kurulumu başarıyla tamamlandı.
 
     ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/testingsso.png)
 
-3. Kullanıcı adı ve parola istemi meydana gelirse, sorunu aşağıdaki URL'yi kullanarak izlemeyi etkinleştir tarafından Lütfen tanılayın
+3. Kullanıcı adı & parola istemi oluşursa, lütfen aşağıdaki URL 'YI kullanarak izlemeyi etkinleştirerek sorunu tanılayın
 
     `https://<sapurl>/sap/bc/webdynpro/sap/sec_diag_tool?sap-client=122&sap-language=EN#`
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+## <a name="configure-sap-netweaver-for-oauth"></a>OAuth için SAP NetWeaver yapılandırma
+
+1. SAP belgelenmiş işlem şu konumda kullanılabilir: [NetWeaver ağ geçidi hizmeti etkinleştirme ve OAuth 2,0 kapsam oluşturma](https://wiki.scn.sap.com/wiki/display/Security/NetWeaver+Gateway+Service+Enabling+and+OAuth+2.0+Scope+Creation)
+
+2. SPRO ' ya gidin ve **hizmetleri etkinleştirme ve sürdürme**' yı bulun.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth01.png)
+
+3. Bu örnekte OData hizmetini `DAAG_MNGGRP` OAuth ile Azure AD SSO 'ya bağlamak istiyoruz. Hizmet `DAAG_MNGGRP` için teknik hizmet adı aramasını kullanın ve henüz etkin değilse etkinleştirin (ICF düğümleri altında `green` durum ' u arayın). Sistem diğer adının (hizmetin gerçekten çalıştığı bağlı arka uç sistemi) doğru olduğundan emin olun.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth02.png)
+
+    * Sonra üstteki düğme çubuğunda basma ve **OAuth** ' a tıklayın ve `scope` (varsayılan adı sunulsun) atayın.
+
+4. Bizim örneğimiz için kapsam `DAAG_MNGGRP_001`, otomatik olarak bir sayı eklenerek hizmet adından oluşturulur. Rapor `/IWFND/R_OAUTH_SCOPES` , kapsam adını değiştirmek veya el ile oluşturmak için kullanılabilir.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth03.png)
+
+    > [!NOTE]
+    > İleti `soft state status is not supported` – sorun olmadığından yoksayılabilir. Daha fazla ayrıntı için [buraya](https://help.sap.com/doc/saphelp_nw74/7.4.16/1e/c60c33be784846aad62716b4a1df39/content.htm?no_cache=true) bakın
+
+### <a name="create-a-service-user-for-the-oauth-20-client"></a>OAuth 2,0 Istemcisi için bir hizmet kullanıcısı oluşturma
+
+1. OAuth2, son `service ID` Kullanıcı adına erişim belirtecini almak için bir kullanır. OAuth tasarımına göre önemli kısıtlama: `OAuth 2.0 Client ID` bir erişim belirteci istenirken OAuth 2,0 istemcisinin oturum açması için kullanması `username` ile aynı olmalıdır. Bu nedenle, bizim örneğimizde, ISTEMCI1 adına sahip bir OAuth 2,0 istemcisini kaydedebiliyoruz ve bir önkoşul olarak, SAP sisteminde aynı ada (ISTEMCI1) sahip olan bir kullanıcının ve başvurulan uygulama tarafından kullanılmak üzere yapılandıracağız bir kullanıcı var olmalıdır. 
+
+2. Bir OAuth Istemcisi kaydedilirken, `SAML Bearer Grant type`kullanılır.
+
+    >[!NOTE]
+    >Daha fazla ayrıntı için, [burada](https://wiki.scn.sap.com/wiki/display/Security/OAuth+2.0+Client+Registration+for+the+SAML+Bearer+Grant+Type) SAML taşıyıcı verme türü için OAuth 2,0 istemci kaydına başvurun
+
+3. TCOD: SU01/Kullanıcı İSTEMCİ1 `System type` 'i oluşturma ve parola atama, kimlik bilgisini, çağıran koda Kullanıcı adı ile yazmak isteyen API Programlayıcısının kimlik bilgilerini sağlamak için gereken şekilde kaydedin. Hiçbir profil veya rol atanmalıdır.
+
+### <a name="register-the-new-oauth-20-client-id-with-the-creation-wizard"></a>Yeni OAuth 2,0 Istemci KIMLIĞINI oluşturma Sihirbazı ile kaydetme
+
+1. Yeni bir **OAuth 2,0 Client** start TRANSACTION **SOAUTH2**kaydetmek için. İşlem, zaten kayıtlı olan OAuth 2,0 istemcilerle ilgili bir genel bakış görüntüler. CLIENT1in Bu örnek olarak adlandırılan yeni OAuth istemcisinin sihirbazını başlatmak için **Oluştur** ' a tıklayın.
+
+2. T koduna git: **SOAUTH2** ve açıklamayı girip **İleri**' ye tıklayın.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth04.png)
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth05.png)
+
+3. Açılan listeden zaten eklenmiş olan **SAML2 IDP – Azure AD** ' ı seçin ve kaydedin.
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth06.png)
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth07.png)
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth08.png)
+
+4. Daha önce oluşturulan kapsamı eklemek için kapsam ataması altında **Ekle** ' ye tıklayın:`DAAG_MNGGRP_001`
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth09.png)
+
+    ![Çoklu oturum açmayı yapılandırın](./media/sapnetweaver-tutorial/oauth10.png)
+
+5. **Son**' a tıklayın.
+
+## <a name="additional-resources"></a>Ek kaynaklar
 
 - [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+
+- [SAP NetWeaver 'i Azure AD ile deneyin](https://aad.portal.azure.com/)

@@ -1,6 +1,6 @@
 ---
-title: En iyi uygulamalar için Azure SQL Data Sync | Microsoft Docs
-description: Yapılandırma ve Azure SQL Data Sync çalıştırmak için en iyi uygulamalar hakkında bilgi edinin.
+title: Data Sync için en iyi deneyimler
+description: Azure SQL Data Sync yapılandırmak ve çalıştırmak için en iyi yöntemler hakkında bilgi edinin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: data-movement
@@ -10,232 +10,231 @@ ms.topic: conceptual
 author: allenwux
 ms.author: xiwu
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 12/20/2018
-ms.openlocfilehash: 0b1e3b98fe5b934b712db2a5549ebdc865523bfb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 75fe07dc9847ae32248688bc20fac01e74c7b26a
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61412592"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821866"
 ---
 # <a name="best-practices-for-sql-data-sync"></a>SQL Data Sync için en iyi deneyimler 
 
-Bu makalede, Azure SQL Data Sync için en iyi uygulamaları açıklar.
+Bu makalede, Azure SQL Data Sync için en iyi yöntemler açıklanmaktadır.
 
 SQL Data Sync hizmetine genel bakış için bkz. [Azure SQL Data Sync ile birden fazla bulut ve şirket içi veritabanı arasında veri eşitleme](sql-database-sync-data.md).
 
 > [!IMPORTANT]
-> Azure SQL Data Sync mu **değil** şu anda Azure SQL veritabanı yönetilen örneği destekler.
+> Azure SQL Data Sync Şu anda Azure SQL veritabanı yönetilen **örneğini desteklemez.**
 
-## <a name="security-and-reliability"></a> Güvenlik ve güvenilirlik
+## <a name="security-and-reliability"></a>Güvenlik ve güvenilirlik
 
 ### <a name="client-agent"></a>İstemci Aracısı
 
--   İstemci Aracısı, ağ hizmeti erişimi olan en az ayrıcalıklı kullanıcı hesabı kullanarak yükleyin.  
--   İstemci Aracısı, şirket içi SQL Server bilgisayarı olmayan bir bilgisayara yükleyin.  
--   Bir şirket içi veritabanı ile birden fazla aracı kayıt ettirmezseniz.    
-    -   Farklı eşitleme grupları için farklı tabloları eşitleme yapan olsa bile bu kaçının.  
-    -   Eşitleme grubu sildiğinizde, bir şirket içi veritabanı ile birden çok istemci aracıları yürütmelisiniz zorluklarının kaydediliyor.
+-   İstemci aracısını, ağ hizmeti erişimi olan en az ayrıcalıklı kullanıcı hesabını kullanarak yükler.  
+-   İstemci aracısını, şirket içi SQL Server bilgisayar olmayan bir bilgisayara yükler.  
+-   Birden fazla aracıyla şirket içi bir veritabanını kaydetmeyin.    
+    -   Farklı eşitleme grupları için farklı tabloları eşitleseniz bile bunu önleyin.  
+    -   Birden çok istemci aracılarıyla şirket içi bir veritabanını kaydettirmek, eşitleme gruplarından birini sildiğinizde zorluk doğurur.
 
-### <a name="database-accounts-with-least-required-privileges"></a>Gerekli en az ayrıcalığa sahip veritabanı hesapları
+### <a name="database-accounts-with-least-required-privileges"></a>En az gerekli ayrıcalıklara sahip veritabanı hesapları
 
--   **Eşitleme Kurulumu için**. Tablo oluşturma/değiştirme; Veritabanı değiştirmek; Yordam oluşturma Seç / şema değiştirmek; Kullanıcı tanımlı tür oluşturun.
+-   **Eşitleme kurulumu için**. Tablo Oluştur/Değiştir; Alter database; Yordam oluşturma; Şemayı Seç/Değiştir; Kullanıcı tanımlı tür oluşturun.
 
--   **Devam eden eşitleme**. Seç / ekleme / güncelleştirme / eşitleme meta verileri ve izleme tablolarını ve eşitleme için seçilen tabloları silin; Saklı yordamlar hizmet tarafından oluşturulan çalıştırma izni; Kullanıcı tanımlı tablo türlerinde çalıştırma izni.
+-   , **Devam eden eşitleme için**. Eşitleme için seçilen tablolarda ve eşitleme meta verileri ve izleme tablolarında seçme/ekleme/güncelleştirme/silme; Hizmet tarafından oluşturulan saklı yordamlarda yürütme izni; Kullanıcı tanımlı tablo türlerinde yürütme izni.
 
--   **Yetkiyi kaldırmak için**. Eşitleme tablolar parçası üzerinde değiştirmek; Seç / eşitleme meta verileri tablolarda Sil; Tabloları, saklı yordamlar ve kullanıcı tanımlı türler izleme eşitleme denetler.
+-   **Sağlaması için**. Eşitleme kapsamında tablolar üzerinde Değiştir; Eşitleme meta verileri tablolarında seçin/silin; Eşitleme izleme tablolarında, saklı yordamlarda ve Kullanıcı tanımlı türlerde denetim.
 
-Azure SQL veritabanı kimlik bilgileri yalnızca tek bir kümesini destekler. Bu kısıtlama içinde bu görevleri gerçekleştirmek için aşağıdaki seçenekleri göz önünde bulundurun:
+Azure SQL veritabanı yalnızca tek bir kimlik bilgileri kümesini destekler. Bu kısıtlama dahilinde bu görevleri gerçekleştirmek için aşağıdaki seçenekleri göz önünde bulundurun:
 
--   Kimlik bilgilerini değiştirmek için farklı aşamaları (örneğin, *credentials1* kurulumu ve *credentials2* için devam eden).  
--   Değiştirme izni kimlik bilgilerinin (eşitleme ayarlandıktan sonra diğer bir deyişle, değiştirme izni).
+-   Farklı aşamalar için kimlik bilgilerini değiştirin (örneğin, *credentials1* for Setup ve *credentials2* for devam için).  
+-   Kimlik bilgilerinin iznini değiştirin (yani, eşitleme ayarlandıktan sonra izni değiştirin).
 
 ## <a name="setup"></a>Kurulum
 
-### <a name="database-considerations-and-constraints"></a> Veritabanı önemli noktalar ve sınırlamalar
+### <a name="database-considerations-and-constraints"></a>Veritabanı konuları ve kısıtlamaları
 
 #### <a name="sql-database-instance-size"></a>SQL veritabanı örnek boyutu
 
-Yeni bir SQL veritabanı örneği oluşturduğunuzda, böylece her zaman dağıtım veritabanından daha büyük boyut üst sınırını ayarlayın. Büyük dağıtılan bir veritabanı için en büyük boyutu ayarlamazsanız, eşitleme başarısız olur. SQL Data Sync otomatik büyüme sunulmaz ancak çalıştırabileceğiniz `ALTER DATABASE` oluşturulduktan sonra veritabanı boyutunu artırmak için komutu. SQL veritabanı örneği boyutu sınırları içinde kalmasını sağlayın.
+Yeni bir SQL veritabanı örneği oluşturduğunuzda, en büyük boyutu, dağıttığınız veritabanından her zaman daha büyük olacak şekilde ayarlayın. En büyük boyutu dağıtılan veritabanından daha büyük olarak ayarlamazsanız eşitleme başarısız olur. SQL Data Sync otomatik büyüme sunmasa da, oluşturulduktan sonra veritabanının boyutunu artırmak için `ALTER DATABASE` komutunu çalıştırabilirsiniz. SQL veritabanı örneği boyut sınırları içinde kaltığınızdan emin olun.
 
 > [!IMPORTANT]
-> SQL Data Sync ile her veritabanı ek meta verileri depolar. Gerekli alan hesaplarken bu meta veriler için hesap emin olun. Miktarı eklenen yükü tabloların genişliğine ilgili (örneğin, dar tabloları daha fazla ek yük gerektirir) ve trafik miktarı.
+> SQL Data Sync her veritabanıyla ek meta verileri depolar. Gerekli alanı hesaplarken bu meta veriler için hesap oluşturduğunuzdan emin olun. Eklenen ek yükün miktarı, tabloların genişliğiyle ilgilidir (örneğin, dar tablolar daha fazla ek yük gerektirir) ve trafik miktarı.
 
-### <a name="table-considerations-and-constraints"></a> Tablo önemli noktalar ve sınırlamalar
+### <a name="table-considerations-and-constraints"></a>Tablo konuları ve kısıtlamaları
 
 #### <a name="selecting-tables"></a>Tabloları seçme
 
-Bir veritabanında bir eşitleme grubunda olan tüm tabloları eklemek gerekmez. Bir eşitleme grubunda içeren tablolar, verimliliği ile maliyetleri etkiler. Tabloları ve bunlar yalnızca iş gerektiren gerekiyorsa bir eşitleme grubunda bağlı olarak, tabloları içerir.
+Eşitleme grubundaki bir veritabanında bulunan tüm tabloları eklemeniz gerekmez. Bir eşitleme grubuna dahil ettiğiniz tablolar verimlilik ve maliyetleri etkiler. Tabloları ve bağımlı oldukları tabloları, yalnızca iş ihtiyacı olduğunda bir eşitleme grubunda ekleyin.
 
 #### <a name="primary-keys"></a>Birincil anahtarlar
 
-Her bir eşitleme grubu tabloda bir birincil anahtarı olmalıdır. SQL Data Sync hizmet, birincil anahtarı olmayan tablo eşitleme yapılamıyor.
+Bir eşitleme grubundaki her tablo bir birincil anahtara sahip olmalıdır. SQL Data Sync hizmeti, birincil anahtarı olmayan bir tabloyu eşitleyemiyor.
 
-SQL Data Sync, üretim ortamında kullanmadan önce ilk ve devam eden eşitleme performansı test edin.
+Üretimde SQL Data Sync kullanmadan önce, ilk ve devam eden eşitleme performansını test edin.
 
-#### <a name="empty-tables-provide-the-best-performance"></a>Boş tabloları, en iyi performansı sağlar.
+#### <a name="empty-tables-provide-the-best-performance"></a>Boş tablolar en iyi performansı sağlar
 
-Boş tablolar başlatma sırasında en iyi performansı sağlar. Hedef Tablo boşsa, veri eşitleme toplu ekleme verileri yüklemek için kullanır. Aksi takdirde, bir satır karşılaştırma ve ekleme çakışmalarını denetlemek için veri eşitleme yapar. Ancak, performansı önemli değilse, veriler içeren tablolar arasında eşitleme ayarlayabilirsiniz.
+Boş tablolar, başlatma zamanında en iyi performansı sağlar. Hedef tablo boş ise, veri eşitleme verileri yüklemek için toplu ekleme kullanır. Aksi halde, veri eşitleme, çakışmaları denetlemek için satır içi bir karşılaştırma ve ekleme yapar. Ancak performans bir sorun değilse, zaten veri içeren tablolar arasında eşitleme ayarlayabilirsiniz.
 
-### <a name="provisioning-destination-databases"></a> Hedef veritabanı sağlama
+### <a name="provisioning-destination-databases"></a>Hedef veritabanlarını sağlama
 
-SQL Data Sync temel veritabanı autoprovisioning sağlar.
+SQL Data Sync, temel veritabanı oto sağlaması sağlar.
 
-Bu bölüm SQL Data Sync sağlanıyor kısıtlamaları açıklar.
+Bu bölümde SQL Data Sync ' de sağlama kısıtlamaları anlatılmaktadır.
 
-#### <a name="autoprovisioning-limitations"></a>Autoprovisioning sınırlamaları
+#### <a name="autoprovisioning-limitations"></a>Oto sağlama sınırlamaları
 
-SQL Data Sync için autoprovisioning aşağıdaki sınırlamalara sahiptir:
+SQL Data Sync, oto sağlama için aşağıdaki sınırlamalara sahiptir:
 
--   Hedef tabloda oluşturulan sütunları seçin. Eşitleme grubunun parçası olmayan tüm sütunları hedef tabloda sağlanan değildir.
--   Yalnızca Seçili sütunları için dizin oluşturulur. Kaynak tablo dizin eşitleme grubunun parçası olmayan sütunları varsa, bu dizinler hedef tabloda sağlanan değildir.  
--   XML türü sütunlarındaki dizinler sağlanan değildir.  
--   Denetim kısıtlamalarında sağlanan değildir.  
--   Kaynak tablolarda varolan tetikleyicilerinizi sağlanan değildir.  
--   Görünüm ve saklı yordam hedef veritabanında oluşturulmaz.
--   UPDATE CASCADE ve ON DELETE CASCADE eylemleri yabancı anahtar kısıtlamaları hedef tabloda yeniden değildir.
--   Kesinliği 28'den büyük olan ondalık veya sayısal sütununuz varsa, SQL Data Sync eşitleme sırasında bir dönüştürme taşma sorunla karşılaşabilirsiniz. 28 veya daha az ondalık veya sayısal sütun duyarlığını sınırlamanızı öneririz.
+-   Yalnızca hedef tabloda oluşturulan sütunları seçin. Eşitleme grubunun parçası olmayan tüm sütunlar hedef tablolarda sağlanmaz.
+-   Dizinler yalnızca seçili sütunlar için oluşturulur. Kaynak tablo dizininde eşitleme grubunun parçası olmayan sütunlar varsa, bu dizinler hedef tablolarda sağlanmaz.  
+-   XML türü sütunlarındaki dizinler sağlanmadı.  
+-   DENETIM kısıtlamaları sağlanmadı.  
+-   Kaynak tablolardaki mevcut Tetikleyiciler sağlanmadı.  
+-   Görünümler ve saklı yordamlar hedef veritabanında oluşturulmaz.
+-   GÜNCELLEŞTIRME basamakla ve yabancı anahtar kısıtlamalarındaki BASAMAKLı SILME eylemleri hedef tablolarda yeniden oluşturulmaz.
+-   En fazla 28 ' den büyük olan ondalık veya sayısal sütunlarınız varsa SQL Data Sync eşitleme sırasında bir dönüştürme taşması sorunuyla karşılaşabilir. Ondalık veya sayısal sütunların duyarlılığını 28 veya daha az olacak şekilde kısıtlamanızı öneririz.
 
 #### <a name="recommendations"></a>Öneriler
 
--   Yalnızca hizmetin ölçeğini çalışırken SQL Data Sync autoprovisioning olanağını kullanın.  
+-   Yalnızca hizmeti denediğiniz sırada SQL Data Sync oto sağlama özelliğini kullanın.  
 -   Üretim için veritabanı şemasını sağlayın.
 
-### <a name="locate-hub"></a> Hub veritabanı bulunacağı yere
+### <a name="locate-hub"></a>Merkez veritabanının yerini nerede bulabileceğiniz
 
-#### <a name="enterprise-to-cloud-scenario"></a>Kurumsal bulut senaryosu
+#### <a name="enterprise-to-cloud-scenario"></a>Kuruluşa buluta senaryo
 
-Gecikmeyi en aza indirmek için hub veritabanı eşitleme grubunun veritabanı trafiğini en yüksek yoğunluk yakın tutun.
+Gecikme süresini en aza indirmek için, hub veritabanını eşitleme grubunun veritabanı trafiğinin en büyük yoğunluğu ' na yakın tutun.
 
-#### <a name="cloud-to-cloud-scenario"></a>Bulut Bulut senaryosu
+#### <a name="cloud-to-cloud-scenario"></a>Buluttan buluta senaryo
 
--   Bir eşitleme grubu içindeki tüm veritabanlarına merkezinde olduğunda, hub'ı aynı veri merkezinde bulunmalıdır. Bu yapılandırma, gecikme süresi ve veri merkezleri arasında veri aktarımı maliyeti azaltır.
--   Bir eşitleme grubu içindeki veritabanlarını birden çok veri merkezlerinde olduğunda hub veritabanlarının ve veritabanı trafiğinin çoğu olarak aynı veri merkezinde bulunmalıdır.
+-   Bir eşitleme grubundaki tüm veritabanları tek bir veri merkezinde olduğunda, hub aynı veri merkezinde bulunmalıdır. Bu yapılandırma, veri merkezleri arasındaki gecikme süresini ve veri aktarımı maliyetini azaltır.
+-   Bir eşitleme grubundaki veritabanları birden çok veri merkezinde olduğunda, hub, veritabanlarının ve veritabanı trafiğinin çoğunluğu ile aynı veri merkezinde bulunmalıdır.
 
-#### <a name="mixed-scenarios"></a>Karma senaryolar
+#### <a name="mixed-scenarios"></a>Karışık senaryolar
 
-Kurumsal Bulut ve Bulut Bulut senaryoları bir karışımını olanlar gibi karmaşık bir eşitleme grubu yapılandırmaları önceki yönergeleri uygulayın.
+Önceki yönergeleri, Kurumsal-bulut ve buluttan buluta senaryolar gibi karmaşık eşitleme grubu yapılandırmalarına uygulayın.
 
 ## <a name="sync"></a>Sync
 
-### <a name="avoid-a-slow-and-costly-initial-synchronization"></a> Yavaş ve pahalı ilk eşitleme kaçının
+### <a name="avoid-a-slow-and-costly-initial-synchronization"></a>Yavaş ve maliyetli ilk eşitlemeden kaçının
 
-Bu bölümde, bir eşitleme grubu ilk eşitlemesi ele alır. Uzun sürüyor ve gerekenden daha pahalı bir ilk eşitleme önlemeye yardımcı olmak konusunda bilgi edinin.
+Bu bölümde, bir eşitleme grubunun ilk eşitlemesini tartıştık. İlk eşitlemenin daha uzun sürmesi ve gerekenden daha pahalı olmasını önlemeye nasıl yardımcı olabileceğinizi öğrenin.
 
-#### <a name="how-initial-sync-works"></a>Nasıl ilk eşitleme çalışır
+#### <a name="how-initial-sync-works"></a>İlk eşitlemenin nasıl çalıştığı
 
-Bir eşitleme grubu oluşturma, tek bir veritabanındaki verilerle başlayın. SQL Data Sync, birden çok veritabanında veri varsa, her satır çözülmesi gereken bir çakışma değerlendirir. Bu çakışma yavaş gitmek ilk eşitleme neden olur. Birden çok veritabanında veri varsa, ilk eşitleme veritabanı boyutuna bağlı olarak birkaç ay arasındaki birkaç gün sürebilir.
+Bir eşitleme grubu oluşturduğunuzda, verileri yalnızca bir veritabanında başlatın. Birden çok veritabanında verileriniz varsa SQL Data Sync her satırı çözülmesi gereken bir çakışma olarak değerlendirir. Bu çakışma çözümü, ilk eşitlemenin yavaş geçmesine neden olur. Birden çok veritabanında verileriniz varsa, ilk eşitleme, veritabanı boyutuna bağlı olarak birkaç gün ve birkaç ay sürebilir.
 
-Veritabanlarını farklı veri merkezlerinde varsa, her satır arasında farklı veri merkezlerinde geçmelidir. Bu, bir ilk eşitleme maliyetini artırır.
+Veritabanları farklı veri merkezlerimizde, her satır farklı veri merkezleri arasında gezinmelidir. Bu, ilk eşitlemenin maliyetini artırır.
 
 #### <a name="recommendation"></a>Öneri
 
-Mümkünse, veri eşitleme grubunun veritabanları yalnızca birinde başlayın.
+Mümkünse, eşitleme grubunun veritabanlarından yalnızca birinde bulunan verilerle başlayın.
 
-### <a name="design-to-avoid-synchronization-loops"></a> Eşitleme döngülerinden kaçınmak için Tasarım
+### <a name="design-to-avoid-synchronization-loops"></a>Eşitleme döngülerinin önüne geçmek için tasarım
 
-Bir eşitleme döngüsü, bir eşitleme grubu içinde döngüsel başvurular olduğunda gerçekleşir. Bu senaryoda, bir veritabanındaki her değişiklik Kısıtlamasız bir şekilde ve döngüsel olarak eşitleme grubundaki veritabanları arasında çoğaltılır.   
+Bir eşitleme grubu içinde döngüsel başvurular olduğunda bir eşitleme döngüsü oluşur. Bu senaryoda, bir veritabanındaki her değişiklik son olarak zaman içinde eşitlenir ve eşitleme grubundaki veritabanları aracılığıyla döngüsel olarak çoğaltılır.   
 
-Performans düşüşüne neden olur ve maliyetleri önemli ölçüde artabilir olduğundan eşitleme döngüleri önlemek emin olun.
+Performans düşüşüne neden olduğundan ve maliyetleri önemli ölçüde artırabileceğinden, eşitleme döngülerinden kaçıntığınızdan emin olun.
 
-### <a name="handling-changes-that-fail-to-propagate"></a> Yayılması başarısız değişiklikler
+### <a name="handling-changes-that-fail-to-propagate"></a>Yayılmaya başarısız olan değişiklikler
 
-#### <a name="reasons-that-changes-fail-to-propagate"></a>Değişikliklerin yayılması başarısız nedenleri
+#### <a name="reasons-that-changes-fail-to-propagate"></a>Değişikliklerin yayılmasının nedeni
 
-Değişiklikler, aşağıdaki nedenlerden birinden dolayı yaymak başarısız olabilir:
+Değişiklikler aşağıdaki nedenlerden biri için yayılamıyor olabilir:
 
--   Şema/datatype uyumsuzluğu.
--   Null atanamayan sütunlar ekleniyor.
+-   Şema/veri türü uyumsuzluğu.
+-   Null değer atanamaz sütunlara null ekleniyor.
 -   Yabancı anahtar kısıtlamalarını ihlal ediyor.
 
-#### <a name="what-happens-when-changes-fail-to-propagate"></a>Değişikliklerin yayılması başarısız olduğunda ne olur?
+#### <a name="what-happens-when-changes-fail-to-propagate"></a>Değişiklikler yayamadığında ne olur?
 
--   Eşitleme içinde grup gösterir bir **uyarı** durumu.
--   Ayrıntıları portal UI günlük Görüntüleyicisi'nde listelenmiştir.
--   45 gün sorun çözülmezse, veritabanını eski haline gelir.
+-   Eşitleme grubu, bir **Uyarı** durumunda olduğunu gösterir.
+-   Ayrıntılar Portal Kullanıcı arabirimi günlük görüntüleyicisinde listelenmiştir.
+-   Sorun 45 gün boyunca çözümlenmiyorsa, veritabanının tarihi eski olur.
 
 > [!NOTE]
-> Bu değişiklikleri hiçbir zaman aktarabilirsiniz. Bu senaryoda, kurtarılır tek yolu eşitleme grubunu yeniden oluşturmaktır.
+> Bu değişiklikler hiçbir şekilde yayılmaz. Bu senaryoya geri almanın tek yolu, eşitleme grubunu yeniden oluşturmaktır.
 
 #### <a name="recommendation"></a>Öneri
 
-Eşitleme grubu ve veritabanı sistem durumu portalı ve günlük arabirimi aracılığıyla düzenli olarak izleyin.
+Portal ve günlük arabirimi aracılığıyla eşitleme grubunu ve veritabanı sistem durumunu düzenli olarak izleyin.
 
 
 ## <a name="maintenance"></a>Bakım
 
-### <a name="avoid-out-of-date-databases-and-sync-groups"></a> Güncel olmayan veritabanları önlemek ve grupları Eşitle
+### <a name="avoid-out-of-date-databases-and-sync-groups"></a>Güncel olmayan veritabanlarının ve eşitleme gruplarının olmaması
 
-Bir eşitleme grubu ya da bir veritabanında bir eşitleme grubu güncel hale gelebilir. Bir eşitleme grubunun durumu olduğunda **güncel**, çalışmayı durdurur. Bir veritabanının durumu olduğunda **güncel**, verileri kaybolabilir. Bu durumdan kurtulmanın çalışırken yerine bu senaryonun olmaması idealdir.
+Bir eşitleme grubunun veya bir eşitleme grubundaki veritabanının tarihi eski olabilir. Eşitleme grubunun durumu **güncel**olmadığında, çalışmayı sonlandırır. Veritabanının durumu **güncel**olmadığında veriler kaybolabilir. Bu senaryodan kurtarmaya çalışmak yerine bu senaryonun önüne geçmek en iyisidir.
 
-#### <a name="avoid-out-of-date-databases"></a>Güncel olmayan veritabanları kaçının
+#### <a name="avoid-out-of-date-databases"></a>Güncel olmayan veritabanlarından kaçının
 
-Bir veritabanının durumu kümesine **güncel** zaman da meydana geldi çevrimdışı 45 gün veya daha fazla bilgi için. Önlemek için bir **güncel** durumu bir veritabanında veritabanlarının hiçbiri 45 gün veya daha fazla bilgi için çevrimdışı olduğundan emin olun.
+Bir veritabanının durumu, 45 gün veya daha uzun bir süre çevrimdışı olduğunda **güncel** değil olarak ayarlanır. Bir veritabanında **güncel** olmayan bir durumu önlemek için, veritabanlarının hiçbirinin 45 gün veya daha uzun bir süre çevrimdışı olduğundan emin olun.
 
-#### <a name="avoid-out-of-date-sync-groups"></a>Güncel olmayan eşitleme grupları kaçının
+#### <a name="avoid-out-of-date-sync-groups"></a>Güncel olmayan eşitleme gruplarından kaçının
 
-Bir eşitleme grubunun durumu kümesine **güncel** eşitleme grubundaki herhangi bir değişiklik başarısız olduğunda 45 gün veya daha fazla eşitleme grubunu geri kalanı için yaymak. Önlemek için bir **güncel** bir eşitleme grubu durumunu düzenli olarak eşitleme grubunun Geçmiş günlüğünü denetleyin. Tüm çakışmaları çözümlenir ve değişiklikleri veritabanları eşitleme grubu başarıyla yayılana emin olun.
+Eşitleme grubundaki herhangi bir değişiklik, 45 gün veya daha uzun bir süre için eşitleme grubunun geri kalanına yayamazsa, eşitleme grubunun durumu **güncel** değil olarak ayarlanır. Bir eşitleme grubunda **güncel** olmayan bir durumu önlemek için, eşitleme grubunun geçmiş günlüğünü düzenli olarak kontrol edin. Tüm çakışmaların çözümlendiğinden ve değişikliklerin eşitleme grubu veritabanları genelinde başarıyla yayıldığından emin olun.
 
-Bir eşitleme grubu, aşağıdaki nedenlerden biri için bir değişikliği uygulamak başarısız olabilir:
+Bir eşitleme grubu, şu nedenlerden biri için değişiklik uygulayamayabilir:
 
--   Tablolar arasındaki bir şema uyumsuzluğu.
+-   Tablolar arasındaki şema uyumsuzluğu.
 -   Tablolar arasında veri uyumsuzluğu.
--   Bir satır null değere sahip bir sütunda null değerlere izin vermeyecek ekleniyor.
--   Bir satır bir yabancı anahtar kısıtlaması ihlal eden bir değer ile güncelleştiriliyor.
+-   Null değerlere izin veren bir sütunda null değeri olan bir satır ekleniyor.
+-   Bir satır, yabancı anahtar kısıtlamasını ihlal eden bir değerle güncelleştiriliyor.
 
-Güncel olmayan eşitleme grupları engellemek için:
+Güncel olmayan eşitleme gruplarını engellemek için:
 
--   Şema başarısız satırlarda bulunan değerlere izin verecek şekilde güncelleştirin.
--   Yabancı anahtar değerleri içerdiği değerlerin başarısız satırları içerecek şekilde güncelleştirin.
--   Önceden şema veya hedef veritabanındaki yabancı anahtarlar ile uyumlu olduklarından başarısız satırındaki veri değerlerini güncelleştirin.
+-   Şemayı, başarısız satırlarda içerilen değerlere izin verecek şekilde güncelleştirin.
+-   Yabancı anahtar değerlerini, başarısız satırlarda yer alan değerleri içerecek şekilde güncelleştirin.
+-   Başarısız olan satırdaki veri değerlerini, hedef veritabanındaki şema veya yabancı anahtarlarla uyumlu olacak şekilde güncelleştirin.
 
-### <a name="avoid-deprovisioning-issues"></a> Sorunları sağlamayı kaldırma kaçının
+### <a name="avoid-deprovisioning-issues"></a>Sağlamayı kaldırma sorunlarından kaçının
 
-Bazı durumlarda, bir veritabanı ile bir istemci Aracısı kaydını eşitleme başarısız olmasına neden olabilir.
+Bazı durumlarda, bir istemci aracısıyla bir veritabanının kaydını silmek eşitlemenin başarısız olmasına neden olabilir.
 
 #### <a name="scenario"></a>Senaryo
 
-1. SQL veritabanı örneğinde ve yerel Aracı 1 ile ilişkili bir şirket içi SQL Server veritabanını kullanarak bir eşitleme grubu oluşturuldu.
-2. Aynı şirket içi veritabanı, yerel Aracı (Bu aracı, herhangi bir eşitleme grubu ile ilişkili değil) 2 ile kaydedilmiştir.
-3. Şirket içi veritabanı kaydını yerel Aracıdan izleme 2 kaldırır ve meta tablolar için şirket içi veritabanı için bir grup eşitleme.
-4. Eşitleme Grubu A işlemleri, şu hatayla başarısız: "Geçerli işlem eşitleme yapılandırma tablolar için izniniz yok veya veritabanı eşitleme için sağlanmamış olduğundan tamamlanamadı."
+1. A adlı eşitleme grubu, bir SQL veritabanı örneği ve yerel aracı 1 ile ilişkili bir şirket içi SQL Server veritabanı kullanılarak oluşturulmuştur.
+2. Aynı şirket içi veritabanı yerel aracı 2 ile kaydedilir (Bu aracı herhangi bir eşitleme grubuyla ilişkili değildir).
+3. Şirket içi veritabanının kaydını yerel aracı 2 ' den silmek, şirket içi veritabanı için bir eşitleme grubu için izleme ve meta tabloları kaldırır.
+4. Eşitleme grubu A işlemleri başarısız oldu, bu hata: "veritabanı eşitleme için sağlanmadığından veya eşitleme yapılandırma tabloları için izinleriniz olmadığından geçerli işlem tamamlanamadı."
 
 #### <a name="solution"></a>Çözüm
 
-Bu senaryonun olmaması için bir veritabanı ile birden fazla aracı kayıt ettirmezseniz.
+Bu senaryoyu önlemek için, birden fazla aracıyla bir veritabanını kaydetmeyin.
 
 Bu senaryodan kurtarmak için:
 
-1. Veritabanı ait her bir eşitleme grubunu kaldırın.  
-2. Buradan kaldırdığınız geri her eşitleme grubuna veritabanı ekleyin.  
-3. (Bu işlem, veritabanı sağlar) her bir etkilenen eşitleme grubuna dağıtın.  
+1. Veritabanını ait olduğu her bir eşitleme grubundan kaldırın.  
+2. Veritabanını kaldırdığınız her bir eşitleme grubuna geri ekleyin.  
+3. Etkilenen her eşitleme grubunu dağıtın (Bu eylem veritabanını sağlar).  
 
-### <a name="modifying-your-sync-group"></a> Bir eşitleme grubu değiştirme
+### <a name="modifying-your-sync-group"></a>Eşitleme grubunu değiştirme
 
-Bir veritabanını bir eşitleme grubundan kaldırmanız ve ardından değişikliklerin dağıtma ilki olmadan eşitleme grubu düzenlemek denemeyin.
+Bir veritabanını bir eşitleme grubundan kaldırmaya çalışmayın ve sonra, önce değişikliklerden birini dağıttıktan sonra eşitleme grubunu düzenleyin.
 
-Bunun yerine, önce bir veritabanı eşitleme grubundan kaldırın. Daha sonra değişikliğin dağıtılması ve tamamlanması sağlamayı kaldırma için bekleyin. Sağlamayı kaldırma işlemi tamamlandığında eşitleme grubu düzenleme ve değişiklikleri dağıtın.
+Bunun yerine, önce bir veritabanını bir eşitleme grubundan kaldırın. Ardından, değişikliği dağıtın ve sağlamayı kaldırma işleminin bitmesini bekleyin. Sağlamayı kaldırma tamamlandığında, eşitleme grubunu düzenleyebilir ve değişiklikleri dağıtabilirsiniz.
 
-Bir veritabanını kaldırın ve ardından değişikliklerin dağıtma ilki olmadan bir eşitleme grubu düzenlemek çalışırsanız, bir veya başka bir işlem başarısız olur. Portal arabirimi tutarsız hale gelebilir. Böyle bir durumda doğru duruma geri yüklemek için sayfayı yenileyin.
+Bir veritabanını kaldırmaya ve sonra değişikliklerden birini dağıtmaya gerek kalmadan bir eşitleme grubunu düzenlemenize çalışırsanız, bir veya başka bir işlem başarısız olur. Portal arabirimi tutarsız hale gelebilir. Bu durumda, doğru durumu geri yüklemek için sayfayı yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-SQL Data Sync hakkında daha fazla bilgi için bkz:
+SQL Data Sync hakkında daha fazla bilgi için bkz.:
 
--   Genel Bakış - [verileri Eşitle birden fazla Bulut ve şirket içi veritabanı arasında Azure SQL Data Sync ile](sql-database-sync-data.md)
--   Data Sync'i Ayarla
-    - Portalda - [Öğreticisi: Azure SQL veritabanı ve SQL Server arasında verileri eşitlemek amacıyla şirket içi SQL Data Sync'i Ayarla](sql-database-get-started-sql-data-sync.md)
+-   Genel Bakış- [Azure SQL Data Sync ile birden çok bulut ve şirket içi veritabanı arasında veri eşitleme](sql-database-sync-data.md)
+-   Veri eşitlemesini ayarlama
+    - Portalda- [öğreticide, Azure SQL veritabanı ve şirket içi SQL Server arasında veri eşitlemek için SQL Data Sync ayarlama](sql-database-get-started-sql-data-sync.md)
     - PowerShell ile
         -  [PowerShell kullanarak birden çok Azure SQL veritabanı arasında eşitleme](scripts/sql-database-sync-data-between-sql-databases.md)
         -  [PowerShell kullanarak bir Azure SQL Veritabanı ile SQL Server şirket içi veritabanı arasında eşitleme](scripts/sql-database-sync-data-between-azure-onprem.md)
--   Veri Eşitleme Aracısı - [veri Aracısı Azure SQL Data Sync için eşitleme](sql-database-data-sync-agent.md)
--   İzleyici - [SQL Data Sync'i Azure İzleyici ile izleme günlükleri](sql-database-sync-monitor-oms.md)
--   Sorun giderme - [Azure SQL Data Sync ile ilgili sorunları giderme](sql-database-troubleshoot-data-sync.md)
--   Eşitleme şemasını güncelleştirmek
-    -   Transact-SQL ile- [Azure SQL Data Sync şema değişikliklerinin çoğaltmayı otomatik hale getirme](sql-database-update-sync-schema.md)
-    -   PowerShell ile- [var olan bir eşitleme grubunda eşitleme şemasını güncelleştirmek için PowerShell kullanma](scripts/sql-database-sync-update-schema.md)
+-   Veri eşitleme Aracısı- [Azure SQL Data Sync Için veri eşitleme Aracısı](sql-database-data-sync-agent.md)
+-   İzleyici- [Azure izleyici günlükleri ile izleyici SQL Data Sync](sql-database-sync-monitor-oms.md)
+-   Sorun giderme- [Azure SQL Data Sync sorunlarını giderme](sql-database-troubleshoot-data-sync.md)
+-   Eşitleme şemasını güncelleştirme
+    -   Transact-SQL- [Azure SQL Data Sync şema değişikliklerinin çoğaltılmasını otomatikleştirin](sql-database-update-sync-schema.md)
+    -   PowerShell ile- [varolan bir eşitleme grubundaki eşitleme şemasını güncelleştirmek Için PowerShell kullanın](scripts/sql-database-sync-update-schema.md)
 
-SQL veritabanı hakkında daha fazla bilgi için bkz:
+SQL veritabanı hakkında daha fazla bilgi için bkz.
 
 -   [SQL veritabanına genel bakış](sql-database-technical-overview.md)
 -   [Veritabanı yaşam döngüsü yönetimi](https://msdn.microsoft.com/library/jj907294.aspx)

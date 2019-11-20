@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 11/30/2018
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 835f23f98ebe56e0b19081f07dc3302ef93b27b9
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: a601b0c40f84832101e97a7abf7dd7418a0a5c69
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188213"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67673564"
 ---
 Aşağıdaki adımları izleyerek, Resource Manager dağıtım modelini ve Azure portalı ile bir sanal ağ oluşturabilirsiniz. Sanal ağlar hakkında daha fazla bilgi için bkz. [sanal ağa genel bakış](../articles/virtual-network/virtual-networks-overview.md).
 
@@ -22,7 +22,7 @@ Aşağıdaki adımları izleyerek, Resource Manager dağıtım modelini ve Azure
 >
 >
 
-1. Oturum [Azure portalında](http://portal.azure.com) seçip **kaynak Oluştur**. **Yeni** sayfası açılır.
+1. Oturum [Azure portalında](https://portal.azure.com) seçip **kaynak Oluştur**. **Yeni** sayfası açılır.
 
 2. İçinde **markette Ara** alanına *sanal ağ* seçip **sanal ağ** döndürülen listeden. **Sanal ağ** sayfası açılır.
 

@@ -101,6 +101,8 @@
               href: network-watcher-nsg-flow-logging-cli.md
             - name: REST
               href: network-watcher-nsg-flow-logging-rest.md
+        - name: NSG akış günlüğü depolama bloblarını silme
+          href: network-watcher-delete-nsg-flow-log-blobs.md
         - name: NSG akış günlüklerini analiz etme
           items:
             - name: NSG akış günlüklerini okuma
@@ -170,6 +172,8 @@
       href: /rest/api/network-watcher/
 - name: Kaynaklar
   items:
+    - name: Ağ İzleyicisi hakkında SSS
+      href: frequently-asked-questions.md
     - name: Azure Yol Haritası
       href: 'https://azure.microsoft.com/roadmap/'
     - name: MSDN forumu

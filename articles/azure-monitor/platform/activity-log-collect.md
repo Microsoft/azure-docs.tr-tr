@@ -1,78 +1,79 @@
 ---
-title: Toplama ve çözümleme Azure etkinlik günlüklerini Log Analytics çalışma alanında | Microsoft Docs
-description: Azure İzleyici günlüklerine Azure etkinlik günlüğü toplayın ve analiz edin ve tüm Azure aboneliklerinizi arasında Azure etkinlik günlüğü aramak için izleme çözümü kullanın.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: dbac4c73-0058-4191-a906-e59aca8e2ee0
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Log Analytics çalışma alanında Azure etkinlik günlüklerini toplayın ve çözümleyin | Microsoft Docs
+description: Azure etkinlik günlüğünü Azure Izleyici günlüklerine toplayın ve izleme çözümünü kullanarak Azure etkinlik günlüğünü analiz edin ve tüm Azure aboneliklerinizde arayın.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 05/19/2019
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 5839fd40a128097e400f13acbe4fb6ef90c656b7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.openlocfilehash: a53694f97da144f3932efe39941d3f22ef739c7b
+ms.sourcegitcommit: b1a8f3ab79c605684336c6e9a45ef2334200844b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66248137"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74048219"
 ---
-# <a name="collect-and-analyze-azure-activity-logs-in-log-analytics-workspace-in-azure-monitor"></a>Toplama ve Azure İzleyici'de Log Analytics çalışma alanında Azure etkinlik günlüklerini çözümleme
-[Azure etkinlik günlüğü](activity-logs-overview.md) Azure aboneliğinizde gerçekleşen abonelik düzeyindeki olayların hakkında Öngörüler sağlar. Bu makalede bir Log Analytics çalışma alanınıza etkinlik günlüğü toplamak nasıl ve Activity Log Analytics kullanma [izleme çözümü](../insights/solutions.md), sağlayan günlük sorguları ve görünümleri bu verileri çözümlemek için. 
+# <a name="collect-and-analyze-azure-activity-logs-in-log-analytics-workspace-in-azure-monitor"></a>Azure Izleyici 'de Log Analytics çalışma alanında Azure etkinlik günlüklerini toplayın ve çözümleyin
 
-Etkinlik günlüğü bir Log Analytics çalışma alanına bağlanma aşağıdaki avantajları sağlar:
+> [!NOTE]
+> Artık, kaynak günlüklerini topladığınıza benzer bir tanılama ayarı kullanarak, etkinlik günlüğünü bir Log Analytics çalışma alanında toplayabilirsiniz. Bkz. Azure [izleyici 'de Log Analytics çalışma alanında Azure etkinlik günlüklerini toplayın ve çözümleyin](activity-log-collect.md).
 
-- Birden çok Azure aboneliği analiz için tek bir konumda etkinlik günlüğünde birleştirin.
-- Etkinlik günlüğü girdileri 90 günden uzun Store.
-- Azure İzleyici tarafından toplanan diğer izleme verilerinin ile etkinlik günlüğü verileri ilişkilendirin.
-- Kullanım [oturum sorguları](../log-query/log-query-overview.md) karmaşık bir analiz gerçekleştirin ve etkinlik günlüğü girdileri dayalı derin Öngörüler elde etmek için.
+[Azure etkinlik günlüğü](activity-logs-overview.md) , Azure aboneliğinizde oluşan abonelik düzeyi olaylar hakkında öngörüler sağlar. Bu makalede, Etkinlik günlüğünün bir Log Analytics çalışma alanında nasıl toplanacağı ve bu verileri çözümlemek için günlük sorguları ve görünümler sağlayan Etkinlik Günlüğü Analizi [izleme çözümünün](../insights/solutions.md)nasıl kullanılacağı açıklanır. 
 
-## <a name="connect-to-log-analytics-workspace"></a>Log Analytics çalışma alanına bağlayın
-Bir etkinlik günlüğü yalnızca bir çalışma alanına bağlanabilir, ancak tek bir çalışma alanı aynı Azure kiracısı içinde birden fazla aboneliğiniz için etkinlik günlüğüne bağlanabilir. Birden fazla Kiracı genelinde koleksiyon için bkz [bir Log Analytics çalışma alanına Azure Active Directory'de farklı abonelikler arasında Azure etkinlik günlüklerini toplamak Kiracı](activity-log-collect-tenants.md).
+Etkinlik günlüğünü bir Log Analytics çalışma alanına bağlamak aşağıdaki avantajları sağlar:
 
-Etkinlik günlüğü, Log Analytics çalışma alanına bağlamak için aşağıdaki yordamı kullanın:
+- Birden çok Azure aboneliğinden etkinlik günlüğünü analiz için tek bir konuma birleştirin.
+- Etkinlik günlüğü girdilerini 90 günden daha uzun bir süre için depolayın.
+- Etkinlik günlüğü verilerinin Azure Izleyici tarafından toplanan diğer izleme verileriyle ilişkilendirilmesi.
+- Karmaşık analizler gerçekleştirmek ve etkinlik günlüğü girişleriyle ilgili ayrıntılı Öngörüler elde etmek için [günlük sorgularını](../log-query/log-query-overview.md) kullanın.
 
-1. Gelen **Log Analytics çalışma alanları** menüsünde Azure portalında etkinlik günlükleri toplamak için çalışma alanı seçin.
-1. İçinde **çalışma alanı veri kaynakları** çalışma alanınızın menüsünde, select bölümünü **Azure etkinlik günlüğü**.
+## <a name="connect-to-log-analytics-workspace"></a>Log Analytics çalışma alanına bağlan
+Aynı Azure kiracısındaki birden çok abonelik için etkinlik günlüğüne tek bir çalışma alanı bağlanabilir. Birden çok kiracının genelinde koleksiyon için bkz. [Azure etkinlik günlüklerini farklı Azure Active Directory kiracılardaki abonelikler arasında Log Analytics çalışma alanında toplama](activity-log-collect-tenants.md).
+
+> [!IMPORTANT]
+> Microsoft. Operationalınsights ve Microsoft. OperationsManagement kaynak sağlayıcılarının aboneliğiniz için kayıtlı olmadığı durumlarda aşağıdaki yordamla bir hata alabilirsiniz. Bu sağlayıcıları kaydetmek için bkz. [Azure kaynak sağlayıcıları ve türleri](../../azure-resource-manager/resource-manager-supported-services.md) .
+
+Etkinlik günlüğünü Log Analytics çalışma alanınıza bağlamak için aşağıdaki yordamı kullanın:
+
+1. Azure portal **Log Analytics çalışma alanları** menüsünde, etkinlik günlüğünü toplamak için çalışma alanını seçin.
+1. Çalışma alanının menüsündeki **çalışma alanı veri kaynakları** bölümünde **Azure etkinlik günlüğü**' nü seçin.
 1. Bağlanmak istediğiniz aboneliğe tıklayın.
 
     ![Çalışma Alanları](media/activity-log-export/workspaces.png)
 
-1. Tıklayın **Connect** abonelik etkinlik günlüğünde seçilen çalışma alanına bağlamak için. Abonelik zaten başka bir çalışma alanına bağlıysa, tıklayın **Bağlantıyı Kes** ilk bağlantısı kesilemedi.
+1. Abonelikteki etkinlik günlüğünü seçili çalışma alanına bağlamak için **Bağlan** ' a tıklayın. Abonelik zaten başka bir çalışma alanına bağlıysa bağlantıyı kesmek için önce **bağlantıyı kes** ' e tıklayın.
 
-    ![Çalışma alanları bağlanma](media/activity-log-export/connect-workspace.png)
+    ![Çalışma alanlarını bağlama](media/activity-log-export/connect-workspace.png)
 
-## <a name="analyze-in-log-analytics-workspace"></a>Log Analytics çalışma alanında analiz edin
-Log Analytics çalışma alanına bir etkinlik günlüğü bağlandığınızda girişleri çalışma alanına adlı bir tabloya yazılır **AzureActivity** ile alabileceğiniz bir [günlük sorgusu](../log-query/log-query-overview.md). Bu tablonun yapısını bağlı olarak değişir [günlük girişi kategorisi](activity-logs-overview.md#categories-in-the-activity-log). Bkz: [Azure etkinlik günlüğü olay şeması](activity-log-schema.md) her kategori açıklaması.
+## <a name="analyze-in-log-analytics-workspace"></a>Log Analytics çalışma alanında Çözümle
+Bir etkinlik günlüğünü Log Analytics çalışma alanına bağladığınızda, girdiler çalışma alanına, bir [günlük sorgusuyla](../log-query/log-query-overview.md)alabileceğiniz **AzureActivity** adlı bir tabloya yazılır. Bu tablonun yapısı, [günlük girişi kategorisine](activity-logs-overview.md#categories-in-the-activity-log)bağlı olarak değişir. Her kategorinin açıklaması için bkz. [Azure etkinlik günlüğü olay şeması](activity-log-schema.md) .
 
-## <a name="activity-logs-analytics-monitoring-solution"></a>Etkinlik günlüklerini analiz izleme çözümü
-Azure Log Analytics izleme çözümü, birden fazla günlük sorguları ve Log Analytics çalışma alanınızda etkinlik günlük kayıtları çözümlemek için görünümler içerir.
+## <a name="activity-logs-analytics-monitoring-solution"></a>Etkinlik günlükleri analitik izleme çözümü
+Azure Log Analytics izleme çözümü, Log Analytics çalışma alanınızdaki etkinlik günlüğü kayıtlarını çözümlemek için birden çok günlük sorgusu ve görünümü içerir.
 
-### <a name="install-the-solution"></a>Çözüm yükleme
-Yordamı kullanın [bir izleme çözümü yükleme](../insights/solutions.md#install-a-monitoring-solution) yüklemek için **Activity Log Analytics** çözüm. Ek yapılandırma yoktur.
+### <a name="install-the-solution"></a>Çözümü yükler
+**Etkinlik günlüğü Analizi** çözümünü yüklemek için [bir izleme çözümü yüklerken](../insights/solutions.md#install-a-monitoring-solution) yordamı kullanın. Ek yapılandırma gerekmez.
 
 ### <a name="use-the-solution"></a>Çözüm kullanın
-İzleme çözümleri erişilebilir **İzleyici** Azure portalındaki menü. Seçin **daha fazla** içinde **Insights** açmak için bölüm **genel bakış** çözüm kutucuklarındaki sayfası. **Azure etkinlik günlüklerini** kutucuk sayısını sayısını görüntüler **AzureActivity** çalışma alanınızdaki kaydeder.
+**İzleme çözümlerine Azure Portal izleme menüsünden erişilir** . **Genel bakış** sayfasını çözüm kutucukları ile açmak için **Öngörüler** bölümünde **daha fazla** ' yı seçin. **Azure etkinlik günlükleri** kutucuğu, çalışma alanınızdaki **AzureActivity** kayıt sayısının sayısını görüntüler.
 
 ![Azure etkinlik günlüklerini kutucuğu](media/collect-activity-logs/azure-activity-logs-tile.png)
 
 
-Tıklayın **Azure etkinlik günlüklerini** açmak için kutucuğa **Azure etkinlik günlüklerini** görünümü. Görünümü aşağıdaki tabloda görselleştirme bölümü içerir. Her bölüm en fazla 10 öğe belirtilen zaman aralığı için bu bölümleri 's ölçütlerle eşleşen listeler. Tıklayarak tüm eşleşen kayıtlar döndüren bir günlük sorgusu çalıştırabilirsiniz **tümünü gör** bölümünün altındaki.
+Azure **etkinlik günlükleri görünümünü açmak** için Azure etkinlik **günlükleri** kutucuğuna tıklayın. Görünüm, aşağıdaki tablodaki görselleştirme parçalarını içerir. Her bölümde, belirtilen zaman aralığı için parçaların ölçütlerine uyan 10 ' a kadar öğe listelenir. Bölümün en altında bulunan **Tümünü görüntüle ' ye** tıklayarak eşleşen tüm kayıtları döndüren bir günlük sorgusu çalıştırabilirsiniz.
 
 ![Azure etkinlik günlüklerini Panosu](media/collect-activity-logs/activity-log-dash.png)
 
 | Görselleştirme bölümü | Açıklama |
 | --- | --- |
-| Azure etkinlik günlüğü girdileri | Azure etkinlik günlüğü girdisi üst çubuk grafik, seçtiğiniz tarih aralığı için kayıt toplamları gösterir ve en iyi 10 etkinlik çağıranlar listesini gösterir. Günlük araması çalıştırmak için çubuk grafiğe tıklayın `AzureActivity`. Bu öğe için tüm etkinlik günlüğü girdileri döndüren bir günlük araması gerçekleştirmek için arayan bir öğeye tıklayın. |
-| Duruma göre etkinlik günlükleri | Azure etkinlik günlüğü durumunun seçili tarih aralığı ve en iyi on durum kayıtlarını içeren bir liste için bir halka grafik gösterir. Günlük sorgusu çalıştırmak için grafiği tıklatın `AzureActivity | summarize AggregatedValue = count() by ActivityStatus`. Bu durum kaydını tüm etkinlik günlüğü girişlerini döndüren bir günlük araması çalıştırmak için bir durum öğesini tıklatın. |
-| Kaynağa göre etkinlik günlükleri | Etkinlik günlükleri ile kaynakların toplam sayısını gösterir ve kayıt on kaynakları sayar her kaynak için üst listeler. Günlük araması çalıştırmak için toplam alanı `AzureActivity | summarize AggregatedValue = count() by Resource`, çözüme kullanılabilir tüm Azure kaynaklarını gösterir. Bu kaynak için tüm etkinlik kayıtlarını döndüren günlük sorgu çalıştırmak için bir kaynağa tıklayın. |
-| Kaynak sağlayıcısı tarafından etkinlik günlükleri | Etkinlik günlüğü oluşturan işler de kaynak sağlayıcıları toplam sayısını gösterir ve ilk on listeler. Toplam alanı için günlük sorgusu `AzureActivity | summarize AggregatedValue = count() by ResourceProvider`, tüm Azure kaynak sağlayıcılarını gösterir. Bir kaynak sağlayıcısı için sağlayıcı tüm etkinlik kayıtlarını döndüren günlük sorgu çalıştırmak için tıklayın. |
+| Azure etkinlik günlüğü girdileri | Seçtiğiniz tarih aralığı için en üstteki Azure etkinlik günlüğü girişi kayıt toplamlarını gösteren bir çubuk grafiği gösterir ve ilk 10 etkinlik çağıranlarının bir listesini gösterir. Günlük araması çalıştırmak için çubuk grafiğe tıklayın `AzureActivity`. Bu öğe için tüm etkinlik günlüğü girdilerini döndüren bir günlük araması çalıştırmak için bir arayan öğesine tıklayın. |
+| Duruma göre etkinlik günlükleri | Seçili tarih aralığı için Azure etkinlik günlüğü durumu ve ilk on durum kayıtlarının listesi için bir halka grafiği gösterir. `AzureActivity | summarize AggregatedValue = count() by ActivityStatus`günlük sorgusu çalıştırmak için grafiğe tıklayın. Bu durum kaydı için tüm etkinlik günlüğü girdilerini döndüren bir günlük araması çalıştırmak için bir durum öğesine tıklayın. |
+| Kaynağa göre etkinlik günlükleri | Etkinlik günlüklerinin bulunduğu toplam kaynak sayısını gösterir ve her bir kaynak için kayıt sayısı olan ilk on kaynağı listeler. Günlük araması çalıştırmak için toplam alanı `AzureActivity | summarize AggregatedValue = count() by Resource`, çözüme kullanılabilir tüm Azure kaynaklarını gösterir. Kaynak için tüm etkinlik kayıtlarını döndüren bir günlük sorgusu çalıştırmak için kaynağa tıklayın. |
+| Kaynak sağlayıcısı tarafından etkinlik günlükleri | Etkinlik günlükleri üreten ve ilk on olan kaynak sağlayıcılarının toplam sayısını gösterir. Tüm Azure Kaynak sağlayıcılarını gösteren `AzureActivity | summarize AggregatedValue = count() by ResourceProvider`bir günlük sorgusu çalıştırmak için Toplam alanına tıklayın. Sağlayıcıya yönelik tüm etkinlik kayıtlarını döndüren bir günlük sorgusu çalıştırmak için bir kaynak sağlayıcısına tıklayın. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [etkinlik günlüğü](activity-logs-overview.md).
-- Daha fazla bilgi edinin [Azure İzleyici, veri platformu](data-platform.md).
-- Kullanım [oturum sorguları](../log-query/log-query-overview.md) etkinlik günlüğünüzü ayrıntılı bilgileri görüntülemek için.
+- [Etkinlik günlüğü](activity-logs-overview.md)hakkında daha fazla bilgi edinin.
+- [Azure izleyici veri platformu](data-platform.md)hakkında daha fazla bilgi edinin.
+- Etkinlik Günlüğliğinizden ayrıntılı bilgileri görüntülemek için [günlük sorgularını](../log-query/log-query-overview.md) kullanın.

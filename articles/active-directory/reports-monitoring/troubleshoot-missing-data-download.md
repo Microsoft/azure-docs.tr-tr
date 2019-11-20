@@ -1,5 +1,5 @@
 ---
-title: 'Sorun giderme: Veri indirilen Azure Active Directory etkinlik günlüklerindeki eksik | Microsoft Docs'
+title: 'Sorun giderme: indirilen etkinlik günlüklerinde eksik veriler | Microsoft Docs'
 description: İndirilen Azure Active Directory etkinlik günlüklerindeki eksik verilere yönelik bir çözüm sağlar.
 services: active-directory
 documentationcenter: ''
@@ -17,14 +17,14 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2200a9c75b371ed72ffefe6900367e698101e0fe
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ee07fdb6f8a4e69600297bdb16b6ad74793f10c9
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60437116"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74007716"
 ---
-# <a name="i-cant-find-all-the-data-in-the-azure-active-directory-activity-logs-i-downloaded"></a>Tüm verileri karşıdan Azure Active Directory etkinlik günlüğünde bulamıyorum
+# <a name="i-cant-find-all-the-data-in-the-azure-active-directory-activity-logs-i-downloaded"></a>İndirdiğim Azure Active Directory etkinlik günlüğündeki tüm verileri bulamıyorum
 
 ## <a name="symptoms"></a>Belirtiler
 
@@ -34,7 +34,7 @@ Etkinlik günlüklerini (denetim veya oturum açma) indirdim ve seçtiğim süre
  
 ## <a name="cause"></a>Nedeni
 
-Azure Portal'da etkinlik günlüklerini indirdiğinizde ölçek en son gerçekleşen en başta göre sıralanmış, 250.000 kayıtlara sınırlıyoruz. 
+Etkinlik günlüklerini Azure portal indirdiğinizde, ölçeği 250.000 kayıt olarak sınırlarız ve en son ilk olarak sıralanır. 
 
 ## <a name="resolution"></a>Çözüm
 
@@ -42,5 +42,5 @@ Belirli bir noktadaki bir milyon kaydı getirmek için [Azure AD Raporlama API�
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure Active Directory SSS raporları](reports-faq.md)
+* [Azure Active Directory raporları SSS](reports-faq.md)
 

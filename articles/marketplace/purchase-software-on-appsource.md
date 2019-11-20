@@ -1,73 +1,74 @@
 ---
-title: Appsource'ta yazılım satın alma | Azure Market
-description: Bir yazılım appsource'ta satın almak adımlar | Azure Market.
+title: AppSource 'ta yazılım satın alma | Azure Marketi
+description: AppSource 'ta yazılım satın alma adımları | Azure Marketi.
 author: qianw211
 manager: evansma
 ms.author: v-qiwe
 ms.service: marketplace
-ms.topic: how-to
+ms.subservice: partnercenter-marketplace-publisher
+ms.topic: conceptual
 ms.date: 06/05/2019
-ms.openlocfilehash: f3fb34f263ead9552b8d1d0b1dba4996b355c22a
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.openlocfilehash: 3ca07f060aebcea82895f0463cac693c66f0c629
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67503506"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827744"
 ---
-# <a name="how-to-purchase-software-on-microsoft-appsource"></a>Microsoft appsource'ta yazılım satın alma
+# <a name="how-to-purchase-software-on-microsoft-appsource"></a>Microsoft AppSource yazılım satın alma
 
-Microsoft [AppSource](https://appsource.microsoft.com/) artık, müşterilerin Microsoft iş ortakları tarafından sunulan SaaS uygulamalarına abone sağlar. Müşteriler, sertifikalı web uygulamaları deposunda bulabilirsiniz ve ücretleri, yükseltme, eski sürümü yükleme işlemleri ve iptallerinin Microsoft'un Yönetim merkezini kullanarak tek bir yerden yönetebilirsiniz. Bu makalede, uygulama Mağazası'ndan nasıl satın alabileceğiniz açıklanır.
+Microsoft [Appsource](https://appsource.microsoft.com/) artık müşterilerin Microsoft iş ortakları tarafından sunulan SaaS uygulamalarına abone olmalarını sağlar. Müşteriler mağaza üzerinde sertifikalı Web uygulamaları bulabilir ve Microsoft 'un yönetim merkezini kullanarak ücretleri, yükseltmeleri, eski sürümü ve iptalleri tek bir yerde yönetebilir. Bu makalede mağaza 'dan bir uygulama satın alabileceğiniz açıklanır.
 
 ## <a name="requirements"></a>Gereksinimler
 
-SaaS teklifleri satın almak için ihtiyacınız vardır:
+SaaS tekliflerini satın almak için şunlar gerekir:
 
-- Bir iş veya Okul hesabı.
+- Bir iş veya okul hesabı.
 
     > [!Note]
-    > Bir iş veya Okul hesabı yoksa, bir iş veya Okul hesabı eklenebilir bir Azure Active Directory Kiracı oluşturmanız gerekir. Daha fazla bilgi için bkz: [hızlı başlangıç: Azure Active Directory'de yeni bir kiracı oluşturmak](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-access-create-new-tenant).
+    > Bir iş veya okul hesabınız yoksa, bir iş veya okul hesabının eklenebileceği bir Azure Active Directory kiracı oluşturmanız gerekir. Daha fazla bilgi edinmek için bkz. [hızlı başlangıç: Azure Active Directory yeni kiracı oluşturma](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-access-create-new-tenant).
 
 - Geçerli bir kredi kartı.
 
     > [!Note]
-    > Müşteri teklifi satın alıyorsa ülke/bölge için ait kredi kartı gerekir. Farklı bir ülkede seçmek için "fatura ülkesi/bölgesi sayfasının alt kısmında Değiştir"'i seçin.
+    > Kredi kartının, müşterinin teklifi satın aldığı ülkeye/bölgeye ait olması gerekir. Farklı bir ülke seçmek için sayfanın altındaki "fatura ülkesini/bölgesini Değiştir" seçeneğini belirleyin.
 
-## <a name="steps-for-making-purchases-on-appsource"></a>Appsource'ta satın alma işlemleri yapmak için adımları
+## <a name="steps-for-making-purchases-on-appsource"></a>AppSource 'ta satın alma işlemleri yapma adımları
 
-1. Faturalandırma veya ülkeyi bölgenizi seçin [AppSource](https://appsource.microsoft.com/).
+1. [Appsource](https://appsource.microsoft.com/)'ta faturalandırma/ülke bölgenizi seçin.
 1. Satın almak istediğiniz uygulamayı bulun.
 
     > [!Note]
-    > AppSource Ücretli aboneliklere ve ücretsiz deneme sürümleri dahil olmak üzere uygulamalar, arasından seçim sağlar. Bu makalede nasıl Ücretli aboneliklere AppSource aracılığıyla satın alınabilir.
+    > AppSource, ücretsiz, denemeler ve ücretli abonelikler dahil olmak üzere, aralarından seçim yapabileceğiniz bir uygulama seçimi sağlar. Bu makalede, ücretli aboneliklerin AppSource aracılığıyla nasıl satın alınacağı açıklanmaktadır.
 
-1. Seçin **şimdi edinin**.
-1. Plan seçin:
+1. **Şimdi al**' ı seçin.
+1. Planı seçin:
 
-    1. Bilgisayar lisansı sayısını ayarlayın
-    1. Fatura dönemi ayarlayın.
+    1. Koltuk sayısını ayarlama
+    1. Faturalandırma terimini ayarlayın.
     
-1. Fatura adresini girin.
-1. Ödeme yönteminiz girin:
-    * Kredi kartları desteklenir: Visa, ana kart, American Express keşfedin.
+1. Fatura adresinizi girin.
+1. Ödeme yönteminizi girin:
+    * Desteklenen kredi kartları: Visa, ana kart, Amerikan Express, bul.
     
-1. Seçin **sipariş**.
+1. **Siparişi yerleştir**' i seçin.
 
-## <a name="how-to-configure-software-post-purchase"></a>Yazılım satın alma işleminden yapılandırma
+## <a name="how-to-configure-software-post-purchase"></a>Yazılım satın alma sonrası yazılım yapılandırma
 
-Siparişinizi alındıktan sonra uygulamanın Onaylandı için birkaç saniye sürebilir. Sayfa, aynı zamanda satın alma ve yapılandırmayı tamamlama için bağlantı onaylayan bir e-posta SaaS aboneliğinizi yapılandırma için bir bağlantı elde edersiniz.
+Siparişiniz alındıktan sonra, onay alınması birkaç saniye sürebilir. Sayfada SaaS aboneliğinizi yapılandırmak için bir bağlantı alacaksınız ve satın almayı onaylayan bir e-posta ve yapılandırmayı tamamlamaya yönelik bağlantı görüntülenir.
 
-1. Üzerinde **sipariş onayı** sayfasında **yapılandırma**. Alternatif olarak, size gönderilen onay e-postada yapılandırma bağlantısı kullanabilirsiniz.
-1. Sağlamayı tamamlamasını ve yazılım sağlayıcının Web sitesinde ayarlayın.
+1. **Sipariş onayı** sayfasında **Yapılandır**' ı seçin. Alternatif olarak, onay e-postasında size gönderilen yapılandırma bağlantısını kullanabilirsiniz.
+1. Sağlamayı tamamlayıp yazılım sağlayıcısının Web sitesinde ayarlamayı yapın.
 
     > [!Note]
-    > Bu adım zorunludur ve istediğiniz zaman tamamlayabilirsiniz.
+    > Bu adım zorunludur ve herhangi bir zamanda tamamlanabilir.
 
 ## <a name="contact-support"></a>Desteğe başvurun
 
-Bir can [bir destek bileti gönderin](https://admin.microsoft.com/Adminportal/Home?source=applauncher#/homepage) Microsoft 365 Yönetim Merkezi aracılığıyla.
+Bir [destek bileti](https://admin.microsoft.com/Adminportal/Home?source=applauncher#/homepage) Microsoft 365 Yönetim Merkezi aracılığıyla gönderebilir.
 
-İş ürünleri için [kişi burada Yardım](https://docs.microsoft.com/office365/admin/contact-support-for-business-products?view=o365-worldwide&tabs=phone).
+İş ürünleri için [buradaki yardım 'a başvurun](https://docs.microsoft.com/office365/admin/contact-support-for-business-products?view=o365-worldwide&tabs=phone).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz: [ticari Market belgeleri](https://docs.microsoft.com/azure/marketplace/partner-center-portal/commercial-marketplace-overview) daha fazla bilgi için.
+- Daha fazla bilgi için bkz. [ticari Market belgeleri](https://docs.microsoft.com/azure/marketplace/partner-center-portal/commercial-marketplace-overview) .

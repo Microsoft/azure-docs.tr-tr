@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric ile çalışmaya başlama VS Code'u | Microsoft Docs
-description: Bu makalede, Visual Studio Code kullanarak Service Fabric uygulamaları oluşturmaya genel bakış ' dir.
+title: VS Code kullanmaya başlama ile Azure Service Fabric | Microsoft Docs
+description: Bu makalede Visual Studio Code kullanarak Service Fabric uygulamalar oluşturmaya genel bakış sunulmaktadır.
 services: service-fabric
 documentationcenter: .net
 author: peterpogorski
@@ -8,27 +8,26 @@ manager: chackdan
 editor: ''
 ms.assetid: ''
 ms.service: service-fabric
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/29/2018
 ms.author: pepogors
-ms.openlocfilehash: f977a48338f784562ec84355aabb212e5a3dade4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9662ebd26a263fa006c8fccf877fdc950e9014c0
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60946584"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70102952"
 ---
 # <a name="service-fabric-for-visual-studio-code"></a>Visual Studio Code için Service Fabric
 
-[VS Code için Service Fabric güvenilir hizmetler uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-service-fabric-reliable-services) oluşturmak, derlemek ve Service Fabric uygulamaları Windows, Linux ve Macos'ta işletim sistemlerinde hata ayıklama için gereken araçları sağlar.
+[Vs Code için Service Fabric Reliable Services uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-service-fabric-reliable-services) , Windows, Linux ve MacOS işletim sistemlerinde Service Fabric uygulamaları oluşturmak, derlemek ve hatalarını ayıklamak için gereken araçları sağlar.
 
-Bu makalede gereksinimlerine genel bir bakış ve Kurulum uzantısı'nın yanı sıra uzantısı tarafından sağlanan çeşitli komutlara kullanımını sağlar. 
+Bu makalede, uzantının gereksinimlerine ve kurulumuna ilişkin bir genel bakış ve uzantı tarafından sağlanan çeşitli komutların kullanımı sunulmaktadır. 
 
 > [!IMPORTANT]
-> Service Fabric Java uygulamalarını Windows makinelerde geliştirilebilir, ancak yalnızca Azure Linux kümeleri üzerinde dağıtılabilir. Java uygulamalarında hata ayıklama, Windows üzerinde desteklenmiyor.
+> Service Fabric Java uygulamaları Windows makinelerde geliştirilebilir, ancak yalnızca Azure Linux kümelerine dağıtılabilir. Java uygulamalarında hata ayıklama Windows üzerinde desteklenmez.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -37,8 +36,8 @@ Tüm ortamlarda aşağıdaki önkoşulların yüklü olması gerekir.
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [Node.js](https://nodejs.org/)
 * [Git](https://git-scm.com/)
-* [Service fabric SDK'sı](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started)
-* Yeoman oluşturucularını--uygulamanız için uygun oluşturucuları yükleyin
+* [Service Fabric SDK](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started)
+* Yeumman Generıcılar--uygulamanız için uygun oluşturucuları yükler
 
    ```sh
    npm install -g yo
@@ -48,92 +47,92 @@ Tüm ortamlarda aşağıdaki önkoşulların yüklü olması gerekir.
    npm install -g generator-azuresfguest
    ```
 
-Java geliştirme için aşağıdaki önkoşulların yüklü olması gerekir:
+Java geliştirmesi için aşağıdaki önkoşulların yüklü olması gerekir:
 
-* [Java SDK'sı](https://aka.ms/azure-jdks) (sürüm 1.8)
+* [Java SDK 'sı](https://aka.ms/azure-jdks) (sürüm 1,8)
 * [Gradle](https://gradle.org/install/)
-* [Java VS Code uzantısı için hata ayıklayıcı](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug) Java hizmetlerinden hatalarını ayıklamak için gerekli. Java hizmetlerinde hata ayıklama Linux üzerinde yalnızca desteklenir. Uzantıları simgesine tıklayarak ya da yükleyebileceğiniz **etkinlik çubuğu** VS Code ve uzantıyı veya arama VS Code Marketi'nde gelen.
+* [Java vs Code uzantısı Için hata ayıklayıcı](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug) Java hizmetlerinde hata ayıklamak için gereklidir. Java hizmetleri 'nde hata ayıklama yalnızca Linux 'ta desteklenir. VS Code ve uzantıyı arayarak ya da VS Code marketinden, **etkinlik çubuğundaki** uzantılar simgesine tıklayarak yükleyebilirsiniz.
 
-.NET Core için aşağıdaki önkoşullar yüklenmelidir /C# geliştirme:
+.NET Core/C# geliştirme için aşağıdaki önkoşulların yüklü olması gerekir:
 
-* [.NET core](https://www.microsoft.com/net/learn/get-started) (2.0.0 sürümü veya üzeri)
-* [C#Visual Studio Code (OmniSharp tarafından desteklenen) VS Code uzantısı için](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) hatalarını ayıklamak için gerekli C# Hizmetleri. Uzantıları simgesine tıklayarak ya da yükleyebileceğiniz **etkinlik çubuğu** VS Code ve uzantıyı veya arama VS Code Marketi'nde gelen.
+* [.NET Core](https://www.microsoft.com/net/learn/get-started) (sürüm 2.0.0 veya üzeri)
+* [Visual Studio Code için (omnisharp tarafından desteklenen) vs Code uzantısı C# ](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) Hata ayıklama C# için gerekli. VS Code ve uzantıyı arayarak ya da VS Code marketinden, **etkinlik çubuğundaki** uzantılar simgesine tıklayarak yükleyebilirsiniz.
 
 ## <a name="setup"></a>Kurulum
 
-1. Açık VS kodu.
-2. Uzantıları simgesini **etkinlik çubuğu** VS Code sol tarafındaki. "Service Fabric" arayın. Tıklayın **yükleme** Service Fabric güvenilir hizmetler uzantısı.
+1. VS Code açın.
+2. VS Code sol tarafındaki **etkinlik çubuğunda** uzantılar simgesine tıklayın. "Service Fabric" araması yapın. Service Fabric Reliable Services uzantısı için **yüklensin** ' e tıklayın.
 
 ## <a name="commands"></a>Komutlar
-VS Code için Service Fabric güvenilir hizmetler uzantısı oluşturun ve Service Fabric projelerini dağıtma geliştiricilerin yardımcı olmak için birçok komutlar sağlar. Komutları çağırabilirsiniz **komut paleti** tuşuna basarak `(Ctrl + Shift + p)`, komut adı giriş çubuğuna yazarak ve istenen komut istemi listeden seçerek. 
+VS Code için Service Fabric Reliable Services uzantısı, geliştiricilerin Service Fabric projeleri oluşturup dağıtmalarına yardımcı olmak için birçok komut sağlar. **Komut paletinden** `(Ctrl + Shift + p)`komutları çağırarak, giriş çubuğuna komut adını yazarak ve istem listesinden istenen komutu seçebilirsiniz. 
 
-* Service Fabric: Uygulama oluşturma 
+* Service Fabric: Uygulama Oluştur 
 * Service Fabric: Uygulama yayımlama 
-* Service Fabric: Uygulamayı dağıtma 
-* Service Fabric: Uygulamayı kaldırma  
-* Service Fabric: Uygulama oluşturma 
-* Service Fabric: Uygulamayı Temizle 
+* Service Fabric: Uygulama dağıtma 
+* Service Fabric: Uygulamayı Kaldır  
+* Service Fabric: Uygulama oluştur 
+* Service Fabric: Uygulamayı temizle 
 
-### <a name="service-fabric-create-application"></a>Service Fabric: Uygulama oluşturma
+### <a name="service-fabric-create-application"></a>Service Fabric: Uygulama Oluştur
 
-**Service Fabric: Uygulama oluşturma** komut, geçerli çalışma alanınızda yeni bir Service Fabric uygulaması oluşturur. Hangi yeoman oluşturucularını geliştirme makinenizde yüklü bağlı olarak, Service Fabric uygulaması, Java, dahil olmak üzere çeşitli türleri oluşturabilirsiniz C#, kapsayıcı ve Konuk projeleri. 
+**Service Fabric: Uygulama** Oluştur komutu, geçerli çalışma alanınızda yeni bir Service Fabric uygulaması oluşturur. Geliştirme makinenizde hangi yeumman, yüklü olduğuna bağlı olarak, Java, C#, Container ve konuk projeler dahil olmak üzere çeşitli Service Fabric uygulamalar oluşturabilirsiniz. 
 
-1.  Seçin **Service Fabric: Hizmet Ekle** komutu
-2.  Yeni Service Fabric uygulamanızı türünü seçin. 
+1.  **Service Fabric seçin: Hizmet** Ekle komutu
+2.  Yeni Service Fabric uygulamanızın türünü seçin. 
 3.  Oluşturmak istediğiniz uygulamanın adını girin
-3.  Service Fabric uygulamanıza eklemek istediğiniz hizmet türünü seçin. 
-4.  Hizmet adı için istemleri izleyin. 
+3.  Service Fabric uygulamanıza eklemek istediğiniz hizmetin türünü seçin. 
+4.  Hizmeti adlandırmak için istemleri izleyin. 
 5.  Yeni Service Fabric uygulama çalışma alanında görüntülenir.
-6.  Çalışma alanı kök klasöründe haline gelebilmesi yeni uygulama klasörü açın. Komutları yürütmeden buradan devam edebilirsiniz.
+6.  Yeni uygulama klasörünü, çalışma alanındaki kök klasör olacak şekilde açın. Komutları buradan yürütmeye devam edebilirsiniz.
 
 ### <a name="service-fabric-add-service"></a>Service Fabric: Hizmet Ekle
-**Service Fabric: Hizmet Ekle** komutu, var olan bir Service Fabric uygulaması için yeni bir hizmet ekler. Hizmet eklenecek uygulama çalışma alanının kök dizini olmalıdır. 
+**Service Fabric: Hizmet** Ekle komutu, mevcut bir Service Fabric uygulamasına yeni bir hizmet ekler. Hizmetin ekleneceği uygulamanın, çalışma alanının kök dizini olması gerekir. 
 
-1.  Seçin **Service Fabric: Hizmet Ekle** komutu.
-2.  Geçerli Service Fabric uygulamanızı türünü seçin. 
-3.  Service Fabric uygulamanıza eklemek istediğiniz hizmet türünü seçin. 
-4.  Hizmet adı için istemleri izleyin. 
-5.  Proje dizininizde yeni görünür. 
+1.  **Service Fabric seçin: Hizmet** komutu Ekle.
+2.  Geçerli Service Fabric uygulamanızın türünü seçin. 
+3.  Service Fabric uygulamanıza eklemek istediğiniz hizmetin türünü seçin. 
+4.  Hizmeti adlandırmak için istemleri izleyin. 
+5.  Yeni hizmet, proje dizininizde görüntülenir. 
 
 ### <a name="service-fabric-publish-application"></a>Service Fabric: Uygulama yayımlama
-**Service Fabric: Uygulama yayımlama** komutu, Service Fabric uygulamanızı uzak bir küme dağıtır. Hedef küme güvenli veya güvenli olmayan bir kümeye olabilir. Parametreleri Cloud.json ayarlanmamışsa, uygulamayı yerel kümeye dağıtılır.
+**Service Fabric: Uygulama** Yayımla komutu, Service Fabric uygulamanızı uzak bir kümede dağıtır. Hedef küme güvenli ya da güvensiz bir küme olabilir. Cloud. JSON içinde parametreler ayarlanmamışsa, uygulama yerel kümeye dağıtılır.
 
-1.  Uygulama yerleşik olarak bulunan ilk kez Cloud.json dosya proje dizininde oluşturulur.
-2.  Publishprofiles dosyasında bağlamak istediğiniz küme için değerleri girin.
-3.  Seçin **Service Fabric: Uygulama yayımlama** komutu.
-4.  Service Fabric Explorer'ı, uygulamanın yüklendiğini doğrulamak için hedef kümeyle görüntüleyin. 
+1.  Uygulama ilk kez oluşturulduğunda, proje dizininde bir Cloud. JSON dosyası oluşturulur.
+2.  Cloud. json dosyasında bağlanmak istediğiniz kümenin değerlerini girin.
+3.  **Service Fabric seçin: Uygulama** Yayımla komutu.
+4.  Uygulamanın yüklendiğini onaylamak için hedef kümeyi Service Fabric Explorer görüntüleyin. 
 
-### <a name="service-fabric-deploy-application-localhost"></a>Service Fabric: Uygulama (Localhost) dağıtma
-**Service Fabric: Uygulamayı dağıtma** komutu, Service Fabric uygulamanızı yerel kümenize dağıtır. Yerel kümenize komutu kullanmadan önce çalışır durumda olduğundan emin olun. 
+### <a name="service-fabric-deploy-application-localhost"></a>Service Fabric: Uygulama dağıtma (localhost)
+**Service Fabric: Application** komutunu dağıt, Service Fabric uygulamanızı yerel kümenize dağıtır. Komutunu kullanmadan önce yerel kümenizin çalıştığından emin olun. 
 
-1. Seçin **Service Fabric: Uygulamayı dağıtma** komutu
-2. Service Fabric Explorer ile yerel küme görüntüleyebilirsiniz (http:\//localhost:19080 / Explorer) uygulamanın yüklendiğini doğrulamak için. Bu biraz zaman alabilir. Bu nedenle sabırlı olun.
-3. Ayrıca **Service Fabric: Uygulama yayımlama** komutunu parametresiz Cloud.json dosyanın yerel bir kümeye dağıtmak için ayarlayın.
+1. **Service Fabric seçin: Uygulama** komutunu dağıt
+2. Uygulamanın yüklendiğini onaylamak için Service Fabric Explorer yerel kümeyi (http\/:/localhost: 19080/Explorer) ile görüntüleyin. Bu işlem biraz zaman alabilir, bu nedenle sabırlı olun.
+3. Service Fabric de kullanabilirsiniz **: Cloud.** json dosyasında yerel bir kümeye dağıtılacak hiçbir parametre ayarlanmamış şekilde uygulama komutunu yayımlayın.
 
 > [!NOTE]
-> Java uygulamalarını yerel kümeye dağıtma Windows makinelerde desteklenmiyor.
+> Java uygulamalarını yerel kümeye dağıtmak Windows makinelerinde desteklenmez.
 
-### <a name="service-fabric-remove-application"></a>Service Fabric: Uygulamayı kaldırma
-**Service Fabric: Uygulamayı kaldırma** komut bir Service Fabric uygulaması, daha önce VS Code uzantısı kullanarak dağıtıldığı kümeden kaldırır. 
+### <a name="service-fabric-remove-application"></a>Service Fabric: Uygulamayı Kaldır
+**Service Fabric: Uygulamayı** Kaldır komutu, daha önce vs Code uzantısı kullanılarak dağıtılan Service Fabric bir uygulamayı kümeden kaldırır. 
 
-1.  Seçin **Service Fabric: Uygulamayı kaldırma** komutu.
-2.  Uygulama kaldırıldığını doğrulamak için Service Fabric Explorer ile küme görüntüleyebilirsiniz. Bu biraz zaman alabilir. Bu nedenle sabırlı olun.
+1.  **Service Fabric seçin: Uygulama** komutunu kaldır.
+2.  Uygulamanın kaldırıldığını onaylamak için Service Fabric Explorer kümeyi görüntüleyin. Bu işlem biraz zaman alabilir, bu nedenle sabırlı olun.
 
-### <a name="service-fabric-build-application"></a>Service Fabric: Uygulama oluşturma
-**Service Fabric: Uygulama derleme** komut ya da Java oluşturabilirsiniz veya C# Service Fabric uygulamaları. 
+### <a name="service-fabric-build-application"></a>Service Fabric: Uygulama oluştur
+**Service Fabric: Yapı uygulaması** komutu Java veya C# Service Fabric uygulamaları oluşturabilir. 
 
-1.  Bu komutu çalıştırmadan önce uygulama kök klasöründe olduğundan emin olun. Komut uygulama türlerini tanımlar (C# veya Java) ve uygun şekilde uygulamanızı oluşturur.
-2.  Seçin **Service Fabric: Uygulama derleme** komutu.
-3.  Yapı işleminin çıkış için tümleşik Terminalini yazılır.
+1.  Bu komutu yürütmeden önce uygulama kök klasöründe olduğunuzdan emin olun. Komut, uygulamanın (C# veya Java) türünü tanımlar ve uygulamanızı uygun şekilde oluşturur.
+2.  **Service Fabric seçin: Uygulama** komutu oluştur.
+3.  Yapı işleminin çıktısı tümleşik terminale yazılır.
 
-### <a name="service-fabric-clean-application"></a>Service Fabric: Uygulamayı Temizle
-**Service Fabric: Uygulamayı Temizle** komut tüm jar dosyalarını ve derleme tarafından oluşturulan yerel kitaplıkları siler. Yalnızca Java uygulamaları için geçerlidir. 
+### <a name="service-fabric-clean-application"></a>Service Fabric: Uygulamayı temizle
+**Service Fabric: Uygulamayı** Temizle komutu, derleme tarafından oluşturulan tüm jar dosyalarını ve yerel kitaplıkları siler. Yalnızca Java uygulamaları için geçerlidir. 
 
-1.  Bu komutu çalıştırmadan önce uygulama kök klasöründe olduğundan emin olun. 
-2.  Seçin **Service Fabric: Uygulamayı Temizle** komutu.
-3.  Temizleme işleminin çıktısı için tümleşik Terminalini yazılır.
+1.  Bu komutu yürütmeden önce uygulama kök klasöründe olduğunuzdan emin olun. 
+2.  **Service Fabric seçin: Uygulamayı** Temizle komutu.
+3.  Temizleme işleminin çıktısı tümleşik terminale yazılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bilgi edinmek için nasıl [geliştirme ve hata ayıklama C# VS Code ile Service Fabric uygulamaları](./service-fabric-develop-csharp-applications-with-vs-code.md).
-* Bilgi edinmek için nasıl [geliştirme ve hata ayıklama, VS Code ile Java Service Fabric uygulamaları](./service-fabric-develop-java-applications-with-vs-code.md).
+* [Vs Code ile Service Fabric uygulamaları geliştirmeyi ve C# hata ayıklamayı](./service-fabric-develop-csharp-applications-with-vs-code.md)öğrenin.
+* [Vs Code Ile Java Service Fabric uygulamaları geliştirmeyi ve hata ayıklamayı](./service-fabric-develop-java-applications-with-vs-code.md)öğrenin.

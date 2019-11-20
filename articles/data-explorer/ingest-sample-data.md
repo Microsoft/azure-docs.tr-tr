@@ -1,25 +1,25 @@
 ---
-title: Azure veri Gezgini'ne örnek verileri alma
-description: Azure veri Gezgini'ne (yükle) hava durumu ile ilgili örnek verileri alma hakkında bilgi edinin.
+title: Azure Veri Gezgini 'de örnek verileri alma
+description: Hava durumu ile ilgili örnek verileri Azure Veri Gezgini 'a alma (yükleme) hakkında bilgi edinin.
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
-ms.date: 09/24/2018
-ms.openlocfilehash: e80322cda671e2145cf3e65aa1457f1fa1827737
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: quickstart
+ms.date: 08/12/2019
+ms.openlocfilehash: c803de599f6be98512b15e927c6d15f1c7d95ff1
+ms.sourcegitcommit: 0e59368513a495af0a93a5b8855fd65ef1c44aac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60759284"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69515749"
 ---
-# <a name="ingest-sample-data-into-azure-data-explorer"></a>Azure veri Gezgini'ne örnek verileri alma
+# <a name="quickstart-ingest-sample-data-into-azure-data-explorer"></a>Hızlı Başlangıç: Azure Veri Gezgini 'de örnek verileri alma
 
-Bu makalede, bir Azure Veri Gezgini veritabanına (yükle) örnek verileri alma işlemini göstermektedir. Vardır [veri almak için çeşitli yollar](ingest-data-overview.md); bu makalede, test amacıyla uygun bir temel yaklaşım odaklanır.
+Bu makalede, örnek verileri bir Azure Veri Gezgini veritabanına alma (yükleme) işlemi gösterilmektedir. [Verileri almanın birkaç yolu](ingest-data-overview.md)vardır; Bu makale, test amacıyla uygun olan temel bir yaklaşıma odaklanmaktadır.
 
 > [!NOTE]
-> Tamamlanmışsa, bu veriler zaten [hızlı başlangıç: Azure Veri Gezgini Python kitaplığı kullanarak veri alma](python-ingest-data.md).
+> [Azure Veri Gezgini Python kitaplığını kullanarak verileri](python-ingest-data.md)alma işlemi yaptıysanız bu verilere zaten sahipsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -33,9 +33,9 @@ Bu makalede, bir Azure Veri Gezgini veritabanına (yükle) örnek verileri alma 
 
 1. Uygulamanın sol üst köşesinden **Küme ekle**'yi seçin.
 
-1. İçinde **Ekle küme** iletişim kutusunda, küme URL'nizi girin `https://<ClusterName>.<Region>.kusto.windows.net/`, ardından **Ekle**.
+1. **Küme Ekle** iletişim kutusunda, küme URL 'nizi forma `https://<ClusterName>.<Region>.kusto.windows.net/`girin ve ardından **Ekle**' yi seçin.
 
-1. Aşağıdaki komutta yapıştırın ve seçin **çalıştırma**.
+1. Aşağıdaki komutu yapıştırın ve **Çalıştır**' ı seçin.
 
     ```Kusto
     .create table StormEvents (StartTime: datetime, EndTime: datetime, EpisodeId: int, EventId: int, State: string, EventType: string, InjuriesDirect: int, InjuriesIndirect: int, DeathsDirect: int, DeathsIndirect: int, DamageProperty: int, DamageCrops: int, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: dynamic)
@@ -43,24 +43,19 @@ Bu makalede, bir Azure Veri Gezgini veritabanına (yükle) örnek verileri alma 
     .ingest into table StormEvents h'https://kustosamplefiles.blob.core.windows.net/samplefiles/StormEvents.csv?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D' with (ignoreFirstRecord=true)
     ```
 
-1. Alma işlemi tamamlandıktan sonra aşağıdaki sorguyu yapıştırın, sorgu penceresinde seçip **çalıştırma**.
+1. Alma işlemi tamamlandıktan sonra, aşağıdaki sorguyu yapıştırın, penceredeki sorguyu seçin ve **Çalıştır**' ı seçin.
 
     ```Kusto
     StormEvents
     | sort by StartTime desc
     | take 10
     ```
-    Sorgu, aşağıdaki sonuçları alınan örnek verileri döndürür.
+    Sorgu, alınan örnek verilerden aşağıdaki sonuçları döndürür.
 
     ![Sorgu sonuçları](media/ingest-sample-data/query-results.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-> [!div class="nextstepaction"]
-> [Hızlı Başlangıç: Azure veri Gezgini'nde verileri Sorgulama](web-query-data.md)
-
-> [!div class="nextstepaction"]
-> [Sorgu yazma](write-queries.md)
-
-> [!div class="nextstepaction"]
-> [Azure Veri Gezgini veri alımı](ingest-data-overview.md)
+* [Azure Veri Gezgini veri](ingest-data-overview.md) alımı, alım yöntemleri hakkında daha fazla bilgi edinmekdedir.
+* [Hızlı Başlangıç: Azure Veri Gezgini](web-query-data.md) Web Kullanıcı arabirimindeki verileri sorgulama.
+* [Sorguları](write-queries.md) kusto sorgu diliyle yazın.

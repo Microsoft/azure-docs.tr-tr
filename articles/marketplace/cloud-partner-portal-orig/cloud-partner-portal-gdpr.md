@@ -1,46 +1,47 @@
 ---
-title: GDPR uyumluluğu | Azure Market
-description: Bulut iş ortağı portalı ve GDPR.
+title: GDPR uyumluluğu | Azure Marketi
+description: Bulut İş Ortağı Portalı ve GDPR.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 221f559dde2017c9b5d13dd4e06a140a6bcb5e2e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bc43a6cb3c30638d8c3904d7ca5b004e0905f1d2
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935414"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824302"
 ---
-<a name="cloud-partner-portal-gdpr-compliance"></a>Bulut iş ortağı portalı GDPR uyumluluğu
+<a name="cloud-partner-portal-gdpr-compliance"></a>Bulut İş Ortağı Portalı GDPR uyumluluğu
 ====================================
 
-[Genel veri koruma yönetmeliği (GDPR)](https://ec.europa.eu/justice/data-protection/reform/index_en.htm)bir Avrupa Birliği (AB) veri koruma ve gizlilik yasadır. GDPR şirketler kurallarını uygular, devlet kurumları, gütmeyen ve mal ve hizmet, AB veya kişilere teklif diğer kuruluşlar AB vatandaşlar için bağlı verileri toplayıp analiz.
+[Genel veri koruma yönetmeliği (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection/reform_en/) , Avrupa BIRLIĞI (AB) veri koruma ve gizlilik yasaları olur. GDPR, şirketler, devlet kurumları, kar amacı gütmeyen ve AB 'daki kişilere mal ve hizmet sunan ya da AB saklarına bağlı verileri toplayıp çözümleyen diğer kuruluşların kurallarını uygular.
 
-Bulut iş ortağı portalı, veri ve bu verileri korumak için kullanılan güvenlik önlemlerini müşteri işlemesi ilgili ayrıntılı bilgileri sağlar. Bu bilgiler, ürün içi deneyimler erişilebilir.
+Bulut İş Ortağı Portalı, müşteri verilerinin işlenmesiyle ilgili ayrıntılı bilgiler ve bu verileri korumak için kullanılan güvenlik ölçümlerini sağlar. Bu bilgilere ürün içi deneyimler aracılığıyla erişilebilir.
 
 <a name="discover"></a>Keşif
 --------
 
-Bulut iş ortağı portalı, tüm verilerinize ilişkin kullanıcılar sekmesinde erişmenizi sağlar. Kişisel verileriniz var. tanımlayabilirsiniz. Kullanıcı ekleme/kaldırma konusunda bilgi almak için bkz: bizim [belgeleri](./cloud-partner-portal-manage-users.md).
+Bulut İş Ortağı Portalı, kullanıcılar sekmesindeki tüm verilerinize erişim sağlar. Kişisel verilerinizi burada belirleyebilirsiniz. Kullanıcı ekleme/kaldırma hakkında bilgi edinmek için [belgelerimizi](./cloud-partner-portal-manage-users.md)inceleyin.
 
-<a name="manage"></a>Yönetme
+<a name="manage"></a>Yönet
 ------
 
-Kullanıcı hesabınıza ilişkin kullanıcılar sekmesinde delete tuşuna basarak kişisel verilerinizi yönetin. Rolleri, sahip olduğumuz bir **sahibi** ve **katkıda bulunan** her belirli bir kullanıcıya atanabilir ve her ikisi de atanmış/kopyalanan/güncelleştirilen/silinen olabilir.
+Kullanıcılar sekmesindeki kullanıcı hesabınızda Sil ' i tıklatarak kişisel verilerinizi yönetebilirsiniz. Her bir kullanıcıya atanabilecek ve her ikisi de atanabilir/kopyalanabilir/güncelleştirilebilen/silinen bir **sahip** ve **katkıda bulunan** rollerdir.
 
-<a name="consent"></a>Onayı
+<a name="consent"></a>İzniniz
 -------
 
-Bulut iş ortağı portalı onay yönetmek için bir yayımcı her zaman başlangıçta gösterilir sözleşmesi sözleşme, Microsoft ile yayımcı olması için kabul etmek ihtiyacınız. Yayımcı anlaşma onaylamazsanız, biz publisher'ın Microsoft ile satabilmek olmaması kısıtlayın.
+Bulut İş Ortağı Portalı izin yönetiminde, her zaman başlangıçta Microsoft ile yayımcı olması için kabul etmeniz gereken bir Yayımcı Sözleşmesi sözleşmesi gösterilir. Yayımcı Sözleşmesi sözleşmesini kabul etmediyseniz, yayımcıyı Microsoft ile satılayamaz şekilde kısıtlarız.
 
 <a name="related-links"></a>İlgili bağlantılar
 -------------
 
--   [Microsoft, müşterilerin gönderir, nasıl ve nerede\' coğrafi konumları da dahil olmak üzere verileri](https://www.microsoft.com/trustcenter/privacy/where-your-data-is-located)
--   [Müşteriler erişimi olan alt yüklenicilerin\' veri](https://aka.ms/Online_Serv_Subcontractor_List)
--   [Microsoft tarafından yönetilen Azure güvenlik önlemleri hakkında ayrıntılar](https://download.microsoft.com/download/1/6/0/160216AA-8445-480B-B60F-5C8EC8067FCA/WindowsAzure-SecurityPrivacyCompliance.pdf)
--   [Microsoft ile ilgili ayrıntıları\'un gizlilik işlemi, tüm Azure Hizmetleri dahil olmak üzere tüm ürünler için gerçekleştirilen gözden geçirme](https://www.microsoft.com/trustcenter/privacy/we-set-and-adhere-to-stringent-standards)
--   [Hangi veri Microsoft'un topladığı ve müşteri sistemlerine ve son kullanıcılara işlemlerden](https://www.microsoft.com/trustcenter/privacy/you-own-your-data)
+-   [Microsoft, coğrafi konumlar dahil olmak üzere müşterileri\' verileri nasıl gönderir](https://www.microsoft.com/trustcenter/privacy/where-your-data-is-located)
+-   [Müşterilere\' verilerine erişimi olan alt yükleniciler](https://aka.ms/Online_Serv_Subcontractor_List)
+-   [Microsoft tarafından yönetilen Azure Güvenlik önlemleri hakkındaki ayrıntılar](https://download.microsoft.com/download/1/6/0/160216AA-8445-480B-B60F-5C8EC8067FCA/WindowsAzure-SecurityPrivacyCompliance.pdf)
+-   [Tüm Azure hizmetleri de dahil olmak üzere tüm ürünlerin gerçekleştirildiği Microsoft\'s gizlilik İncelemeleri süreci ile ilgili ayrıntılar](https://www.microsoft.com/trustcenter/privacy/we-set-and-adhere-to-stringent-standards)
+-   [Microsoft 'un müşteri sistemleri ve son kullanıcılar tarafından topladığı ve işlediği veriler](https://www.microsoft.com/trustcenter/privacy/you-own-your-data)

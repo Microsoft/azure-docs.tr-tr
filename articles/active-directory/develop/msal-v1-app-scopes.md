@@ -1,37 +1,37 @@
 ---
-title: V1.0 uygulama (Microsoft kimlik doğrulama kitaplığı) için kapsamları | Azure
-description: Microsoft Authentication Library (MSAL) kullanarak bir v1.0 uygulama için kapsamları hakkında bilgi edinin.
+title: Bir v 1.0 uygulaması için kapsamlar (Microsoft kimlik doğrulama kitaplığı) | Mavisi
+description: Microsoft kimlik doğrulama kitaplığı 'nı (MSAL) kullanarak bir v 1.0 uygulaması için kapsamlar hakkında bilgi edinin.
 services: active-directory
 documentationcenter: dev-center-name
-author: rwike77
+author: TylerMSFT
 manager: CelesteDG
 editor: ''
 ms.service: active-directory
 ms.subservice: develop
 ms.devlang: na
-ms.topic: overview
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 04/23/2019
-ms.author: ryanwi
+ms.author: twhitney
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3e43bc245a5908ba1bf91e7b4bee6df2f5cfc618
-ms.sourcegitcommit: 6cb4dd784dd5a6c72edaff56cf6bcdcd8c579ee7
+ms.openlocfilehash: 0590614e1c1bc7331246e76fa26a6567a05324e6
+ms.sourcegitcommit: 040abc24f031ac9d4d44dbdd832e5d99b34a8c61
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67514357"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69532345"
 ---
-# <a name="scopes-for-a-web-api-accepting-v10-tokens"></a>V1.0 belirteçleri kabul eden bir Web API'si için kapsamları
+# <a name="scopes-for-a-web-api-accepting-v10-tokens"></a>V 1.0 belirteçlerini kabul eden bir Web API 'SI için kapsamlar
 
-OAuth2, istemci uygulamaları için bir Azure AD geliştiricilerin (v1.0) web API (kaynak) uygulamasının sunan izin kapsamları izinlerdir. Bu izin kapsamları, onay işlemi sırasında istemci uygulamalara verilebilir. Bölümüne bakın `oauth2Permissions` içinde [Azure Active Directory Uygulama bildirimi başvurusu](reference-app-manifest.md#manifest-reference).
+OAuth2 izinleri, bir Azure AD for Developers (v 1.0) Web API (kaynak) uygulamasının istemci uygulamalarına sunduğu izin kapsamlardır. Bu izin kapsamları, izin sırasında istemci uygulamalarına verilebilir. `oauth2Permissions` [Azure Active Directory uygulama bildirimi başvurusunda](reference-app-manifest.md#manifest-reference)hakkında bölümüne bakın.
 
-## <a name="scopes-to-request-access-to-specific-oauth2-permissions-of-a-v10-application"></a>Belirli OAuth2 izinleri v1.0 uygulamanın erişim istemek için kapsamları
-V1.0 uygulamasının belirli kapsamlarının belirteçlerini almak istiyorsanız (örneğin https olduğunda Azure AD graph:\//graph.windows.net), istenen bir OAuth2 iznine sahip bir istenen kaynak tanımlayıcısı birleştirerek kapsamlar oluşturmak ihtiyacınız Bu kaynak için.
+## <a name="scopes-to-request-access-to-specific-oauth2-permissions-of-a-v10-application"></a>Bir v 1.0 uygulamasının belirli OAuth2 izinlerine erişim istemek için kapsamlar
+Bir v 1.0 uygulamasının belirli kapsamları için belirteçler almak istiyorsanız (örneğin, https:\//Graph.Windows.net), istenen bir kaynak tanımlayıcısını istenen bir OAuth2 izniyle birleştirerek kapsamlar oluşturmanız gerekir Bu kaynak için.
 
-Örneğin, uygulama kimliği URI'SİNİN olduğu v1.0 web API'si kullanıcı adına erişim için `ResourceId`:
+Örneğin, Kullanıcı adına, uygulama KIMLIĞI URI 'sinin `ResourceId`bulunduğu bir v 1.0 Web API 'sine erişmek için:
 
 ```csharp
 var scopes = new [] {  ResourceId+"/user_impersonation"};
@@ -41,7 +41,7 @@ var scopes = new [] {  ResourceId+"/user_impersonation"};
 var scopes = [ ResourceId + "/user_impersonation"];
 ```
 
-Okuma ve yazma MSAL.NET Azure Azure AD graph API'sini kullanarak Active Directory ile istiyorsanız (https:\//graph.windows.net/), kapsamları aşağıdaki gibi bir liste oluşturursunuz:
+Azure AD Graph API 'si (https:\//Graph.Windows.net/) kullanarak msal.net Azure Active Directory ile okumak ve yazmak isterseniz, aşağıdaki gibi kapsamların bir listesini oluşturursunuz:
 
 ```csharp
 string ResourceId = "https://graph.windows.net/";
@@ -53,7 +53,7 @@ var ResourceId = "https://graph.windows.net/";
 var scopes = [ ResourceId + "Directory.Read", ResourceID + "Directory.Write"];
 ```
 
-Azure Resource Manager API'si için karşılık gelen kapsam yazmak istiyorsanız (https:\//management.core.windows.net/), aşağıdaki kapsamın (Not iki eğik çizgi) istemeniz gerekir:
+Azure Resource Manager API 'sine (https:\//Management.Core.Windows.net/) karşılık gelen kapsamı yazmak isterseniz, aşağıdaki kapsamı istemeniz gerekir (iki eğik çizgi).
 
 ```csharp
 var scopes = new[] {"https://management.core.windows.net//user_impersonation"};
@@ -63,16 +63,16 @@ var result = await app.AcquireTokenInteractive(scopes).ExecuteAsync();
 ```
 
 > [!NOTE]
-> Azure Resource Manager API'si bir eğik çizgi, hedef kitle talebinin (aud) bekler ve ardından kapsamı API addan ayırmak için bir eğik çizgi yoktur çünkü iki eğik çizgi kullanmanız gerekir.
+> Azure Resource Manager API 'SI, hedef kitle talebinde (AUD) bir eğik çizgi beklediği için iki eğik çizgi kullanmanız gerekir ve ardından API adını kapsamdan ayırmak için bir eğik çizgi vardır.
 
-Azure AD tarafından kullanılan mantıksal aşağıda verilmiştir:
+Azure AD tarafından kullanılan mantık şunlardır:
 
-- Bir v1.0 erişim belirteci (tek olası) aud ile ADAL (v1.0) uç noktası için kaynak =
-- MSAL aud v2.0 belirteç kabul eden bir kaynak için bir erişim belirteci isteyen (Microsoft kimlik Platformu (v2.0) uç noktası) için kaynak =. Uygulama Kimliği
-- Azure AD, bir erişim belirteci (yukarıdaki söz konusu olduğu) v1.0 bir erişim belirteci kabul eden bir kaynak için soran MSAL için (v2.0 uç noktası), son eğik çizgiden önce her şeyi alma ve kaynak tanımlayıcısı kullanılarak istenen hedef istenen kapsamından ayrıştırır. Bu nedenle, https:\//database.windows.net hedef kitlesine bekliyor "https:\//database.windows.net/", istek bir kapsam gerekir "https:\//database.windows.net//.default". Ayrıca bkz. GitHub sorunu [#747: Kaynak URL'nin sonunda eğik çizgi atlanırsa, hangi sql kimlik doğrulama hatası nedeniyle](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/issues/747).
+- Bir v 1.0 erişim belirtecine sahip ADAL (v 1.0) uç noktası (tek olası), AUD = kaynak
+- MSAL (Microsoft Identity platform (v 2.0) uç noktası) için, v 2.0 belirteçleri, AUD = kaynağı kabul eden bir kaynak için erişim belirteci soran bir. AppID
+- MSAL (v 2.0 uç noktası) için, bir v 1.0 erişim belirtecini kabul eden bir kaynak için erişim belirteci isteyen (Yukarıdaki durum), Azure AD, son eğik çizgiden önce her şeyi alarak ve bunu kaynak tanımlayıcısı olarak kullanarak istenen kapsamdaki hedef kitleyi ayrıştırır. Bu nedenle, https\/:/Database.Windows.net "https:\//Database.Windows.net/" kitlesini beklediğinde, "https:\//Database.Windows.net//.default" kapsamını istemeniz gerekir. Ayrıca bkz. GitHub [sorunu #747: Kaynak URL 'sinin sondaki eğik çizgi gözardı edilir ve bu da SQL kimlik](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/issues/747)doğrulama hatasına neden olur.
 
-## <a name="scopes-to-request-access-to-all-the-permissions-of-a-v10-application"></a>V1.0 uygulamasının tüm izinleri erişim istemek için kapsamları
-V1.0 uygulamanın statik tüm kapsamlar için bir belirteç almak istiyorsanız, ".default" uygulama kimliği URI'si API ekleyin:
+## <a name="scopes-to-request-access-to-all-the-permissions-of-a-v10-application"></a>Bir v 1.0 uygulamasının tüm izinlerine erişim istemek için kapsamlar
+Bir v 1.0 uygulamasının tüm statik kapsamları için bir belirteç almak istiyorsanız, API 'nin uygulama KIMLIĞI URI 'sine ". default" ekleyin:
 
 ```csharp
 ResourceId = "someAppIDURI";
@@ -84,5 +84,5 @@ var ResourceId = "someAppIDURI";
 var scopes = [ ResourceId + "/.default"];
 ```
 
-## <a name="scopes-to-request-for-client-credential-flow--daemon-app"></a>Kapsamlar için istemci istemek için kimlik bilgisi akış / daemon uygulama
-Söz konusu olduğunda istemci kimlik bilgileri akışı, geçirilecek kapsamını da olacaktır `/.default`. Bu Azure AD'ye söyler: "Yönetici uygulama kaydında seçtiği tüm uygulama düzeyinde izinleri.
+## <a name="scopes-to-request-for-client-credential-flow--daemon-app"></a>İstemci kimlik bilgisi akışı/Daemon uygulaması için istek yapılacak kapsamlar
+İstemci kimlik bilgileri akışı durumunda geçirilecek kapsam de olur `/.default`. Bu, Azure AD 'ye ("yöneticinin uygulamanın kaydında sahip olduğu tüm uygulama düzeyindeki izinleri) söyler.

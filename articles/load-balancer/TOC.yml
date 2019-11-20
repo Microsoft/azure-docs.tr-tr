@@ -18,7 +18,7 @@
       href: quickstart-load-balancer-standard-public-cli.md
     - name: Standard Load Balancer oluşturma - Azure PowerShell
       href: quickstart-create-standard-load-balancer-powershell.md
-    - name: Standart Load Balancer - Azure Resource Manager şablonu oluşturma
+    - name: Standart Load Balancer oluşturma - şablon
       displayName: ARM
       href: quickstart-load-balancer-standard-public-template.md
 - name: Öğreticiler
@@ -61,6 +61,8 @@
       href: load-balancer-standard-availability-zones.md
     - name: Standard Load Balancer ölçümleri ve tanılamaları
       href: load-balancer-standard-diagnostics.md
+    - name: Yerleşik güvenlik denetimleri
+      href: load-balancer-security-controls.md
 - name: Nasıl yapılır
   items:
     - name: 'Bölgesel olarak yedekli, genel bir Standard Load Balancer oluşturma'
@@ -82,7 +84,11 @@
     - name: Bir bölge içerisindeki VM’lerin yükünü dengeleme (CLI)
       href: load-balancer-standard-public-zonal-cli.md
     - name: Giden kuralları yapılandırma
-      href: configure-load-balancer-outbound-cli.md
+      items:
+        - name: Giden kurallarını yapılandırma - CLI
+          href: configure-load-balancer-outbound-cli.md
+        - name: Giden kurallarını yapılandırma - PowerShell
+          href: configure-load-balancer-outbound-powershell.md
     - name: REST API kullanarak Azure Load Balancer oluşturma
       href: create-load-balancer-rest-api.md
     - name: Basic Load Balancer oluşturma (Şablon)
@@ -121,31 +127,20 @@
       href: load-balancer-query-metrics-rest-api.md
     - name: İç Load Balancer için Yüksek Kullanılabilirliğe Sahip Bağlantı Noktalarını Yapılandırma
       href: load-balancer-configure-ha-ports.md
+    - name: Bölgeler arasında taşıma
+      items:
+        - name: Dış yük dengeleyici - Portal
+          href: move-across-regions-external-load-balancer-portal.md
+        - name: Dış yük dengeleyici - PowerShell
+          href: move-across-regions-external-load-balancer-powershell.md
+        - name: İç yük dengeleyici - Portal
+          href: move-across-regions-internal-load-balancer-portal.md
+        - name: İç yük dengeleyici - PowerShell
+          href: move-across-regions-internal-load-balancer-powershell.md
     - name: Sorun giderme
       items:
         - name: Azure Load Balancer sorunlarını giderme
           href: load-balancer-troubleshoot.md
-    - name: Klasik dağıtım modeli makaleleri
-      items:
-        - name: Giden bağlantılar (klasik)
-          href: load-balancer-outbound-connections-classic.md
-        - name: Bulut hizmeti için birden çok VIP yapılandırma
-          href: load-balancer-multivip.md
-          items:
-            - name: Cloud Services için iç Load Balancer yapılandırma
-              href: load-balancer-get-started-ilb-classic-cloud.md
-              items:
-                - name: Cloud Services için iç Load Balancer yapılandırma (PowerShell)
-                  href: load-balancer-get-started-ilb-classic-ps.md
-                - name: Cloud Services için iç Load Balancer yapılandırma (CLI)
-                  href: load-balancer-get-started-ilb-classic-cli.md
-            - name: Genel Load Balancer’ı yapılandırma (Klasik PowerShell)
-              href: load-balancer-get-started-internet-classic-ps.md
-              items:
-                - name: Genel Load Balancer yapılandırma (Klasik Bulut)
-                  href: load-balancer-get-started-internet-classic-cloud.md
-                - name: Genel Load Balancer yapılandırma (Klasik CLI)
-                  href: load-balancer-get-started-internet-classic-cli.md
 - name: Başvuru
   items:
     - name: Kod örnekleri

@@ -1,5 +1,5 @@
 ---
-title: "Devreleri Klasikten Resource Manager'a - ExpressRoute taşıyın: PowerShell: Azure | Microsoft Docs"
+title: 'Azure ExpressRoute: klasik devreleri Kaynak Yöneticisi taşıyın'
 description: Bu sayfa, klasik bir bağlantı hattı PowerShell kullanılarak Resource Manager dağıtım modelinde taşımayı açıklar.
 services: expressroute
 author: ganesr
@@ -7,13 +7,12 @@ ms.service: expressroute
 ms.topic: conceptual
 ms.date: 02/25/2019
 ms.author: cherylmc
-ms.custom: seodec18
-ms.openlocfilehash: 11a84d4ced3232102d262352b84abe1f813e2406
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4e49a3bc803733f5e78207fa3573c93395924d6a
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60365208"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74080165"
 ---
 # <a name="move-expressroute-circuits-from-classic-to-resource-manager-deployment-model-using-powershell"></a>PowerShell kullanılarak Resource Manager dağıtım modelinde ExpressRoute devreleri Klasikten Taşı
 
@@ -21,9 +20,9 @@ Bir ExpressRoute bağlantı hattı Klasik ve Resource Manager dağıtım modelle
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
-* Hem Klasik hem de Az Azure PowerShell modüllerini yerel olarak bilgisayarınızda yüklü olduğunu doğrulayın. Daha fazla bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/overview).
+* Bilgisayarınızda hem klasik hem de az Azure PowerShell modüllerini yüklediğinizi doğrulayın. Daha fazla bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/overview).
 * Geçirdiğinizden emin emin [önkoşulları](expressroute-prerequisites.md), [yönlendirme gereksinimleri](expressroute-routing.md), ve [iş akışları](expressroute-workflows.md) yapılandırmaya başlamadan önce.
 * Altında sağlanan bilgileri gözden [bir ExpressRoute bağlantı hattını Klasikten Resource Manager'a taşıma](expressroute-move.md). Tam olarak sınırlar ve sınırlamalar anladığınızdan emin olun.
 * Bağlantı hattı Klasik dağıtım modelinde tam olarak işlevsel olduğunu doğrulayın.
@@ -60,7 +59,7 @@ Azure Klasik ortamı için oturum açın ve hizmet anahtarı toplayın.
    Get-AzureDedicatedCircuit
    ```
 
-### <a name="step-2-sign-in-and-create-a-resource-group"></a>2\. adım: Oturum açma ve bir kaynak grubu oluşturma
+### <a name="step-2-sign-in-and-create-a-resource-group"></a>2\. adım: Oturum açın ve bir kaynak grubu oluşturun
 
 Resource Manager ortamı için oturum açın ve yeni bir kaynak grubu oluşturun.
 
@@ -82,7 +81,7 @@ Resource Manager ortamı için oturum açın ve yeni bir kaynak grubu oluşturun
    New-AzResourceGroup -Name "DemoRG" -Location "West US"
    ```
 
-### <a name="step-3-move-the-expressroute-circuit-to-the-resource-manager-deployment-model"></a>3\. adım: ExpressRoute bağlantı hattı Resource Manager dağıtım modeline taşıma
+### <a name="step-3-move-the-expressroute-circuit-to-the-resource-manager-deployment-model"></a>3\. adım: ExpressRoute bağlantı hattı Resource Manager dağıtım modeline taşıma.
 
 ExpressRoute bağlantı hattı Klasik dağıtım modelinden Resource Manager dağıtım modeline taşıma artık hazırsınız. Devam etmeden önce sağlanan bilgileri gözden geçirin [bir ExpressRoute bağlantı hattını Klasikten Resource Manager dağıtım modeline taşıma](expressroute-move.md).
 
@@ -92,7 +91,7 @@ Bağlantı hattınız taşımak için değiştirin ve aşağıdaki kod parçacı
 Move-AzExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "DemoRG" -Location "West US" -ServiceKey "<Service-key>"
 ```
 
-Klasik modda bir bölgeye bağlı kavramı bir ExpressRoute bağlantı hattı yok. Ancak, Kaynak Yöneticisi'nde, her kaynak bir Azure bölgesine eşlenmesi gerekir. Taşıma AzExpressRouteCircuit cmdlet'e belirtilen bölge teknik olarak herhangi bir bölgeyi olabilir. Kurumsal amaçlarla yakından eşleme konumunuzu temsil eden bir bölge seçin isteyebilirsiniz.
+Klasik modda bir bölgeye bağlı kavramı bir ExpressRoute bağlantı hattı yok. Ancak, Kaynak Yöneticisi'nde, her kaynak bir Azure bölgesine eşlenmesi gerekir. Move-Azexpressroutedevresi cmdlet 'inde belirtilen bölge Teknik olarak herhangi bir bölge olabilir. Kurumsal amaçlarla yakından eşleme konumunuzu temsil eden bir bölge seçin isteyebilirsiniz.
 
 > [!NOTE]
 > Taşıma tamamlandıktan sonra önceki cmdlet'inde listelenen yeni adı kaynak ele almak için kullanılır. Bağlantı hattı temelde yeniden adlandırılacak.

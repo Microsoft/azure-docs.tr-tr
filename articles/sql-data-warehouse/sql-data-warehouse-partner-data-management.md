@@ -1,6 +1,6 @@
 ---
-title: SQL veri ambarı veri yönetimi iş ortakları | Microsoft Docs
-description: Üçüncü taraf veri yönetimi iş ortakları ile SQL veri ambarı destekleyen çözümler listeler.
+title: Veri yönetimi iş ortakları
+description: Azure SQL veri ambarı 'nı destekleyen çözümlerle üçüncü taraf veri yönetimi iş ortaklarının listesi.
 services: sql-data-warehouse
 author: mabasile-MSFT
 manager: craigg
@@ -10,27 +10,28 @@ ms.subservice: consume
 ms.date: 04/17/2018
 ms.author: mabasile
 ms.reviewer: igorstan
-ms.openlocfilehash: 98f581eca893fc3f0cf2eae12fdcffbe0440bdd7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: b26d81a125cd64987a9725d88b2f3fcadbdb19ac
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65873690"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685593"
 ---
 # <a name="sql-data-warehouse-data-management-partners"></a>SQL veri ambarı veri yönetimi iş ortakları
-Veri ambarı çözümünüzü oluşturmak için çok çeşitli sektör lideri araçları seçin. Bu makalede, Microsoft iş ortağı şirketlerden veri yönetimi araçları ve Azure SQL veri ambarı destek çözümleriyle vurgulanır.
+Veri ambarı çözümünüzü oluşturmak için çok çeşitli sektör lideri araçlardan birini seçin. Bu makalede, Azure SQL veri ambarı 'nı destekleyen veri yönetimi araçları ve çözümleri ile Microsoft iş ortağı şirketleri vurgulanmaktadır.
 
-## <a name="data-management-partners"></a>Veri Yönetimi iş ortakları
+## <a name="data-management-partners"></a>Veri yönetimi iş ortakları
 | Partner | Açıklama | Web sitesi/ürün bağlantısı |
 | ------- | ----------- | -------------------- |
-| ![Coffing veri ambarı][1] |**Coffing veri ambarı**<br>Coffing veri ambarlama, Nexus Chameleon, 10 yıl tasarım sistemlerinin sorgulama için adanmış bir araç sağlar. Nexus, SQL veri ambarı için bir sorgu araç olarak kullanılabilir. Şirket içinde sorgulamak ve farklı platformlar arasında bulut bilgisayarları ve verileri birleştirme için nexus kullanın. Noktası-Click-rapor! |[Ürün sayfası][coffing_website]<br> |
-| ![Inbrein][2] |**Inbrein MicroERD**<br>Inbrein MicroERD hassas veri modeli oluşturma, veri yedekliği azaltmak, verimliliği artırmak ve standartları gözlemlemek için ihtiyacınız olan araçları sağlar. Kapsamlı kullanıcı deneyimleri temel geliştirilmiştir, kullanıcı Arabirimi kullanarak bir Modelleyicisi DB modeller üzerinde kolayca ve uygun şekilde çalışabilir. MicroERD yeni ve geliştirilmiş işlevleri istemi işlevsel iyileştirmeler ve Güncelleştirmeler aracılığıyla sürekli olarak yararlanabilirsiniz. |[Ürün sayfası][inbrein_website]<br> |
-| ![Infolibrarian][3] |**Infolibrarian (meta veri yönetim sunucusu)**<br>InfoLibrarian kataloglar, depolar ve veri yönetimi, anahtar sorunlu noktaları çözmenize yardımcı olması için meta verileri yönetir. Ayrıca, meta veri yönetimi, veri yönetimi ve varlık yönetimi yazılım çözümleri, Araçlar ve teknolojiler kümelerinden meta veri yayımlama ve yönetme için Infolibrarian sağlar. |[Ürün sayfası][infolibrarian_website]<br> [Azure Market][infolibrarian_marketplace]<br> |
-| ![Redpoint genel][4] |**RedPoint veri yönetimi**<br>Pazarlamacılar, tüm verilerini sürücü arası kanal müşteri katılımı gerçekleştirirken yapılandırılmış ve yapılandırılmamış veri yönetimi uygulamak RedPoint veri yönetimi sağlar. Azure SQL veri ambarı ve RedPoint avantajlarından yararlanarak günümüzün omni kanal müşteri katılım için gerekli hyper-kişiselleştirilmiş ve bağlamsal etkileşimleri sunmak için yapılandırılmış ve yapılandırılmamış veri değerini en üst düzeye çıkarabilirsiniz. Sürükle ve bırak arabirimi tasarlama ve yürütülen veri yönetimi işlemlerini kolay hale getirir. |[Ürün sayfası][redpoint_dm_website]<br> [Azure Market][redpoint_dm_marketplace]<br> |
-| ![Sentry bir][5] |**SentryOne (DW Sentry)**<br>Akıllı veri taşıma Pano ve olay takvimi ile her zaman tam olarak hangi iş yükünüz etkilenip bildiğiniz. Yükleme, yedekleme veya verilerinizi geri yüklemek için çalışan işleri ve sorguları görünürlük vermek için tasarlanmış, hiçbir zaman Azure kaynaklarınızı en iyi hale getirme hakkında endişe ediyorsunuz. |[Ürün sayfası][sql_sentry_website]<br>[Azure Market][sql_sentry_marketplace]<br> |
+| ![Coffing veri depolama][1] |**Coffing veri depolama**<br>Coffing veri ambarı, sistemleri sorgulamak için adanmış 10 yıllık tasarıma sahip bir araç olan Nexus Chameleon sağlar. Nexus, SQL veri ambarı için bir sorgu aracı olarak kullanılabilir. Şirket içi ve bulut bilgisayarları sorgulamak ve verileri farklı platformlarda birleştirmek için Nexus 'ı kullanın. Nokta tıklama-rapor! |[Ürün sayfası][coffing_website]<br> |
+| ![Inbrein][2] |**Inbrein mikro erd**<br>Inbrein mikro erd, kesin bir veri modeli oluşturmak, veri yedekliliği azaltmak, üretkenliği artırmak ve standartları gözlemlemek için ihtiyacınız olan araçları sağlar. Kapsamlı kullanıcı deneyimleri temelinde geliştirilen kullanıcı arabirimini kullanarak, bir Modelleyicisi DB modelleriyle kolayca ve rahat bir şekilde çalışabilir. İşlev geliştirmelerini ve güncelleştirmelerini sor aracılığıyla, mikro erd 'nin yeni ve geliştirilmiş işlevlerinin sürekli olarak keyfini çıkarabilirsiniz. |[Ürün sayfası][inbrein_website]<br> |
+| ![Infokütüphanarian][3] |**Infokütüphanarian (meta veri yönetim sunucusu)**<br>Infokütüphaneian Katalog, veri yönetimi önemli sorunlarındaki sorunları çözmenize yardımcı olacak meta verileri depolar, depolar ve yönetir. Ayrıca, ınfokütüphaneian, farklı bir araç ve teknoloji kümesinden meta verileri yönetmek ve yayımlamak için meta veri yönetimi, veri yönetimi ve varlık yönetimi yazılım çözümleri sağlar. |[Ürün sayfası][infolibrarian_website]<br> [Azure Market][infolibrarian_marketplace]<br> |
+| ![Redpoint küresel][4] |**RedPoint Veri Yönetimi**<br>RedPoint Veri Yönetimi, pazarlamacılar 'ın, yapılandırılmış ve yapılandırılmamış veri yönetimi gerçekleştirirken, platformlar arası müşteri katılımını tüm verilerini uygulamasına uygulamasını sağlar. Azure SQL veri ambarı ve RedPoint avantajlarından yararlanarak, günümüzün Omni-Channel müşteriyi sağlamak için gereken hiper kişiselleştirilmiş ve bağlamsal etkileşimleri sunmak üzere yapılandırılmış ve yapılandırılmamış verilerinizin değerini en üst düzeye çıkarabilirsiniz. Sürükle ve bırak arabirimi veri yönetimi süreçlerini kolay bir şekilde tasarlamayı ve yürütmeyi kolaylaştırır. |[Ürün sayfası][redpoint_dm_website]<br> [Azure Market][redpoint_dm_marketplace]<br> |
+| ![Sentry bir][5] |**Sentryone 'ın (DW Sentry)**<br>Akıllı veri taşıma panosu ve olay takvimi sayesinde, her zaman iş yükünüzü nelerin etkilediklerini tam olarak bilirsiniz. Verilerinizi yüklemek, yedeklemek veya geri yüklemek için kullandığınız sorgular ve işleriniz için görünürlük sağlamak üzere tasarlanan Azure kaynaklarınızdan en iyi şekilde karşılaşmanız gerekmez. |[Ürün sayfası][sql_sentry_website]<br>[Azure Market][sql_sentry_marketplace]<br> |
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-Diğer iş ortaklarıyla ilgili daha fazla bilgi için bkz. [iş zekası iş ortakları] [ bi_partners] ve [veri tümleştirme iş ortakları][di_partners].
+Diğer iş ortakları hakkında daha fazla bilgi edinmek için bkz. [Iş zekası ortakları][bi_partners] ve [veri tümleştirme iş ortakları][di_partners].
 
 <!--Image references-->
 

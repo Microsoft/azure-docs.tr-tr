@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dabe0ad1a556ee43f3e6cae0e1cd421db5cde0fd
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 1efb67df6c31a3b03fdc45fffc0564fb09e39faf
+ms.sourcegitcommit: 470041c681719df2d4ee9b81c9be6104befffcea
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60413976"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67853034"
 ---
 # <a name="tutorial-enabling-password-writeback"></a>Öğretici: Parola geri yazma özelliğini etkinleştirme
 
@@ -54,11 +54,11 @@ Parola geri yazma özelliğini Azure AD Connect'te etkinleştirme, sürecin yar�
 2. **Azure Active Directory**'ye göz adın, **Parola Sıfırlama**'ya tıklayın ve ardından **Şirket içi tümleştirme**'yi seçin.
 3. **Parolalar şirket içi dizininize geri yazılsın mı?** ayarını **Evet** olarak değiştirin.
 4. **Kullanıcıların parolalarını sıfırlamadan hesapların kilidini açmasına izin verilsin mi?** ayarını **Evet** olarak değiştirin.
-5. **Kaydet**’e tıklayın
+5. **Kaydet**'e tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide self servis parola sıfırlama için parola geri yazma özelliğini etkinleştirdiniz. Azure portal penceresini açık bırakın ve bir sonraki öğreticiye geçerek çözümü pilot gruba dağıtmadan önce self servis parola sıfırlama özelliğiyle ilgili ek ayarları yapılandırın.
 
 > [!div class="nextstepaction"]
-> [SSPR'yi Windows oturum açma ekranında etkinleştirme](tutorial-sspr-windows.md)
+> [Oturum açma sırasında risk değerlendirmesi yapma](tutorial-risk-based-sspr-mfa.md)

@@ -1,6 +1,6 @@
 ---
-title: Azure içeri/dışarı aktarma işi durumunu görüntüleme | Microsoft Docs
-description: İçeri/dışarı aktarma işleri ve kullanılan sürücüleri durumunu görüntüleme hakkında bilgi edinin.
+title: Azure Içeri/dışarı aktarma işlerinin durumunu görüntüleme | Microsoft Docs
+description: Içeri/dışarı aktarma işlerinin ve kullanılan sürücülerin durumunu görüntülemeyi öğrenin.
 author: alkohli
 services: storage
 ms.service: storage
@@ -8,76 +8,76 @@ ms.topic: article
 ms.date: 05/17/2018
 ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: 225164fe00f70839446f8b74155cd3959f745a49
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 222c893f06d9adf77f8a8124af18bc03c5d20bdf
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61478054"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72821433"
 ---
-# <a name="view-the-status-of-azure-importexport-jobs"></a>Azure içeri/dışarı aktarma işleri durumunu görüntüleme
+# <a name="view-the-status-of-azure-importexport-jobs"></a>Azure Içeri/dışarı aktarma işlerinin durumunu görüntüleme
 
-Bu makalede, Azure içeri/dışarı aktarma işleri için sürücü ve iş durumunun nasıl görüntüleneceği hakkında bilgi sağlar. Azure içeri/dışarı aktarma hizmeti, büyük miktarda veriyi Azure BLOB ve Azure dosyaları için güvenli bir şekilde aktarmak için kullanılır. Hizmet Ayrıca, Azure Blob depolama alanından verileri dışarı aktarmak için kullanılır.  
+Bu makalede, Azure Içeri/dışarı aktarma işlerinin sürücü ve iş durumunun nasıl görüntüleneceği hakkında bilgi verilmektedir. Azure Içeri/dışarı aktarma hizmeti, büyük miktarlarda verileri Azure Blob 'larına ve Azure dosyalarına güvenli bir şekilde aktarmak için kullanılır. Hizmet, verileri Azure Blob depolamadan dışarı aktarmak için de kullanılır.  
 
-## <a name="view-job-and-drive-status"></a>İşimin ve Sürücümün durumunu görüntüle
-İçeri aktarma işleminizin durumunu izlemek veya işleri, Azure portalından dışarı aktarın. Tıklayın **içeri/dışarı aktarma** sekmesi. İşlerinizi Listesi sayfasında görüntülenir.
+## <a name="view-job-and-drive-status"></a>İşi ve sürücü durumunu görüntüleme
+Azure portal içeri aktarma veya dışarı aktarma işlerinizin durumunu izleyebilirsiniz. **İçeri/dışarı aktarma** sekmesine tıklayın. İşlerin bir listesi sayfada görüntülenir.
 
-![Görünüm işi durumu](./media/storage-import-export-service/jobstate.png)
+![Iş durumunu görüntüle](./media/storage-import-export-service/jobstate.png)
 
 ## <a name="view-job-status"></a>İş durumunu görüntüleme
 
-Sürücünüzün işlemde olduğu bağlı olarak aşağıdaki iş durumları birini görürsünüz.
+Sürücünüzün işlemde bulunduğu yere bağlı olarak aşağıdaki iş durumlardan birini görürsünüz.
 
 | İş durumu | Açıklama |
 |:--- |:--- |
-| Oluşturma | Bir işi oluşturulduktan sonra durumuna ayarlanır **oluşturma**. İş çalışırken **oluşturma** durumunda, içeri/dışarı aktarma hizmeti sürücüleri sevk veri merkezine varsayar. Bir iş, iki sonra otomatik olarak hizmet tarafından silinir haftaya kadar bu durumda kalabilir. |
-| Sevkiyat | Paketiniz sevk sonra Azure portalında izleme bilgilerini güncelleştirmeniz gerekir.  Bu işi kapatır **sevkiyat** durumu. Kalan iş **sevkiyat** iki haftaya kadar durum. 
-| Alındı | Tüm sürücüleri, veri merkezinde alındıktan sonra iş durumu kümesine **alınan**. |
-| Aktarma | En az bir sürücüsü işleme başladıktan sonra iş durumu kümesine **aktarma**. Daha fazla bilgi için Git [sürücü durumları](#view-drive-status). |
-| Paketleme | Tüm sürücüleri işlemeyi tamamladıktan sonra iş yerleştirildi **paketleme** sürücüler size geri gönderilir ve kadar belirtin. |
-| Tamamlandı | Projenin hatasız tamamlanırsa tüm sürücüler size geri gönderilir ve sonra iş sonra ayarlanmış **tamamlandı**. İş otomatik olarak 90 gün sonra silinir **tamamlandı** durumu. |
-| Kapalı | İş işlenmesi sırasında herhangi bir hata varsa tüm sürücüler size geri gönderilir ve sonra iş kümesine **kapalı**. İş otomatik olarak 90 gün sonra silinir **kapalı** durumu. |
+| Oluşturma | Bir iş oluşturulduktan sonra, durumu **oluşturma**olarak ayarlanır. İş **oluşturuluyor** durumundaysa, Içeri/dışarı aktarma hizmeti, sürücülerin veri merkezine gönderilmediğinden varsayılmaktadır. Bir iş, iki hafta boyunca bu durumda kalabilir ve sonrasında hizmet tarafından otomatik olarak silinir. |
+| Servisinin | Paketinizi gönderdikten sonra, Azure portal izleme bilgilerini güncelleştirmeniz gerekir.  Bu işlem, işi **teslim** durumuna getirir. İş, en fazla iki hafta boyunca **Sevkiyat** durumunda kalır. 
+| Alındı | Tüm sürücüler veri merkezinde alındıktan sonra iş durumu **alındı**olarak ayarlanır. |
+| Aktarma | En az bir sürücü işlemeye başladıktan sonra, iş durumu **aktarma**olarak ayarlanır. Daha fazla bilgi için [Sürücü durumları](#view-drive-status)' na gidin. |
+| Paketleme | Tüm sürücüler işlemeyi tamamladıktan sonra, diskler size geri gönderilene kadar iş **paketleme** durumuna yerleştirilir. |
+| Tamamlandı | Tüm sürücüler size geri gönderildikten sonra, iş hatasız tamamlanırsa, iş **tamamlandı**olarak ayarlanır. İş, **tamamlandı** durumunda 90 gün sonra otomatik olarak silinir. |
+| kapandı | Tüm sürücüler size geri gönderildikten sonra, işin işlenmesi sırasında herhangi bir hata oluşursa iş **kapalı**olarak ayarlanır. İş, **kapalı** durumda 90 gün sonra otomatik olarak silinir. |
 
 ## <a name="view-drive-status"></a>Sürücü durumunu görüntüleme
 
-Aşağıdaki tabloda bir içeri veya dışarı aktarma işi ile geçiş ayrı ayrı bir sürücü yaşam döngüsünü açıklanmaktadır. Azure portalında bir işteki her bir sürücü geçerli durumunu görebilirsiniz.
+Aşağıdaki tabloda, bir içeri aktarma veya dışarı aktarma işi aracılığıyla geçiş yaparken tek bir sürücünün yaşam döngüsü açıklanmaktadır. Bir işteki her sürücünün geçerli durumu Azure portal görülür.
 
-Aşağıdaki tabloda, her bir iş sürücüsünde geçişine her durumunu açıklar.
+Aşağıdaki tabloda, bir işteki her bir sürücünün geçeme durumu açıklanmaktadır.
 
 | Sürücü durumu | Açıklama |
 |:--- |:--- |
-| Belirtilen | İçeri aktarma işi için Azure portalından iş oluşturulduğunda ilk sürücü için durumudur **belirtilen**. Sürücü yok iş oluşturulduğunda, belirtilen bir dışarı aktarma işi için ilk sürücü durumu olduğu **alınan**. |
-| Alındı | Sürücü geçiş **alınan** durum içeri aktarma işi için kargo şirketi öğesinden alınan sürücüleri içeri/dışarı aktarma hizmetini ne zaman işlediği. Bir dışarı aktarma işi için ilk sürücü durumudur **alınan** durumu. |
-| NeverReceived | Sürücü taşır **NeverReceived** durum paket için bir iş ulaşan ancak paket sürücü içermiyor. İki haftalık gönderim bilgilerinizi hizmet aldı, ancak paket henüz veri merkezinde edinildi değil beri çağrıldıysa, bir sürücü, ayrıca bu duruma taşır. |
-| Aktarma | Bir sürücü taşır **aktarma** durum verileri Azure Depolama'ya sürücüden aktarmak hizmet başladığı. |
-| Tamamlandı | Bir sürücü taşır **tamamlandı** durum zaman hizmeti herhangi bir hata ile tüm verileri başarıyla aktarıldı.
-| CompletedMoreInfo | Bir sürücü taşır **CompletedMoreInfo** durum hizmet bazı sorunlar ya da sürücüye veri kopyalarken zaman karşılaştı. Bilgiler, hataları, uyarıları veya BLOB'ları üzerine hakkında bilgilendirme iletileri ekleyebilirsiniz.
-| ShippedBack | Bir sürücü taşır **ShippedBack** geri dönüş adresi için veri merkezinden gönderildi, durumu. |
+| Belirtilir | İçeri aktarma işi için, iş Azure portal oluşturulduğunda, bir sürücü için ilk durum **belirtilir**. Bir dışarı aktarma işi için, iş oluşturulduğunda bir sürücü belirtilmediğinden, ilk sürücü durumu **alınır**. |
+| Alındı | Içeri/dışarı aktarma hizmeti bir içeri aktarma işi için sevkiyat şirketten alınan sürücüleri işlediğinde, sürücü **alındı** durumuna geçer. Bir dışarı aktarma işi için ilk sürücü durumu **alınan** durumudur. |
+| NeverReceived | Bir işin paketi ulaştığında, ancak paket sürücüyü içermiyorsa, sürücü **Neverreceived** durumuna gider. Ayrıca bir sürücü, hizmetin sevkiyat bilgilerini almasından bu yana iki hafta sonra da bu duruma gider, ancak paket henüz veri merkezinde gelmedi. |
+| Aktarma | Hizmet, sürücüden verileri Azure depolama 'ya aktarmaya başladığında bir sürücü **aktarma** durumuna gider. |
+| Tamamlandı | Hizmet, tüm verileri hatasız bir şekilde aktarmışsa, bir sürücü **tamamlandı** durumuna gider.
+| Completedınfo | Bir sürücü, verileri sürücüden ya da sürücüden kopyalarken bazı sorunlarla karşılaşıldığında, bir sürücü **Completedınfoınfo** durumuna gider. Bilgiler, Blobların üzerine yazma hakkında hata, uyarı veya bilgi iletileri içerebilir.
+| ShippedBack | Bir sürücü, veri merkezinden dönüş adresine geri gönderildiğinde **ShippedBack** durumuna gider. |
 
-Bu görüntü Azure portalından bir örnek iş sürücüsü durumunu gösterir:
+Azure portal bu görüntüde örnek bir işin sürücü durumu görüntülenir:
 
 ![Sürücü durumunu görüntüle](./media/storage-import-export-service/drivestate.png)
 
-Aşağıdaki tabloda, sürücü hata durumları ve her durum için gerçekleştirilen eylemleri açıklar.
+Aşağıdaki tabloda, her durum için sürücü hatası durumları ve gerçekleştirilen eylemler açıklanmaktadır.
 
-| Sürücü durumu | Olay | Çözüm / sonraki adım |
+| Sürücü durumu | Olay | Çözüm/sonraki adım |
 |:--- |:--- |:--- |
-| NeverReceived | Olarak işaretlenmiş bir sürücü **NeverReceived** (işin sevkiyat bir parçası olarak alınmadı çünkü) başka bir sevkiyat ulaşır. | Operasyon ekibinin sürücüye taşır **alınan**. |
-| Yok | Başka bir iş parçası olarak veri merkezinde herhangi bir iş parçası olmayan bir sürücüye ulaşır. | Sürücü, ek bir sürücü olarak işaretlenir ve özgün paket ile ilişkili iş tamamlandığında size geri döndürülür. |
+| NeverReceived | **Neverreceived** olarak işaretlenen bir sürücü (iş sevkiyatının bir parçası olarak alınmadığı için) başka bir sevkiyata ulaştı. | İşlemler ekibi, sürücüyü **alındı**olarak kaydırır. |
+| Yok | Herhangi bir işin parçası olmayan bir sürücü, veri merkezinde başka bir işin parçası olarak ulaşır. | Sürücü ek bir sürücü olarak işaretlenir ve özgün paketle ilişkili iş tamamlandığında size döndürülür. |
 
-## <a name="time-to-process-job"></a>İşleme işi süresi
-İçeri/dışarı aktarma işi işlemek için geçen süreyi gibi bir dizi etkene göre farklılık gösterir:
+## <a name="time-to-process-job"></a>İşi işleme süresi
+İçeri/dışarı aktarma işinin işlenmesi için gereken süre, şöyle bir dizi etkene göre farklılık gösterir:
 
--  Gönderim saati
--  Veri merkezinde yükleme
--  İş türü ve kopyalanan verilerin boyutu
--  Bir İşte disk sayısı. 
+-  Sevkiyat Zamanı
+-  Veri merkezinde yük
+-  Kopyalandığı verilerin iş türü ve boyutu
+-  Bir işteki disk sayısı. 
 
-İçeri/dışarı aktarma hizmeti, bir SLA yoktur, ancak hizmet kopyalama diskleri alındıktan sonra 7 ila 10 gün içinde tamamlanması üstlenmeye çalışır. Azure portalında gönderilen durum testlerine ek olarak, REST API'leri, iş ilerleme durumunu izlemek için kullanılabilir. Tamamlanma parametresinde [Listeleyemeyeceksiniz](/previous-versions/azure/dn529083(v=azure.100)) API işlem çağrısı yüzdesi kopyalama işinin ilerleme durumunu sağlar.
+İçeri/dışarı aktarma hizmeti bir SLA 'ya sahip değil, ancak hizmet, diskler alındıktan sonra 7 güne kadar kopyayı tamamlamaya çalışır. Azure portalında gönderilen duruma ek olarak, REST API 'Leri iş ilerlemesini izlemek için kullanılabilir. [Işleri Listele](/previous-versions/azure/dn529083(v=azure.100)) işlem API çağrısı ' nda tamamlanma yüzdesi parametresi, kopyalama ilerleme durumunu yüzdesini sağlar.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [WAImportExport Aracı'nı ayarlama](storage-import-export-tool-how-to.md)
+* [Waımportexport aracını ayarlama](storage-import-export-tool-how-to.md)
 * [AzCopy komut satırı yardımcı programıyla veri aktarma](storage-use-azcopy.md)
-* [Azure içeri dışarı aktarma REST API örneği](https://azure.microsoft.com/documentation/samples/storage-dotnet-import-export-job-management/)
+* [Azure Içeri aktarma dışarı aktarma REST API örneği](https://github.com/Azure-Samples/storage-dotnet-import-export-job-management/)

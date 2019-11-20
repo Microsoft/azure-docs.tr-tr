@@ -1,6 +1,6 @@
 ---
-title: Uzaktan izleme çözümü için kullanıcı Arabirimi - Azure bir sayfa ekleyin | Microsoft Docs
-description: Bu makalede, Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimi yeni bir sayfa ekleme işlemini göstermektedir.
+title: Uzaktan Izleme çözümü Kullanıcı arabirimine sayfa ekleme-Azure | Microsoft Docs
+description: Bu makalede, uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimine nasıl yeni bir sayfa ekleyebileceğiniz gösterilmektedir.
 author: dominicbetts
 manager: timlt
 ms.author: dobett
@@ -8,36 +8,36 @@ ms.service: iot-accelerators
 services: iot-accelerators
 ms.date: 10/02/2018
 ms.topic: conceptual
-ms.openlocfilehash: 95830cdffb232e16f9fbae51cfa11fbd18172c3c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ec0b9fbdfdb96317e1e7f6fe00384ba4f8c42bcc
+ms.sourcegitcommit: 6cff17b02b65388ac90ef3757bf04c6d8ed3db03
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61447089"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68607959"
 ---
-# <a name="add-a-custom-page-to-the-remote-monitoring-solution-accelerator-web-ui"></a>Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimine özel sayfa ekleme
+# <a name="add-a-custom-page-to-the-remote-monitoring-solution-accelerator-web-ui"></a>Uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimine özel bir sayfa ekleme
 
-Bu makalede, Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimi yeni bir sayfa ekleme işlemini göstermektedir. Bu makalede açıklanır:
+Bu makalede, uzaktan Izleme çözümü Hızlandırıcısı Web Kullanıcı arabirimine nasıl yeni bir sayfa ekleyebileceğiniz gösterilmektedir. Makalede şunları açıklanmaktadır:
 
-- Yerel geliştirme ortamı hazırlamayı öğrenin.
-- Yeni bir sayfa web kullanıcı Arabirimi ekleme.
+- Yerel bir geliştirme ortamı hazırlama.
+- Web Kullanıcı arabirimine yeni sayfa ekleme.
 
-Diğer nasıl yapılır kılavuzları, daha fazla özellik eklediğiniz sayfasına eklemek için bu senaryo genişletin.
+Diğer nasıl yapılır kılavuzlarında, eklediğiniz sayfaya daha fazla özellik eklemek için bu senaryo genişletilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Nasıl yapılır bu kılavuzdaki adımları tamamlamak için aşağıdaki yazılımların yerel geliştirme makinenizde yüklü gerekir:
+Bu nasıl yapılır kılavuzundaki adımları tamamlayabilmeniz için, yerel geliştirme makinenizde aşağıdaki yazılımların yüklü olması gerekir:
 
 - [Git](https://git-scm.com/downloads)
 - [Node.js](https://nodejs.org/download/)
 
-## <a name="prepare-a-local-development-environment-for-the-ui"></a>Kullanıcı Arabirimi için bir yerel geliştirme ortamınızı hazırlama
+## <a name="prepare-a-local-development-environment-for-the-ui"></a>Kullanıcı arabirimi için yerel bir geliştirme ortamı hazırlama
 
-Uzaktan izleme çözüm Hızlandırıcısını UI kod kullanılarak uygulanan [React](https://reactjs.org/) JavaScript çerçevesini. Kaynak kodunda bulabilirsiniz [Uzaktan izleme WebUI](https://github.com/Azure/pcs-remote-monitoring-webui) GitHub deposu.
+Uzaktan Izleme çözümü Hızlandırıcısı Kullanıcı arabirimi kodu, [tepki](https://reactjs.org/) verme JavaScript çerçevesi kullanılarak uygulanır. Kaynak kodunu [Uzaktan Izleme WebUI](https://github.com/Azure/pcs-remote-monitoring-webui) GitHub deposunda bulabilirsiniz.
 
-Ve kullanıcı arabirimi değişiklikleri test etmek için yerel geliştirme makinenizde çalıştırabilirsiniz. İsteğe bağlı olarak yerel kopya gerçek veya sanal cihazlarınızı etkileşim sağlamak için çözüm Hızlandırıcısını dağıtılan bir örneğini bağlanabilirsiniz.
+Kullanıcı arabiriminde değişiklikler yapmak ve bu değişiklikleri test etmek için yerel geliştirme makinenizde çalıştırabilirsiniz. İsteğe bağlı olarak, yerel kopya gerçek veya sanal cihazlarınızla etkileşime geçmesini sağlamak için çözüm hızlandırıcının dağıtılan bir örneğine bağlanabilir.
 
-Yerel geliştirme ortamınızı hazırlama için kopyalamak için Git kullanın [Uzaktan izleme WebUI](https://github.com/Azure/pcs-remote-monitoring-webui) deposunu yerel makinenize:
+Yerel geliştirme ortamınızı hazırlamak için git ' i kullanarak [Uzaktan Izleme WebUI](https://github.com/Azure/pcs-remote-monitoring-webui) deposunu yerel makinenize kopyalayın:
 
 ```cmd/sh
 git clone https://github.com/Azure/pcs-remote-monitoring-webui.git
@@ -45,43 +45,43 @@ git clone https://github.com/Azure/pcs-remote-monitoring-webui.git
 
 ## <a name="add-a-page"></a>Sayfa ekleme
 
-Web kullanıcı Arabirimine bir sayfa eklemek için sayfanın tanımlayan kaynak dosyaları ekleyin ve web kullanıcı Arabirimi yeni sayfa haberdar olmak için bazı mevcut dosyaları değiştirmek gerekir.
+Web Kullanıcı arabirimine bir sayfa eklemek için, sayfayı tanımlayan kaynak dosyaları eklemeniz ve mevcut bazı dosyaları değiştirerek Web Kullanıcı arabirimini yeni sayfanın farkında olması gerekir.
 
-### <a name="add-the-new-files-that-define-the-page"></a>Tanımlama sayfası yeni dosyaları Ekle
+### <a name="add-the-new-files-that-define-the-page"></a>Sayfayı tanımlayan yeni dosyaları ekleyin
 
-Başlamak, için **src/gözden geçirme/bileşenleri/sayfaları/basicPage** klasörü, basit bir sayfa tanımlama dört dosyaları içerir:
+Başlangıç yapmanız için, **src/izlenecek yol/bileşenler/sayfalar/basicpage** klasörü, basit bir sayfayı tanımlayan dört dosya içerir:
 
-**basicPage.container.js**
+**basicPage. Container. js**
 
 [!code-javascript[Page container source](~/remote-monitoring-webui/src/walkthrough/components/pages/basicPage/basicPage.container.js?name=container "Page container source")]
 
-**basicPage.js**
+**basicPage. js**
 
 [!code-javascript[Basic page](~/remote-monitoring-webui/src/walkthrough/components/pages/basicPage/basicPage.js?name=page "Basic page")]
 
-**basicPage.scss**
+**basicPage. SCSS**
 
 [!code-javascript[Page styling](~/remote-monitoring-webui/src/walkthrough/components/pages/basicPage/basicPage.scss?name=styles "Page styling")]
 
-**basicPage.test.js**
+**basicPage. test. js**
 
 [!code-javascript[Test code for basic page](~/remote-monitoring-webui/src/walkthrough/components/pages/basicPage/basicPage.test.js?name=test "Test code for basic page")]
 
-Yeni bir klasör oluşturun **src/bileşenleri/sayfaları/örnek** ve şu dört dosyaları içine kopyalayın.
+Yeni bir **src/Components/Pages/example** klasörü oluşturun ve bu dört dosyayı buna kopyalayın.
 
-### <a name="add-the-new-page-to-the-web-ui"></a>Web kullanıcı Arabirimine yeni sayfa Ekle
+### <a name="add-the-new-page-to-the-web-ui"></a>Yeni sayfayı Web Kullanıcı arabirimine ekleyin
 
-Web kullanıcı Arabirimi yeni sayfa eklemek, var olan dosyaları için aşağıdaki değişiklikleri yapın:
+Yeni sayfayı Web Kullanıcı arabirimine eklemek için, varolan dosyalarda aşağıdaki değişiklikleri yapın:
 
-1. Yeni sayfa kapsayıcıya Ekle **src/components/pages/index.js** dosyası:
+1. Yeni sayfa kapsayıcısını **src/Components/Pages/index. js** dosyasına ekleyin:
 
     ```js
     export * from './example/basicPage.container';
     ```
 
-1. (İsteğe bağlı)  Yeni sayfa için bir SVG simgesi ekleyin. Daha fazla bilgi için [webui/src/utilities/README.md](https://github.com/Azure/pcs-remote-monitoring-webui/blob/master/src/utilities/README.md). Mevcut bir SVG dosyasının kullanabilirsiniz.
+1. Seçim  Yeni sayfa için bir SVG simgesi ekleyin. Daha fazla bilgi için bkz. [WebUI/src/Utilities/Readme. MD](https://github.com/Azure/pcs-remote-monitoring-webui/blob/master/src/utilities/README.md). Varolan bir SVG dosyası kullanabilirsiniz.
 
-1. Sayfa adı çevirileri dosyasına ekleme **public/locales/en/translations.json**. Kullanıcı Arabirimi kullanan web [i18next](https://www.i18next.com/) uluslararası duruma getirme için.
+1. Sayfa adını, **genel/yerel ayarlar/en/Çeviriler. JSON**çeviri dosyasına ekleyin. Web Kullanıcı arabirimi Uluslararası hale getirme için [i18next](https://www.i18next.com/) kullanır.
 
     ```json
     "tabs": {
@@ -89,7 +89,7 @@ Web kullanıcı Arabirimi yeni sayfa eklemek, var olan dosyaları için aşağı
     },
     ```
 
-1. Açık **src/components/app.js** en üst düzey uygulama sayfası tanımlayan dosya. İçeri aktarmalar listesine yeni bir sayfa ekleyin:
+1. Üst düzey uygulama sayfasını tanımlayan **src/Components/App. js** dosyasını açın. Yeni sayfayı içeri aktarmalar listesine ekleyin:
 
     ```javascript
     // Page Components
@@ -99,7 +99,7 @@ Web kullanıcı Arabirimi yeni sayfa eklemek, var olan dosyaları için aşağı
     } from './pages';
     ```
 
-1. Aynı dosyada, yeni sayfaya ekleyin `pagesConfig` dizisi. Ayarlama `to` adres için rota, SVG simgesi ve daha önce eklediğiniz çevirileri başvurmak ve ayarlama `component` sayfanın kapsayıcıya:
+1. Aynı dosyada, yeni sayfayı `pagesConfig` diziye ekleyin. Yolun adresini ayarlayın, daha önce eklenen SVG simgesine ve çevirilerine başvurun ve öğesini sayfanın kapsayıcısına `component` ayarlayın: `to`
 
     ```js
     const pagesConfig = [
@@ -115,7 +115,7 @@ Web kullanıcı Arabirimi yeni sayfa eklemek, var olan dosyaları için aşağı
     ];
     ```
 
-1. Eklemek istediğiniz yeni içerik haritaları için `crumbsConfig` dizisi:
+1. `crumbsConfig` Diziye yeni bir içerik haritaları ekleyin:
 
     ```js
     const crumbsConfig = [
@@ -129,58 +129,58 @@ Web kullanıcı Arabirimi yeni sayfa eklemek, var olan dosyaları için aşağı
     ];
     ```
 
-    Bu örnek sayfası, yalnızca bir içerik haritası içerir, ancak bazı sayfalar daha fazla olabilir.
+    Bu örnek sayfada yalnızca bir içerik haritası vardır ancak bazı sayfalar daha fazla olabilir.
 
-Yaptığınız tüm değişiklikleri kaydedin. Web kullanıcı Arabirimi eklenen yeni sayfanız ile çalışmaya hazır.
+Yaptığınız tüm değişiklikleri kaydedin. Web Kullanıcı arabirimini yeni sayfanız eklenmiş olarak çalıştırmaya hazırsınız.
 
-### <a name="test-the-new-page"></a>Yeni sayfa test
+### <a name="test-the-new-page"></a>Yeni sayfayı test etme
 
-Bir komut isteminde yerel kopyanızı deposunun kök dizinine gidin ve gerekli kitaplıkları yükleyin ve web kullanıcı Arabirimi yerel olarak çalıştırmak için aşağıdaki komutları çalıştırın:
+Komut isteminde deponun yerel kopyasının köküne gidin ve gerekli kitaplıkları yüklemek ve Web Kullanıcı arabirimini yerel olarak çalıştırmak için aşağıdaki komutları çalıştırın:
 
 ```cmd/sh
 npm install
 npm start
 ```
 
-Önceki komutta kullanıcı Arabiriminde, yerel olarak çalışan [ http://localhost:3000/dashboard ](http://localhost:3000/dashboard).
+Önceki komut, Kullanıcı arabirimini ' de [http://localhost:3000/dashboard](http://localhost:3000/dashboard)yerel olarak çalıştırır.
 
-Çözüm Hızlandırıcısını dağıtılan bir örneğine yerel web kullanıcı Arabirimi örneğinizin bağlanmadan Panoda görüyorsunuz. Yeni sayfanız test yeteneği bu hataları etkilemez.
+Web Kullanıcı arabiriminin yerel örneğinizi Çözüm hızlandırıcının dağıtılan bir örneğine bağlamadan, panoda hatalar görürsünüz. Bu hatalar, yeni sayfanızı test etme yeteneğinizi etkilemez.
 
-Şimdi, sitenin yerel olarak çalışırken kod düzenleme ve UI'yi güncellemeye dinamik olarak web bakın.
+Artık, site yerel olarak çalışırken kodu düzenleyebilir ve Web Kullanıcı arabirimi güncelleştirmesini dinamik olarak görebilirsiniz.
 
-## <a name="optional-connect-to-deployed-instance"></a>[İsteğe bağlı] Dağıtılan bir sunucuya bağlanın
+## <a name="optional-connect-to-deployed-instance"></a>Seçim Dağıtılan örneğe Bağlan
 
-İsteğe bağlı olarak, Uzaktan izleme çözüm Hızlandırıcısını bulutta çalışan yerel web kullanıcı Arabirimi kopyası bağlanabilirsiniz:
+İsteğe bağlı olarak, Web Kullanıcı arabiriminin yerel çalışan kopyanızı buluttaki uzaktan Izleme çözümü hızlandırıcısına bağlayabilirsiniz:
 
-1. Dağıtım bir **temel** çözüm Hızlandırıcı kullanarak örneğini **bilgisayarları** CLI. Dağıtımınız ve sanal makine için sağlanan kimlik bilgileri adını not edin. Daha fazla bilgi için [CLI kullanarak dağıtma](iot-accelerators-remote-monitoring-deploy-cli.md).
+1. **Bilgisayar** CLI 'sını kullanarak çözüm hızlandırıcının **temel** bir örneğini dağıtın. Dağıtımınızın adını ve sanal makine için verdiğiniz kimlik bilgilerini bir yere unutmayın. Daha fazla bilgi için bkz. [CLI kullanarak dağıtma](iot-accelerators-remote-monitoring-deploy-cli.md).
 
-1. Azure portalını kullanın veya [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) çözümünüzdeki mikro hizmetleri barındıran sanal makineye SSH erişimini etkinleştirmek için. Örneğin:
+1. Çözümünüzde mikro hizmetleri barındıran sanal makineye SSH erişimini etkinleştirmek için Azure portal veya [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) kullanın. Örneğin:
 
     ```sh
     az network nsg rule update --name SSH --nsg-name {your solution name}-nsg --resource-group {your solution name} --access Allow
     ```
 
-    Yalnızca, test ve geliştirme sırasında SSH erişimini etkinleştirmeniz gerekir. SSH, etkinleştirirseniz [yeniden olabildiğince çabuk devre dışı](../security/azure-security-network-security-best-practices.md).
+    Yalnızca test ve geliştirme sırasında SSH erişimini etkinleştirmeniz gerekir. SSH 'yi etkinleştirirseniz, [mümkün olan en kısa sürede yeniden devre dışı bırakmanız gerekir](../security/fundamentals/network-best-practices.md).
 
-1. Azure portalını kullanın veya [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) adı ve sanal makinenizin genel IP adresini bulmak için. Örneğin:
+1. Sanal makinenizin adını ve genel IP adresini bulmak için Azure portal veya [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) kullanın. Örneğin:
 
     ```sh
     az resource list --resource-group {your solution name} -o table
     az vm list-ip-addresses --name {your vm name from previous command} --resource-group {your solution name} -o table
     ```
 
-1. IP adresi önceki adımda ve çalıştırdığınızda sağladığınız kimlik bilgileri kullanarak sanal makinenize bağlanmak için SSH kullanın **bilgisayarları** çözüm dağıtın.
+1. Önceki adımdan IP adresini ve çözümü dağıtmak üzere **bilgisayarları** çalıştırdığınızda verdiğiniz kimlik bilgilerini kullanarak sanal makinenize bağlanmak için SSH kullanın.
 
-1. Bağlanmak yerel kullanıcı Deneyimini izin vermek için sanal makine bash kabuğunda aşağıdaki komutları çalıştırın:
+1. Yerel UX 'in bağlanmasına izin vermek için, sanal makinedeki bash kabuğu 'nda aşağıdaki komutları çalıştırın:
 
     ```sh
     cd /app
     sudo ./start.sh --unsafe
     ```
 
-1. Komut tamamlandıktan ve web sitesini başlatır gördükten sonra sanal makineden kesebilirsiniz.
+1. Komutun tamamlandığını ve Web sitesi başladıktan sonra, sanal makine bağlantısını kesebilirsiniz.
 
-1. Yerel kopyanızı içinde [Uzaktan izleme WebUI](https://github.com/Azure/pcs-remote-monitoring-webui) havuzu Düzenle **.env** dosya dağıtılan çözümünüzün URL'si eklemek için:
+1. [Uzaktan Izleme WebUI](https://github.com/Azure/pcs-remote-monitoring-webui) deposunun yerel kopyasında, DAĞıTıLAN çözümünüzün URL 'sini eklemek için **. env** dosyasını düzenleyin:
 
     ```config
     NODE_PATH = src/
@@ -189,8 +189,8 @@ npm start
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, Uzaktan izleme çözüm Hızlandırıcısını web kullanıcı Arabirimi özelleştirmenize yardımcı olacak kaynaklar hakkında bilgi edindiniz.
+Bu makalede, uzaktan Izleme çözüm hızlandırıcısında Web Kullanıcı arabirimini özelleştirmenize yardımcı olacak kaynaklar hakkında bilgi edindiniz.
 
-Tanımladığınız bir sayfa artık sonraki adım olarak [özel hizmet Uzaktan izleme çözüm Hızlandırıcı web kullanıcı Arabirimine ekleme](iot-accelerators-remote-monitoring-customize-service.md) kullanıcı Arabiriminde görüntülenecek veri alır.
+Bir sayfa tanımladınız, bir sonraki adım, [Uzaktan izleme çözümü Hızlandırıcı Web Kullanıcı arabirimine](iot-accelerators-remote-monitoring-customize-service.md) , Kullanıcı arabiriminde görüntülenecek verileri alan özel bir hizmet eklemektir.
 
-Uzaktan izleme çözüm Hızlandırıcısını hakkında daha fazla kavramsal bilgi için bkz. [Uzaktan izleme mimarisi](iot-accelerators-remote-monitoring-sample-walkthrough.md).
+Uzaktan Izleme çözümü Hızlandırıcısı hakkında daha fazla kavramsal bilgi için bkz. [Uzaktan izleme mimarisi](iot-accelerators-remote-monitoring-sample-walkthrough.md).

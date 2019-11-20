@@ -1,118 +1,117 @@
 ---
-title: Windows Azure sanal makinesinde döngü yeniden | Microsoft Docs
-description: Windows başlatma döngüsünde sorunlarını gidermeyi öğrenin | Microsoft Docs
+title: Azure VM 'de Windows yeniden başlatma döngüsü | Microsoft Docs
+description: Windows yeniden başlatma döngüsü sorunlarını nasıl giderebileceğinizi öğrenin | Microsoft Docs
 services: virtual-machines-windows
 documentationCenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/15/2018
 ms.author: genli
-ms.openlocfilehash: 1c97b1da094b759ccf85f310ceec4c7abfd91b9b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d8a1d64ac8e65fd52730ee1750c0b0b1949b3512
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65472286"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71088461"
 ---
-# <a name="windows-reboot-loop-on-an-azure-vm"></a>Azure VM'de Windows başlatma döngüsünde
-Bu makalede, Microsoft azure'da Windows sanal makine (VM) üzerinde karşılaşabileceğiniz başlatma döngüsünde açıklanır.
+# <a name="windows-reboot-loop-on-an-azure-vm"></a>Azure VM 'de Windows yeniden başlatma döngüsü
+Bu makalede, Microsoft Azure ' de bir Windows sanal makinesinde (VM) karşılaşabileceğiniz yeniden başlatma döngüsü açıklanır.
 
 ## <a name="symptom"></a>Belirti
 
-Kullanırken [önyükleme tanılaması](./boot-diagnostics.md) bir VM'nin bir ekran görüntüleri almak için sanal makine önyükleme ancak önyükleme işlemi kesintiye ve işlem başlıyorum bulun.
+Bir VM 'nin ekran görüntülerini almak için [önyükleme tanılamayı](./boot-diagnostics.md) kullandığınızda, sanal makinenin önbaşlatılmakta olduğunu ancak önyükleme işleminin kesintiye uğratılmakta olduğunu ve işlemin üzerine başlatılmakta olduğunu fark edersiniz.
 
 ![Başlangıç ekranı 1](./media/troubleshoot-reboot-loop/start-screen-1.png)
 
 ## <a name="cause"></a>Nedeni
 
-Başlatma döngüsünde aşağıdakilerden biri nedeniyle oluşur:
+Yeniden başlatma döngüsü aşağıdaki nedenlerle oluşur:
 
 ### <a name="cause-1"></a>Neden 1
 
-Önemli olarak işaretlenmiş bir üçüncü taraf hizmeti mevcuttur ve başlatılamaz. Bu, işletim sisteminin yeniden neden olur.
+Kritik olarak işaretlenen bir üçüncü taraf hizmeti var ve başlatılamıyor. Bu, işletim sisteminin yeniden başlatılmasına neden olur.
 
 ### <a name="cause-2"></a>Neden 2
 
-İşletim sistemi için bazı değişiklikler yapıldı. Genellikle, bu güncelleştirme yüklemesi, uygulama yükleme veya yeni bir ilke ilgilidir. Ek bilgi için aşağıdaki günlüklere bakın gerekebilir:
+İşletim sisteminde bazı değişiklikler yapılmıştır. Genellikle bunlar güncelleştirme yüklemesiyle, uygulama yüklemesiyle veya yeni ilkeyle ilgilidir. Ek ayrıntılar için aşağıdaki günlükleri denetlemeniz gerekebilir:
 
 - Olay Günlükleri
-- CBS.logWindows
-- Update.log
+- CBS. logWindows
+- Update. log
 
 ### <a name="cause-3"></a>Neden 3
 
-Dosya Sistemi Bozulması bu neden olabilir. Ancak, tanılama ve işletim sistemi Bozulması neden olan değişikliği belirlemek zor olabilir.
+Dosya sistemi bozulması buna neden olabilir. Ancak, işletim sisteminin bozulmasına neden olan değişikliği tanılamak ve tanımlamak zordur.
 
 ## <a name="solution"></a>Çözüm
 
-Bu sorunu çözmek için [işletim sistemi diskini yedekleme](../windows/snapshot-copy-managed-disk.md), ve [kurtarma VM için işletim sistemi diski](../windows/troubleshoot-recovery-disks-portal.md)ve çözüm seçenekleri uygun şekilde izleyin veya tek tek çözümleri deneyin.
+Bu sorunu çözmek için, [işletim sistemi diskini yedekleyin](../windows/snapshot-copy-managed-disk.md)ve [işletim sistemi DISKINI bir kurtarma VM 'sine bağlayın](../windows/troubleshoot-recovery-disks-portal.md), sonra çözüm seçeneklerini uygun şekilde uygulayın veya çözümleri tek tek deneyin.
 
-### <a name="solution-for-cause-1"></a>Çözüm nedeni 1 için
+### <a name="solution-for-cause-1"></a>Neden 1 için çözüm
 
-1. İşletim sistemi diski, çalışan VM bağlı sonra disk olarak işaretlenmiş emin olun **çevrimiçi** içeren bölümün sürücü harfini unutmayın ve Disk Yönetimi'nde konsol **\Windows** klasör.
+1. İşletim sistemi diski çalışan bir VM 'ye eklendikten sonra, diskin disk yönetim konsolunda **çevrimiçi** olarak işaretlendiğinden emin olun ve **\Windows** klasörünü tutan bölümün sürücü harfini unutmayın.
 
-2. Disk ayarlanırsa **çevrimdışı**, ayarlayabilirsiniz **çevrimiçi**.
+2. Disk **çevrimdışı**olarak ayarlandıysa, **çevrimiçi**olarak ayarlayın.
 
-3. Bir kopyasını oluşturmak **\Windows\System32\config** klasör durumda değişiklikleri geri alma gereklidir.
+3. Değişiklikler üzerinde geri alma işleminin gerekli olması durumunda **\Windows\system32\config** klasörünün bir kopyasını oluşturun.
 
-4. VM kurtarma üzerinde Windows Kayıt Defteri Düzenleyicisi'ni (regedit) açın.
+4. Kurtarma VM 'sinde, Windows kayıt defteri Düzenleyicisi 'Ni (regedit) açın.
 
-5. Seçin **HKEY_LOCAL_MACHINE** anahtar ve ardından **dosya** > **yığını** menüsünde.
+5. **HKEY_LOCAL_MACHINE** anahtarını seçin ve menüden **Dosya** > **yükleme Hive** ' yi seçin.
 
-6. Sistem dosyasına göz atın **\Windows\System32\config** klasör.
+6. **\Windows\system32\config** klasöründeki sistem dosyasına gidin.
 
-7. Seçin **açık**, türü **BROKENSYSTEM** genişletin adı için **HKEY_LOCAL_MACHINE** anahtarı ve ardından adlı ek bir anahtar göreceksiniz **BROKENSYSTEM** .
+7. **Aç**' ı seçin, ad Için **brokensystem** yazın, **HKEY_LOCAL_MACHINE** anahtarını genişletin ve sonra **brokensystem**adlı ek bir anahtar görürsünüz.
 
-8. Bilgisayar önyükleme hangi ControlSet denetleyin. Aşağıdaki kayıt defteri anahtarı numarası göreceksiniz.
+8. Bilgisayarın hangi ControlSet 'e önyükleme olduğunu denetleyin. Anahtar numarasını aşağıdaki kayıt defteri anahtarında görürsünüz.
 
     `HKEY_LOCAL_MACHINE\BROKENSYSTEM\Select\Current`
 
-9. VM aracısı aşağıdaki kayıt defteri anahtarı aracılığıyla kritikliği olduğunu denetleyin.
+9. Aşağıdaki kayıt defteri anahtarı aracılığıyla VM Aracısı hizmetinin önemi olduğunu denetleyin.
 
     `HKEY_LOCAL_MACHINE\BROKENSYSTEM\ControlSet00x\Services\RDAgent\ErrorControl`
 
-10. Kayıt defteri anahtarının değeri olarak ayarlanmazsa, **2**sonraki azaltma gidin.
+10. Kayıt defteri anahtarının değeri **2**olarak ayarlanmamışsa, sonraki hafifletme bölümüne gidin.
 
-11. Kayıt defteri anahtarının değerini ayarlanırsa **2**, ardından değerini değiştirmek **2** için **1**.
+11. Kayıt defteri anahtarının değeri **2**olarak ayarlandıysa, değeri **2** ' den **1**' e değiştirin.
 
-12. Aşağıdaki anahtarlardan herhangi birine var ve bunlar değeri varsa **2** veya **3**ve ardından bu değerleri değiştirmek **1** buna göre:
+12. Aşağıdaki anahtarlardan biri varsa ve **2** veya **3**değeri varsa ve bu değerleri uygun şekilde **1** olarak değiştirin:
 
     - `HKEY_LOCAL_MACHINE\BROKENSYSTEM\ControlSet00x\Services\AzureWLBackupCoordinatorSvc\ErrorControl`
     - `HKEY_LOCAL_MACHINE\BROKENSYSTEM\ControlSet00x\Services\AzureWLBackupInquirySvc\ErrorControl`
     - `HKEY_LOCAL_MACHINE\BROKENSYSTEM\ControlSet00x\Services\AzureWLBackupPluginSvc\ErrorControl`
 
-13. Seçin **BROKENSYSTEM** anahtar ve ardından **dosya** > **yığını** menüsünde.
+13. **Brokensystem** anahtarını seçin ve menüden **Dosya** > **yükleme Hive** öğesini seçin.
 
-14. İşletim sistemi diski sorun giderme sanal makineden çıkarın.
+14. İşletim sistemi diskini sorun giderme VM 'sinden ayırın.
 
-15. Diskin sorun giderme sanal makineden kaldırın ve Azure bu diski yayın yaklaşık 2 dakika bekleyin.
+15. Diski sorun giderme VM 'sinden kaldırın ve Azure 'un bu diski serbest bırakmasıyla ilgili 2 dakika bekleyin.
 
-16. [İşletim sistemi diskinden yeni bir VM oluşturmak](../windows/create-vm-specialized.md).
+16. [İşletim sistemi diskinden yeni BIR VM oluşturun](../windows/create-vm-specialized.md).
 
-17. Sorun çözüldükten sonra yeniden yüklemeniz gerekebilir [RDAgent](https://blogs.msdn.microsoft.com/mast/2014/04/07/install-the-vm-agent-on-an-existing-azure-vm/) (WaAppAgent.exe).
+17. Sorun giderilirse, [Rdadgent](https://blogs.msdn.microsoft.com/mast/2014/04/07/install-the-vm-agent-on-an-existing-azure-vm/) 'ı (waappagent. exe) yeniden yüklemeniz gerekebilir.
 
-### <a name="solution-for-cause-2"></a>Neden 2 çözümü
+### <a name="solution-for-cause-2"></a>Neden 2 için çözüm
 
-Sanal Makinenin bilinen son iyi yapılandırmaya geri yükleme, adımları [bilinen son iyi yapılandırma ile Azure Windows VM başlatma](https://support.microsoft.com/help/4016731/).
+VM 'yi bilinen son iyi yapılandırmaya geri yükleme, [Azure WINDOWS VM 'Yi bilinen son Iyi yapılandırmayla başlatma](https://support.microsoft.com/help/4016731/)bölümündeki adımları izleyin.
 
-### <a name="solution-for-cause-3"></a>Çözüm nedeni 3
+### <a name="solution-for-cause-3"></a>Neden 3 için çözüm
 >[!NOTE]
->Aşağıdaki yordam, yalnızca son kaynak olarak kullanılmalıdır. Regback geri erişim makineye geri, ancak veri kayıt defteri kovanı zaman damgası ve geçerli gün arasında kayıp olduğundan işletim sistemi kararlı olarak kabul edilmez. Yeni bir VM oluşturun ve veri taşımak için ilave planlar yapmanıza gerek.
+>Aşağıdaki yordam yalnızca son kaynak olarak kullanılmalıdır. Regback 'ten geri yükleme işlemi makineye geri yüklenebilirken, kayıt defterinde Hive ve geçerli gün arasında kaybolan veriler olduğundan, işletim sistemi kararlı kabul edilmez. Yeni bir VM oluşturmanız ve verileri geçirmeye yönelik planlar yapmanız gerekir.
 
-1. Bir sorun giderme sanal makinesine disk bağlandıktan sonra disk olarak işaretlenmiş emin olun **çevrimiçi** Disk Yönetimi Konsolu'nda.
+1. Disk, sorun giderme sanal makinesine eklendikten sonra, diskin Disk Yönetimi konsolunda **çevrimiçi** olarak işaretlendiğinden emin olun.
 
-2. Bir kopyasını oluşturmak **\Windows\System32\config** klasör durumda değişiklikleri geri alma gereklidir.
+2. Değişiklikler üzerinde geri alma işleminin gerekli olması durumunda **\Windows\system32\config** klasörünün bir kopyasını oluşturun.
 
-3. Dosyaları kopyalama **\Windows\System32\config\regback** klasör ve dosyaları değiştirin **\Windows\System32\config** klasör.
+3. **\Windows\system32\config\regback** klasöründeki dosyaları kopyalayın ve **\Windows\System32\Config** klasöründeki dosyaları değiştirin.
 
-4. Diskin sorun giderme sanal makineden kaldırın ve Azure bu diski yayın yaklaşık 2 dakika bekleyin.
+4. Diski sorun giderme VM 'sinden kaldırın ve Azure 'un bu diski serbest bırakmasıyla ilgili 2 dakika bekleyin.
 
-5. [İşletim sistemi diskinden yeni bir VM oluşturmak](../windows/create-vm-specialized.md).
+5. [İşletim sistemi diskinden yeni BIR VM oluşturun](../windows/create-vm-specialized.md).
 
 

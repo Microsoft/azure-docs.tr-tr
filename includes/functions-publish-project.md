@@ -8,22 +8,37 @@ ms.topic: include
 ms.date: 04/24/2019
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 48bb91b3b2e9a31de63e515edb857bc2a170ea79
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: e2d63ab38bad341400538c5079fee22737cf0b8e
+ms.sourcegitcommit: 39d95a11d5937364ca0b01d8ba099752c4128827
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188156"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69562959"
 ---
 ## <a name="deploy-the-function-app-project-to-azure"></a>İşlev uygulaması projesini Azure'a dağıtma
 
-Azure işlev uygulaması oluşturulduktan sonra kullanabileceğiniz [ `func azure functionapp publish` ](../articles/azure-functions/functions-run-local.md#project-file-deployment) proje kodunuzu Azure'a dağıtmak için temel araçları komutu. Aşağıdaki komutta `<APP_NAME>` uygulamanızı önceki adımdan adı.
+İşlev uygulaması Azure 'da oluşturulduktan sonra, proje kodunuzu Azure 'a dağıtmak için [`func azure functionapp publish`](../articles/azure-functions/functions-run-local.md#project-file-deployment) çekirdek Araçlar komutunu kullanabilirsiniz. Bu örneklerde, önceki adımda `<APP_NAME>` uygulamanızın adıyla değiştirin.
 
-```bash
+### <a name="c--javascript"></a>C\# /JavaScript
+
+```command
 func azure functionapp publish <APP_NAME>
 ```
 
-Okunabilirliği artırmak için kesilmiştir aşağıdakine benzer bir çıktı görürsünüz.
+### <a name="python"></a>Python
+
+```command
+func azure functionapp publish <APP_NAME> --build remote
+```
+
+### <a name="typescript"></a>TypeScript
+
+```command
+npm run build:production 
+func azure functionapp publish <APP_NAME>
+```
+
+Aşağıdakine benzer bir çıktı görürsünüz ve bu, okunabilirlik için kesildi:
 
 ```output
 Getting site publishing info...
@@ -39,4 +54,4 @@ Functions in myfunctionapp:
         Invoke url: https://myfunctionapp.azurewebsites.net/api/httptrigger?code=cCr8sAxfBiow548FBDLS1....
 ```
 
-Artık Azure'da işlevinizi test etmek için kullanabilirsiniz, HttpTrigger için çağırma URL'si değerini kopyalayın. URL içeren bir `code` dize değeri işlevi anahtarınızı sorgudur. Bu anahtar, başkalarının Azure'da HTTP tetikleyici bitiş çağrısı zorlaştırır.
+Yalnızca Azure 'da işlevinizi `HttpTrigger`test etmek için kullanabileceğiniz değerinikopyalayın.`Invoke url` URL, işlev anahtarınız `code` olan bir sorgu dizesi değeri içeriyor. Bu anahtar başkalarının Azure 'da HTTP tetikleyici uç noktanızı aramasını zorlaştırır.

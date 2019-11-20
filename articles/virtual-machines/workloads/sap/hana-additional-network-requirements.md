@@ -1,71 +1,70 @@
 ---
-title: (Büyük örnekler) Azure üzerinde SAP HANA için ek donanım gereksinimleri | Microsoft Docs
-description: SAP HANA (büyük örnekler) azure'da ek ağ gereksinimleri.
+title: Azure 'da SAP HANA için ek ağ gereksinimleri (büyük örnekler) | Microsoft Docs
+description: Azure 'daki SAP HANA için ek ağ gereksinimleri (büyük örnekler).
 services: virtual-machines-linux
 documentationcenter: ''
 author: RicksterCDN
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/10/2018
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 2f4c74076f2763addc1f2b971d8ea0ca29ce6fd0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 6fc4e797bd74c28fc741bf2a3928b46f0984b1b9
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60203984"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70099935"
 ---
-# <a name="additional-network-requirements-for-large-instances"></a>Büyük örnekler için ek donanım gereksinimleri
+# <a name="additional-network-requirements-for-large-instances"></a>Büyük örnekler için ek ağ gereksinimleri
 
-Azure'da SAP HANA büyük örnekleri dağıtımının bir parçası olarak ek ağ gereksinimleri olabilir.
+Azure üzerinde büyük SAP HANA örneklerinin dağıtılması kapsamında ek ağ gereksinimlerine sahip olabilirsiniz.
 
-## <a name="add-more-ip-addresses-or-subnets"></a>Daha fazla IP adresleri veya alt ağları Ekle
+## <a name="add-more-ip-addresses-or-subnets"></a>Daha fazla IP adresi veya alt ağ ekleyin
 
-Daha fazla IP adresleri veya alt eklediğinizde, Azure portalı, PowerShell veya Azure CLI'yı kullanın.
+Daha fazla IP adresi veya alt ağ eklerken Azure portal, PowerShell veya Azure CLı kullanın.
 
-Yeni IP adresi aralığı, yeni bir toplu aralığı oluşturmak yerine sanal ağ adres alanına yeni bir aralık olarak ekleyin. Bu değişiklik Microsoft'a gönderin. Bu, yeni IP adres aralığından HANA büyük örnek istemciniz birimleriyle bağlanmanıza olanak sağlar. Eklenen yeni sanal ağ adres alanı almak için bir Azure destek isteği açabilirsiniz. Onay aldıktan sonra sonraki adımları gerçekleştirin.
+Yeni IP adresi aralığını yeni bir toplu Aralık oluşturmak yerine, sanal ağ adres alanına yeni bir Aralık olarak ekleyin. Bu değişikliği Microsoft 'a gönder. Bu, bu yeni IP adresi aralığından, istemcinizdeki HANA büyük örnek birimlerine bağlanmanızı sağlar. Yeni sanal ağ adresi alanının eklenmesini sağlamak için bir Azure destek isteği açabilirsiniz. Onay aldıktan sonra sonraki adımları gerçekleştirin.
 
-Azure portalından ek bir alt ağ oluşturmak için bkz [Azure portalını kullanarak bir sanal ağ oluşturma](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network). Powershell'den oluşturmak için bkz: [PowerShell kullanarak sanal ağ oluşturma](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network).
+Azure portal ek bir alt ağ oluşturmak için, bkz. [Azure Portal kullanarak sanal ağ oluşturma](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network). PowerShell 'den bir tane oluşturmak için bkz. [PowerShell kullanarak sanal ağ oluşturma](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network).
 
-## <a name="add-virtual-networks"></a>Sanal ağları Ekle
+## <a name="add-virtual-networks"></a>Sanal ağ ekle
 
-Bir veya daha fazla Azure sanal ağları ilk kez bağladıktan sonra SAP HANA (büyük örnekler) azure'da erişim bulunmakla bağlanmak isteyebilirsiniz. İlk olarak, bir Azure destek isteği gönderin. Bu istekte belirli Azure dağıtım tanımlayan bilgiler içerir. Ayrıca, Azure sanal ağ adres alanının aralıkları ve IP adres alanı aralığı içerir. Microsoft hizmet yönetimi üzerinde SAP HANA sonra ek sanal ağlar ve Azure ExpressRoute bağlanmak için gereken bilgileri sağlar. Her sanal ağ için HANA büyük örnekler için ExpressRoute bağlantı hattına bağlamak için bir benzersiz yetkilendirme anahtarı gerekir.
+İlk olarak bir veya daha fazla Azure sanal ağını bağladıktan sonra, Azure 'daki SAP HANA erişen ek bilgisayarlara (büyük örnekler) bağlanmak isteyebilirsiniz. İlk olarak, bir Azure destek isteği gönderebilirsiniz. Bu istekte, belirli Azure dağıtımını tanımlayan belirli bilgileri ekleyin. Ayrıca, Azure sanal ağ adresi alanının IP adresi alanı aralığını veya aralıklarını de ekleyin. Microsoft hizmet yönetiminde SAP HANA, ek sanal ağları ve Azure ExpressRoute 'u bağlamak için gereken bilgileri sağlar. Her sanal ağ için, ExpressRoute bağlantı hattına HANA büyük örneklerine bağlanmak için benzersiz bir yetkilendirme anahtarına ihtiyacınız vardır.
 
-## <a name="increase-expressroute-circuit-bandwidth"></a>ExpressRoute bağlantı hattı bant genişliğini artırın
+## <a name="increase-expressroute-circuit-bandwidth"></a>ExpressRoute devre bant genişliğini artırma
 
-Microsoft hizmet yönetimi üzerinde SAP HANA başvurun. SAP hana (büyük örnekler) Azure ExpressRoute bağlantı hattı üzerinde bant genişliğini artırmanız bildirmek, bir Azure destek isteği oluşturun. (Bir tek bağlantı hattı bant genişliğini en çok 10 GB/sn için bir artışı isteyebilirsiniz.) İşlem tamamlandıktan sonra bildirim sonra alırsınız; Bu daha yüksek hız azure'da etkinleştirmek için başka bir şey yapmanız gerekmez.
+Microsoft hizmet yönetiminde SAP HANA başvurun. Azure 'da SAP HANA bant genişliğini (büyük örnekler) ExpressRoute devresine artırmanız için bir Azure destek isteği oluşturun. (En fazla 10 Gbps 'e kadar tek bir devre bant genişliği artışı isteyebilirsiniz.) Sonra işlem tamamlandıktan sonra bildirim alırsınız; Azure 'da bu daha yüksek hıza olanak tanımak için başka bir şey yapmanız gerekmez.
 
-## <a name="add-an-additional-expressroute-circuit"></a>Ek bir ExpressRoute bağlantı hattı ekleyin
+## <a name="add-an-additional-expressroute-circuit"></a>Ek bir ExpressRoute devresi ekleyin
 
-Microsoft hizmet yönetimi üzerinde SAP HANA başvurun. Ek bir ExpressRoute bağlantı hattı eklemek için öneri (yeni bağlantı hattına bağlamak için yetkilendirme bilgileri alma isteği dahil) bir Azure destek isteği oluşturun. İsteği yapmadan önce sanal ağlarda kullanılan adres alanını tanımlamalısınız. Microsoft hizmet yönetimi üzerinde SAP HANA ardından yetkilendirme sağlar.
+Microsoft hizmet yönetiminde SAP HANA başvurun. Ek bir ExpressRoute bağlantı hattı eklemenizi öneriyorlarsa, bir Azure destek isteği (yeni bağlantı hattını bağlamak için yetkilendirme bilgileri almak için bir istek dahil) oluşturun. İsteği yapmadan önce, sanal ağlarda kullanılan adres alanını tanımlamanız gerekir. Microsoft hizmet yönetimi SAP HANA, yetkilendirme sağlayabilir.
 
-Yeni devreyi oluşturulur ve Microsoft Hizmet Yönetimi yapılandırma üzerinde SAP HANA tamamlandıktan sonra devam etmeniz için gereken bilgileri içeren bir bildirimi alırsınız. Bunlar zaten başka bir SAP HANA (büyük örnek) Azure ExpressRoute bağlantı hattı aynı Azure bölgesinde bağlıysa bu ek bağlantı hattı için Azure sanal ağları bağlamak mümkün değildir.
+Yeni devre oluşturulduğunda ve Microsoft hizmet yönetimi yapılandırmasındaki SAP HANA tamamlandığında, devam etmeniz için gereken bilgileri içeren bir bildirim alırsınız. Azure sanal ağlarını aynı Azure bölgesindeki Azure (büyük örnek) ExpressRoute bağlantı hattı üzerindeki başka bir SAP HANA zaten bağlandıysa bu ek devreye bağlanamazsınız.
 
-## <a name="delete-a-subnet"></a>Bir alt ağı Sil
+## <a name="delete-a-subnet"></a>Bir alt ağı silme
 
-Bir sanal ağ alt ağı kaldırmak için Azure portalı, PowerShell veya Azure CLI'yı kullanabilirsiniz. Azure sanal ağı IP adres aralığı veya adres alanınızı toplu bir aralık varsa, Microsoft ile sizin için hiçbir izleme yoktur. (Ancak, sanal ağ hala silinmiş alt içerir BGP rota adres alanı yayma unutmayın.) Hangi biri silinmiş alt ağınız için atanmış birden çok IP adresi aralıklarını olarak, Azure sanal ağ adres aralığı veya adres alanı tanımlamış olabilirsiniz. Bu sanal ağ adresi alanınızdan silmek istediğinizden emin olun. Ardından, SAP HANA (büyük örnekler) Azure üzerinde SAP HANA ile iletişim kurmak için izin verilen aralıklar kaldırmak için Microsoft Hizmet Yönetimi bildirin.
+Bir sanal ağ alt ağını kaldırmak için Azure portal, PowerShell veya Azure CLı kullanabilirsiniz. Azure sanal ağ IP adresi aralığınızı veya adres alanınızı toplanmış bir Aralık ise, Microsoft ile ilgili bir izleme yoktur. (Ancak, sanal ağın Silinen alt ağı içeren BGP yönlendirme adres alanını yaymakta olduğunu unutmayın.) Azure sanal ağ adresi aralığını veya adres alanını, Silinen alt ağınıza atanmış birden çok IP adresi aralığı olarak tanımlamış olabilirsiniz. Bunu sanal ağ adres alanınızda sildiğinizden emin olun. Daha sonra, Azure 'daki SAP HANA (büyük örnekler) ile iletişim kurmasına izin verilen aralıklardan kaldırmak için Microsoft hizmet yönetimi 'nde SAP HANA bilgilendirin.
 
-Daha fazla bilgi için [bir alt ağını silmek](../../../virtual-network/virtual-network-manage-subnet.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#delete-a-subnet).
+Daha fazla bilgi için bkz. [bir alt ağı silme](../../../virtual-network/virtual-network-manage-subnet.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#delete-a-subnet).
 
-## <a name="delete-a-virtual-network"></a>Bir sanal ağı silme
+## <a name="delete-a-virtual-network"></a>Sanal ağı silme
 
-Bilgi için [bir sanal ağı silme](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#delete-a-virtual-network).
+Bilgi için bkz. [sanal ağı silme](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#delete-a-virtual-network).
 
-Microsoft hizmet yönetimi üzerinde SAP HANA, SAP HANA (büyük örnekler) Azure ExpressRoute bağlantı hattı üzerinde mevcut yetkilendirmeleri kaldırır. Ayrıca, Azure sanal ağı için IP adresi aralığı veya adres alanını HANA büyük örnekleri ile iletişimi kaldırır.
+Microsoft hizmet yönetimi SAP HANA, Azure 'daki SAP HANA (büyük örnekler) ExpressRoute bağlantı hattının mevcut yetkilendirmelerini kaldırır. Ayrıca, HANA büyük örneklerle iletişim için Azure sanal ağ IP adresi aralığını veya adres alanını da kaldırır.
 
-Sanal ağ kaldırdıktan sonra kaldırılacak aralıkları ve IP adres alanı aralığı sağlamak için Azure destek isteği açın.
+Sanal ağı kaldırdıktan sonra, kaldırılacak IP adresi alanı aralığını veya aralıklarını sağlamak için bir Azure destek isteği açın.
 
-Her şeyi kaldırmak emin olmak için ExpressRoute bağlantısı, sanal ağ geçidi, sanal ağ geçidi genel IP ve sanal ağ'ı silin.
+Her şeyi kaldırmayı sağlamak için ExpressRoute bağlantısını, sanal ağ geçidini, sanal ağ geçidi genel IP 'sini ve sanal ağı silin.
 
-## <a name="delete-an-expressroute-circuit"></a>Bir ExpressRoute bağlantı hattını Sil
+## <a name="delete-an-expressroute-circuit"></a>ExpressRoute devresini silme
 
-Ek bir SAP HANA (büyük örnekler) Azure ExpressRoute bağlantı hattı üzerinde kaldırmak için Microsoft hizmet yönetimi üzerinde SAP HANA ile bir Azure destek isteği açın. Devrenin silinmesini isteyin. Azure aboneliğinde, silebilir veya gerektiği şekilde sanal ağ tutun. Ancak, HANA büyük örnekler ExpressRoute bağlantı hattına bağlı sanal ağ geçidi arasındaki bağlantı silmeniz gerekir.
+Azure (büyük örnekler) ExpressRoute bağlantı hattına ek bir SAP HANA kaldırmak için, Microsoft hizmet yönetiminde SAP HANA bir Azure destek isteği açın. Devrenin silinmesini isteyin. Azure aboneliği içinde, gerektiğinde sanal ağı silebilir veya tutabilirsiniz. Ancak, HANA büyük örnekler ExpressRoute bağlantı hattı ile bağlı sanal ağ geçidi arasındaki bağlantıyı silmeniz gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

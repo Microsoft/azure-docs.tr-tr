@@ -1,66 +1,67 @@
 ---
-title: Azure uygulama teklifi | Azure Market
-description: Bir Azure uygulaması yayımlama işlemine genel bakış Azure Marketi'nde sunar.
+title: Azure Uygulama teklifi | Azure Marketi
+description: Azure Market 'te Azure uygulaması teklifi yayımlama sürecine genel bakış.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 02/06/2019
 ms.author: pabutler
-ms.openlocfilehash: 3691664ee6212f838e7a9b95089893e4b52c689f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9125b5c71b63b27c58ea72b7bfd49f730854b33d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943027"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818801"
 ---
 # <a name="azure-application-offer"></a>Azure uygulama teklifi
 
 |    |    |
 |-----------------------------------------------------------------|------------------------------------------|
-| <div class="body"> Bu bölümde yeni bir Azure uygulama teklifi yayımlama açıklanmaktadır [Azure Marketi](https://azuremarketplace.microsoft.com).  Azure her uygulama, genellikle bir veya daha fazla sanal makine ve diğer destekleyici Azure veya Web tabanlı hizmetleri içeren uygulama tarafından kullanılan tüm teknik varlıklar tanımlayan bir Azure Resource Manager şablonu içerir. Tüm Azure app teklifleri aracılığıyla erişim güvenliği etkinleştirmelisiniz [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/).  </div> | ![Azure uygulama simgesi](./media/azureapp-icon1.png)  |
+| <div class="body"> Bu bölümde, [Azure Market 'te](https://azuremarketplace.microsoft.com)yeni bir Azure uygulaması teklifinin nasıl yayımlanacağı açıklanmaktadır.  Her bir Azure uygulaması, genellikle bir veya daha fazla sanal makine ve diğer Azure veya Web tabanlı Hizmetleri destekleyen bir uygulama tarafından kullanılan tüm teknik varlıkları tanımlayan bir Azure Resource Manager şablonu içerir. Tüm Azure Uygulama teklifleri [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/)aracılığıyla erişim güvenliğini sağlamalıdır.  </div> | ![Azure uygulamaları simgesi](./media/azureapp-icon1.png)  |
 
-## <a name="publishing-overview"></a>Yayımlama genel bakış
+## <a name="publishing-overview"></a>Yayımlamaya genel bakış
 
-Aşağıdaki videoda [yapı çözüm şablonları ve yönetilen uygulamalar, Azure Market'te](https://channel9.msdn.com/Events/Build/2018/BRK3603), giriş niteliğindedir: ne teklif türleri kullanılabilir, teknik varlıkları nelerdir gerekli, nasıl Azure Resource Manager Yazar geliştirme ve test kullanıcı Arabirimi, uygulama şablonu, uygulama teklifini ve uygulama İnceleme süreci yayımlama.
+Aşağıdaki video, [Çözüm şablonları ve Azure Market Için yönetilen uygulamalar](https://channel9.msdn.com/Events/Build/2018/BRK3603), bir giriş: hangi teklif türlerinin kullanılabildiği, hangi teknik varlıkların gerekli olduğu, Azure Resource Manager şablonu yazma, geliştirme uygulama kullanıcı arabirimini, uygulama teklifini yayımlamayı ve uygulama inceleme sürecini test etme.
 
 >[!VIDEO https://channel9.msdn.com/Events/Build/2018/BRK3603/player]
 
 
 ## <a name="types-of-azure-applications"></a>Azure uygulama türleri
 
-Azure uygulamaları iki tür vardır: yönetilen uygulamaları ve çözüm şablonları. 
+İki tür Azure uygulaması vardır: yönetilen uygulamalar ve çözüm şablonları. 
 
-- Çözüm şablonları Market'te çözüm yayımlama için temel yollarından biridir. Çözümünüzü ek dağıtım ve yapılandırma tek bir sanal makine (VM) otomasyonundan gerektirdiğinde bu Teklif türü kullanılır. Bir çözüm şablonu kullanarak birden fazla VM sağlama otomatik hale getirebilirsiniz. Bu Otomasyon karmaşık Iaas çözümleri sağlamak için ağ ve depolama kaynaklarının sağlanmasını içerir. Çözüm şablonu gereksinimleri ve faturalandırma modeli genel bakış için bkz: [Azure uygulamalarını: Çözüm şablonları](https://docs.microsoft.com/azure/marketplace/marketplace-solution-templates).
+- Çözüm şablonları, Market 'te çözüm yayımlamanın ana yöntemlerinden biridir. Bu teklif türü, çözümünüz tek bir sanal makinenin (VM) ötesinde ek dağıtım ve yapılandırma Otomasyonu gerektirdiğinde kullanılır. Bir çözüm şablonu kullanarak birden fazla VM 'yi sağlamayı otomatik hale getirebilirsiniz. Bu Otomasyon, karmaşık IaaS çözümleri sağlamak üzere ağ ve depolama kaynakları sağlamayı içerir. Çözüm şablonu gereksinimlerine ve faturalama modeline genel bir bakış için bkz. [Azure uygulamaları: çözüm şablonları](https://docs.microsoft.com/azure/marketplace/marketplace-solution-templates).
 
-- Yönetilen uygulamalar, çözüm şablonları, önemli bir fark ile benzerdir. Yönetilen bir uygulamada kaynaklar, uygulamanın yayımcısı tarafından yönetilen bir kaynak grubuna dağıtılır. Kaynak grubu, tüketicinin aboneliğinde mevcuttur ancak yayımcının kiracısındaki bir kimlik, kaynak grubuna erişime sahiptir. Yayımcı olarak, çözümün sürekli desteği için maliyeti belirtirsiniz. Azure yönetilen uygulamaları kolayca oluşturup müşterilerinize tam olarak yönetilen, kullanıma hazır uygulamalar sunmak için kullanır.
+- Yönetilen uygulamalar, tek bir anahtar farkla çözüm şablonlarına benzerdir. Yönetilen bir uygulamada kaynaklar, uygulamanın yayımcısı tarafından yönetilen bir kaynak grubuna dağıtılır. Kaynak grubu, tüketicinin aboneliğinde mevcuttur ancak yayımcının kiracısındaki bir kimlik, kaynak grubuna erişime sahiptir. Yayımcı olarak, çözümün sürekli desteği için maliyeti belirtirsiniz. Azure yönetilen uygulamaları kullanarak, müşterilerinize tam olarak yönetilen, anahtar uygulamaları kolayca oluşturup sunun.
 
-Azure Marketi ek olarak, hizmet Kataloğu yönetilen uygulamalarda sunabilir. Hizmet kataloğu, bir kuruluştaki kullanıcılar için onaylı çözümleri içeren bir dahili katalogdur. Katalog grupları bir kuruluşta çözümleri sunmaya devam ederken kuruluş standartları karşılamak üzere kullanın. Çalışanlar, kataloğu kullanarak BT bölümleri tarafından önerilen ve onaylanan uygulamaları kolayca bulabilir.
+Azure Marketi ' ne ek olarak, bir hizmet kataloğunda yönetilen uygulamalar da sunabilirsiniz. Hizmet kataloğu, bir kuruluştaki kullanıcılar için onaylı çözümleri içeren bir dahili katalogdur. Kuruluştaki gruplar için çözümler sunarak kurumsal standartları karşılamak için kataloğunu kullanırsınız. Çalışanlar, kataloğu kullanarak BT bölümleri tarafından önerilen ve onaylanan uygulamaları kolayca bulabilir.
 
 >[!Note]
->Bulut çözümü sağlayıcıları (CSP) iş ortağı kanalı katılımı kullanıma sunuldu.  Lütfen [bulut çözüm sağlayıcıları](../../cloud-solution-providers.md) teklifinizi Microsoft CSP aracılığıyla pazarlama hakkında daha fazla bilgi için iş ortağı kanalı.
+>Bulut çözümü sağlayıcıları (CSP) iş ortağı kanalı kabul etme artık kullanılabilir.  Teklifinizi Microsoft CSP iş ortağı kanalları aracılığıyla pazarlama hakkında daha fazla bilgi için lütfen bkz. [bulut çözümü sağlayıcıları](../../cloud-solution-providers.md) .
 
-Avantajları ve yönetilen uygulama türleri hakkında daha fazla bilgi için bkz: [Azure yönetilen uygulamalara genel bakış](https://docs.microsoft.com/azure/managed-applications/overview).
+Yönetilen uygulamaların avantajları ve türleri hakkında daha fazla bilgi için bkz. [Azure yönetilen uygulamalarına genel bakış](https://docs.microsoft.com/azure/managed-applications/overview).
 
 
 ## <a name="publishing-process-workflow"></a>Yayımlama işlemi iş akışı
 
-Aşağıdaki diyagramda bir Azure uygulaması teklif yayımlamak için üst düzey bir işlem gösterilir.
+Aşağıdaki diyagramda bir Azure Uygulama teklifi yayımlamak için üst düzey işlem gösterilmektedir.
 
-![Yayımlama teklif için iş akışı](./media/new-offer-process.png)
+![Yayımlama teklifi için iş akışı](./media/new-offer-process.png)
 
-Bir Azure uygulaması teklif yayımlamak için üst düzey adımlar şunlardır:
+Azure uygulaması teklifini yayımlamaya yönelik üst düzey adımlar şunlardır:
 
-1. Karşılamak [önkoşulları](./cpp-prerequisites.md) - (gösterilmez) iş ve bir Azure uygulamasına Azure Market'te yayımlama için teknik gereksinimlerini karşıladığınızdan emin olun. 
+1. [Önkoşulları](./cpp-prerequisites.md) karşılayın-(gösterilmez) bir Azure uygulamasını Azure Marketi 'nde yayımlamaya yönelik iş ve teknik gereksinimleri karşıladığınızı doğrulayın. 
 
-1. [Teklif oluşturma](./cpp-create-offer.md) -teklifi hakkında ayrıntılı bilgi sağlar. Bu bilgiler içerir: pazarlama malzemeleri, destek bilgileri ve varlık belirtimleri teklif açıklaması.
+1. [Teklifi oluşturun](./cpp-create-offer.md) -teklifle ilgili ayrıntılı bilgi sağlayın. Bu bilgiler şunları içerir: teklif açıklaması, pazarlama malzemeleri, destek bilgileri ve varlık belirtimleri.
 
-1. [Oluşturun veya var olan iş ve teknik varlıkları toplamak](./cpp-create-technical-assets.md) -iş varlıkları (yasal belgeler ve pazarlama malzemeleri) ve ilişkili çözümü için teknik varlıkları oluşturun.
+1. [Mevcut iş ve teknik varlıkları oluşturun veya toplayın](./cpp-create-technical-assets.md) -ilişkili çözüm için iş varlıklarını (yasal belgeler ve pazarlama malzemeleri) ve teknik varlıkları oluşturun.
 
-1. [SKU oluşturma](./cpp-skus-tab.md) -teklifle ilgili fiyatlarını oluşturun. Yayımlama planlıyorsanız her görüntü için benzersiz bir SKU gereklidir.
+1. [SKU 'Yu oluşturun](./cpp-skus-tab.md) -TEKLIFLE ilişkili SKU 'ları oluşturun. Yayımlamayı planladığınız her görüntü için benzersiz bir SKU gereklidir.
 
-1. Onayla ve [teklifi yayımlama](./cpp-publish-offer.md) -teklif ve teknik varlıkları tamamlandıktan sonra teklifi gönderebilirsiniz. Bu gönderi, yayımlama işlemi başlar. Bu işlem sırasında çözümü, doğrulanmış sertifikalı, ardından "Azure Marketi'nde etkin hale gelir" test edilir.
+1. Teklifi onaylama ve [Yayımlama](./cpp-publish-offer.md) -teklif ve teknik varlıklar tamamlandıktan sonra teklifi gönderebilirsiniz. Bu gönderim, yayımlama işlemini başlatır. Bu işlem sırasında çözüm, Azure Marketi 'nde test edilmiş, doğrulanan, sertifikalı ve "canlı gidiyor" olarak yapılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu adımları düşünmeden önce karşılamanız gereken [teknik ve işle ilgili gereksinimleriniz](./cpp-prerequisites.md) Microsoft Azure Market'te bir yönetilen uygulama yayımlama.
+Bu adımları kabul etmeden önce, Microsoft Azure Market yönetilen bir uygulama yayınlamak için [Teknik ve iş gereksinimlerini](./cpp-prerequisites.md) karşılamanız gerekir.

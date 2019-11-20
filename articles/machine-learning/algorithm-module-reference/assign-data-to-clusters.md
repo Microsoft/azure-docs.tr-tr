@@ -1,7 +1,7 @@
 ---
-title: 'Veri kümesine atayın: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Ata veri kümesi modülü için kümeleme modeli puanlamak için Azure Machine Learning hizmetinde kullanmayı öğrenin.
+title: 'Kümeye veri ata: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Kümeleme modeline puan vermek için Azure Machine Learning ' de verileri kümeye ata modülünü kullanmayı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,45 +9,44 @@ ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
 ms.date: 05/06/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 1c2d2a02ecfb617551dd9174b87f363d57b151a8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 75a547a26057ad05444753253666dceea160d714
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65467208"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73493866"
 ---
-# <a name="module-assign-data-to-clusters"></a>Modül: Veri kümelerine atama
+# <a name="module-assign-data-to-clusters"></a>Modül: kümelere veri atama
 
-Bu makalede nasıl kullanılacağını *Ata veri kümelerine* modülü Azure Machine Learning visual arabiriminde. Modül ile eğitilmiş bir kümeleme modeli aracılığıyla tahminler oluşturur *K-ortalamaları Kümeleme* algoritması.
+Bu makalede Azure Machine Learning tasarımcısında *kümelenecek veri atama* modülünün nasıl kullanılacağı açıklanmaktadır (Önizleme). Modül, *K-anlamı kümeleme* algoritması ile eğitilen bir kümeleme modeli aracılığıyla tahmin oluşturur.
 
-Ata veri kümeleri modülü için yeni her veri noktası için olası atamaları içeren bir veri kümesi döndürür. 
+Kümelere veri ata modülü, her yeni veri noktası için olası atamaları içeren bir veri kümesi döndürür. 
 
 
-## <a name="how-to-use-assign-data-to-clusters"></a>Ata veri kümelerine kullanma
+## <a name="how-to-use-assign-data-to-clusters"></a>Kümelere veri atama kullanımı
   
-1. Azure Machine Learning görsel arabirim önceden eğitilmiş bir kümeleme modeli bulun. Oluşturun ve aşağıdaki yöntemlerden birini kullanarak bir kümeleme modeli eğitme:  
+1. Azure Machine Learning tasarımcısında, daha önce eğitilen bir kümeleme modeli bulun. Aşağıdaki yöntemlerden birini kullanarak bir kümeleme modeli oluşturabilir ve eğitebilirsiniz:  
   
-    - K-ortalamaları kümeleme algoritması kullanarak yapılandırma [K-ortalamaları Kümeleme](k-means-clustering.md) modülü ve bir veri kümesi ve kümeleme modeli eğitme modülünü (Bu makale) kullanarak model eğitme.  
+    - K- [ortalamalar kümeleme modülünü kullanarak](k-means-clustering.md) k-bit kümeleme algoritmasını yapılandırın ve bir veri kümesi ve bir veri kümesi (Bu makale) Ile eğitme modeli kullanarak modeli eğitme.  
   
-    - Mevcut bir eğitilen kümeleme modelden da ekleyebilirsiniz **kaydettiğiniz modelleri** çalışma alanınızda grup.
+    - Ayrıca, çalışma alanınızdaki **kaydedilmiş modeller** grubundan mevcut bir eğitimli kümeleme modeli ekleyebilirsiniz.
 
-2. Eğitilen modelin sol giriş bağlantı noktasına ekleme **Ata veri kümelerine**.  
+2. Eğitilen modeli, **kümeler Için veri ata**'nın sol giriş bağlantı noktasına ekleyin.  
 
-3. Yeni bir veri kümesinin girdi olarak ekleyin. 
+3. Giriş olarak yeni bir veri kümesi iliştirin. 
 
-   Bu veri kümesinde, etiketler isteğe bağlıdır. Genellikle, kümeleme bir Denetimsiz öğrenme yöntemidir. Kategorileri önceden bilmeniz beklenmez. Ancak, giriş sütunları eğitim kümeleme modeli veya bir hata oluştuğunda kullanılan sütunları aynı olmalıdır.
+   Bu veri kümesinde, Etiketler isteğe bağlıdır. Genellikle kümeleme, denetimli bir öğrenme yöntemidir. Kategorileri önceden bilmeniz beklenmez. Ancak, giriş sütunlarının, kümeleme modeliyle eğitiminde kullanılan sütunlarla aynı olması gerekir veya bir hata oluşur.
 
     > [!TIP]
-    > Arabirimi küme tahminleri yazılır sütun sayısını azaltmak için kullanma [veri kümesinde sütun seçme](select-columns-in-dataset.md), sütunların bir alt kümesini seçin. 
+    > Küme tahminlerinin tasarımcıya yazılan sütunların sayısını azaltmak için, [veri kümesindeki sütunları seç](select-columns-in-dataset.md)' i kullanın ve sütunların bir alt kümesini seçin. 
     
-4. Bırakın **ekleme veya işaretini denetlemek için yalnızca sonuç** sonuçları (küme atamaları) sütununu dahil olmak üzere tam giriş veri kümesi, içerecek şekilde sonuçları istiyorsanız onay kutusu.
+4. Sonuçların, sonuçları görüntüleyen bir sütun da dahil olmak üzere tam giriş veri kümesini içermesini istiyorsanız **yalnızca sonuç için ekleme veya onay işaretini kaldır** onay kutusunu seçili bırakın.
   
-    Bu onay kutusunun işaretini kaldırırsanız, yalnızca sonuçlar döndürülür. Öngörüler bir web hizmeti bir parçası olarak oluşturduğunuzda, bu seçenek yararlı olabilir.
+    Bu onay kutusunu temizlerseniz yalnızca sonuçlar döndürülür. Bu seçenek, bir Web hizmetinin parçası olarak tahmin oluştururken yararlı olabilir.
   
-5.  Denemeyi çalıştırın.  
+5.  İşlem hattını çalıştırma.  
   
 ### <a name="results"></a>Sonuçlar
 
-+  Değerleri veri kümesini görüntülemek için modülü sağ tıklayın, **neden veri kümeleri**ve ardından **Görselleştir**.
++  Veri kümesindeki değerleri görüntülemek için modüle sağ tıklayın, **sonuç veri kümeleri**' ni seçin ve ardından **Görselleştir**' i seçin.
 

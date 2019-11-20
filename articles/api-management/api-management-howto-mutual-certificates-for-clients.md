@@ -1,6 +1,6 @@
 ---
-title: Sertifika kimlik doğrulaması API Management - Azure API Management istemcisini kullanarak API'leri güvenli hale getirme | Microsoft Docs
-description: İstemci sertifikaları kullanarak API'leri güvenli öğrenin
+title: API Management-Azure API Management istemci sertifikası kimlik doğrulaması kullanarak API 'Leri güvenli hale getirme | Microsoft Docs
+description: İstemci sertifikalarını kullanarak API 'lere erişimi güvenli hale getirme hakkında bilgi edinin
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,31 +9,30 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 05/30/2019
 ms.author: apimpm
-ms.openlocfilehash: 5427c4050b6b70c18da7a1899d16e448c41e81c6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 263f8495b9dbb0a1c5b3c54301b4b4deab425e31
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66427308"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70072356"
 ---
-# <a name="how-to-secure-apis-using-client-certificate-authentication-in-api-management"></a>Sertifika kimlik doğrulaması API Management istemcisini kullanarak API güvenliğini sağlama
+# <a name="how-to-secure-apis-using-client-certificate-authentication-in-api-management"></a>API Management 'de istemci sertifikası kimlik doğrulaması kullanarak API 'Leri güvenli hale getirme
 
-API Management API'leri (yani, API Management istemciden) erişimin güvenliğini sağlama olanağı sunuyor istemci sertifikaları kullanarak. Gelen sertifikasını doğrulamak ve sertifika özellikleri kullanım ilkesi ifadeleri istenen değerleri karşı denetleyin.
+API Management, istemci sertifikaları kullanarak API 'lere (yani API Management istemci) erişimi güvenli hale getirme yeteneği sağlar. İlke ifadelerini kullanarak, gelen sertifikayı doğrulayabilir ve istenen değerlere göre sertifika özelliklerini denetleyebilirsiniz.
 
-İstemci sertifikalarını (yani, arka uç API Management'a) kullanarak bir API'nin arka uç hizmetine erişim güvenliğini sağlama hakkında daha fazla bilgi için bkz: [istemcisini kullanarak arka uç Hizmetleri, sertifika kimlik doğrulaması güvenliğini sağlama](https://docs.microsoft.com/azure/api-management/api-management-howto-mutual-certificates)
+İstemci sertifikaları kullanarak bir API 'nin arka uç hizmetine erişimin güvenliğini sağlama hakkında bilgi için (örneğin, arka uca API Management), bkz. [istemci sertifikası kimlik doğrulaması kullanarak arka uç hizmetlerini güvenli hale](https://docs.microsoft.com/azure/api-management/api-management-howto-mutual-certificates) getirme
 
 > [!IMPORTANT]
-> Alma ve tüketim katmanındaki istemci sertifikalarını doğrulamak için önce "istek istemci sertifikası"Özel etki alanları"dikey penceresinde, aşağıda gösterildiği gibi ayarlama" etkinleştirmeniz gerekir.
+> Tüketim katmanında istemci sertifikalarını almak ve doğrulamak için, önce aşağıda gösterildiği gibi "özel etki alanları" dikey penceresinde "istemci sertifikası ıste" ayarını açmanız gerekir.
 
-![İstemci sertifikası isteme](./media/api-management-howto-mutual-certificates-for-clients/request-client-certificate.png)
+![İstemci sertifikası iste](./media/api-management-howto-mutual-certificates-for-clients/request-client-certificate.png)
 
-## <a name="checking-the-issuer-and-subject"></a>Sertifikayı veren ve konu denetleniyor
+## <a name="checking-the-issuer-and-subject"></a>Veren ve Subject denetleniyor
 
-Bir istemci sertifikasının konu ve veren denetlemek için ilkeleri yapılandırılabilir:
+Aşağıdaki ilkeler bir istemci sertifikasının vereni ve konusunu denetlemek için yapılandırılabilir:
 
 ```xml
 <choose>
@@ -46,12 +45,12 @@ Bir istemci sertifikasının konu ve veren denetlemek için ilkeleri yapılandı
 ```
 
 > [!NOTE]
-> Denetimi sertifika iptal listesi kullanımı devre dışı bırakmak için `context.Request.Certificate.VerifyNoRevocation()` yerine `context.Request.Certificate.Verify()`.
-> İstemci sertifika kendinden imzalı ise, kök (veya Ara) CA sertifikaları olmalıdır [karşıya](api-management-howto-ca-certificates.md) için API Management'tan `context.Request.Certificate.Verify()` ve `context.Request.Certificate.VerifyNoRevocation()` çalışmak için.
+> Yerine sertifika iptal listesi kullanımını `context.Request.Certificate.VerifyNoRevocation()` denetlemeyi devre dışı bırakmak için. `context.Request.Certificate.Verify()`
+> İstemci sertifikası kendinden imzalanmışsa, `context.Request.Certificate.Verify()` ve ' `context.Request.Certificate.VerifyNoRevocation()` nin çalışması için API Management, kök (veya ara) CA sertifikalarının [yüklenmiş](api-management-howto-ca-certificates.md) olması gerekir.
 
-## <a name="checking-the-thumbprint"></a>Parmak denetimi
+## <a name="checking-the-thumbprint"></a>Parmak izi denetleniyor
 
-Bir istemci sertifikası parmak izi denetlemek için ilkeleri yapılandırılabilir:
+Aşağıdaki ilkeler bir istemci sertifikasının parmak izini denetlemek için yapılandırılabilir:
 
 ```xml
 <choose>
@@ -64,12 +63,12 @@ Bir istemci sertifikası parmak izi denetlemek için ilkeleri yapılandırılabi
 ```
 
 > [!NOTE]
-> Denetimi sertifika iptal listesi kullanımı devre dışı bırakmak için `context.Request.Certificate.VerifyNoRevocation()` yerine `context.Request.Certificate.Verify()`.
-> İstemci sertifika kendinden imzalı ise, kök (veya Ara) CA sertifikaları olmalıdır [karşıya](api-management-howto-ca-certificates.md) için API Management'tan `context.Request.Certificate.Verify()` ve `context.Request.Certificate.VerifyNoRevocation()` çalışmak için.
+> Yerine sertifika iptal listesi kullanımını `context.Request.Certificate.VerifyNoRevocation()` denetlemeyi devre dışı bırakmak için. `context.Request.Certificate.Verify()`
+> İstemci sertifikası kendinden imzalanmışsa, `context.Request.Certificate.Verify()` ve ' `context.Request.Certificate.VerifyNoRevocation()` nin çalışması için API Management, kök (veya ara) CA sertifikalarının [yüklenmiş](api-management-howto-ca-certificates.md) olması gerekir.
 
-## <a name="checking-a-thumbprint-against-certificates-uploaded-to-api-management"></a>API yönetimi için karşıya bir parmak izi sertifikalara karşı denetleniyor
+## <a name="checking-a-thumbprint-against-certificates-uploaded-to-api-management"></a>API Management yüklenen sertifikalara yönelik parmak izi denetleniyor
 
-Aşağıdaki örnekte, nasıl bir istemci sertifikası karşı API Management'a yüklenen sertifikaların parmak izi kontrol edileceğini göstermektedir:
+Aşağıdaki örnek, API Management yüklenen sertifikalara karşı bir istemci sertifikasının parmak izini nasıl denet, gösterir:
 
 ```xml
 <choose>
@@ -83,16 +82,16 @@ Aşağıdaki örnekte, nasıl bir istemci sertifikası karşı API Management'a 
 ```
 
 > [!NOTE]
-> Denetimi sertifika iptal listesi kullanımı devre dışı bırakmak için `context.Request.Certificate.VerifyNoRevocation()` yerine `context.Request.Certificate.Verify()`.
-> İstemci sertifika kendinden imzalı ise, kök (veya Ara) CA sertifikaları olmalıdır [karşıya](api-management-howto-ca-certificates.md) için API Management'tan `context.Request.Certificate.Verify()` ve `context.Request.Certificate.VerifyNoRevocation()` çalışmak için.
+> Yerine sertifika iptal listesi kullanımını `context.Request.Certificate.VerifyNoRevocation()` denetlemeyi devre dışı bırakmak için. `context.Request.Certificate.Verify()`
+> İstemci sertifikası kendinden imzalanmışsa, `context.Request.Certificate.Verify()` ve ' `context.Request.Certificate.VerifyNoRevocation()` nin çalışması için API Management, kök (veya ara) CA sertifikalarının [yüklenmiş](api-management-howto-ca-certificates.md) olması gerekir.
 
 > [!TIP]
-> Bu konuda açıklanan istemci sertifikası kilitlenme sorunu [makale](https://techcommunity.microsoft.com/t5/Networking-Blog/HTTPS-Client-Certificate-Request-freezes-when-the-Server-is/ba-p/339672) kendisini çeşitli yollarla bildirim, örneğin istekleri dondurma, istekleri sonucu `403 Forbidden` aşımından sonra durum kodu `context.Request.Certificate` olduğu `null`. Bu sorun genellikle etkiler `POST` ve `PUT` istekleri içerik uzunluğu yaklaşık 60 KB veya daha büyük.
-> Bu sorunu gerçekleşmesini önlemek için aşağıda gösterildiği gibi "Özel etki alanları" dikey penceresinde istenen ana bilgisayar adları için "Anlaş istemci sertifikası" ayarı açın. Bu özellik tüketim katmanında kullanılamıyor.
+> Bu [makalede](https://techcommunity.microsoft.com/t5/Networking-Blog/HTTPS-Client-Certificate-Request-freezes-when-the-Server-is/ba-p/339672) açıklanan istemci sertifikası kilitlenmesi sorunu, tek bir şekilde kendi kendine bildirimde bulunabilir. Örneğin, istekler `403 Forbidden` `context.Request.Certificate` dondurduktan sonra istek zaman aşımından sonra durum koduna neden olur `null`. Bu sorun genellikle yaklaşık `POST` 60 `PUT` KB veya daha büyük içerik uzunluğuna sahip olan istekleri etkiler.
+> Bu sorunun oluşmasını engellemek için, "özel etki alanları" dikey penceresindeki istenen ana bilgisayar adları için "istemci sertifikası anlaş" ayarını aşağıda gösterildiği gibi etkinleştirin. Bu özellik, tüketim katmanında kullanılamaz.
 
 ![İstemci sertifikası için anlaş](./media/api-management-howto-mutual-certificates-for-clients/negotiate-client-certificate.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
--   [Arka uç Hizmetleri istemcisini kullanarak sertifika kimlik doğrulaması güvenliğini sağlama](https://docs.microsoft.com/azure/api-management/api-management-howto-mutual-certificates)
+-   [İstemci sertifikası kimlik doğrulaması kullanarak arka uç hizmetlerini güvenli hale getirme](https://docs.microsoft.com/azure/api-management/api-management-howto-mutual-certificates)
 -   [Sertifikaları karşıya yükleme](https://docs.microsoft.com/azure/api-management/api-management-howto-mutual-certificates)

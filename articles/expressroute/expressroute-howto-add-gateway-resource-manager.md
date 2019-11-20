@@ -1,5 +1,5 @@
 ---
-title: 'ExpressRoute için sanal ağ geçidi bir sanal ağa ekleyin: PowerShell: Azure | Microsoft Docs'
+title: 'Azure ExpressRoute: sanal ağa ağ geçidi ekleme: PowerShell'
 description: Bu makalede önceden oluşturulmuş bir Resource Manager Vnet'i ExpressRoute için VNet ağ geçidinin eklemenize yardımcı olur.
 services: expressroute
 author: charwen
@@ -8,12 +8,12 @@ ms.topic: article
 ms.date: 02/21/2019
 ms.author: charwen
 ms.custom: seodec18
-ms.openlocfilehash: 6ab701adcc2122270c607604f222ac5edbceeb37
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6e6d79afa1126acb26cb8856c39ba486cce31a5e
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66730527"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037421"
 ---
 # <a name="configure-a-virtual-network-gateway-for-expressroute-using-powershell"></a>PowerShell kullanarak ExpressRoute için sanal ağ geçidi yapılandırma
 > [!div class="op_single_selector"]
@@ -24,15 +24,15 @@ ms.locfileid: "66730527"
 > 
 > 
 
-Bu makalede, ekleme, yeniden boyutlandırma ve önceden var olan bir VNet için bir sanal ağ (VNet) ağ geçidini kaldırmak yardımcı olur. Bu yapılandırma için adımlar, bir ExpressRoute yapılandırması için Resource Manager dağıtım modeli kullanılarak oluşturulan sanal ağlar için geçerlidir. Daha fazla bilgi için [ExpressRoute için sanal ağ geçitleri hakkında](expressroute-about-virtual-network-gateways.md).
+Bu makalede, ekleme, yeniden boyutlandırma ve önceden var olan bir VNet için bir sanal ağ (VNet) ağ geçidini kaldırmak yardımcı olur. Bu yapılandırmaya yönelik adımlar, bir ExpressRoute yapılandırması için Kaynak Yöneticisi dağıtım modeli kullanılarak oluşturulan sanal ağlar için geçerlidir. Daha fazla bilgi için bkz. [ExpressRoute için sanal ağ geçitleri hakkında](expressroute-about-virtual-network-gateways.md).
 
 ## <a name="before-beginning"></a>Başlamadan önce
 
 ### <a name="working-with-powershell"></a>PowerShell ile çalışma
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
-[!INCLUDE [working with cloud shell](../../includes/expressroute-cloud-shell-powershell-about.md)]
+[!INCLUDE [working with cloud shell](../../includes/expressroute-cloudshell-powershell-about.md)]
 
 ### <a name="configuration-reference-list"></a>Yapılandırma başvuru listesi
 

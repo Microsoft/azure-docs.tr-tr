@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric ters proxy güvenli iletişim | Microsoft Docs
-description: Güvenli uçtan uca iletişimi etkinleştirmek için ters proxy yapılandırın.
+title: Azure Service Fabric ters proxy güvenli iletişimi | Microsoft Docs
+description: Uçtan uca iletişimin güvenliğini sağlamak için ters proxy 'yi yapılandırın.
 services: service-fabric
 documentationcenter: .net
 author: kavyako
@@ -13,37 +13,37 @@ ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 08/10/2017
 ms.author: kavyako
-ms.openlocfilehash: d8a11a3289037602535d1b5727d041e376012bd8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e915e689f09ba7f5c92958ebf8531aa67eef4493
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60837853"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72933947"
 ---
-# <a name="connect-to-a-secure-service-with-the-reverse-proxy"></a>Güvenli hizmet ters proxy ile bağlanma
+# <a name="connect-to-a-secure-service-with-the-reverse-proxy"></a>Ters ara sunucu ile güvenli bir hizmete bağlanma
 
-Bu makalede, ters proxy ve bu nedenle bir uçtan uca güvenli kanal Etkinleştirme Hizmetleri arasında güvenli bağlantı kurmak açıklanmaktadır. Ters proxy hakkında daha fazla bilgi için bkz: [ters proxy Azure Service fabric'te](service-fabric-reverseproxy.md)
+Bu makalede, ters proxy ve hizmetler arasında güvenli bağlantı kurmayı ve böylece uçtan uca güvenli kanalı etkinleştirmeyi açıklar. Ters proxy hakkında daha fazla bilgi edinmek için bkz. [Azure 'Da ters proxy Service Fabric](service-fabric-reverseproxy.md)
 
-Ters proxy HTTPS üzerinde dinleyecek şekilde yapılandırıldığında güvenli hizmetlere bağlanma desteklenir. Bu makalede, bu durumda varsayılır.
-Başvurmak [Kurulum ters proxy Azure Service fabric'te](service-fabric-reverseproxy-setup.md) Service Fabric ters Proxy'yi yapılandırmak için.
+Güvenli hizmetlere bağlanma yalnızca ters proxy, HTTPS üzerinde dinlemek üzere yapılandırıldığında desteklenir. Bu makalede bu durum olduğu varsayılır.
+Service Fabric ' de ters proxy 'yi yapılandırmak için [Azure Service Fabric 'da ters proxy ayarlama](service-fabric-reverseproxy-setup.md) bölümüne bakın.
 
-## <a name="secure-connection-establishment-between-the-reverse-proxy-and-services"></a>Ters proxy ile hizmetler arasında güvenli bağlantı kurma 
+## <a name="secure-connection-establishment-between-the-reverse-proxy-and-services"></a>Ters proxy ve hizmetler arasında güvenli bağlantı kurulumu 
 
-### <a name="reverse-proxy-authenticating-to-services"></a>Kimlik doğrulama hizmetleri için ters proxy:
-Ters proxy sertifikasını kullanarak hizmetlere kendisini tanımlar. İle Azure sertifika kümeleri için belirtilen ***reverseProxyCertificate*** özelliğinde [ **Microsoft.ServiceFabric/clusters** ](https://docs.microsoft.com/azure/templates/microsoft.servicefabric/clusters) [kaynak türü bölüm](../azure-resource-manager/resource-group-authoring-templates.md) Resource Manager şablonu. Tek başına kümeler için sertifika ile belirtilir ***ReverseProxyCertificate*** veya ***ReverseProxyCertificateCommonNames*** özelliğinde **güvenlik**ClusterConfig.json bölümü. Daha fazla bilgi için bkz. [tek başına kümeler ters proxy etkinleştirme](service-fabric-reverseproxy-setup.md#enable-reverse-proxy-on-standalone-clusters). 
+### <a name="reverse-proxy-authenticating-to-services"></a>Hizmetlere ters proxy kimlik doğrulaması:
+Ters proxy, sertifikasını kullanarak kendisini hizmetlere tanıtır. Azure kümeleri için sertifika, Kaynak Yöneticisi şablonunun [**Microsoft. ServiceFabric/kümeler**](https://docs.microsoft.com/azure/templates/microsoft.servicefabric/clusters) [kaynak türü bölümünde](../azure-resource-manager/resource-group-authoring-templates.md) bulunan ***smarproxycertificate*** özelliği ile belirtilir. Tek başına kümeler için, sertifika, ClusterConfig. json ' un **güvenlik** bölümünde bulunan bir ***smarproxycertificate*** veya ***smarproxycertificatecommonnames*** özelliği ile belirtilir. Daha fazla bilgi için bkz. [tek başına kümelerde ters proxy 'Yi etkinleştirme](service-fabric-reverseproxy-setup.md#enable-reverse-proxy-on-standalone-clusters). 
 
-Hizmetleri ters proxy tarafından sunulan sertifika doğrulamak için mantığı uygulayabilir. Hizmetler, yapılandırma ayarlarında yapılandırma paketi olarak kabul edilen istemci sertifikası ayrıntıları belirtebilirsiniz. Bu çalışma zamanında okunabilir ve ters proxy tarafından sunulan sertifika doğrulamak için kullanılır. Başvurmak [uygulama parametrelerini yönetme](service-fabric-manage-multiple-environment-app-configuration.md) yapılandırma ayarlarını eklemek için. 
+Hizmetler, ters proxy tarafından sunulan sertifikayı doğrulamak için mantığı uygulayabilir. Hizmetler, kabul edilen istemci sertifikası ayrıntılarını yapılandırma paketindeki yapılandırma ayarları olarak belirtebilir. Bu, çalışma zamanında okunabilir ve ters proxy tarafından sunulan sertifikayı doğrulamak için kullanılabilir. Yapılandırma ayarlarını eklemek için [Uygulama parametrelerini yönetme](service-fabric-manage-multiple-environment-app-configuration.md) bölümüne bakın. 
 
-### <a name="reverse-proxy-verifying-the-services-identity-via-the-certificate-presented-by-the-service"></a>Ters proxy hizmeti tarafından sunulan sertifika aracılığıyla hizmet kimliği doğrulanıyor:
-Ters proxy hizmetleri tarafından sunulan sertifikaların sunucu sertifikası doğrulamayı gerçekleştirmek için aşağıdaki ilkeleri destekler: None, ServiceCommonNameAndIssuer ve ServiceCertificateThumbprints.
-Ters proxy'nin kullanması ilkeyi seçmek için **ApplicationCertificateValidationPolicy** içinde **Applicationgateway'inin/Http** bölümüne [fabricSettings](service-fabric-cluster-fabric-settings.md).
+### <a name="reverse-proxy-verifying-the-services-identity-via-the-certificate-presented-by-the-service"></a>Hizmet tarafından sunulan sertifika aracılığıyla hizmetin kimliğini ters proxy olarak doğrulayan:
+Ters proxy, hizmetler tarafından sunulan sertifikaların sunucu sertifikası doğrulamasını gerçekleştirmek için aşağıdaki ilkeleri destekler: None, ServiceCommonNameAndIssuer ve ServiceCertificateThumbprints.
+Kullanılacak ters proxy ilkesini seçmek için, [Fabricsettings](service-fabric-cluster-fabric-settings.md)altındaki **Applicationgateway/http** bölümünde **applicationcertificatevalidationpolicy** ' ı belirtin.
 
-Sonraki bölümde bu seçeneklerin her biri için yapılandırma ayrıntılarını gösterir.
+Sonraki bölümde, bu seçeneklerin her biri için yapılandırma ayrıntıları gösterilmektedir.
 
-### <a name="service-certificate-validation-options"></a>Hizmet sertifika doğrulama seçenekleri 
+### <a name="service-certificate-validation-options"></a>Hizmet sertifikası doğrulama seçenekleri 
 
-- **Hiçbiri**: Ters proxy proxy hizmet sertifikası doğrulamasını atlar ve güvenli bir bağlantı kurar. Bu varsayılan davranıştır.
-Belirtin **ApplicationCertificateValidationPolicy** değerle **hiçbiri** içinde [ **Applicationgateway'inin/Http** ](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümü.
+- **Hiçbiri**: ters proxy, proxy kullanan hizmet sertifikasının doğrulanmasını atlar ve güvenli bağlantı kurar. Bu, varsayılan davranıştır.
+[**Applicationgateway/http**](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümünde **none** değeriyle **applicationcertificatevalidationpolicy** değerini belirtin.
 
    ```json
    {
@@ -63,7 +63,7 @@ Belirtin **ApplicationCertificateValidationPolicy** değerle **hiçbiri** içind
    }
    ```
 
-- **ServiceCommonNameAndIssuer**: Ters proxy, sertifikanın ortak adı ve hemen verenin parmak izi bağlı hizmeti tarafından sunulan sertifika doğrular: Belirtin **ApplicationCertificateValidationPolicy** değerle **ServiceCommonNameAndIssuer** içinde [ **Applicationgateway'inin/Http** ](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümü.
+- **Servicecommonnameandissuer**: ters proxy, sertifikanın ortak adına ve anında verenin parmak izine göre hizmet tarafından sunulan sertifikayı doğrular: değer **Ile applicationcertificatevalidationpolicy belirtin**  [**Applicationgateway/http**](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümünde ServiceCommonNameAndIssuer.
 
    ```json
    {
@@ -83,10 +83,10 @@ Belirtin **ApplicationCertificateValidationPolicy** değerle **hiçbiri** içind
    }
    ```
 
-   Hizmet ortak adı ve verenin parmak izleri listesi belirtmek için bir [ **Applicationgateway'inin/Http/ServiceCommonNameAndIssuer** ](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttpservicecommonnameandissuer) bölümüne **fabricSettings**, Aşağıda gösterildiği gibi. Birden çok sertifika ortak adı ve verenin parmak izi çiftleri eklenebilir **parametreleri** dizisi. 
+   Hizmet ortak adı ve veren parmak izleri listesini belirtmek için, aşağıda gösterildiği gibi **Fabricsettings**altına bir [**Applicationgateway/http/ServiceCommonNameAndIssuer**](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttpservicecommonnameandissuer) bölümü ekleyin. **Parametreler** dizisine birden çok sertifika ortak adı ve veren parmak izi çiftleri eklenebilir. 
 
-   Uç nokta ters proxy sunar için ortak bir sertifika bağlanılıyorsa burada belirtilen değerlerden herhangi birini adı ve verenin parmak iziyle eşleştiğinden, SSL kanalı kurulur. 
-   Sertifika ayrıntıları eşleştirmek için başarısızlık durumunda, ters proxy, istemcinin isteği 502 (hatalı ağ geçidi) durum kodu ile başarısız olur. HTTP durum satırı da "Geçersiz SSL sertifikası" ifadesini içerir 
+   Uç nokta ters ara sunucusu, ortak ad ve veren parmak izi burada belirtilen değerlerden biriyle eşleşen bir sertifika sunduğunda, SSL kanalı oluşturulur. 
+   Sertifika ayrıntılarının eşleşmemesi başarısız olduktan sonra, ters proxy istemcinin isteği 502 (Hatalı ağ geçidi) durum kodu ile başarısız olur. HTTP durum satırı, "geçersiz SSL sertifikası" ifadesini de içerecektir. 
 
    ```json
    {
@@ -110,7 +110,7 @@ Belirtin **ApplicationCertificateValidationPolicy** değerle **hiçbiri** içind
    }
    ```
 
-- **ServiceCertificateThumbprints**: Ters proxy proxy hizmet sertifikası, parmak izinden yola çıkarak doğrular. Git Hizmetleri ile kendi kendine yapılandırıldığında bu yolu otomatik olarak imzalanan sertifikalar seçebilirsiniz: Belirtin **ApplicationCertificateValidationPolicy** değerle **ServiceCertificateThumbprints** içinde [ **Applicationgateway'inin/Http** ](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümü.
+- **ServiceCertificateThumbprints**: ters proxy, kendi parmak izine bağlı olarak proxy hizmet sertifikasını doğrular. Hizmetler kendinden imzalı sertifikalarla yapılandırıldığında bu yolu kullanmaya devam edebilirsiniz: [**Applicationgateway/http**](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) içinde **ServiceCertificateThumbprints** değeri Ile **applicationcertificatevalidationpolicy** belirtin kısmı.
 
    ```json
    {
@@ -130,7 +130,7 @@ Belirtin **ApplicationCertificateValidationPolicy** değerle **hiçbiri** içind
    }
    ```
 
-   Ayrıca parmak belirtin bir **ServiceCertificateThumbprints** girişi **Applicationgateway'inin/Http** bölümü. Birden çok parmak izleri aşağıda gösterildiği gibi değeri alanına, virgülle ayrılmış bir liste olarak belirtilebilir:
+   Ayrıca, **ServiceCertificateThumbprints** girişi ile birlikte parmak Izlerini **Applicationgateway/http** bölümünde de belirtin. Birden çok parmak izi, değer alanında aşağıda gösterildiği gibi, virgülle ayrılmış bir liste olarak belirtilebilir:
 
    ```json
    {
@@ -151,12 +151,12 @@ Belirtin **ApplicationCertificateValidationPolicy** değerle **hiçbiri** içind
    }
    ```
 
-   Sunucu sertifikasının parmak izini bu yapılandırma girişi listeleniyorsa, ters proxy SSL bağlantı başarılı olur. Aksi takdirde, bağlantıyı sonlandırır ve istemcinin isteği bir 502 (hatalı ağ geçidi) ile başarısız olur. HTTP durum satırı da "Geçersiz SSL sertifikası" ifadesini içerir
+   Sunucu sertifikasının parmak izi bu yapılandırma girişinde listeleniyorsa, ters proxy, SSL bağlantısını başarılı bir şekilde başarılı olur. Aksi takdirde, bağlantıyı sonlandırır ve istemcinin isteği 502 (Hatalı ağ geçidi) ile başarısız olur. HTTP durum satırı, "geçersiz SSL sertifikası" ifadesini de içerecektir.
 
-## <a name="endpoint-selection-logic-when-services-expose-secure-as-well-as-unsecured-endpoints"></a>Hizmetleri güvenli olarak güvenli olmayan uç noktaları kullanıma sunun, uç nokta seçme mantığı
-Service fabric, bir hizmet için birden fazla uç nokta yapılandırma destekler. Daha fazla bilgi için [bir hizmet bildiriminde kaynakları belirtme](service-fabric-service-manifest-resources.md).
+## <a name="endpoint-selection-logic-when-services-expose-secure-as-well-as-unsecured-endpoints"></a>Hizmetler güvenli hale geldiğinde ve güvenli olmayan uç noktalar sunan uç nokta seçim mantığı
+Service Fabric, bir hizmet için birden çok uç noktanın yapılandırılmasını destekler. Daha fazla bilgi için bkz. [hizmet bildiriminde kaynakları belirtme](service-fabric-service-manifest-resources.md).
 
-Ters proxy seçer göre isteği iletmek için uç noktalardan biri **ListenerName** sorgu parametresi olarak [URI hizmet](./service-fabric-reverseproxy.md#uri-format-for-addressing-services-by-using-the-reverse-proxy). Varsa **ListenerName** parametresi belirtilmezse, ters proxy, uç noktalar listesinden herhangi bir uç noktaya seçim yapabilirsiniz. Hizmet için yapılandırılmış Uç noktalara bağlı olarak, seçili uç noktaya bir HTTP veya HTTPS uç noktası olabilir. Olabilir senaryoları veya gereksinimleri, bir "yalnızca güvenli modda"; çalışması için ters proxy istediğiniz diğer bir deyişle, güvenli olmayan uç noktaları isteklerini iletmek için güvenli ters proxy istemezsiniz. Ters proxy için salt güvenli moda ayarlanacak belirtin **SecureOnlyMode** yapılandırma girişi değerle **true** içinde [ **Applicationgateway'inin/Http** ](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümü.   
+Ters proxy, isteği [HIZMET URI](./service-fabric-reverseproxy.md#uri-format-for-addressing-services-by-using-the-reverse-proxy)'Sindeki **listenername** sorgu parametresine göre iletmek için uç noktalardan birini seçer. **Listenername** parametresi belirtilmemişse, ters proxy uç noktalar listesinden herhangi bir uç nokta seçebilir. Hizmet için yapılandırılan uç noktalara bağlı olarak, seçilen uç nokta bir HTTP veya HTTPS uç noktası olabilir. Ters proxy 'nin "yalnızca güvenli modda" çalışmasını istediğiniz senaryolar veya gereksinimler olabilir; diğer bir deyişle, güvenli ters proxy 'nin istekleri güvenli olmayan uç noktalara iletmesini istemezsiniz. Ters proxy 'yi güvenli moda ayarlamak için, [**Applicationgateway/http**](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümünde **true** değerine sahip **secureonlymode** yapılandırma girdisini belirtin.   
 
 ```json
 {
@@ -178,26 +178,26 @@ Ters proxy seçer göre isteği iletmek için uç noktalardan biri **ListenerNam
 ```
 
 > [!NOTE]
-> İçinde çalışırken **SecureOnlyMode**, bir istemci belirtilmişse bir **ListenerName** bir HTTP(unsecured) uç noktasına karşılık gelen, ters proxy istek bir 404 (bulunamadı) HTTP durum kodu ile başarısız olur.
+> **Secureonlymode**'da çalışırken, istemci http (güvenli olmayan) uç noktasına karşılık gelen bir **listenername** belirttiyseniz, ters proxy, isteği 404 (bulunamadı) http durum kodu ile başarısız olur.
 
-## <a name="setting-up-client-certificate-authentication-through-the-reverse-proxy"></a>İstemci sertifikası kimlik doğrulaması ters proxy aracılığıyla ayarlama
-Ters proxy SSL sonlandırma olur ve tüm istemci sertifikası verileri kaybolur. İstemci sertifikası kimlik doğrulaması gerçekleştirmek hizmetler için belirtme **ForwardClientCertificate** ayarı [ **Applicationgateway'inin/Http** ](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümü.
+## <a name="setting-up-client-certificate-authentication-through-the-reverse-proxy"></a>Ters ara sunucu aracılığıyla istemci sertifikası kimlik doğrulamasını ayarlama
+SSL sonlandırma, ters proxy 'de gerçekleşir ve tüm istemci sertifikası verileri kaybedilir. Hizmetlerin istemci sertifikası kimlik doğrulaması gerçekleştirmesi için [**Applicationgateway/http**](./service-fabric-cluster-fabric-settings.md#applicationgatewayhttp) bölümünde **forwardclientcertificate** ayarını belirtin.
 
-1. Zaman **ForwardClientCertificate** ayarlanır **false**ters proxy değil istek istemci sertifikası, SSL anlaşması sırasında istemciyle.
-Bu varsayılan davranıştır.
+1. **Forwardclientcertificate** **false**olarak ayarlandığında, ters proxy, istemci ile SSL el sıkışması sırasında istemci sertifikasını istemeyecektir.
+Bu, varsayılan davranıştır.
 
-2. Zaman **ForwardClientCertificate** ayarlanır **true**ters proxy istemcinin, SSL anlaşması sırasında istemci sertifikasını ister.
-Ardından sertifika verileri, adlı özel bir HTTP üst bilgisinde istemci iletir **X istemci sertifikası**. Üst bilgi değeri istemci sertifikasını base64 kodlu PEM biçimi dizesidir. Hizmet başarılı/istek uygun durum kodu ile sertifika verileri inceleyerek sonra başarısız.
-İstemci sertifika sunmuyorsa ters proxy boş bir üst bilgisi iletir ve durumu işlemek service gerisini halleder.
+2. **Forwardclientcertificate** **değeri true**olarak ayarlandığında ters proxy, istemci ile SSL el sıkışması sırasında istemcinin sertifikasını ister.
+Daha sonra istemci sertifikası verilerini **X-Client-Certificate**adlı özel bir http üst bilgisinde iletecektir. Üst bilgi değeri, istemci sertifikasının Base64 kodlamalı pek biçim dizesidir. Hizmet, sertifika verilerini inceledikten sonra uygun durum koduna sahip isteği başarılı bir şekilde devreder.
+İstemci bir sertifika sunmıyorsa, ters proxy boş bir üst bilgiyi iletir ve hizmetin durumu işlemesini sağlar.
 
 > [!NOTE]
-> Ters proxy boyutundaydı iletici ' dir. İstemci sertifikasının tüm doğrulaması gerçekleştirmez.
+> Ters proxy bir boyutundaydı ileticidir. İstemci sertifikasının herhangi bir doğrulamasını gerçekleştirmeyecektir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Bir kümede ters proxy ayarlarını yapılandırma ve ayarlama](service-fabric-reverseproxy-setup.md).
-* Başvurmak [güvenli hizmetlerine bağlanmak için ters proxy yapılandırma](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/ReverseProxySecureSample#configure-reverse-proxy-to-connect-to-secure-services) için Azure Resource Manager şablonu örnekleri yapılandırmak için farklı hizmet sertifikası ile ters proxy doğrulama seçenekleri güvenli.
-* HTTP iletişim hizmetleri arasında bir örneğini görmek bir [GitHub üzerinde örnek proje](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started).
-* [Reliable Services uzaktan iletişimi ile uzak yordam çağrıları](service-fabric-reliable-services-communication-remoting.md)
-* [OWIN güvenilir hizmetler kullanan Web](service-fabric-reliable-services-communication-webapi.md)
+* [Bir kümede ters proxy ayarlayın ve yapılandırın](service-fabric-reverseproxy-setup.md).
+* [Güvenli hizmetlere bağlanmak için ters proxy 'Yi yapılandırma](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Reverse-Proxy-Sample#configure-reverse-proxy-to-connect-to-secure-services) konusuna bakın
+* [GitHub üzerinde örnek bir projede](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started)bulunan HIZMETLER arasındaki HTTP iletişimi örneğini inceleyin.
+* [Reliable Services uzaktan iletişim ile uzak yordam çağrıları](service-fabric-reliable-services-communication-remoting.md)
+* [Reliable Services 'de OWıN kullanan Web API 'SI](service-fabric-reliable-services-communication-webapi.md)
 * [Küme sertifikalarını yönetme](service-fabric-cluster-security-update-certs-azure.md)

@@ -1,37 +1,38 @@
 ---
-title: SaaS yerine getirme API'leri | Azure Market
-description: İle Azure marketi, SaaS tümleştirmenize olanak sağlayan API'ler sunar yerine getirme sürümlerini sunar.
+title: SaaS API 'Leri karşılama | Azure Marketi
+description: SaaS tekliflerinizi Azure Marketi ile tümleştirmenize olanak tanıyan, karşılama API 'lerinin sürümlerini tanıtır.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 05/23/2019
 ms.author: evansma
-ms.openlocfilehash: 7896ed77d9dbb3358ddb1c809ca342828280f66a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ebfc278d09c244970df5807df1505295fe7016c4
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66258932"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819116"
 ---
 # <a name="saas-fulfillment-apis"></a>SaaS gerçekleştirme API'leri
 
-SaaS yerine getirme API'leri, bağımsız yazılım satıcılarına (ISV) Azure Market ile SaaS uygulamalarını tümleştirme sağlar. Bu API'leri ISV uygulamaları tüm ticari etkin kanallarında katılmayı etkinleştir: doğrudan, iş ortağı destekli (satıcı) ve alan öncülüğünde.  Bir gereksinim transactable SaaS tekliflerini Azure Marketi'nde listeleme değildirler.
+SaaS 'nin birlikte getirilmesi API 'Leri, bağımsız yazılım satıcılarının (ISV 'Ler) SaaS uygulamalarını Azure Marketi ile tümleştirmelerini sağlar. Bu API 'Ler ISV uygulamalarının tüm ticari özellikli kanallara katılmasını sağlar: doğrudan, iş ortağı LED (satıcı) ve alan-LED.  Azure Marketi 'nde transactable SaaS tekliflerini listelemesi gereksinimleridir.
 
 > [!WARNING]
-> Bu API'ın geçerli sürümü kullanılması gereken sürüm 2 ' olan tüm yeni SaaS teklifleri.  API sürümü 1 kullanım dışıdır ve mevcut teklifler desteklemek üzere saklanır.
+> Bu API 'nin geçerli sürümü, tüm yeni SaaS teklifleri için kullanılması gereken sürüm 2 ' dir.  API sürüm 1 kullanım dışıdır ve mevcut teklifleri desteklemek için tutulmaktadır.
 
 
 ## <a name="business-model-support"></a>İş modeli desteği
 
-Bu API aşağıdaki iş modeli özelliklerini destekler; Şunları yapabilirsiniz:
+Bu API aşağıdaki iş modeli yeteneklerini destekler; Şunları yapabilirsiniz:
 
-* Bir teklif için birden çok planları belirtin. Bu planları farklı işlevselliğe sahip ve farklı fiyatlandırılır.
-* Teklif sağlayan bir site başına veya bir model başına faturalama kullanıcı başına.
-* Aylık ve yıllık (önceden ödenen) sağlayan faturalandırma seçenekleriyle.
-* Üzerinde anlaşılan iş anlaşmasına göre bir müşteriye özel ücretlendirme yapılır.
+* Bir teklif için birden çok plan belirtin. Bu planlar farklı işlevlere sahiptir ve farklı şekilde fiyatlandırılabilir.
+* Site başına veya Kullanıcı başına faturalandırma modeli temelinde bir teklif sunun.
+* Aylık ve yıllık (ücretli ön ödeme) Faturalandırma seçeneklerini belirtin.
+* Anlaşmalı bir iş sözleşmesine göre müşteriye özel fiyatlandırma sağlar.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Zaten yapmadıysanız, SaaS uygulamanızı kaydetme [Azure portalında](https://ms.portal.azure.com) açıklandığı şekilde [bir Azure AD uygulaması kaydedin](./pc-saas-registration.md).  Ardından, geliştirme için en güncel sürümü bu arabirimin kullanın: [SaaS yerine getirme API sürüm 2](./pc-saas-fulfillment-api-v2.md).
+Daha önce yapmadıysanız, SaaS uygulamanızı [Azure AD uygulaması kaydetme](./pc-saas-registration.md)bölümünde açıklandığı gibi [Azure Portal](https://ms.portal.azure.com) kaydedin.  Daha sonra, geliştirme için bu arabirimin en güncel sürümünü kullanın: [SaaS API sürüm 2](./pc-saas-fulfillment-api-v2.md)' yi karşılama.

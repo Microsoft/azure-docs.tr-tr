@@ -5,51 +5,47 @@ services: bastion
 author: cherylmc
 ms.service: bastion
 ms.topic: overview
-ms.date: 06/17/2019
+ms.date: 11/04/2019
 ms.author: cherylmc
-ms.openlocfilehash: d153c876366c8c747e06bf50a0ea26bcdcea10eb
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: 4cee16a4b6d4f87c8f09ad742d9a504cfc5fc394
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67303588"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73498321"
 ---
-# <a name="what-is-azure-bastion-preview"></a>Azure savunma nedir? (Önizleme)
+# <a name="what-is-azure-bastion"></a>Azure Bastion nedir?
 
-Sanal ağınız içinde sağladığınız yeni bir tam platformu olarak yönetilen PaaS hizmeti Azure savunma hizmetidir. Bu, SSL üzerinden doğrudan Azure portalında sanal makinelerinize güvenli ve sorunsuz RDP/SSH bağlantı sağlar. Azure Bastion aracılığıyla bağlandığınızda, sanal makinelerinizin bir genel IP adresi olması gerekmez.
+Azure savunma hizmeti, sanal ağınızın içinde sağladığınız yeni, platform tarafından yönetilen yeni bir PaaS hizmetidir. SSL üzerinden Azure portal doğrudan sanal makinelerinize yönelik güvenli ve sorunsuz RDP/SSH bağlantısı sağlar. Azure Bastion aracılığıyla bağlandığınızda, sanal makinelerinizin bir genel IP adresi olması gerekmez.
 
- Savunma, sağlanan sanal ağ içindeki tüm sanal makineleri güvenli RDP ve SSH bağlantısı sağlar. Azure savunma kullanarak sanal makinelerinizi hala RDP/SSH kullanarak güvenli erişim sağlarken dış dünya RDP/SSH bağlantı noktalarını gösterme korur. Azure savunma ile doğrudan Azure portalından sanal makineye bağlanın. Bir ek istemci, aracı veya yazılım gerekmez.
-
-> [!IMPORTANT]
-> Bu genel önizleme bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılmamalıdır. Belirli özellikler desteklenmiyor olabilir, kısıtlı yeteneklere sahip olabilir veya tüm Azure konumlarında mevcut olmayabilir. Ayrıntılar için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
->
+ Savunma, sağlandığı sanal ağdaki tüm VM 'lere güvenli RDP ve SSH bağlantısı sağlar. Azure savunma 'nın kullanılması, sanal makinelerinizin, RDP/SSH kullanarak güvenli erişim sağlamaya devam ederken, dış dünyaya RDP/SSH bağlantı noktaları sunulmasını önler. Azure savunma sayesinde, sanal makineye doğrudan Azure portal bağlanırsınız. Ek bir istemci, aracı veya yazılım parçası gerekmez.
 
 ## <a name="architecture"></a>Mimari
 
-Azure savunma sanal ağınızda dağıtılan ve dağıtıldıktan sonra sanal ağınızdaki tüm sanal makineler için güvenli RDP/SSH deneyimi sağlar. Sanal ağınızda Azure savunma hizmet sağladıktan sonra RDP/SSH deneyimi, aynı sanal ağdaki tüm Vm'leriniz için kullanılabilir. Abonelik/hesap ya da sanal makine başına sanal ağ başına dağıtımıdır.
+Azure savunma, sanal ağınızda dağıtılır ve dağıtıldıktan sonra, sanal ağınızdaki tüm sanal makineler için güvenli RDP/SSH deneyimi sağlar. Sanal ağınızda bir Azure savunma hizmeti sağladığınızda, RDP/SSH deneyimi aynı sanal ağdaki tüm VM 'leriniz için kullanılabilir. Dağıtım, abonelik/hesap veya sanal makine başına değil, sanal ağ başına yapılır.
 
-RDP ve SSH Azure'da çalışan bir iş yükünüz için bağlanabileceğiniz temel anlamına gelir bazılarıdır. RDP/SSH bağlantı noktası Internet üzerinden kullanıma sunan gerekli değildir ve önemli tehdit yüzeyi olarak görülür. Bu genellikle protokol güvenlik açıkları nedeniyle olur. Bu tehdit yüzeyini içeren çevre ağınızda genel tarafında savunma ana bilgisayar (diğer adıyla atlama-sunucuları) dağıtabilirsiniz. Savunma ana bilgisayarı sunucularını tasarlanmış ve saldırıları dayanacak şekilde yapılandırılmış. Savunma sunucuları de savunma oturan iş yükleri için RDP ve SSH bağlantısı sağlamak, hem de ağ içinde daha fazla.
+RDP ve SSH, Azure 'da çalışan iş yüklerinize bağlanmak için kullanabileceğiniz temel yollardan biridir. RDP/SSH bağlantı noktalarının Internet üzerinden kullanıma sunulması istenmez ve önemli bir tehdit yüzeyi olarak görülür. Bunun nedeni genellikle protokol güvenlik açıklarına göre yapılır. Bu tehdit yüzeyini içermesi için, çevre ağınızın genel tarafında savunma Konakları (doğrudan geçiş sunucuları olarak da bilinir) dağıtabilirsiniz. Savunma ana bilgisayar sunucuları tasarlanmakta ve bağımsız saldırılara yönelik olarak yapılandırılmıştır. Savunma sunucuları Ayrıca, savunma ve ağ içinde oturmuş iş yükleri için RDP ve SSH bağlantısı sağlar.
 
 ![architecture](./media/bastion-overview/architecture.png)
 
-Bu şekilde bir Azure savunma dağıtım mimarisi gösterilmektedir. Bu diyagramda:
+Bu şekilde, bir Azure savunma dağıtımının mimarisi gösterilmektedir. Bu diyagramda:
 
-* Kale ana bilgisayarı sanal ağ içinde dağıtılır.
-* Kullanıcı, Azure portalında herhangi bir HTML5 tarayıcı kullanarak bağlanır.
-* Kullanıcı bağlanmak için sanal makine seçer.
-* Tek bir tıklamayla RDP/SSH oturumundan tarayıcıda açılır.
-* Azure sanal makinesinde hiçbir genel IP gereklidir.
+* Savunma ana bilgisayarı sanal ağda dağıtılır.
+* Kullanıcı herhangi bir HTML5 tarayıcısı kullanarak Azure portal bağlanır.
+* Kullanıcı, bağlanılacak sanal makineyi seçer.
+* Tek bir tıklama ile, RDP/SSH oturumu tarayıcıda açılır.
+* Azure VM 'de genel IP gerekli değildir.
 
 ## <a name="key-features"></a>Önemli özellikler
 
-Genel Önizleme sırasında denemek aşağıdaki özellikler mevcuttur:
+Aşağıdaki özellikler mevcuttur:
 
-* **RDP ve SSH doğrudan Azure Portalı'nda:** Tek tıklamayla sorunsuz bir deneyim kullanarak doğrudan Azure portalının RDP ve SSH oturumunda doğrudan alabilirsiniz.
-* **Uzak oturum üzerinden SSL ve güvenlik duvarı geçişi RDP/SSH için:** SSL üzerinden güvenlik duvarları güvenli bir şekilde çapraz geçiş sağlayarak 443 numaralı bağlantı noktası üzerinde RDP/SSH oturumunuzun eklentisinden azure savunma yerel cihazınız otomatik olarak akışa bir HTML5 tabanlı web istemcisi kullanır.
-* **Hiçbir genel IP, Azure sanal makinesinde gerekli:** Azure savunma sanal Makinenize özel IP kullanan, Azure sanal makinesi için RDP/SSH bağlantısı açılır. Sanal makinenizde bir genel IP gerekmez.
-* **Nsg'ler yönetme sorunsuz:** Azure savunma, RDP/SSH bağlantısı güvenliğini sağlamak için dahili olarak sıkı Azure PaaS hizmeti tam olarak yönetilen bir platformdur. Azure savunma alt ağda Nsg uygulamak gerek yoktur. Azure savunma, sanal makinelerinizi, özel IP bağlandığından, Nsg'lerinizi yalnızca Azure savunma RDP/SSH izin verecek şekilde yapılandırabilirsiniz. Bu, Nsg'ler sanal makinelerinize güvenli bir şekilde bağlanmak için her zaman yönetmek için ortadan kaldırır.
-* **Bağlantı noktası tarama karşı koruma:** Sanal makinelerinizi genel İnternet'e kullanıma gerekmez çünkü Vm'lerinizi bağlantı noktası tarama dolandırıcı ve sanal ağınızın dışında bulunan kötü amaçlı kullanıcılara karşı korunur.
-* **Sıfır gün açıklarından karşı koruyun. Yalnızca tek bir yerde sağlamlaştırma:** Azure savunma bir tam platformu olarak yönetilen PaaS hizmetidir. Sanal ağ çevre bulunur çünkü sanal ağınızdaki sanal makinelerin her biri sağlamlaştırma hakkında endişelenmeniz gerekmez. Azure platformu, Azure savunma sağlamlaştırılmış ve her zaman güncel sizin için otomatik olarak kilitlenmesini sağlayarak sıfır gün açıklarından karşı korur.
+* **RDP ve SSH doğrudan Azure Portal:** Yalnızca tek tıklamayla sorunsuz bir deneyim kullanarak doğrudan Azure portal RDP ve SSH oturumuna doğrudan ulaşabilirsiniz.
+* **RDP/SSH IÇIN SSL üzerinden uzak oturum ve güvenlik duvarı geçişi:** Azure savunma, şirket güvenlik duvarlarını güvenli bir şekilde çapraz bir şekilde geçebilmenizi sağlayan 443 numaralı bağlantı noktasında RDP/SSH oturumunuzu SSL üzerinden almanızı sağlamak için otomatik olarak yerel cihazınıza akan HTML5 tabanlı bir Web istemcisi kullanır.
+* **Azure VM 'de genel IP gerekmez:** Azure savunma, sanal makinelinizdeki özel IP kullanarak Azure sanal makinenize yönelik RDP/SSH bağlantısını açar. Sanal makinenizde genel IP 'niz olması gerekmez.
+* **NSG 'leri yönetmenin bir sorun yoktur:** Azure savunma, Azure 'dan gelen ve RDP/SSH bağlantısı sağlayan güvenli bir platform PaaS hizmetidir. Azure savunma alt ağında herhangi bir NSG uygulamanız gerekmez. Azure savunma, sanal makinelerinize özel IP üzerinden bağlandığından, NSG 'lerinizi yalnızca Azure 'dan gelen RDP/SSH 'ye izin verecek şekilde yapılandırabilirsiniz. Bu, sanal makinelerinize güvenli bir şekilde bağlanmak için gereken her seferinde NSG 'leri yönetmenin ne kadar olduğunu ortadan kaldırır.
+* **Bağlantı noktası taramaya karşı koruma:** Sanal makinelerinizi ortak Internet 'e sunmak zorunda olmadığınızdan, VM 'niz, sanal ağınızın dışında bulunan standart dışı ve kötü amaçlı kullanıcılar tarafından bağlantı noktası taramaya karşı korunur.
+* **Sıfır günlük saldırılara karşı koruma. Yalnızca bir yerde sağlamlaştırma:** Azure savunma, tam platform tarafından yönetilen bir PaaS hizmetidir. Sanal ağınızın çevre tarafında bulunduğundan, sanal ağınızdaki sanal makinelerin her birini sağlamlaştırma konusunda endişelenmeniz gerekmez. Azure platformu, sizin için Azure savunma ve sürekli güncel kalmasını sağlayarak sıfır günlük güvenlik açıklarından yararlanmaya karşı koruma sağlar.
 
 ## <a name="faq"></a>SSS
 
@@ -57,5 +53,5 @@ Genel Önizleme sırasında denemek aşağıdaki özellikler mevcuttur:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Bir Azure savunma ana kaynak oluşturma](bastion-create-host-portal.md).
+* [Bir Azure savunma konak kaynağı oluşturun](bastion-create-host-portal.md).
 * Azure'un diğer önemli [ağ özelliklerinden](../networking/networking-overview.md) bazıları hakkında bilgi edinin.

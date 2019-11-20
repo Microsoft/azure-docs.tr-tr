@@ -1,10 +1,10 @@
-- name: SQL Veri Ambarı Belgeleri
-  href: index.md
+- name: Azure Synapse Analytics Belgeleri
+  href: index.yml
 - name: Genel Bakış
   items:
-    - name: SQL Veri Ambarı nedir?
+    - name: Azure Synapse Analytics nedir?
       href: sql-data-warehouse-overview-what-is.md
-    - name: SQL Veri Ambarı mimarisi
+    - name: Azure Synapse Analytics mimarisi
       href: massively-parallel-processing-mpp-architecture.md
     - name: Veri ambarı birimleri
       href: what-is-a-data-warehouse-unit-dwu-cdwu.md
@@ -22,20 +22,6 @@
       href: release-notes-10-0-10106-0.md
     - name: 2. Nesil bölge yükseltme zamanlaması
       href: gen2-migration-schedule.md
-    - name: Arşivlenmiş Sürüm Notları
-      items:
-        - name: Eylül 2018
-          href: release-notes-september-2018.md
-        - name: Ağustos 2018
-          href: release-notes-august-2018.md
-        - name: Temmuz 2018
-          href: release-notes-july-2018.md
-        - name: Haziran 2018
-          href: release-notes-june-2018.md
-        - name: Mayıs 2018
-          href: release-notes-may-2018.md
-        - name: Nisan 2018
-          href: release-notes-april-2018.md
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
@@ -61,58 +47,62 @@
           href: quickstart-scale-compute-tsql.md
     - name: İş yükü yönetimi
       items:
-        - name: İş yükü sınıflandırıcısı oluşturma
+        - name: İş yükü yalıtımı oluşturma
           items:
             - name: T-SQL
-              href: quickstart-create-a-workload-classifier-tsql.md
+              href: quickstart-configure-workload-isolation-tsql.md
 - name: Kavramlar
   items:
     - name: Güvenlik
       items:
         - name: Genel Bakış
           href: sql-data-warehouse-overview-manage-security.md
-        - name: Gelişmiş Veri Güvenliği
+        - name: Gelişmiş veri güvenliği
           items:
             - name: Genel Bakış
-              href: ../sql-database/sql-database-advanced-data-security.md?toc=/azure/sql-data-warehouse/toc.json
-            - name: Veri Bulma ve Sınıflandırma
-              href: ../sql-database/sql-database-data-discovery-and-classification.md?toc=/azure/sql-data-warehouse/toc.json
-            - name: Güvenlik Açığı Değerlendirmesi
-              href: ../sql-database/sql-vulnerability-assessment.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-advanced-data-security.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+            - name: Veri bulma ve sınıflandırma
+              href: ../sql-database/sql-database-data-discovery-and-classification.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+            - name: Güvenlik açığı değerlendirmesi
+              href: ../sql-database/sql-vulnerability-assessment.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
             - name: Gelişmiş Tehdit Koruması
-              href: ../sql-database/sql-database-threat-detection-overview.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-threat-detection-overview.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
         - name: Denetim
-          href: ../sql-database/sql-database-auditing.md?toc=/azure/sql-data-warehouse/toc.json
-        - name: Ağ Güvenliği
+          href: ../sql-database/sql-database-auditing.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+        - name: Ağ güvenliği
           items:
             - name: Güvenlik duvarı kuralları
-              href: ../sql-database/sql-database-firewall-configure.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-firewall-configure.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+            - name: Özel Bağlantı
+              href: ../sql-database/sql-database-private-endpoint-overview.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
             - name: Sanal ağ hizmet uç noktaları
-              href: ../sql-database/sql-database-vnet-service-endpoint-rule-overview.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-vnet-service-endpoint-rule-overview.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
         - name: Kimlik Doğrulaması
           items:
             - name: Genel Bakış
-              href: sql-data-warehouse-authentication.md?toc=/azure/sql-data-warehouse/toc.json
+              href: sql-data-warehouse-authentication.md
             - name: Azure Active Directory
-              href: ../sql-database/sql-database-aad-authentication.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-aad-authentication.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
             - name: Oturum açma bilgileri ve kullanıcılar
-              href: ../sql-database/sql-database-manage-logins.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-manage-logins.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
             - name: Multi-Factor Authentication
-              href: ../sql-database/sql-database-ssms-mfa-authentication.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-ssms-mfa-authentication.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
         - name: Erişim denetimi
           items:
             - name: Genel Bakış
-              href: ../sql-database/sql-database-control-access.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/sql-database-control-access.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
             - name: Sütun düzeyi güvenlik
               href: column-level-security.md
             - name: Satır düzeyi güvenlik
-              href: 'https://docs.microsoft.com/sql/relational-databases/security/row-level-security?toc=%2Fazure%2Fsql-data-warehouse%2Ftoc.json'
-        - name: Veri Koruma
+              href: /sql/relational-databases/security/row-level-security?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+        - name: Veri koruma
           items:
+            - name: Dinamik veri maskeleme
+              href: ../sql-database/sql-database-dynamic-data-masking-get-started.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
             - name: Saydam Veri Şifrelemesi (TDE) genel bakış
-              href: ../sql-database/transparent-data-encryption-azure-sql.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/transparent-data-encryption-azure-sql.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
             - name: Kendi Anahtarını Getir ile TDE
-              href: ../sql-database/transparent-data-encryption-byok-azure-sql.md?toc=/azure/sql-data-warehouse/toc.json
+              href: ../sql-database/transparent-data-encryption-byok-azure-sql.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
     - name: Veri yükleme
       items:
         - name: Genel Bakış
@@ -127,6 +117,52 @@
           href: sql-data-warehouse-overview-develop.md
         - name: En iyi uygulamalar
           href: sql-data-warehouse-best-practices-development.md
+        - name: JSON
+          items:
+            - name: JSON
+              href: /sql/t-sql/functions/json-functions-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: ISJSON
+              href: /sql/t-sql/functions/isjson-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: JSON_VALUE
+              href: /sql/t-sql/functions/json-value-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: JSON_QUERY
+              href: /sql/t-sql/functions/json-query-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: JSON_MODIFY
+              href: /sql/t-sql/functions/json-modify-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: OPENJSON
+              href: /sql/t-sql/functions/openjson-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+        - name: Gerçekleştirilmiş görünüm
+          items:
+            - name: Performans ayarlama kılavuzu
+              href: performance-tuning-materialized-views.md
+            - name: Oluştur
+              href: /sql/t-sql/statements/create-materialized-view-as-select-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: Değiştir
+              href: /sql/t-sql/statements/alter-materialized-view-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: Görünüm ek yükünü denetleme
+              href: /sql/t-sql/database-console-commands/dbcc-pdw-showmaterializedviewoverhead-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+        - name: Sıralı kümelenmiş columnstore dizini
+          items:
+            - name: Performans ayarlama kılavuzu
+              href: performance-tuning-ordered-CCI.md
+            - name: Tablo oluşturma
+              href: /sql/t-sql/statements/create-table-azure-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: CTAS
+              href: /sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: Dizini oluşturma ve değiştirme
+              href: 'https://docs.microsoft.com/sql/t-sql/statements/create-columnstore-index-transact-sql?view=azure-sqldw-latest'
+        - name: Sonuç kümesini önbelleğe alma
+          items:
+            - name: Performans ayarlama kılavuzu
+              href: performance-tuning-result-set-caching.md
+            - name: Veritabanı için ayarlama
+              href: /sql/t-sql/statements/alter-database-transact-sql-set-options?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: Oturum için ayarlama
+              href: /sql/t-sql/statements/set-result-set-caching-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: Önbellek boyutunu denetleme
+              href: /sql/t-sql/database-console-commands/dbcc-showresultcachespaceused-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+            - name: Önbelleği temizleme
+              href: /sql/t-sql/database-console-commands/dbcc-dropresultsetcache-transact-sql?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
         - name: Tablolar
           items:
             - name: Genel Bakış
@@ -137,6 +173,8 @@
               href: sql-data-warehouse-tables-data-types.md
             - name: Dağıtılmış tablolar
               href: sql-data-warehouse-tables-distribute.md
+            - name: Tablo düzeyinde kısıtlamalar
+              href: sql-data-warehouse-table-constraints.md
             - name: Dizinler
               href: sql-data-warehouse-tables-index.md
             - name: Kimlik
@@ -157,7 +195,7 @@
               href: sql-data-warehouse-develop-stored-procedures.md
             - name: İşlemler
               href: sql-data-warehouse-develop-transactions.md
-            - name: En iyi İşlem Uygulamaları
+            - name: En iyi işlem deneyimleri
               href: sql-data-warehouse-develop-best-practices-transactions.md
             - name: Kullanıcı tanımlı şemalar
               href: sql-data-warehouse-develop-user-defined-schemas.md
@@ -175,14 +213,18 @@
           href: sql-data-warehouse-develop-label.md
     - name: İş yükü yönetimi
       items:
-        - name: Kaynak sınıfları ve iş yükü yönetimi
-          href: resource-classes-for-workload-management.md
+        - name: Genel Bakış
+          href: sql-data-warehouse-workload-management.md
         - name: İş yükü sınıflandırma
           href: sql-data-warehouse-workload-classification.md
         - name: İş yükü önem düzeyi
           href: sql-data-warehouse-workload-importance.md
+        - name: İş yükü yalıtımı
+          href: sql-data-warehouse-workload-isolation.md
         - name: Bellek ve eşzamanlılık sınırları
-          href: memory-and-concurrency-limits.md
+          href: memory-concurrency-limits.md
+        - name: Kaynak sınıfları
+          href: resource-classes-for-workload-management.md
     - name: Yönetilebilirlik ve izleme
       items:
         - name: Genel Bakış
@@ -198,13 +240,7 @@
         - name: Sorun giderme
           href: sql-data-warehouse-troubleshoot.md
     - name: Bakım zamanlamaları
-      items:
-        - name: Genel Bakış
-          href: maintenance-scheduling.md
-        - name: Bakım zamanlamasını görüntüleme
-          href: viewing-maintenance-schedule.md
-        - name: Bakım zamanlamasını değiştirme
-          href: changing-maintenance-schedule.md
+      href: maintenance-scheduling.md
     - name: Tümleştirme
       items:
         - name: Genel Bakış
@@ -214,45 +250,55 @@
     - name: Güvenlik
       items:
         - name: Azure AD kimlik doğrulamasını yapılandırma
-          href: ../sql-database/sql-database-aad-authentication-configure.md?toc=/azure/sql-data-warehouse/toc.json
+          href: ../sql-database/sql-database-aad-authentication-configure.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
         - name: Koşullu Erişim
-          href: ../sql-database/sql-database-conditional-access.md?toc=/azure/sql-data-warehouse/toc.json
+          href: ../sql-database/sql-database-conditional-access.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
         - name: PowerShell’in sanal ağ kuralları
-          href: ../sql-database/sql-database-vnet-service-endpoint-rule-powershell.md?toc=/azure/sql-data-warehouse/toc.json
+          href: ../sql-database/sql-database-vnet-service-endpoint-rule-powershell.md?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
         - name: Şifrelemeyi etkinleştirme - portal
           href: sql-data-warehouse-encryption-tde.md
         - name: Şifrelemeyi etkinleştirme - T-SQL
           href: sql-data-warehouse-encryption-tde-tsql.md
     - name: Veri yükleme
       items:
-        - name: New York taxi cab verileri
-          href: load-data-from-azure-blob-storage-using-polybase.md
-        - name: Contoso genel verileri
-          href: sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md
-        - name: Azure Data Lake Storage
+        - name: Azure Data Lake Storage’dan (ADLS)
           href: sql-data-warehouse-load-from-azure-data-lake-store.md
-        - name: Azure Databricks
-          href: /azure/azure-databricks/databricks-extract-load-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json
-        - name: Data Factory
-          href: /azure/data-factory/load-azure-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json
-        - name: SSIS
+        - name: Azure Databricks’i (ADB) kullanma
+          href: /azure/azure-databricks/databricks-extract-load-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+        - name: Data Factory'yi (ADF) kullanma
+          href: /azure/data-factory/load-azure-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+        - name: SQL Server Integration Services'i (SSIS) kullanma
           href: /sql/integration-services/load-data-to-sql-data-warehouse
-        - name: WideWorldImporters yükleme
-          href: load-data-wideworldimportersdw.md
+        - name: Örnekler
+          items:
+            - name: New York Taxi
+              href: load-data-from-azure-blob-storage-using-polybase.md
+            - name: Contoso
+              href: sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md
+            - name: Wide World Importers
+              href: load-data-wideworldimportersdw.md
     - name: Geliştirme
       items:
         - name: Genel Bakış
           href: sql-data-warehouse-connect-overview.md
         - name: Bağlantı dizeleri
           href: sql-data-warehouse-connection-strings.md
-        - name: sqlcmd
-          href: sql-data-warehouse-get-started-connect-sqlcmd.md
-        - name: SSMS ile Sorgulama
-          href: sql-data-warehouse-query-ssms.md
-        - name: Visual Studio ile Sorgulama
-          href: sql-data-warehouse-query-visual-studio.md
-        - name: Visual Studio yükleme
-          href: sql-data-warehouse-install-visual-studio.md
+        - name: Değişiklik yönetimi ve dağıtımı
+          items:
+            - name: Visual Studio SSDT yükleme
+              href: sql-data-warehouse-install-visual-studio.md
+            - name: Kaynak denetimi tümleştirmesi
+              href: sql-data-warehouse-source-control-integration.md
+            - name: Sürekli tümleştirme ve dağıtım
+              href: sql-data-warehouse-continuous-integration-and-deployment.md
+        - name: Bağlanma ve sorgulama
+          items:
+            - name: Visual Studio SSDT
+              href: sql-data-warehouse-query-visual-studio.md
+            - name: SSMS
+              href: sql-data-warehouse-query-ssms.md
+            - name: sqlcmd
+              href: sql-data-warehouse-get-started-connect-sqlcmd.md
     - name: İş yükü yönetimi
       items:
         - name: İş yükünüzü çözümleme
@@ -261,18 +307,30 @@
           href: sql-data-warehouse-how-to-manage-and-monitor-workload-importance.md
         - name: İş yükü önem düzeyini yapılandırma
           href: sql-data-warehouse-how-to-configure-workload-importance.md
+        - name: Kaynak sınıflarını iş yükü gruplarına dönüştürme
+          href: sql-data-warehouse-how-to-convert-resource-classes-workload-groups.md
     - name: Yönetme ve izleme
       items:
         - name: Gen2'ye yükselt
           href: upgrade-to-latest-generation.md
-        - name: Veri ambarınızı geri yükleme
-          href: sql-data-warehouse-restore.md
+        - name: İşlemi yönetme
+          href: manage-compute-with-azure-functions.md
         - name: İş yükünüzü izleme - Portal
           href: sql-data-warehouse-monitor-workload-portal.md
         - name: İş yükünüzü izleme - DMV’ler
           href: sql-data-warehouse-manage-monitor.md
         - name: Gen2 önbelleğini izleme
           href: sql-data-warehouse-how-to-monitor-cache.md
+    - name: Yedekleme ve geri yükleme
+      items:
+        - name: Geri yükleme noktası oluşturma
+          href: sql-data-warehouse-restore-points.md
+        - name: Mevcut bir veri ambarını geri yükleme
+          href: sql-data-warehouse-restore-active-paused-dw.md
+        - name: Silinmiş bir veri ambarını geri yükleme
+          href: sql-data-warehouse-restore-deleted-dw.md
+        - name: Coğrafi yedeklemeden geri yükleme
+          href: sql-data-warehouse-restore-from-geo-backup.md
     - name: Tümleştirme
       items:
         - name: Makine öğrenmesini kullanma
@@ -295,13 +353,15 @@
           href: sql-data-warehouse-troubleshoot-connectivity.md
 - name: Başvuru
   items:
+    - name: Veritabanı harmanlama türleri
+      href: sql-data-warehouse-reference-collation-types.md
     - name: T-SQL
       items:
         - name: Tam başvuru
-          href: 'https://docs.microsoft.com/sql/t-sql/language-reference/'
-        - name: SQL DW dil öğeleri
+          href: /sql/t-sql/language-reference?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest
+        - name: Azure Synapse Analytics TSQL dili öğeleri
           href: sql-data-warehouse-reference-tsql-language-elements.md
-        - name: SQL DW deyimleri
+        - name: Azure Synapse Analytics TSQL deyimleri
           href: sql-data-warehouse-reference-tsql-statements.md
     - name: Sistem görünümleri
       href: sql-data-warehouse-reference-tsql-system-views.md

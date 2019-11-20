@@ -1,27 +1,23 @@
 ---
-title: Öğretici - otomatik ölçeklendirme sanal makine ölçek kümeleri Azure'da Ansible kullanarak | Microsoft Docs
-description: Azure'da sanal makine ölçek kümeleri ile otomatik ölçeklendirme ölçeğini Ansible'ı kullanmayı öğrenin
-keywords: ansible'ı, azure, devops, bash, playbook, Ölçek, otomatik ölçeklendirme, sanal makine, sanal makine ölçek kümesi, vmss
+title: Öğretici-Azure 'da sanal makine ölçek kümelerini Anerişilebilir kullanarak otomatik ölçeklendirme
+description: Azure 'da otomatik ölçeklendirme ile sanal makine ölçek kümelerini ölçeklendirmek için nasıl kullanılacağını öğrenin
+keywords: anerişilebilir, Azure, DevOps, Bash, PlayBook, ölçek, otomatik ölçeklendirme, sanal makine, sanal makine ölçek kümesi, VMSS
 ms.topic: tutorial
-ms.service: ansible
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.date: 04/30/2019
-ms.openlocfilehash: 4f2cd66b7460fc6fe48cb55f45bf4bc309ae054c
-ms.sourcegitcommit: 2ce4f275bc45ef1fb061932634ac0cf04183f181
+ms.openlocfilehash: fb8d2a4bfca32be4575ca8f11018e5cab17cd9a2
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/07/2019
-ms.locfileid: "65231272"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74156823"
 ---
-# <a name="tutorial-autoscale-virtual-machine-scale-sets-in-azure-using-ansible"></a>Öğretici: Otomatik ölçeklendirme sanal makine ölçek kümeleri Azure'da ansible'ı kullanma
+# <a name="tutorial-autoscale-virtual-machine-scale-sets-in-azure-using-ansible"></a>Öğretici: Azure 'da sanal makine ölçek kümelerini anormal kullanarak otomatik ölçeklendirme
 
 [!INCLUDE [ansible-27-note.md](../../includes/ansible-27-note.md)]
 
 [!INCLUDE [open-source-devops-intro-vmss.md](../../includes/open-source-devops-intro-vmss.md)]
 
-Sanal makine örneği sayısını otomatik olarak ayarlama özelliği adlı [otomatik ölçeklendirme](/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview). Otomatik ölçeklendirme, izlemek ve uygulamanızın performansını en iyi duruma getirmek için yönetim yükünü azaltır avantajdır. Otomatik ölçeklendirme, yanıt, tanımlanmış bir zamanlamaya göre veya isteğe bağlı şekilde yapılandırılabilir. Ansible'ı kullanarak, pozitif bir müşteri deneyimi için kabul edilebilir performans tanımlayan otomatik ölçeklendirme kuralları belirtebilirsiniz.
+Sanal makine örneklerinin sayısını otomatik olarak ayarlamaya yönelik özelliği otomatik [ölçeklendirme](/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview)olarak adlandırılır. Otomatik ölçeklendirme avantajı, uygulamanızın performansını izlemek ve iyileştirmek için yönetim yükünü azaltmasıdır. Otomatik ölçeklendirme, isteğe veya tanımlı bir zamanlamaya göre yanıt olarak yapılandırılabilir. Anormal bir şekilde kullanıldığında, olumlu bir müşteri deneyimi için kabul edilebilir performansı tanımlayan otomatik ölçeklendirme kurallarını belirtebilirsiniz.
 
 [!INCLUDE [ansible-tutorial-goals.md](../../includes/ansible-tutorial-goals.md)]
 
@@ -29,9 +25,9 @@ Sanal makine örneği sayısını otomatik olarak ayarlama özelliği adlı [oto
 >
 > * Otomatik ölçeklendirme profilini tanımlama
 > * Yinelenen bir zamanlamaya göre otomatik ölçeklendirme
-> * Uygulama performansına dayalı otomatik ölçeklendirme
-> * Otomatik ölçeklendirme ayarları bilgilerini alma 
-> * Bir otomatik ölçeklendirme ayarı devre dışı bırak
+> * Uygulama performansına göre otomatik ölçeklendirme
+> * Otomatik ölçeklendirme ayarları bilgilerini al 
+> * Otomatik ölçeklendirme ayarını devre dışı bırakma
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -39,13 +35,13 @@ Sanal makine örneği sayısını otomatik olarak ayarlama özelliği adlı [oto
 [!INCLUDE [ansible-prereqs-cloudshell-use-or-vm-creation2.md](../../includes/ansible-prereqs-cloudshell-use-or-vm-creation2.md)] 
 [!INCLUDE [ansible-prereqs-vm-scale-set.md](../../includes/ansible-prereqs-vm-scale-set.md)]
 
-## <a name="autoscale-based-on-a-schedule"></a>Bir zamanlamaya göre otomatik ölçeklendirme
+## <a name="autoscale-based-on-a-schedule"></a>Zamanlamaya göre otomatik ölçeklendirme
 
-Bir ölçek kümesinde otomatik ölçeklendirmeyi etkinleştirmek için ilk olarak bir otomatik ölçeklendirme profili tanımlamanız gerekir. Bu profil varsayılan, en düşük ve en yüksek ölçek kümesi kapasitesini tanımlar. Bu sınırlar değil, sürekli olarak VM örnekleri oluşturarak maliyet denetlemek ve en az bir ölçeğini olayında kalan örnek sayısı kabul edilebilir performans Bakiye belirlemenizi sağlar. 
+Bir ölçek kümesinde otomatik ölçeklendirmeyi etkinleştirmek için ilk olarak bir otomatik ölçeklendirme profili tanımlamanız gerekir. Bu profil varsayılan, en düşük ve en yüksek ölçek kümesi kapasitesini tanımlar. Bu sınırlar, sanal makine örneklerini sürekli olarak oluşturmadığından maliyeti denetlemenizi sağlar ve ölçek genişletme olayında kalan minimum örnek sayısı ile kabul edilebilir performansı dengelemenize olanak tanır. 
 
-Ansible, belirli bir tarih veya yinelenen bir zamanlama, Ölçek kümelerinde ölçeklendirmenize olanak tanır.
+Anormal, ölçek kümelerinizi belirli bir tarih veya yinelenen zamanlamaya göre ölçeklendirmenize imkan tanır.
 
-Bu bölümdeki playbook kod üç saat 10:00 her Pazartesi VM örneği sayısını artırır.
+Bu bölümdeki PlayBook kodu, sanal makine örneklerinin sayısını her Pazartesi 10:00 ' de üç olarak artırır.
 
 Aşağıdaki playbook'u `vmss-auto-scale.yml` olarak kaydedin:
 
@@ -81,22 +77,22 @@ Aşağıdaki playbook'u `vmss-auto-scale.yml` olarak kaydedin:
               - '10'
 ```
 
-Kullanarak playbook çalıştırma `ansible-playbook` komutu:
+`ansible-playbook` komutunu kullanarak PlayBook 'u çalıştırın:
 
 ```bash
 ansible-playbook vmss-auto-scale.yml
 ```
 
-## <a name="autoscale-based-on-performance-data"></a>Performans verilerini temel alarak otomatik ölçeklendirme
+## <a name="autoscale-based-on-performance-data"></a>Performans verilerine göre otomatik ölçeklendirme
 
-Uygulamanızın talebi artarsa, Ölçek kümenizdeki sanal makine örneklerine üzerindeki yük arttıkça ayarlar. Bu kısa süreli bir talep olmayıp tutarlı şekilde yük artıyorsa, ölçek kümesindeki sanal makine örneği sayısını artırmak için otomatik ölçeklendirme kuralları yapılandırabilirsiniz. Bu sanal makine örnekleri oluşturulduğunda ve uygulamalarınız dağıtıldığında ölçek kümesi, yük dengeleyici aracılığıyla bunlara trafiği dağıtmaya başlar. Ansible, hangi ölçümlerin izleneceğini, CPU kullanımı, disk kullanımı ve uygulama yükleme süresi gibi denetlemenize olanak tanır. Ölçeği daraltma ve ölçek genişletme göre performans ölçüm eşikleri, yinelenen bir zamanlamaya göre veya belirli bir tarihe göre ayarlar. 
+Uygulamanızın talebi arttıkça, ölçek kümelerinizin sanal makine örnekleri üzerindeki yük artar. Bu kısa süreli bir talep olmayıp tutarlı şekilde yük artıyorsa, ölçek kümesindeki sanal makine örneği sayısını artırmak için otomatik ölçeklendirme kuralları yapılandırabilirsiniz. Bu sanal makine örnekleri oluşturulduğunda ve uygulamalarınız dağıtıldığında ölçek kümesi, yük dengeleyici aracılığıyla bunlara trafiği dağıtmaya başlar. Anormal, CPU kullanımı, disk kullanımı ve uygulama yükleme süresi gibi hangi ölçümlerin izleneceğini denetlemenizi sağlar. Performans ölçümü eşiklerine, yinelenen bir zamanlamaya göre veya belirli bir tarihe göre ölçek kümelerinde ölçeklendirebilir ve ölçek getirebilirsiniz. 
 
-Bu bölümdeki playbook kod, önceki 10 dakika 18:00 her Pazartesi CPU yükünü denetler. 
+Bu bölümdeki PlayBook kodu, Pazartesi günü 18:00 ' de önceki 10 dakikalık CPU iş yükünü denetler. 
 
-Playbook'u CPU yüzdesi ölçümlere göre aşağıdaki eylemlerden birini gerçekleştirir:
+PlayBook, CPU yüzdesi ölçümlerine bağlı olarak aşağıdaki eylemlerden birini yapar:
 
-- Dört VM örneklerinin sayısını ölçeklendirir
-- Bir sanal makine örneği sayısını ölçeklendirir
+- Sanal makine örneği sayısını dört olarak ölçeklendirir
+- VM örneği sayısında bir tane olarak ölçeklendirir
 
 Aşağıdaki playbook'u `vmss-auto-scale-metrics.yml` olarak kaydedin:
 
@@ -175,15 +171,15 @@ Aşağıdaki playbook'u `vmss-auto-scale-metrics.yml` olarak kaydedin:
             value: '1'
 ```
 
-Kullanarak playbook çalıştırma `ansible-playbook` komutu:
+`ansible-playbook` komutunu kullanarak PlayBook 'u çalıştırın:
 
 ```bash
 ansible-playbook vmss-auto-scale-metrics.yml
 ```
 
-## <a name="get-autoscale-settings-information"></a>Otomatik ölçeklendirme ayarları bilgilerini alma 
+## <a name="get-autoscale-settings-information"></a>Otomatik ölçeklendirme ayarları bilgilerini al 
 
-Bu bölümdeki playbook kod `azure_rm_autoscale_facts` otomatik ölçeklendirme ayarı ayrıntılarını alma modülü.
+Bu bölümdeki PlayBook kodu, otomatik ölçeklendirme ayarının ayrıntılarını almak için `azure_rm_autoscale_facts` modülünü kullanır.
 
 Aşağıdaki playbook'u `vmss-auto-scale-get-settings.yml` olarak kaydedin:
 
@@ -203,7 +199,7 @@ Aşağıdaki playbook'u `vmss-auto-scale-get-settings.yml` olarak kaydedin:
         var: autoscale_query.autoscales[0]
 ```
 
-Kullanarak playbook çalıştırma `ansible-playbook` komutu:
+`ansible-playbook` komutunu kullanarak PlayBook 'u çalıştırın:
 
 ```bash
 ansible-playbook vmss-auto-scale-get-settings.yml
@@ -211,9 +207,9 @@ ansible-playbook vmss-auto-scale-get-settings.yml
 
 ## <a name="disable-autoscale-settings"></a>Otomatik ölçeklendirme ayarlarını devre dışı bırak
 
-Otomatik ölçeklendirme ayarları devre dışı bırakmak için iki yolu vardır. Tek yönlü değiştirmektir `enabled` anahtar `true` için `false`. İkinci yol ayarı silmektir.
+Otomatik ölçeklendirme ayarlarını devre dışı bırakmak için iki yol vardır. Bunlardan biri, `true` `enabled` anahtarını `false`olarak değiştirmenin bir yoludur. İkinci yöntem ayarı silmektir.
 
-Bu bölümdeki playbook kod otomatik ölçeklendirme ayarının siler. 
+Bu bölümdeki PlayBook kodu, otomatik ölçeklendirme ayarını siler. 
 
 Aşağıdaki playbook'u `vmss-auto-scale-delete-setting.yml` olarak kaydedin:
 
@@ -230,7 +226,7 @@ Aşağıdaki playbook'u `vmss-auto-scale-delete-setting.yml` olarak kaydedin:
          state: absent
 ```
 
-Kullanarak playbook çalıştırma `ansible-playbook` komutu:
+`ansible-playbook` komutunu kullanarak PlayBook 'u çalıştırın:
 
 ```bash
 vmss-auto-scale-delete-setting.yml
@@ -239,4 +235,4 @@ vmss-auto-scale-delete-setting.yml
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"] 
-> [Öğretici: Ansible'ı kullanarak Azure sanal makine ölçek özel görüntüsünü güncelleştirme ayarlar](./ansible-vmss-update-image.md)
+> [Öğretici: anormal kullanarak Azure sanal makine ölçek kümelerinin özel görüntüsünü güncelleştirme](./ansible-vmss-update-image.md)

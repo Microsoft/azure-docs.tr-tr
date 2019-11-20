@@ -1,10 +1,10 @@
 ---
-title: Azure Traffic Manager'ı kullanarak öncelikli trafik yönlendirme yöntemini yapılandırma | Microsoft Docs
-description: Bu makalede, trafik Yöneticisi'nde öncelik trafik yönlendirme yöntemini yapılandırma açıklanmaktadır
+title: Öncelik trafiği yönlendirmeyi Yapılandırma-Azure Traffic Manager
+description: Bu makalede, Traffic Manager ' de öncelik trafiği yönlendirme yönteminin nasıl yapılandırılacağı açıklanmaktadır
 services: traffic-manager
 documentationcenter: ''
 author: asudbring
-manager: twooley
+manager: kumudD
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: article
@@ -12,50 +12,50 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/20/2017
 ms.author: allensu
-ms.openlocfilehash: 259457a604727cba6e6964851ec4fcf4b13a20a6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f9954c7733c30efaea4a74e04949556a3a8617fd
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048494"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74040345"
 ---
-# <a name="configure-priority-traffic-routing-method-in-traffic-manager"></a>Trafik Yöneticisi'nde öncelikli trafik yönlendirme yöntemini yapılandırma
+# <a name="configure-priority-traffic-routing-method-in-traffic-manager"></a>Traffic Manager 'de öncelik trafiği yönlendirme yöntemini yapılandırma
 
-Web sitesi modu ne olursa olsun, Azure Web siteleri, zaten bir veri merkezi (bölge olarak da bilinir) içinde Web siteleri için yük devretme işlevsellik sağlar. Traffic Manager yük devretme için farklı veri merkezlerindeki Web sitesi sunar.
+Azure Web siteleri, Web sitesi modundan bağımsız olarak bir veri merkezindeki (bölge olarak da bilinir) Web siteleri için yük devretme işlevselliği sunmaktadır. Traffic Manager, farklı veri merkezlerinde Web siteleri için yük devretme sağlar.
 
-Birincil bir hizmete trafiği göndermek ve aynı yedekleme hizmetler için yük devretme kümesi sağlamak için hizmeti yük devretme için yaygın bir düzen olduğunu. Aşağıdaki adımlarda, Azure bulut Hizmetleri ve Web siteleri ile bu öncelikli yük devri yapılandırmak açıklanmaktadır:
+Hizmet yük devretmesi için ortak bir model, bir birincil hizmete trafik göndermek ve yük devretme için aynı yedekleme Hizmetleri kümesi sağlamaktır. Aşağıdaki adımlarda, bu öncelikli yük devretmeyi Azure bulut hizmetleri ve Web siteleri ile yapılandırma açıklanmaktadır:
 
-## <a name="to-configure-the-priority-traffic-routing-method"></a>Öncelik trafik yönlendirme yöntemini yapılandırma
+## <a name="to-configure-the-priority-traffic-routing-method"></a>Öncelik trafiği yönlendirme yöntemini yapılandırmak için
 
 1. Bir tarayıcıdan [Azure portalında](https://portal.azure.com) oturum açın. Henüz bir hesabınız yoksa, [bir aylık ücretsiz denemeye](https://azure.microsoft.com/free/) kaydolabilirsiniz. 
-2. Portalın arama çubuğunda arama **Traffic Manager profillerini** ve yönlendirme yöntemi için yapılandırmak istediğiniz profil adına tıklayın.
-3. İçinde **Traffic Manager profili** dikey penceresinde bulut Hizmetleri ve yapılandırmanızda dahil etmek istediğiniz Web siteleri mevcut olduğunu doğrulayın.
-4. İçinde **ayarları** bölümünde **yapılandırma**hem de **yapılandırma** dikey penceresinde, aşağıdaki gibi doldurun:
-    1. İçin **trafik yönlendirme yöntemi ayarları**, trafik yönlendirme yöntemini olduğundan emin olun **öncelik**. Yüklü değilse, **öncelik** aşağı açılan listeden.
-    2. Ayarlama **uç nokta İzleyicisi ayarları** aynı şekilde bu profili içindeki tüm her bir uç noktası için:
-        1. Uygun seçin **Protokolü**, belirtin **bağlantı noktası** sayı. 
-        2. İçin **yolu** eğik çizgi yazın */* . Uç noktaları izlemek için bir yol ve dosya adı belirtmeniz gerekir. Bir eğik çizgi "/" göreli yolu için geçerli bir giriştir ve dosyasının kök dizininde (varsayılan) olduğunu gösterir.
-        3. Sayfanın üst kısmında tıklayın **Kaydet**.
-5. İçinde **ayarları** bölümünde **uç noktaları**.
-6. İçinde **uç noktaları** dikey penceresinde, uç noktalarınız için öncelik sırası gözden geçirin. Seçtiğinizde, **öncelik** trafik yönlendirme yöntemini, seçili uç noktalardan önemli olan konuya sırası. Uç noktaları öncelik sırasını doğrulayın.  Üst birincil uç noktadır. Görüntülenme sırasını denetleyin. tüm istekler, ilk uç noktaya yönlendirilir ve iyi durumda olmayan, Traffic Manager algılarsa, trafiği otomatik olarak sonraki uç noktaya devreder. 
-7. Uç nokta öncelik sırasını değiştirmek için uç noktaya tıklayın ve **uç nokta** görüntülenir, dikey **Düzenle** değiştirip **öncelik** değer gerektiğinde. 
-8. Tıklayın **Kaydet** kaydetme uç nokta ayarlarını değiştirmek için.
-9. Yapılandırma Değişikliklerinizi tamamladıktan sonra tıklayın **Kaydet** sayfanın alt kısmındaki.
-10. Değişiklikleri yapılandırmanızda şu şekilde test edin:
-    1.  Portalın arama çubuğunda, Traffic Manager profil adı için arama yapın ve sonuçları Traffic Manager profiline tıklayın, görüntülenen.
-    2.  İçinde **Traffic Manager** profil dikey penceresinde, tıklayın **genel bakış**.
-    3.  **Traffic Manager profili** dikey penceresinde, yeni oluşturulan Traffic Manager profilinizin DNS adını görüntüler. Tüm istemciler tarafından bu kullanılabilir (örneğin, bir web tarayıcısı kullanarak giderek) yönlendirme türüne göre belirlenen doğru uç noktaya yönlendirilir. Bu durumda, tüm istekleri ilk uç noktaya yönlendirilir ve iyi durumda olmayan, Traffic Manager algılarsa, trafiği otomatik olarak sonraki uç noktaya devreder.
-11. Traffic Manager profilinizin çalışmaya başladığında, şirketinizin etki alanı adını Traffic Manager etki alanı adına yönlendirme için yetkili DNS sunucunuzdaki DNS kaydı düzenleyin.
+2. Portalın arama çubuğunda **Traffic Manager profillerini** arayın ve ardından yönlendirme yöntemini yapılandırmak istediğiniz profil adına tıklayın.
+3. **Traffic Manager profili** dikey penceresinde, yapılandırmanıza dahil etmek istediğiniz bulut hizmetlerinin ve Web sitelerinin mevcut olduğunu doğrulayın.
+4. **Ayarlar** bölümünde **yapılandırma**' ya tıklayın ve **yapılandırma** dikey penceresinde aşağıdaki gibi tamamlanır:
+    1. **Trafik yönlendirme yöntemi ayarları**için trafik yönlendirme yönteminin **öncelikli**olduğunu doğrulayın. Aksi takdirde, açılan listeden **Öncelik** ' e tıklayın.
+    2. Bu profildeki tüm uç noktaları için aynı **uç nokta izleyici ayarlarını** aşağıdaki şekilde ayarlayın:
+        1. Uygun **Protokolü**seçin ve **bağlantı noktası** numarasını belirtin. 
+        2. **Yol** türü için eğik çizgi */* . Uç noktaları izlemek için bir yol ve dosya adı belirtmeniz gerekir. Eğik çizgi "/", göreli yol için geçerli bir giriştir ve dosyanın kök dizinde (varsayılan) olduğunu gösterir.
+        3. Sayfanın üst kısmında **Kaydet**' e tıklayın.
+5. **Ayarlar** bölümünde **uç noktalar**' a tıklayın.
+6. **Uç noktalar** dikey penceresinde, uç noktalarınız için öncelik sırasını gözden geçirin. **Öncelik** trafiği yönlendirme yöntemini seçtiğinizde, seçilen uç noktaların sırası önemlidir. Uç noktaların öncelik sırasını doğrulayın.  Birincil uç nokta en üstte. Görüntülenme sırasını iki kez kontrol edin. Tüm istekler ilk uç noktaya yönlendirilir ve Traffic Manager sağlıksız olduğunu algılarsa trafik otomatik olarak sonraki uç noktaya devreder. 
+7. Uç nokta önceliği sırasını değiştirmek için uç noktaya tıklayın ve görüntülenen **uç nokta** dikey penceresinde **Düzenle** ' ye tıklayın ve **Öncelik** değerini gerektiği şekilde değiştirin. 
+8. Kayıt uç noktası ayarlarını değiştirmek için **Kaydet** ' e tıklayın.
+9. Yapılandırma değişikliklerinizi tamamladıktan sonra sayfanın alt kısmındaki **Kaydet** ' e tıklayın.
+10. Yapılandırmanızda yaptığınız değişiklikleri aşağıdaki gibi test edin:
+    1.  Portalın arama çubuğunda Traffic Manager profili adını arayın ve görüntülenen sonuçlarda Traffic Manager profiline tıklayın.
+    2.  **Traffic Manager** profili dikey penceresinde **Genel Bakış ' a**tıklayın.
+    3.  **Traffic Manager profili** dikey penceresi, yeni oluşturduğunuz TRAFFIC Manager profilinizin DNS adını görüntüler. Bu, yönlendirme türü tarafından belirlendiği şekilde doğru uç noktaya yönlendirilmek için herhangi bir istemci tarafından (örneğin, bir Web tarayıcısı kullanılarak gezinilirken) kullanılabilir. Bu durumda, tüm istekler ilk uç noktaya yönlendirilir ve Traffic Manager sağlıksız olduğunu algılarsa trafik otomatik olarak sonraki uç noktaya devreder.
+11. Traffic Manager profiliniz çalışmaya başladıktan sonra, yetkili DNS sunucunuzdaki DNS kaydını düzenleyerek şirket etki alanı adınızı Traffic Manager etki alanı adına getirin.
 
-![Traffic Manager'ı kullanarak öncelikli trafik yönlendirme yöntemini yapılandırma][1]
+![Traffic Manager kullanarak öncelik trafiği yönlendirme yöntemini yapılandırma][1]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 
 - [Ağırlıklı trafik yönlendirme yöntemi](traffic-manager-configure-weighted-routing-method.md) hakkında bilgi edinin.
-- Hakkında bilgi edinin [performans yönlendirme yöntemini](traffic-manager-configure-performance-routing-method.md).
+- [Performans yönlendirme yöntemi](traffic-manager-configure-performance-routing-method.md)hakkında bilgi edinin.
 - [Coğrafi yönlendirme yöntemi](traffic-manager-configure-geographic-routing-method.md) hakkında bilgi edinin.
-- Bilgi edinmek için nasıl [Traffic Manager ayarlarını sınama](traffic-manager-testing-settings.md).
+- [Traffic Manager ayarlarını test](traffic-manager-testing-settings.md)etme hakkında bilgi edinin.
 
 <!--Image references-->
 [1]: ./media/traffic-manager-priority-routing-method/traffic-manager-priority-routing-method.png

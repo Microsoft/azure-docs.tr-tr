@@ -1,6 +1,6 @@
 ---
-title: Kullanım dışı önceden oluşturulmuş varlıklar
-titleSuffix: Azure
+title: Kullanımdan kaldırılan önceden oluşturulmuş varlıklar-LUSıS
+titleSuffix: Azure Cognitive Services
 description: Bu makale, Language Understanding (LUIS) kullanım dışı önceden oluşturulmuş varlık bilgileri içerir.
 services: cognitive-services
 author: diberry
@@ -8,22 +8,22 @@ ms.custom: seodec18
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 02/28/2019
+ms.topic: conceptual
+ms.date: 07/29/2019
 ms.author: diberry
-ms.openlocfilehash: 653fbd65e5ccfbc65781f2332b35d10237f718d5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8c15ebacd0fd959fe789d7f3a9b33b16ee29a1b2
+ms.sourcegitcommit: 13a289ba57cfae728831e6d38b7f82dae165e59d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60712789"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68933619"
 ---
-# <a name="deprecated-prebuilt-entities-in-a-luis-app"></a>Bir LUIS uygulaması kullanım dışı önceden oluşturulmuş varlıklar
+# <a name="deprecated-prebuilt-entities-in-a-luis-app"></a>Bir LUSıS uygulamasında kullanımdan kaldırılan önceden oluşturulmuş varlıklar
 Aşağıdaki önceden oluşturulmuş varlıklar kullanım dışıdır ve yeni LUIS uygulamalara eklenemez.
 
-* **DateTime**: Kullanan mevcut LUIS uygulamalar **datetime** geçirilmesi gereken **datetimeV2**, datetime varlığı kullanan önceden mevcut olan uygulamalarda çalışmaya devam etse de.
-* **Coğrafya**: Kullanan mevcut LUIS uygulamalar **Coğrafya** aralık 2018'e kadar desteklenir.
-* **Ansiklopedi**: Kullanan mevcut LUIS uygulamalar **Ansiklopedi** aralık 2018'e kadar desteklenir.
+* **Tarih saat**: Tarih saat kullanan var olan LUSıS uygulamaları **datetimeV2**'e geçirilmelidir, ancak DateTime varlığı onu kullanan önceden var olan uygulamalarda çalışmaya devam eder.
+* **Coğrafya**: **Coğrafya** kullanan mevcut Lua uygulamaları, Aralık 2018 ' ye kadar desteklenir.
+* **Ansiklopedi**: **Ansiklopedi** kullanan mevcut Lua uygulamaları, Aralık 2018 ' ye kadar desteklenir.
 
 ## <a name="geography-culture"></a>Coğrafya kültürü
 **Coğrafya** yalnızca kullanılabilir `en-us` yerel ayar.
@@ -43,7 +43,7 @@ Aşağıdaki önceden oluşturulmuş varlıklar kullanım dışıdır ve yeni LU
 **Ansiklopedi** yalnızca kullanılabilir `en-US` yerel ayar.
 
 #### <a name="encyclopedia-subtypes"></a>Ansiklopedi alt türleri
-Ansiklopedi yerleşik varlık aşağıdaki tabloda 100'den fazla alt türlerini içerir: Ayrıca, ansiklopedi varlıklar, genellikle birden çok türlerine eşlenir. Örneğin, sorgu Ronald Reagan verir: 
+Ansiklopedi yerleşik varlığı, aşağıdaki tabloda 100 alt türlerden fazlasını içerir: Ayrıca, ansiklopedi varlıkları genellikle birden çok türe eşlenir. Örneğin, sorgu Ronald Reagan verir: 
 
 ```json
 {

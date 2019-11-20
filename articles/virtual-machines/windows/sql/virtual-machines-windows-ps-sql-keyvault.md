@@ -1,6 +1,6 @@
 ---
-title: Anahtar kasası (Resource Manager) azure'da Windows sanal makinelerinde SQL Server ile tümleştirme | Microsoft Docs
-description: Azure Key Vault ile kullanmak için SQL Server şifreleme yapılandırmasını otomatikleştirme hakkında bilgi edinin. Bu konuda, Resource Manager ile oluşturulan SQL Server sanal makineleri ile Azure anahtar kasası tümleştirmeyi kullanmayı açıklar.
+title: Azure 'da Windows VM 'lerinde Key Vault SQL Server Tümleştirme (Kaynak Yöneticisi) | Microsoft Docs
+description: Azure Key Vault ile kullanmak üzere SQL Server şifreleme yapılandırmasını nasıl otomatikleştirebileceğinizi öğrenin. Bu konuda Kaynak Yöneticisi ile oluşturulan SQL Server sanal makinelerle Azure Key Vault tümleştirmenin nasıl kullanılacağı açıklanmaktadır.
 services: virtual-machines-windows
 documentationcenter: ''
 author: MashaMSFT
@@ -9,65 +9,64 @@ editor: ''
 tags: azure-service-management
 ms.assetid: cd66dfb1-0e9b-4fb0-a471-9deaf4ab4ab8
 ms.service: virtual-machines-sql
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 04/30/2018
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: 13d698cfbc0241248a77fd5f3b148a9393320c64
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: cad70169e88e1fafa129c02f30d5288d39e30a9c
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67075993"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70102144"
 ---
-# <a name="configure-azure-key-vault-integration-for-sql-server-on-azure-virtual-machines-resource-manager"></a>Azure sanal makinelerinde (Resource Manager) SQL Server için Azure anahtar kasası tümleştirmesini yapılandırma
+# <a name="configure-azure-key-vault-integration-for-sql-server-on-azure-virtual-machines-resource-manager"></a>Azure sanal makinelerinde SQL Server için Azure Key Vault tümleştirmesini yapılandırma (Kaynak Yöneticisi)
 
 > [!div class="op_single_selector"]
 > * [Resource Manager](virtual-machines-windows-ps-sql-keyvault.md)
 > * [Klasik](../sqlclassic/virtual-machines-windows-classic-ps-sql-keyvault.md)
 
 ## <a name="overview"></a>Genel Bakış
-Birden çok SQL Server şifreleme özellikleri vardır, örneğin [saydam veri şifrelemesi (TDE)](https://msdn.microsoft.com/library/bb934049.aspx), [sütun düzeyinde şifrelemeyi (CLE)](https://msdn.microsoft.com/library/ms173744.aspx), ve [yedekleme şifrelemesi](https://msdn.microsoft.com/library/dn449489.aspx). Bu formlar şifreleme, şifreleme için kullandığınız şifreleme anahtarlarını depolamak ve yönetmek gerektirir. Azure Key Vault (AKV) hizmeti, güvenlik ve bu anahtarları güvenli ve yüksek oranda kullanılabilir bir konumda yönetimini iyileştirmek için tasarlanmıştır. [SQL Server Bağlayıcısı](https://www.microsoft.com/download/details.aspx?id=45344) Bu anahtarları Azure Key vault'tan kullanılacak SQL Server'ı etkinleştirir.
+[Saydam veri şifrelemesi (TDE)](https://msdn.microsoft.com/library/bb934049.aspx), [sütun DÜZEYINDE şifreleme (CLE)](https://msdn.microsoft.com/library/ms173744.aspx)ve [yedekleme şifrelemesi](https://msdn.microsoft.com/library/dn449489.aspx)gibi birden çok SQL Server şifreleme özelliği vardır. Bu şifreleme biçimleri, şifreleme için kullandığınız şifreleme anahtarlarını yönetmenizi ve depolamanızı gerektirir. Azure Key Vault (AKV) hizmeti, güvenli ve yüksek oranda kullanılabilir bir konumda bu anahtarların güvenliğini ve yönetimini geliştirmek için tasarlanmıştır. [SQL Server Bağlayıcısı](https://www.microsoft.com/download/details.aspx?id=45344) , SQL Server Azure Key Vault bu anahtarları kullanmasına olanak sağlar.
 
-SQL Server ile şirket içi makineleri çalıştırıyorsanız, vardır [şirket içi SQL Server makinenizden Azure Key Vault'a erişmesi için izlemeniz adımları](https://msdn.microsoft.com/library/dn198405.aspx). Ancak Azure vm'lerde SQL Server için kullanarak zaman kazanabilirsiniz *Azure anahtar kasası tümleştirmeyi* özelliği.
+Şirket içi makinelerle SQL Server çalıştırıyorsanız, Şirket [içi SQL Server makinenizden Azure Key Vault erişmek için izleyebileceğiniz adımlar](https://msdn.microsoft.com/library/dn198405.aspx)vardır. Ancak Azure VM 'lerinde SQL Server için *Azure Key Vault tümleştirme* özelliğini kullanarak zamandan tasarruf edebilirsiniz.
 
-Bu özellik etkinleştirildiğinde otomatik olarak SQL Server Bağlayıcısı, Azure Key Vault'a erişmesi için EKM sağlayıcısına yapılandırır, yüklenip kasanıza erişmek için izin vermek için kimlik bilgisi oluşturur. Şirket yukarıda belirtilen belgelere adımları sırasında görünüyorsa bu özelliği 2 ve 3. adımları otomatikleştiren görebilirsiniz. Yine de el ile yapmanız gerekir gereken tek şey, anahtarları ve anahtar kasası oluşturmaktır. Burada, tüm kurulum SQL vm'nizin otomatik hale getirilmiştir. Bu özellik, bu kurulum tamamlandıktan sonra veritabanları veya yedekleri normalde yaptığınız gibi şifreleme başlamak için T-SQL deyimleri yürütebilir.
+Bu özellik etkinleştirildiğinde, SQL Server Bağlayıcısı otomatik olarak yüklenir, EKM sağlayıcısını Azure Key Vault erişim için yapılandırır ve kasanıza erişmenize izin veren kimlik bilgisini oluşturur. Daha önce bahsedilen şirket içi belgelerdeki adımlara bakarsanız, bu özelliğin 2 ve 3. adımları otomatikleştirdiği hakkında bilgi alabilirsiniz. Hala el ile yapmanız gereken tek şey, anahtar kasasını ve anahtarları oluşturmaktır. Buradan, SQL sanal makinenizin tüm kurulumu otomatikleştirilir. Bu özellik bu kurulumu tamamladıktan sonra, veritabanlarını veya yedeklemelerinizi normal şekilde şifrelemeye başlamak için T-SQL deyimlerini çalıştırabilirsiniz.
 
 [!INCLUDE [AKV Integration Prepare](../../../../includes/virtual-machines-sql-server-akv-prepare.md)]
 
   >[!NOTE]
-  > EKM sağlayıcısı sürümü 1.0.4.0 SQL Server VM üzerinde yüklü [SQL Iaas uzantısı](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension). SQL Iaas uzantısı yükseltme sağlayıcı sürümü güncelleştirilmez. Lütfen el ile (örneğin, bir SQL yönetilen örneğine geçişi sırasında) gerekirse EKM sağlayıcısı sürüm yükseltme de göz önünde bulundurur.
+  > EKM sağlayıcısı sürüm 1.0.4.0, [SQL IaaS uzantısı](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension)aracılığıyla SQL Server VM yüklendi. SQL IaaS uzantısını yükseltmek, sağlayıcı sürümünü güncelleştirmeyecektir. Lütfen EKM sağlayıcısı sürümünü gerekirse (örneğin, bir SQL yönetilen örneği 'ne geçiş yaparken) el ile yükseltmeyi düşünün.
 
 
-## <a name="enabling-and-configuring-akv-integration"></a>Etkinleştirme ve yapılandırma AKV tümleştirme
-Sağlama sırasında AKV tümleştirme etkinleştirin veya var olan VM'ler için yapılandırın.
+## <a name="enabling-and-configuring-akv-integration"></a>AKV Tümleştirmesini Etkinleştirme ve yapılandırma
+Sağlama sırasında AKV tümleştirmesini etkinleştirebilir veya mevcut VM 'Ler için yapılandırabilirsiniz.
 
-### <a name="new-vms"></a>Yeni VM'ler
-Yeni bir SQL Server sanal makinesini Resource Manager ile sağlıyorsanız, Azure portalında Azure anahtar kasası tümleştirmeyi etkinleştirmek için bir yol sağlar. Azure Key Vault özelliği yalnızca Enterprise, Developer ve SQL Server'ın değerlendirme sürümleri için kullanılabilir.
+### <a name="new-vms"></a>Yeni VM 'Ler
+Kaynak Yöneticisi ile yeni bir SQL Server sanal makine sağlıyorsanız Azure portal Azure Key Vault tümleştirmeyi etkinleştirmek için bir yol sağlar. Azure Key Vault özelliği yalnızca SQL Server Enterprise, Developer ve Evaluation sürümlerinde kullanılabilir.
 
 ![SQL Azure Anahtar Kasası Tümleştirme](./media/virtual-machines-windows-ps-sql-keyvault/azure-sql-arm-akv.png)
 
-Sağlama ayrıntılı kılavuz için bkz. [Azure Portal'da bir SQL Server sanal makinesi sağlama](virtual-machines-windows-portal-sql-server-provision.md).
+Sağlama hakkında ayrıntılı yönergeler için, bkz. [Azure portal SQL Server sanal makinesi sağlama](virtual-machines-windows-portal-sql-server-provision.md).
 
-### <a name="existing-vms"></a>Varolan Vm'leri
+### <a name="existing-vms"></a>Mevcut VM 'Ler
 
 [!INCLUDE [windows-virtual-machines-sql-use-new-management-blade](../../../../includes/windows-virtual-machines-sql-new-resource.md)]
 
-Mevcut SQL Server sanal makineleri için açma, [SQL sanal makineleri kaynak](virtual-machines-windows-sql-manage-portal.md#access-sql-virtual-machine-resource) seçip **güvenlik** altında **ayarları**. Seçin **etkinleştirme** Azure anahtar kasası tümleştirmeyi etkinleştirmek için. 
+Mevcut SQL Server sanal makineler için [SQL sanal makineler](virtual-machines-windows-sql-manage-portal.md#access-the-sql-virtual-machines-resource) kaynağınızı açın ve **Ayarlar**altında **güvenlik** ' i seçin. Azure Key Vault tümleştirmesini etkinleştirmek için **Etkinleştir** ' i seçin. 
 
-![Var olan sanal makineler için SQL AKV tümleştirme](./media/virtual-machines-windows-ps-sql-keyvault/azure-sql-rm-akv-existing-vms.png)
+![Mevcut VM 'Ler için SQL AKV tümleştirmesi](./media/virtual-machines-windows-ps-sql-keyvault/azure-sql-rm-akv-existing-vms.png)
 
-İşiniz bittiğinde seçin **Uygula** altındaki düğmesine **güvenlik** yaptığınız değişiklikleri kaydetmek için sayfa.
-
-> [!NOTE]
-> Burada oluşturulan kimlik bilgisi adı daha sonra bir SQL oturum açmayla. Bu anahtar kasasına erişmek SQL oturum açma sağlar. 
-
+İşiniz bittiğinde, değişikliklerinizi kaydetmek için **güvenlik** sayfasının alt kısmındaki **Uygula** düğmesini seçin.
 
 > [!NOTE]
-> Şablon kullanarak AKV tümleştirme de yapılandırabilirsiniz. Daha fazla bilgi için [Azure anahtar kasası tümleştirme için Azure Hızlı Başlangıç şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-sql-existing-keyvault-update).
+> Burada oluşturduğumuz kimlik bilgisi adı, daha sonra bir SQL oturum açmayla eşlenecek. Bu, SQL oturum açmanın anahtar kasasına erişmesine izin verir. 
+
+
+> [!NOTE]
+> Ayrıca, bir şablon kullanarak AKV tümleştirmesini yapılandırabilirsiniz. Daha fazla bilgi için bkz. [Azure Key Vault tümleştirme Için Azure hızlı başlangıç şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-sql-existing-keyvault-update).
 
 
 [!INCLUDE [AKV Integration Next Steps](../../../../includes/virtual-machines-sql-server-akv-next-steps.md)]

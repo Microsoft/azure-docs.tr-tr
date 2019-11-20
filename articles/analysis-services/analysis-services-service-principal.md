@@ -1,59 +1,58 @@
 ---
-title: Hizmet sorumluları ile Azure Analysis Services görevleri otomatik hale getirin | Microsoft Docs
-description: Azure Analysis Services görevlerini otomatikleştirmek için hizmet sorumlusu oluşturma konusunda bilgi edinin.
+title: Hizmet sorumluları ile Azure Analysis Services görevleri otomatikleştirin | Microsoft Docs
+description: Azure Analysis Services yönetim görevlerini otomatikleştirmek için bir hizmet sorumlusu oluşturmayı öğrenin.
 author: minewiskan
-manager: kfile
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 04/23/2019
+ms.date: 10/30/2019
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: c034ed7164e67183b9a848d5210dcaf377476c6a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5078fcc1ba5c581aca475025b286d0319d6024a6
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65518155"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73572599"
 ---
 # <a name="automation-with-service-principals"></a>Hizmet sorumlularıyla otomasyon
 
-Hizmet sorumluları, katılımsız kaynak ve hizmet düzeyinde işlemler gerçekleştirmek için kiracınızın içinde oluşturduğunuz bir Azure Active Directory uygulama kaynağıdır. Benzersiz türde oldukları *kullanıcı kimliğini* bir uygulama kimliği ve parola veya sertifika ile. Bir hizmet sorumlusu yalnızca kendisi için atanan izinleri ve rolleri tarafından tanımlanan görevleri gerçekleştirmek gerekli izinleri vardır. 
+Hizmet sorumluları, katılımsız kaynak ve hizmet düzeyinde işlemler gerçekleştirmek için kiracınızın içinde oluşturduğunuz bir Azure Active Directory uygulama kaynağıdır. Bunlar, bir uygulama KIMLIĞI ve parolası ya da sertifikası olan benzersiz bir *Kullanıcı kimliği* türüdür. Bir hizmet sorumlusu yalnızca atandığı roller ve izinler tarafından tanımlanan görevleri gerçekleştirmek için gerekli izinlere sahiptir. 
 
-Analysis Services hizmet sorumluları Azure Otomasyonu, PowerShell katılımsız modda, özel istemci uygulamaları ve web uygulamaları ile ortak görevleri otomatik hale getirmek için kullanılır. Örneğin, sağlama sunucular, dağıtma, modelleri, veri yenileme, Ölçek artırma/azaltma ve VM'yi duraklatabilir/sürdürebilirsiniz tüm hizmet sorumlularını kullanma tarafından otomatik olarak yapılabilir. Normal bir Azure AD UPN'sini hesaplarına çok benzer, rol üyeliğini hizmet sorumlularının izinlerini atanır.
+Analysis Services, hizmet sorumluları, ortak görevleri otomatikleştirmek için Azure Otomasyonu, PowerShell katılımsız modu, özel istemci uygulamaları ve Web uygulamaları ile birlikte kullanılır. Örneğin, sunucuları sağlama, modelleri dağıtma, veri yenileme, ölçek artırma/azaltma ve duraklatma/devam etmeyi hizmet sorumluları kullanılarak otomatik hale getirilebilir. İzinler, normal Azure AD UPN hesaplarına benzer şekilde rol üyeliğiyle, hizmet sorumlularına atanır.
 
-Analysis Services tarafından yönetilen kimlikleri hizmet sorumlusu kullanarak gerçekleştirilen işlemleri de destekler. Daha fazla bilgi için bkz. [kimliklerini Azure kaynakları için yönetilen](../active-directory/managed-identities-azure-resources/overview.md) ve [Azure Hizmetleri söz konusu destek Azure AD kimlik doğrulamasını](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-analysis-services).
+Analysis Services Ayrıca, hizmet sorumlularını kullanan yönetilen kimlikler tarafından gerçekleştirilen işlemleri destekler. Daha fazla bilgi edinmek için bkz. Azure [kaynakları Için Yönetilen kimlikler](../active-directory/managed-identities-azure-resources/overview.md) ve Azure [ad kimlik doğrulamasını destekleyen Azure hizmetleri](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-analysis-services).
 
 ## <a name="create-service-principals"></a>Hizmet sorumlusu oluşturma
  
-Hizmet sorumluları, Azure portalında veya PowerShell kullanarak oluşturulabilir. Daha fazla bilgi için bkz:
+Hizmet sorumluları Azure portal veya PowerShell kullanarak oluşturulabilir. Daha fazla bilgi için bkz:
 
-[Hizmet sorumlusu - Azure portal'ı oluşturma](../active-directory/develop/howto-create-service-principal-portal.md)   
+[Hizmet sorumlusu oluşturma-Azure portal](../active-directory/develop/howto-create-service-principal-portal.md)   
 [Hizmet sorumlusu oluşturma - PowerShell](../active-directory/develop/howto-authenticate-service-principal-powershell.md)
 
-## <a name="store-credential-and-certificate-assets-in-azure-automation"></a>Azure Automation'da kimlik bilgisi ve sertifika varlıklar Store
+## <a name="store-credential-and-certificate-assets-in-azure-automation"></a>Azure Otomasyonu 'nda kimlik bilgilerini ve sertifika varlıklarını depolayın
 
-Hizmet sorumlusu kimlik bilgileri ve sertifikaları güvenli bir şekilde Azure Otomasyonu'nda runbook işlemleri için saklanır. Daha fazla bilgi için bkz:
+Hizmet sorumlusu kimlik bilgileri ve sertifikaları, runbook işlemleri için Azure Otomasyonu 'nda güvenli bir şekilde depolanabilir. Daha fazla bilgi için bkz:
 
-[Azure automation'da kimlik bilgisi varlıkları](../automation/automation-credentials.md)   
+[Azure Automation 'Da kimlik bilgisi varlıkları](../automation/automation-credentials.md)   
 [Azure Otomasyonu'ndaki sertifika varlıkları](../automation/automation-certificates.md)
 
-## <a name="add-service-principals-to-server-admin-role"></a>Sunucu Yöneticisi rolüne hizmet sorumlularını Ekle
+## <a name="add-service-principals-to-server-admin-role"></a>Sunucu Yöneticisi rolüne hizmet sorumluları ekleme
 
-Analysis Services sunucusu yönetim işlemleri için bir hizmet sorumlusu kullanabilmeniz için önce sunucu Yöneticiler rolüne eklemeniz gerekir. Daha fazla bilgi için bkz. [sunucu yöneticisi rolüne hizmet sorumlusu ekleme](analysis-services-addservprinc-admins.md).
+Analysis Services sunucusu yönetim işlemleri için bir hizmet sorumlusu kullanabilmeniz için, bunu sunucu yöneticileri rolüne eklemeniz gerekir. Daha fazla bilgi için bkz. [Sunucu Yöneticisi rolüne hizmet sorumlusu ekleme](analysis-services-addservprinc-admins.md).
 
-## <a name="service-principals-in-connection-strings"></a>Bağlantı dizeleri hizmet sorumluları
+## <a name="service-principals-in-connection-strings"></a>Bağlantı dizelerinde hizmet sorumluları
 
-Hizmet sorumlusu uygulama kimliği ve parola veya sertifika kullanılabilir bağlantı dizeleri hemen hemen aynı UPN.
+Hizmet sorumlusu uygulama kimliği ve parolası ya da sertifikası, bir UPN ile aynı bağlantı dizelerinde kullanılabilir.
 
 ### <a name="powershell"></a>PowerShell
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-#### <a name="a-nameazmodule-using-azanalysisservices-module"></a><a name="azmodule" />Az.AnalysisServices modülünü kullanma
+#### <a name="a-nameazmodule-using-azanalysisservices-module"></a>Az. AnalysisServices modülünü kullanarak <a name="azmodule" />
 
-İle kaynak yönetimi işlemleri için bir hizmet sorumlusunu kullanırken [Az.AnalysisServices](/powershell/module/az.analysisservices) modülü, kullanım `Connect-AzAccount` cmdlet'i. 
+[Az. AnalysisServices](/powershell/module/az.analysisservices) modülüyle kaynak yönetimi işlemleri için bir hizmet sorumlusu kullanırken `Connect-AzAccount` cmdlet 'ini kullanın. 
 
-Aşağıdaki örnekte, AppID ve parola, / ölçeği ve salt okunur kopyaya eşitleme için Denetim düzlemi işlemleri gerçekleştirmek için kullanılır:
+Aşağıdaki örnekte, AppID ve parola, salt okuma çoğaltmaları ve ölçeği artırma/genişletme işlemleri için denetim düzlemi işlemlerini gerçekleştirmek üzere kullanılır:
 
 ```powershell
 Param (
@@ -74,9 +73,9 @@ Sync-AzAnalysisServicesInstance -Instance "asazure://westus.asazure.windows.net/
 Set-AzAnalysisServicesServer -Name "testsvr" -ResourceGroupName "testRG" -Sku "S1" -ReadonlyReplicaCount 2 -DefaultConnectionMode Readonly
 ```
 
-#### <a name="using-sqlserver-module"></a>SQLServer modülündeki kullanma
+#### <a name="using-sqlserver-module"></a>SQLServer modülünü kullanma
 
-Aşağıdaki örnekte, uygulama kimliği ve parola, bir model veritabanı yenileme işlemi gerçekleştirmek için kullanılır:
+Aşağıdaki örnekte, bir model veritabanı yenileme işlemi gerçekleştirmek için AppID ve bir parola kullanılır:
 
 ```powershell
 Param (
@@ -93,11 +92,11 @@ Invoke-ProcessTable -Server "asazure://westcentralus.asazure.windows.net/myserve
 
 ### <a name="amo-and-adomd"></a>AMO ve ADOMD 
 
-İstemci uygulamaları ve web apps ile bağlanırken [AMO ve ADOMD istemci kitaplıkları](analysis-services-data-providers.md) 15.0.2 ve daha yüksek yüklenebilir NuGet paketleri bağlantı dizeleri aşağıdaki sözdizimini kullanarak hizmet sorumluları destekleyen bir sürüm: `app:AppID` ve parola veya `cert:thumbprint`. 
+İstemci uygulamaları ve Web Apps ile bağlanırken, [amo ve ADOMD istemci kitaplıkları](analysis-services-data-providers.md) sürüm 15.0.2 ve bağlantı dizelerindeki NuGet destek hizmeti sorumlularını kullanarak şu sözdizimini kullanarak daha fazla yüklenebilir paketler: `app:AppID` ve parola veya @no_ _t_2_ .`cert:thumbprint` 
 
-Aşağıdaki örnekte, `appID` ve `password` bir model veritabanı yenileme işlemi gerçekleştirmek için kullanılır:
+Aşağıdaki örnekte `appID` ve bir `password` model veritabanı yenileme işlemi gerçekleştirmek için kullanılır:
 
-```C#
+```csharp
 string appId = "xxx";
 string authKey = "yyy";
 string connString = $"Provider=MSOLAP;Data Source=asazure://westus.asazure.windows.net/<servername>;User ID=app:{appId};Password={authKey};";
@@ -110,5 +109,5 @@ db.Model.SaveChanges();
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Azure PowerShell ile oturum açma için oturum açın](https://docs.microsoft.com/powershell/azure/authenticate-azureps)   
+[Azure PowerShell  Ile oturum açın](https://docs.microsoft.com/powershell/azure/authenticate-azureps)  
 [Sunucu Yöneticisi rolüne hizmet sorumlusu ekleme](analysis-services-addservprinc-admins.md)   

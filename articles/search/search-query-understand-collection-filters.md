@@ -1,13 +1,13 @@
 ---
-title: OData koleksiyon filtreleri - Azure Search anlama
-description: OData koleksiyon filtreleri Azure arama sorguları nasıl çalıştığını anlama.
-ms.date: 06/13/2019
-services: search
-ms.service: search
-ms.topic: conceptual
+title: OData koleksiyon filtrelerini anlama
+titleSuffix: Azure Cognitive Search
+description: OData koleksiyon filtrelerinin, koleksiyonlara özgü sınırlamalar ve davranışlar dahil olmak üzere Azure Bilişsel Arama sorgularında nasıl çalıştığı mekanizması öğrenin.
+manager: nitinme
 author: brjohnstmsft
 ms.author: brjohnst
-ms.manager: cgronlun
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
 translation.priority.mt:
 - de-de
 - es-es
@@ -19,46 +19,46 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: 7af1b0ab95d04249d6d74e3324dbeb30eda6e1de
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f6e8ed5baef9b8594bb1fe03942e831fd8264a56
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67079606"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113060"
 ---
-# <a name="understanding-odata-collection-filters-in-azure-search"></a>Azure Search'te OData toplama filtreleri anlama
+# <a name="understanding-odata-collection-filters-in-azure-cognitive-search"></a>Azure Bilişsel Arama OData koleksiyon filtrelerini anlama
 
-İçin [filtre](query-odata-filter-orderby-syntax.md) Azure Search'te toplama alanlar üzerinde kullanabileceğiniz [ `any` ve `all` işleçleri](search-query-odata-collection-operators.md) ile birlikte **lambda ifadeleri**. Lambda ifadeleri başvuran Boolean ifadeler olan bir **aralık değişkeni**. `any` Ve `all` işleçleridir benzer bir `for` döngü, döngü değişkeninin ve döngü gövdesi lambda ifadesiyle rolünü alma olan Aralık değişkeniyle çoğu programlama dillerinde. Aralık değişkeni koleksiyonu yineleme döngüsü sırasında "mevcut" değerini alır.
+Azure Bilişsel Arama 'de koleksiyon alanlarını [filtrelemek](query-odata-filter-orderby-syntax.md) için [`any` ve `all` işleçlerini](search-query-odata-collection-operators.md) **lambda ifadeleriyle**birlikte kullanabilirsiniz. Lambda ifadeleri, bir **Aralık değişkenine**başvuran Boole ifadeleridir. `any` ve `all` işleçleri çoğu programlama dilinde bir `for` döngüsüne benzer, döngü değişkeninin rolünü alan Aralık değişkeni ve döngünün gövdesi olarak lambda ifadesi. Aralık değişkeni, döngünün yinelemesi sırasında koleksiyonun "Current" değerini alır.
 
-En az olan kavramsal olarak şekli at. Gerçekte, Azure Search çok farklı bir şekilde nasıl filtreler uygulayan `for` iş döngüsü. İdeal olarak, bu fark için görünmez, ancak belirli durumlarda bu değildir. Sonuç, lambda ifadeleri yazarken izlemek zorunda kural yoktur.
+En azından bu, kavramsal olarak nasıl çalıştığı. Azure Bilişsel Arama, `for` döngülerinin nasıl çalıştığı konusunda filtreleri çok farklı bir şekilde uygular. İdeal olarak, bu fark sizin için görünmez, ancak bazı durumlarda değildir. Nihai sonuç, lambda ifadeleri yazarken izlemeniz gereken kurallar vardır.
 
-Bu makalede, neden toplama filtreleri için kuralları nasıl Azure Search bu filtreler çalıştırır inceleyerek mevcut açıklanmaktadır. Gelişmiş Filtreler karmaşık lambda ifadeleri ile yazıyorsanız, bu makalede filtreleri mümkündür, Anlayışınızı oluşturmanın faydalı bulabilirsiniz ve neden.
+Bu makalede, Azure Bilişsel Arama 'in bu filtreleri nasıl yürüttüğünü inceleyerek koleksiyon filtreleri için kuralların neden olduğu açıklanmaktadır. Karmaşık lambda ifadeleriyle gelişmiş filtreler yazıyorsanız, filtrelerdeki nelerin ve neden olduğunu anlamak için bu makaleyi yararlı bulabilirsiniz.
 
-Kuralları örnekler de dahil olmak üzere toplama filtreleri şunlardır bkz bilgi [sorun giderme OData toplama filtreleri Azure Search'te](search-query-troubleshoot-collection-filters.md).
+Koleksiyon filtreleri kurallarının ne olduğu hakkında bilgi için, örnekler de dahil olmak üzere bkz. [Azure bilişsel arama 'Da OData koleksiyon filtrelerinde sorun giderme](search-query-troubleshoot-collection-filters.md).
 
-## <a name="why-collection-filters-are-limited"></a>Neden toplama filtreleri sınırlıdır
+## <a name="why-collection-filters-are-limited"></a>Koleksiyon filtrelerinin neden sınırlandırıldı
 
-Koleksiyonlar tüm türleri için desteklenen tüm filtre özellikler neden üç temel neden şunlardır:
+Tüm filtre özelliklerinin tüm koleksiyon türleri için desteklenmemesinin üç temel nedeni vardır:
 
-1. Yalnızca belirli işleçler, belirli veri türleri için desteklenir. Örneğin, bu Boolean değerleri karşılaştırmak için doesn't make Sense `true` ve `false` kullanarak `lt`, `gt`ve benzeri.
-1. Azure Search'ü desteklemez **bağıntılı arama** türünde alanlar üzerinde `Collection(Edm.ComplexType)`.
-1. Azure Search kullanan filtreler tüm koleksiyonları dahil olmak üzere, veri türleri üzerinde yürütmek için dizinleri ters.
+1. Belirli veri türleri için yalnızca belirli işleçler desteklenir. Örneğin, `lt`, `gt`vb. kullanarak `true` ve `false` Boole değerlerini karşılaştırmak mantıklı değildir.
+1. Azure Bilişsel Arama, `Collection(Edm.ComplexType)`türündeki alanlarda **bağıntılı aramayı** desteklemez.
+1. Azure Bilişsel Arama, koleksiyonlar da dahil olmak üzere tüm veri türlerinde filtre yürütmek için ters dizinler kullanır.
 
-İlk neden EDM türü sistem ve OData dil nasıl tanımlandığını, yalnızca bir sonucu var. Son iki, bu makalenin geri kalanında daha ayrıntılı açıklanmıştır.
+İlk neden, OData dilinin ve EDM türü sisteminin nasıl tanımlandığınıza ilişkin bir sonucudur. Son ikisi bu makalenin geri kalanında daha ayrıntılı olarak açıklanmıştır.
 
-## <a name="correlated-versus-uncorrelated-search"></a>Bağıntılı uncorrelated arama
+## <a name="correlated-versus-uncorrelated-search"></a>Bağıntılı ve bağıntılı olmayan arama
 
-Birden çok filtre ölçütlerini karmaşık nesne koleksiyonu uygularken ölçütlerdir **bağıntılı** uygulandıkları beri *koleksiyondaki her bir nesnenin*. Örneğin, aşağıdaki filtre 100'den daha az bir ücret en az bir lüks odada hotels döndürür:
+Karmaşık nesneler koleksiyonuna birden çok filtre ölçütü uygulanırken, *koleksiyonda her bir nesne*için uygulandıklarından, ölçütler **bağıntılı** bir şekilde yapılır. Örneğin, aşağıdaki filtre 100 ' dan düşük bir fiyata sahip en az bir Deluxe Oda olan oteller döndürür:
 
     Rooms/any(room: room/Type eq 'Deluxe Room' and room/BaseRate lt 100)
 
-Filtreleme olduysa *uncorrelated*, yukarıdaki filtre, burada bir oda haline deluxe ve farklı bir yer olan temel hotels Oranı 100'den küçük döndürebilir. Mıydı mantıklı, her iki yan tümceleri lambda ifadesinin yani aynı aralık değişkeni için geçerli olduğundan `room`. Bu tür filtreleri bağıntılı nedeni budur.
+Filtreleme *bağıntısız*ise yukarıdaki filtre, bir odanın Deluxe olduğu ve farklı bir odanın 100 ' den düşük bir taban oranına sahip olan oteller döndürebilir. Bu anlamlı değildir, çünkü lambda ifadesinin her iki yan tümcesi de aynı Aralık değişkenine uygulanır, yani `room`. Bu, bu tür filtrelerin bağıntılı olmasının nedenleridir.
 
-Ancak, tam metin araması için belirli bir aralık değişkenine başvurmak için hiçbir yolu yoktur. Verilecek fielded arama kullanıyorsanız bir [tam Lucene sorgu](query-lucene-syntax.md) bunu ister:
+Ancak, tam metin arama için belirli bir Aralık değişkenine başvurmanız mümkün değildir. Bu şekilde, [tam bir Lucene sorgusu](query-lucene-syntax.md) vermek için kullanılabilir arama kullanıyorsanız:
 
     Rooms/Type:deluxe AND Rooms/Description:"city view"
 
-bir açıklama burada bir oda deluxe ve "Şehir görünümü" farklı bir oda bahsetmeleri hotels geri alabilirsiniz. Örneğin, aşağıdaki belge ile `Id` , `1` sorgu eşleşir:
+oteller bir odanın bulunduğu yerde ve farklı bir odada açıklama içinde "şehir görünümü" bahsetmesini sağlayabilirsiniz. Örneğin, `1` `Id` aşağıdaki belge sorguyla eşleşir:
 
 ```json
 {
@@ -80,39 +80,39 @@ bir açıklama burada bir oda deluxe ve "Şehir görünümü" farklı bir oda ba
 }
 ```
 
-Neden olan `Rooms/Type` başvuran tüm çözümlenen koşullarını `Rooms/Type` tüm belge ve benzer şekilde için alan `Rooms/Description`aşağıdaki tabloda gösterildiği gibi.
+Bunun nedeni, `Rooms/Type` tüm belgedeki `Rooms/Type` alanın analiz edilen tüm koşullarına ve benzer şekilde `Rooms/Description`için de aşağıdaki tablolarda gösterildiği gibi anlamına gelir.
 
-Nasıl `Rooms/Type` tam metin araması için depolanır:
+Tam metin arama için `Rooms/Type` nasıl depolanır:
 
-| Terim `Rooms/Type` | Belge Kimliği |
+| `Rooms/Type` dönemi | Belge kimlikleri |
 | --- | --- |
-| Deluxe | 1, 2 |
+| lü | 1, 2 |
 | standart | 1 |
 
-Nasıl `Rooms/Description` tam metin araması için depolanır:
+Tam metin arama için `Rooms/Description` nasıl depolanır:
 
-| Terim `Rooms/Description` | Belge Kimliği |
+| `Rooms/Description` dönemi | Belge kimlikleri |
 | --- | --- |
-| courtyard | 2 |
+| Kurs | 2 |
 | city | 1 |
-| bahçesi | 1 |
-| Büyük | 1 |
-| motel | 2 |
-| Oda | 1, 2 |
+| Bahçe | 1 |
+| miktarda | 1 |
+| Motel | 2 |
+| yı | 1, 2 |
 | standart | 1 |
-| Paketi | 1 |
+| kurallarý | 1 |
 | görünüm | 1 |
 
-Bu nedenle yukarıdaki filtre, temelde diyor "eşleşen bir oda sahip olduğu belgeleri `Type` 'Deluxe odası' eşittir ve **, aynı odada** sahip `BaseRate` 100", arama sorgu "eşleşme belgeleri nerede `Rooms/Type`"deluxe" bir dönemi kapsar ve `Rooms/Description` "Şehir görünümü" deyimi vardır. İkinci durumda, alanlar eşleştirilebilir bireysel odaları kavramı yoktur.
+Bu nedenle, yukarıdaki filtreden farklı olarak, "bir odanın ' lüks ' 'e eşit `Type` sahip olduğu ve **aynı odanın** 100 ' den küçük `BaseRate` sahip olduğu belgeleri Eşleştir" ifadesi "" Deluxe "teriminin bulunduğu ve `Rooms/Description`" şehir görünümü "ifadesinin bulunduğu" arama sorgusu `Rooms/Type` "diyor. Alanları, ikinci durumda bağıntılı olabilecek ayrı odalar kavramı yoktur.
 
 > [!NOTE]
-> Görmek istiyorsanız, Azure Search için eklenen bağıntılı arama desteği, lütfen oylayın [bu Uservoice öğesi](https://feedback.azure.com/forums/263029-azure-search/suggestions/37735060-support-correlated-search-on-complex-collections).
+> Azure Bilişsel Arama 'a eklenen bağıntılı arama desteğini görmek isterseniz, lütfen [Bu Kullanıcı ses öğesini](https://feedback.azure.com/forums/263029-azure-search/suggestions/37735060-support-correlated-search-on-complex-collections)oylayın.
 
-## <a name="inverted-indexes-and-collections"></a>Ters dizinleri ve koleksiyonları
+## <a name="inverted-indexes-and-collections"></a>Ters dizinler ve koleksiyonlar
 
-İster basit koleksiyonları için daha çok daha az kısıtlamalar lambda ifadeleri karmaşık koleksiyonlar üzerinden olduğunu fark etmiş olabilirsiniz `Collection(Edm.Int32)`, `Collection(Edm.GeographyPoint)`ve benzeri. Basit koleksiyonların koleksiyon olarak hiç depolanmaz, ancak Azure Search karmaşık koleksiyonları gerçek alt belge koleksiyonları depolar. olmasıdır.
+Karmaşık koleksiyonlar üzerinde `Collection(Edm.Int32)`, `Collection(Edm.GeographyPoint)`vb. gibi basit koleksiyonlar için çok daha az kısıtlama olduğunu fark etmiş olabilirsiniz. Bunun nedeni, Azure Bilişsel Arama karmaşık koleksiyonları gerçek bir alt belge koleksiyonları olarak depolarken basit koleksiyonlar tüm koleksiyonlar olarak depolanmaz.
 
-Örneğin, filtrelenebilir dize koleksiyonu alanı gibi düşünün `seasons` bir çevrimiçi satış şirketi için dizin içinde. Bu dizin için karşıya yüklenen bazı belgeler şuna benzeyebilir:
+Örneğin, çevrimiçi bir satıcı için Dizin `seasons` gibi filtrelenebilir bir dize toplama alanı düşünün. Bu dizine yüklenmiş bazı belgeler şöyle görünebilir:
 
 ```json
 {
@@ -136,18 +136,18 @@ Bu nedenle yukarıdaki filtre, temelde diyor "eşleşen bir oda sahip olduğu be
 }
 ```
 
-Değerlerini `seasons` alan adı verilen bir yapıda depolanan bir **dizin ters**, aşağıdakine benzer aradığı:
+`seasons` alanının değerleri **ters bir dizin**adlı bir yapıda saklanır ve şuna benzer bir şekilde görünür:
 
-| Terim | Belge Kimliği |
+| Sözleşme Dönemi | Belge kimlikleri |
 | --- | --- |
-| Yay | 1, 2 |
-| Yaz | 1 |
-| Kalan | 1, 2 |
+| yay | 1, 2 |
+| ini | 1 |
+| düştü | 1, 2 |
 | Kış | 2, 3 |
 
-Bu veri yapısını, büyük bir hızla ile bir soruyu yanıtlamak için tasarlanmıştır: Belirli bir dönem içinde hangi belgelerin görünüyor mu? Bu soruyu yanıtlarken daha gibi bir düz eşitlik kontrolüne göre bir döngü bir koleksiyon üzerinde çalışır. Aslında, bu neden dize koleksiyonları, Azure Search yalnızca sağlar, `eq` içinde bir lambda ifadesi için karşılaştırma işleci olarak `any`.
+Bu veri yapısı, bir soruyu harika bir hızla yanıtlamak üzere tasarlandı: hangi belgeler belirli bir terime ait görünüyor? Bu sorunun yanıtlanması, bir koleksiyon üzerinde bir döngüden daha basit bir eşitlik denetimi gibi daha fazla işe yarar. Aslında, bu neden dize koleksiyonları için, Azure Bilişsel Arama yalnızca `any`lambda ifadesinde bir karşılaştırma işleci olarak `eq` izin veriyor.
 
-Eşitlik oluşturmayı, sonraki nasıl, aynı aralık değişkeniyle birden çok eşitlik denetimleri birleştirmek mümkündür göz atacağız `or`. Cebir sayesinde çalışır ve [miktar belirleyiciler dağıtarak özelliğini](https://en.wikipedia.org/wiki/Existential_quantification#Negation). Bu ifade:
+Daha sonra, eşitlik `or`ile aynı Aralık değişkeninde birden çok eşitlik denetimini nasıl birleştirebileceğinizi inceleyeceğiz. Sonuç olarak [, nicelik belirteçleri ve dağıtılabilir özelliği](https://en.wikipedia.org/wiki/Existential_quantification#Negation)için teşekkürler. Bu ifade:
 
     seasons/any(s: s eq 'winter' or s eq 'fall')
 
@@ -155,7 +155,7 @@ eşdeğerdir:
 
     seasons/any(s: s eq 'winter') or seasons/any(s: s eq 'fall')
 
-ve her iki `any` alt ifadeler verimli bir şekilde yürütülebilir ters dizini kullanma. Ayrıca, performanstan için [miktar belirleyiciler olumsuzlama Kanunu](https://en.wikipedia.org/wiki/Existential_quantification#Negation), bu ifade:
+ve iki `any` alt ifadesinin her biri ters bir dizin kullanılarak etkili bir şekilde çalıştırılabilir. Ayrıca, [nicelik sayısının Olumsuzlaştırma yasaları](https://en.wikipedia.org/wiki/Existential_quantification#Negation)sayesinde bu ifade:
 
     seasons/all(s: s ne 'winter' and s ne 'fall')
 
@@ -163,33 +163,33 @@ eşdeğerdir:
 
     not seasons/any(s: s eq 'winter' or s eq 'fall')
 
-kullanmak mümkün mü neden olduğu `all` ile `ne` ve `and`.
+`all` `ne` ve `and`ile kullanmak mümkün değildir.
 
 > [!NOTE]
-> Ayrıntılar bu belgenin kapsamı dışında olsa da, bu aynı ilkeler uzatmak [Jeo-uzamsal noktaları koleksiyonları için uzaklık ve kesişimi testleri](search-query-odata-geo-spatial-functions.md) de. Bu nedenle, bileşenidir `any`:
+> Ayrıntılar bu belgenin kapsamının ötesinde olsa da, aynı ilkeler [coğrafi uzamsal noktaların koleksiyonları için uzaklık ve kesişim testlerine](search-query-odata-geo-spatial-functions.md) de genişletilir. `any`:
 >
-> - `geo.intersects` negatif olamaz
-> - `geo.distance` kullanarak karşılaştırıldığında gerekir `lt` veya `le`
-> - ifadeler birlikte, ile `or`değil `and`
+> - `geo.intersects`, iç içe geçirilemez
+> - `geo.distance` `lt` veya `le` kullanılarak karşılaştırılmalıdır
+> - ifadeler `or`değil, `and` ile birleştirilmelidir
 >
-> Ters kurallar için geçerli `all`.
+> `all`için convero kuralları geçerlidir.
 
-Çok çeşitli ifadeleri izin verilen koleksiyon üzerinde veri filtreleme desteği yazdığında `lt`, `gt`, `le`, ve `ge` işleçler gibi `Collection(Edm.Int32)` örneğin. Özellikle kullanabilirsiniz `and` yanı `or` içinde `any`, temel alınan karşılaştırma ifadeleri birleştirilir sürece **aralığı karşılaştırmalar** kullanarak `and`, hangi sonra daha fazla kullanılarak birleştirilen `or`. Boolean ifadeleri, bu yapı adlı [ayırt edici Normal Form (DNF)](https://en.wikipedia.org/wiki/Disjunctive_normal_form), aksi takdirde "ORs, Equal" bilinir. Buna karşılık, lambda ifadeleri için `all` türleri olmalıdır bu veriler için [Conjunctive Normal Form (CNF)](https://en.wikipedia.org/wiki/Conjunctive_normal_form), aksi takdirde "Equal biri OR"özniteliklerine bilinen. Azure arama, bunları yürütebilir çünkü tür aralığı karşılaştırmaları sağlar kullanarak ters dizinleri verimli bir şekilde yalnızca yapabildiğiniz gibi dizeler için hızlı terim araması.
+Örneğin `Collection(Edm.Int32)` gibi `lt`, `gt`, `le`ve `ge` işleçlerini destekleyen veri türleri koleksiyonlarında filtrelendiğinde daha geniş bir dizi ifadeye izin verilir. Özellikle, `or`kullanarak daha fazla birleştirilmiş olan `and`kullanan **Aralık karşılaştırmaları** içine birleştirileceği sürece, `any``or` ve `and` de kullanabilirsiniz. Bu Boole ifadesi yapısına, "and Iler" olarak bilinen, ayırt edici [normal form (DNF)](https://en.wikipedia.org/wiki/Disjunctive_normal_form)adı verilir. Buna karşılık, bu veri türleri için `all` lambda ifadeleri, "and of ORs" olarak da bilinen, [ayırt edici normal biçimde (CNF)](https://en.wikipedia.org/wiki/Conjunctive_normal_form)olmalıdır. Azure Bilişsel Arama, dize için hızlı bir arama yapmak gibi, bunları tersine çevrilmiş dizinler kullanarak yürütebildiğinden, bu tür Aralık karşılaştırmaları yapılmasına izin verir.
 
-Özet olarak, kural için bir lambda ifadesinde izin verilenden karşısında şunlardır:
+Özet bölümünde, bir lambda ifadesinde izin verilen nesnelerin kaydırma kuralları aşağıda verilmiştir:
 
-- İçinde `any`, *pozitif denetimleri* her zaman, eşitlik gibi aralığı karşılaştırmalar izin `geo.intersects`, veya `geo.distance` ile karşılaştırıldığında `lt` veya `le` (düşünün "gibi olarak eşleşme" uzaklık denetimini geldiğinde eşitlik).
-- İçinde `any`, `or` her zaman izin verilir. Kullanabileceğiniz `and` Equal ORs (DNF) yalnızca aralığı denetimleri ve yalnızca ifade edebilirsiniz veri türleri için kullanın.
-- İçinde `all`, kuralları--yalnızca tersine *negatif denetimleri* izin verilen, kullanabileceğiniz `and` her zaman kullanabileceğiniz `or` kaldırmalı, ORs (CNF) olarak ifade edilen aralık denetimleri için yalnızca.
+- `any`içinde, *pozitif denetimler* her zaman eşitlik, Aralık karşılaştırmaları, `geo.intersects`veya `geo.distance` `lt` veya `le` ile karşılaştırıldığında izin verilir (uzaklığı denetlemek için "closeness" gibi bir eşitlik gibi düşünün).
+- `any`içinde `or` her zaman izin verilir. Yalnızca, yalnızca and (DNF) ' i kullanıyorsanız, yalnızca, Aralık denetimlerini ifade eden veri türleri için `and` kullanabilirsiniz.
+- `all`içinde kurallar ters çevrilir; yalnızca *negatif denetimlerine* izin verilir, `and` her zaman kullanabilir ve `or` yalnızca and of ORS (CNF) olarak ifade edilen Aralık denetimleri için kullanabilirsiniz.
 
-Uygulamada, bunlar yine de kullanmak en olası filtreleri türleridir. Olasılıklara ancak sınırları anlamak yine de yararlıdır.
+Uygulamada, bunlar en büyük olasılıkla kullanabileceğiniz filtrelerin türleridir. Mümkün olan nesnelerin sınırlarını anlamak yine de yararlıdır.
 
-Hangi tür filtre izin verildiğini ve hangi olmayan belirli örnekleri için bkz: [geçerli koleksiyon filtreleri yazmak nasıl](search-query-troubleshoot-collection-filters.md#bkmk_examples).
+Hangi tür filtrelerin izin verileceğini ve hangilerinin geçerli olduğunu gösteren belirli örnekler için bkz. [geçerli koleksiyon filtreleri yazma](search-query-troubleshoot-collection-filters.md#bkmk_examples).
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
-- [Azure Search'te OData toplama filtreleri sorunlarını giderme](search-query-troubleshoot-collection-filters.md)
-- [Azure Search'te filtreler](search-filters.md)
-- [Azure Search için OData ifade dili genel bakış](query-odata-filter-orderby-syntax.md)
-- [Azure Search için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
-- [Search belgeleri &#40;Azure arama hizmeti REST API'si&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Azure Bilişsel Arama OData koleksiyon filtreleri sorunlarını giderme](search-query-troubleshoot-collection-filters.md)
+- [Azure Bilişsel Arama filtreler](search-filters.md)
+- [Azure Bilişsel Arama için OData ifade diline genel bakış](query-odata-filter-orderby-syntax.md)
+- [Azure Bilişsel Arama için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
+- [Belgeleri &#40;Azure Bilişsel Arama ara REST API&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)

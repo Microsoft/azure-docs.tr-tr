@@ -1,5 +1,5 @@
 - name: Azure Hizmet Durumu
-  href: index.md
+  href: index.yml
 - name: Genel Bakış
   items:
     - name: Azure Hizmet Durumu hizmeti

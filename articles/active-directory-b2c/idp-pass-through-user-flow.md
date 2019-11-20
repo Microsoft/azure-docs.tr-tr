@@ -1,65 +1,58 @@
 ---
-title: Kullanıcı akışı aracılığıyla erişim belirteci, uygulamanıza - Azure Active Directory B2C geçirin | Microsoft Docs
-description: Bir erişim belirteci OAuth2.0 kimlik sağlayıcıları için Azure Active Directory B2C kullanıcı akışında bir talebi olarak nasıl geçirebilirsiniz öğrenin.
+title: Uygulamanıza Kullanıcı akışı aracılığıyla erişim belirteci geçirme-Azure Active Directory B2C
+description: OAuth 2,0 kimlik sağlayıcıları için bir erişim belirtecini Azure Active Directory B2C bir Kullanıcı akışında talep olarak nasıl geçitireceğinizi öğrenin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 04/16/2019
+ms.date: 08/17/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: db4b799aa31a4132609b0dd158b65070fb2474b7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a1a9ad0c615e50db746548a1ed5b557fe6fdea5a
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66510959"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71064292"
 ---
-# <a name="pass-an-access-token-through-a-user-flow-to-your-application-in-azure-active-directory-b2c"></a>Uygulamanızı Azure Active Directory B2C için bir kullanıcı akışı aracılığıyla erişim belirteci geçirin
+# <a name="pass-an-access-token-through-a-user-flow-to-your-application-in-azure-active-directory-b2c"></a>Azure Active Directory B2C uygulamasında uygulamanıza bir Kullanıcı akışı aracılığıyla erişim belirteci geçirin
 
-> [!NOTE]
-> Bu özellik şu anda genel Önizleme aşamasındadır.
+Azure Active Directory B2C (Azure AD B2C) bir [Kullanıcı akışı](active-directory-b2c-reference-policies.md) , uygulamanızın kullanıcılarına bir kimlik sağlayıcısına kaydolma veya oturum açma olanağı sağlar. Yolculuğun başladığı zaman, Azure AD B2C kimlik sağlayıcısından bir [erişim belirteci](active-directory-b2c-reference-tokens.md) alır. Azure AD B2C, kullanıcı hakkındaki bilgileri almak için bu belirteci kullanır. Kullanıcı akışındaki bir talebi, belirteci, Azure AD B2C kaydettiğinizde bulunan uygulamalara geçirmek için etkinleştirirsiniz.
 
-A [kullanıcı akışı](active-directory-b2c-reference-policies.md) Azure Active Directory (Azure AD) B2C'de, uygulamanızın kullanıcıları ıntune'a kaydolma veya bir kimlik sağlayıcısı ile oturum açmak için bir fırsat sağlar. Yolculuğunuzun başladığında, Azure AD B2C alır bir [erişim belirteci](active-directory-b2c-reference-tokens.md) kimlik sağlayıcısından gelen. Azure AD B2C kullanıcı hakkında bilgi almak için bu belirteci kullanır. Bir talep belirteci aracılığıyla Azure AD B2C'de kayıt uygulamaları geçirmek için kullanıcı akışınızı etkinleştirin.
-
-Azure AD B2C şu anda yalnızca destekler erişim belirtecini geçirme [OAuth 2.0](active-directory-b2c-reference-oauth-code.md) içeren kimlik sağlayıcıları [Facebook](active-directory-b2c-setup-fb-app.md) ve [Google](active-directory-b2c-setup-goog-app.md). Diğer tüm kimlik sağlayıcıları için talep boş olarak döndürülür.
+Azure AD B2C Şu anda yalnızca [Facebook](active-directory-b2c-setup-fb-app.md) ve [Google](active-directory-b2c-setup-goog-app.md)içeren [OAuth 2,0](active-directory-b2c-reference-oauth-code.md) kimlik sağlayıcılarının erişim belirtecinin geçirilmesini destekler. Diğer tüm kimlik sağlayıcıları için talep boş döndürülür.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Uygulamanızı kullanarak bir [v2 kullanıcı akışı](user-flow-versions.md).
-- Kullanıcı akışı, OAuth 2.0 kimlik sağlayıcısı ile yapılandırılır.
+* Uygulamanızın [V2 Kullanıcı akışı](user-flow-versions.md)kullanıyor olması gerekir.
+* Kullanıcı akışınız bir OAuth 2,0 kimlik sağlayıcısı ile yapılandırılır.
 
-## <a name="enable-the-claim"></a>Talep etkinleştir
+## <a name="enable-the-claim"></a>Talebi etkinleştir
 
 1. [Azure portalda](https://portal.azure.com/) Azure AD B2C kiracınızın genel yöneticisi olarak oturum açın.
-2. Azure AD B2C kiracınızı içeren dizine kullandığınızdan emin olun. Seçin **dizin ve abonelik filtresi** üst menüdeki ve kiracınız içeren dizini seçin.
+2. Azure AD B2C kiracınızı içeren dizini kullandığınızdan emin olun. Üstteki menüden **Dizin + abonelik** filtresini seçin ve kiracınızı içeren dizini seçin.
 3. Azure portalın sol üst köşesinde **Tüm hizmetler**’i seçin ve **Azure AD B2C**’yi arayıp seçin.
-4. Seçin **kullanıcı akışları (ilke)** ve ardından, kullanıcı akışı seçin. Örneğin, **B2C_1_signupsignin1**.
+4. **Kullanıcı akışları ' nı (ilkeler)** seçin ve ardından Kullanıcı akışınızı seçin. Örneğin, **B2C_1_signupsignin1**.
 5. **Uygulama talepleri**’ni seçin.
-6. Etkinleştirme **kimlik sağlayıcısı erişim belirteci** talep.
+6. **Kimlik sağlayıcısı erişim belirteci** talebini etkinleştirin.
 
-    ![Kimlik sağlayıcısı erişim belirteci talep etkinleştir](./media/idp-pass-through-user-flow/idp-pass-through-user-flow-app-claim.png)
+    ![Kimlik sağlayıcısı erişim belirteci talebini etkinleştir](./media/idp-pass-through-user-flow/idp-pass-through-user-flow-app-claim.png)
 
-7. Tıklayın **Kaydet** kullanıcı akışı kaydedin.
+7. Kullanıcı akışını kaydetmek için **Kaydet** ' e tıklayın.
 
-## <a name="test-the-user-flow"></a>Kullanıcı akışı test edin
+## <a name="test-the-user-flow"></a>Kullanıcı akışını test etme
 
-Uygulamalarınızı Azure AD B2C'de test etme, döndürülen Azure AD B2C belirteci sahip olmak yararlı olabilir `https://jwt.ms` Taleplerde gözden geçirmek için.
+Uygulamalarınızın Azure AD B2C test edilirken, içindeki talepleri gözden geçirmek `https://jwt.ms` için Azure AD B2C belirtecinin döndürüldüğünden yararlı olabilir.
 
-1. Kullanıcı akışı genel bakış sayfasında **kullanıcı akışı çalıştırma**.
-2. İçin **uygulama**, daha önce kaydettiğiniz uygulamanızı seçin. Aşağıdaki örnekte, belirteci görmek için **yanıt URL'si** göstermelidir `https://jwt.ms`.
-3. Tıklayın **kullanıcı akışı çalıştırma**ve ardından hesabı kimlik bilgilerinizle oturum açın. Erişim belirteci kimlik sağlayıcısının görmelisiniz **idp_access_token** talep.
+1. Kullanıcı akışının genel bakış sayfasında, **Kullanıcı akışını Çalıştır**' ı seçin.
+2. **Uygulama**için, daha önce kaydetmiş olduğunuz uygulamanızı seçin. Aşağıdaki örnekteki belirteci görmek için, **yanıt URL 'sinin** gösterilmesi `https://jwt.ms`gerekir.
+3. **Kullanıcı akışını Çalıştır**' a tıklayın ve ardından hesap kimlik bilgilerinizle oturum açın. **İdp_access_token** talebinde kimlik sağlayıcısının erişim belirtecini görmeniz gerekir.
 
     Aşağıdaki örneğe benzer bir şey görmeniz gerekir:
 
-    ![Kodu çözülen belirteci](./media/idp-pass-through-user-flow/idp-pass-through-user-flow-token.png)
+    ![İdp_access_token bloğu vurgulanmış şekilde jwt.ms içinde kodu çözülmüş belirteç](./media/idp-pass-through-user-flow/idp-pass-through-user-flow-token.PNG)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi [Azure AD B2C belirteçleri bakış](active-directory-b2c-reference-tokens.md).
-
-
-
-
+[Azure AD B2C belirteçlerine genel bakış](active-directory-b2c-reference-tokens.md)hakkında daha fazla bilgi edinin.

@@ -1,6 +1,6 @@
 ---
-title: Uyarılar ve Azure işlevleri ile öngörülü ağ izleme yapmak için paket yakalamayı kullanma | Microsoft Docs
-description: Bu makalede bir uyarı tetiklendi paket yakalama ile Azure Ağ İzleyicisi oluşturma
+title: Uyarı ve Azure Işlevleri ile öngörülü ağ izleme yapmak için paket yakalamayı kullanın | Microsoft Docs
+description: Bu makalede, Azure ağ Izleyicisi ile bir uyarı tetiklenen paket yakalama oluşturma açıklanmaktadır
 services: network-watcher
 documentationcenter: na
 author: KumudD
@@ -14,22 +14,22 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: kumud
-ms.openlocfilehash: 37e42b05046be27254d2ceb15a59fbdb931ae161
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d894fabf3cfd4c6949aba94d558751bf007356d9
+ms.sourcegitcommit: 19a821fc95da830437873d9d8e6626ffc5e0e9d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64711918"
+ms.lasthandoff: 08/29/2019
+ms.locfileid: "70165149"
 ---
-# <a name="use-packet-capture-for-proactive-network-monitoring-with-alerts-and-azure-functions"></a>Uyarılar ve Azure işlevleri ile öngörülü ağ izleme için paket yakalamayı kullanma
+# <a name="use-packet-capture-for-proactive-network-monitoring-with-alerts-and-azure-functions"></a>Uyarılar ve Azure Işlevleri ile öngörülü ağ izleme için paket yakalamayı kullanma
 
-Ağ İzleyicisi paket yakalama, sanal makineler ve giden trafiği izlemek için yakalama oturumu oluşturur. Yakalama dosyası, izlemek istediğiniz trafiği izlemek için tanımlanan bir filtre olabilir. Bu veriler daha sonra bir depolama blobu veya yerel olarak Konuk makineye depolanır.
+Ağ Izleyicisi paket yakalama, sanal makinelerin içinde ve dışında trafiği izlemek için yakalama oturumları oluşturur. Yakalama dosyası, yalnızca izlemek istediğiniz trafiği izlemek için tanımlanan bir filtreye sahip olabilir. Bu veriler daha sonra bir Depolama Blobu veya Konuk makinede yerel olarak depolanır.
 
-Bu özellik, Azure işlevleri gibi diğer Otomasyon senaryolardan uzaktan başlatılabilir. Paket yakalaması tanımlı ağ anomali göre proaktif yakalamaları çalıştırma özelliği sağlar. Diğer kullanımlar istatistikleri ağ izinsiz girişi, istemci-sunucu iletişimi hata ayıklama ve daha fazlasını hakkında bilgi alma, toplama içerir.
+Bu özellik, Azure Işlevleri gibi diğer otomasyon senaryolarından uzaktan başlatılabilir. Paket yakalama, tanımlı ağ bozuklukları temelinde proaktif yakalamaları çalıştırma yeteneği sağlar. Diğer kullanımlar arasında ağ istatistiklerini toplama, ağ izinsiz kullanım hakkında bilgi alma, istemci-sunucu iletişimlerinde hata ayıklama ve daha fazlası yer alır.
 
-Azure'da dağıtılan kaynakları 7/24 çalıştırın. Siz ve ekibiniz, 7/24 tüm kaynakların durum etkin olarak izleyemez. Örneğin, 02: 00 bir sorun oluşması durumunda ne olur?
+Azure 'da dağıtılan kaynaklar 24/7 çalıştırın. Siz ve çalışanlarınız 24/7 tüm kaynakların durumunu etkin bir şekilde izleyemezsiniz. Örneğin, 2 ' de bir sorun oluşursa ne olur?
 
-Ağ İzleyicisi'ni kullanarak, uyarı ve işlevlerden içinde Azure ekosistemi tarafından ağınızdaki sorunları çözmek için araçları ve verileri ile proaktif olarak yanıt verebilir.
+Azure ekosistemi içinden ağ Izleyicisi, uyarı ve işlevleri kullanarak ağınızdaki sorunları çözümlemek için veri ve araçlarla proaktif olarak yanıt verebilirsiniz.
 
 ![Senaryo][scenario]
 
@@ -38,80 +38,80 @@ Ağ İzleyicisi'ni kullanarak, uyarı ve işlevlerden içinde Azure ekosistemi t
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* En son sürümünü [Azure PowerShell](/powershell/azure/install-Az-ps).
-* Ağ İzleyicisi'nin var olan bir örneği. Zaten yoksa, [Ağ İzleyicisi bir örneğini oluşturmak](network-watcher-create.md).
-* Ağ İzleyicisi ile aynı bölgede mevcut bir sanal makine [Windows uzantısı](../virtual-machines/windows/extensions-nwa.md) veya [Linux sanal makine uzantısı](../virtual-machines/linux/extensions-nwa.md).
+* [Azure PowerShell](/powershell/azure/install-Az-ps)en son sürümü.
+* Var olan bir ağ Izleyicisi örneği. Henüz bir tane yoksa, [Ağ İzleyicisi 'nin bir örneğini oluşturun](network-watcher-create.md).
+* [Windows uzantısı](../virtual-machines/windows/extensions-nwa.md) veya [Linux sanal makine uzantısıyla](../virtual-machines/linux/extensions-nwa.md)Ağ İzleyicisi ile aynı bölgedeki mevcut bir sanal makine.
 
 ## <a name="scenario"></a>Senaryo
 
-Bu örnekte, sanal makinenizin normalden daha çok TCP kesimini gönderiyor ve uyarı almak istediğiniz. TCP kesimini burada bir örnek olarak kullanılır, ancak herhangi bir uyarı koşulu kullanabilirsiniz.
+Bu örnekte, sanal ağınız normalden daha fazla TCP kesimi gönderiyor ve uyarı almak istiyorsunuz. TCP kesimleri burada bir örnek olarak kullanılır, ancak herhangi bir uyarı koşulunu kullanabilirsiniz.
 
-Uyarı aldığınızda, iletişimi neden arttı anlamak için paket düzeyinde veri almak istersiniz. Ardından sanal makineyi normal iletişimi döndürmek üzere adım atabilirsiniz.
+Uyarı aldığınızda, iletişimin neden arttığını anlamak için paket düzeyi verileri almak istersiniz. Ardından, sanal makineyi normal iletişime döndürmek için adımları izleyebilirsiniz.
 
-Bu senaryo, Ağ İzleyicisi ile geçerli bir sanal makine ile bir kaynak grubu mevcut bir örneğini sahibi olduğunuzu varsayar.
+Bu senaryoda, mevcut bir ağ Izleyicisi örneğine ve geçerli bir sanal makineye sahip bir kaynak grubuna sahip olduğunuz varsayılır.
 
-Aşağıdaki listede yer alan bir iş akışı genel bir bakış verilmiştir:
+Aşağıdaki listede yer alan iş akışına genel bir bakış verilmiştir:
 
-1. Sanal makinenizde bir uyarı tetiklenir.
-1. Uyarı aracılığıyla bir Web kancası, Azure işlevi çağırır.
-1. Azure işlevinizi uyarı işler ve bir Ağ İzleyicisi paket yakalama oturumu başlatır.
-1. Paket yakalaması VM üzerinde çalışan ve trafiği toplar.
-1. Paket yakalama dosyasını gözden geçirin ve İleri tanılama için bir depolama hesabına yüklenir.
+1. VM 'niz üzerinde bir uyarı tetiklenir.
+1. Uyarı, Azure işlevinizi bir Web Kancası aracılığıyla çağırır.
+1. Azure işleviniz uyarıyı işler ve bir ağ Izleyicisi paket yakalama oturumu başlatır.
+1. Paket yakalama, VM üzerinde çalışır ve trafik toplar.
+1. Paket yakalama dosyası, gözden geçirme ve Tanılama için bir depolama hesabına yüklenir.
 
-Bu işlemi otomatikleştirmek için oluşturun ve bir uyarı olayı ortaya çıktığında tetiklemek için VM'de bağlanın. Ağ İzleyicisi çağırmak için fonksiyon de oluştururuz.
+Bu işlemi otomatikleştirmek için, VM 'imizde olay gerçekleştiğinde tetiklenecek bir uyarı oluşturur ve bağladık. Ağ izleyicisine çağrı yapmak için de bir işlev oluşturacağız.
 
-Bu senaryo, şunları yapar:
+Bu senaryo şunları yapar:
 
-* Paket yakalaması başlatan bir Azure işlevi oluşturur.
-* Bir sanal makinede bir uyarı kuralı oluşturur ve Azure işlevini çağırmak için uyarı kuralı yapılandırır.
+* Paket yakalamayı Başlatan bir Azure işlevi oluşturur.
+* Bir sanal makinede bir uyarı kuralı oluşturur ve uyarı kuralını Azure işlevini çağıracak şekilde yapılandırır.
 
 ## <a name="create-an-azure-function"></a>Azure işlevi oluşturma
 
-İlk adım, uyarı işleme ve bir paket yakalama oluşturmak için bir Azure işlevi oluşturmaktır.
+İlk adım, uyarıyı işlemek ve bir paket yakalama oluşturmak için bir Azure işlevi oluşturmaktır.
 
-1. İçinde [Azure portalında](https://portal.azure.com)seçin **kaynak Oluştur** > **işlem** > **işlev uygulaması**.
+1. [Azure Portal](https://portal.azure.com) **kaynak** > oluşturmaişlemişlevuygulaması > seçin.
 
-    ![Bir işlev uygulaması oluşturma][1-1]
+    ![İşlev uygulaması oluşturma][1-1]
 
-2. Üzerinde **işlev uygulaması** dikey penceresinde aşağıdaki değerleri girin ve ardından **Tamam** uygulamayı oluşturmak için:
+2. **İşlev uygulaması** dikey penceresinde aşağıdaki değerleri girin ve ardından uygulamayı oluşturmak için **Tamam** ' ı seçin:
 
     |**Ayar** | **Değer** | **Ayrıntılar** |
     |---|---|---|
     |**Uygulama adı**|PacketCaptureExample|İşlev uygulamasının adı.|
-    |**Abonelik**|[Aboneliğiniz] İşlev uygulaması oluşturmak istediğiniz aboneliği.||
-    |**Kaynak Grubu**|PacketCaptureRG|İşlev uygulaması içerecek olan kaynak grubu.|
-    |**Barındırma Planı**|Tüketim Planı| Türü, işlev uygulamasını kullanan planlayın. Seçenekler: Tüketim veya Azure App Service planı. |
-    |**Konum**|Orta ABD| İşlev uygulaması oluşturmak üzere OU'nun bölge.|
-    |**Depolama Hesabı**|{otomatik olarak oluşturulan}| Azure işlevleri için genel amaçlı depolama gerekli depolama hesabı.|
+    |**Abonelik**|[Aboneliğiniz] İşlev uygulamasının oluşturulacağı abonelik.||
+    |**Kaynak Grubu**|PacketCaptureRG|İşlev uygulamasını içerecek kaynak grubu.|
+    |**Barındırma Planı**|Tüketim Planı| İşlev uygulamanızın kullandığı planın türü. Seçenekler, tüketim veya Azure App Service planlardır. |
+    |**Location**|Orta ABD| İşlev uygulamasının oluşturulacağı bölge.|
+    |**Depolama Hesabı**|otomatik olarak oluşturulan| Azure Işlevlerinin genel amaçlı depolama için ihtiyaç duyacağı depolama hesabı.|
 
-3. Üzerinde **PacketCaptureExample işlev uygulamaları** dikey penceresinde **işlevleri** > **özel işlev**  >  **+** .
+3. **Packetcaptureexample işlevi uygulamalar** dikey penceresinde **işlevler** > **özel işlev** > **+** ' i seçin.
 
-4. Seçin **HttpTrigger-Powershell**ve ardından kalan bilgileri girin. Son olarak, işlev oluşturmak için Seç **Oluştur**.
+4. **Httptrigger-PowerShell**' i seçin ve ardından kalan bilgileri girin. Son olarak, işlevi oluşturmak için **Oluştur**' u seçin.
 
     |**Ayar** | **Değer** | **Ayrıntılar** |
     |---|---|---|
-    |**Senaryo**|Deneysel|Senaryo türü|
+    |**Senaryo**|Deneysel|Senaryonun türü|
     |**İşlevinizi adlandırın**|AlertPacketCapturePowerShell|İşlevin adı|
-    |**Yetkilendirme düzeyi**|İşlev|Yetkilendirme düzeyi işlevi|
+    |**Yetkilendirme düzeyi**|İşlev|İşlevin Yetkilendirme düzeyi|
 
-![Örnek işlevleri][functions1]
+![İşlevler örneği][functions1]
 
 > [!NOTE]
-> PowerShell şablon Deneysel ve tam desteğine sahip değil.
+> PowerShell şablonu deneysel ve tam desteği yok.
 
-Özelleştirmeleri, bu örnek için gerekli olan ve aşağıdaki adımlarda açıklanmıştır.
+Bu örnek için özelleştirmeler gereklidir ve aşağıdaki adımlarda açıklanmıştır.
 
 ### <a name="add-modules"></a>Modül Ekle
 
-Ağ İzleyicisi PowerShell cmdlet'lerini kullanmak için işlev uygulaması için en son PowerShell modülünü yükleyin.
+Ağ Izleyicisi PowerShell cmdlet 'lerini kullanmak için, işlev uygulamasına en son PowerShell modülünü yükleyin.
 
-1. Yerel makinenizde yüklü en son Azure PowerShell modülleri, aşağıdaki PowerShell komutunu çalıştırın:
+1. En son Azure PowerShell modüller yüklü olan yerel makinenizde aşağıdaki PowerShell komutunu çalıştırın:
 
     ```powershell
     (Get-Module Az.Network).Path
     ```
 
-    Bu örnek, Azure PowerShell modüllerini yerel yolunu sağlar. Bu klasör, bir sonraki adımda kullanılır. Bu senaryoda kullanılan modülleri şunlardır:
+    Bu örnek size Azure PowerShell modüllerinizin yerel yolunu sağlar. Bu klasörler sonraki bir adımda kullanılır. Bu senaryoda kullanılan modüller şunlardır:
 
    * Az.Network
 
@@ -121,15 +121,15 @@ Ağ İzleyicisi PowerShell cmdlet'lerini kullanmak için işlev uygulaması içi
 
      ![PowerShell klasörleri][functions5]
 
-1. Seçin **işlev uygulaması ayarları** > **App Service Düzenleyicisi'ne gitmek**.
+1. **İşlev uygulaması ayarları** > seçin**App Service Düzenleyicisi git**.
 
     ![İşlev uygulaması ayarları][functions2]
 
-1. Sağ **AlertPacketCapturePowershell** klasörünü ve ardından adlı bir klasör oluşturun **azuremodules**. 
+1. **Alertpacketcapturepowershell** klasörüne sağ tıklayın ve ardından **azuremodules**adlı bir klasör oluşturun. 
 
-4. İhtiyacınız olan her bir modül için bir alt klasör oluşturun.
+4. İhtiyaç duyduğunuz her modül için bir alt klasör oluşturun.
 
-    ![Klasör ve alt klasörleri][functions3]
+    ![Klasör ve alt klasörler][functions3]
 
     * Az.Network
 
@@ -137,28 +137,28 @@ Ağ İzleyicisi PowerShell cmdlet'lerini kullanmak için işlev uygulaması içi
 
     * Az.Resources
 
-1. Sağ **Az.Network** alt klasöre tıklayın ve ardından **dosyaları karşıya yükle**. 
+1. **Az. Network** alt klasörüne sağ tıklayın ve ardından **dosyaları karşıya yükle**' yi seçin. 
 
-6. Azure modüllerinizi gidin. Yerel **Az.Network** klasörü, klasördeki tüm dosyaları seçin. Sonra **Tamam**’ı seçin. 
+6. Azure modülleriniz sayfasına gidin. Yerel **az. Network** klasöründe klasöründeki tüm dosyalar ' ı seçin. Sonra **Tamam**’ı seçin. 
 
-7. Bu adımı yineleyin **Az.Accounts** ve **Az.Resources**.
+7. **Az. Accounts** ve **az. resources**için bu adımları tekrarlayın.
 
     ![Dosyaları karşıya yükleme][functions6]
 
-1. Sizin tamamladıktan sonra her klasörü yerel makinenizden PowerShell Modülü dosyaları olmalıdır.
+1. İşiniz bittiğinde, her klasörün yerel makinenizden PowerShell modülü dosyaları olmalıdır.
 
     ![PowerShell dosyaları][functions7]
 
-### <a name="authentication"></a>Kimlik Doğrulaması
+### <a name="authentication"></a>Authentication
 
-PowerShell cmdlet'lerini kullanmak için kimlik doğrulaması gerekir. İşlev uygulamasında kimlik doğrulamasını yapılandırın. Kimlik doğrulamasını yapılandırmak için ortam değişkenlerini yapılandırma ve şifreli bir anahtar dosyası işlev uygulamasına yükleyin.
+PowerShell cmdlet 'lerini kullanmak için kimlik doğrulaması yapmanız gerekir. İşlev uygulamasında kimlik doğrulamasını yapılandırırsınız. Kimlik doğrulamasını yapılandırmak için, ortam değişkenlerini yapılandırmanız ve şifrelenmiş bir anahtar dosyasını işlev uygulamasına yüklemeniz gerekir.
 
 > [!NOTE]
-> Bu senaryo, Azure işlevleri ile kimlik doğrulaması uygulamak yalnızca bir örneğini sağlar. Bunu yapmanın farklı yöntemleri vardır.
+> Bu senaryo, Azure Işlevleri ile kimlik doğrulamanın nasıl uygulanacağı hakkında yalnızca bir örnek sağlar. Bunu yapmak için başka yollar vardır.
 
 #### <a name="encrypted-credentials"></a>Şifrelenmiş kimlik bilgileri
 
-Aşağıdaki PowerShell betiğini adlı bir anahtar dosyası oluşturur **PassEncryptKey.key**. Sağlanan parola şifrelenmiş bir sürümünü de sağlar. Bu parola kimlik doğrulaması için kullanılan Azure Active Directory uygulama için tanımlanmış aynı paroladır.
+Aşağıdaki PowerShell betiği, **Passencryptkey. Key**adlı bir anahtar dosyası oluşturur. Ayrıca, sağlanan parolanın şifrelenmiş bir sürümünü de sağlar. Bu parola, kimlik doğrulaması için kullanılan Azure Active Directory uygulaması için tanımlanan parolanın aynısını kullanır.
 
 ```powershell
 #Variables
@@ -177,26 +177,26 @@ $Encryptedpassword = $secPw | ConvertFrom-SecureString -Key $AESKey
 $Encryptedpassword
 ```
 
-İşlev uygulamasının App Service Düzenleyicisi adlı bir klasör oluşturun **anahtarları** altında **AlertPacketCapturePowerShell**. Ardından karşıya **PassEncryptKey.key** önceki PowerShell örnekte oluşturulan dosya.
+İşlev uygulamasının App Service Düzenleyicisi, **Alertpacketcapturepowershell**altında **anahtarlar** adlı bir klasör oluşturun. Ardından, önceki PowerShell örneğinde oluşturduğunuz **Passencryptkey. Key** dosyasını karşıya yükleyin.
 
-![İşlevleri anahtarı][functions8]
+![İşlevler anahtarı][functions8]
 
-### <a name="retrieve-values-for-environment-variables"></a>Ortam değişkenleri için değerleri alma
+### <a name="retrieve-values-for-environment-variables"></a>Ortam değişkenlerinin değerlerini al
 
-Son gereksinim kimlik doğrulaması için değerlere erişmek gerekli olan ortam değişkenlerini ayarlamaktır. Aşağıdaki liste, oluşturulan ortam değişkenlerini gösterir:
+Son gereksinim, kimlik doğrulama için değerlere erişmesi gereken ortam değişkenlerini ayarlamak içindir. Aşağıdaki listede, oluşturulan ortam değişkenleri gösterilmektedir:
 
-* AzureClientID
+* Azureclıtıd
 
 * AzureTenant
 
 * AzureCredPassword
 
 
-#### <a name="azureclientid"></a>AzureClientID
+#### <a name="azureclientid"></a>Azureclıtıd
 
-Azure Active Directory'de bir uygulamanın uygulama kimliği istemci kimliğidir.
+İstemci KIMLIĞI, Azure Active Directory bir uygulamanın uygulama KIMLIĞIDIR.
 
-1. Bir uygulamayı kullanmak için zaten sahip değilseniz, bir uygulama oluşturmak için aşağıdaki örneği çalıştırın.
+1. Zaten kullanabileceğiniz bir uygulamanız yoksa, bir uygulama oluşturmak için aşağıdaki örneği çalıştırın.
 
     ```powershell
     $app = New-AzADApplication -DisplayName "ExampleAutomationAccount_MF" -HomePage "https://exampleapp.com" -IdentifierUris "https://exampleapp1.com/ExampleFunctionsAccount" -Password "<same password as defined earlier>"
@@ -206,19 +206,19 @@ Azure Active Directory'de bir uygulamanın uygulama kimliği istemci kimliğidir
     ```
 
    > [!NOTE]
-   > Uygulamayı oluştururken kullandığınız parolayı daha önce oluşturduğunuz anahtar dosyası kaydedilirken aynı parola olmalıdır.
+   > Uygulamayı oluştururken kullandığınız parolanın, anahtar dosyasını kaydederken daha önce oluşturduğunuz parolayla aynı olması gerekir.
 
-1. Azure portalında **abonelikleri**. Aboneliğini kullanın ve ardından **erişim denetimi (IAM)** .
+1. Azure portal **abonelikler**' i seçin. Kullanılacak aboneliği seçin ve ardından **erişim denetimi (IAM)** öğesini seçin.
 
-    ![IAM işlevleri][functions9]
+    ![İşlev ıAM][functions9]
 
-1. Hesabı kullanın ve ardından seçin **özellikleri**. Uygulama kimliğini kopyalama
+1. Kullanılacak hesabı seçin ve ardından **Özellikler**' i seçin. Uygulama KIMLIĞINI kopyalayın.
 
-    ![İşlevler uygulama kimliği][functions10]
+    ![İşlevler uygulama KIMLIĞI][functions10]
 
 #### <a name="azuretenant"></a>AzureTenant
 
-Aşağıdaki PowerShell örneğini çalıştırarak Kiracı Kimliğini alın:
+Aşağıdaki PowerShell örneğini çalıştırarak kiracı KIMLIĞINI edinin:
 
 ```powershell
 (Get-AzSubscription -SubscriptionName "<subscriptionName>").TenantId
@@ -226,7 +226,7 @@ Aşağıdaki PowerShell örneğini çalıştırarak Kiracı Kimliğini alın:
 
 #### <a name="azurecredpassword"></a>AzureCredPassword
 
-AzureCredPassword ortam değişkeninin değerini, aşağıdaki PowerShell örneğini çalıştırılarak elde değerdir. Bu örnek bir önceki gösterilenle aynıdır **şifrelenmiş kimlik bilgileri** bölümü. Gerekli olan çıktısı değerdir `$Encryptedpassword` değişkeni.  PowerShell Betiği kullanılarak şifrelenmiş hizmet sorumlusu parolası budur.
+AzureCredPassword ortam değişkeninin değeri, aşağıdaki PowerShell örneğini çalıştırmadan aldığınız değerdir. Bu örnek, önceki **şifreli kimlik bilgileri** bölümünde gösterilen bir örnektir. Gereken değer, `$Encryptedpassword` değişkenin çıktıdır.  Bu, PowerShell betiğini kullanarak şifrelediğiniz hizmet sorumlusu parolasıdır.
 
 ```powershell
 #Variables
@@ -245,27 +245,27 @@ $Encryptedpassword = $secPw | ConvertFrom-SecureString -Key $AESKey
 $Encryptedpassword
 ```
 
-### <a name="store-the-environment-variables"></a>Ortam değişkenlerini Store
+### <a name="store-the-environment-variables"></a>Ortam değişkenlerini depolayın
 
-1. İşlev uygulamasına gidin. Ardından **işlev uygulaması ayarları** > **uygulama ayarlarını yapılandırma**.
+1. İşlev uygulamasına gidin. Ardından **işlev uygulama ayarları** > **uygulama ayarlarını yapılandır**' ı seçin.
 
     ![Uygulama ayarlarını yapılandırma][functions11]
 
-1. Ortam değişkenlerini ve değerleri uygulama ayarları ekleyin ve ardından **Kaydet**.
+1. Ortam değişkenlerini ve değerlerini uygulama ayarlarına ekleyin ve ardından **Kaydet**' i seçin.
 
     ![Uygulama ayarları][functions12]
 
-### <a name="add-powershell-to-the-function"></a>PowerShell işleve ekleyin
+### <a name="add-powershell-to-the-function"></a>İşleve PowerShell ekleyin
 
-Bu, artık Azure işlevi içinde Ağ İzleyicisi ' çağrılar yapmak zamanı geldi. Bu işlev uygulamasını gereksinimlerine bağlı olarak değişebilir. Ancak, kod genel akışı şu şekildedir:
+Azure işlevinin içinden ağ izleyicisine çağrı yapmak artık zaman alabilir. Gereksinimlere bağlı olarak, bu işlevin uygulanması farklılık gösterebilir. Ancak, kodun genel akışı aşağıdaki gibidir:
 
 1. İşlem giriş parametreleri.
-2. Sınırları doğrulamak ve ad çakışmalarını çözmek için sorgu mevcut paket yakalar.
-3. Bir paket yakalama, uygun parametrelerle oluşturun.
-4. Yoklama paket yakalama düzenli aralıklarla tamamlanana kadar.
-5. Paket yakalama oturumu tam olduğunu kullanıcıya bildirin.
+2. Sınırları doğrulamak ve ad çakışmalarını çözmek için mevcut paket yakalamalarını sorgulayın.
+3. Uygun parametrelerle bir paket yakalama oluşturun.
+4. Zamanlayıcı, tamamlanana kadar düzenli aralıklarla yakalama.
+5. Kullanıcıya, paket yakalama oturumunun tamamlandığını bildirin.
 
-Aşağıdaki örnek işlev kullanılabilecek PowerShell kodudur. Değerler için değiştirilmesi gereken **Subscriptionıd**, **resourceGroupName**, ve **storageAccountName**.
+Aşağıdaki örnek, işlevinde kullanılabilen PowerShell kodudur. **SubscriptionID**, **Resourcegroupname**ve **storageAccountName**için değiştirilmeleri gereken değerler vardır.
 
 ```powershell
             #Import Azure PowerShell modules required to make calls to Network Watcher
@@ -305,8 +305,7 @@ Aşağıdaki örnek işlev kullanılabilecek PowerShell kodudur. Değerler için
                 Write-Output ("Resource Type:  {0}" -f $requestBody.context.resourceType)
 
                 #Get the Network Watcher in the VM's region
-                $nw = Get-AzResource | Where {$_.ResourceType -eq "Microsoft.Network/networkWatchers" -and $_.Location -eq $requestBody.context.resourceRegion}
-                $networkWatcher = Get-AzNetworkWatcher -Name $nw.Name -ResourceGroupName $nw.ResourceGroupName
+                $networkWatcher = Get-AzResource | Where {$_.ResourceType -eq "Microsoft.Network/networkWatchers" -and $_.Location -eq $requestBody.context.resourceRegion}
 
                 #Get existing packetCaptures
                 $packetCaptures = Get-AzNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher
@@ -325,56 +324,56 @@ Aşağıdaki örnek işlev kullanılabilecek PowerShell kodudur. Değerler için
                 }
             } 
  ``` 
-#### <a name="retrieve-the-function-url"></a>İşlev URL'sini Al 
-1. İşlevinizi oluşturduktan sonra işlev ile ilişkili URL çağırmak için uyarıyı yapılandırın. Bu değeri almak için işlev uygulamanızı işlev URL'sini kopyalayın.
+#### <a name="retrieve-the-function-url"></a>İşlev URL 'sini al 
+1. İşlevinizi oluşturduktan sonra, uyarınızı işlevle ilişkili URL 'YI çağırmak üzere yapılandırın. Bu değeri almak için, işlev URL 'sini işlev uygulamanızdan kopyalayın.
 
-    ![İşlev URL'sini bulma][functions13]
+    ![İşlev URL 'sini bulma][functions13]
 
-2. İşlev uygulamanız için işlev URL'sini kopyalayın.
+2. İşlev uygulamanızın işlev URL 'sini kopyalayın.
 
-    ![İşlev URL'sini kopyalama][2]
+    ![İşlev URL 'SI kopyalanıyor][2]
 
-Web kancası POST isteğinin yükünde özel özellikler gerektiriyorsa, başvurmak [Azure bir ölçüm uyarısında Web kancası yapılandırma](../azure-monitor/platform/alerts-webhooks.md).
+Web kancası GÖNDERI isteği yükünde özel özellikler gerekiyorsa, [Azure ölçüm uyarısında Web kancası yapılandırma](../azure-monitor/platform/alerts-webhooks.md)konusuna bakın.
 
-## <a name="configure-an-alert-on-a-vm"></a>Bir VM'de bir uyarı yapılandırma
+## <a name="configure-an-alert-on-a-vm"></a>VM 'de uyarı yapılandırma
 
-Uyarılar, belirli bir ölçüyü kendisine atanmış bir eşiği geçtiğinde kişilere bildirimde şekilde yapılandırılabilir. Bu örnekte, uyarı, gönderilen TCP kesimini belirtir, ancak diğer için çok sayıda ölçüm uyarı tetiklenebilir. Bu örnekte, bir uyarı işlevi çağrısı için bir Web kancası çağırma yapılandırılır.
+Uyarılar, belirli bir ölçüm kendisine atanan bir eşiğe girdiğinde bireylere bildirmek üzere yapılandırılabilir. Bu örnekte, uyarı gönderilen TCP kesimleridir, ancak uyarı diğer birçok ölçüm için tetiklenebilir. Bu örnekte, işlevi çağırmak için bir Web kancasını çağırmak üzere bir uyarı yapılandırılmıştır.
 
 ### <a name="create-the-alert-rule"></a>Uyarı kuralı oluşturma
 
-Varolan bir sanal makineye gidin ve ardından bir uyarı kuralı ekleyin. Uyarıları yapılandırma hakkında daha ayrıntılı belgeler bulunabilir [oluşturma uyarılar Azure İzleyici'de Azure Hizmetleri için - Azure portalı](../monitoring-and-diagnostics/insights-alerts-portal.md). Aşağıdaki değerleri girin **uyarı kuralı** dikey penceresine tıklayın ve ardından **Tamam**.
+Var olan bir sanal makineye gidin ve bir uyarı kuralı ekleyin. Uyarıları yapılandırma hakkında daha ayrıntılı belgeler, [Azure hizmetleri Için Azure izleyici 'de uyarı oluşturma ' da bulunabilir-Azure Portal](../monitoring-and-diagnostics/insights-alerts-portal.md). **Uyarı kuralı** dikey penceresinde aşağıdaki değerleri girin ve **Tamam**' ı seçin.
 
   |**Ayar** | **Değer** | **Ayrıntılar** |
   |---|---|---|
-  |**Ad**|TCP_Segments_Sent_Exceeded|Uyarı kuralı adı.|
-  |**Açıklama**|TCP kesimini eşiğini gönderilen|Uyarı kuralı açıklaması.|
-  |**Ölçüm**|TCP kesimini gönderilen| Uyarı tetiklemek için kullanılacak ölçü. |
+  |**Name**|TCP_Segments_Sent_Exceeded|Uyarı kuralının adı.|
+  |**Açıklama**|Gönderilen TCP kesimleri eşiği aştı|Uyarı kuralının açıklaması.|
+  |**Ölçüm**|Gönderilen TCP kesimleri| Uyarıyı tetiklemek için kullanılacak ölçüm. |
   |**Koşul**|Büyüktür| Ölçüm değerlendirilirken kullanılacak koşul.|
-  |**Eşik**|100| Uyarıyı tetikleyen ölçüm değeri. Bu değer, ortamınız için geçerli bir değere ayarlanmalıdır.|
-  |**Dönem**|Son beş dakika boyunca| Ölçüm eşiğine aramak süreniz belirler.|
-  |**Web kancası**|[işlev uygulamasından Web kancası URL'si]| Web kancası URL'si önceki adımlarda oluşturulan işlev uygulamasından.|
+  |**Eşiği**|100| Uyarıyı tetikleyen ölçümün değeri. Bu değer, ortamınız için geçerli bir değer olarak ayarlanmalıdır.|
+  |**Dönemini**|Son beş dakika boyunca| Ölçüm üzerindeki eşiğin aranacağı süreyi belirler.|
+  |**Web kancası**|[işlev uygulamasından Web kancası URL 'SI]| Önceki adımlarda oluşturulan işlev uygulamasındaki Web kancası URL 'SI.|
 
 > [!NOTE]
-> Varsayılan olarak TCP segmentleri ölçüm etkin değil. Ek ölçümler ederek etkinleştirme hakkında daha fazla bilgi [izleme ve tanılamayı etkinleştirme](../monitoring-and-diagnostics/insights-how-to-use-diagnostics.md).
+> TCP kesimleri ölçümü varsayılan olarak etkin değildir. [İzleme ve tanılamayı etkinleştir ' i](../monitoring-and-diagnostics/insights-how-to-use-diagnostics.md)ziyaret ederek ek ölçümleri etkinleştirme hakkında daha fazla bilgi edinin.
 
 ## <a name="review-the-results"></a>Sonuçları gözden geçirin
 
-Uyarı tetiklenmeden ölçütlerini sonra bir paket yakalama oluşturulur. Ağ İzleyicisi gidin ve ardından **paket yakalaması**. Bu sayfada, paket yakalama dosyası bağlantısı'paket yakalaması indirmek için seçebilirsiniz.
+Uyarının ölçütlerine sonra bir paket yakalama oluşturulur. Ağ Izleyicisi ' ne gidin ve ardından **paket yakalama**' yı seçin. Bu sayfada, paket yakalamayı indirmek için paket yakalama dosyası bağlantısını seçebilirsiniz.
 
-![Paket yakalaması görüntüle][functions14]
+![Paket yakalamayı görüntüle][functions14]
 
-Yakalama dosyasını yerel olarak depolanıyorsa, sanal makineye oturum açarak alabilir.
+Yakalama dosyası yerel olarak depolanıyorsa, sanal makinede oturum açarak alabilirsiniz.
 
-Azure depolama hesaplarından dosyaları indirme hakkındaki yönergeler için bkz: [.NET kullanarak Azure Blob depolamayı kullanmaya başlama](../storage/blobs/storage-dotnet-how-to-use-blobs.md). Kullanabileceğiniz başka bir araçtır [Depolama Gezgini](https://storageexplorer.com/).
+Azure depolama hesaplarından dosya indirme hakkında yönergeler için bkz. [.NET kullanarak Azure Blob depolamayı kullanmaya başlama](../storage/blobs/storage-dotnet-how-to-use-blobs.md). Kullanabileceğiniz başka bir araç da [Depolama Gezgini](https://storageexplorer.com/).
 
-Yakalama İndirildikten sonra okuyabilirsiniz herhangi bir aracı kullanarak görüntüleyebilirsiniz bir **.cap** dosya. Bu araçların iki bağlantılar aşağıda verilmiştir:
+Yakalandıktan sonra, bir **. Cap** dosyası okuyabilen herhangi bir aracı kullanarak görüntüleyebilirsiniz. Bu araçların ikisi için bağlantılar aşağıda verilmiştir:
 
-- [Microsoft ileti Çözümleyicisi](https://technet.microsoft.com/library/jj649776.aspx)
+- [Microsoft Ileti Çözümleyicisi](https://technet.microsoft.com/library/jj649776.aspx)
 - [WireShark](https://www.wireshark.org/)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Paket yakalamaları almanızı sağlamanın ederek görüntülemeyi öğrenin [paket yakalama Wireshark analiziyle](network-watcher-deep-packet-inspection.md).
+Paket [yakalama analizini Wireshark ile](network-watcher-deep-packet-inspection.md)ziyaret ederek paket yakalamalarını görüntülemeyi öğrenin.
 
 
 [1]: ./media/network-watcher-alert-triggered-packet-capture/figure1.png

@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Facebook ile çalışma alanına Azure Active Directory ile otomatik kullanıcı hazırlama için yapılandırma | Microsoft Docs'
-description: Azure Active Directory ve Facebook ile iş yeri arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Azure Active Directory ile otomatik Kullanıcı sağlama için çalışma alanını Facebook ile yapılandırma | Microsoft Docs'
+description: Facebook tarafından Azure Active Directory ve çalışma alanı arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -15,91 +15,94 @@ ms.topic: article
 ms.date: 01/26/2018
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 72c2e23b0d60ca242549ebf2c058ea8f44f2b1c8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7ee091d1c8f0f477354f6bb422d041278ec5668e
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60520151"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73574259"
 ---
-# <a name="tutorial-configure-workplace-by-facebook-for-automatic-user-provisioning"></a>Öğretici: Facebook ile çalışma için otomatik kullanıcı hazırlama yapılandırın
+# <a name="tutorial-configure-workplace-by-facebook-for-automatic-user-provisioning"></a>Öğretici: otomatik Kullanıcı sağlaması için çalışma alanını Facebook ile yapılandırma
 
-Bu öğreticinin amacı, otomatik olarak sağlama ve sağlamasını Facebook tarafından çalışma alanı için Azure AD'den kullanıcı hesapları için Facebook ve Azure AD çalışma alanına gerçekleştirmek için gereken adımları Göster sağlamaktır.
+Bu öğreticinin amacı, Facebook ve Azure AD çalışma alanında yapmanız gereken adımları, Azure AD 'den Facebook tarafından çalışma alanına otomatik olarak sağlamak ve devre dışı bırakmak için yapmanız gereken adımları gösterir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Azure AD tümleştirmesi iş yeri tarafından Facebook ile yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini Facebook tarafından çalışma alanıyla yapılandırmak için aşağıdaki öğelere ihtiyacınız vardır:
 
 - Azure AD aboneliği
-- Facebook çoklu oturum açma etkin abonelik tarafından bir çalışma alanı
+- Facebook tarafından çoklu oturum açma özellikli abonelikte çalışma alanı
 
 > [!NOTE]
-> Bu öğreticideki adımları test etmek için üretim ortamı kullanarak önermiyoruz.
+> Bu öğreticideki adımları test etmek için, üretim ortamının kullanılmasını önermiyoruz.
 
-Bu öğreticideki adımları test etmek için bu önerileri izlemelidir:
+Bu öğreticideki adımları test etmek için aşağıdaki önerileri izlemeniz gerekir:
 
-- Gerekli olmadıkça, üretim ortamında kullanmayın.
-- Azure AD deneme ortamı yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/).
+- Gerekli olmadığı takdirde üretim ortamınızı kullanmayın.
+- Azure AD deneme ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/)bir aylık deneme sürümü edinebilirsiniz.
 
-## <a name="assigning-users-to-workplace-by-facebook"></a>Facebook ile çalışma alanına kullanıcı atama
+## <a name="assigning-users-to-workplace-by-facebook"></a>Facebook tarafından çalışma alanına kullanıcı atama
 
-Azure Active Directory "atamaları" adlı bir kavram, hangi kullanıcıların seçilen uygulamalara erişimi alması belirlemek için kullanır. Otomatik kullanıcı hesabı sağlama bağlamında, yalnızca kullanıcıların ve grupların, "Azure AD'de bir uygulama için atandı" eşitlenir.
+Azure Active Directory, hangi kullanıcıların seçili uygulamalara erişim alacağını belirleyebilmek için "atamalar" adlı bir kavram kullanır. Otomatik Kullanıcı hesabı sağlama bağlamında, yalnızca Azure AD 'de bir uygulamaya "atanmış" olan kullanıcılar ve gruplar eşitlenir.
 
-Yapılandırma ve sağlama hizmetini etkinleştirmeden önce hangi kullanıcılara ve/veya Azure AD'de grupları Facebook uygulama tarafından çalışma alanınızı erişmesi gereken kullanıcıları temsil karar vermeniz gerekir. Karar sonra bu kullanıcılar çalışma alanınıza Facebook uygulama tarafından Buradaki yönergeleri izleyerek atayabilirsiniz:
+Sağlama hizmetini yapılandırmadan ve etkinleştirmeden önce, Azure AD 'deki hangi kullanıcıların ve/veya grupların çalışma alanınıza Facebook uygulaması tarafından erişmesi gereken kullanıcıları temsil ettiğini belirlemeniz gerekir. Karar verdikten sonra buradaki yönergeleri izleyerek bu kullanıcıları Facebook uygulaması tarafından çalışma alanınıza atayabilirsiniz:
 
-[Kurumsal bir uygulamayı kullanıcı veya grup atama](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal)
+[Kurumsal uygulamaya Kullanıcı veya Grup atama](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal)
 
-### <a name="important-tips-for-assigning-users-to-workplace-by-facebook"></a>Facebook ile çalışma alanına kullanıcı atama önemli ipuçları
+### <a name="important-tips-for-assigning-users-to-workplace-by-facebook"></a>Facebook tarafından çalışma alanına Kullanıcı atamaya yönelik önemli ipuçları
 
-*   Önerilir tek bir Azure AD kullanıcı atandığı çalışma alanına Facebook tarafından sağlama yapılandırmasını test etmek için. Ek kullanıcılar ve/veya grupları daha sonra atanabilir.
+*   Sağlama yapılandırmasını test etmek için Facebook tarafından çalışma alanına tek bir Azure AD kullanıcısının atanması önerilir. Ek kullanıcılar ve/veya grupları daha sonra atanabilir.
 
-*   Facebook ile çalışma alanına kullanıcı atama, geçerli bir kullanıcı rolü seçmeniz gerekir. "Varsayılan erişim" rolü sağlama için çalışmaz.
+*   Facebook tarafından çalışma alanına bir Kullanıcı atarken geçerli bir kullanıcı rolü seçmeniz gerekir. "Varsayılan erişim" rolü sağlama için çalışmaz.
 
-## <a name="enable-user-provisioning"></a>Kullanıcı sağlamayı etkinleştirin
+## <a name="enable-user-provisioning"></a>Kullanıcı sağlamayı etkinleştir
 
-Bu bölümde, Azure AD çalışma alanına sağlama API'si, Facebook'ın kullanıcı hesabı tarafından bağlama size yol gösterir ve sağlama hizmeti oluşturmak için yapılandırma güncelleştirmesi ve çalışma alanına kullanıcı ve Grup dayanan Facebook tarafından atanan kullanıcı hesaplarını devre dışı bırak Azure AD'de atama.
+Bu bölüm, Azure AD 'nizi Facebook 'un Kullanıcı hesabı sağlama API 'SI ile çalışma alanına bağlama ve sağlama hizmetini Kullanıcı ve gruba göre Facebook tarafından çalışma alanında atanan kullanıcı hesaplarını oluşturmak, güncelleştirmek ve devre dışı bırakmak için size rehberlik eder Azure AD 'de atama.
 
 >[!Tip]
->Uygulamayı da seçebilirsiniz Facebook tarafından çalışma alanı için SAML tabanlı çoklu oturum açmayı etkinleştirmek, yönergeleri izleyerek sağlanan [Azure portalında](https://portal.azure.com). Bu iki özellik birbirine tamamlayıcı rağmen otomatik sağlama bağımsız olarak, çoklu oturum açma yapılandırılabilir.
+>[Azure Portal](https://portal.azure.com)' de belirtilen talimatları izleyerek Facebook tarafından çalışma alanı için SAML tabanlı çoklu oturum açmayı etkinleştirmeyi de tercih edebilirsiniz. Çoklu oturum açma özelliği otomatik sağlanmadan bağımsız olarak yapılandırılabilir, ancak bu iki özellik birbirini karmaşıdirebilirler.
 
-### <a name="to-configure-user-account-provisioning-to-workplace-by-facebook-in-azure-ad"></a>Hesabı için çalışma alanına Facebook tarafından Azure AD'de kullanıcı sağlamayı yapılandırmak için:
+### <a name="to-configure-user-account-provisioning-to-workplace-by-facebook-in-azure-ad"></a>Kullanıcı hesabı sağlamayı Azure AD 'de Facebook tarafından çalışma alanına yapılandırmak için:
 
-Bu bölümün amacı, Facebook tarafından çalışma alanı için Active Directory kullanıcı hesaplarının sağlamayı etkinleştirme adımlarını özetler sağlamaktır.
+Bu bölümün amacı, Facebook tarafından çalışma alanına Active Directory Kullanıcı hesaplarının sağlanması için nasıl olanak sağlamasının ana hatlarıyla anlatılmaktadır.
 
-Azure AD'ye otomatik olarak atanan kullanıcılar için çalışma alanına göre Facebook hesabı ayrıntılarını eşitleme özelliğini destekler. Bu otomatik eşitleme, bunları ilk kez oturum açmayı denemeden önce erişim için Kullanıcıları yetkilendirmek için ihtiyacı olan verileri almak için Facebook tarafından çalışma alanı sağlar. Azure AD'de erişimi iptal edilmiş olduğunda, ayrıca kullanıcıların Facebook ile çalışma alanına geri sağlamaları sildiğinde.
+Azure AD, atanan kullanıcıların hesap ayrıntılarını Facebook ile çalışma alanına otomatik olarak eşitleyebilme olanağını destekler. Bu otomatik eşitleme, Facebook tarafından, kullanıcıların, ilk kez oturum açmaya çalışmadan önce kullanıcılara yetkilendirmek için ihtiyaç duyacağı verileri almasını sağlar. Ayrıca, Azure AD 'de erişim iptal edildiğinde, kullanıcıların Facebook tarafından çalışma alanından de sağlamasını yapar.
 
-1. İçinde [Azure portalında](https://portal.azure.com), Gözat **Azure Active Directory** > **Kurumsal uygulamaları** > **tümuygulamalar** bölümü.
+1. [Azure portal](https://portal.azure.com) **Azure Active Directory** > **Enterprise Apps** > **tüm uygulamalar** bölümüne gidin.
 
-2. Çoklu oturum açma için Facebook ile çalışma alanına zaten yapılandırdıysanız, örneğiniz tarafından arama alanını kullanarak Facebook çalışma alanına arayın. Aksi takdirde seçin **Ekle** araması **Facebook ile çalışma alanına** uygulama galerisinde. Arama sonuçlarından Facebook tarafından çalışma alanı seçin ve uygulamalar listesine ekleyin.
+2. Zaten Facebook ile çoklu oturum açma için çalışma alanı yapılandırdıysanız, arama alanını kullanarak Facebook ile çalışma alanınızın örneğini arayın. Aksi halde, uygulama galerisinde **Facebook tarafından çalışma alanı** için **Ekle** ve ara ' yı seçin. Arama sonuçlarından Facebook tarafından çalışma alanı ' nı seçin ve uygulama listenize ekleyin.
 
-3. Örneğinizi Facebook tarafından çalışma alanı seçin ve ardından **sağlama** sekmesi.
+3. Facebook tarafından Iş yeriniz örneğinizi seçin, sonra **sağlama** sekmesini seçin.
 
-4. Ayarlama **hazırlama modu** için **otomatik**. 
+4. **Sağlama modunu** **Otomatik**olarak ayarlayın. 
 
-    ![Sağlama](./media/workplacebyfacebook-provisioning-tutorial/provisioning.png)
+    ![alınıyor](./media/workplacebyfacebook-provisioning-tutorial/provisioning.png)
 
-5. Altında **yönetici kimlik bilgileri** bölümünde çalışma alanınızı Facebook Yöneticisi tarafından erişim belirteci girin ve Kiracı URL'si değerine `https://www.facebook.com/scim/v1/` . Bu [yönergeleri](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/apps) çalışma alanı için bir erişim belirteci oluşturma. 
+5. **Yönetici kimlik bilgileri** bölümünde, Facebook Yöneticisi tarafından çalışma alanınızın erişim belirtecini girin ve kiracı URL 'si değerini `https://www.facebook.com/scim/v1/` olarak ayarlayın. Çalışma alanı için erişim belirteci oluşturma hakkındaki [yönergelere](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/apps) bakın. 
 
-6. Azure portalında **Test Bağlantısı** Azure emin olmak için AD alanınıza Facebook uygulama tarafından bağlanabilir. Bağlantı başarısız olursa, çalışma alanınızı Facebook hesabı ve takım Yöneticisi izinlerine sahip olun.
+6. Azure portal Azure AD 'nin Facebook uygulaması tarafından çalışma alanınıza bağlanabildiğinden emin olmak için **Bağlantıyı Sına** ' ya tıklayın. Bağlantı başarısız olursa, Facebook hesabına göre çalışma alanınızın Takım Yöneticisi izinlerine sahip olduğundan emin olun.
 
-7. Bir kişi veya grup sağlama hatası bildirimlerini alması gereken e-posta adresini girin **bildirim e-posta** alan ve onay kutusunu işaretleyin.
+7. **Bildirim e-postası** alanında sağlama hatası bildirimleri alması gereken bir kişinin veya grubun e-posta adresini girin ve onay kutusunu işaretleyin.
 
-8. Tıklayın **kaydedin.**
+8. Kaydet ' e tıklayın **.**
 
-9. Eşlemeleri bölümü altında seçin **eşitleme Azure Active Directory Kullanıcıları için Facebook ile çalışma.**
+9. Eşlemeler bölümünde, **Facebook ile Azure Active Directory kullanıcıları çalışma alanına eşitler** ' ı seçin.
 
-10. İçinde **öznitelik eşlemelerini** bölümünde, Azure AD çalışma alanına Facebook ile eşitlenen kullanıcı özniteliklerini gözden geçirin. Seçilen öznitelikler **eşleşen** özellikleri kullanılır çalışma alanına kullanıcı hesaplarında eşleştirmek için Facebook ile güncelleştirme işlemleri için. Değişiklikleri kaydetmek için Kaydet düğmesini seçin.
+10. **Öznitelik eşlemeleri** bölümünde, Azure AD 'den Facebook tarafından çalışma alanına eşitlenen Kullanıcı özniteliklerini gözden geçirin. **Eşleşen** özellikler olarak seçilen öznitelikler, güncelleştirme Işlemleri için Facebook tarafından çalışma alanındaki Kullanıcı hesaplarını eşleştirmek için kullanılır. Değişiklikleri uygulamak için Kaydet düğmesini seçin.
 
-11. Azure AD sağlama hizmeti için çalışma alanına Facebook ile etkinleştirmek için değiştirin **sağlama durumu** için **üzerinde** içinde **ayarları** bölümü
+11. Facebook tarafından çalışma alanı için Azure AD sağlama hizmetini etkinleştirmek üzere **Ayarlar** bölümünde **sağlama durumunu** **Açık** olarak değiştirin
 
-12. Tıklayın **kaydedin.**
+12. Kaydet ' e tıklayın **.**
 
-Otomatik sağlama yapılandırma hakkında daha fazla bilgi için bkz. [https://developers.facebook.com/docs/facebook-at-work/provisioning/cloud-providers](https://developers.facebook.com/docs/facebook-at-work/provisioning/cloud-providers)
+Otomatik sağlamayı yapılandırma hakkında daha fazla bilgi için bkz. [https://developers.facebook.com/docs/facebook-at-work/provisioning/cloud-providers](https://developers.facebook.com/docs/facebook-at-work/provisioning/cloud-providers)
 
-Artık bir test hesabı oluşturabilirsiniz. Çalışma alanına Facebook ile eşitlenmiş hesabı doğrulamak için 20 dakika kadar bekleyin.
+Artık bir test hesabı oluşturabilirsiniz. Hesabın Facebook tarafından çalışma alanına eşitlendiğinden emin olmak için 20 dakikaya kadar bekleyin.
+
+> [!NOTE]
+> Azure AD uygulamasının onaylandığından ve yeni yönergelerini karşıladığından emin olmak için Facebook ekibi tarafından çalışma alanı ile yakından çalışıyoruz. Facebook son tarihine göre çalışma alanı, 16 Aralık ve bunu karşılamaları beklenir. Bu anda müşterilerin hiçbir iş beklenmez. 28-Şubat-2020 tarihine kadar müşterilerin yeni tümleştirmeye geçiş yapması gerekir. Geçiş yolu kullanılabilir duruma geldiğinde buraya buraya göndereceğiz.    
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kullanıcı hesabı, kurumsal uygulamalar için sağlamayı yönetme](tutorial-list.md)
+* [Kurumsal uygulamalar için Kullanıcı hesabı sağlamayı yönetme](tutorial-list.md)
 * [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
-* [Çoklu oturum açmayı yapılandırın](workplacebyfacebook-tutorial.md)
+* [Çoklu oturum açmayı yapılandırma](workplacebyfacebook-tutorial.md)

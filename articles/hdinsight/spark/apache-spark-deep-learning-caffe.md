@@ -1,44 +1,44 @@
 ---
-title: Azure HDInsight Spark üzerinde dağıtılmış derin öğrenme için Caffe kullanma
-description: Azure HDInsight Spark üzerinde dağıtılmış derin öğrenme için Caffe kullanma
+title: Dağıtılmış derin öğrenme için Azure HDInsight Spark Caffe kullanma
+description: Azure HDInsight 'ta dağıtılmış derin öğrenme için Apache Spark 'da Caffe kullanın.
 author: hrasheed-msft
 ms.author: hrasheed
+ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 02/17/2017
-ms.openlocfilehash: d0d68263485c5ab6e57a349317b1975862470cc2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e5988bf1955502d89cc31bcc30672de983a399ec
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64721505"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083336"
 ---
-# <a name="use-caffe-on-azure-hdinsight-spark-for-distributed-deep-learning"></a>Azure HDInsight Spark üzerinde dağıtılmış derin öğrenme için Caffe kullanma
-
+# <a name="use-caffe-on-azure-hdinsight-spark-for-distributed-deep-learning"></a>Dağıtılmış derin öğrenme için Azure HDInsight Spark Caffe kullanma
 
 ## <a name="introduction"></a>Giriş
 
-Derin öğrenme, sağlık hizmetleri için üretim nakliye kadar her şeyi ve daha fazlasını etkilenip. Şirketler için derin gibi sabit sorunlarını gidermek öğrenme kapatma [görüntü sınıflandırma](https://blogs.microsoft.com/next/2015/12/10/microsoft-researchers-win-imagenet-computer-vision-challenge/), [konuşma tanıma](https://googleresearch.blogspot.jp/2015/08/the-neural-networks-behind-google-voice.html)nesne tanıma ve makine çevirisi. 
+Derin öğrenme, sağlık hizmetleri 'nden üretime ulaşım 'e kadar olan her şeyi ve daha fazlasını etkiliyor. Şirketler, [görüntü sınıflandırması](https://blogs.microsoft.com/next/2015/12/10/microsoft-researchers-win-imagenet-computer-vision-challenge/), [konuşma tanıma](https://googleresearch.blogspot.jp/2015/08/the-neural-networks-behind-google-voice.html), nesne tanıma ve makine çevirisi gibi sabit sorunları çözmeye yönelik derin öğrenmeleri kapatıyor.
 
-Vardır [birçok popüler çerçeveleri](https://en.wikipedia.org/wiki/Comparison_of_deep_learning_software)de dahil olmak üzere [Microsoft Bilişsel Araç Seti](https://www.microsoft.com/en-us/research/product/cognitive-toolkit/), [Tensorflow](https://www.tensorflow.org/), [Apache MXNet](https://mxnet.apache.org/), Theano, vs. [Caffe](https://caffe.berkeleyvision.org/) En ünlü sembolik olmayan (zorunlu) sinir ağı çerçeveleri biridir ve görüntü işleme dahil birçok alanda yaygın olarak kullanılan. Ayrıca, [CaffeOnSpark](https://yahoohadoop.tumblr.com/post/139916563586/caffeonspark-open-sourced-for-distributed-deep) Caffe Apache Spark, bu durumda derin öğrenme ile var olan bir Hadoop kümesinde kolayca da kullanılabilir bir araya getirir. Derin öğrenme Spark ETL işlem hatları, azalan sistem karmaşıklığını ve gecikme süresi ile birlikte eksiksiz bir çözüm öğrenme için kullanabilirsiniz.
+[Microsoft Cognitive Toolkit](https://www.microsoft.com/en-us/research/product/cognitive-toolkit/), [TensorFlow](https://www.tensorflow.org/), [Apache mxnet](https://mxnet.apache.org/), Theano, vb. gibi [popüler birçok çerçeve](https://en.wikipedia.org/wiki/Comparison_of_deep_learning_software)vardır. [Caffe](https://caffe.berkeleyvision.org/) , en yoğun sembolik olmayan (zorunlu) sinir ağ çerçevelerinden biridir ve bilgisayar vizyonu dahil pek çok alanda yaygın olarak kullanılır. Ayrıca, [Caffeonspark](https://github.com/yahoo/CaffeOnSpark) , caffe 'yi Apache Spark ile birleştirerek, bu durumda derin öğrenimi mevcut bir Hadoop kümesinde kolayca kullanılabilir. Ayrıntılı öğrenmeyi Spark ETL işlem hatları ile birlikte kullanabilirsiniz, sistem karmaşıklığını azaltır ve tüm çözüm öğrenimi için gecikme süresi.
 
-[HDInsight](https://azure.microsoft.com/services/hdinsight/) olan Apache Hadoop bulut sunan Apache Spark, Apache Hive, Apache Hadoop, Apache HBase, Apache Storm, Apache Kafka ve ML Hizmetleri için iyileştirilmiş açık kaynaklı analiz kümeleri sağlayan. HDInsight, % 99,9 SLA ile desteklenir. Her biri bu büyük veri teknolojilerini ve ISV uygulamalarını yönetilen kümeler güvenlik ve izleme kuruluşlara yönelik olarak kolayca dağıtılabilir.
+[HDInsight](https://azure.microsoft.com/services/hdinsight/) , Apache Spark, Apache Hive, Apache Hadoop, Apache hbase, Apache Storm, Apache Kafka ve ml Hizmetleri için iyileştirilmiş açık kaynaklı analitik kümeler sağlayan bir bulut Apache Hadoop sunumudur. HDInsight,% 99,9 SLA ile desteklenir. Bu büyük veri teknolojilerinin ve ISV uygulamalarının her biri, kuruluşlar için güvenlik ve izleme özellikli yönetilen kümeler olarak kolayca dağıtılabilir.
 
-Bu makalede nasıl yükleneceği gösterilmektedir [Spark üzerinde Caffe](https://github.com/yahoo/CaffeOnSpark) bir HDInsight kümesi için. Bu makalede yerleşik MNIST tanıtım dağıtılmış CPU üzerinde HDInsight Spark'ı kullanarak ayrıntılı öğrenme kullanmayı göstermek için de kullanır.
+Bu makalede, bir HDInsight kümesi için [Spark üzerinde Caffe](https://github.com/yahoo/CaffeOnSpark) 'nin nasıl yükleneceği gösterilmektedir. Bu makalede ayrıca yerleşik kapsamlı öğrenmeyi kullanarak CPU 'Larda HDInsight Spark kullanarak nasıl kullanılacağı gösterilmektedir.
 
-Bir görevi tamamlamak için dört adım vardır:
+Görevi gerçekleştirmek için dört adım vardır:
 
-1. Tüm düğümlerde gerekli bağımlılıkları yükleyin
-2. Caffe HDInsight için Spark üzerinde baş düğümünde oluşturun.
-3. Tüm çalışan düğümleri için gerekli kitaplıkları dağıtın
-4. Caffe modeli oluşturabilir ve dağıtılmış bir şekilde çalıştırın.
+1. Gerekli bağımlılıkları tüm düğümlere yükler
+2. Baş düğüm üzerinde HDInsight için Spark Caffe oluşturun
+3. Gerekli kitaplıkları tüm çalışan düğümlerine dağıt
+4. Bir Caffe modeli oluşturun ve dağıtılmış bir şekilde çalıştırın.
 
-HDInsight bir PaaS çözümü olduğundan, bazı görevleri daha kolaydır - harika platform özelliklerini sunar. Bu blog gönderisinde kullanılan özelliklerden biri çağrıldığında [betik eylemi](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux), hangi, yürütebilir küme düğümleri (baş düğüm, alt düğüm veya kenar düğümüne) özelleştirmek için Kabuk komutları.
+HDInsight PaaS çözümü olduğundan harika platform özellikleri sunar; bu nedenle bazı görevleri gerçekleştirmek kolaydır. Bu blog Gönderinizde kullanılan özelliklerden birine, küme düğümlerini (baş düğüm, çalışan düğümü veya kenar düğümü) özelleştirmek için kabuk komutlarını yürütebileceğiniz [betik eylemi](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux)denir.
 
-## <a name="step-1--install-the-required-dependencies-on-all-the-nodes"></a>1\. adım:  Tüm düğümlerde gerekli bağımlılıkları yükleyin
+## <a name="step-1--install-the-required-dependencies-on-all-the-nodes"></a>1\. Adım: gerekli bağımlılıkları tüm düğümlere yükler
 
-Başlamak için bağımlılıkları yüklemeniz gerekir. Caffe site ve [CaffeOnSpark site](https://github.com/yahoo/CaffeOnSpark/wiki/GetStarted_yarn) bağımlılıkları için Spark YARN modunu yüklemeye yönelik bazı kullanışlı wiki sunar. HDInsight Spark YARN modunu de kullanır. Ancak, HDInsight platformuna yönelik birkaç daha fazla bağımlılıkları eklemeniz gerekir. Bunu yapmak için betik eylemi kullanın ve tüm baş düğümü ve çalışan düğümleri üzerinde çalıştırın. Bu betik eylemi, bu bağımlılıkların diğer paketleri ayrıca bağlı olarak yaklaşık 20 dakika sürer. Bir GitHub konumu veya varsayılan BLOB Depolama hesabı gibi HDInsight kümenize erişilebilir olan bazı konumda koymalısınız.
+Başlamak için bağımlılıkları yüklemeniz gerekir. Caffe sitesi ve [Caffeonspark sitesi](https://github.com/yahoo/CaffeOnSpark/wiki/GetStarted_yarn) , Yarn modunda Spark için bağımlılıkları yüklemeye yönelik bazı yararlı wiki olanakları sunmaktadır. HDInsight Ayrıca YARN modunda Spark kullanır. Ancak, HDInsight platformu için birkaç bağımlılık eklemeniz gerekir. Bunu yapmak için, bir betik eylemi kullanır ve tüm baş düğümlerde ve çalışan düğümlerinde çalıştırırsınız. Bu bağımlılıklar diğer paketlere de bağlı olduğundan, bu betik eylemi yaklaşık 20 dakika sürer. Bunu bir GitHub konumu veya varsayılan BLOB depolama hesabı gibi HDInsight kümeniz tarafından erişilebilen bir konuma koymanız gerekir.
 
     #!/bin/bash
     #Please be aware that installing the below will add additional 20 mins to cluster creation because of the dependencies
@@ -58,19 +58,17 @@ Başlamak için bağımlılıkları yüklemeniz gerekir. Caffe site ve [CaffeOnS
     sudo ldconfig
     echo "protobuf installation done"
 
+Betik eyleminde iki adım vardır. İlk adım gereken tüm kitaplıkları yüklemektir. Bu kitaplıklar, hem Caffe 'nin (gflags, glog gibi) derlenmesi ve Caffe (sayısal tuş takımı gibi) için gerekli kitaplıkları içerir. CPU iyileştirmesi için libatlas kullanıyorsunuz, ancak MKL veya CUDA (GPU için) gibi diğer en iyi duruma getirme kitaplıklarını yüklerken CaffeOnSpark wiki 'yi her zaman takip edebilirsiniz.
 
-Betik eylemi iki adımı vardır. İlk adım, gerekli tüm kitaplıkların yüklemektir. Bu kitaplıkları (gflags aracına gibi glog) Caffe derleme hem de Caffe (numpy gibi) çalıştırmak için gerekli kitaplıkları içerir. CPU en iyi duruma getirme libatlas kullanıyorsunuz ancak MKL veya CUDA (için GPU) gibi diğer iyileştirme kitaplıkları yükleme CaffeOnSpark wiki her zaman izleyebilirsiniz.
+İkinci adım, çalışma zamanı sırasında Caffe için proto2.5.0 yükleme, derleme ve yükleme. Protoarabellek 2.5.0 [gereklidir](https://github.com/yahoo/CaffeOnSpark/issues/87), ancak bu sürüm Ubuntu 16 üzerinde bir paket olarak kullanılamaz, bu yüzden bunu kaynak kodundan derlemeniz gerekir. Ayrıca, Internet 'te nasıl derleneceği hakkında birkaç kaynak vardır. Daha fazla bilgi için [buraya](https://jugnu-life.blogspot.com/2013/09/install-protobuf-25-on-ubuntu.html)bakın.
 
-İkinci adım, derleme, indirip protobuf 2.5.0 Caffe için çalışma zamanı sırasında dir. Protobuf 2.5.0 [gereklidir](https://github.com/yahoo/CaffeOnSpark/issues/87), ancak bu sürümü Kaynak Kodu derlemek gereken şekilde Ubuntu 16 üzerindeki bir paket olarak kullanılabilir değildir. Ayrıca birkaç kaynak yok Internet'te derlemeniz konusunda. Daha fazla bilgi için [burada](https://jugnu-life.blogspot.com/2013/09/install-protobuf-25-on-ubuntu.html).
+Başlamak için, bu betik eylemini yalnızca tüm çalışan düğümleri ve baş düğümler (HDInsight 3,5 için) için kümenize çalıştırabilirsiniz. Betik eylemlerini mevcut bir kümede çalıştırabilir ya da küme oluşturma sırasında betik eylemleri kullanabilirsiniz. Betik eylemleri hakkında daha fazla bilgi için [buradaki](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux)belgelere bakın.
 
-Başlamak için yalnızca bu betik eylemi kümenizi karşı tüm çalışan düğümleri ve baş düğümlerine (HDInsight 3.5 için) çalıştırabilirsiniz. Betik eylemleri var olan bir kümede çalıştırmak veya betik eylemleri küme oluşturma sırasında kullanabilirsiniz. Betik eylemleri hakkında daha fazla bilgi için belgelere bakın [burada](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux).
+![Bağımlılıkları yüklemek için betik eylemleri](./media/apache-spark-deep-learning-caffe/submit-script-action.png)
 
-![Bağımlılıkları yüklemek üzere betik eylemleri](./media/apache-spark-deep-learning-caffe/Script-Action-1.png)
+## <a name="step-2-build-caffe-on-apache-spark-for-hdinsight-on-the-head-node"></a>2\. Adım: baş düğümde HDInsight için Apache Spark Caffe oluşturma
 
-
-## <a name="step-2-build-caffe-on-apache-spark-for-hdinsight-on-the-head-node"></a>2\. adım: Caffe HDInsight için Apache Spark, baş düğümünde oluşturun.
-
-İkinci adım, baş düğüme Caffe oluşturun ve ardından tüm çalışan düğümleri için derlenmiş kitaplıkları dağıtmak sağlamaktır. Bu adımda, gerekir [ssh, baş içine](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-linux-use-ssh-unix). Bundan sonra izlemeniz gereken [CaffeOnSpark yapı işlemi](https://github.com/yahoo/CaffeOnSpark/wiki/GetStarted_yarn). Aşağıda birkaç ek adım ile CaffeOnSpark oluşturmak için kullanabileceğiniz betiği verilmiştir. 
+İkinci adım, headnode üzerinde Caffe oluşturmak ve ardından derlenen kitaplıkları tüm çalışan düğümlerine dağıtmaktır. Bu adımda, [baş düğümüne içinde SSH](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-linux-use-ssh-unix)oluşturmanız gerekir. Bundan sonra [Caffeonspark derleme işlemini](https://github.com/yahoo/CaffeOnSpark/wiki/GetStarted_yarn)izlemeniz gerekir. Aşağıda, CaffeOnSpark 'ı birkaç ek adımla derlemek için kullanabileceğiniz komut dosyası verilmiştir.
 
     #!/bin/bash
     git clone https://github.com/yahoo/CaffeOnSpark.git --recursive
@@ -109,23 +107,22 @@ Başlamak için yalnızca bu betik eylemi kümenizi karşı tüm çalışan dü�
     hadoop fs -put CaffeOnSpark/caffe-distri/distribute/lib/* /CaffeOnSpark/caffe-distri/distribute/lib/
     hadoop fs -put CaffeOnSpark/caffe-public/distribute/lib/* /CaffeOnSpark/caffe-public/distribute/lib/
 
-CaffeOnSpark belgelere ne diyor birden fazla yapmanız gerekebilir. Değişiklikler şöyledir:
-- CPU-yalnızca değiştirme ve bu belirli bir amaç için libatlas kullanın.
-- Veri kümeleri, daha sonra kullanmak için tüm çalışan düğümleri için erişilebilir olan bir paylaşılan konuma olan BLOB depolama alanına yerleştirin.
-- Derlenmiş Caffe kitaplıkları, BLOB depolama alanına yerleştirin ve daha sonra ek derleme süresi önlemek için betik eylemlerini kullanarak tüm düğümleri bu kitaplıkları kopyalayın.
+CaffeOnSpark belgelerinin yazdıkından daha fazlasını yapmanız gerekebilir. Değişiklikler şunlardır:
+- Yalnızca CPU olarak değiştirin ve bu belirli amaçla libatlas kullanın.
+- Veri kümelerini, daha sonra kullanılmak üzere tüm çalışan düğümlerinin erişebileceği paylaşılan bir konum olan BLOB depolamaya koyun.
+- Derlenen Caffe kitaplıklarını BLOB depolamaya yerleştirin ve daha sonra bu kitaplıkları, ek derleme süresinin önüne geçmek için betik eylemleri kullanarak tüm düğümlere kopyalayın.
 
+### <a name="troubleshooting-an-ant-buildexception-has-occurred-exec-returned-2"></a>Sorun giderme: bir ant BuildException oluştu: exec döndürüldü: 2
 
-### <a name="troubleshooting-an-ant-buildexception-has-occurred-exec-returned-2"></a>Sorun giderme: Ant BuildException oluştu: exec döndürdü: 2
-
-İlk CaffeOnSpark oluşturmaya çalışırken, bazen söylüyor
+İlk olarak CaffeOnSpark oluşturmaya çalışırken şöyle diyor
 
     failed to execute goal org.apache.maven.plugins:maven-antrun-plugin:1.7:run (proto) on project caffe-distri: An Ant BuildException has occurred: exec returned: 2
 
-Kod deposu tarafından Temizle "temiz olun" ve ardından "yapı çalışma yap" bağımlılıkları doğru olduğu sürece, bu sorunu çözmek için.
+Doğru bağımlılıklara sahip olduğunuz sürece bu sorunu çözmek için "temiz yap" ve ardından "derlemeyi oluştur" öğesini çalıştırın.
 
-### <a name="troubleshooting-maven-repository-connection-time-out"></a>Sorun giderme: Maven deposu bağlantı zaman aşımı
+### <a name="troubleshooting-maven-repository-connection-time-out"></a>Sorun giderme: Maven depo bağlantısı zaman aşımı
 
-Bazen aşağıdaki kod parçacığına benzer bir bağlantı zaman aşımı hatası, maven sunar:
+Bazen Maven, aşağıdaki kod parçacığına benzer bir bağlantı zaman aşımı hatası verir:
 
     Retry:
     [INFO] Downloading: https://repo.maven.apache.org/maven2/com/twitter/chill_2.11/0.8.0/chill_2.11-0.8.0.jar
@@ -134,10 +131,9 @@ Bazen aşağıdaki kod parçacığına benzer bir bağlantı zaman aşımı hata
 
 Birkaç dakika sonra yeniden denemeniz gerekir.
 
-
 ### <a name="troubleshooting-test-failure-for-caffe"></a>Sorun giderme: Caffe için test hatası
 
-Son onay için CaffeOnSpark yaparken büyük olasılıkla test hatası bakın. Bu büyük olasılıkla UTF-8 kodlaması ile ilişkilidir, ancak Caffe kullanımını etkilememesi gerekir
+CaffeOnSpark için son denetimi yaparken büyük olasılıkla bir test hatası görürsünüz. Bu muhtemelen UTF-8 kodlaması ile ilgilidir, ancak Caffe 'nin kullanımını etkilememelidir.
 
     Run completed in 32 seconds, 78 milliseconds.
     Total number of tests run: 7
@@ -145,76 +141,77 @@ Son onay için CaffeOnSpark yaparken büyük olasılıkla test hatası bakın. B
     Tests: succeeded 6, failed 1, canceled 0, ignored 0, pending 0
     *** 1 TEST FAILED ***
 
-## <a name="step-3-distribute-the-required-libraries-to-all-the-worker-nodes"></a>3\. adım: Tüm çalışan düğümleri için gerekli kitaplıkları dağıtın
+## <a name="step-3-distribute-the-required-libraries-to-all-the-worker-nodes"></a>3\. Adım: gerekli kitaplıkları tüm çalışan düğümlerine dağıtma
 
-Sonraki adım kitaplıkları dağıtmaktır (temel kitaplıklarında CaffeOnSpark/caffe-Genel/dağıtma/lib/ve CaffeOnSpark/caffe-dağıtım/dağıtma/lib /) tüm düğümlere. 2\. adım, BLOB Depolama alanında bu kitaplıkları yerleştirin ve bu adımda, tüm baş düğümlerine ve çalışan düğümleri kopyalamak için betik eylemlerini kullanın.
+Sonraki adım, kitaplıkları (temel olarak CaffeOnSpark/Caffe-public/dağıt/lib/and CaffeOnSpark/Caffe-Distri/dağıt/lib/) tüm düğümlere dağıtmaktır. 2\. adımda bu kitaplıkları BLOB depolamaya yerleştirir ve bu adımda, betik eylemlerini kullanarak tüm baş düğümlere ve çalışan düğümlerine kopyalayabilirsiniz.
 
-Bunu yapmak için betik eylemi aşağıdaki kod parçacığında gösterildiği gibi çalıştırın:
+Bunu yapmak için, aşağıdaki kod parçacığında gösterildiği gibi bir betik eylemi çalıştırın:
 
     #!/bin/bash
     hadoop fs -get wasb:///CaffeOnSpark /home/changetoyourusername/
 
-Doğru konumu noktasına kümenize belirli ihtiyacınız olduğundan emin olun)
+Kümenize özgü doğru konuma işaret ettiğinizden emin olun.
 
-2\. adımda, tüm düğümler için erişilebilir olan BLOB Depolama alanında yerleştirdiğiniz çünkü bu adımda, yalnızca, tüm düğümlere kopyalayın.
+2\. adımda, tüm düğümlerin erişebileceği BLOB depolama alanına yerleştirmeniz, bu adımda bunu yalnızca tüm düğümlere kopyalamanız yeterlidir.
 
-## <a name="step-4-compose-a-caffe-model-and-run-it-in-a-distributed-manner"></a>4\. Adım: Caffe modeli oluşturabilir ve dağıtılmış bir şekilde çalıştırın
+## <a name="step-4-compose-a-caffe-model-and-run-it-in-a-distributed-manner"></a>4\. Adım: bir Caffe modeli oluşturun ve dağıtılmış bir şekilde çalıştırın
 
-Caffe, önceki adımlarda çalıştırdıktan sonra yüklenir. Sonraki adım, Caffe modeli yazmaktır. 
+Caffe, önceki adımları çalıştırdıktan sonra yüklenir. Sonraki adım bir Caffe modeli yazmaktır. 
 
-Caffe "bir model oluşturmak için yalnızca bir yapılandırma dosyası tanımlamak gereken bir ifadesel mimari", kullanma ve olmadan hiç (çoğu durumda) kodlama. Şimdi burada göz atın. 
+Caffe, model oluştururken yalnızca bir yapılandırma dosyası tanımlamanız ve herhangi bir kodlama yapmadan (çoğu durumda) bir "ifade eden mimari" kullanıyor. Şimdi oraya göz atalım. 
 
-Eğittiğiniz modeli MNIST eğitim için bir örnek modelidir. El yazısı basamak MNIST veritabanını 60.000 örnekler Eğitim kümesi ve bir sınama kümesi 10.000 örnekler vardır. Bu, daha büyük bir NIST kullanılabilir bir alt kümesidir. Basamak boyutu normalleştirilmiş ve sabit boyutlu görüntü ortalanmış olmuştur. Veri kümesini indirin ve doğru biçime dönüştürmek için bazı kodlar CaffeOnSpark sahiptir.
+Eğitmeniz gereken model, bir model oluşturma eğitimi için örnek bir modeldir. El ile yazılan basamakların veri tabanı, 60.000 örnek bir eğitim kümesine ve bir 10.000 örnek test kümesine sahiptir. NıST 'den kullanılabilen daha büyük bir kümenin alt kümesidir. Rakamlar normal boyuttadır ve sabit boyutlu bir görüntüde ortalanmıştır. CaffeOnSpark, veri kümesini indirmek ve doğru biçime dönüştürmek için bazı betikler içerir.
 
-CaffeOnSpark bazı ağ topolojileri örnek MNIST eğitimi sağlar. En iyi duruma getirme ve ağ mimarisini (ağ topolojisi) bölme iyi bir tasarım var. Bu durumda, gerekli iki dosya vardır: 
+CaffeOnSpark, bazı ağ topolojileri örneği sağlar. Ağ mimarisini bölmek için iyi bir tasarıma sahiptir (ağın topolojisi) ve iyileştirmesi. Bu durumda, iki dosya gerekir:
 
-"Solver" dosyası (${CAFFE_ON_SPARK}/data/lenet_memory_solver.prototxt) en iyi duruma getirme gözlemledikten ve parametre güncelleştirmeleri oluşturmak için kullanılır. Örneğin, CPU veya GPU, kaç adet yineleme olan İtici Güç nedir kullanılıp kullanılmayacağını tanımlar vs. Ayrıca, programın (ikinci dosya ihtiyacınız olan) kullanmalıdır hangi neuron ağ topolojisi da tanımlar. Çözücü hakkında daha fazla bilgi için bkz: [Caffe belgeleri](https://caffe.berkeleyvision.org/tutorial/solver.html).
+"çözücü" dosyası ($ {CAFFE_ON_SPARK}/Data/lenet_memory_solver. prototxt), iyileştirme ve parametre güncelleştirmelerini oluşturmak için kullanılır. Örneğin, CPU veya GPU 'nun kullanılıp kullanılmadığını, itici güç ne olduğunu, kaç yinelemenin olduğunu tanımlar. Ayrıca programın kullanması gereken neuron ağ topolojisini tanımlar (Bu, ihtiyacınız olan ikinci dosyadır). Çözücü hakkında daha fazla bilgi için bkz. [Caffe belgeleri](https://caffe.berkeleyvision.org/tutorial/solver.html).
 
-CPU, GPU yerine kullandığından, bu örnekte, en son satırına değiştirmelisiniz.
+Bu örnekte, GPU yerine CPU kullandığından, son satırı şu şekilde değiştirmelisiniz:
 
     # solver mode: CPU or GPU
     solver_mode: CPU
 
-![Caffe yapılandırma](./media/apache-spark-deep-learning-caffe/Caffe-1.png)
+![HDInsight Caffe yapılandırma örneği](./media/apache-spark-deep-learning-caffe/caffe-configuration1.png
+)
 
 Diğer satırları gerektiği gibi değiştirebilirsiniz.
 
-İkinci bir dosya (${CAFFE_ON_SPARK}/data/lenet_memory_train_test.prototxt) nasıl neuron ağ, benzer ve ilgili girdi ve çıktı dosyası tanımlar. Eğitim verileri konumu yansıtacak şekilde dosyasını güncelleştirmeniz gerekir. (Bu, kümeniz için belirli doğru konuma işaret edecek şekilde gerekir) lenet_memory_train_test.prototxt aşağıdaki bölümünde değiştirin:
+İkinci dosya ($ {CAFFE_ON_SPARK}/Data/lenet_memory_train_test. prototxt), neuron ağının nasıl göründüğünü ve ilgili giriş ve çıkış dosyasını tanımlar. Eğitim verilerinin konumunu yansıtmak için dosyayı da güncelleştirmeniz gerekir. Lenet_memory_train_test. prototxt ' de aşağıdaki parçayı değiştirin (kümenize özgü doğru konuma işaret etmeniz gerekir):
 
-- "file:/Users/mridul/bigml/demodl/mnist_train_lmdb" Dönüştür "wasb: / / / Proje/machine_learning/image_dataset/mnist_train_lmdb"
-- "file:/Users/mridul/bigml/demodl/mnist_test_lmdb/" Dönüştür "wasb: / / / Proje/machine_learning/image_dataset/mnist_test_lmdb"
+- "File:/Users/Mridul/bigml/demodl/mnist_train_lmdb" değerini "wasb:///projects/machine_learning/image_dataset/mnist_train_lmdb" olarak değiştirin
+- "File:/Users/Mridul/bigml/demodl/mnist_test_lmdb/" değerini "wasb:///projects/machine_learning/image_dataset/mnist_test_lmdb" olarak değiştirin
 
-![Caffe yapılandırma](./media/apache-spark-deep-learning-caffe/Caffe-2.png)
+![HDInsight Caffe yapılandırma örneği yeniden](./media/apache-spark-deep-learning-caffe/caffe-configuration2.png)
 
-Ağ tanımlama hakkında daha fazla bilgi için denetleme [MNIST veri kümesinde Caffe belgeleri](https://caffe.berkeleyvision.org/gathered/examples/mnist.html)
+Ağı tanımlama hakkında daha fazla bilgi için, [MNIST veri kümesindeki Caffe belgelerini](https://caffe.berkeleyvision.org/gathered/examples/mnist.html) denetleyin
 
-Bu makalede amacıyla bu MNIST örneği kullanın. Baş düğümünden aşağıdaki komutları çalıştırın:
+Bu makalenin amacına yönelik olarak, bu ilgili bir örnek kullanırsınız. Baş düğümden aşağıdaki komutları çalıştırın:
 
     spark-submit --master yarn --deploy-mode cluster --num-executors 8 --files ${CAFFE_ON_SPARK}/data/lenet_memory_solver.prototxt,${CAFFE_ON_SPARK}/data/lenet_memory_train_test.prototxt --conf spark.driver.extraLibraryPath="${LD_LIBRARY_PATH}" --conf spark.executorEnv.LD_LIBRARY_PATH="${LD_LIBRARY_PATH}" --class com.yahoo.ml.caffe.CaffeOnSpark ${CAFFE_ON_SPARK}/caffe-grid/target/caffe-grid-0.1-SNAPSHOT-jar-with-dependencies.jar -train -features accuracy,loss -label label -conf lenet_memory_solver.prototxt -devices 1 -connection ethernet -model wasb:///mnist.model -output wasb:///mnist_features_result
 
-Yukarıdaki komut, her YARN kapsayıcı için gerekli dosyaları (lenet_memory_solver.prototxt ve lenet_memory_train_test.prototxt) dağıtır. Komutu, ayrıca LD_LIBRARY_PATH için her Spark sürücüsü/Yürütücü ilgili YOLUNU ayarlar. Önceki kod parçacığı ve CaffeOnSpark kitaplıkların bulunduğu konumu işaret LD_LIBRARY_PATH tanımlanır. 
+Yukarıdaki komut, her YARN kapsayıcısına gerekli dosyaları (lenet_memory_solver. prototxt ve lenet_memory_train_test. prototxt) dağıtır. Komut ayrıca her Spark sürücüsünün/yürütücsürümünün ilgili yolunu LD_LIBRARY_PATH olarak ayarlar. LD_LIBRARY_PATH, önceki kod parçacığında tanımlanır ve CaffeOnSpark kitaplıklarının bulunduğu konuma işaret eder. 
 
 ## <a name="monitoring-and-troubleshooting"></a>İzleme ve sorun giderme
 
-YARN küme modunu kullandığından, rastgele bir kapsayıcı (ve bir rasgele çalışan düğümü) Spark sürücüsü zamanlanacak durumda yalnızca çıktısı aşağıdakine benzer konsolunda görmeniz gerekir:
+YARN küme modunu kullandığınızdan, Spark sürücüsü rastgele bir kapsayıcıya (ve rastgele bir çalışan düğümüne) zamanlanabileceği için, konsolda yalnızca şunun gibi bir şey çıktısını görmeniz gerekir:
 
     17/02/01 23:22:16 INFO Client: Application report for application_1485916338528_0015 (state: RUNNING)
 
-Ne olduğunu bilmek istiyorsanız, genellikle daha fazla bilgi içeren sürücünün günlük Spark almanız gerekir. Bu durumda, ilgili YARN günlüklerini bulmak için YARN UI gitmeniz gerekiyor. Bu URL'ye göre YARN UI alabilirsiniz: 
+Ne olduğunu biliyorsanız, genellikle Spark sürücüsünün günlüğünü almanız gerekir, bu da daha fazla bilgi içerir. Bu durumda, ilgili YARN günlüklerini bulmak için YARN Kullanıcı arabirimine gitmeniz gerekir. YARN Kullanıcı arabirimini şu URL ile edinebilirsiniz:
 
     https://yourclustername.azurehdinsight.net/yarnui
-   
-![YARN UI](./media/apache-spark-deep-learning-caffe/YARN-UI-1.png)
 
-Bu belirli bir uygulama için kaç kaynak ayrılmış bir göz atalım. "Zamanlayıcı" bağlantısına tıklayarak ve ardından bu uygulama için olduğunu çalışan dokuz kapsayıcılar görürsünüz. sekiz yürütücüler sağlamak için YARN isteyin ve sürücü işlemi için başka bir kapsayıcıdır. 
+![Apache Yarn Zamanlayıcı tarayıcı görünümü](./media/apache-spark-deep-learning-caffe/apache-yarn-window-1.png)
 
-![YARN Zamanlayıcı](./media/apache-spark-deep-learning-caffe/YARN-Scheduler.png)
+Bu belirli uygulama için ayrılan kaynak sayısına göz atabilirsiniz. "Scheduler" bağlantısına tıklayabilirsiniz ve bu uygulama için çalışan dokuz kapsayıcı olduğunu görürsünüz. YARN 'nin sekiz yürütme sağlamasını ve başka bir kapsayıcı de sürücü işlemi için olduğunu sorabilirsiniz. 
 
-Hata varsa sürücü günlükleri veya kapsayıcı günlüklerini denetlemek isteyebilirsiniz. Sürücü günlükleri için uygulama kimliği YARN kullanıcı arabiriminde tıklayın ve ardından "Günlükleri" düğmesine tıklayın. Stderr sürücü günlüklere yazılır.
+![HDI Apache YARN Zamanlayıcı görünümü](./media/apache-spark-deep-learning-caffe/apache-yarn-scheduler.png)
 
-![YARN UI 2](./media/apache-spark-deep-learning-caffe/YARN-UI-2.png)
+Başarısızlık durumunda sürücü günlüklerini veya kapsayıcı günlüklerini denetlemek isteyebilirsiniz. Sürücü günlükleri için, YARN Kullanıcı arabiriminde uygulama KIMLIĞI ' ne tıklayabilir ve ardından "Günlükler" düğmesine tıklayabilirsiniz. Sürücü günlükleri stderr 'e yazılır.
 
-Örneğin, aşağıdaki hatayı sürücüsünü günlüğündeki bazıları çok fazla yürütücüler tahsis belirten görebilirsiniz.
+![Apache Yarn pencere tarayıcısı görünümü](./media/apache-spark-deep-learning-caffe/apache-yarn-window-2.png)
+
+Örneğin, daha fazla sayıda yürütme ayırdığını belirten sürücü günlüklerinden aşağıdaki bazı hataları görebilirsiniz.
 
     17/02/01 07:26:06 ERROR ApplicationMaster: User class threw exception: java.lang.IllegalStateException: Insufficient training data. Please adjust hyperparameters or increase dataset.
     java.lang.IllegalStateException: Insufficient training data. Please adjust hyperparameters or increase dataset.
@@ -227,7 +224,7 @@ Hata varsa sürücü günlükleri veya kapsayıcı günlüklerini denetlemek ist
         at java.lang.reflect.Method.invoke(Method.java:498)
         at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:627)
 
-Bazı durumlarda, sorunu sürücüleri yerine yürütücüler oluşabilir. Bu durumda, kapsayıcı günlüklerini denetlemeniz gerekir. Her zaman kapsayıcı günlüklerini Al ve ardından başarısız kapsayıcıya alın. Örneğin, Caffe çalıştırırken bu hatayla karşılayabilir.
+Bazen sorun, sürücüler yerine yürüticilere de gerçekleşebilir. Bu durumda, kapsayıcı günlüklerini denetlemeniz gerekir. Her zaman kapsayıcı günlüklerini alabilir ve ardından başarısız kapsayıcıyı alabilirsiniz. Örneğin, Caffe çalıştırırken bu hatayı karşılayabilirsiniz.
 
     17/02/01 07:12:05 WARN YarnAllocator: Container marked as failed: container_1485916338528_0008_05_000005 on host: 10.0.0.14. Exit status: 134. Diagnostics: Exception from container-launch.
     Container id: container_1485916338528_0008_05_000005
@@ -250,26 +247,25 @@ Bazı durumlarda, sorunu sürücüleri yerine yürütücüler oluşabilir. Bu du
 
     Container exited with a non-zero exit code 134
 
-Bu durumda, başarısız bir kapsayıcı kimliği için ihtiyaç duyduğunuz (Yukarıdaki durumda bu, container_1485916338528_0008_05_000005'dir). Ardından çalıştırmanız gerekir 
+Bu durumda, başarısız kapsayıcı KIMLIĞINI almanız gerekir (Yukarıdaki örnekte, container_1485916338528_0008_05_000005). Ardından şunu çalıştırmanız gerekir 
 
     yarn logs -containerId container_1485916338528_0008_03_000005
 
-baş düğümüne. Kapsayıcı hatası denetledikten sonra GPU modunu (burada, CPU modunu kullanmanız) kullanarak lenet_memory_solver.prototxt neden olur.
+. Kapsayıcı başarısızlığını denetledikten sonra, lenet_memory_solver. prototxt içinde GPU modunun (Bunun yerine CPU modunu kullanmanız gerekir) kullanılması neden olur.
 
     17/02/01 07:10:48 INFO LMDB: Batch size:100
     WARNING: Logging before InitGoogleLogging() is written to STDERR
     F0201 07:10:48.309725 11624 common.cpp:79] Cannot use GPU in CPU-only Caffe: check mode.
 
-
 ## <a name="getting-results"></a>Sonuçlar alınıyor
 
-8 yürütücüler tahsis ve ağ topolojisini basit olduğundan, yaklaşık 30 dakika sonucunu çalıştırmak için yalnızca sürer. Komut satırından wasb:///mnist.model için model yerleştirin ve sonuçları wasb adlı bir klasöre yerleştirin görebilirsiniz: / / / mnist_features_result.
+8 yürüticileri ayırdığından ve ağ topolojisi basit olduğundan, sonucu çalıştırmak için yalnızca 30 dakika sürer. Komut satırından, modeli wasb:///mnist.model 'e yerleştiristediğinizi görebilir ve sonuçları wasb:///mnist_features_result adlı bir klasöre yerleştirebilirsiniz.
 
-Çalıştırarak sonuçlar alabilirsiniz.
+Şu şekilde çalıştırarak sonuçları alabilirsiniz
 
     hadoop fs -cat hdfs:///mnist_features_result/*
 
-ve sonuç aşağıdaki gibi görünür:
+ve sonuç şöyle görünür:
 
     {"SampleID":"00009597","accuracy":[1.0],"loss":[0.028171852],"label":[2.0]}
     {"SampleID":"00009598","accuracy":[1.0],"loss":[0.028171852],"label":[6.0]}
@@ -281,21 +277,21 @@ ve sonuç aşağıdaki gibi görünür:
     {"SampleID":"00009604","accuracy":[0.97],"loss":[0.0677709],"label":[3.0]}
     {"SampleID":"00009605","accuracy":[0.97],"loss":[0.0677709],"label":[4.0]}
 
-SampleID MNIST kümesindeki kimlik temsil eder ve etiket modeli tanımlayan sayısıdır.
-
+Sampleıd, MNIST veri kümesindeki KIMLIĞI temsil eder ve etiket modelin tanımladığı sayıdır.
 
 ## <a name="conclusion"></a>Sonuç
 
-Bu belgede, basit bir örnek çalıştırmayla CaffeOnSpark yüklemeye çalıştınız. HDInsight, tam yönetilen bulut dağıtılmış bir işlem platformudur ve makine öğrenimi ve Gelişmiş analiz iş yükleri, büyük veri kümesinde çalıştırmak için en iyi yerdir ve dağıtılmış derin öğrenme için Caffe HDInsight Spark üzerinde derin öğrenme gerçekleştirmek için kullanabilirsiniz görevler.
-
+Bu belgede, basit bir örnek çalıştırmaya yönelik CaffeOnSpark 'ı yüklemeye çalıştınız. HDInsight, tam olarak yönetilen bir bulut dağıtılmış işlem platformudur ve büyük veri kümesinde makine öğrenimi ve gelişmiş analiz iş yüklerini çalıştırmak için en iyi yerdir ve dağıtılmış derin öğrenme için, HDInsight Spark üzerinde Caffe 'yi kullanarak derin öğrenme yapabilirsiniz görevlerinize.
 
 ## <a name="seealso"></a>Ayrıca bkz.
-* [Genel Bakış: Azure HDInsight üzerinde Apache Spark](apache-spark-overview.md)
+
+* [Genel Bakış: Azure HDInsight’ta Apache Spark](apache-spark-overview.md)
 
 ### <a name="scenarios"></a>Senaryolar
-* [Apache Spark Machine Learning ile: HVAC verilerini kullanarak bina sıcaklığını çözümlemek için HDInsight içindeki Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
-* [Apache Spark Machine Learning ile: Gıda denetimi sonuçlarını tahmin etmek için HDInsight içindeki Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
+
+* [Machine Learning ile Apache Spark: HVAC verilerini kullanarak oluşturma sıcaklığını çözümlemek için HDInsight 'ta Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
+* [Machine Learning Apache Spark: yemek İnceleme sonuçlarını tahmin etmek için HDInsight 'ta Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
 
 ### <a name="manage-resources"></a>Kaynakları yönetme
-* [Azure HDInsight’ta Apache Spark kümesi kaynaklarını yönetme](apache-spark-resource-manager.md)
 
+* [Azure HDInsight’ta Apache Spark kümesi kaynaklarını yönetme](apache-spark-resource-manager.md)

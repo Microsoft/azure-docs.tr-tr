@@ -1,6 +1,6 @@
 ---
-title: Tanılama ve sorun giderme için Azure IOT hub'ı ile bağlantısını keser
-description: Tanılama ve Azure IOT Hub için cihaz bağlantısı ile sık karşılaşılan hataları giderme hakkında bilgi edinin
+title: Azure IoT Hub ile bağlantıyı Tanıla ve sorunlarını giderme
+description: Azure IoT Hub cihaz bağlantısıyla sık karşılaşılan hataları tanılamayı ve sorun gidermeyi öğrenin
 author: jlian
 manager: briz
 ms.service: iot-hub
@@ -8,103 +8,103 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 07/19/2018
 ms.author: jlian
-ms.openlocfilehash: a107689796c58b17c445e7a9cf7c6f0402ef6005
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3904c6390cfe8de197bae470c4ae32d22605ae6a
+ms.sourcegitcommit: b7b0d9f25418b78e1ae562c525e7d7412fcc7ba0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61440157"
+ms.lasthandoff: 09/08/2019
+ms.locfileid: "70801418"
 ---
-# <a name="detect-and-troubleshoot-disconnects-with-azure-iot-hub"></a>Algılama ve giderme Azure IOT Hub ile bağlantısını keser
+# <a name="detect-and-troubleshoot-disconnects-with-azure-iot-hub"></a>Azure IoT Hub ile kesilen sorunları algılayın ve giderin
 
-IOT cihazları için bağlantı sorunları olmadığı için birçok olası hata noktaları sorun giderme zor olabilir. Aygıt tarafı uygulama mantığı, fiziksel ağları, protokolleri, donanım ve Azure IOT hub'ı tüm sorunlara neden olabilir. Bu makalede, algılamak ve bulut tarafındaki (aksine, cihaz tarafında) cihaz bağlantısı sorunlarını giderme konusunda öneriler sağlar.
+Birçok olası hata noktası olduğundan, IoT cihazlarına yönelik bağlantı sorunlarının giderilmesi zor olabilir. Cihaz tarafı uygulama mantığı, fiziksel ağlar, protokoller, donanım ve Azure IoT Hub her türlü soruna neden olabilir. Bu makalede, bulut tarafında (cihaz tarafı aksine) cihaz bağlantısı sorunlarını algılamaya ve gidermeye yönelik öneriler sağlanır.
 
-## <a name="get-alerts-and-error-logs"></a>Uyarıları ve Hata günlüklerini alma
+## <a name="get-alerts-and-error-logs"></a>Uyarıları ve hata günlüklerini al
 
-Azure İzleyici uyarı alın ve cihaz bağlantılarını düşürdüğünüzde, günlükleri yazmak için kullanın.
+Cihaz bağlantıları başlatıldığında uyarıları almak ve günlükleri yazmak için Azure Izleyici 'yi kullanın.
 
 ### <a name="turn-on-diagnostic-logs"></a>Tanılama günlüklerini açın
 
-Cihaz bağlantı olayları ve hataları günlüğe kaydetmek için IOT hub'ı için tanılamayı açın.
+Cihaz bağlantısı olaylarını ve hatalarını günlüğe kaydetmek için IoT Hub tanılamayı açın.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 
-2. IOT hub'ınıza gidin.
+2. IoT Hub 'ınıza gidin.
 
-3. Seçin **tanılama ayarları**.
+3. **Tanılama ayarları**' nı seçin.
 
 4. Seçin **tanılamayı Aç**.
 
-5. Etkinleştirme **bağlantıları** toplanacak günlükleri.
+5. Toplanabilecek **bağlantı** günlüklerini etkinleştirin.
 
-6. Daha kolay analiz için açma **Log Analytics'e gönderme** ([fiyatlandırmaya](https://azure.microsoft.com/pricing/details/log-analytics/)). Altındaki örneğe bakın [bağlantı hatalarını gidermek](#resolve-connectivity-errors).
+6. Daha kolay analiz için **Log Analytics gönder** ' i açın ([bkz. fiyatlandırma](https://azure.microsoft.com/pricing/details/log-analytics/)). [Bağlantı hatalarını çözme](#resolve-connectivity-errors)bölümündeki örneğe bakın.
 
    ![Önerilen ayarlar](./media/iot-hub-troubleshoot-connectivity/diagnostic-settings-recommendation.png)
 
-Daha fazla bilgi için bkz. [Azure IOT Hub durumunu izleyin ve sorunları hızla tanılayın](iot-hub-monitor-resource-health.md).
+Daha fazla bilgi edinmek için bkz. [Azure IoT Hub sistem durumunu izleme ve sorunları hızlı bir şekilde tanılama](iot-hub-monitor-resource-health.md).
 
-### <a name="set-up-alerts-for-the-connected-devices-count-metric"></a>İçin uyarıları ayarlama _bağlı cihazları_ ölçüsü Say
+### <a name="set-up-alerts-for-the-_connected-devices_-count-metric"></a>_Bağlı cihazlar_ sayım ölçümü için uyarıları ayarlama
 
-Cihazları bağlantısını kestiğinizde uyarıları almak için uyarıları yapılandırın **bağlı cihazlar (Önizleme)** ölçümü.
+Cihazların bağlantısı kesildiğinde uyarı almak için, **bağlı cihazlar (Önizleme)** ölçümünde uyarıları yapılandırın.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 
-2. IOT hub'ınıza gidin.
+2. IoT Hub 'ınıza gidin.
 
-3. Seçin **uyarılar**.
+3. **Uyarıları**seçin.
 
-4. Seçin **yeni uyarı kuralı**.
+4. **Yeni uyarı kuralı**' nı seçin.
 
-5. Seçin **koşul Ekle**, "bağlı cihazlar (Önizleme)"'yi seçin.
+5. **Koşul Ekle**' yi seçin ve ardından "bağlı cihazlar (Önizleme)" öğesini seçin.
 
-6. İstediğiniz, eşikleri ayarlayarak ve seçenekleri uyarı tarafından aşağıdaki istemleri tamamlayın.
+6. İstediğiniz eşiklerinizi ve uyarı seçeneklerini aşağıdaki istemlerle ayarlamayı tamamlayın.
 
-Daha fazla bilgi için bkz. [Microsoft azure'da Klasik uyarılar nedir?](../azure-monitor/platform/alerts-overview.md).
+Daha fazla bilgi edinmek için bkz. [Microsoft Azure klasik uyarılar nelerdir?](../azure-monitor/platform/alerts-overview.md).
 
-## <a name="resolve-connectivity-errors"></a>Bağlantı hataları çözün
+## <a name="resolve-connectivity-errors"></a>Bağlantı hatalarını çözme
 
-Tanılama günlükleri ve uyarılar bağlı cihazlar için etkinleştirdiğinizde, hata oluştuğunda uyarı alın. Bu bölümde, bir uyarı aldığınızda, sık karşılaşılan sorunları çözmek açıklar. Aşağıdaki adımları, Azure İzleyici günlüklerini tanılama günlükleriniz için ayarlamış olduğunuz varsayılır.
+Bağlı cihazlar için tanılama günlüklerini ve uyarılarını açtığınızda, hata oluştuğunda uyarılar alırsınız. Bu bölümde, bir uyarı aldığınızda yaygın sorunların nasıl giderileceği açıklanmaktadır. Aşağıdaki adımlarda, tanılama günlüklerinizin Azure Izleyici günlüklerini ayarlamış olduğunuz varsayılmaktadır.
 
-1. Çalışma alanınızı gitmek **Log Analytics** Azure portalında.
+1. Azure portal **Log Analytics** için çalışma alanınıza gidin.
 
-2. Seçin **günlük arama**.
+2. **Günlük araması**' nı seçin.
 
-3. IOT Hub için bağlantı Hata günlüklerini ayırmak için aşağıdaki sorguyu girin ve ardından **çalıştırmak**:
+3. IoT Hub için bağlantı hata günlüklerini yalıtmak için aşağıdaki sorguyu girin ve **Çalıştır**' ı seçin:
 
-    ```
+    ```kusto
     search *
     | where ( Type == "AzureDiagnostics" and ResourceType == "IOTHUBS")
     | where ( Category == "Connections" and Level == "Error")
     ```
 
-1. Sonuç yoksa Ara `OperationName`, `ResultType` (hata kodu) ve `ResultDescription` (hata hakkında daha fazla ayrıntı almak için hata iletisi).
+1. Sonuçlar varsa, hata hakkında daha fazla `OperationName`ayrıntı `ResultType` almak için, (hata kodu `ResultDescription` ) ve (hata iletisi) bölümüne bakın.
 
    ![Hata günlüğü örneği](./media/iot-hub-troubleshoot-connectivity/diag-logs.png)
 
-2. Ortak hatalarını anlama ve çözme için bu tabloyu kullanın.
+2. Sık karşılaşılan hataları anlamak ve çözmek için bu tabloyu kullanın.
 
     | Hata | Kök neden | Çözüm |
     |-------|------------|------------|
-    | 404104 DeviceConnectionClosedRemotely | Cihaz tarafından bağlantı kapatıldı ancak IOT Hub neden bilmez. Yaygın nedenler MQTT/AMQP zaman aşımı ve internet bağlantısı kaybı. | Cihaz IOT hub'ına bağlanabilir olduğundan emin olun [bağlantı test ediliyor](tutorial-connectivity.md). Bağlantı bir sakınca yoktur, ancak cihaz aralıklı olarak kesiliyor Protokolü (MQTT/AMPQ) tercih ettiğiniz için uygun canlı tutma cihaz mantığını emin olun. |
-    | 401003 IoTHubUnauthorized | IOT Hub bağlantı doğrulanamıyor. | SAS ya da kullandığınız diğer güvenlik belirteci süresi olmadığından emin olun. [Azure IOT SDK'ları](iot-hub-devguide-sdks.md) otomatik olarak özel bir yapılandırma gerektirmeden belirteçleri oluşturun. |
-    | 409002 LinkCreationConflict | Bir cihaz birden fazla bağlantı var. Yeni bir bağlantı isteği için bir cihaz söz konusu olduğunda, bu hata önceki bir IOT hub'ı kapatır. | En yaygın durumda, bir cihaz bir bağlantıyı kes algılar ve bağlantıyı yeniden kurmak çalışır, ancak IOT Hub, bağlı cihaz yine de dikkate alır. IOT hub'ı önceki bağlantıyı kapatır ve bu hatayı günlüğe kaydeder. Bu hata genellikle bir yan etkisi farklı ve geçici bir sorun ortaya çıkar kadar başka hatalar da daha fazla sorun giderme için günlüklere bakın. Aksi takdirde, yeni bir bağlantı isteği bağlantı düşerse verdiğinizden emin olun. |
-    | 500001 ServerError | IOT hub'ı bir sunucu tarafı sorunla karşılaşıldı. Büyük olasılıkla sorun geçici olmasıdır. IOT hub'ı takımınızın çalıştığı bakımını yapmayı while [SLA](https://azure.microsoft.com/support/legal/sla/iot-hub/), IOT hub'ı düğümler küçük kümelerine bazen geçici hataların karşılaşırsınız. Cihazınızı sorunları bir düğüme bağlanmaya çalışırken bu hatayı alırsınız. | Geçici hata gidermek için bir yeniden deneme CİHAZDAN sorun. İçin [otomatik olarak yeniden denemeleri yönetmek](iot-hub-reliability-features-in-sdks.md#connection-and-retry), en son sürümünü kullandığınızdan emin olun [Azure IOT SDK'ları](iot-hub-devguide-sdks.md).<br><br>Geçici hata işleme ve yeniden denemeler en iyi uygulama için bkz: [geçici hata işleme](/azure/architecture/best-practices/transient-faults).  <br><br>Yeniden denemelerden sonra sorun devam ederse, kontrol [kaynak durumu](iot-hub-monitor-resource-health.md#use-azure-resource-health) ve [Azure durumu](https://azure.microsoft.com/status/history/) IOT Hub bir bilinen sorun olup olmadığını belirlemek için. Varsa herhangi bir bilinen sorun ve sorun devam ederse, [desteğe](https://azure.microsoft.com/support/options/) araştırılması için. |
-    | 500008 GenericTimeout | IOT Hub bağlantı isteği zaman aşımına uğramadan önce tamamlanamadı. Bir 500001 ServerError gibi bu hata geçici olabilir değil. | Kök neden bir 500001 ServerError için sorun giderme adımlarını izleyin ve bu hatayı çözebilirsiniz.|
+    | 404104 Deviceconnectioncloseduzaktan | Bağlantı cihaz tarafından kapatıldı, ancak IoT Hub nedenini bilmez. Genel nedenler MQTT/AMQP zaman aşımı ve internet bağlantı kaybını içerir. | Cihazın [bağlantıyı test](tutorial-connectivity.md)ederek IoT Hub bağlanabildiğinizden emin olun. Bağlantı iyi ise, ancak cihaz zaman zaman bağlantıyı kesse, protokol seçiminiz (MQTT/AMPQ) için uygun etkin tut cihaz mantığını uyguladığınızdan emin olun. |
+    | 401003 Iothubyetkilendirilmemiş | IoT Hub bağlantının kimliğini doğrulayamadı. | Kullandığınız SAS veya diğer güvenlik belirtecinin kullanım dışında olmadığından emin olun. [Azure IoT SDK 'ları](iot-hub-devguide-sdks.md) özel yapılandırma gerektirmeden belirteçleri otomatik olarak oluşturur. |
+    | 409002 LinkCreationConflict | Cihazda birden fazla bağlantı vardır. Bir cihaz için yeni bir bağlantı isteği geldiğinde, IoT Hub önceki hatayı bu hatayla kapatır. | En yaygın durumda, bir cihaz bir bağlantı kesmeyi algılar ve bağlantıyı yeniden kurmaya çalışır, ancak IoT Hub cihazın bağlı olduğunu kabul eder. IoT Hub önceki bağlantıyı kapatır ve bu hatayı günlüğe kaydeder. Bu hata genellikle farklı, geçici bir sorunun yan etkisi olarak görünür, bu nedenle daha fazla sorun gidermek için günlüklerdeki diğer hatalara bakın. Aksi takdirde, yalnızca bağlantı düşerse yeni bir bağlantı isteği yayınlediğinizden emin olun. |
+    | 500001 ServerError | IoT Hub, sunucu tarafı bir sorunla karşılaştı. Büyük olasılıkla sorun geçicidir. IoT Hub takım [SLA](https://azure.microsoft.com/support/legal/sla/iot-hub/)'yı sürdürmek için zor çalışırken, IoT Hub düğümlerin küçük alt kümeleri zaman zaman geçici hatalara karşılaşabilir. Cihazınız sorun yaşayan bir düğüme bağlanmaya çalıştığında, bu hatayı alırsınız. | Geçici hatayı azaltmak için cihazdan yeniden deneme yapın. [Yeniden denemeleri otomatik olarak yönetmek](iot-hub-reliability-features-in-sdks.md#connection-and-retry)Için [Azure IoT SDK](iot-hub-devguide-sdks.md)'larının en son sürümünü kullandığınızdan emin olun.<br><br>Geçici hata işleme ve yeniden denemeler için en iyi yöntem için bkz. [geçici hata işleme](/azure/architecture/best-practices/transient-faults).  <br><br>Sorun yeniden denemeden sonra devam ederse, IoT Hub bilinen bir sorun olup olmadığını görmek için [kaynak durumu](iot-hub-monitor-resource-health.md#use-azure-resource-health) ve [Azure durumunu](https://azure.microsoft.com/status/history/) kontrol edin. Bilinen bir sorun yoksa ve sorun devam ederse, daha fazla araştırma için [desteğe başvurun](https://azure.microsoft.com/support/options/) . |
+    | 500008 GenericTimeout | IoT Hub, zaman aşımından önce bağlantı isteğini tamamlayamadı. 500001 sunucubir hata gibi, bu hata muhtemelen geçicidir. | 500001 sunucubir hata için sorun giderme adımlarını temel neden izleyin ve bu hatayı çözün.|
 
-## <a name="other-steps-to-try"></a>Diğer adımları deneyin
+## <a name="other-steps-to-try"></a>Denemek için diğer adımlar
 
-Önceki adımları yaramazsa deneyebilirsiniz:
+Önceki adımlarda yardım olmadıysa, şunları deneyebilirsiniz:
 
-* Sorunlu cihazlara fiziksel olarak veya uzaktan (SSH) gibi erişiminiz varsa izleyin [aygıt tarafı sorun giderme kılavuzu](https://github.com/Azure/azure-iot-sdk-node/wiki/Troubleshooting-Guide-Devices) sorun giderme devam etmek için.
+* Fiziksel veya uzaktan (SSH gibi) sorunlu cihazlara erişiminiz varsa, sorun gidermeye devam etmek için [cihaz tarafı sorun giderme kılavuzunu](https://github.com/Azure/azure-iot-sdk-node/wiki/Troubleshooting-Guide-Devices) izleyin.
 
-* Cihazlarınızı doğrulayın **etkin** Azure portalında > IOT hub'ınıza > IOT cihazları.
+* IoT Hub 'ınızın > IoT cihazlarınızın Azure portal >, cihazlarınızın **etkinleştirildiğini** doğrulayın.
 
-* Yardım almak [Azure IOT hub'ı Forumu](https://social.msdn.microsoft.com/Forums/azure/home?forum=azureiothub), [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-iot-hub), veya [Azure Destek](https://azure.microsoft.com/support/options/).
+* [Azure IoT Hub Forumu](https://social.msdn.microsoft.com/Forums/azure/home?forum=azureiothub), [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-iot-hub)veya [Azure desteğiyle](https://azure.microsoft.com/support/options/)yardım alın.
 
-Bu kılavuzda işe yaramazsa herkesin belgelerini geliştirmeye yardımcı olmak için bir geri bildirim bölümünde yorum.
+Herkesin belgelerinin artırılmasına yardımcı olmak için, bu kılavuz size yardımcı olmadıysa aşağıdaki geri bildirim bölümünde bir yorum bırakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Geçici bir sorun giderme hakkında daha fazla bilgi için bkz. [geçici hata işleme](/azure/architecture/best-practices/transient-faults).
+* Geçici sorunları çözme hakkında daha fazla bilgi için bkz. [geçici hata işleme](/azure/architecture/best-practices/transient-faults).
 
-* Azure IOT SDK'sı hakkında daha fazla bilgi edinin ve deneme için bkz. [bağlantı ve Azure IOT Hub cihazı SDK'larını kullanarak güvenilir Mesajlaşma yönetme](iot-hub-reliability-features-in-sdks.md#connection-and-retry).
+* Azure IoT SDK ve yeniden denemeleri yönetme hakkında daha fazla bilgi edinmek için bkz. [azure IoT Hub cihaz SDK 'larını kullanarak bağlantı ve güvenilir mesajlaşma yönetimi](iot-hub-reliability-features-in-sdks.md#connection-and-retry).

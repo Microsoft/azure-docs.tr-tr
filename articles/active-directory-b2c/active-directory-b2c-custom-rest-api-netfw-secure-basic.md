@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.date: 09/25/2017
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 08aebf698a7a00729a0e37b57cb15938853e4185
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.openlocfilehash: 8c1251056ad816af664f95abcd18d50ceca4619d
+ms.sourcegitcommit: 64798b4f722623ea2bb53b374fb95e8d2b679318
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67501626"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67835273"
 ---
 # <a name="secure-your-restful-services-by-using-http-basic-authentication"></a>HTTP temel kimlik doğrulaması kullanarak, RESTful Hizmetleri güvenli hale getirme
 
@@ -76,12 +76,12 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
 
 2. İçinde **adı** kutusuna **ClientAuthMiddleware.cs**.
 
-   ![Yeni C# sınıfı oluşturma](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-secure-basic-OWIN-startup-auth2.png)
+   ![Yeni bir oluşturma C# Visual Studio'da yeni öğe Ekle iletişim kutusu sınıfında](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-secure-basic-OWIN-startup-auth2.png)
 
 3. Açık *App_Start\ClientAuthMiddleware.cs* dosyasını ve dosya içeriğini aşağıdaki kodla değiştirin:
 
     ```csharp
-    
+
     using Microsoft.Owin;
     using System;
     using System.Collections.Generic;
@@ -91,7 +91,7 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
     using System.Text;
     using System.Threading.Tasks;
     using System.Web;
-    
+
     namespace Contoso.AADB2C.API
     {
         /// <summary>
@@ -101,12 +101,12 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
         {
             private static readonly string ClientID = ConfigurationManager.AppSettings["WebApp:ClientId"];
             private static readonly string ClientSecret = ConfigurationManager.AppSettings["WebApp:ClientSecret"];
-    
+
             /// <summary>
             /// Gets or sets the next owin middleware
             /// </summary>
             private Func<IDictionary<string, object>, Task> Next { get; set; }
-    
+
             /// <summary>
             /// Initializes a new instance of the <see cref="ClientAuthMiddleware"/> class.
             /// </summary>
@@ -115,7 +115,7 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
             {
                 this.Next = next;
             }
-    
+
             /// <summary>
             /// Invoke client authentication middleware during each request.
             /// </summary>
@@ -125,7 +125,7 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
             {
                 // Get wrapper class for the environment
                 var context = new OwinContext(environment);
-    
+
                 // Check whether the authorization header is available. This contains the credentials.
                 var authzValue = context.Request.Headers.Get("Authorization");
                 if (string.IsNullOrEmpty(authzValue) || !authzValue.StartsWith("Basic ", StringComparison.OrdinalIgnoreCase))
@@ -133,21 +133,21 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
                     // Process next middleware
                     return Next(environment);
                 }
-    
+
                 // Get credentials
                 var creds = authzValue.Substring("Basic ".Length).Trim();
                 string clientId;
                 string clientSecret;
-    
+
                 if (RetrieveCreds(creds, out clientId, out clientSecret))
                 {
                     // Set transaction authenticated as client
                     context.Request.User = new GenericPrincipal(new GenericIdentity(clientId, "client"), new string[] { "client" });
                 }
-    
+
                 return Next(environment);
             }
-    
+
             /// <summary>
             /// Retrieve credentials from header
             /// </summary>
@@ -159,7 +159,7 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
             {
                 string pair;
                 clientId = clientSecret = string.Empty;
-    
+
                 try
                 {
                     pair = Encoding.UTF8.GetString(Convert.FromBase64String(credentials));
@@ -172,16 +172,16 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
                 {
                     return false;
                 }
-    
+
                 var ix = pair.IndexOf(':');
                 if (ix == -1)
                 {
                     return false;
                 }
-    
+
                 clientId = pair.Substring(0, ix);
                 clientSecret = pair.Substring(ix + 1);
-    
+
                 // Return whether credentials are valid
                 return (string.Compare(clientId, ClientAuthMiddleware.ClientID) == 0 &&
                     string.Compare(clientSecret, ClientAuthMiddleware.ClientSecret) == 0);
@@ -195,14 +195,14 @@ Ekleme `ClientAuthMiddleware.cs` altında sınıfı *App_Start* klasör. Bunu ya
 Adlı bir OWIN başlangıç sınıfı ekleyin `Startup.cs` API. Bunu yapmak için:
 1. Projeye sağ tıklayın, **Ekle** > **yeni öğe**ve ardından arama **OWIN**.
 
-   ![OWIN başlangıç sınıfı ekleme](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-secure-basic-OWIN-startup.png)
+   ![Visual Studio'da yeni öğe Ekle iletişim kutusunda OWIN başlangıç sınıfı oluşturma](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-secure-basic-OWIN-startup.png)
 
 2. Açık *Startup.cs* dosyasını ve dosya içeriğini aşağıdaki kodla değiştirin:
 
     ```csharp
     using Microsoft.Owin;
     using Owin;
-    
+
     [assembly: OwinStartup(typeof(Contoso.AADB2C.API.Startup))]
     namespace Contoso.AADB2C.API
     {
@@ -241,7 +241,7 @@ RESTful hizmetiniz istemci kimliği (kullanıcı adı) ve gizli dizi tarafından
 
 4. İçin **seçenekleri**seçin **el ile**.
 
-5. İçin **adı**, türü **B2cRestClientId**.  
+5. İçin **adı**, türü **B2cRestClientId**.
     Önek *B2C_1A_* otomatik olarak eklenebilir.
 
 6. İçinde **gizli** kutusunda, daha önce tanımlanan uygulama kimliği girin.
@@ -262,7 +262,7 @@ RESTful hizmetiniz istemci kimliği (kullanıcı adı) ve gizli dizi tarafından
 
 4. İçin **seçenekleri**seçin **el ile**.
 
-5. İçin **adı**, türü **B2cRestClientSecret**.  
+5. İçin **adı**, türü **B2cRestClientSecret**.
     Önek *B2C_1A_* otomatik olarak eklenebilir.
 
 6. İçinde **gizli** kutusunda, daha önce tanımlanan uygulama gizli anahtarı girin.
@@ -297,8 +297,8 @@ RESTful hizmetiniz istemci kimliği (kullanıcı adı) ve gizli dizi tarafından
     ```
 
     Kod parçacığı eklendikten sonra teknik profilinizi şu XML kod gibi görünmelidir:
-    
-    ![Temel kimlik doğrulaması XML öğeleri Ekle](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-secure-basic-add-1.png)
+
+    ![TechnicalProfile için temel kimlik doğrulaması XML öğeleri Ekle](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-secure-basic-add-1.png)
 
 ## <a name="step-5-upload-the-policy-to-your-tenant"></a>5\. Adım: Kiracınız için ilkeyi karşıya yükle
 
@@ -323,12 +323,12 @@ RESTful hizmetiniz istemci kimliği (kullanıcı adı) ve gizli dizi tarafından
 
 2. Açık **B2C_1A_signup_signin**, yüklenmiş ve ardından bağlı olan taraf (RP) özel ilke **Şimdi Çalıştır**.
 
-3. İşlem yazarak test edin **Test** içinde **verilen ad** kutusu.  
+3. İşlem yazarak test edin **Test** içinde **verilen ad** kutusu.
     Azure AD B2C, pencerenin en üstünde bir hata iletisi görüntüler.
 
-    ![Kimliğinizi API testi](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-test.png)
+    ![Kimliğinizi API verilen ad giriş doğrulama sınaması](media/aadb2c-ief-rest-api-netfw-secure-basic/rest-api-netfw-test.png)
 
-4. İçinde **verilen ad** ("Test" dışında) bir ad yazın.  
+4. İçinde **verilen ad** ("Test" dışında) bir ad yazın.
     Azure AD B2C kullanıcı oturum açtığında ve uygulamanızı bir bağlılık sayı gönderir. Bu örnekte numarasını not edin:
 
     ```

@@ -1,77 +1,80 @@
 ---
-title: Rol tabanlı erişim denetimi (RBAC) ile Azure Site Recovery erişimini yönetme | Microsoft Docs
-description: Bu makalede rol tabanlı erişim denetimi (RBAC) Azure Site Recovery erişimi yönetmek için nasıl uygulanacağını açıklar.
+title: Azure Site Recovery 'de Azure rol tabanlı erişim denetimini yönetme
+description: Bu makalede, Azure Site Recovery erişimini yönetmek için rol tabanlı erişim denetimi 'nin (RBAC) nasıl uygulanacağı açıklanır.
 ms.service: site-recovery
 ms.date: 04/08/2019
 author: mayurigupta13
 ms.topic: conceptual
 ms.author: mayg
-ms.openlocfilehash: 33fc2cd19152fb6cbbffb106aa058948d39555f9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ce389f9281b02662f87353f00c9bca92cdf86937
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61471443"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083772"
 ---
-# <a name="manage-site-recovery-access-with-role-based-access-control-rbac"></a>Rol tabanlı erişim denetimi (RBAC) Site Recovery erişimini yönetme
+# <a name="manage-site-recovery-access-with-role-based-access-control-rbac"></a>Rol tabanlı erişim denetimi (RBAC) ile Site Recovery erişimini yönetme
 
-Azure Rol Tabanlı Erişim Denetimi (RBAC), Azure için ayrıntılı erişim yönetimi sağlar. RBAC kullanarak, kendi sorumluluklarını ayırabilir ve belirli işlerini gerçekleştirmek için gereken şekilde kullanıcılara yalnızca belirli erişim izinleri verme.
+Azure rol tabanlı erişim denetimi (RBAC), Azure için ayrıntılı erişim yönetimine izin vermez. RBAC kullanarak, takımlarınızın içindeki sorumlulukları ayırabilirsiniz ve belirli işleri gerçekleştirmek için gerektiğinde kullanıcılara yalnızca belirli erişim izinleri verebilirsiniz.
 
 Azure Site Recovery, Site Recovery yönetim işlemlerini denetlemek için 3 yerleşik rol sağlar. [Azure RBAC yerleşik rolleri](../role-based-access-control/built-in-roles.md) hakkında daha fazla bilgi edinin
 
-* [Site Recovery Katkıda Bulunanı](../role-based-access-control/built-in-roles.md#site-recovery-contributor) - Bu rol, Kurtarma Hizmetleri kasasında Site Recovery işlemlerini yönetmek için gereken tüm izinlere sahiptir. Ancak bu role sahip kullanıcı, Kurtarma Hizmetleri kasasını oluşturamaz veya silemez ya da diğer kullanıcılara erişim hakkı atayamaz. Bu rol etkinleştirebilen ve uygulamalar veya kuruluşların tamamı için olağanüstü durum kurtarma gibi durumda may olmak yönetme olağanüstü durum kurtarma yöneticileri için idealdir.
-* [Site Recovery Operatörü](../role-based-access-control/built-in-roles.md#site-recovery-operator) - Bu rol, Yük Devretme ve Yeniden Çalışma işlemlerini yürütme ve yönetme izinlerine sahiptir. Bu role sahip bir kullanıcı etkinleştiremez veya çoğaltmayı devre dışı bırak, oluşturma veya kasa silme, yeni altyapılar kaydedebilir veya diğer kullanıcılara erişim hakkı atayabilirsiniz. Bu rol yük devretme sanal makinelerini bir olağanüstü durum kurtarma operatörü için idealdir veya uygulama sahipleri ve BT yöneticileri bir DR gibi bir gerçek veya sanal bir olağanüstü durumda tarafından istendiğinde uygulamaları detayına gidin. POST çözümleme olağanüstü DR operatörü yeniden koruma altına alabilir ve yeniden çalışma sanal makineler.
-* [Site Recovery Okuyucusu](../role-based-access-control/built-in-roles.md#site-recovery-reader) - Bu rol tüm Site Recovery yönetim işlemlerini görüntüleme iznine sahiptir. Bu rol kullanan mevcut koruma durumunu izleyebilir ve gerekirse destek biletleri oluşturabilen BT izleme Yöneticisi için idealdir.
+* [Site Recovery Katkıda Bulunanı](../role-based-access-control/built-in-roles.md#site-recovery-contributor) - Bu rol, Kurtarma Hizmetleri kasasında Site Recovery işlemlerini yönetmek için gereken tüm izinlere sahiptir. Ancak bu role sahip kullanıcı, Kurtarma Hizmetleri kasasını oluşturamaz veya silemez ya da diğer kullanıcılara erişim hakkı atayamaz. Bu rol, büyük/küçük harf gibi durumlarda uygulamalar veya tüm kuruluşlar için olağanüstü durum kurtarmayı etkinleştirebilen ve yönetebilen olağanüstü durum kurtarma yöneticileri için idealdir.
+* [Site Recovery Operatörü](../role-based-access-control/built-in-roles.md#site-recovery-operator) - Bu rol, Yük Devretme ve Yeniden Çalışma işlemlerini yürütme ve yönetme izinlerine sahiptir. Bu role sahip bir Kullanıcı çoğaltmayı etkinleştiremez veya devre dışı bırakamayabilir, kasa oluşturabilir veya silebilir, yeni altyapıyı kaydedebilir veya diğer kullanıcılara erişim hakları atayabilir. Bu rol, uygulama sahipleri ve BT yöneticileri tarafından bir DR detaya gitme gibi gerçek ya da sanal bir olağanüstü durum durumunda, sanal makinelerin veya uygulamaların yükünü önleyebilen bir olağanüstü durum kurtarma operatörü için en uygun seçenektir. Olağanüstü durum çözümlemesi sonrasında DR işletmeni, sanal makineleri yeniden koruyabilir ve yeniden gerçekleştirebilir.
+* [Site Recovery Okuyucusu](../role-based-access-control/built-in-roles.md#site-recovery-reader) - Bu rol tüm Site Recovery yönetim işlemlerini görüntüleme iznine sahiptir. Bu rol, güncel koruma durumunu izleyebilen ve gerekirse destek biletleri veren BT izleme Yöneticisi için idealdir.
 
-Daha fazla denetim için kendi rolleri tanımlamak için arıyorsanız, bkz. nasıl [özel roller oluşturma](../role-based-access-control/custom-roles.md) azure'da.
+Daha da fazla denetim için kendi rollerinizi tanımlamak istiyorsanız bkz. Azure 'da [özel roller oluşturma](../role-based-access-control/custom-roles.md) .
 
 ## <a name="permissions-required-to-enable-replication-for-new-virtual-machines"></a>Yeni sanal makineler için çoğaltmayı etkinleştirmek için gereken izinler
-Yeni bir sanal makine Azure Site Recovery kullanılarak Azure'a çoğaltılırken, ilişkili kullanıcının erişim düzeyi kullanıcının Site Recovery için sağlanan Azure kaynakları için gerekli izinlere sahip olduğundan emin olmak doğrulanır.
+Yeni bir sanal makine Azure Site Recovery kullanılarak Azure 'a çoğaltıldığında, kullanıcının Site Recovery için belirtilen Azure kaynaklarını kullanmak için gerekli izinlere sahip olduğundan emin olmak için ilişkili kullanıcının erişim düzeyleri onaylanır.
 
-Yeni bir sanal makineye yönelik çoğaltmayı etkinleştirmek için bir kullanıcı olması gerekir:
-* Seçilen kaynak grubunda bir sanal makine oluşturma izni
-* Seçilen sanal ağda bir sanal makine oluşturma izni
-* Seçili depolama hesabına yazma izni
+Yeni bir sanal makine için çoğaltmayı etkinleştirmek üzere bir Kullanıcı şunları içermelidir:
+* Seçili kaynak grubunda sanal makine oluşturma izni
+* Seçilen sanal ağda sanal makine oluşturma izni
+* Seçilen depolama hesabına yazma izni
 
-Bir kullanıcı yeni bir sanal makine çoğaltmayı tamamlamak için aşağıdaki izinler gerekiyor.
+Bir kullanıcının yeni bir sanal makinenin çoğaltmasını tamamlaması için aşağıdaki izinlere ihtiyacı vardır.
 
 > [!IMPORTANT]
->İlgili izinler dağıtım modeli eklendiğinden emin olun (Resource Manager / Klasik) kaynak dağıtımı için kullanılır.
+>Kaynak dağıtımı için kullanılan dağıtım modeli (Kaynak Yöneticisi/klasik) başına ilgili izinlerin eklendiğinden emin olun.
 
-| **Kaynak Türü** | **Dağıtım modeli** | **İzni** |
+> [!NOTE]
+> Bir Azure VM için çoğaltmayı etkinleştirip Site Recovery güncelleştirmeleri yönetmesine izin vermek istiyorsanız, çoğaltmayı etkinleştirirken Ayrıca, aynı zamanda bir Otomasyon hesabı oluşturmak için izninizin olması gereken yeni bir Otomasyon hesabı oluşturmak isteyebilirsiniz. kasa olarak da abonelik.
+
+| **Kaynak Türü** | **Dağıtım modeli** | **Yetkisi** |
 | --- | --- | --- |
-| İşlem | Resource Manager | Microsoft.Compute/availabilitySets/read |
-|  |  | Microsoft.Compute/virtualMachines/read |
-|  |  | Microsoft.Compute/virtualMachines/write |
-|  |  | Microsoft.Compute/virtualMachines/delete |
-|  | Klasik | Microsoft.ClassicCompute/domainNames/read |
-|  |  | Microsoft.ClassicCompute/domainNames/write |
-|  |  | Microsoft.ClassicCompute/domainNames/delete |
-|  |  | Microsoft.ClassicCompute/virtualMachines/read |
-|  |  | Microsoft.ClassicCompute/virtualMachines/write |
-|  |  | Microsoft.ClassicCompute/virtualMachines/delete |
-| Ağ | Resource Manager | Microsoft.Network/networkInterfaces/read |
+| Bilgi İşlem | Resource Manager | Microsoft. COMPUTE/kullanılabilirliği Bilitysets/Read |
+|  |  | Microsoft. COMPUTE/virtualMachines/okuma |
+|  |  | Microsoft. COMPUTE/virtualMachines/Write |
+|  |  | Microsoft. COMPUTE/virtualMachines/Delete |
+|  | Klasik | Microsoft. ClassicCompute/domainNames/Read |
+|  |  | Microsoft. ClassicCompute/domainNames/Write |
+|  |  | Microsoft. ClassicCompute/domainNames/Delete |
+|  |  | Microsoft. ClassicCompute/virtualMachines/okuma |
+|  |  | Microsoft. ClassicCompute/virtualMachines/Write |
+|  |  | Microsoft. ClassicCompute/virtualMachines/Delete |
+| Ağ | Resource Manager | Microsoft. Network/NetworkInterfaces/Read |
 |  |  | Microsoft.Network/networkInterfaces/write |
-|  |  | Microsoft.Network/networkInterfaces/delete |
+|  |  | Microsoft. Network/NetworkInterfaces/Delete |
 |  |  | Microsoft.Network/networkInterfaces/join/action |
-|  |  | Microsoft.Network/virtualNetworks/read |
-|  |  | Microsoft.Network/virtualNetworks/subnets/read |
-|  |  | Microsoft.Network/virtualNetworks/subnets/join/action |
-|  | Klasik | Microsoft.ClassicNetwork/virtualNetworks/read |
+|  |  | Microsoft. Network/virtualNetworks/Read |
+|  |  | Microsoft. Network/virtualNetworks/alt ağlar/okuma |
+|  |  | Microsoft. Network/virtualNetworks/alt ağlar/JOIN/Action |
+|  | Klasik | Microsoft. ClassicNetwork/virtualNetworks/Read |
 |  |  | Microsoft.ClassicNetwork/virtualNetworks/join/action |
-| Depolama | Resource Manager | Microsoft.Storage/storageAccounts/read |
-|  |  | Microsoft.Storage/storageAccounts/listkeys/action |
+| Depolama | Resource Manager | Microsoft. Storage/storageAccounts/Read |
+|  |  | Microsoft. Storage/storageAccounts/ListKeys/Action |
 |  | Klasik | Microsoft.ClassicStorage/storageAccounts/read |
 |  |  | Microsoft.ClassicStorage/storageAccounts/listKeys/action |
-| Kaynak Grubu | Resource Manager | Microsoft.Resources/deployments/* |
-|  |  | Microsoft.Resources/subscriptions/resourceGroups/read |
+| Kaynak Grubu | Resource Manager | Microsoft. resources/dağıtımlar/* |
+|  |  | Microsoft. resources/abonelikler/resourceGroups/Read |
 
-'Sanal makine Katılımcısı' ve 'Klasik sanal makine Katılımcısı' kullanmayı düşünün [yerleşik roller](../role-based-access-control/built-in-roles.md) için Resource Manager ve klasik dağıtım modelleri sırasıyla.
+Sırasıyla Kaynak Yöneticisi ve klasik dağıtım modelleriyle ilgili ' sanal makine katılımcısı ' ve ' klasik sanal makine katılımcısı ' [yerleşik rollerini](../role-based-access-control/built-in-roles.md) kullanmayı göz önünde bulundurun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Rol tabanlı erişim denetimi](../role-based-access-control/role-assignments-portal.md): Azure portalında RBAC ile çalışmaya başlayın.
-* Erişim ile yönetmeyi öğrenin:
+* [Rol tabanlı Access Control](../role-based-access-control/role-assignments-portal.md): Azure Portal RBAC ile çalışmaya başlayın.
+* İle erişimin nasıl yönetileceğini öğrenin:
   * [PowerShell](../role-based-access-control/role-assignments-powershell.md)
   * [Azure CLI](../role-based-access-control/role-assignments-cli.md)
   * [REST API](../role-based-access-control/role-assignments-rest.md)
-* [Rol tabanlı erişim denetimi sorunlarını giderme](../role-based-access-control/troubleshooting.md): Yaygın sorunları çözme için öneriler alın.
+* [Rol tabanlı Access Control sorun giderme](../role-based-access-control/troubleshooting.md): yaygın sorunları gidermeye yönelik öneriler alın.

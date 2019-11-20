@@ -4,12 +4,12 @@ ms.service: virtual-machines-sql
 ms.topic: include
 ms.date: 05/13/2019
 ms.author: mathoma
-ms.openlocfilehash: 90c85b97f0d2de359f9debda3703e9a2f2d41112
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 5a9feb559a73fa16ae3e711151102f2d02dba5b4
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67075739"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68846114"
 ---
   > [!NOTE]
-  > Aşağıdaki ekran görüntüleri arasındadır **SQL sanal makineleri** Azure portalındaki kaynak. İçin [destek sonu (EOS)](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-server-2008-eos-extend-support.md) SQL server Vm'leri ve ile kaydedilmemiş bir SQL Server Vm'leri [SQL VM kaynak sağlayıcısı](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-ahb.md), kullanın [SQL Server yapılandırma sekmesinde](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-manage-portal.md#access-sql-server-configuration-tab) için Bunun yerine SQL Server VM'nize yönetin. 
+  > Aşağıdaki ekran görüntüleri Azure portal içindeki **SQL sanal makineler** kaynağıdır. [Destek sonu (EOS)](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-server-2008-eos-extend-support.md) SQL Server sanal makineleri ve [SQL VM kaynak sağlayıcısına](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-ahb.md)kayıtlı olmayan VM 'ler SQL Server, bunun yerine SQL Server VM yönetmek için [SQL Server Yapılandırma sekmesini](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-manage-portal.md#access-the-sql-server-configuration-tab) kullanın. 

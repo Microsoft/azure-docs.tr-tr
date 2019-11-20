@@ -1,5 +1,5 @@
 ---
-title: Uygulama sayfası için bir uygulama proxy'si uygulaması düzgün görüntülemez | Microsoft Docs
+title: Uygulama sayfası uygulama proxy 'Si uygulaması için doğru görüntülenmez | Microsoft Docs
 description: Azure AD ile tümleştirilmiş sayfanın içinde uygulama proxy'si uygulamasını doğru görüntülenmiyor olduğunda Kılavuzu
 services: active-directory
 documentationcenter: ''
@@ -15,12 +15,12 @@ ms.date: 05/21/2018
 ms.author: mimart
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 99c2c53f3bf723c1d45edf2e62cd404615924c9b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 13e73f0ed56648ce162f00d6df5e7b86a922ca01
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65783729"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68381421"
 ---
 # <a name="application-page-does-not-display-correctly-for-an-application-proxy-application"></a>Uygulama sayfası için bir uygulama proxy'si uygulaması düzgün görüntülenmiyor
 
@@ -29,7 +29,7 @@ Bu makalede sayfasına gidin, ancak sayfadaki bir şey doğru görünmüyor Azur
 ## <a name="overview"></a>Genel Bakış
 Bir uygulama proxy'si uygulama yayımladığınızda, uygulamaya erişirken yalnızca, kök altında sayfalarını daha erişilebilir. Uygulama için kullanılan kök İç URL sayfası doğru görüntülenmiyor, bazı sayfa kaynaklar eksik olabilir. Çözümlemek için yayımladığınız emin olun *tüm* kaynaklar için sayfa, uygulamanızın bir parçası olarak.
 
-Eksik sorunun Ağ İzleyicisi'ni açarak olup olmadığını doğrulayabilirsiniz (Fiddler veya F12 gibi araçları Internet Explorer/Microsoft edge'de), sayfa yükleme ve 404 hatalarını aranıyor. Bu sayfa şu anda bulunamıyor ve bunları yayımlamak gereken gösterir.
+Ağ izleyicinizi (ör. Fiddler veya Internet Explorer/Microsoft Edge 'de F12 araçları) açarak, sayfayı yükleyerek ve 404 hata arayarak sorunu eksik kaynaklarda doğrulayabilirsiniz. Bu sayfa şu anda bulunamıyor ve bunları yayımlamak gereken gösterir.
 
 Bu durumda bir örnek olarak, dahili URL'yi kullanarak masrafları uygulama yayımladığınız varsayılmaktadır `http://myapps/expenses`, ancak stil uygulamanın kullandığı `http://myapps/style.css`. Bu durumda, stil sayfası, masrafları uygulama yükleme durum için bir 404 hatası style.css yüklenmeye çalışılırken, uygulamanızda yayımlanmaz. Bu örnekte, bir iç URL uygulamayla yayımlayarak Sorun çözülene `http://myapp/`.
 

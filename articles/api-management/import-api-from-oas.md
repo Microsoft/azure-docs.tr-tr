@@ -9,16 +9,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
-ms.date: 11/22/2017
+ms.date: 07/12/2019
 ms.author: apimpm
-ms.openlocfilehash: b1602af59cd46b4bbcefa6f1df3cd84c0d342b71
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 2b5bcd0d3bba914b81e305c88a512645c1a1c258
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60236465"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74108516"
 ---
 # <a name="import-an-openapi-specification"></a>OpenAPI belirtimini içeri aktarma
 
@@ -44,7 +43,8 @@ Bu makalede şunları öğreneceksiniz:
 
 1. **API YÖNETİMİ** bölümünden **API’ler** öğesini seçin.
 2. **Yeni API ekle** listesinden **OpenAPI belirtimi**’ni seçin.
-    ![OpenAPI belirtimi](./media/import-api-from-oas/oas-api.png)
+
+    ![Openapı belirtimi](./media/import-api-from-oas/oas-api.png)
 3. Uygun ayarları girin. Oluşturma sırasında tüm API değerlerini ayarlayabilirsiniz. Alternatif olarak, **Ayarlar** sekmesine giderek bunların bazılarını daha sonra ayarlayabilirsiniz. <br/> **Sekme** tuşuna basarsanız, alanların bazıları (veya tümü), belirtilen arka uç hizmetindeki bilgilerle doldurulur.
 
     ![Bir API oluşturma](./media/api-management-get-started/create-api.png)
@@ -53,48 +53,29 @@ Bu makalede şunları öğreneceksiniz:
     |---|---|---|
     |**OpenAPI Belirtimi**|https://conferenceapi.azurewebsites.net?format=json|API’yi uygulayan hizmete başvurur. API Management istekleri bu adrese iletir.|
     |**Görünen ad**|*Tanıtım Konferansı API’si*|Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur. <br/>Bu ad, Geliştirici portalında görüntülenir.|
-    |**Ad**|*demo-conference-api*|API için benzersiz bir ad sağlar. <br/>Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur.|
+    |**Adı**|*demo-conference-api*|API için benzersiz bir ad sağlar. <br/>Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur.|
     |**Açıklama**|API için isteğe bağlı bir açıklama sağlayın.|Hizmet URL’sini girdikten sonra sekme tuşuna basarsanız APIM, json'da ne olduğuna bağlı olarak bu alanı doldurur.|
     |**API URL’si soneki**|*conference*|Sonek, API yönetimi hizmetinin temel URL’sinin sonuna eklenir. API Management API'leri soneklerine bakarak ayırt eder; dolayısıyla belirli bir yayımcıdaki her API için sonekin benzersiz olması gerekir.|
     |**URL düzeni**|*HTTPS*|API’ye erişmek için hangi protokollerin kullanılabileceğini belirler. |
-    |**Ürünler**|*Sınırsız*| API’yi bir ürünle ilişkilendirerek yayımlayın. İsteğe bağlı olarak bu yeni API’yi bir ürüne ekleyin, ürün adını yazın. Bu adım, API’yi birden fazla ürüne eklemek için birçok defa yinelenebilir.<br/>Ürünler bir veya daha fazla API arasındaki ilişkilendirmelerdir. Bir dizi API ekleyebilir ve geliştirici portalı aracılığıyla geliştiricilere sunabilirsiniz. Geliştiricilerin bir API’ye erişebilmesi için önce ürüne abone olması gerekir. Abone olduklarında, ilgili üründeki tüm API’ler için geçerli olan bir abonelik anahtarı edinirler. APIM örneğini siz oluşturduysanız zaten bir yöneticisinizdir ve varsayılan olarak tüm ürünlere abone olmuşsunuz demektir.<br/> Varsayılan olarak, her bir API Management örneği iki örnek ürün ile birlikte gelir: **Başlangıç** ve **sınırsız**. |
+    |**Ürünler**|*Sınırsız*| API’yi bir ürünle ilişkilendirerek yayımlayın. İsteğe bağlı olarak bu yeni API’yi bir ürüne ekleyin, ürün adını yazın. Bu adım, API’yi birden fazla ürüne eklemek için birçok defa yinelenebilir.<br/>Ürünler bir veya daha fazla API arasındaki ilişkilendirmelerdir. Bir dizi API ekleyebilir ve geliştirici portalı aracılığıyla geliştiricilere sunabilirsiniz. Geliştiricilerin bir API’ye erişebilmesi için önce ürüne abone olması gerekir. Abone olduklarında, ilgili üründeki tüm API’ler için geçerli olan bir abonelik anahtarı edinirler. APIM örneğini siz oluşturduysanız zaten bir yöneticisinizdir ve varsayılan olarak tüm ürünlere abone olmuşsunuz demektir.<br/> Varsayılan olarak, her bir API Management örneği iki örnek ürün ile birlikte gelir: **Başlangıç** ve **Sınırsız**. |
 
-4. **Oluştur**’u seçin.
+4. **Oluştur**'u seçin.
 
-## <a name="test-the-new-apim-api-in-the-azure-portal"></a>Azure portalında yeni APIM API’sini test etme
+> [!NOTE]
+> API içeri aktarma sınırlamaları, [başka bir makalede](api-management-api-import-restrictions.md)belgelenmiştir.
+
+## <a name="test-the-new-api-in-the-azure-portal"></a>Azure portal yeni API 'YI test etme
+
+![API haritasını test etme](./media/api-management-get-started/01-import-first-api-01.png)
 
 İşlemler doğrudan bir API’nin işlemlerini görüntülemek ve test etmek için kullanışlı bir yol sağlayan Azure portalından çağrılabilir.
 
-![API’yi test et](./media/api-management-get-started/01-import-first-api-01.png)
-
-1. Önceki adımda oluşturduğunuz API’yi seçin.
+1. Önceki adımda oluşturduğunuz API’yi seçin (**API’ler** sekmesinden).
 2. **Test** sekmesine basın.
-3. **GetSpeakers** seçeneğine tıklayın.
-
-    Sayfa, sorgu parametreleri için alanları görüntüler, ancak bu durumda bir alan yok. Sayfa, üst bilgiler için de alanları görüntüler. Bu API ile ilişkilendirilmiş ürünün abonelik anahtarı için, üst bilgilerden biri "Ocp-Apim-Subscription-Key" üst bilgisidir. APIM örneğini siz oluşturduysanız zaten bir yöneticisinizdir ve anahtar otomatik olarak doldurulur.
+3. **GetSpeakers** seçeneğine tıklayın. Sayfa, sorgu parametreleri alanlarını ve üst bilgileri görüntüler, ancak bu durumda bir alan yok. Bu API ile ilişkilendirilmiş ürünün abonelik anahtarı için, üst bilgilerden biri "Ocp-Apim-Subscription-Key" üst bilgisidir. Anahtar otomatik olarak doldurulur.
 4. **Gönder**’e basın.
 
     Arka uç, **200 OK** ve bazı verilerle yanıt verir.
-
-## <a name="call-operation"> </a>Geliştirici portalından işlem çağırma
-
-API’leri test etmek için **Geliştirici portalından** da işlemler çağrılabilir.
-
-1. "Arka uç API’sini içeri aktarma ve yayımlama" adımında oluşturduğunuz API’yi seçin.
-2. **Geliştirici portalı** düğmesine basın.
-
-    ![Geliştirici portalında test etme](./media/api-management-get-started/developer-portal.png)
-
-    "Geliştirici portalı" sitesi açılır.
-3. **API**’yi seçin.
-4. **Tanıtım Konferansı API’si** seçeneğini belirleyin.
-5. **GetSpeakers**’a tıklayın.
-
-    Sayfa, sorgu parametreleri için alanları görüntüler, ancak bu durumda bir alan yok. Sayfa, üst bilgiler için de alanları görüntüler. Bu API ile ilişkilendirilmiş ürünün abonelik anahtarı için, üst bilgilerden biri "Ocp-Apim-Subscription-Key" üst bilgisidir. APIM örneğini siz oluşturduysanız zaten bir yöneticisinizdir ve anahtar otomatik olarak doldurulur.
-6. **Deneyin**’e basın.
-7. **Gönder**’e basın.
-
-    Bir işlem çağrıldıktan sonra, geliştirici portalı **Yanıt durumu**, **Yanıt üst ilgileri** ve tüm **Yanıt içeriğini** gösterir.
 
 [!INCLUDE [api-management-navigate-to-instance.md](../../includes/api-management-append-apis.md)]
 

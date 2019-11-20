@@ -2,57 +2,57 @@
 title: Azure’da Kubernetes öğreticisi - Uygulamayı dağıtma
 description: Bu Azure Kubernetes Service (AKS) öğreticisinde, Azure Container Registry'de depolanan özel bir görüntüyü kullanarak kümenizde çok kapsayıcılı bir uygulama dağıtacaksınız.
 services: container-service
-author: tylermsft
+author: mlearned
 ms.service: container-service
 ms.topic: tutorial
 ms.date: 12/19/2018
-ms.author: twhitney
+ms.author: mlearned
 ms.custom: mvc
-ms.openlocfilehash: c579aed1acb555a82d5a04308ab4e68f4bfecb8c
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: cc01b12e493f3e0d3cd63786c27819d4704f97f4
+ms.sourcegitcommit: b4665f444dcafccd74415fb6cc3d3b65746a1a31
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66305289"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72263883"
 ---
-# <a name="tutorial-run-applications-in-azure-kubernetes-service-aks"></a>Öğretici: Azure Kubernetes Service (AKS) uygulamaları çalıştırma
+# <a name="tutorial-run-applications-in-azure-kubernetes-service-aks"></a>Öğretici: Azure Kubernetes Hizmeti’nde (AKS) uygulamaları çalıştırma
 
 Kubernetes, kapsayıcılı uygulamalar için dağıtılmış bir platform sunar. Kendi uygulamalarınızı ve hizmetlerinizi oluşturup bir Kubernetes kümesine dağıtırsınız, kullanılabilirlik ve bağlantı özellikleri de küme tarafından yönetilir. Yedi bölümün dördüncüsü olan bu öğreticide Kubernetes kümesine örnek bir uygulama dağıtılır. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Kubernetes bildirim dosyalarını güncelleştirme
+> * Kubernetes bildirim dosyasını güncelleştirme
 > * Kubernetes'te uygulama çalıştırma
 > * Uygulamayı test etme
 
-Ek öğreticilerde, bu uygulama ölçeklendirilir ve güncelleştirildi.
+Ek öğreticilerde, bu uygulama genişletilebilir ve güncelleştirilir.
 
-Bu hızlı başlangıç, Kubernetes kavramlarının temel olarak bilindiğini varsayar. Daha fazla bilgi için [Kubernetes kavramlarını Azure Kubernetes Service (AKS) için çekirdek][kubernetes-concepts].
+Bu hızlı başlangıç, Kubernetes kavramlarının temel olarak bilindiğini varsayar. Daha fazla bilgi için bkz. [Azure Kubernetes hizmeti (AKS) Için Kubernetes temel kavramları][kubernetes-concepts].
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
 Önceki öğreticilerde, bir uygulama bir kapsayıcı görüntüsüne paketlendi, görüntü Azure Container Registry’ye yüklendi ve bir Kubernetes kümesi oluşturuldu.
 
-Bu öğreticiyi tamamlamak için önceden oluşturulmuş `azure-vote-all-in-one-redis.yaml` Kubernetes bildirim dosyasına ihtiyaç duyarsınız. Bu dosya, önceki öğreticide uygulama kaynak koduyla indirildi. Depo kopyalandı ve dizinleri kopyalanmış depoya göre değiştirdiğinizi doğrulayın. Bu adımları bu işlemi yapmadıysanız ve örneği takip etmek istiyorsanız, başlayın [öğretici 1 – kapsayıcı görüntüleri oluşturma][aks-tutorial-prepare-app].
+Bu öğreticiyi tamamlamak için önceden oluşturulmuş `azure-vote-all-in-one-redis.yaml` Kubernetes bildirim dosyasına ihtiyaç duyarsınız. Bu dosya, önceki öğreticide uygulama kaynak koduyla indirildi. Depoyu Klonladığınız ve dizinleri kopyalanmış depoya değiştirdiğinizi doğrulayın. Bu adımları tamamlamadıysanız ve takip etmek istiyorsanız, [öğretici 1 – kapsayıcı görüntüleri oluşturma][aks-tutorial-prepare-app]ile başlayın.
 
-Bu öğretici, Azure CLI Sürüm 2.0.53 çalıştırdığınız gerektirir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme][azure-cli-install].
+Bu öğreticide, Azure CLı sürüm 2.0.53 veya üstünü çalıştırıyor olmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli-install].
 
 ## <a name="update-the-manifest-file"></a>Bildirim dosyasını güncelleştirme
 
 Bu öğreticilerde Azure Container Registry (ACR) örneği, örnek uygulamanın kapsayıcı görüntüsünü depolar. Uygulamayı dağıtmak için Kubernetes bildirim dosyası içindeki görüntü adını ACR oturum açma sunucusu adını içerecek şekilde güncelleştirmeniz gerekir.
 
-ACR oturum açma sunucusunun adını almak için [az acr list][az-acr-list] komutunu aşağıda gösterilen şekilde kullanın:
+[Az ACR List][az-acr-list] komutunu kullanarak ACR oturum açma sunucusu adını aşağıdaki gibi alın:
 
 ```azurecli
 az acr list --resource-group myResourceGroup --query "[].{acrLoginServer:loginServer}" --output table
 ```
 
-İlk öğreticide kopyalanan git deposundaki örnek bildirim dosyasında oturum açma sunucusu adı olarak *microsoft* kullanılmıştır. Kopyalanan olduğunuzdan emin olun *azure voting uygulamasını redis* dizin ve açık bildirim dosyasını bir metin düzenleyiciyle gibi `vi`:
+İlk öğreticide kopyalanan git deposundaki örnek bildirim dosyasında oturum açma sunucusu adı olarak *microsoft* kullanılmıştır. Kopyalanmış *Azure-oylama-App-redsıs* dizininde olduğunuzdan emin olun, ardından bildirim dosyasını `vi` gibi bir metin düzenleyicisiyle açın:
 
 ```console
 vi azure-vote-all-in-one-redis.yaml
 ```
 
-*microsoft* yerine ACR oturum açma sunucunuzun adını yazın. Görüntü adı, bildirim dosyasının 51 satırında bulunur. Aşağıdaki örnekte varsayılan görüntü adı gösterilir:
+*microsoft* yerine ACR oturum açma sunucunuzun adını yazın. Görüntü adı, bildirim dosyasının 51. satırında bulunur. Aşağıdaki örnekte varsayılan görüntü adı gösterilir:
 
 ```yaml
 containers:
@@ -68,17 +68,17 @@ containers:
   image: <acrName>.azurecr.io/azure-vote-front:v1
 ```
 
-Dosyayı kaydedin ve kapatın. İçinde `vi`, kullanın `:wq`.
+Dosyayı kaydedin ve kapatın. @No__t-0 ' da `:wq` ' i kullanın.
 
 ## <a name="deploy-the-application"></a>Uygulamayı dağıtma
 
-Uygulamanızı dağıtmak için [kubectl apply][kubectl-apply] komutunu kullanın. Bu komut, bildirim dosyasını ayrıştırır ve tanımlanmış Kubernetes nesnelerini oluşturur. Aşağıdaki örnekte gösterildiği gibi örnek bildirim dosyasının adını belirtin:
+Uygulamanızı dağıtmak için [kubectl Apply][kubectl-apply] komutunu kullanın. Bu komut, bildirim dosyasını ayrıştırır ve tanımlanmış Kubernetes nesnelerini oluşturur. Aşağıdaki örnekte gösterildiği gibi örnek bildirim dosyasının adını belirtin:
 
 ```console
 kubectl apply -f azure-vote-all-in-one-redis.yaml
 ```
 
-Aşağıdaki örnek çıktıda, AKS kümesinde başarıyla oluşturulan kaynakları gösterir:
+Aşağıdaki örnek çıktıda, AKS kümesinde başarıyla oluşturulan kaynaklar gösterilmektedir:
 
 ```
 $ kubectl apply -f azure-vote-all-in-one-redis.yaml
@@ -91,7 +91,7 @@ service "azure-vote-front" created
 
 ## <a name="test-the-application"></a>Uygulamayı test etme
 
-Uygulama çalıştırıldığında, uygulama ön ucu İnternet'e bir Kubernetes hizmeti sunar. Bu işlemin tamamlanması birkaç dakika sürebilir.
+Uygulama çalıştığında, bir Kubernetes hizmeti, uygulamanın ön ucuna internet 'e koyar. Bu işlemin tamamlanması birkaç dakika sürebilir.
 
 İlerleme durumunu izlemek için [kubectl get service][kubectl-get] komutunu `--watch` bağımsız değişkeniyle birlikte kullanın.
 
@@ -99,27 +99,27 @@ Uygulama çalıştırıldığında, uygulama ön ucu İnternet'e bir Kubernetes 
 kubectl get service azure-vote-front --watch
 ```
 
-Başlangıçta *EXTERNAL-IP* için *azure-vote-front* hizmet olarak gösterildiği *bekleyen*:
+Başlangıçta *Azure-oyönme* hizmeti IÇIN *dış IP* , *Beklemede*olarak gösterilir:
 
 ```
-azure-vote-front   10.0.34.242   <pending>     80:30676/TCP   7s
+azure-vote-front   LoadBalancer   10.0.34.242   <pending>     80:30676/TCP   5s
 ```
 
-Zaman *EXTERNAL-IP* adresi değişirse *bekleyen* gerçek genel IP adresi için `CTRL-C` durdurmak için `kubectl` işlemi izleyin. Hizmete atanan geçerli genel IP adresi aşağıdaki örnek çıktı gösterilmektedir:
+*Dış IP* adresi *bekliyor* durumundan gerçek ortak ıp adresini değiştirdiğinde, `kubectl` izleme işlemini durdurmak için `CTRL-C` ' yi kullanın. Aşağıdaki örnek çıktıda, hizmete atanmış geçerli bir genel IP adresi gösterilmektedir:
 
 ```
-azure-vote-front   10.0.34.242   52.179.23.131   80:30676/TCP   2m
+azure-vote-front   LoadBalancer   10.0.34.242   52.179.23.131   80:30676/TCP   67s
 ```
 
-Uygulamayı iş başında görmek için hizmetin dış IP adresini bir web tarayıcısı açın:
+Uygulamayı eylemde görmek için, hizmetinizin dış IP adresine bir Web tarayıcısı açın:
 
 ![Azure’da Kubernetes kümesinin görüntüsü](media/container-service-kubernetes-tutorials/azure-vote.png)
 
-Uygulama yüklenmedi, görüntü kayıt defterinizdeki bir yetkilendirme sorunu nedeniyle olabilir. Kapsayıcılarınızın durumunu görüntülemek için `kubectl get pods` komutunu kullanın. Kapsayıcı görüntülerini çekilmiş olup [izin vermeyecek bir Kubernetes ile kapsayıcı kayıt defterine gizli](https://docs.microsoft.com/azure/container-registry/container-registry-auth-aks#access-with-kubernetes-secret).
+Uygulama yüklenmediyse, görüntü kayıt defterinizde bir yetkilendirme sorunundan kaynaklanıyor olabilir. Kapsayıcılarınızın durumunu görüntülemek için `kubectl get pods` komutunu kullanın. Kapsayıcı görüntüleri çekemediği takdirde bkz. [Azure Kubernetes hizmetinden Azure Container Registry kimlik doğrulaması](cluster-container-registry-integration.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, örnek Azure vote uygulaması, aks'deki bir Kubernetes kümesine dağıtılmıştır. Şunları öğrendiniz:
+Bu öğreticide, AKS 'teki bir Kubernetes kümesine örnek bir Azure oy uygulaması dağıtıldı. Şunları öğrendiniz:
 
 > [!div class="checklist"]
 > * Kubernetes bildirim dosyalarını güncelleştirme

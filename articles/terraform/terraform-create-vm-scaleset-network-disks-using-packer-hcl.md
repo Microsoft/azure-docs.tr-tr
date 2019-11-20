@@ -1,50 +1,44 @@
 ---
-title: Terraform kullanarak özel bir Packer görüntüsünden Azure sanal makine ölçek kümesi oluşturma
+title: Öğretici-Terrayform kullanarak Packer özel görüntüsünden Azure sanal makine ölçek kümesi oluşturma
 description: Terraform kullanarak Packer tarafından oluşturulan özel bir görüntüden (sanal ağ ve takılmış disklere sahip) Azure sanal makine ölçek kümesi yapılandırın ve sürüm oluşturun.
-services: terraform
-ms.service: azure
-keywords: terraform, devops, ölçek kümesi, sanal makine, ağ, depolama alanı, modüller, özel görüntüler, packer
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.topic: tutorial
-ms.date: 10/29/2017
-ms.openlocfilehash: 5aff45b4a6b5da62569e0a39c13239a726e6b80b
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 11/07/2019
+ms.openlocfilehash: 9d149a28f82100715035f435de56ff134ca685f5
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60884970"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159277"
 ---
-# <a name="use-terraform-to-create-an-azure-virtual-machine-scale-set-from-a-packer-custom-image"></a>Terraform kullanarak özel bir Packer görüntüsünden Azure sanal makine ölçek kümesi oluşturma
+# <a name="tutorial-create-an-azure-virtual-machine-scale-set-from-a-packer-custom-image-by-using-terraform"></a>Öğretici: Teroyform kullanarak Packer özel görüntüsünden Azure sanal makine ölçek kümesi oluşturma
 
-Bu öğreticide [Terraform](https://www.terraform.io/)'u kullanarak [Packer](https://www.packer.io/intro/index.html) ile ve [HashiCorp Yapılandırma Dili](https://www.terraform.io/docs/configuration/syntax.html) (HCL) kullanılarak oluşturulmuş yönetilen disklerle oluşturulmuş olan özel bir görüntüyü kullanarak [Azure sanal makine ölçek kümesi](/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview) oluşturacak ve dağıtacaksınız.  
+Bu öğreticide [Terrayform](https://www.terraform.io/) kullanarak, [HashiCorp yapılandırma dilini](https://www.terraform.io/docs/configuration/syntax.html) (HCL) kullanan yönetilen disklerle birlikte [Packer](https://www.packer.io/intro/index.html) kullanılarak oluşturulan özel bir görüntüyle oluşturulmuş bir [Azure sanal makine ölçek kümesi](/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview) oluşturun ve dağıtın. 
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Terraform dağıtımınızı ayarlama
-> * Terraform dağıtımı için değişkenleri ve çıkışları kullanma 
-> * Ağ altyapısı oluşturma ve dağıtma
-> * Packer kullanarak özel sanal makine görüntüsü oluşturma
-> * Özel görüntüyü kullanarak sanal makine ölçek kümesi oluşturma ve dağıtma
-> * Sıçrama kutusu oluşturma ve dağıtma 
+> * Terrayform dağıtımınızı ayarlayın.
+> * Terrayform dağıtımı için değişkenleri ve çıkışları kullanın.
+> * Ağ altyapısı oluşturun ve dağıtın.
+> * Packer kullanarak özel bir sanal makine görüntüsü oluşturun.
+> * Özel görüntüyü kullanarak bir sanal makine ölçek kümesi oluşturun ve dağıtın.
+> * Bir JumpBox oluşturun ve dağıtın.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
-## <a name="before-you-begin"></a>Başlamadan önce
-> * [Terraform'u yükleyin ve Azure erişimini yapılandırın](https://docs.microsoft.com/azure/virtual-machines/linux/terraform-install-configure)
-> * Henüz yoksa [bir SSH anahtar çifti oluşturun](https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys)
-> * Yerel makinenizde Packer yüklü değilse [Packer'ı yükleyin](https://www.packer.io/docs/install/index.html)
+## <a name="prerequisites"></a>Önkoşullar
 
+- **Terrayform**: [terrayform 'U yükler ve Azure 'a erişimi yapılandırır](/azure/virtual-machines/linux/terraform-install-configure).
+- **SSH anahtar çifti**: [SSH anahtar çifti oluşturun](/azure/virtual-machines/linux/mac-create-ssh-keys).
+- **Packer**: [Packer 'ı yükler](https://www.packer.io/docs/install/index.html).
 
 ## <a name="create-the-file-structure"></a>Dosya yapısını oluşturun
 
 Boş bir dizinde aşağıdaki adları kullanarak üç yeni dosya oluşturun:
 
-- ```variables.tf``` Bu dosya, şablonda kullanılan değişkenlerin değerini içerir.
-- ```output.tf``` Bu dosya, dağıtım sonrasında görüntülenen ayarı tanımlar.
-- ```vmss.tf``` Bu dosya, dağıtmakta olduğunuz altyapının kodunu içerir.
+- `variables.tf`: Bu dosya şablonda kullanılan değişkenlerin değerlerini içerir.
+- `output.tf`: Bu dosya dağıtımdan sonra görüntülenecek ayarları açıklar.
+- `vmss.tf`: Bu dosya, dağıtmakta olduğunuz altyapının kodunu içerir.
 
 ##  <a name="create-the-variables"></a>Değişkenleri oluşturma 
 
@@ -52,7 +46,7 @@ Bu adımda Terraform tarafından oluşturulan kaynakları özelleştiren değiş
 
 `variables.tf` dosyasını düzenleyin, aşağıdaki kodu kopyalayın ve değişiklikleri kaydedin.
 
-```tf 
+```hcl
 variable "location" {
   description = "The location where resources are created"
   default     = "East US"
@@ -66,36 +60,36 @@ variable "resource_group_name" {
 ```
 
 > [!NOTE]
-> resource_group_name değişkeninin varsayılan değerinin yerine kendi değerinizi tanımlayın.
+> Resource_group_name değişkeninin varsayılan değeri unset. Kendi değerini tanımlayın.
 
 Dosyayı kaydedin.
 
-Terraform şablonunu dağıttığınızda uygulamaya erişmek için kullanılan tam etki alanı adını almanız gerekir. Terraform'un ```output``` kaynak türünü kullanın ve kaynağın ```fqdn``` özelliğini alın. 
+Terkform şablonunuzu dağıttığınızda, uygulamaya erişmek için kullanılan tam etki alanı adını almak istersiniz. Terraform'un `output` kaynak türünü kullanın ve kaynağın `fqdn` özelliğini alın. 
 
 `output.tf` dosyasını düzenleyin ve aşağıdaki kodu kopyalayarak tam etki alanı adını sanal makinelerin kullanımına açın. 
 
 ```hcl 
 output "vmss_public_ip" {
-    value = "${azurerm_public_ip.vmss.fqdn}"
+    value = azurerm_public_ip.vmss.fqdn
 }
 ```
 
 ## <a name="define-the-network-infrastructure-in-a-template"></a>Şablonda ağ altyapısını tanımlama 
 
 Bu adımda yeni bir Azure kaynak grubunda aşağıdaki ağ altyapısını oluşturacaksınız: 
-  - 10.0.0.0/16 adres alanına sahip bir sanal ağ 
-  - 10.0.2.0/24 adres alanına sahip bir alt ağ
-  - İki genel IP adresi. Biri sanal makine ölçek kümesi yük dengeleyici tarafından, diğeri ise SSH sıçrama kutusuna bağlanmak için kullanılır
+  - 10.0.0.0/16 adres alanına sahip bir sanal ağ.
+  - Adres alanı 10.0.2.0/24 olan bir alt ağ.
+  - İki genel IP adresi. Bunlardan biri, sanal makine ölçek kümesi yük dengeleyici tarafından kullanılır. Diğer bir deyişle SSH atlama kutusuna bağlanmak için kullanılır.
 
 Ayrıca tüm kaynakların oluşturulacağı bir kaynak grubu da oluşturmanız gerekir. 
 
-```vmss.tf``` dosyasını düzenleyip aşağıdaki kodu kopyalayın: 
+`vmss.tf` dosyasını düzenleyip aşağıdaki kodu kopyalayın: 
 
-```tf 
+```hcl
 
 resource "azurerm_resource_group" "vmss" {
-  name     = "${var.resource_group_name}"
-  location = "${var.location}"
+  name     = var.resource_group_name
+  location = var.location
 
   tags {
     environment = "codelab"
@@ -105,8 +99,8 @@ resource "azurerm_resource_group" "vmss" {
 resource "azurerm_virtual_network" "vmss" {
   name                = "vmss-vnet"
   address_space       = ["10.0.0.0/16"]
-  location            = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.vmss.name}"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.vmss.name
 
   tags {
     environment = "codelab"
@@ -115,17 +109,17 @@ resource "azurerm_virtual_network" "vmss" {
 
 resource "azurerm_subnet" "vmss" {
   name                 = "vmss-subnet"
-  resource_group_name  = "${azurerm_resource_group.vmss.name}"
-  virtual_network_name = "${azurerm_virtual_network.vmss.name}"
+  resource_group_name  = azurerm_resource_group.vmss.name
+  virtual_network_name = azurerm_virtual_network.vmss.name
   address_prefix       = "10.0.2.0/24"
 }
 
 resource "azurerm_public_ip" "vmss" {
   name                         = "vmss-public-ip"
-  location                     = "${var.location}"
-  resource_group_name          = "${azurerm_resource_group.vmss.name}"
-  public_ip_address_allocation = "static"
-  domain_name_label            = "${azurerm_resource_group.vmss.name}"
+  location                     = var.location
+  resource_group_name          = azurerm_resource_group.vmss.name
+  allocation_method            = "static"
+  domain_name_label            = azurerm_resource_group.vmss.name
 
   tags {
     environment = "codelab"
@@ -135,7 +129,7 @@ resource "azurerm_public_ip" "vmss" {
 ``` 
 
 > [!NOTE]
-> İleride daha kolay ayırt etmek için Azure'a dağıtılan kaynakları etiketlemenizi öneririz.
+> Daha sonra tanımlanmasını kolaylaştırmak için Azure 'da dağıtılan kaynakları etiketleyerek.
 
 ## <a name="create-the-network-infrastructure"></a>Ağ altyapısını oluşturma
 
@@ -145,7 +139,7 @@ resource "azurerm_public_ip" "vmss" {
 terraform init 
 ```
  
-Sağlayıcı eklentileri Terraform kayıt defterinden komutu çalıştırdığınız dizindeki ```.terraform``` klasörüne indirilir.
+Sağlayıcı eklentileri, Terrayform kayıt defterinden komutu çalıştırdığınız dizindeki `.terraform` klasörüne indirir.
 
 Altyapıyı Azure'a dağıtmak için aşağıdaki komutu çalıştırın.
 
@@ -155,47 +149,46 @@ terraform apply
 
 Genel IP adresinin tam etki alanı adının yapılandırmanıza gittiğinden emin olun.
 
-![Genel IP adresi için Terraform sanal makine ölçek kümesi tam etki alanı adı](./media/terraform-create-vm-scaleset-network-disks-using-packer-hcl/tf-create-vmss-step4-fqdn.png)
+![Genel IP adresi için sanal makine ölçek kümesi Terkform tam etki alanı adı](./media/terraform-create-vm-scaleset-network-disks-using-packer-hcl/tf-create-vmss-step4-fqdn.png)
 
 Kaynak grubu aşağıdaki kaynakları kapsar:
 
 ![Sanal makine ölçek kümesi Terraform ağ kaynakları](./media/terraform-create-vm-scaleset-network-disks-using-packer-hcl/tf-create-vmss-step4-rg.png)
 
 
-## <a name="create-an-azure-image-using-packer"></a>Packer'ı kullanarak Azure görüntüsü oluşturma
-[Packer'ı kullanarak Azure'da Linux sanal makine görüntüleri oluşturma](https://docs.microsoft.com/azure/virtual-machines/linux/build-image-with-packer) öğreticisindeki adımları kullanarak özel bir Linux görüntüsü oluşturun.
+## <a name="create-an-azure-image-by-using-packer"></a>Packer kullanarak Azure görüntüsü oluşturma
+[Azure 'Da Linux sanal makine görüntüleri oluşturmak Için Packer kullanma](/azure/virtual-machines/linux/build-image-with-packer)öğreticisindeki adımları izleyerek özel bir Linux görüntüsü oluşturun.
  
-NGINX yüklü ve sağlaması kaldırılmış bir Ubuntu görüntüsü oluşturma öğreticisindeki adımları izleyin.
+NGINX yüklü olarak önceden sağlanmış bir Ubuntu görüntüsü oluşturmak için öğreticiyi izleyin.
 
-![Packer görüntüsünü oluşturduktan sonra bir görüntü elde edersiniz](./media/terraform-create-vm-scaleset-network-disks-using-packer-hcl/packerimagecreated.png)
+![Packer görüntüsünü oluşturduktan sonra bir görüntünüz vardır](./media/terraform-create-vm-scaleset-network-disks-using-packer-hcl/packerimagecreated.png)
 
 > [!NOTE]
-> Bu öğreticide Packer görüntüsünde nginx yüklemek için bir komut çalıştırılır. Oluşturma sırasında kendi betiğinizi de çalıştırabilirsiniz.
+> Bu öğreticinin amaçları doğrultusunda, Packer görüntüsünde, NGINX yüklemek için bir komut çalıştırılır. Oluşturma sırasında kendi betiğinizi de çalıştırabilirsiniz.
 
 ## <a name="edit-the-infrastructure-to-add-the-virtual-machine-scale-set"></a>Altyapıyı düzenleyerek sanal makine ölçek kümesini ekleme
 
 Bu adımda önceden dağıttığınız ağ üzerinde aşağıdaki kaynakları oluşturacaksınız:
-- Uygulamayı sunmak ve 4. adımda dağıtılan genel IP adresine eklemek için Azure yük dengeleyici
-- Uygulamayı sunmak ve önceden yapılandırılan genel IP adresine eklemek için bir Azure yük dengeleyici ve kurallar.
-- Yük dengeleyiciye atanacak Azure arka uç adres havuzu 
-- Uygulama tarafından kullanılan ve yük dengeleyici üzerinde yapılandırılan sistem durumu yoklama bağlantı noktası 
-- Önceden dağıtılan sanal ağ üzerinde çalışan ve yük dengeleyicinin arkasında bulunan bir sanal makine ölçek kümesi
-- Özel görüntüden yüklenen ve sanal makine ölçek kümesi düğümlerinde bulunan [Nginx](https://nginx.org/)
+- Uygulamayı sunacak bir Azure yük dengeleyici. Daha önce dağıtılan genel IP adresine iliştirin.
+- Uygulamayı sunacak bir Azure yük dengeleyici ve kuralları. Daha önce yapılandırılmış genel IP adresine iliştirin.
+- Bir Azure arka uç Adres Havuzu. Yük dengeleyiciye atayın.
+- Uygulama tarafından kullanılan ve yük dengeleyicide yapılandırılan bir sistem durumu araştırması bağlantı noktası.
+- Yük dengeleyicinin arkasında yer alan ve daha önce dağıtılan sanal ağ üzerinde çalışan bir sanal makine ölçek kümesi.
+- Özel görüntüden yüklenen sanal makine ölçeğinin düğümlerinde [NGINX](https://nginx.org/) .
 
 
 `vmss.tf` dosyasının sonuna aşağıdaki kodu ekleyin.
 
-```tf
-
+```hcl
 
 resource "azurerm_lb" "vmss" {
   name                = "vmss-lb"
-  location            = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.vmss.name}"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.vmss.name
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
-    public_ip_address_id = "${azurerm_public_ip.vmss.id}"
+    public_ip_address_id = azurerm_public_ip.vmss.id
   }
 
   tags {
@@ -204,28 +197,28 @@ resource "azurerm_lb" "vmss" {
 }
 
 resource "azurerm_lb_backend_address_pool" "bpepool" {
-  resource_group_name = "${azurerm_resource_group.vmss.name}"
-  loadbalancer_id     = "${azurerm_lb.vmss.id}"
+  resource_group_name = azurerm_resource_group.vmss.name
+  loadbalancer_id     = azurerm_lb.vmss.id
   name                = "BackEndAddressPool"
 }
 
 resource "azurerm_lb_probe" "vmss" {
-  resource_group_name = "${azurerm_resource_group.vmss.name}"
-  loadbalancer_id     = "${azurerm_lb.vmss.id}"
+  resource_group_name = azurerm_resource_group.vmss.name
+  loadbalancer_id     = azurerm_lb.vmss.id
   name                = "ssh-running-probe"
-  port                = "${var.application_port}"
+  port                = var.application_port
 }
 
 resource "azurerm_lb_rule" "lbnatrule" {
-  resource_group_name            = "${azurerm_resource_group.vmss.name}"
-  loadbalancer_id                = "${azurerm_lb.vmss.id}"
+  resource_group_name            = azurerm_resource_group.vmss.name
+  loadbalancer_id                = azurerm_lb.vmss.id
   name                           = "http"
   protocol                       = "Tcp"
-  frontend_port                  = "${var.application_port}"
-  backend_port                   = "${var.application_port}"
-  backend_address_pool_id        = "${azurerm_lb_backend_address_pool.bpepool.id}"
+  frontend_port                  = var.application_port
+  backend_port                   = var.application_port
+  backend_address_pool_id        = azurerm_lb_backend_address_pool.bpepool.id
   frontend_ip_configuration_name = "PublicIPAddress"
-  probe_id                       = "${azurerm_lb_probe.vmss.id}"
+  probe_id                       = azurerm_lb_probe.vmss.id
 }
 
 data "azurerm_resource_group" "image" {
@@ -234,13 +227,13 @@ data "azurerm_resource_group" "image" {
 
 data "azurerm_image" "image" {
   name                = "myPackerImage"
-  resource_group_name = "${data.azurerm_resource_group.image.name}"
+  resource_group_name = data.azurerm_resource_group.image.name
 }
 
 resource "azurerm_virtual_machine_scale_set" "vmss" {
   name                = "vmscaleset"
-  location            = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.vmss.name}"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.vmss.name
   upgrade_policy_mode = "Manual"
 
   sku {
@@ -250,7 +243,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   }
 
   storage_profile_image_reference {
-    id="${data.azurerm_image.image.id}"
+    id=data.azurerm_image.image.id
   }
 
   storage_profile_os_disk {
@@ -278,7 +271,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
     ssh_keys {
       path     = "/home/azureuser/.ssh/authorized_keys"
-      key_data = "${file("~/.ssh/id_rsa.pub")}"
+      key_data = file("~/.ssh/id_rsa.pub")
     }
   }
 
@@ -288,8 +281,9 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
     ip_configuration {
       name                                   = "IPConfiguration"
-      subnet_id                              = "${azurerm_subnet.vmss.id}"
-      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
+      subnet_id                              = azurerm_subnet.vmss.id
+      load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.bpepool.id]
+      primary = true
     }
   }
   
@@ -302,7 +296,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
 Dağıtımı özelleştirmek için `variables.tf` dosyasına aşağıdaki kodu ekleyin:
 
-```tf 
+```hcl
 variable "application_port" {
     description = "The port that you want to expose to the external load balancer"
     default     = 80
@@ -345,7 +339,7 @@ Bir tarayıcı penceresi açın ve komutun döndürdüğü tam etki alanı adın
 Bu isteğe bağlı adım, sıçrama kutusu kullanarak sanal makine ölçek kümesi örneklerine SSH erişimi sunar.
 
 Var olan dağıtımınıza aşağıdaki kaynakları ekleyin:
-- Sanal makine ölçek kümesiyle aynı alt ağa bağlı olan bir ağ arabirimi
+- Sanal makine ölçek kümesi ile aynı alt ağa bağlı bir ağ arabirimi
 - Bu ağ arabirimine sahip bir sanal makine
 
 `vmss.tf` dosyasının sonuna aşağıdaki kodu ekleyin:
@@ -353,9 +347,9 @@ Var olan dağıtımınıza aşağıdaki kaynakları ekleyin:
 ```hcl 
 resource "azurerm_public_ip" "jumpbox" {
   name                         = "jumpbox-public-ip"
-  location                     = "${var.location}"
-  resource_group_name          = "${azurerm_resource_group.vmss.name}"
-  public_ip_address_allocation = "static"
+  location                     = var.location
+  resource_group_name          = azurerm_resource_group.vmss.name
+  allocation_method            = "static"
   domain_name_label            = "${azurerm_resource_group.vmss.name}-ssh"
 
   tags {
@@ -365,14 +359,14 @@ resource "azurerm_public_ip" "jumpbox" {
 
 resource "azurerm_network_interface" "jumpbox" {
   name                = "jumpbox-nic"
-  location            = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.vmss.name}"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.vmss.name
 
   ip_configuration {
     name                          = "IPConfiguration"
-    subnet_id                     = "${azurerm_subnet.vmss.id}"
+    subnet_id                     = azurerm_subnet.vmss.id
     private_ip_address_allocation = "dynamic"
-    public_ip_address_id          = "${azurerm_public_ip.jumpbox.id}"
+    public_ip_address_id          = azurerm_public_ip.jumpbox.id
   }
 
   tags {
@@ -382,9 +376,9 @@ resource "azurerm_network_interface" "jumpbox" {
 
 resource "azurerm_virtual_machine" "jumpbox" {
   name                  = "jumpbox"
-  location              = "${var.location}"
-  resource_group_name   = "${azurerm_resource_group.vmss.name}"
-  network_interface_ids = ["${azurerm_network_interface.jumpbox.id}"]
+  location              = var.location
+  resource_group_name   = azurerm_resource_group.vmss.name
+  network_interface_ids = [azurerm_network_interface.jumpbox.id]
   vm_size               = "Standard_DS1_v2"
 
   storage_image_reference {
@@ -412,7 +406,7 @@ resource "azurerm_virtual_machine" "jumpbox" {
 
     ssh_keys {
       path     = "/home/azureuser/.ssh/authorized_keys"
-      key_data = "${file("~/.ssh/id_rsa.pub")}"
+      key_data = file("~/.ssh/id_rsa.pub")
     }
   }
 
@@ -422,11 +416,11 @@ resource "azurerm_virtual_machine" "jumpbox" {
 }
 ```
 
-`outputs.tf` dosyasını düzenleyerek dağıtım tamamlandığında sıçrama kutusunun ana bilgisayar adını gösteren aşağıdaki kodu ekleyin:
+Dağıtım tamamlandığında sıçrama kutusu ana bilgisayar adını görüntüleyen aşağıdaki kodu eklemek için `outputs.tf` düzenleyin:
 
 ```
 output "jumpbox_public_ip" {
-    value = "${azurerm_public_ip.jumpbox.fqdn}"
+    value = azurerm_public_ip.jumpbox.fqdn
 }
 ```
 
@@ -438,12 +432,12 @@ Sıçrama kutusu dağıtın.
 terraform apply 
 ```
 
-Dağıtım tamamlandıktan sonra kaynak grubunun içeriği şu görüntüye benzer olacaktır:
+Dağıtım tamamlandıktan sonra, kaynak grubunun içeriği aşağıdaki görüntüye benzer şekilde görünür:
 
 ![Terraform sanal makine ölçek kümesi kaynak grubu](./media/terraform-create-vm-scaleset-network-disks-using-packer-hcl/tf-create-create-vmss-step8.png)
 
 > [!NOTE]
-> Dağıttığınız sıçrama kutusunda ve sanal makine ölçek kümesinde devre dışı bırakılmış olan bir parolayla oturum açın. VM'lere erişmek için SSH ile oturum açın.
+> Parola ile oturum açma, sıçrama kutusu ve dağıttığınız sanal makine ölçek kümesi üzerinde devre dışıdır. VM 'Lere erişmek için SSH ile oturum açın.
 
 ## <a name="clean-up-the-environment"></a>Ortamı temizleme
 
@@ -453,16 +447,9 @@ Aşağıdaki komutlar bu öğreticide oluşturulan kaynakları siler:
 terraform destroy
 ```
 
-Kaynakların silinmesini onaylamanız istendiğinde `yes` yazın. Yok etme işleminin tamamlanması birkaç dakika sürebilir.
+Kaynakları silme işlemini onaylamanız istendiğinde *Evet* yazın. Yok etme işleminin tamamlanması birkaç dakika sürebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide Terraform'u kullanarak Azure'da bir sanal makine ölçek kümesi ve sıçrama kutusu dağıttınız. Şunları öğrendiniz:
-
-> [!div class="checklist"]
-> * Terraform dağıtımını başlatma
-> * Terraform dağıtımı için değişkenleri ve çıkışları kullanma 
-> * Ağ altyapısı oluşturma ve dağıtma
-> * Packer kullanarak özel sanal makine görüntüsü oluşturma
-> * Özel görüntüyü kullanarak sanal makine ölçek kümesi oluşturma ve dağıtma
-> * Sıçrama kutusu oluşturma ve dağıtma 
+> [!div class="nextstepaction"] 
+> [Azure 'da Terrayform kullanma hakkında daha fazla bilgi edinin](/azure/terraform)

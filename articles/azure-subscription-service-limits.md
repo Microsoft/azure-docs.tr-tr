@@ -1,6 +1,6 @@
 ---
 title: Azure abonelik limitleri ve kotaları
-description: Yaygın Azure aboneliği ve hizmet limitleri, kotalar ve kısıtlamalar listesini sağlar. Bu makalede, en yüksek değerleri birlikte sınırları artırmak nasıl hakkındaki bilgileri içerir.
+description: Ortak Azure aboneliği ve hizmet sınırları, Kotalar ve kısıtlamaların bir listesini sağlar. Bu makale, limitlerin en yüksek değerleriyle birlikte nasıl artabileceğine ilişkin bilgiler içerir.
 services: multiple
 author: rothja
 manager: jeffreyg
@@ -10,37 +10,37 @@ ms.service: billing
 ms.topic: article
 ms.date: 05/30/2019
 ms.author: byvinyal
-ms.openlocfilehash: d1043f254d2a2cc2804ab8a4d68770b6d57cbed4
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.openlocfilehash: f9fe540611b1b773867e1f92439e13df91ad4bd3
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67296011"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818340"
 ---
 # <a name="azure-subscription-and-service-limits-quotas-and-constraints"></a>Azure aboneliği ve hizmet sınırları, kotalar ve kısıtlamalar
-Bu belge Ayrıca bazen kota olarak da adlandırılır en yaygın Microsoft Azure sınırları bazıları listelenmiştir. Bu belge, şu anda tüm Azure Hizmetleri ele alınmamıştır. Zamanla, listenin genişletilir ve diğer hizmetler kapsayacak şekilde güncelleştirildi.
+Bu belgede, bazen kotalar olarak da adlandırılan en yaygın Microsoft Azure limitlerin bazıları listelenir. Bu belge şu anda tüm Azure hizmetlerini kapsamıyor. Zamanla, liste genişletilir ve daha fazla hizmeti kapsayacak şekilde güncelleştirilir.
 
-Azure fiyatlandırması hakkında daha fazla bilgi için bkz: [Azure fiyatlandırmaya genel bakış](https://azure.microsoft.com/pricing/). Burada, kullanarak maliyetlerinizi tahmin edebilirsiniz [fiyatlandırma hesaplayıcısını](https://azure.microsoft.com/pricing/calculator/). Ayrıca belirli bir hizmet için fiyatlandırma ayrıntıları sayfasına gibi gidebilirsiniz [Windows Vm'leri](https://azure.microsoft.com/pricing/details/virtual-machines/#Windows). Maliyetlerinizi yönetmenize yardımcı olmak ipuçları için bkz: [Azure'da faturalandırma ve maliyet yönetimi ile beklenmeyen maliyetleri engelleme](billing/billing-getting-started.md).
-
-> [!NOTE]
-> Yukarıda belirtilen varsayılan sınırı, kotası ve sınırı artırmak istiyorsanız [ücretsiz bir çevrimiçi müşteri destek isteği açın](azure-resource-manager/resource-manager-quota-errors.md). Aşağıdaki tablolarda gösterilen üst sınırı değerini yukarıda sınırları yükseltilemez. Üst sınır sütun yok ise, kaynak sınırları ayarlanabilir sahip değil.
->
-> [Ücretsiz deneme abonelikleri](https://azure.microsoft.com/offers/ms-azr-0044p) sınırı veya kota artırma işlemleri için uygun değildir. Varsa bir [ücretsiz deneme aboneliği](https://azure.microsoft.com/offers/ms-azr-0044p), Yükseltme yapabileceğiniz bir [Kullandıkça Öde](https://azure.microsoft.com/offers/ms-azr-0003p/) abonelik. Daha fazla bilgi için [Azure ücretsiz deneme aboneliğinizi Kullandıkça Öde aboneliğine yükseltin](billing/billing-upgrade-azure-subscription.md) ve [ücretsiz deneme aboneliği SSS](https://azure.microsoft.com/free/free-account-faq).
->
-
-## <a name="limits-and-azure-resource-manager"></a>Sınırları ve Azure Resource Manager
-Artık, tek bir Azure kaynak grubu içinde birden çok Azure kaynaklarını birleştirmek mümkündür. Kaynak gruplarını kullandığınızda, kez genel sınırları bölge düzeyinde Azure Resource Manager ile yönetilen olur. Azure kaynak grupları hakkında daha fazla bilgi için bkz. [Azure Resource Manager'a genel bakış](azure-resource-manager/resource-group-overview.md).
-
-Azure Resource Manager'ı kullandığınızda sınırları aşağıdaki listede yeni bir tablo farkları sınırları yansıtır. Örneğin, bir **abonelik limitleri** tablo ve **abonelik limitleri - Azure Resource Manager** tablo. Her iki senaryo için bir sınır uygulanır, yalnızca ilk tabloda gösterilir. Aksi belirtilmediği sürece, tüm bölgelerde genel limitlerdir.
+Azure fiyatlandırması hakkında daha fazla bilgi edinmek için bkz. [Azure fiyatlandırması genel bakış](https://azure.microsoft.com/pricing/). Burada, [Fiyatlandırma hesaplayıcısı](https://azure.microsoft.com/pricing/calculator/)' nı kullanarak maliyetlerinizi tahmin edebilirsiniz. Ayrıca, belirli bir hizmet için (örneğin, [Windows VM 'ler](https://azure.microsoft.com/pricing/details/virtual-machines/#Windows)) Fiyatlandırma ayrıntıları sayfasına gidebilirsiniz. Maliyetlerinizi yönetmeye yardımcı olacak ipuçları için bkz. [Azure Faturalandırma ve maliyet yönetimiyle ilgili beklenmedik maliyetleri engelleme](billing/billing-getting-started.md).
 
 > [!NOTE]
-> Azure kaynak gruplarındaki kaynaklar için kotalar bölge başına abonelik başına değil, abonelik tarafından erişilebilir olduğundan hizmet yönetimi kotalar. VCPU kotaları örnek olarak kullanalım. Vcpu desteğiyle bir kota artırım talebinde bulunmak hangi bölgelerde kullanmak istediğiniz kaç Vcpu karar vermeniz gerekir. Tutarları ve istediğiniz bölgeleri için daha sonra Azure kaynak grubu vCPU kotaları belirli bir istekte bulunmak. Uygulamanız var. çalıştırmayı Batı Avrupa'daki 30 Vcpu kullanmanız gerekiyorsa, özellikle Batı Avrupa'daki 30 Vcpu isteyin. Yalnızca Batı Avrupa 30 vCPU kotası, vCPU kotası herhangi diğer bölgesinde--artırılmış değil.
+> Sınırı veya kotayı varsayılan sınırın üzerinde yükseltmek istiyorsanız, [ücretsiz bir çevrimiçi müşteri destek isteği açın](azure-resource-manager/resource-manager-quota-errors.md). Sınırlar, aşağıdaki tablolarda gösterilen en büyük sınır değerinin üzerinde olamaz. En fazla limit sütunu yoksa, kaynak, ayarlanabilir sınırlara sahip değildir.
+>
+> [Ücretsiz deneme abonelikleri](https://azure.microsoft.com/offers/ms-azr-0044p) sınır veya kota artışına uygun değildir. [Ücretsiz bir deneme aboneliğiniz](https://azure.microsoft.com/offers/ms-azr-0044p)varsa, bir [Kullandıkça Öde](https://azure.microsoft.com/offers/ms-azr-0003p/) aboneliğine yükseltebilirsiniz. Daha fazla bilgi için bkz. [Azure Ücretsiz deneme aboneliğinizi bir Kullandıkça Öde aboneliğine yükseltme](billing/billing-upgrade-azure-subscription.md) ve [ücretsiz deneme aboneliği hakkında SSS](https://azure.microsoft.com/free/free-account-faq).
+>
+
+## <a name="limits-and-azure-resource-manager"></a>Sınırlar ve Azure Resource Manager
+Artık birden çok Azure kaynağını tek bir Azure Kaynak grubunda birleştirmek mümkündür. Kaynak gruplarını kullandığınızda, bir kez genel olan sınırlar, Azure Resource Manager ile bölgesel düzeyde yönetilmeye gelir. Azure Kaynak grupları hakkında daha fazla bilgi için bkz. [Azure Resource Manager genel bakış](azure-resource-manager/resource-group-overview.md).
+
+Aşağıdaki sınırlar listesinde, yeni bir tablo Azure Resource Manager kullandığınızda limitlerde yapılan farkları yansıtır. Örneğin, bir **abonelik limitleri** tablosu ve **abonelik limitleri Azure Resource Manager** tablo vardır. Her iki senaryo için de bir sınır geçerliyse, bu yalnızca ilk tabloda gösterilir. Aksi belirtilmedikçe, sınırlar tüm bölgelerde geneldir.
+
+> [!NOTE]
+> Azure kaynak gruplarındaki kaynaklara yönelik kotalar, hizmet yönetimi kotaları olduğu için abonelik başına değil, aboneliğiniz tarafından erişilebilir. Örnek olarak vCPU kotaları kullanalım. VCPU desteğiyle bir kota artışı istemek için, hangi bölgelerde kaç vCPU kullanmak istediğinize karar vermelisiniz. Daha sonra istediğiniz miktarlar ve bölgeler için Azure Kaynak grubu vCPU kotaları için özel bir istek yaparsınız. Uygulamanızı orada çalıştırmak için Batı Avrupa 'de 30 vCPU kullanmanız gerekiyorsa, Batı Avrupa özellikle 30 vCPU isteğinde bulunur. VCPU kotanızı başka hiçbir bölgede artmıyor; yalnızca Batı Avrupa 30-vCPU kotasına sahiptir.
 > <!-- -->
-> Sonuç olarak, Azure kaynak grubu kotanızı herhangi bir bölgede iş yükünüz için olmalıdır karar verin. Ardından, dağıtmak istediğiniz her bölgede miktarındaki bu isteyin. Özel bölgeler için geçerli kotanızı belirlemek nasıl daha fazla yardım için bkz [dağıtım sorunlarını giderme](resource-manager-common-deployment-errors.md).
+> Sonuç olarak, Azure Kaynak grubu Kotalarınızın herhangi bir bölgede iş yükünüz için ne olması gerektiğine karar verin. Ardından, dağıtmak istediğiniz her bölgede bu miktarı isteyin. Belirli bölgeler için geçerli kotalarınızı belirleme konusunda yardım için bkz. [dağıtım sorunlarını giderme](resource-manager-common-deployment-errors.md).
 >
 >
 
-## <a name="service-specific-limits"></a>Hizmete özgü sınırları
+## <a name="service-specific-limits"></a>Hizmete özgü sınırlar
 * [Active Directory](#active-directory-limits)
 * [API Management](#api-management-limits)
 * [App Service](#app-service-limits)
@@ -48,50 +48,54 @@ Azure Resource Manager'ı kullandığınızda sınırları aşağıdaki listede 
 * [Otomasyon](#automation-limits)
 * [Redis için Azure Önbelleği](#azure-cache-for-redis-limits)
 * [Azure Cloud Services](#azure-cloud-services-limits)
+* [Azure Bilişsel Arama](#azure-cognitive-search-limits)
+* [Azure Bilişsel Hizmetler](#azure-cognitive-services-limits)
 * [Azure Cosmos DB](#azure-cosmos-db-limits)
 * [MySQL için Azure Veritabanı](#azure-database-for-mysql)
 * [PostgreSQL için Azure Veritabanı](#azure-database-for-postgresql)
 * [Azure DNS](#azure-dns-limits)
-* [Azure güvenlik duvarı](#azure-firewall-limits)
+* [Azure Güvenlik Duvarı](#azure-firewall-limits)
 * [Azure İşlevleri](#functions-limits)
 * [Azure Kubernetes Service](#azure-kubernetes-service-limits)
-* [Azure Machine Learning hizmeti](#azure-machine-learning-service-limits)
+* [Azure Machine Learning](#azure-machine-learning-limits)
 * [Azure Haritalar](#azure-maps-limits)
 * [Azure İzleyici](#azure-monitor-limits)
 * [Azure İlkesi](#azure-policy-limits)
-* [Azure Search](#azure-search-limits)
 * [Azure SignalR hizmeti](#azure-signalr-service-limits)
 * [Backup](#backup-limits)
 * [Batch](#batch-limits)
-* [BizTalk Hizmetleri](#biztalk-services-limits)
+* [BizTalk Services](#biztalk-services-limits)
 * [Container Instances](#container-instances-limits)
 * [Container Registry](#container-registry-limits)
-* [İçerik teslim ağı](#content-delivery-network-limits)
+* [Content Delivery Network](#content-delivery-network-limits)
 * [Data Factory](#data-factory-limits)
 * [Data Lake Analytics](#data-lake-analytics-limits)
 * [Data Lake Store](#data-lake-store-limits)
-* [Veritabanı geçiş hizmeti](#database-migration-service-limits)
+* [Veritabanı Geçiş Hizmeti](#database-migration-service-limits)
 * [Event Grid](#event-grid-limits)
 * [Event Hubs](#event-hubs-limits)
-* [Ön kapısı hizmeti](#azure-front-door-service-limits)
-* [Identity Manager](#identity-manager-limits)
+* [Ön kapı hizmeti](#azure-front-door-service-limits)
+* [Kimlik Yöneticisi](#identity-manager-limits)
 * [IoT Hub’ı](#iot-hub-limits)
 * [IoT Hub Cihazı Sağlama Hizmeti](#iot-hub-device-provisioning-service-limits)
 * [Anahtar Kasası](#key-vault-limits)
 * [Media Services](#media-services-limits)
-* [Mobil hizmetler](#mobile-services-limits)
+* [Mobile Services](#mobile-services-limits)
 * [Multi-Factor Authentication](#multi-factor-authentication-limits)
 * [Ağ](#networking-limits)
   * [Application Gateway](#application-gateway-limits)
+  * [Azure savunma](#azure-bastion-limits)
   * [Azure DNS](#azure-dns-limits)
-  * [Azure ön kapısı hizmeti](#azure-front-door-service-limits)
-  * [Azure güvenlik duvarı](#azure-firewall-limits)
+  * [Azure Front Door Service](#azure-front-door-service-limits)
+  * [Azure Güvenlik Duvarı](#azure-firewall-limits)
   * [ExpressRoute](#expressroute-limits)
   * [Yük Dengeleyici](#load-balancer)
+  * [Ağ Izleyicisi](#network-watcher-limits)
   * [Genel IP adresi](#publicip-address)
-  * [Ağ İzleyicisi](#network-watcher-limits)
+  * [Özel bağlantı](#private-link-limits)
   * [Traffic Manager](#traffic-manager-limits)
   * [Sanal Ağ](#networking-limits)
+  * [Sanal WAN](#virtual-wan-limits)
 * [Notification Hubs](#notification-hubs-limits)
 * [Kaynak grubu](#resource-group-limits)
 * [Rol tabanlı erişim denetimi](#role-based-access-control-limits)
@@ -108,110 +112,119 @@ Azure Resource Manager'ı kullandığınızda sınırları aşağıdaki listede 
 * [Sanal makine ölçek kümeleri](#virtual-machine-scale-sets-limits)
 
 ### <a name="subscription-limits"></a>Abonelik sınırları
-#### <a name="subscription-limits---azure-service-management-classic-deployment-model"></a>Abonelik limitleri - Azure Hizmet Yönetimi (Klasik dağıtım modeli)
+#### <a name="subscription-limits---azure-service-management-classic-deployment-model"></a>Abonelik limitleri-Azure hizmet yönetimi (klasik dağıtım modeli)
 [!INCLUDE [azure-subscription-limits](../includes/azure-subscription-limits.md)]
 
-#### <a name="subscription-limits---azure-resource-manager"></a>Abonelik limitleri - Azure Resource Manager
-Azure Resource Manager ve Azure kaynak grupları kullandığınızda aşağıdaki sınırlar geçerlidir. Azure Resource Manager ile değiştirilmemiş sınırları listelenmiyor. Bu sınırları için önceki tabloya bakın.
+#### <a name="subscription-limits---azure-resource-manager"></a>Abonelik limitleri-Azure Resource Manager
+Azure Resource Manager ve Azure kaynak gruplarını kullandığınızda aşağıdaki sınırlar geçerlidir. Azure Resource Manager ile değiştirilmemiş sınırlar listelenmez. Bu limitler için önceki tabloya bakın.
 
-Resource Manager API'si hakkında bilgi için okuma ve yazma sınırları, bkz: [istekleri azaltma Resource Manager](resource-manager-request-limits.md).
+Kaynak Yöneticisi API okuma ve yazma sınırları hakkında bilgi için bkz. [azaltma Kaynak Yöneticisi istekleri](resource-manager-request-limits.md).
 
 [!INCLUDE [azure-subscription-limits-azure-resource-manager](../includes/azure-subscription-limits-azure-resource-manager.md)]
 
 ### <a name="resource-group-limits"></a>Kaynak grubu sınırları
 [!INCLUDE [azure-resource-groups-limits](../includes/azure-resource-groups-limits.md)]
 
-### <a name="virtual-machines-limits"></a>Sanal makine limitleri
-#### <a name="virtual-machines-limits"></a>Sanal makine limitleri
+### <a name="virtual-machines-limits"></a>Sanal makine sınırları
+#### <a name="virtual-machines-limits"></a>Sanal makine sınırları
 [!INCLUDE [azure-virtual-machines-limits](../includes/azure-virtual-machines-limits.md)]
 
-#### <a name="virtual-machines-limits---azure-resource-manager"></a>Sanal makine limitleri - Azure Resource Manager
-Azure Resource Manager ve Azure kaynak grupları kullandığınızda aşağıdaki sınırlar geçerlidir. Azure Resource Manager ile değiştirilmemiş sınırları listelenmiyor. Bu sınırları için önceki tabloya bakın.
+#### <a name="virtual-machines-limits---azure-resource-manager"></a>Sanal makine limitleri-Azure Resource Manager
+Azure Resource Manager ve Azure kaynak gruplarını kullandığınızda aşağıdaki sınırlar geçerlidir.
 
 [!INCLUDE [azure-virtual-machines-limits-azure-resource-manager](../includes/azure-virtual-machines-limits-azure-resource-manager.md)]
 
-#### <a name="shared-image-gallery-limits"></a>Görüntü Galerisi sınırları paylaşılan
+#### <a name="shared-image-gallery-limits"></a>Paylaşılan görüntü Galerisi sınırları
 
-Sınırları, paylaşılan resim galerileri kullanarak kaynakları dağıtmak için abonelik başına vardır:
-- Bölge başına abonelik başına 100 paylaşılan resim galerileri
-- Bölge başına abonelik başına 1.000 görüntü tanımları
-- Abonelik, bölge başına 10.000 yansıma sürümü
+Paylaşılan görüntü galerileri kullanarak kaynak dağıtmak için abonelik başına sınırlar vardır:
+- 100 paylaşılan görüntü galerileri, her bölge için abonelik başına
+- 1\.000 görüntü tanımları, her bölge için abonelik başına
+- 10.000 görüntü sürümü, her bölge için abonelik başına
 
-### <a name="virtual-machine-scale-sets-limits"></a>Sanal makine ölçek kümeleri sınırları
+### <a name="virtual-machine-scale-sets-limits"></a>Sanal Makine Ölçek Kümeleri sınırları
 [!INCLUDE [virtual-machine-scale-sets-limits](../includes/azure-virtual-machine-scale-sets-limits.md)]
 
-### <a name="container-instances-limits"></a>Kapsayıcı örnekleri sınırları
+### <a name="container-instances-limits"></a>Container Instances sınırları
 [!INCLUDE [container-instances-limits](../includes/container-instances-limits.md)]
 
-### <a name="container-registry-limits"></a>Kapsayıcı kayıt defteri sınırları
-Aşağıdaki tabloda temel, standart ve Premium sınırlamaları ve özellikleri ayrıntıları [hizmet katmanları](./container-registry/container-registry-skus.md).
+### <a name="container-registry-limits"></a>Container Registry sınırları
+Aşağıdaki tabloda temel, standart ve Premium [hizmet katmanlarının](./container-registry/container-registry-skus.md)özellikleri ve limitleri ayrıntılı olarak verilmiştir.
 
 [!INCLUDE [container-registry-limits](../includes/container-registry-limits.md)]
 
-### <a name="azure-kubernetes-service-limits"></a>Azure Kubernetes hizmeti limitleri
+### <a name="azure-kubernetes-service-limits"></a>Azure Kubernetes hizmet limitleri
 [!INCLUDE [container-service-limits](../includes/container-service-limits.md)]
 
-### <a name="azure-machine-learning-service-limits"></a>Azure Machine Learning hizmeti limitleri
-Azure Machine Learning işlem kotası için en son değerleri bulunabilir [Azure Machine Learning kota sayfası](../articles/machine-learning/service/how-to-manage-quotas.md)
+### <a name="azure-machine-learning-limits"></a>Azure Machine Learning sınırları
+Azure Machine Learning Işlem kotaları için en son değerler [Azure Machine Learning kota sayfasında](../articles/machine-learning/service/how-to-manage-quotas.md) bulunabilir
 
 ### <a name="networking-limits"></a>Ağ limitleri
 [!INCLUDE [azure-virtual-network-limits](../includes/azure-virtual-network-limits.md)]
 
-#### <a name="expressroute-limits"></a>ExpressRoute sınırları
+#### <a name="expressroute-limits"></a>ExpressRoute limitleri
 [!INCLUDE [expressroute-limits](../includes/expressroute-limits.md)]
 
-#### <a name="application-gateway-limits"></a>Uygulama ağ geçidi sınırlar
+#### <a name="virtual-wan-limits"></a>Sanal WAN sınırları
+[!INCLUDE [virtual-wan-limits](../includes/virtual-wan-limits.md)]
 
-Aşağıdaki tabloda, aksi belirtilmedikçe v1, v2, standart ve WAF SKU'ları için geçerlidir.
+#### <a name="application-gateway-limits"></a>Application Gateway sınırları
+
+Aşağıdaki tablo, aksi belirtilmediği takdirde v1, v2, standart ve WAF SKU 'Ları için geçerlidir.
 [!INCLUDE [application-gateway-limits](../includes/application-gateway-limits.md)]
 
-#### <a name="network-watcher-limits"></a>Ağ İzleyicisi sınırları
+#### <a name="network-watcher-limits"></a>Ağ Izleyicisi sınırları
 [!INCLUDE [network-watcher-limits](../includes/network-watcher-limits.md)]
+
+#### <a name="private-link-limits"></a>Özel bağlantı limitleri
+[!INCLUDE [private-link-limits](../includes/private-link-limits.md)]
 
 #### <a name="traffic-manager-limits"></a>Traffic Manager sınırları
 [!INCLUDE [traffic-manager-limits](../includes/traffic-manager-limits.md)]
 
-#### <a name="azure-dns-limits"></a>Azure DNS sınırlamaları
+#### <a name="azure-bastion-limits"></a>Azure savunma limitleri
+[!INCLUDE [Azure Bastion limits](../includes/bastion-limits.md)]
+
+#### <a name="azure-dns-limits"></a>Azure DNS sınırları
 [!INCLUDE [dns-limits](../includes/dns-limits.md)]
 
-#### <a name="azure-firewall-limits"></a>Azure güvenlik duvarı sınırları
+#### <a name="azure-firewall-limits"></a>Azure Güvenlik Duvarı sınırları
 [!INCLUDE [azure-firewall-limits](../includes/firewall-limits.md)]
 
-#### <a name="azure-front-door-service-limits"></a>Azure ön kapısı hizmet sınırları
+#### <a name="azure-front-door-service-limits"></a>Azure ön kapı hizmeti sınırları
 [!INCLUDE [azure-front-door-service-limits](../includes/front-door-limits.md)]
 
 ### <a name="storage-limits"></a>Depolama sınırları
 <!--like # storage accts -->
 [!INCLUDE [azure-storage-limits](../includes/azure-storage-limits.md)]
 
-Depolama hesabı sınırları hakkında daha fazla bilgi için bkz. [Azure depolama ölçeklenebilirlik ve performans hedefleri](storage/common/storage-scalability-targets.md).
+Depolama hesabı sınırları hakkında daha fazla bilgi için bkz. [Azure Storage ölçeklenebilirlik ve performans hedefleri](storage/common/storage-scalability-targets.md).
 
-#### <a name="storage-resource-provider-limits"></a>Depolama kaynak sağlayıcısı sınırları 
+#### <a name="storage-resource-provider-limits"></a>Depolama kaynak sağlayıcısı sınırları
 
 [!INCLUDE [azure-storage-limits-azure-resource-manager](../includes/azure-storage-limits-azure-resource-manager.md)]
 
-#### <a name="azure-blob-storage-limits"></a>Azure Blob Depolama sınırları
+#### <a name="azure-blob-storage-limits"></a>Azure Blob depolama sınırları
 [!INCLUDE [storage-blob-scale-targets](../includes/storage-blob-scale-targets.md)]
 
-#### <a name="azure-files-limits"></a>Azure dosyaları sınırları
-Azure dosyaları sınırları hakkında daha fazla bilgi için bkz. [Azure dosyaları ölçeklenebilirlik ve performans hedefleri](storage/files/storage-files-scale-targets.md).
+#### <a name="azure-files-limits"></a>Azure dosya sınırları
+Azure dosya limitleri hakkında daha fazla bilgi için bkz. [Azure dosyaları ölçeklenebilirlik ve performans hedefleri](storage/files/storage-files-scale-targets.md).
 
 [!INCLUDE [storage-files-scale-targets](../includes/storage-files-scale-targets.md)]
 
-#### <a name="azure-file-sync-limits"></a>Azure dosya eşitleme sınırları
+#### <a name="azure-file-sync-limits"></a>Azure Dosya Eşitleme sınırları
 [!INCLUDE [storage-sync-files-scale-targets](../includes/storage-sync-files-scale-targets.md)]
 
 #### <a name="azure-queue-storage-limits"></a>Azure kuyruk depolama sınırları
 [!INCLUDE [storage-queues-scale-targets](../includes/storage-queues-scale-targets.md)]
 
-#### <a name="azure-table-storage-limits"></a>Azure tablo depolama sınırları
+#### <a name="azure-table-storage-limits"></a>Azure Tablo depolama sınırları
 [!INCLUDE [storage-tables-scale-targets](../includes/storage-tables-scale-targets.md)]
 
 <!-- conceptual info about disk limits -- applies to unmanaged and managed -->
-#### <a name="virtual-machine-disk-limits"></a>Sanal makine disk limitleri
+#### <a name="virtual-machine-disk-limits"></a>Sanal makine diski sınırları
 [!INCLUDE [azure-storage-limits-vm-disks](../includes/azure-storage-limits-vm-disks.md)]
 
-Daha fazla bilgi için [sanal makine boyutları](virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Daha fazla bilgi için bkz. [sanal makine boyutları](virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
 #### <a name="managed-virtual-machine-disks"></a>Yönetilen sanal makine diskleri
 
@@ -223,53 +236,56 @@ Daha fazla bilgi için [sanal makine boyutları](virtual-machines/linux/sizes.md
 
 [!INCLUDE [azure-storage-limits-vm-disks-premium](../includes/azure-storage-limits-vm-disks-premium.md)]
 
-### <a name="azure-cloud-services-limits"></a>Azure Cloud Services sınırları
+### <a name="azure-cloud-services-limits"></a>Azure Cloud Services limitleri
 [!INCLUDE [azure-cloud-services-limits](../includes/azure-cloud-services-limits.md)]
 
-### <a name="app-service-limits"></a>App Service limitleri
-Aşağıdaki App Service limitleri, Web Apps, Mobile Apps ve API Apps sınırları içerir.
+### <a name="azure-cognitive-services-limits"></a>Azure bilişsel hizmetler sınırları
+[!INCLUDE [azure-cloud-services-limits](../includes/azure-cognitive-services-limits.md)]
+
+### <a name="app-service-limits"></a>App Service sınırları
+Aşağıdaki App Service limitleri Web Apps, Mobile Apps ve API Apps sınırlarını içerir.
 
 [!INCLUDE [azure-websites-limits](../includes/azure-websites-limits.md)]
 
-### <a name="functions-limits"></a>İşlevleri sınırları
+### <a name="functions-limits"></a>İşlev limitleri
 [!INCLUDE [functions-limits](../includes/functions-limits.md)]
 
-### <a name="scheduler-limits"></a>Scheduler sınırları
+### <a name="scheduler-limits"></a>Zamanlayıcı sınırları
 [!INCLUDE [scheduler-limits-table](../includes/scheduler-limits-table.md)]
 
-### <a name="batch-limits"></a>Batch sınırları
+### <a name="batch-limits"></a>Toplu iş sınırları
 [!INCLUDE [azure-batch-limits](../includes/azure-batch-limits.md)]
 
-### <a name="biztalk-services-limits"></a>BizTalk Hizmetleri sınırları
-Aşağıdaki tabloda, Azure BizTalk Hizmetleri için sınırlar gösterilmektedir.
+### <a name="biztalk-services-limits"></a>BizTalk Services sınırları
+Aşağıdaki tabloda Azure BizTalk Services sınırları gösterilmektedir.
 
 [!INCLUDE [biztalk-services-service-limits](../includes/biztalk-services-service-limits.md)]
 
 ### <a name="azure-cosmos-db-limits"></a>Azure Cosmos DB sınırları
-Azure Cosmos DB limitleri için bkz. [sınırları Azure Cosmos DB'de](cosmos-db/concepts-limits.md).
+Azure Cosmos DB sınırları için bkz. [Azure Cosmos DB sınırları](cosmos-db/concepts-limits.md).
 
 ### <a name="azure-database-for-mysql"></a>MySQL için Azure Veritabanı
-Sınırları MySQL için Azure veritabanı için bkz: [MySQL için Azure veritabanı'nda sınırlamaları](mysql/concepts-limits.md).
+MySQL için Azure veritabanı limitleri için bkz. [MySQL Için Azure veritabanı 'Nda sınırlamalar](mysql/concepts-limits.md).
 
 ### <a name="azure-database-for-postgresql"></a>PostgreSQL için Azure Veritabanı
-Sınırları PostgreSQL için Azure veritabanı için bkz: [PostgreSQL için Azure veritabanı'nda sınırlamaları](postgresql/concepts-limits.md).
+PostgreSQL için Azure veritabanı limitleri için bkz. [PostgreSQL Için Azure veritabanı sınırlamaları](postgresql/concepts-limits.md).
 
-### <a name="azure-search-limits"></a>Azure arama sınırları
-Fiyatlandırma katmanı, kapasitesi ve sınırları, arama hizmetinizin belirleyin. Katmanlar şunlardır:
+### <a name="azure-cognitive-search-limits"></a>Azure Bilişsel Arama limitleri
+Fiyatlandırma katmanları, arama hizmetinizin kapasitesini ve sınırlarını tespit edin. Katmanlar şunları içerir:
 
-* **Ücretsiz** Azure diğer abonelerle paylaşılan çok kiracılı bir hizmet, değerlendirme ve küçük geliştirme projeleri için tasarlanmıştır.
-* **Temel** daha küçük bir ölçekte, yüksek oranda kullanılabilir sorgu iş yükleri için en fazla üç yinelemelerle üretim iş yükleri için adanmış işlem kaynakları sağlar.
-* **Standart**, S1, S2, S3, içerir ve S3 yüksek yoğunluklu olan daha büyük üretim iş yükleri için. İş yükü profilinizi en iyi şekilde eşleşen bir kaynak yapılandırması seçebilmeniz standart katmanında birden çok düzeyi yok.
+* Diğer Azure aboneleri ile paylaşılan **ücretsiz** çok kiracılı hizmet, değerlendirme ve küçük geliştirme projelerine yöneliktir.
+* **Temel** , yüksek düzeyde kullanılabilir sorgu iş yükleri için en fazla üç çoğaltmaya sahip üretim iş yükleri için özel bilgi işlem kaynakları sağlar.
+* S1, S2, S3 ve S3 yüksek yoğunluklu gibi **Standart**, daha büyük üretim iş yükleri için de kullanılır. İş yükü profilinizle en iyi şekilde eşleşen bir kaynak yapılandırması seçebilmeniz için Standart katmanda birden çok düzey bulunur.
 
-**Abonelik başına limitler**
+**Abonelik başına sınırlar**
 
 [!INCLUDE [azure-search-limits-per-subscription](../includes/azure-search-limits-per-subscription.md)]
 
-**Arama hizmeti başına limitler**
+**Arama hizmeti başına sınırlar**
 
 [!INCLUDE [azure-search-limits-per-service](../includes/azure-search-limits-per-service.md)]
 
-Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gibi daha ayrıntılı bir düzeyde sınırları hakkında daha fazla bilgi için bkz: [Azure Search'te hizmet sınırları](search/search-limits-quotas-capacity.md).
+Belge boyutu, saniye başına sorgu, anahtar, istek ve yanıt gibi daha ayrıntılı bir düzeyde sınırlamalar hakkında daha fazla bilgi edinmek için bkz. [Azure bilişsel arama hizmet limitleri](search/search-limits-quotas-capacity.md).
 
 ### <a name="media-services-limits"></a>Media Services sınırları
 [!INCLUDE [azure-mediaservices-limits](../includes/azure-mediaservices-limits.md)]
@@ -277,10 +293,10 @@ Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gi
 ### <a name="content-delivery-network-limits"></a>Content Delivery Network sınırları
 [!INCLUDE [cdn-limits](../includes/cdn-limits.md)]
 
-### <a name="mobile-services-limits"></a>Mobil hizmetler sınırları
+### <a name="mobile-services-limits"></a>Mobile Services sınırları
 [!INCLUDE [mobile-services-limits](../includes/mobile-services-limits.md)]
 
-### <a name="azure-monitor-limits"></a>Azure İzleyici sınırları
+### <a name="azure-monitor-limits"></a>Azure Izleyici sınırları
 
 #### <a name="alerts"></a>Uyarılar
 
@@ -289,6 +305,10 @@ Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gi
 #### <a name="action-groups"></a>Eylem grupları
 
 [!INCLUDE [monitoring-limits](../includes/azure-monitor-limits-action-groups.md)]
+
+#### <a name="log-queries-and-language"></a>Günlük sorguları ve dili
+
+[!INCLUDE [monitoring-limits](../includes/azure-monitor-limits-log-queries.md)]
 
 #### <a name="log-analytics-workspaces"></a>Log Analytics çalışma alanları
 
@@ -301,22 +321,22 @@ Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gi
 
 
 
-### <a name="notification-hubs-limits"></a>Bildirim hub'ları sınırları
+### <a name="notification-hubs-limits"></a>Notification Hubs sınırları
 [!INCLUDE [notification-hub-limits](../includes/notification-hub-limits.md)]
 
-### <a name="event-hubs-limits"></a>Olay hub'ları sınırları
+### <a name="event-hubs-limits"></a>Event Hubs sınırları
 [!INCLUDE [azure-servicebus-limits](../includes/event-hubs-limits.md)]
 
 ### <a name="service-bus-limits"></a>Service Bus sınırları
 [!INCLUDE [azure-servicebus-limits](../includes/service-bus-quotas-table.md)]
 
-### <a name="iot-hub-limits"></a>IOT hub'ı sınırları
+### <a name="iot-hub-limits"></a>IoT Hub sınırları
 [!INCLUDE [azure-iothub-limits](../includes/iot-hub-limits.md)]
 
-### <a name="iot-hub-device-provisioning-service-limits"></a>IOT Hub cihazı sağlama hizmeti sınırları
+### <a name="iot-hub-device-provisioning-service-limits"></a>Cihaz sağlama hizmeti sınırlarını IoT Hub
 [!INCLUDE [azure-iotdps-limits](../includes/iot-dps-limits.md)]
 
-### <a name="data-factory-limits"></a>Veri Fabrikası sınırları
+### <a name="data-factory-limits"></a>Data Factory sınırları
 [!INCLUDE [azure-data-factory-limits](../includes/azure-data-factory-limits.md)]
 
 ### <a name="data-lake-analytics-limits"></a>Data Lake Analytics sınırları
@@ -325,7 +345,7 @@ Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gi
 ### <a name="data-lake-store-limits"></a>Data Lake Store sınırları
 [!INCLUDE [azure-data-lake-store-limits](../includes/azure-data-lake-store-limits.md)]
 
-### <a name="database-migration-service-limits"></a>Veritabanı geçiş hizmeti limitleri
+### <a name="database-migration-service-limits"></a>Veritabanı geçiş hizmeti sınırları
 [!INCLUDE [database-migration-service-limits](../includes/database-migration-service-limits.md)]
 
 ### <a name="stream-analytics-limits"></a>Stream Analytics sınırları
@@ -337,19 +357,19 @@ Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gi
 ### <a name="event-grid-limits"></a>Event Grid sınırları
 [!INCLUDE [event-grid-limits](../includes/event-grid-limits.md)]
 
-### <a name="azure-maps-limits"></a>Azure haritalar sınırları
+### <a name="azure-maps-limits"></a>Azure haritalar limitleri
 [!INCLUDE [maps-limits](../includes/maps-limits.md)]
 
-### <a name="azure-policy-limits"></a>Azure İlkesi sınırları
+### <a name="azure-policy-limits"></a>Azure Ilke sınırları
 [!INCLUDE [policy-limits](../includes/azure-policy-limits.md)]
 
-### <a name="storsimple-system-limits"></a>StorSimple sistemi sınırları
+### <a name="storsimple-system-limits"></a>StorSimple sistem sınırları
 [!INCLUDE [storsimple-limits-table](../includes/storsimple-limits-table.md)]
 
-### <a name="backup-limits"></a>Yedekleme sınırları
+### <a name="backup-limits"></a>Yedekleme limitleri
 [!INCLUDE [azure-backup-limits](../includes/azure-backup-limits.md)]
 
-### <a name="azure-signalr-service-limits"></a>Azure SignalR hizmeti limitleri
+### <a name="azure-signalr-service-limits"></a>Azure SignalR hizmeti sınırları
 [!INCLUDE [signalr-service-limits](../includes/signalr-service-limits.md)]
 
 ### <a name="site-recovery-limits"></a>Site Recovery limitleri
@@ -358,13 +378,13 @@ Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gi
 ### <a name="api-management-limits"></a>API Management sınırları
 [!INCLUDE [api-management-service-limits](../includes/api-management-service-limits.md)]
 
-### <a name="azure-cache-for-redis-limits"></a>Azure önbelleği için Redis sınırları
+### <a name="azure-cache-for-redis-limits"></a>Redsıs limitleri için Azure önbelleği
 [!INCLUDE [redis-cache-service-limits](../includes/redis-cache-service-limits.md)]
 
 ### <a name="key-vault-limits"></a>Key Vault sınırları
 [!INCLUDE [key-vault-limits](../includes/key-vault-limits.md)]
 
-### <a name="multi-factor-authentication-limits"></a>Çok faktörlü kimlik doğrulaması sınırları
+### <a name="multi-factor-authentication-limits"></a>Multi-Factor Authentication sınırları
 [!INCLUDE [azure-mfa-service-limits](../includes/azure-mfa-service-limits.md)]
 
 ### <a name="automation-limits"></a>Otomasyon sınırları
@@ -373,16 +393,16 @@ Belge boyutuna, sorgu başına saniye, anahtarları, istekleri ve yanıtları gi
 ### <a name="identity-manager-limits"></a>Identity Manager sınırları
 [!INCLUDE [automation-limits](~/includes/managed-identity-limits.md)]
 
-### <a name="role-based-access-control-limits"></a>Rol tabanlı erişim denetimi sınırları
+### <a name="role-based-access-control-limits"></a>Rol tabanlı erişim denetimi limitleri
 [!INCLUDE [role-based-access-control-limits](../includes/role-based-access-control-limits.md)]
 
-### <a name="sql-database-limits"></a>SQL veritabanı sınırları
-SQL veritabanı limitleri için bkz. [tek veritabanları için SQL veritabanı kaynak limitleri](sql-database/sql-database-vcore-resource-limits-single-databases.md), [elastik havuzlara ve havuza alınmış veritabanları için SQL veritabanı kaynak limitleri](sql-database/sql-database-vcore-resource-limits-elastic-pools.md), ve [SQL veritabanı kaynak limitleri Yönetilen örnek için](sql-database/sql-database-managed-instance-resource-limits.md).
+### <a name="sql-database-limits"></a>SQL veritabanı limitleri
+SQL veritabanı limitleri için bkz. [SQL veritabanı kaynak limitleri tek veritabanları için](sql-database/sql-database-vcore-resource-limits-single-databases.md), [elastik havuzlar ve havuza alınmış veritabanları için SQL veritabanı kaynak limitleri](sql-database/sql-database-vcore-resource-limits-elastic-pools.md)ve [yönetilen örnekler için SQL veritabanı kaynak sınırları](sql-database/sql-database-managed-instance-resource-limits.md).
 
 ### <a name="sql-data-warehouse-limits"></a>SQL veri ambarı sınırları
-SQL veri ambarı limitleri için bkz. [SQL veri ambarı kaynak sınırları](sql-data-warehouse/sql-data-warehouse-service-capacity-limits.md).
+SQL veri ambarı sınırları için bkz. [SQL veri ambarı kaynak sınırları](sql-data-warehouse/sql-data-warehouse-service-capacity-limits.md).
 
 ## <a name="see-also"></a>Ayrıca bkz.
-- [Azure sınırları ve arttıkça anlama](https://azure.microsoft.com/blog/2014/06/04/azure-limits-quotas-increase-requests/)
+- [Azure sınırlarını ve artışları anlayın](https://azure.microsoft.com/blog/2014/06/04/azure-limits-quotas-increase-requests/)
 - [Azure için sanal makine ve bulut hizmeti boyutları](virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-- [Azure Cloud Services boyutları](cloud-services/cloud-services-sizes-specs.md)
+- [Azure Cloud Services için Boyutlar](cloud-services/cloud-services-sizes-specs.md)

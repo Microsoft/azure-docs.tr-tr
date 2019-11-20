@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory kullanarak Tahmine dayalı veri işlem hatları oluşturun | Microsoft Docs
-description: Azure Machine Learning - Batch yürütme etkinliği Azure Data factory'de kullanarak Tahmine dayalı bir işlem hattı oluşturmayı öğrenin.
+title: Azure Data Factory kullanarak tahmine dayalı veri işlem hatları oluşturma
+description: Azure Data Factory ' de Azure Machine Learning Batch yürütme etkinliğini kullanarak tahmine dayalı bir Işlem hattı oluşturmayı öğrenin.
 services: data-factory
 documentationcenter: ''
 ms.service: data-factory
@@ -11,37 +11,37 @@ ms.date: 02/20/2019
 author: nabhishek
 ms.author: abnarain
 manager: craigg
-ms.openlocfilehash: aaf1d72a0c9c56e7d140fb615caf014507ebf263
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 24568940a0f6e550ae0fe7658b81ba1c3b3d3556
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60928088"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73683772"
 ---
-# <a name="create-predictive-pipelines-using-azure-machine-learning-and-azure-data-factory"></a>Azure Machine Learning ve Azure Data Factory kullanarak öngörülebilir komut zincirleri oluşturma
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="create-predictive-pipelines-using-azure-machine-learning-and-azure-data-factory"></a>Azure Machine Learning ve Azure Data Factory kullanarak tahmine dayalı işlem hatları oluşturun
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](v1/data-factory-azure-ml-batch-execution-activity.md)
 > * [Geçerli sürüm](transform-data-using-machine-learning.md)
 
-[Azure Machine Learning](https://azure.microsoft.com/documentation/services/machine-learning/) derleme, test ve Tahmine dayalı analiz çözümlerini dağıtmanıza olanak sağlar. Bir üst düzey açısından bakıldığında, bu üç adımda gerçekleştirilir:
+[Azure Machine Learning](https://azure.microsoft.com/documentation/services/machine-learning/) tahmine dayalı analiz çözümleri oluşturmanıza, test etmenize ve dağıtmanıza olanak sağlar. Üst düzey bir görünüm noktasından üç adımda yapılır:
 
-1. **Eğitim denemesini oluşturma**. Azure Machine Learning Studio'yu kullanarak, bu adımı uygulayın. Azure Machine Learning studio, eğitim ve eğitim verilerini kullanarak bir Tahmine dayalı analiz modeli test etmek için kullandığınız bir görsel işbirliğine dayalı geliştirme ortamıdır.
-2. **Öngörücü bir denemeye dönüştürme**. Modelinizi mevcut verilerle eğitim almış ve yeni verileri puanlamak için kullanıma hazır sonra hazırlama ve puanlama için deneyiminizi kolaylaştırın.
-3. **Bir web hizmeti olarak dağıtalım**. Bir Azure web hizmeti olarak Puanlama denemenizi yayımlayabilirsiniz. Bu web hizmeti uç noktası aracılığıyla modelinizi veri göndermek ve modelden sonucu Öngörüler alırsınız.
+1. **Eğitim denemesi oluşturun**. Bu adımı Azure Machine Learning Studio 'yu kullanarak yapabilirsiniz. Azure Machine Learning Studio, eğitim verilerini kullanarak tahmine dayalı analiz modelini eğitme ve test etmek için kullandığınız işbirliğine dayalı bir görsel geliştirme ortamıdır.
+2. Tahmine **dayalı bir Deneyiye dönüştürün**. Modelinize mevcut veriler ile eğitilirken ve yeni veri puanlaması için kullanmaya hazırsanız, Puanlama için denemenizi hazırlayın ve kolaylaştırın.
+3. **Bunu bir Web hizmeti olarak dağıtın**. Puanlama denemenizin bir Azure Web hizmeti olarak yayımlanmasını sağlayabilirsiniz. Bu Web hizmeti uç noktası aracılığıyla modelinize veri gönderebilir ve modelden sonuç tahminleri alabilirsiniz.
 
-### <a name="data-factory-and-machine-learning-together"></a>Data Factory ve Machine Learning ile birlikte
-Azure Data Factory bir yayımlanan kullanan işlem hatları kolayca oluşturmanıza olanak sağlar [Azure Machine Learning](https://azure.microsoft.com/documentation/services/machine-learning) web için Tahmine dayalı analiz hizmetidir. Kullanarak **Batch yürütme etkinliği** toplu verilerde tahmin yapmayı sağlayan bir Azure Machine Learning studio web hizmeti bir Azure Data Factory işlem hattında çağırabilirsiniz.
+### <a name="data-factory-and-machine-learning-together"></a>Data Factory ve Machine Learning birlikte
+Azure Data Factory, tahmine dayalı analiz için yayımlanmış bir [Azure Machine Learning](https://azure.microsoft.com/documentation/services/machine-learning) Web hizmeti kullanan işlem hatlarını kolayca oluşturmanızı sağlar. **Toplu yürütme etkinliğini** bir Azure Data Factory işlem hattında kullanarak, toplu işteki verilerde tahmine dayalı hale getirmek için bir Azure Machine Learning Studio Web hizmeti çağırabilirsiniz.
 
-Zaman içinde yeni bir giriş veri kümeleri kullanarak eğitilebileceği denemeleri Puanlama Azure Machine Learning Studio'da Tahmine dayalı modelleri gerekir. Aşağıdaki adımları uygulayarak bir Data Factory işlem hattı modelden yeniden eğitebilir:
+Zaman içinde, Azure Machine Learning Studio Puanlama denemeleri 'un tahmine dayalı modellerinin yeni giriş veri kümeleri kullanılarak geri çekilmesi gerekir. Aşağıdaki adımları uygulayarak bir modeli Data Factory işlem hattından yeniden eğitebilirsiniz:
 
-1. Eğitim denemesini (değil Tahmine dayalı denemeye) bir web hizmeti olarak yayımlayın. Tahmine dayalı denemeye önceki senaryoda bir web hizmeti olarak kullanıma sunmak için yaptığınız gibi Azure Machine Learning Studio'da bu adımı uygulayın.
-2. Batch yürütme etkinliği Azure Machine Learning studio web hizmeti için eğitim denemesini çağırmak için kullanın. Temel olarak, hem eğitim web hizmeti hem de Puanlama web hizmeti çağırmak için Azure Machine Learning studio Batch yürütme etkinliği kullanabilirsiniz.
+1. Eğitim denemenize (tahmine dayalı deneme) Web hizmeti olarak yayımlayın. Bu adımı, önceki senaryoda, tahmine dayalı denemeyi bir Web hizmeti olarak kullanıma sunabileceğiniz Azure Machine Learning Studio 'da yapabilirsiniz.
+2. Eğitim denemesinde Web hizmetini çağırmak için Azure Machine Learning Studio Batch yürütme etkinliğini kullanın. Temel olarak, hem eğitim Web hizmeti hem de Puanlama Web hizmetini çağırmak için Azure Machine Learning Studio Batch yürütme etkinliğini kullanabilirsiniz.
 
-Yeniden eğitme ile işiniz bittiğinde, Puanlama web hizmeti (bir web hizmeti olarak kullanıma sunulan Tahmine dayalı denemeye) ile yeni eğitim modeli kullanarak güncelleştirme **Azure Machine Learning studio güncelleştirmek kaynak etkinliği**. Bkz: [kaynak güncelleştirme etkinliği kullanarak modelleri güncelleştirme](update-machine-learning-models.md) makale Ayrıntılar için.
+Yeniden eğitim elde ettikten sonra, **Azure Machine Learning Studio güncelleştirme kaynak etkinliğini**kullanarak Puanlama Web hizmetini (bir Web hizmeti olarak sunulan tahmine dayalı deneme) yeni eğitilen modelle güncelleştirin. Ayrıntılar için bkz. [kaynak güncelleştirme etkinliğini kullanarak modelleri güncelleştirme](update-machine-learning-models.md) .
 
-## <a name="azure-machine-learning-linked-service"></a>Azure Machine Learning bağlı hizmeti
+## <a name="azure-machine-learning-linked-service"></a>Bağlı hizmet Azure Machine Learning
 
-Oluşturduğunuz bir **Azure Machine Learning** bağlı hizmet bir Azure Machine Learning Web hizmeti bir Azure veri fabrikasına bağlamak için. Bağlı hizmeti Azure Machine Learning Batch yürütme etkinliği tarafından kullanılır ve [kaynak güncelleştirme etkinliği](update-machine-learning-models.md).
+Bir Azure Machine Learning Web hizmetini bir Azure Data Factory 'ye bağlamak için **Azure Machine Learning** bağlı bir hizmet oluşturursunuz. Bağlı hizmet Azure Machine Learning Batch yürütme etkinliği ve [kaynak güncelleştirme](update-machine-learning-models.md)etkinliği tarafından kullanılır.
 
 ```JSON
 {
@@ -64,15 +64,15 @@ Oluşturduğunuz bir **Azure Machine Learning** bağlı hizmet bir Azure Machine
 }
 ```
 
-Bkz: [işlem bağlı Hizmetleri](compute-linked-services.md) açıklamaları JSON tanımındaki özellikler hakkında daha fazla makale.
+JSON tanımındaki özellikler hakkında açıklamalar için bkz. [işlem bağlı hizmetleri](compute-linked-services.md) makalesi.
 
-Azure Machine Learning Klasik Web hizmetleri hem de yeni Web Hizmetleri, Tahmine dayalı denemeye için destek. Data Factory tarafından kullanılacak doğru olanı seçebilirsiniz. Azure Machine Learning bağlı hizmetini oluşturmak için gereken bilgileri almak için Git https://services.azureml.net, tüm Web Hizmetleri (yeni) ve Klasik Web Hizmetleri burada listelenir. Web erişimi ve istediğiniz hizmeti **Tüket** sayfası. Kopyalama **birincil anahtar** için **apiKey** özelliği ve **toplu istekleri** için **mlEndpoint** özelliği.
+Azure Machine Learning, tahmine dayalı denemenize yönelik hem klasik Web hizmetlerini hem de yeni Web hizmetlerini destekler. Data Factory kullanarak doğru olanı seçebilirsiniz. Azure Machine Learning bağlı hizmeti oluşturmak için gereken bilgileri almak için, tüm (yeni) Web hizmetlerinizin ve klasik Web hizmetlerinizin listelendiği https://services.azureml.netgidin. Erişmek istediğiniz Web **hizmetine tıklayın ve sayfayı kullan** ' a tıklayın. **Apikey** özelliği Için **birincil anahtarı** ve **mlEndpoint** özelliği için **Batch isteklerini** kopyalayın.
 
 ![Azure Machine Learning Web Hizmetleri](./media/transform-data-using-machine-learning/web-services.png)
 
-## <a name="azure-machine-learning-batch-execution-activity"></a>Azure Machine Learning Batch Execution etkinliği
+## <a name="azure-machine-learning-batch-execution-activity"></a>Azure Machine Learning Batch yürütme etkinliği
 
-Aşağıdaki JSON kod parçacığında, bir Azure Machine Learning Batch Execution etkinliği tanımlar. Etkinlik tanımı, daha önce oluşturduğunuz bağlı Azure Machine Learning hizmetine başvuru içeriyor.
+Aşağıdaki JSON kod parçacığı bir Azure Machine Learning Batch yürütme etkinliği tanımlar. Etkinlik tanımı, daha önce oluşturduğunuz Azure Machine Learning bağlı hizmete bir başvuru içerir.
 
 ```JSON
 {
@@ -126,20 +126,20 @@ Aşağıdaki JSON kod parçacığında, bir Azure Machine Learning Batch Executi
 
 | Özellik          | Açıklama                              | Gerekli |
 | :---------------- | :--------------------------------------- | :------- |
-| name              | İşlem hattındaki etkinliğin adı     | Evet      |
-| description       | Etkinliğin ne yaptığını açıklayan metin.  | Hayır       |
-| türü              | Data Lake Analytics U-SQL etkinliği için etkinlik türdür **AzureMLBatchExecution**. | Evet      |
-| linkedServiceName | Bağlı hizmeti Azure Machine learning'e bağlı hizmetler. Bu bağlı hizmeti hakkında bilgi edinmek için [işlem bağlı Hizmetleri](compute-linked-services.md) makalesi. | Evet      |
-| Webserviceınputs  | Azure Machine Learning Web hizmeti girişleri adlarını eşleme anahtar, değer çiftleri. Anahtarı, yayımlanan Azure Machine Learning Web hizmeti içinde tanımlanan giriş parametreleri eşleşmelidir. Giriş Blob konumları belirten bir Azure depolama bağlı hizmetleri ve FilePath özellikleri çifti değerdir. | Hayır       |
-| webServiceOutputs | Azure Machine Learning Web hizmeti çıkışları adlarını eşleme anahtar, değer çiftleri. Anahtarı, yayımlanan Azure Machine Learning Web hizmeti içinde tanımlanan çıkış parametreleri eşleşmelidir. Değer, bir Azure depolama bağlı hizmetleri ve dosya yolu: çıkış belirten özellikleri çifti Blob konumları. | Hayır       |
-| globalParameters  | Azure Machine Learning studio toplu yürütme Hizmeti uç noktası için geçirilecek anahtar, değer çiftleri. Anahtarları yayımlanan Azure Machine Learning studio web hizmeti tanımlı web hizmeti parametrelerini adları eşleşmelidir. Azure Machine Learning studio toplu yürütme isteği GlobalParameters özelliğinde değerleri geçirilir | Hayır       |
+| ad              | İşlem hattındaki etkinliğin adı     | Evet      |
+| açıklama       | Etkinliğin ne yaptığını açıklayan metin.  | Hayır       |
+| type              | Data Lake Analytics U-SQL etkinliği için etkinlik türü **AzureMLBatchExecution**' dir. | Evet      |
+| linkedServiceName | Azure Machine Learning bağlı hizmetine bağlı hizmetler. Bu bağlı hizmet hakkında bilgi edinmek için bkz. [işlem bağlı hizmetleri](compute-linked-services.md) makalesi. | Evet      |
+| Webservicegirişlerinde  | Azure Machine Learning Web hizmeti girişlerinin adlarını eşleyerek anahtar, değer çiftleri. Anahtar, yayımlanan Azure Machine Learning Web hizmetinde tanımlanan giriş parametreleriyle eşleşmelidir. Değer, giriş blobu konumlarını belirten bir Azure depolama bağlı hizmetleri ve FilePath Properties çiftidir. | Hayır       |
+| Webserviceçıktılar | Azure Machine Learning Web hizmeti çıktılarının adlarını eşleyerek anahtar, değer çiftleri. Anahtar, yayımlanan Azure Machine Learning Web hizmetinde tanımlanan çıkış parametreleriyle eşleşmelidir. Değer, çıkış blob konumlarını belirten bir Azure depolama bağlı hizmetleri ve FilePath Properties çiftidir. | Hayır       |
+| globalParameters  | Azure Machine Learning Studio Batch yürütme hizmeti uç noktasına geçirilecek anahtar, değer çiftleri. Anahtarların yayımlanan Azure Machine Learning Studio Web hizmetinde tanımlanan Web hizmeti parametrelerinin adlarıyla eşleşmesi gerekir. Değerler Azure Machine Learning Studio Batch yürütme isteğinin GlobalParameters özelliğinde geçirilir | Hayır       |
 
-### <a name="scenario-1-experiments-using-web-service-inputsoutputs-that-refer-to-data-in-azure-blob-storage"></a>Senaryo 1: Web hizmeti girdiler/Azure Blob depolama alanındaki verilere başvuran çıktılar kullanarak denemeler
+### <a name="scenario-1-experiments-using-web-service-inputsoutputs-that-refer-to-data-in-azure-blob-storage"></a>Senaryo 1: Azure Blob depolama alanındaki verilere başvuran Web hizmeti girişlerini/çıkışlarını kullanarak denemeleri
 
-Bu senaryoda, Azure Machine Learning Web hizmeti bir Azure blob depolamadaki bir dosyadan verileri kullanarak Öngörüler sağlar ve blob depolama alanında tahmin sonuçlarını depolar. Aşağıdaki JSON ile AzureMLBatchExecution etkinliği bir Data Factory işlem hattı tanımlar. Girdi ve çıktı verilerini Azure Blog depolama alanındaki bir LinkedName ve FilePath çifti kullanarak başvuruluyor. Örnekte bağlı hizmetin adı girişler ve çıkışlar farklı, doğru dosyaları seçin ve Azure Machine Learning studio Web hizmeti için göndermek için farklı bir bağlı hizmetler her girdiler/çıktılar Data Factory için kullanabilirsiniz.
+Bu senaryoda Azure Machine Learning Web hizmeti, Azure Blob depolama alanındaki bir dosyadaki verileri kullanarak tahmine dayalı hale getirir ve tahmin sonuçlarını BLOB depolama alanında depolar. Aşağıdaki JSON, bir AzureMLBatchExecution etkinliği ile Data Factory işlem hattını tanımlar. Azure blog depolamada bulunan giriş ve çıkış verilerine LinkedName ve FilePath Pair kullanılarak başvurulur. Girişlerin ve çıktıların örnek bağlantılı hizmetinde farklılık farklıysa, doğru dosyaları alabilmesi ve Azure Machine Learning Studio Web hizmeti 'ne gönderebilmek için Data Factory yönelik her bir giriş/çıkış için farklı bağlı hizmetleri kullanabilirsiniz.
 
 > [!IMPORTANT]
-> Azure Machine Learning studio denemesi, web hizmeti giriş ve çıkış bağlantı noktaları ve genel parametrelerini özelleştirebileceğiniz varsayılan adları ("input1", "input2") sahiptir. Webserviceınputs webServiceOutputs ve globalParameters ayarları için kullandığınız adları denemeleri adlarında tam olarak eşleşmelidir. Örnek istek yükü beklenen eşleme doğrulamak Azure Machine Learning studio uç noktanız için toplu işlem yürütme Yardım sayfasında görüntüleyebilirsiniz.
+> Azure Machine Learning Studio denemeniz, Web hizmeti giriş ve çıkış bağlantı noktalarında ve genel parametrelerde, özelleştirebileceğiniz varsayılan adlar ("input1", "input2") vardır. Webservicegirişlerinde, Webserviceçıktılar ve globalParameters ayarları için kullandığınız adlar, denemeleri adlarıyla tam olarak eşleşmelidir. Beklenen eşlemeyi doğrulamak için Azure Machine Learning Studio uç noktanıza yönelik toplu yürütme Yardım sayfasında örnek istek yükünü görüntüleyebilirsiniz.
 >
 >
 
@@ -188,17 +188,17 @@ Bu senaryoda, Azure Machine Learning Web hizmeti bir Azure blob depolamadaki bir
     }
 }
 ```
-### <a name="scenario-2-experiments-using-readerwriter-modules-to-refer-to-data-in-various-storages"></a>Senaryo 2: Çeşitli depoları verilerde başvurmak için Okuyucu/Yazıcı modülleri'ni kullanarak deneme
-Azure Machine Learning studio denemeleri oluştururken bir diğer yaygın senaryo, verileri içeri aktarma ve çıktı verilerini modülleri kullanmaktır. Verileri içeri aktarma modülü bir denemenin verileri yüklemek için kullanılır ve çıkış veri modülü denemelerinizden veri kaydetmektir. Verileri içeri aktarma ve çıktı verilerini modüller hakkında daha fazla ayrıntı için bkz: [verileri içeri aktarma](https://msdn.microsoft.com/library/azure/dn905997.aspx) ve [çıktı verilerini](https://msdn.microsoft.com/library/azure/dn905984.aspx) konularıyla ilgili MSDN Kitaplığı.
+### <a name="scenario-2-experiments-using-readerwriter-modules-to-refer-to-data-in-various-storages"></a>Senaryo 2: çeşitli depolama alanındaki verilere başvurmak için okuyucu/yazıcı modüllerini kullanma denemeleri
+Azure Machine Learning Studio denemeleri oluştururken diğer bir yaygın senaryo, veri al ve çıkış veri modüllerini kullanmaktır. Veri Içeri aktarma modülü, bir denemeye veri yüklemek için kullanılır ve çıkış verileri modülü, verileri denemeleri. Veri ve çıkış veri modüllerini Içeri aktarma hakkında daha fazla bilgi için bkz. MSDN kitaplığındaki veri ve [Çıkış verilerini](https://msdn.microsoft.com/library/azure/dn905984.aspx) [içeri aktarma](https://msdn.microsoft.com/library/azure/dn905997.aspx) konuları.
 
-Verileri içeri aktarma ve çıktı verilerini modülleri kullanırken, bu modüllerin her bir özellik için bir Web hizmeti parametresi kullanmak iyi bir uygulamadır. Bu web parametreleri çalışma zamanı sırasında değerleri yapılandırmanıza olanak sağlar. Örneğin, bir Azure SQL veritabanı kullanan bir verileri içeri aktarma modülü ile bir deneme oluşturabilirsiniz: XXX.database.windows.net. Web hizmeti dağıtıldıktan sonra web hizmeti tüketicilerinin adlı başka bir Azure SQL Server'ı belirtmek etkinleştirmek istediğiniz `YYY.database.windows.net`. Bir Web hizmeti parametresi yapılandırılması için bu değeri izin vermek için kullanabilirsiniz.
+Veri alma ve çıkış verileri modüllerini kullanırken, bu modüllerin her özelliği için bir Web hizmeti parametresi kullanmak iyi bir uygulamadır. Bu Web parametreleri, çalışma zamanı sırasında değerleri yapılandırmanızı sağlar. Örneğin, bir Azure SQL veritabanı kullanan bir Içeri aktarma verileri modülü ile bir deneme oluşturabilirsiniz: XXX.database.windows.net. Web hizmeti dağıtıldıktan sonra, Web hizmetinin tüketicilerini `YYY.database.windows.net`adlı başka bir Azure SQL Server belirtmesini etkinleştirmek isteyebilirsiniz. Bu değerin yapılandırılmasına izin vermek için bir Web hizmeti parametresi kullanabilirsiniz.
 
 > [!NOTE]
-> Web hizmeti giriş ve çıkış, Web hizmeti parametreleri farklıdır. Bu senaryoda, bir giriş ve çıkış bir Azure Machine Learning studio Web hizmeti için nasıl belirtilebilir gördünüz. Bu senaryoda, veri/çıkış verilerini içeri aktar modülleri özelliklerine karşılık gelen bir Web hizmeti parametrelerini geçirin.
+> Web hizmeti girişi ve çıkışı Web hizmeti parametrelerinden farklıdır. İlk senaryoda, bir giriş ve çıkışın bir Azure Machine Learning Studio Web hizmeti için nasıl belirtilebileceği gördünüz. Bu senaryoda, veri al/çıkış veri modüllerinin özelliklerine karşılık gelen bir Web hizmeti için parametreler geçirirsiniz.
 >
 >
 
-Web hizmeti parametrelerini kullanarak bir senaryo bakalım. Bir Azure Machine Learning tarafından desteklenen veri kaynakları verileri okumak için bir okuyucu modülü kullanan dağıtılmış bir Azure Machine Learning web hizmeti sahip (örneğin: Azure SQL veritabanı). Toplu yürütme işlemi gerçekleştirildikten sonra sonuçları bir yazıcı Modülü (Azure SQL veritabanı) kullanılarak yazılır.  Hiçbir web hizmeti giriş ve çıkışları denemeleri içinde tanımlanır. Bu durumda, okuyucu ve yazıcı modüller için ilgili web hizmeti parametreleri yapılandırmanızı öneririz. Bu yapılandırma Okuyucu/Yazıcı AzureMLBatchExecution etkinlik kullanırken yapılandırılması için modül sağlar. Web hizmeti parametreleri olarak belirttiğiniz **globalParameters** JSON etkinliğinde gibi bölümü.
+Web hizmeti parametrelerini kullanmak için bir senaryoya göz atalım. Azure Machine Learning tarafından desteklenen veri kaynaklarından birinden veri okumak için okuyucu modülü kullanan dağıtılmış bir Azure Machine Learning Web hizmetiniz vardır (örneğin: Azure SQL veritabanı). Toplu yürütme gerçekleştirildikten sonra, sonuçlar bir yazıcı modülü (Azure SQL veritabanı) kullanılarak yazılır.  Denemeleri içinde hiçbir Web hizmeti girişi ve çıkışı tanımlanmamıştır. Bu durumda, okuyucu ve yazıcı modülleri için ilgili Web hizmeti parametrelerini yapılandırmanızı öneririz. Bu yapılandırma, AzureMLBatchExecution etkinliği kullanılırken okuyucu/yazıcı modüllerinin yapılandırılmasını sağlar. Web hizmeti parametrelerini etkinlik JSON ' daki **Globalparameters** bölümünde aşağıdaki gibi belirtirsiniz.
 
 ```JSON
 "typeProperties": {
@@ -212,19 +212,19 @@ Web hizmeti parametrelerini kullanarak bir senaryo bakalım. Bir Azure Machine L
 ```
 
 > [!NOTE]
-> Web hizmeti parametreleri büyük/küçük harfe duyarlıdır, dolayısıyla etkinliğinde belirttiğiniz adları JSON Web hizmeti tarafından kullanıma sunulan olanları eşleşmesini.
+> Web hizmeti parametreleri büyük/küçük harfe duyarlıdır; bu nedenle, JSON etkinliğinde belirttiğiniz adların Web hizmeti tarafından açığa çıkanlara eşleştiğinden emin olun.
 >
 
-Yeniden eğitme ile işiniz bittiğinde, Puanlama web hizmeti (bir web hizmeti olarak kullanıma sunulan Tahmine dayalı denemeye) ile yeni eğitim modeli kullanarak güncelleştirme **Azure Machine Learning studio güncelleştirmek kaynak etkinliği**. Bkz: [kaynak güncelleştirme etkinliği kullanarak modelleri güncelleştirme](update-machine-learning-models.md) makale Ayrıntılar için.
+Yeniden eğitim elde ettikten sonra, **Azure Machine Learning Studio güncelleştirme kaynak etkinliğini**kullanarak Puanlama Web hizmetini (bir Web hizmeti olarak sunulan tahmine dayalı deneme) yeni eğitilen modelle güncelleştirin. Ayrıntılar için bkz. [kaynak güncelleştirme etkinliğini kullanarak modelleri güncelleştirme](update-machine-learning-models.md) .
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Anlatan farklı yollarla verileri dönüştürmek aşağıdaki makalelere bakın:
+Verileri başka yollarla nasıl dönüştürebileceğinizi açıklayan aşağıdaki makalelere bakın:
 
 * [U-SQL etkinliği](transform-data-using-data-lake-analytics.md)
 * [Hive etkinliği](transform-data-using-hadoop-hive.md)
 * [Pig etkinliği](transform-data-using-hadoop-pig.md)
 * [MapReduce etkinliği](transform-data-using-hadoop-map-reduce.md)
-* [Hadoop akış etkinliğinde](transform-data-using-hadoop-streaming.md)
+* [Hadoop akışı etkinliği](transform-data-using-hadoop-streaming.md)
 * [Spark etkinliği](transform-data-using-spark.md)
 * [.NET özel etkinliği](transform-data-using-dotnet-custom-activity.md)
 * [Saklı yordam etkinliği](transform-data-using-stored-procedure.md)

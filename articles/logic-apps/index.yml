@@ -1,57 +1,155 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Logic Apps Belgeleri
+### YamlMime:Landing
+title: Azure Logic Apps belgeleri
+summary: Bulut hizmetleri ve şirket içi sistemler arasında uygulamalarınızı ve verilerinizi tümleştirmek için otomatik ölçeklenebilir iş akışları, iş süreçleri ve kurumsal düzenlemeler oluşturun.
 metadata:
-  title: 'Azure Logic Apps Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: 'Azure Logic Apps, bulut hizmetleri ve şirket içi sistemler üzerinde uygulamalar ile verileri tümleştiren, otomatik olarak ölçeklenebilir iş akışlarını oluşturmanızı kolaylaştırır. Hızlı başlangıçlarımız, öğreticilerimiz, şablonlarımız ve API’lerimiz ile iş süreçlerini otomatik hale getiren mantıksal uygulamaları oluşturmayı, tasarlamayı ve dağıtmayı öğrenin.'
+  title: Azure Logic Apps belgeleri
+  description: Bulut hizmetleri ve şirket içi sistemler arasında uygulamalarınızı ve verilerinizi tümleştirmek için otomatik ölçeklenebilir iş akışları, iş süreçleri ve kurumsal düzenlemeler oluşturun.
   services: logic-apps
-  author: ecfan
-  manager: carmonm
   ms.service: logic-apps
-  ms.tgt_pltfrm: na
-  ms.devlang: na
-  ms.topic: logic-apps
-  ms.date: 01/09/2018
-  ms.author: estfan
-abstract:
-  description: 'Azure Logic Apps, bulut hizmetleri ve şirket içi sistemler üzerinde uygulamalar ile verileri tümleştiren, otomatik olarak ölçeklenebilir iş akışlarını oluşturmanızı kolaylaştırır. Hızlı başlangıçlarımız, öğreticilerimiz, şablonlarımız ve API’lerimiz ile iş süreçlerini otomatik hale getiren mantıksal uygulamaları oluşturmayı, tasarlamayı ve dağıtmayı öğrenin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure’da çalışan mantıksal uygulama oluşturmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_portal.svg'
-            text: Azure portal
-            href: /azure/logic-apps/quickstart-create-first-logic-app-workflow
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_visual-studio.svg'
-            text: Visual Studio
-            href: /azure/logic-apps/quickstart-create-logic-apps-with-visual-studio
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_vs-code.svg'
-            text: Visual Studio Code
-            href: /azure/logic-apps/quickstart-create-logic-apps-visual-studio-code
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Bir zamanlamaya göre çalışan ve Azure hizmetleri, Microsoft hizmetleri ve diğer hizmet olarak yazılım (SaaS) uygulamaları üzerindeki verileri tümleştiren mantıksal uygulamaları oluşturmayı öğrenin.'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/logic-apps/tutorial-build-schedule-recurring-logic-app-workflow">Zamanlama tabanlı mantıksal uygulama ile trafiği denetleme</a>
-          - html: <a href="/azure/logic-apps/tutorial-process-mailing-list-subscriptions-workflow">Mantıksal uygulama ile posta listesi isteklerini yönetme</a>
-          - html: <a href="/azure/logic-apps/tutorial-process-email-attachments-workflow">Mantıksal uygulama ile e-postaları ve ekleri işleme</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/module/az.logicapp">Azure PowerShell</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/logic/">REST API başvurusu</a></p>
+  ms.topic: landing-page
+  author: ecfan
+  ms.author: estfan; logicappspm
+  ms.date: 09/18/2019
+  ms.openlocfilehash: 8c4f701c398e27114844b5a2b95c894044c3a8b2
+  ms.sourcegitcommit: 263a69b70949099457620037c988dc590d7c7854
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/25/2019
+  ms.locfileid: "71268882"
+landingContent:
+- title: Azure Logic Apps hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Logic Apps nedir?
+      url: logic-apps-overview.md
+  - linkListType: concept
+    links:
+    - text: Azure Logic Apps için Bağlayıcılar
+      url: /azure/connectors/apis-list
+    - text: Yinelenen iş akışlarını zamanlama
+      url: concepts-schedule-automated-recurring-tasks-workflows.md
+    - text: B2B kurumsal tümleştirme
+      url: logic-apps-enterprise-integration-overview.md
+  - linkListType: learn
+    links:
+    - text: Azure Logic Apps'e giriş
+      url: https://docs.microsoft.com/learn/modules/intro-to-logic-apps/
+  - linkListType: video
+    links:
+    - text: Azure Logic Apps tanıtımı
+      url: https://channel9.msdn.com/Blogs/Azure/Introducing-Azure-Logic-Apps
+    - text: Azure Logic Apps - Kod ve API içermeyen tümleştirme
+      url: https://www.youtube.com/watch?v=Z3qaBQS0w20
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Mantıksal uygulama oluşturma - Azure portalı
+      url: quickstart-create-first-logic-app-workflow.md
+    - text: Mantıksal uygulama oluşturma - Visual Studio
+      url: quickstart-create-logic-apps-with-visual-studio.md
+  - linkListType: get-started
+    links:
+    - text: 'Şablon: Zamanlayıcı işlerini bir zamanlamaya göre çalıştırma'
+      url: https://azure.microsoft.com/resources/templates/301-logicapps-jobscheduler/
+  - linkListType: learn
+    links:
+    - text: Verileri otomatik olarak yönlendirme ve işleme
+      url: https://docs.microsoft.com/learn/modules/route-and-process-data-logic-apps
+  - linkListType: tutorial
+    links:
+    - text: Zamanlamaya dayalı iş akışı oluşturma
+      url: tutorial-build-schedule-recurring-logic-app-workflow.md
+    - text: Onaya dayalı iş akışı oluşturma
+      url: tutorial-process-mailing-list-subscriptions-workflow.md
+    - text: Azure İşlevleri ve Depolama iş akışı oluşturma
+      url: tutorial-process-email-attachments-workflow.md
+  - linkListType: video
+    links:
+    - text: Azure Logic Apps ile zamanlayıcı ustası olma
+      url: https://azure.microsoft.com/resources/videos/ignite-2018-be-the-scheduler-hero-with-azure-logic-apps
+- title: Şirket içi verilerine veya sanal ağlarına erişme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Şirket içi veri ağ geçidi nedir?
+      url: https://docs.microsoft.com/data-integration/gateway/service-gateway-onprem
+    - text: Tümleştirme hizmeti ortamı nedir?
+      url: connect-virtual-network-vnet-isolated-environment-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Şirket içi veri ağ geçidini yükleme
+      url: logic-apps-gateway-install.md
+    - text: Şirket içi veri kaynaklarına bağlanma
+      url: logic-apps-gateway-connection.md
+    - text: Sanal ağlara bağlanma
+      url: connect-virtual-network-vnet-isolated-environment-overview.md
+  - linkListType: video
+    links:
+    - text: Tümleştirme Hizmeti Ortamı’na giriş
+      url: https://azure.microsoft.com/resources/videos/azure-friday-introduction-to-azure-integration-service-environment-for-logic-apps/
+- title: B2B kurumsal tümleştirmeler oluşturma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Tümleştirme hesaplarını oluşturma ve yönetme
+      url: logic-apps-enterprise-integration-create-integration-account.md
+    - text: Ticari ortaklar ekleme
+      url: logic-apps-enterprise-integration-partners.md
+    - text: İş ortakları arasında sözleşme oluşturma
+      url: logic-apps-enterprise-integration-agreements.md
+  - linkListType: learn
+    links:
+    - text: 'Örnek: Azure DevOps ile tümleştirme hesabına bağlanma ve dağıtma'
+      url: https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-an-integration-account-from-azure-logic-apps-and-deploy-by-using-azure-devops-pipelines/
+  - linkListType: architecture
+    links:
+    - text: Temel kurumsal tümleştirme
+      url: https://docs.microsoft.com/azure/architecture/reference-architectures/enterprise-integration/basic-enterprise-integration
+- title: Mantıksal uygulamaları yönetme ve güvenliğini sağlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Mantıksal uygulamaları yönetme - Visual Studio
+      url: manage-logic-apps-with-visual-studio.md
+    - text: Tümleştirme hizmeti ortamını yönetme
+      url: ise-manage-integration-service-environment.md
+    - text: Erişimin ve verilerin güvenliğini sağlama
+      url: logic-apps-securing-a-logic-app.md
+    - text: Yönetilen kimliklerle kimlik doğrulaması
+      url: create-managed-service-identity.md
+- title: Mantıksal uygulamaları dağıtma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Mantıksal uygulama dağıtımı otomatikleştirme
+      url: logic-apps-azure-resource-manager-templates-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Mantıksal uygulama şablonları oluşturma
+      url: logic-apps-create-azure-resource-manager-templates.md
+    - text: Mantıksal uygulama şablonları dağıtma
+      url: logic-apps-deploy-azure-resource-manager-templates.md
+  - linkListType: learn
+    links:
+    - text: Resource Manager şablonlarıyla oluşturma ve dağıtma
+      url: https://docs.microsoft.com/learn/modules/create-deploy-logic-apps-using-arm-templates/
+    - text: "Örnek: Azure Depolama'ya bağlanma ve Azure DevOps ile dağıtma"
+      url: https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-storage-accounts-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/
+    - text: "Örnek: Azure Service Bus'a bağlanma ve Azure DevOps ile dağıtma"
+      url: https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-service-bus-queues-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/
+- title: Daha fazla bilgi
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Hizmet limitleri ve yapılandırma
+      url: logic-apps-limits-and-config.md
+    - text: Fiyatlandırma modeli
+      url: logic-apps-pricing.md
+    - text: İş Akışı Tanımı Dil şeması
+      url: logic-apps-workflow-definition-language.md
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.logicapp/
+    - text: REST API
+      url: https://docs.microsoft.com/rest/api/logic/

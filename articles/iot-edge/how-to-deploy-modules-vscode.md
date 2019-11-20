@@ -1,6 +1,6 @@
 ---
-title: Visual Studio Code - Azure IOT Edge modüllerini dağıtmak | Microsoft Docs
-description: Modüller IOT Edge cihazına dağıtmak için Visual Studio Code'u kullanma
+title: Visual Studio Code modüller dağıtma-Azure IoT Edge | Microsoft Docs
+description: IoT Edge cihazına modül dağıtmak için Visual Studio Code kullanma
 author: kgremban
 manager: philmea
 ms.author: kgremban
@@ -10,33 +10,33 @@ ms.reviewer: ''
 ms.service: iot-edge
 services: iot-edge
 ms.custom: seodec18
-ms.openlocfilehash: 91a074cf98291b105864a69730314efff3482254
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c3d721427075736138ba73fda51a4fd515125f1c
+ms.sourcegitcommit: c4700ac4ddbb0ecc2f10a6119a4631b13c6f946a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62126418"
+ms.lasthandoff: 10/27/2019
+ms.locfileid: "72964870"
 ---
-# <a name="deploy-azure-iot-edge-modules-from-visual-studio-code"></a>Visual Studio code'dan Azure IOT Edge modüllerini dağıtmak
+# <a name="deploy-azure-iot-edge-modules-from-visual-studio-code"></a>Visual Studio Code Azure IoT Edge modüllerini dağıtma
 
-IOT Edge modülleri, iş mantığı ile oluşturduktan sonra bunları ucuna çalışılacak cihazlarınıza dağıtmak istiyorsanız. Toplamak ve veri işlemek için birlikte çalışan birden çok modül varsa, bunları tamamını aynı anda dağıtabilir ve bunları bağlayan yönlendirme kurallarını bildirin.
+İş mantığınızla IoT Edge modüller oluşturduktan sonra, bunları kenarda çalıştırmak için cihazlarınıza dağıtmak istersiniz. Verileri toplamak ve işlemek için birlikte çalışan birden fazla modülünüz varsa, bunları tek seferde dağıtabilir ve bunları bağlayan yönlendirme kurallarını bildirebilirsiniz.
 
-Bu makalede, bir JSON dağıtım bildirimi oluşturun, sonra IOT Edge cihazına dağıtım göndermek için bu dosyayı kullanma gösterilmektedir. Birden fazla cihazda kendi paylaşılan etiketlere göre hedefleyen bir dağıtım oluşturma hakkında daha fazla bilgi için bkz. [dağıtma ve izleme uygun ölçekte IOT Edge modülleri](how-to-deploy-monitor.md)
+Bu makalede, bir JSON dağıtım bildiriminin nasıl oluşturulacağı ve dağıtım IoT Edge bir cihaza gönderimi için bu dosyanın nasıl kullanılacağı gösterilir. Paylaşılan etiketlerine göre birden çok cihazı hedefleyen bir dağıtım oluşturma hakkında bilgi için bkz. [IoT Edge modüllerini ölçeklendirerek dağıtma ve izleme](how-to-deploy-monitor.md)
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Bir [IOT hub'ı](../iot-hub/iot-hub-create-through-portal.md) Azure aboneliğinizdeki.
-* Bir [IOT Edge cihazı](how-to-register-device-portal.md) yüklü olan bir IOT Edge çalışma zamanı ile.
+* Azure aboneliğinizdeki bir [IoT Hub 'ı](../iot-hub/iot-hub-create-through-portal.md) .
+* IoT Edge çalışma zamanı yüklü [IoT Edge bir cihaz](how-to-register-device.md#register-with-visual-studio-code) .
 * [Visual Studio Code](https://code.visualstudio.com/).
-* [Azure IOT Araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools#overview) Visual Studio Code için.
+* Visual Studio Code için [Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools#overview) .
 
-## <a name="configure-a-deployment-manifest"></a>Bir dağıtım bildirimi yapılandırma
+## <a name="configure-a-deployment-manifest"></a>Dağıtım bildirimi yapılandırma
 
-Bir dağıtım bildirimi dağıtmak için modülleri ve modül ikizlerini istenen özellikleri arasında verilerin nasıl aktığını modüllerine açıklayan bir JSON belgesidir. Nasıl iş dağıtım bildirimleri ve bunların nasıl oluşturulacağı hakkında daha fazla bilgi için bkz. [nasıl IOT Edge modülleri, yapılandırılmış, yeniden kaldırılabilir ve anlamak](module-composition.md).
+Dağıtım bildirimi, hangi modüllerin dağıtılacağını, modüller arasında verilerin nasıl akacağını ve modül TWINS 'in istenen özelliklerini tanımlayan bir JSON belgesidir. Dağıtım bildirimlerinin nasıl çalıştığı ve nasıl oluşturulacağı hakkında daha fazla bilgi için bkz. [IoT Edge modüllerinin nasıl kullanılabileceğini, yapılandırılacağını ve yeniden kullanıldığını anlayın](module-composition.md).
 
-Visual Studio Code kullanarak modüllerini dağıtmak için dağıtım bildirimi olarak yerel olarak kaydedin. bir. JSON dosyası. Cihazınıza yapılandırmayı uygulamak için komutu çalıştırdığınızda, sonraki bölümde dosya yolu kullanır.
+Visual Studio Code kullanarak modüller dağıtmak için, dağıtım bildirimini yerel olarak bir olarak kaydedin. JSON dosyası. Yapılandırmayı cihazınıza uygulamak için komutunu çalıştırdığınızda sonraki bölümde bulunan dosya yolunu kullanacaksınız.
 
-Örnek olarak bir modülü ile temel bir dağıtım bildirimi şöyledir:
+Örnek olarak bir modülle birlikte temel bir dağıtım bildirimi aşağıda verilmiştir:
 
    ```json
    {
@@ -71,7 +71,7 @@ Visual Studio Code kullanarak modüllerini dağıtmak için dağıtım bildirimi
              }
            },
            "modules": {
-             "tempSensor": {
+             "SimulatedTemperatureSensor": {
                "version": "1.0",
                "type": "docker",
                "status": "running",
@@ -95,60 +95,60 @@ Visual Studio Code kullanarak modüllerini dağıtmak için dağıtım bildirimi
            }
          }
        },
-       "tempSensor": {
+       "SimulatedTemperatureSensor": {
          "properties.desired": {}
        }
      }
    }
    ```
 
-## <a name="sign-in-to-access-your-iot-hub"></a>IOT hub'ınıza erişmek için oturum açın
+## <a name="sign-in-to-access-your-iot-hub"></a>IoT Hub 'ınıza erişmek için oturum açın
 
-Visual Studio Code için Azure IOT uzantıları, IOT hub'ınıza işlemleri gerçekleştirmek için kullanabilirsiniz. Bu işlemleri çalışmak Azure hesabınızda oturum açın ve üzerinde çalıştığınız IOT hub'ı seçmek gerekir.
+IoT Hub 'ınız ile işlemler gerçekleştirmek için Visual Studio Code için Azure IoT uzantılarını kullanabilirsiniz. Bu işlemlerin çalışması için, Azure hesabınızda oturum açmanız ve üzerinde çalıştığınız IoT Hub 'ını seçmeniz gerekir.
 
-1. Visual Studio Code'da açmak **Gezgini** görünümü.
+1. Visual Studio Code ' de **Gezgin** görünümünü açın.
 
-1. Explorer alt kısmında, Genişlet **Azure IOT Hub cihazları** bölümü.
+1. Gezgin 'in alt kısmındaki **Azure IoT Hub cihazlar** bölümünü genişletin.
 
-   ![Azure IOT Hub cihazları bölümü genişletin](./media/how-to-deploy-modules-vscode/azure-iot-hub-devices.png)
+   ![Azure IoT Hub cihazları bölümünü Genişlet](./media/how-to-deploy-modules-vscode/azure-iot-hub-devices.png)
 
-1. Tıklayarak **...**  içinde **Azure IOT Hub cihazları** bölüm başlığı. Üç nokta simgesini görmüyorsanız, üst bilgisinin üzerinde gezdirin.
+1. **Azure IoT Hub Devices** bölüm üstbilgisindeki **..** . öğesine tıklayın. Üç noktayı görmüyorsanız üstbilginin üzerine gelin.
 
-1. Seçin **IOT hub'ını seçin**.
+1. **IoT Hub Seç ' i**seçin.
 
-1. Azure hesabınızda oturum açmadınız, bunu yapmak için yönergeleri izleyin.
+1. Azure hesabınızda oturum açmadıysanız, bunu yapmak için istemleri izleyin.
 
 1. Azure aboneliğinizi seçin.
 
-1. IOT hub'ınızı seçin.
+1. IoT Hub 'ınızı seçin.
 
 ## <a name="deploy-to-your-device"></a>Cihazınıza dağıtma
 
-Modül bilgileri yapılandırdığınız dağıtım bildirimini uygulayarak modülleri cihazınıza dağıtın.
+Modül bilgileriyle yapılandırdığınız dağıtım bildirimini uygulayarak modülleri cihazınıza dağıtırsınız.
 
-1. Visual Studio Code Gezgini görünümünde genişletin **Azure IOT Hub cihazları** bölümü.
+1. Visual Studio Code Gezgini görünümünde, **Azure IoT Hub cihazları** bölümünü genişletin.
 
-1. Dağıtım bildirimi ile yapılandırmak istediğiniz IOT Edge cihazı sağ tıklayın.
+1. Dağıtım bildirimiyle yapılandırmak istediğiniz IoT Edge cihaza sağ tıklayın.
 
     > [!TIP]
-    > Seçtiğiniz cihazın IOT Edge cihazı olduğunu onaylamak için bu modüllerin listesini genişletin ve varlığını doğrulamak için seçin **$edgeHub** ve **$edgeAgent**. Her IOT Edge cihazı, bu iki modül dahildir.
+    > Seçtiğiniz cihazın IoT Edge bir cihaz olduğunu doğrulamak için, modül listesini genişletmek ve **$edgeHub** ve **$edgeAgent**varlığını doğrulamak için seçin. Her IoT Edge cihaz bu iki modülü içerir.
 
-1. Seçin **tek cihaz için dağıtım oluşturma**.
+1. **Tek cihaz Için dağıtım oluştur**' u seçin.
 
-1. Kullanmak istediğiniz dağıtım bildirim JSON dosyasına gidin ve tıklayın **Edge dağıtım bildirimi seçin**.
+1. Kullanmak istediğiniz dağıtım bildirimi JSON dosyasına gidin ve **kenar dağıtım bildirimini Seç**' e tıklayın.
 
-   ![Edge dağıtım bildirimi seçin](./media/how-to-deploy-modules-vscode/select-deployment-manifest.png)
+   ![Kenar dağıtım bildirimini seçin](./media/how-to-deploy-modules-vscode/select-deployment-manifest.png)
 
-Dağıtımınızın sonuçlarını, VS Code çıktısında yazdırılır. Başarılı dağıtımlarında hedef cihaza çalışıyorsa birkaç dakika içinde uygulanan ve internet'e bağlı.
+Dağıtımınızın sonuçları VS Code çıktısında yazdırılır. Başarılı dağıtımlar, hedef cihaz çalışıyorsa ve internet 'e bağlıysa birkaç dakika içinde uygulanır.
 
-## <a name="view-modules-on-your-device"></a>Cihazınızda modülleri görüntüleme
+## <a name="view-modules-on-your-device"></a>Cihazınızdaki modülleri görüntüleme
 
-Cihazınıza modülleri dağıttıktan sonra bunların tümünün görüntüleyebilirsiniz **Azure IOT Hub cihazları** bölümü. Genişletmek için IOT Edge cihazınızın yanındaki oku seçin. Çalışmakta olan tüm modülleri görüntülenir.
+Modülleri cihazınıza dağıttıktan sonra, bunların tümünü **Azure IoT Hub cihazları** bölümünde görüntüleyebilirsiniz. IoT Edge cihazınızın yanındaki oku seçerek genişletin. Çalışmakta olan tüm modüller görüntülenir.
 
-Kısa bir süre önce yeni modülleri bir cihaza dağıtılan, üzerine **Azure IOT Hub cihazları** bölüm başlığı ve Görünümü güncelleştirmek için yenile simgesini seçin.
+Yeni modülleri bir cihaza yakın zamanda dağıttıysanız, **Azure IoT Hub cihazlar** bölüm üst bilgisinin üzerine gelin ve Yenile simgesini seçerek görünümü güncelleştirin.
 
-Bir modül, modül ikizi görüntüleyip adına sağ tıklayın.
+Modülün adına sağ tıklayıp ikizi modülünü görüntüleyin ve düzenleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi nasıl [dağıtma ve izleme uygun ölçekte IOT Edge modülleri](how-to-deploy-monitor.md)
+[IoT Edge modüllerini ölçekli olarak dağıtmayı ve izlemeyi](how-to-deploy-monitor.md) öğrenin

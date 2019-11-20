@@ -1,12 +1,12 @@
 ---
-title: Planlanmış bildirimler gönderme | Microsoft Docs
-description: Bu konuda, Azure Notification Hubs ile zamanlanmış bildirimler kullanmayı açıklar.
+title: Zamanlanmış bildirimler gönderme | Microsoft Docs
+description: Bu konuda Azure Notification Hubs ile zamanlanmış bildirimlerin kullanılması açıklanmaktadır.
 services: notification-hubs
 documentationcenter: .net
 keywords: anında iletme bildirimleri, anında iletme bildirimi, anında iletme bildirimleri zamanlama
-author: jwargo
-manager: patniko
-editor: spelluru
+author: sethmanheim
+manager: femila
+editor: jwargo
 ms.assetid: 6b718c75-75dd-4c99-aee3-db1288235c1a
 ms.service: notification-hubs
 ms.workload: mobile
@@ -14,35 +14,37 @@ ms.tgt_pltfrm: mobile-android
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 01/04/2019
-ms.author: jowargo
-ms.openlocfilehash: af0de9e8c18644f4ae200f6546c0dd0a41320f9f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 01/04/2019
+ms.openlocfilehash: ef5eedaa903480ae670f9bc48d0af89744a99d22
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61457694"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71213008"
 ---
 # <a name="how-to-send-scheduled-notifications"></a>Nasıl Yapılır: Planlanmış bildirimler gönderme
 
-Bir senaryo, gelecekte bir noktada bir bildirim göndermesini istiyor ancak arka uç kodunuzu bildirim göndermek için uyandırmak için kolay bir yolu olmayan varsa. Standart katmandaki bildirim hub'ları bildirimleri gelecekte yedi gün zamanlayın olanak tanıyan bir özelliği destekler.
+Gelecekte bir noktada bildirim göndermek istediğiniz bir senaryonuz varsa, ancak bildirimi göndermek için arka uç kodunuzu uyandırmanın kolay bir yolu yoktur. Standart katman Bildirim Hub 'ları, gelecekteki yedi güne kadar bildirim zamanlamanıza olanak tanıyan bir özelliği destekler.
 
 
-## <a name="schedule-your-notifications"></a>Bildirimlerinizi zamanlama
-Bildirim gönderilirken kullanmanız yeterlidir [ `ScheduledNotification` sınıfı](https://msdn.microsoft.com/library/microsoft.azure.notificationhubs.schedulednotification.aspx) bildirim hub'ları aşağıdaki örnekte gösterildiği gibi SDK:
+## <a name="schedule-your-notifications"></a>Bildirimlerinizi zamanlayın
+Bir bildirim gönderilirken, aşağıdaki örnekte gösterildiği gibi Notification Hubs SDK içindeki [ `ScheduledNotification` sınıfını](https://msdn.microsoft.com/library/microsoft.azure.notificationhubs.schedulednotification.aspx) kullanmanız yeterlidir:
 
-```c#
+```csharp
 Notification notification = new AppleNotification("{\"aps\":{\"alert\":\"Happy birthday!\"}}");
 var scheduled = await hub.ScheduleNotificationAsync(notification, new DateTime(2014, 7, 19, 0, 0, 0));
 ```
 
-## <a name="cancel-scheduled-notifications"></a>Planlanmış bildirimler iptal et
-Ayrıca, kendi notificationId kullanarak önceden zamanlanmış bir bildirim iptal edebilirsiniz:
+## <a name="cancel-scheduled-notifications"></a>Zamanlanan bildirimleri iptal et
+Ayrıca, önceden zamanlanmış bir bildirimi Notificationıd kullanarak iptal edebilirsiniz:
 
-```c#
+```csharp
 await hub.CancelNotificationAsync(scheduled.ScheduledNotificationId);
 ```
 
-Planlanmış bildirimler göndermek için sayısı sınırı yoktur.
+Gönderebilmeniz için zamanlanmış bildirim sayısı sınırı yoktur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

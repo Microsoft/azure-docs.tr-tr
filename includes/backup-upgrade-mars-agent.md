@@ -1,24 +1,24 @@
 ---
-title: Azure Backup Aracısı'nı yükseltme
-description: Bu bilgiler, neden Azure Backup aracısını yükseltmeniz gerekir ve yükseltme karşıdan yükleme konumu açıklar.
+title: Azure Backup aracısını yükseltme
+description: Bu bilgiler, Azure Backup aracısını yükseltmeniz ve yükseltmenin nereye indirileceğini açıklar.
 services: backup
 cloud: ''
 suite: ''
-author: markgalioto
+author: dcurwin
 manager: carmonm
 ms.service: backup
 ms.tgt_pltfrm: <optional>
 ms.devlang: <optional>
 ms.topic: article
 ms.date: 8/29/2018
-ms.author: markgal
-ms.openlocfilehash: 56310b7356dd9e263238234cf3e28bd498fa70fc
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.author: dacurwin
+ms.openlocfilehash: ea1295b08aa77a3e1a03d944ddbcbf37b6d17702
+ms.sourcegitcommit: 992e070a9f10bf43333c66a608428fcf9bddc130
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188727"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71251547"
 ---
-## <a name="upgrade-the-mars-agent"></a>MARS Aracısı'nı yükseltme
+## <a name="upgrade-the-mars-agent"></a>MARS aracısını yükseltme
 
-Microsoft Azure kurtarma hizmeti (MARS) aracısını 2.0.9083.0 aşağıda Azure erişim denetimi hizmeti (ACS) bir bağımlılık vardır. MARS Aracısı Azure Backup aracısı olarak da bilinir. 2018'den Azure içinde [Azure erişim denetimi hizmeti (ACS) kullanım dışı](../articles/active-directory/develop/active-directory-acs-migration.md). 19 Mart 2018'den itibaren yedekleme hataları 2.0.9083.0 aşağıda MARS agent'ın tüm sürümleri karşılaşırsınız. Yedekleme hatalarını gidermek veya önlemek için [MARS aracınızı en son sürüme yükseltme](https://go.microsoft.com/fwlink/?linkid=229525). MARS Aracısı yükseltmesini gerektiren sunucuları tanımlamak için adımları izleyin. [MARS aracıları yükseltmek için yedekleme blog](https://blogs.technet.microsoft.com/srinathv/2018/01/17/updating-azure-backup-agents/). MARS Aracısı, dosyaları ve klasörleri ve sistem durumu verileri Azure'a yedekleme için kullanılır. System Center DPM ve Azure Backup sunucusu verileri Azure'a yedeklemek için MARS Aracısı'nı kullanın.
+2\.0.9083.0 altına Microsoft Azure kurtarma hizmeti (MARS) aracısının sürümlerinin Azure Access Control hizmeti 'ne (ACS) bağımlılığı vardır. MARS aracısına Azure Backup Aracısı da denir. 2018 ' de Azure, [azure Access Control hizmeti 'ni (ACS) kullanımdan kaldırılmıştır](../articles/active-directory/develop/active-directory-acs-migration.md). 19 Mart 2018 ' den itibaren, 2.0.9083.0 altındaki MARS aracısının tüm sürümleri yedekleme hatalarıyla karşılaşacaktır. Yedekleme başarısızlıklarını önlemek veya çözmek için [Mars aracınızı en son sürüme yükseltin](https://go.microsoft.com/fwlink/?linkid=229525). MARS Aracısı yükseltmesi gerektiren sunucuları belirlemek için, [Mars aracılarını yükseltmek Için Yedekleme blogundan](https://blogs.technet.microsoft.com/srinathv/2018/01/17/updating-azure-backup-agents/)adımları izleyin. MARS Aracısı, dosya ve klasörleri ve sistem durumu verilerini Azure 'a yedeklemek için kullanılır. System Center DPM ve Azure Backup Sunucusu verileri Azure 'a yedeklemek için MARS aracısını kullanın.

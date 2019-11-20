@@ -1,26 +1,25 @@
 ---
-title: Azure'da Linux sanal makinelerine genel bakış | Microsoft Docs
+title: Azure 'da Linux VM 'lerine genel bakış
 description: Linux sanal makineleriyle Azure İşlem, Depolama ve Ağ hizmetlerini açıklar.
 services: virtual-machines-linux
 documentationcenter: virtual-machines-linux
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: 7965a80f-ea24-4cc2-bc43-60b574101902
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: overview
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 11/29/2017
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017, mvc
-ms.openlocfilehash: a5203d75e673a7b8206446553414ff933e00b0b6
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: dc0145e23b940f6aca9021186254b966592f343d
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "60542535"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74035352"
 ---
 # <a name="azure-and-linux"></a>Azure ve Linux
 Microsoft Azure; çözümlerinizi barındırmak için ideal olan ve giderek büyüyen bir analiz, sanal makine, veritabanı, mobil kullanım, ağ, depolama ve web dahil tümleşik genel bulut hizmetleri koleksiyonudur.  Microsoft Azure şirket içi donanım için yatırım yapmanıza gerek olmadan istediğiniz zaman yalnızca kullandığınız hizmetler için ödeme yapmanızı sağlayan ölçeklenebilir bir bilgi işlem platformu sunar.  Azure, çözümlerinizin ölçeğini artırmaya hazır olduğunuzda müşterilerinizin ihtiyaçlarını karşılamak için gereken ölçeğe yükseltilmek için hazırdır.
@@ -76,7 +75,7 @@ Microsoft, sağlanan görüntülerin güncelleştirilmiş ve Azure çalışma za
 * Red Hat - [Azure Market - Red Hat Enterprise Linux 7.2](https://azure.microsoft.com/marketplace/partners/redhat/redhatenterpriselinux72/)
 * Canonical - [Azure Market - Ubuntu Server 16.04 LTS](https://azure.microsoft.com/marketplace/partners/canonical/ubuntuserver1604lts/)
 * Debian - [Azure Market - Debian 8 "Jessie"](https://azure.microsoft.com/marketplace/partners/credativ/debian8/)
-* FreeBSD - [Azure Market - FreeBSD 10.4](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.FreeBSD104)
+* FreeBSD- [Azure Marketi-freebsd 10,4](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.FreeBSD104)
 * CoreOS - [Azure Market - CoreOS (Stable)](https://azure.microsoft.com/marketplace/partners/coreos/coreosstable/)
 * RancherOS - [Azure Market - RancherOS](https://azure.microsoft.com/marketplace/partners/rancher/rancheros/)
 * Bitnami - [Azure için Bitnami Kitaplığı](https://azure.bitnami.com/)
@@ -87,7 +86,7 @@ Microsoft, sağlanan görüntülerin güncelleştirilmiş ve Azure çalışma za
 ## <a name="getting-started-with-linux-on-azure"></a>Azure'da Linux'ı kullanmaya başlama
 Azure'ı kullanmaya başlamak için bir Azure hesabına, yüklü Azure CLI'ye ve bir çift SSH genel ve özel anahtarına ihtiyacınız vardır.
 
-### <a name="sign-up-for-an-account"></a>Hesap için kaydolma
+### <a name="sign-up-for-an-account"></a>Hesap edinmek için kaydolun
 Azure Cloud kullanmanın ilk adımı Azure hesabı için kaydolmaktır.  Başlamak için [Azure Hesap Kaydı](https://azure.microsoft.com/pricing/free-trial/) sayfasına gidin.
 
 ### <a name="install-the-cli"></a>CLI'yi yükleme
@@ -119,7 +118,7 @@ Artık VM Azure'da çalışıyor ve oturum açmaya hazırsınız.  SSH üzerinde
 * [Sanal Ağ’a Genel Bakış](../../virtual-network/virtual-networks-overview.md)
 * [Azure’da IP adresleri](../../virtual-network/virtual-network-ip-addresses-overview-arm.md)
 * [Azure'da Linux VM'sine bağlantı noktalarını açma](nsg-quickstart.md)
-* [Azure Portal'da Tam Etki Alanı Adı oluşturma](portal-create-fqdn.md)
+* [Azure portalda Tam Etki Alanı Adı oluşturma](portal-create-fqdn.md)
 
 ## <a name="containers"></a>Kapsayıcılar
 * [Azure’da Sanal Makineler ve Kapsayıcılar](containers.md)

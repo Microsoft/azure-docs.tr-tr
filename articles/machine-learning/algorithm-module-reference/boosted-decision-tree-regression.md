@@ -1,105 +1,104 @@
 ---
-title: 'Artırmalı karar ağacı regresyonu: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Artırılmış karar ağacı regresyonu modülü Azure Machine Learning hizmetinde bir topluluğu, regresyon ağaçlarında artırma kullanarak oluşturmak için kullanmayı öğrenin.
+title: 'Artırılmış karar ağacı gerileme: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Artırma kullanarak regresyon ağaçlarının bir listesini oluşturmak için Azure Machine Learning ' de, artırılmış karar ağacı gerileme modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 67e54f10074ee566ce974dbd27485904bfe0a653
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: b04a44a82f793f39b24ffd94083ca8fd5e66cfb8
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65411540"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73493878"
 ---
-# <a name="boosted-decision-tree-regression-module"></a>Artırmalı karar ağacı regresyonu Modülü
+# <a name="boosted-decision-tree-regression-module"></a>Artırılmış karar ağacı gerileme modülü
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Regresyon ağaçlarında artırma kullanarak, bir topluluğu oluşturmak için bu modülü kullanın. *Artırma* ağaçlarının her önceki ağaçları bağımlı olduğu anlamına gelir. Algoritma, öncesinde ağaçları fazlalığı sığdırma tarafından öğrenir. Bu nedenle, küçük riskiyle karşı daha az kapsamı ile doğruluğunu artırmak için karar ağacı topluluğu içinde artırma eğilimlidir.  
+Bu modülü, artırma kullanarak regresyon ağaçlarının bir listesini oluşturmak için kullanın. *Yükseltme* , her ağacın önceki ağaçlara bağlı olduğu anlamına gelir. Algoritma, önünde olan ağaçların fazlalıklarını sunarak öğrenir. Bu nedenle, bir karar ağacı ' nın artması, daha az sayıda daha az bir riske karşı doğruluğu artırmaya eğilimlidir.  
   
-Bu regresyon yöntemi denetimli öğrenme yöntemidir ve bu nedenle bir *veri kümesi olarak etiketlenmiş*. Etiket sütunun sayısal değerler içermesi gerekir.  
+Bu regresyon yöntemi denetimli bir öğrenme yöntemidir ve bu nedenle *etiketli bir veri kümesi*gerektirir. Etiket sütunu sayısal değer içermelidir.  
 
 > [!NOTE]
-> Sayısal değişkenler kullanan kümeleriyle bu modülü kullanın.  
+> Bu modülü yalnızca sayısal değişkenleri kullanan veri kümeleriyle kullanın.  
 
-Model tanımladıktan sonra bunu kullanarak eğitme [modeli eğitme](./train-model.md).
+Modeli tanımladıktan sonra [eğitme modelini](./train-model.md)kullanarak eğitimi eğitin.
 
 > [!TIP]
-> Oluşturulan ağaçları hakkında daha fazla bilgi edinmek ister misiniz? Modeli eğitilir sonra çıktısını sağ tıklayarak [modeli eğitme](./train-model.md) modülü ve select **Görselleştir** her yineleme üzerinde oluşturuldu ağaç görmek için. Her ağacının bölmelerini incelemek ve her düğüm için bkz.  
+> Oluşturulan ağaçlar hakkında daha fazla bilgi edinmek istiyor musunuz? Model eğitilirken, [model eğitimi](./train-model.md) modülünün çıktısına sağ tıklayın ve her yinelemede oluşturulan ağacı görmek Için **Görselleştir** ' i seçin. Her bir ağaç için bölünmenize gidebilir ve her bir düğüm için kurallara bakabilirsiniz.  
   
-## <a name="more-about-boosted-regression-trees"></a>Artırmalı regresyon ağaçlarında hakkında daha fazla bilgi  
+## <a name="more-about-boosted-regression-trees"></a>Artırılmış regresyon ağaçları hakkında daha fazla bilgi  
 
-Artırma bagging, rastgele ormanları ve benzeri birlikte topluluğu modelleri oluşturmak için Klasik çeşitli yöntemler biridir.  Azure Machine Learning'de artırmalı karar ağacı algoritması artırma REYONU geçişin verimli bir uygulama kullanın. Gradyan artırma bir machine learning teknik regresyon sorunları var. Bu, her adımda hata ölçün ve sonraki düzeltmek için önceden tanımlanmış kaybı işlevini kullanarak tarafınızdaki bir biçimde her regresyon ağacını oluşturur. Böylece öngörü aslında bir topluluğu zayıf tahmin modellerinin modelidir.  
+Yükseltme, ileri doğru, rastgele ormanlar ve benzeri modellerle birlikte ensebirlikte bulunan modeller oluşturmaya yönelik birkaç klasik yöntemden biridir.  Azure Machine Learning, artırılmış karar ağaçları, MART gradyanı artırma algoritmasının verimli bir uygulamasını kullanır. Gradyan artırma, regresyon sorunları için bir makine öğrenimi tekniğidir. Her bir regresyon ağacını, her adımdaki hatayı ölçmek ve bir sonraki adımda düzeltmek için önceden tanımlanmış bir kayıp işlevi kullanarak bir adım temelinde oluşturur. Bu nedenle tahmin modeli, daha zayıf tahmin modellerinin gerçekten bir şekilde ele alınabildiği bir şeydir.  
   
-Regresyon sorunları artırma ağaçları tarafınızdaki bir biçimde bir dizi oluşturur ve ardından bir rastgele Diferansiyeli kaybı işlevi kullanarak en iyi ağacı seçer.  
+Gerileme sorunlarında, artırma, bir dizi ağacı bir adım temelinde oluşturur ve sonra rastgele bir fark edici kayıp işlevi kullanarak en iyi ağacı seçer.  
   
-Ek bilgi için şu makalelere bakın:  
+Daha fazla bilgi için şu makalelere bakın:  
   
 + [https://wikipedia.org/wiki/Gradient_boosting#Gradient_tree_boosting](https://wikipedia.org/wiki/Gradient_boosting)
 
-    Gradyan artırma bu Wikipedia makalesi artırmalı ağaçları bazı arka plan bilgileri sağlar. 
+    Gradyan yükseltme üzerinde bu Vikipedi makalesi, daha fazla ağaç üzerinde bazı arka plan sağlar. 
   
 -  [https://research.microsoft.com/apps/pubs/default.aspx?id=132652](https://research.microsoft.com/apps/pubs/default.aspx?id=132652)  
 
-    Microsoft Research: LambdaRank LambdaMART için için RankNet: Genel bir bakış. J.C. tarafından Burges.
+    Microsoft Research: RankNet 'Ten LambdaRank 'e lambda damart: genel bakış. J.C. tarafından Burges.
 
-Gradyan yöntemi yükseltmeli için uygun kaybı işlevi regresyonla azaltarak sınıflandırma sorunlar için de kullanılabilir. Sınıflandırma görevleri için artırmalı ağaçları uygulaması hakkında daha fazla bilgi için bkz. [iki sınıflı artırılmış karar ağacı](./two-class-boosted-decision-tree.md).  
+Gradyan artırma yöntemi, uygun bir kayıp işleviyle regresyon için azaltılarak sınıflandırma sorunları için de kullanılabilir. Sınıflandırma görevleri için artırılmış ağaçlar uygulamasıyla ilgili daha fazla bilgi için, bkz. [Iki sınıf önceden artırılmış karar ağacı](./two-class-boosted-decision-tree.md).  
 
-## <a name="how-to-configure-boosted-decision-tree-regression"></a>Artırılmış karar ağacı regresyonu yapılandırma
+## <a name="how-to-configure-boosted-decision-tree-regression"></a>Artırılmış karar ağacı gerilemesini yapılandırma
 
-1.  Ekleme **artırılmış karar ağacı** denemenizi modülü. Bu modül altında bulabilirsiniz **Machine Learning**, **başlatmak**altında **regresyon** kategorisi. 
+1.  İşlem hattınızı **artırmalı karar ağacı** modülünü ekleyin. Bu modülü, **regresyon** kategorisinin altında **Machine Learning**, **Initialize**altında bulabilirsiniz. 
   
-2.  Model, ayarlayarak düşünürler nasıl istediğinizi belirtmek **Oluştur trainer modu** seçeneği.  
+2.  Model **oluşturma modunu** ayarlayarak modelin eğitilme şeklini belirleyin.  
   
-    -   **Tek bir parametre**: Nasıl model yapılandırın ve bağımsız değişkenler olarak, belirli bir dizi sağlamak istediğinizi biliyorsanız, bu seçeneği belirleyin.  
+    -   **Tek parametre**: modeli nasıl yapılandırmak istediğinizi biliyorsanız ve bağımsız değişken olarak belirli bir değer kümesi sağlamak için bu seçeneği belirleyin.  
    
   
-3. **Yapraklar ağaç başına en fazla sayısını**: Tüm ağacında oluşturulabilir terminal düğümlerinden (Yapraklar) sayısını gösterir.  
+3. **Ağaç başına en fazla yaprakları**: herhangi bir ağaçta oluşturulabilecek maksimum Terminal düğümü sayısını (yaprakları) belirtin.  
 
-    Bu değer artırarak, büyük olasılıkla ağaç boyutunu artırın ve overfitting ve uzun süre eğitim at the risk of daha iyi duyarlılık, alın.  
+    Bu değeri artırarak ağacın boyutunu artırabilir ve daha fazla anlayışın ve daha uzun eğitim süresi riskinden daha iyi bir duyarlık elde edersiniz.  
 
-4. **Örnek yaprak düğümü başına en düşük sayısı**: Terminal düğümlerinden (yaprak) oluşturmak için bir ağaç biçiminde gereken durumlarda en az sayısını belirtir.
+4. **Yaprak düğüm başına minimum örnek sayısı**: bir ağaçta herhangi bir Terminal düğümü (yaprak) oluşturmak için gereken minimum durum sayısını belirtin.
 
-    Bu değer artırarak yeni kurallar oluşturma için eşik artırın. Örneğin, varsayılan değer olan 1 ile tek bir çalışmasını oluşturulacak yeni bir kural neden olabilir. 5 değerine artırmak istiyorsanız, eğitim verilerini aynı koşulları karşılayan en az 5 servis taleplerini içerir etmesi gerekir.
+    Bu değeri artırarak, yeni kurallar oluşturma eşiğini artırırsınız. Örneğin, varsayılan 1 değeri ile tek bir durum bile yeni bir kuralın oluşturulmasına neden olabilir. Değeri 5 ' e artırırsanız eğitim verilerinin aynı koşulları karşılayan en az 5 durum içermesi gerekir.
 
-5. **Öğrenme oranı**: 0 ile öğrenme sırasında adım boyutu tanımlayan 1 arasında bir sayı yazın. Öğrenme oranı ne kadar hızlı veya yavaş learner en iyi çözüm üzerinde uygun sonuç verir belirler. Adım boyutu çok büyük ise, en iyi çözüm overshoot. Adım boyutu çok küçükse, eğitim en iyi çözümün yakınsanmasını daha uzun sürer.
+5. **Öğrenme oranı**: öğrenirken adım boyutunu tanımlayan 0 ile 1 arasında bir sayı yazın. Öğrenme oranı, öğrenimi en iyi çözüm üzerinde ne kadar hızlı veya yavaş söylebileceğinizi belirler. Adım boyutu çok büyükse en iyi çözümü fazla gerçekleştirebilirsiniz. Adım boyutu çok küçükse, eğitimin en iyi çözüm üzerinde yakınsama işlemi daha uzun sürer.
 
-6. **Oluşturulan ağaçları sayısı**: Karar ağaçları topluluğu içinde oluşturmak için toplam sayısını gösterir. Daha fazla karar ağaçları oluşturarak potansiyel olarak daha iyi kapsamı elde edebilirsiniz, ancak eğitim süresini artırır.
+6. **Oluşturulan ağaç sayısı**: ensede oluşturmak için gereken karar ağacının toplam sayısını belirtin. Daha fazla karar ağacı oluşturarak daha iyi tedarik sağlayabilirsiniz, ancak eğitim süresi artar.
 
-    Bu değer, eğitilen model görselleştirirken kullanılacak görüntülenen ağaçları sayısını da denetler. bakın veya bir tek ağacı yazdırma istiyorsanız, değer 1 olarak ayarlayabilirsiniz; Ancak, yalnızca bir ağaç oluşturulur (ilk parametre kümesiyle ağacı) ve herhangi bir yinelemenin gerçekleştirilir.
+    Bu değer aynı zamanda eğitilen modeli görselleştirirken gösterilecek ağaç sayısını da denetler. tek bir ağacı görmek veya yazdırmak isterseniz, değeri 1 olarak ayarlayabilirsiniz. Ancak, yalnızca bir ağaç üretilir (ilk parametre kümesini içeren ağaç) ve başka yineleme yapılmaz.
 
-7. **Rastgele sayı kaynağı**: Rasgele çekirdek değeri kullanmak için isteğe bağlı bir negatif olmayan tamsayı türü. Bir çekirdek belirterek yeniden üretilebilirliğini verilere ve parametreleri olan çalıştırmaları arasında sağlar.
+7. **Rastgele sayı çekirdek**: rastgele çekirdek değeri olarak kullanılacak isteğe bağlı negatif olmayan bir tamsayı yazın. Bir çekirdek belirtmek, aynı verilere ve parametrelere sahip olan çalışmalarda reproducibility sağlar.
 
-    Varsayılan olarak, rastgele bir tohum ilk çekirdek değeri sistem saatinden elde edilen anlamına gelen 0 olarak ayarlanır.
+    Varsayılan olarak, rastgele çekirdek 0 olarak ayarlanır; Bu, ilk çekirdek değerin sistem saatinden elde ettiği anlamına gelir.
   
-8. **Bilinmeyen kategorik düzeyleri izin**: Eğitim ve doğrulama kümelerinde bilinmeyen değerleri için bir grup oluşturmak için bu seçeneği belirleyin. Bu seçeneğin işaretini kaldırırsanız, model eğitim verilerde bulunan değerleri kabul edebilir. Model için bilinen değerleri daha az kesin olabilir, ancak daha iyi tahminler elde etmek için yeni (bilinmiyor) değerler sağlayabilirsiniz.
+8. **Bilinmeyen kategorik düzeylerine Izin ver**: eğitim ve doğrulama kümelerinde bilinmeyen değerler için bir grup oluşturmak üzere bu seçeneği belirleyin. Bu seçeneğin işaretini kaldırırsanız model yalnızca eğitim verilerinde bulunan değerleri kabul edebilir. Model, bilinen değerler için daha az kesin olabilir, ancak yeni (bilinmiyor) değerler için daha iyi tahminler sağlayabilir.
 
-9. Bir eğitim veri kümesi ve eğitim modülleri birini ekleyin:
+9. Eğitim veri kümesi ve eğitim modüllerinden birini ekleyin:
 
-    - Ayarlarsanız **Oluştur trainer modu** seçeneğini **tek parametre**, kullanın [modeli eğitme](train-model.md) modülü.  
+    - **Tek parametreye**bir **eğitmen modu** seçeneği ayarlarsanız, [model eğitme](train-model.md) modülünü kullanın.  
   
     
 
-10. Denemeyi çalıştırın.  
+10. İşlem hattını çalıştırma.  
   
-### <a name="results"></a>Sonuçlar
+## <a name="results"></a>Sonuçlar
 
-Alıştırma tamamlandıktan sonra:
+Eğitim tamamlandıktan sonra:
 
-+ Çıktısı, her yineleme üzerinde oluşturuldu ağaç görmek için sağ [modeli eğitme](train-model.md) modülü ve select **Görselleştir**.
++ Her yinelemede oluşturulan ağacı görmek için [eğitim modeli](train-model.md) modülünün çıktısına sağ tıklayın ve **Görselleştir**' i seçin.
   
-     Her ağaç gruplama detaya gitme ve her düğüm için kuralları görmek için tıklayın.  
+     Her bir ağaca tıklayarak her bir düğümün kurallarını inceleyin ve her bir düğüm için kuralları görüntüleyin.  
 
-+ Modeli Puanlama için kullanmak için ona bağlanın [Score Model](./score-model.md), yeni giriş örnekleri için değerleri tahmin etmek için.
++ Puanlama için modeli kullanmak üzere, yeni giriş örneklerine ilişkin değerleri tahmin etmek için [modeli puan](./score-model.md)alanına bağlayın.
 
-+ Eğitim modeli anlık görüntüsünü kaydetmek için sağ **Trained modeli** seçin ve eğitim modülünün çıkışını **Kaydet**. Denemeyi art arda gelen çalışır bir kopyasını kaydettiğiniz eğitilen model güncelleştirilmez.
++ Eğitilen modelin anlık görüntüsünü kaydetmek için eğitim modülünün **eğitilen model** çıktısına sağ tıklayın ve **farklı kaydet**' i seçin. Tasarruf ettiğiniz eğitilen modelin kopyası, ardışık düzenin art arda çalıştırmaları üzerinde güncellenmez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

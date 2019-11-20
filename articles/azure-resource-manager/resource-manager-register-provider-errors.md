@@ -1,24 +1,14 @@
 ---
-title: Azure kaynak sağlayıcısı kayıt hataları | Microsoft Docs
-description: Azure kaynak Sağlayıcısı kaydı hataları gidermek nasıl açıklar.
-services: azure-resource-manager
-documentationcenter: ''
-author: tfitzmac
-manager: timlt
-editor: ''
-ms.service: azure-resource-manager
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
+title: Kaynak sağlayıcısı kayıt hataları
+description: Azure Resource Manager ile kaynak dağıtılırken Azure Kaynak sağlayıcısı kayıt hatalarının nasıl çözümlendiğini açıklar.
 ms.topic: troubleshooting
 ms.date: 02/15/2019
-ms.author: tomfitz
-ms.openlocfilehash: 2f3db5e6260b065c83f0e337306d38dca6e5ff51
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 96595bab9d0db189911cac4fc1b42c722c2c1515
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60389954"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150499"
 ---
 # <a name="resolve-errors-for-resource-provider-registration"></a>Kaynak Sağlayıcısı kaydı için hataları çözümleyin
 
@@ -45,7 +35,7 @@ Message: The subscription is not registered to use namespace {resource-provider-
 
 Hata iletisi desteklenen konumları ve API sürümleri için öneriler vermeniz gerekir. Önerilen değerler birine şablonunuzu değiştirebilirsiniz. Azure portalı veya komut satırı arabirimi, kullanmakta olduğunuz tarafından otomatik olarak kayıtlı ancak tüm çoğu sağlayıcıları. Bir kaynak sağlayıcısı önce kullanmadıysanız, bu sağlayıcıyı kaydetmek gerekebilir.
 
-Ya da sanal makineleri için otomatik kapatmayı devre dışı bırakılırken benzer bir hata iletisi alabilirsiniz:
+Ya da sanal makineler için otomatik kapanmaya devre dışı bıraktığınızda şuna benzer bir hata iletisi alabilirsiniz:
 
 ```
 Code: AuthorizationFailed
@@ -54,22 +44,22 @@ Message: The client '<identifier>' with object id '<identifier>' does not have a
 
 ## <a name="cause"></a>Nedeni
 
-Aşağıdaki nedenlerden biri için bu hataları alırsınız:
+Şu nedenlerden biri için bu hataları alırsınız:
 
-* Aboneliğiniz için kaydedilmiş henüz gerekli kaynak sağlayıcısı
+* Gerekli kaynak sağlayıcısı aboneliğiniz için kayıtlı değil
 * Kaynak türü için desteklenmeyen API sürümü
 * Konum kaynak türü için desteklenmiyor
-* Otomatik kapatma için sanal makinelerin, Microsoft.DevTestLab kaynak sağlayıcısı kayıtlı olması gerekir.
+* VM 'lerin otomatik olarak kapatılmasını için, Microsoft. DevTestLab kaynak sağlayıcısının kayıtlı olması gerekir.
 
 ## <a name="solution-1---powershell"></a>Çözüm 1 - PowerShell
 
-PowerShell için şunu kullanın **Get-AzResourceProvider** , kayıt durumunu görmek için.
+PowerShell için, kayıt durumunuzu görmek için **Get-AzResourceProvider** ' ı kullanın.
 
 ```powershell
 Get-AzResourceProvider -ListAvailable
 ```
 
-Bir sağlayıcıyı kaydetmek için kullanın **Register-AzResourceProvider** ve kaydetmek istediğiniz kaynak sağlayıcısının adını sağlayın.
+Bir sağlayıcıyı kaydetmek için **register-AzResourceProvider** ' ı kullanın ve kaydetmek istediğiniz kaynak sağlayıcının adını sağlayın.
 
 ```powershell
 Register-AzResourceProvider -ProviderNamespace Microsoft.Cdn

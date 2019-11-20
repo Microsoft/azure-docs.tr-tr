@@ -1,74 +1,74 @@
 ---
-title: Bir Azure Resource Manager şablonu - Azure ile bir Windows sanal masaüstü Önizleme konak havuzu oluşturma
-description: Bir konak havuzu bir Azure Resource Manager şablonu ile Windows sanal masaüstü önizlemede oluşturmak nasıl.
+title: Windows sanal masaüstü konak havuzu Azure Resource Manager-Azure
+description: Windows sanal masaüstü 'nde bir Azure Resource Manager şablonuyla konak havuzu oluşturma.
 services: virtual-desktop
 author: Heidilohr
 ms.service: virtual-desktop
-ms.topic: how-to
-ms.date: 04/05/2019
+ms.topic: conceptual
+ms.date: 08/29/2019
 ms.author: helohr
-ms.openlocfilehash: 4df8b854a94374346eec6f77d761e65a04ef78a2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 23d032a2496e975c7e6ceafb61691c2cb1216218
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65523976"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73605759"
 ---
 # <a name="create-a-host-pool-with-an-azure-resource-manager-template"></a>Azure Resource Manager şablonuyla ana bilgisayar havuzu oluşturma
 
-Ana bilgisayar havuzları, Windows sanal masaüstü Önizleme Kiracı ortamlar içinde bir veya daha fazla aynı sanal makinelerden oluşan bir koleksiyondur. Her konak havuzu, fiziksel masaüstünde yaptıkları gibi kullanıcı etkileşim kurabilir bir uygulama grubu içerebilir.
+Konak havuzları, Windows sanal masaüstü kiracı ortamlarında bir veya daha fazla özdeş sanal makine koleksiyonudur. Her konak havuzu, kullanıcıların fiziksel bir masaüstünde yaptıkları gibi etkileşime girebilecekleri bir uygulama grubu içerebilir.
 
-Microsoft tarafından sağlanan bir Azure Resource Manager şablonu ile Windows sanal masaüstü Kiracı için bir konak havuzu oluşturmak için bu bölümün yönergeleri izleyin. Bu makalede, Windows sanal masaüstü konak havuz oluşturma, bir kaynak grubu ile Vm'leri bir Azure aboneliği oluşturun, bu sanal makineler için AD etki alanına ve Vm'leri ile Windows sanal masaüstü kaydetme hakkında size bildirir.
+Microsoft tarafından sunulan bir Azure Resource Manager şablonuyla Windows sanal masaüstü kiracısı için bir konak havuzu oluşturmak üzere bu bölümün yönergelerini izleyin. Bu makalede, Windows sanal masaüstü 'nde bir konak havuzu oluşturma, bir Azure aboneliğinde VM 'Ler içeren bir kaynak grubu oluşturma, bu VM 'leri AD etki alanına ekleme ve VM 'Leri Windows sanal masaüstü ile kaydetme hakkında bilgi alınacaktır.
 
-## <a name="what-you-need-to-run-the-azure-resource-manager-template"></a>Azure Resource Manager şablonu çalıştırmak için ihtiyacınız olanlar
+## <a name="what-you-need-to-run-the-azure-resource-manager-template"></a>Azure Resource Manager şablonunu çalıştırmak için gerekenler
 
-Azure Resource Manager şablonu çalıştırmadan önce şunları bildiğinizden emin olun:
+Azure Resource Manager şablonunu çalıştırmadan önce aşağıdaki şeyleri öğrendiğinizden emin olun:
 
-- Burada kullanmak istediğiniz görüntüyü kaynağıdır. Azure Galerisi'nden olduğundan veya özel?
-- Etki alanına katılma kimlik.
-- Windows sanal masaüstü kimlik bilgilerinizi.
+- Kullanmak istediğiniz görüntünün kaynağı. Azure galerisinden mi yoksa özel mi?
+- Etki alanınıza katılarak kimlik bilgileri.
+- Windows sanal masaüstü kimlik bilgileriniz.
 
-Azure Resource Manager şablonuyla bir Windows sanal masaüstü konak havuzu oluşturduğunuzda, Azure Galerisi, yönetilen bir görüntü veya yönetilmeyen görüntü bir sanal makine oluşturabilirsiniz. VM görüntüleri oluşturma hakkında daha fazla bilgi için bkz. [Windows VHD veya VHDX yüklemek için hazırlama](https://docs.microsoft.com/azure/virtual-machines/windows/prepare-for-upload-vhd-image) ve [Azure'da bir genelleştirilmiş VM'nin yönetilen görüntüsünü oluşturma](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource).
+Azure Resource Manager şablonuyla bir Windows sanal masaüstü konak havuzu oluşturduğunuzda, Azure Galerisi 'nden, yönetilen bir görüntüden veya yönetilmeyen görüntüden bir sanal makine oluşturabilirsiniz. VM görüntülerini oluşturma hakkında daha fazla bilgi edinmek için bkz. Azure ['a yüklemek için bir WINDOWS VHD veya vhdx hazırlama](https://docs.microsoft.com/azure/virtual-machines/windows/prepare-for-upload-vhd-image) ve [Azure 'DA genelleştirilmiş bir VM 'Nin yönetilen görüntüsünü oluşturma](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource).
 
-## <a name="run-the-azure-resource-manager-template-for-provisioning-a-new-host-pool"></a>Yeni bir ana makine havuzu sağlamak için Azure Resource Manager şablonu çalıştırın
+## <a name="run-the-azure-resource-manager-template-for-provisioning-a-new-host-pool"></a>Yeni bir konak havuzu sağlamak için Azure Resource Manager şablonunu çalıştırma
 
-Başlamak için Git [bu GitHub URL'sini](https://github.com/Azure/RDS-Templates/tree/master/wvd-templates/Create%20and%20provision%20WVD%20host%20pool).
+Başlamak için [Bu GITHUB URL](https://github.com/Azure/RDS-Templates/tree/master/wvd-templates/Create%20and%20provision%20WVD%20host%20pool)'sine gidin.
 
-### <a name="deploy-the-template-to-azure"></a>Şablonu Azure'a dağıtma
+### <a name="deploy-the-template-to-azure"></a>Şablonu Azure 'a dağıtma
 
-Bir kurumsal aboneliğinde dağıtıyorsanız, aşağıya kaydırın ve **azure'a Dağıt**, ardından Atla tamamlanan parametreleri doldurun temel görüntü kaynağınızı.
+Kurumsal abonelikte dağıtım yapıyorsanız, aşağı kaydırın ve **Azure 'A dağıt**' ı seçin, sonra da görüntü kaynağınıza göre parametreleri doldurun.
 
-Bir bulut çözümü sağlayıcısı abonelikte dağıtıyorsanız, Azure'a dağıtmak için aşağıdaki adımları izleyin:
+' Yi bir bulut çözümü sağlayıcısı aboneliğine dağıtıyorsanız, Azure 'a dağıtmak için aşağıdaki adımları izleyin:
 
-1. Ekranı aşağı kaydırın ve sağ **azure'a Dağıt**, ardından **kopya bağlantı konumu**.
-2. Not Defteri gibi bir metin düzenleyicisinde açın ve bağlantı var. yapıştırın.
-3. Hemen sonra "https://portal.azure.com/" girin (#) diyez etiketi önce bir at işareti (@) ve Kiracı etki alanı adından. İşte bir örnek kullanmanız gerektiğini biçimi: https://portal.azure.com/@Contoso.onmicrosoft.com#create/.
-4. Azure portalında bir bulut çözümü sağlayıcısı aboneliğe yönetici/katkıda bulunan izinlerine sahip bir kullanıcı olarak oturum açın.
-5. Adres çubuğuna metin düzenleyiciye kopyaladığınız bağlantı yapıştırın.
+1. Aşağı kaydırın ve **Azure 'A dağıt**' a sağ tıkladıktan sonra **bağlantı konumunu Kopyala**' yı seçin.
+2. Not Defteri gibi bir metin Düzenleyicisi açın ve bağlantıyı buraya yapıştırın.
+3. "https://portal.azure.com/" işaretinden önce ve diyez etiketinden önce (#) bir at işareti (@) ve ardından kiracı etki alanı adını girin. Aşağıda, kullanmanız gereken biçime bir örnek verilmiştir: https://portal.azure.com/@Contoso.onmicrosoft.com#create/.
+4. Bulut çözümü sağlayıcısı aboneliğine yönetici/katkıda bulunan izinleri olan bir kullanıcı olarak Azure portal oturum açın.
+5. Metin düzenleyicisine kopyaladığınız bağlantıyı adres çubuğuna yapıştırın.
 
-Windows sanal masaüstü hangi parametreleri hakkında senaryonuz için girmeniz gereken yönergeler için bkz [Benioku dosyası](https://github.com/Azure/RDS-Templates/blob/master/wvd-templates/Create%20and%20provision%20WVD%20host%20pool/README.md). Benioku dosyasını her zaman en son değişikliklerle güncelleştirilir.
+Senaryonuza yönelik girmeniz gereken parametreler hakkında rehberlik için bkz. Windows sanal masaüstü [Benioku dosyası](https://github.com/Azure/RDS-Templates/blob/master/wvd-templates/Create%20and%20provision%20WVD%20host%20pool/README.md). Benioku dosyası her zaman en son değişikliklerle güncellenir.
 
-## <a name="assign-users-to-the-desktop-application-group"></a>Masaüstü uygulama grubuna kullanıcı atama
+## <a name="assign-users-to-the-desktop-application-group"></a>Kullanıcıları Masaüstü uygulama grubuna atama
 
-GitHub Azure Resource Manager şablonu tamamlandıktan sonra sanal makinelerinizde tam oturum Masaüstü test başlamadan önce kullanıcı erişimi atayın.
+GitHub Azure Resource Manager şablonu tamamlandıktan sonra, sanal makinelerinizdeki tam oturum masaüstlerini teste başlamadan önce Kullanıcı erişimi atayın.
 
-İlk olarak, [indirin ve Windows sanal masaüstü PowerShell modülünü içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview) henüz yapmadıysanız, PowerShell oturumunuzda kullanılacak.
+İlk olarak, henüz yapmadıysanız PowerShell oturumunuzda kullanmak üzere [Windows sanal masaüstü PowerShell modülünü indirip içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview) .
 
-Masaüstü uygulama grubuna kullanıcıları atamak için bir PowerShell penceresi açın ve Windows sanal masaüstü ortama oturum açmak için bu cmdlet'i çalıştırın:
+Kullanıcıları Masaüstü uygulama grubuna atamak için bir PowerShell penceresi açın ve Windows sanal masaüstü ortamında oturum açmak üzere bu cmdlet 'i çalıştırın:
 
 ```powershell
 Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
 ```
 
-Bundan sonra kullanıcılar bu cmdlet ile masaüstü uygulama grubuna ekleyin:
+Bundan sonra, bu cmdlet 'i kullanarak masaüstü uygulama grubuna kullanıcı ekleyin:
 
 ```powershell
 Add-RdsAppGroupUser <tenantname> <hostpoolname> "Desktop Application Group" -UserPrincipalName <userupn>
 ```
 
-Kullanıcının UPN kullanıcının kimliğini Azure Active Directory'de eşleşmesi gerekir (örneğin, user1@contoso.com). Birden çok kullanıcı eklemek istiyorsanız, her kullanıcı için bu cmdlet'i çalıştırmanız gerekir.
+Kullanıcının UPN 'si Azure Active Directory kullanıcının kimliğiyle eşleşmelidir (örneğin, user1@contoso.com). Birden çok kullanıcı eklemek istiyorsanız, her kullanıcı için bu cmdlet 'i çalıştırmanız gerekir.
 
-Bu adımları tamamladıktan sonra Masaüstü uygulama grubuna eklenen kullanıcılar Windows sanal masaüstüne desteklenen Uzak Masaüstü istemcileri ile oturum açın ve bir kaynağı için bir oturum Masaüstü bakın.
+Bu adımları tamamladıktan sonra, Masaüstü uygulama grubuna eklenen kullanıcılar Windows sanal masaüstünde desteklenen uzak masaüstü istemcileriyle oturum açabilir ve oturum Masaüstü için bir kaynak görebilirler.
 
 >[!IMPORTANT]
->Güvenliğini sağlamaya yardımcı olmak için azure'da Windows sanal masaüstü ortamınızı Vm'lerinizde gelen bağlantı noktası 3389 açmayın öneririz. Windows sanal masaüstü açık bir konak havuzun Vm'leri erişmek kullanıcılar için 3389 numaralı gelen bağlantı noktası gerektirmez. Sorun giderme amacıyla 3389 numaralı bağlantı noktası açmanız gerekiyorsa, kullanmanızı öneririz [tam zamanında VM erişimi](https://docs.microsoft.com/azure/security-center/security-center-just-in-time).
+>Azure 'da Windows sanal masaüstü ortamınızı güvenli hale getirmeye yardımcı olmak için, VM 'leriniz üzerinde gelen bağlantı noktası 3389 ' i açmanız önerilir. Windows sanal masaüstü, kullanıcıların konak havuzunun VM 'lerine erişmesi için açık bir gelen bağlantı noktası 3389 gerektirmez. Sorun giderme amacıyla bağlantı noktası 3389 ' i açmanız gerekiyorsa, [tam ZAMANıNDA VM erişimi](https://docs.microsoft.com/azure/security-center/security-center-just-in-time)kullanmanızı öneririz.

@@ -44,6 +44,10 @@
       href: expressroute-erdirect-about.md
     - name: ExpressRoute Global Reach hakkında
       href: expressroute-global-reach.md
+    - name: ExpressRoute şifrelemesi hakkında
+      href: expressroute-about-encryption.md
+    - name: Azure'ı genel buluta bağlama
+      href: expressroute-connect-azure-to-public-cloud.md
     - name: Arka Uç Bağlantısı Birlikte Çalışabilirliği
       items:
         - name: Önsöz ve Test Kurulumu
@@ -56,8 +60,8 @@
           href: ../networking/connectivty-interoperability-data-plane.md?toc=%2fazure%2fexpressroute%2ftoc.json
     - name: Ağlar arası bağlantı
       href: cross-network-connectivity.md
-    - name: Azure ortak güvenlik öznitelikleri
-      href: expressroute-security-attributes.md
+    - name: Yerleşik güvenlik denetimleri
+      href: expressroute-security-controls.md
     - name: Yüksek Kullanılabilirlik Tasarımı
       href: designing-for-high-availability-with-expressroute.md
     - name: Olağanüstü Durum Kurtarma Tasarımı
@@ -74,6 +78,9 @@
           href: expressroute-howto-circuit-arm.md
         - name: Azure CLI
           href: howto-circuit-cli.md
+        - name: Azure Resource Manager şablonu
+          displayName: 'ARM,resource manager template'
+          href: expressroute-howto-circuit-resource-manager-template.md
     - name: Eşleme yapılandırması oluşturma ve değiştirme
       items:
         - name: Azure portal
@@ -116,6 +123,8 @@
           href: expressroute-howto-erdirect.md
         - name: Azure CLI
           href: expressroute-howto-expressroute-direct-cli.md
+    - name: ExpressRoute Direct için MACsec bağlantı noktalarını yapılandırma
+      href: expressroute-howto-macsec.md
     - name: Microsoft eşlemesi için rota filtreleri yapılandırma
       items:
         - name: Azure portal
@@ -190,6 +199,9 @@
       href: 'https://msdn.microsoft.com/library/azure/mt586720'
     - name: REST (Klasik)
       href: 'https://msdn.microsoft.com/library/azure/dn606310'
+    - name: Resource Manager şablonu
+      displayName: 'ARM,resource manager template'
+      href: /azure/templates/microsoft.network/expressroutecircuits
 - name: Kaynaklar
   items:
     - name: ExpressRoute SSS

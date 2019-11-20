@@ -1,22 +1,20 @@
 ---
 title: Azure Hızlı Başlangıç - Ruby kullanarak nesne depolamada blob oluşturma | Microsoft Docs
 description: Bu hızlı başlangıçta, nesne (Blob) depolamada depolama hesabı ve kapsayıcı oluşturursunuz. Sonra, Azure Depolama’ya blob yüklemek, blob indirmek ve bir kapsayıcıdaki blobları listelemek amacıyla Ruby için depolama istemcisi kitaplığını kullanırsınız.
-services: storage
 author: mhopkins-msft
-ms.custom: mvc
-ms.service: storage
-ms.topic: quickstart
-ms.date: 11/14/2018
 ms.author: mhopkins
-ms.reviewer: seguler
-ms.openlocfilehash: 77e8e3dd8c32545b24230512ded00e335108d802
-ms.sourcegitcommit: f6ba5c5a4b1ec4e35c41a4e799fb669ad5099522
+ms.date: 11/14/2018
+ms.service: storage
+ms.subservice: blobs
+ms.topic: quickstart
+ms.openlocfilehash: 8c24c5f043d17b5f0e54ca1c2c6cf41a0d3fe9bc
+ms.sourcegitcommit: 85b3973b104111f536dc5eccf8026749084d8789
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65150441"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68726362"
 ---
-# <a name="quickstart-upload-download-and-list-blobs-using-ruby"></a>Hızlı Başlangıç: Karşıya yükleme, indirme ve Ruby kullanarak blobları Listele
+# <a name="quickstart-upload-download-and-list-blobs-using-ruby"></a>Hızlı Başlangıç: Ruby kullanarak Blobları karşıya yükleme, indirme ve listeleme
 
 Bu hızlı başlangıçta, Azure Blob depolamadaki bir kapsayıcıda blok bloblarını karşıya yüklemek, indirmek ve listelemek için Ruby'yi nasıl kullanabileceğinizi öğreneceksiniz. 
 
@@ -27,7 +25,7 @@ Bu hızlı başlangıçta, Azure Blob depolamadaki bir kapsayıcıda blok blobla
 Aşağıdaki ek önkoşulların yüklü olduğundan emin olun:
 
 * [Ruby](https://www.ruby-lang.org/en/downloads/)
-* [Ruby için Azure depolama kitaplığını](https://docs.microsoft.com/azure/storage/blobs/storage-ruby-how-to-use-blob-storage), rubygem paketini kullanarak: 
+* Rubygeı paketini kullanarak [Ruby Için Azure depolama kitaplığı](https://docs.microsoft.com/azure/storage/blobs/storage-ruby-how-to-use-blob-storage): 
 
     ```
     gem install azure-storage-blob

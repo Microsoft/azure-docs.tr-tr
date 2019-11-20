@@ -1,6 +1,6 @@
 ---
-title: Daha fazla veri, öğeleri veya sayfalandırma - Azure Logic Apps ile kayıt Al
-description: Azure Logic Apps Bağlayıcısı eylemleri için varsayılan sayfa boyutu sınırını aşmasına sayfalandırma ayarlayın
+title: Sayfalandırmaya sahip daha fazla öğe veya kayıt alın-Azure Logic Apps
+description: Azure Logic Apps içindeki bağlayıcı eylemleri için varsayılan sayfa boyutu sınırını aşacak şekilde sayfalandırma ayarla
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -9,26 +9,26 @@ ms.author: estfan
 ms.reviewer: klam, LADocs
 ms.topic: article
 ms.date: 04/11/2019
-ms.openlocfilehash: 2d1bcf2cf83fab106f79120c3caacc424f839836
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e86600312490c77ed492cb28a359add0fed90596
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64476549"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72679885"
 ---
-# <a name="get-more-data-items-or-records-by-using-pagination-in-azure-logic-apps"></a>Azure Logic Apps'te sayfalandırma kullanarak daha fazla veri, öğe veya kayıt Al
+# <a name="get-more-data-items-or-records-by-using-pagination-in-azure-logic-apps"></a>Azure Logic Apps ' de sayfalandırma kullanarak daha fazla veri, öğe veya kayıt alın
 
-Aldığınızda veri, öğeleri veya kayıtları bir bağlayıcı eylemini kullanarak [Azure Logic Apps](../logic-apps/logic-apps-overview.md), sonuç kümeleri çok büyük eylem aynı anda tüm sonuçlar döndürmüyor alabilirsiniz. Bazı eylemler ile bağlayıcı'nın varsayılan sayfa boyutu sonuç sayısını aşabilir. Bu durumda, eylem sonuçlarını yalnızca ilk sayfasını döndürür. Örneğin, SQL Server bağlayıcı'nın varsayılan sayfa boyutu **satırları Al** eylem 2048'dir, ancak diğer ayarlar göre değişebilir.
+[Azure Logic Apps](../logic-apps/logic-apps-overview.md)bir bağlayıcı eylemini kullanarak veri, öğe veya kayıt aldığınızda, sonuç kümelerini, eylemin aynı anda tüm sonuçları döndürmediğini büyük bir şekilde elde edebilirsiniz. Bazı eylemlerle, sonuç sayısı bağlayıcının varsayılan sayfa boyutunu aşabilir. Bu durumda, eylem yalnızca ilk sonuç sayfasını döndürür. Örneğin, SQL Server bağlayıcının **satırları al** eyleminin varsayılan sayfa boyutu 2048 ' dir, ancak diğer ayarlara göre farklılık gösterebilir.
 
-Size bazı eylemler çalıştıracak bir *sayfalandırma* mantıksal uygulamanız sayfalandırma sınıra kadar daha fazla sonuç almak ancak eylem tamamlandığında tek bir mesaj olarak bu sonuçları döndürmek için ayarı. Sayfalandırma kullandığınızda belirtmeniz gerekir bir *eşiği* sonuçları döndürmek için eylem istediğiniz hedef sayısı değeri. Eylem, belirtilen eşik ulaşana kadar sonuçlarını alır. Toplam öğe sayısı belirtilen eşik değerinden düşük olduğunda, tüm sonuçları eylemi alır.
+Bazı eylemler, mantıksal uygulamanızın sayfalandırma sınırına kadar daha fazla sonuç alabilmesi için bir *sayfalandırma* ayarını açmanızı sağlar, ancak eylem tamamlandığında bu sonuçları tek bir ileti olarak döndürebilir. Sayfalandırma kullandığınızda, eylemin döndürmesini istediğiniz sonuç sayısı olan bir *eşik* değeri belirtmeniz gerekir. Eylem, belirtilen eşiğe ulaşıncaya kadar sonuçları alır. Toplam öğe sayısı belirtilen eşikten az olduğunda, eylem tüm sonuçları alır.
 
-Bir bağlayıcı'nın sayfa boyutuna göre sonuçlarını sayfalandırma ayarı alır sayfalarında kapatılıyor. Bu davranışı bazı durumlarda, size, belirtilen eşikten daha fazla sonuç elde anlamına gelir. Örneğin, SQL Server kullanırken **satırları Al** sayfalandırma ayarını destekler eylemini:
+Sayfalandırma ayarını açmak, bir bağlayıcının sayfa boyutuna bağlı olarak sonuçların sayfalarını alır. Bu davranış bazen, belirtilen eşikten daha fazla sonuç elde edemeyeceğiniz anlamına gelir. Örneğin, sayfalandırma ayarını destekleyen SQL Server **satırları al** eylemini kullanırken:
 
-* Eylemin varsayılan sayfa boyutu 2048 sayfa başına kayıt ' dir.
-* 10\.000 kayıtları ve en düşük 5000 kayıt belirtin varsayalım.
-* Sayfalar, bu nedenle en az belirtilen en düşük almak için kayıtlarının sayfalandırma alır, eylem 6144 kayıtları (3 sayfaları x 2048 kayıtlar), 5000 kayıtları döndürür.
+* Eylemin varsayılan sayfa boyutu sayfa başına 2048 kayıtdır.
+* 10.000 kayıt olduğunu ve en az 5000 kayıt olduğunu varsayalım.
+* Sayfalandırma, kayıt sayfalarını alır, bu nedenle en az belirtilen minimum değeri almak için, işlem 5000 kayıt değil 6144 kayıt (3 sayfa x 2048 kayıt) döndürür.
 
-Burada belirli eylemler için varsayılan sayfa boyutu aşabilir bağlayıcıları yalnızca bir kısmı bir listesi aşağıda verilmiştir:
+Aşağıda, belirli eylemler için varsayılan sayfa boyutunu aştığınız bazı bağlayıcılardan yalnızca bazılarına sahip bir liste verilmiştir:
 
 * [Azure Blob Depolama](https://docs.microsoft.com/connectors/azureblob/)
 * [Dynamics 365](https://docs.microsoft.com/connectors/dynamicscrmonline/)
@@ -43,29 +43,29 @@ Burada belirli eylemler için varsayılan sayfa boyutu aşabilir bağlayıcılar
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure aboneliği. Henüz Azure aboneliğiniz yoksa, [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
+* Azure aboneliği. Henüz bir Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-* Mantıksal uygulama ve sayfalandırma üzerinde etkinleştirmek için istediğiniz eylemi. Mantıksal uygulama yoksa bkz [hızlı başlangıç: İlk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
+* Mantıksal uygulama ve sayfalandırmayı açmak istediğiniz eylem. Mantıksal uygulamanız yoksa, bkz. [hızlı başlangıç: ilk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
 
-## <a name="turn-on-pagination"></a>Sayfalandırma üzerinde Aç
+## <a name="turn-on-pagination"></a>Sayfalandırmayı aç
 
-Bir eylem, mantıksal Uygulama Tasarımcısı'nda sayfalandırma destekleyip desteklemediğini belirlemek için eylem ayarlarını kontrol edin **sayfalandırma** ayarı. Bu örnek, SQL Server'ın sayfalandırma nasıl gösterir **satırları Al** eylem.
+Mantıksal uygulama tasarımcısında bir eylemin sayfalandırmayı destekleyip desteklemediğini anlamak için, **sayfalandırma** ayarı için eylemin ayarlarını denetleyin. Bu örnekte, SQL Server **satırları al** eyleminde sayfalandırmayı açma işlemi gösterilmektedir.
 
-1. Eylemin sağ üst köşede bulunan üç noktayı seçin ( **...** ) düğmesini ve **ayarları**.
+1. Eylemin sağ üst köşesinde üç nokta ( **...** ) düğmesini ve ardından **Ayarlar**' ı seçin.
 
-   ![Eylem ayarları](./media/logic-apps-exceed-default-page-size-with-pagination/sql-action-settings.png)
+   ![Eylemin ayarlarını açın](./media/logic-apps-exceed-default-page-size-with-pagination/sql-action-settings.png)
 
-   Sayfalandırma eylemi destekliyorsa, bir işlem gösterilir **sayfalandırma** ayarı.
+   Eylem sayfalandırmayı destekliyorsa, eylem **sayfalandırma** ayarını gösterir.
 
-1. Değişiklik **sayfalandırma** ayarını **kapalı** için **üzerinde**. İçinde **eşiği** özelliği için döndürülecek eylem istediğiniz sonuçları hedef sayısı bir tamsayı değeri belirtin.
+1. **Sayfalama** ayarını **Açık** **olarak değiştirin** . **Threshold** özelliğinde, eylemin döndürmesini istediğiniz sonuçların hedef sayısı için bir tamsayı değeri belirtin.
 
-   ![Döndürülecek sonuç sayısı alt sınırını belirtin](./media/logic-apps-exceed-default-page-size-with-pagination/sql-action-settings-pagination.png)
+   ![Döndürülecek en az sonuç sayısını belirtin](./media/logic-apps-exceed-default-page-size-with-pagination/sql-action-settings-pagination.png)
 
-1. Hazır olduğunuzda seçin **Bitti**.
+1. Hazırsanız, **bitti**' yi seçin.
 
-## <a name="workflow-definition---pagination"></a>İş akışı tanımı - sayfalandırma
+## <a name="workflow-definition---pagination"></a>İş akışı tanımı-sayfalandırma
 
-Bu özelliği destekleyen bir eylem için sayfalandırma açtığınızda, mantıksal uygulamanızın iş akışı tanımını içeren `"paginationPolicy"` özelliği ile birlikte `"minimumItemCount"` bu eylemin özelliğinde `"runtimeConfiguration"` özelliği, örneğin:
+Bu özelliği destekleyen bir eylem için sayfalandırmayı açtığınızda, mantıksal uygulamanızın iş akışı tanımı, bu eylemin `"runtimeConfiguration"` özelliğindeki `"minimumItemCount"` özelliği ile birlikte `"paginationPolicy"` özelliğini içerir, örneğin:
 
 ```json
 "actions": {

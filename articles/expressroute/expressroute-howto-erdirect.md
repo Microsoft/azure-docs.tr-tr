@@ -1,21 +1,20 @@
 ---
-title: Azure ExpressRoute doğrudan - yapılandırma | Microsoft Docs
-description: Bu sayfa ExpressRoute doğrudan yapılandırmanıza yardımcı olur.
+title: "Azure ExpressRoute: ExpressRoute Direct 'i yapılandırma"
+description: Bu sayfa, ExpressRoute Direct 'i yapılandırmanıza yardımcı olur.
 services: expressroute
 author: jaredr80
 ms.service: expressroute
 ms.topic: conceptual
 ms.date: 05/20/2019
 ms.author: jaredro
-ms.custom: seodec18
-ms.openlocfilehash: 0fec7234d18659051c61fda593b1ba0fb846c220
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ba7bddb2f11732f7de5f1dfa68b66be1204722cc
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65964249"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083480"
 ---
-# <a name="how-to-configure-expressroute-direct"></a>ExpressRoute doğrudan'ı yapılandırma
+# <a name="how-to-configure-expressroute-direct"></a>ExpressRoute Direct 'i yapılandırma
 
 ExpressRoute doğrudan, Microsoft'un küresel ağı dünya genelindeki stratejik dağıtılmış eşleme konumlarda doğrudan bağlanma özelliği sağlar. Daha fazla bilgi için [hakkında ExpressRoute doğrudan bağlanma](expressroute-erdirect-about.md).
 
@@ -26,7 +25,7 @@ ExpressRoute doğrudan, Microsoft'un küresel ağı dünya genelindeki stratejik
    ```powershell
    Connect-AzAccount 
 
-   Select-AzSubscription -Subscription “<SubscriptionID or SubscriptionName>”
+   Select-AzSubscription -Subscription "<SubscriptionID or SubscriptionName>"
    ```
 2. ExpressRoute doğrudan'ın desteklendiği tüm konumların listesi.
   
@@ -163,10 +162,10 @@ ExpressRoute doğrudan, Microsoft'un küresel ağı dünya genelindeki stratejik
    Bağlantılar [0] birincil bağlantı ve bağlantılar [1] ikincil bağlantı noktası.
 
    ```powershell
-   $ERDirect.Links[0].AdminState = “Enabled”
+   $ERDirect.Links[0].AdminState = "Enabled"
    Set-AzExpressRoutePort -ExpressRoutePort $ERDirect
    $ERDirect = Get-AzExpressRoutePort -Name $Name -ResourceGroupName $ResourceGroupName
-   $ERDirect.Links[1].AdminState = “Enabled”
+   $ERDirect.Links[1].AdminState = "Enabled"
    Set-AzExpressRoutePort -ExpressRoutePort $ERDirect
    ```
    **Örnek çıktı:**
@@ -218,7 +217,7 @@ ExpressRoute doğrudan, Microsoft'un küresel ağı dünya genelindeki stratejik
    Circuits                   : []
    ```
 
-   İle aynı yordamı `AdminState = “Disabled”` bağlantı noktalarını açmak için.
+   İle aynı yordamı `AdminState = "Disabled"` bağlantı noktalarını açmak için.
 
 ## <a name="circuit"></a>Bir bağlantı hattı oluşturma
 
@@ -226,9 +225,9 @@ Varsayılan olarak 10 bağlantı hatları ExpressRoute doğrudan kaynak olduğu 
 
 Yalnızca yukarıda özetlenen senaryoları desteklemek için ExpressRoute doğrudan üzerinde kullanılan ek bağlantı hattı bant genişlikleri vardır. Bunlar: 40Gbps ve 100Gbps.
 
-**SkuTier** yerel, standart veya Premium olabilir.
+**Skutier** yerel, standart veya Premium olabilir.
 
-**SkuFamily** MeteredData yalnızca sınırsız olarak olmalıdır ExpressRoute doğrudan üzerinde desteklenmiyor.
+**Skufamily** , doğrudan ExpressRoute Direct üzerinde desteklenmediği için MeteredData olmalıdır.
 
 Bir devreyi ExpressRoute doğrudan kaynağı oluşturun.
 
@@ -236,7 +235,7 @@ Bir devreyi ExpressRoute doğrudan kaynağı oluşturun.
   New-AzExpressRouteCircuit -Name $Name -ResourceGroupName $ResourceGroupName -ExpressRoutePort $ERDirect -BandwidthinGbps 100.0  -Location $AzureRegion -SkuTier Premium -SkuFamily MeteredData 
   ```
 
-  Diğer bant genişlikleri şunlardır: 5.0, 10.0 ve 40.0
+  Diğer bant genişlikleri içerir: 5.0, 10.0 ve 40.0
 
   **Örnek çıktı:**
 

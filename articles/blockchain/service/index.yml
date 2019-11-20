@@ -1,57 +1,111 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure Blok Zinciri Hizmeti Belgeleri
+summary: Blok zinciri uygulamaları oluşturmayı öğrenin. Öğreticiler, API başvuruları ve diğer belgeler, Azure’daki blok zinciri uygulamalarını oluşturmak, geliştirmek ve yönetmek için Azure Blok Zinciri Hizmetini nasıl kullanacağınızı gösterir.
 metadata:
-  title: 'Azure Blok Zinciri Hizmeti Belgeleri - Öğreticiler, API Başvurusu'
-  description: 'Blok zinciri uygulamaları oluşturmayı öğrenin. Öğreticiler, API başvuruları ve diğer belgeler, Azure’daki blok zinciri uygulamalarını oluşturmak, geliştirmek ve yönetmek için Azure Blok Zinciri Hizmetini nasıl kullanacağınızı gösterir.'
+  title: Azure Blok Zinciri Hizmeti Belgeleri - Öğreticiler, API Başvurusu
+  description: Blok zinciri uygulamaları oluşturmayı öğrenin. Öğreticiler, API başvuruları ve diğer belgeler, Azure’daki blok zinciri uygulamalarını oluşturmak, geliştirmek ve yönetmek için Azure Blok Zinciri Hizmetini nasıl kullanacağınızı gösterir.
   services: azure-blockchain
-  author: patricka
-  manager: femila
   ms.service: azure-blockchain
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 03/13/2019
+  author: PatAltimore
   ms.author: patricka
-abstract:
-  description: 'Blok zinciri uygulamaları oluşturmayı öğrenin. Öğreticiler, API başvuruları ve diğer belgeler, Azure’daki blok zinciri uygulamalarını oluşturmak, geliştirmek ve kullanmak için Azure Blok Zinciri Hizmetini nasıl kullanacağınızı gösterir.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure’da konsorsiyum üyeleri oluşturmayı ve bunlara bağlanmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: ./media/index/deploy.svg
-            text: Konsorsiyum üyesi oluşturma
-            href: /azure/blockchain/service/create-member
-          - image:
-              src: ./media/index/multi-connect.svg
-            text: MetaMask kullanarak bağlanma
-            href: /azure/blockchain/service/connect-metamask
-          - image:
-              src: ./media/index/cligeneric.svg
-            text: Geth kullanarak bağlanma
-            href: /azure/blockchain/service/connect-geth
-          - image:
-              src: ./media/index/code-blocks.svg
-            text: Truffle kullanarak bağlanma
-            href: /azure/blockchain/service/connect-truffle
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure’da blok zinciri uygulamaları oluşturmayı, yapılandırmayı ve geliştirmeyi öğrenin.'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/blockchain/service/send-transaction">Bir Azure Blok Zinciri Hizmeti üyesi oluşturma ve işlem gönderme</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: REST
-            html: '<p><a href="https://docs.microsoft.com/rest/api/blockchain">REST API</a></p>'
+  ms.date: 11/04/2019
+  ms.openlocfilehash: 9e4def49e2d0e1fc91259bbdf744ec7e40a34547
+  ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73577335"
+landingContent:
+- title: Azure Blok Zinciri Hizmeti Hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Blok Zinciri Hizmeti nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Özel konsorsiyum blok zinciri ağları
+      url: consortium.md
+    - text: Veri erişimi ve güvenlik
+      url: data-security.md
+    - text: Geliştirme araçları
+      url: develop.md
+- title: Başlarken
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: Blok zinciri üyesi oluşturma - Portal
+      url: create-member.md
+    - text: Blok zinciri üyesi oluşturma - CLI
+      url: create-member-cli.md
+  - linkListType: quickstart
+    links:
+    - text: Visual Studio Code kullanarak konsorsiyum ağına bağlanma
+      url: connect-vscode.md
+    - text: Bağlanmak için MetaMask ve akıllı anlaşma dağıtmak için Remix kullanma
+      url: connect-metamask.md
+    - text: İşlem düğümüne bağlanmak için Geth kullanma
+      url: connect-geth.md
+    - text: İşlem düğümüne bağlanmak için Truffle kullanma
+      url: connect-truffle.md
+  - linkListType: tutorial
+    links:
+    - text: Visual Studio Code kullanarak akıllı anlaşmalar oluşturma, derleme ve dağıtma
+      url: send-transaction.md
+  - linkListType: video
+    links:
+    - text: Ağınızı dağıtma ve yapılandırma
+      url: https://channel9.msdn.com/Shows/Blocktalk/Getting-started-with-Azure-Blockchain-Service-Part-I-Deploy-and-configure-your-network
+    - text: VS Code ile akıllı anlaşma yazma ve test etme
+      url: https://channel9.msdn.com/Shows/Blocktalk/Getting-started-with-Azure-Blockchain-Service-Part-II-Write-and-test-smart-contracts-with-VS-Code
+    - text: Verileri kayıt defterine gönderme
+      url: https://channel9.msdn.com/Shows/Blocktalk/Getting-started-with-Azure-Blockchain-Service-Part-III-Send-data-to-the-ledger
+    - text: Olayları ve kayıt defteri verilerini yayımlama
+      url: https://channel9.msdn.com/Shows/Blocktalk/Getting-started-with-Azure-Blockchain-Service-Part-IV-Publish-events-and-ledger-data
+- title: Tümleştirme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Blok Zinciri Veri Yöneticisi'ni kullanarak diğer hizmetlere blok zinciri verilerini gönderme
+      url: data-manager.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure portalını kullanarak Blok Zinciri Veri Yöneticisi'ni yapılandırma
+      url: data-manager-portal.md
+    - text: CLI kullanarak Blok Zinciri Veri Yöneticisi'ni yapılandırma
+      url: data-manager-cli.md
+    - text: Azure Logic Apps kullanarak blok zincirini tümleştirme
+      url: ethereum-logic-app.md
+  - linkListType: tutorial
+    links:
+    - text: Azure Cosmos DB'ye veri göndermek için Blok Zinciri Veri Yöneticisi'ni kullanma
+      url: data-manager-cosmosdb.md
+  - linkListType: video
+    links:
+    - text: Blok Zinciri Veri Yöneticisi'ne giriş
+      url: https://aka.ms/BTDataManager
+    - text: Azure Logic Apps ile Ethereum Blok Zinciri bağlayıcısını kullanma
+      url: https://channel9.msdn.com/Shows/Blocktalk/Logic-Apps-Connector-to-Ethereum-Blockchain-Networks?term=logic%20apps%20blockchain&lang-en=true
+    - text: Azure Logic Apps kullanarak blok zincirini bağlamaya ilişkin yaygın senaryolar
+      url: https://channel9.msdn.com/Shows/Blocktalk/Doing-more-with-Logic-Apps?term=logic%20apps%20blockchain&lang-en=true
+    - text: Akıllı anlaşmalardan web hizmetleri oluşturma
+      url: https://channel9.msdn.com/Shows/Blocktalk/Generating-Web-Services-from-Smart-Contracts-Based-on-Logic-Apps-Flows-and-Azure-Functions?term=logic%20apps%20blockchain&lang-en=true
+    - text: Azure Event Grid veya Azure Service Bus'a akıllı anlaşma olayları yayımlama
+      url: https://channel9.msdn.com/Shows/Blocktalk/Generate-Logic-Apps-and-Flows-to-Publish-Smart-Contract-Events-to-Event-Grid-and-Service-Bus?term=logic%20apps%20blockchain&lang-en=true
+- title: Yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Blok zinciri üyelerini yönetme - CLI
+      url: manage-cli.md
+    - text: Konsorsiyum üyelerini yönetme - PowerShell
+      url: manage-consortium-powershell.md
+    - text: İşlem düğümlerini yapılandırma
+      url: configure-transaction-nodes.md
+    - text: Active Directory erişimini yapılandırma
+      url: configure-aad.md
+  - linkListType: reference
+    links:
+    - text: REST API
+      url: https://docs.microsoft.com/rest/api/blockchain

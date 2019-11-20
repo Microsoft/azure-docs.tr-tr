@@ -1,62 +1,61 @@
 ---
-title: Azure işlevleri için olay Kılavuzu tetikleyicisi
-description: Azure işlevleri'nde Event Grid olayların nasıl işleneceğini anlayın.
+title: Azure Işlevleri için Event Grid tetikleyicisi
+description: Azure Işlevlerinde Event Grid olaylarının nasıl işleneceğini anlayın.
 services: functions
 documentationcenter: na
 author: craigshoemaker
 manager: gwallace
 keywords: ''
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: reference
 ms.date: 09/04/2018
 ms.author: cshoe
-ms.openlocfilehash: f48eced2ebcc4ad92c5124194ed2e2df92f64f11
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: ff21a1325e341f119fc8615ca03b41b8068aca19
+ms.sourcegitcommit: 92d42c04e0585a353668067910b1a6afaf07c709
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67480657"
+ms.lasthandoff: 10/28/2019
+ms.locfileid: "72991417"
 ---
-# <a name="event-grid-trigger-for-azure-functions"></a>Azure işlevleri için olay Kılavuzu tetikleyicisi
+# <a name="event-grid-trigger-for-azure-functions"></a>Azure Işlevleri için Event Grid tetikleyicisi
 
-Bu makalede nasıl yapılacağını açıklar [Event Grid](../event-grid/overview.md) Azure işlevleri'nde olayları.
+Bu makalede, Azure Işlevlerinde [Event Grid](../event-grid/overview.md) olaylarının nasıl işleneceği açıklanır.
 
-Event Grid, içinde gerçekleşen olaylar hakkında bilgilendirmek için HTTP istekleri gönderen bir Azure hizmetidir; *yayımcılar*. Bir hizmet veya olay kaynaklı kaynak yayımcısıdır. Örneğin, bir Azure blob depolama hesabındaki bir yayımcı olur ve [blob karşıya yükleme veya silme bir olaydır](../storage/blobs/storage-blob-event-overview.md). Bazı [olayları Event Grid'e yayımlamak için yerleşik desteğe sahiptir. Azure Hizmetleri](../event-grid/overview.md#event-sources).
+Event Grid, *yayımcılardan*oluşan olayları BILDIRMEK üzere http istekleri gönderen bir Azure hizmetidir. Yayımcı, olayı oluşturan hizmet veya kaynaktır. Örneğin, bir Azure Blob depolama hesabı bir yayımcı, [BLOB karşıya yükleme veya silme bir olaydır](../storage/blobs/storage-blob-event-overview.md). Bazı [Azure hizmetlerinde Event Grid olay yayımlamaya yönelik yerleşik destek vardır](../event-grid/overview.md#event-sources).
 
-Olay *işleyicileri* almak ve olay işleme. Azure işlevleri, çeşitli birini [Event Grid olaylarını işlemek için yerleşik desteğe sahip olan Azure Hizmetleri](../event-grid/overview.md#event-handlers). Bu makalede, bir olay Kılavuzu tetikleyicisi Event Grid'den gelen bir olay alındığında bir işlevi çağırmak için nasıl kullanılacağını öğrenin.
+Olay *işleyicileri* olayları alır ve işler. Azure Işlevleri, [Event Grid olaylarını işlemek için yerleşik desteğe sahip çeşitli Azure hizmetlerinden](../event-grid/overview.md#event-handlers)biridir. Bu makalede, Event Grid bir olay alındığında bir işlevi çağırmak için Event Grid tetikleyicisini nasıl kullanacağınızı öğreneceksiniz.
 
-Tercih ederseniz, Event Grid olaylarını işlemek için bir HTTP tetikleyicisi kullanabilirsiniz; bkz: [HTTP tetikleyicisi bir Event Grid tetikleyici olarak kullanma](#use-an-http-trigger-as-an-event-grid-trigger) bu makalenin ilerleyen bölümlerinde. Olay iletildiğinde şu anda bir Event Grid tetikleyicisinin bir Azure işlev uygulaması için kullanamazsınız [CloudEvents şeması](../event-grid/cloudevents-schema.md). Bunun yerine bir HTTP tetikleyicisi kullanın.
+İsterseniz, Event Grid olaylarını işlemek için bir HTTP tetikleyicisi kullanabilirsiniz; Bu makalenin ilerleyen kısımlarında [bir Event Grid tetikleyicisi olarak http tetikleyicisi kullanma](#use-an-http-trigger-as-an-event-grid-trigger) konusuna bakın. Şu anda, olay [Cloudevents şemasında](../event-grid/cloudevents-schema.md)teslim edildiğinde Azure işlevleri uygulaması için Event Grid tetikleyicisi kullanamazsınız. Bunun yerine, bir HTTP tetikleyicisi kullanın.
 
 [!INCLUDE [intro](../../includes/functions-bindings-intro.md)]
 
-## <a name="packages---functions-2x"></a>Paketler - 2.x işlevleri
+## <a name="packages---functions-2x"></a>Paketler-Işlevler 2. x
 
-Event Grid tetikleyicisinin sağlanan [Microsoft.Azure.WebJobs.Extensions.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid) NuGet paketi sürüm 2.x. Paket için kaynak kodu konusu [azure işlevleri eventgrid uzantı](https://github.com/Azure/azure-functions-eventgrid-extension/tree/v2.x) GitHub deposu.
+Event Grid tetikleyicisi [Microsoft. Azure. WebJobs. Extensions. EventGrid](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid) NuGet paketi, sürüm 2. x ' te sunulmaktadır. Paketin kaynak kodu, [Azure-Functions-eventgrid-Extension](https://github.com/Azure/azure-functions-eventgrid-extension/tree/v2.x) GitHub deposunda bulunur.
 
 [!INCLUDE [functions-package-v2](../../includes/functions-package-v2.md)]
 
-## <a name="packages---functions-1x"></a>Paketler - 1.x işlevleri
+## <a name="packages---functions-1x"></a>Paketler-Işlevler 1. x
 
-Event Grid tetikleyicisinin sağlanan [Microsoft.Azure.WebJobs.Extensions.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid) NuGet paketi sürüm 1.x. Paket için kaynak kodu konusu [azure işlevleri eventgrid uzantı](https://github.com/Azure/azure-functions-eventgrid-extension/tree/master) GitHub deposu.
+Event Grid tetikleyicisi [Microsoft. Azure. WebJobs. Extensions. EventGrid](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid) NuGet paketi, sürüm 1. x ' te sunulmaktadır. Paketin kaynak kodu, [Azure-Functions-eventgrid-Extension](https://github.com/Azure/azure-functions-eventgrid-extension/tree/master) GitHub deposunda bulunur.
 
 [!INCLUDE [functions-package](../../includes/functions-package.md)]
 
 ## <a name="example"></a>Örnek
 
-Bir olay Kılavuzu tetikleyicisi için dile özgü örneğe bakın:
+Event Grid tetikleyicisi için dile özgü örneğe bakın:
 
 * C#
-* [C# betiği (.csx)](#c-script-example)
+* [C#betik (. CSX)](#c-script-example)
 * [Java](#trigger---java-examples)
 * [JavaScript](#javascript-example)
 * [Python](#python-example)
 
-HTTP tetikleyicisi örneği için bkz. [HTTP tetikleyicisi kullanmayı](#use-an-http-trigger-as-an-event-grid-trigger) bu makalenin ilerleyen bölümlerinde.
+Bir HTTP tetikleyici örneği için, bu makalede daha sonra [http tetikleyicisini kullanma](#use-an-http-trigger-as-an-event-grid-trigger) konusuna bakın.
 
-### <a name="c-2x"></a>C#(2.x)
+### <a name="c-2x"></a>C#(2. x)
 
-Aşağıdaki örnek, bir işlevler gösterir 2.x [C# işlevi](functions-dotnet-class-library.md) için bağlar `EventGridEvent`:
+Aşağıdaki örnek, `EventGridEvent` ' ye bağlanan işlevler 2. x [ C# işlevini](functions-dotnet-class-library.md) gösterir:
 
 ```cs
 using Microsoft.Azure.EventGrid.Models;
@@ -78,11 +77,11 @@ namespace Company.Function
 }
 ```
 
-Paketler, daha fazla bilgi için bkz. [öznitelikleri](#attributes), [yapılandırma](#configuration), ve [kullanım](#usage).
+Daha fazla bilgi için bkz. paketler, [öznitelikler](#attributes), [yapılandırma](#configuration)ve [kullanım](#usage).
 
-### <a name="c-version-1x"></a>C#(Sürüm 1.x)
+### <a name="c-version-1x"></a>C#(Sürüm 1. x)
 
-Aşağıdaki örnek, bir işlevler gösterir 1.x [C# işlevi](functions-dotnet-class-library.md) için bağlar `JObject`:
+Aşağıdaki örnek, `JObject` ' ye bağlanan bir işlevler 1. x [ C# işlevini](functions-dotnet-class-library.md) gösterir:
 
 ```cs
 using Microsoft.Azure.WebJobs;
@@ -105,11 +104,11 @@ namespace Company.Function
 }
 ```
 
-### <a name="c-script-example"></a>C# betiği örneği
+### <a name="c-script-example"></a>C#betik örneği
 
-Aşağıdaki örnek, bir tetikleyici bağlamasında gösterir. bir *function.json* dosyası ve bir [C# betik işlevi](functions-reference-csharp.md) bağlama kullanan.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir tetikleyici bağlamayı ve bağlamayı kullanan bir [ C# betik işlevini](functions-reference-csharp.md) gösterir.
 
-Veri bağlama işte *function.json* dosyası:
+Bu, *function. JSON* dosyasındaki bağlama verileri:
 
 ```json
 {
@@ -124,9 +123,9 @@ Veri bağlama işte *function.json* dosyası:
 }
 ```
 
-#### <a name="c-script-version-2x"></a>C#betik (sürüm 2.x)
+#### <a name="c-script-version-2x"></a>C#betik (sürüm 2. x)
 
-İşte bağlar işlevleri 2.x C# betik kodu `EventGridEvent`:
+Aşağıda`EventGridEvent`bağlanan 2. x C# betik kodu verilmiştir:
 
 ```csharp
 #r "Microsoft.Azure.EventGrid"
@@ -139,11 +138,11 @@ public static void Run(EventGridEvent eventGridEvent, ILogger log)
 }
 ```
 
-Paketler, daha fazla bilgi için bkz. [öznitelikleri](#attributes), [yapılandırma](#configuration), ve [kullanım](#usage).
+Daha fazla bilgi için bkz. paketler, [öznitelikler](#attributes), [yapılandırma](#configuration)ve [kullanım](#usage).
 
-#### <a name="c-script-version-1x"></a>C#betik (sürüm 1.x)
+#### <a name="c-script-version-1x"></a>C#betik (sürüm 1. x)
 
-İşte bağlar işlevleri 1.x C# betik kodu `JObject`:
+`JObject`'e bağlanan 1. x C# komut dosyası kodu aşağıda verilmiştir:
 
 ```cs
 #r "Newtonsoft.Json"
@@ -159,9 +158,9 @@ public static void Run(JObject eventGridEvent, TraceWriter log)
 
 ### <a name="javascript-example"></a>JavaScript örneği
 
-Aşağıdaki örnek, bir tetikleyici bağlamasında gösterir. bir *function.json* dosyası ve bir [JavaScript işlevi](functions-reference-node.md) bağlama kullanan.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir tetikleyici bağlamayı ve bağlamayı kullanan bir [JavaScript işlevini](functions-reference-node.md) gösterir.
 
-Veri bağlama işte *function.json* dosyası:
+Bu, *function. JSON* dosyasındaki bağlama verileri:
 
 ```json
 {
@@ -176,7 +175,7 @@ Veri bağlama işte *function.json* dosyası:
 }
 ```
 
-JavaScript kod aşağıdaki gibidir:
+JavaScript kodu aşağıda verilmiştir:
 
 ```javascript
 module.exports = function (context, eventGridEvent) {
@@ -188,11 +187,11 @@ module.exports = function (context, eventGridEvent) {
 };
 ```
 
-### <a name="python-example"></a>Python örnek
+### <a name="python-example"></a>Python örneği
 
-Aşağıdaki örnek, bir tetikleyici bağlamasında gösterir. bir *function.json* dosyası ve bir [funkce Pythonu](functions-reference-python.md) bağlama kullanan.
+Aşağıdaki örnek, bir *function. JSON* dosyasındaki bir tetikleyici bağlamayı ve bağlamayı kullanan bir [Python işlevini](functions-reference-python.md) gösterir.
 
-Veri bağlama işte *function.json* dosyası:
+Bu, *function. JSON* dosyasındaki bağlama verileri:
 
 ```json
 {
@@ -208,7 +207,7 @@ Veri bağlama işte *function.json* dosyası:
 }
 ```
 
-Python kod aşağıdaki gibidir:
+Python kodu aşağıda verilmiştir:
 
 ```python
 import logging
@@ -222,14 +221,14 @@ def main(event: func.EventGridEvent):
     logging.info("  Data: %s", event.get_json())
 ```
 
-### <a name="trigger---java-examples"></a>Tetikleyici - Java örnekleri
+### <a name="trigger---java-examples"></a>Trigger-Java örnekleri
 
 Bu bölüm aşağıdaki örnekleri içerir:
 
-* [Olay Kılavuzu tetikleyicisi, dize parametresi](#event-grid-trigger-string-parameter-java)
-* [Olay Kılavuzu tetikleyicisi, POJO'ya parametresi](#event-grid-trigger-pojo-parameter-java)
+* [Event Grid tetikleyicisi, dize parametresi](#event-grid-trigger-string-parameter-java)
+* [Event Grid tetikleyicisi, POJO parametresi](#event-grid-trigger-pojo-parameter-java)
 
-Tetikleyici bağlamasında Aşağıdaki örnekler bir *function.json* dosya ve [Java işlevleri](functions-reference-java.md) bağlama kullanın ve ilk olay olarak alan, bir olay yazdırmak ```String``` ve ikinci bir POJO'ya olarak.
+Aşağıdaki örneklerde, önce olayı bir POJO olarak ```String``` ' ye ve ikinci kez alarak, bir olayı oluşturan bir *işlev. JSON* dosyası ve [Java işlevlerinde](functions-reference-java.md) tetikleyici bağlama gösterilmektedir.
 
 ```json
 {
@@ -243,7 +242,7 @@ Tetikleyici bağlamasında Aşağıdaki örnekler bir *function.json* dosya ve [
 }
 ```
 
-#### <a name="event-grid-trigger-string-parameter-java"></a>Olay Kılavuzu tetikleyicisi, dize parametresinin (Java)
+#### <a name="event-grid-trigger-string-parameter-java"></a>Event Grid tetikleyicisi, dize parametresi (Java)
 
 ```java
   @FunctionName("eventGridMonitorString")
@@ -253,14 +252,13 @@ Tetikleyici bağlamasında Aşağıdaki örnekler bir *function.json* dosya ve [
     ) 
     String content, 
     final ExecutionContext context) {
-      // log 
       context.getLogger().info("Event content: " + content);      
   }
 ```
 
-#### <a name="event-grid-trigger-pojo-parameter-java"></a>Olay Kılavuzu tetikleyicisi, POJO'ya parametre (Java)
+#### <a name="event-grid-trigger-pojo-parameter-java"></a>Event Grid tetikleyicisi, POJO parametresi (Java)
 
-Bu örnek, üst düzey bir Event Grid olay özelliklerini temsil eden aşağıdaki POJO'ya kullanır:
+Bu örnek, bir Event Grid olayının en üst düzey özelliklerini temsil eden aşağıdaki POJO 'ları kullanır:
 
 ```java
 import java.util.Date;
@@ -280,7 +278,7 @@ public class EventSchema {
 }
 ```
 
-Olayın bir JSON yükü geldiğinde, içine serileştirilmiş seri durumdan ```EventSchema``` POJO'ya işlevi tarafından kullanılacak. Bu, nesne yönelimli bir yolla olay özelliklerine erişmek işlev sağlar.
+Varış sonrasında, olayın JSON yükü, işlev tarafından kullanılmak üzere ```EventSchema``` POJO 'ya de serileştirilir. Bu, işlevin, nesne yönelimli bir şekilde olay özelliklerine erişmesini sağlar.
 
 ```java
   @FunctionName("eventGridMonitor")
@@ -290,7 +288,6 @@ Olayın bir JSON yükü geldiğinde, içine serileştirilmiş seri durumdan ```E
     ) 
     EventSchema event, 
     final ExecutionContext context) {
-      // log 
       context.getLogger().info("Event content: ");
       context.getLogger().info("Subject: " + event.subject);
       context.getLogger().info("Time: " + event.eventTime); // automatically converted to Date by the runtime
@@ -299,13 +296,13 @@ Olayın bir JSON yükü geldiğinde, içine serileştirilmiş seri durumdan ```E
   }
 ```
 
-İçinde [Java Çalışma Zamanı Kitaplığı işlevleri](/java/api/overview/azure/functions/runtime), kullanın `EventGridTrigger` ek açıklama parametreleri değeri EventGrid ' gelmesi. Bu ek açıklamalar parametrelerle bir olay geldiğinde çalıştırmak işlev neden.  Bu ek açıklama yerel Java türler, pojo'ları veya kullanarak boş değer atanabilir değer ile kullanılabilir `Optional<T>`.
+[Java işlevleri çalışma zamanı kitaplığı](/java/api/overview/azure/functions/runtime)'nda, değeri eventgrid 'den gelen parametrelerde `EventGridTrigger` ek açıklamasını kullanın. Bu ek açıklamaların bulunduğu parametreler, bir olay geldiğinde işlevin çalışmasına neden olur.  Bu ek açıklama `Optional<T>` kullanılarak yerel Java türleri, POJOs veya null atanabilir değerlerle kullanılabilir.
 
 ## <a name="attributes"></a>Öznitelikler
 
-İçinde [C# sınıfı kitaplıklar](functions-dotnet-class-library.md), kullanın [EventGridTrigger](https://github.com/Azure/azure-functions-eventgrid-extension/blob/master/src/EventGridExtension/EventGridTriggerAttribute.cs) özniteliği.
+[ C# Sınıf kitaplıkları](functions-dotnet-class-library.md)' nda [eventgridtrigger](https://github.com/Azure/azure-functions-eventgrid-extension/blob/master/src/EventGridExtension/TriggerBinding/EventGridTriggerAttribute.cs) özniteliğini kullanın.
 
-İşte bir `EventGridTrigger` özniteliği bir yöntem imzası:
+Yöntem imzasında bir `EventGridTrigger` özniteliği aşağıda verilmiştir:
 
 ```csharp
 [FunctionName("EventGridTest")]
@@ -315,37 +312,37 @@ public static void EventGridTest([EventGridTrigger] JObject eventGridEvent, ILog
 }
 ```
 
-Tam bir örnek için bkz. C# örnek.
+Tüm örnek için bkz C# . örnek.
 
 ## <a name="configuration"></a>Yapılandırma
 
-Aşağıdaki tabloda ayarladığınız bağlama yapılandırma özelliklerini açıklayan *function.json* dosya. Oluşturucu parametresi veya ayarlamak için özellikler yok `EventGridTrigger` özniteliği.
+Aşağıdaki tabloda, *function. JSON* dosyasında ayarladığınız bağlama yapılandırma özellikleri açıklanmaktadır. `EventGridTrigger` özniteliğinde ayarlanacak bir oluşturucu parametresi veya özellik yok.
 
-|Function.JSON özelliği |Açıklama|
+|function. JSON özelliği |Açıklama|
 |---------|---------|
-| **type** | Gerekli - kümesine olmalıdır `eventGridTrigger`. |
-| **direction** | Gerekli - kümesine olmalıdır `in`. |
-| **name** | Gereklidir - işlev kodu olay verileri alan parametresi için kullanılan bir değişken adı. |
+| **type** | Gerekli-`eventGridTrigger` olarak ayarlanmalıdır. |
+| **direction** | Gerekli-`in` olarak ayarlanmalıdır. |
+| **ada** | Gerekli-olay verilerini alan parametre için işlev kodunda kullanılan değişken adı. |
 
 ## <a name="usage"></a>Kullanım
 
-İçin C# ve F# Azure işlevlerinde 1.x İşlevler, aşağıdaki parametre türleri için Event Grid tetikleyicisinin kullanabilirsiniz:
+Azure C# işlevleri F# 1. x içindeki ve işlevleri için, Event Grid tetikleyicisi için aşağıdaki parametre türlerini kullanabilirsiniz:
 
 * `JObject`
 * `string`
 
-İçin C# ve F# işlevleri Azure işlevleri'nde 2.x de aşağıdaki parametre türü için Event Grid tetikleyicisinin kullanılacak seçeneğiniz vardır:
+Azure C# işlevleri F# 2. x içindeki ve işlevleri için, Event Grid tetikleyicisi için aşağıdaki parametre türünü kullanma seçeneğiniz de vardır:
 
-* `Microsoft.Azure.EventGrid.Models.EventGridEvent`-Tüm olay türlerine abone ortak alanlar için özellikleri tanımlar.
+* `Microsoft.Azure.EventGrid.Models.EventGridEvent`-tüm olay türlerinde ortak olan alanların özelliklerini tanımlar.
 
 > [!NOTE]
-> Bağlanılacak çalışırsanız işlevleri v1'de `Microsoft.Azure.WebJobs.Extensions.EventGrid.EventGridEvent`, derleyici bir "kullanım dışı" iletisini görüntülemek ve kullanmanızı öneriyoruz `Microsoft.Azure.EventGrid.Models.EventGridEvent` yerine. Daha yeni türü kullanmak için başvuru [Microsoft.Azure.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.EventGrid) NuGet paketini ve tam olarak nitelemek `EventGridEvent` tür adı ile önek tarafından `Microsoft.Azure.EventGrid.Models`. Bir C# betik işlevi NuGet paketlerine başvurmak hakkında daha fazla bilgi için bkz. [kullanarak NuGet paketleri](functions-reference-csharp.md#using-nuget-packages)
+> Işlev v1 ' de `Microsoft.Azure.WebJobs.Extensions.EventGrid.EventGridEvent` ' a bağlamayı denerseniz, derleyici "kullanım dışı" iletisini görüntüler ve bunun yerine `Microsoft.Azure.EventGrid.Models.EventGridEvent` ' i kullanmanızı ister. Daha yeni türü kullanmak için [Microsoft. Azure. EventGrid](https://www.nuget.org/packages/Microsoft.Azure.EventGrid) NuGet paketine başvurun ve `EventGridEvent` tür adını `Microsoft.Azure.EventGrid.Models` ' ye ekleyerek tam olarak nitelendirin. Bir C# betik işlevindeki NuGet paketlerine başvurma hakkında daha fazla bilgi için bkz. [NuGet paketlerini kullanma](functions-reference-csharp.md#using-nuget-packages)
 
-JavaScript işlevleri için parametre adlı tarafından *function.json* `name` özelliği, olay nesnesine bir başvuru içeriyor.
+JavaScript işlevleri için, *function. json* `name` özelliği tarafından adlandırılan parametrenin olay nesnesine bir başvurusu vardır.
 
 ## <a name="event-schema"></a>Olay şeması
 
-Bir Event Grid olay verilerini bir HTTP istek gövdesindeki bir JSON nesnesi olarak alınır. JSON, aşağıdaki örneğe benzer:
+Bir Event Grid olayının verileri bir HTTP isteği gövdesinde JSON nesnesi olarak alınır. JSON aşağıdaki örneğe benzer şekilde görünür:
 
 ```json
 [{
@@ -373,49 +370,49 @@ Bir Event Grid olay verilerini bir HTTP istek gövdesindeki bir JSON nesnesi ola
 }]
 ```
 
-Gösterilen örnek bir öğeden oluşan bir dizidir. Event Grid, her zaman bir dizi gönderir ve dizideki birden fazla olay gönderebilir. Çalışma zamanının işlevinizi her dizi öğesi için bir kez çalıştırır.
+Gösterilen örnek bir öğe dizisidir. Event Grid her zaman bir dizi gönderir ve dizide birden fazla olay gönderebilir. Çalışma zamanı, her dizi öğesi için işlevinizi bir kez çağırır.
 
-JSON verilerini olay üst düzey özelliklere içeriğini sırasında tüm olay türleri arasında aynıdır `data` özelliği her olay türüne özeldir. Gösterilen örnekte, bir blob depolama olayı bulunur.
+Olay JSON verilerinde en üst düzey özellikler tüm olay türleri arasında aynıdır, ancak `data` özelliğinin içeriği her bir olay türüne özeldir. Gösterilen örnek bir BLOB depolama olayı içindir.
 
-Ortak ve özel olay özellikleri açıklamaları için bkz. [olay özellikleri](../event-grid/event-schema.md#event-properties) Event Grid belgelerinde.
+Ortak ve olaya özgü özelliklerin açıklamaları için Event Grid belgelerindeki [olay özellikleri](../event-grid/event-schema.md#event-properties) ' ne bakın.
 
-`EventGridEvent` Türü yalnızca üst düzey özellikler tanımlar; `Data` özelliği bir `JObject`.
+`EventGridEvent` türü yalnızca en üst düzey özellikleri tanımlar; `Data` özelliği bir `JObject`.
 
 ## <a name="create-a-subscription"></a>Abonelik oluşturma
 
-Event Grid HTTP isteklerini almaya başlaması için işlevi çağıran uç nokta URL'sini belirten bir Event Grid aboneliği oluşturun.
+Event Grid HTTP isteklerini almaya başlamak için, işlevi çağıran uç nokta URL 'sini belirten bir Event Grid aboneliği oluşturun.
 
-### <a name="azure-portal"></a>Azure portal
+### <a name="azure-portal"></a>Azure portalı
 
-Azure portalında Event Grid tetikleyicisinin geliştirme işlevleri için seçin **Event Grid aboneliği Ekle**.
+Event Grid tetikleyicisiyle Azure portal geliştirdiğiniz işlevlerde **Event Grid aboneliği Ekle**' yi seçin.
 
-![Abonelik portalında oluşturma](media/functions-bindings-event-grid/portal-sub-create.png)
+![Portalda abonelik oluşturma](media/functions-bindings-event-grid/portal-sub-create.png)
 
-Bu bağlantıyı seçtiğinizde, portal açar **olay aboneliği oluşturma** sayfasında uç nokta URL'si ile doldurulmuş.
+Bu bağlantıyı seçtiğinizde, Portal Endpoint URL 'SI önceden doldurulmuş olarak **olay aboneliği oluştur** sayfasını açar.
 
-![Doldurulmuş bir uç nokta URL'si](media/functions-bindings-event-grid/endpoint-url.png)
+![Endpoint URL önceden dolduruldu](media/functions-bindings-event-grid/endpoint-url.png)
 
-Azure portalını kullanarak abonelikleri oluşturma hakkında daha fazla bilgi için bkz. [özel olay oluşturma - Azure portalı](../event-grid/custom-event-quickstart-portal.md) Event Grid belgelerinde.
+Azure portal kullanarak abonelikler oluşturma hakkında daha fazla bilgi için Event Grid belgelerinde [özel olay oluşturma-Azure Portal](../event-grid/custom-event-quickstart-portal.md) konusuna bakın.
 
 ### <a name="azure-cli"></a>Azure CLI
 
-Kullanarak bir abonelik oluşturmak için [Azure CLI'yı](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli?view=azure-cli-latest), kullanın [az eventgrid olay aboneliği oluşturma](https://docs.microsoft.com/cli/azure/eventgrid/event-subscription?view=azure-cli-latest#az-eventgrid-event-subscription-create) komutu.
+[Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli?view=azure-cli-latest)kullanarak bir abonelik oluşturmak için [az eventgrid olay-abonelik oluştur](https://docs.microsoft.com/cli/azure/eventgrid/event-subscription?view=azure-cli-latest#az-eventgrid-event-subscription-create) komutunu kullanın.
 
-Komut işlevi çağıran uç nokta URL'sini gerektirir. Aşağıdaki örnek, sürüme özgü URL deseni gösterir:
+Komut, işlevi çağıran uç nokta URL 'sini gerektirir. Aşağıdaki örnekte, sürüme özgü URL kalıbı gösterilmektedir:
 
-#### <a name="version-2x-runtime"></a>Sürüm 2.x çalışma zamanı
+#### <a name="version-2x-runtime"></a>Sürüm 2. x çalışma zamanı
 
     https://{functionappname}.azurewebsites.net/runtime/webhooks/eventgrid?functionName={functionname}&code={systemkey}
 
-#### <a name="version-1x-runtime"></a>Sürüm 1.x çalışma zamanı
+#### <a name="version-1x-runtime"></a>Sürüm 1. x çalışma zamanı
 
     https://{functionappname}.azurewebsites.net/admin/extensions/EventGridExtensionConfig?functionName={functionname}&code={systemkey}
 
-Sistem, bir olay Kılavuzu tetikleyicisi için uç nokta URL'si dahil edilecek bir yetkilendirme anahtar anahtardır. Aşağıdaki bölümde, sistem anahtarını almak açıklanmaktadır.
+Sistem anahtarı, Event Grid tetikleyicisi için uç nokta URL 'sine dahil olması gereken bir yetkilendirme anahtarıdır. Aşağıdaki bölümde Sistem anahtarının nasıl alınacağı açıklanmaktadır.
 
-(Sistem anahtarı için bir yer tutucu ile) bir blob depolama hesabına abone olan bir örnek aşağıda verilmiştir:
+Bir BLOB depolama hesabına abone olan bir örnek (sistem anahtarı için bir yer tutucu ile) aşağıda verilmiştir:
 
-#### <a name="version-2x-runtime"></a>Sürüm 2.x çalışma zamanı
+#### <a name="version-2x-runtime"></a>Sürüm 2. x çalışma zamanı
 
 ```azurecli
 az eventgrid resource event-subscription create -g myResourceGroup \
@@ -426,7 +423,7 @@ az eventgrid resource event-subscription create -g myResourceGroup \
 --endpoint https://mystoragetriggeredfunction.azurewebsites.net/runtime/webhooks/eventgrid?functionName=imageresizefunc&code=<key>
 ```
 
-#### <a name="version-1x-runtime"></a>Sürüm 1.x çalışma zamanı
+#### <a name="version-1x-runtime"></a>Sürüm 1. x çalışma zamanı
 
 ```azurecli
 az eventgrid resource event-subscription create -g myResourceGroup \
@@ -437,27 +434,27 @@ az eventgrid resource event-subscription create -g myResourceGroup \
 --endpoint https://mystoragetriggeredfunction.azurewebsites.net/admin/extensions/EventGridExtensionConfig?functionName=imageresizefunc&code=<key>
 ```
 
-Bir aboneliğin nasıl oluşturulacağı hakkında daha fazla bilgi için bkz. [blob depolama hızlı başlangıcı](../storage/blobs/storage-blob-event-quickstart.md#subscribe-to-your-storage-account) veya diğer Event Grid hızlı başlangıçları.
+Abonelik oluşturma hakkında daha fazla bilgi için bkz. [BLOB Storage hızlı](../storage/blobs/storage-blob-event-quickstart.md#subscribe-to-your-storage-account) başlangıcı veya diğer Event Grid hızlı başlangıçlar.
 
-### <a name="get-the-system-key"></a>Sistem anahtarını alma
+### <a name="get-the-system-key"></a>Sistem anahtarını al
 
-Aşağıdaki API (HTTP GET) kullanarak sistem anahtarı alabilirsiniz:
+Aşağıdaki API 'YI kullanarak sistem anahtarını alabilirsiniz (HTTP GET):
 
-#### <a name="version-2x-runtime"></a>Sürüm 2.x çalışma zamanı
+#### <a name="version-2x-runtime"></a>Sürüm 2. x çalışma zamanı
 
 ```
 http://{functionappname}.azurewebsites.net/admin/host/systemkeys/eventgrid_extension?code={masterkey}
 ```
 
-#### <a name="version-1x-runtime"></a>Sürüm 1.x çalışma zamanı
+#### <a name="version-1x-runtime"></a>Sürüm 1. x çalışma zamanı
 
 ```
 http://{functionappname}.azurewebsites.net/admin/host/systemkeys/eventgridextensionconfig_extension?code={masterkey}
 ```
 
-İşlev uygulamanızı gerektiriyorsa Bu olduğundan bir yönetici API'si, [ana anahtarı](functions-bindings-http-webhook.md#authorization-keys). (Bir olay Kılavuzu tetikleyicisi işlevi çağırma için) sistemi anahtarı (için yönetim görevleri işlev uygulamasını gerçekleştirdiği) ana anahtarı ile karıştırmayın. Bir olay Kılavuzu konu başlığına abone olduğunuzda, sistem anahtarını kullandığınızdan emin olun.
+Bu bir yönetim API 'sidir, bu nedenle işlev uygulama [ana anahtarınızı](functions-bindings-http-webhook.md#authorization-keys)gerektirir. Ana anahtarla (bir Event Grid tetikleyici işlevi çağırmak için) sistem anahtarını karıştırmayın (işlev uygulamasında yönetim görevleri gerçekleştirmek için). Bir Event Grid konusuna abone olduğunuzda, sistem anahtarını kullandığınızdan emin olun.
 
-Sistem anahtarı sağlayan yanıtın bir örnek aşağıda verilmiştir:
+Aşağıda sistem anahtarını sağlayan yanıta bir örnek verilmiştir:
 
 ```
 {
@@ -472,29 +469,29 @@ Sistem anahtarı sağlayan yanıtın bir örnek aşağıda verilmiştir:
 }
 ```
 
-İşlev uygulamanız için ana anahtarı alma **işlev uygulaması ayarları** portalında sekmesi.
+İşlev uygulamanızın ana anahtarını portalda **işlev uygulaması ayarları** sekmesinden alabilirsiniz.
 
 > [!IMPORTANT]
-> Ana anahtarı, işlev uygulamanızı yönetici erişim sağlar. Bu anahtarı üçüncü taraflarla paylaşan veya yerel istemci uygulamaları Dağıt kullanmayın.
+> Ana anahtar, işlev uygulamanıza yönetici erişimi sağlar. Bu anahtarı üçüncü taraflarla paylaşmayın veya yerel istemci uygulamalarında dağıtamazsınız.
 
-Daha fazla bilgi için [yetkilendirme anahtarları](functions-bindings-http-webhook.md#authorization-keys) makaledeki HTTP tetikleyici başvurusu.
+Daha fazla bilgi için HTTP tetikleyici başvurusu makalesindeki [Yetkilendirme anahtarları](functions-bindings-http-webhook.md#authorization-keys) bölümüne bakın.
 
-Alternatif olarak, anahtar değeri kendiniz belirlemek için bir HTTP PUT gönderebilirsiniz.
+Alternatif olarak, anahtar değerini kendiniz belirtmek için bir HTTP PUT da gönderebilirsiniz.
 
-## <a name="local-testing-with-viewer-web-app"></a>Yerel Görüntüleyici web uygulamasını test etme
+## <a name="local-testing-with-viewer-web-app"></a>Viewer Web App ile yerel test
 
-Bir olay Kılavuzu tetikleyicisi test etmek için yerel olarak, Event Grid HTTP istekleri, kaynaktan bulutta yerel makinenize teslim gerekir. Bunu yapmanın bir yolu, çevrimiçi ve el ile bunları yerel makinenizde yeniden gönderme istekleri yakalayarak şöyledir:
+Event Grid bir tetikleyiciyi yerel olarak test etmek için, buluttaki kaynağından yerel makinenize teslim edilen Event Grid HTTP isteklerini almanız gerekir. Bunu yapmanın bir yolu, istekleri çevrimiçi olarak yakalayıp yerel makinenizde el ile yeniden göndermeyi kullanmaktır:
 
-1. [Görüntüleyicisi web uygulaması oluşturma](#create-a-viewer-web-app) , olay iletileri yakalar.
-1. [Bir Event Grid aboneliği oluşturmak](#create-an-event-grid-subscription) , Olay Görüntüleyicisi'ni uygulamaya gönderir.
-1. [Bir isteği](#generate-a-request) ve Görüntüleyicisi uygulamadan istek gövdesine kopyalayın.
-1. [El ile istek gönderin](#manually-post-the-request) , Event Grid localhost URL'sini işlevi tetikleyin.
+1. Olay iletilerini yakalayan [bir Görüntüleyici Web uygulaması oluşturun](#create-a-viewer-web-app) .
+1. Görüntüleyici uygulamasına olayları Gönderen [Event Grid bir abonelik oluşturun](#create-an-event-grid-subscription) .
+1. [Bir Istek oluşturun](#generate-a-request) ve Görüntüleyici uygulamasından istek gövdesini kopyalayın.
+1. İsteği Event Grid tetikleyici işlevinizin localhost URL 'sine [el ile gönderin](#manually-post-the-request) .
 
-Bitirdiğinizde testi, aynı abonelik için üretim uç noktası güncelleştirerek kullanabilirsiniz. Kullanım [az eventgrid olay aboneliği güncelleştirme](https://docs.microsoft.com/cli/azure/eventgrid/event-subscription?view=azure-cli-latest#az-eventgrid-event-subscription-update) Azure CLI komutu.
+Testi tamamladıktan sonra, uç noktayı güncelleştirerek üretim için aynı aboneliği kullanabilirsiniz. [Az eventgrid olay-abonelik güncelleştirme](https://docs.microsoft.com/cli/azure/eventgrid/event-subscription?view=azure-cli-latest#az-eventgrid-event-subscription-update) Azure CLI komutunu kullanın.
 
-### <a name="create-a-viewer-web-app"></a>Görüntüleyicisi web uygulaması oluşturma
+### <a name="create-a-viewer-web-app"></a>Görüntüleyiciye Web uygulaması oluşturma
 
-Yakalama olay iletileri basitleştirmek için dağıtabileceğiniz bir [önceden oluşturulmuş bir web uygulaması](https://github.com/Azure-Samples/azure-event-grid-viewer) , olay iletileri görüntüler. Dağıtılan çözüm bir App Service planı, App Service web uygulaması ve GitHub'dan kaynak kod içerir.
+Olay iletilerini yakalamayı basitleştirmek için, olay iletilerini görüntüleyen [önceden oluşturulmuş bir Web uygulaması](https://github.com/Azure-Samples/azure-event-grid-viewer) dağıtabilirsiniz. Dağıtılan çözüm bir App Service planı, App Service web uygulaması ve GitHub'dan kaynak kod içerir.
 
 Çözümü aboneliğinize dağıtmak için **Azure'a Dağıt**'ı seçin. Azure portalında parametre değerlerini girin.
 
@@ -508,74 +505,74 @@ Siteyi görürsünüz ancak henüz yayımlanmış olay yoktur.
 
 ### <a name="create-an-event-grid-subscription"></a>Event Grid aboneliği oluşturma
 
-Test etmek istediğiniz türde bir Event Grid aboneliği oluşturun ve URL web uygulamanızdan uç noktası olarak olay bildirimi için verin. Web uygulamanızın uç noktası `/api/updates/` sonekini içermelidir. Bu nedenle, tam URL'si olur `https://<your-site-name>.azurewebsites.net/api/updates`
+Test etmek istediğiniz türün Event Grid aboneliğini oluşturun ve olay bildirimi için uç nokta olarak Web uygulamanızdan URL 'YI verin. Web uygulamanızın uç noktası `/api/updates/` sonekini içermelidir. Bu nedenle, tam URL `https://<your-site-name>.azurewebsites.net/api/updates` ' dır
 
-Azure portalını kullanarak abonelikleri oluşturma hakkında daha fazla bilgi için bkz. [özel olay oluşturma - Azure portalı](../event-grid/custom-event-quickstart-portal.md) Event Grid belgelerinde.
+Azure portal kullanarak abonelikler oluşturma hakkında daha fazla bilgi için, bkz. Event Grid belgelerinde [özel olay oluşturma-Azure Portal](../event-grid/custom-event-quickstart-portal.md) .
 
-### <a name="generate-a-request"></a>Bir isteği oluştur
+### <a name="generate-a-request"></a>İstek oluştur
 
-Web uygulaması uç noktanıza HTTP trafiğini oluşturacak bir olayı tetikleyin.  Örneğin, bir blob depolama aboneliği oluşturduysanız, karşıya yükleyin veya bir blobu silme. Web uygulamanıza istek gösterilir, istek gövdesine kopyalayın.
+Web uygulaması uç noktanıza HTTP trafiği oluşturacak bir olay tetikleyin.  Örneğin, bir BLOB depolama aboneliği oluşturduysanız, blob yükleyin veya silin. Web uygulamanızda bir istek görüntülendiğinde, istek gövdesini kopyalayın.
 
-Abonelik doğrulama isteği ilk alınır; tüm doğrulama isteklerini yoksayar ve olay istek kopyalayın.
+Abonelik doğrulama isteği ilk olarak alınır; tüm doğrulama isteklerini yoksayın ve olay isteğini kopyalayın.
 
-![Web uygulamasından istek gövdesine kopyalayın](media/functions-bindings-event-grid/view-results.png)
+![Web uygulamasından istek gövdesini Kopyala](media/functions-bindings-event-grid/view-results.png)
 
-### <a name="manually-post-the-request"></a>El ile istek gönderin
+### <a name="manually-post-the-request"></a>İsteği el ile gönderin
 
-Event Grid işleviniz yerel olarak çalıştırın.
+Event Grid işlevinizi yerel olarak çalıştırın.
 
-Gibi bir araç kullanın [Postman](https://www.getpostman.com/) veya [curl](https://curl.haxx.se/docs/httpscripting.html) bir HTTP POST isteği oluşturmak için:
+HTTP POST isteği oluşturmak için [Postman](https://www.getpostman.com/) veya [kıvrımlı](https://curl.haxx.se/docs/httpscripting.html) gibi bir araç kullanın:
 
-* Ayarlanmış bir `Content-Type: application/json` başlığı.
-* Ayarlanmış bir `aeg-event-type: Notification` başlığı.
-* RequestBin veri istek gövdesine yapıştırın.
-* Event Grid tetikleyici işlevinizin URL'sini gönderin.
-  * 2\.x için şu biçimi kullanın:
+* `Content-Type: application/json` üst bilgisi ayarlayın.
+* `aeg-event-type: Notification` üst bilgisi ayarlayın.
+* RequestBin verilerini istek gövdesine yapıştırın.
+* Event Grid tetikleyici işlevinizin URL 'sine gönderin.
+  * 2\. x için aşağıdaki kalıbı kullanın:
 
     ```
     http://localhost:7071/runtime/webhooks/eventgrid?functionName={FUNCTION_NAME}
     ```
 
-  * 1\.x kullanmak için:
+  * 1\. x kullanımı için:
 
     ```
     http://localhost:7071/admin/extensions/EventGridExtensionConfig?functionName={FUNCTION_NAME}
     ```
 
-`functionName` Parametresi, belirtilen adı olmalıdır `FunctionName` özniteliği.
+`functionName` parametresi `FunctionName` özniteliğinde belirtilen ad olmalıdır.
 
-Aşağıdaki ekran görüntüleri, üst bilgilerini göster ve istek gövdesi postman'deki:
+Aşağıdaki ekran görüntülerinde, Postman 'daki üstbilgiler ve istek gövdesi gösterilmektedir:
 
-![Postman üstbilgileri](media/functions-bindings-event-grid/postman2.png)
+![Postman 'daki üstbilgiler](media/functions-bindings-event-grid/postman2.png)
 
-![İstek gövdesinde Postman](media/functions-bindings-event-grid/postman.png)
+![Postman 'da istek gövdesi](media/functions-bindings-event-grid/postman.png)
 
-Olay Kılavuzu tetikleyicisi işlevi yürütür ve günlükleri aşağıdaki örneğe benzer gösterir:
+Event Grid tetikleyici işlevi yürütülür ve aşağıdaki örneğe benzer Günlükler gösterir:
 
-![Örnek olay Kılavuzu tetikleyicisi işlev günlükleri](media/functions-bindings-event-grid/eg-output.png)
+![Örnek Event Grid tetikleyici işlev günlükleri](media/functions-bindings-event-grid/eg-output.png)
 
-## <a name="local-testing-with-ngrok"></a>Yerel ngrok ile test etme
+## <a name="local-testing-with-ngrok"></a>Ngrok ile yerel test
 
-Bir olay Kılavuzu tetikleyicisi yerel olarak test etmek için başka bir HTTP bağlantısı Internet ile geliştirme bilgisayarınızda arasında otomatik hale getirmek için yoludur. Gibi bir araç ile bunu yapabilirsiniz [ngrok](https://ngrok.com/):
+Event Grid tetikleyiciyi yerel olarak test etmenin başka bir yolu da Internet ile geliştirme bilgisayarınız arasındaki HTTP bağlantısını otomatikleştirmeye yönelik bir yoldur. Bunu [ngrok](https://ngrok.com/)gibi bir araçla yapabilirsiniz:
 
-1. [Ngrok uç nokta oluşturma](#create-an-ngrok-endpoint).
-1. [Olay Kılavuzu tetikleyicisi işlevi çalıştırmak](#run-the-event-grid-trigger-function).
-1. [Bir Event Grid aboneliği oluşturmak](#create-a-subscription) , olayları ngrok uç noktasına gönderir.
+1. [Bir ngrok uç noktası oluşturun](#create-an-ngrok-endpoint).
+1. [Event Grid tetikleyici Işlevini çalıştırın](#run-the-event-grid-trigger-function).
+1. Olayları ngrok uç noktasına Gönderen [Event Grid bir abonelik oluşturun](#create-a-subscription) .
 1. [Bir olayı tetikleyin](#trigger-an-event).
 
-Bitirdiğinizde testi, aynı abonelik için üretim uç noktası güncelleştirerek kullanabilirsiniz. Kullanım [az eventgrid olay aboneliği güncelleştirme](https://docs.microsoft.com/cli/azure/eventgrid/event-subscription?view=azure-cli-latest#az-eventgrid-event-subscription-update) Azure CLI komutu.
+Testi tamamladıktan sonra, uç noktayı güncelleştirerek üretim için aynı aboneliği kullanabilirsiniz. [Az eventgrid olay-abonelik güncelleştirme](https://docs.microsoft.com/cli/azure/eventgrid/event-subscription?view=azure-cli-latest#az-eventgrid-event-subscription-update) Azure CLI komutunu kullanın.
 
-### <a name="create-an-ngrok-endpoint"></a>Ngrok uç nokta oluşturma
+### <a name="create-an-ngrok-endpoint"></a>Ngrok uç noktası oluşturma
 
-İndirme *ngrok.exe* gelen [ngrok](https://ngrok.com/)ve aşağıdaki komutu çalıştırın:
+Ngrok *. exe* dosyasını [ngrok](https://ngrok.com/)konumundan indirin ve aşağıdaki komutla çalıştırın:
 
 ```
 ngrok http -host-header=localhost 7071
 ```
 
-Host-komut localhost üzerinde çalıştığında, İşlevler çalışma zamanı localhost gelen istekleri beklediği için üstbilgi parametresi gereklidir. çalışma zamanı yerel olarak çalıştığında 7071 varsayılan bağlantı noktası numarasıdır.
+İşlevler çalışma zamanı localhost üzerinde çalıştırıldığında localhost 'tan gelen istekleri beklediği için-Host-Header parametresi gereklidir. 7071, çalışma zamanı yerel olarak çalıştırıldığında varsayılan bağlantı noktası numarasıdır.
 
-Komut şuna benzer bir çıktı oluşturur:
+Komut aşağıdakine benzer bir çıktı oluşturur:
 
 ```
 Session Status                online
@@ -589,60 +586,60 @@ Connections                   ttl     opn     rt1     rt5     p50     p90
                               0       0       0.00    0.00    0.00    0.00
 ```
 
-Kullanacağınız `https://{subdomain}.ngrok.io` Event Grid aboneliğiniz için URL.
+Event Grid aboneliğiniz için `https://{subdomain}.ngrok.io` URL 'sini kullanacaksınız.
 
-### <a name="run-the-event-grid-trigger-function"></a>Olay Kılavuzu tetikleyicisi işlevi çalıştırın
+### <a name="run-the-event-grid-trigger-function"></a>Event Grid tetikleyici işlevini çalıştırma
 
-Abonelik oluşturulurken, işlevi yerel olarak çalışıyor olması gerekir böylece ngrok URL'si, Event Grid ile özel işlem elde edemez. Aksi takdirde, gönderilen doğrulama yanıtı değil ve abonelik oluşturma başarısız olur.
+Ngrok URL 'SI Event Grid tarafından özel işleme almaz, bu nedenle, abonelik oluşturulduğunda işlevinizin yerel olarak çalışıyor olması gerekir. Değilse, doğrulama yanıtı gönderilmez ve abonelik oluşturma başarısız olur.
 
 ### <a name="create-a-subscription"></a>Abonelik oluşturma
 
-Test etmek istediğiniz türde bir Event Grid aboneliği oluşturun ve ngrok uç noktanızı verin.
+Test etmek istediğiniz türün Event Grid aboneliğini oluşturun ve bunu ngrok uç noktanıza verin.
 
-İşlevler için bu endpoint düzeni kullanın 2.x:
+2\. x Işlevleri için bu uç nokta modelini kullanın:
 
 ```
 https://{SUBDOMAIN}.ngrok.io/runtime/webhooks/eventgrid?functionName={FUNCTION_NAME}
 ```
 
-İşlevler için bu endpoint düzeni kullanın 1.x:
+Bu uç nokta modelini 1. x Işlevleri için kullanın:
 
 ```
 https://{SUBDOMAIN}.ngrok.io/admin/extensions/EventGridExtensionConfig?functionName={FUNCTION_NAME}
 ```
 
-`{FUNCTION_NAME}` Parametresi, belirtilen adı olmalıdır `FunctionName` özniteliği.
+`{FUNCTION_NAME}` parametresi `FunctionName` özniteliğinde belirtilen ad olmalıdır.
 
-Azure CLI kullanarak bir örnek aşağıda verilmiştir:
+Azure CLı kullanarak bir örnek aşağıda verilmiştir:
 
 ```azurecli
 az eventgrid event-subscription create --resource-id /subscriptions/aeb4b7cb-b7cb-b7cb-b7cb-b7cbb6607f30/resourceGroups/eg0122/providers/Microsoft.Storage/storageAccounts/egblobstor0122 --name egblobsub0126 --endpoint https://263db807.ngrok.io/runtime/webhooks/eventgrid?functionName=EventGridTrigger
 ```
 
-Bir aboneliğin nasıl oluşturulacağı hakkında daha fazla bilgi için bkz. [abonelik oluşturma](#create-a-subscription) bu makalenin üst kısmındaki.
+Abonelik oluşturma hakkında daha fazla bilgi için bu makalenin önceki kısımlarında [bir abonelik oluşturma](#create-a-subscription) bölümüne bakın.
 
 ### <a name="trigger-an-event"></a>Bir olay tetikleme
 
-HTTP trafiğini ngrok uç noktanıza oluşturacak bir olayı tetikleyin.  Örneğin, bir blob depolama aboneliği oluşturduysanız, karşıya yükleyin veya bir blobu silme.
+Ngrok uç noktanıza HTTP trafiği oluşturacak bir olay tetikleyin.  Örneğin, bir BLOB depolama aboneliği oluşturduysanız, blob yükleyin veya silin.
 
-Olay Kılavuzu tetikleyicisi işlevi yürütür ve günlükleri aşağıdaki örneğe benzer gösterir:
+Event Grid tetikleyici işlevi yürütülür ve aşağıdaki örneğe benzer Günlükler gösterir:
 
-![Örnek olay Kılavuzu tetikleyicisi işlev günlükleri](media/functions-bindings-event-grid/eg-output.png)
+![Örnek Event Grid tetikleyici işlev günlükleri](media/functions-bindings-event-grid/eg-output.png)
 
-## <a name="use-an-http-trigger-as-an-event-grid-trigger"></a>HTTP tetikleyicisi bir Event Grid tetikleyici olarak kullanma
+## <a name="use-an-http-trigger-as-an-event-grid-trigger"></a>Event Grid tetikleyicisi olarak HTTP tetikleyicisi kullanma
 
-Olayları bir Event Grid INSTEAD OF tetikleyicisi bir HTTP tetikleyicisini kullanarak işleyebilmesi için event Grid olaylarını HTTP isteklerini alınır. Böylece olası bir nedeni hakkında daha fazla denetime işlevi çağıran bir uç nokta URL'si almaktır. Başka bir nedenle olayları almaya ihtiyacınız olduğunda [CloudEvents şeması](../event-grid/cloudevents-schema.md). Şu anda, Event Grid tetikleyicisinin CloudEvents şeması desteklemiyor. Bu bölümdeki örneklerde, Event Grid şema hem de CloudEvents şeması için çözümleri gösterir.
+Event Grid olaylar HTTP istekleri olarak alınır, bu nedenle olayları, Event Grid tetikleyicisi yerine bir HTTP tetikleyicisi kullanarak işleyebilirsiniz. Bunu yapmanın olası bir nedeni, işlevi çağıran uç nokta URL 'SI üzerinde daha fazla denetim edinmektir. Diğer bir neden, [Cloudevents şemasında](../event-grid/cloudevents-schema.md)olay almanız gerektiğinde olur. Şu anda Event Grid tetikleyicisi CloudEvents şemasını desteklemez. Bu bölümdeki örneklerde, hem Event Grid şeması hem de CloudEvents şeması için çözümler gösterilmektedir.
 
-HTTP tetikleyicisi kullanıyorsanız, Event Grid tetikleyicisinin otomatik olarak yaptığı için kod yazmak zorundasınız:
+HTTP tetikleyicisi kullanıyorsanız, Event Grid tetikleyicisinin otomatik olarak yaptığı kodu yazmanız gerekir:
 
-* Doğrulama yanıt gönderir bir [abonelik doğrulama isteği](../event-grid/security-authentication.md#webhook-event-delivery).
-* İstek gövdesinde yer alan olay dizi öğesi için bir sefer işlevi çağırır.
+* [Abonelik doğrulama isteğine](../event-grid/security-authentication.md#webhook-event-delivery)bir doğrulama yanıtı gönderir.
+* İstek gövdesinde bulunan olay dizisinin öğesi başına işlevi bir kez çağırır.
 
-İşlevi yerel olarak veya Azure'da çalıştırıldığında çağırmak için kullanılacak URL hakkında daha fazla bilgi için bkz. [HTTP tetikleyici bağlama başvuru belgeleri](functions-bindings-http-webhook.md)
+İşlevi yerel olarak veya Azure 'da çalıştırıldığında kullanılacak URL hakkında daha fazla bilgi için bkz. [http tetikleyici bağlama başvurusu belgeleri](functions-bindings-http-webhook.md)
 
 ### <a name="event-grid-schema"></a>Olay Kılavuz şeması
 
-Aşağıdaki örnek C# kod HTTP tetikleyicisi için olay Kılavuzu tetikleyicisi davranışını taklit eder. Bu örnek olay ızgarası şema teslim olaylar için kullanın.
+Bir HTTP tetikleyicisi C# için aşağıdaki örnek kod, Event Grid tetikleme davranışının benzetimini yapar. Event Grid şemasında teslim edilen olaylar için bu örneği kullanın.
 
 ```csharp
 [FunctionName("HttpTrigger")]
@@ -680,7 +677,7 @@ public static async Task<HttpResponseMessage> Run(
 }
 ```
 
-Aşağıdaki örnek JavaScript kodunu HTTP tetikleyicisi için Event Grid tetikleyici davranışını taklit eder. Bu örnek olay ızgarası şema teslim olaylar için kullanın.
+Bir HTTP tetikleyicisi için aşağıdaki örnek JavaScript kodu, Event Grid tetikleme davranışının benzetimini yapar. Event Grid şemasında teslim edilen olaylar için bu örneği kullanın.
 
 ```javascript
 module.exports = function (context, req) {
@@ -708,11 +705,11 @@ module.exports = function (context, req) {
 };
 ```
 
-Döngü içinde olay işleme kodunuzu gider `messages` dizisi.
+Olay işleme kodunuz `messages` dizisi aracılığıyla döngünün içine gider.
 
 ### <a name="cloudevents-schema"></a>CloudEvents şeması
 
-Aşağıdaki örnek C# kod HTTP tetikleyicisi için olay Kılavuzu tetikleyicisi davranışını taklit eder.  CloudEvents şeması teslim edilen olaylara için bu örneği kullanın.
+Bir HTTP tetikleyicisi C# için aşağıdaki örnek kod, Event Grid tetikleme davranışının benzetimini yapar.  CloudEvents şemasında teslim edilen olaylar için bu örneği kullanın.
 
 ```csharp
 [FunctionName("HttpTrigger")]
@@ -750,7 +747,7 @@ public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLeve
 }
 ```
 
-Aşağıdaki örnek JavaScript kodunu HTTP tetikleyicisi için Event Grid tetikleyici davranışını taklit eder. CloudEvents şeması teslim edilen olaylara için bu örneği kullanın.
+Bir HTTP tetikleyicisi için aşağıdaki örnek JavaScript kodu, Event Grid tetikleme davranışının benzetimini yapar. CloudEvents şemasında teslim edilen olaylar için bu örneği kullanın.
 
 ```javascript
 module.exports = function (context, req) {

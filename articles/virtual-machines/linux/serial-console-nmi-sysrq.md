@@ -1,134 +1,133 @@
 ---
-title: Azure seri konsol SysRq ve NMI çağrı | Microsoft Docs
-description: Seri konsol SysRq ve NMI kullanarak Azure sanal makineler'de çağırır.
+title: SysRq ve NMI çağrıları için Azure seri konsolu
+description: Azure sanal makinelerinde SysRq ve NMI çağrıları için seri konsol kullanma.
 services: virtual-machines-linux
 documentationcenter: ''
 author: asinn826
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 08/14/2018
 ms.author: alsin
-ms.openlocfilehash: 5a97a40ba48db9f73471d5fd778ceb5cb9070964
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 5eba50e7cfc00c081622972ca09f305b34c19c47
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60542654"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74034989"
 ---
-# <a name="use-serial-console-for-sysrq-and-nmi-calls"></a>Seri konsol SysRq ve NMI çağrıları için kullanın.
+# <a name="use-serial-console-for-sysrq-and-nmi-calls"></a>SysRq ve NMI çağrıları için seri konsol kullan
 
-## <a name="system-request-sysrq"></a>Sistem istek (SysRq)
-Bir SysRq anahtarları, bir dizi önceden tanımlanmış bir eylemi tetikleyebilir Linux işlemi sistemi çekirdeğinin tarafından anlaşılan bir dizidir. Bu komutlar, genellikle sorun giderme sanal makine veya Kurtarma (örneğin, sanal makine yanıt vermiyorsa,) ile geleneksel yönetim gerçekleştirilemez olduğunda kullanılır. Seri konsol Azure'nın SysRq özelliğini kullanarak fiziksel klavyede girdiğiniz karakterleri ve SysRq anahtar tuşlarına basarak benzetimini yapacak.
+## <a name="system-request-sysrq"></a>Sistem Isteği (SysRq)
+SysRq, bir dizi önceden tanımlanmış eylemi tetikleyebilen Linux işlem sistemi çekirdeği tarafından anlaşılan bir anahtarlar dizisidir. Bu komutlar genellikle sanal makine sorun giderme veya kurtarma geleneksel yönetim aracılığıyla gerçekleştirilemediği zaman kullanılır (örneğin, VM yanıt vermiyorsa). Azure seri konsolunun SysRq özelliğinin kullanılması, SysRq anahtarına ve fiziksel bir klavyede girilen karakterlere yönelik olarak bir tuşa benzecektir.
 
-SysRq sıralı teslim sonra Çekirdek yapılandırmasını sistemin nasıl yanıt vereceğini denetleyin. SysRq devre dışı bırakma ve etkinleştirme hakkında daha fazla bilgi için bkz: *SysRq yönetici kılavuzundaki* [metin](https://aka.ms/kernelorgsysreqdoc) | [markdown](https://aka.ms/linuxsysrq).  
+SysRq sırası teslim edildiğinde, çekirdek yapılandırması sistemin nasıl yanıt verdiğini denetler. SysRq 'ı etkinleştirme ve devre dışı bırakma hakkında bilgi için bkz. [markup](https://aka.ms/linuxsysrq) | *SySRq Yönetici Kılavuzu* [metni](https://aka.ms/kernelorgsysreqdoc) .  
 
-Azure seri konsol, aşağıda gösterilen komut çubuğunda klavye simgesini kullanarak bir Azure sanal makine bir SysRq göndermek için kullanılabilir.
+Azure seri konsolu, aşağıda gösterilen komut çubuğundaki klavye simgesini kullanarak bir Azure sanal makinesine bir SysRq göndermek için kullanılabilir.
 
 ![](../media/virtual-machines-serial-console/virtual-machine-serial-console-command-menu.jpg)
 
-"SysRq komutu Gönder" seçme ortak SysRq seçenekleri sağlamak veya bir dizi iletişim kutusuna girilen SysRq komutları kabul bir iletişim kutusu açılır.  SysRq dizi kullanarak güvenli bir yeniden başlatma gibi üst düzey bir işlemi gerçekleştirmek için kullanıcının bu izin verir: `REISUB`.
+"Send SysRq komutunu" seçtiğinizde, genel SysRq seçeneklerini sağlayan bir iletişim kutusu açılır ve iletişim kutusuna girilen bir SysRq komutları dizisi kabul edilir.  Bu, ' nin kullanarak güvenli bir yeniden başlatma gibi yüksek düzey bir işlem gerçekleştirmesine olanak sağlar: `REISUB`.
 
 ![](../media/virtual-machines-serial-console/virtual-machine-serial-console-sysreq_UI.png)
 
-Sanal makinelerde, durduruldu veya duyarlı olmayan bir durumda olan çekirdek SysRq komutu kullanılamaz. (örneğin çekirdek Panik).
+SysRq komutu durdurulmuş olan veya çekirdeği yanıt vermeyen bir durumda olan sanal makinelerde kullanılamaz. (örneğin, bir çekirdek Panic).
 
-### <a name="enable-sysrq"></a>SysRq etkinleştir 
-Bölümünde anlatıldığı gibi *SysRq yönetici kılavuzundaki* SysRq yukarıdaki yapılandırılabilir gibi tüm, none veya yalnızca belirli komutları kullanılabilir. Aşağıdaki adımları kullanarak tüm SysRq komutları etkinleştirebilirsiniz, ancak bir yeniden başlatma titanik'ten değil:
+### <a name="enable-sysrq"></a>SysRq 'ı etkinleştir 
+Yukarıdaki *SySRq yönetici kılavuzunda* açıklandığı gibi, SySRq, All, None veya yalnızca belirli komutların kullanılabilmesi için yapılandırılabilir. Tüm SysRq komutlarını aşağıdaki adımı kullanarak etkinleştirebilirsiniz, ancak yeniden başlatma işlemi devam etmez:
 ```
 echo "1" >/proc/sys/kernel/sysrq
 ```
-SysReq yapılandırma kalıcı hale getirmek için tüm SysRq komutları etkinleştirmek için aşağıdakileri yapabilirsiniz.
-1. Bu satıra ekleyerek */etc/sysctl.conf* <br>
+SysReq yapılandırmasını kalıcı hale getirmek için, tüm SysRq komutlarını etkinleştirmek üzere şunları yapabilirsiniz
+1. Bu satırı */etc/sysctl.exe* 'e ekleme <br>
     `kernel.sysrq = 1`
-1. Yeniden başlatmadan veya çalıştırarak sysctl güncelleştiriliyor <br>
+1. Çalıştırarak sysctl 'yi yeniden başlatma veya güncelleştirme <br>
     `sysctl -p`
 
-### <a name="command-keys"></a>Komut anahtarları 
-SysRq Yönetici Kılavuzu yukarıdaki:
+### <a name="command-keys"></a>Komut tuşları 
+Yukarıdaki SysRq yönetim kılavuzunda:
 
 |Komut| İşlev
 | ------| ----------- |
-|``b``  |   Hemen eşitleniyor veya disklerinizi çıkarma sırasında sistem yeniden başlatılır.
-|``c``  |   Sistem tarafından bir NULL işaretçi gerçekleştirecek başvuru. Yapılandırılmış bir dosyası alınır.
+|``b``  |   , Disklerinizi eşitlemeden veya bağlamadan geri yüklemeden sistemi hemen yeniden başlatır.
+|``c``  |   NULL işaretçi başvurusu tarafından sistem kilitlenmesiyle gerçekleştirilir. Yapılandırıldıysa bir kilitlenme dökümü alınacaktır.
 |``d``  |   Tutulan tüm kilitleri gösterir.
-|``e``  |   İnit dışındaki tüm işlemler bir SIGTERM gönderin.
-|``f``  |   Bir bellek hog işlemi sonlandırmak için oom kaldırıcı çağırır, ancak hiçbir şey sonlandırılabilir, Acil değildir.
-|``g``  |   Kgdb (çekirdek hata ayıklayıcısı) tarafından kullanılan
-|``h``  |   Yardım görüntülenir (burada listelenenden herhangi bir tuşa Yardım, ayrıca görüntülenir ancak ``h`` :-) kolay
-|``i``  |    İnit dışındaki tüm işlemler bir SIGKILL gönderin.
-|``j``  |    Zorla "Yalnızca çözme," - dosya sistemleri tarafından FIFREEZE IOCTL dondurulmuş.
-|``k``  |    Güvenli erişim anahtarı (SAK) tüm programları mevcut sanal Konsolu durur. NOT: SAK bölümünde aşağıdaki önemli yorumlara bakın.
-|``l``  |    Bir yığının için tüm etkin CPU gösterir.
-|``m``  |    Konsolu için geçerli bellek bilgileri döküm.
-|``n``  |    RT görevleri mümkün kullanışlı hale getirmek için kullanılır
-|``o``  |    Sisteminizi (yapılandırılmış ve desteklenen varsa) kapatır.
-|``p``  |    Geçerli kaydeder ve konsola bayrakları döküm.
-|``q``  |    CPU tüm armed hrtimers listesi dökümü (ama normal timer_list zamanlayıcılar) ve tüm clockevent cihazlar hakkında ayrıntılı bilgi.
-|``r``  |    Klavye ham modunu kapatır ve XLATE için ayarlar.
-|``s``  |    Tüm bağlı dosya sistemleri eşitleme girişiminde bulunur.
-|``t``  |    Geçerli görev ve bilgilerine, konsola listesi dökümü.
-|``u``  |    Tüm bağlı dosya sistemleri salt okunur yeniden bağlamak dener.
-|``v``  |    Zorla framebuffer konsol geri yükler
-|``v``  |    Neden ETM arabellek döküm [ARM özgü]
-|``w``  |    Kesintisiz (engellenen) durumda olan görevleri dökümünü yapar.
-|``x``  |    Xmon arabirimde ppc/powerpc platformları tarafından kullanılır. Genel PMU'ya kaydeder sparc64 üzerinde gösterir. MIPS tüm TLB girişlerde dökümü.
-|``y``  |    Genel CPU yazmaçlarını [SPARC 64 özel] Göster
-|``z``  |    Ftrace arabellek dökümü
-|``0``-``9`` | Çekirdek iletileri konsolunuza yazdırılmasını denetleme Konsolu günlük düzeyini ayarlar. (``0``, böylece yalnızca Acil Durum iletileri gibi Paniğiyle veya OOPSes konsolunuza yapacağınız örnek, yapacağı için.)
+|``e``  |   İnit hariç tüm işlemlere bir SIGTERM gönderin.
+|``f``  |   , Bir bellek barındırma işlemini sonlandırmak için OOM Killer çağrısını çağırır, ancak hiçbir şey sonlandırılıp sonlandırılmayacağını söylemez.
+|``g``  |   KGDB tarafından kullanılan (çekirdek hata ayıklayıcı)
+|``h``  |   Yardım görüntülenir (burada listelenenden başka herhangi bir anahtar de yardım görüntüler, ancak ``h`` hatırlamaları kolay olur)
+|``i``  |    İnit hariç tüm işlemlere bir SIGKıLL gönderin.
+|``j``  |    Zorla, fifreeze IOCTL tarafından dondurulmuş olan dosya sistemleri 'ı zorla.
+|``k``  |    Güvenli erişim anahtarı (SAK) geçerli sanal konsolundaki tüm programları Killer. NOTE: SAK bölümünde aşağıdaki önemli açıklamalara bakın.
+|``l``  |    Tüm etkin CPU 'Lar için yığın geri izlemeyi gösterir.
+|``m``  |    Geçerli bellek bilgilerinin konsolunuza dökümünü alacak.
+|``n``  |    RT görevlerinin iyi hale getirmek için kullanılır
+|``o``  |    , Sisteminizi kapatacak (yapılandırıldıysa ve destekleniyorsa).
+|``p``  |    Geçerli yazmaçların ve bayrakların konsolunuza dökümünü yapar.
+|``q``  |    , Tüm clockevent cihazlarla ilgili tüm hrsüreölçerler (ancak normal timer_list zamanlayıcılar DEĞIL) ve ayrıntılı bilgiler için her türlü CPU listesi dökümünü alacak.
+|``r``  |    Klavye ham modunu kapatır ve bunu XGEÇ olarak ayarlar.
+|``s``  |    , Tüm bağlı dosya sistemlerini eşitlemeye çalışır.
+|``t``  |    , Geçerli görevlerin listesini ve bunların bilgilerini konsolunuza döker.
+|``u``  |    , Tüm bağlı dosya sistemlerini salt okunurdur.
+|``v``  |    Framebuffer konsolunu zorla geri yükler
+|``v``  |    ETM arabellek dökümünden neden olur [ARM 'ye özgü]
+|``w``  |    Kesintisiz (engellenen) durumundaki görevlerin dökümünü yapar.
+|``x``  |    PPC/PowerPC platformlarında XMON arabirimi tarafından kullanılır. SPARC64 üzerinde genel PMU kayıtlarını göster. MIPS üzerindeki tüm TLB girdilerini dökümünü alın.
+|``y``  |    Genel CPU kayıtlarını göster [SPARC-64 özgü]
+|``z``  |    FTRACE arabelleğinin dökümünü al
+|``0``-``9`` | Konsolunuza hangi çekirdek iletilerinin yazdırılacağını denetleyen konsol günlük düzeyini ayarlar. (``0``Örneğin, bunu yalnızca PANICs veya Oopse gibi acil mesaj iletilerinin konsolunuza yapması için yapar.)
 
-### <a name="distribution-specific-documentation"></a>Dağıtım özgü belgelere yönlendirir ###
-SysRq ve kilitlenme bilgi dökümü bir SysRq "Kilitlenme" komutunu aldığında oluşturmak için adımları Linux yapılandırmak için ilgili dağıtım özel belgeler için aşağıdaki bağlantılara bakın:
+### <a name="distribution-specific-documentation"></a>Dağıtıma özgü belgeler ###
+SysRq üzerinde dağıtıma özgü belgeler ve Linux 'u bir SysRq "kilitlenme" komutu aldığında kilitlenme dökümü oluşturmak üzere Linux yapılandırma adımları için aşağıdaki bağlantılara bakın:
 
 #### <a name="ubuntu"></a>Ubuntu ####
  - [Çekirdek kilitlenme dökümü](https://help.ubuntu.com/lts/serverguide/kernel-crash-dump.html)
 
 #### <a name="red-hat"></a>Red Hat ####
-- [SysRq tesis nedir ve nasıl kullanılır?](https://access.redhat.com/articles/231663)
-- [RHEL sunucudan bilgi toplamak için SysRq özelliğini kullanma](https://access.redhat.com/solutions/2023)
+- [SysRq tesis nedir ve nasıl kullanabilirim?](https://access.redhat.com/articles/231663)
+- [Bir RHEL sunucusundan bilgi toplamak için SysRq özelliğini kullanma](https://access.redhat.com/solutions/2023)
 
 #### <a name="suse"></a>SUSE ####
-- [Çekirdek çekirdek döküm yakalama yapılandırın](https://www.suse.com/support/kb/doc/?id=3374462)
+- [Çekirdek temel döküm yakalamayı yapılandırma](https://www.suse.com/support/kb/doc/?id=3374462)
 
 #### <a name="coreos"></a>CoreOS ####
 - [Kilitlenme günlüklerini toplama](https://coreos.com/os/docs/latest/collecting-crash-logs.html)
 
-## <a name="non-maskable-interrupt-nmi"></a>Maskelenemez olmayan kesme (NMI) 
-Maskelenemez olmayan bir kesinti (NMI) yazılımı bir sanal makinede değil yoksayacak bir sinyal oluşturmak için tasarlanmıştır. Tarihsel olarak, NMIs belirli yanıt süreleri gerektiren sistemleri donanım sorunları izlemek için kullanılır.  Bugün, programcılar ve sistem yöneticileri bir mekanizma NMI hata ayıklama veya yanıt vermeyen sistemleri gidermek için genellikle kullanın.
+## <a name="non-maskable-interrupt-nmi"></a>Maskelenemeyen kesme (NMI) 
+Maskelenemeyen bir kesme (NMI), bir sanal makinede yazılımın yok saymayacak bir sinyal oluşturmak için tasarlanmıştır. Tarihsel olarak, NMIs belirli yanıt süreleri gerektiren sistemleri donanım sorunları izlemek için kullanılır.  Günümüzde programcılar ve sistem yöneticileri, yanıt vermeyen sistemlerde hata ayıklamak veya sorunları gidermek için genellikle NMI 'yi bir mekanizma olarak kullanır.
 
-Seri konsol, aşağıda gösterilen komut çubuğunda klavye simgesini kullanarak bir Azure sanal makine bir NMI göndermek için kullanılabilir. NMI teslim sonra sanal makine yapılandırması sistemin nasıl yanıt vereceğini denetleyin.  Linux işletim sistemleri için kilitlenme yapılandırılabilir ve bir bellek dökümü işletim sistemi oluşturma, bir NMI alır.
+Seri konsol, aşağıda gösterilen komut çubuğundaki klavye simgesini kullanarak bir Azure sanal makinesine bir NMI göndermek için kullanılabilir. NMI teslim edildiğinde, sanal makine yapılandırması sistemin nasıl yanıt verdiğini denetler.  Linux işletim sistemleri, kilitlenme ve bellek dökümü oluşturmak için yapılandırılabilir ve işletim sistemi bir NMI alır.
 
 ![](../media/virtual-machines-serial-console/virtual-machine-serial-console-command-menu.jpg) <br>
 
-Çekirdek parametreleri yapılandırmak için sysctl destekleyen Linux sistemleri için aşağıdaki komutu kullanarak bu NMI alırken bir Panik etkinleştirebilirsiniz:
-1. Bu satıra ekleyerek */etc/sysctl.conf* <br>
+Çekirdek parametrelerini yapılandırmak için sysctl 'yi destekleyen Linux sistemleri için, aşağıdakileri kullanarak bu NMI 'yi alırken bir panik 'yi etkinleştirebilirsiniz:
+1. Bu satırı */etc/sysctl.exe* 'e ekleme <br>
     `kernel.panic_on_unrecovered_nmi=1`
-1. Yeniden başlatmadan veya çalıştırarak sysctl güncelleştiriliyor <br>
+1. Çalıştırarak sysctl 'yi yeniden başlatma veya güncelleştirme <br>
     `sysctl -p`
 
-Dahil olmak üzere Linux Çekirdek yapılandırmaları hakkında daha fazla bilgi için `unknown_nmi_panic`, `panic_on_io_nmi`, ve `panic_on_unrecovered_nmi`, bkz: [/ Proc/sys/çekirdek/belgelerine *](https://www.kernel.org/doc/Documentation/sysctl/kernel.txt). NMI ve kilitlenme bilgi dökümü bir NMI aldığında oluşturmak için adımları Linux yapılandırmak için ilgili dağıtım özel belgeler için aşağıdaki bağlantılara bakın:
+`unknown_nmi_panic`, `panic_on_io_nmi`ve `panic_on_unrecovered_nmi`dahil Linux çekirdek yapılandırması hakkında daha fazla bilgi için bkz. [/proc/sys/kernel/for documentation *](https://www.kernel.org/doc/Documentation/sysctl/kernel.txt). NMI 'deki dağıtıma özgü belgeler ve bir NMI aldığında kilitlenme dökümü oluşturmak için Linux yapılandırma adımları için aşağıdaki bağlantılara bakın:
  
 ### <a name="ubuntu"></a>Ubuntu 
  - [Çekirdek kilitlenme dökümü](https://help.ubuntu.com/lts/serverguide/kernel-crash-dump.html)
 
 ### <a name="red-hat"></a>Red Hat 
- - [Bir NMI nedir ve ne için kullanılır?](https://access.redhat.com/solutions/4127)
- - [Sistemimin NMI anahtar gönderildiğinde çökmesine neden nasıl yapılandırabilirim?](https://access.redhat.com/solutions/125103)
- - [Yönetici Kılavuzu kilitlenme dökümü](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/pdf/kernel_crash_dump_guide/kernel-crash-dump-guide.pdf)
+ - [NMI nedir ve ne için kullanabilirim?](https://access.redhat.com/solutions/4127)
+ - [NMI anahtarı gönderildiğinde sistemmi kilitlenme için nasıl yapılandırabilirim?](https://access.redhat.com/solutions/125103)
+ - [Kilitlenme dökümü Yönetici Kılavuzu](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/pdf/kernel_crash_dump_guide/kernel-crash-dump-guide.pdf)
 
 ### <a name="suse"></a>SUSE 
-- [Çekirdek çekirdek döküm yakalama yapılandırın](https://www.suse.com/support/kb/doc/?id=3374462)
+- [Çekirdek temel döküm yakalamayı yapılandırma](https://www.suse.com/support/kb/doc/?id=3374462)
 
 ### <a name="coreos"></a>CoreOS 
 - [Kilitlenme günlüklerini toplama](https://coreos.com/os/docs/latest/collecting-crash-logs.html)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Ana seri Konsolu Linux belgeleri sayfasında bulunduğu [burada](serial-console.md).
-* Seri konsol uygulamasına önyükleme kullanılacağını [kaz ve tek kullanıcı moduna gir](serial-console-grub-single-user-mode.md)
-* Seri konsol için de kullanılabilir olan [Windows](../windows/serial-console.md) VM'ler
-* Daha fazla bilgi edinin [önyükleme tanılaması](boot-diagnostics.md)
+* Ana seri konsol Linux belge sayfası [burada](serial-console.md)bulunur.
+* IDB 'de önyükleme yapmak [ve tek kullanıcı moduna girmek](serial-console-grub-single-user-mode.md) Için seri konsol kullanın
+* Seri konsol [Windows](../windows/serial-console.md) VM 'leri için de kullanılabilir
+* [Önyükleme tanılaması](boot-diagnostics.md) hakkında daha fazla bilgi

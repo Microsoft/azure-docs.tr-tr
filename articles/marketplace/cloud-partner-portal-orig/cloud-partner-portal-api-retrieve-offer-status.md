@@ -1,23 +1,24 @@
 ---
-title: Teklif durumunun | Azure Market
+title: Teklif durumunu al | Azure Marketi
 description: API, teklifin geçerli durumunu alır.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 26ee8b5b1879c505f8200671558fe065ace068a3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5ce546d79497f462f6c262de738036d7e3a30226
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935450"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819659"
 ---
 <a name="retrieve-offer-status"></a>Teklif durumunu alma 
 =====================
 
-Teklif geçerli durumunu alır.
+Teklifin geçerli durumunu alır.
 
   `GET  https://cloudpartner.azure.com/api/publishers/<publisherId>/offers/<offerId>/status?api-version=2017-10-31`
 
@@ -26,13 +27,13 @@ Teklif geçerli durumunu alır.
 
 |  **Ad**       |   **Açıklama**                            |  **Veri türü** |
 |  -------------  |  ------------------------------------------  |  ------------  |
-|  publisherId    | Örneğin, yayımcı tanımlayıcısı `Contoso`  |     String     |
-|  OfferId        | Teklifin benzersiz olarak tanımlayan GUID      |     String     |
-|  API sürümü    | API'sının en son sürümü                        |     Tarih       |
+|  PublisherId    | Yayımcı tanımlayıcı, örneğin `Contoso`  |     Dize     |
+|  OfferId        | Teklifi benzersiz bir şekilde tanımlayan GUID      |     Dize     |
+|  api sürümü    | En son API sürümü                        |     Tarih       |
 |  |  |
 
 
-<a name="header"></a>Üstbilgi
+<a name="header"></a>Üst bilgi
 ------
 
 |  Ad           |  Değer               |
@@ -124,29 +125,29 @@ Teklif geçerli durumunu alır.
 
 |  **Ad**             |    **Açıklama**                                                                             |
 | --------------------  |   -------------------------------------------------------------------------------------------- |
-|  status               | Teklif durumu. Olası değerler listesi için bkz: [teklif durumu](#offer-status) aşağıda. |
-|  sayısı             | Bir Teklifle ilişkili iletilerin dizisi                                                    |
-|  adımlar                | Bir teklifi yayımlama sırasında teklif geçtiği adımlar dizisi                      |
-|  estimatedTimeFrame   | Tahmini, kolay bir biçimde bu adımı tamamlamak için geçen süre                       |
-|  id                   | Adım tanımlayıcısı                                                                         |
-|  stepName             | Adım adı                                                                               |
-|  description          | Adım açıklaması                                                                        |
-|  status               | Adım durumu. Olası değerler listesi için bkz: [adım durumu](#step-status) aşağıda.    |
-|  sayısı             | İlgili adıma ileti dizisi                                                          |
-|  processPercentage    | Tamamlanma adımın                                                              |
-|  previewLinks         | *Henüz uygulanmadı*                                                                    |
-|  liveLinks            | *Henüz uygulanmadı*                                                                    |
-|  notificationEmails   | İşlemin ilerleme durumunu gönderilecek e-posta adreslerini virgülle ayrılmış listesi        |
+|  status               | Teklifin durumu. Olası değerler listesi için bkz. [teklif durumu](#offer-status) aşağıdaki. |
+|  sayısı             | Teklifle ilişkili ileti dizisi                                                    |
+|  adımlar                | Teklifin bir teklif yayımlaması sırasında gittiği adımların dizisi                      |
+|  Estimatedzaman çerçevesi   | Bu adımın tamamlanması için gereken süre (kolay biçimde)                       |
+|  id                   | Adımın tanımlayıcısı                                                                         |
+|  stepName             | Adımın adı                                                                               |
+|  açıklama          | Adımın açıklaması                                                                        |
+|  status               | Adımın durumu. Olası değerler listesi için aşağıdaki [adım durumuna](#step-status) bakın.    |
+|  sayısı             | Adımla ilgili ileti dizisi                                                          |
+|  processPercentage    | Adımın tamamlanma yüzdesi                                                              |
+|  Önizleme bağlantıları         | *Şu anda uygulanmadı*                                                                    |
+|  Livelmürekkepler            | *Şu anda uygulanmadı*                                                                    |
+|  Notificationepostalar   | İşlemin ilerleme durumunun bildirilmesi için, virgülle ayrılmış e-posta adresleri listesi        |
 |  |  |
 
 
 ### <a name="response-status-codes"></a>Yanıt durum kodları
 
-| **Kod** |   **Açıklama**                                                                                 |
+| **Kodudur** |   **Açıklama**                                                                                 |
 | -------  |   ----------------------------------------------------------------------------------------------- |
-|  200     |  `OK` -İstek başarıyla işlendi ve önerinin geçerli durumu döndürüldü. |
-|  400     | `Bad/Malformed request` -Hata yanıt gövdesi, daha fazla bilgi içeriyor olabilir.                 |
-|  404     | `Not found` -Belirtilen varlık yok.                                                |
+|  200     |  `OK`-istek başarıyla işlendi ve teklifin geçerli durumu döndürüldü. |
+|  400     | `Bad/Malformed request`-hata yanıtı gövdesinde daha fazla bilgi bulunabilir.                 |
+|  404     | `Not found`-belirtilen varlık yok.                                                |
 |  |  |
 
 
@@ -154,13 +155,13 @@ Teklif geçerli durumunu alır.
 
 |  **Ad**                    |    **Açıklama**                                       |
 |  --------------------------  |  ------------------------------------------------------  |
-|  NeverPublished              | Teklif, hiç yayımlanmadı.                          |
-|  NotStarted                  | Teklif, yeni ve başlatılmadı.                            |
-|  WaitingForPublisherReview   | Teklif, yayımcı onay bekliyor.                 |
+|  Neveryayınlandı              | Teklif hiç yayımlanmadı.                          |
+|  NotStarted                  | Teklif yenidir ve başlatılmamaktadır.                            |
+|  WaitingForPublisherReview   | Teklif, yayımcı onayını bekliyor.                 |
 |  Çalışıyor                     | Teklif gönderimi işleniyor.                     |
-|  Başarılı oldu                   | Teklif gönderme işlemi tamamlandı.               |
-|  İptal edildi                    | Teklif gönderim iptal edildi.                           |
-|  Başarısız                      | Teklif gönderme başarısız oldu.                                 |
+|  Başarılı oldu                   | Teklif gönderimi işlemeyi tamamladı.               |
+|  İptal edildi                    | Teklif Gönderimi iptal edildi.                           |
+|  Başarısız                      | Teklif gönderimi başarısız oldu.                                 |
 |  |  |
 
 
@@ -169,11 +170,11 @@ Teklif geçerli durumunu alır.
 |  **Ad**                    |    **Açıklama**                           |
 |  -------------------------   |  ------------------------------------------  |
 |  NotStarted                  | Adım başlatılmadı.                        |
-|  Devam ediyor                  | Adım çalışıyor.                             |
-|  WaitingForPublisherReview   | Adım yayımcı onay bekliyor.      |
-|  WaitingForApproval          | Adım işlemi onay bekliyor.        |
-|  Engellendi                     | Adım engellenir.                             |
-|  Reddedildi                    | Adım reddedilir.                            |
-|  Tamamlama                    | Adım tamamlandı.                            |
+|  Ediyor                  | Adım çalışıyor.                             |
+|  WaitingForPublisherReview   | Adım, yayımcı onayını bekliyor.      |
+|  WaitingForApproval          | Adım, işlem onayı bekliyor.        |
+|  Engellendiğini                     | Adım engellendi.                             |
+|  Reddedilecek                    | Adım reddedildi.                            |
+|  Tamamlama                    | Adım tamamlanmıştır.                            |
 |  İptal edildi                    | Adım iptal edildi.                           |
 |  |  |

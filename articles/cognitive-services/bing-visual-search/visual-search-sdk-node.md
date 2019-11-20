@@ -1,30 +1,30 @@
 ---
-title: "Hızlı Başlangıç: Node.js için Bing görsel arama SDK'sını kullanarak görüntü Öngörüler elde edin"
+title: "Hızlı başlangıç: node. js için Bing Görsel Arama SDK 'sını kullanarak görüntü öngörülerini alın"
 titleSuffix: Azure Cognitive Services
-description: Bing görsel arama SDK'sını kullanarak bir görüntüyü karşıya yükleme ve ilgili Öngörüler elde edin.
+description: Node. js SDK 'sını kullanarak Bing Görsel Arama hizmetinden görüntü öngörülerini almaya başlamak için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-visual-search
 ms.topic: quickstart
-ms.date: 06/18/2018
+ms.date: 07/15/2019
 ms.author: aahi
-ms.openlocfilehash: 6f7740ebd09a1fde564613c38ab12513ca51fece
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: fd69179c98e999323936daf7e83b165126c20381
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67204907"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111596"
 ---
-# <a name="quickstart-get-image-insights-using-the-bing-visual-search-sdk-for-nodejs"></a>Hızlı Başlangıç: Node.js için Bing görsel arama SDK'sını kullanarak görüntü Öngörüler elde edin
+# <a name="quickstart-get-image-insights-using-the-bing-visual-search-sdk-for-nodejs"></a>Hızlı başlangıç: node. js için Bing Görsel Arama SDK 'sını kullanarak görüntü öngörülerini alın
 
-Bu hızlı başlangıçta, görüntü ınsights Node.js SDK'sını kullanarak Bing görsel arama hizmetinden alma başlamak için kullanın. Bing görsel arama çoğu programlama dilleri ile uyumlu bir REST API olsa da SDK hizmeti uygulamalarınızla tümleştirmek için kolay bir yol sağlar. Bu örnek için kaynak kodu bulunabilir [GitHub](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/blob/master/Samples/visualSearch.js). 
+Node. js SDK 'sını kullanarak Bing Görsel Arama hizmetinden görüntü öngörülerini almaya başlamak için bu hızlı başlangıcı kullanın. Bing Görsel Arama birçok programlama dili ile uyumlu bir REST API sahip olsa da SDK, hizmeti uygulamalarınızla tümleştirmenin kolay bir yolunu sunar. Bu örneğe ilişkin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/blob/master/Samples/visualSearch.js)' da bulunabilir. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 * [Node.js](https://www.nodejs.org/)
-* Node.js için Bing görsel arama SDK'sı
-    * Bing görsel arama SDK'sını kullanarak bir konsol uygulaması ayarlamak için aşağıdaki komutları çalıştırın:
+* Node. js için Bing Görsel Arama SDK 'Sı
+    * Bing Görsel Arama SDK kullanarak bir konsol uygulaması ayarlamak için aşağıdaki komutları çalıştırın:
         1. `npm install ms-rest-azure`
         2. `npm install azure-cognitiveservices-search-visualSearch`.
 
@@ -35,7 +35,7 @@ Bu hızlı başlangıçta, görüntü ınsights Node.js SDK'sını kullanarak Bi
 
 ## <a name="create-and-initialize-the-application"></a>Uygulamayı oluşturma ve başlatma
 
-1. Sık kullandığınız IDE veya düzenleyici yeni bir JavaScript dosyası oluşturun ve aşağıdaki koşulları ekleyin. Daha sonra abonelik anahtarınızı, özel yapılandırma kimliği ve dosya yolu karşıya yüklemek istediğiniz görüntüye değişkenleri oluşturun. 
+1. En sevdiğiniz IDE veya düzenleyicide yeni bir JavaScript dosyası oluşturun ve aşağıdaki gereksinimleri ekleyin. Ardından abonelik anahtarınız, özel yapılandırma KIMLIĞI ve karşıya yüklemek istediğiniz görüntünün dosya yolu için değişkenler oluşturun. 
 
     ```javascript
     const os = require("os");
@@ -49,15 +49,15 @@ Bu hızlı başlangıçta, görüntü ınsights Node.js SDK'sını kullanarak Bi
     let filePath = "../Data/image.jpg";
     ```
 
-2. İstemci örneği oluşturun.
+2. İstemcinin örneğini oluşturun.
 
     ```javascript
     let visualSearchClient = new Search.VisualSearchClient(credentials);
     ```
 
-## <a name="search-for-images"></a>Resimler için arama
+## <a name="search-for-images"></a>Görüntü ara
 
-1. Kullanım `fs.createReadStream()` görüntü dosyanızda okuyup arama isteği ve sonuçlar için değişkenler oluşturun. Daha sonra istemci görüntülerini aramak için kullanın.
+1. Görüntü dosyanızda okumak için `fs.createReadStream()` kullanın, arama isteğiniz ve sonuçlarınız için değişkenler oluşturun. Ardından, görüntüleri aramak için istemcisini kullanın.
 
     ```javascript
     let fileStream = fs.createReadStream(filePath);
@@ -110,4 +110,4 @@ Bu hızlı başlangıçta, görüntü ınsights Node.js SDK'sını kullanarak Bi
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Tek sayfa uygulaması oluşturma](tutorial-bing-visual-search-single-page-app.md)
+> [Tek sayfalı Web uygulaması oluşturma](tutorial-bing-visual-search-single-page-app.md)

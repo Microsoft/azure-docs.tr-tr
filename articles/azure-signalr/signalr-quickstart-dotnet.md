@@ -1,26 +1,26 @@
 ---
-title: Azure SignalR hizmeti ASP.NET ile kullanma hakkında bilgi edinmek için hızlı başlangıç
-description: ASP.NET framework ile sohbet odası oluşturma amacıyla Azure SignalR hizmeti kullanmak için bir hızlı başlangıcı.
+title: ASP.NET ile geliştirme-Azure SignalR hizmeti
+description: ASP.NET Framework ile sohbet odası oluşturmak için Azure SignalR hizmetini kullanmaya yönelik hızlı başlangıç.
 author: sffamily
 ms.service: signalr
 ms.devlang: dotnet
 ms.topic: quickstart
 ms.date: 04/20/2019
 ms.author: zhshang
-ms.openlocfilehash: 2020ee02d236ca13431adb736d9f48171d33b4f3
-ms.sourcegitcommit: 72f1d1210980d2f75e490f879521bc73d76a17e1
+ms.openlocfilehash: ec5b7a75bced4b7cd81a120925558b8c1be57818
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67147427"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158184"
 ---
-# <a name="quickstart-create-a-chat-room-with-aspnet-and-signalr-service"></a>Hızlı Başlangıç: ASP.NET SignalR hizmeti ile sohbet odası oluşturamadı.
+# <a name="quickstart-create-a-chat-room-with-aspnet-and-signalr-service"></a>Hızlı başlangıç: ASP.NET ve SignalR hizmeti ile sohbet odası oluşturma
 
-Azure SignalR hizmeti temel [ASP.NET Core 2.0 için SignalR](https://docs.microsoft.com/aspnet/core/signalr/introduction), olduğu **değil** %100 ASP.NET SignalR ile uyumlu. Azure SignalR hizmeti en son ASP.NET Core teknolojilere göre ASP.NET SignalR Veri Protokolü'nü yeniden uygulanır. Azure SignalR hizmeti için ASP.NET SignalR kullanırken bazı ASP.NET SignalR özellikleri artık desteklenir, istemci bağlandığında, Azure SignalR iletileri yeniden değil. Ayrıca, her zaman çerçevesini aktarım ve JSONP destek değildir. Bazı kod değişiklikleri ve bağımlı kitaplıkları uygun sürümünün ASP.NET SignalR uygulama SignalR hizmet ile çalışması için gereklidir. 
+Azure SignalR hizmeti, ASP.NET SignalR ile %100 uyumlu **olmayan** [ASP.NET Core 2,0 için SignalR](https://docs.microsoft.com/aspnet/core/signalr/introduction)'yi temel alır. Azure SignalR hizmeti, en son ASP.NET Core teknolojilerine göre ASP.NET SignalR veri protokolünü yeniden uyguladık. ASP.NET SignalR için Azure SignalR hizmeti kullanılırken, bazı ASP.NET SignalR özellikleri artık desteklenmez. Örneğin, Azure SignalR istemci yeniden bağlandığında iletileri yeniden oynamaz. Ayrıca, süresiz çerçeve taşıması ve JSONP desteklenmez. ASP.NET SignalR uygulamasının SignalR hizmeti ile çalışmasını sağlamak için bazı kod değişiklikleri ve bağımlı kitaplıkların uygun sürümü gerekir. 
 
-Başvurmak [sürümü farkları doc](https://docs.microsoft.com/aspnet/core/signalr/version-differences?view=aspnetcore-2.2) ASP.NET SignalR ve ASP.NET Core SignalR arasında özellik karşılaştırması tam listesi için.
+ASP.NET SignalR ve ASP.NET Core SignalR arasındaki özellik karşılaştırmasının tamamen listesi için [sürüm farklılıkları](https://docs.microsoft.com/aspnet/core/signalr/version-differences?view=aspnetcore-2.2) bölümüne bakın.
 
-Bu hızlı başlangıçta, ASP.NET ve Azure SignalR hizmeti ile benzer bir kullanmaya nasıl başlayacağınızı öğreneceksiniz [sohbet odası uygulama](./signalr-quickstart-dotnet-core.md).
+Bu hızlı başlangıçta, benzer bir [sohbet odası uygulaması](./signalr-quickstart-dotnet-core.md)için ASP.net ve Azure SignalR hizmetini kullanmaya nasıl başlacağınızı öğreneceksiniz.
 
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
@@ -36,9 +36,9 @@ Azure hesabınızla [Azure portalında](https://portal.azure.com/) oturum açın
 
 [!INCLUDE [Create instance](includes/signalr-quickstart-create-instance.md)]
 
-*Sunucusuz* modu ASP.NET SignalR uygulamalar için desteklenmez. Her zaman *varsayılan* veya *Klasik* Azure SignalR hizmeti örneği.
+*Sunucusuz* mod, ASP.NET SignalR uygulamaları için desteklenmez. Her zaman Azure SignalR hizmeti örneği için *varsayılan* veya *Klasik* ' i kullanın.
 
-Bu hızlı başlangıçta ile kullanılan Azure kaynakları da oluşturabilirsiniz [SignalR hizmeti betik oluşturma](scripts/signalr-cli-create-service.md).
+Bu hızlı başlangıçta, [bir SignalR Hizmet betiği oluştur](scripts/signalr-cli-create-service.md)Ile kullanılan Azure kaynakları da oluşturabilirsiniz.
 
 ## <a name="clone-the-sample-application"></a>Örnek uygulamayı kopyalama
 
@@ -52,17 +52,17 @@ Hizmet dağıtılırken kod ile çalışmaya geçiş yapalım. [GitHub'dan örne
     git clone https://github.com/aspnet/AzureSignalR-samples.git
     ```
 
-## <a name="configure-and-run-chat-room-web-app"></a>Yapılandırma ve sohbet odası web uygulamasını çalıştırma
+## <a name="configure-and-run-chat-room-web-app"></a>Sohbet odası Web uygulamasını yapılandırma ve çalıştırma
 
-1. Visual Studio'yu başlatın ve bir çözüm açın *aspnet-samples/odası/* kopyalanan deponun klasör.
+1. Visual Studio 'Yu başlatın ve kopyalanan deponun *ASPNET-Samples/ChatRoom/* klasöründe çözümü açın.
 
-1. Azure portalında nerede açıldığında, tarayıcıda bulun ve oluşturduğunuz örneğini seçin.
+1. Azure portal açıldığı tarayıcıda, oluşturduğunuz örneği bulun ve seçin.
 
 1. SignalR Hizmeti örneğinin bağlantı dizelerini görüntülemek için **Anahtarlar**’ı seçin.
 
 1. Birincil bağlantı dizesini seçerek kopyalayın.
 
-1. Şimdi web.config dosyasında bağlantı dizesini ayarlayalım.
+1. Şimdi Web. config dosyasında bağlantı dizesini ayarlayın.
 
     ```xml
     <configuration>
@@ -73,7 +73,7 @@ Hizmet dağıtılırken kod ile çalışmaya geçiş yapalım. [GitHub'dan örne
     </configuration>
     ```
 
-1. İçinde *Startup.cs*, çağırmak yerine `MapSignalR()`, çağırmanız gerekir `MapAzureSignalR({your_applicationName})` ve uygulama yerine tek başına SignalR barındırma hizmetine bağlanmak için bağlantı dizesini geçirin. Değiştirin `{YourApplicationName}` uygulamanızın adı. Bu ad, bu uygulama, diğer uygulamalardan ayırt etmek için benzersiz bir addır. Kullanabileceğiniz `this.GetType().FullName` değeri.
+1. *Startup.cs*' de `MapSignalR()`çağırmak yerine, uygulamanın kendi kendine bir SignalR barındırmak yerine hizmete bağlanmasını sağlamak için `MapAzureSignalR({your_applicationName})` çağırmanız ve bağlantı dizesinde geçiş yapmanız gerekir. `{YourApplicationName}`, uygulamanızın adıyla değiştirin. Bu ad, bu uygulamayı diğer uygulamalarınızdan ayırt etmek için benzersiz bir addır. Değer olarak `this.GetType().FullName` kullanabilirsiniz.
 
     ```cs
     public void Configuration(IAppBuilder app)
@@ -83,18 +83,18 @@ Hizmet dağıtılırken kod ile çalışmaya geçiş yapalım. [GitHub'dan örne
     }
     ```
 
-    Ayrıca, SDK hizmeti, bu API'leri kullanmadan önce başvurmanız gerekir. Açık **araçları | NuGet Paket Yöneticisi | Paket Yöneticisi Konsolu** ve komutu çalıştırın:
+    Ayrıca, bu API 'Leri kullanmadan önce hizmet SDK 'sına başvurmanız gerekir. Araçları açın **| NuGet Paket Yöneticisi | Paket Yöneticisi konsolu** ve Çalıştır komutu:
 
     ```powershell
     Install-Package Microsoft.Azure.SignalR.AspNet
     ```
 
-    Bu değişiklikler dışındaki her şey aynı kalır, zaten iş mantığı yazmak için alışık olduğunuz hub arabirimi kullanmaya devam edebilirsiniz.
+    Bu değişiklikler dışında, diğer her şey aynı kalır, iş mantığını yazmak için zaten bildiğiniz hub arabirimini kullanmaya devam edebilirsiniz.
 
     > [!NOTE]
-    > Uygulamasında bir uç nokta `/signalr/negotiate` anlaşması Azure SignalR hizmeti SDK'sı tarafından sunulur. İstemcileri bağlanmak ve istemcilerin bağlantı dizesinde tanımlanmış hizmet uç noktasına yönlendirmek çalıştığında bir özel anlaşma yanıtı döndürür.
+    > Uygulamada bir uç nokta `/signalr/negotiate` Azure SignalR hizmeti SDK 'Sı tarafından anlaşmaya sunuldu. İstemciler bağlanmayı ve bağlantı dizesinde tanımlanan hizmet uç noktasına yeniden yönlendirmeyi denediğinde, özel bir anlaşma yanıtı döndürür.
 
-1. Tuşuna **F5** projeyi hata ayıklama modunda çalıştırın. Uygulama çalışırken yerel olarak görebilirsiniz. Uygulama tarafından bir SignalR çalışma zamanı barındırma yerine bunu şimdi Azure SignalR hizmeti için bağlar.
+1. Projeyi hata ayıklama modunda çalıştırmak için **F5** tuşuna basın. Uygulamanın yerel olarak çalıştığını görebilirsiniz. Bir SignalR çalışma zamanını uygulamanın kendisi için barındırmak yerine artık Azure SignalR hizmetine bağlanır.
 
 [!INCLUDE [Cleanup](includes/signalr-quickstart-cleanup.md)]
 
@@ -116,7 +116,7 @@ Birkaç dakika sonra kaynak grubu ve içerdiği kaynakların tümü silinir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, yeni bir Azure SignalR hizmeti kaynak oluşturduğunuz ve bir ASP.NET web uygulaması kullanılır. Ardından, Azure SignalR hizmeti ile ASP.NET Core kullanarak gerçek zamanlı uygulamalar geliştirmeyi öğrenin.
+Bu hızlı başlangıçta yeni bir Azure SignalR hizmeti kaynağı oluşturdunuz ve bunu bir ASP.NET Web uygulamasıyla kullandınız. Daha sonra, ASP.NET Core ile Azure SignalR hizmetini kullanarak gerçek zamanlı uygulamalar geliştirmeyi öğrenin.
 
 > [!div class="nextstepaction"]
 > [ASP.NET Core ile Azure SignalR hizmeti](./signalr-quickstart-dotnet-core.md)

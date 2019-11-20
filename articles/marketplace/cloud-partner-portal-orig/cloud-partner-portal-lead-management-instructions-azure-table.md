@@ -1,161 +1,166 @@
 ---
-title: Azure tablo | Azure Market
-description: Azure tablosu için sağlama yönetimi yapılandırın.
+title: Azure Tablo Depolaması | Azure Marketi
+description: Azure Tablo Depolaması 'nda lider yönetimini yapılandırın.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 05/22/2019
 ms.author: pabutler
-ms.openlocfilehash: 08f9d794822dfd7879efc7c4813ecc46f92f6a45
-ms.sourcegitcommit: 72f1d1210980d2f75e490f879521bc73d76a17e1
+ms.openlocfilehash: 21105d72ccd288faf0fed58019e67afe2e1c9d01
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67147893"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73825281"
 ---
-# <a name="lead-management-instructions-for-azure-table"></a>Azure tablosu için yönetim yönergeleri sağlama
+# <a name="lead-management-instructions-for-table-storage"></a>Tablo depolama için öncü yönetim yönergeleri
 
-Bu makalede, Azure tablo satışa depolamak için yapılandırma açıklanır. Azure tablo depolamak ve müşteri bilgileri özelleştirmenize olanak sağlar.
+Bu makalede, satış fırsatlarını yönetmek için Azure Tablo depolamanın nasıl yapılandırılacağı açıklanır. Tablo depolama, müşteri bilgilerini depolamanıza ve değiştirmenize yardımcı olur.
 
+## <a name="configure-table-storage"></a>Tablo Depolamayı Yapılandırma
 
-## <a name="how-to-configure-azure-table"></a>Azure tablo yapılandırma
+1. Azure hesabınız yoksa [ücretsiz bir deneme hesabı oluşturun](https://azure.microsoft.com/pricing/free-trial/).
+1. Hesabınız etkin olduktan sonra [Azure Portal](https://portal.azure.com)oturum açın.
+1. Azure portal, aşağıdaki adımları izleyin:  
+    1. Sol taraftaki bölmede **+ kaynak oluştur** ' u seçin. **Yeni** bölme açılır.
+    1. **Yeni** bölmesinde **depolama**' yı seçin. **Öne çıkan** bir liste, sağ tarafta açılır.
+    1. **Depolama hesabı**' nı seçin. Ardından, [depolama hesabı oluşturma](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal)bölümündeki yönergeleri izleyin.
 
-1. Bir Azure hesabınız yoksa, şunları yapabilirsiniz [ücretsiz bir deneme hesabı oluşturma](https://azure.microsoft.com/pricing/free-trial/).
-2. Azure hesabınız etkinleştikten sonra oturum [Azure portalında](https://portal.azure.com).
-3. Azure portalında, aşağıdaki yordamı kullanarak bir depolama hesabı oluşturun.  
-    1. Seçin **+ kaynak Oluştur** sol menü içinde.  **Yeni** bölmesinde (dikey) sağda görüntülenir.
-    2. Seçin **depolama** içinde **yeni** bölmesi.  A **öne çıkan** listesi, sağda görüntülenir.
-    3. Seçin **depolama hesabı** hesap oluşturma başlamak için.  Makaledeki yönergeleri [depolama hesabı oluşturma](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal).
+    ![Azure Storage hesabı oluşturma](./media/cloud-partner-portal-lead-management-instructions-azure-table/azurestoragecreate.png)
 
-    ![Bir Azure depolama hesabı oluşturma adımları](./media/cloud-partner-portal-lead-management-instructions-azure-table/azurestoragecreate.png)
+    Depolama hesapları hakkında daha fazla bilgi için bkz. [hızlı başlangıç öğreticileri](https://docs.microsoft.com/azure/storage/). Fiyatlandırma bilgileri için bkz. [Azure Depolama fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/).
 
-    Depolama hesapları hakkında daha fazla bilgi için seçin [hızlı başlangıç öğreticisinde](https://docs.microsoft.com/azure/storage/).  Depolama fiyatlandırması hakkında daha fazla bilgi için bkz. [depolama fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/).
+1. Depolama Hesabınız sağlanana kadar bekleyin, genellikle birkaç dakika sürer. Sonra, Azure portal giriş sayfasından hesaba erişin: **Tüm kaynaklarınızı** veya gezinti bölmesindeki **tüm kaynakları** görüntüle ' yi seçin.
 
-4. Genellikle birkaç dakika sürer. işlem, depolama hesabı sağlanana kadar bekleyin.  Ardından depolama hesabınızı sık erişim **giriş** seçerek Azure Portalı'nın sayfasında **tüm kaynaklara bakın** veya seçerek **tüm kaynakları** sol gezinti bölmesinden Azure portal'ın menü çubuğu.
+    ![Azure depolama hesabınıza erişin](./media/cloud-partner-portal-lead-management-instructions-azure-table/azure-storage-access.png)
 
-    ![Azure depolama hesabınızın erişim](./media/cloud-partner-portal-lead-management-instructions-azure-table/azure-storage-access.png)
+1. Depolama hesabı bölmesinizden anahtar için depolama hesabı bağlantı dizesini kopyalayın. Bulut İş Ortağı Portalı depolama hesabının **bağlantı dizesi** alanına yapıştırın.
 
-5. Depolama hesabı bölmesinden anahtarı için depolama hesabı bağlantı dizesini kopyalayın ve yapıştırın **depolama hesabı bağlantı dizesi** bulut iş ortağı portalı ile sekmesindeki. Bir bağlantı dizesi örneği verilmiştir:
+    Örnek bağlantı dizesi:
 
-```sql
-DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net
-```
+    ```sql
+    DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net
+    ```
 
-  ![Azure depolama anahtarı](./media/cloud-partner-portal-lead-management-instructions-azure-table/azurestoragekeys.png)
+      ![Azure depolama anahtarı](./media/cloud-partner-portal-lead-management-instructions-azure-table/azurestoragekeys.png)
 
-Kullanabileceğiniz [Azure Depolama Gezgini](https://azurestorageexplorer.codeplex.com/) veya depolama Tablonuzdaki verileri görmek için diğer benzer bir araç. Azure tablolardaki verileri de dışarı aktarabilirsiniz.
+Tablo depolamadaki verileri görmek için [Azure Depolama Gezgini](https://azurestorageexplorer.codeplex.com/) veya benzer bir araç kullanabilirsiniz. Ayrıca, verileri dosyadan dışarı aktarabilirsiniz.
 
+## <a name="use-microsoft-flow-with-table-storage-optional"></a>Tablo depolama ile Microsoft Flow kullanma (*isteğe bağlı*)
 
-## <a name="use-microsoft-flow-with-an-azure-table-optional"></a>Microsoft Flow ile bir Azure tablosu kullanın (*isteğe bağlı*) 
+Tablo depolamaya bir müşteri adayı eklendiğinde otomatik olarak bildirim göndermek için [Microsoft Flow](https://docs.microsoft.com/flow/) kullanabilirsiniz. Microsoft Flow hesabınız yoksa [ücretsiz hesap için kaydolun](https://flow.microsoft.com/).
 
-Kullanabileceğiniz [Microsoft Flow](https://docs.microsoft.com/flow/) Azure tablosunda her bir müşteri adayı eklendiğinde bildirim otomatik hale getirmek için. Bir hesabınız yoksa, şunları yapabilirsiniz [ücretsiz bir hesap için kaydolun](https://flow.microsoft.com/).
+### <a name="lead-notification-example"></a>Müşteri adayı bildirimi örneği
 
-
-### <a name="lead-notification-example"></a>Bildirim örneği sağlama
-
-Bu örnek, bir Azure tablosu için yeni bir müşteri adayı eklendiğinde otomatik olarak bir e-posta bildirimi gönderir temel bir akış oluşturmak için bir kılavuz olarak kullanın. Bu örnek, tablo depolama güncelleştirildiyse, müşteri adayı bilgilerini saatte göndermek için bir yineleme ayarlar.
+Bu örnek, temel akışın nasıl oluşturulacağını gösterir. Akış, yeni müşteri adayları tablo depolamaya eklendiğinde otomatik olarak bir e-posta bildirimi gönderir.
 
 1. Microsoft Flow hesabınızda oturum açın.
-2. Sol gezinti çubuğunda **Akışlarım**.
-3. Üst gezinti çubuğunda, seçin **+ yeni**.  
-4. Aşağı açılan listesinde seçin **+ boş akış oluştur**
-5. Boş akış Oluştur altında seçin **boş akış Oluştur**.
+1. Sol taraftaki Gezinti bölmesinde **Akışlarım**' ı seçin.
+1. Üst gezinti çubuğunda **+ Yeni**' yi seçin.  
+1. Aşağı açılan listeden **+ boş oluştur**' u seçin.
+1. **Boş akış oluştur**altında, **boş oluştur**' u seçin.
 
-   ![Yeni bir akışı sıfırdan oluşturma](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-create-from-blank.png)
+   ![Boş yeni bir akış oluşturun](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-create-from-blank.png)
 
-6. Bağlayıcılar ve tetikleyiciler arama sayfası seçin **Tetikleyicileri**.
-7. Altında **Tetikleyicileri**seçin **yinelenme**.
-8. İçinde **yinelenme** penceresinde varsayılan ayar 1 tutmak **aralığı**. Gelen **sıklığı** açılan listesinden **saat**.
+1. Bağlayıcılar ve Tetikleyiciler arama sayfasında **Tetikleyiciler**' i seçin.
+1. **Tetikleyiciler**altında **yinelenme**' yi seçin.
+1. **Yineleme** penceresinde, **Aralık**için varsayılan **1** ayarını tutun. **Sıklık** açılan listesinden **saat**' i seçin.
 
    >[!NOTE] 
-   >Bu örnek bir 1 saatlik zaman aralığında kullansa da, aralık ve, iş ihtiyaçlarınız için en iyi şekilde sıklığı seçebilirsiniz.
+   >Bu örnek bir saatlik aralığı kullanır. Ancak, iş gereksinimlerinize en uygun bir Aralık ve sıklık seçebilirsiniz.
 
-   ![Yineleme için 1 saatlik sıklığını ayarlayın](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-recurrence-dropdown.png)
+   ![Yineleme için 1 saatlik sıklık ayarla](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-recurrence-dropdown.png)
 
-9. Seçin **+ yeni adım**.
-10. "Get geçmiş zamanı" için arama yapın ve ardından **geçmişteki saati Al** Eylemler altında. 
+1. **+ Yeni adım**' ı seçin.
+1. **Geçmiş zamanı al**' ı arayın ve sonra **bir eylem seçin**altında **geçmiş zamanı al** ' ı seçin.
 
-    ![Bulun ve seçin, eylem saati Al](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-search-getpasttime.png)
+    !["Geçmiş zamanı al" eylemini bulun ve seçin](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-search-getpasttime.png)
 
-11. İçinde **geçmişteki saati Al** penceresinde **aralığı** 1.  Gelen **zaman birimi** açılan listesinden **saat**.
+1. **Son zaman al** penceresinde, **aralığı** **1**olarak ayarlayın.  **Zaman birimi** aşağı açılan listesinden **saat**' i seçin.
     >[!IMPORTANT] 
-    >Bu aralık ve zaman birimi yineleme için yapılandırılan sıklık ve aralığı eşleştiğinden emin olun.
+    >**Aralık** ve **zaman biriminin** yineleme için yapılandırdığınız Aralık ve sıklık ile eşleştiğinden emin olun (adım 8).
 
-    ![Son zaman aralığı ayarla al](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-getpast-time.png)
+    ![Son tarihi al zaman aralığını ayarla](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-getpast-time.png)
 
     >[!TIP] 
-    >Akışınız her adımın doğru yapılandırıldığını doğrulamak için istediğiniz zaman kontrol edebilirsiniz. Akışınız denetlemek için **akış denetleyicisi** akış menü çubuğundan.
+    >Her adımın doğru yapılandırıldığını doğrulamak için akışınızı dilediğiniz zaman kontrol edebilirsiniz: Flow menü çubuğundan **Flow denetleyicisi** ' ni seçin.
 
-Sonraki adım kümesini, Azure tablonuza bağlanırsınız ve yeni işlemek için işleme mantığının ayarlama yol açar.
+Sonraki adımlarda, depolama tablonuza bağlanır ve yeni müşteri adaylarını işlemek için işleme mantığını ayarlarsınız.
 
-1. Adım Süresi geçmiş Get sonra seçin **+ yeni adım**ve ardından "Get varlıklar için" arayın.
-2. Altında **eylemleri**seçin **alma varlıkları**ve ardından **Gelişmiş Seçenekleri Göster**.
-3. İçinde **alma varlıkları** penceresinde, aşağıdaki alanlar için bilgileri sağlayın:
+1. **Geçmiş zamanı al** adımından sonra **+ yeni adım**' ı seçin ve ardından **varlıkları al**' ı arayın.
+1. **Eylemler**altında **varlıkları al**' ı seçin ve ardından **Gelişmiş seçenekleri göster**' i seçin.
+1. **Varlıkları al** penceresinde aşağıdaki alanları girin:
 
-   - **Tablo** – Azure tablo Depolama'nızda adını girin. Bu örnekte "MarketPlaceLeads" girildiğinde sonraki ekran görüntüsü yakalamayı istemi gösterir. 
+   - **Tablo**: tablo depolamanın adı. Aşağıdaki görüntüde "Marketplacefırsatlarını" girilen bir gösterilmektedir:
 
-     ![Azure tablo adı için özel bir değer seçin](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-getentities-table-name.png)
+     ![Azure Tablo adı için özel bir değer seçin](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-getentities-table-name.png)
 
-   - **Filtre sorgusu** – bu alana tıklayın ve **geçmişteki saati Al** simgesi açılan pencerede görüntülenir. Seçin **süresini geçen** bu sorguya filtre uygulamak için zaman damgası kullanmak için. Alternatif olarak, aşağıdaki işlev alanına yapıştırabilirsiniz: oluşturulma zamanı `Timestamp gt datetime'@{body('Get_past_time')}'` 
+   - **Filtre sorgusu**: bu alanı seçtiğinizde, **son zaman al** simgesi açılır pencerede görüntülenir. Sorguyu filtrelemek için bu değeri bir zaman damgası olarak kullanmak üzere **geçmiş zamanı** seçin. Veya, alanına aşağıdaki işlevi yapıştırabilirsiniz:
+   
+      `CreatedTime Timestamp gt datetime'@{body('Get_past_time')}'` 
 
-     ![Filtre sorgu işlevi ayarlama](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-getentities-filterquery.png)
+     ![Filtre sorgusu işlevini ayarlama](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-getentities-filterquery.png)
 
-4. Seçin **yeni adım** yeni müşteri adayları için Azure tablo taramak için bir koşul eklemek için.
+1. Yeni müşteri adayları için tablo depolama alanınızı taramak üzere koşul eklemek için **yeni adım** ' ı seçin.
 
-   ![Azure tablo taramak için bir koşul eklemek için yeni adımı kullanın](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-add-filterquery-new-step.png)
+   ![Tablo depolama alanını taramak üzere bir koşul eklemek için "yeni adım" kullanın](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-add-filterquery-new-step.png)
 
-5. İçinde **eylem seçin** penceresinde **eylemleri**ve ardından **koşul** denetimi.
+1. **Eylem seçin** penceresinde **Eylemler**' i ve ardından **koşul denetimi**' ni seçin.
 
      ![Koşul denetimi ekleme](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-action-condition-control.png)
 
-6. İçinde **koşul** penceresinde **bir değer seçin** alan ve ardından **ifade** açılan penceresinde.
-7. Yapıştırma `length(body('Get_entities')?['value'])` içine ***fx*** alan. Seçin **Tamam** bu işlevi eklemek için. Koşul ayarlamayı tamamlamak için:
-
-   - "Açılır listeden büyüktür" seçin.
-   - Değeri olarak 0 girin 
-
-     ![Bir işlev koşula Ekle](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-condition-fx0.png)
-
-8. Koşulun sonucuna göre gerçekleştirilecek eylem ayarlama.
-
-     ![Eylem koşulu sonuçlarına göre ayarlama](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-condition-pick-action.png)
-
-9. Koşul halinde **hiçbir**, hiçbir şey yapmaz. 
-10. Koşul halinde **Evet ise**, e-posta göndermek için Office 365 hesabınıza bağlayan eylem tetikler. Seçin **Eylem Ekle**.
-11. Seçin **bir e-posta**. 
-12. İçinde **bir e-posta** penceresinde, aşağıdaki alanlar için bilgileri sağlayın:
-
-    - **İçin** -bu bildirim alacak herkes için bir e-posta adresi girin.
-    - **Konu** – e-posta için bir konu belirtin. Örneğin: Yeni müşteri adayları!
-    - **Gövde**:   Her e-posta (isteğe bağlı) içerir ve gövdesine yapıştırın istediğiniz metni Ekle `body('Get_entities')?['value']` müşteri adayı bilgilerini eklemek için bir işlev olarak.
-
-      >[!NOTE] 
-      >Bu e-posta gövdesi için ek bir statik veya dinamik veri noktaları ekleyebilirsiniz.
-
-      ![Sağlama bildirim e-posta](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-emailbody-fx.png)
-
-13. Seçin **Kaydet** akışı kaydedin. Microsoft Flow, flow hataları için otomatik olarak test eder. Herhangi bir hata yoksa, akışınız kaydedildikten sonra çalışmaya başlar.
-
-Sonraki ekran yakalama örneği son akışı nasıl görünmelidir gösterir.
-
-[![Son akış sırası](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-end-to-end-thmb.png)](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-end-to-end.png)
-
-(*Büyütmek için görüntüye tıklayın.* )
+1. **Koşul** penceresinde, **bir değer seçin**' i seçin ve ardından açılır pencerede **ifade** ' ı seçin.
+1. `length(body('Get_entities')?['value'])` ***FX*** alanına yapıştırın. Bu işlevi eklemek için **Tamam ' ı** seçin. 
 
 
-### <a name="manage-your-flow"></a>Akışınız yönetme
 
-Çalışmaya başladıktan sonra akışınızı yönetmek kolaydır.  Akışınızı üzerinde tam denetime sahip. Örneğin, durdurmak, düzenleme, çalıştırma geçmişini görebilir ve analizler elde. Sonraki ekran görüntüsü yakalamayı akış yönetmek kullanılabilir seçenekleri gösterir. 
+     ![Koşula işlev ekleme](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-condition-fx0.png)
 
- ![Bir akışı yönetme](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-manage-completed.png)
+1. Koşulun sonucuna göre gerçekleştirilecek eylemi ayarlayın.
 
-Akışı kullanarak durduruncaya kadar çalışmaya devam eder **kapatmak akış** seçeneği.
+    1. Aşağı açılan listeden **büyüktür** ' i seçin.
+   1. Değer olarak **0** girin.
 
-Herhangi bir müşteri adayı e-posta bildirim almıyorsanız, Azure tablosu için yeni müşteri adayları eklemediyseniz, anlamına gelir. Akış hatalarını varsa, sonraki ekran görüntüsünde örnekte olduğu gibi bir e-posta alırsınız.
+     ![Koşul sonuçlarına göre bir eylem ayarlama](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-condition-pick-action.png)
 
- ![Akış hatası e-posta bildirimi](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-failure-note.png)
+1. Koşul "Eğer hayır" olarak çözümlenirse hiçbir şey yapmayın.
 
+    Koşul "If Yes" olarak çözümlenirse, Office 365 hesabınızı bağlayan bir eylemi bir e-posta göndermek üzere tetikleyin:
+   1. **Eylem Ekle**' yi seçin.
+   1. **E-posta gönder**' i seçin.
+   1. **E-posta gönder** penceresinde, aşağıdaki alanlara bilgi girin:
+
+      - **Kime**: bildirimi alacak herkese yönelik bir e-posta adresi.
+      - **Konu**: e-posta konusu. Örneğin: *yeni müşteri adayları!*
+      - **Gövde**: her bir e-postaya dahil etmek istediğiniz metin (isteğe bağlı). Ayrıca, müşteri adayı bilgilerini eklemek için `body('Get_entities')?['value']` bir işlev olarak yapıştırın.
+
+        >[!NOTE] 
+        >E-postanın gövdesine ek statik veya dinamik veri noktaları ekleyebilirsiniz.
+
+      ![Müşteri adayı bildirimi için e-posta ayarla](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-emailbody-fx.png)
+
+1. Akışı kaydetmek için **Kaydet** ' i seçin. Microsoft Flow hatalar için otomatik olarak test eder. Herhangi bir hata yoksa, akışınız kaydedildikten sonra çalışmaya başlar.
+
+    Aşağıdaki görüntüde, son akışın nasıl görüneceğine ilişkin bir örnek gösterilmektedir.
+
+    [![son akış sırası](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-end-to-end-thmb.png)](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-end-to-end.png)
+
+    (*Büyütmek için görüntüyü seçin.* )
+
+### <a name="manage-your-flow"></a>Akışınızı yönetin
+
+Kaydettikten sonra akışınızı yönetmek kolaydır. Akışınız üzerinde tamamen denetim sahibi olursunuz. Örneğin, bunu durdurabilir, düzenleyebilir, çalıştırma geçmişine bakabilirsiniz ve analiz alabilirsiniz. Aşağıdaki görüntüde, akış yönetimi seçenekleri gösterilmektedir.
+
+ ![Akış yönetimi seçenekleri](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-manage-completed.png)
+
+Akış, **akışı kapat**seçeneğini seçinceye kadar çalışmaya devam eder.
+
+Hiçbir müşteri adayı e-posta bildirimi almıyorsanız, tablo depolamaya yeni müşteri adayları eklenmez.
+Bir akış hatası oluşursa aşağıdaki örnekteki gibi bir e-posta alacaksınız:
+
+ ![Flow hata e-posta bildirimi](./media/cloud-partner-portal-lead-management-instructions-azure-table/msflow-failure-note.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,9 +1,9 @@
 ---
-title: Azure Blob ile çalışmaya başlama depolama ve Visual Studio bağlı hizmetler (ASP.NET) | Microsoft Docs
-description: Başlamak nasıl bir ASP.NET projesi Visual Studio'da Azure Blob Depolama kullanarak Visual Studio kullanarak bir depolama hesabına bağlandıktan sonra bağlı hizmetler
+title: Visual Studio kullanarak Azure Blob depolama kullanmaya başlama (ASP.NET)
+description: Visual Studio bağlı hizmetleri kullanarak bir depolama hesabına bağlandıktan sonra Visual Studio 'da bir ASP.NET projesinde Azure Blob depolamayı kullanmaya başlama
 services: storage
 author: ghogen
-manager: douge
+manager: jillfra
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
 ms.custom: vs-azure
@@ -11,22 +11,23 @@ ms.workload: azure-vs
 ms.topic: conceptual
 ms.date: 12/07/2017
 ms.author: ghogen
-ms.openlocfilehash: 557b47aab5cdadef79427c4da9c18477daac0689
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX,NOFOLLOW
+ms.openlocfilehash: d6591cdb8f19484c87bb05f9007521adc34778f9
+ms.sourcegitcommit: 8b44498b922f7d7d34e4de7189b3ad5a9ba1488b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62123051"
+ms.lasthandoff: 10/13/2019
+ms.locfileid: "72298875"
 ---
-# <a name="get-started-with-azure-blob-storage-and-visual-studio-connected-services-aspnet"></a>Azure Blob ile çalışmaya başlama depolama ve Visual Studio bağlı hizmetler (ASP.NET)
+# <a name="get-started-with-azure-blob-storage-and-visual-studio-connected-services-aspnet"></a>Azure Blob depolama ve Visual Studio bağlı hizmetlerini kullanmaya başlama (ASP.NET)
 
 > [!div class="op_single_selector"]
 > - [ASP.NET](./vs-storage-aspnet-getting-started-blobs.md)
 > - [ASP.NET Core](./vs-storage-aspnet-core-getting-started-blobs.md)
 
-Azure Blob Depolama, yapılandırılmamış verileri nesne veya BLOB olarak bulutta depolayan bir hizmettir. Blob Storage belge, medya dosyası veya uygulama yükleyici gibi her tür metin veya ikili veri depolayabilir. Blob Storage aynı zamanda nesne depolama olarak adlandırılır. Blob Depolama hakkında daha fazla bilgi için bkz: [Azure Blob depolamaya giriş](../storage/blobs/storage-blobs-introduction.md).
+Azure Blob depolama, yapılandırılmamış verileri bulutta veya bloblarla depolayan bir hizmettir. Blob Storage belge, medya dosyası veya uygulama yükleyici gibi her tür metin veya ikili veri depolayabilir. Blob Storage aynı zamanda nesne depolama olarak adlandırılır. BLOB depolama hakkında daha fazla bilgi için bkz. [Azure Blob depolamaya giriş](../storage/blobs/storage-blobs-introduction.md).
 
-Bu öğreticide, Blob Depolama kullanan bazı genel senaryolar için ASP.NET kodunun nasıl yazılacağını gösterir. Bir blob kapsayıcısı oluşturma ve karşıya yükleme, listeleme, indirme ve BLOB'ları silmeden senaryolar içerir.
+Bu öğreticide, blob depolamayı kullanan bazı yaygın senaryolar için ASP.NET kodu yazma gösterilmektedir. Senaryolar, blob kapsayıcısı oluşturma ve Blobları karşıya yükleme, listeleme, indirme ve silmeyi içerir.
 
 [!INCLUDE [storage-try-azure-tools-blobs](../../includes/storage-try-azure-tools-blobs.md)]
 
@@ -38,37 +39,37 @@ Bu öğreticide, Blob Depolama kullanan bazı genel senaryolar için ASP.NET kod
 
 ## <a name="create-an-mvc-controller"></a>MVC denetleyicisi oluşturma 
 
-1. İçinde **Çözüm Gezgini**, sağ **denetleyicileri**.
+1. **Çözüm Gezgini**, **denetleyiciler**öğesine sağ tıklayın.
 
-2. Bağlam menüsünden seçin **Ekle** > **denetleyicisi**.
+2. Bağlam menüsünden  >  denetleyicisi **Ekle**' yi seçin.
 
-    ![Çözüm Gezgini'nin ekran görüntüsü, Ekle ve vurgulanmış denetleyicisi](./media/vs-storage-aspnet-getting-started-blobs/add-controller-menu.png)
+    ![Ekleme ve denetleyici vurgulanmış Çözüm Gezgini ekran görüntüsü](./media/vs-storage-aspnet-getting-started-blobs/add-controller-menu.png)
 
-1. İçinde **İskele Ekle** iletişim kutusunda **MVC 5 denetleyici - boş**seçip **Ekle**.
+1. **Yapı Iskelesi Ekle** Iletişim kutusunda **MVC 5 denetleyici-boş**öğesini seçin ve **Ekle**' yi seçin.
 
-    ![Ekran görüntüsü, İskele Ekle iletişim kutusu](./media/vs-storage-aspnet-getting-started-blobs/add-controller.png)
+    ![Yapı iskelesi Ekle iletişim kutusunun ekran görüntüsü](./media/vs-storage-aspnet-getting-started-blobs/add-controller.png)
 
-1. İçinde **denetleyici Ekle** iletişim kutusunda, denetleyici adı *BlobsController*seçip **Ekle**.
+1. **Denetleyici Ekle** iletişim kutusunda, denetleyiciyi *blobscontroller*olarak adlandırın ve **Ekle**' yi seçin.
 
-    ![Ekran görüntüsü, denetleyici Ekle iletişim kutusu](./media/vs-storage-aspnet-getting-started-blobs/add-controller-name.png)
+    ![Denetleyici Ekle iletişim kutusunun ekran görüntüsü](./media/vs-storage-aspnet-getting-started-blobs/add-controller-name.png)
 
-1. Aşağıdaki `using` yönergelerini `BlobsController.cs` dosyası:
+1. Aşağıdaki `using` yönergelerini `BlobsController.cs` dosyasına ekleyin:
 
     ```csharp
-    using Microsoft.Azure;
+    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
     ```
 
-## <a name="connect-to-a-storage-account-and-get-a-container-reference"></a>Bir kapsayıcı başvurusu alın ve bir depolama hesabına bağlama
+## <a name="connect-to-a-storage-account-and-get-a-container-reference"></a>Bir depolama hesabına bağlanın ve bir kapsayıcı başvurusu alın
 
-Bir blob kapsayıcı, BLOB ve klasörleri iç içe hiyerarşisini ' dir. Bu belgedeki adımlarda geri kalanı ölçeklendirilebileceği için kendi yöntemindeki kod yerleştirilmelidir. böylece bir blob kapsayıcısına bir başvuru gerektirir.
+Blob kapsayıcısı, Blobların ve klasörlerin iç içe bir hiyerarşisidir. Bu belgedeki adımların geri kalanında bir blob kapsayıcısına başvuru gerekir, böylece kod yeniden kullanılabilirlik için kendi yöntemine yerleştirilmelidir.
 
-Aşağıdaki adımlar bağlantı dizesini kullanarak depolama hesabına bağlanmak için bir yöntem oluşturma **Web.config**. Adımları ayrıca bir başvuru için bir kapsayıcı oluşturun.  Bağlantı dizesi ayarı **Web.config** biçimiyle adlı `<storageaccountname>_AzureStorageConnectionString`. 
+Aşağıdaki adımlarda, **Web. config**dosyasındaki bağlantı dizesini kullanarak depolama hesabına bağlanmak için bir yöntem oluşturulur. Adımlar bir kapsayıcıya başvuru de oluşturur.  **Web. config** dosyasındaki bağlantı dizesi ayarı `<storageaccountname>_AzureStorageConnectionString` biçimiyle adlandırılır. 
 
 1. `BlobsController.cs` dosyasını açın.
 
-1. Adlı bir yöntem ekleyin **GetCloudBlobContainer** döndüren bir **CloudBlobContainer**.  Değiştirdiğinizden emin olun `<storageaccountname>_AzureStorageConnectionString` anahtarı gerçek adıyla **Web.config**.
+1. **Cloudblobcontainer**döndüren **getcloudblobcontainer** adlı bir yöntem ekleyin.  @No__t-0 ' ı, **Web. config**dosyasındaki anahtarın gerçek adıyla değiştirdiğinizden emin olun.
     
     ```csharp
     private CloudBlobContainer GetCloudBlobContainer()
@@ -82,13 +83,13 @@ Aşağıdaki adımlar bağlantı dizesini kullanarak depolama hesabına bağlanm
     ```
 
 > [!NOTE]
-> Olsa da *test blob kapsayıcısı* yok henüz bu kod buna bir başvuru oluşturur. Kapsayıcı ile oluşturulan bu olduğundan `CreateIfNotExists` sonraki adımda gösterilen yöntemi.
+> *Test-blob-kapsayıcısı* henüz mevcut olmasa bile, bu kod buna bir başvuru oluşturur. Bu, kapsayıcının bir sonraki adımda gösterilen `CreateIfNotExists` yöntemiyle oluşturulabilmesini sağlayacak.
 
 ## <a name="create-a-blob-container"></a>Blob kapsayıcısı oluşturma
 
-Aşağıdaki adımlar, bir blob kapsayıcısı oluşturma işlemini göstermektedir:
+Aşağıdaki adımlarda bir blob kapsayıcısının nasıl oluşturulacağı gösterilmektedir:
 
-1. Adlı bir yöntem ekleyin `CreateBlobContainer` döndüren bir `ActionResult`.
+1. @No__t-1 döndüren `CreateBlobContainer` adlı bir yöntem ekleyin.
 
     ```csharp
     public ActionResult CreateBlobContainer()
@@ -99,25 +100,25 @@ Aşağıdaki adımlar, bir blob kapsayıcısı oluşturma işlemini göstermekte
     }
     ```
  
-1. Alma bir `CloudBlobContainer` istenen blob kapsayıcı adı için bir başvuru temsil eden nesne. 
+1. İstenen blob kapsayıcısı adına bir başvuruyu temsil eden `CloudBlobContainer` nesnesi alır. 
    
     ```csharp
     CloudBlobContainer container = GetCloudBlobContainer();
     ```
 
-1. Çağrı `CloudBlobContainer.CreateIfNotExists` henüz yoksa, kapsayıcı oluşturmak için yöntemi. `CloudBlobContainer.CreateIfNotExists` Yöntemi döndürür **true** kapsayıcı yok ve başarıyla oluşturuldu. Aksi takdirde yöntem döndürür **false**.    
+1. Henüz yoksa, kapsayıcıyı oluşturmak için `CloudBlobContainer.CreateIfNotExists` yöntemini çağırın. @No__t-0 yöntemi, kapsayıcı yoksa **doğru** değerini döndürür ve başarıyla oluşturulur. Aksi takdirde, yöntem **false**döndürür.    
 
     ```csharp
     ViewBag.Success = container.CreateIfNotExists();
     ```
 
-1. Güncelleştirme `ViewBag` ile blob kapsayıcısının adı.
+1. @No__t-0 ' yı blob kapsayıcısının adıyla güncelleştirin.
 
     ```csharp
     ViewBag.BlobContainerName = container.Name;
     ```
     
-    Aşağıdaki tamamlanmış gösterir `CreateBlobContainer` yöntemi:
+    Aşağıda, tamamlanan `CreateBlobContainer` yöntemi gösterilmektedir:
 
     ```csharp
     public ActionResult CreateBlobContainer()
@@ -130,17 +131,17 @@ Aşağıdaki adımlar, bir blob kapsayıcısı oluşturma işlemini göstermekte
     }
     ```
 
-1. İçinde **Çözüm Gezgini**, sağ **görünümleri** klasör.
+1. **Çözüm Gezgini**, **Görünümler** klasörüne sağ tıklayın.
 
-1. Mevcut değilse bir **Blobları** klasörü oluşturun. Bağlam menüsünden seçin **Ekle** > **yeni klasör**. Yeni klasör adı *Blobları*. 
+1. **Bloblar** klasörü yoksa, bir tane oluşturun. Bağlam menüsünden  > **Yeni klasör** **Ekle**' yi seçin. Yeni klasör *bloblarını*adlandırın. 
  
-1. İçinde **Çözüm Gezgini**, genişletme **görünümleri** klasörünü açın ve sağ **Blobları**.
+1. **Çözüm Gezgini**, **Görünümler** klasörünü genişletin ve **Bloblar**' a sağ tıklayın.
 
-1. Bağlam menüsünden seçin **Ekle** > **görünümü**.
+1. Bağlam menüsünden  >  görünümü **Ekle**' yi seçin.
 
-1. İçinde **Görünüm Ekle** iletişim kutusuna **CreateBlobContainer** görünüm adını ve seçin için **Ekle**.
+1. **Görünüm Ekle** iletişim kutusunda, görünüm adı Için **createblobcontainer** yazın ve **Ekle**' yi seçin.
 
-1. Açık `CreateBlobContainer.cshtml`ve aşağıdaki kod parçacığı gibi görünüyor şekilde değiştirin:
+1. @No__t-0 ' ı açın ve aşağıdaki kod parçacığı gibi görünmesi için değiştirin:
 
     ```csharp
     @{
@@ -152,27 +153,27 @@ Aşağıdaki adımlar, bir blob kapsayıcısı oluşturma işlemini göstermekte
     Creation of @ViewBag.BlobContainerName @(ViewBag.Success == true ? "succeeded" : "failed")
     ```
 
-1. İçinde **Çözüm Gezgini**, genişletme **görünümleri** > **paylaşılan** klasörü ve açık `_Layout.cshtml`.
+1. **Çözüm Gezgini**' de, **Görünümler** > **paylaşılan** klasörünü genişletin ve `_Layout.cshtml` ' ü açın.
 
-1. En son **Html.ActionLink**, aşağıdaki **Html.ActionLink**:
+1. Son **HTML. ActionLink**sonra, aşağıdaki **HTML. ActionLink**öğesini ekleyin:
 
     ```html
     <li>@Html.ActionLink("Create blob container", "CreateBlobContainer", "Blobs")</li>
     ```
 
-1. Uygulamayı çalıştırmak ve seçmek **Blob kapsayıcısı Oluştur** aşağıdaki ekran görüntüsüne benzer bir sonuç görmek için:
+1. Uygulamayı çalıştırın ve aşağıdaki ekran görüntüsüne benzer sonuçları görmek için **BLOB kapsayıcısı oluştur** ' u seçin:
   
-    ![Blob kapsayıcısı Oluştur ekran görüntüsü](./media/vs-storage-aspnet-getting-started-blobs/create-blob-container-results.png)
+    ![Blob kapsayıcısı oluştur ekran görüntüsü](./media/vs-storage-aspnet-getting-started-blobs/create-blob-container-results.png)
 
-    Daha önce de belirtildiği `CloudBlobContainer.CreateIfNotExists` yöntemi döndürür **true** yalnızca kapsayıcı yok ve oluşturulur. Bu nedenle, kapsayıcı mevcut olduğunda, uygulama çalıştırıldığında, yöntem döndürür **false**.
+    Daha önce belirtildiği gibi, `CloudBlobContainer.CreateIfNotExists` yöntemi yalnızca kapsayıcı yoksa ve oluşturulduğunda **true** değerini döndürür. Bu nedenle, kapsayıcı varken uygulama çalıştırılır, yöntem **false**döndürür.
 
-## <a name="upload-a-blob-into-a-blob-container"></a>Bir blob kapsayıcıya bir blob yükleme
+## <a name="upload-a-blob-into-a-blob-container"></a>Blob kapsayıcısına blob yükleme
 
-Zaman [blob kapsayıcısı oluşturulur](#create-a-blob-container), dosyalar bu kapsayıcıya yükleyin. Bu bölüm bir yerel dosya bir blob kapsayıcısına yüklemek aracılığıyla size yol gösterir. Adlı bir blob kapsayıcısı yok adımlarda varsayılır *test blob kapsayıcısı*. 
+[BLOB kapsayıcısı oluşturulduğunda](#create-a-blob-container), dosyaları bu kapsayıcıya yükleyin. Bu bölüm bir blob kapsayıcısına yerel bir dosya yüklemeyi açıklar. Adımlarda, *Test-blob-Container*adlı bir blob kapsayıcısı olduğu varsayılır. 
 
 1. `BlobsController.cs` dosyasını açın.
 
-1. Adlı bir yöntem ekleyin `UploadBlob` , bir dize döndürür.
+1. String döndüren `UploadBlob` adlı bir yöntem ekleyin.
 
     ```csharp
     public string UploadBlob()
@@ -183,22 +184,22 @@ Zaman [blob kapsayıcısı oluşturulur](#create-a-blob-container), dosyalar bu 
     }
     ```
  
-1. İçinde `UploadBlob` yöntemi almak bir `CloudBlobContainer` istenen blob kapsayıcı adı için bir başvuru temsil eden nesne. 
+1. @No__t-0 yönteminde, istenen blob kapsayıcısı adına bir başvuruyu temsil eden bir `CloudBlobContainer` nesnesi alın. 
    
     ```csharp
     CloudBlobContainer container = GetCloudBlobContainer();
     ```
 
-1. Azure depolama blob farklı türlerini destekler. Bu öğreticide, blok blobları kullanılır. Bir blok blobuna bir başvuru almak için arama `CloudBlobContainer.GetBlockBlobReference` yöntemi.
+1. Azure depolama farklı blob türlerini destekler. Bu öğretici blok bloblarını kullanır. Bir blok blobuna başvuru almak için `CloudBlobContainer.GetBlockBlobReference` yöntemini çağırın.
 
     ```csharp
     CloudBlockBlob blob = container.GetBlockBlobReference("myBlob");
     ```
     
     > [!NOTE]
-    > Blob adı bir blob almak için kullanılan URL'nin bir parçasıdır ve dosya adı dahil olmak üzere herhangi bir dize olabilir.
+    > Blob adı bir blobu almak için kullanılan URL 'nin bir parçasıdır ve dosyanın adı da dahil olmak üzere herhangi bir dize olabilir.
 
-1. Bir blob başvurusu sonra herhangi bir veri akışı için blob başvurusu nesnenin çağırarak yükleyebilirsiniz `UploadFromStream` yöntemi. `UploadFromStream` Yöntemi oluşturur blobu mevcut değil veya varsa üzerine yazar. (Değişiklik  *&lt;dosya karşıya yükleme >* karşıya yüklenecek bir dosya için tam olarak nitelenmiş bir yola.)
+1. Blob başvurusu olduktan sonra, blob başvuru nesnesinin `UploadFromStream` yöntemini çağırarak herhangi bir veri akışını ona yükleyebilirsiniz. @No__t-0 yöntemi, mevcut değilse blobu oluşturur veya varsa üzerine yazar. ( *@No__t-1 dosya yükleme-karşıya* yüklenecek bir dosyanın tam yoluna >.)
 
     ```csharp
     using (var fileStream = System.IO.File.OpenRead(@"<file-to-upload>"))
@@ -207,7 +208,7 @@ Zaman [blob kapsayıcısı oluşturulur](#create-a-blob-container), dosyalar bu 
     }
     ```
     
-    Aşağıdaki tamamlanmış gösterir `UploadBlob` yöntemiyle (karşıya yüklenecek dosyanın tam yolu):
+    Aşağıda, tamamlanan `UploadBlob` yöntemi gösterilmektedir (karşıya yüklenecek dosyanın tam yolu ile):
 
     ```csharp
     public string UploadBlob()
@@ -222,25 +223,25 @@ Zaman [blob kapsayıcısı oluşturulur](#create-a-blob-container), dosyalar bu 
     }
     ```
 
-1. İçinde **Çözüm Gezgini**, genişletme **görünümleri** > **paylaşılan** klasörü ve açık `_Layout.cshtml`.
+1. **Çözüm Gezgini**' de, **Görünümler** > **paylaşılan** klasörünü genişletin ve `_Layout.cshtml` ' ü açın.
 
-1. En son **Html.ActionLink**, aşağıdaki **Html.ActionLink**:
+1. Son **HTML. ActionLink**sonra, aşağıdaki **HTML. ActionLink**öğesini ekleyin:
 
     ```html
     <li>@Html.ActionLink("Upload blob", "UploadBlob", "Blobs")</li>
     ```
 
-1. Uygulamayı çalıştırmak ve seçmek **blobu karşıya yükleme**.  Word *başarılı!* görüntülenmesi gerekir.
+1. Uygulamayı çalıştırın ve **blobu karşıya yükle**' yi seçin.  Başarı sözcüğü *!* görünmelidir.
     
-    ![Ekran görüntüsü başarısını doğrulama](./media/vs-storage-aspnet-getting-started-blobs/upload-blob.png)
+    ![Başarı doğrulamanın ekran görüntüsü](./media/vs-storage-aspnet-getting-started-blobs/upload-blob.png)
   
-## <a name="list-the-blobs-in-a-blob-container"></a>Blob kapsayıcı içindeki blobları Listele
+## <a name="list-the-blobs-in-a-blob-container"></a>Blob kapsayıcısındaki Blobları listeleme
 
-Bu bölümde, bir blob kapsayıcıdaki blobları listelemek gösterilmektedir. Örnek kod başvurularını *test blob kapsayıcısı* bölümünde oluşturduğunuz [bir blob kapsayıcısı oluşturursunuz](#create-a-blob-container).
+Bu bölüm bir blob kapsayıcısındaki Blobların nasıl ekleneceğini gösterir. Örnek kod, bölümünde oluşturulan *Test-blob-kapsayıcısına* başvurur, [bir blob kapsayıcısı oluşturur](#create-a-blob-container).
 
 1. `BlobsController.cs` dosyasını açın.
 
-1. Adlı bir yöntem ekleyin `ListBlobs` döndüren bir `ActionResult`.
+1. @No__t-1 döndüren `ListBlobs` adlı bir yöntem ekleyin.
 
     ```csharp
     public ActionResult ListBlobs()
@@ -250,13 +251,13 @@ Bu bölümde, bir blob kapsayıcıdaki blobları listelemek gösterilmektedir. �
     }
     ```
  
-1. İçinde `ListBlobs` yöntemi almak bir `CloudBlobContainer` blob kapsayıcısına bir başvuru temsil eden nesne. 
+1. @No__t-0 yönteminde, blob kapsayıcısına bir başvuruyu temsil eden bir `CloudBlobContainer` nesnesi alın. 
    
     ```csharp
     CloudBlobContainer container = GetCloudBlobContainer();
     ```
    
-1. Bir blob kapsayıcıdaki blobları listelemek için kullanın `CloudBlobContainer.ListBlobs` yöntemi. `CloudBlobContainer.ListBlobs` Yöntemi döndürür bir `IListBlobItem` atanabilecek bir nesne bir `CloudBlockBlob`, `CloudPageBlob`, veya `CloudBlobDirectory` nesne. Aşağıdaki kod parçacığı, bir blob kapsayıcıdaki tüm blob'lara numaralandırır. Her blobun kendi türüne göre uygun nesne türüne dönüştürülür. Adı (veya URI durumunda bir **CloudBlobDirectory**) bir listesine eklenir.
+1. Blob kapsayıcısındaki Blobları listelemek için `CloudBlobContainer.ListBlobs` yöntemini kullanın. @No__t-0 yöntemi, bir `CloudBlockBlob`, `CloudPageBlob` veya `CloudBlobDirectory` nesnesine tür bir `IListBlobItem` nesnesi döndürür. Aşağıdaki kod parçacığı bir blob kapsayıcısındaki tüm Blobları numaralandırır. Her blob, türüne göre uygun nesneye yayın yapılır. Adı (veya **Cloudblobdirectory**söz konusu olduğunda URI) bir listeye eklenir.
 
     ```csharp
     List<string> blobs = new List<string>();
@@ -283,19 +284,19 @@ Bu bölümde, bir blob kapsayıcıdaki blobları listelemek gösterilmektedir. �
     return View(blobs);
     ```
 
-    Blob kapsayıcıları, blobları ek olarak, dizinleri içerebilir. Adlı bir blob kapsayıcısında olduğunu varsayın *test blob kapsayıcısı*, aşağıdaki hiyerarşisi:
+    Blob kapsayıcıları, bloblara ek olarak dizinler içerebilir. Aşağıdaki hiyerarşi ile *Test-blob-Container*adlı bir blob kapsayıcısı olduğunu varsayalım:
 
         foo.png
         dir1/bar.png
         dir2/baz.png
 
-    Yukarıdaki kod örneğinde, kullanarak **blobları** dize listesi aşağıdaki gibi değerleri içerir:
+    Önceki kod örneğini kullanarak, **Bloblar** dize listesi aşağıdakine benzer değerler içerir:
 
         foo.png
         <storage-account-url>/test-blob-container/dir1
         <storage-account-url>/test-blob-container/dir2
 
-    Gösterildiği gibi liste yalnızca üst düzey varlıkları ve iç içe geçmiş olanlar içerir (*bar.png* ve *baz.png*). Bir blob kapsayıcı içindeki tüm varlıkları listelemek için kodu değiştirin böylece **CloudBlobContainer.ListBlobs** yöntemi geçirilir **true** için **Listblobs** parametre.    
+    Gösterildiği gibi liste, iç içe geçmiş olanları değil yalnızca en üst düzey varlıkları içerir (*çubuk. png* ve *baz. png*). Blob kapsayıcısı içindeki tüm varlıkları listelemek için, kodu değiştirin, böylece **cloudblobcontainer. listblobları** yönteminin **Useyataybloblist** parametresi için **true** olarak geçirilmesi gerekir.    
 
     ```csharp
     //...
@@ -303,13 +304,13 @@ Bu bölümde, bir blob kapsayıcıdaki blobları listelemek gösterilmektedir. �
     //...
     ```
 
-    Ayarı **Listblobs** parametresi **true** blob kapsayıcısında tüm varlıkların düz bir liste döndürür. Bu, aşağıdaki sonuçları verir:
+    **Useyataybloblisteleme** parametresinin **true** olarak ayarlanması, blob kapsayıcısındaki tüm varlıkların düz bir listesini döndürür. Bu, aşağıdaki sonuçları verir:
 
         foo.png
         dir1/bar.png
         dir2/baz.png
     
-    Aşağıdaki tamamlanmış gösterir **ListBlobs** yöntemi:
+    Tamamlanan **Listbloblar** yöntemi aşağıda gösterilmiştir:
 
     ```csharp
     public ActionResult ListBlobs()
@@ -339,13 +340,13 @@ Bu bölümde, bir blob kapsayıcıdaki blobları listelemek gösterilmektedir. �
     }
     ```
 
-1. İçinde **Çözüm Gezgini**, genişletme **görünümleri** klasörünü açın ve sağ **Blobları**.
+1. **Çözüm Gezgini**, **Görünümler** klasörünü genişletin ve **Bloblar**' a sağ tıklayın.
 
-2. Bağlam menüsünden seçin **Ekle** > **görünümü**.
+2. Bağlam menüsünden  >  görünümü **Ekle**' yi seçin.
 
-1. İçinde **Görünüm Ekle** iletişim kutusuna `ListBlobs` görünüm adını ve seçin için **Ekle**.
+1. **Görünüm Ekle** iletişim kutusunda, görünüm adı için `ListBlobs` girin ve **Ekle**' yi seçin.
 
-1. Açık `ListBlobs.cshtml`ve içeriğini aşağıdaki kodla değiştirin:
+1. @No__t-0 ' ı açın ve içeriği şu kodla değiştirin:
 
     ```html
     @model List<string>
@@ -363,25 +364,25 @@ Bu bölümde, bir blob kapsayıcıdaki blobları listelemek gösterilmektedir. �
     </ul>
     ```
 
-1. İçinde **Çözüm Gezgini**, genişletme **görünümleri** > **paylaşılan** klasörü ve açık `_Layout.cshtml`.
+1. **Çözüm Gezgini**' de, **Görünümler** > **paylaşılan** klasörünü genişletin ve `_Layout.cshtml` ' ü açın.
 
-1. En son **Html.ActionLink**, aşağıdaki **Html.ActionLink**:
+1. Son **HTML. ActionLink**sonra, aşağıdaki **HTML. ActionLink**öğesini ekleyin:
 
     ```html
     <li>@Html.ActionLink("List blobs", "ListBlobs", "Blobs")</li>
     ```
 
-1. Uygulamayı çalıştırmak ve seçmek **listeleme** aşağıdaki ekran görüntüsüne benzer bir sonuç görmek için:
+1. Uygulamayı çalıştırın ve aşağıdaki ekran görüntüsüne benzer sonuçları görmek için **liste Blobları** ' nı seçin:
   
-    ![Ekran listesi BLOB'ları](./media/vs-storage-aspnet-getting-started-blobs/listblobs.png)
+    ![Blobların listesi ekran görüntüsü](./media/vs-storage-aspnet-getting-started-blobs/listblobs.png)
 
 ## <a name="download-blobs"></a>Blob’ları indirme
 
-Bu bölümde, blob indirmek gösterilmektedir. Yerel depolama alanına kalıcı veya içeriğini bir dizeye okuyun. Örnek kod başvurularını *test blob kapsayıcısı* bölümünde oluşturduğunuz [bir blob kapsayıcısı oluşturursunuz](#create-a-blob-container).
+Bu bölümde bir Blobun nasıl indirileceği gösterilmektedir. Yerel depolamaya devam edebilir veya içeriği bir dizeye okuyabilirsiniz. Örnek kod, bölümünde oluşturulan *Test-blob-kapsayıcısına* başvurur, [bir blob kapsayıcısı oluşturur](#create-a-blob-container).
 
 1. `BlobsController.cs` dosyasını açın.
 
-1. Adlı bir yöntem ekleyin `DownloadBlob` , bir dize döndürür.
+1. String döndüren `DownloadBlob` adlı bir yöntem ekleyin.
 
     ```csharp
     public string DownloadBlob()
@@ -392,19 +393,19 @@ Bu bölümde, blob indirmek gösterilmektedir. Yerel depolama alanına kalıcı 
     }
     ```
  
-1. İçinde `DownloadBlob` yöntemi almak bir `CloudBlobContainer` blob kapsayıcısına bir başvuru temsil eden nesne.
+1. @No__t-0 yönteminde, blob kapsayıcısına bir başvuruyu temsil eden bir `CloudBlobContainer` nesnesi alın.
    
     ```csharp
     CloudBlobContainer container = GetCloudBlobContainer();
     ```
 
-1. Bir blob başvurusu nesnesini çağırarak alma `CloudBlobContainer.GetBlockBlobReference` yöntemi. 
+1. @No__t-0 yöntemini çağırarak bir blob başvurusu nesnesi alın. 
 
     ```csharp
     CloudBlockBlob blob = container.GetBlockBlobReference("myBlob");
     ```
 
-1. Bir blobu indirmek için kullanmak `CloudBlockBlob.DownloadToStream` yöntemi. Aşağıdaki kod, bir blobun içeriklerini bir akış nesnesine aktarır. Ardından söz konusu nesne yerel bir dosyaya kalıcı hale getirilir. (Değişiklik  *&lt;yerel dosya adı >* tam olarak nitelenmiş dosya adını gösteren blob olduğu indirilmesi.) 
+1. Bir blobu indirmek için `CloudBlockBlob.DownloadToStream` yöntemini kullanın. Aşağıdaki kod, bir Blobun içeriğini Stream nesnesine aktarır. Bu nesne daha sonra yerel bir dosyaya kalıcı hale getirilir. ( *@No__t-1 yerel dosya adı >* blob 'un indirileceği yeri temsil eden tam dosya adına değiştirin.) 
 
     ```csharp
     using (var fileStream = System.IO.File.OpenWrite(<local-file-name>))
@@ -413,7 +414,7 @@ Bu bölümde, blob indirmek gösterilmektedir. Yerel depolama alanına kalıcı 
     }
     ```
     
-    Aşağıdaki tamamlanmış gösterir `DownloadBlob` yöntemi (ile oluşturulan yerel dosyanın tam yolu):
+    Aşağıda, tamamlanan `DownloadBlob` yöntemi gösterilmektedir (oluşturulan yerel dosyanın tam yolu ile):
     
     ```csharp
     public string DownloadBlob()
@@ -428,23 +429,23 @@ Bu bölümde, blob indirmek gösterilmektedir. Yerel depolama alanına kalıcı 
     }
     ```
 
-1. İçinde **Çözüm Gezgini**, genişletme **görünümleri** > **paylaşılan** klasörü ve açık `_Layout.cshtml`.
+1. **Çözüm Gezgini**' de, **Görünümler** > **paylaşılan** klasörünü genişletin ve `_Layout.cshtml` ' ü açın.
 
-1. En son **Html.ActionLink**, aşağıdaki **Html.ActionLink**:
+1. Son **HTML. ActionLink**sonra, aşağıdaki **HTML. ActionLink**öğesini ekleyin:
 
     ```html
     <li>@Html.ActionLink("Download blob", "DownloadBlob", "Blobs")</li>
     ```
 
-1. Uygulamayı çalıştırmak ve seçmek **indirme blob** blobu indirmek için. Belirtilen blob `CloudBlobContainer.GetBlockBlobReference` yöntem çağrısının indirir, belirtilen konuma `File.OpenWrite` yöntem çağrısı.  Metin *başarılı!* tarayıcı içinde görüntülenmesi gerekir. 
+1. Uygulamayı çalıştırın ve blobu indirmek için **blobu indir** ' i seçin. @No__t-0 Yöntem çağrısında belirtilen blob, `File.OpenWrite` Yöntem çağrısında belirtilen konuma indirilir.  Metin *başarılı!* tarayıcıda görünmelidir. 
 
 ## <a name="delete-blobs"></a>Blob’ları silme
 
-Aşağıdaki adımlar, bir blob silme işlemini göstermektedir:
+Aşağıdaki adımlarda bir Blobun nasıl silineceği gösterilmektedir:
 
 1. `BlobsController.cs` dosyasını açın.
 
-1. Adlı bir yöntem ekleyin `DeleteBlob` , bir dize döndürür.
+1. String döndüren `DeleteBlob` adlı bir yöntem ekleyin.
 
     ```csharp
     public string DeleteBlob()
@@ -455,19 +456,19 @@ Aşağıdaki adımlar, bir blob silme işlemini göstermektedir:
     }
     ```
 
-1. İçinde `DeleteBlob` yöntemi almak bir `CloudBlobContainer` blob kapsayıcısına bir başvuru temsil eden nesne.
+1. @No__t-0 yönteminde, blob kapsayıcısına bir başvuruyu temsil eden bir `CloudBlobContainer` nesnesi alın.
    
     ```csharp
     CloudBlobContainer container = GetCloudBlobContainer();
     ```
 
-1. Bir blob başvurusu nesnesini çağırarak alma `CloudBlobContainer.GetBlockBlobReference` yöntemi. 
+1. @No__t-0 yöntemini çağırarak bir blob başvurusu nesnesi alın. 
 
     ```csharp
     CloudBlockBlob blob = container.GetBlockBlobReference("myBlob");
     ```
 
-1. Bir blobu silmek için kullanın `Delete` yöntemi.
+1. Bir blobu silmek için `Delete` yöntemini kullanın.
 
     ```csharp
     blob.Delete();
@@ -485,19 +486,19 @@ Aşağıdaki adımlar, bir blob silme işlemini göstermektedir:
     }
     ```
 
-1. İçinde **Çözüm Gezgini**, genişletme **görünümleri** > **paylaşılan** klasörü ve açık `_Layout.cshtml`.
+1. **Çözüm Gezgini**' de, **Görünümler** > **paylaşılan** klasörünü genişletin ve `_Layout.cshtml` ' ü açın.
 
-1. En son **Html.ActionLink**, aşağıdaki **Html.ActionLink**:
+1. Son **HTML. ActionLink**sonra, aşağıdaki **HTML. ActionLink**öğesini ekleyin:
 
     ```html
     <li>@Html.ActionLink("Delete blob", "DeleteBlob", "Blobs")</li>
     ```
 
-1. Uygulamayı çalıştırmak ve seçmek **silme blob** belirtilen blob silinemedi `CloudBlobContainer.GetBlockBlobReference` yöntem çağrısı. Metin *başarılı!* tarayıcı içinde görüntülenmesi gerekir. Tarayıcının seçin **geri** düğmesini ve ardından **listeleme** blob kapsayıcısında artık olduğu doğrulanamadı.
+1. Uygulamayı çalıştırın ve `CloudBlobContainer.GetBlockBlobReference` Yöntem çağrısında belirtilen blobu silmek için **blobu Sil** ' i seçin. Metin *başarılı!* tarayıcıda görünmelidir. Tarayıcının **geri** düğmesini seçin ve ardından Blobun artık kapsayıcıda bulunmadığından emin olmak için **Blobları Listele** ' yi seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, ASP.NET kullanarak Azure Depolama'daki blobları almak depolamak ve liste öğrendiniz. Azure’da veri depolama ile ilgili ek seçenekler hakkında daha fazla bilgi edinmek için daha fazla özellik kılavuzu görüntüleyin.
+Bu öğreticide, ASP.NET kullanarak Azure Storage 'da blob 'ları depolamayı, listeleyerek ve almayı öğrendiniz. Azure’da veri depolama ile ilgili ek seçenekler hakkında daha fazla bilgi edinmek için daha fazla özellik kılavuzu görüntüleyin.
 
-  * [Azure tablosu ile çalışmaya başlama depolama ve Visual Studio bağlı hizmetler (ASP.NET)](vs-storage-aspnet-getting-started-tables.md)
-  * [Azure kuyruk ile çalışmaya başlama depolama ve Visual Studio bağlı hizmetler (ASP.NET)](vs-storage-aspnet-getting-started-queues.md)
+  * [Azure Tablo depolama ve Visual Studio bağlı hizmetlerini kullanmaya başlama (ASP.NET)](vs-storage-aspnet-getting-started-tables.md)
+  * [Azure kuyruk depolama ve Visual Studio bağlı hizmetler 'i kullanmaya başlama (ASP.NET)](vs-storage-aspnet-getting-started-queues.md)

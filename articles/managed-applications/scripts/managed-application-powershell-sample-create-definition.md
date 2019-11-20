@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell betik örneği - yönetilen uygulama tanımı oluşturma | Microsoft Docs
-description: Azure PowerShell betik örneği - yönetilen uygulama tanımı oluşturma
+title: Yönetilen uygulama tanımı oluşturma-Azure PowerShell
+description: Azure aboneliğinde yönetilen uygulama tanımı oluşturan bir Azure PowerShell betik örneği sağlar.
 services: managed-applications
 documentationcenter: na
 author: tfitzmac
@@ -12,14 +12,14 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/27/2017
 ms.author: tomfitz
-ms.openlocfilehash: 35f1b805323da03f1622e5c355d6ffa6d960b275
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 4c0b06ed0e103a88f3f99e1c242dbfe15ba8fd2a
+ms.sourcegitcommit: f29fec8ec945921cc3a89a6e7086127cc1bc1759
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66171499"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72527265"
 ---
-# <a name="create-a-managed-application-definition-with-powershell"></a>PowerShell ile bir yönetilen uygulama tanımı oluşturma
+# <a name="create-a-managed-application-definition-with-powershell"></a>PowerShell ile yönetilen uygulama tanımı oluşturma
 
 Bu betik bir hizmet kataloğunda yönetilen bir uygulama tanımını yayımlar.
 
@@ -38,7 +38,7 @@ Bu betik, yönetilen uygulama tanımını oluşturmak için aşağıdaki komutu 
 
 | Komut | Notlar |
 |---|---|
-| [Yeni AzManagedApplicationDefinition](https://docs.microsoft.com/powershell/module/az.resources/new-azmanagedapplicationdefinition) | Yönetilen uygulama tanımı oluşturur. Gerekli dosyaları içeren paketi sağlar. |
+| [New-Azmanagedadpplicationdefinition](https://docs.microsoft.com/powershell/module/az.resources/new-azmanagedapplicationdefinition) | Yönetilen uygulama tanımı oluşturur. Gerekli dosyaları içeren paketi sağlar. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

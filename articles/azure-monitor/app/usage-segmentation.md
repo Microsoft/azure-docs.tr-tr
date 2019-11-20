@@ -1,71 +1,66 @@
 ---
-title: Azure Application Insights kullanıcı, oturum ve olay analizi | Microsoft docs
+title: Azure Application Insights Kullanıcı, oturum ve olay Analizi | Microsoft docs
 description: Web uygulamanızın kullanıcılarının demografik analizi.
-services: application-insights
-documentationcenter: ''
-author: NumberByColors
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: NumberByColors
+ms.author: daviste
 ms.date: 01/24/2018
 ms.reviewer: mbullwin
-ms.pm_owner: daviste;NumberByColors
-ms.author: daviste
-ms.openlocfilehash: 7d378c2f72035c3584e1f5cd3c1f0fb9a5d5c2ed
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 16b0b734b6b680bea75786bfdbe77eac5e590cfe
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60372298"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899407"
 ---
-# <a name="users-sessions-and-events-analysis-in-application-insights"></a>Application Insights kullanıcılar, oturumlar ve olaylar analizi
+# <a name="users-sessions-and-events-analysis-in-application-insights"></a>Application Insights Kullanıcı, oturum ve olay Analizi
 
-Web uygulamanız, bunlar en, burada, kullanıcılarınızın bulunduğu ve hangi tarayıcılar ve işletim sistemleri kullandıkları ilginizi çeken hangi sayfaların kullandıklarında öğrenin. Kullanarak iş ve kullanım telemetrisini çözümlemek [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md).
+Kullanıcıların Web uygulamanızı ne zaman kullandığı, en çok hangi sayfalardan ilgilendikleri, kullanıcılarınızın nerede olduğunu ve hangi tarayıcıları ve işletim sistemlerini kullandıkları hakkında bilgi edinin. [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md)kullanarak iş ve kullanım telemetrisini çözümleyin.
 
-![Application Insights kullanıcılarının ekran görüntüsü](./media/usage-segmentation/0001-users.png)
+![Application Insights kullanıcıların ekran görüntüsü](./media/usage-segmentation/0001-users.png)
 
-## <a name="get-started"></a>başlarken
+## <a name="get-started"></a>Kullanmaya Başlayın
 
-Kullanıcılar, oturumlar veya olaylar dikey pencereleri Application Insights portalında verileri henüz göremiyorsanız [kullanım araçları ile çalışmaya başlama hakkında bilgi edinin](usage-overview.md).
+Application Insights portalındaki kullanıcılar, oturumlar veya olaylar dikey penceresinde verileri henüz görmüyorsanız, [kullanım araçlarını kullanmaya nasıl başlaleyeceğinizi öğrenin](usage-overview.md).
 
-## <a name="the-users-sessions-and-events-segmentation-tool"></a>Kullanıcılar, oturumlar ve olaylar Segment aracı
+## <a name="the-users-sessions-and-events-segmentation-tool"></a>Kullanıcılar, oturumlar ve olaylar segmentleme aracı
 
-Kullanım dikey pencerelerinde üçünün de aynı aracı dilimlediği telemetri üç perspektiflerden web uygulamanızdan kullanın. Filtreleme ve verileri bölme farklı sayfalarını ve özelliklerini göreli kullanımıyla ilgili öngörüleri ortaya çıkarabilirsiniz.
+Kullanım dikey pencerelerinin üçü, Web uygulamanızdan Telemetriyi üç perspektiften dilimlemek ve zaratmak için aynı aracı kullanır. Verileri filtreleyerek ve bölerek, farklı sayfaların ve özelliklerin göreli kullanımı hakkındaki öngörüleri açabilirsiniz.
 
-* **Kullanıcılar aracı**: Kaç kişinin uygulamanızı ve özellikleri kullanılır.  Kullanıcıların, tarayıcı tanımlama bilgilerinde depolanan anonim kimlikleri kullanarak sayılır. Farklı tarayıcılar veya makineleri kullanarak tek bir kişi olarak birden fazla kullanıcı olarak sayılır.
-* **Oturumlar aracına**: Kaç oturum, kullanıcı etkinliğinin belirli sayfalarını ve özelliklerini uygulamanızın eklediniz. Oturum, kullanıcı yapılmadığında yarım saat sürekli kullanıma 24 saat sonra veya sayılır.
-* **Olaylar aracına**: Belirli sayfalarını ve özelliklerini uygulamanızın ne sıklıkla kullanılır. Sahip olduğunuz sağlanan bir sayfa görünümü bir tarayıcı, uygulamanızdan Sayfa yüklediğinde sayılır [, izleme eklenmiş](../../azure-monitor/app/javascript.md). 
+* **Kullanıcılar aracı**: uygulamanızı ve özelliklerini kullanan kişi sayısı.  Kullanıcılar, tarayıcı tanımlama bilgilerinde depolanan anonim kimlikler kullanılarak sayılır. Farklı tarayıcıları veya makineleri kullanan tek bir kişi, birden fazla kullanıcı olarak sayılır.
+* **Oturumlar aracı**: Kullanıcı etkinliğinin kaç oturumu, uygulamanızın belirli sayfalarını ve özelliklerini içerir. Bir oturum, kullanıcının süresi dolduktan sonra veya 24 saatlik sürekli kullanım sonrasında sayılır.
+* **Olaylar aracı**: uygulamanızın belirli sayfa ve özelliklerinin ne sıklıkta kullanıldığı. Bir tarayıcı Uygulamanızdan bir sayfa yüklediğinde bir sayfa görünümü [sayılır.](../../azure-monitor/app/javascript.md) 
 
-    Özel olay şeyin uygulamanızı, genellikle bir düğmeyi gibi bir kullanıcı etkileşimi veya bazı görevi tamamlanırken bir oluşumu temsil eder. Uygulamanıza kod eklemek [özel olaylar oluşturma](../../azure-monitor/app/api-custom-events-metrics.md#trackevent).
+    Özel bir olay, uygulamanızda gerçekleşen bir şeyin bir oluşumunu temsil eder, genellikle düğme tıklamasıyla veya bir görevin tamamlanması gibi Kullanıcı etkileşimidir. [Özel olaylar oluşturmak](../../azure-monitor/app/api-custom-events-metrics.md#trackevent)için uygulamanıza kod eklersiniz.
 
-## <a name="querying-for-certain-users"></a>Belirli kullanıcılar sorgulama
+## <a name="querying-for-certain-users"></a>Belirli kullanıcıları sorgulama
 
-Farklı kullanıcı grupları, kullanıcılar aracı üst kısmındaki sorgu seçeneklerini ayarlayarak keşfedin:
+Kullanıcılar aracının en üstündeki sorgu seçeneklerini ayarlayarak farklı Kullanıcı gruplarını keşfedebilirsiniz:
 
-* Göster: Analiz etmek için kullanıcıların kohortu seçin.
-* Şunu kullanan: Özel olaylar ve sayfa görüntülemelerini seçin.
-* İşlem sırasında: Bir zaman aralığını seçin.
-* Tarafından: Bir süre veya tarayıcı veya şehir gibi başka bir özellik tarafından veri demetine nasıl seçin.
-* Bölme ölçütü: Bir özellik olarak bölünmüş veya segment için verileri seçin. 
-* Filtreleri ekleyin: Belirli kullanıcılar, oturumlar veya tarayıcı veya şehir gibi özelliklerini dayalı olarak olayları sorgu sınırı. 
+* Göster: analiz edilecek kullanıcıların bir kohortu seçin.
+* Kullanılan: özel olayları ve sayfa görünümlerini seçin.
+* Sırasında: bir zaman aralığı seçin.
+* Tarafından: bir süre veya tarayıcı ya da şehir gibi başka bir özellik tarafından verilerin demet olarak nasıl yapılacağını seçin.
+* Bölme ölçütü: verileri ayırmak veya segmentlere ayırmak için bir özellik seçin. 
+* Filtre ekleme: sorguyu, tarayıcı veya şehir gibi özelliklerine göre belirli kullanıcılar, oturumlar veya olaylarla sınırlayın. 
  
-## <a name="saving-and-sharing-reports"></a>Kaydetme ve rapor paylaşma 
-Kullanıcıların raporları yalnızca raporlarım bölümünde, özel veya paylaşılan diğer paylaşılan Raporlar bölümünde bu Application Insights kaynağına erişimi olan herkes ile kaydedebilirsiniz.
+## <a name="saving-and-sharing-reports"></a>Raporları kaydetme ve paylaşma 
+Kullanıcı raporlarını, Raporlarım bölümünde yalnızca sizin için özel olarak kaydedebilir veya paylaşılan Raporlar bölümünde bu Application Insights kaynağına erişimi olan diğer herkesle paylaşılacağını sağlayabilirsiniz.
 
-Kullanıcılar, oturumlar veya olaylar bir raporun bir bağlantısını paylaşmak için; tıklayın **paylaşımı** araç çubuğunda, ardından bağlantıyı kopyalayın.
+Kullanıcılar, oturumlar veya olaylar raporunun bağlantısını paylaşmak için; araç çubuğunda **paylaşma** ' ya tıklayın, ardından bağlantıyı kopyalayın.
 
-Kullanıcılar, oturumlar veya olaylar rapordaki verilerin bir kopyasını paylaşmak için; tıklayın **paylaşımı** araç çubuğunda, ardından **Word simgesi** verilerle bir Word belgesi oluşturmak için. Veya tıklayın **Word simgesi** ana grafiğin üstünde.
+Kullanıcılar, oturumlar veya olaylar raporundaki verilerin bir kopyasını paylaşmak için; araç çubuğunda **paylaşma** ' ya tıkladıktan sonra, verilerle Word belgesi oluşturmak için **Word simgesine** tıklayın. Ya da, ana grafiğin üzerindeki **sözcük simgesine** tıklayın.
 
-## <a name="meet-your-users"></a>Kullanıcılarınızın karşılamak
+## <a name="meet-your-users"></a>Kullanıcılarınızı karşılayın
 
-**Kullanıcılarınızın karşılamak** bölümü geçerli sorgu tarafından eşleşen yaklaşık beş örnek kullanıcı bilgileri gösterir. Düşünüyor ve davranışları kişilerin, toplamlar, ek olarak keşfetmeye insanların gerçekte uygulamanızı kullanma hakkında bilgiler sağlayabilir.
+**Kullanıcılarınızın uyması** bölümünde geçerli sorguyla eşleşen beş örnek kullanıcı hakkında bilgi gösterilir. Toplamaların yanı sıra kişilerin uygulamanızı nasıl kullandıkları hakkında öngörüler sağlayabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kullanım deneyimlerini etkinleştirmek için göndermeye başlayın [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views).
-- Özel olay veya sayfa görüntülemesi zaten gönderirseniz, kullanıcıların hizmetinizin nasıl öğrenmek için kullanım araçları keşfedin.
+- Kullanım deneyimlerini etkinleştirmek için [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views)göndermeye başlayın.
+- Özel olayları veya sayfa görünümlerini zaten gönderirseniz, kullanıcıların hizmetinizi nasıl kullandığını öğrenmek için kullanım araçları ' nı araştırın.
     - [Huniler](usage-funnels.md)
     - [Bekletme](usage-retention.md)
     - [Kullanıcı Akışları](usage-flows.md)

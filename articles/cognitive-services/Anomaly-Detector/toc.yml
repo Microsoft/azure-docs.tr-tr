@@ -8,6 +8,14 @@
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
+    - name: İstemci kitaplığı
+      items:
+        - name: 'C# kullanma'
+          href: quickstarts/detect-data-anomalies-csharp-sdk.md
+        - name: Python’u kullanma
+          href: quickstarts/detect-data-anomalies-python-sdk.md
+        - name: Node.js'yi kullanma
+          href: quickstarts/detect-data-anomalies-nodejs-sdk.md
     - name: REST API
       items:
         - name: 'C# kullanma'
@@ -16,12 +24,6 @@
           href: quickstarts/detect-data-anomalies-java.md
         - name: Python’u kullanma
           href: quickstarts/detect-data-anomalies-python.md
-    - name: SDK
-      items:
-        - name: 'C# kullanma'
-          href: quickstarts/detect-data-anomalies-csharp-sdk.md
-        - name: Python’u kullanma
-          href: quickstarts/detect-data-anomalies-python-sdk.md
 - name: Öğreticiler
   items:
     - name: Power BI kullanarak anomalileri toplu olarak görselleştirme
@@ -40,6 +42,8 @@
         - name: Kapsayıcıları yapılandırma
           href: anomaly-detector-container-configuration.md
           displayName: 'docker, container, apikey, billing, log, mount, run, pull, port'
+        - name: Kapsayıcı örnekleri kullanma
+          href: how-to/deploy-anomaly-detection-on-container-instances.md
 - name: Kavramlar
   items:
     - name: Anomali Algılama API'si en iyi yöntemleri
@@ -58,6 +62,20 @@
           href: 'https://go.microsoft.com/fwlink/?linkid=2090370'
         - name: Node.js
           href: 'https://go.microsoft.com/fwlink/?linkid=2090788'
+    - name: Teknik bloglar
+      items:
+        - name: Azure Anomali Algılayıcısı API’sine giriş
+          href: 'https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Introducing-Azure-Anomaly-Detector-API/ba-p/490162'
+        - name: SR-CNN algoritmasına genel bakış
+          href: 'https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Overview-of-SR-CNN-algorithm-in-Azure-Anomaly-Detector/ba-p/982798'
+    - name: Tanıtım
+      items:
+        - name: Etkileşimli tanıtım
+          href: 'https://aka.ms/adDemo'
+        - name: Jupyter Notebook hakkında
+          href: 'https://aka.ms/adNotebook'
+    - name: KDD 2019’daki SR-CNN ile ilgili makale
+      href: 'https://arxiv.org/abs/1906.03821'
 - name: Kaynaklar
   items:
     - name: Fiyatlandırma

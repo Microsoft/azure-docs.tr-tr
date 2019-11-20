@@ -1,10 +1,10 @@
 ---
-title: Olay Kimliğine göre Azure VM RDP bağlantı sorunlarını giderme | Microsoft Docs
+title: Olay KIMLIĞINE göre Azure VM RDP bağlantısı sorunlarını giderme | Microsoft Docs
 description: ''
 services: virtual-machines-windows
 documentationcenter: ''
 author: Deland-Han
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 tags: ''
 ms.service: virtual-machines
@@ -14,40 +14,40 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: azurecli
 ms.date: 11/01/2018
 ms.author: delhan
-ms.openlocfilehash: 4c783c70217a84bbe5ccf15accc4a2bec0b7cca8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 166648402eec7f8033c090a3f7862a902bae4be6
+ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61485501"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71154200"
 ---
 # <a name="troubleshoot-azure-vm-rdp-connection-issues-by-event-id"></a>Azure VM RDP bağlantı sorunlarını olay kimliğine göre giderme 
 
-Bu makale, Uzak Masaüstü Protokolü (RDP) bağlantısını için Azure sanal makinesi (VM) engelleyen sorunları gidermek için olay kimlikleri kullanmayı açıklar.
+Bu makalede, bir Azure sanal makinesine (VM) yönelik Uzak Masaüstü Protokolü (RDP) bağlantısını engelleyen sorunları gidermek için olay kimliklerinin nasıl kullanılacağı açıklanmaktadır.
 
 ## <a name="symptoms"></a>Belirtiler
 
-Bir Azure VM'ye Uzak Masaüstü Protokolü (RDP) oturumu kullanmayı deneyin. Kimlik bilgilerinizi girdikten sonra bağlantı başarısız olur ve aşağıdaki hata iletisini alıyorsunuz:
+Bir Azure VM 'ye bağlanmak için Uzak Masaüstü Protokolü (RDP) oturumu kullanmayı deneyin. Kimlik bilgilerinizi girdikten sonra bağlantı başarısız olur ve aşağıdaki hata iletisini alırsınız:
 
-**Bu bilgisayar, uzak bilgisayara bağlanamıyor. Sorun devam ederse, yeniden bağlanmayı deneyin, sahibi, uzak bilgisayar ya da ağ yöneticinize başvurun.**
+**Bu bilgisayar uzak bilgisayara bağlanamıyor. Yeniden bağlanmayı deneyin, sorun devam ederse, uzak bilgisayarın sahibine veya ağ yöneticinize başvurun.**
 
-Bu sorunu gidermek için VM olay günlüklerini gözden geçirin ve ardından aşağıdaki senaryolara bakın.
+Bu sorunu gidermek için, VM 'deki olay günlüklerini gözden geçirin ve ardından aşağıdaki senaryolara bakın.
 
-## <a name="before-you-troubleshoot"></a>Sorun giderme önce
+## <a name="before-you-troubleshoot"></a>Sorun gidermeye başlamadan önce
 
-### <a name="create-a-backup-snapshot"></a>Bir yedek anlık görüntüsü oluşturma
+### <a name="create-a-backup-snapshot"></a>Yedekleme anlık görüntüsü oluşturma
 
-Bir yedek anlık görüntüsü oluşturmak için adımları [bir diskin anlık görüntüsünü alma](../windows/snapshot-copy-managed-disk.md).
+Bir yedekleme anlık görüntüsü oluşturmak için, [bir diskte anlık görüntü](../windows/snapshot-copy-managed-disk.md)' daki adımları izleyin.
 
-### <a name="connect-to-the-vm-remotely"></a>VM'ye uzaktan bağlanın
+### <a name="connect-to-the-vm-remotely"></a>VM 'ye uzaktan bağlanma
 
-VM'ye uzaktan bağlanmak için metotlarından birini kullanın [Azure VM sorunlarını gidermek için Uzak Araçlar'ı kullanma](remote-tools-troubleshoot-azure-vm-issues.md).
+VM 'ye uzaktan bağlanmak için, [Azure VM sorunlarını gidermek üzere uzak araçları kullanma](remote-tools-troubleshoot-azure-vm-issues.md)bölümündeki yöntemlerden birini kullanın.
 
 ## <a name="scenario-1"></a>Senaryo 1
 
 ### <a name="event-logs"></a>Olay günlükleri
 
-Bir CMD örneğinde 1058 veya olayın 1057 sistem günlüğünde son 24 saat içinde günlüğe kaydedilip kaydedilmediğini kontrol etmek için aşağıdaki komutları çalıştırın:
+Bir CMD örneğinde, son 24 saat içindeki sistem günlüğüne olay 1058 veya olay 1057 ' nin kaydedilip kaydedilmeyeceğini denetlemek için aşağıdaki komutları çalıştırın:
 
 ```cmd
 wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Microsoft-Windows-TerminalServices-RemoteConnectionManager'] and EventID=1058 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more
@@ -55,39 +55,39 @@ wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Microsoft-Windo
 ```
 
 **Günlük adı:**      Sistem <br />
-**Kaynak:**        Microsoft-Windows-TerminalServices-RemoteConnectionManager <br />
+**Kaynaktaki**        Microsoft-Windows-TerminalServices-RemoteConnectionManager <br />
 **Tarih:** *zaman* <br />
-**Olay Kimliği:**      1058 <br />
-**Görev kategorisi:** None <br />
-**Düzeyi:**         Hata <br />
-**Anahtar sözcükler:**      Klasik <br />
+**Olay KIMLIĞI:**      1058 <br />
+**Görev kategorisi:** Yok. <br />
+**Düzeyde**         Hata <br />
+**Lerimi**      Klasik <br />
 **Kullanıcı:**          Yok <br />
 **Bilgisayar:** *bilgisayar* <br />
-**Açıklama:** RD Oturumu Ana bilgisayarı, kendinden imzalı SSL bağlantıları RD Oturumu Ana Bilgisayar sunucusu kimlik doğrulaması için kullanılan sertifikanın süresi dolmuş değiştirmek başarısız oldu. İlgili durum kodu: erişim engellendi.
+**Açıklama:** RD Oturumu Ana Bilgisayarı sunucusu, SSL bağlantılarında RD Oturumu Ana Bilgisayarı sunucu kimlik doğrulaması için kullanılan, süresi biten kendinden imzalı sertifikayı değiştirme işlemi başarısız oldu. İlgili durum kodu erişim reddedildi.
 
 **Günlük adı:**      Sistem <br />
-**Kaynak:**        Microsoft-Windows-TerminalServices-RemoteConnectionManager <br />
+**Kaynaktaki**        Microsoft-Windows-TerminalServices-RemoteConnectionManager <br />
 **Tarih:** *zaman* <br />
-**Olay Kimliği:**      1058 <br />
-**Görev kategorisi:** None <br />
-**Düzeyi:**         Hata <br />
-**Anahtar sözcükler:**      Klasik <br />
+**Olay KIMLIĞI:**      1058 <br />
+**Görev kategorisi:** Yok. <br />
+**Düzeyde**         Hata <br />
+**Lerimi**      Klasik <br />
 **Kullanıcı:**          Yok <br />
 **Bilgisayar:** *bilgisayar* <br />
-**Açıklama:** RD Oturumu Ana Bilgisayar sunucusu SSL bağlantıları üzerinde RD Oturumu Ana bilgisayarı sunucu kimlik doğrulaması için kullanılacak yeni bir otomatik olarak imzalanan sertifika oluşturmak başarısız oldu, ilgili durum kodu: nesne zaten mevcut.
+**Açıklama:** RD Oturumu Ana Bilgisayarı sunucusu, SSL bağlantılarında RD Oturumu Ana Bilgisayarı sunucu kimlik doğrulaması için kullanılmak üzere yeni bir kendinden imzalı sertifika oluşturamadı, ilgili durum kodu nesne zaten var.
 
 **Günlük adı:**      Sistem <br />
-**Kaynak:**        Microsoft-Windows-TerminalServices-RemoteConnectionManager <br />
+**Kaynaktaki**        Microsoft-Windows-TerminalServices-RemoteConnectionManager <br />
 **Tarih:** *zaman* <br />
-**Olay Kimliği:**      1057 <br />
-**Görev kategorisi:** None <br />
-**Düzeyi:**         Hata <br />
-**Anahtar sözcükler:**      Klasik <br />
+**Olay KIMLIĞI:**      1057 <br />
+**Görev kategorisi:** Yok. <br />
+**Düzeyde**         Hata <br />
+**Lerimi**      Klasik <br />
 **Kullanıcı:**          Yok <br />
 **Bilgisayar:** *bilgisayar* <br />
-**Açıklama:** RD Oturumu Ana bilgisayarı, yeni imzalanan SSL bağlantıları üzerinde RD Oturumu Ana Bilgisayar sunucusu kimlik doğrulaması için kullanılacak bir sertifika oluşturmak başarısız oldu. İlgili durum kodu: anahtar kümesi yok.
+**Açıklama:** RD Oturumu Ana Bilgisayarı sunucusu, SSL bağlantılarında RD Oturumu Ana Bilgisayarı sunucu kimlik doğrulaması için kullanılacak yeni bir kendinden imzalı sertifika oluşturamadı. İlgili durum kodu anahtar kümesi yok
 
-Aşağıdaki komutları çalıştırarak 36872 ve 36870 SCHANNEL hata olayları için de göz atabilirsiniz:
+Aşağıdaki komutları çalıştırarak SCHANNEL hata olaylarını 36872 ve 36870 olarak da denetleyebilirsiniz:
 
 ```cmd
 wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Schannel'] and EventID=36870 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more
@@ -95,31 +95,31 @@ wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Schannel'] and 
 ```
 
 **Günlük adı:**      Sistem <br />
-**Kaynak:**        Schannel <br />
+**Kaynaktaki**        Schannel <br />
 **Tarih:** — <br />
-**Olay Kimliği:**      36870 <br />
-**Görev kategorisi:** None <br />
-**Düzeyi:**         Hata <br />
-**Anahtar sözcükler:**       <br />
-**Kullanıcı:**          SİSTEM <br />
+**Olay KIMLIĞI:**      36870 <br />
+**Görev kategorisi:** Yok. <br />
+**Düzeyde**         Hata <br />
+**Lerimi**       <br />
+**Kullanıcı:**          SISTEMIN <br />
 **Bilgisayar:** *bilgisayar* <br />
-**Açıklama:** SSL sunucu kimlik bilgisi özel anahtarına erişme girişimi sırasında önemli bir hata oluştu. Şifreleme modülünden döndürülen hata kodu 0x8009030D ' dir.  <br />
-10001 iç bir hata durumudur.
+**Açıklama:** SSL sunucusu kimlik bilgisi özel anahtarına erişmeye çalışırken önemli bir hata oluştu. Şifreleme modülünden döndürülen hata kodu 0x8009030D.  <br />
+İç hata durumu 10001 ' dir.
 
 ### <a name="cause"></a>Nedeni
-VM üzerindeki MachineKeys klasörü yerel RSA şifreleme anahtarları erişilemediğinden bu sorun oluşur. Bu sorun aşağıdaki nedenlerden birinden dolayı ortaya çıkabilir:
+Bu sorun, VM 'deki MachineKeys klasöründe yerel RSA şifreleme anahtarlarına erişilemediğinden oluşur. Bu sorun, aşağıdakilerden biri nedeniyle oluşabilir:
 
-1. Yanlış izin yapılandırmayı Machinekeys klasörü veya RSA dosyaları.
+1. MachineKeys klasöründe veya RSA dosyalarında yanlış izin yapılandırması.
 
 2. RSA anahtarı bozuk veya eksik.
 
 ### <a name="resolution"></a>Çözüm
 
-Bu sorunu gidermek için aşağıdaki adımları kullanarak RDP sertifikası doğru izinleri ayarlamanız gerekir.
+Bu sorunu gidermek için, aşağıdaki adımları kullanarak RDP sertifikasında doğru izinleri ayarlamanız gerekir.
 
 #### <a name="grant-permission-to-the-machinekeys-folder"></a>MachineKeys klasörüne izin ver
 
-1. Aşağıdaki içeriğe kullanarak bir komut dosyası oluşturun:
+1. Aşağıdaki içeriği kullanarak bir komut dosyası oluşturun:
 
    ```powershell
    remove-module psreadline 
@@ -132,18 +132,18 @@ Bu sorunu gidermek için aşağıdaki adımları kullanarak RDP sertifikası do�
    Restart-Service TermService -Force
    ```
 
-2.  MachineKey klasörün izinlerini sıfırlanır ve RSA dosyaları varsayılan değerlere sıfırlamak için bu betiği çalıştırın.
+2.  MachineKey klasörünün izinlerini sıfırlamak ve RSA dosyalarını varsayılan değerlere sıfırlamak için bu betiği çalıştırın.
 
-3.  VM yeniden erişmeyi deneyin.
+3.  VM 'ye erişmeyi yeniden deneyin.
 
-Betiği çalıştırdıktan sonra izin sorunları yaşıyorsanız aşağıdaki dosyaları denetleyebilirsiniz:
+Betiği çalıştırdıktan sonra, izin sorunları yaşayan aşağıdaki dosyaları kontrol edebilirsiniz:
 
 * c:\temp\BeforeScript_permissions.txt
 * c:\temp\AfterScript_permissions.txt
 
-#### <a name="renew-rdp-self-signed-certificate"></a>RDP otomatik olarak imzalanan sertifikasını yenileme
+#### <a name="renew-rdp-self-signed-certificate"></a>RDP otomatik olarak imzalanan sertifikayı Yenile
 
-Sorun devam ederse RDP otomatik imzalı sertifikanın yenilendiğini emin olmak için aşağıdaki betiği çalıştırın:
+Sorun devam ederse, RDP otomatik olarak imzalanan sertifikanın yenilendiğinden emin olmak için aşağıdaki betiği çalıştırın:
 
 ```powershell
 Import-Module PKI
@@ -154,27 +154,27 @@ Stop-Service -Name "SessionEnv"
 Start-Service -Name "SessionEnv"
 ```
 
-Sertifika yenileyemezsiniz, sertifikayı silmek için aşağıdaki adımları izleyin:
+Sertifikayı yenileyemezseniz, sertifikayı silmeyi denemek için aşağıdaki adımları izleyin:
 
-1. Aynı vnet'teki başka bir VM üzerinde açın **çalıştırma** kutusuna **mmc**ve tuşuna **Tamam**. 
+1. Aynı VNET 'teki başka bir sanal makinede, **Çalıştır** kutusunu açın, **MMC**yazın ve ardından **Tamam**' a basın. 
 
-2. Üzerinde **dosya** menüsünde **Ekle/Kaldır ek bileşenini**.
+2. **Dosya** menüsünde **ek bileşen Ekle/Kaldır**' ı seçin.
 
-3. İçinde **kullanılabilir ek bileşenler** listesinden **sertifikaları**ve ardından **Ekle**.
+3. **Kullanılabilir ek bileşenler** listesinde, **Sertifikalar**' ı seçin ve ardından **Ekle**' yi seçin.
 
-4. Seçin **bilgisayar hesabı**ve ardından **sonraki**.
+4. **Bilgisayar hesabı**' nı seçin ve ardından **İleri**' yi seçin.
 
-5. Seçin **başka bir bilgisayara**ve ardından sorunları olan sanal makinenin IP adresini ekleyin.
+5. **Başka bir bilgisayar**seçin ve ardından sorunlu VM 'nin IP adresini ekleyin.
    >[!Note]
-   >Sanal bir IP adresi kullanmaktan kaçınmak için iç ağ kullanmayı deneyin.
+   >Sanal bir IP adresi kullanmaktan kaçınmak için iç ağı kullanmayı deneyin.
 
-6. Seçin **son**ve ardından **Tamam**.
+6. **Son**' u ve ardından **Tamam**' ı seçin.
 
    ![Bilgisayar seçin](./media/event-id-troubleshoot-vm-rdp-connecton/select-computer.png)
 
-7. Sertifikalar'ı genişletin, uzak Desktop\Certificates klasöre gidin, sertifikaya sağ tıklayın ve ardından **Sil**.
+7. Sertifikaları genişletin, uzak Desktop\Certificates klasörüne gidin, sertifikaya sağ tıklayın ve ardından **Sil**' i seçin.
 
-8. Uzak Masaüstü yapılandırması hizmetini yeniden başlatın:
+8. Uzak Masaüstü yapılandırma hizmetini yeniden başlatın:
 
    ```cmd
    net stop SessionEnv
@@ -182,25 +182,25 @@ Sertifika yenileyemezsiniz, sertifikayı silmek için aşağıdaki adımları iz
    ```
 
    >[!Note]
-   >Bu noktada, mağaza'dan mmc yenilerseniz, sertifikayı yeniden görüntülenir. 
+   >Bu noktada, mağazayı MMC 'den yenilerseniz sertifika yeniden görüntülenir. 
 
-VM RDP kullanarak yeniden erişmeyi deneyin.
+RDP 'yi yeniden kullanarak VM 'ye erişmeyi deneyin.
 
-#### <a name="update-secure-sockets-layer-ssl-certificate"></a>Güvenli Yuva Katmanı (SSL) sertifikasını güncelleştir
+#### <a name="update-secure-sockets-layer-ssl-certificate"></a>Güvenli Yuva Katmanı (SSL) sertifikasını Güncelleştir
 
-VM'yi bir SSL sertifikası kullanmak üzere ayarlarsanız, parmak izini edinmek için aşağıdaki komutu çalıştırın. Sonra sertifikanın parmak izi ile aynı olup olmadığını denetleyin:
+VM 'yi bir SSL sertifikası kullanacak şekilde ayarlarsanız, parmak izini almak için aşağıdaki komutu çalıştırın. Sertifikanın parmak iziyle aynı olup olmadığını kontrol edin:
 
 ```cmd
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v SSLCertificateSHA1Hash
 ```
 
-Yoksa, parmak izini değiştirin:
+Değilse, parmak izini değiştirin:
 
 ```cmd
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v SSLCertificateSHA1Hash /t REG_BINARY /d <CERTIFICATE THUMBPRINT>
 ```
 
-RDP için RDP otomatik olarak imzalanan sertifika kullanır. böylece anahtarı silmek de deneyebilirsiniz:
+RDP için otomatik olarak imzalanan sertifika kullanması için anahtarı silmeyi de deneyebilirsiniz:
 
 ```cmd
 reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v SSLCertificateSHA1Hash
@@ -210,83 +210,83 @@ reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RD
 
 ### <a name="event-log"></a>Olay günlüğü
 
-CMD örneğinde, SCHANNEL hata olayı 36871 son 24 saat içinde sistem günlüğüne kaydedilir olup olmadığını denetlemek için aşağıdaki komutları çalıştırın:
+Bir CMD örneğinde, son 24 saat içindeki Sistem günlüğünde SCHANNEL hata olayı 36871 ' nin günlüğe kaydedilip kaydedilmeyeceğini denetlemek için aşağıdaki komutları çalıştırın:
 
 ```cmd
 wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Schannel'] and EventID=36871 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more
 ```
 
 **Günlük adı:**      Sistem <br />
-**Kaynak:**        Schannel <br />
+**Kaynaktaki**        Schannel <br />
 **Tarih:** — <br />
-**Olay Kimliği:**      36871 <br />
-**Görev kategorisi:** None <br />
-**Düzeyi:**         Hata <br />
-**Anahtar sözcükler:**       <br />
-**Kullanıcı:**          SİSTEM <br />
+**Olay KIMLIĞI:**      36871 <br />
+**Görev kategorisi:** Yok. <br />
+**Düzeyde**         Hata <br />
+**Lerimi**       <br />
+**Kullanıcı:**          SISTEMIN <br />
 **Bilgisayar:** *bilgisayar* <br />
-**Açıklama:** TLS sunucusu kimlik bilgisi oluşturulurken önemli bir hata oluştu. 10013 iç bir hata durumudur.
+**Açıklama:** TLS sunucusu kimlik bilgisi oluşturulurken önemli bir hata oluştu. İç hata durumu 10013 ' dir.
  
 ### <a name="cause"></a>Nedeni
 
-Bu sorunu, güvenlik ilkeleri tarafından neden olur. Eski TLS sürümlerini (örneğin, 1.0) ne zaman devre dışı bırakılır, RDP erişim başarısız olur.
+Bu sorun, güvenlik ilkeleri nedeniyle oluşur. TLS (1,0 gibi) eski sürümleri devre dışı bırakıldığında, RDP erişimi başarısız olur.
 
 ### <a name="resolution"></a>Çözüm
 
-RDP varsayılan protokol TLS 1.0 kullanır. Bununla birlikte, yeni bir standart olduğu protokolü, TLS 1.1 olarak'e değiştirilebilir.
+RDP, varsayılan protokol olarak TLS 1,0 kullanır. Ancak protokol, yeni standart olan TLS 1,1 olarak değiştirilebilir.
 
-Bu sorunu gidermek için bkz: [Azure VM'ye bağlanmak için RDP kullandığınızda, kimlik doğrulama hatalarını giderme](troubleshoot-authentication-error-rdp-vm.md#tls-version).
+Bu sorunu gidermek için bkz. [Azure VM 'ye bağlanmak IÇIN RDP kullanırken kimlik doğrulama hatalarında sorun giderme](troubleshoot-authentication-error-rdp-vm.md#tls-version).
 
 ## <a name="scenario-3"></a>Senaryo 3
 
-Yüklediyseniz **Uzak Masaüstü Bağlantı Aracısı** rol VM'de bulunup bulunmadığını 2056 veya olayın 1296 son 24 saat içinde denetleyin. CMD örnekte, aşağıdaki komutları çalıştırın: 
+VM 'ye **Uzak Masaüstü Bağlantı Aracısı** rolünü yüklediyseniz, son 24 saat içinde olay 2056 veya olay 1296 ' nin olup olmadığını kontrol edin. Bir CMD örneğinde aşağıdaki komutları çalıştırın: 
 
 ```cmd
 wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name=' Microsoft-Windows-TerminalServices-SessionBroker '] and EventID=2056 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more
 wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name=' Microsoft-Windows-TerminalServices-SessionBroker-Client '] and EventID=1296 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more
 ```
 
-**Günlük adı:**      Microsoft-Windows-TerminalServices-SessionBroker/işlem <br />
-**Kaynak:**        Microsoft-Windows-TerminalServices-SessionBroker <br />
+**Günlük adı:**      Microsoft-Windows-TerminalServices-SessionBroker/operasyonel <br />
+**Kaynaktaki**        Microsoft-Windows-TerminalServices-SessionBroker <br />
 **Tarih:** *zaman* <br />
-**Olay Kimliği:**      2056 <br />
+**Olay KIMLIĞI:**      2056 <br />
 **Görev kategorisi:** (109) <br />
-**Düzeyi:**         Hata <br />
-**Anahtar sözcükler:**       <br />
-**Kullanıcı:**          AĞ HİZMETİ <br />
-**Bilgisayar:** *bilgisayar fqdn* <br />
-**Açıklama:** Olay Kimliği 2056 kaynağından açıklaması Microsoft-Windows-TerminalServices-SessionBroker nebyla nalezena. Bu olayı oluşturan bileşen, yerel bilgisayarınızda yüklü değil veya yüklemenin bozuk. Yüklediğinizde veya yerel bilgisayarda bileşen onarın. <br />
-Olay başka bir bilgisayarda bulunuyorsa, görüntü bilgilerini olay ile kayıtlı gerekiyordu. <br />
-Aşağıdaki bilgiler, olay ile eklendi: <br />
+**Düzeyde**         Hata <br />
+**Lerimi**       <br />
+**Kullanıcı:**          AĞ HIZMETI <br />
+**Bilgisayar:** *bilgisayar FQDN 'si* <br />
+**Açıklama:** Kaynak Microsoft-Windows-TerminalServices-SessionBroker 'dan 2056 olay KIMLIĞI için açıklama bulunamıyor. Bu olayı başlatan bileşen yerel bilgisayarınızda yüklü değil veya yükleme bozuk. Bileşeni yerel bilgisayara yükleyebilir veya onarabilirsiniz. <br />
+Olayın başka bir bilgisayarda kaynağı varsa, görüntüleme bilgilerinin olayla birlikte kaydedilmesi gerekiyordu. <br />
+Olaya aşağıdaki bilgiler eklenmiştir: <br />
 NULL <br />
 NULL <br />
-Veritabanına oturum açma başarısız oldu.
+Veritabanında oturum açılamadı.
 
-**Günlük adı:**      Microsoft-Windows-TerminalServices-SessionBroker-istemci/işlem <br />
-**Kaynak:**        Microsoft-Windows-TerminalServices-SessionBroker-Client <br />
+**Günlük adı:**      Microsoft-Windows-TerminalServices-SessionBroker-Istemci/Işlem <br />
+**Kaynaktaki**        Microsoft-Windows-TerminalServices-SessionBroker-Client <br />
 **Tarih:** *zaman* <br />
-**Olay Kimliği:**      1296 <br />
+**Olay KIMLIĞI:**      1296 <br />
 **Görev kategorisi:** (104) <br />
-**Düzeyi:**         Hata <br />
-**Anahtar sözcükler:**       <br />
-**Kullanıcı:**          AĞ HİZMETİ <br />
-**Bilgisayar:** *bilgisayar fqdn* <br />
-**Açıklama:** Olay Kimliği 1296 kaynağından açıklaması Microsoft-Windows-TerminalServices-SessionBroker-Client nebyla nalezena. Bu olayı oluşturan bileşen, yerel bilgisayarınızda yüklü değil veya yüklemenin bozuk. Yüklediğinizde veya yerel bilgisayarda bileşen onarın.
-Olay başka bir bilgisayarda bulunuyorsa, görüntü bilgilerini olay ile kayıtlı gerekiyordu.
-Aşağıdaki bilgiler, olay ile eklendi:  <br />
+**Düzeyde**         Hata <br />
+**Lerimi**       <br />
+**Kullanıcı:**          AĞ HIZMETI <br />
+**Bilgisayar:** *bilgisayar FQDN 'si* <br />
+**Açıklama:** Microsoft-Windows-TerminalServices-SessionBroker-Client kaynağından olay KIMLIĞI 1296 açıklaması bulunamıyor. Bu olayı başlatan bileşen yerel bilgisayarınızda yüklü değil veya yükleme bozuk. Bileşeni yerel bilgisayara yükleyebilir veya onarabilirsiniz.
+Olayın başka bir bilgisayarda kaynağı varsa, görüntüleme bilgilerinin olayla birlikte kaydedilmesi gerekiyordu.
+Olaya aşağıdaki bilgiler eklenmiştir:  <br />
 *text* <br />
 *text* <br />
-Uzak Masaüstü Bağlantı Aracısı RPC iletişimi için hazır değil.
+Uzak Masaüstü Bağlantı Aracısı RPC iletişimi için kullanılamaz.
 
 ### <a name="cause"></a>Nedeni
 
-Uzak Masaüstü Bağlantı Aracısı sunucusu konak adı, desteklenen bir değişiklik değil değiştiğinden, bu sorun oluşur. 
+Bu sorun, desteklenen bir değişiklik olmayan Uzak Masaüstü Bağlantı Aracısı sunucusunun ana bilgisayar adı değiştiği için oluşur. 
 
-Ana bilgisayar adı, Windows İç Uzak Masaüstü hizmetini grubu tarafından çalışabilmek için gerekli olan veritabanında girişleri ve bağımlılıkları vardır. Ana bilgisayar grubu zaten oluşturulduktan sonra değiştirilmesi, birçok hatalarına neden olur ve Aracısı sunucunun çalışmayı durdurmasına neden olabilir.
+Ana bilgisayar adı, Windows Iç veritabanı üzerinde giriş ve bağımlılıklara sahiptir ve bu, uzak masaüstü hizmet grubu 'nun çalışabilebilmesi için gereklidir. Grup zaten oluşturulduktan sonra ana bilgisayar adının değiştirilmesi çok sayıda hataya neden olur ve aracı sunucusunun çalışmayı durdurmasına neden olabilir.
 
 ### <a name="resolution"></a>Çözüm 
 
-Bu sorunu gidermek için Uzak Masaüstü Bağlantı Aracısı rol ve Windows İç Veritabanı yüklenmesi gerekir.
+Bu sorunu onarmak için Uzak Masaüstü Bağlantı Aracısı rolünün ve Windows Iç veritabanının yeniden yüklenmesi gerekir.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
@@ -294,9 +294,9 @@ Bu sorunu gidermek için Uzak Masaüstü Bağlantı Aracısı rol ve Windows İ�
 
 [Schannel SSP teknik genel bakış](https://technet.microsoft.com/library/dn786429(v=ws.11).aspx)
 
-[Olay Kimliği 1058 & olay 36870 Uzak Masaüstü Oturumu Ana bilgisayar sertifika & SSL iletişimi ile RDP başarısız oluyor](https://blogs.technet.microsoft.com/askperf/2014/10/22/rdp-fails-with-event-id-1058-event-36870-with-remote-desktop-session-host-certificate-ssl-communication/)
+[RDP, Uzak Masaüstü Oturumu Ana Bilgisayarı sertifikası & SSL Iletişimi ile olay KIMLIĞI 1058 & olay 36870 ile başarısız oluyor](https://blogs.technet.microsoft.com/askperf/2014/10/22/rdp-fails-with-event-id-1058-event-36870-with-remote-desktop-session-host-certificate-ssl-communication/)
 
-[Schannel 36872 veya bir etki alanı denetleyicisinde 36870 Schannel](https://blogs.technet.microsoft.com/instan/2009/01/05/schannel-36872-or-schannel-36870-on-a-domain-controller/)
+[Bir etki alanı denetleyicisinde Schannel 36872 veya Schannel 36870](https://blogs.technet.microsoft.com/instan/2009/01/05/schannel-36872-or-schannel-36870-on-a-domain-controller/)
 
-[Olay Kimliği 1058 — Uzak Masaüstü Hizmetleri kimlik doğrulaması ve şifreleme](https://technet.microsoft.com/library/ee890862(v=ws.10).aspx)
+[Olay KIMLIĞI 1058 — Uzak Masaüstü Hizmetleri kimlik doğrulaması ve şifreleme](https://technet.microsoft.com/library/ee890862(v=ws.10).aspx)
 

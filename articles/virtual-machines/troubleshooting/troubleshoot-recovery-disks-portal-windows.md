@@ -1,153 +1,144 @@
 ---
-title: Bir Windows VM Azure Portalı'nda sorun giderme kullanın | Microsoft Docs
-description: İşletim sistemi diskini bir kurtarma sanal Makinesine Azure portalını kullanarak bağlanarak azure'da Windows sanal makine sorunlarını gidermeyi öğrenin
+title: Azure portal bir Windows sorun giderme sanal makinesi kullanın | Microsoft Docs
+description: Azure portal kullanarak işletim sistemi diskini bir kurtarma VM 'sine bağlayarak Azure 'da Windows sanal makine sorunlarını nasıl giderebileceğinizi öğrenin
 services: virtual-machines-windows
 documentationCenter: ''
 author: genlin
-manager: jeconnoc
+manager: dcscontentpm
 editor: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 08/13/2018
+ms.date: 08/19/2018
 ms.author: genli
-ms.openlocfilehash: ec2da7d9f659f32c40f7a2685ab08be4eec27ed5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 18bd531e122ed72aa1cc481d6cf76590412c73c6
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60320932"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71088298"
 ---
-# <a name="troubleshoot-a-windows-vm-by-attaching-the-os-disk-to-a-recovery-vm-using-the-azure-portal"></a>İşletim sistemi diskini bir kurtarma Azure portalını kullanarak sanal Makinesine ekleyerek bir Windows sanal makinesinin sorunlarını giderme
-Azure'da Windows sanal makinesi (VM), önyükleme veya disk bir hatasıyla karşılaşırsa, sanal sabit diskin kendisinde sorun giderme adımları gerçekleştirmeniz gerekebilir. Yaygın olarak karşılaşılan örneklerden VM başarıyla önyükleme engelleyen bir uygulamanın güncelleştirme olacaktır. Bu makalede, sanal sabit diskinizi başka bir Windows varsa hataları düzeltin ve ardından orijinal VM'yi yeniden oluşturmak için VM'ye bağlanmak için Azure portalını kullanma işlemi açıklanmaktadır.
+# <a name="troubleshoot-a-windows-vm-by-attaching-the-os-disk-to-a-recovery-vm-using-the-azure-portal"></a>Azure portal kullanarak işletim sistemi diskini bir kurtarma VM 'sine ekleyerek bir Windows sanal makinesi sorunlarını giderme
+Azure 'daki Windows sanal makineniz (VM) bir önyükleme veya disk hatasıyla karşılaşırsa, sanal sabit diskin kendisi üzerinde sorun giderme adımları gerçekleştirmeniz gerekebilir. Ortak bir örnek, VM 'nin başarıyla önyükleme yapabilmesini önleyen başarısız bir uygulama güncelleştirmesidir. Bu makalede, tüm hataları onarmak için sanal sabit diskinizi başka bir Windows sanal makineye bağlamak üzere Azure portal kullanma ve ardından özgün VM 'nizi yeniden oluşturma ayrıntıları yer aldığı açıklanır. 
 
 ## <a name="recovery-process-overview"></a>Kurtarma işlemine genel bakış
 Sorun giderme işlemi aşağıdaki gibidir:
 
-1. Sanal sabit diskleri tutmak, sorun yaşayan VM'yi silin.
-2. Ekleme ve sorun giderme amacıyla başka bir Windows VM için sanal sabit diski bağlayın.
-3. Sorun giderme işlemlerini yapacağınız VM'ye bağlanın. Dosyaları düzenleyin veya özgün sanal sabit diskte sorunları gidermek için herhangi bir aracı çalıştırın.
-4. Sorun giderme işlemlerini yaptığınız VM’den sanal sabit diski çıkarın.
-5. Orijinal sanal sabit diski kullanarak bir VM oluşturun.
+1. Etkilenen VM 'yi durdurun.
+1. VM 'nin işletim sistemi diski için bir anlık görüntü oluşturun.
+1. Anlık görüntüden bir sanal sabit disk oluşturun.
+1. Sorun giderme amacıyla sanal sabit diski başka bir Windows sanal makinesine ekleyin ve bağlayın.
+1. Sorun giderme işlemlerini yapacağınız VM'ye bağlanın. Özgün sanal sabit diskteki sorunları gidermek için dosyaları düzenleyin veya herhangi bir araç çalıştırın.
+1. Sorun giderme işlemlerini yaptığınız VM’den sanal sabit diski çıkarın.
+1. VM için işletim sistemi diskini değiştirin.
 
-Bu kullanan yönetilen diskin VM için artık Azure PowerShell bir VM için işletim sistemi diskini değiştirmek için kullanabiliriz. Artık VM silip ihtiyacımız var. Daha fazla bilgi için [işletim sistemi diskini bir kurtarma için Azure PowerShell kullanarak VM ekleyerek bir Windows sanal makinesinin sorunlarını giderme](troubleshoot-recovery-disks-windows.md).
+> [!NOTE]
+> Bu makale, yönetilmeyen disk içeren VM için geçerlidir.
 
-## <a name="determine-boot-issues"></a>Önyükleme sorunlarını belirleme
-Neden sanal makinenizin doğru ön yükleyebileceğini değil belirlemek için önyükleme tanılama VM ekran inceleyin. Yaygın olarak karşılaşılan örneklerden başarısız bir uygulama güncelleştirmesinin ya da bir temel alınan sanal sabit silinmiş veya taşınmış disk gerekir.
+## <a name="take-a-snapshot-of-the-os-disk"></a>İşletim sistemi diskinin anlık görüntüsünü alın
+Anlık görüntü, bir sanal sabit sürücünün (VHD) tam, salt okunurdur bir kopyasıdır. Sürmekte olan tüm işlemlerin seçimini kaldırmak için bir anlık görüntüyü almadan önce VM 'yi düzgün bir şekilde kapatmanız önerilir. Bir işletim sistemi diskinin anlık görüntüsünü almak için şu adımları izleyin:
 
-Portalında VM'nizi seçin ve ardından aşağı kaydırarak **destek + sorun giderme** bölümü. Tıklayın **önyükleme tanılaması** ekran görüntülemek için. Herhangi bir özel hata iletileri veya hata kodları VM bir sorunla karşılaşan neden belirlemeye yardımcı olması için dikkat edin. 
+1. [Azure Portal](https://portal.azure.com)gidin. Kenar çubuğundan **sanal makineler** ' i seçin ve ardından sorunlu VM 'yi seçin.
+1. Sol bölmede, **diskler**' i seçin ve ardından işletim sistemi diskinin adını seçin.
+    ![İşletim sistemi diskinin adı hakkında resim](./media/troubleshoot-recovery-disks-portal-windows/select-osdisk.png)
+1. İşletim sistemi diskinin **genel bakış** sayfasında **anlık görüntü oluştur**' u seçin.
+1. İşletim sistemi diskiyle aynı konumda bir anlık görüntü oluşturun.
 
-![Konsol günlükleri görüntüleme VM önyükleme tanılaması](./media/troubleshoot-recovery-disks-portal-windows/screenshot-error.png)
+## <a name="create-a-disk-from-the-snapshot"></a>Anlık görüntüden disk oluşturma
+Anlık görüntüden bir disk oluşturmak için aşağıdaki adımları izleyin:
 
-Ayrıca **indirme ekran** bir VM ekran görüntüsü yakalama indirmek için.
+1. Azure portal **Cloud Shell** seçin.
 
-## <a name="view-existing-virtual-hard-disk-details"></a>Mevcut sanal sabit disk ayrıntıları görüntüleyin
-Sanal sabit diskinizi başka bir sanal makineye iliştirebilmek için önce sanal sabit disk (VHD) adını tanımlamak gerekir. 
+    ![Açık Cloud Shell görüntüsü](./media/troubleshoot-recovery-disks-portal-windows/cloud-shell.png)
+1. Anlık görüntüden yönetilen disk oluşturmak için aşağıdaki PowerShell komutlarını çalıştırın. Bu örnek adları uygun adlarla değiştirmelisiniz.
 
-Portalda kaynak grubunuzu seçin, ardından depolama hesabınızı seçin. Tıklayın **Blobları**, aşağıdaki örnekte olduğu gibi:
+    ```powershell
+    #Provide the name of your resource group
+    $resourceGroupName ='myResourceGroup'
+    
+    #Provide the name of the snapshot that will be used to create Managed Disks
+    $snapshotName = 'mySnapshot' 
+    
+    #Provide the name of theManaged Disk
+    $diskName = 'newOSDisk'
+    
+    #Provide the size of the disks in GB. It should be greater than the VHD file size. In this sample, the size of the snapshot is 127 GB. So we set the disk size to 128 GB.
+    $diskSize = '128'
+    
+    #Provide the storage type for Managed Disk.  Premium_LRS or Standard_LRS.
+    $storageType = 'Standard_LRS'
+    
+    #Provide the Azure region (e.g. westus) where Managed Disks will be located.
+    #This location should be same as the snapshot location
+    #Get all the Azure location using command below:
+    #Get-AzLocation
+    $location = 'westus'
+    
+    $snapshot = Get-AzSnapshot -ResourceGroupName $resourceGroupName -SnapshotName $snapshotName 
+     
+    $diskConfig = New-AzDiskConfig -AccountType $storageType -Location $location -CreateOption Copy -SourceResourceId $snapshot.Id
+     
+    New-AzDisk -Disk $diskConfig -ResourceGroupName $resourceGroupName -DiskName $diskName
+    ```
+3. Komutlar başarıyla çalışıyorsa, belirttiğiniz kaynak grubunda Yeni diski görürsünüz.
 
-![Depolama BLOB'ları seçin](./media/troubleshoot-recovery-disks-portal-windows/storage-account-overview.png)
+## <a name="attach-the-disk-to-another-vm"></a>Diski başka bir VM 'ye iliştirme
+Sonraki birkaç adımda, sorun giderme amacıyla başka bir VM kullanırsınız. Diski sorun giderme VM 'sine iliştirdikten sonra, diskin içeriğine gözatıp düzenleyebilirsiniz. Bu işlem, yapılandırma hatalarını düzeltmenize veya ek uygulama veya sistem günlük dosyalarını incelemenizi sağlar. Diski başka bir VM 'ye eklemek için şu adımları izleyin:
 
-Genellikle, adlı bir kapsayıcıya sahip **VHD'ler** , sanal sabit disklerinizin depolar. Sanal sabit disklerin listesini görüntülemek üzere kapsayıcıyı seçin. (Önek genellikle sanal makinenizin adıdır) VHD'nizi adını not edin:
+1. Portaldan kaynak grubunuzu seçin ve ardından sorun giderme sanal makinesini seçin. **Diskler**' i seçin, **Düzenle**' yi seçin ve **veri diski Ekle**' ye tıklayın:
 
-![Depolama kapsayıcısı VHD tanımlayın](./media/troubleshoot-recovery-disks-portal-windows/storage-container.png)
+    ![Portala mevcut diski iliştirme](./media/troubleshoot-recovery-disks-portal-windows/attach-existing-disk.png)
 
-Listeden var olan sanal sabit diskinizi seçin ve aşağıdaki adımlarda kullanılmak URL'yi kopyalayın:
+2. **Veri diskleri** listesinde, tanımladığınız VM 'nin işletim sistemi diskini seçin. İşletim sistemi diskini görmüyorsanız, sanal makine ve işletim sistemi diskinin aynı bölgede (konum) olduğundan emin olun. 
+3. Değişiklikleri uygulamak için **Kaydet** ' i seçin.
 
-![Mevcut sanal sabit disk URL'sini Kopyala](./media/troubleshoot-recovery-disks-portal-windows/copy-vhd-url.png)
+## <a name="mount-the-attached-data-disk-to-the-vm"></a>Bağlı veri diskini VM 'ye bağlama
 
+1. Sorun giderme VM 'sine bir Uzak Masaüstü bağlantısı açın. 
+2. Sanal makinede sorun gider ' de **Sunucu Yöneticisi**açın **ve dosya ve depolama hizmetleri**' ni seçin. 
 
-## <a name="delete-existing-vm"></a>Mevcut VM'yi silin
-Sanal sabit diskler ve sanal makineler Azure'da iki ayrı kaynaktır. Bir sanal sabit disk, işletim sisteminin kendisi, uygulamalar ve yapılandırmalar depolandığı yerdir. VM boyutunu veya konumunu tanımlar ve bir sanal sabit disk veya sanal ağ arabirim kartı (NIC) gibi kaynaklara başvurur meta verilerdir. Her sanal sabit disk bir VM'ye atanan bir kira var. Veri diskleri VM çalışırken bile eklenip çıkarılabilir, ancak VM kaynağı silinmedikçe işletim sistemi diski çıkarılamaz. Kira, VM durdurulmuş ve serbest bırakılmış durumda olsa bile işletim sistemi diski ile bir VM ile ilişkisini sürdürür.
+    ![Sunucu Yöneticisi içinde dosya ve depolama hizmetleri seçin](./media/troubleshoot-recovery-disks-portal-windows/server-manager-select-storage.png)
 
-VM'nizi kurtarmanın ilk adımı, VM kaynağını silmektir. VM’yi sildiğinizde sanal sabit diskler depolama hesabınızda kalır. VM silindikten sonra sanal sabit diski ve hataları gidermek için başka bir sanal makineye ekleyin.
+3. Veri diski otomatik olarak algılanır ve eklenir. Bağlı disklerin bir listesini görmek için **diskler**' i seçin. Sürücü harfi dahil olmak üzere birim bilgilerini görüntülemek için veri diskinizi seçebilirsiniz. Aşağıdaki örnek, **F:** ile bağlı veri diskini gösterir.
 
-Portalında VM'nizi seçin ve ardından tıklayın **Sil**:
+    ![Sunucu Yöneticisi 'de disk bağlı ve birim bilgileri](./media/troubleshoot-recovery-disks-portal-windows/server-manager-disk-attached.png)
 
-![VM önyükleme tanılama önyükleme hatası gösteren ekran görüntüsü](./media/troubleshoot-recovery-disks-portal-windows/stop-delete-vm.png)
+## <a name="fix-issues-on-original-virtual-hard-disk"></a>Özgün sanal sabit diskteki sorunları çözme
+Var olan sanal sabit disk takılı olduğunda, artık gereken tüm bakım ve sorun giderme adımlarını gerçekleştirebilirsiniz. Sorunları giderdikten sonra aşağıdaki adımlarla devam edin.
 
-VM sanal sabit diski başka bir sanal makineye eklemeden önce silme işlemlerinin tamamlanmasını bekleyin. Kira VM ile ilişkilendiren sanal sabit diski sanal sabit diski başka bir sanal makineye iliştirebilmek için önce yayımlanması gerekir.
+## <a name="unmount-and-detach-original-virtual-hard-disk"></a>Özgün sanal sabit diski çıkarın ve ayırın
+Hatalar çözümlendikten sonra, var olan sanal sabit diski sorun giderme sanal makinenizin dışında ayırın. Sanal sabit diski, sorun giderme VM 'sine iliştirene kadar sanal sabit diskinizi başka bir VM ile kullanamazsınız.
 
+1. RDP oturumundan sanal makinenize **Sunucu Yöneticisi**açın **ve dosya ve depolama hizmetleri**' ni seçin:
 
-## <a name="attach-existing-virtual-hard-disk-to-another-vm"></a>Mevcut sanal sabit diski başka bir VM'ye
-Sonraki birkaç adımı için sorun giderme amacıyla başka bir VM kullanın. Varolan bir sanal sabit diski bulun ve diskin içeriği düzenlemek için bu sorun giderme sanal makinesine ekleyebilir. Bu işlem, yapılandırma hataları düzeltin veya ek uygulama veya sistem günlük dosyalarını, örneğin gözden geçirmek sağlar. Seçin veya sorun giderme amacıyla kullanmak üzere başka bir VM oluşturun.
+    ![Sunucu Yöneticisi dosya ve depolama hizmetleri 'ni seçin](./media/troubleshoot-recovery-disks-portal-windows/server-manager-select-storage.png)
 
-1. Portalda kaynak grubunuzu seçin, sonra sorun giderme VM'nizi seçin. Seçin **diskleri** ve ardından **iliştirme varolan**:
+2. **Diskler** ' i seçin ve ardından veri diskinizi seçin. Veri diskinize sağ tıklayıp **Çevrimdışına Al**' ı seçin:
 
-    ![Portalda mevcut diski ekleme](./media/troubleshoot-recovery-disks-portal-windows/attach-existing-disk.png)
+    ![Veri diskini Sunucu Yöneticisi çevrimdışı olarak ayarlama](./media/troubleshoot-recovery-disks-portal-windows/server-manager-set-disk-offline.png)
 
-2. Mevcut sanal sabit diskinizi seçmek için **VHD Dosyası**’na tıklayın:
+3. Artık sanal sabit diski VM 'den ayırın. Azure portal VM 'nizi seçin ve **diskler**' e tıklayın. 
+4. **Düzenle**' yi seçin, eklediğiniz işletim sistemi diskini seçin ve **Ayır**' ı tıklatın:
 
-    ![Mevcut bir VHD'ye göz atma](./media/troubleshoot-recovery-disks-portal-windows/select-vhd-location.png)
+    ![Var olan sanal sabit diski ayır](./media/troubleshoot-recovery-disks-portal-windows/detach-disk.png)
 
-3. Depolama hesabı ve kapsayıcı seçip mevcut VHD'NİZİ'ı tıklatın. Tıklayın **seçin** düğmesini Seçiminizi onaylayın:
+    Devam etmeden önce VM veri diskini başarıyla ayırana kadar bekleyin.
 
-    ![Mevcut VHD’nizi seçme](./media/troubleshoot-recovery-disks-portal-windows/select-vhd.png)
+## <a name="swap-the-os-disk-for-the-vm"></a>VM için işletim sistemi diskini değiştirme
 
-4. Artık VHD'niz seçiliyken, tıklayın **Tamam** mevcut sanal sabit diski eklemek için:
+Azure portal artık VM 'nin işletim sistemi diskini değiştirmeyi destekler. Bunu yapmak için şu adımları uygulayın:
 
-    ![Mevcut sanal sabit disk ekleme onaylayın](./media/troubleshoot-recovery-disks-portal-windows/attach-disk-confirm.png)
+1. [Azure Portal](https://portal.azure.com)gidin. Kenar çubuğundan **sanal makineler** ' i seçin ve ardından sorunlu VM 'yi seçin.
+1. Sol bölmede, **diskler**' i seçin ve ardından **Işletim sistemi diski Değiştir**' i seçin.
+        ![Azure portal takas OS disk ile ilgili görüntü](./media/troubleshoot-recovery-disks-portal-windows/swap-os-ui.png)
 
-5. Birkaç saniye sonra **diskleri** VM'niz için bölmesi, mevcut sanal sabit veri diski olarak bağlı disk listeler:
-
-    ![Veri diski olarak bağlı olan sanal sabit disk](./media/troubleshoot-recovery-disks-portal-windows/attached-disk.png)
-
-
-## <a name="mount-the-attached-data-disk"></a>Bağlı veri diski takma
-
-1. Sanal makinenize Uzak Masaüstü Bağlantısı açın. Portal ve tıklatın VM'nizi seçin **Connect**. İndirin ve RDP bağlantı dosyasını açın. Sanal makinenizde şu şekilde oturum açmak için kimlik bilgilerinizi girin:
-
-    ![Sanal makinenize Uzak Masaüstü kullanarak oturum açın](./media/troubleshoot-recovery-disks-portal-windows/open-remote-desktop.png)
-
-2. Açık **Sunucu Yöneticisi'ni**, ardından **dosya ve depolama hizmetleri**. 
-
-    ![Dosya ve depolama hizmetleri Sunucu Yöneticisi içinde seçin](./media/troubleshoot-recovery-disks-portal-windows/server-manager-select-storage.png)
-
-3. Veri diski otomatik olarak algılandı ve bağlı. Bağlı disklerin listesini görmek için seçin **diskleri**. Sürücü harfini birim bilgilerini görüntülemek için veri diski seçebilirsiniz. Aşağıdaki örnek, iliştirilmiş ve kullanarak veri diski gösterir **F:** :
-
-    ![Bağlı disk ve birim bilgileri Sunucu Yöneticisi'nde](./media/troubleshoot-recovery-disks-portal-windows/server-manager-disk-attached.png)
-
-
-## <a name="fix-issues-on-original-virtual-hard-disk"></a>Özgün sanal sabit diskteki sorunları düzeltme
-Mevcut sanal sabit bağlı disk ile artık tüm bakım ve sorun giderme adımlarını gereken şekilde gerçekleştirebilirsiniz. Sorunları giderdikten sonra aşağıdaki adımlarla devam edin.
-
-
-## <a name="unmount-and-detach-original-virtual-hard-disk"></a>Çıkarın ve özgün sanal sabit disk detach
-Mevcut sanal sabit diski sorun giderme, hataları çözümlendikten sonra çıkarın. Sorun giderme sanal makinesine sanal sabit disk ekleme kira ilişkisini sonlandırana kadar sanal sabit diskinizi başka bir VM ile kullanamazsınız.
-
-1. Sanal makinenize yönelik RDP oturumundan açın **Sunucu Yöneticisi'ni**, ardından **dosya ve depolama hizmetleri**:
-
-    ![Sunucu Yöneticisi'nde dosya ve depolama hizmetleri seçin](./media/troubleshoot-recovery-disks-portal-windows/server-manager-select-storage.png)
-
-2. Seçin **diskleri** ve ardından veri diskinizi seçin. Veri diskinizi sağ tıklayıp **çevrimdışına**:
-
-    ![Veri diski, Sunucu Yöneticisi'nde çevrimdışı olarak ayarlayın](./media/troubleshoot-recovery-disks-portal-windows/server-manager-set-disk-offline.png)
-
-3. Artık VM'den sanal sabit diski çıkarın. Azure portalında VM'nizi seçin ve tıklayın **diskleri**. Mevcut sanal sabit diskinizi seçin ve ardından **ayırma**:
-
-    ![Mevcut sanal sabit diski ayırma](./media/troubleshoot-recovery-disks-portal-windows/detach-disk.png)
-
-    VM başarıyla veri diski devam etmeden önce ayrılmış kadar bekleyin.
-
-## <a name="create-vm-from-original-hard-disk"></a>Orijinal sabit diskten VM oluşturma
-Özgün sanal sabit diskten bir VM oluşturmak için kullanın [bu Azure Resource Manager şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-specialized-vhd-new-or-existing-vnet). Şablonun, önceki komuttan VHD URL'sini kullanarak mevcut veya yeni sanal ağına, bir VM dağıtır. Tıklayın **azure'a Dağıt** düğmesi gibi:
-
-![Github'dan şablondan VM dağıtma](./media/troubleshoot-recovery-disks-portal-windows/deploy-template-from-github.png)
-
-Şablon dağıtımı için Azure portalında yüklenir. Yeni VM ve mevcut Azure kaynaklarınıza adlarını girin ve mevcut sanal sabit diskinizi URL'sini yapıştırın. Dağıtımı başlatmak için tıklatın **satın alma**:
-
-![Şablondan VM dağıtma](./media/troubleshoot-recovery-disks-portal-windows/deploy-from-image.png)
-
-
-## <a name="re-enable-boot-diagnostics"></a>Önyükleme tanılaması yeniden etkinleştirin
-Mevcut sanal sabit diskten VM oluşturma, önyükleme tanılamaları otomatik olarak etkinleştirilmemiş olabilir. Önyükleme tanılaması durumunu denetleyin ve gerekirse etkinleştirmek için portalda VM'nizi seçin. Altında **izleme**, tıklayın **tanılama ayarları**. Durum olduğundan emin olun **üzerinde**ve yanındaki onay işaretini **önyükleme tanılaması** seçilir. Herhangi bir değişiklik yaparsanız, tıklayın **Kaydet**:
-
-![Önyükleme tanılama ayarları güncelleştir](./media/troubleshoot-recovery-disks-portal-windows/reenable-boot-diagnostics.png)
+1. Onarılmakta olduğunuz yeni diski seçin ve ardından değişikliği onaylamak için VM 'nin adını yazın. Diski listede görmüyorsanız, diski sorun giderme VM 'sinden ayırdıktan sonra 10 ~ 15 dakika bekleyin. Ayrıca, diskin VM ile aynı konumda olduğundan emin olun.
+1. Tamam ' ı seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Sanal makinenizde bağlanma sorunu yaşıyorsanız bkz [Azure VM'ye RDP sorunlarını giderme bağlantıları](troubleshoot-rdp-connection.md). Sanal makinenizde çalışan uygulamalara erişim sorunları için bkz: [bir Windows sanal makinesinde uygulama bağlantı sorunlarını giderme](troubleshoot-app-connection.md).
+Sanal makinenize bağlanırken sorun yaşıyorsanız bkz. [Azure VM 'ye YÖNELIK RDP bağlantılarında sorun giderme](troubleshoot-rdp-connection.md). VM 'niz üzerinde çalışan uygulamalara erişme sorunları için bkz. [WINDOWS VM 'de uygulama bağlantı sorunlarını giderme](troubleshoot-app-connection.md).
 
-Resource Manager kullanma hakkında daha fazla bilgi için bkz. [Azure Resource Manager'a genel bakış](../../azure-resource-manager/resource-group-overview.md).
+Kaynak Yöneticisi kullanma hakkında daha fazla bilgi için bkz. [Azure Resource Manager genel bakış](../../azure-resource-manager/resource-group-overview.md).
+
 

@@ -1,10 +1,10 @@
 ---
-title: Azure CLI ile bir Linux sanal makinesi üzerinde MongoDB yükleme | Microsoft Docs
-description: Yükleme ve MongoDB bir Linux sanal makine iusing Azure CLI'yı yapılandırma hakkında bilgi edinin
+title: Azure CLı ile bir Linux sanal makinesine MongoDB 'yi yüklemeyin
+description: Azure CLı kullanarak MongoDB 'yi Linux sanal makinesine yüklemeyi ve yapılandırmayı öğrenin
 services: virtual-machines-linux
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: 3f55b546-86df-4442-9ef4-8a25fae7b96e
 ms.service: virtual-machines-linux
@@ -14,24 +14,24 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 12/15/2017
 ms.author: cynthn
-ms.openlocfilehash: 5fadf23cc1fc2e1a6092c48033580d398fc689a0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7f5fdd625eb49bfcac0bd58bca7a8415ac877517
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60542808"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036003"
 ---
-# <a name="how-to-install-and-configure-mongodb-on-a-linux-vm"></a>Yükleme ve Linux sanal makinesine MongoDB yapılandırın
+# <a name="how-to-install-and-configure-mongodb-on-a-linux-vm"></a>Linux VM 'de MongoDB 'yi yüklemek ve yapılandırmak
 
-[MongoDB](https://www.mongodb.org) popüler açık kaynaklı, yüksek performanslı NoSQL veritabanıdır. Bu makalede, yükleme ve Azure CLI ile bir Linux sanal makinesi üzerinde MongoDB yapılandırma işlemini göstermektedir. Örnekleri gösterilir, ayrıntı nasıl için:
+[MongoDB](https://www.mongodb.org) , popüler bir açık kaynaklı ve yüksek performanslı bir NoSQL veritabanıdır. Bu makalede, Azure CLı ile bir Linux sanal makinesine MongoDB 'nin nasıl yükleneceği ve yapılandırılacağı gösterilmektedir. Aşağıda aşağıdakiler hakkında ayrıntılı bilgiler verilmiştir:
 
-* [El ile yükleyin ve temel bir MongoDB örneğine yapılandırın](#manually-install-and-configure-mongodb-on-a-vm)
-* [Resource Manager şablonu kullanarak temel bir MongoDB örneğine oluşturma](#create-basic-mongodb-instance-on-centos-using-a-template)
-* [Resource Manager şablonu kullanarak çoğaltma ile parçalı kümesi ayarlar karmaşık bir MongoDB oluşturma](#create-a-complex-mongodb-sharded-cluster-on-centos-using-a-template)
+* [Temel bir MongoDB örneğini el ile yükleyip yapılandırma](#manually-install-and-configure-mongodb-on-a-vm)
+* [Kaynak Yöneticisi şablonu kullanarak temel bir MongoDB örneği oluşturma](#create-basic-mongodb-instance-on-centos-using-a-template)
+* [Kaynak Yöneticisi şablonu kullanarak çoğaltma kümeleriyle karmaşık bir MongoDB parçalı kümesi oluşturma](#create-a-complex-mongodb-sharded-cluster-on-centos-using-a-template)
 
 
-## <a name="manually-install-and-configure-mongodb-on-a-vm"></a>El ile yükleyin ve MongoDB üzerinde bir VM yapılandırma
-MongoDB [yükleme yönergelerinizi](https://docs.mongodb.com/manual/administration/install-on-linux/) Red Hat gibi Linux dağıtım paketlerini için / CentOS, SUSE, Ubuntu ve Debian. Aşağıdaki örnek, oluşturur bir *CentOS* VM. Bu ortamı oluşturmak için en son gerekir [Azure CLI](/cli/azure/install-az-cli2) yüklü ve bir Azure hesabı kullanarak oturum açmış [az login](/cli/azure/reference-index).
+## <a name="manually-install-and-configure-mongodb-on-a-vm"></a>MongoDB 'yi bir VM 'ye el ile yükleyip yapılandırma
+MongoDB, Red Hat/CentOS, SUSE, Ubuntu ve detik dahil olmak üzere Linux Distro 'lara için [yükleme yönergeleri sağlar](https://docs.mongodb.com/manual/administration/install-on-linux/) . Aşağıdaki örnek bir *CentOS* sanal makinesi oluşturur. Bu ortamı oluşturmak için [az Login](/cli/azure/reference-index)kullanarak bir Azure hesabında en son [Azure CLI](/cli/azure/install-az-cli2) 'nın yüklü ve oturum açmış olması gerekir.
 
 [az group create](/cli/azure/group) ile bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur:
 
@@ -39,7 +39,7 @@ MongoDB [yükleme yönergelerinizi](https://docs.mongodb.com/manual/administrati
 az group create --name myResourceGroup --location eastus
 ```
 
-[az vm create](/cli/azure/vm) ile bir VM oluşturun. Aşağıdaki örnekte adlı bir VM oluşturur *myVM* adlı bir kullanıcı ile *azureuser* SSH ortak anahtarı kimlik doğrulaması kullanma
+[az vm create](/cli/azure/vm) ile bir VM oluşturun. Aşağıdaki örnek, SSH ortak anahtar kimlik doğrulamasını kullanarak *azureuser* adlı bir kullanıcıyla *MYVM* adlı bir VM oluşturur
 
 ```azurecli
 az vm create \
@@ -50,19 +50,19 @@ az vm create \
     --generate-ssh-keys
 ```
 
-Kendi kullanıcı adınızı kullanarak VM'ye SSH ve `publicIpAddress` önceki adımdan çıktısında listelenir:
+Kendi Kullanıcı adınızı ve önceki adımdan alınan çıktıda listelenen `publicIpAddress` sanal makineye SSH.
 
 ```bash
 ssh azureuser@<publicIpAddress>
 ```
 
-MongoDB için yükleme kaynakları eklemek için oluşturun bir **yum** depo dosyası aşağıdaki gibi:
+MongoDB için yükleme kaynakları eklemek için, aşağıdaki gibi bir **yum** depo dosyası oluşturun:
 
 ```bash
 sudo touch /etc/yum.repos.d/mongodb-org-3.6.repo
 ```
 
-Düzenleme için MongoDB depo dosyası gibi açın ile `vi` veya `nano`. Aşağıdaki satırları ekleyin:
+`vi` veya `nano`gibi, düzenlenmek üzere MongoDB depo dosyasını açın. Aşağıdaki satırları ekleyin:
 
 ```sh
 [mongodb-org-3.6]
@@ -73,32 +73,32 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc
 ```
 
-MongoDB kullanarak yükleme **yum** gibi:
+Şu şekilde **yum** kullanarak MongoDB 'yi oluşturun:
 
 ```bash
 sudo yum install -y mongodb-org
 ```
 
-Varsayılan olarak, MongoDB erişmesini engelleyen CentOS görüntülerindeki SELinux zorlanır. İlke Yönetimi Araçları'nı yükleyin ve SELinux MongoDB, varsayılan TCP bağlantı noktası 27017 gibi çalışmasına izin verecek şekilde yapılandırın:
+Varsayılan olarak SELinux, MongoDB 'ye erişiminizi önleyen CentOS görüntülerinde zorlanır. İlke yönetim araçları 'nı yükleyip SELinux 'u, MongoDB 'nin varsayılan TCP bağlantı noktası 27017 ' de şu şekilde çalışmasına izin verecek şekilde yapılandırın:
 
 ```bash
 sudo yum install -y policycoreutils-python
 sudo semanage port -a -t mongod_port_t -p tcp 27017
 ```
 
-MongoDB hizmeti şu şekilde başlatın:
+MongoDB hizmetini şu şekilde başlatın:
 
 ```bash
 sudo service mongod start
 ```
 
-MongoDB yükleme yerel ile bağlanarak doğrulayın `mongo` istemci:
+Yerel `mongo` istemcisini kullanarak bağlantı kurarak MongoDB yüklemesini doğrulayın:
 
 ```bash
 mongo
 ```
 
-Artık bir MongoDB örneğine veri eklemek ve ardından arama test edin:
+Şimdi bazı verileri ekleyerek ve ardından arayarak MongoDB örneğini test edin:
 
 ```sh
 > db
@@ -109,50 +109,50 @@ test
 > exit
 ```
 
-İsterseniz, MongoDB, sistemin yeniden başlatılması sırasında otomatik olarak başlayacak şekilde yapılandırın:
+İsterseniz, MongoDB 'yi sistem yeniden başlatma sırasında otomatik olarak başlayacak şekilde yapılandırın:
 
 ```bash
 sudo chkconfig mongod on
 ```
 
 
-## <a name="create-basic-mongodb-instance-on-centos-using-a-template"></a>Şablon kullanarak CentOS üzerinde temel MongoDB örneği oluşturma
-Temel bir MongoDB örneğine github'dan aşağıdaki Azure Hızlı Başlangıç şablonu kullanarak tek bir CentOS VM'de oluşturabilirsiniz. Bu şablon eklemek için Linux için özel betik uzantısı kullanan bir **yum** depoya yeni oluşturulan CentOS VM ve MongoDB yükleyin.
+## <a name="create-basic-mongodb-instance-on-centos-using-a-template"></a>Bir şablon kullanarak CentOS üzerinde temel MongoDB örneği oluşturma
+GitHub 'dan aşağıdaki Azure hızlı başlangıç şablonunu kullanarak tek bir CentOS sanal makinesinde temel bir MongoDB örneği oluşturabilirsiniz. Bu şablon, yeni oluşturulan CentOS sanal makinesine bir **IUM** deposu eklemek ve ardından MongoDB 'yi yüklemek için Linux Için özel Betik uzantısı 'nı kullanır.
 
-* [CentOS temel MongoDB örneğinde](https://github.com/Azure/azure-quickstart-templates/tree/master/mongodb-on-centos) - https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/mongodb-on-centos/azuredeploy.json
+* [CentOS - https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/mongodb-on-centos/azuredeploy.json temel MongoDB örneği](https://github.com/Azure/azure-quickstart-templates/tree/master/mongodb-on-centos)
 
-Bu ortamı oluşturmak için en son gerekir [Azure CLI](/cli/azure/install-az-cli2) yüklü ve bir Azure hesabı kullanarak oturum açmış [az login](/cli/azure/reference-index). Öncelikle [az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur:
+Bu ortamı oluşturmak için [az Login](/cli/azure/reference-index)kullanarak bir Azure hesabında en son [Azure CLI](/cli/azure/install-az-cli2) 'nın yüklü ve oturum açmış olması gerekir. Öncelikle [az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur:
 
 ```azurecli
 az group create --name myResourceGroup --location eastus
 ```
 
-Ardından, MongoDB şablon ile dağıtım [az grubu dağıtım oluşturma](/cli/azure/group/deployment). İstendiğinde, kendi benzersiz değerleri girin *newStorageAccountName*, *dnsNameForPublicIP*ve yönetici kullanıcı adı ve parola:
+Daha sonra, MongoDB şablonunu [az Group Deployment Create](/cli/azure/group/deployment)komutuyla dağıtın. İstendiğinde, *Newstorageaccountname*, *dnsnameforpublicıp*ve Yönetici Kullanıcı adı ve parolası için kendi benzersiz değerlerinizi girin:
 
 ```azurecli
 az group deployment create --resource-group myResourceGroup \
   --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/mongodb-on-centos/azuredeploy.json
 ```
 
-Sanal makinenizin Genel DNS adres kullanarak sanal Makineye oturum açın. Genel DNS adresiyle görüntüleyebileceğiniz [az vm show](/cli/azure/vm):
+VM 'nizin genel DNS adresini kullanarak VM 'de oturum açın. Genel DNS adresini [az VM Show](/cli/azure/vm)ile görüntüleyebilirsiniz:
 
 ```azurecli
 az vm show -g myResourceGroup -n myLinuxVM -d --query [fqdns] -o tsv
 ```
 
-Kullanıcı adınızı ve Genel DNS adresi kullanarak sanal makinenize yönelik SSH:
+Kendi Kullanıcı adınızı ve genel DNS adresinizi kullanarak sanal makinenize SSH:
 
 ```bash
 ssh azureuser@mypublicdns.eastus.cloudapp.azure.com
 ```
 
-MongoDB yükleme yerel ile bağlanarak doğrulayın `mongo` aşağıdaki gibi istemci:
+Yerel `mongo` istemcisini kullanarak şu şekilde bağlantı kurarak MongoDB yüklemesini doğrulayın:
 
 ```bash
 mongo
 ```
 
-Şimdi örnek, bazı veri eklemeye ve arama gibi test edin:
+Şimdi aşağıdaki gibi bazı veri ve arama ekleyerek örneği test edin:
 
 ```sh
 > db
@@ -164,21 +164,21 @@ test
 ```
 
 
-## <a name="create-a-complex-mongodb-sharded-cluster-on-centos-using-a-template"></a>Şablon kullanarak CentOS üzerinde karmaşık MongoDB parçalı küme oluşturma
-Github'dan aşağıdaki Azure Hızlı Başlangıç şablonu kullanarak karmaşık bir MongoDB parçalı kümesi oluşturabilirsiniz. Bu şablon aşağıdaki [MongoDB parçalı küme en iyi](https://docs.mongodb.com/manual/core/sharded-cluster-components/) yedeklilik ve yüksek kullanılabilirlik sağlamak için. Şablon, her çoğaltma kümedeki üç düğüm ile iki parça oluşturur. Üç düğüm ile ayarlanmış bir yapılandırma sunucusu çoğaltma ayrıca oluşturulur, iki **mongos** parçalar arasında uygulamalardan tutarlılık sağlamak için yönlendirici sunucuları.
+## <a name="create-a-complex-mongodb-sharded-cluster-on-centos-using-a-template"></a>Bir şablon kullanarak CentOS üzerinde karmaşık bir MongoDB parçalı kümesi oluşturma
+GitHub 'dan aşağıdaki Azure hızlı başlangıç şablonunu kullanarak karmaşık bir MongoDB parçalı küme oluşturabilirsiniz. Bu şablon, artıklık ve yüksek kullanılabilirlik sağlamak için [MongoDB parçalı küme en iyi uygulamalarını](https://docs.mongodb.com/manual/core/sharded-cluster-components/) izler. Şablon, her bir çoğaltma kümesinde üç düğüm ile iki parça oluşturur. Aynı zamanda üç düğüm içeren bir yapılandırma sunucusu çoğaltma kümesi oluşturulur ve parçaların tamamında uygulamalara tutarlılık sağlamak için iki **mongos** yönlendirici sunucusu vardır.
 
-* [MongoDB parçalama kümede CentOS](https://github.com/Azure/azure-quickstart-templates/tree/master/mongodb-sharding-centos) - https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/mongodb-sharding-centos/azuredeploy.json
+* [CentOS - https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/mongodb-sharding-centos/azuredeploy.json MongoDB parçalama kümesi](https://github.com/Azure/azure-quickstart-templates/tree/master/mongodb-sharding-centos)
 
 > [!WARNING]
-> Bu karmaşık MongoDB parçalara ayrılmış Küme dağıtımı, genellikle bir abonelik için bölge başına varsayılan çekirdek sayısı olan 20'den fazla çekirdek gerektirir. Çekirdek sayınız artırmak için Azure destek isteği açın.
+> Bu karmaşık MongoDB parçalı kümenin dağıtımı, genellikle bir abonelik için bölge başına varsayılan çekirdek sayısı olan 20 ' den fazla çekirdek gerektirir. Çekirdek saymanızı artırmak için bir Azure destek isteği açın.
 
-Bu ortamı oluşturmak için en son gerekir [Azure CLI](/cli/azure/install-az-cli2) yüklü ve bir Azure hesabı kullanarak oturum açmış [az login](/cli/azure/reference-index). Öncelikle [az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur:
+Bu ortamı oluşturmak için [az Login](/cli/azure/reference-index)kullanarak bir Azure hesabında en son [Azure CLI](/cli/azure/install-az-cli2) 'nın yüklü ve oturum açmış olması gerekir. Öncelikle [az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur:
 
 ```azurecli
 az group create --name myResourceGroup --location eastus
 ```
 
-Ardından, MongoDB şablon ile dağıtım [az grubu dağıtım oluşturma](/cli/azure/group/deployment). Kendi kaynak tanımlamak adları ve gibi gerektiğinde boyutları *mongoAdminUsername*, *sizeOfDataDiskInGB*, ve *configNodeVmSize*:
+Daha sonra, MongoDB şablonunu [az Group Deployment Create](/cli/azure/group/deployment)komutuyla dağıtın. *Mongoadminusername*, *sizeofdatadiskingb*ve *confignodevmsize*gibi gerektiğinde kendi kaynak adlarınızı ve boyutlarınızı tanımlayın:
 
 ```azurecli
 az group deployment create --resource-group myResourceGroup \
@@ -200,7 +200,7 @@ az group deployment create --resource-group myResourceGroup \
   --no-wait
 ```
 
-Bu dağıtım, tüm VM örnekleri yapılandırmak ve dağıtmak için bir saatten fazla sürebilir. `--no-wait` Denetimi, şablon dağıtımı Azure platformu tarafından kabul edildikten sonra komut istemine geri dönmek için önceki komutta sonunda bayrağı kullanılır. Dağıtım durumunu daha sonra görüntüleyebileceğiniz [az grubu dağıtım show](/cli/azure/group/deployment). Aşağıdaki örnek için durum görünümleri *myMongoDBCluster* dağıtımda *myResourceGroup* kaynak grubu:
+Bu dağıtım, tüm sanal makine örneklerini dağıtmak ve yapılandırmak için bir saatten fazla sürebilir. `--no-wait` bayrağı, önceki komutun sonunda, şablon dağıtımı Azure platformu tarafından kabul edildikten sonra denetimi komut istemine döndürmek için kullanılır. Daha sonra dağıtım durumunu [az Group Deployment Show](/cli/azure/group/deployment)ile görüntüleyebilirsiniz. Aşağıdaki örnek *Myresourcegroup* kaynak grubundaki *Mymongodbcluster* dağıtımının durumunu görüntüler:
 
 ```azurecli
 az group deployment show \
@@ -211,11 +211,11 @@ az group deployment show \
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu örneklerde, MongoDB örneği yerel olarak VM'den bağlanabilirsiniz. Başka bir VM veya ağ MongoDB örneğine bağlanmak istiyorsanız, uygun olmak [ağ güvenlik grubu kurallarını oluşturulur](nsg-quickstart.md).
+Bu örneklerde, sanal makinede bulunan MongoDB örneğine yerel olarak bağlanırsınız. Başka bir VM 'den veya ağdan MongoDB örneğine bağlanmak istiyorsanız, uygun [ağ güvenlik grubu kurallarının oluşturulduğundan](nsg-quickstart.md)emin olun.
 
-Bu örnekler, çekirdek MongoDB ortamı geliştirme amacıyla dağıtın. Gerekli güvenlik yapılandırma seçenekleri, ortamınız için geçerlidir. Daha fazla bilgi için [MongoDB güvenlik docs](https://docs.mongodb.com/manual/security/).
+Bu örnekler, geliştirme amacıyla çekirdek MongoDB ortamını dağıtır. Ortamınız için gerekli güvenlik yapılandırması seçeneklerini uygulayın. Daha fazla bilgi için bkz. [MongoDB güvenlik belgeleri](https://docs.mongodb.com/manual/security/).
 
-Şablonları kullanarak oluşturma hakkında daha fazla bilgi için bkz. [Azure Resource Manager'a genel bakış](../../azure-resource-manager/resource-group-overview.md).
+Şablonları kullanarak oluşturma hakkında daha fazla bilgi için bkz. [Azure Resource Manager genel bakış](../../azure-resource-manager/resource-group-overview.md).
 
-Azure Resource Manager şablonları indirip Vm'lerinizde betiklerini yürütmek için özel betik uzantısı kullanın. Daha fazla bilgi için [Azure özel betik uzantısı ile Linux sanal makineleri kullanarak](extensions-customscript.md).
+Azure Resource Manager şablonlar, VM 'lerinizde betikleri indirmek ve yürütmek için özel betik uzantısını kullanır. Daha fazla bilgi için bkz. [Azure Özel Betik uzantısı 'nı Linux sanal makineleri Ile kullanma](extensions-customscript.md).
 

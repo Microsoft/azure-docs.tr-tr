@@ -1,138 +1,109 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure İzleyici Belgeleri
+### YamlMime:Landing
+title: Azure İzleyici belgeleri
+summary: Azure'ı ve şirket içi hizmetlerini izleme. Ölçümleri, günlükleri ve izlemeleri toplayın ve analiz edin. Uyarıları tetikleyin ve bildirimler gönderin veya otomatik çözümleri çağırın.
 metadata:
-  title: Azure İzleyici Belgeleri | Microsoft Docs
-  description: 'Log Analytics ve Application Insights çözümlerini de içeren Azure İzleyici, buluttaki ve şirket içindeki kaynaklarınızla uygulamalarınızın performansını ve kullanılabilirliğini en üst düzeye çıkarmanızı sağlayan telemetri verilerini toplamak ve analiz etmek için kullanabileceğiniz gelişmiş araçlar sunar.'
+  title: Azure İzleyici belgeleri
+  description: Log Analytics ve Application Insights çözümlerini de içeren Azure İzleyici, buluttaki ve şirket içindeki kaynaklarınızla uygulamalarınızın performansını ve kullanılabilirliğini en üst düzeye çıkarmanızı sağlayan telemetri verilerini toplamak ve analiz etmek için kullanabileceğiniz gelişmiş araçlar sunar.
   services: azure-monitor
-  author: bwren
-  manager: carmonm
   ms.service: azure-monitor
-  ms.tgt_pltfrm: na
   ms.topic: landing-page
-  ms.date: 01/25/2019
-  ms.author: bwren
-abstract:
-  description: 'Log Analytics ve Application Insights çözümlerini de içeren Azure İzleyici, buluttaki ve şirket içindeki kaynaklarınızla uygulamalarınızın performansını ve kullanılabilirliğini en üst düzeye çıkarmanızı sağlayan telemetri verilerini toplamak ve analiz etmek için kullanabileceğiniz gelişmiş araçlar sunar. Uygulamalarınızın performansını anlamanıza ve uygulamalarla bağlı oldukları kaynakları etkileyen sorunları önceden tespit etmenize yardımcı olur.'
-sections:
-  - title: Önerilen içerik
-    items:
-      - type: paragraph
-        text: Aşağıdaki bağlantıları kullanarak Log Analytics ve Application Insights'a yönelik önerilen içerik listesine bakın.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/azure-monitor/azure-monitor-log-hub">Log Analytics</a>
-          - html: <a href="/azure/azure-monitor/azure-monitor-app-hub">Application Insights</a>
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure kaynaklarından ölçümleri ve günlükleri toplamayı ve toplanan verileri analiz etmeyi öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/Chart.svg'
-            text: İzleyici ölçümleri
-            href: /azure/monitoring-and-diagnostics/monitor-quick-resource-metric-alert-portal
-          - image:
-              src: /azure/azure-monitor/media/index/log-analytics.svg
-            text: Günlükleri analiz etme
-            href: /azure/log-analytics/query-language/get-started-analytics-portal
-          - image:
-              src: 'https://docs.microsoft.com/azure/media/index/virtualmachine.svg'
-            text: Azure VM’leri
-            href: /azure/log-analytics/log-analytics-quick-collect-azurevm
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_linux.svg'
-            text: Linux bilgisayarı
-            href: /azure/log-analytics/log-analytics-quick-collect-linux-computer
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_Windows.svg'
-            text: Windows bilgisayar
-            href: /azure/log-analytics/log-analytics-quick-collect-windows-computer
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_alert.svg'
-            text: Abonelik Denetimi ve Uyarılar
-            href: /azure/monitoring-and-diagnostics/monitor-quick-audit-notify-action-in-subscription
-      - type: paragraph
-        text: Azure İzleyici Application Insights ile uygulamanızı izlemeye nasıl başlayabileceğinizi öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/dotnet.svg'
-            text: .NET
-            href: /azure/application-insights/quick-monitor-portal
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_NETcore.svg'
-            text: .NET Core
-            href: /azure/application-insights/app-insights-dotnetcore-quick-start
-          - image:
-              src: 'https://docs.microsoft.com/media/common/nodejs.svg'
-            text: Node.js
-            href: /azure/application-insights/app-insights-nodejs-quick-start
-          - image:
-              src: 'https://docs.microsoft.com/media/common/java.svg'
-            text: Java
-            href: /azure/application-insights/app-insights-java-quick-start
-          - image:
-              src: /azure/application-insights/media/index/mobile-center.png
-            text: Cep telefonu
-            href: /azure/application-insights/app-insights-mobile-center-quickstart
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_web-color.svg'
-            text: Web sitesi
-            href: /azure/application-insights/app-insights-website-monitoring
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Toplanan verileri çözümleme, görselleştirme ve bu veriler üzerinde işlem yapma hakkında bilgi edinin.'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/log-analytics/log-analytics-tutorial-viewdata">Toplanan verileri görüntüleme veya çözümleme</a>
-          - html: <a href="/azure/log-analytics/log-analytics-tutorial-dashboards">Pano oluşturma ve panoları paylaşma</a>
-          - html: <a href="/azure/monitoring-and-diagnostics/monitor-tutorial-autoscale-performance-schedule">Zamanlama veya uygulama performansına dayalı otomatik ölçeklendirme</a>
-          - html: <a href="/azure/monitoring-and-diagnostics/monitor-tutorial-archive-monitoring-data">İzleme verilerini arşivleme</a>
-      - type: paragraph
-        text: Web uygulamalarınızın performansını ve kullanımını sürekli olarak nasıl artırabileceğinizi öğrenin.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/application-insights/app-insights-tutorial-runtime-exceptions">Çalışma zamanı özel durumlarını bulma ve tanılama</a>
-          - html: <a href="/azure/application-insights/app-insights-tutorial-performance">Performans sorunlarını bulma ve tanılama</a>
-          - html: <a href="/azure/application-insights/app-insights-tutorial-alert">Uygulama durumunu izleme ve uyarılar gönderme</a>
-          - html: <a href="/azure/application-insights/app-insights-tutorial-users">Müşteri kullanımını ve bilgilerini çözümleme</a>
-          - html: <a href="/azure/application-insights/app-insights-tutorial-dashboards">Özel KPI panoları oluşturma</a>
-  - title: Ücretsiz Pluralsight Video Eğitimi
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Yöneticisi
-            href: 'https://go.microsoft.com/fwlink/?linkid=2012827'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
-              href: 'https://go.microsoft.com/fwlink/?linkid=2012827'
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Log Analytics’i yapılandırmak ve yönetmek için aşağıdaki örnekleri kullanın.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/log-analytics/powershell-samples">Azure PowerShell</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/module/az.operationalinsights">Azure PowerShell</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/loganalytics">REST API başvurusu</a></p>
+  author: rboucher
+  ms.author: robb
+  ms.date: 10/08/2019
+  ms.openlocfilehash: 5ea61f712898c13864e28a4f091521d36f52884c
+  ms.sourcegitcommit: c4700ac4ddbb0ecc2f10a6119a4631b13c6f946a
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/27/2019
+  ms.locfileid: "72965846"
+landingContent:
+- title: Azure İzleyici hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure İzleyici nedir?
+      url: overview.md
+    - text: Azure İzleyici günlükleri / Log Analytics nedir?
+      url: overview.md
+    - text: Azure İzleyici günlükleri / Log Analytics içerik merkezi sayfası
+      url: azure-monitor-log-hub.md
+    - text: Application Insights nedir?
+      url: app/app-insights-overview.md
+    - text: Application Insights içerik merkezi sayfası
+      url: azure-monitor-app-hub.md
+- title: Verileri izleme hakkında
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Veri kaynaklarına genel bakış
+      url: platform/data-sources.md
+    - text: Veri platformuna genel bakış
+      url: platform/data-platform.md
+- title: 10 dakikalık hızlı başlangıçlar
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Ölçümleri izleme ve uyarma
+      url: platform/alerts-metric.md
+    - text: Günlükleri analiz etme
+      url: log-query/get-started-portal.md
+    - text: Log Analytics'te Azure VM'leri
+      url: learn/quick-collect-azurevm.md
+    - text: Log Analytics'te Linux VM'leri
+      url: learn/quick-collect-linux-computer.md
+    - text: Log Analytics'te Windows VM'leri
+      url: learn/quick-collect-windows-computer.md
+    - text: Abonelik olaylarıyla ilgili uyarı
+      url: platform/alerts-activity-log.md
+- title: Uygulamaları izleme
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: .NET
+      url: learn/quick-monitor-portal.md
+    - text: .NET Core
+      url: learn/dotnetcore-quick-start.md
+    - text: Node.js
+      url: learn/nodejs-quick-start.md
+    - text: Cep telefonu
+      url: azure-monitor-app-hub.md
+    - text: Web sitesi
+      url: app/website-monitoring.md
+- title: Eğitim
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Ücretsiz Pluralsite Eğitimi - Azure Yöneticisi
+      url: https://go.microsoft.com/fwlink/?linkid=2012827
+- title: Başvuru - CLI
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Ölçümler, Otomatik Ölçeklendirme, Tanılama ayarları, Uyarılar
+      url: /cli/azure/monitor?view=azure-cli-latest
+    - text: Log Analytics
+      url: /cli/azure/ext/log-analytics/monitor?view=azure-cli-latest
+    - text: Application Insights
+      url: /cli/azure/ext/application-insights/monitor/app-insights/component?view=azure-cli-latest
+- title: Başvuru - PowerShell
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Ölçümler, Otomatik Ölçeklendirme, Tanılama ayarları, Uyarılar
+      url: /powershell/module/az.monitor/?view=azps-2.6.0
+    - text: Log Analytics
+      url: /powershell/module/az.operationalinsights
+    - text: Application Insights
+      url: /powershell/module/az.applicationinsights/new-azapplicationinsights?view=azps-2.7.0&viewFallbackFrom=azps-2.5.0
+- title: Başvuru - REST API
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Ölçümler, Otomatik Ölçeklendirme, Tanılama ayarları, Uyarılar
+      url: /rest/api/monitor
+    - text: Log Analytics
+      url: /rest/api/loganalytics
+    - text: Application Insights
+      url: /rest/api/application-insights/
+    - text: Application Insights REST API korumalı alanı
+      url: https://dev.applicationinsights.io

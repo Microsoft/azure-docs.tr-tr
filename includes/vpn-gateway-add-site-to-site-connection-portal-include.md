@@ -5,26 +5,26 @@ services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: include
-ms.date: 04/04/2018
+ms.date: 08/02/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 19ad4e39ca4e402c37b2cfa69c7c306b6e5a2766
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 5149973fe63f867b49e55c970779c005e12536b9
+ms.sourcegitcommit: 6cbf5cc35840a30a6b918cb3630af68f5a2beead
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188224"
+ms.lasthandoff: 08/05/2019
+ms.locfileid: "68780098"
 ---
-1. Sanal ağ geçidinizin sayfasına gidip bu sayfayı açın. Buraya çeşitli yollardan gidebilirsiniz. 'VNet1GW' ağ geçidine gitmek için **TestVNet1 -> Genel bakış -> Bağlı cihazlar -> VNet1GW** seçeneğine gidebilirsiniz.
-2. VNet1GW sayfasında **Bağlantılar**'a tıklayın. Bağlantılar sayfasının üstündeki **+Ekle**’ye tıklayarak **Bağlantı ekle** sayfasını açın.
+1. Sanal ağ geçidinizin sayfasını açın. Buraya çeşitli yollardan gidebilirsiniz. VNet 'iniz adına giderek ağ geçidine gidebilirsiniz- **> genel bakış-> bağlı cihazlar-ağ geçidinizin > adı**.
+2. Ağ geçidinin sayfasında **Bağlantılar**' a tıklayın. Bağlantılar sayfasının üstündeki **+Ekle**’ye tıklayarak **Bağlantı ekle** sayfasını açın.
 
    ![Siteden Siteye bağlantısı oluşturma](./media/vpn-gateway-add-site-to-site-connection-portal-include/configure-site-to-site-connection.png)
 3. **Bağlantı ekle** sayfasında, bağlantınız için değerleri yapılandırın.
 
-   - **Adı:** Bağlantınızı adlandırın.
-   - **Bağlantı türü:** Seçin **Site-to-site(IPSec)** .
-   - **Sanal ağ geçidi:** Bu ağ geçidinden bağlandığınız için değer sabittir.
-   - **Yerel ağ geçidi:** Tıklayın **bir yerel ağ geçidi seçin** ve kullanmak istediğiniz yerel ağ geçidini seçin.
+   - **Ada** Bağlantınızı adlandırın.
+   - **Bağlantı türü:** **Siteden siteye (IPSec)** seçeneğini belirleyin.
+   - **Sanal ağ geçidi:** Bu ağ geçidinden bağlanmakta olduğunuz için değer sabittir.
+   - **Yerel ağ geçidi:** **Bir yerel ağ geçidi seçin** ' e tıklayın ve kullanmak istediğiniz yerel ağ geçidini seçin.
    - **Paylaşılan Anahtar:** Buradaki değer, yerel şirket için VPN cihazınız için kullandığınız değerle eşleşmelidir. Örnekte 'abc123' değeri kullanılmıştır, ancak siz daha karmaşık bir değer kullanabilirsiniz (ve kullanmalısınız). Önemli olan, burada belirttiğiniz değerin VPN cihazınızı yapılandırırken belirttiğiniz değerle aynı olmasıdır.
    - **Abonelik**, **Kaynak Grubu** ve **Konum** için kalan değerler sabittir.
 

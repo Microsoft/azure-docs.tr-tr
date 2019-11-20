@@ -1,20 +1,16 @@
 ---
-title: Örnek - özel VM görüntüsü, bir kaynak grubunda izin ver
-description: Bu örnek ilke tanımı, özel görüntüleri bir onaylı kaynak grubundan gelen gerektirir.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-kaynak grubundan özel VM görüntüsüne Izin ver
+description: Bu örnek ilke tanımı, özel görüntülerin onaylanan bir kaynak grubundan gelmesini gerektirir.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 29f42a278d9a1d0879d464b6c4e1cfad8f73d518
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 4956b01dfc48014a047e61aa4961cc4da418f6ae
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61333531"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076488"
 ---
-# <a name="sample---allow-custom-vm-image-from-a-resource-group"></a>Örnek - özel VM görüntüsü, bir kaynak grubunda izin ver
+# <a name="sample---allow-custom-vm-image-from-a-resource-group"></a>Örnek-kaynak grubundan özel VM görüntüsüne Izin ver
 
 Bu örnek ilkesi, özel görüntülerin onaylı bir kaynak grubundan gelmesini gerektirir. Onaylı kaynak grubunun adını belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu örnek ilkesi, özel görüntülerin onaylı bir kaynak grubundan gelmesini g
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Fcustom-image-from-rg%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Fcustom-image-from-rg%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

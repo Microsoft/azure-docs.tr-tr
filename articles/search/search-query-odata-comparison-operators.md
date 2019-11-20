@@ -1,13 +1,13 @@
 ---
-title: OData karşılaştırma işleci başvuru - Azure Search
-description: OData Karşılaştırma işleçleri, eq, ne, gt, lt, ge ve Azure arama sorgularında le.
-ms.date: 06/13/2019
-services: search
-ms.service: search
-ms.topic: conceptual
+title: OData karşılaştırma işleci başvurusu
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama sorgularında OData karşılaştırma işleçleri (EQ, ne, gt, lt, GE ve Le) kullanılmasına yönelik sözdizimi ve başvuru belgeleri.
+manager: nitinme
 author: brjohnstmsft
 ms.author: brjohnst
-ms.manager: cgronlun
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
 translation.priority.mt:
 - de-de
 - es-es
@@ -19,37 +19,37 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: b51bf3d77283ae828f47fdb0355d2deb43f071a1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 62c8c93e07326e776cbe089042abc481544794bc
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67079931"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113213"
 ---
-# <a name="odata-comparison-operators-in-azure-search---eq-ne-gt-lt-ge-and-le"></a>Azure Search - OData karşılaştırma işleçlerinden `eq`, `ne`, `gt`, `lt`, `ge`, ve `le`
+# <a name="odata-comparison-operators-in-azure-cognitive-search---eq-ne-gt-lt-ge-and-le"></a>Azure Bilişsel Arama OData karşılaştırma işleçleri `eq`, `ne`, `gt`, `lt`, `ge`ve `le`
 
-En temel işleminde bir [OData filtre ifadesinin](query-odata-filter-orderby-syntax.md) Azure Search'te bir alan belirli bir değerle karşılaştırmak sağlamaktır. Olası--karşılaştırma iki tür eşitlik karşılaştırması ve aralığı karşılaştırma. Bir alan sabit bir değerle karşılaştırmak için aşağıdaki işleçleri kullanabilirsiniz:
+Azure Bilişsel Arama 'deki bir [OData filtre ifadesinde](query-odata-filter-orderby-syntax.md) en temel işlem, bir alanı verilen değerle karşılaştırmaktır. İki tür karşılaştırma yapılabilir--eşitlik karşılaştırması ve Aralık karşılaştırması. Bir alanı sabit değerle karşılaştırmak için aşağıdaki işleçleri kullanabilirsiniz:
 
 Eşitlik işleçleri:
 
-- `eq`: Bir alan olup olmadığını sınamak **eşit** sabit değer
-- `ne`: Bir alan olup olmadığını sınamak **eşit değil** sabit değer
+- `eq`: bir alanın sabit değere **eşit** olup olmadığını test edin
+- `ne`: bir alanın sabit değere **eşit** olup olmadığını test edin
 
 Aralık işleçleri:
 
-- `gt`: Bir alan olup olmadığını sınamak **büyüktür** sabit değer
-- `lt`: Bir alan olup olmadığını sınamak **küçüktür** sabit değer
-- `ge`: Bir alan olup olmadığını sınamak **büyüktür veya eşittir** sabit değer
-- `le`: Bir alan olup olmadığını sınamak **ya da eşit** sabit değer
+- `gt`: bir alanın sabit değerden **büyük** olup olmadığını test edin
+- `lt`: bir alanın sabit değerden **küçük** olup olmadığını test edin
+- `ge`: bir alanın sabit değere **eşit veya ondan büyük** olup olmadığını test edin
+- `le`: bir alanın sabit değere **eşit veya ondan küçük** olup olmadığını test edin
 
-Aralık işleçleri ile birlikte kullanabileceğiniz [mantıksal işleçler](search-query-odata-logical-operators.md) bir alan bir değer aralığında olup olmadığını test etmek için. Bkz: [örnekler](#examples) bu makalenin ilerleyen bölümlerinde.
+Bir alanın belirli bir değer aralığı içinde olup olmadığını test etmek için, Aralık işleçlerini [mantıksal işleçlerle](search-query-odata-logical-operators.md) birlikte kullanabilirsiniz. Bu makalenin devamındaki [örneklere](#examples) bakın.
 
 > [!NOTE]
-> Tercih ederseniz, sol tarafta, işleç ve sağ taraftaki alan adı, sabit değer koyabilirsiniz. Aralık işleçler için karşılaştırma anlamını tersine çevrildi. Örneğin, sol tarafta, sabit değer ise `gt` sabit değer alanın büyük olup olmadığını test edersiniz. Bir işlevin sonucu gibi Karşılaştırılacak Karşılaştırma işleçleri kullanabilirsiniz `geo.distance`, bir değere sahip. Boole işlevleri gibi `search.ismatch`, karşılaştırma sonucu `true` veya `false` isteğe bağlıdır.
+> İsterseniz, sabit değeri işlecin sol tarafına ve alan adını sağ tarafta koyabilirsiniz. Aralık işleçleri için karşılaştırma anlamı tersine çevrilir. Örneğin, sabit değer Solsa, `gt` sabit değerin alandan büyük olup olmadığını test edecektir. Karşılaştırma işleçlerini, `geo.distance`gibi bir işlevin sonucunu karşılaştırmak için de kullanabilirsiniz. `search.ismatch`gibi Boole işlevleri için, sonucu `true` veya `false` olarak karşılaştırmak isteğe bağlıdır.
 
 ## <a name="syntax"></a>Sözdizimi
 
-Aşağıdaki EBNF ([genişletilmiş Backus-Naur Form](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)) Karşılaştırma işleçleri kullanan bir OData ifade dilbilgisi tanımlar.
+Aşağıdaki EBNF ([Genişletilmiş Backus-Naur formu](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)), karşılaştırma işleçlerini kullanan bir OData ifadesinin dilbilgisini tanımlar.
 
 <!-- Upload this EBNF using https://bottlecaps.de/rr/ui to create a downloadable railroad diagram. -->
 
@@ -63,57 +63,57 @@ variable_or_function ::= variable | function_call
 comparison_operator ::= 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne'
 ```
 
-Bir etkileşimli söz dizim diyagramı görülmektedir de kullanılabilir:
+Etkileşimli bir sözdizimi diyagramı da kullanılabilir:
 
 > [!div class="nextstepaction"]
-> [Azure Search için OData söz dizimini diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#comparison_expression)
+> [Azure Bilişsel Arama için OData sözdizimi diyagramı](https://azuresearch.github.io/odata-syntax-diagram/#comparison_expression)
 
 > [!NOTE]
-> Bkz: [OData ifadesi söz dizimi başvurusu için Azure Search](search-query-odata-syntax-reference.md) tam EBNF için.
+> Tüm EBNF için bkz. [Azure bilişsel arama Için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md) .
 
-Karşılaştırma ifadeleri iki biçimi vardır. Aralarındaki tek fark, sabiti sol - veya sağ taraftaki üzerinde işlecinin görünüp görünmediğini ' dir. İşlecinin diğer tarafında bir ifade olmalıdır bir **değişkeni** veya bir işlev çağrısı. Bir değişken bir alan adı veya bir aralık değişkenine durumunda olabilir bir [lambda ifadesi](search-query-odata-collection-operators.md).
+İki karşılaştırma ifadesi biçimi vardır. Bunlar arasındaki tek fark, işlecin, işlecin sol veya sağ tarafında görünüp görüntülenmemesidir. İşlecin diğer tarafındaki ifade bir **değişken** veya işlev çağrısı olmalıdır. Bir değişken, bir alan adı ya da bir [lambda ifadesi](search-query-odata-collection-operators.md)söz konusu olduğunda bir Aralık değişkeni olabilir.
 
-## <a name="data-types-for-comparisons"></a>Veri türleri için karşılaştırma
+## <a name="data-types-for-comparisons"></a>Karşılaştırmalar için veri türleri
 
-Karşılaştırma işlecinin her iki tarafında veri türleri uyumlu olmalıdır. Örneğin, sol tarafta türünde bir alan ise `Edm.DateTimeOffset`, sağ tarafındaki bir tarih saat sabiti olmalıdır. Sayısal veri türleri daha esnektir. Aşağıdaki tabloda açıklandığı gibi değişkenlerin ve işlevlerin herhangi bir sayısal tür başka türden sayısal, bazı kısıtlamalarla sabitler ile karşılaştırabilirsiniz.
+Karşılaştırma işlecinin her iki tarafındaki veri türleri uyumlu olmalıdır. Örneğin, sol kenar `Edm.DateTimeOffset`türünde bir alan ise, sağ kenar bir tarih-saat sabiti olmalıdır. Sayısal veri türleri daha esnektir. Aşağıdaki tabloda açıklandığı gibi, herhangi bir sayısal türdeki değişkenleri ve işlevleri diğer herhangi bir sayısal tür sabitleri ile karşılaştırabilirsiniz.
 
 | Değişken veya işlev türü | Sabit değer türü | Sınırlamalar |
 | --- | --- | --- |
-| `Edm.Double` | `Edm.Double` | Bir karşılaştırmadır konusu [için özel kurallar `NaN`](#special-case-nan) |
-| `Edm.Double` | `Edm.Int64` | Sabiti dönüştürülür `Edm.Double`, sonuçta elde edilen büyük büyüklük değerlerinin duyarlık kaybı |
+| `Edm.Double` | `Edm.Double` | Karşılaştırma, [`NaN`için özel kurallara](#special-case-nan) tabidir |
+| `Edm.Double` | `Edm.Int64` | Sabit, `Edm.Double`'e dönüştürülüp büyük boyutlu değerler için duyarlık kaybı ile sonuçlanır |
 | `Edm.Double` | `Edm.Int32` | yok |
-| `Edm.Int64` | `Edm.Double` | Karşılaştırmalar `NaN`, `-INF`, veya `INF` izin verilmez |
+| `Edm.Int64` | `Edm.Double` | `NaN`, `-INF`veya `INF` karşılaştırmalara izin verilmez |
 | `Edm.Int64` | `Edm.Int64` | yok |
-| `Edm.Int64` | `Edm.Int32` | Sabiti dönüştürülür `Edm.Int64` karşılaştırma önce |
-| `Edm.Int32` | `Edm.Double` | Karşılaştırmalar `NaN`, `-INF`, veya `INF` izin verilmez |
+| `Edm.Int64` | `Edm.Int32` | Sabit, karşılaştırmadan önce `Edm.Int64` dönüştürülür |
+| `Edm.Int32` | `Edm.Double` | `NaN`, `-INF`veya `INF` karşılaştırmalara izin verilmez |
 | `Edm.Int32` | `Edm.Int64` | yok |
 | `Edm.Int32` | `Edm.Int32` | yok |
 
-Türünde bir alan karşılaştırma gibi izin verilmeyen karşılaştırmalar için `Edm.Int64` için `NaN`, Azure Search REST API'sine döndüreceği bir "HTTP 400: Hatalı istek"hatası.
+`Edm.Int64` bir alanı `NaN`olarak karşılaştıran izin verilmeyen karşılaştırmalar için, Azure Bilişsel Arama REST API bir "HTTP 400: Hatalı Istek" hatası döndürür.
 
 > [!IMPORTANT]
-> Sayısal tür karşılaştırmaları esnek olmasına karşın, sabit değeri olarak değişken veya işlev için bunu karşılaştırılıyor aynı veri türünde olması karşılaştırmalar filtrelerini yazma önemle öneririz. Bu olduğunda özellikle önemlidir, kayan nokta karıştırma ve duyarlık kaybı örtük dönüştürmelerin nerede olası tamsayı değerleri.
+> Sayısal tür karşılaştırmaları esnek olsa da, sabit değerin karşılaştırıldığı değişken veya işlevle aynı veri türü olması için filtrelerdeki karşılaştırmalar yazmanız önemle önerilir. Bu, özellikle de duyarlık kaybı olan örtük dönüştürmeler mümkün olduğunda kayan nokta ve tamsayı değerlerini karıştırdığınızda önemlidir.
 
 <a name="special-case-nan"></a>
 
-### <a name="special-cases-for-null-and-nan"></a>Özel durumlar için `null` ve `NaN`
+### <a name="special-cases-for-null-and-nan"></a>`null` ve `NaN` için özel durumlar
 
-Karşılaştırma işleçleri kullanırken, Azure Search'te tüm koleksiyon dışı alanlar büyük olasılıkla olabileceğini unutmayın `null`. Aşağıdaki tabloda her iki tarafında nereye olabilir bir karşılaştırma ifadesi tüm olası sonuçlarını gösterir. `null`:
+Karşılaştırma işleçlerini kullanırken, Azure Bilişsel Arama tüm koleksiyon olmayan alanların `null`olabileceğini unutmamak önemlidir. Aşağıdaki tabloda her iki tarafın de `null`bir karşılaştırma ifadesi için olası tüm sonuçlar gösterilmektedir:
 
-| İşleç | Yalnızca alan veya değişken olduğunda sonucu `null` | Yalnızca sabiti olduğunda sonucu `null` | Alan veya değişken ve sabiti sonuç `null` |
+| İşleç | Yalnızca alan veya değişken `null` olduğunda sonuç | Yalnızca sabit `null` olduğunda sonuç | Hem alan hem de değişken ve sabit `null` olduğunda sonuç |
 | --- | --- | --- | --- |
-| `gt` | `false` | HTTP 400: Hatalı istek hatası | HTTP 400: Hatalı istek hatası |
-| `lt` | `false` | HTTP 400: Hatalı istek hatası | HTTP 400: Hatalı istek hatası |
-| `ge` | `false` | HTTP 400: Hatalı istek hatası | HTTP 400: Hatalı istek hatası |
-| `le` | `false` | HTTP 400: Hatalı istek hatası | HTTP 400: Hatalı istek hatası |
+| `gt` | `false` | HTTP 400: Hatalı Istek hatası | HTTP 400: Hatalı Istek hatası |
+| `lt` | `false` | HTTP 400: Hatalı Istek hatası | HTTP 400: Hatalı Istek hatası |
+| `ge` | `false` | HTTP 400: Hatalı Istek hatası | HTTP 400: Hatalı Istek hatası |
+| `le` | `false` | HTTP 400: Hatalı Istek hatası | HTTP 400: Hatalı Istek hatası |
 | `eq` | `false` | `false` | `true` |
 | `ne` | `true` | `true` | `false` |
 
-Özet olarak, `null` yalnızca kendisine eşit ve daha az veya diğer değerden büyüktür.
+Özet ' te, `null` yalnızca kendine eşittir ve diğer herhangi bir değerden daha az veya daha büyük değildir.
 
-Dizininizi türünde alanlar varsa `Edm.Double` ve karşıya yüklediğiniz `NaN` bu alanların değerlerine için filtreler yazarken hesabı gerekir. Azure arama, işleme için IEEE 754 standart uygulayan `NaN` değerler ve tür değerleri karşılaştırmalar aşağıdaki tabloda gösterildiği gibi belirgin olmayan sonuçlar üretir.
+Dizininizdeki `Edm.Double` türünde alanlar varsa ve `NaN` değerlerini bu alanlara yüklerseniz, filtre yazarken bu hesaba hesap eklemeniz gerekir. Azure Bilişsel Arama, `NaN` değerlerini işlemek için IEEE 754 standardını uygular ve bu tür değerlerle karşılaştırmalar, aşağıdaki tabloda gösterildiği gibi belirgin olmayan sonuçlar üretir.
 
-| İşleç | En az bir işlenen olduğunda sonucu `NaN` |
+| İşleç | En az bir işlenen `NaN` sonuç |
 | --- | --- |
 | `gt` | `false` |
 | `lt` | `false` |
@@ -122,41 +122,41 @@ Dizininizi türünde alanlar varsa `Edm.Double` ve karşıya yüklediğiniz `NaN
 | `eq` | `false` |
 | `ne` | `true` |
 
-Özet olarak, `NaN` kendisi de dahil olmak üzere, herhangi bir değerine eşit değil.
+Özet içinde `NaN`, kendisi dahil olmak üzere herhangi bir değere eşit değildir.
 
-### <a name="comparing-geo-spatial-data"></a>Jeo-uzamsal verileri karşılaştırma
+### <a name="comparing-geo-spatial-data"></a>Coğrafi uzamsal verileri karşılaştırma
 
-Türünde bir alan doğrudan karşılaştırılamaz `Edm.GeographyPoint` sabit bir değer ile kullanabilirsiniz, ancak `geo.distance` işlevi. Bu işlev türünde bir değer döndürür `Edm.Double`, bir sayısal karşılaştırma için sabit Jeo-uzamsal koordinatları mesafe dayanan filtre uygulamak için sabiti. Bkz: [örnekler](#examples) aşağıda.
+`Edm.GeographyPoint` türünde bir alanı doğrudan sabit bir değerle karşılaştıramazsınız, ancak `geo.distance` işlevini kullanabilirsiniz. Bu işlev `Edm.Double`türünde bir değer döndürür, böylece sabit coğrafi uzamsal koordinatlardan uzaklıktan yola çıkarak filtrelemek için sayısal bir sabitle karşılaştırabilirsiniz. Aşağıdaki [örneklere](#examples) bakın.
 
-### <a name="comparing-string-data"></a>Dize verileri karşılaştırma
+### <a name="comparing-string-data"></a>Dize verilerini karşılaştırma
 
-Dizeleri karşılaştırılabilir filtreleri kullanarak tam eşleşme için `eq` ve `ne` işleçleri. Bu karşılaştırmalar büyük/küçük harfe duyarlıdır.
+Dizeler, `eq` ve `ne` işleçlerini kullanarak tam eşleşmelerin filtrelerinde karşılaştırılabilir. Bu karşılaştırmalar büyük/küçük harfe duyarlıdır.
 
 ## <a name="examples"></a>Örnekler
 
-Eşleşme belgeleri nerede `Rating` alandır 3 ile 5, kapsamlı arasında:
+`Rating` alanın 3 ile 5 arasında (dahil) olduğu belgeleri eşleştirin:
 
     Rating ge 3 and Rating le 5
 
-Eşleşme belgeleri nerede `Location` alandır değerinden 2 kilometre belirli bir enlem ve boylam:
+`Location` alanın, verilen Enlem ve Boylam 'den 2 kilometreden az olduğu belgeleri eşleştirin:
 
     geo.distance(Location, geography'POINT(-122.031577 47.578581)') lt 2.0
 
-Eşleşme belgeleri nerede `LastRenovationDate` alandır büyüktür veya eşittir 1 Ocak 2015'den itibaren gece yarısı UTC:
+`LastRenovationDate` alanın 1 Ocak 2015, gece yarısı UTC 'den büyük veya bu değere eşit olduğu belgeleri eşleştirin:
 
     LastRenovationDate ge 2015-01-01T00:00:00.000Z
 
-Eşleşme belgeleri nerede `Details/Sku` alan değil `null`:
+`Details/Sku` alanın `null`olmadığı belge eşleştir:
 
     Details/Sku ne null
 
-Belgeler için en az bir oda sahip olduğu türü "Deluxe odası", burada hotels eşleşen dizenin `Rooms/Type` alan filtre tam olarak eşleşen:
+En az bir odada "Deluxe Oda" türünde olduğu ve `Rooms/Type` alanının dizesinin filtreye tam olarak eşleştiği, otel için belge eşleştir:
 
     Rooms/any(room: room/Type eq 'Deluxe Room')
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
-- [Azure Search'te filtreler](search-filters.md)
-- [Azure Search için OData ifade dili genel bakış](query-odata-filter-orderby-syntax.md)
-- [Azure Search için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
-- [Search belgeleri &#40;Azure arama hizmeti REST API'si&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Azure Bilişsel Arama filtreler](search-filters.md)
+- [Azure Bilişsel Arama için OData ifade diline genel bakış](query-odata-filter-orderby-syntax.md)
+- [Azure Bilişsel Arama için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
+- [Belgeleri &#40;Azure Bilişsel Arama ara REST API&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)

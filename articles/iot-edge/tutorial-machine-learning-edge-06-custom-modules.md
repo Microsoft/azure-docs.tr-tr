@@ -1,102 +1,102 @@
 ---
-title: Özel modüller - Machine Learning, Azure IOT Edge üzerinde oluşturup | Microsoft Docs
-description: Oluşturun ve machine learning modeli aracılığıyla yaprak cihazlarından veri işlemek ve ardından IOT Hub'ına öngörüleri gönderin IOT Edge modüllerini dağıtmak.
+title: 'Öğretici: Azure IoT Edge üzerinde özel modüller oluşturma ve dağıtma-Machine Learning'
+description: 'Öğretici: bir makine öğrenimi modeli aracılığıyla yaprak cihazlardan verileri işleyen IoT Edge modülleri oluşturun ve dağıtın ve ardından öngörüleri IoT Hub gönderin.'
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 06/13/2019
+ms.date: 11/12/2019
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 6c4636fe370a4046b1c5020aee249529f1498639
-ms.sourcegitcommit: 1289f956f897786090166982a8b66f708c9deea1
+ms.openlocfilehash: 7bfe620510d5ff88a20c518be1f4dd1fb422daa2
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67155514"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74106556"
 ---
-# <a name="tutorial-create-and-deploy-custom-iot-edge-modules"></a>Öğretici: Oluşturma ve dağıtma özel IOT Edge modülleri
+# <a name="tutorial-create-and-deploy-custom-iot-edge-modules"></a>Öğretici: özel IoT Edge modüller oluşturma ve dağıtma
 
 > [!NOTE]
-> Bu makale bir serinin IOT Edge üzerinde Azure Machine Learning'i kullanma hakkında bir öğretici için parçasıdır. Bu makalede doğrudan gelmiş, başlangıç öneriyoruz [makaleyi](tutorial-machine-learning-edge-01-intro.md) serisindeki en iyi sonuçlar için.
+> Bu makale, IoT Edge Azure Machine Learning kullanımı hakkında öğretici için bir serinin bir parçasıdır. Bu makaleye doğrudan ulaşdıysanız, en iyi sonuçlar için serideki [ilk makaleyle](tutorial-machine-learning-edge-01-intro.md) başlamanızı öneririz.
 
-Bu makalede, yaprak cihazlardan ileti almak, machine learning modeli veri çalıştırın ve ardından IOT Hub'ına ınsights iletin üç IOT Edge modülleri oluşturuyoruz.
+Bu makalede, yaprak cihazlardan ileti alan üç IoT Edge modülü oluşturacağız, verileri Machine Learning modelinize aracılığıyla çalıştırır ve ardından öngörüleri IoT Hub iletebilirsiniz.
 
-IOT Edge hub'ı modül için modülü iletişimi kolaylaştırır. IOT Edge kullanarak hub'a bir ileti aracısı olarak modülleri birbirinden bağımsız tutar. Modüller yalnızca üzerinde iletileri ve bunlar iletileri yazma çıkışları kabul girişleri belirtmeniz gerekir.
+IoT Edge hub, modülü modül iletişimine kolaylaştırır. IoT Edge hub 'ı bir ileti Aracısı olarak kullanmak, modülleri birbirinden bağımsız olarak tutar. Modüller yalnızca üzerinde iletileri ve bunlar iletileri yazma çıkışları kabul girişleri belirtmeniz gerekir.
 
-Bizim için dört şeyler gerçekleştirmek için IOT Edge cihazı istiyoruz:
+IoT Edge cihazının bizimle ilgili dört şeyi yerine getirebilmemiz istiyoruz:
 
 * Yaprak cihazlardan veri alma
-* Veri gönderen bir cihaz için RUL tahmin edin
-* İletiyi yalnızca rul değerini hesaplaması için cihaz ile IOT Hub'ına gönderme (Bu işlev RUL bazı seviyenin altındaysa yalnızca veri gönderecek şekilde değiştirilmesi)
-* IOT Edge cihazı üzerindeki yerel bir dosyaya yaprak cihaz verilerini kaydedin. Bu veri dosyası, makine öğrenme modelinin eğitim iyileştirmek için dosya karşıya yükleme IOT Hub'ına düzenli olarak yüklenir. Karşıya dosya yükleme yerine sabit bir ileti akışıyla daha uygun maliyetlidir.
+* Verileri gönderen cihaz için kalan yararlı yaşam süresini (RUL) tahmin edin
+* IoT Hub cihaz için yalnızca RUL ile bir ileti gönderin (Bu işlev yalnızca RUL 'nin bir düzey altına düşerse verileri gönderecek şekilde değiştirilebilir)
+* Yaprak cihaz verilerini IoT Edge cihazdaki yerel bir dosyaya kaydedin. Bu veri dosyası, makine öğrenimi modelinin eğitimini iyileştirmek için dosya karşıya yükleme yoluyla düzenli aralıklarla IoT Hub yüklenir. Sabit ileti akışı yerine karşıya dosya yükleme kullanmak daha uygun maliyetli bir değerdir.
 
-Bu görevleri gerçekleştirmek için üç özel modüller kullanırız:
+Bu görevleri gerçekleştirmek için üç özel modül kullanıyoruz:
 
-* **RUL sınıflandırıcı:** Oluşturduğumuz turboFanRulClassifier Modülü [eğitme ve bir Azure Machine Learning modelini dağıtma](tutorial-machine-learning-edge-04-train-model.md) "amlInput" ve "amlOutput" adlı bir çıktı adlı giriş sunan bir standart machine learning modül. "amlInput" gibi tam olarak ACI tabanlı web hizmetine gönderdik girişi aramak için girdi bekliyor. Benzer şekilde, web hizmeti olarak aynı verileri "amlOutput" döndürür.
+* **Rul Sınıflandırıcısı:** [Azure Machine Learning modeli eğitme ve dağıtma](tutorial-machine-learning-edge-04-train-model.md) bölümünde oluşturduğumuz Turbofanrulsınıflandırıcı modülü, "amlInput" adlı bir girişi ve "amlOutput" adlı bir çıktıyı kullanıma sunan standart makine öğrenimi modülüdür. "AmlInput" girişinin, ACI tabanlı Web hizmetine gönderdiğimiz giriş gibi tam olarak görünmesini bekler. Benzer şekilde, "amlOutput", Web hizmetiyle aynı verileri döndürür.
 
-* **Avro Yazan:** Bu modül, "avroModuleInput" giriş iletileri alır ve daha sonra yüklemek için IOT hub'ı diske Avro biçiminde iletiyi almaya devam.
+* **Avro yazıcı:** Bu modül, "Avromoduleınput" girişinde iletileri alır ve daha sonra IoT Hub yüklemek için avro biçimindeki iletiyi diske devam ettirir.
 
-* **Yönlendirici Modülü:** Yönlendirici modülü aşağı akış yaprak cihazlarıyla iletileri alır, ardından biçimlendirir ve bir sınıflandırıcı iletileri gönderir. Modül bir sınıflandırıcı tanımından iletileri alır ve Avro yazıcı modülü iletiyi iletir. Son olarak, modül RUL tahmin yalnızca IOT Hub'ına gönderir.
+* **Yönlendirici modülü:** Yönlendirici modülü, aşağı akış yaprak cihazlarından iletileri alır, ardından iletileri sınıflandırıcılara biçimlendirir ve gönderir. Modül daha sonra sınıflandırıcıdan iletileri alır ve iletiyi avro Writer modülüne iletir. Son olarak, modül yalnızca IoT Hub RUL tahminini gönderir.
 
-  * Girişler:
-    * **deviceInput**: yaprak cihazlardan iletileri alır
-    * **rulInput:** "amlOutput" iletiler alır
+  * Girişi
+    * **Deviceınput**: yaprak cihazlardan iletileri alır
+    * **Rulınput:** "amlOutput" öğesinden iletileri alır
 
-  * Çıkışlar:
-    * **Sınıflandırma:** "amlInput" iletileri gönderir
-    * **writeAvro:** "avroModuleInput" iletileri gönderir
-    * **toIotHub:** iletileri bağlı IOT Hub'ına geçirir. $ Yukarı Akış, iletileri gönderir
+  * Çıkışı
+    * **sınıflandır:** Iletileri "amlInput" öğesine gönderir
+    * **writeAvro:** "Avromoduleınput" iletilerini gönderir
+    * **toIotHub:** iletileri bağlı IoT Hub ileten $upstream iletileri gönderir
 
-Aşağıdaki diyagramda, modüller, girişler, çıkışlar ve IOT Edge hub'ı yollar için tam çözüm gösterilmektedir:
+Aşağıdaki diyagramda, tam çözüm için modüller, girişler, çıktılar ve IoT Edge hub yolları gösterilmektedir:
 
-![IOT Edge üç modülleri mimarisi diyagramı](media/tutorial-machine-learning-edge-06-custom-modules/modules-diagram.png)
+![IoT Edge üç modül mimarisi diyagramı](media/tutorial-machine-learning-edge-06-custom-modules/modules-diagram.png)
 
-Bu makaledeki adımlarda, genellikle bir bulut geliştiricisi tarafından gerçekleştirilir.
+Bu makaledeki adımlar genellikle bir bulut geliştiricisi tarafından gerçekleştirilir.
 
-## <a name="create-a-new-iot-edge-solution"></a>Yeni bir IOT Edge çözümü oluşturun
+## <a name="create-a-new-iot-edge-solution"></a>Yeni bir IoT Edge çözümü oluşturun
 
-Bizim iki Azure not defterleri saniye yürütme sırasında oluşturulan ve yayımlanan RUL modelimizi içeren bir kapsayıcı görüntüsü. Parçaları görüntüyü Azure IOT Edge modülü olarak dağıtılabilir hale getirmek için yerleşik görüntü oluşturma işleminin bir parçası olarak Azure Machine Learning. Bu adımda, "Azure Machine Learning" modülü kullanarak bir Azure IOT Edge çözümü oluşturacaksınız ve modül Azure not defterlerini kullanarak yayımlanan resmin üzerine gelin.
+İki Azure Notebooks ikincisinin yürütülmesi sırasında, RUL modelimizi içeren bir kapsayıcı görüntüsü oluşturulup yayımladık. Azure Machine Learning, görüntü oluşturma sürecinin bir parçası olarak, görüntünün bir Azure IoT Edge modülü olarak dağıtılabilir olması için bu modelin paketlenmesi. Bu adımda, "Azure Machine Learning" modülünü kullanarak bir Azure IoT Edge çözümü oluşturacağız ve modülün Azure Notebooks kullanarak yayımladığımız görüntüye işaret eteceğiz.
 
-1. Geliştirme makinenize Uzak Masaüstü oturumu açın.
+1. Geliştirme makinenizde bir Uzak Masaüstü oturumu açın.
 
-2. Klasör Aç **C:\\kaynak\\IoTEdgeAndMlSample** Visual Studio code'da.
+2. **C:\\Source klasörünü açın\\ıotedgeandmlsample** Visual Studio Code.
 
-3. Explorer panelinde (boşluk) sağ tıklayın ve seçin **yeni IOT Edge çözüm**.
+3. Gezgin paneline (boş alanda) sağ tıklayın ve **yeni IoT Edge çözüm**' ü seçin.
 
-    ![Yeni bir IOT Edge çözümü oluşturun](media/tutorial-machine-learning-edge-06-custom-modules/new-edge-solution-command.png)
+    ![Yeni IoT Edge çözümü oluştur](media/tutorial-machine-learning-edge-06-custom-modules/new-edge-solution-command.png)
 
-4. Varsayılan çözüm adı kabul **EdgeSolution**.
+4. **EdgeSolution**varsayılan çözüm adını kabul edin.
 
-5. Seçin **Azure Machine Learning** modülü şablon olarak.
+5. Modül şablonu olarak **Azure Machine Learning** seçin.
 
-6. Modül adı **turbofanRulClassifier**.
+6. Modülün **Turbofanrulite sınıflandırıcısını**adlandırın.
 
-7. Machine learning çalışma alanı seçin.
+7. Machine Learning çalışma alanınızı seçin.
 
-8. Azure not defteri çalıştırılırken oluşturulan görüntüyü seçin.
+8. Azure Not defteri 'ni çalıştırırken oluşturduğunuz görüntüyü seçin.
 
-9. Söyleyin; çözüm arayın ve oluşturulan dosyaları dikkat edin:
+9. Çözüme bakın ve oluşturulan dosyalara dikkat edin:
 
-   * **Deployment.Template.JSON:** Bu dosya, her bir çözüm içindeki modül tanımını içerir. Bu dosyadaki dikkat edilmesi gereken üç bölüm bulunur:
+   * **Deployment. Template. JSON:** Bu dosya çözümdeki her bir modülün tanımını içerir. Bu dosyada dikkat etmeniz gereken üç bölüm vardır:
 
-     * **Kayıt defteri kimlik bilgileri:** Çözümünüzde kullanmakta olduğunuz özel kapsayıcı kayıt defterleri kümesini tanımlar. Sağ şimdi onu, machine learning çalışma alanı, kayıt defterinden Azure Machine Learning görüntünüzü saklandığı olduğu içermelidir. Herhangi bir sayıda kapsayıcı kayıt defterleri olabilir, ancak kolaylık olması için bu bir kayıt defteri tüm modüller için kullanacağız
+     * **Kayıt defteri kimlik bilgileri:** Çözümünüzde kullanmakta olduğunuz özel kapsayıcı kayıt defterleri kümesini tanımlar. Şimdi, Azure Machine Learning görüntünüzün depolandığı, Machine Learning çalışma alanınızdaki kayıt defterini içermesi gerekir. Herhangi bir sayıda kapsayıcı kayıt defterine sahip olabilirsiniz, ancak kolaylık sağlaması için bu kayıt defterini tüm modüller için kullanacağız
 
        ```json
        "registryCredentials": {
          "<your registry>": {
            "username": "$CONTAINER_REGISTRY_USERNAME_<your registry>",
            "password": "$CONTAINER_REGISTRY_PASSWORD_<your registry>",
-           "address": "<your registry>.azurecr.io”
+           "address": "<your registry>.azurecr.io"
          }
        }
        ```
 
-     * **Modüller:** Bu bölümde, bu çözüm ile Git kullanıcı tanımlı modülleri kümesini içerir. Bu bölümde şu anda iki modül içerdiğini görürsünüz: tempSensor ve turbofanRulClassifier. TempSensor Visual Studio Code şablon tarafından yüklendi, ancak bu çözüm için ihtiyacımız yok. TempSensor modül tanımı modülleri bölümünden silebilirsiniz. Görüntüyü kapsayıcı kayıt defterinizde turbofanRulClassifier modül tanımı işaret unutmayın. Daha fazla modülleri çözümü eklediğinizde, bu bölümde gösterilir.
+     * **Modüller:** Bu bölüm, bu çözümle birlikte gelen Kullanıcı tanımlı modüller kümesini içerir. Bu bölümün şu anda iki modül içerdiğini fark edeceksiniz: SimulatedTemperatureSensor ve Turbofanrulsınıflandırıcı. SimulatedTemperatureSensor Visual Studio Code şablonu tarafından yüklendi, ancak bu çözüm için bu çözüme ihtiyacım yok. Modüller bölümünden SimulatedTemperatureSensor Module tanımını silebilirsiniz. Turbofanrulsınıflandırıcı modül tanımının kapsayıcı kayıt defterinizde görüntüyü işaret ettiğini unutmayın. Çözüme daha fazla modül eklediğimiz için, bu bölümde görünür.
 
        ```json
        "modules": {
-         "tempSensor": {
+         "SimulatedTemperatureSensor": {
            "version": "1.0",
            "type": "docker",
            "status": "running",
@@ -119,7 +119,7 @@ Bizim iki Azure not defterleri saniye yürütme sırasında oluşturulan ve yay�
        }
        ```
 
-     * **Yollar:** biz rotalarla bir bit Bu öğreticide çalışacaksınız. Modüller birbirleri ile nasıl iletişim kuracağını yolları tanımlayın. Şablon tarafından tanımlanan iki rotalar ihtiyacımız yönlendirme ile eşleşmiyor. İlk rota, IOT Hub'ına (Yukarı Akış$) sınıflandırıcı çıktısından tüm verileri gönderir. Başka bir yolun yalnızca sildik tempSensor için ' dir. İki varsayılan yolları silin.
+     * **Rotalar:** Bu öğreticide yalnızca yollarla bir bit olacak şekilde çalışıyoruz. Rotalar modüllerin birbirleriyle nasıl iletişim kuracağını tanımlar. Şablon tarafından tanımlanan iki yol, gereksinimimiz yönlendirmeyle eşleşmiyor. İlk yol, sınıflandırıcının herhangi bir çıktısından tüm verileri IoT Hub ($upstream) gönderir. Diğer yol, az önce silintiğimiz SimulatedTemperatureSensor içindir. İki varsayılan yolu silin.
 
        ```json
        "$edgeHub": {
@@ -127,7 +127,7 @@ Bizim iki Azure not defterleri saniye yürütme sırasında oluşturulan ve yay�
            "schemaVersion": "1.0",
            "routes": {
              "turbofanRulClassifierToIoTHub": "FROM /messages/modules/turbofanRulClassifier/outputs/\* INTO $upstream",
-             "sensorToturbofanRulClassifier": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\\"/modules/turbofanRulClassifier/inputs/input1\\")"
+             "sensorToturbofanRulClassifier": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\\"/modules/turbofanRulClassifier/inputs/input1\\")"
            },
            "storeAndForwardConfiguration": {
              "timeToLiveSecs": 7200
@@ -136,61 +136,61 @@ Bizim iki Azure not defterleri saniye yürütme sırasında oluşturulan ve yay�
        }
        ```
 
-   * **Deployment.Debug.Template.JSON:** deployment.template.json hata ayıklama sürümünü bu dosyasıdır. Biz deployment.template.json gelen tüm değişiklikler bu dosyaya yansıması olmalıdır.
+   * **Deployment. Debug. Template. JSON:** bu dosya Deployment. Template. JSON öğesinin hata ayıklama sürümüdür. Dağıtım. Template. JSON dosyasındaki tüm değişiklikleri bu dosyaya yansıtmalıdır.
 
-   * **.env:** kullanıcı adı ve parola kayıt defterinizin erişmek için burada sağlamanız bu dosyasıdır.
+   * **. env:** bu dosya, Kayıt defterinize erişmek için Kullanıcı adını ve parolayı sağlamanız gereken yerdir.
 
       ```env
       CONTAINER_REGISTRY_USERNAME_<your registry name>=<ACR username>
       CONTAINER_REGISTRY_PASSWORD_<your registry name>=<ACR password>
       ```
 
-10. Visual Studio Code Gezgini'nde deployment.template.json dosyaya sağ tıklayın ve seçin **IOT Edge Çözümü Derle**.
+10. Visual Studio Code Explorer 'da Deployment. Template. JSON dosyasına sağ tıklayın ve **Build IoT Edge Solution**' ı seçin.
 
-11. Bu komut config klasörü deployment.amd64.json dosyasıyla oluşturduğunu görürsünüz. Bu çözüm için somut bir dağıtım şablonu dosyasıdır.
+11. Bu komutun bir Deployment. AMD64. JSON dosyası ile bir yapılandırma klasörü oluşturduğuna dikkat edin. Bu dosya, çözüm için somut dağıtım şablonudur.
 
-## <a name="add-router-module"></a>Yönlendirici modül Ekle
+## <a name="add-router-module"></a>Yönlendirici modülü Ekle
 
-Ardından, yönlendirici modülü çözüm ekleriz. Yönlendirici modülü Çözümümüzü için çeşitli sorumlulukları işler:
+Ardından, çözümümüze yönlendirici modülünü ekliyoruz. Yönlendirici modülü, çözümümüzde çeşitli sorumlulukları işler:
 
-* **Yaprak cihazlardan iletilerini:** yönlendirici modülü iletileri aşağı akış cihazlardan IOT Edge cihazına geldiğinde, iletiyi alır ve ileti yönlendirme işlemlerini başlar.
-* **RUL sınıflandırıcı modülü ileti gönderme:** bir aşağı akış CİHAZDAN yeni bir ileti alındığında, yönlendirici modülü ileti RUL sınıflandırıcı bekliyor biçimine dönüştürür. Yönlendirici RUL sınıflandırıcı RUL tahmin için ileti gönderir. Sınıflandırıcı tahmin yaptıktan sonra yeniden yönlendirici modülü iletiyi gönderir.
-* **RUL iletileri IOT Hub'ına gönderme:** yönlendirici bir sınıflandırıcı tanımından ileti aldığında, iletiyi yalnızca önemli bilgileri, cihaz kimliği ve RUL, içerecek şekilde dönüştürür ve IOT hub'ına kısaltılmış iletisi gönderir. Yalnızca RUL tahmin (örneğin 100'den az döngüleri RUL olduğunda) bir eşiğin altına düştüğünde size burada tamamlamadıysanız, bir diğer iyileştirme iletileri IOT hub'a gönderir. Bu şekilde filtreleme iletileri hacmini azaltmak ve IOT hub'ın maliyeti azaltmak.
-* **Avro yazıcı modülü ileti gönder:** aşağı akış cihaz tarafından gönderilen tüm verileri korumak için yönlendirici modülü kalıcı hale getirmek ve IOT hub'ı dosyasını kullanarak verileri karşıya Avro yazıcı modülü bir sınıflandırıcı tanımından alınan tüm ileti gönderir karşıya yükleyin.
+* **Yaprak cihazlardan Iletiler al:** iletiler, aşağı akış aygıtlarından IoT Edge cihaza ulaştığında, yönlendirici modülü iletiyi alır ve iletiyi yönlendirmeyi düzenlemeye başlar.
+* **Rul sınıflandırıcı modülüne Ileti gönderme:** bir aşağı akış aygıtından yeni bir ileti alındığında, yönlendirici modülü iletiyi rul sınıflandırıcının beklediği biçime dönüştürür. Yönlendirici, iletiyi RUL tahmini için RUL sınıflandırıcıya gönderir. Sınıflandırıcı bir tahmin yapıldıktan sonra iletiyi yönlendirici modülüne geri gönderir.
+* **IoT Hub için RUL Iletileri gönderme:** yönlendirici sınıflandırıcıdan ileti aldığında, iletiyi yalnızca önemli bilgileri, cihaz kimliğini ve rul 'yi içerecek şekilde dönüştürür ve kısaltılmış iletiyi IoT Hub 'ına gönderir. Burada yapmadığımız daha ileri bir iyileştirme, yalnızca RUL tahmini bir eşiğin altına düştüğünde (örneğin, RUL 100 döngüden az olduğunda) iletileri IoT Hub gönderir. Bu şekilde filtrelendiğinde, ileti hacmi azalır ve IoT Hub 'ının maliyeti azalır.
+* **Avro Writer modülüne Ileti gönderin:** aşağı akış cihazı tarafından gönderilen tüm verileri korumak Için, yönlendirici modülü sınıflandırıcıdan alınan Iletinin tamamını avro yazıcı modülüne gönderir ve bu, IoT Hub dosya yükleme kullanarak verileri devam ettirilecektir ve karşıya yükleyebilir.
 
 > [!NOTE]
-> Modül sorumlulukları açıklamasını sıralı görünen işleme kalmasına neden olabilir, ancak ileti/olay tabanlı akış olduğu. Bizim yönlendirici modülü gibi bir düzenleme modülü ihtiyacımız nedeni budur.
+> Modül sorumluluklarına ilişkin açıklama işlem sıralı görünebilir, ancak akış ileti/olay tabanlıdır. Bu nedenle, yönlendirici modülümüzü beğendiniz bir düzenleme modülüne ihtiyacımız var.
 
-### <a name="create-module-and-copy-files"></a>Modül ve kopyalama dosyaları oluşturma
+### <a name="create-module-and-copy-files"></a>Modül oluşturma ve dosyaları kopyalama
 
-1. Visual Studio code'da modüller klasörüne sağ tıklayın ve seçin **IOT Edge Modülü Ekle**.
+1. Visual Studio Code ' deki modüller klasörüne sağ tıklayın ve **IoT Edge modülü Ekle**' yi seçin.
 
-2. Seçin  **C# Modülü**.
+2. **C# Modül**seçin.
 
-3. Modül adı **turbofanRouter**.
+3. Modülün **Turbofanrouter**adını adlandırın.
 
-4. Docker görüntüsü deponuz için bir istem göründüğünde, machine learning çalışma alanına kayıt defterini kullanın (kayıt defteri registryCredentials düğümünde bulabilirsiniz, *deployment.template.json* dosyası). Bu değer tam kayıt defterine gibi adresidir  **\<kayıt defterinizin\>.azurecr.io/turbofanrouter**.
+4. Docker görüntü deponuz sorulduğunda, Machine Learning çalışma alanındaki kayıt defterini kullanın (kayıt defterini dağıtımınızın kayıt kimlik bilgileri düğümünde bulabilirsiniz *. Template. JSON* dosyası). Bu değer, kayıt **defterinizin\>. azurecr.io/turbofanrouter\<** gibi tam olarak nitelenmiş adresidir.
 
     > [!NOTE]
-    > Bu makalede, Azure Container Registry eğitmek ve bizim sınıflandırıcı dağıtmak için kullandığımız Azure Machine Learning hizmeti çalışma tarafından oluşturulan kullanırız. Bu, yalnızca kolaylık sağlamaya yöneliktir. Biz, yeni bir kapsayıcı kayıt defteri oluşturmuş olabileceğiniz ve yayımlanan bizim modüller vardır.
+    > Bu makalede, sınıflandırımızda eğitim ve dağıtım yapmak için kullandığımız Azure Machine Learning çalışma alanı tarafından oluşturulan Azure Container Registry kullanırız. Bu yalnızca kolaylık sağlaması içindir. Yeni bir kapsayıcı kayıt defteri oluşturup modüllerimizi burada yayımladık.
 
-5. Visual Studio Code'da yeni bir terminal penceresi açın (**görünümü** > **Terminal**) ve modülleri dizinden dosyaları kopyalayın.
+5. Visual Studio Code ( > **terminalini** **görüntüle** ) ' de yeni bir Terminal penceresi açın ve dosyaları modüller dizininden kopyalayın.
 
     ```cmd
     copy c:\source\IoTEdgeAndMlSample\EdgeModules\modules\turbofanRouter\*.cs c:\source\IoTEdgeAndMlSample\EdgeSolution\modules\turbofanRouter\
     ```
 
-6. Program.cs üzerine yazmak isteyip istemediğiniz sorulduğunda basın `y` ve ardından isabet `Enter`.
+6. Program.cs üzerine yazmak isteyip istemediğiniz sorulduğunda `y` tuşuna basın ve ardından `Enter`.
 
-### <a name="build-router-module"></a>Yönlendirici Modülü
+### <a name="build-router-module"></a>Derleme yönlendirici modülü
 
-1. Visual Studio Code'da seçin **Terminal** > **varsayılan derleme görevi'ni yapılandırma**.
+1. Visual Studio Code, **Terminal** > **varsayılan derleme görevini Yapılandır**' ı seçin.
 
-2. Tıklayarak **şablondan tasks.json dosyası oluştur**.
+2. **Şablondan Tasks. JSON dosyası oluştur**' a tıklayın.
 
-3. Tıklayarak **.NET Core**.
+3. **.NET Core**'a tıklayın.
 
-4. Tasks.JSON açıldığında içeriğiyle değiştirin:
+4. Tasks. JSON açıldığında içeriği şu şekilde değiştirin:
 
     ```json
     {
@@ -219,64 +219,64 @@ Ardından, yönlendirici modülü çözüm ekleriz. Yönlendirici modülü Çöz
     }
     ```
 
-5. Kaydet ve tasks.json kapatın.
+5. Tasks. JSON öğesini kaydedin ve kapatın.
 
-6. Birlikte çalışma derleme `Ctrl + Shift + B` veya **Terminal** > **derleme görevi Çalıştır**.
+6. Derlemeyi `Ctrl + Shift + B` veya **terminalle** çalıştırın > **derlemeyi Çalıştır görevi**.
 
-### <a name="set-up-module-routes"></a>Modül rotalar ayarlayabilir
+### <a name="set-up-module-routes"></a>Modül yollarını ayarlama
 
-Yukarıda belirtildiği gibi yapılandırılan yollar IOT Edge çalışma zamanı kullanan *deployment.template.json* modüller arasındaki iletişimi gevşek yönetmek için dosya eşleşmiş. Bu bölümde, biz turbofanRouter modülü için rotalar ayarlama konusunda ayrıntılı. Biz, giriş rotaları ilk kapsar ve çıktılar üzerinde taşıyın.
+Yukarıda belirtildiği gibi, IoT Edge çalışma zamanı, gevşek olarak bağlanmış modüller arasındaki iletişimi yönetmek için *Deployment. Template. JSON* dosyasında yapılandırılan yolları kullanır. Bu bölümde, turbofanRouter modülü için yolların nasıl ayarlandığına detaylanıyoruz. Önce giriş yollarını ele alacak ve ardından çıkışlar üzerinde taşınacak.
 
 #### <a name="inputs"></a>Girişler
 
-1. Program.cs dosyasının Init() yöntemi, biz modülü için iki geri aramaları kaydetme:
+1. Program.cs 'in Init () yönteminde, modül için iki geri çağırma kaydeder:
 
    ```csharp
    await ioTHubModuleClient.SetInputMessageHandlerAsync(EndpointNames.FromLeafDevice, LeafDeviceInputMessageHandler, ioTHubModuleClient);
    await ioTHubModuleClient.SetInputMessageHandlerAsync(EndpointNames.FromClassifier, ClassifierCallbackMessageHandler, ioTHubModuleClient);
    ```
 
-2. İlk geri gönderilen iletileri dinler **deviceInput** havuz. Yukarıdaki diyagramdan iletileri yönlendirmek için bu giriş için herhangi bir yaprak CİHAZDAN istediğimizi bakın. İçinde *deployment.template.json* turbofanRouter modüldeki bir IOT Edge modülü tarafından "deviceInput" adlı giriş gönderilmedi IOT Edge cihazı tarafından alınan herhangi bir ileti yönlendirmek için edge hub'ı belirten bir rota ekleyin:
+2. İlk geri çağırma, **Deviceınput** havuzuna gönderilen iletileri dinler. Yukarıdaki diyagramdan, herhangi bir yaprak cihazdan iletileri bu girişe yönlendirmek istediğdiğimiz görüyoruz. *Deployment. Template. JSON* dosyasında, Edge hub 'ına, bir IoT Edge modülü tarafından alınan IoT Edge cihaz tarafından alınan herhangi bir Iletiyi, turbofanRouter modülünde "deviceınput" adlı girişe yönlendirmeye yönlendiren bir yol ekleyin:
 
    ```json
    "leafMessagesToRouter": "FROM /messages/* WHERE NOT IS_DEFINED($connectionModuleId) INTO BrokeredEndpoint(\"/modules/turbofanRouter/inputs/deviceInput\")"
    ```
 
-3. Sonraki iletiler için bir rota rulClassifier modülünden turbofanRouter modülünü ekleyin:
+3. Ardından, Rulsınıflandırıcı modülünden turbofanRouter modülüne iletiler için bir yol ekleyin:
 
    ```json
-   "classifierToRouter": "FROM /messages/modules/classifier/outputs/amloutput INTO BrokeredEndpoint(\"/modules/turbofanRouter/inputs/rulInput\")"
+   "classifierToRouter": "FROM /messages/modules/turbofanRulClassifier/outputs/amloutput INTO BrokeredEndpoint(\"/modules/turbofanRouter/inputs/rulInput\")"
    ```
 
 #### <a name="outputs"></a>Çıkışlar
 
-Dört ek yolları yönlendirici modül çıkışları işlemek için $edgeHub rota parametresi ekleyin.
+Yönlendirici modülündeki çıkışları işlemek için $edgeHub Route parametresine dört ek yol ekleyin.
 
-1. Program.cs modülü istemci yol kullanılarak RUL sınıflandırıcı ileti göndermek için kullandığı SendMessageToClassifier() yöntemi tanımlar:
+1. Program.cs, yolu kullanarak RUL sınıflandırıcısına ileti göndermek için modül istemcisini kullanan Sendmessagetosınıflandırıcı () yöntemini tanımlar.
 
    ```json
-   "routerToClassifier": "FROM /messages/modules/turbofanRouter/outputs/classOutput INTO BrokeredEndpoint(\"/modules/classifier/inputs/amlInput\")"
+   "routerToClassifier": "FROM /messages/modules/turbofanRouter/outputs/classOutput INTO BrokeredEndpoint(\"/modules/turbofanRulClassifier/inputs/amlInput\")"
    ```
 
-2. SendRulMessageToIotHub() modülü istemci rota aracılığıyla IOT hub'ına cihaz için yalnızca RUL veri göndermek için kullanır:
+2. SendRulMessageToIotHub (), yönlendirme yoluyla IoT Hub cihaz için yalnızca RUL verisini göndermek üzere modül istemcisini kullanır:
 
    ```json
    "routerToIoTHub": "FROM /messages/modules/turboFanRouter/outputs/hubOutput INTO $upstream"
    ```
 
-3. SendMessageToAvroWriter() modülü istemci avroFileWriter modülüne eklenen RUL verilerle ileti göndermek için kullanır.
+3. SendMessageToAvroWriter (), iletisini avroFileWriter modülüne eklenen RUL verileriyle birlikte göndermek için modül istemcisini kullanır.
 
    ```json
    "routerToAvro": "FROM /messages/modules/turbofanRouter/outputs/avroOutput INTO BrokeredEndpoint(\"/modules/avroFileWriter/inputs/avroModuleInput\")"
    ```
 
-4. HandleBadMessage() nerede bunlar daha sonra kullanmak üzere yönlendirilebilir IOT Hub başarısız yukarı akışla iletiler gönderir.
+4. HandleBadMessage () başarısız iletileri daha sonra yönlendirilebileceği IoT Hub yukarı akış gönderir.
 
    ```json
    "deadLetter": "FROM /messages/modules/turboFanRouter/outputs/deadMessages INTO $upstream"
    ```
 
-Birlikte, "$edgeHub" geçen tüm yollar ile düğümü aşağıdaki JSON gibi görünmelidir:
+Tüm yolların birlikte ele alınması, "$edgeHub" düğümünüz aşağıdaki JSON gibi görünmelidir:
 
 ```json
 "$edgeHub": {
@@ -298,92 +298,92 @@ Birlikte, "$edgeHub" geçen tüm yollar ile düğümü aşağıdaki JSON gibi g�
 ```
 
 > [!NOTE]
-> Aşağıdaki ek yol oluşturulan turbofanRouter modülü ekleme: `turbofanRouterToIoTHub": "FROM /messages/modules/turbofanRouter/outputs/* INTO $upstream`. Bu rota kaldırmak için yalnızca yolları bırakarak deployment.template.json dosyanızda yukarıdaki.
+> TurbofanRouter modülünü eklemek şu ek yol oluşturdu: `turbofanRouterToIoTHub": "FROM /messages/modules/turbofanRouter/outputs/* INTO $upstream`. Yalnızca dağıtım. Template. JSON dosyanızda yukarıda listelenen yolları bırakarak bu rotayı kaldırın.
 
-#### <a name="copy-routes-to-deploymentdebugtemplatejson"></a>Deployment.debug.template.json kopyalama yolları
+#### <a name="copy-routes-to-deploymentdebugtemplatejson"></a>Yolları dağıtıma Kopyala. Debug. Template. JSON
 
-Son adım olarak, bizim dosyaları eşitlenmiş şekilde tutmanızı sağlayacak deployment.template.json deployment.debug.template.json içinde yapılan değişiklikleri yansıtır.
+Son bir adım olarak, dosyalarınızı eşitlenmiş halde tutmak için, Deployment. Debug. JSON içinde Deployment. Template. json dosyasında yaptığınız değişiklikleri yansıtın.
 
-## <a name="add-avro-writer-module"></a>Avro yazıcı Modülü Ekle
+## <a name="add-avro-writer-module"></a>Avro Writer modülü Ekle
 
-Avro yazıcı modülü iletileri depolamak ve dosyaları karşıya yüklemek için sunduğumuz çözümde iki sorumlulukları vardır.
+Avro yazıcı modülünün,, iletileri depolamak ve dosyaları karşıya yüklemek için çözümümüzde iki sorumluluğu vardır.
 
-* **Store iletileri**: Avro yazıcı modülü ileti aldığında, iletiyi Avro biçimi yerel dosya sisteminde yazar. Bir dizini (büyük/küçük harf bu /data/avrofiles) bir modülün kapsayıcı yoluna bağlar bağlama bağlama kullanırız. Bu bağlama için yerel bir yol yazmak modül sağlar (/ avrofiles) ve bu dosyaların doğrudan IOT Edge CİHAZDAN erişilebilir.
+* **Mağaza iletileri**: avro yazıcı modülü bir ileti aldığında, iletiyi avro biçimindeki yerel dosya sistemine yazar. Bir dizin (Bu durumda/Data/avrofiles) modülün kapsayıcısındaki bir yola bağlayan bir bağlama bağlama kullanıyoruz. Bu bağlama, modülün bir yerel yola (/avrofiles) yazmasını ve bu dosyaların doğrudan IoT Edge cihazdan erişilebilir olmasını sağlar.
 
-* **Dosyaları karşıya yükleme**: bir Azure depolama hesabına dosya yüklemek için Azure IOT hub'ı karşıya dosya yükleme özelliğiyle Avro yazıcı modülü kullanır. Dosya başarıyla karşıya yüklendikten sonra modülü dosyayı diskten siler.
+* **Karşıya dosya yükleme**: avro Writer modülü, Azure depolama hesabına dosya yüklemek için Azure IoT Hub dosya karşıya yükleme özelliğini kullanır. Bir dosya başarıyla karşıya yüklendikten sonra Modül dosyayı diskten siler
 
-### <a name="create-module-and-copy-files"></a>Modül ve kopyalama dosyaları oluşturma
+### <a name="create-module-and-copy-files"></a>Modül oluşturma ve dosyaları kopyalama
 
-1. Komut paletini içinde arayın ve ardından seçin **Python: Yorumlayıcıyı seçme**.
+1. Komut paletinde, öğesini arayın ve **Python: yorumlayıcı Seç**' i seçin.
 
-1. C: bulunan yorumlayıcı seçin\\Python37.
+1. C:\\Python37 içinde bulunan yorumlayıcı seçin.
 
-1. Yeniden komut paletini açın ve arayın ve ardından seçin **Terminal: Varsayılan kabuğunu seçin**.
+1. Komut paletini tekrar açın ve sonra da **Terminal seçin: varsayılan kabuğu seçin**.
 
-1. İstendiğinde, **komut istemi**.
+1. İstendiğinde, **komut istemi**' ni seçin.
 
-1. Yeni bir terminal kabuğunu açın **Terminal** > **yeni Terminal**.
+1. Yeni bir Terminal kabuğu açın, **terminal** > **yeni Terminal**.
 
-1. Visual Studio code'da modüller klasörüne sağ tıklayın ve seçin **IOT Edge Modülü Ekle**.
+1. Visual Studio Code ' deki modüller klasörüne sağ tıklayın ve **IoT Edge modülü Ekle**' yi seçin.
 
 1. **Python Modülü**'nü seçin.
 
-1. ' % S'modülü "avroFileWriter" olarak adlandırın.
+1. "AvroFileWriter" modülünü adlandırın.
 
-1. Docker görüntüsü deponuz için bir istem göründüğünde, aynı kayıt defteri, yönlendirici modülü eklerken kullanılan kullanın.
+1. Docker görüntü deponuz sorulduğunda, yönlendirici modülünü eklerken kullandığınız kayıt defterini kullanın.
 
-1. Dosyaları örnek modülünden çözümün içine kopyalayın.
+1. Dosyaları örnek modülünden çözüme kopyalayın.
 
    ```cmd
    copy C:\source\IoTEdgeAndMlSample\EdgeModules\modules\avroFileWriter\*.py C:\source\IoTEdgeAndMlSample\EdgeSolution\modules\avroFileWriter\
    ```
 
-1. Main.PY üzerine istenirse türü `y` ve ardından isabet `Enter`.
+1. Main.py üzerine yazmak isteyip istemediğiniz sorulursa `y` yazın ve sonra `Enter`vurun.
 
-1. Filemanager.PY ve schema.py çözüme eklenmiş ve güncelleştirilmiş main.py dikkat edin.
+1. Çözüme filemanager.py ve schema.py eklendiğini ve main.py güncelleştirildiğini unutmayın.
 
 > [!NOTE]
-> Bir Python dosyası açtığınızda pylint yüklemeniz istenebilir. Bu öğreticiyi tamamlamak için lint yüklemeniz gerekmez.
+> Bir Python dosyası açtığınızda, pylint ' i yüklemek isteyip istemediğiniz sorulabilir. Bu öğreticiyi tamamlayabilmeniz için nter yüklemeniz gerekmez.
 
 ### <a name="bind-mount-for-data-files"></a>Veri dosyaları için bağlama bağlama
 
-Giriş belirtildiği gibi cihazın dosya sistemine Avro dosyalarını yazmak için bağlama bağlama varlığını yazıcı modülü kullanır.
+Giriş bölümünde belirtildiği gibi, yazıcı modülü, avro dosyalarını cihazın dosya sistemine yazmak için bağlama bağlama varlığını kullanır.
 
-#### <a name="add-directory-to-device"></a>Cihaz için Dizin Ekle
+#### <a name="add-directory-to-device"></a>Cihaza Dizin Ekle
 
-1. IOT Edge cihazınıza VM bağlanmak SSH kullanarak.
+1. SSH kullanarak IoT Edge cihaz sanal makinesine bağlanın.
 
    ```bash
    ssh -l <user>@IoTEdge-<extension>.<region>.cloudapp.azure.com
    ```
 
-2. Kaydedilen yaprak cihaz iletileri tutar dizini oluşturun.
+2. Kayıtlı yaprak cihaz iletilerini tutacak dizini oluşturun.
 
    ```bash
    sudo mkdir -p /data/avrofiles
    ```
 
-3. Kapsayıcı tarafından yazılabilir yapmak için dizin izinlerini güncelleştirin.
+3. Kapsayıcı tarafından yazılabilir hale getirmek için dizin izinlerini güncelleştirin.
 
    ```bash
    sudo chmod ugo+rw /data/avrofiles
    ```
 
-4. Dizini doğrulama artık kullanıcı, Grup ve sahibi için yazma (w) izni vardır.
+4. Dizinin artık Kullanıcı, Grup ve sahip için yazma (w) iznine sahip olduğunu doğrulayın.
 
    ```bash
    ls -la /data
    ```
 
-   ![Dizin izinlerini avrofiles](media/tutorial-machine-learning-edge-06-custom-modules/avrofiles-directory-permissions.png)
+   ![Avrofiles için dizin izinleri](media/tutorial-machine-learning-edge-06-custom-modules/avrofiles-directory-permissions.png)
 
-#### <a name="add-directory-to-the-module"></a>Dizin Modülü Ekle
+#### <a name="add-directory-to-the-module"></a>Modüle dizin ekleme
 
-Modülün kapsayıcıya dizine eklemek için avroFileWriter modülle ilişkili dockerfile'ları değiştirir. Üç dockerfile'ları modülle ilişkili vardır: Dockerfile.AMD64 Dockerfile.amd64.debug ve Dockerfile.arm32v7. Hata ayıklama veya arm32 cihazına dağıtmak istediğimiz durumunda, bu dosyaları eşitlenmiş durumda tutulmalıdır. Bu makalede, yalnızca Dockerfile.amd64 üzerinde odaklanın.
+Dizini modülün kapsayıcısına eklemek için, avroFileWriter modülüyle ilişkili Dockerfiles 'ı değiştireeceğiz. Modülle ilişkili üç Dockerfiles vardır: Dockerfile. amd64, Dockerfile. AMD64. Debug ve Dockerfile. arm32v7. Bu dosyalar, hata ayıklamak veya bir ARM32 cihazına dağıtmak istediğimiz durumda eşitlenmiş durumda tutulmalıdır. Bu makalede yalnızca Dockerfile. amd64 üzerine odaklanırsınız.
 
-1. Geliştirme makinenizde açın **Dockerfile.amd64** dosya.
+1. Geliştirme makinenizde **Dockerfile. amd64** dosyasını açın.
 
-2. Dosya, aşağıdaki örneğe benzer görünür olacak şekilde değiştirin:
+2. Dosyayı aşağıdaki örnekte olduğu gibi görünecek şekilde değiştirin:
 
    ```dockerfile
    FROM ubuntu:xenial
@@ -406,17 +406,17 @@ Modülün kapsayıcıya dizine eklemek için avroFileWriter modülle ilişkili d
    CMD [ "python3", "-u", "./main.py" ]
    ```
 
-   `mkdir` Ve `chown` komutları /avrofiles görüntüde adlı en üst düzey bir dizin oluşturmak için Docker derleme işlemi isteyin ve ardından moduleuser bu dizine sahibi olmak için. Modülü kullanıcı ile görüntüsüne eklendikten sonra bu komutlar eklenen önemlidir `useradd` komutunu ve bağlam anahtarlara moduleuser (kullanıcı moduleuser) önce.
+   `mkdir` ve `chown` komutları Docker Build işlemine, görüntüde/avrofiles adlı bir üst düzey dizin oluşturulmasını ve ardından moduleuser öğesinin bu dizinin sahibi olmasını sağlar. Bu komutların, modül kullanıcısı `useradd` komutuyla görüntüye eklendikten ve bağlam moduleuser 'a (Kullanıcı moduleuser) geçmeden önce eklenmesi önemlidir.
 
-3. Dockerfile.amd64.debug ve Dockerfile.arm32v7 karşılık gelen değişiklikleri yapın.
+3. Dockerfile. AMD64. Debug ve Dockerfile. arm32v7 üzerinde ilgili değişiklikleri yapın.
 
-#### <a name="update-the-module-configuration"></a>Modül yapılandırması güncelleştirme
+#### <a name="update-the-module-configuration"></a>Modül yapılandırmasını güncelleştirme
 
-Bağlama oluşturmanın son deployment.template.json (ve deployment.debug.template.json) dosyaları ile bağlama bilgileri güncelleştirmek için adımdır.
+Bağlamayı oluşturmanın son adımı, Deployment. Template. JSON (ve Deployment. JSON) dosyalarını bağlama bilgileriyle güncelleştirmedir.
 
-1. Deployment.Template.JSON açın.
+1. Deployment. Template. JSON öğesini açın.
 
-2. Modül tanımı avroFileWriter ekleyerek değiştirin `Binds` kapsayıcı dizini /avrofiles sınır cihazı yerel dizine işaret eden bir parametre. Modül tanımınızı şu örnekle eşleşmelidir:
+2. /Avrofiles kapsayıcı dizinini uç cihazdaki yerel dizine gösteren `Binds` parametresini ekleyerek avroFileWriter için modül tanımını değiştirin. Modül tanımınız şu örnekle eşleşmelidir:
 
    ```json
    "avroFileWriter": {
@@ -437,39 +437,39 @@ Bağlama oluşturmanın son deployment.template.json (ve deployment.debug.templa
    }
    ```
 
-3. Deployment.debug.template.json için karşılık gelen değişiklikleri yapın.
+3. Dağıtım. Debug. Template. JSON öğesine karşılık gelen değişiklikleri yapın.
 
-### <a name="bind-mount-for-access-to-configyaml"></a>Erişim için bağlama için config.yaml bağlama
+### <a name="bind-mount-for-access-to-configyaml"></a>Config. YAML erişimi için bağlama bağlama
 
-Yazıcı modülü için bir daha fazla bağlama eklemek ihtiyacımız var. Bu bağlama modülü IOT Edge cihazı /etc/iotedge/config.yaml dosyasından bağlantı dizesini okuma erişimi sağlar. Bir sı: Iothubclient oluşturun, böylece karşıya yükleme diyoruz için bağlantı dizesi ihtiyacımız\_blob\_IOT hub'ına dosyaları karşıya yüklemek için zaman uyumsuz yöntem. Bu bağlama eklemek için adımları, önceki bölümde olanlara benzerdir.
+Yazıcı modülü için bir bağlama daha eklememiz gerekiyor. Bu bağ, IoT Edge cihazında/etc/iotedge/config.exe dosyasından bağlantı dizesini okumak için modüle erişim sağlar. Dosyaları IoT Hub 'a yüklemek için\_blob\_zaman uyumsuz yöntemini çağırabilmemiz için bir ıothubclient oluşturmak üzere bağlantı dizesine ihtiyacımız var. Bu bağlamayı ekleme adımları, önceki bölümde yer aldığı olanlarla benzerdir.
 
-#### <a name="update-directory-permission"></a>Dizin izni güncelleştir
+#### <a name="update-directory-permission"></a>Dizin izinlerini Güncelleştir
 
-1. IOT Edge cihazınıza SSH kullanarak bağlanın.
+1. SSH kullanarak IoT Edge cihazınıza bağlanın.
 
    ```bash
    ssh -l <user>@IoTEdge-<extension>.<region>.cloudapp.azure.com
    ```
 
-2. Okuma izni config.yaml dosyaya ekleyin.
+2. Config. YAML dosyasına okuma izni ekleyin.
 
    ```bash
    sudo chmod +r /etc/iotedge/config.yaml
    ```
 
-3. Doğrulama izinlerin doğru ayarlandığını.
+3. İzinlerin doğru şekilde ayarlandığını doğrulayın.
 
    ```bash
    ls -la /etc/iotedge/
    ```
 
-4. Config.yaml izinleri olduğundan emin olun **- r--r--r--** .
+4. Config. YAML izinlerinin **-r--r--r--** olduğundan emin olun.
 
-#### <a name="add-directory-to-module"></a>Modül için Dizin Ekle
+#### <a name="add-directory-to-module"></a>Modüle Dizin Ekle
 
-1. Geliştirme makinenizde açın **Dockerfile.amd64** dosya.
+1. Geliştirme makinenizde **Dockerfile. amd64** dosyasını açın.
 
-2. Ek Ekle `mkdir` ve `chown` dosyaya kadar diğer bir deyişle gibi görünüyor komutları:
+2. Aşağıdaki gibi görünmesi için dosyaya ek bir `mkdir` ve `chown` komut kümesi ekleyin:
 
    ```dockerfile
    FROM ubuntu:xenial
@@ -494,13 +494,13 @@ Yazıcı modülü için bir daha fazla bağlama eklemek ihtiyacımız var. Bu ba
    CMD "python3", "-u", "./main.py"]
    ```
 
-3. Dockerfile.amd64.debug ve Dockerfile.arm32v7 karşılık gelen değişiklikleri yapın.
+3. Dockerfile. AMD64. Debug ve Dockerfile. arm32v7 üzerinde ilgili değişiklikleri yapın.
 
-#### <a name="update-the-module-configuration"></a>Modül yapılandırması güncelleştirme
+#### <a name="update-the-module-configuration"></a>Modül yapılandırmasını güncelleştirme
 
-1. Açık **deployment.template.json** dosya.
+1. **Deployment. Template. JSON** dosyasını açın.
 
-2. İkinci bir satıra ekleyerek avroFileWriter modül tanımını değiştirme `Binds` (/ etc/iotedge) cihazda yerel dizin kapsayıcı dizini (/ uygulama/iotconfig) işaret eden bir parametre.
+2. Kapsayıcı dizinini (/App/iotconfig) cihazdaki yerel dizine (/etc/iotedge) işaret eden `Binds` parametresine ikinci bir satır ekleyerek avroFileWriter için modül tanımını değiştirin.
 
    ```json
    "avroFileWriter": {
@@ -522,22 +522,22 @@ Yazıcı modülü için bir daha fazla bağlama eklemek ihtiyacımız var. Bu ba
    }
    ```
 
-3. Deployment.debug.template.json için karşılık gelen değişiklikleri yapın.
+3. Dağıtım. Debug. Template. JSON öğesine karşılık gelen değişiklikleri yapın.
 
 ## <a name="install-dependencies"></a>Bağımlılıkları yükleme
 
-Yazıcı modülü bir bağımlılık iki Python kitaplıkları, fastavro ve PyYAML alır. Biz geliştirme makinemizi bağımlılıkları yükler ve Docker yapı işlemi bunları bizim modülün görüntüsüne yükleyip istemeniz gerekir.
+Yazıcı modülü, fastavro ve PyYAML olmak üzere iki Python kitaplığı bağımlılığı alır. Geliştirme makinemizdeki bağımlılıkları yüklememiz ve Docker Build işlemini modülün görüntüsüne yüklemesi gerekir.
 
 ### <a name="pyyaml"></a>PyYAML
 
-1. Geliştirme makinenizde açın **requirements.txt** dosya ve pyyaml ekleyin.
+1. Geliştirme makinenizde, **requirements. txt** dosyasını açın ve pyyaml ekleyin.
 
    ```txt
    azure-iothub-device-client~=1.4.3
    pyyaml
    ```
 
-2. Açık **Dockerfile.amd64** dosya ve ekleme bir `pip install` setuptools yükseltmek komutu.
+2. Setuptools 'ı yükseltmek için **Dockerfile. amd64** dosyasını açın ve bir `pip install` komutu ekleyin.
 
    ```dockerfile
    FROM ubuntu:xenial
@@ -563,17 +563,17 @@ Yazıcı modülü bir bağımlılık iki Python kitaplıkları, fastavro ve PyYA
    CMD [ "python3", "-u", "./main.py" ]
    ```
 
-3. Dockerfile.amd64.debug için karşılık gelen değişiklikleri yapın. <!--may not be necessary. Add 'if needed'?-->
+3. Dockerfile. AMD64. Debug üzerinde ilgili değişiklikleri yapın. <!--may not be necessary. Add 'if needed'?-->
 
-4. Visual Studio Code'da bir terminal açıp yazarak pyyaml yerel olarak yükle
+4. Visual Studio Code ' de bir Terminal açıp ve yazarak pyyaml 'yi yerel olarak yükleyip
 
    ```cmd
    pip install pyyaml
    ```
 
-### <a name="fastavro"></a>Fastavro
+### <a name="fastavro"></a>Fastavro dili
 
-1. Requirements.txt içinde fastavro pyyaml sonra ekleyin.
+1. Requirements. txt dosyasında pyyaml sonrasında fastavro ekleyin.
 
    ```txt
    azure-iothub-device-client~=1.4.3
@@ -581,52 +581,52 @@ Yazıcı modülü bir bağımlılık iki Python kitaplıkları, fastavro ve PyYA
    fastavro
    ```
 
-2. Fastavro terminal Visual Studio Code kullanarak, geliştirme makinenize yükleyin.
+2. Visual Studio Code terminalini kullanarak fastavro 'yi geliştirme makinenize yüklemeyin.
 
    ```cmd
    pip install fastavro
    ```
 
-## <a name="reconfigure-iot-hub"></a>IOT hub'ı yeniden yapılandırın
+## <a name="reconfigure-iot-hub"></a>IoT Hub yeniden yapılandırın
 
-IOT Edge cihazı ve modülleri sisteme sunarak hangi veriler gönderilir, hub'ına ve hangi amaçla ilgili bizim beklentileri değiştirdik. Hub'ında yeni bizim gerçeklik ile dağıtılacak yönlendirme yeniden yapılandırmanız gerekir.
+IoT Edge cihaz ve modüllerle sisteme bakarak, hub 'a hangi verilerin gönderileceği hakkında beklentilerimizi ve hangi amaçla değiştirildiğini değiştirdik. Yeni gerçeklik ile başa çıkmak için hub 'daki yönlendirmeyi yeniden yapılandırmamız gerekiyor.
 
 > [!NOTE]
-> Biz hub bazı hub ayarlar, özellikle dosya karşıya yükleme için düzgün çalışması için avroFileWriter modülü için doğru ayarlanmış olması gerekir, modülleri dağıtmadan önce yeniden yapılandırın
+> Yönetim ayarları, özellikle dosya karşıya yükleme, avroFileWriter modülünün doğru şekilde çalışması için doğru şekilde ayarlanması gerektiğinden, modüller dağıtılmadan önce hub 'ı yeniden yapılandıracağız
 
-### <a name="set-up-route-for-rul-messages-in-iot-hub"></a>IOT hub'ında RUL iletileri için rota ayarlama
+### <a name="set-up-route-for-rul-messages-in-iot-hub"></a>IoT Hub RUL iletileri için rota ayarlama
 
-Yönlendirici ve yerinde sınıflandırıcı yalnızca cihaz kimliği ve cihaz için RUL tahmin içeren normal iletileri almak isteriz. Burada cihazların durumunu izlemek, raporlar ve uyarılar gerektiğinde harekete kendi depolama konumuna RUL verileri yönlendirmek istiyoruz. Aynı zamanda, doğrudan henüz geçerli depolama konuma yönlendirmek devam etmek için sunduğumuz IOT Edge cihazına eklenmemiş bir yaprak cihaz tarafından hala gönderilen herhangi bir cihaza veri istiyoruz.
+Yönlendirici ve sınıflandırıcıda, yalnızca cihaz KIMLIĞI ve cihaz için RUL tahmini içeren normal iletiler almayı bekledik. RUL verilerini, cihazların durumunu izleyebilmemiz, raporlar derleyebilir ve gerektiğinde uyarı tetikliyoruz. Aynı zamanda, geçerli depolama konumuna yönlendirmeye devam etmek için IoT Edge cihazımızı henüz eklenmemiş bir yaprak cihaz tarafından doğrudan gönderilen cihaz verilerinin olmasını istiyoruz.
 
-#### <a name="create-a-rul-message-route"></a>RUL ileti yönlendirme oluşturma
+#### <a name="create-a-rul-message-route"></a>RUL ileti yolu oluşturma
 
-1. Azure portalında, IOT Hub'ınıza gidin.
+1. Azure portal IoT Hub gidin.
 
-2. Sol gezinti bölmesinden seçin **ileti yönlendirme**.
+2. Sol gezinmede **ileti yönlendirme**' yi seçin.
 
 3. **Add (Ekle)** seçeneğini belirleyin.
 
-4. Rota adı **RulMessageRoute**.
+4. Yol **Rulmessageroute**adını adlandırın.
 
-5. Seçin **Ekle** yanındaki **uç nokta** Seçici ve **Blob Depolama**.
+5. **Uç nokta** seçicisinin yanındaki **Ekle** ' yi seçin ve **BLOB depolama**' yı seçin.
 
-6. İçinde **depolama uç noktası ekleme** formunda, uç nokta adı **ruldata**.
+6. **Depolama uç noktası Ekle** formunda, uç nokta **rulı verilerini**adlandırın.
 
-7. Seçin **bir kapsayıcı seçin**.
+7. **Kapsayıcı Seç**' i seçin.
 
-8. Gibi adlı Bu öğretici boyunca kullanılan depolama hesabı seçin **iotedgeandml\<benzersiz soneki\>** .
+8. Bu öğreticide kullanılan, **ıotedgeandml\<benzersiz sonek\>** gibi adlandırılan depolama hesabını seçin.
 
-9. Seçin **ruldata** kapsayıcı ve tıklatın **seçin**.
+9. **Ruldata** kapsayıcısını seçin ve **Seç**' e tıklayın.
 
-10. Tıklayın **Oluştur** depolama uç noktayı oluşturun.
+10. Depolama uç noktası oluşturmak için **Oluştur** ' a tıklayın.
 
-11. İçin **yönlendirme sorgu**, aşağıdaki sorguyu girin:
+11. **Yönlendirme sorgusu**için aşağıdaki sorguyu girin:
 
     ```sql
     IS_DEFINED($body.PredictedRul) AND NOT IS_DEFINED($body.OperationalSetting1)
     ```
 
-12. Genişletin **Test** bölümüne ve ardından **ileti gövdesi** bölümü. İleti, beklenen iletilerle Bu örnekle değiştirin:
+12. **Test** bölümünü ve ardından **ileti gövdesi** bölümünü genişletin. İletiyi beklenen iletilerimizin bu örneği ile değiştirin:
 
     ```json
     {
@@ -637,25 +637,25 @@ Yönlendirici ve yerinde sınıflandırıcı yalnızca cihaz kimliği ve cihaz i
     }
     ```
 
-13. Seçin **Test rota**. Test başarılı olursa, "ileti sorguyu eşleşmedi." konusuna bakın
+13. **Test rotası**seçin. Sınama başarılı olursa "ileti sorguyla eşleşti." iletisini görürsünüz.
 
 14. **Kaydet**’e tıklayın.
 
-#### <a name="update-turbofandevicetostorage-route"></a>Güncelleştirme turbofanDeviceToStorage yol
+#### <a name="update-turbofandevicetostorage-route"></a>TurbofanDeviceToStorage yolunu Güncelleştir
 
-Biz istemediğiniz yeni tahmin veri bizim eski depolama konumuna yönlendirme, bu nedenle, önlemek için rota güncelleştirme.
+Yeni tahmin verilerini eski depolama konumumuza yönlendirmek istemiyorum, bu nedenle yolu engellemek için yeniden güncelleştirin.
 
-1. IOT hub'ında **ileti yönlendirme** sayfasında **yollar** sekmesi.
+1. **İleti yönlendirme** IoT Hub sayfasında, **rotalar** sekmesini seçin.
 
-2. Seçin **turbofanDeviceDataToStorage**, veya örneğin adı, ilk cihaz verileri yönlendirmek için verdiğiniz.
+2. **Turbofandevicedatatostorage**' ı veya ilk cihaz veri yönlendirmenize verdiğiniz adı seçin.
 
-3. Yönlendirme sorgusu güncelleştir
+3. Yönlendirme sorgusunu güncelleştirme
 
    ```sql
    IS_DEFINED($body.OperationalSetting1)
    ```
 
-4. Genişletin **Test** bölümüne ve ardından **ileti gövdesi** bölümü. İleti, beklenen iletilerle Bu örnekle değiştirin:
+4. **Test** bölümünü ve ardından **ileti gövdesi** bölümünü genişletin. İletiyi beklenen iletilerimizin bu örneği ile değiştirin:
 
    ```json
    {
@@ -689,34 +689,34 @@ Biz istemediğiniz yeni tahmin veri bizim eski depolama konumuna yönlendirme, b
    }
    ```
 
-5. Seçin **Test rota**. Test başarılı olursa, "ileti sorguyu eşleşmedi." konusuna bakın
+5. **Test rotası**seçin. Sınama başarılı olursa "ileti sorguyla eşleşti." iletisini görürsünüz.
 
 6. **Kaydet**’i seçin.
 
 ### <a name="configure-file-upload"></a>Karşıya dosya yüklemeyi yapılandırma
 
-Dosya depolama alanına yüklemek dosya yazıcı modülü etkinleştirmek için IOT hub'ı dosya karşıya yükleme özelliğini yapılandırın.
+Dosya yazıcı modülünün depolama alanına dosya yüklemesine izin vermek için IoT Hub dosya yükleme özelliğini yapılandırın.
 
-1. IOT hub'ınızdaki sol Gezgin seçin **karşıya dosya yükleme**.
+1. IoT Hub sol gezgin 'den **karşıya dosya yükleme**' yi seçin.
 
-2. Seçin **Azure depolama kapsayıcısı**.
+2. **Azure depolama kapsayıcısı**' nı seçin.
 
 3. Listeden depolama hesabınızı seçin.
 
-4. Seçin **uploadturbofanfiles** kapsayıcı ve tıklatın **seçin**.
+4. **Uploadturbofanfiles** kapsayıcısını seçip **Seç**' e tıklayın.
 
-5. **Kaydet**’i seçin. Kayıt tamamlandığında portal size bildirir.
+5. **Kaydet**’i seçin. Portal, Kaydetme tamamlandığında size bildirir.
 
 > [!Note]
-> Biz Bu öğretici için karşıya yükleme bildirimini kapatma değildir, ancak bkz [dosya karşıya yükleme bildirim alma](../iot-hub/iot-hub-java-java-file-upload.md#receive-a-file-upload-notification) bildirim dosyasını işlemek birleştiremiyorsa yükleme.
+> Bu öğretici için karşıya yükleme bildirimini kapatmıyoruz, ancak karşıya dosya yükleme bildirimini işleme hakkında ayrıntılar için karşıya [dosya yükleme bildirimi alma](../iot-hub/iot-hub-java-java-file-upload.md#receive-a-file-upload-notification) bölümüne bakın.
 
-## <a name="build-publish-and-deploy-modules"></a>Oluşturun, yayımlayın ve modülleri dağıtma
+## <a name="build-publish-and-deploy-modules"></a>Modüller oluşturma, yayımlama ve dağıtma
 
-Yapılandırma değişikliklerini yaptık, görüntülerinizi oluşturmak ve bunları müşterilerimizin Azure kapsayıcı kayıt defterine yayımlamak hazırız. Yapı işlemi deployment.template.json dosyası modüllerine oluşturulması gerektiğini belirlemek için kullanır. Ayarlar sürümü dahil olmak üzere her bir modül için modülü klasörünü module.json dosyasında bulunur. Dockerfile'ları üzerinde ilk çalıştıran bir Docker derleme module.json dosyasında bulunan görüntü oluşturmak için geçerli yapılandırma ile eşleşen derleme işlemi. Ardından bu görüntüyü kayıt defterine module.json dosyasından module.json dosyasındaki bir eşleşen bir sürüm etiketi ile yayımlar. Son olarak, IOT Edge cihazına dağıtacağız yapılandırmaya özgü dağıtım bildirimini (örneğin, deployment.amd64.json) üretir. IOT Edge cihazı dağıtım bildirimi ve temel bilgileri yönergelerini modülleri indirir, yapılandırmak ve istediğiniz özellikleri ayarlayın okur. Bu dağıtım yöntemi, farkında olmanız gereken iki yan etkilere sahiptir:
+Artık yapılandırma değişikliklerini yaptığımız için, görüntüleri oluşturmaya ve bunları Azure Container Registry 'imizde yayımlamaya hazırız. Yapı işlemi, hangi modüllerin oluşturulması gerektiğini belirleyen Deployment. Template. json dosyasını kullanır. Sürümü de dahil olmak üzere her modülün ayarları modül klasöründeki Module. json dosyasında bulunur. Yapı işlemi önce, bir görüntü oluşturmak için Module. json dosyasında bulunan geçerli yapılandırmayla eşleşen Dockerfiles üzerinde bir Docker derlemesini çalıştırır. Daha sonra, Module. JSON dosyasındaki modül. JSON dosyası ile eşleşen bir sürüm etiketiyle görüntüyü kayıt defterine yayınlar. Son olarak, IoT Edge cihaza dağıtacağınız yapılandırmaya özgü bir dağıtım bildirimi (örneğin, Deployment. AMD64. JSON) oluşturur. IoT Edge cihaz, dağıtım bildiriminden bilgileri okur ve yönergeleri temel alarak modülleri indirir, yolları yapılandırır ve istediğiniz özellikleri ayarlar. Bu dağıtım yönteminde dikkat etmeniz gereken iki yan etkisi vardır:
 
-* **Dağıtım gecikme:** yeniden başlatılmadan önce IOT Edge çalışma zamanı istenen özelliklerini değişikliği tanıması gerekir olduğundan, miktar kadar çalışma zamanı tarafından toplanır ve IOT Edge güncelleştirme başlar modüllerinizi dağıttıktan sonra zaman alabilir cihaz.
+* **Dağıtım gecikmesi:** IoT Edge çalışma zamanının, yeniden yapılandırma işlemine başlamadan önce istenen özelliklerine yapılan değişikliği tanıması gerektiğinden, çalışma zamanı onları bulana ve IoT Edge güncelleştirilmeye başladıktan sonra modüllerinizi dağıttıktan sonra zaman alabilir aygıtların.
 
-* **Modül sürümlerini konular:** bir modülün kapsayıcı yeni bir sürümü önceki modül olarak aynı sürüm etiketleri kullanarak kapsayıcı kayıt defterinizin yayımlarsanız Çalışma Zamanı Modülü yeni sürümünü karşıdan yüklemez. Bunu, Dağıtım bildiriminden sürüm etiketi yerel görüntüyü ve istediğiniz görüntüyü bir karşılaştırmasını yapar. Bu sürümlerden eşleşirse, çalışma zamanı herhangi bir eylemi alır. Bu nedenle, yeni değişiklikler dağıtmak istediğiniz her zaman modülünüzün sürümün artırmak önemlidir. Sürüm değiştirerek Artır **sürüm** özelliği altında **etiketi** değiştiriyorsanız, modül module.json dosyasındaki özellik. Ardından derleme ve modül yayımlayın.
+* **Modül sürümleri:** önceki modülle aynı sürüm etiketlerini kullanarak bir modülün kapsayıcısının kapsayıcı Kayıt defterinize yeni bir sürümünü yayımlarsanız, çalışma zamanı modülün yeni sürümünü indirmeyecektir. Yerel görüntünün sürüm etiketinin ve dağıtım bildiriminden istenen görüntünün bir karşılaştırmasını yapar. Bu sürümler eşleşiyorsa, çalışma zamanı hiçbir eylemde bulunmaz. Bu nedenle, yeni değişiklikler dağıtmak istediğiniz her seferinde modülünüzün sürümünü artırmak önemlidir. Değiştirdiğiniz modülün Module. JSON dosyasındaki **Tag** özelliği altındaki **Version** özelliğini değiştirerek sürümü artırın. Ardından modülü derleyin ve yayımlayın.
 
     ```json
     {
@@ -740,82 +740,82 @@ Yapılandırma değişikliklerini yaptık, görüntülerinizi oluşturmak ve bun
 
 ### <a name="build-and-publish"></a>Derleme ve yayımlama
 
-1. VM geliştirme Visual Studio Code'da bir terminal penceresi Visual Studio Code ve kapsayıcı kayıt defterinizde oturum açın.
+1. Geliştirme sanal makinenizde Visual Studio Code, bir Visual Studio Code Terminal penceresi açın ve kapsayıcı kayıt defterinizde oturum açın.
 
    ```cmd
    docker login -u <ACR username> -p <ACR password> <ACR login server>
    ```
 
-1. Visual Studio code'da deployment.template.json üzerinde sağ tıklatın ve seçin **derleme ve anında iletme IOT Edge çözüm**.
+1. Visual Studio Code, Deployment. Template. json ' a sağ tıklayın ve **IoT Edge çözümü oluştur ve Gönder**' i seçin.
 
-### <a name="view-modules-in-the-registry"></a>Kayıt defterinde modülleri görüntüleme
+### <a name="view-modules-in-the-registry"></a>Kayıt defterindeki modülleri görüntüleme
 
-Yapılandırma başarıyla tamamlandıktan sonra biz bizim yayımlanan modülleri gözden geçirmek için Azure portalını kullanmanız mümkün olacaktır.
+Oluşturma başarıyla tamamlandıktan sonra, yayımlanan modüllerimizi gözden geçirmek için Azure portal kullanacağız.
 
-1. Azure portalında, Azure Machine Learning hizmeti çalışma alanınıza gidin ve için köprüyü tıklatarak **kayıt defteri**.
+1. Azure portal, Azure Machine Learning çalışma alanınıza gidin ve **kayıt defteri**köprüsüne tıklayın.
 
-    ![Makine öğrenme hizmeti çalışma alanında kayıt defterinize gidin](media/tutorial-machine-learning-edge-06-custom-modules/follow-registry-link.png)
+    ![Machine Learning hizmeti çalışma alanından kayıt defterine git](media/tutorial-machine-learning-edge-06-custom-modules/follow-registry-link.png)
 
-2. Kayıt defteri yan Gezgin seçin **depoları**.
+2. Kayıt defteri tarafı Gezgini ' nden **depolar**' ı seçin.
 
-3. Her iki modülü de oluşturduğunuz, Not **avrofilewriter** ve **turbofanrouter**, depoları olarak görünür.
+3. Her iki modülün da, **avrofilewriter** ve **turbofanrouter**, depo olarak göründüğünü unutmayın.
 
-4. Seçin **turbofanrouter** 0.0.1-amd64 etiketlenmiş bir görüntü yayımladığınız not edin.
+4. **Turbofanrouter** ' ı seçin ve 0.0.1-amd64 olarak etiketlenmiş bir görüntü yayımladığınızdan emin olabilirsiniz.
 
-   ![İlk etiketli versiyonunu turbofanrouter görüntüleyin](media/tutorial-machine-learning-edge-06-custom-modules/tagged-image-turbofanrouter-repo.png)
+   ![Turbofanrouter 'un ilk etiketli sürümünü görüntüle](media/tutorial-machine-learning-edge-06-custom-modules/tagged-image-turbofanrouter-repo.png)
 
-### <a name="deploy-modules-to-iot-edge-device"></a>Modüller IOT Edge cihazına dağıtma
+### <a name="deploy-modules-to-iot-edge-device"></a>Modülleri IoT Edge cihaza dağıt
 
-Biz yerleşik ve modülleri IOT Edge cihazına dağıtacağız artık modülleri çözümümüz, yapılandırılmış.
+Çözümünüzde modülleri oluşturup yapılandırdık, şimdi de modülleri IoT Edge cihaza dağıtacağız.
 
-1. Visual Studio Code'da sağ tıklayın **deployment.amd64.json** config klasöründeki dosya.
+1. Visual Studio Code ' de, yapılandırma klasöründe **Deployment. AMD64. JSON** dosyasına sağ tıklayın.
 
-2. Seçin **tek cihaz için dağıtım oluşturma**.
+2. **Tek cihaz Için dağıtım oluştur**seçeneğini belirleyin.
 
-3. IOT Edge Cihazınızı seçin **aaTurboFanEdgeDevice**.
+3. IoT Edge cihazınızı, **Aaturbofanedgedevice**' ı seçin.
 
-4. Visual Studio kod Gezgini Azure IOT Hub cihazları panelinde yenileyin. Üç yeni modüller ancak değil ancak çalışan dağıtıldığını görmeniz gerekir.
+4. Visual Studio Code Explorer 'da Azure IoT Hub cihazları panelini yenileyin. Üç yeni modülün dağıtıldığını ancak henüz çalışmadığını görmeniz gerekir.
 
-5. Birkaç dakika sonra tekrar yenileyin ve modülleri görürsünüz.
+5. Birkaç dakika sonra yeniden yenileyin ve çalıştıran modülleri görürsünüz.
 
-   ![Visual Studio Code'da çalışan modüller görünümü](media/tutorial-machine-learning-edge-06-custom-modules/view-running-modules-list.png)
+   ![Visual Studio Code çalışan modülleri görüntüleme](media/tutorial-machine-learning-edge-06-custom-modules/view-running-modules-list.png)
 
 > [!NOTE]
-> Bu, başlangıç ve kapatma sürekli çalışır duruma geçirmek modüller için birkaç dakika sürebilir. Bu süre boyunca, IOT Edge hub'ı modülü ile bağlantı kurmaya çalışırken başlatıp modülleri görebilirsiniz.
+> Modüllerin sürekli çalışan bir duruma başlaması ve yeniden başlatılması birkaç dakika sürebilir. Bu süre boyunca, IoT Edge hub modülüyle bir bağlantı kurmaya çalışırken modüllerin başlayıp durdurulabiliyor olabilirsiniz.
 
-## <a name="diagnosing-failures"></a>Hataları tanılama
+## <a name="diagnosing-failures"></a>Sorunları tanılama
 
-Bu bölümde, biz ne bir modül veya modülleri ile sorun oluştu anlamaya yönelik bazı teknikleri paylaşın. Genellikle bir hata ilk durum Visual Studio code'da gelen anlaþýlmaz.
+Bu bölümde, bir modül veya modüllerle neyin yanlış olduğunu anlamak için birkaç teknik paylaşıyoruz. Genellikle bir hata, Visual Studio Code durumundan önce bir hata olabilir.
 
-### <a name="identify-failed-modules"></a>Başarısız modülleri belirle
+### <a name="identify-failed-modules"></a>Başarısız modülleri tanımla
 
-* **Visual Studio kodu:** Azure IOT Hub cihazları masasında arayın. Modüllerinin çoğu çalışır durumda olan ancak bir durduruldu, durduruldu modülün daha fazla araştırmak gerekir. Tüm modüller, durdurulmuş bir durumda, uzun bir süre için varsa, hata de gösterebilir.
+* **Visual Studio Code:** Azure IoT Hub cihazlar paneline bakın. Çoğu modül çalışır durumda, ancak bir durdurulmuşsa, bu durdurulan modülün daha fazla araştırılması gerekir. Tüm modüller uzun bir süre boyunca durdurulmuş durumdaysa, bu da hata olduğunu gösteriyor olabilir.
 
-* **Azure portalı:** Portalı'nda IOT hub'ınıza giderek ve ardından cihaz ayrıntıları sayfasına bulma (altında IOT Edge, cihazınızın içine ayrıntıya) bir modülü bir hata bildirdi veya hiçbir şey IOT hub'ına bildirdi bulabilirsiniz.
+* **Azure Portal:** Portalda IoT Hub 'ınıza gidip cihaz ayrıntıları sayfasını bularak (IoT Edge altında, cihazınızla detaya gitme), bir modülün bir hata raporladığını veya IoT Hub 'ına hiçbir şey bildirmemiş olduğunu fark edebilirsiniz.
 
-### <a name="diagnosing-from-the-device"></a>CİHAZDAN tanılama
+### <a name="diagnosing-from-the-device"></a>Cihazdan tanılama
 
-IOT Edge cihazı açtıktan tarafından modüllerinizi durumuyla ilgili bilgileri daha iyi bir miktarda erişim elde. Cihaz görüntülerinde ve kapsayıcıları incelemek bize Docker komutlarını kullandığımız ana mekanizma var.
+IoT Edge cihazda oturum açarak modüllerinizin durumu hakkında iyi bir bilgiye erişim elde edebilirsiniz. Kullandığımız ana mekanizma, cihazdaki kapsayıcıları ve görüntüleri incelemenize olanak tanıyan Docker komutlarıdır.
 
-1. Tüm çalışan kapsayıcıları listesi. Modülü karşılık gelen bir ada sahip her modül için bir kapsayıcı görmek bekliyoruz. Ayrıca, bu komut, beklentisi ile eşleşebilir. Bu nedenle sürüm dahil olmak üzere kapsayıcı tam görüntüyü listeler. Ayrıca, komut "container" için "Görüntü" getirilmesiyle görüntüleri listeleyebilirsiniz.
+1. Tüm çalışan kapsayıcıları listeleyin. Her modül için modüle karşılık gelen bir ada sahip bir kapsayıcı görmemiz bekleniyor. Ayrıca, bu komut, bir sürüm dahil olmak üzere kapsayıcının tam görüntüsünü listeler, böylece beklentilerinizle eşleştirebilirsiniz. Ayrıca, komut içinde "kapsayıcı" için "görüntü" koyarak görüntüleri listeleyebilirsiniz.
 
    ```bash
    sudo docker container ls
    ```
 
-2. Bir kapsayıcı için günlükleri alın. Bu komut, ne olursa olsun, StdErr ve kapsayıcıdaki StdOut yazılmış çıkarır. Bu komut, çalışmaya ve ardından herhangi bir nedenden dolayı sonlanmış kapsayıcılar için çalışır. EdgeAgent veya edgeHub kapsayıcılarla olduğunu anlamak için kullanışlıdır.
+2. Bir kapsayıcı için günlükleri alın. Bu komut, kapsayıcıda StdErr ve StdOut 'a yazılan her şeyi çıktı olarak verir. Bu komut, başlatılan ve bir nedenden dolayı daha sonra gelen kapsayıcılar için geçerlidir. Ayrıca, edgeAgent veya edgeHub kapsayıcılarıyla neler olduğunu anlamak için de kullanışlıdır.
 
    ```bash
    sudo docker container logs <container name>
    ```
 
-3. Bir kapsayıcı inceleyin. Bu komut bir sürü görüntü ile ilgili bilgi sağlar. Ne aradığınıza bağlı olarak, veriler filtrelenebilir. Örnek olarak, bağlamalar avroFileWriter üzerinde doğru olup olmadığını görmek istiyorsanız komutunun kullanabilirsiniz:
+3. Bir kapsayıcıyı inceleyin. Bu komut, görüntü hakkında bilgi verir. Veriler, neyi aradığınızı bağlı olarak filtrelenebilir. Örnek olarak, avroFileWriter üzerindeki bağlamalar doğru olup olmadığını görmek isterseniz komutunu kullanabilirsiniz:
 
    ```bash
    sudo docker container inspect -f "{{ json .Mounts }}" avroFileWriter | python -m json.tool
    ```
 
-4. Bir çalışan kapsayıcıya bağlanın. Bu komutu çalıştırırken kapsayıcıyı incelemek isterseniz yararlı olabilir:
+4. Çalışan bir kapsayıcıya bağlanın. Bu komut, çalışırken kapsayıcıyı incelemek istiyorsanız yararlı olabilir:
 
    ```bash
    sudo docker exec -it avroFileWriter bash
@@ -823,17 +823,17 @@ IOT Edge cihazı açtıktan tarafından modüllerinizi durumuyla ilgili bilgiler
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, bir IOT Edge çözümü üç modülleri ile Visual Studio code'da, bir sınıflandırıcı, yönlendirici ve bir dosya yazıcı/yükleyici oluşturduk. Biz edge cihazında birbirleri ile iletişim kurmak için modülleri izin vermek için rotalar ayarlayabilir, sınır cihazı yapılandırmasını değiştirilebilir ve bağımlılıkları yükleme ve bağlama takar modülleri kapsayıcıları için eklemek için dockerfile'ları güncelleştirildi. Ardından, yapılandırma türüne göre bizim iletileri yönlendirmek için ve karşıya dosya yükleme işlemleri işlemek için IOT Hub'ın güncelleştirdik. Her yerde modülleri IOT Edge cihazına dağıtılan ve modülleri düzgün çalışmasını güvence altına.
+Bu makalede, üç modülle, sınıflandırıcı, yönlendirici ve dosya yazarı/Uploader ile Visual Studio Code IoT Edge bir çözüm oluşturduk. Modüllerin Edge cihazında birbirleriyle iletişim kurmasına izin vermek için yollar ayarladık, sınır cihazının yapılandırmasını değiştirmiş ve bu, bağımlılıkları yükleyecek ve modüllerin kapsayıcılarına BIND bağlama ekleyecek olan Dockerfiles 'ı güncelleştirdik. Daha sonra, IoT Hub yapılandırmasını, bu iletileri türüne göre yönlendirmekte ve dosya karşıya yüklemelerini işleyecek şekilde güncelleştirdik. Her şey ile, modülleri IoT Edge cihaza dağıttık ve modüller doğru şekilde çalışıyor.
 
-Aşağıdaki sayfalarda daha fazla bilgi bulunabilir:
+Aşağıdaki sayfalarda daha fazla bilgi bulabilirsiniz:
 
-* [IOT Edge'de yollar oluşturmak ve modülleri dağıtma hakkında bilgi edinin](module-composition.md)
-* [IOT Hub ileti yönlendirme sorgusu söz dizimi](../iot-hub/iot-hub-devguide-routing-query-syntax.md)
-* [IOT Hub ileti yönlendirme: artık ileti gövdesinde yönlendirme ile](https://azure.microsoft.com/blog/iot-hub-message-routing-now-with-routing-on-message-body/)
+* [IoT Edge'de modülleri dağıtmayı ve yolları oluşturmayı öğrenin](module-composition.md)
+* [IoT Hub ileti yönlendirme sorgusu sözdizimi](../iot-hub/iot-hub-devguide-routing-query-syntax.md)
+* [IoT Hub ileti yönlendirme: Şu anda ileti gövdesinde yönlendirme ile](https://azure.microsoft.com/blog/iot-hub-message-routing-now-with-routing-on-message-body/)
 * [IoT Hub ile dosyaları karşıya yükleme](../iot-hub/iot-hub-devguide-file-upload.md)
-* [Cihazınızı IOT Hub ile buluta dosyaları karşıya yükleme](../iot-hub/iot-hub-python-python-file-upload.md)
+* [IoT Hub ile cihazınızdan buluta dosya yükleme](../iot-hub/iot-hub-python-python-file-upload.md)
 
-Veri göndermeye başlamak ve çözümünüzü iş başında görmek için sonraki makaleye geçin.
+Veri göndermeye başlamak ve çözümünüzü eylemde görmek için sonraki makaleye geçin.
 
 > [!div class="nextstepaction"]
-> [Saydam bir ağ geçidi üzerinden veri gönderme](tutorial-machine-learning-edge-07-send-data-to-hub.md)
+> [Saydam ağ geçidi aracılığıyla veri Gönder](tutorial-machine-learning-edge-07-send-data-to-hub.md)

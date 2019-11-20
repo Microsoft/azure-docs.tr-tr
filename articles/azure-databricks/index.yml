@@ -1,66 +1,116 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Databricks Belgeleri
+### YamlMime:Landing
+title: Azure Databricks belgeleri
+summary: Tek tıklamayla kurulum olanağı ve sorunsuz iş akışları getiren, ayrıca veri uzmanları, mühendisler ve iş analistleri arasında işbirliğine yönelik etkileşimli bir çalışma alanı sağlayan Apache Spark tabanlı analiz platformu Azure Databricks'i öğrenin.
 metadata:
-  title: Azure Databricks Belgeleri
-  description: 'Burada verilen hızlı başlangıç kılavuzunu ve diğer bağlantıları kullanarak, Azure Databricks’i kullanma hakkında bilgi edinin. Azure Databricks, Microsoft Azure bulut hizmetleri platformu için iyileştirilen Apache Spark tabanlı bir analiz platformudur.'
+  title: Azure Databricks belgeleri
+  description: Tek tıklamayla kurulum olanağı ve sorunsuz iş akışları getiren, ayrıca veri uzmanları, mühendisler ve iş analistleri arasında işbirliğine yönelik etkileşimli bir çalışma alanı sağlayan Apache Spark tabanlı analiz platformu Azure Databricks'i öğrenin.
   services: azure-databricks
-  author: mamccrea
   ms.service: azure-databricks
   ms.topic: landing-page
-  ms.date: 05/07/2019
+  ms.collection: collection
+  author: mamccrea
   ms.author: mamccrea
-abstract:
-  description: 'Tek tıklamayla kurulum olanağı ve sorunsuz iş akışları getiren, ayrıca veri uzmanları, veri mühendisleri ve iş analistleri arasında işbirliğine yönelik etkileşimli bir çalışma alanı sağlayan Apache Spark tabanlı analiz platformu Azure Databricks''i kullanmayı öğrenin. Hızlı başlangıçlar ve öğreticiler Azure Databricks''le çalışmaya nasıl başlayacağınızı ve diğer Azure hizmetleriyle nasıl tümleştireceğinizi gösterir.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: media/index/video.png
-      width: 250
-    title: 'Azure Databricks’e Giriş (3:38)'
-    href: 'https://azure.microsoft.com/resources/videos/connect-2017-introduction-to-azure-databricks/'
-    width: 250
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Azure Databricks çalışma alanı ve Spark kümesi oluşturmayı, ardından aşağıdakileri kullanarak işleri çalıştırmayı öğrenin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/azure-databricks/media/index/portal.svg
-            text: Azure portal
-            href: /azure/azure-databricks/quickstart-create-databricks-workspace-portal
-          - image:
-              src: /azure/azure-databricks/media/index/logo_azure_resource_manager.svg
-            text: Resource Manager şablonu
-            href: /azure/azure-databricks/quickstart-create-databricks-workspace-resource-manager-template
-          - image:
-              src: /azure/azure-databricks/media/index/virtualnetwork.svg
-            text: Sanal ağ
-            href: /azure/azure-databricks/quickstart-create-databricks-workspace-vnet-injection
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure Databricks ile çalışma hakkında bilgi edinin:'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/azure-databricks/vnet-injection-sql-server">Docker kapsayıcısında çalışan SQL Server’ı sorgulama</a>
-          - html: <a href="/azure/azure-databricks/service-endpoint-cosmosdb">Cosmos DB hizmet uç noktası kullanma</a>
-          - html: '<a href="/azure/azure-databricks/databricks-extract-load-sql-data-warehouse">Veri ayıklama, dönüştürme ve yükleme</a>'
-          - html: <a href="/azure/azure-databricks/databricks-stream-from-eventhubs">Event Hubs’dan veri akışı sağlama</a>
-          - html: <a href="/azure/azure-databricks/databricks-sentiment-analysis-cognitive-services">Bilişsel Hizmetler kullanarak yaklaşım analizi</a>
-          - html: '<a href="https://docs.azuredatabricks.net/spark/latest/structured-streaming/kafka.html" target="_blank">HDInsight Kafka’dan veri akışı sağlama</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: REST
-            html: <p><a href="/rest/api/databricks">REST API</a></p>
-          - title: Resource Manager
-            html: <p><a href="/azure/templates/microsoft.databricks/workspaces">Şablon</a></p>
+  ms.date: 09/11/2019
+  ms.openlocfilehash: 3d82583617ac5ee2efc7f19bd937a01d557eb5ba
+  ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/05/2019
+  ms.locfileid: "73606053"
+landingContent:
+- title: Azure Databricks hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Databricks nedir?
+      url: what-is-azure-databricks.md
+  - linkListType: concept
+    links:
+    - text: Sık sorulan sorular
+      url: frequently-asked-questions-databricks.md
+  - linkListType: reference
+    links:
+    - text: Sürüm notları
+      url: /azure/databricks/release-notes/product/
+  - linkListType: learn
+    links:
+    - text: Azure Databricks’e Giriş
+      url: https://docs.microsoft.com/learn/modules/intro-to-azure-databricks
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure portalını kullanarak Databricks çalışma alanı oluşturma
+      url: quickstart-create-databricks-workspace-portal.md
+    - text: Azure Resource Manager şablonunu kullanarak Databricks’te Apache Spark işini çalıştırma
+      url: quickstart-create-databricks-workspace-resource-manager-template.md
+  - linkListType: how-to-guide
+    links:
+    - text: Apache Spark kümesi oluşturma
+      url: /azure/databricks/clusters/create
+    - text: Veri kaynaklarına bağlanma
+      url: databricks-connect-to-data-sources.md
+    - text: Azure Cloud Shell’den Databricks CLI kullanma
+      url: databricks-cli-from-azure-cloud-shell.md
+  - linkListType: reference
+    links:
+    - text: Azure Resource Manager şablonu
+      url: /azure/templates/microsoft.databricks/workspaces
+- title: Azure çözümlerinin mimarisini oluşturma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure Data Factory'den not defteri çalıştırma
+      url: ../data-factory/transform-data-using-databricks-notebook.md
+    - text: Bilişsel Hizmetler kullanarak yaklaşım analizi yapma
+      url: databricks-sentiment-analysis-cognitive-services.md
+    - text: Cosmos DB hizmet uç noktasını kullanma
+      url: service-endpoint-cosmosdb.md
+    - text: Azure Key Vault kullanarak depolama alanına erişme
+      url: store-secrets-azure-key-vault.md
+    - text: Azure Data Lake Storage 2. Nesil ve SQL Veri Ambarı kullanarak ETL işlemleri gerçekleştirme
+      url: databricks-extract-load-sql-data-warehouse.md
+  - linkListType: how-to-guide
+    links:
+    - text: Excel, R ve Python'a bağlanma
+      url: connect-databricks-excel-python-r.md
+- title: Sanal ağ kullanma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Sanal ağda Databricks çalışma alanı oluşturma
+      url: quickstart-create-databricks-workspace-vnet-injection.md
+  - linkListType: deploy
+    links:
+    - text: Sanal ağınızda Azure Databricks'i dağıtma
+      url: vnet-injection.md
+  - linkListType: tutorial
+    links:
+    - text: Azure Databricks not defterinden sanal ağdaki SQL Server Linux Docker kapsayıcısını sorgulama
+      url: vnet-injection-sql-server.md
+- title: Veri akışı yapma
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Azure Databricks'te akış verileriyle çalışma
+      url: https://docs.microsoft.com/learn/modules/streaming-in-azure-databricks/
+  - linkListType: tutorial
+    links:
+    - text: Event Hubs kullanarak veri akışı sağlama
+      url: databricks-stream-from-eventhubs.md
+    - text: HDInsight Kafka’dan veri akışı sağlama
+      url: /azure/databricks/spark/latest/structured-streaming/kafka
+- title: Geliştiriciler için kılavuzlar
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Azure Databricks ile derin öğrenme
+      url: https://docs.microsoft.com/learn/modules/deep-learning-in-azure-databricks
+    - text: Metin analizi yapma
+      url: https://docs.microsoft.com/learn/modules/perform-text-analytics-with-azure-databricks
+  - linkListType: reference
+    links:
+    - text: Databricks REST API
+      url: /rest/api/databricks
+    - text: R geliştirici kılavuzu
+      url: ../machine-learning/r-developers-guide.md

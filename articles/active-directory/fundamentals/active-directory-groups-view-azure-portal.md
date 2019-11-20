@@ -1,28 +1,28 @@
 ---
-title: Gruplar ve üyeler - Azure Active Directory görüntülemek için hızlı başlangıç | Microsoft Docs
+title: Grupları ve üyeleri görüntülemek için hızlı başlangıç-Azure Active Directory | Microsoft Docs
 description: Arama ve kuruluşunuzun gruplar ve atanan üyelerini görüntüleme hakkında yönergeler.
 services: active-directory
-author: eross-msft
+author: msaburnley
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: fundamentals
 ms.topic: quickstart
 ms.date: 09/24/2018
-ms.author: lizross
+ms.author: ajburnle
 ms.custom: it-pro, seodec18, seo-update-azuread-jan
 ms.reviewer: krbain
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8eef6f7a363fe7b020a3ef18ae26799d7d5452ed
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 9b4f2f6e86ce076e7c0464609252b027499a8307
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60249335"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68942877"
 ---
 <!--As a brand-new Azure AD administrator, I need to view my organization’s groups along with the assigned members, so I can manage permissions to apps and services for people in my organization-->
 
-# <a name="quickstart-view-your-organizations-groups-and-members-in-azure-active-directory"></a>Hızlı Başlangıç: Kuruluşunuzun gruplar ve üyeler, Azure Active Directory'de görüntüle
+# <a name="quickstart-view-your-organizations-groups-and-members-in-azure-active-directory"></a>Hızlı Başlangıç: Azure Active Directory içinde kuruluşunuzun gruplarını ve üyelerini görüntüleme
 Azure portalı kullanarak kuruluşunuzun mevcut gruplarını ve grup üyelerini görüntüleyebilirsiniz. Gruplar, büyük olasılıkla kısıtlı uygulama ve hizmetler için aynı erişim ve izinlere ihtiyacı olan kullanıcıları (üyeleri) yönetmek için kullanılır.
 
 Bu hızlı başlangıçta, kuruluşunuzun tüm mevcut gruplarını ve atanmış üyelerini görüntüleyeceksiniz.
@@ -44,29 +44,29 @@ _MDM ilkesi - Batı_ adlı yeni bir grup oluşturun. Grup oluşturma hakkında d
 
 2. **Grup** sayfasını tamamlayın:
     
-    - **Grup türü:** Seçin **güvenlik**
+    - **Grup türü:** **Güvenlik** seçin
     
-    - **Grup adı:** Tür _MDM İlkesi - Batı_
+    - **Grup adı:** _MDM ilkesi türü-Batı_
     
-    - **Üyelik türü:** Seçin **atanan**.
+    - **Üyelik türü:** **Atandı**' ı seçin.
 
 3. **Oluştur**’u seçin.
 
 ## <a name="create-a-new-user"></a>Yeni kullanıcı oluşturma
-_Alain Charon_ adı yeni bir kullanıcı oluşturun. Bir kullanıcı grup üyesi olarak eklenmeden önce mevcut olmalıdır. Kullanıcı oluşturma hakkında daha fazla bilgi için, bkz. [Kullanıcı ekleme veya silme](add-users-azure-active-directory.md).
+_Alain Charon_ adı yeni bir kullanıcı oluşturun. Bir kullanıcı grup üyesi olarak eklenmeden önce mevcut olmalıdır. Kullanıcıların oluşturulacağı doğrulanmış etki alanı adını almak için önce "özel etki alanı adları" sekmesini kontrol edin. Kullanıcı oluşturma hakkında daha fazla bilgi için, bkz. [Kullanıcı ekleme veya silme](add-users-azure-active-directory.md).
 
 1. **Azure Active Directory**’yi, **Kullanıcılar**’ı ve ardından **Yeni kullanıcı**’yı seçin.
 
 2. **Kullanıcı** sayfasını tamamlayın:
 
-    - **Adı:** Tür _Alain Charon_.
+    - **Ada** _Charon_ yazın.
 
-    - **Kullanıcı adı:** Tür *alain\@contoso.com*.
+    - **Kullanıcı adı:** Contoso.com yazın. *\@*
 
 3. **Parola** kutusunda sağlanan otomatik olarak oluşturulmuş parolayı kopyalayın ve ardından **Oluştur** seçeneğini belirleyin.
 
 ## <a name="add-a-group-member"></a>Grup üyesi ekleme
-Şimdi bir grubunuz ve kullanıcınız olduğuna göre, _Alain Charon_’u _MDM ilkesi - Batı_ grubuna üye olarak ekleyebilirsiniz. Grup üyelerini ekleme hakkında daha fazla bilgi için, bkz. [Grup üyelerini ekleme veya kaldırma](active-directory-groups-members-azure-portal.md).
+Şimdi bir grubunuz ve kullanıcınız olduğuna göre, _Alain Charon_ ’u _MDM ilkesi - Batı_ grubuna üye olarak ekleyebilirsiniz. Grup üyelerini ekleme hakkında daha fazla bilgi için, bkz. [Grup üyelerini ekleme veya kaldırma](active-directory-groups-members-azure-portal.md).
 
 1. **Azure Active Directory** > **Gruplar**'ı seçin.
 

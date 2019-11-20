@@ -1,49 +1,49 @@
 ---
-title: Query Store PostgreSQL - tek bir sunucu için Azure veritabanı'ndaki en iyi yöntemler
-description: Bu makalede, PostgreSQL - tek bir sunucu için Azure veritabanında Query Store için en iyi uygulamalar açıklanmaktadır.
+title: PostgreSQL için Azure veritabanı 'nda sorgu deposu en iyi yöntemleri-tek sunucu
+description: Bu makalede, PostgreSQL için Azure veritabanı-tek sunucu 'da sorgu deposu için en iyi yöntemler açıklanmaktadır.
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 5/6/2019
-ms.openlocfilehash: 798a7a3edbf11c8421848871d26ba55b5bada0b6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 51239f4cf49784dd47470e1272b90508eaf25e6f
+ms.sourcegitcommit: a4b5d31b113f520fcd43624dd57be677d10fc1c0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65067247"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70764228"
 ---
-# <a name="best-practices-for-query-store"></a>Query Store için en iyi uygulamalar
+# <a name="best-practices-for-query-store"></a>Sorgu deposu için en iyi uygulamalar
 
-**Şunlara uygulanır:** -Tek bir sunucu 9.6 ve 10 olan PostgreSQL için Azure veritabanı
+**Şunlara uygulanır:** PostgreSQL için Azure veritabanı-tek sunuculu sürümler 9,6, 10, 11
 
-Bu makalede, PostgreSQL için Azure veritabanı'nda Query Store kullanmak için en iyi uygulamalar özetlenmektedir.
+Bu makalede, PostgreSQL için Azure veritabanı 'nda sorgu deposunu kullanmaya yönelik en iyi yöntemler özetlenmektedir.
 
-## <a name="set-the-optimal-query-capture-mode"></a>En iyi sorgu yakalama modunu ayarlayın
-Let Query Store, önem verdiğiniz verileri yakalayın. 
+## <a name="set-the-optimal-query-capture-mode"></a>En iyi sorgu yakalama modunu ayarlama
+Sorgu deposunun sizin için önemli olan verileri yakalamasına izin verin. 
 
 |**pg_qs.query_capture_mode** | **Senaryo**|
 |---|---|
-|_Tümü_  |İş yükünüz kapsamlı olarak tüm sorgular ve bunların yürütme sıklığı ve diğer istatistikleri açısından analiz edin. İş yükünüz yeni sorguları belirleyin. Geçici sorgular için kullanıcı veya otomatik Parametreleştirme fırsatlarını belirlemek için kullanılıp kullanılmadığını algılayın. _Tüm_ maliyet bir artan kaynak tüketimi ile birlikte gelir. |
-|_Sayfanın Üstü_  |İlgilenmeniz en sık kullanılan sorgular - bu istemciler tarafından gönderilen odaklanır.
-|_Yok._ |Bir sorgu kümesi zaten topladık ve araştırmak istediğiniz zaman penceresi ve diğer sorgular yükleyebilecek karışıklıkları ortadan kaldırmak istiyorsanız. _Hiçbiri_ test etmek için uygun ve Kıyaslama olduğu ortamlar. _Hiçbiri_ izlemek ve önemli yeni sorgular en iyi duruma getirme olanağı kaçırabilirsiniz dikkatli kullanılmalıdır. Bu geçmiş zaman pencereleri üzerinde verileri kurtaramazsınız. |
+|_Tümü_  |İş yükünüzü tüm sorgular ve bunların yürütülme sıklıklarıyla ve diğer istatistiklerde ayrıntılı şekilde çözümleyin. İş yükünüzün yeni sorgularını belirler. Kullanıcı veya otomatik Parametreleştirme fırsatlarını belirlemek için geçici sorguların kullanıldığını algıla. _Hepsi_ daha fazla kaynak tüketim maliyetiyle gelir. |
+|_Sayfanın Üstü_  |En iyi sorgulara dikkat edin-istemciler tarafından verilen olanlardır.
+|_Yok._ |Araştırmak istediğiniz bir sorgu kümesi ve zaman penceresi zaten yakalandı ve diğer sorguların getirebilme nedenlerini ortadan kaldırmak istiyorsunuz. _Hiçbiri_ , test ve tezgahtır işaretleme ortamları için uygun değildir. Önemli yeni sorguları izleme ve iyileştirme fırsatını kaçırdığı için _hiçbiri_ dikkatli kullanılmamalıdır. Bu eski zaman Windows üzerinde veri kurtaramazsınız. |
 
-Query Store, bir deposu bekleme istatistikleri de içerir. Bekleme istatistikleri yöneten bir ek bir yakalama modu sorgu: **pgms_wait_sampling.query_capture_mode** ayarlanabilir _hiçbiri_ veya _tüm_. 
+Sorgu deposu bekleme istatistikleri için bir mağaza da içerir. Bekleme istatistiklerini yöneten ek bir yakalama modu sorgusu var: **pgms_wait_sampling. query_capture_mode** , _none_ veya _All_olarak ayarlanabilir. 
 
 > [!NOTE] 
-> **pg_qs.query_capture_mode** yerini **pgms_wait_sampling.query_capture_mode**. Pg_qs.query_capture_mode ise _hiçbiri_, pgms_wait_sampling.query_capture_mode ayarın hiçbir etkisi olmaz. 
+> **pg_qs. query_capture_mode** , **pgms_wait_sampling. query_capture_mode**yerine geçiyor. Pg_qs. query_capture_mode _none_ise, pgms_wait_sampling. query_capture_mode ayarının etkisi yoktur. 
 
 
-## <a name="keep-the-data-you-need"></a>İhtiyacınız olan verileri tut
-**Pg_qs.retention_period_in_days** parametresi, gün Query Store veri saklama süresini belirtir. Eski veri sorgulamak ve istatistikleri silinir. Varsayılan olarak 7 gün boyunca verileri saklamak için Query Store yapılandırılır. Geçmiş verileri kullanmayı planlamıyorsanız kaçının. Verileri daha uzun süre tutmanız gerekiyorsa değerini artırın.
+## <a name="keep-the-data-you-need"></a>İhtiyacınız olan verileri koruyun
+**Pg_qs. retention_period_in_days** parametresi, sorgu deposu için veri saklama süresinin gün cinsinden belirtir. Daha eski sorgu ve istatistik verileri silinir. Varsayılan olarak, sorgu deposu, verileri 7 gün boyunca koruyacak şekilde yapılandırılmıştır. Kullanmayı planlamadığınız geçmiş verilerini saklamaktan kaçının. Verileri daha uzun süre tutmanız gerekiyorsa değeri arttırın.
 
 
-## <a name="set-the-frequency-of-wait-stats-sampling"></a>Örnekleme bekleme istatistikleri sıklığını ayarlayın 
-**Pgms_wait_sampling.history_period** parametresinin belirttiği ne sıklıkta bekleme olayları örneklenen (milisaniye cinsinden). Kısa dönem örnekleme daha sık. Daha fazla bilgi alınır, ancak daha büyük kaynak tüketimi maliyetini ortaya çıktı. Sunucu yükü altında veya ayrıntı düzeyi gerekmez bu süresini artırın
+## <a name="set-the-frequency-of-wait-stats-sampling"></a>Bekleme istatistiği örnekleme sıklığını ayarla 
+**Pgms_wait_sampling. history_period** parametresi, bekleme olaylarının ne sıklıkta örnekleneceğini belirtir (milisaniye olarak). Süre ne kadar kısa olursa örnekleme daha fazla sıklıkla yapılır. Daha fazla bilgi alındı, ancak bu daha fazla kaynak tüketimine sahiptir. Sunucu yük altındaysa veya ayrıntı düzeyi gerekmiyorsa bu süreyi artırın
 
 
-## <a name="get-quick-insights-into-query-store"></a>Query Store hızlı Öngörüler edinin
-Kullanabileceğiniz [sorgu performansı İçgörüleri](concepts-query-performance-insight.md) Query Store veriler hakkında hızlı Öngörüler almak için Azure portalında. Görselleştirmeler, uzun çalışan sorguları yüzeyine ve en uzun zaman içinde olayları bekleyin.
+## <a name="get-quick-insights-into-query-store"></a>Sorgu deposu hakkında hızlı öngörüler edinin
+Sorgu deposundaki veriler hakkında hızlı Öngörüler almak için Azure portal [sorgu performansı içgörüleri](concepts-query-performance-insight.md) kullanabilirsiniz. Görselleştirmeler, en uzun çalışan sorguları ve zaman içinde en uzun bekleme olaylarını yüzey halinde görüntüler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Alınacak veya ayarlanacak kullanarak parametreleri hakkında bilgi edinin [Azure portalında](howto-configure-server-parameters-using-portal.md) veya [Azure CLI](howto-configure-server-parameters-using-cli.md).
+- [Azure Portal](howto-configure-server-parameters-using-portal.md) veya [Azure CLI](howto-configure-server-parameters-using-cli.md)kullanarak parametreleri alma veya ayarlama hakkında bilgi edinin.

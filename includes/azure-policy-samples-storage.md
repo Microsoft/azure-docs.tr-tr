@@ -5,15 +5,15 @@ services: azure-policy
 author: DCtheGeek
 ms.service: azure-policy
 ms.topic: include
-ms.date: 05/17/2018
+ms.date: 08/21/2019
 ms.author: dacoulte
 ms.custom: include file
-ms.openlocfilehash: fe6c6d461fd6b99ce2ce57ebdd61a3f3e961489c
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 42e965b188db2b84579ab322fbe19781000dff7e
+ms.sourcegitcommit: a3a40ad60b8ecd8dbaf7f756091a419b1fe3208e
 ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188534"
+ms.lasthandoff: 08/21/2019
+ms.locfileid: "69894089"
 ---
 ## <a name="storage"></a>Depolama
 
@@ -24,4 +24,3 @@ ms.locfileid: "67188534"
 | [Depolama hesapları için seyrek erişim katmanını reddet](../articles/governance/policy/samples/deny-cool-access-tiering.md) | Blob depolama hesapları için seyrek erişimli depolama katmanının kullanılmasını engeller.  |
 | [Depolama hesabı için yalnızca HTTPS trafiğini güvence altına alma](../articles/governance/policy/samples/ensure-https-storage-account.md) | Depolama hesaplarının HTTPS trafiği kullanmasını gerektirir.  |
 | [Depolama dosya şifrelemesini güvence altına alma](../articles/governance/policy/samples/ensure-storage-file-encryption.md) | Depolama hesapları için dosya şifrelemenin etkinleştirilmesini gerektirir.  |
-| [Depolama hesabı şifrelemesi iste](../articles/governance/policy/samples/require-storage-account-encryption.md) | Blob şifrelemesi kullanmak için depolama hesabı gerektirir.  |

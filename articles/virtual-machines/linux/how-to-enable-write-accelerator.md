@@ -1,6 +1,6 @@
 ---
-title: Azure yazma Hızlandırıcı | Microsoft Docs
-description: Etkinleştirme ve yazma Hızlandırıcı kullanma hakkında belge
+title: Azure Yazma Hızlandırıcısı
+description: Yazma Hızlandırıcısı etkinleştirme ve kullanma ile ilgili belgeler
 services: virtual-machines-linux
 documentationcenter: ''
 author: raiye
@@ -9,7 +9,6 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
@@ -17,11 +16,12 @@ ms.date: 2/20/2019
 ms.author: raiye
 ms.custom: H1Hack27Feb2017
 ms.subservice: disks
-ms.openlocfilehash: fcd7b43bf142ab33c1a3421cbc539bb2646d48f2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 48842227e1467a64a0e5167ce319ea9da8dbc90f
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60543249"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036063"
 ---
+# <a name="enable-write-accelerator"></a>Yazma Hızlandırıcısı etkinleştir
 [!INCLUDE [how-to-enable-write-accelerator](../../../includes/virtual-machines-common-how-to-enable-write-accelerator.md)]

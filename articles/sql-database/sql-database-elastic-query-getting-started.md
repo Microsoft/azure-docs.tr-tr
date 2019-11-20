@@ -1,6 +1,6 @@
 ---
-title: Ölçeği genişletilen bulut veritabanlarında (yatay bölümleme) rapor | Microsoft Docs
-description: Çapraz veritabanı veritabanı sorguları için rapor birden fazla veritabanında kullanın.
+title: Ölçeği genişletilen bulut veritabanlarında raporlama
+description: Birden çok veritabanı arasında raporlamak için veritabanları arası veritabanı sorguları kullanın.
 services: sql-database
 ms.service: sql-database
 ms.subservice: scale-out
@@ -10,69 +10,68 @@ ms.topic: conceptual
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: sstein
-manager: craigg
-ms.date: 12/18/2018
-ms.openlocfilehash: a73938c98ebaea310875f0db8b665d0f1aed55e8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 10/10/2019
+ms.openlocfilehash: bad52b364dc83994e7985fc80b1b9f9e7f50481e
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60556271"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823785"
 ---
-# <a name="report-across-scaled-out-cloud-databases-preview"></a>(Önizleme) ölçeği genişletilen bulut veritabanlarında raporlama
+# <a name="report-across-scaled-out-cloud-databases-preview"></a>Ölçekli bulut veritabanları arasında rapor (Önizleme)
 
-Bir tek bağlantı noktası kullanarak birden çok Azure SQL veritabanından raporlar oluşturabilirsiniz bir [esnek sorgu](sql-database-elastic-query-overview.md). (Ayrıca "olarak parçalı" bilinen) yatay olarak bu veritabanlarını bölümlenmesi gerekir.
+[Elastik bir sorgu](sql-database-elastic-query-overview.md)kullanarak, tek bir bağlantı noktasından birden çok Azure SQL veritabanından rapor oluşturabilirsiniz. Veritabanlarının yatay olarak bölümlenmesi gerekir ("parçalar" olarak da bilinir).
 
-Mevcut bir veritabanı varsa, bkz: [ölçeği genişletilmiş veritabanları için mevcut veritabanlarını geçirme](sql-database-elastic-convert-to-use-elastic-tools.md).
+Var olan bir veritabanınız varsa, bkz. [var olan veritabanlarını ölçekli veritabanlarına geçirme](sql-database-elastic-convert-to-use-elastic-tools.md).
 
-Sorgu için gerekli olan SQL nesneleri anlamak için bkz: [sorgu yatay olarak bölünmüş veritabanlarında](sql-database-elastic-query-horizontal-partitioning.md).
+Sorgulamak için gereken SQL nesnelerini anlamak için bkz. [yatay bölümlenmiş veritabanlarında sorgulama](sql-database-elastic-query-horizontal-partitioning.md).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-İndirme ve çalıştırma [esnek veritabanı araçları örnek ile kullanmaya](sql-database-elastic-scale-get-started.md).
+[Esnek veritabanı araçları](sql-database-elastic-scale-get-started.md)'nı kullanmaya başlama örneğini indirip çalıştırın.
 
-## <a name="create-a-shard-map-manager-using-the-sample-app"></a>Parça eşleme Yöneticisi örnek uygulaması kullanarak oluşturma
-Burada bir parça eşleme Yöneticisi tarafından veri ekleme parçalara ardından birkaç parçalar ile birlikte oluşturur. Parçalı verileri parçalar Kurulumu zaten içeren seçerseniz, aşağıdaki adımları atlayın ve sonraki bölüme Taşı.
+## <a name="create-a-shard-map-manager-using-the-sample-app"></a>Örnek uygulamayı kullanarak parça eşleme Yöneticisi oluşturma
+Burada, birden fazla parça ile birlikte bir parça eşleme Yöneticisi oluşturacaksınız ve sonra verileri parçalara eklemekirsiniz. Zaten parçalar içindeki parçalı verileri içeren parçalar varsa, aşağıdaki adımları atlayabilir ve sonraki bölüme geçebilirsiniz.
 
-1. Derleme ve çalıştırma **esnek veritabanı araçları ile çalışmaya başlama** örnek uygulama. Bölümündeki 7. adım kadar adımları [örnek uygulamasını indirme ve çalıştırma](sql-database-elastic-scale-get-started.md#download-and-run-the-sample-app). Adım 7 sonunda, aşağıdaki komut istemi görürsünüz:
+1. [Örnek uygulamayı indirme ve çalıştırma](sql-database-elastic-scale-get-started.md#download-and-run-the-sample-app-1)makalesindeki adımları Izleyerek **elastik veritabanı araçları** örnek uygulamasını derleyin ve çalıştırın. Tüm adımları tamamladıktan sonra aşağıdaki komut istemi görüntülenir:
 
-    ![Komut İstemi][1]
-2. Komut penceresinde "1" yazın ve basın **Enter**. Parça eşleme Yöneticisi oluşturur ve iki parça sunucusuna ekler. Ardından, "3" yazın ve basın **Enter**; eylemi dört kez tekrarlayın. Bu örnek veri satırları, parçalarda ekler.
-3. [Azure portalında](https://portal.azure.com) üç yeni veritabanı sunucunuzun göstermelidir:
+    ![komut istemi][1]
+2. Komut penceresinde, "1" yazın ve **ENTER**tuşuna basın. Bu, parça eşleme yöneticisini oluşturur ve sunucuya iki parçalama ekler. Ardından "3" yazın ve **ENTER**tuşuna basın. eylemi dört kez tekrarlayın. Bu, parçalara örnek veri satırları ekler.
+3. [Azure Portal](https://portal.azure.com) , sunucunuzda üç yeni veritabanı göstermelidir:
 
    ![Visual Studio onayı][2]
 
-   Bu noktada, platformlar arası sorguları, elastik veritabanı istemci kitaplıkları aracılığıyla desteklenir. Örneğin, komut penceresinde 4 seçeneğini kullanın. Çok parçalı sorgusundan gelen sonuçları her zaman olan bir **UNION ALL** sonuçlarına ilişkin tüm parçalar.
+   Bu noktada, çapraz veritabanı sorguları elastik veritabanı istemci kitaplıkları aracılığıyla desteklenir. Örneğin, komut penceresinde 4 seçeneğini kullanın. Çok parçalı bir sorgunun sonuçları her zaman tüm parçalardaki sonuçların bir **birleşimidir** .
 
-   Sonraki bölümde, verilerin parçalar arasında daha zengin sorgulama destekleyen bir örnek veritabanı uç nokta oluşturacağız.
+   Sonraki bölümde, parçaları genelinde verilerin daha zengin sorgulanmasını destekleyen bir örnek veritabanı uç noktası oluşturacağız.
 
-## <a name="create-an-elastic-query-database"></a>Esnek sorgu veritabanı oluşturma
-1. Açık [Azure portalında](https://portal.azure.com) ve oturum açın.
-2. Parça kurulumunuzu ile aynı sunucuda yeni bir Azure SQL veritabanı oluşturun. Adı ' % s'veritabanı "ElasticDBQuery."
+## <a name="create-an-elastic-query-database"></a>Elastik sorgu veritabanı oluşturma
+1. [Azure Portal](https://portal.azure.com) açın ve oturum açın.
+2. Parça kurulumlarınız ile aynı sunucuda yeni bir Azure SQL veritabanı oluşturun. "Elaun dbquery" veritabanını adlandırın.
 
-    ![Azure portalı ve fiyatlandırma katmanı][3]
+    ![Azure portal ve Fiyatlandırma Katmanı][3]
 
     > [!NOTE]
-    > Varolan bir veritabanını kullanabilirsiniz. Bunu, sorgularınızı yürütmek istediğiniz parçalar birini olmamalıdır. Bu veritabanı, esnek veritabanı sorgusu için meta veri nesneleri oluşturmak için kullanılır.
+    > var olan bir veritabanını kullanabilirsiniz. Bunu yapabiliyorsanız, sorgularınızı yürütmek istediğiniz parçaların biri olmamalıdır. Bu veritabanı, elastik veritabanı sorgusu için meta veri nesneleri oluşturmak üzere kullanılacaktır.
     >
 
-## <a name="create-database-objects"></a>Veritabanı nesneleri oluşturma
-### <a name="database-scoped-master-key-and-credentials"></a>Veritabanı kapsamlı ana anahtarı hem de kimlik bilgileri
-Bunlar, parça eşleme Yöneticisi ve parçalar bağlanmak için kullanılır:
+## <a name="create-database-objects"></a>Veritabanı nesneleri oluştur
+### <a name="database-scoped-master-key-and-credentials"></a>Veritabanı kapsamlı ana anahtar ve kimlik bilgileri
+Bunlar, parça eşleme Yöneticisi ve parçaları 'na bağlanmak için kullanılır:
 
-1. SQL Server Management Studio veya SQL Server veri araçları, Visual Studio'da açın.
-2. ElasticDBQuery veritabanına bağlanmak ve aşağıdaki T-SQL komutlarını çalıştırın:
+1. Visual Studio 'da SQL Server Management Studio veya SQL Server Veri Araçları açın.
+2. Elaun dbquery veritabanına bağlanın ve aşağıdaki T-SQL komutlarını yürütün:
 
-        CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>';
+        CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master_key_password>';
 
         CREATE DATABASE SCOPED CREDENTIAL ElasticDBQueryCred
         WITH IDENTITY = '<username>',
         SECRET = '<password>';
 
-    "username" ve "password" olmalıdır 6. adımında kullanılan oturum açma bilgileri aynı [örnek uygulamasını indirme ve çalıştırma](sql-database-elastic-scale-get-started.md#download-and-run-the-sample-app) içinde [esnek veritabanı araçları ile çalışmaya başlama](sql-database-elastic-scale-get-started.md).
+    "Kullanıcı adı" ve "parola", **elastik veritabanı araçları ile çalışmaya başlama** makalesinde [Örnek uygulamayı indirme ve çalıştırma](sql-database-elastic-scale-get-started.md#download-and-run-the-sample-app) başlıklı Bölüm adım 3 ' te kullanılan oturum açma bilgileri ile aynı olmalıdır.
 
 ### <a name="external-data-sources"></a>Dış veri kaynakları
-Bir dış veri kaynağı oluşturmak için ElasticDBQuery veritabanı üzerinde aşağıdaki komutu yürütün:
+Dış veri kaynağı oluşturmak için, Elaun dbquery veritabanında aşağıdaki komutu yürütün:
 
     CREATE EXTERNAL DATA SOURCE MyElasticDBQueryDataSrc WITH
       (TYPE = SHARD_MAP_MANAGER,
@@ -82,10 +81,10 @@ Bir dış veri kaynağı oluşturmak için ElasticDBQuery veritabanı üzerinde 
        SHARD_MAP_NAME = 'CustomerIDShardMap'
     ) ;
 
- Parça Haritası ve parça eşleme Yöneticisi esnek veritabanı araçları örneğini kullanarak oluşturduysanız, "CustomerIDShardMap" parça eşlemesi adıdır. Ancak, bu örnek için özel kurulumunuzu kullandıysanız, uygulamanızda seçtiğiniz parça eşleme adı olması gerekir.
+ "Customerıdshardmap", parçalı harita ve parça eşleme yöneticisini elastik veritabanı araçları örneği kullanarak oluşturduysanız parça eşlemenin adıdır. Ancak, bu örnek için özel kurulumunuzu kullandıysanız, uygulamanızda seçtiğiniz parça haritası adı olmalıdır.
 
 ### <a name="external-tables"></a>Dış tablolar
-ElasticDBQuery veritabanında aşağıdaki komutu yürüterek parçaları Müşteriler tablosunda eşleşen bir dış tablo oluşturun:
+Elagardbquery veritabanında aşağıdaki komutu yürüterek parçaların içindeki Customers tablosuyla eşleşen bir dış tablo oluşturun:
 
     CREATE EXTERNAL TABLE [dbo].[Customers]
     ( [CustomerId] [int] NOT NULL,
@@ -96,46 +95,46 @@ ElasticDBQuery veritabanında aşağıdaki komutu yürüterek parçaları Müşt
       DISTRIBUTION = SHARDED([CustomerId])
     ) ;
 
-## <a name="execute-a-sample-elastic-database-t-sql-query"></a>Esnek veritabanı örnek T-SQL sorgusu yürütme
-Dış veri kaynağı ve dış tablolarınızı tanımladıktan sonra tam T-SQL artık dış tablolarınızı kullanabilirsiniz.
+## <a name="execute-a-sample-elastic-database-t-sql-query"></a>Örnek esnek veritabanı T-SQL sorgusu yürütme
+Dış veri kaynağınızı ve dış tablolarınızı tanımladıktan sonra, dış Tablolarınızda artık tam T-SQL kullanabilirsiniz.
 
-Bu sorgu ElasticDBQuery veritabanında yürütün:
+Bu sorguyu Elaun dbquery veritabanında yürütün:
 
     select count(CustomerId) from [dbo].[Customers]
 
-Sorgu sonuçları tüm parçadan toplayan ve şu çıktıyı verir olduğunu göreceksiniz:
+Sorgunun tüm parçalardan sonuçları topladığına ve aşağıdaki çıktıyı sunduğuna dikkat edin:
 
-![Çıkış Ayrıntıları][4]
+![Çıkış ayrıntıları][4]
 
-## <a name="import-elastic-database-query-results-to-excel"></a>Excel için elastik veritabanı sorgusu sonuçlarını Al
- Gelen bir sorgunun sonuçlarının bir Excel dosyasına aktarabilirsiniz.
+## <a name="import-elastic-database-query-results-to-excel"></a>Elastik veritabanı sorgu sonuçlarını Excel 'e aktar
+ Sorgunun sonuçlarını bir Excel dosyasına aktarabilirsiniz.
 
-1. Excel 2013'ün başlatın.
-2. Gidin **veri** Şerit.
-3. Tıklayın **diğer kaynaklardan** tıklatıp **SQL Server'dan**.
+1. Excel 2013 ' i başlatın.
+2. **Veri** şeridine gidin.
+3. **Diğer kaynaklardan** öğesine tıklayın ve **SQL Server**' ye tıklayın.
 
-   ![Excel Import diğer kaynaklardan][5]
-4. İçinde **Veri Bağlantı Sihirbazı'nı** sunucu adını ve oturum açma kimlik bilgilerini yazın. Ardından **İleri**'ye tıklayın.
-5. İletişim kutusunda **istediğiniz verileri içeren veritabanını seçin**seçin **ElasticDBQuery** veritabanı.
-6. Seçin **müşteriler** tıklayın ve liste görünümünde tablo **sonraki**. Ardından **son**.
-7. İçinde **verileri içeri aktarma** formunda, altında **bu verileri çalışma kitabınızı görüntüleme istediğiniz şekli seçin**seçin **tablo** tıklatıp **Tamam**.
+   ![Diğer kaynaklardan Excel içeri aktarma][5]
+4. **Veri bağlantısı Sihirbazı** 'nda sunucu adını ve oturum açma kimlik bilgilerini yazın. Ardından **İleri**'ye tıklayın.
+5. İletişim kutusunda istediğiniz **verileri içeren veritabanını seçin**, **Elaun dbquery** veritabanını seçin.
+6. Liste görünümünde **Customers** tablosunu seçin ve **İleri**' ye tıklayın. Ardından **son**' a tıklayın.
+7. **Veri al** formunda, **çalışma kitabınızda bu verileri nasıl görüntülemek Istediğinizi seçin**altında **tablo** ' yı seçin ve **Tamam**' ı tıklatın.
 
-Tüm satırların **müşteriler** tabloda, farklı parçalarda depolanan Excel sayfası doldurun.
+**Müşteriler** tablosundaki tüm satırlar, farklı parçalar halinde saklanan Excel sayfasını doldurur.
 
-Artık, Excel'in güçlü veri görselleştirme işlevleri kullanabilirsiniz. BI ve veri tümleştirme araçlarınızı esnek sorgu veritabanına bağlanmak için sunucu adını, veritabanı adı ve kimlik bilgileri ile bağlantı dizesini kullanabilirsiniz. SQL Server'ın aracınız için bir veri kaynağı olarak desteklendiğinden emin olun. Herhangi bir SQL Server veritabanı gibi dış tablolar ve aracınızla bağlanacağı SQL Server tabloları ve esnek sorgu veritabanı başvurabilirsiniz.
+Artık Excel 'in güçlü veri görselleştirme işlevlerini kullanabilirsiniz. Bı ve veri tümleştirme araçlarınızı elastik sorgu veritabanına bağlamak için sunucu adı, veritabanı adı ve kimlik bilgilerinizle bağlantı dizesini kullanabilirsiniz. SQL Server, aracınız için bir veri kaynağı olarak desteklendiğinden emin olun. Daha esnek sorgu veritabanına ve dış tablolara, tıpkı diğer tüm SQL Server veritabanları ve araç ile bağlandığınız SQL Server tabloları gibi başvurabilirsiniz.
 
 ### <a name="cost"></a>Maliyet
-Elastik veritabanı sorgusu özelliğini kullanmak için ek ücret yoktur.
+Elastik veritabanı sorgu özelliğinin kullanılması için ek ücret alınmaz.
 
-Fiyatlandırma bilgileri için bkz: [SQL veritabanı fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/sql-database/).
+Fiyatlandırma bilgileri için bkz. [SQL Veritabanı Fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/sql-database/).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Esnek sorgu genel bakış için bkz. [esnek sorgu genel bakış](sql-database-elastic-query-overview.md).
-* Dikey bölümleme öğreticisi için bkz. [(dikey bölümlendirme) veritabanları arası sorgu ile çalışmaya başlama](sql-database-elastic-query-getting-started-vertical.md).
-* Dikey olarak bölümlenmiş veriler için söz dizimi ve örnek sorgular için bkz. [sorgulama dikey olarak bölümlenmiş verileri)](sql-database-elastic-query-vertical-partitioning.md)
-* Yatay olarak bölümlenmiş veriler için söz dizimi ve örnek sorgular için bkz. [sorgulama yatay olarak bölümlenmiş veriler)](sql-database-elastic-query-horizontal-partitioning.md)
-* Bkz: [sp\_yürütme \_uzak](https://msdn.microsoft.com/library/mt703714) parçalarda bir yatay bölümleme düzeni olarak hizmet veren bir veritabanları kümesi veya bir uzak tek Azure SQL veritabanı Transact-SQL deyimini yürütür bir saklı yordam için.
+* Elastik sorguya genel bakış için bkz. [elastik sorguya genel bakış](sql-database-elastic-query-overview.md).
+* Dikey bölümleme öğreticisi için bkz. [çapraz veritabanı sorgusuna Başlarken (dikey bölümlendirme)](sql-database-elastic-query-getting-started-vertical.md).
+* Dikey olarak bölümlenmiş verilere yönelik sözdizimi ve örnek sorgular için bkz. [dikey olarak bölümlenmiş verileri sorgulama)](sql-database-elastic-query-vertical-partitioning.md)
+* Yatay olarak bölümlenmiş veriler için sözdizimi ve örnek sorgular için bkz. [yatay olarak bölümlenmiş verileri sorgulama)](sql-database-elastic-query-horizontal-partitioning.md)
+* Tek bir uzak Azure SQL veritabanı üzerinde Transact-SQL ifadesini yürüten saklı yordam için bkz. [sp\_execute \_Remote](https://msdn.microsoft.com/library/mt703714) , yatay bölümleme düzeninde parçalar olarak hizmet veren veritabanları kümesi.
 
 
 <!--Image references-->

@@ -1,73 +1,117 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Anomali Algılayıcısı API'si Belgeleri
+summary: Verileri zaman içinde izlemek ve makine öğrenmesi ile anomalileri algılamak için Anomali Algılayıcısı API'sini kullanmayı öğrenin. Hacimden, sektörden veya senaryodan bağımsız olarak verilerinizle ilgili içgörüler elde edin.
 metadata:
-  title: 'Anomali Algılayıcısı API''si - Öğreticiler, hızlı başlangıçlar, API başvurusu - Azure Bilişsel Hizmetler | Microsoft Docs'
-  description: 'Verileri zaman içinde izlemek ve makine öğrenmesi ile anomalileri algılamak için Anomali Algılayıcısı API''sini kullanın. Hacimden, sektörden veya senaryodan bağımsız olarak verilerinizle ilgili içgörüler elde edin.'
+  title: Anomali Algılayıcısı API'si - Öğreticiler, Hızlı başlangıçlar, API başvurusu
+  titleSuffix: Azure Cognitive Services
+  description: Verileri zaman içinde izlemek ve makine öğrenmesi ile anomalileri algılamak için Anomali Algılayıcısı API'sini kullanın. Hacimden, sektörden veya senaryodan bağımsız olarak verilerinizle ilgili içgörüler elde edin.
   services: cognitive-services
   author: aahill
-  manager: cgronlun
+  manager: nitinme
   layout: LandingPage
   ms.service: cognitive-services
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: anomaly-detector
   ms.topic: landing-page
-  ms.date: 03/26/2019
+  ms.date: 09/10/2019
   ms.author: aahi
-abstract:
-  description: 'Anomali Algılayıcısı API''si, kullanıcılarınızın sorunları hızla tanımlayıp kayıpları ve müşteriler üzerindeki etkiyi en aza indirmesini sağlamak için anomali algılama özelliklerini kolayca uygulamalarınıza eklemenize yardımcı olur. Makine öğrenmesi ile ilgili arka plan bilgisi gerekmez. Tek bir API çağrısıyla, her türde ve her hacimde zaman serisi verilerini alan, yüksek bir doğruluk düzeyi için verilerinize en uygun anomali algılama modelini seçen ve olayları oluştukları anda yüzeye çıkaran bu önceden eğitilmiş AI modelini etkinleştirebilirsiniz. Her büyüklükteki anomaliyi algılamak için hizmeti özelleştirebilirsiniz.  Anomali Algılayıcısı''nı kullanarak iş olaylarını tanımlayabilir, IoT cihaz trafiğini izleyebilir, sahtekarlığı yönetebilir, pazarlardaki değişikliklere yanıt verebilir ve daha birçok şey yapabilirsiniz.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/anomaly-detector/overview
-            html: <p>Anomali Algılayıcısı API'si hakkında bilgi edinin</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Anomali Algılayıcısı API'si nedir?
-          - href: /azure/cognitive-services/anomaly-detector/concepts/anomaly-detection-best-practices
-            html: <p>API ile en iyi yöntemleri kullanarak anomali algılama sonuçlarınızı iyileştirin</p>
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: Anomali Algılayıcısı API'sini kullanırken en iyi yöntemler
-          - href: /azure/cognitive-services/anomaly-detector/how-to/identify-anomalies
-            html: '<p>Anomali algılama hassaslığını ayarlayın, farklı algılama modları kullanın ve başka ayarlamalar yapın.</p>'
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: Anomali Algılama API'sini kullanma
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Aşağıdakileri kullanarak zaman serisi verilerinizdeki anomalileri algılayın:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/logo_Csharp.svg
-            href: quickstarts/detect-data-anomalies-csharp
-            text: 'C#'
-          - image:
-              src: media/logo_Java.svg
-            href: quickstarts/detect-data-anomalies-java
-            text: Java
-          - image:
-              src: media/logo_python.svg
-            href: quickstarts/detect-data-anomalies-python
-            text: Python
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: REST API
-            html: '<p><a href="https://aka.ms/anomaly-detector-rest-api-ref">Anomali Algılayıcısı API’si</a></p>'
-          - title: SDK’lar
-            html: '<p><a href="https://aka.ms/anomaly-detector-dotnet-ref">.NET</a></p> <p><a href="https://go.microsoft.com/fwlink/?linkid=2089915">Go</a></p> <p><a href="https://go.microsoft.com/fwlink/?linkid=2090370">Python</a></p> <p><a href="https://go.microsoft.com/fwlink/?linkid=2090788">Node.js</a></p>'
-          - title: PowerShell
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest">Azure CLI</a></p>'
+  ms.openlocfilehash: 4f7eca51cd4ec6995618b68bd376fa5f4f6268e4
+  ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/13/2019
+  ms.locfileid: "74013599"
+landingContent:
+- title: Anomali Algılayıcısı API'si hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Anomali Algılayıcısı API'si nedir?
+      url: overview.md
+  - linkListType: get-started
+    links:
+    - text: Anomali Algılayıcısı tanıtımı
+      url: https://aka.ms/adDemo
+  - linkListType: video
+    links:
+    - text: Anomali Algılayıcısı API'sine giriş
+      url: https://channel9.msdn.com/Shows/AI-Show/Introducing-Azure-Anomaly-Detector?WT.mc_id=ai-c9-niner
+    - text: Anomali Algılayıcısı API’si tarafından kullanılan algoritmalar
+      url: https://www.youtube.com/embed/ERTaAnwCarM
+  - linkListType: reference
+    links:
+    - text: Azure Anomali Algılayıcısı API’sine giriş
+      url: https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Introducing-Azure-Anomaly-Detector-API/ba-p/490162
+    - text: SR-CNN algoritmasına genel bakış
+      url: https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Overview-of-SR-CNN-algorithm-in-Azure-Anomaly-Detector/ba-p/982798
+    - text: Anomali algılamada kullanılan algoritmalar (KDD makalesi)
+      url: https://arxiv.org/abs/1906.03821
+- title: Verilerinizdeki anomalileri algılama
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: C# kullanma
+      url: quickstarts/detect-data-anomalies-csharp-sdk.md
+    - text: Python’u kullanma
+      url: quickstarts/detect-data-anomalies-python-sdk.md
+  - linkListType: tutorial
+    links:
+    - text: Toplu algılama ve Power BI kullanarak anomalileri görselleştirme
+      url: tutorials/batch-anomaly-detection-powerbi.md
+    - text: Azure Databricks kullanarak akış verilerinde Anomali algılama
+      url: tutorials/anomaly-detection-streaming-databricks.md
+  - linkListType: video
+    links:
+    - text: Azure Databricks kullanarak akış verileri üzerinde anomali algılama
+      url: https://channel9.msdn.com/Shows/AI-Show/Anomaly-detection-on-streaming-data-using-Azure-Databricks
+- title: Algılama sonuçlarınızı iyileştirme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Verileriniz için anomali algılama modlarını ve parametrelerini ayarlayın.
+      url: how-to/identify-anomalies.md
+    - text: Anomali algılama sonuçlarınızı iyileştirmek için en iyi yöntemleri kullanın.
+      url: concepts/anomaly-detection-best-practices.md
+  - linkListType: video
+    links:
+    - text: Anomali Algılayıcısı en iyi yöntemleri
+      url: https://channel9.msdn.com/Shows/AI-Show/Anomaly-Detector-v10-Best-Practices
+- title: Docker kapsayıcılarını kullanma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Anomali Algılayıcısı kapsayıcılarını yükleme ve çalıştırma
+      url: anomaly-detector-container-howto.md
+    - text: Anomali Algılayıcısı kapsayıcılarını yapılandırma
+      url: anomaly-detector-container-configuration.md
+    - text: Azure’a kapsayıcı örneği dağıtma
+      url: how-to/deploy-anomaly-detection-on-container-instances.md
+  - linkListType: video
+    links:
+    - text: Kapsayıcılar desteğiyle Anomali Algılayıcısı’nı şirket içine taşıma
+      url: https://channel9.msdn.com/Shows/AI-Show/Bring-Anomaly-Detector-on-premise-with-containers-support
+- title: Anomali Algılayıcısı topluluğuna katılın
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Microsoft Teams üzerinde Anomali Algılayıcısı Danışmanları grubuna katılın
+      url: https://aka.ms/adadvisorsjoin
+    - text: Öne çıkan kullanıcı tarafından oluşturulan içerikler
+      url: user-generated-content.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: REST API
+      url: https://aka.ms/anomaly-detector-rest-api-ref
+    - text: .NET SDK
+      url: https://aka.ms/anomaly-detector-dotnet-ref
+    - text: .Python SDK’sı
+      url: https://go.microsoft.com/fwlink/?linkid=2090370
+    - text: Go SDK'sı
+      url: https://go.microsoft.com/fwlink/?linkid=2089915
+    - text: Node.js SDK'sı
+      url: https://go.microsoft.com/fwlink/?linkid=2090788
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+    - text: Azure CLI
+      url: /cli/azure/cognitiveservices#az-cognitiveservices-list

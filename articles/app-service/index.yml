@@ -6,14 +6,12 @@ metadata:
   title: 'Azure App Service Belgeleri - Öğreticiler, API Başvurusu'
   meta.description: 'Learn how to use App Service to build and host websites and web applications, including RESTful APIs and mobile back ends.'
   services: app-service
-  author: czeumault
-  manager: carolz
+  author: georgewallace
+  manager: gwallace
   ms.service: app-service
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
   ms.date: 01/23/2017
-  ms.author: carolz
+  ms.author: gwallace
 abstract:
   description: 'Azure App Service, altyapı yönetimine gerek kalmadan, kendi seçtiğiniz programlama dilinde web uygulamaları, mobil arka uçlar ve REST API''ler oluşturmanıza ve barındırmanıza olanak tanır. Otomatik ölçeklendirme ve yüksek kullanılabilirlik sunar, hem Windows hem de Linux’ı destekler ve GitHub, Azure DevOps veya herhangi bir Git deposundan otomatik dağıtımlar sağlar. Hızlı başlangıçlarımız, öğreticilerimiz ve örneklerimizle Azure App Service’i kullanmayı öğrenin.'
   aside:
@@ -107,7 +105,7 @@ sections:
         items:
           - html: <a href="/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase">Azure SQL DB ile .NET</a> veya <a href="/azure/app-service/app-service-web-tutorial-nodejs-mongodb-app">MongoDB ile Node.js</a> kullanarak uygulama oluşturma
           - html: <a href="/azure/app-service/app-service-web-tutorial-custom-domain">Mevcut bir özel etki alanını uygulamanıza eşleme</a>
-          - html: <a href="/azure/app-service/app-service-web-tutorial-custom-SSL">Mevcut bir SSL sertifikasını uygulamanıza bağlama</a>
+          - html: <a href="/azure/app-service/configure-ssl-certificate">Azure App Service'de SSL bağlamasıyla özel DNS adının güvenliğini sağlama</a>
           - html: <a href="/azure/app-service/app-service-web-tutorial-content-delivery-network">Uygulamanıza CDN ekleme</a>
   - title: Microsoft Learn ile becerilerinizi geliştirin
     items:

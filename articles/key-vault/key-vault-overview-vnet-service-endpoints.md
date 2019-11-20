@@ -1,86 +1,87 @@
 ---
-title: Sanal ağ hizmet uç noktaları Azure Key Vault - Azure Key Vault için | Microsoft Docs
-description: Sanal ağ hizmet uç noktaları için Key Vault genel bakış
+title: Azure Key Vault için sanal ağ hizmet uç noktaları Azure Key Vault | Microsoft Docs
+description: Key Vault için sanal ağ hizmeti uç noktalarına genel bakış
 services: key-vault
 author: amitbapat
 ms.author: ambapat
-manager: barbkess
+manager: rkarlin
 ms.date: 01/02/2019
 ms.service: key-vault
 ms.topic: conceptual
-ms.openlocfilehash: 45499dac3cc50e2b6e79f9ebcb1bc3e7b4330beb
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 6e85e33cf0488cf688303c590c2bbaf5d671d9b7
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67165846"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73467115"
 ---
-# <a name="virtual-network-service-endpoints-for-azure-key-vault"></a>Sanal ağ hizmet uç noktaları Azure Key Vault için
+# <a name="virtual-network-service-endpoints-for-azure-key-vault"></a>Azure Key Vault için sanal ağ hizmeti uç noktaları
 
-Azure Key Vault için sanal ağ hizmet uç noktalarını belirtilen bir sanal ağa erişimi sınırlamak sağlar. Bitiş IPv4 (internet Protokolü sürüm 4) adres aralıkları listesine erişimi sınırlamak sağlar. Key vault'ta dışındaki kaynaklarda bağlanan herhangi bir kullanıcı, erişim reddedildi.
+Azure Key Vault için sanal ağ hizmet uç noktaları, belirtilen sanal ağa erişimi kısıtlayabilmeniz için izin verir. Uç noktalar Ayrıca bir IPv4 (Internet Protokolü sürüm 4) adres aralığı listesine erişimi sınırlamanıza olanak tanır. Anahtar kasanıza bu kaynakların dışından bağlanan herhangi bir kullanıcının erişimi reddedilir.
 
-Bu kısıtlama için önemli bir istisna yoktur. Bir kullanıcı kabul güvenilen Microsoft hizmetlerinin izin vermek için açma, bu hizmetlerinden gelen bağlantıları güvenlik duvarı üzerinden izin. Örneğin, bu hizmetler Office 365 Exchange Online içerir, Office 365 SharePoint Online, Azure işlem, Azure Resource Manager ve Azure Backup. Bu kullanıcılar hala geçerli bir Azure Active Directory belirteci sunmak gereken ve gerekir istenen işlemi gerçekleştirmek için sahip izinleri (erişim ilkeleri olarak yapılandırılır). Daha fazla bilgi için [sanal ağ hizmet uç noktaları](../virtual-network/virtual-network-service-endpoints-overview.md).
+Bu kısıtlamanın önemli bir istisnası vardır. Bir kullanıcı güvenilen Microsoft hizmetlerine izin vermeyi kabul ettiğinde, bu hizmetlerden gelen bağlantılara güvenlik duvarı üzerinden izin verilir. Örneğin, bu hizmetler Office 365 Exchange Online, Office 365 SharePoint Online, Azure işlem, Azure Resource Manager ve Azure Backup içerir. Bu tür kullanıcıların yine de geçerli bir Azure Active Directory belirteci sunması gerekir ve istenen işlemi gerçekleştirmek için izinleri (erişim ilkeleri olarak yapılandırılmış) olmalıdır. Daha fazla bilgi için bkz. [sanal ağ hizmeti uç noktaları](../virtual-network/virtual-network-service-endpoints-overview.md).
 
 ## <a name="usage-scenarios"></a>Kullanım senaryoları
 
-Yapılandırabileceğiniz [Key Vault güvenlik duvarları ve sanal ağlar](key-vault-network-security.md) varsayılan olarak (internet trafiğini dahil) tüm ağlardan erişime trafiği reddetmek için. Erişim uygulamalarınız için bir güvenli ağ sınırı oluşturmanıza izin vererek belirli bir Azure sanal ağları ve genel internet IP adresi trafiği için aralıklar, verebilirsiniz.
+[Key Vault güvenlik duvarlarını ve sanal ağları](key-vault-network-security.md) , varsayılan olarak tüm ağlardan gelen trafiğe (internet trafiği dahil) erişimi reddedecek şekilde yapılandırabilirsiniz. Belirli Azure sanal ağlarından ve genel İnternet IP adresi aralıklarından trafiğe erişim izni vererek uygulamalarınız için güvenli bir ağ sınırı oluşturabilirsiniz.
 
 > [!NOTE]
-> Key Vault güvenlik duvarları ve sanal ağ kuralları yalnızca geçerli [veri düzlemi](../key-vault/key-vault-secure-your-key-vault.md#data-plane-access-control) anahtar kasası. Anahtar kasası denetim düzlemi işlemleri (gibi oluşturma, silme ve işlemleri, erişim ilkeleri ayarlama, ayar güvenlik duvarları ve sanal ağ kuralları değiştirme), güvenlik duvarları ve sanal ağ kuralları tarafından etkilenmez.
+> Key Vault güvenlik duvarları ve sanal ağ kuralları yalnızca Key Vault [veri düzlemine](../key-vault/key-vault-secure-your-key-vault.md#data-plane-access-control) uygulanır. Key Vault denetim düzlemi işlemleri (oluşturma, silme ve değiştirme işlemleri, erişim ilkelerini ayarlama, güvenlik duvarlarını ayarlama ve sanal ağ kuralları), güvenlik duvarları ve sanal ağ kurallarından etkilenmez.
 
-Hizmet uç noktaları nasıl kullanabileceğinize ilişkin bazı örnekler şunlardır:
+Hizmet uç noktalarını nasıl kullanabileceğinizi gösteren bazı örnekler şunlardır:
 
-* Key Vault, şifreleme anahtarları, uygulama gizli dizilerini ve sertifikaları depolamak için kullandığınız ve genel internet'ten anahtar kasanız için erişimi engellemek istiyorsunuz.
-* Anahtar kasanıza erişim yalnızca uygulamanız veya atanmış konaklar, kısa bir listesi için anahtar kasanıza bağlanabilmesi için kilitlemek istediğiniz.
-* Azure sanal ağınızda çalışan bir uygulamaya sahiptir ve tüm gelen ve giden trafik için bu sanal ağ kilitlenmiştir. Uygulama parolaları veya sertifikaları getirme veya şifreleme anahtarlarını kullanmak için anahtar Kasası'na bağlanmak hala gerekir.
+* Şifreleme anahtarlarını, uygulama gizli dizilerini ve sertifikaları depolamak için Key Vault kullanıyorsunuz ve genel İnternet 'ten anahtar kasanıza erişimi engellemek istiyorsunuz.
+* Anahtar kasanıza yalnızca uygulamanızın veya kısa bir ana bilgisayar listesinin bir listesini, anahtar kasanıza bağlanabilmesi için, anahtar kasanıza erişimi kilitlemek istiyorsunuz.
+* Azure sanal ağınızda çalışan bir uygulamanız var ve tüm gelen ve giden trafik için bu sanal ağ kilitli. Uygulamanızın parolaları veya sertifikaları getirmek veya şifreleme anahtarlarını kullanmak için Key Vault bağlanması gerekir.
 
-## <a name="configure-key-vault-firewalls-and-virtual-networks"></a>Key Vault güvenlik duvarları ve sanal ağları yapılandırma
+## <a name="configure-key-vault-firewalls-and-virtual-networks"></a>Key Vault güvenlik duvarlarını ve sanal ağları yapılandırma
 
-Güvenlik duvarları ve sanal ağları yapılandırmak için gereken adımlar aşağıda verilmiştir. PowerShell, Azure CLI veya Azure portalı kullanıp kullanmadığınızı aşağıdaki adımları uygulayın.
+Güvenlik duvarlarını ve sanal ağları yapılandırmak için gereken adımlar aşağıda verilmiştir. Bu adımlar, PowerShell, Azure CLı veya Azure portal kullanıp kullanmayacağınızı uygular.
 
-1. Etkinleştirme [anahtar kasası günlüğü](key-vault-logging.md) ayrıntılı erişim günlükleri görmek için. Güvenlik duvarları ve sanal ağ kuralları bir anahtar kasasına erişim engellediğinizde bu Tanılama'da yardımcı olur. (Bu adım isteğe bağlıdır ancak uygulanması önemle önerilir.)
-2. Etkinleştirme **hizmet uç noktalarını key vault için** hedef sanal ağlar ve alt ağlar için.
-3. Güvenlik duvarları ve sanal özel ağlar, alt ağlar ve IPv4 adres aralıklarını, anahtar Kasası'na erişimi kısıtlamak bir anahtar kasası için sanal ağ kuralları ayarlayın.
-4. Bu anahtar kasası, tüm güvenilen Microsoft Hizmetleri tarafından erişilebilir olması gereken, izin vermek için bu seçeneği etkinleştirin. **güvenilen Azure hizmetlerinin** anahtar Kasası'na bağlanmak için.
+1. Ayrıntılı erişim günlüklerini görmek için [Key Vault günlüğe kaydetmeyi](key-vault-logging.md) etkinleştirin. Bu, güvenlik duvarları ve sanal ağ kuralları bir anahtar kasasının erişimini engelliyorsa tanılamada yardımcı olur. (Bu adım isteğe bağlıdır, ancak önemle önerilir.)
+2. Hedef sanal ağlar ve alt ağlar için **Anahtar Kasası için hizmet uç noktalarını** etkinleştirin.
+3. Belirli sanal ağlardan, alt ağlardan ve IPv4 adres aralıklarından ilgili anahtar kasasına erişimi kısıtlamak için bir Anahtar Kasası için güvenlik duvarlarını ve sanal ağ kurallarını ayarlayın.
+4. Bu anahtar kasasının herhangi bir güvenilir Microsoft hizmeti tarafından erişilebilir olması gerekiyorsa, **Güvenilen Azure hizmetlerinin** Key Vault bağlanmasına izin ver seçeneğini etkinleştirin.
 
-Daha fazla bilgi için [Azure anahtar Kasası'nı yapılandırma güvenlik duvarları ve sanal ağlar](key-vault-network-security.md).
+Daha fazla bilgi için bkz. [Azure Key Vault güvenlik duvarlarını ve sanal ağları yapılandırma](key-vault-network-security.md).
 
 > [!IMPORTANT]
-> Güvenlik duvarı kuralları etkin olduktan sonra kullanıcılar yalnızca Key Vault gerçekleştirebilir [veri düzlemi](../key-vault/key-vault-secure-your-key-vault.md#data-plane-access-control) isteklerinde kaynaklanan olduğunda işlemlerine izin sanal ağlara veya IPv4 adres aralıklarını. Bu, aynı zamanda Key Vault Azure portalından erişmek için geçerlidir. Kullanıcılar, Azure portalından bir anahtar Kasası'na göz atabilir olsa da, kendi istemci makine izin verilenler listesinde değilse, bunlar liste anahtarlarını, gizli dizileri veya sertifikaları mümkün olmayabilir. Bu anahtar kasası Seçici tarafından diğer Azure hizmetleri de etkiler. Kullanıcılar anahtar kasalarının listesi bakın, ancak güvenlik duvarı kurallarını istemci makine engelliyorsa anahtarları listesi değil mümkün olabilir.
+> Güvenlik duvarı kuralları etkin olduktan sonra, kullanıcılar, istekleri izin verilen sanal ağlardan veya IPv4 adres aralıklarından başlatıldığında yalnızca Key Vault [veri düzlemi](../key-vault/key-vault-secure-your-key-vault.md#data-plane-access-control) işlemleri gerçekleştirebilir. Bu, Azure portal Key Vault erişmek için de geçerlidir. Kullanıcılar Azure portal bir anahtar kasasına gözatabilse de, istemci makineleri izin verilenler listesinde yoksa anahtarları, parolaları veya sertifikaları listelemeyebilir. Bu, diğer Azure hizmetleri tarafından Key Vault seçiciyi de etkiler. Kullanıcılar, güvenlik duvarı kuralları istemci makinesini engelliyorsa, anahtar kasalarının listesini görebilirler, ancak liste anahtarlarını göremez.
 
 
 > [!NOTE]
-> Aşağıdaki yapılandırma sınırlamaları unutmayın:
-> * En fazla 127 sanal ağ kuralları ve 127 IPv4 kuralları izin verilir. 
-> * Küçük adres aralıkları kullanan "/ 31" veya "/ 32" öneki boyutları desteklenmez. Bunun yerine, tek tek IP adresi kurallarını kullanarak bu aralığı yapılandırın.
-> * IP ağ kuralları yalnızca genel IP adresleri için izin verilir. IP adresi aralıkları için özel ağlar (RFC 1918 ' tanımlandığı şekilde) ayrılmış IP kurallarında izin verilmez. Özel ağlar ile başlayan bir adres dahil **10.** , **172.16-31**, ve **192.168.** . 
-> * Şu anda yalnızca IPv4 adresleri desteklenir.
+> Aşağıdaki yapılandırma sınırlamalarından haberdar olun:
+> * En fazla 127 sanal ağ kuralına ve 127 IPv4 kuralına izin verilir. 
+> * "/31" veya "/32" ön ek boyutlarını kullanan küçük adres aralıkları desteklenmez. Bunun yerine, tek tek IP adresi kurallarını kullanarak bu aralıkları yapılandırın.
+> * IP ağ kurallarına yalnızca genel IP adresleri için izin verilir. Özel ağlar için ayrılan IP adresi aralıklarına (RFC 1918 ' de tanımlandığı gibi) IP kurallarında izin verilmez. Özel ağlarda **10.** , **172.16-31**ve 192,168 ile başlayan adresler bulunur **.** 
+> * Şu anda yalnızca IPv4 adresleri destekleniyor.
 
-## <a name="trusted-services"></a>Güvenilir hizmetler
+## <a name="trusted-services"></a>Güvenilen hizmetler
 
-İşte bir listesi, bir anahtar kasasına erişmek için izin verilen güvenilir hizmetlerin **izin güvenilir Hizmetleri** seçeneği etkin olduğunda.
+**Güvenilen hizmetlere Izin ver** seçeneği etkinse, anahtar kasasına erişmesine izin verilen güvenilir hizmetlerin bir listesi aşağıda verilmiştir.
 
-|Güvenilir hizmet|Kullanım senaryoları|
+|Güvenilen hizmet|Desteklenen kullanım senaryoları|
 | --- | --- |
-|Azure sanal makineleri dağıtım hizmeti|[Sertifikalar, müşteri tarafından yönetilen Key Vault'tan Vm'lerine dağıtma](https://blogs.technet.microsoft.com/kv/2016/09/14/updated-deploy-certificates-to-vms-from-customer-managed-key-vault/).|
-|Azure Resource Manager şablon dağıtımı hizmeti|[Dağıtım sırasında güvenlik değerlerini geçirme](../azure-resource-manager/resource-manager-keyvault-parameter.md).|
-|Azure Disk şifrelemesi birim şifreleme hizmeti|BitLocker anahtarı (Windows VM) veya DM parola (Linux VM) ve anahtar şifreleme anahtarı, sanal makine dağıtımı sırasında erişilebilsin. Böylece [Azure Disk şifrelemesi](../security/azure-security-disk-encryption.md).|
-|Azure Backup|Yedekleme ve geri yükleme ilgili anahtar ve gizli dizi Azure sanal makineleri yedekleme sırasında kullanarak izin [Azure Backup](../backup/backup-introduction-to-azure-backup.md).|
-|Exchange Online ve SharePoint Online|Müşteri anahtarı için Azure depolama hizmeti şifrelemesi ile erişmesine [müşteri anahtarı](https://support.office.com/article/Controlling-your-data-in-Office-365-using-Customer-Key-f2cd475a-e592-46cf-80a3-1bfb0fa17697).|
-|Azure Information Protection|Kiracı anahtarı için erişim izni [Azure Information Protection.](https://docs.microsoft.com/azure/information-protection/what-is-information-protection)|
-|Azure uygulama hizmeti|[Key Vault üzerinden Azure Web App sertifikası dağıtma](https://azure.github.io/AppService/2016/05/24/Deploying-Azure-Web-App-Certificate-through-Key-Vault.html).|
-|Azure SQL Veritabanı|[Azure SQL veritabanı ve veri ambarı için kendi anahtarını Getir destekli saydam veri şifrelemesi](../sql-database/transparent-data-encryption-byok-azure-sql.md?view=sql-server-2017&viewFallbackFrom=azuresqldb-current).|
-|Azure Storage|[Azure anahtar Kasası'nda müşteri tarafından yönetilen anahtarlar kullanılarak depolama hizmeti şifrelemesi](../storage/common/storage-service-encryption-customer-managed-keys.md).|
-|Azure Data Lake Store|[Azure Data Lake Store içinde verilerin şifrelenmesi](../data-lake-store/data-lake-store-encryption.md) müşteri tarafından yönetilen bir anahtara sahip.|
-|Azure databricks|[Hızlı, kolay ve işbirliğine dayalı Apache Spark tabanlı analiz hizmeti](../azure-databricks/what-is-azure-databricks.md)|
-|Azure API Management|[MSI kullanarak Key vault'tan özel etki alanı için sertifikaları dağıtma](../api-management/api-management-howto-use-managed-service-identity.md#use-the-managed-service-identity-to-access-other-resources)|
+|Azure sanal makineler dağıtım hizmeti|[Sertifikaları, müşteri tarafından yönetilen Key Vault sanal makinelere dağıtın](https://blogs.technet.microsoft.com/kv/2016/09/14/updated-deploy-certificates-to-vms-from-customer-managed-key-vault/).|
+|Azure Resource Manager şablonu dağıtım hizmeti|[Dağıtım sırasında güvenli değerler geçirin](../azure-resource-manager/resource-manager-keyvault-parameter.md).|
+|Azure disk şifreleme birimi şifreleme hizmeti|Sanal makine dağıtımı sırasında BitLocker anahtarına (Windows VM) veya DM parolasının (Linux VM) ve anahtar şifreleme anahtarına erişime izin verin. Bu, [Azure disk şifrelemesini](../security/fundamentals/encryption-overview.md)mümkün bir şekilde sunar.|
+|Azure Backup|[Azure Backup](../backup/backup-introduction-to-azure-backup.md)kullanarak Azure sanal makineler yedeklemesi sırasında ilgili anahtarların ve parolaların yedeklenme ve geri yüklenmesine izin verin.|
+|Exchange Online & SharePoint Online|[Müşteri anahtarına](https://support.office.com/article/Controlling-your-data-in-Office-365-using-Customer-Key-f2cd475a-e592-46cf-80a3-1bfb0fa17697)sahip Azure depolama hizmeti şifrelemesi müşteri anahtarına erişime izin verin.|
+|Azure Information Protection|Azure Information Protection için kiracı anahtarına erişime izin ver [.](https://docs.microsoft.com/azure/information-protection/what-is-information-protection)|
+|Azure App Service|[Key Vault aracılığıyla Azure Web uygulaması sertifikasını dağıtın](https://azure.github.io/AppService/2016/05/24/Deploying-Azure-Web-App-Certificate-through-Key-Vault.html).|
+|Azure SQL Veritabanı|[Azure SQL veritabanı ve veri ambarı için kendi anahtarını getir desteğiyle saydam veri şifrelemesi](../sql-database/transparent-data-encryption-byok-azure-sql.md?view=sql-server-2017&viewFallbackFrom=azuresqldb-current).|
+|Azure Depolama|[Depolama Hizmeti Şifrelemesi Azure Key Vault müşteri tarafından yönetilen anahtarları kullanma](../storage/common/storage-service-encryption-customer-managed-keys.md).|
+|Azure Data Lake Store|Müşteri tarafından yönetilen bir anahtarla [Azure Data Lake Store verilerin şifrelenmesi](../data-lake-store/data-lake-store-encryption.md) .|
+|Azure Databricks|[Hızlı, kolay ve işbirliğine dayalı Apache Spark tabanlı analiz hizmeti](../azure-databricks/what-is-azure-databricks.md)|
+|Azure API Management|[MSI kullanarak Key Vault özel etki alanı için sertifika dağıtma](../api-management/api-management-howto-use-managed-service-identity.md#use-the-managed-service-identity-to-access-other-resources)|
+|Azure Data Factory|[Data Factory Key Vault veri deposu kimlik bilgilerini getir](https://go.microsoft.com/fwlink/?linkid=2109491)|
 
 
 
 > [!NOTE]
-> İlgili Key Vault erişim ilkeleri, anahtar kasasına erişim elde etmek karşılık gelen hizmetler izin verecek şekilde ayarlamanız gerekir.
+> İlgili hizmetlerin Key Vault erişimi almasını sağlamak için ilgili Key Vault erişim ilkelerini ayarlamanız gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Anahtar kasanızın güvenliğini sağlama](key-vault-secure-your-key-vault.md)
-* [Azure Key Vault güvenlik duvarları ve sanal ağları yapılandırma](key-vault-network-security.md)
+* [Azure Key Vault güvenlik duvarlarını ve sanal ağları yapılandırma](key-vault-network-security.md)

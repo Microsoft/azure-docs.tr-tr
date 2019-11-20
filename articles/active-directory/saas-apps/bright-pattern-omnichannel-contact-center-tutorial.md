@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Parlak deseni Omnichannel ilgili Center ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: Azure Active Directory ve parlak deseni Omnichannel ilgili Center arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici Azure Active Directory: parlak model omnichannel Iletişim merkezi ile çoklu oturum açma (SSO) Tümleştirmesi | Microsoft Docs'
+description: Azure Active Directory ve parlak desenli Iletişim merkezi arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -13,167 +13,162 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 06/19/2019
+ms.date: 10/18/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 205b1746bac30a015d4efe4bde573be44563e2f1
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 27cda1f1a797ca0cb8e1b9d1c4cd7498c22ddde5
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67450264"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74081927"
 ---
-# <a name="tutorial-integrate-bright-pattern-omnichannel-contact-center-with-azure-active-directory"></a>Öğretici: Parlak deseni Omnichannel ilgili Center Azure Active Directory ile tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-bright-pattern-omnichannel-contact-center"></a>Öğretici: parlak model omnichannel Iletişim merkezi ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, parlak deseni Omnichannel ilgili Center Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. Parlak deseni Omnichannel ilgili Center'ı Azure AD ile tümleştirdiğinizde, şunları yapabilirsiniz:
+Bu öğreticide, parlak model omnichannel Iletişim merkezini Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. Parlak model omnichannel Iletişim merkezini Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Parlak deseni Omnichannel kişi merkezi erişimi, Azure AD'de denetler.
-* Otomatik olarak parlak deseni Omnichannel kişi merkezine kendi Azure AD hesapları ile oturum açmış olmasını sağlayın.
-* Bir merkezi konumda - Azure portalı hesaplarınızı yönetin.
+* Azure AD 'de parlak desenler omnichannel Iletişim merkezine erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla parlak desenli bir Iletişim merkezine otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla bilgi için bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Başlamak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir aboneliğiniz yoksa, bir aylık ücretsiz deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/).
-* Parlak deseni Omnichannel ilgili Center çoklu oturum açma (SSO) abonelik etkin.
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Parlak desenler omnichannel kişi merkezi çoklu oturum açma (SSO) etkin abonelik.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD SSO bir test ortamında test edin.
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* Parlak deseni Omnichannel ilgili Center destekler **SP ve IDP** tarafından başlatılan
-* Parlak deseni Omnichannel ilgili Center destekler **zamanında** kullanıcı sağlama
 
-## <a name="adding-bright-pattern-omnichannel-contact-center-from-the-gallery"></a>Parlak deseni Omnichannel ilgili Center galeri ekleme
 
-Azure AD'ye parlak deseni Omnichannel ilgili Center tümleştirmesini yapılandırmak için parlak deseni Omnichannel ilgili Center Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+* Parlak model omnichannel kişi Merkezi **SP ve ıDP** tarafından başlatılan SSO 'yu destekler
+* Parlak model omnichannel kişi Merkezi **, tam zamanında** Kullanıcı sağlamasını destekler
+
+
+## <a name="adding-bright-pattern-omnichannel-contact-center-from-the-gallery"></a>Galeriden parlak model omnichannel kişi merkezi ekleme
+
+Parlak desenli omnichannel Iletişim merkezinin tümleştirmesini Azure AD 'ye göre yapılandırmak için, Galeri 'den, yönetilen SaaS uygulamaları listenize parlak desenli bir Iletişim merkezi eklemeniz gerekir.
 
 1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
-1. Sol gezinti bölmesinde seçin **Azure Active Directory** hizmeti.
-1. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları**.
-1. Yeni bir uygulama eklemek için seçin **yeni uygulama**.
-1. İçinde **Galeriden Ekle** bölümüne şunu yazın **parlak deseni Omnichannel ilgili Center** arama kutusuna.
-1. Seçin **parlak deseni Omnichannel ilgili Center** gelen sonuçlar panelinde ve uygulama ekleyin. Uygulama, kiracınıza eklendiği sırada birkaç saniye bekleyin.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **parlak model omnichannel iletişim merkezi** yazın.
+1. Sonuçlar panelinden **parlak desenli omnichannel Iletişim merkezini** seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-Yapılandırma ve test adlı bir test kullanıcı kullanarak Azure AD SSO parlak deseni Omnichannel ilgili Center ile **B.Simon**. Çalışmak SSO için bir Azure AD kullanıcısının parlak deseni Omnichannel ilgili Center ilgili kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
+## <a name="configure-and-test-azure-ad-single-sign-on-for-bright-pattern-omnichannel-contact-center"></a>Parlak model omnichannel için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Yapılandırma ve Azure AD SSO parlak deseni Omnichannel ilgili Center ile test etmek için aşağıdaki yapı taşlarını tamamlayın:
+**B. Simon**adlı bir test kullanıcısı kullanarak parlak model omnichannel Ile Azure AD SSO 'yu yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı arasında parlak model omnichannel Iletişim merkezinde bir bağlantı ilişkisi oluşturmanız gerekir.
 
-1. **[Azure AD SSO'yu yapılandırma](#configure-azure-ad-sso)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Parlak deseni Omnichannel ilgili Center SSO'yu yapılandırarak](#configure-bright-pattern-omnichannel-contact-center-sso)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma B.Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak B.Simon etkinleştirmek için.
-5. **[Parlak deseni Omnichannel ilgili Center test kullanıcısı oluşturma](#create-bright-pattern-omnichannel-contact-center-test-user)**  - parlak deseni Omnichannel kişi Merkezi'nde kullanıcı Azure AD gösterimini bağlı B.Simon bir karşılığı vardır.
-6. **[Test SSO](#test-sso)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+Azure AD SSO 'yu parlak model omnichannel ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-### <a name="configure-azure-ad-sso"></a>Azure AD SSO'yu yapılandırma
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    1. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. , Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[parlak desenli omnichannel Contact Center SSO 'Yu yapılandırın](#configure-bright-pattern-omnichannel-contact-center-sso)** .
+    1. **[Parlak model omnichannel kişi merkezi sınama kullanıcısı oluşturma](#create-bright-pattern-omnichannel-contact-center-test-user)** -kullanıcının Azure AD gösterimine bağlı olan parlak model omnichannel bağlantı merkezinde B. Simon 'ın bir karşılığı olacak.
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-Azure portalında Azure AD SSO'yu etkinleştirmek üzere aşağıdaki adımları izleyin.
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **parlak deseni Omnichannel ilgili Center** uygulama tümleştirme sayfası, bulma **Yönet** bölümünde ve seçin **tek oturum açma**.
-1. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** sayfasında **SAML**.
-1. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında, düzenleme/kalem simgesine tıklayıp **temel SAML yapılandırma** ayarlarını düzenlemek için.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
+
+1. [Azure Portal](https://portal.azure.com/), **parlak desenler omnichannel kişi merkezi** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-1. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** başlatılan modu, aşağıdaki adımları gerçekleştirin:
+1. **Temel SAML yapılandırması** bölümünde, **IDP** tarafından başlatılan modda uygulamayı yapılandırmak istiyorsanız aşağıdaki alanlar için değerleri girin:
 
-    a. İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak bir URL yazın: `<SUBDOMAIN>_sso`
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `<SUBDOMAIN>_sso`
 
-    b. İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<SUBDOMAIN>.brightpattern.com/agentdesktop/sso/redirect`
+    b. **Yanıt URL 'si** metin kutusuna şu kalıbı kullanarak bir URL yazın: `https://<SUBDOMAIN>.brightpattern.com/agentdesktop/sso/redirect`
 
-1. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+1. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://<SUBDOMAIN>.brightpattern.com/`
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<SUBDOMAIN>.brightpattern.com/`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek tanımlayıcısı, yanıt URL'si ve oturum açma URL'si ile güncelleştirin. İlgili kişi [parlak deseni Omnichannel ilgili Center istemci Destek ekibine](mailto:support@brightpattern.com) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı, yanıt URL 'SI ve oturum açma URL 'SI ile güncelleştirin. Bu değerleri almak için [parlak model omnichannel kişi Merkezi istemci destek ekibine](mailto:support@brightpattern.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-1. Parlak deseni Omnichannel ilgili Center uygulama belirli bir biçimde SAML onaylamalarını bekler. Bu uygulama için aşağıdaki talepleri yapılandırın. Bu öznitelikleri değerlerini yönetebilirsiniz **kullanıcı öznitelikleri** uygulama tümleştirme sayfasında bölümü. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için düğmeyi **kullanıcı öznitelikleri** iletişim.
+1. Parlak model omnichannel kişi Merkezi uygulaması, SAML onayları için SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde bekler. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir.
 
     ![image](common/edit-attribute.png)
 
-1. İçinde **kullanıcı taleplerini** bölümünde **kullanıcı öznitelikleri** iletişim kutusunda kullanarak talep Düzenle **düzenleme simgesi** veya talep kullanarak **Ekle yeni talep**SAML belirteci özniteliği yukarıdaki görüntüde gösterildiği gibi yapılandırın ve aşağıdaki adımları gerçekleştirin: 
+1. Yukarıdakine ek olarak, parlak desenli omnichannel Contact Center uygulaması aşağıda gösterilen SAML yanıtına daha fazla öznitelik geçirilmesini bekler. Bu öznitelikler de önceden doldurulur, ancak gereksiniminize göre bunları gözden geçirebilirsiniz.
 
     | Ad | Ad Alanı  |
     | ---------------| --------------- |
-    | FirstName | User.givenName |
-    | Soyadı | User.surname |
-    | email | User.Mail |
+    | firstName | Kullanıcı. |
+    | lastName | User. soyadı |
+    | e-posta | Kullanıcı. Mail |
 
-    a. Tıklayın **Ekle yeni talep** açmak için **yönetmek, kullanıcı talepleri** iletişim.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama sertifikası** bölümünde **sertifika bulun (base64)** ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-    b. İçinde **adı** metin kutusuna, bu satır için gösterilen öznitelik adı yazın.
+    ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-    c. Bırakın **Namespace** boş.
+1. **Parlak model omnichannel Iletişim merkezini ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    d. Kaynağı olarak **özniteliği**.
-
-    e. Gelen **kaynak özniteliği** listesinde, ilgili satır için gösterilen öznitelik değeri yazın.
-
-    f. Tıklayın **Tamam**
-
-    g. **Kaydet**’e tıklayın.
-
-1. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde, bulma **sertifika (Base64)** seçip **indirin** sertifikayı indirin ve bilgisayarınıza kaydedin.
-
-   ![Sertifika indirme bağlantısı](common/certificatebase64.png)
-
-1. Üzerinde **parlak deseni Omnichannel ilgili Center Kurulumu** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
-
-   ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
-
-### <a name="configure-bright-pattern-omnichannel-contact-center-sso"></a>Parlak deseni Omnichannel ilgili Center SSO yapılandırma
-
-Çoklu oturum açmayı yapılandırma **parlak deseni Omnichannel ilgili Center** tarafı, indirilen göndermek için ihtiyacınız **sertifika (Base64)** ve uygun URL'ler için Azure portalından [ Parlak deseni Omnichannel ilgili Center Destek ekibine](mailto:support@brightpattern.com). Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-Bu bölümde, bir test kullanıcısı B.Simon adlı Azure portalında oluşturacaksınız.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-1. Azure Portalı'ndaki sol bölmeden seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 1. Seçin **yeni kullanıcı** ekranın üstünde.
-1. İçinde **kullanıcı** özellikleri, aşağıdaki adımları izleyin:
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
    1. **Ad** alanına `B.Simon` girin.  
-   1. İçinde **kullanıcı adı** alanına username@companydomain.extension. Örneğin, `B.Simon@contoso.com`.
-   1. Seçin **Show parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
-   1. **Oluştur**’a tıklayın.
+   1. **Kullanıcı adı** alanına username@companydomain.extensiongirin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**’ tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, parlak deseni Omnichannel kişi merkezine erişim vererek, Azure çoklu oturum açma kullanılacak B.Simon tıklatmalarını sağlarsınız.
+Bu bölümde, parlak model omnichannel Iletişim merkezine erişim vererek, B. Simon 'u Azure çoklu oturum açma özelliğini kullanacak şekilde etkinleştireceksiniz.
 
-1. Azure portalında **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
-1. Uygulamalar listesinde **parlak deseni Omnichannel ilgili Center**.
-1. Uygulamanın genel bakış sayfasında bulma **Yönet** seçin ve bölüm **kullanıcılar ve gruplar**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde **parlak model omnichannel Iletişim merkezi**' ni seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-1. Seçin **Kullanıcı Ekle**, ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![Kullanıcı ekleme bağlantısı](common/add-assign-user.png)
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-1. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **B.Simon** kullanıcılar listesinden ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. SAML onaylama işlemi herhangi bir rolü değer de beklediğiniz varsa **rolü Seç** iletişim kutusunda, listeden bir kullanıcı için uygun rolü seçin ve ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. İçinde **atama Ekle** iletişim kutusunda, tıklayın **atama** düğmesi.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-bright-pattern-omnichannel-contact-center-test-user"></a>Parlak deseni Omnichannel ilgili Center test kullanıcısı oluşturma
+## <a name="configure-bright-pattern-omnichannel-contact-center-sso"></a>Parlak model omnichannel Contact Center SSO 'yu yapılandırma
 
-Bu bölümde, parlak deseni Omnichannel ilgili Center B.Simon adlı bir kullanıcı oluşturuldu. Parlak deseni Omnichannel ilgili Center just-ın-time kullanıcı hazırlama, varsayılan olarak etkin olduğu destekler. Bu bölümde, hiçbir eylem öğesini yoktur. Parlak deseni Omnichannel ilgili Center bir kullanıcı zaten mevcut değilse yeni bir kimlik doğrulamasından sonra oluşturulur.
+**Parlak model omnichannel Iletişim merkezi** tarafında çoklu oturum açma 'yı yapılandırmak için, indirilen **sertifikayı (Base64)** ve Azure Portal ' den [parlak desenler omnichannel iletişim merkezi destek ekibi](mailto:support@brightpattern.com)' ne uygun kopyalanmış URL 'leri göndermeniz gerekir. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 
-### <a name="test-sso"></a>Test SSO
+### <a name="create-bright-pattern-omnichannel-contact-center-test-user"></a>Parlak model omnichannel kişi merkezi test kullanıcısı oluşturma
 
-Erişim Paneli'nde parlak deseni Omnichannel ilgili Center kutucuğu seçtiğinizde, otomatik olarak parlak deseni Omnichannel kişi SSO'yu ayarlama merkezi oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Bu bölümde, B. Simon adlı bir Kullanıcı parlak desenler omnichannel Iletişim merkezinde oluşturulur. Parlak desenli omnichannel kişi Merkezi, varsayılan olarak etkinleştirilen tam zamanında Kullanıcı sağlamayı destekler. Bu bölümde sizin için herhangi bir eylem öğesi yok. Bir Kullanıcı parlak model omnichannel Iletişim merkezinde zaten yoksa, kimlik doğrulamasından sonra yeni bir tane oluşturulur.
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+## <a name="test-sso"></a>Test SSO 'SU 
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+Erişim panelinde parlak desen omnichannel Iletişim merkezi kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız parlak desenli bir Iletişim merkezinde otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+## <a name="additional-resources"></a>Ek kaynaklar
+
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+
+- [Azure AD ile parlak model omnichannel Iletişim merkezini deneyin](https://aad.portal.azure.com/)
+

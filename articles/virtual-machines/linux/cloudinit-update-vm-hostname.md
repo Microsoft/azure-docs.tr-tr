@@ -1,10 +1,10 @@
 ---
-title: Azure'da bir Linux VM için ana bilgisayar adı ayarlamak için cloud-init kullanma | Microsoft Docs
-description: Azure CLI ile oluşturma sırasında bir Linux VM özelleştirmek için cloud-init kullanma
+title: Azure 'da bir Linux sanal makinesi için konak adı ayarlamak için Cloud-init kullanın
+description: Azure CLı ile oluşturma sırasında bir Linux sanal makinesini özelleştirmek için Cloud-init kullanma
 services: virtual-machines-linux
 documentationcenter: ''
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
@@ -14,33 +14,33 @@ ms.devlang: azurecli
 ms.topic: article
 ms.date: 11/29/2017
 ms.author: rclaus
-ms.openlocfilehash: da20c4b30e2708bf7754d025cfbd2c269c3b5c7c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: adac9dc41aaba7ce6bfd9f01917d647174b41282
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60648950"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036708"
 ---
-# <a name="use-cloud-init-to-set-hostname-for-a-linux-vm-in-azure"></a>Azure'da bir Linux sanal makinesi için ana bilgisayar adı ayarlamak için cloud-init kullanma
-Bu makalede nasıl kullanılacağını gösterir [cloud-init](https://cloudinit.readthedocs.io) belirli bir ana bilgisayar adı, bir sanal makine (VM) veya sanal makinede yapılandırmak için ölçek kümeleri (VMSS zaman azure'da sağlama sırasında). Kaynakları Azure tarafından sağlanan sonra ilk önyüklemede bu cloud-init betikleri çalıştırın. Cloud-init yerel olarak desteklenen Linux dağıtımları ve Azure ile işleyişi hakkında daha fazla bilgi için bkz. [cloud-init genel bakış](using-cloud-init.md)
+# <a name="use-cloud-init-to-set-hostname-for-a-linux-vm-in-azure"></a>Azure 'da bir Linux sanal makinesi için konak adı ayarlamak için Cloud-init kullanın
+Bu makalede, Azure 'da sağlama zamanında bir sanal makinede (VM) veya sanal makine ölçek kümelerinde (VMSS) belirli bir ana bilgisayar adını yapılandırmak için [Cloud-init](https://cloudinit.readthedocs.io) ' in nasıl kullanılacağı gösterilmektedir. Bu Cloud-init betikleri, kaynaklar Azure tarafından sağlandıktan sonra ilk önyüklemede çalışır. Cloud-init 'in Azure 'da ve desteklenen Linux korumalar 'daki yerel olarak nasıl çalıştığı hakkında daha fazla bilgi için bkz. [Cloud-init Overview](using-cloud-init.md)
 
-## <a name="set-the-hostname-with-cloud-init"></a>Cloud-init ile ana bilgisayar adı ayarlayın
-Azure'da yeni bir sanal makine oluşturduğunuzda varsayılan olarak, ana bilgisayar adı VM adıyla aynıdır.  Azure ile bir VM oluşturduğunuzda, bu varsayılan konak adını değiştirmek için cloud-init betiğini çalıştırmak için [az vm oluşturma](/cli/azure/vm), cloud-init dosyası ile belirtin `--custom-data` geçin.  
+## <a name="set-the-hostname-with-cloud-init"></a>Konak adını Cloud-init ile ayarlama
+Varsayılan olarak, ana bilgisayar adı, Azure 'da yeni bir sanal makine oluştururken VM adıyla aynıdır.  Azure 'da [az VM Create](/cli/azure/vm)Ile bir VM oluşturduğunuzda, bu varsayılan ana bilgisayar adını değiştirmek için bir Cloud-init betiği çalıştırmak için, `--custom-data` anahtarıyla Cloud-init dosyasını belirtin.  
 
-Yükseltme işlemi uygulamada görmek için geçerli kabuğunuzda adlı bir dosya oluşturmak *cloud_init_hostname.txt* oluşturup aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud shell'de oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_hostname.txt` adını girin. Kullanılacak #1 seçin **nano** Düzenleyici. Tüm cloud-init dosyası doğru bir şekilde kopyalandığından emin olun başta birinci satır.  
+Yükseltme işlemini eylemde görmek için, geçerli kabuğunuzun *cloud_init_hostname. txt* adlı bir dosya oluşturun ve aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud Shell oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_hostname.txt` adını girin. **Nano** düzenleyiciyi kullanmak için #1 seçin. Tüm Cloud-init dosyalarının, özellikle de ilk satırda doğru şekilde kopyalandığından emin olun.  
 
 ```yaml
 #cloud-config
 hostname: myhostname
 ```
 
-Bu görüntü dağıtmadan önce bir kaynak grubu oluşturmak için ihtiyacınız [az grubu oluşturma](/cli/azure/group) komutu. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
+Bu görüntüyü dağıtılmadan önce [az Group Create](/cli/azure/group) komutuyla bir kaynak grubu oluşturmanız gerekir. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
 
 ```azurecli-interactive 
 az group create --name myResourceGroup --location eastus
 ```
 
-Şimdi bir VM oluşturun [az vm oluşturma](/cli/azure/vm) ve cloud-init dosyası ile `--custom-data cloud_init_hostname.txt` gibi:
+Şimdi [az VM Create](/cli/azure/vm) Ile bir VM oluşturun ve Cloud-init dosyasını `--custom-data cloud_init_hostname.txt` ile aşağıdaki gibi belirtin:
 
 ```azurecli-interactive 
 az vm create \
@@ -51,28 +51,28 @@ az vm create \
   --generate-ssh-keys 
 ```
 
-Oluşturulduktan sonra Azure CLI VM hakkında bilgi gösterir. Kullanım `publicIpAddress` sanal makinenize yönelik SSH için. Kendi adresinizi aşağıdaki gibi girin:
+Azure CLı, oluşturulduktan sonra VM hakkındaki bilgileri gösterir. Sanal makinenize SSH eklemek için `publicIpAddress` kullanın. Kendi adresinizi aşağıdaki gibi girin:
 
 ```bash
 ssh <publicIpAddress>
 ```
 
-VM adı görmek için `hostname` komutuyla şu şekilde:
+VM adını görmek için `hostname` komutunu aşağıdaki gibi kullanın:
 
 ```bash
 hostname
 ```
 
-VM konak adı, cloud-init dosyası içinde aşağıdaki örnek çıktıda gösterildiği gibi ayarlayın. Bu değer olarak raporlamalıdır:
+Aşağıdaki örnek çıktıda gösterildiği gibi, VM, ana bilgisayar adını Cloud-init dosyasında belirlenen değer olarak raporlemelidir:
 
 ```bash
 myhostname
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yapılandırma değişiklikleri ek cloud-init örnekleri için aşağıdakilere bakın:
+Yapılandırma değişikliklerine yönelik ek Cloud-init örnekleri için aşağıdakilere bakın:
  
-- [Bir VM'ye ek Linux kullanıcı ekleme](cloudinit-add-user.md)
-- [İlk önyüklemede mevcut paketlerini güncelleştirmek için bir paket Yöneticisi'ni çalıştırın](cloudinit-update-vm.md)
-- [VM yerel ana bilgisayar adını değiştirin](cloudinit-update-vm-hostname.md) 
-- [Bir uygulama paketi yükleme, yapılandırma dosyasını güncelleyin ve anahtarları ekleme](tutorial-automate-vm-deployment.md)
+- [VM 'ye ek bir Linux kullanıcısı ekleme](cloudinit-add-user.md)
+- [İlk önyüklemede var olan paketleri güncelleştirmek için bir paket yöneticisi çalıştırın](cloudinit-update-vm.md)
+- [VM yerel ana bilgisayar adını değiştir](cloudinit-update-vm-hostname.md) 
+- [Uygulama paketi yüklemesi, yapılandırma dosyalarını güncelleştirme ve anahtarları ekleme](tutorial-automate-vm-deployment.md)

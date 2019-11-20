@@ -4,12 +4,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 05/08/2019
 ms.author: wolfma
-ms.openlocfilehash: 6b64d8ea32e0c99c6f9468b84ea02c377c7441f5
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 1b82d3c6ffb1f53d8adb3582a50134b300206b34
+ms.sourcegitcommit: af58483a9c574a10edc546f2737939a93af87b73
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188662"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68306137"
 ---
 | Bölge | Uç Nokta |
 |--------|----------|
@@ -17,7 +17,7 @@ ms.locfileid: "67188662"
 | Orta Kanada | `https://canadacentral.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
 | Orta ABD | `https://centralus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
 | Doğu Asya | `https://eastasia.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
-| Doğu ABD | `https://eastus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
+| East US | `https://eastus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
 | Doğu ABD 2 | `https://eastus2.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
 | Fransa Orta | `https://francecentral.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
 | Hindistan Orta | `https://centralindia.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
@@ -33,4 +33,4 @@ ms.locfileid: "67188662"
 | Batı ABD 2 | `https://westus2.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1` |
 
 > [!NOTE]
-> Language parametresini URL'si HTTP 4xx hata almamak eklenmesi gerekir. Örneğin, ABD Batı ABD uç noktayı kullanarak İngilizcesi olarak ayarladığınız dil olan: https://westus.stt.speech.microsoft.com/speech/recognition/conversation/speech/recognition/conversation/cognitiveservices/v1?language=en-US.
+> Bir 4xx HTTP hatası almamak için dil parametresi URL 'ye eklenmelidir. Örneğin, Batı ABD uç noktası kullanılarak dil ABD Ingilizcesi olarak ayarlanmıştır: `https://westus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US`.

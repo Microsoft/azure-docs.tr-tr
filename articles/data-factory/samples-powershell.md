@@ -1,21 +1,21 @@
 ---
-title: Azure Data Factory için Azure PowerShell örnekleri | Microsoft Docs
-description: Azure PowerShell örnekleri - oluşturma ve veri fabrikaları yönetmenize yardımcı olacak betikler.
+title: Azure Data Factory için Azure PowerShell örnekleri
+description: Azure PowerShell örnekleri-veri fabrikaları oluşturmanıza ve yönetmenize yardımcı olacak betikler.
 services: data-factory
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.topic: conceptual
 ms.date: 01/16/2018
-author: sharonlo101
-ms.author: shlo
-manager: craigg
-ms.openlocfilehash: c822ebdea2bab6f4c6c05cf2d4a4b822d6e02f3f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b42a7667321215247233776eb0f2d733d67ab945
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60635026"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73684454"
 ---
 # <a name="azure-powershell-samples-for-azure-data-factory"></a>Azure Data Factory için Azure PowerShell örnekleri
 
@@ -23,15 +23,15 @@ Aşağıdaki tablo, Azure Data Factory için örnek Azure PowerShell betiklerini
 
 | |  |
 |---|---|
-|**Veri kopyalama**||
-|[Blobları, Azure Blob depolama alanındaki başka bir klasöre bir klasöre kopyalayın.](scripts/copy-azure-blob-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell Betiği blobları Azure Blob depolama alanındaki bir klasörden aynı Blob depolama alanındaki başka bir klasöre kopyalar. |
-|[Şirket içi SQL Server'dan Azure Blob depolama alanına veri kopyalama](scripts/hybrid-copy-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell Betiği, bir şirket içi SQL Server veritabanındaki verileri bir Azure blob depolama alanına kopyalar. |
-|[Toplu kopyalama](scripts/bulk-copy-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu örnek PowerShell Betiği bir Azure SQL veri ambarı'na veri birden çok tablodan Azure SQL veritabanına kopyalar. |
-|[Artımlı kopyalama](scripts/incremental-copy-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu örnek PowerShell Betiği yalnızca yeni veya güncelleştirilmiş kayıtları kopyalamadan sonra ilk tam veri kaynağından havuz için bir havuz veri deposu için bir kaynak veri deposundan yükler. |
+|**Verileri Kopyala**||
+|[Blob 'ları bir klasörden bir Azure Blob depolama alanındaki başka bir klasöre kopyalama](scripts/copy-azure-blob-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, Blobları Azure Blob depolama alanındaki bir klasörden aynı BLOB depolama alanındaki başka bir klasöre kopyalar. |
+|[Şirket içi SQL Server verileri Azure Blob depolamaya kopyalama](scripts/hybrid-copy-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, verileri şirket içi SQL Server veritabanından bir Azure Blob depolama alanına kopyalar. |
+|[Toplu kopyalama](scripts/bulk-copy-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu örnek PowerShell betiği, verileri bir Azure SQL veritabanında bulunan birden çok tablodan Azure SQL veri ambarı 'na kopyalar. |
+|[Artımlı kopya](scripts/incremental-copy-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu örnek PowerShell betiği, kaynak veri deposundan yalnızca yeni veya güncelleştirilmiş kayıtları, kaynaktan havuza verilerin ilk tam kopyasından sonra bir havuz veri deposuna yükler. |
 |**Verileri dönüştürme**||
-|[Bir Spark kümesi kullanarak verileri dönüştürme](scripts/transform-data-spark-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell Betiği, bir Spark kümesinde programı kullanarak verileri dönüştürür. |
-|**SSIS paketlerini lift and shift ile azure'a**||
-|[Azure-SSIS tümleştirme çalışma zamanı oluşturma](scripts/deploy-azure-ssis-integration-runtime-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| SQL Server Integration Services (SSIS) paketlerini çalışan bu PowerShell Betiği hükümlerine bir Azure-SSIS tümleştirme çalışma zamanı. |
+|[Spark kümesi kullanarak veri dönüştürme](scripts/transform-data-spark-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, bir Spark kümesinde program çalıştırarak verileri dönüştürür. |
+|**SSIS paketlerini Azure 'a yükselt ve Kaydır**||
+|[Azure-SSIS tümleştirme çalışma zamanı oluşturma](scripts/deploy-azure-ssis-integration-runtime-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| Bu PowerShell betiği, Azure 'da SQL Server Integration Services (SSIS) paketlerini çalıştıran bir Azure-SSIS tümleştirme çalışma zamanı sağlar. |
 
 
 

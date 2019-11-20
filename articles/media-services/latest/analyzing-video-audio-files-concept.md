@@ -1,6 +1,6 @@
 ---
-title: Azure Media Services ile video ve ses dosyalarını analiz etme | Microsoft Docs
-description: Azure Media Services hizmetini kullanırken, ses ve video contnet AudioAnalyzerPreset ve VideoAnalyzerPreset kullanarak çözümleyebilirsiniz.
+title: Video ve ses dosyalarını Azure Media Services ile çözümleme | Microsoft Docs
+description: Azure Media Services kullanırken, ses ve video içeriğinizi Audioanalizzerönayar ve Videoanalizzerönayar kullanarak çözümleyebilirsiniz.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -9,65 +9,65 @@ editor: ''
 ms.service: media-services
 ms.workload: ''
 ms.topic: article
-ms.date: 04/21/2019
+ms.date: 09/21/2019
 ms.author: juliako
-ms.openlocfilehash: 9154e5d58a36bde1827d63d11d57a77b4289a781
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bc4be8eaafe805e5d9a985b005efe80bc4af1d21
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64689366"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71177986"
 ---
-# <a name="analyzing-video-and-audio-files"></a>Video ve ses dosyalarını analiz etme
+# <a name="analyzing-video-and-audio-files"></a>Video ve ses dosyalarını çözümleme
 
-Azure Media Services v3 Video Indexer AMS v3 Çözümleyicisi hazır (Bu makalede açıklanan) aracılığıyla, video ve ses dosyalarını içgörü sağlar. Daha ayrıntılı içgörüler istiyorsanız doğrudan Video Indexer’ı kullanın. Video Indexer’ı ve Media Services çözümleyicisinin önceden belirlenmiş ayarlarını hangi durumlarda kullanacağınızı anlamak için [karşılaştırma belgesine](../video-indexer/compare-video-indexer-with-media-services-presets.md) bakın.
+Azure Media Services v3, Media Services v3 çözümleyici önayarları aracılığıyla (Bu makalede açıklanmıştır), video ve ses dosyalarından Video Indexer içeren öngörüleri ayıklamanızı sağlar. Daha ayrıntılı içgörüler istiyorsanız doğrudan Video Indexer’ı kullanın. Video Indexer’ı ve Media Services çözümleyicisinin önceden belirlenmiş ayarlarını hangi durumlarda kullanacağınızı anlamak için [karşılaştırma belgesine](../video-indexer/compare-video-indexer-with-media-services-presets.md) bakın.
 
-İçeriğinizi Media Services v3 hazır kullanarak çözümlemek için oluşturduğunuz bir **dönüştürme** ve gönderme bir **iş** bu hazır birini kullanır: [VideoAnalyzerPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#videoanalyzerpreset) veya **AudioAnalyzerPreset**. Aşağıdaki makalede nasıl yapılacağı açıklanır **VideoAnalyzerPreset**: [Öğretici: Azure Media Services ile videoları analiz etme](analyze-videos-tutorial-with-api.md).
+Media Services v3 ön ayarlarını kullanarak içeriğinizi analiz etmek için bir **dönüşüm** oluşturur ve bu önayarlardan birini kullanan bir **iş** gönderebilirsiniz: [Videoanaliz zerönayar](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#videoanalyzerpreset) veya **audioanaldaha önayarı**. Aşağıdaki makalede, **Videoanaliz Zerönayar**nasıl kullanılır: [Öğreticide Videoları Azure Media Services](analyze-videos-tutorial-with-api.md)analiz edin.
 
 > [!NOTE]
 > Video veya Ses Çözümleyicisi önayarlarını kullanırken, hesabınızı 10 S3 Medya Ayrılmış Birimine sahip olacak şekilde ayarlamak için Azure portalı kullanın. Daha fazla bilgi için bkz. [Medya işlemeyi ölçeklendirme](media-reserved-units-cli-how-to.md).
 
 ## <a name="built-in-presets"></a>Yerleşik hazır
 
-Media Services şu anda aşağıdaki yerleşik Çözümleyicisi hazır destekler:  
+Media Services Şu anda aşağıdaki yerleşik çözümleyici önayarlarını desteklemektedir:  
 
 |**Önceden tanımlı ayar adı**|**Senaryo**|**Ayrıntılar**|
 |---|---|---|
-|[AudioAnalyzerPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#audioanalyzerpreset)|Ses analizi|Yapay ZEKA tabanlı analiz işlemleri konuşma transkripsiyonu dahil olmak üzere, önceden tanımlanmış bir dizi hazır geçerlidir. Şu anda hazır işleme içerikle tek bir dilde konuşma içeren tek bir ses kaydı destekler. Ses yükü için dil giriş 'dil etiketi-region' BCP-47 biçimi kullanarak belirtebilirsiniz. Desteklenen bir dil olan İngilizce ('en-US' ve 'en-GB'), İspanyolca ('es-ES ' ve 'es-MX'), Fransızca ("fr-FR"), İtalyanca ('it-IT'), Japonca ('ja-JP'), Portekizce ('pt-BR'), Çince ('zh-CN'), Almanca ('de-DE'), Arapça ('ar-ÖRN'), Rusça ('ru-RU'), Hintçe ('Merhaba-IN' ) ve Kore dili ('ko-KR').<br/><br/> Dil değilse veya belirtilen için null değerler, otomatik dil algılama ayarlarsanız algılanan ilk dili seçin ve ile seçilen dile dosyayı süresi boyunca işlem. Otomatik dil algılama özelliği, şu anda İngilizce, Çince, Fransızca, Almanca, İtalyanca, Japonca, İspanyolca, Rusça ve Portekizce destekler. Şu anda ilk dil algılandıktan sonra diller arasında dinamik geçiş desteklemiyor. Otomatik dil algılama özelliğini açıkça anlaşılabilir Konuşmayla sesli kayıtlar ile en iyi çalışır. Dil bulmak otomatik dil algılama başarısız olursa, döküm İngilizce'ye döner.|
-|[VideoAnalyzerPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#videoanalyzerpreset)|Ses ve video analiz etme|Ses hem video öngörüleri (zengin meta veriler) ayıklar ve çıkaran bir JSON biçim dosyası. Yalnızca ses video dosyası işlenirken içgörü isteyip istemediğinizi belirtebilirsiniz. Daha fazla bilgi için [Çözümle video](analyze-videos-tutorial-with-api.md).|
-|[FaceDetectorPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#facedetectorpreset)|Videoda, mevcut tüm yüzleri algılama|Bir video analiz edilirken, mevcut tüm yüzleri algılamak için kullanılması için ayarları açıklar.|
+|[Audioanaliz Zerönayar](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#audioanalyzerpreset)|Ses çözümleme|Önayar, konuşma dökümü dahil olmak üzere, önceden tanımlanmış bir AI tabanlı analiz işlemleri kümesi uygular. Şu anda önayar, tek bir dilde konuşmayı içeren tek bir ses izlemeli içeriği işlemeyi destekler. Girişte ses yükünün dilini ' Language Tag-Region ' BCP-47 biçimini kullanarak belirtebilirsiniz. Desteklenen diller Ingilizce (' en-US ' ve ' en-GB '), Ispanyolca (' es-ES ' ve ' es-MX '), Fransızca (' fr-FR '), Italyanca (' It-IT '), Japonca (' ja-JP '), Portekizce (' PT-BR '), Çince (' zh-CN '), Almanca (' de-DE '), Arapça (' ar-EG '), Rusça (' ru-RU '), Hintçe (' HI-IN ') ) ve Korece (' ko-KR ').<br/><br/> Dil belirtilmezse veya null olarak ayarlanırsa, otomatik dil algılama, algılanan ilk dili seçer ve dosya süresince seçili dille işlem görür. Otomatik dil algılama özelliği şu anda Ingilizce, Çince, Fransızca, Almanca, Italyanca, Japonca, Ispanyolca, Rusça ve Portekizce desteklemektedir. Bu, şu anda ilk dil algılandıktan sonra diller arasında dinamik geçiş yapmayı desteklememektedir. Otomatik dil algılama özelliği, açık bir konuşma sayesinde ses kayıtları ile en iyi şekilde işe yarar. Otomatik dil algılama dili bulamazsa, döküm, Ingilizce 'ye geri dönecektir.|
+|[Videoanaliz Zerönayar](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#videoanalyzerpreset)|Ses ve video çözümleme|Hem ses hem de videodan Öngörüler (zengin meta veriler) ayıklar ve bir JSON biçim dosyası verir. Video dosyasını işlerken yalnızca ses öngörülerini ayıklamak isteyip istemediğinizi belirtebilirsiniz. Daha fazla bilgi için bkz. [video çözümleme](analyze-videos-tutorial-with-api.md).|
+|[Facedetectorönayar](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#facedetectorpreset)|Videoda bulunan tüm yüzler algılanıyor|Bir video analiz edilirken kullanılacak ayarları açıklar. Bu, mevcut tüm yüzeyleri tespit etmek için kullanılır.|
 
-### <a name="audioanalyzerpreset"></a>AudioAnalyzerPreset
+### <a name="audioanalyzerpreset"></a>Audioanaliz Zerönayar
 
-Hazır bir ses veya video dosyasından birden çok ses ınsights almanıza olanak sağlar. Çıkış bir JSON dosyası (öngörülerle tüm) ve ses transkripti VTT dosyası içerir. Bu hazır kabul diline giriş dosyası biçiminde belirten bir özelliği bir [BCP47](https://tools.ietf.org/html/bcp47) dize. Ses ınsights şunlardır:
+Önceden ayarlanmış, bir ses veya video dosyasından birden çok ses öngörülerini ayıklamanızı sağlar. Çıktı, ses dökümü için bir JSON dosyası (tüm Öngörüler ile) ve VTT dosyasını içerir. Bu önayar, bir [BCP47](https://tools.ietf.org/html/bcp47) dizesi biçimindeki giriş dosyasının dilini belirten bir özelliği kabul eder. Ses öngörüleri şunları içerir:
 
-* Ses tanıma – konuşulan kelimeleri zaman damgalı bir kopyası. Birden çok dil desteklenir
-* Konuşmacı dizin oluşturma – konuşmacıların ve karşılık gelen konuşulan kelimeleri ilişkin bir eşleme
-* Konuşma yaklaşım analizi – ses tanıma üzerinde gerçekleştirilen yaklaşım analizi çıkışı
-* Anahtar sözcükler – ses tanıma ayıklanan anahtar sözcükleri.
+* Ses dökümü: zaman damgalarına sahip konuşulan sözcüklerin dökümünü alma. Birden çok dil destekleniyor
+* Konuşmacı dizin oluşturma – hoparlörleri ve ilgili konuşulan kelimeleri eşleme
+* Konuşma yaklaşımı Analizi – ses dökümü üzerinde gerçekleştirilen yaklaşım analizinin çıkışı
+* Anahtar sözcükler: ses dökümden ayıklanan anahtar sözcükler.
 
-### <a name="videoanalyzerpreset"></a>VideoAnalyzerPreset
+### <a name="videoanalyzerpreset"></a>Videoanaliz Zerönayar
 
-Önceden ayarlanmış bir video dosyasından birden çok ses ve video öngörüleri ayıklamak sağlar. Çıktı (tüm Öngörüler) içeren bir JSON dosyası, video deşifre metni ve küçük bir koleksiyon için bir VTT dosyası içerir. Bu hazır de kabul eden bir [BCP47](https://tools.ietf.org/html/bcp47) (video dilini temsil eden) dize özelliği. Video içgörüleri yukarıda belirtilen tüm ses Öngörüler ve aşağıdaki ek öğeler şunlardır:
+Önceden ayarlanmış, bir video dosyasından birden çok ses ve video öngörüleri ayıklamanızı sağlar. Çıktı, bir JSON dosyası (tüm içgörüler ile), video dökümü için bir VTT dosyası ve küçük resim koleksiyonu içerir. Bu önayar Ayrıca özellik olarak bir [BCP47](https://tools.ietf.org/html/bcp47) dizesi (videonun dilini temsil eder) kabul eder. Video öngörüleri yukarıda belirtilen tüm ses öngörülerini ve aşağıdaki ek öğeleri içerir:
 
-* Yüz tanıma izleme – yüzleri videoda mevcut zaman. Face ID ve Parçacıkların karşılık gelen bir koleksiyon her yüz tanıma sahip
-* Görsel metin – optik karakter tanıma algılanan metin. Zaman damgalı ve aynı zamanda anahtar sözcükleri (ses transkripti) ek olarak ayıklamak için kullanılan metindir
-* Ana kareleri – videodan ayıklanan ana kareleri koleksiyonu
-* Görsel içerik denetimi – yetişkinlere yönelik veya müstehcen yapısı olarak işaretlenmiş videolar bölümü
-* Ek açıklama – bir sonucu bir önceden tanımlanmış nesne modelini temel videoları yorumlama
+* Yüz izleme: videoda yüzlerin bulunduğu zaman. Her yüz için bir yüz kimliği ve karşılık gelen küçük resim koleksiyonu bulunur
+* Görsel metin: optik karakter tanıma aracılığıyla algılanan metin. Metin zaman damgalı olur ve anahtar sözcükleri ayıklamak için de kullanılır (ses dökümü dosyasına ek olarak)
+* Ana kareler: videodan çıkarılan bir ana kare koleksiyonu
+* Görsel içerik denetimi – videoların yetişkin veya korklık olarak işaretlenen kısmı
+* Ek Açıklama: önceden tanımlanmış bir nesne modeline göre videolara açıklama ekleme sonucu
 
-##  <a name="insightsjson-elements"></a>insights.JSON öğeleri
+##  <a name="insightsjson-elements"></a>Insights. JSON öğeleri
 
-Çıktı, video veya ses bulunamadı öngörü bir JSON dosyası (insights.json) içerir. Json'u aşağıdaki öğeleri içerebilir:
+Çıktı, video veya ses üzerinde bulunan tüm öngörülere sahip bir JSON dosyası (Insights. JSON) içerir. JSON aşağıdaki öğeleri içerebilir:
 
-### <a name="transcript"></a>transkript
+### <a name="transcript"></a>döküm
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|Satır kimliği|
-|metin|Transkripti kendisi.|
-|language|Döküm dili. Transkript desteklemek her satırı farklı bir dil sahip olduğu yöneliktir.|
-|örnekler|Bu satırı nerede göründüğü zaman aralıkları listesi. Transkript örneğiyse yalnızca 1 örneğin olacaktır.|
+|id|Satır KIMLIĞI.|
+|text|Dökümü.|
+|dil|Döküm dili. Her satırın farklı bir dile sahip olduğu yazılı betiği desteklemeye yöneliktir.|
+|örnekler|Bu satırın göründüğü zaman aralıklarının listesi. Örnek TRANSCRIPT ise, yalnızca 1 örneğe sahip olur.|
 
 Örnek:
 
@@ -100,13 +100,13 @@ Hazır bir ses veya video dosyasından birden çok ses ınsights almanıza olana
 
 ### <a name="ocr"></a>OCR
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|OCR satır kimliği|
-|metin|OCR metin.|
-|güven|Tanıma güvenilirlik.|
-|language|OCR dili.|
-|örnekler|Bu OCR nerede göründüğü zaman aralıkları listesi (aynı OCR birden çok kez görünebilir).|
+|id|OCR satır KIMLIĞI.|
+|text|OCR metni.|
+|likli|Tanıma güvenilirliği.|
+|dil|OCR dili.|
+|örnekler|Bu OCR 'nin göründüğü zaman aralıklarının listesi (aynı OCR birden çok kez görünebilir).|
 
 ```json
 "ocr": [
@@ -141,21 +141,21 @@ Hazır bir ses veya video dosyasından birden çok ses ınsights almanıza olana
   ],
 ```
 
-### <a name="faces"></a>yüzleri
+### <a name="faces"></a>leri
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|Face ID|
-|name|Yüz tanıma adı. 'Bilinmeyen #0', tanımlanmış bir ünlü veya müşteri eğitilen kişi olabilir.|
-|güven|Yüz tanıma güvenilirlik.|
-|description|Ünlü açıklaması. |
-|thumbnailId|Yüz tanıma, küçük resim kimliği.|
-|knownPersonId|Bilinen bir kişi, kendi iç kimliği ise|
-|Başvuru Kimliği|Bir Bing ünlü Bing kimliği ise|
+|id|Yüz KIMLIĞI.|
+|name|Yüz adı. ' Bilinmeyen #0 ', tanımlı bir ünlütlik veya müşterinin eğitilen bir kişi olabilir.|
+|likli|Yüz tanıma kimlik güveni.|
+|description|Ünlüğün açıklaması. |
+|thumbnailId|Bu yüzün küçük resminin KIMLIĞI.|
+|Knownpersonıd|Bilinen bir kişiyse, iç KIMLIĞI.|
+|Referenceıd|Bing ünlüğlik, Bing KIMLIĞI.|
 |referenceType|Şu anda yalnızca Bing.|
-|title|Ünlü, alt başlık (örneğin "CEO Microsoft'un") ise.|
-|ImageUrl|Ünlü, görüntü URL'sini ise.|
-|örnekler|Bunlar örnekleri, burada belirtilen zaman aralığında yüzü göründü. Her örnek, bir thumbnailsId de vardır. |
+|title|Bu bir ünlüğlik ise, başlığı (örneğin, "Microsoft 'un CEO").|
+|ImageUrl|Bu bir ünlüsün ise, görüntü URL 'si.|
+|örnekler|Bunlar, yüzün verilen zaman aralığında göründüğü örneklerdir. Her örneğin bir thumbnailsId de vardır. |
 
 ```json
 "faces": [{
@@ -186,13 +186,13 @@ Hazır bir ses veya video dosyasından birden çok ses ınsights almanıza olana
 }]
 ```
 
-### <a name="shots"></a>anlık görüntüleri
+### <a name="shots"></a>görüntüleri
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|Görüntüsü kimliği.|
-|ana kareler|Anahtar çerçeveler (her bir kimlik ve örnekleri zaman aralıkları listesi vardır) görüntüsü içindeki bir listesi. Anahtar çerçeveler örneğiniz kimliği thumbnailId alana ana kare'nın küçük resimle|
-|örnekler|Bu görüntüsü zaman aralıkları listesi (yalnızca 1 örneğinin sahip görüntüleri).|
+|id|Görüntü KIMLIĞI.|
+|Gezen|Görüntü içindeki anahtar çerçevelerinin listesi (her birinin bir KIMLIĞI ve bir örnek zaman aralığı listesi vardır). Anahtar çerçeve örneklerinin, ana karenin küçük resim KIMLIĞI olan bir thumbnailId alanı vardır.|
+|örnekler|Bu görüntüsündeki zaman aralıklarının bir listesi (görüntüleri yalnızca 1 örneğe sahiptir).|
 
 ```json
 "Shots": [
@@ -243,27 +243,27 @@ Hazır bir ses veya video dosyasından birden çok ses ınsights almanıza olana
   ]
 ```
 
-### <a name="statistics"></a>İstatistikleri
+### <a name="statistics"></a>girecek
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|CorrespondenceCount|Videoda yazışmalar sayısı.|
-|WordCount|Konuşmacı sözcük sayısı.|
-|SpeakerNumberOfFragments|Parçaları miktarı bulunan bir videoyu Konuşmacı vardır.|
-|SpeakerLongestMonolog|Konuşmacı uzun monolog. Konuşmacı silences monolog içinde varsa dahil edilir. Başında ve sonunda monolog sessizlik kaldırılır.| 
-|SpeakerTalkToListenRatio|Hesaplama videonun toplam zaman bölünmüş konuşmacının monolog (olmadan arasındaki sessizlik) üzerinde harcanan zamanı temel alır. Saat üçüncü ondalık noktasına yuvarlanır.|
+|Yazışma sayısı|Videodaki yazışma sayısı.|
+|WordCount|Konuşmacı başına sözcük sayısı.|
+|Hoparlörkernumberoffragments|Konuşmacının videoda bulunduğu parçaların miktarı.|
+|SpeakerLongestMonolog|Hoparlörün en uzun monolog. Konuşmacı, monolog içinde susraysa dahil edilmiştir. Monolog 'in başındaki ve sonundaki sessizlik kaldırılır.| 
+|Hoparlörkertalktolistenratio|Hesaplama, konuşmacının monolog harcanan zamanına (arasında sessizlik olmadan), videonun toplam süresine göre bölünür. Saat, üçüncü ondalık noktaya yuvarlanır.|
 
 
-### <a name="sentiments"></a>yaklaşımları
+### <a name="sentiments"></a>yaklaşımlar
 
-Yaklaşımları sentimentType alanı (nötr/olumlu/olumsuz) tarafından toplanır. Örneğin, 0-0.1, 0.2 0,1.
+Sentiments, sentimentType alanı tarafından toplanır (pozitif/nötr/negatif). Örneğin, 0-0.1, 0,1-0.2.
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|Yaklaşım kimliği.|
-|Ortalama Not karşılaştırması |Bu yaklaşım türdeki - nötr/olumlu/olumsuz tüm örneklerin tüm puanları ortalaması|
-|örnekler|Bu yaklaşım nerede göründüğü zaman aralıkları listesi.|
-|sentimentType |Türü 'Pozitif', 'Nötr' veya 'Negatif' olabilir.|
+|id|Yaklaşım KIMLIĞI.|
+|averageScore |Bu yaklaşım türünün tüm örneklerinin ortalaması-pozitif/nötr/negatif|
+|örnekler|Bu yaklaşım görüntülenen zaman aralıklarının bir listesi.|
+|sentimentType |Tür ' pozitif ', ' Nötr ' veya ' negative ' olabilir.|
 
 ```json
 "sentiments": [
@@ -293,12 +293,12 @@ Yaklaşımları sentimentType alanı (nötr/olumlu/olumsuz) tarafından toplanı
 
 ### <a name="labels"></a>etiketleri
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|Etiket Kimliği|
-|name|Etiket adı (örneğin, 'Bilgisayara', 'TV').|
-|language|Etiket adı (çevrildiğinde) dili. BCP-47|
-|örnekler|Bu etiket nerede göründüğü zaman aralıkları listesi (bir etiket birden çok kez görünebilir). Her örnek güvenle alana sahiptir. |
+|id|Etiket KIMLIĞI.|
+|name|Etiket adı (örneğin, ' bilgisayar ', ' TV ').|
+|dil|Etiket adı dili (çevrildiğinde). BCP-47|
+|örnekler|Bu etiketin göründüğü zaman aralıklarının listesi (bir etiket birden çok kez görünebilir). Her örneğin bir güvenirlik alanı vardır. |
 
 
 ```json
@@ -352,13 +352,13 @@ Yaklaşımları sentimentType alanı (nötr/olumlu/olumsuz) tarafından toplanı
 
 ### <a name="keywords"></a>anahtar sözcükler
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|Anahtar sözcük kimliği.|
-|metin|Anahtar sözcüğü metin.|
-|güven|Anahtar sözcüğü'nın tanıma güvenilirlik.|
-|language|Anahtar sözcüğü (çevrildiğinde) dili.|
-|örnekler|Bu anahtar sözcük nerede göründüğü zaman aralıkları listesi (bir anahtar sözcüğü, birden çok kez görünebilir).|
+|id|Anahtar sözcük KIMLIĞI.|
+|text|Anahtar sözcük metni.|
+|likli|Anahtar sözcüğünün tanıma güvenilirliği.|
+|dil|Anahtar sözcük dili (çevrildiğinde).|
+|örnekler|Bu anahtar sözcüğünün göründüğü zaman aralıklarının listesi (bir anahtar sözcük birden çok kez görünebilir).|
 
 ```json
 "keywords": [
@@ -397,18 +397,18 @@ Yaklaşımları sentimentType alanı (nötr/olumlu/olumsuz) tarafından toplanı
 ] 
 ```
 
-#### <a name="visualcontentmoderation"></a>visualContentModeration
+#### <a name="visualcontentmoderation"></a>Visualcontentdenetlemesi
 
-Video Indexer, büyük olasılıkla yetişkinlere yönelik içeriğe sahip bulunan olan tarih aralıkları visualContentModeration blok içerir. VisualContentModeration boşsa, tanımlanan yetişkinlere yönelik içerik yok.
+Visualcontentmoderblock blok, büyük olasılıkla yetişkinlere yönelik içeriğe sahip Video Indexer bulunan zaman aralıklarını içerir. Visualcontentdenetlemesi boşsa, tanımlı yetişkin içerik yoktur.
 
-Yetişkinlere yönelik veya müstehcen içerikleri bulunan videoları yalnızca özel görünüm için olabilir. Kullanıcılar bir insan tarafından İnceleme çalışması IsAdult öznitelik insan tarafından İnceleme sonucunu içerecek içerik için bir istek göndermek seçeneğiniz vardır.
+Yetişkin veya kcy içeriği içeren videolar yalnızca özel görünüm için kullanılabilir olabilir. Kullanıcılar, içeriğin insan incelemesi için bir istek gönderme seçeneğine sahiptir ve bu durumda Isyetişkin özniteliği insan incelemesi sonucunu içerecektir.
 
-|Ad|Açıklama|
+|Name|Açıklama|
 |---|---|
-|id|Görsel içerik denetleme kimliği.|
-|adultScore|Yetişkinlere yönelik içerik puanı (Başlangıç, content moderator).|
-|racyScore|Müstehcenlik puanı (Başlangıç, içerik denetleme).|
-|örnekler|Bu görsel içerik denetleme nerede göründüğü zaman aralıkları listesi.|
+|id|Görsel içerik denetleme KIMLIĞI.|
+|adultScore|Yetişkin puanı (İçerik Yöneticisi 'nden).|
+|Oycyscore|Yağanın puanı (içerik denetleme).|
+|örnekler|Bu görsel içerik denetimi 'nin göründüğü zaman aralıklarının listesi.|
 
 ```json
 "VisualContentModeration": [

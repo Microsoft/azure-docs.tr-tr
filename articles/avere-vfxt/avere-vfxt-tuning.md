@@ -1,26 +1,26 @@
 ---
-title: Avere vFXT küme ayarlama - Azure
-description: Azure için Avere vFXT performansını iyileştirmek için özel ayarlar genel bakış
+title: Avere vFXT kümesi ayarlama-Azure
+description: Azure için avere vFXT içindeki performansı iyileştirmek için özel ayarlara genel bakış
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 10/31/2018
-ms.author: v-erkell
-ms.openlocfilehash: f5e780dcab20befe19ca34020908eee93c290516
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: 274a20f84b978b38a284d1feb315d6621b7d3ccd
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60409182"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72256157"
 ---
 # <a name="cluster-tuning"></a>Küme ayarlama
 
 
-Çoğu vFXT kümede özelleştirilmiş performans ayarları yararlı olabilir. Bu ayarlar, belirli bir iş akışı, veri kümesi ve araçları ile en iyi şekilde çalışması için küme yardımcı olur. 
+Birçok vFXT kümesi, özelleştirilmiş performans ayarlarından yararlanabilir. Bu ayarlar, kümenin belirli iş akışınız, veri kümeniz ve araçlarınızla en iyi şekilde çalışmasına yardımcı olur. 
 
-Avere Denetim Masası'ndan kullanılabilir olmayan özellikleri yapılandırma genellikle içerdiğinden bu özelleştirme, bir destek temsilcisine yapılmalıdır.
+Bu özelleştirme, genellikle avere Denetim Masası 'Nda kullanılamayan özellikleri yapılandırmayı içerdiğinden, bir destek temsilcisiyle birlikte yapılmalıdır.
 
-Bu bölümde, bazı özel ayarı yapılabilir açıklanmaktadır.
+Bu bölümde, yapılabilecek özel ayarlamadan bazıları açıklanmaktadır.
 
 <!-- 
 [ xxx keep or not? \/ research this xxx ]
@@ -32,32 +32,30 @@ Bu bölümde, bazı özel ayarı yapılabilir açıklanmaktadır.
 
 ## <a name="general-optimizations"></a>Genel iyileştirmeler
 
-Bu değişiklikler, veri kümesi kalitelerini veya iş akışı stili göre önerilen.
+Bu değişiklikler, veri kümesi kalitelerini veya iş akışı stilini temel alan önerilen olabilir.
 
-* İş yükü yazma yoğunluklu ise, varsayılan % 20'den yazma önbelleğinin boyutunu artırın. 
-* Veri kümesi çok sayıda küçük dosyaları gerektiriyorsa, küme önbelleğin dosya sayısı sınırı artırın. 
-* İşi kopyalama veya iki depoları arasında veri taşıma içeriyorsa, veri taşıma için kullanılan iş parçacığı sayısını ayarlayın: 
-  * Hızını artırmak için kullanılan paralel iş parçacığı sayısını artırabilir.
-  * Arka uç depolama birimini aşırı yüklenerek, kullanılan paralel iş parçacığı sayısını azaltmak gerekebilir.
-* Küme NFSv4 ACL'leri kullanan bir çekirdek dosyalayıcı için verileri önbelleğe alır, belirli istemcileri için dosya yetkilendirme kolaylaştırmak için önbelleğe erişim modu etkinleştirin.
+* İş yükü yazma ağır ise, yazma önbelleğinin boyutunu varsayılan% 20 ' den artırın. 
+* Veri kümesi çok sayıda küçük dosya içeriyorsa, küme önbelleğinin dosya sayısı sınırını artırın. 
+* İş, iki depo arasında veri kopyalamayı veya taşımayı içeriyorsa, verileri taşımak için kullanılan iş parçacıklarının sayısını ayarlayın: 
+  * Hızı artırmak için, kullanılan paralel iş parçacığı sayısını artırabilirsiniz.
+  * Arka uç depolama birimi aşırı yüklenmişse, kullanılan paralel iş parçacığı sayısını azaltmanıza gerek duyabilirsiniz.
+* Küme, NFSv4 ACL 'Leri kullanan bir çekirdek filme için verileri önbelleğe alıyorsa, belirli istemciler için dosya yetkilendirmesini kolaylaştırmak üzere erişim modu önbelleğe almayı etkinleştirin.
 
-## <a name="cloud-nas-or-cloud-gateway-optimizations"></a>NAS bulut ya da bulut ağ geçidi en iyi duruma getirme
+## <a name="cloud-nas-or-cloud-gateway-optimizations"></a>Bulut NAS veya bulut ağ geçidi iyileştirmeleri
 
-(Burada vFXT kümesi bir bulut kapsayıcısı NAS stili erişim sağlar) cloud NAS veya ağ geçidi senaryosunda vFXT küme ve bulut depolama arasındaki daha yüksek veri hızlarını yararlanmak için temsilcinize gibi daha fazla bilgi için bu ayarları değiştirme önerebilir agresif bir biçimde veri depolama birimine önbellekten gönderin:
+Bir bulut NAS veya ağ geçidi senaryosunda vFXT kümesi ile bulut depolaması arasındaki daha yüksek veri hızlarından yararlanmak için (vFXT kümesinin bir bulut kapsayıcısına NAS stili erişimi sağladığı), temsilciniz bunlar gibi ayarların daha fazla değiştirilmesini önerebilir önbellekten depolama birimine verileri bir daha Agresif iletme:
 
-* Küme ve depolama kapsayıcısını arasında TCP bağlantısı sayısını artırın
-* Küme arasındaki iletişim için geri KALAN zaman aşımı değerini azaltın ve hemen başarılı olmayan yeniden denemek için depolama daha çabuk Yazar  
-* Her arka uç yazma böylece segment aktarımları bir 8 MB öbek veri yerine 1 MB kesim boyutunu artırın
+* Küme ve depolama kapsayıcısı arasındaki TCP bağlantısı sayısını artırma
 
-## <a name="cloud-bursting-or-hybrid-wan-optimizations"></a>Bulut Patlaması veya karma WAN en iyi duruma getirme
+## <a name="cloud-bursting-or-hybrid-wan-optimizations"></a>Bulut, hibrit veya karma WAN iyileştirmeleri
 
-Bu değişiklikler senaryonuz ya da karma depolama WAN iyileştirme senaryosu (vFXT küme bulut arasında tümleştirme sağlar ve şirket içinde donanım depolama) Patlaması bulutta yararlı olabilir:
+Bulut patlaması senaryosunda veya karma depolama WAN iyileştirmesi senaryosunda (vFXT kümesinin bulut ve şirket içi donanım depolaması arasında tümleştirme sağladığı), bu değişiklikler yararlı olabilir:
 
-* Küme çekirdeği dosyalayıcı arasında izin verilen TCP bağlantı sayısını artırın
-* (Bu ayar şirket uzak dosyalayıcı veya Bulut çekirdek olandan farklı bir Azure bölgesinde kullanılabilir.) uzaktan çekirdek dosyalayıcı WAN iyileştirme ayarını etkinleştirin
-* TCP yuva arabellek boyutunu (iş yükü ve performans gereksinimlerini) bağlı olarak artırın
-* Nedenle önbelleğe alınan dosyaları (bağlı olarak iş yükü ve performans gereksinimlerini) azaltmak "İleri her zaman" ayarını etkinleştirin
+* Küme ve çekirdek filme arasında izin verilen TCP bağlantısı sayısını artırma
+* Uzak çekirdek filme için WAN optimizasyon ayarını etkinleştirin (Bu ayar, uzak bir şirket içi filme veya farklı bir Azure bölgesindeki bir bulut çekirdeği için kullanılabilir.)
+* TCP yuvası arabellek boyutunu (iş yüküne ve performans gereksinimlerine bağlı olarak) artırın
+* Redundantly önbelleğe alınmış dosyaları azaltmak için "her zaman ilet" ayarını etkinleştirin (iş yüküne ve performans gereksinimlerine bağlı olarak)
 
-## <a name="help-optimizing-your-avere-vfxt-for-azure"></a>Yardım, Avere vFXT Azure'a yönelik en iyi duruma getirme
+## <a name="help-optimizing-your-avere-vfxt-for-azure"></a>Azure için avere vFXT 'nizi iyileştirmeye yardımcı olma
 
-Açıklanan yordamı kullanın [sisteminizle Yardım Al](avere-vfxt-open-ticket.md) için bu iyileştirmeleri hakkında destek personeline başvurun. 
+Bu iyileştirmeler hakkında destek personeline başvurmak için [sisteminizle ilgili yardım alın](avere-vfxt-open-ticket.md) bölümünde açıklanan yordamı kullanın. 

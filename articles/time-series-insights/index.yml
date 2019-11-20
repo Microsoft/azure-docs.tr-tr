@@ -1,63 +1,81 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure Time Series Insights Belgeleri
+summary: Hızlı başlangıçlar, öğreticiler, JavaScript örnekleri ve REST API belgelerini kullanarak, tam olarak yönetilen olay işleme ile bulutta Azure IoT analizlerinin nasıl çalıştırılacağını öğrenin. Uygulamalardan, algılayıcılardan, cihazlardan ve diğer kaynaklardan gelen verileri gerçek zamanlı olarak analiz edin.
 metadata:
-  title: 'Azure Time Series Insights Belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: 'Tam olarak yönetilen olay işlemeyle bulutta nasıl Azure IoT analizi çalıştıracağınızı öğrenin. Uygulamalardan, algılayıcılardan, cihazlardan ve diğer kaynaklardan gelen verileri gerçek zamanlı olarak analiz edin.'
+  title: Azure Time Series Insights Belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvurusu | Microsoft Docs
+  description: Hızlı başlangıçlar, öğreticiler, JavaScript örnekleri ve REST API belgelerini kullanarak, tam olarak yönetilen olay işleme ile bulutta Azure IoT analizlerinin nasıl çalıştırılacağını öğrenin.
   services: time-series-insights
-  author: deepakpalled
-  manager: cshankar
   ms.service: time-series-insights
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: time-series-insights
   ms.topic: landing-page
-  ms.date: 06/03/2019
-  ms.author: dpalled
-abstract:
-  description: 'Azure Time Series Insights''a hoş geldiniz. Azure Time Series Insights, işlem analizinizi geliştirmenize yardımcı olmak için güçlü veri araştırma ve telemetri araçları sağlar. Bu belgede hizmet, hizmetin birçok özelliğiyle nasıl çalışmaya başlanacağı, istemci SDK’sı ve güçlü Time Series Insights API’leri açıklanır. İki sürüm için bilgi sağlanır. Bunlardan biri genel kullanıma sunulmuş olan (Time Series Insights GA) ve diğeri de önizleme aşamasında (Time Series Insights Önizleme) olan kapsamlı hizmet güncelleştirmesidir.'
-  aside:
-    image:
-      alt: Azure IoT Time Series Insights özelliklerine giriş videosu.
-      height: 110
-      src: media/index/new-tsi-intro.png
-      width: 250
-    title: 'IoT uygulamaları için Time Series Insights. (13:31)'
-    href: 'https://channel9.msdn.com/Shows/Internet-of-Things-Show/Azure-Time-Series-Insights-e2e-solution-for-industrial-IoT-analytics'
-    width: 250
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Dakikalar içinde çalışmaya başlamanıza yardımcı olacak hızlı örnekleri inceleyerek Azure Time Series Insights hakkında bilgi edinin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/azure/time-series-insights/media/index/time-series-insights.svg'
-            text: Azure Time Series Insights GA'yı keşfedin
-            href: /azure/time-series-insights/time-series-quickstart
-      - html: <p><a href="/azure/time-series-insights/time-series-insights-update-quickstart">Azure Time Series Insights Önizleme'yi keşfedin</a></p>
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Çeşitli adım adım örnekler sayesinde Azure Time Series Insights ortamlarını, tek sayfalı web uygulamalarını ve daha fazlasını oluşturmayı öğrenin.'
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Azure Time Series Insights GA
-            html: <p><a href="/azure/time-series-insights/tutorial-create-populate-tsi-environment">Azure Time Series Insights ortamı oluşturma</a></p> <p><a href="/azure/time-series-insights/tutorial-create-tsi-sample-spa">Tek sayfalı web uygulaması oluşturma</a></p> <p><a href="/azure/time-series-insights/tutorial-explore-js-client-lib">JavaScript istemci kitaplığını keşfetme</a></p>
-          - title: Azure Time Series Insights Önizleme
-            html: <p><a href="/azure/time-series-insights/time-series-insights-update-create-environment">Azure Time Series Insights Önizleme ortamı ayarlama</a></p>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Time Series Insights GA API'leri
-            html: <p><a href="/rest/api/time-series-insights/ga">Veri Erişimi</a></p> <p><a href="/rest/api/time-series-insights/ga-query-api">Sorgu API'si</a></p> <p><a href="/rest/api/time-series-insights/ga-query-syntax">Sorgu Söz Dizimi</a></p>
-          - title: Time Series Insights Önizleme API'leri
-            html: <p><a href="/rest/api/time-series-insights/preview-query">Sorgu API'si</a></p> <p><a href="/rest/api/time-series-insights/preview-model">Model API'si</a></p> <p><a href="/rest/api/time-series-insights/preview-env">Ortam API'si</a></p> <p><a href="/rest/api/time-series-insights/preview-tsx">Zaman Serisi İfadesi API'si</a></p>
-          - title: İstemci SDK’sı
-            html: '<p><a href="https://github.com/microsoft/tsiclient/blob/master/docs/API.md">JavaScript İstemci SDK’sı</a></p>'
+  ms.collection: collection
+  author: KingdomOfEnds
+  ms.author: v-adgera
+  ms.date: 10/21/2019
+  ms.openlocfilehash: bfb8ba57c57f771177782180b2133b46eb34b79e
+  ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/13/2019
+  ms.locfileid: "74014818"
+landingContent:
+- title: Azure Time Series Insights hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Time Series Insights Önizleme nedir?
+      url: time-series-insights-update-overview.md
+    - text: Azure Time Series Insights GA hakkında
+      url: time-series-insights-overview.md
+    - text: İstemci SDK örnek görselleştirmesi
+      url: https://tsiclientsample.azurewebsites.net/
+  - linkListType: concept
+    links:
+    - text: Time Series Insights gezgini Önizleme'de verileri görselleştirme
+      url: time-series-insights-update-explorer.md
+    - text: Zaman Serisi Modeli
+      url: time-series-insights-update-tsm.md
+  - linkListType: video
+    links:
+    - text: IoT uygulamaları için Time Series Insights. (13:31)
+      url: https://channel9.msdn.com/Shows/Internet-of-Things-Show/Azure-Time-Series-Insights-e2e-solution-for-industrial-IoT-analytics
+- title: Önizleme'yi kullanmaya başlama
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Time Series Insights Önizleme'yi keşfedin
+      url: time-series-insights-update-quickstart.md
+  - linkListType: tutorial
+    links:
+    - text: Azure Time Series Insights Önizleme öğreticisi
+      url: time-series-insights-update-create-environment.md
+  - linkListType: deploy
+    links:
+    - text: Event Hubs'a bağlanma
+      url: time-series-insights-how-to-add-an-event-source-eventhub.md
+    - text: IoT Hub'a bağlanma
+      url: time-series-insights-how-to-add-an-event-source-iothub.md
+    - text: Ortamınızı planlama
+      url: time-series-insights-update-plan.md
+    - text: Veri depolama ve giriş
+      url: time-series-insights-update-storage-ingress.md
+  - linkListType: how-to-guide
+    links:
+    - text: Sağlama ve yönetme
+      url: time-series-insights-update-how-to-manage.md
+    - text: Veri erişim izni verme
+      url: time-series-insights-data-access.md
+    - text: Sorgular için JSON'u şekillendirme
+      url: time-series-insights-update-how-to-shape-events.md
+- title: API Başvurusu
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure Zaman Serisi Görüşleri
+      url: /rest/api/time-series-insights/
+    - text: Veri Erişimi Kavramları Önizlemesi
+      url: /rest/api/time-series-insights/preview
+    - text: Veri Erişimi GK
+      url: /rest/api/time-series-insights/ga
+    - text: JavaScript İstemci SDK’sı
+      url: https://github.com/microsoft/tsiclient/blob/master/docs/API.md

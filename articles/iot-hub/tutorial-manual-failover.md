@@ -1,22 +1,22 @@
 ---
 title: Azure IoT hub'ında elle yük devretme | Microsoft Docs
-description: Bir Azure IoT hub'ı için elle yük devretme gerçekleştirmeyi gösterme
+description: IoT Hub 'ınızı farklı bir bölgeye el ile yük devretme işlemini gerçekleştirmeyi ve çalıştığını onaylamaya ve sonra özgün bölgeye geri dönüp yeniden kontrol yapmayı öğrenin.
 author: robinsh
 manager: timlt
 ms.service: iot-hub
 services: iot-hub
 ms.topic: tutorial
-ms.date: 07/11/2018
+ms.date: 07/24/2019
 ms.author: robinsh
 ms.custom: mvc
-ms.openlocfilehash: 40a7bba99068ebc2368e413199cf966bd2e4f25c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 42785e3ee636f24ca185f57a11d4ee1091db3e98
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60650548"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73890404"
 ---
-# <a name="tutorial-perform-manual-failover-for-an-iot-hub-public-preview"></a>Öğretici: El ile yük devretme gerçekleştirmek için IOT hub (genel Önizleme)
+# <a name="tutorial-perform-manual-failover-for-an-iot-hub"></a>Öğretici: IoT Hub 'ı için el ile yük devretme gerçekleştirme
 
 Elle yük devretme, müşterilerin hub işlemleri için birincil bölgeden coğrafi olarak eşleştirilen ilgili Azure coğrafi eşleme bölgesine [yük devretme](https://en.wikipedia.org/wiki/Failover) gerçekleştirmesini sağlayan bir IoT Hub hizmeti özelliğidir. Elle yük devretme, bölgesel olağanüstü durum veya uzun süreli hizmet kesintisi durumunda gerçekleştirilebilir. Ayrıca sisteminizin olağanüstü durum kurtarma özelliklerini test etmek için de planlı bir yük devretme gerçekleştirebilirsiniz. Bunun için üretim ortamı yerine test amaçlı bir IoT hub kullanmanız önerilir. Elle yük devretme özelliği, müşterilere ek maliyet olmadan sunulur.
 
@@ -29,7 +29,7 @@ Bu öğreticide, aşağıdaki görevleri gerçekleştireceksiniz:
 > * IoT hub'ın işlemlerini birincil konuma geri almak için yeniden çalışma gerçekleştirin. 
 > * Hub'ın doğru konumda düzgün biçimde çalıştığını onaylayın.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 - Azure aboneliği. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
@@ -41,13 +41,13 @@ Bu öğreticide, aşağıdaki görevleri gerçekleştireceksiniz:
 
    ![IoT hub'ı oluşturmayı gösteren ekran görüntüsü](./media/tutorial-manual-failover/create-hub-01.png)
 
-3. **Temel Bilgiler** sekmesini seçin. Aşağıdaki alanları doldurun.
+3. **Temel bilgiler** sekmesini seçin. aşağıdaki alanları girin.
 
     **Abonelik**: Kullanmak istediğiniz Azure aboneliğini seçin.
 
     **Kaynak Grubu**: **Yeni oluştur**'a tıklayın ve kaynak grubu adı olarak **ManlFailRG** girin.
 
-    **Bölge**: Önizleme kapsamındaki bölgelerden size yakın olanı seçin. Bu öğreticide `westus2` kullanılır. Yük devretme yalnızca coğrafi olarak eşleştirilmiş Azure bölgeleri arasında gerçekleştirilebilir. westus2 ile coğrafi olarak eşleştirilmiş bölge WestCentralUS bölgesidir.
+    **Bölge**: size yakın bir bölge seçin. Bu öğreticide `West US 2` kullanılır. Yük devretme yalnızca coğrafi olarak eşleştirilmiş Azure bölgeleri arasında gerçekleştirilebilir. Batı ABD 2 coğrafi olarak eşleştirilmiş bölge WestCentralUS.
     
    **IoT Hub'ı Adı**: IoT hub'ınıza bir ad verin. Hub adının genel olarak benzersiz olması gerekir. 
 
@@ -65,33 +65,38 @@ Bir IoT hub'ı için günlük iki yük devretme ve iki yeniden çalışma sını
 
 1. **Kaynak grupları**'na tıklayın ve **ManlFailRG** adlı kaynak grubunu seçin. Kaynak listesinde hub'ınıza tıklayın. 
 
-2. IoT Hub'ı bölmesinin **Dayanıklılık** bölümünde **Elle yük devretme (önizleme)** seçeneğini belirleyin. Hub'ınız geçerli bir bölgede oluşturulmadıysa elle yük devretme seçeneği devre dışı olur.
+1. IoT Hub bölmesinde **Ayarlar** altında **Yük devretme**' ye tıklayın.
 
    ![IoT Hub'ı özellikler bölmesini gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-01.png)
 
-3. Elle yük devretme bölmesinde **IoT Hub'ı Birincil Konumu** ve **IoT Hub'ı İkincil Konumu** bilgileri gösterilir. Birincil konum, IoT hub'ını oluştururken belirlediğiniz konumdur ve her zaman hub'ın etkin olduğu konumu gösterir. İkincil konum, birincil konumla eşleştirilmiş olan standart [coğrafi olarak eşleştirilmiş Azure bölgesi](../best-practices-availability-paired-regions.md) olur. Konum değerlerini değiştiremezsiniz. Bu öğreticide birincil konum `westus2`, ikincil konum ise `WestCentralUS` olarak belirlenmiştir.
+1. El Ile yük devretme bölmesinde **geçerli konumu** ve **Yük devretme konumunu**görürsünüz. Geçerli konum her zaman hub 'ın Şu anda etkin olduğu konumu gösterir. Yük devretme konumu, geçerli konumla eşleştirilmiş standart [Azure coğrafi eşlenmiş bölgesidir](../best-practices-availability-paired-regions.md) . Konum değerlerini değiştiremezsiniz. Bu öğretici için, geçerli konum `West US 2` ve yük devretme konumu `West Central US`.
 
    ![Elle Yük Devretme bölmesini gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-02.png)
 
-3. Elle yük devretme bölmesinin en üstündeki **Yük devretmeyi başlat**'a tıklayın. **Elle yük devretmeyi onaylayın** bölmesi açılır. Yük devretmek istediğiniz IoT hub'ını onaylamak için adını yazın. Ardından yük devretmeyi başlatmak için **Tamam**'a tıklayın.
+1. El Ile yük devretme bölmesinin üst kısmında, **Yük devretmeyi Başlat**' a tıklayın. 
+
+1. Onay bölmesinde, IoT Hub 'ınızın adını doldurarak yük devretmek istediğinizi onaylayın. Ardından, yük devretmeyi başlatmak için **Yük devretme**' ye tıklayın.
 
    Elle yük devretme gerçekleştirmek için gereken süre, hub'ınıza kayıtlı olan cihaz sayısına bağlıdır. Örneğin 100.000 cihazınız varsa 15 dakika, beş milyon cihazınız varsa bir saat veya daha uzun sürebilir.
 
-4. **Elle yük devretmeyi onaylayın** bölmesinde yük devretmek istediğiniz IoT hub'ını onaylamak için adını yazın. Ardından yük devretmeyi başlatmak için Tamam'a tıklayın. 
-
    ![Elle Yük Devretme bölmesini gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-03-confirm.png)
 
-   Elle yük devretme işlemi çalışırken Elle Yük Devretme bölmesinde devam eden bir elle yük devretme işlemi olduğunu gösteren bir başlık görüntülenir. 
+   El ile yük devretme işlemi çalışırken, devam etmekte olan bir el ile yük devretme olduğunu söyleyen bir başlık görünür. 
 
    ![Devam eden Elle Yük Devretme işlemini gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-04-in-progress.png)
 
-   IoT Hub'ı bölmesini kapatıp Kaynak Grubu bölmesinde tıklayarak yeniden açmanız halinde hub'ın etkin olmadığını gösteren bir başlık görünür. 
+   IoT Hub bölmesini kapatır ve kaynak grubu bölmesinde tıklayarak yeniden açarsanız, hub 'ın el ile yük devretmenin ortasında olduğunu bildiren bir başlık görürsünüz. 
 
-   ![IoT Hub'ının devre dışı olduğunu gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-05-hub-inactive.png)
+   ![IoT Hub yük devretme işleminin devam ettiğini gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-05-hub-inactive.png)
 
-   İşlem tamamlandıktan sonra Elle Yük Devretme sayfasındaki birincil ve ikincil bölgeler yer değiştirir ve hub yeniden etkin hale gelir. Bu örnekte birincil konum `WestCentralUS`, ikincil konum da `westus2` olmuştur. 
+   Tamamlandıktan sonra, El Ile yük devretme sayfasındaki geçerli ve yük devretme bölgeleri çevrilmiştir ve hub tekrar etkin olur. Bu örnekte, geçerli konum artık `WestCentralUS` ve yük devretme konumu artık `West US 2`. 
 
    ![Yük devretme işleminin tamamlandığını gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-06-finished.png)
+
+   Genel Bakış sayfasında ayrıca yük devretme işleminin tamamlandığını ve IoT Hub `West Central US`çalıştığını belirten bir başlık gösterilir.
+
+   ![Genel Bakış sayfasında yük devretme işleminin tamamlandığını gösteren ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-06-finished-overview.png)
+
 
 ## <a name="perform-a-failback"></a>Yeniden çalışma gerçekleştirme 
 
@@ -101,15 +106,15 @@ Yeniden çalışma işlemi, elle yük devretme işlemiyle aynı şekilde gerçek
 
 1. Yeniden çalışma gerçekleştirmek için IoT hub'ınızın IoT Hub'ı bölmesine dönün.
 
-2. IoT Hub'ı bölmesinin **Dayanıklılık** bölümünde **Elle yük devretme (önizleme)** seçeneğini belirleyin. 
+2. IoT Hub bölmesinde **Ayarlar** altında **Yük devretme**' ye tıklayın. 
 
-3. Elle yük devretme bölmesinin en üstündeki **Yük devretmeyi başlat**'a tıklayın. **Elle yük devretmeyi onaylayın** bölmesi açılır. 
+3. El Ile yük devretme bölmesinin üst kısmında, **Yük devretmeyi Başlat**' a tıklayın. 
 
-4. **Elle yük devretmeyi onaylayın** bölmesinde yeniden çalışma gerçekleştirmek istediğiniz IoT hub'ını onaylamak için adını yazın. Ardından yeniden çalışmayı başlatmak için Tamam'a tıklayın. 
+4. Onay bölmesinde, IoT Hub 'ınızın adını doldurarak yeniden çalışmayı istediğinizi onaylayın. Ardından yeniden çalışmayı başlatmak için Tamam'a tıklayın. 
 
-   ![Elle yeniden çalışma isteğinin ekran görüntüsü](./media/tutorial-manual-failover/trigger-failback-01-regions.png)
+   ![Elle yeniden çalışma isteğinin ekran görüntüsü](./media/tutorial-manual-failover/trigger-failover-03-confirm.png)
 
-   Başlıklar, gerçekleştirme yük devretme bölümünde açıklandığı gibi görüntülenir. Yeniden çalışma tamamlandıktan sonra birincil konum olarak `westus2`, ikincil konum olarak da `WestCentralUS` özgün değerleri gösterilir.
+   Başlık, yük devretme gerçekleştirme bölümünde açıklandığı gibi görüntülenir. Yeniden çalışma tamamlandıktan sonra, geçerli konum olarak `West US 2` ve ilk olarak ayarlanan yük devretme konumu olarak `West Central US` gösterir.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme 
 

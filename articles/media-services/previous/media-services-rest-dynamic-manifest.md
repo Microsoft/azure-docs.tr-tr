@@ -13,29 +13,30 @@ ms.tgt_pltfrm: na
 ms.devlang: ne
 ms.topic: article
 ms.date: 03/20/2019
-ms.author: juliako;cenkdin
-ms.openlocfilehash: 5b023a152cf93ec6ff688674e991ad55db215965
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: juliako
+ms.reviewr: cenkdin
+ms.openlocfilehash: 29fef3bec90819b252b43491c08e7a5bc2b3d454
+ms.sourcegitcommit: de47a27defce58b10ef998e8991a2294175d2098
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60767821"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "69014894"
 ---
-# <a name="creating-filters-with-azure-media-services-rest-api"></a>İle Azure Media Services REST API filtreleri oluşturma 
+# <a name="creating-filters-with-azure-media-services-rest-api"></a>Azure Media Services REST API'si ile Filtreler oluşturma 
 > [!div class="op_single_selector"]
 > * [.NET](media-services-dotnet-dynamic-manifest.md)
 > * [REST](media-services-rest-dynamic-manifest.md)
 > 
 > 
 
-2\.17 sürümünden başlayarak, Media Services, varlıklarınız için filtrelerini tanımlamanızı sağlar. Bu filtreler müşterileriniz gibi şeyler seçmesine izin veren sunucu tarafı kurallar şunlardır: yalnızca bir bölümünü (yerine tüm video oynatma), bir video kayıttan yürütme ya da yalnızca bir alt kümesini (yerine, müşterinizin cihaz işleyebilir ses ve video yorumlama belirtin bir varlıkla ilişkilendirilen tüm yorumlama). Bu filtreleme varlıklarınızı aracılığıyla arşivlenmiş **dinamik bildirim**müşterinizin istek üzerine video akışı oluşturan s üzerinde belirtilen filtreleri temel.
+2,17 sürümünden itibaren, Media Services varlıklarınız için filtreler tanımlamanızı sağlar. Bu filtreler, müşterilerinizin, bir videonun yalnızca bir bölümünü kayıttan yürütme (videonun tamamını çalmak yerine) veya yalnızca müşterinizin cihazının işleyebileceği ses ve video çevirilerinin bir alt kümesini (örneğin, varlıkla ilişkili tüm yorumlamalar). Varlıklarınızın bu şekilde filtrelenmesi, belirtilen filtre (ler) i temel alarak bir videoyu akışa almak için müşterinizin isteğiyle oluşturulan **dinamik bildirim**aracılığıyla arşivlenir.
 
-Daha ayrıntılı filtreler ve dinamik bildirim ilgili bilgi için bkz. [dinamik bildirimlerin genel bakış](media-services-dynamic-manifest-overview.md).
+Filtreler ve dinamik bildirimle ilgili daha ayrıntılı bilgi için bkz. [dinamik bildirimlere genel bakış](media-services-dynamic-manifest-overview.md).
 
-Bu makalede, oluşturma, güncelleştirme ve filtreleri silmek için REST API'lerini kullanma gösterilmektedir. 
+Bu makalede, filtre oluşturmak, güncelleştirmek ve silmek için REST API 'Lerinin nasıl kullanılacağı gösterilmektedir. 
 
-## <a name="types-used-to-create-filters"></a>Filtreler oluşturmak için kullanılan türleri
-Aşağıdaki türleri filtreler oluşturulurken kullanılır:  
+## <a name="types-used-to-create-filters"></a>Filtre oluşturmak için kullanılan türler
+Şu türler, filtre oluştururken kullanılır:  
 
 * [Filtre](https://docs.microsoft.com/rest/api/media/operations/filter)
 * [AssetFilter](https://docs.microsoft.com/rest/api/media/operations/assetfilter)
@@ -44,17 +45,17 @@ Aşağıdaki türleri filtreler oluşturulurken kullanılır:
 
 > [!NOTE]
 > 
-> Varlıklar Media Services erişirken, HTTP isteklerini özel üstbilgi alanlarını ve değerlerini ayarlamanız gerekir. Daha fazla bilgi için [Media Services REST API geliştirme için Kurulum](media-services-rest-how-to-use.md).
+> Media Services varlıklara erişirken, HTTP isteklerinizin belirli üstbilgi alanlarını ve değerlerini ayarlamanız gerekir. Daha fazla bilgi için bkz. [Media Services REST API Geliştirme Için kurulum](media-services-rest-how-to-use.md).
 
 ## <a name="connect-to-media-services"></a>Media Services’e bağlanmak
 
-AMS API'ye bağlanma hakkında daha fazla bilgi için bkz: [Azure AD kimlik doğrulamasıyla Azure Media Services API'sine erişim](media-services-use-aad-auth-to-access-ams-api.md). 
+AMS API 'sine bağlanma hakkında daha fazla bilgi için bkz. [Azure AD kimlik doğrulamasıyla Azure MEDIA SERVICES API 'Sine erişme](media-services-use-aad-auth-to-access-ams-api.md). 
 
 ## <a name="create-filters"></a>Filtre oluşturma
-### <a name="create-global-filters"></a>Genel filtre oluşturma
+### <a name="create-global-filters"></a>Genel filtreler oluşturma
 Genel bir filtre oluşturmak için aşağıdaki HTTP isteklerini kullanın:  
 
-#### <a name="http-request"></a>HTTP isteği
+#### <a name="http-request"></a>HTTP Isteği
 İstek üst bilgileri
 
     POST https://media.windows.net/API/Filters HTTP/1.1 
@@ -105,9 +106,9 @@ Genel bir filtre oluşturmak için aşağıdaki HTTP isteklerini kullanın:
     HTTP/1.1 201 Created 
 
 ### <a name="create-local-assetfilters"></a>Yerel AssetFilters oluşturma
-Yerel AssetFilter oluşturmak için aşağıdaki HTTP isteklerini kullanın:  
+Yerel bir AssetFilter oluşturmak için aşağıdaki HTTP isteklerini kullanın:  
 
-#### <a name="http-request"></a>HTTP isteği
+#### <a name="http-request"></a>HTTP Isteği
 İstek üst bilgileri
 
     POST https://media.windows.net/API/AssetFilters HTTP/1.1 
@@ -157,10 +158,10 @@ Yerel AssetFilter oluşturmak için aşağıdaki HTTP isteklerini kullanın:
     . . . 
 
 ## <a name="list-filters"></a>Liste filtreleri
-### <a name="get-all-global-filters-in-the-ams-account"></a>Tüm genel alma **filtre**AMS hesabına s
-İstek filtreleri listelemek için aşağıdaki HTTP kullanın: 
+### <a name="get-all-global-filters-in-the-ams-account"></a>AMS hesabındakitüm genel filtreleri al
+Filtreleri listelemek için aşağıdaki HTTP isteklerini kullanın: 
 
-#### <a name="http-request"></a>HTTP isteği
+#### <a name="http-request"></a>HTTP Isteği
     GET https://media.windows.net/API/Filters HTTP/1.1 
     DataServiceVersion:3.0 
     MaxDataServiceVersion: 3.0 
@@ -170,8 +171,8 @@ Yerel AssetFilter oluşturmak için aşağıdaki HTTP isteklerini kullanın:
     x-ms-version: 2.17 
     Host: media.windows.net 
 
-### <a name="get-assetfilters-associated-with-an-asset"></a>Alma **AssetFilter**bir varlıkla ilişkilidir.
-#### <a name="http-request"></a>HTTP isteği
+### <a name="get-assetfilters-associated-with-an-asset"></a>Bir varlıkla ilişkili **Assetfilter**'ları al
+#### <a name="http-request"></a>HTTP Isteği
     GET https://media.windows.net/API/Assets('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592')/AssetFilters HTTP/1.1 
     DataServiceVersion: 3.0 
     MaxDataServiceVersion: 3.0 
@@ -182,8 +183,8 @@ Yerel AssetFilter oluşturmak için aşağıdaki HTTP isteklerini kullanın:
     x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
     Host: media.windows.net 
 
-### <a name="get-an-assetfilter-based-on-its-id"></a>Alma bir **AssetFilter** kimliğine göre
-#### <a name="http-request"></a>HTTP isteği
+### <a name="get-an-assetfilter-based-on-its-id"></a>Kimliğine göre bir **Assetfiltresi** al
+#### <a name="http-request"></a>HTTP Isteği
     GET https://media.windows.net/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__TestFilter') HTTP/1.1 
     DataServiceVersion: 3.0 
     MaxDataServiceVersion: 3.0 
@@ -194,16 +195,16 @@ Yerel AssetFilter oluşturmak için aşağıdaki HTTP isteklerini kullanın:
     x-ms-client-request-id: 00000000
 
 
-## <a name="update-filters"></a>Güncelleştirme filtreleri
-Bir filtre ile yeni özellik değerlerini güncelleştirmek için PATCH, PUT veya MERGE kullanın.  Bu işlemler hakkında daha fazla bilgi için bkz: [düzeltme eki, YERLEŞTİRME, birleştirme](https://msdn.microsoft.com/library/dd541276.aspx).
+## <a name="update-filters"></a>Filtreleri Güncelleştir
+Yeni özellik değerleriyle bir filtreyi güncelleştirmek için PATCH, PUT veya MERGE kullanın.  Bu işlemler hakkında daha fazla bilgi için bkz. [Patch, put, Merge](https://msdn.microsoft.com/library/dd541276.aspx).
 
-Bir filtre güncelleştirirseniz, kuralları yenilemek akış uç noktası için iki dakikaya kadar sürebilir. İçerik için bu filtreyi kullanarak hizmet (ve bu önbellekler proxy'leri ve CDN önbelleğe), bu filtre güncelleştirme player hatalarına neden olabilir. Filtre güncelleştirdikten sonra önbelleğini temizleyin. Bu seçenek, mümkün değildir. farklı bir filtre kullanmayı düşünün.  
+Bir filtreyi güncelleştirirseniz akış uç noktasının kuralların yenilenmesi iki dakika kadar sürebilir. İçerik bu filtre kullanılarak sunulduysa (ve proxy 'lerde ve CDN önbelleklerde önbelleğe alınmışsa), bu filtrenin güncelleştirilmesi oynatıcı hatalara neden olabilir. Filtreyi güncelleştirdikten sonra önbelleğin işaretini kaldırın. Bu seçenek mümkün değilse, farklı bir filtre kullanmayı düşünün.  
 
-### <a name="update-global-filters"></a>Genel filtrelerin güncelleştir
-Genel filtre güncelleştirmek için aşağıdaki HTTP isteklerini kullanın: 
+### <a name="update-global-filters"></a>Genel filtreleri Güncelleştir
+Genel bir filtreyi güncelleştirmek için aşağıdaki HTTP isteklerini kullanın: 
 
-#### <a name="http-request"></a>HTTP isteği
-İstek bağlıkları: 
+#### <a name="http-request"></a>HTTP Isteği
+İstek üst bilgileri: 
 
     MERGE https://media.windows.net/API/Filters('filterName') HTTP/1.1 
     DataServiceVersion:3.0 
@@ -239,11 +240,11 @@ Genel filtre güncelleştirmek için aşağıdaki HTTP isteklerini kullanın:
        ] 
     } 
 
-### <a name="update-local-assetfilters"></a>Yerel AssetFilters güncelleştir
-Yerel bir filtre güncelleştirmek için aşağıdaki HTTP isteklerini kullanın: 
+### <a name="update-local-assetfilters"></a>Yerel Assetfiltrelerini Güncelleştir
+Yerel bir filtreyi güncelleştirmek için aşağıdaki HTTP isteklerini kullanın: 
 
-#### <a name="http-request"></a>HTTP isteği
-İstek bağlıkları: 
+#### <a name="http-request"></a>HTTP Isteği
+İstek üst bilgileri: 
 
     MERGE https://media.windows.net/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__TestFilter')  HTTP/1.1 
     DataServiceVersion: 3.0 
@@ -280,10 +281,10 @@ Yerel bir filtre güncelleştirmek için aşağıdaki HTTP isteklerini kullanın
 
 
 ## <a name="delete-filters"></a>Filtreleri Sil
-### <a name="delete-global-filters"></a>Genel filtrelerin Sil
+### <a name="delete-global-filters"></a>Genel filtreleri Sil
 Genel bir filtreyi silmek için aşağıdaki HTTP isteklerini kullanın:
 
-#### <a name="http-request"></a>HTTP isteği
+#### <a name="http-request"></a>HTTP Isteği
     DELETE https://media.windows.net/api/Filters('GlobalFilter') HTTP/1.1 
     DataServiceVersion:3.0 
     MaxDataServiceVersion: 3.0 
@@ -294,10 +295,10 @@ Genel bir filtreyi silmek için aşağıdaki HTTP isteklerini kullanın:
     Host: media.windows.net 
 
 
-### <a name="delete-local-assetfilters"></a>Yerel AssetFilters Sil
-Yerel AssetFilter silmek için aşağıdaki HTTP isteklerini kullanın:
+### <a name="delete-local-assetfilters"></a>Yerel Assetfiltrelerini Sil
+Yerel bir AssetFilter 'ı silmek için aşağıdaki HTTP isteklerini kullanın:
 
-#### <a name="http-request"></a>HTTP isteği
+#### <a name="http-request"></a>HTTP Isteği
     DELETE https://media.windows.net/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__LocalFilter') HTTP/1.1 
     DataServiceVersion: 3.0 
     MaxDataServiceVersion: 3.0 
@@ -307,24 +308,24 @@ Yerel AssetFilter silmek için aşağıdaki HTTP isteklerini kullanın:
     x-ms-version: 2.17 
     Host: media.windows.net 
 
-## <a name="build-streaming-urls-that-use-filters"></a>Akış Filtreleri kullanan URL'lerini oluşturun
-Yayımlama ve varlıklarınızı teslim hakkında daha fazla bilgi için bkz: [müşterilerin genel bakış için içerik teslim](media-services-deliver-content-overview.md).
+## <a name="build-streaming-urls-that-use-filters"></a>Filtreler kullanan akış URL 'Leri oluşturma
+Varlıklarınızı yayımlama ve teslim etme hakkında daha fazla bilgi için bkz. [müşterilere Içerik sunma genel bakış](media-services-deliver-content-overview.md).
 
-Aşağıdaki örnekler, akış URL'leri için filtreleri ekleyin gösterilmektedir.
+Aşağıdaki örneklerde, akış URL 'Lerine filtrelerin nasıl ekleneceği gösterilmektedir.
 
 **MPEG DASH** 
 
     http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf, filter=MyFilter)
 
-**Apple HTTP canlı akış (HLS) V4**
+**Apple HTTP Canlı Akışı (HLS) v4**
 
     http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl, filter=MyFilter)
 
-**Apple HTTP canlı akış (HLS) V3**
+**Apple HTTP Canlı Akışı (HLS) v3**
 
     http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3, filter=MyFilter)
 
-**Kesintisiz akış**
+**Kesintisiz Akış**
 
     http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(filter=MyFilter)
 

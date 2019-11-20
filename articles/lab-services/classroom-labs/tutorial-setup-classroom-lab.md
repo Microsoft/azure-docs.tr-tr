@@ -12,14 +12,14 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
 ms.custom: mvc
-ms.date: 06/11/2019
+ms.date: 10/31/2019
 ms.author: spelluru
-ms.openlocfilehash: 803fe6eff8804dbd407642386865fe975c8db524
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a5f8c8c00a9f63558043167c5cf8269f9e139d54
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67123253"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73584903"
 ---
 # <a name="tutorial-set-up-a-classroom-lab"></a>Öğretici: Bir sınıf laboratuvarı ayarlama 
 Bu öğreticide, sınıftaki öğrenciler tarafından kullanılan sanal makinelerle bir sınıf laboratuvarı ayarlayacaksınız.  
@@ -28,136 +28,135 @@ Bu öğreticide, aşağıdaki eylemleri gerçekleştireceksiniz:
 
 > [!div class="checklist"]
 > * Sınıf laboratuvarı oluşturma
-> * Kullanıcılar laboratuvara ekleme
-> * Öğrencilere kayıt bağlantısı gönderme
+> * Laboratuvara Kullanıcı ekleme
+> * Laboratuvar için zamanlamayı ayarla
+> * Öğrenciye davetiye e-postası gönder
 
-## <a name="prerequisites"></a>Önkoşullar
-Bir laboratuvar hesabı içinde bir sınıf laboratuvarı kurmak için laboratuvar hesabında bu rollerden birinin üyesi olması gerekir: Sahip, Laboratuvar oluşturan veya katkıda bulunan. Bir laboratuvar hesabı oluşturmak için kullanılan hesap sahibi rolüne otomatik olarak eklenir.
+## <a name="prerequisites"></a>Ön koşullar
+Laboratuvar hesabında bir derslik Laboratuvarı ayarlamak için laboratuvar hesabındaki şu rollerden birine üye olmanız gerekir: sahip, laboratuvar Oluşturucusu veya katkıda bulunan. Laboratuvar hesabı oluşturmak için kullandığınız hesap, sahip rolüne otomatik olarak eklenir.
 
-Laboratuvar sahibi diğer kullanıcılara ekleyebilirsiniz **Laboratuvar oluşturan** rol. Örneğin, bir laboratuvar sahibi profesörlerinin Laboratuvar oluşturan rolüne ekler. Ardından, profesörlerinin kendi sınıfları için Vm'lerle laboratuvarlar oluşturun. Öğrenciler için laboratuvar kaydedilecek profesörlerinin almak kayıt bağlantıyı kullanın. Kullanıcılar kaydedildikten sonra Vm'leri Labs'de sınıfı yapmak için kullanabileceklerini iş ve ev iş. Laboratuvar oluşturan rolüne kullanıcı eklemek için ayrıntılı adımlar için bkz. [Laboratuvar oluşturan rolüne kullanıcı ekleme](tutorial-setup-lab-account.md#add-a-user-to-the-lab-creator-role).
+Laboratuvar sahibi, başka kullanıcıları **Laboratuvar Oluşturucu** rolüne ekleyebilir. Örneğin, bir laboratuar sahibi, laboratuvar Oluşturucu rolüne meslektedir ekler. Daha sonra, mesleler, sınıfları için VM 'Ler ile laboratuvarları oluşturur. Öğrenciler, mesleler tarafından laboratuvara kaydolmak için aldıkları kayıt bağlantısını kullanır. Kaydolduktan sonra, iş ve ev işlerini yapmak için laboratuvarlarda VM 'Leri kullanabilirler. Laboratuvar Oluşturucu rolüne kullanıcı ekleme hakkında ayrıntılı adımlar için bkz. [Laboratuvar Oluşturucu rolüne kullanıcı ekleme](tutorial-setup-lab-account.md#add-a-user-to-the-lab-creator-role).
 
 
 ## <a name="create-a-classroom-lab"></a>Sınıf laboratuvarı oluşturma
 
-1. [Azure Lab Services web sitesine](https://labs.azure.com) gidin. Internet Explorer 11 henüz desteklenmediğini unutmayın. 
+1. [Azure Lab Services web sitesine](https://labs.azure.com) gidin. Internet Explorer 11 ' in henüz desteklenmediğini unutmayın. 
 2. **Oturum aç**’ı seçip kimlik bilgilerinizi girin. Azure Lab Services, kuruluş hesaplarını ve Microsoft hesaplarını destekler. 
-3. **Yeni Laboratuvar** penceresinde aşağıdaki eylemleri gerçekleştirin: 
-    1. Laboratuvarınız için bir **ad** belirtin. 
-    2. Maksimum belirtin **sanal makinelerin sayısı** Laboratuvardaki. Laboratuvarı oluşturduktan sonra veya varolan bir laboratuvar içindeki VM sayısını decreate veya artırabilirsiniz. Daha fazla bilgi için [bir laboratuvar içindeki sanal makine sayısını güncelleştir](how-to-configure-student-usage.md#update-number-of-virtual-machines-in-lab)
-    6. **Kaydet**’i seçin.
+3. **Yeni laboratuvar**' ı seçin. 
+    
+    ![Sınıf laboratuvarı oluşturma](../media/tutorial-setup-classroom-lab/new-lab-button.png)
+4. **Yeni Laboratuvar** penceresinde aşağıdaki eylemleri gerçekleştirin: 
+    1. Laboratuvarınız için bir **ad** belirtip **İleri**' yi seçin.  
 
         ![Sınıf laboratuvarı oluşturma](../media/tutorial-setup-classroom-lab/new-lab-window.png)
-4. **Sanal makine özelliklerini seçin** sayfasında aşağıdaki adımları gerçekleştirin:
-    1. Laboratuvarda oluşturulan sanal makineler (VM) için bir **boyut** seçin. Şu anda **küçük**, **orta**, **Orta (sanallaştırma)** , **büyük**, ve **GPU** boyutları izin verilir.
-    3. Laboratuvardaki VM'leri oluşturmak için kullanılacak **VM görüntüsünü** seçin. Bir Linux görüntüsü seçerseniz, Uzak Masaüstü bağlantı etkinleştirmek için bir seçenek görürsünüz. Ayrıntılar için bkz [Linux için Uzak Masaüstü Bağlantısı etkinleştirme](how-to-enable-remote-desktop-linux.md).
-    4. **İleri**’yi seçin.
 
-        ![VM özellikleri belirtme](../media/tutorial-setup-classroom-lab/select-vm-specifications.png)    
-5. **Kimlik bilgilerini ayarla** sayfasında laboratuvardaki tüm VM'ler için varsayılan kimlik bilgilerini belirtin. 
-    1. Laboratuvardaki tüm VM'ler için **kullanıcı adını** belirtin.
-    2. Kullanıcının **parolasını** belirtin. 
+        Bir Linux görüntüsü seçerseniz, bunun için Uzak Masaüstü bağlantısını etkinleştirme seçeneğini görürsünüz. Ayrıntılar için bkz. [Linux için Uzak Masaüstü bağlantısını etkinleştirme](how-to-enable-remote-desktop-linux.md).
+    2. **Sanal makine kimlik bilgileri** sayfasında, laboratuvardaki tüm VM 'ler için varsayılan kimlik bilgilerini belirtin. Kullanıcının **adını** ve **parolasını** belirtin ve ardından **İleri**' yi seçin.  
+
+        ![Yeni laboratuvar penceresi](../media/tutorial-setup-classroom-lab/virtual-machine-credentials.png)
 
         > [!IMPORTANT]
         > Kullanıcı adını ve parolayı not edin. Bunlar tekrar gösterilmeyecektir.
-    3. **Oluştur**’u seçin. 
+    3. **Laboratuvar ilkeleri** sayfasında, her kullanıcı için ayrılan saat sayısını (**her bir kullanıcı için kota**) laboratuvar için zamanlanan süre dışında girin ve ardından **son**' u seçin. 
 
-        ![Kimlik bilgilerini ayarlama](../media/tutorial-setup-classroom-lab/set-credentials.png)
-6. **Şablonu yapılandır** sayfasında laboratuvar oluşturma işleminin durumunu görebilirsiniz. Laboratuvar şablonunun oluşturulması 20 dakika sürebilir. 
+        ![Her Kullanıcı için kota](../media/tutorial-setup-classroom-lab/quota-for-each-user.png)
+5. Şablon VM oluşturma 'nın durumunu gösteren aşağıdaki ekranı görmeniz gerekir. Laboratuvar şablonunun oluşturulması 20 dakika sürebilir. 
 
-    ![Şablonu yapılandır](../media/tutorial-setup-classroom-lab/configure-template.png)
-7. Şablon yapılandırma işlemleri tamamlandıktan sonra şu sayfayı görürsünüz: 
+    ![Şablon VM oluşturma durumu](../media/tutorial-setup-classroom-lab/create-template-vm-progress.png)
+8. **Şablon** sayfasında, aşağıdaki adımları uygulayın: Bu adımlar öğretici için **isteğe bağlıdır** .
 
-    ![Tamamlanmış şablon yapılandırma sayfası](../media/tutorial-setup-classroom-lab/configure-template-after-complete.png)
-8. Üzerinde **yapılandırma şablonu** sayfasında, aşağıdaki adımları uygulayın: Bu adımlar **isteğe bağlı** öğretici.
-    2. **Bağlan**'ı seçerek şablon VM'sine bağlanın. Linux VM şablon varsa (RDP etkinse), SSH veya RDP kullanarak bağlanmasını isteyip istemediğinizi seçin.
-    1. Seçin **parolayı Sıfırla** VM için parolayı sıfırlamak için. 
+    2. **Bağlan**'ı seçerek şablon VM'sine bağlanın. Bir Linux şablon sanal makinesi ise, SSH veya RDP kullanarak bağlanmak isteyip istemediğinizi seçin (RDP etkinse).
+    1. VM 'nin parolasını sıfırlamak için **Parolayı Sıfırla** ' yı seçin. 
     1. Şablon VM'sinde yazılım yükleme ve yapılandırma işlemlerini gerçekleştirin. 
     1. VM'yi **durdurun**.  
     1. Şablon için bir **açıklama** girin
-9. Şablon sayfasında **İleri**'yi seçin. 
-10. **Şablonu yayımla** sayfasında aşağıdaki işlemleri gerçekleştirin. 
-    1. Şablon hemen yayımlamak için seçin **Yayımla**.  
+10. **Şablon** sayfasında, araç çubuğunda **Yayımla** ' yı seçin. 
 
-        > [!WARNING]
-        > Yayımlama işlemini geri alamazsınız. 
-    2. Daha sonra yayımlamak istiyorsanız **Sonrası için kaydet**'i seçin. Sihirbaz tamamlandıktan sonra VM şablonunu yayımlayabilirsiniz. Yapılandırma ve Sihirbaz sonlandıktan sonra yayımlama hakkında daha fazla bilgi için bkz [şablon yayımlama](how-to-create-manage-template.md#publish-the-template-vm) konusundaki [sınıf laboratuvarlarını yönetme](how-to-manage-classroom-labs.md) makalesi.
+    ![Şablon Yayımla düğmesi](../media/tutorial-setup-classroom-lab/template-page-publish-button.png)
 
-        ![Şablonu yayımlama](../media/tutorial-setup-classroom-lab/publish-template.png)
-11. Şablonun **yayımlama ilerleme durumunu** görürsünüz. Bu işlemin tamamlanması bir saat sürebilir. 
+    > [!WARNING]
+    > Yayımlama işlemini geri alamazsınız. 
+8. **Şablonu Yayımla** sayfasında, laboratuvarda oluşturmak istediğiniz sanal makine sayısını girin ve ardından **Yayımla**' yı seçin. 
+
+    ![Şablon yayımlama-sanal makine sayısı](../media/tutorial-setup-classroom-lab/publish-template-number-vms.png)
+11. Şablonu **Yayımlama durumunu** sayfada görürsünüz. Bu işlemin tamamlanması bir saat sürebilir. 
 
     ![Şablonu yayımlama - ilerleme](../media/tutorial-setup-classroom-lab/publish-template-progress.png)
-12. Şablon başarıyla yayımlandığında aşağıdaki sayfayı görürsünüz. **Done** (Bitti) öğesini seçin.
-
-    ![Şablonu yayımlama - başarılı](../media/tutorial-setup-classroom-lab/publish-success.png)
-1. Laboratuvar **panosunu** görürsünüz. 
-    
-    ![Sınıf laboratuvarı panosu](../media/tutorial-setup-classroom-lab/classroom-lab-home-page.png)
-4. Geçiş **sanal makineler** sayfasında soldaki menüden sanal makinelerde seçerek veya sanal makineleri kutucuğu seçtiğinizde. Bulunan sanal makineler gördüğünüzü onaylayın **atanmamış** durumu. Bu VM’ler henüz bir öğrenciye atanmamıştır. Bu makinelerin durumu **Durduruldu** olmalıdır. Bu sayfadan bir öğrenci VM'sini başlatabilir, VM'ye bağlanabilir, VM'yi durdurabilir ve VM'yi silebilirsiniz. VM'leri bu sayfadan başlatabilir veya öğrencilerinizin başlatmasını sağlayabilirsiniz. 
+4. Sol taraftaki menüden sanal makineler ' i seçerek veya sanal makineler Kutucuğu ' nı seçerek **sanal makine havuzu** sayfasına geçin. **Atanmamış** durumda olan sanal makineleri görtığınızdan emin olun. Bu VM’ler henüz bir öğrenciye atanmamıştır. Bu makinelerin durumu **Durduruldu** olmalıdır. Bu sayfadan bir öğrenci VM'sini başlatabilir, VM'ye bağlanabilir, VM'yi durdurabilir ve VM'yi silebilirsiniz. VM'leri bu sayfadan başlatabilir veya öğrencilerinizin başlatmasını sağlayabilirsiniz. 
 
     ![Durdurulmuş durumdaki sanal makineler](../media/tutorial-setup-classroom-lab/virtual-machines-stopped.png)
 
-## <a name="add-users-to-the-lab"></a>Kullanıcılar laboratuvara ekleme
+    Bu sayfada aşağıdaki görevleri gerçekleştirebilirsiniz (öğreticide bu adımları uygulayın. Bu adımlar yalnızca bilgileriniz içindir.): 
+    
+    1. Laboratuvar kapasitesini (laboratuvardaki VM sayısı) değiştirmek için araç çubuğunda **Laboratuvar kapasitesi** ' ni seçin.
+    2. Tüm VM 'Leri aynı anda başlatmak için araç çubuğunda **Tümünü Başlat** ' ı seçin. 
+    3. Belirli bir sanal makineyi başlatmak için, **durumunda**aşağı oku seçin ve ardından **Başlat**' ı seçin. Ayrıca, ilk sütunda bir VM seçerek ve ardından araç çubuğundan **Başlat** ' ı seçerek bir VM başlatabilirsiniz.
 
-1. Seçin **kullanıcılar** sol menüsünde. Varsayılan olarak, **erişimi kısıtlama** seçeneği etkinleştirilir. Bu ayar etkin olduğunda, kullanıcı listesinde kullanıcı değilse kullanıcı kayıt bağlantıya sahip olsa bile, bir kullanıcı laboratuvarla kaydedilemiyor. Yalnızca bu listedeki kullanıcılar laboratuvarla gönderdiğiniz kayıt bağlantıyı kullanarak kaydedebilirsiniz. Bu yordamda, kullanıcıların listesine ekleyin. Alternatif olarak, kapatabilirsiniz **erişimi kısıtlama**, kullanıcıların kayıt bağlantıya sahip oldukları sürece laboratuvarla kaydolmasını sağlar. 
-2. Seçin **kullanıcı ekleme** araç. 
+    Şablon oluşturma ve yönetme hakkında daha fazla bilgi ve öğrenci sanal makinelerini ayarlama ve yönetme hakkında daha fazla bilgi için aşağıdaki makalelere bakın: 
+    
+    - [Sınıf Laboratuvarı şablonları oluşturma ve yönetme](how-to-create-manage-template.md)
+    - [Sanal makine havuzunu ayarlama ve yönetme](how-to-set-virtual-machine-passwords.md)
 
-    ![Kullanıcı düğmesi ekleme](../media/how-to-configure-student-usage/add-users-button.png)
-1. Üzerinde **kullanıcı ekleme** sayfasında, ayrı bir satırda veya tek bir satırda noktalı virgülle ayırarak kullanıcılar e-posta adreslerini girin. 
+## <a name="add-users-to-the-lab"></a>Laboratuvara Kullanıcı ekleme
 
-    ![Kullanıcı e-posta ekleyin](../media/how-to-configure-student-usage/add-users-email-addresses.png)
-4. **Kaydet**’i seçin. E-posta adreslerini kullanıcıları ve bunların durumlarını (veya kayıtlı) listesinde görürsünüz. 
+1. Sol menüdeki **Kullanıcılar** ' ı seçin. Varsayılan olarak, **erişimi kısıtla** seçeneği etkinleştirilmiştir. Bu ayar açık olduğunda, Kullanıcı kullanıcılar listesinde olmadığı takdirde Kullanıcı kayıt bağlantısına sahip olsa bile, Kullanıcı laboratuvara kayıt yapamıyor. Yalnızca listedeki kullanıcılar, göndereceğiniz kayıt bağlantısını kullanarak laboratuvara kayıt yapabilir. Bu yordamda, kullanıcıları listeye eklersiniz. Alternatif olarak, kayıt bağlantısı olduğu sürece kullanıcıların laboratuvara kaydolmaları için **erişimi kısıtla**' yı devre dışı bırakabilirsiniz. 
+2. Araç çubuğundan **Kullanıcı Ekle** ' yi seçin ve ardından **e-posta adreslerine göre Ekle**' yi seçin. 
+
+    ![Kullanıcı Ekle düğmesi](../media/how-to-configure-student-usage/add-users-button.png)
+1. **Kullanıcı Ekle** sayfasında, kullanıcıların e-posta adreslerini ayrı satırlarda veya noktalı virgülle ayrılmış tek bir satıra girin. 
+
+    ![Kullanıcı e-posta adresleri Ekle](../media/how-to-configure-student-usage/add-users-email-addresses.png)
+4. **Kaydet**’i seçin. Kullanıcıların e-posta adreslerini ve bunların durumlarını (kayıtlı veya değil) listede görürsünüz. 
 
     ![Kullanıcı listesi](../media/how-to-configure-student-usage/users-list-new.png)
 
-## <a name="set-quotas-for-users"></a>Kullanıcılar için kota ayarlama
-Aşağıdaki adımları kullanarak, kullanıcı başına kotaları ayarlayabilirsiniz: 
+    Laboratuvar 'e kaydolduktan sonra listedeki kullanıcıların adlarını görürsünüz. 
+    
+## <a name="set-a-schedule-for-the-lab"></a>Laboratuvar için zamanlama ayarlama
+Laboratuvardaki VM 'Lerin belirli zamanlarda otomatik olarak başlatılması/durdurulması için laboratuvar için zamanlanmış bir olay oluşturun. Daha önce belirttiğiniz Kullanıcı kotası, bu zamanlanan sürenin dışında her bir kullanıcıya atanan ek süredir. 
 
-1. Seçin **kullanıcılar** sayfası zaten etkin değilse sol menüsünde. 
-2. Seçin **kullanıcı başına kota:** araç. 
-3. Üzerinde **kullanıcı başına kotası** sayfasında, her bir kullanıcı (Öğrenci) vermek istediğiniz süreyi belirtin: 
-    1. **0 saat (yalnızca zamanlama)** . Kullanıcılar Vm'lerini yalnızca zamanlanmış süre boyunca veya Laboratuvar sahibi olarak, Vm'lerde için bunları kullanabilirsiniz.
+1. **Zamanlamalar** sayfasına geçin ve araç çubuğunda **Zamanlanmış olay Ekle** ' yi seçin. 
 
-        ![Sıfır saat - yalnızca zamanlanan saati](../media/how-to-configure-student-usage/zero-hours.png)
-    1. **Toplam Laboratuvar saat başına kullanıcı sayısı**. Kullanıcıların kümesi kaç saat (Bu alan için belirtilen) için Vm'lerini kullanabilir **zamanlanan süreden yanı sıra**. Bu seçeneği belirlerseniz, girin **saat sayısı** metin kutusuna. 
+    ![Zamanlamalar sayfasında zamanlama Ekle düğmesi](../media/how-to-create-schedules/add-schedule-button.png)
+2. **Zamanlanmış olay Ekle** sayfasında, aşağıdaki adımları uygulayın:
+    1. **Standart** **olay türünün**seçili olduğunu onaylayın.  
+    2. Sınıf için **başlangıç tarihini** belirtin. 
+    4. VM 'Lerin **başlamasını istediğiniz başlangıç saatini** belirtin.
+    5. VM 'Lerin kapatıldığı **bitiş saatini** belirtin. 
+    6. Belirttiğiniz başlangıç ve durdurma zamanları için **saat dilimini** belirtin. 
+3. Aynı **Zamanlanmış olay Ekle** sayfasında, **Yinele** bölümünde geçerli zamanlamayı seçin.  
 
-        ![Saat başına kullanıcı sayısı](../media/how-to-configure-student-usage/number-of-hours-per-user.png)
-    4. **Kaydet**’i seçin. 
-5. Değiştirilmiş değerlere araç göreceksiniz: **Kullanıcı başına kota: &lt;saat sayısı&gt;** . 
+    ![Zamanlamalar sayfasında zamanlama Ekle düğmesi](../media/how-to-create-schedules/select-current-schedule.png)
+5. **Yinele** iletişim kutusunda, aşağıdaki adımları uygulayın:
+    1. **Yineleme** alanı için **Her haftanın** ayarlandığını onaylayın. 
+    2. Zamanlamanın etkili olmasını istediğiniz günleri seçin. Aşağıdaki örnekte Pazartesi-Cuma seçilidir. 
+    3. Zamanlama için bir **bitiş tarihi** seçin.
+    8. **Kaydet**’i seçin. 
 
-    ![Kullanıcı başına kotası](../media/how-to-configure-student-usage/quota-per-user.png)
+        ![Yineleme zamanlaması ayarla](../media/how-to-create-schedules/set-repeat-schedule.png)
 
-## <a name="set-a-schedule-for-the-lab"></a>Laboratuvar için bir zamanlama
-Kota ayarı yapılandırılmışsa **0 saat (yalnızca zamanlama)** , Laboratuvar için bir zamanlama ayarlamanız gerekir. Bu öğreticide, bir programa haftalık olarak çalıştırılması için zamanlamayı ayarlayın.
+3. Şimdi, **zamanlanan olay Ekle** sayfasında, **notlar için (isteğe bağlı)** , zamanlama için herhangi bir açıklama veya Not girin. 
+4. **Zamanlanmış olay Ekle** sayfasında **Kaydet**' i seçin. 
 
-1. Geçiş **zamanlamaları** sayfasında ve seçin **Ekle zamanlama** araç. 
+    ![Haftalık zamanlama](../media/how-to-create-schedules/add-schedule-page-weekly.png)
+5. Zamanlamanın ayarlandığını doğrulamak için takvimdeki başlangıç tarihine gidin.
+    
+    ![Takvimde zamanla](../media/how-to-create-schedules/schedule-calendar.png)
 
-    ![Zamanlama sayfasında zamanlama düğmesi ekleme](../media/how-to-create-schedules/add-schedule-button.png)
-2. Üzerinde **Ekle zamanlama** sayfasında, geçiş **haftalık** en üstünde. 
-3. İçin **zamanlama gün (gereklidir)** , zamanlama etkili olmasını istediğiniz günleri seçin. Aşağıdaki örnekte, Pazartesi-Cuma seçilir. 
-4. İçin **gelen** alanına **zamanlama başlangıç tarihi** ya da bir tarih seçerek çekme **Takvim** düğmesi. Bu alan gereklidir. 
-5. İçin **zamanlama bitiş tarihi**kapatma için VM'ler üzerinde olan bir bitiş tarihi seçin veya girin. 
-6. İçin **başlangıç zamanı**, başlatılacak Vm'leri istediğiniz saati seçin. Başlangıç zamanı, bitiş zamanı ayarlanmamışsa gereklidir. Seçin **kaldırma olay başlangıç** durdurma saati belirtmek istiyorsanız. varsa **başlangıç zamanı** olduğundan devre dışı seçin **Ekle başlangıç olayı** etkinleştirmek için açılır listenin yanındaki. 
-7. İçin **durdurma saati**, kapatma için Vm'leri istediğiniz saati seçin. Bitiş zamanı başlangıç zamanından ayarlanmamışsa gereklidir. Seçin **Kaldır durdurma olayını** yalnızca başlangıç saatini belirtmek istiyorsanız. varsa **durdurma saati** olduğundan devre dışı seçin **durdurma olay Ekle** etkinleştirmek için açılır listenin yanındaki.
-8. İçin **saat dilimi (gerekli)** , başlangıç için saat dilimini seçin ve bitiş zamanlarını belirttiğiniz.  
-9. İçin **notları**, zamanlama için herhangi bir açıklama veya notları girin. 
-10. **Kaydet**’i seçin. 
+    Bir sınıfa yönelik zamanlamalar oluşturma ve yönetme hakkında daha fazla bilgi için bkz. sınıf [laboratuvarları için zamanlama oluşturma ve yönetme](how-to-create-schedules.md).
 
-    ![Haftalık Zamanlama](../media/how-to-create-schedules/add-schedule-page-weekly.png)
+## <a name="send-invitation-emails-to-students"></a>Öğrencilere davetiye e-postaları gönderin
 
-## <a name="send-an-email-with-the-registration-link"></a>Kayıt bağlantısı içeren bir e-posta Gönder
+1. Zaten sayfada değilseniz **Kullanıcılar** görünümüne geçin ve araç çubuğunda **Tümünü davet et** ' i seçin. 
 
-1. Geçiş **kullanıcılar** sayfada zaten kök kullanıcı değilseniz görüntüleyin. 
-2. Belirli veya tüm kullanıcılar listeden seçin. Belirli kullanıcıları seçmek için listedeki ilk sütunda onay kutularını seçin. Tüm kullanıcıları seçmek için ilk sütun başlığının önüne onay kutusunu seçin (**adı**) veya listeden tüm kullanıcılar için tüm onay kutularını seçin. Durumunu görebilirsiniz **davet durumu** bu listede.  Aşağıdaki görüntüde tüm Öğrenciler için davet durumu ayarlanır **davet gönderilmedi**. 
+    ![Öğrencileri seçin](../media/tutorial-setup-classroom-lab/invite-all-button.png)
 
-    ![Öğrencileri seçme](../media/tutorial-setup-classroom-lab/select-students.png)
-1. Seçin **e-posta simgesine (Zarf)** satır (veya) select biriyle **Davet Gönder** araç. Fare, e-posta simgesini görmek için listedeki bir öğrenci adının üzerine de gelebilirsiniz. 
+1. **E-postaya davet gönder** sayfasında, isteğe bağlı bir ileti girin ve ardından **Gönder**' i seçin. E-posta otomatik olarak kayıt bağlantısını içerir. Bu kayıt bağlantısını,... öğesini seçerek alabilirsiniz **. (üç nokta)** araç çubuğunda ve **kayıt bağlantısı**. 
 
-    ![Kayıt bağlantıyı e-posta ile gönderin](../media/tutorial-setup-classroom-lab/send-email.png)
-4. Üzerinde **e-posta ile gönderme kayıt bağlantı** sayfasında, aşağıdaki adımları izleyin: 
-    1. Türü bir **isteğe bağlı iletisini** Öğrenciler göndermek istediğiniz. E-posta kayıt bağlantıyı otomatik olarak içerir. 
-    2. Üzerinde **e-posta ile gönderme kayıt bağlantı** sayfasında **Gönder**. Davet değiştirerek durumunu görmek **davet gönderiliyor** ve sonra **davet gönderildi**. 
-        
-        ![Davet gönderildi](../media/tutorial-setup-classroom-lab/invitations-sent.png)
+    ![Kayıt bağlantısını e-posta ile gönder](../media/tutorial-setup-classroom-lab/send-email.png)
+4. **Kullanıcı** listesindeki **davetin** durumunu görürsünüz. Durum, **&lt;tarih&gt;** **gönderilmesi ve ardından** gönderilmek üzere değiştirilmelidir. 
+
+    Bir sınıfa öğrenci ekleme ve laboratuvarın kullanımını yönetme hakkında daha fazla bilgi için bkz. [öğrenci kullanımını yapılandırma](how-to-configure-student-usage.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Bu öğreticide, bir sınıf laboratuvarı oluşturdunuz ve laboratuvarı yapılandırdınız. Bir öğrencinin, kayıt bağlantısını kullanarak laboratuvardaki bir sanal makineye nasıl erişebileceğinizi öğrenmek için sonraki öğreticiye ilerleyin:

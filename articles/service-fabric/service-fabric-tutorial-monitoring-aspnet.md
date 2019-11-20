@@ -12,15 +12,15 @@ ms.devlang: dotNet
 ms.topic: tutorial
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 3/21/2019
+ms.date: 07/10/2019
 ms.author: dekapur
 ms.custom: mvc
-ms.openlocfilehash: 9de11c0049cf3db3feea311a2541640437ba8632
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 1f18aef12978b3df1ba1fd654ea4a0e9548a4b46
+ms.sourcegitcommit: 920ad23613a9504212aac2bfbd24a7c3de15d549
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60719927"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "68228086"
 ---
 # <a name="tutorial-monitor-and-diagnose-an-aspnet-core-application-on-service-fabric-using-application-insights"></a>Öğretici: Bir Application Insights'ı kullanarak Service fabric'te ASP.NET Core uygulamasını izleme ve tanılama
 
@@ -46,7 +46,7 @@ Bu öğretici dizisinde şunların nasıl yapıldığını öğrenirsiniz:
 Bu öğreticiye başlamadan önce:
 
 * Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun
-* **Azure geliştirme** ve **ASP.NET ve web geliştirme** iş yükleriyle [Visual Studio 2017’yi yükleyin](https://www.visualstudio.com/).
+* [Visual Studio 2019 yükleme](https://www.visualstudio.com/) yükleyip **Azure geliştirme** ve **ASP.NET ve web geliştirme** iş yükleri.
 * [Service Fabric SDK'yı yükleyin](service-fabric-get-started.md)
 
 ## <a name="download-the-voting-sample-application"></a>Voting örnek uygulamasını indirme
@@ -74,7 +74,7 @@ Gerekli bilgileri doldurduktan sonra, kaynağı sağlamak için **Oluştur**'a t
 
 ## <a name="add-application-insights-to-the-applications-services"></a>Uygulamanın hizmetlerine Application Insights ekleme
 
-Başlat menüsünde Visual Studio simgesine sağ tıklayıp seçerek Visual Studio 2017'yi yükseltilmiş ayrıcalıklarla başlatın **yönetici olarak çalıştır**. **Dosya** > **Aç** > **Proje/Çözüm**'e tıklayın ve Oylama uygulamasına gidin (öğreticinin birinci bölümde oluşturulmuştur veya git kopyasıdır). Açık *Voting.sln*. Uygulamanın NuGet paketlerini geri yüklemek isteyip istemediğiniz sorulduğunda tıklayın **Evet**.
+Başlat menüsünde Visual Studio simgesine sağ tıklayıp seçerek Visual Studio 2019 yükseltilmiş ayrıcalıklarla başlatın **yönetici olarak çalıştır**. **Dosya** > **Aç** > **Proje/Çözüm**'e tıklayın ve Oylama uygulamasına gidin (öğreticinin birinci bölümde oluşturulmuştur veya git kopyasıdır). Açık *Voting.sln*. Uygulamanın NuGet paketlerini geri yüklemek isteyip istemediğiniz sorulduğunda tıklayın **Evet**.
 
 Hem VotingWeb hem de VotingData hizmetlerinde Application Insights'ı yapılandırmak için aşağıdaki adımları izleyin:
 
@@ -118,7 +118,7 @@ NuGet paketini adımları şunlardır:
     using Microsoft.ApplicationInsights.ServiceFabric;
     ```
 
-    2. İç içe her iki dosyada *dönüş* deyiminin *Createservicereplicalisteners()* veya *altındaki*altında  *Createservicereplicalisteners()* > *Hizmetleri*, bildirilen diğer tekil hizmetleriyle ekleyin:
+    2. İç içe her iki dosyada *dönüş* deyiminin *Createservicereplicalisteners()* veya *altındaki*altında  *Createservicereplicalisteners()*  > *Hizmetleri*, bildirilen diğer tekil hizmetleriyle ekleyin:
     ```csharp
     .AddSingleton<ITelemetryInitializer>((serviceProvider) => FabricTelemetryInitializerExtension.CreateFabricTelemetryInitializer(serviceContext))
     ```

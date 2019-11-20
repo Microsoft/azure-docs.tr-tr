@@ -16,12 +16,12 @@ ms.author: mimart
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8cd29fc00a1c25a7c092393591060ca7e2938155
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: 5d3b8176566593c5c9e9ff63a6ccbafcb2a35cd5
+ms.sourcegitcommit: 441e59b8657a1eb1538c848b9b78c2e9e1b6cfd5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67481262"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67828002"
 ---
 # <a name="wildcard-applications-in-the-azure-active-directory-application-proxy"></a>Azure Active Directory Uygulama proxy'si joker karakteri uygulamalarında
 
@@ -45,7 +45,9 @@ Hem, iç ve dış URL'leri şu biçimde olması durumunda joker karakterler içe
 
 > http (s) :/ / *. \<etki alanı\>
 
-Örneğin: `http(s)://*.adventure-works.com`. İç ve dış URL, en iyi uygulama farklı etki alanlarını kullanabilirsiniz, ancak bunlar aynı olmalıdır. URL'lerinden biri joker karakter yoksa, uygulama yayımlama sırasında bir hata görürsünüz.
+Örneğin: `http(s)://*.adventure-works.com`.
+
+İç ve dış URL, en iyi uygulama farklı etki alanlarını kullanabilirsiniz, ancak bunlar aynı olmalıdır. URL'lerinden biri joker karakter yoksa, uygulama yayımlama sırasında bir hata görürsünüz.
 
 Farklı yapılandırma ayarları ile ek uygulamalarınız varsa, bu özel durumlar için joker karakter belirlenen Varsayılanların üzerine yazmak için ayrı uygulamalar olarak yayımlamanız gerekir. Joker karakter olmayan uygulamalar joker uygulamalar her zaman önceliklidir. Yapılandırma açısından bakıldığında, bunlar "Yeni" Normal uygulamalardır.
 
@@ -60,7 +62,7 @@ Başlamak için bu gereksinimlerini karşılamanızın emin olun.
 Sırada [özel etki alanları](application-proxy-configure-custom-domain.md) olan joker karakter içeren uygulamalar için bir önkoşul oldukları diğer tüm uygulamaları için isteğe bağlı. Özel etki alanları oluşturmak, gerektirir:
 
 1. Azure içinde doğrulanmış bir etki alanı oluşturun.
-2. Bir SSL sertifikası PFX biçimi, uygulama ara sunucusuna yükleyin.
+1. Bir SSL sertifikası PFX biçimi, uygulama ara sunucusuna yükleyin.
 
 Uygulama oluşturmayı planladığınız eşleştirmek için joker karakter sertifika kullanmayı düşünmeniz gerekir. Alternatif olarak, yalnızca belirli uygulamaların listeleyen bir sertifika kullanabilirsiniz. Bu durumda, yalnızca sertifikasında listelenen uygulamalar bu joker uygulama erişilebilir.
 
@@ -82,11 +84,11 @@ Joker karakter içeren uygulamalar için hesaba atmanız gereken bazı noktalar 
 
 Joker karakter içeren uygulamalar için **İç URL** olarak biçimlendirilmelidir `http(s)://*.<domain>`.
 
-![İç URL için http (s) biçimi kullanmak :/ / *. < etki alanı >](./media/application-proxy-wildcard/22.png)
+![İç URL için http (s) biçimi kullanmak :/ / *. \<etki alanı >](./media/application-proxy-wildcard/22.png)
 
 Yapılandırırken bir **dış URL**, aşağıdaki biçimi kullanmanız gerekir: `https://*.<custom domain>`
 
-![Dış URL biçimi https://*.<custom etki alanını kullan >](./media/application-proxy-wildcard/21.png)
+![Dış URL biçimi https://* kullanın. \<özel etki alanı >](./media/application-proxy-wildcard/21.png)
 
 Joker karakter, birden fazla joker karakterler veya diğer normal ifade dizeleri diğer konumlarını desteklenmez ve hatalara neden oluyor.
 
@@ -95,11 +97,11 @@ Joker karakter, birden fazla joker karakterler veya diğer normal ifade dizeleri
 Bir uygulama tarafından joker uygulamadan hariç tutabilirsiniz
 
 - Normal bir uygulama olarak özel durum uygulama yayımlama
-- Joker karakter yalnızca DNS ayarlarınızı aracılığıyla belirli uygulamalar için etkinleştirme  
+- Joker karakter yalnızca DNS ayarlarınızı aracılığıyla belirli uygulamalar için etkinleştirme
 
 Normal bir uygulama olarak bir uygulama yayımlama, joker karakter bir uygulama hariç tutmak için tercih edilen yöntemdir. Joker karakter içeren uygulamalar, özel durumlar en baştan uygulanmasını sağlamak için önce hariç tutulan uygulamalar yayımlamanız gerekir. En belirgin uygulama her zaman – olarak yayımlanan uygulama öncelikli olur `budgets.finance.adventure-works.com` uygulamanın önceliklidir `*.finance.adventure-works.com`, hangi sırayla önceliklidir uygulamanın `*.adventure-works.com`.
 
-Ayrıca, DNS Yönetimi aracılığıyla belirli uygulamalar için yalnızca iş için joker karakter sınırlayabilirsiniz. En iyi uygulama, bir joker karakter içeren ve biçimi, yapılandırdığınız dış URL ile eşleşen bir CNAME girişi oluşturmanız gerekir. Ancak, joker karakterler için bunun yerine belirli bir uygulama URL'lerini işaret edebilir. Örneğin, yerine, `*.adventure-works.com`, işaret `hr.adventure-works.com`, `expenses.adventure-works.com` ve `travel.adventure-works.com individually` için `000aa000-11b1-2ccc-d333-4444eee4444e.tenant.runtime.msappproxy.net`. 
+Ayrıca, DNS Yönetimi aracılığıyla belirli uygulamalar için yalnızca iş için joker karakter sınırlayabilirsiniz. En iyi uygulama, bir joker karakter içeren ve biçimi, yapılandırdığınız dış URL ile eşleşen bir CNAME girişi oluşturmanız gerekir. Ancak, joker karakterler için bunun yerine belirli bir uygulama URL'lerini işaret edebilir. Örneğin, yerine, `*.adventure-works.com`, işaret `hr.adventure-works.com`, `expenses.adventure-works.com` ve `travel.adventure-works.com individually` için `000aa000-11b1-2ccc-d333-4444eee4444e.tenant.runtime.msappproxy.net`.
 
 Bu seçeneği kullanırsanız, ayrıca başka bir CNAME girişi için bir değer gerekir `AppId.domain`, örneğin, `00000000-1a11-22b2-c333-444d4d4dd444.adventure-works.com`de aynı konuma gelin. Bulabilirsiniz **AppID** joker uygulama, uygulama özellikleri sayfasında:
 
@@ -110,7 +112,7 @@ Bu seçeneği kullanırsanız, ayrıca başka bir CNAME girişi için bir değer
 Joker uygulama içinde yalnızca tek bir kutucuk ile temsil edilen [MyApps paneli](https://myapps.microsoft.com). Bu kutucuk, varsayılan olarak gizlidir. Kutucuğu Göster ve belirli bir sayfada kullanıcı land olması için:
 
 1. İçin yönergeleri izleyin [giriş sayfası URL ayarını](application-proxy-configure-custom-home-page.md).
-2. Ayarlama **Göster uygulama** için **true** uygulama özellikleri sayfasında.
+1. Ayarlama **Göster uygulama** için **true** uygulama özellikleri sayfasında.
 
 ### <a name="kerberos-constrained-delegation"></a>Kısıtlı Kerberos temsilcisi seçme
 

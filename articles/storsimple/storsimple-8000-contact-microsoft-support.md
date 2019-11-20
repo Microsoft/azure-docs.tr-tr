@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 01/09/2018
-ms.author: alkohli;
-ms.openlocfilehash: 77050ad37862394785cf348a242f585cc089ba26
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: alkohli
+ms.openlocfilehash: 5394feff80c1df8b7a6cf7f6e6ea56678f575823
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65606855"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67612519"
 ---
 # <a name="contact-microsoft-support"></a>Microsoft Destek'e Başvur
 
@@ -45,7 +45,7 @@ Bağlı olarak, [destek planı](https://azure.microsoft.com/support/plans/), Sto
    1. Gelen **sorun türü** aşağı açılan listesinden **teknik**.
    2. Geçerli **abonelik**, **hizmet** türü ve **kaynak** (StorSimple cihaz Yöneticisi hizmeti) otomatik olarak seçilir. 
    3. Seçin bir **destek planı** aşağı açılan listeden, aboneliğinizle ilişkili birden çok planları varsa. Teknik Destek etkinleştirmek için bir Ücretli destek planına ihtiyacınız var.
-   4. **İleri**’ye tıklayın.
+   4.           **İleri**'ye tıklayın.
 
        ![Yeni portal aracılığıyla kişinin MS desteği](./media/storsimple-8000-contact-microsoft-support/contactsupport2.png)
 
@@ -57,7 +57,7 @@ Bağlı olarak, [destek planı](https://azure.microsoft.com/support/plans/), Sto
     4. Başlangıç tarihi ve saati sorun için sağlar.
     5. İçinde **karşıya dosya yükleme**, destek paketinizi göz atmak için klasör simgesine tıklayın.
     6. Denetleme **tanılama bilgilerini paylaşmak**.
-    7. **İleri**’ye tıklayın.
+    7.           **İleri**'ye tıklayın.
 
        ![Yeni portal aracılığıyla kişinin MS desteği](./media/storsimple-8000-contact-microsoft-support/contactsupport3.png) 
 
@@ -65,7 +65,7 @@ Bağlı olarak, [destek planı](https://azure.microsoft.com/support/plans/), Sto
 
    1. İçinde **başvurun seçenekleri**, tercih ettiğiniz iletişim yöntemi (telefon veya e-posta) ve dil sağlar. Yanıt süresi, abonelik planınıza göre otomatik olarak seçilir.
    2. Kişi bilgileri, ad, e-posta, isteğe bağlı bir kişi, ülke/bölge belirtin. Seçin **Kaydet kişi değişikliklerini gelecekteki destek istekleri** onay kutusu.
-   3. **Oluştur**’a tıklayın.
+   3.           **Oluştur**'a tıklayın.
    
        ![Yeni portal aracılığıyla kişinin MS desteği](./media/storsimple-8000-contact-microsoft-support/contactsupport5.png)   
 

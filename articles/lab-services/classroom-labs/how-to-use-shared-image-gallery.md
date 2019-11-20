@@ -1,6 +1,6 @@
 ---
-title: Azure Lab Services paylaşılan görüntü galerisinde kullanabilecek | Microsoft Docs
-description: Bir kullanıcı başka bir görüntü paylaşın ve başka bir kullanıcı, laboratuvarda bir VM şablonu oluşturmak için görüntü kullanabilirsiniz, paylaşılan görüntü Galerisi kullanmak için bir laboratuvar hesabı yapılandırmayı öğrenin.
+title: Azure Lab Services paylaşılan görüntü galerisini kullanma | Microsoft Docs
+description: Bir laboratuvar hesabını paylaşılan görüntü Galerisi 'ni kullanmak üzere yapılandırmayı öğrenin, böylece Kullanıcı bir görüntüyü başkalarıyla paylaşabilir ve başka bir Kullanıcı, laboratuvarda bir şablon VM oluşturmak için görüntüyü kullanabilir.
 services: lab-services
 documentationcenter: na
 author: spelluru
@@ -11,33 +11,45 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/07/2019
+ms.date: 10/31/2019
 ms.author: spelluru
-ms.openlocfilehash: 8d8b6fffe197d4180b091518dcd1615d0e0b9d19
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f438c32deb7e923f08396b0580d807d6e5b5e69a
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65412847"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73584984"
 ---
-# <a name="use-a-shared-image-gallery-in-azure-lab-services"></a>Azure Lab Services paylaşılan görüntü galerisinde kullanın
-Bu makalede, Öğretmenler/Laboratuvar Yöneticisi şablonu sanal makine görüntüsü de başkaları tarafından kullanılabilmeleri nasıl tasarruf edebilecekleri gösterilmektedir. Bu görüntüleri bir Azure kaydedilir [paylaşılan görüntü Galerisi](../../virtual-machines/windows/shared-image-galleries.md). İlk adım, Laboratuvar Yöneticisi var olan bir paylaşılan görüntü Galerisine Laboratuvar hesabına ekler. Paylaşılan görüntü Galerisi bağlandıktan sonra labs Laboratuvar hesabında oluşturulan görüntüleri paylaşılan görüntü Galerisine kaydedebilirsiniz. Diğer Öğretmenler, bu görüntü, kendi sınıfları için bir şablon oluşturmak için paylaşılan bir görüntü galerisinden seçebilirsiniz. 
+# <a name="use-a-shared-image-gallery-in-azure-lab-services"></a>Azure Lab Services paylaşılan görüntü galerisini kullanma
+Bu makalede, öğretmenler/laboratuvar yöneticisinin başkaları tarafından yeniden kullanılabilmesi için bir şablon sanal makine görüntüsünü nasıl kaydedecağı gösterilmektedir. Bu görüntüler bir Azure [paylaşılan görüntü galerisine](../../virtual-machines/windows/shared-image-galleries.md)kaydedilir. İlk adım olarak, Laboratuvar Yöneticisi laboratuvar hesabına var olan bir paylaşılan görüntü Galerisi ekler. Paylaşılan görüntü Galerisi eklendikten sonra, laboratuvar hesabında oluşturulan laboratuvarlar paylaşılan görüntü galerisine görüntü kaydedebilir. Diğer öğretmenler bu görüntüyü, sınıfları için bir şablon oluşturmak üzere paylaşılan görüntü galerisinden seçebilir. 
 
-## <a name="prerequisites"></a>Önkoşullar
-- Kullanarak bir paylaşılan görüntü Galerisi oluşturma [Azure PowerShell](../../virtual-machines/windows/shared-images.md) veya [Azure CLI](../../virtual-machines/linux/shared-images.md).
-- Paylaşılan görüntü Galerisi Laboratuvar hesabına eklediğiniz. Adım adım yönergeler için bkz: [görüntü Galerisine ekleme veya ayırma nasıl paylaşılan](how-to-attach-detach-shared-image-gallery.md).
+## <a name="prerequisites"></a>Ön koşullar
+- [Azure PowerShell](../../virtual-machines/windows/shared-images.md) veya [Azure CLI](../../virtual-machines/linux/shared-images.md)kullanarak paylaşılan bir görüntü galerisi oluşturun.
+- Paylaşılan görüntü galerisini laboratuvar hesabına eklemiş olabilirsiniz. Adım adım yönergeler için bkz. [paylaşılan görüntü Galerisi 'ni bağlama veya ayırma](how-to-attach-detach-shared-image-gallery.md).
 
 
-## <a name="save-an-image-to-the-shared-image-gallery"></a>Paylaşılan görüntü Galerisine bir görüntüyü kaydedin
-Paylaşılan görüntü Galerisi bağlandıktan sonra bir Öğretmen kaydedebilir veya diğer Öğretmen tarafından yeniden kullanılabilir, böylece paylaşılan görüntü Galerisine bir görüntü yükleyin. Paylaşılan görüntü Galerisine bir görüntü yüklemek için yönergeler için bkz: [paylaşılan görüntü Galerisi genel bakış](../../virtual-machines/windows/shared-images.md). 
+## <a name="save-an-image-to-the-shared-image-gallery"></a>Paylaşılan görüntü galerisine görüntü kaydetme
+Paylaşılan görüntü Galerisi eklendikten sonra, bir laboratuvar hesabı Yöneticisi veya öğretmen, bir görüntüyü paylaşılan görüntü galerisine kaydedebilir, böylece diğer öğretmenler tarafından yeniden kullanılabilir. 
 
-> [!NOTE]
-> Sınıf Laboratuvarlarını kullanıcı arabirimi (UI) curently, paylaşılan bir görüntü Galerisine bir laboratuvar görüntüsü kaydediliyor desteklemiyor. 
+1. Laboratuvarın **şablon** sayfasında, araç çubuğunda **paylaşılan görüntü galerisine aktar** ' ı seçin.
+
+    ![Görüntüyü Kaydet düğmesi](../media/how-to-use-shared-image-gallery/export-to-shared-image-gallery-button.png)
+2. **Paylaşılan görüntü galerisine aktar** iletişim kutusunda, **görüntü için bir ad**girin ve **dışarı aktar**' ı seçin. 
+
+    ![Paylaşılan görüntü galerisine Aktar iletişim kutusu](../media/how-to-use-shared-image-gallery/export-to-shared-image-gallery-dialog.png)
+3. Bu işlemin ilerleme durumunu **şablon** sayfasında görebilirsiniz. Bu işlem biraz zaman alabilir. 
+
+    ![Dışarı aktarma devam ediyor](../media/how-to-use-shared-image-gallery/exporting-image-in-progress.png)
+4. Dışarı aktarma işlemi başarılı olduğunda aşağıdaki iletiyi görürsünüz:
+
+    ![Dışarı aktarma tamamlandı](../media/how-to-use-shared-image-gallery/exporting-image-completed.png)
+
+Ayrıca, bir laboratuvar bağlamı dışında paylaşılan görüntü galerisine bir görüntü yükleyebilirsiniz. Daha fazla bilgi için bkz. [paylaşılan görüntü galerisine genel bakış](../../virtual-machines/windows/shared-images.md). 
 
 ## <a name="use-an-image-from-the-shared-image-gallery"></a>Paylaşılan görüntü galerisinden bir görüntü kullanma
-Öğretmen/Profesör yeni Laboratuvar oluşturma sırasında şablonu için paylaşılan görüntü galerisinde kullanılabilir özel bir görüntü seçebilirsiniz.
+Öğretmen/Mesleme, yeni laboratuvar oluşturma sırasında şablon için paylaşılan görüntü galerisinde bulunan özel bir görüntü seçebilir.
 
-![Galeriden sanal makine görüntüsünü kullanma](../media/how-to-use-shared-image-gallery/use-shared-image.png)
+![Galerideki sanal makine görüntüsünü kullan](../media/how-to-use-shared-image-gallery/use-shared-image.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Paylaşılan resim galerileri hakkında daha fazla bilgi için bkz: [paylaşılan görüntü Galerisi](../../virtual-machines/windows/shared-image-galleries.md).
+Paylaşılan görüntü galerileri hakkında daha fazla bilgi için bkz. [paylaşılan görüntü Galerisi](../../virtual-machines/windows/shared-image-galleries.md).

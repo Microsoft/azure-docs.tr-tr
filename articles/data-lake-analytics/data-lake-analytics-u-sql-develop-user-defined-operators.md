@@ -1,6 +1,6 @@
 ---
-title: U-SQL kullanıcı tanımlı işleçler (Udo'lar) Azure Data Lake Analytics geliştirin
-description: Kullanıcı tanımlı işleçler kullanılan ve Azure Data Lake Analytics işleri yeniden geliştirmeyi öğrenin.
+title: U-SQL Kullanıcı tanımlı işleçler geliştirme-Azure Data Lake Analytics
+description: Azure Data Lake Analytics işlerinde kullanılmak ve yeniden kullanmak üzere Kullanıcı tanımlı işleçler geliştirmeyi öğrenin.
 services: data-lake-analytics
 ms.service: data-lake-analytics
 author: saveenr
@@ -9,23 +9,23 @@ ms.reviewer: jasonwhowell
 ms.assetid: e5189e4e-9438-46d1-8686-ed4836bf3356
 ms.topic: conceptual
 ms.date: 12/05/2016
-ms.openlocfilehash: 122a4b6af78a22f74d5057da75767077f8d9b978
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b2d1293b06b4d8791138ed666bc3cb4abe3adf40
+ms.sourcegitcommit: 9fba13cdfce9d03d202ada4a764e574a51691dcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60813799"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71316533"
 ---
-# <a name="develop-u-sql-user-defined-operators-udos"></a>U-SQL kullanıcı tanımlı işleçler (Udo'lar) geliştirin
-Bu makalede, bir U-SQL işi verileri işlemek için kullanıcı tanımlı işleçleri geliştirme açıklar.
+# <a name="develop-u-sql-user-defined-operators-udos"></a>U-SQL Kullanıcı tanımlı işleçler (UDOs) geliştirme
+Bu makalede, bir U-SQL işinde verileri işlemek için Kullanıcı tanımlı işleçlerin nasıl geliştirileceği açıklanır.
 
-## <a name="define-and-use-a-user-defined-operator-in-u-sql"></a>Tanımlama ve U-SQL kullanıcı tanımlı bir işleç kullanma
-**U-SQL işi oluşturma ve gönderme için**
+## <a name="define-and-use-a-user-defined-operator-in-u-sql"></a>U-SQL içinde Kullanıcı tanımlı bir işleç tanımlama ve kullanma
+**Bir U-SQL işi oluşturmak ve göndermek için**
 
-1. Visual Studio seçin **Dosya > Yeni > Proje > U-SQL projesi**.
-2. **Tamam** düğmesine tıklayın. Visual Studio Script.usql dosyasıyla bir çözüm oluşturur.
-3. Gelen **Çözüm Gezgini**Script.usql genişletin ve ardından çift **Script.usql.cs**.
-4. Dosyaya aşağıdaki kodu yapıştırın:
+1. Visual Studio 'da **yeni > project > U-SQL projesi > dosya**seçin.
+2. **Tamam**'ı tıklatın. Visual Studio, Script. usql dosyası ile bir çözüm oluşturur.
+3. **Çözüm Gezgini**, Script. usql öğesini genişletin ve ardından **Script.usql.cs**öğesine çift tıklayın.
+4. Aşağıdaki kodu dosyasına yapıştırın:
 
         using Microsoft.Analytics.Interfaces;
         using System.Collections.Generic;
@@ -82,7 +82,7 @@ Bu makalede, bir U-SQL işi verileri işlemek için kullanıcı tanımlı işle�
                 }
             }
         }
-6. Açık **Script.usql**, aşağıdaki U-SQL betiğini yapıştırın:
+6. **Script. usql dosyasını**açın ve şu U-SQL betiğini yapıştırın:
 
         @drivers =
             EXTRACT UserID      string,
@@ -114,15 +114,15 @@ Bu makalede, bir U-SQL işi verileri işlemek için kullanıcı tanımlı işle�
 7. Data Lake Analytics hesabını, Veritabanı'nı ve Şema'yı belirtin.
 8. **Çözüm Gezgini**'nden, **Script.usql** öğesine sağ tıklayın ve ardından **Betik Oluştur**'a tıklayın.
 9. **Çözüm Gezgini**'nden, **Script.usql** öğesine sağ tıklayın ve ardından **Betiği Gönder**'e tıklayın.
-10. Azure aboneliğinize bağlanmadıysanız, Azure hesabı kimlik bilgilerinizi girmeniz istenir.
-11. **Gönder**'e tıklayın. Gönderim tamamlandığında Sonuçları penceresinde, gönderme işleminin sonuçları ve iş bağlantısı da kullanılabilir.
-12. Tıklayın **Yenile** en son iş durumu ve ekranı yenilemek görmek için düğme.
+10. Azure aboneliğinize bağlanmadıysanız Azure hesabı kimlik bilgilerinizi girmeniz istenir.
+11. **Gönder**'e tıklayın. Gönderim tamamlandığında, sonuç penceresinde gönderim sonuçları ve iş bağlantısı bulunur.
+12. En son iş durumunu görmek ve ekranı yenilemek için **Yenile** düğmesine tıklayın.
 
 **Çıktıyı görmek için**
 
-1. Gelen **Sunucu Gezgini**, genişletme **Azure**, genişletme **Data Lake Analytics**, Data Lake Analytics hesabınızı genişletin, **Depolamahesapları**, varsayılan depolama sağ tıklayın ve ardından **Gezgini**.
-2. Örnekleri'ni genişletin, çıkışlar genişletin ve ardından çift **sürücüler.csv**.
+1. **Sunucu Gezgini**, **Azure**' ı genişletin, **Data Lake Analytics**' i genişletin, Data Lake Analytics hesabınızı genişletin, **depolama hesapları**' nı genişletin, varsayılan depolama alanına sağ tıklayın ve ardından **Gezgin**' e tıklayın.
+2. Örnekler ' i genişletin, çıktılar ' i genişletin ve ardından **Drivers. csv**' ye çift tıklayın.
 
 ## <a name="see-also"></a>Ayrıca bkz.
-* [U-SQL deyimleri kullanıcı kodu ile genişletme](/u-sql/concepts/extending-u-sql-expressions-with-user-code)
-* [U-SQL uygulamalarını geliştirmek için Visual Studio için Data Lake araçları kullanma](data-lake-analytics-data-lake-tools-get-started.md)
+* [U-SQL Ifadelerini Kullanıcı kodu ile genişletme](/u-sql/concepts/extending-u-sql-expressions-with-user-code)
+* [Visual Studio için Data Lake araçları 'nı kullanarak U-SQL uygulamaları geliştirme](data-lake-analytics-data-lake-tools-get-started.md)

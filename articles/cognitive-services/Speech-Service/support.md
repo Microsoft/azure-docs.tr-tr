@@ -1,97 +1,97 @@
 ---
-title: Destek ve Yardım seçenekleri
-titlesuffix: Azure Cognitive Services
-description: Nasıl yardım almak ve konuşma hizmeti ile tümleştirilen uygulamalar oluşturduğunuzda, soruları ve sorunları için destek
+title: Destek ve yardım seçenekleri-konuşma hizmeti
+titleSuffix: Azure Cognitive Services
+description: Konuşma hizmeti ile tümleşen uygulamalar oluştururken sorular ve sorunlar için yardım ve destek alma
 services: cognitive-services
-author: wolfma61
+author: jhakulin
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 07/26/2018
-ms.author: wolfma
-ms.openlocfilehash: 4099bc7bfce6de620504e03be3afc5392281d8d8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/05/2019
+ms.author: jhakulin
+ms.openlocfilehash: f8793975d920e24924fca7c2ae366f70972e6ab7
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67072366"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73468623"
 ---
-# <a name="support-and-help-options"></a>Destek ve Yardım seçenekleri
+# <a name="support-and-help-options"></a>Destek ve yardım seçenekleri
 
-Konuşma Hizmetleri işlevselliğinin keşfetmeye yeni başlayan? Uygulamanız için yeni bir özellik uyguluyor? Aşağıda, bir geliştirici olarak yardım alabileceğiniz hakkında öneriler yer almaktadır.
+Konuşma hizmetlerinin işlevselliğini keşfetmeye başladınız mı? Uygulamanıza yeni bir özellik mi uygulıyorsunuz? İşte, geliştirici olarak yardım alabileceğiniz öneriler aşağıda verilmiştir.
 
 > [!div class="checklist"]
-> * Yeni gelişmeler hakkında haberdar kalın *Azure Bilişsel Hizmetler*, veya ilgili son haberleri Bul *konuşma hizmeti*.
-> * Sürüm Notları, tüm sürümler için bilgiler içerir.
-> * Sorununuzu topluluk tarafından ele alınan veya zaten uygulamak istediğiniz özelliği için varolan belgeleri varsa görmek için arama yapın.
-> * Tatmin edici bir yanıt bulamazsanız, soru sorabilirsiniz *Stack Overflow*.
-> * Github'da örnekleri biri ile ilgili bir sorun bulursanız, yükseltmek bir *GitHub* sorun.
-> * Bir çözümde Ara *UserVoice forumumuzu*.
+> * Azure bilişsel *Hizmetler*'deki yeni gelişmeler hakkında bilgi sahibi olun veya *konuşma hizmetiyle*ilgili en son haberleri bulun.
+> * Sürüm notları tüm yayınlar için bilgi içerir.
+> * Sorununuzun topluluk tarafından açıklandığı veya uygulamak istediğiniz özellik için mevcut belgelerin zaten var olup olmadığını görmek için arama yapın.
+> * Tatmin edici bir yanıt bulamazsanız *Stack Overflow*bir soru sorun.
+> * GitHub 'daki örneklerden biriyle ilgili bir sorun bulursanız, bir *GitHub* sorunu yükseltin.
+> * *UserVoice forumundaki*bir çözüm arayın.
 
 ## <a name="stay-informed"></a>Bildirim alın
 
-Bilişsel hizmetler ile ilgili Haberler toplanır [Bilişsel hizmetler blogu](https://azure.microsoft.com/blog/topics/cognitive-services/). Konuşma hizmetleri hakkında en yeni bilgiler için izleme [konuşma Hizmetleri blog](https://azure.microsoft.com/blog/tag/speech-service/).
+Bilişsel hizmetler hakkında haberler bilişsel [Hizmetler blogu](https://azure.microsoft.com/blog/topics/cognitive-services/)'nda toplanır. Konuşma hizmetleri hakkında en son bilgiler için, [konuşma Hizmetleri blogunu](https://azure.microsoft.com/blog/tag/speech-service/)izleyin.
 
 ## <a name="release-notes"></a>Sürüm notları
 
-[Sürüm notları](https://aka.ms/csspeech/whatsnew) yeni bir sürümü kullanıma hazır olarak güncelleştirilir. Notları yeni özellikler, iyileştirmeler ve hata düzeltmeleri hakkında bilgi içerir.
+[Sürüm notları](https://aka.ms/csspeech/whatsnew) , yeni bir sürüm kullanılabilir duruma geldiğinde güncelleştirilir. Notlar yeni özellikler, geliştirmeler ve hata düzeltmeleri hakkında bilgiler içerir.
 
-## <a name="search"></a>Ara
+## <a name="search"></a>Arama
 
-Belgeler, örnekler, gereksinim duyduğunuz yanıt bulabilir veya yanıtlarını [Stack Overflow](https://www.stackoverflow.com) sorular veya örnekleri.
+Belgelerinize, örneklere veya [Stack Overflow](https://www.stackoverflow.com) soruların veya örneklerde cevapdaki cevapları bulabilirsiniz.
 
 ### <a name="scoped-search"></a>Kapsamlı arama
 
-Stack Overflow'da, belgeler için aramanızın kapsamını ve kod örnekleri aşağıdaki sorguyu kullanarak daha hızlı sonuçlar için [sık kullanılan arama motorunuz](https://bing.com):
+Daha hızlı sonuçlar için aramanızın kapsamını Stack Overflow, belgeleri ve kod örneklerini en [sevdiğiniz arama altyapısında](https://bing.com)aşağıdaki sorguyu kullanarak yapın:
 
 ```
 {Your Search Terms} (site:stackoverflow.com OR site:docs.microsoft.com OR site:github.com/azure-samples)
 ```
 
-Burada *{Your arama terimlerini}* arama anahtar sözcüklerinizi olduğu.
+Burada *{arama koşullarınız}* arama anahtar sözcüklerdir.
 
-## <a name="create-an-azure-support-request"></a>Bir Azure destek isteği oluşturma
+## <a name="create-an-azure-support-request"></a>Azure destek isteği oluşturma
 
-Azure müşterileri, oluşturun ve Azure portalında destek isteklerini yönetin.
+Azure müşterileri Azure portal destek istekleri oluşturabilir ve yönetebilir.
 
-* [Azure portal](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)
-* [Amerika Birleşik Devletleri kamu için Azure portalı](https://portal.azure.us)
+* [Azure Portal](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)
+* [Birleşik Devletler kamu Azure portal](https://portal.azure.us)
 
-## <a name="post-a-question-to-stack-overflow"></a>Stack Overflow için bir soru gönderin
+## <a name="post-a-question-to-stack-overflow"></a>Stack Overflow bir soru gönderin
 
-Yığın taşması geliştirme ile ilgili sorular için tercih edilen bir kanaldır. Bu, burada topluluk üyeleri ve Microsoft Takım üyeleri doğrudan sorunlarınızı çözmenize yardımcı söz konusu olur.
+Stack Overflow, geliştirmeyle ilgili sorular için tercih edilen kanaldır. Bu, topluluk ve Microsoft ekip üyelerinin üyelerinin, sorunlarınızı çözmenize yardımcı olmak için doğrudan dahil olduğu yerdir.
 
-Bir arama ile sorununuzun yanıtını bulamazsanız, yeni Stack Overflow soru gönderin. Soru formüle aşağıdaki etiketlerin birine kullanın:
+Arama yoluyla sorununuz için bir yanıt bulamazsanız, Stack Overflow için yeni bir soru gönderin. Soruyu seçerken aşağıdaki etiketlerden birini kullanın:
 
-|Bileşen/alan  |Tags  |
+|Bileşen/alan  |Etiketler  |
 |---------|---------|
-|Konuşma Tanıma |[[microsoft-bilişsel + Konuşmayı metne dönüştürme]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+speech-to-text)|
-|Konuşma sentezi |[[microsoft-bilişsel + metin okuma için]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+text-to-speech)|
-|Konuşma Çevirisi |[[microsoft-bilişsel + çeviri]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+translation)|
-|Konuşma amacı |[[microsoft-bilişsel + luıs]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+luis)|
-|Genel Speech SDK'sı |[[microsoft-bilişsel + microsoft-konuşma tanıma-API'si]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+microsoft-speech-api)|
-| Ses öncelikli sanal Yardımcıları (Önizleme) | [[microsoft-bilişsel + sanal-Yardımcısı + botframework'te]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+virtual-assistant+botframework) | 
+|Konuşma Tanıma |[[Microsoft-bilişsel + konuşmayı metne]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+speech-to-text)|
+|Konuşma Senşü |[[Microsoft-bilişsel + metinden konuşmaya]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+text-to-speech)|
+|Konuşma Çevirisi |[[Microsoft-bilişsel + çeviri]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+translation)|
+|Konuşma hedefi |[[Microsoft-bilişsel + lu,]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+luis)|
+|Genel konuşma SDK 'Sı |[[Microsoft-bilişsel + Microsoft-Speech-API]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+microsoft-speech-api)|
+|Ses yardımcıları | [[Microsoft-bilişsel + sanal-yardımcı + botframework]](https://stackoverflow.com/questions/tagged/microsoft-cognitive+virtual-assistant+botframework) |
 
 > [!TIP]
-> Stack Overflow aşağıdaki gönderilerinden form soruların konusunda ipuçları içerir ve kaynak kodu ekleyin. Bu yönergeler, topluluk üyeleri değerlendirmek ve sorularınıza hızla yanıt şansını artırmak yardımcı olabilir:  
-> * [İyi bir soru nasıl miyim?](https://stackoverflow.com/help/how-to-ask)
-> * [En az, tam ve doğrulanabilir örnek oluşturma](https://stackoverflow.com/help/mcve)
+> Stack Overflow 'den aşağıdaki gönderiler, soruların nasıl ayarlanacağını ve kaynak kodu nasıl ekleneceğini gösteren ipuçları içerir. Bu yönergelerin ardından, topluluk üyelerinin sorunuzu hızla değerlendirmesi ve yanıtlaması ihtimalini artırmaya yardımcı olabilirsiniz:  
+> * [Nasıl yaparım? iyi bir soru soruyor musunuz?](https://stackoverflow.com/help/how-to-ask)
+> * [En az, tamamlanmış ve doğrulanabilir örnek oluşturma](https://stackoverflow.com/help/mcve)
 
-## <a name="create-a-github-issue"></a>Bir GitHub sorunu oluşturun
+## <a name="create-a-github-issue"></a>GitHub sorunu oluştur
 
-Örnekler, genellikle açık kaynak gönderilir. Sorular ve sorunlar için oluşturma bir *sorunu* ilgili GitHub deposundaki. Bir çekme isteği çok gönderebilirsiniz. Aşağıdaki listede, örnek depoları bağlantılar içeriyor:
+Örnekler genellikle açık kaynak olarak gönderilir. Sorular ve sorunlar için ilgili GitHub deposunda bir *sorun* oluşturun. Çekme isteği de gönderebilirsiniz. Aşağıdaki liste, örnek depoların bağlantılarını içerir:
 
 * [Konuşma SDK'sı](https://github.com/Azure-Samples/cognitive-services-speech-sdk/issues)
-* [Konuşma cihaz SDK'sı](https://github.com/Azure-Samples/Cognitive-Services-Speech-Devices-SDK/issues)
+* [Konuşma cihazları SDK 'Sı](https://github.com/Azure-Samples/Cognitive-Services-Speech-Devices-SDK/issues)
 
-Özellik isteği, bir hata raporu oluşturabilir veya genel bir soru sorun ve en iyi yöntemlerinizi paylaşın. Hata raporları için lütfen sağlanan şablon izleyin:
+Bir hata raporu, özellik isteği oluşturabilir veya genel bir soru sorabilir ve en iyi uygulamaları paylaşabilirsiniz. Hata raporları için lütfen belirtilen şablonu izleyin:
 
-**Hatayı açıklayan**
+**Hatayı açıkla**
 
-Hata nedir, kısa ve öz açıklaması.
+Hatanın ne olduğuna ilişkin açık ve kısa bir açıklama.
 
-**Yeniden oluşturma**
+**Yeniden oluşturmak için**
 
 Davranışı yeniden oluşturma adımları:
 1. ...
@@ -99,27 +99,27 @@ Davranışı yeniden oluşturma adımları:
 
 **Beklenen davranış**
 
-Olmasını beklediğinizi ve anlaşılır açıklaması.
+Ne olması beklendiğinizi açık ve kısa bir açıklama.
 
-**Bilişsel hizmetler konuşma SDK sürümü**
+**Bilişsel hizmetler konuşma SDK 'sının sürümü**
 
-SDK'sının hangi sürümünü kullandığınızı.
+Hangi SDK sürümünün kullanıyorsunuz.
 
-**Platform, işletim sistemi ve programlama dili**
+**Platform, Işletim sistemi ve programlama dili**
 
- - İşletim sistemi: [örneğin Windows, Linux, Android, iOS,...] - Lütfen ayrıntılı belirtin
- - Donanım - x64, x86, ARM...
- - Tarayıcı [Örneğin, Chrome, Safari] (varsa)-Lütfen ayrıntılı belirtin
+ - İşletim sistemi: [örn. Windows, Linux, Android, iOS,...]-Lütfen özel
+ - Donanım-x64, x86, ARM,...
+ - Tarayıcı [ör. Chrome, Safari] (varsa)-lütfen özel
 
 **Ek bağlam**
 
- - Hata iletileri, günlük bilgileri yığın izlemesini...
- - Bir hizmete etkileşimi için bir hata raporu, rapor edilen olay süresi (saat dilimi dahil) ve SessionID bildirin. SessionID tüm çağrı-telefonla geri/aldığınız olaylar bildirilir.
- - Herhangi bir ek bilgi
+ - Hata iletileri, günlük bilgileri, yığın izleme,...
+ - Belirli bir hizmet etkileşimi için bir hata raporlayabilir, bildirilen olayların SessionID ve saatini (saat dilimi dahil) bildirin. SessionID, aldığınız tüm geri göndermeler/etkinliklerde raporlanır.
+ - Diğer ek bilgiler
 
 
-## <a name="uservoice-forum"></a>UserVoice forumumuzu
+## <a name="uservoice-forum"></a>UserVoice forumu
 
-Bilişsel hizmetler oluşturmaya yönelik fikirlerinizi paylaşın ve eşlik eden API'leri geliştirdiğiniz uygulamalar için daha iyi çalışır. Büyüyen kendi bilgi Tabanımız yaygın soruların yanıtları bulmak için kullanın:
+Bilişsel hizmetler sağlamak için fikirlerinizi paylaşın ve ilgili API 'Ler geliştirdiğiniz uygulamalar için daha iyi çalışır. Sık sorulan soruların yanıtlarını bulmak için büyüyen Bilgi Bankamızı kullanın:
 
 [UserVoice](https://cognitive.uservoice.com/)

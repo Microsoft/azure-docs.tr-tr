@@ -1,47 +1,24 @@
 ---
-title: Microsoft Dynamics 365 Business Central uygulamanızı Microsoft Appsource'ta Getir
-description: Microsoft AppSource üzerine bir Dynamics 365 Business Central uygulaması yayımlama genel bakış.
-services: Azure, Marketplace, Cloud Partner Portal,
-author: v-miclar
+title: Microsoft Dynamics 365 Business Central uygulamanızı Microsoft AppSource 'e taşıyın
+description: Kullanım dışı olan makale, bılgısayar makalelerine bağlantılar sağladı; "Dynamics 365 Iş Merkezi uygulamasını Microsoft AppSource üzerine yayımlamaya genel bakış."
+services: Azure, Marketplace, Cloud Partner Portal
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 03/13/2019
+ms.date: 09/18/2019
 ms.author: pabutler
-ms.openlocfilehash: 062a16d02f26e3f2f6eb815432bed024d5e3746e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1c4ed269fe4efe55e4218beee8f41cb9cee904e4
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935007"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819983"
 ---
-# <a name="bring-your-microsoft-dynamics-365-business-central-app-into-microsoft-appsource"></a>Microsoft Dynamics 365 Business Central uygulamanızı Microsoft Appsource'ta Getir
+# <a name="bring-your-microsoft-dynamics-365-business-central-app-into-microsoft-appsource"></a>Microsoft Dynamics 365 Business Central uygulamanızı Microsoft AppSource 'e taşıyın
 
-Çok sayıda uygulama oluşturucular için Dynamics 365 Business Central olarak bir platform kullanmanın avantajları vardır:
-
--   Dynamics 365 Business Central uzmanlığınızı ile kanıtlanmış Microsoft bir çevrimiçi çözümü zenginleştirin.
--   Dynamics 365 marka--milyonlarca kullanıcıya bildiğiniz ve güvendiğiniz bir marka yararlanın.
--   Microsoft AppSource ile iş uygulamalarınız için daha fazla müşteriye ulaşın.
--   Daha modern bir deneyim sunar ve ölçek sunar bir platformdan elde edin.
--   Microsoft PowerApps, Microsoft Flow, Power BI, Cortana Intelligence ve çok daha fazlası gibi akıllı iş uygulamaları ile paket.
-
-İş Merkezi uygulamanızı Microsoft Appsource'ta getirmek için:
-
-1.  Hesaplarınızı oluşturun.
-2.  Bizimle hakkında aklınızdaki uygulamayı etkileşim kurun.
-    - Teknik yönünü uygulamanızı geliştirin
-    - Uygulamanızı pazarlama yönlerini geliştirin
-4.  *Uygulamanızı yayımlayın.*
-
-
-## <a name="application-process-and-timeline"></a>Uygulama işlemi ve zaman çizelgesi
-
-Genel uygulama süreci ve zaman çizelgesi Aşağıdaki diyagramda gösterilen: 
-
-![Dynamics 365 Business Central uygulama için yayımlama dizisi](./media/d365-financials/image001.png)
-
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık Dynamics 365 İş Merkezi tekliflerinin oluşturulmasını ve yönetilmesini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 Iş Merkezi teklifi oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-business-central-offer).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu uygulama türü hakkında daha fazla bilgi için bkz: [Duyurusu Dynamics 365 Business Central](https://dynamics.microsoft.com/business-central/finance-and-operations-business-edition-to-business-central/).  Ayrıca, zaten yapmadıysanız, gözden [Office 365, Dynamics 365, PowerApps ve Power BI teklifi yayımlama Kılavuzu](../appsource-offer-publishing-guide.md)
-
-Bu hazırlıkları sonra yeni bir oluşturabilirsiniz [Microsoft Dynamics 365 Business Central teklif](./d365-finance-create-new-offer.md).
+Yeni bir Dynamics 365 Iş Merkezi teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 Iş Merkezi teklifi oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-business-central-offer) bölümündeki yönergeleri izleyin.

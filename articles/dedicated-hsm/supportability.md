@@ -3,7 +3,7 @@ title: Desteklenebilirlik - Azure ayrılmış HSM | Microsoft Docs
 description: Destek seçenekleri ve farklı senaryolarda Azure ayrılmış HSM'ye sorumluluk alanları
 services: dedicated-hsm
 author: johndaw
-manager: barbkess
+manager: rkarlin
 ms.service: key-vault
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -11,13 +11,13 @@ ms.devlang: na
 ms.topic: conceptual
 ms.custom: seodec18
 ms.date: 03/27/2019
-ms.author: barclayn
-ms.openlocfilehash: 8341e9057b07fbb72957eddc342ae875e4591993
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: mbaldwin
+ms.openlocfilehash: d83d688707baf6098d63dfde9b4181eb04fb9729
+ms.sourcegitcommit: 7c5a2a3068e5330b77f3c6738d6de1e03d3c3b7d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60912285"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70881012"
 ---
 # <a name="azure-dedicated-hsm-supportability"></a>Azure ayrılmış HSM Desteklenebilirliği
 
@@ -26,12 +26,12 @@ Müşteriler, HSM'ler kullanın ve Gemalto ile destek veya Yardım danışmanlı
 
 ## <a name="getting-support"></a>Destek alma
 
-Ayrılmış HSM müşteri desteği bir çabasıdır Microsoft ve Gemalto aşamasındadır. Microsoft tarafından bir donanım veya ağ yolu sorunları ele alınacağını ve yapılandırma, yazılım, üretici yazılımı ve uygulama geliştirme, gerçek HSM ile yapmak için herhangi bir şey tarafından Gemalto ele alınacaktır. Bu destek modeli en hızlı yolu en etkili destek sağlar. Bu konuda şüpheleriniz varsa, belirli bir sorunu Microsoft ile bir destek isteği oluşurun ve biz uygun şekilde yönlendirilmesini sağlar. Microsoft, tüm destek senaryolarına bağlı kalın ve müşterilerimiz için en iyi destek deneyimi çaba.
+Adanmış HSM için müşteri desteği, Microsoft ve Gemalto arasındaki birleşme çabadır. Herhangi bir donanım sorunu veya ağ yolu sorunları Microsoft tarafından ele alınacaktır ve yapılandırma, yazılım, bellenim ve uygulama geliştirme gibi gerçek HSM ile yapılan her türlü şey Gemalto tarafından ele alınacaktır. Bu destek modeli en etkin desteğe en hızlı yol sağlar. Belirli bir sorunla karşılaşırsanız, Microsoft ile bir destek isteği oluşturup uygun şekilde yönlendirildiğinizden emin olursunuz. Microsoft tüm destek senaryolarından sorumlu olmaya devam eder ve müşterilerimiz için en iyi destek deneyimine yöneliktir.
 
 ## <a name="gemalto-support"></a>Gemalto desteği
 
-Ayrılmış HSM hizmetini kullanan müşteriler, destek Gemalto uyarınca bunların yanı sıra destek planı için uygun. Bu, yalnızca Gemalto destek portalı kullanarak bir kayıt işlemi gerektirir. Ayrılmış HSM hizmetini erişim elde etmek için ilk engagement Microsoft ile bir parçası olarak bu müşteri kimliği ve yönergeler sağlanır. Gemalto destek almak için bir mekanizma aracılığıyla olan kendi [müşteri desteği portalı](https://supportportal.gemalto.com/csm/).
-Bir anahtar Not Gemalto tüm yazılım ve HSM (örneğin, istemci erişim yazılım ve SDK'ları) kullanmak için gereken belge sağlayacak indirme müşteri desteği Portalı aracılığıyla noktasıdır.
+Adanmış HSM hizmetini kullanan müşteriler, Gemallerinden ve Destek planına kadar olan destek için uygun olan kullanıcıları destekler. Bu, yalnızca Gemalto Destek portalını kullanarak bir kayıt işlemi gerektirir. Bu, adanmış HSM hizmetine erişim kazanmak için Microsoft ile ilk katılım 'nin bir parçası olarak bu bir müşteri KIMLIĞI ve yönergeler sağlanacaktır. Gemalto destek almak için bir mekanizma aracılığıyla olan kendi [müşteri desteği portalı](https://supportportal.gemalto.com/csm/).
+Bir anahtar noktası, Gemalto 'ın, müşteri destek portalı 'nda indirme yoluyla HSM 'yi (örneğin, istemci erişim yazılımı ve SDK 'lar) kullanması için gereken tüm yazılım ve belgeleri sağlayacağına yönelik bir örnektir.
 
 ### <a name="software-components"></a>Yazılım bileşenleri
 
@@ -55,7 +55,7 @@ Tüm tasarım, geliştirme ve dağıtımı HSM kullanan özel uygulamalar, Gemal
 
 ## <a name="microsoft-support"></a>Microsoft Desteği
 
-Microsoft, ağ, tek bir müşteriye özel kullanım için işletimsel bir durumda erişilebilir ve fiziksel HSM cihazlardır sağlayacaktır. Müşteriler, yapılandırma, yönetim ve cihaz yönetimi için sorumludur. Microsoft sorumlulukları şunlardır:
+Microsoft, fiziksel HSM cihazlarının ağa erişilebilir ve tek bir müşterinin özel kullanımı için işlemsel bir durumda olmasını sağlayacaktır. Müşteriler, cihazın yapılandırmasından, yönetiminden ve yönetiminden sorumludur. Microsoft sorumlulukları şunlardır:
 
 * Cihazın güce sahip olduğundan emin ve soğutma yapma
 * HSM (örneğin, onarım senaryoları) bir işletimsel durumunu koruma
@@ -76,7 +76,7 @@ Ayrılmış HSM hizmeti için onaylanmış bir kaydı bir müşteri sahip oldukt
 
 ### <a name="hardware-issues"></a>Donanım sorunları
 
-HSM cihazını yedekli ve değiştirilebilen güç kaynakları ve fanı birimleri var.  Ancak, fan birimini kaldırma işlemi hala kurcalamaya olay neden olur. Bir bileşeni hatası oluştuğunda, Microsoft, en az kesinti ve müşterilerin hizmeti kullanılabilirlik düşük riskle neden olan bir yolla bileşen düzeyinde sorunu gidermek için en uygun işlemi kullanır.
+HSM cihazını yedekli ve değiştirilebilen güç kaynakları ve fanı birimleri var.  Ancak, fan birimi kaldırma işlemi yine de bir yetkisiz olay oluşmasına neden olur. Bir bileşeni hatası oluştuğunda, Microsoft, en az kesinti ve müşterilerin hizmeti kullanılabilirlik düşük riskle neden olan bir yolla bileşen düzeyinde sorunu gidermek için en uygun işlemi kullanır.
 Cihazın herhangi daha ciddi bir hata ücretsiz havuzundan yeni bir tane değiştirilmekte olan cihazın neden olur. Müşteri yalnızca yeni cihaz eşitleme ve tam çalışır duruma döndürmek için de mevcut HA çifti içerir. Başarısız Aygıt kaldırıldı ve veri merkezinde sitesinde shredded cihazları pul verilerini olacaktır. Kasa için Gemalto geri dönüştürme için döndürülür.
 
 

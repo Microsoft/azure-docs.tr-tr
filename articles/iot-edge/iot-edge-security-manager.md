@@ -6,31 +6,31 @@ keywords: Güvenlik, güvenli öğesi, kuşatma, TEE, IOT Edge
 author: eustacea
 manager: philmea
 ms.author: eustacea
-ms.date: 07/30/2018
+ms.date: 08/30/2019
 ms.topic: article
 ms.service: iot-edge
 ms.custom: seodec18
-ms.openlocfilehash: bc441e2bbd36c8d078eb67aff48e58684a026289
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f137070cb8a62f2c11f9e2688b5c7db47c1b866f
+ms.sourcegitcommit: 5f67772dac6a402bbaa8eb261f653a34b8672c3a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60445001"
+ms.lasthandoff: 09/01/2019
+ms.locfileid: "70208205"
 ---
 # <a name="azure-iot-edge-security-manager"></a>Azure IOT Edge Güvenlik Yöneticisi
 
-Azure IOT Edge güvenlik IOT Edge cihazı ve tüm bileşenlerini güvenli Silikon donanım özetleyen tarafından korunması için iyi sınırlanmış güvenlik çekirdek yöneticisidir. Bu, güvenliğin sağlamlaştırılmasını için odak noktasıdır ve özgün cihaz üreticileri (OEM) teknolojisi tümleştirme noktası sağlar.
+Azure IOT Edge güvenlik IOT Edge cihazı ve tüm bileşenlerini güvenli Silikon donanım özetleyen tarafından korunması için iyi sınırlanmış güvenlik çekirdek yöneticisidir. Bu, güvenlik sağlamlaştırma için odak noktasıdır ve özgün ekipman üreticilerine (OEM) teknoloji tümleştirme noktası sağlar.
 
 ![Azure IOT Edge Güvenlik Yöneticisi](media/edge-security-manager/iot-edge-security-manager.png)
 
-IOT Edge Güvenlik Yöneticisi'ni IOT Edge cihazı ve tüm yazılım devralınan işlemler bütünlüğünü korumak amaçlar.  Bunu güven donanım temel alınan donanım kök güveni (varsa) güvenli bir IOT Edge çalışma zamanı bootstrap ve işlemlerini bütünlüğünü izlemek devam etmek için geçiş yapar.  IOT Edge Güvenlik Yöneticisi'ni güvenli Silikon donanım yanı sıra yazılım çalışma (mevcutsa) Standart'tan olası en yüksek güvenlik güvencesi sağlamak yardımcı olmaktır.  
+IOT Edge Güvenlik Yöneticisi'ni IOT Edge cihazı ve tüm yazılım devralınan işlemler bütünlüğünü korumak amaçlar. Güvenlik Yöneticisi, IoT Edge çalışma zamanını önyüklemek ve devam eden işlemleri izlemek için, güven donanımının temel alınan donanım kökünden (varsa) güven geçişi yapar.  IoT Edge Güvenlik Yöneticisi, mümkün olan en yüksek güvenlik önlemlerinin sağlanmasına yardımcı olmak üzere güvenli bir Silicon Hardware (varsa) ile birlikte çalışır.  
 
-IOT Edge Güvenlik Yöneticisi'nin sorumlulukları içerir, ancak bunlarla sınırlı değildir:
+IoT Edge Güvenlik Yöneticisi sorumlulukları şunlardır, ancak bunlarla sınırlı değildir:
 
 * Güvenli ve Azure IOT Edge cihazı önyükleme ölçülür.
 * Cihaz kimlik sağlama ve güven geçişin uygun olduğunda.
 * Ana bilgisayar ve cihaz sağlama hizmeti gibi bulut hizmetlerinin bileşenleri cihaz koruyun.
-* IOT Edge modülleri benzersiz kimlikler ile güvenli bir şekilde sağlayın.
+* Benzersiz kimliklerle IoT Edge modülleri güvenli bir şekilde sağlayın.
 * Ağ geçidi cihaz donanım kök güven notary Hizmetleri aracılığıyla.
 * IOT Edge çalışma zamanı operace bütünlüğünü izler.
 
@@ -42,59 +42,59 @@ IOT Edge Güvenlik Yöneticisi üç bileşenleri içerir:
 
 ## <a name="the-iot-edge-security-daemon"></a>IOT Edge güvenlik arka plan programı
 
-IOT Edge güvenlik arka plan programı IOT Edge Güvenlik Yöneticisi mantıksal işlemleri için sorumlu bir yazılımdır. IOT Edge cihazı güvenilir bilgi işlem tabanı önemli bir bölümüdür. 
+IoT Edge güvenlik arka plan programı, IoT Edge Security Manager 'ın mantıksal işlemlerinden sorumludur. IoT Edge cihazının güvenilir bilgi işlem tabanının önemli bir bölümünü temsil eder. 
 
 ### <a name="design-principles"></a>Tasarım ilkeleri
 
-IOT Edge güvenlik arka plan iki temel ilkeler izler: işletimsel bütünlüğü en üst düzeye çıkarmak ve Şişirme en aza indirmek ve değişim sıklığı.
+IoT Edge güvenlik arka plan programı iki temel ilkeden daha sonra çalışır: işlemsel bütünlüğü en üst düzeye çıkarın ve oluşan şişirmeyi ve dalgalanma
 
 #### <a name="maximize-operational-integrity"></a>İşletimsel bütünlüğü en üst düzeye çıkarın
 
-IOT Edge güvenlik arka plan programı, verilen tüm kök güven donanım defense yeteneğini içinde olası en yüksek bütünlüğü ile çalışır. Uygun Tümleştirmesi ile güven donanım kök ölçer ve güvenlik arka plan programı statik ve izinsiz kullanıma karşı dayanıklılık zamanında izler.
+IoT Edge güvenlik arka plan programı, belirli bir güven donanımı kökünün savunma yeteneği dahilinde mümkün olan en yüksek bütünlüğü ile çalışır. Uygun Tümleştirmesi ile güven donanım kök ölçer ve güvenlik arka plan programı statik ve izinsiz kullanıma karşı dayanıklılık zamanında izler.
 
-Fiziksel erişim IOT cihazlarına her zaman bir tehdididir. Donanım kök güven IOT Edge güvenlik daemon bütünlüğünü savunma önemli bir rol oynar.  Donanım kök güven gelen iki model olarak sağlanır:
+Fiziksel erişim, IoT cihazlarına yönelik her zaman bir tehdittir. Güvenin donanım kökü, IoT Edge güvenlik arka plan 'un bütünlüğünü erteleme bölümünde önemli bir rol oynar.  Güvenin donanım kökü iki değişken olarak gelir:
 
 * Gizli dizileri ve şifreleme anahtarları gibi hassas bilgilerin korunması için güvenli öğeleri.
 * Gizli dizileri koruması için güvenli enclaves anahtarları ve ölçüm ve faturalandırma gibi hassas iş yükleri gibi.
 
-Donanım kök güven yararlanmak için yürütme ortamlarını iki tür mevcuttur:
+Güvenin donanım kökünü kullanmak için iki tür yürütme ortamı vardır:
 
-* Hassas bilgileri korumak için güvenli öğeleri kullanımını kullanan standart ya da zengin Yürütme Ortamı (REE).
-* Hassas bilgileri korumak ve yazılım yürütme koruma sunmak için güvenli kuşatma teknolojisinin kullanımı kullanan güvenilir Yürütme Ortamı (TEE).
+* Hassas bilgileri korumak için güvenli öğelerin kullanımına dayanan standart ya da zengin yürütme ortamı (REE).
+* Hassas bilgileri korumak ve yazılım yürütmeye koruma sunmak için güvenli şifreleme teknolojisini kullanan güvenilir yürütme ortamı (t).
 
-Cihazlar için donanım güven kökü olarak güvenli enclaves kullanarak IOT Edge güvenlik arka plan programı hassas mantık kuşatma içinde bulunan beklenir.  Hassas olmayan güvenlik arka plan programı bölümlerini dışında TEE bulunabilir.  Her iki durumda da, özgün tasarım üreticileri (ODM) ve orijinal donanım üreticileri (OEM) ölçmek ve IOT Edge güvenlik arka plan programı önyükleme ve çalışma zamanı bütünlüğü korumak için HSM gelen güven genişletmek için bekleniyor.
+Güvenli kuşanın donanım kökü olarak kullanıldığı cihazlarda, IoT Edge güvenlik cini içindeki hassas mantık kuşatma içinde olmalıdır.  Güvenlik arka plan programının hassas olmayan kısımları t 'nin dışında olabilir.  Herhangi bir durumda, özgün tasarım üreticileri (ODM) ve orijinal ekipman üreticileri (OEM), önyükleme ve çalışma zamanında IoT Edge güvenlik arka plan 'un bütünlüğünü ölçmek ve savunmak için HSM 'lerden güven genişletmelidir.
 
 #### <a name="minimize-bloat-and-churn"></a>Şişirme en aza indirmek ve değişim sıklığı
 
-Başka bir çekirdek IOT Edge güvenlik arka plan programı için karmaşıklığı en aza indirmek için ilkesidir.  En yüksek güven düzeyi için IOT Edge güvenlik arka plan programı sıkı bir şekilde cihaz donanım kök güven ile birleştirin ve yerel kod çalışır.  Bu tür, belirli donanım ve dağıtım senaryosuna bağlı olarak zorlu olabilir arka plan programı yazılım güven'ın güvenli güncelleştirme yollarını (aksine, sağlanan işletim sistemi güncelleştirme mekanizmaları), donanım kök yoluyla güncelleştirmek için realizations yaygındır.  Güvenlik yenileme IOT cihazları için güçlü bir öneri olsa da, birçok yönden tehdit surface aşırı güncelleştirme gereksinimleri veya büyük güncelleştirme yüklerini genişletebilirsiniz nedeni anlamına gelir.  İşletimsel kullanılabilirliği en üst düzeye çıkarmak için güncelleştirmeleri atlanıyor verilebilir veya kök güven donanım çok büyük bir güncelleştirme yükü işlemek için kısıtlanmış.  Bu nedenle, IOT Edge güvenlik arka plan programı tasarımını ayak izini tutmak için kısa ve bu nedenle güvenilir bilgi işlem temel küçük ve güncelleştirme gereksinimlerini en aza indirmek için.
+IoT Edge güvenlik arka plan programı için başka bir temel ilke, karmaşıklığı en aza indirmektir.  En yüksek güven düzeyi için IoT Edge güvenlik arka plan programı, güvenilir bir şekilde cihaz donanımı köküne sahiptir ve yerel kod olarak çalışır.  Bu gerçekçi türler, bazı senaryolarda zor olabilen güvenli güncelleştirme yollarının (işletim sistemi tarafından sunulan güncelleştirme mekanizmalarının aksine) donanım kökü aracılığıyla Daemon yazılımını güncelleştirmek için yaygındır.  IoT cihazları için güvenlik yenilemesi önerilse de, aşırı güncelleştirme gereksinimleri veya büyük güncelleştirme yükleri tehdit yüzeyini birçok şekilde genişletebilirler.  İşletimsel kullanılabilirliği en üst düzeye çıkarmak için güncelleştirmeleri atlanıyor verilebilir veya kök güven donanım çok büyük bir güncelleştirme yükü işlemek için kısıtlanmış.  Bu nedenle, IoT Edge güvenlik arka plan programının tasarımı, parmak izini ve güvenilir bilgi işlem temelini korumak ve güncelleştirme gereksinimlerini en aza indirmek için kısa bir işlemdir.
 
 ### <a name="architecture-of-iot-edge-security-daemon"></a>IOT Edge güvenlik arka plan programı mimarisi
 
 ![Azure IOT Edge güvenlik arka plan programı](media/edge-security-manager/iot-edge-security-daemon.png)
 
-IOT Edge güvenlik arka plan programı, tüm kullanılabilir donanım kök güvenliğin sağlamlaştırılmasını için güven teknolojinin avantajlarından yararlanmak için geliştirilmiştir.  Güvenilir yürütme ortamlarını donanım teknolojileri sunar, ayrıca standart/zengin Yürütme Ortamı (REE) ve güvenilir bir yürütme ortamı (TEE) arasında bölünmüş dünya işlemi için sağlar. Role özgü arabirimler etkileşim özelliği, cihaz ve işlemlerini IOT Edge bütünlüğünü sağlamak için IOT Edge ana bileşenleri etkinleştirin.
+IoT Edge güvenlik arka plan programı, güvenlik sağlamlaştırma için herhangi bir güven teknolojisinin kullanılabilir donanım kökünden yararlanır.  Ayrıca, donanım teknolojileri güvenilir yürütme ortamları sundukları zaman standart/zengin yürütme ortamı (REE) ve güvenilir bir yürütme ortamı (t) arasında bölünmüş bir işleme de olanak tanır. Role özgü arabirimler, IoT Edge cihazının ve işlemlerinin bütünlüğünü güvence altına almak için IoT Edge ana bileşenlerini etkinleştirir.
 
 #### <a name="cloud-interface"></a>Bulut arabirimi
 
-Cihaz güvenliği gibi güvenlik yenileme için bulut tebrik gibi bulut hizmetlerine erişmek güvenlik daemon IOT Edge bulut arabirimi sağlar.  Örneğin, IOT Edge güvenlik arka plan programı şu anda bu arabirimi Azure IOT hub'ı erişmek için kullandığı [cihaz sağlama hizmeti (DPS)](https://docs.microsoft.com/azure/iot-dps/) cihaz kimlik yaşam döngüsü yönetimi.  
+Bulut arabirimi, IoT Edge güvenlik arka plan programı, bulut Tebrikler gibi bulut hizmetlerine güvenlik yenilemesi gibi cihaz güvenliğine erişmesini sağlar.  Örneğin, IoT Edge güvenlik arka plan programı Şu anda bu arabirimi kullanarak cihaz kimliği yaşam döngüsü yönetimi için Azure IoT Hub [cihaz sağlama hizmeti](https://docs.microsoft.com/azure/iot-dps/) 'ne erişin.  
 
 #### <a name="management-api"></a>Yönetim API'si
 
-IOT Edge güvenlik arka plan programı sunan IOT Edge Aracısı oluşturma/başlatma/durdurma/kaldırırken tarafından çağrılan bir yönetim API'si, edge modülü. IOT Edge güvenlik arka plan programı, tüm etkin modüller için "kayıtları" depolar. Bu kayıtları bir modülün kimlik modülü bazı özelliklerine eşlenir. Bu özelliklerin birkaç örnek kapsayıcı ya da docker kapsayıcının içeriğinin karma çalışan işlemin işlem tanımlayıcısını (PID) verilmiştir.
+IoT Edge güvenlik arka plan programı, bir IoT Edge modülünü oluştururken/başlatırken/kaldırırken IoT Edge Aracısı tarafından çağrılan bir yönetim API 'SI sunar. Güvenlik arka plan programı, tüm etkin modüller için "kayıtlar" depolar. Bu kayıtları bir modülün kimlik modülü bazı özelliklerine eşlenir. Bu özelliklerin birkaç örnek kapsayıcı ya da docker kapsayıcının içeriğinin karma çalışan işlemin işlem tanımlayıcısını (PID) verilmiştir.
 
-Bu özellikler iş yükü API (çağıran bir eylem gerçekleştirme yetkisi gerçekleştiğini doğrulamak için aşağıda açıklanan) kullanılır.
+Bu özellikler, arayanın bir eylem gerçekleştirme yetkisi olduğunu doğrulamak için iş yükü API 'SI (aşağıda açıklanmıştır) tarafından kullanılır.
 
-Yalnızca IOT Edge Aracısı'ndan çağrılabilir ayrıcalıklı bir API Management API'dir.  IOT Edge güvenlik daemon bootstraps ve IOT Edge Aracısı'nı başlatır olduğundan, IOT Edge Aracısı ile değiştirilmemiş olduğunu Kanıtlanmamış sonra IOT Edge aracısı için örtük bir kaydı oluşturabilirsiniz. İş yükü API kullandığı aynı kanıtlama işlemi yalnızca IOT Edge Aracısı yönetim API erişimi sınırlamak için kullanılır.
+Yönetim API 'si, yalnızca IoT Edge aracılarından çağrılabilir olan ayrıcalıklı bir API 'dir.  IOT Edge güvenlik daemon bootstraps ve IOT Edge Aracısı'nı başlatır olduğundan, IOT Edge Aracısı ile değiştirilmemiş olduğunu Kanıtlanmamış sonra IOT Edge aracısı için örtük bir kaydı oluşturabilirsiniz. İş yükü API 'sinin kullandığı kanıtlama işlemi aynı zamanda yönetim API 'sine erişimi yalnızca IoT Edge aracısına kısıtlar.
 
 #### <a name="container-api"></a>Kapsayıcı API
 
-IOT Edge güvenlik arka plan programı Moby ve Docker gibi kullanılan modül örneklemesi için kapsayıcı sistem ile etkileşimde bulunmak için kapsayıcı arabirimi sunar.
+Kapsayıcı API 'SI, Moby veya Docker gibi modül yönetimi için kullanılan kapsayıcı sistemle etkileşime girer.
 
 #### <a name="workload-api"></a>İş yükü API
 
-API IOT Edge güvenlik daemon API IOT Edge Aracısı dahil olmak üzere tüm modüller için erişilebilir iş yüküdür. Kimlik kanıtı sağlar, imzalı bir belirteç veya X509 ya da bir HSM'nin kök sertifikası ve karşılık gelen güven paket için bir modül. Güven paket modülleri'nın güvenmeli diğer tüm sunucular için CA sertifikaları içerir.
+İş yükü API 'sine tüm modüller erişebilir. Bir HSM 'nin imzalı belirteci veya x509 sertifikası ile karşılık gelen güven paketini bir modüle, kimlik kanıtı sağlar. Güven paketi, modüllerin güveneceği diğer tüm sunucular için CA sertifikaları içerir.
 
-IOT Edge güvenlik arka plan programı, bu API koruma sağlamak için bir kanıtlama işlemi kullanır. Bir modül, bu API çağrısı, IOT Edge güvenlik arka plan programı kimliği için bir kayıt bulmaya çalışır. Başarılı olursa, modül ölçmek için kayıt özelliklerini kullanır. Ölçüm işleminin sonucu kayıt eşleşirse, yeni bir HSM imzalı belirteç veya X509 kök sertifika oluşturulur. Karşılık gelen CA sertifikaları (güven paket) modülü döndürülür.  Modül bir sunucuyu başlatın veya diğer modüller, IOT Hub'ına bağlanmak için bu sertifikayı kullanır. İmzalı bir belirteç ya da sertifika süre sonu yaklaştığında, yeni bir sertifika istemek için modülün sorumluluğundadır. 
+IoT Edge güvenlik arka plan programı, bu API 'yi korumak için bir kanıtlama işlemi kullanır. Bir modül bu API 'yi çağırdığında, güvenlik cini kimlik için bir kayıt bulmaya çalışır. Başarılı olursa, modül ölçmek için kayıt özelliklerini kullanır. Ölçüm işleminin sonucu kayıtla eşleşiyorsa, yeni bir kimlik kanıtı oluşturulur. Karşılık gelen CA sertifikaları (güven paketi) modüle döndürülür.  Modül bir sunucuyu başlatın veya diğer modüller, IOT Hub'ına bağlanmak için bu sertifikayı kullanır. İmzalanmış belirteç veya sertifika süre sonu yaklaştığında, bu, modülün yeni bir sertifika istemesi için sorumluluğundadır. 
 
 ### <a name="integration-and-maintenance"></a>Tümleştirme ve Bakım
 
@@ -102,28 +102,28 @@ Microsoft'un ana kod tabanı [GitHub üzerinde IOT Edge güvenlik daemon](https:
 
 #### <a name="installation-and-updates"></a>Yükleme ve güncelleştirme
 
-Yükleme ve IOT Edge güvenlik arka plan programı, güncelleştirmeleri işletim sisteminin paket yönetim sistemi yönetilir. IOT Edge cihazları donanım kök güven ile ek arka plan programı bütünlüğünü yaşam döngüsü Güvenli Önyükleme ve güncelleştirmeleri yönetim sistemleri ile yöneterek sağlamlaştırma sağlamanız gerekir.  İlgili cihaz yeteneklerini uygun olarak bu seçenek keşfetmek için cihazları yetkililerine bırakılır.
+IoT Edge güvenlik arka plan programının yüklenmesi ve güncelleştirmeleri, işletim sisteminin paket yönetim sistemi üzerinden yönetilir. Donanım köküne sahip IoT Edge cihazlar, güvenli önyükleme ve güncelleştirme yönetimi sistemleri aracılığıyla yaşam döngüsünü yöneterek arka plan 'un bütünlüğünden daha fazla sağlamlaştırma sağlamalıdır. Cihaz üreticileri bu avenilgili cihaz özelliklerine göre araştırmalıdır.
 
 #### <a name="versioning"></a>Sürüm oluşturma
 
-IOT Edge çalışma zamanı izler ve IOT Edge güvenlik daemon sürümü bildiriyor. Sürüm olarak bildirilir *runtime.platform.version* IOT Edge aracı modülü özniteliği bildirilen özellik.
+IOT Edge çalışma zamanı izler ve IOT Edge güvenlik daemon sürümü bildiriyor. Sürüm, IoT Edge Agent modülünün bildirdiği özelliğin *Runtime. platform. Version* özniteliği olarak bildirilir.
 
 ### <a name="hardware-security-module-platform-abstraction-layer-hsm-pal"></a>Donanım güvenlik modülü platform Soyutlama Katmanı (HSM PAL)
 
-Tüm kök geliştirici veya IOT Edge kullanıcıdan miktarı yalıtmak için güven donanım HSM PAL soyutlar.  Bu, bir birleşimi uygulama programlama arabirimi (API) ve trans etki alanı iletişim yordamları, örneğin standart yürütme ortamı ile güvenli bir kuşatma arasındaki iletişimi oluşur.  HSM PAL gerçek uygulaması belirli güvenli donanımı bağlıdır. Var, neredeyse tüm güvenli Silikon donanım kullanımını etkinleştirir.
+Tüm kök geliştirici veya IOT Edge kullanıcıdan miktarı yalıtmak için güven donanım HSM PAL soyutlar.  Uygulama programlama arabirimi (API) ve Trans-etki alanı iletişim yordamlarının bir birleşimini içerir, örneğin standart bir yürütme ortamı ile güvenli bir şifreleme arasındaki iletişim.  HSM PAL gerçek uygulaması belirli güvenli donanımı bağlıdır. Varlığı neredeyse tüm güvenli Silicon Hardware kullanımına izin vermez.
 
 ## <a name="secure-silicon-root-of-trust-hardware"></a>Silikon kök güven donanım güvenliğini sağlama
 
-Güvenli Silikon, IOT Edge cihaz donanım içinde yer işareti güven için gereklidir.  Silikon güvenli, Güvenilir Platform Modülü (TPM), katıştırılmış güvenli öğesi (eSE), ARM TrustZone, Intel SGX ve özel güvenli Silikon teknolojileri dahil etmek için çeşitli gelir.  Fiziksel olarak IOT cihazları erişilebilirlikle ilgili tehditleri verilen güvenli Silikon kök güven cihazlarında kullanımını önemle tavsiye edilir.
+Güvenli Silikon, IOT Edge cihaz donanım içinde yer işareti güven için gereklidir.  Silikon güvenli, Güvenilir Platform Modülü (TPM), katıştırılmış güvenli öğesi (eSE), ARM TrustZone, Intel SGX ve özel güvenli Silikon teknolojileri dahil etmek için çeşitli gelir.  IoT cihazlarının fiziksel erişilebilirliği ile ilişkili tehditler verildiğinde cihazlarda güvenli bir güvenlik listesi kökünün kullanılması önerilir.
 
 ## <a name="iot-edge-security-manager-integration-and-maintenance"></a>IOT Edge Güvenlik Yöneticisi tümleştirmesi ve bakımı
 
-Güvenlik ve bütünlüğünü özel sağlamlaştırma için Azure IOT Edge platform bileşenleri yalıtmak üzere IOT Edge Güvenlik Yöneticisi'ni amaçlar. Cihaz üreticileri gibi üçüncü taraflara olmalısınız cihaz donanım ile kullanılabilen özel güvenlik özelliklerini kullanın.  Azure IOT Güvenlik Yöneticisi ile Güvenilir Platform Modülü (TPM) Linux ve Windows platformlarında sağlamlaştırmak nasıl gösteren bağlantılara ilişkin sonraki adımlar bölümüne bakın. Bu örnekler, yazılım veya sanal TPM'ler kullanır ancak ayrık TPM cihazları kullanarak uygulayabilirsiniz.  
+IoT Edge Güvenlik Yöneticisi, özel sağlamlaştırma için Azure IoT Edge platformunun güvenliğini ve bütünlüğünü savunmaya yönelik bileşenleri belirleyip yalıtmak üzere amaçlar. Cihaz üreticileri gibi üçüncü taraflar, cihaz donanımlarıyla kullanılabilen özel güvenlik özelliklerini kullanmalıdır.  Azure IoT Güvenlik Yöneticisi 'nin Linux ve Windows platformlarındaki Güvenilir Platform Modülü (TPM) ile nasıl sağlamlaştıralınacağını gösteren bağlantılar için sonraki adımlar bölümüne bakın. Bu örnekler, yazılım veya sanal TPMs kullanır, ancak Ayrık TPM cihazlarını kullanarak doğrudan uygulanır.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Blogu okuyun [akıllı uç güvenliğini sağlama](https://azure.microsoft.com/blog/securing-the-intelligent-edge/).
 
-Oluşturma ve sağlama bir [IOT Edge cihazı ile bir Linux sanal makinesine sanal bir TPM](how-to-auto-provision-simulated-device-linux.md).
+[Linux sanal makinesinde sanal TPM ile bir IoT Edge cihazı](how-to-auto-provision-simulated-device-linux.md)oluşturun ve sağlayın.
 
-Oluşturma ve sağlama bir [Windows sanal bir TPM ile IOT Edge cihazı](how-to-auto-provision-simulated-device-windows.md).
+[Windows üzerinde sanal BIR TPM ile IoT Edge bir cihaz](how-to-auto-provision-simulated-device-windows.md)oluşturun ve sağlayın.

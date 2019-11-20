@@ -1,29 +1,29 @@
 ---
-title: Azure'da VM'ler için önyükleme tanılama | Microsoft belgeleri
-description: Azure'da sanal makineler için iki hata ayıklama özelliklerine genel bakış
+title: Azure 'da VM 'Ler için önyükleme tanılaması | Microsoft doc
+description: Azure 'daki sanal makineler için iki hata ayıklama özelliğine genel bakış
 services: virtual-machines
 author: Deland-Han
-manager: jeconnoc
+manager: dcscontentpm
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
 ms.topic: troubleshooting
 ms.date: 10/31/2018
 ms.author: delhan
-ms.openlocfilehash: 59602977c1b7f6dd0524c6535d8458d3eb1a3f26
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: d34182e09bf453dbec1e9592f131cb9b3b78a086
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60505910"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71086480"
 ---
-# <a name="how-to-use-boot-diagnostics-to-troubleshoot-virtual-machines-in-azure"></a>Azure'da sanal makine sorunlarını gidermek için önyükleme tanılama kullanma
+# <a name="how-to-use-boot-diagnostics-to-troubleshoot-virtual-machines-in-azure"></a>Azure 'da sanal makinelerde sorun gidermek için önyükleme tanılamayı kullanma
 
-Bir sanal makine önyüklenebilir olmayan bir duruma girer birçok nedeni olabilir. Aşağıdaki hata ayıklama özellikleri kullanabileceğinizi Resource Manager dağıtım modeli kullanılarak oluşturulan sanal makinelerinize sorunlarını gidermek için: Konsol çıkışını ve ekran için Azure sanal makineleri destekler. 
+Bir sanal makinenin önyüklenebilir olmayan bir duruma girmesinin pek çok nedeni olabilir. Kaynak Yöneticisi dağıtım modeli kullanılarak oluşturulan sanal makinelerinizdeki sorunları gidermek için aşağıdaki hata ayıklama özelliklerini kullanabilirsiniz: Azure sanal makineleri için konsol çıkışı ve ekran görüntüsü desteği. 
 
-Linux sanal makineleri için Portal'dan konsol oturum çıktısını görüntüleyebilirsiniz. Hem Windows hem de Linux sanal makineleri için Azure, Hiper yöneticiden VM'nin ekran görmenizi sağlar. Her iki özellik, tüm bölgelerde Azure sanal makineler için desteklenir. Not, ekran görüntüleri ve çıktının depolama hesabınızda görünmesi 10 dakika sürebilir.
+Linux sanal makineleri için, portaldan konsol günlüğlerinizin çıkışını görüntüleyebilirsiniz. Azure, hem Windows hem de Linux sanal makineleri için Hiper yöneticide VM 'nin ekran görüntüsünü görmenizi sağlar. Her iki özellik de tüm bölgelerdeki Azure sanal makineleri için desteklenir. Not, ekran görüntüleri ve çıktının depolama hesabınızda görünmesi 10 dakika sürebilir.
 
-Seçebileceğiniz **önyükleme tanılaması** günlük ve ekran görüntülemek için seçeneği.
+Günlüğü ve ekran görüntüsünü görüntülemek için **önyükleme tanılama** seçeneğini belirleyebilirsiniz.
 
 ![Resource Manager](./media/virtual-machines-common-boot-diagnostics/screenshot1.png)
 
@@ -43,21 +43,21 @@ Seçebileceğiniz **önyükleme tanılaması** günlük ve ekran görüntülemek
 - [Bir işletim sistemi bulunamadı](https://support.microsoft.com/help/4010142)
 - [Önyükleme hatası veya INACCESSIBLE_BOOT_DEVICE](https://support.microsoft.com/help/4010143)
 
-## <a name="enable-diagnostics-on-a-virtual-machine-created-using-the-azure-portal"></a>Azure portalı kullanılarak oluşturulan bir sanal makinede tanılamayı etkinleştirme
+## <a name="enable-diagnostics-on-a-virtual-machine-created-using-the-azure-portal"></a>Azure portalını kullanarak oluşturulan bir sanal makinede tanılamayı etkinleştirme
 
-Aşağıdaki yordam, Resource Manager dağıtım modeli kullanılarak oluşturulan bir sanal makine için kullanılır.
+Aşağıdaki yordam, Kaynak Yöneticisi dağıtım modeli kullanılarak oluşturulan bir sanal makine içindir.
 
-Üzerinde **Yönetim** sekmesinde **izleme** bölümünde, emin **önyükleme tanılaması** açıktır. Gelen **tanılama depolama hesabı** aşağı açılan listesinde, Tanılama dosyalarını yerleştirmek için bir depolama hesabı seçin.
+**Yönetim** sekmesinde, **Izleme** bölümünde, **önyükleme Tanılamanın** açık olduğundan emin olun. **Tanılama depolama hesabı** açılır listesinden, tanılama dosyalarının yerleştirileceği bir depolama hesabı seçin.
  
-![VM oluşturma](./media/virtual-machines-common-boot-diagnostics/enable-boot-diagnostics-vm.png)
+![VM Oluştur](./media/virtual-machines-common-boot-diagnostics/enable-boot-diagnostics-vm.png)
 
 > [!NOTE]
-> Premium depolama hesabı, önyükleme Tanılama özelliğini desteklemiyor. Önyükleme tanılaması için premium depolama hesabı kullanırsanız, sanal Makineyi başlattığınızda StorageAccountTypeNotSupported hata alabilirsiniz.
+> Önyükleme tanılaması özelliği Premium Depolama hesabını desteklemez. Önyükleme tanılaması için Premium depolama hesabı kullanıyorsanız, VM 'yi başlattığınızda StorageAccountTypeNotSupported hatasını alabilirsiniz.
 >
 
-### <a name="deploying-from-an-azure-resource-manager-template"></a>Bir Azure Resource Manager şablonu dağıtma
+### <a name="deploying-from-an-azure-resource-manager-template"></a>Azure Resource Manager şablonundan dağıtma
 
-Bir Azure Resource Manager şablonu dağıtıyorsanız, sanal makine kaynağınıza gidin ve tanılama profili bölümünü ekleyin. API sürümü üst bilgisini "2015-06-15" veya sonraki bir sürüme ayarlayın. "2018-10-01" en son sürümüdür.
+Azure Resource Manager şablondan dağıtıyorsanız, sanal makine kaynağınız ' ne gidin ve tanılama profili bölümüne ekleyin. API sürüm üstbilgisini "2015-06-15" veya üzeri olarak ayarlayın. En son sürüm "2018-10-01" dir.
 
 ```json
 {
@@ -79,22 +79,22 @@ Tanılama profili, bu günlükleri yerleştirmek istediğiniz depolama hesabın�
 }
 ```
 
-Şablonları kullanarak kaynakları dağıtma hakkında daha fazla bilgi için bkz. [hızlı başlangıç: Oluşturma ve Azure portalını kullanarak Azure Resource Manager şablonlarını dağıtma](../../azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal.md).
+Şablonları kullanarak kaynakları dağıtma hakkında daha fazla bilgi için bkz [. hızlı başlangıç: Azure portal](../../azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal.md)kullanarak Azure Resource Manager şablonları oluşturun ve dağıtın.
 
-## <a name="enable-boot-diagnostics-on-existing-virtual-machine"></a>Mevcut bir sanal makinede önyükleme tanılamasını etkinleştirme 
+## <a name="enable-boot-diagnostics-on-existing-virtual-machine"></a>Mevcut sanal makinede önyükleme tanılamayı etkinleştir 
 
-Mevcut bir sanal makinede önyükleme tanılamasını etkinleştirmek için aşağıdaki adımları izleyin:
+Mevcut bir sanal makinede önyükleme tanılamayı etkinleştirmek için şu adımları izleyin:
 
-1. Oturum [Azure portalında](https://portal.azure.com)ve ardından sanal makineyi seçin.
-2. İçinde **destek + sorun giderme** bölümünden **önyükleme tanılaması**, ardından **ayarları** sekmesi.
-3. İçinde **önyükleme tanılaması** ayarlarını değiştirmek için durum **üzerinde**, gelen ve giden **depolama hesabı** açılır listede, bir depolama hesabı seçin. 
-4. Yaptığınız değişikliği kaydedin.
+1. [Azure Portal](https://portal.azure.com)oturum açın ve sonra sanal makineyi seçin.
+2. **Destek + sorun giderme** bölümünde **önyükleme tanılaması**' nı seçin, sonra **Ayarlar** sekmesini seçin.
+3. **Önyükleme tanılaması** ayarları ' nda, durumu **Açık**olarak değiştirin ve **depolama hesabı** açılır listesinden bir depolama hesabı seçin. 
+4. Değişikliği kaydedin.
 
     ![Mevcut VM’yi güncelleştirme](./media/virtual-machines-common-boot-diagnostics/enable-for-existing-vm.png)
 
-Sanal makine için değişikliğin etkili olması için yeniden başlatmanız gerekir.
+Değişikliğin etkili olması için sanal makineyi yeniden başlatmanız gerekir.
 
-### <a name="enable-boot-diagnostics-using-the-azure-cli"></a>Azure CLI kullanarak önyükleme tanılamasını etkinleştirme
+### <a name="enable-boot-diagnostics-using-the-azure-cli"></a>Azure CLı kullanarak önyükleme tanılamayı etkinleştirme
 
-Var olan Azure sanal makinesinde önyükleme tanılamasını etkinleştirmek için Azure CLI'yı kullanabilirsiniz. Daha fazla bilgi için [az vm önyükleme tanılaması](
-https://docs.microsoft.com/cli/azure/vm/boot-diagnostics?view=azure-cli-latest).
+Azure CLı 'yi, var olan bir Azure sanal makinesinde önyükleme tanılamayı etkinleştirmek için kullanabilirsiniz. Daha fazla bilgi için bkz [. az VM Boot-](
+https://docs.microsoft.com/cli/azure/vm/boot-diagnostics?view=azure-cli-latest)Diagnostics.

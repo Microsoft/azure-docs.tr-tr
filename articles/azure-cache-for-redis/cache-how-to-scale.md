@@ -1,90 +1,82 @@
 ---
-title: Azure önbelleği için Redis ölçeklendirme | Microsoft Docs
-description: Azure önbelleği için Redis örneği ölçeklendirmeyi öğrenin
-services: cache
-documentationcenter: ''
+title: Redsıs için Azure önbelleğini ölçeklendirme
+description: Redsıs örnekleri için Azure önbelleğinizi ölçeklendirmeyi öğrenin
 author: yegu-ms
-manager: jhubbard
-editor: ''
-ms.assetid: 350db214-3b7c-4877-bd43-fef6df2db96c
 ms.service: cache
-ms.workload: tbd
-ms.tgt_pltfrm: cache
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 04/11/2017
 ms.author: yegu
-ms.openlocfilehash: 495fc031150d04f253279606baebb5d64d52bce7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0fe4092a93e34d6e6b4bb4c4441609f696518b86
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66132952"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74122130"
 ---
-# <a name="how-to-scale-azure-cache-for-redis"></a>Azure önbelleği için Redis ölçeklendirme
-Azure önbelleği için Redis önbellek boyutunu ve özelliklerini, tercih ettiğiniz esneklik sağlayan farklı bir önbellek teklifleri sahiptir. Önbellek oluşturulduktan sonra uygulamanızın gereksinimlerini değiştirirseniz, boyutu ve fiyatlandırma katmanı önbellek ölçeklendirebilirsiniz. Bu makalede Azure portalı ve Azure PowerShell ve Azure CLI gibi araçları kullanarak, önbellek ölçeklendirme gösterilmektedir.
+# <a name="how-to-scale-azure-cache-for-redis"></a>Redsıs için Azure önbelleğini ölçeklendirme
+Redin için Azure önbelleğinde, önbellek boyutu ve özellikleri seçiminde esneklik sağlayan farklı önbellek teklifleri vardır. Bir önbellek oluşturulduktan sonra, uygulamanızın gereksinimlerinin değiştirilmesi durumunda önbelleğin boyutunu ve fiyatlandırma katmanını ölçeklendirebilirsiniz. Bu makalede, Azure portal ve Azure PowerShell ve Azure CLı gibi araçları kullanarak önbelleğinizi nasıl ölçekleyebilirsiniz.
 
 ## <a name="when-to-scale"></a>Ne zaman ölçeklendirme yapılmalıdır?
-Kullanabileceğiniz [izleme](cache-how-to-monitor.md) Azure önbelleği için Redis durumunu ve performansını önbelleğinizin izlemek ve ne zaman önbellek ölçeklendirme belirlemenize yardımcı olmak özellikleri. 
+Redsıs için Azure cache [izleme](cache-how-to-monitor.md) özelliklerini kullanarak önbelleğinizin sistem durumunu ve performansını izleyebilir ve önbelleğin ne zaman ölçekleneceğini belirlemenize yardımcı olabilirsiniz. 
 
-Ölçeği artırmanız gerekiyorsa belirlemeye yardımcı olması için aşağıdaki ölçümleri izleyebilirsiniz.
+Ölçeklendirmeniz gerekip gerekmediğini belirlemenize yardımcı olması için aşağıdaki ölçümleri izleyebilirsiniz.
 
-* Redis sunucu yükü
+* Redsıs sunucu yükü
 * Bellek kullanımı
 * Ağ bant genişliği
 * CPU kullanımı
 
-Önbelleğinizi artık uygulamanızın gereksinimlerini karşılıyor mu olduğunu belirlerseniz, uygulamanız için en uygun fiyatlandırma daha büyük veya küçük bir önbellek ölçeklendirebilirsiniz. Fiyatlandırma katmanı kullanmak için hangi önbellek belirleme hakkında daha fazla bilgi için bkz. [hangi Azure önbelleği için Redis teklifini ve boyutunu kullanmalıyım](cache-faq.md#what-azure-cache-for-redis-offering-and-size-should-i-use).
+Önbelleğinizin artık uygulamanızın gereksinimlerini karşılamadığını belirlerseniz, uygulamanız için uygun olan daha büyük veya daha küçük bir önbellek fiyatlandırma katmanına ölçeklendirebilirsiniz. Hangi önbellek fiyatlandırma katmanını kullanacağınızı belirleme hakkında daha fazla bilgi için bkz. [redne Için Azure Cache ve size ne kadar bellek kullanmalıyım?](cache-faq.md#what-azure-cache-for-redis-offering-and-size-should-i-use)
 
-## <a name="scale-a-cache"></a>Önbellek ölçeklendirme
-Önbelleğinizi, ölçeklendirmek için [önbelleğe Gözat](cache-configure.md#configure-azure-cache-for-redis-settings) içinde [Azure portalında](https://portal.azure.com) tıklatıp **ölçek** gelen **kaynak menüsünde**.
+## <a name="scale-a-cache"></a>Bir önbelleği ölçeklendirme
+Önbelleğinizi ölçeklendirmek için [Azure Portal](https://portal.azure.com) [önbelleğe](cache-configure.md#configure-azure-cache-for-redis-settings) gidin ve **Kaynak menüsünden** **Ölçekle** ' ye tıklayın.
 
 ![Ölçek](./media/cache-how-to-scale/redis-cache-scale-menu.png)
 
-İstenen fiyatlandırma katmanı seçin **fiyatlandırma katmanı seçme** dikey de **seçin**.
+**Fiyatlandırma katmanı Seç** dikey penceresinde istediğiniz fiyatlandırma katmanını seçin ve **Seç**' e tıklayın.
 
 ![Fiyatlandırma katmanı][redis-cache-pricing-tier-blade]
 
 
-Aşağıdaki kısıtlamalarla birlikte farklı bir fiyatlandırma katmanına ölçeklendirebilirsiniz:
+Aşağıdaki kısıtlamalara sahip farklı bir fiyatlandırma katmanına ölçeklendirebilirsiniz:
 
-* Daha yüksek bir fiyatlandırma Katmanı'ndan daha düşük bir fiyatlandırma katmanına ölçeklendirilemez.
-  * Ölçek genişletilemiyor bir **Premium** aşağı önbelleğe bir **standart** veya **temel** önbellek.
-  * Ölçek genişletilemiyor bir **standart** aşağı önbelleğe bir **temel** önbellek.
-* Değerine ölçeklendirme bir **temel** için önbellek bir **standart** önbellek ancak değiştiremez boyutu aynı anda. Başka bir boyutu gerekiyorsa, istediğiniz boyuta izleyen bir ölçeklendirme işlemi yapabilirsiniz.
-* Ölçek genişletilemiyor bir **temel** doğrudan önbelleğe bir **Premium** önbellek. İlk olarak, değerine ölçeklendirme **temel** için **standart** bir ölçeklendirme işlemi ve ardından gelen **standart** için **Premium** , sonraki ölçeklendirme işlem.
-* Büyük bir değerden aşağı ölçeklendirilemez **C0 (250 MB)** boyutu.
+* Daha yüksek bir fiyatlandırma katmanından daha düşük bir fiyatlandırma katmanına ölçeklendiremez.
+  * **Premium** önbellekten bir **Standart** veya **temel** önbelleğe ölçeklendiremez.
+  * **Standart** bir önbellekten, **temel** bir önbellekten ölçeklendiremez.
+* **Temel** bir önbellekten **Standart** bir önbelleğe ölçeklendirebilirsiniz, ancak aynı anda boyutu değiştiremezsiniz. Farklı bir boyuta ihtiyacınız varsa, sonraki ölçekleme işlemini istenen boyuta getirebilirsiniz.
+* **Temel** önbellekten doğrudan **Premium** önbelleğe ölçeklendiremez. İlk olarak, bir ölçeklendirme işleminde **temel** olarak **Standart** ve sonra da sonraki ölçekleme işleminde **Standart** 'den **Premium** 'a ölçeklendirin.
+* Daha büyük bir boyuttan **C0 (250 MB)** boyutuna kadar ölçeklendiremez.
  
-Önbellek, yeni fiyatlandırma katmanına ölçeklendirme sırasında bir **ölçeklendirme** durumu görüntülenir **Azure önbelleği için Redis** dikey penceresi.
+Önbellek yeni fiyatlandırma katmanına ölçeklendirilirken, **redsıs dikey penceresinde Azure önbelleğinde** **ölçekleme** durumu görüntülenir.
 
 ![Ölçeklendirme][redis-cache-scaling]
 
-Ölçeklendirme tamamlandığında, durum değişiklikleri **ölçeklendirme** için **çalıştıran**.
+Ölçeklendirme tamamlandığında, durum **ölçeklendirmeden** **çalışır**olarak değişir.
 
-## <a name="how-to-automate-a-scaling-operation"></a>Bir ölçeklendirme işlemi otomatikleştirme
-Azure portalında önbelleği örneklerinizin ölçeklendirme yanı sıra PowerShell cmdlet'lerini, Azure CLI kullanarak ölçeklendirilebilir ve Microsoft Azure yönetim kitaplıkları'nı (MAML) kullanarak. 
+## <a name="how-to-automate-a-scaling-operation"></a>Ölçeklendirme işlemini otomatikleştirme
+Azure portal önbellek örneklerinizi ölçeklendirmenin yanı sıra, PowerShell cmdlet 'leri, Azure CLı ve Microsoft Azure Yönetim kitaplıklarını (MAML) kullanarak ölçeklendirebilirsiniz. 
 
-* [PowerShell kullanarak ölçek](#scale-using-powershell)
-* [Azure CLI kullanarak ölçek](#scale-using-azure-cli)
-* [Aynı anda MAML kullanarak ölçek](#scale-using-maml)
+* [PowerShell kullanarak ölçeklendirme](#scale-using-powershell)
+* [Azure CLı kullanarak ölçeklendirme](#scale-using-azure-cli)
+* [MAML kullanarak ölçeklendirme](#scale-using-maml)
 
-### <a name="scale-using-powershell"></a>PowerShell kullanarak ölçek
+### <a name="scale-using-powershell"></a>PowerShell kullanarak ölçeklendirme
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-PowerShell ile Azure önbelleği için Redis örneği kullanarak ölçeğini [kümesi AzRedisCache](https://docs.microsoft.com/powershell/module/az.rediscache/set-azrediscache) cmdlet'i, `Size`, `Sku`, veya `ShardCount` özellikleri değiştirildiğinde. Aşağıdaki örnekte adlı önbellek ölçeklendirme gösterilmiştir `myCache` 2,5 GB önbellek için. 
+`Size`, `Sku`veya `ShardCount` özellikleri değiştirildiğinde [set-AzRedisCache](https://docs.microsoft.com/powershell/module/az.rediscache/set-azrediscache) cmdlet 'Ini kullanarak PowerShell ile redsıs örnekleri Için Azure önbelleğinizi ölçekleyebilirsiniz. Aşağıdaki örnek, `myCache` adlı bir önbelleğin 2,5 GB önbellek olarak nasıl ölçeklendirilebilen gösterilmektedir. 
 
     Set-AzRedisCache -ResourceGroupName myGroup -Name myCache -Size 2.5GB
 
-PowerShell ile ölçeklendirme hakkında daha fazla bilgi için bkz. [bir Azure önbelleği için Redis Powershell kullanarak ölçeklendirmek için](cache-howto-manage-redis-cache-powershell.md#scale).
+PowerShell ile ölçeklendirme hakkında daha fazla bilgi için bkz. [PowerShell kullanarak redsıs Için Azure önbelleğini ölçekleme](cache-how-to-manage-redis-cache-powershell.md#scale).
 
-### <a name="scale-using-azure-cli"></a>Azure CLI kullanarak ölçek
-Azure CLI kullanarak Redis örneği için Azure önbelleği ölçeklendirmek için çağrı `azure rediscache set` komut ve yeni boyutu, sku veya istenen ölçeklendirme işleme bağlı olarak, küme boyutu istenen yapılandırma değişiklikleri geçirin.
+### <a name="scale-using-azure-cli"></a>Azure CLı kullanarak ölçeklendirme
+Azure CLı kullanarak Redsıs örnekleri için Azure önbelleğinizi ölçeklendirmek üzere, istenen ölçeklendirme işlemine bağlı olarak, `azure rediscache set` komutunu çağırın ve yeni boyut, SKU veya küme boyutu içeren istenen yapılandırma değişikliklerini geçirin.
 
-Azure CLI ile ölçeklendirme hakkında daha fazla bilgi için bkz. [Redis için mevcut bir Azure önbellek ayarlarını değiştirme](cache-manage-cli.md#scale).
+Azure CLı ile ölçeklendirme hakkında daha fazla bilgi için bkz. [redsıs için mevcut bir Azure önbelleğinin ayarlarını değiştirme](cache-manage-cli.md#scale).
 
-### <a name="scale-using-maml"></a>Aynı anda MAML kullanarak ölçek
-Ölçeklendirme, Azure önbelleği için Redis örneği kullanarak [Microsoft Azure yönetim kitaplıkları (MAML)](https://azure.microsoft.com/updates/management-libraries-for-net-release-announcement/), çağrı `IRedisOperations.CreateOrUpdate` yöntemi ve yeni boyutu geçişinde `RedisProperties.SKU.Capacity`.
+### <a name="scale-using-maml"></a>MAML kullanarak ölçeklendirme
+[Microsoft Azure Yönetim kitaplıklarını (MAML)](https://azure.microsoft.com/updates/management-libraries-for-net-release-announcement/)kullanarak redsıs örnekleri Için Azure önbelleğinizi ölçeklendirmek için, `IRedisOperations.CreateOrUpdate` metodunu çağırın ve `RedisProperties.SKU.Capacity`yeni boyutunu geçirin.
 
     static void Main(string[] args)
     {
@@ -104,80 +96,80 @@ Azure CLI ile ölçeklendirme hakkında daha fazla bilgi için bkz. [Redis için
         client.Redis.CreateOrUpdate(resourceGroupName,cacheName, redisParams);
     }
 
-Daha fazla bilgi için [MAML kullanarak Redis için yönetilen Azure önbelleği](https://github.com/rustd/RedisSamples/tree/master/ManageCacheUsingMAML) örnek.
+Daha fazla bilgi için bkz. [MAML Için Azure önbelleğini redml Ile yönetme](https://github.com/rustd/RedisSamples/tree/master/ManageCacheUsingMAML) örneği.
 
 ## <a name="scaling-faq"></a>Ölçeklendirme hakkında SSS
-Aşağıdaki liste, Redis ölçeklendirmeye yönelik Azure önbelleği hakkında sık sorulan soruların yanıtlarını içerir.
+Aşağıdaki liste, Redsıs ölçeklendirmesi için Azure önbelleği hakkında sık sorulan soruların yanıtlarını içerir.
 
-* [İçin ya da Premium önbelleğindeki ölçeklendirebilir miyim?](#can-i-scale-to-from-or-within-a-premium-cache)
-* [Ölçeklendirme sonra miyim önbellek adı ya da erişim anahtarlarımı değiştirmeniz gerekiyor mu?](#after-scaling-do-i-have-to-change-my-cache-name-or-access-keys)
+* [Premium önbellekten ölçeklendirebilir miyim?](#can-i-scale-to-from-or-within-a-premium-cache)
+* [Ölçeklendirdikten sonra, önbellek adı veya erişim anahtarlarımı değiştirmem gerekiyor mu?](#after-scaling-do-i-have-to-change-my-cache-name-or-access-keys)
 * [Ölçeklendirme nasıl çalışır?](#how-does-scaling-work)
-* [My önbellekten ölçeklendirme sırasında miyim veriyi kaybedeceksiniz?](#will-i-lose-data-from-my-cache-during-scaling)
-* [My özel veritabanlarını ölçeklendirme sırasında etkilenen ayarlıyor?](#is-my-custom-databases-setting-affected-during-scaling)
-* [Önbelleğimin ölçeklendirme sırasında kullanıma sunulacak?](#will-my-cache-be-available-during-scaling)
-* Yapılandırılmış, coğrafi çoğaltma ile neden önbelleğimin ölçeklemek ya da bir kümedeki parça değiştirmek gönderemiyorum?
-* [Desteklenmeyen işlemleri](#operations-that-are-not-supported)
-* [Nasıl ölçekleme kadar sürer?](#how-long-does-scaling-take)
-* [Ölçeklendirme tamamlandığında nasıl anlayabilirim?](#how-can-i-tell-when-scaling-is-complete)
+* [Ölçeklendirme sırasında önbelleğim verileri kaybedecek mıyım?](#will-i-lose-data-from-my-cache-during-scaling)
+* [Özel Veritabanlarım, ölçekleme sırasında etkileniyor mu?](#is-my-custom-databases-setting-affected-during-scaling)
+* [Önbelleğim ölçekleme sırasında kullanılabilir olacak mı?](#will-my-cache-be-available-during-scaling)
+* Coğrafi çoğaltma yapılandırıldığında, neden önbelleğinizi ölçeklendirmem veya bir kümedeki parçaları değiştirmem mümkün değil mi?
+* [Desteklenmeyen işlemler](#operations-that-are-not-supported)
+* [Ölçeklendirme ne kadar sürer?](#how-long-does-scaling-take)
+* [Ölçeklendirmenin tamamlandığını nasıl anlayabilirim?](#how-can-i-tell-when-scaling-is-complete)
 
-### <a name="can-i-scale-to-from-or-within-a-premium-cache"></a>İçin ya da Premium önbelleğindeki ölçeklendirebilir miyim?
-* Ölçek genişletilemiyor bir **Premium** aşağı önbelleğe bir **temel** veya **standart** fiyatlandırma katmanı.
-* Bir ölçek **Premium** fiyatlandırma katmanı başka bir önbellek.
-* Ölçek genişletilemiyor bir **temel** doğrudan önbelleğe bir **Premium** önbellek. İlk olarak, değerine ölçeklendirme **temel** için **standart** bir ölçeklendirme işlemi ve ardından gelen **standart** için **Premium** , sonraki ölçeklendirme işlem.
-* Kümeleme etkinleştirilirse oluştururken, **Premium** önbellek, yapabilecekleriniz [küme boyutu değiştirmek](cache-how-to-premium-clustering.md#cluster-size). Önbelleğinizi etkin Kümeleme olmadan oluşturulduysa, daha sonraki bir zamanda kümeleme yapılandırabilirsiniz.
+### <a name="can-i-scale-to-from-or-within-a-premium-cache"></a>Premium önbellekten ölçeklendirebilir miyim?
+* **Premium** önbellekten, **temel** veya **Standart** fiyatlandırma katmanına kadar ölçeklendiremez.
+* Bir **Premium** önbellek fiyatlandırma katmanından diğerine ölçeklendirebilirsiniz.
+* **Temel** önbellekten doğrudan **Premium** önbelleğe ölçeklendiremez. İlk olarak, bir ölçeklendirme işleminde **temel** olarak **Standart** ve sonra da sonraki ölçekleme işleminde **Standart** 'den **Premium** 'a ölçeklendirin.
+* **Premium** önbelleğinizi oluştururken kümeleme 'yi etkinleştirdiyseniz, [küme boyutunu değiştirebilirsiniz](cache-how-to-premium-clustering.md#cluster-size). Önbelleğiniz kümeleme etkin olmadan oluşturulduysa, kümelendirmeyi daha sonra yapılandırabilirsiniz.
   
-  Daha fazla bilgi için [Redis için Premium Azure Cache için kümeleri yapılandırma](cache-how-to-premium-clustering.md).
+  Daha fazla bilgi için bkz. [redsıs Için Premium Azure önbelleği için kümeleme yapılandırma](cache-how-to-premium-clustering.md).
 
-### <a name="after-scaling-do-i-have-to-change-my-cache-name-or-access-keys"></a>Ölçeklendirme sonra miyim önbellek adı ya da erişim anahtarlarımı değiştirmeniz gerekiyor mu?
-Hayır, önbellek adını ve anahtarlarını bir ölçeklendirme işlemi sırasında değiştirilmez.
+### <a name="after-scaling-do-i-have-to-change-my-cache-name-or-access-keys"></a>Ölçeklendirdikten sonra, önbellek adı veya erişim anahtarlarımı değiştirmem gerekiyor mu?
+Hayır, bir ölçeklendirme işlemi sırasında önbellek adınız ve anahtarlarınız değiştirilmez.
 
 ### <a name="how-does-scaling-work"></a>Ölçeklendirme nasıl çalışır?
-* Olduğunda bir **temel** önbellek farklı bir boyuta ölçeklendirilir, kapandığında ve yeni bir önbellek yeni boyut kullanılarak sağlanır. Bu süre boyunca önbellek kullanılamaz duruma ve önbellekteki tüm verileri kaybolur.
-* Olduğunda bir **temel** önbellek ölçeği genişletilmiş bir **standart** önbellek, çoğaltma önbelleği sağlandığında ve veri çoğaltma önbelleğe birincil önbellekteki kopyalanır. Önbellek ölçeklendirme işlemi sırasında kullanılabilir durumda kalır.
-* Olduğunda bir **standart** başka bir boyutu veya için önbellek ölçeklendirilmiş bir **Premium** önbellek, çoğaltmalarından birini kapatılır ve yeni boyut ve üzerinden aktarılan veriler, ardından başka bir çoğaltma için sağlama silinmeden önce kullanılması, benzer önbellek düğümlerinden birinin hata sırasında gerçekleşen işlem için bir yük devretme gerçekleştirir.
+* **Temel** bir önbellek farklı bir boyuta ölçeklenirse, kapanır ve yeni bir önbellek yeni boyut kullanılarak sağlanır. Bu süre boyunca önbellek kullanılamaz ve önbellekteki tüm veriler kaybolur.
+* **Temel** bir önbellek **Standart** bir önbelleğe ölçeklenirse, bir çoğaltma önbelleği sağlanır ve veriler birincil önbellekten çoğaltma önbelleğine kopyalanır. Önbellek ölçeklendirme işlemi sırasında kullanılabilir kalır.
+* **Standart** bir önbellek farklı bir boyuta veya **Premium** bir önbelleğe ölçeklendiğinde, çoğaltmalardan biri kapatılır ve yeni boyut ve üzerinden aktarılan veriler için yeniden sağlanmış olur ve daha sonra, başka bir çoğaltma, yeniden sağlanmadan önce bir yük devretme gerçekleştirir ve bu işlem, önbellek düğümlerinden birinin başarısızlığı sırasında oluşan işleme benzer.
 
-### <a name="will-i-lose-data-from-my-cache-during-scaling"></a>My önbellekten ölçeklendirme sırasında miyim veriyi kaybedeceksiniz?
-* Olduğunda bir **temel** önbellek yeni bir boyuta ölçeklendirilir, tüm veriler kaybolur ve önbellek ölçeklendirme işlemi sırasında kullanılamaz.
-* Olduğunda bir **temel** önbellek ölçeği genişletilmiş bir **standart** önbellek, önbellekteki verilerin genellikle korunur.
-* Olduğunda bir **standart** daha büyük bir boyut veya katmanı önbellek ölçeği veya **Premium** önbellek daha büyük bir boyuta ölçeklendirilir, tüm veriler genellikle korunur. Ölçeklendirme bir **standart** veya **Premium** veri daha küçük bir boyut gösteriyor önbellek için yeni boyut ölçeklendiğinde ilgili önbellekte ne kadar veri olduğuna bağlı olarak kayıp. Veri ölçeği azaltma sırasında kaybolsa bile anahtarları kullanarak çıkarılan [allkeys lru](https://redis.io/topics/lru-cache) çıkarma ilkesi. 
+### <a name="will-i-lose-data-from-my-cache-during-scaling"></a>Ölçeklendirme sırasında önbelleğim verileri kaybedecek mıyım?
+* **Temel** bir önbellek yeni bir boyuta ölçeklenirken, tüm veriler kaybedilir ve ölçekleme işlemi sırasında önbellek kullanılamaz.
+* **Temel** bir önbellek **Standart** bir önbelleğe ölçeklenirse, önbellekteki veriler genellikle korunur.
+* **Standart** önbellek daha büyük bir boyuta veya katmana ölçeklendirildiğinde veya **Premium** önbellek daha büyük bir boyuta ölçeklenirse, tüm veriler genellikle korunur. **Standart** veya **Premium** bir önbelleğin boyutunu daha küçük bir boyuta ölçeklendirirken veriler, ölçeklendiği sırada yeni boyutla ilgili önbellekte ne kadar veri olduğunu kaybetmiş olabilir. Ölçeği azaltma sırasında veriler kaybolursa, anahtarlar [AllKeys-LRU](https://redis.io/topics/lru-cache) çıkarma ilkesi kullanılarak kaldırılır. 
 
-### <a name="is-my-custom-databases-setting-affected-during-scaling"></a>My özel veritabanlarını ölçeklendirme sırasında etkilenen ayarlıyor?
-Özel bir değer için yapılandırılmışsa `databases` önbellek oluşturma işlemi sırasında ayarlama, bazı fiyatlandırma katmanlarını etkilenebileceğini sahip farklı [veritabanları sınırları](cache-configure.md#databases). Bu senaryoda ölçeklerken bazı noktalar şunlardır:
+### <a name="is-my-custom-databases-setting-affected-during-scaling"></a>Özel Veritabanlarım, ölçekleme sırasında etkileniyor mu?
+Önbellek oluşturma sırasında `databases` ayarı için özel bir değer yapılandırdıysanız, bazı fiyatlandırma katmanlarının farklı [veritabanı sınırlarına](cache-configure.md#databases)sahip olduğunu aklınızda bulundurun. Bu senaryoda ölçeklendirilirken bazı konular aşağıda verilmiştir:
 
-* Bir fiyatlandırma katmanına düşük ile ölçeklendirme `databases` geçerli katmanı sınırından:
-  * Varsayılan sayısını kullanıyorsanız `databases`16 tüm fiyatlandırma katmanlarına yönelik olan, veri kaybedilmez.
-  * Özel bir dizi kullanıyorsanız `databases` için ölçekleme, bu katman için sınırlar içinde kalan `databases` ayarı korunur ve veri kaybedilmez.
-  * Özel bir dizi kullanıyorsanız `databases` , yeni katmanı limitlerini `databases` ayarı yeni katman sınırlarına kadar değerin ve kaldırılan veritabanlarındaki tüm veriler kaybolur.
-* Aynı veya daha yüksek bir fiyatlandırma katmanına ölçeklendirme `databases` geçerli katmanı sınırından, `databases` ayarı korunur ve veri kaybedilmez.
+* Geçerli katmandan daha düşük bir `databases` sınırı olan bir fiyatlandırma katmanına ölçeklendirirken:
+  * Tüm fiyatlandırma katmanları için 16 olan varsayılan `databases`sayısını kullanıyorsanız, hiçbir veri kaybolmaz.
+  * Ölçeklendirilen katmana yönelik limitlerde yer alan özel sayıda `databases` kullanıyorsanız, bu `databases` ayarı korunur ve hiçbir veri kaybolmaz.
+  * Yeni katmanın sınırlarını aşan özel sayıda `databases` kullanıyorsanız, `databases` ayarı yeni katmanın sınırlarına indirgenmiştir ve kaldırılan veritabanlarındaki tüm veriler kaybolur.
+* Geçerli katmana göre aynı veya daha yüksek `databases` bir fiyatlandırma katmanına ölçeklendirirken, `databases` ayarınız korunur ve hiçbir veri kaybolmaz.
 
-Standart ve Premium önbellekler kullanılabilirlik için % 99,9 SLA olsa da, veri kaybı için SLA yoktur.
+Standart ve Premium önbellekler kullanılabilirlik için% 99,9 SLA 'ya sahip olsa da veri kaybı için SLA yoktur.
 
-### <a name="will-my-cache-be-available-during-scaling"></a>Önbelleğimin ölçeklendirme sırasında kullanıma sunulacak?
-* **Standart** ve **Premium** önbellekler kullanılabilir olmaya devam eder bir ölçeklendirme işlemi sırasında. Ancak, bağlantı blips, standart ve Premium önbellekler ölçeklendirme sırasında ve ayrıca da temel katmandan standart önbellekler için ölçeklendirme sırasında ortaya çıkabilir. Bu bağlantı blips küçük olmaları beklenir ve redis istemcilerinin kendi anında yeniden bağlantı görüyor olmalısınız.
-* **Temel** önbellekler çevrimdışı işlemleri farklı bir boyuta ölçeklendirme sırasında. Temel önbellekler kullanılabilir olmaya devam eder gelen ölçeklerken **temel** için **standart** ancak küçük bağlantı blip karşılaşabilirsiniz. Bir bağlantı blip ortaya çıkarsa, redis istemcilerinin kendi anında yeniden bağlantı mümkün olması gerekir.
-
-
-### <a name="scaling-limitations-with-geo-replication"></a>Coğrafi çoğaltma ile ölçekleme sınırlamaları
-
-Artık iki önbellekler arasında coğrafi çoğaltma bağlantı ekledikten sonra bir ölçeklendirme işlemi başlatabilir ya da bir kümedeki parça sayısını değiştirmek mümkün olmayacak. Bu komutları için önbellek bağlantısını kaldırmanız gerekir. Daha fazla bilgi için [yapılandırma coğrafi çoğaltma](cache-how-to-geo-replication.md).
+### <a name="will-my-cache-be-available-during-scaling"></a>Önbelleğim ölçekleme sırasında kullanılabilir olacak mı?
+* Ölçek işlemi sırasında **Standart** ve **Premium** önbellekler kullanılabilir durumda kalır. Ancak, standart ve Premium önbellekler ölçeklendirilirken ve ayrıca temel ve standart önbelleklere ölçeklendirilirken bağlantı sinyalleri 'ler meydana gelebilir. Bu bağlantı bliclarının küçük ve redsıs istemcilerinin, bağlantısını anında ayarlayabilmeleri gerekir.
+* **Temel** önbellekler, ölçeklendirme işlemleri sırasında farklı bir boyuta göre çevrimdışı. Temel önbellekler **temel** ve **Standart** arasında ölçeklendirilirken kullanılabilir olmaya devam eder ancak küçük bir bağlantı BLIP ile karşılaşabilir. Bir bağlantı Blip oluşması durumunda, redsıs istemcilerinin, bağlantısını anında yeniden kurabilmesi gerekir.
 
 
-### <a name="operations-that-are-not-supported"></a>Desteklenmeyen işlemleri
-* Daha yüksek bir fiyatlandırma Katmanı'ndan daha düşük bir fiyatlandırma katmanına ölçeklendirilemez.
-  * Ölçek genişletilemiyor bir **Premium** aşağı önbelleğe bir **standart** veya **temel** önbellek.
-  * Ölçek genişletilemiyor bir **standart** aşağı önbelleğe bir **temel** önbellek.
-* Değerine ölçeklendirme bir **temel** için önbellek bir **standart** önbellek ancak değiştiremez boyutu aynı anda. Başka bir boyutu gerekiyorsa, istediğiniz boyuta izleyen bir ölçeklendirme işlemi yapabilirsiniz.
-* Ölçek genişletilemiyor bir **temel** doğrudan önbelleğe bir **Premium** önbellek. İlk ölçeklendirme **temel** için **standart** bir ölçeklendirme işlemi ve ölçek kümesinden **standart** için **Premium** sonraki işlem.
-* Büyük bir değerden aşağı ölçeklendirilemez **C0 (250 MB)** boyutu.
+### <a name="scaling-limitations-with-geo-replication"></a>Coğrafi çoğaltma ile ölçeklendirme sınırlamaları
 
-Bir ölçeklendirme işlemi başarısız olursa hizmeti işlemi geri almak çalışır ve önbelleği özgün durumuna geri döner.
+İki önbellek arasında coğrafi çoğaltma bağlantısı ekledikten sonra bir ölçeklendirme işlemi başlatamaz veya bir kümedeki parça sayısını değiştiremeyeceksiniz. Bu komutları vermek için önbelleğin bağlantısını kaldırmanız gerekir. Daha fazla bilgi için bkz. [Coğrafi çoğaltmayı yapılandırma](cache-how-to-geo-replication.md).
 
 
-### <a name="how-long-does-scaling-take"></a>Nasıl ölçekleme kadar sürer?
-Yaklaşık 20 önbellekte ne kadar veri olduğuna bağlı olarak dakika sürer ölçeklendirilmesi.
+### <a name="operations-that-are-not-supported"></a>Desteklenmeyen işlemler
+* Daha yüksek bir fiyatlandırma katmanından daha düşük bir fiyatlandırma katmanına ölçeklendiremez.
+  * **Premium** önbellekten bir **Standart** veya **temel** önbelleğe ölçeklendiremez.
+  * **Standart** bir önbellekten, **temel** bir önbellekten ölçeklendiremez.
+* **Temel** bir önbellekten **Standart** bir önbelleğe ölçeklendirebilirsiniz, ancak aynı anda boyutu değiştiremezsiniz. Farklı bir boyuta ihtiyacınız varsa, sonraki ölçekleme işlemini istenen boyuta getirebilirsiniz.
+* **Temel** önbellekten doğrudan **Premium** önbelleğe ölçeklendiremez. İlk olarak, tek bir ölçeklendirme işleminde **temel** ve **Standart** arasında ölçeklendirin ve sonraki bir işlemde **Standart** 'dan **Premium** 'a ölçeklendirin.
+* Daha büyük bir boyuttan **C0 (250 MB)** boyutuna kadar ölçeklendiremez.
 
-### <a name="how-can-i-tell-when-scaling-is-complete"></a>Ölçeklendirme tamamlandığında nasıl anlayabilirim?
-Azure portalında bir ölçeklendirme işlemi sürüyor görebilirsiniz. Ölçeklendirme tamamlandığında, önbellek durumu değişerek **çalıştıran**.
+Bir ölçeklendirme işlemi başarısız olursa, hizmet işlemi döndürmeye çalışır ve önbellek özgün boyutuna döndürülür.
+
+
+### <a name="how-long-does-scaling-take"></a>Ölçeklendirme ne kadar sürer?
+Önbellekte ne kadar veri olduğuna bağlı olarak ölçekleme yaklaşık 20 dakika sürer.
+
+### <a name="how-can-i-tell-when-scaling-is-complete"></a>Ölçeklendirmenin tamamlandığını nasıl anlayabilirim?
+Azure portal ölçeklendirme işleminin devam ettiğini görebilirsiniz. Ölçeklendirme tamamlandığında, önbelleğin durumu **çalışıyor**olarak değişir.
 
 <!-- IMAGES -->
 

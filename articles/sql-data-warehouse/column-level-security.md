@@ -1,30 +1,31 @@
 ---
-title: Azure SQL veri ambarı sütun düzeyinde güvenlik | Microsoft Docs
-description: Sütun düzeyi güvenlik (CLS), kullanıcının yürütme bağlamı veya grup üyeliklerini temel veritabanı tablo sütunları erişimi denetlemek müşterilerin sağlar. Tasarım ve uygulama güvenlik kodlama CLS basitleştirir. CLS sütun erişim kısıtlamaları uygulamak sağlar.
+title: Sütun düzeyi güvenlik
+description: Sütun düzeyinde güvenlik (CLS), müşterilerin, Kullanıcı yürütme bağlamına veya grup üyeliğine göre veritabanı tablo sütunlarına erişimi denetlemesine olanak sağlar. CLS, uygulamanızdaki güvenliğin tasarımını ve kodlamasını basitleştirir. CLS, sütun erişimi üzerinde kısıtlamalar uygulamanıza olanak sağlar.
 services: sql-data-warehouse
-author: KavithaJonnakuti
+author: julieMSFT
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
 ms.subservice: security
 ms.date: 04/02/2019
-ms.author: kavithaj
+ms.author: jrasnick
 ms.reviewer: igorstan, carlrab
-ms.openlocfilehash: aa91bd586e064239d0e05c754427947963c9ee3a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 85f705022a0ff5970d30c61206d4f2631254b7ce
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61082819"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74077099"
 ---
 # <a name="column-level-security"></a>Sütun düzeyinde güvenlik
-Sütun düzeyi güvenlik (CLS), kullanıcının yürütme bağlamı veya grup üyeliklerini temel veritabanı tablo sütunları erişimi denetlemek müşterilerin sağlar.
-
+Sütun düzeyinde güvenlik (CLS), müşterilerin, Kullanıcı yürütme bağlamına veya grup üyeliğine göre veritabanı tablo sütunlarına erişimi denetlemesine olanak sağlar.
+Aşağıdaki videoya Güncelleştir-Bu videonun gönderildiği [satır düzeyi güvenlik](/sql/relational-databases/security/row-level-security?toc=%2Fazure%2Fsql-data-warehouse%2Ftoc&view=sql-server-2017) , SQL Data Warehouse 'da da kullanılabilir. 
 > [!VIDEO https://www.youtube.com/embed/OU_ESg0g8r8]
 
-Tasarım ve uygulama güvenlik kodlama CLS basitleştirir. CLS, hassas verileri korumak için sütun erişim kısıtlamaları uygulamak sağlar. Örneğin, belirli kullanıcılara yalnızca belirli departmanı için uygun bir tablonun sütunlarını eriştiğinden emin olun. Veritabanı katmanı bulunur yerine koy verileri başka bir uygulama katmanı kullanarak erişimi kısıtlama mantığı. Veri erişimini herhangi bir katmanı denenir her zaman veritabanına erişim kısıtlamalarını uygular. Bu kısıtlama, genel güvenlik sistem'ın yüzey alanını azaltarak daha güvenli ve sağlam güvenlik sağlar. Ayrıca, CLS Ayrıca kullanıcıların erişim kısıtlamalarını izlenmesi için sütunları filtrelemek için görünümler tanıtımı için ihtiyacını ortadan kaldırır.
+CLS, uygulamanızdaki güvenliğin tasarımını ve kodlamasını basitleştirir. CLS, hassas verileri korumak için sütun erişimiyle ilgili kısıtlamalar uygulamanıza olanak sağlar. Örneğin, belirli kullanıcıların departmanıyla ilgili bir tablonun yalnızca belirli sütunlarına erişebilmesini sağlama. Erişim kısıtlama mantığı, başka bir uygulama katmanındaki verilerden uzakta değil, veritabanı katmanında bulunur. Veri erişimi herhangi bir katmandan her denendiğinde, veritabanı erişim kısıtlamalarını uygular. Bu kısıtlama, genel güvenlik sisteminizin yüzey alanını azaltarak güvenlik sisteminizi daha güvenilir ve sağlam hale getirir. Ayrıca, CLS, kullanıcıların erişim kısıtlamalarını kullanıcılara sağlamak için sütunları filtrelemeye yönelik görüntüleme gereksinimini ortadan kaldırır.
 
-CLS ile uygulayabileceğine [GRANT](https://docs.microsoft.com/sql/t-sql/statements/grant-transact-sql) T-SQL deyimi. Bu mekanizma ile hem SQL hem de Azure Active Directory (AAD) kimlik doğrulaması desteklenir.
+[Ver](https://docs.microsoft.com/sql/t-sql/statements/grant-transact-sql) T-SQL ifadesiyle CLS 'yi uygulayabilirsiniz. Bu mekanizmaya, hem SQL hem de Azure Active Directory (AAD) kimlik doğrulaması desteklenir.
 
 ![CLS](./media/column-level-security/cls.png)
 
@@ -47,9 +48,9 @@ GRANT <permission> [ ,...n ] ON
 ```
 
 ## <a name="example"></a>Örnek
-Aşağıdaki örnek, 'TestUser', 'Üyelik' tablosunun 'SSN' sütunu erişimini kısıtlamak gösterilmektedir:
+Aşağıdaki örnek, ' TestUser ' tablosunun ' SSK ' sütununa erişimini nasıl kısıtlayabileceğini gösterir:
 
-Sosyal Güvenlik numaraları depolamak için kullanılan SSN sütunuyla 'Üyelik' tablo oluşturun:
+Sosyal güvenlik numaralarını depolamak için kullanılan SSK sütunuyla ' Membership ' tablosu oluşturun:
 
 ```sql
 CREATE TABLE Membership
@@ -61,13 +62,13 @@ CREATE TABLE Membership
    Email varchar(100) NULL);
 ```
 
-'TestUser' izin hassas veriler içeren SSN sütun dışındaki tüm sütunları erişmek için:
+' TestUser ' öğesine, gizli verileri olan SSCOLUMN hariç tüm sütunlara erişmesine izin ver:
 
 ```sql
 GRANT SELECT ON Membership(MemberID, FirstName, LastName, Phone, Email) TO TestUser;
 ```
 
-'TestUser' SSN sütun içeriyorlarsa başarısız olacağından yürütülen sorgular:
+' TestUser ' olarak yürütülen sorgular, SSN sütununu içeriyorsa başarısız olur:
 
 ```sql
 SELECT * FROM Membership;
@@ -76,7 +77,7 @@ Msg 230, Level 14, State 1, Line 12
 The SELECT permission was denied on the column 'SSN' of the object 'Membership', database 'CLS_TestDW', schema 'dbo'.
 ```
 
-## <a name="use-cases"></a>Kullanım örnekleri
-CLS bugün nasıl kullanıldığını ilişkin bazı örnekler:
-- Finansal hizmet şirketi yalnızca hesap yöneticileri müşteri sosyal güvenlik numarası (SSN), telefon numaraları ve diğer kişisel bilgileri (PII) erişmesini sağlar.
-- Sağlık Hizmetleri Sağlayıcısı yalnızca Doktorlar ve nurses fatura departmanı üyeleri sağlanmıyor hassas sağlık kayıtlarına erişim sağlamak bu verileri görüntüleme olanak sağlar.
+## <a name="use-cases"></a>Kullanım Örnekleri
+Şu anda CLS 'nin nasıl kullanıldığı hakkında bazı örnekler:
+- Finans hizmetleri firması, yalnızca hesap yöneticilerinin müşteri sosyal güvenlik numaralarına (SSN), telefon numaralarına ve diğer kişisel olarak tanımlanabilen bilgilere (PII) erişmesine izin verir.
+- Sağlık hizmetleri sağlayıcısı, yalnızca doktorlarla ve nur'lerin, faturalandırma departmanı üyelerinin bu verileri görüntülemesine izin vermeyerek gizli tıbbi kayıtlarına erişmesine izin verir.

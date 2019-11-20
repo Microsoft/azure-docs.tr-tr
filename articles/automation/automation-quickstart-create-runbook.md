@@ -9,12 +9,12 @@ ms.topic: quickstart
 ms.service: automation
 ms.subservice: process-automation
 ms.custom: mvc
-ms.openlocfilehash: 2f6dcbba8da314798b2e8de12a9fc5bf55f67a4a
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 2cbb37b4e93468a42335f40a19baf4c742cb6dbb
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60738663"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71098617"
 ---
 # <a name="create-an-azure-automation-runbook"></a>Azure Otomasyonu runbook'u oluşturma
 
@@ -24,7 +24,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir Azure hesabı](https:
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
-https://portal.azure.com adresinden Azure'da oturum açın
+[https://portal.azure.com](https://portal.azure.com ) adresinden Azure'da oturum açın
 
 ## <a name="create-runbook"></a>Runbook oluşturma
 
@@ -34,9 +34,9 @@ https://portal.azure.com adresinden Azure'da oturum açın
 
 1. **SÜREÇ OTOMASYONU**'nın altındaki **Runbook'lar** öğesine tıklayın. Runbook'ların listesi görüntülenir.
 
-1. Listenin en üstünde yer alan **Runbook ekle** düğmesine tıklayın. **Runbook ekle** sayfasında **Hızlı Oluştur**'u seçin.
+1. Listenin en üstünde bulunan **runbook oluştur** düğmesine tıklayın
 
-1. Runbook **Ad** değeri için "Hello-World" girip **Runbook türü** olarak **PowerShell**'i seçin. **Oluştur**’a tıklayın.
+1. Runbook **Ad** değeri için "Hello-World" girip **Runbook türü** olarak **PowerShell**'i seçin. **Oluştur**'a tıklayın.
 
    ![Otomasyon runbook'unuz hakkındaki bilgileri sayfaya girin](./media/automation-quickstart-create-runbook/automation-create-runbook-configure.png)
 
@@ -45,7 +45,7 @@ https://portal.azure.com adresinden Azure'da oturum açın
     ![Runbook düzenleyicisinde PowerShell betiğini yazma](./media/automation-quickstart-create-runbook/automation-edit-runbook-empty.png)
 
 1. Aşağıdaki kodu düzenleme bölmesine yazın veya kopyalayıp yapıştırın. "Name" adına ve "World" varsayılan değerine sahip isteğe bağlı bir giriş parametresi oluşturur ve bu giriş değerini kullanan bir dize çıktısı verir:
-   
+
    ```powershell-interactive
    param
    (
@@ -102,4 +102,3 @@ Bu hızlı başlangıçta bir runbook oluşturdunuz, düzenlediniz, test ettiniz
 
 > [!div class="nextstepaction"]
 > [Otomasyon ile Nasıl Yapılır? - Runbook Türleri](./automation-runbook-types.md)
-

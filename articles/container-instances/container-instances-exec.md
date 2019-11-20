@@ -1,38 +1,39 @@
 ---
-title: Azure Container Instances'da kapsayıcı çalıştırma komutları yürütün.
-description: Bilgi nasıl Azure Container Instances'da çalışmakta olan bir kapsayıcıdaki bir komut yürütün
+title: Azure Container Instances içinde çalışan kapsayıcılarda komutları yürütme
+description: Azure Container Instances ' de çalışmakta olan bir kapsayıcıda bir komutu nasıl yürütebileceğinizi öğrenin
 services: container-instances
 author: dlepow
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
 ms.date: 03/30/2018
 ms.author: danlep
-ms.openlocfilehash: 577e2386c352798bc21a2c78b22726128ac7cf0a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a8583cf605891631a2bce6914b24525aebd59ea0
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60579755"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68325991"
 ---
-# <a name="execute-a-command-in-a-running-azure-container-instance"></a>Bir çalışan Azure container Instance üzerinde bir komut yürütün
+# <a name="execute-a-command-in-a-running-azure-container-instance"></a>Çalışan bir Azure Container Instance 'da bir komut yürütün
 
-Azure Container Instances, çalışan bir kapsayıcıda bir komutun yürütülmesini destekler. Zaten başlatılmış bir kapsayıcıda çalıştırarak uygulama geliştirme ve sorun giderme sırasında özellikle yardımcı olur. Bu özelliğin en yaygın kullanımı bir çalışmakta olan kapsayıcıyı sorunları hatalarını ayıklayabilir, etkileşimli bir kabuk başlatılmasıdır.
+Azure Container Instances, çalışan bir kapsayıcıda bir komutun yürütülmesini destekler. Zaten başlattığınız kapsayıcıda bir komutun çalıştırılması, özellikle uygulama geliştirme ve sorun giderme işlemleri sırasında yararlıdır. Bu özelliğin en yaygın kullanımı, çalışan bir kapsayıcıdaki sorunları ayıklayabilmeniz için etkileşimli bir kabuk başlatma.
 
-## <a name="run-a-command-with-azure-cli"></a>Azure CLI ile bir komut çalıştırın
+## <a name="run-a-command-with-azure-cli"></a>Azure CLı ile bir komut çalıştırma
 
-İle çalışan bir kapsayıcıdaki bir komut yürütün [az container exec] [ az-container-exec] içinde [Azure CLI][azure-cli]:
+[Azure CLI][azure-cli]'de [az Container exec][az-container-exec] ile çalışan bir kapsayıcıda bir komut yürütün:
 
 ```azurecli
 az container exec --resource-group <group-name> --name <container-group-name> --exec-command "<command>"
 ```
 
-Örneğin, bir Bash kabuğunda Ngınx kapsayıcısı başlatmak için şunu yazın:
+Örneğin, bir NGINX kapsayıcısında bash kabuğu başlatmak için:
 
 ```azurecli
 az container exec --resource-group myResourceGroup --name mynginx --exec-command "/bin/bash"
 ```
 
-Aşağıdaki örnek çıktıda bir terminalde sağlayan bir çalışan Linux kapsayıcısı içinde Bash kabuğunu başlatılan `ls` çalıştırılır:
+Aşağıdaki örnek çıktıda, bash kabuğu çalışan bir Linux kapsayıcısında başlatılır ve içinde `ls` yürütülen bir Terminal sağlanır:
 
 ```console
 $ az container exec --resource-group myResourceGroup --name mynginx --exec-command "/bin/bash"
@@ -44,7 +45,7 @@ exit
 Bye.
 ```
 
-Bu örnekte, bir çalışan Nanoserver kapsayıcıda komut istemi başlatılır:
+Bu örnekte, komut Istemi çalışan bir Nanoserver kapsayıcısında başlatılır:
 
 ```console
 $ az container exec --resource-group myResourceGroup --name myiis --exec-command "cmd.exe"
@@ -74,9 +75,9 @@ Bye.
 
 ## <a name="multi-container-groups"></a>Birden çok kapsayıcılı gruplar
 
-Varsa, [kapsayıcı grubu](container-instances-container-groups.md) komutu çalıştırmak için kapsayıcının adını belirtin, bir uygulama kapsayıcısı ve günlüğe kaydetme sepet, gibi birden çok kapsayıcı `--container-name`.
+[Kapsayıcı grubunuz](container-instances-container-groups.md) , uygulama kapsayıcısı ve günlük arabası gibi birden çok kapsayıcıyla, komutun `--container-name`çalıştırılacağı kapsayıcının adını belirtin.
 
-Örneğin, kapsayıcı grubundaki *mynginx* iki kapsayıcı *ngınx uygulamasını* ve *Günlükçü*. Üzerinde bir Shell'i başlatmak için *ngınx uygulamasını* kapsayıcı:
+Örneğin, *myngınx* kapsayıcı grubunda iki kapsayıcı, *NGINX-App* ve *günlükçü*vardır. *NGINX-uygulama* kapsayıcısında bir kabuğu başlatmak için:
 
 ```azurecli
 az container exec --resource-group myResourceGroup --name mynginx --container-name nginx-app --exec-command "/bin/bash"
@@ -84,11 +85,11 @@ az container exec --resource-group myResourceGroup --name mynginx --container-na
 
 ## <a name="restrictions"></a>Kısıtlamalar
 
-Azure Container Instances şu anda destekleyen tek bir işlem başlatma [az container exec][az-container-exec], ve komut satırı bağımsız değişkenlerini geçirilemez. Örneğin, komutları gibi zincirleme yükleyemezsiniz `sh -c "echo FOO && echo BAR"`, veya yürütme `echo FOO`.
+Azure Container Instances Şu anda [az Container exec][az-container-exec]ile tek bir işlem başlatmayı destekler ve komut bağımsız değişkenlerini geçiremezsiniz. Örneğin, `sh -c "echo FOO && echo BAR"` `echo FOO`veya gibi komutları zincirlenemez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Diğer sorun giderme araçları ve sık karşılaşılan dağıtım sorunlarını hakkında [Azure Container ınstances'da kapsayıcı ve dağıtım sorunlarını giderme](container-instances-troubleshooting.md).
+[Azure Container Instances 'de kapsayıcı ve dağıtım sorunlarını gidermeye yönelik](container-instances-troubleshooting.md)diğer sorun giderme araçları ve yaygın dağıtım sorunları hakkında bilgi edinin.
 
 <!-- LINKS - internal -->
 [az-container-create]: /cli/azure/container#az-container-create

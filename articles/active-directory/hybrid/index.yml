@@ -1,65 +1,81 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Hibrit kimlik belgeleri
+summary: Microsoft’un kimlik çözümleri şirket içi ve bulut tabanlı çözümleri birleştirerek konumdan bağımsız olarak tüm kaynaklara kimlik doğrulaması ve yetkilendirme sağlamak üzere tek bir kullanıcı kimliği oluşturur. Buna hibrit kimlik denir.
 metadata:
-  document_id: 44409b3f-ab8c-053d-cdf4-5d7e823a275e
-  title: Hibrit kimlik belgeleri
-  description: 'Azure AD Connect, şirket içi dizinlerinizi Azure Active Directory ile tümleştirir. Bu sayede kullanıcılarınıza Azure AD ile tümleşik Office 365, Azure ve SaaS uygulamaları için ortak bir kimlik sağlayabilirsiniz.'
-  services: active-directory
   author: billmath
+  description: Azure AD Connect, şirket içi dizinlerinizi Azure Active Directory ile tümleştirir. Bu sayede kullanıcılarınıza Azure AD ile tümleşik Office 365, Azure ve SaaS uygulamaları için ortak bir kimlik sağlayabilirsiniz.
   manager: daveba
-  ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
-  ms.topic: landing-page
-  ms.date: 05/18/2018
   ms.author: billmath
-abstract:
-  description: 'Microsoft’un kimlik çözümleri şirket içi ve bulut tabanlı çözümleri birleştirerek konumdan bağımsız olarak tüm kaynaklara kimlik doğrulaması ve yetkilendirme sağlamak üzere tek bir kullanıcı kimliği oluşturur. Buna hibrit kimlik denir.</br></br></br>Azure AD Connect, şirket içi dizinlerinizi Azure Active Directory ile tümleştirir. Bu sayede kullanıcılarınıza Azure AD ile tümleşik Office 365, Azure ve SaaS uygulamaları için ortak bir kimlik sağlayabilirsiniz. Planlama, dağıtım ve işlem adımları sırasında sizi yönlendirmesi için bu konu başlığından faydalanabilirsiniz. Bu alanla ilgili konu başlıklarına yönelik bağlantılar mevcuttur.'
-  aside:
-    image:
-      alt: channel 9 videosu
-      height: 110
-      src: media/index/video2.png
-      width: 250
-    title: 'Şirket içi dizinleri buluta genişletin (1:11:12)'
-    href: 'https://channel9.msdn.com/Events/Ignite/2015/BRK3862/player'
-    width: 250
-sections:
-  - title: Adım adım öğreticiler
-    items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/active-directory/hybrid/tutorial-password-hash-sync
-            html: <p>Parola karması eşitlemeyi kullanarak kimliklerinizi buluta genişletmeye nasıl başlayacağınızı öğrenme</p>
-            image:
-              alt: parola karması eşitleme
-              src: media/index/azuread2.png
-            title: Parola karması eşitleme (PHS) kullanarak tek bir AD ormanında tümleştirme
-          - href: /azure/active-directory/hybrid/tutorial-passthrough-authentication
-            html: <p>Geçişli kimlik doğrulaması kullanarak kimliklerinizi buluta genişletmeye nasıl başlayacağınızı öğrenin.</p>
-            image:
-              alt: doğrudan kimlik doğrulama
-              src: media/index/manage2.png
-            title: Geçişli kimlik doğrulaması (PTA) kullanarak tek bir AD ormanında tümleştirme
-          - href: /azure/active-directory/hybrid/tutorial-federation
-            html: <p>Şirket içi Active Directory Federasyon Hizmetleri (AD FS) ve Azure AD ile Azure Active Directory (Azure AD) Connect’i federasyona eklemeyi öğrenin.</p>
-            image:
-              alt: federasyon
-              src: media/index/federate2.png
-            title: Federasyon kullanarak tek bir AD ormanında tümleştirme
-  - title: Nasıl Yapılır Kılavuzları
-    items:
-      - type: paragraph
-        text: Hibrit kimlik için çeşitli görevleri gerçekleştirmeyi öğrenme
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/hybrid/how-to-connect-install-custom">Azure AD Connect’i hibrit kimlik ortamınıza yükleme</a>
-          - html: <a href="/azure/active-directory/hybrid/how-to-connect-sso">Azure AD Connect ile sorunsuz bir şekilde çoklu oturum açma</a>
-          - html: <a href="/azure/active-directory/hybrid/how-to-connect-install-prerequisites">Azure AD Connect önkoşulları</a>
-          - html: <a href="/azure/active-directory/hybrid/reference-connect-version-history">Azure AD Connect sürüm yayınlama geçmişi</a>
-          - html: <a href="/azure/active-directory/hybrid/how-to-connect-sync-feature-scheduler">Azure AD Connect Eşitleme zamanlayıcısını yönetme</a>
+  ms.collection: na
+  ms.date: 08/15/2019
+  ms.service: active-directory
+  ms.subservice: na
+  ms.topic: landing-page
+  services: active-directory
+  ms.openlocfilehash: fa9007d0e9ad59ee0ffb29fe1c5c74c8530d84fa
+  ms.sourcegitcommit: 19a821fc95da830437873d9d8e6626ffc5e0e9d6
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/29/2019
+  ms.locfileid: "70162191"
+landingContent:
+- title: Hibrit Kimlik hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Hibrit kimlik nedir?
+      url: whatis-hybrid-identity.md
+- title: Kullanıcılarınızın ve gruplarınızın yaşam döngüsünü yönetmek için en iyi çözümü belirleme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD Connect ve Connect Health nedir?
+      url: whatis-azure-ad-connect.md
+  - linkListType: tutorial
+    links:
+    - text: Parola karması eşitleme (PHS) kullanarak tek bir AD ormanında tümleştirme
+      url: tutorial-password-hash-sync.md
+    - text: Geçişli kimlik doğrulaması (PTA) kullanarak tek bir AD ormanında tümleştirme
+      url: tutorial-passthrough-authentication.md
+    - text: Federasyon kullanarak tek bir AD ormanında tümleştirme
+      url: tutorial-federation.md
+- title: Kuruluşunuz için en uygun kimlik doğrulama yöntemini seçme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Parola karması eşitleme nedir?
+      url: whatis-phs.md
+    - text: Geçişli kimlik doğrulaması nedir?
+      url: how-to-connect-pta.md
+    - text: Federasyon nedir?
+      url: whatis-fed.md
+    - text: Çoklu oturum açma nedir?
+      url: how-to-connect-sso.md
+  - linkListType: concept
+    links:
+    - text: Hangi kimlik doğrulama yönteminin sizin için uygun olduğunu belirleme
+      url: /azure/security/fundamentals/choose-ad-authn
+- title: Karma kimlik ile çalışmaya başlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD Connect’i hızlı ayarlar ile yükleme
+      url: how-to-connect-install-express.md
+    - text: Azure AD Connect’i özel ayarlar ile yükleme
+      url: how-to-connect-install-custom.md
+    - text: AD DS Bağlayıcı hesabını yapılandırma
+      url: how-to-connect-configure-ad-ds-connector-account.md
+    - text: ADSync hizmet hesabı parolasını değiştirme
+      url: how-to-connect-sync-change-serviceacct-pass.md
+    - text: Azure AD Bağlayıcısı hesap parolasını değiştirme
+      url: how-to-connect-azureadaccount.md
+    - text: AD DS hesap parolasını değiştirme
+      url: how-to-connect-sync-change-addsacct-pass.md
+  - linkListType: reference
+    links:
+    - text: Gereken bağlantı noktaları ve protokoller
+      url: reference-connect-ports.md
+    - text: Hesaplar ve izinler
+      url: reference-connect-accounts-permissions.md
+    - text: Azure AD Connect sürüm geçmişi
+      url: reference-connect-version-history.md

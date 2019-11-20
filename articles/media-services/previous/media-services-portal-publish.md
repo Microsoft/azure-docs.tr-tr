@@ -1,6 +1,6 @@
 ---
-title: Azure portalında içerik yayımlama | Microsoft Docs
-description: Bu öğreticide Azure portalında içerik yayımlama adımlarında size kılavuzluk eder.
+title: Azure portal içerik yayımlama | Microsoft Docs
+description: Bu öğretici, Azure portal içeriğinizi yayımlama adımlarında size yol gösterir.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -14,14 +14,14 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 2639d47a6c9d8da53c9d6bccde0d317698d5d9fd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5f242018abfb15cea1b76cbcaad00942ec25d78d
+ms.sourcegitcommit: 470041c681719df2d4ee9b81c9be6104befffcea
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61127880"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "69015071"
 ---
-# <a name="publish-content-in-the-azure-portal"></a>Azure portalında içerik yayımlama  
+# <a name="publish-content-in-the-azure-portal"></a>Azure portal içerik yayımlama  
 > [!div class="op_single_selector"]
 > * [Portal](media-services-portal-publish.md)
 > * [.NET](media-services-deliver-streaming-content.md)
@@ -35,9 +35,9 @@ ms.locfileid: "61127880"
 > 
 > 
 
-Kullanıcınıza içeriğinizin akışını sağlamak veya indirmek için kullanılabilecek bir URL sağlamak üzere, önce bulucu oluşturarak varlığınızı “yayımlamanız” gerekir. Bulucular varlık dosyalara erişim imkanı sağlar. Azure Media Services iki tür bulucuyu destekler: 
+Kullanıcınıza içeriğinizin akışını sağlamak veya indirmek için kullanılabilecek bir URL sağlamak üzere, önce bulucu oluşturarak varlığınızı “yayımlamanız” gerekir. Konumlandırıcı varlık dosyalarına erişim sağlar. Azure Media Services iki tür bulucuyu destekler: 
 
-* **Akış (OnDemandOrigin) bulucuları**. Akış bulucuları, uyarlamalı akış için kullanılır. Uyarlamalı akış örnekleri HTTP (DASH, MPEG-DASH olarak da adlandırılır) üzerinden Apple HTTP canlı akış (HLS), Microsoft kesintisiz akış ve Dynamic Adaptive Streaming içerir. Akış bulucusu oluşturmak için varlığınız bir .ism dosyası içermelidir. Örneğin, http://amstest.streaming.mediaservices.windows.net/61b3da1d-96c7-489e-bd21-c5f8a7494b03/scott.ism/manifest.
+* **Akış (OnDemandOrigin) bulucuları**. Akış bulucuları, uyarlamalı akış için kullanılır. Uyarlamalı akışa örnek olarak, Apple HTTP Canlı Akışı (HLS), Microsoft Kesintisiz Akış ve HTTP üzerinden dinamik uyarlamalı akış (MPEG-DASH olarak da adlandırılır) verilebilir. Akış bulucusu oluşturmak için varlığınız bir .ism dosyası içermelidir. Örneğin: http://amstest.streaming.mediaservices.windows.net/61b3da1d-96c7-489e-bd21-c5f8a7494b03/scott.ism/manifest.
 * **Aşamalı (paylaşılan erişim imzası) bulucuları**. Aşamalı bulucular, videoları aşamalı indirme aracılığıyla sunmak için kullanılır.
 
 HLS akış URL’si oluşturmak için, URL’ye *(format=m3u8-aapl)* ekleyin.
@@ -56,14 +56,14 @@ Paylaşılan erişim imzası URL'si aşağıdaki biçime sahiptir:
 
     {blob container name}/{asset name}/{file name}/{shared access signature}
 
-Daha fazla bilgi için [içerik teslimine genel bakış](media-services-deliver-content-overview.md).
+Daha fazla bilgi için bkz. [içerik sunma genel bakış](media-services-deliver-content-overview.md).
 
 > [!NOTE]
 > Azure portalında Mart 2015 öncesinde oluşturulmuş olan bulucuların iki yıllık sona erme tarihi vardır.  
 > 
 > 
 
-Bir Bulucunun sona erme tarihini güncelleştirmek için kullanım kullanabilirsiniz bir [REST API](https://docs.microsoft.com/rest/api/media/operations/locator#update_a_locator) veya [.NET API](https://go.microsoft.com/fwlink/?LinkID=533259). 
+Bir bulucunun sona erme tarihini güncelleştirmek için, kullanımı bir [REST API](https://docs.microsoft.com/rest/api/media/operations/locator#update_a_locator) veya [.NET API 'si](https://go.microsoft.com/fwlink/?LinkID=533259)kullanabilir. 
 
 > [!NOTE]
 > Paylaşılan erişim imzası bulucunun sona erme tarihini güncelleştirdiğinizde URL değişir.
@@ -79,7 +79,7 @@ Bir Bulucunun sona erme tarihini güncelleştirmek için kullanım kullanabilirs
 
 URL **Yayımlanan URL’ler** listesine eklenir.
 
-## <a name="play-content-in-the-portal"></a>Portalda içerik oynatma
+## <a name="play-content-in-the-portal"></a>Portalda içerik yürütme
 Videonuzu Azure portalında bir içerik oynatıcıda test edebilirsiniz.
 
 Videoyu seçin ve ardından **Oynat** düğmesini seçin.
@@ -89,8 +89,8 @@ Videoyu seçin ve ardından **Oynat** düğmesini seçin.
 Bazı dikkate alınması gereken noktalar vardır:
 
 * Videonun yayımlandığından emin olun.
-* Azure portal medya oynatıcı varsayılan akış uç noktasından oynatılır. Varsayılan olmayan bir akış uç noktasından oynatmak istiyorsanız, URL'yi seçip kopyalayın ve başka bir oynatıcıya yapıştırın. Örneğin [Azure Media Player](https://amsplayer.azurewebsites.net/azuremediaplayer.html) üzerinde videonuzu test edebilirsiniz.
-* Akış akış uç noktasının çalışıyor olması gerekir.  
+* Azure portal medya oynatıcı varsayılan akış uç noktasından oynatılır. Varsayılan olmayan bir akış uç noktasından oynatmak istiyorsanız, URL'yi seçip kopyalayın ve başka bir oynatıcıya yapıştırın. Örneğin [Azure Media Player](https://aka.ms/azuremediaplayer) üzerinde videonuzu test edebilirsiniz.
+* Akış olduğunuz akış uç noktasının çalışıyor olması gerekir.  
 
 ## <a name="provide-feedback"></a>Geri bildirimde bulunma
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]

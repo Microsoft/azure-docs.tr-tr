@@ -1,7 +1,7 @@
 ---
-title: 'K-ortalamaları kümeleme: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Kümeleme modeli eğitmek için Azure Machine Learning hizmetinde K-ortalamaları kümeleme modülünü kullanmayı öğrenin.
+title: 'K-, kümeleme: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Kümeleme modellerini eğitmek için Azure Machine Learning K-anlamı kümeleme modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,137 +9,136 @@ ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
 ms.date: 05/06/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 7e9b7c8f2cf86245322679198b84b50d2c5edce8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4634519f55582a3184472d28acfd98fa849be86a
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65464662"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73497759"
 ---
-# <a name="module-k-means-clustering"></a>Modül: K Ortalamaları Kümeleme
+# <a name="module-k-means-clustering"></a>Modül: K-kümeleme anlamına gelir
 
-Bu makalede nasıl kullanılacağını *K-ortalamaları Kümeleme* deneyimsiz K-ortalamaları kümeleme modeli oluşturmak için Azure Machine Learning Studio'da modülü. 
+Bu makalede, eğitilen bir kümeleme modeli oluşturmak için Azure Machine Learning tasarımcısında (Önizleme) *k-bit kümeleme* modülünün nasıl kullanılacağı açıklanır. 
  
-K-ortalamaları, en iyi bilinen bir basit birini ve *Denetimsiz* öğrenimi algoritmaları. Algoritma makine görevler gibi çeşitli için kullanabilirsiniz: 
+K-anlamı en basit ve en *iyi bilinen öğrenme* algoritmalarından biridir. Algoritmayı çeşitli makine öğrenimi görevleri için kullanabilirsiniz, örneğin: 
 
-* [Olağan dışı veri algılama](https://msdn.microsoft.com/magazine/jj891054.aspx).
-* Kümeleme metin belgesi.
-* Başka bir sınıflandırma veya regresyon yöntemler kullanmadan önce veri kümeleri çözümleniyor. 
+* [Olağan dışı veriler algılanıyor](https://msdn.microsoft.com/magazine/jj891054.aspx).
+* Kümeleme metin belgeleri.
+* Diğer sınıflandırma veya regresyon yöntemlerini kullanmadan önce veri kümelerini çözümleme. 
 
-Bir kümeleme modeli oluşturmak için:
+Bir kümeleme modeli oluşturmak için şunları yapın:
 
-* Bu modül için denemenizi ekleyin.
-* Bir veri kümesine bağlanın.
-* Beklediğiniz, kümeleri oluşturmak için uzaklık ölçüm ve VS küme sayısı gibi parametreleri ayarlayın. 
+* Bu modülü ardışık düzene ekleyin.
+* Bir veri kümesini bağlayın.
+* Tahmin ettiğiniz küme sayısı, küme oluştururken kullanılacak mesafe ölçümü ve benzeri parametreleri ayarlayın. 
   
-Modül hiperparametreleri yapılandırdıktan sonra deneyimsiz modele bağlanmak [kümeleme modeli eğitme](train-clustering-model.md). K-ortalamaları algoritması Denetimsiz öğrenme yöntemi olduğundan, bir etiket sütun isteğe bağlıdır. 
+Modül hiper parametrelerini yapılandırdıktan sonra, eğitilen modeli [tren Kümelemesi modeline](train-clustering-model.md)bağlayın. K-anlamı algoritması, denetimli bir öğrenme yöntemi olduğundan, bir etiket sütunu isteğe bağlıdır. 
 
-+ Verilerinizi bir etiket içeriyorsa, kümelerin seçimi Kılavuzu ve model iyileştirmek için etiket değerlerini kullanabilirsiniz. 
++ Verileriniz bir etiket içeriyorsa, kümelerin seçimine kılavuzluk etmek ve modeli iyileştirmek için etiket değerlerini kullanabilirsiniz. 
 
-+ Verilerinizde herhangi bir etiket varsa, algoritma mümkün kategoriler, yalnızca verileri temel alan temsil eden kümeleri oluşturur.  
++ Verilerinizde etiket yoksa, algoritma yalnızca verileri temel alan olası kategorileri temsil eden kümeler oluşturur.  
 
-##  <a name="understand-k-means-clustering"></a>K-ortalamaları kümeleme anlama
+##  <a name="understand-k-means-clustering"></a>K-anlama, kümeleme
  
-Genel olarak, yinelemeli teknikler kullanır grubu durumlarda bir veri kümesi için benzer özelliklere sahip kümeler halinde kümelemeyi. Koruyabilmesini verilerdeki anomaliler tanımlama, veri keşfetme ve sonunda tahminleri yapmak için kullanışlıdır. Modelleri kümeleme mantıksal gözatma veya basit gözlem tarafından türettiğiniz değil DataSet ilişkileri belirlemenize de yardımcı olabilir. Bu nedenlerle, kümeleme sık makine öğrenimi görevlerini erken aşamalarında verileri araştırmak ve beklenmeyen bağıntılar bulmak için kullanılır.  
+Genellikle kümeleme, bir veri kümesindeki durumları benzer özelliklere sahip kümeler halinde gruplamak için yinelemeli teknikler kullanır. Bu gruplandırmalar, verileri keşfetmek, verilerdeki bozuklukları belirlemek ve tahmin yapmak için son olarak faydalıdır. Kümeleme modelleri Ayrıca, göz atma veya basit gözlemlemeye göre mantıksal olarak türeteceğiniz bir veri kümesindeki ilişkileri tanımlamanızı da yardımcı olabilir. Bu nedenlerden dolayı kümeleme genellikle makine öğrenimi görevlerinin erken aşamalarında kullanılır, verileri keşfeder ve beklenmeyen correlations 'ı bulur.  
   
- K-ortalamaları yöntemi kullanarak kümeleme modeli yapılandırırken, bir hedef numarası belirtmelisiniz *k* sayısını belirtir *centroids* modelde istiyor. Kütle merkezi temsilcisi her kümenin bir noktadır. K-ortalamaları algoritması küme içinde kareler toplamı en aza indirerek gelen her veri noktası kümelerden birine atar. 
+ K-Ortalamalar yöntemini kullanarak bir kümeleme modeli yapılandırdığınızda, modelde istediğiniz *centroıd* sayısını gösteren bir hedef numarası ( *k* ) belirtmeniz gerekir. Centroıd, her kümenin temsili olan bir noktasıdır. K-Ortalamalar algoritması, her bir gelen veri noktasını kümelerden birine atar ve bu da kare içi Karelerin toplamını en aza indirir. 
  
-Eğitim verileri işlediğinde, K-ortalamaları algoritması rastgele seçilen centroids başlangıç kümesi ile başlar. Centroids noktaları kümeler için başlangıç olarak görev yapar ve bunlar Lloyd'ın algoritması çalıştırmalarınızı konumlarına iyileştirmek için geçerlidir. K-ortalamaları algoritması oluşturmak ve bir veya daha fazla bu koşulları karşıladığında kümeleri iyileştirme durdurur:  
+Eğitim verilerini işlediğinde, K-Ortalamalar algoritması rastgele seçilmiş centroıd 'ler kümesiyle başlar. Centroıds, kümeler için başlangıç noktaları olarak görev yapar ve konumlarını yinelemeli olarak daraltmak için Lloyd algoritması uygular. K-anlamı algoritması, bu koşullardan bir veya daha fazlasını karşıladığında kümeleri oluşturmayı ve iyileştirmasını durduruyor:  
   
--   Artık tek tek noktaları için küme atamaları değiştirmek ve algoritma hiper yakınsanmış bir çözüm üzerinde centroids Sabitle.  
+-   Centroıds, tek tek noktaların küme atamalarının artık değişmeyeceği ve algoritmanın bir çözüme yakınsamış olduğu anlamına gelir.  
   
--   Algoritmanın, yinelemeleri belirtilen sayıda çalışan tamamlandı.  
+-   Algoritma, belirtilen sayıda yineleme çalıştırmayı tamamladı.  
   
- Eğitim aşamasını tamamladıktan sonra kullandığınız [Ata veri kümelerine](assign-data-to-clusters.md) modülü birinden K-ortalamaları algoritması kullanılarak bulunan yeni çalışmaları atayın. Küme atama, yeni durum her kümenin kütle merkezi arasındaki mesafeyi hesaplayarak gerçekleştirin. Her yeni örneği yakın kütle merkezi kümeyle atanır.  
+ Eğitim aşamasını tamamladıktan sonra, K-ortalamalar algoritmasını kullanarak bulduğunuz kümelerden birine yeni durumlar atamak için [verileri kümeye ata](assign-data-to-clusters.md) modülünü kullanırsınız. Yeni durum ve her kümenin centroıd arasındaki mesafeyi hesaplayarak küme atamasını gerçekleştirirsiniz. Her yeni durum, en yakın centroıd ile kümeye atanır.  
 
-## <a name="configure-the-k-means-clustering-module"></a>K-ortalamaları kümeleme modülünü Yapılandır
+## <a name="configure-the-k-means-clustering-module"></a>K-anlamı kümeleme modülünü yapılandırma
   
-1.  Ekleme **K-ortalamaları Kümeleme** denemenizi modülü.  
+1.  İşlem hattınızda **K-anlamı kümeleme** modülünü ekleyin.  
   
-2.  Eğitim modeli nasıl istediğinizi belirtmek için seçin **Oluştur trainer modu** seçeneği.  
+2.  Modelin nasıl eğitilme etmek istediğinizi belirtmek için, **eğitmen modunu oluştur** seçeneğini belirleyin.  
   
-    -   **Tek bir parametre**: Kümeleme modeli kullanmak istediğiniz tam parametreleri biliyorsanız, bağımsız değişken olarak belirli bir değerler kümesi sağlayabilirsiniz.  
+    -   **Tek parametre**: kümeleme modelinde kullanmak istediğiniz tam parametreleri biliyorsanız bağımsız değişken olarak belirli bir değer kümesi sağlayabilirsiniz.  
   
-3.  İçin **numarası, Centroids**, algoritması şununla istediğiniz küme sayısını yazın.  
+3.  **Centroıds sayısı**için, algoritmanın başlamasını istediğiniz küme sayısını yazın.  
   
-     Model, tam olarak bu küme sayısını üretmek için garanti yoktur. Algoritma, veri noktalarının sayısı ile başlar ve en uygun yapılandırma bulmak için yinelenir.  
+     Modelin tam olarak bu sayıda küme üretmesi garanti edilmez. Algoritma, bu sayıda veri noktasıyla başlar ve en iyi yapılandırmayı bulmak için yinelenir.  
   
-4.  Özellikleri **başlatma** ilk küme yapılandırmasına tanımlamak için kullanılan algoritma belirtmek için kullanılır.  
+4.  Özellikler **başlatma** , ilk küme yapılandırmasını tanımlamak için kullanılan algoritmayı belirtmek için kullanılır.  
   
-    -   **İlk N**: Bazı ilk veri noktası sayısı seçilen veri kümesinden ve ilk şekilde kullanılır. 
+    -   **Ilk N**: veri noktalarının bazı ilk sayısı, veri kümesinden seçilir ve ilk anlamı olarak kullanılır. 
     
-         Bu yöntem ayrıca çağrılır *Forgy yöntemi*.  
+         Bu yöntem, *Forgy yöntemi*olarak da adlandırılır.  
   
-    -   **Rastgele**: Algoritma, rastgele bir veri noktasının bir kümeye yerleştirir ve ardından, kümenin kütle merkezi rastgele olarak ilk ortalama noktalarına atanan hesaplar. 
+    -   **Rastgele**: algoritma bir kümeye rastgele bir veri noktası koyar ve sonra kümenin Rastgele atanan noktalarının centroıd değeri olacak şekilde ilk ortalaması hesaplar. 
 
-         Bu yöntem ayrıca çağrılır *rastgele bölüm* yöntemi.  
+         Bu yöntem, *rastgele bölüm* yöntemi olarak da adlandırılır.  
   
-    -   **K-anlamına gelir ++** : Bu kümeleri başlatma için varsayılan yöntemdir.  
+    -   **K-Ortalamalar + +** : Bu, kümeleri başlatmak için varsayılan yöntemdir.  
   
-         **K-anlamına gelir ++** algoritması önerilen 2007'de David Arthur ve Sergei Vassilvitskii düşük standart K-ortalamaları algoritma tarafından kümeleme önlemek için. **K-anlamına gelir ++** ilk küme merkezleri seçmek için farklı bir yöntem kullanarak, standart K-ortalamaları artırır.  
+         **K-ortalamalar + +** algoritması, standart K-Ortalamalar algoritması tarafından zayıf kümelemeyi önlemek Için David Arthur ve Sergei Vassilvıtskii tarafından 2007 ' de önerdi. **K-** ilk küme merkezlerini seçmek için farklı bir yöntem kullanarak standart K-Ortalamalar üzerinde + + artar.  
   
     
-5.  İçin **rastgele sayı doldurma**, isteğe bağlı olarak küme başlatma için temel kullanılacak bir değer yazın. Bu değer, küme seçimi önemli bir etkiye sahip olabilir.  
+5.  **Rastgele sayı çekirdek**için, isteğe bağlı olarak, küme başlatma için çekirdek olarak kullanılacak bir değer yazın. Bu değer, küme seçiminde önemli bir etkiye sahip olabilir.  
   
-6.  İçin **ölçüm**, küme vektör arasında ya da yeni veri noktaları rastgele seçilen kütle merkezi arasındaki uzaklığı ölçmek amacıyla kullanılacak işlevi seçin. Azure Machine Learning aşağıdaki küme uzaklık ölçümleri destekler:  
+6.  **Ölçüm**için, küme vektörlerine veya yeni veri noktalarıyla rastgele seçilmiş centroıd arasındaki mesafeyi ölçmek için kullanılacak işlevi seçin. Azure Machine Learning aşağıdaki küme uzaklık ölçümlerini destekler:  
   
-    -   **Euclidean**: Euclidean uzaklık K-ortalamaları kümeleme için küme dağılım bir ölçü yaygın olarak kullanılır. Bu ölçüm tercih edilen çünkü centroids noktaları arasındaki ortalama uzaklığı en aza indirir.
+    -   **Euclidean**: Euclidean, genellikle K-anlamı Kümelemesi için küme dağılım ölçüsü olarak kullanılır. Bu ölçüm, noktaları ve centroıd 'ler arasındaki ortalama mesafeyi en aza indirecek için tercih edilir.
   
-7.  İçin **yinelemeler**, algoritma centroids seçimini sonlandırır önce eğitim verileri yinelemek sayısını yazın.  
+7.  **Yinelemeler**için, algoritmanın, centroıd 'leri seçimini sonlandırmadan önce eğitim verilerini kaç kez yinelemelidir? yazın.  
   
-     Bu parametre için Bakiye doğruluğu eğitim zamana karşı ayarlayabilirsiniz.  
+     Bu parametreyi, eğitim süresine göre doğruluğu dengelemek için ayarlayabilirsiniz.  
   
-8.  İçin **Ata etiket modu**, bir etiket sütun kümesinde varsa nasıl işleneceğini belirten bir seçenek belirleyin.  
+8.  **Etiket Atama modu**için, veri kümesinde varsa, bir etiket sütununun nasıl işleneceğini belirten bir seçenek belirleyin.  
   
-     K-ortalamaları kümeleme yöntemi öğrenme Denetimsiz bir makine olduğundan, etiketler isteğe bağlıdır. Ancak, veri kümeniz zaten bir etiket sütun varsa, kümelerin seçimi yol göstermesi için bu değerleri kullanabilirsiniz veya değerleri yoksayılacak belirtebilirsiniz.  
+     K-kümeleme, denetimli bir makine öğrenimi yöntemi olduğu için Etiketler isteğe bağlıdır. Ancak, veri kümeniz zaten bir etiket sütunu içeriyorsa, kümelerin seçimine yol göstermek için bu değerleri kullanabilir veya değerlerin yok sayılmasını belirtebilirsiniz.  
   
-    -   **Etiket sütunu yoksayın**: Etiket sütundaki değerleri yok sayılır ve modeli oluşturma kullanılmaz.
+    -   **Etiket sütununu yoksay**: etiket sütunundaki değerler yok sayılır ve model oluşturulurken kullanılmaz.
   
-    -   **Eksik değerleri doldurun**: Etiket sütun değerleri, kümeler oluşturmanıza yardımcı olmak üzere özellikleri kullanılır. Herhangi bir satır etiket eksikse değerin diğer özelliklerini kullanarak imputed.  
+    -   **Eksik değerleri doldur**: Etiket sütun değerleri, kümeleri oluşturmaya yardımcı olacak özellikler olarak kullanılır. Herhangi bir satırda etiket eksikse, bu değer diğer özellikler kullanılarak belirlenir.  
   
-    -   **En yakın Merkezi'ne gelen üzerine**: Etiket sütun değerleri, geçerli kütle merkezi için en yakın olan noktası etiketini kullanarak, tahmin edilen etiket değerleri ile değiştirilir.  
+    -   **En yakın üzerine yaz**: Etiket sütun değerleri, geçerli centroıd 'ye en yakın noktanın etiketi kullanılarak tahmin edilen etiket değerleriyle değiştirilmiştir.  
 
-8.  Seçin **Normalleştir özellikleri** eğitim önce Özellikleri'leri normalleştirmek isterseniz seçeneği.
+8.  Eğitim öncesi özellikleri normalleştirmek istiyorsanız **özellikleri Normalleştir** seçeneğini belirleyin.
   
-     Eğitim önce bir normalleştirme uygularsanız, veri noktaları için normalleştirilir `[0,1]` MinMaxNormalizer tarafından.
+     Normalleştirme uygularsanız, öğreticmadan önce veri noktaları MinMaxNormalizer tarafından `[0,1]` normalleştirilir.
 
 10. Modeli eğitme.  
   
-    -   Ayarlarsanız **Oluştur trainer modu** için **tek parametre**etiketli bir veri kümesi ekleyin ve kullanarak modeli eğitmek [kümeleme modeli eğitme](train-clustering-model.md) modülü.  
+    -   **Tek parametreye** **oluşturma eğitmen modu** ' nu ayarlarsanız, etiketli bir veri kümesi ekleyin ve modeli [eğitme model](train-clustering-model.md) modülünü kullanarak modeli eğitme.  
   
 ### <a name="results"></a>Sonuçlar
 
-Modeli eğitmek ve yapılandırma bitirdikten sonra puanları oluşturmak için kullanabileceğiniz bir modeline sahiptir. Ancak, modeli eğitmek için birden çok yol ve sonuçları görüntüleyip için birden çok yolu vardır: 
+Modeli yapılandırmayı ve eğitimi tamamladıktan sonra, puanlar oluşturmak için kullanabileceğiniz bir modeliniz vardır. Ancak, modeli eğitmek için birden çok yol ve sonuçları görüntülemenin ve kullanmanın birden çok yolu vardır: 
 
-#### <a name="capture-a-snapshot-of-the-model-in-your-workspace"></a>Model çalışma alanınızdaki bir anlık görüntüsünü yakalama
+#### <a name="capture-a-snapshot-of-the-model-in-your-workspace"></a>Çalışma alanınızda modelin anlık görüntüsünü yakalama
 
-Kullandıysanız [kümeleme modeli eğitme](train-clustering-model.md) Modülü:
+[Tren kümeleme modeli](train-clustering-model.md) modülünü kullandıysanız:
 
-1. Sağ **kümeleme modeli eğitme** modülü.
+1. **Tren kümeleme modeli** modülüne sağ tıklayın.
 
-2. Seçin **Trained modeli**ve ardından **eğitilen modeli kaydedin**.
+2. **Eğitim modeli**' ni seçin ve ardından **eğitilen model olarak kaydet**' i seçin.
 
-Kaydedilmiş modeli model kaydettiğiniz anda eğitim verileri temsil eder. Daha sonra deneme kullanılan eğitim verilerini güncelleştirirseniz, kaydedilmiş modeli güncelleştirmez. 
+Kaydedilen model, modeli kaydettiğiniz sırada eğitim verilerini temsil eder. İşlem hattında kullanılan eğitim verilerini daha sonra güncelleştirirseniz, kaydedilen modeli güncelleştirmez. 
 
-#### <a name="see-the-clustering-result-dataset"></a>Kümeleme sonuç veri kümesini görürsünüz 
+#### <a name="see-the-clustering-result-dataset"></a>Kümeleme sonucu veri kümesine bakın 
 
-Kullandıysanız [kümeleme modeli eğitme](train-clustering-model.md) Modülü:
+[Tren kümeleme modeli](train-clustering-model.md) modülünü kullandıysanız:
 
-1. Sağ **kümeleme modeli eğitme** modülü.
+1. **Tren kümeleme modeli** modülüne sağ tıklayın.
 
-2. Seçin **sonuçları veri kümesi**ve ardından **Görselleştir**.
+2. **Sonuçlar veri kümesini**seçin ve ardından **Görselleştir**' i seçin.
 
-### <a name="tips-for-generating-the-best-clustering-model"></a>Kümeleme modelinin yerini, en iyi oluşturmaya yönelik ipuçları  
+### <a name="tips-for-generating-the-best-clustering-model"></a>En iyi kümeleme modelini oluşturmaya yönelik ipuçları  
 
-İle eşleşmeyebileceği bilinmektedir *dengeli dağıtım* kümeleme sırasında kullanılan işlem modeli önemli ölçüde etkileyebilir. Dengeli dağıtım noktaları ilk yerleşimini olası centroids içine anlamına gelir.
+Kümeleme sırasında kullanılan *dengeli dağıtım* işleminin modeli önemli ölçüde etkileyebileceğini bilinir. Dengeli dağıtım, noktaların ilk olarak olası centroıds 'a yerleştirilme anlamına gelir.
  
-Örneğin, veri kümesini birçok aykırı değerleri içeren ve bir aykırı değer kümeleri sağlamak için seçilir, diğer veri noktası da bu kümeyle yerleştirin ve küme tek olabilir. Diğer bir deyişle, yalnızca bir noktasına sahip olabilir.  
+Örneğin, veri kümesi çok sayıda mantıksal dizi içeriyorsa ve kümelerin çekirdeğini oluşturmak için bir mantıksal değer seçilirse, başka hiçbir veri noktası bu kümeye uygun olmaz ve küme tek bir değer olabilir. Yani, tek bir noktası olabilir.  
   
-Çeşitli şekillerde bu sorunu önleyebilirsiniz:  
+Bu sorundan birkaç yolla kaçınabilirsiniz:  
   
--   Centroids sayısını değiştirmek ve birden çok çekirdek değer deneyin.  
+-   Centroıds sayısını değiştirin ve birden çok çekirdek değeri deneyin.  
   
--   Ölçüm değişen veya daha fazla yineleme birden çok modeller oluşturun.  
+-   Ölçüyü değiştirerek veya daha fazlasını yineleirken birden çok model oluşturun.  
   
-Genel olarak, kümeleme modeli, herhangi bir yapılandırma kümeleri yerel olarak en iyi duruma getirilmiş kümesindeki sonuçlanır mümkündür. Diğer bir deyişle, modeli tarafından döndürülen kümeleri kümesini yalnızca geçerli veri noktalarının uygun ve diğer verilerle genelleştirilebilir desteklenmez. Farklı bir başlangıç yapılandırmasını kullanırsanız, K-ortalamaları yöntemi farklı, belki de daha üstün bir yapılandırmada bulabilirsiniz. 
+Genellikle, kümeleme modelleriyle, belirli bir yapılandırmanın yerel olarak iyileştirilmiş kümeler kümesine neden olacağı olasıdır. Diğer bir deyişle, model tarafından döndürülen kümeler kümesi yalnızca geçerli veri noktalarına uygun değildir ve diğer verilere genelleştirilebilir. Farklı bir başlangıç yapılandırması kullanırsanız, K-Ortalamalar yöntemi farklı, belki de farklı bir yapılandırma bulabilir. 

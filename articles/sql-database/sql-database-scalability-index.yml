@@ -1,9 +1,9 @@
 ### YamlMime:YamlDocument
 documentType: LandingData
-title: Azure SQL veritabanı - ölçeklenebilirlik
+title: Ölçeklenebilirlik
 metadata:
   document_id: 36d89c48-3646-380e-34a0-ae3ac62e2641
-  title: Azure SQL veritabanı - ölçeklenebilirlik
+  title: Azure SQL Veritabanı - Ölçeklenebilirlik
   meta.description: Learn how to scale your Azure SQL Database.
   services: sql-database
   ms.subservice: scale-out
@@ -19,36 +19,36 @@ metadata:
 sections:
   - items:
       - type: paragraph
-        text: 'Azure SQL veritabanı, veritabanı, daha fazla işlem gücü (büyütme) ekleme veya daha fazla veritabanı birimleri (ölçeklendirme) ekleyerek kolayca ölçekleyebilmenizi sağlar.'
+        text: 'Azure SQL Veritabanı, veritabanınızı daha fazla işlem gücü (ölçek büyütme) veya daha fazla veritabanı birimi (ölçek genişletme) ekleyerek kolayca ölçeklendirmenize olanak tanır.'
       - type: list
         style: cards
         className: cardsM
         columns: 3
         items:
-          - title: Ölçek büyütme
+          - title: Ölçeği büyütme
             href: /azure/sql-database/sql-database-scale-resources
-            html: <p>Kolayca ekleyebilir veya kaynakları en iyi fiyat/performans oranını bulun veya performans sorunlarını gidermek için SQL veritabanınızda kaldırın.</p>
-          - title: Ölçek genişletme okuyun
+            html: <p>En iyi fiyat/performans oranını bulmak veya performans sorunlarını azaltmak için SQL Veritabanınızda kolayca kaynak ekleyin ya da kaynakları kaldırın.</p>
+          - title: Okuma Amaçlı Ölçeği Genişletme
             href: /azure/sql-database/sql-database-read-scale-out
-            html: '<p>Kritik iş katmanı, verilerin bir kopyasını nereden raporları, analizleri ve diğer salt okunur sorgular çalıştırabilirsiniz veritabanının, ücretsiz çoğaltmasını sağlar.</p>'
+            html: '<p>İş Açısından Kritik katman raporları, analizleri ve diğer salt okunur sorguları verilerin kopyasında çalıştırmanıza olanak tanıyan ücretsiz bir veritabanı çoğaltması sunar.</p>'
           - title: Veritabanı parçalama
             href: /azure/sql-database/sql-database-elastic-scale-introduction
-            html: <p>Birden fazla veritabanlarının parçaya veritabanınızı düzeyde bilgi işlem ve depolama sınırları tek veritabanları için ötesine genişletmek için kullanabilirsiniz.</p>
+            html: <p>Veritabanınızın ölçeğini en fazla işlem ve depolama sınırının ötesine genişletmek için birden fazla veritabanı parçasını kullanabilirsiniz.</p>
           - title: Esnek sorgular
             href: /azure/sql-database/sql-database-elastic-query-overview
-            html: <p>Elastik sorgular çalıştırmadan standart Transact-SQL sorguları bir dizi Global olarak dağıtılmış veritabanı parçalarını etkinleştirin.</p>
+            html: '<p>Esnek Sorgular, genel olarak dağıtılan veritabanı parçalarında standart Transact-SQL sorguları çalıştırmanıza olanak tanır.</p>'
           - title: Elastik işlemler
             href: /azure/sql-database/sql-database-elastic-transactions-overview
-            html: <p>Global olarak dağıtılmış işlemler dağıtılmış verilerinizi işlemsel olarak tutarlı erişim sağlamak için kullanın.</p>
+            html: <p>Dağıtılan verilerinize işlemsel açıdan tutarlı erişim sunmak için genel olarak dağıtılan işlemleri kullanın.</p>
           - title: Çapraz veritabanı işleri
             href: /azure/sql-database/elastic-jobs-overview
-            html: <p>Çapraz veritabanı esnek işlerini kullanarak bir veritabanları kümesi bakımını yapar.</p>
-  - title: Daha fazla kaynak
+            html: <p>Veritabanları arası Elastik İşleri kullanarak veritabanı kümesini koruyun.</p>
+  - title: Diğer kaynaklar
     items:
       - type: paragraph
-        text: Verilerinizi ölçeklendirmek için yardımcı olabilecek ek özellikler hakkında bilgi edinin.
+        text: Verilerinizi ölçeklendirmenize yardımcı olabilecek ek özellikler hakkında bilgi edinin.
       - type: list
         style: ordered
         items:
-          - html: '<a href="https://docs.microsoft.com/sql/relational-databases/linked-servers/linked-servers-database-engine">Bağlantılı sunucu</a> çekirdek SQL Server veritabanı altyapısı, dağıtılmış sorgular, başka bir veritabanı altyapısına Transact-SQL kodunu çalıştırmak sağlayan bir özelliktir.'
-          - html: <a href="sql-database-geo-replication-overview.md">Coğrafi çoğaltma</a> okunabilir çoğaltma herhangi bir sayıda farklı bölgelerde yerleştirmenizi sağlar.
+          - html: '<a href="https://docs.microsoft.com/sql/relational-databases/linked-servers/linked-servers-database-engine">Bağlantılı sunucu</a>, dağıtılan sorguları Transact-SQL kodundan farklı veritabanı altyapılarında yürütmenize olanak tanıyan temel SQL Server Veritabanı Altyapısı özelliğidir.'
+          - html: '<a href="sql-database-geo-replication-overview.md">Coğrafi çoğaltma</a>, farklı bölgelere istediğiniz sayıda okunabilir çoğaltma koymanıza olanak tanır.'

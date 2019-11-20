@@ -1,201 +1,314 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Cosmos DB Belgeleri
+### YamlMime:Landing
+title: Azure Cosmos DB belgeleri
+summary: Azure Cosmos DB, Microsoft'un işlem ve analiz iş yükleri için genel olarak dağıtılmış çok modelli veritabanı hizmetidir. İşlem hızını, işlemi ve depolamayı otomatik olarak ölçeklendirme yoluyla çoklu ana kaynak özelliği sunar.
 metadata:
-  document_id: e77bd640-1036-8b31-955c-a2cc990c69a1
-  title: 'Azure Cosmos DB Belgeleri - Öğreticiler, API Başvurusu'
-  description: 'Genel olarak dağıtılmış çok modelli veritabanı hizmeti Azure Cosmos DB''yi kullanmayı öğrenin. Öğreticiler, belgeleri, anahtar/değer ve grafik veritabanlarını oluşturmayı ve sorgulamayı gösterir.'
-  author: SnehaGunda
-  ms.author: sngun
+  title: Azure Cosmos DB
+  description: Azure Cosmos DB, Microsoft'un işlem ve analiz iş yükleri için genel olarak dağıtılmış çok modelli veritabanı hizmetidir. İşlem hızını, işlemi ve depolamayı otomatik olarak ölçeklendirme yoluyla çoklu ana kaynak özelliği sunar.
+  services: service
   ms.service: cosmos-db
   ms.topic: landing-page
-  ms.date: 05/20/2019
-abstract:
-  description: 'Azure Cosmos DB, anahtar teslimi genel dağıtım ve saydam çoklu ana kaynak çoğaltma özelliğiyle tam olarak yönetilen bir veritabanı hizmetidir. Veritabanınızdaki işlem verileri üzerinde genel olarak dağıtılmış, düşük gecikme süreli operasyon ve analiz iş yükleri ile yapay zeka çalıştırın. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, Azure Cosmos DB’yi kullanmayı öğrenin.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: media/index/video.png
-      width: 250
-    title: 'Global ölçekli mobil uygulamaları birkaç dakika içinde oluşturun (16:17)'
-    href: 'https://azure.microsoft.com/resources/videos/build-2017-azure-cosmos-db-build-planet-scale-mobile-apps-in-minutes/'
-    width: 250
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cosmos-db/distribute-data-globally/
-            html: '<p>Tüm Azure Cosmos DB API’leri için geçerli olan genel dağıtım, bölümlendirme, sağlanan aktarım hızı, dizin oluşturma ve diğer kavramlar hakkında bilgi edinin.</p>'
-            image:
-              src: media/index/azure-cosmos-db-icon.png
-            title: Kavramlar
-          - href: /azure/cosmos-db/sql-api-query-reference/
-            html: <p>Yeni bir ilişkisel olmayan belge veritabanı oluşturuyorsanız ve tanıdık SQL söz dizimini kullanarak sorgulamak istiyorsanız SQL API'yi kullanın.</p>
-            image:
-              src: media/index/sql-api.svg
-            title: SQL API’si
-          - href: /azure/cosmos-db/graph-introduction/
-            html: <p>Varlıklar arası ilişkiler modelleyip bunlar üzerinden geçiş yapmak için bir grafik veritabanı oluşturuyorsanız Gremlin API’yi kullanın.</p>
-            image:
-              src: media/index/graph-api.svg
-            title: Gremlin API
-          - href: /azure/cosmos-db/mongodb-introduction/
-            html: <p>Bir MongoDB veritabanından Azure Cosmos DB'nin tam olarak yönetilen hizmetine veri geçiriyorsanız MongoDB için Azure Cosmos DP API'yi kullanın.</p>
-            image:
-              src: media/index/mongodb-api.svg
-            title: MongoDB için Azure Cosmos DB API'si
-          - href: /azure/cosmos-db/cassandra-introduction/
-            html: <p>Cassanra’dan Azure Cosmos DB'nin tam olarak yönetilen hizmetine veri geçiriyorsanız Cassandra API’yi kullanın.</p>
-            image:
-              src: media/index/cassandra-api.png
-            title: Cassandra API’si
-          - href: /azure/cosmos-db/table-introduction/
-            html: <p>Azure Tablo Depolama'dan Azure cosmos DB’nin premium tablo teklifine veri geçiriyorsanız Tablo API’sini kullanın.</p>
-            image:
-              src: media/index/table-api.svg
-            title: Tablo API’si
-          - href: /azure/cosmos-db/spark-api-introduction/
-            html: <p>Bir Azure Cosmos hesabında depolanan veriler üzerinde analiz çalıştırmak için yerleşik Apache Spark desteğini kullanın. </p>
-            image:
-              src: media/index/spark-logo.png
-            title: Apache Spark ile yerleşik analiz
-          - href: /azure/cosmos-db/change-feed/
-            html: <p>Bir Azure Cosmos DB koleksiyonunda düzenlenme sırasına göre sıralanmış bir belge listesini okuyarak değişiklik akışı ile gerçek zamanlı analiz gerçekleştirin. </p>
-            image:
-              src: media/index/change-feed-logo.png
-            title: Akışı değiştirme
-          - href: /azure/cosmos-db/etcd-api-introduction/
-            html: '<p> Etcd API’si, Azure Cosmos DB’yi Azure Kubernetes için arka uç deposu olarak kullanmanıza olanak sağlar.</p>'
-            image:
-              src: media/index/etcd-logo.png
-            title: Etcd API'si
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Çok modelli API’lere yönelik aşağıdaki hızlı başlangıçlardan birini kullanarak global olarak dağıtılmış veritabanı oluşturmak için Azure Cosmos DB kullanmayı öğrenin:'
-      - type: table
-        style: dataMatrix
-        columns:
-          - image:
-              src: media/index/logo_java.svg
-            title: Java
-          - image:
-              src: media/index/logo_net.svg
-            title: .NET
-          - image:
-              src: media/index/logo_nodejs.svg
-            title: Node.js
-          - image:
-              src: media/index/logo_python.svg
-            title: Python
-          - image:
-              src: media/index/logo_gremlin.svg
-            title: Gremlin
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_gopher.svg'
-            title: Başlayın
-          - image:
-              src: media/index/logo_xamarin.svg
-            title: Xamarin
-        rows:
-          - title: SQL API’si
-            values:
-              - href: /azure/cosmos-db/create-sql-api-java
-              - href: /azure/cosmos-db/create-sql-api-dotnet
-              - href: /azure/cosmos-db/create-sql-api-nodejs
-              - href: /azure/cosmos-db/create-sql-api-python
-              - href: null
-              - href: null
-              - href: /azure/cosmos-db/create-sql-api-xamarin-dotnet
-          - title: MongoDB için API
-            values:
-              - href: /azure/cosmos-db/create-mongodb-java
-              - href: /azure/cosmos-db/create-mongodb-dotnet
-              - href: /azure/cosmos-db/create-mongodb-nodejs
-              - href: /azure/cosmos-db/create-mongodb-flask
-              - href: null
-              - href: /azure/cosmos-db/create-mongodb-golang
-              - href: /azure/cosmos-db/create-mongodb-xamarin
-          - title: Gremlin API
-            values:
-              - href: /azure/cosmos-db/create-graph-java
-              - href: /azure/cosmos-db/create-graph-dotnet
-              - href: /azure/cosmos-db/create-graph-nodejs
-              - href: /azure/cosmos-db/create-graph-python
-              - href: /azure/cosmos-db/create-graph-gremlin-console
-              - href: null
-              - href: null
-          - title: Tablo API’si
-            values:
-              - href: /azure/cosmos-db/create-table-java
-              - href: /azure/cosmos-db/create-table-dotnet
-              - href: /azure/cosmos-db/create-table-nodejs
-              - href: /azure/cosmos-db/create-table-python
-              - href: null
-              - href: null
-              - href: null
-          - title: Cassandra API’si
-            values:
-              - href: /azure/cosmos-db/create-cassandra-java
-              - href: /azure/cosmos-db/create-cassandra-dotnet
-              - href: /azure/cosmos-db/create-cassandra-nodejs
-              - href: /azure/cosmos-db/create-cassandra-python
-              - href: null
-              - href: null
-              - href: null
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure Cosmos DB kullanarak uygulama geliştirmeyi öğrenin&#58;'
-      - type: list
-        style: ordered
-        items:
-          - html: 'Azure Cosmos DB ile uygulama geliştirme&#58; <a href="/azure/cosmos-db/tutorial-develop-sql-api-dotnet">SQL</a> | <a href="/azure/cosmos-db/tutorial-develop-mongodb-nodejs">MongoDB</a> | <a href="/azure/cosmos-db/tutorial-develop-table-dotnet">Table</a> | <a href="/azure/cosmos-db/tutorial-develop-graph-dotnet">Gremlin</a> | <a href="https://aka.ms/cassandratutorial">Cassandra</a>'
-          - html: 'Azure Cosmos DB’ye veri geçirme&#58; <a href="import-data">SQL</a> | <a href="mongodb-migrate">MongoDB</a> | <a href="https://aka.ms/tableapiimporttool">Tablo</a> | <a href="https://aka.ms/cassandraimport">Cassandra</a>'
-          - html: 'Azure Cosmos DB ile veri sorgulama&#58; <a href="/azure/cosmos-db/tutorial-query-sql-api">SQL</a> | <a href="/azure/cosmos-db/tutorial-query-mongodb">MongoDB</a> | <a href="/azure/cosmos-db/tutorial-query-table">Tablo</a> | <a href="/azure/cosmos-db/tutorial-query-graph">Gremlin</a>'
-          - html: 'Azure Cosmos DB ile global veritabanı çoğaltma&#58; <a href="/azure/cosmos-db/tutorial-global-distribution-sql-api">SQL</a> | <a href="/azure/cosmos-db/tutorial-global-distribution-mongodb">MongoDB</a> | <a href="/azure/cosmos-db/tutorial-global-distribution-table">Tablo</a>'
-          - html: <a href="local-emulator">Öykünücüyü kullanarak uygulamanızı yerel ortamda geliştirin</a>
-          - html: <a href="/azure/cosmos-db/tutorial-functions-http-trigger">Azure Cosmos DB giriş bağlama işlemiyle HTTP Tetikleyicisi oluşturma</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: "\_Ölçeklendirmeye uygun bir Azure Cosmos veritabanı oluşturun"
-            href: /learn/modules/create-cosmos-db-for-scale/
-            image:
-              src: /learn/achievements/create-cosmos-db-for-scale.svg
-              href: /learn/modules/create-cosmos-db-for-scale/
-          - title: Azure Cosmos veritabanınıza veri ekleyin ve var olan verileri sorgulayın
-            href: /learn/modules/access-data-with-cosmos-db-and-sql-api/
-            image:
-              src: /learn/achievements/access-data-with-cosmos-db-and-sql-api.svg
-              href: /learn/modules/access-data-with-cosmos-db-and-sql-api/
-          - title: Visual Studio Code ile Azure Cosmos DB için bir .NET Core uygulaması derleyin
-            href: /learn/modules/build-cosmos-db-app-with-vscode
-            image:
-              src: /learn/achievements/build-cosmos-db-app-with-vscode.svg
-              href: /learn/modules/build-cosmos-db-app-with-vscode
-      - type: paragraph
-        text: <a href="/learn/browse/?products=azure-cosmos-db">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: SQL API’si
-            html: '<p><a href="/rest/api/cosmos-db/">REST</a></p><p><a href="https://aka.ms/acdbnetref">.NET</a></p><p><a href="sql-api-sdk-dotnet-changefeed">.NET Change akışı</a></p><p><a href="https://aka.ms/acdbnetcoreref">.NET Core</a></p><p><a href="https://aka.ms/acdbnoderef">Node.js</a></p><p><a href="https://aka.ms/acdbjavaref">Java</a></p><p><a href="https://aka.ms/acdbpythonref">Python</a></p><p><a href="/rest/api/cosmos-db-resource-provider/">REST Kaynak Sağlayıcısı</a></p><p><a href="sql-api-query-reference">SQL</a></p>'
-          - title: MongoDB için Azure Cosmos DB API'si
-            html: '<p><a href="https://docs.mongodb.com/manual/reference/mongodb-wire-protocol/">Wire Protocol</a></p><p><a href="https://mongodb.github.io/node-mongodb-native/ ">Node.js</a></p><p><a href="https://docs.mongodb.com/ecosystem/drivers/csharp/">C#</a></p><p><a href="https://docs.mongodb.com/ecosystem/drivers/java/">Java</a></p><p><a href="https://docs.mongodb.com/ecosystem/drivers/python/">Python</a></p><p><a href="https://docs.mongodb.com/ruby-driver/master/">Ruby</a></p>'
-          - title: Tablo API’si
-            html: <p><a href="/rest/api/storageservices/fileservices/Table-Service-Concepts">REST</a></p><p><a href="/azure/cosmos-db/table-sdk-dotnet">.NET</a></p><p><a href="/azure/cosmos-db/table-sdk-nodejs">Node.js</a></p><p><a href="/azure/cosmos-db/table-sdk-java">Java</a></p><p><a href="/azure/cosmos-db/table-sdk-python">Python</a></p>
-          - title: Gremlin API
-            html: '<p><a href="https://tinkerpop.apache.org/docs/current/reference/">Gremlin</a></p><p><a href="/azure/cosmos-db/graph-sdk-dotnet">.NET</a></p><p><a href="https://github.com/ZEROFAIL/goblin">Python</a></p><p><a href="https://tinkerpop.apache.org/docs/current/reference/#connecting-via-java">Java</a></p><p><a href="https://github.com/jbmusso/gremlin-javascript">JavaScript</a></p>'
-          - title: Cassandra API’si
-            html: '<p><a href="https://github.com/datastax/nodejs-driver">Node.js</a></p><p><a href="https://github.com/datastax/python-driver">Python</a></p><p><a href="https://github.com/datastax/java-driver">Java</a></p>'
+  ms.collection: collection
+  author: SnehaGunda
+  ms.author: sngun
+  ms.date: 09/10/2019
+  ms.openlocfilehash: a023092c675c8a99285abfdf81c29a5163c3fadd
+  ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/06/2019
+  ms.locfileid: "73681643"
+landingContent:
+- title: Azure Cosmos DB hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Cosmos DB nedir?
+      url: introduction.md
+  - linkListType: concept
+    links:
+    - text: MongoDB ile kablo protokolü uyumluluğu
+      url: mongodb-feature-support.md
+    - text: Apache Cassandra ile kablo protokolü uyumluluğu
+      url: cassandra-support.md
+    - text: Tinkerpop Gremlin ile kablo protokol uyumluluğu
+      url: gremlin-support.md
+  - linkListType: quickstart
+    links:
+    - text: Azure Cosmos hesabı oluşturma
+      url: create-cosmosdb-resources-portal.md
+- title: Genel dağıtım
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Genel Bakış
+      url: distribute-data-globally.md
+    - text: Tutarlılık düzeyleri
+      url: consistency-levels.md
+    - text: Doğru tutarlılık düzeyini seçme
+      url: consistency-levels-choosing.md
+    - text: Tutarlılık düzeyleri ve API'ler
+      url: consistency-levels-across-apis.md
+    - text: Tutarlılık, kullanılabilirlik ve performans dengeleri
+      url: consistency-levels-tradeoffs.md
+    - text: Yüksek kullanılabilirlik
+      url: high-availability.md
+    - text: Çakışma türleri ve çözme ilkeleri
+      url: conflict-resolution-policies.md
+    - text: Arka planda genel veri dağıtımı
+      url: global-dist-under-the-hood.md
+    - text: Bölgesel varlık
+      url: regional-presence.md
+  - linkListType: how-to-guide
+    links:
+    - text: Çoklu ana kaynağı yapılandırma
+      url: how-to-multi-master.md
+    - text: Tutarlılık düzeylerini yapılandırma
+      url: how-to-manage-consistency.md
+    - text: Özel eşitlemeyi uygulama
+      url: how-to-manage-conflicts.md
+    - text: Çakışma çözme ilkelerini yapılandırma
+      url: how-to-manage-conflicts.md
+- title: Veri bölümleme ve en iyi yöntemler
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Genel Bakış
+      url: partitioning-overview.md
+    - text: Bölümleme ve yatay ölçeklendirme
+      url: partition-data.md
+    - text: Yapay bölüm anahtarı
+      url: synthetic-partition-keys.md
+    - text: Veri modelleme
+      url: modeling-data.md
+  - linkListType: how-to-guide
+    links:
+    - text: Büyük bölüm anahtarıyla kapsayıcı oluşturma
+      url: large-partition-keys.md
+    - text: Bölümlenmiş kapsayıcıya geçme
+      url: migrate-containers-partitioned-to-nonpartitioned.md
+- title: Cosmos DB kaynaklarını oluşturma ve yönetme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Azure Cosmos hesabı nedir?
+      url: account-overview.md
+    - text: Azure Cosmos veritabanları, kapsayıcıları ve öğeleri
+      url: databases-containers-items.md
+    - text: Cosmos DB'de verilerin dizinini oluşturma
+      url: index-overview.md
+    - text: Dizin oluşturma ilkeleri, özellikleri dahil etme ve dışlama
+      url: index-policy.md
+    - text: Yaşam süresi
+      url: time-to-live.md
+    - text: Benzersiz anahtar kısıtlamaları
+      url: unique-keys.md
+  - linkListType: how-to-guide
+    links:
+    - text: Veritabanı oluşturma
+      url: how-to-manage-database-account.md
+    - text: Bir kapsayıcı oluşturma
+      url: how-to-create-container.md
+    - text: Kapsayıcıdan veri sorgulama
+      url: how-to-query-container.md
+    - text: Kapsayıcılar ve öğeler için yaşam süresini yapılandırma
+      url: how-to-time-to-live.md
+    - text: Dizin oluşturma ilkelerini yapılandırma
+      url: how-to-manage-indexing-policy.md
+    - text: Benzersiz anahtarlar tanımlama
+      url: how-to-define-unique-keys.md
+    - text: Yerel geliştirme için öykünücü kullanma
+      url: local-emulator.md
+    - text: Azure PowerShell kullanarak yönetme
+      url: manage-with-powershell.md
+    - text: Azure CLI kullanarak yönetme
+      url: manage-with-cli.md
+    - text: Resource Manager (ARM) şablonlarını kullanarak yönetme
+      url: manage-sql-with-resource-manager.md
+- title: Sağlanan İşleme Hızı
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: İstek Birimleri
+      url: request-units.md
+    - text: Veritabanı ve kapsayıcı düzeyinde işleme hızı
+      url: set-throughput.md
+  - linkListType: how-to-guide
+    links:
+    - text: Gerekli işleme hızını tahmin etme
+      url: estimate-ru-with-capacity-planner.md
+    - text: Veritabanında aktarım hızı sağlama
+      url: how-to-provision-database-throughput.md
+    - text: Kapsayıcıda aktarım hızı sağlama
+      url: how-to-provision-container-throughput.md
+    - text: İstek birimi ücretlerini alma
+      url: find-request-unit-charge.md
+- title: SQL API ile uygulama oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: .NET Konsol uygulaması
+      url: create-sql-api-dotnet.md
+    - text: Java uygulaması
+      url: create-sql-api-java.md
+    - text: Node.js uygulaması
+      url: create-sql-api-nodejs.md
+    - text: Python uygulaması
+      url: create-sql-api-python.md
+    - text: Xamarin uygulaması
+      url: create-sql-api-xamarin-dotnet.md
+  - linkListType: tutorial
+    links:
+    - text: .NET web uygulaması
+      url: sql-api-dotnet-application.md
+    - text: Zaman uyumsuz SDK ile Java uygulaması
+      url: sql-api-async-java-get-started.md
+    - text: SQL sorgularıyla verileri sorgulama
+      url: tutorial-query-sql-api.md
+  - linkListType: how-to-guide
+    links:
+    - text: Power BI ile verileri görselleştirme
+      url: powerbi-visualize.md
+    - text: Saklı yordamları, tetikleyicileri ve UDF’leri tanımlama
+      url: how-to-write-stored-procedures-triggers-udfs.md
+    - text: Saklı yordamları, tetikleyicileri ve UDF’leri yürütme
+      url: how-to-use-stored-procedures-triggers-udfs.md
+  - linkListType: reference
+    links:
+    - text: .NET
+      url: sql-api-sdk-dotnet.md
+    - text: Java
+      url: sql-api-sdk-java.md
+    - text: JavaScript
+      url: sql-api-sdk-node.md
+    - text: REST
+      url: /rest/api/cosmos-db/
+  - linkListType: learn
+    links:
+    - text: SQL API verilerini oluşturma ve yönetme
+      url: /learn/modules/store-access-data-cosmos-table-api/
+- title: MongoDB API'yle uygulama oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: .NET uygulaması
+      url: create-mongodb-dotnet.md
+    - text: Java uygulaması
+      url: create-mongodb-java.md
+    - text: Node.js uygulaması
+      url: create-mongodb-nodejs.md
+    - text: Python uygulaması
+      url: create-mongodb-flask.md
+  - linkListType: tutorial
+    links:
+    - text: MongoDB kabuğuyla verileri sorgulama
+      url: tutorial-query-mongodb.md
+  - linkListType: how-to-guide
+    links:
+    - text: Veri dizinlemeyi yönetme
+      url: mongodb-indexing.md
+    - text: Yaşam süresini ayarlama
+      url: mongodb-time-to-live.md
+    - text: Robo 3T ile bağlanma
+      url: mongodb-robomongo.md
+- title: Gremlin API'yle uygulama oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Gremlin Konsolunu kullanma
+      url: create-graph-gremlin-console.md
+    - text: .NET uygulaması
+      url: create-graph-dotnet.md
+    - text: Java uygulaması
+      url: create-graph-java.md
+    - text: Node.js uygulaması
+      url: create-graph-nodejs.md
+    - text: Python uygulaması
+      url: create-graph-python.md
+    - text: PHP uygulaması
+      url: create-graph-php.md
+  - linkListType: how-to-guide
+    links:
+    - text: Graf verileri modellemesi
+      url: graph-modeling.md
+    - text: Graf verileri bölümlemesi için en iyi yöntemler
+      url: graph-partitioning.md
+    - text: Gremlin sorgularını iyileştirme
+      url: graph-execution-profile.md
+  - linkListType: learn
+    links:
+    - text: Grafik verilerini depolama ve bu verilere erişme
+      url: /learn/modules/store-access-data-cosmos-graph-api/
+- title: Cassandra API'yle uygulama oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: .NET
+      url: create-cassandra-dotnet.md
+    - text: Java
+      url: create-cassandra-java.md
+    - text: Node.js
+      url: create-cassandra-nodejs.md
+    - text: Python
+      url: create-cassandra-python.md
+  - linkListType: how-to-guide
+    links:
+    - text: Spark'tan Cassandra API’ye bağlanma
+      url: cassandra-spark-generic.md
+- title: Performansı ve maliyeti iyileştirme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: İşleme hızı maliyeti
+      url: optimize-cost-throughput.md
+    - text: Sorgu maliyeti
+      url: optimize-cost-queries.md
+    - text: Depolama maliyeti
+      url: optimize-cost-storage.md
+    - text: Okuma ve yazma işlemlerinin maliyeti
+      url: optimize-cost-reads-writes.md
+    - text: Birden çok bölgenin maliyeti
+      url: optimize-cost-regions.md
+    - text: Sorgu performansı
+      url: sql-api-query-metrics.md
+  - linkListType: how-to-guide
+    links:
+    - text: Veri modellemesi ile iyileştirme
+      url: how-to-model-partition-example.md
+- title: Verilerinizi Cosmos DB’ye geçirme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Veri geçiş aracı – SQL API
+      url: import-data.md
+    - text: CQL kabuğu, Spark – Cassandra API
+      url: cassandra-import-data.md
+    - text: Azure Veritabanı Geçiş Hizmeti – MongoDB API
+      url: /azure/dms/tutorial-mongodb-cosmos-db
+    - text: AzCopy, Veri geçiş aracı – Tablo API'si
+      url: table-import.md
+  - linkListType: how-to-guide
+    links:
+    - text: Striim kullanarak Oracle DB'den Cosmos DB SQL API'ye
+      url: cosmosdb-sql-api-migrate-data-striim.md
+    - text: Striim kullanarak Oracle DB'den Cosmos DB Cassandra API'ye
+      url: cosmosdb-cassandra-api-migrate-data-striim.md
+    - text: Blitzz kullanarak Oracle DB'den Cosmos DB Cassandra API'ye
+      url: oracle-migrate-cosmos-db-blitzz.md
+    - text: Blitzz kullanarak Apache Cassandra'dan Cosmos DB'ye
+      url: cassandra-migrate-cosmos-db-blitzz.md
+    - text: Yüzlerce terabayt veriyi geçirme
+      url: migrate-cosmosdb-data.md
+- title: Apache Spark ile yerleşik analiz
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Analiz kullanım örnekleri
+      url: analytics-usecases.md
+    - text: Lambda mimarisi
+      url: lambda-architecture.md
+  - linkListType: how-to-guide
+    links:
+    - text: Cosmos DB - Spark bağlayıcısı kullanma
+      url: spark-connector.md
+    - text: Apache Kafka ile Cosmos DB kullanma
+      url: /azure/hdinsight/apache-kafka-spark-structured-streaming-cosmosdb

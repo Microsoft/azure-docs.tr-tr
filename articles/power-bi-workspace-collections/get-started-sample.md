@@ -2,18 +2,18 @@
 title: Bir örnek ile kullanmaya başlama
 description: Bu makalede, sizi, Power BI çalışma alanı koleksiyonları get başlatılan örneğe tanıtacağız.
 services: power-bi-workspace-collections
-ms.service: power-bi-workspace-collections
+ms.service: power-bi-embedded
 author: rkarlin
 ms.author: rkarlin
 ms.topic: article
 ms.workload: powerbi
 ms.date: 09/25/2017
-ms.openlocfilehash: 6cf78bf9c83df0a1255c14499bbd2036a2be5ed6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9b45dd6bcc9aa3abf2d5078b54e51531cae4ec5f
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64714512"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67669112"
 ---
 # <a name="get-started-with-power-bi-workspace-collections-sample"></a>Power BI çalışma alanı koleksiyonları örnek ile kullanmaya başlama
 
@@ -38,7 +38,7 @@ Aşağıdaki kaynaklar kaydetmek istediğiniz tüm daha fazla ayrıntıya önce:
 
 1. İndirip sıkıştırmasını [Power BI çalışma alanı koleksiyonları - bir raporu web uygulamasıyla tümleştirmek](https://go.microsoft.com/fwlink/?LinkId=761493) GitHub üzerinde örnek.
 2. Açık **Powerbı embedded.sln** Visual Studio'da. Yürütme gerekebilir **Update-Package** bu çözümde kullanılan paketler güncelleştirmek için NuGet Paket Yöneticisi konsolunda komutu.
-3. Çözümü derleyin.
+3. Çözümü oluşturun.
 4. Çalıştırma **ProvisionSample** konsol uygulaması. Örnek konsol uygulamasında, bir çalışma alanı sağlama ve PBIX dosyasını içeri aktarın.
 5. Yeni bir sağlama **çalışma**, 1 seçeneğini belirleyin **koleksiyonu Yönetimi**ve seçeneği 6'da, ardından **yeni bir çalışma alanı sağlanamadı**
 6. Yeni bir içeri aktarmak için **rapor**, seçin, 2. seçenek **rapor Yönetim**seçip 3 seçeneği **PBIX Desktop içeri aktarma dosyası bir çalışma alanına**.
@@ -140,7 +140,7 @@ Genel sunucu ve veritabanı kullanarak başarısız öznitelikler. Örneğin: Se
 
 | Bölümü | Açıklama |
 | --- | --- |
-| Unvan |Raporun adı. |
+| Başlık |Raporun adı. |
 | QueryString |Bir bağlantı Raporu Kimliği |
 ```cshtml
 <div id="reports-nav" class="panel-collapse collapse">

@@ -1,43 +1,45 @@
 ---
-title: SaaS uygulamaları - Azure Active Directory erişimi yönetmek için bir grup kullanmanızı | Microsoft Docs
-description: Azure Active Directory ile tümleştirilmiş SaaS uygulamalarına erişimi atamak için Azure Active Directory'de grupları kullanma
+title: SaaS uygulamalarına erişimi yönetmek için bir grup kullanma-Azure AD | Microsoft Docs
+description: Azure Active Directory ile tümleştirilmiş SaaS uygulamalarına erişim atamak için Azure Active Directory içindeki grupları kullanma.
 services: active-directory
 documentationcenter: ''
 author: curtand
-manager: mtillman
+manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: users-groups-roles
 ms.topic: article
-ms.date: 01/31/2019
+ms.date: 11/08/2019
 ms.author: curtand
 ms.reviewer: krbain
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 873863016d6dc54c7439ec1f46180b3c063bda19
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 51375f057543c86fe021822eb9722ffd1be16804
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60470424"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74026847"
 ---
 # <a name="using-a-group-to-manage-access-to-saas-applications"></a>SaaS uygulamalarına erişimi yönetmek için grup kullanma
 
-Azure Active Directory (Azure AD) bir Azure AD Premium veya Azure AD temel lisansı ile birlikte kullanarak, Azure AD ile tümleştirilmiş bir SaaS uygulamasına erişim atamak için grupları kullanabilirsiniz. Örneğin, beş farklı SaaS uygulamasında kullanmak pazarlama bölümü için erişimi atamak istiyorsanız, pazarlama departmanındaki kullanıcılar içeren bir grup oluşturabilir ve ardından tarafından gerekli olan bu beş SaaS uygulamaları için bu gruba atayın Pazarlama departmanındaki. Bu şekilde üyelik pazarlama departmanı tek bir yerden yöneterek zaman kazanabilirsiniz. Pazarlama grubunun bir üyesi eklenir ve pazarlama gruptan kaldırdığınızda atamaları uygulamadan kaldırdıysanız, kullanıcılar uygulamaya sonra atanır. Bu özellik, Azure AD uygulama Galerisi içinde ekleyebilirsiniz uygulamaları yüzlerce ile kullanılabilir.
+Azure AD Premium lisans planıyla Azure Active Directory (Azure AD) kullanarak, Azure AD ile tümleştirilmiş bir SaaS uygulamasına erişim atamak için grupları kullanabilirsiniz. Örneğin, pazarlama departmanı için beş farklı SaaS uygulaması kullanmak üzere erişim atamak istiyorsanız, pazarlama departmanındaki kullanıcıları içeren bir grup oluşturabilir ve ardından bu grubu, bu grup için gereken beş SaaS uygulamasına atayabilirsiniz. Pazarlama Departmanı. Bu şekilde, pazarlama bölümünün üyeliğini tek bir yerde yöneterek zamandan tasarruf edebilirsiniz. Kullanıcılar, pazarlama grubunun üyesi olarak eklendiklerinde uygulamaya atanır ve bunların atamaları pazarlama grubundan kaldırıldığında uygulamadan kaldırılır. Bu özellik, Azure AD Uygulama Galerisi içinden ekleyebileceğiniz yüzlerce uygulama ile kullanılabilir.
 
 > [!IMPORTANT]
-> Yalnızca bir Azure AD Premium denemesi başlatın veya Azure AD Premium veya Azure AD temel lisansı satın sonra bu özelliği kullanabilirsiniz. Grup tabanlı atama, yalnızca güvenlik grupları için desteklenir. Şu anda uygulamalara grup tabanlı atama yapmak için iç içe geçmiş grup üyelikleri desteklenmiyor.
+> Bu özelliği, yalnızca bir Azure AD Premium deneme sürümünü başlattıktan veya Azure AD Premium lisans planı satın aldıktan sonra kullanabilirsiniz.
+> Grup tabanlı atama yalnızca güvenlik grupları için desteklenir.
+> Şu anda uygulamalara grup tabanlı atama yapmak için iç içe geçmiş grup üyelikleri desteklenmiyor.
 
-**Bir SaaS uygulamasına erişimi bir kullanıcı veya grup için atama**
+## <a name="to-assign-access-for-a-user-or-group-to-a-saas-application"></a>SaaS uygulamasına bir kullanıcı veya grup için erişim atama
 
-1. İçinde [Azure AD yönetim merkezini](https://aad.portal.azure.com)seçin **kurumsal uygulamalar**.
-2. Açmak için uygulama galerisinden eklediğiniz uygulama seçin.
-3. Seçin **kullanıcılar ve gruplar**ve ardından **Kullanıcı Ekle**.
-4. Üzerinde **atama Ekle**seçin **kullanıcılar ve gruplar** açmak için **kullanıcılar ve gruplar** seçim listesi.
-6. Sayıda grubu seçin veya kullanıcıların, istediğiniz tıklayın veya dokunun **seçin** ekleneceği **atama Ekle** listesi. Ayrıca bu aşamada bir kullanıcıya bir rol atayabilirsiniz.
-7. Seçin **atama** kullanıcılar veya gruplar için seçilen Kurumsal uygulama atamak için.
+1. [Azure AD Yönetim merkezinde](https://aad.portal.azure.com) **Kurumsal uygulamalar**' ı seçin.
+2. Uygulama galerisinden eklediğiniz bir uygulamayı açmak için seçin.
+3. **Kullanıcılar ve gruplar**' ı seçin ve ardından **Kullanıcı Ekle**' yi seçin.
+4. **Atama Ekle**sayfasında kullanıcılar **ve** gruplar ' ı seçerek kullanıcılar ve **gruplar** seçim listesini açın.
+6. İstediğiniz sayıda grup veya Kullanıcı seçin, sonra **atama Ekle** listesine eklemek için **Seç** ' e tıklayın veya dokunun. Ayrıca, bu aşamada bir kullanıcıya bir rol atayabilirsiniz.
+7. Kullanıcıları veya grupları seçili kurumsal uygulamaya atamak için **ata** ' yı seçin.
 
-### <a name="next-steps"></a>Sonraki adımlar
+## <a name="next-steps"></a>Sonraki adımlar
 Bu makalelerde Azure Active Directory ile ilgili ek bilgi sağlanmıştır.
 
 * [Azure Active Directory grupları ile kaynaklara erişimi yönetme](../fundamentals/active-directory-manage-groups.md)

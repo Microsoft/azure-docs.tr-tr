@@ -1,7 +1,7 @@
 ---
-title: Studio çalışma alanına Azure Resource Manager ile dağıtma
-titleSuffix: Azure Machine Learning Studio
-description: Bir çalışma alanı için Azure Machine Learning Azure Resource Manager şablonu kullanarak Studio dağıtma
+title: Azure Resource Manager ile Studio (klasik) çalışma alanını dağıtma
+titleSuffix: ML Studio (classic) - Azure
+description: Azure Resource Manager şablonu kullanarak Azure Machine Learning Studio (klasik) için çalışma alanı dağıtma
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,26 +10,26 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: seodec18
 ms.date: 02/05/2018
-ms.openlocfilehash: 91413aa461261824782717ae4edacc2757ad5405
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5ca45d772e3804dce4e27e5a6d4388acca4d1486
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66121310"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73837686"
 ---
-# <a name="deploy-azure-machine-learning-studio-workspace-using-azure-resource-manager"></a>Azure Machine Learning Studio çalışma alanına Azure Resource Manager kullanarak dağıtma
+# <a name="deploy-azure-machine-learning-studio-classic-workspace-using-azure-resource-manager"></a>Azure Resource Manager kullanarak Azure Machine Learning Studio (klasik) çalışma alanını dağıtma
 
-Kullanarak bir Azure Resource Manager dağıtım şablonu, ölçeklenebilir bir şekilde vererek, zaman tasarrufu sağlar, birbirine bağlı bileşenleri ile bir doğrulama dağıtmak ve yeniden deneme mekanizması. Azure Machine Learning Studio çalışma alanları ayarlamak için örneğin, önce bir Azure depolama hesabı yapılandırın ve ardından çalışma alanınızı dağıtmanız gerekir. Çalışma alanları yüzlerce için el ile bunu hayal edin. Daha kolay bir alternatif bir Studio çalışma alanına ve tüm bağımlılıklarını dağıtmak için bir Azure Resource Manager şablonu kullanmaktır. Bu makalede bu işlemi adım adım alır. Harika bir genel bakış, Azure Resource Manager için bkz: [Azure Resource Manager'a genel bakış](../../azure-resource-manager/resource-group-overview.md).
+Bir Azure Resource Manager dağıtım şablonu kullanmak, bir doğrulama ve yeniden deneme mekanizmasıyla bağlantılı bileşenleri dağıtmak için ölçeklenebilir bir yol sunarak size zaman kazandırır. Örneğin Azure Machine Learning Studio (klasik) çalışma alanlarını ayarlamak için önce bir Azure depolama hesabı yapılandırmanız ve ardından çalışma alanınızı dağıtmanız gerekir. Yüzlerce çalışma alanı için el ile bunu düşünün. Daha kolay bir alternatif, bir Studio (klasik) çalışma alanını ve tüm bağımlılıklarını dağıtmak için Azure Resource Manager şablonu kullanmaktır. Bu makale, bu işlem adım adım boyunca size kılavuzluk eden bir işlemdir. Azure Resource Manager harika bir genel bakış için bkz. [Azure Resource Manager genel bakış](../../azure-resource-manager/resource-group-overview.md).
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-## <a name="step-by-step-create-a-machine-learning-workspace"></a>Adım adım: bir Machine Learning çalışma alanı oluşturma
-Biz bir Azure kaynak grubu oluşturun ve ardından yeni bir Azure depolama hesabı ve yeni Azure Machine Learning Studio Resource Manager şablonu kullanarak bir çalışma alanı dağıtın. Dağıtım tamamlandıktan sonra biz (birincil anahtar, çalışma alanı kimliği ve çalışma alanı URL) oluşturulan çalışma alanları hakkında önemli bilgileri yazdırır.
+## <a name="step-by-step-create-a-machine-learning-workspace"></a>Adım adım: Machine Learning Çalışma Alanı oluşturma
+Bir Azure Kaynak grubu oluşturacak, sonra yeni bir Azure depolama hesabı ve yeni bir Azure Machine Learning Studio (klasik) çalışma alanını Kaynak Yöneticisi şablonu kullanarak dağıtacağız. Dağıtım tamamlandıktan sonra, oluşturulan çalışma alanları (birincil anahtar, çalışma alanı kimliği ve çalışma alanının URL 'SI) hakkındaki önemli bilgileri yazdıracağız.
 
-### <a name="create-an-azure-resource-manager-template"></a>Bir Azure Resource Manager şablonu oluşturma
+### <a name="create-an-azure-resource-manager-template"></a>Azure Resource Manager şablonu oluşturma
 
-Bir Machine Learning çalışma alanı, bağlantılı veri kümesine depolamak için bir Azure depolama hesabı gerektirir.
-Depolama hesabı adı oluşturmak için kaynak grubu adını ve çalışma alanı adı şu şablonu kullanır.  Ayrıca depolama hesabı adı bir özellik olarak çalışma alanını oluştururken kullanır.
+Machine Learning Çalışma Alanı, kendisiyle bağlantılı veri kümesini depolamak için bir Azure depolama hesabı gerektirir.
+Aşağıdaki şablon, depolama hesabı adını ve çalışma alanı adını oluşturmak için kaynak grubunun adını kullanır.  Ayrıca, çalışma alanını oluştururken bir özellik olarak depolama hesabı adını kullanır.
 
 ```json
 {
@@ -76,12 +76,12 @@ Depolama hesabı adı oluşturmak için kaynak grubu adını ve çalışma alan�
 }
 
 ```
-Bu şablon, c:\temp\ altında mlworkspace.json dosyası olarak kaydedin.
+Bu şablonu c:\temp\ın altında mlworkspace. JSON dosyası olarak kaydedin.
 
 ### <a name="deploy-the-resource-group-based-on-the-template"></a>Şablona göre kaynak grubunu dağıtma
 
 * PowerShell’i açın
-* Azure Resource Manager ve Azure hizmet yönetimi için modülleri yükleme
+* Azure Resource Manager ve Azure hizmet yönetimi için modülleri yükler
 
 ```powershell
 # Install the Azure Resource Manager modules from the PowerShell Gallery (press “A”)
@@ -91,19 +91,19 @@ Install-Module Az -Scope CurrentUser
 Install-Module Azure -Scope CurrentUser
 ```
 
-   Bu adımlar, indirin ve kalan adımları tamamlamak için gerekli modüllerini yükleyin. Bu yalnızca burada PowerShell komutlarını çalıştırma ortama bir kez gerçekleştirilmesi gerekir.
+   Bu adımlar, kalan adımları tamamlayabilmeniz için gereken modülleri indirir ve yükler. Bu, PowerShell komutlarını yürüttüğünüz ortamda yalnızca bir kez yapılmalıdır.
 
-* Azure'da kimlik doğrulaması
+* Azure 'da kimlik doğrulama
 
 ```powershell
 # Authenticate (enter your credentials in the pop-up window)
 Connect-AzAccount
 ```
-Bu adımı her oturum için yinelenmesi gerekir. Kimlik doğrulandıktan sonra abonelik bilgilerinizi görüntülenmesi gerekir.
+Bu adımın her oturum için yinelenmesi gerekir. Kimliği doğrulandıktan sonra, abonelik bilgileriniz görüntülenmelidir.
 
 ![Azure hesabı](./media/deploy-with-resource-manager-template/azuresubscription.png)
 
-Azure'a erişimi sahibiz, kaynak grubunu oluşturabiliriz.
+Artık Azure 'a erişimimiz olduğuna göre, kaynak grubunu oluşturuyoruz.
 
 * Kaynak grubu oluşturma
 
@@ -112,38 +112,38 @@ $rg = New-AzResourceGroup -Name "uniquenamerequired523" -Location "South Central
 $rg
 ```
 
-Kaynak grubu doğru şekilde sağlandığından emin olun. **ProvisioningState** "Başarılı olması."
-Kaynak grubu adı, depolama hesabı adı oluşturmak için şablon tarafından kullanılır. Depolama hesabı adı 3 ila 24 karakter uzunluğunda olmalı ve sayı ve yalnızca küçük harflerden oluşmalıdır.
+Kaynak grubunun doğru şekilde sağlandığını doğrulayın. **Provisioningstate** "başarılı" olmalıdır.
+Kaynak grubu adı, şablon tarafından depolama hesabı adını oluşturmak için kullanılır. Depolama hesabı adı 3 ila 24 karakter uzunluğunda olmalı ve yalnızca rakam ve küçük harf kullanılmalıdır.
 
 ![Kaynak Grubu](./media/deploy-with-resource-manager-template/resourcegroupprovisioning.png)
 
-* Kaynak grubu dağıtımı'nı kullanarak yeni bir Machine Learning çalışma alanı dağıtın.
+* Kaynak grubu dağıtımını kullanarak yeni bir Machine Learning Çalışma Alanı dağıtın.
 
 ```powershell
 # Create a Resource Group, TemplateFile is the location of the JSON template.
 $rgd = New-AzResourceGroupDeployment -Name "demo" -TemplateFile "C:\temp\mlworkspace.json" -ResourceGroupName $rg.ResourceGroupName
 ```
 
-Dağıtım tamamlandıktan sonra dağıttığınız çalışma özelliklerine erişmek için basit bir iştir. Örneğin, birincil anahtar belirteci erişebilirsiniz.
+Dağıtım tamamlandıktan sonra, dağıttığınız çalışma alanının özelliklerine erişim basittir. Örneğin, birincil anahtar belirtecine erişebilirsiniz.
 
 ```powershell
-# Access Azure Machine Learning studio Workspace Token after its deployment.
+# Access Azure Machine Learning Studio Workspace Token after its deployment.
 $rgd.Outputs.mlWorkspaceToken.Value
 ```
 
-Mevcut bir çalışma alanının belirteçlerini almak için başka bir yolu, Invoke-AzResourceAction komutunu kullanmaktır. Örneğin, birincil ve ikincil belirteçleri tüm çalışma alanları listeleyebilirsiniz.
+Mevcut çalışma alanının belirteçlerini almanın başka bir yolu da Invoke-AzResourceAction komutunu kullanmaktır. Örneğin, tüm çalışma alanlarının birincil ve ikincil belirteçlerini listeleyebilirsiniz.
 
 ```powershell
 # List the primary and secondary tokens of all workspaces
 Get-AzResource |? { $_.ResourceType -Like "*MachineLearning/workspaces*"} |ForEach-Object { Invoke-AzResourceAction -ResourceId $_.ResourceId -Action listworkspacekeys -Force}
 ```
-Çalışma alanı sağlandıktan sonra kullanarak birçok Azure Machine Learning Studio görevleri de otomatik hale getirebilirsiniz [Azure Machine Learning Studio için PowerShell Modülü](https://aka.ms/amlps).
+Çalışma alanı sağlandıktan sonra, [Azure Machine Learning Studio (klasik) Için PowerShell modülünü](https://aka.ms/amlps)kullanarak pek çok Azure Machine Learning Studio (klasik) görevi otomatikleştirebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Daha fazla bilgi edinin [Azure Resource Manager şablonları yazma](../../azure-resource-manager/resource-group-authoring-templates.md).
-* Göz atın [Azure hızlı başlangıç şablonları depo](https://github.com/Azure/azure-quickstart-templates).
-* Bu videoyu hakkında [Azure Resource Manager](https://channel9.msdn.com/Events/Ignite/2015/C9-39).
-* Bkz: [Resource Manager şablon Başvurusu Yardımı](https://docs.microsoft.com/azure/templates/microsoft.machinelearning/allversions)
+* [Azure Resource Manager şablonları yazma](../../azure-resource-manager/resource-group-authoring-templates.md)hakkında daha fazla bilgi edinin.
+* [Azure hızlı başlangıç şablonları deposuna](https://github.com/Azure/azure-quickstart-templates)göz atın.
+* [Azure Resource Manager](https://channel9.msdn.com/Events/Ignite/2015/C9-39)hakkındaki bu videoyu izleyin.
+* [Kaynak Yöneticisi şablonu başvurusu yardımına](https://docs.microsoft.com/azure/templates/microsoft.machinelearning/allversions) bakın
 
 <!--Link references-->

@@ -1,195 +1,187 @@
 ---
-title: Coğrafi çoğaltma, Azure önbelleği için Redis için yapılandırma | Microsoft Docs
-description: Azure önbelleği için Redis örneği coğrafi bölgeler arasında çoğaltmak öğrenin.
-services: cache
-documentationcenter: ''
+title: Redsıs için Azure önbelleği için Coğrafi çoğaltmayı ayarlama | Microsoft Docs
+description: Coğrafi bölgeler arasında Redsıs örnekleri için Azure önbelleğinizi çoğaltmayı öğrenin.
 author: yegu-ms
-manager: jhubbard
-editor: ''
-ms.assetid: 375643dc-dbac-4bab-8004-d9ae9570440d
 ms.service: cache
-ms.workload: tbd
-ms.tgt_pltfrm: cache
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/06/2019
 ms.author: yegu
-ms.openlocfilehash: 4254175955c3560c7bd0fdd08c6b60c318238b76
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ce50c665fa79c361f638fda4ec373d5215c407f8
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60552390"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74129422"
 ---
-# <a name="how-to-configure-geo-replication-for-azure-cache-for-redis"></a>Coğrafi çoğaltma, Azure önbelleği için Redis için yapılandırma
+# <a name="how-to-set-up-geo-replication-for-azure-cache-for-redis"></a>Redsıs için Azure önbelleği için Coğrafi çoğaltmayı ayarlama
 
-Coğrafi çoğaltma, iki Premium katmanı Azure Cache Redis örneği için bağlama için bir mekanizma sağlar. Bir önbelleği birincil bağlı önbellek ve diğer bağlı ikincil önbellek olarak seçilir. Bağlı ikincil önbellek salt okunur hale gelir ve birincil önbelleğe yazılan veri ikincil bağlı önbellek için çoğaltılır. Bu işlev, Azure bölgeleri arasında bir önbellek çoğaltmak için kullanılabilir. Bu makalede, Azure Cache Premium katmanı Redis örneği için coğrafi çoğaltmayı yapılandırma için bir kılavuz sağlar.
+Coğrafi çoğaltma, Redsıs örnekleri için iki Premium katman Azure önbelleğinin bağlanmasına yönelik bir mekanizma sağlar. Birincil bağlı önbellek ve diğeri ikincil bağlantılı önbellek olarak bir önbellek seçilir. İkincil bağlantılı önbellek salt okunurdur ve birincil önbelleğe yazılan veriler ikincil bağlantılı önbelleğe çoğaltılır. Bu işlev, Azure bölgeleri arasında bir önbelleği çoğaltmak için kullanılabilir. Bu makale, Redsıs örnekleri için Premium katman Azure önbelleğiniz için Coğrafi çoğaltmayı yapılandırmaya yönelik bir kılavuz sağlar.
 
 ## <a name="geo-replication-prerequisites"></a>Coğrafi çoğaltma önkoşulları
 
-İki önbellekler arasında coğrafi çoğaltmayı yapılandırmak için aşağıdaki önkoşullar karşılanmalıdır:
+İki önbellek arasında Coğrafi çoğaltmayı yapılandırmak için aşağıdaki önkoşulların karşılanması gerekir:
 
-- Her iki önbellekler [Premium katmanı](cache-premium-tier-intro.md) önbelleğe alır.
-- Her iki önbellekler aynı Azure aboneliğinde ise.
-- Bağlı ikincil önbellek aynı önbellek boyutunu ya da birincil bağlı önbellek daha büyük bir önbellek boyutu ' dir.
-- Her iki önbellekler oluşturulur ve çalışır durumda.
+- Her iki önbellek de [Premium katman](cache-premium-tier-intro.md) önbellekler.
+- Her iki önbellek de aynı Azure aboneliğinde bulunur.
+- İkincil bağlantılı önbellek, birincil bağlı önbellekten aynı önbellek boyutu veya daha büyük bir önbellek boyutudur.
+- Her iki önbellek de oluşturulur ve çalışır durumda.
 
-Bazı özellikler, coğrafi çoğaltma desteklenmez:
+Bazı özellikler coğrafi çoğaltma ile desteklenmez:
 
-- Kalıcılık coğrafi çoğaltma desteklenmez.
-- Her iki önbellekler kümeleme özelliği etkinleştirildiğinde varsa ve aynı parça sayısı Kümelemesi desteklenir.
-- Aynı vnet'teki önbellekler desteklenir.
-- Farklı sanal ağlardaki önbellekler, uyarılar ile desteklenir. Bkz: [coğrafi çoğaltma bir vnet'teki benim önbellek ile kullanabilir miyim?](#can-i-use-geo-replication-with-my-caches-in-a-vnet) daha fazla bilgi için.
+- Kalıcılık, coğrafi çoğaltma ile desteklenmez.
+- Her iki önbellekte de kümeleme etkinse ve aynı sayıda parça varsa kümeleme desteklenir.
+- Aynı VNET 'teki önbellekler desteklenir.
+- Farklı VNET 'lerdeki önbellekler uyarılarla desteklenir. Daha fazla bilgi için bkz. [VNET 'te önbellekler ile Coğrafi çoğaltmayı kullanabilir miyim?](#can-i-use-geo-replication-with-my-caches-in-a-vnet)
 
-Coğrafi çoğaltma yapılandırdıktan sonra bağlı önbellek çiftinizi aşağıdaki kısıtlamalar uygulanır:
+Coğrafi Çoğaltma yapılandırıldıktan sonra, aşağıdaki kısıtlamalar bağlı önbellek çiftiniz için geçerlidir:
 
-- Bağlı ikincil önbellek salt okunur; Buradan okuyabilirsiniz, ancak herhangi bir veri yazamaz. 
-- Bağlantıyı eklenmeden önce ikincil bağlı önbellekte olan tüm veriler kaldırılır. Ancak, coğrafi çoğaltma daha geç ise ikincil bağlı önbellek çoğaltılan veriler saklanır kaldırıldı.
-- Şunları yapamazsınız [ölçek](cache-how-to-scale.md) önbellekleri bağlı olsa da önbellek.
-- Şunları yapamazsınız [parça sayısını değiştirmek](cache-how-to-premium-clustering.md) önbellek kümeleme özelliği etkinleştirildiğinde varsa.
-- Her iki önbellek kalıcılığı etkinleştirilemiyor.
-- Yapabilecekleriniz [dışarı](cache-how-to-import-export-data.md#export) ya da önbelleğinden.
-- Şunları yapamazsınız [alma](cache-how-to-import-export-data.md#import) ikincil bağlı önbelleğine.
-- Bağlı önbellek veya Önbelleklerin bağlantısı kadar bunları içeren kaynak grubu silinemiyor. Daha fazla bilgi için [neden işlem başarısız bağlı önbelleğimin silmeye çalışırken?](#why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache)
-- Önbellekleri farklı bölgelerde bulunuyorsa, ağ çıkışı maliyeti bölgeler arasında taşınan veriler için geçerlidir. Daha fazla bilgi için [ücreti ne kadardır verilerimi Azure bölgeleri arasında çoğaltılmasını?](#how-much-does-it-cost-to-replicate-my-data-across-azure-regions)
-- Birincil ve ikincil bağlı önbellek arasında otomatik yük devretme gerçekleşmez. Daha fazla bilgi ve yük devretme bir istemci uygulaması hakkında bilgi için bkz. [nasıl yük devretme ikincil bağlı önbellek çalışır?](#how-does-failing-over-to-the-secondary-linked-cache-work)
+- İkincil bağlantılı önbellek salt okunurdur; buradan okuyabilirsiniz, ancak buraya veri yazılamaz. 
+- Bağlantı eklenmeden önce ikincil bağlantılı önbellekte bulunan tüm veriler kaldırılır. Coğrafi çoğaltma daha sonra kaldırılırsa, çoğaltılan veriler ikincil bağlantılı önbellekte kalır.
+- Önbellekler bağlıyken her iki önbelleği [ölçeklendirebilirsiniz](cache-how-to-scale.md) .
+- Önbellekte kümeleme etkinse [, parça sayısını değiştiremezsiniz](cache-how-to-premium-clustering.md) .
+- Her iki önbellekte de kalıcılığı etkinleştiremezsiniz.
+- Her iki önbellekten de [dışarı aktarabilirsiniz](cache-how-to-import-export-data.md#export) .
+- İkincil bağlantılı önbelleğe [Içeri aktaramazsınız](cache-how-to-import-export-data.md#import) .
+- Önbellekler bağlantısını kaldırana kadar bağlı önbelleği veya bunları içeren kaynak grubunu silemezsiniz. Daha fazla bilgi için bkz [. bağlı önbelleğinizi silmeye çalıştığımda işlem başarısız oldu mu?](#why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache)
+- Önbellekler farklı bölgelerde ise, ağ çıkış maliyetleri bölgeler arasında taşınan veriler için geçerlidir. Daha fazla bilgi için bkz. [verileri Azure bölgelerinde çoğaltma maliyeti ne kadar sürer?](#how-much-does-it-cost-to-replicate-my-data-across-azure-regions)
+- Birincil ve ikincil bağlantılı önbellek arasında otomatik yük devretme gerçekleşmez. İstemci uygulamasının yük devretmesi hakkında daha fazla bilgi ve bilgi için bkz. [İkincil bağlantılı önbelleğin yükünü devretme nasıl çalışır?](#how-does-failing-over-to-the-secondary-linked-cache-work)
 
-## <a name="add-a-geo-replication-link"></a>Coğrafi çoğaltma bağlantısı Ekle
+## <a name="add-a-geo-replication-link"></a>Coğrafi çoğaltma bağlantısı ekleme
 
-1. İki önbellekler için coğrafi çoğaltmayı birbirine bağlamak için tıklatın kaydedeceğinize **coğrafi çoğaltma** önbelleği kaynak menüsünden birincil olmasını istediğiniz önbellek bağlı. Ardından, **Ekle önbellek çoğaltma bağlantısı** gelen **coğrafi çoğaltma** dikey penceresi.
+1. İki önbelleği coğrafi çoğaltma için birlikte bağlamak üzere, birincil bağlantılı önbellek olmasını istediğiniz önbelleğin kaynak menüsünde **coğrafi çoğaltma** ' ya tıklayın. Sonra, **coğrafi çoğaltma** dikey penceresinden **önbellek çoğaltma bağlantısı ekle** ' ye tıklayın.
 
-    ![Bağlantı Ekle](./media/cache-how-to-geo-replication/cache-geo-location-menu.png)
+    ![Bağlantı ekle](./media/cache-how-to-geo-replication/cache-geo-location-menu.png)
 
-2. Hedeflenen ikincil önbellekten adına **uyumlu önbellekler** listesi. İkincil önbelleğinizi listede görüntülenmiyorsa, doğrulayın [coğrafi çoğaltma önkoşulları](#geo-replication-prerequisites) için ikincil önbellek karşılanır. Önbellekleri bölgeye göre filtrelemek için yalnızca önbelleklere haritanın bölgede tıklayın **uyumlu önbellekler** listesi.
+2. **Uyumlu önbellekler** listesinden amaçlanan ikincil önbelleğiniz adına tıklayın. İkincil önbelleğiniz listede görüntülenmiyorsa, ikincil önbelleğin [coğrafi çoğaltma ön koşullarının](#geo-replication-prerequisites) karşılandığını doğrulayın. Önbellekleri bölgeye göre filtrelemek için, haritadaki bölgeye tıklayarak yalnızca **uyumlu önbellekler** listesindeki önbellekleri görüntüleyin.
 
-    ![Coğrafi çoğaltma uyumlu önbellekler](./media/cache-how-to-geo-replication/cache-geo-location-select-link.png)
+    ![Coğrafi çoğaltma ile uyumlu önbellekler](./media/cache-how-to-geo-replication/cache-geo-location-select-link.png)
     
-    Bağlama işlemini Başlat veya bağlam menüsünü kullanarak ikincil önbellek hakkında ayrıntıları görüntüleyin.
+    Ayrıca bağlama işlemini başlatabilir veya bağlam menüsünü kullanarak ikincil önbellek hakkındaki ayrıntıları görüntüleyebilirsiniz.
 
     ![Coğrafi çoğaltma bağlam menüsü](./media/cache-how-to-geo-replication/cache-geo-location-select-link-context-menu.png)
 
-3. Tıklayın **bağlantı** iki önbellekleri birbirine bağlamak ve çoğaltma işlemini başlatmak için.
+3. İki önbelleği birlikte bağlamak ve çoğaltma işlemini başlatmak için **bağlantı** ' ya tıklayın.
 
-    ![Bağlantı önbellekler](./media/cache-how-to-geo-replication/cache-geo-location-confirm-link.png)
+    ![Bağlantı önbellekleri](./media/cache-how-to-geo-replication/cache-geo-location-confirm-link.png)
 
-4. Çoğaltma işleminin ilerleme durumunu görüntüleyebileceğiniz **coğrafi çoğaltma** dikey penceresi.
+4. Çoğaltma işleminin ilerlemesini **coğrafi çoğaltma** dikey penceresinde görebilirsiniz.
 
-    ![Bağlantı durumu](./media/cache-how-to-geo-replication/cache-geo-location-linking.png)
+    ![Bağlama durumu](./media/cache-how-to-geo-replication/cache-geo-location-linking.png)
 
-    Üzerinde bağlantı durumunu görüntüleyebilirsiniz **genel bakış** birincil ve ikincil önbellek için dikey pencere.
+    Ayrıca, birincil ve ikincil önbellekler için **genel bakış** dikey penceresinde bağlama durumunu da görüntüleyebilirsiniz.
 
     ![Önbellek durumu](./media/cache-how-to-geo-replication/cache-geo-location-link-status.png)
 
-    Çoğaltma işlemi tamamlandıktan sonra **bağlantı durumu** değişikliklerini **başarılı**.
+    Çoğaltma işlemi tamamlandıktan sonra **bağlantı durumu** **başarılı**olarak değişir.
 
     ![Önbellek durumu](./media/cache-how-to-geo-replication/cache-geo-location-link-successful.png)
 
-    Birincil bağlı önbellek bağlama işlemi sırasında kullanılabilir kalır. İkincil bağlı önbellek bağlama işlemi tamamlanana kadar kullanılamaz.
+    Birincil bağlantılı önbellek, bağlama işlemi sırasında kullanılabilir kalır. İkincil bağlantılı önbellek, bağlama işlemi tamamlanana kadar kullanılamaz.
 
-## <a name="remove-a-geo-replication-link"></a>Coğrafi çoğaltma bağlantısını Kaldır
+## <a name="remove-a-geo-replication-link"></a>Coğrafi çoğaltma bağlantısını kaldırma
 
-1. İki önbellekler arasındaki bağlantıyı kaldırın ve coğrafi çoğaltma durdurmak için tıklatın **önbelleklerinin bağlantısını** gelen **coğrafi çoğaltma** dikey penceresi.
+1. İki önbellek arasındaki bağlantıyı kaldırmak ve Coğrafi çoğaltmayı durdurmak için, **coğrafi çoğaltma** dikey penceresinden **önbellekler bağlantısını** Kaldır ' a tıklayın.
     
-    ![Önbelleklerin bağlantısı](./media/cache-how-to-geo-replication/cache-geo-location-unlink.png)
+    ![Önbelleklerin bağlantısını kaldır](./media/cache-how-to-geo-replication/cache-geo-location-unlink.png)
 
-    Bağlantı kaldırma işlemi tamamlandıktan sonra ikincil Önbellek Okuma ve yazma işlemleri için kullanılabilir.
+    Bağlantı kaldırma işlemi tamamlandığında, ikincil önbellek hem okuma hem de yazma işlemleri için kullanılabilir.
 
 >[!NOTE]
->Coğrafi çoğaltma bağlantısı kaldırıldığında, birincil bağlı önbellek çoğaltılan verilerini ikincil önbellekte kalır.
+>Coğrafi çoğaltma bağlantısı kaldırıldığında, birincil bağlantılı önbellekteki çoğaltılan veriler ikincil önbellekte kalır.
 >
 >
 
-## <a name="geo-replication-faq"></a>Coğrafi çoğaltma ile ilgili SSS
+## <a name="geo-replication-faq"></a>Coğrafi çoğaltma hakkında SSS
 
-- [Coğrafi çoğaltma standart veya temel katmanı önbelleği ile kullanabilir miyim?](#can-i-use-geo-replication-with-a-standard-or-basic-tier-cache)
-- [Önbelleğimin bağlantı veya bağlantı kaldırma işlemi sırasında kullanılabilir durumda?](#is-my-cache-available-for-use-during-the-linking-or-unlinking-process)
-- [İkiden fazla önbellekler birlikte bağlayabilir miyim?](#can-i-link-more-than-two-caches-together)
-- [Ben, iki farklı Azure aboneliklerinde önbelleklerden bağlayabilir miyim?](#can-i-link-two-caches-from-different-azure-subscriptions)
-- [Ben, iki farklı boyutlarda önbelleklerle bağlayabilir miyim?](#can-i-link-two-caches-with-different-sizes)
-- [Coğrafi çoğaltma Etkin kümeleme ile kullanabilir miyim?](#can-i-use-geo-replication-with-clustering-enabled)
-- [Bir vnet'teki benim önbellek ile coğrafi çoğaltma kullanabilir miyim?](#can-i-use-geo-replication-with-my-caches-in-a-vnet)
-- [Redis coğrafi çoğaltma için çoğaltma zamanlamasını nedir?](#what-is-the-replication-schedule-for-redis-geo-replication)
-- [Coğrafi çoğaltma çoğaltma ne kadar sürer?](#how-long-does-geo-replication-replication-take)
-- [Çoğaltma kurtarma noktası sağlanır?](#is-the-replication-recovery-point-guaranteed)
-- [Coğrafi çoğaltmayı yönetmek için PowerShell veya Azure CLI'yı kullanabilir miyim?](#can-i-use-powershell-or-azure-cli-to-manage-geo-replication)
-- [Bu benim verilerimi Azure bölgeleri arasında çoğaltılmasını nin ücreti ne kadardır?](#how-much-does-it-cost-to-replicate-my-data-across-azure-regions)
-- [Neden bağlı önbelleğimin silmeye çalıştığınızda işlem başarısız oldu?](#why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache)
-- [İkinci bağlantılı önbelleğimin için hangi bölgeyi kullanmalıyım?](#what-region-should-i-use-for-my-secondary-linked-cache)
-- [Yük devretme ikincil bağlı önbellek nasıl çalışır?](#how-does-failing-over-to-the-secondary-linked-cache-work)
+- [Standart veya temel katman önbelleğiyle Coğrafi çoğaltmayı kullanabilir miyim?](#can-i-use-geo-replication-with-a-standard-or-basic-tier-cache)
+- [Önbelleğim bağlama veya bağlantısı kaldırma işlemi sırasında kullanılabilir mi?](#is-my-cache-available-for-use-during-the-linking-or-unlinking-process)
+- [İkiden fazla önbelleğim birlikte bağlanabilir miyim?](#can-i-link-more-than-two-caches-together)
+- [Farklı Azure aboneliklerinden iki önbelleğe bağlanabilir miyim?](#can-i-link-two-caches-from-different-azure-subscriptions)
+- [İki önbelleğe farklı boyutlarda bağlanabilir miyim?](#can-i-link-two-caches-with-different-sizes)
+- [Kümeleme özelliği etkinken Coğrafi çoğaltmayı kullanabilir miyim?](#can-i-use-geo-replication-with-clustering-enabled)
+- [VNET 'teki önbelleklerim ile Coğrafi çoğaltmayı kullanabilir miyim?](#can-i-use-geo-replication-with-my-caches-in-a-vnet)
+- [Redsıs coğrafi çoğaltma için çoğaltma zamanlaması nedir?](#what-is-the-replication-schedule-for-redis-geo-replication)
+- [Coğrafi çoğaltma çoğaltması ne kadar sürer?](#how-long-does-geo-replication-replication-take)
+- [Çoğaltma kurtarma noktası garanti edilir mi?](#is-the-replication-recovery-point-guaranteed)
+- [Coğrafi çoğaltmayı yönetmek için PowerShell veya Azure CLı kullanabilir miyim?](#can-i-use-powershell-or-azure-cli-to-manage-geo-replication)
+- [Verileri Azure bölgeleri arasında çoğaltma maliyeti ne kadar sürer?](#how-much-does-it-cost-to-replicate-my-data-across-azure-regions)
+- [Bağlı önbelleğinizi silmeye çalıştığımda işlem başarısız oldu mu?](#why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache)
+- [İkincil bağlantılı önbelleğim için hangi bölgeyi kullanmalıyım?](#what-region-should-i-use-for-my-secondary-linked-cache)
+- [İkincil bağlantılı önbelleğin yük devri nasıl çalışır?](#how-does-failing-over-to-the-secondary-linked-cache-work)
 
-### <a name="can-i-use-geo-replication-with-a-standard-or-basic-tier-cache"></a>Coğrafi çoğaltma standart veya temel katmanı önbelleği ile kullanabilir miyim?
+### <a name="can-i-use-geo-replication-with-a-standard-or-basic-tier-cache"></a>Standart veya temel katman önbelleğiyle Coğrafi çoğaltmayı kullanabilir miyim?
 
-Coğrafi çoğaltma Hayır, yalnızca Premium katmanı önbellek olarak kullanılabilir.
+Hayır, coğrafi çoğaltma yalnızca Premium katman önbellekler için kullanılabilir.
 
-### <a name="is-my-cache-available-for-use-during-the-linking-or-unlinking-process"></a>Önbelleğimin bağlantı veya bağlantı kaldırma işlemi sırasında kullanılabilir durumda?
+### <a name="is-my-cache-available-for-use-during-the-linking-or-unlinking-process"></a>Önbelleğim bağlama veya bağlantısı kaldırma işlemi sırasında kullanılabilir mi?
 
-- Bağlama işlemini tamamlarken bağlanırken, birincil bağlı önbellek kullanılabilir kalır.
-- Bağlama işlemi tamamlanana kadar ikincil bağlı önbellek bağlanırken kullanılamaz.
-- Kaldırılırken, her iki önbelleklerinin bağlantısını kaldırma işlemi tamamlanırken kullanılabilir durumda kalır.
+- Bağlama sırasında, bağlama işlemi tamamlanırken birincil bağlantılı önbellek kullanılabilir kalır.
+- Bağlama sırasında, ikincil bağlantılı önbellek, bağlama işlemi tamamlanana kadar kullanılamaz.
+- Bağlantı kaldırılırken her iki önbellek de bağlantı kaldırılıyor işlemi tamamlandığında kullanılabilir kalır.
 
-### <a name="can-i-link-more-than-two-caches-together"></a>İkiden fazla önbellekler birlikte bağlayabilir miyim?
+### <a name="can-i-link-more-than-two-caches-together"></a>İkiden fazla önbelleğim birlikte bağlanabilir miyim?
 
-Hayır, yalnızca iki önbellekler birbirine bağlayabilirsiniz.
+Hayır, iki önbelleği yalnızca bir araya bağlayabilirsiniz.
 
-### <a name="can-i-link-two-caches-from-different-azure-subscriptions"></a>Ben, iki farklı Azure aboneliklerinde önbelleklerden bağlayabilir miyim?
+### <a name="can-i-link-two-caches-from-different-azure-subscriptions"></a>Farklı Azure aboneliklerinden iki önbelleğe bağlanabilir miyim?
 
-Hayır, her iki önbellekler, aynı Azure aboneliğinde olması gerekir.
+Hayır, her iki önbellek de aynı Azure aboneliğinde olmalıdır.
 
-### <a name="can-i-link-two-caches-with-different-sizes"></a>Ben, iki farklı boyutlarda önbelleklerle bağlayabilir miyim?
+### <a name="can-i-link-two-caches-with-different-sizes"></a>İki önbelleğe farklı boyutlarda bağlanabilir miyim?
 
-İkincil bağlı önbellek birincil bağlı önbellek daha büyük olduğu sürece Evet.
+Evet, ikincil bağlantılı önbelleğin birincil bağlı önbellekten daha büyük olduğu sürece.
 
-### <a name="can-i-use-geo-replication-with-clustering-enabled"></a>Coğrafi çoğaltma Etkin kümeleme ile kullanabilir miyim?
+### <a name="can-i-use-geo-replication-with-clustering-enabled"></a>Kümeleme özelliği etkinken Coğrafi çoğaltmayı kullanabilir miyim?
 
-Her iki önbellekler aynı parça sayısı olduğu sürece Evet.
+Evet, her iki önbellekte de aynı sayıda parça olduğu sürece.
 
-### <a name="can-i-use-geo-replication-with-my-caches-in-a-vnet"></a>Bir vnet'teki benim önbellek ile coğrafi çoğaltma kullanabilir miyim?
+### <a name="can-i-use-geo-replication-with-my-caches-in-a-vnet"></a>VNET 'teki önbelleklerim ile Coğrafi çoğaltmayı kullanabilir miyim?
 
-Evet, sanal ağlar önbelleklerinde coğrafi çoğaltma ile ilgili uyarılar desteklenir:
+Evet, VNET 'lerdeki önbelleklerin coğrafi yinelemesi uyarılarla desteklenir:
 
-- Aynı vnet'teki önbellekler arasında coğrafi çoğaltma desteklenir.
-- Farklı sanal ağlardaki önbellekler arasında coğrafi çoğaltma ayrıca desteklenir.
-  - Sanal ağlar aynı bölgedeyse bağlanabilir kullanarak [VNET eşlemesi](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview) veya [VPN ağ geçidi VNET-VNET bağlantı](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways#V2V).
-  - Sanal ağlar farklı bölgelerde bulunuyorsa coğrafi çoğaltma kullanarak VNET eşlemesi temel iç yük Dengeleyiciler ile ilgili bir sınırlama nedeniyle desteklenmez. Sanal ağ eşleme kısıtlamaları hakkında daha fazla bilgi için bkz. [sanal ağ - eşleme - gereksinimler ve kısıtlamalar](https://docs.microsoft.com/azure/virtual-network/virtual-network-manage-peering#requirements-and-constraints). Önerilen çözüm, bir VPN ağ geçidi VNET-VNET bağlantısı kullanmaktır.
+- Aynı VNET 'teki önbellekler arasında coğrafi çoğaltma desteklenir.
+- Farklı VNET 'lerdeki önbellekler arasında coğrafi çoğaltma de desteklenir.
+  - Sanal ağlar aynı bölgedeyse [VNET eşlemesi](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview) veya [VPN Gateway VNET-VNet bağlantısı](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways#V2V)kullanarak bunları bağlayabilirsiniz.
+  - Sanal ağlar farklı bölgelerde ise, temel iç yük dengeleyiciler içeren bir kısıtlama nedeniyle VNET eşlemesi kullanılarak coğrafi çoğaltma desteklenmez. VNET eşleme kısıtlamaları hakkında daha fazla bilgi için bkz. [sanal ağ eşleme-gereksinimler ve kısıtlamalar](https://docs.microsoft.com/azure/virtual-network/virtual-network-manage-peering#requirements-and-constraints). Önerilen çözüm VPN Gateway VNET 'ten VNET 'e bağlantı kullanmaktır.
 
-Kullanarak [Azure bu şablonu](https://azure.microsoft.com/resources/templates/201-redis-vnet-geo-replication/), iki önbellekler coğrafi olarak çoğaltılmış bir VPN ağ geçidi VNET-VNET bağlantısı ile sanal ağ içinde dağıtabilirsiniz.
+[Bu Azure şablonunu](https://azure.microsoft.com/resources/templates/201-redis-vnet-geo-replication/)kullanarak, VPN Gateway VNET-VNET bağlantısıyla bağlı bir sanal ağa hızla iki coğrafi çoğaltılan önbellek dağıtabilirsiniz.
 
-### <a name="what-is-the-replication-schedule-for-redis-geo-replication"></a>Redis coğrafi çoğaltma için çoğaltma zamanlamasını nedir?
+### <a name="what-is-the-replication-schedule-for-redis-geo-replication"></a>Redsıs coğrafi çoğaltma için çoğaltma zamanlaması nedir?
 
-Çoğaltma, sürekli ve zaman uyumsuz ve belirli bir zamanlamaya göre gerçekleşmez. Birincil siteye yapılan tüm yazma işlemlerini ikincil anında ve zaman uyumsuz olarak çoğaltılır.
+Çoğaltma sürekli ve zaman uyumsuzdur ve belirli bir zamanlamaya göre gerçekleşmez. Birincil öğesine yapılan tüm yazma işlemleri, ikincil üzerinde anında ve zaman uyumsuz olarak çoğaltılır.
 
-### <a name="how-long-does-geo-replication-replication-take"></a>Coğrafi çoğaltma çoğaltma ne kadar sürer?
+### <a name="how-long-does-geo-replication-replication-take"></a>Coğrafi çoğaltma çoğaltması ne kadar sürer?
 
-Artımlı, zaman uyumsuz ve sürekli çoğaltma ve bölgeler arasında geçen süre gecikme süresi ' çok farklı değildir. Belirli koşullar altında ikincil önbellek birincil verilerin tam bir eşitleme yapmanız gerekebilir. Çoğaltma süre bu durumda söz gibi bir dizi etkene bağlıdır: birincil önbellek, kullanılabilir ağ bant genişliği ve bölgeler arası gecikme yükü. Çoğaltma süresi tam 53 GB coğrafi olarak çoğaltılmış bir çifti için herhangi bir yere 5-10 dakika arasında olabilir bulduk.
+Çoğaltma artımlı, zaman uyumsuz ve sürekli ve bölge genelindeki gecikme süresinden çok farklı değildir. Belirli koşullarda, birincil önbellekten verilerin tam olarak eşitlenmesini sağlamak için ikincil önbelleğin kullanılması gerekebilir. Bu durumda çoğaltma süresi; birincil önbellekte yükleme, kullanılabilir ağ bant genişliği ve bölgeler arası gecikme gibi faktörlerin sayısına bağlıdır. Tam 53 GB 'lık coğrafi olarak çoğaltılan çift için çoğaltma süresi bulduk ve 5 ila 10 dakika arasında bir değer olabilir.
 
-### <a name="is-the-replication-recovery-point-guaranteed"></a>Çoğaltma kurtarma noktası sağlanır?
+### <a name="is-the-replication-recovery-point-guaranteed"></a>Çoğaltma kurtarma noktası garanti edilir mi?
 
-Coğrafi olarak çoğaltılmış bir modda önbellekler için Kalıcılık devre dışı bırakıldı. Coğrafi olarak çoğaltılmış bir çifti, müşteri tarafından başlatılan bir yük devretme gibi bağlantısız ise ikincil bağlı önbellek zaman o noktaya kadar eşitlenmiş verilerini tutar. Kurtarma noktası yok, bu gibi durumlarda garanti edilir.
+Coğrafi olarak çoğaltılan bir moddaki önbellekler için Kalıcılık devre dışıdır. Coğrafi olarak çoğaltılan bir çiftin bir müşteri tarafından başlatılan yük devretme gibi bağlantısı kesildiğinde, ikincil bağlantılı önbellek eşitlenmiş verileri o zaman noktasına kadar korur. Böyle durumlarda herhangi bir kurtarma noktası garanti edilmez.
 
-Bir kurtarma noktası almak için [dışarı](cache-how-to-import-export-data.md#export) ya da önbelleğinden. Daha sonra [alma](cache-how-to-import-export-data.md#import) birincil bağlı önbelleğine.
+Kurtarma noktası almak için, herhangi bir önbellekten [dışarı aktarın](cache-how-to-import-export-data.md#export) . Daha sonra birincil bağlantılı önbelleğe [Içeri aktarabilirsiniz](cache-how-to-import-export-data.md#import) .
 
-### <a name="can-i-use-powershell-or-azure-cli-to-manage-geo-replication"></a>Coğrafi çoğaltmayı yönetmek için PowerShell veya Azure CLI'yı kullanabilir miyim?
+### <a name="can-i-use-powershell-or-azure-cli-to-manage-geo-replication"></a>Coğrafi çoğaltmayı yönetmek için PowerShell veya Azure CLı kullanabilir miyim?
 
-Evet, coğrafi çoğaltma, Azure portal, PowerShell veya Azure CLI kullanılarak yönetilebilir. Daha fazla bilgi için [PowerShell docs](https://docs.microsoft.com/powershell/module/az.rediscache/?view=azps-1.4.0#redis_cache) veya [Azure CLI belgeleri](https://docs.microsoft.com/cli/azure/redis/server-link?view=azure-cli-latest).
+Evet, coğrafi çoğaltma Azure portal, PowerShell veya Azure CLı kullanılarak yönetilebilir. Daha fazla bilgi için bkz. [PowerShell belgeleri](https://docs.microsoft.com/powershell/module/az.rediscache/?view=azps-1.4.0#redis_cache) veya [Azure CLI belgeleri](https://docs.microsoft.com/cli/azure/redis/server-link?view=azure-cli-latest).
 
-### <a name="how-much-does-it-cost-to-replicate-my-data-across-azure-regions"></a>Bu benim verilerimi Azure bölgeleri arasında çoğaltılmasını nin ücreti ne kadardır?
+### <a name="how-much-does-it-cost-to-replicate-my-data-across-azure-regions"></a>Verileri Azure bölgeleri arasında çoğaltma maliyeti ne kadar sürer?
 
-Coğrafi çoğaltma kullanırken birincil bağlı önbellek verilerini ikincil bağlı önbellek için çoğaltılır. İki bağlı önbellekleri aynı bölgedeyse veri aktarımı için ücret alınmaz. İki bağlı önbellekleri farklı bölgelerde bulunuyorsa, veri aktarımı ücreti giren ve çıkan iki bölge arasında ağ çıkışı maliyeti ' dir. Daha fazla bilgi için [bant genişliği fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/bandwidth/).
+Coğrafi çoğaltma kullanılırken, birincil bağlantılı önbellekteki veriler ikincil bağlantılı önbelleğe çoğaltılır. İki bağlı önbellek aynı bölgedeyse veri aktarımı ücretsizdir. İki bağlı önbellek farklı bölgelerde ise, veri aktarımı ücreti her iki bölge arasında taşınan verilerin ağ çıkış maliyetidir. Daha fazla bilgi için bkz. [bant genişliği fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/bandwidth/).
 
-### <a name="why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache"></a>Neden bağlı önbelleğimin silmeye çalıştığınızda işlem başarısız oldu?
+### <a name="why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache"></a>Bağlı önbelleğinizi silmeye çalıştığımda işlem başarısız oldu mu?
 
-Coğrafi çoğaltma bağlantısı kaldırana kadar bağlı durumdayken, coğrafi olarak çoğaltılmış bir önbellek ve bunların kaynak gruplarını silinemiyor. Birine veya ikisine de bağlı önbellekleri içeren kaynak grubunu silmeye çalışıyorsanız, kaynak grubundaki diğer kaynaklar silinir, ancak kaynak grubu içinde kalır `deleting` durum ve tüm bağlı önbellekler kaynak grubunda kalması içinde `running`durumu. Kaynak grubu ve içerdiği bağlı önbellekleri tamamen silmek için Önbelleklerin açıklandığı bağlantısı [coğrafi çoğaltma bağlantısını kaldırmak](#remove-a-geo-replication-link).
+Coğrafi çoğaltma bağlantısını kaldırana kadar, coğrafi olarak çoğaltılan önbellekler ve bunların kaynak grupları bağlantı sırasında silinemez. Bağlı önbelleklerinin birini veya her ikisini içeren kaynak grubunu silmeye çalışırsanız, kaynak grubundaki diğer kaynaklar silinir, ancak kaynak grubu `deleting` durumunda kalır ve kaynak grubundaki tüm bağlantılı önbellekler `running` durumunda kalır. Kaynak grubunu ve içindeki bağlı önbellekleri tamamen silmek için, [coğrafi çoğaltma bağlantısını kaldırma](#remove-a-geo-replication-link)başlığı altında açıklandığı gibi önbellekler bağlantısını kaldırın.
 
-### <a name="what-region-should-i-use-for-my-secondary-linked-cache"></a>İkinci bağlantılı önbelleğimin için hangi bölgeyi kullanmalıyım?
+### <a name="what-region-should-i-use-for-my-secondary-linked-cache"></a>İkincil bağlantılı önbelleğim için hangi bölgeyi kullanmalıyım?
 
-Genel olarak, eriştiği uygulama ile aynı Azure bölgesinde mevcut bir önbellek hesabınız için önerilir. Uygulamalar için ayrı birincil ve geri dönüş bölgelerle aynı bu bölgede, birincil ve ikincil önbellek mevcut önerilir. Eşleştirilmiş bölgeler hakkında daha fazla bilgi için bkz. [en iyi uygulamaları – Azure eşleştirilmiş bölgeleri](../best-practices-availability-paired-regions.md).
+Genellikle önbelleğinizin, kendisine erişen uygulamayla aynı Azure bölgesinde bulunması önerilir. Ayrı birincil ve geri dönüş bölgeleri olan uygulamalarda, birincil ve ikincil önbellekler aynı bölgelerde olmalıdır. Eşleştirilmiş bölgeler hakkında daha fazla bilgi için bkz. [En Iyi uygulamalar – Azure eşleştirilmiş bölgeleri](../best-practices-availability-paired-regions.md).
 
-### <a name="how-does-failing-over-to-the-secondary-linked-cache-work"></a>Yük devretme ikincil bağlı önbellek nasıl çalışır?
+### <a name="how-does-failing-over-to-the-secondary-linked-cache-work"></a>İkincil bağlantılı önbelleğin yük devri nasıl çalışır?
 
-Otomatik Yük devretme Azure bölgelerinde coğrafi olarak çoğaltılmış bir önbellek için desteklenmiyor. Bir olağanüstü durum kurtarma senaryosunda, müşterilerin tüm uygulama yığınını oluşturan koordineli bir şekilde yedekleme bölgelerinde duruma getirmeniz gerekir. Tek tek uygulama bileşenleri karar izin vererek, yedeklerini kendi geçmek ne zaman performansı olumsuz yönde etkileyebilir. Redis başlıca avantajlarından biri, çok düşük gecikmeli depolama olmasıdır. Müşteri'nin ana uygulama önbelleğini farklı bir bölgede ise, eklenen gidiş dönüş süresi performans üzerinde fark edilebilir etkisi gerekir. Bu nedenle, biz otomatik yük devretmeyi önlemek geçici kullanılabilirlik sorunları nedeniyle.
+Azure bölgelerinde otomatik yük devretme, coğrafi çoğaltılan önbelleklerde desteklenmez. Olağanüstü durum kurtarma senaryosunda, müşteriler tüm uygulama yığınını yedekleme bölgelerinde koordine edilmiş bir şekilde getirmelidir. Tek tek uygulama bileşenlerinin kendi yedeklemelerine ne zaman geçileceğine izin vermek performansı olumsuz etkileyebilir. Redin 'ın önemli avantajlarından biri, çok düşük gecikme süreli bir depodır. Müşterinin ana uygulaması önbelleğinden farklı bir bölgedeyse, eklenen gidiş dönüş süresi performans üzerinde belirgin bir etkiye sahip olacaktır. Bu nedenle, geçici kullanılabilirlik sorunları nedeniyle otomatik olarak yük devretmemeye özen gösterin.
 
-Müşteri tarafından başlatılan bir yük devretmeyi başlatmak için önce Önbelleklerin bağlantısı. Ardından, Redis istemci bağlantı uç noktası (eski adıyla bağlı) ikincil önbellek kullanmak için değiştirin. İki önbellekleri bağlantısız olduğunda, ikincil önbellek normal bir okuma-yazma önbelleği yeniden olur ve Redis istemcileri doğrudan gelen istekleri kabul eder.
+Müşteri tarafından başlatılan bir yük devretmeyi başlatmak için öncelikle önbellekler bağlantısını kaldırın. Ardından, Redsıs istemcinizi (eski adıyla bağlantılı) ikincil önbelleğin bağlantı uç noktasını kullanacak şekilde değiştirin. İki önbelleğin bağlantısı kesildiğinde, ikincil önbellek normal bir okuma-yazma önbelleği yeniden oluşturur ve istekleri doğrudan Redsıs istemcilerinden kabul eder.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi edinin [Azure önbelleği için Redis Premium katmanı](cache-premium-tier-intro.md).
+[Redsıs Premium katmanı Için Azure önbelleği](cache-premium-tier-intro.md)hakkında daha fazla bilgi edinin.

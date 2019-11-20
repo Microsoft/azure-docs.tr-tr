@@ -1,6 +1,6 @@
 ---
-title: Çözümleyiciler Azure Active Directory B2C özel ilkelerinde'yaklaşık talep | Microsoft Docs
-description: Nasıl talep çözümleyiciler Azure Active Directory B2C, özel bir ilkede kullanıldığı hakkında bilgi edinin.
+title: Azure Active Directory B2C özel ilkelerde talep çözücüler hakkında | Microsoft Docs
+description: Talep çözümleyicilerine Azure Active Directory B2C bir özel ilkede nasıl kullanıldığı hakkında bilgi edinin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 01/25/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: a13d4b0b44c51f78a068b1619fe083a08756af6b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f08c85cee2378f4a879daf197af7a2adf0c20f45
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66511598"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71064407"
 ---
-# <a name="about-claim-resolvers-in-azure-active-directory-b2c-custom-policies"></a>Azure Active Directory B2C özel ilkelerinde talep Çözümleyicileri hakkında
+# <a name="about-claim-resolvers-in-azure-active-directory-b2c-custom-policies"></a>Azure Active Directory B2C özel ilkelerde talep çözücüler hakkında
 
-Azure Active Directory (Azure AD) B2C, çözümleyiciler talep [özel ilkeler](active-directory-b2c-overview-custom.md) ilke adı, istek bağıntı kimliği, kullanıcı arabirimi dili ve daha fazlası gibi bir yetkilendirme isteği hakkında bağlam bilgisi sağlar.
+Azure Active Directory B2C (Azure AD B2C) [özel ilkelerindeki](active-directory-b2c-overview-custom.md) talep çözücüler, ilke adı, Istek bağıntı kimliği, Kullanıcı arabirimi dili ve daha fazlası gibi bir yetkilendirme isteğiyle ilgili bağlam bilgilerini sağlar.
 
-Bir talep çözümleyicisinin bir giriş veya çıkış talep kümesinde kullanmak için bir dizeyi tanımlamak **ClaimType**altında [ClaimsSchema](claimsschema.md) öğesi olarak ayarlayın ve sonra **DefaultValue** talep Çözümleyici giriş veya çıkış talep öğesi. Azure AD B2C, talep çözümleyici değerini okur ve teknik profili içinde değerini kullanır. 
+Bir giriş veya çıkış talebinde bir talep çözümleyici kullanmak için, [Claimsschema](claimsschema.md) öğesi altında bir String **ClaimType**tanımlar ve ardından **DefaultValue** değerini giriş veya çıkış talebi öğesinde talep çözümleyici olarak ayarlarsınız. Azure AD B2C, talep Çözümleyicisinin değerini okur ve teknik profildeki değeri kullanır.
 
-Aşağıdaki örnekte, bir talep türü adlı `correlationId` ile tanımlanmış bir **DataType** , `string`.  
+Aşağıdaki örnekte, adlı `correlationId` bir talep türü, bir **veri türü** `string`ile tanımlanmıştır.
 
 ```XML
 <ClaimType Id="correlationId">
@@ -33,83 +33,83 @@ Aşağıdaki örnekte, bir talep türü adlı `correlationId` ile tanımlanmış
 </ClaimType>
 ```
 
-Teknik profili içinde talep çözümleyici talep türüne eşlenir. Azure AD B2C talep çözümleyici değerini doldurur `{Context:CorrelationId}` talep içine `correlationId` ve teknik profil için bir talep gönderir.
+Teknik profilde talep çözümleyicisini talep türü ile eşleyin. Azure AD B2C talep Çözümleyicisinin `{Context:CorrelationId}` değerini talebe `correlationId` göre doldurur ve talebi teknik profile gönderir.
 
 ```XML
 <InputClaim ClaimTypeReferenceId="correlationId" DefaultValue="{Context:CorrelationId}" />
 ```
 
-## <a name="claim-resolver-types"></a>Talep türleri çözme
+## <a name="claim-resolver-types"></a>Talep çözümleyici türleri
 
-Aşağıdaki bölümlerde kullanılabilir talep Çözümleyicileri listelenmektedir.
+Aşağıdaki bölümlerde, kullanılabilir talep çözücüler listelenmektedir.
 
 ### <a name="culture"></a>Kültür
 
-| İste | Açıklama | Örnek |
+| Talep | Açıklama | Örnek |
 | ----- | ----------- | --------|
-| {Kültür: LanguageName} | İki harfli ISO kod dili için. | tr |
-| {Kültür: LCID}   | Dil kodu LCID'i. | 1033 |
-| {Kültür: RegionName} | İki harfli ISO kod bölge için. | ABD |
-| {Kültür: RFC5646} | RFC5646 dil kodu. | en-US |
+| {Culture: LanguageName} | Dil için iki harfli ISO kodu. | tr-TR |
+| {Culture: LCıD}   | Dil kodunun LCıD 'SI. | 1033 |
+| {Culture: RegionName} | Bölgenin iki harfli ISO kodu. | ABD |
+| {Culture: RFC5646} | RFC5646 dil kodu. | en-US |
 
 ### <a name="policy"></a>İlke
 
-| İste | Açıklama | Örnek |
+| Talep | Açıklama | Örnek |
 | ----- | ----------- | --------|
-| {İlkesi: Policyıd} | Bağlı olan taraf ilke adı. | B2C_1A_signup_signin |
-| {İlkesi: RelyingPartyTenantId} | Bağlı olan taraf İlkesi Kiracı kimliği. | Bilgisayarınızı tenant.onmicrosoft.com |
-| {Policy:TenantObjectId} | Bağlı olan taraf İlkesi Kiracı nesnesi kimliği. | 00000000-0000-0000-0000-000000000000 |
-| {Policy:TrustFrameworkTenantId} | Güven framework Kiracı kimliği. | Bilgisayarınızı tenant.onmicrosoft.com |
+| {Policy: PolicyId} | Bağlı olan taraf ilkesi adı. | B2C_1A_signup_signin |
+| {Policy: RelyingPartyTenantId} | Bağlı olan taraf ilkesinin kiracı KIMLIĞI. | your-tenant.onmicrosoft.com |
+| {Policy: Tenantobjectıd} | Bağlı olan taraf ilkesinin kiracı nesne KIMLIĞI. | 00000000-0000-0000-0000-000000000000 |
+| {Policy: TrustFrameworkTenantId} | Güven çerçevesinin kiracı KIMLIĞI. | your-tenant.onmicrosoft.com |
 
 ### <a name="openid-connect"></a>OpenID Connect
 
-| İste | Açıklama | Örnek |
+| Talep | Açıklama | Örnek |
 | ----- | ----------- | --------|
-| {OIDC:AuthenticationContextReferences} |`acr_values` Sorgu dizesi parametresi. | Yok |
-| {OIDC:ClientId} |`client_id` Sorgu dizesi parametresi. | 00000000-0000-0000-0000-000000000000 |
-| {OIDC:DomainHint} |`domain_hint` Sorgu dizesi parametresi. | facebook.com |
-| {OIDC:LoginHint} |  `login_hint` Sorgu dizesi parametresi. | someone@contoso.com |
-| {OIDC:MaxAge} | `max_age`. | Yok |
-| {OIDC:Nonce} |`Nonce` Sorgu dizesi parametresi. | defaultNonce |
-| {OIDC:Prompt} | `prompt` Sorgu dizesi parametresi. | oturum açma |
-| {OIDC:Resource} |`resource` Sorgu dizesi parametresi. | Yok |
-| {OIDC:scope} |`scope` Sorgu dizesi parametresi. | openıd |
+| {OıDC: AuthenticationContextReferences} |`acr_values` Sorgu dizesi parametresi. | Yok |
+| {OıDC: ClientID} |`client_id` Sorgu dizesi parametresi. | 00000000-0000-0000-0000-000000000000 |
+| {OıDC: Domainipucuyla} |`domain_hint` Sorgu dizesi parametresi. | facebook.com |
+| {OıDC: Loginipucu} |  `login_hint` Sorgu dizesi parametresi. | someone@contoso.com |
+| {OıDC: MaxAge} | `max_age`. | Yok |
+| {OıDC: nonce} |`Nonce` Sorgu dizesi parametresi. | defaultNonce |
+| {OıDC: Prompt} | `prompt` Sorgu dizesi parametresi. | oturum açma |
+| {OıDC: kaynak} |`resource` Sorgu dizesi parametresi. | Yok |
+| {OıDC: scope} |`scope` Sorgu dizesi parametresi. | OpenID |
 
 ### <a name="context"></a>Bağlam
 
-| İste | Açıklama | Örnek |
+| Talep | Açıklama | Örnek |
 | ----- | ----------- | --------|
-| {Bağlam: BuildNumber} | Kimlik deneyimi çerçevesi sürümü (derleme numarası).  | 1.0.507.0 |
-| {Context:CorrelationId} | Bağıntı Kimliği  | 00000000-0000-0000-0000-000000000000 |
-| {Context:DateTimeInUtc} |Tarih saat UTC diliminde saat.  | 10/10/2018'DEN 12:00:00 PM |
-| {Context:DeploymentMode} |İlke dağıtım modu.  | Üretim |
-| {Bağlam: IPAddress} | Kullanıcının IP adresi. | 11.111.111.11 |
+| {Context: BuildNumber} | Kimlik deneyimi çerçevesi sürümü (derleme numarası).  | 1.0.507.0 |
+| {Context: CorrelationId} | Bağıntı Kimliği  | 00000000-0000-0000-0000-000000000000 |
+| {Context: Datetimeınutc} |UTC olarak tarih saat.  | 10/10/2018 12:00:00 PM |
+| {Context: DeploymentMode} |İlke dağıtım modu.  | Üretim |
+| {Context: IPAddress} | Kullanıcı IP adresi. | 11.111.111.11 |
 
 
-### <a name="non-protocol-parameters"></a>Olmayan protokol parametreleri
+### <a name="non-protocol-parameters"></a>Protokol olmayan parametreler
 
-OIDC veya OAuth2 bir isteğin parçası olarak dahil herhangi bir parametre adı içindeki kullanıcı yolculuğu bir talep eşlenebilir. Örneğin, uygulamadan gelen istek adı ile bir sorgu dizesi parametresi içerebilir `app_session`, `loyalty_number`, ya da herhangi bir özel sorgu dizesi.
+OıDC veya OAuth2 isteğinin bir parçası olarak dahil edilen herhangi bir parametre adı, Kullanıcı yolculuğunda bir talebe eşleştirilebilir. Örneğin, uygulamadaki istek, veya bir özel sorgu dizesi adına `app_session` `loyalty_number`sahip bir sorgu dizesi parametresi içerebilir.
 
-| İste | Açıklama | Örnek |
+| Talep | Açıklama | Örnek |
 | ----- | ----------------------- | --------|
-| {OAUTH-KV:campaignId} | Bir sorgu dizesi parametresi. | hawaii |
-| {OAUTH-KV:app_session} | Bir sorgu dizesi parametresi. | A3C5R |
-| {OAUTH-KV:loyalty_number} | Bir sorgu dizesi parametresi. | 1234 |
-| {OAUTH KV: herhangi bir özel sorgu dizesini} | Bir sorgu dizesi parametresi. | Yok |
+| {OAUTH-KV: kampanya Nkimliği} | Sorgu dizesi parametresi. | Hawaii |
+| {OAUTH-KV: app_session} | Sorgu dizesi parametresi. | A3C5R |
+| {OAUTH-KV: loyalty_number} | Sorgu dizesi parametresi. | 1234 |
+| {OAUTH-KV: herhangi bir özel sorgu dizesi} | Sorgu dizesi parametresi. | Yok |
 
 ### <a name="oauth2"></a>OAuth2
 
-| İste | Açıklama | Örnek |
+| Talep | Açıklama | Örnek |
 | ----- | ----------------------- | --------|
-| {oauth2:access_token} | Erişim belirteci. | Yok |
+| {OAuth2: access_token} | Erişim belirteci. | Yok |
 
-## <a name="how-to-use-claim-resolvers"></a>Talep Çözümleyicileri kullanma
+## <a name="how-to-use-claim-resolvers"></a>Talep çözücüler kullanma
 
-### <a name="restful-technical-profile"></a>RESTful teknik profili
+### <a name="restful-technical-profile"></a>Yeniden teknik profil
 
-İçinde bir [RESTful](restful-technical-profile.md) teknik profili, kullanıcının dil, ilke adı, kapsam ve istemci kimliği göndermek isteyebilirsiniz REST API özel iş mantığı çalıştırın ve gerekirse, yerelleştirilmiş hata iletisi yükseltmek bu taleplere göre. 
+[Bir teknik](restful-technical-profile.md) profilde, Kullanıcı dilini, ilke adını, kapsamı ve istemci kimliğini göndermek isteyebilirsiniz. Bu talepler temelinde REST API özel iş mantığını çalıştırabilir ve gerekirse yerelleştirilmiş bir hata iletisi oluşturabilir.
 
-Aşağıdaki örnek, bir RESTful teknik profili gösterir:
+Aşağıdaki örnek, bir Restsize teknik profil göstermektedir:
 
 ```XML
 <TechnicalProfile Id="REST">
@@ -132,13 +132,13 @@ Aşağıdaki örnek, bir RESTful teknik profili gösterir:
 
 ### <a name="direct-sign-in"></a>Doğrudan oturum açma
 
-Talep Çözümleyicileri kullanarak, oturum açma adı veya doğrudan oturum açma, bir Microsoft hesabı Facebook veya LinkedIn gibi belirli sosyal kimlik sağlayıcısı için önceden doldurabilir. Daha fazla bilgi için [doğrudan Azure Active Directory B2C kullanarak oturum kümesi](direct-signin.md).
+Talep çözümleyicilerine göre, oturum açma adını veya Facebook, LinkedIn veya Microsoft hesabı gibi belirli bir sosyal kimlik sağlayıcısına doğrudan oturum açmayı önceden girebilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory B2C kullanarak doğrudan oturum açma ayarlama](direct-signin.md).
 
-### <a name="dynamic-ui-customization"></a>Dinamik kullanıcı arabirimini özelleştirme
+### <a name="dynamic-ui-customization"></a>Dinamik UI özelleştirmesi
 
-Azure AD B2C, böylece sayfa içeriği dinamik olarak oluşturulabilen HTML içerik tanımı uç noktalar için sorgu dizesi parametreleri geçirmek sağlar. Örneğin, web veya mobil uygulama geçirdiğiniz bir özel parametre temel Azure AD B2C kaydolma veya oturum açma sayfasında arka plan görüntüsü değiştirebilirsiniz. Daha fazla bilgi için [dinamik olarak Azure Active Directory B2C'de özel ilkeler kullanarak kullanıcı Arabirimi yapılandırma](active-directory-b2c-ui-customization-custom-dynamic.md). Dil parametresini temel alan, HTML sayfası da yerelleştirebilirsiniz veya istemci kimliği temel alınarak içeriği değiştirebilirsiniz.
+Azure AD B2C, sayfa içeriğini dinamik olarak işleyebilmeniz için sorgu dizesi parametrelerini HTML içerik tanım uç noktalarınıza geçirmenize olanak sağlar. Örneğin, Azure AD B2C kaydolma veya oturum açma sayfasındaki arka plan görüntüsünü, Web veya mobil uygulamanızdan geçirdiğiniz özel bir parametreye göre değiştirebilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory B2C içindeki özel ilkeleri kullanarak Kullanıcı arabirimini dinamik olarak yapılandırma](active-directory-b2c-ui-customization-custom-dynamic.md). Ayrıca, HTML sayfanızı bir dil parametresine göre yerelleştirebilirsiniz veya içeriği istemci KIMLIĞINE göre değiştirebilirsiniz.
 
-Aşağıdaki örnek sorgu dizesinde adlı bir parametre geçirir **campaignId** değeriyle `hawaii`, **dil** kodunu `en-US`, ve **uygulama** İstemci Kimliğini temsil eden:
+Aşağıdaki örnek, bir `hawaii`değeri, bir **dil** kodu `en-US`ve istemci kimliğini temsil eden **uygulama** olan **Kampanya NID** adlı bir parametre sorgu dizesinde geçirilir:
 
 ```XML
 <UserJourneyBehaviors>
@@ -150,7 +150,7 @@ Aşağıdaki örnek sorgu dizesinde adlı bir parametre geçirir **campaignId** 
 </UserJourneyBehaviors>
 ```
 
-Sonuç olarak Azure AD B2C yukarıdaki parametreleri için HTML içerik sayfası gönderir:
+Sonuç olarak Azure AD B2C yukarıdaki parametreleri HTML içerik sayfasına gönderir:
 
 ```
 /selfAsserted.aspx?campaignId=hawaii&language=en-US&app=0239a9cc-309c-4d41-87f1-31288feb2e82
@@ -158,7 +158,7 @@ Sonuç olarak Azure AD B2C yukarıdaki parametreleri için HTML içerik sayfası
 
 ### <a name="application-insights-technical-profile"></a>Application Insights teknik profili
 
-Azure Application Insights ile talep çözümleyenler kullanıcı davranışları hakkında öngörü sahibi olabilir. Application Insights teknik profilde, Azure Application ınsights'ı kalıcı giriş talep gönderin. Daha fazla bilgi için [Application Insights'ı kullanarak Azure AD B2C kullanıcı davranışını izleme yolculuklarından](active-directory-b2c-custom-guide-eventlogger-appins.md). Aşağıdaki örnekte, ilke kimliği, bağıntı kimliği, dil ve istemci kimliği Azure Application Insights'a gönderir.
+Azure Application Insights ve talep Çözümleyenler sayesinde Kullanıcı davranışında Öngörüler elde edebilirsiniz. Application Insights teknik profilinde, Azure Application Insights kalıcı olan giriş taleplerini gönderirsiniz. Daha fazla bilgi için bkz. [Application Insights kullanarak Azure AD B2C yolculuğa yönelik kullanıcı davranışını izleme](active-directory-b2c-custom-guide-eventlogger-appins.md). Aşağıdaki örnek, ilke KIMLIĞI, bağıntı KIMLIĞI, dil ve istemci KIMLIĞINI Azure Application Insights gönderir.
 
 ```XML
 <TechnicalProfile Id="AzureInsights-Common">

@@ -1,6 +1,6 @@
 ---
-title: SQL veritabanı için XEvent olay dosyası kod | Microsoft Docs
-description: Olay dosyası hedef Azure SQL veritabanı'nda genişletilmiş bir olay gösteren iki aşamalı bir kod örneği için PowerShell ve Transact-SQL sağlar. Azure depolama, bu senaryo, gerekli bir parçasıdır.
+title: XEvent olay dosyası kodu
+description: Azure SQL veritabanı 'nda genişletilmiş bir olayda olay dosyası hedefini gösteren iki aşamalı kod örneği için PowerShell ve Transact-SQL sağlar. Azure depolama, bu senaryonun gerekli bir parçasıdır.
 services: sql-database
 ms.service: sql-database
 ms.subservice: monitor
@@ -10,69 +10,68 @@ ms.topic: conceptual
 author: MightyPen
 ms.author: genemi
 ms.reviewer: jrasnik
-manager: craigg
 ms.date: 03/12/2019
-ms.openlocfilehash: ce559e50d5a34ebad9113f0e21dcb732adc40dd2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3b1e8881b2e2004a94064e472690ee40414ea02d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65233772"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73822379"
 ---
-# <a name="event-file-target-code-for-extended-events-in-sql-database"></a>SQL veritabanı'nda genişletilmiş olaylar için olay dosyası hedef kodu
+# <a name="event-file-target-code-for-extended-events-in-sql-database"></a>SQL veritabanı 'nda genişletilmiş olaylar için olay dosyası hedef kodu
 
 [!INCLUDE [sql-database-xevents-selectors-1-include](../../includes/sql-database-xevents-selectors-1-include.md)]
 
-Genişletilmiş olay yakalama ve rapor bilgilerini için güçlü bir yol için bir kod örneği istersiniz.
+Genişletilmiş bir olay için bilgileri yakalamak ve raporlamak için sağlam bir yol için bir kod örneği istersiniz.
 
-Microsoft SQL Server'da [olay dosyası hedef](https://msdn.microsoft.com/library/ff878115.aspx) bir yerel sabit diske dosyasına olay çıktılarının depolanması için kullanılır. Ancak, bu tür dosyaları Azure SQL veritabanı'na kullanılabilir değil. Bunun yerine Azure depolama hizmeti olay dosyası hedef desteklemek için kullanırız.
+Microsoft SQL Server, olay [dosyası hedefi](https://msdn.microsoft.com/library/ff878115.aspx) , olay çıktılarını yerel bir sabit sürücü dosyasına depolamak için kullanılır. Ancak bu tür dosyalar Azure SQL veritabanı için kullanılamaz. Bunun yerine, olay dosyası hedefini desteklemek için Azure Storage hizmetini kullanırız.
 
-Bu konuda, bir iki aşamalı bir kod örneği sunar:
+Bu konuda, iki aşamalı bir kod örneği sunulmaktadır:
 
-* PowerShell, bulutta bir Azure depolama kapsayıcısı oluşturmak için kullanılır.
+* PowerShell, bulutta bir Azure depolama kapsayıcısı oluşturmak için.
 * Transact-SQL:
   
-  * Azure depolama kapsayıcısı için bir olay dosyası hedef atamak için.
-  * Oluşturma ve olay oturumu başlatın ve benzeri için.
+  * Azure depolama kapsayıcısını bir olay dosyası hedefine atamak için.
+  * Olay oturumu oluşturmak ve başlatmak için ve bu şekilde devam edin.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 > [!IMPORTANT]
-> Azure Resource Manager PowerShell modülü, Azure SQL veritabanı tarafından hala desteklenmektedir, ancak tüm gelecekteki geliştirme için Az.Sql modüldür. Bu cmdlet'ler için bkz. [Azurerm.SQL'e](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az modül ve AzureRm modülleri komutları için bağımsız değişkenler büyük ölçüde aynıdır.
+> PowerShell Azure Resource Manager modülü Azure SQL veritabanı tarafından hala desteklenmektedir, ancak gelecekteki tüm geliştirmeler az. SQL modülüne yöneliktir. Bu cmdlet 'ler için bkz. [Azurerd. SQL](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). Az Module ve Azurerd modüllerinde komutların bağımsız değişkenleri önemli ölçüde aynıdır.
 
 * Bir Azure hesabı ve aboneliği [Ücretsiz deneme sürümü](https://azure.microsoft.com/pricing/free-trial/) için kaydolabilirsiniz.
-* Herhangi bir veritabanı içinde bir tablo oluşturabilirsiniz.
+* İçinde tablo oluşturabileceğiniz herhangi bir veritabanı.
   
-  * İsteğe bağlı olarak yapabilecekleriniz [oluşturmak bir **AdventureWorksLT** demo veritabanı](sql-database-get-started.md) dakikalar içinde.
-* SQL Server Management Studio (ssms.exe), ideal olarak en son aylık güncelleştirme sürümü. 
-  Gelen son ssms.exe indirebilirsiniz:
+  * İsteğe bağlı olarak, dakikalar içinde [bir **AdventureWorksLT** demo veritabanı oluşturabilirsiniz](sql-database-get-started.md) .
+* SQL Server Management Studio (SSMS. exe), en son aylık güncelleştirme sürümünü idealdir. 
+  En son SSMS. exe ' yi şuradan indirebilirsiniz:
   
-  * Başlıklı konusuna [SQL Server Management Studio'yu indirme](https://msdn.microsoft.com/library/mt238290.aspx).
-  * [İndirme için doğrudan bir bağlantı.](https://go.microsoft.com/fwlink/?linkid=616025)
-* Olmalıdır [Azure PowerShell modüllerini](https://go.microsoft.com/?linkid=9811175) yüklü.
+  * [SQL Server Management Studio indirme](https://msdn.microsoft.com/library/mt238290.aspx)başlıklı konu.
+  * [İndirmenin doğrudan bağlantısı.](https://go.microsoft.com/fwlink/?linkid=616025)
+* [Azure PowerShell modüllerinin](https://go.microsoft.com/?linkid=9811175) yüklü olması gerekir.
   
-  * Modüller komutları gibi - sağlayan **yeni AzStorageAccount**.
+  * Modüller- **New-AzStorageAccount**gibi komutlar sağlar.
 
 ## <a name="phase-1-powershell-code-for-azure-storage-container"></a>1\. Aşama: Azure depolama kapsayıcısı için PowerShell kodu
 
-1\. Aşama iki aşamalı kod örneğinin powershell'dir.
+Bu PowerShell, iki aşamalı kod örneğinin Aşama 1 ' dir.
 
-Betik, olası bir önceki çalıştırma ve rerunnable sonra temizlemek için komutları ile başlar.
+Betik, bir önceki çalıştırıldıktan sonra temizlik komutları ile başlar ve yeniden başlatılamaz.
 
-1. Notepad.exe gibi bir metin düzenleyicisinde PowerShell betiğini yapıştırın ve betiği uzantılı bir dosya olarak kaydedin **.ps1**.
-2. PowerShell ISE yönetici olarak başlatın.
-3. İsteminde<br/>`Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser`<br/>' i tıklatın ve ardından Enter tuşuna basın.
-4. PowerShell ISE'de açın, **.ps1** dosya. Betiği çalıştırın.
-5. Komut içinde Azure'da oturum açarken yeni bir pencere ilk başlatır.
+1. PowerShell betiğini Notepad. exe gibi bir basit metin düzenleyicisine yapıştırın ve betiği **. ps1**uzantısına sahip bir dosya olarak kaydedin.
+2. PowerShell ıSE 'yi yönetici olarak başlatın.
+3. İsteminde şunu yazın:<br/>`Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser`<br/>ve ardından ENTER tuşuna basın.
+4. PowerShell ıSE 'de **. ps1** dosyanızı açın. Betiği çalıştırın.
+5. Betik ilk olarak Azure 'da oturum açarken yeni bir pencere başlatır.
    
-   * Oturumunuz kesintiye uğratmadan betiği yeniden çalıştırın, out yorum kullanışlı seçeneğiniz vardır **Add-AzureAccount** komutu.
+   * Oturumunuzu kesintiye uğratmadan betiği yeniden çalıştırırsanız, **Add-AzureAccount** komutunu açıklama eklemek uygun bir seçeneğe sahip olursunuz.
 
-![PowerShell ISE, Azure Modülü yüklü, komut dosyasını çalıştırmak hazır.][30_powershell_ise]
+![Azure modülü yüklü olan PowerShell ıSE, betiği çalıştırmaya hazırlanıyor.][30_powershell_ise]
 
 ### <a name="powershell-code"></a>PowerShell kodu
 
-Bu PowerShell Betiği, Az modül zaten yüklü olduğunu varsayar. Bilgi için [Azure PowerShell modülünü yükleme](/powershell/azure/install-Az-ps).
+Bu PowerShell betiği az Module 'ü zaten yüklediğinizi varsayar. Bilgi için bkz. [Azure PowerShell modülünü Install](/powershell/azure/install-Az-ps).
 
 ```powershell
 ## TODO: Before running, find all 'TODO' and make each edit!!
@@ -232,27 +231,27 @@ Now shift to the Transact-SQL portion of the two-part code sample!';
 ```
 
 
-PowerShell betiğini sona erdiğinde yazdıran birkaç adlandırılmış değerleri not alın. Bu değerler, Aşama 2 aşağıdaki Transact-SQL komut dosyası içine düzenlemeniz gerekir.
+PowerShell betiğinin bittiği sırada yazdırdığı birkaç adlandırılmış değeri unutmayın. Bu değerleri, Aşama 2 olarak takip eden Transact-SQL betiğine düzenlemeniz gerekir.
 
-## <a name="phase-2-transact-sql-code-that-uses-azure-storage-container"></a>2\. Aşama: Azure depolama kapsayıcısı kullanan transact-SQL kodu
+## <a name="phase-2-transact-sql-code-that-uses-azure-storage-container"></a>2\. Aşama: Azure Storage kapsayıcısını kullanan Transact-SQL kodu
 
-* Bu kod örneği, 1 aşamasında, bir Azure depolama kapsayıcısı oluşturmak için bir PowerShell Betiği çalıştırdınız.
-* Sonraki aşama 2'de, aşağıdaki Transact-SQL betiğini kapsayıcı kullanmanız gerekir.
+* Bu kod örneğinin 1. aşamasında, bir Azure depolama kapsayıcısı oluşturmak için bir PowerShell betiği çalıştırdınız.
+* Sonraki aşama 2 ' de, aşağıdaki Transact-SQL betiği kapsayıcıyı kullanmalıdır.
 
-Betik, olası bir önceki çalıştırma ve rerunnable sonra temizlemek için komutları ile başlar.
+Betik, bir önceki çalıştırıldıktan sonra temizlik komutları ile başlar ve yeniden başlatılamaz.
 
-PowerShell Betiği, ne zaman bittiğini birkaç adlandırılmış değerler yazdırılan. Bu değerleri kullanmak için Transact-SQL betiğini düzenlemeniz gerekir. Bulma **TODO** düzenleme noktaları bulmak için Transact-SQL komut.
+PowerShell betiği, sona erdikten sonra birkaç adlandırılmış değer yazdırılmıştır. Bu değerleri kullanmak için Transact-SQL betiğini düzenlemeniz gerekir. Düzenleme noktalarını bulmak için Transact-SQL komut dosyasında **Todo** bulun.
 
-1. SQL Server Management Studio'yu (ssms.exe) açın.
+1. SQL Server Management Studio açın (SSMS. exe).
 2. Azure SQL veritabanı veritabanınıza bağlanın.
-3. Yeni bir sorgu bölmesini açmak için tıklayın.
+3. Yeni bir sorgu bölmesi açmak için tıklayın.
 4. Aşağıdaki Transact-SQL betiğini sorgu bölmesine yapıştırın.
-5. Bulma her **TODO** komut ve uygun düzenlemeleri yapın.
-6. Kaydedin ve ardından komut dosyasını çalıştırın.
+5. Betikteki her **Todo** bulun ve uygun düzenlemeleri yapın.
+6. Betiği kaydedin ve çalıştırın.
 
 
 > [!WARNING]
-> Önceki PowerShell betiği tarafından oluşturulan SAS anahtarının değeri ile başlayabilir bir '?' (soru işareti). Aşağıdaki T-SQL betiği SAS anahtarını kullanırken, şunları yapmalısınız *kaldırmak başında '?'* . Aksi takdirde çalışmalarınızı security tarafından engelleniyor olabilir.
+> Önceki PowerShell betiği tarafından oluşturulan SAS anahtarı değeri '? ' ile başlayabilir (soru işareti). SAS anahtarını aşağıdaki T-SQL komut dosyasında kullandığınızda, *önde gelen '? ' öğesini kaldırmanız*gerekir. Aksi takdirde, çalışmalarınız güvenlik tarafından engelleniyor olabilir.
 
 
 ### <a name="transact-sql-code"></a>Transact-SQL kodu
@@ -452,7 +451,7 @@ GO
 ```
 
 
-Programını çalıştırdığınızda eklemek hedef başarısız olursa, durdurun ve olay oturumu yeniden başlatın:
+Çalıştırdığınızda hedef iliştirilemezse olay oturumunu durdurmanız ve yeniden başlatmanız gerekir:
 
 ```sql
 ALTER EVENT SESSION ... STATE = STOP;
@@ -464,9 +463,9 @@ GO
 
 ## <a name="output"></a>Çıktı
 
-Transact-SQL betik tamamlandığında, altında bir hücreyi tıklatın **event_data_XML** sütun başlığı. Bir  **\<olay >** öğeyi gösteren bir güncelleştirme bildirimi görüntülenir.
+Transact-SQL betiği tamamlandığında, **event_data_XML** sütun üst bilgisinin altındaki bir hücreye tıklayın. Tek bir UPDATE ifadesini gösteren bir **\<event >** öğesi görüntülenir.
 
-İşte  **\<olay >** testi sırasında oluşturulan öğesi:
+Test sırasında oluşturulan bir **\<event >** öğesi aşağıda verilmiştir:
 
 
 ```xml
@@ -509,34 +508,34 @@ SELECT 'AFTER__Updates', EmployeeKudosCount, * FROM gmTabEmployee;
 ```
 
 
-Önceki Transact-SQL betiği aşağıdaki sistem işlevi event_file okumak için kullanılır:
+Yukarıdaki Transact-SQL betiği, event_file okumak için aşağıdaki sistem işlevini kullandı:
 
-* [sys.fn_xe_file_target_read_file (Transact-SQL)](https://msdn.microsoft.com/library/cc280743.aspx)
+* [sys. fn_xe_file_target_read_file (Transact-SQL)](https://msdn.microsoft.com/library/cc280743.aspx)
 
-Genişletilmiş olaylar verileri Gelişmiş seçenekleri görüntülemek için bir açıklama şuradan ulaşabilirsiniz:
+Genişletilmiş olaylardan verilerin görüntülenmesine yönelik gelişmiş seçeneklerin açıklaması şurada bulunabilir:
 
-* [Genişletilmiş olaylar hedef verileri gelişmiş görüntüleme](https://msdn.microsoft.com/library/mt752502.aspx)
+* [Genişletilmiş olaylardaki hedef verilerin gelişmiş görüntüleme](https://msdn.microsoft.com/library/mt752502.aspx)
 
 
-## <a name="converting-the-code-sample-to-run-on-sql-server"></a>Kod örneği, SQL Server üzerinde çalıştırmak için dönüştürme
+## <a name="converting-the-code-sample-to-run-on-sql-server"></a>Kod örneğini SQL Server üzerinde çalışacak şekilde dönüştürme
 
-Microsoft SQL Server'da önceki Transact-SQL örneği çalıştırmak istediğinizi varsayalım.
+Yukarıdaki Transact-SQL örneğini Microsoft SQL Server çalıştırmak istediğinizi varsayalım.
 
-* Kolaylık olması için tamamen Azure depolama kapsayıcısı kullanımı gibi basit bir dosya ile değiştirmek istiyorsunuz **C:\myeventdata.xel**. Dosya, SQL Server'ı barındıran bilgisayarın yerel sabit sürücüye yazılacaktır.
-* Sizin için Transact-SQL deyimleriyle herhangi bir türden ihtiyaç duymaz **CREATE MASTER KEY** ve **kimlik bilgisi oluşturma**.
-* İçinde **olay OTURUMU oluşturma** deyimi, kendi **ekleme hedef** yan tümcesi atanır Http değeri değiştirmek yapılan **filename =** gibibirtamyoldizesiile**C:\myfile.xel**.
+* Kolaylık olması için, Azure depolama kapsayıcısının kullanımını **C:\myeventdata.XEL**gibi basit bir dosyayla tamamen değiştirmek isteyebilirsiniz. Dosya, SQL Server barındıran bilgisayarın yerel sabit sürücüsüne yazılır.
+* **Ana anahtar oluştur** ve **kimlik bilgisi oluşturma**için HERHANGI bir Transact-SQL deyimlerine ihtiyacınız yoktur.
+* **Olay oturumu oluştur** Ifadesinde, **add target** yan tümcesinde, **filename =** için atanan http değerini, **C:\MyFile.XEL**gibi bir tam yol dizesiyle değiştirirsiniz.
   
-  * Azure depolama hesabı dahil.
+  * Azure depolama hesabı gerekmez.
 
 ## <a name="more-information"></a>Daha fazla bilgi
 
-Hesapları ve Azure depolama hizmetinde kapsayıcıları hakkında daha fazla bilgi için bkz:
+Azure depolama hizmetindeki hesaplar ve kapsayıcılar hakkında daha fazla bilgi için bkz.:
 
-* [Net'ten BLOB storage kullanma](../storage/blobs/storage-dotnet-how-to-use-blobs.md)
+* [.NET 'ten blob depolamayı kullanma](../storage/blobs/storage-dotnet-how-to-use-blobs.md)
 * [Kapsayıcıları, Blobları ve Meta Verileri Adlandırma ve Bunlara Başvurma](https://msdn.microsoft.com/library/azure/dd135715.aspx)
-* [Kök kapsayıcı ile çalışma](https://msdn.microsoft.com/library/azure/ee395424.aspx)
-* [1. Ders: Bir Azure kapsayıcısı üzerinde depolanmış erişim ilkesini ve bir paylaşılan erişim imzası oluşturma](https://msdn.microsoft.com/library/dn466430.aspx)
-  * [2. Ders: Paylaşılan erişim imzası kullanarak bir SQL Server kimlik bilgileri oluşturma](https://msdn.microsoft.com/library/dn466435.aspx)
+* [Kök Kapsayıcınle çalışma](https://msdn.microsoft.com/library/azure/ee395424.aspx)
+* [1. ders: bir Azure kapsayıcısında depolanan erişim ilkesi ve paylaşılan erişim imzası oluşturma](https://msdn.microsoft.com/library/dn466430.aspx)
+  * [2. ders: paylaşılan erişim imzası kullanarak SQL Server kimlik bilgileri oluşturma](https://msdn.microsoft.com/library/dn466435.aspx)
 * [Microsoft SQL Server için genişletilmiş olaylar](https://docs.microsoft.com/sql/relational-databases/extended-events/extended-events)
 
 <!--

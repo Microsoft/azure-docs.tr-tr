@@ -1,6 +1,6 @@
 ---
-title: Parola çoklu oturum açma Azure AD galeri uygulaması için yapılandırma sorunu | Microsoft Docs
-description: Zaten Azure AD uygulama galerisinde listelenmiş uygulamalar için parola çoklu oturum açmayı yapılandırırken ortak sorunları insanların yüz anlama
+title: Azure AD Galeri uygulaması için parola çoklu oturum açmayı yapılandırma sorunları | Microsoft Docs
+description: Azure AD uygulama galerisinde zaten listelenen uygulamalar için parola çoklu oturum açmayı yapılandırırken insanların karşılaştığı yaygın sorunları anlayın
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -14,94 +14,94 @@ ms.topic: conceptual
 ms.date: 07/11/2017
 ms.author: mimart
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a35ef95074099499186eae0fadd37f1995d8e725
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.openlocfilehash: bc75346b1093cc41a44edad1376c5f10dfec2409
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67190286"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68381133"
 ---
-# <a name="problem-configuring-password-single-sign-on-for-an-azure-ad-gallery-application"></a>Parola çoklu oturum açma Azure AD galeri uygulaması için yapılandırma sorunu
+# <a name="problem-configuring-password-single-sign-on-for-an-azure-ad-gallery-application"></a>Azure AD Galeri uygulaması için parola çoklu oturum açmayı yapılandırma sorunu
 
-Bu makale ortak sorunları insanların yüz yapılandırırken anlamanıza yardımcı olur **parola ile çoklu oturum açma** ile Azure AD galeri uygulaması.
+Bu makale, Azure AD Galeri uygulamasıyla **parola çoklu oturum açmayı** yapılandırırken insanların karşılaştığı yaygın sorunları anlamanıza yardımcı olur.
 
-## <a name="credentials-are-filled-in-but-the-extension-does-not-submit-them"></a>Kimlik bilgileri doldurulur ancak bunları uzantısı göndermez
+## <a name="credentials-are-filled-in-but-the-extension-does-not-submit-them"></a>Kimlik bilgileri doldurulmuştur, ancak uzantı onları gönderemiyor
 
-Bu sorun genellikle uygulamanın satıcısına kısa bir süre önce bir alan eklemek için oturum açma sayfası değiştirildi varsa, kullanıcı adı ve parola alanları algılamak için kullanılan tanımlayıcı değiştirildi veya nasıl oturum açma deneyimi, uygulamanın çalıştığı değişiklik olur. Neyse ki, çoğu durumda, Microsoft bu sorunları hızlı bir şekilde çözmek için uygulama satıcıları ile çalışabilirsiniz.
+Bu sorun genellikle uygulama satıcısı oturum açma sayfasını son zamanlarda bir alan eklemek, Kullanıcı adı ve parola alanlarını algılamak için kullanılan tanımlayıcıyı değiştirmek veya oturum açma deneyiminin uygulama için nasıl çalıştığını değiştirmek üzere değiştirdiyse meydana gelir. Neyse ki, birçok örnekte Microsoft bu sorunları hızlı bir şekilde çözmek için uygulama satıcılarıyla birlikte çalışabilir.
 
-Microsoft teknolojileri tümleştirmeler böldüğünüzde otomatik olarak algılamak için olsa da hemen sorunları bulmak mümkün olmayabilir veya sorunları düzeltmek için biraz zaman alabilir. Bu tümleştirmelere biri düzgün çalışmaz, olabildiğince çabuk düzeltilebilir şekilde durumda destek talebinde bulunun.
+Microsoft, tümleştirmelerin ne zaman otomatik olarak algılanması için teknolojiler sağlarken, sorunları hemen bulmak mümkün olmayabilir veya sorunların düzeltilmesi biraz zaman alabilir. Bu tümleştirmelerin bir örneği doğru şekilde çalışmazsa, mümkün olduğunca çabuk düzeltibilmeleri için bir destek talebi açın.
 
-**Bu uygulamanın satıcısına kurmuş olduğunuz** Microsoft yerel olarak kendi uygulama Azure Active Directory ile tümleştirmek için bunlarla çalışabilmesi için bunları eklemeyeceğimize. Satıcıya gönderdiğiniz [Azure Active Directory Uygulama galerisinde uygulamanızı listeleme](../develop/howto-app-gallery-listing.md) bunları kullanmaya almak için.
+**Bu uygulamanın satıcısıyla iletişim kursunsam, Microsoft 'un** kendi uygulamasını Azure Active Directory ile yerel olarak tümleştirmeleri için onlarla birlikte çalışmasına yol açabilir. Satıcıyı başlamak için [Azure Active Directory Uygulama galerisinde uygulamanızı listeye](../develop/howto-app-gallery-listing.md) gönderebilirsiniz.
 
-## <a name="credentials-are-filled-in-and-submitted-but-the-page-indicates-the-credentials-are-incorrect"></a>Kimlik bilgileri doldurulur ve gönderildi, ancak kimlik bilgileri hatalıdır sayfasını gösterir
+## <a name="credentials-are-filled-in-and-submitted-but-the-page-indicates-the-credentials-are-incorrect"></a>Kimlik bilgileri doldurulmuştur ve gönderilir, ancak sayfa kimlik bilgilerinin yanlış olduğunu belirtiyor
 
-Bu sorunu çözmek için önce bunları deneyin:
+Bu sorunu çözmek için öncelikle şunları deneyin:
 
-- İlk çalıştığınızda kullanıcının **oturum açın uygulama Web sitesine doğrudan** kendileri için depolanan kimlik bilgileri ile.
+- Kullanıcının **uygulama Web sitesinde, doğrudan** bunlar için depolanan kimlik bilgileriyle oturum açmaya çalışın.
 
-  * Oturum açma çalışırsa, ardından tıklayın kullanıcı sahip **kimlik bilgilerini güncelleştirme** düğmesini **uygulama kutucuğu** içinde **uygulamaları** bölümünü [uygulama erişimi Paneli](https://myapps.microsoft.com/) en son bilinen çalışma kullanıcı adı ve parola olarak güncelleştirmek için.
+  * Oturum açma çalışır durumda olduğunda, kullanıcının en son bilinen çalışma Kullanıcı adı ve parolasıyla güncelleştirilmesi için [uygulama erişimi panelinin](https://myapps.microsoft.com/) **uygulamalar** bölümünde yer alan **uygulama kutucuğunda** bulunan **kimlik bilgilerini güncelleştir** düğmesine tıklamasını sağlar.
 
-  * Bu kullanıcı için kimlik bilgilerini, siz veya başka bir yöneticinin atadıysanız, kullanıcının veya grubun uygulama ataması için giderek bulabilirsiniz **kullanıcıları ve grupları** atama seçip uygulamanınsekmesi **Kimlik bilgilerini güncelleştirme** düğmesi.
+  * Ya da bu kullanıcı için kimlik bilgilerini başka bir yönetici atadıysanız, uygulamanın **kullanıcılar & gruplar** sekmesine giderek kullanıcının veya grubun uygulama atamasını bulun, atamayı seçip **güncelleştirme kimlik bilgilerine tıklayın** düğmesine basın.
 
-- Kullanıcı kendi kimlik bilgilerini atanmış ise, kullanıcı sahip **parolalarını uygulamada dolduğunu değil emin olmak için onay** ve bu durumda, **süresi dolmuş parolasını güncelleştirmesi** uygulamada oturum açarken tarafından doğrudan.
+- Kullanıcı kendi kimlik bilgilerini atamışsa, kullanıcının, **parolasının uygulamanın süresi dolmadığından emin** olup olmadığını denetleyin ve bu durumda, uygulamada doğrudan oturum açarak, **süresi doldu parolasını güncelleştirin** .
 
-  * Uygulama parolası güncelleştirildikten sonra kullanıcının'ı istek **kimlik bilgilerini güncelleştirme** düğmesini **uygulama kutucuğu** içinde **uygulamaları** bölümünü [Uygulama erişim panelinde](https://myapps.microsoft.com/) en son bilinen çalışma kullanıcı adı ve parola olarak güncelleştirmek için.
+  * Parola uygulamada güncelleştirildikten sonra, uygulamayı bilinen en son güncelleştirmeyle güncelleştirmek için [uygulama erişim paneli](https://myapps.microsoft.com/) 'nin **uygulamalar** bölümündeki **uygulama kutucuğunda** bulunan **kimlik bilgilerini güncelleştir** düğmesine tıklamasını isteyin. çalışma Kullanıcı adı ve parola.
 
-  * Bu kullanıcı için kimlik bilgilerini, siz veya başka bir yöneticinin atadıysanız, kullanıcının veya grubun uygulama ataması için giderek bulabilirsiniz **kullanıcıları ve grupları** atama seçip uygulamanınsekmesi **Kimlik bilgilerini güncelleştirme** düğmesi.
+  * Ya da bu kullanıcı için kimlik bilgilerini başka bir yönetici atadıysanız, uygulamanın **kullanıcılar & gruplar** sekmesine giderek kullanıcının veya grubun uygulama atamasını bulun, atamayı seçip **güncelleştirme kimlik bilgilerine tıklayın** düğmesine basın.
 
-- Aşağıdaki adımları izleyerek erişim paneli tarayıcı uzantısını güncelleştirme kullanıcı [erişim paneli tarayıcı uzantısını nasıl yükleyeceğiniz](#how-to-install-the-access-panel-browser-extension) bölümü.
+- Kullanıcı erişim paneli [tarayıcı uzantısını yüklemek](#how-to-install-the-access-panel-browser-extension) bölümünde aşağıdaki adımları izleyerek kullanıcının erişim paneli tarayıcı uzantısını güncelleştirmesini sağlayabilirsiniz.
 
-- Erişim paneli tarayıcı uzantısını çalışır ve kullanıcı tarayıcısında etkin olduğundan emin olun.
+- Erişim paneli tarayıcı uzantısının, kullanıcının tarayıcısında çalıştığından ve etkinleştirildiğinden emin olun.
 
-- Kullanıcılarınız uygulamaya erişim panelinden oturum açmaya çalışırken değil olun **gizli, InPrivate veya özel modu**. Erişim paneli uzantısını bu modda desteklenmez.
+- Kullanıcılarınızın erişim panelinden uygulamada oturum açmaya çalışmalarından **, InPrivate veya özel moddayken**emin olun. Bu modlarda erişim paneli uzantısı desteklenmez.
 
-Önceki öneriler çalışmaz durumda uygulamanın Azure AD ile tümleştirme geçici olarak bozuk uygulama tarafında gerçekleşen bir değişikliği durumda olabilir. Uygulamanın satıcısına getirir, örneğin, bu giriş, hangi nedenleri ayırmak için tümleştirme, kendi, gibi otomatikleştirilmiş bir betik, el ile vs için farklı davranır sayfasında otomatik ortaya çıkabilir. Neyse ki, çoğu durumda, Microsoft bu sorunları hızlı bir şekilde çözmek için uygulama satıcıları ile çalışabilirsiniz.
+Önceki önerilerin çalışmamasına karşı, uygulamanın Azure AD ile tümleştirmesini geçici olarak bozan uygulama tarafında bir değişikliğin oluşması durumunda olabilir. Örneğin, bu durum, uygulama satıcısı kendi sayfasında bir betiği ortaya çıkardığı zaman gerçekleşebilir ve bu, kendi otomatik entegrasyonumuz gibi otomatik tümleştirmeye neden olur. Neyse ki, birçok örnekte Microsoft bu sorunları hızlı bir şekilde çözmek için uygulama satıcılarıyla birlikte çalışabilir.
 
-Microsoft teknolojileri uygulama tümleştirmeler böldüğünüzde otomatik olarak algılamak için olsa da hemen sorunları bulmak mümkün olmayabilir veya sorunları düzeltmek için biraz zaman alabilir. Bir tümleştirme düzgün çalışmaz, olabildiğince çabuk sorunu düzeltmesi için bir destek talebi açabilir. 
+Microsoft, uygulama tümleştirmeleri sırasında otomatik olarak algılamaya yönelik teknolojiler sağlarken, sorunları hemen bulmak mümkün olmayabilir veya sorunların düzeltilmesi biraz zaman alabilir. Bir tümleştirme düzgün çalışmazsa, mümkün olduğunca hızlı bir şekilde düzeltilmesi için bir destek talebi açabilirsiniz. 
 
-Bu, ek olarak **bu uygulamanın satıcısına kurmuş olduğunuz** **bunları eklemeyeceğimize** yerel olarak kendi uygulama Azure Active Directory ile tümleştirmek için bunlarla çalışabilmesi için. Satıcıya gönderdiğiniz [Azure Active Directory Uygulama galerisinde uygulamanızı listeleme](../develop/howto-app-gallery-listing.md) bunları kullanmaya almak için.
+Buna ek olarak, **Bu uygulamanın satıcısıyla iletişim**  kursunuz, uygulamaları Azure Active Directory ile yerel olarak tümleştirmek üzere bunlarla çalışabilmemiz için sizinle birlikte çalışmamız gerekir. Satıcıyı başlamak için [Azure Active Directory Uygulama galerisinde uygulamanızı listeye](../develop/howto-app-gallery-listing.md) gönderebilirsiniz.
 
-## <a name="the-extension-works-in-chrome-and-firefox-but-not-in-internet-explorer"></a>Uzantı, Chrome ve Firefox, ancak Internet Explorer'da çalışır.
+## <a name="the-extension-works-in-chrome-and-firefox-but-not-in-internet-explorer"></a>Uzantı Chrome ve Firefox 'ta çalışmaktadır, ancak Internet Explorer 'da kullanılamaz
 
-Bu sorunun iki ana nedeni vardır:
+Bu sorunun başlıca iki nedeni vardır:
 
-- Web sitesi ise, Internet Explorer'da etkin güvenlik ayarlarına bağlı olarak parçası olan bir **güvenilen**, bazen betiğimizi engellenmesi için uygulamanın yürütülmesini.
+- Internet Explorer 'da etkinleştirilen güvenlik ayarlarına bağlı olarak, Web sitesi **Güvenilen bir bölgenin**parçası değilse, bazen betiğimizin uygulama için yürütülmesi engellenir.
 
-  *  Bu sorunu çözmek için kullanıcıya bildirin **uygulamanın Web sitesini Ekle** için **Güvenilen siteler** içinde listesinde kendi **Internet Explorer güvenlik ayarlarınızın**. Kullanıcılarınızın gönderdiğiniz [my Güvenilen siteler listesine bir site ekleme](https://answers.microsoft.com/en-us/ie/forum/ie9-windows_7/how-do-i-add-a-site-to-my-trusted-sites-list/98cc77c8-b364-e011-8dfc-68b599b31bf5) makalede ayrıntılı yönergeler için.
+  *  Bu sorunu çözmek için, kullanıcının **Internet Explorer güvenlik ayarları**Içindeki **Güvenilen siteler** listesine **uygulamanın Web sitesini eklemesini** isteyin. Ayrıntılı yönergeler için kullanıcılarınızı, [Güvenilen siteler listesinden site ekleme](https://answers.microsoft.com/en-us/ie/forum/ie9-windows_7/how-do-i-add-a-site-to-my-trusted-sites-list/98cc77c8-b364-e011-8dfc-68b599b31bf5) makalesine gönderebilirsiniz.
 
-- Nadir durumlarda, Internet Explorer'ın güvenlik doğrulaması bazen daha yavaş yüklenir betiğimizi yürütülmesi için sayfayı neden olabilir.
+- Nadir koşullarda, Internet Explorer 'ın güvenlik doğrulaması bazen sayfanın betiğimizin yürütülmesinden daha yavaş yüklenmesine neden olabilir.
 
-  * Ne yazık ki bu durumda, tarayıcı sürümü, bilgisayar hızı veya ziyaret edilen site bağlı olarak farklılık gösterebilir. Bu durumda, biz bu belirli bir uygulama için tümleştirme düzeltebilmek için Destek birimine başvurmanızı öneririz.
+  * Ne yazık ki bu durum tarayıcı sürümüne, bilgisayar hızına veya ziyaret edilen siteye bağlı olarak farklılık gösterebilir. Bu durumda, bu belirli uygulama için tümleştirmeyi çözebilmemiz için destek ekibiyle iletişime geçin.
 
-Bu, ek olarak **bu uygulamanın satıcısına kurmuş olduğunuz** **bunları eklemeyeceğimize** yerel olarak kendi uygulama Azure Active Directory ile tümleştirmek için bunlarla çalışabilmesi için. Satıcıya gönderdiğiniz [Azure Active Directory Uygulama galerisinde uygulamanızı listeleme](../develop/howto-app-gallery-listing.md) bunları kullanmaya almak için.
+Buna ek olarak, **Bu uygulamanın satıcısıyla iletişim**  kursunuz, uygulamaları Azure Active Directory ile yerel olarak tümleştirmek üzere bunlarla çalışabilmemiz için sizinle birlikte çalışmamız gerekir. Satıcıyı başlamak için [Azure Active Directory Uygulama galerisinde uygulamanızı listeye](../develop/howto-app-gallery-listing.md) gönderebilirsiniz.
 
-## <a name="check-if-the-applications-login-page-has-changed-recently-or-requires-an-additional-field"></a>Uygulamanın oturum açma sayfası kısa bir süre önce değiştirildi veya başka bir alan gerektirir
+## <a name="check-if-the-applications-login-page-has-changed-recently-or-requires-an-additional-field"></a>Uygulamanın oturum açma sayfasının yakın zamanda değişip değişmediğini ve ek bir alan gerektirip gerektirmediğini denetleyin
 
-Uygulamanın oturum açma sayfası önemli ölçüde değiştiyse, bazen bu bizim tümleştirmeler ayırmak neden olur. Bir uygulamanın satıcısına deneyimlerini için bir oturum açma alanı, captcha veya çok faktörlü kimlik doğrulaması eklediğinde, bu örneğidir. Neyse ki, çoğu durumda, Microsoft bu sorunları hızlı bir şekilde çözmek için uygulama satıcıları ile çalışabilirsiniz.
+Uygulamanın oturum açma sayfası büyük ölçüde değiştirilmişse, bazı durumlarda tümleştirmelerimiz kesintiye neden olur. Bunun bir örneği, bir uygulama satıcısının deneyimler için bir oturum açma alanı, CAPTCHA veya Multi-Factor Authentication eklediğinde oluşur. Neyse ki, birçok örnekte Microsoft bu sorunları hızlı bir şekilde çözmek için uygulama satıcılarıyla birlikte çalışabilir.
 
-Microsoft teknolojileri uygulama tümleştirmeler böldüğünüzde otomatik olarak algılamak için olsa da hemen sorunları bulmak mümkün olmayabilir veya sorunları düzeltmek için biraz zaman alabilir. Bir tümleştirme düzgün çalışmaz, olabildiğince çabuk sorunu düzeltmesi için bir destek talebi açabilir. 
+Microsoft, uygulama tümleştirmeleri sırasında otomatik olarak algılamaya yönelik teknolojiler sağlarken, sorunları hemen bulmak mümkün olmayabilir veya sorunların düzeltilmesi biraz zaman alabilir. Bir tümleştirme düzgün çalışmazsa, mümkün olduğunca hızlı bir şekilde düzeltilmesi için bir destek talebi açabilirsiniz. 
 
-Bu, ek olarak **bu uygulamanın satıcısına kurmuş olduğunuz** **bunları eklemeyeceğimize** yerel olarak kendi uygulama Azure Active Directory ile tümleştirmek için bunlarla çalışabilmesi için. Satıcıya gönderdiğiniz [Azure Active Directory Uygulama galerisinde uygulamanızı listeleme](../develop/howto-app-gallery-listing.md) bunları kullanmaya almak için.
+Buna ek olarak, **Bu uygulamanın satıcısıyla iletişim**  kursunuz, uygulamaları Azure Active Directory ile yerel olarak tümleştirmek üzere bunlarla çalışabilmemiz için sizinle birlikte çalışmamız gerekir. Satıcıyı başlamak için [Azure Active Directory Uygulama galerisinde uygulamanızı listeye](../develop/howto-app-gallery-listing.md) gönderebilirsiniz.
 
-## <a name="how-to-install-the-access-panel-browser-extension"></a>Erişim paneli tarayıcı uzantısını yükleme
+## <a name="how-to-install-the-access-panel-browser-extension"></a>Erişim paneli tarayıcı uzantısını nasıl yüklenir
 
 Erişim paneli tarayıcı uzantısını yüklemek için aşağıdaki adımları izleyin:
 
-1.  Açık [erişim paneli](https://myapps.microsoft.com) olarak oturum açın ve desteklenen tarayıcılar birinde bir **kullanıcı** Azure ad.
+1.  Desteklenen tarayıcılardan birinde [erişim panelini](https://myapps.microsoft.com) açın ve Azure AD 'de **Kullanıcı** olarak oturum açın.
 
-2.  ' a tıklayın bir **parola SSO uygulama** erişim panelinde.
+2.  Erişim panelinde bir **Password-SSO uygulamasına** tıklayın.
 
-3.  Yazılımı yüklemek soran istem içinde seçin **Şimdi Yükle**.
+3.  Yazılımı yüklemek isteyip istememe isteminde **Şimdi yüklensin**' i seçin.
 
-4.  Tarayıcınıza bağlı olarak, yükleme bağlantısını yönlendirilir. **Ekleme** tarayıcınızı uzantısı.
+4.  Tarayıcınıza bağlı olarak, indirme bağlantısına yönlendirilirsiniz. Uzantıyı tarayıcınıza **ekleyin** .
 
-5.  Tarayıcınız isterse, ya da seçin **etkinleştirme** veya **izin** uzantısı.
+5.  Tarayıcınız istediğinde, uzantıyı **etkinleştirmek** veya **izin vermek** için seçin.
 
-6.  Yüklendiğinde, **yeniden** , tarayıcı oturumu.
+6.  Yüklendikten sonra tarayıcı oturumunuzu **yeniden başlatın** .
 
-7.  Erişim paneline oturum açın ve, varsa görebilirsiniz **başlatma** parola SSO uygulamalarınız
+7.  Erişim panelinde oturum açın ve parola SSO uygulamalarınızı **başlatıp başlatamadıysanız** bkz.
 
-Ayrıca uzantısı Chrome ve Firefox için aşağıdaki doğrudan bağlantılardan indirebilirsiniz:
+Chrome ve Firefox uzantısını aşağıdaki doğrudan bağlantılardan de indirebilirsiniz:
 
 -   [Chrome erişim paneli uzantısı](https://chrome.google.com/webstore/detail/access-panel-extension/ggjhpefgjjfobnfoldnjipclpcfbgbhl)
 

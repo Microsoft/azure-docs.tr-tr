@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı sanal çekirdek tabanlı kaynak sınırları - elastik havuzlar | Microsoft Docs
-description: Bu sayfa, Azure SQL veritabanındaki elastik havuzlar için bazı ortak sanal çekirdek tabanlı kaynak sınırları açıklar.
+title: Sanal çekirdek kaynak limitleri-elastik havuzlar
+description: Bu sayfa, Azure SQL veritabanı 'nda esnek havuzlar için bazı yaygın sanal çekirdek kaynak sınırlarını açıklamaktadır.
 services: sql-database
 ms.service: sql-database
 ms.subservice: elastic-pools
@@ -9,283 +9,351 @@ ms.devlang: ''
 ms.topic: conceptual
 author: oslake
 ms.author: moslake
-ms.reviewer: carlrab
-manager: craigg
-ms.date: 06/26/2019
-ms.openlocfilehash: 4e63e1e477ce82221e5121815b609326cc2c1112
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.reviewer: carlrab, sstein
+ms.date: 11/04/2019
+ms.openlocfilehash: f356b9d248ac9c5f0bcfaaeeb37b43d958eaa528
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447177"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73822369"
 ---
-# <a name="resource-limits-for-elastic-pools-using-the-vcore-based-purchasing-model-limits"></a>Sanal çekirdek tabanlı satın alma modeli sınırlarını kullanarak elastik havuzlar için kaynak sınırları
+# <a name="resource-limits-for-elastic-pools-using-the-vcore-purchasing-model"></a>Sanal çekirdek satın alma modelini kullanarak elastik havuzlar için kaynak sınırları
 
-Bu makalede, Azure SQL veritabanı elastik havuzları ve sanal çekirdek tabanlı satın alma modeli kullanarak havuza alınmış veritabanları için ayrıntılı kaynak sınırları sağlar.
+Bu makalede, sanal çekirdek satın alma modeli kullanılarak Azure SQL veritabanı elastik havuzları ve havuza alınmış veritabanları için ayrıntılı kaynak sınırları sağlanmaktadır.
 
-DTU tabanlı satın alma modeli limitleri için bkz. [SQL veritabanı DTU tabanlı kaynak sınırları - elastik havuzlar](sql-database-dtu-resource-limits-elastic-pools.md).
-
-> [!IMPORTANT]
-> Bazı durumlarda, kullanılmayan alanı geri kazanmak için bir veritabanı daraltma gerekebilir. Daha fazla bilgi için [Azure SQL veritabanı'nda dosya alanı yönetmek](sql-database-file-space-management.md).
-
-Bir hizmet katmanı, işlem boyutu ve depolama miktarını kullanarak ayarlayabilirsiniz [Azure portalında](sql-database-elastic-pool-manage.md#azure-portal-manage-elastic-pools-and-pooled-databases), [PowerShell](sql-database-elastic-pool-manage.md#powershell-manage-elastic-pools-and-pooled-databases), [Azure CLI](sql-database-elastic-pool-manage.md#azure-cli-manage-elastic-pools-and-pooled-databases), veya [REST API](sql-database-elastic-pool-manage.md#rest-api-manage-elastic-pools-and-pooled-databases).
+DTU satın alma modeli sınırları için bkz. [SQL VERITABANı DTU kaynak limitleri-elastik havuzlar](sql-database-dtu-resource-limits-elastic-pools.md).
 
 > [!IMPORTANT]
-> Bkz. yönergeler ve önemli noktalar ölçekleme için [elastik havuzu ölçekleme](sql-database-elastic-pool-scale.md)
-> [!NOTE]
-> Kaynak elastik havuzlardaki veritabanlarını tek tek genellikle tek veritabanları aynı havuzları dışında aynı boyutu işlem limitlerdir. Örneğin, maks. eş zamanlı çalışan GP_Gen4_1 veritabanı için 200 çalışanları olur. Bu nedenle, GP_Gen4_1 havuzdaki bir veritabanı için en fazla eş zamanlı çalışan var. Ayrıca 200 çalışanları 210 olduğuna dikkat edin. eş zamanlı çalışan GP_Gen4_1 havuzundaki toplam sayısı.
+> Bazı durumlarda, kullanılmayan alanı geri kazanmak için bir veritabanını daraltmanız gerekebilir. Daha fazla bilgi için bkz. [Azure SQL veritabanı 'nda dosya alanını yönetme](sql-database-file-space-management.md).
 
-## <a name="general-purpose-service-tier-storage-sizes-and-compute-sizes"></a>Genel amaçlı hizmet katmanı: Depolama boyutlarına ve işlem boyutları
+Hizmet katmanını, işlem boyutunu ve depolama miktarını [Azure Portal](sql-database-elastic-pool-manage.md#azure-portal-manage-elastic-pools-and-pooled-databases), [POWERSHELL](sql-database-elastic-pool-manage.md#powershell-manage-elastic-pools-and-pooled-databases), [Azure CLI](sql-database-elastic-pool-manage.md#azure-cli-manage-elastic-pools-and-pooled-databases)veya [REST API](sql-database-elastic-pool-manage.md#rest-api-manage-elastic-pools-and-pooled-databases)kullanarak ayarlayabilirsiniz.
 
 > [!IMPORTANT]
-> Yeni 4. nesil veritabanları, AustraliaEast bölgesinde artık desteklenmemektedir.
+> Ölçeklendirme Kılavuzu ve değerlendirmeleri için bkz. [elastik havuz ölçekleme](sql-database-elastic-pool-scale.md)
 
-### <a name="general-purpose-service-tier-generation-4-compute-platform-part-1"></a>Genel amaçlı hizmet katmanı: 4. nesil işlem platformu (1. bölüm)
+
+## <a name="general-purpose---provisioned-compute---gen4"></a>Genel amaçlı-sağlanan işlem-4. nesil
+
+> [!IMPORTANT]
+> Yeni 4. nesil veritabanları artık Avustralya Doğu veya Brezilya Güney bölgelerinde desteklenmez.
+
+### <a name="general-purpose-service-tier-generation-4-compute-platform-part-1"></a>Genel amaçlı hizmet katmanı: nesil 4 işlem platformu (Bölüm 1)
 
 |İşlem boyutu|GP_Gen4_1|GP_Gen4_2|GP_Gen4_3|GP_Gen4_4|GP_Gen4_5|GP_Gen4_6
 |:--- | --: |--: |--: |--: |--: |--: |
-|S/W oluşturma|4|4|4|4|4|4|
-|Sanal çekirdekler|1|2|3|4|5|6|
+|İşlem oluşturma|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|
+|Sanal çekirdek|1|2|3|4|5|6|
 |Bellek (GB)|7|14|21|28|35|42|
 |Havuz başına en fazla veritabanı|100|200|500|500|500|500|
 |Columnstore desteği|Evet|Evet|Evet|Evet|Evet|Evet|
-|Bellek içi OLTP depolama alanı (GB)|Yok|Yok|Yok|Yok|Yok|Yok|
-|En yüksek veri boyutu (GB)|512|756|756|1536|1536|1536|
-|Maksimum günlük boyutu|154|227|227|461|461|461|
-|TempDB boyutu (GB)|32|64|96|128|160|192|
+|Bellek içi OLTP depolaması (GB)|Yok|Yok|Yok|Yok|Yok|Yok|
+|En fazla veri boyutu (GB)|512|756|756|1536|1536|1536|
+|En büyük günlük boyutu|154|227|227|461|461|461|
+|TempDB boyutu (GB)|32|64|6400/96|128|160|192|
 |Depolama türü|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|
-|GÇ gecikmesi (yaklaşık)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|
-|Hedef IOPS (64 KB)|500|1000|1500|2000|2500|3000|
-|Günlük oran sınırları (MBps)|4.6875|9.375|14.0625|18.75|23.4375|28.125|
-|Maks. eş zamanlı çalışan (istek) havuz başına * |210|420|630|840|1050|1260|
-|Havuz başına maks. eş zamanlı oturum * |210|420|630|840|1050|1260|
-|İzin verilen maks. oturumları|30000|30000|30000|30000|30000|30000|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|0, 0.25, 0.5, 1|0, 0.25, 0.5, 1, 2|0, 0.25, 0.5, 1...3|0, 0.25, 0.5, 1...4|0, 0.25, 0.5, 1...5|0, 0.25, 0.5, 1...6|
-|Çoğaltma sayısı|1|1\.|1\.|1\.|1\.|1|
-|Çok AZ|Yok|Yok|Yok|Yok|Yok|Yok|
-|Ölçek genişletme okuyun|Yok|Yok|Yok|Yok|Yok|Yok|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|GÇ gecikme süresi (yaklaşık)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|
+|Hedef ıOPS (64 KB)|500|1000|1500|2000|2500|3000|
+|Günlük hızı sınırları (MBps)|4,6875|9,375|14,0625|18,75|23,4375|28,125|
+|Havuz başına en fazla eş zamanlı çalışan (istek) * |210|420|630|840|1050|1260|
+|Havuz başına en fazla eşzamanlı oturum açma * |210|420|630|840|1050|1260|
+|İzin verilen en fazla oturum sayısı|30000|30000|30000|30000|30000|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0, 0,25, 0,5, 1|0, 0,25, 0,5, 1, 2|0, 0,25, 0,5, 1... 3|0, 0,25, 0,5, 1... 4|0, 0,25, 0,5, 1... 5|0, 0,25, 0,5, 1... 6|
+|Çoğaltma sayısı|1|1|1|1|1|1|
+|Çoklu-AZ|Yok|Yok|Yok|Yok|Yok|Yok|
+|Ölçeği okuyun|Yok|Yok|Yok|Yok|Yok|Yok|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
 
-### <a name="general-purpose-service-tier-generation-4-compute-platform-part-2"></a>Genel amaçlı hizmet katmanı: 4. nesil işlem platformu (2. bölüm)
+
+### <a name="general-purpose-service-tier-generation-4-compute-platform-part-2"></a>Genel amaçlı hizmet katmanı: nesil 4 işlem platformu (Bölüm 2)
 
 |İşlem boyutu|GP_Gen4_7|GP_Gen4_8|GP_Gen4_9|GP_Gen4_10|GP_Gen4_16|GP_Gen4_24|
 |:--- | --: |--: |--: |--: |--: |--: |
-|S/W oluşturma|4|4|4|4|4|4|
-|Sanal çekirdekler|7|8|9|10|16|24|
+|İşlem oluşturma|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|
+|Sanal çekirdek|7|8|9|10|16|24|
 |Bellek (GB)|49|56|63|70|112|168|
 |Havuz başına en fazla veritabanı|500|500|500|500|500|500|
 |Columnstore desteği|Evet|Evet|Evet|Evet|Evet|Evet|
-|Bellek içi OLTP depolama alanı (GB)|Yok|Yok|Yok|Yok|Yok|Yok|
-|En yüksek veri boyutu (GB)|1536|2048|2048|2048|3584|4096|
-|Maksimum günlük boyutu (GB)|461|614|614|614|1075|1229|
+|Bellek içi OLTP depolaması (GB)|Yok|Yok|Yok|Yok|Yok|Yok|
+|En fazla veri boyutu (GB)|1536|2048|2048|2048|3584|4096|
+|En fazla günlük boyutu (GB)|461|614|614|614|1075|1229|
 |TempDB boyutu (GB)|224|256|288|320|384|384|
 |Depolama türü|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|
-|GÇ gecikmesi (yaklaşık)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|
-|Hedef IOPS (64 KB)|3500|4000|4500|5000|7000|7000|
-|Günlük oran sınırları (MBps)|32.8125|37.5|37.5|37.5|37.5|37.5|
-|Maks. eş zamanlı çalışan (istek) havuz başına *|1470|1680|1890|2100|3360|5040|
-|En fazla eşzamanlı oturum açma havuzu (istek) *|1470|1680|1890|2100|3360|5040|
-|İzin verilen maks. oturumları|30000|30000|30000|30000|30000|30000|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|0, 0.25, 0.5, 1...7|0, 0.25, 0.5, 1...8|0, 0.25, 0.5, 1...9|0, 0.25, 0.5, 1...10|0, 0.25, 0.5, 1...10, 16|0, 0.25, 0.5, 1...10, 16, 24|
-|Çoğaltma sayısı|1|1\.|1\.|1\.|1\.|1|
-|Çok AZ|Yok|Yok|Yok|Yok|Yok|Yok|
-|Ölçek genişletme okuyun|Yok|Yok|Yok|Yok|Yok|Yok|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|GÇ gecikme süresi (yaklaşık)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|
+|Hedef ıOPS (64 KB)|3500|4000|4500|5000|7000|7000|
+|Günlük hızı sınırları (MBps)|32,8125|37,5|37,5|37,5|37,5|37,5|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|1470|1680|1890|2100|3360|5040|
+|En fazla eşzamanlı oturum açma Havuzu (istek) *|1470|1680|1890|2100|3360|5040|
+|İzin verilen en fazla oturum sayısı|30000|30000|30000|30000|30000|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0, 0,25, 0,5, 1... 7|0, 0,25, 0,5, 1... 8|0, 0,25, 0,5, 1... 9|0, 0,25, 0,5, 1... 10|0, 0,25, 0,5, 1... 10, 16|0, 0,25, 0,5, 1... 10, 16, 24|
+|Çoğaltma sayısı|1|1|1|1|1|1|
+|Çoklu-AZ|Yok|Yok|Yok|Yok|Yok|Yok|
+|Ölçeği okuyun|Yok|Yok|Yok|Yok|Yok|Yok|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
 
-### <a name="general-purpose-service-tier-generation-5-compute-platform-part-1"></a>Genel amaçlı hizmet katmanı: 5. nesil işlem platformu (1. bölüm)
+
+## <a name="general-purpose---provisioned-compute---gen5"></a>Genel amaçlı-sağlanan işlem-5. nesil
+
+### <a name="general-purpose-service-tier-generation-5-compute-platform-part-1"></a>Genel amaçlı hizmet katmanı: nesil 5 işlem platformu (Bölüm 1)
 
 |İşlem boyutu|GP_Gen5_2|GP_Gen5_4|GP_Gen5_6|GP_Gen5_8|GP_Gen5_10|GP_Gen5_12|GP_Gen5_14|
 |:--- | --: |--: |--: |--: |---: | --: |--: |
-|S/W oluşturma|5|5|5|5|5|5|5|
-|Sanal çekirdekler|2|4|6|8|10|12|14|
-|Bellek (GB)|10.2|20.4|30.6|40.8|51|61.2|71.4|
+|İşlem oluşturma|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|
+|Sanal çekirdek|2|4|6|8|10|12|14|
+|Bellek (GB)|10.2|20,4|30,6|40,8|51|61,2|71,4|
 |Havuz başına en fazla veritabanı|100|200|500|500|500|500|500|
 |Columnstore desteği|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
-|Bellek içi OLTP depolama alanı (GB)|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
-|En yüksek veri boyutu (GB)|512|756|756|1536|1536|1536|
-|Maksimum günlük boyutu (GB)|154|227|227|461|461|461|461|
+|Bellek içi OLTP depolaması (GB)|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
+|En fazla veri boyutu (GB)|512|756|756|1536|1536|1536|
+|En fazla günlük boyutu (GB)|154|227|227|461|461|461|461|
 |TempDB boyutu (GB)|64|128|192|256|320|384|384|
 |Depolama türü|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|
-|GÇ gecikmesi (yaklaşık)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|
-|Hedef IOPS (64 KB)|1000|2000|3000|4000|5000|6000|7000|
-|Günlük oran sınırları (MBps)|4.6875|9.375|14.0625|18.75|23.4375|28.125|32.8125|
-|Maks. eş zamanlı çalışan (istek) havuz başına *|210|420|630|840|1050|1260|1470|
-|(İstek) havuz başına maks. eş zamanlı oturum *|210|420|630|840|1050|1260|1470|
-|İzin verilen maks. oturumları|30000|30000|30000|30000|30000|30000|30000|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|0, 0.25, 0.5, 1, 2|0, 0.25, 0.5, 1...4|0, 0.25, 0.5, 1...6|0, 0.25, 0.5, 1...8|0, 0.25, 0.5, 1...10|0, 0.25, 0.5, 1...12|0, 0.25, 0.5, 1...14|
-|Çoğaltma sayısı|1|1\.|1\.|1\.|1\.|1\.|1|
-|Çok AZ|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
-|Ölçek genişletme okuyun|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|GÇ gecikme süresi (yaklaşık)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|
+|Hedef ıOPS (64 KB)|1000|2000|3000|4000|5000|6000|7000|
+|Günlük hızı sınırları (MBps)|4,6875|9,375|14,0625|18,75|23,4375|28,125|32,8125|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|210|420|630|840|1050|1260|1470|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|210|420|630|840|1050|1260|1470|
+|İzin verilen en fazla oturum sayısı|30000|30000|30000|30000|30000|30000|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0, 0,25, 0,5, 1, 2|0, 0,25, 0,5, 1... 4|0, 0,25, 0,5, 1... 6|0, 0,25, 0,5, 1... 8|0, 0,25, 0,5, 1... 10|0, 0,25, 0,5, 1... 12|0, 0,25, 0,5, 1... 14|
+|Çoğaltma sayısı|1|1|1|1|1|1|1|
+|Çoklu-AZ|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
+|Ölçeği okuyun|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
 
-### <a name="general-purpose-service-tier-generation-5-compute-platform-part-2"></a>Genel amaçlı hizmet katmanı: 5. nesil işlem platformu (2. bölüm)
+### <a name="general-purpose-service-tier-generation-5-compute-platform-part-2"></a>Genel amaçlı hizmet katmanı: nesil 5 işlem platformu (Bölüm 2)
 
 |İşlem boyutu|GP_Gen5_16|GP_Gen5_18|GP_Gen5_20|GP_Gen5_24|GP_Gen5_32|GP_Gen5_40|GP_Gen5_80|
 |:--- | --: |--: |--: |--: |---: | --: |--: |
-|S/W oluşturma|5|5|5|5|5|5|5|
-|Sanal çekirdekler|16|18|20|24|32|40|80|
-|Bellek (GB)|81.6|91.8|102|122.4|163.2|204|408|
+|İşlem oluşturma|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|
+|Sanal çekirdek|16|18|20|24|32|40|80|
+|Bellek (GB)|81,6|91,8|102|122,4|163,2|204|408|
 |Havuz başına en fazla veritabanı|500|500|500|500|500|500|500|
 |Columnstore desteği|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
-|Bellek içi OLTP depolama alanı (GB)|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
-|En yüksek veri boyutu (GB)|2048|2048|3072|3072|4096|4096|4096|
-|Maksimum günlük boyutu (GB)|614|614|922|922|1229|1229|1229|
+|Bellek içi OLTP depolaması (GB)|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
+|En fazla veri boyutu (GB)|2048|2048|3072|3072|4096|4096|4096|
+|En fazla günlük boyutu (GB)|614|614|922|922|1229|1229|1229|
 |TempDB boyutu (GB)|384|384|384|384|384|384|384|
 |Depolama türü|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|Premium (uzak) depolama|
-|GÇ gecikmesi (yaklaşık)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|5-7 ms (yazma)<br>5-10 ms (okuma)|
-|Hedef IOPS (64 KB)|7000|7000|7000|7000|7000|7000|7000|
-|Günlük oran sınırları (MBps)|37.5|37.5|37.5|37.5|37.5|37.5|37.5|
-|Maks. eş zamanlı çalışan (istek) havuz başına *|1680|1890|2100|2520|33600|4200|8400|
-|(İstek) havuz başına maks. eş zamanlı oturum *|1680|1890|2100|2520|33600|4200|8400|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|0, 0.25, 0.5, 1...16|0, 0.25, 0.5, 1...18|0, 0.25, 0.5, 1...20|0, 0.25, 0.5, 1...20, 24|0, 0.25, 0.5, 1...20, 24, 32|0, 0.25, 0.5, 1...16, 24, 32, 40|0, 0.25, 0.5, 1...16, 24, 32, 40, 80|
-|Çoğaltma sayısı|1|1\.|1\.|1\.|1\.|1\.|1|
-|Çok AZ|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
-|Ölçek genişletme okuyun|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|GÇ gecikme süresi (yaklaşık)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|5-7 MS (yazma)<br>5-10 MS (okuma)|
+|Hedef ıOPS (64 KB)|7000|7000|7000|7000|7000|7000|7000|
+|Günlük hızı sınırları (MBps)|37,5|37,5|37,5|37,5|37,5|37,5|37,5|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|1680|1890|2100|2520|3360|4200|8400|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|1680|1890|2100|2520|3360|4200|8400|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0, 0,25, 0,5, 1... 16|0, 0,25, 0,5, 1... 18|0, 0,25, 0,5, 1... 20|0, 0,25, 0,5, 1... 20, 24|0, 0,25, 0,5, 1... 20, 24, 32|0, 0,25, 0,5, 1... 16, 24, 32, 40|0, 0,25, 0,5, 1... 16, 24, 32, 40, 80|
+|Çoğaltma sayısı|1|1|1|1|1|1|1|
+|Çoklu-AZ|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
+|Ölçeği okuyun|Yok|Yok|Yok|Yok|Yok|Yok|Yok|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+## <a name="general-purpose---provisioned-compute---fsv2-series"></a>Genel amaçlı-sağlanan işlem-Fsv2-Series
 
-## <a name="business-critical-service-tier-storage-sizes-and-compute-sizes"></a>İş kritik hizmet katmanı: Depolama boyutlarına ve işlem boyutları
+### <a name="fsv2-series-compute-generation-preview"></a>Fsv2 serisi işlem oluşturma (Önizleme)
+
+|İşlem boyutu|GP_Fsv2_72|
+|:--- | --: |
+|İşlem oluşturma|Fsv2-serisi|
+|Sanal çekirdek|72|
+|Bellek (GB)|136|
+|Havuz başına en fazla veritabanı|500|
+|Columnstore desteği|Evet|
+|Bellek içi OLTP depolaması (GB)|Yok|
+|En fazla veri boyutu (GB)|4096|
+|En fazla günlük boyutu (GB)|1024|
+|TempDB en fazla veri boyutu (GB)|333|
+|Depolama türü|Premium (uzak) depolama|
+|GÇ gecikme süresi (yaklaşık)|5-7 MS (yazma)<br>5-10 MS (okuma)|
+|Hedef ıOPS (64 KB)|36000|
+|Günlük hızı sınırları (MBps)|37,5|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|1680|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|1680|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0-72|
+|Çoğaltma sayısı|1|
+|Çoklu-AZ|Yok|
+|Ölçeği okuyun|Yok|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|
+
+
+
+
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
+
+
+## <a name="business-critical---provisioned-compute---gen4"></a>İş açısından kritik-sağlanan işlem-4. nesil
 
 > [!IMPORTANT]
-> Yeni 4. nesil veritabanları, AustraliaEast bölgesinde artık desteklenmemektedir.
+> Yeni 4. nesil veritabanları artık Avustralya Doğu veya Brezilya Güney bölgelerinde desteklenmez.
 
-### <a name="business-critical-service-tier-generation-4-compute-platform-part-1"></a>İş kritik hizmet katmanı: 4. nesil işlem platformu (1. bölüm)
+### <a name="business-critical-service-tier-generation-4-compute-platform-part-1"></a>İş açısından kritik hizmet katmanı: nesil 4 işlem platformu (Bölüm 1)
 
 |İşlem boyutu|BC_Gen4_1|BC_Gen4_2|BC_Gen4_3|BC_Gen4_4|BC_Gen4_5|BC_Gen4_6|
 |:--- | --: |--: |--: |--: |--: |--: |
-|S/W oluşturma|4|4|4|4|4|4|
-|Sanal çekirdekler|1|2|3|4|5|6|
+|İşlem oluşturma|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|
+|Sanal çekirdek|1|2|3|4|5|6|
 |Bellek (GB)|7|14|21|28|35|42|
-|Havuz başına en fazla veritabanı|Yalnızca tek veritabanları için bu işlem boyutu desteklenir|50|100|100|100|100|
+|Havuz başına en fazla veritabanı|Bu işlem boyutu için yalnızca tek bir DBs destekleniyor|50|100|100|100|100|
 |Columnstore desteği|Evet|Evet|Evet|Evet|Evet|Evet|
-|Bellek içi OLTP depolama alanı (GB)|1|2|3|4|5|6|
+|Bellek içi OLTP depolaması (GB)|1|2|3|4|5|6|
 |Depolama türü|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|
-|En yüksek veri boyutu (GB)|650|650|650|650|650|650|
-|Maksimum günlük boyutu (GB)|195|195|195|195|195|195|
-|TempDB boyutu (GB)|32|64|96|128|160|192|
-|GÇ gecikmesi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
-|Hedef IOPS (64 KB)|5000|10000|15000|20000|25000|30000|
-|Günlük oran sınırları (MBps)|10|20|30|40|50|60|
-|Maks. eş zamanlı çalışan (istek) havuz başına *|210|420|630|840|1050|1260|
-|(İstek) havuz başına maks. eş zamanlı oturum *|210|420|630|840|1050|1260|
-|İzin verilen maks. oturumları|30000|30000|30000|30000|30000|30000|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|Yok|0, 0.25, 0.5, 1, 2|0, 0.25, 0.5, 1...3|0, 0.25, 0.5, 1...4|0, 0.25, 0.5, 1...5|0, 0.25, 0.5, 1...6|
+|En fazla veri boyutu (GB)|650|650|650|650|650|650|
+|En fazla günlük boyutu (GB)|195|195|195|195|195|195|
+|TempDB boyutu (GB)|32|64|6400/96|128|160|192|
+|GÇ gecikme süresi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
+|Hedef ıOPS (64 KB)|5000|10000|15000|20000|25000|30000|
+|Günlük hızı sınırları (MBps)|10|20|30|40|50|60|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|210|420|630|840|1050|1260|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|210|420|630|840|1050|1260|
+|İzin verilen en fazla oturum sayısı|30000|30000|30000|30000|30000|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|Yok|0, 0,25, 0,5, 1, 2|0, 0,25, 0,5, 1... 3|0, 0,25, 0,5, 1... 4|0, 0,25, 0,5, 1... 5|0, 0,25, 0,5, 1... 6|
 |Çoğaltma sayısı|4|4|4|4|4|4|
-|Çok AZ|Evet|Evet|Evet|Evet|Evet|Evet|
-|Ölçek genişletme okuyun|Evet|Evet|Evet|Evet|Evet|Evet|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|Çoklu-AZ|Evet|Evet|Evet|Evet|Evet|Evet|
+|Ölçeği okuyun|Evet|Evet|Evet|Evet|Evet|Evet|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
 
-### <a name="business-critical-service-tier-generation-4-compute-platform-part-2"></a>İş kritik hizmet katmanı: 4. nesil işlem platformu (2. bölüm)
+### <a name="business-critical-service-tier-generation-4-compute-platform-part-2"></a>İş açısından kritik hizmet katmanı: nesil 4 işlem platformu (Bölüm 2)
 
 |İşlem boyutu|BC_Gen4_7|BC_Gen4_8|BC_Gen4_9|BC_Gen4_10|BC_Gen4_16|BC_Gen4_24|
 |:--- | --: |--: |--: |--: |--: |--: |
-|S/W oluşturma|4|4|4|4|4|4|
-|Sanal çekirdekler|7|8|9|10|16|24|
-|Bellek (GB)|81.6|91.8|102|122.4|163.2|204|
+|İşlem oluşturma|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|4\. nesil|
+|Sanal çekirdek|7|8|9|10|16|24|
+|Bellek (GB)|81,6|91,8|102|122,4|163,2|204|
 |Havuz başına en fazla veritabanı|100|100|100|100|100|100|
 |Columnstore desteği|Yok|Yok|Yok|Yok|Yok|Yok|
-|Bellek içi OLTP depolama alanı (GB)|7|8|9.5|11|20|36|
+|Bellek içi OLTP depolaması (GB)|7|8|9.5|11|20|36|
 |Depolama türü|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|
-|En yüksek veri boyutu (GB)|650|650|650|650|1024|1024|
-|Maksimum günlük boyutu (GB)|195|195|195|195|307|307|
+|En fazla veri boyutu (GB)|650|650|650|650|1024|1024|
+|En fazla günlük boyutu (GB)|195|195|195|195|307|307|
 |TempDB boyutu (GB)|224|256|288|320|384|384|
-|GÇ gecikmesi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
-|Hedef IOPS (64 KB)|35000|40000|45000|50000|80000|120000|
-|Günlük oran sınırları (MBps)|70|80|80|80|80|80|
-|Maks. eş zamanlı çalışan (istek) havuz başına *|1470|1680|1890|2100|3360|5040|
-|(İstek) havuz başına maks. eş zamanlı oturum *|1470|1680|1890|2100|3360|5040|
-|İzin verilen maks. oturumları|30000|30000|30000|30000|30000|30000|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|0, 0.25, 0.5, 1...7|0, 0.25, 0.5, 1...8|0, 0.25, 0.5, 1...9|0, 0.25, 0.5, 1...10|0, 0.25, 0.5, 1...10, 16|0, 0.25, 0.5, 1...10, 16, 24|
+|GÇ gecikme süresi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
+|Hedef ıOPS (64 KB)|35000|40000|45000|50000|80000|120000|
+|Günlük hızı sınırları (MBps)|70|80|80|80|80|80|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|1470|1680|1890|2100|3360|5040|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|1470|1680|1890|2100|3360|5040|
+|İzin verilen en fazla oturum sayısı|30000|30000|30000|30000|30000|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0, 0,25, 0,5, 1... 7|0, 0,25, 0,5, 1... 8|0, 0,25, 0,5, 1... 9|0, 0,25, 0,5, 1... 10|0, 0,25, 0,5, 1... 10, 16|0, 0,25, 0,5, 1... 10, 16, 24|
 |Çoğaltma sayısı|4|4|4|4|4|4|
-|Çok AZ|Evet|Evet|Evet|Evet|Evet|Evet|
-|Ölçek genişletme okuyun|Evet|Evet|Evet|Evet|Evet|Evet|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|Çoklu-AZ|Evet|Evet|Evet|Evet|Evet|Evet|
+|Ölçeği okuyun|Evet|Evet|Evet|Evet|Evet|Evet|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
 
-#### <a name="business-critical-service-tier-generation-5-compute-platform-part-1"></a>İş kritik hizmet katmanı: 5. nesil işlem platformu (1. bölüm)
+## <a name="business-critical---provisioned-compute---gen5"></a>İş açısından kritik-sağlanan işlem-5. nesil
+
+### <a name="business-critical-service-tier-generation-5-compute-platform-part-1"></a>İş açısından kritik hizmet katmanı: nesil 5 işlem platformu (Bölüm 1)
 
 |İşlem boyutu|BC_Gen5_2|BC_Gen5_4|BC_Gen5_6|BC_Gen5_8|BC_Gen5_10|BC_Gen5_12|BC_Gen5_14|
 |:--- | --: |--: |--: |--: |---: | --: |--: |
-|S/W oluşturma|5|5|5|5|5|5|5|
-|Sanal çekirdekler|2|4|6|8|10|12|14|
-|Bellek (GB)|10.2|20.4|30.6|40.8|51|61.2|71.4|
-|Havuz başına en fazla veritabanı|Yalnızca tek veritabanları için bu işlem boyutu desteklenir|50|100|100|100|100|100|
+|İşlem oluşturma|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|
+|Sanal çekirdek|2|4|6|8|10|12|14|
+|Bellek (GB)|10.2|20,4|30,6|40,8|51|61,2|71,4|
+|Havuz başına en fazla veritabanı|Bu işlem boyutu için yalnızca tek bir DBs destekleniyor|50|100|100|100|100|100|
 |Columnstore desteği|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
-|Bellek içi OLTP depolama alanı (GB)|1.571|3.142|4.713|6.284|8.655|11.026|13.397|
-|En yüksek veri boyutu (GB)|1024|1024|1536|1536|1536|3072|3072|
-|Maksimum günlük boyutu (GB)|307|307|307|461|461|922|922|
+|Bellek içi OLTP depolaması (GB)|1,571|3,142|4,713|6,284|8,655|11,026|13,397|
+|En fazla veri boyutu (GB)|1024|1024|1536|1536|1536|3072|3072|
+|En fazla günlük boyutu (GB)|307|307|307|461|461|922|922|
 |TempDB boyutu (GB)|64|128|192|256|320|384|384|
 |Depolama türü|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|
-|GÇ gecikmesi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
-|Hedef IOPS (64 KB)|5000|10000|15000|20000|25000|30000|35000|
-|Günlük oran sınırları (MBps)|15|30|45|60|75|90|105|
-|Maks. eş zamanlı çalışan (istek) havuz başına *|210|420|630|840|1050|1260|1470|
-|(İstek) havuz başına maks. eş zamanlı oturum *|210|420|630|840|1050|1260|1470|
-|İzin verilen maks. oturumları|30000|30000|30000|30000|30000|30000|30000|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|Yok|0, 0.25, 0.5, 1...4|0, 0.25, 0.5, 1...6|0, 0.25, 0.5, 1...8|0, 0.25, 0.5, 1...10|0, 0.25, 0.5, 1...12|0, 0.25, 0.5, 1...14|
+|GÇ gecikme süresi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
+|Hedef ıOPS (64 KB)|5000|10000|15000|20000|25000|30000|35000|
+|Günlük hızı sınırları (MBps)|15|30|45|60|75|90|105|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|210|420|630|840|1050|1260|1470|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|210|420|630|840|1050|1260|1470|
+|İzin verilen en fazla oturum sayısı|30000|30000|30000|30000|30000|30000|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|Yok|0, 0,25, 0,5, 1... 4|0, 0,25, 0,5, 1... 6|0, 0,25, 0,5, 1... 8|0, 0,25, 0,5, 1... 10|0, 0,25, 0,5, 1... 12|0, 0,25, 0,5, 1... 14|
 |Çoğaltma sayısı|4|4|4|4|4|4|4|
-|Çok AZ|Evet|Evet|Evet|Evet|Evet|Evet|
-|Ölçek genişletme okuyun|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|Çoklu-AZ|Evet|Evet|Evet|Evet|Evet|Evet|
+|Ölçeği okuyun|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
 
-#### <a name="business-critical-service-tier-generation-5-compute-platform-part-2"></a>İş kritik hizmet katmanı: 5. nesil işlem platformu (2. bölüm)
+### <a name="business-critical-service-tier-generation-5-compute-platform-part-2"></a>İş açısından kritik hizmet katmanı: nesil 5 işlem platformu (Bölüm 2)
 
 |İşlem boyutu|BC_Gen5_16|BC_Gen5_18|BC_Gen5_20|BC_Gen5_24|BC_Gen5_32|BC_Gen5_40|BC_Gen5_80|
 |:--- | --: |--: |--: |--: |---: | --: |--: |
-|S/W oluşturma|5|5|5|5|5|5|5|
-|Sanal çekirdekler|16|18|20|24|32|40|80|
-|Bellek (GB)|81.6|91.8|102|122.4|163.2|204|408|
+|İşlem oluşturma|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|Gen5|
+|Sanal çekirdek|16|18|20|24|32|40|80|
+|Bellek (GB)|81,6|91,8|102|122,4|163,2|204|408|
 |Havuz başına en fazla veritabanı|100|100|100|100|100|100|100|
 |Columnstore desteği|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
-|Bellek içi OLTP depolama alanı (GB)|15.768|18.139|20.51|25.252|37.936|52.22|131.64|
-|En yüksek veri boyutu (GB)|3072|3072|3072|4096|4096|4096|4096|
-|Maksimum günlük boyutu (GB)|922|922|922|1229|1229|1229|1229|
+|Bellek içi OLTP depolaması (GB)|15,768|18,139|20,51|25,252|37,936|52,22|131,64|
+|En fazla veri boyutu (GB)|3072|3072|3072|4096|4096|4096|4096|
+|En fazla günlük boyutu (GB)|922|922|922|1229|1229|1229|1229|
 |TempDB boyutu (GB)|384|384|384|384|384|384|384|
 |Depolama türü|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|Yerel SSD|
-|GÇ gecikmesi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
-|Hedef IOPS (64 KB)|40000|45000|50000|60000|80000|100000|200000|
-|Günlük oran sınırları (MBps)|120|120|120|120|120|120|120|
-|Maks. eş zamanlı çalışan (istek) havuz başına *|1680|1890|2100|2520|3360|4200|8400|
-|(İstek) havuz başına maks. eş zamanlı oturum *|1680|1890|2100|2520|3360|4200|8400|
-|İzin verilen maks. oturumları|30000|30000|30000|30000|30000|30000|30000|
-|Veritabanı başına en düşük/en yüksek elastik havuz sanal çekirdek seçenekleri|0, 0.25, 0.5, 1...16|0, 0.25, 0.5, 1...18|0, 0.25, 0.5, 1...20|0, 0.25, 0.5, 1...20, 24|0, 0.25, 0.5, 1...20, 24, 32|0, 0.25, 0.5, 1...20, 24, 32, 40|0, 0.25, 0.5, 1...20, 24, 32, 40, 80|
+|GÇ gecikme süresi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|1-2 ms (yazma)<br>1-2 ms (okuma)|
+|Hedef ıOPS (64 KB)|40000|45000|50000|60000|80000|100000|200000|
+|Günlük hızı sınırları (MBps)|120|120|120|120|120|120|120|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|1680|1890|2100|2520|3360|4200|8400|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|1680|1890|2100|2520|3360|4200|8400|
+|İzin verilen en fazla oturum sayısı|30000|30000|30000|30000|30000|30000|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0, 0,25, 0,5, 1... 16|0, 0,25, 0,5, 1... 18|0, 0,25, 0,5, 1... 20|0, 0,25, 0,5, 1... 20, 24|0, 0,25, 0,5, 1... 20, 24, 32|0, 0,25, 0,5, 1... 20, 24, 32, 40|0, 0,25, 0,5, 1... 20, 24, 32, 40, 80|
 |Çoğaltma sayısı|4|4|4|4|4|4|4|
-|Çok AZ|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
-|Ölçek genişletme okuyun|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
-|Yedekleme depolama alanı dahil|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|1 X veritabanı boyutu|
+|Çoklu-AZ|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
+|Ölçeği okuyun|Evet|Evet|Evet|Evet|Evet|Evet|Evet|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|1X DB boyutu|
 
-\* En fazla eş zamanlı çalışan (istek) herhangi bir tek veritabanı için bkz. [tek veritabanı kaynak limitleri](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuzun 5. nesil ve veritabanı başına en fazla kendi sanal çekirdek kullanıyorsa, maks. eş zamanlı çalışan sonra 200 2 ' dir.  Veritabanı başına en çok sanal çekirdek 0,5 ardından maks. eş zamanlı çalışan ise, 50 üzerinde 5. nesil olduğundan sanal çekirdek başına 100 eşzamanlı çalışan en fazla.  Diğer en çok sanal çekirdek ayarlarını daha az 1 sanal çekirdek olan veritabanı başına ya da daha az, en fazla eş zamanlı çalışan sayısı için benzer şekilde içerik yeniden ölçeklenir.
+## <a name="business-critical---provisioned-compute---m-series"></a>İş açısından kritik-sağlanan işlem-a serisi
 
-Tüm sanal çekirdek, bir elastik havuzun meşgul ise, havuzdaki her bir veritabanı eşit miktarda sorguları işlemek için işlem kaynaklarını alır. SQL Veritabanı hizmeti, eşit dilimlerde işlem süresi sunarak veritabanları arasında kaynak paylaşım eşitliğini sağlar. Elastik havuz kaynak paylaşımı eşitliği, herhangi bir kaynak yoksa veritabanı başına en düşük vCore değeri, sıfır olmayan bir değere ayarlandığında her veritabanı için garanti edilen miktarda'ek niteliğindedir.
+### <a name="m-series-compute-generation-preview"></a>A serisi işlem oluşturma (Önizleme)
+
+|İşlem boyutu|GP_M_128|
+|:--- | --: |
+|İşlem oluşturma|M serisi|
+|Sanal çekirdek|128|
+|Bellek (GB)|3767|
+|Havuz başına en fazla veritabanı|100|
+|Columnstore desteği|Evet|
+|Bellek içi OLTP depolaması (GB)|481|
+|En fazla veri boyutu (GB)|4096|
+|En fazla günlük boyutu (GB)|2048|
+|TempDB en fazla veri boyutu (GB)|4096|
+|Depolama türü|Yerel SSD|
+|GÇ gecikme süresi (yaklaşık)|1-2 ms (yazma)<br>1-2 ms (okuma)|
+|Hedef ıOPS (64 KB)|40000|
+|Günlük hızı sınırları (MBps)|120|
+|Havuz başına en fazla eş zamanlı çalışan (istek) *|1680|
+|Havuz başına en fazla eşzamanlı oturum açma sayısı (istek) *|1680|
+|İzin verilen en fazla oturum sayısı|30000|
+|Veritabanı başına en az/en fazla elastik havuz sanal çekirdek seçimi|0-128|
+|Çoğaltma sayısı|4|
+|Çoklu-AZ|Evet|
+|Ölçeği okuyun|Evet|
+|Dahil edilen yedekleme depolaması|1X DB boyutu|
+
+
+
+her veritabanı için en fazla eşzamanlı çalışan (istek) Için \*, bkz. [tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md). Örneğin, elastik havuz 5. nesil kullanıyorsa ve veritabanı başına en fazla sanal çekirdek 2 ise, en fazla eş zamanlı çalışan 200 olur.  Veritabanı başına en fazla sanal çekirdek 0,5 ise, en fazla eş zamanlı çalışan 5. nesil ' den itibaren, sanal çekirdek başına en fazla 100 ' 50 dir.  Daha az 1 sanal çekirdek veya daha az 1 olan veritabanı başına diğer en fazla sanal çekirdek ayarları için, en fazla eş zamanlı çalışan sayısı benzer şekilde ölçeklendirildi.
+
+Elastik havuzun tüm sanal çekirdekleri meşgulse, havuzdaki her veritabanı, sorguları işlemek için eşit miktarda işlem kaynağı alır. SQL Veritabanı hizmeti, eşit dilimlerde işlem süresi sunarak veritabanları arasında kaynak paylaşım eşitliğini sağlar. Elastik havuz kaynak paylaşımı eşitliği, veritabanı başına vCore en düşük değeri sıfır olmayan bir değere ayarlandığında her bir veritabanı için garanti edilen herhangi bir kaynak miktarına ek olarak yapılır.
 
 ## <a name="database-properties-for-pooled-databases"></a>Havuza alınmış veritabanları için veritabanı özellikleri
 
-Aşağıdaki tabloda, havuza alınmış veritabanları için özellikleri tanımlar.
+Aşağıdaki tabloda, havuza alınmış veritabanlarının özellikleri açıklanmaktadır.
+
+> [!NOTE]
+> Elastik havuzlardaki ayrı veritabanlarının kaynak sınırları, aynı işlem boyutuna sahip havuzlar dışındaki tek veritabanları için genellikle aynıdır. Örneğin, bir GP_Gen4_1 veritabanı için en fazla eş zamanlı çalışan 200 çalışandır. Bu nedenle, bir GP_Gen4_1 havuzundaki bir veritabanı için en fazla eş zamanlı çalışan da 200 çalışandır. GP_Gen4_1 havuzundaki eşzamanlı çalışanların toplam sayısı 210 ' dir.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| Veritabanı başına en yüksek sanal çekirdekler |Havuzdaki diğer veritabanlarının tarafından kullanılabilir kullanım oranlarına dayalı, herhangi bir veritabanı havuzu kullanabiliriz sanal çekirdek sayısı. Veritabanı başına en yüksek Vcore bir veritabanı için kaynak garantisi değil. Bu ayar havuzdaki tüm veritabanları için geçerli olan genel bir ayardır. Veritabanı kullanımı yükündeki yüksek veritabanı başına en yüksek Vcore ayarlayın. Havuz genellikle sıcak ve soğuk kullanım modellerini varsaydığından aşırı işleme, belirli bir ölçüde burada tüm veritabanlarını değil aynı anda en üst seviyeye çıkan bekleniyor.|
-| Veritabanı başına en düşük Vcore |Herhangi bir havuzda veritabanı sanal çekirdek sayısı alt sınırını garanti edilir. Bu ayar havuzdaki tüm veritabanları için geçerli olan genel bir ayardır. Veritabanı başına minimum sanal çekirdekler 0 olarak ayarlayın ve aynı zamanda varsayılan değerdir. Bu özellik 0 ile veritabanı başına ortalama çekirdek kullanımı arasında herhangi bir yere ayarlanır. Havuz başına sanal çekirdekler ürün veritabanları havuz ve veritabanı başına en az çekirdek sayısını aşamaz.|
-| Veritabanı başına maks. depolama |Bir havuzda bir veritabanı için kullanıcı tarafından ayarlanmış maksimum veritabanı boyutu. Havuza alınmış veritabanları, bir veritabanı ulaşabilirsiniz boyutu sınırlıdır bu nedenle ayrılmış havuz depolama alanını paylaşır küçük kalan havuz depolama ve veritabanı boyutu. Maks. veritabanı boyutu, veri dosyaları için en büyük boyutunu ifade eder ve günlük dosyalarının kullandığı alanı içermez. |
+| Veritabanı başına en fazla sanal çekirdek |Havuzdaki diğer veritabanlarının kullanımına bağlı olarak varsa, havuzdaki herhangi bir veritabanının kullanabileceği maksimum sanal çekirdek sayısı. Veritabanı başına en fazla sanal çekirdek, bir veritabanı için kaynak garantisi değildir. Bu ayar havuzdaki tüm veritabanları için geçerli olan genel bir ayardır. Veritabanı kullanımında en üst düzey sanal çekirdekleri işlemek için, veritabanı başına maksimum sanal çekirdek ayarlayın. Havuz genellikle tüm veritabanlarının eşzamanlı olarak en fazla düzeyde olmadığı veritabanları için sık ve soğuk kullanım düzenlerini varsaydığından, bazı aşırı işleme beklenmektedir.|
+| Veritabanı başına en az sanal çekirdek |Havuzdaki herhangi bir veritabanının garanti edilmesi gereken en az sayıda sanal çekirdek. Bu ayar havuzdaki tüm veritabanları için geçerli olan genel bir ayardır. Veritabanı başına en düşük sanal çekirdekler 0 olarak ayarlanabilir ve aynı zamanda varsayılan değerdir. Bu özellik 0 ve veritabanı başına ortalama sanal çekirdek kullanımı arasındaki herhangi bir yere ayarlanır. Havuzdaki veritabanlarının sayısı ve veritabanı başına en düşük sanal çekirdekler, havuz başına sanal çekirdekleri aşamaz.|
+| Veritabanı başına en fazla depolama |Bir havuzdaki bir veritabanı için Kullanıcı tarafından ayarlanan en büyük veritabanı boyutu. Havuza alınmış veritabanları, ayrılmış havuz depolama alanını paylaşır, bu nedenle bir veritabanının ulaşabileceği boyut, kalan havuz depolama ve veritabanı boyutundan daha küçük olacak şekilde sınırlıdır. En fazla veritabanı boyutu, veri dosyalarının boyut üst sınırını ifade eder ve günlük dosyaları tarafından kullanılan alanı içermez. |
 |||
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Tek bir veritabanı için sanal çekirdek kaynak limitleri için bkz. [sanal çekirdek tabanlı satın alma modeli kullanarak tek veritabanı kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md)
-- Tek veritabanının DTU kaynak limitleri için bkz. [DTU tabanlı satın alma modeli kullanarak tek veritabanı kaynak sınırları](sql-database-dtu-resource-limits-single-databases.md)
-- Elastik havuzlar için DTU kaynak limitleri için bkz. [DTU tabanlı satın alma modeli kullanarak elastik havuzlar için kaynak sınırları](sql-database-dtu-resource-limits-elastic-pools.md)
-- Yönetilen örnek için kaynak limitleri için bkz [yönetilen örnek kaynak sınırları](sql-database-managed-instance-resource-limits.md).
-- Genel Azure sınırları hakkında daha fazla bilgi için bkz. [Azure aboneliği ve hizmet limitleri, kotalar ve kısıtlamalar](../azure-subscription-service-limits.md).
-- Bir veritabanı sunucusunda kaynak sınırları hakkında daha fazla bilgi için bkz [kaynak sınırları üzerinde bir SQL veritabanı sunucusuna genel bakış](sql-database-resource-limits-database-server.md) sunucu ve abonelik düzeyinde sınırları hakkında daha fazla bilgi için.
+- Tek bir veritabanı için sanal çekirdek kaynak sınırları için bkz [. Vcore satın alma modelini kullanarak tek veritabanları için kaynak sınırları](sql-database-vcore-resource-limits-single-databases.md)
+- Tek bir veritabanı için DTU kaynak sınırları için bkz [. DTU satın alma modelini kullanarak tek veritabanları için kaynak limitleri](sql-database-dtu-resource-limits-single-databases.md)
+- Elastik havuzların DTU kaynak sınırları için bkz [. DTU satın alma modelini kullanarak elastik havuzlar için kaynak limitleri](sql-database-dtu-resource-limits-elastic-pools.md)
+- Yönetilen örnekler için kaynak sınırları için bkz. [yönetilen örnek kaynak sınırları](sql-database-managed-instance-resource-limits.md).
+- Genel Azure limitleri hakkında daha fazla bilgi için bkz. [Azure aboneliği ve hizmet limitleri, Kotalar ve kısıtlamalar](../azure-subscription-service-limits.md).
+- Bir veritabanı sunucusundaki kaynak sınırları hakkında daha fazla bilgi için bkz. sunucu ve abonelik düzeylerindeki sınırlamalar hakkında bilgi için bkz. [SQL veritabanı sunucusundaki kaynak sınırlarına genel bakış](sql-database-resource-limits-database-server.md) .

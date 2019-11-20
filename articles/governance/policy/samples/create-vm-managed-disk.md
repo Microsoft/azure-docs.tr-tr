@@ -1,20 +1,16 @@
 ---
-title: Örneği - denetim yönetilen disk kullanmayan sanal makine
-description: Bir sanal makine yönetilen diskleri kullanmayan oluşturulduğunda bu json örnek tanımı denetler.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-denetim VM 'si yönetilen disk kullanmıyor
+description: Bu JSON örnek tanımı, yönetilen diskler kullanmayan bir sanal makine oluşturulduğunda denetler.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 8f1823ecfad7b78dc6360ffdfb517b0dbe858b53
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: acd79ffbbc3f0094b1c11855aafdb22554743017
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545393"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74071136"
 ---
-# <a name="sample---audit-when-vm-does-not-use-managed-disk"></a>VM kullanmaz, denetim örneği - yönetilen disk
+# <a name="sample---audit-when-vm-does-not-use-managed-disk"></a>Örnek-VM yönetilen disk kullanmıyorsa denetleyin
 
 Yönetilen diskler kullanmayan bir sanal makine oluşturulduğunda denetler.
 
@@ -28,7 +24,7 @@ Yönetilen diskler kullanmayan bir sanal makine oluşturulduğunda denetler.
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Faudit-non-managed-disk-vm%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Faudit-non-managed-disk-vm%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

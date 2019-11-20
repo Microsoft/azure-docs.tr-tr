@@ -1,70 +1,69 @@
 ---
-title: Yerel Jupyter not defterini Azure not defterleri için geçirme
-description: Hızlı bir şekilde Azure not defterleri için yerel bilgisayarınıza veya bir web URL'si bir Jupyter not defteri aktarılması, sonra işbirliği için paylaşın.
+title: Yerel bir Jupyter Not defterini Azure Notebooks geçirme
+description: Bir Jupyter Not defterini yerel bilgisayarınızdan veya bir Web URL 'sinden Azure Notebooks hızlı bir şekilde aktarın ve işbirliği için paylaşabilirsiniz.
 services: app-service
 documentationcenter: ''
 author: kraigb
-manager: douge
+manager: barbkess
 ms.assetid: 2e935425-3923-4a33-89b2-0f2100b0c0c4
 ms.service: azure-notebooks
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
 ms.date: 12/04/2018
 ms.author: kraigb
-ms.openlocfilehash: 7df64c3fb70bdf3e7689787ec558bfe0e4942352
-ms.sourcegitcommit: 45e4466eac6cfd6a30da9facd8fe6afba64f6f50
+ms.openlocfilehash: 2151d5b04b0fe5d47e8e2ddfb750ac279b6f74fa
+ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/07/2019
-ms.locfileid: "66754016"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71970197"
 ---
-# <a name="quickstart-migrate-a-local-jupyter-notebook"></a>Hızlı Başlangıç: Yerel Jupyter not defterini geçirme
+# <a name="quickstart-migrate-a-local-jupyter-notebook"></a>Hızlı başlangıç: yerel bir Jupyter Not defterini geçirme
 
-Kendi bilgisayarınızda yerel olarak oluşturduğunuz Jupyter not defterleri yalnızca sizin erişilebilir. Dosyalarınızı anlamına gelir, çeşitli paylaşabilirsiniz, ancak ardından alıcılar not defteri kendi yerel kopyasına sahip ve neden olabilecek tüm değişiklikleri birleştirmek için zordur. GitHub gibi paylaşılan çevrimiçi depoda not defterlerini depolayabilir, ancak bunun yapılması yine de her bir ortak çalışanı kendi yerel Jupyter yükleme sizinkiyle aynı yapılandırmaya sahip olmasını gerektirir.
+Kendi bilgisayarınızda yerel olarak oluşturduğunuz jupi not defterlerine yalnızca sizin erişebiliyordu. Dosyalarınızı çeşitli yollarla paylaşabilirsiniz, ancak alıcıların not defterinizin kendi yerel kopyaları vardır ve bu durumda yaptıkları değişiklikleri eklemeniz zordur. Ayrıca, not defterlerini GitHub gibi paylaşılan bir çevrimiçi depoda da saklayabilirsiniz, ancak bunu yapmak, her işbirriminin sizinkiyle aynı yapılandırmaya sahip kendi yerel Jupyıter yüklemesine sahip olmasını gerektirir.
 
-Azure not defterleri için yerel ya da depo tabanlı not defterlerinizi geçiş yaparak, bunları içinden anında, ortak çalışanlarla paylaşmanız bulutta depolar. Bu ortak çalışanlar görüntüleyip, Not Defteri çalıştırmak için yalnızca bir tarayıcı gereklidir ve bunların [oturum](quickstart-sign-in-azure-notebooks.md) Azure not defterleri için bunlar da değişiklik yapabilirsiniz.
+Yerel veya depo tabanlı not defterlerinizi Azure Notebooks geçirerek, bunları ortak çalışanlarla birlikte paylaşabileceğiniz bulutta deporsınız. Bu ortak çalışanlarla, Not defterinizi görüntülemek ve çalıştırmak için yalnızca bir tarayıcı gerekir ve bu kişiler Azure Notebooks [oturum](quickstart-sign-in-azure-notebooks.md) açtıklarında de değişiklik yapabilirler.
 
-Bu hızlı başlangıçta bir not defteri yerel bilgisayarınıza veya başka bir ulaşılabilir dosya URL'si geçirme işlemi gösterilmektedir. Bir GitHub deposundan not defterlerini geçirmek için bkz [hızlı başlangıç: Bir not defteri kopyalama](quickstart-clone-jupyter-notebook.md).
+Bu hızlı başlangıçta, yerel bilgisayarınızdan veya başka bir erişilebilir dosya URL 'sinden bir not defteri geçirme işlemi gösterilir. Not defterlerini bir GitHub deposundan geçirmek için bkz. [hızlı başlangıç: Not defterini kopyalama](quickstart-clone-jupyter-notebook.md).
 
-## <a name="create-a-project-on-azure-notebooks"></a>Azure not defterleri ile ilgili bir proje oluşturun
+## <a name="create-a-project-on-azure-notebooks"></a>Azure Notebooks proje oluşturma
 
-1. Git [Azure not defterleri](https://notebooks.azure.com) ve oturum açın. (Ayrıntılar için bkz [hızlı başlangıç - Azure not defterleri için oturum açma](quickstart-sign-in-azure-notebooks.md)).
+1. [Azure Notebooks](https://notebooks.azure.com) gidin ve oturum açın. (Ayrıntılar için bkz. [hızlı başlangıç-Azure Notebooks Için oturum açma](quickstart-sign-in-azure-notebooks.md)).
 
-1. Genel profil sayfanızdan seçin **Projelerim** sayfanın üstündeki:
+1. Ortak profil sayfanızda sayfanın en üstündeki **Projelerim** ' nı seçin:
 
-    ![Projeleri bağlantımı tarayıcı penceresinin üst kısmındaki](media/quickstarts/my-projects-link.png)
+    ![Projelerim tarayıcı penceresinin üst kısmında bağlantı](media/quickstarts/my-projects-link.png)
 
-1. Üzerinde **Projelerim** sayfasında **+ yeni proje** (klavye kısayolu: n); yalnızca olarak görüntülenebilir **+** tarayıcı penceresini darsa:
+1. **Projelerim** sayfasında **+ Yeni proje** ' yi seçin (klavye kısayolu: n); düğme yalnızca tarayıcı penceresi dar ise **+** olarak görünebilir:
 
     ![Projelerim sayfasında yeni proje komutu](media/quickstarts/new-project-command.png)
 
-1. İçinde **yeni proje oluştur** görüntülenen açılan, geçiş yaptığınız Not defteri için uygun değerleri girin **proje adı** ve **proje kimliği** alanları Temizle Seçenekler **genel proje** ve **bir Benioku.MD oluşturma**, ardından **Oluştur**.
+1. Görüntülenen **Yeni proje oluştur** açılır penceresinde, **Proje adı** ve **proje kimliği** alanlarına geçirdiğiniz Not defteri için uygun değerleri girin, **ortak proje** seçeneklerini temizleyin ve **bir Readme.MD oluşturun**ve ardından **Oluştur**' u seçin.
 
-## <a name="upload-the-local-notebook"></a>Yerel not defterini karşıya yükleme
+## <a name="upload-the-local-notebook"></a>Yerel Not defterini karşıya yükle
 
-1. Proje sayfasında **karşıya** (yukarı ok yalnızca Eğer öyleyse, tarayıcı pencerenizi görünebilir küçük), 1'i seçin. Görünen açılır seçin **bilgisayardan** defterinizin, yerel dosya sisteminde bulunuyorsa veya **URL'den** defterinizin çevrimiçi bulunuyorsa:
+1. Proje sayfasında **karşıya yükle** ' yi seçin (yalnızca tarayıcı pencereniz küçük olduğunda yukarı ok olarak görünebilir), sonra 1 ' i seçin. Görüntülenen açılan pencerede, Not defteriniz yerel dosya **sisteminizde veya Not defteriniz çevrimiçi olduğunda** **bilgisayardan** ' i seçin:
 
-    ![Bir URL veya yerel bilgisayar bir not defterini karşıya yüklemek için komutu](media/quickstarts/upload-from-computer-url-command.png)
+    ![Bir URL 'den veya yerel bilgisayardan Not defteri yükleme komutu](media/quickstarts/upload-from-computer-url-command.png)
 
-   (Not defterinizin bir GitHub deposunda ise, yeniden yönergeleri takip [hızlı başlangıç: Bir not defteri kopyalama](quickstart-clone-jupyter-notebook.md) yerine.)
+   (Not defteriniz bir GitHub deponuz olduğunda, [hızlı başlangıç: bir not defteri kopyalama](quickstart-clone-jupyter-notebook.md) bölümündeki adımları izleyin.)
 
-   - Kullanıyorsanız **bilgisayarı**, sürükle ve bırak, *.ipynb* seçin veya açılan dosyalarıyla **dosya seçin**, ardından gözatın ve içeri aktarmak istediğiniz dosyaları seçin. Ardından **karşıya**. Karşıya yüklenen dosyalar olan yerel dosyalarla aynı adı verilir. (Herhangi bir içeriği karşıya yükleme gerekmez *.ipynb_checkpoints* klasörleri.)
+   - **Bilgisayardan**kullanıyorsanız, *. ipynb* dosyalarınızı sürükleyip açılan pencereye bırakın veya **dosyaları seç**' i seçin ve ardından içeri aktarmak istediğiniz dosyaları seçin. Ardından **karşıya yükle**' yi seçin. Karşıya yüklenen dosyalara yerel dosyalarla aynı ad verilir. (Herhangi bir *. ipynb_checkpoints* klasörünün içeriğini karşıya yüklemeniz gerekmez.)
 
-     ![Bilgisayar açılır penceresinden karşıya yükleme](media/quickstarts/upload-from-computer-popup.png)
+     ![Açılan bilgisayardan karşıya yükle](media/quickstarts/upload-from-computer-popup.png)
 
-   - Kullanıyorsanız **URL'den**, kaynak adresi girerek **dosya URL'si** alan ve projenizde not defterine atamak için dosya adı **dosya adı** alan. Ardından **karşıya**. Ayrı URL'ler ile birden çok dosyanız varsa, kullanmak **+ Dosya Ekle** sonra ve açılan yeni alanlar için başka bir dosyaya sağlar, girdiğiniz ilk URL denetlemek için komutu.
+   - **URL 'den**kullanıyorsanız, dosya **URL 'si** alanına kaynak adresini ve **dosya adı** alanına projenizdeki not defterine atamak için dosya adını girin. Ardından **karşıya yükle**' yi seçin. Ayrı URL 'Ler içeren birden çok dosyanız varsa, açılan pencerenin, daha sonra başka bir dosya için yeni alanlar sağladığı ilk URL 'YI denetlemek için **+ Dosya Ekle** komutunu kullanın.
 
-     ![URL açılır penceresinden karşıya yükleme](media/quickstarts/upload-from-url-popup.png)
+     ![URL açılan penceresinden karşıya yükle](media/quickstarts/upload-from-url-popup.png)
 
-1. Açın ve içeriğini ve işlem doğrulamak için yeni yüklenen defterinizin çalıştırın. İşiniz bittiğinde **dosya** > **durdurmak ve Kapat** not defterini kapatmak için.
+1. İçeriğini ve işlemini doğrulamak için karşıya yüklenen yeni not defterinizi açın ve çalıştırın. İşiniz bittiğinde, **dosya** >  ' i seçin**ve** Not defterini kapatmak için Kapat ' ı kapatın.
 
-1. Karşıya yüklenen defterinizin bağlantısını paylaşmak için projeyi seçip dosyaya sağ tıklayın **bağlantıyı Kopyala** (klavye kısayolu: y), bu bağlantıyı uygun iletisine yapıştırın. Alternatif olarak, tüm kullanarak olarak proje paylaşabilirsiniz **paylaşmak** proje sayfasında denetimi.
+1. Karşıya yüklenen Not defterinize bir bağlantı paylaşmak için, projedeki dosyaya sağ tıklayın ve **Bağlantıyı Kopyala** ' yı (klavye kısayolu: y) seçin ve ardından bu bağlantıyı uygun iletiye yapıştırın. Alternatif olarak, proje sayfasında **paylaşma** denetimini kullanarak projeyi bir bütün olarak paylaşabilirsiniz.
 
-1. Not defterlerini dışında dosyalarını düzenlemek için seçin ve proje dosyasında sağ **dosya Düzenle** (klavye kısayolu: Ben). Varsayılan eylem **çalıştırma** (klavye kısayolu: r), yalnızca dosya içeriğini gösterir ve düzenlemeye izin vermez.
+1. Not defterleri dışındaki dosyaları düzenlemek için, projedeki dosyaya sağ tıklayın ve **dosyayı Düzenle** ' yi seçin (klavye kısayolu: ı). Varsayılan eylem, **Çalıştır** (klavye kısayolu: r) yalnızca dosya içeriğini gösterir ve düzenlenmesine izin vermez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Öğretici: bir çalışma doğrusal regresyon yapmak için Jupyter not defteri oluşturma](tutorial-create-run-jupyter-notebook.md)
+> [Öğretici: doğrusal regresyon yapmak için bir Jupyter Not defteri çalıştırma](tutorial-create-run-jupyter-notebook.md)

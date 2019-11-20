@@ -1,6 +1,6 @@
 ---
-title: Gelişmiş Media Encoder Premium iş akışı ile kodlama | Microsoft Docs
-description: Media Encoder Premium iş akışı ile kodlama hakkında bilgi edinin. İçinde yazılan kod örneklerini C# ve .NET için Media Services SDK'sını kullanın.
+title: Media Encoder Premium Workflow ile gelişmiş kodlama | Microsoft Docs
+description: Media Encoder Premium Workflow ile kodlama hakkında bilgi edinin. Kod örnekleri içine C# yazılır ve .net için Media Services SDK 'sını kullanır.
 services: media-services
 documentationcenter: ''
 author: juliako
@@ -13,36 +13,34 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: d20fc0cee6bce1389649e6287170b1963e799ccf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ca5de657ad45f53cff0cb01d5fe9cc412baf4533
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61463926"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72792294"
 ---
-# <a name="advanced-encoding-with-media-encoder-premium-workflow"></a>Gelişmiş Media Encoder Premium iş akışı ile kodlama
+# <a name="advanced-encoding-with-media-encoder-premium-workflow"></a>Media Encoder Premium Workflow ile gelişmiş kodlama
 > [!NOTE]
-> Bu makalede ele alınan Media Encoder Premium iş akışı medya işlemci Çin'de kullanılamaz.
+> Bu makalede ele alınan Media Encoder Premium Workflow medya işlemcisi Çin 'de bulunmamaktadır.
 >
 >
-
-Premium Kodlayıcı sorular için e-posta mepd@microsoft.com.
 
 ## <a name="overview"></a>Genel Bakış
-Microsoft Azure Media Services ile tanışın **Media Encoder Premium iş akışı** Medya işleyicisi. Bu işlemci teklifler kodlama yetenekleri için premium isteğe bağlı akışlarınızı öncelikli.
+Microsoft Azure Media Services, **Media Encoder Premium Workflow** medya işlemcisine giriş. Bu işlemci, Premium isteğe bağlı iş akışlarınız için gelişmiş kodlama özellikleri sunar.
 
-İlgili ayrıntıları aşağıdaki konularda anahat **Media Encoder Premium iş akışı**:
+Aşağıdaki konularda **Media Encoder Premium Workflow**ile ilgili ayrıntılar ana hatlarıyla verilmiştir:
 
-* [Media Encoder Premium iş akışı tarafından desteklenen biçimleri](media-services-premium-workflow-encoder-formats.md) – Discusses dosya biçimleri ve codec bileşenleri tarafından desteklenen **Media Encoder Premium iş akışı**.
-* [Genel bakış ve karşılaştırma Azure isteğe bağlı medya kodlayıcılarına](media-services-encode-asset.md) kodlama yeteneklerini karşılaştırır **Media Encoder Premium iş akışı** ve **Media Encoder Standard**.
+* [Media Encoder Premium Workflow tarafından desteklenen biçimler](media-services-premium-workflow-encoder-formats.md) : **Media Encoder Premium Workflow**tarafından desteklenen dosya biçimlerini ve codec bileşenlerini ele alır.
+* [Azure isteğe bağlı medya kodlayıcılarını genel bakış ve karşılaştırma](media-services-encode-asset.md) , **Media Encoder Premium Workflow** ve **Media Encoder Standard**kodlama yeteneklerini karşılaştırır.
 
-Bu makalede ile kodlama yapmayı gösteren **Media Encoder Premium iş akışı** .NET kullanarak.
+Bu makalede, .NET kullanarak **Media Encoder Premium Workflow** kodlama gösterilmektedir.
 
-Görevler için kodlama **Media Encoder Premium iş akışı** bir iş akışı dosyası adlı ayrı bir yapılandırma dosyası, gerektirir. Bu dosyalar .workflow uzantısına sahiptir ve kullanılarak oluşturulan [iş akışı Tasarımcısı](media-services-workflow-designer.md) aracı.
+**Media Encoder Premium Workflow** için kodlama görevleri, iş akışı dosyası olarak adlandırılan ayrı bir yapılandırma dosyası gerektirir. Bu dosyaların bir. Workflow uzantısı vardır ve [iş akışı Tasarımcısı](media-services-workflow-designer.md) Aracı kullanılarak oluşturulur.
 
-Varsayılan iş akışı dosyalarını da edinebilirsiniz [burada](https://github.com/Azure/azure-media-services-samples/tree/master/Encoding%20Presets/VoD/MediaEncoderPremiumWorkfows). Klasör, bu dosyaların açıklaması da içerir.
+Varsayılan iş akışı dosyalarını [buradan](https://github.com/Azure/azure-media-services-samples/tree/master/Encoding%20Presets/VoD/MediaEncoderPremiumWorkfows)da edinebilirsiniz. Klasör Ayrıca bu dosyaların açıklamasını içerir.
 
-İş akışı dosyalarını Media Services hesabınıza bir varlık olarak yüklenmesi gerekir ve bu varlık için kodlama görevinin geçirilmelidir.
+İş akışı dosyalarının Media Services hesabınıza bir varlık olarak yüklenmesi gerekir ve bu varlık kodlama görevine geçirilmelidir.
 
 ## <a name="create-and-configure-a-visual-studio-project"></a>Visual Studio projesi oluşturup yapılandırma
 
@@ -50,26 +48,26 @@ Geliştirme ortamınızı kurun ve app.config dosyanızı [.NET ile Media Servic
 
 ## <a name="encoding-example"></a>Kodlama örneği
 
-Aşağıdaki örnek ile kodlama yapmayı gösteren **Media Encoder Premium iş akışı**.
+Aşağıdaki örnek, **Media Encoder Premium Workflow**ile nasıl kodlanacağını göstermektedir.
 
-Aşağıdaki adımları gerçekleştirilir:
+Aşağıdaki adımlar gerçekleştirilir:
 
-1. Bir varlık oluşturun ve bir iş akışı dosyasını karşıya yükleyin.
-2. Bir varlık oluşturun ve bir kaynak medya dosyasını karşıya yükleyin.
-3. "Medya Kodlayıcısı Premium iş akışı" medya işleyicisini alır.
-4. Bir iş ve bir görev oluşturun.
+1. Bir varlık oluşturun ve bir iş akışı dosyası yükleyin.
+2. Bir varlık oluşturun ve bir kaynak medya dosyası yükleyin.
+3. "Media Encoder Premium Workflow" medya işlemcisini alın.
+4. Bir iş ve görev oluşturun.
 
-    Çoğu durumda, yapılandırma görevi için boş dizedir (aşağıdaki örnekte ister). (Çalışma zamanı özellikleri dinamik olarak ayarlamak ihtiyacınız olan) bazı Gelişmiş senaryolar vardır, bu durumda kodlama görevi bir XML dizesini sağlar. Bu tür senaryoların örnekleri şunlardır: bir katman, birleştirme, subtitling paralel veya sıralı ortam oluşturma.
-5. İki giriş varlıklar göreve ekleyin.
+    Çoğu durumda, görev için yapılandırma dizesi boştur (aşağıdaki örnekte olduğu gibi). Kodlama görevine bir XML dizesi sağlayabilmeniz için bazı gelişmiş senaryolar (çalışma zamanı özelliklerini dinamik olarak ayarlamanız gerekir) vardır. Bu senaryolara örnek olarak şunlar verilebilir: bir kaplama, paralel veya sıralı medya dikiş, alt başlık oluşturma.
+5. Göreve iki giriş varlığı ekleyin.
 
-   1. 1 – iş akışı varlık.
-   2. 2-video varlık.
+   1. 1: iş akışı varlığı.
+   2. 2 – video varlığı.
 
       >[!NOTE]
-      >İş akışı varlık görev medya varlığını önce eklenmesi gerekir.
+      >İş akışı varlığı, medya varlığı öncesinde göreve eklenmelidir.
       Bu görev için yapılandırma dizesi boş olmalıdır.
    
-6. Kodlama işinin gönderin.
+6. Kodlama işini gönderme.
 
 ```csharp
 using System;
@@ -231,10 +229,12 @@ namespace MediaEncoderPremiumWorkflowSample
 }
 ```
 
-Premium Kodlayıcı sorular için e-posta mepd@microsoft.com.
+## <a name="need-help"></a>Yardım mı gerekiyor?
+
+[Yeni destek isteğine](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest) giderek bir destek bileti açabilirsiniz
 
 ## <a name="media-services-learning-paths"></a>Media Services’i öğrenme yolları
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
 
-## <a name="provide-feedback"></a>Geri bildirimde bulunma
+## <a name="provide-feedback"></a>Geri bildirim sağlayın
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]

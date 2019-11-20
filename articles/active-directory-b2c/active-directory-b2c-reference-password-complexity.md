@@ -1,6 +1,6 @@
 ---
-title: Parola karmaşıklığını - Azure Active Directory B2C | Microsoft Docs
-description: Azure Active Directory B2C, tüketicilere tarafından sağlanan parola karmaşıklık gereksinimlerini yapılandırma
+title: Parola karmaşıklığı-Azure Active Directory B2C | Microsoft Docs
+description: Azure Active Directory B2C ' de tüketiciler tarafından sağlanan parolalar için karmaşıklık gereksinimlerini yapılandırma.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,70 +10,70 @@ ms.topic: conceptual
 ms.date: 02/11/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 37f8305d8ed212cf2c6678b35220d823611b9d7a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 642621e2e04d3e96dc6886b1bdb28c161560b28e
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66509025"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71065450"
 ---
-# <a name="configure-complexity-requirements-for-passwords-in-azure-active-directory-b2c"></a>Azure Active Directory B2C'de parola karmaşıklık gereksinimlerini yapılandırma
+# <a name="configure-complexity-requirements-for-passwords-in-azure-active-directory-b2c"></a>Azure Active Directory B2C parolalar için karmaşıklık gereksinimlerini yapılandırın
 
-Azure Active Directory (Azure AD) B2C, bir hesabı oluştururken bir son kullanıcı tarafından sağlanan parola karmaşıklık gereksinimleri değiştirmeyi destekler. Varsayılan olarak, Azure AD B2C kullanır `Strong` parola. Azure AD B2C, ayrıca müşteriler parola karmaşıklığı denetlemek için yapılandırma seçeneklerini destekler.
+Azure Active Directory B2C (Azure AD B2C) bir hesap oluştururken Son Kullanıcı tarafından sağlanan parolaların karmaşıklık gereksinimlerinin değiştirilmesini destekler. Varsayılan olarak, Azure AD B2C parolaları `Strong` kullanır. Azure AD B2C Ayrıca, müşterilerin kullanabileceği parolaların karmaşıklığını denetlemek için yapılandırma seçeneklerini destekler.
 
-## <a name="password-rule-enforcement"></a>Parola kural zorlama
+## <a name="password-rule-enforcement"></a>Parola kuralı zorlaması
 
-Kaydolma sırasında veya parola sıfırlama, bir son kullanıcı sağlaması gerekir karmaşıklığı kurallarına uyan bir parola. Parola karmaşıklığı kurallarına kullanıcı akışı uygulanır. Bir kullanıcı akışı kaydolma while sırasında başka bir kullanıcı akışı sekiz karakter dizisi kayıt sırasında gerektiren dört basamaklı bir PIN gerekli olması mümkündür. Örneğin, farklı bir parola karmaşıklık kullanıcı akışı yetişkinler alt öğe için kullanabilir.
+Kaydolma veya parola sıfırlama sırasında, son kullanıcının karmaşıklık kurallarını karşılayan bir parola sağlaması gerekir. Parola karmaşıklığı kuralları Kullanıcı akışı başına zorlanır. Kayıt sırasında bir Kullanıcı akışının dört basamaklı PIN olmasını gerektirirken, kayıt sırasında sekiz karakterlik bir dize olması gerekir. Örneğin, çocuklar için alt öğeler için farklı parola karmaşıklığı olan bir Kullanıcı akışı kullanabilirsiniz.
 
-Parola karmaşıklığını hiç oturum açma sırasında zorlanır. Kullanıcıların hiçbir zaman oturum açma sırasında geçerli karmaşıklık gereksinimini karşılamadığı için parola değiştirmesi istenir.
+Oturum açma sırasında parola karmaşıklığı hiçbir şekilde zorlanmaz. Kullanıcılar, geçerli karmaşıklık gereksinimini karşılamadığından parolalarını değiştirmek için oturum açma sırasında hiçbir şekilde istenmez.
 
-Parola karmaşıklığı aşağıdaki kullanıcı akışları türlerinde yapılandırılabilir:
+Parola karmaşıklığı aşağıdaki Kullanıcı akışları türlerinde yapılandırılabilir:
 
-- Kaydolma veya oturum açma kullanıcı akışı
-- Parola sıfırlama kullanıcı akışı
+- Kaydolma veya oturum açma Kullanıcı akışı
+- Parola sıfırlama Kullanıcı akışı
 
-Özel ilkeleri kullanıyorsanız, aşağıdakileri yapabilirsiniz ([parola karmaşıklığını özel bir ilke yapılandırmak](active-directory-b2c-reference-password-complexity-custom.md)).
+Özel ilkeler kullanıyorsanız, ([bir özel ilkede parola karmaşıklığı yapılandırabilirsiniz](active-directory-b2c-reference-password-complexity-custom.md)) yapabilirsiniz.
 
-## <a name="configure-password-complexity"></a>Parola karmaşıklığını yapılandırın
+## <a name="configure-password-complexity"></a>Parola karmaşıklığını yapılandırma
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Azure AD B2C kiracınızı tıklayarak içeren dizine kullandığınızdan emin olun **dizin ve abonelik filtresi** üst menü ve kiracınız içeren dizine seçme.
-3. Seçin **tüm hizmetleri** Azure portalı ve ardından arayın ve seçin, sol üst köşedeki **Azure AD B2C**.
-4. Seçin **kullanıcı akışları**.
-2. Kullanıcı akışı seçin ve tıklayın **özellikleri**.
-3. Altında **parola karmaşıklığını**, değiştirmek için bu kullanıcı akışını için parola karmaşıklığını **basit**, **güçlü**, veya **özel**.
+2. Üst menüdeki **Dizin + abonelik** filtresini seçip kiracınızı içeren dizini seçerek Azure AD B2C kiracınızı içeren dizini kullandığınızdan emin olun.
+3. Azure portal sol üst köşesindeki **tüm hizmetler** ' i seçin ve ardından **Azure AD B2C**' i arayıp seçin.
+4. **Kullanıcı akışları ' nı**seçin.
+2. Bir Kullanıcı akışı seçin ve **Özellikler**' e tıklayın.
+3. **Parola karmaşıklığı**bölümünde, bu kullanıcı akışının parola karmaşıklığını **basit**, **güçlü**veya **özel**olarak değiştirin.
 
 ### <a name="comparison-chart"></a>Karşılaştırma grafiği
 
 | Karmaşıklık | Açıklama |
 | --- | --- |
-| Basit | En az 8 ila 64 karakter bir parola. |
-| Güçlü | En az 8 ila 64 karakter bir parola. 3 / 4 küçük harf, küçük büyük harf, sayı veya semboller gerektirir. |
-| Özel | Bu seçenek parola karmaşıklık kurallarını üzerinden en fazla denetimi sağlar.  Özel bir uzunluk yapılandırma sağlar.  Yalnızca sayı parolaları (PIN'ler) kabul etmesini sağlar. |
+| Basit | En az 8 ile 64 karakter uzunluğunda bir parola. |
+| Güçlü | En az 8 ile 64 karakter uzunluğunda bir parola. 3/4 küçük harf, büyük harf, sayı veya sembol gerektirir. |
+| Özel | Bu seçenek, parola karmaşıklığı kuralları üzerinde en çok denetim sağlar.  Özel bir uzunluk yapılandırmasına izin verir.  Ayrıca yalnızca sayı parolalarının kabul edilmesini sağlar (PIN 'ler). |
 
-## <a name="custom-options"></a>Özel seçenekleri
+## <a name="custom-options"></a>Özel seçenekler
 
 ### <a name="character-set"></a>Karakter kümesi
 
-Yalnızca rakam (PIN'ler) ya da tam kabul etmenizi sağlayan karakter kümesi.
+Yalnızca rakamları (PIN) veya tam karakter kümesini kabul etmenizi sağlar.
 
-- **Yalnızca sayı** parola girerken basamak yalnızca (0-9) sağlar.
-- **Tüm** herhangi bir harf, sayı veya sembol sağlar.
+- **Sayılar yalnızca sayılara** izin verir (0-9) ve bir parola girildiğinde.
+- **Tümü** , herhangi bir harf, sayı veya simgeye izin verir.
 
 ### <a name="length"></a>Uzunluk
 
-Parola uzunluğu gereksinimleri denetlemenize olanak tanır.
+Parolanın uzunluk gereksinimlerini denetlemenize olanak tanır.
 
-- **En az uzunluk** en az 4 olmalıdır.
-- **En fazla uzunluk** büyük veya buna eşit en küçük uzunluk olmalıdır ve en fazla 64 karakter olabilir.
+- **Minimum uzunluk** en az 4 olmalıdır.
+- **Maksimum uzunluk** en düşük uzunluğa eşit veya daha büyük olmalı ve en fazla 64 karakter olabilir.
 
 ### <a name="character-classes"></a>Karakter sınıfları
 
-Parolada kullanılan farklı karakter türleri denetlemenizi sağlar.
+Parolada kullanılan farklı karakter türlerini denetlemenizi sağlar.
 
-- **2 / 4: Küçük harf karakter, büyük harf karakter, sayı (0-9), sembol** parola içeren en az iki karakter türleri sağlar. Örneğin, bir sayı ve küçük harf karakter.
-- **3 / 4: Küçük harf karakter, büyük harf karakter, sayı (0-9), sembol** parola içeren en az iki karakter türleri sağlar. Örneğin, bir sayı, bir küçük harf ve bir büyük harf karakteri.
-- **4 / 4: Küçük harf karakter, büyük harf karakter, sayı (0-9), sembol** parola içeren tüm karakter türleri sağlar.
+- **2/4: Küçük harfli karakter, büyük harf, sayı (0-9),** simge parolanın en az iki karakter türü içermesini sağlar. Örneğin, bir sayı ve küçük harfli bir karakter.
+- **3/4: Küçük harfli karakter, büyük harf, sayı (0-9),** simge parolanın en az iki karakter türü içermesini sağlar. Örneğin, bir sayı, küçük harf ve bir büyük harf karakteri.
+- **4/4: Küçük harfli karakter, büyük harf, sayı (0-9),** simge, parola tüm karakter türlerini içerir.
 
     > [!NOTE]
-    > Gerektiren **4 / 4** son kullanıcı sıkıntıya yol açabilir. Bu gereksinim parola entropi iyileştirmez bazı çalışmalar gösterilmiştir. Bkz: [NIST parola yönergeleri](https://pages.nist.gov/800-63-3/sp800-63b.html#appA)
+    > **4/4** gereksinimi, son kullanıcı rahatsız edilmesine yol açabilir. Bazı çalışmalar bu gereksinimin parola entropi ' i geliştirmediğinden gösterilmemiştir. [NIST parola yönergelerine](https://pages.nist.gov/800-63-3/sp800-63b.html#appA) bakın

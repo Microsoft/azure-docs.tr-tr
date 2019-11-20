@@ -1,169 +1,155 @@
 ---
-title: Azure Application Insights arama'yı kullanarak | Microsoft Docs
-description: Web uygulamanız tarafından gönderilen arama ve filtre ham telemetri.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 2a437555-8043-45ec-937a-225c9bf0066b
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights arama kullanma | Microsoft Docs
+description: Web uygulamanız tarafından gönderilen ham Telemetriyi arayın ve filtreleyin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 09/20/2018
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: dfbaabd3d27804909334a7a370bcc89115e625c4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 07/30/2019
+ms.openlocfilehash: 77cd0a8d0c1a93e7dc1db931e987a172d31978ef
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60900265"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72678010"
 ---
-# <a name="using-search-in-application-insights"></a>Uygulama anlayışları'nda arama kullanma
-Arama özelliği, [Application Insights](../../azure-monitor/app/app-insights-overview.md) bulmak ve sayfa görüntülemeleri, özel durumlar gibi tek bir telemetri öğelerini keşfedin veya web istekleri için kullanın. Ve günlük izlemeleri ve kodlanmış olayları görüntüleyebilir.
+# <a name="using-search-in-application-insights"></a>Application Insights arama kullanma
 
-(Verileriniz üzerinde daha karmaşık sorgular için [Analytics](../../azure-monitor/log-query/get-started-portal.md).)
+Arama, sayfa görünümleri, özel durumlar veya Web istekleri gibi tek tek telemetri öğelerini bulmak ve araştırmak için kullandığınız [Application Insights](../../azure-monitor/app/app-insights-overview.md) özelliğidir. Ve kodlandığı günlük izlemelerini ve olayları görüntüleyebilirsiniz.
 
-## <a name="where-do-you-see-search"></a>Burada arama görüyor musunuz?
+(Verileriniz üzerinde daha karmaşık sorgular için [analiz](../../azure-monitor/log-query/get-started-portal.md)kullanın.)
 
-### <a name="in-the-azure-portal"></a>Azure portalında
+## <a name="where-do-you-see-search"></a>Aramayı nerede görüyorsunuz?
 
-Tanılama araması uygulamanızı Application Insights'a genel bakış dikey penceresinden açıkça açabilirsiniz:
+### <a name="in-the-azure-portal"></a>Azure portal
 
-![Tanılama Aramayı Aç](./media/diagnostic-search/001.png)
+Tanılama aramasını uygulamanızın Application Insights genel bakış sekmesinden açabilirsiniz (üst çubukta bulunan) veya sol tarafta Araştır ' ın altında.
 
-![Tanılama araması grafiklerin ekran görüntüsü](./media/diagnostic-search/002.png)
+![Arama sekmesi](./media/diagnostic-search/view-custom-events.png)
 
-Tanılama araması ana gövdesi bir listedir telemetri öğelerinin - sunucu istekleri, görünümler, kodlanmış özel olaylar ve benzeri sayfa. Listenin en üstünde zaman içinde olay sayısını gösteren Özet bir grafiktir.
+Telemetri öğelerinin bir listesini, sunucu isteklerini, sayfa görünümlerini, kodlandığı özel olayları ve benzerlerini görmek için olay türleri ' açılan menüsüne gidin. Sonuçlar ' listesinin en üstünde, zaman içinde olayların sayısını gösteren bir Özet grafiktir.
 
-Yeni olaylar almak için Yenile'ye tıklayın.
+Yeni olaylar almak için açılan menüyü veya yenilemeyi seçin.
 
 ### <a name="in-visual-studio"></a>Visual Studio’da
 
-Visual Studio'da da Application Insights arama penceresi yok. Ayıkladığınız uygulama tarafından üretilen telemetri olayları görüntülemek için en kullanışlıdır. Ancak, Azure portalında yayımlanmış uygulamanızdan toplanan olayları da gösterebilirsiniz.
+Visual Studio 'da Ayrıca bir Application Insights arama penceresi de vardır. Bu, hata ayıklama yaptığınız uygulama tarafından oluşturulan telemetri olaylarını görüntülemek için yararlıdır. Ancak, Azure portal yayımlanan uygulamanızdan toplanan olayları da gösterebilir.
 
-Arama penceresi Visual Studio'da açın:
+Visual Studio 'da arama penceresini açın:
 
-![Visual Studio Application Insights arama açın](./media/diagnostic-search/32.png)
+![Visual Studio açık Application Insights arama](./media/diagnostic-search/32.png)
 
-Arama penceresi, web Portalı'na benzer özelliklere sahiptir:
+Arama penceresinde web portalına benzer özellikler vardır:
 
 ![Visual Studio Application Insights arama penceresi](./media/diagnostic-search/34.png)
 
-İşlemi İzle sekmesi, bir istek veya sayfa görünümü açtığınızda kullanılabilir. Bir'işlemi ' olduğu için tek bir istek veya sayfa görüntüleme ile ilişkili bir olay dizisi. Örneğin, bağımlılık çağrıları, özel durumlar, izleme günlükleri ve özel olaylar tek bir işlemin parçası olabilir. İşlemi İzle sekmesi zamanlama ve istek veya sayfa görüntüleme ile ilgili olarak bu olayların süresi grafik şeklinde gösterir. 
+Izleme Işlemi sekmesi bir istek veya sayfa görünümü açtığınızda kullanılabilir. ' İşlem ', tek bir istek veya sayfa görünümü ile ilişkili olayların bir dizisidir. Örneğin, bağımlılık çağrıları, özel durumlar, izleme günlükleri ve özel olaylar tek bir işlemin parçası olabilir. Izleme Işlemi sekmesi, istek veya sayfa görünümüyle ilgili olarak bu olayların zamanlamasını ve süresini grafik olarak gösterir.
 
-## <a name="inspect-individual-items"></a>Bireysel öğeleri inceleyin
+## <a name="inspect-individual-items"></a>Ayrı öğeleri İnceleme
 
-Anahtar alanları görmek için herhangi bir telemetri öğesinin ve ilgili öğeleri seçin.
+Anahtar alanları ve ilgili öğeleri görmek için herhangi bir telemetri öğesini seçin.
 
-![Bir bireysel bağımlılığı isteğinin ekran görüntüsü](./media/diagnostic-search/003.png)
+![Tek bir bağımlılık isteğinin ekran görüntüsü](./media/diagnostic-search/telemetry-item.png)
 
-Bu uçtan uca işlem Ayrıntıları görünümü başlatılır:
+Bu, uçtan uca işlem ayrıntıları görünümünü başlatacaktır.
 
-![Uçtan uca işlem ayrıntıları görünümünün ekran görüntüsü.](./media/diagnostic-search/004.png)
+## <a name="filter-event-types"></a>Olay türlerini filtrele
 
-## <a name="filter-event-types"></a>Olay türlerini Filtrele
-Filtre dikey penceresini açın ve görmek istediğiniz olay türlerini seçin. (Daha sonra dikey pencere açılır filtreler geri yüklemek istiyorsanız Sıfırla'ya tıklayın.)
-
-![Filtreyi seçin ve telemetri türlerini seçin](./media/diagnostic-search/02-filter-req.png)
+Olay türleri ' açılan menüsünü açın ve görmek istediğiniz olay türlerini seçin. (Daha sonra, filtreleri geri yüklemek istiyorsanız Sıfırla ' ya tıklayın.)
 
 Olay türleri şunlardır:
 
-* **İzleme** - [tanılama günlükleri](../../azure-monitor/app/asp-net-trace-logs.md) TrackTrace, log4Net, NLog ve System.Diagnostic.Trace çağrılar dahil olmak üzere.
-* **İstek** -sayfaları, betikleri, görüntüler, Stil dosyaları ve verileri dahil olmak üzere sunucu uygulamanız tarafından alınan HTTP istekleri. Bu olaylar, istek ve yanıt genel bakış grafiklerinde oluşturmak için kullanılır.
-* **Sayfa görünümü** - [Telemetri web istemcisi tarafından gönderilen](../../azure-monitor/app/javascript.md)sayfa görünümü raporları oluşturmak için kullanılır. 
-* **Özel olay** - için TrackEvent() çağrıları eklediyseniz [kullanım izleme](../../azure-monitor/app/api-custom-events-metrics.md), burada bulabilirsiniz.
-* **Özel durum** - yakalanmayan [sunucu özel durumları](../../azure-monitor/app/asp-net-exceptions.md)hem de TrackException() kullanarak oturum açın.
-* **Bağımlılık** - [sunucu uygulamanızı çağrılarından](../../azure-monitor/app/asp-net-dependencies.md) REST API'leri veya veritabanları ve AJAX gibi diğer hizmetlere çağırır, [istemci kodu](../../azure-monitor/app/javascript.md).
-* **Kullanılabilirlik** -sonuçlarını [kullanılabilirlik testleri](../../azure-monitor/app/monitor-web-app-availability.md).
+* TrackTrace, log4Net, NLog ve System. Diagnostics. Trace çağrıları dahil olmak üzere[tanılama günlüklerini](../../azure-monitor/app/asp-net-trace-logs.md) **izleme**  - .
+* **İstek** -sunucu uygulamanız tarafından alınan, sayfalar, betikler, görüntüler, stil dosyaları ve veriler dahil http istekleri. Bu olaylar, istek ve yanıt genel bakış grafiklerini oluşturmak için kullanılır.
+* Sayfa görüntüleme raporları oluşturmak için kullanılan[Web istemcisi tarafından gönderilen telemetri](../../azure-monitor/app/javascript.md) -  **sayfa görünümü** .
+* **Özel olay** - [kullanımı Izlemek](../../azure-monitor/app/api-custom-events-metrics.md)için trackevent () çağrıları eklediyseniz, burada arama yapabilirsiniz.
+* **Özel durum** - [sunucuda](../../azure-monitor/app/asp-net-exceptions.md)yakalanamayan özel durumlar ve trackexception () kullanarak oturum açmalarını sağlayabilirsiniz.
+* **Bağımlılık**  - ,[sunucu uygulamanızdan](../../azure-monitor/app/asp-net-dependencies.md) REST API 'leri veya veritabanları gibi diğer HIZMETLERE ve [istemci kodunuzun](../../azure-monitor/app/javascript.md)Ajax çağrılarına çağrı yapılır.
+* **Kullanılabilirlik-** [kullanılabilirlik testlerinin](../../azure-monitor/app/monitor-web-app-availability.md)sonuçları.
 
-## <a name="filter-on-property-values"></a>Özellik değerlerine göre filtreleme
-Olayları değerlerine özelliklerine göre filtreleyebilirsiniz. Kullanılabilir özellikler, seçtiğiniz olay türlerine bağlıdır. 
+## <a name="filter-on-property-values"></a>Özellik değerlerini filtrele
 
-Örneğin, istekleri belirli bir yanıtı koduyla çıkış seçin. 
+Olaylarını özelliklerinin değerlerine göre filtreleyebilirsiniz. Kullanılabilir özellikler, seçtiğiniz olay türlerine bağlıdır. Filtre simgesine tıklayın ![Filtre simgesi](./media/diagnostic-search/filter-icon.png) başlamak için.
 
-![Bir özelliği'ni genişletin ve bir değer seçin](./media/diagnostic-search/03-response500.png)
+Belirli bir özelliğin hiçbir değer seçilmesi, tüm değerleri seçerken aynı etkiye sahip olur. Bu özelliğin filtrelenmesini devre dışı bırakır.
 
-Belirli bir özellik yok değerlerini seçerek tüm değerleri seçmeyi aynı etkiye sahiptir. Bu, söz konusu özellik üzerinde filtreleme devre dışı geçer.
+Filtre değerlerinin sağında bulunan sayımların, geçerli filtrelenmiş kümesinde kaç tane oluşum olduğunu gösterir.
 
-### <a name="narrow-your-search"></a>Aramanızı daraltın
-Filtre değerleri sağındaki sayıları kaç örnekleri var. geçerli filtrelenmiş kümededir Göster dikkat edin. 
+## <a name="find-events-with-the-same-property"></a>Aynı özelliğe sahip olayları bulma
 
-Bu örnekte, 'Rpt/çalışanlar' Sonuçları '500' hataların çoğu istek açıktır:
+Aynı özellik değerine sahip tüm öğeleri bulmak için arama çubuğuna yazın veya filtre sekmesindeki Özellikler ' e baktığınızda onay kutusuna tıklayın.
 
-![Bir özelliği'ni genişletin ve bir değer seçin](./media/diagnostic-search/04-failingReq.png)
+![Filtre sekmesindeki bir özelliğin onay kutusuna tıklayın](./media/diagnostic-search/filter-property.png)
 
-## <a name="find-events-with-the-same-property"></a>Aynı özellik ile olayları bulun
-Aynı özellik değerine sahip tüm öğeleri bulun:
-
-![Bir özelliğe sağ tıklayın](./media/diagnostic-search/12-samevalue.png)
-
-## <a name="search-the-data"></a>Veri arama
+## <a name="search-the-data"></a>Verilerde arama
 
 > [!NOTE]
-> Daha karmaşık sorgular yazmak için açık [ **Analytics** ](../../azure-monitor/log-query/get-started-portal.md) arama dikey pencerenin üst.
-> 
+> Daha karmaşık sorgular yazmak için arama dikey penceresinin en üstünden [**günlükleri (Analiz)** ](../../azure-monitor/log-query/get-started-portal.md) açın.
+>
 
-Herhangi bir özellik değeri terimlerini arayabilirsiniz. Bu yazdığınız, özellikle yararlı olacaktır [özel olaylar](../../azure-monitor/app/api-custom-events-metrics.md) özellik değerlerine sahip. 
+Özellik değerlerinin herhangi birinde terimleri arayabilirsiniz. Bu özellik değerleri ile [özel olaylar](../../azure-monitor/app/api-custom-events-metrics.md) yazdıysanız yararlı olur.
 
-Aralık, daha kısa bir aralık içinde aramalar olarak daha hızlı bir zaman ayarlamak isteyebilirsiniz. 
+Daha kısa bir aralıktaki aramalar daha hızlı olduğundan bir zaman aralığı ayarlamak isteyebilirsiniz.
 
-![Tanılama Aramayı Aç](./media/diagnostic-search/appinsights-311search.png)
+![Tanılama aramasını aç](./media/diagnostic-search/search-property.png)
 
-Arama için tam sözcük, alt dizeler değil. Özel karakterleri için tırnak işaretleri kullanın.
+Alt dizeler değil, tüm sözcükleri arayın. Özel karakterleri kapsamak için tırnak işaretleri kullanın.
 
-| string | olan *değil* tarafından bulunamadı | ancak bunlar Bul |
+| Dize | *Bulunamadı* | Bulunamaz |
 | --- | --- | --- |
-| HomeController.About |Giriş<br/>Denetleyici<br/>Çıkış | homecontroller<br/>hakkında<br/>"homecontroller.about"|
-|Amerika Birleşik Devletleri|UNI<br/>ted|Birleşik<br/>durumları<br/>VE Birleşik Devletleri<br/>"ABD"
+| HomeController. hakkında |`home`<br/>`controller`<br/>`out` | `homecontroller`<br/>`about`<br/>`"homecontroller.about"`|
+|Birleşik Devletler|`Uni`<br/>`ted`|`united`<br/>`states`<br/>`united AND states`<br/>`"united states"`
 
-Kullanabileceğiniz arama ifadeleri şunlardır:
+Kullanabileceğiniz arama ifadeleri aşağıda verilmiştir:
 
 | Örnek sorgu | Etki |
 | --- | --- |
-| `apple` |Alanları "apple" sözcüğünü içeren bir zaman aralığında tüm etkinlikler bulun |
-| `apple AND banana` <br/>`apple banana` |Her iki sözcükleri içeren etkinlikler bulun. Capital "ve" değil kullan "ve". <br/>Kısa biçim. |
-| `apple OR banana` |Her iki word içeren etkinlikler bulun. "Veya", yok "veya". |
-| `apple NOT banana` |Bir sözcük, ancak diğer içeren etkinlikler bulun. |
+| `apple` |Alanları "Apple" sözcüğünü içeren zaman aralığındaki tüm olayları bul |
+| `apple AND banana` <br/>`apple banana` |Her iki sözcüğü de içeren olayları bulun. "Ve" değil, sermaye "ve" kullanın. <br/>Kısa biçim. |
+| `apple OR banana` |Word içeren olayları bulun. "Veya" değil, "veya" kullanın. |
+| `apple NOT banana` |Bir sözcük içeren ancak diğerini olmayan olayları bulun. |
 
 ## <a name="sampling"></a>Örnekleme
-Uygulamanız çok sayıda telemetri oluşturuyorsa (ve ASP.NET SDK sürüm 2.0.0-Beta3 veya daha sonra), Uyarlamalı örnekleme modülü olayların yalnızca bir temsilci fraksiyonunu göndererek portala gönderilen hacmi otomatik olarak azaltır. Ancak aynı istekle ilgili olayları seçtikten veya bir grup olarak seçili, böylece ilgili olaylar arasında gezinebilirsiniz. 
+
+Uygulamanız büyük miktarda telemetri oluşturuyorsa (ve ASP.NET SDK sürümünü 2.0.0-Beta3 veya üzerini kullanıyorsanız), uyarlamalı örnekleme modülü, yalnızca bir dizi olayın temsili bir kısmını göndererek portala gönderilen hacmi otomatik olarak azaltır. Ancak, aynı istekle ilgili olaylar, bir grup olarak seçilir veya seçimden kaldırılır, böylece ilgili olaylar arasında gezinebilmenizi sağlayabilirsiniz.
 
 [Örnekleme hakkında bilgi edinin](../../azure-monitor/app/sampling.md).
 
-## <a name="create-work-item"></a>İş öğesi oluşturma
-Tüm telemetri öğesinin Ayrıntıları ile GitHub ya da Azure DevOps bir hata oluşturabilirsiniz. 
+## <a name="create-work-item"></a>İş öğesi oluştur
 
-![Yeni iş öğesini, alanları düzenleyin ve sonra Tamam'a tıklayın.](./media/diagnostic-search/42.png)
+GitHub veya Azure DevOps 'da herhangi bir telemetri öğesinin ayrıntılarından bir hata oluşturabilirsiniz.
 
-Azure DevOps kuruluşunuz ve proje bağlantısını yapılandırmak için bunu ilk kez istenir.
+Herhangi bir telemetri öğesine tıklayıp **iş öğesi oluştur**' u seçerek uçtan uca işlem ayrıntısı görünümüne gidin.
 
-![Azure DevOps hizmetlerinizi ve proje adı URL'sini girin ve Yetkilendir'e tıklayın](./media/diagnostic-search/41.png)
+![Yeni Iş öğesi ' ne tıklayın, alanları düzenleyin ve ardından Tamam ' a tıklayın.](./media/diagnostic-search/work-item.png)
 
-(Ayrıca bağlantı iş öğeleri dikey penceresinde yapılandırabilirsiniz.)
+Bunu ilk kez yaptığınızda Azure DevOps kuruluşunuz ve projeniz için bir bağlantı yapılandırmanız istenir.
 
-## <a name="send-more-telemetry-to-application-insights"></a>Daha fazla telemetri Application Insights'a gönderme
-Application Insights SDK'sı tarafından gönderilen kullanıma hazır telemetriyi ek olarak, şunları yapabilirsiniz:
+(Iş öğeleri sekmesinde bağlantıyı da yapılandırabilirsiniz.)
 
-* İçinde sık kullandığınız günlük çerçeveden günlük izlemelerini yakalama [.NET](../../azure-monitor/app/asp-net-trace-logs.md) veya [Java](../../azure-monitor/app/java-trace-logs.md). Bunun anlamı, günlük izlemelerini aramak ve sayfa görüntülemeleri, özel durumlar ve diğer olaylarla ilişkilendirin. 
-* [Kod yazma](../../azure-monitor/app/api-custom-events-metrics.md) özel olaylar, sayfa görüntülemeleri ve özel durumlar göndermek için. 
+## <a name="send-more-telemetry-to-application-insights"></a>Application Insights için daha fazla telemetri gönderin
 
-[Günlükleri ve özel telemetri, Application Insights'a gönderme öğrenin](../../azure-monitor/app/asp-net-trace-logs.md).
+Application Insights SDK tarafından gönderilen kullanıma hazır telemetriye ek olarak şunları yapabilirsiniz:
 
-## <a name="questions"></a>SORU- CEVAP
-### <a name="limits"></a>Ne kadar veri tutulur?
+* [.Net](../../azure-monitor/app/asp-net-trace-logs.md) veya [Java](../../azure-monitor/app/java-trace-logs.md)'daki en sevdiğiniz günlük çatısı için günlük izlemelerini yakalayın. Bu, günlük izlemelerinizi arayabilir ve bunları sayfa görünümleri, özel durumlar ve diğer olaylarla ilişkilendirebilmeniz anlamına gelir.
+* Özel olaylar, sayfa görünümleri ve özel durumlar göndermek için [kod yazın](../../azure-monitor/app/api-custom-events-metrics.md) .
 
-Bkz: [sınırları özeti](../../azure-monitor/app/pricing.md#limits-summary).
+[Application Insights için günlüklerin ve özel telemetrinin nasıl gönderileceğini öğrenin](../../azure-monitor/app/asp-net-trace-logs.md).
 
-### <a name="how-can-i-see-post-data-in-my-server-requests"></a>Gönderme verisi sunucu isteklerim nasıl görebilirim?
-Gönderme verisi otomatik olarak oturum yok, ancak kullanabileceğiniz [TrackTrace ya da günlük aramaları](../../azure-monitor/app/asp-net-trace-logs.md). Gönderme verisi ileti parametreyi yerleştirin. İletide, özelliklerde filtre aynı şekilde filtre uygulanamıyor, ancak boyut sınırını uzundur.
+## <a name="questions"></a>soru-cevap &
 
-## <a name="video"></a>Video
+### <a name="limits"></a>Ne kadar veri tutuluyor?
 
-> [!VIDEO https://channel9.msdn.com/events/Connect/2016/112/player]
+[Limitlerin özetine](../../azure-monitor/app/pricing.md#limits-summary)bakın.
+
+### <a name="how-can-i-see-post-data-in-my-server-requests"></a>Sunucu isteklerim ' de veri gönderme işlemini nasıl görebilirim?
+
+POST verilerini otomatik olarak günlüğe vermedik, ancak [Tracktrace veya log çağrılarını](../../azure-monitor/app/asp-net-trace-logs.md)kullanabilirsiniz. POST verilerini ileti parametresine koyun. Aynı şekilde, özellikleri filtreleyebileceğiniz şekilde filtreleyebilirsiniz, ancak boyut sınırı daha uzundur.
 
 ## <a name="add"></a>Sonraki adımlar
-* [Karmaşık sorgular Analytics'te yazma](../../azure-monitor/log-query/get-started-portal.md)
-* [Günlükleri ve özel telemetri, Application Insights'a gönderme](../../azure-monitor/app/asp-net-trace-logs.md)
-* [Kullanılabilirlik ve yanıt hızını testleri ayarlama](../../azure-monitor/app/monitor-web-app-availability.md)
+
+* [Analytics 'te karmaşık sorgular yazma](../../azure-monitor/log-query/get-started-portal.md)
+* [Application Insights için Günlükler ve özel telemetri gönder](../../azure-monitor/app/asp-net-trace-logs.md)
+* [Kullanılabilirlik ve yanıt verme testlerini ayarlama](../../azure-monitor/app/monitor-web-app-availability.md)
 * [Sorun giderme](../../azure-monitor/app/troubleshoot-faq.md)

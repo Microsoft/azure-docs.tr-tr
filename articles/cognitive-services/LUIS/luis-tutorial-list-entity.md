@@ -1,110 +1,112 @@
 ---
-title: Extact metin eşleşen varlıkları
-description: LUIS etiket çeşitleri bir sözcük veya tümcecik yardımcı olmak için bir liste varlığı eklemeyi öğrenin.
+title: Exkişiyle metin eşleşmesi varlıkları-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Bir sözcüğün veya tümceciğin BASıS etiket çeşitlemelerine yardımcı olmak için bir liste varlığı eklemeyi öğrenin.
 services: cognitive-services
 author: diberry
-titleSuffix: Azure
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 01/23/2019
+ms.topic: conceptual
+ms.date: 09/05/2019
 ms.author: diberry
-ms.openlocfilehash: 929dc7a86d141446a2070b046c6febfda4a07f0f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f3c99856eaffc454754618a1eac34630b985a77e
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62117457"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73499485"
 ---
-# <a name="use-a-list-entity-to-increase-entity-detection"></a>Varlık algılama artırmak için bir liste varlığı kullanın 
-Bu öğretici, kullanımını gösterir. bir [varlık listesinde](luis-concept-entity-types.md) varlık algılama artırmak için. Liste varlıkları, koşulları'nın tam bir eşleşme olarak Etiketlenecek gerekmez.  
+# <a name="use-a-list-entity-to-increase-entity-detection"></a>Varlık algılamayı artırmak için bir liste varlığı kullanma 
+Bu makalede, varlık algılamayı artırmak için bir [liste varlığının](luis-concept-entity-types.md) kullanımı gösterilmektedir. Liste varlıklarının, koşullara tam olarak eşleştiği için etiketlenmesi gerekmez.  
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+[!INCLUDE [Waiting for LUIS portal refresh](./includes/wait-v3-upgrade.md)]
+
+Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Bir liste varlığı oluşturma 
-> * Normalleştirilmiş değerleri ve eş anlamlı sözcükler ekleme
-> * Geliştirilmiş varlık kimliği doğrula
+> * Liste varlığı oluşturma 
+> * Normalleştirilmiş değerler ve eş anlamlılar ekleme
+> * Geliştirilmiş varlık kimliğini doğrula
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 > [!div class="checklist"]
-> * En son [Node.js](https://nodejs.org)
-> * [HomeAutomation LUIS uygulaması](luis-get-started-create-app.md). Oluşturulan giriş Otomasyon uygulama yoksa yeni bir uygulama oluşturma ve önceden oluşturulmuş etki alanı ekleme **HomeAutomation**. Uygulamayı eğitin ve yayımlayın. 
-> * [AuthoringKey](luis-concept-keys.md#authoring-key), [EndpointKey](luis-concept-keys.md#endpoint-key) (birden çok kez sorgulama değilse), uygulama kimliği, sürüm kimliği ve [bölge](luis-reference-regions.md) LUIS uygulaması için.
+> * En son [Node. js](https://nodejs.org)
+> * [Homeautomation lusıs uygulaması](luis-get-started-create-app.md). Ana Otomasyon uygulaması oluşturmadıysanız, yeni bir uygulama oluşturun ve önceden oluşturulmuş etki alanı **Homeautomation**' ı ekleyin. Uygulamayı eğitin ve yayımlayın. 
+> * [Authoringkey](luis-concept-keys.md#authoring-key), [endpointkey](luis-concept-keys.md#endpoint-key) (birçok kez sorgulandığında), uygulama kimliği, sürüm kimliği ve lusıs uygulamasının [bölgesi](luis-reference-regions.md) .
 
 > [!Tip]
-> Zaten bir aboneliğiniz yoksa, kaydolabilirsiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/free/).
+> Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)için kaydolabilirsiniz.
 
-Bu öğreticideki kod tüm kullanılabilir [Azure örnekleri GitHub deposunda](https://github.com/Azure-Samples/cognitive-services-language-understanding/tree/master/documentation-samples/tutorial-list-entity). 
+Bu makaledeki tüm kod, [Azure-Samples GitHub deposunda](https://github.com/Azure-Samples/cognitive-services-language-understanding/tree/master/documentation-samples/tutorial-list-entity)bulunur. 
 
 ## <a name="use-homeautomation-app"></a>HomeAutomation uygulamasını kullanma
-Işıklar, eğlence sistemleri ve ortam gibi denetimin Isıtma ve soğutma gibi denetimleri HomeAutomation uygulama sağlar. Bu sistemler üretici adları, takma adlar, takma adlar ve argo kullanımlar ekleyebileceğiniz birçok farklı adlara sahip. 
+HomeAutomation uygulaması, ışıklar, eğlence sistemleri ve Isıtma ve soğutma gibi ortam denetimleri gibi cihazlar için denetim sağlar. Bu sistemlerde üretici adları, takma adlar, kısaltmalar ve Slang içerebilen birçok farklı ad vardır. 
 
-Farklı kültürler ve demografik bilgilere arasında birçok adları olan bir sıcaklığının sistemidir. Bir termostatınız, soğutma hem bir ev veya yapı için sistemleri ısıtma kontrol edebilirsiniz.
+Farklı kültürler ve demografik genelinde birçok adı olan bir sistem, termostat ' dir. Bir termostat, bir ev veya bina için hem soğutma hem de ısıtma sistemlerini denetleyebilir.
 
-İdeal olarak, aşağıdaki konuşma önceden oluşturulmuş varlığa çözümlenmelidir **HomeAutomation.Device**:
+İdeal olarak, aşağıdaki araslar, önceden oluşturulmuş olan Homeautomation varlığına çözümlenmelidir **. cihaz**:
 
-|#|Utterance|Belirtilen varlık|puan|
+|#|söylenişi|tanımlanan varlık|ınızı|
 |--|--|--|--|
-|1|ac üzerinde Aç|HomeAutomation.Device - "ac"|0.8748562|
-|2|Isı Aç|HomeAutomation.Device - "ısı"|0.784990132|
-|3|soğuk olun|||
+|1|AC 'yi açma|HomeAutomation. Device-"AC"|0,8748562|
+|2|ısı 'yi açın|HomeAutomation. Device-"ısı"|0,784990132|
+|3|BT Koder yapın|||
 
-İlk iki konuşma farklı cihazlara eşleyin. Üçüncü utterance "soğuk olun" bir aygıtın eşlenmesi değil ancak bunun yerine bir sonuç ister. LUIS, "soğuk" terimi, istenen cihaz sıcaklığının olduğu anlamına gelir bilmez. İdeal olarak, LUIS Bu konuşma tümünün aynı cihaza çözümlenmelidir. 
+İlk iki söz konusu farklı cihazlara eşlenir. Üçüncü utterance, "It Colder" olarak bir cihazla eşleşmez, ancak bunun yerine bir sonuç ister. LUSıS, "Colder" teriminin, termostat 'ın istenen cihaz olduğunu bilmez. En ideal olarak, LUYA bu söyleylerini aynı cihaza çözmelidir. 
 
-## <a name="use-a-list-entity"></a>Bir liste varlığı kullanın
-HomeAutomation.Device varlık küçük birkaç cihaz ya da bazı farklılıklar nedeniyle adları için idealdir. Bir ofis binasındaki veya kampüs için cihaz adları HomeAutomation.Device varlık kullanışlılığını büyütün. 
+## <a name="use-a-list-entity"></a>Liste varlığı kullanma
+HomeAutomation. Device varlığı, az sayıda cihaz için veya adların birkaç çeşitiyle harika. Office binası veya kampüs için, cihaz adları HomeAutomation. Device varlığının kullanışlılığını aşacak şekilde artar. 
 
-A **varlık listesinde** kümesi için bir cihaz bir yapı veya kampüs bilinen birtakım büyük bir küme olsa bile, bu senaryo için iyi bir seçim olduğundan. Bir liste varlığı kullanarak LUIS herhangi bir olası değer sıcaklığının için kümedeki alabilir ve yalnızca tek cihaz aşağı "thermostat" çözün. 
+Bir **liste varlığı** bu senaryo için iyi bir seçimdir çünkü bir yapı veya kampüs içindeki bir cihazın hüküm kümesi, büyük bir küme olsa bile bilinen bir küme. Bir liste varlığı kullanarak, Lua, termostat için küme içindeki olası bir değeri alabilir ve yalnızca tek bir "termostat" cihazına çözümleyebilir. 
 
-Bu öğreticide bir varlık listesi termostatın oluşturma zordur. Bu öğreticide bir thermostat için alternatif adlar şunlardır: 
+Bu makale, termostat ile bir varlık listesi oluşturacağız. Bu makaledeki bir termostat için alternatif adlar şunlardır: 
 
-|thermostat için diğer adlar|
+|Termostat için alternatif adlar|
 |--|
-| AC |
-| Hesap|
+| m |
+| a/c|
 | a-c|
-|heater|
-|Sık erişimli|
-|hotter|
-|soğuk|
-|soğuk|
+|ısıtıcı|
+|Kolay|
+|Hotter|
+|Soğuk|
+|COLDER|
 
-LUIS, genellikle yeni bir seçenek belirlemek gerekiyorsa bir [tümcecik listesi](luis-concept-feature.md#how-to-use-phrase-lists) daha iyi bir yanıt.
+LUTO 'ıN yeni bir alternatif belirlemesi gerekiyorsa, bir [tümcecik listesi](luis-concept-feature.md#how-to-use-phrase-lists) daha iyi bir yanıt olur.
 
-## <a name="create-a-list-entity"></a>Bir liste varlığı oluşturma
-Bir Node.js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. AuthoringKey, AppID VersionID ve bölge değerlerini değiştirin.
+## <a name="create-a-list-entity"></a>Liste varlığı oluşturma
+Bir Node. js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. AuthoringKey, AppID, VersionId ve Region değerlerini değiştirin.
 
    [!code-javascript[Create DevicesList List Entity](~/samples-luis/documentation-samples/tutorial-list-entity/add-entity-list.js "Create DevicesList List Entity")]
 
-NPM bağımlılıkları yükler ve liste varlığı oluşturmak için kodu çalıştırmak için aşağıdaki komutu kullanın:
+NPM bağımlılıklarını yüklemek ve liste varlığını oluşturmak için kodu çalıştırmak için aşağıdaki komutu kullanın:
 
 ```console
 npm install && node add-entity-list.js
 ```
 
-Çıktı çalıştırma listesi varlık kimliği.
+Çalıştırmanın çıkışı, liste varlığının KIMLIĞIDIR:
 
 ```console
 026e92b3-4834-484f-8608-6114a83b03a6
 ```
 
 ## <a name="train-the-model"></a>Modeli eğitme
-Sorgu sonuçlarını etkileyecek şekilde yeni liste için sırayla LUIS eğitin. Eğitim, eğitim, eğitim işlem durumu kontrol ediliyor iki parçalı işlemidir. Çok sayıda model ile bir uygulama geliştirmek için birkaç dakika sürebilir. Aşağıdaki kod, uygulamanın eğitir ardından eğitim başarılı olana kadar bekler. Kod, 429 önlemek için bekleyin ve yeniden deneme stratejisi kullanır. "çok fazla istek var" hatası. 
+Yeni listenin sorgu sonuçlarını etkilemesini sağlamak için LUFOR 'ı eğitme. Eğitim, eğitimin iki bölümden oluşan bir işlemdir ve eğitim yapıldığında durum olup olmadığını denetler. Birçok modelle bir uygulamanın eğitilmesi birkaç dakika sürebilir. Aşağıdaki kod, uygulamayı başardıktan sonra eğitim başarılı olana kadar bekler. Kod, 429 "çok fazla istek" hatası oluşmasını önlemek için bir bekleme ve yeniden deneme stratejisi kullanır. 
 
-Bir Node.js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. AuthoringKey, AppID VersionID ve bölge değerlerini değiştirin.
+Bir Node. js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. AuthoringKey, AppID, VersionId ve Region değerlerini değiştirin.
 
    [!code-javascript[Train LUIS](~/samples-luis/documentation-samples/tutorial-list-entity/train.js "Train LUIS")]
 
-Uygulama geliştirmek için kodu çalıştırmak için aşağıdaki komutu kullanın:
+Uygulamayı eğiteetmek üzere kodu çalıştırmak için aşağıdaki komutu kullanın:
 
 ```console
 node train.js
 ```
 
-Çalıştırma çıktısı her bir yinelemesini LUIS modellerin eğitimi durumudur. Aşağıdaki yürütme eğitimlerini yalnızca bir onay gerekli:
+Çalıştırmanın çıkışı, LUTÜR modellerinin eğitiminin her bir yinelemesinin durumudur. Aşağıdaki yürütme yalnızca bir eğitim denetimi gerektirdi:
 
 ```console
 1 trained = true
@@ -122,20 +124,20 @@ node train.js
     details: { statusId: 2, status: 'UpToDate', exampleCount: 45 } } ]
 
 ```
-## <a name="publish-the-model"></a>Modeli yayımlayın
-Liste varlığı uç noktasından kullanılabilir olacak şekilde yayımlayın.
+## <a name="publish-the-model"></a>Modeli Yayımla
+Liste varlığının uç noktadan kullanılabilir olması için yayımlayın.
 
-Bir Node.js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. EndpointKey, AppID ve bölge değerlerini değiştirin. Bu dosya, kota sınırını aşan çağrı planlamıyorsanız, authoringKey kullanabilirsiniz.
+Bir Node. js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. EndpointKey, AppID ve Region değerlerini değiştirin. Bu dosyayı kota sınırınızdan daha fazla çağırmayı planlamıyorsanız authoringKey 'nizi kullanabilirsiniz.
 
    [!code-javascript[Publish LUIS](~/samples-luis/documentation-samples/tutorial-list-entity/publish.js "Publish LUIS")]
 
-Uygulama sorgulamak için kodu çalıştırmak için aşağıdaki komutu kullanın:
+Uygulamayı sorgulamak üzere kodu çalıştırmak için aşağıdaki komutu kullanın:
 
 ```console
 node publish.js
 ```
 
-Aşağıdaki çıktı, sorgular için uç nokta URL'sini içerir. Gerçek JSON sonuçları gerçek AppID verilebilir. 
+Aşağıdaki çıktı, herhangi bir sorgu için uç nokta URL 'sini içerir. Gerçek JSON sonuçları gerçek AppID 'yi içerir. 
 
 ```json
 { 
@@ -149,10 +151,10 @@ Aşağıdaki çıktı, sorgular için uç nokta URL'sini içerir. Gerçek JSON s
 }
 ```
 
-## <a name="query-the-app"></a>Sorgu uygulama 
-Liste varlığı cihaz türü belirlemek LUIS yardımcı kanıtlamak için uç nokta uygulamadan sorgu.
+## <a name="query-the-app"></a>Uygulamayı sorgulama 
+Liste varlığının, cihaz türünü belirlemesine yardımcı olduğunu kanıtlamak için uygulamayı uç noktadan sorgulayın.
 
-Bir Node.js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. EndpointKey, AppID ve bölge değerlerini değiştirin. Bu dosya, kota sınırını aşan çağrı planlamıyorsanız, authoringKey kullanabilirsiniz.
+Bir Node. js dosyası oluşturun ve içine aşağıdaki kodu kopyalayın. EndpointKey, AppID ve Region değerlerini değiştirin. Bu dosyayı kota sınırınızdan daha fazla çağırmayı planlamıyorsanız authoringKey 'nizi kullanabilirsiniz.
 
    [!code-javascript[Query LUIS](~/samples-luis/documentation-samples/tutorial-list-entity/query.js "Query LUIS")]
 
@@ -162,7 +164,7 @@ Kodu çalıştırmak ve uygulamayı sorgulamak için aşağıdaki komutu kullan�
 node train.js
 ```
 
-Sorgu sonuçları çıkış alınır. Kodunu eklenmiş olduğunuzdan **ayrıntılı** tüm hedefleri ve puanlarını sorgu dizesi, çıkış adı/değer çifti içerir:
+Çıktı Sorgu sonuçlarınızda bulunur. Kod, sorgu dizesine **ayrıntılı** ad/değer çifti ekletiğinden, çıkış tüm amaçları ve bunların puanlarını içerir:
 
 ```json
 {
@@ -208,16 +210,16 @@ Sorgu sonuçları çıkış alınır. Kodunu eklenmiş olduğunuzdan **ayrıntı
 }
 ```
 
-Özel aygıt **Thermostat** "ısı'kurmak aç" sonucu odaklı bir sorgu ile tanımlanır. Orijinal HomeAutomation.Device varlık hala uygulamada olduğundan, sonuçları de görebilirsiniz. 
+Belirli bir **termostat** cihazı, "ısı artırma" sonucu odaklı bir sorgu ile tanımlanır. Özgün HomeAutomation. Device varlığı hala uygulamada olduğundan, onun sonuçlarını da görebilirsiniz. 
 
-Bunlar ayrıca bir thermostat döndürülür görmek için diğer iki konuşma deneyin. 
+Aynı zamanda bir termostat olarak döndürüldüğünden emin olmak için diğer iki kuralı deneyin. 
 
-|#|Utterance|varlık|type|değer|
+|#|söylenişi|Varlığının|type|değer|
 |--|--|--|--|--|
-|1|ac üzerinde Aç| AC | DevicesList | Thermostat|
-|2|Isı Aç|Isı| DevicesList |Thermostat|
-|3|soğuk olun|soğuk|DevicesList|Thermostat|
+|1|AC 'yi açma| m | DevicesList | Saatiniz|
+|2|ısı 'yi açın|yı| DevicesList |Saatiniz|
+|3|BT Koder yapın|COLDER|DevicesList|Saatiniz|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Cihaz konumları odaları, Katlar veya binalar genişletmek için başka bir liste varlığı oluşturabilirsiniz. 
+Cihaz konumlarını Odalar, katörler veya binalara genişletmek için başka bir liste varlığı oluşturabilirsiniz. 

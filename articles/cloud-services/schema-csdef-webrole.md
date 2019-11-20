@@ -1,5 +1,5 @@
 ---
-title: Azure bulut Hizmetleri def olarak WebRole şeması | Microsoft Docs
+title: Azure Cloud Services def. WebRole şeması | Microsoft Docs
 ms.custom: ''
 ms.date: 04/14/2015
 services: cloud-services
@@ -10,23 +10,23 @@ ms.tgt_pltfrm: ''
 ms.topic: reference
 ms.assetid: 85368e4e-a0db-4c02-8dbc-8e2928fa6091
 caps.latest.revision: 60
-author: jpconnock
-ms.author: jeconnoc
-manager: timlt
-ms.openlocfilehash: 0bb0946ea48a4c206d6bfe683da0835aca9b198b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+author: georgewallace
+ms.author: gwallace
+manager: gwallace
+ms.openlocfilehash: bafc8780368f58a7076ae472636d852d698d276c
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60613239"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68941360"
 ---
-# <a name="azure-cloud-services-definition-webrole-schema"></a>Azure Cloud Services tanım WebRole şeması
-Azure web rolü, IIS 7, ASP.NET, PHP, Windows Communication Foundation ve Fastcgı gibi tarafından desteklenen web uygulaması programlama için özelleştirilmiş bir rolüdür.
+# <a name="azure-cloud-services-definition-webrole-schema"></a>Azure Cloud Services Definition WebRole şeması
+Azure Web rolü, IIS 7 tarafından desteklenen ASP.NET, PHP, Windows Communication Foundation ve FastCGI gibi Web uygulaması programlamasında özelleştirilmiş bir roldür.
 
-.Csdef Hizmet tanım dosyası için varsayılan uzantısıdır.
+Hizmet tanım dosyası için varsayılan uzantı. csdef ' dir.
 
-## <a name="basic-service-definition-schema-for-a-web-role"></a>Bir web rolü için temel hizmet Tanım Şeması  
-Bir web rolü içeren bir hizmet tanımı dosyası temel biçimi aşağıdaki gibidir.
+## <a name="basic-service-definition-schema-for-a-web-role"></a>Web rolü için temel hizmet tanımı şeması  
+Bir Web rolü içeren bir hizmet tanımı dosyasının temel biçimi aşağıdaki gibidir.
 
 ```xml
 <ServiceDefinition …>  
@@ -94,7 +94,7 @@ Bir web rolü içeren bir hizmet tanımı dosyası temel biçimi aşağıdaki gi
 ```  
 
 ## <a name="schema-elements"></a>Şema öğeleri  
-Hizmet tanım dosyası, bu konunun sonraki bölümlerinde ayrıntılı olarak açıklanan, bu öğeleri içerir:  
+Hizmet tanımı dosyası, bu konunun sonraki bölümlerinde ayrıntılı olarak açıklanan bu öğeleri içerir:  
 
 [WebRole](#WebRole)
 
@@ -106,11 +106,11 @@ Hizmet tanım dosyası, bu konunun sonraki bölümlerinde ayrıntılı olarak a�
 
 [LocalStorage](#LocalStorage)
 
-[Uç noktaları](#Endpoints)
+[Noktalarının](#Endpoints)
 
 [InternalEndpoint](#InternalEndpoint)
 
-[InstanceInputEndpoint](#InstanceInputEndpoint)
+[Instanceınputendpoint](#InstanceInputEndpoint)
 
 [AllocatePublicPortFrom](#AllocatePublicPortFrom)
 
@@ -122,7 +122,7 @@ Hizmet tanım dosyası, bu konunun sonraki bölümlerinde ayrıntılı olarak a�
 
 [Sertifika](#Certificate)
 
-[İçeri aktarmalar](#Imports)
+[İşlemlerinin](#Imports)
 
 [İçeri Aktar](#Import)
 
@@ -130,21 +130,21 @@ Hizmet tanım dosyası, bu konunun sonraki bölümlerinde ayrıntılı olarak a�
 
 [Ortam](#Environment)
 
-[Değişkeni](#Variable)
+[Değişken](#Variable)
 
-[RoleInstanceValue](#RoleInstanceValue)
+[Roleınstancevalue](#RoleInstanceValue)
 
 [NetFxEntryPoint](#NetFxEntryPoint)
 
-[Siteleri](#Sites)
+[Barındıra](#Sites)
 
-[Site](#Site)
-
-[VirtualApplication](#VirtualApplication)
+[Bölgesi](#Site)
 
 [VirtualApplication](#VirtualApplication)
 
-[Bağlamaları](#Bindings)
+[VirtualApplication](#VirtualApplication)
+
+[Lara](#Bindings)
 
 [Bağlama](#Binding)
 
@@ -152,327 +152,327 @@ Hizmet tanım dosyası, bu konunun sonraki bölümlerinde ayrıntılı olarak a�
 
 [Görev](#Task)
 
-[İçeriği](#Contents)
+[Dekiler](#Contents)
 
 [İçeriği](#Content)
 
 [SourceDirectory](#SourceDirectory)
 
-##  <a name="WebRole"></a> WebRole  
-`WebRole` Öğesi, ASP.NET ve IIS 7 ile desteklenen web uygulaması programlama için özelleştirilmiş bir rolü açıklar. Bir hizmet, sıfır veya daha fazla web rollerini içerebilir.
+##  <a name="WebRole"></a>WebRole  
+`WebRole` Öğesi, IIS 7 ve ASP.NET tarafından desteklendiği şekilde Web uygulaması programlama için özelleştirilmiş bir rol tanımlar. Bir hizmet, sıfır veya daha fazla web rolü içerebilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `WebRole` öğesi.
+Aşağıdaki tablo, `WebRole` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Web rolü adı. Rolün adı benzersiz olmalıdır.|  
-|enableNativeCodeExecution|boole|İsteğe bağlı. Varsayılan değer `true`; yerel kod yürütme ve tam güven varsayılan olarak etkinleştirilir. Bu öznitelik ayarlanan `false` web rolü için yerel kod yürütme devre dışı bırakabilir ve bunun yerine Azure kısmi güven kullanın.|  
-|vmsize|string|İsteğe bağlı. Rolü için ayrılan sanal makinenin boyutunu değiştirmek için bu değeri ayarlayın. Varsayılan değer `Small` şeklindedir. Daha fazla bilgi için [bulut Hizmetleri için sanal makine boyutları](cloud-services-sizes-specs.md).|  
+|name|dize|Gerekli. Web rolünün adı. Rolün adı benzersiz olmalıdır.|  
+|enableNativeCodeExecution|boolean|İsteğe bağlı. Varsayılan değer `true`; yerel kod yürütme ve tam güven varsayılan olarak etkindir. Web rolü için yerel `false` kod yürütmeyi devre dışı bırakmak üzere bu özniteliği olarak ayarlayın ve bunun yerine Azure kısmi güven kullanın.|  
+|VMSize|dize|İsteğe bağlı. Role ayrılan sanal makinenin boyutunu değiştirmek için bu değeri ayarlayın. Varsayılan değer `Small` şeklindedir. Daha fazla bilgi için bkz. [sanal makine boyutları Cloud Services](cloud-services-sizes-specs.md).|  
 
-##  <a name="ConfigurationSettings"></a> ConfigurationSettings  
-`ConfigurationSettings` Öğesi, bir web rolü için yapılandırma ayarlarını koleksiyonunu açıklar. Bu öğenin üst öğesi değil `Setting` öğesi.
+##  <a name="ConfigurationSettings"></a>ConfigurationSettings  
+`ConfigurationSettings` Öğesi, bir Web rolü için yapılandırma ayarları koleksiyonunu açıklar. Bu öğe, `Setting` öğesinin üst öğesidir.
 
-##  <a name="Setting"></a> Ayarı  
-`Setting` Öğesi, bir rol örneği için bir yapılandırma ayarı belirten bir ad ve değer çifti açıklar.
+##  <a name="Setting"></a>Ayarlanmasını  
+`Setting` Öğesi bir rol örneği için yapılandırma ayarını belirten bir ad ve değer çiftini tanımlar.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Setting` öğesi.
+Aşağıdaki tablo, `Setting` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Yapılandırma ayarı için benzersiz bir ad.|  
+|name|dize|Gerekli. Yapılandırma ayarı için benzersiz bir ad.|  
 
-Bir rol için yapılandırma ayarlarını, hizmet tanımı dosyasında bildirilir ve hizmet yapılandırma dosyasında ayarlanan ad ve değer çiftleridir.
+Bir rolün yapılandırma ayarları, hizmet tanım dosyasında belirtilen ve hizmet yapılandırma dosyasında ayarlanan ad ve değer çiftleridir.
 
-##  <a name="LocalResources"></a> LocalResources  
-`LocalResources` Öğesi, bir web rolü için yerel depolama kaynakları koleksiyonunu açıklar. Bu öğenin üst öğesi değil `LocalStorage` öğesi.
+##  <a name="LocalResources"></a>LocalResources  
+Öğesi `LocalResources` , bir Web rolü için yerel depolama kaynakları koleksiyonunu açıklar. Bu öğe, `LocalStorage` öğesinin üst öğesidir.
 
-##  <a name="LocalStorage"></a> LocalStorage  
-`LocalStorage` Öğesi zamanında hizmet dosya sistemi alanı sağlayan bir yerel depolama kaynağı tanımlar. Bir rol, sıfır veya daha fazla yerel depolama kaynaklarını tanımlayabilir.
+##  <a name="LocalStorage"></a>LocalStorage  
+Öğesi `LocalStorage` , çalışma zamanında hizmet için dosya sistemi alanı sağlayan bir yerel depolama kaynağı tanımlar. Rol, sıfır veya daha fazla yerel depolama kaynağı tanımlayabilir.
 
 > [!NOTE]
->  `LocalStorage` Öğesi alt öğesi olarak görünebilir `WebRole` Azure SDK'sının önceki sürümleriyle uyumluluk desteği için öğesi.
+>  Öğesi, Azure SDK 'sının önceki sürümleriyle uyumluluğu desteklemek `WebRole` için öğesinin bir alt öğesi olarak görünebilir. `LocalStorage`
 
-Aşağıdaki tabloda özniteliklerini açıklayan `LocalStorage` öğesi.
+Aşağıdaki tablo, `LocalStorage` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Yerel depo için benzersiz bir ad.|  
-|cleanOnRoleRecycle|boole|İsteğe bağlı. Rolü yeniden başlatıldığında, yerel depo temizlendi olup olmadığını gösterir. Varsayılan değer `true`.|  
-|sizeInMb|int|İsteğe bağlı. İstenen depolama alanı için yerel depoda MB ayrılacak miktarı. Belirtilmezse, varsayılan depolama alanı ayrılan 100 MB'dir. Ayrılabileceği depolama alanı miktarını en az 1 MB'dir.<br /><br /> Yerel kaynak boyutu üst sınırı sanal makine boyutuna bağlıdır. Daha fazla bilgi için [bulut Hizmetleri için sanal makine boyutları](cloud-services-sizes-specs.md).|  
+|name|dize|Gerekli. Yerel depo için benzersiz bir ad.|  
+|cleanOnRoleRecycle|boolean|İsteğe bağlı. Rol yeniden başlatıldığında yerel deponun temizlenmesinin gerekip gerekmediğini gösterir. Varsayılan değer `true`.|  
+|Sizeınmb|int|İsteğe bağlı. Yerel depo için ayrılacak, MB cinsinden istenen depolama alanı miktarı. Belirtilmemişse, ayrılan varsayılan depolama alanı 100 MB 'tır. Ayrılabilen en az depolama alanı miktarı 1 MB 'tır.<br /><br /> Yerel kaynakların en büyük boyutu sanal makine boyutuna bağımlıdır. Daha fazla bilgi için bkz. [sanal makine boyutları Cloud Services](cloud-services-sizes-specs.md).|  
   
-Yerel depolama kaynağına ayrılmış dizinin adını ad özniteliği için sağlanan değer karşılık gelir.
+Yerel depolama kaynağına ayrılan dizinin adı, Name özniteliği için belirtilen değere karşılık gelir.
 
-##  <a name="Endpoints"></a> Uç noktaları  
-`Endpoints` Giriş (Dış) iç koleksiyonunu açıklar ve örnek giriş uç noktaları bir rol için. Bu öğenin üst öğesi değil `InputEndpoint`, `InternalEndpoint`, ve `InstanceInputEndpoint` öğeleri.
+##  <a name="Endpoints"></a>Noktalarının  
+`Endpoints` Öğesi, bir rol için giriş (dış), iç ve örnek giriş uç noktaları koleksiyonunu açıklar. Bu öğe `InputEndpoint`, `InternalEndpoint`, ve `InstanceInputEndpoint` öğelerinin üst öğesidir.
 
-Giriş ve iç uç noktalar için ayrı olarak ayrılır. Bir hizmetin 25 giriş, iç, toplam olabilir ve bir hizmette izin verilen 25 rollerde ayrılan uç noktalar örneği giriş. Örneğin, 5 rolü varsa rol başına 5 giriş uç noktaları ayırabilirsiniz, 25 giriş uç noktaları tek bir rol için tahsis edebilirsiniz veya 1 giriş uç noktasına her 25 rolleri ayırabilirsiniz.
+Giriş ve Iç uç noktalar ayrı olarak ayrılır. Bir hizmette toplam 25 giriş, iç ve örnek giriş uç noktası bulunabilir ve bu da bir hizmette izin verilen 25 rol arasında ayrılabilir. Örneğin, 5 rol varsa, rol başına 5 giriş uç noktası ayırabilirsiniz veya tek bir role 25 giriş uç noktası ayırabilirsiniz veya her biri 25 rol için 1 giriş uç noktası ayırabilirsiniz.
 
 > [!NOTE]
->  Dağıtılan her bir rol, rol başına bir örneğini gerektirir. Varsayılan bir abonelik için sağlama 20 adede kadar çekirdek sınırlıdır ve bu nedenle bir rolün 20 olayla sınırlıdır. Uygulamanızı bakın sağlama varsayılan olarak sağlanan çok daha fazla örnek gerektirip gerektirmediğini [faturalama, abonelik yönetimi ve kota Destek](https://azure.microsoft.com/support/options/) kota artırma hakkında daha fazla bilgi.
+>  Dağıtılan her rolün rol başına bir örnek olması gerekir. Abonelik için varsayılan sağlama 20 çekirdekle sınırlıdır ve bu nedenle bir rolün 20 örneğiyle sınırlıdır. Uygulamanız varsayılan sağlama tarafından sağlanmasından daha fazla örnek gerektiriyorsa, kotayı artırma hakkında daha fazla bilgi için [faturalandırma, abonelik yönetimi ve kota desteği '](https://azure.microsoft.com/support/options/) ne bakın.
 
-##  <a name="InputEndpoint"></a> Inputendpoint  
-`InputEndpoint` Öğesi, bir web rolü için dış uç noktası açıklar.
+##  <a name="InputEndpoint"></a>Inputendpoint  
+`InputEndpoint` Öğesi bir Web rolü için bir dış uç nokta tanımlar.
 
-Birden çok HTTP, HTTPS, UDP birleşimi olan uç noktaları ve TCP uç noktaları tanımlayabilirsiniz. Giriş uç noktası için seçtiğiniz herhangi bir bağlantı noktası numarasını belirtebilirsiniz, ancak her rol için belirtilen bağlantı noktası numaraları benzersiz olması gerekir. Bir web rolü 80 numaralı bağlantı noktası için HTTP ve bağlantı noktası 443 HTTPS kullandığını belirtirseniz, örneğin, ardından ikinci bir web rolü 8080 bağlantı noktası için HTTP ve bağlantı noktası 8043 HTTPS kullandığını belirtebilirsiniz.
+HTTP, HTTPS, UDP ve TCP uç noktalarının birleşimi olan birden fazla uç nokta tanımlayabilirsiniz. Bir giriş uç noktası için seçtiğiniz herhangi bir bağlantı noktası numarasını belirtebilirsiniz, ancak hizmette her rol için belirtilen bağlantı noktası numaraları benzersiz olmalıdır. Örneğin, bir Web rolünün HTTP için 80 bağlantı noktasını ve HTTPS için bağlantı noktası 443 kullandığını belirtirseniz, ikinci bir Web rolünün HTTP için bağlantı noktası 8080 ' i ve HTTPS için bağlantı noktası 8043 kullandığını belirtebilirsiniz.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `InputEndpoint` öğesi.
+Aşağıdaki tablo, `InputEndpoint` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Dış uç nokta için benzersiz bir ad.|  
-|protocol|string|Gereklidir. Dış uç noktası için Aktarım Protokolü. Bir web rolü için olası değerler `HTTP`, `HTTPS`, `UDP`, veya `TCP`.|  
-|port|int|Gereklidir. Dış uç noktası için bağlantı noktası. Seçtiğiniz herhangi bir bağlantı noktası numarasını belirtebilirsiniz, ancak her rol için belirtilen bağlantı noktası numaraları benzersiz olması gerekir.<br /><br /> Olası değerler aralığı 1 ila 65535, kapsamlı (Azure SDK sürüm 1.7 veya üzerini).|  
-|sertifika|string|Bir HTTPS uç noktası için gereklidir. Tarafından tanımlanan bir sertifika adını bir `Certificate` öğesi.|  
-|yerel bağlantı noktası|int|İsteğe bağlı. İç uç nokta bağlantıları için kullanılan bir bağlantı noktasını belirtir. `localPort` Özniteliği bir iç bağlantı noktasına bir rol üzerinde dış bağlantı uç noktasında eşler. Bu, burada bir rol bir bağlantı noktası iç bir bileşen için kullandığınızın dışında harici olarak kullanıma sunulduğunu iletişim kurması gereken senaryolarda yararlıdır.<br /><br /> Belirtilmezse, değerini `localPort` aynı `port` özniteliği. Değerini `localPort` için "*" çalışma zamanı API'si kullanılarak bulunabilir olduğundan ayrılmamış bir bağlantı noktası otomatik olarak atamak için.<br /><br /> Olası değerler aralığı 1 ila 65535, kapsamlı (Azure SDK sürüm 1.7 veya üzerini).<br /><br /> `localPort` Özniteliği, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.|  
-|ignoreRoleInstanceStatus|boole|İsteğe bağlı. Bu özniteliğin değeri ayarlandığında `true`, bir hizmetin durumunu göz ardı edilir ve uç nokta yük dengeleyici tarafından kaldırılmaz. Bu değeri ayarlamak `true` meşgul bir hizmetin örneklerine hata ayıklama için kullanışlıdır. Varsayılan değer `false` şeklindedir. **Not:**  Bir uç nokta trafiği bile rolün hazır durumda değil yine de alabilirsiniz.|  
-|loadBalancerProbe|string|İsteğe bağlı. Giriş uç noktasıyla ilişkili yük dengeleyici araştırması adı. Daha fazla bilgi için [LoadBalancerProbe şeması](schema-csdef-loadbalancerprobe.md).|  
+|name|dize|Gerekli. Dış uç nokta için benzersiz bir ad.|  
+|protocol|dize|Gerekli. Dış uç nokta için Aktarım Protokolü. Bir Web rolü için `HTTP`olası değerler `UDP`, `HTTPS`, veya `TCP`' dir.|  
+|port|int|Gerekli. Dış uç nokta için bağlantı noktası. Seçtiğiniz herhangi bir bağlantı noktası numarasını belirtebilirsiniz, ancak hizmette her bir rol için belirtilen bağlantı noktası numaraları benzersiz olmalıdır.<br /><br /> Olası değerler 1 ile 65535 (Azure SDK sürüm 1,7 veya üzeri) arasında değişir.|  
+|sertifika|dize|Bir HTTPS uç noktası için gereklidir. Bir `Certificate` öğe tarafından tanımlanan sertifikanın adı.|  
+|localPort|int|İsteğe bağlı. Uç noktada iç bağlantılar için kullanılan bir bağlantı noktasını belirtir. `localPort` Öznitelik, uç noktasındaki dış bağlantı noktasını bir roldeki iç bağlantı noktasına eşler. Bu, bir rolün dışarıdan açığa çıkarılan bir bağlantı noktasında iç bileşen ile iletişim kurması gereken senaryolarda yararlıdır.<br /><br /> Belirtilmemişse, değeri `localPort` `port` özniteliğiyle aynı olur. Çalışma zamanı API 'si `localPort` kullanılarak keşfedilen ayrılmamış bir bağlantı noktasını otomatik olarak atamak için değerini "*" olarak ayarlayın.<br /><br /> Olası değerler 1 ile 65535 (Azure SDK sürüm 1,7 veya üzeri) arasında değişir.<br /><br /> `localPort` Özniteliği yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.|  
+|ignoreRoleInstanceStatus|boolean|İsteğe bağlı. Bu özniteliğin değeri olarak `true`ayarlandığında, bir hizmetin durumu yok sayılır ve uç nokta yük dengeleyici tarafından kaldırılmaz. Bu değer, bir `true` hizmetin meşgul örneklerinde hata ayıklama için yararlı olarak ayarlanıyor. Varsayılan değer `false` şeklindedir. **Not:**  Bir uç nokta, rol kullanılmaya devam eden bir durumda olsa bile trafiği alabilir.|  
+|loadBalancerProbe|dize|İsteğe bağlı. Giriş uç noktasıyla ilişkili yük dengeleyici araştırmasının adı. Daha fazla bilgi için bkz. [Loadbalanceraraştırma şeması](schema-csdef-loadbalancerprobe.md).|  
 
-##  <a name="InternalEndpoint"></a> InternalEndpoint  
-`InternalEndpoint` Öğesi, bir web rolü için bir iç uç nokta açıklar. Bir iç uç nokta yalnızca Hizmeti'nde çalışan diğer rol örnekleri kullanılabilir; Hizmet dışındaki istemciler tarafından kullanılabilir değil. Web rolleri içermeyen `Sites` öğesi yalnızca tek bir HTTP, UDP veya TCP iç uç nokta olabilir.
+##  <a name="InternalEndpoint"></a>InternalEndpoint  
+`InternalEndpoint` Öğesi bir Web rolüne iç uç nokta tanımlar. İç uç nokta yalnızca hizmet içinde çalışan diğer rol örnekleri için kullanılabilir; hizmet dışındaki istemciler için kullanılamaz. `Sites` Öğesi içermeyen Web rollerinin yalnızca tek bir http, UDP veya TCP iç uç noktası olabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `InternalEndpoint` öğesi.
+Aşağıdaki tablo, `InternalEndpoint` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. İç uç nokta için benzersiz bir ad.|  
-|protocol|string|Gereklidir. İç uç nokta için Aktarım Protokolü. Olası değerler `HTTP`, `TCP`, `UDP`, veya `ANY`.<br /><br /> Değerini `ANY` herhangi bir protokolünü herhangi bir bağlantı noktasına izin verildiğini belirtir.|  
-|port|int|İsteğe bağlı. İç yük dengeli uç nokta bağlantıları için kullanılan bağlantı noktası. Uç nokta kullanan iki bağlantı noktası bir yük dengeli. Genel IP adresi için kullanılan bağlantı noktasını ve özel IP adresinde kullanılan bağlantı noktası. Bunlar genellikle bunlar aynı ayarlanır, ancak farklı bağlantı noktalarını kullanmayı seçebilirsiniz.<br /><br /> Olası değerler aralığı 1 ila 65535, kapsamlı (Azure SDK sürüm 1.7 veya üzerini).<br /><br /> `Port` Özniteliği, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.|  
+|name|dize|Gerekli. İç uç nokta için benzersiz bir ad.|  
+|protocol|dize|Gerekli. İç uç nokta için Aktarım Protokolü. Olası değerler şunlardır `HTTP` `TCP` `ANY`, ,veya.`UDP`<br /><br /> Bir değeri `ANY` herhangi bir protokolün, herhangi bir bağlantı noktasına izin verildiğini belirtir.|  
+|port|int|İsteğe bağlı. Uç noktada iç yük dengeli bağlantılar için kullanılan bağlantı noktası. Yük dengeli bir uç nokta iki bağlantı noktası kullanır. Genel IP adresi için kullanılan bağlantı noktası ve özel IP adresinde kullanılan bağlantı noktası. Bunlar genellikle bunlar aynı şekilde ayarlanmıştır, ancak farklı bağlantı noktaları kullanmayı seçebilirsiniz.<br /><br /> Olası değerler 1 ile 65535 (Azure SDK sürüm 1,7 veya üzeri) arasında değişir.<br /><br /> `Port` Özniteliği yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.|  
 
-##  <a name="InstanceInputEndpoint"></a> InstanceInputEndpoint  
-`InstanceInputEndpoint` Öğesi, bir web rolü için bir örnek giriş uç noktası açıklar. Örnek giriş uç noktası yük dengeleyicide bağlantı noktası iletme kullanarak belirli bir rol örneği ile ilişkilidir. Her örnek giriş uç noktası, olası bağlantı noktası aralığından belirli bir bağlantı noktasıyla eşlenir. Bu öğenin üst öğesi değil `AllocatePublicPortFrom` öğesi.
+##  <a name="InstanceInputEndpoint"></a>Instanceınputendpoint  
+`InstanceInputEndpoint` Öğesi bir Web rolüne örnek giriş uç noktası tanımlar. Örnek giriş uç noktası, yük dengeleyicide bağlantı noktası iletme kullanılarak belirli bir rol örneğiyle ilişkilendirilir. Her örnek giriş uç noktası, olası bir bağlantı noktası aralığından belirli bir bağlantı noktasıyla eşleştirilir. Bu öğe, `AllocatePublicPortFrom` öğesinin üst öğesidir.
 
-`InstanceInputEndpoint` Öğesi, yalnızca Azure SDK'sı sürüm 1.7 kullanılarak kullanılabilirlik veya daha yüksek.
+`InstanceInputEndpoint` Öğesi yalnızca Azure SDK 1,7 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `InstanceInputEndpoint` öğesi.
+Aşağıdaki tablo, `InstanceInputEndpoint` öğesinin özniteliklerini açıklar.
   
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Uç nokta için benzersiz bir ad.|  
-|yerel bağlantı noktası|int|Gereklidir. Tüm rol örneklerine yük dengeleyiciden ileten gelen trafiği almak için dinleyeceği iç bağlantı noktasını belirtir. Olası değerler aralığı 1 ila 65535 (dahil).|  
-|protocol|string|Gereklidir. İç uç nokta için Aktarım Protokolü. Olası değerler: `udp` veya `tcp`. Kullanım `tcp` http/https trafiğini tabanlı için.|  
+|name|dize|Gerekli. Uç nokta için benzersiz bir ad.|  
+|localPort|int|Gerekli. Yük dengeleyiciden iletilen gelen trafiği almak için tüm rol örneklerinin dinleyeceği iç bağlantı noktasını belirtir. Olası değerler 1 ile 65535 (dahil) arasında değişir.|  
+|protocol|dize|Gerekli. İç uç nokta için Aktarım Protokolü. Olası değerler: `udp` veya `tcp`. Http `tcp` /https tabanlı trafik için kullanın.|  
   
-##  <a name="AllocatePublicPortFrom"></a> AllocatePublicPortFrom  
-`AllocatePublicPortFrom` Her örnek giriş uç noktasına erişmek için dış müşteriler tarafından kullanılan ortak bağlantı noktası aralığını açıklar. Genel (VIP) bağlantı noktası numarasını bu aralıktaki ayrılmış ve Kiracı dağıtım ve güncelleştirme sırasında her ayrı rol örneğinin uç noktası atanmış. Bu öğenin üst öğesi değil `FixedPortRange` öğesi.
+##  <a name="AllocatePublicPortFrom"></a>AllocatePublicPortFrom  
+Öğesi `AllocatePublicPortFrom` , dış müşteriler tarafından her örnek giriş uç noktasına erişmek için kullanılabilen genel bağlantı noktası aralığını açıklar. Ortak (VIP) bağlantı noktası numarası bu aralıktan ayrılır ve kiracı dağıtımı ve güncelleştirmesi sırasında her bir rol örneği uç noktasına atanır. Bu öğe, `FixedPortRange` öğesinin üst öğesidir.
 
-`AllocatePublicPortFrom` Öğesi, yalnızca Azure SDK'sı sürüm 1.7 kullanılarak kullanılabilirlik veya daha yüksek.
+`AllocatePublicPortFrom` Öğesi yalnızca Azure SDK 1,7 veya üzeri sürümler kullanılarak kullanılabilir.
 
-##  <a name="FixedPort"></a> FixedPort  
-`FixedPort` Öğesi için yük dengeli uç nokta bağlantılarda hangi etkinleştirir iç uç nokta, bağlantı noktasını belirtir.
+##  <a name="FixedPort"></a>FixedPort  
+`FixedPort` Öğesi, iç uç nokta için uç noktada yük dengeli bağlantıları sağlayan bağlantı noktasını belirtir.
 
-`FixedPort` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`FixedPort` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `FixedPort` öğesi.
+Aşağıdaki tablo, `FixedPort` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|port|int|Gereklidir. İç uç noktası için bağlantı noktası. Bu ayar ile aynı etkiye sahip `FixedPortRange` MIN ve max aynı bağlantı noktası.<br /><br /> Olası değerler aralığı 1 ila 65535, kapsamlı (Azure SDK sürüm 1.7 veya üzerini).|  
+|port|int|Gerekli. İç uç nokta için bağlantı noktası. Bu, `FixedPortRange` en düşük ve en fazla aynı bağlantı noktasına ayarlanması ile aynı etkiye sahiptir.<br /><br /> Olası değerler 1 ile 65535 (Azure SDK sürüm 1,7 veya üzeri) arasında değişir.|  
 
-##  <a name="FixedPortRange"></a> FixedPortRange  
-`FixedPortRange` Öğesi iç uç nokta veya örnek giriş uç noktası için atanan bağlantı noktası aralığını belirtir ve bağlantı noktasının kullanılması için yük dengelenmiş küme uç noktası bağlantıları.
+##  <a name="FixedPortRange"></a>FixedPortRange  
+`FixedPortRange` Öğesi, iç uç noktaya veya örnek giriş uç noktasına atanan bağlantı noktası aralığını belirtir ve uç noktada yük dengeli bağlantılar için kullanılan bağlantı noktasını ayarlar.
 
 > [!NOTE]
->  `FixedPortRange` Öğesi içinde bulunduğu öğesi bağlı olarak farklı şekilde çalışır. Zaman `FixedPortRange` öğe konusu `InternalEndpoint` öğesi, tüm bağlantı noktalarında yük dengeleyicisi tüm sanal makineler üzerinde rolün çalıştığı MIN ve max özniteliklerini aralık içinde açılır. Zaman `FixedPortRange` öğe konusu `InstanceInputEndpoint` öğesi, yalnızca bir bağlantı noktası rolünü çalıştıran her sanal makinede MIN ve max özniteliklerini aralık içinde açılır.
+>  Öğesi `FixedPortRange` , bulunduğu öğeye göre farklı şekilde çalışır. `FixedPortRange` Öğeöğesiiçindeyse,yükdengeleyicidekitümbağlantınoktalarını,rolünçalıştığıtümsanalmakineleriçinminveMax`InternalEndpoint` özniteliklerinin aralığı içinde açar. `FixedPortRange` Öğesi `InstanceInputEndpoint` öğesinde olduğunda, rolü çalıştıran her bir sanal makinede en az ve en fazla öznitelik aralığı içinde yalnızca bir bağlantı noktası açılır.
 
-`FixedPortRange` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`FixedPortRange` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `FixedPortRange` öğesi.
+Aşağıdaki tablo, `FixedPortRange` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|dk|int|Gereklidir. En az bağlantı noktası aralığı içinde. Olası değerler aralığı 1 ila 65535, kapsamlı (Azure SDK sürüm 1.7 veya üzerini).|  
-|en fazla|string|Gereklidir. En fazla bağlantı noktası aralığı içinde. Olası değerler aralığı 1 ila 65535, kapsamlı (Azure SDK sürüm 1.7 veya üzerini).|  
+|dk|int|Gerekli. Aralıktaki en küçük bağlantı noktası. Olası değerler 1 ile 65535 (Azure SDK sürüm 1,7 veya üzeri) arasında değişir.|  
+|en çok|dize|Gerekli. Aralıktaki en fazla bağlantı noktası. Olası değerler 1 ile 65535 (Azure SDK sürüm 1,7 veya üzeri) arasında değişir.|  
 
-##  <a name="Certificates"></a> Sertifikaları  
-`Certificates` Öğesi, bir web rolü için sertifika koleksiyonunu açıklar. Bu öğenin üst öğesi değil `Certificate` öğesi. Bir rol herhangi bir sayıda ilişkili sertifikaları olabilir. Sertifikaları öğesini kullanarak daha fazla bilgi için bkz: [bir sertifika ile Hizmet tanım dosyasını değiştirmektir](cloud-services-configure-ssl-certificate-portal.md#step-2-modify-the-service-definition-and-configuration-files).
+##  <a name="Certificates"></a>Sertifika  
+`Certificates` Öğesi bir Web rolü için sertifika koleksiyonunu açıklar. Bu öğe, `Certificate` öğesinin üst öğesidir. Bir rol, ilişkili sayıda sertifikaya sahip olabilir. Sertifikalar öğesini kullanma hakkında daha fazla bilgi için bkz. [hizmet tanımı dosyasını bir sertifikayla değiştirme](cloud-services-configure-ssl-certificate-portal.md#step-2-modify-the-service-definition-and-configuration-files).
 
-##  <a name="Certificate"></a> Sertifika  
-`Certificate` Web rolüyle ilişkilendirilmiş bir sertifika açıklar.
+##  <a name="Certificate"></a>Sertifika  
+Öğesi `Certificate` , bir Web rolüyle ilişkili bir sertifika tanımlar.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Certificate` öğesi.
+Aşağıdaki tablo, `Certificate` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Bir HTTPS ile ilişkili olduğunda başvurmak için kullanılan bu sertifika için bir ad `InputEndpoint` öğesi.|  
-|storeLocation|string|Gereklidir. Bu sertifika, yerel makinede burada bulunabilir sertifika deposunun konumu. Olası değerler `CurrentUser` ve `LocalMachine`.|  
-|storeName|string|Gereklidir. Bu sertifika yerel makine üzerinde bulunduğu sertifika deposunun adı. Olası değerler şunlardır: yerleşik deposu adları `My`, `Root`, `CA`, `Trust`, `Disallowed`, `TrustedPeople`, `TrustedPublisher`, `AuthRoot`, `AddressBook`, ya da herhangi bir özel depo adı. Özel depo adı belirtilirse, bu deponun otomatik olarak oluşturulur.|  
-|permissionLevel|string|İsteğe bağlı. Rol işlemler için verilen erişim izinleri belirtir. Özel anahtarına erişim ve belirlemek için yalnızca yükseltilmiş işlemleri istiyorsanız `elevated` izni. `limitedOrElevated` özel anahtarına erişim tüm rol işlemler izin verir. Olası değerler: `limitedOrElevated` veya `elevated`. Varsayılan değer `limitedOrElevated` şeklindedir.|  
+|name|dize|Gerekli. Bir https `InputEndpoint` öğesiyle ilişkilendirildiğinde bu sertifikaya başvurmak için kullanılan bir ad.|  
+|storeLocation|dize|Gerekli. Bu sertifikanın yerel makinede bulunabileceği sertifika deposunun konumu. Olası değerler şunlardır `CurrentUser`. `LocalMachine`|  
+|storeName|dize|Gerekli. Bu sertifikanın yerel makinede bulunduğu sertifika deposunun adı. Olası değerler `My`, yerleşik depo adlarını `TrustedPeople`, `Trust` `CA` `Root`,,, ,`TrustedPublisher`, ,`AuthRoot`, veyaherhangibirözelmağazaadınıiçerir.`AddressBook` `Disallowed` Özel bir mağaza adı belirtilmişse mağaza otomatik olarak oluşturulur.|  
+|permissionLevel|dize|İsteğe bağlı. Rol işlemlerine verilen erişim izinlerini belirtir. Yalnızca yükseltilmiş işlemlerin özel anahtara erişip erişebilmesini istiyorsanız izin belirtin `elevated` . `limitedOrElevated`izin, tüm rol işlemlerinin özel anahtara erişmesine izin verir. Olası değerler: `limitedOrElevated` veya `elevated`. Varsayılan değer `limitedOrElevated` şeklindedir.|  
 
-##  <a name="Imports"></a> İçeri aktarmalar  
-`Imports` Bileşenleri eklemek için konuk işletim sistemini içeri aktarma modülleri bir web rolü için koleksiyonunu açıklar. Bu öğenin üst öğesi değil `Import` öğesi. Bu öğe isteğe bağlıdır ve bir rolü yalnızca bir içe aktarmalar blok olabilir. 
+##  <a name="Imports"></a>İşlemlerinin  
+Öğesi `Imports` , Konuk işletim sistemine bileşenler ekleyen bir Web rolü için içeri aktarma modülleri koleksiyonunu açıklar. Bu öğe, `Import` öğesinin üst öğesidir. Bu öğe isteğe bağlıdır ve bir rol yalnızca bir içeri aktarma bloğuna sahip olabilir. 
 
-`Imports` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Imports` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-##  <a name="Import"></a> içeri aktarma  
-`Import` Öğesi konuk işletim sistemine eklemek için bir modüle belirtir.
+##  <a name="Import"></a>Aktarmaya  
+Öğesi `Import` , Konuk işletim sistemine eklenecek bir modül belirtir.
 
-`Import` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Import` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Import` öğesi.
+Aşağıdaki tablo, `Import` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|Modül adı|string|Gereklidir. İçeri aktarmak için modülünün adı. Geçerli alma modülleri şunlardır:<br /><br /> -   RemoteAccess<br />-RemoteForwarder<br />-Diagnostics<br /><br /> RemoteAccess ve RemoteForwarder modüllerini rol Örneğiniz için Uzak Masaüstü bağlantılarını yapılandırmanıza olanak sağlar. Daha fazla bilgi için [Uzak Masaüstü Bağlantısı etkinleştirme](cloud-services-role-enable-remote-desktop-new-portal.md).<br /><br /> Tanılama modülü, bir rol örneği için Tanılama verileri toplamanıza olanak tanır.|  
+|Ladı|dize|Gerekli. İçeri aktarılacak modülün adı. Geçerli içeri aktarma modülleri şunlardır:<br /><br /> -RemoteAccess<br />-RemoteForwarder<br />-Tanılama<br /><br /> RemoteAccess ve RemoteForwarder modülleri, rol örneğinizi Uzak Masaüstü bağlantıları için yapılandırmanıza olanak tanır. Daha fazla bilgi için bkz. [Uzak Masaüstü bağlantısı etkinleştirme](cloud-services-role-enable-remote-desktop-new-portal.md).<br /><br /> Tanılama modülü bir rol örneği için tanılama verileri toplamanızı sağlar.|  
 
-##  <a name="Runtime"></a> Çalışma zamanı  
-`Runtime` Denetleyen Azure ana bilgisayarı işlemlerinin çalışma zamanı ortamı için ortam değişkeni ayarlarının bir web rolü koleksiyonunu açıklar. Bu öğenin üst öğesi değil `Environment` öğesi. Bu öğe isteğe bağlıdır ve yalnızca bir çalışma zamanı blok bir role sahip olabilir.
+##  <a name="Runtime"></a>Çalışma zamanı  
+`Runtime` Öğesi, Azure ana bilgisayar işleminin çalışma zamanı ortamını denetleyen bir Web rolü için ortam değişkeni ayarlarının bir koleksiyonunu açıklar. Bu öğe, `Environment` öğesinin üst öğesidir. Bu öğe isteğe bağlıdır ve bir rol yalnızca bir çalışma zamanı bloğuna sahip olabilir.
 
-`Runtime` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Runtime` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Runtime` öğesi:  
+Aşağıdaki tablo, `Runtime` öğesinin özniteliklerini açıklar:  
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|executionContext|string|İsteğe bağlı. Hangi rol işlemi her bağlam belirtir. Varsayılan bağlamı `limited`.<br /><br /> -   `limited` – İşlem yönetici ayrıcalıklarına gerek kalmadan başlatılmadı.<br />-   `elevated` – İşlem yönetici ayrıcalıklarıyla başlatılmadı.|  
+|executionContext|dize|İsteğe bağlı. Rol Işleminin başlatıldığı bağlamı belirtir. Varsayılan bağlam `limited`.<br /><br /> -   `limited`– İşlem, yönetici ayrıcalıkları olmadan başlatılır.<br />-   `elevated`– İşlem, yönetici ayrıcalıklarıyla başlatılır.|  
 
-##  <a name="Environment"></a> Ortam  
-`Environment` Öğesi, bir web rolü için ortam değişkeni ayarlarının koleksiyonunu açıklar. Bu öğenin üst öğesi değil `Variable` öğesi. Bir rol herhangi bir sayıda ayarlanan ortam değişkenlerine sahip olabilir.
+##  <a name="Environment"></a>Ortamınızın  
+Öğesi `Environment` , bir Web rolü için ortam değişkeni ayarlarının koleksiyonunu açıklar. Bu öğe, `Variable` öğesinin üst öğesidir. Rol herhangi bir sayıda ortam değişkeni kümesine sahip olabilir.
 
-##  <a name="Variable"></a> Değişkeni  
-`Variable` Öğesi, konuk işletim ayarlamak için bir ortam değişkenini belirtir.
+##  <a name="Variable"></a>Değişken  
+Öğesi `Variable` , Konuk işletim içinde ayarlanacak bir ortam değişkenini belirtir.
 
-`Variable` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Variable` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Variable` öğesi:  
+Aşağıdaki tablo, `Variable` öğesinin özniteliklerini açıklar:  
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Ayarlanacak ortam değişkeninin adı.|  
-|value|string|İsteğe bağlı. Ortam değişkeni için ayarlanacak değer. Bir değer özniteliği içermelidir veya `RoleInstanceValue` öğesi.|  
+|name|dize|Gerekli. Ayarlanacak ortam değişkeninin adı.|  
+|value|dize|İsteğe bağlı. Ortam değişkeni için ayarlanacak değer. Bir değer özniteliği veya bir `RoleInstanceValue` öğesi dahil etmeniz gerekir.|  
 
-##  <a name="RoleInstanceValue"></a> RoleInstanceValue  
-`RoleInstanceValue` Öğesi, değişkenin değerini almak xPath belirtir.
+##  <a name="RoleInstanceValue"></a>Roleınstancevalue  
+`RoleInstanceValue` Öğesi, değişkenin değerinin alınacağı XPath 'i belirtir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `RoleInstanceValue` öğesi.
+Aşağıdaki tablo, `RoleInstanceValue` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|XPath|string|İsteğe bağlı. Konumu yolu bir örneği için dağıtım ayarları. Daha fazla bilgi için [XPath yapılandırma değişkenleriyle](cloud-services-role-config-xpath.md).<br /><br /> Bir değer özniteliği içermelidir veya `RoleInstanceValue` öğesi.|  
+|XPath|dize|İsteğe bağlı. Örnek için dağıtım ayarlarının konum yolu. Daha fazla bilgi için bkz. [XPath Ile yapılandırma değişkenleri](cloud-services-role-config-xpath.md).<br /><br /> Bir değer özniteliği veya bir `RoleInstanceValue` öğesi dahil etmeniz gerekir.|  
 
-##  <a name="EntryPoint"></a> Giriş noktası  
-`EntryPoint` Öğesi, bir rol için giriş noktasını belirtir. Bu öğenin üst öğesi değil `NetFxEntryPoint` öğeleri. Bu öğeleri rol giriş noktası olarak görev yapacak bir uygulamayı WaWorkerHost.exe varsayılan dışındaki belirtmenizi sağlar.
+##  <a name="EntryPoint"></a>Noktası  
+Öğesi `EntryPoint` , bir rolün giriş noktasını belirtir. Bu öğe, `NetFxEntryPoint` öğelerinin üst öğesidir. Bu öğeler, rol giriş noktası olarak görev yapmak için varsayılan WaWorkerHost. exe dışında bir uygulama belirtmenize olanak tanır.
 
-`EntryPoint` Öğesi, yalnızca Azure SDK'sı sürüm 1.5 kullanılarak kullanılabilirlik veya daha yüksek.
+`EntryPoint` Öğesi yalnızca Azure SDK 1,5 veya üzeri sürümler kullanılarak kullanılabilir.
 
-##  <a name="NetFxEntryPoint"></a> NetFxEntryPoint  
-`NetFxEntryPoint` Öğesi, bir rol için çalıştırılacak programı belirtir.
+##  <a name="NetFxEntryPoint"></a>NetFxEntryPoint  
+Öğesi `NetFxEntryPoint` , bir rol için çalıştırılacak programı belirtir.
 
 > [!NOTE]
->  `NetFxEntryPoint` Öğesi, yalnızca Azure SDK'sı sürüm 1.5 kullanılarak kullanılabilirlik veya daha yüksek.
+>  `NetFxEntryPoint` Öğesi yalnızca Azure SDK 1,5 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `NetFxEntryPoint` öğesi.
+Aşağıdaki tablo, `NetFxEntryPoint` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|AssemblyName|string|Gereklidir. Giriş noktasını içeren derleme yolu ve dosya adı. Klasörüyle ilgili yol olduğu  **\\%ROLEROOT%\Approot** (belirtmeyin  **\\%ROLEROOT%\Approot** içinde `commandLine`, kabul edilir). **ROLEROOT %** bir ortam değişkeni, Azure tarafından korunur ve rolünüz için kök klasör konumunu gösterir. **\\%ROLEROOT%\Approot** klasör rolünüz için uygulama klasörü temsil eder.<br /><br /> HWC rolleri için her zaman göreli yoludur  **\\%ROLEROOT%\Approot\bin** klasör.<br /><br /> Tam IIS ve IIS Express web rolleri, derlemenin göreli bulunamazsa  **\\%ROLEROOT%\Approot** klasöründe  **\\%ROLEROOT%\Approot\bin** aranır.<br /><br /> Bu sıfırlamaya davranış tam IIS için önerilen en iyi yöntem değildir ve belki ileride sürümleri kaldırıldı.|  
-|targetFrameworkVersion|string|Gereklidir. Derlemeyi .NET framework sürümü. Örneğin, `targetFrameworkVersion="v4.0"`.|  
+|assemblyName|dize|Gerekli. Giriş noktasını içeren derlemenin yolu ve dosya adı. Yol,  **\\%roleroot%\approot** klasörüne göredir (içinde `commandLine`  **\\%roleroot%\approot** belirtmeyin, kabul edilir). **% Roleroot%** , Azure tarafından tutulan bir ortam değişkenidir ve rolünüz için kök klasör konumunu temsil eder. %Roleroot%\approot klasörü, rolünüzün uygulama klasörünü temsil eder.  **\\**<br /><br /> HWC rolleri için yol her zaman  **\\%roleroot%\approot\bin** klasörüne görelidir.<br /><br /> Tam IIS ve IIS Express Web rolleri için, derleme  **\\%roleroot%\approot** klasörüne göre bulunamıyorsa,  **\\%roleroot%\approot\bin** aranır.<br /><br /> Tam IIS için bu geri dönüş davranışı önerilen bir uygulama değildir ve gelecekteki sürümlerde kaldırılmış olabilir.|  
+|targetFrameworkVersion|dize|Gerekli. Derlemenin oluşturulduğu .NET Framework sürümü. Örneğin: `targetFrameworkVersion="v4.0"`.|  
 
-##  <a name="Sites"></a> Siteleri  
-`Sites` Öğesi, bir web rolünde barındırılan Web siteleri ve web uygulamaları koleksiyonunu açıklar. Bu öğenin üst öğesi değil `Site` öğesi. Belirtmezseniz, bir `Sites` öğesi web rolünüz eski web rolü olarak barındırılıyorsa ve yalnızca web rolünüz barındırılan bir Web sitesi olabilir. Bu öğe isteğe bağlıdır ve bir rolü yalnızca bir site blok olabilir.
+##  <a name="Sites"></a>Barındıra  
+Öğesi `Sites` , bir Web rolünde barındırılan Web siteleri ve Web uygulamaları koleksiyonunu açıklar. Bu öğe, `Site` öğesinin üst öğesidir. Bir `Sites` öğe belirtmezseniz Web rolünüzün eski web rolü olarak barındırıldığı ve Web rolünüzde barındırılan bir Web siteniz olabilir. Bu öğe isteğe bağlıdır ve bir rol yalnızca bir siteler bloğuna sahip olabilir.
 
-`Sites` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Sites` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-##  <a name="Site"></a> Site  
-`Site` Öğesi web rolünün parçası olmayan bir Web sitesi veya web uygulamasını belirtir.
+##  <a name="Site"></a>Bölgesi  
+`Site` Öğesi, Web rolünün bir parçası olan bir Web sitesini veya Web uygulamasını belirtir.
 
-`Site` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Site` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Site` öğesi.
+Aşağıdaki tablo, `Site` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Web sitesi ya da uygulamanın adı.|  
-|physicalDirectory|string|Site kökü için içerik dizini konumu. Konumun .csdef konumun göreli veya mutlak bir yol olarak belirtilebilir.|  
+|name|dize|Gerekli. Web sitesinin veya uygulamanın adı.|  
+|physicalDirectory|dize|Site kökünün içerik dizininin konumu. Konum, mutlak bir yol veya. csdef konumuna göre belirtilebilir.|  
 
-##  <a name="VirtualApplication"></a> VirtualApplication  
-`VirtualApplication` Öğe tanımlar uygulama Internet Information Services (IIS) içerik teslim eder ya da HTTP gibi protokoller üzerinden hizmetler sağlayan bir gruplandırma dosyalarının 7'dir. IIS 7'de bir uygulama oluşturduğunuzda, uygulamanın yolu site URL'SİNİN bir parçası haline gelir.
+##  <a name="VirtualApplication"></a>VirtualApplication  
+`VirtualApplication` Öğesi Internet Information Services (IIS) 7 ' de bir uygulamayı tanımlar, içerik teslim eden veya http gibi protokoller üzerinden hizmetler sağlayan bir dosya grubudur. IIS 7 ' de bir uygulama oluşturduğunuzda, uygulamanın yolu site URL 'sinin bir parçası haline gelir.
 
-`VirtualApplication` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`VirtualApplication` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `VirtualApplication` öğesi.
+Aşağıdaki tablo, `VirtualApplication` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Sanal uygulama tanımlamak için bir ad belirtir.|  
-|physicalDirectory|string|Gereklidir. Geliştirme makinesinde içeren sanal uygulama yolunu belirtir. İşlem öykünücüsü'nde, bu konumdan içeriği almak için IIS yapılandırılır. Azure'a dağıtırken fiziksel dizin içeriğini hizmeti geri kalanı ile birlikte paketlenmiştir. Hizmet paketi Azure'a dağıtıldığında, IIS paketten çıkarılan içeriği konumu ile yapılandırılır.|  
+|name|dize|Gerekli. Sanal uygulamayı tanımlayacak bir ad belirtir.|  
+|physicalDirectory|dize|Gerekli. Geliştirme makinesindeki sanal uygulamayı içeren yolu belirtir. İşlem öykünücüsünde IIS bu konumdan içerik almak üzere yapılandırılmıştır. Azure 'a dağıtım yaparken, fiziksel dizin içeriği hizmetin geri kalanı ile birlikte paketlenir. Hizmet paketi Azure 'a dağıtıldığında, IIS, paketi açılan içeriklerin konumuyla yapılandırılır.|  
 
-##  <a name="VirtualDirectory"></a> Sanal dizin  
-`VirtualDirectory` Öğeyi belirten bir dizin adı (yol olarak da bilinir), IIS'de belirttiğiniz ve eşlemek için bir yerel veya uzak sunucuda fiziksel bir dizin.
+##  <a name="VirtualDirectory"></a>Dizin  
+Öğesi `VirtualDirectory` , IIS 'de belirttiğiniz bir dizin adı (yol da denir) belirtir ve yerel veya uzak bir sunucuda fiziksel bir dizine eşlenir.
 
-`VirtualDirectory` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`VirtualDirectory` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `VirtualDirectory` öğesi.
+Aşağıdaki tablo, `VirtualDirectory` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Sanal dizin tanımlamak için bir ad belirtir.|  
-|value|physicalDirectory|Gereklidir. Web sitesi veya sanal dizin içeriğini içeren geliştirme makinesinde yolunu belirtir. İşlem öykünücüsü'nde, bu konumdan içeriği almak için IIS yapılandırılır. Azure'a dağıtırken fiziksel dizin içeriğini hizmeti geri kalanı ile birlikte paketlenmiştir. Hizmet paketi Azure'a dağıtıldığında, IIS paketten çıkarılan içeriği konumu ile yapılandırılır.|  
+|name|dize|Gerekli. Sanal dizini tanımlayacak bir ad belirtir.|  
+|value|physicalDirectory|Gerekli. Geliştirme makinesindeki Web sitesini veya sanal dizin içeriğini içeren yolu belirtir. İşlem öykünücüsünde IIS bu konumdan içerik almak üzere yapılandırılmıştır. Azure 'a dağıtım yaparken, fiziksel dizin içeriği hizmetin geri kalanı ile birlikte paketlenir. Hizmet paketi Azure 'a dağıtıldığında, IIS, paketi açılan içeriklerin konumuyla yapılandırılır.|  
 
-##  <a name="Bindings"></a> Bağlamaları  
-`Bindings` Öğesi için bir Web sitesi bağlamalarını koleksiyonunu açıklar. Üst öğesidir `Binding` öğesi. Öğe için gerekli her `Site` öğesi. Uç noktalarını yapılandırma hakkında daha fazla bilgi için bkz. [Etkinleştir iletişim rol örnekleri için](cloud-services-enable-communication-role-instances.md).
+##  <a name="Bindings"></a>Lara  
+Öğesi `Bindings` , bir Web sitesi için bağlama koleksiyonunu açıklar. Bu, `Binding` öğesinin üst öğesidir. Öğesi her `Site` öğe için gereklidir. Uç noktaları yapılandırma hakkında daha fazla bilgi için bkz. [rol örnekleri Için Iletişimi etkinleştirme](cloud-services-enable-communication-role-instances.md).
 
-`Bindings` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Bindings` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-##  <a name="Binding"></a> Bağlama  
-`Binding` Öğesi, bir Web sitesi veya web uygulamasıyla iletişim kurmak istekler için gerekli yapılandırma bilgilerini belirtir.
+##  <a name="Binding"></a>Bağlayıcısı  
+Öğesi `Binding` , bir Web sitesi veya Web uygulamasıyla iletişim kurmak için istekler için gereken yapılandırma bilgilerini belirtir.
 
-`Binding` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Binding` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|name|string|Gereklidir. Bu bağlamayı tanımlamak için bir ad belirtir.|  
-|Uçnoktaadı|string|Gereklidir. Bağlamak için uç nokta adı belirtir.|  
-|AnaBilgisayarÜstbilgisi|string|İsteğe bağlı. Farklı bir ana bilgisayar adları, tek bir IP adresini/bağlantı noktası numarası bileşimi ile birden çok site barındırma olanak tanıyan bir ana bilgisayar adını belirtir.|  
+|name|dize|Gerekli. Bağlamayı tanımlayacak bir ad belirtir.|  
+|Uçnoktaadı|dize|Gerekli. Bağlanacak bitiş noktası adını belirtir.|  
+|hostHeader|dize|İsteğe bağlı. Tek bir IP adresi/bağlantı noktası numarası birleşimine sahip birden fazla siteyi, farklı ana bilgisayar adlarıyla barındırmanıza olanak tanıyan bir ana bilgisayar adı belirtir.|  
 
-##  <a name="Startup"></a> Başlangıç  
-`Startup` Rolü başlatıldığında çalıştırılan görev koleksiyonunu açıklar. Bu öğenin üst öğesi olabilir `Variable` öğesi. Rol başlangıç görevleri kullanma hakkında daha fazla bilgi için bkz. [başlangıç görevlerini yapılandırma](cloud-services-startup-tasks.md). Bu öğe isteğe bağlıdır ve yalnızca bir başlangıç bloğu bir role sahip olabilir.
+##  <a name="Startup"></a>Başlangıç  
+`Startup` Öğesi, rol başlatıldığında çalışan bir görev koleksiyonu tanımlar. Bu öğe, `Variable` öğesinin üst öğesi olabilir. Rol başlangıç görevlerini kullanma hakkında daha fazla bilgi için bkz. [başlangıç görevlerini yapılandırma](cloud-services-startup-tasks.md). Bu öğe isteğe bağlıdır ve bir rol yalnızca bir başlangıç bloğuna sahip olabilir.
 
-Öznitelik, aşağıdaki tabloda açıklanmıştır `Startup` öğesi.
+Aşağıdaki tabloda `Startup` öğesi özniteliği açıklanmaktadır.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|öncelik|int|Yalnızca iç kullanım içindir.|  
+|priority|int|Yalnızca iç kullanım içindir.|  
 
-##  <a name="Task"></a> Görev  
-`Task` Öğesi rol başladığında gerçekleşir başlangıç görevi belirtir. Başlangıç görevleri, tür yükleme yazılım bileşenlerini çalıştırmak veya diğer uygulamaları çalıştırmak için rol hazırlama görevleri gerçekleştirmek için kullanılabilir. Görevleri yürütme göründükleri içinde sırayla `Startup` öğe bloğu.
+##  <a name="Task"></a>Görevinin  
+`Task` Öğesi, rol başladığında gerçekleşen başlangıç görevini belirler. Başlangıç görevleri, rolü bu Install yazılım bileşenlerini çalıştırmak veya diğer uygulamaları çalıştırmak için hazırlayan görevleri gerçekleştirmek için kullanılabilir. Görevler, `Startup` öğe bloğunda göründükleri sırada yürütülür.
 
-`Task` Öğesi, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+`Task` Öğesi yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Task` öğesi.
+Aşağıdaki tablo, `Task` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|komut satırı|string|Gereklidir. Çalıştırılacak komutları içeren bir CMD dosyası gibi bir betik. Başlangıç komutu ve toplu iş dosyaları ANSI biçimde kaydedilmesi gerekir. Dosyanın başında bayt sırası işaret Ayarla dosya biçimleri düzgün şekilde işlemez.|  
-|executionContext|string|Betiğin çalıştırıldığı bağlam belirtir.<br /><br /> -   `limited` [– Barındırma işlemi rolle aynı ayrıcalıklarla çalıştır varsayılan].<br />-   `elevated` – Yönetici ayrıcalıklarıyla çalıştırın.|  
-|taskType|string|Komutun yürütme davranışını belirtir.<br /><br /> -   `simple` [Varsayılan] – sistemi herhangi bir görevi tasarlandıkça önce çıkmak görevin tamamlanmasını bekler.<br />-   `background` – Sistem çıkmak görevin tamamlanmasını beklemez.<br />-   `foreground` – Benzer arka plan, tüm ön plan görevlerini çıkana kadar rolü yeniden başlatılmaz.|  
+|Komut satırı|dize|Gerekli. Çalıştırılacak komutları içeren bir komut dosyası (örneğin, CMD dosyası). Başlangıç komutu ve toplu iş dosyalarının ANSI biçiminde kaydedilmesi gerekir. Dosyanın başlangıcında bir bayt düzeni işaretçisi ayarlanan dosya biçimleri düzgün şekilde çalışmaz.|  
+|executionContext|dize|Betiğin çalıştırıldığı bağlamı belirtir.<br /><br /> -   `limited`[Varsayılan] – işlemi barındıran rolle aynı ayrıcalıklarla çalıştırın.<br />-   `elevated`– Yönetici ayrıcalıklarıyla çalıştırın.|  
+|taskType|dize|Komutun yürütme davranışını belirtir.<br /><br /> -   `simple`[Varsayılan] – sistem, diğer tüm görevler başlatılmadan önce görevin çıkmasını bekler.<br />-   `background`– Sistem, görevin çıkış gelmesini beklemez.<br />-   `foreground`– Arka plana benzer, ancak tüm ön plan görevleri çıkana kadar rol yeniden başlatılmaz.|  
 
-##  <a name="Contents"></a> İçeriği  
-`Contents` Öğesi, bir web rolü için içerik koleksiyonunu açıklar. Bu öğenin üst öğesi değil `Content` öğesi.
+##  <a name="Contents"></a>Dekiler  
+`Contents` Öğesi bir Web rolü için içerik koleksiyonunu açıklar. Bu öğe, `Content` öğesinin üst öğesidir.
 
-`Contents` Öğesi, yalnızca Azure SDK'sı sürüm 1.5 kullanılarak kullanılabilirlik veya daha yüksek.
+`Contents` Öğesi yalnızca Azure SDK 1,5 veya üzeri sürümler kullanılarak kullanılabilir.
 
-##  <a name="Content"></a> İçeriği  
-`Content` Öğe içeriği, Azure sanal makinesi ve bunun kopyalandığı hedef yol için Kopyalanacak kaynak konumunu tanımlar.
+##  <a name="Content"></a>İçeriði  
+`Content` Öğesi, Azure sanal makinesine kopyalanacak içeriğin kaynak konumunu ve kopyalandığı hedef yolu tanımlar.
 
-`Content` Öğesi, yalnızca Azure SDK'sı sürüm 1.5 kullanılarak kullanılabilirlik veya daha yüksek.
+`Content` Öğesi yalnızca Azure SDK 1,5 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `Content` öğesi.
+Aşağıdaki tablo, `Content` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|destination|string|Gereklidir. Azure sanal makinesine içeriği yerleştirildiği konum. Bu konum klasörüyle ilgili olan **%ROLEROOT%\Approot**.|  
+|destination|dize|Gerekli. Azure sanal makinesinde içeriğin yerleştirildiği konum. Bu konum **%Roleroot%\approot**klasörüne göredir.|  
 
-Bu öğenin üst öğesi olan `SourceDirectory` öğesi.
+Bu öğe, `SourceDirectory` öğesinin üst öğesidir.
 
-##  <a name="SourceDirectory"></a> SourceDirectory  
-`SourceDirectory` Öğe içeriği kopyalandığı yerel dizin tanımlar. Azure sanal makineye kopyalamak için yerel içeriği belirtmek için bu öğeyi kullanırsınız.
+##  <a name="SourceDirectory"></a>SourceDirectory  
+`SourceDirectory` Öğesi, içeriğin kopyalandığı yerel dizini tanımlar. Azure sanal makinesine kopyalanacak yerel içeriği belirtmek için bu öğeyi kullanın.
 
-`SourceDirectory` Öğesi, yalnızca Azure SDK'sı sürüm 1.5 kullanılarak kullanılabilirlik veya daha yüksek.
+`SourceDirectory` Öğesi yalnızca Azure SDK 1,5 veya üzeri sürümler kullanılarak kullanılabilir.
 
-Aşağıdaki tabloda özniteliklerini açıklayan `SourceDirectory` öğesi.
+Aşağıdaki tablo, `SourceDirectory` öğesinin özniteliklerini açıklar.
 
-| Öznitelik | Tür | Açıklama |  
+| Öznitelik | Type | Açıklama |  
 | --------- | ---- | ----------- |  
-|yol|string|Gereklidir. Azure sanal makinesine içerikleri kopyalanacak yerel bir dizine göreli veya mutlak yolu. Ortam değişkenlerini dizin yolunda genişletme desteklenir.|  
+|path|dize|Gerekli. İçerikleri Azure sanal makinesine kopyalanacak olan yerel bir dizinin göreli veya mutlak yolu. Dizin yolundaki ortam değişkenlerinin genişletilmesi desteklenir.|  
   
 ## <a name="see-also"></a>Ayrıca Bkz.
-[Bulut hizmeti (Klasik) tanım Şeması](schema-csdef-file.md)
+[Bulut hizmeti (klasik) Tanım Şeması](schema-csdef-file.md)

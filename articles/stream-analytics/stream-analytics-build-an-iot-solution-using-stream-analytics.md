@@ -9,12 +9,12 @@ ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 12/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 5b2c153646021aeb8ee0dbb787cfce41af19568d
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 4b250a5e14ab37553d93453d05f8ff388bf1ba84
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67443669"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67620515"
 ---
 # <a name="build-an-iot-solution-by-using-stream-analytics"></a>Stream Analytics kullanarak bir IOT çözümü oluşturma
 
@@ -164,7 +164,7 @@ Bir kaynak grubunda birlikte birkaç tıklamayla kolayca dağıtılabilir çeşi
 
    Sorgunun amacı paraphrase için ücretli standına girin taşıtlardan sayısını gerektiğini varsayalım. Otoyol Ücretli standına girme taşıtlardan sürekli bir akışı olduğundan, hiçbir zaman durduran bir akışa giriş olayları benzer olanlardır. Bir "süre" tanımlamak zorunda akış ölçmek için üzerinden ölçmek için. Şimdi "kaç taşıtlardan Ücretli standına üç dakikada bir için enter?" sorusuna daha İyileştir Bu genellikle atlayan sayım olarak adlandırılır.
 
-   Gördüğünüz gibi Azure Stream Analytics sorgu zamanla ilişkili yönlerini belirlemek için birkaç uzantıları ekler ve SQL gibi bir sorgu dili kullanır.  Hakkında daha fazla ayrıntı için okuma [zaman Yönetimi](https://msdn.microsoft.com/library/azure/mt582045.aspx) ve [Pencereleme](https://msdn.microsoft.com/library/azure/dn835019.aspx) sorguda kullanılan oluşturur.
+   Gördüğünüz gibi Azure Stream Analytics sorgu zamanla ilişkili yönlerini belirlemek için birkaç uzantıları ekler ve SQL gibi bir sorgu dili kullanır.  Hakkında daha fazla ayrıntı için okuma [zaman Yönetimi](https://docs.microsoft.com/stream-analytics-query/time-management-azure-stream-analytics) ve [Pencereleme](https://docs.microsoft.com/stream-analytics-query/windowing-azure-stream-analytics) sorguda kullanılan oluşturur.
 
 3. TollApp örnek iş girişleri inceleyin. Geçerli sorguyu yalnızca EntryStream giriş kullanılır.
    - **EntryStream** giriştir kuyruklar her zaman bir araba Otoyol üzerinde bir gişe girer temsil eden veri bir olay hub'ı bağlantısı. Örnek bir parçası olan bir web uygulaması, olayları oluşturma ve bu verileri bu olay Hub'ında sıraya alınır. Bu giriş akış sorgusunun FROM yan tümcesinde sorgulanır unutmayın.

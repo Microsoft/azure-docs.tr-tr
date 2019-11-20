@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - Windows Server 2016 VM oluşturma | Microsoft Docs
+title: Azure CLI Betik Örneği - Windows Server 2016 VM oluşturma
 description: Azure CLI Betik Örneği - Windows Server 2016 VM oluşturma
 services: virtual-machines-Windows
 documentationcenter: virtual-machines
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: ''
 ms.assetid: ''
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: vm-Windows
 ms.workload: infrastructure
 ms.date: 02/23/2017
 ms.author: rclaus
-ms.openlocfilehash: 0d1fcc081cd19a141df4a10a4be7a1073f5b39e8
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 3c0710f75df4cdd1cdf015c0acc374a3d06652b7
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60506040"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039870"
 ---
 # <a name="create-a-virtual-machine-with-the-azure-cli"></a>Azure CLI ile sanal makine oluşturma
 

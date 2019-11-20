@@ -33,6 +33,8 @@
           href: visual-search-sdk-node.md
         - name: Python’u kullanma
           href: visual-search-sdk-python.md
+        - name: Java'yı kullanma
+          href: visual-search-sdk-java.md
 - name: Öğreticiler
   items:
     - name: Görüntüyü karşıya yükleme
@@ -52,13 +54,15 @@
     - name: Bing içgörü kullanımı
       href: bing-insights-usage.md
     - name: Görsel Arama API’si analizleri
-      href: bing-visual-search-stats.md
+      maintainContext: true
+      href: ../bing-web-search/bing-web-stats.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Belirteç kullanarak içgörüler edinme
       href: use-insights-token.md
     - name: Küçük resimleri yeniden boyutlandırma ve kırpma
-      href: resize-and-crop-thumbnails.md
+      maintainContext: true
+      href: ../bing-web-search/resize-and-crop-thumbnails.md
     - name: Görüntü içgörüsü belirteçlerini kullanarak bir görüntüyü arama
       href: tutorial-visual-search-insights-token.md
     - name: Tek sayfalı Web uygulaması oluşturma
@@ -72,9 +76,11 @@
         - name: .NET
           href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingvisualsearch?view=azure-dotnet'
         - name: Java
-          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/visualsearch?view=azure-java-stable'
+          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingvisualsearch?view=azure-java-stable'
         - name: Python
           href: 'https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/visualsearch?view=azure-python'
+        - name: Node.js
+          href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-visualsearch/?view=azure-node-latest'
     - name: Kullanım ve görüntüleme gereksinimleri
       href: ../Bing-Web-Search/use-display-requirements.md
       maintainContext: true

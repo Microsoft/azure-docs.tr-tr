@@ -15,12 +15,12 @@ ms.date: 11/08/2018
 ms.author: mimart
 ms.reviewer: japere
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c97729cf7d88ebdeefb44c83eb571bb6d7ebd0ed
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cbc5c356ea5a542fdc12b11aff236c56b146b3d5
+ms.sourcegitcommit: 75a56915dce1c538dc7a921beb4a5305e79d3c7a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65825591"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68477251"
 ---
 # <a name="working-with-claims-aware-apps-in-application-proxy"></a>Uygulama proxy'sinde talep kullanan uygulamalar ile çalışma
 [Talep kullanan uygulamalar](https://msdn.microsoft.com/library/windows/desktop/bb736227.aspx) yeniden yönlendirmesi için güvenlik belirteci hizmeti (STS) gerçekleştirin. STS, bir belirteç lisanslarınıza kullanıcıdan kimlik bilgilerini ister ve ardından kullanıcıyı uygulamaya yönlendirir. Bu yeniden yönlendirme ile çalışmak uygulama proxy'sini etkinleştirmek için birkaç yolu vardır. Talep kullanan uygulamalar için dağıtımınızı yapılandırmak için bu makaleyi kullanın. 
@@ -38,11 +38,11 @@ Talep kullanan uygulamaya yönlendirilir STS şirket içi ağınızın dışınd
 
 İki yoldan biriyle talep kullanan uygulamalar için ADFS yapılandırabilirsiniz. İlk özel etki alanları kullanmaktır. WS-Federasyon ile saniyedir. 
 
-### <a name="option-1-custom-domains"></a>1\. seçenek: Özel etki alanları
+### <a name="option-1-custom-domains"></a>Seçenek 1: Özel etki alanları
 
 Tüm uygulamalarınız için iç URL tam olarak nitelikli etki alanı adlarını (FQDN) sonra yapılandırabileceğiniz [özel etki alanları](application-proxy-configure-custom-domain.md) uygulamalarınız için. İç URL ile aynıdır, dış URL'leri oluşturmak için özel etki alanları kullanın. Ardından, dış URL'leri iç URL'nizde eşleştiğinde, kullanıcılarınızın şirket içi veya uzak olup STS yeniden yönlendirmeleri çalışır. 
 
-### <a name="option-2-ws-federation"></a>2\. seçenek: WS-Federation
+### <a name="option-2-ws-federation"></a>Seçenek 2: WS-Federation
 
 1. AD FS Yönetimi'ni açın.
 2. Git **bağlı olan taraf güvenleri**uygulaması Ara sunucusu ile yayımlama, uygulamayı sağ tıklatın ve seçin **özellikleri**.  
@@ -55,7 +55,7 @@ Tüm uygulamalarınız için iç URL tam olarak nitelikli etki alanı adlarını
    ![Uç nokta - ekleme güvenilen URL değeri - ekran görüntüsü ayarlama](./media/application-proxy-configure-for-claims-aware-applications/appproxyendpointtrustedurl.png)  
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Çoklu oturum açmayı etkinleştirme](configure-single-sign-on-portal.md) talep kullanan olmayan uygulamalar için
+* [Çoklu oturum açmayı etkinleştirme](configure-single-sign-on-non-gallery-applications.md) talep kullanan olmayan uygulamalar için
 * [Yerel istemci uygulama proxy uygulamaları ile etkileşim kurmak etkinleştirin](application-proxy-configure-native-client-application.md)
 
 

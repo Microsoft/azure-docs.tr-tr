@@ -3,9 +3,8 @@ documentType: LandingData
 title: Azure IoT Hub Cihaz Sağlama Hizmeti Belgeleri
 metadata:
   title: 'Azure IoT Hub Cihaz Sağlama Hizmeti Belgeleri - Öğreticiler, API Başvurusu'
-  description: Azure IoT Hub Cihazı Sağlama Hizmeti’ne genel bakış.
+  description: 'Azure IoT Hub Cihazı Sağlama Hizmeti - Öğreticiler, Hızlı Başlangıçlar, Nasıl Yapılır Videoları ve API Başvurusu'
   author: nberdy
-  manager: briz
   ms.service: iot-dps
   services: iot-dps
   ms.topic: landing-page

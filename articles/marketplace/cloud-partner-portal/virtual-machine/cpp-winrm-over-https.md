@@ -1,41 +1,42 @@
 ---
-title: Azure için Windows Uzaktan Yönetimi HTTPS üzerinden | Azure Market
-description: PowerShell ile uzaktan yönetilebilir, Azure'da barındırılan, Windows tabanlı bir VM yapılandırma açıklanmaktadır.
+title: Azure için HTTPS üzerinden Windows Uzaktan Yönetimi | Azure Marketi
+description: Azure 'da barındırılan, Windows tabanlı bir VM 'nin PowerShell ile uzaktan yönetilebilmesi için nasıl yapılandırılacağı açıklanmaktadır.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 11/26/2018
 ms.author: pabutler
-ms.openlocfilehash: fb661a2705d437d1f40ceebcad7e759c2a78540f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e39f83b2ed715afbfff69770c151cfc4d527105d
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938219"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74132268"
 ---
-# <a name="windows-remote-management-over-https"></a>HTTPS üzerinden Windows Uzak Yönetimi
+# <a name="windows-remote-management-over-https"></a>HTTPS üzerinden Windows Uzaktan Yönetimi
 
-Bu bölümde, yönetilen ve PowerShell ile uzaktan dağıtılması için Azure'da barındırılan, Windows tabanlı bir VM yapılandırma açıklanmaktadır.  PowerShell uzaktan iletişimini etkinleştirmek için hedef sanal Makineyi bir Windows Uzaktan Yönetim (WinRM) HTTPS uç noktasını açığa çıkarmalıdır.  PowerShell uzaktan iletişimi hakkında daha fazla bilgi için bkz: [çalıştıran uzak komutları](https://docs.microsoft.com/powershell/scripting/core-powershell/running-remote-commands?view=powershell-6).  WinRM hakkında daha fazla bilgi için bkz: [Windows Uzaktan Yönetimi](https://docs.microsoft.com/windows/desktop/WinRM/portal).
+Bu bölümde, Azure 'da barındırılan, Windows tabanlı bir VM 'nin PowerShell ile uzaktan yönetilebilmesi ve dağıtılması için nasıl yapılandırılacağı açıklanmaktadır.  PowerShell uzaktan iletişimini etkinleştirmek için hedef VM 'nin bir Windows Uzaktan Yönetimi (WinRM) HTTPS uç noktasını kullanıma sunması gerekir.  PowerShell uzaktan iletişimi hakkında daha fazla bilgi için bkz. [uzak komutları çalıştırma](https://docs.microsoft.com/powershell/scripting/learn/remoting/running-remote-commands).  WinRM hakkında daha fazla bilgi için bkz. [Windows Uzaktan Yönetimi](https://docs.microsoft.com/windows/desktop/WinRM/portal).
 
-"Klasik" Azure yaklaşımlardan birini kullanarak bir VM oluşturduysanız — Azure Service Manager portalı veya kullanım dışı [Azure Hizmet Yönetimi API'si](https://docs.microsoft.com/previous-versions/azure/ee460799(v=azure.100))— sonra bir WinRM uç noktasıyla otomatik olarak yapılandırılır.  Ancak, bir VM oluşturursanız, aşağıdakilerden herhangi birini kullanarak "modern" Azure yaklaşıyor sonra VM'nizi olacak *değil* , HTTPS üzerinden WinRM için yapılandırılmış.  
+"Klasik" Azure yaklaşımlardan birini (Azure Service Manager portalı veya kullanım dışı bırakılmış [azure hizmet yönetim API'si](https://docs.microsoft.com/previous-versions/azure/ee460799(v=azure.100))) kullanarak bir VM oluşturduysanız, otomatik olarak bir WinRM uç noktası ile yapılandırılır.  Ancak, aşağıdaki "modern" Azure yaklaşımının birini kullanarak bir VM oluşturursanız, VM 'niz HTTPS üzerinden WinRM için *yapılandırılmayacak.*
 
-- Kullanarak [Azure portalında](https://portal.azure.com/), genellikle bölümünde açıklandığı gibi onaylı bir temel gelen [Azure ile uyumlu bir VHD oluşturun](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/virtual-machine/cpp-create-vhd)
+- [Azure ile uyumlu bır VHD oluşturma](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/virtual-machine/cpp-create-vhd) bölümünde açıklandığı gibi, genellikle onaylanan bir tabandan [Azure Portal](https://portal.azure.com/)kullanma
 - [Azure Resource Manager şablonlarını kullanma](https://docs.microsoft.com/azure/virtual-machines/windows/ps-template)
-- Azure PowerShell veya Azure CLI komut kabuğunu kullanma.  Örnekler için bkz [hızlı başlangıç: PowerShell ile azure'da Windows sanal makine oluşturma](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-powershell) ve [hızlı başlangıç: Azure CLI ile Linux sanal makinesi oluşturma](https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-cli).
+- Azure PowerShell veya Azure CLı komut kabuğunu kullanma.  Örnekler için bkz. [hızlı başlangıç: Azure 'Da PowerShell Ile Windows sanal makinesi oluşturma](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-powershell) ve [hızlı başlangıç: Azure CLI ile Linux sanal makinesi oluşturma](https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-cli).
 
-Bu WinRM uç nokta ayrıca yetiştirme sertifika Araç Seti VM çalıştırmak için açıklandığı gibi gerekli [VM görüntünüzü sertifika](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/virtual-machine/cpp-certify-vm).
+Bu WinRM uç noktası, VM [görüntünüzü onaylama](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/virtual-machine/cpp-certify-vm)bölümünde AÇıKLANDıĞı gibi VM 'yi ekleme için sertifika araç setini çalıştırmak için de gereklidir.
 
-Buna karşılık, genellikle Linux Vm'leri uzaktan kullanarak yönetilen [Azure CLI](https://docs.microsoft.com/cli/azure) veya SSH konsolundan Linux komutları.  Azure için alternatif çeşitli yöntemler sunar [Linux VM'nize betikleri çalıştırma](https://docs.microsoft.com/azure/virtual-machines/linux/run-scripts-in-vm).  Daha karmaşık senaryolarda, Windows veya Linux tabanlı VM'ler için kullanılabilen bir dizi otomasyon ve tümleştirme çözümleri vardır.
+Buna karşılık, genellikle Linux VM 'Ler bir SSH konsolundan [Azure CLI](https://docs.microsoft.com/cli/azure) veya Linux komutları kullanılarak uzaktan yönetilir.  Azure, [LINUX sanal makinenizde betikleri çalıştırmak](https://docs.microsoft.com/azure/virtual-machines/linux/run-scripts-in-vm)için çeşitli alternatif yöntemler de sağlar.  Daha karmaşık senaryolar için, Windows veya Linux tabanlı VM 'Ler için kullanabileceğiniz çeşitli otomasyon ve tümleştirme çözümleri vardır.
 
 
-## <a name="configure-and-deploy-with-winrm"></a>Yapılandırma ve WinRM ile dağıtma
+## <a name="configure-and-deploy-with-winrm"></a>WinRM ile yapılandırma ve dağıtma
 
-WinRM uç nokta windows tabanlı bir VM için iki farklı aşamalarında, geliştirme sırasında yapılandırılabilir:
+Windows tabanlı bir VM için WinRM uç noktası, geliştirmenin iki farklı aşamasında yapılandırılabilir:
 
-- Oluşturma sırasında - varolan bir VHD'yi bir VM dağıtımı sırasında.  Yeni teklifler için tercih edilen yaklaşım budur.  Bu yaklaşım, sağlanan Azure Resource Manager şablonlarını kullanarak bir Azure sertifikası oluşturulmasını gerektirir ve PowerShell betikleri çalıştırma özelleştirilebilir. 
-- Dağıtımdan sonra - Azure'da barındırılan mevcut bir VM üzerinde.  Zaten Azure'da dağıtılan bir VM çözümü varsa ve pencere uzaktan yönetimi etkinleştirmek gereken bu yaklaşımı kullanın.  Bu yaklaşım, Azure portalında ve hedef VM'de bir betik yürütme işlemi el ile yapılan değişiklikler gerektirir. 
+- Oluşturma sırasında-VM 'nin mevcut bir VHD 'ye dağıtılması sırasında.  Bu, yeni teklifler için tercih edilen yaklaşımdır.  Bu yaklaşım, sağlanan Azure Resource Manager şablonlarını kullanarak ve özelleştirilmiş PowerShell betikleri çalıştırarak bir Azure sertifikası oluşturulmasını gerektirir.
+- Dağıtımdan sonra, Azure 'da barındırılan mevcut bir VM 'de.  Azure üzerinde dağıtılmış bir VM çözümünüz varsa ve bu yaklaşım için pencere uzak yönetimini etkinleştirmeniz gerekiyorsa bu yaklaşımı kullanın.  Bu yaklaşım, Azure portal ve hedef VM üzerinde bir betiğin yürütülmesi için el ile yapılan değişiklikler gerektirir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yeni bir sanal makine oluşturuyorsanız, WinRM sırasında etkinleştirebilirsiniz [dağıtım kendi vhd'lerden sanal makinenizin](./cpp-deploy-vm-vhd.md).  Aksi takdirde, varolan bir VM'yi WinRM etkinleştirilebilir  
+Yeni bir VM oluşturuyorsanız, [sanal makinenizin VHD 'lerinden dağıtımı](./cpp-deploy-vm-vhd.md)sırasında WinRM 'yi etkinleştirebilirsiniz.  Aksi halde, WinRM mevcut bir VM 'de etkinleştirilebilir

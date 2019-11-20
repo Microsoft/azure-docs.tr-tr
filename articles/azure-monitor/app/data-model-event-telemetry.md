@@ -1,35 +1,31 @@
 ---
-title: Azure Application Insights Telemetri veri modeli - olay Telemetrisi | Microsoft Docs
-description: Olay telemetrisi için Application Insights veri modeli
-services: application-insights
-documentationcenter: .net
-author: mrbullwinkle
-manager: carmonm
-ms.service: application-insights
-ms.workload: TBD
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Telemetri veri modeli-olay telemetrisi | Microsoft Docs
+description: Olay telemetrisi için veri modeli Application Insights
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: mrbullwinkle
+ms.author: mbullwin
 ms.date: 04/25/2017
 ms.reviewer: sergkanz
-ms.author: mbullwin
-ms.openlocfilehash: 8e519e5a5e5fe6b893fa5663e1426630f46f885f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 620983fb2174fe7f32a61503b0b87e8e7ce0c330
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60900859"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72678141"
 ---
-# <a name="event-telemetry-application-insights-data-model"></a>Olay telemetri: Application Insights veri modeli
+# <a name="event-telemetry-application-insights-data-model"></a>Olay telemetrisi: Application Insights veri modeli
 
-Olay telemetri öğelerini oluşturabilirsiniz (içinde [Application Insights](../../azure-monitor/app/app-insights-overview.md)), uygulamanızda gerçekleşen bir olayı göstermek için. Genellikle düğmesine tıklayın veya kullanıma alma siparişi gibi bir kullanıcı etkileşimi olduğu. Uygulama yaşam döngüsü olay başlatma ya da yapılandırma güncelleştirme gibi da olabilir. 
+Uygulamanızda gerçekleşen bir olayı göstermek için olay telemetrisi öğeleri ( [Application Insights](../../azure-monitor/app/app-insights-overview.md)) oluşturabilirsiniz. Genellikle, düğme tıklama veya siparişi teslim alma gibi bir Kullanıcı etkileşimidir. Ayrıca, başlatma veya yapılandırma güncelleştirmesi gibi bir uygulama yaşam döngüsü olayı da olabilir. 
 
-Anlamsal olarak, olaylar olabilir veya isteklerine ilişkili değil. Ancak, doğru kullandıysanız, olay telemetri isteklerini veya izlemeleri daha daha önemlidir. Olayları iş telemetriyi temsil eder ve ayırmak için bir konu daha az agresiftir [örnekleme](../../azure-monitor/app/api-filtering-sampling.md).
+Anlamsal olarak olaylar, isteklerle bağıntılı olabilir veya olmayabilir. Ancak, düzgün şekilde kullanılırsa, olay telemetrisi isteklerden veya İzlemelerden daha önemlidir. Olaylar iş telemetrisini temsil eder ve ayrı, daha az agresif [örneklemeye](../../azure-monitor/app/api-filtering-sampling.md)tabi olmalıdır.
 
-## <a name="name"></a>Ad
+## <a name="name"></a>Adı
 
-Olay adı. Uygun gruplandırma ve yararlı ölçümler izin vermek için ayrı olay adları az sayıda oluşturur, böylece uygulamanız kısıtlayın. Örneğin, bir olayın oluşturulan her örneği için ayrı bir ad kullanmayın.
+Olay adı. Doğru gruplandırılmasına ve yararlı ölçümlere izin vermek için uygulamanızı, az sayıda ayrı olay adı oluşturacak şekilde kısıtlayın. Örneğin, bir olayın oluşturulan her örneği için ayrı bir ad kullanmayın.
 
-En fazla uzunluk: 512 karakteri
+Maksimum Uzunluk: 512 karakter
 
 ## <a name="custom-properties"></a>Özel Özellikler
 
@@ -41,6 +37,6 @@ En fazla uzunluk: 512 karakteri
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz: [veri modeli](data-model.md) için Application Insights türleri ve veri modeli.
-- [Özel olay telemetri yazma](../../azure-monitor/app/api-custom-events-metrics.md#trackevent)
-- Kullanıma [platformları](../../azure-monitor/app/platforms.md) Application Insights tarafından desteklenir.
+- Application Insights türleri ve veri modeli için [veri modeli](data-model.md) 'ne bakın.
+- [Özel olay telemetrisini yazma](../../azure-monitor/app/api-custom-events-metrics.md#trackevent)
+- Application Insights tarafından desteklenen [platformları](../../azure-monitor/app/platforms.md) inceleyin.

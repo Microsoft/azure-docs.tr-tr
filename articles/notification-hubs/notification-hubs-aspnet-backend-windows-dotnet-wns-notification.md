@@ -2,9 +2,9 @@
 title: Azure Notification Hubs kullanarak belirli kullanıcılara bildirim gönderme | Microsoft Docs
 description: Evrensel Windows Platformu (UWP) uygulamalarını kullanarak belirli kullanıcılara bildirim göndermeyi öğrenin.
 documentationcenter: windows
-author: jwargo
-manager: patniko
-editor: spelluru
+author: sethmanheim
+manager: femila
+editor: jwargo
 services: notification-hubs
 ms.assetid: 012529f2-fdbc-43c4-8634-2698164b5880
 ms.service: notification-hubs
@@ -14,15 +14,17 @@ ms.devlang: dotnet
 ms.topic: tutorial
 ms.custom: mvc
 ms.date: 03/22/2019
-ms.author: jowargo
-ms.openlocfilehash: 32714b3e5a5ed859716faef2ca660f8b2c90b089
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 03/22/2019
+ms.openlocfilehash: 914ccc2ac74048abb2a66b61aa65b771f8141d5e
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60874293"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71212066"
 ---
-# <a name="tutorial-send-notifications-to-specific-users-by-using-azure-notification-hubs"></a>Öğretici: Azure Notification Hubs'ı kullanarak, belirli kullanıcılara bildirimler gönderme
+# <a name="tutorial-send-notifications-to-specific-users-by-using-azure-notification-hubs"></a>Öğretici: Azure Notification Hubs kullanarak belirli kullanıcılara bildirimler gönderme
 
 [!INCLUDE [notification-hubs-selector-aspnet-backend-notify-users](../../includes/notification-hubs-selector-aspnet-backend-notify-users.md)]
 
@@ -31,7 +33,7 @@ ms.locfileid: "60874293"
 Bu öğreticide, belirli bir cihazdaki belirli bir uygulama kullanıcısına anında iletme bildirimleri göndermek için Azure Notification Hubs’ı nasıl kullanacağınız gösterilmektedir. İstemcilerin kimliğini doğrulamak için bir ASP.NET WebAPI arka ucu kullanılır. Arka uç bir istemci uygulama kullanıcısının kimliğini doğruladığında, bildirimi kaydına otomatik olarak bir etiket ekler. Arka uç, bu etiketi kullanarak belirli bir kullanıcıya bildirimler gönderir.
 
 > [!NOTE]
-> Bu öğreticinin tamamlanan kodu [GitHub'da](https://github.com/Azure/azure-notificationhubs-samples/tree/master/dotnet/NotifyUsers) bulunabilir.
+> Bu öğreticinin tamamlanan kodu [GitHub'da](https://github.com/Azure/azure-notificationhubs-dotnet/tree/master/Samples/NotifyUsers) bulunabilir.
 
 Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
 
@@ -46,25 +48,25 @@ Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticide oluşturduğunuz Visual Studio'nun proje ve bildirim hub'ı geliştirir [Öğreticisi: Azure Notification Hubs'ı kullanarak, Evrensel Windows platformu uygulamaları için bildirimleri gönderecek](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md) öğretici. Bu nedenle, bu öğreticiye başlamadan önce onu tamamlayın.
+Bu öğretici, [öğreticide oluşturduğunuz Notification Hub ve Visual Studio projesi üzerinde oluşturulmuştur: Azure Notification Hubs](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md) öğreticisi kullanarak Evrensel Windows platformu uygulamalarına bildirimler gönderin. Bu nedenle, bu öğreticiye başlamadan önce onu tamamlayın.
 
 > [!NOTE]
 > Azure App Service’te arka uç hizmetiniz olarak Mobile Apps kullanıyorsanız, bu öğreticinin [Mobile Apps sürümüne](../app-service-mobile/app-service-mobile-windows-store-dotnet-get-started-push.md) bakın.
 
 [!INCLUDE [notification-hubs-aspnet-backend-notifyusers](../../includes/notification-hubs-aspnet-backend-notifyusers.md)]
 
-## <a name="update-the-code-for-the-uwp-client"></a>UWP istemci kodunu güncelleştirmesi
+## <a name="update-the-code-for-the-uwp-client"></a>UWP istemcisi için kodu güncelleştirme
 
-Bu bölümde, tamamladığınız için proje kodu güncelleştirme [Öğreticisi: Azure Notification Hubs'ı kullanarak, Evrensel Windows platformu uygulamaları için bildirimleri gönderecek](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md) öğretici. Proje, Windows mağazası ile zaten ilişkilendirilmiş olmalıdır. Ayrıca, bildirim hub'ınızı kullanacak şekilde yapılandırılmış olmalıdır. Bu bölümde, yeni WebAPI arka ucunu çağırmak için kod ekleyecek ve bildirimlere kaydolup bildirim göndermek için kullanacaksınız.
+Bu bölümde, [öğretici için tamamladığınız projedeki kodu güncelleştirin: Azure Notification Hubs](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md) öğreticisi kullanarak Evrensel Windows platformu uygulamalarına bildirimler gönderin. Proje, Windows mağazası ile zaten ilişkilendirilmiş olmalıdır. Ayrıca, bildirim hub'ınızı kullanacak şekilde yapılandırılmış olmalıdır. Bu bölümde, yeni WebAPI arka ucunu çağırmak için kod ekleyecek ve bildirimlere kaydolup bildirim göndermek için kullanacaksınız.
 
-1. Visual Studio'da açmak için oluşturduğunuz çözüm [Öğreticisi: Azure Notification Hubs'ı kullanarak, Evrensel Windows platformu uygulamaları için bildirimleri gönderecek](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md).
-2. Çözüm Gezgini'nde, Evrensel Windows Platformu (UWP) projesine sağ tıklayın ve ardından **NuGet paketlerini Yönet**.
-3. Sol taraftan **Gözat**.
+1. Visual Studio 'da [öğretici için oluşturduğunuz çözümü açın: Azure Notification Hubs](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)kullanarak Evrensel Windows platformu uygulamalarına bildirimler gönderin.
+2. Çözüm Gezgini, Evrensel Windows Platformu (UWP) projesine sağ tıklayın ve ardından **NuGet Paketlerini Yönet**' e tıklayın.
+3. Sol tarafta, **Araştır**' ı seçin.
 4. **Arama** kutusuna **Http İstemcisi** yazın.
 5. Sonuçlar listesinde **System.Net.Http** ve sonra **Yükle**’ye tıklayın. Yüklemeyi tamamlayın.
 6. NuGet **Arama** kutusuna **Json.net** yazın. **Newtonsoft.json** paketini yükleyin ve sonra NuGet Paket Yöneticisi penceresini kapatın.
 7. Çözüm Gezgini'nde, **WindowsApp** projesinde bulunan **MainPage.xaml** dosyasına çift tıklayarak dosyayı Visual Studio düzenleyicisinde açın.
-8. İçinde `MainPage.xaml` XML kodunu değiştirin `<Grid>` bölümü aşağıdaki kod ile: Bu kod ile kullanıcı kimliğini doğrulayan bir kullanıcı adı ve parola metin ekler. Ayrıca, bildirim iletisini ve bildirim alması gereken kullanıcı adı etiketi için metin kutuları ekler:
+8. XML kodunda, `<Grid>` bölümünü aşağıdaki kodla değiştirin: `MainPage.xaml` Bu kod, kullanıcının kimliğini doğruladığı Kullanıcı adı ve parola metin kutusunu ekler. Bildirim iletisi ve bildirimi alması gereken Kullanıcı adı etiketi için de metin kutuları ekler:
 
     ```xml
     <Grid>
@@ -116,7 +118,7 @@ Bu bölümde, tamamladığınız için proje kodu güncelleştirme [Öğreticisi
         </StackPanel>
     </Grid>
     ```
-9. Çözüm Gezgini'nde açın `MainPage.xaml.cs` dosya **(Windows 8.1)** ve **(Windows Phone 8.1)** projeleri. Her iki dosyanın üst kısmına aşağıdaki `using` deyimlerini ekleyin:
+9. Çözüm Gezgini, `MainPage.xaml.cs` **(Windows 8.1)** ve **(Windows Phone 8,1)** projeleri için dosyasını açın. Her iki dosyanın üst kısmına aşağıdaki `using` deyimlerini ekleyin:
 
     ```csharp
     using System.Net.Http;
@@ -126,12 +128,12 @@ Bu bölümde, tamamladığınız için proje kodu güncelleştirme [Öğreticisi
     using Windows.UI.Popups;
     using System.Threading.Tasks;
     ```
-10. İçinde `MainPage.xaml.cs` için **WindowsApp** aşağıdaki üyeyi ekleyin, proje için `MainPage` sınıfı. `<Enter Your Backend Endpoint>` değerini, önceden aldığınız gerçek arka ucun uç noktasıyla değiştirdiğinizden emin olun. Örneğin, `http://mybackend.azurewebsites.net`.
+10. **WindowsApp** projesi için içinde `MainPage` `MainPage.xaml.cs` aşağıdaki üyeyi sınıfına ekleyin. `<Enter Your Backend Endpoint>` değerini, önceden aldığınız gerçek arka ucun uç noktasıyla değiştirdiğinizden emin olun. Örneğin, `http://mybackend.azurewebsites.net`.
 
     ```csharp
     private static string BACKEND_ENDPOINT = "<Enter Your Backend Endpoint>";
     ```
-11. MainPage sınıfında aşağıdaki kodu ekleyin `MainPage.xaml.cs` için **(Windows 8.1)** ve **(Windows Phone 8.1)** projeleri.
+11. Aşağıdaki kodu, `MainPage.xaml.cs` **(Windows 8.1)** ve **(Windows Phone 8,1)** projeleri için içindeki MainPage sınıfına ekleyin.
 
     `PushClick` yöntemi, **Anında İletme Bildirimi Gönder** düğmesinin tıklama işleyicisidir. `to_tag` parametresiyle eşleşen bir kullanıcı adı etiketine sahip tüm cihazlarda bir bildirimi tetiklemek için arka ucu çağırır. Bildirim iletisi, istek gövdesinde JSON içeriği olarak gönderilir.
 
@@ -213,14 +215,14 @@ Bu bölümde, tamamladığınız için proje kodu güncelleştirme [Öğreticisi
         ApplicationData.Current.LocalSettings.Values["AuthenticationToken"] = token;
     }
     ```
-12. Açık `App.xaml.cs` çağrısını bulun `InitNotificationsAsync()` içinde `OnLaunched()` olay işleyicisi. `InitNotificationsAsync()` çağrısına açıklama ekleyin veya çağrıyı silin. Düğme işleyicisi, bildirim kayıtlarını başlatır.
+12. ' `App.xaml.cs` İ açın ve `OnLaunched()` olay işleyicisinde `InitNotificationsAsync()` çağrısını bulun. `InitNotificationsAsync()` çağrısına açıklama ekleyin veya çağrıyı silin. Düğme işleyicisi, bildirim kayıtlarını başlatır.
 
     ```csharp
     protected override void OnLaunched(LaunchActivatedEventArgs e)
     {
         //InitNotificationsAsync();
     ```
-13. **WindowsApp** projesine sağ tıklayın, **Ekle**’ye ve sonra **Sınıf**’a tıklayın. Sınıf adı `RegisterClient.cs`, ardından **Tamam** sınıfı oluşturun.
+13. **WindowsApp** projesine sağ tıklayın, **Ekle**’ye ve sonra **Sınıf**’a tıklayın. Sınıfı adlandırın, ardından sınıfı oluşturmak için Tamam ' a tıklayın. `RegisterClient.cs`
 
     Bu sınıf, anında iletme bildirimlerine kaydolmak için uygulama arka ucuyla iletişim kurmak üzere gereken REST çağrılarını sarmalar. [Uygulama arka ucunuzdan kaydetme](https://msdn.microsoft.com/library/dn743807.aspx) bölümünde açıklandığı gibi Bildirim Hub’ı tarafından oluşturulan *registrationId*’leri de yerel olarak depolar. **Oturum aç ve kaydet** düğmesine tıkladığınızda yerel depolama alanında depolanan bir yetkilendirme belirtecini kullanır.
 14. Aşağıdaki `using` deyimlerini RegisterClient.cs dosyasının en üst kısmına ekleyin:

@@ -1,68 +1,67 @@
 ---
-title: Azure'da desteklenen Linux dağıtımı | Microsoft Docs
-description: Ubuntu, CentOS, Oracle ve SUSE yönergeleri de dahil olmak üzere, Azure destekli dağıtımlarda Linux hakkında bilgi edinin.
+title: Azure’da desteklenen Linux dağıtımları
+description: Ubuntu, CentOS, Oracle ve SUSE için yönergeler de dahil olmak üzere, Azure tarafından onaylanan dağıtımlara yönelik Linux hakkında bilgi edinin.
 services: virtual-machines-linux
 documentationcenter: ''
 author: szarkos
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-service-management,azure-resource-manager
 ms.assetid: 2777a526-c260-4cb9-a31a-bdfe1a55fffc
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
-ms.date: 05/16/2019
+ms.date: 11/04/2019
 ms.author: szark
-ms.openlocfilehash: a1be0b6870882d3c7b0281dec7933e87c50e49de
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 66717222b505b7dd91f7f270cab27ec4ca97038e
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65834564"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036226"
 ---
-# <a name="endorsed-linux-distributions-on-azure"></a>Azure'da Linux destekli dağıtımlar
-İş ortakları, Azure Market'teki Linux görüntüleri sağlar. Desteklenen dağıtım listesine daha da fazla çeşitleme katmak çeşitli Linux topluluklarıyla çalışıyoruz. Bu sırada, Market'ten mevcut olmayan dağıtımlar her zaman kendi Linux yönergeleri izleyerek getirebilir [oluşturma ve karşıya yükleme Linux işletim sistemini içeren bir sanal sabit disk](https://docs.microsoft.com/azure/virtual-machines/linux/create-upload-generic).
+# <a name="endorsed-linux-distributions-on-azure"></a>Azure 'da desteklenen Linux dağıtımları
+İş ortakları, Azure Marketi 'nde Linux görüntüleri sağlar. Çeşitli Linux topluluklarıyla birlikte çalışarak, onaylı dağıtım listesine daha da fazla bilgi ekleyebilirsiniz. Bu sırada, Market 'ten kullanılamayan dağıtımlar için, [Linux işletim sistemini içeren bir sanal sabit disk oluşturma ve karşıya yükleme](https://docs.microsoft.com/azure/virtual-machines/linux/create-upload-generic)konusundaki yönergeleri Izleyerek kendi Linux 'u her zaman getirebilirsiniz.
 
 ## <a name="supported-distributions-and-versions"></a>Desteklenen dağıtımlar ve sürümler
-Aşağıdaki tabloda Linux dağıtımları ve Azure üzerinde desteklenen sürümleri listelenmiştir. Başvurmak [Microsoft azure'da Linux görüntüleri için destek](https://support.microsoft.com/help/2941892/support-for-linux-and-open-source-technology-in-azure) Linux ve açık kaynak teknolojisi azure'da desteği hakkında daha ayrıntılı bilgi için.
+Aşağıdaki tablo, Azure 'da desteklenen Linux dağıtımlarını ve sürümlerini listelemektedir. Azure 'da Linux ve açık kaynaklı teknoloji desteği hakkında daha ayrıntılı bilgi için [Microsoft Azure Içindeki Linux görüntüleri Için destek](https://support.microsoft.com/help/2941892/support-for-linux-and-open-source-technology-in-azure) bölümüne bakın.
 
-Hyper-V ve Azure Linux Integration Services (LIS) sürücülerini Microsoft katkıda bulunan doğrudan Yukarı Akış Linux çekirdeğinin çekirdek modüllerdir.  Bazı LIS sürücüleri dağıtım'ın çekirdeğe varsayılan olarak oluşturulur. Red Hat Enterprise (RHEL) tabanlı eski dağıtımları veya CentOS ayrı bir indirme olarak kullanılabilir [Hyper-V ve Azure için Linux Tümleştirme hizmetleri sürüm 4.2](https://www.microsoft.com/download/details.aspx?id=55106). Bkz: [Linux çekirdek gereksinimleri](create-upload-generic.md#linux-kernel-requirements) LIS sürücüleri hakkında daha fazla bilgi için.
+Hyper-V ve Azure için Linux Integration Services (LIS) sürücüleri, Microsoft 'un doğrudan yukarı akış Linux çekirdeğine katkıda bulunduğu çekirdek modüllerdir.  Bazı LIS sürücüleri, varsayılan olarak dağıtımın çekirdeğine yerleştirilmiştir. Red Hat Enterprise (RHEL)/CentOS tabanlı eski dağıtımlar, [Hyper-V ve Azure Için Linux Integration Services sürüm 4,2](https://www.microsoft.com/download/details.aspx?id=55106)' de ayrı bir indirme olarak sunulmaktadır. LIS sürücüleri hakkında daha fazla bilgi için bkz. [Linux çekirdek gereksinimleri](create-upload-generic.md#linux-kernel-requirements) .
 
-Azure Linux Aracısı, Azure Market görüntüleri üzerinde önceden yüklü olan ve dağıtım ait bir paket deposundaki genellikle kullanılabilir. Kaynak kodu bulunabilir [GitHub](https://github.com/azure/walinuxagent).
+Azure Linux Aracısı, Azure Marketi görüntülerinde önceden yüklenmiş olur ve genellikle dağıtımın paket deposundan kullanılabilir. Kaynak kodu [GitHub](https://github.com/azure/walinuxagent)' da bulunabilir.
 
 
-| Dağıtım | Version | Sürücüler | Aracı |
+| Dağıtım | Sürüm | Sürücüler | Aracı |
 | --- | --- | --- | --- |
-| CentOS |CentOS 6.3+, 7.0+ |CentOS 6.3: [LIS yükleme](https://www.microsoft.com/download/details.aspx?id=55106)<p>CentOS 6.4+: Çekirdek |Paket: İçinde [depo](http://olcentgbl.trafficmanager.net/openlogic/6/openlogic/x86_64/RPMS/) "WALinuxAgent" altında <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
-| [CoreOS](https://coreos.com/docs/running-coreos/cloud-providers/azure/) |494.4.0+ |Çekirdek |Kaynak kodu: [GitHub](https://github.com/coreos/coreos-overlay/tree/master/app-emulation/wa-linux-agent) |
-| Debian |Debian 7,9 +, 8.2 + |Çekirdek |Paket: Depoda "waagent" altında <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
-| Oracle Linux |6.4+, 7.0+ |Çekirdek |Paket: Depoda "WALinuxAgent" altında <br/>Kaynak kodu: [GitHub](https://go.microsoft.com/fwlink/p/?LinkID=250998) |
-| Red Hat Enterprise Linux |RHEL 6.7+, 7.1+, 8.0+ |Çekirdek |Paket: Depoda "WALinuxAgent" altında <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
-| SUSE Linux Enterprise |SAP için SLES/SLES<br>11 SP4<br>12 SP1+<br>15|Çekirdek |Paket:<p> 11'de için [bulut: Araçları](https://build.opensuse.org/project/show/Cloud:Tools) depo<br>için "Genel bulut" modülünü "azure-python-agent" altında bulunan 12<br/>Kaynak kodu: [GitHub](https://go.microsoft.com/fwlink/p/?LinkID=250998) |
-| openSUSE |openSUSE 42.2 + artık |Çekirdek |Paket: İçinde [bulut: Araçları](https://build.opensuse.org/project/show/Cloud:Tools) altındaki "azure-python-agent" depo <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
-| Ubuntu |Ubuntu 12.04+ **<sup>1</sup>** |Çekirdek |Paket: Depoda "walinuxagent" altında <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| CentOS |CentOS 6.3 +, 7.0 +, 8.0 + |CentOS 6,3: [LIS Download](https://www.microsoft.com/download/details.aspx?id=55106)<p>CentOS 6.4 +: çekirdekte |Paket: "Walınuxagent" altında [Depo](http://olcentgbl.trafficmanager.net/openlogic/6/openlogic/x86_64/RPMS/) içinde <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| [CoreOS](https://coreos.com/docs/running-coreos/cloud-providers/azure/) |494.4.0+ |Çekirdekte |Kaynak kodu: [GitHub](https://github.com/coreos/coreos-overlay/tree/master/app-emulation/wa-linux-agent) |
+| Debian |DE7.9 +, 8.2 +, 9, 10 |Çekirdekte |Paket: "waagent" altında depo Içinde <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| Oracle Linux |6.4+, 7.0+ |Çekirdekte |Paket: "Walınuxagent" altında depo Içinde <br/>Kaynak kodu: [GitHub](https://go.microsoft.com/fwlink/p/?LinkID=250998) |
+| Red Hat Enterprise Linux |RHEL 6.7 +, 7.1 +, 8.0 + |Çekirdekte |Paket: "Walınuxagent" altında depo Içinde <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| SUSE Linux Enterprise |SLES/SLES for SAP<br>11 SP4<br>12 SP1 +<br>15|Çekirdekte |Paket:<p> Bulutta 11 için [: Araçlar](https://build.opensuse.org/project/show/Cloud:Tools) deposu<br>"genel bulut" modülünde "Python-Azure-Agent" altında bulunan 12 için<br/>Kaynak kodu: [GitHub](https://go.microsoft.com/fwlink/p/?LinkID=250998) |
+| openSUSE |openSUSE artık 42.2 + |Çekirdekte |Paket: [bulutta:](https://build.opensuse.org/project/show/Cloud:Tools) "Python-Azure-Agent" ın altındaki araçlar deposu <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| Ubuntu |Ubuntu 12.04 +  **<sup>1</sup>** |Çekirdekte |Paket: "walınuxagent" altında depo Içinde <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
 
-  - **<sup>1</sup>**  Ubuntu 12.04 ve 14.04 yönelik genişletilmiş destek hakkında daha fazla bilgi şurada bulunabilir: [Genişletilmiş güvenlik bakımı Ubuntu](https://www.ubuntu.com/esm).
+  - **<sup>1</sup>** ubuntu 12,04 ve 14,04 için genişletilmiş destek hakkında bilgi burada bulunabilir: [Ubuntu genişletilmiş güvenlik Bakımı](https://www.ubuntu.com/esm).
 
 
-## <a name="image-update-cadence"></a>Görüntü güncelleştirme uyumu
-Azure desteklenen Linux dağıtımları yayımcıları düzenli olarak görüntüleri Azure Market'te güvenlik düzeltmeleri, bir üç aylık ya da daha hızlı temposu ve en son düzeltme eklerinin ile güncelleştirmeniz gerekir. Güncelleştirilmiş görüntüleri Azure Market'te yeni sürümleri bir görüntü SKU otomatik olarak müşterileri tarafından kullanılabilir. Linux görüntüleri bulma hakkında daha fazla bilgi: [Linux VM görüntüleri Azure Market'te bulma](https://docs.microsoft.com/azure/virtual-machines/linux/cli-ps-findimage).
+## <a name="image-update-cadence"></a>Görüntü güncelleştirme temposunda
+Azure, onaylı Linux dağıtımlarının yayımcılarının, üç aylık veya daha hızlı bir temposunda en son düzeltme ekleri ve güvenlik düzeltmeleri ile Azure Marketi 'ndeki görüntülerini düzenli olarak güncelleştirilmesini gerektirir. Azure Marketi 'ndeki güncelleştirilmiş görüntüler, bir görüntü SKU 'sunun yeni sürümleri olarak müşteriler tarafından otomatik olarak kullanılabilir. Linux görüntülerini bulma hakkında daha fazla bilgi: [Azure Marketi 'Nde LINUX VM görüntülerini bulun](https://docs.microsoft.com/azure/virtual-machines/linux/cli-ps-findimage).
 
 ### <a name="additional-links"></a>Ek bağlantılar
- - [SUSE genel bulut görüntü yaşam döngüsü](https://www.suse.com/c/suse-public-cloud-image-life-cycle/)
+ - [SUSE genel bulut görüntüsü yaşam döngüsü](https://www.suse.com/c/suse-public-cloud-image-life-cycle/)
 
-## <a name="azure-tuned-kernels"></a>Azure olarak ayarlanmış çekirdekler
+## <a name="azure-tuned-kernels"></a>Azure tarafından ayarlanan çekirdekler
 
-Azure, Azure Market'te yayımlanan görüntü iyileştirmek için çeşitli desteklenen Linux dağıtımları ile yakın bir tümleştirmede çalışır. Bu işbirliği yönlerinden biri, Azure platformu için iyileştirilen ve tam olarak desteklenen Linux dağıtımı bileşenleri olarak teslim "Takipte" Linux çekirdeklerinin geliştirilmesini ' dir. Azure olarak ayarlanmış çekirdekler yeni özellikler ve performans geliştirmeleri ve daha hızlı (genellikle üç aylık) bir tempoda varsayılan veya Dağıtım noktasındaki mevcut olan genel çekirdekler karşılaştırılan.
+Azure, Azure Market 'Te yayımladıkları görüntüleri iyileştirmek için, çeşitli desteklenen linux dağıtımlarıyla yakından birlikte çalışmaktadır. Bu işbirliğinin bir yönü, Azure platformu için optimize edilmiş ve Linux dağıtımının tamamen desteklenen bileşenleri olarak sunulan "ayarlanmış" Linux çekirdekleri geliştirmektedir. Azure tarafından ayarlanmış çekirdekler yeni özellikler ve performans iyileştirmeleri ve dağıtım tarafından kullanılabilen varsayılan ya da genel çekirdekler ile karşılaştırıldığında daha hızlı (genellikle üç ayda) temposunda.
 
-Bu nedenle Azure müşterileri bu en iyi duruma getirilmiş çekirdekler avantajı hemen erişin ve çoğu durumda varsayılan görüntüleri Azure Market'te önceden yüklenmiş bu çekirdekler bulacaksınız. Bu Azure olarak ayarlanmış çekirdekler hakkında daha fazla bilgi aşağıdaki bağlantılarda bulunabilir:
+Çoğu durumda, bu çekirdekler 'leri Azure Marketi 'ndeki varsayılan görüntülerde önceden yüklenmiş olarak bulacak ve Azure müşterileri bu iyileştirilmiş çekirdekler için hemen avantajına sahip olur. Azure tarafından ayarlanan bu çekirdekler hakkında daha fazla bilgi aşağıdaki bağlantılarda bulunabilir:
 
- - CentOS Azure olarak ayarlanmış çekirdek - SIG - CentOS sanallaştırma kullanılabilir [daha fazla bilgi](https://wiki.centos.org/SpecialInterestGroup/Virtualization)
- - Debian bulut çekirdek - Debian 10 ve Azure - Debian 9 "backports" görüntüde bulunan [daha fazla bilgi](https://wiki.debian.org/Cloud/MicrosoftAzure)
- - SLES çekirdek Azure olarak ayarlanmış - [daha fazla bilgi](https://www.suse.com/c/a-different-builtin-kernel-for-azure-on-demand-images/)
- - Ubuntu çekirdek Azure olarak ayarlanmış - [daha fazla bilgi](https://blog.ubuntu.com/2017/09/21/microsoft-and-canonical-increase-velocity-with-azure-tailored-kernel)
+ - CentOS Azure-ayarlanmış çekirdek-CentOS sanallaştırma SıG ile kullanılabilir- [daha fazla bilgi](https://wiki.centos.org/SpecialInterestGroup/Virtualization)
+ - Bulut çekirdeğini devre dışı bırak- [daha fazla bilgi](https://wiki.debian.org/Cloud/MicrosoftAzure) için 10.
+ - SLES Azure-ayarlanmış çekirdek- [daha fazla bilgi](https://www.suse.com/c/a-different-builtin-kernel-for-azure-on-demand-images/)
+ - Ubuntu Azure-ayarlanmış çekirdek- [daha fazla bilgi](https://blog.ubuntu.com/2017/09/21/microsoft-and-canonical-increase-velocity-with-azure-tailored-kernel)
 
 
 ## <a name="partners"></a>İş Ortakları
@@ -72,31 +71,31 @@ Bu nedenle Azure müşterileri bu en iyi duruma getirilmiş çekirdekler avantaj
 
 CoreOS Web sitesinden:
 
-*CoreOS, güvenlik, tutarlılık ve güvenilirlik için tasarlanmıştır. Yum aracılığıyla veya apt paket yüklemek yerine, CoreOS Linux kapsayıcıları daha yüksek düzeyde soyutlama hizmetlerinizi yönetmek üzere kullanır. Tek bir hizmetin kodu ve tüm bağımlılıkları, bir veya daha çok CoreOS makinelerde çalıştırılabilir bir kapsayıcı içinde paketlenir.*
+*CoreOS güvenlik, tutarlılık ve güvenilirlik için tasarlanmıştır. CoreOS, VUM veya apt aracılığıyla paket yüklemek yerine, hizmetlerinizi daha yüksek bir soyutlama düzeyinde yönetmek için Linux kapsayıcıları kullanır. Tek bir hizmetin kodu ve tüm bağımlılıkları, bir veya daha fazla CoreOS makinesi üzerinde çalıştırılabilen bir kapsayıcı içinde paketlenmiştir.*
 
 ### <a name="credativ"></a>credativ
 [https://www.credativ.co.uk/credativ-blog/debian-images-microsoft-azure](https://www.credativ.co.uk/credativ-blog/debian-images-microsoft-azure)
 
-Credativ bağımsız danışmanlık ve ücretsiz yazılım kullanarak geliştirme ve uygulama profesyonel çözümlerinin uzmanlaşmış Hizmetleri şirket ' dir. Önde gelen açık kaynak uzmanlarına Credativ destek kullanan birçok BT departmanı ile uluslararası tanıma sahip. Microsoft ile birlikte, Credativ şu anda karşılık gelen bir Debian görüntüleri Debian 8 (Jessie) ve Debian 7 (Wheezy) önce hazırlanıyor. Her iki görüntüleri, Azure üzerinde çalışacak şekilde özel olarak tasarlanmıştır ve platformu kolayca yönetilebilir. Credativ uzun süreli Bakım ve kendi açık kaynak desteği merkezleri aracılığıyla Azure için Debian görüntülerini güncelleştirme de destekler.
+Credadtiv, ücretsiz yazılım kullanarak profesyonel çözümlerin geliştirilmesi ve uygulanması konusunda uzmanlaşmış bağımsız bir danışmanlık ve hizmetler şirketidir. Önde gelen açık kaynaklı uzmanlar olarak, Crefetiv, desteğini kullanan pek çok BT departmanının kullanıldığı Uluslararası tanıma sahiptir. Credadtiv, Microsoft ile birlikte, şu anda Demallik 8 (Jesan) ve 7 ' den önce (Wheezy) ilgili Dekamu görüntülerini hazırlıyor. Her iki görüntü de Azure 'da çalışmak üzere özel olarak tasarlanmıştır ve platform aracılığıyla kolayca yönetilebilir. Credavtiv Ayrıca, Azure için açık kaynak destek merkezleri aracılığıyla uzun süreli bakım ve güncelleştirme görüntülerinin güncelleştirilmesini de destekleyecektir.
 
 ### <a name="oracle"></a>Oracle
 [https://www.oracle.com/technetwork/topics/cloud/faq-1963009.html](https://www.oracle.com/technetwork/topics/cloud/faq-1963009.html)
 
-Oracle'nın geniş bir Portföy ortak ve özel bulut çözümleri sunmak için stratejisidir. Stratejisi müşteriler, seçim ve Oracle bulutlarında Oracle yazılımları ve diğer bulutlarda nasıl dağıttıkları esneklik sağlar. Oracle ile Microsoft arasındaki iş ortaklığı sayesinde müşteriler, Oracle tarafından sağlanan sertifika ve desteğin verdiği güvenle Microsoft’un genel ve özel bulutlarında Oracle yazılımlarını dağıtabilir.  Oracle'nın taahhüt ve Oracle ortak ve özel bulut çözümleri yatırım değişmez.
+Oracle stratejisi, genel ve özel bulutlara yönelik kapsamlı bir çözüm portföyü sunmamaktadır. Strateji, müşterilere Oracle bulutlarında ve diğer bulutlarda Oracle yazılımı dağıtma konusunda seçim ve esneklik sağlar. Oracle ile Microsoft arasındaki iş ortaklığı sayesinde müşteriler, Oracle tarafından sağlanan sertifika ve desteğin verdiği güvenle Microsoft’un genel ve özel bulutlarında Oracle yazılımlarını dağıtabilir.  Oracle 'ın, Oracle ortak ve özel bulut çözümlerinde taahhüt ve yatırımı değiştirilmez.
 
 ### <a name="red-hat"></a>Red Hat
 [https://www.redhat.com/en/partners/strategic-alliance/microsoft](https://www.redhat.com/en/partners/strategic-alliance/microsoft)
 
-Açık kaynak çözümleri, dünyanın önde gelen sağlayıcısı, birden fazla iş sorunlarını çözmeye, kendi BT hizalama % 90 Fortune 500 şirketlerinin Red Hat yardımcı olur ve iş stratejilerine ve teknolojisinin geleceği için hazırlayın. Red Hat, bunu bir açık iş modeli ve uygun maliyetli ve öngörülebilir abonelik modeli aracılığıyla güvenli çözümler sağlayarak yapar.
+Dünyanın önde gelen açık kaynak çözüm sağlayıcısı olan Red hat, Fortune 500 şirketinin %90 ' ünden daha fazlasına yardımcı olur. Red Hat Bu, açık iş modeli ve uygun maliyetli, öngörülebilir bir abonelik modeli aracılığıyla güvenli çözümler sunarak bunu yapar.
 
 ### <a name="suse"></a>SUSE
 [https://www.suse.com/suse-linux-enterprise-server-on-azure](https://www.suse.com/suse-linux-enterprise-server-on-azure)
 
-SUSE Linux Enterprise Server azure'da daha üstün güvenilirlik ve güvenlik için bulut bilgi işlem sağlayan bir kendini kanıtlamış platformudur. SUSE'ın çok yönlü Linux platformuna bir kolayca yönetilebilen bir bulut ortamında sunmak için Azure bulut Hizmetleri ile sorunsuz şekilde entegre olur. SUSE Linux Enterprise Server için 1800'den fazla bağımsız yazılım satıcıları birden fazla 9,200 sertifikalı uygulamaları ile desteklenen veri merkezinde çalışan iş yüklerini Azure'da güvenle dağıtılabilir SUSE sağlar.
+Azure 'da SUSE Linux Enterprise Server, bulut bilgi işlem için üstün güvenilirlik ve güvenlik sağlayan, kendini kanıtlamış bir platformdur. SUSE 'in çok yönlü Linux platformu, kolayca yönetilebilir bir bulut ortamı sunmak için Azure bulut hizmetleriyle sorunsuz bir şekilde tümleşir. SUSE Linux Enterprise Server için 9.200 ' 1.800 den fazla bağımsız yazılım satıcısından daha fazla sertifikalı uygulama sayesinde, SUSE, veri merkezinde desteklenen çalışan iş yüklerinin Azure 'da güvenle dağıtılmasını sağlar.
 
 ### <a name="canonical"></a>Canonical
 [https://www.ubuntu.com/cloud/azure](https://www.ubuntu.com/cloud/azure)
 
-Kurallı mühendislik ve açık bir topluluk idare sürücü Ubuntu'nın başarı, istemci, sunucu ve bulut bilgi işlem Tüketiciler için kişisel bulut hizmetlerini içerir. Canonical Ubuntu, birleşik, ücretsiz platform buluta, Phone sunulmasıyla, telefon, tablet, TV ve Masaüstü için tutarlı arabirimleri ailesi sağlar. Bu işleme, tüketici elektroniği üreticileri ve sık kullanılan arasında bireysel ekiplerindeki genel bulut sağlayıcılarından farklı kurumlar için gereken ilk seçim Ubuntu hale getirir.
+Kurallı mühendislik ve açık topluluk idare sürücüsü Ubuntu, müşteriler için kişisel bulut hizmetleri içeren istemci, sunucu ve bulut bilgi işlem başarısı. Ubuntu 'da bulunan Birleşik, ücretsiz bir platformun, telefonlardan buluta kadar, telefon, tablet, TV ve Masaüstü için bir dizi tutarlı arabirim sağlar. Bu vizyon, genel bulut sağlayıcılarından farklı kurumlar için birinci seçimi, tüketici elektronileri ve bireysel teknolojik vericiler arasında bir sık kullanılan olarak sunar.
 
-Geliştiriciler ve dünyanın dört bir yanındaki mühendislik merkezleri, Canonical donanım üreticileri, içerik sağlayıcıları ve yazılım geliştiricileri bilgisayarları, sunucuları ve taşınabilir cihazları pazar için Ubuntu çözümleri ile ortaklık kurmak için benzersiz olarak konumlandırıldı.
+Dünyanın dört bir yanındaki geliştiriciler ve mühendislik merkezleri sayesinde, yaygın olarak donanım üreticileri, içerik sağlayıcıları ve yazılım geliştiricileri olan iş ortaklarına, bilgisayarlar, sunucular ve avuçiçi cihazlar için de Ubuntu çözümlerini pazara sunma olanağı sağlar.

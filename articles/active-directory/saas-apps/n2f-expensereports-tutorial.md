@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: N2F - Azure Active Directory tümleştirmesiyle gider raporlarını | Microsoft Docs'
-description: Azure Active Directory ve N2F - arasında çoklu oturum açmayı yapılandırma, Gider raporlarını öğrenin.
+title: 'Öğretici: N2F-harcama raporlarıyla tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve N2F-gider raporları arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,251 +8,252 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: f56d53d7-5a08-490a-bfb9-78fefc2751ec
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/01/2019
 ms.author: jeedes
-ms.openlocfilehash: 0a7b38f26261625c6db8acb6653b3cd9353fdcc2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 11f5e2f7763008c3af09c5367d90265af6a9653a
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67096513"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73161294"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-n2f---expense-reports"></a>Öğretici: Harcama N2F - Azure Active Directory tümleştirmesiyle raporları
+# <a name="tutorial-azure-active-directory-integration-with-n2f---expense-reports"></a>Öğretici: N2F-harcama raporlarıyla tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile gider raporlarını N2F - tümleştirmek nasıl öğrenin.
-Tümleştirme N2F - Azure AD ile gider raporlarını ile aşağıdaki avantajları sağlar:
+Bu öğreticide, N2F-gider raporlarının Azure Active Directory (Azure AD) ile nasıl tümleştirileceğini öğreneceksiniz.
+N2F-gider raporlarını Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* N2F - erişimi, Azure AD'de denetleyebilirsiniz gider bildirir.
-* Otomatik olarak N2F - gider raporlarını (çoklu oturum açma) ile Azure AD hesaplarına oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* N2F-harcama raporlarına erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla N2F-harcama raporlarında (çoklu oturum açma) otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesi N2F - gider raporlarını yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini N2F-harcama raporlarıyla yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* N2F - gider raporlarını tek oturum açma etkin abonelik
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* N2F-gider raporları çoklu oturum açma etkin aboneliği
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* N2F - gider raporlarını destekler **SP** ve **IDP** tarafından başlatılan
+* N2F-harcama raporları **SP** ve **IDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-n2f---expense-reports-from-the-gallery"></a>N2F - gider raporlarını galeri ekleme
+## <a name="adding-n2f---expense-reports-from-the-gallery"></a>Galeriden N2F-harcama raporları ekleme
 
-N2F - eklemenize gerek N2F - Azure AD'de, Gider raporlarını tümleştirmesini yapılandırmak için yönetilen SaaS listenizden galerisinden raporlar gider.
+N2F-harcama raporlarının tümleştirmesini Azure AD 'ye göre yapılandırmak için galerideki N2F-harcama raporları ' nı yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**N2F - galerisinden, Gider raporlarını eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden N2F-harcama raporları eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **N2F - gider raporlarını**seçin **N2F - gider raporlarını** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **N2F-harcama raporları**yazın, sonuç panelinden **N2F-harcama raporları** ' nı seçin, sonra da uygulamayı eklemek için düğme **Ekle** ' ye tıklayın.
 
-     ![N2F - gider raporlarını sonuçları listesi](common/search-new-app.png)
+     ![N2F-sonuçlar listesindeki gider raporları](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve test Azure AD çoklu oturum açma ile N2F - gider raporlarını bir test kullanıcı tabanlı olarak adlandırılan **Britta Simon**.
-Çoklu oturum açma iş, bir Azure AD kullanıcısının N2F - ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekiyorsa gider bildirir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test KULLANıCıSıNA göre N2F-harcama raporlarıyla yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve N2F-harcama raporlarında ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma ile N2F - gider raporlarını, test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı N2F-harcama raporlarıyla yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[N2F yapılandırma - gider raporlarını çoklu oturum açma](#configure-n2f---expense-reports-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[N2F Oluştur - gider raporlarını kullanıcı test](#create-n2f---expense-reports-test-user)**  - N2F içinde bir karşılığı Britta simon'un sağlamak için - gider kullanıcı Azure AD gösterimini bağlantılı raporlar.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. **[N2F-gider raporlarını yapılandırma çoklu oturum](#configure-n2f---expense-reports-single-sign-on)** açma-uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Kullanıcının Azure AD gösterimine bağlı olan N2F-harcama raporlarında, **[N2F-gider raporları test kullanıcısı oluşturun](#create-n2f---expense-reports-test-user)** .
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD yapılandırmak için çoklu oturum açma ile N2F - gider raporlarını, aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı N2F-harcama raporlarıyla yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **N2F - gider raporlarını** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **N2F-harcama raporları** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** başlatılan modu, kullanıcı uygulamaya zaten Azure ile önceden tümleştirilmiş olduğu gibi tüm adımları gerçekleştirmek sahip değil.
+4. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak Istiyorsanız, uygulama zaten Azure ile önceden tümleştirildiği için Kullanıcı herhangi bir adım gerçekleştirmek zorunda değildir.
 
-    ![Çoklu oturum açma bilgileri N2F - gider raporlarını etki alanı ve URL'ler](common/preintegrated.png)
+    ![N2F-gider raporları etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/preintegrated.png)
 
-5. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+5. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    ![Çoklu oturum açma bilgileri N2F - gider raporlarını etki alanı ve URL'ler](common/metadata-upload-additional-signon.png)
+    ![N2F-gider raporları etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/metadata-upload-additional-signon.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna bir URL yazın:  `https://www.n2f.com/app/`
+    **Oturum açma URL 'si** metin kutusuna bir URL yazın: `https://www.n2f.com/app/`
 
-6. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında **SAML imzalama sertifikası** bölümünde, kopyalamak için Kopyala düğmesine **uygulama Federasyon meta verileri URL'sini** ve üzerinde kaydedin, bilgisayar.
+6. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **uygulama Federasyon meta verileri URL 'sini** kopyalamak ve bilgisayarınıza kaydetmek için Kopyala düğmesine tıklayın.
 
     ![Sertifika indirme bağlantısı](common/copy-metadataurl.png)
 
-7. Üzerinde **myPolicies kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+7. **MyPolicies ayarla** bölümünde, uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure AD Tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-n2f---expense-reports-single-sign-on"></a>N2F - gider raporlarını çoklu oturum açmayı yapılandırın
+### <a name="configure-n2f---expense-reports-single-sign-on"></a>N2F-gider raporlarını çoklu oturum açmayı yapılandırma
 
-1. Farklı bir web tarayıcı penceresinde N2F - gider raporlarını şirket site yönetici olarak oturum açın.
+1. Farklı bir Web tarayıcısı penceresinde, N2F-harcama raporları şirket sitenizde yönetici olarak oturum açın.
 
-2. Tıklayarak **ayarları** seçip **Gelişmiş ayarlar** açılır listeden.
+2. **Ayarlar** ' a tıklayın ve ardından açılan listeden **Gelişmiş ayarlar** ' ı seçin.
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/configure1.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/configure1.png)
 
-3. Seçin **hesap ayarları** sekmesi.
+3. **Hesap ayarları** sekmesini seçin.
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/configure2.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/configure2.png)
 
-4. Seçin **kimlik doğrulaması** seçip **+ kimlik doğrulama yöntemi Ekle** sekmesi.
+4. **Kimlik doğrulaması** ' nı seçin ve **+ kimlik doğrulama yöntemi ekle** sekmesini seçin.
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/configure3.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/configure3.png)
 
-5. Seçin **SAML Microsoft Office 365** kimlik doğrulama yöntemi olarak.
+5. Kimlik doğrulama yöntemi olarak **SAML Microsoft Office 365** ' u seçin.
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/configure4.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/configure4.png)
 
-6. Üzerinde **kimlik doğrulama yöntemi** bölümünde, aşağıdaki adımları gerçekleştirin:
+6. **Kimlik doğrulama yöntemi** bölümünde aşağıdaki adımları uygulayın:
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/configure5.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/configure5.png)
 
-    a. İçinde **varlık kimliği** metin kutusu, yapıştırma **Azure AD tanımlayıcısı** Azure portaldan kopyaladığınız değeri.
+    a. **VARLıK kimliği** metin kutusunda, Azure Portal KOPYALADıĞıNıZ **Azure AD tanımlayıcı** değerini yapıştırın.
 
-    b. İçinde **meta veri URL'si** metin kutusu, yapıştırma **uygulama Federasyon meta verileri URL'sini** Azure portaldan kopyaladığınız değeri.
+    b. **Meta veri URL 'si** metin kutusunda, Azure Portal kopyaladığınız **uygulama Federasyon meta veri URL 'si** değerini yapıştırın.
 
-    c. **Kaydet**’e tıklayın.
+    c. **Kaydet** düğmesine tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için N2F erişim vererek Britta Simon enable - gider bildirir.
+Bu bölümde, N2F-harcama raporlarına erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **N2F - gider raporlarını**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve **N2F-gider raporları**' nı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **N2F - gider raporlarını**.
+2. Uygulamalar listesinde **N2F-harcama raporları**' nı seçin.
 
-    ![-N2F gider bağlantıyı uygulamalar listesini bildirir.](common/all-applications.png)
+    ![Uygulamalar listesindeki N2F-harcama raporları bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-n2f---expense-reports-test-user"></a>N2F oluşturma - kullanıcı gider raporlarını test
+### <a name="create-n2f---expense-reports-test-user"></a>N2F-harcama raporları test kullanıcısı oluşturma
 
-Azure AD kullanıcılarının N2F - gider raporlarını, oturum açmayı etkinleştirmek için bunların N2F - gider raporlarını sağlanması gerekir. N2F - gider raporlarını, söz konusu olduğunda sağlama bir el ile gerçekleştirilen bir görevdir.
+Azure AD kullanıcılarının N2F-harcama raporlarında oturum açmasını sağlamak için, N2F-harcama raporlarında sağlanması gerekir. N2F-harcama raporlarında, sağlama işlemi el ile gerçekleştirilen bir görevdir.
 
 **Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:**
 
-1. N2F - gider raporlarını şirket site yönetici olarak oturum açın.
+1. N2F-harcama raporlarında Şirket sitenizde yönetici olarak oturum açın.
 
-2. Tıklayarak **ayarları** seçip **Gelişmiş ayarlar** açılır listeden.
+2. **Ayarlar** ' a tıklayın ve ardından açılan listeden **Gelişmiş ayarlar** ' ı seçin.
 
-    ![N2F - kullanıcı gider Ekle](./media/n2f-expensereports-tutorial/configure1.png)
+    ![N2F-harcama Kullanıcı ekleme](./media/n2f-expensereports-tutorial/configure1.png)
 
-3. Seçin **kullanıcılar** sol gezinti bölmesi sekmesinden.
+3. Sol Gezinti panelinden **Kullanıcılar** sekmesini seçin.
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/user1.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/user1.png)
 
-4. Seçin **+ yeni kullanıcı** sekmesi.
+4. **+ Yeni Kullanıcı** sekmesini seçin.
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/user2.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/user2.png)
 
-5. Üzerinde **kullanıcı** bölümünde, aşağıdaki adımları gerçekleştirin:
+5. **Kullanıcı** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![N2F - gider raporlarını yapılandırma](./media/n2f-expensereports-tutorial/user3.png)
+    ![N2F-harcama raporları yapılandırması](./media/n2f-expensereports-tutorial/user3.png)
 
-    a. İçinde **e-posta adresi** metin gibi kullanıcı e-posta adresini girin **brittasimon\@contoso.com**.
+    a. **E-posta adresi** metin kutusuna, **\@contoso.com**gibi kullanıcının e-posta adresini girin.
 
-    b. İçinde **ad** metin gibi kullanıcı adını girin **Britta**.
+    b. **Ad** metin kutusuna, ilk Kullanıcı adını **Britta**gibi girin.
 
-    c. İçinde **adı** metin gibi kullanıcı adını girin **BrittaSimon**.
+    c. **Ad** metin kutusuna, **Brittasıon**gibi kullanıcının adını girin.
 
-    d. Seçin **doğrudan Yöneticisi (N + 1) rolü,** , ve **bölme** kuruluş ihtiyacınıza göre.
+    d. **Rol, doğrudan yönetici (N + 1)** seçeneğini belirleyin ve kuruluş gereksiniminize göre **bölme** yapın.
 
-    e. Tıklayın **doğrula ve gönderme davet**.
+    e. **Doğrula ve davet gönder**' e tıklayın.
 
     > [!NOTE]
-    > Kullanıcı eklenirken herhangi bir sorunla karşılaşıyorsanız Lütfen başvurun [N2F - gider raporlarını Destek ekibine](mailto:support@n2f.com)
+    > Kullanıcı eklerken herhangi bir sorunla karşılaşırsanız lütfen [N2F-harcama raporları destek ekibine](mailto:support@n2f.com) başvurun
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-N2F tıklayın - erişim Paneli'nde gider raporlarını döşeme sonra otomatik olarak N2F - gider raporlarını SSO'yu ayarlamak için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde N2F-harcama raporları kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız N2F-harcama raporlarında otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

@@ -1,37 +1,37 @@
 ---
-title: 'Hızlı Başlangıç: Python kullanarak Bing özel arama uç noktanızı arayın | Microsoft Docs'
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta Python kullanarak Bing özel arama örneğinizin arama sonuçlarını talep başlamak için kullanın
+title: 'Hızlı Başlangıç: Python kullanarak Bing Özel Arama uç noktanızı çağırma | Microsoft Docs'
+titleSuffix: Azure Cognitive Services
+description: Python kullanarak Bing Özel Arama örneğinizi arama sonuçları istemeye başlamak için bu hızlı başlangıcı kullanın
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-custom-search
 ms.topic: quickstart
-ms.date: 03/04/2019
+ms.date: 07/26/2019
 ms.author: aahi
-ms.openlocfilehash: a6f8d3964c71d036053fe0d4136468fde690f872
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 24416bc2259fdd35581699b11f599ea48e349d5a
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60593149"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68564633"
 ---
-# <a name="quickstart-call-your-bing-custom-search-endpoint-using-python"></a>Hızlı Başlangıç: Python kullanarak Bing özel arama uç noktanızı arayın
+# <a name="quickstart-call-your-bing-custom-search-endpoint-using-python"></a>Hızlı Başlangıç: Python kullanarak Bing Özel Arama uç noktanızı çağırma
 
-Bing özel arama örneğinizin arama sonuçlarını talep başlamak için bu Hızlı Başlangıç'ı kullanın. Bu uygulama Python'da yazılmıştır, ancak Bing özel arama API'si bir RESTful web çoğu programlama dilleri ile uyumlu hizmetidir. Bu örneğin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/python/Search/BingCustomSearchv7.py)’da mevcuttur.
+Bing Özel Arama örneğinden arama sonuçları istemeye başlamak için bu hızlı başlangıcı kullanın. Bu uygulama Python 'da yazıldığı sırada, Bing Özel Arama API'si çoğu programlama dili ile uyumlu olan yeniden yazılmış bir Web hizmetidir. Bu örneğin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/python/Search/BingCustomSearchv7.py)’da mevcuttur.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Bing özel arama örneği için. Bkz: [hızlı başlangıç: İlk Bing özel arama örneğinizin oluşturma](quick-start.md) daha fazla bilgi için.
-- [Python](https://www.python.org/) 2.x veya 3.x
+- Bir Bing Özel Arama örneği. Bkz [. hızlı başlangıç: Daha fazla bilgi için ilk](quick-start.md) Bing özel arama örneğinizi oluşturun.
+- [Python](https://www.python.org/) 2. x veya 3. x
 
 [!INCLUDE [cognitive-services-bing-custom-search-prerequisites](../../../includes/cognitive-services-bing-custom-search-signup-requirements.md)]
 
 
 ## <a name="create-and-initialize-the-application"></a>Uygulamayı oluşturma ve başlatma
 
-1. Sık kullandığınız IDE veya düzenleyici yeni bir Python dosyası oluşturun ve aşağıdaki import deyimlerini girin. Abonelik anahtarınız ve özel yapılandırma kimliği bir arama terimi için değişkenler oluşturun. 
+1. En sevdiğiniz IDE veya düzenleyicide yeni bir Python dosyası oluşturun ve aşağıdaki içeri aktarma deyimlerini ekleyin. Abonelik anahtarınız, özel yapılandırma KIMLIĞINIZ ve bir arama terimi için değişkenler oluşturun. 
 
     ```python
     import json
@@ -42,15 +42,15 @@ Bing özel arama örneğinizin arama sonuçlarını talep başlamak için bu Hı
     searchTerm = "microsoft"
     ```
 
-## <a name="send-and-receive-a-search-request"></a>Arama isteği gönderip 
+## <a name="send-and-receive-a-search-request"></a>Arama isteği gönderme ve alma 
 
-1. Arama teriminizi ekleyerek istek URL'si oluşturmak `q=` sorgu parametresi ve yapılandırma kimliği özel arama örneğinizin `customconfig=`. parametrelerle ayrı bir `&` karakter. 
+1. Arama teriminizi `q=` sorgu parametresine ekleyerek istek URL 'sini oluşturun ve arama örneğinizin özel yapılandırma kimliği ' ni olarak `customconfig=`yapın. parametreleri bir `&` karakterle ayırın. 
 
     ```python
     url = 'https://api.cognitive.microsoft.com/bingcustomsearch/v7.0/search?' + 'q=' + searchTerm + '&' + 'customconfig=' + customConfigId
     ```
 
-2. Bing özel arama örneğinizin isteği gönderir ve döndürülen arama sonuçlarını yazdırın.  
+2. İsteği Bing Özel Arama örneğinize gönderin ve döndürülen arama sonuçlarını yazdırın.  
 
     ```python
     r = requests.get(url, headers={'Ocp-Apim-Subscription-Key': subscriptionKey})
@@ -60,4 +60,4 @@ Bing özel arama örneğinizin arama sonuçlarını talep başlamak için bu Hı
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Bir özel arama web uygulaması derleme](./tutorials/custom-search-web-page.md)
+> [Özel bir arama Web uygulaması oluşturma](./tutorials/custom-search-web-page.md)

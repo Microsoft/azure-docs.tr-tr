@@ -1,68 +1,68 @@
 ---
-title: Nasıl arama, düzenleme ve takım projesi - özel Translator Sil
+title: Proje-özel çeviriciyi arama, düzenleme ve silme
 titleSuffix: Azure Cognitive Services
-description: Özel Translator projelerinizi verimli bir şekilde yönetmek için çeşitli yollar sağlar. Birden çok oluşturabilirsiniz projeleri, arama, ölçütlerinize göre projelerinizi düzenleyin. Bir proje silme da özel Translator mümkündür.
+description: Özel çevirici, projelerinizi verimli şekilde yönetmek için çeşitli yollar sunar. Birden çok proje oluşturabilir, kriterinize göre arama yapabilir, projelerinizi düzenleyebilirsiniz. Özel çevirmende bir projeyi silme de mümkündür.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: 3a19feb76b5f5e65f891dc9f4e9dbfbd642d15b6
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 9432ac390b7677b3dea5aebc84cf23ef6e45db92
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447932"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68595723"
 ---
-# <a name="search-edit-and-delete-projects"></a>Arama, düzenleme ve projeleri sil
+# <a name="search-edit-and-delete-projects"></a>Projeleri arama, düzenleme ve silme
 
-Özel Translator projelerinizi verimli bir şekilde yönetmek için birden çok yol sağlar. Çok sayıda proje oluşturabilir, arama ölçütlerinize göre ve projelerinizi düzenleyin. Bir proje silme da özel Translator mümkündür.  
+Özel çevirici, projelerinizi verimli şekilde yönetmenin birden çok yolunu sağlar. Birçok proje oluşturabilir, kriterinize göre arama yapabilir ve projelerinizi düzenleyebilirsiniz. Özel çevirmende bir projeyi silme de mümkündür.  
 
-## <a name="search-and-filter-projects"></a>Arama ve filtre projeleri
+## <a name="search-and-filter-projects"></a>Projeleri arama ve filtreleme
 
-Filtre aracı tarafından farklı bir filtre koşulları projeleri aramanıza olanak sağlar. Bu, proje adı, durum, kaynak ve hedef dil ve projenin kategorisi gibi filtreler.
+Filtre aracı, farklı filtre koşullarına göre projelerde arama yapmanıza olanak tanır. Proje adı, durum, kaynak ve hedef dil gibi filtreler ve projenin kategorisi.
 
 1.  Filtre düğmesine tıklayın.
 
-    ![Arama proje](media/how-to/how-to-search-project.png)
+    ![Proje ara](media/how-to/how-to-search-project.png)
 
-1.  (Veya tamamını) aşağıdaki alanların göre filtreleyebilirsiniz: Proje adı, durum, kaynak dili, hedef dil ve kategorisi.
+1.  Şu alanların herhangi birine (veya tümüne) göre filtre uygulayabilirsiniz: proje adı, durum, kaynak dili, hedef dil ve kategori.
 
-2.  Uygula düğmesini tıklatın.
+2.  Uygula ' ya tıklayın.
 
-    ![Arama proje filtre seçenekleri](media/how-to/how-to-search-project-filters.png)
+    ![Proje filtresi seçeneklerini ara](media/how-to/how-to-search-project-filters.png)
 
-3.  Tüm projeleriniz "Temizle"'e dokunarak görmek için filtreyi temizleyin.
+3.  "Temizle" düğmesine dokunarak tüm projelerinizi görüntülemek için filtreyi temizleyin.
 
 
-## <a name="edit-a-project"></a>Bir projeyi Düzenle
+## <a name="edit-a-project"></a>Projeyi düzenleme
 
-Özel Translator ad ve açıklama projenin düzenleme olanağı sağlar. Kategori, kaynak dili ve hedef dil için kullanılabilir değil gibi diğer proje meta verileri düzenleyin. Aşağıdaki adımlar, bir projeyi düzenleme açıklanmaktadır.
+Özel çevirici, bir projenin adını ve açıklamasını düzenlemenize olanak tanır. Kategori, kaynak dili ve hedef dil gibi diğer proje meta verileri düzenleme için kullanılamaz. Aşağıdaki adımlarda projenin nasıl düzenleneceği açıklanır.
 
-1.  Bir proje üzerinde geldiğinizde görüntülenen kalem simgesine tıklayın.
+1.  Bir projenin üzerine geldiğinizde görüntülenen kurşun kalem simgesine tıklayın.
 
-    ![Projeyi Düzenle](media/how-to/how-to-edit-project.png)
+    ![Proje düzenleme](media/how-to/how-to-edit-project.png)
 
-2.  İletişim kutusunda proje adının veya projenin açıklamasını değiştirebilirsiniz ancak proje etiketi, kategori veya dil çifti değiştiremezsiniz.
+2.  İletişim kutusunda proje adını ya da projenin açıklamasını değiştirebilir, ancak proje etiketi, kategorisi veya Dil çiftini değiştiremezsiniz.
 
-    ![Proje iletişim kutusu Düzenle](media/how-to/how-to-edit-project-dialog.png)
+    ![Projeyi Düzenle iletişim kutusu](media/how-to/how-to-edit-project-dialog.png)
 
 3.  Filtre düğmesine tıklayın.
 
-## <a name="delete-a-project"></a>Proje silme
+## <a name="delete-a-project"></a>Projeyi silme
 
-Artık ihtiyacınız olmadığında, bir proje silebilirsiniz. Aşağıdaki adımlar bir projenin nasıl silineceğini açıklar.
+Artık ihtiyaç kalmadığında bir projeyi silebilirsiniz. Aşağıdaki adımlarda projenin nasıl silineceği açıklanır.
 
-1. Herhangi bir proje kaydının gelin ve çöp kutusu simgesine tıklayın.
+1. Herhangi bir proje kaydında üzerine gelin ve çöp kutusu simgesine tıklayın.
 
-   ![Projeyi Sil](media/how-to/how-to-delete-project.png)
+   ![Projeyi sil](media/how-to/how-to-delete-project.png)
 
-2. Silme işlemini onaylayın. Bir proje silindiğinde, o proje içinde oluşturulmuş tüm modelleri silinir. Proje silme belgelerinizi etkilemez.
+2. Silmeyi onaylayın. Proje silindiğinde, bu proje içinde oluşturulan tüm modeller silinir. Projeyi silme, belgelerinizi etkilemez.
 
-   ![Silme onay iletişim kutusu](media/how-to/how-to-delete-project-confirm.png)
+   ![Onay iletişim kutusunu Sil](media/how-to/how-to-delete-project-confirm.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Belgeleri karşıya yüklemesine](how-to-upload-document.md) özel çeviri modelinizi oluşturmaya başlamak için.
+- Özel çeviri modelinizi oluşturmaya başlamak için [belgeleri karşıya yükleyin](how-to-upload-document.md) .

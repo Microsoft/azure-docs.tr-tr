@@ -9,18 +9,18 @@ ms.topic: include
 ms.date: 10/20/2018
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 26789a12053fa6275b09836e706c391e181c8efd
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 83f3def8f4972f35df25dc98f4b818e703801d2e
+ms.sourcegitcommit: 78ebf29ee6be84b415c558f43d34cbe1bcc0b38a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188150"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "68949977"
 ---
 ## <a name="create-a-function"></a>İşlev oluşturma
 
 Aşağıdaki komut HTTP ile tetiklenen `MyHttpTrigger` adlı bir işlev oluşturur.
 
-```bash
+```command
 func new --name MyHttpTrigger --template "HttpTrigger"
 ```
 

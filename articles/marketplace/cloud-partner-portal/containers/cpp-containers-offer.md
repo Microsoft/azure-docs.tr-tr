@@ -1,45 +1,46 @@
 ---
-title: Azure kapsayıcı görüntüsü teklifi | Azure Market
-description: Bir kapsayıcı teklifin Azure Marketi'nde yayımlama işlemine genel bakış.
+title: Azure kapsayıcıları görüntüsü teklifi | Azure Marketi
+description: Azure Marketi 'nde bir kapsayıcı teklifi yayımlama sürecine genel bakış.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 11/02/2018
 ms.author: pabutler
-ms.openlocfilehash: 9617380822f5814d1cbd2bd2b69eac72722fe813
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f0e71d8135a5dd691dc1f746ec54cfb6170e281d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942745"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823241"
 ---
 # <a name="containers"></a>Kapsayıcılar
 
-<table> <tr> <td>Bu bölümde bir kapsayıcı görüntüsüne yayımlama açıklanmaktadır <a href="https://azuremarketplace.microsoft.com">Azure Marketi</a>.  
-Docker kapsayıcı görüntüleri sağlanan olarak kapsayıcı teklif türünü destekler <a href="https://docs.microsoft.com/azure/aks/index">Azure Kubernetes hizmeti</a> örnekleri veya <a href="https://docs.microsoft.com/azure/container-instances/container-instances-overview">Azure Container Instances</a> ve barındırılan bir <a href="https://docs.microsoft.com/azure/container-registry">Azure Container Registry </a> depo. </td> <td><img src="./media/container-icon.png"  alt="Azure container icon" /></td> </tr> </table>
+<table> <tr> <td>Bu bölümde, <a href="https://azuremarketplace.microsoft.com">Azure Marketi 'nde</a>bir kapsayıcı görüntüsünün nasıl yayımlanacağı açıklanmaktadır.  
+Kapsayıcı teklif türü, <a href="https://docs.microsoft.com/azure/aks/index">Azure Kubernetes hizmet</a> örnekleri veya <a href="https://docs.microsoft.com/azure/container-instances/container-instances-overview">Azure Container Instances</a> olarak sağlanan ve bir <a href="https://docs.microsoft.com/azure/container-registry">Azure Container Registry</a> deposunda barındırılan Docker kapsayıcı görüntülerini destekler. </td> <td><img src="./media/container-icon.png"  alt="Azure container icon" /></td> </tr> </table>
 
 ## <a name="offer-components"></a>Teklif bileşenleri
 
-Bu bölümde, bir kapsayıcı yayımlama öğeleri özetler ve Azure Marketi yayımcı için bir kılavuz olarak tasarlanmıştır. Yayımlama'nın aşağıdaki ana bölümlere:
+Bu bölümde bir kapsayıcı yayımlama öğeleri özetlenmektedir ve yayımcı Azure Marketi 'ne yönelik bir kılavuz olarak hazırlanmıştır. Yayımlama aşağıdaki ana bölümlere ayrılmıştır:
 
-- [Önkoşullar](./cpp-prerequisites.md) -oluşturma veya bir kapsayıcı teklifini yayımlamanın önce teknik ve iş gereksinimleri listelenir.
-- [Teklif oluşturma](./cpp-create-offer.md) -bulut iş ortağı portalını kullanarak yeni bir kapsayıcı Teklif girişi oluşturmak için gerekli olan adımları listeler.
-- [Teknik varlıkları hazırlama](./cpp-create-technical-assets.md) -Azure marketi'ndeki teklif olarak bir kapsayıcı çözümü için teknik varlıkları oluşturma.
-- [Teklifi yayımlama](./cpp-publish-offer.md) -teklifi Azure Marketi yayımlama için gönderme.
+- [Önkoşullar](./cpp-prerequisites.md) -bir kapsayıcı teklifi oluşturmadan veya yayınlamadan önce teknik ve iş gereksinimlerini listeler.
+- [Teklifi oluşturma](./cpp-create-offer.md) -bulut iş ortağı portalı kullanarak yeni bir kapsayıcı teklifi girişi oluşturmak için gereken adımları listeler.
+- [Teknik varlıkları hazırlama](./cpp-create-technical-assets.md) -Azure Marketi 'nde teklif olarak bir kapsayıcı çözümü için teknik varlıkları oluşturma.
+- [Teklifi yayımlayın](./cpp-publish-offer.md) -teklifi Azure Marketi 'nde yayımlama için gönderme.
 
 ## <a name="container-publishing-process"></a>Kapsayıcı yayımlama işlemi
 
-Aşağıdaki diyagramda bir VM teklifi yayımlama üst düzey adımları gösterilmektedir.
-![Bir teklifi yayımlama adımları](./media/containers-offer-process.png)
+Aşağıdaki diyagramda bir VM teklifi yayımlamanın üst düzey adımları gösterilmektedir.
+teklif](./media/containers-offer-process.png) yayımlama adımlarını ![
 
-Bir kapsayıcı teklif yayımlamak için üst düzey adımlar şunlardır:
+Bir kapsayıcı teklifini yayımlamaya yönelik üst düzey adımlar şunlardır:
 
-1. Teklif oluşturma - teklifi hakkında ayrıntılı bilgi sağlar. Bu bilgiler içerir: pazarlama malzemeleri, destek bilgileri ve varlık belirtimleri teklif açıklaması.
-2. İş ve teknik varlıkları oluşturma - iş varlıkları (yasal belgeler ve pazarlama malzemeleri) ve ilişkili çözümü için teknik varlıkları oluşturma (kapsayıcı görüntülerini bir Azure Container Registry'de barındırılan.
-3. SKU Oluştur - teklifle ilgili fiyatlarını oluşturun. Yayımlama planlıyorsanız her görüntü için benzersiz bir SKU gereklidir.
-4. Onayla ve - teklifi yayımlama teklif ve teknik varlıkları tamamlandıktan sonra teklifi gönderebilirsiniz. Bu gönderi, yayımlama işlemi başlar. Bu işlem sırasında çözümü, doğrulanmış sertifikalı, ardından "Azure Marketi'nde etkin hale gelir" test edilir.
+1. Teklifi oluşturun-teklifle ilgili ayrıntılı bilgi sağlayın. Bu bilgiler şunları içerir: teklif açıklaması, pazarlama malzemeleri, destek bilgileri ve varlık belirtimleri.
+2. İş ve teknik varlıkları oluşturma-ilişkili çözüme yönelik iş varlıklarını (yasal belgeler ve pazarlama malzemeleri) ve teknik varlıkları oluşturun (bir Azure Container Registry barındırılan kapsayıcılar görüntüleri).
+3. SKU 'YU oluşturun-teklifle ilişkili SKU 'ları oluşturun. Yayımlamayı planladığınız her görüntü için benzersiz bir SKU gereklidir.
+4. Teklifi onaylama ve yayımlama-teklif ve teknik varlıklar tamamlandıktan sonra teklifi gönderebilirsiniz. Bu gönderim, yayımlama işlemini başlatır. Bu işlem sırasında çözüm, Azure Marketi 'nde test edilmiş, doğrulanan, sertifikalı ve "canlı gidiyor" olarak yapılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu adımları düşünmeden önce karşılamanız gereken [teknik ve işle ilgili gereksinimleriniz](./cpp-prerequisites.md) kapsayıcı Microsoft Azure Marketi'nde yayımlama.
+Bu adımları kabul etmeden önce, bir kapsayıcıyı Microsoft Azure Market yayımlamak için [Teknik ve iş gereksinimlerini](./cpp-prerequisites.md) karşılamanız gerekir.

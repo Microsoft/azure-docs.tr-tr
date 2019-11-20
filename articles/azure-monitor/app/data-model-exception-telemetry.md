@@ -1,41 +1,37 @@
 ---
-title: Azure Application Insights Telemetri veri modeli - özel durum Telemetrisi | Microsoft Docs
+title: Azure Application Insights Telemetri veri modeli-özel durum telemetrisi | Microsoft Docs
 description: Özel durum telemetrisi için Application Insights veri modeli
-services: application-insights
-documentationcenter: .net
-author: mrbullwinkle
-manager: carmonm
-ms.service: application-insights
-ms.workload: TBD
-ms.tgt_pltfrm: ibiza
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: mrbullwinkle
+ms.author: mbullwin
 ms.date: 04/25/2017
 ms.reviewer: sergkanz
-ms.author: mbullwin
-ms.openlocfilehash: efd7ad43ee9a2206f474621612eca7dfe5079f99
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0ba1c94ee8dc78b937d650cff32e1518a7ca5a12
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60908074"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72677414"
 ---
 # <a name="exception-telemetry-application-insights-data-model"></a>Özel durum telemetrisi: Application Insights veri modeli
 
-İçinde [Application Insights](../../azure-monitor/app/app-insights-overview.md), izlenen uygulamanın yürütülmesi sırasında oluşan bir işlenen veya işlenmeyen özel durum bir özel durumun örneğini temsil eder.
+[Application Insights](../../azure-monitor/app/app-insights-overview.md)bir özel durum örneği, izlenen uygulamanın yürütülmesi sırasında oluşan işlenmiş veya işlenmemiş bir özel durumu temsil eder.
 
 ## <a name="problem-id"></a>Sorun kimliği
 
-Burada kodda özel durum oluştu, tanımlayıcısı'ı tıklatın. Özel durumları gruplandırmak için kullanılır. Genellikle bir özel durum türü ve birleşim çağrı yığınındaki bir işleve.
+Kodda özel durumun oluşturulduğu tanımlayıcı. Özel durumlar gruplandırması için kullanılır. Genellikle, çağrı yığınından özel durum türü ve bir işlev birleşimi.
 
-En fazla uzunluk: 1024 karakter
+Maksimum Uzunluk: 1024 karakter
 
 ## <a name="severity-level"></a>Önem derecesi
 
-İzleme önem düzeyi. Değeri olabilir `Verbose`, `Information`, `Warning`, `Error`, `Critical`.
+Önem derecesi düzeyini izleyin. Değer `Verbose`, `Information`, `Warning`, `Error`, `Critical` olabilir.
 
 ## <a name="exception-details"></a>Özel durum ayrıntıları
 
-(Genişletilmesi için)
+(Genişletilmek üzere)
 
 ## <a name="custom-properties"></a>Özel Özellikler
 
@@ -47,6 +43,6 @@ En fazla uzunluk: 1024 karakter
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz: [veri modeli](data-model.md) için Application Insights türleri ve veri modeli.
-- Bilgi edinmek için nasıl [Application Insights ile web uygulamalarınızda özel durumları tanılama](../../azure-monitor/app/asp-net-exceptions.md).
-- Kullanıma [platformları](../../azure-monitor/app/platforms.md) Application Insights tarafından desteklenir.
+- Application Insights türleri ve veri modeli için [veri modeli](data-model.md) 'ne bakın.
+- [Web uygulamalarınızda Application Insights özel durumları tanılamayı](../../azure-monitor/app/asp-net-exceptions.md)öğrenin.
+- Application Insights tarafından desteklenen [platformları](../../azure-monitor/app/platforms.md) inceleyin.

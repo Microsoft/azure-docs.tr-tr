@@ -6,18 +6,18 @@ ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/31/2019
 ms.author: mjbrown
-ms.openlocfilehash: eecc1522f8c260286c7dd7fc4c2e58d5d8caa8fb
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: 899355ad7331a3df8cd5d647a573dc15e3a0bb14
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342493"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71003376"
 ---
-# <a name="operators-in-azure-cosmos-db"></a>Azure cosmos DB'de işleçleri
+# <a name="operators-in-azure-cosmos-db"></a>Azure Cosmos DB işleçler
 
-Bu makalede Azure Cosmos DB tarafından desteklenen çeşitli işleçler ayrıntılı olarak açıklanmaktadır.
+Bu makalede Azure Cosmos DB tarafından desteklenen çeşitli işleçler ayrıntılı olarak açıklanır.
 
-## <a name="equality-and-comparison-operators"></a>Eşitlik ve Karşılaştırma işleçleri
+## <a name="equality-and-comparison-operators"></a>Eşitlik ve karşılaştırma Işleçleri
 
 Aşağıdaki tabloda, her iki JSON türünden SQL API eşitlik karşılaştırmaları sonucunu gösterir.
 
@@ -31,13 +31,13 @@ Aşağıdaki tabloda, her iki JSON türünden SQL API eşitlik karşılaştırma
 | **Nesne** | Tanımlanmadı | Tanımlanmadı | Tanımlanmadı | Tanımlanmadı | Tanımlanmadı | **Tamam** | Tanımlanmadı |
 | **Dizi** | Tanımlanmadı | Tanımlanmadı | Tanımlanmadı | Tanımlanmadı | Tanımlanmadı | Tanımlanmadı | **Tamam** |
 
-Karşılaştırma işleçleri gibi `>`, `>=`, `!=`, `<`, ve `<=`, karşılaştırma türleri arasında veya iki arasında nesneleri veya dizi üretir `Undefined`.  
+`>` `Undefined`, ,,`>=`Ve gibikarşılaştırmaişleçleriiçin,türlerarasındaveyaikinesneveyadiziarasındakarşılaştırmaüretir.`<=` `!=` `<`  
 
-Skaler ifade sonucu ise `Undefined`, öğe sonucunda, çünkü bulunmayan `Undefined` eşit değildir `true`.
+Skaler ifadenin sonucu ise `Undefined`, eşit `true`olmadığı `Undefined` için öğe sonuca dahil değildir.
 
 ## <a name="logical-and-or-and-not-operators"></a>Mantıksal (AND, OR ve NOT) işleçleri
 
-Mantıksal işleçler Boole değerleri üzerinde çalışır. Aşağıdaki tablolarda, bu işleçler için mantıksal gerçekte tabloları göster:
+Mantıksal işleçler Boole değerleri üzerinde çalışır. Aşağıdaki tablolarda bu işleçler için mantıksal Truth tabloları gösterilmektedir:
 
 **OR işleci**
 
@@ -66,29 +66,29 @@ Mantıksal işleçler Boole değerleri üzerinde çalışır. Aşağıdaki tablo
 
 ## <a name="-operator"></a>* işleci
 
-Özel işleç * olduğu gibi tüm öğe projeleri. Kullanıldığında yansıtılan tek alan olması gerekir. Bir sorgu ister `SELECT * FROM Families f` geçerlidir, ancak `SELECT VALUE * FROM Families f` ve `SELECT *, f.id FROM Families f` geçerli değildir.
+\* Özel işleci, tüm öğeyi olduğu gibi projeler. Kullanıldığında yansıtılan tek alan olması gerekir. Benzer `SELECT * FROM Families f` bir sorgu geçerli, `SELECT *, f.id FROM Families f` ancak `SELECT VALUE * FROM Families f` geçerli değil.
 
-## <a name="-and--operators"></a>? ve?? İşleçleri
+## <a name="-and--operators"></a>? ve?? işletmenlerinin
 
-Ternary (?) kullanın ve programlama dilleri gibi olduğu gibi koşullu ifadeleri oluşturmak için (?) işleçleri birleşim C# ve JavaScript. 
+C# Ve JavaScript gibi programlama dillerinde olduğu gibi, Koşullu ifadeler oluşturmak için üçlü (?) ve birleşim (??) işleçlerini kullanabilirsiniz. 
 
-Kullanabilirsiniz? Yeni JSON özellikleri hareket halindeyken oluşturmak için işleç. Örneğin, aşağıdaki sorguyu sınıf düzeylerde sınıflandıran `elementary` veya `other`:
+Kullanabilirsiniz. anında yeni JSON özellikleri oluşturmaya yönelik operatör. Örneğin, aşağıdaki sorgu, sınıf düzeylerini veya `elementary` `other`içine sınıflandırır:
 
 ```sql
      SELECT (c.grade < 5)? "elementary": "other" AS gradeLevel
      FROM Families.children[0] c
 ```
 
-Çağrı Ayrıca iç içe yerleştirebilirsiniz? Aşağıdaki sorgu olduğu gibi işleç: 
+Ayrıca, çağrılarını iç içe geçirebilirsiniz. işlecini, aşağıdaki sorguda olduğu gibi: 
 
 ```sql
     SELECT (c.grade < 5)? "elementary": ((c.grade < 9)? "junior": "high") AS gradeLevel
     FROM Families.children[0] c
 ```
 
-Diğer sorgu işleçleri olduğu gibi mi? işleci, başvurulan özellikleri eksik olan veya karşılaştırılan türleri farklı öğeleri hariç tutar.
+Diğer sorgu işleçleri gibi? başvurulan Özellikler eksikse veya karşılaştırılan türler farklıysa işleç öğeleri dışlar.
 
-Kullanım?? verimli bir şekilde bir öğede bir özellik karşı yarı yapılandırılmış veya karma tür veriler sorgulanırken olup olmadığını denetlemek için işleci. Örneğin, aşağıdaki döndürür sorgu `lastName` varsa veya `surname` varsa `lastName` bulunmaz.
+??? yarı yapılandırılmış veya karma tür verilere göre sorgulama yaparken bir öğedeki özelliği etkin bir şekilde denetlemek için işleç. Örneğin, aşağıdaki sorgu varsa döndürür `lastName` `lastName` veya `surname` yoksa.
 
 ```sql
     SELECT f.lastName ?? f.surname AS familyName
@@ -97,6 +97,6 @@ Kullanım?? verimli bir şekilde bir öğede bir özellik karşı yarı yapılan
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmosdb-dotnet)
+- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3)
 - [anahtar sözcükler](sql-query-keywords.md)
 - [SELECT yan tümcesi](sql-query-select.md)

@@ -1,127 +1,100 @@
 ---
-title: Önceden oluşturulmuş sıcaklık varlık
-titleSuffix: Azure
-description: Bu makalede sıcaklık içeren önceden oluşturulmuş varlık bilgilerini Language Understanding (LUIS).
+title: Sıcaklık önceden oluşturulmuş varlık-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Bu makale, Language Understanding (LUSıS) içindeki sıcaklık önceden oluşturulmuş varlık bilgilerini içerir.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 05/07/2019
+ms.topic: conceptual
+ms.date: 10/14/2019
 ms.author: diberry
-ms.openlocfilehash: 8d5e10a7a4fe7fb12bc4140690fcabffa16b32be
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f2ea08694419caaaf54e4fed45c7c1589be2473d
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65072103"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73499514"
 ---
-# <a name="temperature-prebuilt-entity-for-a-luis-app"></a>Sıcaklık LUIS uygulaması için önceden oluşturulmuş varlık
-Sıcaklık sıcaklık türleri çeşitli ayıklar. Bu varlık zaten eğitildi çünkü uygulama sıcaklık içeren örnek Konuşma ekleme gerekmez. Sıcaklık varlık içerisinde desteklendiği [çok kültür](luis-reference-prebuilt-entities.md). 
+# <a name="temperature-prebuilt-entity-for-a-luis-app"></a>Bir LUSıS uygulaması için sıcaklık önceden oluşturulmuş varlık
+Sıcaklık çeşitli sıcaklık türlerini ayıklar. Bu varlık zaten eğitiltiğinden, uygulamanın sıcaklığını içeren örnek bir değer eklemeniz gerekmez. Sıcaklık varlığı [birçok kültürde](luis-reference-prebuilt-entities.md)desteklenir. 
 
 ## <a name="types-of-temperature"></a>Sıcaklık türleri
-Sıcaklık yönetilen engelle [tanıyıcıları metin](https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-NumbersWithUnit.yaml#L819) GitHub deposu
+Sıcaklık, [Tanıyıcılar-metin](https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-NumbersWithUnit.yaml#L819) GitHub deposundan yönetiliyor
 
-## <a name="resolution-for-prebuilt-temperature-entity"></a>Önceden oluşturulmuş sıcaklık varlık için çözümleme
+## <a name="resolution-for-prebuilt-temperature-entity"></a>Önceden oluşturulmuş sıcaklık varlığına yönelik çözüm
 
-### <a name="api-version-2x"></a>API sürüm 2.x
+Sorgu için aşağıdaki varlık nesneleri döndürülür:
 
-Aşağıdaki örnek, çözünürlüğünü gösterir **builtin.temperature** varlık.
+`set the temperature to 30 degrees`
 
-```json
-{
-  "query": "set the temperature to 30 degrees",
-  "topScoringIntent": {
-    "intent": "None",
-    "score": 0.85310787
-  },
-  "intents": [
-    {
-      "intent": "None",
-      "score": 0.85310787
-    }
-  ],
-  "entities": [
-    {
-      "entity": "30 degrees",
-      "type": "builtin.temperature",
-      "startIndex": 23,
-      "endIndex": 32,
-      "resolution": {
-        "unit": "Degree",
-        "value": "30"
-      }
-    }
-  ]
-}
-```
 
-### <a name="preview-api-version-3x"></a>Önizleme API sürümü 3.x
+#### <a name="v3-responsetabv3"></a>[V3 yanıtı](#tab/V3)
 
-Aşağıdaki JSON ile olan `verbose` parametresini `false`:
+Aşağıdaki JSON, `verbose` parametresi `false`olarak ayarlanmıştır:
 
 ```json
-{
-    "query": "set the temperature to 30 degrees",
-    "prediction": {
-        "normalizedQuery": "set the temperature to 30 degrees",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.656305432
-            }
-        },
-        "entities": {
-            "temperature": [
-                {
-                    "number": 30,
-                    "unit": "Degree"
-                }
-            ]
+"entities": {
+    "temperature": [
+        {
+            "number": 30,
+            "units": "Degree"
         }
-    }
+    ]
 }
 ```
-
-Aşağıdaki JSON ile olan `verbose` parametresini `true`:
+#### <a name="v3-verbose-responsetabv3-verbose"></a>[V3 ayrıntılı yanıt](#tab/V3-verbose)
+Aşağıdaki JSON, `verbose` parametresi `true`olarak ayarlanmıştır:
 
 ```json
-{
-    "query": "set the temperature to 30 degrees",
-    "prediction": {
-        "normalizedQuery": "set the temperature to 30 degrees",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.656305432
-            }
-        },
-        "entities": {
-            "temperature": [
-                {
-                    "number": 30,
-                    "unit": "Degree"
-                }
-            ],
-            "$instance": {
-                "temperature": [
-                    {
-                        "type": "builtin.temperature",
-                        "text": "30 degrees",
-                        "startIndex": 23,
-                        "length": 10,
-                        "modelTypeId": 2,
-                        "modelType": "Prebuilt Entity Extractor"
-                    }
+"entities": {
+    "temperature": [
+        {
+            "number": 30,
+            "units": "Degree"
+        }
+    ],
+    "$instance": {
+        "temperature": [
+            {
+                "type": "builtin.temperature",
+                "text": "30 degrees",
+                "startIndex": 23,
+                "length": 10,
+                "modelTypeId": 2,
+                "modelType": "Prebuilt Entity Extractor",
+                "recognitionSources": [
+                    "model"
                 ]
             }
-        }
+        ]
     }
 }
 ```
+#### <a name="v2-responsetabv2"></a>[V2 yanıtı](#tab/V2)
+
+Aşağıdaki örnek, **yerleşik. sıcaklık** varlığının çözünürlüğünü gösterir.
+
+```json
+"entities": [
+    {
+        "entity": "30 degrees",
+        "type": "builtin.temperature",
+        "startIndex": 23,
+        "endIndex": 32,
+        "resolution": {
+        "unit": "Degree",
+        "value": "30"
+        }
+    }
+]
+```
+* * * 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hakkında bilgi edinin [yüzdesi](luis-reference-prebuilt-percentage.md), [numarası](luis-reference-prebuilt-number.md), ve [yaş](luis-reference-prebuilt-age.md) varlıklar. 
+[V3 tahmin uç noktası](luis-migration-api-v3.md)hakkında daha fazla bilgi edinin.
+
+[Yüzde](luis-reference-prebuilt-percentage.md), [sayı](luis-reference-prebuilt-number.md)ve [yaş](luis-reference-prebuilt-age.md) varlıkları hakkında bilgi edinin. 

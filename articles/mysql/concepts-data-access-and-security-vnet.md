@@ -1,44 +1,44 @@
 ---
-title: MySQL sunucusu sanal ağ için Azure veritabanı hizmetleri uç noktası genel bakış | Microsoft Docs
-description: Sanal ağ hizmet uç noktaları için Azure veritabanınızı MySQL sunucusuna nasıl açıklar.
+title: MySQL için Azure veritabanı sunucu VNet Hizmetleri uç noktası genel bakış | Microsoft Docs
+description: Sanal ağ hizmet uç noktalarının MySQL sunucusu için Azure veritabanı için nasıl çalıştığını açıklar.
 author: bolzmj
 ms.author: mbolz
 manager: jhubbard
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 08/20/2018
-ms.openlocfilehash: 3a7eaacc4c234ec7d1d3d88455bd423256a07e90
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: cf8b917b72362465c3273f80db61b681ffd0c4d7
+ms.sourcegitcommit: 6cff17b02b65388ac90ef3757bf04c6d8ed3db03
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60614850"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68610378"
 ---
-# <a name="use-virtual-network-service-endpoints-and-rules-for-azure-database-for-mysql"></a>Sanal ağ hizmet uç noktaları ve kuralları için Azure veritabanı için MySQL kullanır.
+# <a name="use-virtual-network-service-endpoints-and-rules-for-azure-database-for-mysql"></a>MySQL için Azure veritabanı 'nda sanal ağ hizmet uç noktalarını ve kurallarını kullanma
 
-*Sanal ağ kuralları* MySQL için Azure veritabanı sunucunuza belirli alt ağları sanal ağlardaki gönderildiği iletişimleri kabul edip etmeyeceğini denetleyen bir güvenlik duvarı güvenliği özelliğidir. Bu makalede, sanal ağ kuralı özellik bazen güvenli bir şekilde iletişim için Azure veritabanınızı MySQL sunucusuna vermeye yönelik en iyi seçenek olup neden açıklar.
+*Sanal ağ kuralları* , MySQL sunucusu Için Azure veritabanı 'nın sanal ağlardaki belirli alt ağlardan gönderilen iletişimleri kabul edip etmediğini denetleyen bir güvenlik duvarı güvenlik özelliğidir. Bu makalede, MySQL için Azure veritabanı sunucunuza iletişimin güvenli bir şekilde yapılmasına olanak tanımak için sanal ağ kuralı özelliğinin neden bazen en iyi seçenektir.
 
-Bir sanal ağ kuralı oluşturmak için öncelikle olmalıdır bir [sanal ağ] [ vm-virtual-network-overview] (VNet) ve bir [sanal ağ hizmet uç noktası] [ vm-virtual-network-service-endpoints-overview-649d] için başvuru kural. Aşağıdaki resimde, bir sanal ağ hizmet uç noktası MySQL için Azure veritabanı ile işleyişi gösterilmektedir:
+Bir sanal ağ kuralı oluşturmak için öncelikle kuralın başvurması için bir [sanal ağ][vm-virtual-network-overview] (VNet) ve bir [sanal ağ hizmeti uç noktası][vm-virtual-network-service-endpoints-overview-649d] olmalıdır. Aşağıdaki resimde, bir sanal ağ hizmeti uç noktasının MySQL için Azure veritabanı ile nasıl çalıştığı gösterilmektedir:
 
-![Örneği, bir sanal ağ hizmet uç noktasının nasıl çalışır?](media/concepts-data-access-and-security-vnet/vnet-concept.png)
+![VNet hizmeti uç noktasının nasıl çalıştığı hakkında örnek](media/concepts-data-access-and-security-vnet/vnet-concept.png)
 
 > [!NOTE]
-> Bu özellik, MySQL için Azure veritabanı genel amaçlı ve bellek için iyileştirilmiş sunucuları için dağıtıldığı tüm bölgelerde Azure'nın kullanılabilir.
-> Trafiği ortak bir VNet ağ geçidi hizmet uç noktaları ile üzerinden akan ve eşler arası akışı beklenir, VNet eşlemesi olması durumunda bir ACL/sanal ağ kuralı, Azure sanal makinelerinde MySQL sunucusu için Azure veritabanına erişmek için ağ geçidi sanal ağda izin vermek için lütfen oluşturun.
+> Bu özellik, MySQL için Azure veritabanı 'nın Genel Amaçlı ve bellek için Iyileştirilmiş sunucular için dağıtıldığı tüm Azure bölgelerinde kullanılabilir.
+> VNet eşlemesi söz konusu olduğunda trafik, hizmet uç noktaları içeren bir ortak VNet ağ geçidi üzerinden akar ve eşe akışı gerekiyorsa, ağ geçidi VNet 'teki Azure sanal makinelerinin MySQL sunucusuna Azure veritabanı 'na erişmesine izin vermek için lütfen bir ACL/VNet kuralı oluşturun.
 
 <a name="anch-terminology-and-description-82f" />
 
-## <a name="terminology-and-description"></a>Terminoloji ve açıklaması
+## <a name="terminology-and-description"></a>Terminoloji ve açıklama
 
-**Sanal ağ:** Azure aboneliğinizle ilişkili sanal ağları olabilir.
+**Sanal ağ:** Azure aboneliğinizle ilişkili sanal ağlarınız olabilir.
 
-**Alt ağı:** Bir sanal ağ içeren **alt ağlar**. Tüm Azure sahip olduğunuz sanal makinelerin (VM'ler), alt ağa atanır. Bir alt ağ, birden çok VM veya başka bir işlem düğümünde içerebilir. Sanal ağınızın dışında düğümleri erişime izin vermek için güvenlik yapılandırmadığınız sürece, sanal ağınızın erişemiyor işlem.
+**Alt ağ** Bir sanal ağ, **alt ağlar**içerir. Sahip olduğunuz tüm Azure sanal makineleri (VM 'Ler) alt ağlara atanır. Bir alt ağ birden çok VM veya başka işlem düğümü içerebilir. Ağınızı erişime izin verecek şekilde yapılandırmadığınız müddetçe, sanal ağınızın dışındaki işlem düğümleri sanal ağınıza erişemez.
 
-**Sanal ağ hizmet uç noktası:** A [sanal ağ hizmet uç noktası] [ vm-virtual-network-service-endpoints-overview-649d] özellik değerleri içeren bir veya daha fazla biçimsel Azure hizmet türü adları bir alt ağ. Bu makalede şu tür adı ile ilgilenen **Microsoft.Sql**, adlandırılmış SQL veritabanı, Azure hizmetini ifade eder. Bu hizmet etiketi, hizmetleri, MySQL ve PostgreSQL için Azure veritabanı için de geçerlidir. Uygularken dikkate almak önemlidir **Microsoft.Sql** hizmet etiketi bir sanal ağ hizmet uç noktası için tüm Azure SQL veritabanı, MySQL için Azure veritabanı ve PostgreSQL sunucuları için Azure veritabanı için hizmet uç noktası trafiğini yapılandırın alt ağda. 
+**Sanal ağ hizmeti uç noktası:** [Sanal ağ hizmeti uç noktası][vm-virtual-network-service-endpoints-overview-649d] , özellik değerleri bir veya daha fazla resmi Azure hizmet türü adı içeren bir alt ağıdır. Bu makalede, SQL veritabanı adlı Azure hizmetine başvuran **Microsoft. SQL**tür adı ile ilgileniyoruz. Bu hizmet etiketi, MySQL için Azure veritabanı ve PostgreSQL Hizmetleri için de geçerlidir. **Microsoft. SQL** hizmet etiketi bir sanal ağ hizmeti uç noktasına uygulanırken, tüm Azure SQL veritabanı, MySQL Için Azure veritabanı ve alt ağdaki PostgreSQL Için Azure veritabanı sunucuları için hizmet uç noktası trafiğini yapılandıracaksınız. 
 
-**Sanal ağ kuralı:** MySQL için Azure veritabanı sunucunuza erişim denetimi listesi (ACL) listelenen bir alt ağ için Azure veritabanınızı MySQL sunucusu için bir sanal ağ kuralı önemlidir. MySQL için Azure veritabanı sunucunuza ACL'si olması için alt ağ içermelidir **Microsoft.Sql** tür adı.
+**Sanal ağ kuralı:** MySQL için Azure veritabanı sunucunuz için bir sanal ağ kuralı, MySQL için Azure veritabanı sunucunuzun erişim denetim listesi 'nde (ACL) listelenen bir alt ağıdır. MySQL için Azure veritabanı sunucunuzun ACL 'sinde olması için, alt ağın **Microsoft. SQL** tür adını içermesi gerekir.
 
-Azure veritabanınızı MySQL sunucusu için bir alt ağda bulunan her düğüme gelen iletişimleri kabul etmek için bir sanal ağ kuralı söyler.
+Bir sanal ağ kuralı, MySQL için Azure veritabanı sunucunuzun alt ağdaki her düğümden gelen iletişimleri kabul etmesini söyler.
 
 
 
@@ -48,102 +48,103 @@ Azure veritabanınızı MySQL sunucusu için bir alt ağda bulunan her düğüme
 
 <a name="anch-benefits-of-a-vnet-rule-68b" />
 
-## <a name="benefits-of-a-virtual-network-rule"></a>Bir sanal ağ kuralı avantajları
+## <a name="benefits-of-a-virtual-network-rule"></a>Bir sanal ağ kuralının avantajları
 
-Önlem kadar alt ağlarınızı Vm'lerde MySQL sunucusu için Azure veritabanı ile iletişim kuramıyor. İletişim kuran bir sanal ağ kuralı oluşturulmasını eylemdir. Sanal ağ kuralı yaklaşım seçme stratejinin güvenlik duvarı tarafından sunulan rakip güvenlik seçenekleri içeren bir karşılaştırma ve karşıtlık tartışma gerektirir.
+İşlem yapana kadar, alt ağlardaki VM 'Ler MySQL sunucusu için Azure veritabanı ile iletişim kuramaz. İletişim kuran bir eylem, bir sanal ağ kuralı oluşturma işlemi olur. VNet kuralı yaklaşımını seçmeye yönelik korvaale, güvenlik duvarı tarafından sunulan rekabet güvenlik seçeneklerini içeren bir karşılaştırma ve kontrast tartışması gerektirir.
 
 ### <a name="a-allow-access-to-azure-services"></a>A. Azure hizmetlerine erişime izin ver
 
-Bağlantı güvenliği bölmesi olan bir **açık/kapalı** etiketli bir düğme **Azure hizmetlerine erişime izin ver**. **ON** ayarı, tüm Azure IP adresleri ve tüm Azure alt ağlar arasındaki iletişimler sağlar. Bu Azure IP'ler veya alt ağlara sahip değil. Bu **ON** ayardır olarak MySQL veritabanı için Azure veritabanınızı istediğinizden daha büyük olasılıkla daha açık. Sanal ağ kuralı özelliği çok daha ayrıntılı denetim olanağı sunar.
+Bağlantı güvenlik bölmesinde, **Azure hizmetlerine erişime Izin ver**etiketli bir **açık/kapalı** düğmesi vardır. **Açık** ayarı tüm Azure IP adreslerinden ve tüm Azure alt ağlarının iletişimlerine izin verir. Bu Azure IP 'Leri veya alt ağları size ait olmayabilir. Bu **ayar** , MySQL veritabanınızın Azure veritabanınızın olmasını istediğiniz büyük olasılıkla daha açıktır. Sanal ağ kuralı özelliği, daha ayrıntılı bir denetim sağlar.
 
 ### <a name="b-ip-rules"></a>B. IP kuralları
 
-Güvenlik Duvarı'nı MySQL için Azure veritabanı, iletişim MySQL veritabanı için Azure veritabanı'na kabul IP adresi aralıklarını belirtmenizi sağlar. Bu yaklaşım, Azure özel ağ dışından kararlı IP adresleri için uygundur. Ancak Azure özel ağ içindeki birçok düğümleri ile yapılandırılan *dinamik* IP adresleri. Sanal makinenizin ne zaman yeniden gibi dinamik IP adresleri değişebilir. Bu bir güvenlik duvarı kuralı, bir üretim ortamında dinamik bir IP adresi belirtmek için folly olacaktır.
+MySQL için Azure veritabanı güvenlik duvarı, iletişimlere MySQL veritabanı için Azure veritabanı 'na kabul edileceği IP adresi aralıklarını belirtmenize olanak tanır. Bu yaklaşım, Azure özel ağının dışında olan kararlı IP adresleri için çok uygundur. Ancak, Azure özel ağı içindeki birçok düğüm *dinamik* IP adresleriyle yapılandırılır. SANAL makinenizin yeniden başlatılması gibi dinamik IP adresleri değişebilir. Bir güvenlik duvarı kuralında, bir üretim ortamında dinamik bir IP adresi belirtmek de bu şekilde yapılır.
 
-IP seçeneği elde ederek hurda bir *statik* , VM için IP adresi. Ayrıntılar için bkz [Azure portalını kullanarak bir sanal makine için özel IP adreslerini yapılandırın][vm-configure-private-ip-addresses-for-a-virtual-machine-using-the-azure-portal-321w].
+VM 'niz için bir *statik* IP adresı alarak IP seçeneğini hurda yapabilirsiniz. Ayrıntılar için bkz. [Azure Portal kullanarak bir sanal makine için özel IP adreslerini yapılandırma][vm-configure-private-ip-addresses-for-a-virtual-machine-using-the-azure-portal-321w].
 
-Ancak, statik IP yaklaşım yönetmek zor olabilir ve uygun ölçekte kullanıldıklarında maliyeti yüksek. Sanal ağ kuralları oluşturmak ve yönetmek için daha kolay okunuyor.
+Ancak, statik IP yaklaşımının yönetilmesi zor olabilir ve ölçekteki tamamlandığında maliyetli hale gelir. Sanal ağ kuralları kurmak ve yönetmek daha kolaydır.
 
-### <a name="c-cannot-yet-have-azure-database-for-mysql-on-a-subnet-without-defining-a-service-endpoint"></a>C. Henüz Azure veritabanını MySQL için bir alt ağ üzerinde bir hizmet uç noktası tanımlamadan sahip olamaz
+### <a name="c-cannot-yet-have-azure-database-for-mysql-on-a-subnet-without-defining-a-service-endpoint"></a>C. Hizmet uç noktası tanımlamadan bir alt ağda MySQL için Azure veritabanı olamaz
 
-Varsa, **Microsoft.Sql** sunucusuydu bir düğümde sanal ağınızdaki bir alt ağ, sanal ağ içindeki tüm düğümleri MySQL sunucusu için Azure veritabanı ile iletişim kurulamadı. Bu durumda, sanal makinelerinizi Azure veritabanı ile MySQL için herhangi bir sanal ağ kuralları veya IP kuralları gerek kalmadan iletişim kurulamadı.
+**Microsoft. SQL** Server ağınız sanal ağınızdaki bir alt ağda yer alıyorsa, sanal ağ içindeki tüm düğümler MySQL sunucusu Için Azure veritabanı ile iletişim kurabilir. Bu durumda, sanal makineler herhangi bir sanal ağ kuralına veya IP kuralına gerek duymadan MySQL için Azure veritabanı ile iletişim kurabilir.
 
-Ancak Ağustos 2018'den itibaren MySQL hizmeti için Azure veritabanı henüz bir alt ağa doğrudan atanabilir hizmetleri arasında değil.
+Ancak, Ağustos 2018 itibariyle, MySQL için Azure veritabanı hizmeti, henüz bir alt ağa atanabileceği hizmetler arasında değil.
 
 <a name="anch-details-about-vnet-rules-38q" />
 
 ## <a name="details-about-virtual-network-rules"></a>Sanal ağ kuralları hakkında ayrıntılar
 
-Bu bölümde, sanal ağ kuralları hakkında bazı ayrıntılar açıklanmaktadır.
+Bu bölümde, sanal ağ kurallarıyla ilgili çeşitli ayrıntılar açıklanmaktadır.
 
-### <a name="only-one-geographic-region"></a>Yalnızca tek bir coğrafi bölge
+### <a name="only-one-geographic-region"></a>Yalnızca bir coğrafi bölge
 
-Her sanal ağ hizmet uç noktası yalnızca bir Azure bölgesine geçerlidir. Uç nokta, alt ağından gelen iletişimi kabul etmek üzere diğer bölgeler etkinleştirmez.
+Her sanal ağ hizmeti uç noktası yalnızca bir Azure bölgesi için geçerlidir. Uç nokta diğer bölgelerin alt ağdan iletişim kabul etmesine izin vermez.
 
-Herhangi bir sanal ağ kuralı, temel alınan bitim uygulandığı bölgeye sınırlıdır.
+Herhangi bir sanal ağ kuralı, temeldeki uç noktasının geçerli olduğu bölge ile sınırlıdır.
 
-### <a name="server-level-not-database-level"></a>Sunucu düzeyinde, veritabanı düzeyinde
+### <a name="server-level-not-database-level"></a>Sunucu düzeyi, veritabanı düzeyi değil
 
-Her sanal ağ kuralı, tüm Azure veritabanınızı MySQL sunucusuna, yalnızca sunucu üzerindeki belirli bir veritabanı için geçerlidir. Diğer bir deyişle, sunucu düzeyinde-, veritabanı düzeyinde değil, sanal ağ kuralı uygular.
+Her bir sanal ağ kuralı, yalnızca sunucudaki belirli bir veritabanına değil, tüm MySQL Server için Azure veritabanınız için geçerlidir. Diğer bir deyişle, sanal ağ kuralı, veritabanı düzeyinde değil, sunucu düzeyinde geçerlidir.
 
-### <a name="security-administration-roles"></a>Güvenlik Yönetim rolleri
+### <a name="security-administration-roles"></a>Güvenlik yönetimi rolleri
 
-Sanal ağ hizmet uç noktaları Yönetim güvenlik rollerini ayrımı yoktur. Eylem her aşağıdaki roller gereklidir:
+Sanal ağ hizmet uç noktalarının yönetiminde güvenlik rollerinin bir ayrımı vardır. Aşağıdaki rollerden her biri için eylem gereklidir:
 
-- **Ağ Yöneticisi:** &nbsp; Uç noktada bırakın.
-- **Veritabanı Yöneticisi:** &nbsp; Erişim denetimi listesi (ACL) belirli alt MySQL sunucusu için Azure veritabanı eklemek için güncelleştirin.
+- **Ağ Yöneticisi:** &nbsp;Uç noktasını açın.
+- **Veritabanı Yöneticisi:** &nbsp;Verilen alt ağı MySQL sunucusu için Azure veritabanı 'na eklemek üzere erişim denetim listesini (ACL) güncelleştirin.
 
-*RBAC alternatif:*
+*RBAC alternatifi:*
 
-Ağ Yöneticisi ve veritabanı yöneticisi rollerini sanal ağ kuralları yönetmek için gerekli olandan daha fazla özelliğe sahip. Yalnızca bir alt kümesini yeteneklerini gereklidir.
+Ağ yöneticisinin ve veritabanı yöneticisinin rollerinin sanal ağ kurallarını yönetmek için gerekenden daha fazla özelliği vardır. Yalnızca kendi yeteneklerinin bir alt kümesi gereklidir.
 
-Kullanma seçeneğiniz [rol tabanlı erişim denetimi (RBAC)] [ rbac-what-is-813s] özellikleri yalnızca gerekli kısmı olan tek bir özel rol oluşturmak için azure'da. Özel rol ağ yöneticisi ya da veritabanı yöneticisi içeren yerine kullanılabilir. Diğer iki ana Yöneticisi rollere kullanıcı ekleyerek yerine özel bir rol için bir kullanıcı eklerseniz, güvenlik açıklarını'nın yüzey alanını düşüktür.
+Azure 'da [rol tabanlı erişim denetimi (RBAC)][rbac-what-is-813s] kullanarak yalnızca gerekli özellik alt kümesini içeren tek bir özel rol oluşturabilirsiniz. Özel rol, ağ yöneticisi ya da veritabanı Yöneticisi dahil olmak yerine kullanılabilir. Bir kullanıcıyı özel bir role eklerseniz, diğer iki ana yönetici rolüne kullanıcı ekleyerek güvenlik açıkağınızın yüzey alanı düşüktür.
 
 > [!NOTE]
-> Bazı durumlarda, MySQL ve VNet-alt ağ için Azure veritabanı farklı Aboneliklerde olduğundan. Bu durumlarda aşağıdaki yapılandırmaları emin olmanız gerekir:
-> - Her iki aboneliğin aynı Azure Active Directory kiracısı olmalıdır.
-> - Kullanıcı, hizmet uç noktaları etkinleştiriliyor ve verilen bir sunucu için bir sanal ağ alt ağı ekleme gibi işlemleri başlatmak için gerekli izinlere sahip.
+> Bazı durumlarda, MySQL için Azure veritabanı ve VNet alt ağı farklı aboneliklerde bulunur. Bu durumlarda, aşağıdaki yapılandırmalardan emin olmanız gerekir:
+> - Her iki abonelik da aynı Azure Active Directory kiracısında olmalıdır.
+> - Kullanıcı, hizmet uç noktalarını etkinleştirme ve verilen sunucuya VNet-subnet ekleme gibi işlemleri başlatmak için gerekli izinlere sahiptir.
+> - Her iki aboneliğin de **Microsoft. SQL** kaynak sağlayıcısı 'nın kayıtlı olduğundan emin olun. Daha fazla bilgi için [Resource-Manager-kayıt][resource-manager-portal] bölümüne bakın
 
 ## <a name="limitations"></a>Sınırlamalar
 
-MySQL için Azure veritabanı için sanal ağ kuralları özelliği aşağıdaki sınırlamalara sahiptir:
+MySQL için Azure veritabanı 'nda, sanal ağ kuralları özelliği aşağıdaki sınırlamalara sahiptir:
 
-- Bir Web uygulaması, bir VNet/alt ağ içinde bir özel IP eşlenebilir. Hizmet uç noktaları belirtilen VNet/alt ağ üzerinde etkin olsa bile, bir Azure genel IP kaynağı, bir VNet/alt ağ kaynak sunucuya Web uygulamasından bağlantıları gerekir. Sanal ağ güvenlik duvarı kuralları olan bir sunucuyu bir Web uygulamasından bağlantıyı etkinleştirmek için sunucu sunucusuna erişmek için izin Azure Hizmetleri gerekir.
+- Bir Web uygulaması, VNet/alt ağdaki özel bir IP ile eşleştirilebilir. Hizmet uç noktaları, belirtilen VNet/alt ağdan açık olsa bile, Web uygulamasından sunucusuna yapılan bağlantıların VNet/alt ağ kaynağına değil, Azure genel IP kaynağı olur. Bir Web uygulamasından VNet güvenlik duvarı kurallarına sahip bir sunucuya bağlantıyı etkinleştirmek için, Azure hizmetlerinin sunucuda sunucuya erişmesine Izin vermelisiniz.
 
-- MySQL için Azure veritabanı için Güvenlik Duvarı'nda, her sanal ağ kuralı bir alt ağ başvuruyor. Bu başvurulan tüm alt ağlar, MySQL için Azure veritabanını barındıran aynı coğrafi bölgede barındırılması gerekir.
+- MySQL için Azure veritabanı 'nın güvenlik duvarında, her bir sanal ağ kuralı bir alt ağa başvurur. Bu başvurulan tüm alt ağlar, MySQL için Azure veritabanı 'nı barındıran aynı coğrafi bölgede barındırılmalıdır.
 
-- Her bir MySQL sunucusu için Azure veritabanı, belirli herhangi bir sanal ağ için 128 ACL girişleri kadar olabilir.
+- Her MySQL sunucusu için Azure veritabanı, belirli bir sanal ağ için en fazla 128 ACL girişine sahip olabilir.
 
-- Sanal ağ kuralları yalnızca Azure Resource Manager sanal ağlara uygulanır. ve değil [Klasik dağıtım modeli] [ arm-deployment-model-568f] ağlar.
+- Sanal ağ kuralları yalnızca Azure Resource Manager sanal ağlar için geçerlidir; [klasik dağıtım modeli][arm-deployment-model-568f] ağlarına değil.
 
-- Kullanarak MySQL için kapatma şirket sanal ağ hizmet uç noktaları için Azure veritabanı **Microsoft.Sql** hizmet etiketi, aynı zamanda uç noktaları tüm Azure veritabanı hizmetleri sağlar: MySQL için Azure veritabanı, PostgreSQL için Azure veritabanı, Azure SQL veritabanı ve Azure SQL veri ambarı.
+- **Microsoft. SQL** Service etiketini kullanarak MySQL Için Azure veritabanı 'nda sanal ağ hizmet uç noktalarını açmak, tüm Azure veritabanı hizmetleri için uç noktaları da sağlar: MySQL için Azure veritabanı, PostgreSQL için Azure veritabanı, Azure SQL veritabanı ve Azure SQL veri ambarı.
 
 - Yalnızca genel amaçlı ve bellek için iyileştirilmiş sunucuları için sanal ağ hizmet uç noktaları desteğidir.
 
-- Güvenlik Duvarı, IP adresi aralıklarını aşağıdaki ağ öğeleri için geçerlidir, ancak bu sanal ağ kuralları yapın:
+- Güvenlik duvarında, IP adresi aralıkları aşağıdaki ağ öğelerine uygulanır, ancak sanal ağ kuralları şunları içermez:
     - [Siteden siteye (S2S) sanal özel ağ (VPN)][vpn-gateway-indexmd-608y]
-    - Aracılığıyla şirket [ExpressRoute][expressroute-indexmd-744v]
+    - [ExpressRoute][expressroute-indexmd-744v] aracılığıyla şirket içi
 
 ## <a name="expressroute"></a>ExpressRoute
 
-Ağınız aracılığıyla Azure ağına bağlı olup olmadığını [ExpressRoute][expressroute-indexmd-744v], her bağlantı hattı, Microsoft Edge, iki genel IP adresi ile yapılandırılır. İki IP adresi, Microsoft Services gibi Azure depolama için Azure ortak eşleme kullanarak bağlanmak için kullanılır.
+Ağınız [ExpressRoute][expressroute-indexmd-744v]kullanılarak Azure ağına bağlandıysa, her bağlantı hattı Microsoft Edge 'de ıkı genel IP adresi ile yapılandırılır. Azure genel eşlemesi kullanılarak Azure Storage gibi Microsoft hizmetlerine bağlanmak için iki IP adresi kullanılır.
 
-Bağlantı hattınız gelen MySQL için iletişimi için Azure veritabanı izin vermek için genel IP adresleri, bağlantı hatları için IP ağ kuralları oluşturmanız gerekir. ExpressRoute devreniz genel IP adreslerini bulmak için Azure portalını kullanarak ExpressRoute ile bir destek bileti açın.
+Bağlantı hattınızdan MySQL için Azure veritabanı 'na yönelik iletişime izin vermek için, Devrelerinizin genel IP adresleri için IP ağ kuralları oluşturmanız gerekir. ExpressRoute devrenizin genel IP adreslerini bulmak için Azure portal kullanarak ExpressRoute ile bir destek bileti açın.
 
-## <a name="adding-a-vnet-firewall-rule-to-your-server-without-turning-on-vnet-service-endpoints"></a>Üzerinde sanal ağ hizmet uç noktaları açmadan sunucunuza bir VNET güvenlik duvarı kuralı ekleme
+## <a name="adding-a-vnet-firewall-rule-to-your-server-without-turning-on-vnet-service-endpoints"></a>VNET hizmet uç noktalarını açmadan sunucunuza VNET güvenlik duvarı kuralı ekleme
 
-Yalnızca ayar bir güvenlik duvarı kuralı sunucunun sanal ağa güvenli yardımcı olmaz. Sanal ağ hizmet uç noktalarını da açmanız gerekir **üzerinde** etkili olması güvenlik. Hizmet uç noktaları kapatma zaman **üzerinde**, Geçiş tamamlanana kadar sanal ağ alt ağınızın kapalı kalma süresi deneyimleri **kapalı** için **üzerinde**. Bu özellikle büyük sanal ağlar bağlamında geçerlidir. Kullanabileceğiniz **IgnoreMissingServiceEndpoint** azaltmak veya geçiş sırasında kapalı kalma süresini ortadan kaldırmak için bayrak.
+Yalnızca bir güvenlik duvarı kuralı ayarlandığında sunucunun VNet 'e güvenli hale getirilmesine yardımcı olmaz. Ayrıca güvenliğin etkili olabilmesi için VNet hizmet **uç noktalarını** açmanız gerekir. Hizmet uç noktalarını **Açık**olarak açtığınızda, VNET alt ağınız **kapalı** kalma süresini **Açık**olarak tamamlanana kadar kesinti yaşar. Bu, büyük sanal ağlar bağlamında özellikle doğrudur. Geçiş sırasında kesinti süresini azaltmak veya ortadan kaldırmak için **ıgnoremissingserviceendpoint** bayrağını kullanabilirsiniz.
 
-Ayarlayabileceğiniz **IgnoreMissingServiceEndpoint** Azure CLI veya portalı kullanarak bayrağı.
+**Ignoremissingserviceendpoint** BAYRAĞıNı Azure CLI veya portalını kullanarak ayarlayabilirsiniz.
 
 ## <a name="related-articles"></a>İlgili makaleler
 - [Azure sanal ağları][vm-virtual-network-overview]
 - [Azure sanal ağ hizmet uç noktaları][vm-virtual-network-service-endpoints-overview-649d]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Sanal ağ kuralları oluşturma hakkında makaleler için bkz:
-- [Oluşturma ve Azure portalını kullanarak MySQL sanal ağ kuralları için Azure veritabanı'nı yönetme](howto-manage-vnet-using-portal.md)
-- [Oluşturma ve Azure CLI kullanarak MySQL sanal ağ kuralları için Azure veritabanı'nı yönetme](howto-manage-vnet-using-cli.md)
+VNet kuralları oluşturma hakkında makaleler için bkz.:
+- [Azure portal kullanarak MySQL VNet için Azure veritabanı kuralları oluşturma ve yönetme](howto-manage-vnet-using-portal.md)
+- [Azure CLı kullanarak MySQL için Azure veritabanı kuralları oluşturma ve yönetme](howto-manage-vnet-using-cli.md)
 
 <!-- Link references, to text, Within this same GitHub repo. -->
 [arm-deployment-model-568f]: ../azure-resource-manager/resource-manager-deployment-model.md
@@ -159,3 +160,5 @@ Sanal ağ kuralları oluşturma hakkında makaleler için bkz:
 [vpn-gateway-indexmd-608y]: ../vpn-gateway/index.yml
 
 [expressroute-indexmd-744v]: ../expressroute/index.yml
+
+[resource-manager-portal]: ../azure-resource-manager/resource-manager-supported-services.md

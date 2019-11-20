@@ -1,40 +1,59 @@
 ---
-title: Azure veri fabrikası veri akışı seçin dönüştürme eşlemesi
-description: Azure veri fabrikası veri akışı seçin dönüştürme eşlemesi
+title: Azure Data Factory eşleme veri akışı dönüşümü seçme
+description: Azure Data Factory eşleme veri akışı dönüşümü seçme
 author: kromerm
 ms.author: makromer
-ms.reviewer: douglasl
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 02/12/2019
-ms.openlocfilehash: bc83b41067d587adce41658a2c4b3d68969750ba
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6ef9712dd2fd6b8d53fd4ad2c3e07e1d6c8f1aec
+ms.sourcegitcommit: e0e6663a2d6672a9d916d64d14d63633934d2952
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61364482"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72387194"
 ---
-# <a name="azure-data-factory-mapping-data-flow-select-transformation"></a>Azure veri fabrikası veri akışı seçin dönüştürme eşlemesi
+# <a name="mapping-data-flow-select-transformation"></a>Eşleme veri akışı dönüşüm seçme
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
 
-Bu dönüştürme için sütun seçiciliği (sütun sayısı azaltılırsa) kullanın veya diğer sütunları ve akışı adları.
+Seçiciliği (sütun sayısını azaltma), diğer ad sütunları ve akış adları ve sütunları yeniden sıralama için bu dönüşümü kullanın.
 
-Select dönüştürme, diğer tüm bir akışı sağlar veya bu akıştaki sütunları farklı adlardır (takma adlardır) atayın ve ardından bu yeni adları daha sonra veri akışı başvuru. Bu dönüşüm, kendi kendine birleşme senaryoları için kullanışlıdır. Kendi kendine birleşme ADF veri akışı uygulamak için bir akış dalı "Dalı" yazıp hemen sonra ekleyin "Seçin" dönüşüm gerçekleştirilecek yoludur. Bu akış artık kendi kendine birleşme oluşturma geri özgün akışına katılmak için kullanabileceğiniz yeni bir adı olacaktır:
+## <a name="how-to-use-select-transformation"></a>Seçme dönüşümünü kullanma
+Seçim dönüşümü, bir akışın tamamına veya bu akıştaki sütunlara diğer ad atamanıza, farklı adlar atamanıza (diğer adlar) ve ardından bu yeni adlara daha sonra veri akışınızda başvurmasına olanak tanır. Bu dönüşüm, kendine katılacak senaryolar için yararlıdır. ADF veri akışında kendi kendine katılmayı uygulama yolu bir akış almak, bunu "yeni dal" ile dallandırma ve sonra hemen sonra da "Select" dönüştürmesi eklemektir. Bu akış artık özgün akışa geri katılabilmek için kullanabileceğiniz yeni bir ada sahip olur ve kendi kendine katılması oluşturursunuz:
 
-![Kendi kendine birleşme](media/data-flow/selfjoin.png "kendi kendine birleşim")
+![Kendi kendine Birleştir](media/data-flow/selfjoin.png "Kendi kendine Birleştir")
 
-Yukarıdaki diyagramda, Select dönüştürme en üstünde alır. Diğer ad kullanımı "OrigSourceBatting" özgün akışa budur. Aşağıdaki higlighted birleştirme dönüştürme bu seçim diğer akış sağ birleştirme, aynı anahtarı sol ve sağ tarafında iç birleşim başvurmak bize verme kullandığımızı görebilirsiniz.
+Yukarıdaki diyagramda, select Transform en üstte. Bu, özgün akışın "OrigSourceBatting" olarak diğer adını alıyor. Aşağıdaki Vurgulanan birleşim dönüşümünden, bu Select diğer ad akışını sağ birleşim olarak kullandığımızdan, Iç birleştirmenin sağ & sağ tarafında aynı anahtara başvurmamızı sağlayabilirsiniz.
 
-Bir yol seçimini gibi veri akışınız sütunları seçin de kullanılabilir. Örneğin, havuzunuzu içinde tanımlanan 6 sütunları vardır, ancak yalnızca dönüştürmek ve ardından havuza akış için belirli bir 3 seçmek istiyorsanız, select dönüştürme kullanarak yalnızca 3 seçebilirsiniz.
+Ayrıca, veri akışınızdan sütunları seçmek için bir yöntem olarak da kullanılabilir. Örneğin, havuzunuzu tanımlanmış 6 sütunlarınız varsa, ancak yalnızca belirli bir 3 ' ü dönüştürmek ve havuza akışa almak istiyorsanız, select Transform 'u kullanarak yalnızca bu 3 ' ü seçebilirsiniz.
+
+![Dönüşüm seçin](media/data-flow/newselect1.png "Diğer ad Seç")
+
+## <a name="options"></a>Seçenekler
+* "Select" için varsayılan ayar tüm gelen sütunları dahil etmek ve bu özgün adları tutmak içindir. Seçim dönüşümünün adını ayarlayarak akışa diğer ad verebilirsiniz.
+* Tek tek sütunlara, "Tümünü Seç" seçimini kaldırın ve alt kısımdaki sütun eşlemesini kullanın.
+* Giriş veya çıkış meta verilerinden yinelenen sütunları kaldırmak için Yinelenenleri atla ' yı seçin.
+
+![Yinelenenleri atla](media/data-flow/select-skip-dup.png "Yinelenenleri atla")
+
+* Yinelemeleri atlamayı seçtiğinizde, sonuçlar Inceleme sekmesinde görünür. ADF, sütunun ilk oluşumunu tutar ve aynı sütunun sonraki oluşumunun akışınızdan kaldırıldığını görürsünüz.
 
 > [!NOTE]
-> "Yalnızca belirli sütunları seçmek için Tümünü Seç" geçmelidir
+> Eşleme kurallarını temizlemek için **Sıfırla** düğmesine basın.
 
-Seçenekler
+## <a name="mapping"></a>Eşlemeleri
+Varsayılan olarak, select dönüşümü tüm sütunları otomatik olarak eşleştirir. Bu, tüm gelen sütunları çıktıda aynı ada geçirecek şekilde otomatik olarak eşler. Seçim ayarları 'nda ayarlanan çıkış akışı adı, akış için yeni bir diğer ad tanımlar. Otomatik eşleme için seçim kümesini tutarsanız, tüm akış için aynı olan tüm akışı aynı şekilde diğer ad olarak kullanabilirsiniz.
 
-Varsayılan ayar "Seçin" için tüm gelen sütunlarını ekleyin ve bu özgün adlarını saklamak sağlamaktır. Akış diğer adı seçin dönüştürme adını ayarlayarak yapabilirsiniz.
+![Dönüşüm kurallarını seçin](media/data-flow/rule2.png "Kural tabanlı eşleme")
 
-Diğer tek tek sütunlara yapılan "Tümünü Seç" seçimini kaldırın ve sütun eşleme altındaki kullanın.
+Sütunları diğer ad, kaldırma, yeniden adlandırma veya yeniden sıralama yapmak istiyorsanız, önce "otomatik eşleme" seçeneğini kapatmanız gerekir. Varsayılan olarak, "tüm giriş sütunları" olarak adlandırılabilecek bir varsayılan kural görürsünüz. Tüm gelen sütunların çıktılarıyla aynı ada sahip olacak şekilde her zaman izin vermeyi düşünüyorsanız, bu kuralı yerinde bırakabilirsiniz.
 
-![Dönüştürme seçin](media/data-flow/select001.png "diğer adı seçin")
+Ancak, özel kurallar eklemek istiyorsanız, "eşleme Ekle" seçeneğine tıklamanız gerekir. Alan eşleme, eşleme ve diğer ad için gelen ve giden sütun adlarının bir listesini sağlar. "Kural tabanlı eşleme" yi seçerek model eşleştirme kuralları oluşturun.
+
+## <a name="rule-based-mapping"></a>Kural tabanlı eşleme
+Kural tabanlı eşleme ' yi seçtiğinizde, gelen model kurallarını eşleştirmek ve giden alan adlarını tanımlamak için eşleşen ifadenizi değerlendirmek üzere ADF 'yi öğreneceksiniz. Hem alan hem de kural tabanlı eşlemelerin birleşimini ekleyebilirsiniz. Daha sonra alan adları, kaynaktan gelen meta veriler temelinde ADF tarafından çalışma zamanında oluşturulur. Oluşturulan alanların adlarını hata ayıklama sırasında ve veri önizleme bölmesini kullanarak görüntüleyebilirsiniz.
+
+Model eşleştirme hakkında daha fazla ayrıntı, [sütun deseninin belgelerinde](concepts-data-flow-column-pattern.md)bulunabilir.
+
+## <a name="next-steps"></a>Sonraki adımlar
+* Yeniden adlandırma, yeniden sıralama ve diğer ad Sütunlarını Seç ' i kullandıktan sonra, verileri bir veri deposuna eklemek için [Havuz dönüştürmeyi](data-flow-sink.md) kullanın.

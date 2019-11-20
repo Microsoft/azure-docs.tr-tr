@@ -1,6 +1,6 @@
 ---
-title: Güvenlik bilgileri (Önizleme) - Azure Active Directory güvenlik sorunuzu kullanacak şekilde | Microsoft Docs
-description: Güvenlik bilgilerinizi kullanarak kimlik doğrulamak için ayarlama güvenlik sorularını önceden tanımlanmış.
+title: Güvenlik soruları için güvenlik bilgilerini ayarlama (Önizleme)-Azure AD
+description: Önceden tanımlanmış güvenlik sorularını kullanarak kimliğinizi doğrulamak için güvenlik bilgilerinizi ayarlama.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -12,82 +12,88 @@ ms.topic: conceptual
 ms.date: 02/13/2019
 ms.author: lizross
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3e5d1546c658631911f25c43e94275f00c7a5140
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c2513b52c347db428b5ac0236a2561e5d4f1cdd2
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60474638"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820316"
 ---
-# <a name="set-up-security-info-preview-to-use-security-questions"></a>Güvenlik sorularını kullanmak için güvenlik bilgileri (Önizleme) ayarlama
-Yöntemi, parolanızı sıfırlayamıyoruz eklemek için aşağıdaki adımları izleyebilirsiniz. Bu ilk kez ayarladıktan sonra dönebilirsiniz **güvenlik bilgisi** sayfasına ekleme, güncelleştirme veya güvenlik bilgilerinizi silin.
+# <a name="set-up-security-info-preview-to-use-security-questions"></a>Güvenlik sorularını kullanmak için güvenlik bilgilerini ayarlama (Önizleme)
 
-Ayarladıktan sonra parolanızı sıfırlayamıyoruz yöntemi, ayrıca, iki Faktörlü doğrulama yöntemi ayarladığını ayarlamanız gerekir kullanarak bir [authenticator uygulamasını](security-info-setup-auth-app.md), [metin Mesajlaşma](security-info-setup-text-msg.md), veya bir [telefon araması](security-info-setup-phone-number.md).
+Parola sıfırlama yönteminizi eklemek için bu adımları takip edebilirsiniz. İlk kez ayarladıktan sonra güvenlik bilgilerini eklemek, güncelleştirmek veya silmek için **güvenlik** bilgileri sayfasına dönebilirsiniz.
+
+Parola sıfırlama yönteminizi ayarladıktan sonra, bir [doğrulayıcı uygulaması](security-info-setup-auth-app.md), [SMS mesajı](security-info-setup-text-msg.md)veya [telefon araması](security-info-setup-phone-number.md)kullanarak iki öğeli doğrulama yönteminizi de ayarlamanız gerekir.
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-end-user-preview-notice-security-info.md)]
 
-## <a name="set-up-your-security-questions-from-the-security-info-page"></a>Güvenlik sorularınızı güvenlik bilgileri sayfasından ayarlama
-Kuruluşunuzun ayarlara bağlı olarak seçin ve, güvenlik bilgisi yöntemlerinden biri olarak birkaç güvenlik soruları yanıtlamak mümkün olabilir. Yöneticiniz seçin ve yanıtlamak için gereken güvenlik sorusu sayısını ayarlar.
+## <a name="set-up-your-security-questions-from-the-security-info-page"></a>Güvenlik bilgileri sayfasından güvenlik sorularınızı ayarlayın
 
-Güvenlik sorularını kullanıyorsanız, bunları başka bir yöntem ile birlikte kullanmanızı öneririz. Bazı kişiler sorularınızın yanıtlarını biliyor olabilirsiniz güvenlik sorularını diğer yöntemlerinden daha az güvenli olabilir.
+Kuruluşunuzun ayarlarına bağlı olarak, güvenlik bilgileri yöntemlerinizin biri olarak birkaç güvenlik sorusu seçebilir ve yanıt verebilir. Yöneticiniz, seçmek ve yanıtlamak için gereken güvenlik sorusu sayısını ayarlar.
+
+Güvenlik sorularını kullanıyorsanız, bunları başka bir yöntemle birlikte kullanmanızı öneririz. Güvenlik soruları, bazı kişiler sorularınızın yanıtlarını bilebileceğinden diğer yöntemlerden daha az güvenli olabilir.
 
 > [!Note]
-> Güvenlik sorularını dizindeki kullanıcı nesnesinin üzerinde özel ve güvenli bir şekilde depolanır ve yalnızca sizin tarafınızdan kayıt sırasında yanıtlanması. Okuma veya soru veya yanıt değiştirmek için yöneticinize bir yolu yoktur.
-> 
-> Güvenlik soruları seçeneğini görmüyorsanız, kuruluşunuzun, doğrulama için güvenlik sorularını kullan izin vermez mümkündür. Bu durumda, daha fazla yardım için yöneticinize başvurun veya başka bir yöntem seçmeniz gerekir.
-> 
-> Yönetici hesabı parola sıfırlama yöntemi olarak güvenlik sorularını kullanmak için izin verilmez. Bir yönetici düzeyi hesabı oturum açtıysanız bu seçeneği görmezsiniz.
+> Güvenlik soruları, dizindeki bir kullanıcı nesnesi üzerinde özel olarak ve güvenli bir şekilde depolanır ve yalnızca kayıt sırasında yanıtlanabilecek. Yöneticinizin sorularınızı veya yanıtlarınızı okuması veya değiştirmesi için bir yol yoktur.
+>
+> Güvenlik soruları seçeneğini görmüyorsanız, kuruluşunuz doğrulama için güvenlik sorularını kullanmanıza izin vermiyor olabilir. Bu durumda başka bir yöntem seçmeniz veya daha fazla yardım almak için yöneticinize başvurmanız gerekir.
+>
+> Yönetici hesaplarının, bir parola sıfırlama yöntemi olarak güvenlik sorularını kullanmasına izin verilmez. Yönetici düzeyi hesap olarak oturum açtıysanız, bu seçenekleri görmezsiniz.
 
 ### <a name="to-set-up-your-security-questions"></a>Güvenlik sorularınızı ayarlamak için
 
-1. İş veya Okul hesabınızda oturum açın ve ardından Git kullanarak https://myprofile.microsoft.com/ sayfası.
+1. İş veya okul hesabınızda oturum açın ve ardından https://myprofile.microsoft.com/ sayfanıza gidin.
 
-    ![Vurgulanan güvenlik bilgisi bağlantıları gösteren profili sayfam](media/security-info/securityinfo-myprofile-page.png)
+    ![, Vurgulanan güvenlik bilgisi bağlantılarını gösteren profilim sayfası](media/security-info/securityinfo-myprofile-page.png)
 
-2. Seçin **güvenlik bilgisi** sol gezinti bölmesinden ya da bağlantıyı **güvenlik bilgisi** engelleyebilir ve ardından **yöntemi ekleyin** gelen **güvenlik bilgisi**  sayfası.
+2. Sol gezinti bölmesinden veya **güvenlik bilgileri** bloğundaki bağlantıdan **güvenlik bilgileri** ' ni seçin ve ardından **güvenlik bilgileri** sayfasından **Yöntem Ekle** ' yi seçin.
 
-    ![Güvenlik bilgileri sayfasını vurgulanan Ekle yöntemi seçeneği](media/security-info/securityinfo-myprofile-addmethod-page.png)
+    ![Vurgulanan yöntem ekleme seçeneğiyle güvenlik bilgileri sayfası](media/security-info/securityinfo-myprofile-addmethod-page.png)
 
-3. Üzerinde **bir yöntem ekleyin** sayfasında **güvenlik sorularını** seçin ve açılır listede **Ekle**.
+3. **Yöntem Ekle** sayfasında, açılan listeden **güvenlik soruları** ' nı seçin ve ardından **Ekle**' yi seçin.
 
-    ![Yöntemi kutusunda, seçili güvenlik soruları Ekle](media/security-info/securityinfo-myprofile-addquestions.png)
+    ![Güvenlik soruları seçiliyken Yöntem kutusu Ekle](media/security-info/securityinfo-myprofile-addquestions.png)
 
-4. Üzerinde **güvenlik sorularını** sayfasında, seçin ve güvenlik sorularınızı yanıtlayın ve ardından **Kaydet**.
+4. **Güvenlik soruları** sayfasında Güvenlik sorularınızı seçin ve yanıtlayın ve ardından **Kaydet**' i seçin.
 
-    ![Telefon numarası ekleyin ve telefon aramaları seçin](media/security-info/securityinfo-myprofile-securityquestions.png)
+    ![Telefon numarası ekleyin ve telefon görüşmeleri seçin](media/security-info/securityinfo-myprofile-securityquestions.png)
 
-    Güvenlik bilgileriniz güncelleştirildi ve güvenlik sorularınızı parola sıfırlaması kullanırken, kimliğinizi doğrulamak için kullanabilirsiniz.
+    Güvenlik bilgileriniz güncelleştirildi ve parola sıfırlama kullanırken kimliğinizi doğrulamak için güvenlik sorularınızı kullanabilirsiniz.
 
-## <a name="delete-security-questions-from-your-security-info-methods"></a>Güvenlik sorularını güvenlik bilgisi yöntemlerinizi Sil
-Artık bir güvenlik bilgisi yöntemi olarak güvenlik sorularını kullanmak istiyorsanız, bunları kaldırabilirsiniz **güvenlik bilgisi** sayfası.
+## <a name="delete-security-questions-from-your-security-info-methods"></a>Güvenlik bilgileri yöntemlerinizin güvenlik sorularını silme
+
+Güvenlik sorularınızı artık güvenlik bilgileri yöntemi olarak kullanmak istemiyorsanız, bunları **güvenlik bilgileri** sayfasından kaldırabilirsiniz.
 
 >[!Important]
->Güvenlik sorularınızı yanlışlıkla silerseniz, geri almak için hiçbir yolu yoktur. Yöntem yeniden eklemek aşağıdaki adımları gerekir [, güvenlik sorularını](#set-up-your-security-questions-from-the-security-info-page) bu makalenin.
+>Güvenlik sorularınızı yanlışlıkla silerseniz, geri almanın bir yolu yoktur. Bu makalenin [güvenlik sorularını ayarlama](#set-up-your-security-questions-from-the-security-info-page) bölümündeki adımları izleyerek yöntemi tekrar eklemeniz gerekir.
 
 ### <a name="to-delete-your-security-questions"></a>Güvenlik sorularınızı silmek için
 
-1. Üzerinde **güvenlik bilgisi** sayfasında **Sil** yanındaki bağlantı **güvenlik sorularını** seçeneği.
+1. **Güvenlik bilgileri** sayfasında **güvenlik soruları** seçeneğinin yanındaki **Sil** bağlantısını seçin.
 
-    ![Güvenlik bilgisi telefon yöntemi silmek için bağlantı](media/security-info/securityinfo-myprofile-questionsdelete.png)
+    ![Güvenlik bilgileri 'nden telefon yöntemini silmeye yönelik bağlantı](media/security-info/securityinfo-myprofile-questionsdelete.png)
 
-2. Seçin **Evet** silmek için onay kutusundan, **güvenlik sorularını**. Güvenlik sorularınızı silinir, yöntem güvenlik bilgilerinizden kaldırılır ve bu kaybolur sonra **güvenlik bilgisi** sayfası.
+2. **Güvenlik sorularınızı**silmek için onay kutusundan **Evet** ' i seçin. Güvenlik sorularınızı sildikten sonra yöntem güvenlik bilgilerinizden kaldırılır ve **güvenlik bilgileri** sayfasından kaybolur.
 
-## <a name="additional-security-info-methods"></a>Ek güvenlik bilgileri yöntemi
-Nasıl kuruluş kişilerinizi, olduğuna göre kimliğinizi doğrulamak için yapmak çalıştığınız için ek bir seçeneğiniz vardır. Seçeneklere şunlar dahildir:
+## <a name="additional-security-info-methods"></a>Ek güvenlik bilgileri yöntemleri
 
-- **Authenticator uygulaması.** İndirin ve iki aşamalı doğrulama veya parola sıfırlama için bir onay bildirimi ya da bir rastgele oluşturulmuş bir onay kodu almak için bir authenticator uygulamasını kullanın. Ayarlama ve Microsoft Authenticator uygulamasını kullanma hakkında adım adım yönergeler için bkz. [authenticator uygulamasını kullanmak için güvenlik bilgileri ' ayarlamak](security-info-setup-auth-app.md).
+Kuruluşunuzun, kimliğinizi doğrulamak için size ne olduğuna bağlı olarak kimliğinizi nasıl öğrendiğini öğrenmek için ek seçenekleriniz vardır. Seçeneklere şunlar dahildir:
 
-- **Mobil cihaz metin.** Mobil cihaz numaranızı girin ve kısa mesaj, iki aşamalı doğrulama veya parola için kullanacağınız bir kod alın sıfırlayın. Kısa mesaj (SMS) ile kimliğinizi doğrulama hakkında adım adım yönergeler için bkz: [güvenlik bilgilerini, metin iletileri (SMS) kullanacak şekilde](security-info-setup-text-msg.md).
+- **Authenticator uygulaması.** İki adımlı doğrulama veya parola sıfırlama için bir onay bildirimi ya da rastgele oluşturulmuş bir onay kodu almak üzere bir Authenticator uygulaması indirin ve kullanın. Microsoft Authenticator uygulamasını ayarlama ve kullanma hakkında adım adım yönergeler için bkz. [güvenlik bilgilerini bir Authenticator uygulaması kullanmak Için ayarlama](security-info-setup-auth-app.md).
 
-- **Mobil cihaz veya iş telefon çağrısı.** Mobil cihaz numaranızı girin ve iki aşamalı doğrulama veya parola sıfırlama için bir telefon araması alın. Bir telefon numarası ile kimliğinizi doğrulama hakkında adım adım yönergeler için bkz: [güvenlik bilgilerini, telefon aramaları kullanacak şekilde](security-info-setup-phone-number.md).
+- **Mobil cihaz metni.** Mobil cihaz numaranızı girin ve iki adımlı doğrulama veya parola sıfırlama için kullanacağınız kodu bir metin alın. Bir SMS mesajı (SMS) ile kimliğinizi doğrulamaya yönelik adım adım yönergeler için bkz. [güvenlik bilgilerini ayarlama hakkında bilgi iletisi (SMS)](security-info-setup-text-msg.md).
 
-- **E-posta adresi.** Girin, iş veya Okul e-posta adresinizi, parola sıfırlama için bir e-posta almak için. Bu seçenek, iki aşamalı doğrulama için kullanılamaz. E-posta kurma hakkında adım adım yönergeler için bkz. [güvenlik bilgileri e-posta kullanacak şekilde](security-info-setup-email.md).
-   
+- **Mobil cihaz veya iş telefonu çağrısı.** Mobil cihaz numaranızı girin ve iki adımlı doğrulama veya parola sıfırlama için bir telefon araması alın. Telefon numarası ile kimliğinizi doğrulama hakkında adım adım yönergeler için bkz. [telefon aramalarını kullanmak için güvenlik bilgilerini ayarlama](security-info-setup-phone-number.md).
+
+- **Güvenlik anahtarı.** Microsoft uyumlu güvenlik anahtarınızı kaydedin ve iki adımlı doğrulama veya parola sıfırlama için PIN ile birlikte kullanın. Bir güvenlik anahtarı ile kimliğinizi doğrulama hakkında adım adım yönergeler için bkz. Güvenlik [anahtarı kullanmak için güvenlik bilgilerini ayarlama](security-info-setup-security-key.md).
+
+- **E-posta adresi.** Parola sıfırlama için bir e-posta almak üzere iş veya okul e-posta adresinizi girin. Bu seçenek, iki adımlı doğrulama için kullanılamaz. E-postanızı ayarlama hakkında adım adım yönergeler için bkz. [e-posta kullanmak için güvenlik bilgilerini ayarlama](security-info-setup-email.md).
+
     >[!Note]
-    >Bu seçeneklerden bazısı eksikse, kuruluşunuz bu yöntemleri izin vermeyen büyük olasılıkla olmasıdır. Bu durumda, kullanılabilir bir yöntem seçin veya daha fazla yardım için yöneticinize başvurun gerekecektir.
+    >Bu seçeneklerden bazıları eksikse, kuruluşunuzun bu yöntemlere izin vermediği için büyük olasılıkla olasıdır. Bu durumda, daha fazla yardım için kullanılabilir bir yöntem seçmeniz veya yöneticinize başvurmanız gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kaybolur veya, gelen unutulabilir, parolanızı sıfırlayamıyoruz [parola sıfırlama portalı](https://passwordreset.microsoftonline.com/) veya adımları [iş veya Okul parolanızı sıfırlama](user-help-reset-password.md) makalesi.
+- Parola [sıfırlama portalından](https://passwordreset.microsoftonline.com/) kayıp veya unuttuysanız parolanızı sıfırlayın veya [iş veya okul parolanızı sıfırlama](active-directory-passwords-update-your-own-password.md) makalesindeki adımları izleyin.
 
-- İpuçları ve Yardım almak için oturum açma sorunlarını giderme alma [Microsoft hesabınızda oturum açamazsınız](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant) makalesi.
+- [Microsoft hesabı makalesinde oturum açma](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant) sorunları için sorun giderme ipuçları ve yardım alın.

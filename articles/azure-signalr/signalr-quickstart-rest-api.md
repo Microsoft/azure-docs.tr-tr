@@ -1,19 +1,19 @@
 ---
-title: Hızlı Başlangıç - Azure SignalR hizmeti REST API'si
-description: Azure SignalR hizmeti REST API'sini kullanmak için bir hızlı başlangıç öğreticisi.
+title: Hızlı başlangıç-Azure SignalR hizmeti REST API
+description: REST API Azure SignalR hizmeti ile aşağıdaki örnekleri kullanarak nasıl kullanacağınızı öğrenin. REST API belirtiminin ayrıntılarını bulun.
 author: sffamily
 ms.service: signalr
 ms.topic: quickstart
-ms.date: 03/01/2019
+ms.date: 11/13/2019
 ms.author: zhshang
-ms.openlocfilehash: 999d44e394d47e350187f9175389e04e68567d5e
-ms.sourcegitcommit: 44a85a2ed288f484cc3cdf71d9b51bc0be64cc33
+ms.openlocfilehash: 17371e3bd426ea81b5e7e07610aac0073ea972c9
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "64724658"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74157688"
 ---
-# <a name="quickstart-broadcast-real-time-messages-from-console-app"></a>Hızlı Başlangıç: Konsol uygulamasından gerçek zamanlı iletileri yayın
+# <a name="quickstart-broadcast-real-time-messages-from-console-app"></a>Hızlı Başlangıç: Konsol uygulamasından gerçek zamanlı iletiler yayımlama
 
 Azure SignalR hizmeti, yayıncılık gibi sunucudan istemciye doğrudan iletişim senaryolarını desteklemek için [REST API](https://github.com/Azure/azure-signalr/blob/dev/docs/rest-api.md)’sini sağlar. REST API çağrısı yapabilen herhangi bir programlama dilini seçebilirsiniz. Bağlı tüm istemcilere, adına göre belirli bir istemciye veya bir istemci grubuna iletiler gönderebilirsiniz.
 
@@ -99,7 +99,7 @@ dotnet run -- client <ClientName> -c "<ConnectionString>" -h <HubName>
 
 ## <a name="usage"></a>Kullanım
 
-Sunucu başlatıldıktan sonra ileti göndermek için komutu kullanın:
+Sunucu başlatıldıktan sonra şu iletiyi göndermek için komutunu kullanın:
 
 ```
 send user <User Id>
@@ -115,11 +115,11 @@ Farklı istemci adları ile birden çok istemci başlatabilirsiniz.
 
 Azure SignalR hizmeti, üçüncü taraf hizmetlerin sistemle tümleştirilmesini sağlar.
 
-### <a name="definition-of-technical-specifications"></a>Teknik Özellikleri tanımı
+### <a name="definition-of-technical-specifications"></a>Teknik belirtimlerin tanımı
 
 Aşağıdaki tabloda, desteklenen tüm REST API sürümleri gösterilmektedir. Belirli bir sürüme ait tanım dosyasını da bulabilirsiniz
 
-Version | API Durumu | Kapı | Özel
+Sürüm | API Durumu | Kapı | Özel
 --- | --- | --- | ---
 `1.0-preview` | Kullanılabilir | 5002 | [Swagger](https://github.com/Azure/azure-signalr/tree/dev/docs/swagger/v1-preview.json)
 `1.0` | Kullanılabilir | Standart | [Swagger](https://github.com/Azure/azure-signalr/tree/dev/docs/swagger/v1.json)
@@ -130,16 +130,16 @@ API | `1.0-preview` | `1.0`
 --- | --- | ---
 [Tümüne yayınla](#broadcast) | **&#x2713;** | **&#x2713;**
 [Gruba yayınla](#broadcast-group) | **&#x2713;** | **&#x2713;**
-Bazı gruplara yayın | **&#x2713;**(Kullanım dışı) | `N / A`
+Bazı gruplara yayın | **&#x2713;** Kullanım dışı | `N / A`
 [Belirli kullanıcılara gönder](#send-user) | **&#x2713;** | **&#x2713;**
-Bazı kullanıcılara gönder | **&#x2713;**(Kullanım dışı) | `N / A`
+Bazı kullanıcılara gönder | **&#x2713;** Kullanım dışı | `N / A`
 [Gruba kullanıcı ekleme](#add-user-to-group) | `N / A` | **&#x2713;**
 [Gruptan kullanıcı kaldırma](#remove-user-from-group) | `N / A` | **&#x2713;**
 
 <a name="broadcast"> </a>
 ### <a name="broadcast-to-everyone"></a>Herkese yayınlama
 
-Version | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
+Sürüm | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
 --- | --- | --- | ---
 `1.0-preview` | `POST` | `https://<instance-name>.service.signalr.net:5002/api/v1-preview/hub/<hub-name>` | `{"target": "<method-name>", "arguments": [...]}`
 `1.0` | `POST` | `https://<instance-name>.service.signalr.net/api/v1/hubs/<hub-name>` | Yukarıdakiyle aynı
@@ -147,7 +147,7 @@ Version | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
 <a name="broadcast-group"> </a>
 ### <a name="broadcast-to-a-group"></a>Gruba yayınla
 
-Version | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
+Sürüm | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
 --- | --- | --- | ---
 `1.0-preview` | `POST` | `https://<instance-name>.service.signalr.net:5002/api/v1-preview/hub/<hub-name>/group/<group-name>` | `{"target": "<method-name>", "arguments": [...]}`
 `1.0` | `POST` | `https://<instance-name>.service.signalr.net/api/v1/hubs/<hub-name>/groups/<group-name>` | Yukarıdakiyle aynı
@@ -155,7 +155,7 @@ Version | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
 <a name="send-user"> </a>
 ### <a name="sending-to-specific-users"></a>Belirli kullanıcılara gönderme
 
-Version | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
+Sürüm | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
 --- | --- | --- | ---
 `1.0-preview` | `POST` | `https://<instance-name>.service.signalr.net:5002/api/v1-preview/hub/<hub-name>/user/<user-id>` | `{"target": "<method-name>", "arguments": [...]}`
 `1.0` | `POST` | `https://<instance-name>.service.signalr.net/api/v1/hubs/<hub-name>/users/<user-id>` | Yukarıdakiyle aynı
@@ -163,14 +163,14 @@ Version | API HTTP Yöntemi | İstek URL'si | İstek gövdesi
 <a name="add-user-to-group"> </a>
 ### <a name="adding-a-user-to-a-group"></a>Gruba kullanıcı ekleme
 
-Version | API HTTP Yöntemi | İstek URL'si
+Sürüm | API HTTP Yöntemi | İstek URL'si
 --- | --- | ---
 `1.0` | `PUT` | `https://<instance-name>.service.signalr.net/api/v1/hubs/<hub-name>/groups/<group-name>/users/<userid>`
 
 <a name="remove-user-from-group"> </a>
 ### <a name="removing-a-user-from-a-group"></a>Gruptan kullanıcı kaldırma
 
-Version | API HTTP Yöntemi | İstek URL'si
+Sürüm | API HTTP Yöntemi | İstek URL'si
 --- | --- | ---
 `1.0` | `DELETE` | `https://<instance-name>.service.signalr.net/api/v1/hubs/<hub-name>/groups/<group-name>/users/<userid>`
 
@@ -178,7 +178,7 @@ Version | API HTTP Yöntemi | İstek URL'si
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, gerçek zamanlı ileti SignalR hizmetinden istemcilere yayınlamak için REST API'sini kullanmayı öğrendiniz. Ardından, geliştirme ve Azure işlevleri ile SignalR hizmeti dağıtma hakkında daha fazla bilgi REST API temelinde oluşturulan bağlama.
+Bu hızlı başlangıçta, SignalR hizmetinden istemcilere gerçek zamanlı ileti yayınlamak için REST API kullanmayı öğrendiniz. Daha sonra, REST API üzerine inşa olan SignalR hizmeti bağlamasıyla Azure Işlevleri geliştirme ve dağıtma hakkında daha fazla bilgi edinin.
 
 > [!div class="nextstepaction"]
-> [Azure SignalR hizmeti bağlantıları kullanarak Azure işlevleri geliştirme](signalr-quickstart-azure-functions-csharp.md)
+> [Azure SignalR hizmeti bağlamalarını kullanarak Azure Işlevleri geliştirme](signalr-quickstart-azure-functions-csharp.md)

@@ -1,6 +1,6 @@
 ---
-title: Desired State Configuration sanal makine ölçek kümeleri ile kullanma | Microsoft Docs
-description: Sanal makine ölçek kümeleri ile Azure DSC uzantısı
+title: Sanal makine ölçek kümeleriyle Istenen durum yapılandırmasını kullanma | Microsoft Docs
+description: Azure DSC Uzantısı ile sanal makine ölçek kümelerini kullanma
 services: virtual-machine-scale-sets
 documentationcenter: ''
 author: zjalexander
@@ -16,18 +16,18 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: na
 ms.date: 04/05/2017
 ms.author: zachal
-ms.openlocfilehash: 24a37d352413ff9ac55ce8e189691988383950f3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f3da1ed5eabd3a35fe382471314084258b20213b
+ms.sourcegitcommit: aef6040b1321881a7eb21348b4fd5cd6a5a1e8d8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64728442"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72166152"
 ---
-# <a name="using-virtual-machine-scale-sets-with-the-azure-dsc-extension"></a>Sanal makine ölçek kümeleri ile Azure DSC uzantısı
-[Sanal makine ölçek kümeleri](virtual-machine-scale-sets-overview.md) kullanılabilir [Azure Desired State Configuration (DSC)](../virtual-machines/windows/extensions-dsc-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) uzantısı işleyicisi. Sanal makine ölçek kümeleri dağıtmak ve çok sayıda sanal makineleri yönetmek için bir yol sağlar ve giriş ve çıkış yanıt olarak yüklenecek şekilde ölçeklendirebilir. DSC Vm'leri için üretim yazılımı çalıştıran çevrimiçine bunlar yapılandırmak için kullanılır.
+# <a name="using-virtual-machine-scale-sets-with-the-azure-dsc-extension"></a>Azure DSC Uzantısı ile sanal makine ölçek kümelerini kullanma
+[Sanal Makine Ölçek Kümeleri](virtual-machine-scale-sets-overview.md) , [Azure istenen durum yapılandırması (DSC)](../virtual-machines/windows/extensions-dsc-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) uzantı işleyicisiyle birlikte kullanılabilir. Sanal Makine Ölçek Kümeleri, büyük miktarlarda sanal makine dağıtmak ve yönetmek için bir yol sağlar ve yükleme yanıtı olarak esnek ve out edebilir. DSC, üretim yazılımını çalıştırdığından VM 'Leri çevrimiçi olarak yapılandırmak için kullanılır.
 
-## <a name="differences-between-deploying-to-virtual-machines-and-virtual-machine-scale-sets"></a>Sanal makineler ve sanal makine ölçek kümeleri dağıtma arasındaki farklar
-Şablon temelindeki bir sanal makine ölçek kümesi için tek bir VM'den biraz farklıdır. Özellikle, tek bir VM uzantılarını "virtualMachines" düğümünün altında dağıtır. DSC şablona nereden eklenir "uzantıları" türünde bir giriş olan
+## <a name="differences-between-deploying-to-virtual-machines-and-virtual-machine-scale-sets"></a>Sanal makinelere ve sanal makine ölçek kümelerine dağıtma arasındaki farklar
+Bir sanal makine ölçek kümesi için temel alınan şablon yapısı, tek bir VM 'den biraz farklıdır. Özellikle, tek bir VM "virtualMachines" düğümü altında uzantıları dağıtır. DSC 'nin şablona eklendiği "Uzantılar" türünde bir giriş vardır
 
 ```
 "resources": [
@@ -66,7 +66,7 @@ ms.locfileid: "64728442"
       ]
 ```
 
-Bir "Özellikler" bölümüne "VirtualMachineProfile", "extensionProfile" özniteliği ile bir sanal makine ölçek kümesi düğümü vardır. DSC "uzantıları" altında eklenir
+Bir sanal makine ölçek kümesi düğümünde "VirtualMachineProfile", "extensionProfile" özniteliği içeren bir "Özellikler" bölümü vardır. DSC "Uzantılar" altına eklenir
 
 ```
 "extensionProfile": {
@@ -97,15 +97,15 @@ Bir "Özellikler" bölümüne "VirtualMachineProfile", "extensionProfile" öznit
             ]
 ```
 
-## <a name="behavior-for-a-virtual-machine-scale-set"></a>Bir sanal makine ölçek kümesi için davranışı
-Bir sanal makine ölçek kümesi için davranışı davranış tek bir VM için aynıdır. Yeni bir VM oluşturulduğunda DSC uzantısı ile otomatik olarak sağlanır. WMF daha yeni bir sürümü uzantısı tarafından gerekiyorsa çevrimiçine önce VM'yi yeniden başlatır. Çevrimiçi olduktan sonra DSC yapılandırması .zip indirir ve VM sağlama. Daha fazla ayrıntı bulunabilir [Azure DSC uzantısına genel bakış](../virtual-machines/windows/extensions-dsc-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+## <a name="behavior-for-a-virtual-machine-scale-set"></a>Bir sanal makine ölçek kümesi davranışı
+Bir sanal makine ölçek kümesi davranışı, tek bir VM 'nin davranışıyla aynıdır. Yeni bir VM oluşturulduğunda, DSC uzantısıyla otomatik olarak sağlanır. Uzantı için WMF 'in daha yeni bir sürümü gerekliyse, sanal makine çevrimiçi duruma gelmeden önce yeniden başlatılır. Bu, çevrimiçi olduktan sonra DSC Configuration. zip ' i indirir ve VM 'de temin edilir. Daha fazla ayrıntı [Için Azure DSC uzantısına genel bakış](../virtual-machines/windows/extensions-dsc-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)'da ulaşabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-İnceleme [DSC uzantısı için Azure Resource Manager şablonu](../virtual-machines/windows/extensions-dsc-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+[DSC uzantısının Azure Resource Manager şablonunu](../virtual-machines/windows/extensions-dsc-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)inceleyin.
 
-Bilgi nasıl [DSC uzantısı kimlik bilgilerini güvenli bir şekilde işler](../virtual-machines/windows/extensions-dsc-credentials.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
+[DSC uzantısının kimlik bilgilerini güvenli bir şekilde nasıl işlediğini](../virtual-machines/windows/extensions-dsc-credentials.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)öğrenin. 
 
-Azure DSC uzantısı işleyicisine hakkında daha fazla bilgi için bkz. [Azure Desired State Configuration uzantısı işleyicisi giriş](../virtual-machines/windows/extensions-dsc-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
+Azure DSC uzantı işleyicisi hakkında daha fazla bilgi için bkz. [Azure Istenen durum yapılandırması uzantı Işleyicisine giriş](../virtual-machines/windows/extensions-dsc-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
 
-PowerShell DSC hakkında daha fazla bilgi için [PowerShell belge merkezini ziyaret edin](https://msdn.microsoft.com/powershell/dsc/overview). 
+PowerShell DSC hakkında daha fazla bilgi için [PowerShell belge merkezini ziyaret edin](/powershell/scripting/dsc/overview/overview). 
 

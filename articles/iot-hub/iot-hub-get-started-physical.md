@@ -1,29 +1,28 @@
 ---
-title: Azure IOT Hub'ına fiziksel cihazlar bağlama çalışmaya başlama | Microsoft Docs
-description: Fiziksel cihazlar ve panoları Azure IOT Hub'ına bağlanmayı öğreneceksiniz. Cihazlarınızı IOT Hub ve IOT Hub'ına telemetri izleyebilir ve cihazlarınızı yönetmeye gönderebilirsiniz.
+title: Fiziksel cihazları Azure IoT Hub bağlamaya başlama | Microsoft Docs
+description: Fiziksel cihazları ve panoları Azure IoT Hub bağlamayı öğrenin. Cihazlarınız, IoT Hub telemetri gönderebilir ve IoT Hub cihazlarınızı izleyebilir ve yönetebilir.
 author: wesmc7777
 manager: timlt
-keywords: Azure IOT hub'ı Öğreticisi
+keywords: Azure IoT Hub öğreticisi
 ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.date: 08/22/2017
 ms.author: wesmc
-ms.openlocfilehash: f2af216dc199de7a49546a903b929a17cbddfe9f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e70ee8843e467af152eedefdf7e03a4ea869e4a6
+ms.sourcegitcommit: 36e9cbd767b3f12d3524fadc2b50b281458122dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60398691"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69638243"
 ---
-# <a name="azure-iot-hub-get-started-with-physical-devices-tutorials"></a>Azure IOT hub'ı fiziksel cihazlar öğreticileri ile çalışmaya başlama
+# <a name="azure-iot-hub-get-started-with-physical-devices-tutorials"></a>Azure IoT Hub fiziksel cihaz öğreticileri ile çalışmaya başlama
 
-Bu öğreticiler size Azure IOT Hub ve cihaz SDK'ları için tanıtır. Öğreticiler, IOT Hub'ının özelliklerini tanıtmak için yaygın IOT senaryolarını kapsar. Öğreticiler, ayrıca diğer Azure Hizmetleri ve daha güçlü IOT çözümleri oluşturmak için Araçlar ile IOT hub'ı birleştirerek oluşturulacağını göstermektedir. Aşağıdaki tabloda listelenen öğreticiler fiziksel IOT cihazları nasıl oluşturulacağını gösterir.
+Bu öğreticiler size Azure IoT Hub ve cihaz SDK 'larını sunar. Öğreticiler, IoT Hub yeteneklerini göstermek için yaygın IoT senaryolarını kapsar. Öğreticiler Ayrıca daha güçlü IoT çözümleri oluşturmak için IoT Hub diğer Azure hizmetleri ve araçlarıyla nasıl birleştirileceğini gösterir. Aşağıdaki tabloda listelenen öğreticiler, fiziksel IoT cihazlarının nasıl oluşturulacağını göstermektedir.
 
-| IOT cihaz                       | Programlama dili |
+| IoT cihazı                       | Programlama dili |
 |---------------------------------|----------------------|
-| Raspberry Pi                    | [Node.js](iot-hub-raspberry-pi-kit-node-get-started.md), [C](iot-hub-raspberry-pi-kit-c-get-started.md)  |
-| IOT DevKit                      | [VSCode içinde Arduino](iot-hub-arduino-iot-devkit-az3166-get-started.md)     |
-| Adafruit Feather HUZZAH ESP8266 | [Arduino](iot-hub-arduino-huzzah-esp8266-get-started.md)              |
+| Raspberry Pi                    | [Node. js](iot-hub-raspberry-pi-kit-node-get-started.md), [C](iot-hub-raspberry-pi-kit-c-get-started.md)  |
+| IoT DevKit                      | [VSCode 'da Arduino](iot-hub-arduino-iot-devkit-az3166-get-started.md)     |
 
 [!INCLUDE [iot-hub-get-started-extended](../../includes/iot-hub-get-started-extended.md)]

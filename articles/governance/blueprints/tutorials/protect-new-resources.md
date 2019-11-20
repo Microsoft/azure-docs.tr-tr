@@ -1,65 +1,61 @@
 ---
-title: Öğretici - yeni kaynaklar blueprint kaynak kilitleri ile koruma
-description: Bu öğreticide, Azure Blueprint kaynak kilitleri seçenekleri salt okunur öğreneceksiniz ve dağıtılan kaynakları yeni korunacak silmeyin.
-author: DCtheGeek
-ms.author: dacoulte
+title: Yeni kaynakları şema kilitleri ile koruma
+description: Bu öğreticide, Azure şemaları kaynak kilitleri seçeneklerini salt okunurdur ve yeni dağıtılan kaynakları korumak için silme ' yi kullanmayı öğreneceksiniz.
 ms.date: 03/28/2019
 ms.topic: tutorial
-ms.service: blueprints
-manager: carmonm
-ms.openlocfilehash: 274c437acd8df50d631727fc352c4b9ebecead18
-ms.sourcegitcommit: cababb51721f6ab6b61dda6d18345514f074fb2e
+ms.openlocfilehash: e2adbb1e47222055753d4b3690646daa83b32bf1
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66479980"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73960262"
 ---
-# <a name="tutorial-protect-new-resources-with-azure-blueprints-resource-locks"></a>Öğretici: Yeni kaynaklar Azure Blueprint kaynak kilitleri ile koruma
+# <a name="tutorial-protect-new-resources-with-azure-blueprints-resource-locks"></a>Öğretici: Azure şemaları kaynak kilitleri ile yeni kaynakları koruma
 
-Azure şemaları ile [kaynak kilitleri](../concepts/resource-locking.md), yeni dağıtılan kaynaklar, hatta sahip bir hesap tarafından değiştirilmiş gelen Koruyabileceğiniz _sahibi_ rol. Bu koruma, bir Resource Manager şablonu yapıt tarafından oluşturulan kaynakları şema tanımlarında ekleyebilirsiniz.
+Azure şemaları [kaynak kilitleri](../concepts/resource-locking.md)ile, yeni dağıtılan _kaynakların, sahip rolü olan_ bir hesap tarafından bile üzerinde oynanarak korunmasını sağlayabilirsiniz. Bu korumayı, bir kaynak yöneticisi şablonu yapıtı tarafından oluşturulan kaynakların şema tanımlarına ekleyebilirsiniz.
 
-Bu öğreticide, aşağıdaki adımları tamamlamanız:
+Bu öğreticide, aşağıdaki adımları tamamlayacaksınız:
 
 > [!div class="checklist"]
-> - Şema tanımını oluşturma
-> - Blueprint tanımınızı olarak işaretlemek **yayımlandı**
-> - Mevcut bir aboneliğe, şema tanımını atama
-> - Yeni Kaynak Grup İnceleme
-> - Kilitler kaldırmak için şema atamasını Kaldır
+> - Şema tanımı oluşturma
+> - Şema tanımınızı **yayımlandı** olarak işaretleyin
+> - Şema tanımınızı mevcut bir aboneliğe atama
+> - Yeni kaynak grubunu İncele
+> - Kilitleri kaldırmak için şema atamasını kaldırma
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu öğreticiyi tamamlamak için bir Azure aboneliğinizin olması gerekir. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
-## <a name="create-a-blueprint-definition"></a>Şema tanımını oluşturma
+## <a name="create-a-blueprint-definition"></a>Şema tanımı oluşturma
 
 İlk olarak, şema tanımını oluşturun.
 
-1. Seçin **tüm hizmetleri** sol bölmesinde. Arayın ve seçin **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Üzerinde **Başlarken** seçin sol taraftaki sayfasında **Oluştur** altında **blueprint oluşturma**.
+1. Soldaki **Başlarken** sayfasında, şema **Oluştur**altında **Oluştur** ' u seçin.
 
-1. Bulma **boş Blueprint** sayfanın üstündeki şema örnek. Seçin **Başlat ile boş blueprint**.
+1. Sayfanın üst kısmındaki **boş BLUEPRINT** şema örneğini bulun. **Boş şema ile Başlat**' ı seçin.
 
-1. Bu bilgileri girin **Temelleri** sekmesinde:
+1. **Temel** bilgiler sekmesinde bu bilgileri girin:
 
-   - **Blueprint adı**: Şema örnek kopyası için bir ad sağlayın. Bu öğreticide, adı kullanacağız **kilitli storageaccount**.
-   - **Blueprint açıklaması**: Şema tanımı için bir açıklama ekleyin. Kullanım **test blueprint kaynak üzerinde kilitlemek için dağıtılan kaynakların**.
-   - **Tanım konumu**: Üç nokta düğmesini (…) seçin ve ardından şema tanımınızı kaydetmek için yönetim grubu veya abonelik seçin.
+   - **Şema adı**: şema örneğinin kopyasına bir ad verin. Bu öğreticide, **kilitli-storageaccount**adını kullanacağız.
+   - **Şema açıklaması**: şema tanımı için bir açıklama ekleyin. **Dağıtılan kaynaklarda şema kaynak kilitlemeyi test etmek için**kullanın.
+   - **Tanım konumu**: üç nokta düğmesini (...) seçin ve ardından şema tanımınızı kaydetmek için yönetim grubunu veya aboneliği seçin.
 
-1. Seçin **Yapıtları** sekmesinde sayfanın üstünde ya da seçin **sonraki: Yapıtları** sayfanın alt kısmındaki.
+1. Sayfanın üst kısmındaki **yapıtlar** sekmesini seçin veya sayfanın altındaki **yapıtlar** ' ı seçin.
 
-1. Bir kaynak grubu, abonelik düzeyinde ekleyin:
-   1. Seçin **yapıt ekleme** altında satır **abonelik**.
-   1. Seçin **kaynak grubu** altında **Yapıt türü**.
-   1. Ayarlama **Yapıt görünen ad** için **RGtoLock**.
-   1. Bırakın **kaynak grubu adı** ve **konumu** kutularını boş, ancak bunları yapmak için her bir özellik onay kutusunun seçildiğinden emin olun **dinamik parametreleri**.
-   1. Seçin **Ekle** blueprint'e yapıt eklemek için.
+1. Abonelik düzeyinde bir kaynak grubu ekleyin:
+   1. **Abonelik**altında **yapıt Ekle** satırını seçin.
+   1. **Yapıt türü**altında **kaynak grubu** ' nu seçin.
+   1. **Yapıt görünen adını** **rgtolock**olarak ayarlayın.
+   1. **Kaynak grubu adını** ve **konum** kutularını boş bırakın, ancak her bir özellikte onay kutusunun seçili olduğundan emin olun ve **dinamik parametreleri**yapın.
+   1. Yapıtı şemasını Blueprint öğesine eklemek için **Ekle** ' yi seçin.
 
-1. Kaynak grubu altında bir şablon ekleyin:
-   1. Seçin **yapıt ekleme** altında satır **RGtoLock** girişi. 
-   1. Seçin **Azure Resource Manager şablonu** altında **Yapıt türü**ayarlayın **Yapıt görünen ad** için **StorageAccount**ve bırakın **Açıklama** boş. 
-   1. Üzerinde **şablon** sekmesinde, aşağıdaki Resource Manager şablonu Düzenleyicisi kutuya yapıştırın. Şablonda yapıştırdıktan sonra seçin **Ekle** blueprint'e yapıt eklemek için.
+1. Kaynak grubunun altına bir şablon ekleyin:
+   1. **Rgtolock** girişinin altındaki **yapıt Ekle** satırını seçin. 
+   1. **Yapıt türü**altında **Azure Resource Manager şablonu** ' nu seçin, **yapıt görünen adını** **storageaccount**olarak ayarlayın ve **açıklamayı** boş bırakın. 
+   1. **Şablon** sekmesinde, aşağıdaki kaynak yöneticisi şablonunu düzenleyici kutusuna yapıştırın. Şablonu yapıştırdıktan sonra, yapıtı şemasını Blueprint 'e eklemek için **Ekle** ' yi seçin.
 
    ```json
    {
@@ -103,134 +99,134 @@ Bu öğreticiyi tamamlamak için bir Azure aboneliğinizin olması gerekir. Azur
    }
    ```
 
-1. Seçin **Taslağı Kaydet** sayfanın alt kısmındaki.
+1. Sayfanın alt kısmındaki **Taslağı kaydet** ' i seçin.
 
-Bu adım, seçilen yönetim grubu veya abonelik içinde şema tanımını oluşturur.
+Bu adım, seçilen yönetim grubunda veya abonelikte şema tanımını oluşturur.
 
-Sonra **başarılı şema tanımını kaydetme** portal bildirimi görünürse, sonraki adıma geçin.
+Şema **tanımını kaydetme başarılı oldu** Portal bildirimi göründüğünde bir sonraki adıma gidin.
 
 ## <a name="publish-the-blueprint-definition"></a>Şema tanımını yayımlama
 
-Şema tanımı, artık ortamınızda oluşturuldu. İçinde oluşturulan **taslak** modu ve bu atanan ve dağıtılan kullanılmadan önce yayımlanması gerekir.
+Şema tanımınız artık ortamınızda oluşturulmuştur. **Taslak** modunda oluşturulur ve atanmadan ve dağıtılmadan önce yayımlanmaları gerekir.
 
-1. Seçin **tüm hizmetleri** sol bölmesinde. Arayın ve seçin **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Seçin **Blueprint tanımları** soldaki sayfası. Bulmak için filtreleri kullanın; **kilitli storageaccount** blueprint tanımının ve ardından bu seçeneği belirleyin.
+1. Sol taraftaki **Blueprint tanımları** sayfasını seçin. **Kilitli-storageaccount** şeması tanımını bulmak için filtreleri kullanın ve ardından seçin.
 
-1. Seçin **Yayımla şema** sayfanın üstünde. Sağ taraftaki yeni bölmede girin **1.0** olarak **sürüm**. Daha sonra bir değişiklik yaparsanız, bu özellik yararlıdır. Girin **notları değiştirmek**, gibi **ilk sürüm yayımlanan blueprint dağıtılan kaynakları kilitlemek için**. Ardından **Yayımla** sayfanın alt kısmındaki.
+1. Sayfanın üst kısmındaki şemayı **Yayımla** ' yı seçin. Sağdaki yeni bölmede **Sürüm**olarak **1,0** girin. Daha sonra bir değişiklik yaparsanız bu özellik faydalıdır. **Şeması dağıtılan kaynakları kilitlemek için yayımlanan ilk sürüm**gibi **değişiklik notlarını**girin. Ardından sayfanın alt kısmında **Yayımla** ' yı seçin.
 
-Bu adım, bir abonelik için şema atamak mümkün kılar. Şema tanımını yayımlandıktan sonra hala değişiklik yapabilirsiniz. Değişiklik yaparsanız, aynı şema tanımını sürümleri arasındaki farklar izlemek için yeni bir sürüm değeri tanımıyla yayımlamanız gerekir.
+Bu adım, şema 'in bir aboneliğe atanmasını olanaklı kılar. Şema tanımı yayımlandıktan sonra yine de değişiklik yapabilirsiniz. Değişiklik yaparsanız, aynı şema tanımının sürümleri arasındaki farkları izlemek için tanımı yeni bir sürüm değeriyle yayımlamanız gerekir.
 
-Sonra **yayımlama başarılı tanımı blueprint** portal bildirimi görünürse, sonraki adıma geçin.
+Şema **tanımını yayımlama başarılı oldu** Portal bildirimi göründüğünde bir sonraki adıma gidin.
 
 ## <a name="assign-the-blueprint-definition"></a>Şema tanımını atama
 
-Şema tanımını yayımlandıktan sonra kaydettiğiniz yönetim grubu dahilinde bir aboneliğe atayabilirsiniz. Bu adımda, blueprint tanımının her dağıtım benzersiz olacak şekilde parametreleri sağlayın.
+Şema tanımı yayımlandıktan sonra, bunu kaydettiğiniz yönetim grubu içindeki bir aboneliğe atayabilirsiniz. Bu adımda, şema tanımının her bir dağıtımını benzersiz hale getirmek için parametreler sağlarsınız.
 
-1. Seçin **tüm hizmetleri** sol bölmesinde. Arayın ve seçin **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Seçin **Blueprint tanımları** soldaki sayfası. Bulmak için filtreleri kullanın; **kilitli storageaccount** blueprint tanımının ve ardından bu seçeneği belirleyin.
+1. Sol taraftaki **Blueprint tanımları** sayfasını seçin. **Kilitli-storageaccount** şeması tanımını bulmak için filtreleri kullanın ve ardından seçin.
 
-1. Seçin **Ata şema** şema tanımı sayfanın üstünde.
+1. Şema tanım sayfasının en üstünde şema **ata** ' yı seçin.
 
-1. Blueprint ataması için parametre değerlerini sağlayın:
+1. Şema atamasının parametre değerlerini sağlayın:
 
    - **Temel Bilgiler**
 
-     - **Abonelikler**: Bir veya daha fazla, blueprint tanımının kaydedildiği yönetim grubundaki abonelikleri seçin. Birden fazla aboneliğiniz seçerseniz, girdiğiniz parametreleri kullanarak her abonelik için bir atama oluşturulur.
-     - **Ödev adı**: Ad blueprint tanımının ada göre önceden doldurulmuştur. Bu atama kilitleme yeni kaynak grubunu temsil etmek için bu nedenle atama adı değiştirmek istiyoruz **atama kilitli storageaccount TestingBPLocks**.
-     - **Konum**: Yönetilen kimlik oluşturulacağı bir bölge seçin. Azure Blueprint bu yönetilen kimliği kullanarak tüm yapıtları atanmış şemaya dağıtır. Daha fazla bilgi için bkz. [Azure kaynakları için yönetilen kimlikler](../../../active-directory/managed-identities-azure-resources/overview.md).
-       Bu öğreticide, seçin **Doğu ABD 2**.
-     - **Şema tanımı sürümü**: Yayımlanan sürümü **1.0** blueprint tanımının.
+     - **Abonelikler**: şema tanımınızı kaydettiğiniz yönetim grubunda olan bir veya daha fazla abonelik seçin. Birden fazla abonelik seçerseniz, girdiğiniz parametreleri kullanarak her bir abonelik için bir atama oluşturulacaktır.
+     - **Atama adı**: ad, şema tanımının adına göre önceden doldurulur. Bu atamanın yeni kaynak grubunu kilitlemeyi göstermesini istiyoruz, bu nedenle atama adını **atama-kilitli-storageaccount-Testingbpkilitler**olarak değiştirin.
+     - **Konum**: yönetilen kimliğin oluşturulacağı bölgeyi seçin. Azure Blueprint bu yönetilen kimliği kullanarak tüm yapıtları atanmış şemaya dağıtır. Daha fazla bilgi için bkz. [Azure kaynakları için yönetilen kimlikler](../../../active-directory/managed-identities-azure-resources/overview.md).
+       Bu öğretici için **Doğu ABD 2**' yi seçin.
+     - Şema **tanımı sürümü**: şema tanımının yayınlanan **1,0** sürümünü seçin.
 
-   - **Kilit atama**
+   - **Kilit ataması**
 
-     Seçin **salt okunur** blueprint kilit modu. Daha fazla bilgi için bkz. [şema kaynağı kilitleme](../concepts/resource-locking.md).
+     **Salt okuma** şeması kilit modunu seçin. Daha fazla bilgi için bkz. [şema kaynağı kilitleme](../concepts/resource-locking.md).
 
    - **Yönetilen kimlik**
 
-     Varsayılan seçeneği kullanın: **Sistem tarafından atanan**. Daha fazla bilgi için [yönetilen kimlikleri](../../../active-directory/managed-identities-azure-resources/overview.md).
+     Varsayılan seçeneği kullanın: **sistem atandı**. Daha fazla bilgi için bkz. [Yönetilen kimlikler](../../../active-directory/managed-identities-azure-resources/overview.md).
 
    - **Yapıt parametreleri**
 
-     Bu bölümde tanımlanan parametrelerin altında tanımlandıkları yapıtı için geçerlidir. Bu parametreler [dinamik parametreleri](../concepts/parameters.md#dynamic-parameters) blueprint ataması sırasında tanımlanan çünkü. Her bir yapıt olarak gördükleri için parametre değeri ayarlamak **değer** sütun.
+     Bu bölümde tanımlanan parametreler, tanımlandıkları yapıt için geçerlidir. Şema atama sırasında tanımlandıklarından, bu parametreler [dinamik parametrelerdir](../concepts/parameters.md#dynamic-parameters) . Her yapıt için, parametre değerini değer sütununda gördüğünüz **değere** ayarlayın.
 
      |Yapıt adı|Yapıt türü|Parametre adı|Değer|Açıklama|
      |-|-|-|-|-|
-     |RGtoLock kaynak grubu|Kaynak grubu|Ad|TestingBPLocks|Blueprint kilitleri uygulamak için yeni kaynak grubunun adını tanımlar.|
-     |RGtoLock kaynak grubu|Kaynak grubu|Location|Batı ABD 2|Blueprint kilitleri uygulamak için yeni kaynak grubunun konumunu tanımlar.|
-     |Depolama hesabı|Resource Manager şablonu|storageAccountType (depolama hesabı)|Standard_GRS|Depolama SKU'su. Varsayılan değer _Standard_LRS_.|
+     |RGtoLock kaynak grubu|Kaynak grubu|Ad|Testingbpkilitleri|Şema kilitlerinin uygulanacağı yeni kaynak grubunun adını tanımlar.|
+     |RGtoLock kaynak grubu|Kaynak grubu|Konum|Batı ABD 2|Şema kilitlerini uygulamak için yeni kaynak grubunun konumunu tanımlar.|
+     |StorageAccount|Resource Manager şablonu|storageAccountType (StorageAccount)|Standard_GRS|Depolama SKU 'SU. Varsayılan değer _Standard_LRS_.|
 
-1. Tüm parametreler girdikten sonra seçin **atama** sayfanın alt kısmındaki.
+1. Tüm parametreleri girdikten sonra sayfanın alt kısmındaki **ata** ' yı seçin.
 
-Bu adım tanımlanmış kaynakları dağıtır ve seçili yapılandırır **kilit atama**. Bu, blueprint kilitleri uygulamak için en fazla 30 dakika sürebilir.
+Bu adım, tanımlı kaynakları dağıtır ve seçili **kilit atamasını**yapılandırır. Şema kilitlerinin uygulanması 30 dakika kadar sürebilir.
 
-Sonra **başarılı atama şema tanımını** portal bildirimi görünürse, sonraki adıma geçin.
+Şema **tanımı başarılı oldu** Portal bildirimi seçildikten sonra, bir sonraki adıma gidin.
 
-## <a name="inspect-resources-deployed-by-the-assignment"></a>Atamaya göre dağıtılan kaynakları inceleyin
+## <a name="inspect-resources-deployed-by-the-assignment"></a>Atama tarafından dağıtılan kaynakları İncele
 
-Atama kaynak grubu oluşturulur _TestingBPLocks_ ve Resource Manager şablonu yapıt tarafından dağıtılan bir depolama hesabı. Atama Ayrıntıları sayfasında, yeni kaynak grubu ve seçili kilit durumu gösterilir.
+Atama, _Testingbpkilitler_ kaynak grubunu ve Kaynak Yöneticisi şablonu yapıtı tarafından dağıtılan depolama hesabını oluşturur. Yeni kaynak grubu ve seçilen kilit durumu atama ayrıntıları sayfasında gösterilir.
 
-1. Seçin **tüm hizmetleri** sol bölmesinde. Arayın ve seçin **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Seçin **şemaları atanan** soldaki sayfası. Bulmak için filtreleri kullanın; **atama kilitli storageaccount TestingBPLocks** blueprint ataması ve ardından bu seçeneği belirleyin.
+1. Sol taraftaki **atanan** şemalar sayfasını seçin. **Atama-kilitli-storageaccount-Testingbpkilitleri** şeması atamasını bulmak için filtreleri kullanın ve ardından seçin.
 
-   Bu sayfadan kaynakları yeni şema kilitleme durumu ile dağıtıldı ve atama başarılı olduğunu görebiliriz. Atama güncelleştirdiyseniz, **atama işlemi** açılan, dağıtım her tanım sürümüne ayrıntılarını gösterir. Özellik sayfasını açmak için kaynak grubunu seçebilirsiniz.
+   Bu sayfadan, atamanın başarılı olduğunu ve kaynakların yeni şema kilit durumuyla dağıtıldığını görebiliriz. Atama güncelleştirilirse, **atama işlemi** açılır listesi her tanım sürümünün dağıtımıyla ilgili ayrıntıları gösterir. Özellik sayfasını açmak için kaynak grubunu seçebilirsiniz.
 
-1. Seçin **TestingBPLocks** kaynak grubu.
+1. **Testingbpkilitler** kaynak grubunu seçin.
 
-1. Seçin **erişim denetimi (IAM)** soldaki sayfası. Ardından **rol atamaları** sekmesi.
+1. Sol taraftaki **erişim denetimi (IAM)** sayfasını seçin. Ardından **rol atamaları** sekmesini seçin.
 
-   Olduğunu görebiliriz burada _atama kilitli storageaccount TestingBPLocks_ blueprint ataması _sahibi_ rol. Bu rol, dağıtmak ve kaynak grubu kilitlemek için kullanıldığından bu rolü var.
+   Burada, _atama-kilitleme-storageaccount-testingbpkilitleri_ şema atamasının _Owner_ rolüne sahip olduğunu görüyoruz. Bu rol, kaynak grubunu dağıtmak ve kilitlemek için kullanıldığından bu rolü içeriyor.
 
-1. Seçin **atamaları Reddet** sekmesi.
+1. **Atamaları Reddet** sekmesini seçin.
 
-   Oluşturulan şema atamasını bir [atamasını Reddet](../../../role-based-access-control/deny-assignments.md) zorlamak için dağıtılan kaynak grubunda **salt okunur** blueprint kilit modu. Reddetme atama uygun haklara sahip biri üzerinde engeller **rol atamaları** belirli eylemleri gelen sekmesi. Reddetme atama etkiler _tüm ilkeleri_.
+   Şema ataması, **salt okuma** şeması kilit modunu zorlamak için dağıtılan kaynak grubunda bir [reddetme ataması](../../../role-based-access-control/deny-assignments.md) oluşturdu. Reddetme ataması, **rol atamaları** sekmesinde uygun haklara sahip birinin belirli eylemleri almasını engeller. Reddetme ataması _tüm sorumluları_etkiler.
 
-   Sorumlu bir reddetme atamasından dışlama hakkında daha fazla bilgi için bkz: [Blueprint kaynak kilitleme](../concepts/resource-locking.md#exclude-a-principal-from-a-deny-assignment).
+   Bir sorumluyu reddetme atamasından dışlamak hakkında bilgi için bkz. [kaynak kilitlemeyi planlar](../concepts/resource-locking.md#exclude-a-principal-from-a-deny-assignment).
 
-1. Reddetme Ataması'nı seçin ve ardından **izinler reddedildi** soldaki sayfası.
+1. Reddetme atamasını seçin ve ardından sol taraftaki **Reddedilenler izinleri** sayfasını seçin.
 
-   Reddetme atama ile yapılan tüm işlemlerde engelliyor **\*** ve **eylem** yapılandırma da izin verir ancak okuma erişimi hariç tutarak  **\* /Okuma**aracılığıyla **NotActions**.
+   Reddetme ataması **\*** ve **eylem** yapılandırmasıyla tüm Işlemleri engellemektedir, ancak **NotActions**aracılığıyla **\*/Read** 'i dışlayarak okuma erişimine izin verir.
 
-1. Azure portal içerik haritasındaki, seçin **TestingBPLocks - erişim denetimi (IAM)** . Ardından **genel bakış** sayfasında soldaki ardından **kaynak grubunu Sil** düğmesi. Bir ad girin **TestingBPLocks** silme işlemini onaylayın ve ardından **Sil** bölmesinin alt kısmındaki.
+1. Azure portal içerik haritasında **Testingbpkilitler-Access Control (IAM)** öğesini seçin. Ardından sol taraftaki **genel bakış** sayfasını ve ardından **kaynak grubunu sil** düğmesini seçin. Silmeyi onaylamak için **Testingbpkilitleri** adını girin ve ardından bölmenin altındaki **Sil** ' i seçin.
 
-   Portal bildiriminden **TestingBPLocks başarısız oldu. kaynak grubunu Sil** görünür. Kaynak grubunu silme izni olsa da hesabınızı hatayı bildiren, şema atamasını tarafından erişim reddedildi. Biz seçildiğini unutmayın **salt okunur** blueprint ataması sırasında şema kilit modu. Şema kilidi iznine sahip bir hesap da engeller _sahibi_, kaynak silmelerini. Daha fazla bilgi için bkz. [şema kaynağı kilitleme](../concepts/resource-locking.md).
+   Portal bildirim **silme kaynak grubu Testingbpkilitleri başarısız oldu** . Hata, hesabınız kaynak grubunu silme iznine sahip olsa da, erişim şeması atama tarafından reddedilir. Şema atama sırasında **yalnızca okuma** şeması kilit modunu seçtiğinizi unutmayın. Şema Lock, izin olan bir hesabın, hatta _sahibi_, kaynağın silinmesini engeller. Daha fazla bilgi için bkz. [şema kaynağı kilitleme](../concepts/resource-locking.md).
 
-Bu adımlar, dağıtılan kaynaklarımızın bile kaynakları silmek için izni olan hesabın istenmeyen silinmesini engellemek şema kilit ile artık korunduğunu gösterir.
+Bu adımlarda, dağıtılmış kaynaklarımızın, kaynakları silme izni olan bir hesaptan bile, istenmeyen silme işlemini önleyen şema kilitleri ile korunduğu gösterilmektedir.
 
-## <a name="unassign-the-blueprint"></a>Şema atamasını Kaldır
+## <a name="unassign-the-blueprint"></a>Şema atamasını kaldırma
 
-Son adım, şema tanımını atama kaldırmaktır. Atama kaldırılıyor, ilişkilendirilmiş yapılarının kaldırmaz.
+Son adım, şema tanımının atamasını kaldırdır. Atamanın kaldırılması ilişkili yapıtları kaldırmaz.
 
-1. Seçin **tüm hizmetleri** sol bölmesinde. Arayın ve seçin **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Seçin **şemaları atanan** soldaki sayfası. Bulmak için filtreleri kullanın; **atama kilitli storageaccount TestingBPLocks** blueprint ataması ve ardından bu seçeneği belirleyin.
+1. Sol taraftaki **atanan** şemalar sayfasını seçin. **Atama-kilitli-storageaccount-Testingbpkilitleri** şeması atamasını bulmak için filtreleri kullanın ve ardından seçin.
 
-1. Seçin **Atamayı Kaldır blueprint** sayfanın üstünde. Onay iletişim kutusunda uyarı okuyun ve ardından **Tamam**.
+1. Sayfanın üst kısmında **şema atamasını Kaldır** ' ı seçin. Onay iletişim kutusunda uyarıyı okuyun ve ardından **Tamam**' ı seçin.
 
-   Şema atamasını kaldırıldığında, şemayı kilitler de kaldırılır. Kaynakları bir kez daha uygun izinlere sahip bir hesap tarafından silinebilir.
+   Şema ataması kaldırıldığında, BLUEPRINT kilitleri da kaldırılır. Kaynaklar bir kez daha uygun izinlere sahip bir hesap tarafından silinebilir.
 
-1. Seçin **kaynak grupları** Azure menüsünden ve ardından **TestingBPLocks**.
+1. Azure menüsünden **kaynak grupları** ' nı seçin ve ardından **Testingbpkilitleri**' nı seçin.
 
-1. Seçin **erişim denetimi (IAM)** sayfasında soldaki ve ardından **rol atamaları** sekmesi.
+1. Sol taraftaki **erişim denetimi (IAM)** sayfasını seçin ve ardından **rol atamaları** sekmesini seçin.
 
-Şema atamasını artık olduğu kaynak grubu için güvenlik görünür _sahibi_ erişim.
+Kaynak grubunun güvenliği, şema atamasının artık _sahip_ erişimine sahip olmadığını gösterir.
 
-Sonra **başarılı kaldırma şema atamasını** portal bildirimi görünürse, sonraki adıma geçin.
+Şema **atamasını kaldırma başarılı oldu** Portal bildirimi görüntülendikten sonra bir sonraki adıma gidin.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu öğreticiyle tamamladığınızda, bu kaynakları silin:
+Bu öğreticiyi tamamladığınızda, şu kaynakları silin:
 
-- Kaynak grubu _TestingBPLocks_
-- Blueprint tanımının _kilitli storageaccount_
+- Kaynak grubu _Testingbpkilitleri_
+- Blueprint Definition _kilitlendi-storageaccount_
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Hakkında bilgi edinin [yaşam döngüsü blueprint](../concepts/lifecycle.md).
+- [Şema yaşam döngüsü](../concepts/lifecycle.md) hakkında bilgi edinin.
 - [Statik ve dinamik parametrelerin](../concepts/parameters.md) kullanımını anlayın.
-- Nasıl kullanılacağını öğrenmek [blueprint kaynak kilitleme](../concepts/resource-locking.md).
+- [Şema kaynak kilitlemeyi](../concepts/resource-locking.md)nasıl kullanacağınızı öğrenin.
 - [Şema sıralama düzenini](../concepts/sequencing-order.md) özelleştirmeyi öğrenin.
 - [Mevcut atamaları güncelleştirmeyi](../how-to/update-existing-assignments.md) öğrenin.
-- [Sorunlarını giderme](../troubleshoot/general.md) blueprint ataması sırasında.
+- Blueprint atama sırasında [sorunları giderin](../troubleshoot/general.md) .

@@ -1,47 +1,43 @@
 ---
 title: Azure ile Chef kullanma
-description: Chef ve Azure altyapınıza test yapılandırmak için kullanmaya giriş
-ms.service: virtual-machines-linux
-keywords: Azure, chef, devops, sanal makineler, genel bakış, otomatikleştirin
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
+description: Azure altyapınızı yapılandırmak ve test etmek için Chef kullanmaya giriş
+keywords: Azure, Chef, DevOps, sanal makineler, genel bakış, Otomatikleştir
 ms.date: 05/15/2018
 ms.topic: article
-ms.openlocfilehash: 5c4e20177c1b334a34f7ce9328dfaa7bd8c66d3d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4ad8b79b42c9d8d7942f391223c052f63579b11b
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60656583"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158012"
 ---
 # <a name="using-chef-with-azure"></a>Azure ile Chef kullanma
-[Chef](https://www.chef.io) azure'da sanal makine altyapısı koduna dönüştüren bir güçlü Otomasyon platformudur. Chef nasıl altyapı yapılandırılmış, dağıtılan ve boyutu ne olursa olsun, ağ üzerinden yönetilen otomatikleştirir.
+[Chef](https://www.chef.io) , Azure 'daki sanal makine altyapısını koda dönüştüren güçlü bir Otomasyon platformudur. Chef, altyapının, boyutu ne kadar bir şekilde yapılandırıldığını, dağıtıldığını ve yönetildiğini otomatik hale getirir.
 
-Bu makalede, Azure altyapı yönetmek için Chef kullanmanın avantajları anlatılmaktadır.
+Bu makalede, Azure altyapısını yönetmek için Chef kullanmanın avantajları açıklanmaktadır.
 
-## <a name="chef-extension-on-azure"></a>Azure üzerinde Chef uzantısı
-Chef ile bir arka plan hizmeti olarak çalışan istemci ile bir sanal makine sağlama [Chef uzantısı](https://docs.microsoft.com/azure/chef/chef-extension-portal) Azure Portalı'nda. Sağlanan sonra bu sanal makineler Chef sunucusu tarafından yönetilmeye hazırdır.
+## <a name="chef-extension-on-azure"></a>Azure 'da Chef uzantısı
+Azure portalında [Chef uzantılı](https://docs.microsoft.com/azure/chef/chef-extension-portal) bir arka plan hizmeti olarak çalışan Chef istemcisiyle bir sanal makine sağlayın. Bu sanal makineler, sağlandıktan sonra bir Chef sunucusu tarafından yönetilmeye hazır hale gelir.
 
 ## <a name="chef-cloud-shell"></a>Chef Cloud Shell
-Azure Cloud shell'de doğrudan iş istasyonu kullanmak Chef! Tüm Chef yardımcı programları ve Inspec doğru Cloud Shell'den çalıştırın. Chef komutları kullanabilir:
+Chef Workstation 'ı doğrudan Azure Cloud Shell ' de kullanın! Cloud Shell tüm Chef yardımcı programlarını ve InSpec hakkını çalıştırın. Chef komutlarının arasından yararlanabilirsiniz:
 
 * [Chef](https://docs.chef.io/ctl_chef.html)
-* [mutfak](https://docs.chef.io/ctl_kitchen.html)
+* [ğa](https://docs.chef.io/ctl_kitchen.html)
 * [inspec](https://www.inspec.io/docs/reference/cli/)
-* [Bıçak](https://docs.chef.io/knife.html)
-* [cookstyle](https://docs.chef.io/cookstyle.html)
-* [foodcritic](https://docs.chef.io/foodcritic.html)
-* [Chef çalıştırma](https://www.chef.sh/docs/chef-workstation/getting-started/)
+* [bı](https://docs.chef.io/knife.html)
+* [Tanıtım stili](https://docs.chef.io/cookstyle.html)
+* [kandcritik](https://docs.chef.io/foodcritic.html)
+* [Chef-Çalıştır](https://www.chef.sh/docs/chef-workstation/getting-started/)
 
-Gibi bizim komut yardımcı programları Cloud Shell'de kullanılabilen diğer Araçları'yla birleştirerek `git`, `az-cli`, ve `terraform`ve altyapı ve uyumluluk otomasyonunuzu tarayıcıdan yazma.
+`git`, `az-cli`ve `terraform`gibi Cloud Shell bulunan diğer araçlarla komut yardımcı programlarını birleştirin ve altyapı ve uyumluluk Otomasyonunuzu tarayıcıdan yazın.
 
-## <a name="automate-infrastructure-apps-and-compliance-with-one-platform"></a>Altyapı, uygulamalar ve uyumluluk tek bir platform ile otomatikleştirme
-Şirketler, hız, hız ve dijital Market'te mücadele etmek için güvenliği gerektirir. Chef ve Microsoft birlikte kişiler, takımlar ve kurumlar tüm bu işlemleri gerçekleştirmenize yardımcı olur. Bir platform ile Chef Automate, artık hale getirebilir ve altyapı, uygulamalarınızın ve uyumluluk, Microsoft Emlak arasında sürekli olarak sunun.
+## <a name="automate-infrastructure-apps-and-compliance-with-one-platform"></a>Altyapıyı, uygulamaları ve bir platformla uyumluluğu otomatikleştirin
+Şirketler, dijital market 'te yarışmaya yönelik hız, hız ve güvenlik gerektirir. Chef ve Microsoft Yardım bireyleri, takımları ve kuruluşları bu işlemleri gerçekleştirebilir. Tek platformlu Chef sayesinde, artık altyapınızı, uygulamalarınızı ve uyumluluğunu Microsoft 'a göre otomatik hale getirebilir ve sürekli teslim edebilirsiniz.
 
-## <a name="test-drive-chef-automate-on-azure"></a>Test sürüşü Chef Automate Azure üzerinde
-Chef tarafından desteklenen [Chef otomatikleştirmek Azure Market çözüm](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/chef-software.chef-automate) oluşturmanızı, dağıtmanızı ve altyapınızı ve uygulamalarınızı işbirliğine dayalı bir şekilde yönetmenize olanak sağlar. Tek bir tıklamayla Chef Automate'e dahil edilen tüm ticari özelliklere anında erişim alır; filonuzun tamamı uçtan uca görünürlük elde edin, sürekli uyumluluk sağlayabilir ve birleşik bir iş akışıyla tüm değişiklik yönetin.
+## <a name="test-drive-chef-automate-on-azure"></a>Azure üzerinde sürücü Chef Otomasyonu test etme
+Chef tarafından desteklenen [Chef, Azure Marketi çözümünü otomatikleştirin](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/chef-software.chef-automate) , altyapı ve uygulamalarınızı işbirliği yaparak oluşturmanıza, dağıtmanıza ve yönetmenize olanak sağlar. Tek tıklamada Chef otomatikleştirmesine dahil olan tüm ticari özelliklere anında erişebilirsiniz; Tüm Fleet genelinde uçtan uca görünürlük elde edin, sürekli uyumluluğu etkinleştirin ve Birleşik bir iş akışıyla tüm değişikliği yönetin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Chef kullanarak Azure'da Windows sanal makine oluşturma](/azure/virtual-machines/windows/chef-automation)
+* [Chef kullanarak Azure 'da Windows sanal makinesi oluşturma](/azure/virtual-machines/windows/chef-automation)

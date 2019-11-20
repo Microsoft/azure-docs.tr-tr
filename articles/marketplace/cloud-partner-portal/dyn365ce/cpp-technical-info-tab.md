@@ -1,70 +1,22 @@
 ---
-title: Dynamics 365 müşteri katılımı teknik bilgileri sekmesi için | Azure Market
-description: Dynamics 365 Customer Engagement uygulaması için teknik bilgi AppSource Market'te belirleme.
+title: Müşteri katılımı için Dynamics 365 teknik bilgi sekmesi | Azure Marketi
+description: Kullanım dışı olan CPP makalesi, bılgısayar makalesine bağlı; "AppSource Market 'te müşteri için Dynamics 365 için bir Dynamics için teknik bilgileri belirtme."
 services: Dynamics 365 for Customer Engagement Offer, Azure, Marketplace, Cloud Partner Portal, AppSource
-author: v-miclar
+author: ChJenk
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 04/24/2019
-ms.author: pabutler
-ms.openlocfilehash: df7f3be5a92a183176da7851ce1943793b8b57d0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.author: v-chjen
+ms.openlocfilehash: 61a82d2bde5406fabb68badfc45c750364b46f77
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942379"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824655"
 ---
-# <a name="dynamics-365-for-customer-engagement-technical-info-tab"></a>Dynamics 365 müşteri katılımı teknik bilgileri sekmesi için
+# <a name="dynamics-365-for-customer-engagement-technical-info-tab"></a>Müşteri katılımı için Dynamics 365 teknik bilgi sekmesi
 
-**Teknik bilgi** sekmesinde **yeni teklif** sayfası, Dynamics 365 Customer Engagement uygulaması, CRM paket ve pazarlama logosu varlıklar dahil olmak üzere ilgili ayrıntılı bilgileri belirtmenize imkan tanır.  Bu sekme, dört bölümlere ayrılmıştır: **Uygulama bilgileri**, **CRM paket**, **CRM paket kullanılabilirlik**, ve **Yapıtları pazarlama**. Bir alan adı eklenmiş bir yıldız (*) gerekli olduğunu gösterir. 
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık Dynamics 365 müşteri katılımı tekliflerinin oluşturulmasını ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Customer Engagement for the PowerApps teklifi &](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer).
 
-
-## <a name="application-info-section"></a>Uygulama bilgileri bölümü
-
-Bu bölümde, Dynamics 365 uygulama hakkında ayrıntıları sağlayacaktır.
-
-![Uygulama bilgileri bölümünden teknik bilgi sekmesi](./media/dynce-technical-info-tab1.png)
-
-Aşağıdaki tabloda, bu alanlar açıklanır. Gerekli alanlar yıldız (*) indicted.
-
-|      Alan                    |    Açıklama                  |
-|    ---------                  |  ---------------                |
-|   Temel lisans modeli\*          |  Lisans modeli, müşterilerin uygulamanızı Dynamics 365 Yönetim merkezinde nasıl atanacağını belirler. **Kaynak** lisanslama örnek tabanlı ise **kullanıcı** lisansları, Kiracı başına bir atanır.  |
-|  Giden S2S & CRM güvenli Store erişimi\* |  Yapılandırma CRM güvenli Store veya sunucudan sunucuya (S2S) giden erişim sağlar. *Bu özellik, Dynamics 365 ekibinden özel durum sertifika aşaması sırasında gerektirir.* Microsoft bu özelliği desteklemek için ek adımları tamamlamak için sizinle iletişime geçecektir.  |
-| CRM yaşam döngüsü olaylarına abone olma\* | Dynamics 365 yaşam döngüsü olayları ile tümleştirme, Microsoft ile özel bir sözleşme aracılığıyla kaydedilen adanmış bir hizmet sağlamak gerektirir. *Bu özellik, Dynamics 365 ekibinden özel durum sertifika aşaması sırasında gerektirir.* Bu özelliği destekleyen eksiksiz ek adımları kurulur.  |
-| Uygulama Yapılandırma URL'si | Uygulamayı yapılandırmak kullanıcının sağlayan web sayfasının URL'si |
-| İlgili Dynamics 365 ürünleri  | Bu teklif için geçerli bir Dynamics 365 ürünleri seçin. Bu teklif seçili ürünlerin appsource'ta görünür.  |
-| Değişiklik yalnızca pazarlama         | Bu seçeneği Evet gösterir için var olan bir teklif için yalnızca pazarlama/açıklayıcı değişiklikler yapıldı ayarlanıyor.  Bu değişikliklere izin verecek sertifika ve sağlama aşamaları atlamak bir teklif.  |
-|  |  |
-
-
-## <a name="crm-package-section"></a>CRM paket bölümü
-
-Bu bölümde, AppSource paket dosyası hakkında ayrıntılar sağlayacaktır.  Bu bilgiler, Dynamics 365 doğrulama ve sertifika ekipleri tarafından kullanılır.
-
-![CRM paketin bölümünü teknik bilgi sekmesi](./media/dynce-technical-info-tab2.png)
-
-Aşağıdaki tabloda, bu alanlar açıklanır.  Gerekli alanlar yıldız (*) indicted.
-
-|      Alan                    |    Açıklama                  |
-|    ---------                  |  ---------------                |
-|  Paketinin dosya adı\*     |  Kullanımınızın paket (.zip) dosya adı.  Bu ad *değil* genel ve Dynamics 365 sertifika ekibi tarafından dahili olarak kullanılır.  |
-|  Paket konumu URL'si\*      |  Karşıya yüklenen paket dosyası içeren bir Azure depolama hesabı URL'si. Bu URL'yi paketiniz için doğrulama alması için ekibimize izin vermek için bir salt okunur SAS anahtarını içermesi gerekir.  |
-| Birden fazla crm paket\*     | Crm farklı paketleri ile birden çok sürümünü destekleniyorsa Evet sadece'i seçin.  Her sürüm ayrı ayrı oluşturmanız gerekir, karşılık gelen paket dosyası tht sahip olur.  |
-| Senaryo ve kullanım örneği varlık\*   | Dynamics 365 doğrulama ekibi tarafından kullanılmak üzere uygulamanız için işlev belirtimi belgenin bir karşıya yükleme sağlar.  Bu belirtim tercih edilen biçimi [E2E kullanıcı senaryosu şablonu](https://isvdocumentation.blob.core.windows.net/d365documentation/Power%20Platform%20E2E%20document.docx).  |
-|  |  |
-
-
-## <a name="crm-package-availability-section"></a>CRM paket kullanılabilirlik bölümü
-
-Bu bölümde, uygulamanızın hangi coğrafi bölgeler müşterilerine olacağını seçin.  Aşağıdaki bağımsız bölgeler için dağıtmadan *özel izinler ve doğrulama gerektiren* sertifika işlemi sırasında: [Almanya](https://docs.microsoft.com/azure/germany/), [ABD kamu Bulutu](https://docs.microsoft.com/azure/azure-government/documentation-government-welcome)ve ipucu.
-
-
-## <a name="marketing-artifacts-section"></a>Pazarlama Yapıtları bölümü
-
-Bu bölümde, paketinizin Appsource'ta Market'te temsil etmek için kullanılacak bir uygulama logonuzu gerektirir.  Logo resmi PNG biçiminde olmalı ve boyutu 255 x 115 piksel olması gerekir.
-
-
-## <a name="next-steps"></a>Sonraki adımlar
-
-Tamamlayarak uygulamanızı Tanıtımı teklif öneririz [Test Sürüşü sekmesi](./cpp-testdrive-tab.md)
+Müşteri için yeni bir Dynamics 365 teklif teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Customer Engagement & PowerApps teklifini](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-customer-engagement-offer) oluşturma bölümündeki yönergeleri izleyin.

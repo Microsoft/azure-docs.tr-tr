@@ -1,30 +1,30 @@
 ---
-title: Azure veri Gezgini'nde yinelenen veri işleme
-description: Bu konuda, Azure Veri Gezgini'ni kullanarak, yinelenen veri ile ilgilenmeniz çeşitli yaklaşımlar gösterilmektedir.
+title: Azure Veri Gezgini 'de yinelenen verileri işleme
+description: Bu konuda, Azure Veri Gezgini kullanırken yinelenen verilerle uğraşmak için çeşitli yaklaşımlar gösterilecektir.
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 12/19/2018
-ms.openlocfilehash: 8f55b6dfb7b5bc9eda675aca4ed80a66b8a25a7f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 60ec2b86e0205060f907f1fe39d084dca3aac1cd
+ms.sourcegitcommit: 6cff17b02b65388ac90ef3757bf04c6d8ed3db03
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60445779"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68608236"
 ---
-# <a name="handle-duplicate-data-in-azure-data-explorer"></a>Azure veri Gezgini'nde yinelenen veri işleme
+# <a name="handle-duplicate-data-in-azure-data-explorer"></a>Azure Veri Gezgini 'de yinelenen verileri işleme
 
-Cihazlar bulut için veri gönderen bir yerel veri önbelleği korur. Veri boyutu bağlı olarak yerel önbellek verileri için gün veya hatta aylar depoluyor. Analitik veritabanlarınızı önbelleğe alınmış verileri de yeniden göndermeniz ve analitik veritabanında veri çoğaltma neden yapıyor cihazlardan korumak istiyorsunuz. Bu konuda, bu tür senaryolar için yinelenen veri işleme için en iyi uygulamalar açıklanmaktadır.
+Buluta veri gönderen cihazlar, verilerin yerel bir önbelleğini korur. Veri boyutuna bağlı olarak, yerel önbellek verileri günler veya hatta aylar için depoluyor olabilir. Ön belleğe alınmış verileri yeniden veren ve analitik veritabanında veri çoğaltmasına neden olan hatalı çalışan cihazlardan analitik veritabanlarınızı korumak istiyorsunuz. Bu konu, bu tür senaryolar için yinelenen verileri işlemeye yönelik en iyi yöntemleri özetler.
 
-Veri çoğaltma için en iyi çözüm çoğaltma engelliyor. Veri işlem hattı boyunca veri taşıma ile ilişkili maliyetler kaydeder ve karşılanan sisteme alınan yinelenen veri ile şirket kaynaklarına harcama önler daha önce veri ardışık düzeninde Mümkünse sorunu düzeltin. Bununla birlikte, burada kaynak sistemi değiştirilemez durumda bu senaryoyla yarayan çeşitli yolları vardır.
+Veri çoğaltma için en iyi çözüm yinelemeyi engellemektedir. Mümkünse, veri işlem hattındaki bu sorunu giderip veri işlem hattında veri hareketiyle ilişkili maliyetleri kaydeder ve sistemle birlikte bulunan yinelenen verilerle içeri aktarılmalarını önler. Ancak, kaynak sistemin değiştirilemediği durumlarda, bu senaryoya yönelik çeşitli yollar vardır.
 
-## <a name="understand-the-impact-of-duplicate-data"></a>Yinelenen verileri etkisini anlama
+## <a name="understand-the-impact-of-duplicate-data"></a>Yinelenen verilerin etkisini anlayın
 
-Yinelenen verileri yüzdesini izleyin. Yinelenen verileri yüzdesi bulununca sorunu ve iş üzerindeki etkilerine kapsamını çözümleme ve uygun çözümü seçebilirsiniz.
+Yinelenen verilerin yüzdesini izleyin. Yinelenen verilerin yüzdesi bulunduktan sonra, sorunun kapsamını ve iş etkisini analiz edebilir ve uygun çözümü seçebilirsiniz.
 
-Örnek Sorgu: yinelenen kayıtları yüzdesini belirlemek için
+Yinelenen kayıt yüzdesini belirlemek için örnek sorgu:
 
 ```kusto
 let _sample = 0.01; // 1% sampling
@@ -39,17 +39,17 @@ _data
 | extend duplicate_percentage = (duplicateRecords / _sample) / _totalRecords  
 ```
 
-## <a name="solutions-for-handling-duplicate-data"></a>Yinelenen veri işleme yönelik çözümler
+## <a name="solutions-for-handling-duplicate-data"></a>Yinelenen verileri işlemeye yönelik çözümler
 
 ### <a name="solution-1-dont-remove-duplicate-data"></a>Çözüm #1: Yinelenen verileri kaldırma
 
-İş gereksinimlerinize ve yinelenen veri tolerans anlayın. Bazı veri kümeleri, yinelenen verileri belirli bir yüzdesi ile yönetebilirsiniz. Yinelenen verileri büyük etkiye sahip değilse, varlığı yoksayabilirsiniz. Yinelenen verileri kaldırma değil avantajı ortadan kalkar alma işlemi veya sorgu performansı ' dir.
+Yinelenen verilerin iş gereksinimlerinizi ve toleransını anlayın. Bazı veri kümeleri, yinelenen verilerin belirli bir yüzdesi ile yönetebilir. Yinelenen verilerin büyük bir etkisi yoksa, varlığını yoksayabilirsiniz. Yinelenen verileri kaldırmanın avantajı, alma işleminin veya sorgu performansının ek bir yükü olmamasıdır.
 
-### <a name="solution-2-handle-duplicate-rows-during-query"></a>Çözüm #2: Sorgu sırasında yinelenen satırları işleme
+### <a name="solution-2-handle-duplicate-rows-during-query"></a>Çözüm #2: Sorgu sırasında yinelenen satırları işle
 
-Sorgu sırasında veri yinelenen satırları filtrelemek başka bir seçenektir. [ `arg_max()` ](/azure/kusto/query/arg-max-aggfunction) Toplu işlev, yinelenen kayıtları süzer ve zaman damgası (veya başka bir sütuna) göre en son kaydını döndürmek için kullanılabilir. Bu yöntemi kullanmanın avantajı daha hızlı alma olduğu yinelenenleri kaldırma sorgu süre boyunca ortaya çıkar. Ayrıca, Denetim ve sorun giderme için tüm kayıtları (yinelenenler de dahil) kullanılabilir. Kullanılarak dezavantajı `arg_max` işlevi, ek sorgu süresini ve CPU üzerindeki yükü veriler sorgulanır her zaman kullanılabilir. Sorgulanan veri miktarına bağlı olarak bu çözüm, işlevsel olmayan veya bellek kullanan durdurabilir ve diğer seçenekleri değiştirme gerektirir.
+Sorgu sırasında verilerdeki yinelenen satırları filtrelemeniz başka bir seçenektir. [`arg_max()`](/azure/kusto/query/arg-max-aggfunction) Toplu işlev, yinelenen kayıtları filtrelemek ve zaman damgasına (veya başka bir sütuna) göre son kaydı döndürmek için kullanılabilir. Bu yöntemi kullanmanın avantajı, sorgu süresi sırasında aynı zamanda çoğaltılmasından daha hızlı bir şekilde yapılır. Ayrıca, tüm kayıtlar (yinelemeler dahil) denetim ve sorun giderme için kullanılabilir. `arg_max` İşlevi kullanmanın dezavantajı, verilerin her sorgulanışında ek sorgu zamanı ve CPU üzerinde yükleme olur. Sorgulanan verilerin miktarına bağlı olarak, bu çözüm işlevsel olmayan veya bellek kullanan bir duruma gelebilir ve diğer seçeneklere geçiş yapılmasını gerektirir.
 
-Aşağıdaki örnekte, biz benzersiz kayıtları belirlemek sütun kümesi için alınan son kaydını sorgu:
+Aşağıdaki örnekte, benzersiz kayıtları tespit eden bir sütun kümesi için alınan son kaydı sorgulıyoruz:
 
 ```kusto
 DeviceEventsAll
@@ -57,7 +57,7 @@ DeviceEventsAll
 | summarize hint.strategy=shuffle arg_max(EventDateTime, *) by DeviceId, EventId, StationId
 ```
 
-Bu sorgu, tablonun doğrudan sorgulama yerine bir işlev içinde de yerleştirilebilir:
+Bu sorgu, tabloyu doğrudan sorgulamak yerine bir işlevin içine de yerleştirilebilecek:
 
 ```kusto
 .create function DeviceEventsView
@@ -68,19 +68,19 @@ DeviceEventsAll
 }
 ```
 
-### <a name="solution-3-filter-duplicates-during-the-ingestion-process"></a>Çözüm #3: Alma işlemi sırasında yinelenenleri Filtrele
+### <a name="solution-3-filter-duplicates-during-the-ingestion-process"></a>Çözüm #3: Alma işlemi sırasında yinelenenleri filtrele
 
-Yinelenen filtre alma işlemi sırasında başka bir çözümdür. Kusto tablolara alımı sırasında yinelenen verileri yoksayar. Veriler bir hazırlama tablosuna alınan ve yinelenen satırlar kaldırdıktan sonra başka bir tabloya kopyalar. Bu çözümün avantajı, sorgu performansını önemli ölçüde karşılaştırıldığında önceki çözümü artırır olmasıdır. Dezavantajlarından artan alma süresi ve ek veri depolama maliyetini içerir.
+Başka bir çözüm, alma işlemi sırasında yinelenenleri filtrelemeye yönelik bir çözümdür. Sistem, kusto tablolarında alma sırasında yinelenen verileri yoksayar. Veriler hazırlama tablosuna alınır ve yinelenen satırlar kaldırıldıktan sonra başka bir tabloya kopyalanır. Bu çözümün avantajı, önceki çözümle karşılaştırıldığında sorgu performansının önemli ölçüde artmasına olanak sağlar. Dezavantajları, artan alım süresini ve ek veri depolama maliyetlerini içerir. Bu çözüm, yalnızca dupliingin eşzamanlı olarak sunulmadığından işe yarar. Yinelenen kayıtlar içeren birden çok eş zamanlı Alım varsa, yinelenenleri kaldırma işlemi tabloda varolan herhangi bir eşleşen kaydı bulmayacak olduğundan, tümü alınabilir.    
 
-Bu yöntem aşağıdaki örnekte gösterilmiştir:
+Aşağıdaki örnek bu yöntemi göstermektedir:
 
-1. Aynı şemaya başka bir tablo oluşturun:
+1. Aynı şemaya sahip başka bir tablo oluşturun:
 
     ```kusto
     .create table DeviceEventsUnique (EventDateTime: datetime, DeviceId: int, EventId: int, StationId: int)
     ```
 
-1. Yinelenen kayıtları göre filtrelemek için bir işlev oluşturma hologram katılma daha önce alınan fiyatlarla yeni kayıtlar.
+1. Yeni kayıtları daha önce alınan olanlarla birleştirerek yinelenen kayıtları filtrelemek için bir işlev oluşturun.
 
     ```kusto
     .create function RemoveDuplicateDeviceEvents()
@@ -97,9 +97,9 @@ Bu yöntem aşağıdaki örnekte gösterilmiştir:
     ```
 
     > [!NOTE]
-    > Birleştirmeler CPU bağlantılı işlemler ve sisteme ek yük ekleyin.
+    > Birleşimler, CPU 'ya bağlı işlemlerdir ve sisteme ek bir yük ekler.
 
-1. Ayarlama [güncelleştirme ilkesi](/azure/kusto/management/update-policy) üzerinde `DeviceEventsUnique` tablo. Yeni veri uygulamasına gittiğinde güncelleştirme ilkesi etkinleştirilir `DeviceEventsAll` tablo. Kusto altyapısı otomatik olarak yeni olarak işlev yürütülür [kapsamlarını](/azure/kusto/management/extents-overview) oluşturulur. Yeni oluşturulan veri işleme kapsamlıdır. Aşağıdaki komut, kaynak tablosu bitiştirir (`DeviceEventsAll`), hedef tablo (`DeviceEventsUnique`) ve işlev `RemoveDuplicatesDeviceEvents` birlikte bir güncelleştirme ilkesi oluşturmak için.
+1. `DeviceEventsUnique` Tablodaki [güncelleştirme ilkesini](/azure/kusto/management/update-policy) ayarla. Yeni veriler `DeviceEventsAll` tabloya geçtiğinde güncelleştirme ilkesi etkinleştirilir. Yeni [kapsamlar](/azure/kusto/management/extents-overview) oluşturulduğunda kusto altyapısı işlevi otomatik olarak yürütür. İşleme, yeni oluşturulan verilerin kapsamına alınır. Aşağıdaki komut, güncelleştirme ilkesini oluşturmak için kaynak tablo`DeviceEventsAll`(), hedef tablo`DeviceEventsUnique`() ve işlevi `RemoveDuplicatesDeviceEvents` birlikte oluşturur.
 
     ```kusto
     .alter table DeviceEventsUnique policy update
@@ -107,9 +107,9 @@ Bu yöntem aşağıdaki örnekte gösterilmiştir:
     ```
 
     > [!NOTE]
-    > Güncelleştirme ilkesi, veri alımı sırasında filtrelenmiş ve iki kez alınan alma süresini genişletir (için `DeviceEventsAll` tablo ve `DeviceEventsUnique` tablo).
+    > Güncelleştirme ilkesi, verilerin alma sırasında filtrelenmesini ve iki kez ( `DeviceEventsAll` tabloya ve `DeviceEventsUnique` tabloya) göre filtrelenmesinden itibaren alma süresini uzatır.
 
-1. (İsteğe bağlı) Daha düşük bir veri saklama ayarlamak `DeviceEventsAll` verilerin kopyaları depolanmasını önlemek için tablo. Veri hacmine bağlı olarak gün sayısı ve sorun giderme verilerini saklamak istediğiniz süreyi seçin. Ayarlayabilirsiniz `0d` gün saklama COGS kaydetmek ve veri depolama alanına yüklenir olmadığından bu yana, performansı artırmak için.
+1. Seçim Verilerin kopyalarının depolanmasını önlemek için `DeviceEventsAll` tabloda daha düşük bir veri saklama alanı ayarlayın. Veri hacmine ve sorun giderme için verileri bekletmek istediğiniz sürenin uzunluğuna bağlı olarak gün sayısını seçin. Verileri depolama alanına yüklenmediğinden, `0d` SMM 'yi kaydetmek ve performansı artırmak için gün bekletme olarak ayarlayabilirsiniz.
 
     ```kusto
     .alter-merge table DeviceEventsAll policy retention softdelete = 1d
@@ -117,7 +117,7 @@ Bu yöntem aşağıdaki örnekte gösterilmiştir:
 
 ## <a name="summary"></a>Özet
 
-Veri çoğaltma, birden çok yolla işlenebilir. Seçenekler, işletmeniz için doğru yöntem belirlemek için hesap fiyat ve performans, alma dikkatlice değerlendirin.
+Veri çoğaltma, birden çok şekilde işlenebilir. İşletmeniz için doğru yöntemi öğrenmek için, seçenekleri dikkatle değerlendirin, hesap fiyatını ve performansını inceleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

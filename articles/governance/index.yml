@@ -1,68 +1,205 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Yönetimi - Governance
+### YamlMime:Hub
+title: Azure İdaresi belgeleri
+summary: Tüm önemli bulut sağlayıcılarının en gelişmiş idare özelliklerine sahip olun.
+brand: azure
 metadata:
-  title: Azure Yönetimi - Governance
-  description: Özel tasarımlar ve kurallar ile ortamınızı tutarlı bir şekilde yönetmek ve uyumluluk açısından denetlemek için kullanabileceğiniz kavramlar ve Azure hizmetleri hakkında bilgi edinin.
-  author: DCtheGeek
-  manager: carmonm
+  title: Azure İdaresi belgeleri
+  description: Tüm önemli bulut sağlayıcılarının en gelişmiş idare özelliklerine sahip olun.
   ms.service: governance
-  ms.topic: landing-page
-  ms.date: 05/07/2019
+  ms.topic: hub-page
+  ms.collection: collection
+  author: DCtheGeek
   ms.author: dacoulte
-abstract:
-  description: 'Azure Governance, farklı Azure kaynaklarınızı tüm ölçeklerde yönetmenizi sağlayan kavramlardan ve hizmetlerden oluşan bir koleksiyondur. Bu hizmetler aboneliklerinizi mantıksal bir şekilde düzenlemenizi ve yapılandırmanızı, yeniden kullanılabilir ve yerel Azure kaynak paketleri oluşturup dağıtmanızı, kaynaklarınızı tanımlama, denetleme ve düzeltme gibi birçok işlem gerçekleştirmenizi sağlar. Bu kavramlar ve hizmetler hakkında daha fazla bilgi edinmek ve bunları ortamınızda etkinleştirmek ve kullanmak için yapmanız gerekenleri öğrenmek için bu sayfayı kullanın.'
-  aside:
-    image:
-      alt: null
-      height: 225
-      src: ./media/video.png
-      width: 250
-    title: 'Azure Governance ile kaynaklar üzerinde hız ve denetim elde edin (1:47)'
-    href: 'https://www.youtube.com/watch?v=MhGbKjlmuRs'
-    width: 250
-sections:
-  - title: Bileşenler ve Hizmetler
-  - items:
-      - type: list
-        style: cards
-        className: cardsD
-        columns: 2
-        items:
-          - href: ./management-groups/overview
-            html: <p>Aboneliklerinizi gruplamayı ve diğer Governance hizmetlerinin yapılandırılmış bir şekilde dağıtılmasını destekleyen mantıksal bir hiyerarşi halinde düzenlemeyi öğrenin.<br /></p>
-            image:
-              alt: Yönetim Grupları
-              src: ./media/management-groups-illustration.svg
-            title: Yönetim Grupları
-          - href: ./resource-graph/
-            html: <p>Güçlü bir komut satırı aracı (Azure CLI ve Azure PowerShell destekler) kullanarak Azure kaynaklarınızla ilgili karmaşık bilgileri hızlıca sorgulayın. Geniş ölçekteki kaynakları keşfetmek için karmaşık ve yinelemeli betikler kullanmanızı gerektiren bilgileri hızlıca bulun ve kullanıma sunun.</p>
-            image:
-              alt: Kaynak Grafiği
-              src: ./media/resource-graph-illustration.svg
-            title: Kaynak Grafiği
-          - href: ./policy/
-            html: '<p>Ortamınızdaki kaynaklar için standartlar belirleyin ve bunları uygulayın. İstenmeyen kaynakların oluşturulmasını önleyin, yeni kaynakları ek öğelerle geliştirin ve ortamınızdaki kaynakları denetleyip düzeltin.</p>'
-            image:
-              alt: İlke
-              src: ./media/policy-illustration.svg
-            title: İlke
-          - href: ./blueprints/
-            html: '<p>Tutarlı ve tekrarlanabilir ortamlar oluşturmak için aboneliklere dinamik olarak dağıtılabilecek yerel Azure <i>yapıt</i> (kaynak grupları, ilkeler, rol atamaları, Resource Manager şablonları ve diğerleri) paketi oluşturun.</p>'
-            image:
-              alt: Şemalar
-              src: ./media/blueprints-illustration.svg
-            title: Şemalar
-  - title: Bulut Benimseme Çerçevesi
-  - items:
-      - type: list
-        style: cards
-        className: cardsZ
-        columns: 3
-        items:
-          - href: /azure/architecture/cloud-adoption/index?toc=/azure/governance/toc.json
-            html: '<p>Bulut Benimseme Çerçevesi, Microsoft Azure için teknik rehberlik sağlar. Müşteriler, hala bulut satıcısı seçme aşamasında olabildiğinden, bu çerçeve mümkün olduğunda daha üst düzey kararlar için buluttan bağımsız rehberlik sağlar.</p>'
-            title: Genel Bakış
-          - href: /azure/architecture/cloud-adoption/governance/index?toc=/azure/governance/toc.json
-            html: '<p>Şirket içi BT ortamlarını idare eden mevcut ilkelere sahip kuruluşlar için, bulut idaresi bu iş ilkelerini tamamlayıcı nitelikte olmalıdır.<br /><br /></p>'
-            title: İdareye Genel Bakış
+  ms.date: 09/10/2019
+  ms.openlocfilehash: 926220dc7260798ed9b2ffd9f6317fc97be198ac
+  ms.sourcegitcommit: f29fec8ec945921cc3a89a6e7086127cc1bc1759
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/17/2019
+  ms.locfileid: "72529516"
+highlightedContent:
+  items:
+  - title: İdareye genel bakış
+    itemType: overview
+    url: ./azure-management.md
+  - title: İdare YouTube kanalı
+    itemType: video
+    url: https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ
+  - title: Bulut Benimseme Çerçevesi'nde İdare
+    itemType: architecture
+    url: /azure/architecture/cloud-adoption/governance
+  - title: Azure İlkesi ile altyapı standartlarını uygulama ve izleme
+    itemType: learn
+    url: /learn/modules/intro-to-governance/
+productDirectory:
+  title: Bileşenler ve Hizmetler
+  items:
+  - title: Azure Yönetim Grupları
+    imageSrc: ./media/management-groups.svg
+    links:
+    - url: ./management-groups/overview.md
+      text: Genel Bakış
+    - url: ./management-groups/index.yml
+      text: Daha fazla göster >
+  - title: Azure İlkesi
+    imageSrc: ./media/azure-policy.svg
+    links:
+    - url: ./policy/overview.md
+      text: Genel Bakış
+    - url: ./policy/how-to/get-compliance-data.md
+      text: Uyumluluğu değerlendirme
+    - url: ./policy/concepts/rego-for-aks.md
+      text: AKS yapılandırmasını yönetme
+    - url: ./policy/concepts/guest-configuration.md
+      text: VM yapılandırmasını yönetme
+    - url: ./policy/index.yml
+      text: Daha fazla göster >
+  - title: Azure Blueprints
+    imageSrc: ./media/azure-blueprints.svg
+    links:
+    - url: ./blueprints/overview.md
+      text: Genel Bakış
+    - url: ./blueprints/tutorials/protect-new-resources.md
+      text: Kaynakları koruma
+    - url: ./blueprints/index.yml
+      text: Daha fazla göster >
+  - title: Azure Kaynak Grafiği
+    imageSrc: ./media/azure-resource-graph.svg
+    links:
+    - url: ./resource-graph/overview.md
+      text: Genel Bakış
+    - url: ./resource-graph/concepts/explore-resources.md
+      text: Azure kaynaklarınızı inceleme
+    - url: ./resource-graph/how-to/get-resource-changes.md
+      text: Değişiklikleri izleme
+    - url: ./resource-graph/index.yml
+      text: Daha fazla göster >
+  - title: Maliyet Yönetimi
+    imageSrc: ./media/cost-management.svg
+    links:
+    - url: ../cost-management/overview-cost-mgt.md
+      text: Genel Bakış
+    - url: ../cost-management/aws-integration-manage.md
+      text: AWS maliyet ve kullanımını yönetme
+    - url: ../cost-management/index.yml
+      text: Daha fazla göster >
+tools:
+  title: Örnekler
+  summary: İlke tanımları, uyumluluk şemaları, kaynak sorguları ve daha fazlası
+  items:
+  - title: Azure İlkesi
+    imageSrc: ./media/azure-policy.svg
+    url: ./policy/samples/index.md
+  - title: Azure Blueprints
+    imageSrc: ./media/azure-blueprints.svg
+    url: ./blueprints/samples/index.md
+  - title: Azure Kaynak Grafiği
+    imageSrc: ./media/azure-resource-graph.svg
+    url: ./resource-graph/samples/starter.md
+  - title: Maliyet Yönetimi
+    imageSrc: ./media/cost-management.svg
+    url: https://github.com/Azure-Samples/Cost-Management-Samples
+additionalContent:
+  sections:
+  - title: Geliştirici Kaynakları
+    items:
+    - title: Yönetim Grupları
+      links:
+      - text: Azure CLI
+        url: /cli/azure/ext/managementgroups/?view=azure-cli-latest
+      - text: Azure PowerShell
+        url: /powershell/module/az.resources/#resources
+      - text: .NET için Azure SDK
+        url: /dotnet/api/overview/azure/managementgroups
+      - text: Node için Azure SDK
+        url: /javascript/api/azure-arm-resource/managementgroups
+    - title: Azure İlkesi
+      links:
+      - text: Azure CLI
+        url: /cli/azure/policy
+      - text: Azure PowerShell
+        url: /powershell/module/az.resources/#policies
+        note: (İlke)
+      - text: Azure PowerShell
+        url: /powershell/module/az.policyinsights#policy_insights
+        note: (İlke İçgörüleri)
+      - text: Azure PowerShell
+        url: https://www.powershellgallery.com/packages/Az.GuestConfiguration
+        note: (Konuk Yapılandırması)
+      - text: .NET için Azure SDK
+        url: /dotnet/api/microsoft.azure.management.resourcemanager.models.policyassignment
+        note: (Atamalar)
+      - text: .NET için Azure SDK
+        url: /dotnet/api/microsoft.azure.management.resourcemanager.models.policydefinition
+        note: (İlke Tanımları)
+      - text: REST
+        url: /rest/api/policy-insights/
+        note: (İlke İçgörüleri)
+      - text: REST
+        url: /rest/api/resources/policyassignments
+        note: (Atamalar)
+      - text: REST
+        url: /rest/api/resources/policydefinitions
+        note: (Tanımlar)
+      - text: REST
+        url: /rest/api/resources/policysetdefinitions
+        note: (Girişimler)
+      - text: REST
+        url: /rest/api/guestconfiguration/
+        note: (Konuk Yapılandırması)
+      - text: Resource Manager şablonları
+        url: /azure/templates/microsoft.authorization/allversions
+    - title: Azure Blueprints
+      links:
+      - text: Şema işlevleri
+        url: ./blueprints/reference/blueprint-functions.md
+      - text: Azure PowerShell
+        url: /powershell/module/az.blueprint/#blueprint
+      - text: Azure PowerShell
+        url: https://www.powershellgallery.com/packages/Az.Blueprint
+        note: (PS Galerisi Modülü)
+      - text: .NET için Azure SDK
+        url: /dotnet/api/overview/azure/blueprints/management
+      - text: REST
+        url: /rest/api/blueprints/
+    - title: Azure Kaynak Grafiği
+      links:
+      - text: Azure CLI
+        url: /cli/azure/ext/resource-graph/graph
+      - text: Azure PowerShell
+        url: /powershell/module/az.resourcegraph/
+      - text: Azure PowerShell
+        url: https://www.powershellgallery.com/packages/Az.ResourceGraph
+        note: (PS Galerisi Modülü)
+      - text: .NET için Azure SDK
+        url: /dotnet/api/Microsoft.Azure.Management.ResourceGraph
+      - text: .NET için Azure SDK
+        url: https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceGraph/
+        note: (NuGet)
+      - text: Go için Azure SDK
+        url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2019-04-01/resourcegraph
+      - text: Java için Azure SDK
+        url: /java/api/overview/azure/resourcegraph/management?view=azure-java-stable
+      - text: Java için Azure SDK
+        url: https://search.maven.org/artifact/com.microsoft.azure.resourcegraph.v2019_04_01/azure-mgmt-resourcegraph/1.0.0-beta/jar
+        note: (Maven)
+      - text: Node için Azure SDK
+        url: /javascript/api/@azure/arm-resourcegraph
+      - text: Python için Azure SDK
+        url: /python/api/azure-mgmt-resourcegraph/azure.mgmt.resourcegraph
+      - text: Ruby için Azure SDK
+        url: https://rubygems.org/gems/azure_mgmt_resourcegraph
+        note: (Gem)
+      - text: REST
+        url: /rest/api/azure-resourcegraph/
+    - title: Maliyet Yönetimi
+      links:
+      - text: REST
+        url: /rest/api/cost-management
+        note: (Maliyet Yönetimi)
+      - text: REST
+        url: /rest/api/consumption
+        note: (Tüketim)
+      - text: Resource Manager şablonları
+        url: /azure/templates/microsoft.consumption/budgets
+  footer: '[UserVoice](https://feedback.azure.com/forums/915958-azure-governance) | [Microsoft Teknoloji Topluluğu - Azure İdaresi](https://techcommunity.microsoft.com/t5/Azure-Governance/bd-p/AzureGovernance) | [Azure Desteği](https://azure.microsoft.com/support/create-ticket/)'

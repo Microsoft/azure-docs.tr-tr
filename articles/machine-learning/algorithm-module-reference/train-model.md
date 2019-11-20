@@ -1,81 +1,80 @@
 ---
-title: 'Modeli eğitme: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Nasıl kullanacağınızı öğrenin **modeli eğitme** modülü Azure Machine Learning hizmetinde bir sınıflandırma veya regresyon modelini eğitmek için.
+title: 'Modeli eğitme: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Sınıflandırma veya regresyon modelini eğitmek için Azure Machine Learning **modeli eğitme** modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 29d0f698456b83c1520a92bc7df47b26540325f4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 28cc2e1f8782f1ffd37e3a20fcc68264b481e42e
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65028118"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490374"
 ---
-# <a name="train-model-module"></a>Train Model Modülü
+# <a name="train-model-module"></a>Model modülünü eğitme
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Bir sınıflandırma veya regresyon modelini eğitmek için bu modülü kullanın. Eğitim gerçekleştikten sonra model tanımlı ve parametrelerini ayarlayın ve ekli veri gerektirir. Ayrıca **modeli eğitme** yeni verilerle birlikte var olan bir modeli yeniden eğitme için. 
+Sınıflandırma veya regresyon modelini eğitmek için bu modülü kullanın. Eğitim, bir modeli tanımladıktan ve parametrelerini ayarladıktan sonra ve etiketli veriler gerektirdiğinde gerçekleşir. Ayrıca, mevcut bir modeli yeni verilerle yeniden eğitmek için **eğitme modeli** ' ni de kullanabilirsiniz. 
 
-## <a name="how-the-training-process-works"></a>Eğitim işlem nasıl çalışır?
+## <a name="how-the-training-process-works"></a>Eğitim süreci nasıl işler?
 
-Azure Machine Learning, oluşturma ve machine learning modeli kullanarak genellikle üç adım, bir işlemdir. 
+Azure Machine Learning, makine öğrenimi modelinin oluşturulması ve kullanılması genellikle üç adımlı bir işlemdir. 
 
-1. Bir model, belirli türde bir algoritma seçme ve kendi parametrelerini veya hiperparametreleri tanımlama yapılandırın. Aşağıdaki modeli türlerinden herhangi birini seçin: 
+1. Bir modeli, belirli bir algoritma türü seçerek ve parametrelerini veya hiper parametrelerini tanımlayarak yapılandırırsınız. Aşağıdaki model türlerinden birini seçin: 
 
-    + **Sınıflandırma** modelleri, karmaşık sinir ağları, karar ağaçları ve karar ormanları ve diğer algoritmalar göre.
-    + **Regresyon** modelleri, standart doğrusal regresyon içerebilir veya sinir ağları ve Bayes regresyon dahil olmak üzere, diğer algoritmalar kullanın.  
+    + Sinir Networks, karar ağaçları ve karar ormanları ve diğer algoritmalara göre **Sınıflandırma** modelleri.
+    + Standart doğrusal regresyon veya sinir ağları ile Bayeme gerileme dahil diğer algoritmaları kullanan **regresyon** modelleri.  
 
-2. Etiketlenir ve veri algoritması ile uyumlu olan bir veri kümesi sağlar. Hem verileri hem de modele bağlanmak **modeli eğitme**.
+2. Etiketli ve verilerle uyumlu olan bir veri kümesi sağlayın. **Modeli eğitme**için hem verileri hem de modeli bağlayın.
 
-    Hangi eğitim üreten bir belirli ikili verilerden öğrenilen istatistiksel düzenleri kapsülleyen iLearner biçimdir. Doğrudan değiştiremez veya bu biçim okuyun; Ancak, diğer modüllerin bu eğitilen modeli kullanabilirsiniz. 
+    Eğitimin ürettiği, verilerden öğrenilen istatistiksel desenleri kapsayan, iLearner olan belirli bir ikili biçimdir. Bu biçimi doğrudan değiştiremez veya okuyabilirsiniz; Ancak, diğer modüller bu eğitilen modeli kullanabilir. 
     
-    Modelin özelliklerine yönelik da görüntüleyebilirsiniz. Daha fazla bilgi için sonuçlar bölümüne bakın.
+    Ayrıca modelin özelliklerini görüntüleyebilirsiniz. Daha fazla bilgi için sonuçlar bölümüne bakın.
 
-3. Alıştırma tamamlandıktan sonra eğitilen model biri ile kullanın [modülleri Puanlama](./score-model.md)yeni veri tahminlerde bulunmak için.
+3. Eğitim tamamlandıktan sonra, yeni verilerde tahmine dayalı hale getirmek için, [Puanlama modülleriyle](./score-model.md)eğitilen modeli kullanın.
 
-## <a name="how-to-use-train-model"></a>Nasıl kullanılacağını **modeli eğitme**  
+## <a name="how-to-use-train-model"></a>**Eğitim modeli** kullanma  
   
-1.  Azure Machine Learning'de model sınıflandırma veya regresyon modelinden yapılandırın.
+1.  Azure Machine Learning, bir sınıflandırma modeli veya regresyon modeli yapılandırın.
     
-2. Ekleme **modeli eğitme** modülünü deneme.  Bu modül altında bulabilirsiniz **Machine Learning** kategorisi. Genişletin **eğitme**ve ardından sürükleyin **modeli eğitme** denemenizi modüle.
+2. İşlem hattına **model eğitme** modülünü ekleyin.  Bu modülü **Machine Learning** kategorisi altında bulabilirsiniz. **Eğit**' i genişletin ve ardından **model eğitimi** modülünü işlem hattınızla sürükleyin.
   
-3.  Sol giriş deneyimsiz modu ekleyin. Eğitim veri kümesi eklemek için sağ girişine **modeli eğitme**.
+3.  Sol girişte, eğitilen modunu ekleyin. Eğitim veri kümesini, **tren modelinin**sağ girdisine iliştirin.
 
-    Eğitim veri kümesi, bir etiket sütun içermelidir. Herhangi bir satır etiketsiz göz ardı edilir.
+    Eğitim veri kümesi bir etiket sütunu içermelidir. Etiketleri olmayan herhangi bir satır yok sayılır.
   
-4.  İçin **etiket sütun**, tıklayın **Sütun seçiciyi Başlat**ve modeli için eğitim kullanabileceğiniz sonuçları içeren tek bir sütun seçin.
+4.  **Etiket sütunu**için, **sütun seçiciyi Başlat**' a tıklayın ve modelin eğitim için kullanabileceği sonuçları içeren tek bir sütun seçin.
   
-    - Sınıflandırma sorunlar için etiket sütunu ya da içermelidir **kategorik** değerleri veya **ayrık** değerleri. Bazı örnekler, bir Evet/Hayır derecelendirme, Hastalık sınıflandırma kod veya adı veya bir gelir grubu olabilir.  Noncategorical bir sütun seçerseniz, modül eğitim sırasında bir hata döndürür.
+    - Sınıflandırma sorunları için etiket sütunu **kategorik** değerler ya da **ayrık** değerler içermelidir. Bazı örnekler bir Evet/Hayır derecelendirmesi, bir dimevsimi sınıflandırma kodu veya adı ya da bir gelir grubu olabilir.  Kategorik olmayan bir sütun seçerseniz, modül eğitim sırasında bir hata döndürür.
   
-    -   Regresyon sorunlar için etiket sütunu içermelidir **sayısal** yanıt değişkeni temsil eden veriler. İdeal olarak sürekli bir ölçek sayısal veri temsil eder. 
+    -   Regresyon sorunları için etiket sütunu, yanıt değişkenini temsil eden **sayısal** veriler içermelidir. İdeal olarak, sayısal veriler sürekli bir ölçeklendirmeyi temsil eder. 
     
-    Örnekleri bir kredi risk puanı öngörülen zamanında hatası için bir sabit sürücü veya tahmin edilen bir çağrı merkezi çağrı sayısı için belirli gün veya saat olabilir.  Sayısal bir sütun seçmezseniz, bir hata alabilirsiniz.
+    Örnekler, bir kredi risk puanı, bir sabit sürücü için öngörülen başarısızlık süresi veya belirli bir gün ya da zaman için bir çağrı merkezine tahmini çağrı sayısı olabilir.  Sayısal bir sütun belirtmezseniz bir hata alabilirsiniz.
   
-    -   Kullanılacak etiket sütunu belirtmezseniz, Azure Machine Learning veri kümesinin meta verileri kullanarak uygun etiketi sütun olduğu Infer dener. Yanlış sütun seçer, bunu düzeltmek için Sütun seçiciyi kullanın.
+    -   Kullanılacak etiket sütununu belirtmezseniz, Azure Machine Learning, veri kümesinin meta verilerini kullanarak ilgili etiket sütunu olduğunu belirtmektir. Yanlış sütunu seçer, düzeltmek için sütun seçiciyi kullanın.
   
     > [!TIP] 
-    > Sütun Seçici üzerinden sorun yaşıyorsanız, bkz [kümesindeki sütunları seçme](./select-columns-in-dataset.md) için ipuçları. Bazı yaygın senaryolar ve kullanımına yönelik ipuçları açıklanır **kuralları ile** ve **ada göre** seçenekleri.
+    > Sütun seçiciyi kullanırken sorun yaşıyorsanız, ipuçları için [veri kümesindeki sütunları seçme](./select-columns-in-dataset.md) makalesine bakın. KURALLARıN ve **ad** seçeneklerinin kullanımı **ile** ilgili bazı yaygın senaryolar ve ipuçları açıklanmaktadır.
   
-5.  Denemeyi çalıştırın. Çok fazla veri varsa, bu işlem biraz sürebilir.
+5.  İşlem hattını çalıştırma. Çok fazla veriniz varsa bu işlem biraz zaman alabilir.
 
-## <a name="bkmk_results"></a> Sonuçları
+## <a name="bkmk_results"></a>Sonucunun
 
-Sonra modeli eğitilir:
+Model eğitilirken:
 
-+ Model parametreleri ve özellik ağırlıkları görüntülemek için seçin ve çıkış sağ **Görselleştir**.
-+ Diğer denemeleri modelini kullanmak için model sağ tıklayıp **Modeli Kaydet**. Model için bir ad yazın. 
++ Model parametrelerini ve özellik ağırlıklarını görüntülemek için, çıkışa sağ tıklayın ve **Görselleştir**' i seçin.
++ Modeli başka işlem hatlarında kullanmak için modele sağ tıklayın ve **modeli Kaydet**' i seçin. Model için bir ad yazın. 
 
-    Bu, modeli deneme yinelenen çalıştırıcıları tarafından güncelleştirilmemiş bir anlık görüntü olarak kaydeder.
-+ Yeni değerleri modelini kullanmak için ona bağlanın [Score Model](./score-model.md) modülü, yeni giriş verileriyle birlikte.
+    Bu, modeli, ardışık düzenin yinelenen çalıştırmaları tarafından güncelleştirilmemiş bir anlık görüntü olarak kaydeder.
++ Modeli yeni değerleri tahmin etmek üzere kullanmak için, yeni giriş verileriyle birlikte, [puan modeli](./score-model.md) modülüne bağlayın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

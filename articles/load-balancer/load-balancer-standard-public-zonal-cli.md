@@ -1,10 +1,10 @@
 ---
-title: Azure CLI kullanarak bölgesel ön uç ile standart yük dengeleyici oluşturma
-titlesuffix: Azure Load Balancer
-description: Azure CLI kullanarak bölgesel genel IP adresi ön uç ile genel bir Standard Load Balancer oluşturma konusunda bilgi edinin
+title: ZGen genel IP adresi ön ucu ile Standart Load Balancer-Azure CLı
+titleSuffix: Azure Load Balancer
+description: Azure CLı kullanarak genel IP adresi ön ucu ile Genel Standart Load Balancer oluşturma hakkında bilgi edinin
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.custom: seodec18
 ms.service: load-balancer
 ms.devlang: na
@@ -12,17 +12,17 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/26/2018
-ms.author: kumud
-ms.openlocfilehash: 7f5aa65b055669a8a4047dffa72d456fed0714f8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: allensu
+ms.openlocfilehash: b9c3a88df6801566bc927cfc18fda0adfa05a5ae
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66111572"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076042"
 ---
-#  <a name="create-a-standard-load-balancer-with-zonal-frontend-using-azure-cli"></a>Azure CLI kullanarak bölgesel ön uç ile standart yük dengeleyici oluşturma
+#  <a name="create-a-standard-load-balancer-with-zonal-public-ip-address-frontend-using-azure-cli"></a>Azure CLı kullanarak ZGen genel IP adresi ön ucu ile Standart Load Balancer oluşturma
 
-Bu makalede adımları genel oluşturma işleminde [Standard Load Balancer](https://aka.ms/azureloadbalancerstandard) genel IP standart bir adres kullanarak bölgesel bir ön uç ile. Bu senaryoda, veri yolunuzu ve kaynaklarınızı belirli bir bölge ile hizalamak amacıyla ön uç ve arka uç örnekleriniz için belirli bir bölge belirtirsiniz.
+Bu makalede, genel bir IP standart adresi kullanılarak bir genel [Standart Load Balancer](https://aka.ms/azureloadbalancerstandard) ön uç ile oluşturma adımları sağlanır. Bu senaryoda, veri yolunuzu ve kaynaklarınızı belirli bir bölge ile hizalamak amacıyla ön uç ve arka uç örnekleriniz için belirli bir bölge belirtirsiniz.
 
 Standart Yük Dengeleyici ile Kullanılabilirlik alanlarını kullanma hakkında daha fazla bilgi için [Standart Yük Dengeleyici ve Kullanılabilirlik Alanları](load-balancer-standard-availability-zones.md).
 
@@ -40,7 +40,7 @@ CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz, en son yüklediğini
 
 [az group create](/cli/azure/group#az-group-create) ile bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
 
-Aşağıdaki örnekte adlı bir kaynak grubu oluşturur *myResourceGroupLB* içinde *westeurope* konumu:
+Aşağıdaki örnek *westeurope* konumunda *Myresourcegrouplb* adlı bir kaynak grubu oluşturur:
 
 ```azurecli-interactive
 az group create \
@@ -48,10 +48,10 @@ az group create \
 --location westeurope
 ```
 
-## <a name="create-a-zonal-public-ip-standard"></a>Bir bölgesel genel IP Standard oluşturma
-Uygulamanıza İnternet’ten erişmek için yük dengeleyicinin genel IP adresi gereklidir. Her zaman belirli bir bölgede oluşturulan genel IP adresi, yalnızca bu bölgede mevcut. Bir genel IP adresi alanı değiştirmek mümkün değildir.
+## <a name="create-a-zonal-public-ip-standard"></a>Genel IP standardı oluşturma
+Uygulamanıza İnternet’ten erişmek için yük dengeleyicinin genel IP adresi gereklidir. Belirli bir bölgede oluşturulan genel IP adresi her zaman yalnızca o bölgede bulunur. Genel bir IP adresi bölgesinin değiştirilmesi mümkün değildir.
 
-[az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) komutu ile bir genel IP adresi oluşturun. Aşağıdaki örnekte adlı bir bölgesel genel IP adresi oluşturur *Mypublicıp* içinde *Mypublicıp* bölge 1 kaynak grubunda.
+[az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) komutu ile bir genel IP adresi oluşturun. Aşağıdaki örnek, bölge 1 ' deki *Myresourcegrouploadbalancer* kaynak grubunda *Mypublicıp* adlı bir genel IP adresi oluşturur.
 
 ```azurecli-interactive
 az network public-ip create \
@@ -61,7 +61,7 @@ az network public-ip create \
 --zone 1
 ```
 
-## <a name="create-azure-standard-load-balancer"></a>Azure Standard Load Balancer oluşturma
+## <a name="create-azure-standard-load-balancer"></a>Azure Standart Load Balancer oluşturma
 Bu bölümde yük dengeleyicinin aşağıdaki bileşenlerini nasıl oluşturabileceğiniz ve yapılandırabileceğiniz açıklanmaktadır:
 - Yük dengeleyicideki gelen ağ trafiğini alan bir ön uç IP havuzu.
 - Ön uç havuzunun yük dengelemesi yapılmış ağ trafiğini gönderdiği bir arka uç IP havuzu.
@@ -69,7 +69,7 @@ Bu bölümde yük dengeleyicinin aşağıdaki bileşenlerini nasıl oluşturabil
 - Trafiğin sanal makinelere dağıtımını tanımlayan bir yük dengeleyici kuralı.
 
 ### <a name="create-the-load-balancer"></a>Yük dengeleyiciyi oluşturma
-Bir Standard Load Balancer ile oluşturma [az ağ lb oluşturma](/cli/azure/network/lb#az-network-lb-create). Aşağıdaki örnekte adlı bir yük dengeleyici oluşturur *myLoadBalancer* ve atar *Mypublicıp* ön uç IP yapılandırmasını adresi.
+[Az Network lb Create](/cli/azure/network/lb#az-network-lb-create)ile bir standart Load Balancer oluşturun. Aşağıdaki örnek *Myloadbalancer* adlı bir yük dengeleyici oluşturur ve *Mypublicıp* adresini ön uç IP yapılandırmasına atar.
 
 ```azurecli-interactive
 az network lb create \
@@ -83,7 +83,7 @@ az network lb create \
 
 ## <a name="create-health-probe-on-port-80"></a>80 numaralı bağlantı noktasında durum araştırması oluşturma
 
-Sistem durumu araştırması tüm sanal makine örneklerini denetleyerek ağ trafiği gönderdiklerinden emin olur. Sistem durumu denetimi başarısız olan sanal makine örnekleri tekrar çevrimiçi olana ve sistem durumu denetimi iyi olduğuna karar verene kadar yük dengeleyiciden kaldırılır. Durum araştırması oluşturun sanal makinelerin durumunu izlemek için az ağ lb araştırma ile oluşturun. TCP durum araştırması oluşturmak için [az network lb probe create](/cli/azure/network/lb/probe#az-network-lb-probe-create) komutunu kullanın. Aşağıdaki örnek *myHealthProbe* adında bir durum araştırması oluşturur:
+Sistem durumu araştırması tüm sanal makine örneklerini denetleyerek ağ trafiği gönderdiklerinden emin olur. Sistem durumu denetimi başarısız olan sanal makine örnekleri tekrar çevrimiçi olana ve sistem durumu denetimi iyi olduğuna karar verene kadar yük dengeleyiciden kaldırılır. Sanal makinelerin durumunu izlemek için az Network lb araştırması oluştur komutuyla bir sistem durumu araştırması oluşturun. TCP durum araştırması oluşturmak için [az network lb probe create](/cli/azure/network/lb/probe#az-network-lb-probe-create) komutunu kullanın. Aşağıdaki örnek *myHealthProbe* adında bir durum araştırması oluşturur:
 
 ```azurecli-interactive
 az network lb probe create \
@@ -94,8 +94,8 @@ az network lb probe create \
 --port 80
 ```
 
-## <a name="create-load-balancer-rule-for-port-80"></a>Bağlantı noktası 80 için yük dengeleyici kuralı oluşturun
-Yük dengeleyici kuralı, gerekli kaynak ve hedef bağlantı noktalarının yanı sıra gelen trafik için ön uç IP yapılandırmasını ve trafiği almak için arka uç IP havuzunu tanımlar. *myFrontEndPool* ön uç havuzunda 80 numaralı bağlantı noktasını dinlemek ve yine 80 numaralı bağlantı noktasını kullanarak *myBackEndPool* arka uç adres havuzuna yük dengelemesi yapılmış ağ trafiğini göndermek için [az network lb rule create](/cli/azure/network/lb/rule#az-network-lb-rule-create) ile *myLoadBalancerRuleWeb* yük dengeleyici kuralı oluşturun.
+## <a name="create-load-balancer-rule-for-port-80"></a>80 numaralı bağlantı noktası için yük dengeleyici kuralı oluşturma
+Yük dengeleyici kuralı, gerekli kaynak ve hedef bağlantı noktalarının yanı sıra gelen trafik için ön uç IP yapılandırmasını ve trafiği almak için arka uç IP havuzunu tanımlar. *myFrontEndPool* ön uç havuzunda 80 numaralı bağlantı noktasını dinlemek ve yine 80 numaralı bağlantı noktasını kullanarak [myBackEndPool](/cli/azure/network/lb/rule#az-network-lb-rule-create) arka uç adres havuzuna yük dengelemesi yapılmış ağ trafiğini göndermek için *az network lb rule create* ile *myLoadBalancerRuleWeb* yük dengeleyici kuralı oluşturun.
 
 ```azurecli-interactive
 az network lb rule create \
@@ -115,7 +115,7 @@ VM’leri dağıtmadan ve dengeleyicinizi test etmeden önce yardımcı sanal a�
 
 ### <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
-Adlı bir sanal ağ oluşturma *myVnet* adlı bir alt ağ ile *mySubnet* myResourceGroup kullanarak [az ağ sanal ağ oluşturma](/cli/azure/network/vnet#az-network-vnet-create).
+MyResourceGroup *adlı bir* alt ağ Ile *myvnet* adlı bir sanal ağ oluşturun [az Network VNET Create](/cli/azure/network/vnet#az-network-vnet-create)komutunu kullanın.
 
 
 ```azurecli-interactive
@@ -128,7 +128,7 @@ az network vnet create \
 
 ### <a name="create-a-network-security-group"></a>Ağ güvenlik grubu oluşturma
 
-Adlı ağ güvenlik grubu oluşturma *Vm2* sanal ağınıza gelen bağlantıları tanımlamak için [az ağ nsg oluşturma](/cli/azure/network/nsg#az-network-nsg-create).
+[Az Network NSG Create](/cli/azure/network/nsg#az-network-nsg-create)komutunu kullanarak sanal ağınıza gelen bağlantıları tanımlamak Için *Mynetworksecuritygroup* adlı ağ güvenlik grubu oluşturun.
 
 ```azurecli-interactive
 az network nsg create \
@@ -136,7 +136,7 @@ az network nsg create \
 --name myNetworkSecurityGroup
 ```
 
-Adlı bir ağ güvenlik grubu kuralı oluşturma *myNetworkSecurityGroupRule* bağlantı noktası 80 ile [az ağ nsg kuralı oluşturmak](/cli/azure/network/nsg/rule#az-network-nsg-rule-create).
+80 numaralı bağlantı noktası için, [az Network NSG Rule Create](/cli/azure/network/nsg/rule#az-network-nsg-rule-create)Ile *Mynetworksecuritygrouprule* adlı bir ağ güvenlik grubu kuralı oluşturun.
 
 ```azurecli-interactive
 az network nsg rule create \
@@ -153,7 +153,7 @@ az network nsg rule create \
 --priority 200
 ```
 ### <a name="create-nics"></a>NIC’leri oluşturma
-Üç sanal NIC ile oluşturma [az ağ NIC oluşturup](/cli/azure/network/nic#az-network-nic-create) ve bunları genel IP adresi ve ağ güvenlik grubu ile ilişkilendirin. Aşağıdaki örnek üç sanal NIC oluşturur. (Sonraki adımlarda uygulamanız için oluşturduğunuz her bir VM için bir sanal NIC). İstediğiniz zaman ek sanal NIC’ler ve VM’ler oluşturabilir ve bunları yük dengeleyiciye ekleyebilirsiniz:
+[Az Network Nic Create](/cli/azure/network/nic#az-network-nic-create) ile üç sanal NIC oluşturun ve BUNLARı genel IP adresi ve ağ güvenlik grubuyla ilişkilendirin. Aşağıdaki örnek üç sanal NIC oluşturur. (Sonraki adımlarda uygulamanız için oluşturduğunuz her bir VM için bir sanal NIC). İstediğiniz zaman ek sanal NIC’ler ve VM’ler oluşturabilir ve bunları yük dengeleyiciye ekleyebilirsiniz:
 
 ```azurecli-interactive
 for i in `seq 1 3`; do
@@ -168,7 +168,7 @@ for i in `seq 1 3`; do
 done
 ```
 ## <a name="create-backend-servers"></a>Arka uç sunucular oluşturma
-Bu örnekte, bölge 1 yük dengeleyici için arka uç sunucular olarak kullanılacak bulunan üç sanal makine oluşturun. Yük dengeleyicinin başarıyla oluşturulduğunu doğrulamak için sanal makinelere NGINX de yükleyin.
+Bu örnekte, yük dengeleyici için arka uç sunucular olarak kullanılacak bölge 1 ' de bulunan üç sanal makine oluşturursunuz. Yük dengeleyicinin başarıyla oluşturulduğunu doğrulamak için sanal makinelere NGıNX de yüklersiniz.
 
 ### <a name="create-cloud-init-config"></a>cloud-init yapılandırması oluşturma
 
@@ -216,8 +216,8 @@ runcmd:
   - nodejs index.js
 ```
 
-### <a name="create-the-zonal-virtual-machines"></a>Bölgesel bir sanal makine oluşturma
-İle Vm'leri oluşturmak [az vm oluşturma](/cli/azure/vm#az-vm-create). Aşağıdaki örnek üç VM bölge 1 ve zaten mevcut değilse SSH anahtarlarını oluşturur:
+### <a name="create-the-zonal-virtual-machines"></a>Bölgesel sanal makinelerini oluşturma
+[Az VM Create](/cli/azure/vm#az-vm-create)Ile VM 'ler oluşturun. Aşağıdaki örnek, bölge 1 ' de üç VM oluşturur ve henüz yoksa SSH anahtarlarını oluşturur:
 
 ```azurecli-interactive
 for i in `seq 1 3`; do
@@ -233,7 +233,7 @@ done
 ```
 
 ## <a name="test-the-load-balancer"></a>Yük dengeleyiciyi test etme
-Yük Dengeleyici kullanarak genel IP adresini alın [az ağ public-ip show](/cli/azure/network/public-ip#az-network-public-ip-show). 
+[Az Network public-IP Show](/cli/azure/network/public-ip#az-network-public-ip-show)kullanarak yük DENGELEYICININ genel IP adresini alın. 
 
 ```azurecli-interactive
   az network public-ip show \
@@ -247,7 +247,7 @@ Sonra da genel IP adresini bir web tarayıcısına girebilirsiniz. Yük dengeley
 
 ![Node.js uygulaması çalıştırma](./media/load-balancer-standard-public-zonal-cli/running-nodejs-app.png)
 
-Yük dengeleyicinin trafiği, uygulamanızı çalıştıran 1 bölgedeki Vm'lere dağıtmasını görmek için web tarayıcınızı yenilemeye zorlayabilirsiniz.
+Yük dengeleyiciyi, uygulamanızı çalıştıran bölge 1 ' deki VM 'lere trafiği dağıtmalarını görmek için Web tarayıcınızı yenilemeyi zorunlu hale getirebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - [Standart Yük Dengeleyici](./load-balancer-standard-overview.md) hakkında daha fazla bilgi edinin.

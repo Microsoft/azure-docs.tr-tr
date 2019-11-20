@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Bing haber arama REST API'si ve Git kullanarak haberleri alın"
+title: 'Hızlı başlangıç: Bing Haber Arama REST API ve Go kullanarak haber alın'
 titleSuffix: Azure Cognitive Services
-description: Bing haber arama API'si haber sonuçları almayı öğrenin.
+description: Bu hızlı başlangıçta Bing Haber Arama API'si çağırmak için go dili kullanılır. Sonuçlar, sorgu dizesi tarafından tanımlanan haber kaynaklarının adlarını ve URL 'Lerini içerir.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,27 +10,27 @@ ms.subservice: bing-visual-search
 ms.topic: quickstart
 ms.date: 2/21/2019
 ms.author: aahi
-ms.openlocfilehash: 79e93e3ba0bbf9ac71a01bad0502b84dfee85297
-ms.sourcegitcommit: 36c50860e75d86f0d0e2be9e3213ffa9a06f4150
+ms.openlocfilehash: c3d18852086e202d9f818f2cac2c90fa4f464211
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/16/2019
-ms.locfileid: "65798497"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74110810"
 ---
-# <a name="quickstart-get-news-results-using-the-bing-news-search-rest-api-and-go"></a>Hızlı Başlangıç: Bing haber arama REST API'si ve Git kullanarak haber sonuçlar elde edin
+# <a name="quickstart-get-news-results-using-the-bing-news-search-rest-api-and-go"></a>Hızlı başlangıç: Bing Haber Arama REST API kullanarak haber sonuçları alın ve git
 
-Bu hızlı başlangıçta, Bing haber arama API'sini çağırmak için Go dilini kullanır. Sonuçlar adları ve URL sorgu dizesi tarafından tanımlanan haber kaynakları içerir.
+Bu hızlı başlangıçta Bing Haber Arama API'si çağırmak için go dili kullanılır. Sonuçlar, sorgu dizesi tarafından tanımlanan haber kaynaklarının adlarını ve URL 'Lerini içerir.
 
 ## <a name="prerequisites"></a>Önkoşullar
-* Yükleme [Git ikili dosyaları](https://golang.org/dl/)
-* Git-çıktısının kitaplığı için sonuçları görüntülemek için asıl yazıcı yüklemeniz
-    * Bu kitaplığı yükleyin: `$ go get -u https://github.com/davecgh/go-spew`
+* [Go ikililerini](https://golang.org/dl/) yükler
+* Sonuçları göstermek için BT 'nin yazıcı için go-Spew kitaplığını yükler
+    * Bu Libarary 'ı yüklensin: `$ go get -u https://github.com/davecgh/go-spew`
 
 [!INCLUDE [bing-web-search-quickstart-signup](../../../includes/bing-web-search-quickstart-signup.md)]
 
 ## <a name="create-a-project-and-import-libraries"></a>Proje oluşturma ve kitaplıkları içeri aktarma
 
-Yeni bir Git proje, IDE'niz veya düzenleyicinizle oluşturun. Ardından içeri `net/http` istekleri `ioutil` yanıt okumak için ve `encoding/json` JSON metnini sonuçları işlemek için. Git-çıktısının kitaplığı, JSON ayrıştırmak için gereklidir. 
+IDE veya Düzenleyicinizde yeni bir go projesi oluşturun. Ardından istekler için `net/http` içeri aktarın, yanıtı okumak için `ioutil` ve sonuçların JSON metnini işlemek için `encoding/json`. JSON ayrıştırmak için go-Spew kitaplığı gereklidir. 
 
 ```
 package main
@@ -45,9 +45,9 @@ import (
 
 ```
 
-## <a name="create-a-struct-to-format-the-news-search-results"></a>Haber araması sonuçları biçimlendirmek için bir yapı oluşturma
+## <a name="create-a-struct-to-format-the-news-search-results"></a>Haber arama sonuçlarını biçimlendirmek için bir yapı oluşturma
 
-`NewsAnswer` yapısı, yanıtta sağlanan verileri biçimlendirir. Yanıt üst üste ve oldukça karmaşık JSON.  Aşağıdaki uygulama temelleri ele alınmaktadır.
+`NewsAnswer` yapısı, yanıtta sağlanan verileri biçimlendirir. JSON yanıtı çok düzeyli ve oldukça karmaşıktır.  Aşağıdaki uygulama temel bilgileri içerir.
 
 ```
 // This struct formats the answer provided by the Bing News Search API.
@@ -87,7 +87,7 @@ type NewsAnswer struct {
 
 ## <a name="declare-the-main-function-and-define-variables"></a>Ana işlevi ve değişkenleri tanımlama  
 
-Aşağıdaki kod ana işlevini bildirir ve gerekli değişkenleri atar. Uç noktasının geçerli olduğunu doğrulayın ve `token` değerini Azure hesabınızdan geçerli bir abonelik anahtarı ile değiştirin.
+Aşağıdaki kod Main işlevini bildirir ve gerekli değişkenleri atar. Uç noktasının geçerli olduğunu doğrulayın ve `token` değerini Azure hesabınızdan geçerli bir abonelik anahtarı ile değiştirin.
 
 ```
 func main() {
@@ -106,9 +106,9 @@ func main() {
 }
 ```
 
-## <a name="query-and-header"></a>Sorgu ve üst bilgisi
+## <a name="query-and-header"></a>Sorgu ve üst bilgi
 
-Sorgu dizesi ve erişim anahtarı üstbilgisi Ekle
+Sorgu dizesini ve erişim anahtarı üst bilgisini ekleyin
 
 ```
 // Add the query to the request.  
@@ -121,9 +121,9 @@ req.Header.Add("Ocp-Apim-Subscription-Key", token)
 
 ```
 
-## <a name="get-request"></a>Alma isteği
+## <a name="get-request"></a>İsteği al
 
-İstemci oluşturmak ve Get isteği gönderin. 
+İstemcisini oluşturun ve get isteğini gönderin. 
 
 ```
 // Instantiate a client.  
@@ -137,9 +137,9 @@ if err != nil {
 
 ```
 
-## <a name="send-the-request"></a>İsteği Gönder
+## <a name="send-the-request"></a>İsteği gönder
 
-İstek göndermek ve sonuçları kullanarak okuma `ioutil`.
+`ioutil`kullanarak isteği gönderin ve sonuçları okuyun.
 
 ```
 resp, err := client.Do(req)
@@ -160,7 +160,7 @@ if err != nil {
 
 ## <a name="handle-the-response"></a>Yanıtı işleme
 
-`Unmarshall` İşlevi, haber arama API'si tarafından döndürülen JSON metninde bilgileri ayıklar.  Düğümleri kullanarak sonuçları görüntüleyebilirsiniz sonra `go-spew` güzel yazıcı.
+`Unmarshall` işlevi, Haber Arama API tarafından döndürülen JSON metnindeki bilgileri ayıklar.  Ardından, `go-spew` oldukça yazıcısını kullanarak sonuçlardan düğümleri görüntüleyebilirsiniz.
 
 ```
 // Create a new answer object 
@@ -181,7 +181,7 @@ spew.Dump(result.Name, result.URL)
 
 ## <a name="results"></a>Sonuçlar
 
-Sonuçları adını ve her sonuç URL'sini içerir.
+Sonuçlar her sonucun adını ve URL 'sini içerir.
 
 ```
 (string) (len=91) "Cognitive Services Market: Global Industry Analysis and Opportunity Assessment, 2019 - 2025"
@@ -206,4 +206,4 @@ Sonuçları adını ve her sonuç URL'sini içerir.
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Bing haber arama nedir](search-the-web.md)
+> [Bing Haber Arama nedir?](search-the-web.md)

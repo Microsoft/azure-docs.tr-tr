@@ -4,6 +4,8 @@
   items:
     - name: Azure portalı hakkında
       href: azure-portal-overview.md
+    - name: Azure Hızlı Başlangıç’ı kullanmaya başlama
+      href: azure-portal-quickstart-center.md
     - name: Desteklenen tarayıcılar ve cihazlar
       href: azure-portal-supported-browsers-devices.md
 - name: Kavramlar
@@ -25,7 +27,7 @@
     - name: Kullanıcı ayarlarını dışarı aktarma veya silme
       href: azure-portal-export-delete-settings.md
     - name: Azure portalı nasıl yapılır video serisi
-      href: 'https://www.youtube.com/playlist?list=PLLasX02E8BPBKgXP4oflOL29TtqTzwhxR'
+      href: azure-portal-video-series.md
 - name: Başvuru
   items:
     - name: Klavye kısayolları

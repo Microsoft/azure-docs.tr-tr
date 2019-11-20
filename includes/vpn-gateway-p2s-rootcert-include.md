@@ -9,17 +9,17 @@ ms.date: 12/11/2018
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 4c8e7e5272f180c482ca7fdd44302f49eb888b25
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: e0e6663a2d6672a9d916d64d14d63633934d2952
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 10/21/2019
 ms.locfileid: "67188231"
 ---
-(Önerilen) bir kuruluş çözümü ile oluşturulan bir kök sertifika kullanabilir veya otomatik olarak imzalanan bir sertifika oluşturun. Kök sertifikayı oluşturduktan sonra ortak sertifika verilerini (özel anahtarı değil) bir Base64 ile kodlanmış X.509 .cer dosyası olarak dışarı aktarın. Ardından, genel sertifika verilerini Azure sunucusuna yükleyin.
+Bir kurumsal çözümle oluşturulmuş bir kök sertifika kullanın (önerilir) ya da kendinden imzalı bir sertifika oluşturun. Kök sertifikayı oluşturduktan sonra, ortak sertifika verilerini (özel anahtarı değil) Base64 kodlamalı X. 509.952. cer dosyası olarak dışarı aktarın. Daha sonra, genel sertifika verilerini Azure sunucusuna yükleyin.
 
-* **Kurumsal sertifika:** Bir kuruluş çözümü kullanıyorsanız, var olan sertifika zincirinizi kullanabilirsiniz. Kullanmak istediğiniz kök sertifikanın .cer dosyasını alın.
-* **Otomatik olarak imzalanan kök sertifika:** Kurumsal bir sertifika çözümü kullanmıyorsanız, otomatik olarak imzalanan kök sertifika oluşturun. Aksi halde, oluşturduğunuz sertifikalar, P2S bağlantılarıyla uyumlu olmaz ve bağlanmayı denediğinizde, istemciler bir bağlantı hatası alırsınız. Azure PowerShell, MakeCert veya OpenSSL kullanabilirsiniz. Aşağıdaki makalelerdeki adımlar uyumlu otomatik olarak imzalanan kök sertifika oluşturmak nasıl açıklar:
+* **Kurumsal sertifika:** Kurumsal bir çözüm kullanıyorsanız, var olan sertifika zincirinizi kullanabilirsiniz. Kullanmak istediğiniz kök sertifika için. cer dosyasını alın.
+* **Otomatik olarak imzalanan kök sertifika:** Kurumsal bir sertifika çözümü kullanmıyorsanız, otomatik olarak imzalanan bir kök sertifika oluşturun. Aksi halde, oluşturduğunuz sertifikalar P2S bağlantılarınız ile uyumlu olmayacaktır ve istemciler bağlanmaya çalıştıklarında bir bağlantı hatası alırlar. Azure PowerShell, MakeCert veya OpenSSL kullanabilirsiniz. Aşağıdaki makalelerdeki adımlarda, uyumlu bir otomatik olarak imzalanan kök sertifika oluşturma açıklanır:
 
-  * [Windows 10 PowerShell yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site.md): Bu yönergeler, sertifikalarını oluşturmak Windows 10 ve PowerShell gerektirir. Kök sertifikadan oluşturulan istemci sertifikaları tüm desteklenen P2S istemcilere yüklenebilir.
-  * [MakeCert yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-makecert.md): Sertifikaları oluşturmak için kullanılacak bir Windows 10 bilgisayarına erişim yoksa MakeCert kullanın. MakeCert kullanım dışı bırakılmış olsa da, bu sertifikaları oluşturmak için kullanmaya devam edebilirsiniz. Kök sertifikadan istemci sertifikaları tüm desteklenen P2S istemcilere yüklenebilir.
+  * [Windows 10 PowerShell yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site.md): Bu yönergeler, sertifika oluşturmak için Windows 10 ve PowerShell gerektirir. Kök sertifikadan oluşturulan istemci sertifikaları tüm desteklenen P2S istemcilere yüklenebilir.
+  * [MakeCert yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-makecert.md): Sertifikaları oluşturmak için kullanabileceğiniz bir Windows 10 bilgisayarınızın yoksa MakeCert kullanın. MakeCert kullanım dışı olsa da, sertifika oluşturmak için kullanmaya devam edebilirsiniz. Kök sertifikadan oluşturduğunuz istemci sertifikaları, desteklenen herhangi bir P2S istemcisine yüklenebilir.
   * [Linux yönergeleri](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-linux.md)

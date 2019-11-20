@@ -1,78 +1,129 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure üzerinde Resource Manager belgeleri
+### YamlMime:Landing
+title: Azure Resource Manager belgeleri
+summary: Resource Manager şablonu, projenizin altyapısını ve yapılandırmasını tanımlayan bir JavaScript Nesne Gösterimi (JSON) dosyasıdır.
 metadata:
-  title: 'Azure üzerinde Resource Manager belgeleri - Öğreticiler, örnekler, başvuru ve kaynaklar'
-  description: Resource Manager’ı kullanarak çözüm kaynaklarını bir grup olarak dağıtma ve yönetme; tutarlı ve tekrarlanabilir kaynak dağıtımı için şablonlar oluşturma hakkında bilgi edinin.
+  title: Azure Resource Manager belgeleri
+  description: Azure Resource Manager şablonu geliştirip bunları Azure kaynaklarını dağıtmak için kullanmayı öğrenin
   services: azure-resource-manager
   ms.service: azure-resource-manager
-  keywords: 'Resource Manager, azure, devops, öğreticiler, örnekler, başvuru, belgeler'
-  author: mumian
-  manager: dougeby
-  ms.author: jgao
+  ms.subservice: na
   ms.topic: landing-page
-  ms.date: 12/10/2018
-abstract:
-  description: 'Resource Manager’ı kullanarak çözüm kaynaklarını bir grup olarak dağıtma, izleme ve yönetme hakkında bilgi edinin. Öğreticiler, API başvuruları ve diğer belgeler, kaynak grupları ayarlamanın yanı sıra tutarlı ve tekrarlanabilir dağıtım için şablonlar oluşturma ile ilgili bilgiler içerir.'
-sections:
-  - title: Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure kaynaklarını dağıtmak üzere Azure Resource Manager şablonları oluşturmak için çeşitli araçları kullanın.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_portal.svg'
-            text: Azure portalını kullanarak şablon oluşturma
-            href: 'https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal'
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_vs-code.svg'
-            text: Visual Studio Code kullanarak şablon oluşturma
-            href: 'https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-visual-studio-code'
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_visual-studio.svg'
-            text: Visual Studio kullanarak şablon oluşturma
-            href: 'https://docs.microsoft.com/azure/azure-resource-manager/vs-azure-tools-resource-groups-deployment-projects-create-deploy'
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Azure kaynaklarını dağıtmak için Azure Resource Manager şablonları oluşturmayı öğrenin.
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-create-encrypted-storage-accounts">Resource Manager şablon başvurusunu kullanma</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-create-multiple-instances">Azure kaynağının birden çok örneğini oluşturma</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-create-templates-with-dependent-resources">Kaynak dağıtım sırasını ayarlama</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-use-conditions">Koşulları kullanma</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-use-key-vault">Azure Key Vault''u tümleştirme</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-create-linked-templates">Bağlı şablonlar oluşturma</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-deploy-vm-extensions">Sanal makine uzantılarını dağıtma</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-deploy-sql-extensions-bacpac">SQL uzantılarını dağıtma</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-secure-artifacts">Güvenli şablon yapıtları</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/deployment-manager-tutorial">Güvenli dağıtım uygulamaları kullanma</a>.'
-          - html: '<a href="https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-tutorial-troubleshoot">Şablon dağıtımı sorunlarını giderme</a>.'
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Genel dağıtım görevleri için örnek yapılandırma şablonları.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: '<a href="https://azure.microsoft.com/resources/templates/">Azure Hızlı Başlangıç Şablonları</a>'
-          - html: '<a href="https://resources.azure.com/">Azure Kaynak Gezgini (Önizleme)</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Şablonlar
-            html: <p><a href="/azure/templates/">Şablon başvurusu</a></p><p><a href="/azure/resource-group-template-functions">Şablon işlevleri</a></p><p><a href="/azure/azure-resource-manager/managed-application-createuidefinition-functions">UI tanımı işlevleri</a></p><p><a href="/azure/azure-resource-manager/managed-application-createuidefinition-elements">UI tanımı öğeleri</a></p>
-          - title: Komut Satırı
-            html: <p><a href="/cli/azure/resource">Azure CLI</a></p><p><a href="/powershell/module/az.resources">Azure PowerShell</a></p>
-          - title: Diller
-            html: <p><a href="/dotnet/api/microsoft.azure.management.resourcemanager">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.resources">Java</a></p><p><a href="/python/api/overview/azure/resources?view=azure-python">Python</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/resources/">REST API</a></p>
+  ms.collection: na
+  author: mumian
+  ms.author: jgao
+  ms.date: 09/25/2019
+  ms.openlocfilehash: 33e3fb270b1b907af9288794d35028fb410652b6
+  ms.sourcegitcommit: 4d177e6d273bba8af03a00e8bb9fe51a447196d0
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/04/2019
+  ms.locfileid: "71959617"
+landingContent:
+- title: Resource Manager hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Resource Manager nedir?
+      url: resource-group-overview.md
+    - text: Resource Manager şablonu nedir?
+      url: template-deployment-overview.md
+  - linkListType: concept
+    links:
+    - text: En iyi uygulamalar
+      url: template-best-practices.md
+    - text: Dağıtım modları
+      url: deployment-modes.md
+    - text: Bağlı şablonlar
+      url: resource-group-linked-templates.md
+    - text: Abonelik düzeyi dağıtımı
+      url: deploy-to-subscription.md
+    - text: Dağıtım Yöneticisi
+      url: deployment-manager-overview.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Şablon oluşturma - portal
+      url: resource-manager-quickstart-create-templates-use-the-portal.md
+    - text: şablon oluşturma - VS Code
+      url: resource-manager-quickstart-create-templates-use-visual-studio-code.md
+    - text: şablon oluşturma - Visual Studio
+      url: vs-azure-tools-resource-groups-deployment-projects-create-deploy.md
+  - linkListType: tutorial
+    links:
+    - text: Başlangıç öğretileri
+      url: template-tutorial-create-first-template.md
+    - text: Birden çok örnek dağıtma
+      url: resource-manager-tutorial-create-multiple-instances.md
+    - text: Dağıtım sırasını ayarlama
+      url: resource-manager-tutorial-create-templates-with-dependent-resources.md
+    - text: Anahtar kasasını tümleştirme
+      url: resource-manager-tutorial-use-key-vault.md
+- title: Şablon geliştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: VS Code kullanma
+      url: resource-manager-tools-vs-code.md
+    - text: İşlev kullanma
+      url: resource-group-template-functions.md
+    - text: Parametreleri tanımlama
+      url: template-parameters.md
+    - text: Değişkenleri tanımlama
+      url: template-variables.md
+    - text: Kaynakları tanımlama
+      url: child-resource-name-type.md
+    - text: Çıktıları tanımlama
+      url: template-outputs.md
+  - linkListType: reference
+    links:
+    - text: Azure Hızlı Başlangıç şablonları
+      url: template-deployment-overview.md
+- title: Şablon dağıtma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: PowerShell kullanarak
+      url: resource-group-template-deploy.md
+    - text: CLI kullanarak
+      url: resource-group-template-deploy-cli.md
+    - text: Portalı kullanarak
+      url: resource-group-template-deploy-portal.md
+    - text: REST API kullanarak
+      url: resource-group-template-deploy-rest.md
+- title: Şablonları yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Şablonları dışarı aktarma
+      url: export-template-portal.md
+    - text: CI/CD
+      url: vs-resource-groups-project-devops-pipelines.md
+- title: Kaynakları yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Kaynakları taşıma
+      url: resource-group-move-resources.md
+    - text: Kaynakları etiketleme
+      url: resource-group-using-tags.md
+    - text: Kaynakları kilitleme
+      url: resource-group-lock-resources.md
+- title: İzleme ve sorun giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Etkinlik günlüklerini görüntüleme
+      url: resource-group-audit.md
+    - text: Dağıtım işlemini görüntüleme
+      url: resource-manager-deployment-operations.md
+    - text: Dağıtım hatalarını giderme
+      url: resource-manager-common-deployment-errors.md
+- title: Başvuru içeriğini keşfetme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Kaynak sağlayıcıları ve türleri
+      url: resource-manager-supported-services.md
+    - text: Şablon başvurusu
+      url: /azure/templates/

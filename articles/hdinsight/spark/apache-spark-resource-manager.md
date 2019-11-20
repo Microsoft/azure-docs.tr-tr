@@ -1,6 +1,6 @@
 ---
-title: Azure HDInsight üzerinde Apache Spark kümesi kaynaklarını yönetme
-description: Nasıl kullanacağınızı öğrenin daha iyi performans için Azure HDInsight Spark kümelerinde kaynaklarını yönetme.
+title: Azure HDInsight 'ta Apache Spark kümesi için kaynakları yönetme
+description: Daha iyi performans için Azure HDInsight 'ta Spark kümeleri için kaynakları yönetme ' nin nasıl kullanılacağını öğrenin.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,166 +8,169 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 01/23/2018
 ms.author: hrasheed
-ms.openlocfilehash: dfd926f3e091f4516685fd73f3a6b87949330afb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ac0109ff8c5dd7f6013acefbe5ee08a13494cb77
+ms.sourcegitcommit: e0e6663a2d6672a9d916d64d14d63633934d2952
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64706359"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "71001718"
 ---
-# <a name="manage-resources-for-apache-spark-cluster-on-azure-hdinsight"></a>Azure HDInsight üzerinde Apache Spark kümesi kaynaklarını yönetme 
+# <a name="manage-resources-for-apache-spark-cluster-on-azure-hdinsight"></a>Azure HDInsight 'ta Apache Spark kümesi için kaynakları yönetme 
 
-Arabirimler gibi erişmeyi öğrenin [Apache Ambari](https://ambari.apache.org/) kullanıcı Arabirimi, [Apache Hadoop YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) kullanıcı Arabirimi ve Spark geçmiş sunucusu ile ilişkili, [Apache Spark](https://spark.apache.org/) küme ve nasıl yapılır en iyi performans için küme yapılandırmasını ayarlayın.
+[Apache ambarı](https://ambari.apache.org/) Kullanıcı arabirimi, [Apache Hadoop Yarn](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) Kullanıcı arabirimi ve [Apache Spark](https://spark.apache.org/) kümeniz ile ilişkili Spark geçmiş sunucusu gibi arabirimlere erişmeyi ve en iyi performans için küme yapılandırmasını ayarlamayı öğrenin.
 
 **Ön koşullar:**
 
 * HDInsight üzerinde bir Apache Spark kümesi. Yönergeler için bkz. [Azure HDInsight'ta Apache Spark kümeleri oluşturma](apache-spark-jupyter-spark-sql.md).
 
-## <a name="open-the-ambari-web-ui"></a>Ambari Web kullanıcı arabirimini açın
+## <a name="open-the-ambari-web-ui"></a>Ambarı Web Kullanıcı arabirimini açın
 
-Apache Ambari kümesini izlemek ve yapılandırma değişiklikleri yapmak için kullanılır. Daha fazla bilgi için [yönetme Apache Hadoop, Azure portalını kullanarak HDInsight kümeleri](../hdinsight-administer-use-portal-linux.md#open-the-apache-ambari-web-ui)
+Apache ambarı, kümeyi izlemek ve yapılandırma değişiklikleri yapmak için kullanılır. Daha fazla bilgi için bkz [. HDInsight 'ta Apache Hadoop kümelerini yönetme Azure Portal kullanarak](../hdinsight-administer-use-portal-linux.md#open-the-apache-ambari-web-ui)
 
-## <a name="open-the-spark-history-server"></a>Spark geçmiş sunucusu açın
+## <a name="open-the-spark-history-server"></a>Spark geçmiş sunucusunu açın
 
-Spark geçmiş tamamlanmış ve çalışan Spark uygulamaları için kullanıcı Arabirimi web sunucusudur. Spark'ın Web kullanıcı arabiriminin bir uzantısıdır.
+Spark geçmiş sunucusu, tamamlanan ve Spark uygulamalarının çalıştırıldığı Web Kullanıcı arabirimi. Spark 'ın Web Kullanıcı arabiriminin bir uzantısıdır.
 
-**Spark geçmiş sunucusu Web kullanıcı arabirimini açmak için**
+**Spark geçmiş sunucusu Web Kullanıcı arabirimini açmak için**
 
-1. Gelen [Azure portalında](https://portal.azure.com/), Spark kümesini açın. Daha fazla bilgi için [kümeleri Listele ve Göster](../hdinsight-administer-use-portal-linux.md#showClusters).
-2. Gelen **hızlı bağlantılar**, tıklayın **küme Panosu**ve ardından **Spark geçmiş sunucusu**
+1. [Azure Portal](https://portal.azure.com/)Spark kümesini açın. Daha fazla bilgi için bkz. [kümeleri listeleme ve gösterme](../hdinsight-administer-use-portal-linux.md#showClusters).
+2. **Hızlı bağlantılardan** **küme panosu**' na ve ardından **Spark geçmiş sunucusu** ' na tıklayın.
 
     ![Spark geçmiş sunucusu](./media/apache-spark-resource-manager/launch-history-server.png "Spark geçmiş sunucusu")
 
-    İstendiğinde, Spark küme için yönetici kimlik bilgilerini girin. Spark geçmiş sunucusu aşağıdaki URL'ye göz atarak da açabilirsiniz:
+    İstendiğinde Spark kümesi için yönetici kimlik bilgilerini girin. Spark geçmiş sunucusunu aşağıdaki URL 'ye göz atarak da açabilirsiniz:
 
     ```
     https://<ClusterName>.azurehdinsight.net/sparkhistory
     ```
 
-    Değiştirin `<ClusterName>` ile Spark kümenizin adıdır.
+    @No__t_0 Spark kümeniz adınızla değiştirin.
 
-Spark geçmiş sunucusu web kullanıcı Arabirimi gibi görünür:
+Spark geçmiş sunucusu Web Kullanıcı arabirimi şöyle görünür:
 
 ![HDInsight Spark geçmiş sunucusu](./media/apache-spark-resource-manager/hdinsight-spark-history-server.png)
 
-## <a name="open-the-yarn-ui"></a>Yarn UI'ı açın
-YARN UI kullanarak Spark kümesi üzerinde çalışmakta olan uygulamaları izlemek için kullanabilirsiniz.
+## <a name="open-the-yarn-ui"></a>Yarn Kullanıcı arabirimini açın
 
-1. Gelen [Azure portalında](https://portal.azure.com/), Spark kümesini açın. Daha fazla bilgi için [kümeleri Listele ve Göster](../hdinsight-administer-use-portal-linux.md#showClusters).
-2. Gelen **hızlı bağlantılar**, tıklayın **küme Panosu**ve ardından **YARN**.
+Şu anda Spark kümesinde çalışmakta olan uygulamaları izlemek için YARN Kullanıcı arabirimini kullanabilirsiniz.
 
-    ![YARN kullanıcı arabirimini Başlat](./media/apache-spark-resource-manager/launch-yarn-ui.png)
+1. [Azure Portal](https://portal.azure.com/)Spark kümesini açın. Daha fazla bilgi için bkz. [kümeleri listeleme ve gösterme](../hdinsight-administer-use-portal-linux.md#showClusters).
+2. **Hızlı bağlantılardan** **küme panosu**' na ve ardından **Yarn**' ye tıklayın.
+
+    ![YARN Kullanıcı arabirimini Başlat](./media/apache-spark-resource-manager/hdi-launch-apache-yarn.png)
 
    > [!TIP]  
-   > Alternatif olarak, Ambari UI YARN kullanıcı Arabiriminden da başlatabilirsiniz. Ambari UI başlatmak için tıklayın **küme Panosu**ve ardından **HDInsight küme Panosu**. Ambari Arabiriminden tıklayın **YARN**, tıklayın **hızlı bağlantılar**etkin Kaynak Yöneticisi'ni tıklatın ve ardından **kaynak yöneticisi kullanıcı Arabirimi**.
+   > Alternatif olarak, Ayrıca, ambarı kullanıcı arabiriminden YARN Kullanıcı arabirimini de başlatabilirsiniz. Ambarı Kullanıcı arabirimini başlatmak için **küme panosu**' na ve ardından **HDInsight küme panosu**' na tıklayın. Ambarı kullanıcı arabiriminden, **Yarn**' ye tıklayın, **hızlı bağlantılar**' a tıklayın, etkin kaynak yöneticisi ve ardından **Kaynak Yöneticisi Kullanıcı arabirimi**' ne tıklayın.
 
-## <a name="optimize-clusters-for-spark-applications"></a>Kümeleri Spark uygulamaları için en iyi duruma getirme
-Uygulama gereksinimlerine bağlı olarak Spark yapılandırması için kullanılabilecek üç anahtar parametreleri `spark.executor.instances`, `spark.executor.cores`, ve `spark.executor.memory`. Bir yürütücü Spark uygulaması için başlatılan bir işlemdir. Çalışan düğümü üzerinde çalışan ve uygulama için görevleri yürütmek için sorumludur. Varsayılan yürütücü ve her küme için Yürütücü boyutları sayısını çalışan düğümlerine ve çalışan düğümü boyutu sayısı hesaplanır. Bu bilgiler saklanır `spark-defaults.conf` küme baş düğümlerine.
+## <a name="optimize-clusters-for-spark-applications"></a>Spark uygulamaları için kümeleri iyileştirme
 
-Üç yapılandırma parametrelerini (için küme üzerinde çalışan tüm uygulamalar) küme seviyesinde yapılandırılmış veya her tek tek uygulama için belirtilebilir.
+Uygulama gereksinimlerine bağlı olarak Spark yapılandırması için kullanılabilecek üç temel parametre `spark.executor.instances`, `spark.executor.cores` ve `spark.executor.memory`. Yürütücü, Spark uygulaması için başlatılan bir işlemdir. Çalışan düğümünde çalışır ve uygulama için görevleri yürütmekten sorumludur. Her kümenin varsayılan yürütmelerin sayısı ve yürütücü boyutları, çalışan düğümlerinin sayısı ve çalışan düğüm boyutu temel alınarak hesaplanır. Bu bilgiler, küme baş düğümlerinde `spark-defaults.conf` depolanır.
 
-### <a name="change-the-parameters-using-ambari-ui"></a>Ambari UI kullanarak parametreleri değiştirin
-1. Ambari UI'ı tıklatın **Spark**, tıklayın **yapılandırmaları**ve ardından **özel spark-varsayılanları**.
+Üç yapılandırma parametresi küme düzeyinde yapılandırılabilir (küme üzerinde çalışan tüm uygulamalar için) veya her bir uygulama için de belirlenebilir.
 
-    ![Ambari kullanarak parametrelerini ayarlayın](./media/apache-spark-resource-manager/set-parameters-using-ambari.png)
-2. Varsayılan değerleri kümede aynı anda çalıştırılması dört Spark uygulamaları uygundur. Aşağıdaki ekran görüntüsünde gösterildiği gibi kullanıcı arabiriminden bu değerleri değiştirebilirsiniz:
+### <a name="change-the-parameters-using-ambari-ui"></a>Ambarı Kullanıcı arabirimini kullanarak parametreleri değiştirme
+1. Ambarı kullanıcı arabiriminden **Spark**' a tıklayın, **configs**' ye tıklayın ve ardından **özel Spark-varsayılanlar**' ı genişletin.
 
-    ![Ambari kullanarak parametrelerini ayarlayın](./media/apache-spark-resource-manager/set-executor-parameters.png)
-3. Tıklayın **Kaydet** yapılandırma değişikliklerini kaydetmek için. Sayfanın üst kısmında etkilenen tüm hizmetleri yeniden başlatmanız istenir. **Yeniden Başlat**'a tıklayın.
+    ![Ambarı özel kullanarak parametreleri ayarlama](./media/apache-spark-resource-manager/set-parameters-using-ambari.png "Ambarı özel kullanarak parametreleri ayarlama")
+2. Varsayılan değerler, küme üzerinde aynı anda dört Spark uygulamasının çalışması için uygundur. Aşağıdaki ekran görüntüsünde gösterildiği gibi kullanıcı arabiriminden bu değerleri değiştirebilirsiniz:
 
-    ![Hizmetlerini yeniden başlatın](./media/apache-spark-resource-manager/restart-services.png)
+    ![Ambarı kullanarak parametreleri ayarlama](./media/apache-spark-resource-manager/set-executor-parameters.png "Ambarı kullanarak parametreleri ayarlama")
 
-### <a name="change-the-parameters-for-an-application-running-in-jupyter-notebook"></a>Jupyter not defteri çalışan bir uygulama için parametreleri Değiştir
-Jupyter not defteri çalışan uygulamalar için kullandığınız `%%configure` yapılandırma değişiklikleri yapmak için magic. İdeal olarak, birinci kod hücresini çalıştırmadan önce uygulama başına bu tür değişiklikler yapmanız gerekir. Bunun yapılması sağlar yapılandırmayı oluşturulduğu Livy oturumuna uygulanır. Uygulama daha sonraki bir aşamasında yapılandırmasını değiştirmek istiyorsanız, kullanmalısınız `-f` parametresi. Ancak, bunu yaparak uygulamanın tüm devam eden kaybolur.
+3. Yapılandırma değişikliklerini kaydetmek için **Kaydet** ' e tıklayın. Sayfanın üst kısmında, etkilenen tüm hizmetleri yeniden başlatmanız istenir. **Yeniden Başlat**'a tıklayın.
 
-Aşağıdaki kod parçacığı, Jupyter içinde çalışan bir uygulama yapılandırmasını değiştirme işlemi gösterilmektedir.
+    ![Hizmetleri yeniden Başlat](./media/apache-spark-resource-manager/apache-ambari-restart-services.png)
+
+### <a name="change-the-parameters-for-an-application-running-in-jupyter-notebook"></a>Jupyter Not defteri 'nde çalışan bir uygulamanın parametrelerini değiştirme
+Jupyter not defterinde çalışan uygulamalar için, yapılandırma değişikliğini yapmak üzere `%%configure` Magic ' i kullanabilirsiniz. İdeal olarak, ilk kod hücresini çalıştırmadan önce bu değişiklikleri uygulamanın başlangıcında yapmanız gerekir. Bunun yapılması, yapılandırmanın, oluşturulduğu zaman, uygun bir oturuma uygulanmasını sağlar. Uygulamada sonraki bir aşamada yapılandırmayı değiştirmek istiyorsanız `-f` parametresini kullanmanız gerekir. Ancak bunu yaparak uygulamadaki tüm ilerleme durumu kaybedilir.
+
+Aşağıdaki kod parçacığında, Jupyıter 'da çalışan bir uygulama için yapılandırmanın nasıl değiştirileceği gösterilmektedir.
 
     %%configure
     {"executorMemory": "3072M", "executorCores": 4, "numExecutors":10}
 
-Yapılandırma parametreleri, içinde bir JSON dizesi geçirilmelidir ve sonraki satırda Sihirli sonra örnek sütununda gösterildiği gibi olması gerekir.
+Yapılandırma parametrelerinin, örnek sütununda gösterildiği gibi, bir JSON dizesi olarak geçirilmesi ve Magic 'in sonraki satırında olması gerekir.
 
-### <a name="change-the-parameters-for-an-application-submitted-using-spark-submit"></a>Parametreler kullanılarak gönderilen bir uygulama için spark-submit Değiştir
-Aşağıdaki komut, bir örnek kullanılarak gönderilen bir batch uygulaması için yapılandırma parametreleri değiştirmek nasıl `spark-submit`.
+### <a name="change-the-parameters-for-an-application-submitted-using-spark-submit"></a>Spark-gönder kullanılarak gönderilen bir uygulama için parametreleri değiştirme
+Aşağıdaki komut, `spark-submit` kullanılarak gönderilen bir Batch uygulamasının yapılandırma parametrelerinin nasıl değiştirileceği hakkında bir örnektir.
 
     spark-submit --class <the application class to execute> --executor-memory 3072M --executor-cores 4 –-num-executors 10 <location of application jar file> <application parameters>
 
-### <a name="change-the-parameters-for-an-application-submitted-using-curl"></a>CURL kullanarak gönderilen bir uygulama için parametreleri Değiştir
-Aşağıdaki komut, cURL kullanarak gönderilen bir batch uygulaması için yapılandırma parametreleri değiştirmek nasıl bir örneğidir.
+### <a name="change-the-parameters-for-an-application-submitted-using-curl"></a>Kıvrımlı kullanılarak gönderilen bir uygulama için parametreleri değiştirme
+Aşağıdaki komut, kıvrımlı kullanılarak gönderilen toplu uygulama için yapılandırma parametrelerinin nasıl değiştirileceği hakkında bir örnektir.
 
     curl -k -v -H 'Content-Type: application/json' -X POST -d '{"file":"<location of application jar file>", "className":"<the application class to execute>", "args":[<application parameters>], "numExecutors":10, "executorMemory":"2G", "executorCores":5' localhost:8998/batches
 
-### <a name="change-these-parameters-on-a-spark-thrift-server"></a>Spark Thrift sunucusu bu parametreleri değiştirmek
-Spark Thrift sunucusu, bir Spark kümesi JDBC/ODBC erişim sağlar ve hizmet Spark SQL sorguları için kullanılır. Power BI, Tableau vb. gibi araçlar. Spark uygulaması olarak Spark SQL sorguları çalıştırmak için Spark Thrift sunucusu ile iletişim kurmak için ODBC protokolünü kullanır. Bir Spark kümesi oluşturduğunuzda, Spark Thrift sunucusu iki örneği başlatılır, bir baş düğümlerine. Her Spark Thrift sunucusu, YARN kullanıcı arabiriminde bir Spark uygulaması olarak görülebilir.
+### <a name="change-these-parameters-on-a-spark-thrift-server"></a>Spark Thrift sunucusunda bu parametreleri değiştirme
+Spark Thrift Server, Spark kümesine JDBC/ODBC erişimi sağlar ve Spark SQL sorgularına hizmet vermek için kullanılır. Power BI, Tableau vb. gibi araçlar Spark SQL sorgularını Spark uygulaması olarak yürütmek üzere Spark Thrift sunucusuyla iletişim kurmak için ODBC protokolünü kullanın. Bir Spark kümesi oluşturulduğunda, her bir baş düğümde bir tane olmak üzere Spark Thrift sunucusu 'nun iki örneği başlatılır. Her Spark Thrift sunucusu, YARN Kullanıcı arabiriminde Spark uygulaması olarak görülebilir.
 
-Spark Thrift sunucusu Spark Yürütücü dinamik ayırma kullanır ve bu nedenle `spark.executor.instances` kullanılmaz. Bunun yerine, Spark Thrift sunucusu kullanan `spark.dynamicAllocation.minExecutors` ve `spark.dynamicAllocation.maxExecutors` Yürütücü sayısı belirtmek için. Yapılandırma parametrelerini `spark.executor.cores` ve `spark.executor.memory` Yürütücü boyutunu değiştirmek için kullanılır. Aşağıdaki adımlarda gösterildiği gibi bu parametreleri değiştirebilirsiniz:
+Spark Thrift sunucusu Spark dinamik yürütücü ayırmayı kullanır ve bu nedenle `spark.executor.instances` kullanılmaz. Bunun yerine, Spark Thrift sunucusu `spark.dynamicAllocation.minExecutors` ve `spark.dynamicAllocation.maxExecutors` kullanarak yürütücü sayısını belirtir. @No__t_0 ve `spark.executor.memory` yapılandırma parametreleri, yürütücü boyutunu değiştirmek için kullanılır. Aşağıdaki adımlarda gösterildiği gibi bu parametreleri değiştirebilirsiniz:
 
-* Genişletin **spark thrift sparkconf Gelişmiş** parametreleri güncelleştirmek için kategori `spark.dynamicAllocation.minExecutors`, `spark.dynamicAllocation.maxExecutors`, ve `spark.executor.memory`.
+* @No__t_1, `spark.dynamicAllocation.maxExecutors` ve `spark.executor.memory` parametreleri güncelleştirmek için **Advanced Spark-Thrift-parlak conf** kategorisini genişletin.
 
-    ![Spark thrift sunucusu yapılandırma](./media/apache-spark-resource-manager/spark-thrift-server-1.png)    
-* Genişletin **özel spark thrift sparkconf** parametresi güncelleştirmek için kategori `spark.executor.cores`.
+    ![Spark Thrift sunucusunu yapılandırma](./media/apache-spark-resource-manager/spark-thrift-server-1.png "Spark Thrift sunucusunu yapılandırma")
+* @No__t_1 parametresini güncelleştirmek için **Custom Spark-Thrift-parlak conf** kategorisini genişletin.
 
-    ![Spark thrift sunucusu yapılandırma](./media/apache-spark-resource-manager/spark-thrift-server-2.png)
+    ![Spark Thrift sunucu parametresini yapılandırma](./media/apache-spark-resource-manager/spark-thrift-server-2.png "Spark Thrift sunucu parametresini yapılandırma")
 
-### <a name="change-the-driver-memory-of-the-spark-thrift-server"></a>Spark Thrift sunucusu sürücü belleğini değiştirin
-Spark Thrift sunucusu sürücü bellek baş düğüm RAM boyutunu % 25 oranında yapılandırılmış, baş düğümün Toplam RAM boyutu 14 GB'den büyük sağlanır. Aşağıdaki ekran görüntüsünde gösterildiği gibi sürücü bellek yapılandırmasını değiştirmek için Ambari UI kullanabilirsiniz:
+### <a name="change-the-driver-memory-of-the-spark-thrift-server"></a>Spark Thrift sunucusunun sürücü belleğini değiştirme
+Spark Thrift sunucu sürücüsü belleği, baş düğümün Toplam RAM boyutu 14 GB 'den büyük olduğundan, baş düğüm RAM boyutunun %25 ' i olarak yapılandırılır. Aşağıdaki ekran görüntüsünde gösterildiği gibi, sürücü belleği yapılandırmasını değiştirmek için, ambarı Kullanıcı arabirimini kullanabilirsiniz:
 
-* Ambari UI'ı tıklatın **Spark**, tıklayın **yapılandırmaları**, genişletin **spark env Gelişmiş**ve ardından değeri sağlayın **spark_thrift_cmd_opts**.
+* Ambarı kullanıcı arabiriminden **Spark**' a tıklayın, **configs**' ye tıklayın, **Advanced Spark-env**' i genişletin ve ardından **spark_thrift_cmd_opts**değerini girin.
 
-    ![Spark thrift sunucusu RAM yapılandırın](./media/apache-spark-resource-manager/spark-thrift-server-ram.png)
+    ![Spark Thrift Server RAM 'ini yapılandırma](./media/apache-spark-resource-manager/spark-thrift-server-ram.png)
 
-## <a name="reclaim-spark-cluster-resources"></a>Spark kümesi kaynaklarınıza geri kazan
-Spark dinamik ayırma nedeniyle thrift sunucusu tarafından tüketilen kaynak yalnızca iki uygulama ana sunucu için kaynaklardır. Bu kaynakları geri kazanmak için küme üzerinde çalışan Thrift sunucusu Hizmetleri durdurmanız gerekir.
+## <a name="reclaim-spark-cluster-resources"></a>Spark küme kaynaklarını geri kazanma
+Spark dinamik ayırma nedeniyle, yalnızca Thrift sunucusu tarafından tüketilen kaynaklar iki uygulama ana öğesinin kaynaklarıdır. Bu kaynakları geri kazanmak için küme üzerinde çalışan Thrift sunucu hizmetlerini durdurmanız gerekir.
 
-1. Sol bölmeden Ambari UI'ı tıklatın **Spark**.
-2. Sonraki sayfada, tıklayın **Spark Thrift sunucuları**.
+1. Ambarı kullanıcı arabiriminden, sol bölmeden **Spark**' a tıklayın.
+2. Sonraki sayfada **Spark Thrift sunucuları**' na tıklayın.
 
-    ![Thrift sunucuyu yeniden başlatın](./media/apache-spark-resource-manager/restart-thrift-server-1.png)
-3. Spark Thrift sunucusu üzerinde çalıştığı iki baş görmeniz gerekir. Baş düğümler birine tıklayın.
+    ![Yeniden başlatma Sunucu1](./media/apache-spark-resource-manager/restart-thrift-server-1.png "Yeniden başlatma Sunucu1")
+3. Spark Thrift sunucusunun çalıştığı iki headnode görmeniz gerekir. Yayın düğümlerinden birine tıklayın.
 
-    ![Thrift sunucuyu yeniden başlatın](./media/apache-spark-resource-manager/restart-thrift-server-2.png)
-4. Sonraki sayfada, baş düğüm üzerinde çalışan tüm hizmetler listelenir. Listeden Spark Thrift sunucusu yanındaki açılan düğmeyi tıklayın ve ardından **Durdur**.
+    ![Yeniden başlatma, Sunucu2](./media/apache-spark-resource-manager/restart-thrift-server-2.png "Yeniden başlatma, Sunucu2")
+4. Sonraki sayfada, o headnode üzerinde çalışan tüm hizmetler listelenir. Listeden Spark Thrift Server ' ın yanındaki açılan düğmeye tıklayın ve ardından **Durdur**' a tıklayın.
 
-    ![Thrift sunucuyu yeniden başlatın](./media/apache-spark-resource-manager/restart-thrift-server-3.png)
-5. Diğer baş de bu adımları tekrarlayın.
+    ![Yeniden başlatma Thrift Server3](./media/apache-spark-resource-manager/restart-thrift-server-3.png "Yeniden başlatma Thrift Server3")
+5. Bu adımları diğer baş düğümüne üzerinde de yineleyin.
 
-## <a name="restart-the-jupyter-service"></a>Jupyter hizmetini yeniden başlatın
-Ambari Web kullanıcı arabirimini, makalenin başında gösterildiği gibi başlatın. Sol gezinti bölmesinden tıklayın **Jupyter**, tıklayın **hizmet eylemleri**ve ardından **yeniden tüm**. Bu, üzerinde tüm baş düğümler Jupyter hizmetini başlatır.
+## <a name="restart-the-jupyter-service"></a>Jupyıter hizmetini yeniden başlatma
+Makalenin başlangıcında gösterildiği gibi, ambarı Web Kullanıcı arabirimini başlatın. Sol gezinti bölmesinden **jupi**' ye tıklayın, **hizmet eylemleri**' ne tıklayın ve ardından **Tümünü Yeniden Başlat**' a tıklayın. Bu, Jupyıter hizmetini tüm yayın düğümlerinde başlatır.
 
-![Jupyter yeniden](./media/apache-spark-resource-manager/restart-jupyter.png "Jupyter yeniden başlatın")
+![Jupyıter 'ı yeniden Başlat](./media/apache-spark-resource-manager/apache-ambari-restart-jupyter.png "Jupyter’i yeniden başlatın")
 
 ## <a name="monitor-resources"></a>Kaynakları izleme
-Yarn UI makalenin başında gösterildiği gibi başlatın. Ekranın en üstünde Cluster Metrics tablosunda değerlerini kontrol edin **kullanılan bellek** ve **bellek toplam** sütunları. İki değer Kapat ise sonraki uygulamayı başlatmak için yeterli kaynağı olmayabilir. Aynı geçerlidir **sanal çekirdekler kullanılan** ve **VCores Total** sütunları. Varsa Ayrıca, ana görünümünde, bir uygulama içinde stayed **kabul edilen** durumu ve içine geçiş değil **çalıştıran** ya da **başarısız** durumunda, bu da olabilir bir göstergesi, başlatmak için yeterli kaynağı alamıyor.
+Makalenin başlangıcında gösterildiği gibi Yarn Kullanıcı arabirimini başlatın. Ekranın üstündeki küme ölçümleri tablosunda, **kullanılan bellek** ve **bellek toplam** sütunları değerlerini denetleyin. İki değer yakınsa, bir sonraki uygulamayı başlatmak için yeterli kaynak bulunmayabilir. Aynı, **kullanılan sanal çekirdekler** ve **sanal çekirdekler** için de geçerlidir. Ayrıca, ana görünümde, **kabul edilmiş** durumda olan ve **çalışan** ya da **başarısız** durumuna geçmemiş bir uygulama varsa, bu, başlamak için yeterli kaynak bulunmadığını de ifade eder.
 
-![Kaynak sınırına](./media/apache-spark-resource-manager/resource-limit.png "kaynak sınırı")
+![Kaynak sınırı](./media/apache-spark-resource-manager/apache-ambari-resource-limit.png "Kaynak sınırı")
 
-## <a name="kill-running-applications"></a>Çalışan uygulamaları Kaldır
-1. Yarn kullanıcı arabiriminde, sol panelden tıklayın **çalıştıran**. Sonlandırılan ve tıklayarak uygulamanın çalışmakta olan uygulamalar listesinden belirlemek **kimliği**.
+## <a name="kill-running-applications"></a>Çalışan uygulamaları Sonlandır
+1. Yarn Kullanıcı arabiriminde sol bölmede, **çalışıyor**' a tıklayın. Çalışan uygulamalar listesinden, sonlandırılacak uygulamayı belirleme ve **kimliğe**tıklama.
 
-    ![App1'KILL](./media/apache-spark-resource-manager/kill-app1.png "App1 Sonlandır")
+    ![KILL APP1](./media/apache-spark-resource-manager/apache-ambari-kill-app1.png "KILL APP1")
 
-2. Tıklayın **KILL uygulama** üzerinde sağ üst köşede, ardından **Tamam**.
+2. Sağ üst köşedeki **Uygulamayı Sonlandır** ' a ve ardından **Tamam**' a tıklayın.
 
-    ![App2 KILL](./media/apache-spark-resource-manager/kill-app2.png "App2 Sonlandır")
+    ![KILL app2](./media/apache-spark-resource-manager/apache-ambari-kill-app2.png "KILL app2")
 
 ## <a name="see-also"></a>Ayrıca bkz.
 * [HDInsight’ta bir Apache Spark kümesinde çalışan işleri izleme ve hata ayıklama](apache-spark-job-debugging.md)
 
 ### <a name="for-data-analysts"></a>Veri analistleri için
 
-* [Apache Spark Machine Learning ile: HVAC verilerini kullanarak bina sıcaklığını çözümlemek için HDInsight içindeki Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
-* [Apache Spark Machine Learning ile: Gıda denetimi sonuçlarını tahmin etmek için HDInsight içindeki Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
-* [HDInsight Apache Spark'ı kullanarak Web sitesi günlüğü çözümlemesi](apache-spark-custom-library-website-log-analysis.md)
-* [HDInsight Apache Spark'ı kullanarak application Insight telemetri verilerinin analizi](apache-spark-analyze-application-insight-logs.md)
-* [Azure HDInsight Spark üzerinde dağıtılmış derin öğrenme için Caffe kullanma](apache-spark-deep-learning-caffe.md)
+* [Machine Learning ile Apache Spark: HVAC verilerini kullanarak oluşturma sıcaklığını çözümlemek için HDInsight 'ta Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
+* [Machine Learning Apache Spark: yemek İnceleme sonuçlarını tahmin etmek için HDInsight 'ta Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
+* [HDInsight 'ta Apache Spark kullanarak Web sitesi günlüğü Analizi](apache-spark-custom-library-website-log-analysis.md)
+* [HDInsight 'ta Apache Spark kullanarak Application Insight telemetri veri analizi](apache-spark-analyze-application-insight-logs.md)
+* [Dağıtılmış derin öğrenme için Azure HDInsight Spark Caffe kullanma](apache-spark-deep-learning-caffe.md)
 
 ### <a name="for-apache-spark-developers"></a>Apache Spark geliştiricileri için
 
 * [Scala kullanarak tek başına uygulama oluşturma](apache-spark-create-standalone-application.md)
-* [Apache Livy kullanarak bir Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
+* [Apache Livy kullanarak Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
 * [Spark Scala uygulamaları oluşturmak ve göndermek amacıyla IntelliJ IDEA için HDInsight Araçları Eklentisini kullanma](apache-spark-intellij-tool-plugin.md)
-* [Apache Spark uygulamalarında uzaktan hata ayıklamak amacıyla Intellij Idea için HDInsight araçları eklentisi kullanma](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
-* [HDInsight üzerinde Apache Spark kümesi ile Apache Zeppelin not defterlerini kullanma](apache-spark-zeppelin-notebook.md)
-* [HDInsight için Apache Spark kümesinde Jupyter not defteri için kullanılabilir çekirdekler](apache-spark-jupyter-notebook-kernels.md)
+* [Apache Spark uygulamalarında uzaktan hata ayıklama için IntelliJ fıkır için HDInsight Araçları eklentisini kullanın](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
+* [HDInsight 'ta Apache Spark kümesiyle Apache Zeppelin not defterlerini kullanma](apache-spark-zeppelin-notebook.md)
+* [HDInsight için Apache Spark kümesindeki Jupyter Not defteri için kullanılabilir kernels](apache-spark-jupyter-notebook-kernels.md)
 * [Jupyter not defterleri ile dış paketleri kullanma](apache-spark-jupyter-notebook-use-external-packages.md)
 * [Jupyter’i bilgisayarınıza yükleme ve bir HDInsight Spark kümesine bağlanma](apache-spark-jupyter-notebook-install-locally.md)

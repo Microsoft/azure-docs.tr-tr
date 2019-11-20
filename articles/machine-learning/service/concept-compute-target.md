@@ -1,73 +1,72 @@
 ---
-title: Hedef işlem
-titleSuffix: Azure Machine Learning service
-description: Bir işlem hedefine eğitim betiği veya ana bilgisayar hizmeti dağıtımınız çalıştırdığınız işlem kaynağı belirtmenize olanak sağlar. Bu konum, yerel makinenizde veya bir bulut tabanlı işlem kaynağı olabilir.
+title: 'İşlem hedefleri: modellerin eğmesi ve dağıtılması'
+titleSuffix: Azure Machine Learning
+description: Azure Machine Learning modelinize eğmesini veya dağıtmayı istediğinizi tanımlayın.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
 ms.author: sgilley
 author: sdgilley
-ms.date: 05/30/2019
-ms.openlocfilehash: 42c0f5460a63b781aafdd43410761e2d7b17944d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/04/2019
+ms.openlocfilehash: 75e789ac1f9c161bc67ba90062be39f986f5b140
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66755358"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73580609"
 ---
-#  <a name="what-is-a-compute-target-in-azure-machine-learning-service"></a>Azure Machine Learning hizmetinde bir işlem hedefine nedir? 
+#  <a name="what-are-compute-targets-in-azure-machine-learning"></a>Azure Machine Learning işlem hedefleri nelerdir? 
 
-Bir işlem hedefine eğitim betiği veya ana bilgisayar hizmeti dağıtımınız çalıştırdığınız işlem kaynağı belirtmenize olanak sağlar. Bu konum, yerel makinenizde veya bir bulut tabanlı işlem kaynağı olabilir.
+**İşlem hedefi** , eğitim betiğinizi çalıştırdığınız veya hizmet dağıtımınızı barındırabileceğiniz, belirlenen bir işlem kaynağıdır/ortamıdır. Bu konum, yerel makineniz veya bulut tabanlı bir işlem kaynağıdır. İşlem hedeflerini kullanmak, kodunuzu değiştirmek zorunda kalmadan daha sonra işlem ortamınızı değiştirmenizi kolaylaştırır.  
 
-İşlem hedefleri, bilgi işlem ortamınızı kodunuzu değiştirmeden değiştirmek kolaylaştırır.  Tipik bir model geliştirme yaşam döngüsü:
+Tipik bir model geliştirme yaşam döngüsünde şunları yapabilirsiniz:
+1. Daha az miktarda veri geliştirme ve deneme ile başlayın. Bu aşamada, işlem hedefi olarak yerel ortamınızı (yerel bilgisayar veya bulut tabanlı VM) öneririz. 
+2. Daha büyük verilere kadar ölçeklendirin ve bu [eğitim işlem hedeflerinden](#train)birini kullanarak dağıtılmış eğitim yapın.  
+3. Modeliniz hazırlandıktan sonra, bu [dağıtım işlem hedeflerinin](#deploy)birine sahip bir Web barındırma ortamına veya IoT cihazına dağıtın.
 
-* Geliştirme/deneme az miktarda veriniz üzerinde çalışmaya başlayın. Bu aşamada, yerel bir ortamı kullanmanızı öneririz. Örneğin, yerel bilgisayarınıza veya bulut tabanlı bir VM.
-* Büyük veri kümeleri üzerinde eğitim ölçeğini veya dağıtılmış birini kullanarak eğitim [eğitim hedefleri](#train).  
-* Çeşitli web barındırma ortamları veya IOT cihazları kullanarak dağıtmak [dağıtım hedefleri](#deploy).
+İşlem hedeflerinizin kullanacağı işlem kaynakları bir [çalışma alanına](concept-workspace.md)eklenir. Yerel makine dışında işlem kaynakları, çalışma alanının kullanıcıları tarafından paylaşılır.
 
-İşlem hedeflerinizi için kullandığınız işlem kaynakları eklenmiş bir [çalışma](concept-workspace.md). İşlem kaynakları yerel makine dışındaki çalışma alanının kullanıcılar tarafından paylaşılır.
+## <a name="train"></a>Eğitim işlem hedefleri
 
-## <a name="train"></a> Eğitim hedefleri
-
-Azure Machine Learning hizmeti farklı işlem kaynakları genelinde değişen desteğe sahiptir.  Çeşitli senaryolarda olarak değişiklik gösterebilir destek aşağıda ayrıntılarıyla olsa da, kendi işlem kaynağı ekleyebilirsiniz:
+Azure Machine Learning, farklı işlem kaynakları arasında farklı destek içerir.  Ayrıca, çeşitli senaryolar için destek farklılık gösterebilse de kendi işlem kaynağınızı ekleyebilirsiniz.
 
 [!INCLUDE [aml-compute-target-train](../../../includes/aml-compute-target-train.md)]
 
+[Model eğitimi için bir işlem hedefi ayarlama ve kullanma](how-to-set-up-training-targets.md)hakkında daha fazla bilgi edinin.
 
 ## <a name="deploy"></a>Dağıtım hedefleri
 
-Aşağıdaki işlem kaynakları, model dağıtımı barındırmak için kullanılabilir.
+Aşağıdaki işlem kaynakları, model dağıtımınızı barındırmak için kullanılabilir.
 
 [!INCLUDE [aml-compute-target-deploy](../../../includes/aml-compute-target-deploy.md)]
 
+[Modelinizin bir işlem hedefine dağıtımını nerede ve nasıl dağıtacağınızı](how-to-deploy-and-where.md)öğrenin.
 
-## <a name="managed-compute"></a>Yönetilen işlem
+<a name="amlcompute"></a>
+## <a name="azure-machine-learning-compute-managed"></a>Azure Machine Learning işlem (yönetilen)
 
-Bir yönetilen işlem kaynağı oluşturulur ve Azure Machine Learning hizmeti tarafından yönetilir. Bu işlem, machine learning iş yükleri için optimize edilmiştir. Azure Machine Learning işlemi yalnızca yönetilen bir işlem 30 Mayıs 2019 tarihinde olur. Yönetilen ek işlem kaynakları gelecekte eklenebilir.
+Yönetilen bir işlem kaynağı Azure Machine Learning tarafından oluşturulur ve yönetilir. Bu işlem makine öğrenimi iş yükleri için iyileştirilmiştir. İşlem kümelerini Azure Machine Learning. Daha sonra ek yönetilen işlem kaynakları eklenebilir.
 
-### <a name="amlcompute"></a> Azure Machine Learning işlem
+Azure Machine Learning Studio, Azure portal, SDK, Kaynak Yöneticisi şablonu veya CLı 'de Azure Machine Learning işlem kümeleri oluşturabilirsiniz.
 
-Azure Machine Learning işlem batch çıkarım (Önizleme) ve eğitim için kullanabilirsiniz.  Bu işlem kaynağı ile aşağıdakiler:
+Bu işlem kaynakları oluşturulduğunda, diğer tür bilgi işlem hedeflerinin aksine, çalışma alanınızın otomatik olarak bir parçasıdır.
 
-* Tek veya çok node küme
-* İhtiyaçlara göre otomatik bir çalıştırma gönderdiğiniz her zaman 
-* Otomatik küme yönetimi ve iş zamanlama 
+Eğitim için Azure Machine Learning işlem kümelerini ve toplu iş ınuzyı (Önizleme) için kullanabilirsiniz.  Bu işlem kaynağıyla şunları yapabilirsiniz:
+
+* Tek veya çok düğümlü küme
+* Her çalıştırma gönderdiğinizde otomatik ölçekler 
+* Otomatik küme yönetimi ve iş zamanlaması 
 * Hem CPU hem de GPU kaynakları için destek
 
-Azure Machine Learning işlem örnekleri aşağıdakilerden birini oluşturabilirsiniz:
 
-* Azure portal
-* Azure Machine Learning SDK'sı
-* The Azure CLI
-
-Diğer tüm bilgi işlem kaynakları çalışma alanı dışında oluşturulan ve kendisine bağlı.
 
 ## <a name="unmanaged-compute"></a>Yönetilmeyen işlem
 
-Yönetilmeyen işlem kaynağı *değil* Azure Machine Learning hizmeti tarafından yönetilir. Bu tür bir Azure Machine Learning dışında bir işlem oluşturun, ardından çalışma alanınıza ekleyin. Yönetilmeyen işlem kaynaklarını korumak için veya makine öğrenimi iş yükleri için performansı artırmak için ek adımlar gerektirebilir.
+Yönetilmeyen bir işlem hedefi Azure Machine Learning *tarafından yönetilmiyor.* Bu tür bir işlem hedefini Azure Machine Learning dışında oluşturun ve ardından çalışma alanınıza ekleyin. Yönetilmeyen işlem kaynakları, makine öğrenimi iş yüklerinin performansını korumanız veya iyileştirebilmeniz için ek adımlar gerektirebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [İşlem hedeflerine yönelik model eğitiminin ayarlama](how-to-set-up-training-targets.md)
-* [Azure Machine Learning hizmeti ile modelleri dağıtma](how-to-deploy-and-where.md)
+Şunları nasıl yapacağınızı öğrenin:
+* [Modelinizi eğitme için bir işlem hedefi ayarlama](how-to-set-up-training-targets.md)
+* [Modelinizi bir işlem hedefine dağıtın](how-to-deploy-and-where.md)

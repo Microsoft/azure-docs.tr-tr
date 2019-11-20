@@ -2,73 +2,76 @@
   href: index.yml
   items: null
 - name: Genel Bakış
+  expanded: true
   items:
-    - name: Veri Bilimi VM nedir?
+    - name: Veri Bilimi Sanal Makinesi (DSVM) nedir?
       href: overview.md
-    - name: Derin Öğrenme VM nedir?
-      href: deep-learning-dsvm-overview.md
-    - name: Coğrafi AI Veri Bilimi VM nedir?
+    - name: Coğrafi Yapay Zeka DSVM’si nedir?
       href: geo-ai-dsvm-overview.md
+    - name: DSVM'ye Dahil Edilen Araçlar
+      href: tools-included.md
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
-    - name: Windows Veri Bilimi VM’si oluşturma
+    - name: Windows DSVM’si oluşturma
       href: provision-vm.md
-    - name: Ubuntu Veri Bilimi VM’si oluşturma
+    - name: Ubuntu DSVM’si oluşturma
       href: dsvm-ubuntu-intro.md
-    - name: CentOS Veri Bilimi VM’si oluşturma
+    - name: CentOS DSVM’si oluşturma
       href: linux-dsvm-intro.md
-    - name: Derin Öğrenme VM’si oluşturma
-      href: provision-deep-learning-dsvm.md
-    - name: Coğrafi AI Veri Bilimi VM'si oluşturma
+    - name: Coğrafi AI DSVM’si oluşturma
       href: provision-geo-ai-dsvm.md
 - name: Kavramlar
   items:
-    - name: DSVM’yi keşfetme
-      href: dsvm-tools-overview.md
     - name: Derin Öğrenme ve AI çerçeveleri
       href: dsvm-deep-learning-ai-frameworks.md
-    - name: ML ve veri bilimi araçları
-      href: dsvm-ml-data-science-tools.md
-    - name: Diller
+    - name: Programlama dilleri
       href: dsvm-languages.md
     - name: Geliştirme araçları
       href: dsvm-tools-development.md
+    - name: ML ve veri bilimi araçları
+      href: dsvm-ml-data-science-tools.md
+    - name: Veri platformları
+      href: dsvm-data-platforms.md
     - name: Veri alma araçları
       href: dsvm-tools-ingestion.md
     - name: Veri keşfi ve görselleştirme araçları
       href: dsvm-tools-explore-and-visualize.md
-    - name: Veri platformları
-      href: dsvm-data-platforms.md
-    - name: Örnekler ve yönergeler
-      href: dsvm-samples-and-walkthroughs.md
+    - name: Kurumsal güvenlik ve rehberlik
+      href: dsvm-enterprise-overview.md
+- name: Örnekler
+  href: dsvm-samples-and-walkthroughs.md
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Windows Veri Bilimi VM’si kullanma
+    - name: Windows DSVM’si kullanma
       href: vm-do-ten-things.md
-    - name: Linux Veri Bilimi VM’si kullanma
+    - name: Linux DSVM’si kullanma
       href: linux-dsvm-walkthrough.md
-    - name: Derin Öğrenme VM’si kullanma
-      href: use-deep-learning-dsvm.md
-    - name: Coğrafi AI Veri Bilimi VM'si kullanma
+    - name: Coğrafi AI DSVM kullanma
       href: use-geo-ai-dsvm.md
-    - name: Kurumsal kılavuz
-      items:
-        - name: Genel Bakış
-          href: dsvm-enterprise-overview.md
-        - name: Ölçeklendirme
-          href: dsvm-pools.md
-        - name: Active Directory tümleştirmesi
-          href: dsvm-common-identity.md
-        - name: Kaynak erişim kimlik bilgilerini koruma
-          href: dsvm-secure-access-keys.md
+    - name: Otomatik ölçeklendirilmiş DSVM havuzu oluşturma
+      href: dsvm-pools.md
+    - name: Active Directory ile tümleştirme
+      href: dsvm-common-identity.md
+    - name: Kaynak erişim kimlik bilgilerini koruma
+      href: dsvm-secure-access-keys.md
 - name: Kaynaklar
   items:
-    - name: R geliştirici kılavuzu
-      href: /azure/architecture/data-guide/technology-choices/r-developers-guide?context=azure/machine-learning/data-science-virtual-machine/context/ml-context
-    - name: Blog
-      href: 'https://blogs.technet.microsoft.com/machinelearning/tag/dsvm/'
     - name: MSDN forumu
-      href: 'https://social.microsoft.com/Forums/en-US/home?forum=dsvm'
+      href: 'https://social.microsoft.com/Forums/home?forum=dsvm'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/search?q=dsvm'
+    - name: R geliştirici kılavuzu
+      href: /azure/architecture/data-guide/technology-choices/r-developers-guide?context=azure/machine-learning/data-science-virtual-machine/context/ml-context
+- name: Başvuru
+  items:
+    - name: Ubuntu DSVM
+      href: reference-ubuntu-vm.md
+    - name: CentOS DSVM
+      href: reference-centos-vm.md
+    - name: Sürüm notları
+      href: release-notes.md
+    - name: Bilinen sorunlar
+      href: reference-known-issues.md
+    - name: Kullanımdan Kaldırma Duyuruları
+      href: reference-deprecation.md

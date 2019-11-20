@@ -1,18 +1,865 @@
-- name: HDInsight Belgeleri
-  href: index.yml
-- name: Apache Hadoop
-  href: ./hadoop/apache-hadoop-linux-create-cluster-get-started-portal.md
+- name: HDInsight hizmeti
+  expanded: true
+  items:
+    - name: Genel Bakış
+      items:
+        - name: Azure HDInsight nedir?
+          href: ./hdinsight-overview.md
+    - name: Öğreticiler
+      items:
+        - name: HDInsight kümeleri oluşturma
+          href: ./hdinsight-hadoop-provision-linux-clusters.md
+        - name: HDInsight kümelerini yönetme - Portal
+          href: ./hdinsight-administer-use-portal-linux.md
+        - name: HDInsight kümelerini yönetme - CLI
+          href: ./hdinsight-administer-use-command-line.md
+        - name: HDInsight kümelerini yönetme - .NET SDK
+          href: ./hdinsight-administer-use-dotnet-sdk.md
+        - name: HDInsight kümelerini yönetme - PowerShell
+          href: ./hdinsight-administer-use-powershell.md
+        - name: ETL işlem hattı oluşturma
+          href: ./hdinsight-sales-insights-etl.md
+    - name: Örnekler
+      items:
+        - name: Azure CLI örnekleri
+          href: ./azure-cli-samples.md
+        - name: .NET örnekleri
+          href: ./hdinsight-sdk-dotnet-samples.md
+        - name: Java örnekleri
+          href: ./hdinsight-sdk-java-samples.md
+        - name: Python örnekleri
+          href: ./hdinsight-sdk-python-samples.md
+        - name: Azure örnekleri tarayıcı
+          href: 'https://azure.microsoft.com/resources/samples/?service=hdinsight'
+    - name: Kavramlar
+      items:
+        - name: HDInsight üzerindeki Apache Hadoop bileşenleri
+          href: ./hdinsight-component-versioning.md
+        - name: Yüksek kullanılabilirlik bileşenleri
+          href: ./hdinsight-high-availability-components.md
+        - name: HDInsight’ta makine öğrenimi
+          href: ./hdinsight-machine-learning-overview.md
+        - name: HDInsight’ta ölçeğe göre akış
+          href: ./hdinsight-streaming-at-scale-overview.md
+        - name: HDInsight’ta Apache Hadoop mimarisi
+          href: ./hdinsight-hadoop-architecture.md
+        - name: HDInsight tarafından desteklenen VM boyutları
+          href: ./hdinsight-supported-node-configuration.md
+        - name: Doğru VM boyutunu seçme
+          href: ./hdinsight-selecting-vm-size.md
+        - name: Küme kapasitesi planlama
+          href: ./hdinsight-capacity-planning.md
+        - name: Kullanılabilirlik ve güvenilirlik
+          href: ./hdinsight-high-availability-linux.md
+        - name: Depolama seçeneklerini karşılaştırın
+          href: ./hdinsight-hadoop-compare-storage-options.md
+        - name: Yönetilen kimlikleri anlama
+          href: ./hdinsight-managed-identities.md
+    - name: Nasıl yapılır
+      items:
+        - name: Küme oluşturma
+          items:
+            - name: Portalda küme oluşturma
+              href: ./hdinsight-hadoop-create-linux-clusters-portal.md
+            - name: Şablonları kullanarak küme oluşturma
+              href: ./hdinsight-hadoop-create-linux-clusters-arm-templates.md
+            - name: Komut satırını kullanarak küme oluşturma
+              href: ./hdinsight-hadoop-create-linux-clusters-azure-cli.md
+            - name: PowerShell kullanarak küme oluşturma
+              href: ./hdinsight-hadoop-create-linux-clusters-azure-powershell.md
+            - name: REST API kullanarak küme oluşturma
+              href: ./hdinsight-hadoop-create-linux-clusters-curl-rest.md
+            - name: .NET kullanarak küme oluşturma
+              href: ./hdinsight-hadoop-create-linux-clusters-dotnet-sdk.md
+        - name: Küme depolama alanını kullanma
+          items:
+            - name: Azure Depolama’yı kullanma
+              href: hdinsight-hadoop-use-blob-storage.md
+            - name: Azure Data Lake Storage 2. Nesil kullanma
+              href: hdinsight-hadoop-use-data-lake-storage-gen2.md
+            - name: Azure Data Lake Storage 1. Nesil kullanma
+              href: hdinsight-hadoop-use-data-lake-store.md
+        - name: Kümeleri genişletme
+          items:
+            - name: HDInsight uygulamaları yükleme
+              href: hdinsight-apps-install-applications.md
+            - name: Bootstrap ile kümeleri özelleştirme
+              href: hdinsight-hadoop-customize-cluster-bootstrap.md
+            - name: Script Action kullanarak kümeleri özelleştirme
+              href: hdinsight-hadoop-customize-cluster-linux.md
+            - name: Betik eylemleri geliştirme
+              href: hdinsight-hadoop-script-actions-linux.md
+            - name: Apache Hive kitaplıkları ekleme
+              href: hdinsight-hadoop-add-hive-libraries.md
+            - name: Apache Giraph kullanma
+              href: hdinsight-hadoop-giraph-install-linux.md
+            - name: Hue kullanma
+              href: hdinsight-hadoop-hue-linux.md
+            - name: HDInsight uygulamalarını derleme
+              items:
+                - name: Özel uygulamaları yükleme
+                  href: hdinsight-apps-install-custom-applications.md
+                - name: Uygulama yüklemek için REST kullanma
+                  href: 'https://msdn.microsoft.com/library/mt706515.aspx'
+                - name: HDInsight uygulamalarını Azure Market’te yayımlama
+                  href: hdinsight-apps-publish-applications.md
+        - name: Güvenlik
+          items:
+            - name: HDInsight ile SSH kullanma
+              href: hdinsight-hadoop-linux-use-ssh-unix.md
+            - name: SSH tüneli kullanma
+              href: hdinsight-linux-ambari-ssh-tunnel.md
+            - name: Veri erişiminin kısıtlama
+              href: hdinsight-storage-sharedaccesssignature-permissions.md
+            - name: Kullanıcıları Apache Ambari Görünümleri için yetkilendirme
+              href: hdinsight-authorize-users-to-ambari.md
+        - name: Geçiş
+          items:
+            - name: Amaç ve yararlar
+              href: ./hadoop/apache-hadoop-on-premises-migration-motivation.md
+            - name: En iyi uygulamalar - mimari
+              href: ./hadoop/apache-hadoop-on-premises-migration-best-practices-architecture.md
+            - name: En iyi uygulamalar - altyapı
+              href: ./hadoop/apache-hadoop-on-premises-migration-best-practices-infrastructure.md
+            - name: En iyi uygulamalar - depolama
+              href: ./hadoop/apache-hadoop-on-premises-migration-best-practices-storage.md
+            - name: En iyi uygulamalar - veri geçişi
+              href: ./hadoop/apache-hadoop-on-premises-migration-best-practices-data-migration.md
+            - name: En iyi uygulamalar - güvenlik ve DevOps
+              href: ./hadoop/apache-hadoop-on-premises-migration-best-practices-security-devops.md
+        - name: Yönetme
+          items:
+            - name: Apache Ambari web kullanıcı arabirimini kullanarak kümeleri yönetme
+              href: ./hdinsight-hadoop-manage-ambari.md
+            - name: Apache Ambari web kullanıcı arabirimiyle kümeleri iyileştirme
+              href: ./hdinsight-changing-configs-via-ambari.md
+            - name: Apache Ambari REST API'sini kullanma
+              href: ./hdinsight-hadoop-manage-ambari-rest-api.md
+            - name: Küme silme
+              href: ./hdinsight-delete-cluster.md
+            - name: Kümeyi el ile ölçeklendirme
+              href: ./hdinsight-scaling-best-practices.md
+            - name: Kümeleri otomatik ölçeklendirme
+              href: ./hdinsight-autoscale-clusters.md
+            - name: Dış meta veri depolarını kullanma
+              href: ./hdinsight-use-external-metadata-stores.md
+            - name: Özel Ambari DB
+              href: ./hdinsight-custom-ambari-db.md
+            - name: HDInsight kümesi için günlükleri yönetme
+              href: ./hdinsight-log-management.md
+            - name: Depolama hesapları ekleme
+              href: ./hdinsight-hadoop-add-storage.md
+            - name: Apache Hadoop işleri için veri yükleme
+              href: ./hdinsight-upload-data.md
+            - name: Data Lake Storage ile birden çok HDInsight kümesi
+              href: ./hdinsight-multiple-clusters-data-lake-store.md
+            - name: .NET’i Linux’a geçirme
+              href: ./hdinsight-hadoop-migrate-dotnet-to-linux.md
+            - name: Apache Sqoop ile verileri içeri ve dışarı aktarma
+              items:
+                - name: Genel bakış - Apache Sqoop kullanma
+                  href: ./hadoop/hdinsight-use-sqoop.md
+                - name: SSH ile bağlanma
+                  href: ./hadoop/apache-hadoop-use-sqoop-mac-linux.md
+                - name: cURL kullanarak çalıştırma
+                  href: ./hadoop/apache-hadoop-use-sqoop-curl.md
+                - name: .NET için SDK’yı kullanarak çalıştırma
+                  href: ./hadoop/apache-hadoop-use-sqoop-dotnet-sdk.md
+                - name: Azure PowerShell’i kullanarak çalıştırma
+                  href: ./hadoop/apache-hadoop-use-sqoop-powershell.md
+            - name: Veri analizi işlem hattını kullanıma hazır hale getirme
+              href: ./hdinsight-operationalize-data-pipeline.md
+            - name: İş akışları için Apache Oozie kullanma
+              href: ./hdinsight-use-oozie-linux-mac.md
+            - name: Küme ve hizmet bağlantı noktaları ile URI'ler
+              href: ./hdinsight-hadoop-port-settings-for-services.md
+            - name: Resource Manager geliştirme araçlarına geçiş
+              href: ./hdinsight-hadoop-development-using-azure-resource-manager.md
+            - name: HDInsight kümesini yeni bir sürüme yükseltme
+              href: ./hdinsight-upgrade-cluster.md
+            - name: HDInsight kümesi için işletim sistemi düzeltme eki uygulama
+              href: ./hdinsight-os-patching.md
+        - name: HDInsight araçlarını kullanma
+          items:
+            - name: Visual Studio Araçları
+              href: ./hadoop/apache-hadoop-visual-studio-tools-get-started.md
+            - name: VSCode için Spark ve Hive Araçları
+              href: ./hdinsight-for-vscode.md
+            - name: Hortonworks Korumalı Alanı ile IntelliJ için HDInsight Araçları
+              href: ./hadoop/hdinsight-tools-for-intellij-with-hortonworks-sandbox.md
+            - name: Hortonworks Korumalı Alanı ile Data Lake Araçları
+              href: ./hdinsight-hadoop-emulator-visual-studio.md
+        - name: İzleme
+          items:
+            - name: Azure İzleyici günlüklerini kullanma
+              href: ./hdinsight-hadoop-oms-log-analytics-tutorial.md
+            - name: Azure İzleyici günlükleriyle sorguları kullanma
+              href: ./hdinsight-hadoop-oms-log-analytics-use-queries.md
+            - name: Küme performansını izleme
+              href: ./hdinsight-key-scenarios-to-monitor.md
+            - name: Ambari ve Azure İzleyici günlükleriyle küme kullanılabilirliğini izleme
+              href: ./hdinsight-cluster-availability.md
+    - name: Başvuru
+      items:
+        - name: Azure PowerShell
+          href: /powershell/module/az.hdinsight
+        - name: .NET için SDK
+          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/hdinsight?view=azure-dotnet'
+        - name: Python için SDK
+          href: 'https://docs.microsoft.com/python/api/overview/azure/hdinsight?view=azure-python'
+        - name: Java için SDK
+          href: 'https://docs.microsoft.com/java/api/overview/azure/hdinsight?view=azure-java-stable'
+        - name: Go için SDK
+          href: ./hdinsight-go-sdk-overview.md
+        - name: .NET (Apache HBase)
+          href: 'https://www.nuget.org/packages/Microsoft.HBase.Client/'
+        - name: REST API
+          href: /rest/api/hdinsight/
+        - name: REST API (Apache Spark)
+          href: /rest/api/hdinsightspark/
+        - name: Resource Manager şablonu
+          href: /azure/templates/microsoft.hdinsight/allversions
+    - name: Kaynaklar
+      items:
+        - name: Yayınlar
+          items:
+            - name: HDInsight 4.0’daki yenilikler nelerdir?
+              href: ./hdinsight-version-release.md
+            - name: Sürüm notları
+              href: ./hdinsight-release-notes.md
+            - name: Azure HDInsight’a yönelik arşivlenmiş sürüm notları
+              href: ./hdinsight-release-notes-archive.md
+        - name: Sık sorulan sorular (SSS)
+          href: ./hdinsight-faq.md
+        - name: Küme yapılandırmaları için ayrıntılı rol tabanlı erişime geçme
+          href: ./hdinsight-migrate-granular-access-cluster-configurations.md
+        - name: Linux’ta HDInsight kullanma ile ilgili bilgiler
+          href: ./hdinsight-hadoop-linux-information.md
+        - name: Apache Hadoop’ta bellek ve performans
+          href: ./hdinsight-hadoop-stack-trace-error-messages.md
+        - name: Linux üzerinde Apache Hadoop’ta YARN uygulama günlüklerine erişme
+          href: ./hdinsight-hadoop-access-yarn-app-logs-linux.md
+        - name: Apache Hadoop hizmetleri için yığın dökümlerini etkinleştirme
+          href: ./hdinsight-hadoop-collect-debug-heap-dump-linux.md
+        - name: WebHCat hatalarını anlama ve çözme
+          href: ./hdinsight-hadoop-templeton-webhcat-debug-errors.md
+        - name: Azure Yol Haritası
+          href: 'https://azure.microsoft.com/roadmap/?category=intelligence-analytics'
+        - name: Forumdan yardım alma
+          href: 'https://social.msdn.microsoft.com/forums/azure/home?forum=hdinsight'
+        - name: Öğrenme yolu
+          href: 'https://azure.microsoft.com/documentation/learning-paths/hdinsight-self-guided-hadoop-training/'
+        - name: Büyük Veri için Microsoft Professional Program
+          href: 'https://academy.microsoft.com/en-us/professional-program/tracks/big-data/'
+        - name: Fiyatlandırma hesaplayıcı
+          href: 'https://azure.microsoft.com/pricing/calculator/'
+        - name: HDInsight için Windows araçları
+          href: ./hdinsight-hadoop-windows-tools.md
 - name: Apache Spark
-  href: ./spark/apache-spark-jupyter-spark-sql-use-portal.md
-- name: Apache HBase
-  href: ./hbase/query-hbase-with-hbase-shell.md
-- name: Interactive Query
-  href: ./interactive-query/hdinsight-connect-hive-zeppelin.md
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight’ta Apache Spark nedir?
+          href: ./spark/apache-spark-overview.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Apache Spark kümesi oluşturma - Portal
+          href: ./spark/apache-spark-jupyter-spark-sql-use-portal.md
+        - name: Apache Spark kümesi oluşturma - PowerShell
+          href: ./spark/apache-spark-jupyter-spark-sql-use-powershell.md
+        - name: Apache Spark kümesi oluşturma - Azure CLI
+          href: ./spark/apache-spark-create-cluster-cli.md
+        - name: Apache Spark kümesi oluşturma - Şablon
+          href: ./spark/apache-spark-jupyter-spark-sql.md
+    - name: Öğreticiler
+      items:
+        - name: Apache Spark kümesinde sorgu çalıştırma
+          href: ./spark/apache-spark-load-data-run-query.md
+        - name: IntelliJ'de hatalı Spark işinde hata ayıklama (önizleme)
+          href: ./spark/apache-spark-intellij-tool-failure-debug.md
+        - name: BI araçlarını kullanarak verileri analiz etme
+          href: ./spark/apache-spark-use-bi-tools.md
+        - name: Akış işi çalıştırma
+          href: ./spark/apache-spark-eventhub-streaming.md
+        - name: Bir makine öğrenimi uygulaması oluşturma
+          href: ./spark/apache-spark-ipython-notebook-machine-learning.md
+        - name: IntelliJ’de Apache Spark uygulaması oluşturma
+          href: ./spark/apache-spark-create-standalone-application.md
+    - name: Kavramlar
+      items:
+        - name: HDInsight üzerinde Spark en iyi yöntemleri
+          href: ./spark/spark-best-practices.md
+        - name: Apache Spark ayarlarını yapılandırma
+          href: ./spark/apache-spark-settings.md
+        - name: Apache Spark işlerini iyileştirme
+          href: ./spark/apache-spark-perf.md
+    - name: Nasıl yapılır
+      items:
+        - name: Araçları kullanma
+          items:
+            - name: IntelliJ için Araçlar
+              href: ./spark/apache-spark-intellij-tool-plugin.md
+            - name: Eclipse için Araçlar
+              href: ./spark/apache-spark-eclipse-tool-plugin.md
+            - name: VSCode için PySpark
+              href: ./set-up-pyspark-interactive-environment.md
+        - name: Geliştirme
+          items:
+            - name: Etkileşimli bir Apache Spark Shell kullanma
+              href: ./spark/apache-spark-shell.md
+            - name: Apache Livy ile uzak işler
+              href: ./spark/apache-spark-livy-rest-interface.md
+            - name: Apache Spark işlerinde VPN üzerinden IntelliJ aracılığıyla uzaktan hata ayıklama
+              href: ./spark/apache-spark-intellij-tool-plugin-debug-jobs-remotely.md
+            - name: Apache Spark akışı
+              items:
+                - name: Akışa genel bakış
+                  href: ./spark/apache-spark-streaming-overview.md
+                - name: Structured Streaming’e genel bakış
+                  href: ./spark/apache-spark-structured-streaming-overview.md
+                - name: Apache Hadoop YARN’da yüksek oranda kullanılabilir Apache Spark akış işleri oluşturma
+                  href: ./spark/apache-spark-streaming-high-availability.md
+                - name: Kesinlikle bir kere olay işleme ile Apache Spark akış işleri oluşturma
+                  href: ./spark/apache-spark-streaming-exactly-once.md
+            - name: Apache Spark ve Machine Learning
+              items:
+                - name: Gıda denetimi sonuçlarını tahmin etme
+                  href: ./spark/apache-spark-machine-learning-mllib-ipython.md
+                - name: Web sitesi günlüklerini çözümleme
+                  href: ./spark/apache-spark-custom-library-website-log-analysis.md
+                - name: Derin öğrenme için Caffe kullanma
+                  href: ./spark/apache-spark-deep-learning-caffe.md
+                - name: Microsoft Bilişsel Araç Seti ile kullanma
+                  href: ./spark/apache-spark-microsoft-cognitive-toolkit.md
+                - name: Apache Spark makine öğrenimi işlem hattı oluşturma
+                  href: ./spark/apache-spark-creating-ml-pipelines.md
+            - name: Büyük verileri çözümleme
+              items:
+                - name: Apache HBase verilerini okuyup yazmak için Apache Spark kullanma
+                  href: ./hdinsight-using-spark-query-hbase.md
+                - name: Application Insights telemetri günlüklerini çözümleme
+                  href: ./spark/apache-spark-analyze-application-insight-logs.md
+        - name: Yönetme
+          items:
+            - name: Küme kaynaklarını yönetme
+              href: ./spark/apache-spark-resource-manager.md
+            - name: Genişletilmiş Geçmiş Sunucusu kullanarak Apache Spark uygulamalarını yönetme
+              href: ./spark/apache-azure-spark-history-server.md
+            - name: GÇ Önbellek ile önbelleğe almayı etkinleştirme
+              href: ./spark/apache-spark-improve-performance-iocache.md
+            - name: Not defterlerini Apache Spark ile kullanma
+              items:
+                - name: Yerel Jupyter not defterini kullanma
+                  href: ./spark/apache-spark-jupyter-notebook-install-locally.md
+                - name: Jupyter not defteri çekirdekleri
+                  href: ./spark/apache-spark-jupyter-notebook-kernels.md
+                - name: Jupyter’de cell magic komutları aracılığıyla dış paketleri kullanma
+                  href: ./spark/apache-spark-jupyter-notebook-use-external-packages.md
+                - name: Jupyter’de betik eylemleri aracılığıyla dış paketleri kullanma
+                  href: ./spark/apache-spark-python-package-installation.md
+                - name: Apache Zeppelin not defterlerini kullanma
+                  href: ./spark/apache-spark-zeppelin-notebook.md
+            - name: Diğer Azure hizmetleri ile kullanma
+              items:
+                - name: Data Lake Storage ile kullanma
+                  href: ./spark/apache-spark-use-with-data-lake-store.md
+                - name: Azure SQL Veritabanı'na bağlanma
+                  href: ./spark/apache-spark-connect-to-sql-database.md
+                - name: Apache Spark ve Cosmos DB kullanarak lambda mimarisi uygulama
+                  href: ../cosmos-db/lambda-architecture.md
+                - name: AutoML ile Azure ML iş yüklerini çalıştırma
+                  href: ./spark/apache-spark-run-machine-learning-automl.md
+        - name: Sorun giderme
+          items:
+            - name: OutOfMemoryError özel durumu
+              href: ./spark/apache-spark-troubleshoot-outofmemory.md
+            - name: Apache Spark iş başarısızlıkları - NoClassDefFoundError
+              href: ./spark/apache-spark-troubleshoot-job-fails-noclassdeffounderror.md
+            - name: Apache Spark iş başarısızlıkları - InvalidClassException
+              href: ./spark/apache-spark-troubleshoot-job-fails-invalidclassexception.md
+            - name: Yavaş Apache Spark işleri - listStatus
+              href: ./spark/apache-spark-troubleshoot-job-slowness-liststatus.md
+            - name: Yavaş Apache Spark işleri - depolama kapsayıcısı
+              href: ./spark/apache-spark-troubleshoot-job-slowness-container.md
+            - name: IllegalArgumentException özel durumu
+              href: ./spark/apache-spark-troubleshoot-illegalargumentexception.md
+            - name: Apache Spark Akış uygulaması duraklıyor
+              href: ./spark/apache-spark-troubleshoot-application-stops.md
+            - name: RpcTimeoutException özel durumu
+              href: ./spark/apache-spark-troubleshoot-rpctimeoutexception.md
+            - name: Çıkış Noktaları Arası API’sini engelleme
+              href: ./spark/apache-spark-troubleshoot-blocking-cross-origin.md
+            - name: Kryo serileştirme işlemi başarısız oldu
+              href: ./spark/apache-spark-troubleshoot-sparkexception-kryo-serialization-failed.md
+            - name: Apache Spark olay günlüğü - RequestBodyTooLarge
+              href: ./spark/apache-spark-troubleshoot-event-log-requestbodytoolarge.md
+            - name: Apache Spark işlerinde hata ayıklama
+              href: ./spark/apache-spark-job-debugging.md
+            - name: Apache Spark işlerinde hata ayıklamak için IntelliJ kullanma
+              href: ./spark/apache-spark-intellij-tool-debug-remotely-through-ssh.md
+            - name: Apache Spark sorunlarını giderme
+              href: ./spark/apache-troubleshoot-spark.md
+            - name: Bilinen sorunlar
+              href: ./spark/apache-spark-known-issues.md
+- name: Apache Hadoop
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight’ta Apache Hadoop nedir?
+          href: ./hadoop/apache-hadoop-introduction.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Apache Hadoop kümesi oluşturma - Portal
+          href: ./hadoop/apache-hadoop-linux-create-cluster-get-started-portal.md
+        - name: Apache Hadoop kümesi oluşturma - Şablon
+          displayName: 'resource manager template, arm template, resource manager group'
+          href: ./hadoop/apache-hadoop-linux-tutorial-get-started.md
+    - name: Öğreticiler
+      items:
+        - name: İsteğe bağlı kümeler oluşturma
+          href: ./hdinsight-hadoop-create-linux-clusters-adf.md
+        - name: Apache Hadoop işlerini gönderme
+          href: ./hadoop/submit-apache-hadoop-jobs-programmatically.md
+    - name: Nasıl yapılır
+      items:
+        - name: Araçları kullanma
+          items:
+            - name: Apache Hadoop korumalı alanını kullanma
+              href: ./hadoop/apache-hadoop-emulator-get-started.md
+        - name: Geliştirme
+          items:
+            - name: Apache Hadoop ile MapReduce kullanma
+              items:
+                - name: MapReduce’a genel bakış
+                  href: ./hadoop/hdinsight-use-mapreduce.md
+                - name: SSH kullanma
+                  href: ./hadoop/apache-hadoop-use-mapreduce-ssh.md
+                - name: cURL kullanma
+                  href: ./hadoop/apache-hadoop-use-mapreduce-curl.md
+                - name: Azure PowerShell kullanma
+                  href: ./hadoop/apache-hadoop-use-mapreduce-powershell.md
+                - name: .NET için SDK’yı kullanma
+                  href: ./hadoop/apache-hadoop-use-mapreduce-dotnet-sdk.md
+                - name: MapReduce örneklerini çalıştırma
+                  href: ./hadoop/apache-hadoop-run-samples-linux.md
+                - name: Özel Apache Hadoop MapReduce programları çalıştırma
+                  href: ./hadoop/apache-hadoop-run-custom-programs.md
+                - name: 'C# ile MapReduce akış programları geliştirme'
+                  href: ./hadoop/apache-hadoop-dotnet-csharp-mapreduce-streaming.md
+                - name: Java MapReduce programları geliştirme
+                  href: ./hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md
+            - name: 'Apache Hive’ı ayıklama, dönüştürme ve yükleme (ETL) aracı olarak kullanma'
+              href: ./hadoop/apache-hadoop-using-apache-hive-as-an-etl-tool.md
+            - name: 'Ölçekli bir biçimde ayıklama, dönüştürme ve yükleme'
+              href: ./hadoop/apache-hadoop-etl-at-scale.md
+            - name: Etkileşimli olmayan kimlik doğrulaması ile çalıştırılan .NET HDInsight uygulamaları oluşturma
+              href: ./hdinsight-create-non-interactive-authentication-dotnet-applications.md
+            - name: Büyük verileri çözümleme
+              items:
+                - name: Power Query kullanarak çözümleme
+                  href: ./hadoop/apache-hadoop-connect-excel-power-query.md
+                - name: Power BI’ı Interactive Query’ye Bağlama
+                  href: ./interactive-query/apache-hadoop-connect-hive-power-bi-directquery.md
+                - name: Power BI’ı Apache Hadoop’a Bağlama
+                  href: ./hadoop/apache-hadoop-connect-hive-power-bi.md
+                - name: Excel'i Apache Hadoop’a Bağlama
+                  href: ./hadoop/apache-hadoop-connect-excel-hive-odbc-driver.md
+                - name: Apache Hive JDBC sürücüsü kullanarak bağlanma
+                  href: ./hadoop/apache-hadoop-connect-hive-jdbc-driver.md
+                - name: Depolanan tweetleri çözümleme
+                  href: ./hdinsight-analyze-twitter-data-linux.md
+                - name: Apache Mahout ile öneriler oluşturma
+                  href: ./hadoop/apache-hadoop-mahout-linux-mac.md
+                - name: HDInsight için gelişmiş analiz
+                  href: ./hadoop/apache-hadoop-deep-dive-advanced-analytics.md
+        - name: Yönetme
+          items:
+            - name: Boş kenar düğümlerini kullanma
+              href: ./hdinsight-apps-use-edge-node.md
+        - name: Sorun giderme
+          items:
+            - name: Genel sorunlar
+              href: ./hdinsight-troubleshoot-guide.md
+            - name: Küme oluşturma sorunları
+              href: ./hadoop/hdinsight-troubleshoot-cluster-creation-fails.md
+            - name: Diskte yer yok
+              href: ./hadoop/hdinsight-troubleshoot-out-disk-space.md
+            - name: Yazılım kilitlemesi - CPU
+              href: ./hadoop/hdinsight-troubleshoot-soft-lockup-cpu.md
+            - name: InvalidNetworkConfigurationErrorCode - küme oluşturulamıyor
+              href: ./hadoop/troubleshoot-invalidnetworkconfigurationerrorcode-cluster-creation-fails.md
+            - name: InvalidNetworkSecurityGroupSecurityRules - küme oluşturulamıyor
+              href: ./hadoop/hdinsight-troubleshoot-invalidnetworksecuritygroupsecurityrules-cluster-creation-fails.md
+            - name: HDInsight kümesinde oturum açılamıyor
+              href: ./hadoop/hdinsight-troubleshoot-unable-log-in-cluster.md
+            - name: HDInsight kümesine düğümler eklenemiyor
+              href: ./hadoop/hdinsight-troubleshoot-unable-add-nodes.md
+            - name: Hizmet sorumlusu sertifikasını dönüştürme
+              href: ./hadoop/hdinsight-troubleshoot-converting-service-principal-certificate.md
+            - name: Yerel HDFS güvenli modda takılıyor
+              href: ./hadoop/hdinsight-hdfs-troubleshoot-safe-mode.md
+            - name: Apache Ambari sinyal sorunları
+              href: ./hadoop/apache-ambari-troubleshoot-heartbeat-issues.md
+            - name: Apache Ambari kullanıcı arabirimi 502 hatası
+              href: ./hadoop/apache-ambari-troubleshoot-fivezerotwo-error.md
+            - name: Apache Ambari ana bilgisayarları ve hizmetleri yavaşlatıyor
+              href: ./hadoop/apache-ambari-troubleshoot-down-hosts-services.md
+            - name: Yavaş ya da başarısız olan bir HDInsight kümesinde sorun giderme
+              href: ./hdinsight-troubleshoot-failed-cluster.md
+            - name: Apache Hadoop HDFS sorunlarını giderme
+              href: ./hdinsight-troubleshoot-hdfs.md
+            - name: Apache Hadoop YARN sorunlarını giderme
+              href: ./hdinsight-troubleshoot-yarn.md
+            - name: Apache Hadoop günlüklerini analiz etme
+              href: ./hadoop/apache-hadoop-debug-jobs.md
+            - name: Data Lake Store dosyalarında sorun giderme
+              href: ./hadoop/hdinsight-troubleshoot-data-lake-files.md
 - name: Apache Kafka
-  href: ./kafka/apache-kafka-get-started.md
-- name: Apache Storm
-  href: ./storm/apache-storm-quickstart.md
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight’ta Apache Kafka nedir?
+          href: ./kafka/apache-kafka-introduction.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Apache Kafka kümesi oluşturma - Portal
+          href: ./kafka/apache-kafka-get-started.md
+        - name: Apache Kafka kümesi oluşturma - PowerShell
+          href: ./kafka/apache-kafka-quickstart-powershell.md
+        - name: Apache Kafka kümesi oluşturma - Şablon
+          displayName: 'resource manager template, arm template, resource manager group'
+          href: ./kafka/apache-kafka-quickstart-resource-manager-template.md
+    - name: Öğreticiler
+      items:
+        - name: Apache Kafka Üretici ve Tüketici API’sini kullanma
+          href: ./kafka/apache-kafka-producer-consumer-api.md
+        - name: Apache Kafka Streams API'si ile uygulama geliştirme
+          href: ./kafka/apache-kafka-streams-api.md
+        - name: Apache Spark yapılandırılmış akışını kullanma
+          href: ./hdinsight-apache-kafka-spark-structured-streaming.md
+    - name: Kavramlar
+      items:
+        - name: Depolama ve ölçeklenebilirlik
+          href: ./kafka/apache-kafka-scalability.md
+        - name: Veriler için yüksek kullanılabilirlik
+          href: ./kafka/apache-kafka-high-availability.md
+        - name: Performans ayarlama
+          href: ./kafka/apache-kafka-performance-tuning.md
+        - name: Kafka hakkında SSS
+          href: ./kafka/kafka-faq.md
+    - name: Nasıl yapılır
+      items:
+        - name: Geliştirme
+          items:
+            - name: Otomatik konu oluşturmayı etkinleştirme
+              href: ./kafka/apache-kafka-auto-create-topics.md
+            - name: IoT Hub ile Apache Kafka kullanma
+              href: ./kafka/apache-kafka-connector-iot-hub.md
+            - name: Akış işlem hatları oluşturma
+              items:
+                - name: 'Apache Spark, Apache Kafka ve Azure Cosmos DB'
+                  href: ./apache-kafka-spark-structured-streaming-cosmosdb.md
+                - name: Apache Kafka ve Apache Spark (DStream)
+                  href: ./hdinsight-apache-spark-with-kafka.md
+                - name: Azure Container Service ile Apache Kafka kullanma
+                  href: ./kafka/apache-kafka-azure-container-services.md
+        - name: Yönetme
+          items:
+            - name: Sanal ağda Apache Kafka kullanma
+              href: ./kafka/apache-kafka-connect-vpn-gateway.md
+            - name: Apache Kafka verilerini çoğaltma
+              href: ./kafka/apache-kafka-mirroring.md
+            - name: Apache Kafka günlüklerini çözümleme
+              href: ./kafka/apache-kafka-log-analytics-operations-management.md
+            - name: Kendi anahtarınızı getirin
+              href: ./kafka/apache-kafka-byok.md
+            - name: SSL Şifreleme ve Kimlik Doğrulaması
+              href: ./kafka/apache-kafka-ssl-encryption-authentication.md
+        - name: Sorun giderme
+          items:
+            - name: Yetersiz hata etki alanları
+              href: ./kafka/kafka-troubleshoot-insufficient-domains.md
+- name: Apache HBase
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight’ta Apache HBase nedir?
+          href: ./hbase/apache-hbase-overview.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Apache HBase’i sorgulama - Apache Phoenix
+          href: ./hbase/apache-hbase-query-with-phoenix.md
+        - name: Apache HBase’i Sorgulama - HBase Kabuğu
+          href: ./hbase/query-hbase-with-hbase-shell.md
+    - name: Öğreticiler
+      items:
+        - name: HDInsight’ta Apache HBase kullanma
+          href: ./hbase/apache-hbase-tutorial-get-started-linux.md
+    - name: Nasıl yapılır
+      items:
+        - name: Geliştirme
+          items:
+            - name: .NET için Apache HBase SDK’yı kullanma
+              href: ./hbase/apache-hbase-rest-sdk.md
+            - name: Java uygulamaları geliştirme
+              href: ./hbase/apache-hbase-build-java-maven-linux.md
+            - name: Apache Zeppelin ile Apache Phoenix
+              href: ./hbase/apache-hbase-phoenix-zeppelin.md
+            - name: HDInsight üzerinde Apache Phoenix
+              href: ./hdinsight-phoenix-in-hdinsight.md
+            - name: Apache Phoenix Sorgu Sunucusu REST SDK'sını kullanma
+              href: ./hbase/apache-hbase-using-phoenix-query-server-rest-sdk.md
+            - name: Psql kullanarak Apache Phoenix’e toplu veri yükleme
+              href: ./hbase/apache-hbase-phoenix-psql.md
+        - name: Yönetme
+          items:
+            - name: Hızlandırılmış Yazma İşlemleri
+              href: ./hbase/apache-hbase-accelerated-writes.md
+            - name: Azure VNet’te Apache HBase kümesi çoğaltma
+              href: ./hbase/apache-hbase-replication.md
+            - name: Apache HBase ve Apache Phoenix için yedekleme ve çoğaltmayı ayarlama
+              href: ./hbase/apache-hbase-backup-replication.md
+            - name: Apache HBase kümesini daha yeni bir sürüme geçirme
+              href: ./hbase/apache-hbase-migrate-new-version.md
+            - name: Apache Phoenix performansı için en iyi yöntemler
+              href: ./hbase/apache-hbase-phoenix-performance.md
+            - name: Azure VNet’te Apache HBase kümesi oluşturma
+              href: ./hbase/apache-hbase-provision-vnet.md
+        - name: Sorun giderme
+          items:
+            - name: Apache HBase performans sorunlarını giderme
+              href: ./hbase/troubleshoot-hbase-performance-issues.md
+            - name: hbase hbck tutarsızlıklar döndürüyor
+              href: ./hbase/hbase-troubleshoot-hbase-hbck-inconsistencies.md
+            - name: Bağlantı sıfırlandıktan sonra depolama özel durumu
+              href: ./hbase/hbase-troubleshoot-storage-exception-reset.md
+            - name: Apache Phoenix görünümlerinde veri yok
+              href: ./hbase/hbase-troubleshoot-phoenix-no-data.md
+            - name: BindException - Adres kullanımda
+              href: ./hbase/hbase-troubleshoot-bindexception-address-use.md
+            - name: Apache HBase başlatılamıyor
+              href: ./hbase/hbase-troubleshoot-start-fails.md
+            - name: Bölge sunucularıyla ilgili sorunlar
+              href: ./hbase/hbase-troubleshoot-unassigned-regions.md
+            - name: Apache Phoenix bağlantı sorunları
+              href: ./hbase/hbase-troubleshoot-phoenix-connectivity.md
+            - name: Apache HBase REST yanıt vermiyor
+              href: ./hbase/hbase-troubleshoot-rest-not-spending.md
+            - name: Bölge sunucusu üzerinde ilişkilendirilmiş CPU
+              href: ./hbase/hbase-troubleshoot-pegged-cpu-region-server.md
+            - name: '''hbase hbck'' komutuyla zaman aşımları'
+              href: ./hbase/hbase-troubleshoot-timeouts-hbase-hbck.md
+            - name: Apache HBase sorunlarını giderme
+              href: ./hbase/apache-troubleshoot-hbase.md
+- name: Interactive Query
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight’ta Interactive Query nedir?
+          href: ./interactive-query/apache-interactive-query-get-started.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Apache Hive sorguları yürütme - Apache Zeppelin
+          href: ./interactive-query/hdinsight-connect-hive-zeppelin.md
+    - name: Öğreticiler
+      items:
+        - name: Interactive Query ile verileri çözümleme
+          href: ./interactive-query/interactive-query-tutorial-analyze-flight-data.md
+    - name: Nasıl yapılır
+      items:
+        - name: Geliştirme
+          items:
+            - name: JSON belgelerini işleme ve çözümleme
+              href: ./hadoop/using-json-in-hive.md
+            - name: 'Kullanıcı tanımlı C# işlevlerini kullanma'
+              href: ./hadoop/apache-hadoop-hive-pig-udf-dotnet-csharp.md
+            - name: Apache Hive ve Apache Pig ile Python kullanma
+              href: ./hadoop/python-udf-hdinsight.md
+            - name: Apache Spark ile Apache Hive
+              href: ./interactive-query/apache-hive-warehouse-connector.md
+            - name: Hadoop ile Apache Hive
+              href: ./hadoop/hdinsight-use-hive.md
+            - name: Apache Hive Görünümünü kullanma
+              href: ./hadoop/apache-hadoop-use-hive-ambari-view.md
+            - name: Apache Hive Beeline’ı kullanma
+              href: ./hadoop/apache-hadoop-use-hive-beeline.md
+            - name: Grafana kullanma
+              href: ./interactive-query/hdinsight-grafana.md
+            - name: REST API’yi kullanma
+              href: ./hadoop/apache-hadoop-use-hive-curl.md
+            - name: Azure PowerShell kullanma
+              href: ./hadoop/apache-hadoop-use-hive-powershell.md
+            - name: .NET için SDK’yı kullanma
+              href: ./hadoop/apache-hadoop-use-hive-dotnet-sdk.md
+            - name: Visual Studio için HDInsight araçlarını kullanma
+              href: ./hadoop/apache-hadoop-use-hive-visual-studio.md
+            - name: Apache Hive ile Java UDF kullanma
+              href: ./hadoop/apache-hadoop-hive-java-udf.md
+            - name: PowerShell ve ODBC ile Hive’ı sorgulama
+              href: ./interactive-query/apache-hive-query-odbc-driver-powershell.md
+        - name: Yönetme
+          items:
+            - name: Hive iş yüklerini HDInsight 4.0 sürümüne geçirme
+              href: ./interactive-query/apache-hive-migrate-workloads.md
+            - name: Apache Hive sorgularını iyileştirme
+              href: ./hdinsight-hadoop-optimize-hive-query.md
+        - name: Sorun giderme
+          items:
+            - name: Apache Hive ayarları ile Yetersiz Bellek hatalarını düzeltme
+              href: ./hdinsight-hadoop-hive-out-of-memory-error-oom.md
+            - name: Apache Tez uygulaması yanıt vermiyor
+              href: ./interactive-query/interactive-query-troubleshoot-tez-hangs.md
+            - name: Apache Hive LLAP sorgu performansı
+              href: ./interactive-query/interactive-query-troubleshoot-query-performance.md
+            - name: Azaltıcı yavaş çalışıyor
+              href: ./interactive-query/interactive-query-troubleshoot-slow-reducer.md
+            - name: Apache Hive Görünümünde zaman aşımı
+              href: ./interactive-query/interactive-query-troubleshoot-view-time-out.md
+            - name: Tablo oluşturma izin hatası
+              href: ./interactive-query/interactive-query-troubleshoot-permission-error-create-table.md
+            - name: GC ek yük sınırı aşıldı
+              href: ./interactive-query/interactive-query-troubleshoot-outofmemory-overhead-exceeded.md
+            - name: Apache Ambari Tez Görünümü yavaş yükleniyor
+              href: ./interactive-query/interactive-query-troubleshoot-tez-view-slow.md
+            - name: Apache Hive Görünümünde hata iletisi gösterilmiyor
+              href: ./interactive-query/interactive-query-troubleshoot-error-message-hive-view.md
+            - name: Apache Hive Görünümüne erişilemiyor
+              href: ./interactive-query/interactive-query-troubleshoot-inaccessible-hive-view.md
+            - name: ZooKeeperHiveClientException - HiveServer2 yapılandırmaları
+              href: ./interactive-query/interactive-query-troubleshoot-zookeeperhiveclientexception-hiveserver-configs.md
+            - name: Apache HIVE sorunlarını giderme
+              href: ./hdinsight-troubleshoot-hive.md
 - name: ML Services
-  href: ./r-server/machine-learning-services-quickstart-job-rstudio.md
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight'ta ML Services nedir?
+          href: ./r-server/r-server-overview.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: Örnek iş - RStudio Server
+          href: ./r-server/machine-learning-services-quickstart-job-rstudio.md
+        - name: Örnek iş - R konsolu
+          href: ./r-server/machine-learning-services-quickstart-job-rconsole.md
+    - name: Öğreticiler
+      items:
+        - name: HDInsight’ta Spark içinde R işlem bağlamı
+          href: ./r-server/ml-services-tutorial-spark-compute.md
+        - name: Visual Studio için R araçlarını kullanma
+          href: ./r-server/r-server-submit-jobs-r-tools-vs.md
+    - name: Nasıl yapılır
+      items:
+        - name: Geliştirme
+          items:
+            - name: İşlem bağlamı
+              href: ./r-server/r-server-compute-contexts.md
+            - name: ScaleR ve SparkR
+              href: ./hdinsight-hadoop-r-scaler-sparkr.md
+        - name: Yönetme
+          items:
+            - name: ML Services kümesini yönetme
+              href: ./r-server/r-server-hdinsight-manage.md
+            - name: ML Services kümesini kullanıma hazır hale getirme
+              href: ./r-server/r-server-operationalize.md
+            - name: Depolama seçenekleri
+              href: ./r-server/r-server-storage.md
+- name: Apache Storm
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight'ta Apache Storm nedir?
+          href: ./storm/apache-storm-overview.md
+    - name: Hızlı Başlangıçlar
+      items:
+        - name: HDInsight’ta Apache Storm topolojisi oluşturma
+          href: ./storm/apache-storm-quickstart.md
+    - name: Öğreticiler
+      items:
+        - name: Depolamaya yazmak için Apache Storm kullanma
+          href: ./storm/apache-storm-write-data-lake-store.md
+    - name: Nasıl yapılır
+      items:
+        - name: Geliştirme
+          items:
+            - name: Topolojiler
+              items:
+                - name: Java kullanarak topoloji geliştirme
+                  href: ./storm/apache-storm-develop-java-topology.md
+                - name: Python kullanarak topolojileri geliştirme
+                  href: ./storm/apache-storm-develop-python-topology.md
+                - name: 'C# kullanarak topoloji geliştirme'
+                  href: ./storm/apache-storm-develop-csharp-visual-studio-topology.md
+                - name: SCP.NET programlama kılavuzu
+                  href: ./storm/apache-storm-scp-programming-guide.md
+                - name: Apache Storm örnekleri
+                  href: ./storm/apache-storm-example-topology.md
+            - name: Akış işlem hatları
+              items:
+                - name: Apache Kafka ve Apache Storm (Java)
+                  href: ./hdinsight-apache-storm-with-kafka.md
+                - name: 'Event Hubs, Depolama ve Data Lake Storage (Java)'
+                  href: 'https://azure.microsoft.com/resources/samples/hdinsight-java-storm-eventhub/'
+                - name: 'Event Hubs ve Apache Storm (C# ve Java)'
+                  href: ./storm/apache-storm-develop-csharp-event-hub-topology.md
+        - name: Yönetme
+          items:
+            - name: Topolojileri izleme
+              href: ./storm/apache-storm-deploy-monitor-topology-linux.md
+        - name: Sorun giderme
+          items:
+            - name: Apache STORM sorunlarını giderme
+              href: ./storm/apache-troubleshoot-storm.md
 - name: Kurumsal kullanıma hazır olma
-  href: ./domain-joined/apache-domain-joined-run-hbase.md
+  items:
+    - name: Genel Bakış
+      items:
+        - name: HDInsight’ta kurumsal güvenlik nedir?
+          href: ./domain-joined/hdinsight-security-overview.md
+    - name: Öğreticiler
+      items:
+        - name: Giden trafiği kısıtlamak için güvenlik duvarı kullanma
+          href: ./hdinsight-restrict-outbound-traffic.md
+        - name: Apache Ranger ile Apache HBase RBAC
+          href: ./domain-joined/apache-domain-joined-run-hbase.md
+        - name: Apache Ranger ile Apache Hive RBAC
+          href: ./domain-joined/apache-domain-joined-run-hive.md
+        - name: Apache Ranger ile Apache Kafka RBAC
+          href: ./domain-joined/apache-domain-joined-run-kafka.md
+        - name: ESP kümelerinde Apache Oozie kullanma
+          href: ./domain-joined/hdinsight-use-oozie-domain-joined-clusters.md
+    - name: Kavramlar
+      items:
+        - name: ESP kümeleri için planlama
+          href: ./domain-joined/apache-domain-joined-architecture.md
+        - name: HDInsight sanal ağ mimarisi
+          href: ./hdinsight-virtual-network-architecture.md
+        - name: HDInsight için sanal ağ planlama
+          href: ./hdinsight-plan-virtual-network-deployment.md
+        - name: NSG ve UDR’ler için gereken IP adresleri
+          href: ./hdinsight-management-ip-addresses.md
+        - name: Azure güvenlik duvarına yönelik hizmet etiketleri
+          href: ./hdinsight-service-tags.md
+    - name: Nasıl yapılır
+      items:
+        - name: ESP kümeleri oluşturma ve şirket içi ile eşitleme
+          href: ./domain-joined/apache-domain-joined-create-configure-enterprise-security-cluster.md
+        - name: HDInsight için sanal ağ oluşturma
+          href: ./hdinsight-create-virtual-network.md
+        - name: HDInsight’a şirket içi ağınızla bağlanma
+          href: ./connect-on-premises-network.md
+        - name: HDInsight’ta kurumsal güvenliği yapılandırma
+          href: ./domain-joined/apache-domain-joined-configure.md
+        - name: Azure AD DS kullanarak ESP kümelerini yapılandırma
+          href: ./domain-joined/apache-domain-joined-configure-using-azure-adds.md
+        - name: Azure AD kullanıcılarını HDInsight kümesine eşitleme
+          href: ./hdinsight-sync-aad-users-to-cluster.md
+        - name: Kurumsal güvenlik ile kümeleri yönetme
+          href: ./domain-joined/apache-domain-joined-manage.md
+        - name: Verilerin güvenliğini sağlama
+          href: ./hdinsight-hadoop-create-linux-clusters-with-secure-transfer-storage.md
+        - name: Sorun giderme
+          items:
+            - name: ESP Kimlik doğrulaması sorunları
+              href: ./domain-joined/domain-joined-authentication-issues.md
+            - name: ESP ile Zeppelin’de oturum açılamıyor
+              href: ./domain-joined/domain-joined-zeppelin-signin.md

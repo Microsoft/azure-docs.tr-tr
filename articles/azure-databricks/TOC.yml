@@ -17,6 +17,8 @@
   items:
     - name: Docker kapsayıcısında çalışan SQL Server’ı sorgulama
       href: vnet-injection-sql-server.md
+    - name: Azure Key Vault kullanarak depolama alanına erişme
+      href: store-secrets-azure-key-vault.md
     - name: Cosmos DB hizmet uç noktasını kullanma
       href: service-endpoint-cosmosdb.md
     - name: ETL işlemleri gerçekleştirme
@@ -25,49 +27,1692 @@
       href: databricks-stream-from-eventhubs.md
     - name: Bilişsel Hizmetler kullanarak yaklaşım analizi
       href: databricks-sentiment-analysis-cognitive-services.md
-    - name: HDInsight Kafka’dan veri akışı sağlama
-      href: 'https://docs.azuredatabricks.net/spark/latest/structured-streaming/kafka.html'
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Spark kümesi oluşturma
-      href: 'https://docs.azuredatabricks.net/user-guide/clusters/index.html'
-    - name: Not defterleri ile çalışma
-      href: 'https://docs.azuredatabricks.net/user-guide/notebooks/index.html'
-    - name: Spark işleri çalıştırma
-      href: 'https://docs.azuredatabricks.net/user-guide/jobs.html'
-    - name: Veri kaynaklarına bağlanma
-      href: databricks-connect-to-data-sources.md
-    - name: Sanal ağ eklemeyi kullanma
-      href: vnet-injection.md
-    - name: Azure Data Factory ile kullanma
-      href: ../data-factory/transform-data-using-databricks-notebook.md
+    - name: Başlarken
+      items:
+        - name: Azure Databricks’i deneyin
+          href: /azure/databricks/getting-started/try-databricks
+          maintainContext: true
+        - name: Azure Databricks ile çalışmaya başlama
+          href: /azure/databricks/getting-started/quick-start
+          maintainContext: true
+        - name: Verilere genel bakış
+          href: /azure/databricks/getting-started/data
+          maintainContext: true
+        - name: Azure Databricks kavramları
+          href: /azure/databricks/getting-started/concepts
+          maintainContext: true
+        - name: Azure Databricks veri kümeleri
+          href: /azure/databricks/getting-started/databricks-datasets
+          maintainContext: true
+        - name: Apache Spark
+          items:
+            - name: Apache Spark'a genel bakış
+              href: /azure/databricks/getting-started/spark/index
+              maintainContext: true
+            - name: Apache Spark ile çalışmaya başlama
+              href: /azure/databricks/getting-started/spark/quick-start
+              maintainContext: true
+            - name: Veri çerçeveleri
+              href: /azure/databricks/getting-started/spark/dataframes
+              maintainContext: true
+            - name: Veri kümeleri
+              href: /azure/databricks/getting-started/spark/datasets
+              maintainContext: true
+            - name: Makine öğrenimi
+              href: /azure/databricks/getting-started/spark/machine-learning
+              maintainContext: true
+            - name: Yapılandırılmış akış
+              href: /azure/databricks/getting-started/spark/streaming
+              maintainContext: true
+            - name: Sırada ne var?
+              href: /azure/databricks/getting-started/spark/next
+              maintainContext: true
+        - name: Eğitim ve SSS
+          href: /azure/databricks/getting-started/training-faq
+          maintainContext: true
+        - name: Desteklenen tarayıcılar
+          href: /azure/databricks/getting-started/supported-browsers
+          maintainContext: true
+    - name: Databricks çalışma zamanları
+      items:
+        - name: Çalışma zamanına genel bakış
+          href: /azure/databricks/runtime/index
+          maintainContext: true
+        - name: Databricks Çalışma Zamanı
+          href: /azure/databricks/runtime/dbr
+          maintainContext: true
+        - name: Conda ile Databricks Runtime
+          href: /azure/databricks/runtime/conda
+          maintainContext: true
+        - name: Machine Learning için Databricks Runtime
+          href: /azure/databricks/runtime/mlruntime
+          maintainContext: true
+        - name: Genomiks için Databricks Runtime
+          href: /azure/databricks/runtime/genomicsruntime
+          maintainContext: true
+        - name: Databricks Light
+          href: /azure/databricks/runtime/light
+          maintainContext: true
+    - name: Çalışma alanı
+      items:
+        - name: Azure Databricks çalışma alanını inceleme
+          href: /azure/databricks/workspace/index
+          maintainContext: true
+        - name: Çalışma alanı varlıkları
+          href: /azure/databricks/workspace/workspace-assets
+          maintainContext: true
+        - name: Çalışma alanı nesneleriyle çalışma
+          href: /azure/databricks/workspace/workspace-objects
+          maintainContext: true
+        - name: 'Çalışma alanı, küme, not defteri ve iş tanımlayıcılarını alma'
+          href: /azure/databricks/workspace/workspace-details
+          maintainContext: true
+    - name: Kümeler
+      items:
+        - name: Kümelere genel bakış
+          href: /azure/databricks/clusters/index
+          maintainContext: true
+        - name: Küme oluşturma
+          href: /azure/databricks/clusters/create
+          maintainContext: true
+        - name: Kümeleri yönetme
+          href: /azure/databricks/clusters/clusters-manage
+          maintainContext: true
+        - name: Kümeleri yapılandırma
+          href: /azure/databricks/clusters/configure
+          maintainContext: true
+        - name: Küme düğümlerini başlatma
+          href: /azure/databricks/clusters/init-scripts
+          maintainContext: true
+        - name: Özel kapsayıcılar
+          href: /azure/databricks/clusters/custom-containers
+          maintainContext: true
+        - name: GPU etkinleştirilmiş kümeler
+          href: /azure/databricks/clusters/gpu
+          maintainContext: true
+        - name: Havuzlar
+          items:
+            - name: Havuzlara genel bakış
+              href: /azure/databricks/clusters/instance-pools/index
+              maintainContext: true
+            - name: Havuzları görüntüleme
+              href: /azure/databricks/clusters/instance-pools/display
+              maintainContext: true
+            - name: Havuz oluşturma
+              href: /azure/databricks/clusters/instance-pools/create
+              maintainContext: true
+            - name: Havuz yapılandırma
+              href: /azure/databricks/clusters/instance-pools/configure
+              maintainContext: true
+            - name: Havuzu düzenleme
+              href: /azure/databricks/clusters/instance-pools/edit
+              maintainContext: true
+            - name: Havuzu silme
+              href: /azure/databricks/clusters/instance-pools/delete
+              maintainContext: true
+            - name: Havuzu kullanma
+              href: /azure/databricks/clusters/instance-pools/cluster-instance-pool
+              maintainContext: true
+    - name: Notebooks
+      items:
+        - name: Not defterlerine genel bakış
+          href: /azure/databricks/notebooks/index
+          maintainContext: true
+        - name: Not defterlerini yönetme
+          href: /azure/databricks/notebooks/notebooks-manage
+          maintainContext: true
+        - name: Not defterlerini kullanma
+          href: /azure/databricks/notebooks/notebooks-use
+          maintainContext: true
+        - name: Sürüm denetimi
+          items:
+            - name: Azure DevOps ile sürüm denetimi
+              href: /azure/databricks/notebooks/azure-devops-services-version-control
+              maintainContext: true
+            - name: Bitbucket Cloud ile sürüm denetimi
+              href: /azure/databricks/notebooks/bitbucket-cloud-version-control
+              maintainContext: true
+            - name: GitHub ile sürüm denetimi
+              href: /azure/databricks/notebooks/github-version-control
+              maintainContext: true
+        - name: Görsel öğeler
+          items:
+            - name: Verileri görselleştirme
+              href: /azure/databricks/notebooks/visualizations/index
+              maintainContext: true
+            - name: Kullanım dışı bırakılmış çizgi grafiklerini geçirme
+              href: /azure/databricks/notebooks/visualizations/migrate-charts
+              maintainContext: true
+            - name: Python'da görselleştirmeye derinlemesine bakış
+              href: /azure/databricks/notebooks/visualizations/charts-and-graphs-python
+              maintainContext: true
+            - name: Scala'da görselleştirmeye derinlemesine bakış
+              href: /azure/databricks/notebooks/visualizations/charts-and-graphs-scala
+              maintainContext: true
+            - name: 'Not defterlerinde HTML, D3 ve SVG'
+              href: /azure/databricks/notebooks/visualizations/html-d3-and-svg
+              maintainContext: true
+            - name: Python not defterlerinde bokeh
+              href: /azure/databricks/notebooks/visualizations/bokeh
+              maintainContext: true
+            - name: Python not defterlerinde matplotlib ve ggplot
+              href: /azure/databricks/notebooks/visualizations/matplotlib-and-ggplot
+              maintainContext: true
+            - name: R not defterlerinde htmlwidgets
+              href: /azure/databricks/notebooks/visualizations/htmlwidgets
+              maintainContext: true
+            - name: Python ve R not defterlerinde Plotly
+              href: /azure/databricks/notebooks/visualizations/plotly
+              maintainContext: true
+        - name: Panolar
+          href: /azure/databricks/notebooks/dashboards
+          maintainContext: true
+        - name: Pencere öğeleri
+          href: /azure/databricks/notebooks/widgets
+          maintainContext: true
+        - name: Not defteri iş akışları
+          href: /azure/databricks/notebooks/notebook-workflows
+          maintainContext: true
+        - name: Paket hücreleri
+          href: /azure/databricks/notebooks/package-cells
+          maintainContext: true
+    - name: İşler
+      href: /azure/databricks/jobs
       maintainContext: true
-    - name: 'Excel, R ve Python ile bağlanma'
-      href: connect-databricks-excel-python-r.md
-    - name: Azure Cloud Shell’den Databricks CLI kullanma
-      href: databricks-cli-from-azure-cloud-shell.md
-    - name: BI araçları kullanma
-      href: 'https://docs.azuredatabricks.net/user-guide/bi/index.html'
-    - name: Olağanüstü durum kurtarma planlama
-      href: howto-regional-disaster-recovery.md
-    - name: MLflow Kılavuzu
-      href: 'https://docs.azuredatabricks.net/applications/mlflow/index.html'
+    - name: Kitaplıklar
+      href: /azure/databricks/libraries
+      maintainContext: true
+    - name: Veriler
+      items:
+        - name: Databricks Dosya Sistemi
+          href: /azure/databricks/data/databricks-file-system
+          maintainContext: true
+        - name: Veritabanları ve tablolar
+          href: /azure/databricks/data/tables
+          maintainContext: true
+        - name: Meta veri depoları
+          items:
+            - name: Dış Hive meta veri deposu
+              href: /azure/databricks/data/metastores/external-hive-metastore
+              maintainContext: true
+        - name: Veri kaynakları
+          items:
+            - name: JDBC kullanan SQL veritabanları
+              href: /azure/databricks/data/data-sources/sql-databases
+              maintainContext: true
+            - name: Apache Spark bağlayıcısını kullanan Azure SQL Veritabanı
+              href: /azure/databricks/data/data-sources/sql-databases-azure
+              maintainContext: true
+            - name: Azure Blob depolama
+              href: /azure/databricks/data/data-sources/azure/azure-storage
+              maintainContext: true
+            - name: Azure Data Lake Storage Gen2
+              href: /azure/databricks/data/data-sources/azure/azure-datalake-gen2
+              maintainContext: true
+            - name: Azure Data Lake Storage
+              href: /azure/databricks/data/data-sources/azure/azure-datalake
+              maintainContext: true
+            - name: Azure Data Lake Storage geçişi
+              href: /azure/databricks/data/data-sources/azure/adls-passthrough
+              maintainContext: true
+            - name: Cosmos DB
+              href: /azure/databricks/data/data-sources/azure/cosmosdb-connector
+              maintainContext: true
+            - name: Azure SQL Veri Ambarı
+              href: /azure/databricks/data/data-sources/azure/sql-data-warehouse
+              maintainContext: true
+            - name: İkili dosyalar
+              href: /azure/databricks/data/data-sources/binary-file
+              maintainContext: true
+            - name: Cassandra
+              href: /azure/databricks/data/data-sources/cassandra
+              maintainContext: true
+            - name: Couchbase
+              href: /azure/databricks/data/data-sources/couchbase
+              maintainContext: true
+            - name: ElasticSearch
+              href: /azure/databricks/data/data-sources/elasticsearch
+              maintainContext: true
+            - name: Görüntüler
+              href: /azure/databricks/data/data-sources/image
+              maintainContext: true
+            - name: Hive tabloları
+              href: /azure/databricks/data/data-sources/hive-tables
+              maintainContext: true
+            - name: MLflow denemesi
+              href: /azure/databricks/data/data-sources/mlflow-experiment
+              maintainContext: true
+            - name: MongoDb
+              href: /azure/databricks/data/data-sources/mongodb
+              maintainContext: true
+            - name: Neo4j
+              href: /azure/databricks/data/data-sources/neo4j
+              maintainContext: true
+            - name: Avro dosyaları
+              href: /azure/databricks/data/data-sources/read-avro
+              maintainContext: true
+            - name: CSV dosyaları
+              href: /azure/databricks/data/data-sources/read-csv
+              maintainContext: true
+            - name: JSON dosyaları
+              href: /azure/databricks/data/data-sources/read-json
+              maintainContext: true
+            - name: LZO sıkıştırılmış dosyaları
+              href: /azure/databricks/data/data-sources/read-lzo
+              maintainContext: true
+            - name: Parquet dosyaları
+              href: /azure/databricks/data/data-sources/read-parquet
+              maintainContext: true
+            - name: Redis
+              href: /azure/databricks/data/data-sources/redis
+              maintainContext: true
+            - name: Riak Zaman Serisi
+              href: /azure/databricks/data/data-sources/riak-ts
+              maintainContext: true
+            - name: Snowflake
+              href: /azure/databricks/data/data-sources/snowflake
+              maintainContext: true
+            - name: ZIP dosyaları
+              href: /azure/databricks/data/data-sources/zip-files
+              maintainContext: true
+        - name: FileStore
+          href: /azure/databricks/data/filestore
+          maintainContext: true
+    - name: İş zekası araçları
+      items:
+        - name: BI araçlarına bağlanma
+          href: /azure/databricks/bi/jdbc-odbc-bi
+          maintainContext: true
+        - name: Tableau
+          href: /azure/databricks/bi/tableau
+          maintainContext: true
+        - name: Power BI
+          href: /azure/databricks/bi/power-bi
+          maintainContext: true
+        - name: Alteryx
+          href: /azure/databricks/bi/alteryx
+          maintainContext: true
+        - name: Looker
+          href: /azure/databricks/bi/looker
+          maintainContext: true
+        - name: SQL Workbench/J
+          href: /azure/databricks/bi/workbenchj
+          maintainContext: true
+    - name: Delta Lake
+      items:
+        - name: Delta Lake'e giriş
+          href: /azure/databricks/delta/delta-intro
+          maintainContext: true
+        - name: Delta Lake’i kullanmaya başlama
+          href: /azure/databricks/delta/quick-start
+          maintainContext: true
+        - name: Giriş not defterleri
+          href: /azure/databricks/delta/intro-notebooks
+          maintainContext: true
+        - name: Tablo toplu okumaları ve yazmaları
+          href: /azure/databricks/delta/delta-batch
+          maintainContext: true
+        - name: Tablo akışı okumaları ve yazmaları
+          href: /azure/databricks/delta/delta-streaming
+          maintainContext: true
+        - name: 'Tablo silme, güncelleştirme ve birleştirme'
+          href: /azure/databricks/delta/delta-update
+          maintainContext: true
+        - name: Tablo yardımcı programı komutları
+          href: /azure/databricks/delta/delta-utility
+          maintainContext: true
+        - name: Delta Lake API başvurusu
+          href: /azure/databricks/delta/delta-apidoc
+          maintainContext: true
+        - name: Eşzamanlılık denetimi
+          href: /azure/databricks/delta/concurrency-control
+          maintainContext: true
+        - name: İyileştirmeler
+          items:
+            - name: İyileştirmelere genel bakış
+              href: /azure/databricks/delta/optimizations/index
+              maintainContext: true
+            - name: Dosya yönetimiyle performansı iyileştirme
+              href: /azure/databricks/delta/optimizations/file-mgmt
+              maintainContext: true
+            - name: Otomatik iyileştirme
+              href: /azure/databricks/delta/optimizations/auto-optimize
+              maintainContext: true
+            - name: Önbellekle performansı iyileştirme
+              href: /azure/databricks/delta/optimizations/delta-cache
+              maintainContext: true
+            - name: Yalıtım düzeyleri
+              href: /azure/databricks/delta/optimizations/isolation-level
+              maintainContext: true
+            - name: MySQL tablolarını Delta Lake tablolarına çoğaltma
+              href: /azure/databricks/delta/optimizations/mysql-delta
+              maintainContext: true
+            - name: Birleştirme performansını iyileştirme
+              items:
+                - name: Birleştirme performansını iyileştirmeye genel bakış
+                  href: /azure/databricks/delta/join-performance/index
+                  maintainContext: true
+                - name: Aralık Birleştirme iyileştirmesi
+                  href: /azure/databricks/delta/join-performance/range-join
+                  maintainContext: true
+                - name: Eğim Birleştirme iyileştirmesi
+                  href: /azure/databricks/delta/join-performance/skew-join
+                  maintainContext: true
+            - name: İyileştirilmiş veri dönüştürme
+              items:
+                - name: İyileştirilmiş veri dönüştürmeye genel bakış
+                  href: /azure/databricks/delta/data-transformation/index
+                  maintainContext: true
+                - name: Daha yüksek sıralı işlevler
+                  href: /azure/databricks/delta/data-transformation/higher-order-lambda-functions
+                  maintainContext: true
+                - name: Karmaşık veri türlerini dönüştürme
+                  href: /azure/databricks/delta/data-transformation/complex-types
+                  maintainContext: true
+            - name: En iyi uygulamalar
+              href: /azure/databricks/delta/best-practices
+              maintainContext: true
+            - name: Tablo sürümü oluşturma
+              href: /azure/databricks/delta/optimizations/versioning
+              maintainContext: true
+            - name: İyileştirme örnekleri
+              href: /azure/databricks/delta/optimizations/optimization-examples
+              maintainContext: true
+        - name: Sık sorulan sorular
+          href: /azure/databricks/delta/delta-faq
+          maintainContext: true
+        - name: Ek Delta kaynakları
+          href: /azure/databricks/delta/delta-resources
+          maintainContext: true
+    - name: Veri çerçeveleri ve veri kümeleri
+      items:
+        - name: Veri Çerçeveleri ve Veri Kümelerine genel bakış
+          href: /azure/databricks/spark/latest/dataframes-datasets/index
+          maintainContext: true
+        - name: Python Veri Çerçevelerine giriş
+          href: /azure/databricks/spark/latest/dataframes-datasets/introduction-to-dataframes-python
+          maintainContext: true
+        - name: Scala Veri Çerçevelerine giriş
+          href: /azure/databricks/spark/latest/dataframes-datasets/introduction-to-dataframes-scala
+          maintainContext: true
+        - name: Veri Kümelerine giriş
+          href: /azure/databricks/spark/latest/dataframes-datasets/introduction-to-datasets
+          maintainContext: true
+        - name: Karmaşık ve iç içe veriler
+          href: /azure/databricks/spark/latest/dataframes-datasets/complex-nested-data
+          maintainContext: true
+        - name: Toplayıcılar
+          href: /azure/databricks/spark/latest/dataframes-datasets/aggregators
+          maintainContext: true
+    - name: Yapılandırılmış Akış
+      items:
+        - name: Structured Streaming’e genel bakış
+          href: /azure/databricks/spark/latest/structured-streaming/index
+          maintainContext: true
+        - name: Giriş not defterleri
+          href: /azure/databricks/spark/latest/structured-streaming/demo-notebooks
+          maintainContext: true
+        - name: Veri kaynaklarının ve havuzların akışını yapma
+          items:
+            - name: Kaynaklar ve havuzlara genel bakış
+              href: /azure/databricks/spark/latest/structured-streaming/data-sources
+              maintainContext: true
+            - name: Apache Kafka
+              href: /azure/databricks/spark/latest/structured-streaming/kafka
+              maintainContext: true
+            - name: Azure Event Hubs
+              href: /azure/databricks/spark/latest/structured-streaming/streaming-event-hubs
+              maintainContext: true
+            - name: Delta Lake tabloları
+              href: /azure/databricks/spark/latest/structured-streaming/delta
+              maintainContext: true
+            - name: Veri Akışlarıyla Avro akış verilerini okuma ve yazma
+              href: /azure/databricks/spark/latest/structured-streaming/avro-dataframe
+              maintainContext: true
+            - name: Rastgele veri havuzlarına yazma
+              href: /azure/databricks/spark/latest/structured-streaming/foreach
+              maintainContext: true
+            - name: Azure Kuyruk depolama ile iyileştirilmiş Azure Blob depolama
+              href: /azure/databricks/spark/latest/structured-streaming/aqs
+              maintainContext: true
+        - name: Üretimde Yapılandırılmış Akış
+          href: /azure/databricks/spark/latest/structured-streaming/production
+          maintainContext: true
+        - name: Akış örnekleri
+          href: /azure/databricks/spark/latest/structured-streaming/examples
+          maintainContext: true
+        - name: Spark Streaming (Eski)
+          items:
+            - name: Spark Streaming'e (Legacy) genel bakış
+              href: /azure/databricks/spark/latest/rdd-streaming/index
+              maintainContext: true
+            - name: Spark Streaming uygulamalarında hata ayıklama
+              href: /azure/databricks/spark/latest/rdd-streaming/debugging-streaming-applications
+              maintainContext: true
+            - name: Akış uygulaması geliştirme için en iyi yöntemler
+              href: /azure/databricks/spark/latest/rdd-streaming/developing-streaming-applications
+              maintainContext: true
+    - name: SQL
+      items:
+        - name: SQL'e genel bakış
+          href: /azure/databricks/spark/latest/spark-sql/index
+          maintainContext: true
+        - name: SQL dili el kitabı
+          items:
+            - name: Veritabanını Değiştirme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/alter-database
+              maintainContext: true
+            - name: Tabloyu veya Görünümü Değiştirme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/alter-table-or-view
+              maintainContext: true
+            - name: Tablo Bölümlerini Değiştirme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/alter-table-partitions
+              maintainContext: true
+            - name: Tabloyu Çözümleme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/analyze-table
+              maintainContext: true
+            - name: Önbellek
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/cache-dbio
+              maintainContext: true
+            - name: Önbellek Tablosu
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/cache-table
+              maintainContext: true
+            - name: Önbelleği Temizle
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/clear-cache
+              maintainContext: true
+            - name: Delta'ya Dönüştürme (Azure Databricks'te Delta Lake)
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/convert-to-delta
+              maintainContext: true
+            - name: Veritabanı Oluşturma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/create-database
+              maintainContext: true
+            - name: İşlev Oluşturma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/create-function
+              maintainContext: true
+            - name: Tablo Oluşturma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/create-table
+              maintainContext: true
+            - name: Görünüm Oluşturma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/create-view
+              maintainContext: true
+            - name: Silme (Azure Databricks'te Delta Lake)
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/delete-from
+              maintainContext: true
+            - name: Veritabanını Açıklama
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/describe-database
+              maintainContext: true
+            - name: İşlevi Açıklama
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/describe-function
+              maintainContext: true
+            - name: Tabloyu Açıklama
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/describe-table
+              maintainContext: true
+            - name: Veritabanını Bırakma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/drop-database
+              maintainContext: true
+            - name: İşlevi Bırakma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/drop-function
+              maintainContext: true
+            - name: Tabloyu Bırakma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/drop-table
+              maintainContext: true
+            - name: Açıklama
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/explain
+              maintainContext: true
+            - name: Fsck Tabloyu Onarma (Azure Databricks'te Delta Lake
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/fsck
+              maintainContext: true
+            - name: İşlevler
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/functions
+              maintainContext: true
+            - name: Ekle
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/insert
+              maintainContext: true
+            - name: Veri Yükleme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/load-data
+              maintainContext: true
+            - name: Birleştirme (Azure Databricks'te Delta Lake
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/merge-into
+              maintainContext: true
+            - name: İyileştirme (Azure Databricks'te Delta Lake
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/optimize
+              maintainContext: true
+            - name: Tabloyu Yenileme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/refresh-table
+              maintainContext: true
+            - name: Sıfırla
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/reset
+              maintainContext: true
+            - name: 'Şunu seçin:'
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/select
+              maintainContext: true
+            - name: Ayarla
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/set
+              maintainContext: true
+            - name: Sütunları Gösterme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/show-columns
+              maintainContext: true
+            - name: Tablo Oluşturmayı Gösterme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/show-create-table
+              maintainContext: true
+            - name: Veritabanlarını Gösterme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/show-databases
+              maintainContext: true
+            - name: İşlevleri Gösterme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/show-functions
+              maintainContext: true
+            - name: Bölümleri Gösterme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/show-partitions
+              maintainContext: true
+            - name: Tablo Özelliklerini Gösterme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/show-table-properties
+              maintainContext: true
+            - name: Tabloları Gösterme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/show-tables
+              maintainContext: true
+            - name: Tabloları Kesme
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/truncate-table
+              maintainContext: true
+            - name: Tabloları Önbellekten Çıkarma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/uncache-table
+              maintainContext: true
+            - name: Güncelleştirme (Azure Databricks'te Delta Lake
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/update
+              maintainContext: true
+            - name: Veritabanını Kullanma
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/use-database
+              maintainContext: true
+            - name: Vakum
+              href: /azure/databricks/spark/latest/spark-sql/language-manual/vacuum
+              maintainContext: true
+        - name: Spark SQL örnekleri
+          items:
+            - name: Maliyet Tabanlı İyileştirici
+              href: /azure/databricks/spark/latest/spark-sql/cbo
+              maintainContext: true
+            - name: Veri Atlama Dizini
+              href: /azure/databricks/spark/latest/spark-sql/dataskipping-index
+              maintainContext: true
+            - name: DBIO ile Bulut Depolamasına İşlem Tabanlı Yazma
+              href: /azure/databricks/spark/latest/spark-sql/dbio-commit
+              maintainContext: true
+            - name: Hatalı kayıtları ve dosyaları işleme
+              href: /azure/databricks/spark/latest/spark-sql/handling-bad-records
+              maintainContext: true
+            - name: Yüksek Eşzamanlılık için Görev Önalımı
+              href: /azure/databricks/spark/latest/spark-sql/preemption
+              maintainContext: true
+            - name: Etkileşimli iş akışlarında Büyük Sorguları işleme
+              href: /azure/databricks/spark/latest/spark-sql/query-watchdog
+              maintainContext: true
+            - name: Spark ve Pandas Veri Çerçeveleri arasında dönüştürmeyi iyileştirme
+              href: /azure/databricks/spark/latest/spark-sql/spark-pandas
+              maintainContext: true
+            - name: Kullanıcı tanımlı toplama işlevler - Scala
+              href: /azure/databricks/spark/latest/spark-sql/udf-scala
+              maintainContext: true
+            - name: Kullanıcı tanımlı işlevler - Python
+              href: /azure/databricks/spark/latest/spark-sql/udf-python
+              maintainContext: true
+            - name: Pandas kullanıcı tanımlı işlevleri
+              href: /azure/databricks/spark/latest/spark-sql/udf-python-pandas
+              maintainContext: true
+            - name: Apache Hive Uyumluluğu
+              href: /azure/databricks/spark/latest/spark-sql/compatibility/hive
+              maintainContext: true
+    - name: R
+      items:
+        - name: R kılavuzu
+          href: /azure/databricks/spark/latest/sparkr/index
+          maintainContext: true
+        - name: SparkR'ye genel bakış
+          href: /azure/databricks/spark/latest/sparkr/overview
+          maintainContext: true
+        - name: SparkR ML öğreticileri
+          items:
+            - name: Mini r ML öğreticilerine genel bakış
+              href: /azure/databricks/spark/latest/sparkr/tutorials/index
+              maintainContext: true
+            - name: glm kullanma
+              href: /azure/databricks/spark/latest/sparkr/tutorials/using-glm
+              maintainContext: true
+        - name: SparkR işlev başvurusu
+          href: /azure/databricks/spark/latest/sparkr/sparkr
+          maintainContext: true
+        - name: SparkR 1.6
+          items:
+            - name: SparkR 1.6'ya genel bakış
+              href: /azure/databricks/spark/1.6/sparkr/overview
+              maintainContext: true
+            - name: SparkR 1.6 işlev başvurusu
+              href: /azure/databricks/spark/1.6/sparkr/functions/index
+              maintainContext: true
+        - name: sparklyr
+          href: /azure/databricks/spark/latest/sparkr/sparklyr
+          maintainContext: true
+        - name: Azure Databricks üzerinde RStudio
+          href: /azure/databricks/spark/latest/sparkr/rstudio
+          maintainContext: true
+    - name: Makine öğrenimi
+      items:
+        - name: Makine öğrenmesine genel bakış
+          href: /azure/databricks/applications/machine-learning/index
+          maintainContext: true
+        - name: Apache Spark MLlib
+          items:
+            - name: İkili sınıflandırma örneği
+              href: /azure/databricks/applications/machine-learning/mllib/binary-classification-mllib-pipelines
+              maintainContext: true
+            - name: Karar ağaçları örneği
+              href: /azure/databricks/applications/machine-learning/mllib/decision-trees
+              maintainContext: true
+            - name: MLlib işlem hatları ve Yapılandırılmış Akış
+              href: /azure/databricks/applications/machine-learning/mllib/mllib-pipelines-and-stuctured-streaming
+              maintainContext: true
+            - name: Gelişmiş MLlib örneği
+              href: /azure/databricks/applications/machine-learning/mllib/advanced-mllib
+              maintainContext: true
+        - name: AutoML
+          items:
+            - name: AutoML’ye genel bakış
+              href: /azure/databricks/applications/machine-learning/automl/index
+              maintainContext: true
+            - name: Hyperopt
+              items:
+                - name: Hyperopt'a genel bakış
+                  href: /azure/databricks/applications/machine-learning/automl/hyperopt/index
+                  maintainContext: true
+                - name: Dağıtılmış Hyperopt ve otomatikleştirilmiş MLflow akışı
+                  href: /azure/databricks/applications/machine-learning/automl/hyperopt/hyperopt-spark-mlflow-integration
+                  maintainContext: true
+                - name: HorovodRunner ile Hyperopt
+                  href: /azure/databricks/applications/machine-learning/automl/hyperopt/hyperopt-distributed-ml
+                  maintainContext: true
+                - name: Dağıtılmış Hyperopt kullanarak Model Araması
+                  href: /azure/databricks/applications/machine-learning/automl/hyperopt/hyperopt-model-selection
+                  maintainContext: true
+            - name: MLlib ve otomatik MLflow izleme
+              href: /azure/databricks/applications/machine-learning/automl/mllib-mlflow-integration
+              maintainContext: true
+        - name: ML modellerini içeri ve dışarı aktarma
+          items:
+            - name: İçeri ve dışarı aktarmaya genel bakış
+              href: /azure/databricks/applications/machine-learning/model-export-import/index
+              maintainContext: true
+            - name: MLeap ML modelini dışarı aktarma
+              href: /azure/databricks/applications/machine-learning/model-export-import/mleap-model-export
+              maintainContext: true
+        - name: Üçüncü taraf makine öğrenmesi tümleştirmesi
+          href: /azure/databricks/applications/machine-learning/third-party/index
+          maintainContext: true
+    - name: Derin öğrenme
+      items:
+        - name: Derin öğrenmeye genel bakış
+          href: /azure/databricks/applications/deep-learning/index
+          maintainContext: true
+        - name: Veri hazırlama
+          items:
+            - name: Veri hazırlamaya genel bakış
+              href: /azure/databricks/applications/deep-learning/data-prep/index
+              maintainContext: true
+            - name: Veri yükleme ve model denetim noktası için depolamayı hazırlama
+              href: /azure/databricks/applications/deep-learning/data-prep/ddl-storage
+              maintainContext: true
+            - name: Dağıtılmış eğitim için verileri hazırlama
+              href: /azure/databricks/applications/deep-learning/data-prep/ddl-data
+              maintainContext: true
+            - name: Petastorm kullanarak verileri yükleme
+              href: /azure/databricks//applications/deep-learning/data-prep/petastorm
+              maintainContext: true
+            - name: Veri Çerçevelerini ve Veri Kümelerini TFRecord dosyalarına kaydetme
+              href: /azure/databricks//applications/deep-learning/data-prep/dataset-to-tfrecords
+              maintainContext: true
+            - name: TensorFlow ile TFRecord dosyalarından verileri yükleme
+              href: /azure/databricks//applications/deep-learning/data-prep/tfrecords-to-tensorflow
+              maintainContext: true
+            - name: TensorFlow ile verileri TFRecord dosyalarına kaydetme
+              href: /azure/databricks//applications/deep-learning/data-prep/tensorflow-to-tfrecords
+              maintainContext: true
+        - name: Tek düğümlü eğitim
+          items:
+            - name: Tek düğümlü eğitime genel bakış
+              href: /azure/databricks/applications/deep-learning/single-node-training/index
+              maintainContext: true
+            - name: Derin Öğrenme İşlem Hatları
+              href: /azure/databricks/applications/deep-learning/single-node-training/deep-learning-pipelines
+              maintainContext: true
+            - name: TensorFlow
+              href: /azure/databricks/applications/deep-learning/single-node-training/tensorflow
+              maintainContext: true
+            - name: Keras
+              href: /azure/databricks/applications/deep-learning/single-node-training/keras
+              maintainContext: true
+            - name: PyTorch
+              href: /azure/databricks/applications/deep-learning/single-node-training/pytorch
+              maintainContext: true
+            - name: Dağıtılmış DL'ye tek düğümlü PyTorch
+              href: /azure/databricks/applications/deep-learning/distributed-training/mnist-pytorch
+              maintainContext: true
+            - name: Dağıtılmış DL'ye tek düğümlü Keras
+              href: /azure/databricks/applications/deep-learning/distributed-training/mnist-tensorflow-keras
+              maintainContext: true
+            - name: Dağıtılmış DL'ye tek düğümlü TensorFlow
+              href: /azure/databricks/applications/deep-learning/distributed-training/mnist-tensorflow
+              maintainContext: true
+        - name: Dağıtılmış eğitim
+          items:
+            - name: HorovodRunner
+              href: /azure/databricks/applications/deep-learning/distributed-training/horovod-runner
+              maintainContext: true
+            - name: HorovodEstimator
+              href: /azure/databricks/applications/deep-learning/distributed-training/horovod-estimator
+              maintainContext: true
+        - name: Model çıkarımı
+          items:
+            - name: Model çıkarımına genel bakış
+              href: /azure/databricks/applications/deep-learning/inference/index
+              maintainContext: true
+            - name: Model çıkarımı iş akışı
+              href: /azure/databricks/applications/deep-learning/inference/model-inference
+              maintainContext: true
+            - name: Model çıkarımı örnekleri
+              href: /azure/databricks/applications/deep-learning/inference/model-inference-examples
+              maintainContext: true
+            - name: Keras kullanarak model çıkarımı
+              href: /azure/databricks/applications/deep-learning/inference/resnet-model-inference-keras
+              maintainContext: true
+            - name: PyTorch kullanarak model çıkarımı
+              href: /azure/databricks/applications/deep-learning/inference/resnet-model-inference-pytorch
+              maintainContext: true
+            - name: TensorFlow kullanarak model çıkarımı
+              href: /azure/databricks/applications/deep-learning/inference/resnet-model-inference-tensorflow
+              maintainContext: true
+            - name: Model çıkarım performansını ayarlama
+              href: /azure/databricks/applications/deep-learning/inference/model-inference-performance
+              maintainContext: true
+    - name: MLflow
+      items:
+        - name: MLflow'a genel bakış
+          href: /azure/databricks/applications/mlflow/index
+          maintainContext: true
+        - name: Başlarken
+          items:
+            - name: MLflow'u kullanmaya başlama
+              href: /azure/databricks/applications/mlflow/quick-start
+              maintainContext: true
+            - name: MLflow Java ve Scala'yı kullanmaya başlama
+              href: /azure/databricks/applications/mlflow/  quick-start-java-scala
+              maintainContext: true
+            - name: MLflow Python'ı kullanmaya başlama
+              href: /azure/databricks/applications/mlflow/  quick-start-python
+              maintainContext: true
+            - name: MLflow R'yi kullanmaya başlama
+              href: /azure/databricks/applications/mlflow/quick-start-r
+              maintainContext: true
+        - name: Makine öğrenmesi eğitim çalıştırmalarını izleme
+          items:
+            - name: İzleme’ye genel bakış
+              href: /azure/databricks/applications/mlflow/tracking
+              maintainContext: true
+            - name: Bir scikit-learn modeli eğitime
+              href: /azure/databricks/applications/mlflow/tracking-ex-scikit
+              maintainContext: true
+            - name: PyTorch modelini eğitme
+              href: /azure/databricks/applications/mlflow/tracking-ex-pytorch
+              maintainContext: true
+            - name: PySpark modelini eğitme ve MLeap biçimlerinde kaydetme
+              href: /azure/databricks/applications/mlflow/tracking-ex-pyspark
+              maintainContext: true
+            - name: Delta Lake ile ML modeli eğitim verilerini izleme
+              href: /azure/databricks/applications/mlflow/tracking-ex-delta
+              maintainContext: true
+            - name: İzlemeye dışarıdan erişme
+              href: /azure/databricks/applications/mlflow/access-hosted-tracking-server
+              maintainContext: true
+        - name: 'Modelleri kaydetme, yükleme ve dağıtma'
+          items:
+            - name: 'Kaydetme, yükleme ve dağıtmaya genel bakış'
+              href: /azure/databricks/applications/mlflow/models
+              maintainContext: true
+            - name: MLflow modeli örnekleri
+              href: /azure/databricks/applications/mlflow/  model-examples
+              maintainContext: true
+        - name: MLflow projeleriyle çalıştırmaları yeniden oluşturma
+          href: /azure/databricks/applications/mlflow/projects
+          maintainContext: true
+    - name: Grafik analizi
+      items:
+        - name: Graf analizine genel bakış
+          href: /azure/databricks/spark/latest/graph-analysis/index
+          maintainContext: true
+        - name: GraphFrames
+          items:
+            - name: GraphFrames ile Graf Analizi öğreticisi
+              href: /azure/databricks/spark/latest/graph-analysis/graphframes/graph-analysis-tutorial
+              maintainContext: true
+            - name: GraphFrames - Python
+              href: /azure/databricks/spark/latest/graph-analysis/graphframes/user-guide-python
+              maintainContext: true
+            - name: GraphFrames - Scala
+              href: /azure/databricks/spark/latest/graph-analysis/graphframes/user-guide-scala
+              maintainContext: true
+        - name: GraphX ile Graf Analizi (Eski)
+          href: /azure/databricks/spark/latest/graph-analysis/graph-analysis-graphx-tutorial
+          maintainContext: true
+    - name: Genomiks
+      items:
+        - name: Genomiks’e genel bakış
+          href: /azure/databricks/applications/genomics/index
+          maintainContext: true
+        - name: İkincil analiz
+          items:
+            - name: İkincil analize genel bakış
+              href: /azure/databricks/applications/genomics/secondary/index
+              maintainContext: true
+            - name: DNASeq işlem hattı
+              href: /azure/databricks/applications/genomics/secondary/dnaseq-pipeline
+              maintainContext: true
+            - name: RNASeq işlem hattı
+              href: /azure/databricks/applications/genomics/secondary/rnaseq-pipeline
+              maintainContext: true
+            - name: Tumor/Normal işlem hattı
+              href: /azure/databricks/applications/genomics/secondary/tumor-normal-pipeline
+              maintainContext: true
+            - name: Pipe Transformer kullanılarak varyant ek açıklaması ekleme
+              href: /azure/databricks/applications/genomics/secondary/variant-annotation-pipe
+              maintainContext: true
+            - name: Değişken ek açıklama yöntemleri
+              href: /azure/databricks/applications/genomics/secondary/annotate-variants
+              maintainContext: true
+            - name: SnpEff işlem hattı
+              href: /azure/databricks/applications/genomics/secondary/snpeff-pipeline
+              maintainContext: true
+            - name: Vep işlem hattı
+              href: /azure/databricks/applications/genomics/secondary/vep-pipeline
+              maintainContext: true
+        - name: Üçüncül analiz
+          items:
+            - name: Üçüncül analize genel bakış
+              href: /azure/databricks/applications/genomics/tertiary/index
+              maintainContext: true
+            - name: Birleşik genetik tipleme işlem hattı
+              href: /azure/databricks/applications/genomics/tertiary/joint-genotyping-pipeline
+              maintainContext: true
+            - name: SAIGE
+              href: /azure/databricks/applications/genomics/tertiary/saige
+              maintainContext: true
+            - name: Hail 0.2
+              href: /azure/databricks/applications/genomics/tertiary/hail
+              maintainContext: true
+    - name: Geçiş
+      items:
+        - name: Üretim iş yüklerini geçirme
+          href: /azure/databricks/migration/production
+          maintainContext: true
+        - name: Tek düğümü geçirme
+          href: /azure/databricks/migration/single-node
+          maintainContext: true
+        - name: İş yüklerini Delta Lake'e geçirme
+          href: /azure/databricks/delta/porting
+          maintainContext: true
+    - name: Güvenlik ve gizlilik
+      items:
+        - name: Güvenliğe genel bakış
+          href: /azure/databricks/security/index
+          maintainContext: true
+        - name: Gizli Diziler
+          items:
+            - name: Gizli dizilerle verilerin güvenliğini koruma
+              href: /azure/databricks/security/secrets/index
+              maintainContext: true
+            - name: Gizli kapsamlar
+              href: /azure/databricks/security/secrets/secret-scopes
+              maintainContext: true
+            - name: Gizli Diziler
+              href: /azure/databricks/security/secrets/secrets
+              maintainContext: true
+            - name: Parola erişim denetimi
+              href: /azure/databricks/security/secrets/secret-acl
+              maintainContext: true
+            - name: Gizli dizi düzeltme
+              href: /azure/databricks/security/secrets/redaction
+              maintainContext: true
+            - name: Gizli dizi iş akışı örneği
+              href: /azure/databricks/security/secrets/example-secret-workflow
+              maintainContext: true
+    - name: Yönetim
+      items:
+        - name: Yönetime genel bakış
+          href: /azure/databricks/administration-guide/index
+          maintainContext: true
+        - name: Yönetici konsolu
+          href: /azure/databricks/administration-guide/admin-console
+          maintainContext: true
+        - name: Azure Databricks hesabınızı yönetme
+          items:
+            - name: Hesap yönetimine genel bakış
+              href: /azure/databricks/administration-guide/account-settings/index
+              maintainContext: true
+            - name: Aboneliğinizi Yönetme
+              href: /azure/databricks/administration-guide/account-settings/account
+              maintainContext: true
+            - name: Azure Databricks'te tanılama günlüğü
+              href: /azure/databricks/administration-guide/account-settings/azure-diagnostic-logs
+              maintainContext: true
+        - name: Kullanıcıları ve Grupları Yönetme
+          items:
+            - name: Kullanıcılar ve gruplara genel bakış
+              href: /azure/databricks/administration-guide/users-groups/index
+              maintainContext: true
+            - name: Kullanıcıları yönetme
+              href: /azure/databricks/administration-guide/users-groups/users
+              maintainContext: true
+            - name: Grupları yönetme
+              href: /azure/databricks/administration-guide/users-groups/groups
+              maintainContext: true
+            - name: Çoklu oturum açmayı ayarlama
+              href: /azure/databricks/administration-guide/users-groups/single-sign-on/index
+              maintainContext: true
+            - name: SCIM kullanarak kullanıcıları ve grupları sağlama
+              href: /azure/databricks/administration-guide/users-groups/scim/index
+              maintainContext: true
+            - name: AAD için SCIM sağlamayı yapılandırma
+              href: /azure/databricks/administration-guide/users-groups/scim/aad
+              maintainContext: true
+        - name: Erişim denetimini yönetme
+          items:
+            - name: Erişim denetimine genel bakış
+              href: /azure/databricks/administration-guide/access-control/index
+              maintainContext: true
+            - name: Kümeye erişim denetimi
+              href: /azure/databricks/administration-guide/access-control/cluster-acl
+              maintainContext: true
+            - name: Havuza erişim denetimi
+              href: /azure/databricks/administration-guide/access-control/pool-acl
+              maintainContext: true
+            - name: İşlere erişim denetimi
+              href: /azure/databricks/administration-guide/access-control/jobs-acl
+              maintainContext: true
+            - name: Tabloya erişim denetimi
+              items:
+                - name: Tabloya erişim denetimine genel bakış
+                  href: /azure/databricks/administration-guide/access-control/table-acls/index
+                  maintainContext: true
+                - name: Tabloya erişim denetimini etkinleştirme
+                  href: /azure/databricks/administration-guide/access-control/table-acls/table-acl
+                  maintainContext: true
+                - name: Veri Nesnesi İzinlerini Ayarlama
+                  href: /azure/databricks/administration-guide/access-control/table-acls/object-permissions
+                  maintainContext: true
+            - name: Çalışma alanına erişim denetimi
+              href: /azure/databricks/administration-guide/access-control/workspace-acl
+              maintainContext: true
+            - name: Belirteç tabanlı kimlik doğrulamasını etkinleştirme
+              href: /azure/databricks/administration-guide/access-control/tokens
+              maintainContext: true
+            - name: Koşullu erişim
+              href: /azure/databricks/administration-guide/access-control/conditional-access
+              maintainContext: true
+            - name: Azure Data Lake Storage kimlik bilgileri geçişini etkinleştirme
+              href: /azure/databricks/administration-guide/access-control/credential-passthrough
+              maintainContext: true
+        - name: Çalışma alanı depolamasını yönetme
+          href: /azure/databricks/administration-guide/workspace-storage/storage
+          maintainContext: true
+        - name: Sanal ağları yönetme
+          items:
+            - name: Sanal ağlara genel bakış
+              href: /azure/databricks/administration-guide/cloud-configurations/azure/index
+              maintainContext: true
+            - name: Sanal ağları eşleme
+              href: /azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering
+              maintainContext: true
+            - name: Önizleme çalışma alanınızı GK’ye yükseltme
+              href: /azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject-upgrade
+              maintainContext: true
+            - name: Sanal ağınızda Azure Databricks'i dağıtma
+              href: /azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject
+              maintainContext: true
+            - name: Çalışma alanını şirket içi ağına bağlama
+              href: /azure/databricks/administration-guide/cloud-configurations/azure/on-prem-network
+              maintainContext: true
+            - name: Kullanıcı tanımlı yol ayarları
+              href: /azure/databricks/administration-guide/cloud-configurations/azure/udr
+              maintainContext: true
+    - name: Sorun giderme
+      items:
+        - name: Sık sorulan sorular
+          href: /azure/databricks//azure/azure-databricks/frequently-asked-questions-databricks
+          maintainContext: true
+        - name: Yönetim
+          items:
+            - name: Azure'da çalışma alanını kim sildi
+              href: /azure/databricks/kb/administration/who-deleted-workspace
+              maintainContext: true
+        - name: İş zekası
+          items:
+            - name: JDBC ve ODBC bağlantıları
+              href: /azure/databricks/kb/bi/jdbc-odbc-troubleshooting
+              maintainContext: true
+        - name: Azure altyapısı
+          items:
+            - name: ADLS 1. Nesil hesabı bağlanamadı
+              href: /azure/databricks/kb/cloud/adls-gen1-mount-problem
+              maintainContext: true
+            - name: ADLException - Dosya için bilgileri alma hatası
+              href: /azure/databricks/kb/cloud/azure-vnet-gen1-issue
+              maintainContext: true
+            - name: Azure Güvenlik Duvarı kullanarak sanal ağ çalışma alanlarına tek bir genel IP atama
+              href: /azure/databricks/kb/cloud/azure-vnet-single-ip
+              maintainContext: true
+            - name: Kullanıcı arabirimi performans sorunlarını analiz etme
+              href: /azure/databricks/kb/cloud/har-log-analysis
+              maintainContext: true
+        - name: Kümeler
+          items:
+            - name: Kümedeki çekirdek sayısını hesaplama
+              href: /azure/databricks/kb/clusters/calculate-number-of-cores
+              maintainContext: true
+            - name: Küme başlatılamadı
+              href: /azure/databricks/kb/clusters/cluster-failed-launch
+              maintainContext: true
+            - name: Küme yöneticisi çekirdek örneği istek sınırı
+              href: /azure/databricks/kb/clusters/cluster-manager-limit
+              maintainContext: true
+            - name: Yönetici kullanıcı kümeyi yeniden başlatamıyor
+              href: /azure/databricks/kb/clusters/cluster-restart-fails-admin-user
+              maintainContext: true
+            - name: Yapılandırma ayarı varsayılan ayarların üzerine yazıyor
+              href: /azure/databricks/kb/clusters/conf-overwrites-default-settings
+              maintainContext: true
+            - name: Tek çekirdekli yürütücülerde JNI kitaplıklarını çalıştırma
+              href: /azure/databricks/kb/clusters/multiple-executors-single-worker
+              maintainContext: true
+            - name: log4j yapılandırmalarının üzerine yazma
+              href: /azure/databricks/kb/clusters/overwrite-log4j-logs
+              maintainContext: true
+            - name: Yürütücü günlük düzeyini ayarlama
+              href: /azure/databricks/kb/clusters/set-executor-log-level
+              maintainContext: true
+            - name: Beklenmeyen küme sonlandırma
+              href: /azure/databricks/kb/clusters/termination-reasons
+              maintainContext: true
+            - name: Apache Spark kullanıcı arabirimi toplam düğüm belleğinden daha azını gösteriyor
+              href: /azure/databricks/kb/clusters/spark-shows-less-memory
+              maintainContext: true
+        - name: Veri yönetimi
+          items:
+            - name: Veri çerçevesine ekleme
+              href: /azure/databricks/kb/data/append-a-row-to-rdd-or-dataframe
+              maintainContext: true
+            - name: Spark 2.0.0 kümesi verileri yavaş ekliyor
+              href: /azure/databricks/kb/data/append-slow-with-spark-2.0.0
+              maintainContext: true
+            - name: Gruplandırma ile performansı geliştirme
+              href: /azure/databricks/kb/data/bucketing
+              maintainContext: true
+            - name: Zincirleme dönüştürmeleri basitleştirme
+              href: /azure/databricks/kb/data/chained-transformations
+              maintainContext: true
+            - name: Tabloların farklı biçimlerde dökümünü alma
+              href: /azure/databricks/kb/data/dump-table
+              maintainContext: true
+            - name: Hive UDF'leri
+              href: /azure/databricks/kb/data/hive-udf
+              maintainContext: true
+            - name: Veri çerçevesi birleştirmelerinde çoğaltılmış sütunları önleme
+              href: /azure/databricks/kb/data/join-two-dataframes-duplicated-columns
+              maintainContext: true
+            - name: Dosyaları daha hızlı listeleme ve silme
+              href: /azure/databricks/kb/data/list-delete-files-faster
+              maintainContext: true
+            - name: Bozuk Parquet dosyalarını farklı bir şemayla işleme
+              href: /azure/databricks/kb/data/match-parquet-schema
+              maintainContext: true
+            - name: Bölümlenmiş sütunlarda null ve boş dizeler null olarak kaydedilir
+              href: /azure/databricks/kb/data/null-empty-strings
+              maintainContext: true
+            - name: randomSplit yönteminin davranışı
+              href: /azure/databricks/kb/data/random-split-behavior
+              maintainContext: true
+            - name: Case sınıfından şema oluşturma
+              href: /azure/databricks/kb/data/schema-from-case-class
+              maintainContext: true
+            - name: Veri Kümesi ve Veri Çerçevesi birleştirme komutlarında dengesiz ipuçlarını belirtme
+              href: /azure/databricks/kb/data/skew-hints-in-join
+              maintainContext: true
+            - name: İç içe sütunları güncelleştirme
+              href: /azure/databricks/kb/data/update-nested-column
+              maintainContext: true
+            - name: Bazı dosyalarda uyumsuz şema
+              href: /azure/databricks/kb/data/wrong-schema-in-files
+              maintainContext: true
+        - name: Veri kaynakları
+          items:
+            - name: Sparklyr ile ADLS 1. Nesil'den veri okuma hatası
+              href: /azure/databricks/kb/data-sources/access-adls1-from-sparklyr
+              maintainContext: true
+            - name: Blob Depolama bağlama ve erişim hataları
+              href: /azure/databricks/kb/data-sources/access-blob-fails-wasb
+              maintainContext: true
+            - name: ADLS 2. Nesil'e JDBC/ODBC erişimi
+              href: /azure/databricks/kb/data-sources/access-blobstore-odbc
+              maintainContext: true
+            - name: Güvenlik duvarıyla ADLS 1. Nesil'e erişilemedi
+              href: /azure/databricks/kb/data-sources/adls-gen1-firewall-access
+              maintainContext: true
+            - name: CosmosDB bağlayıcısı kitaplık çakışması
+              href: /azure/databricks/kb/data-sources/cosmosdb-connector-lib-conf
+              maintainContext: true
+            - name: JSON'da kodlama algılama hatası
+              href: /azure/databricks/kb/data-sources/json-unicode
+              maintainContext: true
+            - name: WASB’de dosya okunamıyor
+              href: /azure/databricks/kb/data-sources/wasb-check-blob-types
+              maintainContext: true
+        - name: DBFS
+          items:
+            - name: DBFS kökünde depolanan nesneler okunamıyor
+              href: /azure/databricks/kb/dbfs/dbfs-root-permissions
+              maintainContext: true
+        - name: Delta Lake
+          items:
+            - name: Delta Lake tablosunda sütunları doldurma veya güncelleştirme
+              href: /azure/databricks/kb/delta/backfill-delta-table-cols
+              maintainContext: true
+            - name: Otomatik ölçeklendirme kümesinde Delta Önbellek davranışı
+              href: /azure/databricks/kb/delta/delta-cache-autoscaling
+              maintainContext: true
+            - name: Bölüm ayıklama ile MERGE INTO performansını geliştirme
+              href: /azure/databricks/kb/delta/delta-merge-into
+              maintainContext: true
+            - name: Yazma işleri başarısız oluyor
+              href: /azure/databricks/kb/delta/delta-write-fails
+              maintainContext: true
+            - name: Yönetilen Delta Lake tablosunu bırakma
+              href: /azure/databricks/kb/delta/drop-delta-table
+              maintainContext: true
+            - name: UPDATE sorgusu IllegalStateException ile başarısız oluyor
+              href: /azure/databricks/kb/delta/update-query-fails
+              maintainContext: true
+        - name: Geliştirici araçları
+          items:
+            - name: Yaygın Azure Data Factory hataları
+              href: /azure/databricks/kb/dev-tools/common-errors-adf
+              maintainContext: true
+            - name: Airflow ile Geçersiz Erişim Belirteci
+              href: /azure/databricks/kb/dev-tools/invalid-access-token-airflow
+              maintainContext: true
+        - name: İş yürütme
+          items:
+            - name: Aşama başına görev sayısını artırma
+              href: /azure/databricks/kb/execution/increase-tasks-per-stage
+              maintainContext: true
+            - name: Maksimum yürütme bağlamı ve not defteri eki sınırları
+              href: /azure/databricks/kb/execution/maximum-execution-context
+              maintainContext: true
+            - name: Yürütücü günlük düzeyini ayarlama
+              href: /azure/databricks/kb/execution/set-executor-log-level
+              maintainContext: true
+            - name: Serileştirilmiş görev çok büyük
+              href: /azure/databricks/kb/execution/spark-serialized-task-is-too-large
+              maintainContext: true
+        - name: İşler
+          items:
+            - name: Etkin ve Kullanım Dışı işleri karşılaştırma
+              href: /azure/databricks/kb/jobs/active-vs-dead-jobs
+              maintainContext: true
+            - name: ADLS CREATE sınırları
+              href: /azure/databricks/kb/jobs/azure-throttling
+              maintainContext: true
+            - name: Sürücü geçici olarak kullanılamıyor
+              href: /azure/databricks/kb/jobs/driver-unavailable
+              maintainContext: true
+            - name: REST API'yi kullanarak tüm işleri silme
+              href: /azure/databricks/kb/jobs/howto-jobsdeleterestapi
+              maintainContext: true
+            - name: Kitaplık yüklü değil
+              href: /azure/databricks/kb/jobs/job-fails-no-library
+              maintainContext: true
+            - name: Yanıt vermeyen işleri düzeltme ve tanılamaları toplama
+              href: /azure/databricks/kb/jobs/job-hang-resolve-and-collect-diagnostics
+              maintainContext: true
+            - name: İş hızı sınırı
+              href: /azure/databricks/kb/jobs/job-rate-limit
+              maintainContext: true
+            - name: Üzerine yazma modunda tablo oluşturma kesintiye uğratıldığında başarısız oluyor
+              href: /azure/databricks/kb/jobs/spark-overwrite-cancel
+              maintainContext: true
+            - name: Özel UDF'den dolayı Spark işi yanıt vermemeye başlıyor
+              href: /azure/databricks/kb/jobs/spark-udf-performance
+              maintainContext: true
+            - name: İş MaxResultSize ile başarısız oldu
+              href: /azure/databricks/kb/jobs/job-fails-maxresultsize-exception
+              maintainContext: true
+            - name: Tek sefer etkili olmayı sağlama
+              href: /azure/databricks/kb/jobs/jobs-idempotency
+              maintainContext: true
+        - name: Kitaplıklar
+          items:
+            - name: Kullanıcı arabiriminden kitaplık kaldırılamıyor
+              href: /azure/databricks/kb/libraries/cant-uninstall-libraries
+              maintainContext: true
+            - name: Kümede pyodbc yüklenirken hata oluştu
+              href: /azure/databricks/kb/libraries/install-pyodbc-on-cluster
+              maintainContext: true
+            - name: Kitaplığın kullanılabilir olmaması iş hatası
+              href: /azure/databricks/kb/libraries/library-install-latency
+              maintainContext: true
+            - name: Maven kitaplığını güncelleştirme
+              href: /azure/databricks/kb/libraries/maven-library-version-mgmt
+              maintainContext: true
+        - name: Makine öğrenimi
+          items:
+            - name: Ağaç tabanlı SparkML işlem hattı modelleri için özellik bilgilerini ayıklama
+              href: /azure/databricks/kb/machine-learning/extract-feature-info
+              maintainContext: true
+            - name: SparkML model uygunluğu hatası
+              href: /azure/databricks/kb/machine-learning/fit-spark-model-error
+              maintainContext: true
+            - name: Grubu K kez çapraz doğrulama
+              href: /azure/databricks/kb/machine-learning/kfold-cross-validation
+              maintainContext: true
+            - name: Çapraz doğrulamayı hızlandırma
+              href: /azure/databricks/kb/machine-learning/speed-up-cross-validation
+              maintainContext: true
+        - name: Meta veri depoları
+          items:
+            - name: Dış meta veri deposuna içeri aktarmak için tablo DDL'leri oluşturma
+              href: /azure/databricks/kb/metastore/create-table-ddl-for-metastore
+              maintainContext: true
+            - name: Bozuk meta veriler içeren tabloları bırakma
+              href: /azure/databricks/kb/metastore/drop-table-corruptedmetadata
+              maintainContext: true
+            - name: Azure meta veri deposu tablo bırakma AnalysisException
+              href: /azure/databricks/kb/metastore/drop-table-exception-azure-metastore
+              maintainContext: true
+            - name: Yaygın Hive meta veri deposu sorunları
+              href: /azure/databricks/kb/metastore/hive-metastore-troubleshooting
+              maintainContext: true
+            - name: Tablo adlarını listeleme
+              href: /azure/databricks/kb/metastore/list-tables
+              maintainContext: true
+            - name: Eklenmiş Hive meta veri deposunu ayarlama
+              href: /azure/databricks/kb/metastore/set-up-embedded-metastore
+              maintainContext: true
+            - name: SQL Server'da Hive meta veri deposunu ayarlama
+              href: /azure/databricks/kb/metastore/set-up-sql-backed-hive-metastore
+              maintainContext: true
+        - name: Ölçümler
+          items:
+            - name: Spark dinleyicileriyle Spark ölçümlerini inceleme
+              href: /azure/databricks/kb/metrics/explore-spark-metrics
+              maintainContext: true
+            - name: Apache Spark ölçümlerini kullanma
+              href: /azure/databricks/kb/metrics/spark-metrics
+              maintainContext: true
+        - name: Notebooks
+          items:
+            - name: Spark özelliğinin değiştirilip değiştirilemeyeceğini denetleme
+              href: /azure/databricks/kb/notebooks/check-spark-property-modifiable
+              maintainContext: true
+            - name: Yaygın not defteri hataları
+              href: /azure/databricks/kb/notebooks/common-errors-in-notebooks
+              maintainContext: true
+            - name: Tam not defteri yolunu alma
+              href: /azure/databricks/kb/notebooks/get-notebook-path
+              maintainContext: true
+            - name: Dosya boyutu sınırlarından dolayı not defteri otomatik kaydetme başarısız oldu
+              href: /azure/databricks/kb/notebooks/notebook-autosave
+              maintainContext: true
+            - name: Akış hücresi iptal edildikten sonra not defteri çalıştırılamıyor
+              href: /azure/databricks/kb/notebooks/streaming-notebook-stuck
+              maintainContext: true
+            - name: İptal komutunda sorun giderme
+              href: /azure/databricks/kb/notebooks/troubleshoot-cancel-command
+              maintainContext: true
+        - name: Güvenlik ve izinler
+          items:
+            - name: Güvenlik özel durumuyla tablo oluşturma hatası
+              href: /azure/databricks/kb/security/table-create-security-exception
+              maintainContext: true
+        - name: Python
+          items:
+            - name: Anaconda ile küme oluşturma
+              href: /azure/databricks/kb/python/anaconda-environment
+              maintainContext: true
+            - name: Cython'u yükleme ve derleme
+              href: /azure/databricks/kb/python/cython
+              maintainContext: true
+            - name: Büyük DBFS'ye bağlı dosyaları okuma
+              href: /azure/databricks/kb/python/dbfs-file-size-limit
+              maintainContext: true
+            - name: Bokeh yüklendikten sonra komut başarısız oluyor
+              href: /azure/databricks/kb/python/python-cmd-fails-tornado-version
+              maintainContext: true
+            - name: Kitaplık çakışmasından dolayı komut iptal edildi
+              href: /azure/databricks/kb/python/python-command-cancelled
+              maintainContext: true
+            - name: Komut AttributeError ile başarısız oluyor
+              href: /azure/databricks/kb/python/python-exec-display-cancelled
+              maintainContext: true
+            - name: C++ kodu çalıştırma
+              href: /azure/databricks/kb/python/running-c-plus-plus-code
+              maintainContext: true
+            - name: SQL sorguları çalıştırma
+              href: /azure/databricks/kb/python/sql-in-python
+              maintainContext: true
+        - name: Spark ile R
+          items:
+            - name: R’nin sürümünü değiştirme
+              href: /azure/databricks/kb/r/change-r-version
+              maintainContext: true
+            - name: rJava ve RJDBC kitaplıklarını yükleme
+              href: /azure/databricks/kb/r/install-rjava-rjdbc-libraries
+              maintainContext: true
+            - name: Paket ve ad alanı yükleme hatasını düzeltme
+              href: /azure/databricks/kb/r/namespace-onload
+              maintainContext: true
+            - name: RStudio'da kodu kalıcı hale getirme ve paylaşma
+              href: /azure/databricks/kb/r/persist-share-code-rstudio
+              maintainContext: true
+            - name: R paketlerinin sürümünü düzeltme
+              href: /azure/databricks/kb/r/pin-r-packages
+              maintainContext: true
+            - name: Spraklyr içeren R Markdown dosyası işlenemedi
+              href: /azure/databricks/kb/r/rmarkdown-sparklyr-code
+              maintainContext: true
+            - name: R kodunu gapply ile paralelleştirme
+              href: /azure/databricks/kb/r/sparkr-gapply
+              maintainContext: true
+            - name: R kodunu spark.lapply ile paralelleştirme
+              href: /azure/databricks/kb/r/sparkr-lapply
+              maintainContext: true
+        - name: Spark
+          items:
+            - name: Scala'da C++ kodu çalıştırma
+              href: /azure/databricks/kb/scala/running-c-plus-plus-code-scala
+              maintainContext: true
+        - name: SQL
+          items:
+            - name: Tablo veya görünüm bulunamadı
+              href: /azure/databricks/kb/sql/global-temp-view-not-found
+              maintainContext: true
+        - name: Akış
+          items:
+            - name: Denetim noktası veya çıkış dizini değişikliğinden sonra kurtarma
+              href: /azure/databricks/kb/streaming/file-sink-streaming
+              maintainContext: true
+            - name: Yapılandırılmış Akış sorgusunu son yazılan farktan yeniden başlatma
+              href: /azure/databricks/kb/streaming/ss-read-from-last-offset
+              maintainContext: true
+        - name: Görsel öğeler
+          items:
+            - name: Plotly dosyalarını kaydetme ve DBFS'den görüntüleme
+              href: /azure/databricks/kb/visualizations/save-plotly-to-dbfs
+              maintainContext: true
+    - name: Geliştirici araçları
+      items:
+        - name: Databricks Connect
+          href: /azure/databricks/dev-tools/databricks-connect
+          maintainContext: true
+        - name: Veri işlem hatlarında bağımlılıkları yönetme
+          href: /azure/databricks/dev-tools/data-pipelines
+          maintainContext: true
 - name: Başvuru
   items:
-    - name: REST API
-      href: /rest/api/databricks
+    - name: Databricks REST API
+      items:
+        - name: REST API 2.0
+          items:
+            - name: API örnekleri
+              href: /azure/databricks/dev-tools/api/latest/examples
+              maintainContext: true
+            - name: Kimlik Doğrulaması
+              href: /azure/databricks/dev-tools/api/latest/authentication
+              maintainContext: true
+            - name: Kümeler
+              href: /azure/databricks/dev-tools/api/latest/clusters
+              maintainContext: true
+            - name: DBFS
+              href: /azure/databricks/dev-tools/api/latest/dbfs
+              maintainContext: true
+            - name: Gruplar
+              href: /azure/databricks/dev-tools/api/latest/groups
+              maintainContext: true
+            - name: Örnek Havuzları API'si
+              href: /azure/databricks/dev-tools/api/latest/instance-pools
+              maintainContext: true
+            - name: İşler
+              href: /azure/databricks/dev-tools/api/latest/jobs
+              maintainContext: true
+            - name: Kitaplıklar
+              href: /azure/databricks/dev-tools/api/latest/libraries
+              maintainContext: true
+            - name: MLflow
+              href: /azure/databricks/dev-tools/api/latest/mlflow
+              maintainContext: true
+            - name: SCIM
+              href: /azure/databricks/dev-tools/api/latest/scim
+              maintainContext: true
+            - name: Gizli Diziler
+              href: /azure/databricks/dev-tools/api/latest/secrets
+              maintainContext: true
+            - name: Belirteçler
+              href: /azure/databricks/dev-tools/api/latest/tokens
+              maintainContext: true
+            - name: Çalışma alanı
+              href: /azure/databricks/dev-tools/api/latest/workspace
+              maintainContext: true
+            - name: REST API çağrıları için çalışma zamanı sürümü dizesi
+              href: /azure/databricks/dev-tools/api/latest/runtime-version-string
+              maintainContext: true
+        - name: REST API 1.2
+          href: /azure/databricks/dev-tools/api/1.2/index
+          maintainContext: true
+    - name: Databricks Utilities
+      href: /azure/databricks/dev-tools/databricks-utils
+      maintainContext: true
+    - name: Databricks CLI
+      href: /azure/databricks/dev-tools/databricks-cli
+      maintainContext: true
+    - name: Stack CLI
+      href: /azure/databricks/dev-tools/stack
+      maintainContext: true
+    - name: Azure Databricks REST API
+      href: /azure/databricks//rest/api/databricks
     - name: Resource Manager şablonu
-      href: /azure/templates/microsoft.databricks/workspaces
+      href: /azure/databricks//azure/templates/microsoft.databricks/workspaces
 - name: Kaynaklar
   items:
-    - name: Sık sorulan sorular
-      href: frequently-asked-questions-databricks.md
     - name: Sürüm notları
-      href: 'https://docs.azuredatabricks.net/release-notes/index.html'
-    - name: Databricks belgeleri
-      href: 'https://docs.azuredatabricks.net/user-guide/index.html'
+      items:
+        - name: Platform
+          items:
+            - name: Platform sürüm notları
+              href: /azure/databricks/release-notes/product/index
+              maintainContext: true
+            - name: Kasım 2019
+              href: /azure/databricks/release-notes/product/2019/november
+              maintainContext: true
+            - name: Ekim 2019
+              href: /azure/databricks/release-notes/product/2019/october
+              maintainContext: true
+            - name: Eylül 2019
+              href: /azure/databricks/release-notes/product/2019/september
+              maintainContext: true
+            - name: Ağustos 2019
+              href: /azure/databricks/release-notes/product/2019/august
+              maintainContext: true
+            - name: Temmuz 2019
+              href: /azure/databricks/release-notes/product/2019/july
+              maintainContext: true
+            - name: Haziran 2019
+              href: /azure/databricks/release-notes/product/2019/june
+              maintainContext: true
+            - name: Mayıs 2019
+              href: /azure/databricks/release-notes/product/2019/may
+              maintainContext: true
+            - name: Nisan 2019
+              href: /azure/databricks/release-notes/product/2019/april
+              maintainContext: true
+            - name: Mart 2019
+              href: /azure/databricks/release-notes/product/2019/march
+              maintainContext: true
+            - name: Şubat 2019
+              href: /azure/databricks/release-notes/product/2019/february
+              maintainContext: true
+            - name: Ocak 2019
+              href: /azure/databricks/release-notes/product/2019/january
+              maintainContext: true
+            - name: Aralık 2018
+              href: /azure/databricks/release-notes/product/2018/december
+              maintainContext: true
+            - name: Kasım 2018
+              href: /azure/databricks/release-notes/product/2018/november
+              maintainContext: true
+            - name: Ekim 2018
+              href: /azure/databricks/release-notes/product/2018/october
+              maintainContext: true
+            - name: Eylül 2018
+              href: /azure/databricks/release-notes/product/2018/september
+              maintainContext: true
+            - name: Ağustos 2018
+              href: /azure/databricks/release-notes/product/2018/august
+              maintainContext: true
+            - name: Temmuz 2018
+              href: /azure/databricks/release-notes/product/2018/july
+              maintainContext: true
+            - name: Haziran 2018
+              href: /azure/databricks/release-notes/product/2018/june
+              maintainContext: true
+            - name: Mayıs 2018
+              href: /azure/databricks/release-notes/product/2018/may
+              maintainContext: true
+            - name: Nisan 2018
+              href: /azure/databricks/release-notes/product/2018/april
+              maintainContext: true
+            - name: Mart 2018
+              href: /azure/databricks/release-notes/product/2018/march
+              maintainContext: true
+            - name: Şubat 2018
+              href: /azure/databricks/release-notes/product/2018/february
+              maintainContext: true
+            - name: Ocak 2018
+              href: /azure/databricks/release-notes/product/2018/january
+              maintainContext: true
+        - name: Databricks Çalışma Zamanı
+          items:
+            - name: Destekleniyor
+              items:
+                - name: Desteklenen çalışma zamanı sürümleri
+                  href: /azure/databricks/release-notes/runtime/supported
+                  maintainContext: true
+                - name: Databricks Runtime 6.2
+                  href: /azure/databricks/release-notes/runtime/6.2
+                  maintainContext: true
+                - name: Databricks Runtime 6.2 ML
+                  href: /azure/databricks/release-notes/runtime/6.2ml
+                  maintainContext: true
+                - name: Databricks Runtime 6.1
+                  href: /azure/databricks/release-notes/runtime/6.1
+                  maintainContext: true
+                - name: Databricks Runtime 6.1 ML
+                  href: /azure/databricks/release-notes/runtime/6.1ml
+                  maintainContext: true
+                - name: Databricks Runtime 6.0
+                  href: /azure/databricks/release-notes/runtime/6.0
+                  maintainContext: true
+                - name: Conda ile Databricks Runtime 6.0
+                  href: /azure/databricks/release-notes/runtime/6.0conda
+                  maintainContext: true
+                - name: Databricks Runtime 6.0 ML
+                  href: /azure/databricks/release-notes/runtime/6.0ml
+                  maintainContext: true
+                - name: Databricks Runtime 5.5
+                  href: /azure/databricks/release-notes/runtime/5.5
+                  maintainContext: true
+                - name: Conda ile Databricks Runtime 5.5
+                  href: /azure/databricks/release-notes/runtime/5.5conda
+                  maintainContext: true
+                - name: Databricks Runtime 5.5 ML
+                  href: /azure/databricks/release-notes/runtime/5.5ml
+                  maintainContext: true
+                - name: Databricks Runtime 5.4
+                  href: /azure/databricks/release-notes/runtime/5.4
+                  maintainContext: true
+                - name: Conda ile Databricks Runtime 5.4
+                  href: /azure/databricks/release-notes/runtime/5.4conda
+                  maintainContext: true
+                - name: Databricks Runtime 5.4 ML
+                  href: /azure/databricks/release-notes/runtime/5.4ml
+                  maintainContext: true
+                - name: Databricks Runtime 5.3
+                  href: /azure/databricks/release-notes/runtime/5.3
+                  maintainContext: true
+                - name: Databricks Runtime 5.3 ML
+                  href: /azure/databricks/release-notes/runtime/5.3ml
+                  maintainContext: true
+                - name: Databricks Light 2.4
+                  href: /azure/databricks/release-notes/runtime/2.4light
+                  maintainContext: true
+                - name: Databricks Runtime 5.2
+                  href: /azure/databricks/release-notes/runtime/5.2
+                  maintainContext: true
+                - name: Databricks Runtime 5.2 ML
+                  href: /azure/databricks/release-notes/runtime/5.2ml
+                  maintainContext: true
+                - name: Databricks Runtime 3.5
+                  href: /azure/databricks/release-notes/runtime/3.5
+                  maintainContext: true
+            - name: Desteklenmeyen
+              items:
+                - name: Desteklenmeyen çalışma zamanı sürümleri
+                  href: /azure/databricks/release-notes/runtime/unsupported
+                  maintainContext: true
+                - name: Databricks Runtime 5.1
+                  href: /azure/databricks/release-notes/runtime/5.1
+                  maintainContext: true
+                - name: Databricks Runtime 5.1 ML
+                  href: /azure/databricks/release-notes/runtime/5.1ml
+                  maintainContext: true
+                - name: Databricks Runtime 5.0
+                  href: /azure/databricks/release-notes/runtime/5.0
+                  maintainContext: true
+                - name: Databricks Runtime 5.0 ML
+                  href: /azure/databricks/release-notes/runtime/5.0ml
+                  maintainContext: true
+                - name: Databricks Runtime 4.3
+                  href: /azure/databricks/release-notes/runtime/4.3
+                  maintainContext: true
+                - name: Databricks Runtime 4.2
+                  href: /azure/databricks/release-notes/runtime/4.2
+                  maintainContext: true
+                - name: Databricks Runtime 4.1
+                  href: /azure/databricks/release-notes/runtime/4.1
+                  maintainContext: true
+                - name: Databricks Runtime 4.1 ML
+                  href: /azure/databricks/release-notes/runtime/4.1ml
+                  maintainContext: true
+                - name: Databricks Runtime 4.0
+                  href: /azure/databricks/release-notes/runtime/4.0
+                  maintainContext: true
+                - name: Databricks Runtime 3.4
+                  href: /azure/databricks/release-notes/runtime/3.4
+                  maintainContext: true
+            - name: Bakım güncelleştirmeleri
+              href: /azure/databricks/release-notes/runtime/maintenance-updates
+              maintainContext: true
+            - name: Çalışma zamanı destek yaşam döngüsü
+              href: /azure/databricks/release-notes/runtime/databricks-runtime-ver
+              maintainContext: true
+        - name: Sürüm türleri
+          href: /azure/databricks/release-notes/release-types
+          maintainContext: true
     - name: R geliştirici kılavuzu
-      href: ../machine-learning/r-developers-guide.md
+      href: /azure/machine-learning/r-developers-guide
     - name: Azure Yol Haritası
       href: 'https://azure.microsoft.com/roadmap/?category=analytics'
     - name: Fiyatlandırma

@@ -1,42 +1,35 @@
 ---
 title: Visual Studio’yu kullanarak Azure’da ilk işlevinizi oluşturma
 description: Visual Studio kullanarak HTTP tarafından tetiklenen bir Azure İşlevi oluşturup yayımlayın.
-services: functions
-documentationcenter: na
 author: ggailey777
-manager: jeconnoc
+manager: gwallace
 keywords: azure işlevleri, işlevler, olay işleme, işlem, sunucusuz mimari
 ms.assetid: 82db1177-2295-4e39-bd42-763f6082e796
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: quickstart
-ms.date: 10/17/2018
+ms.date: 07/19/2019
 ms.author: glenga
 ms.custom: mvc, devcenter, vs-azure, 23113853-34f2-4f
-ms.openlocfilehash: 1c07da0121b8e350c55b139901d56cfe2133386d
-ms.sourcegitcommit: 4c2b9bc9cc704652cc77f33a870c4ec2d0579451
+ms.openlocfilehash: 1d798be3a0cde39de208105c4b3d4458fa5b124c
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2019
-ms.locfileid: "65864492"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72329502"
 ---
-# <a name="create-your-first-function-using-visual-studio"></a>Visual Studio kullanarak ilk işlevinizi oluşturma
+# <a name="create-your-first-function-using-visual-studio"></a>Visual Studio’yu kullanarak ilk işlevinizi oluşturma
 
 Azure İşlevleri, öncelikle bir VM oluşturmak veya bir web uygulaması yayımlamak zorunda kalmadan kodunuzu [sunucusuz](https://azure.microsoft.com/solutions/serverless/) bir ortamda yürütmenize olanak tanır.
 
-Bu makalede, yerel olarak oluşturup bir "Merhaba Dünya" işlevi test etmek için Azure işlevleri için Visual Studio 2019 araçlarını kullanmayı öğrenin. Ardından işlev kodunu Azure’da yayımlayacaksınız. Bu araçlar kullanılabilir Visual Studio 2019 Azure geliştirme iş yükünün parçası olarak.
+Bu makalede, "Hello World" işlevini yerel olarak oluşturmak ve test etmek ve sonra Azure 'Da yayımlamak için Visual Studio 2019 ' i nasıl kullanacağınızı öğreneceksiniz. Bu hızlı başlangıç, Visual Studio 2019 için tasarlanmıştır. Visual Studio 2017 kullanarak bir Işlevler projesi oluştururken, önce [en son Azure işlevleri araçlarını](functions-develop-vs.md#check-your-tools-version)yüklemeniz gerekir.
 
 ![Tarayıcıdaki işlev localhost yanıtı](./media/functions-create-your-first-function-visual-studio/functions-create-your-first-function-visual-studio-browser-local-final.png)
 
-Bu konuda bazı temel adımları anlatan [bir video](#watch-the-video) yer alır.
-
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticiyi tamamlamak için:
+Bu öğreticiyi tamamlayabilmeniz için öncelikle [Visual Studio 2019](https://azure.microsoft.com/downloads/)' i yüklemeniz gerekir. **Azure geliştirme** iş yükünün de yüklü olduğundan emin olun.
 
-* Yükleme [Visual Studio 2019](https://azure.microsoft.com/downloads/) olduğundan emin olun **Azure geliştirme** iş yükü de yüklenir.
-
-* [En son Azure İşlevleri araçlarınızın](functions-develop-vs.md#check-your-tools-version) olduğundan emin olun.
+![Azure geliştirme iş yüküyle Visual Studio 'Yu yükler](media/functions-create-your-first-function-visual-studio/functions-vs-workloads.png)
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
@@ -44,31 +37,23 @@ Bu öğreticiyi tamamlamak için:
 
 [!INCLUDE [Create a project using the Azure Functions template](../../includes/functions-vstools-create.md)]
 
-Visual Studio bir proje oluşturur ve bu projenin içinde seçili işlev türü için ortak kod içeren bir sınıf bulunur. Metottaki **FunctionName** özniteliği işlevin adını ayarlar. **HttpTrigger** özniteliği, işlevin bir HTTP isteği tarafından tetiklenip tetiklenmediğini belirtir. Ortak kod, istek gövdesi veya sorgu dizesinde yer alan bir değeri içeren bir HTTP yanıtı gönderir. Metoda uygun öznitelikleri uygulayarak, bir işleve giriş ve çıkış bağlamaları ekleyebilirsiniz. Daha fazla bilgi için, [Azure İşlevleri C# geliştirici başvurusu](functions-dotnet-class-library.md) konusunun [Tetikleyiciler ve bağlayıcılar](functions-dotnet-class-library.md#triggers-and-bindings) bölümüne göz atın.
+Visual Studio, HTTP tetikleyici işlev türü için ortak kod içeren bir proje ve sınıf oluşturur. Yöntemdeki `FunctionName` özniteliği, varsayılan olarak `HttpTrigger` olan işlevin adını ayarlar. @No__t-0 özniteliği, işlevin bir HTTP isteği tarafından tetiklendiğini belirtir. Ortak kod, istek gövdesi veya sorgu dizesinde yer alan bir değeri içeren bir HTTP yanıtı gönderir.
+
+Yöntemine uygun öznitelikleri uygulayarak giriş ve çıkış bağlamalarını kullanarak işlevinizin yeteneklerini genişletebilirsiniz. Daha fazla bilgi için, [Azure İşlevleri C# geliştirici başvurusu](functions-dotnet-class-library.md) konusunun [Tetikleyiciler ve bağlayıcılar](functions-dotnet-class-library.md#triggers-and-bindings) bölümüne göz atın.
 
 İşlev projenizi ve HTTP ile tetiklenen işlev oluşturduğunuza göre, artık bunu yerel bilgisayarınızda test edebilirsiniz.
 
-## <a name="test-the-function-locally"></a>İşlevi yerel olarak test etme
+## <a name="run-the-function-locally"></a>İşlevi yerel olarak çalıştırma
 
-Azure İşlevleri Temel Araçları, Azure İşlevleri projenizi yerel geliştirme bilgisayarınızda çalıştırmanıza olanak sağlar. Visual Studio'da ilk kez bir işlev başlattığınızda bu araçları yüklemeniz istenir.
+Visual Studio, tüm Işlevler çalışma zamanını kullanarak işlevlerinizi yerel olarak test edebilmeniz için Azure Functions Core Tools ile tümleşir.  
 
-1. İşlevinizi test etmek için F5’e basın. İstenirse Visual Studio'dan gelen Azure İşlevleri Temel (CLI) araçlarını indirme ve yükleme isteğini kabul edin. Aracın HTTP isteklerini işleyebilmesi için bir güvenlik duvarı özel durumu etkinleştirmeniz de gerekebilir.
-
-2. Azure İşlevleri çalışma zamanı çıktısından işlevinizin URL'sini kopyalayın.
-
-    ![Azure yerel çalışma zamanı](./media/functions-create-your-first-function-visual-studio/functions-create-your-first-function-visual-studio-debugging.png)
-
-3. HTTP isteğinin URL’sini tarayıcınızın adres çubuğuna yapıştırın. `?name=<YOUR_NAME>` sorgu dizesini bu URL’ye ekleyip isteği yürütün. İşlevin döndürdüğü yerel GET isteğine tarayıcıda verilen yanıt aşağıda gösterilmiştir: 
-
-    ![Tarayıcıdaki işlev localhost yanıtı](./media/functions-create-your-first-function-visual-studio/functions-create-your-first-function-visual-studio-browser-local.png)
-
-4. Hata ayıklamayı durdurmak için **Shift + F5** tuşuna basın.
+[!INCLUDE [functions-run-function-test-local-vs](../../includes/functions-run-function-test-local-vs.md)]
 
 İşlevin yerel bilgisayarınızda düzgün çalıştığını doğruladıktan sonra, projeyi Azure'da yayımlamanın zamanı gelmiştir.
 
 ## <a name="publish-the-project-to-azure"></a>Projeyi Azure'da yayımlama
 
-Projenizi yayımlayabilmeniz için önce Azure aboneliğinizde bir işlev uygulamanızın olması gerekir. Visual Studio'dan bir işlev uygulaması oluşturabilirsiniz.
+Projenizi yayımlayabilmeniz için önce Azure aboneliğinizde bir işlev uygulamanızın olması gerekir. Visual Studio yayımlama, projenizi ilk kez yayımladığınızda sizin için bir işlev uygulaması oluşturur.
 
 [!INCLUDE [Publish the project to Azure](../../includes/functions-vstools-publish.md)]
 
@@ -84,13 +69,9 @@ Projenizi yayımlayabilmeniz için önce Azure aboneliğinizde bir işlev uygula
 
     ![Tarayıcıdaki işlev yanıtı](./media/functions-create-your-first-function-visual-studio/functions-create-your-first-function-visual-studio-browser-azure.png)
 
-## <a name="watch-the-video"></a>Videoyu izleme
-
-> [!VIDEO https://www.youtube-nocookie.com/embed/DrhG-Rdm80k]
-
 ## <a name="next-steps"></a>Sonraki adımlar
 
-HTTP ile tetiklenen basit bir işlevi kullanarak C# işlev uygulaması oluşturup yayımlamak için Visual Studio’yu kullandınız.
+Azure 'da basit bir HTTP tetiklemeli işlevle bir C# işlev uygulaması oluşturmak ve yayımlamak Için Visual Studio 'yu kullandınız. .NET sınıf kitaplıkları olarak işlevleri geliştirme hakkında daha fazla bilgi için bkz. [Azure C# işlevleri geliştirici başvurusu](functions-dotnet-class-library.md).
 
-* [Diğer hizmetlerle tümleşen giriş ve çıkış bağlamalarının nasıl ekleneceğini öğrenin.](functions-develop-vs.md#add-bindings)
-* [.NET sınıfı kitaplıkları olarak işlev geliştirme hakkında daha fazla bilgi edinin](functions-dotnet-class-library.md).
+> [!div class="nextstepaction"]
+> [İşleviniz için bir Azure depolama kuyruğu bağlama ekleme](functions-add-output-binding-storage-queue-vs.md)

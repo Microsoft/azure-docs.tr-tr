@@ -1,49 +1,53 @@
 ---
-title: Windows sanal masaüstü Önizleme Yük Dengeleme yöntemi - Azure'ı yapılandırma
-description: Yük Dengeleme yöntemi için bir Windows sanal masaüstü ortamında yapılandırılır.
+title: Windows sanal masaüstü yük dengelemesini Yapılandırma-Azure
+description: Windows sanal masaüstü ortamı için yük dengeleme yöntemini yapılandırma.
 services: virtual-desktop
 author: Heidilohr
 ms.service: virtual-desktop
 ms.topic: conceptual
-ms.date: 03/21/2019
+ms.date: 08/29/2019
 ms.author: helohr
-ms.openlocfilehash: 0c4702dada17e759d89c33be99b3155f4b15ad9e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 61c11e342f3b4f906b453e0962018a8f8c34acd4
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60328893"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73605867"
 ---
-# <a name="configure-the-windows-virtual-desktop-preview-load-balancing-method"></a>Windows sanal masaüstü Önizleme yük dengeleme yöntemini yapılandırma
+# <a name="configure-the-windows-virtual-desktop-load-balancing-method"></a>Windows Sanal Masaüstü yük dengeleme yöntemini yapılandırma
 
-Bir konak havuz için Yük Dengeleme yöntemi yapılandırma gereksinimlerinize daha iyi uyacak şekilde Windows sanal masaüstü Önizleme ortamı ayarlamak sağlar.
+Bir konak havuzu için yük dengeleme yöntemini yapılandırmak, Windows sanal masaüstü ortamını gereksinimlerinize daha iyi uyacak şekilde ayarlamanıza olanak sağlar.
 
 >[!NOTE]
-> Kullanıcıların her zaman ana havuzdaki oturumu ana bilgisayarı 1:1 eşlemeye sahip olduğundan bu bir masaüstü kalıcı ana havuzuna geçerli değildir.
+> Bu, kullanıcıların konak havuzundaki bir oturum ana bilgisayarına her zaman bir 1:1 eşlemesi olduğundan, kalıcı bir masaüstü konak havuzu için geçerlidir.
 
-## <a name="configure-breadth-first-load-balancing"></a>Avantajlarına ilk yük dengelemeyi yapılandırma
+## <a name="configure-breadth-first-load-balancing"></a>Enine ilk yük dengelemeyi yapılandırma
 
-Avantajlarına ilk Yük Dengeleme yeni kalıcı olmayan konak havuzları için varsayılan yapılandırmasıdır. Yeni kullanıcı oturumları, avantajlarına ilk Yük Dengeleme konaklarda kullanılabilir oturum ana bilgisayarı havuzu arasında dağıtır. Avantajlarına ilk Yük Dengeleme yapılandırırken, konak havuzunda oturumu ana bilgisayarı başına maksimum oturum sınırı ayarlayabilir.
+Enine ilk yük dengeleme, yeni kalıcı olmayan konak havuzları için varsayılan yapılandırmadır. Enine ilk yük dengeleme, yeni kullanıcı oturumlarını konak havuzundaki kullanılabilir tüm oturum konaklarına dağıtır. Enine ilk yük dengelemeyi yapılandırırken, konak havuzundaki oturum ana bilgisayarı başına en fazla oturum sınırı ayarlayabilirsiniz.
 
-İlk olarak, [indirin ve Windows sanal masaüstü PowerShell modülünü içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview) henüz yapmadıysanız, PowerShell oturumunuzda kullanılacak.
+İlk olarak, henüz yapmadıysanız PowerShell oturumunuzda kullanmak üzere [Windows sanal masaüstü PowerShell modülünü indirip içeri aktarın](https://docs.microsoft.com/powershell/windows-virtual-desktop/overview) . Bundan sonra hesabınızda oturum açmak için aşağıdaki cmdlet 'i çalıştırın:
 
-Maksimum oturum sınırı ayarlama olmadan avantajlarına ilk yük dengelemeyi gerçekleştirmek için bir ana bilgisayar havuzunu yapılandırmak için aşağıdaki PowerShell cmdlet'ini çalıştırın:
+```powershell
+Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
+```
+
+Bir konak havuzunu, en fazla oturum sınırını ayarlamadan önce enine yük dengelemesi gerçekleştirecek şekilde yapılandırmak için aşağıdaki PowerShell cmdlet 'ini çalıştırın:
 
 ```powershell
 Set-RdsHostPool <tenantname> <hostpoolname> -BreadthFirstLoadBalancer
 ```
 
-Yeni maksimum oturum sınırı kullanılacak ve avantajlarına ilk Yük Dengeleme gerçekleştirmek için bir ana bilgisayar havuzunu yapılandırmak için aşağıdaki PowerShell cmdlet'ini çalıştırın:
+Bir konak havuzunu, birinci düzey yük dengelemeyi gerçekleştirecek şekilde yapılandırmak ve yeni bir en fazla oturum sınırı kullanmak için aşağıdaki PowerShell cmdlet 'ini çalıştırın:
 
 ```powershell
 Set-RdsHostPool <tenantname> <hostpoolname> -BreadthFirstLoadBalancer -MaxSessionLimit ###
 ```
 
-## <a name="configure-depth-first-load-balancing"></a>Derinlik ilk yük dengelemeyi yapılandırma
+## <a name="configure-depth-first-load-balancing"></a>Derinlik-ilk yük dengelemeyi yapılandırma
 
-Derinlik ilk Yük Dengeleme bir kullanılabilir oturumu ana bilgisayarı, en yüksek bağlantı sayısı ile yeni kullanıcı oturumlarını dağıtır ancak kendi maksimum oturum sınırı eşiğine değil. Derinlik ilk Yük Dengeleme, yapılandırırken, **gerekir** konak havuzunda oturumu ana bilgisayarı başına maksimum oturum sınırı ayarlayın.
+Derinlik-ilk yük dengeleme, yeni kullanıcı oturumlarını en fazla bağlantı sayısına sahip kullanılabilir bir oturum ana bilgisayarına dağıtır ancak en fazla oturum sınırı eşiğine ulaşmaz. Derinlik-ilk yük dengelemeyi yapılandırırken, konak havuzundaki oturum ana bilgisayarı başına en fazla oturum sınırı ayarlamanız **gerekir** .
 
-Derinlik ilk Yük Dengeleme gerçekleştirmek için bir ana bilgisayar havuzunu yapılandırmak için aşağıdaki PowerShell cmdlet'ini çalıştırın:
+Bir konak havuzunu derinlik-ilk yük dengelemesi gerçekleştirecek şekilde yapılandırmak için aşağıdaki PowerShell cmdlet 'ini çalıştırın:
 
 ```powershell
 Set-RdsHostPool <tenantname> <hostpoolname> -DepthFirstLoadBalancer -MaxSessionLimit ###

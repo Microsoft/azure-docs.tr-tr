@@ -1,59 +1,59 @@
 ---
-title: Azure Cosmos DB'de benzersiz anahtarlar kullanın
-description: Azure Cosmos veritabanınızda benzersiz anahtarlar kullanmayı öğrenin
-author: rimman
-ms.author: rimman
+title: Azure Cosmos DB içinde benzersiz anahtarlar kullanın
+description: Azure Cosmos veritabanınızda benzersiz anahtarların nasıl kullanılacağını öğrenin
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/23/2019
+ms.date: 07/23/2019
 ms.reviewer: sngun
-ms.openlocfilehash: af3c7771ce977cf248c5f1b61ba1c535a10ccd3c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4a929566d464f8548c4bffeb9f89099e77722e67
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66242505"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72756784"
 ---
-# <a name="unique-key-constraints-in-azure-cosmos-db"></a>Azure Cosmos DB'de benzersiz anahtar kısıtlamaları
+# <a name="unique-key-constraints-in-azure-cosmos-db"></a>Azure Cosmos DB 'de benzersiz anahtar kısıtlamaları
 
-Benzersiz anahtarlar bir veri bütünlüğü katmanı için bir Azure Cosmos kapsayıcısı ekleyin. Bir Azure Cosmos kapsayıcı oluştururken bir benzersiz anahtar ilkesi oluşturun. Benzersiz anahtarlara sahip bir veya daha fazla değer mantıksal bölüm içindeki benzersiz olduğundan emin olun. Ayrıca başına benzersizliği garanti [bölüm anahtarı](partition-data.md). 
+Benzersiz anahtarlar bir Azure Cosmos kapsayıcısına veri bütünlüğü katmanı ekler. Azure Cosmos kapsayıcısı oluştururken benzersiz bir anahtar ilkesi oluşturursunuz. Benzersiz anahtarlarla, bir mantıksal bölüm içindeki bir veya daha fazla değerin benzersiz olduğundan emin olun. Ayrıca [bölüm anahtarı](partition-data.md)başına benzersizliği garanti edebilirsiniz. 
 
-Bir kapsayıcı benzersiz bir anahtar ilke oluşturduktan sonra yeni bir oluşturulmasını veya yinelenen bir mantıksal bölüm içinde bunun sonucunda var olan bir öğenin bir güncelleştirme engellendiğinde, benzersiz anahtar kısıtlaması tarafından belirtildiği gibi. Benzersiz bir anahtarla birlikte bölüm anahtarı kapsayıcının kapsamı içindeki bir öğenin benzersizliği garanti eder.
+Benzersiz anahtar ilkesiyle bir kapsayıcı oluşturduktan sonra, benzersiz anahtar kısıtlaması tarafından belirtilen şekilde, bir mantıksal bölüm içinde yinelenerek yeni veya mevcut bir öğenin güncelleştirilmesi engellenir. Benzersiz anahtarla birlikte birleştirilmiş bölüm anahtarı, kapsayıcının kapsamındaki bir öğenin benzersizlik düzeyini garanti eder.
 
-Örneğin, bir Azure Cosmos kapsayıcı benzersiz anahtar kısıtlaması olarak e-posta adresiyle göz önünde bulundurun ve `CompanyID` bölüm anahtarı olarak. Kullanıcının e-posta adresi benzersiz bir anahtar ile yapılandırdığınızda, her öğe içinde benzersiz bir e-posta adresi olan bir verilen `CompanyID`. İki öğe, yinelenen bir e-posta adreslerine sahip ve aynı bölüm anahtarı değeri ile oluşturulamaz. 
+Örneğin, benzersiz anahtar kısıtlaması olarak e-posta adresi ile bir Azure Cosmos kapsayıcısını ve bölüm anahtarı olarak `CompanyID` göz önünde bulundurun. Kullanıcının e-posta adresini benzersiz bir anahtarla yapılandırdığınızda, her öğenin belirli bir `CompanyID`için benzersiz bir e-posta adresi vardır. Yinelenen e-posta adresleriyle ve aynı bölüm anahtarı değeriyle iki öğe oluşturulamıyor. 
 
-Aynı e-posta ile öğeleri oluşturmak için benzersiz anahtar ilkesi için daha yollarını adresi, ancak değil aynı ad, Soyadı ve e-posta adresi ekleyin. Yalnızca e-posta adresini temel alan benzersiz bir anahtar oluşturmak yerine benzersiz bir anahtar da oluşturabilirsiniz ile birlikte ad, Soyadı ve e-posta adresi. Bu anahtarı bileşik benzersiz bir anahtar olarak bilinir. Bu durumda, içinde üç her benzersiz birleşimi değerleri bir verilen `CompanyID` izin verilir. 
+Aynı e-posta adresine sahip olan ancak aynı adı, soyadı ve e-posta adresini içermeyen öğeler oluşturmak için benzersiz anahtar ilkesine daha fazla yol ekleyin. Yalnızca e-posta adresini temel alan benzersiz bir anahtar oluşturmak yerine, ad, soyadı ve e-posta adresi birleşimini içeren benzersiz bir anahtar da oluşturabilirsiniz. Bu anahtar, bileşik benzersiz anahtar olarak bilinir. Bu durumda, belirli bir `CompanyID` içindeki üç değerin her benzersiz birleşimine izin verilir. 
 
-Örneğin, kapsayıcı öğeleri burada her öğeyi benzersiz anahtar kısıtlaması geliştirir aşağıdaki değerlerle içerebilir.
+Örneğin, kapsayıcı, her öğenin benzersiz anahtar kısıtlamasını aldığı aşağıdaki değerlere sahip öğeler içerebilir.
 
-|Companyıd|Ad|Soyadı|E-posta adresi|
+|CompanyID|Ad|Soyadı|E-posta adresi|
 |---|---|---|---|
 |Contoso|Gaby|Duperre|gaby@contoso.com |
 |Contoso|Gaby|Duperre|gaby@fabrikam.com|
 |Fabrikam|Gaby|Duperre|gaby@fabrikam.com|
-|Fabrikam|Çalışan Ivan|Duperre|gaby@fabrikam.com|
+|Fabrikam|Ivan|Duperre|gaby@fabrikam.com|
 |Fabrkam|   |Duperre|gaby@fabraikam.com|
 |Fabrkam|   |   |gaby@fabraikam.com|
 
-Önceki tabloda listelenen birleşimleri olan başka bir öğe eklemeye çalışırsanız, bir hata alırsınız. Benzersiz anahtar kısıtlaması'nin karşılanmadığı durumların hata gösterir. Ya da aldığınız `Resource with specified ID or name already exists` veya `Resource with specified ID, name, or unique index already exists` dönüş iletisi. 
+Önceki tabloda listelenen birleşimlerle başka bir öğe eklemeye çalışırsanız bir hata alırsınız. Hata, benzersiz anahtar kısıtlamasının karşılanmadığını gösterir. Dönüş iletisi olarak `Resource with specified ID or name already exists` ya da `Resource with specified ID, name, or unique index already exists` alırsınız. 
 
 ## <a name="define-a-unique-key"></a>Benzersiz bir anahtar tanımlayın
 
-Yalnızca bir Azure Cosmos kapsayıcısı oluşturduğunuzda, benzersiz anahtarlar tanımlayabilirsiniz. Benzersiz bir anahtar, mantıksal birime kapsamlıdır. POSTA koduna göre kapsayıcı bölümlemeniz halinde önceki örnekte, mantıksal her bölümdeki yinelenen öğeler ile sonlanır. Benzersiz anahtarlar oluşturduğunuzda aşağıdaki özellikleri göz önünde bulundurun:
+Yalnızca bir Azure Cosmos kapsayıcısı oluşturduğunuzda, benzersiz anahtarlar tanımlayabilirsiniz. Benzersiz bir anahtar, mantıksal bir bölümü kapsamlandırılır. Önceki örnekte, kapsayıcıyı ZIP koduna göre bölümleyeceğinize, her mantıksal bölümdeki Yinelenen öğelerle sonlandırın. Benzersiz anahtarlar oluştururken aşağıdaki özellikleri göz önünde bulundurun:
 
-* Farklı bir benzersiz anahtar kullanmak için var olan bir kapsayıcı güncelleştirilemiyor. Diğer bir deyişle, ilke, bir kapsayıcı benzersiz bir anahtar ilke oluşturulduktan sonra değiştirilemez.
+* Var olan bir kapsayıcıyı farklı bir benzersiz anahtar kullanacak şekilde güncelleştiremezsiniz. Diğer bir deyişle, benzersiz bir anahtar ilkesiyle bir kapsayıcı oluşturulduktan sonra ilke değiştirilemez.
 
-* Var olan bir kapsayıcı için benzersiz bir anahtar kümesi için benzersiz anahtar kısıtlaması ile yeni bir kapsayıcı oluşturun. Yeni kapsayıcı için mevcut kapsayıcıdan verileri taşımak için uygun veri geçiş aracını kullanın. SQL kapsayıcıları için [veri geçiş aracı](import-data.md) verileri taşımak için. MongoDB kapsayıcıları için [mongoimport.exe veya mongorestore.exe](mongodb-migrate.md) verileri taşımak için.
+* Mevcut bir kapsayıcı için benzersiz bir anahtar ayarlamak için, benzersiz anahtar kısıtlamasına sahip yeni bir kapsayıcı oluşturun. Mevcut kapsayıcıdan yeni kapsayıcıya veri taşımak için uygun veri geçiş aracını kullanın. SQL kapsayıcıları için veri taşıma [aracını](import-data.md) kullanarak verileri taşıyın. MongoDB kapsayıcıları için [mongoımport. exe veya mongorestore. exe](mongodb-migrate.md) ' yi kullanarak verileri taşıyın.
 
-* En fazla 16 yol değerlerinin bir benzersiz anahtar ilkesi olabilir. Örneğin, değerleri olabilir `/firstName`, `/lastName`, ve `/address/zipCode`. Her bir benzersiz anahtar ilkesi, en fazla 10 benzersiz anahtar kısıtlamaları veya birleşimleri olabilir. Her benzersiz dizin kısıtlaması birleşik yollarını 60 baytı aşmamalıdır. Önceki örnekte, ad, Soyadı ve e-posta adresi bir kısıtlama birleştirilir. Bu kısıtlama, 3 16 olası yolları kullanır.
+* Benzersiz bir anahtar ilkesinde en fazla 16 yol değeri olabilir. Örneğin, değerler `/firstName`, `/lastName`ve `/address/zipCode`olabilir. Her benzersiz anahtar ilkesi en fazla 10 benzersiz anahtar kısıtlaması veya birleşimine sahip olabilir. Her benzersiz dizin kısıtlamasının birleştirilmiş yolları 60 baytı aşmamalıdır. Önceki örnekte adı, soyadı ve e-posta adresi birlikte tek bir kısıtlamadır. Bu kısıtlama, 16 olası yoldan 3 ' ü kullanır.
 
-* Bir kapsayıcı benzersiz bir anahtar ilke olduğunda [istek birimi (RU)](request-units.md) ücretleri oluşturmak için güncelleştirme ve devre dışı bir öğeyi silmek biraz daha yüksektir.
+* Bir kapsayıcının benzersiz bir anahtar ilkesi olduğunda, bir öğeyi oluşturmak, güncelleştirmek ve silmek için [Istek birimi (ru)](request-units.md) ücretleri biraz daha yüksektir.
 
-* Seyrek benzersiz anahtarlar desteklenmez. Bazı benzersiz yolu eksik değerler benzersizlik kısıtlaması katılmak null değerler olarak kabul. Bu nedenle, yalnızca tek bir öğe bu kısıtlamasını karşılamak için null değerine sahip olabilir.
+* Seyrek benzersiz anahtarlar desteklenmiyor. Bazı benzersiz yol değerleri eksikse, bu değerler benzersizlik kısıtlamasındaki bir parçasını oluşturan null değer olarak değerlendirilir. Bu nedenle, bu kısıtlamayı karşılamak için yalnızca null değeri olan tek bir öğe olabilir.
 
-* Benzersiz anahtar adları büyük/küçük harfe duyarlıdır. Örneğin, bir kapsayıcı ayarlamak benzersiz anahtar kısıtlaması ile göz önünde `/address/zipcode`. Verilerinizi adlı bir alan varsa `ZipCode`, Azure Cosmos DB ekler "benzersiz anahtar null" çünkü `zipcode` aynı olmayan `ZipCode`. Bu büyük/küçük harfe duyarlılık nedeniyle, "null" yinelenen benzersiz anahtar kısıtlamasını ihlal ettiğinden ZipCode diğer tüm kayıtları eklenemez.
+* Benzersiz anahtar adları büyük/küçük harfe duyarlıdır. Örneğin, benzersiz anahtar kısıtlaması `/address/zipcode`olarak ayarlanmış bir kapsayıcı düşünün. Verilerinizde `ZipCode`adlı bir alan varsa, `zipcode` `ZipCode`ile aynı olmadığından, Azure Cosmos DB benzersiz anahtar olarak "null" ekler. Bu durumda, aynı "null" değeri benzersiz anahtar kısıtlamasını ihlal ettiğinden, ZipCode içeren diğer tüm kayıtlar eklenemez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Daha fazla bilgi edinin [mantıksal bölümler](partition-data.md)
-* Keşfedin [benzersiz anahtarlar tanımlama](how-to-define-unique-keys.md) kapsayıcı oluştururken
+* [Mantıksal bölümler](partition-data.md) hakkında daha fazla bilgi edinin
+* Kapsayıcı oluştururken [benzersiz anahtarların nasıl tanımlanacağını](how-to-define-unique-keys.md) keşfet

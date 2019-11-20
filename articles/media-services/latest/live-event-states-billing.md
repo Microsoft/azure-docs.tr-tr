@@ -1,6 +1,6 @@
 ---
-title: Livestream durumları ve Azure Media Services faturalandırma | Microsoft Docs
-description: Bu konu Azure Media Services Livestream durumları ve faturalandırma hakkında genel bir bakış sağlar.
+title: Canlı olay durumları ve faturalama Azure Media Services | Microsoft Docs
+description: Bu konu, Azure Media Services LiveEvent durumları ve faturalandırma hakkında genel bakış sunar.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -11,34 +11,37 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: ne
 ms.topic: article
-ms.date: 01/28/2019
+ms.date: 10/24/2019
 ms.author: juliako
-ms.openlocfilehash: 2907b5be7f8d5fda3d510484179e80b065ab64b0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: af3d4b51dadfaa99a166ca0ce475c5a110d8f6e8
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67074886"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72933675"
 ---
 # <a name="live-event-states-and-billing"></a>Canlı olay durumları ve faturalandırma
 
-Azure Media Services canlı bir olay durumuna geçer hemen sonra Fatura başlar **çalıştıran**. Faturalandırma canlı olay durdurmak için Canlı etkinliği durdurmak zorunda.
+Azure Media Services, canlı bir olay, durum geçişleri **çalışmaya**hemen sonra faturalandırmaya başlar. Canlı etkinliği faturalandırmayı durdurmak için canlı olayı durdurmanız gerekir.
 
-Zaman **LiveEventEncodingType** üzerinde [canlı olay](https://docs.microsoft.com/rest/api/media/liveevents) standart veya Premium1080p, Media Services'ın otomatik kapatıldığında tüm Canlı hala olay devre dışı olarak ayarlanmış **çalıştıran** durum 12 saat sonra giriş akışı kaybolur ve başka hiçbir **Canlı çıkış**çalıştıran s. Ancak, yine de canlı olay, saat için faturalandırılırsınız **çalıştıran** durumu.
+[Canlı olayınızdaki](https://docs.microsoft.com/rest/api/media/liveevents) **Liveeventencodingtype** standart veya Premium1080p olarak ayarlandığında Media Services, giriş akışı kaybolduktan sonra **çalışmakta** olan 12 saat içinde devam eden canlı olayları otomatik olarak kapatır ve **canlı çıkış** yok demektir çalışıyor. Ancak, hala canlı olayın **çalışır** durumda olduğu zaman faturalandırılırsınız.
+
+> [!NOTE]
+> Doğrudan geçiş canlı olayları otomatik olarak kapatılmaz ve aşırı faturalandırmayı önlemek için API aracılığıyla açıkça durdurulmalıdır. 
 
 ## <a name="states"></a>Durumlar
 
-Canlı olay şu durumlardan birinde olabilir.
+Canlı olay, aşağıdaki durumlardan birinde olabilir.
 
 |Eyalet|Açıklama|
 |---|---|
-|**Durduruldu**| Bu ilk canlı olay oluşturulduktan sonra durumudur (autostart sürece true.) Bu durumda hiçbir faturalandırma gerçekleşir. Bu durumda, canlı olay özellikleri güncelleştirilebilir ama akışa izin verilmiyor.|
-|**Başlatma**| Canlı olay başlatılır ve kaynakları ayrılır. Bu durumda hiçbir faturalandırma gerçekleşir. Güncelleştirmeleri veya akış, bu durum süresince verilmez. Canlı olay, bir hata oluşursa, durduruldu durumuna döndürülür.|
-|**Çalıştıran**| Canlı kaynakları tahsis edilmiş, alma ve önizleme URL'leri olayı oluşturan ve canlı akışlarınızdan alabildiğini. Bu noktada, faturalandırma etkin değil. Daha fazla faturalama durdurmak için canlı olay kaynağı durdurma açıkça çağırmanız gerekir.|
-|**Durduruluyor**| Canlı olay durduruldu ve kaynaklar serbest sağlandı. Bu geçici bir durumda hiçbir faturalandırma gerçekleşir. Güncelleştirmeleri veya akış, bu durum süresince verilmez.|
-|**Silme**| Canlı olay siliniyor. Bu geçici bir durumda hiçbir faturalandırma gerçekleşir. Güncelleştirmeleri veya akış, bu durum süresince verilmez.|
+|**Durdurulacağını**| Bu, oluşturulduktan sonra canlı etkinliğin ilk durumudur (autostart, true olarak ayarlanmadığı müddetçe).) Bu durumda faturalandırma yapılmaz. Bu durumda, Canlı Etkinlik özellikleri güncelleştirilebilir ama akışa izin verilmez.|
+|**Şunlar**| Canlı etkinlik başlatılıyor ve kaynaklar ayrıldı. Bu durumda faturalandırma yapılmaz. Bu durum sırasında güncelleştirmelere veya akışa izin verilmez. Bir hata oluşursa canlı olay durdurulmuş duruma geri döner.|
+|**Çalıştıran**| Canlı olay kaynakları ayrıldı, alma ve önizleme URL 'Leri oluşturulmuştur ve canlı akışlar alabilir. Bu noktada faturalandırma etkin olur. Daha fazla faturalandırmayı durdurmak için canlı olay kaynağında durdurmayı açıkça çağırmanız gerekir.|
+|**Durdurulamadı**| Canlı etkinlik durduruluyor ve kaynaklar zaten sağlanıyor. Bu geçici durumda faturalandırma yapılmaz. Bu durum sırasında güncelleştirmelere veya akışa izin verilmez.|
+|**Silinmesinden**| Canlı Etkinlik siliniyor. Bu geçici durumda faturalandırma yapılmaz. Bu durum sırasında güncelleştirmelere veya akışa izin verilmez.|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Canlı akış genel bakış](live-streaming-overview.md)
-- [Canlı akış Öğreticisi](stream-live-tutorial-with-api.md)
+- [Canlı akışa genel bakış](live-streaming-overview.md)
+- [Canlı akış öğreticisi](stream-live-tutorial-with-api.md)

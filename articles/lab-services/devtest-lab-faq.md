@@ -1,6 +1,6 @@
 ---
 title: Azure DevTest Labs SSS | Microsoft Docs
-description: Azure DevTest Labs hakkında sık sorulan sorulara yanıtlar bulun.
+description: Azure DevTest Labs hakkında sık sorulan soruların yanıtlarını bulun.
 services: devtest-lab,virtual-machines,lab-services
 documentationcenter: na
 author: spelluru
@@ -12,104 +12,104 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/19/2019
+ms.date: 07/18/2019
 ms.author: spelluru
-ms.openlocfilehash: a46d816c04d9f5629c2ee9538016d42c53f9a331
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fb66fa2d4a6a03841fa057c4d1982b7bf4c6976d
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66244398"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68565325"
 ---
 # <a name="azure-devtest-labs-faq"></a>Azure DevTest Labs SSS
-Azure DevTest Labs hakkında en yaygın soruların yanıtlarını alın.
+Azure DevTest Labs hakkındaki en yaygın soruların bazılarına yanıt alın.
 
 ## <a name="blog-post"></a>Blog gönderisi
-DevTest Labs takım blogumuzda 20 Mart 2019'ten itibaren kullanımdan kaldırılmıştır. 
+DevTest Labs ekip blogumuz, 20 Mart 2019 itibariyle kullanımdan kaldırılmıştır. 
 
-### <a name="where-can-i-track-feature-updates-from-now-on"></a>Burada özellik güncelleştirmeleri artık izleyebilir miyim?
-Şu andan itibaren biz özellik güncelleştirmeleri ve bilgilendirici blog gönderilerini Azure blogunda yayınlayarak ve Azure güncelleştirir. Bu blog gönderileri, ayrıca gerekli yerlerde belgelerimize bağlayacaksınız.
+### <a name="where-can-i-track-feature-updates-from-now-on"></a>Özellik güncelleştirmelerini Şu anda nereden izleyebilirim?
+Bu andan itibaren, Azure bloguna ve Azure güncelleştirmelerine yönelik özellik güncelleştirmelerini ve bilgilendirici blog yayınlarını naklettireceğiz. Bu blog gönderileri Ayrıca gerektiğinde belgelerimize bağlanır.
 
-Abone [DevTest Labs Azure blogunu](https://azure.microsoft.com/blog/tag/azure-devtest-labs/) ve [DevTest Labs Azure güncelleştirmeleri](https://azure.microsoft.com/updates/?product=devtest-lab) DevTest Labs'de yeni özellikler hakkında bilgi sahibi olmak için.
+DevTest Labs 'de yeni özellikler hakkında bilgi sahibi olmak için DevTest [Labs Azure bloguna](https://azure.microsoft.com/blog/tag/azure-devtest-labs/) ve [DevTest Labs Azure güncelleştirmelerine](https://azure.microsoft.com/updates/?product=devtest-lab) abone olun.
 
-### <a name="what-happens-to-the-existing-blog-posts"></a>Mevcut blog gönderilerine yapılan ne olacak?
-Şu anda (kesinti güncelleştirmeler hariç) geçirme mevcut blog gönderilerine çalışıyoruz bizim [DevTest Labs belgeleri](devtest-lab-overview.md). MSDN blog'u kullanım dışı olduğunda için DevTest Labs belgeleri genel bakış yönlendirilirsiniz. Yeniden yönlendirilen sonra 'Filtresi tarafından' başlığında aradığınız makalesi için arama yapabilirsiniz. Size, tüm gönderileri geçirilen henüz yapmadıysanız, ancak bu ay sonuna kadar yapılması gerekir. 
+### <a name="what-happens-to-the-existing-blog-posts"></a>Var olan blog gönderilerine ne olur?
+Şu anda var olan blog gönderilerini (kesinti güncelleştirmeleri hariç) [DevTest Labs belgelerimize](devtest-lab-overview.md)geçirmeye çalışıyoruz. MSDN blogu kullanım dışı olduğunda, DevTest Labs için belgelere genel bakış sayfasına yönlendirilir. Yeniden yönlendirildikten sonra ' filtre ölçütü ' başlığında Aradığınız makaleyi arayabilirsiniz. Tüm gönderilerini henüz geçirdik, ancak bu ayın sonuna kadar gerçekleştirilmelidir. 
 
 
-### <a name="where-do-i-see-outage-updates"></a>Kesinti güncelleştirmeleri nerede görebilirim?
-Biz yayınlayarak bizim Twitter tanıtıcısı Bugünden başlayarak kullanarak kesinti güncelleştirmeleri. Bizi kesintiler ve bilinen hatalar en son güncelleştirmeleri almak için Twitter'da takip edin.
+### <a name="where-do-i-see-outage-updates"></a>Kesinti güncelleştirmelerini nereden görüyorum?
+Artık sonraki sürümlerde Twitter işleyicimizi kullanarak kesinti güncellemeleri göndereceğiz. Kesintiler ve bilinen hatalar hakkında en son güncelleştirmeleri almak için bizi Twitter 'da izleyin.
 
 ### <a name="twitter"></a>Twitter
-Bizim Twitter tanıtıcısı: [@azlabservices](https://twitter.com/azlabservices)
+Twitter tanıtıcımız:[@azlabservices](https://twitter.com/azlabservices)
 
 ## <a name="general"></a>Genel
-### <a name="what-if-my-question-isnt-answered-here"></a>Peki sorumun cevabı burada bulamadığınız?
-Sorunuzu burada listelenmiyorsa, yanıt bulmanıza yardımcı olabiliriz. Bu nedenle, bize bildirin.
+### <a name="what-if-my-question-isnt-answered-here"></a>Sorum burada yanıtlanmazsa ne olacak?
+Sorunuz burada listelenmiyorsa bize bilgi verin. bu nedenle bir yanıt bulmanıza yardımcı olabiliriz.
 
-- Bu SSS, sonunda bir soru gönderin. Azure Cache takım ve diğer topluluk üyelerinin bu makaleyle ilgili etkileşim kurun.
-- Geniş bir kitleye ulaşmak için bir soru gönderin [Azure DevTest Labs MSDN Forumu](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureDevTestLabs). Azure DevTest Labs takım ve diğer topluluk üyelerinin ile etkileşim kurun.
-- Özellik istekleri için istek ve fikirleri için gönderme [Azure DevTest Labs User Voice](https://feedback.azure.com/forums/320373-azure-devtest-labs).
+- Bu SSS sonunda bir soru gönderin. 
+- Daha geniş bir hedef kitleye ulaşmak için [Azure DEVTEST Labs MSDN forumuna](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureDevTestLabs)bir soru gönderin. Azure DevTest Labs ekiple ve topluluktaki diğer üyelerle birlikte katılın.
+- Özellik istekleri için isteklerinizi ve fikirlerinizi [Azure DevTest Labs Kullanıcı seslerine](https://feedback.azure.com/forums/320373-azure-devtest-labs)gönderebilirsiniz.
 
-### <a name="what-is-a-microsoft-account"></a>Bir Microsoft hesabı nedir?
-Bir Microsoft hesabı olan neredeyse her şey Microsoft cihazlar ve hizmetler ile yapmak için kullandığınız hesaptır. Bu bir e-posta adresi ve Skype, Outlook.com, OneDrive, Windows phone, Azure ve Xbox Live oturum açmak için kullandığınız parola olur. Tek bir hesap, dosyaları, fotoğraflar, kişiler ve ayarları, tüm cihazlardan izleyebilirsiniz anlamına gelir.
+### <a name="what-is-a-microsoft-account"></a>Microsoft hesabı nedir?
+Microsoft hesabı, Microsoft cihazları ve hizmetleriyle yaptığınız neredeyse her şey için kullandığınız bir hesaptır. Skype, Outlook.com, OneDrive, Windows Phone, Azure ve Xbox Live 'da oturum açmak için kullandığınız bir e-posta adresi ve parolasıdır. Tek bir hesap, dosyalarınıza, fotoğraflarınızın, kişilerinizin ve ayarlarınızın size herhangi bir cihazda izleyebileceği anlamına gelir.
  
 > [!NOTE]
-> Bir Microsoft hesabı bir Windows Live ID çağrılması için kullanılan
+> Bir Windows Live ID olarak adlandırılabilmesi için kullanılan bir Microsoft hesabı.
 
-### <a name="why-should-i-use-azure-devtest-labs"></a>Azure DevTest Labs neden kullanmalıyım?
-Azure DevTest Labs, takımınızın zamandan ve paradan tasarruf edebilirsiniz. Geliştiriciler, çeşitli farklı tabanlarını kullanarak kendi ortamlarını oluşturabilir. Bunlar ayrıca, yapıtları hızla dağıtın ve uygulamaları yapılandırmak için kullanabilirsiniz. Özel görüntüleri ve formülleri kullanarak sanal makineleri (VM'ler) şablon olarak kaydedin ve kolayca takım arasında yeniden oluşturun. DevTest Labs, yöneticiler israfı azaltın ve bir takımın ortamlarını yönetmek için kullanabilir, Laboratuvar ayrıca çeşitli yapılandırılabilir ilkeler sunar. Bu ilkeler, otomatik kapatma, maliyet eşik, kullanıcı ve en fazla VM boyutu başına en fazla VM içerir. DevTest Labs hakkında daha ayrıntılı açıklama için bkz: [genel bakış](devtest-lab-overview.md) veya [tanıtım videosunu](https://channel9.msdn.com/Blogs/Azure/what-is-azure-devtest-labs).
+### <a name="why-should-i-use-azure-devtest-labs"></a>Neden Azure DevTest Labs kullanmalıyım?
+Azure DevTest Labs takım zaman ve paradan tasarruf edebilir. Geliştiriciler, çeşitli farklı tabanlar kullanarak kendi ortamlarını oluşturabilir. Ayrıca, uygulamaları hızla dağıtmak ve yapılandırmak için yapıtlar da kullanabilirler. Özel resimleri ve formülleri kullanarak, sanal makineleri (VM 'Ler) şablon olarak kaydedebilir ve ekip genelinde kolayca yeniden oluşturabilirsiniz. DevTest Labs Ayrıca laboratuvar yöneticilerinin, bir ekibin ortamlarını azaltmak ve yönetmek için kullanabileceği birkaç yapılandırılabilir ilke sunar. Bu ilkeler otomatik kapatmalar, maliyet eşiği, Kullanıcı başına en fazla VM ve maksimum VM boyutu içerir. DevTest Labs hakkında daha ayrıntılı bir açıklama için bkz. [genel bakış](devtest-lab-overview.md) veya [tanıtım videosu](https://channel9.msdn.com/Blogs/Azure/what-is-azure-devtest-labs).
 
-### <a name="what-does-worry-free-self-service-mean"></a>"Sorunsuz Self-Servis" ne demektir?
-Sorunsuz Self Servis, geliştiricilere ve test edicilere kendi ortamlarını gerektiğinde oluşturmak anlamına gelir. Yöneticiler, DevTest Labs uygun erişimi ayarlayın, israfı en aza indirmek ve maliyetleri denetim yardımcı olduğunu bilmesinin güvenliğe sahip. Yöneticiler, en fazla VM sayısı, hangi VM boyutlarının izin verilir ve VM'ler çalışmaya ve kapatma zaman belirtebilirsiniz. DevTest Labs ayrıca nasıl Laboratuvar kaynaklarını kullanıldığını haberdar olmanıza yardımcı olmak için uyarılar ayarlayın ve maliyetleri izleme kolaylaştırır.
+### <a name="what-does-worry-free-self-service-mean"></a>"Sorunsuz self servis" ne anlama geliyor?
+Sorunsuz Self servis, geliştiricilerin ve Test edicilerin gerektiğinde kendi ortamlarını oluşturmasıdır. Yöneticiler, DevTest Labs 'in uygun erişimi ayarlamanıza, atık ve denetim maliyetlerini en aza indirmenize yardımcı olduğunu bilmenin güvenliğine sahiptir. Yöneticiler hangi VM boyutlarına izin verileceğini, en fazla VM sayısını ve VM 'Lerin başlatılıp kapanmakta olduğunu belirtebilir. DevTest Labs Ayrıca, laboratuvar kaynaklarının nasıl kullanıldığının farkında olmanıza yardımcı olmak için maliyetleri izlemeyi ve uyarıları ayarlamayı kolaylaştırır.
 
-### <a name="how-can-i-use-devtest-labs"></a>DevTest Labs nasıl kullanabilirim?
-DevTest Labs, geliştirme gerektirir veya test ortamları ve hızla yeniden oluşturmak veya maliyet tasarrufu ilkeleri kullanarak yönetmek istediğiniz zaman yararlıdır.
-Müşterilerimiz için DevTest Labs kullanan bazı senaryolar aşağıda verilmiştir:
+### <a name="how-can-i-use-devtest-labs"></a>DevTest Labs 'i nasıl kullanabilirim?
+DevTest Labs, geliştirme veya test ortamları istediğinizde yararlıdır ve bunları hızlı bir şekilde yeniden oluşturmak veya maliyet tasarrufu ilkeleri kullanarak bunları yönetmek ister.
+Müşterilerimizin DevTest Labs 'i şu şekilde kullanmasının bazı senaryoları aşağıda verilmiştir:
 
-- Geliştirme yönetme ve test ortamları tek bir yerde. Maliyetleri azaltmak ve paylaşmak için özel görüntü oluşturma için ilkeleri kullanma takım arasında oluşturur.
-- Geliştirme aşamaları boyunca disk durumunu kaydetmek için özel görüntüleri kullanarak bir uygulama geliştirin.
-- Maliyet ilerleme durumu ile ilgili olarak izleyin.
-- Kalite güvencesi test etmek için yığın test ortamları oluşturun.
-- Yapıtlar ve formülleri kolayca yapılandırmak ve çeşitli ortamlarda bir uygulama oluşturmak için kullanın.
-- Sonları gerçekleştirilen HACK (işbirliğine dayalı geliştirme veya test çalışma) için sanal makineleri dağıtmak ve olay sona erdiğinde daha sonra kolayca bunları sağlamasını kaldırma.
+- Geliştirme ve test ortamlarını tek bir yerde yönetin. Ekip genelinde yapıları paylaşmak için maliyetleri azaltmak ve özel görüntüler oluşturmak için ilkeleri kullanın.
+- Geliştirme aşamaları boyunca disk durumunu kaydetmek için özel görüntüler kullanarak bir uygulama geliştirin.
+- İlerlemeye ilişkin maliyeti izleyin.
+- Kalite güvencesi testi için toplu test ortamları oluşturun.
+- Yapıları ve formülleri kullanarak bir uygulamayı çeşitli ortamlarda kolayca yapılandırabilir ve yeniden oluşturun.
+- VM 'Leri hack maratonları (işbirliğine dayalı geliştirme veya test çalışması) için dağıtın ve ardından olay sona erdiğinde onları kolayca sağlayın.
 
 ### <a name="how-am-i-billed-for-devtest-labs"></a>DevTest Labs için nasıl faturalandırılırım?
-DevTest Labs ücretsiz bir hizmettir. Laboratuvarları oluşturma ve ilkeleri, şablonlar ve yapıtlar DevTest Labs'de yapılandırma ücretsizdir. Yalnızca VM'ler, depolama hesapları ve sanal ağlar gibi laboratuvarlarınızı kullanılan Azure kaynakları için ödeme yaparsınız. Laboratuvar kaynaklarını maliyeti hakkında daha fazla bilgi için bkz. [Azure DevTest Labs fiyatlandırma](https://azure.microsoft.com/pricing/details/devtest-lab/).
+DevTest Labs ücretsiz bir hizmettir. Laboratuvar oluşturma ve DevTest Labs 'de ilkeleri, şablonları ve yapıtları yapılandırma ücretsizdir. Yalnızca Laboratuvarlarınızda kullanılan VM 'Ler, depolama hesapları ve sanal ağlar gibi Azure kaynakları için ödeme yaparsınız. Laboratuvar kaynaklarının maliyeti hakkında daha fazla bilgi için bkz. [Azure DevTest Labs fiyatlandırması](https://azure.microsoft.com/pricing/details/devtest-lab/).
 
 ## <a name="security"></a>Güvenlik
 
-### <a name="what-are-the-different-security-levels-in-devtest-labs"></a>Farklı güvenlik düzeylerine DevTest Labs nedir?
-Güvenlik erişim, rol tabanlı Access Control tarafından (RBAC) belirlenir. Erişimi nasıl çalıştığını öğrenmek için bu izin, bir rolü olan ve bir kapsam arasındaki farkları öğrenmek için RBAC tarafından tanımlandığı şekilde yardımcı olur.
+### <a name="what-are-the-different-security-levels-in-devtest-labs"></a>DevTest Labs 'deki farklı güvenlik düzeyleri nelerdir?
+Güvenlik erişimi rol tabanlı Access Control (RBAC) tarafından belirlenir. Erişimin nasıl çalıştığını öğrenmek için, RBAC tarafından tanımlanan bir izin, rol ve kapsam arasındaki farkları öğrenmenize yardımcı olur.
 
-- **İzni**: Bir izin, belirli bir eylem için tanımlanmış bir erişimdir. Örneğin, bir izin, tüm sanal makineler için okuma erişimi olabilir.
-- **Rol**: Bir rol, gruplandırılmış ve bir kullanıcıya atanmış izinler kümesidir. Örneğin, bir abonelik sahibi rolüne sahip bir kullanıcı bir Abonelikteki tüm kaynaklara erişebilir.
-- **Kapsam**: Bir kapsam, bir Azure kaynak hiyerarşi içinde düzeyidir. Örneğin, bir kapsam bir kaynak grubu, tek bir laboratuvar veya tüm abonelik olabilir.
+- **İzin**: İzin, belirli bir eyleme tanımlı bir erişimdir. Örneğin, bir izin tüm sanal makinelere okunabilir.
+- **Rol**: Rol, gruplandırılabilen ve bir kullanıcıya atanabilecek bir izinler kümesidir. Örneğin, abonelik sahibi rolüne sahip bir kullanıcının abonelik içindeki tüm kaynaklara erişimi vardır.
+- **Kapsam**: Kapsam, bir Azure kaynağı hiyerarşisinde yer alan bir düzeydir. Örneğin, bir kapsam bir kaynak grubu, tek bir laboratuvar veya tüm abonelik olabilir.
 
-DevTest Labs kapsamında, kullanıcı izinlerini tanımlamak rolleri iki tür vardır:
+DevTest Labs kapsamı içinde, Kullanıcı izinlerini tanımlayan iki tür rol vardır:
 
-- **Laboratuvar sahibi**: Laboratuvar sahibi Laboratuvardaki tüm kaynaklara erişebilir. Laboratuvar sahibi ilkeleri değiştirebilir, okuma ve yazma için herhangi bir VM, sanal ağı değiştirin ve benzeri.
-- **Laboratuvar kullanıcı**: Bir laboratuvar kullanıcı Vm'leri, ilkeleri ve sanal ağlar gibi tüm Laboratuvar kaynaklarını görüntüleyebilir. Ancak, Laboratuvar kullanıcı ilkeleri veya diğer kullanıcılar tarafından oluşturulmuş tüm Vm'leri değiştiremezsiniz.
+- **Laboratuvar sahibi**: Laboratuvar sahibinin laboratuvardaki tüm kaynaklara erişimi vardır. Laboratuvar sahibi ilkeleri değiştirebilir, herhangi bir VM 'ye okuyup yazabilir, sanal ağı değiştirebilir ve benzeri devam edebilir.
+- **Laboratuvar kullanıcısı**: Laboratuvar kullanıcısı VM 'Ler, ilkeler ve sanal ağlar gibi tüm laboratuvar kaynaklarını görüntüleyebilir. Ancak, bir laboratuvar kullanıcısı ilkeleri veya diğer kullanıcılar tarafından oluşturulan VM 'Leri değiştiremez.
 
-Ayrıca, DevTest Labs'de özel roller oluşturabilirsiniz. DevTest Labs'de özel roller oluşturma konusunda bilgi almak için bkz: [belirli Laboratuvar ilkeleri için kullanıcı izinleri verin](devtest-lab-grant-user-permissions-to-specific-lab-policies.md).
+Ayrıca, DevTest Labs 'de özel roller de oluşturabilirsiniz. DevTest Labs 'de özel roller oluşturmayı öğrenmek için bkz. [belirli laboratuvar ilkelerine Kullanıcı Izinleri verme](devtest-lab-grant-user-permissions-to-specific-lab-policies.md).
 
-Kapsamları hiyerarşik olduğundan, bir kullanıcı belirli bir kapsamda izinlere sahip olduğunda kullanıcı kapsamı içindeki her alt düzey kapsamda Bu izinler otomatik olarak verilir. Örneği için abonelik sahibi rolüne atanmış bir kullanıcı, kullanıcı bir Abonelikteki tüm kaynaklara erişim izni vardır. Bu kaynaklar, VM'ler, sanal ağlar ve Laboratuvarları içerir. Abonelik sahibi, Laboratuvar sahibi rolünü otomatik olarak devralır. Ancak, bunun tersi doğru değildir. Laboratuvar sahibi abonelik düzeyinden daha düşük bir kapsam bir laboratuvar erişebilir. Bu nedenle, Laboratuvar sahibi Vm'leri, sanal ağlar veya Laboratuvar dışında olan diğer kaynakları göremez.
+Kapsamlar hiyerarşik olduğundan, bir kullanıcının belirli bir kapsamda izinleri olduğunda, kullanıcıya kapsamdaki her alt düzey kapsamda bu izinler otomatik olarak verilir. Örneğin, bir kullanıcıya abonelik sahibi rolü atanırsa, kullanıcının bir abonelikteki tüm kaynaklara erişimi vardır. Bu kaynaklar VM 'Leri, sanal ağları ve laboratuvarları içerir. Abonelik sahibi, laboratuvar sahibinin rolünü otomatik olarak devralır. Ancak, tersi doğru değildir. Laboratuvar sahibinin, abonelik düzeyinden daha düşük bir kapsam olan bir laboratuvara erişimi vardır. Bu nedenle, bir laboratuvar sahibi VM 'Leri, sanal ağları veya laboratuvar dışındaki diğer kaynakları göremez.
 
-### <a name="how-do-i-define-role-based-access-control-for-my-devtest-labs-environments-to-ensure-that-it-can-govern-while-developerstest-can-do-their-work"></a>Ne miyim tanımlamak rol tabanlı erişim denetimi geliştiriciler ve test çalışmalarını yapabilseniz benim için DevTest Labs, BT'nin emin olmak için ortamlar yöneten?
-Kuruluşunuzu ayrıntı bağlıdır ancak geniş bir düzeni vardır.
+### <a name="how-do-i-define-role-based-access-control-for-my-devtest-labs-environments-to-ensure-that-it-can-govern-while-developerstest-can-do-their-work"></a>Geliştirici/test işlerini yapabilirken yönetebilmemesini sağlamak için DevTest Labs Ortamlarım için rol tabanlı erişim denetimi tanımlama Nasıl yaparım?.
+Geniş bir düzen mevcuttur, ancak ayrıntı kuruluşunuza bağlıdır.
 
-Merkezi BT ve yalnızca gerekli olanla kendi gerekli düzeyde bir denetiminiz proje ve uygulama ekiplerin olanak sağlar. Genellikle, bu Orta anlamına gelir BT aboneliğin sahibi ve tanıtıcıları çekirdek ağ yapılandırmaları gibi BT işlevleri. Dizi **sahipleri** abonelik küçük olmalıdır. Bu sahipleri, ihtiyaç olduğunda ek sahipleri aday gösterin veya örneğin "ortak IP" abonelik düzeyinde ilkeler uygulayabilirsiniz.
+Merkezi olarak yalnızca gerekli olan nedir ve proje ve uygulama ekiplerinin gerekli denetim düzeyine sahip olmasını sağlar. Genellikle, bu, aboneliğin sahibi olduğu ve ağ yapılandırması gibi çekirdek BT işlevlerini işleyeceği anlamına gelir. Bir abonelik için **sahip** kümesi küçük olmalıdır. Bu sahipler, ihtiyacınız olduğunda ek sahipleri aday yapabilir veya "genel IP yok" gibi abonelik düzeyinde ilkeler uygulayabilir.
 
-Tier1 veya Katman 2 destek gibi bir abonelik üzerinden erişim gerektiren kullanıcılar bir alt kümesi olabilir. Bu durumda, bu kullanıcılar size öneririz **katkıda bulunan** kullanıcıların kaynaklarını yönetmek, ancak değil kullanıcı erişim sağlamak veya ilkeleri ayarlama böylece erişim.
+Katman1 veya katman 2 desteği gibi bir abonelik genelinde erişim gerektiren kullanıcıların bir alt kümesi olabilir. Bu durumda, bu kullanıcılara, kaynakları yönetebilmeleri, ancak kullanıcı erişimi sağlamamasını veya ilke ayarlamanıza olanak tanımak için **katkıda** bulunan erişimini sağlamanızı öneririz.
 
-DevTest Labs kaynak proje/uygulama ekibine yakın çeken sahipler tarafından sahip olunan. Bunlar makine ve gerekli yazılım gereksinimlerini anlama olmasıdır. Birçok kuruluşta bu DevTest Labs kaynak yaygın olarak proje/Geliştirme lideri sahibidir. Bu sahibi kullanıcı ve laboratuvar ortamında ilkelerini yönetebilir ve DevTest Labs ortamdaki tüm sanal makineleri yönetebilir.
+DevTest Labs kaynağı, proje/uygulama takımına yakın olan sahiplere ait olmalıdır. Bunun nedeni, makineler ve gerekli yazılımlar için gereksinimlerini anladıkları içindir. Çoğu kuruluşta, bu DevTest Labs kaynağının sahibi genellikle proje/geliştirme lideridir. Bu sahip, Laboratuvar ortamındaki kullanıcıları ve ilkeleri yönetebilir ve DevTest Labs ortamındaki tüm VM 'Leri yönetebilir.
 
-Proje/uygulama takım üyeleri eklenmelidir **DevTest Labs kullanıcılar** rol. Bu kullanıcılar, sanal makineler (satır içi Laboratuvar ve abonelik düzeyinde ilkeleri) oluşturabilir. Bunlar, kendi sanal makinelerini de yönetebilirsiniz. Bunlar, diğer kullanıcılara ait sanal makineleri yönetemez.
+Proje/uygulama ekibi üyeleri **DevTest Labs kullanıcıları** rolüne eklenmelidir. Bu kullanıcılar sanal makineler oluşturabilir (Laboratuvar ve abonelik düzeyindeki ilkelerle birlikte). Bunlar, kendi sanal makinelerini de yönetebilir. Diğer kullanıcılara ait sanal makineleri yönetemez.
 
-Daha fazla bilgi için [Azure Kurumsal iskelesi: öngörücü abonelik İdaresi belgeleri](/azure/architecture/cloud-adoption/appendix/azure-scaffold).
+Daha fazla bilgi için bkz. [Azure Kurumsal yapı iskelesi – seçkin abonelik idare belgeleri](/azure/architecture/cloud-adoption/appendix/azure-scaffold).
 
 
-### <a name="how-do-i-create-a-role-to-allow-users-to-do-a-specific-task"></a>Kullanıcıların belirli bir görevi gerçekleştirmek bir rolü nasıl oluşturulur?
-Özel roller oluşturma ve izinleri için rol atama hakkında kapsamlı bir makale için bkz: [belirli Laboratuvar ilkeleri için kullanıcı izinleri verin](devtest-lab-grant-user-permissions-to-specific-lab-policies.md). Bir rol oluşturur, bir komut dosyası örneği aşağıdadır **DevTest Labs kullanıcısı Gelişmiş**, tüm Vm'leri Laboratuvardaki durdurmak ve başlatmak iznine sahip:
+### <a name="how-do-i-create-a-role-to-allow-users-to-do-a-specific-task"></a>Kullanıcıların belirli bir görevi yapmasına izin vermek için Nasıl yaparım? bir rol oluşturmak mı istiyorsunuz?
+Özel roller oluşturma ve bir role izin atama hakkında kapsamlı bir makale için bkz. [belirli laboratuvar ilkelerine Kullanıcı Izinleri verme](devtest-lab-grant-user-permissions-to-specific-lab-policies.md). Laboratuvardaki tüm VM 'Leri başlatma ve durdurma iznine sahip olan **DevTest Labs Ileri düzey Kullanıcı**rolünü oluşturan bir betik örneği aşağıda verilmiştir:
 
 
 ```powershell
@@ -125,102 +125,102 @@ $policyRoleDef.Actions.Add("Microsoft.DevTestLab/labs/virtualMachines/Stop/actio
 $policyRoleDef = New-AzRoleDefinition -Role $policyRoleDef  
 ```
 
-### <a name="how-can-an-organization-ensure-corporate-security-policies-are-in-place"></a>Bir kuruluş Kurumsal güvenlik ilkeleri karşılandığından nasıl sağlayabilirsiniz?
-Bir kuruluş, aşağıdaki eylemleri gerçekleştirerek elde edebilirsiniz:
+### <a name="how-can-an-organization-ensure-corporate-security-policies-are-in-place"></a>Kuruluş güvenlik ilkelerinin yerinde olması nasıl bir organizasyon olabilir?
+Bir kuruluş, aşağıdaki eylemleri gerçekleştirerek bunu elde edebilir:
 
-- Geliştirme ve kapsamlı güvenlik ilkesi yayımlama. Kuralları kullanmayla ilişkili kabul edilebilir kullanım ilkesi korumadaki yazılımı, bulut varlıklar. Ayrıca, hangi açıkça ilkeyi ihlal tanımlar.
-- Özel bir görüntü, özel yapıtlar ve active directory ile tanımlanan güvenlik bölgesi içinde düzenleme izin veren bir dağıtım işlemi geliştirin. Bu yaklaşım şirket sınırında zorlar ve ortak bir ortam denetimleri kümesini belirler. Geliştirin ve bunların genel işleminin bir parçası güvenli geliştirme yaşam döngüsü izleyin bu denetimleri ortama yönelik bir geliştirici olarak düşünebilirsiniz. Hedefi de aşırı kısıtlayıcı olmayan bir ortamda, Mayıs sağlamaktır geliştirme ancak makul bir dizi denetimi azaltabilir. Laboratuvar sanal makinesi içeren kuruluş biriminde (OU) grup ilkeleri, üretimde bulunan toplam grup ilkelerinin bir alt kümesi olabilir. Alternatif olarak, bunlar düzgün şekilde tanımlanan tüm riskleri azaltmak için ek bir kümesi olabilir.
+- Kapsamlı bir güvenlik ilkesi geliştirme ve yayımlama. İlke, using yazılımı, bulut varlıkları ile ilişkili kabul edilebilir kullanım kurallarını ifade ediler. Ayrıca ilkeyi açıkça ihlal ettiğini de tanımlar.
+- Özel bir görüntü, özel yapıtlar ve Active Directory ile tanımlanmış güvenlik bölgesi içinde düzenlemeye izin veren bir dağıtım işlemi geliştirin. Bu yaklaşım, kurumsal sınır uygular ve ortak bir ortam denetimi kümesi ayarlar. Bu denetimler, bir geliştiricinin geliştirme sırasında göz önünde bulundurulması ve genel sürecinin bir parçası olarak güvenli bir geliştirme yaşam döngüsünü takip edebilir. Amaç Ayrıca geliştirmede daha fazla kısıtlayıcı olmayan bir ortam sağlamaktır, ancak makul bir denetim kümesi de vardır. Laboratuvar sanal makineleri içeren kuruluş birimindeki (OU) Grup ilkeleri, üretimde bulunan toplam grup ilkelerinin bir alt kümesi olabilir. Alternatif olarak, belirlenen riskleri doğru bir şekilde azaltmak için ek bir küme olabilir.
 
-### <a name="how-can-an-organization-ensure-data-integrity-to-ensure-that-remoting-developers-cant-remove-code-or-introduce-malware-or-unapproved-software"></a>Bir kuruluş, uzak geliştiriciler kodu kaldıramaz veya kötü amaçlı yazılımlardan veya onaylanmamış tanıtmak emin olmak için veri bütünlüğü nasıl sağlayabilirsiniz?
-Denetimin dış danışmanların, yükleniciler ya da DevTest Labs'de işbirliği yapmak için uzaktan iletişim'de olan çalışanlar tehdidi azaltmak için birden fazla katman vardır.
+### <a name="how-can-an-organization-ensure-data-integrity-to-ensure-that-remoting-developers-cant-remove-code-or-introduce-malware-or-unapproved-software"></a>Bir kuruluş, uzaktan iletişim geliştiricilerin kod kaldıramayacağı veya kötü amaçlı yazılım ya da onaylanmamış yazılımlar sunabileceğine emin olmak için veri bütünlüğünü nasıl
+DevTest Labs 'de işbirliği yapmak için dış danışmanların, yüklenicilerin veya ' de uzaktan iletişim olan çalışanların tehdidi hafifletmek için birkaç denetim katmanı vardır.
 
-İlk adım, daha önce belirtildiği gibi birisi ilkeyi ihlal ettiğinde açıkça sonuçları özetler drafted ve tanımlanmış bir kabul edilebilir kullanım ilkesi olması gerekir.
+Daha önce belirtildiği gibi, ilk adımda, kabul edilebilir kullanım ilkesi drafted ve bir Kullanıcı ilkeyi ihlal ettiğinde sonuçları açıkça özetleyen bir bakış tanımlanmış olmalıdır.
 
-Uzaktan erişim için denetimlerin ilk katman laboratuvara doğrudan bağlı değil bir VPN bağlantısı üzerinden uzaktan erişim ilkesi uygulamaktır.
+Uzaktan erişim için denetimlerin ilk katmanı, bir uzaktan erişim ilkesini doğrudan laboratuvara bağlı olmayan bir VPN bağlantısı aracılığıyla uygulamaktır.
 
-İkinci Katman denetimlerin kopyalama önlemek ve Uzak Masaüstü aracılığıyla yapıştırın, Grup İlkesi nesneleri kümesini uygulamaktır. Ağ İlkesi, FTP gibi ortamından giden Hizmetleri ve ortamın dışında RDP Hizmetleri izin vermeyecek şekilde uygulanabilir. Kullanıcı tanımlı yönlendirme tüm Azure ağ trafiğini yeniden şirket içine zorlayabilir, ancak üretim içerik ve oturumları taramak için bir ara sunucu denetlenen sürece veri yüklemeye izin verebilir tüm URL'ler için hesabı alınamadı. Genel IP'ler destekleyen bir dış ağ kaynağı köprüleme izin vermeyecek şekilde DevTest Labs sanal ağ içinde kısıtlı olabilir.
+Denetimlerin ikinci katmanı, Uzak Masaüstü aracılığıyla kopyalamayı ve yapıştırmayı önleyen bir Grup İlkesi nesnesi kümesi uygulamaktır. Ağ ilkesi, ortamdan FTP ve RDP hizmetleri gibi giden hizmetlere izin vermek için uygulanabilir. Kullanıcı tanımlı yönlendirme, tüm Azure ağ trafiğini şirket içi 'e geri zorlayabilir, ancak yönlendirme, içerik ve oturumları taramak için bir proxy üzerinden denetlenmediği müddetçe verilerin karşıya yüklenmesine izin verebilecek tüm URL 'Leri hesaba işleyemedi. Ortak IP 'Ler, DevTest Labs 'i destekleyen sanal ağ dahilinde bir dış ağ kaynağının köprülemesini sağlamak için kısıtlanabilir.
 
-Sonuç olarak, aynı tür kısıtlamaları için tüm olası yöntemlerin çıkarılabilir medya hesabı kuruluş, veya bir gönderi içeriği kabul edebilecek URL'lere arasında uygulanması gerekiyor. Gözden geçirin ve bir güvenlik ilkesi uygulamak için profesyonel güvenlik ile başvurun. Daha fazla öneri için bkz. [Microsoft siber güvenlik](https://www.microsoft.com/security/default.aspx?&WT.srch=1&wt.mc_id=AID623240_SEM_sNYnsZDs).
+Sonuç olarak, aynı tür kısıtlamaların kuruluş genelinde uygulanması gerekir, bu, tüm olası çıkarılabilir medya veya dış URL 'lerin bir içerik gönderisini kabul edebilecek şekilde hesaba neden olur. Güvenlik ilkesini gözden geçirmek ve uygulamak için güvenlik uzmanınıza başvurun. Daha fazla öneri için bkz. [Microsoft Cyber güvenliği](https://www.microsoft.com/security/default.aspx?&WT.srch=1&wt.mc_id=AID623240_SEM_sNYnsZDs).
 
-## <a name="lab-configuration"></a>Laboratuvar yapılandırma
+## <a name="lab-configuration"></a>Laboratuvar yapılandırması
 
-### <a name="how-do-i-create-a-lab-from-a-resource-manager-template"></a>Bir Resource Manager şablonundan bir laboratuvarı nasıl oluşturabilirim?
-Sunuyoruz bir [Laboratuvar Azure Resource Manager şablonları GitHub deposunda](https://azure.microsoft.com/resources/templates/101-dtl-create-lab) olarak dağıtabileceğiniz- ya da laboratuvarlarınızı için özel şablonlar oluşturmak için değiştirin. Her şablon, laboratuvarı kendi Azure aboneliğinde olduğu gibi dağıtmak için bir bağlantı vardır. Veya şablonu özelleştirebilirsiniz ve [PowerShell veya Azure CLI kullanarak dağıtma](../azure-resource-manager/resource-group-template-deploy.md).
+### <a name="how-do-i-create-a-lab-from-a-resource-manager-template"></a>Kaynak Yöneticisi şablonundan laboratuvar oluşturmak Nasıl yaparım??
+Farklı olarak dağıtabileceğiniz veya laboratuvarınız için özel şablonlar oluşturmak üzere değişiklik yaptığınız bir [laboratuvar Azure Resource Manager şablonlarının GitHub deposunu](https://azure.microsoft.com/resources/templates/101-dtl-create-lab) sunuyoruz. Her şablonda, Laboratuvarı kendi Azure aboneliğinizde olduğu gibi dağıtmaya yönelik bir bağlantı bulunur. Ya da, [PowerShell veya Azure CLI kullanarak](../azure-resource-manager/resource-group-template-deploy.md)şablonu özelleştirebilir ve dağıtabilirsiniz.
 
 
-### <a name="can-i-have-all-virtual-machines-to-be-created-in-a-common-resource-group-instead-having-each-machine-in-its-own-resource-group"></a>Bunun yerine, kendi kaynak grubunda her makineye sahip ortak bir kaynak grubunda oluşturulan tüm sanal makinelerin sahip olabilir miyim? 
-Evet, bir laboratuvar sahibi olarak işlemek için kaynak grubu ayırma Laboratuvar ya da izin verebilir veya tüm sanal makineler ortak bir kaynak grubunda belirttiğiniz oluşturduğunuz. 
+### <a name="can-i-have-all-virtual-machines-to-be-created-in-a-common-resource-group-instead-having-each-machine-in-its-own-resource-group"></a>Her makinenin kendi kaynak grubunda olması yerine ortak bir kaynak grubunda oluşturulacak tüm sanal makinelerime sahip olabilir miyim? 
+Evet, bir laboratuar sahibi olarak, laboratuvarın kaynak grubu ayırmasını işlemesini ya da belirttiğiniz ortak bir kaynak grubunda tüm sanal makinelerin oluşturulmasını sağlayabilirsiniz. 
 
-Farklı bir kaynak grubu senaryosu:
--   DevTest Labs, hızla çalıştırın her ortak/özel IP sanal makinesi için yeni bir kaynak grubu oluşturur.
--   DevTest Labs, aynı boyutta ait paylaşılan IP makineler için bir kaynak grubu oluşturur.
+Ayrı kaynak grubu senaryosu:
+-   DevTest Labs, seçtiğiniz her ortak/özel IP sanal makinesi için yeni bir kaynak grubu oluşturur
+-   DevTest Labs, aynı boyuta ait olan paylaşılan IP makineleri için bir kaynak grubu oluşturur.
 
 Ortak kaynak grubu senaryosu:
--   Tüm sanal makineler çalışmaya belirttiğiniz ortak kaynak grubunda başlar. Daha fazla bilgi edinin [Laboratuvar için kaynak grubu ayırma](https://aka.ms/RGControl). 
+-   Tüm sanal makineler, belirttiğiniz ortak kaynak grubunda sona erdirir. [Laboratuvar için daha fazla kaynak grubu ayırması](https://aka.ms/RGControl)öğrenin. 
 
-### <a name="how-do-i-maintain-a-naming-convention-across-my-devtest-labs-environment"></a>DevTest Labs ortamımın nasıl bir adlandırma kuralı korunsun mu?
-Azure işlemleri için geçerli Kurumsal adlandırma kuralları'nı genişletin ve DevTest Labs'i ortam genelinde tutarlı hale getirmek isteyebilirsiniz. DevTest Labs dağıtırken, belirli bir başlangıç ilkeleri sahip olmasını öneririz. Merkezi bir betiği ve JSON şablonları tutarlılığı zorlamak için bu ilkeleri dağıtırsınız. Abonelik düzeyinde mi uygulanacağına Azure ilkeleri aracılığıyla adlandırma ilkeleri uygulanabilir. Azure İlkesi JSON örneği için bkz. [Azure ilkesi örnekleri](../governance/policy/samples/index.md).
+### <a name="how-do-i-maintain-a-naming-convention-across-my-devtest-labs-environment"></a>Nasıl yaparım? DevTest Labs ortamımı genelinde bir adlandırma kuralına sahip mi?
+Geçerli kurumsal adlandırma kurallarını Azure işlemlerine genişletmek ve bunları DevTest Labs ortamında tutarlı hale getirmek isteyebilirsiniz. DevTest Labs dağıtımı yaparken, belirli başlangıç ilkelerine sahip olmanız önerilir. Bu ilkeleri, tutarlılığı zorlamak için bir merkezi betik ve JSON şablonları ile dağıtırsınız. Adlandırma ilkeleri, abonelik düzeyinde uygulanan Azure ilkeleri aracılığıyla uygulanabilir. Azure Ilkesi için JSON örnekleri için bkz. [Azure ilke örnekleri](../governance/policy/samples/index.md).
 
-### <a name="how-many-labs-can-i-create-under-the-same-subscription"></a>Aynı abonelik altında kaç labs oluşturabilirim?
-Abonelik başına oluşturulabilecek labs sayısı belirli bir sınırı yoktur. Ancak, abonelik başına kullanılan kaynakları miktarı sınırlıdır. Okuyabilirsiniz [limitler ve kotalar Azure aboneliklerinin](../azure-subscription-service-limits.md) ve [bu sınırları artırmak nasıl](https://azure.microsoft.com/blog/azure-limits-quotas-increase-requests).
+### <a name="how-many-labs-can-i-create-under-the-same-subscription"></a>Aynı abonelikte kaç tane laboratuvar oluşturabilirim?
+Abonelik başına oluşturulabilecek laboratuvarların sayısında belirli bir sınır yoktur. Ancak, abonelik başına kullanılan kaynak miktarı sınırlıdır. [Azure aboneliklerine yönelik sınırlar ve Kotalar](../azure-subscription-service-limits.md) hakkında bilgi edinmek için [Bu sınırları nasıl artırabileceğiniz](https://azure.microsoft.com/blog/azure-limits-quotas-increase-requests)hakkında bilgi edinebilirsiniz.
 
 
-### <a name="how-many-vms-can-i-create-per-lab"></a>Laboratuvar sanal makine sayısı oluşturabilirim?
-Laboratuvar oluşturulan VM'ler sayısı belirli bir sınır yoktur. Ancak, abonelik başına kullanılan kaynakların (sanal makine çekirdeklerine, genel IP adresleri ve benzeri) sınırlıdır. Okuyabilirsiniz [limitler ve kotalar Azure aboneliklerinin](../azure-subscription-service-limits.md) ve [bu sınırları artırmak nasıl](https://azure.microsoft.com/blog/azure-limits-quotas-increase-requests).
+### <a name="how-many-vms-can-i-create-per-lab"></a>Laboratuvar başına kaç VM oluşturabilirim?
+Laboratuvar başına oluşturulabilecek VM sayısında belirli bir sınır yoktur. Ancak, kullanılan kaynaklar (VM çekirdekleri, genel IP adresleri vb.) abonelik başına sınırlıdır. [Azure aboneliklerine yönelik sınırlar ve Kotalar](../azure-subscription-service-limits.md) hakkında bilgi edinmek için [Bu sınırları nasıl artırabileceğiniz](https://azure.microsoft.com/blog/azure-limits-quotas-increase-requests)hakkında bilgi edinebilirsiniz.
 
-### <a name="how-do-i-determine-the-ratio-of-users-per-lab-and-the-overall-number-of-labs-that-are-needed-across-an-organization"></a>Laboratuvar ve bir kuruluş genelindeki gerekli labs genel sayısı başına kullanıcı sayısının oranı nasıl belirlerim?
-İş birimleri ve aynı geliştirme proje ile ilişkili olan geliştirme gruplar aynı lab ile ilişkili olduğunu öneririz. Her iki grubuna uygulanacak ilkeler, görüntüleri ve kapatma ilkeleri aynı türde sağlar.
+### <a name="how-do-i-determine-the-ratio-of-users-per-lab-and-the-overall-number-of-labs-that-are-needed-across-an-organization"></a>Nasıl yaparım?, laboratuvar başına Kullanıcı oranını ve bir kuruluşta gerekli olan toplam laboratuvarların sayısını belirlemektir mi?
+Aynı geliştirme projesiyle ilişkili iş birimlerinin ve geliştirme gruplarının aynı laboratuvarda ilişkili olmasını öneririz. Her iki gruba da aynı ilke, görüntü ve kapalı ilke türlerinin uygulanmasını sağlar.
 
-Coğrafi sınırlar dikkate almanız gerekebilir. Örneğin, geliştiricilerin Kuzey doğu ABD (ABD), Doğu ABD 2 sağlanan bir laboratuvar kullanabilir. Ve bir kaynak Güney Orta ABD kullanmak için Texas, Dallas, Denver Colorado geliştiriciler yönlendirilebilir. Dış bir üçüncü taraf ile ortak çabaya ise iç geliştiriciler tarafından kullanılmayan bir laboratuvar atanabilir.
+Coğrafi sınırları da dikkate almanız gerekebilir. Örneğin, Kuzey Doğu Birleşik Devletler (US) geliştiriciler Doğu ABD2 sağlanan bir laboratuvarı kullanabilir. Ve Dallas, Texas ve Denver 'daki geliştiriciler ABD Orta Güney bir kaynağı kullanmak için yönlendirilebilir. Dış üçüncü taraflarla işbirliğine dayalı bir çaba varsa, bunlar dahili geliştiriciler tarafından kullanılmayan bir laboratuvara atanabilir.
 
-Azure DevOps projeleri içinde belirli bir proje için bir laboratuvar de kullanabilirsiniz. Ardından, güvenlik kaynakları her iki kümesine erişim sağlayan belirtilen Azure Active Directory grup olarak uygulanır. Laboratuvara atanan sanal ağ, kullanıcılar birleştirmek için başka bir sınır olabilir.
+Ayrıca, Azure DevOps Projeleri içindeki belirli bir proje için de laboratuvar kullanabilirsiniz. Daha sonra, her iki kaynak kümesine erişime izin veren belirtilen bir Azure Active Directory grubu aracılığıyla güvenliği uygularsınız. Laboratuvara atanan sanal ağ, kullanıcıları birleştirmek için başka bir sınır olabilir.
 
-### <a name="how-can-we-prevent-the-deletion-of-resources-within-a-lab"></a>Nasıl biz bir laboratuvar içindeki kaynakların silinmesini engelleyebilir miyim?
-Böylece yalnızca yetkili kullanıcıların kaynakları silmeniz veya Laboratuvar ilkeleri değiştirme Laboratuvar düzeyinde uygun izinleri ayarlamanızı öneririz. Geliştiriciler, içinde yerleştirilmelidir **DevTest Labs kullanıcılar** grubu. Baş geliştirici ya da altyapı sağlama olmalıdır **DevTest Labs sahibi**. Yalnızca iki Laboratuvar sahibi olması önerilir. Bu ilke bozulmalarını önlemek için kod deposu genişletir. Laboratuvar kullanıcıları kaynakları kullanma haklarına sahip ancak Laboratuvar ilkeleri güncelleştirilemiyor. Rolleri ve yerleşik her grup Laboratuvar sahip hakları listeleyen şu makaleye bakın: [Azure DevTest Labs'de sahibini ve kullanıcıları ekleme](devtest-lab-add-devtest-user.md).
+### <a name="how-can-we-prevent-the-deletion-of-resources-within-a-lab"></a>Laboratuvardaki kaynakların silinmesini nasıl önleyebiliriz?
+Yalnızca yetkili kullanıcıların kaynakları silmesi veya laboratuvar ilkelerini değiştirmesi için uygun izinleri laboratuvar düzeyinde ayarlamanızı öneririz. Geliştiricilerin **DevTest Labs Kullanıcı** grubu içine yerleştirilmesi gerekir. Lider geliştiricisi veya altyapı lideri, **DevTest Labs sahibi**olmalıdır. Yalnızca iki laboratuar sahibi olmasını öneririz. Bu ilke, bozulmayı önlemek için kod deposuna doğru genişletilir. Laboratuvar kullanıcılarının kaynakları kullanma hakları vardır ancak laboratuvar ilkelerini güncelleştiremez. Her bir yerleşik grubun bir laboratuvarda sahip olduğu rolleri ve hakları listeleyen aşağıdaki makaleye bakın: [Azure DevTest Labs ' de sahip ve kullanıcı ekleyin](devtest-lab-add-devtest-user.md).
 
-### <a name="how-do-i-share-a-direct-link-to-my-lab"></a>Doğrudan bağlantısını benim laboratuvara nasıl paylaşırım?
+### <a name="how-do-i-share-a-direct-link-to-my-lab"></a>Nasıl yaparım? laboratuvara doğrudan bir bağlantı paylaşsın mı?
 
-1. İçinde [Azure portalında](https://portal.azure.com)Laboratuvar gidin.
-2. Kopyalama **Laboratuvar URL** tarayıcınızdan ve Laboratuvar Kullanıcılarınızla paylaşabilirsiniz.
+1. [Azure Portal](https://portal.azure.com)laboratuvara gidin.
+2. Tarayıcınızdan **Laboratuvar URL 'sini** kopyalayın ve ardından Laboratuvar kullanıcılarınızla paylaşabilirsiniz.
 
 > [!NOTE]
-> Bir laboratuvar kullanıcı bir Microsoft hesabı kullanan, ancak kuruluşunuzun Active Directory örneğine üye değil bir dış kullanıcı ise, kullanıcının paylaşılan bağlantı erişmeye çalıştıklarında bir hata iletisi görebilirsiniz. Bir dış kullanıcı bir hata iletisi görürse, adlarının ilk Azure portalının sağ üst köşedeki seçmesini isteyin. Ardından, menü Directory bölümünde Laboratuvar bulunduğu dizine kullanıcı seçebilirsiniz.
+> Laboratuvar kullanıcısı Microsoft hesabı olan ve kuruluşunuzun Active Directory örneğinin üyesi olmayan bir dış Kullanıcı ise, paylaşılan bağlantıya erişmeye çalıştıklarında Kullanıcı bir hata mesajı görebilir. Bir dış Kullanıcı bir hata mesajı görürse, kullanıcıdan Azure portal önce sağ üst köşesinde adını seçmesini isteyin. Ardından, menünün dizin bölümünde, Kullanıcı laboratuvarın bulunduğu dizini seçebilir.
 
 ## <a name="virtual-machines"></a>Sanal makineler
 
-### <a name="why-cant-i-see-vms-on-the-virtual-machines-page-that-i-see-in-devtest-labs"></a>DevTest Labs'de bkz. sanal makineler sayfasındaki sanal makineleri neden göremiyorum?
-DevTest Labs'de bir VM oluşturduğunuzda, size bu VM'ye erişmesine izin verilir. Labs sayfasında hem üzerinde VM görüntüleyebileceğiniz **sanal makineler** sayfası. Atanan kullanıcılar **DevTest Labs sahibi** rol Laboratuvar Laboratuvar içinde oluşturulmuş tüm Vm'leri görebilirsiniz **tüm sanal makineler** sayfası. Ancak, sahip kullanıcılar **DevTest Labs kullanıcısı** rolü değil otomatik olarak verilir diğer kullanıcıların oluşturduğu VM kaynaklarına okuma erişimi. Bu nedenle, bu sanal makineler üzerinde görüntülenmez **sanal makineler** sayfası.
+### <a name="why-cant-i-see-vms-on-the-virtual-machines-page-that-i-see-in-devtest-labs"></a>DevTest Labs 'de görmem gereken sanal makineler sayfasında VM 'Leri neden göremiyorum?
+DevTest Labs 'de bir VM oluşturduğunuzda, bu VM 'ye erişim izni verilir. VM 'yi her ikisi de Labs sayfasında ve **sanal makineler** sayfasında görüntüleyebilirsiniz. **DevTest Labs Owner** rolüne atanan kullanıcılar, laboratuvarda **tüm sanal makineler** sayfasında oluşturulan tüm VM 'leri görebilir. Ancak, **DevTest Labs Kullanıcı** rolüne sahip kullanıcılar, diğer KULLANıCıLARıN oluşturduğu VM kaynaklarına otomatik olarak okuma erişimi verilmez. Bu nedenle, **sanal makineler** sayfasında bu VM 'ler gösterilmez.
 
 
-### <a name="how-do-i-create-multiple-vms-from-the-same-template-at-once"></a>Nasıl birden çok VM aynı şablondan tek seferde oluşturabilirim?
-Aynı anda birden çok VM aynı şablonu oluşturmak için iki seçeneğiniz vardır:
+### <a name="how-do-i-create-multiple-vms-from-the-same-template-at-once"></a>Aynı şablondan birden çok VM oluşturmak Nasıl yaparım?.
+Aynı şablondan aynı anda birden çok VM oluşturmak için iki seçeneğiniz vardır:
 
-- Kullanabileceğiniz [Azure DevOps görev uzantımızı](https://marketplace.visualstudio.com/items?itemName=ms-azuredevtestlabs.tasks).
-- Yapabilecekleriniz [Resource Manager şablonu oluşturma](devtest-lab-add-vm.md#save-azure-resource-manager-template) bir VM oluştururken ve [Windows PowerShell Resource Manager şablonu dağıtmayı](../azure-resource-manager/resource-group-template-deploy.md).
-- Sanal makine oluşturma işlemi sırasında oluşturulacak bir makine birden fazla örneğini belirtebilirsiniz. Sanal makineler birden çok örneğini oluşturma hakkında daha fazla bilgi edinmek için ilgili belge bakın [Laboratuvar sanal makinesi oluşturma](devtest-lab-add-vm.md).
+- [Azure DevOps görevleri uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-azuredevtestlabs.tasks)kullanabilirsiniz.
+- Bir VM oluştururken [Kaynak Yöneticisi şablonu](devtest-lab-add-vm.md#save-azure-resource-manager-template) oluşturabilir ve [Kaynak Yöneticisi şablonunu Windows PowerShell 'den dağıtabilirsiniz](../azure-resource-manager/resource-group-template-deploy.md).
+- Ayrıca, sanal makine oluşturma sırasında oluşturulacak bir makinenin birden fazla örneğini belirtebilirsiniz. Birden çok sanal makine örneği oluşturma hakkında daha fazla bilgi edinmek için bkz. [Laboratuvar sanal makinesi oluşturma](devtest-lab-add-vm.md)hakkındaki belge.
 
-### <a name="how-do-i-move-my-existing-azure-vms-into-my-devtest-labs-lab"></a>Mevcut Azure Vm'lerimi my DevTest Labs Laboratuvar nasıl taşırım?
-DevTest Labs mevcut Vm'lerinizi kopyalamak için:
+### <a name="how-do-i-move-my-existing-azure-vms-into-my-devtest-labs-lab"></a>Mevcut Azure VM 'lerimi DevTest Labs laboratuvarma taşımak Nasıl yaparım? mı?
+Mevcut sanal makinelerinizi DevTest Labs 'e kopyalamak için:
 
-1.  Mevcut sanal makinenizin VHD dosyasını kullanarak kopyalama bir [Windows PowerShell Betiği](https://github.com/Azure/azure-devtestlab/blob/master/samples/DevTestLabs/Scripts/CopyVirtualMachines/CopyAzVHDFromVMToLab.ps1).
-2.  Oluşturma [özel görüntü](devtest-lab-create-template.md) DevTest Labs Laboratuvarınızı içinde.
-3.  Laboratuvarda özel görüntü bir VM oluşturun.
+1.  Bir [Windows PowerShell betiği](https://github.com/Azure/azure-devtestlab/blob/master/samples/DevTestLabs/Scripts/CopyVirtualMachines/CopyAzVHDFromVMToLab.ps1)kullanarak var olan sanal makinenizin VHD dosyasını kopyalayın.
+2.  [Özel görüntüyü](devtest-lab-create-template.md) DevTest Labs laboratuvarınızın içinde oluşturun.
+3.  Özel görüntünüzün laboratuvarında bir VM oluşturun.
 
-### <a name="can-i-attach-multiple-disks-to-my-vms"></a>Birden çok disk planlamadığım Vm'lerime ne ekleyebilir miyim?
+### <a name="can-i-attach-multiple-disks-to-my-vms"></a>VM 'larıma birden çok disk ekleyebilir miyim?
 
-Evet, sanal makineleriniz için birden fazla disk ekleyebilirsiniz.
+Evet, sanal makinelerinize birden çok disk ekleyebilirsiniz.
 
-### <a name="if-i-want-to-use-a-windows-os-image-for-my-testing-do-i-have-to-purchase-an-msdn-subscription"></a>Test için bir Windows işletim sistemi görüntüsü kullanmak isterseniz bir MSDN aboneliği satın almanız gerekir mi?
-Windows istemci işletim sistemi görüntüleri (Windows 7 veya sonraki bir sürümü), geliştirme veya Azure'da test kullanmak için aşağıdaki adımlardan birini uygulayın:
+### <a name="if-i-want-to-use-a-windows-os-image-for-my-testing-do-i-have-to-purchase-an-msdn-subscription"></a>Sınamam için bir Windows işletim sistemi görüntüsü kullanmak istersem bir MSDN aboneliği satın almam gerekiyor mu?
+Azure 'da geliştirme veya test etme için Windows istemci işletim sistemi görüntülerini (Windows 7 veya sonraki bir sürümü) kullanmak için aşağıdaki adımlardan birini uygulayın:
 
-- [Bir MSDN aboneliği satın alma](https://www.visualstudio.com/products/how-to-buy-vs).
-- Bir Kurumsal Sözleşme yaptıysanız, bir Azure aboneliği ile oluşturma [Kurumsal geliştirme ve Test teklifi](https://azure.microsoft.com/offers/ms-azr-0148p).
+- [BIR MSDN aboneliği satın alın](https://www.visualstudio.com/products/how-to-buy-vs).
+- Bir Kurumsal Anlaşma varsa, [Kurumsal Geliştirme ve test teklifiyle](https://azure.microsoft.com/offers/ms-azr-0148p)bir Azure aboneliği oluşturun.
 
-Her MSDN teklifi için Azure KREDİLERİ hakkında daha fazla bilgi için bkz. [Visual Studio aboneleri için aylık Azure kredisi](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/).
+Her bir MSDN teklifiyle ilgili Azure kredileri hakkında daha fazla bilgi için bkz. [Visual Studio aboneleri Için aylık Azure kredisi](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/).
 
 
-### <a name="how-do-i-automate-the-process-of-deleting-all-the-vms-in-my-lab"></a>My Laboratuvardaki tüm Vm'leri silme işleminin nasıl otomatikleştirebilirim?
-Laboratuvar sahibi olarak, Vm'leri Azure portalında Laboratuvarınızı öğesinden silebilirsiniz. Ayrıca, tüm VM'lerin bir PowerShell Betiği kullanarak laboratuvarınızda silebilirsiniz. Aşağıdaki örnekte, altında **değiştirmek için değerleri** açıklama, parametre değerlerini değiştirin. Azure portalında Laboratuvar bölmesinden Subscriptionıd labResourceGroup ve labName değerleri alabilir.
+### <a name="how-do-i-automate-the-process-of-deleting-all-the-vms-in-my-lab"></a>Laboratuvardaki tüm VM 'Leri silme işlemini otomatikleştirin Nasıl yaparım??
+Laboratuvar sahibi olarak, Azure portal sanal makinelerinizden VM 'Leri silebilirsiniz. Ayrıca, bir PowerShell betiği kullanarak laboratuvarınızda bulunan tüm VM 'Leri silebilirsiniz. Aşağıdaki örnekte, açıklama **değiştirmek için değerler** altında parametre değerlerini değiştirin. SubscriptionID, labResourceGroup ve labName değerlerini Azure portal laboratuvar bölmesinden alabilirsiniz.
 
 ```powershell
 # Delete all the VMs in a lab.
@@ -254,142 +254,155 @@ foreach($labVM in $labVMs)
 
 ## <a name="environments"></a>Ortamlar 
 
-### <a name="how-can-i-use-resource-manager-templates-in-my-devtest-labs-environment"></a>DevTest Labs Ortamımın Resource Manager şablonlarını nasıl kullanabilirim?
-Bölümünde anlatılan adımları kullanarak DevTest Labs ortamına Resource Manager şablonlarınızı dağıtmak [ortamları özellik DevTest labs'deki](devtest-lab-test-env.md) makalesi. Aslında, Resource Manager şablonlarınızı bir Git deposuna (Azure depoları veya GitHub) denetleyin ve ekleme bir [şablonlarınızın özel depoya](devtest-lab-test-env.md) Laboratuvar için. Bu senaryo, konak geliştirme makineler için DevTest Labs kullanıyorsanız, faydalı olmayabilir ancak üretim temsilcisi bir hazırlık ortamı oluşturuyorsanız yararlı olabilir.
+### <a name="how-can-i-use-resource-manager-templates-in-my-devtest-labs-environment"></a>DevTest Labs Ortamumdaki Kaynak Yöneticisi şablonlarını nasıl kullanabilirim?
+Kaynak Yöneticisi şablonlarınızı [DevTest Labs makalesindeki ortamlar özelliğinde](devtest-lab-test-env.md) bahsedilen adımları kullanarak bir DevTest Labs ortamına dağıtırsınız. Temel olarak, Kaynak Yöneticisi şablonlarınızı bir git deposuna (Azure Repos veya GitHub) kontrol edersiniz ve [şablonlarınıza yönelik özel bir depoyu](devtest-lab-test-env.md) laboratuvara eklersiniz. Bu senaryo, geliştirme makinelerini barındırmak için DevTest Labs kullanıyorsanız ancak üretim temsilcisi olan bir hazırlama ortamı oluşturuyorsanız faydalı olabilir.
 
-Ayrıca, kaç kullanıcı seçeneği veya Laboratuvar başına sanal makineler yalnızca Laboratuvar ve tüm ortamları (Resource Manager şablonlarını) tarafından yerel olarak oluşturulan sanal makinelerde sayısını sınırlayan hatalarının ayıklanabileceğini belirtmekte yarar.
+Ayrıca, laboratuvar başına veya Kullanıcı başına sanal makine sayısının yalnızca laboratuvarda yerel olarak oluşturulan ve herhangi bir ortamda (Kaynak Yöneticisi şablonları) değil, yalnızca laboratuvar üzerinde oluşturulmuş makine sayısını sınırlayan bir değer de vardır.
 
 ## <a name="custom-images"></a>Özel Görüntüler
 
-### <a name="how-can-i-set-up-an-easily-repeatable-process-to-bring-my-custom-organizational-images-into-a-devtest-labs-environment"></a>DevTest Labs ortamına özel kuruluş görüntülerim getirmek için bir kolayca yinelenebilir işlemini nasıl ayarlayabilirim?
-Bkz. Bu [video görüntü Fabrika desenini](https://sec.ch9.ms/ch9/8e8a/9ea0b8d4-b803-4f23-bca4-4808d9368e8a/dtlimagefactory_mid.mp4). Bu senaryo Gelişmiş bir senaryodur ve sağlanan örnek betikler yalnızca betiklerdir. Herhangi bir değişikliğe ihtiyaç olup, yönetmek ve ortamınızda kullanılan komut dosyaları korumak gerekir.
+### <a name="how-can-i-set-up-an-easily-repeatable-process-to-bring-my-custom-organizational-images-into-a-devtest-labs-environment"></a>Özel kurumsal görüntülerimi DevTest Labs ortamına getirmek için kolayca tekrarlanabilir bir işlem ayarlayabilirim?
+Bu [videoya görüntü fabrikası düzenine](https://sec.ch9.ms/ch9/8e8a/9ea0b8d4-b803-4f23-bca4-4808d9368e8a/dtlimagefactory_mid.mp4)bakın. Bu senaryo gelişmiş bir senaryodur ve sunulan betikler yalnızca örnek betiklerdir. Herhangi bir değişiklik gerekliyse, ortamınızda kullanılan betikleri yönetmeniz ve korumanız gerekir.
 
-Bir görüntü fabrikası oluşturma hakkında ayrıntılı bilgi için bkz. [Azure DevTest Labs'de bir özel görüntü fabrikası oluşturma](image-factory-create.md). 
+Görüntü fabrikası oluşturma hakkında ayrıntılı bilgi için, bkz. [Azure DevTest Labs özel görüntü fabrikası oluşturma](image-factory-create.md). 
 
-### <a name="what-is-the-difference-between-a-custom-image-and-a-formula"></a>Özel bir görüntü ile bir formül arasındaki fark nedir?
-Özel bir görüntü, yönetilen bir görüntü hizmetidir. Formül, ek ayarlarla yapılandırın ve ardından kaydedebilir ve yeniden bir görüntüsüdür. Özel bir görüntü, aynı temel, sabit görüntüsünü kullanarak çeşitli ortamları hızlıca oluşturmak istiyorsanız tercih edilebilir. Formül, bir sanal ağın veya alt ağın bir parçası olarak veya belirli bir boyutta bir VM ile en son parçaları, sanal Makinenizin yapılandırmasını yeniden oluşturmak istiyorsanız daha iyi olabilir. Daha ayrıntılı bir açıklama için bkz. [özel görüntüleri ve formülleri DevTest labs'deki karşılaştırma](devtest-lab-comparing-vm-base-image-types.md).
+### <a name="what-is-the-difference-between-a-custom-image-and-a-formula"></a>Özel görüntü ve formül arasındaki fark nedir?
+Özel görüntü, yönetilen bir görüntüdür. Formül, ek ayarlarla yapılandırabileceğiniz bir görüntüdür ve sonra kaydedebilir ve yeniden üretebilir. Aynı temel, sabit görüntüyü kullanarak hızlı bir şekilde birkaç ortam oluşturmak istiyorsanız özel bir görüntü tercih edilebilir. Sanal ağ veya alt ağın parçası olarak veya belirli boyuttaki bir VM olarak VM 'nizin yapılandırmasını en son bitlerle yeniden oluşturmak istiyorsanız formül daha iyi olabilir. Daha ayrıntılı bir açıklama için bkz. [DevTest Labs 'de özel resimleri ve formülleri karşılaştırma](devtest-lab-comparing-vm-base-image-types.md).
 
-### <a name="when-should-i-use-a-formula-vs-custom-image"></a>Özel görüntü veya formül ne zaman kullanmalıyım?
-Genellikle, bu senaryoda faktör, ekonomik ve yeniden kullanabilirsiniz. Burada birçok kullanıcıları/labs temel görüntünün üstüne yazılım çok sayıda görüntü gerektiren bir senaryo varsa, özel bir görüntü oluşturarak maliyetleri azaltabilir. Bu görüntü bir kez oluşturulduktan anlamına gelir. Bu sanal makine ve Kurulum meydana geldiğinde çalışan sanal makinenin nedeniyle sonucunda oluşan maliyet hazırlık süresini azaltır.
+### <a name="when-should-i-use-a-formula-vs-custom-image"></a>Ne zaman özel görüntüden bir formül kullanmalıyım?
+Genellikle, Bu senaryodaki karar verme faktörü maliyetlidir ve yeniden kullanılır. Birçok kullanıcının/laboratuvarın temel görüntünün en üstünde çok fazla yazılım gerektiren bir senaryonuz varsa, özel bir görüntü oluşturarak maliyetleri azaltabilirsiniz. Bu, görüntünün bir kez oluşturulduğu anlamına gelir. Bu, sanal makinenin kurulum süresini ve kurulum gerçekleştiğinde çalışan sanal makine nedeniyle oluşan maliyeti azaltır.
 
-Ancak, ek bir faktörü unutmayın yazılım değişiklikleri sıklığıdır. Çalıştırırsanız günlük oluşturur ve kullanıcılarınızın sanal makinelerde gereken yazılım bir formül yerine özel bir görüntü kullanarak geçirmeniz gerekir.
+Ancak, ek bir faktör yazılım paketinizdeki değişikliklerin sıklığıdır. Günlük derlemeler çalıştırır ve bu yazılımın kullanıcılarınızın sanal makinelerinde olması gerekiyorsa, özel bir görüntü yerine bir formül kullanmayı düşünün.
 
-Daha ayrıntılı bir açıklama için bkz. [özel görüntüleri ve formülleri karşılaştırma](devtest-lab-comparing-vm-base-image-types.md) DevTest labs'deki.
+Daha ayrıntılı bir açıklama için bkz. DevTest Labs 'de [özel resimleri ve formülleri karşılaştırma](devtest-lab-comparing-vm-base-image-types.md) .
 
-### <a name="how-do-i-automate-the-process-of-uploading-vhd-files-to-create-custom-images"></a>Özel görüntüleri oluşturmak için VHD dosyalarını karşıya yükleme işleminin nasıl otomatikleştirebilirim?
+### <a name="how-do-i-automate-the-process-of-uploading-vhd-files-to-create-custom-images"></a>Özel görüntüler oluşturmak için VHD dosyalarını karşıya yükleme işlemini Nasıl yaparım? otomatikleştirin.
 
-Özel görüntüleri oluşturmak için VHD dosyalarını karşıya yükleme otomatikleştirmek için iki seçeneğiniz vardır:
+Özel görüntüler oluşturmak için VHD dosyalarını karşıya yüklemeyi otomatik hale getirmek için iki seçeneğiniz vardır:
 
-- Kullanım [AzCopy](../storage/common/storage-use-azcopy-v10.md) kopyalayın veya lab ile ilişkili depolama hesabına VHD dosyalarını yükleyin.
-- Kullanım [Azure Depolama Gezgini](../vs-azure-tools-storage-manage-with-storage-explorer.md). Depolama Gezgini Windows, OS X ve Linux'ta çalışan tek başına bir uygulamadır.
+- SSD dosyalarını, laboratuvarda ilişkili depolama hesabına kopyalamak veya karşıya yüklemek için [AzCopy](../storage/common/storage-use-azcopy-v10.md) kullanın.
+- [Azure Depolama Gezgini](../vs-azure-tools-storage-manage-with-storage-explorer.md)kullanın. Depolama Gezgini, Windows, OS X ve Linux 'ta çalışan tek başına bir uygulamadır.
 
-Laboratuvarınızı ile ilişkili hedef depolama hesabını bulmak için:
+Laboratuvarınız ile ilişkili hedef depolama hesabını bulmak için:
 
 1.  [Azure Portal](https://portal.azure.com) oturum açın.
-2.  Sol menüden **kaynak grupları**.
-3.  Bulun ve Laboratuvarınızı ile ilişkili kaynak grubunu seçin.
-4.  Altında **genel bakış**, depolama hesaplarından birini seçin.
+2.  Sol taraftaki menüden **kaynak grupları**' nı seçin.
+3.  Laboratuvarınız ile ilişkili kaynak grubunu bulun ve seçin.
+4.  **Genel bakış**' ın altında, depolama hesaplarından birini seçin.
 5.  **Bloblar**'ı seçin.
-6.  Karşıya yükleme listesinde arayın. Yoksa, 4. adıma geri dönün ve başka bir depolama hesabı deneyin.
-7.  Kullanım **URL** , AzCopy komutunda hedef olarak.
+6.  Listedeki karşıya yüklemeleri bulun. Hiçbiri yoksa, 4. adıma dönün ve başka bir depolama hesabı deneyin.
+7.  AzCopy Komutunuz için hedef olarak **URL 'yi** kullanın.
 
-Azure Market görüntüsü kendi özel kuruluş görüntü veya ne zaman kullanmalıyım?
+Ne zaman bir Azure Market görüntüsü kullanmalıyım? kendi özel kurumsal görüntümi?
 
-### <a name="when-should-i-use-an-azure-marketplace-image-vs-my-own-custom-organizational-image"></a>Azure Market görüntüsü kendi özel kuruluş görüntü veya ne zaman kullanmalıyım?
-Azure Market, belirli kaygıları veya kuruluş gereksinimlerine sahip olmadığınız sürece varsayılan olarak kullanılmalıdır. Ortak örnek verilebilir;
+### <a name="when-should-i-use-an-azure-marketplace-image-vs-my-own-custom-organizational-image"></a>Ne zaman bir Azure Market görüntüsü kullanmalıyım? kendi özel kurumsal görüntümi?
+Belirli endişeleriniz veya kuruluş gereksinimleriniz yoksa, Azure Marketi varsayılan olarak kullanılmalıdır. Bazı yaygın örnekler şunlardır;
 
-- Bir uygulamayı temel görüntüsü bir parçası olarak dahil olacak şekilde gerektiren karmaşık yazılım kurulumu.
-- Yükleme ve Kurulum bir uygulamanın Azure Market görüntüsü üzerinde eklenecek işlem süresi verimli bir kullanım olmayan kaç saat sürebilir.
-- Geliştiriciler ve test ediciler bir sanal makineyi hızlı bir şekilde erişmesi ve yeni bir sanal makine hazırlık süresini en aza indirmek istiyorsunuz.
-- Uyumluluk veya tüm makineler için yapılması gerekenleri yasal koşullar (örneğin, güvenlik ilkeleri).
-- Özel görüntüleri kullanarak hafifçe kabul olmamalıdır. Bunlar, artık VHD dosyalarını bu temel alınan temel görüntüleri için gereken yönettiğiniz fazladan karmaşıklık tanıtır. Düzenli olarak bu temel görüntüleri yazılım güncelleştirmeleri ile düzeltmeniz gerekir. Bu güncelleştirmeler, yeni işletim sistemi (OS) güncelleştirmeler ve güncelleştirmeleri ya da yazılım paketi kendisi için gerekli yapılandırma değişikliklerini içerir.
+- Temel görüntünün bir parçası olarak bir uygulamanın eklenmesini gerektiren karmaşık yazılım kurulumu.
+- Bir uygulamanın yüklenmesi ve kurulumu, bir Azure Marketi görüntüsüne eklenmek üzere işlem zamanının etkili bir şekilde kullanılması için birkaç saat sürebilir.
+- Geliştiriciler ve test ediciler, bir sanal makineye hızlı bir şekilde erişim gerektirir ve yeni bir sanal makinenin kurulum süresini en aza indirmek ister.
+- Tüm makineler için yerinde olması gereken uyumluluk veya yasal koşullar (örneğin, güvenlik ilkeleri).
+- Özel görüntülerin kullanılması, hafif olarak düşünülmemelidir. Bu temel görüntüler için VHD dosyalarını yönetmeniz gerektiği için, daha fazla karmaşıklık sağlar. Ayrıca, bu temel görüntülerin yazılım güncelleştirmeleriyle düzenli olarak yayama yapmanız gerekir. Bu güncelleştirmeler yeni işletim sistemi (OS) güncelleştirmelerini ve yazılım paketinin kendisi için gereken güncelleştirme veya yapılandırma değişikliklerini içerir.
 
 ## <a name="artifacts"></a>Yapıtlar
 
-### <a name="what-are-artifacts"></a>Yapıtları nelerdir?
-Yapıtlar, en yeni güncelleştirmeleri dağıtmak veya bir VM'ye geliştirme araçlarınızı dağıtmak için kullanabileceğiniz özelleştirilebilir öğeleridir. Sanal Makineyi oluştururken sanal makinenizde yapıtları ekleyin. VM sağlandıktan sonra yapıtları dağıtın ve sanal makinenize yapılandırın. Önceden mevcut olan çeşitli yapıtları kullanılabilir bizim [ortak GitHub deposu](https://github.com/Azure/azure-devtestlab/tree/master/Artifacts). Ayrıca [kendi yapıtları Yazar](devtest-lab-artifact-author.md).
+### <a name="what-are-artifacts"></a>Yapıtlar nelerdir?
+Yapıtlar, en son bitleri dağıtmak veya geliştirme araçlarınızı bir VM 'ye dağıtmak için kullanabileceğiniz özelleştirilebilir öğelerdir. VM 'yi oluştururken sanal makinenize yapıt ekleyin. VM sağlandıktan sonra yapıtlar VM 'nizi dağıtıp yapılandırır. [Genel GitHub](https://github.com/Azure/azure-devtestlab/tree/master/Artifacts)depolarımızda, önceden var olan çeşitli yapıtlar mevcuttur. [Kendi yapıtlarınızı](devtest-lab-artifact-author.md)da yazabilirsiniz.
 
-### <a name="my-artifact-failed-during-vm-creation-how-do-i-troubleshoot-it"></a>My yapıt VM oluşturma sırasında başarısız oldu. Bunu nasıl giderebilirim?
-Başarısız bir yapıt için günlükleri alma hakkında bilgi için bkz: [DevTest labs'deki yapıt hatalarını tanılama nasıl](devtest-lab-troubleshoot-artifact-failure.md).
+### <a name="my-artifact-failed-during-vm-creation-how-do-i-troubleshoot-it"></a>VM oluşturma sırasında yapım başarısız oldu. Nasıl yaparım? sorun gidermi?
+Başarısız yapıtlarınız için günlük alma hakkında bilgi edinmek için bkz. [DevTest Labs 'de yapıt hatalarının nasıl tanılanacağı](devtest-lab-troubleshoot-artifact-failure.md).
 
-### <a name="when-should-an-organization-use-a-public-artifact-repository-vs-private-artifact-repository-in-devtest-labs"></a>Ne zaman bir kuruluş, genel yapıt deposuna DevTest Labs özel yapıt deposunda karşılaştırması kullanmalıdır?
-[Genel yapıt deposuna](https://github.com/Azure/azure-devtestlab/tree/master/Artifacts) en yaygın olarak kullanılan yazılım paketleri başlangıç kümesi sağlar. Bu hızlı dağıtım ile zaman yatırım yapmanıza gerek kalmadan yaygın geliştirici araçları ve eklentileri oluşturmaya yardımcı olur. Kendi özel depoya dağıtmayı tercih edebilirsiniz. Genel ve özel bir depo paralel kullanabilirsiniz. Genel deponun devre dışı bırakmak seçebilirsiniz. Özel bir depo dağıtmak için ölçütleri hakkında önemli noktalar ve aşağıdaki soruları dikkate alınmalıdır:
+### <a name="when-should-an-organization-use-a-public-artifact-repository-vs-private-artifact-repository-in-devtest-labs"></a>Kuruluşun, DevTest Labs 'de ortak yapıt deposu ve özel yapıt deposu kullanması gerekir mi?
+[Ortak yapıt deposu](https://github.com/Azure/azure-devtestlab/tree/master/Artifacts) , en yaygın olarak kullanılan bir ilk yazılım paketi kümesi sağlar. Ortak geliştirici araçları ve eklentilerini yeniden oluşturmak için zaman yatırmaya gerek kalmadan hızlı dağıtıma yardımcı olur. Kendi özel deposunu dağıtmayı seçebilirsiniz. Genel ve özel bir depoyu paralel olarak kullanabilirsiniz. Ortak depoyu devre dışı bırakmayı da tercih edebilirsiniz. Özel bir depoyu dağıtmaya yönelik ölçütler aşağıdaki soru ve noktalara göre yapılmalıdır:
 
-- Kuruluşun kurumsal lisanslı yazılımı kendi DevTest Labs teklifi kapsamında olan bir gereksinimi var mı? Yanıt Evet ise, özel bir depo oluşturulmalıdır.
-- Kuruluş genel sağlama sürecinin bir parçası olarak gerekli olan belirli bir işlemi sağlayan özel yazılım geliştirmek mu? Yanıt Evet ise, özel bir depo dağıtılmalıdır.
-- Kuruluşunuzun idare İlkesi yalıtım gerektirir ve dış depolardaki kuruluş doğrudan yapılandırma yönetimi altında olmayan, bir özel yapıt deposu dağıtılmalıdır. Bu işlemin bir parçası, genel deponun bir başlangıç kopyasını kopyalanır ve özel depoya ile tümleşiktir. Böylece kimse kuruluş içinde artık erişebilir sonra genel deponun devre dışı bırakılabilir. Bu yaklaşım, kuruluş kapsamındaki tüm kullanıcılara yalnızca bir kuruluş tarafından onaylanan tek depo olmasını zorlar ve yapılandırma değişikliklerini en aza indirin.
+- Kuruluşun, DevTest Labs sunumunun parçası olarak kurumsal lisanslı yazılıma sahip olması için bir gereksinimi var mı? Yanıt Evet ise, özel bir deponun oluşturulması gerekir.
+- Kuruluş, genel sağlama sürecinin bir parçası olarak gerekli olan belirli bir işlem sağlayan özel yazılım geliştirebilir mi? Yanıt Evet ise, özel bir deponun dağıtılması gerekir.
+- Kuruluşun idare ilkesi yalıtım gerektiriyorsa ve dış depolar kuruluş tarafından doğrudan yapılandırma yönetimi altında değilse, özel bir yapıt deposu dağıtılmalıdır. Bu işlemin bir parçası olarak, ortak deponun ilk kopyası özel depo ile kopyalanabilir ve tümleştirilebilir. Daha sonra, ortak depo devre dışı bırakılabilir, böylece kuruluş içinde hiç kimse artık erişemez. Bu yaklaşım, kuruluştaki tüm kullanıcıların kuruluş tarafından onaylanan tek bir depoya sahip olmasını ve yapılandırma drlarını en aza indirmenize olanak sağlar.
 
 
-### <a name="should-an-organization-plan-for-a-single-repository-or-allow-multiple-repositories"></a>Bir kuruluş için tek bir depoda plan veya birden çok deposu izin?
-Kuruluşunuzun genel idare ve yapılandırma yönetimi stratejisi kapsamında, merkezi bir havuz kullanmanızı öneririz. Birden çok deposu kullandığınızda, yönetilmeyen yazılım siloları zamanla durdurabilir. Merkezi bir depo ile birden çok takımı yapıtlar bu depodan kendi projeleri için kullanabilir. Standartlaştırma, güvenlik, yönetim kolaylığı zorlar ve çalışmalarınızı çoğaltma ortadan kaldırır. Merkezi bir parçası olarak, aşağıdaki eylemleri uygulamalar için uzun vadeli yönetimi ve sürdürülebilirlik önerilir:
+### <a name="should-an-organization-plan-for-a-single-repository-or-allow-multiple-repositories"></a>Bir kuruluş tek bir depoyu planlıyor veya birden çok depoya izin veriyor mu?
+Kuruluşunuzun genel idare ve yapılandırma yönetimi stratejisinin bir parçası olarak, merkezi bir depo kullanmanızı öneririz. Birden çok depo kullandığınızda, bu kişiler zaman içinde yönetilmeyen yazılımların siloları haline gelebilir. Merkezi bir depoyla, birden fazla ekip projeleri için bu depodan yapıları kullanabilir. Standartlaştırma, güvenlik ve yönetim kolaylığı sağlar ve çabalarınızın çoğaltılmasını ortadan kaldırır. Merkezileşmeyi bir parçası olarak, uzun süreli yönetim ve sürdürülebilirlik için önerilen uygulamalar aşağıdaki eylemlerdir:
 
-- Azure aboneliği kimlik doğrulama ve yetkilendirme için kullandığı aynı Azure Active Directory kiracısı ile Azure depoları ilişkilendirin.
-- Adlı bir grup oluşturun `All DevTest Labs Developers` merkezi olarak yönetilen Azure Active Directory'de. Yapıt katkıda herhangi bir geliştirici bu gruba yerleştirilmelidir.
-- Aynı Azure Active Directory grubu, Azure depoları depoya ve Laboratuvar erişim sağlamak için kullanılabilir.
-- Azure depolarda dallanma veya çatal ayrı bir de geliştirme depoya birincil üretim depodan kullanılmalıdır. İçerik yalnızca ana dala bir çekme isteği ile bir uygun kod gözden geçirdikten sonra eklenir. Kod Gözden Geçiren, değişikliği onayladığında, ana dalın bakım için sorumlu olan, müşteri adayı geliştirici, güncelleştirilmiş kod birleştirir.
+- Azure Repos kimlik doğrulaması ve yetkilendirme için Azure aboneliğinin kullandığı Azure Active Directory kiracısıyla ilişkilendirin.
+- Merkezi olarak yönetilen Azure Active Directory `All DevTest Labs Developers` adında bir grup oluşturun. Yapıt geliştirmeye katkıda bulunan tüm geliştiriciler bu gruba yerleştirilmelidir.
+- Aynı Azure Active Directory grubu, Azure Repos deposuna ve laboratuvarına erişim sağlamak için kullanılabilir.
+- Azure Repos, dallandırma veya dallama, birincil üretim deposundan ayrı bir geliştirme deposunda ayrı olarak kullanılmalıdır. İçerik yalnızca, doğru bir kod incelemesi sonrasında bir çekme isteğiyle birlikte Ana dala eklenir. Kod gözden geçiren değişikliği onayladığında, ana dalın bakımında sorumlu olan bir lider geliştiricisi, güncelleştirilmiş kodu birleştirir.
 
 ## <a name="cicd-integration"></a>CI/CD tümleştirmesi
 
-### <a name="does-devtest-labs-integrate-with-my-cicd-toolchain"></a>DevTest Labs, my CI/CD araç zinciri ile tümleştiriliyor mu?
-Azure DevOps kullanıyorsanız, kullanabileceğiniz bir [DevTest Labs görevlerini uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuredevtestlabs.tasks) DevTest labs'deki yayın işlem hattınızı otomatik hale getirmek için. Bu uzantı ile gerçekleştirebileceğiniz görevlerden bazıları şunlardır:
+### <a name="does-devtest-labs-integrate-with-my-cicd-toolchain"></a>DevTest Labs CI/CD araç zincirimde tümleştirsin mi?
+Azure DevOps kullanıyorsanız, DevTest Labs 'de yayın işlem hattınızı otomatikleştirmek için bir [DevTest Labs görev uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuredevtestlabs.tasks) kullanabilirsiniz. Bu uzantıyla gerçekleştirebileceğiniz görevlerden bazıları şunlardır:
 
-- Oluşturun ve otomatik olarak bir VM dağıtın. VM en son sürümle Azure dosya kopyalama veya PowerShell Azure DevOps Hizmetleri görevleri kullanarak da yapılandırabilirsiniz.
-- Daha fazla bilgi için aynı VM'de bir hatayı yeniden oluşturmak için test edildikten sonra otomatik olarak bir VM'nin durumunu yakalayın.
-- Sürüm ardışık düzeninin sonunda sanal makine artık gerekli değilse silin.
+- VM 'yi otomatik olarak oluşturun ve dağıtın. Ayrıca, Azure dosya kopyası veya PowerShell Azure DevOps Services görevlerini kullanarak VM 'yi en son derleme ile yapılandırabilirsiniz.
+- Daha fazla araştırma için aynı VM 'de bir hatayı yeniden oluşturmak üzere test ettikten sonra sanal makinenin durumunu otomatik olarak yakala.
+- Artık gerekli olmadığında, yayın işlem hattının sonundaki VM 'yi silin.
 
-Aşağıdaki blog teklif rehberlik ve Azure DevOps Hizmetleri Uzantısı kullanma hakkında bilgi gönderir:
+Aşağıdaki blog gönderileri Azure DevOps Services uzantısını kullanma hakkında rehberlik ve bilgiler sunar:
 
 - [DevTest Labs ve Azure DevOps uzantısı](integrate-environments-devops-pipeline.md)
-- [Azure DevOps Services'dan bir DevTest Labs Laboratuvardaki yeni VM dağıtma](https://www.visualstudiogeeks.com/blog/DevOps/Deploy-New-VM-To-Existing-AzureDevTestLab-From-VSTS)
-- [DevTest Labs'de sürekli dağıtımlar için Azure DevOps Services sürüm Yönetimi'ni kullanma](https://www.visualstudiogeeks.com/blog/DevOps/Use-VSTS-ReleaseManagement-to-Deploy-and-Test-in-AzureDevTestLabs)
+- [Azure DevOps Services mevcut bir DevTest Labs laboratuvarında yeni bir sanal makine dağıtın](https://www.visualstudiogeeks.com/blog/DevOps/Deploy-New-VM-To-Existing-AzureDevTestLab-From-VSTS)
+- [DevTest Labs 'e yönelik sürekli dağıtımlar için Azure DevOps Services Release Management 'ı kullanma](https://www.visualstudiogeeks.com/blog/DevOps/Use-VSTS-ReleaseManagement-to-Deploy-and-Test-in-AzureDevTestLabs)
 
-Diğer sürekli tümleştirme (CI) için / sürekli teslim (CD) araç zincirlerinden, aynı senaryoları elde edebileceğiniz dağıtma [Azure Resource Manager şablonları](https://azure.microsoft.com/resources/templates/) kullanarak [Azure PowerShell cmdlet'lerini](../azure-resource-manager/resource-group-template-deploy.md) ve [.NET SDK'ları](https://www.nuget.org/packages/Microsoft.Azure.Management.DevTestLabs/). Ayrıca [için DevTest Labs REST API'leri](https://aka.ms/dtlrestapis) araç zincirinizi ile tümleştirmek için.
+Diğer sürekli tümleştirme (CI)/sürekli teslim (CD) araç zincirleri için, [Azure PowerShell cmdlet 'lerini](../azure-resource-manager/resource-group-template-deploy.md) ve [.net sdk](https://www.nuget.org/packages/Microsoft.Azure.Management.DevTestLabs/)'larını kullanarak [Azure Resource Manager şablonlarını](https://azure.microsoft.com/resources/templates/) dağıtarak aynı senaryolara ulaşabilirsiniz. Ayrıca, toolzinciriniz ile tümleştirilecek [DevTest Labs Için REST API 'lerini](https://aka.ms/dtlrestapis) de kullanabilirsiniz.
 
 ## <a name="networking"></a>Ağ
 
-### <a name="when-should-i-create-a-new-virtual-network-for-my-devtest-labs-environment-vs-using-an-existing-virtual-network"></a>Yeni bir sanal ağ ve var olan bir sanal ağ kullanarak DevTest Labs ortamım için ne zaman oluşturmalıyım?
-Ardından, sanal makinelerinizin altyapınız ile etkileşim kurmak gerekiyorsa, DevTest Labs ortamınız içinde mevcut bir sanal ağ kullanmayı düşünün. ExpressRoute kullanıyorsanız, sanal ağlar en aza indirmek isteyebilirsiniz / alt ağlar Aboneliklerde kullanılmak üzere atanan, IP adres alanı parçalara böylece. 
+### <a name="when-should-i-create-a-new-virtual-network-for-my-devtest-labs-environment-vs-using-an-existing-virtual-network"></a>DevTest Labs ortamım için yeni bir sanal ağ oluşturmalı ve var olan bir sanal ağı kullanıyor mıyım?
+Sanal makinelerinizin mevcut altyapıyla etkileşime ihtiyacı varsa, DevTest Labs ortamınızda var olan bir sanal ağı kullanmayı göz önünde bulundurun. ExpressRoute kullanırsanız, aboneliklerde kullanılmak üzere atanan IP adresi alanınızı parçalara atabilmeniz için sanal ağlar/alt ağların miktarını en aza indirmek isteyebilirsiniz. 
 
-Sanal ağ eşleme düzeni burada kullanmayı deneyin ([merkez-uç modeli](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)) çok. Bu yaklaşım, abonelikler arasında vnet/alt ağ iletişimi sağlar. Aksi takdirde, DevTest Labs her ortamın kendi sanal ağı olabilir. 
+Burada VNet eşleme[modelini (hub-bağlı bileşen modeli](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)) de kullanmayı göz önünde bulundurun. Bu yaklaşım, abonelikler arasında VNET/subnet iletişimini mümkün bir şekilde sunar. Aksi halde, her DevTest Labs ortamının kendi sanal ağı olabilir. 
 
-Vardır [sınırları](../azure-subscription-service-limits.md) abonelik başına sanal ağ sayısı. Bu sınır 100 olarak oluşturulabilir olsa varsayılan süreyi 50 ' dir.
+Abonelik başına sanal ağ sayısında [sınırlar](../azure-subscription-service-limits.md) vardır. Varsayılan miktar 50 ' dir, ancak bu sınır 100 olarak yükseltilebilir.
 
-### <a name="when-should-i-use-a-shared-ip-vs-public-ip-vs-private-ip"></a>Özel IP ve genel IP ile paylaşılan bir IP ne zaman kullanmalıyım?
+### <a name="when-should-i-use-a-shared-ip-vs-public-ip-vs-private-ip"></a>Paylaşılan IP ile genel IP ve özel IP 'yi ne zaman kullanmalıyım?
  
-Bir siteden siteye VPN veya Express Route kullandığınız makinelerinizi genel internet üzerinden erişilebilir, iç ağ aracılığıyla ve erişilemez olacak şekilde özel IP'ler kullanmayı düşünün.
+Siteden siteye VPN veya Express Route kullanıyorsanız, makinelerinizin iç ağınız aracılığıyla erişilebilir olması ve genel İnternet üzerinden erişilemez olması için özel IP 'Ler kullanmayı düşünün.
 
 > [!NOTE]
-> Laboratuvar sahibi yanlışlıkla, VM'ler için genel IP adresleri hiç oluşturmasını sağlamak için bu alt ağ ilkesi değiştirebilirsiniz. Abonelik sahibi, genel IP'ler oluşturulmasını önleyen bir abonelik İlkesi oluşturmanız gerekir.
+> Laboratuvar sahipleri bu alt ağ ilkesini, yanlışlıkla VM 'Ler için genel IP adresleri oluşturmadığından emin olmak için değiştirebilir. Abonelik sahibinin ortak IP 'Lerin oluşturulmasını önleyecek bir abonelik ilkesi oluşturması gerekir.
 
-Paylaşılan genel IP'ler kullanırken bir laboratuvarındaki sanal makinelerde bir genel IP adresi paylaşın. Bu yaklaşım, belirli bir aboneliği için genel IP adresleri barındırabileceğiniz ihlal önlemek gerektiğinde yararlı olabilir.
+Paylaşılan genel IP 'Leri kullanırken bir laboratuvardaki sanal makineler ortak bir IP adresi paylaşır. Bu yaklaşım, belirli bir abonelik için genel IP adresleri sınırlarına ulaşmaktan kaçınmak gerektiğinde yararlı olabilir.
 
-### <a name="how-do-i-ensure-that-development-and-test-virtual-machines-are-unable-to-reach-the-public-internet-are-there-any-recommended-patterns-to-set-up-network-configuration"></a>Nasıl sağlamak, geliştirme ve test sanal makineleri genel internet ulaşamıyor? Ağ Yapılandırması'kurmak için herhangi bir önerilen Düzen var mı?
+### <a name="how-do-i-ensure-that-development-and-test-virtual-machines-are-unable-to-reach-the-public-internet-are-there-any-recommended-patterns-to-set-up-network-configuration"></a>Geliştirme ve test sanal makinelerinin herkese açık internet 'e ulaşamıyor Nasıl yaparım? emin misiniz? Ağ yapılandırmasını kurmak için önerilen desenler var mı?
 
-Evet. Dikkate alınması gereken – gelen ve giden trafiği iki unsur vardır.
+Evet. Dikkate alınması gereken iki nokta vardır: gelen ve giden trafik.
 
-- **Gelen trafik** – internet ulaşılamıyor sonra sanal makinenin genel IP adresi yoksa. Hiçbir kullanıcı, genel bir IP adresi oluşturabilir, bir abonelik düzeyi ilkesi ayarlanmış olduğundan emin olun. yaygın bir yaklaşımdır.
-- **Giden trafik** – sanal makineler genel İnternet'e doğrudan erişmesini önlemek ve kurumsal bir güvenlik duvarı aracılığıyla trafiği zorlamak istiyorsanız sonra şirket içi trafiği expressroute üzerinden yönlendirebilir veya VPN kullanarak zorlamalı yönlendirme.
+- **Gelen trafik** : sanal makınenın genel IP adresi yoksa, İnternet tarafından erişilemez. Yaygın bir yaklaşım, bir kullanıcının genel IP adresi oluşturgerektirmediğinden, abonelik düzeyinde bir ilkenin ayarlanmış olmasını sağlamaktır.
+- **Giden trafik** : sanal makinelerin genel İnternet 'e doğrudan erişmesini engellemek ve trafiği bir kurumsal güvenlik duvarı aracılığıyla zorlamak istiyorsanız, zorlamalı yönlendirmeyi kullanarak trafiği Express Route veya VPN aracılığıyla yönlendirebilirsiniz.
 
 > [!NOTE]
-> Proxy ayarları olmadan trafiği engelleyen bir proxy sunucunuz varsa, özel durumlar için laboratuvar yapıt depolama hesabı eklemek unutmayın.
+> Proxy ayarları olmayan trafiği engelleyen bir ara sunucunuz varsa, laboratuvarın yapıt depolama hesabına özel durumlar eklemeyi unutmayın.
 
-Ağ güvenlik grupları, sanal makine ya da alt ağlar için de kullanabilirsiniz. Bu adım, ek bir izin ver / trafiği engellemek için koruma katmanı ekler.
+Sanal makineler veya alt ağlar için ağ güvenlik grupları da kullanabilirsiniz. Bu adım trafiğe izin vermek/engellemek için ek bir koruma katmanı ekler.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-### <a name="why-isnt-my-existing-virtual-network-saving-properly"></a>Neden olmayan mevcut sanal ağ düzgün bir şekilde kaydediliyor?
-Sanal ağ adı nokta içeren bir olasılıktır. Bu durumda, dönemleri kaldırarak veya bunları çizgilerle değiştirerek deneyin. Ardından, sanal ağ kaydetmeyi yeniden deneyin.
+### <a name="why-isnt-my-existing-virtual-network-saving-properly"></a>Var olan sanal ağ neden düzgün şekilde kaydediliyor?
+Bunun bir nedeni, sanal ağ adınızın nokta içermeme olasılığı vardır. Bu durumda, dönemleri kaldırmayı veya kısa çizgilerden değiştirmeyi deneyin. Sonra, sanal ağı kaydetmeyi yeniden deneyin.
 
-### <a name="why-do-i-get-a-parent-resource-not-found-error-when-i-provision-a-vm-from-powershell"></a>Ben bir VM'den PowerShell sağladığınızda neden "üst kaynağı bulunamadı" hatası alıyorum?
-Bir kaynak başka bir kaynak için bir üst, alt kaynak oluşturmadan önce üst kaynak mevcut olması gerekir. Üst kaynak yoksa, gördüğünüz bir **ParentResourceNotFound** ileti. Üst kaynak üzerinde bir bağımlılık belirtmezseniz, alt kaynak önce üst dağıtılmış olabilir.
+### <a name="why-do-i-get-a-parent-resource-not-found-error-when-i-provision-a-vm-from-powershell"></a>PowerShell 'den bir VM sağlamadığımda neden "üst kaynak bulunamadı" hatası alıyorum?
+Bir kaynak başka bir kaynağın üst öğesi olduğunda, alt kaynağı oluşturmadan önce üst kaynağın mevcut olması gerekir. Üst kaynak yoksa, bir **Parentresourcenotfound** iletisi görürsünüz. Üst kaynakta bir bağımlılık belirtmezseniz, alt kaynak üst öğeden önce dağıtılabilir.
 
-Sanal makineleri bir laboratuar ortamında bir kaynak grubu altında alt kaynaklardır. PowerShell kullanarak Vm'leri dağıtmak için Resource Manager şablonları kullandığınızda, PowerShell Betiği belirtilen kaynak grubu adı Laboratuvar tamamlandığında, kaynak grubu adı olmalıdır. Daha fazla bilgi için [yaygın Azure dağıtım hatalarını giderme](../azure-resource-manager/resource-manager-common-deployment-errors.md).
+VM 'Ler bir kaynak grubundaki laboratuvar altında alt kaynaklardır. PowerShell kullanarak VM 'Leri dağıtmak için Kaynak Yöneticisi Şablonlar kullandığınızda, PowerShell betiğine girilen kaynak grubu adı laboratuvarın kaynak grubu adı olmalıdır. Daha fazla bilgi için bkz. [Genel Azure dağıtım hatalarıyla Ilgili sorunları giderme](../azure-resource-manager/resource-manager-common-deployment-errors.md).
 
-### <a name="where-can-i-find-more-error-information-if-a-vm-deployment-fails"></a>Bir VM dağıtımı başarısız olursa daha fazla hata bilgilerini nerede bulabilirim?
-Sanal makine dağıtım hataları, etkinlik günlüklerinde yakalanır. Laboratuvar VM etkinlik günlükleri altında bulabilirsiniz **denetim günlükleri** veya **sanal makine tanılama** Laboratuvar VM sayfasında kaynak menüsündeki (VM'den seçtikten sonra sayfanın görünür sanal makineler listem).
+### <a name="where-can-i-find-more-error-information-if-a-vm-deployment-fails"></a>Bir VM dağıtımı başarısız olursa nereden daha fazla hata bilgisi bulabilirim?
+VM dağıtım hataları, etkinlik günlüklerinde yakalanır. Laboratuvar VM 'si etkinlik günlüklerini, laboratuvar VM 'si sayfasındaki kaynak menüsündeki **Denetim günlükleri** veya **sanal makine tanılama** altında bulabilirsiniz (sanal MAKINELERIM listesinden VM 'yi seçtikten sonra sayfa görünür).
 
-Bazı durumlarda, VM dağıtımı başlamadan önce dağıtım hatası oluşur. Sanal makine ile oluşturulan bir kaynak için abonelik sınırı aşıldığında bir örnektir. Bu durumda, hata ayrıntılarını Laboratuvar düzeyinde etkinlik günlüğünde yakalanır. Etkinlik günlükleri alt kısmında bulunan **yapılandırması ve ilkelerini** ayarları. Azure'da günlüklerini etkinlik kullanma hakkında daha fazla bilgi için bkz: [kaynaklara uygulanan eylemleri denetlemek için etkinlik günlüklerini görüntüleme](../azure-resource-manager/resource-group-audit.md).
+Bazen, dağıtım hatası VM dağıtımı başlamadan önce oluşur. VM ile oluşturulan bir kaynak için abonelik sınırının aşıldığı bir örnektir. Bu durumda, hata ayrıntıları laboratuvar düzeyi etkinlik günlüklerinde yakalanır. Etkinlik günlükleri **yapılandırma ve ilke** ayarlarının altında bulunur. Azure 'da etkinlik günlüklerini kullanma hakkında daha fazla bilgi için bkz. [kaynaklardaki eylemleri denetlemek için etkinlik günlüklerini görüntüleme](../azure-resource-manager/resource-group-audit.md).
 
+### <a name="why-do-i-get-location-is-not-available-for-resource-type-error-when-trying-to-create-a-lab"></a>Laboratuvar oluşturmaya çalışırken neden "kaynak türü için konum kullanılamıyor" hatası alıyorum?
+Laboratuvar oluşturmaya çalıştığınızda aşağıdakine benzer bir hata iletisi görebilirsiniz: 
 
+```
+The provided location 'australiacentral' is not available for resource type 'Microsoft.KeyVault/vaults'. List of available regions for the resource type is 'northcentralus,eastus,northeurope,westeurope,eastasia,southeastasia,eastus2,centralus,southcentralus,westus,japaneast,japanwest,australiaeast,australiasoutheast,brazilsouth,centralindia,southindia,westindia,canadacentral,canadaeast,uksouth,ukwest,westcentralus,westus2,koreacentral,koreasouth,francecentral,southafricanorth
+```
+
+Aşağıdaki adımlardan birini gerçekleştirerek, bu hatayı çözebilirsiniz:
+
+#### <a name="option-1"></a>Seçenek 1
+[Bölgeye göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/) sayfasında, Azure bölgelerindeki kaynak türünün kullanılabilirliğini kontrol edin. Kaynak türü belirli bir bölgede kullanılabilir değilse, DevTest Labs bu bölgede bir laboratuvar oluşturmayı desteklemez. Laboratuvarınızı oluştururken başka bir bölge seçin. 
+
+#### <a name="option-2"></a>Seçenek 2
+Bölgenizde kaynak türü kullanılabiliyorsa, aboneliğiniz ile kayıtlı olup olmadığını denetleyin. [Bu makalede](../azure-resource-manager/resource-manager-supported-services.md)gösterildiği gibi, abonelik sahibi düzeyinde yapılabilir. 
 
 

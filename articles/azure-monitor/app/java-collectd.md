@@ -1,49 +1,44 @@
 ---
-title: Linux - Azure üzerinde Java web uygulaması performansını izleme | Microsoft Docs
-description: Uygulama izleme için Application Insights performans toplanan eklentisi ile Java Web sitenizin, genişletilmiş.
-services: application-insights
-documentationcenter: java
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 40c68f45-197a-4624-bf89-541eb7323002
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Linux 'ta Java Web uygulaması performansını izleme-Azure | Microsoft Docs
+description: Application Insights için CollectD eklentisi ile Java Web sitenizin genişletilmiş uygulama performansı izlemesi.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 03/14/2019
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: c6e947dfed3169f346f43ab08225056815e8b487
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 03/14/2019
+ms.openlocfilehash: 47e5e9dd81174b79e149ba29eec725c8c17eb1a6
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67061202"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73176396"
 ---
-# <a name="collectd-linux-performance-metrics-in-application-insights"></a>toplanan: Application ınsights Linux performans ölçümleri
+# <a name="collectd-linux-performance-metrics-in-application-insights"></a>collectd: Application Insights Linux performans ölçümleri
 
 
-İçindeki Linux sistem performans ölçümlerini keşfetmek için [Application Insights](../../azure-monitor/app/app-insights-overview.md), yükleme [toplanan](https://collectd.org/)eklentisi, Application Insights ile birlikte. Bu açık kaynaklı çözüm çeşitli sistem ve ağ istatistiklerini toplar.
+[Application Insights](../../azure-monitor/app/app-insights-overview.md)'deki Linux sistem performans ölçümlerini araştırmak için, Application Insights eklentisiyle [toplanan](https://collectd.org/)'yi birlikte yüklemelisiniz. Bu açık kaynaklı çözüm çeşitli sistem ve ağ istatistiklerini toplar.
 
-Genellikle zaten varsa, toplanan kullanacağınız [Application Insights ile Java web hizmetinizin izleme eklenmiş][java]. Uygulamanızın performansını geliştirmek veya sorunları tanılamak için yardımcı olacak daha fazla veri sağlar. 
+Genellikle, [Java Web hizmetinizi Application Insights][java]zaten belirlediyseniz toplanan kullanırsınız. Uygulamanızın performansını geliştirmenize veya sorunları tanılamanıza yardımcı olacak daha fazla veri sunar. 
 
 ## <a name="get-your-instrumentation-key"></a>İzleme anahtarınızı alın
-İçinde [Microsoft Azure Portal'da](https://portal.azure.com)açın [Application Insights](../../azure-monitor/app/app-insights-overview.md) verilerin görünmesini istediğiniz kaynak. (Veya [yeni kaynak Oluştur](../../azure-monitor/app/create-new-resource.md ).)
+[Microsoft Azure Portal](https://portal.azure.com), verilerin görünmesini istediğiniz [Application Insights](../../azure-monitor/app/app-insights-overview.md) kaynağını açın. (Veya [Yeni bir kaynak oluşturun](../../azure-monitor/app/create-new-resource.md ).)
 
-Kaynağı tanımlayan izleme anahtarını bir kopyasını alın.
+Kaynak tanımlayan izleme anahtarının bir kopyasını alın.
 
-![Tümüne Gözat, kaynağınızı açın ve ardından temel bileşenler açılan listeyi seçin ve izleme anahtarını kopyalama](./media/java-collectd/instrumentation-key-001.png)
+![Tümüne göz atın, kaynağınızı açın ve temel bileşenler açılan penceresinde, Izleme anahtarını seçin ve kopyalayın](./media/java-collectd/instrumentation-key-001.png)
 
-## <a name="install-collectd-and-the-plug-in"></a>Toplanan ve eklenti yükleme
-Linux sunucusu makinelerinizde:
+## <a name="install-collectd-and-the-plug-in"></a>Toplanan ve eklentiyi yükler
+Linux sunucu makinelerinizde:
 
-1. Yükleme [toplanan](https://collectd.org/) sürüm 5.4.0 ya da daha sonra.
-2. İndirme [Application Insights toplanan yazan eklentisi](https://aka.ms/aijavasdk). Sürüm numarasını not edin.
-3. Eklenti JAR içine kopyalama `/usr/share/collectd/java`.
-4. Düzen `/etc/collectd/collectd.conf`:
-   * Emin [Java eklentisi](https://collectd.org/wiki/index.php/Plugin:Java) etkinleştirilir.
-   * Aşağıdaki JAR içerecek şekilde JVMArg java.class.path için güncelleştirin. Sürüm numarasını indirdiğiniz olanla eşleşecek şekilde güncelleştirin:
+1. [Toplanan](https://collectd.org/) sürüm 5.4.0 veya üstünü yükler.
+2. [Application Insights toplanan yazıcı eklentisini](https://github.com/microsoft/ApplicationInsights-Java/tree/master/collectd/src/main/java/com/microsoft/applicationinsights/collectd/internal)indirin. Sürüm numarasını aklınızda yapın.
+3. Eklenti JAR dosyasını `/usr/share/collectd/java`içine kopyalayın.
+4. `/etc/collectd/collectd.conf`Düzenle:
+   * [Java eklentisinin](https://collectd.org/wiki/index.php/Plugin:Java) etkinleştirildiğinden emin olun.
+   * Aşağıdaki JAR 'yi dahil etmek için Java. Class. Path için JVMArg 'yi güncelleştirin. Sürüm numarasını indirdiğiniz bir sürümle eşleşecek şekilde güncelleştirin:
    * `/usr/share/collectd/java/applicationinsights-collectd-1.0.5.jar`
-   * Kaynağınızın izleme anahtarını kullanarak, bu kod parçacığını ekleyin:
+   * Bu kod parçacığını, kaynağınızın Izleme anahtarını kullanarak ekleyin:
 
 ```XML
 
@@ -53,7 +48,7 @@ Linux sunucusu makinelerinizde:
      </Plugin>
 ```
 
-Örnek bir yapılandırma dosyası bir bölümü aşağıda verilmiştir:
+Örnek yapılandırma dosyasının bir parçası aşağıda verilmiştir:
 
 ```XML
 
@@ -86,47 +81,47 @@ Linux sunucusu makinelerinizde:
     ...
 ```
 
-Diğer yapılandırma [toplanan eklentileri](https://collectd.org/wiki/index.php/Table_of_Plugins), hangi çeşitli verilerini toplayabilir farklı kaynaklardan gelen.
+Farklı kaynaklardan çeşitli verileri toplayabilen diğer [toplanan eklentilerini](https://collectd.org/wiki/index.php/Table_of_Plugins)yapılandırın.
 
-Toplanan göre yeniden kendi [el ile](https://collectd.org/wiki/index.php/First_steps).
+[El ile](https://collectd.org/wiki/index.php/First_steps)için toplanan 'yi yeniden başlatın.
 
-## <a name="view-the-data-in-application-insights"></a>Application Insights'ta verileri görüntüleyin
-Application Insights kaynağınızı açın [ölçüm ve grafikler ekleyin][metrics], özel kategori görmek istediğiniz ölçümleri seçme.
+## <a name="view-the-data-in-application-insights"></a>Application Insights verileri görüntüleme
+Application Insights kaynağınız içinde, ölçümler ' i açın [ve grafikler ekleyin ve][metrics]özel kategoriden görmek istediğiniz ölçümleri seçin.
 
-Varsayılan olarak, kendisinden ölçümleri toplanmış olan tüm konak makinelerde ölçümleri toplanır. Grafik ayrıntıları dikey penceresinde, konak başına ölçümleri görüntülemek için gruplandırma'yı açın ve tarafından toplanan konak grubu seçin.
+Varsayılan olarak ölçümler, ölçümlerin toplandığı tüm ana makineler arasında toplanır. Konak başına ölçümleri görüntülemek için, grafik ayrıntıları dikey penceresinde gruplamayı açın ve ardından CollectD-Host ' a göre gruplandırmayı seçin.
 
-## <a name="to-exclude-upload-of-specific-statistics"></a>Karşıya yükleme belirli İstatistikler dışlamak için
-Varsayılan olarak, Application Insights eklentisi 'eklentileri okuma' tüm etkin toplanan tarafından toplanan tüm verileri gönderir. 
+## <a name="to-exclude-upload-of-specific-statistics"></a>Belirli istatistiklerin karşıya yüklenmesini dışlamak için
+Varsayılan olarak, Application Insights eklentisi tüm etkin toplanan ' okuma ' eklentileri tarafından toplanan tüm verileri gönderir. 
 
-Özel eklentiler ya da veri kaynağından verileri dışlamak için:
+Belirli eklentilerden veya veri kaynaklarından veri dışlamak için:
 
 * Yapılandırma dosyasını düzenleyin. 
-* İçinde `<Plugin ApplicationInsightsWriter>`, böyle yönerge satırları ekleyin:
+* `<Plugin ApplicationInsightsWriter>`, aşağıdaki gibi yönerge satırları ekleyin:
 
-| Yönergesi | Etki |
+| Deki | Etki |
 | --- | --- |
-| `Exclude disk` |Tarafından toplanan tüm verileri dışlamak `disk` eklentisi |
-| `Exclude disk:read,write` |Adlı kaynaklarını hariç tutma `read` ve `write` gelen `disk` eklentisi. |
+| `Exclude disk` |`disk` eklentisi tarafından toplanan tüm verileri Dışla |
+| `Exclude disk:read,write` |`read` ve `write` adlı kaynakları `disk` eklentisine dışlayın. |
 
-Yeni bir satır ile ayrı yönergeleri.
+Yönergeleri bir yeni satır ile ayırın.
 
-## <a name="problems"></a>Sorunlarınız mı var?
-*Verileri portalında görmüyorum*
+## <a name="problems"></a>Sorunlar?
+*Portalda veri görmüyorum*
 
-* Açık [arama] [ diagnostic] ham olaylar gelmiş görmek için. Bazen, ölçüm Gezgini'nde görünür daha uzun sürer.
-* Gerekebilir [giden veriler için güvenlik duvarı özel durumlarını ayarlama](../../azure-monitor/app/ip-addresses.md)
-* Application Insights eklentisi içinde izlemeyi etkinleştirin. İçinde bu satırı ekleyin `<Plugin ApplicationInsightsWriter>`:
+* Ham olayların ulaşıp ulaşmadığını görmek için [arama][diagnostic] ' yı açın. Bazen Ölçüm Gezgini 'nde görünmesi daha uzun sürer.
+* [Giden veriler için güvenlik duvarı özel durumları ayarlamanız](../../azure-monitor/app/ip-addresses.md) gerekebilir
+* Application Insights eklentisinde izlemeyi etkinleştirin. Bu satırı `<Plugin ApplicationInsightsWriter>`içine ekleyin:
   * `SDKLogger true`
-* Bir terminal açın ve raporlama tüm sorunları görmek için ayrıntılı modda toplanan başlayın:
+* Raporlama yaptığı sorunları görmek için bir Terminal açın ve toplanan 'yi ayrıntılı modda başlatın:
   * `sudo collectd -f`
 
 ## <a name="known-issue"></a>Bilinen sorun
 
-Application Insights yazma eklentisi, belirli okuma eklenti ile uyumlu değil. Bazı eklentiler, bazen "NaN burada bir kayan noktalı sayı olan Application Insights eklentisi bekliyor" gönderin.
+Application Insights yazma eklentisi, belirli okuma eklentileri ile uyumsuzdur. Bazı Eklentiler bazen Application Insights eklentisinin kayan noktalı bir sayı beklediği "NaN" değerini gönderir.
 
-Belirti: Toplanan günlük içeren "AI:... hataları gösterir. SyntaxError: Beklenmeyen belirteç N".
+Belirti: toplanan günlüğünde "AI:... SyntaxError: beklenmeyen belirteç yok.
 
-Geçici çözüm: Sorun yazma eklentileri tarafından toplanan veriler hariç tutun. 
+Geçici çözüm: sorun yazma eklentileri tarafından toplanan verileri dışlayın. 
 
 <!--Link references-->
 

@@ -1,218 +1,229 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile Freshservice | Microsoft Docs'
-description: Azure Active Directory ve Freshservice arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici Azure Active Directory: tek oturum açma (SSO) öğesini en güncel hizmet ile tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve tek başına hizmeti arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: daveba
+manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 3dd22b1f-445d-45c6-8eda-30207eb9a1a8
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 05/20/2019
+ms.date: 09/11/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8fbf69ba814b99434e933ed700fb0c8c842c3312
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c3ba2f59799629873553fe261abebf59529ad94d
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67101850"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "73570597"
 ---
-# <a name="tutorial-integrate-freshservice-with-azure-active-directory"></a>Öğretici: Freshservice Azure Active Directory ile tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-freshservice"></a>Öğretici: tek oturum açma (SSO) öğesini en güncel hizmet ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Freshservice tümleştirme öğreneceksiniz. Freshservice Azure AD ile tümleştirdiğinizde, şunları yapabilirsiniz:
+Bu öğreticide, Azure Active Directory (Azure AD) ile en güncel hizmeti tümleştirmeyi öğreneceksiniz. En güncel hizmeti Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Freshservice erişimi, Azure AD'de denetler.
-* Otomatik olarak Freshservice için kendi Azure AD hesapları ile oturum açmış olmasını sağlayın.
-* Bir merkezi konumda - Azure portalı hesaplarınızı yönetin.
+* Azure AD 'de, en yenisi hizmetine erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla otomatik olarak hizmet vermek için oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla bilgi için bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Başlamak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir aboneliğiniz yoksa, bir aylık ücretsiz deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/).
-* Freshservice çoklu oturum açma (SSO) abonelik etkin.
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* En güncel hizmeti çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD SSO bir test ortamında test edin. Freshservice destekler **SP** tarafından başlatılan
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-## <a name="adding-freshservice-from-the-gallery"></a>Galeriden Freshservice ekleme
+* En güncel hizmet **SP** tarafından başlatılan SSO 'yu destekler
 
-Azure AD'de Freshservice tümleştirmesini yapılandırmak için Freshservice Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+## <a name="adding-freshservice-from-the-gallery"></a>Galeriden bir hizmet ekleme
+
+En güncel hizmeti Azure AD ile tümleştirmeyi yapılandırmak için, Galeriden, yönetilen SaaS uygulamaları listenize en güncel hizmeti eklemeniz gerekir.
 
 1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
-1. Sol gezinti bölmesinde seçin **Azure Active Directory** hizmeti.
-1. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları**.
-1. Yeni bir uygulama eklemek için seçin **yeni uygulama**.
-1. İçinde **Galeriden Ekle** bölümüne şunu yazın **Freshservice** arama kutusuna.
-1. Seçin **Freshservice** gelen sonuçlar panelinde ve uygulama ekleyin. Uygulama, kiracınıza eklendiği sırada birkaç saniye bekleyin.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna her bir **hizmet** yazın.
+1. Sonuçlar panelinden yalnızca bir **hizmet** seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on-for-freshservice"></a>Geçici hizmet için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Yapılandırma ve Azure AD SSO kullanarak bir test kullanıcı olarak adlandırılır ve Freshservice ile test etme **Britta Simon**. Çalışmak SSO için Freshservice içinde bir Azure AD kullanıcısı ile ilgili kullanıcı arasında bir bağlantı ilişki oluşturmanız gerekir.
+**B. Simon**adlı bir test kullanıcısı kullanarak, Azure AD SSO 'yu yalnızca bir hizmet ile yapılandırma ve test etme. SSO 'nun çalışması için, bir Azure AD kullanıcısı ve bu kullanıcı ile ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-Yapılandırma ve Azure AD SSO ile Freshservice sınamak için aşağıdaki yapı taşlarını tamamlayın:
+Azure AD SSO 'yu en güncel hizmetle yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-1. **[Azure AD SSO'yu yapılandırma](#configure-azure-ad-sso)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Freshservice SSO'yu yapılandırarak](#configure-freshservice-sso)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Freshservice test kullanıcısı oluşturma](#create-freshservice-test-user)**  - kullanıcı Azure AD gösterimini bağlı Freshservice Britta simon'un bir karşılığı vardır.
-6. **[Test SSO](#test-sso)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    1. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için, tek başına **[HIZMET SSO 'Yu yapılandırın](#configure-freshservice-sso)** .
+    1. Kullanıcı için Azure AD gösterimine bağlı olan, yalnızca bir hizmet **[testi kullanıcısı oluşturun](#create-freshservice-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-### <a name="configure-azure-ad-sso"></a>Azure AD SSO'yu yapılandırma
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-Azure portalında Azure AD SSO'yu etkinleştirmek üzere aşağıdaki adımları izleyin.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **Freshservice** uygulama tümleştirme sayfası, bulma **Yönet** bölümünde ve seçin **çoklu oturum açma**.
-1. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** sayfasında **SAML**.
-1. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında, düzenleme/kalem simgesine tıklayıp **temel SAML yapılandırma** ayarlarını düzenlemek için.
+1. [Azure Portal](https://portal.azure.com/), en güncel **hizmet** uygulaması tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-1. Üzerinde **temel SAML yapılandırma** sayfasında, aşağıdaki alanlar için değerleri girin:
+1. **Temel SAML yapılandırması** bölümünde, aşağıdaki alanlar için değerleri girin:
 
-    a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<democompany>.freshservice.com`
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<democompany>.freshservice.com`
 
-    b. İçinde **tanımlayıcı (varlık kimliği)** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://<democompany>.freshservice.com`
+    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<democompany>.freshservice.com`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL ve tanımlayıcıdır ile güncelleştirin. İlgili kişi [Freshservice istemci Destek ekibine](https://support.freshservice.com/) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için, en güncel [hizmet istemci destek ekibine](https://support.freshservice.com/) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-1. İçinde **SAML imzalama sertifikası** bölümünde **Düzenle** açmak için düğmeyi **SAML imzalama sertifikası** iletişim.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama sertifikası** bölümünde **sertifika bulun (base64)** ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-    ![SAML imzalama sertifikası Düzenle](common/edit-certificate.png)
+    ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-1. İçinde **SAML imzalama sertifikası** bölümünde, kopya **parmak izi** ve bilgisayarınıza kaydedin.
+1. En az hizmeti, SSO 'nun çalışmasını sağlamak için SHA-256 parmak izini gerektirir. SHA-256 parmak izini almak için aşağıdaki adımları gerçekleştirin:
 
-    ![Parmak izi değerini kopyalayın](common/copy-thumbprint.png)
+    ![Parmak izi](./media/freshservice-tutorial/ic790821.png "parmak izi")
 
-1. Üzerinde **Freshservice kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+    1. [Bağlantıyı](https://www.samltool.com/fingerprint.php) farklı bir Web tarayıcısında açın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    1. İndirilen sertifika (base64) dosyasını Not defteri 'nde açın ve içeriği **X. 509.440 CERT** metin kutusuna yapıştırın.
 
-    a. Oturum Açma URL'si:
+    1. Algoritma için açılan listeden **SHA256** öğesini seçin.
 
-    b. Azure AD Tanımlayıcısı
+    1. **Parmak Izini hesapla**' ya tıklayın.
 
-    c. Oturum Kapatma URL'si
+    1. Oluşturulan **parmak izini** kopyalayıp bilgisayarınıza kaydetmek için Kopyala simgesine tıklayın.
 
-### <a name="configure-freshservice-sso"></a>Freshservice SSO yapılandırma
+1. **Azure Portal** **en güncel hizmeti ayarla** bölümünde, GEREKSINIMINIZE göre uygun URL 'leri kopyalayın.
 
-1. Yüklemeniz gerekiyor Freshservice içinde yapılandırmasını otomatik hale getirmenizi **My Apps güvenli oturum açma tarayıcı uzantısı** tıklayarak **uzantıyı yükleme**.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    ![Uygulamaları uzantım](common/install-myappssecure-extension.png)
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-2. Uzantı tarayıcıya ekledikten sonra tıklayarak **Kurulum Freshservice** Freshservice uygulamaya yönlendirir. Burada, Freshservice oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı otomatik olarak sizin için uygulamayı yapılandırma ve 3-6 adımları otomatik hale getirin.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
+
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extensiongirin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**'a tıklayın.
+
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
+
+Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak en güncel hizmet 'e erişim izni vererek B. Simon 'u etkinleştireceksiniz.
+
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **yeniden Seç ' i seçin**.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
+
+   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
+
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
+
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
+
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
+
+## <a name="configure-freshservice-sso"></a>En güncel hizmet SSO 'SU yapılandırma
+
+1. Yapılandırma işlemini otomatik hale getirmek için, **uzantıyı yüklemek**üzere **uygulamalar güvenli oturum açma tarayıcı uzantısı** ' nı yüklemeniz gerekir.
+
+    ![Uygulamalarım uzantısı](common/install-myappssecure-extension.png)
+
+2. Tarayıcıya Uzantı eklendikten sonra, **kurulumu** en sonra, bunu en doğru hizmet uygulamasına yönlendirirsiniz. Buradan, tek bir hizmette oturum açmak için yönetici kimlik bilgilerini sağlayın. Tarayıcı uzantısı, uygulamayı sizin için otomatik olarak yapılandırır ve 3-6 adımlarını otomatikleştirecektir.
 
     ![Kurulum yapılandırması](common/setup-sso.png)
 
-3. Freshservice el ile ayarlamak istiyorsanız, yeni bir web tarayıcı penceresi ve oturum Freshservice şirketinizin sitesi yönetici olarak oturum açın ve aşağıdaki adımları gerçekleştirin:
+3. Yeni bir hizmeti el ile ayarlamak isterseniz, yeni bir Web tarayıcı penceresi açın ve yeni bir Web tarayıcısı penceresi açın ve aşağıdaki adımları gerçekleştirin:
 
-4. Üstteki menüden **yönetici**.
+4. Üstteki menüden **yönetici**' ye tıklayın.
 
-    ![Yönetici](./media/freshservice-tutorial/ic790814.png "yönetici")
+    ![Yönetici](./media/freshservice-tutorial/ic790814.png "Yöneticisi")
 
-5. İçinde **müşteri portalı**, tıklayın **güvenlik**.
+5. **Müşteri portalında** **güvenlik**' e tıklayın.
 
-    ![Güvenlik](./media/freshservice-tutorial/ic790815.png "güvenlik")
+    ![Güvenlik](./media/freshservice-tutorial/ic790815.png "güvenliği")
 
-6. İçinde **güvenlik** bölümünde, aşağıdaki adımları gerçekleştirin:
+6. **Güvenlik** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Çoklu oturum](./media/freshservice-tutorial/ic790816.png "tekli oturum")
+    ![Çoklu oturum]açma(./media/freshservice-tutorial/ic790816.png "Çoklu oturum") açma
 
-    a. Anahtar **tekli oturum**.
+    a. **Çoklu oturum açmayı**değiştir.
 
-    b. Seçin **SAML SSO**.
+    b. **SAML SSO**'yu seçin.
 
-    c. İçinde **SAML oturum açma URL'si** metin değerini yapıştırın **oturum açma URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
+    c. **SAML oturum açma URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si**değerini yapıştırın.
 
-    d. İçinde **oturum kapatma URL'si** metin değerini yapıştırın **oturum kapatma URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
+    d. **Logout URL** metin kutusuna, Azure Portal kopyaladığınız **Logout URL 'si**değerini yapıştırın.
 
-    e. İçinde **güvenlik sertifikası parmak izi** metin kutusu, yapıştırma **parmak İZİ** Azure Portalı'ndan kopyaladığınız sertifika değeri.
+    e. **Güvenlik sertifikası parmak izi** metin kutusunda, daha önce oluşturduğunuz **parmak izi** değerini yapıştırın.
 
-    f. **Kaydet**'e tıklayın.
+    f. **Kaydet**’e tıklayın
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-freshservice-test-user"></a>Yalnızca bir hizmet testi kullanıcısı oluştur
 
-Bu bölümde, bir test kullanıcısı Britta Simon adlı Azure portalında oluşturacaksınız.
-
-1. Azure Portalı'ndaki sol bölmeden seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
-1. Seçin **yeni kullanıcı** ekranın üstünde.
-1. İçinde **kullanıcı** özellikleri, aşağıdaki adımları izleyin:
-   1. **Ad** alanına `Britta Simon` girin.  
-   1. İçinde **kullanıcı adı** alanına username@companydomain.extension. Örneğin, `BrittaSimon@contoso.com`.
-   1. Seçin **Show parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
-   1. **Oluştur**’a tıklayın.
-
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
-
-Bu bölümde, Azure çoklu oturum açma kullanmak için Freshservice erişim vererek Britta Simon tıklatmalarını sağlarsınız.
-
-1. Azure portalında **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
-1. Uygulamalar listesinde **Freshservice**.
-1. Uygulamanın genel bakış sayfasında bulma **Yönet** seçin ve bölüm **kullanıcılar ve gruplar**.
-
-   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
-
-1. Seçin **Kullanıcı Ekle**, ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
-
-    ![Kullanıcı ekleme bağlantısı](common/add-assign-user.png)
-
-1. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** kullanıcılar listesinden ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. SAML onaylama işlemi herhangi bir rolü değer de beklediğiniz varsa **rolü Seç** iletişim kutusunda, listeden bir kullanıcı için uygun rolü seçin ve ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. İçinde **atama Ekle** iletişim kutusunda, tıklayın **atama** düğmesi.
-
-### <a name="create-freshservice-test-user"></a>Freshservice test kullanıcısı oluşturma
-
-FreshService için oturum açmak Azure AD kullanıcılarının etkinleştirmek için bunların FreshService sağlanması gerekir. FreshService söz konusu olduğunda, sağlama bir el ile gerçekleştirilen bir görevdir.
+Azure AD kullanıcılarının, tek bir hizmette oturum açmasını sağlamak için, bu kullanıcıların, tek bir hizmet olarak sağlanması gerekir. En güncel hizmet durumunda, sağlama el ile gerçekleştirilen bir görevdir.
 
 **Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:**
 
-1. Oturum açın, **FreshService** yönetici olarak şirketin site.
+1. Alternatif **hizmet** şirket sitenizde yönetici olarak oturum açın.
 
-2. Üstteki menüden **yönetici**.
+2. Üstteki menüden **yönetici**' ye tıklayın.
 
-    ![Yönetici](./media/freshservice-tutorial/ic790814.png "yönetici")
+    ![Yönetici](./media/freshservice-tutorial/ic790814.png "Yöneticisi")
 
-3. İçinde **kullanıcı yönetimi** bölümünde **isteyenlere**.
+3. **Kullanıcı yönetimi** bölümünde, **istek sahipleri**' na tıklayın.
 
-    ![Kararınız istekte](./media/freshservice-tutorial/ic790818.png "isteyenlere")
+    ![İstek](./media/freshservice-tutorial/ic790818.png "sahipleri")
 
-4. Tıklayın **yeni bir istek sahibi**.
+4. **Yeni Istek sahibi**öğesine tıklayın.
 
-    ![Yeni isteyenlere](./media/freshservice-tutorial/ic790819.png "yeni isteyenlere")
+    ![Yeni istekleyiciler](./media/freshservice-tutorial/ic790819.png "Yeni istekleyiciler")
 
-5. İçinde **yeni bir istek sahibi** bölümünde, aşağıdaki adımları gerçekleştirin:
+5. **Yeni Istek sahibi** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Yeni Talep sahibinin](./media/freshservice-tutorial/ic790820.png "yeni bir istek sahibi")  
+    ![Yeni Istek sahibi](./media/freshservice-tutorial/ic790820.png "yeni istek sahibi")  
 
-    a. Girin **ad** ve **e-posta** istediğiniz ilgili metin kutularına zbilgisayarlar geçerli bir Azure Active Directory hesabının öznitelikleri.
+    a. İlgili metin kutularına sağlamak istediğiniz geçerli bir Azure Active Directory hesabının **ad** ve **e-posta** özniteliklerini girin.
 
-    b. **Kaydet**’e tıklayın.
+    b. **Kaydet** düğmesine tıklayın.
 
     > [!NOTE]
-    > Azure Active Directory hesap sahibinin etkin hale gelir önce hesabı onaylamak için bir bağlantı içeren bir e-posta alır.
+    > Azure Active Directory hesap sahibi, hesabı etkin olmadan önce onaylamaya yönelik bir bağlantı içeren bir e-posta alır
     >  
 
 > [!NOTE]
-> Herhangi diğer FreshService kullanıcı hesabı oluşturma araçları kullanabilir veya API'leri için AAD kullanıcı hesapları sağlamak FreshService tarafından sağlanan.
+> AAD Kullanıcı hesapları sağlamak için, başka bir kullanıcı hesabı oluşturma aracını veya en güncel hizmet tarafından sunulan API 'Leri kullanabilirsiniz.
 
-### <a name="test-sso"></a>Test SSO
+## <a name="test-sso"></a>Test SSO 'SU
 
-Erişim Paneli'nde Freshservice kutucuğu seçtiğinizde, otomatik olarak SSO'yu ayarlama Freshservice için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+Erişim panelinde yalnızca bir hizmet kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız otomatik olarak hizmette oturum açmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+## <a name="additional-resources"></a>Ek kaynaklar
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+
+- [Azure AD ile en güncel hizmeti deneyin](https://aad.portal.azure.com/)

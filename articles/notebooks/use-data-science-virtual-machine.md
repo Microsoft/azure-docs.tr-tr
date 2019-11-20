@@ -1,6 +1,6 @@
 ---
-title: Azure veri bilimi sanal makinelerini kullanın
-description: İçin bir Azure veri bilimi sanal makinesi (Azure not defterleri için kullanılabilir olan işlem gücünü genişletmek için DSVM) bağlanın.
+title: Azure veri bilimi sanal makinelerini kullanma
+description: Kullanılabilir işlem gücünü Azure Notebooks genişletmek için bir Azure Veri Bilimi Sanal Makinesi 'ye (DSVM) bağlanın.
 services: app-service
 documentationcenter: ''
 author: getroyer
@@ -9,65 +9,64 @@ ms.assetid: 0ccc2529-e17f-4221-b7c7-9496d6a731cc
 ms.service: azure-notebooks
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 06/13/2019
 ms.author: getroyer
-ms.openlocfilehash: fe9886429a5e894f40c04b1f65094e412c1dc9e2
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 0f06475708adaf1324eedbd8e315fe4d731339be
+ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67441199"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71970098"
 ---
-# <a name="use-azure-data-science-virtual-machines"></a>Azure veri bilimi sanal makinelerini kullanın
+# <a name="use-azure-data-science-virtual-machines"></a>Azure veri bilimi sanal makinelerini kullanma
 
-Varsayılan olarak, projeler çalıştıracağınız **ücretsiz işlem** katmanı, kötüye kullanımı önlemek için 4 GB bellek ve veri 1 GB ile sınırlıdır. Bir Azure aboneliğinde sağladıktan farklı bir sanal makine kullanarak bu kısıtlamaları devre dışı bırakabilir. Bu amaç için bir Azure veri bilimi sanal makinesi (DSVM) en iyi seçenek olduğu kullanarak **Linux (Ubuntu) için veri bilimi sanal makinesi** görüntü. Böyle bir DSVM her şeyi içeren Azure not defterleri için gereken ve otomatik görünür önceden yapılandırılmış olarak gelir **çalıştırma** aşağı açılan listeden Azure not defterleri.
+Varsayılan olarak, projeler **ücretsiz işlem** katmanında çalışır, bu da kötüye kullanımı engellemek IÇIN 4 GB bellek ve 1 GB veri ile sınırlıdır. Bu sınırlamaları, bir Azure aboneliğinde sağladığınız farklı bir sanal makineyi kullanarak atlayabilirsiniz. Bu amaçla en iyi seçenek, **Linux için veri bilimi sanal makinesi (Ubuntu)** görüntüsünü kullanan bir Azure veri bilimi sanal makinesi (dsvm) ' dir. Bu tür bir DSVM, Azure Notebooks için ihtiyaç duyduğunuz her şey ile önceden yapılandırılmış olarak gelir ve Azure Notebooks **açılan listesinde** otomatik olarak görünür.
 
 > [!Note]
-> Azure not defterleri yalnızca üzerinde bir Linux Ubuntu görüntüsünü ile oluşturulan Dsvm'leri üzerinde desteklenir. Dizüstü bilgisayarlar, Windows 2012, Windows 2016 ya da Linux CentOS görüntülerinde desteklenmez.
+> Azure Notebooks yalnızca Linux Ubuntu görüntüsünde oluşturulan DSVMs üzerinde desteklenir. Windows 2012, Windows 2016 veya Linux CentOS görüntülerinde Not defterleri desteklenmez.
 
 ## <a name="create-a-dsvm-instance"></a>DSVM örneği oluşturma
 
-Yeni bir DSVM örneği oluşturmak için yönergeleri takip edin [Ubuntu veri bilimi sanal makinesi oluşturma](/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro). Fiyatlandırma ayrıntıları dahil olmak üzere daha fazla bilgi için bkz. [veri bilimi sanal makineleri](https://azure.microsoft.com/services/virtual-machines/data-science-virtual-machines/).
+Yeni bir DSVM örneği oluşturmak için [Ubuntu veri bilimi VM'si oluşturma](/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro)yönergelerini izleyin. Fiyatlandırma ayrıntıları dahil daha fazla bilgi için bkz. [veri bilimi sanal makineleri](https://azure.microsoft.com/services/virtual-machines/data-science-virtual-machines/).
 
-## <a name="connect-to-the-dsvm"></a>Değerini DSVM Örneğinize bağlanın
+## <a name="connect-to-the-dsvm"></a>DSVM 'ye bağlanma
 
-DSVM oluşturulduktan seçin **çalıştırma** Azure not defterleri aşağı açılan listede proje panosu ve uygun DSVM örneğini seçin. Aşağı açılan listesinde, aşağıdaki koşullar doğruysa, DSVM örnekleri gösterilmektedir:
+DSVM 'yi oluşturduktan sonra, Azure Notebooks projesi panosunda **Çalıştır** açılan listesini seçin ve uygun dsvm örneğini seçin. Aşağıdaki koşullar doğruysa, açılan listede DSVM örnekleri gösterilmektedir:
 
-- Azure Active Directory (AAD), bir şirket hesabı gibi kullanan bir hesapla Azure not defterlerine oturumunuz.
+- Şirket hesabı gibi Azure Active Directory (AAD) kullanan bir hesapla Azure Notebooks oturum açtınız.
 - Hesabınız bir Azure aboneliğine bağlı.
-- Bu Abonelikteki bir veya daha fazla sanal makineler ile en az sahip olduğunuz veri bilimi sanal makinesi için Linux (Ubuntu) görüntüsü kullanan okuyucu erişimi.)
+- Bu abonelikte, Linux (Ubuntu) görüntüsü için Veri Bilimi Sanal Makinesi kullanan en az okuyucu erişimi olan bir veya daha fazla sanal makineniz vardır.)
 
-![Proje panosu açılır listede veri bilimi sanal makine örnekleri](media/project-compute-tier-dsvm.png)
+![Proje panosundaki açılan listede örnekleri Veri Bilimi Sanal Makinesi](media/project-compute-tier-dsvm.png)
 
-Azure not defterleri DSVM örneği seçtiğinizde, sanal Makineyi oluştururken kullanılan belirli bir makine kimlik bilgilerini isteyebilir.
+Bir DSVM örneği seçtiğinizde Azure Notebooks, VM 'yi oluştururken kullanılan belirli makine kimlik bilgilerini isteyip istemeyebilir.
 
-Koşullardan herhangi biri karşılanmadığı takdirde DSVM'ye bağlanmaya devam edebilirler. Aşağı açılan listesinde seçin **doğrudan işlem** seçeneği (listesinde gösterilecek) bir ad, sanal makinenin IP adresi ve 8000 numaralı bağlantı noktasını (genellikle, hangi JupyterHub dinlediği varsayılan bağlantı noktasına) ve VM kimlik bilgileri ister:
+Koşulların herhangi birine uyulmazsa DSVM 'ye bağlanabilirsiniz. Aşağı açılan listede, bir ad (listede göstermek için), sanal makinenin IP adresi ve bağlantı noktası (genellikle 8000, JupyterHub 'ın dinlediği varsayılan bağlantı noktası) ve VM kimlik bilgilerini isteyen **doğrudan işlem** seçeneğini belirleyin:
 
-![Doğrudan işlem seçeneği sunucu bilgilerini toplamak için sor](media/project-compute-tier-direct.png)
+![Doğrudan Işlem seçeneği için sunucu bilgilerini toplamayı isteme](media/project-compute-tier-direct.png)
 
-DSVM sayfasından Azure portalında bu değerleri alın.
+Bu değerleri Azure portal DSVM sayfasından elde edersiniz.
 
-## <a name="accessing-azure-notebooks-files-from-the-dsvm"></a>DSVM Azure not defterleri dosyalardan erişme
+## <a name="accessing-azure-notebooks-files-from-the-dsvm"></a>DSVM 'deki Azure Notebooks dosyalarına erişme
 
-Dosya sistemi erişimini DSVM sürümleri 19.06.15 veya üzeri. Sürümü denetlemek için önce DSVM'ye SSH aracılığıyla bağlanmak ve ardından aşağıdaki komutu çalıştırın: `curl -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2018-10-01"` (burada gösterilen tam IP adresini kullanmanız gerekir). Sürüm numarası, "Sürüm" için çıktıda gösterilir.
+Dosya sistemi erişimi, DSVM sürümleri 19.06.15 veya üzeri için desteklenir. Sürümü denetlemek için öncelikle SSH aracılığıyla DSVM 'nize bağlanın, ardından şu komutu çalıştırın: `curl -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2018-10-01"` (burada gösterilen tam IP adresini kullanmanız gerekir). Sürüm numarası, "sürüm" için çıktıda gösterilir.
 
-Dosya yollarının ile eşlik korumak için **ücretsiz işlem** katmanı tarafından yalnızca bir DSVM üzerinde bir seferde bir proje açın. Yeni bir proje açmak için açık projenin ilk kapatmanız gerekir.
+Dosya yollarının, **ücretsiz işlem** katmanıyla birlikte kullanımını korumak için, BIR anda dsvm 'de yalnızca bir proje açabilirsiniz. Yeni bir proje açmak için önce açık projeyi kapatmanız gerekir.
 
-Bir VM üzerinde bir proje çalıştırıldığında, dosyaları (dizin JupyterHub gösterilen), Jupyter sunucu kök dizininin bağlı varsayılan Azure not defterleri dosyaları değiştirme. Ne zaman bilgisayarı tuşunu kullanarak VM'yi **kapatma** not defterini kullanıcı Arabirimi, Azure Not Defterleri düğmede varsayılan dosyaları geri yükler.
+Bir proje bir VM üzerinde çalıştırıldığında, dosyalar jupi sunucusunun kök dizinine (jupde gösterilen dizin), varsayılan Azure Notebooks dosyalarını değiştirerek bağlanır. Not defteri Kullanıcı arabirimindeki **kapatma** düğmesini kullanarak VM 'yi kapattığınızda, Azure Notebooks varsayılan dosyaları geri yükler.
 
-![Azure not defterlerinde kapatma düğmesi](media/shutdown.png)
+![Azure Notebooks 'da düğme kapatılıyor](media/shutdown.png)
 
-## <a name="create-new-dsvm-users"></a>Yeni DSVM kullanıcılar oluşturma
+## <a name="create-new-dsvm-users"></a>Yeni DSVM kullanıcıları oluştur
 
-Birden çok kullanıcı bir DSVM paylaşıyorsanız, birbirine oluşturarak ve her bir not defteri kullanıcı için DSVM kullanan engelleme önleyebilirsiniz:
+Birden çok kullanıcı bir DSVM 'yi paylaşıyorsa, her bir not defteri kullanıcısı için bir DSVM kullanıcısı oluşturup kullanarak birbirini engellemeyi önleyebilirsiniz:
 
-1. Üzerinde [Azure portalı](https://portal.azure.com), sanal makinenize gidin.
-1. Altında **destek + sorun giderme** sol kenar boşluğunda seçin **parolayı Sıfırla**.
-1. Yeni kullanıcı adı ve parola girin ve seçin **güncelleştirme**. (Mevcut kullanıcı adlarını etkilenmez.)
-1. Tüm kullanıcılar için önceki adımı yineleyin.
+1. [Azure portalında](https://portal.azure.com)sanal makinenize gidin.
+1. Sol kenar boşluğunda **destek + sorun giderme** ' nin altında, **Parolayı Sıfırla**' yı seçin.
+1. Yeni bir Kullanıcı adı ve parola girip **Güncelleştir**' i seçin. (Mevcut kullanıcı adları etkilenmez.)
+1. Ek kullanıcılar için önceki adımı yineleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Dsvm'leri hakkında daha fazla bilgi [giriş için Azure veri bilimi sanal makineleri](/azure/machine-learning/data-science-virtual-machine/overview).
+[Azure veri bilimi sanal makinelerine giriş](/azure/machine-learning/data-science-virtual-machine/overview)hakkında daha fazla bilgi edinin.

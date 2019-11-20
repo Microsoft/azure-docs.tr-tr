@@ -1,31 +1,30 @@
 ---
-title: Öğretici - Azure’da cloud-init ile bir Linux VM’si yapılandırma | Microsoft Docs
-description: Bu öğreticide, Linux sanal makineleri, Azure'da ilk önyüklenmesini özelleştirmek için cloud-init ve Key Vault kullanmayı öğrenin
+title: Öğretici-Azure 'da Cloud-init ile Linux VM Özelleştirme
+description: Bu öğreticide, Cloud-init ve Key Vault kullanarak Azure 'da ilk kez önyükleme yaparken Linux VM 'lerini nasıl özelleştireceğinizi öğreneceksiniz.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 05/30/2018
+ms.date: 09/12/2019
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 8a65b7becc4ec60290670819799e9f8731d55058
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 27c7e32f081003ac236c6d1405eb3512f6c4433c
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67114264"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74034632"
 ---
 # <a name="tutorial---how-to-use-cloud-init-to-customize-a-linux-virtual-machine-in-azure-on-first-boot"></a>Öğretici - Azure’da ilk önyüklemede bir Linux sanal makinesini özelleştirmek için cloud-init kullanma
 
-Bir önceki öğreticide, sanal makineye nasıl SSH uygulanacağını ve NGINX öğesinin el ile nasıl yükleneceğini öğrendiniz. Hızlı ve tutarlı şekilde sanal makineler oluşturmak için genellikle bir otomasyon biçimi istenir. İlk önyüklemede bir sanal makineyi özelleştirmek için genellikle [cloud-init](https://cloudinit.readthedocs.io) kullanılır. Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
+Bir önceki öğreticide, sanal makineye nasıl SSH uygulanacağını ve NGINX öğesinin el ile nasıl yükleneceğini öğrendiniz. Hızlı ve tutarlı şekilde sanal makineler oluşturmak için genellikle bir otomasyon biçimi istenir. İlk önyüklemede bir sanal makineyi özelleştirmek için genellikle [cloud-init](https://cloudinit.readthedocs.io) kullanılır. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * cloud-init yapılandırma dosyası oluşturma
@@ -33,8 +32,6 @@ Bir önceki öğreticide, sanal makineye nasıl SSH uygulanacağını ve NGINX �
 > * Sanal makine oluşturulduktan sonra çalıştırılan bir Node.js uygulamasını görüntüleme
 > * Sertifikaları güvenli şekilde depolamak için Key Vault’u kullanma
 > * cloud-init ile güvenli NGINX dağıtımlarını otomatikleştirme
-
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
 
 CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu öğretici için Azure CLI 2.0.30 veya sonraki bir sürümünü çalıştırmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme]( /cli/azure/install-azure-cli).
 
@@ -45,21 +42,23 @@ Cloud-init, dağıtımlar arasında da çalışır. Örneğin, bir paket yüklem
 
 Azure’a sağladıkları görüntülere cloud-init’in dahil edilmesini ve bu görüntülerde çalışmasını sağlamak için iş ortaklarımızla çalışıyoruz. Aşağıdaki tabloda, Azure platform görüntülerindeki geçerli cloud-init kullanılabilirliği açıklanmaktadır:
 
-| Alias | Yayımcı | Sunduğu | SKU | Version |
+| Yayımcı | Sunduğu | SKU | Sürüm | cloud-init hazır |
 |:--- |:--- |:--- |:--- |:--- |
-| UbuntuLTS |Canonical |UbuntuServer |16.04-LTS |en son |
-| UbuntuLTS |Canonical |UbuntuServer |14.04.5-LTS |en son |
-| CoreOS |CoreOS |CoreOS |Dengeli |en son |
-| | OpenLogic | CentOS | 7-CI | en son |
-| | RedHat | RHEL | 7-RAW-CI | en son |
+|Canonical |UbuntuServer |18.04-LTS |latest |evet | 
+|Canonical |UbuntuServer |16.04-LTS |latest |evet | 
+|Canonical |UbuntuServer |14.04.5-LTS |latest |evet |
+|CoreOS |CoreOS |Dengeli |latest |evet |
+|OpenLogic 7,6 |CentOS |7-CI |latest |önizleme |
+|RedHat 7,6 |RHEL |7-RAW-CI |7.6.2019072418 |evet |
+|RedHat 7,7 |RHEL |7-RAW-CI |7.7.2019081601 |önizleme |
 
 
 ## <a name="create-cloud-init-config-file"></a>cloud-init yapılandırma dosyası oluşturma
 cloud-init’i uygulamalı olarak görmek için, NGINX’i yükleyen ve basit bir 'Merhaba Dünya' Node.js uygulaması çalıştıran bir sanal makine oluşturun. Aşağıdaki cloud-init yapılandırması, gerekli paketleri yükler, bir Node.js uygulaması oluşturur, ardından uygulamayı kullanıma hazırlar ve başlatır.
 
-Geçerli kabuğunuzda *cloud-init.txt* adlı bir dosya oluşturup aşağıdaki yapılandırmayı yapıştırın. Örneğin, dosyayı yerel makinenizde değil Cloud Shell’de oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud-init.txt` adını girin. Başta birinci satır olmak üzere cloud-init dosyasının tamamının doğru bir şekilde kopyalandığından emin olun:
+Bash isteminizdeki veya Cloud Shell, *kabuğunuzda Cloud-init. txt* adlı bir dosya oluşturun ve aşağıdaki yapılandırmayı yapıştırın. Örneğin, dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud-init.txt` yazın. Başta birinci satır olmak üzere cloud-init dosyasının tamamının doğru bir şekilde kopyalandığından emin olun:
 
-```yaml
+```azurecli-interactive
 #cloud-config
 package_upgrade: true
 packages:
@@ -115,7 +114,7 @@ az group create --name myResourceGroupAutomate --location eastus
 ```azurecli-interactive
 az vm create \
     --resource-group myResourceGroupAutomate \
-    --name myVM \
+    --name myAutomatedVM \
     --image UbuntuLTS \
     --admin-username azureuser \
     --generate-ssh-keys \
@@ -127,11 +126,11 @@ VM’nin oluşturulması, paketlerin yüklenmesi ve uygulamanın başlatılması
 Web trafiğinin VM’nize erişmesine izin vermek için, [az vm open-port](/cli/azure/vm#az-vm-open-port) komutuyla İnternet’te 80 numaralı bağlantı noktasını açın:
 
 ```azurecli-interactive
-az vm open-port --port 80 --resource-group myResourceGroupAutomate --name myVM
+az vm open-port --port 80 --resource-group myResourceGroupAutomate --name myAutomatedVM
 ```
 
 ## <a name="test-web-app"></a>Web uygulamasını test etme
-Artık bir web tarayıcısı açın ve girin *http:\/\/\<Publicıpaddress >* adres çubuğundaki. VM oluşturma işleminden kendi herkese açık IP adresinizi sağlayın. Node.js uygulamanız, aşağıdaki örnekte olduğu gibi görüntülenir:
+Artık bir Web tarayıcısı açıp adres çubuğuna *http:\/\/\<publicıpaddress >* girebilirsiniz. VM oluşturma işleminden kendi herkese açık IP adresinizi sağlayın. Node.js uygulamanız, aşağıdaki örnekte olduğu gibi görüntülenir:
 
 ![Çalışan NGINX sitesini görüntüleme](./media/tutorial-automate-vm-deployment/nginx.png)
 
@@ -166,7 +165,7 @@ az keyvault create \
 az keyvault certificate create \
     --vault-name $keyvault_name \
     --name mycert \
-    --policy "$(az keyvault certificate get-default-policy)"
+    --policy "$(az keyvault certificate get-default-policy --output json)"
 ```
 
 
@@ -178,14 +177,14 @@ secret=$(az keyvault secret list-versions \
           --vault-name $keyvault_name \
           --name mycert \
           --query "[?attributes.enabled].id" --output tsv)
-vm_secret=$(az vm secret format --secret "$secret")
+vm_secret=$(az vm secret format --secret "$secret" --output json)
 ```
 
 
 ### <a name="create-cloud-init-config-to-secure-nginx"></a>NGINX’in güvenliğini sağlamak için cloud-init yapılandırması oluşturma
 VM oluşturduğunuzda, sertifika ve anahtarlar korunan */var/lib/waagent/* dizininde depolanır. VM’ye sertifika eklenmesini ve NGINX’in yapılandırılmasını otomatikleştirmek için önceki örnekte yer alan güncelleştirilmiş bir cloud-init yapılandırmasını kullanabilirsiniz.
 
-*cloud-init-secured.txt* adlı bir dosya oluşturup aşağıdaki yapılandırmayı yapıştırın. Cloud Shell’i kullanırsanız yerel makinenizden değil, oradan cloud-init yapılandırma dosyasını oluşturun. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud-init-secured.txt` komutunu kullanın. Başta birinci satır olmak üzere cloud-init dosyasının tamamının doğru bir şekilde kopyalandığından emin olun:
+*cloud-init-secured.txt* adlı bir dosya oluşturup aşağıdaki yapılandırmayı yapıştırın. Cloud Shell kullanıyorsanız, yerel makinenizde değil, bulut-init yapılandırma dosyasını oluşturun. Örneğin, dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud-init-secured.txt` yazın. Başta birinci satır olmak üzere cloud-init dosyasının tamamının doğru bir şekilde kopyalandığından emin olun:
 
 ```yaml
 #cloud-config
@@ -242,7 +241,7 @@ runcmd:
 ```azurecli-interactive
 az vm create \
     --resource-group myResourceGroupAutomate \
-    --name myVMSecured \
+    --name myVMWithCerts \
     --image UbuntuLTS \
     --admin-username azureuser \
     --generate-ssh-keys \
@@ -257,12 +256,12 @@ Güvenli web trafiğinin VM’nize erişmesine izin vermek için, [az vm open-po
 ```azurecli-interactive
 az vm open-port \
     --resource-group myResourceGroupAutomate \
-    --name myVMSecured \
+    --name myVMWithCerts \
     --port 443
 ```
 
 ### <a name="test-secure-web-app"></a>Güvenli web uygulamasını test etme
-Artık bir web tarayıcısı açın ve girin *https:\/\/\<Publicıpaddress >* adres çubuğundaki. Önceki VM oluşturma işleminin çıkışında gösterildiği gibi kendi genel IP adresinizi girin. Otomatik olarak imzalanan sertifika kullanıyorsanız güvenlik uyarısını kabul edin:
+Artık bir Web tarayıcısı açıp adres çubuğuna *https:\/\/\<publicıpaddress >* girebilirsiniz. Önceki VM oluşturma işleminin çıkışında gösterildiği gibi kendi genel IP adresinizi girin. Otomatik olarak imzalanan sertifika kullanıyorsanız güvenlik uyarısını kabul edin:
 
 ![Web tarayıcısı güvenlik uyarısını kabul edin](./media/tutorial-automate-vm-deployment/browser-warning.png)
 

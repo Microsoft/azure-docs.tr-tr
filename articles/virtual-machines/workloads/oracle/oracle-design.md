@@ -1,83 +1,82 @@
 ---
-title: Bir Oracle veritabanına Azure'da tasarlayıp | Microsoft Docs
-description: Tasarlayın ve Azure ortamınızda bir Oracle veritabanına uygulayın.
+title: Azure 'da Oracle veritabanı tasarlama ve uygulama | Microsoft Docs
+description: Azure ortamınızda bir Oracle veritabanı tasarlayın ve uygulayın.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: romitgirdhar
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 08/02/2018
 ms.author: rogirdh
-ms.openlocfilehash: 039b1628571b786a4997c08f96cc9aa0f347c7f7
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: c2c2d1a9affe13d485bfeef52c781ed259b53bc8
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67446693"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70100123"
 ---
 # <a name="design-and-implement-an-oracle-database-in-azure"></a>Azure’da Oracle veritabanı tasarlama ve dağıtma
 
 ## <a name="assumptions"></a>Varsayımlar
 
-- Bir Oracle veritabanına şirket içinden Azure'a geçirmeyi planlamanız durumunda.
-- Sahip olduğunuz [Tanılama paketi](https://docs.oracle.com/cd/E11857_01/license.111/e11987/database_management.htm) geçirmek için aradığınız Oracle veritabanı
-- Oracle AWR raporları çeşitli ölçümleri'nın bilinmesini var.
-- Uygulama performansı ve platform kullanımı temel bir anlayışa sahip.
+- Bir Oracle veritabanını Şirket içinden Azure 'a geçirmeyi planlıyorsunuz.
+- Geçirmek istediğiniz Oracle Database için [Tanılama paketi](https://docs.oracle.com/cd/E11857_01/license.111/e11987/database_management.htm)
+- Oracle AWR raporlarında çeşitli ölçümleri kavramış olursunuz.
+- Uygulama performansı ve platform kullanımının temel olarak anlaşılmış olursunuz.
 
 ## <a name="goals"></a>Hedefleri
 
-- Azure'da Oracle dağıtımınızı en iyi duruma getirme hakkında bilgi edinin.
-- Performans ayarlama Azure ortamınızda bir Oracle veritabanına seçeneklerini keşfedin.
+- Azure 'da Oracle dağıtımınızı en iyi hale getirmeyi öğrenin.
+- Bir Azure ortamında Oracle veritabanı için performans ayarlama seçeneklerini gezin.
 
-## <a name="the-differences-between-an-on-premises-and-azure-implementation"></a>Şirket içi arasındaki farklar ve Azure uygulama 
+## <a name="the-differences-between-an-on-premises-and-azure-implementation"></a>Şirket içi ve Azure uygulamaları arasındaki farklar 
 
-Şirket içi uygulamaları azure'a geçirirken göz önünde bulundurmanız gereken bazı önemli noktalar aşağıda verilmiştir. 
+Şirket içi uygulamaları Azure 'a geçirirken göz önünde bulundurmanız gereken bazı önemli noktalar aşağıda verilmiştir. 
 
-Bir önemli fark, bir Azure uygulamasında, VM'ler, diskler ve sanal ağlar gibi kaynakları diğer istemciler arasında paylaşılır. Ayrıca, gereksinimlerine göre bu kaynakları kısıtlanabilir. Başarısız (MTBF) önleme üzerinde odaklanarak yerine, Azure daha (MTTR) hatası geri kalan odaklanır.
+Önemli bir farklılık, bir Azure uygulamasında VM 'Ler, diskler ve sanal ağlar gibi kaynakların diğer istemciler arasında paylaşılmasıdır. Ayrıca, kaynaklar gereksinimlere göre kısıtlanabilir. Azure, başarısız olmaya (MTBF) odaklanmak yerine, hatanın (MTTR) arızalanmaya yönelik daha fazla odaklanılmıştır.
 
-Aşağıdaki tabloda şirket içi uygulama ve bir Oracle veritabanına Azure uygulaması arasındaki farklılıklar listelenmektedir.
+Aşağıdaki tabloda, şirket içi uygulama ve bir Oracle veritabanının Azure uygulamasıyla ilgili bazı farklılıklar listelenmiştir.
 
 > 
-> |  | **Şirket içi uygulama** | **Azure uygulaması** |
+> |  | **Şirket içi uygulama** | **Azure uygulama** |
 > | --- | --- | --- |
-> | **Ağ** |LAN VE WAN  |SDN (yazılım tanımlı ağ iletişimi)|
+> | **Ağ** |LAN/WAN  |SDN (yazılım tanımlı ağ)|
 > | **Güvenlik grubu** |IP/bağlantı noktası kısıtlama araçları |[Ağ güvenlik grubu (NSG)](https://azure.microsoft.com/blog/network-security-groups) |
-> | **Esnekliği** |MTBF (hatalar arasındaki ortalama süreyi) |MTTR (kurtarma için ortalama zamanı)|
-> | **Planlı bakım** |Düzeltme eki uygulama yükseltmeleri|[Kullanılabilirlik kümeleri](https://docs.microsoft.com/azure/virtual-machines/windows/infrastructure-availability-sets-guidelines) (düzeltme eki uygulama/Azure tarafından yönetilen yükseltme) |
-> | **Kaynak** |Adanmış  |Diğer istemcilerle paylaşılan|
-> | **Bölgeler** |Veri merkezleri |[Bölge çiftleri](https://docs.microsoft.com/azure/virtual-machines/windows/regions-and-availability)|
-> | **Depolama** |SAN/fiziksel diskleri |[Azure tarafından yönetilen depolama](https://azure.microsoft.com/pricing/details/managed-disks/?v=17.23h)|
-> | **Ölçeklendirme** |Dikey ölçeklendirme |Yatay ölçeklendirme|
+> | **Esnekliği** |MTBF (hataların arasındaki ortalama süre) |MTTR (ortalama kurtarma süresi)|
+> | **Planlı bakım** |Düzeltme eki uygulama/yükseltme|[Kullanılabilirlik kümeleri](https://docs.microsoft.com/azure/virtual-machines/windows/infrastructure-availability-sets-guidelines) (Azure tarafından yönetilen düzeltme eki/yükseltmeler) |
+> | **Kaynak** |Adanmış  |Diğer istemcilerle paylaşılıyor|
+> | **Bölgeler** |Veri merkezleri |[Bölge çiftleri](https://docs.microsoft.com/azure/virtual-machines/windows/regions#region-pairs)|
+> | **Depolama** |SAN/fiziksel diskler |[Azure tarafından yönetilen depolama](https://azure.microsoft.com/pricing/details/managed-disks/?v=17.23h)|
+> | **Ölçeklendirme** |Dikey Ölçek |Yatay ölçeklendirme|
 
 
 ### <a name="requirements"></a>Gereksinimler
 
-- Veritabanı boyutu ve büyüme oranını belirler.
-- Oracle AWR raporları veya diğer ağ izleme araçları göre tahmin IOPS gereksinimlerini belirleyin.
+- Veritabanı boyutunu ve büyüme oranını belirleme.
+- Oracle AWR raporlarına veya diğer ağ izleme araçlarına göre tahmin edebileceğiniz ıOPS gereksinimlerini saptayın.
 
 ## <a name="configuration-options"></a>Yapılandırma seçenekleri
 
-Azure ortamınızda performansını ayarlamak, olası dört alan vardır:
+Bir Azure ortamında performansı artırmak için ayarlayabilmeniz gereken dört olası alan vardır:
 
 - Sanal makine boyutu
 - Ağ aktarım hızı
-- Disk türleri ve yapılandırmaları
-- Disk önbellek ayarları
+- Disk türleri ve yapılandırma
+- Disk önbelleği ayarları
 
-### <a name="generate-an-awr-report"></a>AWR rapor oluşturma
+### <a name="generate-an-awr-report"></a>AWR raporu oluşturma
 
-Varolan bir Oracle veritabanına sahip ve Azure'a geçirmeyi planlama, birkaç seçeneğiniz vardır. Varsa [Tanılama paketi](https://www.oracle.com/technetwork/oem/pdf/511880.pdf) Oracle örnekleriniz için ölçümleri (IOPS, MB/sn, GiBs ve benzeri) almak için Oracle AWR rapor çalıştırabilirsiniz. Topladığınız ölçümlere göre sanal makine seçin. Veya benzer bilgileri almak için altyapı takımınızın başvurabilirsiniz.
+Mevcut bir Oracle veritabanınız varsa ve Azure 'a geçirmeyi planlıyorsanız, birkaç seçeneğiniz vardır. Oracle örnekleriniz için [Tanılama paketiniz](https://www.oracle.com/technetwork/oem/pdf/511880.pdf) varsa, ÖLÇÜMLERI (IOPS, Mbps, Gibs vb.) almak için Oracle AWR raporunu çalıştırabilirsiniz. Ardından, topladığınız ölçümlere göre VM 'yi seçin. Ya da benzer bilgiler almak için altyapı ekibinize başvurabilirsiniz.
 
-Karşılaştırabilmeniz AWR raporunuz hem normal hem de yoğun saatler iş yükleri sırasında çalışan göz önünde bulundurabilirsiniz. Bu raporlara bağlı olarak, ortalama iş yükü veya en fazla iş yüküne göre sanal makineleri boyutlandırabilirsiniz.
+AWR raporunuzu hem düzenli hem de yoğun iş yükleri sırasında çalıştırmayı düşünebilirsiniz; böylece karşılaştırabilirsiniz. Bu raporlara bağlı olarak, VM 'Leri ortalama iş yüküne veya en yüksek iş yüküne göre boyut olarak kullanabilirsiniz.
 
-AWR raporu oluşturmak nasıl bir örnek verilmiştir (geçerli yüklemeniz varsa, Oracle Enterprise Manager'ı kullanarak raporlarınızı AWR oluşturun):
+Aşağıda, bir AWR raporunun nasıl üreticeğine bir örnek verilmiştir (geçerli yüklemelerinizin bir tane varsa, Oracle Enterprise Manager 'ı kullanarak AWR raporlarınızı oluşturma):
 
 ```bash
 $ sqlplus / as sysdba
@@ -85,155 +84,155 @@ SQL> EXEC DBMS_WORKLOAD_REPOSITORY.CREATE_SNAPSHOT;
 SQL> @?/rdbms/admin/awrrpt.sql
 ```
 
-### <a name="key-metrics"></a>Ana ölçümler
+### <a name="key-metrics"></a>Anahtar ölçümleri
 
-AWR rapordan edinebilirsiniz ölçümler şunlardır:
+AWR raporundan elde ettiğiniz ölçümler aşağıda verilmiştir:
 
 - Toplam çekirdek sayısı
 - CPU saat hızı
-- Toplam bellek (GB)
+- GB cinsinden toplam bellek
 - CPU kullanımı
-- En yüksek veri aktarım hızı
-- G/ç değişiklikleri (okuma/yazma) oranı
-- Günlük oran (MBPs) Yinele
+- En yoğun veri aktarımı hızı
+- G/ç değişikliklerinin oranı (okuma/yazma)
+- Yeniden yineleme hızı (MBPs)
 - Ağ aktarım hızı
-- Ağ gecikme oranı (düşük/yüksek)
-- Veritabanı boyutu GB
-- SQL aracılığıyla alınan bayt sayısı * / istemci için Net
+- Ağ gecikmesi oranı (düşük/yüksek)
+- GB cinsinden veritabanı boyutu
+- SQL * NET from/to Client aracılığıyla alınan baytlar
 
 ### <a name="virtual-machine-size"></a>Sanal makine boyutu
 
-#### <a name="1-estimate-vm-size-based-on-cpu-memory-and-io-usage-from-the-awr-report"></a>1. CPU, bellek ve g/ç kullanımını AWR rapordan temel tahmin VM boyutu
+#### <a name="1-estimate-vm-size-based-on-cpu-memory-and-io-usage-from-the-awr-report"></a>1. AWR raporundan CPU, bellek ve g/ç kullanımını temel alan VM boyutunu tahmin etme
 
-Sistem darboğazların olduğu yerler belirten en çok beş zamanlanmış ön plan olayları bakmak bir şey var.
+' A bakabileceğiniz bir şey, sistem performans sorunlarının nerede olduğunu belirten ilk beş zaman aşımına uğramış ön etkinlik olaydır.
 
-Örneğin, aşağıdaki diyagramda, günlük dosya eşitleme en üstünde ' dir. Bu, LGWR günlük arabellek Yinele günlük dosyasına yazmaya başlamadan önce gerekli olan bekler sayısını gösterir. Bu sonuçları, daha iyi performans gösteren depolama veya diskleri gerekli olduğunu gösterir. Ayrıca, diyagram CPU (çekirdekler) sayısı ve bellek miktarını gösterir.
+Örneğin, aşağıdaki diyagramda günlük dosyası eşitleme en üstte. Bu, LGWR 'ın günlük arabelleğini yeniden yineleme günlük dosyasına yazmadan önce gerekli olan bekleme sayısını belirtir. Bu sonuçlar, daha iyi uygulanan depolama veya disklerin gerekli olduğunu gösterir. Ayrıca, diyagram CPU (çekirdek) sayısını ve bellek miktarını da gösterir.
 
 ![AWR rapor sayfasının ekran görüntüsü](./media/oracle-design/cpu_memory_info.png)
 
-Aşağıdaki diyagramda, toplam g/ç okuma ve yazma gösterilmektedir. 59 okuma GB ve rapor bir süre boyunca yazılan 247.3 GB vardı.
+Aşağıdaki diyagramda, okuma ve yazma toplam g/ç sayısı gösterilmektedir. Rapor sırasında yazılan 59 GB okuma ve 247,3 GB vardı.
 
 ![AWR rapor sayfasının ekran görüntüsü](./media/oracle-design/io_info.png)
 
-#### <a name="2-choose-a-vm"></a>2. Bir VM seçin
+#### <a name="2-choose-a-vm"></a>2. VM seçin
 
-AWR rapordan toplanan bilgilere göre sonraki adıma gereksinimlerinizi karşılayan benzer boyutta bir VM için seçmektir. Kullanılabilir VM'lerin listesini makaleyi bulabilirsiniz [bellek için iyileştirilmiş](../../linux/sizes-memory.md).
+AWR raporundan topladığınız bilgilere bağlı olarak, bir sonraki adım gereksinimlerinize uyan benzer boyuttaki bir VM 'yi seçmek. Kullanılabilir VM 'lerin bir listesini [bellek için iyileştirilmiş](../../linux/sizes-memory.md)makalesinde bulabilirsiniz.
 
-#### <a name="3-fine-tune-the-vm-sizing-with-a-similar-vm-series-based-on-the-acu"></a>3. ACU üzerinde temel benzer VM serisi ile VM boyutlandırma ince ayar yapma
+#### <a name="3-fine-tune-the-vm-sizing-with-a-similar-vm-series-based-on-the-acu"></a>3. ACU 'ya dayalı benzer bir VM Serisi ile sanal makine boyutlandırmasına ince ayar yapma
 
-VM seçtikten sonra ACU VM için dikkat edin. Gereksinimlerinizi daha iyi uyan ACU değerine göre farklı bir VM seçebilir. Daha fazla bilgi için [Azure işlem birimi](https://docs.microsoft.com/azure/virtual-machines/windows/acu).
+VM 'yi seçtikten sonra, VM için ACU 'ya dikkat edin. Gereksinimlerinize daha uygun olan ACU değerine göre farklı bir VM seçebilirsiniz. Daha fazla bilgi için bkz. [Azure işlem birimi](https://docs.microsoft.com/azure/virtual-machines/windows/acu).
 
 ![ACU birimleri sayfasının ekran görüntüsü](./media/oracle-design/acu_units.png)
 
 ### <a name="network-throughput"></a>Ağ aktarım hızı
 
-Aşağıdaki diyagramda, aktarım hızı ve IOPS arasındaki ilişki gösterilmektedir:
+Aşağıdaki diyagramda, üretilen iş ve ıOPS arasındaki ilişki gösterilmektedir:
 
-![Aktarım hızının ekran görüntüsü](./media/oracle-design/throughput.png)
+![Aktarım hızı ekran görüntüsü](./media/oracle-design/throughput.png)
 
-Toplam ağ verimi, aşağıdaki bilgilere dayanarak tahmin edilir:
-- SQL * Net trafiği
-- MB/sn x sunucuları (giden akış Oracle Data Guard gibi) sayısı
-- Uygulama çoğaltma gibi diğer faktörlere
+Toplam ağ verimlilik, aşağıdaki bilgilere göre tahmin edilir:
+- SQL * NET trafiği
+- MBps x sunucu sayısı (Oracle Data Guard gibi giden akış)
+- Uygulama çoğaltma gibi diğer faktörler
 
-![Ekran görüntüsü SQL * Net aktarım hızı](./media/oracle-design/sqlnet_info.png)
+![SQL * NET aktarım hızı ekran görüntüsü](./media/oracle-design/sqlnet_info.png)
 
-Ağ bant genişliği gereksinimlerinize göre aralarından seçim yapabileceğiniz çeşitli ağ geçidi türü vardır. Bunlar, temel, VpnGw ve Azure ExpressRoute içerir. Daha fazla bilgi için [VPN gateway fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/vpn-gateway/?v=17.23h).
+Ağ bant genişliği gereksinimlerinize göre, aralarından seçim yapabileceğiniz çeşitli ağ geçidi türleri vardır. Bunlar temel, VpnGw ve Azure ExpressRoute 'u içerir. Daha fazla bilgi için [VPN Gateway fiyatlandırması sayfasına](https://azure.microsoft.com/pricing/details/vpn-gateway/?v=17.23h)bakın.
 
 **Öneriler**
 
-- Ağ gecikme süresi, daha yüksek bir şirket içi dağıtımına karşılaştırılır. Ağ gidiş gelişlerin can önemli ölçüde azaltan performansı artırır.
-- Gidiş dönüş azaltmak için yüksek işlem ya da "geveze" uygulamalar aynı sanal makineye sahip uygulamalar birleştirin.
-- Sanal makineler ile kullanmak [hızlandırılmış ağ](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-cli) daha iyi ağ performansı için.
-- Belirli Linux distrubutions düşünün etkinleştirme [TRIM/UNMAP Destek](https://docs.microsoft.com/azure/virtual-machines/linux/configure-lvm#trimunmap-support).
-- Yükleme [Oracle Enterprise Manager](https://www.oracle.com/technetwork/oem/enterprise-manager/overview/index.html) ayrı bir sanal makine üzerinde.
-- Büyük sayfaları linux üzerinde varsayılan olarak etkin değildir. Büyük sayfaları etkinleştirmeyi düşünün ve ayarlama `use_large_pages = ONLY` Oracle DB üzerinde. Bu, performansı artırmaya yardımcı olabilir. Daha fazla bilgi bulunabilir [burada](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/USE_LARGE_PAGES.html#GUID-1B0F4D27-8222-439E-A01D-E50758C88390).
+- Ağ gecikmesi, şirket içi dağıtıma kıyasla daha yüksektir. Ağ gidiş dönüşlerini düşürmek performansı önemli ölçüde iyileştirebilir.
+- Gidiş-gelişleri azaltmak için, yüksek işlemlere sahip uygulamaları veya aynı sanal makinede "geveze" uygulamalarını birleştirin.
+- Daha iyi ağ performansı için, [hızlandırılmış ağ](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-cli) Ile sanal makineleri kullanın.
+- Bazı Linux Dağları için [kesme/EŞLEMEYI kaldır desteğini](https://docs.microsoft.com/azure/virtual-machines/linux/configure-lvm#trimunmap-support)etkinleştirmeyi düşünün.
+- [Oracle Enterprise Manager](https://www.oracle.com/technetwork/oem/enterprise-manager/overview/index.html) 'ı ayrı bir sanal makineye yükler.
+- Çok büyük sayfalar Linux üzerinde varsayılan olarak etkinleştirilmemiştir. Büyük sayfaları etkinleştirmeyi ve Oracle DB ayarlamayı `use_large_pages = ONLY` düşünün. Bu, performansı artırmaya yardımcı olabilir. [Burada](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/USE_LARGE_PAGES.html#GUID-1B0F4D27-8222-439E-A01D-E50758C88390)daha fazla bilgi bulabilirsiniz.
 
-### <a name="disk-types-and-configurations"></a>Disk türleri ve yapılandırmaları
+### <a name="disk-types-and-configurations"></a>Disk türleri ve yapılandırma
 
-- *Varsayılan işletim sistemi diskleri*: Bu disk türlerini kalıcı veri ve önbelleğe alma sunar. Başlatma sırasında işletim sistemi erişimi için optimize edilmiş ve için tasarlanmamış işlemsel veya veri ambarı (analiz) iş yükleri.
+- *Varsayılan işletim sistemi diskleri*: Bu disk türleri kalıcı veriler ve önbelleğe alma sağlar. Başlangıçta işletim sistemi erişimi için iyileştirilir ve işlem veya veri ambarı (analitik) iş yükleri için tasarlanmamıştır.
 
-- *Yönetilmeyen diskler*: Şu disk türleri ile sanal makine disklerinizi karşılık gelen sanal sabit disk (VHD) dosyaları depolayan depolama hesapları yönetin. VHD dosyaları, Azure depolama hesaplarındaki sayfa blobları olarak depolanır.
+- *Yönetilmeyen diskler*: Bu disk türleriyle, VM disklerinizde karşılık gelen sanal sabit disk (VHD) dosyalarını depolayan depolama hesaplarını yönetirsiniz. VHD dosyaları, Azure depolama hesaplarında sayfa Blobları olarak depolanır.
 
-- *Yönetilen diskler*: Azure sanal makine disklerinizi için kullandığınız depolama hesapları yönetir. Disk türünü (premium veya standart) ve ihtiyacınız olan diskin boyutunu belirtin. Azure, oluşturur ve disk sizin yerinize yönetir.
+- *Yönetilen diskler*: Azure, VM disklerinizde kullandığınız depolama hesaplarını yönetir. Disk türünü (Premium veya standart) ve ihtiyacınız olan diskin boyutunu belirtirsiniz. Azure, diski sizin için oluşturur ve yönetir.
 
-- *Premium depolama disklerini*: Bu disk türlerini üretim iş yükleri için uygundur. Premium depolama DS, DSv2, GS ve F serisi VM'ler gibi belirli boyut serisi VM'ler iliştirilebilir VM disklerini destekler. Premium disk farklı boyutlarda gelir ve 32 GB ile 4096 GB arasında değişen diskler arasında seçim yapabilirsiniz. Her disk boyutu, kendi performans özellikleri vardır. Uygulama gereksinimlerinize bağlı olarak, sanal makinenizde bir veya daha fazla disk ekleyebilirsiniz.
+- *Premium depolama diskleri*: Bu disk türleri üretim iş yükleri için idealdir. Premium Depolama, DS, DSv2, GS ve F serisi VM 'Ler gibi belirli boyut serisi sanal makinelere eklenebilecek VM disklerini destekler. Premium disk farklı boyutlarda gelir ve 32 GB ile 4.096 GB arasında değişen diskler arasında seçim yapabilirsiniz. Her disk boyutunun kendi performans belirtimleri vardır. Uygulama gereksinimlerinize bağlı olarak, sanal makinenize bir veya daha fazla disk ekleyebilirsiniz.
 
-Portaldan yeni bir yönetilen disk oluşturduğunuzda, seçebileceğiniz **hesap türü** için kullanmak istediğiniz diskin türü. Açılan menüde tüm kullanılabilir diskleri gösterilmiştir aklınızda bulundurun. Belirli bir VM boyutu seçin sonra menü yalnızca kullanılabilir premium depolama, sanal makine boyutuna göre SKU'ları gösterir.
+Portaldan yeni bir yönetilen disk oluşturduğunuzda, kullanmak istediğiniz disk türü için **hesap türünü** seçebilirsiniz. Kullanılabilir disklerin tümünün açılan menüde gösterildiğine dikkat edin. Belirli bir VM boyutunu seçtikten sonra, menü yalnızca söz konusu VM boyutunu temel alan kullanılabilir Premium Depolama SKU 'Larını gösterir.
 
 ![Yönetilen disk sayfasının ekran görüntüsü](./media/oracle-design/premium_disk01.png)
 
-Bir VM'de depolama alanınızı yapılandırdıktan sonra Yük isteyebilirsiniz diskleri veritabanı oluşturmadan önce test edin. G/ç hızı hem gecikme süresi ve aktarım hızı açısından bilmek, beklenen aktarım hızıyla gecikme hedefleri ile Vm'leri destekliyorsa belirlemenize yardımcı olabilir.
+Depolama alanınızı bir VM 'de yapılandırdıktan sonra, bir veritabanı oluşturmadan önce diskleri test etmek isteyebilirsiniz. G/ç hızını gecikme süresi ve aktarım hızı açısından bilmek, VM 'Lerin gecikme süresiyle beklenen aktarım hızını desteklemesinin gerekip gerekmediğini belirlemenize yardımcı olabilir.
 
-Uygulama yük, Oracle Orion Sysbench ve Fio gibi test etme için araçlar vardır.
+Uygulama yük testi için Oracle Orion, Sysbench ve Fio gibi çeşitli araçlar vardır.
 
-Bir Oracle veritabanına dağıttıktan sonra Yük testi yeniden çalıştırın. Normal ve yoğun saatler iş yüklerinizi başlayın ve sonuçlarını ortamınızın taban çizgisini göster.
+Bir Oracle veritabanını dağıttıktan sonra yük testini yeniden çalıştırın. Düzenli ve en yoğun iş yüklerinizi başlatın ve sonuçlar size ortamınızın temelini gösterir.
 
-Depolama boyutu yerine IOPS oranı tabanlı depolama boyutu daha önemli olabilir. Birden fazla ile 200 GB depolama alanı gelse de Örneğin, gereken IOPS 5.000 olmakla yalnızca 200 GB ihtiyacınız olursa, hala P30 sınıfı premium disk alabilirsiniz.
+Depolama boyutu yerine ıOPS ücretine göre depolamanın boyutunun oluşturulması daha önemli olabilir. Örneğin, gerekli ıOPS 5.000 ise ancak yalnızca 200 GB gerekliyse, P30 sınıfı Premium diski, 200 GB 'tan fazla depolama alanı ile gelse de alabilir.
 
-IOPS oranı AWR rapordan elde edilebilir. Yinele günlük, fiziksel okuma ve yazma oranı tarafından belirlenir.
+IOP oranı, AWR raporundan elde edilebilir. Bu, yineleme günlüğü, fiziksel okuma ve yazma oranına göre belirlenir.
 
 ![AWR rapor sayfasının ekran görüntüsü](./media/oracle-design/awr_report.png)
 
-Örneğin, yineleme boyut 12,200,000 11.63 MB/sn olarak eşit olan, saniye başına bayttır.
-IOPS 12,200,000 olan / 2,358 = 5,174.
+Örneğin, yineleme boyutu 11,63 MB/sn 'ye eşit olan saniyede 12.200.000 bayttır.
+IOPS 12.200.000/2.358 = 5.174.
 
-G/ç gereksinimleri NET bir görüntüsünü oluşturduktan sonra bu gereksinimleri karşılamak için en uygun sürücüleri bir birleşimini seçebilirsiniz.
-
-**Öneriler**
-
-- Veri tablo alanı için g/ç iş yükü, yönetilen depolama veya Oracle ASM kullanarak disk sayısı arasında yayılabilir.
-- Yoğun okuma ve yazma yoğunluklu işlemleri için g/ç blok boyutu arttıkça, daha fazla veri diski ekleyin.
-- Sıralı büyük işlemler için blok boyutunu artırın.
-- G/ç (hem veri ve dizin) azaltmak için veri sıkıştırma kullanın.
-- Yinele günlükler, sistem ve temps ayırın ve TS ayrı veri disklerini geri alın.
-- Hiçbir uygulama dosyasında varsayılan işletim sistemi diskleri (/ dev/sda) koymayın. Bu diskleri için optimize edilmediğinden hızlı sanal makine için önyükleme zamanları ve uygulamanız için iyi bir performans sağlamayabilir.
-- M serisi VM'ler, Premium depolama alanında kullanırken, etkinleştirme [yazma hızlandırıcı](https://docs.microsoft.com/azure/virtual-machines/linux/how-to-enable-write-accelerator) günlükleri disk'üzerinde Yinele.
-
-### <a name="disk-cache-settings"></a>Disk önbellek ayarları
-
-Konak önbelleği için üç seçenek vardır:
-
-- *Salt okunur*: Tüm istekler için gelecekteki okuma önbelleğe alınır. Tüm yazma işlemlerini doğrudan Azure Blob depolama alanına kalıcıdır.
-
-- *ReadWrite*: "İleri okuma" algoritması budur. Okuma ve yazma işlemleri için gelecekteki okuma önbelleğe alınır. Yazma olmayan yazma aracılığıyla yerel önbelleğe ilk kalıcıdır. Ayrıca hafif iş yükleri için düşük disk gecikme sağlar. ReadWrite önbellek kullanarak gerekli verileri kalıcı hale getirmeniz işlemez bir uygulama ile VM kilitlenmesi durumunda veri kaybına neden olabilir.
-
-- *Hiçbiri* (devre dışı): Bu seçeneği kullanarak, önbellek devre dışı bırakabilir. Tüm veriler diske aktarma ve Azure Depolama'da kalıcı hale. Bu yöntem, g/ç kullanımlı iş yükleri için yüksek g/ç hızı sunar. "İşlem Maliyet" önünde bulundurmanız gerekir.
+G/ç gereksinimlerinden oluşan net bir resme sahip olduktan sonra, bu gereksinimleri karşılamak için en uygun sürücü birleşimini seçebilirsiniz.
 
 **Öneriler**
 
-Aktarım hızını en üst düzeye çıkarmak için ile başlamanızı öneririz **hiçbiri** için konak önbelleği. Premium depolama dosya sistemi ile bağladığınızda "engelleri" mamtelemetrydisabled aklınızda bulundurun **salt okunur** veya **hiçbiri** seçenekleri. Disklere UUID'sine sahip /etc/fstab dosyasını güncelleştirin.
+- Veri alanı için, yönetilen depolama veya Oracle ASM kullanarak bir dizi diskte g/ç iş yükünü yayın.
+- Okuma yoğunluğu ve yazma yoğunluklu işlemler için g/ç blok boyutu arttıkça, daha fazla veri diski ekleyin.
+- Büyük sıralı süreçler için blok boyutunu artırın.
+- G/ç 'yi (hem veri hem de dizinler için) azaltmak için veri sıkıştırmayı kullanın.
+- Yineleme günlüklerini, sistemi ve temps 'yi ayırın ve ayrı veri disklerinde TS 'yi geri alın.
+- Herhangi bir uygulama dosyasını varsayılan işletim sistemi disklerine yerleştirmeyin (/dev/sda). Bu diskler hızlı VM önyükleme süreleri için en iyi duruma getirilmemiştir ve uygulamanız için iyi performans sağlamabilirler.
+- Premium depolamada, d serisi VM 'Ler kullanırken, yeniden yineleme diski üzerinde [yazma Hızlandırıcısı](https://docs.microsoft.com/azure/virtual-machines/linux/how-to-enable-write-accelerator) etkinleştirin.
+
+### <a name="disk-cache-settings"></a>Disk önbelleği ayarları
+
+Konak önbelleğe alma için üç seçenek vardır:
+
+- *Salt okunur*: Tüm istekler sonraki kullanımlar için önbelleğe alınır. Tüm yazma işlemleri doğrudan Azure Blob depolama alanına kalıcıdır.
+
+- *ReadWrite*: Bu bir "salt okuma" algoritmasıdır. Okuma ve yazma işlemleri, gelecekteki okumalar için önbelleğe alınır. Yazısız yazma işlemleri, önce yerel önbellekte kalıcı hale getirilir. Ayrıca, hafif iş yükleri için en düşük disk gecikme süresini de sağlar. Gerekli verileri kalıcı olarak işlemeyen bir uygulamayla ReadWrite önbelleği kullanmak, VM kilitlenirse veri kaybına yol açabilir.
+
+- *Hiçbiri* (devre dışı): Bu seçeneği kullanarak önbelleği atlayabilirsiniz. Tüm veriler diske aktarılır ve Azure depolama 'da kalıcı hale getirilir. Bu yöntem, g/ç yoğunluklu iş yükleri için en yüksek g/ç hızını sağlar. Ayrıca "işlem maliyeti" göz önünde bulundurmanız gerekir.
+
+**Öneriler**
+
+Aktarım hızını en üst düzeye çıkarmak için, konak önbelleğe alma için **none** ile başlamanız önerilir. Premium Depolama için, dosya sistemini **ReadOnly** veya **none** seçenekleriyle bağladığınızda "engelleri" devre dışı bırakmanız gerektiğini aklınızda bulundurun. /Etc/fstab dosyasını UUID ile disklere güncelleştirin.
 
 ![Yönetilen disk sayfasının ekran görüntüsü](./media/oracle-design/premium_disk02.png)
 
-- Varsayılan işletim sistemi disklerinde kullanmak **okuma/yazma** önbelleğe alma.
-- Sistem, TEMP ve geri alma için **hiçbiri** önbelleğe alma.
-- VERİLERİ için kullanın **hiçbiri** önbelleğe alma. Ancak, veritabanı salt okunur veya okuma açısından yoğun ise, **salt okunur** önbelleğe alma.
+- İşletim sistemi diskleri için varsayılan **okuma/yazma** önbelleği kullanın.
+- SISTEM, GEÇICI ve GERI alma için, önbelleğe alma için **none** kullanın.
+- VERILER için, önbelleğe alma için **hiçbiri** kullanın. Ancak veritabanınız salt okunurdur veya okuma yoğunluğu varsa, **salt okuma** önbelleği kullanın.
 
-Veri diski ayarınızı kaydedildikten sonra sürücü işletim sistemi düzeyinde çıkarın ve değişiklikleri yaptıktan sonra sonra bunu yeniden bağlamak sürece konak önbelleği ayarı değiştiremezsiniz.
+Veri diski ayarınız kaydedildikten sonra, işletim sistemi düzeyinde sürücüyü çıkarmadığınız ve sonra değişikliği yaptıktan sonra yeniden bağlanmadığınız takdirde konak önbellek ayarını değiştiremezsiniz.
 
 ## <a name="security"></a>Güvenlik
 
-Ayarlama ve Azure ortamınızda sonra sonraki adım, ağınızın güvenliğini sağlamaktır. Bazı öneriler şunlardır:
+Azure ortamınızı ayarladıktan ve yapılandırdıktan sonra, bir sonraki adım ağınızı güvenli hale getirmeye çalışır. Bazı öneriler aşağıda verilmiştir:
 
-- *NSG ilke*: NSG bir alt ağ veya NIC tarafından tanımlanabilir Erişimi denetlemek için güvenlik ve uygulama güvenlik duvarları gibi şeyler için zorla yönlendirme hem de alt ağ düzeyinde basittir.
+- *NSG ilkesi*: NSG, bir alt ağ veya NIC ile tanımlanabilir. Erişimi, hem güvenlik hem de uygulama güvenlik duvarları gibi şeyler için zorla yönlendirme için alt ağ düzeyinde denetlemek daha basittir.
 
-- *Sıçrama kutusu*: Daha güvenli erişim için Yöneticiler doğrudan uygulama hizmeti veya veritabanı için bağlantı. Bir Sıçrama kutusu, yönetici makine ve Azure kaynakları arasında bir medya olarak kullanılır.
+- Sıçrama *kutusu*: Daha güvenli erişim için Yöneticiler Uygulama hizmetine veya veritabanına doğrudan bağlanmamalıdır. Bir atlama kutusu, yönetici makinesi ile Azure kaynakları arasında bir medya olarak kullanılır.
 ![Sıçrama kutusu topolojisi sayfasının ekran görüntüsü](./media/oracle-design/jumpbox.png)
 
-    IP kısıtlı erişim Sıçrama kutusu yalnızca yönetici makine sunmalıdır. Sıçrama kutusu, uygulama ve veritabanına erişimi olmalıdır.
+    Yönetici makinesi yalnızca atlama kutusuna IP kısıtlı erişim sunmalıdır. Sıçrama kutusunun uygulamaya ve veritabanına erişimi olmalıdır.
 
-- *Özel ağ* (alt ağlar): Daha iyi denetim NSG İlkesi tarafından ayarlanabilir bu nedenle, veritabanı ve uygulama hizmeti farklı alt ağlarda olmasını öneririz.
+- *Özel ağ* (alt ağlar): Uygulama hizmeti ve veritabanınızın ayrı alt ağlarda olması önerilir, bu sayede NSG ilkesi tarafından daha iyi denetim ayarlanabilir.
 
 
 ## <a name="additional-reading"></a>Ek okuma
 
 - [Oracle ASM’yi yapılandırma](configure-oracle-asm.md)
-- [Oracle Data Guard'ı yapılandırma](configure-oracle-dataguard.md)
-- [Oracle Golden ağ geçidi yapılandırma](configure-oracle-golden-gate.md)
+- [Oracle Data Guard 'ı yapılandırma](configure-oracle-dataguard.md)
+- [Oracle altın kapısını yapılandırma](configure-oracle-golden-gate.md)
 - [Oracle yedekleme ve kurtarma](oracle-backup-recovery.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Öğretici: Yüksek oranda kullanılabilir VM'ler oluşturma](../../linux/create-cli-complete.md)
-- [VM dağıtımı Azure CLI örneklerini keşfedin](../../linux/cli-samples.md)
+- [Öğretici: Yüksek oranda kullanılabilir VM 'Ler oluşturma](../../linux/create-cli-complete.md)
+- [VM dağıtımı Azure CLı örneklerini keşfet](../../linux/cli-samples.md)

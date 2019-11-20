@@ -17,8 +17,6 @@
       href: quick-create-cli.md
 - name: Öğreticiler
   items:
-    - name: Web uygulaması güvenlik duvarını etkinleştirme
-      href: application-gateway-web-application-firewall-portal.md
     - name: SSL ile güvenli
       href: create-ssl-portal.md
     - name: Birden çok site barındırma
@@ -35,6 +33,8 @@
       href: powershell-samples.md
     - name: Azure CLI
       href: cli-samples.md
+    - name: Resource Manager şablonları
+      href: resource-manager-template-samples.md
 - name: Kavramlar
   items:
     - name: Temel Bilgiler
@@ -67,20 +67,16 @@
           href: application-gateway-ssl-policy-overview.md
         - name: Key Vault kullanma
           href: key-vault-certs.md
-    - name: WAF
-      items:
-        - name: Web uygulaması güvenlik duvarı
-          href: waf-overview.md
-        - name: WAF yapılandırması
-          href: application-gateway-waf-configuration.md
-        - name: Özel kurallar
-          href: custom-waf-rules-overview.md
+    - name: AKS için giriş
+      href: ingress-controller-overview.md
     - name: Sistem durumunu izleme
       items:
         - name: Durum yoklaması
           href: application-gateway-probe-overview.md
-        - name: Tanılama
+        - name: Tanılama günlükleri ve arka uç sistem durumu
           href: application-gateway-diagnostics.md
+        - name: Ölçümler
+          href: application-gateway-metrics.md
     - name: App service web uygulaması ve birden çok kiracı desteği
       href: application-gateway-web-app-overview.md
     - name: WebSocket desteği
@@ -95,9 +91,6 @@
           href: tutorial-manage-web-traffic-powershell.md
         - name: Azure CLI
           href: tutorial-manage-web-traffic-cli.md
-        - name: Şablon
-          displayName: 'ARM, Resource Manager, template'
-          href: create-vmss-template.md
     - name: İç yük dengeleyicisi yapılandırma
       items:
         - name: Azure portal
@@ -122,34 +115,40 @@
               href: application-gateway-end-to-end-ssl-powershell.md
         - name: Sertifikaları yönetme
           items:
-            - name: Güvenilenler listesine ekleme arka ucu için sertifikalar oluşturma
+            - name: Arka uca yönelik sertifikalar
               href: certificates-for-backend-authentication.md
             - name: Sertifikaları yenileme
               href: renew-certificates.md
+            - name: Otomatik olarak imzalanan sertifikalar oluşturma
+              href: self-signed-certificates.md
         - name: SSL ilkesi
           items:
             - name: SSL ilkesi yapılandırma
               href: application-gateway-configure-ssl-policy-powershell.md
-    - name: Web Uygulaması Güvenlik Duvarı’nı Yapılandırma
+    - name: AKS için giriş
       items:
-        - name: Azure PowerShell
-          href: tutorial-restrict-web-traffic-powershell.md
-        - name: Azure CLI
-          href: tutorial-restrict-web-traffic-cli.md
-    - name: WAF kural kümelerini yapılandırma
-      items:
-        - name: Azure portal
-          href: application-gateway-customize-waf-rules-portal.md
-        - name: Azure PowerShell
-          href: application-gateway-customize-waf-rules-powershell.md
-        - name: Azure CLI
-          href: application-gateway-customize-waf-rules-cli.md
-    - name: WAF özel kuralları
-      items:
-        - name: Özel kural örnekleri
-          href: create-custom-waf-rules.md
-        - name: Özel kurallar ile WAF’yi yapılandırma
-          href: configure-waf-custom-rules.md
+        - name: Mevcut Application Gateway ile ayarlama
+          href: ingress-controller-install-existing.md
+        - name: Yeni Application Gateway ile ayarlama
+          href: ingress-controller-install-new.md
+        - name: Tanımlama bilgisi benzeşimini etkinleştirme
+          href: ingress-controller-cookie-affinity.md
+        - name: Birden çok ad alanı desteğini etkinleştirme
+          href: ingress-controller-multiple-namespace-support.md
+        - name: İç yönlendirme için özel IP kullanma
+          href: ingress-controller-private-ip.md
+        - name: AKS podlarına durum araştırmaları ekleme
+          href: ingress-controller-add-health-probes.md
+        - name: Application Gateway kullanarak HTTP/HTTPS üzerinden AKS hizmetini kullanıma sunma
+          href: ingress-controller-expose-service-over-http-https.md
+        - name: Helm kullanarak giriş denetleyicisini yükseltme
+          href: ingress-controller-update-ingress-controller.md
+        - name: Application Gateway ile LetsEncrypt.org'u kullanma
+          href: ingress-controller-letsencrypt-certificate-application-gateway.md
+        - name: WebSocket'i Application Gateway'in kullanımına sunma
+          href: ingress-controller-expose-websocket-server.md
+        - name: Application Gateway ölçümleriyle otomatik ölçeklendirme AKS podları
+          href: ingress-controller-autoscale-pods.md
     - name: URL’ye göre yönlendirme
       items:
         - name: Azure PowerShell
@@ -212,20 +211,26 @@
       items:
         - name: App Service Ortamı ile ILB
           href: create-gateway-internal-load-balancer-app-service-environment.md
-        - name: App Service URL’sine yeniden yönlendirme
+        - name: Uygulama hizmeti sorunları
           href: troubleshoot-app-service-redirection-app-service-url.md
         - name: Oturum benzeşimi sorunları
           href: how-to-troubleshoot-application-gateway-session-affinity-issues.md
         - name: Ağ Geçidi (502) hataları
           href: application-gateway-troubleshooting-502.md
-        - name: Web Uygulaması Güvenlik Duvarı (WAF)
-          href: web-application-firewall-troubleshoot.md
+        - name: AKS için giriş
+          href: ingress-controller-troubleshoot.md
+        - name: Kaynak Durumu
+          href: resource-health-overview.md
+        - name: Log Analytics kullanma
+          href: log-analytics.md
+        - name: Arka uç sistem durumu sorunları
+          href: application-gateway-backend-health-troubleshooting.md
     - name: v1'den v2'ye geçiş
       href: migrate-v1-v2.md
 - name: Başvuru
   items:
-    - name: CRS kuralları
-      href: application-gateway-crs-rulegroups-rules.md
+    - name: AKS için giriş ek açıklamaları
+      href: ingress-controller-annotations.md
     - name: Azure CLI
       href: /cli/azure/network/application-gateway
     - name: Azure PowerShell
@@ -241,19 +246,23 @@
     - name: REST
       href: /rest/api/applicationgateway
     - name: Azure Resource Manager
+      displayName: ARM
       href: ../azure-resource-manager/resource-group-overview.md
     - name: Resource Manager şablonu
-      href: 'https://docs.microsoft.com/azure/templates/microsoft.network/allversions'
+      displayName: ARM
+      href: 'https://docs.microsoft.com/azure/templates/microsoft.network/applicationgateways'
 - name: Kaynaklar
   items:
     - name: Yazar şablonları
+      displayName: ARM
       href: ../azure-resource-manager/resource-group-authoring-templates.md
     - name: Azure Yol Haritası
       href: 'https://azure.microsoft.com/roadmap/'
     - name: Topluluk şablonları
+      displayName: ARM
       href: 'https://azure.microsoft.com/documentation/templates'
     - name: Fiyatlandırma
-      href: 'https://azure.microsoft.com/pricing/details/#Linux'
+      href: 'https://azure.microsoft.com/pricing/details/application-gateway/'
     - name: Bölgesel kullanılabilirlik
       href: 'https://azure.microsoft.com/regions/services/'
     - name: Stack Overflow

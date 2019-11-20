@@ -1,20 +1,20 @@
 ---
-title: Azure Site Recovery dağıtım Planlayıcısı azure'a olağanüstü durum kurtarma Hyper-V sanal makineleri hakkında | Microsoft Docs
-description: Azure'a Azure Site Recovery dağıtım Planlayıcısı Hyper-V olağanüstü durum kurtarma hakkında bilgi edinin.
+title: Azure Site Recovery ile Hyper-V olağanüstü durum kurtarma için Dağıtım Planlayıcısı
+description: Azure 'da Hyper-V olağanüstü durum kurtarma Azure Site Recovery Dağıtım Planlayıcısı hakkında bilgi edinin.
 author: mayurigupta13
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 4/18/2019
+ms.date: 7/29/2019
 ms.author: mayg
-ms.openlocfilehash: a793de302eb0833c959f2486fc2cda1f2eec4674
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 72b1311227f5c9f9efc35b2940d3c843a21dc261
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65149117"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954026"
 ---
-# <a name="about-the-azure-site-recovery-deployment-planner-for-hyper-v-disaster-recovery-to-azure"></a>Azure Site Recovery dağıtım planlayıcısı hakkında azure'a Hyper-V olağanüstü durum kurtarma
+# <a name="about-the-azure-site-recovery-deployment-planner-for-hyper-v-disaster-recovery-to-azure"></a>Azure 'da Hyper-V olağanüstü durum kurtarma Azure Site Recovery Dağıtım Planlayıcısı hakkında
 
 Bu makale, Hyper-V’den Azure’a üretim dağıtımları için Azure Site Recovery Dağıtım Planlayıcısı kullanım kılavuzudur.
 
@@ -59,7 +59,7 @@ Araç aşağıdaki bilgileri sağlar:
 
 **Azure için tahmini DR maliyeti**
 * Azure için tahmini DR maliyeti: işlem, depolama, ağ ve Azure Site Recovery lisans maliyeti
-* VM başına ayrıntılı maliyet analiz
+* VM başına ayrıntılı maliyet analizi
 
 
 
@@ -72,8 +72,8 @@ Araç aşağıdaki bilgileri sağlar:
 
 | | **Vmware’den Azure’a** |**Hyper-V'den Azure'a**|**Azure'dan Azure'a**|**Hyper-V’den ikincil siteye**|**VMware’den ikincil siteye**
 --|--|--|--|--|--
-Desteklenen senaryolar |Evet|Evet|Hayır|Evet*|Hayır
-Desteklenen Sürüm | vCenter 6.7, 6.5, 6.0 or 5.5| Windows Server 2016, Windows Server 2012 R2 | NA |Windows Server 2016, Windows Server 2012 R2|NA
+Desteklenen senaryolar |Yes|Yes|Hayır|Evet*|Hayır
+Desteklenen Sürüm | vCenter 6,7, 6,5, 6,0 veya 5,5| Windows Server 2016, Windows Server 2012 R2 | NA |Windows Server 2016, Windows Server 2012 R2|NA
 Desteklenen yapılandırma|vCenter, ESXi| Hyper-V kümesi, Hyper-V konağı|NA|Hyper-V kümesi, Hyper-V konağı|NA|
 Çalışan Azure Site Recovery Dağıtım Planlayıcısı örneği başına profili oluşturulabilecek sunucu sayısı |Tek (bir vCenter Server ve bir ESXi sunucusuna ait VM’lerin profili aynı anda oluşturulabilir)|Birden çok (birden çok konak veya konak kümesindeki sanal makinelerin profili tek seferde oluşturulabilir)| NA |Birden çok (birden çok konak veya konak kümesindeki sanal makinelerin profili tek seferde oluşturulabilir)| NA
 
@@ -84,7 +84,7 @@ Araç, Hyper-V için üç ana aşama içerir: VM listesini alma, profil oluştur
 
 | Sunucu gereksinimi | Açıklama |
 |---|---|
-|VM listesini alma, profil oluşturma ve aktarım hızı ölçümü |<ul><li>İşletim Sistemi: Microsoft Windows Server 2016 veya Microsoft Windows Server 2012 R2 </li><li>Makine Yapılandırması: 8 Vcpu, 16 GB RAM, 300 GB HDD</li><li>[Microsoft .NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[Visual Studio 2012 için Microsoft Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)</li><li>Bu sunucudan Azure’a İnternet erişimi</li><li>Azure depolama hesabı</li><li>Sunucu üzerinde yönetici erişimi</li><li>En az 100 GB boş disk alanı (30 günlük profili oluşturulmuş ve her biri ortalama üç diske sahip 1000 VM varsayıldığında)</li><li>Azure Site Recovery dağıtım planlayıcısı aracını çalıştırdığınız sanal makinenin, tüm Hyper-V sunucularının TrustedHosts listesine eklenmesi gerekir.</li><li>Tüm Hyper-V sunucularının profili oluşturulacak aracı burada çalıştırıldığı istemci VM'nin TrustedHosts listesine eklenmesi gerekir. [TrustedHosts listesine sunucu eklemek için daha fazla bilgi edinin](#steps-to-add-servers-into-trustedhosts-list). </li><li> Araç, PowerShell veya istemci üzerindeki komut satırı konsolu üzerinde yönetici ayrıcalığı ile çalıştırılmalıdır</ul></ul>|
+|VM listesini alma, profil oluşturma ve aktarım hızı ölçümü |<ul><li>İşletim sistemi: Microsoft Windows Server 2016 veya Microsoft Windows Server 2012 R2 </li><li>Makine yapılandırması: 8 vCPU, 16 GB RAM, 300 GB HDD</li><li>[Microsoft .NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[Visual Studio 2012 için Microsoft Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)</li><li>Bu sunucudan Azure’a İnternet erişimi</li><li>Azure depolama hesabı</li><li>Sunucu üzerinde yönetici erişimi</li><li>En az 100 GB boş disk alanı (30 günlük profili oluşturulmuş ve her biri ortalama üç diske sahip 1000 VM varsayıldığında)</li><li>Azure Site Recovery dağıtım planlayıcısı aracını çalıştırdığınız sanal makinenin, tüm Hyper-V sunucularının TrustedHosts listesine eklenmesi gerekir.</li><li>Profili oluşturulacak tüm Hyper-V sunucularının, aracın çalıştırıldığı istemci VM 'nin TrustedHosts listesine eklenmesi gerekir. [TrustedHosts listesine sunucu eklemek için daha fazla bilgi edinin](#steps-to-add-servers-into-trustedhosts-list). </li><li> Araç, PowerShell veya istemci üzerindeki komut satırı konsolu üzerinde yönetici ayrıcalığı ile çalıştırılmalıdır</ul></ul>|
 | Rapor oluşturma | Microsoft Excel 2013 ve üzerinin yüklü olduğu herhangi bir Windows PC ya da Windows Server |
 | Kullanıcı izinleri | VM listesini alma ve profil oluşturma işlemleri sırasında Hyper-V kümesine/Hyper-V konağına erişmek için kullanılacak yönetici hesabı.<br>Profili oluşturulması gereken tüm konakların, aynı kimlik bilgilerine sahip (kullanıcı adı ve parola) bir etki alanı yönetici hesabı olmalıdır
  |
@@ -110,18 +110,18 @@ Araç, Hyper-V için üç ana aşama içerir: VM listesini alma, profil oluştur
 Araç bir zip klasöründe paketlenmiştir. Aynı araç hem VMware’den Azure’a hem de Hyper-V’den Azure’a olağanüstü durum kurtarma senaryolarını destekler. Bu aracı Hyper-V’den ikincil siteye olağanüstü durum kurtarma senaryoları için de kullanabilirsiniz. Ancak bu durumda, rapordaki Azure altyapısı önerilerini dikkate almayın.
 
 1.  Zip klasörünü, aracı çalıştırmak istediğiniz Windows Server’a kopyalayın. Aracı Windows Server 2012 R2 veya Windows Server 2016 üzerinde çalıştırabilirsiniz. Sunucunun, profili oluşturulacak VM’leri içeren Hyper-V kümesine veya Hyper-V konağına bağlanması için ağ erişimi olması gerekir. Korumak istediğiniz Hyper-V sunucusu ve aracın çalıştırılacağı VM ile aynı donanım yapılandırmasına sahip olmanız önerilir. Bu tür bir yapılandırma, araç tarafından elde edildiği rapor edilen aktarım hızının, Azure Site Recovery tarafından profil oluşturma sırasında elde edilebilecek gerçek aktarım hızı ile eşleşmesini sağlar. Aktarım hızı hesaplaması, sunucu üzerinde kullanılabilir ağ bant genişliğine ve sunucunun donanım yapılandırmasına (CPU, depolama vb.) bağlıdır. Aktarım hızı, aracın Azure’a çalıştırıldığı sunucudan hesaplanır. Sunucunun donanım yapılandırması, Hyper-V sunucusundan farklı olursa, aracın elde edildiğini rapor ettiği aktarım hızı hatalı olur.
-Önerilen VM yapılandırması: 8 vCPUs, 16 GB RAM, 300 GB HDD.
+Önerilen VM yapılandırması: 8 vCPU, 16 GB RAM, 300 GB HDD.
 
 1.  .zip klasörünü ayıklayın.
 Klasör birden fazla dosya ve alt klasör içerir. Yürütülebilir dosya, üst klasördeki ASRDeploymentPlanner.exe dosyasıdır.
 
 Örnek: .zip dosyasını E:\ sürücüsüne kopyalayıp ayıklayın. E:\ASR Deployment Planner_v2.3.zip
 
-E:\ASR Deployment Planner_v2.3\ASRDeploymentPlanner.exe
+E:\ASR dağıtımı Planner_v2.3 \ ASRDeploymentPlanner. exe
 
 ### <a name="updating-to-the-latest-version-of-deployment-planner"></a>Dağıtım planlayıcısını en son sürüme güncelleştirme
 
-Dağıtım Planlayıcısı en son güncelleştirmeleri özetlenmiştir [sürüm geçmişi](site-recovery-deployment-planner-history.md).
+En son güncelleştirmeler Dağıtım Planlayıcısı [sürüm geçmişinde](site-recovery-deployment-planner-history.md)özetlenmektedir.
 
 Dağıtım planlayıcısının önceki sürümüne sahipseniz şunlardan birini yapın:
  * En son sürüm bir profil oluşturma düzeltmesi içermiyor ve profil oluşturma planlayıcının geçerli sürümünde devam ediyorsa, profil oluşturmaya devam edin.
@@ -135,8 +135,8 @@ Dağıtım planlayıcısının önceki sürümüne sahipseniz şunlardan birini 
   >Her yeni dağıtım planlayıcısı, .zip dosyasının toplu bir güncelleştirmesidir. En yeni dosyaları önceki klasöre kopyalamanız gerekmez. Yeni bir klasör oluşturup kullanabilirsiniz.
 
 ## <a name="version-history"></a>Sürüm geçmişi
-En son Azure Site Recovery dağıtım planlayıcısı aracı sürümü 2.4 ' dir.
-Başvurmak [Azure Site Recovery dağıtım Planlayıcısı sürüm geçmişi](https://social.technet.microsoft.com/wiki/contents/articles/51049.asr-deployment-planner-version-history.aspx) her güncelleştirmede eklenen düzeltmeler için sayfa.
+En son Azure Site Recovery Dağıtım Planlayıcısı aracı sürümü 2,5 ' dir.
+Her güncelleştirmede eklenen düzeltmeler için [Azure Site Recovery dağıtım planlayıcısı sürüm geçmişi](https://social.technet.microsoft.com/wiki/contents/articles/51049.asr-deployment-planner-version-history.aspx) sayfasına bakın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

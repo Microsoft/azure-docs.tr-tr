@@ -1,0 +1,97 @@
+### YamlMime:Landing
+title: Azure Synapse Analytics (eski adı Azure SQL Veri Ambarı)
+summary: Azure Synapse kurumsal veri ambarı özellikleriyle Büyük Veri analizini bir araya getiren sınırsız bir analiz hizmetidir. Her ölçekte sunucusuz isteğe bağlı veya sağlanmış kaynakları kullanarak, kendi koşullarınızla verileri sorgulama özgürlüğü getirir.
+metadata:
+  title: Azure Synapse Analytics
+  description: Azure Synapse kurumsal veri ambarı özellikleriyle Büyük Veri analizini bir araya getiren sınırsız bir analiz hizmetidir. Her ölçekte sunucusuz isteğe bağlı veya sağlanmış kaynakları kullanarak, kendi koşullarınızla verileri sorgulama özgürlüğü getirir.
+  services: sql-data-warehouse
+  ms.service: sql-data-warehouse
+  ms.subservice: design
+  ms.topic: landing-page
+  ms.collection: collection
+  author: julieMSFT
+  ms.author: jrasnick
+  ms.date: 10/03/2019
+  ms.openlocfilehash: 2ad2e5b4d17c4642b42efd51de2b91308f49a101
+  ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73492218"
+landingContent:
+- title: Azure Synapse Analytics hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Synapse nedir?
+      url: sql-data-warehouse-overview-what-is.md
+  - linkListType: architecture
+    links:
+    - text: Azure Synapse mimarisi
+      url: massively-parallel-processing-mpp-architecture.md
+    - text: İpuçları ve en iyi yöntemler
+      url: cheat-sheet.md
+- title: Başlarken
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: SQL havuzu oluşturma (veri ambarı)
+      url: create-data-warehouse-portal.md
+- title: Veri yükleme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Veri yükleme stratejisi tasarlama
+      url: design-elt-data-loading.md
+    - text: En iyi uygulamalar
+      url: guidance-for-loading-data.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Data Lake Storage’dan veri yükleme
+      url: sql-data-warehouse-load-from-azure-data-lake-store.md
+  - linkListType: tutorial
+    links:
+    - text: Azure Blob depolamadan veri yükleme
+      url: load-data-from-azure-blob-storage-using-polybase.md
+- title: Performans ayarlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: En iyi uygulamalar
+      url: sql-data-warehouse-best-practices.md
+    - text: Sıralı kümelenmiş columnstore dizini ayarlama
+      url: performance-tuning-ordered-cci.md
+    - text: İş yükü ayarlama için gerçekleştirilmiş görünümleri kullanma
+      url: performance-tuning-materialized-views.md
+  - linkListType: how-to-guide
+    links:
+    - text: İş yükünüzü çözümleme
+      url: analyze-your-workload.md
+- title: Yönetme ve izleme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Veri ambarınızı yönetmeyi ve izlemeyi öğrenin
+      url: sql-data-warehouse-overview-manageability-monitoring.md
+  - linkListType: how-to-guide
+    links:
+    - text: DMV’leri kullanarak iş yükünüzü izleme
+      url: sql-data-warehouse-manage-monitor.md
+    - text: İş yükü önem derecesini yönetme ve izleme
+      url: sql-data-warehouse-how-to-manage-and-monitor-workload-importance.md
+- title: Veri ambarınızın güvenliğini sağlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Veri ambarınızın güvenliğini sağlamaya yönelik temel bilgileri anlayın
+      url: sql-data-warehouse-overview-manage-security.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Active Directory kimlik doğrulamasını yapılandırma
+      url: /azure/sql-database/sql-database-aad-authentication-configure?toc=/azure/sql-data-warehouse/toc.json&bc=/azure/sql-data-warehouse/breadcrumb/toc.json
+- title: Kaynaklar
+  linkLists:
+  - linkListType: video
+    links:
+    - text: En son veri ambarı videolarını izleyin
+      url: sql-data-warehouse-videos.md

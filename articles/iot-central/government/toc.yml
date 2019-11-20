@@ -1,0 +1,114 @@
+- name: Kamu için Azure IoT Central belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure IoT Central ile kamu çözümleri oluşturma
+      href: overview-iot-central-government.md
+- name: Öğreticiler
+  items:
+    - name: Bağlantılı atık yönetimi uygulaması oluşturma
+      href: tutorial-connected-waste-management.md
+    - name: Su tüketimi izleme uygulaması oluşturma
+      href: tutorial-water-consumption-monitoring.md
+    - name: Su kalitesi izleme uygulaması oluşturma
+      href: tutorial-water-quality-monitoring.md
+- name: Kavramlar
+  items:
+    - name: Bağlı atık izleme referans mimarisi
+      href: concepts-connectedwastemanagement-architecture.md
+    - name: Su tüketimi izleme referans mimarisi
+      href: concepts-waterconsumptionmonitoring-architecture.md
+    - name: Su kalitesi izleme referans mimarisi
+      href: concepts-waterqualitymonitoring-architecture.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Uygulamanızı Dynamics 365 Field Services’a bağlama
+      href: how-to-configure-connected-field-services.md
+    - name: Cihazları bağlama
+      items:
+        - name: MXChip IoT DevKit’i hazırlama ve bağlama
+          href: ../preview/howto-connect-devkit.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Rigado Cascade 500'ü hazırlama ve bağlama
+          href: ../preview/howto-connect-rigado-cascade-500.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Azure CLI'yı kullanarak cihaz bağlantısını izleme
+          href: ../preview/howto-monitor-devices-azure-cli.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+    - name: Cihazları yönetme
+      items:
+        - name: Cihazlarınızı yönetme
+          href: ../preview/howto-manage-devices.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: İş çalıştırma
+          href: ../core/howto-run-a-job.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Cihaz şablonu için sürüm oluşturma
+          href: ../preview/howto-version-device-template.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+    - name: İzleme ve analiz
+      items:
+        - name: Cihaz verilerinizi analiz etme
+          href: ../preview/howto-create-analytics.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Kurallar üzerinde web kancaları oluşturma
+          href: ../preview/howto-create-webhooks.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+    - name: Eylemler ve genişletilebilirlik
+      items:
+        - name: Verileri sürekli dışarı aktarmayı yapılandırma
+          href: ../preview/howto-export-data.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Özel kurallar oluşturma
+          href: ../preview/howto-create-custom-rules.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Databricks ile özel analizler oluşturma
+          href: ../preview/howto-create-custom-analytics.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+    - name: Yönetim
+      items:
+        - name: Uygulama ayarlarını değiştirme
+          href: ../preview/howto-administer.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Uygulamanızı dışarı aktarma
+          href: ../preview/howto-use-app-templates.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Kullanıcıları ve rolleri yönetme
+          href: ../preview/howto-manage-users-roles.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Faturanızı yönetme
+          href: ../preview/howto-view-bill.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Uygulama kullanıcı arabirimini özelleştirme
+          href: ../preview/howto-customize-ui.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Panonuza kutucuklar ekleme
+          href: ../core/howto-add-tiles-to-your-dashboard.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Azure portalından yönetme
+          href: ../core/howto-manage-iot-central-from-portal.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Azure CLI’den yönetme
+          href: ../core/howto-manage-iot-central-from-cli.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Azure PowerShell’den yönetme
+          href: ../core/howto-manage-iot-central-from-powershell.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: CSP portalından yönetme
+          href: ../core/howto-create-and-manage-applications-csp.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+    - name: Kişiselleştirme
+      items:
+        - name: Azure IoT Central kişisel panolarını oluşturma
+          href: ../core/howto-create-personal-dashboards.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Kişisel tercihlerinizi yönetme
+          href: ../core/howto-manage-preferences.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+        - name: Canlı sohbeti açma/kapatma
+          href: ../core/howto-show-hide-chat.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+- name: İlgili
+  items:
+    - name: Platform hizmetleri
+      items:
+        - name: IoT Hub
+          href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
+        - name: IoT Hub Cihazı Sağlama Hizmeti
+          href: /azure/iot-dps
+        - name: Konum Tabanlı Hizmetler
+          href: /azure/location-based-services
+        - name: Hizmet SDK'ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+        - name: Time Series Insights
+          href: /azure/time-series-insights
+    - name: IoT Edge
+      items:
+        - name: Azure IoT Edge
+          href: /azure/iot-edge
+        - name: IoT Cihaz SDK'ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+- name: Kaynaklar
+  items:
+    - name: Müşteri verisi istekleri
+      href: ../core/iot-central-customer-data-requests.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json
+    - name: Desteklenen tarayıcılar
+      href: ../core/iot-central-supported-browsers.md?toc=/azure/iot-central/government/toc.json&bc=/azure/iot-central/government/breadcrumb/toc.json

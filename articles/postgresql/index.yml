@@ -1,85 +1,141 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: PostgreSQL Belgeleri için Azure Veritabanı
+### YamlMime:Landing
+title: PostgreSQL için Azure Veritabanı belgeleri
+summary: 'PostgreSQL için Azure Veritabanı, açık kaynak Postgres veritabanı altyapısını temel alan ilişkisel bir veritabanı hizmetidir. Bu, kritik iş yüklerini işleyebilen, tahmin edilebilir performans, güvenlik, yüksek kullanılabilirlik ve dinamik ölçeklenebilirlik sunan, tam olarak yönetilen bir hizmet olarak veritabanıdır. İki dağıtım seçeneğiyle sağlanır: tek sunucu olarak ve Hiper Ölçek (Citus) kümesi olarak. Hiper Ölçek (Citus) seçeneği, parçalamayı kullanarak sorguları birden çok makine arasında yatay olarak ölçeklendirir ve daha büyük ölçek ve performans gerektiren uygulamalara hizmet verir. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, PostgreSQL için Azure Veritabanı’nı kullanmayı öğrenin.'
 metadata:
-  document_id: c0fe8cd3-35da-e3e5-718e-8f3cf2f87f34
-  title: 'Azure PostgreSQL Belgeleri - Öğreticiler, API Başvurusu'
-  description: 'PostgreSQL için Azure Veritabanı, açık kaynak PostgreSQL veritabanı altyapısını temel alan, Microsoft bulutunda geliştiriciler için oluşturulmuş ilişkisel bir veritabanı hizmetidir.'
+  description: PostgreSQL için Azure Veritabanı, açık kaynak PostgreSQL veritabanı altyapısını temel alan, Microsoft bulutunda geliştiriciler için oluşturulmuş ilişkisel bir veritabanı hizmetidir.
   author: rachel-msft
   ms.author: raagyema
+  ms.date: 08/30/2019
   ms.service: postgresql
   ms.topic: landing-page
-  ms.date: 04/26/2019
-abstract:
-  description: 'PostgreSQL için Azure Veritabanı, açık kaynak Postgres veritabanı altyapısını temel alan ilişkisel bir veritabanı hizmetidir.  Bu, kritik iş yüklerini işleyebilen, tahmin edilebilir performans, güvenlik, yüksek kullanılabilirlik ve dinamik ölçeklenebilirlik sunan, tam olarak yönetilen bir hizmet olarak veritabanıdır. İki dağıtım seçeneğiyle sağlanır: Tek Sunucu ve Hiper Ölçek (Citus) (önizleme). Hiper Ölçek (Citus) seçeneği, parçalamayı kullanarak sorguları birden çok makine arasında yatay olarak ölçeklendirir ve daha büyük ölçek ve performans gerektiren uygulamalara hizmet verir. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, PostgreSQL için Azure Veritabanı’nı kullanmayı öğrenin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Şunları kullanarak PostgreSQL veritabanı oluşturmayı öğrenin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/azure/sql-database/media/index/portal.svg'
-            text: Tek Sunucu Azure Portalı
-            href: /azure/postgresql/quickstart-create-server-database-portal
-          - image:
-              src: 'https://docs.microsoft.com/azure/sql-database/media/index/cli.svg'
-            text: Tek Sunucu Azure CLI
-            href: /azure/postgresql/quickstart-create-server-database-azure-cli
-          - image:
-              src: 'https://docs.microsoft.com/azure/sql-database/media/index/portal.svg'
-            text: Hiper Ölçek (Citus) Azure Portalı
-            href: /azure/postgresql/quickstart-create-hyperscale-portal
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Tek Sunucu için:'
-      - type: list
-        style: ordered
-        items:
-          - html: 'Veritabanı Tasarlama&#58; <a href="/azure/postgresql/tutorial-design-database-using-azure-portal">Azure portalı</a> | <a href="/azure/postgresql/tutorial-design-database-using-azure-cli">Azure CLI</a>'
-          - html: <a href="/azure/app-service/containers/tutorial-python-postgresql-app?toc=%2fazure%2fpostgresql%2ftoc.json">Python ve CLI kullanarak bir Web Uygulaması oluşturma</a>
-          - html: <a href="/azure/postgresql/tutorial-monitor-and-tune">Hizmeti izleme ve ayarlama</a>
-      - type: paragraph
-        text: 'Hiper Ölçek için (Citus) (önizleme):'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/postgresql/tutorial-design-database-hyperscale-multi-tenant">Çok kiracılı bir veritabanı tasarlama</a>
-          - html: <a href="/azure/postgresql/tutorial-design-database-hyperscale-realtime">Gerçek zamanlı bir veritabanı tasarlama</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: PostgreSQL için Azure Veritabanı sunucusu oluşturma
-            href: /learn/modules/create-azure-db-for-postgresql-server/
-            image:
-              src: /learn/achievements/create-azure-db-for-postgresql-server.svg
-              href: /learn/modules/create-azure-db-for-postgresql-server/
-      - type: paragraph
-        text: <a href="/learn/browse/?products=azure">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Genel görevleri yönetmeye yönelik betikleri bulun.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/postgresql/sample-scripts-azure-cli">Azure CLI</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/cli/azure/postgres">Azure CLI</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/postgresql">REST API</a></p>
-          - title: Azure Resource Manager
-            html: <p><a href="/azure/templates/microsoft.dbforpostgresql/allversions">Resource Manager şablonları</a></p>
+  ms.openlocfilehash: 4deeec3686d2e3b0a150b74a222f7f1eab0a93fd
+  ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/12/2019
+  ms.locfileid: "73932237"
+landingContent:
+- title: PostgreSQL için Azure Veritabanı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: PostgreSQL için Azure Veritabanı nedir?
+      url: overview.md
+  - linkListType: whats-new
+    links:
+    - text: Blogumuza göz atın
+      url: https://techcommunity.microsoft.com/t5/Azure-Database-for-PostgreSQL/bg-p/ADforPostgreSQL
+- title: Tek bir sunucu oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Portal kullanarak sunucu oluşturma
+      url: quickstart-create-server-database-portal.md
+    - text: Azure CLI kullanarak sunucu oluşturma
+      url: quickstart-create-server-database-azure-cli.md
+  - linkListType: learn
+    links:
+    - text: 'Öğrenme modülü: PostgreSQL için Azure Veritabanı sunucusu oluşturma'
+      url: /learn/modules/create-azure-db-for-postgresql-server/
+  - linkListType: concept
+    links:
+    - text: Fiyatlandırma katmanları
+      url: concepts-pricing-tiers.md
+    - text: Sınırlar
+      url: concepts-limits.md
+    - text: PostgreSQL sürümleri
+      url: concepts-supported-versions.md
+    - text: PostgreSQL uzantıları - tek sunucu
+      url: concepts-extensions.md
+  - linkListType: tutorial
+    links:
+    - text: Azure portal kullanarak Veritabanı tasarlama
+      url: tutorial-design-database-using-azure-portal.md
+    - text: Azure CLI kullanarak Veritabanı tasarlama
+      url: tutorial-design-database-using-azure-cli.md
+    - text: Python ve CLI kullanarak bir Web Uygulaması oluşturma
+      url: /azure/app-service/containers/tutorial-python-postgresql-app?toc=%2fazure%2fpostgresql%2ftoc.json
+    - text: Hizmeti izleme ve ayarlama
+      url: tutorial-monitor-and-tune.md
+- title: Hiper Ölçek (Citus) kümesi oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Portal’da Hiper Ölçek (Citus) kümesi oluşturma
+      url: quickstart-create-hyperscale-portal.md
+  - linkListType: tutorial
+    links:
+    - text: Çok kiracılı bir veritabanı tasarlama
+      url: tutorial-design-database-hyperscale-multi-tenant.md
+    - text: Gerçek zamanlı bir veritabanı tasarlama
+      url: tutorial-design-database-hyperscale-realtime.md
+  - linkListType: concept
+    links:
+    - text: PostgreSQL uzantıları - Hiper Ölçek
+      url: concepts-hyperscale-extensions.md
+    - text: Düğümleri anlama
+      url: concepts-hyperscale-nodes.md
+    - text: Dağıtılan verileri anlama
+      url: concepts-hyperscale-distributed-data.md
+    - text: Performans seçeneklerini yapılandırma
+      url: concepts-hyperscale-configuration-options.md
+    - text: Yüksek kullanılabilirlik
+      url: concepts-hyperscale-high-availability.md
+- title: Tek bir sunucuya bağlanma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Güvenlik duvarını anlama
+      url: concepts-firewall-rules.md
+    - text: Güvenlik duvarı kuralları oluşturma
+      url: howto-manage-firewall-using-portal.md
+    - text: SSL yapılandırma
+      url: concepts-ssl-connection-security.md
+  - linkListType: get-started
+    links:
+    - text: Python kullanarak bağlanma
+      url: connect-python.md
+    - text: Node.js kullanarak bağlanma
+      url: connect-nodejs.md
+    - text: Java kullanarak bağlanma
+      url: connect-java.md
+    - text: Ruby kullanarak bağlanma
+      url: connect-ruby.md
+    - text: PHP kullanarak bağlanma
+      url: connect-php.md
+    - text: .NET kullanarak bağlanma
+      url: connect-csharp.md
+    - text: Go kullanarak bağlanma
+      url: connect-go.md
+- title: Programlama API’leri ile kod yazma
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Ortak görevler için Azure CLI betikleri
+      url: /azure/postgresql/sample-scripts-azure-cli
+  - linkListType: reference
+    links:
+    - text: Azure CLI geliştirici başvurusu
+      url: /rest/api/postgresql/
+    - text: REST API geliştirici başvurusu
+      url: /cli/azure/postgres
+    - text: Azure Resource Manager şablonları
+      url: /azure/templates/microsoft.dbforpostgresql/allversions
+- title: Verileri yedekleme ve geçirme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Tek bir sunucuda yedekleme ve geri yükleme
+      url: concepts-backup.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure portalı kullanarak sunucuyu geri yükleme
+      url: howto-restore-server-portal.md
+    - text: Azure CLI’yi kullanarak sunucuyu geri yükleme
+      url: howto-restore-server-cli.md
+    - text: Döküm ve geri yükleme kullanarak veritabanını geçirme
+      url: howto-migrate-using-dump-and-restore.md
+    - text: Dışarı aktarma ve içeri aktarma seçeneğini kullanarak veritabanını geçirme
+      url: howto-migrate-using-export-and-import.md
+    - text: En düşük kapalı kalma süresiyle geçiş
+      url: howto-migrate-online.md

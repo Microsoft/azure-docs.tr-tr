@@ -1,6 +1,6 @@
 ---
-title: IOT Çözüm Hızlandırıcıları SSS - Azure | Microsoft Docs
-description: IOT Çözüm Hızlandırıcıları için sık sorulan sorular
+title: IoT Çözüm Hızlandırıcıları SSS-Azure | Microsoft Docs
+description: Bu makalede IoT Çözüm Hızlandırıcıları için sık sorulan sorular yanıtlanmaktadır. GitHub depoları bağlantıları içerir.
 author: dominicbetts
 manager: timlt
 ms.service: iot-accelerators
@@ -8,106 +8,106 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 02/15/2018
 ms.author: dobett
-ms.openlocfilehash: b2f08e811217572e09a254e9ab3306ab954b14b5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b448099dab0e79dca38310396896be46cf2e0ff6
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61447967"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826268"
 ---
-# <a name="frequently-asked-questions-for-iot-solution-accelerators"></a>IOT Çözüm Hızlandırıcıları için sık sorulan sorular
+# <a name="frequently-asked-questions-for-iot-solution-accelerators"></a>IoT Çözüm Hızlandırıcıları için sık sorulan sorular
 
-Ayrıca bkz [bağlı Fabrika özgü SSS](iot-accelerators-faq-cf.md) ve [Uzaktan izleme özgü SSS](iot-accelerators-faq-rm-v2.md) .
+Ayrıca bkz. [bağlı fabrikada özgü SSS](iot-accelerators-faq-cf.md) ve [uzaktan izlemeye özgü SSS](iot-accelerators-faq-rm-v2.md) .
 
-### <a name="where-can-i-find-the-source-code-for-the-solution-accelerators"></a>Kaynak kodu için Çözüm Hızlandırıcıları nerede bulabilirim?
+### <a name="where-can-i-find-the-source-code-for-the-solution-accelerators"></a>Çözüm hızlandırıcıları için kaynak kodunu nerede bulabilirim?
 
-Kaynak kodu, aşağıdaki GitHub depolarında depolanır:
+Kaynak kodu aşağıdaki GitHub depolarında depolanır:
 
-* [Uzaktan izleme çözüm Hızlandırıcısını (.NET)](https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet)
-* [Uzaktan izleme çözüm Hızlandırıcısını (Java)](https://github.com/Azure/azure-iot-pcs-remote-monitoring-java)
-* [Tahmine dayalı bakım Çözüm Hızlandırıcısı](https://github.com/Azure/azure-iot-predictive-maintenance)
-* [Bağlı Fabrika Çözüm Hızlandırıcısı](https://github.com/Azure/azure-iot-connected-factory)
+* [Uzaktan İzleme çözümü hızlandırıcısı (.NET)](https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet)
+* [Uzaktan İzleme çözümü hızlandırıcısı (Java)](https://github.com/Azure/azure-iot-pcs-remote-monitoring-java)
+* [Tahmine dayalı bakım çözüm hızlandırıcısı](https://github.com/Azure/azure-iot-predictive-maintenance)
+* [Bağlı Fabrika çözüm hızlandırıcısı](https://github.com/Azure/azure-iot-connected-factory)
 
-### <a name="what-sdks-can-i-use-to-develop-device-clients-for-the-solution-accelerators"></a>Cihaz istemcileri için Çözüm Hızlandırıcıları geliştirmek için hangi SDK'ları kullanabilir miyim?
+### <a name="what-sdks-can-i-use-to-develop-device-clients-for-the-solution-accelerators"></a>Çözüm hızlandırıcılarına yönelik cihaz istemcileri geliştirmek için hangi SDK’ları kullanabilirim?
 
-Farklı dil (C, .NET, Java, Node.js, Python) IOT cihaz SDK'ları bağlantılarını bulabilirsiniz, [Microsoft Azure IOT SDK'ları](https://github.com/Azure/azure-iot-sdks) GitHub depoları.
+Farklı dilin (C, .NET, Java, Node. js, Python) IoT cihaz SDK 'larının bağlantılarını [Microsoft Azure IoT SDK 'ları](https://github.com/Azure/azure-iot-sdks) GitHub depolarında bulabilirsiniz.
 
-DevKit cihaz kullanıyorsanız, kaynakları ve örnekleri bulabilirsiniz [IOT DevKit SDK'sı](https://github.com/Microsoft/devkit-sdk) GitHub deposu.
+DevKit cihazını kullanıyorsanız, [IoT DEVKIT SDK](https://github.com/Microsoft/devkit-sdk) GitHub deposunda kaynakları ve örnekleri bulabilirsiniz.
 
-### <a name="is-the-new-microservices-architecture-available-for-all-the-three-solution-accelerators"></a>Yeni bir mikro hizmet mimarisi, tüm üç Çözüm Hızlandırıcıları için kullanılabilir mi?
+### <a name="is-the-new-microservices-architecture-available-for-all-the-three-solution-accelerators"></a>Yeni mikro hizmet mimarisi, üç Çözüm Hızlandırıcısı için de kullanılabilir mi?
 
-Şu anda, en geniş kapsamlı senaryosuna değiniyor yalnızca Uzaktan izleme çözümü mikro hizmet mimarisi kullanır.
+Şu anda, en geniş senaryoyu kapsadığından yalnızca uzaktan Izleme çözümü mikro hizmet mimarisini kullanır.
 
-### <a name="what-advantages-does-the-new-open-sourced-microservices-based-architecture-provide-in-the-new-update"></a>Yeni güncelleştirme yeni açık kaynaklı mikro hizmet tabanlı mimariye sağladığı avantajları sağlar?
+### <a name="what-advantages-does-the-new-open-sourced-microservices-based-architecture-provide-in-the-new-update"></a>Yeni bir açık kaynak mikro hizmet tabanlı mimarinin yeni güncelleştirmede sağladığı avantajlar nelerdir?
 
-Son iki yıl içinde bulut mimarisi büyük ölçüde geliştirilmiştir. Mikro hizmetler geliştirme hızdan ödün vermeden ölçek ve esneklik elde etmek için harika bir düzen olarak ortaya çıkmıştır. Bu mimari deseni harika güvenilirlik ve ölçeklenebilirlik sonuçları ile çeşitli Microsoft hizmetleriyle dahili olarak kullanılır. Böylece müşteriler, bunları avantaj elde Microsoft Çözüm Hızlandırıcısı uygulama içinde bu dersleri koyuyor.
+Son iki yılda, bulut mimarisi büyük ölçüde gelişmiştir. Mikro hizmetler, geliştirme hızından ödün vermeden ölçek ve esneklik elde etmek için harika bir model olarak ortaya çıktı. Bu mimari model, çok sayıda Microsoft hizmetine şirket içinde harika güvenilirlik ve ölçeklenebilirlik sonuçlarıyla birlikte kullanılır. Microsoft bu dersleri ' i çözüm hızlandırıcılarına yerleştirilerek müşterilerin bundan faydalanır.
 
-### <a name="im-a-service-administrator-and-id-like-to-change-the-directory-mapping-between-my-subscription-and-a-specific-azure-ad-tenant-how-do-i-complete-this-task"></a>Ben bir Hizmet Yöneticisi ve Aboneliğimi ve belirli bir arasında dizin eşlemesini değiştirmek istediğiniz Azure AD kiracısı. Bu görevi nasıl tamamlamak?
+### <a name="im-a-service-administrator-and-id-like-to-change-the-directory-mapping-between-my-subscription-and-a-specific-azure-ad-tenant-how-do-i-complete-this-task"></a>Bir hizmet yöneticiyim ve aboneliğim ile belirli bir Azure AD kiracısı arasındaki dizin eşlemesini değiştirmek istiyorum. Nasıl yaparım? bu görevi tamamlayacak mı?
 
-Bkz: [Azure AD dizininize mevcut bir aboneliğe eklemek için](../active-directory/fundamentals/active-directory-how-subscriptions-associated-directory.md#to-associate-an-existing-subscription-to-your-azure-ad-directory)
+[Azure AD dizininize mevcut bir abonelik eklemek için](../active-directory/fundamentals/active-directory-how-subscriptions-associated-directory.md#to-associate-an-existing-subscription-to-your-azure-ad-directory) bkz.
 
-### <a name="i-want-to-change-a-service-administrator-or-co-administrator-when-logged-in-with-an-organizational-account"></a>Bir Hizmet Yöneticisi veya bir kuruluş hesabıyla oturum açıldığında ortak yöneticiyi değiştirmek istiyorum
+### <a name="i-want-to-change-a-service-administrator-or-co-administrator-when-logged-in-with-an-organizational-account"></a>Bir kuruluş hesabıyla oturum açtıklarında bir hizmet yöneticisini veya ortak yöneticiyi değiştirmek istiyorum
 
-Destek makalesine bakın [Hizmet Yöneticisi değiştiriliyor ve bir kuruluş hesabıyla oturum açıldığında ortak yönetici](https://azure.microsoft.com/support/changing-service-admin-and-co-admin).
+[Kurumsal bir hesapla oturum açıldığında hizmet yöneticisi ve ortak yönetici değiştirme](https://azure.microsoft.com/support/changing-service-admin-and-co-admin)destek makalesine bakın.
 
 ### <a name="why-am-i-seeing-this-error-your-account-does-not-have-the-proper-permissions-to-create-a-solution-please-check-with-your-account-administrator-or-try-with-a-different-account"></a>Bu hatayı neden görüyorum? "Hesabınız bir çözüm oluşturmak için uygun izinlere sahip değil. Lütfen hesap yöneticinize başvurun veya farklı bir hesap ile deneyin."
 
-Yönergeler için aşağıdaki çizime bakın:
+Rehberlik için aşağıdaki diyagrama bakın:
 
-![İzinleri akış çizelgesi](media/iot-accelerators-faq/flowchart.png)
+![İzin akış çizelgesi](media/iot-accelerators-faq/flowchart.png)
 
 > [!NOTE]
-> Doğruladıktan sonra hatayı görmeye devam ederseniz Azure AD kiracısının genel Yöneticisi ve aboneliğin ortak yöneticisi olan, hesap yöneticinizden kullanıcıyı kaldırmasını ve gerekli izinleri şu sırayla yeniden atama vardır. İlk olarak, kullanıcının genel yönetici olarak ekleyin ve ardından kullanıcı Azure aboneliğinin ortak yönetici olarak ekleyin. Sorunlar devam ederse, başvurun [Yardım ve Destek](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
+> Azure AD kiracısının genel yöneticisi ve aboneliğin ortak Yöneticisi olduğunuz doğrulandıktan sonra hatayı görmeye devam ederseniz, Hesap yöneticinizin kullanıcıyı kaldırmasını ve gerekli izinleri bu sırayla yeniden atanmasını sağlayabilirsiniz. İlk olarak, kullanıcıyı genel yönetici olarak ekleyin ve ardından kullanıcıyı Azure aboneliğinin ortak Yöneticisi olarak ekleyin. Sorun devam ederse [destek & yardım 'a](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)başvurun.
 
-### <a name="why-am-i-seeing-this-error-when-i-have-an-azure-subscription-an-azure-subscription-is-required-to-create-pre-configured-solutions-you-can-create-a-free-trial-account-in-just-a-couple-of-minutes"></a>Bir Azure aboneliğim varken bu hatayı neden görüyorum? "Azure aboneliğinin önceden yapılandırılmış çözümler oluşturmak için gereklidir. Ücretsiz bir deneme hesabı yalnızca birkaç dakika içinde oluşturabilirsiniz."
+### <a name="why-am-i-seeing-this-error-when-i-have-an-azure-subscription-an-azure-subscription-is-required-to-create-pre-configured-solutions-you-can-create-a-free-trial-account-in-just-a-couple-of-minutes"></a>Bir Azure aboneliğim varken bu hatayı neden görüyorum? "Önceden yapılandırılmış çözümler oluşturmak için bir Azure aboneliği gereklidir. Yalnızca birkaç dakika içinde ücretsiz bir deneme hesabı oluşturabilirsiniz. "
 
-Bir Azure aboneliğiniz varsa, Kiracı, aboneliğiniz için eşlemesini doğrulayın ve açılır menüden doğru kiracının seçili olup olmadığını denetleyin. Kiracının doğru olduğunu onayladıysanız yukarıdaki diyagramı izleyin ve aboneliğinizi ve bu Azure AD Kiracı eşlemesini doğrulayın.
+Azure aboneliğiniz olduğundan emin değilseniz, aboneliğinizin kiracı eşlemesini doğrulayın ve açılan menüde doğru kiracının seçili olduğunu kontrol edin. Kiracının doğru olduğunu doğruladığınız takdirde, önceki diyagramı izleyin ve aboneliğinizin ve bu Azure AD kiracısının eşlemesini doğrulayın.
 
-### <a name="where-can-i-find-information-about-the-previous-version-of-the-remote-monitoring-solution"></a>Uzaktan izleme çözümünün önceki sürümü hakkında bilgileri nerede bulabilirim?
+### <a name="where-can-i-find-information-about-the-previous-version-of-the-remote-monitoring-solution"></a>Uzaktan Izleme çözümünün önceki sürümüyle ilgili bilgileri nereden bulabilirim?
 
-Uzaktan izleme çözüm Hızlandırıcısını önceki sürümünü IOT paketi uzaktan önceden yapılandırılmış izleme çözümü olarak bilinir. Arşivlenen belgeleri bulabilirsiniz [ https://docs.microsoft.com/previous-versions/azure/iot-suite/ ](https://docs.microsoft.com/previous-versions/azure/iot-suite/).
+Uzaktan Izleme çözüm hızlandırıcısının önceki sürümü IoT Suite uzaktan Izleme çözümü olarak bilinir. Arşivlenmiş belgeleri [https://docs.microsoft.com/previous-versions/azure/iot-suite/](https://docs.microsoft.com/previous-versions/azure/iot-suite/)' de bulabilirsiniz.
 
-### <a name="is-the-new-solution-accelerator-available-in-the-same-geographic-region-as-the-existing-solution"></a>Yeni çözüm Hızlandırıcısını varolan bir çözümü ile aynı coğrafi bölgede kullanılabilir mi?
+### <a name="is-the-new-solution-accelerator-available-in-the-same-geographic-region-as-the-existing-solution"></a>Yeni Çözüm Hızlandırıcısı var olan çözümle aynı coğrafi bölgede kullanılabilir mi?
 
-Evet, yeni Uzaktan izleme aynı coğrafi bölgelerde kullanılabilir.
+Evet, yeni uzaktan Izleme aynı coğrafi bölgede kullanılabilir.
 
-### <a name="whats-the-difference-between-deleting-a-resource-group-in-the-azure-portal-and-clicking-delete-on-a-solution-accelerator-in-azureiotsolutionscom"></a>Azure portalında bir kaynak grubu silme ve bir çözüm Hızlandırıcı azureiotsolutions.com'silme ' ı tıklatarak arasındaki fark nedir?
+### <a name="whats-the-difference-between-deleting-a-resource-group-in-the-azure-portal-and-clicking-delete-on-a-solution-accelerator-in-azureiotsolutionscom"></a>Azure portal bir kaynak grubunu silme ve azureiotsolutions.com içinde çözüm hızlandırıcısında Sil ' i tıklatma arasındaki fark nedir?
 
-* Çözüm Hızlandırıcısını içinde silerseniz [azureiotsolutions.com](https://www.azureiotsolutions.com/), çözüm Hızlandırıcısını oluşturduğunuzda dağıtılan tüm kaynakları silin. Bir kaynak grubuna ek kaynaklar eklediyseniz, bu kaynaklar da silinir.
-* Kaynak grubunu silerseniz [Azure portalında](https://portal.azure.com), yalnızca bu kaynak grubundaki kaynakları silin. Ayrıca çözüm Hızlandırıcı ile ilişkili Azure Active Directory uygulamasını silmek gerekir.
+* Çözüm hızlandırıcıyı [azureiotsolutions.com](https://www.azureiotsolutions.com/)' de silerseniz, çözüm hızlandırıcıyı oluştururken dağıtılan tüm kaynakları silersiniz. Kaynak grubuna ek kaynaklar eklediyseniz, bu kaynaklar da silinir.
+* [Azure Portal](https://portal.azure.com)kaynak grubunu silerseniz bu kaynak grubundaki kaynakları yalnızca silersiniz. Ayrıca çözüm hızlandırıcısında ilişkili Azure Active Directory uygulamasını da silmeniz gerekir.
 
-### <a name="can-i-continue-to-leverage-my-existing-investments-in-azure-iot-solution-accelerators"></a>Azure IOT Çözüm Hızlandırıcıları olarak my mevcut yatırımlardan yararlanma devam edebilir?
+### <a name="can-i-continue-to-leverage-my-existing-investments-in-azure-iot-solution-accelerators"></a>Azure IoT çözüm hızlandırıcılarından mevcut yatırımlarımı kullanmaya devam edebilir miyim?
 
-Evet. Bugün var olan herhangi bir çözümü Azure aboneliğinizde çalışmaya devam eder ve kaynak kodu Github'da kullanılabilir kalır.
+Evet. Bugün mevcut olan herhangi bir çözüm, Azure aboneliğinizde çalışmaya devam eder ve kaynak kodu GitHub 'da kullanılabilir kalır.
 
 ### <a name="how-many-iot-hub-instances-can-i-provision-in-a-subscription"></a>Bir abonelikte kaç IoT Hub örneği sağlayabilirim?
 
-Varsayılan olarak, sağlayabilirsiniz [10 IOT hub'ı abonelik başına](../azure-subscription-service-limits.md#iot-hub-limits). Oluşturabileceğiniz bir [Azure destek bileti](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade) Bu limiti yükseltmek için. Sonuç olarak, her çözüm Hızlandırıcı hükümlerinin bu yana yeni bir IOT Hub, yalnızca belirli bir abonelikte en fazla 10 Çözüm Hızlandırıcıları sağlayabilirsiniz.
+Varsayılan olarak, [abonelik başına 10 IoT Hub](../azure-subscription-service-limits.md#iot-hub-limits)'ı sağlayabilirsiniz. Bu sınırı yükseltmek için bir [Azure destek bileti](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade) oluşturabilirsiniz. Sonuç olarak, her çözüm Hızlandırıcısı yeni bir IoT Hub sağladığından, belirli bir abonelikte en fazla 10 çözüm hızlandırıcıyı sağlayabilirsiniz.
 
-### <a name="how-many-azure-cosmos-db-instances-can-i-provision-in-a-subscription"></a>Bir abonelikte kaç tane Azure Cosmos DB örneği sağlayabilirim?
+### <a name="how-many-azure-cosmos-db-instances-can-i-provision-in-a-subscription"></a>Bir abonelikte kaç Azure Cosmos DB örneği sağlayabilirim?
 
-Elli. Oluşturabileceğiniz bir [Azure destek bileti](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade) Bu limiti yükseltmek için ancak varsayılan olarak, yalnızca abonelik başına 50 Cosmos DB örnekleri sağlayabilirsiniz.
+Elli. Bu sınırı yükseltmek için bir [Azure destek bileti](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade) oluşturabilirsiniz, ancak varsayılan olarak abonelik başına yalnızca 50 Cosmos DB örnekleri sağlayabilirsiniz.
 
 ### <a name="how-many-free-bing-maps-apis-can-i-provision-in-a-subscription"></a>Bir abonelikte kaç tane Ücretsiz Bing Haritaları API'si sağlayabilirim?
 
-İki. Bir Azure aboneliğinde Enterprise planları için yalnızca iki adet İç İşlemler Düzey 1 Bing Haritası oluşturabilirsiniz. Uzaktan izleme çözümü, varsayılan iç işlemler düzey 1 planı ile hazırlanır. Sonuç olarak, yalnızca en fazla iki uzaktan izleme çözümü bir Abonelikteki herhangi bir değişiklik yapılmadıysa sağlayabilirsiniz.
+İki. Bir Azure aboneliğinde Enterprise planları için yalnızca iki adet İç İşlemler Düzey 1 Bing Haritası oluşturabilirsiniz. Uzaktan Izleme çözümü, dahili Işlem düzeyi 1 planıyla birlikte varsayılan olarak sağlanır. Sonuç olarak, bir abonelikte yalnızca değişiklik yapmadan en fazla iki uzaktan Izleme çözümü sağlayabilirsiniz.
 
-### <a name="can-i-create-a-solution-accelerator-if-i-have-microsoft-azure-for-dreamspark"></a>Çözüm Hızlandırıcısı, Microsoft Azure için DreamSpark varsa oluşturabilir miyim?
+### <a name="can-i-create-a-solution-accelerator-if-i-have-microsoft-azure-for-dreamspark"></a>DreamSpark için Microsoft Azure varsa çözüm hızlandırıcıyı oluşturabilir miyim?
 
 > [!NOTE]
-> DreamSpark için Microsoft Azure artık Öğrenciler için Microsoft Imagine da bilinir.
+> DreamSpark için Microsoft Azure artık öğrenciler için Microsoft Imagine olarak bilinir.
 
-Şu anda bir çözüm Hızlandırıcı ile oluşturamazsınız. bir [DreamSpark için Microsoft Azure](https://azure.microsoft.com/pricing/member-offers/imagine/) hesabı. Ancak, oluşturabileceğiniz bir [ücretsiz deneme hesabı için Azure](https://azure.microsoft.com/free/) çözüm Hızlandırıcısını sağlayan yalnızca birkaç dakika içinde oluşturun.
+Şu anda, bir [DreamSpark hesabı için Microsoft Azure](https://azure.microsoft.com/pricing/member-offers/imagine/) bir çözüm Hızlandırıcısı oluşturamazsınız. Ancak, bir çözüm Hızlandırıcısı oluşturmanıza izin veren birkaç dakikada [Azure için ücretsiz bir deneme hesabı](https://azure.microsoft.com/free/) oluşturabilirsiniz.
 
-### <a name="how-do-i-delete-an-azure-ad-tenant"></a>Azure AD kiracısını nasıl silerim?
+### <a name="how-do-i-delete-an-azure-ad-tenant"></a>Nasıl yaparım? bir Azure AD kiracısı silinsin mi?
 
-Eric Golpe'un blog gönderisini inceleyin [bir Azure AD Kiracısını silme Kılavuzu](https://blogs.msdn.com/b/ericgolpe/archive/2015/04/30/walkthrough-of-deleting-an-azure-ad-tenant.aspx).
+[Azure AD kiracısı silme hakkında](https://blogs.msdn.com/b/ericgolpe/archive/2015/04/30/walkthrough-of-deleting-an-azure-ad-tenant.aspx)bilgi için bkz. Eric Golpe 'nin blog gönderisi Kılavuzu.
 
 ### <a name="next-steps"></a>Sonraki adımlar
 
 IoT çözüm hızlandırıcılarının diğer özellik ve yeteneklerinden bazılarını da keşfedebilirsiniz:
 
-* [Uzaktan izleme çözüm Hızlandırıcısını özelliklerini keşfedin](quickstart-remote-monitoring-deploy.md)
+* [Uzaktan Izleme çözüm hızlandırıcısının yeteneklerini keşfet](quickstart-remote-monitoring-deploy.md)
 * [Tahmine Dayalı Bakım çözüm hızlandırıcısına genel bakış](iot-accelerators-predictive-overview.md)
-* [Bağlı Fabrika çözüm Hızlandırıcısını dağıtma](quickstart-connected-factory-deploy.md)
-* [Baştan sona IOT güvenliği](/azure/iot-fundamentals/iot-security-ground-up)
+* [Bağlı fabrika çözüm Hızlandırıcısını dağıtma](quickstart-connected-factory-deploy.md)
+* [Sıfırdan IoT güvenliği](/azure/iot-fundamentals/iot-security-ground-up)

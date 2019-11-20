@@ -1,89 +1,117 @@
-items:
 - name: Azure üzerinde Ansible belgeleri
   href: ./index.yml
 - name: Genel Bakış
   items:
-  - name: Azure üzerinde Ansible hakkında
-    href: ./ansible-overview.md
+    - name: Azure üzerinde Ansible hakkında
+      href: ./ansible-overview.md
 - name: Hızlı Başlangıçlar
-  items:
-  - name: Ansible çözüm şablonu dağıtma
-    href: ./ansible-deploy-solution-template.md
-  - name: Ansible'ı Linux VM'ye yükleme
-    href: /azure/virtual-machines/linux/ansible-install-configure
-    maintainContext: true
-  - name: Linux VM oluşturma
-    href: /azure/virtual-machines/linux/ansible-create-vm
-    maintainContext: true
-  - name: Linux VM yönetme
-    href: /azure/virtual-machines/linux/ansible-manage-linux-vm
-    maintainContext: true
-  - name: Cloud Shell'de playbook çalıştırma
-    href: ./ansible-run-playbook-in-cloudshell.md
   expanded: true
+  items:
+    - name: Ansible çözüm şablonunu CentOS’a dağıtma
+      href: ./ansible-deploy-solution-template.md
+    - name: Linux sanal makinelerine Ansible’ı yükleme
+      href: /azure/virtual-machines/linux/ansible-install-configure
+      maintainContext: true
+    - name: Cloud Shell’de playbook çalıştırma
+      href: ./ansible-run-playbook-in-cloudshell.md
+    - name: Linux Sanal Makineleri ile çalışma
+      expanded: true
+      items:
+        - name: Linux sanal makinelerini yapılandırma
+          href: /azure/virtual-machines/linux/ansible-create-vm
+          maintainContext: true
+        - name: Linux sanal makinelerini yönetme
+          href: /azure/virtual-machines/linux/ansible-manage-linux-vm
+          maintainContext: true
 - name: Öğreticiler
   items:
-  - name: AKS
-    items:
-    - name: AKS kümelerini oluşturma ve yapılandırma
-      href: ./ansible-create-configure-aks.md
-  - name: App Service
-    items:
-    - name: Azure Web Apps oluşturma ve yapılandırma
-      href: ./ansible-create-configure-azure-web-apps.md
-    - name: Azure Web Apps'i ölçeklendirme
-      href: ./ansible-scale-azure-web-apps.md
-  - name: Application Gateway
-    items:
-    - name: Azure Application Gateway oluşturma ve yapılandırma
-      href: ./ansible-create-configure-application-gateway.md
-  - name: Veritabanları
-    items:
-    - name: MySQL için Azure DB oluşturma ve yapılandırma
-      href: ./ansible-create-configure-mysql.md
-  - name: Dinamik envanter
-    items:
-    - name: Dinamik envanterleri yönetme
-      href: ./ansible-manage-azure-dynamic-inventories.md
-  - name: Sanal ağ
-    items:
-    - name: Yol tabloları oluşturma ve yapılandırma
-      href: ./ansible-create-configure-route-table.md
-  - name: VMSS
-    items:
-    - name: VMSS'yi oluşturma ve yapılandırma
-      href: ./ansible-create-configure-vmss.md
-    - name: VMSS'ye uygulama dağıtma
-      href: ./ansible-deploy-app-vmss.md
-    - name: VMSS'yi otomatik ölçeklendirme
-      href: ./ansible-auto-scale-vmss.md
+    - name: Azure Application Gateway
+      items:
+        - name: Web trafiğini yönetme
+          href: ./ansible-create-configure-application-gateway.md
+    - name: Azure App Service
+      items:
+        - name: Uygulamaları yapılandırma
+          href: ./ansible-create-configure-azure-web-apps.md
+        - name: Uygulamaları ölçeklendirme
+          href: ./ansible-scale-azure-web-apps.md
+    - name: Azure DevTest Labs
+      items:
+        - name: Laboratuvarları yapılandırma
+          href: ./ansible-devtest-labs-configure.md
+    - name: Azure Kubernetes Hizmeti (AKS)
+      items:
+        - name: AKS kümelerini yapılandırma
+          href: ./ansible-create-configure-aks.md
+        - name: Azure CNI ağını yapılandırma
+          href: ./ansible-aks-configure-cni-networking.md
+        - name: Kubenet ağını yapılandırma
+          href: ./ansible-aks-configure-kubenet-networking.md
+        - name: AKS kümesinde RBAC rollerini yapılandırma
+          href: ./ansible-aks-configure-rbac.md
+    - name: Azure HDInsight
+      items:
+        - name: Kümeleri yapılandırma
+          href: ./ansible-azure-hdinsight-configure.md
+    - name: Azure Service Bus
+      items:
+        - name: Kuyrukları yapılandırma
+          href: ./ansible-service-bus-queue-configure.md
+        - name: Konuları yapılandırma
+          href: ./ansible-service-bus-topic-configure.md
+    - name: Database
+      items:
+        - name: MySQL için Azure Veritabanı’nı yapılandırma
+          href: ./ansible-create-configure-mysql.md
+        - name: Azure Cosmos DB hesaplarını yapılandırma
+          href: ./ansible-data-cosmos-configure.md
+        - name: Redis için Azure Cache’i yapılandırma
+          href: ./ansible-data-cache-for-redis-configure.md
+    - name: Dinamik envanter
+      items:
+        - name: Azure kaynaklarınızı yönetme
+          href: ./ansible-manage-azure-dynamic-inventories.md
+    - name: Sanal makineler
+      items:
+        - name: Paylaşılan Görüntü Galerisi oluşturma
+          href: ansible-vm-create-from-shared-generalized-image.md
+    - name: Sanal makine ölçek kümeleri
+      items:
+        - name: Yapılandırma
+          href: ./ansible-create-configure-vmss.md
+        - name: Dağıtma
+          href: ./ansible-deploy-app-vmss.md
+        - name: Otomatik Ölçeklendirme
+          href: ./ansible-auto-scale-vmss.md
+        - name: Özel görüntüyü güncelleştirme
+          href: ./ansible-vmss-update-image.md
+        - name: Paylaşılan Görüntü Galerisi oluşturma
+          href: ansible-vm-create-from-shared-generalized-image.md
+    - name: Sanal ağ
+      items:
+        - name: Eşlemeyi yapılandırma
+          href: ./ansible-vnet-peering-configure.md
+        - name: Yol tablolarını yapılandırma
+          href: ./ansible-create-configure-route-table.md
+- name: Örnekler
+  items:
+    - name: Azure için Ansible laboratuvarları
+      href: 'https://github.com/microsoft/ansiblelabs'
+    - name: Ansible Azure playbook örnekleri
+      href: 'https://github.com/Azure-Samples/ansible-playbooks'
 - name: Başvuru
   items:
-  - name: Playbook rolleri
-    items:
-    - name: azure_module
-      href: https://galaxy.ansible.com/Azure/azure_modules/
-    - name: azure_preview_module
-      href: https://galaxy.ansible.com/Azure/azure_preview_modules
-  - name: Sürümler ve özellikler
-    href: ./ansible-matrix.md
-  - name: Azure Container Instances
-    href: https://docs.ansible.com/ansible/latest/azure_rm_containerinstance_module.html
-  - name: Azure İşlevleri
-    href: https://docs.ansible.com/ansible/latest/azure_rm_functionapp_module.html
-  - name: Yük dengeleyiciler
-    href: https://docs.ansible.com/ansible/latest/azure_rm_loadbalancer_module.html
-  - name: Sanal makineler
-    href: https://docs.ansible.com/ansible/latest/azure_rm_virtualmachine_module.html
-  - name: Tüm Azure modülleri
-    href: https://docs.ansible.com/ansible/latest/modules/list_of_cloud_modules#azure
+    - name: Playbook rolleri
+      items:
+        - name: azure_module
+          href: 'https://galaxy.ansible.com/Azure/azure_modules/'
+        - name: azure_preview_module
+          href: 'https://galaxy.ansible.com/Azure/azure_preview_modules'
+    - name: Sürümler ve özellikler
+      href: ./ansible-matrix.md
+    - name: Tüm Azure modülleri
+      href: 'https://docs.ansible.com/ansible/latest/modules/list_of_cloud_modules#azure'
 - name: Araçlar
   items:
-  - name: Ansible için Visual Studio Code uzantısı
-    href: https://marketplace.visualstudio.com/items?itemName=vscoss.vscode-ansible
-ms.openlocfilehash: a3f1dcf9c7672938b35ba5615c8d901cbd1d1332
-ms.sourcegitcommit: 95822822bfe8da01ffb061fe229fbcc3ef7c2c19
-ms.translationtype: HT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 01/29/2019
-ms.locfileid: "55226647"
+    - name: Ansible için Visual Studio Code uzantısı
+      href: 'https://marketplace.visualstudio.com/items?itemName=vscoss.vscode-ansible'

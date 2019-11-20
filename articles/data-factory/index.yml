@@ -1,98 +1,173 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Data Factory Belgeleri
+### YamlMime:Landing
+title: Azure Data Factory belgeleri
+summary: Azure Data Factory, Azure'ın ölçeği genişletilmiş sunucusuz veri tümleştirme ve veri dönüştürmeye yönelik bulut ETL hizmetidir.  Sezgisel yazma işlemleri ve tek bölmede izleme ve yönetim için kod içermeyen bir kullanıcı arabirimi sunar. Ayrıca mevcut SSIS paketlerini lift-and-shift yöntemiyle Azure'a taşıyabilir ve ADF'de tam uyumlulukla çalıştırabilirsiniz. SSIS Integration Runtime tam olarak yönetilen bir hizmet sağladığından altyapı yönetimiyle ilgilenmeniz gerekmez.
 metadata:
-  title: 'Azure Data Factory Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: Data Factory hizmetini kullanarak analiz için şirket içinden ve buluttan ya da ters yönde veri aktarmaya yönelik otomatik veri işlem hatları ayarlama hakkında bilgi edinin.
+  title: Azure Data Factory Belgeleri
+  description: Bir bulut verileri tümleştirme hizmeti olan Data Factory’yi kullanarak veri depolama, taşıma ve işleme hizmetlerini otomatik veri komut zincirlerinde birleştirme hakkında bilgi edinin. Öğreticilerde ve diğer belgelerde, veri işlem hatlarını ayarlama ve yönetme ile verileri analiz için taşıma ve dönüştürme konularında bilgi sağlanmıştır.
   services: data-factory
-  author: sharonlo101
-  ms.author: shlo
-  manager: craigg
   ms.service: data-factory
-  ms.tgt_pltfrm: na
-  ms.topic: overview
-  ms.date: 08/06/2018
-abstract:
-  description: 'Bir bulut verileri tümleştirme hizmeti olan Data Factory’yi kullanarak veri depolama, taşıma ve işleme hizmetlerini otomatik veri komut zincirlerinde birleştirme hakkında bilgi edinin. Öğreticilerde ve diğer belgelerde, veri işlem hatlarını ayarlama ve yönetme ile verileri analiz için taşıma ve dönüştürme konularında bilgi sağlanmıştır. <p>Data Factory hizmetinin V1 sürümünü kullanıyorsanız <a href=/azure/data-factory/v1/data-factory-introduction>V1 belgelerini</a> inceleyin.</p>'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: media/index/video.png
-      width: 250
-    title: 'Bulutta modern veri tümleştirmesine yönelik yeni özellikler (1:19:22)'
-    href: 'https://channel9.msdn.com/Events/Build/2018/BRK2204/player'
-    width: 250
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Verileri taşımak ve işlemek üzere Data Factory işlem hattı oluşturmayı öğrenmek için aşağıdaki hızlı başlangıçlardan birini kullanın:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/data-factory/media/index/portal.svg
-            text: Data Factory Kullanıcı Arabirimi (UI)
-            href: /azure/data-factory/quickstart-create-data-factory-portal
-          - image:
-              src: /azure/data-factory/media/index/copy-data-tool.png
-            text: Veri Kopyalama aracı
-            href: /azure/data-factory/quickstart-create-data-factory-copy-data-tool
-          - image:
-              src: /azure/data-factory/media/index/logo_powershell.svg
-            text: Azure PowerShell
-            href: /azure/data-factory/quickstart-create-data-factory-powershell
-          - image:
-              src: /azure/data-factory/media/index/logo_net.svg
-            text: .NET
-            href: /azure/data-factory/quickstart-create-data-factory-dot-net
-          - image:
-              src: /azure/data-factory/media/index/logo_python.svg
-            text: Python
-            href: /azure/data-factory/quickstart-create-data-factory-python
-          - image:
-              src: /azure/data-factory/media/index/logo_rest.svg
-            text: REST
-            href: /azure/data-factory/quickstart-create-data-factory-rest-api
-          - image:
-              src: /azure/data-factory/media/index/logo_azure_resource_manager.svg
-            text: Resource Manager şablonu
-            href: /azure/data-factory/quickstart-create-data-factory-resource-manager-template
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Veri fabrikası oluşturma ve izleme işlemlerini nasıl yapabileceğinizi öğrenin:'
-      - type: list
-        style: unordered
-        items:
-          - html: Bulutta veri kopyalama - <a href="/azure/data-factory/tutorial-copy-data-tool">Veri Kopyalama aracı</a> | <a href="/azure/data-factory/tutorial-copy-data-portal">Data Factory Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-copy-data-dot-net">.NET</a>
-          - html: Buluta şirket içi verileri kopyalama - <a href="/azure/data-factory/tutorial-hybrid-copy-data-tool">Veri Kopyalama aracı |<a href="/azure/data-factory/tutorial-hybrid-copy-portal">Data Factory Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-hybrid-copy-powershell">Azure PowerShell</a>
-          - html: Toplu olarak veri kopyalama - <a href="/azure/data-factory/tutorial-bulk-copy-portal">Data Factory Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-bulk-copy">Azure PowerShell</a>
-          - html: Artan şekilde veri kopyalama - <a href="/azure/data-factory/tutorial-incremental-copy-portal">Data Factory Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-incremental-copy-powershell">Azure PowerShell</a>
-          - html: Spark kullanarak bulutta verileri dönüştürme - <a href="/azure/data-factory/tutorial-transform-data-spark-portal">Data Factory Kullanıcı Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-transform-data-spark-powershell">Azure PowerShell</a>
-          - html: Sanal ağda verileri dönüştürme - <a href="/azure/data-factory/tutorial-transform-data-hive-virtual-network-portal">Data Factory Kullanıcı Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-transform-data-hive-virtual-network">Azure PowerShell</a>
-          - html: Dal oluşturma ve zincirleme - <a href="/azure/data-factory/tutorial-control-flow-portal">Data Factory Kullanıcı Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-control-flow">.NET</a>
-          - html: Azure'da SSIS paketlerini çalıştırma - <a href="/azure/data-factory/tutorial-create-azure-ssis-runtime-portal">Data Factory Kullanıcı Arabirimi (UI)</a> | <a href="/azure/data-factory/tutorial-deploy-ssis-packages-azure">Azure PowerShell</a>
-          - html: Azure Data Factory’de sürekli tümleştirme ve teslim (CI/CD) - <a href="/azure/data-factory/continuous-integration-deployment">Data Factory Kullanıcı Arabirimi (UI)</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Data Factory ile çalışmak için aşağıdaki örnekleri kullanın
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/data-factory/samples-powershell">PowerShell</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/module/az.datafactory/">Azure PowerShell</a></p>
-          - title: Diller
-            html: <p><a href="/dotnet/api/microsoft.azure.management.datafactory">.NET</a></p><p><a href="/python/api/overview/azure/datafactory?view=azure-python">Python</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/datafactory">REST API</a></p>
+  ms.topic: landing-page
+  ms.collection: collection
+  author: markingmyname
+  ms.author: maghan
+  ms.date: 10/02/2019
+  monikerRange: ''
+  ms.openlocfilehash: 570a549bc132b1126d904d52af3066e152687e72
+  ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/17/2019
+  ms.locfileid: "72554847"
+landingContent:
+- title: Azure Data Factory hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Data Factory nedir?
+      url: /azure/data-factory/introduction
+  - linkListType: reference
+    links:
+    - text: Teknik incelemeler
+      url: /azure/data-factory/whitepapers
+    - text: Fiyatlandırma
+      url: https://azure.microsoft.com/pricing/details/data-factory/
+    - text: Örneklerle fiyatlandırmayı anlama
+      url: /azure/data-factory/pricing-concepts
+    - text: Son özellik güncelleştirmeleri
+      url: https://azure.microsoft.com/updates/?tag=data-factory
+    - text: ADF Blogu
+      url: https://techcommunity.microsoft.com/t5/Azure-Data-Factory/bg-p/AzureDataFactoryBlog
+    - text: Özellik isteme
+      url: https://feedback.azure.com/forums/270578-azure-data-factory
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Data Factory kullanıcı arabirimi
+      url: /azure/data-factory/quickstart-create-data-factory-portal
+    - text: Veri Kopyalama aracı
+      url: /azure/data-factory/quickstart-create-data-factory-copy-data-tool
+    - text: Azure PowerShell
+      url: /azure/data-factory/quickstart-create-data-factory-powershell
+    - text: .NET
+      url: /azure/data-factory/quickstart-create-data-factory-dot-net
+    - text: Python
+      url: /azure/data-factory/quickstart-create-data-factory-python
+    - text: Rest
+      url: /azure/data-factory/quickstart-create-data-factory-rest-api
+    - text: Resource Manager şablonu
+      url: /azure/data-factory/quickstart-create-data-factory-resource-manager-template
+- title: Veri taşıma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Kopyalama etkinliğine genel bakış
+      url: /azure/data-factory/copy-activity-overview
+    - text: Kopyalama performansını ayarlama
+      url: /azure/data-factory/copy-activity-performance
+  - linkListType: overview
+    links:
+    - text: Veri gölü ve veri ambarı geçişi
+      url: /azure/data-factory/data-migration-guidance-overview
+  - linkListType: tutorial
+    links:
+    - text: Buluttaki verileri kopyalama
+      url: /azure/data-factory/tutorial-copy-data-tool
+    - text: Şirket içi verileri buluta kopyalama
+      url: /azure/data-factory/tutorial-hybrid-copy-data-tool
+    - text: Verileri toplu halde kopyalama
+      url: /azure/data-factory/
+    - text: Verileri artımlı olarak kopyalama
+      url: /azure/data-factory/tutorial-create-azure-ssis-runtime-portal
+    - text: ADLS 2. Nesil'i yükleme
+      url: /azure/data-factory/load-azure-data-lake-storage-gen2
+    - text: SQL DW'yi yükleme
+      url: /azure/data-factory/load-azure-sql-data-warehouse
+    - text: SAP BW'yi yükleme
+      url: /azure/data-factory/load-sap-bw-data
+- title: Veri dönüştürme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Veri akışlarını eşleme nedir?
+      url: /azure/data-factory/concepts-data-flow-overview
+  - linkListType: tutorial
+    links:
+    - text: Veri akışı oluşturma
+      url: /azure/data-factory/data-flow-create
+    - text: Veri akışı ifade dili
+      url: /azure/data-factory/data-flow-expression-functions
+    - text: Veri akışı hatalarını ayıklama
+      url: /azure/data-factory/concepts-data-flow-debug-mode
+    - text: Veri akışı etkinliğini işlem hattı içinde yürütme
+      url: /azure/data-factory/control-flow-execute-data-flow-activity
+    - text: Veri akışını izleme
+      url: /azure/data-factory/concepts-data-flow-monitoring
+    - text: Veri akışı performansı
+      url: /azure/data-factory/concepts-data-flow-performance
+- title: SSIS paketlerini Lift-and-shift ile taşıma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: SSIS paketlerini Azure SQL Veritabanı yönetilen örneğine geçirme
+      url: /azure/data-factory/scenario-ssis-migration-ssisdb-mi
+  - linkListType: tutorial
+    links:
+    - text: Azure’da SSIS paketlerini çalıştırma
+      url: /azure/data-factory/tutorial-deploy-ssis-packages-azure
+  - linkListType: how-to-guide
+    links:
+    - text: SSIS Integration Runtime'ı sağlama
+      url: /azure/data-factory/create-azure-ssis-integration-runtime
+    - text: SSIS IR'yi sanal ağa ekleme
+      url: /azure/data-factory/join-azure-ssis-integration-runtime-virtual-network
+    - text: SSIS Paketlerini Yürütme etkinliği ile SSIS paketleri çalıştırma
+      url: /azure/data-factory/how-to-invoke-ssis-package-ssis-activity
+    - text: SSIS tümleştirmesi çalışma zamanını planlama
+      url: /azure/data-factory/how-to-schedule-azure-ssis-integration-runtime
+    - text: SSIS IR için kurulumu özelleştirme
+      url: /azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
+    - text: SSIS IR için lisanslı bileşenleri yükleme
+      url: /azure/data-factory/how-to-develop-azure-ssis-ir-licensed-components
+- title: Güvenlik
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Veri taşırken güvenlikle ilgili dikkat edilmesi gerekenler
+      url: /azure/data-factory/data-movement-security-considerations
+    - text: Veri fabrikası için Yönetilen Kimlik
+      url: /azure/data-factory/data-factory-service-identity
+    - text: Kimlik bilgilerini Azure Key Vault’ta depolama
+      url: /azure/data-factory/store-credentials-in-key-vault
+- title: Yazma, İzleme ve Yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure veri fabrikalarını görsel olarak izleme
+      url: /azure/data-factory/author-visually
+    - text: Kaynak Denetimi
+      url: /azure/data-factory/source-control
+    - text: Sürekli tümleştirme ve teslim
+      url: /azure/data-factory/continuous-integration-deployment
+    - text: Yinelemeli geliştirme ve hata ayıklama
+      url: /azure/data-factory/iterative-development-debugging
+    - text: Görsel olarak izleme
+      url: /azure/data-factory/monitor-visually
+    - text: Azure İzleyici ile izleme
+      url: /azure/data-factory/monitor-using-azure-monitor
+    - text: SDK’lar ile izleme
+      url: /azure/data-factory/monitor-programmatically
+- title: Diller
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.datafactory/
+    - text: .NET
+      url: https://docs.microsoft.com/dotnet/api/microsoft.azure.management.datafactory/
+    - text: Python
+      url: https://docs.microsoft.com/python/api/overview/azure/datafactory?view=azure-python
+    - text: REST
+      url: https://docs.microsoft.com/rest/api/datafactory/
+    - text: Resource Manager şablonu
+      url: https://docs.microsoft.com/azure/templates/microsoft.datafactory/allversions

@@ -1,37 +1,23 @@
 ---
 title: Veri varlıkları
-description: Veri varlıkları genel bakış.
+description: Bu CPP ve PC makalesine bağlı olan bu makalede kullanım dışı bırakıldı. "veri varlıklarına genel bakış" idi.
 services: Azure, Marketplace, Cloud Partner Portal,
-author: pbutlerm
+author: ChJenk
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 09/13/2018
-ms.author: pabutler
-ms.openlocfilehash: a382f9b3ce08bba266311c2cc1d5f868f1bc3143
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/30/2019
+ms.author: v-chjen
+ms.openlocfilehash: 729693b4f887f41140b2df852e70a744edbc060d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64934923"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819962"
 ---
 # <a name="data-entities"></a>Veri varlıkları
 
-Bu makalede, tanımlar ve veri varlıkları için genel bir bakış sağlar. Veri varlıkları yeteneklerini, destekledikleri senaryolar, bunları ve bunları oluşturmak için yöntemleri için kullanılan kategorileri hakkında bilgiler içerir.
+[Bulut iş ortağı portalı](https://cloudpartner.azure.com/) artık finans ve operasyon teklifleri için Dynamics 365 oluşturma ve yönetimini desteklememektedir. Bunun yerine, bu işlevsellik Microsoft [Iş Ortağı Merkezi portalına](https://partner.microsoft.com/)taşınmıştır. Daha fazla bilgi için bkz. [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer).
 
-## <a name="overview"></a>Genel Bakış
-
-Bir veri varlığı veritabanı tablolarının fiziksel uygulamasından bir soyutlamadır. Örneğin, normalleştirilmiş tablolar, bir müşteri tablodaki her müşteriye ait verilerin çoğunu depolanabilir ve sonra geri kalan küçük bir ilişkili tablolar arasında yayılıyor olabilir. Bu durumda, veri varlığı için müşteri kavramı her satır müşteri tablosu ve onun ilişkili tablolar tüm verileri içeren normalleştirilmişlikten çıkarılmış bir görünüm olarak görünür. Bir veri varlığı, geliştirme ve tümleştirme daha kolay anlaşılır bir biçime iş kavramını kapsüller. Bir veri varlığı bulunabilen yapısını, uygulama geliştirme ve özelleştirme basitleştirebilir. Daha sonra Özet ayrıca fiziksel tabloların sürümleri arasında kaçınılmaz karmaşıklığı uygulama kodundan korunmasını sağlar.
-
-Özetlersek: Veri varlığı kavramsal soyutlama ve anahtar veri kavramlarını ve İşlevler temsil etmek için temel alınan tablo şemalarını Kapsüllemesi (normalleştirilmişlikten çıkarılmış görünümü) sağlar.
-
-## <a name="capabilities"></a>Özellikler
-
-Bir veri varlığı aşağıdaki özellikleri içerir:
-
-- AXD, verileri içeri/dışarı aktarma Framework (DIXF) varlıklar, ayrılan ve parçalanmış kavramlarını değiştirir ve tek kavramına toplama sorgular.
-- Bu, iş mantığı yakalamak ve içeri/dışarı aktarma, tümleştirme ve programlama gibi senaryoları etkinleştirmek için tek bir yığın sağlar.
-- Dışarı aktarma ve uygulama yaşam döngüsü yönetimi (ALM) ve tanıtım veri senaryoları için veri paketleri içeri aktarma için birincil mekanizma olur.
-- OData hizmet olarak kullanıma sunulan ve olması ardından tablo stili zaman uyumlu tümleştirme senaryolar ve Microsoft Office içinde kullanılan.
-
-Bkz: [veri varlıkları](https://docs.microsoft.com/dynamics365/operations/dev-itpro/data-entities/data-entities) daha fazla bilgi için.
+Yeni bir Dynamics 365 for Operations teklifi oluşturmadan önce, [Iş Ortağı Merkezi hesabı oluştur](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) ' u okuyup **genel bakış** sayfası seçili olarak [ticari Market panosunu](https://partner.microsoft.com/dashboard/directory) açmanız gerekir. Teklifinizi oluşturmak için [Yeni Dynamics 365 for Operations teklifini oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-operations-offer) bölümündeki yönergeleri izleyin.

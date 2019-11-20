@@ -1,6 +1,6 @@
 ---
-title: Azure HDInsight - veri geçişi en iyi uygulamaları şirket içi Apache Hadoop kümelerini geçirme
-description: Veri geçiş için en iyi Azure HDInsight geçirme şirket içi Hadoop kümelerine öğrenin.
+title: "Veri geçişi: Azure HDInsight 'a şirket içi Apache Hadoop"
+description: Şirket içi Hadoop kümelerini Azure HDInsight 'a geçirmek için veri geçişi en iyi yöntemlerini öğrenin.
 author: hrasheed-msft
 ms.reviewer: ashishth
 ms.service: hdinsight
@@ -8,35 +8,35 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 04/08/2019
 ms.author: hrasheed
-ms.openlocfilehash: 732cb118b7a0eebdbf28c7d7fe6ced435ce7920e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 30f7ae2eeb928e3f8dc71baed20d9c9b2129d1f9
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64713731"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494983"
 ---
-# <a name="migrate-on-premises-apache-hadoop-clusters-to-azure-hdinsight---data-migration-best-practices"></a>Azure HDInsight - veri geçişi en iyi uygulamaları şirket içi Apache Hadoop kümelerini geçirme
+# <a name="migrate-on-premises-apache-hadoop-clusters-to-azure-hdinsight---data-migration-best-practices"></a>Şirket içi Apache Hadoop kümelerini Azure HDInsight 'a geçirme-veri geçişi en iyi yöntemleri
 
-Bu makalede, Azure HDInsight için veri geçiş için öneriler sunar. Geçirme şirket içi Apache Hadoop sistemler ile Azure HDInsight için yardımcı olması için en iyi yöntemler sağlayan bir dizi gereksinimlerimizim bir parçasıdır.
+Bu makale, Azure HDInsight 'a veri taşımaya yönelik öneriler sağlar. Şirket içi Apache Hadoop sistemlerini Azure HDInsight 'a geçirmeye yardımcı olmak için en iyi uygulamaları sağlayan bir serinin bir parçasıdır.
 
-## <a name="migrate-on-premises-data-to-azure"></a>Şirket içi verileri Azure'a geçirme
+## <a name="migrate-on-premises-data-to-azure"></a>Şirket içi verileri Azure 'a geçirme
 
-Verileri şirket içinden Azure ortamına geçirmek için iki ana seçeneğiniz vardır:
+Şirket içinden Azure ortamına veri geçirmek için iki ana seçenek vardır:
 
 1.  TLS ile ağ üzerinden veri aktarımı
-    1. -İnternet üzerinden Azure depolama gibi çeşitli araçları herhangi biri kullanılarak normal bir internet bağlantısı üzerinden veri aktarabilirsiniz: Azure Depolama Gezgini, AzCopy, Azure Powershell ve Azure CLI.  Bkz: [için ve Azure Depolama'dan veri taşıma](../../storage/common/storage-moving-data.md) daha fazla bilgi için.
-    2. Express Route - ExpressRoute, Microsoft veri merkezleri ve şirket içindeki veya ortak yerleşim tesisinizden altyapınız arasında özel bağlantılar oluşturmanızı sağlayan bir Azure hizmetidir. ExpressRoute bağlantıları değil genel Internet üzerinden gidin ve daha yüksek güvenlik, güvenilirlik ve hız tipik daha düşük gecikme süreleriyle Internet üzerinden sunar. Daha fazla bilgi için [oluşturun ve bir ExpressRoute bağlantı hattını değiştirme](../../expressroute/expressroute-howto-circuit-portal-resource-manager.md).
-    1. Veri kutusu çevrimiçi veri aktarımı - veri kutusu Edge ve veri kutusu ağ geçidi olan çevrimiçi veri aktarımı ağ ile Azure arasında verileri yönetmek için depolama ağ geçitleri gibi davranan bir ürün. Şirket içi bir ağ cihazı olan Data Box Edge, Azure’ın içine ve dışına veri aktarımı gerçekleştirmesinin yanı sıra verileri işlemek için yapay zeka (AI) özellikli uç işlemini kullanır. Data Box Gateway, depolama ağ geçidi özelliklerine sahip sanal bir gereçtir. Daha fazla bilgi için [Azure veri kutusu belgeleri - Online aktarım](https://docs.microsoft.com/azure/databox-online/).
-1.  Çevrimdışı veri aktarma
-    1. Veri çevrimdışı veri aktarımı - Data Box, Data Box Disk, kutu ve veri kutusu ağır cihazları ağ bir seçenek olmadığı durumlarda Azure'a büyük miktarlarda veri aktarmanıza yardımcı olur. Bu çevrimdışı veri aktarım cihazları kuruluşunuz ile Azure veri merkezi arasında çift yönlü olarak sevk edilebilir. Bunlar aktarım sırasında verilerinizin korunmasına yardımcı olmak için AES şifrelemesi kullanır ve karşıya yükleme sonrası temizlik işlemine tabi tutularak verileriniz cihazdan silinir. Data Box çevrimdışı aktarımı cihazlar hakkında daha fazla bilgi için bkz. [Azure veri kutusu belgeleri - çevrimdışı aktarımı](https://docs.microsoft.com/azure/databox/). Hadoop kümelerinin geçiş hakkında daha fazla bilgi için bkz. [bir şirket içi HDFS Mağazası'ndan Azure depolama alanına geçiş yapmayı kullanımı Azure Data Box](../../storage/blobs/data-lake-storage-migrate-on-premises-hdfs-cluster.md).
+    1. Internet üzerinden: Azure Depolama Gezgini, AzCopy, Azure PowerShell ve Azure CLı gibi çeşitli araçlardan birini kullanarak düzenli bir internet bağlantısı üzerinden Azure depolama 'ya veri aktarabilirsiniz.  Daha fazla bilgi için bkz. [Azure Storage 'a veri taşıma](../../storage/common/storage-moving-data.md) .
+    2. Express Route-ExpressRoute, Microsoft veri merkezleri ile şirket içinde veya bir birlikte bulundurma tesisinde bulunan altyapı arasında özel bağlantılar oluşturmanızı sağlayan bir Azure hizmetidir. ExpressRoute bağlantıları, genel Internet üzerinden geçmez ve Internet üzerinden tipik bağlantılardan daha düşük gecikme süreleriyle daha yüksek güvenlik, güvenilirlik ve hız sunar. Daha fazla bilgi için bkz. [ExpressRoute bağlantı hattı oluşturma ve değiştirme](../../expressroute/expressroute-howto-circuit-portal-resource-manager.md).
+    1. Data Box çevrimiçi veri aktarımı-Data Box Edge ve Data Box Gateway, siteniz ile Azure arasında verileri yönetmek için ağ depolama ağ geçitleri görevi gören çevrimiçi veri aktarımı ürünlerdir. Şirket içi bir ağ cihazı olan Data Box Edge, Azure’ın içine ve dışına veri aktarımı gerçekleştirmesinin yanı sıra verileri işlemek için yapay zeka (AI) özellikli uç işlemini kullanır. Data Box Gateway, depolama ağ geçidi özelliklerine sahip sanal bir gereçtir. Daha fazla bilgi için bkz. [Azure Data Box belgeleri-çevrimiçi aktarım](https://docs.microsoft.com/azure/databox-online/).
+1.  Verileri çevrimdışı aktarma
+    1. Data Box çevrimdışı veri aktarımı-Data Box, Data Box Disk ve Data Box Heavy cihazları, ağ bir seçenek olmadığında büyük miktarlarda verileri Azure 'a aktarmanızı sağlar. Bu çevrimdışı veri aktarım cihazları kuruluşunuz ile Azure veri merkezi arasında çift yönlü olarak sevk edilebilir. Bunlar aktarım sırasında verilerinizin korunmasına yardımcı olmak için AES şifrelemesi kullanır ve karşıya yükleme sonrası temizlik işlemine tabi tutularak verileriniz cihazdan silinir. Data Box çevrimdışı aktarım cihazları hakkında daha fazla bilgi için bkz. [Azure Data Box belgeleri-çevrimdışı aktarım](https://docs.microsoft.com/azure/databox/). Hadoop kümelerinin geçirilmesi hakkında daha fazla bilgi için bkz. [on-premises bir sunucudan Azure Storage 'a geçiş yapmak için Azure Data Box kullanma](../../storage/blobs/data-lake-storage-migrate-on-premises-hdfs-cluster.md).
 
-Aşağıdaki tabloda veri birimi ve ağ bant genişliğine göre yaklaşık veri aktarım süresi vardır. Bir veri kutusu veri geçişi üç hafta daha uzun sürmesi beklendiğinde kullanın.
+Aşağıdaki tabloda, veri hacmi ve ağ bant genişliğine bağlı olarak yaklaşık veri aktarım süresi bulunur. Veri geçişinin üç haftadan uzun sürmesine bekleniyorsa bir veri kutusu kullanın.
 
-|**Data Qty**|**Ağ bant genişliği**||||
+|**Veri mik**|**Ağ bant genişliği**||||
 |---|---|---|---|---|
-|| **45 MB/sn (T3)**|**100 MB/sn**|**1 GB/sn**|**10 Gbps**|
+|| **45 Mbps (T3)**|**100 Mbps**|**1 Gbps**|**10 Gbps**|
 |1 TB|2 gün|1 gün| 2 saat|14 dakika|
-|10 TB|22 günü|10 gün|1 gün|2 saat|
+|10 TB|22 gün|10 gün|1 gün|2 saat|
 |35 TB|76 gün|34 gün|3 gün|8 saat|
 |80 TB|173 gün|78 gün|8 gün|19 saat|
 |100 TB|216 gün|97 gün|10 gün|1 gün|
@@ -45,40 +45,40 @@ Aşağıdaki tabloda veri birimi ve ağ bant genişliğine göre yaklaşık veri
 |1 PB|6 yıl|3 yıl|97 gün|10 gün|
 |2 PB|12 yıl|5 yıl|194 gün|19 gün|
 
-Araçlar AzureCp, Apache Hadoop DistCp ve Azure Data Factory gibi Azure yerel ağ üzerinden veri aktarmak için kullanılabilir. Üçüncü taraf aracı WANDisco, aynı amaçla da kullanılabilir. Apache Kafka Mirrormaker ve Apache Sqoop, Azure depolama sistemleri için şirket içi devam eden veri aktarımı için kullanılabilir.
+Azure 'da yerel olan ve Apache Hadoop DistCp, Azure Data Factory ve AzureCp gibi araçlar, ağ üzerinden veri aktarmak için kullanılabilir. Ayrıca, üçüncü taraf aracı WANDisco aynı amaçla kullanılabilir. Apache Kafka Mirrormaker ve Apache Sqoop, Şirket içinden Azure depolama sistemlerine devam eden veri aktarımı için kullanılabilir.
 
 
-## <a name="performance-considerations-when-using-apache-hadoop-distcp"></a>Apache Hadoop DistCp kullanırken performans konuları
+## <a name="performance-considerations-when-using-apache-hadoop-distcp"></a>Apache Hadoop Dıtcp kullanırken performans konuları
 
 
-DistCp bir harita MapReduce işi veri aktarımı, hataları işleme ve bu hatalardan kurtarmak için kullandığı bir Apache projesidir. Kaynak dosyaların listesini her eşleme göreve atar. Harita görev sonra tüm atanan dosyaları hedefe kopyalar. Var olan çeşitli teknikler DistCp performansını geliştirebilir.
+DistCp, verileri aktarmak, hataları işlemek ve bu hatalardan kurtarmak için MapReduce eşleme işi kullanan bir Apache projem. Her eşleme görevine bir kaynak dosyaları listesi atar. Eşleme görevi bundan sonra atanan tüm dosyaları hedefe kopyalar. Birçok teknik, DistCp performansını iyileştirebilirler.
 
-### <a name="increase-the-number-of-mappers"></a>Azaltıcının sayısını artırın
+### <a name="increase-the-number-of-mappers"></a>Mapto sayısını artırma
 
-DistCp harita görevleri oluşturun, böylece her biri yaklaşık aynı sayıda bayt kopyalar dener. Varsayılan olarak 20 azaltıcının DistCp işleri kullanın. Daha fazla Azaltıcının için Distcp kullanma (ile 'M ' komut satırı parametresi) veri aktarım işlemi sırasında paralellik artar ve veri aktarımı uzunluğunu azaltır. Ancak, Azaltıcının sayısının artırılması sırasında dikkate alınması gereken iki şey vardır:
+Detcp, her bir kopyanın kabaca aynı bayt sayısına eşit olması için eşleme görevleri oluşturmaya çalışır. Varsayılan olarak, DistCp işleri 20 mapto kullanır. Distcp için daha fazla Maplıya (komut satırında 'm parametresi ile) kullanmak, veri aktarım işlemi sırasında paralellik düzeyini artırır ve veri aktarımının uzunluğunu azaltır. Ancak, Mapıı sayısını artırırken dikkate alınması gereken iki şey vardır:
 
-1. DistCp'ın en düşük ayrıntı düzeyi tek bir dosyadır. Kaynak dosyalarının sayısından daha fazla Azaltıcının sayısını belirten olmaz ve kullanılabilir küme kaynaklarının boşa harcanmasına neden.
-1. Yarn bellek Azaltıcının sayısını belirlemek için küme üzerinde göz önünde bulundurun. Her harita görev Yarn kapsayıcı olarak başlatılır. Diğer ağır iş yükleri kümede çalışan varsayarak, aşağıdaki formülle Azaltıcının sayısı belirlenebilir: m = (çalışan düğümü sayısı \* her çalışan düğümü için YARN bellek) / YARN kapsayıcı boyutu. Diğer uygulamaları bellek kullanıyorsa, ancak yalnızca YARN belleğin bir kısmını DistCp işler için kullanmak üzere seçin.
+1. Detcp 'nin en düşük ayrıntı düzeyi tek bir dosyadır. Kaynak dosya sayısından daha fazla sayıda Mapbir eşleme belirtmek yardımcı değildir ve kullanılabilir küme kaynaklarını boşa karşılacaktır.
+1. Mapçların sayısını öğrenmek için kümede kullanılabilir Yarn belleğini göz önünde bulundurun. Her harita görevi bir Yarn kapsayıcısı olarak başlatılır. Kümede başka bir ağır iş yükünün çalışmadığını varsayarsak, Mapcontroller sayısı şu formül tarafından belirlenebilir: d = (her çalışan düğümü için YARN bellek \* çalışan düğüm sayısı)/YARN kapsayıcı boyutu. Ancak, diğer uygulamalar bellek kullanıyorsa, DistCp işleri için yalnızca YARN belleğin bir kısmını kullanmayı seçin.
 
-### <a name="use-more-than-one-distcp-job"></a>Birden fazla DistCp iş kullanın
+### <a name="use-more-than-one-distcp-job"></a>Birden fazla DistCp işi kullanın
 
-Taşınacak veri kümesi boyutu 1 TB'den büyük olduğunda, birden fazla DistCp işi kullanın. Birden fazla iş kullanarak hatalarının etkisini sınırlar. Herhangi bir işi başarısız olursa, yalnızca bu belirli iş yerine tüm işlerini yeniden başlatmanız gerekir.
+Taşınacak veri kümesinin boyutu 1 TB 'den büyükse, birden fazla DistCp işi kullanın. Birden fazla işin kullanılması, hataların etkisini sınırlar. Herhangi bir iş başarısız olursa, tüm işler yerine yalnızca belirli bir işi yeniden başlatmanız gerekir.
 
 ### <a name="consider-splitting-files"></a>Dosyaları bölmeyi göz önünde bulundurun
 
-Büyük dosyaların küçük bir sayı varsa, bunları daha fazla Azaltıcının ile daha fazla olası eşzamanlılık almak için 256 MB'lık dosya öbeklere bölmeyi düşünün.
+Az sayıda büyük dosya varsa, daha fazla mapa ile daha fazla eşzamanlılık sağlamak için bunları 256 MB dosya öbeklere bölmeyi göz önünde bulundurun.
 
-### <a name="use-the-strategy-command-line-parameter"></a>'Stratejisi' komut satırı parametresini kullanın
+### <a name="use-the-strategy-command-line-parameter"></a>' Strateji ' komut satırı parametresini kullanın
 
-Kullanmayı `strategy = dynamic` komut satırı parametresi. Varsayılan değer olan `strategy` parametresi `uniform size`, yaklaşık aynı bayt sayısı, bu durumda her eşleme kopyalar. Ne zaman bu parametre değiştiğinde `dynamic`, çeşitli "öbek-dosyalarına" listeleme dosyası bölünür. Haritalar sayısının katı öbek dosya sayısıdır. Her harita görev öbek dosyalarından birine atanır. Bir öbek tüm yolları işlendikten sonra geçerli yığında silinir ve yeni öbek alınır. İşlem, öbeği kullanılabilir olana kadar devam eder. "Dinamik" Bu yaklaşım, böylece DistCp işini genel hızlandırma daha yavaş yapılandırılanlardan daha yollarını kullanmak daha hızlı eşleme-görevleri sağlar.
+Komut satırında `strategy = dynamic` parametresi kullanmayı düşünün. `strategy` parametresinin varsayılan değeri `uniform size`, bu durumda her eşleme kabaca aynı sayıda bayt olarak kopyalanır. Bu parametre `dynamic`olarak değiştirildiğinde, liste dosyası birkaç "öbek dosyası" olarak bölünür. Öbek dosyalarının sayısı, haritalar sayısının birden çok sayısıdır. Her eşleme görevi, öbek dosyalarından birine atanır. Bir öbekteki tüm yollar işlendikten sonra, geçerli öbek silinir ve yeni bir öbek elde edilir. İşlem, başka bir öbek kullanılabilir olana kadar devam eder. Bu "dinamik" yaklaşım daha hızlı eşleme görevlerinin daha yavaş yollardan daha fazla yol kullanmasına olanak sağlar. böylece, genel olarak DistCp işini hızlanın.
 
-### <a name="increase-the-number-of-threads"></a>İş parçacığı sayısını artırın
+### <a name="increase-the-number-of-threads"></a>İş parçacığı sayısını artırma
 
-Artan olup `-numListstatusThreads` parametresi performansı artırır. Bu parametre, dosya listesi oluşturmak için kullanılacak iş parçacığı sayısını denetler ve 40 en yüksek değerdir.
+`-numListstatusThreads` parametresinin artması performansı artırdığından bkz. Bu parametre, dosya listesi oluşturmak için kullanılacak iş parçacığı sayısını denetler ve 40 en büyük değerdir.
 
-### <a name="use-the-output-committer-algorithm"></a>Çıkış teslim eden algoritma kullanın
+### <a name="use-the-output-committer-algorithm"></a>Çıkış komter algoritmasını kullanın
 
-Parametre geçirme olup `-Dmapreduce.fileoutputcommitter.algorithm.version=2` DistCp performansını artırır. Bu çıkış teslim eden algoritma çıkış dosyaları hedefe yazma etrafında iyileştirmeler vardır. Aşağıdaki komut, farklı parametreler kullanımını gösteren bir örnek şudur:
+`-Dmapreduce.fileoutputcommitter.algorithm.version=2` parametre geçirmenin, performansı artırdığı konusunda bilgi için bkz. Bu çıkış komter algoritması, çıkış dosyalarını hedefe yazma etrafında iyileştirmelere sahiptir. Aşağıdaki komut, farklı parametrelerin kullanımını gösteren bir örnektir:
 
 ```bash
 hadoop distcp -Dmapreduce.fileoutputcommitter.algorithm.version=2 -numListstatusThreads 30 -m 100 -strategy dynamic hdfs://nn1:8020/foo/bar wasb://<container_name>@<storage_account_name>.blob.core.windows.net/foo/
@@ -88,19 +88,19 @@ hadoop distcp -Dmapreduce.fileoutputcommitter.algorithm.version=2 -numListstatus
 
 ### <a name="apache-hive"></a>Apache Hive
 
-Hive meta veri deposu, komut dosyalarını kullanarak veya veritabanı çoğaltma kullanılarak geçirilebilir.
+Hive meta veri deposu, betikleri kullanılarak veya DB çoğaltması kullanılarak geçirilebilir.
 
-#### <a name="hive-metastore-migration-using-scripts"></a>Hive meta veri deposu geçiş betiklerini kullanma
+#### <a name="hive-metastore-migration-using-scripts"></a>Betikleri kullanarak geçiş Hive meta veri deposu
 
-1. Şirket içi Hive meta veri deposu üzerinde Hive DDLs gelen oluşturur. Bu adım yapılabilir kullanarak bir [sarmalayıcı bash betiğini](https://github.com/hdinsight/hdinsight.github.io/blob/master/hive/hive-export-import-metastore.md).
-1. HDFS url ADLS/WASB/ABFS URL'leri ile değiştirme için oluşturulan DDL düzenleyin.
-1. Güncelleştirilmiş DDL HDInsight küme meta veri deposu üzerinde çalıştırın.
-1. Hive meta veri deposu sürümü şirket içi ile bulut arasında uyumlu olduğundan emin olun.
+1. Şirket içi Hive meta veri deposu Hive DDLs 'Leri oluşturun. Bu adım, [sarmalayıcı Bash betiği](https://github.com/hdinsight/hdinsight.github.io/blob/master/hive/hive-export-import-metastore.md)kullanılarak yapılabilir.
+1. Bir üretilen DDL 'yi, bu edb/ADLS/ABFS URL 'Leriyle, bu URL 'yi değiştirin.
+1. HDInsight kümesinden, meta veri deposu üzerinde güncelleştirilmiş DDL 'yi çalıştırın.
+1. Hive meta veri deposu sürümünün şirket içi ve bulut arasında uyumlu olduğundan emin olun.
 
-#### <a name="hive-metastore-migration-using-db-replication"></a>Hive meta veri deposu geçiş DB çoğaltma kullanma
+#### <a name="hive-metastore-migration-using-db-replication"></a>DB çoğaltma kullanarak geçiş Hive meta veri deposu
 
-- Veritabanı çoğaltma, şirket içi Hive meta veri deposu DB ve HDInsight DB meta veri deposu arasında ayarlayın.
-- "Hive MetaTool" HDFS URL'si, örneğin ADLS/WASB/ABFS URL'ler ile değiştirmek için kullanın:
+- Şirket içi Hive meta veri deposu DB ile HDInsight meta veri deposu DB arasında veritabanı çoğaltmasını ayarlayın.
+- Ifabricurl 'sini IDB/ADLS/ABFS URL 'leri ile değiştirmek için "Hive MetaTool" kullanın, örneğin:
 
 ```bash
 ./hive --service metatool -updateLocation hdfs://nn1:8020/ wasb://<container_name>@<storage_account_name>.blob.core.windows.net/
@@ -108,12 +108,12 @@ Hive meta veri deposu, komut dosyalarını kullanarak veya veritabanı çoğaltm
 
 ### <a name="apache-ranger"></a>Apache Ranger
 
-- Şirket içi Ranger ilkelerini xml dosyasına dışarı aktarın.
-- Şirket içi WASB/ADLS XSLT gibi bir araç kullanarak belirli HDFS tabanlı yollara dönüştürün.
-- HDInsight üzerinde çalışan Ranger oturum ilkeleri içeri aktarın.
+- Şirket içi Ranger ilkelerini XML dosyalarına dışarı aktarın.
+- XSLT gibi bir araç kullanarak, şirket için belirli bir diğer ad tabanlı yollardaki/ADLS 'ye dönüştürme.
+- Içindeki ilkeleri HDInsight üzerinde çalışan Ranger 'a aktarın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu serideki sonraki makaleyi okuyun:
+Bu serideki bir sonraki makaleyi okuyun:
 
-- [Şirket içi-Azure HDInsight Hadoop geçiş için güvenlik ve DevOps en iyi uygulamalar](apache-hadoop-on-premises-migration-best-practices-security-devops.md)
+- [Azure HDInsight Hadoop geçiş için şirket içi güvenlik ve DevOps en iyi uygulamaları](apache-hadoop-on-premises-migration-best-practices-security-devops.md)

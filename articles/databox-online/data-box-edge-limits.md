@@ -1,6 +1,6 @@
 ---
-title: Azure veri kutusu Edge sınırlar | Microsoft Docs
-description: Sistem sınırlarını ve önerilen boyutları için Azure veri kutusu Edge açıklar.
+title: Azure Data Box Edge sınırları | Microsoft Docs
+description: Azure Data Box Edge için sistem sınırlarını ve önerilen boyutları açıklar.
 services: databox
 author: alkohli
 ms.service: databox
@@ -8,41 +8,41 @@ ms.subservice: edge
 ms.topic: article
 ms.date: 03/22/2019
 ms.author: alkohli
-ms.openlocfilehash: b454b563cdb870ca8f07a45b796dc6b1e272502d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9adfc1ef355c31f0bfeeb6c3b194d62426b7b9b3
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64924594"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72244308"
 ---
-# <a name="azure-data-box-edge-limits"></a>Azure veri kutusu Edge sınırları
+# <a name="azure-data-box-edge-limits"></a>Azure Data Box Edge sınırları
 
-Limitler, dağıtmanıza ve Microsoft Azure veri kutusu Edge çözümünüz olarak düşünün.
+Microsoft Azure Data Box Edge çözümünüzü dağıtırken ve işletirken bu limitleri göz önünde bulundurun.
 
-## <a name="data-box-edge-service-limits"></a>Veri kutusu Edge hizmet sınırları
+## <a name="data-box-edge-service-limits"></a>Hizmet sınırlarını Data Box Edge
 
 [!INCLUDE [data-box-edge-gateway-service-limits](../../includes/data-box-edge-gateway-service-limits.md)]
 
-## <a name="data-box-edge-device-limits"></a>Veri kutusu Edge cihaz sınırları
+## <a name="data-box-edge-device-limits"></a>Cihaz sınırlarını Data Box Edge
 
-Aşağıdaki tablo, veri kutusu sınır cihazı sınırları açıklar.
+Aşağıdaki tabloda Data Box Edge cihazının sınırları açıklanmaktadır.
 
 | Açıklama | Değer |
 |---|---|
-|Hayır. cihaz başına dosyaları |100 milyon |
-|Hayır. cihaz başına paylaşılma sayısı |24 |
-|Hayır. kapsayıcı başına paylaşılma sayısı |1 |
+|Hayır. cihaz başına dosya |100.000.000 |
+|Hayır. cihaz başına paylaşım sayısı |24 |
+|Hayır. kapsayıcı başına paylaşım sayısı |1 |
 |Bir paylaşıma yazılan en büyük dosya boyutu| 5 TB |
 
 ## <a name="azure-storage-limits"></a>Azure depolama sınırları
 
 [!INCLUDE [data-box-edge-gateway-storage-limits](../../includes/data-box-edge-gateway-storage-limits.md)]
 
-## <a name="data-upload-caveats"></a>Uyarılar karşıya veri yükleme
+## <a name="data-upload-caveats"></a>Karşıya veri yükleme uyarıları
 
 [!INCLUDE [data-box-edge-gateway-storage-data-upload-caveats](../../includes/data-box-edge-gateway-storage-data-upload-caveats.md)]
 
-## <a name="azure-storage-account-size-and-object-size-limits"></a>Azure depolama hesabı boyut ve nesne boyutu sınırları
+## <a name="azure-storage-account-size-and-object-size-limits"></a>Azure depolama hesabı boyutu ve nesne boyutu sınırları
 
 [!INCLUDE [data-box-edge-gateway-storage-acct-limits](../../includes/data-box-edge-gateway-storage-acct-limits.md)]
 
@@ -53,4 +53,4 @@ Aşağıdaki tablo, veri kutusu sınır cihazı sınırları açıklar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Data Box Gateway'i dağıtmaya hazırlanma](data-box-gateway-deploy-prep.md)
+- [Azure Data Box Edge’i dağıtmaya hazırlanma](data-box-edge-deploy-prep.md)

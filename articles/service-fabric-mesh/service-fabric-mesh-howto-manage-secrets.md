@@ -1,39 +1,39 @@
 ---
-title: Azure Service Fabric Mesh uygulama parolalarını yönetme | Microsoft Docs
-description: Uygulama gizli dizilerini güvenli bir şekilde oluşturabilir ve bir Service Fabric Mesh uygulaması dağıtma şekilde yönetin.
+title: Azure Service Fabric ağı uygulama gizli dizilerini yönetme | Microsoft Docs
+description: Service Fabric bir kafes uygulamasını güvenli bir şekilde oluşturup dağıtabilmeniz için uygulama gizli dizilerini yönetin.
 services: service-fabric-mesh
-keywords: Gizli dizileri
-author: aljo-microsoft
-ms.author: aljo
+keywords: gizli dizi
+author: athinanthny
+ms.author: atsenthi
 ms.date: 4/2/2019
 ms.topic: conceptual
 ms.service: service-fabric-mesh
 manager: chackdan
-ms.openlocfilehash: c2548ea3cf892ebe1a56cbb0909bfa5d5e805acf
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.openlocfilehash: ef3f04437aca7b6ad9aab8806d54e65d00159d87
+ms.sourcegitcommit: 18061d0ea18ce2c2ac10652685323c6728fe8d5f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67503303"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69036165"
 ---
-# <a name="manage-service-fabric-mesh-application-secrets"></a>Service Fabric Mesh uygulama parolalarını yönetme
-Service Fabric Mesh gizli Azure kaynaklarını destekler. Service Fabric Mesh gizli dizi herhangi bir depolama bağlantı dizeleri, parolalar veya güvenli şekilde iletilmesini ve depolanan gereken diğer değerleri gibi hassas metin bilgi olabilir. Bu makalede, Service Fabric güvenli Store hizmeti dağıtma ve gizli dizileri korumak için nasıl kullanılacağını gösterir.
+# <a name="manage-service-fabric-mesh-application-secrets"></a>Service Fabric kafes uygulama gizli dizilerini yönetme
+Service Fabric ağ, Azure kaynakları olarak gizli dizileri destekler. Service Fabric bir ağ parolası, depolama bağlantı dizeleri, parolalar veya güvenli bir şekilde depolanması ve aktarılması gereken diğer değerler gibi herhangi bir hassas metin bilgisi olabilir. Bu makalede, gizli dizileri dağıtmak ve korumak için Service Fabric Güvenli Depolama Hizmeti nasıl kullanılacağı gösterilmektedir.
 
-Mesh uygulaması gizli oluşur:
-* A **gizli dizileri** kaynağı metin gizli dizileri depolayan bir kapsayıcıdır. İçindeki gizli dizileri **gizli dizileri** kaynak depolanır ve güvenli bir şekilde iletilen.
-* Bir veya daha fazla **gizli anahtarları/değerleri** depolanan kaynakları **gizli dizileri** kaynak kapsayıcısı. Her **gizli anahtarları/değerleri** bir sürüm numarası tarafından kaynak ayırt edici. Bir sürümünü değiştiremezsiniz bir **gizli anahtarları/değerleri** kaynağı, yalnızca yeni bir sürüm ekleyin.
+Bir kafes uygulama gizli dizisi aşağıdakilerden oluşur:
+* Metin gizli dizileri depolayan bir kapsayıcı olan **gizlilikler** kaynağı. **Gizli** dizileri kaynağı içinde bulunan gizli dizileri, güvenli bir şekilde depolanır ve iletilir.
+* **Gizlilikler** kaynak kapsayıcısında depolanan bir veya daha fazla **gizli dizi/değer** kaynağı. Her **gizli dizi/değer** kaynağı bir sürüm numarasıyla ayırt edilir. **Gizli dizi/değer** kaynağının bir sürümünü değiştiremezsiniz, yalnızca yeni bir sürüm ekleyebilirsiniz.
 
-Gizli anahtarları yönetme, aşağıdaki adımlardan oluşur:
-1. Kafes bildirmek **gizli dizileri** inlinedValue tür ve SecretsStoreRef contentType tanımlarını kullanarak bir Azure kaynak modeli YAML veya JSON dosyasında kaynak.
-2. Kafes bildirmek **gizli anahtarları/değerleri** kaynaklar içinde depolanan bir Azure kaynak modeli YAML veya JSON dosyasında **gizli dizileri** kaynaktan (1. adım).
-3. Mesh uygulaması kafes gizli değerleri başvurmak için değiştirin.
-4. Dağıtın veya sıralı yükseltme Mesh uygulamasının gizli değerlerini kullanır.
-5. Güvenli Store hizmeti yaşam döngüsü yönetimi için Azure'daki "az" CLI komutları.
+Gizli dizileri yönetmek aşağıdaki adımlardan oluşur:
+1. Inlinedvalue Kind ve SecretsStoreRef contentType tanımlarını kullanarak bir Azure kaynak modeli YAML veya JSON dosyasında bir ağ **Parolaları** kaynağı bildirin.
+2. Ağ **gizli dizileri/değerleri** kaynaklarını bir Azure kaynak modeli YAML veya **gizli** dizi dosyasında (1. ADıMDAN) depolanacak olan JSON dosyasına bildirin.
+3. Kafes uygulamasını, kafes gizli değerlerine başvuracak şekilde değiştirin.
+4. Gizli değerleri kullanmak için kafes uygulamasını dağıtın veya yuvarlama.
+5. Güvenli Depolama Hizmeti yaşam döngüsü yönetimi için Azure "az" CLı komutlarını kullanın.
 
-## <a name="declare-a-mesh-secrets-resource"></a>Mesh gizli dizileri kaynak bildirme
-Mesh gizli dizileri kaynak, bir Azure kaynak modeli JSON veya YAML dosyası inlinedValue tür tanımı kullanılarak bildirilir. Mesh gizli dizileri kaynak güvenli Store kaynaklanan hizmeti gizli dizileri destekler. 
+## <a name="declare-a-mesh-secrets-resource"></a>Ağ parolaları kaynağı bildirme
+Bir ağ parolaları kaynağı bir Azure kaynak modeli JSON veya YAML dosyasında ınlinedvalue türü tanımı kullanılarak belirtilir. Ağ gizli dizileri kaynağı Güvenli Depolama Hizmeti kaynak gizli dizileri destekler. 
 >
-Bir JSON dosyası Mesh gizli kaynaklara bildirmek nasıl bir örnek verilmiştir:
+Aşağıda, bir JSON dosyasında ağ parolaları kaynaklarının nasıl bildirilelebir bir örnek verilmiştir:
 
 ```json
 {
@@ -70,7 +70,7 @@ Bir JSON dosyası Mesh gizli kaynaklara bildirmek nasıl bir örnek verilmiştir
   ]
 }
 ```
-Bir YAML dosyası Mesh gizli kaynaklara bildirmek nasıl bir örnek verilmiştir:
+Aşağıda, bir YAML dosyasında ağ parolaları kaynaklarının nasıl bildirilebir bir örnek verilmiştir:
 ```yaml
     services:
       - name: helloWorldService
@@ -98,13 +98,13 @@ Bir YAML dosyası Mesh gizli kaynaklara bildirmek nasıl bir örnek verilmiştir
       - name: mynetwork
 ```
 
-## <a name="declare-mesh-secretsvalues-resources"></a>Mesh gizli anahtarları/değerleri kaynakları bildirme
-Kafes gizli anahtarları/değerleri kaynaklar, önceki adımda tanımlanan Mesh gizli dizileri kaynaklar üzerinde bir bağımlılık sahiptir.
+## <a name="declare-mesh-secretsvalues-resources"></a>Ağ gizli dizileri/değerleri kaynaklarını bildirin
+Ağ parolaları/değerler kaynakları, önceki adımda tanımlanan ağ parolaları kaynaklarına bağımlıdır.
 
-"Kaynaklar" bölümü arasındaki ilişki ile ilgili "değeri:" ve "adı:" alanları: ikinci bölümü "adı:" iki nokta ile ayrılmış iki nokta üst üste sahip olduğu için Kafes gizli değer ile eşleşmesi gerekiyor önce bir gizli anahtarı ve adı için kullanılan sürüm numarasını dizedir bir bağımlılık. Örneğin, öğe için ```name: mysecret:1.0```, 1.0 ve sürüm numarasını adıdır ```mysecret``` önceden tanımlanmış eşleşmelidir ```"value": "mysecret"```.
+"Resources" bölümü "Value:" ve "Name:" alanları arasındaki ilişki ile ilgili olarak: "Name:" dizesinin bir iki nokta ile ayrılmış ikinci bölümü, bir gizli anahtar için kullanılan sürüm numarasıdır ve iki nokta üst üste ait olan ara gizlilik değeriyle eşleşmelidir bağımlılık. Örneğin, öğesi ```name: mysecret:1.0```için sürüm numarası 1,0, ad ```mysecret``` ise daha önce tanımlanan ```"value": "mysecret"```ile aynı olmalıdır.
 
 >
-Bir JSON dosyası Mesh gizli anahtarları/değerleri kaynaklarında bildirmek nasıl bir örnek verilmiştir:
+Aşağıda, bir JSON dosyasında ağ gizli dizileri/değerleri kaynaklarının nasıl bildirilelelebir örnektir:
 
 ```json
 {
@@ -153,7 +153,7 @@ Bir JSON dosyası Mesh gizli anahtarları/değerleri kaynaklarında bildirmek na
   ],
 }
 ```
-Bir YAML dosyası Mesh gizli anahtarları/değerleri kaynaklarında bildirmek nasıl bir örnek verilmiştir:
+Aşağıda, bir YAML dosyasında ağ gizli dizileri/değerleri kaynaklarının nasıl bildirilelebir örnektir:
 ```yaml
     services:
       - name: helloWorldService
@@ -186,67 +186,67 @@ Bir YAML dosyası Mesh gizli anahtarları/değerleri kaynaklarında bildirmek na
       - name: mynetwork
 ```
 
-## <a name="modify-mesh-application-to-reference-mesh-secret-values"></a>Mesh uygulaması gizli Mesh değerleri başvurmak için değiştirme
-Service Fabric Örgü uygulamalar Store hizmet parolasını güvenli değerleri kullanmak için aşağıdaki iki dizenin dikkat etmeniz gerekir:
-1. Microsoft.ServiceFabricMesh/Secrets.name dosya adını içerir ve düz metin parolaları değeri içerir.
-2. Windows veya Linux ortam değişkeni "Fabric_SettingPath" nerede Store hizmet gizli dizileri güvenli değerleri içeren dosyalar erişilebilir olacaktır için dizin yolunu içerir. Bunun için "C:\Settings" olan Windows barındırılan ve "/ var/ayarları" kafes Linux barındırılan uygulamalar için sırasıyla.
+## <a name="modify-mesh-application-to-reference-mesh-secret-values"></a>Kafes uygulamasını, kafes gizli değerlerine başvuracak şekilde değiştirin
+Service Fabric ağ uygulamalarının Güvenli Depolama Hizmeti gizli değerleri kullanabilmesi için aşağıdaki iki dizeyi farkında olması gerekir:
+1. Microsoft. Servicefabrickafes/gizlilikler. Name, dosyanın adını içerir ve gizli dizi değerini düz metin olacak şekilde içerecektir.
+2. "Fabric_SettingPath" Windows veya Linux ortam değişkeni, Güvenli Depolama Hizmeti gizli dizi değerleri içeren dosyaların erişilebilir olacağı dizin yolunu içerir. Bu, sırasıyla Linux ile barındırılan kafes uygulamaları için Windows ile barındırılan ve "/var/Settings" için "C:\Settings".
 
-## <a name="deploy-or-use-a-rolling-upgrade-for-mesh-application-to-consume-secret-values"></a>Dağıtmanıza veya gizli değerler kullanılacağı Mesh uygulaması için sıralı yükseltme
-Gizli dizileri ve/veya tutulan gizli anahtarları/değerleri oluşturmak için kaynak modeli dağıtımlarını bildirilen sınırlıdır. Bu kaynakları oluşturmak için tek bir kaynak modeli JSON veya YAML dosyası kullanılarak geçirerek yoludur **az kafes dağıtım** komutuyla şu şekilde:
+## <a name="deploy-or-use-a-rolling-upgrade-for-mesh-application-to-consume-secret-values"></a>Gizli değerleri kullanmak için bir ağ uygulaması için sıralı yükseltme dağıtın veya kullanın
+Gizli dizileri ve/veya sürümlenmiş gizli dizileri/değerleri oluşturma, kaynak modeli tarafından tanımlanan dağıtımlar ile sınırlıdır. Bu kaynakları oluşturmanın tek yolu, **az kafesdeployment** komutuyla aşağıdaki gibi bir kaynak modeli JSON veya YAML dosyası geçirmektir:
 
 ```azurecli-interactive
 az mesh deployment create –-<template-file> or --<template-uri>
 ```
 
-## <a name="azure-cli-commands-for-secure-store-service-lifecycle-management"></a>Güvenli Store hizmeti yaşam döngüsü yönetimi için Azure CLI komutları
+## <a name="azure-cli-commands-for-secure-store-service-lifecycle-management"></a>Güvenli Depolama Hizmeti yaşam döngüsü yönetimi için Azure CLı komutları
 
-### <a name="create-a-new-secrets-resource"></a>Yeni gizli dizileri kaynak oluştur
+### <a name="create-a-new-secrets-resource"></a>Yeni bir gizli dizi kaynağı oluşturma
 ```azurecli-interactive
 az mesh deployment create –-<template-file> or --<template-uri>
 ```
-Ya da geçirmeniz **şablon dosyası** veya **URI şablonu** (ancak her ikisini birden değil).
+**Şablon dosyası** ya da **şablon-URI** (her ikisi değil) geçirin.
 
 Örneğin:
-- az kafes dağıtım--c:\MyMeshTemplates\SecretTemplate1.txt oluştur
-- az kafes dağıtım oluşturma--https:\//www.fabrikam.com/MyMeshTemplates/SecretTemplate1.txt
+- az kafes Deployment Create--c:\MyMeshTemplates\SecretTemplate1.txt
+- az kafes Deployment Create--https:\//www.fabrikam.com/MyMeshTemplates/SecretTemplate1.txt
 
-### <a name="show-a-secret"></a>Gizli dizi Göster
-Gizli dizi (ancak değer değil) açıklamasını döndürür.
+### <a name="show-a-secret"></a>Gizli dizi göster
+Gizli anahtar açıklamasını döndürür (ancak değeri değil).
 ```azurecli-interactive
 az mesh secret show --Resource-group <myResourceGroup> --secret-name <mySecret>
 ```
 
-### <a name="delete-a-secret"></a>Gizli anahtarı silme
+### <a name="delete-a-secret"></a>Gizli dizi silme
 
-- Mesh uygulama tarafından başvuruluyor ancak bir gizli dizi silinemiyor.
-- Gizli dizileri kaynağın silinmesi, tüm gizli dizileri/kaynakları sürümlerinin siler.
+- Gizli dizi, bir kafes uygulaması tarafından başvurulduğu sırada silinemez.
+- Gizli dizi kaynağını silme tüm gizli dizileri/kaynaklar sürümlerini siler.
   ```azurecli-interactive
   az mesh secret delete --Resource-group <myResourceGroup> --secret-name <mySecret>
   ```
 
-### <a name="list-secrets-in-subscription"></a>Abonelik gizli anahtarları listeleme
+### <a name="list-secrets-in-subscription"></a>Abonelikte gizli dizileri Listele
 ```azurecli-interactive
 az mesh secret list
 ```
-### <a name="list-secrets-in-resource-group"></a>Kaynak grubundaki gizli anahtarları listeleme
+### <a name="list-secrets-in-resource-group"></a>Kaynak grubundaki gizli dizileri listeleme
 ```azurecli-interactive
 az mesh secret list -g <myResourceGroup>
 ```
-### <a name="list-all-versions-of-a-secret"></a>Gizli dizi tüm sürümlerini listeleme
+### <a name="list-all-versions-of-a-secret"></a>Tüm gizli dizi sürümlerini listeleme
 ```azurecli-interactive
 az mesh secretvalue list --Resource-group <myResourceGroup> --secret-name <mySecret>
 ```
 
-### <a name="show-secret-version-value"></a>Gizli dizi sürümü değeri göster
+### <a name="show-secret-version-value"></a>Gizli sürüm değerini göster
 ```azurecli-interactive
 az mesh secretvalue show --Resource-group <myResourceGroup> --secret-name <mySecret> --version <N>
 ```
 
-### <a name="delete-secret-version-value"></a>Gizli dizi sürümü değerini sil
+### <a name="delete-secret-version-value"></a>Gizli sürüm değerini Sil
 ```azurecli-interactive
 az mesh secretvalue delete --Resource-group <myResourceGroup> --secret-name <mySecret> --version <N>
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar 
-Service Fabric Mesh hakkında daha fazla bilgi için genel bakış okuyun:
-- [Service Fabric Mesh genel bakış](service-fabric-mesh-overview.md)
+Service Fabric ağ hakkında daha fazla bilgi edinmek için genel bakışı okuyun:
+- [Service Fabric kafese bakış](service-fabric-mesh-overview.md)

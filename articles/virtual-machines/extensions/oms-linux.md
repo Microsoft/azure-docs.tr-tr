@@ -1,32 +1,31 @@
 ---
-title: Linux için Azure İzleyici sanal makine uzantısı | Microsoft Docs
+title: Linux için Azure Izleyici sanal makine uzantısı
 description: Log Analytics aracısını sanal makine uzantısını kullanarak Linux sanal makinesine dağıtın.
 services: virtual-machines-linux
 documentationcenter: ''
-author: roiyz-msft
-manager: jeconnoc
+author: axayjo
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: c7bbf210-7d71-4a37-ba47-9c74567a9ea6
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 07/01/2019
-ms.author: roiyz
-ms.openlocfilehash: 2c16e4c105a69d0d48d0b161db2caa390837bf26
-ms.sourcegitcommit: 6cb4dd784dd5a6c72edaff56cf6bcdcd8c579ee7
+ms.date: 08/06/2019
+ms.author: akjosh
+ms.openlocfilehash: a021c76eb973eba11e1dc1ee89f3d7f829a53f70
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67514544"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073053"
 ---
-# <a name="azure-monitor-virtual-machine-extension-for-linux"></a>Linux için Azure İzleyici sanal makine uzantısı
+# <a name="azure-monitor-virtual-machine-extension-for-linux"></a>Linux için Azure Izleyici sanal makine uzantısı
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure İzleyici günlüklerine, Bulut ve şirket içi varlıkları arasında izleme, uyarı ve uyarı düzeltme özellikleri sağlar. Linux için Log Analytics aracısını sanal makine uzantısı yayımlandı ve Microsoft tarafından desteklenmiyor. Uzantı, Azure sanal makinelerinde Log Analytics aracısını yükler ve sanal makinelerin mevcut bir Log Analytics çalışma alanına kaydeder. Bu belge, desteklenen platformlar, yapılandırmaları ve Linux için Azure İzleyici sanal makine uzantısı için dağıtım seçenekleri açıklanmaktadır.
+Azure Izleyici günlükleri, bulut ve şirket içi varlıklar arasında izleme, uyarı ve uyarı düzeltme özellikleri sağlar. Linux için Log Analytics aracısını sanal makine uzantısı yayımlandı ve Microsoft tarafından desteklenmiyor. Uzantı, Azure sanal makinelerinde Log Analytics aracısını yükler ve sanal makinelerin mevcut bir Log Analytics çalışma alanına kaydeder. Bu belgede, Linux için Azure Izleyici sanal makine uzantısı için desteklenen platformlar, konfigürasyonlar ve dağıtım seçenekleri ayrıntılı olarak Izlenir.
 
 >[!NOTE]
 >Azure İzleyici devam eden Microsoft Operations Management Suite (OMS) gelen geçiş işleminin bir parçası olarak için OMS aracısını Windows veya Linux için Windows ve Log Analytics aracısını Linux için Log Analytics aracısını olarak adlandırılır.
@@ -37,43 +36,14 @@ Azure İzleyici günlüklerine, Bulut ve şirket içi varlıkları arasında izl
 
 ### <a name="operating-system"></a>İşletim sistemi
 
-Log Analytics aracısını uzantısı bu Linux dağıtımları karşı çalıştırabilirsiniz.
-
-| Dağıtım | Sürüm |
-|---|---|
-| CentOS Linux | (x86/x64) 6 ve 7 (x 64) |
-| Amazon Linux | 2017.09 (x64) | 
-| Oracle Linux | 6 ve 7 (x86/x64) |
-| Red Hat Enterprise Linux Server | (x86/x64) 6 ve 7 (x 64) |
-| Debian GNU/Linux | 8 ve 9 (x86/x64) |
-| Ubuntu | 14.04 (x86/x64) LTS, 16.04 LTS (x86/x64) ve 18.04 LTS (x64) |
-| SUSE Linux Enterprise Server | 12 (x 64) ve 15 (x 64) |
-
->[!NOTE]
->OpenSSL sürümünden daha düşük 1.x herhangi bir platformda desteklenmiyor ve sürüm 1.10 (64-bit) x86_64 platformlarda desteklenir.  
->
-
-### <a name="agent-prerequisites"></a>Aracı önkoşulları
-
-Aşağıdaki tabloda, aracının yüklü olması desteklenen Linux dağıtımları için gereken paketleri vurgulanmaktadır.
-
-|Gerekli paket |Açıklama |En düşük sürüm |
-|-----------------|------------|----------------|
-|Glibc |    GNU C Kitaplığı | 2.5-12 
-|Openssl    | OpenSSL kitaplıkları | 1.0.x veya 1.1.x |
-|Curl | cURL web istemcisi | 7.15.5 |
-|Python-ctypes | | 
-|PAM | Eklenebilir kimlik doğrulaması modülleri | | 
-
->[!NOTE]
->Rsyslog veya syslog-ng, syslog iletileri toplamak için gereklidir. Red Hat Enterprise Linux, CentOS ve Oracle Linux sürümü (sysklog) 5 sürümünde varsayılan syslog daemon'u syslog olay toplaması için desteklenmiyor. Bu dağıtımları sürümünden Syslog verilerini toplamak için rsyslog daemon'u yüklenmeli ve sysklog değiştirmek için yapılandırılmış.
+Desteklenen Linux dağıtımları hakkında daha fazla bilgi için [Log Analytics aracısına genel bakış](../../azure-monitor/platform/log-analytics-agent.md#supported-linux-operating-systems) makalesine bakın.
 
 ### <a name="agent-and-vm-extension-version"></a>Aracı ve VM uzantısı sürümü
-Aşağıdaki tabloda, her sürüm için Log Analytics aracısını paketi ve Azure İzleyicisi VM uzantısı sürümünü bir eşleme sağlar. Log Analytics aracı Paket sürümü için sürüm notları için bir bağlantı bulunur. Sürüm Notları, hata düzeltmeleri ve belirli bir aracı sürüm için yeni özellikler hakkında ayrıntılı bilgi içerir.  
+Aşağıdaki tabloda, Azure Izleyici VM uzantısının sürümü ve her sürüm için Log Analytics aracı paketi eşleştirmesi verilmiştir. Log Analytics aracı Paket sürümü için sürüm notları için bir bağlantı bulunur. Sürüm Notları, hata düzeltmeleri ve belirli bir aracı sürüm için yeni özellikler hakkında ayrıntılı bilgi içerir.  
 
-| Azure İzleyici Linux VM uzantısı sürümü | Log Analytics aracısını Paket sürümü | 
+| Azure Izleyici Linux VM Uzantısı sürümü | Log Analytics aracısını Paket sürümü | 
 |--------------------------------|--------------------------|
-| 1.11.9 | [1.11.0-7](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.11.0-7) |
+| 1.11.15 | [1.11.0-9](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.11.0-9) |
 | 1.10.0 | [1.10.0-1](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.10.0-1) |
 | 1.9.1 | [1.9.0-0](https://github.com/Microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.9.0-0) |
 | 1.8.11 | [1.8.1-256](https://github.com/Microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.8.1.256)| 
@@ -145,9 +115,9 @@ Log Analytics aracısını Uzantı Şeması aşağıdaki JSON'u göstermektedir.
 
 ## <a name="template-deployment"></a>Şablon dağıtımı
 
-Azure VM uzantıları Azure Resource Manager şablonları ile dağıtılabilir. Şablonları, bir veya daha fazla Azure İzleyici günlüklerine ekleme gibi dağıtım sonrası yapılandırma gerektiren sanal makineler dağıtırken idealdir. Log Analytics aracısını VM uzantısı içeren örnek bir Resource Manager şablonu bulunabilir [Azure hızlı başlangıç Galerisine](https://github.com/Azure/azure-quickstart-templates/tree/master/201-oms-extension-ubuntu-vm). 
+Azure VM uzantıları Azure Resource Manager şablonları ile dağıtılabilir. Azure Izleyici günlüklerine ekleme gibi dağıtım sonrası yapılandırma gerektiren bir veya daha fazla sanal makine dağıtımında şablonlar idealdir. Log Analytics Aracısı VM uzantısını içeren örnek bir Kaynak Yöneticisi şablonu [Azure hızlı başlangıç galerisinde](https://github.com/Azure/azure-quickstart-templates/tree/master/201-oms-extension-ubuntu-vm)bulunabilir. 
 
-Sanal makine uzantısı için JSON yapılandırma içinde sanal makine kaynağı iç içe geçmiş veya kök veya bir Resource Manager JSON şablonunu üst düzey yerleştirilir. Kaynak adı ve türü değeri JSON yapılandırma yerleşimini etkiler. Daha fazla bilgi için [ayarlamak için alt kaynakları ad ve tür](../../azure-resource-manager/resource-group-authoring-templates.md#child-resources). 
+Sanal makine uzantısı için JSON yapılandırma içinde sanal makine kaynağı iç içe geçmiş veya kök veya bir Resource Manager JSON şablonunu üst düzey yerleştirilir. Kaynak adı ve türü değeri JSON yapılandırma yerleşimini etkiler. Daha fazla bilgi için [ayarlamak için alt kaynakları ad ve tür](../../azure-resource-manager/child-resource-name-type.md). 
 
 Aşağıdaki örnekte, VM uzantısını sanal makine kaynağı içinde iç içe varsayılır. İç içe uzantısı kaynak, JSON yerleştirildi `"resources": []` sanal makinenin nesne.
 
@@ -201,7 +171,7 @@ Uzantı JSON şablonu kökünde yerleştirilirken, kaynak adı üst sanal makine
 
 ## <a name="azure-cli-deployment"></a>Azure CLI dağıtım
 
-Azure CLI, mevcut bir sanal makine için Log Analytics Aracısı VM uzantısını dağıtmak için kullanılabilir. Değiştirin *Workspaceıd* ve *workspaceKey* Log Analytics çalışma alanınızın değerlerle. 
+Azure CLI, mevcut bir sanal makine için Log Analytics Aracısı VM uzantısını dağıtmak için kullanılabilir. Aşağıdaki *myworkspacekey anahtarınızla* değerini çalışma alanı anahtarınızla ve *MyWorkspace ID* değerini çalışma alanı Kimliğinizle değiştirin. Bu değerler, *Gelişmiş ayarlar*altında Azure Portal Log Analytics çalışma alanınızda bulunabilir. 
 
 ```azurecli
 az vm extension set \
@@ -209,8 +179,8 @@ az vm extension set \
   --vm-name myVM \
   --name OmsAgentForLinux \
   --publisher Microsoft.EnterpriseCloud.Monitoring \
-  --version 1.7 --protected-settings '{"workspaceKey": "omskey"}' \
-  --settings '{"workspaceId": "omsid"}'
+  --version 1.10.1 --protected-settings '{"workspaceKey":"myWorkspaceKey"}' \
+  --settings '{"workspaceId":"myWorkspaceId"}'
 ```
 
 ## <a name="troubleshoot-and-support"></a>Sorun giderme ve Destek
@@ -240,7 +210,7 @@ Uzantı yürütme çıkış aşağıdaki dosyasına kaydedilir:
 | 19 | OMI paket yükleme hatası | 
 | 20 | SCX paket yükleme hatası |
 | 51 | Bu uzantı sanal makinenin işletim sistemi üzerinde desteklenmiyor | |
-| 55 | Bağlantı kurulamıyor Azure İzleyici hizmeti veya gerekli paketleri eksik veya dpkg Paket Yöneticisi kilitli| Sistem ya da Internet erişimi veya geçerli bir HTTP proxy'sinin sağlanan sahip olmadığını denetleyin. Ayrıca, çalışma alanı kimliği doğruluğunu denetleyin ve curl ve tar yardımcı programları yüklü olmadığını doğrulayın. |
+| 55 | Azure Izleyici hizmetine bağlanılamıyor veya gerekli paketler eksik veya dpkg Paket Yöneticisi kilitli| Sistem ya da Internet erişimi veya geçerli bir HTTP proxy'sinin sağlanan sahip olmadığını denetleyin. Ayrıca, çalışma alanı kimliği doğruluğunu denetleyin ve curl ve tar yardımcı programları yüklü olmadığını doğrulayın. |
 
 Ek bilgiler bulunabilir [Log Analytics aracısı için Linux sorun giderme kılavuzu](../../azure-monitor/platform/vmext-troubleshoot.md).
 

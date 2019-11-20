@@ -1,6 +1,6 @@
 ---
-title: Azure Media Services ve Azure CLI ile video dosyaları Stream | Microsoft Docs
-description: Yeni bir Azure Media Services hesabı oluşturma, bir dosya kodlama ve Azure Media Player ile akış için bu öğreticideki adımları izleyin.
+title: Azure Media Services ve Azure CLı ile video dosyaları akışı | Microsoft Docs
+description: Bu öğreticinin adımlarını izleyerek yeni bir Azure Media Services hesabı oluşturun, bir dosya kodlayın ve Azure Media Player için akışını yapın.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -11,22 +11,22 @@ ms.service: media-services
 ms.workload: media
 ms.topic: tutorial
 ms.custom: ''
-ms.date: 02/19/2019
+ms.date: 08/19/2019
 ms.author: juliako
-ms.openlocfilehash: cce424b11cc4cd587c6e7c50bc8bdf988004a43a
-ms.sourcegitcommit: f013c433b18de2788bf09b98926c7136b15d36f1
+ms.openlocfilehash: 58193a94d09dee5df611acf5d98c8661dd18abbb
+ms.sourcegitcommit: 36e9cbd767b3f12d3524fadc2b50b281458122dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/13/2019
-ms.locfileid: "65550193"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69639977"
 ---
-# <a name="tutorial-stream-video-files---cli"></a>Öğretici: Stream video dosyaları - CLI
+# <a name="tutorial-encode-a-remote-file-based-on-url-and-stream-the-video---cli"></a>Öğretici: URL 'yi temel alan uzak bir dosyayı kodlayın ve video CLı 'YI akışa sunun
 
-Bu öğreticide, kolayca kodlayın ve bunların Azure Media Services ve Azure CLI kullanarak tarayıcılar ve cihazlar çeşitli videoların akışını gösterilmektedir. Azure Blob depolamadaki dosyaları, HTTPS veya SAS URL'lerini veya yolları kullanarak giriş içeriği belirtebilirsiniz.
+Bu öğreticide, Azure Media Services ve Azure CLı kullanarak çeşitli tarayıcılarda ve cihazlarda videoların kolayca nasıl kodlanacağı ve akış akışının nasıl yapılacağı gösterilmektedir. HTTPS veya SAS URL 'Leri ya da Azure Blob depolama alanındaki dosyalara yollar kullanarak giriş içeriği belirtebilirsiniz.
 
-Bu makalede örnek bir HTTPS URL'si aracılığıyla erişilebilir duruma içerik kodlar. Media Services v3 öbekli aktarım kodlamasını HTTPS URL'lerini şu anda desteklemiyor.
+Bu makaledeki örnek, bir HTTPS URL 'SI aracılığıyla erişilebilir hale getirmek istediğiniz içeriği kodluyor. Media Services v3 Şu anda HTTPS URL 'Leri üzerinden öbekli aktarım kodlamasını desteklememektedir.
 
-Bu öğreticinin sonunda bir video akışını yapmak mümkün olacaktır.  
+Bu öğreticinin sonuna kadar video akışı sağlayabileceksiniz.  
 
 ![Videoyu yürütme](./media/stream-files-dotnet-quickstart/final-video.png)
 
@@ -34,11 +34,11 @@ Bu öğreticinin sonunda bir video akışını yapmak mümkün olacaktır.
 
 ## <a name="create-a-media-services-account"></a>Media Services hesabı oluşturma
 
-Şifrelemek, kodlamak, analiz, yönetebilir ve azure'da medya içeriği akışı önce bir Media Services hesabı oluşturmanız gerekir. Bu hesabın bir veya daha fazla depolama hesapları ile ilişkili olması gerekir.
+Azure 'da medya içeriğini şifrelemeden, kodlamadan, çözümleyebilmeniz, yönetebilmeniz ve akışınızdan önce bir Media Services hesabı oluşturmanız gerekir. Bu hesabın bir veya daha fazla depolama hesabıyla ilişkilendirilmesi gerekir.
 
-Media Services hesabınızdan ve tüm ilişkili depolama hesapları aynı Azure aboneliğinde olması gerekir. Gecikme süresi ve veri kullanım maliyetleri sınırlamak için Media Services hesabıyla aynı yerde depolama hesaplarının kullanmanızı öneririz.
+Media Services hesabınız ve tüm ilişkili depolama hesaplarınız aynı Azure aboneliğinde olmalıdır. Gecikme ve veri çıkış maliyetlerini sınırlamak için Media Services hesabıyla aynı yerde olan depolama hesaplarını kullanmanızı öneririz.
 
-### <a name="create-a-resource-group"></a>Kaynak grubu oluşturun
+### <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
 ```azurecli
 az group create -n amsResourceGroup -l westus2
@@ -46,9 +46,9 @@ az group create -n amsResourceGroup -l westus2
 
 ### <a name="create-an-azure-storage-account"></a>Azure Storage hesabı oluşturma
 
-Bu örnekte, bir genel amaçlı v2 standart LRS hesabına oluştururuz.
+Bu örnekte, genel amaçlı v2 standart LRS hesabı oluşturacağız.
 
-Depolama hesapları ile denemek istiyorsanız, kullanın `--sku Standard_LRS`. Üretim için bir SKU seçilmesi sırasında kullanmayı `--sku Standard_RAGRS`, coğrafi çoğaltma için iş sürekliliği sağlar. Daha fazla bilgi için [depolama hesapları](https://docs.microsoft.com/cli/azure/storage/account?view=azure-cli-latest).
+Depolama hesaplarıyla denemek istiyorsanız kullanın `--sku Standard_LRS`. Üretim için bir SKU seçerken, iş sürekliliği için coğrafi çoğaltma `--sku Standard_RAGRS`sağlayan kullanmayı göz önünde bulundurun. Daha fazla bilgi için bkz. [depolama hesapları](https://docs.microsoft.com/cli/azure/storage/account?view=azure-cli-latest).
  
 ```azurecli
 az storage account create -n amsstorageaccount --kind StorageV2 --sku Standard_LRS -l westus2 -g amsResourceGroup
@@ -60,7 +60,7 @@ az storage account create -n amsstorageaccount --kind StorageV2 --sku Standard_L
 az ams account create --n amsaccount -g amsResourceGroup --storage-account amsstorageaccount -l westus2
 ```
 
-Şuna benzer bir yanıt olursunuz:
+Aşağıdakine benzer bir yanıt alırsınız:
 
 ```
 {
@@ -83,13 +83,13 @@ az ams account create --n amsaccount -g amsResourceGroup --storage-account amsst
 
 ## <a name="start-the-streaming-endpoint"></a>Akış uç noktasını başlatma
 
-Aşağıdaki Azure CLI komutu varsayılan başlar **akış uç noktası**.
+Aşağıdaki Azure CLı komutu varsayılan **akış uç noktasını**başlatır.
 
 ```azurecli
 az ams streaming-endpoint start  -n default -a amsaccount -g amsResourceGroup
 ```
 
-Şuna benzer bir yanıt olursunuz:
+Aşağıdakine benzer bir yanıt alırsınız:
 
 ```
 az ams streaming-endpoint start  -n default -a amsaccount -g amsResourceGroup
@@ -119,21 +119,21 @@ az ams streaming-endpoint start  -n default -a amsaccount -g amsResourceGroup
 }
 ```
 
-Akış uç noktasını zaten çalışıyorsa, bu iletiyi alırsınız:
+Akış uç noktası zaten çalışıyorsa şu iletiyi alırsınız:
 
 ```
 (InvalidOperation) The server cannot execute the operation in its current state.
 ```
 
-## <a name="create-a-transform-for-adaptive-bitrate-encoding"></a>Uyarlamalı bit hızlı kodlama için dönüşüm oluşturma
+## <a name="create-a-transform-for-adaptive-bitrate-encoding"></a>Uyarlamalı bit hızı kodlaması için bir dönüşüm oluşturun
 
-Oluşturma bir **dönüştürme** kodlama veya videoları analiz için ortak görevler yapılandırmak için. Bu örnekte, Uyarlamalı bit hızlı kodlama yapın. Biz ardından, oluşturduğumuz Dönüştür altında bir iş gönderin. Media Services belirli bir video veya ses içerik girişi Dönüşüm Uygulama isteğini işidir.
+Videoları kodlamak veya analiz etmek için ortak görevleri yapılandırmak üzere bir **dönüşüm** oluşturun. Bu örnekte, uyarlamalı bit hızı kodlaması yapacağız. Sonra, oluşturduğumuz dönüşümün altına bir iş gönderiyoruz. İş, verilen videoya veya ses içeriği girişine dönüştürmeyi uygulamak için Media Services isteğidir.
 
 ```azurecli
 az ams transform create --name testEncodingTransform --preset AdaptiveStreaming --description 'a simple Transform for Adaptive Bitrate Encoding' -g amsResourceGroup -a amsaccount
 ```
 
-Şuna benzer bir yanıt olursunuz:
+Aşağıdakine benzer bir yanıt alırsınız:
 
 ```
 {
@@ -159,13 +159,13 @@ az ams transform create --name testEncodingTransform --preset AdaptiveStreaming 
 
 ## <a name="create-an-output-asset"></a>Çıktı varlığı oluşturma
 
-Çıktı oluşturma **varlık** kodlama işinin çıktı olarak kullanmak için.
+Kodlama işinin çıkışı olarak kullanılacak bir çıktı **varlığı** oluşturun.
 
 ```azurecli
 az ams asset create -n testOutputAssetName -a amsaccount -g amsResourceGroup
 ```
 
-Şuna benzer bir yanıt olursunuz:
+Aşağıdakine benzer bir yanıt alırsınız:
 
 ```
 {
@@ -184,22 +184,22 @@ az ams asset create -n testOutputAssetName -a amsaccount -g amsResourceGroup
 }
 ```
 
-## <a name="start-a-job-by-using-https-input"></a>HTTPS giriş kullanarak iş Başlat
+## <a name="start-a-job-by-using-https-input"></a>HTTPS girişi kullanarak bir işi başlatma
 
-Videolarınızı işleyin işleri gönderdiğinizde, Media Services'ı giriş videosunun bulunacağı yeri bildirme gerekir. Bu örnekte gösterildiği gibi bir HTTPS URL'si iş girdisi belirtmek için bir seçenek olur.
+İşleri işlem videolarına gönderdiğinizde, Media Services Giriş videosunu nerede bulacağınızı söylemeniz gerekir. Bir seçenek, bu örnekte gösterildiği gibi, iş girişi olarak bir HTTPS URL 'SI belirtmektir.
 
-Çalıştırdığınızda `az ams job start`, bir etiket işin çıktı olarak ayarlayın. Etiket sonra çıktı varlığına ne olduğunu belirlemek için de kullanabilirsiniz.
+Çalıştırdığınızda `az ams job start`, iş çıktısında bir etiket ayarlayabilirsiniz. Daha sonra, çıktı varlığının ne için olduğunu tanımlamak için etiketini kullanabilirsiniz.
 
-- Etiket için bir değer atadığınız verilirse '--çıktı-varlıklarına "assetname label =".
-- Etiket için bir değer atamayın verilirse '--çıktı-varlıklarına "assetname =".
+- Etikete bir değer atarsanız, '--output-varlıklar ' öğesini "assetname = Label" olarak ayarlayın.
+- Etikete bir değer atamadıysanız, '--output-varlıklar ' öğesini "assetname =" olarak ayarlayın.
 
-  Eklediğimiz, "=" için fark `output-assets`.
+  ' A "=" `output-assets`eklediğimiz konusunda dikkat edin.
 
 ```azurecli
 az ams job start --name testJob001 --transform-name testEncodingTransform --base-uri 'https://nimbuscdn-nimbuspm.streaming.mediaservices.windows.net/2b533311-b215-4409-80af-529c3e853622/' --files 'Ignite-short.mp4' --output-assets testOutputAssetName= -a amsaccount -g amsResourceGroup 
 ```
 
-Şuna benzer bir yanıt olursunuz:
+Aşağıdakine benzer bir yanıt alırsınız:
 
 ```
 {
@@ -236,15 +236,15 @@ az ams job start --name testJob001 --transform-name testEncodingTransform --base
 
 ### <a name="check-status"></a>Durumu kontrol etme
 
-Beş dakika içinde işinin durumunu denetleyin. Bu "tamamlanması." Henüz tamamlanmadı, birkaç dakika içinde yeniden kontrol edin. Tamamlandığında, sonraki adıma gidin ve oluşturma bir **akış Bulucu**.
+Beş dakika içinde işin durumunu kontrol edin. "Tamamlandı" olmalıdır. Tamamlanmadı, birkaç dakika sonra yeniden denetleyin. İşiniz bittiğinde sonraki adıma gidin ve bir **akış Bulucu**oluşturun.
 
 ```azurecli
 az ams job show -a amsaccount -g amsResourceGroup -t testEncodingTransform -n testJob001
 ```
 
-## <a name="create-a-streaming-locator-and-get-a-path"></a>Akış Bulucusu oluşturmak ve bir yolunu alma
+## <a name="create-a-streaming-locator-and-get-a-path"></a>Akış Bulucu oluşturma ve yol alma
 
-Kodlama tamamlandıktan sonra sonraki adım video çıktı varlığı kullanılabilir kayıttan yürütme için istemcilere olmasını sağlamaktır. Bunu yapmak için önce bir akış Bulucu oluşturun. Ardından, istemcilerin kullandığı URL'leri akış oluşturun.
+Kodlama tamamlandıktan sonra, bir sonraki adım çıktı kıymetindeki videonun kayıttan yürütmeye yönelik olarak kullanılabilmesini sağlar. Bunu yapmak için ilk olarak bir akış Bulucu oluşturun. Ardından, istemcilerin kullanabileceği akış URL 'Leri oluşturun.
 
 ### <a name="create-a-streaming-locator"></a>Akış bulucusu oluşturma
 
@@ -252,7 +252,7 @@ Kodlama tamamlandıktan sonra sonraki adım video çıktı varlığı kullanıla
 az ams streaming-locator create -n testStreamingLocator --asset-name testOutputAssetName --streaming-policy-name Predefined_ClearStreamingOnly  -g amsResourceGroup -a amsaccount 
 ```
 
-Şuna benzer bir yanıt olursunuz:
+Aşağıdakine benzer bir yanıt alırsınız:
 
 ```
 {
@@ -272,13 +272,13 @@ az ams streaming-locator create -n testStreamingLocator --asset-name testOutputA
 }
 ```
 
-### <a name="get-streaming-locator-paths"></a>Akış Bulucusu yolları
+### <a name="get-streaming-locator-paths"></a>Akış Bulucu yollarını al
 
 ```azurecli
 az ams streaming-locator get-paths -a amsaccount -g amsResourceGroup -n testStreamingLocator
 ```
 
-Şuna benzer bir yanıt olursunuz:
+Aşağıdakine benzer bir yanıt alırsınız:
 
 ```
 {
@@ -309,42 +309,42 @@ az ams streaming-locator get-paths -a amsaccount -g amsResourceGroup -n testStre
 }
 ```
 
-HTTP canlı akış (HLS) yoluna kopyalayın. Bu durumda sahip `/e01b2be1-5ea4-42ca-ae5d-7fe704a5962f/ignite.ism/manifest(format=m3u8-aapl)`.
+HTTP canlı akış (HLS) yolunu kopyalayın. Bu durumda, `/e01b2be1-5ea4-42ca-ae5d-7fe704a5962f/ignite.ism/manifest(format=m3u8-aapl)`.
 
-## <a name="build-the-url"></a>URL oluştur 
+## <a name="build-the-url"></a>URL 'YI oluşturma 
 
 ### <a name="get-the-streaming-endpoint-host-name"></a>Akış uç noktası ana bilgisayar adını alma
 
 ```azurecli
 az ams streaming-endpoint list -a amsaccount -g amsResourceGroup -n default
 ```
-Kopyalama `hostName` değeri. Bu durumda sahip `amsaccount-usw22.streaming.media.azure.net`.
+`hostName` Değeri kopyalayın. Bu durumda, `amsaccount-usw22.streaming.media.azure.net`.
 
-### <a name="assemble-the-url"></a>URL bir araya getirin
+### <a name="assemble-the-url"></a>URL 'YI birleştirme
 
-"https:// " + &lt;hostName value&gt; + &lt;Hls path value&gt;
+"https://" + &lt;hostname değer&gt; + &lt;HLS yol değeri&gt;
 
 Bir örneği aşağıda verilmiştir:
 
 `https://amsaccount-usw22.streaming.media.azure.net/7f19e783-927b-4e0a-a1c0-8a140c49856c/ignite.ism/manifest(format=m3u8-aapl)`
 
-## <a name="test-playback-by-using-azure-media-player"></a>Azure Media Player'ı kullanarak, testi kayıttan yürütme
+## <a name="test-playback-by-using-azure-media-player"></a>Azure Media Player kullanarak kayıttan yürütmeyi test etme
 
 > [!NOTE]
-> Oyuncu bir HTTPS site üzerinde barındırılıyorsa, URL "https" ile başlatmak emin olun.
+> Bir oynatıcı HTTPS sitesinde barındırılıyorsa, URL 'YI "https" ile başlattığınızdan emin olun.
 
-1. Bir web tarayıcısı açın ve gidin [ https://aka.ms/azuremediaplayer/ ](https://aka.ms/azuremediaplayer/).
-2. İçinde **URL** kutusunda, önceki bölümde oluşturulan URL'yi yapıştırın. HLS, Dash veya kesintisiz biçiminde URL'yi yapıştırabilirsiniz. Azure Media Player, Cihazınızda kayıttan yürütme için uygun bir Akış Protokolü otomatik olarak kullanır.
-3. Seçin **Player güncelleştirme**.
+1. Bir Web tarayıcısı açın ve adresine gidin [https://aka.ms/azuremediaplayer/](https://aka.ms/azuremediaplayer/).
+2. **URL** kutusunda, önceki bölümde oluşturduğunuz URL 'yi yapıştırın. URL 'yi HLS, Dash veya düz biçimde yapıştırabilirsiniz. Azure Media Player, cihazınızda kayıttan yürütmek için otomatik olarak uygun bir akış protokolü kullanacaktır.
+3. **Oynatıcıyı Güncelleştir**' i seçin.
 
 >[!NOTE]
 >Azure Media Player, test için kullanılabilir, ancak üretim ortamında kullanılmamalıdır.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık herhangi bir kaynağa medya Hizmetleri ve Bu öğreticide, oluşturulan depolama hesapları dahil olmak üzere, kaynak grubundaki ihtiyacınız varsa, kaynak grubunu silin.
+Kaynak grubunuzda, bu öğretici için oluşturduğunuz Media Services ve depolama hesapları da dahil olmak üzere herhangi bir kaynağa ihtiyacınız yoksa, kaynak grubunu silin.
 
-Bu CLI komutunu çalıştırın:
+Bu CLı komutunu çalıştırın:
 
 ```azurecli
 az group delete --name amsResourceGroup
@@ -352,5 +352,5 @@ az group delete --name amsResourceGroup
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Media Services'e genel bakış](media-services-overview.md)
+[Media Services genel bakış](media-services-overview.md)
 

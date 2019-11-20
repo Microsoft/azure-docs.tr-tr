@@ -1,10 +1,10 @@
 ---
 title: IPv6 - Azure CLI ile bir genel yük dengeleyici oluşturma
-titlesuffix: Azure Load Balancer
-description: Azure CLI kullanarak IPv6 ile genel yük dengeleyici oluşturmayı öğrenin.
+titleSuffix: Azure Load Balancer
+description: Bu öğrenme yoluyla, Azure CLı kullanarak IPv6 ile genel yük dengeleyici oluşturmaya başlayın.
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 keywords: IPv6, azure yük dengeleyici, ikili yığın, genel IP, yerel IPv6, mobil veya IOT
 ms.service: load-balancer
 ms.devlang: na
@@ -13,16 +13,18 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/25/2018
-ms.author: kumud
-ms.openlocfilehash: 1caa8e7554024c3b2e3d86436d3d494d7995169a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: allensu
+ms.openlocfilehash: f7c0eb9bd258d2efbdb4df78f2cf86861f77a975
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60516693"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076025"
 ---
 # <a name="create-a-public-load-balancer-with-ipv6-using-azure-cli"></a>Azure CLI kullanarak IPv6 ile genel yük dengeleyici oluşturma
 
+>[! NOTE: IPv6 için En Iyi uygulamada değişiklik yapın] Bu makalede temel yük dengeleyiciler hem IPv4 hem de IPv6 bağlantısı sağlamasına izin veren bir giriş IPv6 özelliği açıklanır.  Daha kapsamlı IPv6 bağlantısı artık, sanal ağlarınızla IPv6 bağlantısını tümleştiren ve IPv6 ağ güvenlik grubu kuralları, IPv6 Kullanıcı tanımlı yönlendirme, IPv6 temel ve standart yük dengeleme gibi önemli özellikleri ve daha fazlasını içeren [Azure VNET 'ler Için IPv6](../virtual-network/ipv6-overview.md) ile kullanılabilir.  Azure sanal ağları için IPv6, Azure 'daki IPv6 uygulamaları için önerilen en iyi uygulamadır. 
+>Lütfen bkz. [Azure VNET CLI dağıtımı Için IPv6](../virtual-network/virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-cli.md)
 
 Azure Load Balancer bir Katman 4 (TCP, UDP) yük dengeleyicidir. Yük Dengeleyici, gelen trafiği bulut hizmetlerindeki sağlıklı hizmet örnekleri veya bir yük dengeleyici kümesindeki sanal makineler arasında dağıtarak yüksek kullanılabilirlik sağlar. Yük Dengeleyiciler bu hizmetleri birden çok bağlantı noktası veya birden çok IP adresi veya her ikisini de sunabilir.
 
@@ -46,11 +48,11 @@ Aşağıdaki adımlarda, Azure CLI kullanarak herkese açık yük dengeleyici ol
 
 Yük Dengeleyici dağıtmak için oluşturun ve aşağıdaki nesneleri yapılandırın:
 
-* **Ön uç IP yapılandırmasını**: Gelen ağ trafiği için genel IP adreslerini içerir.
-* **Arka uç adres havuzu**: Sanal makinelerin yük dengeleyiciden ağ trafiği alması için ağ arabirimlerini (NIC'ler) içerir.
-* **Yük Dengeleme kuralları**: Yük Dengeleyici üzerindeki bir genel bağlantı noktasını arka uç adres havuzundaki bağlantı noktasına eşleyen kuralları içerir.
-* **Gelen NAT kuralları**: Yük Dengeleyici üzerindeki bir genel bağlantı noktasını arka uç adres havuzundaki belirli bir sanal makineye ait bağlantı noktasına eşlenen ağ adresi çevirisi (NAT) kuralları içerir.
-* **Araştırmalar**: Arka uç adres havuzundaki sanal makine örneklerinin kullanılabilirliğini kontrol etmek için kullanılan durum araştırmalarını içerir.
+* **Ön uç IP yapılandırmasını**: gelen ağ trafiği için genel IP adreslerini içerir.
+* **Arka uç adres havuzu**: sanal makinelerin yük dengeleyiciden ağ trafiği alması için ağ arabirimlerini (NIC'ler) içerir.
+* **Yük Dengeleme kuralları**: yük dengeleyici üzerindeki bir genel bağlantı noktasını arka uç adres havuzundaki bağlantı noktasına eşleyen kuralları içerir.
+* **Gelen NAT kuralları**: yük dengeleyici üzerindeki bir genel bağlantı noktasını arka uç adres havuzundaki belirli bir sanal makineye ait bağlantı noktasına eşlenen ağ adresi çevirisi (NAT) kuralları içerir.
+* **Araştırmalar**: arka uç adres havuzundaki sanal makine örneklerinin kullanılabilirliğini kontrol etmek için kullanılan durum araştırmalarını içerir.
 
 ## <a name="set-up-azure-cli"></a>Azure CLI'yı ayarlama
 
@@ -296,8 +298,4 @@ Sanal makineler oluşturmak için bir depolama hesabı olmalıdır. Yük Dengele
     az vm create --resource-group $rgname --name $vm2Name --image $imageurn --admin-username $vmUserName --admin-password $mySecurePassword --nics $nic2Id --location $location --availability-set $availabilitySetName --size "Standard_A1" 
     ```
 
-## <a name="next-steps"></a>Sonraki adımlar
 
-[Bir iç yük dengeleyici yapılandırmaya başlayın](load-balancer-get-started-ilb-arm-cli.md)  
-[Yük dengeleyici dağıtım modu yapılandırma](load-balancer-distribution-mode.md)  
-[Yük dengeleyiciniz için boşta TCP zaman aşımı ayarlarını yapılandırma](load-balancer-tcp-idle-timeout.md)

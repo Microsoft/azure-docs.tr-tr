@@ -1,28 +1,28 @@
 ---
-title: Azure Site Recovery ile azure'a VMware VM'LERİNDE olağanüstü durum kurtarma sırasında şirket içine yeniden çalışma sorunlarını giderme | Microsoft Docs
-description: Bu makalede, azure'da Azure Site Recovery ile VMware VM'LERİNDE olağanüstü durum kurtarma sırasında yeniden çalışma ve yeniden koruma sorunlarını gidermenin yolları açıklanır.
-author: vDonGlover
-manager: JarrettRenshaw
+title: Azure Site Recovery 'de VMware vCenter bulma hatalarıyla ilgili sorunları giderme
+description: Bu makalede Azure Site Recovery 'de VMware vCenter bulma hatalarının nasıl giderileceği açıklanır.
+author: mayurigupta13
+manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 02/19/2019
-ms.author: v-doglov
-ms.openlocfilehash: c598c5e238458c010500579c5371622b85e71de0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 10/29/2019
+ms.author: mayg
+ms.openlocfilehash: f00c7b12accde9df9a5708a2b8b378d70428318d
+ms.sourcegitcommit: a170b69b592e6e7e5cc816dabc0246f97897cb0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60565200"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74091248"
 ---
-# <a name="troubleshoot-vcenter-discovery-failures"></a>VCenter bulma sorunlarını giderme
+# <a name="troubleshoot-vcenter-server-discovery-failures"></a>vCenter Server bulma hatalarıyla ilgili sorunları giderme
 
-Bu makalede, VMware vCenter bulma hataları nedeniyle oluşan sorunları gidermenize yardımcı olur.
+Bu makale, VMware vCenter bulma hataları nedeniyle oluşan sorunları gidermenize yardımcı olur.
 
-## <a name="non-numeric-values-in-the-maxsnapshots-property"></a>Sayısal olmayan değerleri maxSnapShots özelliği
+## <a name="non-numeric-values-in-the-maxsnapshots-property"></a>MaxSnapShots özelliğindeki sayısal olmayan değerler
 
-Özellik için bir sayısal olmayan değer aldığında 9.20 önceki sürümlerinde, vCenter bağlantısını keser `snapshot.maxSnapShots` bir VM'de özelliği.
+9,20 ' den önceki sürümlerde vCenter, bir VM 'deki Özellik `snapshot.maxSnapShots` özelliği için sayısal olmayan bir değer aldığında bağlantı kesilir.
 
-Bu sorun, hata kimliği 95126 tarafından tanımlanır.
+Bu sorun 95126 hata KIMLIĞIYLE tanımlanır.
 
     ERROR :: Hit an exception while fetching the required informationfrom vCenter/vSphere.Exception details:
     System.FormatException: Input string was not in a correct format.
@@ -30,53 +30,53 @@ Bu sorun, hata kimliği 95126 tarafından tanımlanır.
        at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
        at VMware.VSphere.Management.InfraContracts.VirtualMachineInfo.get_MaxSnapshots()
     
-Bu sorunu çözmek için:
+Sorunu çözmek için:
 
-- Sanal makine belirleyin ve değeri bir sayısal değer (vcenter ayarlarını VM Düzenle) ayarlayın.
+- VM 'yi belirleyin ve değeri sayısal bir değere ayarlayın (vCenter 'da VM düzenleme ayarları).
 
-Or
+Veya
 
-- Yapılandırma sunucunuzda 9.20 veya üzeri sürüme yükseltin.
+- Yapılandırma sunucunuzu 9,20 veya sonraki bir sürüme yükseltin.
 
 ## <a name="proxy-configuration-issues-for-vcenter-connectivity"></a>VCenter bağlantısı için proxy yapılandırma sorunları
 
-vCenter bulma sistem kullanıcı tarafından yapılandırılan sistem varsayılan proxy ayarlarını korur. DRA hizmeti birleşik Kurulum Yükleyici veya OVA şablonunu kullanarak yapılandırma sunucusu yüklemesi sırasında kullanıcı tarafından sağlanan proxy ayarlarını korur. 
+vCenter Discovery sistem kullanıcısı tarafından yapılandırılan sistem varsayılan proxy ayarlarını geliştirir. DRA hizmeti, Birleşik kurulum yükleyicisi veya OVA şablonu kullanılarak yapılandırma sunucusu yüklenirken Kullanıcı tarafından belirtilen proxy ayarlarını kabul eder. 
 
-Genel olarak, proxy ortak ağlara iletişim kurmak için kullanılır; Azure ile iletişim kurma gibi. Proxy yapılandırılır ve yerel bir ortamda vCenter ise, DRA ile iletişim kurmak mümkün olmayacaktır.
+Genel olarak, ara sunucu ortak ağlarla iletişim kurmak için kullanılır; Azure ile iletişim kurma gibi. Ara sunucu yapılandırıldıysa ve vCenter yerel ortamındaysanız, DRA ile iletişim kuramaz.
 
-Bu sorun oluştuğunda aşağıdaki durumlarda oluşur:
+Bu sorunla karşılaşıldığında aşağıdaki durumlar oluşur:
 
-- VCenter server \<vCenter > hata nedeniyle erişilebilir değil: Uzak sunucu hata döndürdü: (503) sunucusu kullanılamıyor
-- VCenter server \<vCenter > hata nedeniyle erişilebilir değil: Uzak sunucu hata döndürdü: Uzak sunucuya bağlanılamıyor.
-- VCenter/ESXi sunucusuna bağlanılamıyor.
+- VCenter Server \<vCenter > Şu hata nedeniyle erişilebilir değil: uzak sunucu bir hata döndürdü: (503) sunucu kullanılamıyor
+- VCenter Server \<vCenter > Şu hata nedeniyle erişilebilir değil: uzak sunucu bir hata döndürdü: uzak sunucuya bağlanılamıyor.
+- VCenter/ESXi sunucusuyla bağlantı kurulamıyor.
 
-Bu sorunu çözmek için:
+Sorunu çözmek için:
 
-İndirme [PsExec aracı](https://aka.ms/PsExec). 
+[PsExec aracını](https://aka.ms/PsExec)indirin. 
 
-Sistem kullanıcı bağlamı erişmek ve proxy adresi yapılandırılıp yapılandırılmadığını belirlemek için PsExec aracını kullanın. Bu gibi durumlarda, vCenter ardından aşağıdaki yordamları kullanarak atlama listesine ekleyebilirsiniz.
+Sistem Kullanıcı bağlamına erişmek ve proxy adresinin yapılandırılıp yapılandırılmadığını öğrenmek için PsExec aracını kullanın. Ardından aşağıdaki yordamları kullanarak atlama listesine vCenter ekleyebilirsiniz.
 
-Keşif proxy yapılandırması için:
+Bulma proxy yapılandırması için:
 
-1. PsExec aracını kullanarak sistem kullanıcı bağlamı IE'de Aç.
+1. PsExec aracını kullanarak IE 'yi sistem kullanıcı bağlamında açın.
     
-    psexec -s -i "%programfiles%\Internet Explorer\iexplore.exe"
+    PsExec-s-i "%ProgramFiles%\Internet Explorer\iexplore.exe"
 
-2. Internet Explorer'ı vCenter IP adresini atlamak için Proxy'yi değiştirin.
+2. Internet Explorer 'daki proxy ayarlarını, vCenter IP adresini atlayacak şekilde değiştirin.
 3. Tmanssvc hizmetini yeniden başlatın.
 
 DRA proxy yapılandırması için:
 
-1. Bir komut istemi açın ve Microsoft Azure Site Recovery sağlayıcısı klasörü açın.
+1. Bir komut istemi açın ve Microsoft Azure Site Recovery sağlayıcı klasörünü açın.
  
     **CD C:\Program Files\Microsoft Azure Site Recovery sağlayıcısı**
 
 3. Komut isteminden aşağıdaki komutu çalıştırın.
    
-   **DRCONFIGURATOR. EXE / /AddBypassUrls configure [IP adresini/FQDN'yi Server vCenter ekleme zamanında sağlanan vCenter'ın]**
+   **DRCONFIGURATOR. EXE/configure/AddBypassUrls [vCenter ekleme sırasında belirtilen vCenter Server IP adresi/FQDN 'SI]**
 
-4. DRA Sağlayıcı hizmetini yeniden başlatın.
+4. DRA sağlayıcı hizmetini yeniden başlatın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[VMware VM'LERİNDE olağanüstü durum kurtarma için yapılandırma sunucusunu yönetme](https://docs.microsoft.com/azure/site-recovery/vmware-azure-manage-configuration-server#refresh-configuration-server) 
+[VMware VM olağanüstü durum kurtarma için yapılandırma sunucusunu yönetme](https://docs.microsoft.com/azure/site-recovery/vmware-azure-manage-configuration-server#refresh-configuration-server) 

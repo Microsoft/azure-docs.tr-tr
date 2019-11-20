@@ -1,6 +1,6 @@
 ---
-title: Azure depolama ortamlarına - Team Data Science Process veri yükleme
-description: Azure Blob Depolamadan/Depolamaya Veri Taşıma
+title: Azure depolama ortamlarına veri yükleme-Team Data Science süreci
+description: Verilerin depolandığı ve işlendiği çeşitli hedef ortamlara veri alma hakkında bilgi edinin.
 services: machine-learning
 author: marktab
 manager: cgronlun
@@ -11,24 +11,24 @@ ms.topic: article
 ms.date: 11/09/2017
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 56c45bf6db79ded64574a44399712951e82c1c3e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 515decfafe46ad0c1b5b90743688abc26a975903
+ms.sourcegitcommit: 87efc325493b1cae546e4cc4b89d9a5e3df94d31
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60303596"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73053255"
 ---
 # <a name="load-data-into-storage-environments-for-analytics"></a>Analiz için depolama ortamlarına veri yükleme
 
-Team Data Science Process veri veya alınan farklı depolama ortamları işlenen ya da işlemin her aşamasında en uygun şekilde analiz için çeşitli yüklenmiş olmasını gerektirir. Azure Blob Depolama, SQL Azure veritabanı, SQL Server Azure VM, HDInsight (Hadoop) ve Azure Machine Learning işlemi için yaygın olarak kullanılan veri hedefleri içerir. 
+Ekip veri bilimi süreci, verilerin her bir aşamasında işlenmek veya analiz edilmesi için verilerin farklı depolama ortamlarına toplanmasını veya bu ortamlara yüklenmesini gerektirir. Genellikle işlenmek üzere kullanılan veri hedefleri Azure Blob depolama, SQL Azure veritabanları, Azure VM 'de SQL Server, HDInsight (Hadoop) ve Azure Machine Learning dahildir. 
 
-Aşağıdaki makaleler, verileri nerede depolanan ve işlenen çeşitli hedef ortamlara verilerin alımı açıklanmaktadır.
+Aşağıdaki makalelerde verilerin depolandığı ve işlendiği çeşitli hedef ortamlara veri alma işlemi açıklanır.
 
-* / Veri deposundan [Azure Blob Depolama](move-azure-blob.md)
-* İçin [Azure vm'lerde SQL Server](move-sql-server-virtual-machine.md)
-* İçin [Azure SQL veritabanı](move-sql-azure.md)
-* İçin [Hive tabloları](move-hive-tables.md)
-* İçin [SQL bölümlenmiş tabloları](parallel-load-sql-partitioned-tables.md)
-* Gelen [şirket içi SQL Server](move-sql-azure-adf.md)
+* [Azure Blob depolama alanı](move-azure-blob.md) /
+* [Azure VM 'de SQL Server](move-sql-server-virtual-machine.md) için
+* [Azure SQL veritabanı](move-sql-azure.md) 'na
+* [Hive tablolarına](move-hive-tables.md)
+* [SQL bölümlenmiş tablolara](parallel-load-sql-partitioned-tables.md)
+* Şirket [içi SQL Server](move-sql-azure-adf.md)
 
-İlk konum yanı sıra teknik ve iş gereksinimlerini biçimlendirin ve hangi verilerin analiz hedeflere ulaşmak için alınan gereken hedef ortamlarında, verilerin boyutunu belirler. Seyrek Tahmine dayalı bir model oluşturmak için gereken görevler çeşitli ulaşmak için birden fazla ortam arasında taşınacak veri gerektiren bir senaryo değildir. Bu görev dizisi, örneğin, bir veri keşfi, ön işleme, temizleme, aşağı örnekleme ve model eğitiminin içerebilir.
+Teknik ve iş ihtiyaçlarına ek olarak verilerinizin ilk konumu, biçimi ve boyutu, analizinizdeki hedeflere ulaşmak için verilerin alınması gereken hedef ortamları tespit eder. Tahmine dayalı bir model oluşturmak için gereken çeşitli görevleri elde etmek üzere çeşitli ortamlar arasında veri taşınmasını gerektiren bir senaryoda bu durum yaygın olmayan bir durumdur. Bu görev dizisi, örneğin veri araştırma, ön işleme, Temizleme, alt örnekleme ve model eğitimi gibi olabilir.

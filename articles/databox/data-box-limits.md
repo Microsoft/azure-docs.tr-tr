@@ -1,37 +1,38 @@
 ---
-title: Azure Data Box sınırlar | Microsoft Docs
-description: Sistem sınırlarını ve Microsoft Azure Data Box bileşenleri ve bağlantıları için önerilen boyutları açıklar.
+title: Azure Data Box sınırları | Microsoft Docs
+description: Microsoft Azure Data Box bileşenleri ve bağlantıları için sistem sınırlarını ve önerilen boyutları açıklar.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: pod
 ms.topic: article
-ms.date: 05/21/2019
+ms.date: 08/27/2019
 ms.author: alkohli
-ms.openlocfilehash: 2e1ed8df490343e569f9466fd56458f652dafaf6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 13d5bce46883ea4ddca91d7222f68a19ba65c21c
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66244583"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098808"
 ---
 # <a name="azure-data-box-limits"></a>Azure Data Box sınırları
 
-Limitler, dağıtmanıza ve Microsoft Azure Data Box'ınızı gibi düşünün. Aşağıdaki tabloda Data Box için limitler açıklanmaktadır.
+Microsoft Azure Data Box dağıtıp işletirken bu limitleri göz önünde bulundurun. Aşağıdaki tabloda Data Box için bu sınırlar açıklanmaktadır.
 
-## <a name="data-box-service-limits"></a>Veri kutusu hizmeti sınırları
+## <a name="data-box-service-limits"></a>Hizmet sınırlarını Data Box
 
 [!INCLUDE [data-box-service-limits](../../includes/data-box-service-limits.md)]
 
-## <a name="data-box-limits"></a>Veri kutusu sınırları
+## <a name="data-box-limits"></a>Data Box sınırları
 
-- Veri kutusu en fazla 500 milyon dosya depolayabilir.
+- Data Box, en fazla 500.000.000 dosya saklayabilir.
+- Data Box buluttaki en fazla 512 kapsayıcıyı veya paylaşımı destekler. Kullanıcı paylaşımı içindeki en üst düzey dizinler, bulutta kapsayıcılar veya Azure dosya paylaşımları haline gelir. 
 
 ## <a name="azure-storage-limits"></a>Azure depolama sınırları
 
 [!INCLUDE [data-box-storage-limits](../../includes/data-box-storage-limits.md)]
 
-## <a name="data-upload-caveats"></a>Uyarılar karşıya veri yükleme
+## <a name="data-upload-caveats"></a>Karşıya veri yükleme uyarıları
 
 [!INCLUDE [data-box-data-upload-caveats](../../includes/data-box-data-upload-caveats.md)]
 
@@ -43,6 +44,6 @@ Limitler, dağıtmanıza ve Microsoft Azure Data Box'ınızı gibi düşünün. 
 
 [!INCLUDE [data-box-object-size-limits](../../includes/data-box-object-size-limits.md)]
 
-## <a name="azure-block-blob-page-blob-and-file-naming-conventions"></a>Azure blok blobu, sayfa blobu ve dosya adlandırma kuralları
+## <a name="azure-block-blob-page-blob-and-file-naming-conventions"></a>Azure Blok Blobu, Sayfa Blobu ve dosya adlandırma kuralları
 
 [!INCLUDE [data-box-naming-conventions](../../includes/data-box-naming-conventions.md)]

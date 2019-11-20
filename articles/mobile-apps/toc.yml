@@ -1,0 +1,48 @@
+- name: Microsoft hizmetleriyle gerçek dünya mobil uygulamaları oluşturma
+  href: index.md
+- name: Mobil uygulama oluşturma aşamaları
+  items:
+    - name: Genel Bakış
+      href: stages-overview.md
+    - name: Mobil geliştirme çerçevesini seçme
+      href: front-end-development-platform.md
+    - name: Arka uç hizmetleriyle mobil uygulama planlama ve tasarlama
+      items:
+        - name: Kimlik Doğrulaması
+          href: authentication.md
+        - name: Veri depolama
+          href: data-storage.md
+        - name: Sunucusuz işlem
+          href: serverless-compute.md
+        - name: Azure Storage
+          href: azure-storage.md
+        - name: Gerçek zamanlı uygulamalar
+          href: real-time.md
+    - name: Kaynak denetimi
+      href: code-hosting-services.md
+    - name: DevOps
+      items:
+        - name: DevOps nedir?
+          href: devops.md
+        - name: Sürekli derleme ve tümleştirme
+          href: continuous-integration.md
+        - name: Gerçek cihazlarda test etme
+          href: test.md
+        - name: Sürekli teslim
+          href: continuous-delivery.md
+    - name: Kullanımı ve kullanıcı davranışını analiz etme
+      href: analytics.md
+    - name: Gerçek zamanlı kilitlenme raporlaması
+      href: diagnostics.md
+    - name: Anında iletme bildirimleri
+      href: push-notifications.md
+- name: Ek hizmetler
+  items:
+    - name: Azure Bilişsel Hizmetler
+      href: cognitive-services.md
+    - name: Azure Haritalar
+      href: azure-maps.md
+    - name: Azure CDN
+      href: azure-cdn.md
+    - name: Azure Bilişsel Arama
+      href: azure-search.md

@@ -1,80 +1,79 @@
 ---
-title: Azure İzleyici uyarılar için ortak uyarı şeması
-description: Neden ve nasıl etkinleştirileceğini kullanmanız gerektiğini ortak bir uyarı şemasını anlama
-author: anantr
-services: azure-monitor
+title: Azure izleyici uyarıları için ortak uyarı şeması
+description: Ortak uyarı şemasını anlama, neden kullanılması gerekir ve nasıl etkinleştirilir?
 ms.service: azure-monitor
+ms.subservice: alerts
 ms.topic: conceptual
+author: anantr
+ms.author: robb
 ms.date: 03/14/2019
-ms.author: anantr
-ms.component: alerts
-ms.openlocfilehash: be38f5d3bbf4fe3d90fc78feab8774595b5338f2
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: ff5c0d96bd4bc87f36a69ca7e8014e118ac7b7bf
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67447663"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72552460"
 ---
 # <a name="common-alert-schema"></a>Ortak uyarı şeması
 
-Ortak uyarı şema nedir, bu makalede ve bunun nasıl etkinleştirileceğini kullanmanın avantajları.
+Bu makalede ortak uyarı şemasının ne olduğu, kullanmanın avantajları ve nasıl etkinleştirileceği açıklanır.
 
-## <a name="what-is-the-common-alert-schema"></a>Ortak uyarı şema nedir?
+## <a name="what-is-the-common-alert-schema"></a>Ortak uyarı şeması nedir?
 
-Ortak uyarı şema için uyarı bildirimleri Azure tüketim deneyimi bugün standart hale getirir. Tarihsel olarak, üç uyarı türlerini azure'da bugün (ölçümü, günlük ve etkinlik günlüğü) kendi e-posta şablonları, Web kancası şemaları vb. kalmışlardır. Ortak uyarı şeması ile tutarlı bir şema ile uyarı bildirimleri alabilir.
+Ortak uyarı şeması, bugün Azure 'daki uyarı bildirimleri için tüketim deneyimini standartlaştırır. Geçmişte, bugün Azure 'daki üç uyarı türü (ölçüm, günlük ve etkinlik günlüğü) kendi e-posta şablonlarına, Web kancası şemalarına vb. sahip. Ortak uyarı şeması ile, artık tutarlı bir şema ile uyarı bildirimleri alabilirsiniz.
 
-Herhangi bir uyarı örneği açıklar **etkilenen kaynak** ve **uyarının nedenini**, ve bu örnekler, ortak şema aşağıdaki bölümlerde açıklanmıştır:
-* **Essentials**: Bir dizi **standart alanlar**açıklayan tüm uyarı türleri arasında ortak **hangi kaynak** uyarı ek ortak uyarı meta verileri birlikte (örneğin, önem derecesi veya açıklama) belirtir. 
-* **Uyarı bağlamı**: Bir dizi tanımlayan alanları **uyarının neden**, farklı alanlara sahip **uyarı türüne göre**. Örneğin, bir etkinlik günlüğü uyarısı uyarının olayla ilgili bilgileri yoktur ancak bir ölçüm uyarısı uyarı bağlamındaki ölçüm değeri ve ölçüm adı gibi alanlarını gerekir. 
+Herhangi bir uyarı örneği, **etkilenen kaynağı** ve **uyarının nedenini**açıklar ve bu örnekler aşağıdaki bölümlerde ortak şemada açıklanmıştır:
+* **Temel bilgiler**: uyarının diğer yaygın uyarı meta verileri (örneğin, önem derecesi veya açıklama) ile birlikte **hangi kaynakla** ilgili olduğunu açıklayan tüm uyarı türlerinde ortak olan **standartlaştırılmış alanlar**kümesi. 
+* **Uyarı bağlamı**: Uyarı **türüne göre**değişen alanlarla, **uyarının nedenini**açıklayan bir alan kümesi. Örneğin, bir ölçüm uyarısında, uyarı bağlamındaki ölçüm adı ve ölçüm değeri gibi alanlar olabilir, ancak bir etkinlik günlüğü uyarısı uyarıyı oluşturan olay hakkında bilgi sahibi olur. 
 
-Müşterilerden aldığımız tipik tümleştirme senaryolarına sonra sorumlu takım çalışma üzerinde başladığı bazı pivot (örneğin, kaynak grubu), temel endişe ekibine bir uyarı örneğinin yönlendirme gerektirir. Ortak uyarı şeması ile yönlendirme mantığı uyarı türleri arasında önemli alanlar yararlanarak daha fazla araştırmak ilgili takımlar için bağlam alan bırakarak standartlaştırılmış.
+Müşterilerden aldığımız tipik tümleştirme senaryoları, uyarı örneğinin, sorumlu ekibin üzerinde çalışmaya başladığı bir Özet (örneğin, kaynak grubu) temelinde ilgili takıma yönlendirilmesini içerir. Ortak uyarı şeması sayesinde, önemli alanları kullanarak uyarı türlerinde standartlaştırılmış yönlendirme mantığınızı kullanabilirsiniz ve bağlam alanlarını ilgili takımların daha fazla araştırmasını sağlar.
 
-Bu, büyük olasılıkla daha az tümleştirmeleri, yönetme ve bunların bakımını yapma işlemi yapmadan olamayacağı anlamına gelir bir _çok_ daha basit bir görev. Ayrıca, gelecekte uyarı yükü zenginleştirmelerinin (örneğin, özelleştirme, tanılama zenginleştirme, vb.) yalnızca yukarı ortak şemada belirir.
+Diğer bir deyişle, _çok_ daha basit bir görevi yönetmek ve sürdürmek için daha az tümleştirmelere sahip olabilirsiniz. Ayrıca, gelecekteki uyarı yükü zenginleştirmelerinin (örneğin, özelleştirme, tanı zenginleştirme vb.) yalnızca ortak şemada çalışır.
 
-## <a name="what-enhancements-does-the-common-alert-schema-bring"></a>Ortak uyarı şema hangi geliştirmeleri getirir?
+## <a name="what-enhancements-does-the-common-alert-schema-bring"></a>Ortak uyarı şeması hangi geliştirmeleri getirir?
 
-Ortak uyarı şema öncelikle kendisi, Uyarı bildirimlerini bildirilmez. Göreceğiniz iyileştirmeleri aşağıda listelenmiştir:
+Ortak uyarı şeması öncelikle uyarı bildirimlerinde kendisini bildirir. Göreceğiniz geliştirmeler aşağıda listelenmiştir:
 
-| Eylem | Geliştirmeler|
+| Eylem | Gelişmeleri|
 |:---|:---|
-| SMS | Tüm uyarı türleri için tutarlı bir SMS şablonu. |
-| Email | Bir bakışta sorunlarını kolayca tanılamanıza olanak tanıyan tutarlı ve ayrıntılı bir e-posta şablonu. Portal ve etkilenen kaynak uyarı örneği için katıştırılmış derin bağlantılar hızlı düzeltme işlemine geçebilirsiniz emin olun. |
-| Web kancası/Logic App/Azure işlevi/Otomasyon Runbook'u | Tümleştirmeler farklı uyarı türleri arasında kolayca oluşturmanıza olanak tanıyan tutarlı bir JSON yapı tüm uyarı türleri için. |
+| SMS | Tüm Uyarı türleri için tutarlı bir SMS şablonu. |
+| E-posta | Tutarlı ve ayrıntılı bir e-posta şablonu, sorunları bir bakışta kolayca tanılamanıza olanak sağlar. Katıştırılmış ayrıntılı-portalda uyarı örneğine ve etkilenen kaynağa yönelik bağlantılar, düzeltme sürecine hızlıca geçebilmenizi sağlar. |
+| Web kancası/mantıksal uygulama/Azure Işlevi/Otomasyon Runbook 'U | Farklı Uyarı türleri genelinde kolayca tümleştirmeler oluşturmanıza olanak sağlayan tüm uyarı türleri için tutarlı bir JSON yapısı. |
 
-Yeni Şema ayrıca daha zengin bir uyarı tüketim deneyimi Azure portalı ve Azure mobil uygulaması yakın gelecekte etkinleştirecektir. 
+Yeni şema aynı zamanda hem Azure portal hem de hemen gelecekte Azure mobil uygulaması daha zengin bir uyarı tüketim deneyimi sağlayacaktır. 
 
-[Web kancaları/Logic Apps/Azure işlevleri/Automation runbook'ları için şema tanımları hakkında daha fazla bilgi edinin.](https://aka.ms/commonAlertSchemaDefinitions)
-
-> [!NOTE]
-> Ortak uyarı Şeması aşağıdaki eylemleri desteklemez: ITSM Bağlayıcısı.
-
-## <a name="how-do-i-enable-the-common-alert-schema"></a>Ortak uyarı şema nasıl etkinleştirebilirim?
-
-REST API ve her iki portal üzerinde eylem grupları aracılığıyla ortak uyarı şema çevirmek ya da kabul et. Yeni şemaya geçiş yapmak için iki durumlu bir eylem düzeyindedir. Örneğin, ayrı olarak e-posta eylem ve bir Web kancası eylemi için katılım gerekir.
+[Web kancaları/Logic Apps/Azure Işlevleri/Otomasyonu runbook 'Ları için şema tanımları hakkında daha fazla bilgi edinin.](https://aka.ms/commonAlertSchemaDefinitions)
 
 > [!NOTE]
-> 1. Aşağıdaki uyarı türleri varsayılan olarak ortak şema desteği (hiçbir iyileştirilmiş gerekli):
+> Aşağıdaki eylemler ortak uyarı şemasını desteklemez: ITSM Bağlayıcısı.
+
+## <a name="how-do-i-enable-the-common-alert-schema"></a>Ortak uyarı şemasını etkinleştirmek Nasıl yaparım? istiyor musunuz?
+
+Eylem grupları aracılığıyla, hem portalda hem de REST API aracılığıyla ortak uyarı şemasını kabul edebilir veya devre dışı bırakabilirsiniz. Yeni şemaya geçiş yapılacak geçiş, bir eylem düzeyinde bulunur. Örneğin, bir e-posta eylemi ve bir Web kancası eylemi için bağımsız olarak kabul etmeniz gerekir.
+
+> [!NOTE]
+> 1. Aşağıdaki uyarı türleri varsayılan olarak ortak şemayı destekler (zorunlu kabul etme gerekmez):
 >     * Akıllı algılama uyarıları
-> 1. Aşağıdaki uyarı türleri, ortak şema şu anda desteklemez:
->     * Tarafından oluşturulan uyarıların [VM'ler için Azure İzleyici](https://docs.microsoft.com/azure/azure-monitor/insights/vminsights-overview)
->     * Tarafından oluşturulan uyarıların [Azure maliyet Yönetimi](https://docs.microsoft.com/azure/billing/billing-cost-management-budget-scenario)
+> 1. Aşağıdaki uyarı türleri şu anda ortak şemayı desteklemiyor:
+>     * [VM'ler için Azure izleyici](https://docs.microsoft.com/azure/azure-monitor/insights/vminsights-overview) tarafından oluşturulan uyarılar
+>     * [Azure maliyet yönetimi](https://docs.microsoft.com/azure/billing/billing-cost-management-budget-scenario) tarafından oluşturulan uyarılar
 
-### <a name="through-the-azure-portal"></a>Azure portalı üzerinden
+### <a name="through-the-azure-portal"></a>Azure portal aracılığıyla
 
 ![Ortak uyarı şeması kabul etme](media/alerts-common-schema/portal-opt-in.png)
 
-1. Tüm mevcut veya yeni bir eylem içinde bir eylem grubu açın. 
-1. 'Evet' gösterildiği gibi ortak uyarı şeması sağlamak için iki durumlu düğmeyi seçin.
+1. Bir eylem grubunda varolan veya yeni bir eylemi açın. 
+1. Gösterilen ortak uyarı şemasını etkinleştirmek için ' Evet ' seçeneğini belirleyin.
 
-### <a name="through-the-action-groups-rest-api"></a>Eylem grupları REST API
+### <a name="through-the-action-groups-rest-api"></a>Eylem grupları aracılığıyla REST API
 
-Ayrıca [Eylem grupları API](https://docs.microsoft.com/rest/api/monitor/actiongroups) içinde ortak uyarı şemaya katılmak için. Yapma sırasında [oluşturma veya güncelleştirme](https://docs.microsoft.com/rest/api/monitor/actiongroups/createorupdate) REST API çağrısı, "'(kabul et) doğru olarak ' bayrağı useCommonAlertSchema" veya 'false' (geri çevirmek için) - Web kancası/e-posta/logic app/Azure işlevi/Otomasyon runbook'u aşağıdaki eylemlerden herhangi birini ayarlayabilirsiniz.
+Ortak uyarı şemasını kabul etmek için [eylem GRUPLARı API](https://docs.microsoft.com/rest/api/monitor/actiongroups) 'sini de kullanabilirsiniz. [Oluşturma veya güncelleştirme](https://docs.microsoft.com/rest/api/monitor/actiongroups/createorupdate) REST API çağrısı yaparken, aşağıdaki eylemlerden herhangi biri Için "useCommonAlertSchema" bayrağını ' true ' olarak (kabul etmek için) veya ' false ' (devre dışı) olarak ayarlayabilirsiniz (e-posta/Web kancası/mantıksal uygulama/Azure işlevi/Otomasyon Runbook 'u).
 
-Örneğin, aşağıdaki istek gövdesi yapılan [oluşturma veya güncelleştirme](https://docs.microsoft.com/rest/api/monitor/actiongroups/createorupdate) REST API aşağıdakileri yapın:
+Örneğin, [Create veya update](https://docs.microsoft.com/rest/api/monitor/actiongroups/createorupdate) REST API için yapılan aşağıdaki istek gövdesi şunları yapacaktır:
 
-* "John Doe'nun e-posta" e-posta eylemi için ortak bir uyarı şema etkinleştir
-* Ortak uyarı şema "Jane Smith'in e-posta" e-posta eylemi için devre dışı bırak
-* Web kancası eylemi "Örnek Web kancası" için ortak bir uyarı şema etkinleştir
+* "John tikan 'un e-postası" e-posta eyleminin ortak uyarı şemasını etkinleştirin
+* "Gamze Smith 'in e-postası" e-posta eyleminin ortak uyarı şemasını devre dışı bırakın
+* Web kancası eylemi "örnek Web kancası" için ortak uyarı şemasını etkinleştirin
 
 ```json
 {
@@ -124,8 +123,8 @@ Ayrıca [Eylem grupları API](https://docs.microsoft.com/rest/api/monitor/action
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Web kancaları/Logic Apps/Azure işlevleri/Automation runbook'ları için ortak uyarı şema tanımları.](https://aka.ms/commonAlertSchemaDefinitions)
-- [Tüm uyarılarınız işlemek için ortak uyarı şema yararlanan bir mantıksal uygulama oluşturmayı öğrenin.](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-integrations) 
+- [Web kancaları/Logic Apps/Azure Işlevleri/Otomasyonu runbook 'Ları için ortak uyarı şeması tanımları.](https://aka.ms/commonAlertSchemaDefinitions)
+- [Tüm uyarılarınızı işlemek için ortak uyarı şemasıyla yararlanan bir mantıksal uygulama oluşturmayı öğrenin.](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-integrations) 
 
 
 

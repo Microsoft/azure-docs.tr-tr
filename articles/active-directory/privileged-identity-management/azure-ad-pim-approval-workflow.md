@@ -1,81 +1,81 @@
 ---
-title: Onaylayın veya reddedin istekleri için Azure AD PIM - Azure Active Directory rolleri | Microsoft Docs
-description: Onaylayın veya reddedin istekleri için Azure AD Privileged Identity Management (PIM) Azure AD rolleri öğrenin.
+title: PıM-Azure AD 'de Azure AD rolleri için istekleri onaylama veya reddetme | Microsoft Docs
+description: Azure AD Privileged Identity Management (PıM) içinde Azure AD rolleri için istekleri onaylamayı veya reddetmeyi öğrenin.
 services: active-directory
 documentationcenter: ''
-author: rolyon
-manager: mtillman
+author: curtand
+manager: daveba
 editor: ''
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: pim
-ms.date: 04/09/2019
-ms.author: rolyon
+ms.date: 11/08/2019
+ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f83cb38567feb51ba7959ada7730d66ded677bf9
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 7f663f7daad19e77dcc1cc95a6a324e881d92b28
+ms.sourcegitcommit: 16c5374d7bcb086e417802b72d9383f8e65b24a7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67476534"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73847123"
 ---
-# <a name="approve-or-deny-requests-for-azure-ad-roles-in-pim"></a>Onaylayın veya reddedin istekleri için Azure AD PIM rolleri
+# <a name="approve-or-deny-requests-for-azure-ad-roles-in-privileged-identity-management"></a>Privileged Identity Management Azure AD rolleri için istekleri onaylama veya reddetme
 
-Azure Active Directory (Azure AD) Privileged Identity Management (PIM) ile rollerini etkinleştirme için onay gerektirecek şekilde yapılandırın ve bir veya birden çok kullanıcı veya grup onaylayanlara temsilci olarak seçin. Temsilci onaylayanlar, istekleri onaylamak için 24 saat vardır. Bir isteği 24 saat içinde onaylanmazsa, ardından uygun kullanıcı yeni bir isteği yeniden göndermeniz gerekir. Onay 24 saatlik zaman penceresi yapılandırılabilir değildir.
+Azure Active Directory (Azure AD) Privileged Identity Management (PıM) sayesinde, rolleri etkinleştirme için onay gerektirecek şekilde yapılandırabilir ve bir ya da birden çok kullanıcı ya da grubu, temsilci onaylayan olarak seçebilirsiniz. Temsilci onaylamalardan isteklerin onaylaması 24 saati vardır. İstek 24 saat içinde onaylanmamışsa, uygun Kullanıcı yeni bir isteği yeniden göndermesi gerekir. 24 saat onay zaman penceresi yapılandırılamaz.
 
-Onaylamak veya reddetmek için Azure AD rolleri istekleri için bu makaledeki adımları izleyin.
+Azure AD rolleri için istekleri onaylamak veya reddetmek için bu makaledeki adımları izleyin.
 
-## <a name="view-pending-requests"></a>Bekleyen istekleri görüntüleme
+## <a name="view-pending-requests"></a>Bekleyen istekleri görüntüle
 
-Onayınızı bekleyen bir Azure AD rol istek olduğunda, bir temsilci onaylayan olarak bir e-posta bildirimi alırsınız. Bu bekleyen istekler PIM'de görüntüleyebilirsiniz.
+Bir temsilci onaylayıcı olarak, Onayınızı bekleyen bir Azure AD rol isteği olduğunda bir e-posta bildirimi alırsınız. Bu bekleyen istekleri Privileged Identity Management görüntüleyebilirsiniz.
 
-1. [Azure Portal](https://portal.azure.com/) oturum açın.
+1. [Azure portalında](https://portal.azure.com/) oturum açın.
 
-1. Açık **Azure AD Privileged Identity Management**.
+1. **Azure AD Privileged Identity Management**açın.
 
-1. Tıklayın **Azure AD rolleri**.
+1. **Azure AD rolleri**' ne tıklayın.
 
-1. Tıklayın **istekleri onaylama**.
+1. **Istekleri Onayla**' ya tıklayın.
 
-    ![Azure AD rolleri - istekleri Onayla](./media/azure-ad-pim-approval-workflow/pim-directory-roles-approve-requests.png)
+    ![Azure AD rolleri-istekleri onaylama](./media/azure-ad-pim-approval-workflow/pim-directory-roles-approve-requests.png)
 
-    Onayınızı bekleyen isteklerinin bir listesini görürsünüz.
+    Onayınızı bekleyen isteklerin bir listesini görürsünüz.
 
 ## <a name="approve-requests"></a>İstekleri onaylama
 
-1. İstekleri onaylama ve ardından istediğiniz seçin **Onayla** Onayla açmak için istekleri bölmesinde seçili.
+1. Onaylamak istediğiniz istekleri seçin ve ardından **Onayla** ' ya tıklayarak seçili istekleri Onayla bölmesini açın.
 
-    ![İstek listesi Onayla seçeneğinin vurgulandığı Onayla](./media/azure-ad-pim-approval-workflow/pim-approve-requests-list.png)
+    ![Onaylama seçeneği vurgulanmış şekilde istekleri Onayla listesi](./media/azure-ad-pim-approval-workflow/pim-approve-requests-list.png)
 
-1. İçinde **onay nedeni** bir neden yazın.
+1. **Onay nedeni** kutusuna bir neden yazın.
 
-    ![Seçili istekleri Onayla neden bölmesiyle Onayla](./media/azure-ad-pim-approval-workflow/pim-approve-selected-requests.png)
+    ![Seçili istekler bölmesini onay nedeni ile Onayla](./media/azure-ad-pim-approval-workflow/pim-approve-selected-requests.png)
 
-1. Tıklayın **onaylama**.
+1. **Onayla**' ya tıklayın.
 
-    Durum simgesinde onayınızı ile güncelleştirilecektir.
+    Durum simgesi onayınız ile güncelleştirilir.
 
-    ![Onayla düğmesine tıklanana sonra bölmesinde seçili istekleri Onayla](./media/azure-ad-pim-approval-workflow/pim-approve-status.png)
+    ![Onay düğmesine tıkladıktan sonra seçili istekleri Onayla bölmesi](./media/azure-ad-pim-approval-workflow/pim-approve-status.png)
 
-## <a name="deny-requests"></a>İstekleri Reddet
+## <a name="deny-requests"></a>Reddetme istekleri
 
-1. İstekleri Reddet ve ardından istediğiniz seçin **Reddet** Reddet açmak için istekleri bölmesinde seçili.
+1. Reddetmek istediğiniz istekleri seçin ve sonra seçili istekleri Reddet bölmesini açmak için **Reddet** ' e tıklayın.
 
-    ![İzin verme seçeneği vurgulanmış istekleri listesi Onayla](./media/azure-ad-pim-approval-workflow/pim-deny-requests-list.png)
+    ![Reddetme seçeneği vurgulanmış şekilde istek listesini Onayla](./media/azure-ad-pim-approval-workflow/pim-deny-requests-list.png)
 
-1. İçinde **reddetme nedeni** bir neden yazın.
+1. **Reddetme nedeni** kutusuna bir neden yazın.
 
-    ![Reddetme nedeni bölmesiyle seçili istekleri Reddet](./media/azure-ad-pim-approval-workflow/pim-deny-selected-requests.png)
+    ![Seçili istekler bölmesini reddetme nedeni ile reddetme](./media/azure-ad-pim-approval-workflow/pim-deny-selected-requests.png)
 
-1. Tıklayın **Reddet**.
+1. **Reddet**' e tıklayın.
 
-    Durum simgesinde, engelleme ile güncelleştirilecektir.
+    Durum simgesi, geri çevirme ile güncelleştirilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [PIM e-posta bildirimleri](pim-email-notifications.md)
-- [Onaylayın veya reddedin PIM Azure kaynak rolleri için istekleri](pim-resource-roles-approval-workflow.md)
+- [Privileged Identity Management e-posta bildirimleri](pim-email-notifications.md)
+- [Privileged Identity Management Azure Kaynak rolleri için istekleri onaylama veya reddetme](pim-resource-roles-approval-workflow.md)

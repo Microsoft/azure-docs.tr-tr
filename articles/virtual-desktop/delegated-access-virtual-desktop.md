@@ -1,69 +1,69 @@
 ---
-title: Windows sanal masaüstü Önizleme - Azure Temsilcili erişim
-description: Örnekler de dahil olmak üzere bir Windows sanal masaüstü Önizleme dağıtımdaki yönetici yetkileri nasıl.
+title: Windows sanal masaüstü 'nde temsilci erişimi-Azure
+description: Örnekler de dahil olmak üzere Windows sanal masaüstü dağıtımında yönetim özellikleri atama.
 services: virtual-desktop
 author: Heidilohr
 ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 03/21/2019
 ms.author: helohr
-ms.openlocfilehash: 41cf5f8bcc69e181350a63d215fb0d78d43dcfdf
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: ad8dc610d15742844b8bec630d7bc3e08fb46973
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67272821"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73606891"
 ---
-# <a name="delegated-access-in-windows-virtual-desktop-preview"></a>Windows sanal masaüstü önizlemede Temsilcili erişim
+# <a name="delegated-access-in-windows-virtual-desktop"></a>Windows Sanal Masaüstü'ne temsilci erişimi
 
-Windows sanal masaüstü Önizleme, belirli bir kullanıcıya bir rol atayarak için izin verilen erişim miktarını tanımlamanıza olanak sağlayan bir temsilci erişimi modeline sahiptir. Bir rol ataması üç bileşenden oluşur: güvenlik sorumlusu, rol tanımı ve kapsam. Azure RBAC modelinde Windows sanal masaüstü Temsilcili erişim modeli temel alır. Özel rol atamaları ve bileşenleri hakkında daha fazla bilgi için bkz: [Azure rol tabanlı erişim denetimine genel bakış](https://docs.microsoft.com/azure/active-directory/role-based-access-built-in-roles).
+Windows sanal masaüstü, belirli bir kullanıcının bir rol atayarak izin verilen erişim miktarını tanımlamanızı sağlayan bir temsilci erişim modeli sağlar. Rol atamasının üç bileşeni vardır: güvenlik sorumlusu, rol tanımı ve kapsam. Windows sanal masaüstü temsilcisi erişim modeli, Azure RBAC modelini temel alır. Belirli rol atamaları ve bileşenleri hakkında daha fazla bilgi edinmek için bkz. [Azure rol tabanlı erişim denetimine genel bakış](https://docs.microsoft.com/azure/active-directory/role-based-access-built-in-roles).
 
-Windows Sanal Masaüstü yönetici temsilcisi erişimi destekleyen her öğenin bir rol ataması için aşağıdaki değerleri:
+Windows sanal masaüstü temsilcisi erişimi, rol atamasının her bir öğesi için aşağıdaki değerleri destekler:
 
 * Güvenlik sorumlusu
     * Kullanıcılar
     * Hizmet sorumluları
 * Rol tanımı
     * Yerleşik roller
-* `Scope`
+* Kapsam
     * Kiracı grupları
-    * Kiracılar
-    * Ana bilgisayar havuzları
+    * Kira
+    * Konak havuzları
     * Uygulama grupları
 
 ## <a name="built-in-roles"></a>Yerleşik roller
 
-Windows sanal masaüstü Temsilcili erişim, kullanıcıların ve hizmet sorumlusu atamak için birkaç yerleşik rol tanımları vardır.
+Windows sanal masaüstü 'nde temsilci erişimi, kullanıcılara ve hizmet sorumlularına atayabileceğiniz birkaç yerleşik rol tanımına sahiptir.
 
-* RDS sahibi kaynaklara erişim dahil her şeyi yönetebilir.
-* Bir RDS katkıda bulunan her şeyi kaynaklarına erişimi yönetebilir.
-* RDS okuyucu her şeyi görüntüleyebilir ancak değişiklik yapamazsınız.
-* RDS operatörün tanılama etkinlikleri görüntüleyebilirsiniz.
+* Bir RDS sahibi, kaynaklara erişim dahil her şeyi yönetebilir.
+* Bir RDS katılımcısı her şeyi yönetebilir, ancak kaynaklara erişebilir.
+* Bir RDS okuyucusu her şeyi görüntüleyebilir, ancak herhangi bir değişiklik yapamaz.
+* Bir RDS Işleci, tanılama etkinliklerini görüntüleyebilir.
 
-## <a name="powershell-cmdlets-for-role-assignments"></a>Rol atamaları için PowerShell cmdlet'leri
+## <a name="powershell-cmdlets-for-role-assignments"></a>Rol atamaları için PowerShell cmdlet 'leri
 
-Oluşturun, görüntüleyin ve rol atamalarını kaldırmak için aşağıdaki cmdlet'leri çalıştırabilirsiniz:
+Rol atamalarını oluşturmak, görüntülemek ve kaldırmak için aşağıdaki cmdlet 'leri çalıştırabilirsiniz:
 
-* **Get-RdsRoleAssignment** rol atamaları listesini görüntüler.
-* **Yeni RdsRoleAssignment** yeni bir rol ataması oluşturur.
-* **Remove-RdsRoleAssignment** rol atamaları siler.
+* **Get-RdsRoleAssignment** , rol atamalarının bir listesini görüntüler.
+* **New-RdsRoleAssignment** yeni bir rol ataması oluşturur.
+* **Remove-RdsRoleAssignment** , rol atamalarını siler.
 
-### <a name="accepted-parameters"></a>Kabul edilen parametreleri
+### <a name="accepted-parameters"></a>Kabul edilen parametreler
 
-Aşağıdaki parametrelerle temel üç cmdlet değiştirebilirsiniz:
+Temel üç cmdlet 'i aşağıdaki parametrelerle değiştirebilirsiniz:
 
-* **AadTenantId**: hizmet sorumlusu üyesi olan Azure Active Directory Kiracı Kimliğini belirtir.
-* **AppGroupName**: Uzak Masaüstü uygulama grubunun adı.
-* **Tanılama**: Tanılama kapsamını belirtir. (İle eşleştirilmelidir **altyapı** veya **Kiracı** parametreler.)
-* **HostPoolName**: Uzak Masaüstü'nü konak havuzunun adı.
+* **Aadtenantıd**: hizmet sorumlusunun üye olduğu Azure ACTIVE DIRECTORY Kiracı kimliğini belirtir.
+* **Appgroupname**: Uzak Masaüstü uygulama grubunun adı.
+* **Tanılama**: Tanılama kapsamını gösterir. ( **Altyapıya** da **kiracı** parametreleriyle eşleştirilmelidir.)
+* **Hostpoolname**: Uzak Masaüstü konak havuzunun adı.
 * **Altyapı**: altyapı kapsamını belirtir.
-* **RoleDefinitionName**: kullanıcı, Grup veya uygulama atanan Uzak Masaüstü Hizmetleri rol tabanlı erişim denetimi rolün adı. (Örneğin, Uzak Masaüstü Hizmetleri sahibi, Uzak Masaüstü Hizmetleri okuyucu ve benzeri.)
-* **ServerPrincipleName**: Azure Active Directory uygulamasının adı.
-* **SignInName**: kullanıcının e-posta adresi veya kullanıcı asıl adı.
-* **Kiracıadı**: Uzak Masaüstü Kiracı adı.
+* **Roledefinitionname**: Kullanıcı, Grup veya uygulamaya atanan Uzak Masaüstü Hizmetleri rol tabanlı erişim denetimi rolünün adı. (Örneğin, Uzak Masaüstü Hizmetleri sahibi, Uzak Masaüstü Hizmetleri okuyucu vb.)
+* **Serverprentaname**: Azure Active Directory uygulamasının adı.
+* **Signınname**: kullanıcının e-posta adresi veya Kullanıcı asıl adı.
+* **TenantName**: Uzak Masaüstü kiracının adı.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Her rol kullanabileceğiniz PowerShell cmdlet'leri daha eksiksiz bir listesi için bkz. [PowerShell başvurusu](/powershell/windows-virtual-desktop/overview).
+Her rolün kullanabileceği PowerShell cmdlet 'lerinin daha kapsamlı bir listesi için bkz. [PowerShell Başvurusu](/powershell/windows-virtual-desktop/overview).
 
-Bir Windows sanal masaüstü ortamını ayarlama ilişkin yönergeler için bkz: [Windows sanal masaüstü Önizleme ortamı](environment-setup.md).
+Windows sanal masaüstü ortamı ayarlama yönergeleri için bkz. [Windows sanal masaüstü ortamı](environment-setup.md).

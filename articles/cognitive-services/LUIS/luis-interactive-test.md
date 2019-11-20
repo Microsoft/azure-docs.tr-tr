@@ -1,118 +1,119 @@
 ---
-title: LUIS Portalı'nda test uygulama
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: Language Understanding (LUIS), uygulamanızı geliştirebilirsiniz ve kendi dil anlama geliştirmek için sürekli olarak çalışmak için kullanın.
+title: LUSıS portalında test uygulaması
+titleSuffix: Azure Cognitive Services
+description: Uygulamanızı iyileştirmek ve dilini anlamak için uygulamanızda sürekli çalışmak üzere Language Understanding (LUO) kullanın.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 01/23/2019
+ms.topic: conceptual
+ms.date: 07/29/2019
 ms.author: diberry
-ms.openlocfilehash: 51c6a58567b35c9b8486d8634b0bed1af7218994
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ebc86d1cf91cf79ab83b0f49d9898a91d8be8a75
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60199168"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73500276"
 ---
-# <a name="test-your-luis-app-in-the-luis-portal"></a>LUIS uygulamanızı LUIS portalında test etme
-<a name="train-your-app"></a>
-[Test](luis-concept-test.md) uygulama yinelemeli bir işlemdir. LUIS uygulamanızı eğitim sonra bu amaç ve varlıkları doğru tanınır olmadığını görmek için örnek Konuşma ile test edin. Değilseniz, güncelleştirmeleri LUIS uygulaması, eğitin ve test için yeniden yapın. 
+# <a name="test-your-luis-app-in-the-luis-portal"></a>Lusıs uygulamanızı Lua portalında test etme
+
+Bir uygulamayı [test etmek](luis-concept-test.md) , yinelemeli bir işlemdir. LUSıS uygulamanıza eğitim ettikten sonra, amaçları ve varlıkların doğru şekilde tanınıp tanınmadığını görmek için örnek bir şekilde test edin. Aksi takdirde, LUSıS uygulaması, eğit ve test güncelleştirmelerini yeniden yapın. 
+
+[!INCLUDE [Waiting for LUIS portal refresh](./includes/wait-v3-upgrade.md)]
 
 <!-- anchors for H2 name changes -->
+<a name="train-your-app"></a>
 <a name="test-your-app"></a>
 <a name="access-the-test-page"></a>
 <a name="luis-interactive-testing"></a>
 
-## <a name="test-an-utterance"></a>Bir utterance test
+## <a name="test-an-utterance"></a>Bir söylenişi test etme
 
-1. Adını seçerek uygulamanıza erişmek **uygulamalarım** sayfası. 
+1. **Uygulamalarım** sayfasında adını seçerek uygulamanıza erişin. 
 
-2. Erişim için **Test** slayt genişletme paneli, select **Test** uygulamanızın üst panelinde.
+1. **Test** slayt paneli paneline erişmek için uygulamanızın üst panelinde **Test** ' i seçin.
 
-    ![Sayfa eğitme ve Test uygulaması](./media/luis-how-to-interactive-test/test.png)
+    ![Eğitim & test uygulaması sayfası](./media/luis-how-to-interactive-test/test.png)
 
-3. Bir utterance metin kutusuna girin ve Enter tuşuna basın. İstediğiniz gibi konuşma kadar test yazabilirsiniz **Test**, ancak aynı anda yalnızca bir utterance.
+1. Metin kutusuna bir söylenişi girin ve ENTER ' u seçin. **Testte**istediğiniz sayıda test ututlik yazabilirsiniz, ancak aynı anda yalnızca bir tane ile bir tane yazın.
 
-4. Utterance, üst amacını ve score konuşma metin kutusunun altında listesine eklenir.
+1. Utterance, en üst amacı ve puanı, metin kutusunun altındaki söylik listesine eklenir.
 
-    ![Etkileşimli sınama yanlış amacını tanımlar](./media/luis-how-to-interactive-test/test-weather-1.png)
+    ![Etkileşimli test, yanlış amacı tanımlıyor](./media/luis-how-to-interactive-test/test-weather-1.png)
 
-## <a name="inspect-score"></a>Puan inceleyin
+## <a name="inspect-score"></a>Puanı İncele
 
-Bir test sonucunun ayrıntılarını incelemek **inceleyin** paneli. 
+**İnceleme** panelinde test sonucunun ayrıntılarını inceleyebilirsiniz. 
  
-1. İle **Test** slayt genişletme paneli açık, select **inceleyin** karşılaştırmak istediğiniz bir utterance için. 
+1. **Test** slayt paneli açıkken, karşılaştırmak istediğiniz bir utterlik için **İncele** ' yi seçin. 
 
-    ![Test sonuçlarıyla ilgili daha fazla ayrıntı için İncele düğmeyi seçin](./media/luis-how-to-interactive-test/inspect.png)
+    ![Test sonuçlarıyla ilgili daha fazla ayrıntı görmek için Inceleme düğmesini seçin](./media/luis-how-to-interactive-test/inspect.png)
 
-2. **İnceleme** paneli görüntülenir. Panelin amacını ve bunun yanı sıra tanımlanan herhangi bir varlık Puanlama üst içerir. Paneli, seçilen utterance sonucunu gösterir.
+1. **İnceleme** paneli görüntülenir. Panel, en iyi Puanlama amacını ve tanımlanan tüm varlıkları içerir. Panel, seçili utterlik 'in sonucunu gösterir.
 
-    ![Panelin amacını ve bunun yanı sıra tanımlanan herhangi bir varlık Puanlama üst içerir. Paneli, seçilen utterance sonucunu gösterir.](./media/luis-how-to-interactive-test/inspect-panel.png)
+    ![Panel, en iyi Puanlama amacını ve tanımlanan tüm varlıkları içerir. Panel, seçili utterlik 'in sonucunu gösterir.](./media/luis-how-to-interactive-test/inspect-panel.png)
 
-## <a name="correct-top-scoring-intent"></a>Doğru üst hedefi Puanlama
+## <a name="correct-top-scoring-intent"></a>Doğru en iyi Puanlama hedefi
 
-1. Hedefi Puanlama üst yanlışsa, seçin **Düzenle** düğmesi.
+1. En üst Puanlama hedefi yanlış ise **Düzenle** düğmesini seçin.
 
-2.  Aşağı açılan listesinde, doğru utterance hedefini seçin.
+1.  Aşağı açılan listede, utterance için doğru amacı seçin.
 
-    ![Doğru hedefini seçin](./media/luis-how-to-interactive-test/intent-select.png)
+    ![Doğru amacı seçin](./media/luis-how-to-interactive-test/intent-select.png)
 
 ## <a name="view-sentiment-results"></a>Yaklaşım sonuçlarını görüntüle
 
-Varsa **yaklaşım analizi** yapılandırılan **[Yayımla](luis-how-to-publish-app.md#enable-sentiment-analysis)** sayfasında test sonuçlarını utterance içinde bulunan yaklaşım içerir. 
+**[Yayımlama](luis-how-to-publish-app.md#enable-sentiment-analysis)** sayfasında yaklaşım **Analizi** yapılandırılırsa, test sonuçları, utde bulunan yaklaşımı içerir. 
 
-![Test Bölmesi ile ilgili yaklaşım analizi görüntüsü](./media/luis-how-to-interactive-test/sentiment.png)
+![Yaklaşım analiziyle test bölmesinin görüntüsü](./media/luis-how-to-interactive-test/sentiment.png)
 
-## <a name="correct-matched-patterns-intent"></a>Eşleşen desenin amacı düzeltin
+## <a name="correct-matched-patterns-intent"></a>Eşleşen düzenin hedefini düzeltin
 
-Kullanıyorsanız [desenleri](luis-concept-patterns.md) ve utterance bir desenle eşleşen, ancak yanlış amacını tahmin, seçin **Düzenle** deseni tarafından bağlamak ve ardından doğru hedefini seçin.
+[Desenler](luis-concept-patterns.md) kullanıyorsanız ve söyleyeni bir desenle eşleşirse, ancak yanlış amaç tahmin edildiğinde, deseni **Düzenle** bağlantısını seçin ve ardından doğru amacı seçin.
 
 ## <a name="compare-with-published-version"></a>Yayımlanan sürümle karşılaştır
 
-Yayımlanan uygulamanızı etkin sürümünü test edebilirsiniz [uç nokta](luis-glossary.md#endpoint) sürümü. İçinde **inceleyin** paneli, select **Karşılaştır yayımlanan**. Yayımlanan modele yönelik test, Azure abonelik kotası bakiyeden çıkarılır. 
+Yayınlanan [uç nokta](luis-glossary.md#endpoint) sürümüyle uygulamanızın etkin sürümünü test edebilirsiniz. **İnceleme** panelinde, **yayımlandı ile karşılaştır**' ı seçin. Yayımlanan modele karşı herhangi bir test, Azure abonelik kotası bakiyesinden düşülür. 
 
-![Yayımlanan Karşılaştır](./media/luis-how-to-interactive-test/inspect-panel-compare.png)
+![Yayımlanla Karşılaştır](./media/luis-how-to-interactive-test/inspect-panel-compare.png)
 
-## <a name="view-endpoint-json-in-test-panel"></a>Uç nokta JSON test panelinde görüntüleyin
-JSON seçerek karşılaştırma için döndürülen uç nokta görüntüleyebileceğiniz **Göster JSON görünümü**.
+## <a name="view-endpoint-json-in-test-panel"></a>Test panelinde Endpoint JSON görüntüleme
+Karşılaştırma için döndürülen JSON bitiş noktasını göster ' i seçerek **JSON görünümünü göster**' i seçebilirsiniz.
 
-![Yayımlanan bir JSON yanıtı](./media/luis-how-to-interactive-test/inspect-panel-compare-json.png)
+![Yayımlanan JSON yanıtı](./media/luis-how-to-interactive-test/inspect-panel-compare-json.png)
 
 <!--Service name is 'Bing Spell Check v7 API' in the portal-->
 ## <a name="additional-settings-in-test-panel"></a>Test panelinde ek ayarlar
 
-### <a name="luis-endpoint"></a>LUIS uç noktası
+### <a name="luis-endpoint"></a>LUSıS uç noktası
 
-Birkaç LUIS uç noktaları varsa, **ek ayarlar** Test bağlantısını test etmek için kullanılan uç nokta değiştirmek için bölmesinde yayımlanan. Kullanmak için hangi uç noktaya emin değilseniz varsayılan seçin **Starter_Key**. 
+Birkaç LUO uç noktanız varsa, test için kullanılan uç noktayı değiştirmek için testin yayımlanan bölmesindeki **ek ayarlar** bağlantısını kullanın. Hangi uç noktanın kullanılacağını bilmiyorsanız varsayılan **Starter_Key**' ı seçin. 
 
-![Ek ayarlar bağlantısının vurgulandığı test paneli](./media/luis-how-to-interactive-test/interactive-with-spell-check-service-key.png)
+![Ek ayarlar bağlantısı vurgulanmış şekilde test paneli](./media/luis-how-to-interactive-test/interactive-with-spell-check-service-key.png)
 
 
-### <a name="view-bing-spell-check-corrections-in-test-panel"></a>Bing yazım denetimi düzeltmeleri test panelinde görüntüleyin
+### <a name="view-bing-spell-check-corrections-in-test-panel"></a>Bing Yazım Denetimi düzeltmelerini test panelinde görüntüle
 
-Yazım düzeltmeleri görmek için gereksinimler: 
+Yazım denetimi düzeltmelerini görüntüleme gereksinimleri: 
 
 * Yayımlanan uygulama
-* Bing yazım denetimi [hizmet anahtarı](https://azure.microsoft.com/try/cognitive-services/?api=spellcheck-api). Hizmet anahtarı depolanmayacak ve her bir tarayıcı oturumu için sıfırlanması gerekir. 
+* [Hizmet anahtarı](https://azure.microsoft.com/try/cognitive-services/?api=spellcheck-api)Bing yazım denetimi. Hizmet anahtarı depolanmaz ve her tarayıcı oturumu için sıfırlanması gerekir. 
 
-Dahil etmek için aşağıdaki yordamı kullanın. [Bing yazım denetimi v7](https://azure.microsoft.com/services/cognitive-services/spell-check/) Test sonuçları bölmesinde hizmet. 
+Test bölmesi sonuçlarına [Bing yazım denetimi v7](https://azure.microsoft.com/services/cognitive-services/spell-check/) hizmetini eklemek için aşağıdaki yordamı kullanın. 
 
-1. İçinde **Test** bölmesinde bir utterance girin. Utterance tahmin bittiğinde **[inceleyin](#inspect-score)** girdiğiniz utterance altında. 
+1. **Test** bölmesinde bir utterance girin. Söylenişi tahmin edildiğinde, girdiğiniz utterlik 'in altında **[Denetle](#inspect-score)** ' yi seçin. 
 
-2. Zaman **inceleyin** panelini açar, seçim  **[ile yayımlanan karşılaştırma](#compare-with-published-version)** . 
+1. **İnceleme** bölmesi açıldığında, **[Yayımlanla Karşılaştır](#compare-with-published-version)** ' ı seçin. 
 
-3. Zaman **yayımlanan** panelini açar, seçim  **[ek ayarlar](#additional-settings-in-test-panel)** .
+1. **Yayımlanan** Panel açıldığında, **[ek ayarlar](#additional-settings-in-test-panel)** ' ı seçin.
 
-4. Açılan iletişim kutusuna girin, **Bing yazım denetimi** hizmet anahtarı. 
-    ![Bing yazım denetimi hizmet anahtarı girin](./media/luis-how-to-interactive-test/interactive-with-spell-check-service-key.png)
+1. Açılır iletişim kutusunda **Bing yazım denetimi etkinleştir** ' i işaretleyin ve anahtarı girip **bitti**' yi seçin. 
+    Bing Yazım Denetimi hizmet anahtarı ![girin](./media/luis-how-to-interactive-test/interactive-with-spell-check-service-key-text.png)
 
-5. Bir hatalı gibi yazım denetimi ile bir sorgu girin `book flite to seattle` seçin girin. Sözcük yanlış yazımını `flite` LUIS için gönderilen sorgu değiştirilir ve sonuçta elde edilen JSON olarak hem özgün sorguyu gösterir. `query`ve düzeltilmiş sorgu yazımı olarak `alteredQuery`.
-
-    ![JSON yazım denetimi düzeltildi](./media/luis-how-to-interactive-test/interactive-with-spell-check-results.png)
+1. `book flite to seattle` gibi yanlış yazımla bir sorgu girin ve ENTER ' u seçin. `flite` sözcüğünün yanlış yazımı, LUVE ' a gönderilen sorguda değiştirilmiştir ve sonuçta elde edilen JSON, `query`ve sorguda düzeltilen yazımı `alteredQuery`olarak gösterir.
 
 <a name="json-file-with-no-duplicates"></a>
 <a name="import-a-dataset-file-for-batch-testing"></a>
@@ -126,11 +127,11 @@ Dahil etmek için aşağıdaki yordamı kullanın. [Bing yazım denetimi v7](htt
 <a name="false-test-results"></a>
 
 ## <a name="batch-testing"></a>Toplu işe testi
-Toplu test bkz [kavramları](luis-concept-batch-test.md) ve öğrenin [nasıl](luis-how-to-batch-test.md) konuşma toplu test edin.
+Toplu iş testi [kavramlarını](luis-concept-batch-test.md) görün ve toplu iş türlerini [nasıl](luis-how-to-batch-test.md) test leyeceğinizi öğrenin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Test LUIS uygulamanızı doğru amaç ve varlıkları tanımıyor gösteriyorsa, daha fazla konuşma etiketleme ya da özellikler ekleyerek LUIS uygulamanızın doğruluğunu artırmak için çalışabilir. 
+Test, LUP uygulamanızın doğru amaçları ve varlıkları algıladığını gösteriyorsa, daha fazla yer etiketleyerek veya özellik ekleyerek LUSıS uygulamanızın doğruluğunu iyileştirebilmek için çalışabilirsiniz. 
 
-* [LUIS ile önerilen konuşma etiket](luis-how-to-review-endpoint-utterances.md) 
-* [LUIS uygulamanızın performansını artırmak için özellikleri kullanın](luis-how-to-add-features.md) 
+* [LUSıS ile önerilen bir şekilde etiketleme](luis-how-to-review-endpoint-utterances.md) 
+* [LUSıS uygulamanızın performansını artırmak için özellikleri kullanın](luis-how-to-add-features.md) 

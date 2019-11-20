@@ -1,6 +1,6 @@
 ---
-title: FMLE Kodlayıcı, tek bit hızlı canlı akış göndermek için yapılandırma | Microsoft Docs
-description: Bu konuda, tek bit hızlı akış gerçek zamanlı kodlama için etkinleştirilmiş kanallar AMS göndermek için Flash Media Live Encoder (FMLE) Kodlayıcı yapılandırma gösterilmektedir.
+title: FMLE kodlayıcısını tek bir bit hızı canlı akış gönderecek şekilde yapılandırma | Microsoft Docs
+description: Bu konu, canlı kodlama için etkinleştirilmiş AMS kanallarına tek bit hızlı bir akış göndermek için Flash Media Live Encoder (FMLE) Kodlayıcısı 'nın nasıl yapılandırılacağını gösterir.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -13,15 +13,16 @@ ms.tgt_pltfrm: na
 ms.devlang: ne
 ms.topic: article
 ms.date: 03/14/2019
-ms.author: juliako;cenkdin;anilmur
-ms.openlocfilehash: 01bb628a6520488dcebf49a1e868213b955abc31
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: juliako
+ms.reviewer: cenkdin;anilmur
+ms.openlocfilehash: 09d9bdffefe9204e9f58b8f07af5b21228269f6c
+ms.sourcegitcommit: de47a27defce58b10ef998e8991a2294175d2098
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61466026"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "69016748"
 ---
-# <a name="use-the-fmle-encoder-to-send-a-single-bitrate-live-stream"></a>FMLE Kodlayıcı tek bit hızlı canlı akış göndermektir. 
+# <a name="use-the-fmle-encoder-to-send-a-single-bitrate-live-stream"></a>Tek bit hızlı canlı akış göndermek için FMLE Kodlayıcısı 'nı kullanın 
 > [!div class="op_single_selector"]
 > * [FMLE](media-services-configure-fmle-live-encoder.md)
 > * [Tricaster](media-services-configure-tricaster-live-encoder.md)
@@ -29,11 +30,11 @@ ms.locfileid: "61466026"
 >
 >
 
-Bu makalede nasıl yapılacağı gösterilmektedir [Flash Media Live Encoder](https://www.adobe.com/products/flash-media-encoder.html) AMS tekli bit hızı akışına kanallar göndermek için (FMLE) Kodlayıcı, gerçek zamanlı kodlama için etkinleştirilir. Daha fazla bilgi için bkz. [Azure Media Services ile Gerçek Zamanlı Kodlama Gerçekleştirmek İçin Etkinleştirilmiş Kanallar ile Çalışma](media-services-manage-live-encoder-enabled-channels.md).
+Bu makalede, canlı kodlama için etkinleştirilmiş AMS kanallarına tek bir bit hızı akışı göndermek için [Flash Media Live Encoder](https://www.adobe.com/products/flash-media-encoder.html) (FMLE) Kodlayıcısı 'nın nasıl yapılandırılacağı gösterilmektedir. Daha fazla bilgi için bkz. [Azure Media Services ile Gerçek Zamanlı Kodlama Gerçekleştirmek İçin Etkinleştirilmiş Kanallar ile Çalışma](media-services-manage-live-encoder-enabled-channels.md).
 
 Bu öğreticide, Azure Media Services Gezgini (AMSE) aracı ile Azure Media Services (AMS) yönetilecek gösterilmektedir. Bu araç yalnızca Windows bilgisayarda çalışır. Mac veya Linux bilgisayarda ise oluşturmak için Azure portalını kullanma [kanalları](media-services-portal-creating-live-encoder-enabled-channel.md#create-a-channel) ve [programlar](media-services-portal-creating-live-encoder-enabled-channel.md).
 
-Bu öğreticide, AAC kullanmayı açıklar. Ancak, FMLE değil destekler AAC varsayılan olarak. AAC gibi MainConcept kodlama için bir eklenti satın almanız gerekecektir: [AAC eklentisi](https://www.mainconcept.com/products/plug-ins/plug-ins-for-adobe/aac-encoder-fmle.html)
+Bu öğreticide, AAC 'nin kullanılması açıklanmaktadır. Ancak, FMLE varsayılan olarak AAC 'yi desteklemez. Mainkavram gibi AAC kodlaması için bir eklenti satın almanız gerekir: [AAC eklentisi](https://www.mainconcept.com/products/plug-ins/plug-ins-for-adobe/aac-encoder-fmle.html)
 
 ## <a name="prerequisites"></a>Önkoşullar
 * [Azure Media Services hesabı oluşturma](media-services-portal-create-account.md)
@@ -67,69 +68,69 @@ Bu öğreticide, AAC kullanmayı açıklar. Ancak, FMLE değil destekler AAC var
 Kanal başlatılırken yapabilecekleriniz [kodlayıcıyı Yapılandır](media-services-configure-fmle-live-encoder.md).
 
 > [!IMPORTANT]
-> Kanal bir hazır durumuna geçtiğinde hemen sonra faturalandırma başlatır. Daha fazla bilgi için [kanalın durumları](media-services-manage-live-encoder-enabled-channels.md#states).
+> Bu durumda, kanal bir hazırlık durumuna geçtiğinde faturalandırma başlar. Daha fazla bilgi için [kanalın durumları](media-services-manage-live-encoder-enabled-channels.md#states).
 >
 >
 
-## <a id=configure_fmle_rtmp></a>FMLE Kodlayıcı yapılandırın
+## <a id=configure_fmle_rtmp></a>FMLE Encoder 'ı yapılandırma
 Bu öğreticide, aşağıdaki çıkış ayarları kullanılır. Bu bölümün geri kalanında daha ayrıntılı yapılandırma adımlarını açıklar.
 
 **Video**:
 
-* Codec: H.264
-* Profil: Yüksek (düzeyi 4.0)
-* Bit hızı: 5000 kbps
-* Ana kare: 2 saniye (60 saniye)
+* Bileşeni H.
+* Profilinizi Yüksek (düzey 4,0)
+* Bit hızı 5000 kbps
+* Denetçisinde 2 saniye (60 saniye)
 * Kare hızı: 30
 
 **Ses**:
 
-* Codec: AAC (LC)
-* Bit hızı: 192 kbps
-* Örnek Hızı: 44,1 kHz
+* Bileşeni AAC (LC)
+* Bit hızı 192 kbps
+* Örnek hız: 44,1 kHz
 
 ### <a name="configuration-steps"></a>Yapılandırma adımları
-1. Gezinmek için kullanılan makine üzerinde Flash Media Live Encoder's (FMLE) arabirim.
+1. Kullanılmakta olan makinedeki Flash Media Live Encoder 'ın (FMLE) arabirimine gidin.
 
-    Bir ana sayfa ayarlarını arabirimidir. FMLE kullanarak akışa başlamak için önerilen ayarları aşağıdakileri not alın.
+    Arabirim, ayarların bir ana sayfasıdır. FMLE kullanarak akışa başlamak için aşağıdaki önerilen ayarları göz önünde yararlanın.
 
-   * Biçim: H.264 kare oranı: 30.00
+   * Biçim: H., bir kare hızı: 30,00
    * Giriş boyutu: 1280 x 720
-   * Bit hızı: 5000 (ağ sınırlamalar göre ayarlanabilir) KB/sn  
+   * Bit hızı: 5000 kbps (ağ kısıtlamalarına göre ayarlanabilir)  
 
-     ![fmle](./media/media-services-fmle-live-encoder/media-services-fmle3.png)
+     ![FMLE](./media/media-services-fmle-live-encoder/media-services-fmle3.png)
 
-     Onay işareti "Taramasız Hale Getir'i" seçeneğini kullanarak kaynakları aralıklı, lütfen
-2. Biçim yanındaki İngiliz anahtarı simgesini seçin, bu ek ayarlar şöyle olmalıdır:
+     Aralıklı kaynakları kullanırken, lütfen "titreşimsiz" seçeneğini onay işareti yapın
+2. Biçim ' in yanındaki İngiliz anahtarı simgesini seçin, bu ek ayarların olması gerekir:
 
-   * Profil: Ana
+   * Profilinizi Ana
    * Düzey: 4.0
    * Ana kare sıklığı: 2 saniye
 
-     ![fmle](./media/media-services-fmle-live-encoder/media-services-fmle4.png)
+     ![FMLE](./media/media-services-fmle-live-encoder/media-services-fmle4.png)
 3. Aşağıdaki önemli ses ayarını ayarlayın:
 
    * Biçim: AAC
-   * Örnek Hızı: 44100 Hz
-   * Bit hızı: 192 Kbps
+   * Örnek hız: 44100 Hz
+   * Bit hızı 192 Kbps
 
-     ![fmle](./media/media-services-fmle-live-encoder/media-services-fmle5.png)
-4. Kanal alma giriş URL FMLE için 's atamak için **RTMP uç nokta**.
+     ![FMLE](./media/media-services-fmle-live-encoder/media-services-fmle5.png)
+4. FMLE 'nın **RTMP uç noktasına**atamak için kanalın giriş URL 'sini alın.
 
     AMSE aracına gidin ve kanal tamamlanma durumunu denetleyin. Durum değiştiğinde **başlangıç** için **çalıştıran**, giriş URL'sini alabilirsiniz.
 
     Kanal çalıştırırken, kanal adına sağ tıklayın, üzerine gelindiğinde aşağı gidin **Panoya kopyalama giriş URL** seçip **birincil giriş URL**.  
 
-    ![fmle](./media/media-services-fmle-live-encoder/media-services-fmle6.png)
-5. Bu bilgileri yapıştırın **FMS URL** çıkış bölümüne ve ata Akış adı alanı.
+    ![FMLE](./media/media-services-fmle-live-encoder/media-services-fmle6.png)
+5. Bu bilgileri çıktı bölümünün **FMS URL 'si** alanına yapıştırın ve bir akış adı atayın.
 
-    ![fmle](./media/media-services-fmle-live-encoder/media-services-fmle7.png)
+    ![FMLE](./media/media-services-fmle-live-encoder/media-services-fmle7.png)
 
-    Ek artıklık için ikincil giriş URL'si ile bu adımları yineleyin.
+    Daha fazla artıklık için bu adımları Ikincil giriş URL 'siyle tekrarlayın.
 6. **Bağlan**’ı seçin.
 
 > [!IMPORTANT]
-> Tıklamadan önce **Connect**, size **gerekir** kanal hazır olduğundan emin olun.
+> **Bağlan**' a tıklamadan önce kanalın Ready olduğundan emin **olmanız gerekir** .
 > Ayrıca, kanal hazır durumda > 15 dakikadan fazla akış bir giriş katkı olmadan bırakmamaya emin olun.
 >
 >
@@ -147,8 +148,8 @@ Bir hata aldıysanız, kanal sıfırlanması gerekir ve Kodlayıcı ayarları ay
 ## <a name="create-a-program"></a>Bir program oluşturma
 1. Kanal kayıttan yürütme onaylandıktan sonra bir program oluşturun. Altında **canlı** sekmesinde AMSE aracı içinde program alanı sağ tıklatın ve seçin **yeni bir Program oluşturma**.  
 
-    ![fmle](./media/media-services-fmle-live-encoder/media-services-fmle9.png)
-2. Program adı ve gerekirse ayarlamak **arşiv penceresi uzunluğu** (bunun varsayılan 4 saat). Ayrıca, bir depolama konumu belirtin veya varsayılan olarak bırakın.  
+    ![FMLE](./media/media-services-fmle-live-encoder/media-services-fmle9.png)
+2. Programı adlandırın ve gerekirse **Arşiv penceresi uzunluğunu** (varsayılan olarak 4 saat) ayarlayın. Ayrıca, bir depolama konumu belirtin veya varsayılan olarak bırakın.  
 3. Denetleme **programı'nı şimdi başlatmak** kutusu.
 4. Tıklayın **Program oluşturma**.  
 

@@ -1,6 +1,6 @@
 ---
-title: Öğrenciler için Azure'ı kullanarak bir işlev oluşturma | Microsoft Docs
-description: Azure Öğrenci başlangıç aboneliği içinde bir Azure işlevi oluşturma hakkında bilgi edinin
+title: Öğrenciler için Azure başlangıç kullanarak bir Işlev oluşturma | Microsoft Docs
+description: Öğrenciler için Azure başlangıç aboneliği içinden bir Azure Işlevi oluşturmayı öğrenin
 Customer intent: As a student, I want to be able to create a HTTP triggered Function App within the Student Starter plan so that I can easily add APIs to any project.
 services: functions
 documentationcenter: na
@@ -8,28 +8,27 @@ author: alexkarcher-msft
 manager: ggailey777
 ms.assetid: ''
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: quickstart
 ms.date: 02/22/2019
 ms.author: alkarche
-ms.openlocfilehash: 860fedb13e84054e8ba264116be4e452445b7e9b
-ms.sourcegitcommit: f6ba5c5a4b1ec4e35c41a4e799fb669ad5099522
+ms.openlocfilehash: b4a143f14dc4e443570e8eca9ce6ce9e81b1d783
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65143091"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70096634"
 ---
-# <a name="create-a-function-using-azure-for-students-starter"></a>Öğrenciler için Azure'ı kullanarak bir işlev oluşturma
+# <a name="create-a-function-using-azure-for-students-starter"></a>Öğrenciler için Azure başlangıç kullanarak bir Işlev oluşturma
 
-Bu öğreticide, Azure Öğrenci başlangıç aboneliği için bir hello world HTTP işlevde oluşturacağız. Ayrıca bu abonelik türü Azure işlevleri'nde kullanılabilir aracılığıyla alacağız.
+Bu öğreticide, öğrenciler için Azure başlangıç aboneliğinde bir Hello World HTTP işlevi oluşturacağız. Ayrıca, bu abonelik türündeki Azure Işlevleri 'nde nelerin kullanılabildiğini de inceleyeceğiz.
 
-Microsoft *Öğrenciler için Azure başlangıç* , size hiçbir ücret ödemeden bulutta geliştirmeniz gereken Azure ürünlerini kullanmaya başlamanızı sağlar. [Burada Bu teklif hakkında daha fazla bilgi edinin.](https://azure.microsoft.com/offers/ms-azr-0144p/)
+*Öğrenciler için Microsoft Azure başlangıç* , ücretsiz olarak bulutta geliştirme yapmanız gereken Azure ürünlerini kullanmaya başlamanızı sağlar. [Bu teklif hakkında daha fazla bilgi edinin.](https://azure.microsoft.com/offers/ms-azr-0144p/)
 
-Azure İşlevleri, öncelikle bir VM oluşturmak veya bir web uygulaması yayımlamak zorunda kalmadan kodunuzu [sunucusuz](https://azure.microsoft.com/solutions/serverless/) bir ortamda yürütmenize olanak tanır. [Burada işlevleri hakkında bilgi edinin.](./functions-overview.md)
+Azure İşlevleri, öncelikle bir VM oluşturmak veya bir web uygulaması yayımlamak zorunda kalmadan kodunuzu [sunucusuz](https://azure.microsoft.com/solutions/serverless/) bir ortamda yürütmenize olanak tanır. [Burada Işlevler hakkında daha fazla bilgi edinin.](./functions-overview.md)
 
-## <a name="create-a-function"></a>Bir işlev oluşturma
+## <a name="create-a-function"></a>Işlev oluşturma
 
- Bu konu başlığında, Azure portalında bir "Merhaba Dünya" HTTP ile tetiklenen işlev oluşturma için işlevleri kullanmayı öğrenin.
+ Bu konu başlığında, Azure portal bir HTTP ile tetiklenen "Hello World" işlevi oluşturmak için Işlevleri nasıl kullanacağınızı öğrenin.
 
 ![Azure portalında işlev uygulaması oluşturma](./media/functions-create-student-starter/function-app-in-portal-editor.png)
 
@@ -54,15 +53,15 @@ Azure hesabınızla Azure portalında <https://portal.azure.com> sayfasında otu
     | **Uygulama adı** | Genel olarak benzersiz bir ad | Yeni işlev uygulamanızı tanımlayan ad. Geçerli karakterler: `a-z`, `0-9`, ve `-`.  | 
     | **Abonelik** | Aboneliğiniz | Bu yeni işlev uygulamasının oluşturulduğu abonelik. | 
     | **[Kaynak Grubu](../azure-resource-manager/resource-group-overview.md)** |  myResourceGroup | İşlev uygulamanızın oluşturulacağı yeni kaynak grubunun adı. |
-   | **[App Service planı/konumu](./functions-scale.md)** | Yeni | Barındırma planı denetleyen işlev uygulamanız için dağıtılan hangi bölge ve kaynaklarınızın yoğunluğu. Birden fazla işlev uygulaması aynı planı olarak dağıtılan tüm ücretsiz aynı tek örnek paylaşır. Öğrenci başlangıç planın bir sınırlama budur. Tam barındırma seçenekleri [burada açıklanmıştır.](./functions-scale.md)|
+   | **[Plan/konum App Service](./functions-scale.md)** | Yeni | İşlev uygulamanızın hangi bölgeye dağıtıldığını ve kaynaklarınızın yoğunluğunu denetleyen barındırma planı. Aynı plana dağıtılan birden çok Işlev uygulaması aynı tek bir ücretsiz örneği paylaşacaktır. Bu, öğrenci başlangıç planının kısıtlamasıdır. Tam barındırma seçenekleri [burada açıklanmıştır.](./functions-scale.md)|
     | **Çalışma zamanı yığını** | Tercih edilen dil | Tercih ettiğiniz işlev programlama dilini destekleyen bir çalışma zamanı seçin. C# ve F# için **.NET** işlevlerini seçin. |
-    |**[Application Insights](./functions-monitoring.md)**| Enabled | Application Insights, işlev uygulamanızın günlüklerini çözümlemek ve depolamak için kullanılır. Application Insights'ı destekleyen bir konuma seçerseniz, varsayılan olarak etkindir. Application Insights herhangi bir işlev için el ile yakın bir bölge seçerek Application Insights'ı dağıtmak için etkinleştirilebilir. Application Insights, yalnızca canlı akış günlüklerini görüntülemek mümkün olmayacak.
+    |**[Application Insights](./functions-monitoring.md)**| Enabled | Application Insights, işlev uygulamanızın günlüklerini depolamak ve analiz etmek için kullanılır. Application Insights destekleyen bir konum seçerseniz, varsayılan olarak etkindir. Application Insights, Application Insights dağıtmak üzere yakın bölgeyi el ile seçerek herhangi bir işlev için etkinleştirilebilir. Application Insights olmadan yalnızca canlı akış günlüklerini görüntüleyebileceksiniz.
 
-3. Seçin **App Service planı/konumu** üst farklı bir konum seçin
+3. Farklı bir konum seçmek için yukarıdaki **App Service planı/konumu** seçin
 
-4. Seçin **Yeni Oluştur** ve ardından planınızı benzersiz bir ad verin.
+4. **Yeni oluştur** ' u seçin ve planınızı benzersiz bir ad verin.
 
-5. Size en yakın konumu seçin. [Burada Azure bölgelerinin tam bir Haritası'na bakın.](https://azure.microsoft.com/global-infrastructure/regions/) 
+5. Size en yakın konumu seçin. [Azure bölgelerinin tam haritasını buradan görebilirsiniz.](https://azure.microsoft.com/global-infrastructure/regions/) 
 
     <img src="./media/functions-create-student-starter/Create-ASP.png" width="800">
 
@@ -114,29 +113,29 @@ Artık bir HTTP isteği göndererek yeni işlevi çalıştırabilirsiniz.
 
 [!INCLUDE [Clean-up resources](../../includes/functions-quickstart-cleanup.md)]
 
-## <a name="supported-features-in-azure-for-students-starter"></a>Öğrenciler için Azure üzerinde desteklenen özellikler
+## <a name="supported-features-in-azure-for-students-starter"></a>Öğrenciler için Azure başlangıç 'ta desteklenen özellikler
 
-Azure Öğrenci başlangıç için Azure işlevleri çalışma zamanı özelliklerinin çoğu aşağıda listelenen birkaç anahtar kısıtlamalarla erişimi vardır:
+Öğrenci için Azure başlangıç bölümünde, Azure Işlevleri çalışma zamanı özelliklerinin çoğuna aşağıda listelenen birkaç anahtar sınırlaması ile erişebilirsiniz:
 
-* HTTP tetikleyicisi, desteklenen tek tetikleyici türüdür.
-    * Tüm giriş ve bağlamaları desteklenen tüm çıktı! [Burada tam listesine bakın.](functions-triggers-bindings.md)
-* Desteklenen diller: 
-    * C# (.NET Core 2)
-    * JavaScript (8 ve 10 Node.js)
-    * F# (.NET Core 2)
-    * [Burada daha yüksek planlarında desteklenen dilleri bakın](supported-languages.md)
-* Windows tek desteklenen işletim sistemi ' dir.
-* Ölçek sınırlı olduğundan [bir ücretsiz katmanı örneği](https://azure.microsoft.com/pricing/details/app-service/windows/) 60 dakika her gün çalışan. Otomatik olarak HTTP trafiğini alındı, ancak başka 0 ile 1 örneğine serverlessly ölçeklenir.
-* Yalnızca [2.x çalışma zamanı](functions-versions.md) desteklenir.
-* Tüm geliştirici araçları, düzenleme ve işlevleri yayımlama için desteklenmiyor. Bu, VS Code, Visual Studio, Azure CLI ve Azure portalı içerir. Portal dışında herhangi bir şey kullanmak istiyorsanız, önce portalda bir uygulama oluşturun ve ardından bu uygulama, tercih edilen aracında dağıtım hedefi olarak gerekecektir.
+* HTTP tetikleyicisi desteklenen tek tetikleyici türüdür.
+    * Tüm giriş ve çıkış bağlamaları desteklenir! [Tam listeye buradan bakın.](functions-triggers-bindings.md)
+* Desteklenen Diller: 
+    * C#(.NET Core 2)
+    * JavaScript (node. js 8 & 10)
+    * F#(.NET Core 2)
+    * [Daha yüksek planlarda desteklenen dillere bakın](supported-languages.md)
+* Windows desteklenen tek işletim sistemidir.
+* Ölçek, her gün 60 dakika boyunca çalışan [bir ücretsiz katman örneğiyle](https://azure.microsoft.com/pricing/details/app-service/windows/) kısıtlıdır. HTTP trafiği alındığından ancak başka hiçbir işlem yapılmadığında 0 ' dan 1 ' e kadar örnek olarak ölçeklendirirsiniz.
+* Yalnızca [2. x çalışma zamanı](functions-versions.md) desteklenir.
+* Tüm geliştirici araçları, işlevleri düzenlenmek ve yayımlamak için desteklenir. Buna VS Code, Visual Studio, Azure CLı ve Azure portal dahildir. Portal dışında bir şey kullanmak isterseniz, önce portalda bir uygulama oluşturmanız ve ardından tercih ettiğiniz araçta bir dağıtım hedefi olarak bu uygulamayı seçmeniz gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Basit bir HTTP ile tetiklenen işlevi bir işlev uygulaması oluşturdunuz! Şimdi yerel araç kullanımı, daha fazla dil, izleme ve tümleştirmeler keşfedebilirsiniz.
+HTTP ile tetiklenen basit bir işlevi olan bir işlev uygulaması oluşturdunuz! Artık yerel araçları, daha fazla dili, izlemeyi ve tümleştirmeleri inceleyebilirsiniz.
 
  * [Visual Studio kullanarak ilk işlevinizi oluşturma](./functions-create-your-first-function-visual-studio.md)
  * [Visual Studio Code kullanarak ilk işlevinizi oluşturma](./functions-create-first-function-vs-code.md)
- * [Azure işlevleri JavaScript Geliştirici Kılavuzu](./functions-reference-node.md)
- * [Bir Azure SQL veritabanı'na bağlanmak için Azure işlevleri'ni kullanın](./functions-scenario-database-table-cleanup.md)
- * [Azure işlevleri HTTP bağlama hakkında daha fazla bilgi](./functions-bindings-http-webhook.md).
- * [Azure işlevlerini izleme](./functions-monitoring.md)
+ * [Azure Işlevleri JavaScript Geliştirici Kılavuzu](./functions-reference-node.md)
+ * [Azure Işlevleri 'ni kullanarak bir Azure SQL veritabanına bağlanma](./functions-scenario-database-table-cleanup.md)
+ * [Azure IŞLEVLERI http bağlamaları hakkında daha fazla bilgi edinin](./functions-bindings-http-webhook.md).
+ * [Azure Işlevlerinizi izleyin](./functions-monitoring.md)

@@ -1,45 +1,39 @@
 ---
-title: Azure İzleyicisi'nde kapasite ve performans çözümü | Microsoft Docs
-description: Kapasite ve performans çözümü İzleyicisi'nde, Hyper-V sunucuları kapasitesini anlamanıza yardımcı olması için kullanın.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: 51617a6f-ffdd-4ed2-8b74-1257149ce3d4
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici 'de çözüm Kapasite ve Performans | Microsoft Docs
+description: Hyper-V sunucularınızın kapasitesini anlamanıza yardımcı olması için Izleyici 'deki Kapasite ve Performans çözümünü kullanın.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 07/13/2017
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: fcf71bf144b559c4867303988d4c1f08b7aa5605
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 07/13/2017
+ms.openlocfilehash: 8b130b800b53afadc40e0c9b9a2b730f24da396e
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62101923"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899052"
 ---
-# <a name="plan-hyper-v-virtual-machine-capacity-with-the-capacity-and-performance-solution-deprecated"></a>(Kullanım dışı) kapasite ve performans çözümü ile Hyper-V sanal makine kapasitesi planlama
+# <a name="plan-hyper-v-virtual-machine-capacity-with-the-capacity-and-performance-solution-deprecated"></a>Hyper-V sanal makine kapasitesini Kapasite ve Performans çözümüyle planlayın (kullanım dışı)
 
-![Kapasite ve performans simgesi](./media/capacity-performance/capacity-solution.png)
+![Kapasite ve Performans simgesi](./media/capacity-performance/capacity-solution.png)
 
 > [!NOTE]
-> Kapasite ve performans çözümü kullanım dışıdır.  Çözüm'i zaten yüklemiş olan müşteriler, onu kullanmaya devam edebilirsiniz, ancak kapasite ve performans için oluşturulan yeni çalışma alanlarında eklenemez.
+> Kapasite ve Performans Çözümü kullanım dışı bırakılmıştır.  Çözümü zaten yüklemiş olan müşteriler bu uygulamayı kullanmaya devam edebilir, ancak Kapasite ve Performans hiçbir yeni çalışma alanına eklenemez.
 
-İzleyicisi'nde kapasite ve performans çözümü Hyper-V sunucularınızın kapasitesini anlamanıza yardımcı olması için kullanabilirsiniz. Çözüm, konakların ve o Hyper-V konakları üzerinde çalışan sanal makinelerin genel kullanım (CPU, bellek ve disk) göstererek Hyper-V ortamınız hakkında Öngörüler sağlar. Ölçümler, CPU, bellek ve disk için tüm konaklar ve onların üzerinde çalışan Vm'leri toplanır.
+Hyper-V sunucularınızın kapasitesini anlamanıza yardımcı olması için Izleyici 'deki Kapasite ve Performans çözümünü kullanabilirsiniz. Bu çözüm, ana bilgisayarların genel kullanımını (CPU, bellek ve disk) ve bu Hyper-V konaklarında çalışan VM 'Leri göstererek, Hyper-V ortamınız hakkında öngörüler sağlar. Ölçümler, tüm konaklarınızdaki ve üzerinde çalışan VM 'lerde CPU, bellek ve diskler için toplanır.
 
 Çözüm:
 
--   En yüksek ve düşük CPU ve bellek kullanımına sahip konaklar gösterir
--   Sanal makine yüksek ve en düşük CPU ve bellek kullanımı ile gösterilir.
--   Sanal makine yüksek ve en düşük IOPS ve aktarım hızı kullanımı ile gösterilir.
--   Hangi konaklarında çalışan VM'ler gösterir
--   Üst disklerin yüksek aktarım hızı, IOPS ve gecikme süresi ile Küme Paylaşılan Birimleri gösterir.
-- Özelleştirme ve göre grupları filtrelemek sağlar
+-   En yüksek ve en düşük CPU ve bellek kullanımı olan Konakları gösterir
+-   En yüksek ve en düşük CPU ve bellek kullanımı olan VM 'Leri gösterir
+-   En yüksek ve en düşük ıOPS ve aktarım hızı kullanımı olan VM 'Leri gösterir
+-   Hangi sanal makinelerin çalıştığını gösterir
+-   Küme Paylaşılan birimlerinde yüksek aktarım hızı, ıOPS ve gecikme süresine sahip en üstteki diskleri gösterir
+- Grupları temel alarak özelleştirmenizi ve filtrelemenizi sağlar
 
 > [!NOTE]
-> Kapasite yönetimi çağrılan kapasite ve performans çözümü önceki sürümü, System Center Operations Manager hem de System Center Virtual Machine Manager gerekli. Bu güncel çözüm, bu bağımlılıkları yoktur.
+> Kapasite ve Performans çözümünün kapasite yönetimi olarak adlandırılan önceki sürümü hem System Center Operations Manager hem de System Center Virtual Machine Manager gerektirir. Bu güncelleştirilmiş çözümde bu bağımlılıklar yok.
 
 
 ## <a name="connected-sources"></a>Bağlı kaynaklar
@@ -48,92 +42,92 @@ Aşağıdaki tabloda bu çözüm tarafından desteklenen bağlı kaynaklar açı
 
 | Bağlı Kaynak | Destek | Açıklama |
 |---|---|---|
-| [Windows aracıları](../../azure-monitor/platform/agent-windows.md) | Evet | Çözüm, Windows aracılarından kapasite ve performans verileri bilgilerini toplar. |
-| [Linux aracıları](../../azure-monitor/learn/quick-collect-linux-computer.md) | Hayır    | Çözüm, doğrudan Linux aracılarından kapasite ve performans verileri bilgi toplamaz.|
-| [SCOM yönetim grubu](../../azure-monitor/platform/om-agents.md) | Evet |Çözüm, bağlı SCOM yönetim grubundaki aracılardan kapasite ve performans verilerini toplar. Log Analytics SCOM Aracısı'ndan doğrudan bir bağlantı gerekli değildir.|
-| [Azure depolama hesabı](../../azure-monitor/platform/collect-azure-metrics-logs.md) | Hayır | Azure depolama kapasite ve performans verilerini dahil etmez.|
+| [Windows aracıları](../../azure-monitor/platform/agent-windows.md) | Yes | Bu çözüm, Windows aracılarından kapasite ve performans veri bilgilerini toplar. |
+| [Linux aracıları](../../azure-monitor/learn/quick-collect-linux-computer.md) | Hayır    | Çözüm, doğrudan Linux aracılarından kapasite ve performans veri bilgilerini toplamaz.|
+| [SCOM yönetim grubu](../../azure-monitor/platform/om-agents.md) | Yes |Çözüm, bağlı bir SCOM yönetim grubundaki aracılardan kapasite ve performans verilerini toplar. SCOM aracısından Log Analytics 'e doğrudan bir bağlantı gerekli değildir.|
+| [Azure depolama hesabı](../../azure-monitor/platform/collect-azure-metrics-logs.md) | Hayır | Azure depolama, kapasite ve performans verilerini içermez.|
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Windows Server 2012 veya daha yüksek Hyper-V konakları, sanal makineler üzerinde Windows ya da Operations Manager aracıları yüklenmelidir.
+- Windows veya Operations Manager aracıları, sanal makinelere değil, Windows Server 2012 veya daha yüksek bir Hyper-V konaklarında yüklü olmalıdır.
 
 
 ## <a name="configuration"></a>Yapılandırma
 
-Kapasite ve performans çözümü, çalışma alanınıza eklemek için aşağıdaki adımı uygulayın.
+Kapasite ve Performans çözümünü çalışma alanınıza eklemek için aşağıdaki adımı gerçekleştirin.
 
-- Kapasite ve performans çözümü, açıklanan işlemi kullanarak Log Analytics çalışma alanınıza eklemek [Log Analytics çözümleri ekleme çözüm Galerisi'ndeki](../../azure-monitor/insights/solutions.md).
+- [Çözüm Galerisi Log Analytics çözümleri ekleme](../../azure-monitor/insights/solutions.md)bölümünde açıklanan işlemi kullanarak Log Analytics çalışma alanınıza kapasite ve performans çözümünü ekleyin.
 
 ## <a name="management-packs"></a>Yönetim paketleri
 
-SCOM yönetim grubunuzu Log Analytics çalışma alanınıza bağlıysa, bu çözümü eklediğinizde, ardından aşağıdaki yönetim paketleri SCOM yüklenir. Bu yönetim paketleri için bir yapılandırma veya bakım gerekmez.
+SCOM yönetim grubunuz Log Analytics çalışma alanınıza bağlıysa, bu çözümü eklediğinizde aşağıdaki yönetim paketleri SCOM 'ye yüklenir. Bu yönetim paketleri için bir yapılandırma veya bakım gerekmez.
 
-- Microsoft.IntelligencePacks.CapacityPerformance
+- Microsoft. ıntelligencepacks. Capacityperformansı
 
-1201 olay benzer şekilde görünür:
+1201 olayı şuna benzer:
 
 
 ```
 New Management Pack with id:"Microsoft.IntelligencePacks.CapacityPerformance", version:"1.10.3190.0" received.
 ```
 
-Kapasite ve performans çözümü güncelleştirildiğinde, sürüm numarasını değiştirir.
+Kapasite ve Performans çözüm güncelleştirildiği zaman, sürüm numarası değişir.
 
 Çözüm yönetim paketlerini güncelleştirme hakkında daha fazla bilgi için bkz. [Operations Manager'ı Log Analytics’e Bağlama](../../azure-monitor/platform/om-agents.md).
 
 ## <a name="using-the-solution"></a>Çözümü kullanma
 
-Kapasite ve performans çözümü, çalışma alanınıza eklediğinizde, kapasite ve performans için genel bakış Panosu'nu eklenir. Bu kutucuk şu anda etkin Hyper-V ana bilgisayar sayısını görüntüler ve seçili zaman aralığı için izlenen etkin sanal makine sayısı.
+Kapasite ve Performans çözümünü çalışma alanınıza eklediğinizde, Kapasite ve Performans genel bakış panosuna eklenir. Bu kutucuk, şu anda etkin olan Hyper-V konaklarının sayısını ve seçilen dönem için izlenen etkin sanal makine sayısını görüntüler.
 
-![Kapasite ve performans kutucuğu](./media/capacity-performance/capacity-tile.png)
+![Kapasite ve Performans kutucuğu](./media/capacity-performance/capacity-tile.png)
 
 
-### <a name="review-utilization"></a>Kullanımını gözden geçirin
+### <a name="review-utilization"></a>Kullanımı gözden geçir
 
-Kapasite ve performans panoyu açmak için kapasite ve performans kutucuğuna tıklayın. Pano aşağıdaki tabloda gösterilen sütunları içerir. Her sütun, sütunun belirtilen kapsam ve zaman aralığına yönelik kriterleriyle eşleşen en fazla on öğe listeler. Sütunun altındaki **Tümünü gör**’e tıklayarak veya sütun başlığına tıklayarak tüm kayıtları döndüren bir günlük araması gerçekleştirebilirsiniz.
+Kapasite ve Performans panosunu açmak için Kapasite ve Performans kutucuğuna tıklayın. Pano aşağıdaki tabloda gösterilen sütunları içerir. Her sütun, sütunun belirtilen kapsam ve zaman aralığına yönelik kriterleriyle eşleşen en fazla on öğe listeler. Sütunun altındaki **Tümünü gör**’e tıklayarak veya sütun başlığına tıklayarak tüm kayıtları döndüren bir günlük araması gerçekleştirebilirsiniz.
 
-- **Konaklar**
-    - **Ana bilgisayar CPU kullanımı** konakları, seçilen zaman aralığı üzerinde listesini ve ana bilgisayarlarda CPU kullanımını grafik eğilimini gösterir. Zaman içinde belirli bir noktaya ayrıntılarını görüntülemek için çizgi grafik üzerine gelin. Günlük araması ' daha fazla ayrıntı görüntülemek için bir grafiğe tıklayın. Günlük araması'nı açın ve barındırılan sanal makineler için CPU sayaç ayrıntılarını görüntülemek için herhangi bir ana bilgisayar adına tıklayın.
-    - **Ana bilgisayar bellek kullanımı** ana bilgisayar bellek kullanımı ve konakları, seçilen zaman aralığı üzerinde listesini grafik eğilimini gösterir. Zaman içinde belirli bir noktaya ayrıntılarını görüntülemek için çizgi grafik üzerine gelin. Günlük araması ' daha fazla ayrıntı görüntülemek için bir grafiğe tıklayın. Günlük araması'nı açın ve barındırılan sanal makineler için bellek sayacı ayrıntılarını görüntülemek için herhangi bir ana bilgisayar adına tıklayın.
+- **Bilgisayarlarınızı**
+    - **Ana BILGISAYAR CPU kullanımı** Seçilen döneme bağlı olarak konak bilgisayarların CPU kullanımının ve konaklar listesinin grafik eğilimini gösterir. Belirli bir zaman noktasına ilişkin ayrıntıları görüntülemek için çizgi grafiğinin üzerine gelin. Günlük aramasında daha fazla ayrıntı görüntülemek için grafiğe tıklayın. Konak aramasını açmak ve barındırılan VM 'Ler için CPU sayacı ayrıntılarını görüntülemek için herhangi bir ana bilgisayar adına tıklayın.
+    - **Ana bilgisayar bellek kullanımı** Seçili dönem temelinde konak bilgisayarların bellek kullanımının ve bir konak listesinin grafik eğilimini gösterir. Belirli bir zaman noktasına ilişkin ayrıntıları görüntülemek için çizgi grafiğinin üzerine gelin. Günlük aramasında daha fazla ayrıntı görüntülemek için grafiğe tıklayın. Konak aramasını açmak ve barındırılan VM 'Ler için bellek sayacı ayrıntılarını görüntülemek için herhangi bir ana bilgisayar adına tıklayın.
 - **Sanal Makineler**
-    - **VM CPU kullanımı** CPU kullanımı sanal makinelerin ve sanal makineler, seçili süreye dayanarak listesini grafik eğilimini gösterir. Ayrıntılar için belirli bir noktaya en üst 3 VM için zaman görüntülemek için çizgi grafik üzerine gelin. Günlük araması ' daha fazla ayrıntı görüntülemek için bir grafiğe tıklayın. Günlük araması'nı açın ve VM için toplam CPU sayaç ayrıntılarını görüntülemek için herhangi bir VM adına tıklayın.
-    - **VM bellek kullanımı** sanal makinelerin bellek kullanımı ve sanal makineler, seçili süreye dayanarak listesini grafik eğilimini gösterir. Ayrıntılar için belirli bir noktaya en üst 3 VM için zaman görüntülemek için çizgi grafik üzerine gelin. Günlük araması ' daha fazla ayrıntı görüntülemek için bir grafiğe tıklayın. Günlük araması'nı açın ve VM için toplam bellek sayacı ayrıntılarını görüntülemek için herhangi bir VM adına tıklayın.
-    - **VM toplam Disk IOPS** toplam disk IOPS sanal makineler için grafik eğilimini ve her, ıops'den sanal makinelerin bir listesini gösterir. Seçili süreye dayanarak. Ayrıntılar için belirli bir noktaya en üst 3 VM için zaman görüntülemek için çizgi grafik üzerine gelin. Günlük araması ' daha fazla ayrıntı görüntülemek için bir grafiğe tıklayın. Günlük araması ve VM için toplam disk IOPS sayaç Ayrıntıları görünümünde açmak için herhangi bir sanal makine adına tıklayın.
-    - **VM toplam Disk aktarım hızı** toplam disk aktarım hızı sanal makineler için grafik eğilimini ve her, toplam disk aktarım hızı ile sanal makinelerin bir listesini gösterir. Seçili süreye dayanarak. Ayrıntılar için belirli bir noktaya en üst 3 VM için zaman görüntülemek için çizgi grafik üzerine gelin. Günlük araması ' daha fazla ayrıntı görüntülemek için bir grafiğe tıklayın. Günlük araması'nı açın ve sanal makine için toplanan toplam disk aktarım hızı sayacı ayrıntılarını görüntülemek için herhangi bir sanal makine adına tıklayın.
+    - **VM CPU kullanımı** Seçilen döneme bağlı olarak, sanal makinelerin CPU kullanımının ve sanal makinelerin listesinin grafik eğilimini gösterir. İlk 3 VM için belirli bir zaman noktasına ilişkin ayrıntıları görüntülemek için çizgi grafiğinin üzerine gelin. Günlük aramasında daha fazla ayrıntı görüntülemek için grafiğe tıklayın. Günlük aramasını açmak ve VM 'nin toplu CPU sayacı ayrıntılarını görüntülemek için herhangi bir VM adına tıklayın.
+    - **VM bellek kullanımı** Seçilen döneme bağlı olarak, sanal makinelerin bellek kullanımının ve sanal makinelerin listesinin grafik eğilimini gösterir. İlk 3 VM için belirli bir zaman noktasına ilişkin ayrıntıları görüntülemek için çizgi grafiğinin üzerine gelin. Günlük aramasında daha fazla ayrıntı görüntülemek için grafiğe tıklayın. Günlük aramasını açmak ve VM için toplanan bellek sayacı ayrıntılarını görüntülemek için herhangi bir VM adına tıklayın.
+    - **VM toplam DISK IOPS** Seçilen dönem temelinde, sanal makineler için toplam disk ıOPS ve her biri için ıOPS olan sanal makinelerin bir listesini gösterir. İlk 3 VM için belirli bir zaman noktasına ilişkin ayrıntıları görüntülemek için çizgi grafiğinin üzerine gelin. Günlük aramasında daha fazla ayrıntı görüntülemek için grafiğe tıklayın. Günlük aramasını açmak ve VM için toplam disk ıOPS sayacı ayrıntılarını görüntülemek için herhangi bir VM adına tıklayın.
+    - **VM toplam disk işleme** Seçilen dönem temelinde, sanal makineler için toplam disk aktarım hızı ve her biri için toplam disk işleme olan sanal makinelerin bir listesini gösteren grafik eğilimi gösterir. İlk 3 VM için belirli bir zaman noktasına ilişkin ayrıntıları görüntülemek için çizgi grafiğinin üzerine gelin. Günlük aramasında daha fazla ayrıntı görüntülemek için grafiğe tıklayın. Günlük aramasını açmak ve VM 'nin toplam disk işleme sayacı ayrıntılarını görüntülemek için herhangi bir VM adına tıklayın.
 - **Kümelenmiş paylaşılan birimler**
-    - **Toplam aktarım hızı** hem okumalar toplamı gösterilir ve kümelenmiş paylaşılan birimlere yazar.
-    - **Toplam IOPS** kümelenmiş paylaşılan birimler üzerinde saniye başına giriş/çıkış işlemi toplamını gösterir.
-    - **Toplam gecikme süresi** kümelenmiş paylaşılan birimler üzerinde toplam gecikme süresini gösterir.
-- **Ana bilgisayar yoğunluğu** üst kutucuk konakların ve çözüme kullanılabilir sanal makinelerin toplam sayısını gösterir. Günlük aramasında ek ayrıntıları görüntülemek için üst kutucuğa tıklayın. Ayrıca, tüm konaklar ve barındırılan sanal makinelerin sayısını listeler. Bir konak VM sonuçlarına bir günlük araması incelemek için tıklayın.
+    - **Toplam Verimlilik** Kümelenmiş paylaşılan birimlerde hem okuma hem de yazma toplamlarını gösterir.
+    - **Toplam IOPS** Kümelenmiş paylaşılan birimlerde saniye başına giriş/çıkış işlemlerinin toplamını gösterir.
+    - **Toplam gecikme süresi** Kümelenmiş paylaşılan birimlerde toplam gecikme süresini gösterir.
+- **Ana bilgisayar yoğunluğu** En üstteki kutucuk, çözümün kullanabildiği toplam ana bilgisayar ve sanal makine sayısını gösterir. Günlük aramasında ek ayrıntılar görüntülemek için üstteki kutucuğa tıklayın. Ayrıca, tüm konakları ve barındırılan sanal makine sayısını listeler. Bir günlük aramasında VM sonuçlarının detayına gitmek için bir konağa tıklayın.
 
 
-![Pano Ana dikey penceresi](./media/capacity-performance/dashboard-hosts.png)
+![Pano ana bilgisayarları dikey penceresi](./media/capacity-performance/dashboard-hosts.png)
 
 ![Pano sanal makineler dikey penceresi](./media/capacity-performance/dashboard-vms.png)
 
 
 ### <a name="evaluate-performance"></a>Performansı değerlendirme
 
-Üretim bilgi işlem ortamlarının bir kuruluştan diğerine önemli ölçüde farklıdır. Ayrıca, kapasite ve performans iş yükleri nasıl sanal makinelerinizin çalıştığı, bağlı olabilir ve normal düşünün. Yardımcı olmak için özel yordamlar ölçü performans ortamınız için büyük olasılıkla geçerli. Daha fazla öngörücü genelleştirilmiş şekilde kılavuzdur daha iyi yardımcı olmak için uygun. Microsoft, çeşitli yardımcı olmak için normatif bir Rehber makale yayımlar performansı ölçme.
+Üretim hesaplama ortamları, bir kuruluştan diğerine büyük ölçüde farklılık gösterir. Ayrıca kapasite ve performans iş yükleri, sanal makinelerinizin nasıl çalıştığı ve normal olarak ne düşünbileceğinize bağlı olarak değişebilir. Performansı ölçmenize yardımcı olacak belirli yordamlar, büyük olasılıkla ortamınıza uygulanmaz. Bu nedenle, yardım için daha Genelleştirilmiş öngörülü rehberlik daha uygundur. Microsoft, performansı ölçmenize yardımcı olmak için çeşitli öngörülü rehberlik makaleleri yayımlar.
 
-Özetlemek gerekirse, çözüm bir çeşitli kaynaklardan performans sayaçları gibi kapasite ve performans verilerini toplar. Çözümde çeşitli yüzeyleri içinde sunulan bu kapasite ve performans verileri kullanabilirsiniz ve bu sonuçlarınızı karşılaştırın [Hyper-V performansını ölçme](https://msdn.microsoft.com/library/cc768535.aspx) makalesi. Makale bir süre önce yayımlanan olsa da, ölçümler, konuları ve yönergeleri hala geçerli. Bu makale, diğer kullanışlı kaynakların bağlantılarını içerir.
+Özetlemek gerekirse, çözüm, performans sayaçları dahil çeşitli kaynaklardan kapasite ve performans verilerini toplar. Çözümdeki çeşitli yüzeylerde sunulan kapasite ve performans verilerini kullanın ve sonuçları [Hyper-V makalesindeki ölçüdekilerle](https://msdn.microsoft.com/library/cc768535.aspx) karşılaştırın. Makale bir süre önce yayımlansa da ölçümler, önemli noktalar ve yönergeler hala geçerlidir. Makale, diğer yararlı kaynakların bağlantılarını içerir.
 
 
 ## <a name="sample-log-searches"></a>Örnek günlük aramaları
 
-Aşağıdaki tabloda toplanan ve bu çözüm tarafından hesaplanan kapasite ve performans verilerini ilişkin örnek günlük aramaları sunulmaktadır.
+Aşağıdaki tabloda, bu çözüm tarafından toplanan ve hesaplanan kapasite ve performans verilerine yönelik örnek günlük aramaları sunulmaktadır.
 
 
 | Sorgu | Açıklama |
 |:--- |:--- |
-| Tüm konak belleği yapılandırmaları | Perf &#124; nerede ObjectName "Kapasite ve performans" ve CounterName == "Konak atanan bellek MB" == &#124; MB özetlemek avg(CounterValue) tarafından InstanceName = |
-| Tüm VM belleği yapılandırmaları | Perf &#124; nerede ObjectName "Kapasite ve performans" ve CounterName == "VM atanan bellek MB" == &#124; MB özetlemek avg(CounterValue) tarafından InstanceName = |
-| Tüm VM'lerin toplam Disk IOPS dökümü | Perf &#124; nerede ObjectName "Kapasite ve performans" == ve (CounterName "VHD Okuma/sn" veya CounterName == "VHD Yazma/sn" ==) &#124; Summarize aggregatedvalue = avg(CounterValue) bin (TimeGenerated, 1 saat), tarafından CounterName, InstanceName |
-| Tüm VM'lerin toplam Disk işlemesinin dökümü | Perf &#124; nerede ObjectName "Kapasite ve performans" == ve (CounterName "VHD okuma MB/s" veya CounterName == "VHD yazma MB/sn" ==) &#124; Summarize aggregatedvalue = avg(CounterValue) bin (TimeGenerated, 1 saat), tarafından CounterName, InstanceName |
-| Tüm CSV'lerin toplam IOPS dökümü | Perf &#124; nerede ObjectName "Kapasite ve performans" == ve (CounterName "CSV Okuma/sn" veya CounterName == "CSV Yazma/sn" ==) &#124; Summarize aggregatedvalue = avg(CounterValue) bin (TimeGenerated, 1 saat), tarafından CounterName, InstanceName |
-| Tüm CSV'lerin toplam işlemesinin dökümü | Perf &#124; nerede ObjectName "Kapasite ve performans" == ve (CounterName "CSV Okuma/sn" veya CounterName == "CSV Yazma/sn" ==) &#124; Summarize aggregatedvalue = avg(CounterValue) bin (TimeGenerated, 1 saat), tarafından CounterName, InstanceName |
-| Genelinde tüm CSV'lerin toplam gecikme süresinin | Perf &#124; nerede ObjectName "Kapasite ve performans" == ve (CounterName "CSV okuma gecikmesi" veya CounterName == "CSV yazma gecikme süresi" ==) &#124; Summarize aggregatedvalue = avg(CounterValue) bin (TimeGenerated, 1 saat), tarafından CounterName, InstanceName |
+| Tüm konak belleği yapılandırması | &#124; NesneAdı, ObjectName = = "kapasite ve performans" ve CounterName = = "ana bilgisayar ATANMıŞ bellek MB &#124; " özetleme MB = Ort (CounterValue) |
+| Tüm VM belleği yapılandırması | &#124; ObjectName = = "kapasite ve performans" ve CounterName = = "VM atanan bellek MB 'si" &#124; , InstanceName 'e göre MB = AVG (CounterValue). |
+| Tüm VM 'lerde toplam disk ıOPS dökümü | &#124; {1 & gt; ObjectName = = "kapasite ve performans" ve (CounterName = = "VHD okumaları/s" ya da CounterName = = "VHD yazmaları &#124; /s"), bin (TimeGenerated, 1h), CounterName, InstanceName için Aggreg, value = Ort (CounterValue) özetleme |
+| Tüm VM 'lerde toplam disk aktarım hızı dökümü | { &#124; 1 & gt; ObjectName = = "kapasite ve performans" ve (CounterName = = "VHD Read MB/s" ya da CounterName = = "VHD yazma MB &#124; /s") performansı, bin (TimeGenerated, 1h), CounterName, InstanceName için Aggreg |
+| Tüm CSV 'lerde toplam ıOPS dökümü | ObjectName &#124; = = "kapasite ve performans" ve (CounterName = = "CSV okumaları/s" ya da CounterName = = "CSV yazmaları/s") &#124; , konum (TimeGenerated, 1h), CounterName, InstanceName için Aggreg, değer = AVG (CounterValue) özetleme |
+| Tüm CSV 'lerde toplam Işleme dökümü | ObjectName &#124; = = "kapasite ve performans" ve (CounterName = = "CSV okumaları/s" ya da CounterName = = "CSV yazmaları/s") &#124; , konum (TimeGenerated, 1h), CounterName, InstanceName için Aggreg, değer = AVG (CounterValue) özetleme |
+| Tüm CSV 'lerde toplam gecikme süresinin dökümünü | { &#124; 1 & gt; ObjectName = = "kapasite ve performans" ve (CounterName = = "CSV okuma gecikmesi" ya da CounterName = = "CSV &#124; yazma gecikme süresi"), bin (TimeGenerated, 1h), CounterName, InstanceName öğesine göre Aggreg, value = Ort (CounterValue) özetleme |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kullanım [Log Analytics'te günlük aramaları](../../azure-monitor/log-query/log-query-overview.md) ayrıntılı kapasite ve performans verilerini görüntülemek için.
+* Ayrıntılı Kapasite ve Performans verileri görüntülemek için [Log Analytics 'de günlük aramalarını](../../azure-monitor/log-query/log-query-overview.md) kullanın.

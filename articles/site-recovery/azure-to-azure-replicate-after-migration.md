@@ -1,87 +1,88 @@
 ---
-title: Azure Site Recovery ile azure'a geçiş sonrasında Azure Vm'leri için olağanüstü durum kurtarma ayarlama | Microsoft Docs
-description: Bu makalede Azure Site Recovery ile azure'a geçiş sonrasında Azure bölgeleri arasında olağanüstü durum kurtarma ayarlama için makineleri hazırlamayı öğrenin.
+title: Azure Site Recovery ile Azure 'a geçişten sonra olağanüstü durum kurtarmayı ayarlama
+description: Bu makalede, Azure Site Recovery kullanarak Azure 'a geçişten sonra Azure bölgeleri arasında olağanüstü durum kurtarmayı ayarlamak için makinelerin nasıl hazırlanacağı açıklanır.
 services: site-recovery
 author: rayne-wiselman
+manager: carmonm
 ms.service: site-recovery
 ms.topic: article
-ms.date: 05/30/2019
+ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: 4b764c8e7c3d97ff521add05033265f705c4136f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 874c282ff878126297dc46ca0e7a4c19910e40a1
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66399530"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159121"
 ---
 # <a name="set-up-disaster-recovery-for-azure-vms-after-migration-to-azure"></a>Azure'a geçişten sonra Azure VM'leri için olağanüstü durumdan kurtarmayı ayarlama 
 
 
-Belirttiyseniz bu makaleyi takip [şirket içi makinelerin Azure Vm'lerine taşıdınız](tutorial-migrate-on-premises-to-azure.md) kullanarak [Site Recovery](site-recovery-overview.md) hizmeti ve artık istediğiniz ikincil bir Azure bölgesine olağanüstü durum kurtarma için ayarlanmış Vm'leri almak. Makalede nasıl geçirilen Vm'lerinde Azure VM aracısı yüklü olduğundan emin olun ve geçişten sonra artık gerekli olan Site Recovery Mobility hizmetinin nasıl kaldırılacağı açıklanmaktadır.
+Şirket içi makineleri [Site Recovery](site-recovery-overview.md) hizmetini kullanarak [Azure VM 'lerine geçirdiyseniz](tutorial-migrate-on-premises-to-azure.md) ve artık ikincil bir Azure bölgesine olağanüstü durum kurtarma için ayarlanan VM 'leri almak istiyorsanız bu makaleyi izleyin. Makalede, Azure VM aracısının geçirilmiş VM 'lerde yüklü olduğundan ve geçişten sonra artık gerekmeyen Site Recovery Mobility hizmetini nasıl kaldırabileceği açıklanmaktadır.
 
 
 
-## <a name="verify-migration"></a>Geçişi doğrulama
+## <a name="verify-migration"></a>Geçişi doğrula
 
-Olağanüstü durum kurtarma işlemini ayarladığınız önce geçiş beklendiği gibi tamamlanmış olduğundan emin olun. Bir geçiş yük devretme işleminden sonra başarıyla tamamlanması için seçmelisiniz **geçişi Tamamla** geçirmek istediğiniz her makine için bir seçenek. 
+Olağanüstü durum kurtarmayı ayarlamadan önce geçişin beklenen şekilde tamamlandığından emin olun. Bir geçişi başarılı bir şekilde gerçekleştirmek için, yük devretmeden sonra, geçirmek istediğiniz her makine için **tüm geçiş** seçeneğini seçmeniz gerekir. 
 
-## <a name="verify-the-azure-vm-agent"></a>Azure VM Aracısı'nı doğrulayın
+## <a name="verify-the-azure-vm-agent"></a>Azure VM aracısını doğrulama
 
-Her Azure VM olmalıdır [Azure VM Aracısı](../virtual-machines/extensions/agent-windows.md) yüklü. Azure Vm'lerini çoğaltmak için Site Recovery Aracısı'nı bir uzantı yükler.
+Her Azure sanal makinesinde [Azure VM aracısının](../virtual-machines/extensions/agent-windows.md) yüklü olması gerekir. Azure VM 'lerini çoğaltmak için Site Recovery aracıya bir uzantı yüklenir.
 
-- Makine sürüm 9.7.0.0 çalıştırıyorsa veya daha sonra Site Recovery Mobility hizmeti, Azure VM Aracısı Windows vm'lerinde Mobility hizmeti tarafından otomatik olarak yüklenir. Mobility hizmetinin daha önceki sürümlerinde, aracıyı otomatik olarak yüklemeniz gerekir.
-- Linux VM'ler için Azure VM aracısını el ile yüklemeniz gerekir. Yalnızca geçirilen makineye yüklü mobilite hizmeti v9.6 ise Azure VM aracısını yüklemeniz gerekir ya da daha önce.
+- Makine, Site Recovery Mobility hizmetinin sürüm 9.7.0.0 veya sonraki bir sürümünü çalıştırıyorsa, Azure VM Aracısı Windows VM 'lerine Mobility hizmeti tarafından otomatik olarak yüklenir. Mobility hizmetinin önceki sürümlerinde aracıyı el ile yükleyeceksiniz.
+- Linux sanal makineleri için Azure VM aracısını el ile yüklemelisiniz. Yalnızca geçirilen makinede yüklü olan Mobility hizmeti v 9.6 'ya veya daha önceki bir sürümdeyse, Azure VM aracısını yüklemeniz gerekir.
 
 
-### <a name="install-the-agent-on-windows-vms"></a>Windows sanal makinelerinde aracıyı yükleme
+### <a name="install-the-agent-on-windows-vms"></a>Aracıyı Windows VM 'lerine yükler
 
-Site Recovery mobility hizmeti 9.7.0.0'den önceki bir sürümünü çalıştırıyorsanız veya aracıyı el ile yüklemek için diğer bazı gereksinimi varsa, aşağıdakileri yapın:  
+Site Recovery Mobility hizmetinin 9.7.0.0 'den önceki bir sürümünü çalıştırıyorsanız veya aracıyı el ile yüklemek için başka bir ihtiyacınız varsa şunları yapın:  
 
-1. VM üzerinde yönetici izinlerine sahip olun.
-2. İndirme [VM Aracısı yükleyicisi](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409).
+1. VM üzerinde yönetici izinlerine sahip olduğunuzdan emin olun.
+2. [VM Aracısı yükleyicisini](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409)indirin.
 3. Yükleyici dosyasını çalıştırın.
 
 #### <a name="validate-the-installation"></a>Yüklemeyi doğrulama
-Aracının yüklü olduğunu denetlemek için:
+Aracının yüklenip yüklenmediğini denetlemek için:
 
-1. Azure VM'de C:\WindowsAzure\Packages klasöründeki WaAppAgent.exe dosyasını görmeniz gerekir.
-2. Dosyaya sağ tıklayın ve **özellikleri**seçin **ayrıntıları** sekmesi.
-3. Doğrulayın **ürün sürümü** alan gösterir 2.6.1198.718 veya üzeri.
+1. Azure VM 'de, C:\WindowsAzure\Packages klasöründe, WaAppAgent. exe dosyasını görmeniz gerekir.
+2. Dosyaya sağ tıklayın ve **Özellikler**' de **Ayrıntılar** sekmesini seçin.
+3. **Ürün sürümü** alanının 2.6.1198.718 veya üzeri olduğunu doğrulayın.
 
-[Daha fazla bilgi edinin](https://docs.microsoft.com/azure/virtual-machines/extensions/agent-windows) Windows için aracı yüklemesi hakkında.
+Windows için aracı yüklemesi hakkında [daha fazla bilgi edinin](https://docs.microsoft.com/azure/virtual-machines/extensions/agent-windows) .
 
-### <a name="install-the-agent-on-linux-vms"></a>Linux Vm'lerde aracı yükleme
+### <a name="install-the-agent-on-linux-vms"></a>Aracıyı Linux VM 'lerine yükler
 
-Yükleme [Azure Linux VM](../virtual-machines/extensions/agent-linux.md) aracısını aşağıdaki gibi el ile:
+[Azure LINUX VM](../virtual-machines/extensions/agent-linux.md) aracısını aşağıdaki şekilde el ile yükleyebilirsiniz:
 
-1. Makine üzerinde yönetici izinlerine sahip olduğunuzdan emin olun.
-2. Dağıtımınıza ait bir paket deposundaki bir RPM veya DEB paketini kullanarak Linux VM aracısını yüklemeniz önerilir. Tüm [dağıtım sağlayıcıları onaylı](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros) Azure Linux Aracısı paketi, görüntüleri ve depoları tümleştirme.
-    - Aracının yalnızca bir dağıtım deposu aracılığıyla güncelleştirmeniz önerilir.
-    - Doğrudan Github'dan Linux VM aracısını yükleme ve güncelleştirirken önerilmemektedir.
-    -  Dağıtımınız için en son aracıyı yüklemek yönergeler mevcut, ilgili kişi dağıtım desteği değilse. 
+1. Makinede yönetici izinlerinizin olduğundan emin olun.
+2. Kuruluşunuzun paket deposundan bir RPM veya bir DEB paketini kullanarak Linux VM aracısını yüklemenizi önemle öneririz. Tüm [onaylı dağıtım sağlayıcıları](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros) , Azure Linux Aracısı paketini görüntülerle ve depolarında tümleştirin.
+    - Aracıyı yalnızca bir dağıtım deposu aracılığıyla güncelleştirmenizi önemle tavsiye ederiz.
+    - Linux VM aracısının doğrudan GitHub 'dan yüklenmesini ve güncelleştirilmesini önermiyoruz.
+    -  Dağıtım için en son aracı kullanılamıyorsa, nasıl yükleneceğine ilişkin yönergeler için dağıtım desteğiyle iletişim kurun. 
 
 #### <a name="validate-the-installation"></a>Yüklemeyi doğrulama 
 
-1. Bu komutu çalıştırın: **ps -e** Azure aracısını Linux VM üzerinde çalıştığından emin olmak için.
-2. İşlem çalışıyor durumda değilse, aşağıdaki komutları kullanarak yeniden başlatın:
-    - Ubuntu için: **hizmet walinuxagent başlangıcı**
-    - Diğer dağıtımlar için: **hizmet waagent başlangıcı**
+1. Linux VM 'de Azure aracısının çalıştığından emin olmak için şu komutu çalıştırın: **PS-e** .
+2. İşlem çalışmıyorsa, aşağıdaki komutları kullanarak yeniden başlatın:
+    - Ubuntu: **Service walınuxagent başlatma**
+    - Diğer dağıtımlar için: **hizmet waagent başlatması**
 
 
-## <a name="uninstall-the-mobility-service"></a>Mobility hizmetini kaldırın
+## <a name="uninstall-the-mobility-service"></a>Mobility hizmetini kaldırma
 
-1. Mobility hizmetini el ile aşağıdaki yöntemlerden birini kullanarak Azure sanal makineden kaldırın. 
-    - Denetim Masası'nda Windows için > **Program Ekle/Kaldır**, kaldırma **Microsoft Azure Site Recovery Mobility hizmeti/ana hedef sunucusu**. Yükseltilmiş bir komut isteminde çalıştırın:
+1. Aşağıdaki yöntemlerden birini kullanarak Mobility hizmetini Azure VM 'den el ile kaldırın. 
+    - Windows için Denetim Masası 'nda **Program Ekle/kaldır**> **Microsoft Azure Site Recovery Mobility hizmeti/ana hedef sunucusu**' nu kaldırın. Yükseltilmiş bir komut isteminde şunu çalıştırın:
         ```
         MsiExec.exe /qn /x {275197FC-14FD-4560-A5EB-38217F80CBD1} /L+*V "C:\ProgramData\ASRSetupLogs\UnifiedAgentMSIUninstall.log"
         ```
-    - Linux için kök kullanıcı olarak oturum açın. Bir terminal penceresinde Git **/user/local/ASR**, ve aşağıdaki komutu çalıştırın:
+    - Linux için, kök kullanıcı olarak oturum açın. Bir terminalde **/User/Local/ASR**adresine gidin ve şu komutu çalıştırın:
         ```
         ./uninstall.sh -Y
         ```
-2. Çoğaltma yapılandırmadan önce VM'yi yeniden başlatın.
+2. Çoğaltmayı yapılandırmadan önce VM 'yi yeniden başlatın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Gözden geçirme sorun giderme](site-recovery-extension-troubleshoot.md) Azure VM Aracısı Site Recovery uzantının.
-[Hızlı bir şekilde çoğaltmak](azure-to-azure-quickstart.md) Azure VM'LERİNİ ikincil bir bölgeye.
+Azure VM Aracısı 'nda Site Recovery uzantısı için [sorun gidermeyi gözden geçirin](site-recovery-extension-troubleshoot.md) .
+Bir Azure VM 'yi bir ikincil bölgeye [hızlıca çoğaltın](azure-to-azure-quickstart.md) .

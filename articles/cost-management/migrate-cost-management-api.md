@@ -1,6 +1,6 @@
 ---
-title: Microsoft Müşteri sözleşmesi API - Azure için Kurumsal Anlaşmamdan geçirme | Microsoft Docs
-description: Bu makale bir Microsoft Müşteri sözleşmesi için Microsoft Kurumsal Anlaşma (EA) geçiş işleminin sonuçlarını anlamanıza yardımcı olur.
+title: Kurumsal Anlaşma 'den Microsoft müşteri anlaşması API 'Lerine geçiş-Azure | Microsoft Docs
+description: Bu makale, Microsoft Kurumsal Anlaşma (EA) ' ın bir Microsoft Müşteri sözleşmesine geçirmesinin sonuçlarını anlamanıza yardımcı olur.
 services: cost-management
 keywords: ''
 author: bandersmsft
@@ -10,138 +10,138 @@ ms.topic: conceptual
 ms.service: cost-management
 manager: micflan
 ms.custom: ''
-ms.openlocfilehash: c3fb1f430076b26f7b5dd83e167371ac6d957ac4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ee4b2196240ceff1351b7ea310d9660ed613d075
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65967229"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73152070"
 ---
-# <a name="migrate-from-enterprise-agreement-to-microsoft-customer-agreement-apis"></a>Kurumsal Sözleşme, Microsoft Müşteri sözleşmesi API'lerine geçiş
+# <a name="migrate-from-enterprise-agreement-to-microsoft-customer-agreement-apis"></a>Kurumsal Anlaşma 'den Microsoft Müşteri Sözleşmesi API 'Lerine geçiş
 
-Bu makalede veri yapısı, API ve diğer Kurumsal Anlaşma (EA) ve Microsoft Müşteri Sözleşmesi (MCA) hesapları sistem tümleştirme farklılıklardan anlamanıza yardımcı olur. Azure maliyet yönetimi, API'leri her iki hesap türlerini destekler. Gözden geçirme [kurulum için Faturalama hesabı](../billing/billing-mca-setup-account.md) devam etmeden önce Microsoft Müşteri sözleşmesi makalesi.
+Bu makale, Kurumsal Anlaşma (EA) ve Microsoft Müşteri Sözleşmesi (MCA) hesapları arasındaki veri yapısını, API 'yi ve diğer sistem tümleştirme farklarını anlamanıza yardımcı olur. Azure maliyet yönetimi, her iki hesap türü için API 'Leri destekler. Devam etmeden önce Microsoft müşteri anlaşması [için faturalandırma hesabı](../billing/mca-setup-account.md) ' nı gözden geçirin.
 
-Mevcut bir EA hesap bir kuruluşlarıyla MCA hesabınızı ayarlama ile birlikte bu makalede gözden geçirmeniz gerekir. Daha önce bir EA hesap yenileniyor, eski bir kayıt işlemini yeni bir dala taşımak için bazı en az iş gereklidir. Ancak, geçiş MCA hesabınız için ek çaba gerektirir. Temel fatura alt sistemdeki tüm maliyet ile ilgili API'ler ve hizmet teklifleri etkileyen değişiklikler nedeniyle ek çalışmasıdır.
+Mevcut bir EA hesabı olan kuruluşlar, bu makaleyi bir MCA hesabı ayarıyla birlikte incelemelidir. Daha önce, bir EA hesabının yenilenmesi, eski bir kayıttan yenisine geçiş yapmak için az sayıda iş gerektirir. Ancak, bir MCA hesabına geçiş için ek çaba gerekir. Daha fazla çaba, temel alınan faturalandırma alt sistemindeki değişikliklerden kaynaklanır ve bu da tüm maliyetlerle ilgili API 'Leri ve hizmet tekliflerini etkiler.
 
-## <a name="mca-apis-and-integration"></a>MCA API'ler ve tümleştirme
+## <a name="mca-apis-and-integration"></a>MCA API 'Leri ve Tümleştirme
 
-MCA API'leri ve yeni bir tümleştirme sağlar:
+MCA API 'Leri ve yeni tümleştirme şunları yapmanıza olanak sağlar:
 
-- Yerel Azure API'leri aracılığıyla tam API kullanılabilirlik vardır.
-- Birden çok faturası tek bir fatura hesap yapılandırın.
-- Market satın alımları Azure hizmet kullanımı ve üçüncü taraf Market kullanım ile birleştirilmiş bir API erişin.
-- Görüntüleme maliyetleri profilleri (aynı kayıtlar) faturalama arasında Azure maliyet Yönetimi'ni kullanma.
-- Maliyetleri gösterme, bildirim maliyetlerini önceden tanımlanmış eşiklerini aşan ve otomatik olarak ham verileri dışarı aktarma alın. yeni API'ler erişim.
+- Yerel Azure API 'Leri aracılığıyla tüm API kullanılabilirliği vardır.
+- Tek bir faturalandırma hesabında birden çok fatura yapılandırın.
+- Azure hizmet kullanımı, üçüncü taraf Market kullanımı ve Market satın alımları ile birleştirilmiş bir API 'ye erişin.
+- Azure maliyet yönetimi 'ni kullanarak faturalandırma profillerindeki (kayıtlarla aynı) maliyetleri görüntüleyin.
+- Maliyetleri göstermek, maliyetler önceden tanımlanmış eşikleri aştığında bildirim almak ve ham verileri otomatik olarak dışarı aktarmak için yeni API 'Lere erişin.
 
 ## <a name="migration-checklist"></a>Geçiş denetim listesi
 
-Aşağıdaki öğeler MCA API'lerine geçiş Yardımı.
+Aşağıdaki öğeler, MCA API 'Lerine geçişinize yardımcı olur.
 
-- Yeni bilgilenmeli [Microsoft Müşteri faturalama hesabı sözleşmesi](../billing/billing-mca-overview.md).
-- Hangi API'leri kullanın ve hangilerinin aşağıdaki bölümde değiştirilir bkz belirleyin.
-- İle kendinizi alıştırın [Azure Resource Manager REST API'leri](/rest/api/azure).
-- Azure Resource Manager API'leri, zaten kullanıyorsanız, [istemci uygulamanızı Azure AD'ye kaydetme](/rest/api/azure/#register-your-client-application-with-azure-ad).
-- Herhangi bir programlama kod güncelleştirme [kullanımı Azure AD kimlik doğrulaması](/rest/api/azure/#create-the-request).
-- EA API çağrıları MCA API çağrısı ile değiştirmek için programlama kodu güncelleştirin.
-- Yeni hata kodları kullanmak için hata işleme güncelleştirin.
-- Cloudyn ve diğer Power BI eylem gerektiği gibi ek tümleştirme teklifleri inceleyin.
+- Yeni [Microsoft Müşteri Sözleşmesi faturalandırma hesabı](../billing/billing-mca-overview.md)hakkında bilgi edinin.
+- Hangi API 'Leri kullanacağınızı öğrenin ve aşağıdaki bölümde hangi hangilerinin değiştirildiğini görüntüleyin.
+- [Azure Resource Manager REST API 'leri](/rest/api/azure)hakkında bilgi edinin.
+- Zaten Azure Resource Manager API 'Leri kullanmıyorsanız, [istemci uygulamanızı Azure AD 'ye kaydedin](/rest/api/azure/#register-your-client-application-with-azure-ad).
+- [Azure AD kimlik doğrulamasını kullanmak](/rest/api/azure/#create-the-request)için herhangi bir programlama kodunu güncelleştirin.
+- EA API çağrılarını, MCA API çağrıları ile değiştirmek için herhangi bir programlama kodunu güncelleştirin.
+- Yeni hata kodlarını kullanmak için hata işlemeyi güncelleştirin.
+- Cloudyn ve Power BI gibi diğer tümleştirme tekliflerini gözden geçirin ve diğer gerekli işlemleri yapın.
 
-## <a name="ea-apis-replaced-with-mca-apis"></a>EA API MCA API'leri ile değiştirildi
+## <a name="ea-apis-replaced-with-mca-apis"></a>EA API 'Leri, MCA API 'Leriyle değiştirilmiştir
 
-EA API, API anahtarı kimlik doğrulaması ve yetkilendirme için kullanın. Azure AD kimlik doğrulaması MCA API'lerini kullanın.
+EA API 'Leri, kimlik doğrulama ve yetkilendirme için bir API anahtarı kullanır. MCA API 'Leri Azure AD kimlik doğrulamasını kullanır.
 
-| Amaç | EA API | MCA API |
+| Amaç | EA APı 'SI | MCA APı 'SI |
 | --- | --- | --- |
-| Bakiye ve krediler | [/balancesummary](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary) | Microsoft.Billing/billingAccounts/billingProfiles/availableBalanceussae |
-| Kullanım (JSON) | [/UsageDetails](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format)[/usagedetailsbycustomdate](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format) | [Microsoft.Consumption/usageDetails](/rest/api/consumption/usagedetails)<sup>1</sup> |
-| Kullanım (CSV) | [/ usagedetails/indirme](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format) [ /usagedetails/gönderme](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format) | [Microsoft.Consumption/usageDetails/download](/rest/api/consumption/usagedetails)<sup>1</sup> |
-| Market kullanım (CSV) | [/marketplacecharges](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge)[/marketplacechargesbycustomdate](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge) | [Microsoft.Consumption/usageDetails/download](/rest/api/consumption/usagedetails)<sup>1</sup> |
-| Faturalama dönemleri | [/billingperiods](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) | Microsoft.Billing/billingAccounts/billingProfiles/invoices |
-| Fiyat listesi | [/pricesheet](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet) | Microsoft.Billing/billingAccounts/billingProfiles/pricesheet/default/download biçimi json =|CSV Microsoft.Billing/billingAccounts/.../billingProfiles/.../invoices/... /pricesheet/default/download biçimi json =|CSV Microsoft.Billing/billingAccounts/... / billingProfiles /... /providers/Microsoft.Consumption/pricesheets/download  |
-| Rezervasyon satın alma | [/reservationcharges](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges) | Microsoft.Billing/billingAccounts/billingProfiles/transactions |
-| Ayırma önerileri | [/ SharedReservationRecommendations](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-shared-reserved-instance-recommendations)[/](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations)[SingleReservationRecommendations](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations) | [Microsoft.Consumption/reservationRecommendations](/rest/api/consumption/reservationrecommendations/list) |
-| Ayırma kullanımı | [/reservationdetails](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#request-for--reserved-instance-usage-details)[/reservationsummaries](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage) | [Microsoft.Consumption/reservationDetails](/rest/api/consumption/reservationsdetails)[Microsoft.Consumption/reservationSummaries](/rest/api/consumption/reservationssummaries) |
+| Bakiye ve krediler | [/balancesummary](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary) | Microsoft. faturalandırma/billingAccounts/billingProfiles/availableBalanceussae |
+| Kullanım (JSON) | [/UsageDetails](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format)[/usageayrýntýbycustomdate](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format) | [Microsoft. tüketim/usageDetails](/rest/api/consumption/usagedetails)<sup>1</sup> |
+| Kullanım (CSV) | [/UsageDetails/Download](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format)[/UsageDetails/gönder](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format) | [Microsoft. tüketim/usageDetails/Download](/rest/api/consumption/usagedetails)<sup>1</sup> |
+| Market kullanımı (CSV) | [/marketplacecharges](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge)[/marketplacechargesbycustomdate](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge) | [Microsoft. tüketim/usageDetails/Download](/rest/api/consumption/usagedetails)<sup>1</sup> |
+| Fatura dönemleri | [/billingdönemler](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) | Microsoft. faturalandırma/billingAccounts/billingProfiles/faturalar |
+| Fiyat listesi | [/pricesheet](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet) | Microsoft. faturalandırma/billingAccounts/billingProfiles/fiyat listesi/varsayılan/indirme biçimi = JSON|CSV Microsoft. faturalandırma/billingAccounts/.../billingProfiles/.../faturalar/... /pricesheet/default/Download Format = JSON|CSV Microsoft. faturalandırma/billingAccounts/.. /Billingprofiles/.exe. /providers/Microsoft.Consumption/pricesheets/download  |
+| Rezervasyon satın almaları | [/rezervationcharges](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges) | Microsoft. faturalandırma/billingAccounts/billingProfiles/işlemler |
+| Ayırma önerileri | [/Sharedrezervationönerilere](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-shared-reserved-instance-recommendations)[/](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations)[SingleReservationRecommendations](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations) | [Microsoft. tüketim/Rezervationönerilere](/rest/api/consumption/reservationrecommendations/list) |
+| Ayırma kullanımı | [/rezervationdetails](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#request-for-reserved-instance-usage-details)[/rezervationözetler](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage) | [Microsoft. tüketim/Rezervationdetails](/rest/api/consumption/reservationsdetails)[Microsoft. tüketim/rezervationözetler](/rest/api/consumption/reservationssummaries) |
 
-<sup>1</sup> azure hizmet ve üçüncü taraf Market kullanım bulunan [kullanım ayrıntılarını API'si](/rest/api/consumption/usagedetails).
+<sup>1</sup> Azure hizmeti ve üçüncü taraf Market kullanımı, [kullanım ayrıntıları API 'si](/rest/api/consumption/usagedetails)ile kullanılabilir.
 
-Aşağıdaki API'leri MCA fatura hesapları için kullanılabilir:
+Aşağıdaki API 'Ler, MCA faturalandırma hesapları için kullanılabilir:
 
-| Amaç | Microsoft Müşteri Sözleşmesi (MCA) API'si |
+| Amaç | Microsoft Müşteri Sözleşmesi (MCA) API 'SI |
 | --- | --- |
-| Faturalama hesaplarının<sup>2</sup> | Microsoft.Billing/billingAccounts |
-| Faturalandırma profilleri<sup>2</sup> | Microsoft.Billing/billingAccounts/billingProfiles |
-| Fatura bölümleri<sup>2</sup> | Microsoft.Billing/billingAccounts/invoiceSections |
-| Faturalar | Microsoft.Billing/billingAccounts/billingProfiles/invoices |
-| Faturalandırma abonelikler | {kapsamı} / billingSubscriptions |
+| Faturalandırma hesapları<sup>2</sup> | Microsoft. faturalandırma/billingAccounts |
+| Faturalandırma profilleri<sup>2</sup> | Microsoft. faturalandırma/billingAccounts/billingProfiles |
+| Fatura bölümleri<sup>2</sup> | Microsoft. faturalandırma/billingAccounts/ınvoicesections |
+| Faturalar | Microsoft. faturalandırma/billingAccounts/billingProfiles/faturalar |
+| Faturalama abonelikleri | {Scope}/Billingabonelikleri |
 
-<sup>2</sup> API'leri burada maliyet yönetimi, Azure portalında deneyimleri ve API'leri çalışması kapsamları nesnelerinin listesini döndürür. Maliyet Yönetimi kapsamları hakkında daha fazla bilgi için bkz. [anlayın ve kapsamlı iş](understand-work-scopes.md).
+<sup>2</sup> API 'ler, Azure Portal ve API 'Lerde maliyet yönetimi deneyimlerinin çalıştığı kapsam olan nesnelerin listesini döndürür. Maliyet yönetimi kapsamları hakkında daha fazla bilgi için bkz. [kapsamları anlama ve bunlarla çalışma](understand-work-scopes.md).
 
-Mevcut bir EA API kullanıyorsanız, bunları MCA fatura hesapları desteklemek için güncelleştirmeniz gerekir. Aşağıdaki tablo, başka bir tümleştirme değişiklik gösterir:
+Mevcut EA API 'Lerini kullanıyorsanız, bunları MCA faturalandırma hesaplarını destekleyecek şekilde güncelleştirmeniz gerekir. Aşağıdaki tabloda diğer tümleştirme değişiklikleri gösterilmektedir:
 
-| Amaç | Eski teklifi | Yeni Teklif |
+| Amaç | Eski teklif | Yeni teklif |
 | --- | --- | --- |
 | Cloudyn | [Cloudyn.com](https://www.cloudyn.com) | [Azure Maliyet Yönetimi](https://azure.microsoft.com/services/cost-management/) |
-| Power BI | [Microsoft kullanım öngörüleri](/power-bi/desktop-connect-azure-consumption-insights) İçerik Paketi ve bağlayıcı | [Microsoft Azure tüketim öngörüleri Power BI uygulamasında](https://appsource.microsoft.com/product/power-bi/pbi_azureconsumptioninsights.pbi-azure-consumptioninsights?tab=overview) ve [Azure tüketim öngörüleri Bağlayıcısı](/power-bi/desktop-connect-azure-consumption-insights) |
+| Power BI | [Microsoft tüketim öngörüleri](/power-bi/desktop-connect-azure-consumption-insights) içerik paketi ve Bağlayıcısı | [Microsoft Azure Consumption Insights Power BI uygulama](https://appsource.microsoft.com/product/power-bi/pbi_azureconsumptioninsights.pbi-azure-consumptioninsights?tab=overview) ve [Azure consumption Insights Bağlayıcısı](/power-bi/desktop-connect-azure-consumption-insights) |
 
-## <a name="apis-to-get-balance-and-credits"></a>Bakiye ve kredi almak için API'ler
+## <a name="apis-to-get-balance-and-credits"></a>Bakiye ve kredilerin alınacağı API 'Ler
 
-[Bakiye özeti alma](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary) API'si aylık bir özetini sunar:
+[Get bakiye Özeti](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary) API 'si size aylık bir özet verir:
 
 - Bakiyeler
 - Yeni satın almalar
-- Azure Market hizmeti ücreti
+- Azure Market hizmet ücretleri
 - Düzeltmeler
 - Hizmet fazla kullanım ücretleri
 
-Tüm tüketim API'leri, Azure AD kimlik doğrulama ve yetkilendirme için kullanın. yerel Azure API'leri ile değiştirilir. Azure REST API'lerini çağırmayla ilgili daha fazla bilgi için bkz. [REST ile çalışmaya başlama](/rest/api/azure/#create-the-request).
+Tüm tüketim API 'Leri, kimlik doğrulama ve yetkilendirme için Azure AD kullanan yerel Azure API 'Leri tarafından değiştirilmiştir. Azure REST API 'Leri çağırma hakkında daha fazla bilgi için bkz. [rest ile çalışmaya](/rest/api/azure/#create-the-request)başlama.
 
-Bakiye özeti alma API Microsoft.Billing/billingAccounts/billingProfiles/availableBalance API'si tarafından değiştirilir.
+Get bakiye Özeti API 'SI Microsoft. faturalandırma/billingAccounts/billingProfiles/Availablebakiye API 'siyle değiştirilmiştir.
 
-Kullanılabilir Bakiye API'si ile kullanılabilir bakiyeleri almak için:
+Kullanılabilir bakiye API 'SI ile kullanılabilir bakiyeleri almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/availableBalances?api-version=2018-11-01-preview` |
 
-## <a name="apis-to-get-cost-and-usage"></a>API'ları, maliyet ve kullanım bilgilerini alma
+## <a name="apis-to-get-cost-and-usage"></a>Maliyet ve kullanım almak için API 'Ler
 
-Azure hizmet kullanımı, üçüncü taraf Market kullanım ve aşağıdaki API'leri ile diğer Market alışverişleri maliyetlerin günlük dökümünü alın. Aşağıdaki ayrı API'leri, Azure Hizmetleri ve üçüncü taraf Market kullanım için birleştirilmiştir. Eski API'ler değiştirilir [Microsoft.Consumption/usageDetails](/rest/api/consumption/usagedetails) API. Daha önce yalnızca bakiyesi tarihe Özet gösterilen Market satın alımları ekler.
+Azure hizmet kullanımı, üçüncü taraf Market kullanımı ve aşağıdaki API 'lerle diğer Market satın alımlarından oluşan maliyetlerin günlük dökümünü alın. Azure hizmetleri ve üçüncü taraf Market kullanımı için aşağıdaki ayrı API 'Ler birleştirildi. Eski API 'Ler, [Microsoft. tüketim/usageDetails](/rest/api/consumption/usagedetails) API 'siyle değiştirilmiştir. Daha önce yalnızca Bakiye özetinde tarih olarak gösterilen Market satın alımları ekler.
 
-- [Kullanım ayrıntısı/download Al](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format)
-- [Kullanım ayrıntısı/gönderme Al](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format)
-- [Kullanım ayrıntısı/usagedetails Al](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format)
-- [Kullanım ayrıntısı/usagedetailsbycustomdate Al](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format)
-- [Market deposu ücret/marketplacecharges Al](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge)
-- [Market deposu ücret/marketplacechargesbycustomdate Al](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge)
+- [Kullanım ayrıntısı al/indir](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format)
+- [Kullanım ayrıntısı al/gönder](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format)
+- [Kullanım ayrıntısı/UsageDetails al](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format)
+- [Kullanım ayrıntısı/usageayrıntılar bycustomdate al](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#json-format)
+- [Market mağaza ücretini/marketplaceücretlerini alın](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge)
+- [Market mağaza ücreti/marketplacechargesbycustomdate al](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge)
 
-Tüm tüketim API'leri, Azure AD kimlik doğrulama ve yetkilendirme için kullanın. yerel Azure API'leri ile değiştirilir. Azure REST API'lerini çağırmayla ilgili daha fazla bilgi için bkz. [REST ile çalışmaya başlama](/rest/api/azure/#create-the-request).
+Tüm tüketim API 'Leri, kimlik doğrulama ve yetkilendirme için Azure AD kullanan yerel Azure API 'Leri tarafından değiştirilmiştir. Azure REST API 'Leri çağırma hakkında daha fazla bilgi için bkz. [rest ile çalışmaya](/rest/api/azure/#create-the-request)başlama.
 
-Önceki tüm API'leri tüketim/kullanım ayrıntılarını API'si tarafından değiştirilir.
+Önceki tüm API 'Ler, tüketim/kullanım ayrıntıları API 'siyle değiştirilmiştir.
 
-Kullanım ayrıntılarını API'si ile kullanım ayrıntılarını almak için:
+Kullanım ayrıntıları API 'SI ile kullanım ayrıntılarını almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/{scope}/providers/Microsoft.Consumption/usageDetails?api-version=2019-01-01` |
 
-Kullanım ayrıntılarını API'si tüm maliyet Yönetimi API'leri ile gibi birden çok kapsamların kullanılabilir. Geleneksel olarak, bir kayıt düzeyinde alacaksınız Faturalanan maliyetleri için faturalandırma profili kapsamı kullanın.  Maliyet Yönetimi kapsamları hakkında daha fazla bilgi için bkz. [anlayın ve kapsamlı iş](understand-work-scopes.md).
+Kullanım ayrıntıları API 'SI, tüm maliyet yönetimi API 'Lerinde olduğu gibi birden fazla kapsam ile kullanılabilir. Faturalanan maliyetler için, genellikle bir kayıt düzeyinde alacağınız gibi, Faturalandırma profili kapsamını kullanın.  Maliyet yönetimi kapsamları hakkında daha fazla bilgi için bkz. [kapsamları anlama ve bunlarla çalışma](understand-work-scopes.md).
 
-| Tür | Kimliği biçimi |
+| Tür | KIMLIK biçimi |
 | --- | --- |
 | Fatura hesabı | `/Microsoft.Billing/billingAccounts/{billingAccountId}` |
-| Faturalandırma profili | `/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}` |
+| Faturalama profili | `/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}` |
 | Abonelik | `/subscriptions/{subscriptionId}` |
 | Kaynak grubu | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}` |
 
-Herhangi bir programlama kod güncelleştirmek için aşağıdaki querystring parametreleri kullanın.
+Herhangi bir programlama kodunu güncelleştirmek için aşağıdaki QueryString parametrelerini kullanın.
 
-| Eski parametreleri | Yeni parametreleri |
+| Eski parametreler | Yeni parametreler |
 | --- | --- |
 | `billingPeriod={billingPeriod}` | Desteklenmiyor |
 | `endTime=yyyy-MM-dd` | `endDate=yyyy-MM-dd` |
 | `startTime=yyyy-MM-dd` | `startDate=yyyy-MM-dd` |
 
-Yanıt gövdesi de değiştirildi.
+Yanıtın gövdesi de değişmiştir.
 
 Eski yanıt gövdesi:
 
@@ -168,144 +168,144 @@ Yeni yanıt gövdesi:
 }
 ```
 
-Veri kullanım kayıtlarından oluşan bir diziyi içeren özellik adı değiştirildi _değerleri_. Düz liste ayrıntılı özellikler sağlamak için kullanılan her bir kaydı. Bununla birlikte, artık tüm ayrıntıları artık adlı iç içe özellik her kayıt _özellikleri_, etiketler dışında. Yeni yapı, diğer Azure API'leri ile tutarlıdır. Bazı özellik adları değiştirilmiştir. Aşağıdaki tabloda, ilgili özellikleri gösterir.
+Kullanım kayıtları dizisinin bulunduğu özellik adı, verilerden _değerlere_değişir. Her kayıt, ayrıntılı özelliklerin düz bir listesini almak için kullanılır. Ancak, her bir kayıt artık tüm ayrıntılar, Etiketler hariç _Özellikler_adlı iç içe bir özellikte bulunur. Yeni yapı diğer Azure API 'Leriyle tutarlıdır. Bazı özellik adları değiştirildi. Aşağıdaki tabloda ilgili özellikler gösterilmektedir.
 
-| Eski özelliği | Yeni özellik | Notlar |
+| Eski Özellik | Yeni Özellik | Notlar |
 | --- | --- | --- |
-| Hesap Kimliği | Yok | Aboneliği Oluşturucusu izlenen değil. İnvoiceSectionId (departmentId ile aynı) kullanın. |
-| AccountNameAccountOwnerId ve AccountOwnerEmail | Yok | Aboneliği Oluşturucusu izlenen değil. İnvoiceSectionName (departmentName ile aynı) kullanın. |
-| Additionalınfo | Additionalınfo | &nbsp;  |
-| ChargesBilledSeparately | isAzureCreditEligible | Bu özellikler birbirinin zıttı olduğunu unutmayın. İsAzureCreditEnabled true ise, ChargesBilledSeparately false olur. |
-| ConsumedQuantity | Miktar | &nbsp; |
-| ConsumedService | ConsumedService | Tam dize değerlerini gösterebilir. |
-| ConsumedServiceId | None | &nbsp; |
-| CostCenter | CostCenter | &nbsp; |
-| Tarih ve usageStartDate | date | &nbsp;  |
-| Gün | None | Başlangıç tarihi gün ayrıştırır. |
-| DepartmentId | invoiceSectionId | Tam değerleri farklı. |
-| Bölüm adı | invoiceSectionName | Tam dize değerlerini gösterebilir. Departmanlar, eşleştirilecek fatura bölümlerde gerekli olup olmadığını yapılandırın. |
-| ExtendedCost ve maliyet | costInBillingCurrency | &nbsp;  |
+| Accoun | Yok | Abonelik Oluşturucu izlenmiyor. Invoicesectionıd (departmentId ile aynı) kullanın. |
+| Accountnameaccountownerıd ve AccountOwnerEmail | Yok | Abonelik Oluşturucu izlenmiyor. Invoicesectionname (departmentName ile aynı) kullanın. |
+| AdditionalInfo | additionalInfo | &nbsp;  |
+| ChargesBilledSeparately | isAzureCreditEligible | Bu özelliklerin Opposites olduğunu unutmayın. İsAzureCreditEnabled true ise, ChargesBilledSeparately false olur. |
+| ConsumedQuantity | miktar | &nbsp; |
+| ConsumedService | consumedService | Tam dize değerleri farklı şekilde değişebilir. |
+| Tüketimedserviceıd | Hiçbiri | &nbsp; |
+| CostCenter | costCenter | &nbsp; |
+| Date ve usageStartDate | date | &nbsp;  |
+| Gün | Hiçbiri | Günü tarih olarak ayrıştırır. |
+| DepartmentId | invoiceSectionId | Tam değerler farklı. |
+| DepartmentName | invoiceSectionName | Tam dize değerleri farklı şekilde değişebilir. Gerekirse, fatura bölümlerini departmanlara uyacak şekilde yapılandırın. |
+| ExtendedCost ve maliyet | Maliyetsiz para birimi | &nbsp;  |
 | InstanceId | resourceId | &nbsp;  |
-| Yinelenen ücreti | None | &nbsp;  |
-| Location | location | &nbsp;  |
-| MeterCategory | MeterCategory | Tam dize değerlerini gösterebilir. |
-| MeterId | MeterId | Tam dize değerleri farklı. |
-| MeterName | MeterName | Tam dize değerlerini gösterebilir. |
-| MeterRegion | MeterRegion | Tam dize değerlerini gösterebilir. |
-| MeterSubCategory | MeterSubCategory | Tam dize değerlerini gösterebilir. |
-| Ay | None | Tarihten itibaren ay ayrıştırır. |
-| Teklif Adı | None | PublisherName ve productOrderName kullanın. |
-| OfferId | None | &nbsp;  |
-| Sipariş numarası | None | &nbsp;  |
-| PartNumber | None | Fiyatlar benzersiz olarak tanımlanabilmesi için meterId ve productOrderName kullanın. |
-| Plan adı | productOrderName | &nbsp;  |
-| Product | Product |   |
+| Yinelenen ücret | Hiçbiri | &nbsp;  |
+| Konum | location | &nbsp;  |
+| MeterCategory | meterCategory | Tam dize değerleri farklı şekilde değişebilir. |
+| MeterId | meterId | Tam dize değerleri farklı. |
+| MeterName | meterName | Tam dize değerleri farklı şekilde değişebilir. |
+| MeterRegion | meterRegion | Tam dize değerleri farklı şekilde değişebilir. |
+| MeterSubCategory | meterSubCategory | Tam dize değerleri farklı şekilde değişebilir. |
+| Ay | Hiçbiri | Ayı tarih olarak ayrıştırır. |
+| Teklif Adı | Hiçbiri | PublisherName ve productOrderName kullanın. |
+| OfferId | Hiçbiri | &nbsp;  |
+| Sipariş Numarası | Hiçbiri | &nbsp;  |
+| PartNumber | Hiçbiri | Fiyatları benzersiz şekilde tanımlamak için ölçüm kimliği ve productOrderName kullanın. |
+| Plan Adı | productOrderName | &nbsp;  |
+| Ürün | Ürün |   |
 | ProductID | productId | Tam dize değerleri farklı. |
-| Yayımcı adı | PublisherName | &nbsp;  |
-| ResourceGroup | resourceGroupName | &nbsp;  |
-| ResourceGuid | MeterId | Tam dize değerleri farklı. |
-| resourceLocation | resourceLocation | &nbsp;  |
-| ResourceLocationId | None | &nbsp;  |
+| Yayımcı Adı | publisherName | &nbsp;  |
+| adlı yönetilen örnek, | resourceGroupName | &nbsp;  |
+| ResourceGuid | meterId | Tam dize değerleri farklı. |
+| ResourceLocation | resourceLocation | &nbsp;  |
+| Resourcelocationıd | Hiçbiri | &nbsp;  |
 | ResourceRate | effectivePrice | &nbsp;  |
-| ServiceAdministratorId | Yok | &nbsp;  |
-| ServiceInfo1 | ServiceInfo1 | &nbsp;  |
-| ServiceInfo2 | ServiceInfo2 | &nbsp;  |
-| serviceName | MeterCategory | Tam dize değerlerini gösterebilir. |
-| ServiceTier | MeterSubCategory | Tam dize değerlerini gösterebilir. |
+| HizmetYöneticisiKimliği | Yok | &nbsp;  |
+| ServiceInfo1 | serviceInfo1 | &nbsp;  |
+| ServiceInfo2 | serviceInfo2 | &nbsp;  |
+| HizmetAdı | meterCategory | Tam dize değerleri farklı şekilde değişebilir. |
+| ServiceTier | meterSubCategory | Tam dize değerleri farklı şekilde değişebilir. |
 | StoreServiceIdentifier | Yok | &nbsp;  |
-| subscriptionGuid | subscriptionId | &nbsp;  |
-| SubscriptionId | subscriptionId | &nbsp;  |
-| subscriptionName | subscriptionName | &nbsp;  |
-| Tags | tags | Etiketler özelliği kök nesnesi, iç içe özellikler özelliğine uygulanır. |
-| UnitOfMeasure | UnitOfMeasure | Tam dize değerleri farklı. |
+| SubscriptionGuid | subscriptionId | &nbsp;  |
+| kaynak grubundaki | subscriptionId | &nbsp;  |
+| SubscriptionName | subscriptionName | &nbsp;  |
+| Etiketler | etiketler | Etiketler özelliği, iç içe geçmiş Özellikler özelliğine değil kök nesne için geçerlidir. |
+| UnitOfMeasure | unitOfMeasure | Tam dize değerleri farklı. |
 | usageEndDate | date | &nbsp;  |
-| Yıl | None | Tarihinden itibaren bir yıl ayrıştırır. |
-| (yeni) | billingCurrency | Para birimi ücreti. |
-| (yeni) | billingProfileId | Faturalandırma profili (kayıt ile aynı) benzersiz kimliği. |
-| (yeni) | billingProfileName | Faturalandırma profili (kayıt ile aynı) adı. |
-| (yeni) | chargeType | Azure hizmet kullanımı, Market kullanım ve satın alma işlemleri ayırt etmek için kullanın. |
-| (yeni) | Fatura kodu | Fatura benzersiz kimliği. Geçerli ve açık ay için boş. |
-| (yeni) | publisherType | Satın alma işlemleri için yayımcı türü. Kullanım için boş. |
-| (yeni) | serviceFamily | Satın alma türü. Kullanım için boş. |
-| (yeni) | servicePeriodEndDate | Satın alınan hizmet bitiş tarihi. |
-| (yeni) | servicePeriodStartDate | Satın alınan hizmet için başlangıç tarihi. |
+| Yıl | Hiçbiri | Yılın tarihini ayrıştırır. |
+| Yeni | billingCurrency | Ücret için kullanılan para birimi. |
+| Yeni | billingProfileId | Faturalandırma profili için benzersiz KIMLIK (kayıt ile aynı). |
+| Yeni | billingProfileName | Faturalandırma profilinin adı (kayıt ile aynı). |
+| Yeni | chargeType | Azure hizmeti kullanımını, Market kullanımını ve satın alımlarını ayırt etmek için kullanın. |
+| Yeni | invoiceId | Faturanın benzersiz KIMLIĞI. Geçerli, açık ay için boştur. |
+| Yeni | publisherType | Satın alımlara Yayımcı türü. Kullanım için boş. |
+| Yeni | serviceFamily | Satın alma türü. Kullanım için boş. |
+| Yeni | servicePeriodEndDate | Satın alınan hizmetin bitiş tarihi. |
+| Yeni | servicePeriodStartDate | Satın alınan hizmetin başlangıç tarihi. |
 
-## <a name="billing-periods-api-replaced-by-invoices-api"></a>Faturalama dönemleri API faturaları API'sı tarafından değiştirildi
+## <a name="billing-periods-api-replaced-by-invoices-api"></a>Fatura dönemleri API 'si, faturalar API 'siyle değiştirilmiştir
 
-Faturalama hesaplarının MCA faturalandırma dönemleri kullanmayın. Bunun yerine, belirli bir fatura dönemlerine kapsam maliyetleri faturalara kullanın. [Faturalandırma dönemlerini API'si](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) faturalar API'si tarafından değiştirilir. Tüm tüketim API'leri, Azure AD kimlik doğrulama ve yetkilendirme için kullanın. yerel Azure API'leri ile değiştirilir. Azure REST API'lerini çağırmayla ilgili daha fazla bilgi için bkz. [REST ile çalışmaya başlama](/rest/api/azure/#create-the-request).
+MCA faturalandırma hesapları faturalandırma dönemlerini kullanmaz. Bunun yerine, maliyetleri belirli faturalandırma dönemleriyle sınırlamak için faturalar kullanır. [Faturalandırma dönemleri API 'si](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) , faturalar API 'siyle değiştirilmiştir. Tüm tüketim API 'Leri, kimlik doğrulama ve yetkilendirme için Azure AD kullanan yerel Azure API 'Leri tarafından değiştirilmiştir. Azure REST API 'Leri çağırma hakkında daha fazla bilgi için bkz. [rest ile çalışmaya](/rest/api/azure/#create-the-request)başlama.
 
-Faturalar faturaları API ile almak için:
+Faturalar API 'SI ile faturaları almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoices?api-version=2018-11-01-preview` |
 
-## <a name="price-sheet-apis"></a>Fiyat listesi API'leri
+## <a name="price-sheet-apis"></a>Fiyat listesi API 'Leri
 
-Bu bölümde, var olan fiyat listesi API'leri açıklar ve fiyat sayfası API'sine için Microsoft Müşteri anlaşmalarını taşımak için öneriler sağlar. Ayrıca, fiyat listesi API'si için Microsoft Müşteri anlaşmalarını açıklanır ve fiyat listeleri alanları açıklar. [Kurumsal elde fiyat](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet) ve [fatura dönemleri Kurumsal elde](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) API'leri için Microsoft Müşteri anlaşmalarını (Microsoft.Billing/billingAccounts/billingProfiles fiyat listesi API'si tarafından değiştirilir / Fiyat listesi). Yeni API hem JSON hem de CSV biçimleri, zaman uyumsuz REST biçimlerde destekler. Tüm tüketim API'leri, Azure AD kimlik doğrulama ve yetkilendirme için kullanın. yerel Azure API'leri ile değiştirilir. Azure REST API'lerini çağırmayla ilgili daha fazla bilgi için bkz. [REST ile çalışmaya başlama](/rest/api/azure/#create-the-request).
+Bu bölümde, mevcut fiyat listesi API 'Leri ele alınmaktadır ve Microsoft Müşteri anlaşmaları için fiyat listesi API 'sine geçiş önerileri sağlanır. Ayrıca, Microsoft Müşteri anlaşmaları için fiyat listesi API 'sini açıklar ve fiyat sayfalarındaki alanları açıklar. [Kurumsal Get fiyat listesi](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet) ve [Kurumsal Sözleşme ödeme dönemleri](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) API 'Leri, Microsoft Müşteri anlaşmaları (Microsoft. faturalandırma/Billingaccounts/billingprofiles/fiyat listesi) IÇIN fiyat listesi API 'siyle değiştirilmiştir. Yeni API, zaman uyumsuz REST biçimlerinde hem JSON hem de CSV biçimlerini destekler. Tüm tüketim API 'Leri, kimlik doğrulama ve yetkilendirme için Azure AD kullanan yerel Azure API 'Leri tarafından değiştirilmiştir. Azure REST API 'Leri çağırma hakkında daha fazla bilgi için bkz. [rest ile çalışmaya](/rest/api/azure/#create-the-request)başlama.
 
-### <a name="billing-enterprise-apis"></a>Faturalama Kurumsal API'leri
+### <a name="billing-enterprise-apis"></a>Faturalandırma kurumsal API 'Leri
 
-Faturalama Kurumsal API'leri ile Kurumsal kayıtlarını fiyat ve faturalandırma dönemi bilgileri almak için kullanılır. Kimlik doğrulama ve yetkilendirme, Azure Active Directory web belirteçleri kullanılır.
+Fiyat ve fatura dönemi bilgilerini almak için Enterprise kayıtları ile faturalandırma kurumsal API 'Leri kullandınız. Web belirteçleri Azure Active Directory kullanılan kimlik doğrulaması ve yetkilendirme.
 
-Faturalandırma dönemi API'lerini ve fiyat listesi ile belirtilen Kurumsal kayıt için uygun fiyatları almak için:
+Fiyat listesi ve faturalandırma dönemi API 'Leri ile belirtilen kurumsal kayıt için geçerli fiyatları almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://consumption.azure.com/v2/enrollments/{enrollmentNumber}/pricesheet` |
 | GET | `https://consumption.azure.com/v2/enrollments/{enrollmentNumber}/billingPeriods/{billingPeriod}/pricesheet` |
 
-### <a name="price-sheet-api-for-microsoft-customer-agreements"></a>Microsoft Müşteri sözleşmesi için fiyat sayfası API'si
+### <a name="price-sheet-api-for-microsoft-customer-agreements"></a>Microsoft Müşteri anlaşmaları için fiyat listesi API 'SI
 
-Tüm Azure tüketim ve Market tüketim hizmetlerin fiyatlarını görüntülemek için Microsoft Müşteri sözleşmesi fiyat listesi API'si kullanın. Fatura profiline ait tüm abonelikleri için fatura profili gösterilen fiyatlar uygulanır.
+Tüm Azure tüketimi ve Market tüketim hizmetlerinin fiyatlarını görüntülemek için Microsoft Müşteri anlaşmaları için fiyat listesi API 'sini kullanın. Faturalandırma profili için gösterilen fiyatlar, faturalandırma profiline ait olan tüm abonelikler için geçerlidir.
 
-Fiyat listesi API'si, tüm Azure tüketim Hizmetleri fiyat listesi verilerini CSV biçiminde görüntülemek için kullanın:
+Tüm Azure tüketim Hizmetleri fiyat listesi verilerini CSV biçiminde görüntülemek için fiyat listesi API 'sini kullanın:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
-| POST | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&startDate=2019-01-01&endDate=2019-01-31&format=csv` |
+| Yayınla | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&startDate=2019-01-01&endDate=2019-01-31&format=csv` |
 
-Fiyat listesi API'si, JSON biçiminde tüm Azure tüketim Hizmetleri fiyat listesi verilerini görüntülemek için kullanın:
+Tüm Azure tüketim Hizmetleri fiyat listesi verilerini JSON biçiminde görüntülemek için fiyat listesi API 'sini kullanın:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
-| POST | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&startDate=2019-01-01&endDate=2019-01-31&format=json` |
+| Yayınla | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&startDate=2019-01-01&endDate=2019-01-31&format=json` |
 
-API'yi kullanarak tüm hesap için fiyat listesini döndürür. Ancak, PDF biçiminde fiyat daraltılmış bir sürümünü de alabilirsiniz. Özet için belirli bir fatura faturalandırılır Azure tüketim ve Market tüketim hizmetleri içerir. Fatura {Fatura kodu tarafından}, tanımlanmış aynı olduğu **fatura numarası** fatura özeti PDF dosyaları gösterilir. Bir örnek aşağıda verilmiştir.
+API 'nin kullanılması, tüm hesabın fiyat listesini döndürür. Ancak, Ayrıca, PDF biçiminde fiyat listesi 'nin sıkıştırılmış bir sürümünü de alabilirsiniz. Özet, belirli bir fatura için faturalandırılan Azure tüketimini ve Market tüketim hizmetlerini içerir. Fatura, Fatura Özeti PDF dosyalarında gösterilen **fatura numarasıyla** aynı olan {InvoiceId} tarafından tanımlanır. İşte bir örnek.
 
-![Karşılık gelen fatura numarası için Fatura kodu gösteren örnek resim](./media/migrate-cost-management-api/invoicesummary.png)
+![InvoiceId 'ye karşılık gelen fatura numarasını gösteren örnek resim](./media/migrate-cost-management-api/invoicesummary.png)
 
-CSV biçiminde fiyat listesi API'si ile fatura bilgilerini görüntülemek için:
+Fiyat listesi API 'SI ile fatura bilgilerini CSV biçiminde görüntülemek için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
-| POST | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/2909cffc-b0a2-5de1-bb7b-5d3383764184/billingProfiles/2dcffe0c-ee92-4265-8647-515b8fe7dc78/invoices/{invoiceId}/pricesheet/default/download?api-version=2018-11-01-preview&format=csv` |
+| Yayınla | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/2909cffc-b0a2-5de1-bb7b-5d3383764184/billingProfiles/2dcffe0c-ee92-4265-8647-515b8fe7dc78/invoices/{invoiceId}/pricesheet/default/download?api-version=2018-11-01-preview&format=csv` |
 
-JSON biçiminde fiyat listesi API'si ile fatura bilgilerini görüntülemek için:
+Fiyat listesi API 'SI ile fatura bilgilerini JSON biçiminde görüntülemek için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
-| POST | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/2909cffc-b0a2-5de1-bb7b-5d3383764184/billingProfiles/2dcffe0c-ee92-4265-8647-515b8fe7dc78/invoices/{invoiceId}/pricesheet/default/download?api-version=2018-11-01-preview&format=json` |
+| Yayınla | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/2909cffc-b0a2-5de1-bb7b-5d3383764184/billingProfiles/2dcffe0c-ee92-4265-8647-515b8fe7dc78/invoices/{invoiceId}/pricesheet/default/download?api-version=2018-11-01-preview&format=json` |
 
-Azure tüketim veya Market herhangi bir tüketim hizmeti için tahmini Fiyatlar, geçerli fatura dönemi açık ya da hizmet süresini de görebilirsiniz.
+Geçerli açık fatura döngüsündeki veya hizmet döneminde herhangi bir Azure tüketimi veya Market tüketim hizmeti için tahmini fiyatları da görebilirsiniz.
 
-Tahmini fiyatlar fiyat listesi API'si ile kullanım hizmeti için CSV biçiminde görüntülemek için:
+Fiyat listesi API 'SI ile birlikte, tüketim Hizmetleri için tahmini fiyatları CSV biçiminde görüntülemek için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
-| POST | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billing AccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&format=csv` |
+| Yayınla | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billing AccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&format=csv` |
 
-Tahmini fiyatlar fiyat listesi API'si ile kullanım hizmeti için JSON biçiminde görüntülemek için:
+Fiyat listesi API 'SI ile birlikte, tüketim Hizmetleri için tahmini fiyatları JSON biçiminde görüntülemek için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
-| POST | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billing AccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&format=json` |
+| Yayınla | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billing AccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&format=json` |
 
-Microsoft Müşteri sözleşmesi fiyat sayfası API'leri *zaman uyumsuz REST API'leri*. API'ler için yanıtlar daha eski zaman uyumlu API'lerinden değiştirildi. API yanıt gövdesinin de değiştirildi.
+Microsoft müşteri anlaşması fiyat listesi API 'Leri, *zaman uyumsuz REST API*'lerdir. API 'Lerin yanıtları eski zaman uyumlu API 'lerden değiştirilmiştir. API yanıtının gövdesi de değişmiştir.
 
 #### <a name="old-response-body"></a>Eski yanıt gövdesi
 
-REST API yanıt zaman uyumlu bir örnek aşağıda verilmiştir:
+Zaman uyumlu REST API yanıtına bir örnek aşağıda verilmiştir:
 
 ```
 [
@@ -326,7 +326,7 @@ REST API yanıt zaman uyumlu bir örnek aşağıda verilmiştir:
 
 #### <a name="new-response-body"></a>Yeni yanıt gövdesi
 
-API'lerini destekleyen [Azure REST zaman uyumsuz](../azure-resource-manager/resource-manager-async-operations.md) biçimi. GET kullanarak API çağırın ve şu yanıtı alırsınız:
+API 'Ler [Azure Rest zaman uyumsuz](../azure-resource-manager/resource-manager-async-operations.md) biçimini destekler. GET kullanarak API 'YI çağırın ve aşağıdaki yanıtı alırsınız:
 
 ```
 No Response Body
@@ -334,7 +334,7 @@ No Response Body
 HTTP Status 202 Accepted
 ```
 
-Aşağıdaki üst bilgiler, çıkış konumunu gönderilir:
+Aşağıdaki üstbilgiler çıktının konumuyla birlikte gönderilir:
 
 ```
 Location:https://management.azure.com/providers/Microsoft.Consumption/operationresults/{operationId}?sessiontoken=XZDFSnvdkbkdsb==
@@ -347,204 +347,204 @@ OData-EntityId: {operationId}
 
 ```
 
-Başka bir GET çağrısı konumuna olun. İşlem tamamlandığında veya başarısız durumuna ulaşana kadar yanıt alma çağrısı için aynıdır. Tamamlandığında, yanıt bir GET çağrısı konuma indirme URL'sini döndürür. İşlem aynı anda yalnızca yürütülmesi alacağı. Bir örneği aşağıda verilmiştir:
+Konuma başka bir GET çağrısı yapın. GET çağrısına olan yanıt, işlem bir tamamlama veya hata durumuna ulaşıncaya kadar aynıdır. Tamamlandığında, GET çağrısı konumuna olan yanıt indirme URL 'sini döndürür. Aynı anda işlemin yürütüldüğünden olduğu gibi. Bir örneği aşağıda verilmiştir:
 
 ```
 HTTP Status 200
 
-                                    {
-                            “id”: “providers/Microsoft.Consumption/operationresults/{operationId}”,
-                            “name”: {operationId},
-                           “type”: “Microsoft.Consumption/operationResults”,
-                           “properties” : {
-                                  “downloadUrl”: {urltoblob},
-                                  “vaildTill”: “Date”
+{
+  "id": "providers/Microsoft.Consumption/operationresults/{operationId}",
+  "name": {operationId},
+  "type": “Microsoft.Consumption/operationResults",
+  "properties" : {
+    "downloadUrl": {urltoblob},
+    "validTill": "Date"
+  }
 }
-                     }
 ```
 
-İstemci bir GET çağrısı de yapmak `Azure-AsyncOperation`. Uç nokta işlemi durumunu döndürür.
+İstemci Ayrıca `Azure-AsyncOperation` için bir GET çağrısı yapabilir. Uç nokta işlemin durumunu döndürür.
 
-Aşağıdaki tabloda, eski Kurumsal elde fiyat sayfası API'SİNDE alanları gösterir. Yeni fiyat listesinde karşılık gelen alanları için Microsoft Müşteri anlaşmalarını içerir:
+Aşağıdaki tabloda, eski Kurumsal Get fiyat listesi API 'sindeki alanlar gösterilmektedir. Microsoft Müşteri anlaşmaları için yeni fiyat listesi ' nde karşılık gelen alanları içerir:
 
-| Eski özelliği | Yeni özellik | Notlar |
+| Eski Özellik | Yeni Özellik | Notlar |
 | --- | --- | --- |
-| billingPeriodId  | _Uygulanamaz_ | Geçerli değildir. Microsoft Müşteri sözleşmelerini billingPeriodId kavramı fatura ve ilişkili fiyat değiştirildi. |
-| MeterId  | MeterId | &nbsp;  |
-| UnitOfMeasure  | UnitOfMeasure | Tam dize değerlerini gösterebilir. |
-| includedQuantity  | includedQuantity | Microsoft Müşteri anlaşmalarını hizmetler için geçerli değildir. |
-| PartNumber  | _Uygulanamaz_ | Bunun yerine, productOrderName (OfferId ile aynı) ve meterid bileşimini kullanın. |
-| UnitPrice  | UnitPrice | Birim fiyatı, Microsoft Müşteri sözleşmelerde kullanılan hizmetler için geçerlidir. |
-| currencyCode  | pricingCurrency | Microsoft Müşteri sözleşmesi, fiyatlandırma para birimi ve Fatura para birimi fiyat temsilleri olabilir. Microsoft Müşteri anlaşmalarla pricingCurrency currencyCode karşılık gelir. |
-| OfferId | productOrderName | OfferId, yerine productOrderName kullanabilirsiniz ancak OfferId olarak aynı değildir. Ancak, productOrderName ve ölçüm Microsoft Müşteri sözleşmelerde fiyatlandırma meterId ve OfferId ilgili eski kayıtları belirleyin. |
+| billingPeriodId  | _Uygulanamaz_ | Uygulanamaz. Microsoft Müşteri anlaşmaları için, fatura ve ilişkili fiyat listesi billingPeriodId kavramını değiştirdi. |
+| meterId  | meterId | &nbsp;  |
+| unitOfMeasure  | unitOfMeasure | Tam dize değerleri farklı şekilde değişebilir. |
+| includedQuantity  | includedQuantity | Microsoft Müşteri anlaşmalarındaki hizmetler için geçerli değildir. |
+| PartNumber  | _Uygulanamaz_ | Bunun yerine, productOrderName (OfferId ile aynı) ve ölçüm kimliği birleşimini kullanın. |
+| unitPrice  | unitPrice | Birim fiyatı, Microsoft Müşteri sözleşmelerinden tüketilen hizmetler için geçerlidir. |
+| currencyCode  | pricingCurrency | Microsoft Müşteri anlaşmaları fiyatlandırma para birimi ve faturalandırma para birimi cinsinden fiyat temsillerine sahiptir. CurrencyCode, Microsoft Müşteri sözleşmeleri içindeki pricingCurrency öğesine karşılık gelir. |
+| OfferId | productOrderName | OfferId yerine productOrderName kullanabilir, ancak OfferId ile aynı olamaz. Ancak, productOrderName ve Meter, eski kayıt işlemlerinde ölçüm kimliği ve OfferId ile ilgili Microsoft Müşteri anlaşmalarında fiyatlandırmayı belirleme. |
 
-## <a name="consumption-price-sheet-api-operations"></a>Tüketim fiyatı sayfası API işlemleri
+## <a name="consumption-price-sheet-api-operations"></a>Tüketim fiyat listesi API işlemleri
 
-Kurumsal anlaşmalar için tüketim fiyatı sayfası API kullanılan [alma](/rest/api/consumption/pricesheet/get) ve [fatura dönemi tarafından alma](/rest/api/consumption/pricesheet/getbybillingperiod) bir kapsam Subscriptionıd ya da bir fatura dönemi için operations. API, Azure kaynak yönetimi kimlik doğrulaması kullanır.
+Kurumsal sözleşmeler için, SubscriptionID veya faturalandırma dönemi kapsamında bir kapsam için [faturalandırma dönemi aracılığıyla](/rest/api/consumption/pricesheet/getbybillingperiod) API [Al](/rest/api/consumption/pricesheet/get) ve Al işlemleri için tüketim fiyatı listesini kullandınız. API, Azure Kaynak yönetimi kimlik doğrulamasını kullanır.
 
-Fiyat listesi API'si ile bir kapsam için fiyat bilgileri almak için:
+Fiyat listesi API 'SI ile bir kapsamın fiyat listesi bilgilerini almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default?api-version=2018-10-01` |
 
-Faturalama dönemi fiyat listesi API'si ile tarafından fiyat bilgileri almak için:
+Fiyat listesi API 'SI ile faturalandırma dönemine göre fiyat listesi bilgilerini almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/default?api-version=2018-10-01` |
 
-Yukarıdaki API uç noktaları yerine Microsoft Müşteri sözleşmeleri için aşağıdaki sorguyu kullanın:
+Yukarıdaki API uç noktaları yerine, Microsoft Müşteri anlaşmaları için aşağıdaki olanları kullanın:
 
-**Fiyat listesi API için Microsoft Müşteri anlaşmalarını (zaman uyumsuz REST API'si)**
+**Microsoft Müşteri anlaşmaları için fiyat listesi API 'SI (zaman uyumsuz REST API)**
 
-Bu API için Microsoft Müşteri anlaşmalarını olan ve ek öznitelikler sağlar.
+Bu API, Microsoft Müşteri anlaşmaları içindir ve ek öznitelikler sağlar.
 
-**Fiyat listesi için bir faturalandırma profili kapsamında bir faturalama hesabı**
+**Faturalandırma hesabındaki bir faturalandırma profili kapsamının fiyat listesi**
 
-Bu API var olan bir API'dir. Fiyat listesi bir faturalama hesabı faturalama profilde sağlamak için güncelleştirildi.
+Bu API, var olan API 'dir. Faturalandırma hesabındaki bir faturalandırma profili için fiyat listesi sağlamak üzere güncelleştirildi.
 
-## <a name="price-sheet-for-a-scope-by-billing-account"></a>Fatura hesabı tarafından bir kapsam için fiyat listesi
+## <a name="price-sheet-for-a-scope-by-billing-account"></a>Bir kapsamın faturalandırma hesabına göre fiyat listesi
 
-Fatura hesabındaki kayıt kapsamda fiyat listesini aldığınızda, azure Resource Manager kimlik doğrulaması kullanılır.
+Azure Resource Manager kimlik doğrulaması, bir faturalandırma hesabındaki kayıt kapsamında fiyat listesi aldığınızda kullanılır.
 
-Bir faturalama hesabı kayıt hesabında, fiyat listesini almak için:
+Bir faturalandırma hesabındaki kayıt hesabındaki fiyat listesini almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `/providers/Microsoft.Billing/billingAccounts/65085863/providers/Microsoft.Consumption/pricesheets/download?api-version=2019-01-01` |
 
-Microsoft Müşteri sözleşmesi için aşağıdaki bölümde bilgileri kullanın. Bu, Microsoft Customer anlaşmalar için kullanılan alanı özellikleri sağlar.
+Bir Microsoft Müşteri Sözleşmesi için aşağıdaki bölümdeki bilgileri kullanın. Microsoft Müşteri anlaşmaları için kullanılan alan özelliklerini sağlar.
 
-### <a name="price-sheet-for-a-billing-profile-scope-in-a-billing-account"></a>Fiyat listesi için bir faturalandırma profili kapsamındaki bir faturalama hesabı
+### <a name="price-sheet-for-a-billing-profile-scope-in-a-billing-account"></a>Faturalandırma hesabındaki bir faturalandırma profili kapsamının fiyat listesi
 
-Fatura hesabı API tarafından güncelleştirilmiş fiyat fiyat CSV biçiminde alır. Bir MCA faturalandırma profili kapsamda fiyat listesini almak için:
+Faturalandırma hesabı API 'sine göre güncelleştirilmiş fiyat listesi, Fiyat listesini CSV biçiminde alır. Bir MCA için Faturalandırma profili kapsamında fiyat listesi almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `/providers/Microsoft.Billing/billingAccounts/28ae4b7f-41bb-581e-9fa4-8270c857aa5f/billingProfiles/ef37facb-cd6f-437a-9261-65df15b673f9/providers/Microsoft.Consumption/pricesheets/download?api-version=2019-01-01` |
 
-EA'ın kayıt kapsamında, API yanıt ve özellikleri aynıdır. Özellikleri aynı MCA özelliklerine karşılık gelir.
+EA 'nın kayıt kapsamında, API yanıtı ve özellikleri aynıdır. Özellikler aynı MCA özelliklerine karşılık gelir.
 
-Eski özelliklerini [Azure Resource Manager fiyat sayfası API'leri](/rest/api/consumption/pricesheet) ve aynı yeni özellikler aşağıdaki tabloda yer alan.
+[Azure Resource Manager fiyat listesi API 'leri](/rest/api/consumption/pricesheet) için eski Özellikler ve aynı yeni özellikler aşağıdaki tabloda verilmiştir.
 
-| Eski Azure Resource Manager fiyat sayfası API özelliği  | Yeni Microsoft Müşteri sözleşmesi fiyat listesi API'si özelliği   | Açıklama |
+| Eski Azure Resource Manager fiyat listesi API özelliği  | Yeni Microsoft müşteri anlaşması fiyat listesi API 'SI özelliği   | Açıklama |
 | --- | --- | --- |
-| Ölçüm Kimliği | _meterId_ | Ölçüm için benzersiz tanımlayıcı. MeterId ile aynıdır. |
-| Ölçüm adı | MeterName | Ölçüm adı. Ölçüm, Azure hizmet dağıtılabilir kaynağa temsil eder. |
-| Ölçüm kategorisi  | hizmet | Ölçüm için sınıflandırma kategorisi adı. Microsoft Müşteri sözleşmesi fiyat hizmette ile aynıdır. Tam dize değerleri farklı. |
-| Ölçüm alt kategorisi | MeterSubCategory | Ölçüm subclassification kategorisi adı. Üst düzey özellik kümesi ayrıştırması hizmetinde sınıflandırmasını temel. Örneğin, temel SQL veritabanı ile standart SQL veritabanı. |
-| Ölçüm bölgesi | MeterRegion | &nbsp;  |
-| Birim | _Uygulanamaz_ | UnitOfMeasure ayrıştırılamaz. |
-| Ölçü birimi | UnitOfMeasure | &nbsp;  |
-| Parça numarası | _Uygulanamaz_ | PartNumber yerine productOrderName ve MeterId fiyat faturalandırma profili için benzersiz olarak tanımlanabilmesi için kullanın. Alanları MCA faturalar içinde partNumber yerine MCA fatura listelenir. |
-| Birim fiyatı | UnitPrice | Microsoft Müşteri sözleşmesi birim fiyatı. |
-| Para birimi kodu | pricingCurrency | Microsoft Müşteri sözleşmeleri, fiyatları para birimi fiyatlandırma ve Fatura para birimi temsil eder. Para birimi kodu, Microsoft Müşteri anlaşmalarla pricingCurrency ile aynıdır. |
-| Dahil edilen miktar | includedQuantity | Microsoft Müşteri anlaşmalarını Hizmetleri için geçerli değildir. İle sıfır değerleri gösterir. |
-|  Teklif kimliği  | productOrderName | ProductOrderName OfferId yerine kullanın. Aynı OfferId, ancak Microsoft Müşteri sözleşmelerde fiyatlandırma productOrderName ve ölçüm belirleyebilir. Eski kayıtları içinde meterId ve OfferId ilgili. |
+| Ölçüm Kimliği | _Ölçüm kimliği_ | Ölçümün benzersiz tanımlayıcısı. Ölçüm kimliği ile aynı. |
+| Ölçüm adı | meterName | Ölçümün adı. Ölçüm, Azure hizmeti dağıtılabilir kaynağını temsil eder. |
+| Ölçüm kategorisi  | hizmet | Ölçüm için sınıflandırma kategorisinin adı. Microsoft müşteri anlaşması fiyat listesi ' nde hizmetle aynı. Tam dize değerleri farklı. |
+| Ölçüm alt kategorisi | meterSubCategory | Ölçüm alt sınıflandırma kategorisinin adı. Hizmette bulunan üst düzey özellik kümesi sınıflandırmasına dayalı olarak. Örneğin, temel SQL DB ile standart SQL VERITABANı. |
+| Ölçüm bölgesi | meterRegion | &nbsp;  |
+| Birim | _Uygulanamaz_ | UnitOfMeasure öğesinden ayrıştırılabilir. |
+| Ölçü birimi | unitOfMeasure | &nbsp;  |
+| Parça numarası | _Uygulanamaz_ | PartNumber yerine, bir faturalandırma profilinin fiyatını benzersiz bir şekilde tanımlamak için productOrderName ve ölçüm kimliği kullanın. Alanlar, MCA faturalarında partNumber yerine MCA faturasında listelenir. |
+| Birim fiyat | unitPrice | Microsoft Müşteri Sözleşmesi birim fiyatı. |
+| Para birimi kodu | pricingCurrency | Microsoft Müşteri anlaşmaları fiyatlandırma para birimi ve faturalandırma para birimi cinsinden fiyatları temsil eder. Para birimi kodu, Microsoft Müşteri sözleşmeleri içindeki pricingCurrency ile aynıdır. |
+| Dahil edilen miktar | includedQuantity | Microsoft Müşteri anlaşmalarındaki hizmetlere uygulanmaz. Sıfır değerleriyle göster. |
+|  Teklif kimliği  | productOrderName | OfferId yerine productOrderName kullanın. OfferId ile aynı değildir, ancak productOrderName ve Meter, Microsoft Müşteri anlaşmalarında fiyatlandırmaya göre belirlenir. Eski kayıtlar 'daki ölçüm kimliği ve OfferId ile ilgilidir. |
 
-Microsoft Müşteri anlaşmalarını fiyatı Kurumsal sözleşmeler farklı tanımlanır. Kurumsal kayıt hizmetleri için fiyat, ürün, PartNumber, ölçüm ve teklif için benzersizdir. Microsoft Müşteri sözleşmelerde PartNumber kullanılmaz.
+Microsoft Müşteri anlaşmalarının fiyatı, kurumsal anlaşmalardan farklı şekilde tanımlanır. Kurumsal kayıt içindeki hizmetlerin fiyatı ürün, PartNumber, ölçüm ve teklif için benzersizdir. PartNumber, Microsoft Müşteri sözleşmelerde kullanılmaz.
 
-Bir Microsoft Müşteri sözleşmesinin bir parçası olan Azure tüketim hizmeti fiyatı productOrderName ve meterId için benzersizdir. Bunlar, hizmet ölçer ve ürün planı temsil eder.
+Microsoft Müşteri sözleşmesinin bir parçası olan Azure tüketim hizmeti fiyatı productOrderName ve ölçüm kimliği için benzersizdir. Hizmet ölçümünü ve ürün planını temsil eder.
 
-Fiyat listesi ve kullanım ayrıntılarını API'si kullanımı arasında mutabık kılınacak productOrderName ve meterId kullanabilirsiniz.
+Kullanım ayrıntıları API 'sindeki fiyat listesi ile kullanım arasında mutabakat sağlamak için productOrderName ve ölçüm kimliği kullanabilirsiniz.
 
-Faturalandırma Profil sahibi, katkıda bulunan, okuyucu ve Fatura Yöneticisi haklarına sahip kullanıcılar, fiyat listesini indirebilirsiniz.
+Faturalama profili sahibi, katkıda bulunan, okuyucu ve fatura yöneticisi haklarına sahip kullanıcılar fiyat listesini indirebilir.
 
-Fiyat, fiyat, kullanıma bağlı hizmetler fiyatları içerir. Hizmetleri, Azure tüketim ve Market tüketimini içerir. Her hizmet dönemin sonunda en son fiyat kilitlidir ve tek hizmet nokta ile kullanım için uygulanır. Azure tüketim hizmetler için genellikle bir takvim ayı hizmet dönemdir.
+Fiyat listesi, fiyatı kullanımı temel alan hizmetlerin fiyatlarını içerir. Hizmetler Azure tüketim ve Market tüketimini içerir. Her hizmet döneminin sonundaki en son fiyat kilitlidir ve tek bir hizmet döneminde kullanıma uygulanır. Azure tüketim Hizmetleri için hizmet dönemi genellikle bir takvim aydır.
 
-### <a name="retired-price-sheet-api-fields"></a>Devre dışı bırakılan fiyat listesi API'si alanları
+### <a name="retired-price-sheet-api-fields"></a>Kullanımdan kaldırılan fiyat listesi API alanları
 
-Aşağıdaki alanları olan Microsoft Müşteri sözleşmesi fiyat sayfası API'leri bulunan veya aynı alanlara sahip.
+Aşağıdaki alanlar Microsoft Müşteri Sözleşmesi fiyat listesi API 'Lerinde kullanılamaz veya aynı alanlara sahip değildir.
 
-|Devre dışı bırakılan alan| Açıklama|
+|Kullanımdan kaldırılan alan| Açıklama|
 |---|---|
-| billingPeriodId | Hayır, uygulanabilir. Fatura için kodu için MCA karşılık gelir. |
-| OfferId | Geçerli değildir. ProductOrderName MCA içinde karşılık gelir. |
-| MeterCategory  | Geçerli değildir. MCA hizmetinde karşılık gelir. |
-| Birim | Geçerli değildir. UnitOfMeasure ayrıştırılamaz. |
-| currencyCode | PricingCurrency MCA içinde aynıdır. |
-| meterLocation | MeterRegion MCA içinde aynıdır. |
-| partNumber partnumber | Parça numarası MCA faturaları listede olduğundan geçerli değil. PartNumber yerine meterId ve productOrderName birleşimi fiyatları benzersiz olarak tanımlanabilmesi için kullanın. |
-| totalIncludedQuantity | Geçerli değildir. |
-| pretaxStandardRate  | Geçerli değildir. |
+| billingPeriodId | Uygulanabilir değil. MCA için InvoiceId öğesine karşılık gelir. |
+| OfferId | Uygulanamaz. MCA productOrderName öğesine karşılık gelir. |
+| meterCategory  | Uygulanamaz. MCA içindeki hizmete karşılık gelir. |
+| birim | Uygulanamaz. UnitOfMeasure öğesinden ayrıştırılabilir. |
+| currencyCode | MCA içindeki pricingCurrency ile aynı. |
+| meterLocation | MCA ile meterRegion aynı. |
+| partNumber partNumber | Bölüm numarası MCA faturalarında listelenmediğinden uygulanamaz. PartNumber yerine, fiyatları benzersiz şekilde tanımlamak için ölçüm kimliği ve productOrderName birleşimini kullanın. |
+| Totalıncludedquantity | Uygulanamaz. |
+| pretaxStandardRate  | Uygulanamaz. |
 
-## <a name="reservation-instance-charge-api-replaced"></a>Ayırma örneği ücret API değiştirildi
+## <a name="reservation-instance-charge-api-replaced"></a>Ayırma örneği ücreti API 'SI değişti
 
-İşlemleri rezervasyon satın alma işlemleri için fatura almak [ayrılmış örnek ücret API](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges). Yeni API üçüncü taraf Market teklifleri de dahil olmak üzere tüm satın alımlar içerir. Tüm tüketim API'leri, Azure AD kimlik doğrulama ve yetkilendirme için kullanın. yerel Azure API'leri ile değiştirilir. Azure REST API'lerini çağırmayla ilgili daha fazla bilgi için bkz. [REST ile çalışmaya başlama](/rest/api/azure/#create-the-request). Ayrılmış örnek ücret API işlem API'si tarafından değiştirilir.
+[Ayrılmış örnek ücreti API 'si](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges)ile rezervasyon satın alımları için faturalandırma işlemleri alabilirsiniz. Yeni API, üçüncü taraf Market teklifleri dahil olmak üzere tüm satınalmaları içerir. Tüm tüketim API 'Leri, kimlik doğrulama ve yetkilendirme için Azure AD kullanan yerel Azure API 'Leri tarafından değiştirilmiştir. Azure REST API 'Leri çağırma hakkında daha fazla bilgi için bkz. [rest ile çalışmaya](/rest/api/azure/#create-the-request)başlama. Ayrılmış örnek ücreti API 'SI, Işlemler API 'siyle değiştirilmiştir.
 
-Rezervasyon satın alma işlemleri işlem API'si ile almak için:
+Işlem API 'SI ile rezervasyon satın alma işlemlerini almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/transactions?api-version=2018-11-01-preview` |
 
-## <a name="recommendations-apis-replaced"></a>Öneriler API'lerini değiştirildi
+## <a name="recommendations-apis-replaced"></a>Öneriler API 'Leri değişti
 
-Ayrılmış örnek satın alma önerileri API'leri son 7, 30 ve 60 gün içinde sanal makine kullanımı sağlar. API'leri, rezervasyon satın alma önerileri de sağlar. Bunlara aşağıdakiler dahildir:
+Ayrılmış örnek satın alma önerileri API 'Leri, son 7, 30 veya 60 gün içinde sanal makine kullanımını sağlar. API 'Ler Ayrıca, rezervasyon satın alma önerilerini de sağlar. Şunları içerir:
 
-- [Paylaşılan ayrılmış örnek öneri API'si](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-shared-reserved-instance-recommendations)
-- [Tek bir ayrılmış örnek öneriler API'si](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations)
+- [Paylaşılan ayrılmış örnek önerisi API 'SI](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-shared-reserved-instance-recommendations)
+- [Tek ayrılmış örnek önerileri API 'SI](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations)
 
-Tüm tüketim API'leri, Azure AD kimlik doğrulama ve yetkilendirme için kullanın. yerel Azure API'leri ile değiştirilir. Azure REST API'lerini çağırmayla ilgili daha fazla bilgi için bkz. [REST ile çalışmaya başlama](/rest/api/azure/#create-the-request). API'leri daha önce listelenen ayırma önerileri değiştirilir [Microsoft.Consumption/reservationRecommendations](/rest/api/consumption/reservationrecommendations/list) API.
+Tüm tüketim API 'Leri, kimlik doğrulama ve yetkilendirme için Azure AD kullanan yerel Azure API 'Leri tarafından değiştirilmiştir. Azure REST API 'Leri çağırma hakkında daha fazla bilgi için bkz. [rest ile çalışmaya](/rest/api/azure/#create-the-request)başlama. Daha önce listelenen ayırma önerileri API 'Leri, [Microsoft. tüketim/Rezervationöneriler](/rest/api/consumption/reservationrecommendations/list) API 'siyle değiştirilmiştir.
 
-Ayırma öneriler API'si ile ayırma öneriler almak için:
+Ayırma önerileri API 'SI ile rezervasyon önerileri almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/providers/Microsoft.Consumption/reservationRecommendations?api-version=2019-01-01` |
 
-## <a name="reservation-usage-apis-replaced"></a>Ayırma kullanım değiştirilen API'ler
+## <a name="reservation-usage-apis-replaced"></a>Ayırma kullanım API 'Leri değişti
 
-Ayrılmış örnek kullanımı API'si ile bir kayıt rezervasyon kullanım elde edebilirsiniz. Bir kayıt birden fazla ayrılmış örnek varsa, ayrıca kullanım, tüm bu API'yi kullanarak ayrılmış örnek satın alabilirsiniz.
+Ayrılmış Örnek Kullanımı API 'SI ile bir kayıtta rezervasyon kullanımı edinebilirsiniz. Bir kayıtta birden fazla ayrılmış örnek varsa, bu API 'YI kullanarak tüm ayrılmış örnek satın almalarınızın kullanımını da edinebilirsiniz.
 
-Bunlara aşağıdakiler dahildir:
+Şunları içerir:
 
-- [Ayrılmış örnek kullanım ayrıntıları](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#request-for--reserved-instance-usage-details)
-- [Ayrılmış örnek Kullanım Özeti](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage)
+- [Ayrılmış Örnek Kullanımı ayrıntıları](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#request-for-reserved-instance-usage-details)
+- [Ayrılmış Örnek Kullanımı Özeti](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage)
 
-Tüm tüketim API'leri, Azure AD kimlik doğrulama ve yetkilendirme için kullanın. yerel Azure API'leri ile değiştirilir. Azure REST API'lerini çağırmayla ilgili daha fazla bilgi için bkz. [REST ile çalışmaya başlama](/rest/api/azure/#create-the-request). API'leri daha önce listelenen ayırma önerileri değiştirilir [Microsoft.Consumption/reservationDetails](/rest/api/consumption/reservationsdetails) ve [Microsoft.Consumption/reservationSummaries](/rest/api/consumption/reservationssummaries) API'leri.
+Tüm tüketim API 'Leri, kimlik doğrulama ve yetkilendirme için Azure AD kullanan yerel Azure API 'Leri tarafından değiştirilmiştir. Azure REST API 'Leri çağırma hakkında daha fazla bilgi için bkz. [rest ile çalışmaya](/rest/api/azure/#create-the-request)başlama. Daha önce listelenen ayırma önerileri API 'Leri [Microsoft. tüketim/Rezervationdetails](/rest/api/consumption/reservationsdetails) ve [Microsoft. tüketim/rezervationözetler](/rest/api/consumption/reservationssummaries) API 'leri tarafından değiştirilmiştir.
 
-Rezervasyon ayrıntıları API'siyle rezervasyon ayrıntıları almak için:
+Ayırma ayrıntıları API 'SI ile rezervasyon ayrıntılarını almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/providers/Microsoft.Consumption/reservationDetails?api-version=2019-01-01` |
 
-Ayırma özetleri ayırma özetleri API'si ile almak için:
+RESERVATION özetler API 'SI ile rezervasyon özetlerini almak için:
 
-| Yöntem | İstek URI'si |
+| Yöntem | İstek URI 'SI |
 | --- | --- |
 | GET | `https://management.azure.com/providers/Microsoft.Consumption/reservationSummaries?api-version=2019-01-01` |
 
 
 
-## <a name="move-from-cloudyn-to-cost-management"></a>Maliyet Yönetimi Cloudyn'den Taşı
+## <a name="move-from-cloudyn-to-cost-management"></a>Cloudyn 'ten maliyet yönetimine taşıma
 
-Kullanan kuruluşlar [Cloudyn](https://cloudyn.com) kullanarak başlamalıdır [Azure maliyet Yönetimi](https://azure.microsoft.com/services/cost-management/) herhangi bir maliyet Yönetimi gereksinimleri için. Maliyet yönetimi, hiçbir ekleme ve bir sekiz saatlik gecikme süresine sahip Azure portalında kullanılabilir. Daha fazla bilgi için [maliyet Yönetimi belgeleri](index.yml).
+[Cloudyn](https://cloudyn.com) kullanan kuruluşlar, herhangi bir maliyet yönetimi Ihtiyacı Için [Azure maliyet yönetimi](https://azure.microsoft.com/services/cost-management/) 'ni kullanmaya başlamalıdır. Maliyet yönetimi, hiçbir ekleme ve sekiz saatlik gecikme süresi olmadan Azure portal kullanılabilir. Daha fazla bilgi için bkz. [maliyet yönetimi belgeleri](index.yml).
 
 Azure maliyet yönetimi ile şunları yapabilirsiniz:
 
-- Önceden tanımlanmış bir bütçeyle karşılaştırmalı bir zaman içinde maliyet görüntüleyin. Günlük maliyet desenleri tanımlamak ve anomalileri harcama durdurmak için analiz edin. Maliyetlerin etiketler, kaynak grubu, hizmet ve konuma göre bölümlere ayırmak.
-- Bütçe sınırlarını kullanım ve maliyetlerinizi ve önemli eşikleri yaklaşıldığında bildirim alın. oluşturun. Otomasyon ile özel olaylar tetikleyin ve sizin şartlarınıza göre sabit sınırlara zorlamak için eylem gruplarını ayarlayın.
-- Maliyet ve kullanım önerileri Azure Danışmanı ile iyileştirin. Rezervasyon satın alma iyileştirmeler keşfedin, downsize kapatacağı sanal makineler ve bütçelerini içinde kalmak için kullanılmayan kaynakları silin.
-- Günlük depolama hesabınıza bir CSV dosyası yayımlanacak bir maliyet ve kullanım verileri dışarı aktarma zamanlayın. Faturalama verileri eşitlenmiş durumda ve güncel tutmak için dış sistemlerle tümleştirme otomatikleştirin.
+- Önceden tanımlanmış bir bütçeye göre zaman içinde maliyetleri görüntüleyin. Harcama bozuklularını belirlemek ve durdurmak için günlük maliyet desenlerini çözümleyin. Maliyetleri etiketlere, kaynak grubuna, hizmete ve konuma göre bölün.
+- Kullanım ve maliyetler için sınırlamalar ayarlamak ve önemli eşikler approached olduğunda bildirim almak için bütçeler oluşturun. Özel olayları tetiklemek ve koşullarınızda sabit limitleri zorlamak için eylem gruplarıyla Otomasyon ayarlayın.
+- Azure Advisor önerileriyle maliyeti ve kullanımı iyileştirin. Rezervasyonlar ile satın alma iyileştirmelerini bulun, daha az kullanılan sanal makineleri yeniden boyutlandırın ve kullanılmayan kaynakları silerek bütçeleri dahilinde kalır.
+- Günlük olarak bir CSV dosyası yayımlamak için bir maliyet ve kullanım verilerini dışa aktarma zamanlayın. Faturalama verilerini eşitlenmiş ve güncel tutmak için dış sistemlerle tümleştirmeyi otomatikleştirin.
 
 ## <a name="power-bi-integration"></a>Power BI tümleştirmesi
 
-Maliyet raporlama için Power BI kullanıyorsanız, geçiş için aşağıdakiler gerekir:
+Maliyet raporlama için Power BI kullanıyorsanız, aşağıdakilere geçiş yapmanız gerekir:
 
-- Microsoft Azure tüketim öngörüleri Power BI uygulaması
-- Azure tüketim öngörüleri Masaüstü Bağlayıcısı
+- Microsoft Azure Consumption Insights Power BI uygulaması
+- Azure Consumption Insights Desktop Bağlayıcısı
 
 
-Bağlayıcı en üst düzeyde esneklik isteyen kuruluşlar için tavsiye edilir. Ancak, Power BI uygulaması da hızlı kurulum için kullanılabilir durumdadır.
+Bağlayıcı, en çok esnekliği isteyen kuruluşlar için önerilir. Ancak Power BI uygulama hızlı kurulum için de kullanılabilir.
 
-- Yükleme [Microsoft Azure tüketim öngörüleri Power BI uygulaması](https://appsource.microsoft.com/product/power-bi/pbi_azureconsumptioninsights.pbi-azure-consumptioninsights?tab=overview)
-- [Azure tüketim öngörüleri Bağlayıcısı ile bağlanma](/power-bi/desktop-connect-azure-consumption-insights)
+- [Microsoft Azure Consumption Insights Power BI uygulamasını](https://appsource.microsoft.com/product/power-bi/pbi_azureconsumptioninsights.pbi-azure-consumptioninsights?tab=overview) yükler
+- [Azure Consumption Insights Bağlayıcısı ile bağlanma](/power-bi/desktop-connect-azure-consumption-insights)
 
-Eski Consumption Insights İçerik Paketi ve bağlayıcı bir kayıt düzeyinde çalışmıştır. Bu, en azından okuma erişimi gereklidir. Yeni tüketim öngörüleri Power BI uygulamasını ve yeni Azure tüketim öngörüleri Bağlayıcısı faturalandırma profili kullanıcılar için kullanılabilir. Ek seçenekler maliyetleri gözden geçirme veya faturalama profilleri arasında maliyetleri görüntülemek üzere takımlar kullanmalıdır [maliyet analizi](https://ms.portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/costanalysis) Azure portalı.
+Eski tüketim öngörüleri içerik paketi ve bağlayıcı bir kayıt düzeyinde çalıştı. En azından okuma erişimi gerekiyor. Yeni tüketim öngörüleri Power BI uygulaması ve yeni Azure Consumption Insights Bağlayıcısı Faturalandırma profili kullanıcıları tarafından kullanılabilir. Maliyetleri gözden geçirmek veya maliyetleri izlemek için ek seçeneklere ihtiyaç duyulan ekipler Azure portal [Maliyet analizinde](https://ms.portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/costanalysis) kullanılmalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Okuma [maliyet Yönetimi belgeleri](index.yml) izlemek ve Azure harcama denetlemek nasıl öğrenmek için. Veya, maliyet yönetimi ile kaynak kullanımını en iyi duruma getirmek istiyorsanız.
+- Azure harcamalarınızı izleme ve denetleme hakkında bilgi edinmek için [maliyet yönetimi belgelerini](index.yml) okuyun. Veya maliyet yönetimiyle kaynak kullanımını iyileştirmek istiyorsanız.

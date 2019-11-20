@@ -1,9 +1,9 @@
 ---
-title: Akka akışları için Apache Kafka - Azure Event hubs'ı kullanarak | Microsoft Docs
-description: Bu makalede, Azure olay hub'ı için bir Apache Kafka Akka akışları bağlanma hakkında bilgi etkin sağlar.
+title: Apache Kafka için Akka akışlarını kullanma-Azure Event Hubs | Microsoft Docs
+description: Bu makalede, Akka akışlarını Apache Kafka etkin bir Azure Olay Hub 'ına bağlama hakkında bilgi sağlanır.
 services: event-hubs
 documentationcenter: ''
-author: basilhariri
+author: ShubhaVijayasarathy
 manager: timlt
 editor: ''
 ms.assetid: ''
@@ -12,63 +12,63 @@ ms.devlang: na
 ms.topic: article
 ms.custom: seodec18
 ms.date: 12/06/2018
-ms.author: bahariri
-ms.openlocfilehash: 32d710464cf61f998e18af28887561cefd2b1b3f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: shvija
+ms.openlocfilehash: ba81ce88bcdf039d020dcd945e45a11cf603c114
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60821575"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555760"
 ---
-# <a name="using-akka-streams-with-event-hubs-for-apache-kafka"></a>Akka akışları için Apache Kafka ile Event hubs'ı kullanma
-Bu öğreticide Protokolü istemcilerinize değiştirme veya kendi kümeleri çalıştıran Akka akışları Kafka özellikli event hubs'a bağlanma gösterilmektedir. Kafka için Azure Event Hubs'ı destekleyen [Apache Kafka sürüm 1.0.](https://kafka.apache.org/10/documentation.html)
+# <a name="using-akka-streams-with-event-hubs-for-apache-kafka"></a>Apache Kafka için Event Hubs ile Akka akışlarını kullanma
+Bu öğreticide, protokol istemcilerinizi değiştirmeden veya kendi kümelerinizi çalıştırmadan Akka akışlarını Kafka özellikli Olay Hub 'larına nasıl bağlayabilmeniz gösterilmektedir. Kafka için Azure Event Hubs [Apache Kafka 1,0 sürümünü destekler.](https://kafka.apache.org/10/documentation.html)
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > [!div class="checklist"]
 > * Event Hubs ad alanı oluşturma
 > * Örnek projeyi kopyalama
-> * Üretici Akka akışları çalıştırma 
-> * Tüketici Akka akışları çalıştırma
+> * Akka Streams üreticisi çalıştırma 
+> * Akka akışları tüketicisini Çalıştır
 
 > [!NOTE]
 > Bu örnek [GitHub](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/akka/java)'da sağlanır
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticiyi tamamlamak için aşağıdaki önkoşulların karşılandığından emin olun:
+Bu öğreticiyi tamamlayabilmeniz için aşağıdaki önkoşullara sahip olduğunuzdan emin olun:
 
 * [Apache Kafka için Event Hubs](event-hubs-for-kafka-ecosystem-overview.md) makalesini okuyun. 
 * Azure aboneliği. Aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) oluşturun.
 * [Java Development Kit (JDK) 1.8+](https://aka.ms/azure-jdks)
     * Ubuntu’da JDK’yi yüklemek için `apt-get install default-jdk` komutunu çalıştırın.
     * JAVA_HOME ortam değişkenini JDK’nin yüklü olduğu klasöre işaret edecek şekilde ayarladığınızdan emin olun.
-* [İndirme](https://maven.apache.org/download.cgi) ve [yükleme](https://maven.apache.org/install.html) Maven ikili Arşivi
+* Maven ikili Arşivi [indirme](https://maven.apache.org/download.cgi) ve [yükleme](https://maven.apache.org/install.html)
     * Ubuntu’da Maven’i yüklemek için `apt-get install maven` komutunu çalıştırabilirsiniz.
 * [Git](https://www.git-scm.com/downloads)
     * Ubuntu’da Git’i yüklemek için `sudo apt-get install git` komutunu çalıştırabilirsiniz.
 
 ## <a name="create-an-event-hubs-namespace"></a>Event Hubs ad alanı oluşturma
 
-Tüm Event Hubs hizmetinden gönderileceği ve alınacağı bir Event Hubs ad alanı gereklidir. Bkz: [Event Hubs etkin Kafka oluşturma](event-hubs-create-kafka-enabled.md) bir olay hub'ları Kafka uç nokta alma hakkında bilgi için. Daha sonra kullanmak için Event Hubs bağlantı dizesi kopyaladığınızdan emin olun.
+Herhangi bir Event Hubs hizmetinden göndermek veya almak için bir Event Hubs ad alanı gerekir. Event Hubs Kafka uç noktası alma hakkında bilgi için bkz. [Create Kafka Enabled Event Hubs](event-hubs-create-kafka-enabled.md) . Event Hubs bağlantı dizesini daha sonra kullanmak üzere kopyalamadığınızdan emin olun.
 
 ## <a name="clone-the-example-project"></a>Örnek projeyi kopyalama
 
-Event Hubs, Kafka özellikli bir bağlantı dizesi olduğuna göre Azure Event Hubs Kafka deposu için kopyalama ve gidin `akka` alt klasörü:
+Artık Kafka özellikli Event Hubs bağlantı dizesine sahip olduğunuza göre, Azure Event Hubs for Kafka Repository 'yi klonlayın ve `akka` alt klasörüne gidin:
 
 ```shell
 git clone https://github.com/Azure/azure-event-hubs-for-kafka.git
 cd azure-event-hubs-for-kafka/tutorials/akka/java
 ```
 
-## <a name="run-akka-streams-producer"></a>Üretici Akka akışları çalıştırma
+## <a name="run-akka-streams-producer"></a>Akka Streams üreticisi çalıştırma
 
-Sağlanan Akka akışları üretici örneği kullanarak Event Hubs hizmeti için iletiler gönderin.
+Sunulan Akka Streams üreticisi örneğini kullanarak, Event Hubs hizmetine ileti gönderin.
 
-### <a name="provide-an-event-hubs-kafka-endpoint"></a>Bir olay hub'ları Kafka uç noktası sağlayın
+### <a name="provide-an-event-hubs-kafka-endpoint"></a>Event Hubs Kafka uç noktası sağlama
 
-#### <a name="producer-applicationconf"></a>Üretici application.conf
+#### <a name="producer-applicationconf"></a>Producer Application. conf
 
-Güncelleştirme `bootstrap.servers` ve `sasl.jaas.config` değerler `producer/src/main/resources/application.conf` üretici doğru kimlik doğrulaması ile Event Hubs Kafka uç noktasına yönlendirmek için.
+Üreticiyi doğru kimlik doğrulamasıyla Event Hubs Kafka uç noktasına yönlendirmek için `producer/src/main/resources/application.conf` `bootstrap.servers` ve `sasl.jaas.config` değerlerini güncelleştirin.
 
 ```xml
 akka.kafka.producer {
@@ -86,26 +86,26 @@ akka.kafka.producer {
 }
 ```
 
-### <a name="run-producer-from-the-command-line"></a>Üretici komut satırından çalıştırma
+### <a name="run-producer-from-the-command-line"></a>Üretici 'yi komut satırından Çalıştır
 
-Üretici komut satırından çalıştırmak için JAR oluşturmak ve ardından Maven içinde çalıştırın (veya daha sonra sınıf için gerekli Kafka JAR(s) ekleyerek Java'da çalıştırma Maven kullanarak bir JAR oluşturmak):
+Producer 'ı komut satırından çalıştırmak için, JAR 'yi oluşturun ve Maven içinden çalıştırın (veya Maven kullanarak JAR 'yi oluşturun ve ardından, gerekli Kafka JAR 'leri, Sınıfyoluna ekleyerek Java 'da çalıştırın):
 
 ```shell
 mvn clean package
 mvn exec:java -Dexec.mainClass="AkkaTestProducer"
 ```
 
-Üretici konu, Kafka etkin olay hub'ına olay göndermeye başlar `test`ve stdout olaylara yazdırır.
+Üretici, `test` konu başlığı altında Kafka etkin olay hub 'ına olay göndermeye başlar ve STDOUT 'a olayları yazdırır.
 
-## <a name="run-akka-streams-consumer"></a>Tüketici Akka akışları çalıştırma
+## <a name="run-akka-streams-consumer"></a>Akka akışları tüketicisini Çalıştır
 
-Sağlanan tüketici örneği kullanarak iletiler Kafka özellikli event hubs'dan alır.
+Sağlanan tüketici örneğini kullanarak, Kafka etkin olay hub 'larından iletiler alın.
 
-### <a name="provide-an-event-hubs-kafka-endpoint"></a>Bir olay hub'ları Kafka uç noktası sağlayın
+### <a name="provide-an-event-hubs-kafka-endpoint"></a>Event Hubs Kafka uç noktası sağlama
 
-#### <a name="consumer-applicationconf"></a>Tüketici application.conf
+#### <a name="consumer-applicationconf"></a>Tüketici uygulaması. conf
 
-Güncelleştirme `bootstrap.servers` ve `sasl.jaas.config` değerler `consumer/src/main/resources/application.conf` tüketici doğru kimlik doğrulaması ile Event Hubs Kafka uç noktasına yönlendirmek için.
+@No__t_0 ve `sasl.jaas.config` `consumer/src/main/resources/application.conf` değerlerini, tüketiciye doğru kimlik doğrulama ile Event Hubs Kafka uç noktasına yönlendirmek için güncelleştirin.
 
 ```xml
 akka.kafka.consumer {
@@ -126,27 +126,27 @@ akka.kafka.consumer {
 }
 ```
 
-### <a name="run-consumer-from-the-command-line"></a>Tüketici komut satırından çalıştırma
+### <a name="run-consumer-from-the-command-line"></a>Komut satırından tüketici çalıştırma
 
-Tüketici komut satırından çalıştırmak için JAR oluşturmak ve ardından Maven içinde çalıştırın (veya daha sonra sınıf için gerekli Kafka JAR(s) ekleyerek Java'da çalıştırma Maven kullanarak bir JAR oluşturmak):
+Tüketici 'yi komut satırından çalıştırmak için, JAR 'yi oluşturun ve Maven içinden çalıştırın (veya Maven kullanarak JAR 'yi oluşturun ve ardından, gerekli Kafka JAR 'leri, Sınıfyoluna ekleyerek Java 'da çalıştırın):
 
 ```shell
 mvn clean package
 mvn exec:java -Dexec.mainClass="AkkaTestConsumer"
 ```
 
-Kafka özellikli bir olay hub'ı olayları varsa (örneğin, üretici da çalışıyorsa), sonra da tüketici, konu başlığından olayları almaya başlar `test`. 
+Kafka etkin olay hub 'ının olayları varsa (örneğin, üreticisi de çalışıyorsa), tüketici `test` konudan olay almaya başlar. 
 
-Kullanıma [Akka akışları Kafka Kılavuzu](https://doc.akka.io/docs/akka-stream-kafka/current/home.html) Akka akışları hakkında daha ayrıntılı bilgi için.
+Akka akışları hakkında daha ayrıntılı bilgi için [Akka Streams Kafka kılavuzuna](https://doc.akka.io/docs/akka-stream-kafka/current/home.html) göz atın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu öğreticide, Protokolü istemcilerinize değiştirme veya kendi kümeleri çalıştıran Akka akışları Kafka özellikli event hubs'a bağlanma öğrendiniz. Kafka için Azure Event Hubs'ı destekleyen [Apache Kafka sürüm 1.0.](https://kafka.apache.org/10/documentation.html). Bu öğreticinin bir parçası olarak aşağıdaki eylemleri yapar: 
+Bu öğreticide, protokol istemcilerinizi değiştirmeden veya kendi kümelerinizi çalıştırmadan Akka akışlarını Kafka özellikli Olay Hub 'larına bağlamayı öğrendiniz. Kafka için Azure Event Hubs [Apache Kafka 1,0 sürümünü destekler.](https://kafka.apache.org/10/documentation.html) Bu öğreticinin bir parçası olarak aşağıdaki eylemleri yaptınız: 
 
 > [!div class="checklist"]
 > * Event Hubs ad alanı oluşturma
 > * Örnek projeyi kopyalama
-> * Üretici Akka akışları çalıştırma 
-> * Tüketici Akka akışları çalıştırma
+> * Akka Streams üreticisi çalıştırma 
+> * Akka akışları tüketicisini Çalıştır
 
 Event Hubs ve Kafka için Event Hubs hakkında daha fazla bilgi edinmek için aşağıdaki konuya bakın:  
 

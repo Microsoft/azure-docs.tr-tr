@@ -1,31 +1,25 @@
 ---
-title: Azure Web Apps analitik verileri görüntüleme | Microsoft Docs
-description: Azure Web Apps Analytics çözümü, tüm Azure Web uygulaması kaynaklarınız genelinde farklı ölçümleri toplayarak Azure Web Apps hakkında Öngörüler elde etmek için kullanabilirsiniz.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: 20ff337f-b1a3-4696-9b5a-d39727a94220
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Web Apps analitik verilerini görüntüleme | Microsoft Docs
+description: Azure Web Apps hakkında içgörüler elde etmek için Azure Web Apps Analytics çözümünü kullanarak Azure Web App kaynaklarınızın tamamında farklı ölçümler toplayabilirler.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 07/02/2018
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 1ebe0b9d3cbe14bf35e05db3349a5aebb11b5716
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 07/02/2018
+ms.openlocfilehash: 6b0a4276e27cdcbfaad133a69ac2f4cc3b750805
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60494746"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899083"
 ---
-# <a name="view-analytic-data-for-metrics-across-all-your-azure-web-app-resources"></a>Azure Web uygulaması tüm kaynaklarınız genelinde ölçümler için analitik verileri görüntüle
+# <a name="view-analytic-data-for-metrics-across-all-your-azure-web-app-resources"></a>Tüm Azure Web uygulaması kaynaklarınız genelinde ölçümler için analitik verileri görüntüleyin
 
 ![Web Apps simgesi](./media/azure-web-apps-analytics/azure-web-apps-analytics-symbol.png)  
 
 > [!NOTE]
-> Azure Web uygulaması analizi çözümü, topluluk desteği için taşınmıştır.  
->- Çözüm Azure Market'te artık kullanılamıyor, ancak yüklenebilir [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/101-webappazure-oms-monitoring/) burada da desteklenir topluluk tarafından.
->- Çözüm'i zaten yüklemiş olan müşteriler, değişiklikler ile kullanmaya devam edebilirsiniz.  
->- Microsoft, kullanmanızı önerir [Application Insights](../../azure-monitor/app/app-insights-overview.md) web uygulamalarınızı izlemek için.
+> Azure Web App Analytics çözümü, topluluk desteğine taşınmıştır.  
+>- Çözüm artık Azure Marketi 'nden kullanılamaz, ancak topluluk tarafından desteklendiği [Azure hızlı başlangıç şablonlarından](https://azure.microsoft.com/resources/templates/101-webappazure-oms-monitoring/) yüklenebilir.
+>- Çözümü zaten yüklemiş olan müşteriler bu değişikliği değişikliklerle kullanmaya devam edebilir.  
+>- Microsoft, Web uygulamalarınızı izlemek için [Application Insights](../../azure-monitor/app/app-insights-overview.md) kullanmanızı önerir.

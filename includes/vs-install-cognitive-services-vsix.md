@@ -9,31 +9,31 @@ ms.topic: include
 ms.date: 03/01/2018
 ms.author: ghogen
 ms.custom: include file
-manager: douge
-ms.openlocfilehash: 892db95a3d8ebaf4d9d3339d4965ce96b1084537
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+manager: jillfra
+ms.openlocfilehash: 295716d6e1d36d84ca78770109ccc1087b5e6303
+ms.sourcegitcommit: 0e59368513a495af0a93a5b8855fd65ef1c44aac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188638"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69520892"
 ---
-## <a name="install-the-cognitive-services-vsix-extension"></a>Bilişsel hizmetler VSIX eklentisini yükleyin
+## <a name="install-the-cognitive-services-vsix-extension"></a>Bilişsel hizmetler VSıX uzantısını yükler
 
-1. Web projenizi Visual Studio'da açın, seçin **bağlı hizmetler** sekmesi. Sekme, yeni bir proje açtığınızda görüntülenen Hoş Geldiniz sayfasında kullanılabilir. Sekmeyi görmüyorsanız seçin **bağlı hizmetler** Çözüm Gezgini'nde projenize.
+1. Visual Studio 'da Web projeniz açıkken, **bağlı hizmetler** sekmesini seçin. Sekme, yeni bir proje açtığınızda görüntülenen hoş geldiniz sayfasında bulunur. Sekmeyi görmüyorsanız, Çözüm Gezgini projenizde **bağlı hizmetler** ' i seçin.
 
-   ![Bağlı hizmetler ekran sekmesi](./media/vs-install-cognitive-services-vsix/Connected-Services-Tab.PNG)
+   ![Bağlı hizmetler sekmesinin ekran görüntüsü](./media/vs-install-cognitive-services-vsix/Connected-Services-Tab.PNG)
 
-1. Kaydırma hizmetlerin listesi En Alta kadar kaydırın ve seçin **daha fazla hizmet Bul.** .
+1. Hizmet listesinin en altına gidin ve **daha fazla hizmet bul**' u seçin.
 
-    ![Ekran görüntüsü, bulmak daha Bağlantı Hizmetleri](./media/vs-install-cognitive-services-vsix/Find-More-Services.PNG)
+    ![Daha fazla hizmet bul bağlantısının ekran görüntüsü](./media/vs-install-cognitive-services-vsix/Find-More-Services.PNG)
  
     **Uzantılar ve güncelleştirmeler** iletişim kutusu görüntülenir.
 
-1. İçinde **Uzantılar ve güncelleştirmeler** iletişim kutusu, arama **Bilişsel Hizmetler**, sonra da indirin ve Bilişsel hizmetler VSIX paketini yükleyin.
+1. **Uzantılar ve güncelleştirmeler** iletişim kutusunda bilişsel **Hizmetler**' i arayın ve ardından BILIŞSEL hizmetler VSIX paketini indirip yükleyin.
 
-   ![Ekran görüntüsü, uzantılar ve güncelleştirmeler iletişim kutusu](./media/vs-install-cognitive-services-vsix/install-cognitive-services-vsix.PNG)
+   ![Uzantılar ve güncelleştirmeler iletişim kutusunun ekran görüntüsü](./media/vs-install-cognitive-services-vsix/install-cognitive-services-vsix.PNG)
 
-   Bir uzantının yüklenmesi tümleşik geliştirme ortamının (IDE) yeniden başlatılması gerekiyor.
+   Bir uzantının yüklenmesi, tümleşik geliştirme ortamının (IDE) yeniden başlatılmasını gerektirir.
 
-2. Visual Studio'yu yeniden başlatın. Uzantı, Visual Studio'yu kapatın, yükler ve IDE sonraki başlatışınızda kullanılabilir.
+2. Visual Studio'yu yeniden başlatın. Uzantı, Visual Studio 'yu kapattığınızda yüklenir ve IDE 'yi bir dahaki sefer başlattığınızda kullanılabilir.
 

@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - VHD ile VM Oluşturma | Microsoft Docs
+title: Azure CLı betik örneği-VHD ile VM oluşturma
 description: Azure CLI Betik Örneği - Sanal sabit disk kullanarak VM oluşturma.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
-author: allclark
-manager: douge
+author: cynthn
+manager: gwallace
 editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
@@ -14,14 +14,14 @@ ms.topic: sample
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 03/09/2017
-ms.author: allclark
+ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 331bf57c415922a6686ba733b5fbcee24699a152
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 16f4e3e153cbc02f8626199d168d069add48e4b6
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61127780"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037663"
 ---
 # <a name="create-a-vm-with-a-virtual-hard-disk"></a>Bir sanal sabit disk ile VM oluşturma
 

@@ -1,7 +1,7 @@
 ---
-title: Bing haber arama API'si ile haberler için arama
-titlesuffix: Azure Cognitive Services
-description: Genel haber, popüler konularını ve başlıkları için arama sorguları göndereceğinizi öğrenin.
+title: Bing Haber Arama API'si haberleri arayın
+titleSuffix: Azure Cognitive Services
+description: Genel Haberler, popüler konular ve haber başlıkları için arama sorguları gönderme hakkında bilgi edinin.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
@@ -10,26 +10,26 @@ ms.subservice: bing-news-search
 ms.topic: overview
 ms.date: 06/19/2019
 ms.author: scottwhi
-ms.openlocfilehash: da1dd68b8e155e121f26f5599207691877fbf0ca
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: b70cf50bb33ca7962116586a347c508b15abcd0c
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67274158"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68423880"
 ---
-# <a name="search-for-news-with-the-bing-news-search-api"></a>Bing haber arama API'si ile haberler için arama
+# <a name="search-for-news-with-the-bing-news-search-api"></a>Bing Haber Arama API'si haberleri arayın
 
-Bing resim arama API'si, Bing'ın bilişsel haber arama özellikleri uygulamalarınızla tümleştirin kolaylaştırır.
+Bing Resim Arama API'si, Bing 'in bilişsel haber arama yeteneklerini uygulamalarınıza tümleştirmeyi kolaylaştırır.
 
-Bing haber arama API'si, öncelikli olarak bulur ve ilgili haber makalelerini döndürür, ancak Web Akıllı ve odaklanmış haberleri almak için çeşitli özellikler sağlar.
+Bing Haber Arama API'si öncelikle ilgili haber makalelerini bulup döndürse de, Web 'de akıllı ve odaklanmış haber alımı için çeşitli özellikler sağlar.
 
-## <a name="suggest-and-use-search-terms"></a>Önermek ve arama terimleri kullanın
+## <a name="suggest-and-use-search-terms"></a>Arama terimleri öner ve kullan
 
 Kullanıcıların arama terimlerini gireceği bir arama kutusu sağlıyorsanız deneyimi geliştirmek için [Bing Otomatik Öneri API'sini](../../bing-autosuggest/get-suggested-search-terms.md) kullanın. API, kullanıcı yazarken kısmi arama terimlerine dayalı önerilen sorgu dizelerini yönetin.
 
 Kullanıcı arama terimini girdikten sonra [q](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#query) sorgu parametresini ayarlamadan önce terimi URL ile kodlayın. Örneğin kullanıcı *sailing dinghies* terimini girerse `q` öğesini `sailing+dinghies` veya `sailing%20dinghies` olarak ayarlayın.
 
-## <a name="get-general-news"></a>Genel haberleri alın
+## <a name="get-general-news"></a>Genel haberleri al
 
 Web'den kullanıcının arama terimiyle ilgili genel haber makalelerini almak için aşağıdaki GET isteğini gönderin:
 
@@ -51,7 +51,7 @@ Belirli bir etki alanındaki haberleri almak için [site:](https://msdn.microsof
 GET https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=sailing+dinghies+site:contososailing.com&mkt=en-us HTTP/1.1
 ```
 
-Önceki sorguya yanıt aşağıdaki JSON örneği gösterilmektedir. Bir parçası olarak [kullanın ve görüntü gereksinimleri](../useanddisplayrequirements.md) Bing arama API'leri yanıt olarak sağlanan sırayla her haber makalesinin görüntülemeniz gerekir. Makalenin makale kümelenmiş ise ilgili makaleler yok ve istek üzerine görüntülemesini belirtmeniz gerekir.
+Aşağıdaki JSON örneği, önceki sorguya olan yanıtı gösterir. Bing arama API 'Leri için [kullanım ve görüntüleme gereksinimlerinin](../useanddisplayrequirements.md) bir parçası olarak, her bir haber makalesini yanıtta belirtilen sırada görüntümalısınız. Makalede kümelenmiş makaleler varsa ilgili makalelerin var olduğunu ve bunları istek üzerine görüntülendiğini belirtmeniz gerekir.
 
 ```json
 {
@@ -105,9 +105,9 @@ Listedeki her [haber makalesi](https://docs.microsoft.com/rest/api/cognitiveserv
 
 Bing haber makalesinin kategorisini belirleyebiliyorsa, makale `category` alanını içerir.
 
-## <a name="get-todays-top-news"></a>Günümüzün üst haberleri alın
+## <a name="get-todays-top-news"></a>Bugünün en iyi haberlerini alın
 
-Günümüzün en iyi haber makalelerini almak için aynı genel haber isteği önce olduğu gibi bırakarak gönderebilir `q` parametresi ayarlanmamış.
+Günümüzün en popüler haber makalelerini almak için, aynı genel haber isteğini daha önce olduğu gibi gönderebilirsiniz ve `q` parametreyi yok edin.
 
 ```http
 GET https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=&mkt=en-us HTTP/1.1
@@ -119,9 +119,9 @@ X-MSEdge-ClientID: <blobFromPriorResponseGoesHere>
 Host: api.cognitive.microsoft.com
 ```
 
-Yanıt üst haberleri almak için neredeyse bir genel haberleri almak için aynıdır. Ancak, belirli sayıda sonuç olduğu için `news` yanıtı `totalEstimatedMatches` alanını içermez. En önemli haber makalelerinin sayısı, haber döngüsüne bağlı olarak farklılık gösterebilir. Kullandığınızdan emin olun `provider` makaleyi özniteliği için alan.
+En iyi haberleri alma yanıtı, genel haberleri alma ile neredeyse aynıdır. Ancak, belirli sayıda sonuç olduğu için `news` yanıtı `totalEstimatedMatches` alanını içermez. En önemli haber makalelerinin sayısı, haber döngüsüne bağlı olarak farklılık gösterebilir. Makaleyi kullanmak `provider` için alanı kullandığınızdan emin olun.
 
-## <a name="get-news-by-category"></a>Kategoriye göre haberleri alın
+## <a name="get-news-by-category"></a>Kategoriye göre haberleri al
 
 Önemli spor veya eğlence haberleri gibi kategoriye göre haber makalelerini almak için, Bing’e aşağıdaki GET isteğini gönderin:
 
@@ -139,7 +139,7 @@ Alınacak makale kategorilerini belirtmek için [category](https://docs.microsof
 
 Haberleri kategoriye göre alma isteğine verilen yanıt, genel haberleri alma ile neredeyse aynıdır. Ancak, makalelerin tümü belirtilen kategoriye aittir.
 
-## <a name="get-headline-news"></a>Başlık haberleri alın
+## <a name="get-headline-news"></a>Başlık haberleri al
 
 Manşet haber makalelerini istemek ve tüm haber kategorilerinden makaleler almak için, Bing’e aşağıdaki GET isteğini gönderin:
 
@@ -161,7 +161,7 @@ Varsayılan olarak, yanıt 12 adede kadar manşet makalesi içerir. Döndürüle
 
 Yanıt, kümeleri tek bir makale olarak sayar. Bir kümede birden fazla makale olabileceği için, yanıt 12’den fazla manşet makalesi ve kategoriye göre manşet olmayan dörtten fazla makale içerebilir.
 
-## <a name="get-trending-news"></a>Popüler haberleri alın
+## <a name="get-trending-news"></a>Popüler haberleri al
 
 Sosyal ağlarda popüler olan haber başlıklarını almak için Bing’e aşağıdaki GET isteğini gönderin:
 
@@ -264,4 +264,4 @@ Bir haber makalesiyle ilgili başka makaleler varsa, haber makalesi [clusteredAr
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Bing haber arama sonuçları sayfasını nasıl](../paging-news.md)
+> [Bing Haber Arama sonuçları arasında sayfa oluşturma](../paging-news.md)

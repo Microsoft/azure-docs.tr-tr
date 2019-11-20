@@ -1,7 +1,7 @@
 ---
-title: API'SİNİN nasıl kullanılacağı çağıran bir konuşma Öğrenici modeliyle - Microsoft Bilişsel hizmetler | Microsoft Docs
+title: Conversation Learner modeliyle API çağrılarını kullanma-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici modeliyle API çağrıları kullanmayı öğrenin.
+description: Conversation Learner modeliyle API çağrılarını nasıl kullanacağınızı öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,94 +10,95 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: 1f7c7c72703d7c3134dd2acdcc466fc0182fa38a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 261536932cc82a28ad4ee3ffc3575ea41fe9ec5b
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66389948"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68703920"
 ---
-# <a name="how-to-add-api-calls-to-a-conversation-learner-model"></a>Konuşma Öğrenici modeli yapılan API çağrılarının ekleme
+# <a name="how-to-add-api-calls-to-a-conversation-learner-model"></a>Conversation Learner modeline API çağrıları ekleme
 
-Bu öğreticide, API çağrıları, bir Modeli'ne Ekle gösterilmektedir. API çağrılarıdır tanımlayın ve yazma Botunuzun, İşlevler ve konuşma Öğrenici çağırabilirsiniz.
+Bu öğretici, modelinize API çağrılarının nasıl ekleneceğini gösterir. API çağrıları, bot 'ta tanımladığınız ve yazdığınız ve Conversation Learner çağırabileceği işlevlerdir.
 
 ## <a name="video"></a>Video
 
-[![API çağrıları öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_APICalls_Preview)](https://aka.ms/cl_Tutorial_v3_APICalls)
+[![API çağrıları öğretici önizlemesi](https://aka.ms/cl_Tutorial_v3_APICalls_Preview)](https://aka.ms/cl_Tutorial_v3_APICalls)
 
 ## <a name="requirements"></a>Gereksinimler
-Bu öğreticide, "tutorialAPICalls.ts" bot çalışıyor olması gerekir.
+Bu öğreticide, "tutorialAPICalls. TS" bot 'ın çalışıyor olması gerekir.
 
     npm run tutorial-api-calls
 
 ## <a name="details"></a>Ayrıntılar
 
-- API çağrıları, okuma ve varlıkları işlemek.
-- API çağrıları, bellek yöneticisi nesnesine erişebilir.
-- API çağrıları, bağımsız değişken alabilir.
+- API çağrıları, varlıkları okuyabilir ve işleyebilir.
+- API çağrılarının bellek Yöneticisi nesnesine erişimi vardır.
+- API çağrıları bağımsız değişkenler alabilir.
 
-### <a name="open-the-demo"></a>Tanıtım açın
+### <a name="open-the-demo"></a>Tanıtımı açın
 
-Web kullanıcı Arabirimi "İçeri aktarma eğitimler" tıklayın ve "Öğreticisi-14-APICalls" adlı modelini seçin.
+Web Kullanıcı arabiriminde "öğreticileri Içeri aktar" düğmesine tıklayın ve "öğretici-14-APICalls" adlı modeli seçin.
 
 ### <a name="entities"></a>Varlıklar
 
-Bir varlık olarak adlandırılan modelde tanımladığınız `number`.
+Adlı `number`modelde bir varlık tanımlıyoruz.
 
 ![](../media/tutorial12_entities.PNG)
 
 ### <a name="api-calls"></a>API çağrıları
-Bu API çağrısı için kod tanımlanan dosya: `C:\<installedpath>\src\demos\tutorialAPICalls.ts`.
+API çağrılarının kodu bu dosyada tanımlanmıştır: `C:\<installedpath>\src\demos\tutorialAPICalls.ts`.
 
 ![](../media/tutorial12_apicalls.PNG)
 
-- `RandomGreeting` Geri döndürür içinde tanımlanan rastgele bir karşılama `greeting` dizisi.
-- `Multiply` Geri çağırma ile çarpın çağırır ve kullanıcı Arabiriminde işlenebilecek bir sonuç döndüren eylem tarafından geçirilen iki sayı.
-    - Bu bellek yöneticisi ilk bağımsız değişken olduğuna dikkat edin. 
-    - API geri çağırmaları çoklu giriş, bu durumda sürebilir fark `num1string` ve `num2string`.
-- `ClearEntities` Geri çağırma, böylece kullanıcı başka bir sayı girebilirsiniz sayı varlık temizler. 
-    - API çağrıları varlıkları nasıl işleyebileceğiniz gösterilmektedir.
+- Geri çağırma, `greeting` dizide tanımlanmış bir rastgele selamlama döndürür. `RandomGreeting`
+- `Multiply` Geri çağırma işlemi çağıran eyleme göre geçirilen iki sayıyı çarpıp Kullanıcı arabiriminde işlenebilen bir sonuç döndürür.
+    - Bellek Yöneticisi 'nin ilk bağımsız değişken olduğunu fark edin. 
+    - API geri çağırmaları, bu durumda `num1string` ve `num2string`' de birden çok giriş götürebileceğini unutmayın.
+- `ClearEntities` Geri arama, Kullanıcı başka bir sayı girebilmesi için sayı varlığını temizler. 
+    - API çağrılarının varlıkları nasıl işleyebileceği gösterilmektedir.
 
 ### <a name="actions"></a>Eylemler
-Dört eylem oluşturduk. Üç tanesi "Non-Wait" API eylemlerini, dördüncü kullanıcı ne diğer öğreticileri, gördük için benzer bir soru soran bir "Metin" eylemdir. Her nasıl oluşturulduğuna görmek için aşağıdakileri yapın:
-1. Sol panelde, "Eylemler", ardından bir kılavuzda listelenen dört eylem tıklatın.
-2. Açılır form üzerindeki her bir alan değerlerine dikkat edin.
-3. Bildirim `Refresh` API alanın yanındaki düğmesi.
-    - Bot durdurun ve UI sayfasında, ederken tıklatabilirsiniz API'lerine değiştirme olsaydık `Refresh` en son değişiklikleri almak için düğme.
+Dört eylem oluşturduk. Üçüne "bekleme olmayan" API eylemleri, üçüncü olarak, diğer öğreticilerde gördük gibi bir soruyu kullanıcıya soran bir "metin" Eyleidir. Her birinin nasıl oluşturulduğunu görmek için aşağıdakileri yapın:
+1. Sol bölmede, "eylemler" e tıklayın ve ardından kılavuzda listelenen dört eylemden birine tıklayın.
+2. Formun açılan formundaki her alanın değerine dikkat edin.
+3. API alanının yanındaki düğmeye dikkat edin. `Refresh`
+    - Botu durduruyoruz ve Kullanıcı arabirimi sayfası açıkken API 'lerde değişiklik yaparsanız, en son değişiklikleri almak için `Refresh` düğmeye tıklayabilirsiniz.
 
 ![](../media/tutorial12_actions.PNG)
 
-#### <a name="clearentities-multiply-and-randomgreeting"></a>ClearEntities, çarpma ve RandomGreeting
-Bu eylemler üç API türüdür. Bunların hepsi, bazı işleri gerçekleştirin ve büyük olasılıkla kullanıcıya sunulacak bir değer döndürmek için API geri arama işlevlerine bağlıdır.
+#### <a name="clearentities-multiply-and-randomgreeting"></a>ClearEntities, çarpma ve rastgele selamlama
+Bu eylemlerin üçü de API türüdür. Bunlar, bazı işleri gerçekleştirmek için API geri çağırma işlevlerini kullanır ve muhtemelen kullanıcıya sunulacak bir değer döndürür.
 
-#### <a name="what-number-do-you-want-to-multiply-by-12"></a>"Hangi numarasını 12 ile çarp istiyorsunuz"
-Bu "Metin" eylemdir ve yalnızca kullanıcının soru sorar. Bu eylem gerçekten API geri çağırmaları biri ile etkileşime girmez sırada API geri çağırmaları birini "Çarp" eylemi tarafından kullanılabilecek bir varlığın belleğe geçer bir sayı ile yanıt vermek için kullanıcı ister.
+#### <a name="what-number-do-you-want-to-multiply-by-12"></a>"12 ile çarpmak istediğiniz sayı"
+Bu, "metin" eylemi ve yalnızca kullanıcının bir sorusunu ister. Bu eylem, API geri aramalarından biriyle gerçekten etkileşime girmediği sürece, kullanıcıdan, API geri aramalarından birini kullanan "çarpma" eylemi tarafından kullanılabilecek bir varlık belleğine gidecek bir sayıyla yanıt vermesini ister.
 
 
-### <a name="train-dialog"></a>Train iletişim
+### <a name="train-dialog"></a>Iletişim kutusunu eğitme
 
-"Eğitim iletişim" atalım.
+Bir "eğitim Iletişim kutusu" aracılığıyla yürülim.
 
-1. Sol panelde tıklayın `Train Dialogs`, ardından `New Train Dialog` düğmesi.
-2. "Hello" yazın.
+1. Sol bölmede, ve `Train Dialogs` `New Train Dialog` ardından düğmesine tıklayın.
+2. "Merhaba" yazın.
 3. `Score Actions` düğmesine tıklayın.
 4. `RandomGreeting` öğesini seçin. 
-    - Bu rastgele Karşılama API çağrısı yürütülür.
-    - Bu, bir kullanıcıdan yanıt beklemez.
+    - Bu, rastgele selamlama API çağrısını yürütür.
+    - Bu, Kullanıcı yanıtı beklemez.
 5. `What number to do you want to multiply by 12?` seçeneğini belirleyin
 6. Bir sayı, herhangi bir sayı ve yalnızca bir sayı yazın.
-    - Numaranızı otomatik olarak etiketlendi bildirimi `number` varlık.
+    - Numaranız `number` varlık olarak otomatik olarak etiketlendiğine dikkat edin.
 7. `Score Actions` düğmesine tıklayın.
-8. Seçin `Multiply` eylem.
-    - Çarpma işleminin sonucu 12 dikkat edin.
-    - Uyarı, bellek için girdiğiniz değer yine de içerir. `number`
-9. Seçin `ClearEntities` eylem.
-    - Varlık değeri için bildirim `number` bellekten temizlendi.
+8. `Multiply` Eylemi seçin.
+    - Çarpma 'nın sonucunu 12 ' ye dikkat edin.
+    - Belleğin hala girdiğiniz değeri içerdiğinden emin olun.`number`
+9. `ClearEntities` Eylemi seçin.
+    - İçin `number` varlık değerinin bellekten temizlendiğine dikkat edin.
 10. `Save` düğmesine tıklayın.
 
-Artık API geri aramaları, kaydetme gördünüz kendi ortak desenler ve bağımsız değişkenleri tanımlayın ve değerleri ve bunları varlıklarda ilişkilendirin.
+Artık API geri çağırmaları, ortak desenlerinin nasıl kaydedileceği ve bağımsız değişkenlerin nasıl tanımlanacağını ve değerleri ile varlıkların nasıl ilişkilendirileceğini gördünüz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Kartları bölüm 1](./15-cards.md)
+> [Kartlar Bölüm 1](./15-cards.md)

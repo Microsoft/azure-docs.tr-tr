@@ -3,8 +3,7 @@ title: Azure PowerShell Betik Örneği - Windows üzerinde AzCopy kullanarak blo
 description: AzCopy kullanarak, bir Azure Depolama Hesabının Blob içeriklerini diğerine kopyalar.
 services: storage
 documentationcenter: na
-author: roygara
-manager: jeconnoc
+author: normesta
 ms.custom: mvc
 ms.service: storage
 ms.workload: storage
@@ -12,13 +11,13 @@ ms.tgt_pltfrm: na
 ms.devlang: azurecli
 ms.topic: sample
 ms.date: 02/01/2018
-ms.author: rogarana
-ms.openlocfilehash: 88eb97a206bc75bc9635da90eb9d48818ceef0f0
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: normesta
+ms.openlocfilehash: 0af945177289760ca0d2a97133a300d9978ce702
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61365607"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71260635"
 ---
 # <a name="migrate-blobs-across-storage-accounts-using-azcopy-on-windows"></a>Windows üzerinde AzCopy kullanarak blobları depolama hesapları arasında geçirme
 
@@ -26,7 +25,7 @@ Bu örnek kullanıcı tarafından sağlanan bir kaynak depolama hesabından tüm
 
 Bu bir depolama hesabındaki tüm kapsayıcıları listeleyen `Get-AzStorageContainer` komutu kullanılarak gerçekleştirilir. Örnek daha sonra AzCopy komutları vererek kaynak depolama hesabından her bir kapsayıcıyı hedef depolama hesabına taşır. Herhangi bir hata oluşursa, örnek $retryTimes kez yeniden dener (varsayılan değer 3’tür ve `-RetryTimes` parametresiyle değiştirilebilir). Her yeniden denemede hatayla karşılaşılırsa, kullanıcı `-LastSuccessContainerName` parametresini kullanarak örneğe başarılı bir şekilde kopyalanan son kapsayıcıyı sağlayarak betiği yeniden çalıştırabilir. Örnek daha sonra bu noktadan kapsayıcıları kopyalamaya devam eder.
 
-Bu örnek Azure PowerShell depolama modülünün sürümünü gerektirir **0,7** veya üzeri. `Get-Module -ListAvailable Az.storage` kullanarak yüklü olan sürümü denetleyebilirsiniz. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure PowerShell Modülü yükleme](/powershell/azure/install-Az-ps). 
+Bu örnek Azure PowerShell depolama modülü **0,7** veya sonraki bir sürümü gerektirir. `Get-Module -ListAvailable Az.storage` kullanarak yüklü olan sürümü denetleyebilirsiniz. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure PowerShell Modülü yükleme](/powershell/azure/install-Az-ps). 
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
@@ -69,7 +68,7 @@ Betik bir depolama hesabından diğerine verileri kopyalamak için aşağıdaki 
 | Komut | Notlar |
 |---|---|
 | [Get-AzStorageContainer](/powershell/module/az.storage/Get-AzStorageContainer) | Bu depolama hesabıyla ilişkili kapsayıcıları döndürür. |
-| [Yeni AzStorageContext](/powershell/module/az.storage/New-AzStorageContext) | Azure Depolama bağlamı oluşturur. |
+| [New-AzStorageContext](/powershell/module/az.storage/New-AzStorageContext) | Azure Depolama bağlamı oluşturur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

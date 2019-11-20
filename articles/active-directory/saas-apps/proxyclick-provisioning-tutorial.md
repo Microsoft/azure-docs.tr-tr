@@ -8,19 +8,19 @@ writer: zchia
 manager: beatrizd
 ms.assetid: na
 ms.service: active-directory
-ms.component: saas-app-tutorial
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 06/3/2019
-ms.author: zchia
-ms.openlocfilehash: 2117f481d213c14f8feeb23eb8af3670db81cab4
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.author: jeedes
+ms.openlocfilehash: c1656e6cc0c690e5a2bccfd2efab02aa843875b8
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67276645"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67672900"
 ---
 # <a name="tutorial-configure-proxyclick-for-automatic-user-provisioning"></a>Öğretici: Otomatik kullanıcı hazırlama için Proxyclick yapılandırın
 

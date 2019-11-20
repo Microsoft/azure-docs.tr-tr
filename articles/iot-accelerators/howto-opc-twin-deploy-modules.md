@@ -1,35 +1,35 @@
 ---
-title: OPC İkizi modülü sıfırdan Azure'a dağıtma | Microsoft Docs
-description: OPC İkizi sıfırdan dağıtma
+title: Azure için OPC Ikizi modülünü sıfırdan dağıtma | Microsoft Docs
+description: Bu makalede, Azure portal IoT Edge dikey penceresi ve AZ CLı kullanılarak OPC Ikizi 'in sıfırdan nasıl dağıtılacağı açıklanır.
 author: dominicbetts
 ms.author: dobett
 ms.date: 11/26/2018
 ms.topic: conceptual
-ms.service: iot-industrialiot
+ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 41d544fd23d258393cc83ea09371332655223581
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 96a4afff3e58bfa1ebf661909f380aa525fea76e
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67203936"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820148"
 ---
-# <a name="deploy-opc-twin-module-and-dependencies-from-scratch"></a>OPC İkizi modülü ve bağımlılıkları sıfırdan dağıtma
+# <a name="deploy-opc-twin-module-and-dependencies-from-scratch"></a>OPC Ikizi modülünü ve bağımlılıklarını sıfırdan dağıtma
 
-OPC İkizi modülü, IOT Edge üzerinde çalışır ve birkaç uç hizmetlerinin OPC cihaz ikizine ve kayıt defteri hizmetleri sağlar. 
+OPC Ikizi modülü IoT Edge üzerinde çalışır ve OPC cihaz ikizi ve kayıt defteri Hizmetleri için birkaç Edge hizmeti sağlar. 
 
-Modüllerini dağıtmak için birkaç seçenek vardır, [Azure IOT Edge](https://azure.microsoft.com/services/iot-edge/) aralarında bir ağ geçidi
+[Azure IoT Edge](https://azure.microsoft.com/services/iot-edge/) ağ geçidinize modül dağıtmak için çeşitli seçenekler vardır
 
-- [Azure portal'ın IOT Edge dikey penceresinden dağıtma](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-portal)
-- [AZ CLI kullanarak dağıtma](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-monitor-cli)
+- [Azure portal IoT Edge dikey penceresinden dağıtma](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-portal)
+- [AZ CLı kullanarak dağıtma](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-monitor-cli)
 
 > [!NOTE]
-> Dağıtım ayrıntıları ve yönergeleri hakkında daha fazla bilgi için bkz. GitHub [depo](https://github.com/Azure/azure-iiot-components).
+> Dağıtım ayrıntıları ve yönergeleri hakkında daha fazla bilgi için bkz. GitHub [deposu](https://github.com/Azure/azure-iiot-components).
 
 ## <a name="deployment-manifest"></a>Dağıtım bildirimi
 
-Tüm modüller, bir dağıtım bildirimi kullanılarak dağıtılır.  Her ikisi de dağıtmak için bir örnek bildirim [OPC yayımcı](https://github.com/Azure/iot-edge-opc-publisher) ve [OPC İkizi](https://github.com/Azure/azure-iiot-opc-twin-module) aşağıda gösterilmiştir.
+Tüm modüller bir dağıtım bildirimi kullanılarak dağıtılır.  Aşağıdaki [OPC yayımcısı](https://github.com/Azure/iot-edge-opc-publisher) ve [OPC ikizi](https://github.com/Azure/azure-iiot-opc-twin-module) dağıtmak için örnek bir bildirim aşağıda gösterilmiştir.
 
 ```json
 {
@@ -72,7 +72,7 @@ Tüm modüller, bir dağıtım bildirimi kullanılarak dağıtılır.  Her ikisi
               "restartPolicy": "always",
               "settings": {
                 "image": "mcr.microsoft.com/iotedge/opc-twin:latest",
-                "createOptions": "{\"NetworkingConfig\":{\"EndpointsConfig\":{\"host\":{}}},\"HostConfig\":{\"NetworkMode\":\"host\",\"CapAdd\":[\"NET_ADMIN\"]}}"
+                "createOptions": "{\"NetworkingConfig\": {\"EndpointsConfig\": {\"host\": {}}}, \"HostConfig\": {\"NetworkMode\": \"host\" }}"
               }
             },
             "opcpublisher": {
@@ -105,105 +105,105 @@ Tüm modüller, bir dağıtım bildirimi kullanılarak dağıtılır.  Her ikisi
 }
 ```
 
-## <a name="deploying-from-azure-portal"></a>Azure Portalı'ndan dağıtma
+## <a name="deploying-from-azure-portal"></a>Azure portal dağıtma
 
-Azure portalı üzerinden modülleri Azure IOT Edge ağ geçidi cihazına dağıtmak için en kolay yoludur.  
+Azure IoT Edge ağ geçidi cihazına modülleri dağıtmanın en kolay yolu, Azure portal.  
 
-### <a name="prerequisites"></a>Önkoşullar
+### <a name="prerequisites"></a>Ön koşullar
 
-1. OPC İkizi dağıtma [bağımlılıkları](howto-opc-twin-deploy-dependencies.md) ve bunun sonucunda elde edilen `.env` dosya. Dağıtılan Not `hub name` , `PCS_IOTHUBREACT_HUB_NAME` sonuç değişkeninde `.env` dosya.
+1. OPC Ikizi [bağımlılıklarını](howto-opc-twin-deploy-dependencies.md) dağıtın ve elde edilen `.env` dosyasını elde edin. Elde edilen `.env` dosyasında `PCS_IOTHUBREACT_HUB_NAME` değişkeninin dağıtılan `hub name`.
 
-2. Kaydolun ve başlayın bir [Linux](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-linux) veya [Windows](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-windows) IOT Edge ağ geçidi ve Not kendi `device id`.
+2. Bir [Linux](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-linux) veya [Windows](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-windows) IoT Edge ağ geçidini kaydedin ve başlatın ve `device id`.
 
-### <a name="deploy-to-an-edge-device"></a>Bir edge cihazına dağıtma
+### <a name="deploy-to-an-edge-device"></a>Sınır cihazına dağıtma
 
-1. Oturum [Azure portalında](https://portal.azure.com/) ve IOT hub'ınıza gidin.
+1. [Azure Portal](https://portal.azure.com/) oturum açın ve IoT Hub 'ınıza gidin.
 
-2. Seçin **IOT Edge** sol taraftaki menüden.
+2. Sol taraftaki menüden **IoT Edge** ' yi seçin.
 
-3. Hedef cihazın cihazlar listesinden numarasını tıklayın.
+3. Cihaz listesinden hedef cihazın KIMLIĞINE tıklayın.
 
 4. **Modülleri Ayarlama**'yı seçin.
 
-5. İçinde **dağıtım modülleri** sayfasında bölümünü **Ekle** ve **IOT Edge modülü.**
+5. Sayfanın **dağıtım modülleri** bölümünde, **Ekle** ve **IoT Edge modülünü seçin.**
 
-6. İçinde **IOT Edge özel Modülü** iletişim kullanım `opctwin` modül için ad kapsayıcı belirtmezseniz *URI görüntü* olarak
+6. **IoT Edge özel modül** iletişim kutusunda modül için ad olarak `opctwin` kullanın, sonra KAPSAYıCı *görüntüsü URI* 'sini şu şekilde belirtin
 
    ```bash
    mcr.microsoft.com/iotedge/opc-twin:latest
    ```
 
-   Olarak *oluşturma seçenekleri* aşağıdaki JSON kullanın:
+   *Kapsayıcı oluşturma seçenekleri*olarak aşağıdaki JSON 'u kullanın:
 
    ```json
-   {"HostConfig":{"NetworkMode":"host","CapAdd":["NET_ADMIN"]}}
+   {"NetworkingConfig": {"EndpointsConfig": {"host": {}}}, "HostConfig": {"NetworkMode": "host" }}
    ```
 
-   Gerekirse, isteğe bağlı alanları doldurun. Kapsayıcı hakkında daha fazla bilgi seçenekleri, yeniden başlatma ilkesi oluşturabilir ve istenen durumunu görmek için [EdgeAgent istenen özelliklerini](https://docs.microsoft.com/azure/iot-edge/module-edgeagent-edgehub#edgeagent-desired-properties). Modül ikizi hakkında daha fazla bilgi için bkz. [tanımlayın veya güncelleştirme istenen özelliklerini](https://docs.microsoft.com/azure/iot-edge/module-composition#define-or-update-desired-properties).
+   Gerekirse isteğe bağlı alanları doldurun. Kapsayıcı oluşturma seçenekleri hakkında daha fazla bilgi için, ilkeyi yeniden başlatın ve istenen durum bkz. [Edgeagent istenen özellikler](https://docs.microsoft.com/azure/iot-edge/module-edgeagent-edgehub#edgeagent-desired-properties). Modül ikizi hakkında daha fazla bilgi için bkz. [istenen özellikleri tanımlama veya güncelleştirme](https://docs.microsoft.com/azure/iot-edge/module-composition#define-or-update-desired-properties).
 
-7. Seçin **Kaydet** ve yineleyin **5**.  
+7. **Kaydet** ' i seçin ve **5**. adımı yineleyin.  
 
-8. IOT Edge özel modülü iletişim kutusunda, kullanmak `opcpublisher` modülü ve kapsayıcı adı olarak *URI görüntü* olarak 
+8. IoT Edge özel modül iletişim kutusunda, modül ve kapsayıcı *görüntüsü URI 'si* için ad olarak `opcpublisher` kullanın 
 
    ```bash
    mcr.microsoft.com/iotedge/opc-publisher:latest
    ```
 
-   Olarak *oluşturma seçenekleri* aşağıdaki JSON kullanın:
+   *Kapsayıcı oluşturma seçenekleri*olarak aşağıdaki JSON 'u kullanın:
 
    ```json
    {"Hostname":"publisher","Cmd":["publisher","--pf=./pn.json","--di=60","--to","--aa","--si=0","--ms=0"],"ExposedPorts":{"62222/tcp":{}},"HostConfig":{"PortBindings":{"62222/tcp":[{"HostPort":"62222"}] }}}
    ```
 
-9. Seçin **Kaydet** ardından **sonraki** yollar bölüme geçmek için.
+9. **Kaydet** ' i ve ardından yollar bölümüne devam etmek için **İleri** ' yi seçin.
 
-10. Yollar sekmesinde, aşağıdaki yapıştırın 
+10. Rotalar sekmesinde, aşağıdakileri yapıştırın 
 
     ```json
     {
       "routes": {
-        "opctwinToIoTHub": "FROM /messages/modules/opctwin/outputs/* INTO $upstream",
-        "opcpublisherToIoTHub": "FROM /messages/modules/opcpublisher/outputs/* INTO $upstream"
+        "opctwinToIoTHub": "FROM /messages/modules/opctwin/* INTO $upstream",
+        "opcpublisherToIoTHub": "FROM /messages/modules/opcpublisher/* INTO $upstream"
       }
     }
     ```
 
-    seçip **İleri**
+    ve **İleri ' yi** seçin
 
-11. Dağıtım bilgilerinizi gözden geçirin ve bildirim.  Bu, yukarıdaki dağıtım bildirimi gibi görünmelidir.  Seçin **gönderme**.
+11. Dağıtım bilgilerinizi ve bildirimini gözden geçirin.  Yukarıdaki dağıtım bildirimi gibi görünmelidir.  **Gönder**' i seçin.
 
-12. Cihazınıza modülleri dağıttıktan sonra bunların tümünün görüntüleyebilirsiniz **cihaz ayrıntıları** portal sayfası. Bu sayfa, her dağıtılan modülü yanı sıra dağıtım durumu ve çıkış kodu gibi yararlı bilgiler adını görüntüler.
+12. Bir modülü cihazınıza dağıttıktan sonra, bunların tümünü portalın **cihaz ayrıntıları** sayfasında görüntüleyebilirsiniz. Bu sayfada dağıtılan her modülün adı ve dağıtım durumu ve çıkış kodu gibi yararlı bilgiler görüntülenir.
 
-## <a name="deploying-using-azure-cli"></a>Azure CLI kullanarak dağıtma
+## <a name="deploying-using-azure-cli"></a>Azure CLı kullanarak dağıtma
 
-### <a name="prerequisites"></a>Önkoşullar
+### <a name="prerequisites"></a>Ön koşullar
 
-1. En son sürümünü yükleyin [Azure komut satırı arabirimi (AZ)](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) gelen [burada](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+1. [Azure komut satırı arabirimi 'nin (az)](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) en son sürümünü [buradan](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)yüklersiniz.
 
 ### <a name="quickstart"></a>Hızlı Başlangıç
 
-1. Yukarıdaki dağıtım bildirimine kaydetmek bir `deployment.json` dosya.  
+1. Yukarıdaki dağıtım bildirimini bir `deployment.json` dosyasına kaydedin.  
 
-2. IOT Edge cihazına yapılandırmayı uygulamak için aşağıdaki komutu kullanın:
+2. Yapılandırmayı IoT Edge bir cihaza uygulamak için aşağıdaki komutu kullanın:
 
    ```bash
    az iot edge set-modules --device-id [device id] --hub-name [hub name] --content ./deployment.json
    ```
 
-   `device id` Parametre duyarlıdır. İçerik parametresi dağıtım noktalarına bildirim kaydettiğiniz dosyası. 
-    ![az IOT Edge modülleri kümesini çıktı](https://docs.microsoft.com/azure/iot-edge/media/how-to-deploy-cli/set-modules.png)
+   `device id` parametresi, büyük/küçük harfe duyarlıdır. İçerik parametresi, kaydettiğiniz dağıtım bildirimi dosyasını işaret eder. 
+    ![az IoT Edge set-modules output](https://docs.microsoft.com/azure/iot-edge/media/how-to-deploy-cli/set-modules.png)
 
-3. Cihazınıza modülleri dağıttıktan sonra tüm bunları aşağıdaki komutla görebilirsiniz:
+3. Modülleri cihazınıza dağıttıktan sonra, aşağıdaki komutla bunların tümünü görüntüleyebilirsiniz:
 
    ```bash
    az iot hub module-identity list --device-id [device id] --hub-name [hub name]
    ```
 
-   Cihaz kimliği parametresi büyük/küçük harf duyarlıdır. ![az IOT hub kimlik modülü liste çıkışı](https://docs.microsoft.com/azure/iot-edge/media/how-to-deploy-cli/list-modules.png)
+   Cihaz KIMLIĞI parametresi, büyük/küçük harfe duyarlıdır. ![az IoT Hub modülü-kimlik listesi çıkışı](https://docs.microsoft.com/azure/iot-edge/media/how-to-deploy-cli/list-modules.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sıfırdan OPC İkizi dağıtmayı öğrendiniz, önerilen sonraki adım aşağıda verilmiştir:
+Artık OPC Ikizi 'in sıfırdan nasıl dağıtılacağını öğrendiğinize göre, önerilen sonraki adım aşağıda verilmiştir:
 
 > [!div class="nextstepaction"]
-> [Mevcut bir projeyi OPC İkizi dağıtma](howto-opc-twin-deploy-existing.md)
+> [OPC Ikizi 'yi mevcut bir projeye dağıtma](howto-opc-twin-deploy-existing.md)

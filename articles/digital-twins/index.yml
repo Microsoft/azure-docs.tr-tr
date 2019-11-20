@@ -1,31 +1,75 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure Digital Twins Önizleme Belgeleri
+summary: Kişileri, mekanları ve nesneleri birbirine bağlamak ve uzamsal zekaya sahip IoT çözümleri oluşturmak için Azure Digital Twins’i kullanmayı öğrenin. Hızlı Başlangıç ve Öğreticileri inceleyerek hayali bir akıllı binayı izleyin, derin kavramları öğrenin ve fiziksel ortamınızdan yola çıkarak son model bir IoT çözümü oluşturun.
 metadata:
-  title: 'Azure Digital Twins Önizleme Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: Akıllı uzamsal çözümler oluşturmak için Azure Digital Twins’i kullanın.
-  author: dsk-2015
-  manager: timlt
-  ms.service: digital-twins
+  title: Azure Digital Twins Önizleme Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs
+  description: Kişileri, mekanları ve nesneleri birbirine bağlamak, uzamsal zekaya sahip IoT çözümleri oluşturmak için Azure Digital Twins’i kullanmayı öğrenin.
   services: digital-twins
+  ms.service: digital-twins
+  ms.subservice: digital-twins
   ms.topic: landing-page
-  ms.date: 10/15/2018
-  ms.author: dkshir
-abstract:
-  description: 'Kişileri, mekanları ve nesneleri birbirine bağlamak ve uzamsal zekaya sahip IoT çözümleri oluşturmak için Azure Digital Twins’i kullanmayı öğrenin. Hızlı Başlangıç ve Öğreticileri inceleyerek hayali bir akıllı binayı izleyin, derin kavramları öğrenin ve fiziksel ortamınızdan yola çıkarak son model bir IoT çözümü oluşturun.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıç
-    items:
-      - type: paragraph
-        text: <a href="quickstart-view-occupancy-dotnet">Azure Digital Twins .NET örneklerini kullanarak hava kalitesi iyi olan uygun odaları bulmayı</a> öğrenin.
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Tesislerinizi izlemek için Azure Digital Twins’i özelleştirmeyi ve kullanmayı öğrenin.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/digital-twins/tutorial-facilities-setup">Örnek bir bina sağlama</a>
-          - html: <a href="/azure/digital-twins/tutorial-facilities-udf">Binanızdaki koşulları izleme</a>
-          - html: <a href="/azure/digital-twins/tutorial-facilities-events">Binanızdan bildirim alma</a>
-          - html: <a href="/azure/digital-twins/tutorial-facilities-analyze">Binanızdaki olayları çözümleme</a>
+  ms.collection: collection
+  author: KingdomOfEnds
+  ms.author: v-adgera
+  ms.date: 09/03/2019
+  ms.openlocfilehash: 3d55dcfc4b57d0179ca6e02bae50bf3d37dc70f3
+  ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/13/2019
+  ms.locfileid: "74009313"
+landingContent:
+- title: Azure Digital Twins Hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Digital Twins nedir?
+      url: about-digital-twins.md
+  - linkListType: concept
+    links:
+    - text: Digital Twins nesne modelini ve uzamsal zeka grafını anlama
+      url: concepts-objectmodel-spatialgraph.md
+  - linkListType: video
+    links:
+    - text: Azure Digital Twins'e giriş
+      url: https://channel9.msdn.com/Shows/Internet-of-Things-Show/Azure-Digital-Twins-Introduction
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Uygun odaları bulma
+      url: quickstart-view-occupancy-dotnet.md
+  - linkListType: tutorial
+    links:
+    - text: Dağıtma ve yapılandırma
+      url: tutorial-facilities-setup.md
+    - text: Koşulları sağlama ve izleme
+      url: tutorial-facilities-udf.md
+    - text: Logic Apps ile bildirme
+      url: tutorial-facilities-events.md
+    - text: Time Series Insights ile olayları görselleştirme
+      url: tutorial-facilities-analyze.md
+- title: Azure Digital Twins ile geliştirme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Cihaz bağlantısı ve telemetri sorunları
+      url: concepts-device-ingress.md
+    - text: Veri işleme ve kullanıcı tanımlı işlevleri
+      url: concepts-user-defined-functions.md
+  - linkListType: how-to-guide
+    links:
+    - text: Postman’i ayarlama
+      url: how-to-configure-postman.md
+    - text: Kullanıcı tanımlı işlevler oluşturma
+      url: how-to-user-defined-functions.md
+- title: API başvurusu
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Kullanıcı tanımlı işlevler istemci kitaplığı
+      url: reference-user-defined-functions-client-library.md
+  - linkListType: how-to-guide
+    links:
+    - text: Digital Twins Swagger’ı kullanma
+      url: how-to-use-swagger.md

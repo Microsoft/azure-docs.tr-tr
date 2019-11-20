@@ -1,19 +1,19 @@
 ---
-title: Azure PowerShell Betiği - hesap anahtarı ve bağlantı dize işlemleri için bir Azure Cosmos hesabı
-description: Azure PowerShell betik örneği - bir Azure Cosmos hesap için hesap anahtarı ve bağlantı dize işlemleri
+title: Azure Cosmos hesabı için betik hesap anahtarı ve bağlantı dizesi işlemleri Azure PowerShell
+description: Azure PowerShell betiği örneği-Azure Cosmos hesabı için hesap anahtarı ve bağlantı dizesi işlemleri
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: samples
-ms.date: 05/20/2019
+ms.topic: sample
+ms.date: 09/20/2019
 ms.author: mjbrown
-ms.openlocfilehash: a7f86bfee0ee2472260b622dc709dc437e53414c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1eb9cc4c35584b94d3d16654b1bec253e21a91ff
+ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66247867"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71154755"
 ---
-# <a name="connection-string-and-account-key-operations-for-an-azure-cosmos-account-using-powershell"></a>Bağlantı dizesini ve hesap işlemleri için PowerShell kullanarak bir Azure Cosmos hesap anahtarı
+# <a name="connection-string-and-account-key-operations-for-an-azure-cosmos-account-using-powershell"></a>PowerShell kullanarak bir Azure Cosmos hesabı için bağlantı dizesi ve hesap anahtarı işlemleri
 
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
@@ -21,7 +21,8 @@ ms.locfileid: "66247867"
 
 ## <a name="sample-script"></a>Örnek betik
 
-Bu örnekler, mevcut hesabı ve kaynak grubu gerektirir. Var olan bir PowerShell önce bir hesap sağlamak için örnek oluşturun.
+> [!NOTE]
+> Bu örnekte bir SQL (Core) API hesabı kullanılması gösterilmektedir. Bu örneği diğer API 'Ler için kullanmak üzere ilgili özellikleri kopyalayın ve API 'ye özel betiğe uygulayın
 
 [!code-powershell[main](../../../../../powershell_scripts/cosmosdb/common/ps-account-keys-connection-strings.ps1 "Connection strings and account keys for Azure Cosmos account")]
 
@@ -40,8 +41,8 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 |**Azure kaynakları**| |
-| [Çağırma AzResourceAction](https://docs.microsoft.com/powershell/module/az.resources/invoke-azresourceaction) | Kaynak üzerinde bir eylemi çağırır. |
-|**Azure kaynak grupları**| |
+| [Invoke-AzResourceAction](https://docs.microsoft.com/powershell/module/az.resources/invoke-azresourceaction) | Kaynak üzerinde bir eylemi çağırır. |
+|**Azure Kaynak grupları**| |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 |||
 

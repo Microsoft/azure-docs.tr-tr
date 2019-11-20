@@ -13,13 +13,14 @@ ms.tgt_pltfrm: na
 ms.devlang: ne
 ms.topic: article
 ms.date: 03/14/2019
-ms.author: juliako;cenkdin;anilmur
-ms.openlocfilehash: d0da69601bfc6fd09c10b30d45195722781d87d6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: juliako
+ms.reviewer: cenkdin;anilmur
+ms.openlocfilehash: be3c75680599c07a3cebe3dcf0436884958e1706
+ms.sourcegitcommit: de47a27defce58b10ef998e8991a2294175d2098
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61232141"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "69016676"
 ---
 # <a name="use-the-wirecast-encoder-to-send-a-single-bitrate-live-stream"></a>Wirecast Kodlayıcı tek bit hızlı canlı akış göndermektir. 
 > [!div class="op_single_selector"]
@@ -69,22 +70,22 @@ Kanal başlatılırken yapabilecekleriniz [kodlayıcıyı Yapılandır](media-se
 >
 >
 
-## <a name="a-idconfigurewirecastrtmp-configure-the-telestream-wirecast-encoder"></a><a id="configure_wirecast_rtmp" />Yapılandırma Telestream Wirecast kodlayıcı
+## <a name="a-idconfigure_wirecast_rtmp-configure-the-telestream-wirecast-encoder"></a><a id="configure_wirecast_rtmp" />Yapılandırma Telestream Wirecast kodlayıcı
 Bu öğreticide, aşağıdaki çıkış ayarları kullanılır. Bu bölümün geri kalanında daha ayrıntılı yapılandırma adımlarını açıklar.
 
 **Video**:
 
-* Codec: H.264
-* Profil: Yüksek (düzeyi 4.0)
-* Bit hızı: 5000 kbps
-* Ana kare: 2 saniye (60 saniye)
+* Bileşeni H.
+* Profilinizi Yüksek (düzey 4,0)
+* Bit hızı 5000 kbps
+* Denetçisinde 2 saniye (60 saniye)
 * Kare hızı: 30
 
 **Ses**:
 
-* Codec: AAC (LC)
-* Bit hızı: 192 kbps
-* Örnek Hızı: 44,1 kHz
+* Bileşeni AAC (LC)
+* Bit hızı 192 kbps
+* Örnek hız: 44,1 kHz
 
 ### <a name="configuration-steps"></a>Yapılandırma adımları
 1. Kullanılan ve RTMP akış için ayarlanmış olan makine üzerinde Telestream Wirecast uygulamayı açın.
@@ -103,16 +104,16 @@ Bu öğreticide, aşağıdaki çıkış ayarları kullanılır. Bu bölümün ge
 
     **Video**
 
-   * Kodlayıcı: MainConcept H.264
-   * Saniyedeki çerçeve sayısı: 30
-   * Ortalama bit oranı: 5000 kbit/sn (ağ sınırlamalar göre ayarlanabilir)
-   * Profil: Ana
-   * Anahtar çerçeve her: 60 çerçeveler
+   * Kodlayıcısı Mainkavram H.,
+   * Kare/saniye: 30
+   * Ortalama bit hızı: 5000 kbits/sn (ağ kısıtlamalarına göre ayarlanabilir)
+   * Profilinizi Ana
+   * Anahtar çerçeve sıklığı: 60 çerçeve
 
      **Ses**
 
-   * Hedef bit oranı: 192 kbit/sn
-   * Örnek Hızı: 44.100 kHz
+   * Hedef bit hızı: 192 kbits/sn
+   * Örnek hız: 44,100 kHz
 
      ![Wirecast](./media/media-services-wirecast-live-encoder/media-services-wirecast4.png)
 6. **Kaydet**’e basın.

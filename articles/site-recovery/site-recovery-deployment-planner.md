@@ -1,20 +1,20 @@
 ---
-title: Azure'a VMware vm'lerinin olağanüstü durum kurtarma için Azure Site Recovery dağıtım planlayıcısı hakkında | Microsoft Docs
-description: Azure'a VMware vm'lerinin olağanüstü durum kurtarma için Azure Site Recovery dağıtım planlayıcısı hakkında bilgi edinin.
+title: VMware olağanüstü durum kurtarma için Azure Site Recovery Dağıtım Planlayıcısı
+description: VMware VM 'lerinin Azure 'a olağanüstü durum kurtarma Azure Site Recovery Dağıtım Planlayıcısı hakkında bilgi edinin.
 author: mayurigupta13
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 04/18/2019
+ms.date: 07/29/2019
 ms.author: mayg
-ms.openlocfilehash: 42ef6087663c48cad965be768f14920efa777a62
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 50a236154a0340bd49e84a8ca02f656e3cd9994a
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66244320"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084538"
 ---
-# <a name="about-the-azure-site-recovery-deployment-planner-for-vmware-to-azure"></a>Azure Site Recovery dağıtım planlayıcısı hakkında vmware'den azure'a
+# <a name="about-the-azure-site-recovery-deployment-planner-for-vmware-to-azure"></a>VMware 'den Azure 'a Azure Site Recovery Dağıtım Planlayıcısı hakkında
 Bu makale, VMware’den Azure’a üretim dağıtımları için Azure Site Recovery Dağıtım Planlayıcısı kullanım kılavuzudur.
 
 ## <a name="overview"></a>Genel Bakış
@@ -41,10 +41,9 @@ Araç aşağıdaki bilgileri sağlar:
 
 **Azure altyapı gereksinimleri**
 
-* Her VM için depolama türü (standart veya premium depolama hesabı) gereksinimi
-* Çoğaltma için ayarlanacak toplam standart ve premium depolama hesabı sayısı
+* Her VM için depolama türü (Standart veya Premium Depolama) gereksinimi
+* Çoğaltma için ayarlanacak toplam standart ve Premium depolama hesabı sayısı (önbellek depolama hesapları dahildir)
 * Depolama kılavuzuna göre depolama hesabı adlandırma önerileri
-* Tüm VM’ler için depolama hesabı yerleşimi
 * Abonelik üzerinde yük devretme testi veya yük devretme öncesinde ayarlanacak Azure çekirdek sayısı
 * Şirket içindeki her VM için önerilen Azure VM boyutu
 
@@ -65,20 +64,20 @@ Araç aşağıdaki bilgileri sağlar:
 
 | | **Vmware’den Azure’a** |**Hyper-V'den Azure'a**|**Azure'dan Azure'a**|**Hyper-V’den ikincil siteye**|**VMware’den ikincil siteye**
 --|--|--|--|--|--
-Desteklenen senaryolar |Evet|Evet|Hayır|Evet*|Hayır
-Desteklenen sürüm | vCenter 6.7, 6.5, 6.0 or 5.5| Windows Server 2016, Windows Server 2012 R2 | NA |Windows Server 2016, Windows Server 2012 R2|NA
+Desteklenen senaryolar |Yes|Yes|Hayır|Evet*|Hayır
+Desteklenen sürüm | vCenter 6,7, 6,5, 6,0 veya 5,5| Windows Server 2016, Windows Server 2012 R2 | NA |Windows Server 2016, Windows Server 2012 R2|NA
 Desteklenen yapılandırma|vCenter, ESXi| Hyper-V kümesi, Hyper-V konağı|NA|Hyper-V kümesi, Hyper-V konağı|NA|
 Çalışan Site Recovery Dağıtım Planlayıcısı örneği başına profili oluşturulabilecek sunucu sayısı |Tek (bir vCenter Server ve bir ESXi sunucusuna ait VM’lerin profili aynı anda oluşturulabilir)|Birden çok (birden çok konak veya konak kümesindeki sanal makinelerin profili tek seferde oluşturulabilir)| NA |Birden çok (birden çok konak veya konak kümesindeki sanal makinelerin profili tek seferde oluşturulabilir)| NA
 
 *Bu araç, öncelikli olarak Hyper-V’den Azure’a olağanüstü durum kurtarma senaryosuna yöneliktir. Hyper-V’den ikincil siteye olağanüstü durum kurtarma senaryosunda yalnızca gereken ağ bant genişliği, kaynak Hyper-V sunucuların her birinde gereken boş depolama alanı ve ilk çoğaltmadaki batch numaralarıyla batch açıklamaları gibi kaynak tarafı önerilerin anlaşılması için kullanılabilir. Rapordaki Azure önerilerini ve maliyetleri dikkate almayın. Ayrıca Aktarım Hızı Alma işlemi, Hyper-V’den ikincil siteye olağanüstü durum kurtarma senaryosu için kullanılamaz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 Araçta başlıca iki aşama vardır: profil oluşturma ve rapor oluşturma. Yalnızca aktarım hızını hesaplamaya yönelik üçüncü bir seçenek de mevcuttur. Profil oluşturma ve aktarım hızı ölçümünün başlatıldığı sunucuya yönelik gereksinimler, aşağıdaki tabloda sunulmuştur.
 
 | Sunucu gereksinimi | Açıklama|
 |---|---|
-|Profil oluşturma ve aktarım hızı ölçümü| <ul><li>İşletim Sistemi: Windows Server 2016 veya Windows Server 2012 R2<br>(En azından [yapılandırma sunucusuna yönelik boyut önerileri](https://aka.ms/asr-v2a-on-prem-components) ile eşleşmesi idealdir)</li><li>Makine Yapılandırması: 8 Vcpu, 16 GB RAM, 300 GB HDD</li><li>[.NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[VMware vSphere PowerCLI 6.0 R3](https://aka.ms/download_powercli)</li><li>[Visual Studio 2012 için Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)</li><li>Bu sunucudan Azure’a İnternet erişimi</li><li>Azure depolama hesabı</li><li>Sunucu üzerinde yönetici erişimi</li><li>En az 100 GB boş disk alanı (30 günlük profili oluşturulmuş ve her biri ortalama üç diske sahip 1.000 VM varsayıldığında)</li><li>VMware vCenter istatistik düzeyi ayarları 1 veya daha yüksek düzey olabilir.</li><li>VCenter bağlantı noktası (varsayılan 443) izin ver: Site Recovery dağıtım Planlayıcısı, vCenter sunucusu/ESXi konağına bağlanmak için bu bağlantı noktasını kullanır.</ul></ul>|
-| Rapor oluşturma | Bir Windows PC veya Windows Server'ın Excel 2013 veya üzeri.<li>[.NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[Visual Studio 2012 için Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)</li><li>[VMware vSphere Powerclı 6.0 R3](https://aka.ms/download_powercli) yalnızca geçirdiğinizde - sanal makinelerin en son VM yapılandırma bilgilerini getirmek için rapor oluşturma komutuna kullanıcı seçeneği gereklidir. Dağıtım Planlayıcısı, vCenter sunucusuna bağlanır. VCenter vCenter sunucusuna bağlanmak bağlantı noktası (varsayılan olarak 443) bağlantı noktasına izin verin.</li>|
+|Profil oluşturma ve aktarım hızı ölçümü| <ul><li>İşletim sistemi: Windows Server 2016 veya Windows Server 2012 R2<br>(En azından [yapılandırma sunucusuna yönelik boyut önerileri](https://aka.ms/asr-v2a-on-prem-components) ile eşleşmesi idealdir)</li><li>Makine yapılandırması: 8 vCPU, 16 GB RAM, 300 GB HDD</li><li>[.NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[VMware vSphere PowerCLI 6.0 R3](https://aka.ms/download_powercli)</li><li>[Visual Studio 2012 için Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)</li><li>Bu sunucudan Azure’a İnternet erişimi</li><li>Azure depolama hesabı</li><li>Sunucu üzerinde yönetici erişimi</li><li>En az 100 GB boş disk alanı (30 günlük profili oluşturulmuş ve her biri ortalama üç diske sahip 1.000 VM varsayıldığında)</li><li>VMware vCenter istatistik düzeyi ayarları 1 veya daha yüksek bir düzey olabilir</li><li>VCenter bağlantı noktasına izin ver (varsayılan 443): Site Recovery Dağıtım Planlayıcısı vCenter sunucusuna/ESXi konağına bağlanmak için bu bağlantı noktasını kullanır</ul></ul>|
+| Rapor oluşturma | Excel 2013 veya üzeri bir Windows BILGISAYARı veya Windows Server.<li>[.NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[Visual Studio 2012 için Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)</li><li>[VMware vSphere PowerCLI 6,0 R3](https://aka.ms/download_powercli) yalnızca VM 'lerin en son VM yapılandırma bilgilerini getirmek için rapor oluşturma komutunda Kullanıcı seçeneğini geçirdiğinizde gereklidir. Dağıtım Planlayıcısı vCenter Server 'a bağlanır. VCenter bağlantı noktası (varsayılan 443) bağlantı noktasının vCenter Server 'a bağlanmasına izin verin.</li>|
 | Kullanıcı izinleri | Profil oluşturma sırasında VMware vCenter sunucusuna/VMware vSphere ESXi ana bilgisayarına erişmek için kullanılan kullanıcı hesabına yönelik salt okunur izin |
 
 > [!NOTE]
@@ -101,11 +100,11 @@ Klasör birden fazla dosya ve alt klasör içerir. Yürütülebilir dosya, üst 
     Örnek: .zip dosyasını E:\ sürücüsüne kopyalayıp ayıklayın.
     E:\ASR Deployment Planner_v2.3.zip
 
-    E:\ASR Deployment Planner_v2.3\ASRDeploymentPlanner.exe
+    E:\ASR dağıtımı Planner_v2.3 \ ASRDeploymentPlanner. exe
 
 ### <a name="update-to-the-latest-version-of-deployment-planner"></a>Dağıtım Planlayıcısı’nı en son sürüme güncelleştirme
 
-Dağıtım Planlayıcısı en son güncelleştirmeleri özetlenmiştir [sürüm geçmişi](site-recovery-deployment-planner-history.md).
+En son güncelleştirmeler Dağıtım Planlayıcısı [sürüm geçmişinde](site-recovery-deployment-planner-history.md)özetlenmektedir.
 
 Dağıtım Planlayıcısı’nın önceki sürümüne sahipseniz şunlardan birini yapın:
  * En son sürüm bir profil oluşturma düzeltmesi içermiyor ve profil oluşturma planlayıcının geçerli sürümünde devam ediyorsa, profil oluşturmaya devam edin.
@@ -120,7 +119,7 @@ Dağıtım Planlayıcısı’nın önceki sürümüne sahipseniz şunlardan biri
 
 
 ## <a name="version-history"></a>Sürüm geçmişi
-En son Site Recovery dağıtım planlayıcısı aracı sürümü 2.4 ' dir.
+En son Site Recovery Dağıtım Planlayıcısı aracı sürümü 2,5 ' dir.
 Her güncelleştirmede eklenen düzeltmeler için [Site Recovery Dağıtım Planlayıcısı sürüm geçmişi](https://docs.microsoft.com/azure/site-recovery/site-recovery-deployment-planner-history) sayfasına bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar

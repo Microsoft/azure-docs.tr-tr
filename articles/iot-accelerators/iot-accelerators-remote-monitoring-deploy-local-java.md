@@ -1,6 +1,6 @@
 ---
-title: Yerel olarak (aracılığıyla Intellij IDE için) - uzaktan izleme çözümünü Azure'da dağıtma | Microsoft Docs
-description: Bu nasıl yapılır kılavuzunda test ve geliştirme için Intellij kullanarak yerel makinenize Uzaktan izleme çözüm Hızlandırıcısını dağıtmayı gösterir.
+title: Uzaktan Izleme çözümünü yerel olarak dağıtma-IntelliJ IDE-Azure | Microsoft Docs
+description: Bu nasıl yapılır kılavuzunda, test ve geliştirme için IntelliJ kullanarak uzaktan Izleme çözümü hızlandırıcısının yerel makinenize nasıl dağıtılacağı gösterilmektedir.
 author: v-krghan
 manager: dominicbetts
 ms.author: v-krghan
@@ -8,226 +8,232 @@ ms.service: iot-accelerators
 services: iot-accelerators
 ms.date: 01/24/2019
 ms.topic: conceptual
-ms.openlocfilehash: 2b55fea69fe1affb6cab5d360f1e8355c3bb720d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 779ee1e057d74b11c5e0ba58dc2fd32b803f1e0e
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66015443"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73888822"
 ---
-# <a name="deploy-the-remote-monitoring-solution-accelerator-locally---intellij"></a>Uzaktan izleme çözüm Hızlandırıcısını yerel olarak - Intellij dağıtma
+# <a name="deploy-the-remote-monitoring-solution-accelerator-locally---intellij"></a>Uzaktan Izleme çözüm Hızlandırıcısını yerel olarak dağıtma-IntelliJ
 
 [!INCLUDE [iot-accelerators-selector-local](../../includes/iot-accelerators-selector-local.md)]
 
-Bu makalede, test ve geliştirme için yerel makinenize Uzaktan izleme çözüm Hızlandırıcısını dağıtma işlemini göstermektedir. Mikro hizmetler Intellij çalıştırmayı öğrenin. Yerel mikro hizmetlerin dağıtımı aşağıdaki bulut hizmetlerini kullanır: Bulutta IOT Hub, Cosmos DB, Azure akış analizi ve Azure Time Series Insights Hizmetleri.
+Bu makalede, test ve geliştirme için uzaktan Izleme çözümü hızlandırıcısının yerel makinenize nasıl dağıtılacağı gösterilmektedir. IntelliJ 'de mikro hizmetleri çalıştırmayı öğreneceksiniz. Yerel bir mikro hizmet dağıtımı şu bulut hizmetlerini kullanır: IoT Hub, Azure Cosmos DB, Azure Akış Analizi ve Azure Time Series Insights.
 
-Uzaktan izleme çözüm Hızlandırıcısını Docker'da yerel makinenizde çalıştırmak istiyorsanız, bkz. [Uzaktan izleme çözüm Hızlandırıcısını yerel olarak - Docker dağıtma](iot-accelerators-remote-monitoring-deploy-local-docker.md).
+Yerel makinenizde Docker 'da uzaktan Izleme çözüm hızlandırıcıyı çalıştırmak istiyorsanız, bkz. [Uzaktan izleme çözüm hızlandırıcıyı yerel olarak dağıtma-Docker](iot-accelerators-remote-monitoring-deploy-local-docker.md).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Uzaktan izleme çözüm Hızlandırıcısını tarafından kullanılan Azure Hizmetleri dağıtmak için bir etkin Azure aboneliği gerekir.
+Uzaktan Izleme çözümü Hızlandırıcısı tarafından kullanılan Azure hizmetlerini dağıtmak için etkin bir Azure aboneliğine ihtiyacınız vardır.
 
-Hesabınız yoksa yalnızca birkaç dakika içinde ücretsiz bir deneme sürümü hesabı oluşturabilirsiniz. Ayrıntılar için bkz [Azure ücretsiz deneme sürümü](https://azure.microsoft.com/pricing/free-trial/).
+Hesabınız yoksa yalnızca birkaç dakika içinde ücretsiz bir deneme sürümü hesabı oluşturabilirsiniz. Ayrıntılar için bkz. [Azure Ücretsiz Deneme](https://azure.microsoft.com/pricing/free-trial/).
 
 ### <a name="machine-setup"></a>Makine Kurulumu
 
-Yerel dağıtımını tamamlamak için aşağıdaki araçları, yerel geliştirme makinenizde yüklü gerekir:
+Yerel dağıtımı tamamlamaya yönelik olarak, yerel geliştirme makinenizde aşağıdaki araçların yüklü olması gerekir:
 
 * [Git](https://git-scm.com/)
 * [Docker](https://www.docker.com)
 * [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [IntelliJ Community Edition](https://www.jetbrains.com/idea/download/)
-* [IntelliJ Plugin Scala](https://plugins.jetbrains.com/plugin/1347-scala)
-* [IntelliJ Plugin SBT](https://plugins.jetbrains.com/plugin/5007-sbt)
-* [Intellij eklentisini SBT Yürütücü](https://plugins.jetbrains.com/plugin/7247-sbt-executor)
-* [Nginx](https://nginx.org/en/download.html)
-* [Node.js v8](https://nodejs.org/) -bu yazılımları Azure kaynaklarını oluşturmayı betiklerini kullanan bilgisayarları CLI önkoşuldur. Node.js v10 kullanmayın.
+* [IntelliJ Scala eklentisi](https://plugins.jetbrains.com/plugin/1347-scala)
+* [IntelliJ SBT eklentisi](https://plugins.jetbrains.com/plugin/5007-sbt)
+* [IntelliJ SBT yürütücü eklentisi](https://plugins.jetbrains.com/plugin/7247-sbt-executor)
+* [NGINX](https://nginx.org/en/download.html)
+* [Node. js V8](https://nodejs.org/)
+
+Node. js V8, betiklerin Azure kaynakları oluşturmak için kullandığı bılgısayar CLı için bir önkoşuldur. Node. js ile v10 arasındaki kullanmayın.
 
 > [!NOTE]
-> Intellij IDE, Windows ve Mac için kullanılabilir
+> IntelliJ IDE, Windows ve Mac için kullanılabilir.
 
-## <a name="download-the-source-code"></a>Kaynak kodunu indirebilir
+## <a name="download-the-source-code"></a>Kaynak kodunu indirin
 
-Uzaktan izleme kaynak kodu depoları, kaynak kodu ve mikro Hizmetleri Docker görüntülerini çalıştırmak için gereken Docker yapılandırma dosyalarını içerir.
+Uzaktan Izleme kaynak kodu depoları, mikro hizmetler Docker görüntülerini çalıştırmak için gereken kaynak kodu ve Docker yapılandırma dosyalarını içerir.
 
-Kopyalamak ve depoya yerel bir sürümünü oluşturmak için yerel makinenizde uygun bir klasöre gitmek için komut satırı ortamı kullanın. Ardından komutların java depoyu kopyalamak için aşağıdaki adımlardan birini çalıştırın:
+Deponun yerel bir sürümünü kopyalayıp oluşturmak için, komut satırı ortamınızı kullanarak yerel makinenizde uygun bir klasöre gidin. Ardından, Java deposunu kopyalamak için aşağıdaki komut kümelerinden birini çalıştırın:
 
-Java mikro hizmet uygulamaları en son sürümünü indirmek için çalıştırın:
+* Java mikro hizmet uygulamalarının en son sürümünü indirmek için aşağıdaki komutu çalıştırın:
 
+  ```cmd/sh
+  git clone --recurse-submodules https://github.com/Azure/azure-iot-pcs-remote-monitoring-java.git
+  ```
 
-```cmd/sh
-git clone --recurse-submodules https://github.com/Azure/azure-iot-pcs-remote-monitoring-java.git
+* En son alt modülleri almak için aşağıdaki komutları çalıştırın:
 
-# To retrieve the latest submodules, run the following command:
-
-cd azure-iot-pcs-remote-monitoring-java
-git submodule foreach git pull origin master
-```
+   ```cmd/sh
+   cd azure-iot-pcs-remote-monitoring-java
+   git submodule foreach git pull origin master
+    ```
 
 > [!NOTE]
-> Bu komutlar, mikro Hizmetleri yerel olarak çalıştırmak için kullandığınız komut dosyalarının yanı sıra tüm mikro hizmetler için kaynak kodunu indirebilir. Kaynak kodu, mikro hizmetler Docker'da çalıştırma için kaynak kodu gerekmez ancak daha sonra çözüm Hızlandırıcısını değiştirin ve değişikliklerinizi yerel olarak test etmeyi planlıyorsanız yararlı olur.
+> Bu komutlar, mikro hizmetleri yerel olarak çalıştırmak için kullandığınız betiklerin yanı sıra tüm mikro hizmetler için kaynak kodu indirir. Mikro hizmetleri Docker 'da çalıştırmak için kaynak koda ihtiyacınız yoktur. Ancak, daha sonra çözüm hızlandırıcıyı değiştirmeyi ve değişikliklerinizi yerel olarak test etmek için planlıyorsanız, kaynak kodu yararlı olur.
 
 ## <a name="deploy-the-azure-services"></a>Azure hizmetlerini dağıtma
 
-Bu makalede, mikro Hizmetleri yerel olarak çalıştırmak nasıl gösterir, ancak bunlar bulutta çalışan Azure Hizmetleri bağlıdır. Azure hizmetlerini dağıtmak için aşağıdaki betiği kullanın. Aşağıdaki betik örnekleri, bir Windows makinede java deposu kullanmakta olduğunuz varsayılır. Başka bir ortamda çalışıyorsanız, yol, dosya uzantılarını ve yol ayırıcıları uygun şekilde ayarlayın.
+Bu makalede, mikro hizmetlerin yerel olarak nasıl çalıştırılacağı gösterilmekle birlikte, bulutta çalışan Azure hizmetlerine bağımlıdır. Azure hizmetlerini dağıtmak için aşağıdaki betiği kullanın. Betik örnekleri, bir Windows makinesinde Java deposunu kullandığınızı varsayar. Başka bir ortamda çalışıyorsanız, yollar, dosya uzantıları ve yol ayırıcıları uygun şekilde ayarlayın.
 
 ### <a name="create-new-azure-resources"></a>Yeni Azure kaynakları oluşturma
 
-Gerekli Azure kaynakları henüz oluşturduysanız, şu adımları izleyin:
+Gerekli Azure kaynaklarını henüz oluşturmadıysanız, şu adımları izleyin:
 
-1. Komut satırı ortamınızda gidin **\services\scripts\local\launch** kopyaladığınız deponun klasöründe.
+1. Komut satırı ortamınızda, deponun kopyalanmış kopyasında **\services\scripts\local\launch** klasörüne gidin.
 
-1. Yüklemek için aşağıdaki komutları çalıştırın **bilgisayarları** CLI aracını kullanarak ve Azure hesabınızda oturum açın:
+1. **PC** CLI aracını yüklemek ve Azure hesabınızda oturum açmak için aşağıdaki komutları çalıştırın:
 
     ```cmd
     npm install -g iot-solutions
     pcs login
     ```
 
-1. Çalıştırma **start.cmd** betiği. Betik için aşağıdaki bilgileri ister:
+1. **Start. cmd** betiğini çalıştırın. Komut dosyası aşağıdaki bilgileri ister:
+
    * Bir çözüm adı.
    * Kullanılacak Azure aboneliği.
-   * Kullanmak için Azure veri merkezi konumu.
+   * Kullanılacak Azure veri merkezinin konumu.
 
-     Betik, çözümünüzün adına ile Azure'da kaynak grubu oluşturur. Bu kaynak grubu, çözüm Hızlandırıcısını Azure kaynaklarını içerir. İlgili kaynaklara artık ihtiyacınız sonra bu kaynak grubunu silebilirsiniz.
+   Betik, Azure 'da çözüm adınızı içeren bir kaynak grubu oluşturur. Bu kaynak grubu, çözüm hızlandırıcının kullandığı Azure kaynaklarını içerir. Bu kaynak grubunu, ilgili kaynaklara artık gerek kalmadığında silebilirsiniz.
 
-     Betik ayrıca bir ön ek ortam değişkenlerini kümesi ekler **bilgisayarları** yerel makinenize. Bu ortam değişkenleri, bir Azure Key Vault kaynaktan okumak, Uzaktan izleme ayrıntılarını sağlayın. Uzaktan izleme kendi yapılandırma değerlerinden burada okuyacaksa bu Key Vault kaynaktır.
+   Betik Ayrıca yerel makinenize bir ortam değişkenleri kümesi de ekler. Her değişken adının önek **bilgisayarları**vardır. Bu ortam değişkenleri, uzaktan Izlemenin bir Azure Key Vault kaynağından yapılandırma değerlerini okumasına izin veren ayrıntılar sağlar.
 
-     > [!TIP]
-     > Betik tamamlandığında, bu da adlı bir dosyaya ortam değişkenlerini kaydeder  **\<, giriş klasörü\>\\.pcs\\\<çözüm adı\>.env** . Gelecekteki çözüm Hızlandırıcı dağıtımları için bunları kullanabilirsiniz. Yerel makinenizde, herhangi bir ortam değişkenini değerleri geçersiz kıldığını unutmayın **Hizmetleri\\betikleri\\yerel\\.env** dosyasını çalıştırdığınızda **docker-compose**.
+   > [!TIP]
+   > Komut dosyası tamamlandığında, ortam değişkenlerini **\<giriş klasörünüzün\>\\. pcs\\\<çözüm adı\>. env**adlı bir dosyaya kaydeder. Bunları gelecekteki çözüm hızlandırıcılarına yönelik olarak kullanabilirsiniz. Yerel makinenizde ayarlanan tüm ortam değişkenlerinin, **Docker-Compose**çalıştırdığınızda **Yerel\\. env dosyası\\hizmetler\\betiklerdeki** değerleri geçersiz kılmasını unutmayın.
 
-1. Komut satırı ortamınızdan çıkın.
+1. Komut satırı ortamınızı kapatın.
 
-### <a name="use-existing-azure-resources"></a>Mevcut Azure kaynakları
+### <a name="use-existing-azure-resources"></a>Mevcut Azure kaynaklarını kullanma
 
-Gerekli Azure kaynakları zaten oluşturduysanız, yerel makinenizde karşılık gelen ortam değişkenleri oluşturun.
-Aşağıdaki ortam değişkenlerini ayarlayın:
-* **PCS_KEYVAULT_NAME** -Azure Key Vault kaynak adı
-* **PCS_AAD_APPID** -AAD uygulama kimliği
-* **PCS_AAD_APPSECRET** -AAD uygulama gizli anahtarı
+Gerekli Azure kaynaklarını zaten oluşturduysanız, yerel makinenizde karşılık gelen ortam değişkenlerini ayarlayın:
+* **PCS_KEYVAULT_NAME**: Key Vault kaynağının adı.
+* **PCS_AAD_APPID**: Azure Active Directory (Azure AD) uygulama kimliği.
+* **PCS_AAD_APPSECRET**: Azure AD uygulama gizli anahtarı.
 
-Bu Azure anahtar kasası kaynak yapılandırma değerlerini okur. Bu ortam değişkenlerini de kaydedilebilir  **\<, giriş klasörü\>\\.pcs\\\<çözüm adı\>.env** dağıtım dosyasından. Yerel makinenizde ortam değişkenleri değerleri geçersiz kıldığını unutmayın **Hizmetleri\\betikleri\\yerel\\.env** dosyasını çalıştırdığınızda **docker-compose**.
+Yapılandırma değerleri bu Key Vault kaynağından okunacaktır. Bu ortam değişkenleri, **\\. pcs\\\<çözüm adı\>. env dosyası\<\>giriş klasörünüze** kaydedilebilir. Yerel makinenizde ayarlanan ortam değişkenlerinin, **Docker-Compose**çalıştırdığınızda **Yerel\\. env dosyası\\hizmetler\\betiklerdeki** değerleri geçersiz kılmasını unutmayın.
 
-Mikro hizmet tarafından gereken yapılandırma bazıları örneğinde depolanır **Key Vault** ilk dağıtımı oluşturuldu. Karşılık gelen anahtar kasası değişkenleri gerektiği şekilde değiştirilmesi gerekir.
+Mikro hizmet tarafından gereken bazı yapılandırmalar ilk dağıtımda oluşturulmuş bir Key Vault örneğine depolanır. Anahtar kasasındaki ilgili değişkenler gerektiği şekilde değiştirilmelidir.
 
-## <a name="run-the-microservices"></a>Mikro Hizmetleri çalıştırın
+## <a name="run-the-microservices"></a>Mikro hizmetleri çalıştırma
 
-Bu bölümde, Uzaktan izleme mikro Hizmetleri çalıştırın. Web kullanıcı Arabirimi yerel olarak çalıştırdığınızda, cihaz benzetimi, Docker kimlik doğrulama ve ASA Yöneticisi hizmeti ve Intellij mikro Hizmetleri.
+Bu bölümde, uzaktan Izleme mikro hizmetlerini çalıştırırsınız. Şunu çalıştırırsınız:
 
-### <a name="run-the-device-simulation-service"></a>Cihaz benzetimi hizmet çalıştırma
+* Web Kullanıcı arabirimi yerel olarak.
+* Docker 'da Azure IoT cihaz benzetimi, kimlik doğrulama ve Azure Stream Analytics Manager hizmetleri.
+* IntelliJ 'deki mikro hizmetler.
 
-Ayarlanan ortam değişkenlerine erişebilir emin olmak için yeni bir komut istemi penceresi açın **start.cmd** önceki bölümde betiği.
+### <a name="run-the-device-simulation-service"></a>Cihaz simülasyon hizmetini çalıştırma
 
-Cihaz benzetimi hizmeti için Docker kapsayıcısı başlatmak için aşağıdaki komutu çalıştırın. Hizmeti cihazları için Uzaktan izleme çözümü benzetimini yapar.
+Yeni bir komut Istemi penceresi açın. Önceki bölümde **Start. cmd** betiği tarafından ayarlanan ortam değişkenlerine erişiminiz olup olmadığını denetleyin.
+
+Cihaz benzetimi hizmeti için Docker kapsayıcısını açmak üzere aşağıdaki komutu çalıştırın. Hizmet, uzaktan Izleme çözümü için cihazların benzetimini yapar.
 
 ```cmd
 <path_to_cloned_repository>\services\device-simulation\scripts\docker\run.cmd
 ```
 
-### <a name="run-the-auth-service"></a>Kimlik doğrulama hizmeti Çalıştır
+### <a name="run-the-auth-service"></a>Auth hizmetini çalıştırma
 
-Yeni bir komut istemi penceresi açın ve kimlik doğrulama hizmeti için Docker kapsayıcısı başlatmak için aşağıdaki komutu çalıştırın. Azure IOT çözümleri erişmeye yetkili kullanıcıları yönetmek için hizmet sağlar.
+Yeni bir komut Istemi penceresi açın ve ardından kimlik doğrulama hizmeti için Docker kapsayıcısını açmak üzere aşağıdaki komutu çalıştırın. Bu hizmeti kullanarak, Azure IoT çözümlerine erişme yetkisine sahip kullanıcıları yönetebilirsiniz.
 
 ```cmd
 <path_to_cloned_repository>\services\auth\scripts\docker\run.cmd
 ```
 
-### <a name="run-the-asa-manager-service"></a>ASA Yöneticisi hizmeti Çalıştır
+### <a name="run-the-stream-analytics-manager-service"></a>Stream Analytics Manager hizmetini çalıştırma
 
-Yeni bir komut istemi penceresi açın ve ASA Manager hizmeti için Docker kapsayıcısı başlatmak için aşağıdaki komutu çalıştırın. Hizmet yapılandırması ve başlatılmasını, durdurmasını ve bunların durumlarını izleme de dahil olmak üzere, Azure Stream Analytics (ASA) işleri yönetilmesine izin verir.
+Yeni bir komut Istemi penceresi açın ve sonra Stream Analytics Manager hizmeti için Docker kapsayıcısını açmak üzere aşağıdaki komutu çalıştırın. Bu hizmetle Stream Analytics işleri yönetebilirsiniz. Bu tür bir yönetim, iş yapılandırması ayarlamayı ve iş durumunu başlatmayı, durdurmayı ve izlemeyi içerir.
 
 ```cmd
 <path_to_cloned_repository>\services\asa-manager\scripts\docker\run.cmd
 ```
 
-### <a name="deploy-all-other-microservices-on-local-machine"></a>Yerel makinede diğer mikro hizmetlerin dağıtımı
+### <a name="deploy-all-other-microservices-on-your-local-machine"></a>Tüm diğer mikro hizmetleri yerel makinenize dağıtma
 
-Aşağıdaki adımları Uzaktan izleme mikro hizmetler Intellij çalıştırma işlemini gösterir:
+Aşağıdaki adımlarda, IntelliJ 'de uzaktan Izleme mikro hizmetlerinin nasıl çalıştırılacağı gösterilmektedir.
 
-#### <a name="import-project"></a>Projeyi İçeri Aktar
+#### <a name="import-a-project"></a>Projeyi içeri aktar
 
-1. Launch IntelliJ IDE
-1. Seçin **Import Project** ve **azure-iot-pcs-remote-monitoring-java\services\build.sbt**
+1. IntelliJ IDE 'yi açın.
+1. **Projeyi Içeri aktar**' ı seçin.
+1. **Azure-iot-PCs-Remote-Monitoring-java\services\build.SBT**seçin.
 
-#### <a name="create-run-configurations"></a>Çalıştırma yapılandırmaları oluşturma
+#### <a name="create-run-configurations"></a>Çalıştırma yapılandırması oluşturma
 
-1. Seçin **Çalıştır > yapılandırmaları Düzenle**
-1. Seçin **yeni Yapılandırması Ekle > sbt görevi** 
-1. Girin **adı** girin **görevleri** çalışacak şekilde 
-1. Seçin **çalışma dizini** çalıştırmak istediğiniz hizmetini temel alan
-1. Tıklayın **Uygula > Tamam** seçimlerinizi kaydetmek için.
-1. Aşağıdaki hizmetler için çalıştırma yapılandırmaları oluşturun:
-    * Web hizmeti (services\config)
-    * Web hizmeti (telemetri services\device)
-    * Web hizmeti (services\iothub Yöneticisi)
-    * Web hizmeti (services\storage bağdaştırıcısı)
+1. **Çalıştır** > **yapılandırmayı Düzenle**' yi seçin.
+1. **Yeni yapılandırma** > **SBT görevi**' ni seçin.
+1. **Ad**girin ve ardından **görevleri** **çalıştırma**olarak girin.
+1. Çalıştırmak istediğiniz hizmete göre **çalışma dizinini** seçin.
+1. Seçimlerinizi kaydetmek için **uygula** > **Tamam ' ı** seçin.
+1. Aşağıdaki Web Hizmetleri için çalıştırma yapılandırması oluşturun:
+    * WebService (services\config)
+    * WebService (services\device-telemetri)
+    * WebService (services\iothub-Manager)
+    * WebService (services\storage-Adapter)
 
-Örneğin, aşağıdaki görüntüde bir hizmeti yapılandırması ekleniyor:
+Örnek olarak, aşağıdaki görüntüde bir hizmet için nasıl yapılandırma ekleneceği gösterilmektedir:
 
-[![Yapılandırması Ekle](./media/deploy-locally-intellij/run-configurations.png)](./media/deploy-locally-intellij/run-configurations.png#lightbox)
+[Sol bölmedeki SBT görevleri listesinde vurgulanan storageAdapter seçeneğini ve sağ bölmedeki ad, görevler, çalışma dizini ve VM parametreleri kutularındaki girdileri gösteren, IntelliJ IDE Run/Debug Configurations penceresinin ekran görüntüsünü ![.](./media/deploy-locally-intellij/run-configurations.png)](./media/deploy-locally-intellij/run-configurations.png#lightbox)
 
+#### <a name="create-a-compound-configuration"></a>Bileşik yapılandırma oluşturma
 
-#### <a name="create-compound-configuration"></a>Bileşik yapılandırması oluştur
+1. Tüm Hizmetleri birlikte çalıştırmak için **bileşik** > **Yeni yapılandırma Ekle** ' yi seçin.
+1. **Ad**girin ve ardından **SBT görevleri ekle**' yi seçin.
+1. Seçimlerinizi kaydetmek için **uygula** > **Tamam ' ı** seçin.
 
-1. Tüm hizmetleri çalıştırmak için birlikte seçin **yeni Yapılandırması Ekle > Bileşik**
-1. Girin **adı** ve **sbt görev ekleyin**
-1. Tıklayın **Uygula > Tamam** seçimlerinizi kaydetmek için.
+Örnek olarak, aşağıdaki görüntüde tüm SBT görevlerinin tek bir yapılandırmaya nasıl ekleneceği gösterilmektedir:
 
-Örnek olarak, tüm sbt görevler için tek bir yapılandırması ekleme, aşağıdaki resimde gösterilmektedir:
+[Sol bölmedeki Birleşik listede ve sağ bölmede vurgulanan SBT görevi ' Devicetelemetri ' seçeneğinde bulunan AllServices seçeneğini gösteren IntelliJ IDE Run/Debug Configurations penceresinin ekran görüntüsünü ![.](./media/deploy-locally-intellij/all-services.png)](./media/deploy-locally-intellij/all-services.png#lightbox)
 
-[![Ekle-All-Services](./media/deploy-locally-intellij/all-services.png)](./media/deploy-locally-intellij/all-services.png#lightbox)
+Yerel makinede Web hizmetlerini derlemek ve çalıştırmak için **Çalıştır** ' ı seçin.
 
-Tıklayın **çalıştırma** oluşturun ve web hizmetleri yerel makinede çalıştırın.
+Her Web hizmeti bir komut Istemi penceresi ve Web tarayıcısı penceresi açar. Komut isteminde, çalışan hizmetten alınan çıktıyı görürsünüz. Tarayıcı penceresi, durumu izlemenize olanak sağlar. Komut Istemi pencerelerini veya Web sayfalarını kapatmayın, çünkü bu eylemler Web hizmetini durdurur.
 
-Her web hizmeti, bir komut istemi'ni ve web tarayıcı penceresi açılır. Komut isteminde çalışan hizmetin çıktısını görürsünüz ve tarayıcının durumunu izlemenize olanak tanır. Komut istemleri veya web sayfaları kapatmayın, bu eylem web hizmetini durdurur.
+Hizmetlerin durumuna erişmek için aşağıdaki URL 'Lere gidin:
 
+* IoT-Hub Yöneticisi: [http://localhost:9002/v1/status](http://localhost:9002/v1/status)
+* Cihaz telemetrisi: [http://localhost:9004/v1/status](http://localhost:9004/v1/status)
+* Yapılandırma: [http://localhost:9005/v1/status](http://localhost:9005/v1/status)
+* depolama-bağdaştırıcı: [http://localhost:9022/v1/status](http://localhost:9022/v1/status)
 
-Hizmetlerin durumunu erişmek için aşağıdaki URL'lere gidebilirsiniz:
-* IOT Hub Yöneticisi [http://localhost:9002/v1/status](http://localhost:9002/v1/status)
-* Cihaz Telemetrisi  [http://localhost:9004/v1/status](http://localhost:9004/v1/status)
-* yapılandırma [http://localhost:9005/v1/status](http://localhost:9005/v1/status)
-* Depolama bağdaştırıcısı [http://localhost:9022/v1/status](http://localhost:9022/v1/status)
+### <a name="start-the-stream-analytics-job"></a>Stream Analytics işini Başlat
 
+Stream Analytics işini başlatmak için aşağıdaki adımları izleyin:
 
-### <a name="start-the-stream-analytics-job"></a>Stream Analytics işini başlatın
+1. [Azure Portal](https://portal.azure.com) gidin.
+1. Çözümünüz için oluşturulan **kaynak grubuna** gidin. Kaynak grubunun adı, **Start. cmd** betiğini çalıştırdığınızda çözümünüz için seçtiğiniz addır.
+1. Kaynak listesinden **Stream Analytics işi** seçin.
+1. Stream Analytics iş **genel bakış** sayfasında **Başlat** düğmesini seçin ve ardından işi başlatmak için **Başlat** ' ı seçin.
 
-Stream Analytics işi başlatmak için aşağıdaki adımları izleyin:
+### <a name="run-the-web-ui"></a>Web Kullanıcı arabirimini çalıştırma
 
-1. [Azure portalına](https://portal.azure.com) gidin.
-1. Gidin **kaynak grubu** çözümünüz için oluşturulur. Kaynak grubunun adı çalıştırdığınızda çözümünüz için seçtiğiniz addır **start.cmd** betiği.
-1. Tıklayın **Stream Analytics işi** kaynakları listesinde.
-1. Stream Analytics işinde **genel bakış** sayfasında **Başlat** düğmesi. Ardından **Başlat** işini şimdi başlatmak için.
-
-### <a name="run-the-web-ui"></a>Web kullanıcı arabirimini çalıştırma
-
-Bu adımda, web kullanıcı Arabirimi başlatın. Ayarlanan ortam değişkenlerine erişebilir emin olmak için yeni bir komut istemi penceresi açın **start.cmd** betiği. Gidin **webui** yerel klasöründe depoyu kopyalayın ve aşağıdaki komutları çalıştırın:
+Bu adımda, Web Kullanıcı arabirimini başlatın. Yeni bir komut Istemi penceresi açın. **Start. cmd** betiği tarafından ayarlanan ortam değişkenlerine erişiminiz olup olmadığını denetleyin. Deponun yerel kopyasında **webui** klasörüne gidin ve aşağıdaki komutları çalıştırın:
 
 ```cmd
 npm install
 npm start
 ```
 
-Başlangıç tamamlandıktan sonra tarayıcınızı sayfası görüntüler **http:\//localhost:3000 / Pano**. Bu sayfadaki hataları beklenmektedir. Uygulama hatasız görüntülemek için aşağıdaki adımı tamamlayın.
+**Başlat** komutu tamamlandığında, tarayıcınız sayfayı [http://localhost:3000/dashboard](http://localhost:3000/dashboard)adreste görüntüler. Bu sayfadaki hatalar beklenmektedir. Uygulamayı hata olmadan görüntülemek için aşağıdaki adımları izleyin.
 
-### <a name="configure-and-run-nginx"></a>Yapılandırma ve NGINX çalıştırma
+### <a name="configure-and-run-nginx"></a>NGINX 'i yapılandırma ve çalıştırma
 
-Yerel makinenizde çalışan mikro hizmetler ve web uygulaması bağlamak için bir ters proxy sunucuyu ayarlayın:
+Web uygulamasını yerel makinenizde çalışan mikro hizmetlere bağlayan bir ters proxy sunucusu ayarlayın:
 
-* Kopyalama **nginx.conf** dosya **webui\scripts\localhost** deposunun yerel kopyasındaki klasör **nginx\conf** yükleme dizini.
-* Çalıştırma **ngınx**.
+1. **NGINX. conf** dosyasını deponun yerel kopyasında bulunan **webui\scripts\localhost** klasöründen **nginx\conf** yükleme dizinine kopyalayın.
+1. NGINX 'i çalıştırın.
 
-Çalıştırma hakkında daha fazla bilgi için **ngınx**, bkz: [nginx Windows için](https://nginx.org/en/docs/windows.html).
+NGINX çalıştırma hakkında daha fazla bilgi için bkz. [Windows için NGINX](https://nginx.org/en/docs/windows.html).
 
-### <a name="connect-to-the-dashboard"></a>Panoya bağlanma
+### <a name="connect-to-the-dashboard"></a>Panoya Bağlan
 
-Uzaktan izleme çözümü panosuna erişmek için http gidin:\/tarayıcınızda /localhost:9000.
+Uzaktan Izleme çözümü panosuna erişmek için tarayıcınızda http://localhost:9000 gidin.
 
 ## <a name="clean-up"></a>Temizleme
 
-Gereksiz önlemek için bulut Hizmetleri ücretleri sınamanızı tamamladığınızda, Azure aboneliğinizden kaldırın. Hizmetlerini kaldırmak için gidin [Azure portalında](https://ms.portal.azure.com) ve delete kaynak grubunda **start.cmd** oluşturulan komut dosyası.
+Gereksiz ücretlerden kaçınmak için, testinizi tamamladıktan sonra bulut hizmetlerini Azure aboneliğinizden kaldırın. Hizmetleri kaldırmak için [Azure Portal](https://ms.portal.azure.com)gidin ve **Start. cmd** betiğinin oluşturulduğu kaynak grubunu silin.
 
-Ayrıca, kaynak kodunu github'dan kopyaladığınız oluşturulan uzaktan izleme depo yerel kopyasını silebilirsiniz.
+Ayrıca, kaynak kodu GitHub 'dan Klonladığınız sırada oluşturulan uzaktan Izleme deposunun yerel kopyasını da silebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Uzaktan izleme çözüm dağıttığınıza göre sonraki adım olarak [çözüm panosunun özelliklerini keşfedin](quickstart-remote-monitoring-deploy.md).
+Uzaktan Izleme çözümünü dağıttığınıza göre, bir sonraki adım [çözüm panosunun yeteneklerini araştırmakta](quickstart-remote-monitoring-deploy.md).

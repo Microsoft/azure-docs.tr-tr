@@ -1,19 +1,15 @@
 ---
-title: Jenkins ve mavi/yeşil dağıtım düzenini kullanarak Azure Kubernetes Service'e (AKS) dağıtım yapma
+title: Jenkins ve mavi/yeşil dağıtım modelini kullanarak Azure Kubernetes hizmetine dağıtın
 description: Jenkins ve mavi/yeşil dağıtım düzenini kullanarak Azure Kubernetes Service'e (AKS) nasıl dağıtım yapacağınızı öğrenin.
-ms.service: jenkins
 keywords: jenkins, azure, devops, kubernetes, k8s, aks, mavi yeşil dağıtım, sürekli teslim, cd
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.topic: tutorial
-ms.date: 10/11/2018
-ms.openlocfilehash: 93f2ac284931ba664e0965e537e515c824e6f7a6
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 10/23/2019
+ms.openlocfilehash: ae9c496cd820bf1263cac50fb676990ed65ed0ba
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60642131"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158545"
 ---
 # <a name="deploy-to-azure-kubernetes-service-aks-by-using-jenkins-and-the-bluegreen-deployment-pattern"></a>Jenkins ve mavi/yeşil dağıtım düzenini kullanarak Azure Kubernetes Service'e (AKS) dağıtım yapma
 
@@ -31,11 +27,11 @@ Bu öğreticide, aşağıdaki görevleri nasıl gerçekleştireceğinizi öğren
 > * Bir Jenkins işi oluşturma ve çalıştırma
 
 ## <a name="prerequisites"></a>Önkoşullar
-- [GitHub hesabı](https://github.com) : Örnek depoyu kopyalamak için bir GitHub hesabı gerekir.
-- [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) : Azure CLI 2.0, Kubernetes kümesini oluşturmak için kullanın.
-- [Chocolatey](https://chocolatey.org): Kubectl yüklemek için kullandığınız bir paket Yöneticisi.
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/): Kubernetes kümelerini karşı komutları çalıştırmak için kullandığınız bir komut satırı arabirimi.
-- [jq](https://stedolan.github.io/jq/download/): Bir basit, komut satırı JSON işlemci.
+- [GitHub hesabı](https://github.com) : Örnek deposunu kopyalamak için bir GitHub hesabınız olması gerekir.
+- [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) : Kubernetes kümesi oluşturmak için Azure CLI 2.0 kullanılır.
+- [Chocolatey](https://chocolatey.org): kubectl yüklemek için kullanılan bir paket yöneticisi.
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/): Kubernetes kümelerine karşı komut çalıştırmak için kullanılan bir komut satırı arabirimi.
+- [jq](https://stedolan.github.io/jq/download/): Basit ve komut satırı için kullanılan bir JSON işlemcisi.
 
 ## <a name="clone-the-sample-app-from-github"></a>Örnek uygulamayı GitHub'dan kopyalama
 
@@ -147,7 +143,7 @@ Mavi/yeşil dağıtımı AKS'de el ile veya önceden kopyalanan örnekte sağlan
     kubectl apply -f  test-endpoint-green.yml
     ```
 
-1. Genel ve test uç noktaları için DNS adını güncelleştirin. Bir Kubernetes kümesi oluşturduğunuzda, aynı zamanda adlandırma düzeni **MC_&lt;kaynak-grubu-adınız>_&lt;kubernetes-kümesi-adınız>_&lt;konumunuz>** olan bir [ek kaynak grubu](https://github.com/Azure/AKS/issues/3) da oluşturmuş olursunuz.
+1. Genel ve test uç noktaları için DNS adını güncelleştirin. Bir Kubernetes kümesi oluşturduğunuzda, aynı zamanda adlandırma düzeni [MC_](https://github.com/Azure/AKS/issues/3)kaynak-grubu-adınız> **&lt;kubernetes-kümesi-adınız> _&lt;konumunuz>_ olan bir &lt;ek kaynak grubu** da oluşturmuş olursunuz.
 
     Kaynak grubundaki genel IP'leri bulun.
 
@@ -218,7 +214,7 @@ Bu bölümde, Jenkins sunucusunu test için kullanılan bir derlemeyi çalışt�
     1. **Manage Jenkins > Manage Plugins > Available**'ı (Jenkins’i yönet > Eklentileri yönet > Kullanılabilir) seçin.
     1. Azure Container Service eklentisini arayın ve yükleyin.
 
-1. Azure'da kaynakları yönetmek için kimlik bilgilerini ekleyin. Eklentiyi henüz yüklemediyseniz **Azure Credential** eklentisini yükleyin.
+1. Azure'da kaynakları yönetmek için kimlik bilgilerini ekleyin. Zaten eklentiniz yoksa, **Azure kimlik bilgisi** eklentisini yükleyebilirsiniz.
 
 1. Azure Hizmet Sorumlusu kimlik bilgilerinizi **Microsoft Azure Service Principal** (Microsoft Azure Hizmet Sorumlusu) türünde ekleyin.
 
@@ -259,7 +255,7 @@ Bu bölümde, Jenkins sunucusunu test için kullanılan bir derlemeyi çalışt�
 
 ## <a name="run-the-job"></a>İşi çalıştırma
 
-1. Projenizi yerel ortamınızda başarıyla çalıştırabildiğinizi doğrulayın. Bunu yapmak için: [Proje yerel makinede çalıştırma](https://github.com/Microsoft/todo-app-java-on-azure/blob/master/README.md#run-it).
+1. Projenizi yerel ortamınızda başarıyla çalıştırabildiğinizi doğrulayın. Bunu yapmak için: [Yerel makinede proje çalıştırma](https://github.com/Microsoft/todo-app-java-on-azure/blob/master/README.md#run-it).
 
 1. Jenkins işini çalıştırın. İşi ilk kez çalıştırdığınızda Jenkins, todo uygulamasını varsayılan etkin olmayan ortam olan mavi ortama dağıtır. 
 

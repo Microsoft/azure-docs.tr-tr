@@ -1,55 +1,87 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Active Directory B2B Belgeleri
+### YamlMime:Landing
+title: Azure Active Directory B2B belgeleri
+summary: Şirketinizin uygulamalarını ve hizmetlerini sizinki haricinde herhangi bir kuruluştaki konuk kullanıcılar ve iş ortakları ile güvenli bir şekilde paylaşmak, bunu yaparken de kurumsal verilerinize yönelik denetiminizi sürdürmek için Azure AD işletmeden işletmeye (B2B) işbirliğini kullanmayı öğrenin.
 metadata:
-  document_id: null
-  title: Azure Active Directory B2B Belgeleri - Azure Active Directory | Microsoft Docs
-  description: 'Şirket dışındaki iş ortaklarıyla dosya paylaşmak ve işbirliği yapmak amacıyla B2B konuk erişimini kullanma hakkında bilgi edinmek için öğreticilerimizi, hızlı başlangıçlarımızı ve nasıl yapılır makalelerimizi kullanın.'
-  services: active-directory
-  ms.subservice: authentication
-  author: msmimart
-  manager: celestedg
+  title: Uygulama Yönetimi Belgeleri
+  description: Şirketinizin uygulamalarını ve hizmetlerini sizinki haricinde herhangi bir kuruluştaki konuk kullanıcılar ve iş ortakları ile güvenli bir şekilde paylaşmak, bunu yaparken de kurumsal verilerinize yönelik denetiminizi sürdürmek için Azure AD işletmeden işletmeye (B2B) işbirliğini kullanmayı öğrenin.
   ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: manage-apps
+  ms.workload: identity
   ms.topic: landing-page
-  ms.date: 09/10/2018
+  ms.date: 08/27/2019
+  author: msmimart
   ms.author: mimart
-abstract:
-  description: 'Şirketinizin uygulamalarını ve hizmetlerini sizinki haricinde herhangi bir kuruluştaki konuk kullanıcılar ve iş ortakları ile güvenli bir şekilde paylaşmak, bunu yaparken de kurumsal verilerinize yönelik denetiminizi sürdürmek için Azure AD işletmeden işletmeye (B2B) işbirliğini kullanmayı öğrenin.  Önemli özelliklerinden bazıları şunlardır:<ul><li>Basit bir davet ve davet kullanma işlemi ile konuk kullanıcılar, erişmelerini istediğiniz kaynaklar üzerinde işbirliği yapmaya başlayabilir.</li><li>Konuk kullanıcılarınız ve şirket dışındaki iş ortaklarınız Azure AD, sosyal e-posta hesapları veya herhangi bir kimlik sağlayıcı ile kendi kimliklerini yönetirler.</li><li>Kurumsal kaynaklarınızı çok faktörlü kimlik doğrulaması gibi Azure AD özellikleriyle koruyabilirsiniz.</li><li>Deneyimi özelleştirmek için, self servis kaydolma portalı gibi API’leri kullanabilirsiniz.</li></ul>Aşağıdaki kaynaklar hızlı bir başlangıç yapmanıza yardımcı olur.'
-  aside:
-    image:
-      alt: Azure AD B2B açıklaması başlıklı videonun küçük resmi
-      height: 110
-      src: ./media/index/video.png
-      width: 246
-    title: Azure AD B2B açıklaması
-    href: 'https://www.youtube.com/watch?v=AhwrweCBdsc'
-    width: 246
-sections:
-  - title: 5 dakikalık hızlı başlangıçlar
-    items:
-      - type: paragraph
-        text: Konuk kullanıcıları davet etme ve B2B işbirliğini kullanmaya başlamayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              alt: null
-              src: ./media/index/i_security-management.png
-            text: Azure portalda konuk kullanıcı ekleme
-            href: b2b-quickstart-add-guest-users-portal.md
-          - image:
-              alt: null
-              src: ./media/index/i_security-management.png
-            text: PowerShell ile konuk kullanıcı ekleme
-            href: b2b-quickstart-invite-powershell.md
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: B2B işbirliğinin ayarlanması ve şirketinizin kaynaklarını güvence altına alma hakkında daha fazla bilgi edinin.
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/b2b/tutorial-bulk-invite">PowerShell ile B2B konuk kullanıcılarını toplu davet etme</a>
-          - html: <a href="/azure/active-directory/b2b/b2b-tutorial-require-mfa">B2B işbirliği kullanıcıları için çok faktörlü kimlik doğrulamasını zorlama</a>
+  manager: celested
+  ms.openlocfilehash: a1822b3bd6ec7950bc3c0ab9304ea2f60a7127e4
+  ms.sourcegitcommit: 07700392dd52071f31f0571ec847925e467d6795
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/28/2019
+  ms.locfileid: "70125168"
+landingContent:
+- title: Azure B2B işbirliği hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: B2B konuk kullanıcı erişimi nedir?
+      url: what-is-b2b.md
+- title: B2B konuk kullanıcılarını davet etme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: B2B konuğu bir davetten nasıl yararlanır?
+      url: redemption-experience.md
+  - linkListType: quickstart
+    links:
+    - text: Dizininize konuk kullanıcı ekleme
+      url: b2b-quickstart-add-guest-users-portal.md
+    - text: PowerShell ile konuk kullanıcı ekleme
+      url: b2b-quickstart-invite-powershell.md
+  - linkListType: how-to-guide
+    links:
+    - text: Yöneticiler konukları nasıl davet eder?
+      url: add-users-administrator.md
+    - text: Kullanıcılarınız konukları nasıl davet eder?
+      url: add-users-information-worker.md
+- title: Azure B2B işbirliğini özelleştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: B2B işbirliğini etkinleştirme
+      url: delegate-invitations.md
+  - linkListType: deploy
+    links:
+    - text: Doğrudan federasyonu ayarlama (önizleme)
+      url: direct-federation.md
+    - text: Google federasyonu ayarlama
+      url: google-federation.md
+    - text: Bir kerelik geçiş kodu kimlik doğrulaması ayarlama (önizleme)
+      url: one-time-passcode.md
+  - linkListType: tutorial
+    links:
+    - text: Çok faktörlü kimlik doğrulamasını zorlama
+      url: b2b-tutorial-require-mfa.md
+  - linkListType: reference
+    links:
+    - text: B2B işbirliği kodu ve PowerShell örnekleri
+      url: code-samples.md
+- title: Konuk kullanıcılarınızı yönetme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: B2B konuk kullanıcısını anlama
+      url: user-properties.md
+    - text: Dinamik gruplar ve B2B konukları
+      url: use-dynamic-groups.md
+  - linkListType: how-to-guide
+    links:
+    - text: B2B konuk kullanıcıları hakkında denetim ve rapor
+      url: auditing-and-reporting.md
+    - text: B2B konuklarına izin verme
+      url: add-guest-to-role.md
+    - text: Kuruluşlara izin verme veya kuruluşları engelleme
+      url: allow-deny-list.md
+  - linkListType: deploy
+    links:
+    - text: B2B işbirliği için SaaS uygulamalarını yapılandırma
+      url: configure-saas-apps.md

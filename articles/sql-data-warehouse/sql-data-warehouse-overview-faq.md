@@ -1,119 +1,135 @@
 ---
-title: Azure SQL veri ambarı hakkında sık sorulan sorular | Microsoft Docs
-description: Bu makalede, Azure SQL veri ambarı hakkında sık sorulan soruların müşterilere ve geliştiricilerinden kullanıma listelenir.
+title: Azure SYNAPSE Analytics (eski adıyla SQL DW) sık sorulan sorular
+description: Bu makalede, müşteriler ve geliştiricilerden Azure SYNAPSE Analytics (eski adıyla SQL DW) hakkında sık sorulan sorular listelenmektedir
 services: sql-data-warehouse
 author: mlee3gsd
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
 ms.subservice: design
-ms.date: 04/17/2018
+ms.date: 11/04/2019
 ms.author: martinle
 ms.reviewer: igorstan
-ms.openlocfilehash: 4679a3bb1935e9f3e2bc90c9bc9ef1247b7ecb30
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f7b4f926bb9611d87c67276f754a6b596850b59d
+ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66515867"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73645599"
 ---
-# <a name="sql-data-warehouse-frequently-asked-questions"></a>SQL veri ambarı sık sorulan sorular
+# <a name="azure-synapse-analytics-formerly-sql-dw-frequently-asked-questions"></a>Azure SYNAPSE Analytics (eski adıyla SQL DW) sık sorulan sorular
 
 ## <a name="general"></a>Genel
 
-S. Hangi SQL DW veri güvenliği için sunduğu?
+S. Azure SYNAPSE nedir?
 
-A. SQL DW TDE gibi veri koruma ve denetim için çeşitli çözümler sunar. Daha fazla bilgi için [güvenlik].
+A. Azure SYNAPSE, veri depolama ve büyük veri analizlerini birlikte getiren sınırsız bir analiz hizmetidir. Aynı zamanda sunucusuz isteğe bağlı veya sağlanmış kaynakları kullanarak koşullarınızda verileri sorgulama özgürlüğü sunar. Azure SYNAPSE, bu iki çalışma LDS 'yi, anında ve makine öğrenimi ihtiyaçları için veri alma, hazırlama, yönetme ve sunma konularında birleştirilmiş bir deneyimle birlikte sunar. Daha fazla bilgi için bkz. [Azure SYNAPSE Analytics nedir](sql-data-warehouse-overview-what-is.md).
 
-S. Hangi yasal veya iş standartları olduğunu SQL DW ile uyumlu nereden edinebilirim?
+S. Azure SQL veri ambarı 'na ne oldu?
 
-A. Ziyaret [Microsoft Uyumluluk] ürün SOC ve ISO gibi çeşitli uyumluluk teklifleri için sayfa. İlk uyumluluk başlığı seçin, ardından Azure genişletin Microsoft kapsamındaki bulut Hizmetleri bölümünde Azure olan hizmetler görmek için sayfanın sağ tarafındaki Hizmetleri uyumludur.
+A. Azure SYNAPSE, Azure SQL veri ambarı (SQL DW) gelişmiştir. Aynı sektörde önde gelen veri ambarını, yeni bir performans ve özellik düzeyinin tamamına gerçekleştirdik. Mevcut veri ambarı iş yüklerinizi Azure SYNAPSE ile bugün çalıştırmaya devam edebilir ve önizleme aşamasında olan yeni yeteneklerden otomatik olarak yararlanabilirsiniz. Daha fazla bilgi için bkz. [Azure SYNAPSE Analytics nedir](sql-data-warehouse-overview-what-is.md).
 
-S. Power BI bağlayabilirim?
+S. SQL Analytics nedir?
 
-A. Evet! SQL DW ile doğrudan sorgu Powerbı destekler ancak çok sayıda kullanıcı veya gerçek zamanlı veriler için tasarlanmamıştır. Power BI'ın üretim sırasında kullanım için Azure Analysis Services veya Analysis Service Iaas üzerine Power BI'ı kullanmanızı öneririz. 
+A. SQL Analytics, Azure SYNAPSE ile genel kullanıma sunulan kurumsal veri ambarı özelliklerini ifade eder. Daha fazla bilgi için bkz. [Azure SYNAPSE Analytics nedir](sql-data-warehouse-overview-what-is.md).
 
-S. SQL veri ambarı kapasite sınırları nelerdir?
+S. Azure SYNAPSE kullanmaya başlama Nasıl yaparım??
 
-A. Bizim geçerli bkz [kapasite sınırları] sayfası. 
+A. [Daha fazla bilgi Için](https://info.microsoft.com/ww-landing-azure-sql-data-warehouse-contactme.html) [Azure Ücretsiz hesabıyla](https://azure.microsoft.com/free/sql-data-warehouse/) çalışmaya başlayabilir veya satışlarla iletişim kurun. 
 
-S. Neden benim ölçek/duraklatın/sürdürün kadar uzun sürüyor?
+S. Azure SYNAPSE veri güvenliği için ne sunuyor?
 
-A. İşlem yönetimi işlemleri için süre çeşitli etkenlere etkileyebilir. Ortak işlemler uzun süre çalışan işlem geri alma için durumda. Bir ölçek veya duraklatma işlemi başlatıldığında, tüm gelen oturumları engellenir ve sorguları boşaltılır. Bir işlemin yeniden başlatılmadan önce sistem kararlı bir duruma ayrılabilmeniz işlemleri alınması gerekir. Büyük sayı ve daha büyük günlük boyutunu işlemler, uzun işlemi sistemi kararlı bir duruma geri durmuş.
+A. Azure SYNAPSE, TDE ve denetimi gibi verileri korumak için çeşitli çözümler sunar. Daha fazla bilgi için bkz. [güvenlik].
+
+S. Azure SYNAPSE 'in hangi yasal veya iş standartlarından uyumlu olduğunu nereden bulabilirim?
+
+A. SOC ve ISO gibi ürüne göre çeşitli uyumluluk teklifleri için [Microsoft uyumluluğu] sayfasını ziyaret edin. Öncelikle uyumluluk başlığına göre ' yi seçin, ardından sayfanın sağ tarafındaki Microsoft 'un kapsam içi bulut Hizmetleri bölümünde Azure ' ı genişleterek Azure SYNAPSE uyumlu olduğunu görün.
+
+S. Power BI bağlanabilir miyim?
+
+A. Evet! Power BI Azure SYNAPSE ile doğrudan sorguyu desteklediğinden, bu, çok sayıda kullanıcı veya gerçek zamanlı veriler için tasarlanmamıştır. Power BI performansını daha iyi hale getirebilmenizi sağlamak için, Azure Analysis Services veya Analysis Service IaaS üzerinde Power BI kullanmayı göz önünde bulundurun.
+
+S. SQL Analytics kapasite sınırları nelerdir?
+
+A. Geçerli [Kapasite limitleri] sayfamıza bakın. 
+
+S. Neden Ölçeklendirmeliyim/Duraklat/devam eden uzun sürüyor?
+
+A. Çeşitli faktörler, işlem yönetimi işlemleri için zamanı etkileyebilir. Uzun süre çalışan işlemler için ortak bir durum işlem geri alma işlemi olur. Bir ölçek veya duraklatma işlemi başlatıldığında, tüm gelen oturumlar engellenir ve sorgular kaldırılır. Sistemin kararlı durumda kalmasını sağlamak için, bir işlemin bir işlem yapılmadan önce geri alınması gerekir. İşlemin ne kadar büyük olması ve günlük boyutunun daha büyük olması, işlemin daha uzun olması sistem kararlı duruma geri yüklenmeye karşı daha uzundur.
 
 ## <a name="user-support"></a>Kullanıcı desteği
 
-S. Burada gönderme bir özellik isteği sahibim?
+S. Bir özellik isteğim var ve nereden gönderebilirim?
 
-A. Bir özellik isteği varsa, üzerinde iletin bizim [UserVoice] sayfası
+A. Bir özellik isteğiniz varsa [UserVoice] sayfamıza gönderebilirsiniz
 
-S. Ne yapabilirim x?
+S. X 'i nasıl yapabilirim?
 
-A. SQL veri ambarı ile geliştirmeye yardımcı olmak için hakkında sorular sorabilirsiniz bizim [Stack Overflow] sayfası. 
+A. Azure SYNAPSE ile geliştirmeye yönelik yardım için [Stack Overflow] sayfamızda soru sorabilirsiniz. 
 
-S. Bir destek bileti nasıl gönderebilirim?
+S. Nasıl yaparım? bir destek bileti mi gönder?
 
-A. [Destek bileti] Azure portalı üzerinden Dosyalanan.
+A. [Destek biletleri] , Azure Portal aracılığıyla dosyalanır.
 
 ## <a name="sql-languagefeature-support"></a>SQL dil/özellik desteği 
 
-S. Hangi veri türleri, SQL veri ambarı destekliyor mu?
+S. Hangi veri türleri destekleniyor?
 
-A. SQL veri ambarı bkz [veri türleri].
+A. Bkz. [veri türleri].
 
-S. Tablo Özellikleri destekliyorsunuz?
+S. Hangi tablo özelliklerini destekliyoruz?
 
-A. SQL veri ambarı birçok özellik desteklese de, bazı desteklenmez ve belgelenen [desteklenmeyen tablo özellikleri].
+A. Birçok özellik desteklenir, desteklenenler desteklenmez ve [Desteklenmeyen tablo özellikleri]belgelenmiştir.
 
-## <a name="tooling-and-administration"></a>Araçlar ve yönetim
+## <a name="tooling-and-administration"></a>Araç ve yönetim
 
-S. Visual Studio veritabanı projelerini desteklemez.
+S. Visual Studio 'da veritabanı projelerini destekliyoruz.
 
-A. Şu anda veritabanı projeleri Visual Studio'da SQL veri ambarı için desteklemiyoruz. Bu özelliği etkinleştirmek için oy dönüştürme yapmak isterseniz, bizim User Voice ziyaret [veritabanı projeleri özellik isteği].
+A. Şu anda Visual Studio 'da veritabanı projelerini desteklemiyoruz. Bu özelliği almak için oy dönüştürmek isterseniz, kullanıcı sesli [Veritabanı projeleri özellik isteği]ziyaret edin.
 
-S. SQL veri ambarı, REST API'lerini destekliyor mu?
+S. SQL Analytics REST API 'Leri destekliyor mu?
 
-A. Evet. SQL veritabanı ile kullanılabilecek en iyi REST işlevselliği de SQL veri ambarı ile kullanılabilir. REST belgeleri sayfaları içinde API bilgi bulabilirsiniz veya [MSDN].
+A. Evet. SQL veritabanıyla birlikte kullanılabilecek çoğu REST işlevi de SQL Analytics ile kullanılabilir. API bilgilerini, REST belge sayfaları veya [MSDN]içinde bulabilirsiniz.
 
 
 ## <a name="loading"></a>Yükleniyor
 
-S. Hangi istemci sürücüleri destekliyorsunuz?
+S. Hangi istemci sürücülerini destekliyoruz?
 
-A. DW sürücü desteği bulunabilir [bağlantı dizeleri] sayfası
+A. DW 'in sürücü desteği [bağlantı dizeleri] sayfasında bulunabilir
 
-S: Hangi dosya biçimlerine PolyBase ile SQL veri ambarı tarafından destekleniyor mu?
+S: PolyBase tarafından hangi dosya biçimleri destekleniyor?
 
-Y: ORC, RC, Parquet ve sınırlandırılmış düz metin
+Y: Orc, RC, Parquet ve düz olarak sınırlandırılmış metin
 
-S: Ne için PolyBase aracılığıyla SQL DW'ye bağlayabilirim? 
+S: PolyBase 'i kullanarak hangi veri kaynaklarına bağlanabilirim? 
 
-Y: [Azure Data Lake Store] ve [Azure depolama BLOB'ları]
+Y: [Azure Data Lake Store] ve [Azure depolama Blobları]
 
-S: Azure depolama Blobları veya ADLS bağlanırken hesaplama itme mümkün mü? 
+S: Azure Storage Bloblarına veya ADLS 'e bağlanılırken hesaplama Işlemi mümkün midir? 
 
-Y: Hayır, SQL DW PolyBase yalnızca depolama bileşenleri etkileşim kurar. 
+Y: Hayır, PolyBase yalnızca depolama bileşenleriyle etkileşime girer. 
 
-S: HDI için bağlayabilirim?
+S: HDI 'ye bağlanabilir miyim?
 
-Y: HDI ADLS ya da WASB HDFS katman olarak kullanabilirsiniz. HDFS katmanınızdaki olarak varsa, bu verileri SQL DW'ye yükleyebilirsiniz. Ancak, itme hesaplama HDI örneği oluşturulamıyor. 
+Y: HDI,,, bir ya da. Bu durumda, bu verileri SQL DW 'ye yükleyebilirsiniz. Ancak, HDI örneğine aşağı itme hesaplaması oluşturamazsınız. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bir bütün olarak SQL veri ambarı hakkında daha fazla bilgi için bkz. bizim [genel bakış] sayfası.
+Azure SYNAPSE hakkında bir bütün olarak daha fazla bilgi için bkz. [genel bakış] sayfası.
 
 
 <!-- Article references -->
 [UserVoice]: https://feedback.azure.com/forums/307516-sql-data-warehouse
 [Bağlantı Dizeleri]: ./sql-data-warehouse-connection-strings.md
 [Stack Overflow]: https://stackoverflow.com/questions/tagged/azure-sqldw
-[Destek bileti]: ./sql-data-warehouse-get-started-create-support-ticket.md
+[Destek biletleri]: ./sql-data-warehouse-get-started-create-support-ticket.md
 [Güvenlik]: ./sql-data-warehouse-overview-manage-security.md
-[Microsoft Uyumluluk]: https://www.microsoft.com/en-us/trustcenter/compliance/complianceofferings
-[Kapasite sınırları]: ./sql-data-warehouse-service-capacity-limits.md
+[Microsoft uyumluluğu]: https://www.microsoft.com/en-us/trustcenter/compliance/complianceofferings
+[Kapasite limitleri]: ./sql-data-warehouse-service-capacity-limits.md
 [veri türleri]: ./sql-data-warehouse-tables-data-types.md
 [Desteklenmeyen tablo özellikleri]: ./sql-data-warehouse-tables-overview.md#unsupported-table-features
 [Azure Data Lake Store]: ./sql-data-warehouse-load-from-azure-data-lake-store.md
-[Azure depolama BLOB'ları]: ./sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md
+[Azure depolama Blobları]: ./sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md
 [Veritabanı projeleri özellik isteği]: https://feedback.azure.com/forums/307516-sql-data-warehouse/suggestions/13313247-database-project-from-visual-studio-to-support-azu
 [MSDN]: https://msdn.microsoft.com/library/azure/mt163685.aspx
-[Genel bakış]: ./sql-data-warehouse-overview-faq.md
+[Genel Bakış]: ./sql-data-warehouse-overview-faq.md

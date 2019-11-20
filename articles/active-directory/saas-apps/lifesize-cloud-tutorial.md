@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi Lifesize bulutla | Microsoft Docs'
-description: Azure Active Directory ve Lifesize bulut arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Lifesize bulutu ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve Lifesize bulutu arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: daveba
 ms.reviewer: barbkess
 ms.assetid: 75fab335-fdcd-4066-b42c-cc738fcb6513
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,227 +16,227 @@ ms.topic: tutorial
 ms.date: 1/4/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f751eb9dfb8ef65bea80993ddbd3a682b1d47111
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e886a1fa3f590ac94dbf088520e6770690ee21ac
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67098051"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73159563"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-lifesize-cloud"></a>Öğretici: Lifesize bulut ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-lifesize-cloud"></a>Öğretici: Lifesize bulutu ile Azure Active Directory tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Lifesize bulut tümleştirme konusunda bilgi edinin.
-Azure AD ile Lifesize bulut tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Lifesize bulutunu Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Lifesize bulutunu Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Lifesize Bulutuna erişimi olan Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) Lifesize buluta oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de, Lifesize bulutuna erişimi olan denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla buluta (çoklu oturum açma) izin vermek için otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesi Lifesize Bulutla yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini, Lifesize bulutu ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik Lifesize bulut çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Etkin çoklu oturum açma aboneliğinden sonra buluta esize
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Lifesize bulutun desteklediği **SP** tarafından başlatılan
+* Lifesize bulutu, **SP** tarafından başlatılan SSO 'yu destekler
 
-* Lifesize bulutun desteklediği **otomatik** kullanıcı sağlama
+* Lifesize bulutu **Otomatik** Kullanıcı sağlamayı destekliyor
 
-## <a name="adding-lifesize-cloud-from-the-gallery"></a>Galeriden Lifesize bulut ekleme
+## <a name="adding-lifesize-cloud-from-the-gallery"></a>Galeriden Lifesize bulutu ekleme
 
-Azure AD'de Lifesize bulut tümleştirmesini yapılandırmak için Lifesize bulut Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Fiesize bulutu 'nın Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden, yönetilen SaaS uygulamaları listenize Fiesize bulutu eklemeniz gerekir.
 
-**Galeriden Lifesize bulut eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden Lifesize bulutu eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **Lifesize bulut**seçin **Lifesize bulut** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna, **Lifesize bulutu**yazın, sonuç panelinden **ömrü bulut** ' ü seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde Lifesize bulut](common/search-new-app.png)
+     ![Sonuç listesinde bulutu yeniden esize](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırdığınız ve Azure AD çoklu oturum açmayı test Lifesize bulutla adlı bir test kullanıcı tabanlı **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ile ilgili kullanıcı Lifesize bulutta arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına bağlı olarak, SIG bulutu ile yapılandırıp test edersiniz.
+Çoklu oturum açma 'nın çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı arasındaki bir bağlantı ilişkisinin, bu bulutta ilgili bir ilişki kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma Lifesize Bulutu ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı ömrü bulutla birlikte yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Lifesize bulut çoklu oturum açmayı yapılandırma](#configure-lifesize-cloud-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Test kullanıcısı Lifesize bulut oluşturma](#create-lifesize-cloud-test-user)**  - kullanıcı Azure AD gösterimini bağlı Lifesize bulutta Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için, **[Lifesize bulutu çoklu oturum açmayı yapılandırın](#configure-lifesize-cloud-single-sign-on)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Kullanıcı Azure AD gösterimine bağlı olan, Lifesize bulutu 'nda Britta Simon 'ın bir karşılığı olacak şekilde, **[Lifesize bulut test kullanıcısı oluşturun](#create-lifesize-cloud-test-user)** .
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma Lifesize Bulutla yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı, ' Lifesize bulutu ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **Lifesize bulut** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **ömrü bulut** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![Lifesize bulut etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier-relay.png)
+    ![Bulut etki alanı ve URL 'Ler çoklu oturum açma bilgilerini lifler](common/sp-identifier-relay.png)
 
-    a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://login.lifesizecloud.com/ls/?acs`
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://login.lifesizecloud.com/ls/?acs`
 
-    b. İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://login.lifesizecloud.com/<companyname>`
+    b. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://login.lifesizecloud.com/<companyname>`
 
-    c. Tıklayın **ek URL'lerini ayarlayın**.
+    c. **Ek URL 'ler ayarla**' ya tıklayın.
 
-    d. İçinde **geçiş durumu** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://webapp.lifesizecloud.com/?ent=<identifier>`
+    d. **Geçiş durumu** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://webapp.lifesizecloud.com/?ent=<identifier>`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL'si, tanımlayıcı ile geçiş durumunu güncelleştirin. İlgili kişi [Lifesize bulut istemci Destek ekibine](https://www.lifesize.com/en/support) oturum açma URL'si ve tanımlayıcı değerlerini ve almak için geçiş durumu değeri SSO yapılandırmasından öğreticinin ilerleyen bölümlerinde açıklanan alabilirsiniz. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI, tanımlayıcı ve geçiş durumuyla güncelleştirin. Oturum açma URL 'SI ve tanımlayıcı değerleri almak için [bulut istemci desteği ekibine](https://www.lifesize.com/en/support) başvurun ve öğreticide daha sonra açıklanan SSO yapılandırmasından geçiş durumu değeri alabilirsiniz. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+5. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. Üzerinde **Lifesize bulut kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. Kullanım **ömrü bulutu ayarla** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-lifesize-cloud-single-sign-on"></a>Lifesize bulut çoklu oturum açmayı yapılandırın
+### <a name="configure-lifesize-cloud-single-sign-on"></a>Lifesize bulutu çoklu oturum açmayı yapılandırma
 
-1. Uygulamanız, yönetici ayrıcalıklarıyla Lifesize bulut uygulamasına oturum açma için yapılandırılmış SSO edinmek için.
+1. Uygulamanız için yapılandırılmış SSO 'yu almak için, yönetici ayrıcalıklarıyla, Lifesize bulut uygulamasında oturum açın.
 
-2. Sağ üst köşede adınıza tıklayın ve ardından **Gelişmiş ayarlar**.
+2. Sağ üst köşedeki ad ' a tıklayın ve ardından **Gelişmiş ayarlar**' a tıklayın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/lifesize-cloud-tutorial/tutorial_lifesizecloud_06.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/lifesize-cloud-tutorial/tutorial_lifesizecloud_06.png)
 
-3. Gelişmiş ayarlar artık tıklayarak **SSO yapılandırma** bağlantı. Bu, Örneğiniz için SSO yapılandırma sayfası açılır.
+3. Gelişmiş ayarlar ' da artık **SSO yapılandırma** bağlantısına tıklayın. Bu işlem, örneğiniz için SSO yapılandırma sayfasını açar.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/lifesize-cloud-tutorial/tutorial_lifesizecloud_07.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/lifesize-cloud-tutorial/tutorial_lifesizecloud_07.png)
 
-4. Artık SSO Yapılandırması kullanıcı Arabirimi aşağıdaki değerleri yapılandırın.
+4. Şimdi SSO yapılandırma Kullanıcı arabiriminde aşağıdaki değerleri yapılandırın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/lifesize-cloud-tutorial/tutorial_lifesizecloud_08.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/lifesize-cloud-tutorial/tutorial_lifesizecloud_08.png)
 
-    a. İçinde **kimlik sağlayıcısını veren** metin değerini yapıştırın **Azure Ad tanımlayıcısı** , Azure Portalı'ndan kopyaladığınız.
+    a. **Kimlik sağlayıcısı veren** metin kutusunda, Azure Portal kopyaladığınız **Azure AD tanımlayıcısının** değerini yapıştırın.
 
-    b.  İçinde **oturum açma URL'si** metin değerini yapıştırın **oturum açma URL'si** , Azure Portalı'ndan kopyaladığınız.
+    b.  **Oturum açma URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
 
-    c. Base-64 kodlanmış sertifikanızı Azure portalından indirdiğiniz Not Defteri'nde açın, içeriğini, panoya kopyalayın ve ardından ona yapıştırın **X.509 sertifikası** metin.
+    c. Azure portal 'den indirilen Not defteri 'nde Base-64 kodlu sertifikanızı açın, içeriğini panonuza kopyalayın ve **X. 509.440 sertifika** metin kutusuna yapıştırın.
   
-    d. Ad metin kutusu için SAML öznitelik eşlemelerini değer olarak girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`
+    d. Ad metin kutusuna ait SAML öznitelik eşlemelerinde değeri `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname` olarak girin.
 
-    e. SAML özniteliği eşlemesinde için **Soyadı** metin kutusuna bir değer olarak girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname`
+    e. **Son ad** metin kutusuna Ilişkin SAML öznitelik eşlemesinde değeri `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname` olarak girin.
 
-    f. SAML özniteliği eşlemesinde için **e-posta** metin kutusuna bir değer olarak girin `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
+    f. **E-posta** metin kutusu Için SAML öznitelik eşlemesinde değeri `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress` olarak girin.
 
-5. Tıklayabilirsiniz yapılandırmayı kontrol etmek için **Test** düğmesi.
+5. Yapılandırmayı denetlemek için, **Test** düğmesine tıklayabilirsiniz.
 
     >[!NOTE]
-    >Başarılı test etmek için Azure AD'de Yapılandırma Sihirbazı'nı tamamlamak ve ayrıca kullanıcılara veya test gerçekleştirebilirsiniz gruplara erişim sağlamak gerekir.
+    >Başarılı bir test için Azure AD 'de Yapılandırma Sihirbazı 'nı doldurmanız ve ayrıca testi gerçekleştirebilen kullanıcılara veya gruplara erişim sağlamanız gerekir.
 
-6. Üzerinde kontrol ederek SSO etkinleştirme **SSO etkinleştirme** düğmesi.
+6. **SSO 'Yu etkinleştir** DÜĞMESINI işaretleyerek SSO 'yu etkinleştirin.
 
-7. Artık tıklayarak **güncelleştirme** böylece tüm ayarları kaydedildi. Bu RelayState değeri oluşturur. Kopyalama metin kutusuna oluşturulan RelayState değeri içinde yapıştırın **geçiş durumu** metin kutusunun altında **Lifesize bulut etki alanı ve URL'ler** bölümü.
+7. Şimdi, tüm ayarların kaydedilmesi için **Güncelleştir** düğmesine tıklayın. Bu, RelayState değerini oluşturur. Metin kutusunda oluşturulan RelayState değerini kopyalayın, bunu, **bulut etki alanı ve URL 'ler** bölümündeki **geçiş durumu** metin kutusuna yapıştırın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma Lifesize buluta erişim vererek kullanmak Britta Simon etkinleştirin.
+Bu bölümde, Lifesize bulutuna erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon özelliğini etkinleştirirsiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **Lifesize bulut**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin, sonra da **ömrü bulutu**' nı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **Lifesize bulut**.
+2. Uygulamalar listesinde, **Lifesize bulutu**' nı seçin.
 
     ![Uygulamalar listesinde Lifesize bulut bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-lifesize-cloud-test-user"></a>Test kullanıcısı Lifesize bulut oluşturma
+### <a name="create-lifesize-cloud-test-user"></a>Lifesize bulut testi Kullanıcı Oluştur
 
-Bu bölümde, Britta Simon Lifesize bulutta adlı bir kullanıcı oluşturun. Otomatik kullanıcı hazırlama Lifesize bulut desteklemiyor. Azure AD, başarılı kimlik doğrulamasından sonra kullanıcı uygulamayı otomatik olarak sağlanır.
+Bu bölümde, Lifesize bulutu 'nda Britta Simon adlı bir Kullanıcı oluşturacaksınız. Lifesize bulutu otomatik Kullanıcı sağlamayı destekler. Azure AD 'de başarılı kimlik doğrulamasından sonra, Kullanıcı uygulamada otomatik olarak temin edilir.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim paneli Lifesize bulut kutucuğa tıkladığınızda, oturum açma sayfası Lifesize bulut uygulamasının almanız gerekir. Burada, kullanıcı adınızı girmeniz gerekir ve bundan sonra yeniden yönlendirilen uygulama giriş sayfasına.
+Erişim panelinde, Lifesize bulut kutucuğuna tıkladığınızda, o bulut uygulamasının oturum açma sayfasını almalısınız. Burada, Kullanıcı adınızı girmeniz ve sonra uygulama giriş sayfasına yönlendirilmeniz gerekir.
 
-Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

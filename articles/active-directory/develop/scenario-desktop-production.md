@@ -1,6 +1,6 @@
 ---
-title: Microsoft kimlik platformu çağrıları API'leri (üretim taşıma) - web, masaüstü uygulaması
-description: Bir masaüstü uygulaması oluşturmayı öğrenin çağrıları veritabanını web API'leri (üretim taşıma)
+title: Web API 'Lerini çağıran masaüstü uygulaması (üretime geçiş)-Microsoft Identity platform
+description: Web API 'Lerini çağıran bir masaüstü uygulaması oluşturmayı öğrenin (üretime geçin)
 services: active-directory
 documentationcenter: dev-center-name
 author: jmprieur
@@ -13,40 +13,42 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 04/18/2019
+ms.date: 10/30/2019
 ms.author: jmprieur
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2343a416bd810792e7267b94395f953aa4f880a1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5331f01c5dc6acf01f567dbe4c332853bf7aa47e
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67111196"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73175557"
 ---
-# <a name="desktop-app-that-calls-web-apis---move-to-production"></a>Web çağıran masaüstü uygulaması API'ler - üretim ortamına taşıyın
+# <a name="desktop-app-that-calls-web-apis---move-to-production"></a>Web API 'Lerini çağıran masaüstü uygulaması-üretime taşı
 
-Bu makalede, uygulamanızı daha da geliştirmek ve üretim ortamına taşımak için Ayrıntılar sunulmaktadır.
+Bu makalede, uygulamanızı daha da geliştirmek ve üretime taşımak için ayrıntılar verilmektedir.
 
-## <a name="handling-errors-in-desktop-applications"></a>Masaüstü uygulamalarındaki hataları işleme
+## <a name="handling-errors-in-desktop-applications"></a>Masaüstü uygulamalarında hataları işleme
 
-Farklı akışlarında (kod parçacıkları gösterildiği gibi) Sessiz akışlar için hataları işlemek öğrendiniz. Ayrıca gördüğünüz gerekli (artımlı onay ve koşullu erişim) etkileşim olduğu durumlar vardır.
+Farklı akışlarda, sessiz akışlar için hataları nasıl işleyeceğinizi öğrendiniz (kod parçacıkları bölümünde gösterildiği gibi). Ayrıca, etkileşimin gerekli olduğu durumlar olduğunu da gördünüz (artımlı izin ve koşullu erişim).
 
-## <a name="how-to-have--the-user-consent-upfront-for-several-resources"></a>Kullanıcı onayı çeşitli kaynaklar için önceden sağlama
+## <a name="how-to-have--the-user-consent-upfront-for-several-resources"></a>Kullanıcı onayını birkaç kaynağın önüne alma
 
 > [!NOTE]
-> Microsoft kimlik platformu, ancak Azure Active Directory (Azure AD) B2C için çeşitli kaynakları Works izninizi almadan. Azure AD B2C kullanıcı onayı yalnızca yönetici onayı destekler.
+> Birkaç kaynağa onay alınması Microsoft Identity platform için geçerlidir, ancak Azure Active Directory (Azure AD) B2C için değildir. Azure AD B2C, Kullanıcı onayını değil yalnızca yönetici onayını destekler.
 
-Microsoft kimlik Platformu (v2.0) uç noktası için çeşitli kaynaklar tek seferde bir belirteç almak üzere izin vermez. Bu nedenle, `scopes` parametresi yalnızca tek bir kaynak için kapsamı içerir. Kullanıcı bazı kaynakları kullanarak önceden toplanmasına onay verir emin olun `extraScopesToConsent` parametresi.
+Microsoft Identity platform (v 2.0) uç noktası aynı anda birkaç kaynak için bir belirteç almanıza izin vermez. Bu nedenle, `scopes` parametresi yalnızca tek bir kaynak için kapsam içerebilir. Kullanıcının `extraScopesToConsent` parametresini kullanarak birkaç kaynağa ön onay vererek emin olabilirsiniz.
 
-Örneğin, iki kaynaklarınız varsa, iki olan her kapsamları:
+Örneğin, iki kaynağınız varsa, her biri iki kapsamı vardır:
 
-- `https://mytenant.onmicrosoft.com/customerapi` -2 kapsamlı `customer.read` ve `customer.write`
-- `https://mytenant.onmicrosoft.com/vendorapi` -2 kapsamlı `vendor.read` ve `vendor.write`
+- `https://mytenant.onmicrosoft.com/customerapi`-2 kapsam `customer.read` ve `customer.write`
+- `https://mytenant.onmicrosoft.com/vendorapi`-2 kapsam `vendor.read` ve `vendor.write`
 
-Kullanmanız gereken `.WithAdditionalPromptToConsent` olan değiştirici `extraScopesToConsent` parametresi.
+`extraScopesToConsent` parametresine sahip `.WithAdditionalPromptToConsent` değiştiricisini kullanmanız gerekir.
 
 Örneğin:
+
+### <a name="in-msalnet"></a>MSAL.NET içinde
 
 ```CSharp
 string[] scopesForCustomerApi = new string[]
@@ -67,17 +69,47 @@ var result = await app.AcquireTokenInteractive(scopesForCustomerApi)
                      .ExecuteAsync();
 ```
 
-Bu çağrı ilke web API'niz için bir erişim belirteci alırsınız.
+### <a name="in-msal-for-ios-and-macos"></a>İOS ve macOS için MSAL içinde
 
-İkinci web API'sini çağırmak gerektiğinde çağırabilirsiniz:
+Amaç-C:
+
+```objc
+NSArray *scopesForCustomerApi = @[@"https://mytenant.onmicrosoft.com/customerapi/customer.read",
+                                @"https://mytenant.onmicrosoft.com/customerapi/customer.write"];
+
+NSArray *scopesForVendorApi = @[@"https://mytenant.onmicrosoft.com/vendorapi/vendor.read",
+                              @"https://mytenant.onmicrosoft.com/vendorapi/vendor.write"]
+
+MSALInteractiveTokenParameters *interactiveParams = [[MSALInteractiveTokenParameters alloc] initWithScopes:scopesForCustomerApi webviewParameters:[MSALWebviewParameters new]];
+interactiveParams.extraScopesToConsent = scopesForVendorApi;
+[application acquireTokenWithParameters:interactiveParams completionBlock:^(MSALResult *result, NSError *error) { /* handle result */ }];
+```
+
+SWIFT
+
+```swift
+let scopesForCustomerApi = ["https://mytenant.onmicrosoft.com/customerapi/customer.read",
+                            "https://mytenant.onmicrosoft.com/customerapi/customer.write"]
+
+let scopesForVendorApi = ["https://mytenant.onmicrosoft.com/vendorapi/vendor.read",
+                          "https://mytenant.onmicrosoft.com/vendorapi/vendor.write"]
+
+let interactiveParameters = MSALInteractiveTokenParameters(scopes: scopesForCustomerApi, webviewParameters: MSALWebviewParameters())
+interactiveParameters.extraScopesToConsent = scopesForVendorApi
+application.acquireToken(with: interactiveParameters, completionBlock: { (result, error) in /* handle result */ })
+```
+
+Bu çağrı size ilk Web API 'SI için bir erişim belirteci alacak.
+
+İkinci Web API 'sini çağırmanız gerektiğinde `AcquireTokenSilent` API 'sini çağırabilirsiniz:
 
 ```CSharp
 AcquireTokenSilent(scopesForVendorApi, accounts.FirstOrDefault()).ExecuteAsync();
 ```
 
-### <a name="microsoft-personal-account-requires-reconsenting-each-time-the-app-is-run"></a>Uygulama her çalıştırıldığında reconsenting kişisel Microsoft hesabı gerektirir.
+### <a name="microsoft-personal-account-requires-reconsenting-each-time-the-app-is-run"></a>Microsoft Kişisel hesabı, uygulamanın her çalıştırılışında reconsenting gerektirir
 
-Microsoft Kişisel hesapları kullanıcılar, her yerel istemci (masaüstü/mobil uygulama) çağrı korunmasına yetki vermek için onay reprompting amaçlanan bir davranış içindir. Yerel istemci kimliği, (aykırı bir gizli dizi kimliklerini kanıtlamak için Microsoft Identity platformuyla exchange gizli istemci uygulaması) kendiliğinden güvenli değil. Bu insecurity tüketici Hizmetleri için kullanıcıdan onayı, her zaman uygulama yetkisi isteyerek azaltmak Microsoft kimlik platformu seçtiniz.
+Microsoft kişisel hesap kullanıcıları için, yetkilendirmede her bir yerel istemcide (masaüstü/mobil uygulama) onay için yeniden sorma, amaçlanan davranıştır. Yerel istemci kimliği, doğal olarak güvenli olmayan bir şekilde (kimlik kanıtlamaları için Microsoft Identity platformu ile gizli dizi olan gizli bir istemci uygulamasının aksine). Microsoft Identity platformu, uygulamanın her yetkilendirildiği her seferinde kullanıcıdan izin vermesini isteyerek tüketici hizmetleri için bu eksik güvenliği azaltmayı tercih seçti.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

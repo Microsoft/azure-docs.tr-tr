@@ -1,157 +1,161 @@
 ---
-title: Mevcut Azure SQL veri ambarı Gen2'ye için geçirme | Microsoft Docs
-description: Var olan bir veri ambarı Gen2'ye ve geçiş için geçirilmesine yönelik yönergeler, bölgeye göre planlayın.
+title: Veri Ambarınızı Gen2 'e geçirin
+description: Var olan bir veri ambarını bölgeye göre Gen2 ve geçiş zamanlaması 'na geçirmeye yönelik yönergeler.
 services: sql-data-warehouse
 author: mlee3gsd
-ms.author: anumjs
+ms.author: anjangsh
 ms.reviewer: jrasnick
 manager: craigg
 ms.assetid: 04b05dea-c066-44a0-9751-0774eb84c689
 ms.service: sql-data-warehouse
 ms.topic: article
-ms.date: 04/03/2019
-ms.openlocfilehash: 3141f3a1d6a9f09261dee4113276af72168e35e8
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 07/22/2019
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 888f50d645c9b3babf95335e434db65423108ccb
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67444699"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73693026"
 ---
-# <a name="upgrade-your-data-warehouse-to-gen2"></a>Veri ambarınız için Gen2'ye yükseltme
+# <a name="upgrade-your-data-warehouse-to-gen2"></a>Veri Ambarınızı Gen2 'ye yükseltme
 
-Microsoft, sürücü giriş düzeyi bir veri ambarı'nı çalıştırmanın maliyeti aşağı yardımcı oluyor.  Alt sorgular zorlu işleyebilmesini katmanları Azure SQL veri ambarı için kullanılabilir işlem. Duyurunun tamamını okuyun [alt işlem katmanı desteği Gen2](https://azure.microsoft.com/blog/azure-sql-data-warehouse-gen2-now-supports-lower-compute-tiers/). Yeni bir teklif, aşağıdaki tabloda belirtildiği bölgelerinde kullanılabilir. Desteklenen bölgeler için mevcut Gen1 veri ambarları için Gen2 üzerinden yükseltilebilir:
+Microsoft, veri ambarı çalıştırmanın giriş düzeyi maliyetinin altına inmesine yardımcı oluyor.  Talep edilen sorguları işleyebilen daha düşük işlem katmanları artık Azure SQL veri ambarı için kullanılabilir. Gen2 için eksiksiz duyuru [daha düşük işlem katmanı desteğini](https://azure.microsoft.com/blog/azure-sql-data-warehouse-gen2-now-supports-lower-compute-tiers/)okuyun. Yeni teklif, aşağıdaki tabloda belirtilen bölgelerde kullanılabilir. Desteklenen bölgeler için, mevcut Gen1 veri ambarları şu iki şekilde Gen2 'e yükseltilebilir:
 
-- **Otomatik yükseltme işlemi:** Hizmet bir bölgede kullanılabilir hemen sonra otomatik yükseltmeler başlamaz.  Otomatik yükseltmeler belirli bir bölgede başlattığınızda, tek tek DW yükseltmeleri sırasında seçilen bakım zamanlamanızı gerçekleşir.
-- [**2. nesil için kendi kendine yükseltme:** ](#self-upgrade-to-gen2) 2. nesil için kendi kendine yükseltme yaparak yükseltme zamanı denetleyebilirsiniz. Bölgeniz henüz desteklenmiyor, desteklenen bir bölgede bir Gen2 örneğine doğrudan bir geri yükleme noktasından geri yükleyebilirsiniz.
+- **Otomatik yükseltme işlemi:** Hizmet bir bölgede kullanılabilir duruma geldiğinde otomatik yükseltmeler başlatılmaz.  Belirli bir bölgede otomatik yükseltmeler başlatıldığında, seçtiğiniz bakım zamanlamalarınız sırasında tek tek DW yükseltmeleri gerçekleşmeyecektir.
+- [**Gen2 'e kendi kendine yükseltme:** ](#self-upgrade-to-gen2) Gen2 'e kendi kendine yükseltme yaparak ne zaman yükselteceğiniz kontrol edebilirsiniz. Bölgeniz henüz desteklenmiyorsa, bir geri yükleme noktasından doğrudan desteklenen bir bölgedeki bir Gen2 örneğine geri yükleyebilirsiniz.
 
-## <a name="automated-schedule-and-region-availability-table"></a>Otomatik zamanlamayı ve bölge kullanılabilirliği tablosu
+## <a name="automated-schedule-and-region-availability-table"></a>Otomatik zamanlama ve bölge kullanılabilirlik tablosu
 
-Aşağıdaki tabloda, bölgeye göre daha düşük 2. nesil işlem katmanını kullanıma sunulacak ve otomatik yükseltmeler başlattığınızda özetler. Tarihleri değişikliğe tabi olduğu. Bölgenizde kullanılabilir duruma geldiğinde tekrar görmek için kontrol edin.
+Aşağıdaki tabloda, alt Gen2 işlem katmanı kullanılabilir olduğunda ve otomatik yükseltmeler başlatıldığında bölge tarafından özetlenmektedir. Tarihler değişebilir. Bölgenizin ne zaman kullanılabilir hale geldiğini görmek için yeniden denetleyin.
 
-\* belirli bir zamanlama bölge için şu anda kullanılamıyor gösterir.
+\* Şu anda bölge için belirli bir zamanlamanın kullanılamadığını gösterir.
 
-| **Bölge** | **Daha düşük Gen2 kullanılabilir** | **Otomatik yükseltmeler başlayın** |
+| **Bölge** | **Düşük Gen2 kullanılabilir** | **Otomatik yükseltmeler başlar** |
 |:--- |:--- |:--- |
-| Avustralya Doğu |Kullanılabilir |1 Haziran 2019 |
-| Avustralya Güneydoğu |Kullanılabilir |1 Mayıs 2019 |
-| Güney Brezilya |Kullanılabilir |1 Haziran 2019 |
-| Orta Kanada |Kullanılabilir |1 Haziran 2019 |
-| Doğu Kanada |\* |\* |
-| Orta ABD |Kullanılabilir |1 Haziran 2019 |
+| Avustralya Doğu |Kullanılabilir |Tamamlama |
+| Avustralya Güneydoğu |Kullanılabilir |Tamamlama |
+| Güney Brezilya |Kullanılabilir |Tamamlama |
+| Orta Kanada |Kullanılabilir |Tamamlama |
+| Doğu Kanada |1 Haziran 2020 |1 Temmuz 2020 |
+| Orta ABD |Kullanılabilir |Tamamlama |
 | Çin Doğu |\* |\* |
-| Çin Doğu 2 |\* |Gen2'ye yalnızca |
+| Çin Doğu 2 |Kullanılabilir |Tamamlama |
 | Çin Kuzey |\* |\* |
-| Çin Kuzey 2 |Kullanılabilir |Gen2'ye yalnızca |
-| Doğu Asya |Kullanılabilir |1 Haziran 2019 |
-| East US |Kullanılabilir |1 Haziran 2019 |
-| Doğu ABD 2 |Kullanılabilir |1 Haziran 2019 |
-| Fransa Orta |\* |1 Haziran 2019 |
+| Çin Kuzey 2 |Kullanılabilir |Tamamlama |
+| Doğu Asya |Kullanılabilir |Tamamlama |
+| Doğu ABD |Kullanılabilir |Tamamlama |
+| Doğu ABD 2 |Kullanılabilir |Tamamlama |
+| Fransa Orta |Kullanılabilir |Devam eden |
 | Almanya Orta |\* |\* |
-| Almanya Orta Batı |1 Eylül 2019|2 Ocak 2020 |
-| Hindistan Orta |Kullanılabilir |1 Haziran 2019 |
-| Hindistan Güney |Kullanılabilir |1 Haziran 2019 |
-| Japonya Doğu |Kullanılabilir |1 Haziran 2019 |
-| Japonya Batı |Kullanılabilir |1 Mayıs 2019 |
-| Kore Orta |Kullanılabilir |1 Haziran 2019 |
-| Kore Güney |Kullanılabilir |1 Mayıs 2019 |
-| Orta Kuzey ABD |Kullanılabilir |1 Mayıs 2019 |
-| Kuzey Avrupa |Kullanılabilir |1 Haziran 2019 |
-| Orta Güney ABD |Kullanılabilir |1 Haziran 2019 |
-| Güneydoğu Asya |Kullanılabilir |1 Haziran 2019 |
-| Birleşik Krallık Güney |Kullanılabilir, 2019 |1 Haziran 2019 |
-| Birleşik Krallık Batı |\*|\* |
-| Batı Orta ABD |2 Eylül 2019 |2 Ocak 2020|
-| Batı Avrupa |Kullanılabilir |1 Haziran 2019 |
-| Batı ABD |Kullanılabilir |1 Haziran 2019 |
-| Batı ABD 2 |Kullanılabilir |1 Haziran 2019 |
+| Almanya Orta Batı |1 Eylül 2019|1 Ekim 2019 |
+| Hindistan Orta |Kullanılabilir |Tamamlama |
+| Hindistan Güney |Kullanılabilir |Tamamlama |
+| Hindistan Batı |1 Temmuz 2019 |Devam eden |
+| Japonya Doğu |Kullanılabilir |Tamamlama |
+| Japonya Batı |Kullanılabilir |Tamamlama |
+| Kore Orta |Kullanılabilir |Tamamlama |
+| Kore Güney |Kullanılabilir |Tamamlama |
+| Orta Kuzey ABD |Kullanılabilir |Tamamlama |
+| Kuzey Avrupa |Kullanılabilir |Tamamlama |
+| Güney Afrika Kuzey |12 Temmuz 2019 |Tamamlama |
+| Orta Güney ABD |Kullanılabilir |Tamamlama |
+| Güneydoğu Asya |Kullanılabilir |Tamamlama |
+| BAE Kuzey |20 Temmuz 2019 |Tamamlama |
+| Birleşik Krallık Güney |Kullanılabilir |Devam eden |
+| Birleşik Krallık Batı |Kullanılabilir |Devam eden |
+| Batı Orta ABD |1 Kasım 2019 |1 Aralık 2019|
+| Batı Avrupa |Kullanılabilir |Tamamlama |
+| Batı ABD |Kullanılabilir |Tamamlama |
+| Batı ABD 2 |Kullanılabilir |Tamamlama |
 
 ## <a name="automatic-upgrade-process"></a>Otomatik yükseltme işlemi
 
-Yukarıdaki kullanılabilirlik grafiğinde bağlı olarak, biz otomatik yükseltmeler Gen1 örnekleriniz için zamanlama. Veri ambarının kullanılabilirliğine herhangi beklenmeyen kesintiler önlemek için otomatik yükseltmeler sırasında bakım zamanlamanızı zamanlanacak. Gen2'ye otomatik yükseltilen bölgede yeni bir Gen1 örneği oluşturma özelliği devre dışı bırakılır. Otomatik yükseltme tamamlandıktan sonra Gen1 kullanımdan kaldırılacaktır. Zamanlama hakkında daha fazla bilgi için bkz. [bakım zamanlaması görüntüleyin](viewing-maintenance-schedule.md)
+Yukarıdaki kullanılabilirlik grafiğine bağlı olarak, Gen1 örneklerinizin otomatik yükseltmelerini planlıyoruz. Veri ambarının kullanılabilirliğine ilişkin beklenmeyen kesintilere engel olmak için, otomatik yükseltmeler bakım zamanlamanız sırasında zamanlanır. Yeni bir Gen1 örneği oluşturma özelliği, Gen2 'ye otomatik olarak yükseltme yapılmakta olan bölgelerde devre dışı bırakılacak. Otomatik yükseltmeler tamamlandıktan sonra Gen1 kullanımdan kalkacaktır. Zamanlamalar hakkında daha fazla bilgi için bkz. [bakım zamanlaması görüntüleme](viewing-maintenance-schedule.md)
 
-Biz, veri ambarı yeniden başlatmanız gibi yükseltme işlemi bağlantısı (yaklaşık 5 dakika) kısa bir bırakma içerir.  Veri ambarınız yeniden başlatıldıktan sonra tam olarak kullanılmaya hazır olacaktır. Ancak, arka planda veri dosyalarını yükseltmek yükseltme işlemi devam ederken, aslında performansta düşüş karşılaşabilirsiniz. Performans düşüşü için toplam süreyi, veri dosyalarının boyutuna bağlı olarak değişir.
+Yükseltme işlemi, veri Ambarınızı yeniden başlatdığımızda bağlantı (yaklaşık 5 dakika) ile kısa bir yer içerir.  Veri ambarınız yeniden başlatıldıktan sonra, tam kullanıma açık olacaktır. Ancak, yükseltme işlemi arka planda veri dosyalarını yükseltmeye devam ederken performans düşüklüğüne karşılaşabilirsiniz. Performans düşüşünün toplam süresi veri dosyalarınızın boyutuna bağlı olarak değişiklik gösterir.
 
-Çalıştırarak veri dosyası yükseltme sürecini hızlandırabilir [Alter Index yeniden](sql-data-warehouse-tables-index.md) yeniden başladıktan sonra daha büyük bir SLO ve kaynak sınıfı kullanarak tüm birincil columnstore tabloları.
-
-> [!NOTE]
-> ALTER INDEX yeniden çevrimdışı bir işlemdir ve tabloları yeniden tamamlanana kadar kullanılamaz.
-
-## <a name="self-upgrade-to-gen2"></a>Kendi kendine için Gen2'ye yükseltme
-
-Var olan bir Gen1 veri ambarı üzerinde aşağıdaki adımları izleyerek kendi kendine yükseltmek seçebilirsiniz. Kendi kendine yükseltmeyi seçerseniz bölgenizde otomatik yükseltme işlemine başlamadan önce tamamlamalısınız. Bunun yapılması, çakışmaya neden otomatik yükseltmeleri riskini önlemek sağlar.
-
-Kendi kendine yükseltme yapılırken iki seçenek vardır.  Ya da, geçerli veri ambarı yerinde yükseltme yapabilirsiniz veya bir Gen1 veri ambarı Gen2 örneğine geri yükleyebilirsiniz.
-
-- [Yerinde yükseltme](upgrade-to-latest-generation.md) -bu seçenek mevcut Gen1 veri ambarınız için Gen2'ye yükseltir. Biz, veri ambarı yeniden başlatmanız gibi yükseltme işlemi bağlantısı (yaklaşık 5 dakika) kısa bir bırakma içerir.  Veri ambarınız yeniden başlatıldıktan sonra tam olarak kullanılmaya hazır olacaktır. Yükseltme sırasında sorunlarla karşılaşırsanız, açık bir [destek isteği](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-get-started-create-support-ticket) ve "Gen2'ye yükseltme" olası nedeni olarak başvuru.
-- [Geri yükleme noktasından yükseltme](sql-data-warehouse-restore.md) - geçerli Gen1 veri ambarınıza bir kullanıcı tanımlı bir geri yükleme noktası oluşturma ve sonra da doğrudan bir Gen2 örneğine geri yükleyin. Var olan Gen1 veri ambarı yerinde kalır. Geri yükleme tamamlandıktan sonra Gen2 veri Ambarınızı tamamen kullanılabilir olacaktır.  Geri yüklenen Gen2 örneğinde tüm sınama ve doğrulama işlemleri gerçekleştirdikten sonra özgün Gen1 örneği silinebilir.
-
-   - 1\. adım: Azure portalından [bir kullanıcı tanımlı bir geri yükleme noktası oluşturma](sql-data-warehouse-restore.md#create-a-user-defined-restore-point-using-the-azure-portal).
-   - 2\. adım: Öğesinden geri yüklenirken kullanıcı tanımlı bir geri yükleme noktası, "performans düzeyi" tercih edilen Gen2 katmanınızı ayarlayın.
-
-Arka planda veri dosyalarını yükseltmek yükseltme işlemi devam ederken, bir süre içinde performans düşüşü karşılaşabilirsiniz. Performans düşüşü için toplam süreyi, veri dosyalarının boyutuna bağlı olarak değişir.
-
-Arka plan veri geçişi işlemini hızlandırmak için hemen veri taşıma çalıştırarak zorlayabilirsiniz [Alter Index yeniden](sql-data-warehouse-tables-index.md) tüm birincil columnstore tabloları, daha büyük bir SLO ve kaynak sınıfı sorgulama.
+Ayrıca, yeniden başlatmanın ardından daha büyük bir SLO ve kaynak sınıfı kullanarak tüm birincil columnstore tablolarında [alter INDEX REBUILD](sql-data-warehouse-tables-index.md) ' i çalıştırarak veri dosyası yükseltme işlemini de hızlandırabilir.
 
 > [!NOTE]
-> ALTER INDEX yeniden çevrimdışı bir işlemdir ve tabloları yeniden tamamlanana kadar kullanılamaz.
+> Alter INDEX REBUILD çevrimdışı bir işlemdir ve tablolar yeniden oluşturma tamamlanana kadar kullanılamaz.
 
-Veri Ambarınızda herhangi bir sorunla karşılaşırsanız oluşturma bir [destek isteği](sql-data-warehouse-get-started-create-support-ticket.md) ve "Gen2'ye yükseltme" olası nedeni olarak başvuru.
+## <a name="self-upgrade-to-gen2"></a>Gen2 'e kendi kendine yükseltme
 
-Daha fazla bilgi için [yükseltmek için 2. nesil](upgrade-to-latest-generation.md).
+Mevcut bir Gen1 veri ambarında bu adımları izleyerek kendi kendine yükseltmeyi seçebilirsiniz. Kendi kendine yükseltmeyi seçerseniz, bölgenizde otomatik yükseltme işlemi başlamadan önce bunu tamamlamalısınız. Bunun yapılması, bir çakışmaya neden olan otomatik yükseltmelerin riskini önlemenize olanak sağlar.
+
+Kendi kendine yükseltme yaparken iki seçenek vardır.  Geçerli veri Ambarınızı yerinde yükseltebilir ya da bir Gen1 veri ambarını bir Gen2 örneğine geri yükleyebilirsiniz.
+
+- [Yerinde yükseltme](upgrade-to-latest-generation.md) -Bu seçenek, var olan Gen1 veri Ambarınızı Gen2 'e yükseltir. Yükseltme işlemi, veri Ambarınızı yeniden başlatdığımızda bağlantı (yaklaşık 5 dakika) ile kısa bir yer içerir.  Veri ambarınız yeniden başlatıldıktan sonra, tam kullanıma açık olacaktır. Yükseltme sırasında sorunlarla karşılaşırsanız, olası neden olarak bir [destek isteği](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-get-started-create-support-ticket) ve "Gen2 Upgrade" başvurusu açın.
+- [Geri yükleme noktasından Yükselt](sql-data-warehouse-restore.md) -geçerli Gen1 veri Ambarınızda Kullanıcı tanımlı bir geri yükleme noktası oluşturun ve ardından doğrudan bir Gen2 örneğine geri yükleyin. Mevcut Gen1 veri ambarı yerinde kalır. Geri yükleme tamamlandıktan sonra, Gen2 veri ambarınızın kullanımı tamamen kullanılabilir olacaktır.  Geri yüklenen Gen2 örneğinde tüm test ve doğrulama süreçlerini çalıştırdıktan sonra, özgün Gen1 örneği silinebilir.
+
+   - 1\. Adım: Azure portal, [Kullanıcı tanımlı bir geri yükleme noktası oluşturun](sql-data-warehouse-restore-active-paused-dw.md#restore-an-existing-data-warehouse-through-the-azure-portal).
+   - 2\. Adım: Kullanıcı tanımlı bir geri yükleme noktasından geri yükleme yaparken, "performans düzeyi" ni tercih ettiğiniz Gen2 katmanına ayarlayın.
+
+Yükseltme işlemi arka planda veri dosyalarını yükseltmeye devam ederken bir süre için performansta düşüş yaşayabilirsiniz. Performans düşüşünün toplam süresi veri dosyalarınızın boyutuna bağlı olarak değişiklik gösterir.
+
+Arka plan veri geçiş sürecini hızlandırmak için, daha büyük bir SLO ve kaynak sınıfında sorguladığınız tüm birincil columnstore tablolarında [alter INDEX REBUILD](sql-data-warehouse-tables-index.md) ' i çalıştırarak veri hareketini hemen zorlayabilirsiniz.
+
+> [!NOTE]
+> Alter INDEX REBUILD çevrimdışı bir işlemdir ve tablolar yeniden oluşturma tamamlanana kadar kullanılamaz.
+
+Veri Ambarınızla ilgili herhangi bir sorunla karşılaşırsanız, olası neden olarak bir [destek isteği](sql-data-warehouse-get-started-create-support-ticket.md) oluşturun ve "Gen2 Upgrade" başvurusu yapın.
+
+Daha fazla bilgi için bkz. [Gen2 sürümüne yükseltme](upgrade-to-latest-generation.md).
 
 ## <a name="migration-frequently-asked-questions"></a>Geçiş hakkında sık sorulan sorular
 
-**S: Gen2 Gen1 aynı maliyeti?**
+**S: Gen2 maliyeti Gen1 ile aynı mı?**
 
-- Y: Evet.
+- C: Evet.
 
-**S: Yükseltmeler nasıl my Otomasyon betikleri etkiler mi?**
+**S: yükseltmeler Otomasyon betiklerimi nasıl etkiler?**
 
-- Y: Bir hizmet düzeyi amacı başvuran tüm otomasyon betiği Gen2'ye denk karşılık gelecek şekilde değiştirilmelidir.  Ayrıntıları görmek [burada](upgrade-to-latest-generation.md#sign-in-to-the-azure-portal).
+- Y: bir hizmet düzeyi hedefine başvuran tüm otomasyon betikleri, Gen2 eşdeğerine karşılık olacak şekilde değiştirilmelidir.  [Ayrıntılara bakın](upgrade-to-latest-generation.md#sign-in-to-the-azure-portal).
 
-**S: Nasıl kendi kendine yükseltme normalde kadar sürer?**
+**S: kendi kendini yükseltme ne kadar sürer?**
 
-- Y: Yerinde yükseltme veya geri yükleme noktasından yükseltin.  
-   - Yerinde yükseltme, veri ambarınızın anlık olarak duraklatma ve sürdürme neden olur.  Veri ambarı çevrimiçi durumdayken arka plan işlemi devam eder.  
-   - Yükseltme tam geri yükleme işleminde geçer çünkü bir geri yükleme noktası yükseltiyorsanız uzun sürer.
+- Y: bir geri yükleme noktasından yerinde yükseltme yapabilir veya yükseltebilirsiniz.  
+   - Yerinde yükseltme, veri ambarınızın geçici olarak duraklamasına ve sürdürülmesine neden olur.  Veri ambarı çevrimiçi olduğunda bir arka plan işlemi devam edecektir.  
+   - Bir geri yükleme noktası üzerinden yükseltiyorsanız, yükseltme tam geri yükleme işlemini yapacağı için daha uzun sürer.
 
-**S: Otomatik yükseltme ne kadar sürer?**
+**S: otomatik yükseltme ne kadar sürer?**
 
-- Y: Gerçek kapalı kalma süresi yükseltme için yalnızca, duraklatma ve sürdürme 5-10 dakika arasında hizmet için gereken zamanı gelmiştir. Kısa kapalı kalma süresini sonra bir arka plan işlemi, depolama geçişi çalışır. Arka plan işlemi süreyi veri Ambarınızı boyutuna bağlıdır.
+- Y: yükseltmenin gerçek kapalı kalma süresi yalnızca hizmeti duraklatma ve devam etmek için gereken süredir ve 5 ila 10 dakika arasındadır. Kısa bir kapalı kalma süresinin ardından arka plan işlemi depolama geçişini çalıştırır. Arka plan işleminin süresi veri ambarınızın boyutuna bağlıdır.
 
-**S: Ne zaman bu otomatik yükseltme gerçekleşir?**
+**S: Bu otomatik yükseltme gerçekleşsin mi?**
 
-- Y: Bakım zamanlaması sırasında. Seçilen bakım zamanlamanızı yararlanarak işletmenizi aksamasıyla en aza indirirsiniz.
+- A: bakım zamanlamanız sırasında. Seçtiğiniz bakım zamanlamalarınızın yararlanmak, işletmenizin kesintiye uğramasını en aza indirir.
 
-**S: Yükseltme işlemi arka planda takılmış gibi görünüyor. varsa ne yapmalıyım?**
+**S: arka plan yükseltme sürecim takılı görünüyorsa ne yapmam gerekir?**
 
- - Y: Columnstore tabloları'bir reindex tetiklersiniz. Tablosu, ancak bu işlem sırasında çevrimdışı olacağını unutmayın.
+ - Y: columnstore tablolarınızın bir yeniden kümesini başlatın. Bu işlem sırasında tablonun yeniden dizin oluşturma işleminin çevrimdışı olacağını unutmayın.
 
-**S: Hizmet düzeyi hedefi varsa ne Gen2 yok üzerinde Gen1 mı var?**
-- Y: DW600 veya DW1200 Gen1 üzerinde çalıştırıyorsanız, 2. nesil daha fazla bellek, kaynakları ve Gen1 daha yüksek performans sağlar. bu yana DW500c veya DW1000c sırasıyla kullanmak için önerilir.
+**S: Gen1 üzerinde Gen2 hizmet düzeyi hedefi yoksa ne olursa?**
+- Y: Gen1 üzerinde DW600 veya DW1200 çalıştırıyorsanız, DW1000c daha fazla bellek, kaynak ve daha yüksek performans olduğundan Gen2 sırasıyla DW500c veya Gen1 kullanılması önerilir.
 
-**S: Coğrafi yedekleme devre dışı bırakabilirim?**
-- Y: Hayır. Coğrafi yedekleme, verilerinizi korumak için bir kurumsal özellik bir bölge kullanılamaz hale gelmesi durumunda kullanılabilirlik ambar ' dir. Açık bir [destek isteği](sql-data-warehouse-get-started-create-support-ticket.md) daha fazla ilgili endişeleriniz varsa.
+**S: coğrafi yedeklemeyi devre dışı bırakabilir miyim?**
+- Y: Hayır. Coğrafi yedekleme, bir bölgenin kullanılamaz duruma gelmesi durumunda veri ambarı kullanılabilirliğinin korunmasının bir kurumsal özelliğidir. Daha fazla endişeniz varsa bir [destek isteği](sql-data-warehouse-get-started-create-support-ticket.md) açın.
 
-**S: T-SQL söz dizimini Gen1 ve 2. nesil arasında bir fark var mı?**
+**S: T-SQL sözdiziminde gen1 ve Gen2 arasında bir fark var mı?**
 
-- Y: Gen2'ye Gen1 öğesinden T-SQL dil sözdiziminde bir değişiklik yoktur.
+- Y: T-SQL dil sözdiziminde Gen1 ile Gen2 arasında bir değişiklik yoktur.
 
-**S: Gen2 bakım Windows destekliyor mu?**
+**S: Gen2, bakım pencerelerini destekliyor mu?**
 
-- Y: Evet.
+- C: Evet.
 
-**S: My bölge yükseltildikten sonra yeni bir Gen1 örneği oluşturabilir kalacağım?**
+**S: bölgem yükseltildikten sonra yeni bir Gen1 örneği oluşturabileceksiniz mi?**
 
-- Y: Hayır. Bir bölge yükseltildikten sonra yeni Gen1 örnekleri oluşturma devre dışı bırakılır.
+- Y: Hayır. Bir bölge yükseltildikten sonra, yeni Gen1 örneklerinin oluşturulması devre dışı bırakılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Yükseltme adımları](upgrade-to-latest-generation.md)
 - [Bakım pencereleri](maintenance-scheduling.md)
 - [Kaynak sistem durumu İzleyicisi](https://docs.microsoft.com/azure/service-health/resource-health-overview)
-- [Bir Geçişe başlamadan önce gözden geçirin](upgrade-to-latest-generation.md#before-you-begin)
-- [Yerinde yükseltme ve geri yükleme noktasından yükseltme](upgrade-to-latest-generation.md)
-- [Bir kullanıcı tanımlı bir geri yükleme noktası oluştur](sql-data-warehouse-restore.md#restore-through-the-azure-portal)
-- [2. nesil için geri yüklemeyi öğreneceksiniz](sql-data-warehouse-restore.md#restore-an-active-or-paused-database-using-the-azure-portal)
-- [SQL veri ambarı destek isteği açın](https://go.microsoft.com/fwlink/?linkid=857950)
+- [Geçişe başlamadan önce gözden geçirin](upgrade-to-latest-generation.md#before-you-begin)
+- [Bir geri yükleme noktasından yerinde yükseltme ve yükseltme](upgrade-to-latest-generation.md)
+- [Kullanıcı tanımlı geri yükleme noktası oluşturma](sql-data-warehouse-restore-points.md)
+- [Gen2 'e geri yüklemeyi öğrenin](sql-data-warehouse-restore-active-paused-dw.md#restore-an-existing-data-warehouse-through-the-azure-portal)
+- [Bir SQL veri ambarı destek isteği açın](https://go.microsoft.com/fwlink/?linkid=857950)

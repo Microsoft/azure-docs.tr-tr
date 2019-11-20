@@ -1,6 +1,6 @@
 ---
 title: Azure Service Fabric destek seçenekleri hakkında bilgi edinin | Microsoft Docs
-description: Azure Service Fabric küme sürümleri desteklenir ve dosya bağlantılarını bilet desteği
+description: Desteklenen Azure Service Fabric küme sürümleri ve dosya desteği biletleri bağlantıları
 services: service-fabric
 documentationcenter: .net
 author: pkcsf
@@ -14,66 +14,66 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 8/24/2018
 ms.author: pkc
-ms.openlocfilehash: 667ee6a49238c1ecaabec631cb72804b0c4b2323
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: ac36b1a538d5899613e19f157695d0bc333d9ece
+ms.sourcegitcommit: 13d5eb9657adf1c69cc8df12486470e66361224e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67304249"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68679053"
 ---
 # <a name="azure-service-fabric-support-options"></a>Azure Service Fabric destek seçenekleri
 
-Uygulama iş yükleri çalıştıran Service Fabric kümeleriniz için uygun destek sunmak için biz sizin için çeşitli seçenekleri ayarladınız. Gerekli destek düzeyini ve sorunun önem derecesine bağlı olarak, uygun seçenekleri seçin alın. 
+Uygulama iş yüklerinizi çalıştırdığınız Service Fabric kümeleriniz için uygun desteği sunmak üzere, sizin için çeşitli seçenekler ayarladık. Gerekli destek düzeyine ve sorunun önem derecesine bağlı olarak doğru seçenekleri seçmeniz gerekir. 
 
-## <a name="report-production-issues-or-request-paid-support-for-azure"></a>Üretim sorun bildirin veya Azure için Ücretli destek isteği
+## <a name="report-production-issues-or-request-paid-support-for-azure"></a>Azure için üretim sorunlarını bildirme veya ücretli destek isteme
 
-Azure'da dağıtılan Service Fabric kümenizdeki sorunları raporlama için bir destek bileti açın [Azure portalında](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) veya [Microsoft destek portalı](https://support.microsoft.com/oas/default.aspx?prid=16146).
+Azure üzerinde dağıtılan Service Fabric kümenizdeki sorunları raporlamak için, Azure portal veya [Microsoft Destek Portalı](https://support.microsoft.com/oas/default.aspx?prid=16146) ['nda](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) destek için bir bilet açın.
 
 Daha fazla bilgi:
  
-- [Azure için Microsoft desteğine](https://azure.microsoft.com/support/plans/?b=16.44).
-- [Microsoft premier desteği](https://support.microsoft.com/en-us/premier).
+- [Azure Için Microsoft desteği](https://azure.microsoft.com/support/plans/?b=16.44).
+- [Microsoft Premier desteği](https://support.microsoft.com/en-us/premier).
 
 > [!Note]
-> Bronz güvenilirlik katmanı üzerinde çalıştıran kümeler yalnızca test iş yüklerini çalıştırmanıza olanak tanır. Bronz güvenilirlik üzerinde çalışan bir küme ile ilgili sorun yaşıyorsanız, Microsoft destek ekibi, sorunu giderme de yardımcı olur, ancak kök neden analizi gerçekleştirmez. Lütfen [güvenilirliği kümenin](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-reliability-characteristics-of-the-cluster) daha fazla ayrıntı için.
+> Bir bronz güvenilirlik katmanında veya tek düğümlü kümede çalışan kümeler yalnızca test iş yüklerini çalıştırmanıza izin verir. Bronz güvenilirlik veya tek düğümlü küme üzerinde çalışan bir küme ile ilgili sorunlarla karşılaşırsanız, Microsoft destek ekibi bu sorunu azaltmaya yardımcı olur, ancak bir kök neden analizi gerçekleştirmeyecektir. Daha fazla ayrıntı için lütfen [kümenin güvenilirlik özelliklerine](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-reliability-characteristics-of-the-cluster) bakın.
 >
-> Üretime hazır bir küme için gerekli olan hakkında daha fazla bilgi için bkz [üretim hazırlık denetim](https://docs.microsoft.com/azure/service-fabric/service-fabric-production-readiness-checklist).
+> Üretime hazır bir küme için gerekli olanlar hakkında daha fazla bilgi için lütfen [Üretim hazırlığı denetim listesine](https://docs.microsoft.com/azure/service-fabric/service-fabric-production-readiness-checklist)bakın.
 
 <a id="getlivesitesupportonprem"></a>
 
-## <a name="report-production-issues-or-request-paid-support-for-standalone-service-fabric-clusters"></a>Üretim sorun bildirin veya tek başına Service Fabric kümeleri için Ücretli destek isteği
+## <a name="report-production-issues-or-request-paid-support-for-standalone-service-fabric-clusters"></a>Üretim sorunlarını bildirme veya tek başına Service Fabric kümeleri için ücretli destek isteme
 
-Service Fabric kümenizdeki sorunları dağıtılan şirket içi raporlama veya diğer bulutlarda bir profesyonel destek bileti açmak [Microsoft destek portalı](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview).
+Şirket içinde veya diğer bulutlarda dağıtılan Service Fabric kümenizdeki sorunları raporlamak için, [Microsoft Destek Portalı](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)'nda profesyonel destek için bir bilet açın.
 
 Daha fazla bilgi:
 
-- [Şirket içi Microsoft profesyonel destek](https://support.microsoft.com/en-us/gp/offerprophone?wa=wsignin1.0).
-- [Microsoft premier desteği](https://support.microsoft.com/en-us/premier).
+- Şirket [içi Için Microsoft 'Tan profesyonel destek](https://support.microsoft.com/en-us/gp/offerprophone?wa=wsignin1.0).
+- [Microsoft Premier desteği](https://support.microsoft.com/en-us/premier).
 
-## <a name="report-azure-service-fabric-issues"></a>Rapor Azure Service Fabric sorunları
+## <a name="report-azure-service-fabric-issues"></a>Azure Service Fabric sorunlarını raporla
 
-Service Fabric sorunları raporlama için GitHub deposuna'kurmak ayarladınız.  Biz de etkin bir şekilde aşağıdaki forumları izlemekte olduğunuz.
+Service Fabric sorunları bildirmek için bir GitHub deposu ayarladık.  Ayrıca, aşağıdaki forumları etkin bir şekilde izliyoruz.
 
 ### <a name="github-repo"></a>GitHub deposu 
 
-Azure Service Fabric sorunların rapor [Service Fabric sorunların git deposu](https://github.com/Azure/service-fabric-issues). Bu deponun sorunları küçük özellik istekleri yapmak için Azure Service Fabric ile izleme ve raporlama için tasarlanmıştır. **Bu raporda Canlı site sorunlarıyla kullanmayın**.
+[Service Fabric sorunları git](https://github.com/Azure/service-fabric-issues)deposunda Azure Service Fabric sorunlarını raporla. Bu depo, Azure Service Fabric ile ilgili sorunları raporlama ve izleme ve küçük özellik istekleri yapma amaçlıdır. **Canlı site sorunlarını bildirmek için bunu kullanmayın**.
 
-### <a name="stackoverflow-and-msdn-forums"></a>StackOverflow ve MSDN Forumları
+### <a name="stackoverflow-and-msdn-forums"></a>StackOverflow ve MSDN forumları
 
-[StackOverflow üzerinde Service Fabric etiketi][stackoverflow] and the [Service Fabric forum on MSDN][msdn-forum] olan en iyi platform nasıl çalıştığını ve belirli görevlerle nasıl gerçekleştirebileceğiniz hakkında sorular sormak için kullanılır.
+[StackOverflow üzerindeki Service Fabric etiketi][stackoverflow] ve [MSDN 'deki Service Fabric Forumu][msdn-forum] , platformun nasıl çalıştığı ve bununla ilgili görevleri nasıl gerçekleştirebileceğiniz hakkında sorular sormak için en iyi seçenektir.
 
 ### <a name="azure-feedback-forum"></a>Azure geri bildirim Forumu
 
-[Azure Service Fabric için geri bildirim Forumu][uservoice-forum] sahip olduğunuz ürün için size en popüler isteklerini gözden geçirirken büyük özellik fikirleri, uzun vadeli planlama bizim Orta parçası olan göndermek için en iyi yerdir. Topluluk içinde önerilerinizi desteği rally etmenizi öneririz.
+[Service Fabric Için Azure geri bildirim Forumu][uservoice-forum] , en popüler istekleri bizim merkezimizin uzun dönem planlamasına bir parçası olduğu için, ürün için sahip olduğunuz büyük özellik fikirlerini göndermek için en iyi yerdir. Topluluk içindeki önerileriniz için bir düzeyde destek geçirmenizi öneririz.
 
-## <a name="service-fabric-preview-versions---unsupported-for-production-use"></a>Service Fabric Önizleme sürümleri üretim kullanımı için desteklenmeyen-
+## <a name="service-fabric-preview-versions---unsupported-for-production-use"></a>Service Fabric önizleme sürümleri-üretim kullanımı için desteklenmez
 
-Zaman zaman, Önizleme kullanıma sunulur, geri bildirim istiyoruz önemli özellikleri olan sürümler sürüm. Bu önizleme sürümleri, yalnızca test amacıyla kullanılmalıdır. Üretim kümenizi her zaman desteklenen ve kararlı bir Service Fabric sürümü çalıştırıyor olmalıdır. Bir önizleme sürümü her zaman bir 255 büyük ve küçük sürüm numarasıyla başlar. Örneğin, bir Service Fabric sürümü 255.255.5703.949 görürseniz, bu sürümü yalnızca test kümeleri kullanılır ve önizleme aşamasındadır. Bu önizleme sürümleri üzerinde de duyurulur [Service Fabric ekibi blogu](https://blogs.msdn.microsoft.com/azureservicefabric) ve ayrıntıları dahil edilen özellikler üzerinde sahip olacaktır.
-Bu önizleme sürümleri için Ücretli destek seçeneği yoktur. Altında listelenen seçeneklerden birini kullanın [rapor Azure Service Fabric sorunları](https://docs.microsoft.com/azure/service-fabric/service-fabric-support#report-azure-service-fabric-issues) soru sormak veya geri bildirim sağlamak için.
+Zaman zaman, önizleme olarak yayınlanan, geri bildirimde bulunmak istediğimiz önemli özelliklere sahip sürümleri yayınlarız. Bu önizleme sürümleri yalnızca test amacıyla kullanılmalıdır. Üretim kümeniz, her zaman desteklenen, kararlı bir Service Fabric sürümü çalıştırıyor olmalıdır. Önizleme sürümü her zaman büyük ve küçük sürüm 255 ile başlar. Örneğin, bir Service Fabric sürüm 255.255.5703.949 görürseniz, bu yayın sürümü yalnızca test kümelerinde kullanılır ve önizlemededir. Bu önizleme yayınları Ayrıca [Service Fabric ekip blogundan](https://blogs.msdn.microsoft.com/azureservicefabric) duyurulur ve dahil edilen özelliklerle ilgili ayrıntıları sağlayacaktır.
+Bu önizleme sürümleri için ücretli destek seçeneği yoktur. Soru sormak veya geri bildirim sağlamak için [Azure Service Fabric sorunlarını raporla](https://docs.microsoft.com/azure/service-fabric/service-fabric-support#report-azure-service-fabric-issues) altında listelenen seçeneklerden birini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Service Fabric desteklenen sürümler](service-fabric-versions.md)
+[Desteklenen Service Fabric sürümleri](service-fabric-versions.md)
 
 <!--references-->
 [msdn-forum]: https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureServiceFabric

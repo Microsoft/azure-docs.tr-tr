@@ -1,66 +1,66 @@
 ---
-title: Azure sanal ağ hizmet uç noktası'nı kullanarak bir Azure Cosmos DB hesabı güvenli erişim
-description: Bu belgede, sanal ağ ve alt ağ erişim denetimi için bir Azure Cosmos hesap hakkında açıklanmaktadır.
+title: Azure sanal ağ hizmeti uç noktası kullanarak bir Azure Cosmos DB hesabına güvenli erişim
+description: Bu belge, bir Azure Cosmos hesabı için sanal ağ ve alt ağ erişim denetimi hakkında açıklanmaktadır.
 author: kanshiG
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/23/2019
 ms.author: govindk
 ms.reviewer: sngun
-ms.openlocfilehash: dfc3ebc0274c87466d6dc27c93880483df023085
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 791821fbfe5854c27b7e3e6927a56a66ac1f1dc2
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66242482"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819094"
 ---
-# <a name="access-azure-cosmos-db-from-virtual-networks-vnet"></a>Azure Cosmos DB'den sanal ağları (VNet) erişim
+# <a name="access-azure-cosmos-db-from-virtual-networks-vnet"></a>Sanal ağlardan (VNet) Azure Cosmos DB erişim
 
-Yalnızca sanal ağın (VNet) belirli bir alt ağından erişime izin vermek için Azure Cosmos hesabı yapılandırabilirsiniz. Etkinleştirerek [hizmet uç noktası](../virtual-network/virtual-network-service-endpoints-overview.md) bir sanal ağ içindeki alt ağdaki Azure Cosmos DB'ye erişmek için bu alt ağ trafiği için Azure Cosmos DB ile sanal ağ ve alt ağ kimliğini gönderilir. Azure Cosmos DB hizmet uç noktası etkinleştirildikten sonra Azure Cosmos hesabınıza ekleyerek alt ağa erişimi sınırlayabilirsiniz.
+Azure Cosmos hesabını yalnızca belirli bir sanal ağ (VNet) alt ağından erişime izin verecek şekilde yapılandırabilirsiniz. [Hizmet uç noktasının](../virtual-network/virtual-network-service-endpoints-overview.md) bir sanal ağ içindeki alt ağda Azure Cosmos DB erişmesini etkinleştirerek, bu alt ağdan gelen trafik, alt ağın ve sanal ağın kimliğiyle Azure Cosmos DB gönderilir. Azure Cosmos DB hizmeti uç noktası etkinleştirildikten sonra, Azure Cosmos hesabınıza ekleyerek alt ağa erişimi sınırlayabilirsiniz.
 
-Varsayılan olarak, isteğin bir geçerli bir yetkilendirme belirteciyle birlikte sunulduğu, bir Azure Cosmos hesabı herhangi bir kaynaktan erişilebilir. Sanal ağ içindeki bir veya daha fazla alt ağlar eklediğinizde, yalnızca bu alt ağlardan kaynaklanan isteklerin geçerli bir yanıt alırsınız. Başka bir kaynaktan gelen istekler, 403 (Yasak) yanıt alırsınız. 
+Varsayılan olarak, isteğe geçerli bir yetkilendirme belirteciyle eşlik eden bir Azure Cosmos hesabına herhangi bir kaynaktan erişilebilir. VNET 'ler içinde bir veya daha fazla alt ağ eklediğinizde, yalnızca bu alt ağlardan kaynaklanan istekler geçerli bir yanıt alır. Diğer kaynaklardan gelen istekler, 403 (yasak) yanıtı alır. 
 
 ## <a name="frequently-asked-questions"></a>Sık sorulan sorular
 
-Sanal ağlardan erişim yapılandırma hakkında sık sorulan bazı sorular şunlardır:
+Aşağıda, sanal ağlardan erişimi yapılandırma hakkında sık sorulan bazı sorular verilmiştir:
 
-### <a name="can-i-specify-both-virtual-network-service-endpoint-and-ip-access-control-policy-on-an-azure-cosmos-account"></a>Bir Azure Cosmos hesapta hem sanal ağ hizmet uç noktası hem de IP erişim denetimi ilkesini belirtebilirsiniz? 
+### <a name="can-i-specify-both-virtual-network-service-endpoint-and-ip-access-control-policy-on-an-azure-cosmos-account"></a>Azure Cosmos hesabında hem sanal ağ hizmeti uç noktası hem de IP erişim denetim ilkesi belirtebilir miyim? 
 
-Sanal ağ hizmet uç noktası hem de bir IP erişim denetimi İlkesi'ni (güvenlik duvarı olarak da bilinir), Azure Cosmos hesabınızda etkinleştirebilirsiniz. Bu iki özellik tamamlayıcıdır ve topluca yalıtım ve Azure Cosmos hesabınızın güvenliğini sağlamak. IP kullanarak, güvenlik duvarı statik IP hesabınızı erişmesini sağlar. 
+Azure Cosmos hesabınızda hem sanal ağ hizmeti uç noktasını hem de bir IP erişim denetimi ilkesini (aka güvenlik duvarı) etkinleştirebilirsiniz. Bu iki özellik tamamlayıcı ve Azure Cosmos hesabınızın yalıtımı ve güvenliğini topluca garanti altına alınır. IP güvenlik duvarının kullanılması, statik IP 'Lerin hesabınıza erişmesini sağlar. 
 
-### <a name="how-do-i-limit-access-to-subnet-within-a-virtual-network"></a>Bir sanal ağ içindeki alt ağ erişimini sınırlamak nasıl? 
+### <a name="how-do-i-limit-access-to-subnet-within-a-virtual-network"></a>Nasıl yaparım? bir sanal ağ içindeki alt ağa erişimi mi sınırlayın? 
 
-Bir alt ağdan Azure Cosmos hesabına erişimi sınırlamak için gereken iki adımı vardır. İlk olarak, kendi alt ağı ve sanal ağ kimliğini Azure Cosmos DB'ye taşımak için alt ağından gelen trafiği sağlar. Bu, Azure Cosmos DB için alt ağda hizmet uç noktası sağlayarak gerçekleştirilir. Sonraki hesabı erişilebilir bir kaynak olarak bu alt ağ belirtme Azure Cosmos hesabındaki bir kuralı ekleniyor.
+Azure Cosmos hesabına erişimi bir alt ağdan sınırlamak için gereken iki adım vardır. İlk olarak, alt ağdan gelen trafiğin alt ağını ve sanal ağ kimliğini Azure Cosmos DB olarak taşıması için izin verebilirsiniz. Bu işlem, alt ağdaki Azure Cosmos DB için hizmet uç noktası etkinleştirilerek yapılır. Daha sonra, bu alt ağı, hesaba erişilebilen bir kaynak olarak belirten Azure Cosmos hesabına bir kural ekleniyor.
 
-### <a name="will-virtual-network-acls-and-ip-firewall-reject-requests-or-connections"></a>Sanal ağ ACL'leri ve IP Güvenlik Duvarı, isteklerin veya bağlantıları reddeder? 
+### <a name="will-virtual-network-acls-and-ip-firewall-reject-requests-or-connections"></a>Sanal ağ ACL 'Leri ve IP güvenlik duvarı istekleri veya bağlantıları reddeder mi? 
 
-IP Güvenlik Duvarı'nı veya sanal ağ erişim kuralları eklenir, yalnızca izin verilen kaynakları get Geçerli yanıtlar gelen istekleri. Bir 403 (Yasak) ile diğer istekler reddedilir. Azure Cosmos hesabın güvenlik duvarı bir bağlantı düzeyi güvenlik duvarı ayırt etmek önemlidir. Kaynak hizmete bağlanmaya devam edebilirler ve bağlantıları reddedilen değildir.
+IP güvenlik duvarı veya sanal ağ erişim kuralları eklendiğinde, yalnızca izin verilen kaynaklardan gelen istekler geçerli yanıtlar alır. Diğer istekler 403 (yasak) ile reddedilir. Azure Cosmos hesabının güvenlik duvarını bir bağlantı düzeyi güvenlik duvarıyla ayırt etmek önemlidir. Kaynak hizmete hala bağlanabilir ve bağlantılar reddedilmez.
 
-### <a name="my-requests-started-getting-blocked-when-i-enabled-service-endpoint-to-azure-cosmos-db-on-the-subnet-what-happened"></a>İsteklerim miyim alt ağdaki hizmet uç noktası için Azure Cosmos DB etkinleştirildiğinde engellenen başlatıldı. Ne oldu?
+### <a name="my-requests-started-getting-blocked-when-i-enabled-service-endpoint-to-azure-cosmos-db-on-the-subnet-what-happened"></a>Hizmet uç noktasını, alt ağda Azure Cosmos DB için etkinleştirdiğimde, isteklerim engellendi almaya başladı. Ne oldu?
 
-Bir alt ağ üzerindeki Azure Cosmos DB için hizmet uç noktası etkinleştirildikten sonra hesap ulaşmasını trafik kaynağını genel IP ile sanal ağ ve alt ağ için geçer. Azure Cosmos hesabınızda IP tabanlı güvenlik duvarı varsa yalnızca, etkin hizmet alt ağından gelen trafiği artık IP güvenlik duvarı kurallarını eşleşir ve bu nedenle reddedilir. IP tabanlı güvenlik duvarı sanal ağ tabanlı erişim denetimi için sorunsuz bir biçimde geçiş adımlarını inceleyeceğiz.
+Bir alt ağda Azure Cosmos DB için hizmet uç noktası etkinleştirildikten sonra, hesap anahtarlarına genel IP 'den sanal ağa ve alt ağa ulaşan trafik kaynağıdır. Azure Cosmos hesabınızda yalnızca IP tabanlı güvenlik duvarı varsa, hizmet etkin alt ağdan gelen trafik artık IP güvenlik duvarı kurallarıyla eşleşmez ve bu nedenle reddedilir. IP tabanlı güvenlik duvarından sanal ağ tabanlı erişim denetimine sorunsuz bir şekilde geçiş yapmak için adımlara gidin.
 
-### <a name="do-the-peered-virtual-networks-also-have-access-to-azure-cosmos-account"></a>Eşlenen sanal ağlarda, Azure Cosmos hesabına erişimi de gerekiyor? 
-Yalnızca sanal ağ ve Azure Cosmos hesaba eklenen ağlarından erişime sahiptir. Eşlenen sanal ağ içindeki alt ağların hesabınıza eklenene kadar eşlenmiş Vnet'ler hesabına erişemiyor.
+### <a name="do-the-peered-virtual-networks-also-have-access-to-azure-cosmos-account"></a>Eşlenen sanal ağların Azure Cosmos hesabına erişimi de var mı? 
+Yalnızca sanal ağın ve Azure Cosmos hesabına eklenen alt ağlarının erişimi vardır. Eşlenen sanal ağlarda bulunan alt ağlar hesaba eklenene kadar, eşlenen VNET 'ler hesaba erişemez.
 
-### <a name="what-is-the-maximum-number-of-subnets-allowed-to-access-a-single-cosmos-account"></a>Hangi alt ağların sayısı tek bir Cosmos hesap erişmesine izin verilir? 
-Şu anda, Azure Cosmos hesabınız için izin verilen en fazla 64 alt ağlara sahip olabilir.
+### <a name="what-is-the-maximum-number-of-subnets-allowed-to-access-a-single-cosmos-account"></a>Tek bir Cosmos hesabına erişim izni verilen en fazla alt ağ sayısı nedir? 
+Şu anda, bir Azure Cosmos hesabı için en fazla 64 alt ağa izin verilebilir.
 
-### <a name="can-i-enable-access-from-vpn-and-express-route"></a>VPN ve Expressroute üzerinden erişimi etkinleştirebilirim? 
-Azure Cosmos hesabı şirket içi Express route'tan üzerinden erişmek için Microsoft eşdüzey hizmet sağlama etkinleştirmek gerekir. IP Güvenlik Duvarı'nı veya sanal ağ erişim kuralları koymak sonra Azure Cosmos hesabı şirket içi Hizmetleri erişimine izin vermek için Azure Cosmos hesabı IP Güvenlik Duvarı'nı Microsoft eşlemesi için kullanılan genel IP adreslerini ekleyebilirsiniz. 
+### <a name="can-i-enable-access-from-vpn-and-express-route"></a>VPN ve Express rotalarından erişimi etkinleştirebilir miyim? 
+Şirket içindeki Express Route üzerinden Azure Cosmos hesabına erişim için Microsoft eşlemesini etkinleştirmeniz gerekir. IP güvenlik duvarı veya sanal ağ erişim kuralları ekledikten sonra, Azure Cosmos hesabı IP güvenlik duvarınızdaki Microsoft eşlemesi için kullanılan genel IP adreslerini, şirket içi hizmetlere Azure Cosmos hesabına erişim sağlamak için ekleyebilirsiniz. 
 
-### <a name="do-i-need-to-update-the-network-security-groups-nsg-rules"></a>Ağ güvenlik grupları (NSG) kurallarını güncelleştirme gerekiyor mu? 
-NSG kuralları bağlantısı için ve bir alt ağdaki sanal ağ ile sınırlamak için kullanılır. Alt ağ ile Azure Cosmos DB için hizmet uç noktası eklediğinizde, Azure Cosmos hesabınız için NSG'de giden bağlantıyı açmaya gerek yoktur. 
+### <a name="do-i-need-to-update-the-network-security-groups-nsg-rules"></a>Ağ güvenlik grupları (NSG) kurallarını güncelleştirmem gerekiyor mu? 
+NSG kuralları, sanal ağı olan bir alt ağ ile bağlantıyı sınırlamak için kullanılır. Alt ağa Azure Cosmos DB için hizmet uç noktası eklediğinizde, Azure Cosmos hesabınız için NSG 'de giden bağlantıyı açmaya gerek yoktur. 
 
-### <a name="are-service-endpoints-available-for-all-vnets"></a>Hizmet uç noktaları tüm sanal ağları için kullanılabilir mi?
-Hayır, yalnızca Azure Resource Manager sanal ağları etkin hizmet bitiş noktası olabilir. Klasik sanal ağ hizmet uç noktaları desteklemez.
+### <a name="are-service-endpoints-available-for-all-vnets"></a>Hizmet uç noktaları tüm VNET 'ler için kullanılabilir mi?
+Hayır, yalnızca Azure Resource Manager sanal ağlarda hizmet uç noktası etkin olabilir. Klasik sanal ağlar hizmet uç noktalarını desteklemez.
 
-### <a name="can-i-accept-connections-from-within-public-azure-datacenters-when-service-endpoint-access-is-enabled-for-azure-cosmos-db"></a>Olabilir miyim "Kabul et bağlantılarından genel Azure veri merkezlerinin içinde" Azure Cosmos DB için hizmet uç noktası erişimi etkinleştirildiğinde?  
-Azure Data factory, Azure Search veya tüm hizmet gibi diğer Azure birinci taraf tarafından erişilecek, Azure Cosmos DB hesabı istediğinizde Hizmetleri yalnızca bu gereklidir belirli bir Azure bölgesine dağıtılır.
+### <a name="can-i-accept-connections-from-within-public-azure-datacenters-when-service-endpoint-access-is-enabled-for-azure-cosmos-db"></a>Hizmet uç noktası erişimi Azure Cosmos DB için etkinleştirildiğinde, "Genel Azure veri merkezlerinden gelen bağlantıları kabul edebilir" miyim?  
+Bu, yalnızca Azure Cosmos DB hesabınıza Azure Data Factory, Azure Bilişsel Arama veya belirtilen Azure bölgesinde dağıtılan herhangi bir hizmet gibi diğer Azure birinci taraf hizmetleri tarafından erişilmesini istediğinizde gereklidir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Sanal ağ içindeki alt ağı, başarılı Azure Cosmos hesabı erişimini sınırlama](how-to-configure-vnet-service-endpoint.md)
-* [Azure Cosmos hesabınız için IP Güvenlik Duvarı yapılandırma](how-to-configure-firewall.md)
+* [Sanal ağlardaki alt ağlara Azure Cosmos hesabı erişimi nasıl sınırlandırmalar](how-to-configure-vnet-service-endpoint.md)
+* [Azure Cosmos hesabınız için IP güvenlik duvarını yapılandırma](how-to-configure-firewall.md)
 

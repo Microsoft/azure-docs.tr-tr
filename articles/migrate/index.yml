@@ -1,26 +1,91 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Geçişi Belgeleri
+### YamlMime:Landing
+title: Azure Geçişi belgeleri
+summary: Azure bulutuna geçmek için Azure Geçişi'ni kullanın. Azure Geçişi şirket içi iş yüklerinin bulunması, değerlendirilmesi ve Azure'a geçişi için merkezi bir konum sağlar. Bu merkezi konum hem Azure Geçişi araçlarını hem de bağımsız yazılım satıcılarının (ISV) tümleşik araçlarını sağlar.
 metadata:
-  title: 'Azure Geçişi Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: Azure’a geçiş için şirket içi makineleri değerlendirmeyi öğrenin
-  services: migration-planner
-  author: rayne-wiselman
-  manager: carmonm
-  ms.service: migration
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  title: Azure Geçişi belgeleri
+  description: Azure bulutuna geçmek için Azure Geçişi'ni kullanın. Azure Geçişi şirket içi iş yüklerinin bulunması, değerlendirilmesi ve Azure'a geçişi için merkezi bir konum sağlar. Bu merkezi konum hem Azure Geçişi araçlarını hem de bağımsız yazılım satıcılarının (ISV) tümleşik araçlarını sağlar.
+  ms.service: azure-migrate
   ms.topic: landing-page
-  ms.date: 11/22/2017
+  ms.collection: collection
+  author: rayne-wiselman
   ms.author: raynew
-abstract:
-  description: 'Azure Geçişi, Azure’a geçiş için şirket içi makineleri keşfetmenize ve bu makinelerin uygunluğunu değerlendirmeniz yardımcı olur; ayrıca Azure VM’lerinin çalıştırılması için boyutlandırma ve maliyet tahminleri sunar.'
-sections:
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Azure’a geçiş için VMware VM’lerini değerlendirmeyi öğrenin
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="tutorial-assessment-vmware">Şirket içi VMware VM’lerini keşfedin ve değerlendirin</a>
+  ms.date: 10/07/2019
+  ms.openlocfilehash: 494bb2f7ec6076bbc7b3b891cd0cb525ae53c5d1
+  ms.sourcegitcommit: be344deef6b37661e2c496f75a6cf14f805d7381
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/07/2019
+  ms.locfileid: "72001143"
+landingContent:
+- title: Azure Geçişi Hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Geçişi nedir?
+      url: ./migrate-services-overview.md
+    - text: Azure Geçişi'ndeki yenilikler
+      url: ./whats-new.md
+    - text: Sık sorulan sorular
+      url: ./resources-faq.md
+- title: Başlarken
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Sunucu Değerlendirmesiyle VMware VM'lerini Değerlendirme
+      url: ./tutorial-prepare-vmware.md
+    - text: Sunucu Değerlendirmesiyle Hyper-V VM'lerini Değerlendirme
+      url: ./tutorial-prepare-hyper-v.md
+    - text: VMware VM'leri Sunucu Geçişi ile geçirme
+      url: ./server-migrate-overview.md
+    - text: Hyper-V VM'leri Sunucu Geçişi ile geçirme
+      url: ./tutorial-migrate-hyper-v.md
+    - text: Fiziksel sunucuları/VM'leri Sunucu Geçişi ile geçirme
+      url: ./tutorial-migrate-physical-virtual-machines.md
+- title: Dağıtıma başlama
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: Sunucu Değerlendirmesi için en iyi yöntemleri gözden geçirin
+      url: ./best-practices-assessment.md
+    - text: Azure Geçişi alet dağıtımı hakkında bilgi edinin
+      url: ./migrate-replication-appliance.md
+    - text: Azure Geçişi destek matrisini gözden geçirin
+      url: migrate-support-matrix.md
+    - text: VMware destek matrisini gözden geçirin
+      url: migrate-support-matrix-vmware.md
+    - text: Hyper-V destek matrisini gözden geçirin
+      url: migrate-support-matrix-hyper-v.md
+- title: Yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Geçiş araçları ekleme
+      url: ./how-to-migrate.md
+    - text: VMware değerlendirmesini ölçeklendirme
+      url: ./scale-vmware-assessment.md
+    - text: Geçici otomatik hale getirme ve ölçeklendirme
+      url: ./how-to-migrate-at-scale.md
+    - text: Değerlendirme ve geçiş sorunlarını giderme
+      url: ./troubleshooting-general.md
+- title: Daha fazla bilgi edinin
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: VMware aracı tabanlı geçiş mimarisi
+      url: ./agent-based-migration-architecture.md
+    - text: Hyper-V geçiş mimarisi
+      url: ./hyper-v-migration-architecture.md
+    - text: Değerlendirmeler hakkında bilgi edinin
+      url: ./concepts-assessment-calculation.md
+    - text: Bağımlılık görselleştirme hakkında bilgi edinin
+      url: ./concepts-dependency-visualization.md
+- title: Dahil olun
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Hizmet özelliği isteyin
+      url: https://feedback.azure.com/forums/907195-azure-migrate
+    - text: Forum sorusu sorun
+      url: https://social.msdn.microsoft.com/forums/azure/home?forum=AzureMigrate
+    - text: Azure Tech Community
+      url: https://techcommunity.microsoft.com/t5/Azure-Migration/bd-p/AzureMigration

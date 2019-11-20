@@ -1,50 +1,45 @@
 ---
-title: Azure Resource Manager şablonları ile Azure Application Insights, akıllı algılama kuralı ayarlarını yapılandırma | Microsoft Docs
-description: Yönetimi ve Azure Resource Manager şablonları ile Azure Application Insights akıllı algılama kuralları yapılandırmasını otomatikleştirin
-services: application-insights
-documentationcenter: ''
-author: harelbr
-manager: carmonm
-ms.assetid: ea2a28ed-4cd9-4006-bd5a-d4c76f4ec20b
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights akıllı algılama kuralı ayarlarını Azure Resource Manager şablonlarla yapılandırma | Microsoft Docs
+description: Azure Resource Manager şablonlarıyla Azure Application Insights akıllı algılama kuralları yönetimini ve yapılandırmasını otomatikleştirin
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: harelbr
+ms.author: harelbr
 ms.date: 06/26/2019
 ms.reviewer: mbullwin
-ms.author: harelbr
-ms.openlocfilehash: 6bb89eec0b4905e101bed87d3d3fc617dec589e0
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 8b55271b39bf2a65dababbef58f7389ca07d57d8
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477854"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72818840"
 ---
-# <a name="manage-application-insights-smart-detection-rules-using-azure-resource-manager-templates"></a>Azure Resource Manager şablonlarını kullanarak Application Insights akıllı algılama kurallarını yönetme
+# <a name="manage-application-insights-smart-detection-rules-using-azure-resource-manager-templates"></a>Azure Resource Manager şablonları kullanarak Application Insights akıllı algılama kurallarını yönetme
 
-Application Insights, akıllı algılama kuralları yönetilebilir ve kullanılarak yapılandırılan [Azure Resource Manager şablonları](../../azure-resource-manager/resource-group-authoring-templates.md).
-Bu yöntem, yeni Application Insights kaynakları mevcut kaynakların ayarlarını değiştirmek için veya Azure Resource Manager otomasyon ile dağıtım yaparken kullanılabilir.
+Application Insights içindeki akıllı algılama kuralları [Azure Resource Manager şablonlar](../../azure-resource-manager/resource-group-authoring-templates.md)kullanılarak yönetilebilir ve yapılandırılabilir.
+Bu yöntem, Azure Resource Manager otomasyonu ile yeni Application Insights kaynakları dağıtıldığında veya mevcut kaynakların ayarlarını değiştirirken kullanılabilir.
 
 ## <a name="smart-detection-rule-configuration"></a>Akıllı algılama kuralı yapılandırması
 
-Bir akıllı algılama kuralına için aşağıdaki ayarları yapılandırabilirsiniz:
-- Kural etkin olduğunda (varsayılan değer **true**.)
-- Aboneliğin ilişkili kullanıcılara e-posta gönderilip gönderilemeyeceğini [izleme okuyucusu](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-reader) ve [izleme katılımcı](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) bir algılama bulunduğunda rolleri (varsayılan değer **true**.)
-- Bir algılama bulunduğu zaman bir bildirim almanız gerekir herhangi ek bir e-posta alıcıları.
-    -  E-posta yapılandırmasını kullanılamaz olarak akıllı algılama kuralları işaretlenmiş için _Önizleme_.
+Akıllı algılama kuralı için aşağıdaki ayarları yapılandırabilirsiniz:
+- Kural etkinse (varsayılan değer **true**'dur.)
+- E-postaların, aboneliğin [Izleme okuyucusu](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-reader) ile ilişkili kullanıcılara gönderilmesi ve bir algılama bulunduğunda [katkıda bulunan rollerinin izlenmesi](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) gerekir (varsayılan değer **true**'dur.)
+- Bir algılama bulunduğunda bildirim alması gereken ek e-posta alıcıları.
+    -  _Önizleme_olarak Işaretlenen akıllı algılama kuralları için e-posta yapılandırması kullanılamaz.
 
-Azure Resource Manager aracılığıyla kural ayarları yapılandırma izin vermek için akıllı algılama kuralı yapılandırması adlı Application Insights kaynağı içinde bir iç kaynak olarak sunuldu **ProactiveDetectionConfigs**.
-Düzeyde esneklik için her bir akıllı algılama kuralına benzersiz bildirim ayarları ile yapılandırılabilir.
+Azure Resource Manager aracılığıyla kural ayarlarını yapılandırmaya izin vermek için, akıllı algılama kuralı yapılandırması artık **ProactiveDetectionConfigs**adlı Application Insights kaynağında iç kaynak olarak kullanılabilir.
+En fazla esneklik için, her akıllı algılama kuralı benzersiz bildirim ayarlarıyla yapılandırılabilir.
 
 ## 
 
 ## <a name="examples"></a>Örnekler
 
-Aşağıda Azure Resource Manager şablonlarını kullanarak akıllı algılama kuralları ayarlarının nasıl yapılandırılacağını gösteren birkaç örnek verilmiştir.
-Tüm örnekleri adlı bir Application Insights kaynağına başvurmak _"myApplication"_ , ve "uzun bağımlılık süresi akıllı algılama kuralına" olarak dahili olarak adlandırılmış _"longdependencyduration"_ .
-Application Insights kaynak adı değiştirin ve ilgili akıllı algılama kuralı iç adını belirtmek için emin olun. Akıllı algılama, her kural için karşılık gelen iç Azure Resource Manager adlarının listesi için aşağıdaki tabloya bakın.
+Aşağıda, Azure Resource Manager şablonları kullanarak akıllı algılama kurallarının ayarlarının nasıl yapılandırılacağı gösterilmektedir.
+Tüm örnekler, " _MyApplication"_ adlı bir Application Insights kaynağına ve dahili olarak _"longdependencyduration"_ olarak adlandırılan "uzun bağımlılık süresi akıllı algılama kuralına" başvurur.
+Application Insights kaynak adını değiştirdiğinizden ve ilgili akıllı algılama kuralını dahili adı olarak belirttiğinizden emin olun. Her akıllı algılama kuralı için karşılık gelen iç Azure Resource Manager adlarının bir listesi için aşağıdaki tabloyu kontrol edin.
 
-### <a name="disable-a-smart-detection-rule"></a>Bir akıllı algılama kuralı devre dışı bırak
+### <a name="disable-a-smart-detection-rule"></a>Akıllı algılama kuralını devre dışı bırakma
 
 ```json
 {
@@ -75,7 +70,7 @@ Application Insights kaynak adı değiştirin ve ilgili akıllı algılama kural
     }
 ```
 
-### <a name="disable-sending-email-notifications-for-a-smart-detection-rule"></a>Gönderen e-posta bildirimleri için bir akıllı algılama kuralına devre dışı bırak
+### <a name="disable-sending-email-notifications-for-a-smart-detection-rule"></a>Akıllı algılama kuralı için e-posta bildirimleri göndermeyi devre dışı bırak
 
 ```json
 {
@@ -106,7 +101,7 @@ Application Insights kaynak adı değiştirin ve ilgili akıllı algılama kural
     }
 ```
 
-### <a name="add-additional-email-recipients-for-a-smart-detection-rule"></a>Bir akıllı algılama kuralına ek e-posta alıcıları ekleyin
+### <a name="add-additional-email-recipients-for-a-smart-detection-rule"></a>Akıllı algılama kuralı için ek e-posta alıcıları ekleme
 
 ```json
 {
@@ -138,9 +133,9 @@ Application Insights kaynak adı değiştirin ve ilgili akıllı algılama kural
 
 ```
 
-### <a name="failure-anomalies-v2-non-classic-alert-rule"></a>Hata Anomalileri v2 (Klasik olmayan) uyarı kuralı
+### <a name="failure-anomalies-v2-non-classic-alert-rule"></a>Hata Anoıes v2 (klasik olmayan) uyarı kuralı
 
-Bu Azure Resource Manager şablonu, bir hata Anomalileri v2 uyarı kuralı 2 önem derecesine sahip yapılandırma gösterilmektedir. Hata Anomalileri uyarı kuralı bu yeni sürümü yeni Azure platformu uyarı bir parçasıdır ve bir parçası olarak devre dışı bırakılıyor Klasik sürümü değiştirir [Klasik uyarıları devre dışı bırakma işlemi](https://azure.microsoft.com/updates/classic-alerting-monitoring-retirement/).
+Bu Azure Resource Manager şablonu, 2 önem derecesine sahip bir hata anomali v2 uyarı kuralını yapılandırmayı gösterir. Hata Anoparçaları uyarı kuralının bu yeni sürümü, yeni Azure uyarı platformunun bir parçasıdır ve [Klasik uyarı](https://azure.microsoft.com/updates/classic-alerting-monitoring-retirement/)kullanımdan kaldırma işleminin bir parçası olarak kullanımdan kaldırılan klasik sürümü değiştirir.
 
 ```json
 {
@@ -151,8 +146,9 @@ Bu Azure Resource Manager şablonu, bir hata Anomalileri v2 uyarı kuralı 2 ön
             "type": "microsoft.alertsmanagement/smartdetectoralertrules",
             "apiVersion": "2019-03-01",
             "name": "Failure Anomalies - my-app",
+            "location": "global", 
             "properties": {
-                  "description": "Detects a spike in the failure rate of requests or dependencies",
+                  "description": "Failure Anomalies notifies you of an unusual rise in the rate of failed HTTP requests or dependency calls.",
                   "state": "Enabled",
                   "severity": "2",
                   "frequency": "PT1M",
@@ -170,31 +166,31 @@ Bu Azure Resource Manager şablonu, bir hata Anomalileri v2 uyarı kuralı 2 ön
 ```
 
 > [!NOTE]
-> Bu Azure Resource Manager şablonu hata Anomalileri v2 uyarı kuralı için benzersiz olan ve diğer Klasik akıllı algılama kuralları farklı bu makalede açıklanmıştır.   
+> Bu Azure Resource Manager şablonu, hata Anoileri v2 uyarı kuralı için benzersizdir ve bu makalede açıklanan diğer klasik akıllı algılama kurallarından farklıdır.   
 
 ## <a name="smart-detection-rule-names"></a>Akıllı algılama kuralı adları
 
-Aşağıda Azure Resource Manager şablonunda kullanılan iç adlarını birlikte portalında göründükleri gibi bir tablo akıllı algılama kuralı adları verilmiştir.
+Aşağıda, portalda göründükleri şekilde, Azure Resource Manager şablonunda kullanılması gereken dahili adlarıyla birlikte akıllı algılama kuralı adlarının bir tablosu verilmiştir.
 
 > [!NOTE]
-> Akıllı algılama kuralları olarak işaretlenmiş _Önizleme_ e-posta bildirimleri desteklemez. Bu nedenle, yalnızca ayarlayabilirsiniz _etkin_ özelliği bu kurallar için. 
+> _Önizleme_ olarak işaretlenen akıllı algılama kuralları, e-posta bildirimlerini desteklemez. Bu nedenle, bu kurallar için yalnızca _etkin_ özelliği ayarlayabilirsiniz. 
 
-| Azure portal kural adı | İç adı
+| Azure portal kural adı | İç ad
 |:---|:---|
-| Yavaş sayfa yükleme süresi | slowpageloadtime |
-| Yavaş sunucu yanıtı süresi | slowserverresponsetime |
+| Yavaş sayfa yükleme süresi | yavaşpageloadtime |
+| Yavaş sunucu yanıt süresi | yavaşsunucuresponsetime |
 | Uzun bağımlılık süresi | longdependencyduration |
-| Sunucu yanıt süresinde performans düşüşü | degradationinserverresponsetime |
-| Bağımlılık süresinde düşüş | degradationindependencyduration |
-| İzleme önem derecesi oranı (Önizleme) içinde performans düşüşü | extension_traceseveritydetector |
-| Olağan dışı özel durum hacmindeki artışı (Önizleme) | extension_exceptionchangeextension |
+| Sunucu yanıt süresi düşüklüğüne | korlationınserverresponsetime |
+| Bağımlılık süresinde düşme | degradationindependencyduration |
+| İzleme önem oranına göre düşme (Önizleme) | extension_traceseveritydetector |
+| Özel durum biriminde olağan dışı artış (Önizleme) | extension_exceptionchangeextension |
 | Olası bellek sızıntısı algılandı (Önizleme) | extension_memoryleakextension |
-| Olası bir güvenlik sorunu algılandı (Önizleme) | extension_securityextensionspackage |
-| Olağan dışı artış, günlük veri hacmi (Önizleme) | extension_billingdatavolumedailyspikeextension |
+| Olası güvenlik sorunu algılandı (Önizleme) | extension_securityextensionspackage |
+| Günlük veri hacminde olağan dışı artış (Önizleme) | extension_billingdatavolumedailyspikeextension |
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-Otomatik olarak algılama hakkında daha fazla bilgi edinin:
+Otomatik algılama hakkında daha fazla bilgi edinin:
 
 - [Hata anormallikleri](../../azure-monitor/app/proactive-failure-diagnostics.md)
 - [Bellek sızıntıları](../../azure-monitor/app/proactive-potential-memory-leak.md)

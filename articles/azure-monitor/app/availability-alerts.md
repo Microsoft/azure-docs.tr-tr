@@ -1,78 +1,76 @@
 ---
-title: Azure Application Insights ile kullanılabilirliği uyarıları Kurulumu | Microsoft Docs
+title: Azure Application Insights kullanılabilirlik uyarılarını ayarlama | Microsoft Docs
 description: Application Insights’ta web testleri ayarlayın. Web sitesi kullanılamaz duruma gelirse veya yavaş yanıt verirse uyarı alın.
-services: application-insights
-documentationcenter: ''
-author: lgayhardt
-manager: carmonm
-ms.assetid: 46dc13b4-eb2e-4142-a21c-94a156f760ee
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: lgayhardt
+ms.author: lagayhar
 ms.date: 06/19/2019
 ms.reviewer: sdash
-ms.author: lagayhar
-ms.openlocfilehash: cc022f91d4b4fec42929769df8c979320548a1f9
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.openlocfilehash: ea2bec541c13ec1615113cef184eb5ad502b158c
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67304897"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72678290"
 ---
 # <a name="availability-alerts"></a>Kullanılabilirlik uyarıları
 
-[Azure Application Insights](../../azure-monitor/app/app-insights-overview.md), dünyanın her yerindeki noktalarından uygulamanıza düzenli aralıklarla web istekleri gönderir. Bu, uygulamanızın yanıt vermiyor veya çok yavaş yanıtlarsa uyarabilir.
+[Azure Application Insights](../../azure-monitor/app/app-insights-overview.md), dünyanın her yerindeki noktalarından uygulamanıza düzenli aralıklarla web istekleri gönderir. Uygulamanız yanıt vermiyorsa veya çok yavaş yanıt verirse sizi uyarır.
 
 ## <a name="enable-alerts"></a>Uyarıları etkinleştirme
 
-Uyarılar artık otomatik olarak varsayılan olarak etkindir, ancak tam olarak bir uyarı yapılandırmak için önce ilk olarak, kullanılabilirlik testi oluşturmak zorunda.
+Uyarılar artık varsayılan olarak otomatik olarak etkinleştirilir, ancak uyarıyı tamamen yapılandırmak için ilk olarak kullanılabilirlik testinizi oluşturmanız gerekir.
 
-![Deneyimi oluşturun](./media/availability-alerts/create-test.png)
-
-> [!NOTE]
->  İle [yeni birleştirilmiş uyarılar](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts), uyarı kuralının önem derecesi ve bildirim tercihleri ile [Eylem grupları](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups) **olmalıdır** uyarılar deneyimi yapılandırılmış. Aşağıdaki adımlar olmadan, yalnızca portal bildirim alırsınız.
-
-1. Kullanılabilirlik testi kaydettikten sonra Ayrıntıları sekmesini üç noktaya yaptığınız test tarafından. "Uyarı Düzenle" tıklayın.
-
-   ![Düzen kaydedildikten sonra](./media/availability-alerts/edit-alert.png)
-
-2. İstenen önem derecesini, kural açıklaması ve en önemlisi - bu uyarı kuralı için kullanmak istediğiniz bildirim tercihleri olan eylem grubu ayarlayın.
-
-   ![Düzen kaydedildikten sonra](./media/availability-alerts/set-action-group.png)
-
-### <a name="alert-on-x-out-of-y-locations-reporting-failures"></a>Hata Raporlama Y konumları dışında X uyar
-
-Varsayılan olarak etkin uyarı kuralı Y konumları dışında X [birleştirilmiş yeni uyarılar deneyimini](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts), yeni bir kullanılabilirlik testi oluşturun. "Klasik" seçeneğini belirleyerek veya uyarı kuralı devre dışı bırakmak seçerek geri çevirebilirsiniz.
+![Deneyim oluştur](./media/availability-alerts/create-test.png)
 
 > [!NOTE]
-> Yukarıdaki adımları izleyerek uyarıyı tetikleyecek çıktığında bildirimleri almak için Eylem grupları yapılandırın. Kural tetiklendiğinde bu adım, yalnızca portal bildirim alırsınız.
+>  [Yeni Birleşik uyarılarla](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts), uyarı kuralının önem derecesi ve [eylem gruplarıyla](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups) ilgili bildirim tercihleri, uyarı **deneyiminde yapılandırılmalıdır.** Aşağıdaki adımlar olmadan yalnızca Portal içi bildirimler alacaksınız.
+
+1. Kullanılabilirlik testini kaydettikten sonra, Ayrıntılar sekmesinde, yeni yaptığınız teste göre üç noktaya tıklayın. "Uyarıyı Düzenle" seçeneğine tıklayın.
+
+   ![Kaydettikten sonra Düzenle](./media/availability-alerts/edit-alert.png)
+
+2. İstenen önem derecesi düzeyi, kural açıklaması ve en önemlisi-bu uyarı kuralı için kullanmak istediğiniz bildirim tercihlerine sahip olan eylem grubunu ayarlayın.
+
+   ![Kaydettikten sonra Düzenle](./media/availability-alerts/set-action-group.png)
+
+### <a name="alert-on-x-out-of-y-locations-reporting-failures"></a>Y/Y konumları raporlama hatalarının X üzerinden uyarı
+
+Yeni bir kullanılabilirlik testi oluşturduğunuzda, [Yeni Birleşik uyarılar deneyiminde](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts)X-Y konumları uyarı kuralı varsayılan olarak etkindir. "Klasik" seçeneğini seçerek veya uyarı kuralını devre dışı bırakmayı tercih edebilirsiniz.
+
+> [!NOTE]
+> Yukarıdaki adımları izleyerek uyarı tetiklediği zaman, eylem gruplarını bildirim alacak şekilde yapılandırın. Bu adım olmadan, yalnızca kural tetiklendiğinde Portal içi bildirimler alacaksınız.
 >
 
-### <a name="alert-on-availability-metrics"></a>Kullanılabilirlik ölçümler üzerinde uyarı
+### <a name="alert-on-availability-metrics"></a>Kullanılabilirlik ölçümleri uyarısı
 
-Kullanarak [yeni birleştirilmiş uyarılar](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts), uyarı segmentli toplama kullanılabilirliğine ve süresi ölçümleri test edebilirsiniz:
+[Yeni Birleşik uyarıları](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts)kullanarak, bölümlenmiş toplam kullanılabilirlik ve test süresi ölçümlerinde de uyarı verebilirsiniz:
 
-1. Ölçüm deneyimi bir Application Insights kaynağını seçin ve bir kullanılabilirlik ölçümü seçin:
+1. Ölçüm deneyiminden bir Application Insights kaynağı seçin ve bir kullanılabilirlik ölçümü seçin:
 
-    ![Kullanılabilirlik ölçümlerini seçimi](./media/availability-alerts/select-metric.png)
+    ![Kullanılabilirlik ölçümleri seçimi](./media/availability-alerts/select-metric.png)
 
-2. Menü seçeneğinden belirli testleri veya uyarı kuralı ayarlamak için konumları seçebileceğiniz yeni deneyime sürer uyarıları yapılandırın. Bu uyarı kuralı buraya Eylem grupları da yapılandırabilirsiniz.
+2. Menüden uyarıları Yapılandır seçeneği, sizi uyarı kuralını ayarlamak için belirli testleri veya konumları seçebileceğiniz yeni deneyimle götürür. Bu uyarı kuralının eylem gruplarını burada da yapılandırabilirsiniz.
 
-### <a name="alert-on-custom-analytics-queries"></a>Özel analytics sorgularına göre uyarı
+### <a name="alert-on-custom-analytics-queries"></a>Özel analiz sorgularında uyar
 
-Kullanarak [yeni birleştirilmiş uyarılar](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts), sizi uyarabilir [özel günlük sorguları](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitor-alerts-unified-log). Özel sorgular ile kullanılabilirlik sorunları en güvenilir sinyal elde etmenize yardımcı olan rastgele koşula göre uyarabilir. Bu ayrıca TrackAvailability SDK'sını kullanarak özel kullanılabilirlik sonuçları gönderiyorsanız özellikle geçerlidir. 
+[Yeni Birleşik uyarıları](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts)kullanarak [özel günlük sorguları](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitor-alerts-unified-log)üzerinde uyarı alabilirsiniz. Özel sorgularla, kullanılabilirlik sorunlarının en güvenilir sinyalini almanıza yardımcı olan herhangi bir rastgele koşulla ilgili uyarı alabilirsiniz. Bu, TrackAvailability SDK 'sını kullanarak özel kullanılabilirlik sonuçları gönderiyorsanız de geçerlidir.
 
 > [!Tip]
-> Ölçümleri kullanılabilirliği verileri TrackAvailability SDK'mız çağırarak gönderdiğiniz herhangi bir özel kullanılabilirlik sonucunu içerir. Uyarı özel kullanılabilirlik sonuçları ölçümleri desteği hakkında uyarı kullanabilirsiniz.
+> Kullanılabilirlik verilerinde ölçümler, TrackAvailability SDK 'sını çağırarak gönderdiğiniz tüm özel kullanılabilirlik sonuçlarını içerir. Özel kullanılabilirlik sonuçlarıyla ilgili uyarı almak için ölçüm desteğiyle ilgili uyarı ' yı kullanabilirsiniz.
 >
+
+## <a name="automate-alerts"></a>Uyarıları otomatikleştirin
+
+Azure Resource Manager şablonlarıyla bu işlemi otomatikleştirmek için [Kaynak Yöneticisi şablonuyla ölçüm uyarısı oluşturma](../../azure-monitor/platform/alerts-metric-create-templates.md#template-for-a-availability-test-along-with-availability-test-alert) belgelerine bakın.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-Ayrılmış [sorunlarını giderme makalesine](troubleshoot-availability.md).
+Adanmış [sorun giderme makalesi](troubleshoot-availability.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Çok adımlı web testleri](availability-multistep.md)
-* [URL ping web testleri](monitor-web-app-availability.md)
-
+* [Çok adımlı Web testleri](availability-multistep.md)
+* [URL ping Web testleri](monitor-web-app-availability.md)

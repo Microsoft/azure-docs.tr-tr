@@ -55,7 +55,7 @@
 - name: Başvuru
   items:
     - name: Kod örnekleri
-      href: 'https://azure.microsoft.com/resources/samples/?service=data-catalog'
+      href: data-catalog-samples.md
     - name: REST
       href: /rest/api/datacatalog/
     - name: Arama söz dizimi başvurusu

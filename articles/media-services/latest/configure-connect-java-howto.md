@@ -1,6 +1,6 @@
 ---
-title: Azure Media Services v3 API'sine - Java bağlanma
-description: Java ile Media Services v3 API bağlanma hakkında bilgi edinin.
+title: Azure Media Services v3 API 'sine bağlanma-Java
+description: Java ile Media Services v3 API 'sine nasıl bağlanacağınızı öğrenin.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -11,51 +11,54 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/18/2019
+ms.date: 09/18/2019
 ms.author: juliako
-ms.openlocfilehash: b7ee54c852ce3332415b69ca6105b472dab0ab8a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3f5e45bb84ca4fc46ccf1f3f3ab86d43c7c03cab
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66480263"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71122864"
 ---
-# <a name="connect-to-media-services-v3-api---java"></a>Media Services v3 API'sine - Java bağlanma
+# <a name="connect-to-media-services-v3-api---java"></a>Media Services v3 API 'sine bağlanma-Java
 
-Bu makale için Azure Media Services v3 Java SDK'sına nasıl hizmet sorumlusu oturum açma yöntemiyle gösterir.
+Bu makalede hizmet sorumlusu oturum açma yöntemi kullanılarak Azure Media Services v3 Java SDK 'sına nasıl bağlanabilmeniz gösterilmektedir.
 
-Bu makalede, Visual Studio Code, örnek uygulama geliştirmek için kullanılır.
+Bu makalede, örnek uygulamayı geliştirmek için Visual Studio Code kullanılır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- İzleyin [Visual Studio Code ile yazma Java](https://code.visualstudio.com/docs/java/java-tutorial) yüklemek için:
+- Yüklemek için [Visual Studio Code Java yazma](https://code.visualstudio.com/docs/java/java-tutorial) ' yı izleyin:
 
    - JDK
    - Apache Maven
-   - Java uzantı paketi
-- Ayarladığınızdan emin olun `JAVA_HOME` ve `PATH` ortam değişkenleri.
-- [Bir Media Services hesabı oluşturma](create-account-cli-how-to.md). Kaynak grubu adı ve Media Services hesap adını hatırlamak emin olun.
-- Bağlantısındaki [erişimi API'leri](access-api-cli-how-to.md) konu. Bir sonraki adımda, abonelik kimliği, uygulama kimliği (istemci kimliği), kimlik doğrulama anahtarı (gizli) ve gereken Kiracı kimliği kaydedin.
+   - Java Uzantı paketi
+- `JAVA_HOME` Ve`PATH` ortam değişkenlerini ayarladığınızdan emin olun.
+- [Bir Media Services hesabı oluşturma](create-account-cli-how-to.md). Kaynak grubu adını ve Media Services hesap adını unutduğunuzdan emin olun.
+- [Erişim API 'leri](access-api-cli-how-to.md) konusundaki adımları izleyin. Abonelik KIMLIĞI, uygulama KIMLIĞI (istemci KIMLIĞI), kimlik doğrulama anahtarı (gizli) ve daha sonraki bir adımda ihtiyacınız olan kiracı KIMLIĞINI kaydedin.
 
-Ayrıca gözden geçirin:
+Ayrıca şunları gözden geçirin:
 
-- [Visual Studio code'da Java](https://code.visualstudio.com/docs/languages/java)
-- [VS code'da Java proje yönetimi](https://code.visualstudio.com/docs/java/java-project)
+- [Visual Studio Code 'de Java](https://code.visualstudio.com/docs/languages/java)
+- [VS Code 'de Java proje yönetimi](https://code.visualstudio.com/docs/java/java-project)
 
-## <a name="create-a-maven-project"></a>Bir Maven projesi oluşturun
+> [!IMPORTANT]
+> [Adlandırma kurallarını](media-services-apis-overview.md#naming-conventions)gözden geçirin.
 
-Bir komut satırı aracı'nı açın ve `cd` , projeyi oluşturmak istediğiniz bir dizine.
+## <a name="create-a-maven-project"></a>Maven projesi oluşturma
+
+Bir komut satırı aracı açın ve `cd` projeyi oluşturmak istediğiniz dizine gidin.
     
 ```
 mvn archetype:generate -DgroupId=com.azure.ams -DartifactId=testAzureApp -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
-Komutu çalıştırdığınızda `pom.xml`, `App.java`, ve diğer dosyalar oluşturulur. 
+`pom.xml` Komutunu`App.java`çalıştırdığınızda,, ve diğer dosyalar oluşturulur. 
 
-## <a name="add-dependencies"></a>Bağımlılıkları ekleyin
+## <a name="add-dependencies"></a>Bağımlılık Ekle
 
-1. Visual Studio Code'da projenizi bulunduğu klasörü açın.
-1. Bulma ve açma `pom.xml`
+1. Visual Studio Code, projenizin bulunduğu klasörü açın
+1. Bul ve aç`pom.xml`
 1. Gerekli bağımlılıkları Ekle
 
     ```xml
@@ -76,14 +79,14 @@ Komutu çalıştırdığınızda `pom.xml`, `App.java`, ve diğer dosyalar oluş
    </dependency>
     ```
 
-## <a name="connect-to-the-java-client"></a>Bağlanmak için Java istemcisi
+## <a name="connect-to-the-java-client"></a>Java istemcisine bağlanma
 
-1. Açık `App.java` altında dosya `src\main\java\com\azure\ams` ve paketinizin en üstünde eklenmiş olduğundan emin olun:
+1. `App.java` Altındaki`src\main\java\com\azure\ams` dosyayı açın ve paketinizin en üste eklendiğinden emin olun:
 
     ```java
     package com.azure.ams;
     ```
-1. Paket bildirimi altında eklemeniz içeri aktarma deyimleri:
+1. Paket deyimi altında bu içeri aktarma deyimlerini ekleyin:
    
    ```java
    import com.microsoft.azure.AzureEnvironment;
@@ -91,7 +94,7 @@ Komutu çalıştırdığınızda `pom.xml`, `App.java`, ve diğer dosyalar oluş
    import com.microsoft.azure.management.mediaservices.v2018_07_01.implementation.MediaManager;
    import com.microsoft.rest.LogLevel;
    ```
-1. İsteğinde bulunmak için gereken Active Directory kimlik bilgilerini oluşturmak için App sınıfının ana yönteme aşağıdaki kodu ekleyin ve aldığınız değerleri [erişimi API'leri](access-api-cli-how-to.md):
+1. İstek yapmak için ihtiyaç duyduğunuz Active Directory kimlik bilgilerini oluşturmak için, uygulama sınıfının Main yöntemine aşağıdaki kodu ekleyin ve [erişim API 'lerinden](access-api-cli-how-to.md)aldığınız değerleri ayarlayın:
    
    ```java
    final String clientId = "00000000-0000-0000-0000-000000000000";
@@ -118,11 +121,13 @@ Komutu çalıştırdığınızda `pom.xml`, `App.java`, ve diğer dosyalar oluş
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-- [Media Services kavramları](concepts-overview.md)
+- [Media Services kavramlar](concepts-overview.md)
 - [Java SDK](https://aka.ms/ams-v3-java-sdk)
 - [Java başvurusu](https://aka.ms/ams-v3-java-ref)
-- [com.microsoft.azure.mediaservices.v2018_07_01:azure-mgmt-media](https://search.maven.org/artifact/com.microsoft.azure.mediaservices.v2018_07_01/azure-mgmt-media/1.0.0-beta/jar)
+- [com. Microsoft. Azure. mediaservices. v2018_07_01: Azure-MGMT-Media](https://search.maven.org/artifact/com.microsoft.azure.mediaservices.v2018_07_01/azure-mgmt-media/1.0.0-beta/jar)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Artık içerebilir `import com.microsoft.azure.management.mediaservices.v2018_07_01.*;` ve varlıkları işleme başlayın.
+Artık varlıkları ekleme `import com.microsoft.azure.management.mediaservices.v2018_07_01.*;` ve düzenleme ' ye başlayabilirsiniz.
+
+Daha fazla kod örneği için bkz. [Java SDK örnek](https://docs.microsoft.com/samples/azure-samples/media-services-v3-java/azure-media-services-v3-samples-using-java/) deposu.

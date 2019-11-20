@@ -1,6 +1,6 @@
 ---
-title: include dosyası
-description: include dosyası
+title: içerme dosyası
+description: içerme dosyası
 services: storage
 author: tamram
 ms.service: storage
@@ -8,24 +8,24 @@ ms.topic: include
 ms.date: 10/19/2018
 ms.author: tamram
 ms.custom: include file
-ms.openlocfilehash: ed7bfca6095dbb03042efd14456f34556f74a843
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 6ad5bafe66e6e39503d3987aa6ddd9159c532fa0
+ms.sourcegitcommit: 42748f80351b336b7a5b6335786096da49febf6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188593"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72237475"
 ---
-Azure depolama, depolama hesabı kullanımınıza göre faturalandırılırsınız. Depolama hesabındaki tüm nesneler bir grup halinde faturalandırılır. 
+Azure depolama için depolama hesabı kullanımınıza göre faturalandırılırsınız. Bir depolama hesabındaki tüm nesneler, bir grup olarak birlikte faturalandırılır. 
 
 Depolama maliyetleri şu etkenlere göre hesaplanır: bölge/konum, hesap türü, erişim katmanı, depolama kapasitesi, çoğaltma düzeni, depolama işlemleri ve veri çıkışı.
 
-* **Bölge** hesabınızı dayanır coğrafi bölgeye başvurur.
-* **Hesap türü** kullandığınız depolama hesabı türünü belirtir. 
-* **Erişim katmanı** genel amaçlı v2 veya Blob Depolama hesabı için belirttiğiniz veri kullanım deseni ifade eder.
-* Depolama **kapasite** ne kadar depolama hesabı payınızın olduğunuz anlamına gelir verilerini depolamak için kullanma.
-* **Çoğaltma** tek seferde ve konumu, verilerinizin kaç kopyasının tutulduğu belirtir.
-* **İşlem** tüm okuma ve yazma işlemleri Azure depolama birimine başvurun.
-* **Veri çıkışı** bir Azure bölgesinin dışına aktarılan tüm verileri ifade eder. Depolama hesabınızdaki verilere aynı bölgede çalıştırılmayan bir uygulama eriştiğinde veri çıkışı için ücretlendirilirsiniz. Veri ve hizmetlerinizi aynı bölgede çıkış ücretlerini sınırlamak için Grup için kaynak gruplarını kullanma hakkında daha fazla bilgi için bkz: [bir Azure kaynak grubu nedir?](https://docs.microsoft.com/azure/architecture/cloud-adoption/governance/resource-consistency/azure-resource-access#what-is-an-azure-resource-group). 
+* **Bölge** , hesabınızın dayandığı coğrafi bölgeyi ifade eder.
+* **Hesap türü** , kullanmakta olduğunuz depolama hesabı türünü belirtir. 
+* **Erişim katmanı** , genel amaçlı v2 veya blob depolama hesabınız için belirttiğiniz veri kullanımı modelini ifade eder.
+* Depolama **kapasitesi** , veri depolamak için kullandığınız depolama hesabı servis biriminden ne kadarının olduğunu ifade eder.
+* **Çoğaltma** , verilerinizin kaç kopyasının aynı anda ve hangi konumlarda tutulmasını belirler.
+* **İşlemler** , Azure depolama 'ya yönelik tüm okuma ve yazma işlemlerine başvurur.
+* **Veri** çıkışı, bir Azure bölgesinden aktarılan tüm verileri ifade eder. Depolama hesabınızdaki verilere aynı bölgede çalıştırmayan bir uygulama tarafından erişildiğinde, veri çıkışı için ücretlendirilirsiniz. Kaynak gruplarını, çıkış ücretlerini sınırlandırmak için aynı bölgedeki veri ve hizmetlerinizi gruplandırmak üzere kullanma hakkında bilgi için bkz. [Azure Kaynak grubu nedir?](https://docs.microsoft.com/azure/cloud-adoption-framework/govern/resource-consistency/resource-access-management#what-is-an-azure-resource-group). 
 
-[Azure Storage Fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/) sayfası hesap türüne, depolama kapasitesine, çoğaltmaya ve işlemlere bağlı olarak ayrıntılı fiyatladırma bilgileri sağlar. [Veri Aktarımları Fiyatlandırma Ayrıntıları](https://azure.microsoft.com/pricing/details/data-transfers/), veri çıkışı için ayrıntılı fiyatlandırma bilgileri sağlar. Maliyetlerinizi tahmin etmeye yardımcı olması için [Azure Storage Fiyatlandırması Hesaplayıcısı](https://azure.microsoft.com/pricing/calculator/?scenario=data-management)’nı kullanabilirsiniz.
+[Azure depolama fiyatlandırma](https://azure.microsoft.com/pricing/details/storage/) sayfası, hesap türü, depolama kapasitesi, çoğaltma ve işlemlere göre ayrıntılı fiyatlandırma bilgileri sağlar. [Veri aktarımları fiyatlandırma ayrıntıları](https://azure.microsoft.com/pricing/details/data-transfers/) , veri çıkışı için ayrıntılı fiyatlandırma bilgileri sağlar. Maliyetlerinizi tahmin etmeye yardımcı olması için [Azure depolama Fiyatlandırma Hesaplayıcı](https://azure.microsoft.com/pricing/calculator/?scenario=data-management) ' yı kullanabilirsiniz.
 

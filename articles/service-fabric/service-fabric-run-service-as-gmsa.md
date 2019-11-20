@@ -1,6 +1,6 @@
 ---
-title: Bir Azure Service Fabric hizmet gMSA hesabı altında Çalıştır | Microsoft Docs
-description: Hizmet gMSA olarak tek başına Service Fabric Windows küme üzerinde çalıştırmayı öğrenin.
+title: Bir Azure Service Fabric hizmetini gMSA hesabı altında çalıştırın | Microsoft Docs
+description: Service Fabric Windows tek başına kümesinde bir hizmeti gMSA olarak çalıştırmayı öğrenin.
 services: service-fabric
 documentationcenter: .net
 author: dkkapur
@@ -14,29 +14,29 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 03/29/2018
 ms.author: dekapur
-ms.openlocfilehash: 5c3781c2111fff7483a7fb65bd7b2e69c2011d18
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d00eceffebb222196191a389058c0feb496e169a
+ms.sourcegitcommit: f176e5bb926476ec8f9e2a2829bda48d510fbed7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60837751"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70307653"
 ---
 # <a name="run-a-service-as-a-group-managed-service-account"></a>Grup tarafından Yönetilen Hizmet Hesabı olarak hizmet çalıştırma
-Windows Server tek başına küme üzerinde bir grup olarak yönetilen hizmet hesabı (gMSA) bir RunAs ilke kullanan bir hizmet çalıştırabilirsiniz.  Varsayılan olarak, Service Fabric uygulamaları Fabric.exe işlemin altında çalıştığı hesabın altına çalıştırın. Hatta bir paylaşılan barındırılan ortamda, farklı hesaplar altındaki uygulamaları çalıştıran bunları birbirinden daha güvenli kılacaktır. Active Directory şirket içi etki alanı ve değil Azure Active Directory (Azure AD) içinde kullandığına dikkat edin. Bir gmsa'yı kullanarak, parola veya yoktur uygulama bildiriminde depolanan şifrelenmiş parola.  Hizmet olarak da çalıştırabilirsiniz bir [Active Directory kullanıcı veya grup](service-fabric-run-service-as-ad-user-or-group.md).
+Windows Server tek başına kümesinde, bir Çalıştır ilkesi kullanarak bir hizmeti grup yönetilen hizmet hesabı (gMSA) olarak çalıştırabilirsiniz.  Varsayılan olarak, Service Fabric uygulamalar yapı. exe işleminin altında çalıştığı hesap altında çalışır. Uygulamaları, paylaşılan barındırılan bir ortamda bile farklı hesaplar altında çalıştırmak, bunları diğerinden daha güvenli hale getirir. Bunun Active Directory Azure Active Directory (Azure AD) değil, etki alanınız içinde şirket içinde kullandığını unutmayın. Bir gMSA kullanarak, uygulama bildiriminde depolanan parola veya şifreli parola yoktur.  Ayrıca, bir hizmeti [Active Directory Kullanıcı veya grup](service-fabric-run-service-as-ad-user-or-group.md)olarak da çalıştırabilirsiniz.
 
-Aşağıdaki örnekte adlı bir gMSA hesabının nasıl oluşturulacağını gösterir *svc Test$* ; küme düğümlerine; Bu yönetilen hizmet hesabını dağıtma ve yapılandırma kullanıcı asıl adı.
+Aşağıdaki örnekte *svc-test $* ; adlı bir gMSA hesabının nasıl oluşturulacağı gösterilmektedir. Bu yönetilen hizmet hesabını küme düğümlerine dağıtma; ve Kullanıcı sorumlusunu yapılandırma.
 
-Ön koşullar:
-- Etki alanı, bir KDS kök anahtarı gerekir.
-- Etki alanı, bir Windows Server 2012 veya üzeri işlev düzeyinde olması gerekir.
+Önkoşulların önkoşulları:
+- Etki alanı bir KDS kök anahtarı gerektirir.
+- Etki alanında en az bir Windows Server 2012 (veya R2) DC olması gerekir.
 
-1. Bir grup yönetilen hizmet hesabı kullanarak oluşturmak bir Active Directory etki alanı yöneticisi olan `New-ADServiceAccount` komutunu olduğundan emin olun `PrincipalsAllowedToRetrieveManagedPassword` tüm service fabric küme düğümleri içerir. `AccountName`, `DnsHostName`, ve `ServicePrincipalName` benzersiz olması gerekir.
+1. Bir Active Directory etki alanı yöneticisi, `New-ADServiceAccount` komutunu kullanarak Grup tarafından yönetilen hizmet hesabı oluşturun ve bunun tüm Service Fabric küme düğümlerini `PrincipalsAllowedToRetrieveManagedPassword` içerdiğinden emin olun. `AccountName`, `DnsHostName` ve`ServicePrincipalName` benzersiz olmalıdır.
 
     ```powershell
     New-ADServiceAccount -name svc-Test$ -DnsHostName svc-test.contoso.com  -ServicePrincipalNames http/svc-test.contoso.com -PrincipalsAllowedToRetrieveManagedPassword SfNode0$,SfNode1$,SfNode2$,SfNode3$,SfNode4$
     ```
 
-2. Her Service Fabric küme düğümleri (örneğin, `SfNode0$,SfNode1$,SfNode2$,SfNode3$,SfNode4$`) yükleyin ve gmsa'yı test.
+2. Service Fabric küme düğümlerinin her birinde (örneğin, `SfNode0$,SfNode1$,SfNode2$,SfNode3$,SfNode4$`), gMSA 'yı yükleyip test edin.
     
     ```powershell
     Add-WindowsFeature RSAT-AD-PowerShell
@@ -44,7 +44,7 @@ Aşağıdaki örnekte adlı bir gMSA hesabının nasıl oluşturulacağını gö
     Test-AdServiceAccount svc-Test$
     ```
 
-3. Kullanıcı asıl adı'nı yapılandırma ve kullanıcı başvurmak için RunAsPolicy yapılandırın.
+3. Kullanıcı sorumlusunu yapılandırın ve RunAsPolicy öğesini kullanıcıya başvuracak şekilde yapılandırın.
     
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
@@ -65,13 +65,13 @@ Aşağıdaki örnekte adlı bir gMSA hesabının nasıl oluşturulacağını gö
     ```
 
 > [!NOTE] 
-> Bir hizmete bir RunAs ilke uygulayın ve hizmet bildirimi uç noktası HTTP protokolü kaynaklarla bildirir, belirtmelisiniz bir **SecurityAccessPolicy**.  Daha fazla bilgi için [HTTP ve HTTPS Uç noktalara yönelik güvenlik erişim ilkesi atama](service-fabric-assign-policy-to-endpoint.md). 
+> Bir hizmete RunAs ilkesi uygularsanız ve hizmet bildirimi uç nokta kaynaklarını HTTP protokolüyle bildirirse, bir **Securityaccesspolicy**belirtmeniz gerekir.  Daha fazla bilgi için bkz. [http ve HTTPS uç noktaları için güvenlik erişimi Ilkesi atama](service-fabric-assign-policy-to-endpoint.md). 
 >
 
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
-Sonraki adım olarak, bu makaleleri okuyun:
+Sonraki adım olarak, aşağıdaki makaleleri okuyun:
 * [Uygulama modelini anlama](service-fabric-application-model.md)
-* [Bir hizmet bildiriminde kaynakları belirtme](service-fabric-service-manifest-resources.md)
+* [Hizmet bildiriminde kaynakları belirtme](service-fabric-service-manifest-resources.md)
 * [Uygulama dağıtma](service-fabric-deploy-remove-applications.md)
 
 [image1]: ./media/service-fabric-application-runas-security/copy-to-output.png

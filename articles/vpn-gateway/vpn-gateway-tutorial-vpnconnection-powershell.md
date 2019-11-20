@@ -1,19 +1,19 @@
 ---
-title: PowerShell kullanarak Azure S2S VPN bağlantıları oluşturma ve yönetme | Microsoft Docs
+title: 'Azure VPN Gateway: S2S VPN bağlantıları oluşturma ve yönetme: öğretici'
 description: Öğretici - Azure PowerShell modülü ile S2S VPN bağlantıları Oluşturma ve Yönetme
 services: vpn-gateway
 author: yushwang
 ms.service: vpn-gateway
 ms.topic: tutorial
-ms.date: 02/11/2019
+ms.date: 10/17/2019
 ms.author: yushwang
 ms.custom: mvc
-ms.openlocfilehash: b59d58eb2c387e5ba1f71748751110bf932837b9
-ms.sourcegitcommit: 1aefdf876c95bf6c07b12eb8c5fab98e92948000
+ms.openlocfilehash: 64da55c3dba4b617458b68a8b54a509bab4264d2
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66727117"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74152150"
 ---
 # <a name="tutorial-create-and-manage-s2s-vpn-connections-using-powershell"></a>Öğretici: PowerShell kullanarak S2S VPN bağlantıları oluşturma ve yönetme
 
@@ -35,15 +35,15 @@ Aşağıdaki diyagramda bu öğreticinin topolojisi gösterilmektedir:
 
 ## <a name="requirements"></a>Gereksinimler
 
-İlk öğreticiyi tamamlayın: [Azure PowerShell ile VPN ağ geçidi oluşturma](vpn-gateway-tutorial-create-gateway-powershell.md) aşağıdaki kaynakları oluşturmak için:
+İlk öğreticiyi doldurun: aşağıdaki kaynakları oluşturmak için [Azure PowerShell Ile VPN ağ geçidi oluşturma](vpn-gateway-tutorial-create-gateway-powershell.md) :
 
 1. Kaynak grubu (TestRG1), sanal ağ (VNet1) ve GatewaySubnet
 2. VPN ağ geçidi (VNet1GW)
 
-Sanal ağ parametre değerleri aşağıda listelenmiştir. Şirket içi ağınızı temsil eden yerel ağ geçidi için ek değerler unutmayın. Temel ortam ve ağ kurulumu daha sonra kopyalama ve yapıştırma Bu öğretici için değişkenleri ayarlamak için aşağıdaki değerleri değiştirin. Cloud Shell oturumunuzu zaman aşımına uğraması veya farklı bir PowerShell penceresi kullanmanız gerekir, kopyalama ve yeni oturumunuz değişkenlere yapıştırın ve Öğreticisi ile devam edin.
+Sanal ağ parametre değerleri aşağıda listelenmiştir. Şirket içi ağınızı temsil eden yerel ağ geçidinin ek değerlerini göz önünde edin. Aşağıdaki değerleri ortamınıza ve ağ kuruluma göre değiştirin, ardından Bu öğreticinin değişkenlerini ayarlamak için kopyalayıp yapıştırın. Cloud Shell oturumunuz zaman aşımına uğrarsa veya farklı bir PowerShell penceresi kullanmanız gerekiyorsa, değişkenleri kopyalayıp yeni oturumunuza yapıştırın ve öğreticiye devam edin.
 
 >[!NOTE]
-> Bu bağlantı kullanıyorsanız, şirket içi ağınıza eşleştirmek için değerleri değiştirdiğinizden emin olun. Bu adımları öğretici olarak yalnızca çalıştırıyorsanız, değişiklik gerekmez, ancak bağlantı çalışmaz.
+> Bunu bir bağlantı yapmak için kullanıyorsanız, değerleri şirket içi ağınızla eşleşecek şekilde değiştirdiğinizden emin olun. Bu adımları bir öğretici olarak çalıştırıyorsanız, değişiklik yapmanız gerekmez, ancak bağlantı çalışmaz.
 >
 
 ```azurepowershell-interactive
@@ -82,7 +82,7 @@ S2S VPN bağlantısı oluşturmak için uygulanması gereken iş akışı basitt
 * Şirket içi adres alanı
 * (İsteğe bağlı) BGP öznitelikleri (BGP eş IP adresi ve AS numarası)
 
-Sahip bir yerel ağ geçidi oluşturma [yeni AzLocalNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/new-azlocalnetworkgateway) komutu.
+[New-AzLocalNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/new-azlocalnetworkgateway) komutuyla bir yerel ağ geçidi oluşturun.
 
 ```azurepowershell-interactive
 New-AzLocalNetworkGateway -Name $LNG1 -ResourceGroupName $RG1 `
@@ -91,7 +91,7 @@ New-AzLocalNetworkGateway -Name $LNG1 -ResourceGroupName $RG1 `
 
 ## <a name="create-a-s2s-vpn-connection"></a>S2S VPN bağlantısı oluşturma
 
-Ardından, sanal ağ geçidiniz ile VPN cihazınız arasında siteden siteye VPN bağlantısı oluşturma [yeni AzVirtualNetworkGatewayConnection](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworkgatewayconnection). Siteden Siteye VPN bağlantısı için ‘-ConnectionType’ değerinin *IPsec* olduğunu unutmayın.
+Sonra, sanal ağ geçidiniz ile VPN cihazınız arasında [New-AzVirtualNetworkGatewayConnection](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworkgatewayconnection)Ile bir sıteden siteye VPN bağlantısı oluşturun. Siteden Siteye VPN bağlantısı için ‘-ConnectionType’ değerinin *IPsec* olduğunu unutmayın.
 
 ```azurepowershell-interactive
 $vng1 = Get-AzVirtualNetworkGateway -Name $GW1  -ResourceGroupName $RG1
@@ -99,16 +99,16 @@ $lng1 = Get-AzLocalNetworkGateway   -Name $LNG1 -ResourceGroupName $RG1
 
 New-AzVirtualNetworkGatewayConnection -Name $Connection1 -ResourceGroupName $RG1 `
   -Location $Location1 -VirtualNetworkGateway1 $vng1 -LocalNetworkGateway2 $lng1 `
-  -ConnectionType IPsec -SharedKey "Azure@!b2C3"
+  -ConnectionType IPsec -SharedKey "Azure@!b2C3" -ConnectionProtocol IKEv2
 ```
 
-BGP kullanıyorsanız isteğe bağlı " **-EnableBGP $True**" özelliğini ekleyerek bağlantı için BGP'yi etkinleştirebilirsiniz. Varsayılan olarak devre dışıdır.
+BGP kullanıyorsanız isteğe bağlı " **-EnableBGP $True**" özelliğini ekleyerek bağlantı için BGP'yi etkinleştirebilirsiniz. Varsayılan olarak devre dışıdır. Varsayılan olarak Ikev2 ile '-ConnectionProtocol ' parametresi isteğe bağlıdır. **-ConnectionProtocol IKEv1**belirterek, IKEv1 protokolleriyle bağlantı oluşturabilirsiniz.
 
 ## <a name="update-the-vpn-connection-pre-shared-key-bgp-and-ipsecike-policy"></a>VPN bağlantısı önceden paylaşılan anahtarını, BGP’yi ve IPsec/IKE ilkesini güncelleştirme
 
 ### <a name="view-and-update-your-pre-shared-key"></a>Önceden paylaşılan anahtarınızı görüntüleme ve güncelleştirme
 
-Azure S2S VPN bağlantısı, şirket içi VPN cihazınız ile Azure VPN ağ geçidi arasında kimlik doğrulaması gerçekleştirmek için önceden paylaşılan bir anahtar (gizli dizi) kullanır. Görüntüleyebilir ve önceden paylaşılan anahtar ile bir bağlantı için güncelleştirme [Get-AzVirtualNetworkGatewayConnectionSharedKey](https://docs.microsoft.com/powershell/module/az.network/get-azvirtualnetworkgatewayconnectionsharedkey) ve [kümesi AzVirtualNetworkGatewayConnectionSharedKey](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetworkgatewayconnectionsharedkey).
+Azure S2S VPN bağlantısı, şirket içi VPN cihazınız ile Azure VPN ağ geçidi arasında kimlik doğrulaması gerçekleştirmek için önceden paylaşılan bir anahtar (gizli dizi) kullanır. [Get-azvirtualnetworkgatewayconnectionsharedkey](https://docs.microsoft.com/powershell/module/az.network/get-azvirtualnetworkgatewayconnectionsharedkey) ve [set-azvirtualnetworkgatewayconnectionsharedkey](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetworkgatewayconnectionsharedkey)ile bir bağlantı için önceden paylaşılan anahtarı görüntüleyebilir ve güncelleştirebilirsiniz.
 
 > [!IMPORTANT]
 > Önceden paylaşılan anahtar, en fazla 128 **yazdırılabilir ASCII karakterden** oluşan bir dizedir.
@@ -120,7 +120,7 @@ Get-AzVirtualNetworkGatewayConnectionSharedKey `
   -Name $Connection1 -ResourceGroupName $RG1
 ```
 
-Çıktı "**Azure\@! b2C3**" Yukarıdaki örneği izleyerek. Önceden paylaşılan anahtar değerine değiştirmek için aşağıdaki komutu kullanın. "**Azure\@! _b2 C3 =** ":
+Yukarıdaki örnekte takip eden çıkış "**Azure\@! b2C3**" olacaktır. Önceden paylaşılan anahtar değerini "**Azure\@! _b2 = C3**" olarak değiştirmek için aşağıdaki komutu kullanın:
 
 ```azurepowershell-interactive
 Set-AzVirtualNetworkGatewayConnectionSharedKey `
@@ -136,9 +136,9 @@ Azure VPN ağ geçidi, BGP dinamik yönlendirme protokolünü destekler. Şirket
 * Şirket içi yerel ağ geçidi ASN’si
 * Şirket içi yerel ağ geçidi BGP eş IP adresi
 
-BGP özellikleri yapılandırmadıysanız, aşağıdaki komutlar, VPN ağ geçidi ve yerel ağ geçidi için bu özellikleri ekleyin: [Set-AzVirtualNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetworkgateway) ve [kümesi AzLocalNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/set-azlocalnetworkgateway).
+BGP özelliklerini yapılandırmadıysanız, aşağıdaki komutlar VPN ağ geçidize ve yerel ağ geçidine bu özellikleri ekler: [set-AzVirtualNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetworkgateway) ve [set-azlocalnetworkgateway](https://docs.microsoft.com/powershell/module/az.network/set-azlocalnetworkgateway).
 
-BGP özellikleri yapılandırmak için aşağıdaki örneği kullanın:
+BGP özelliklerini yapılandırmak için aşağıdaki örneği kullanın:
 
 ```azurepowershell-interactive
 $vng1 = Get-AzVirtualNetworkGateway -Name $GW1  -ResourceGroupName $RG1
@@ -149,7 +149,7 @@ Set-AzLocalNetworkGateway -LocalNetworkGateway $lng1 `
   -Asn $LNGASN1 -BgpPeeringAddress $BGPPeerIP1
 ```
 
-BGP ile etkinleştirme [kümesi AzVirtualNetworkGatewayConnection](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetworkgatewayconnection).
+[Set-AzVirtualNetworkGatewayConnection](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetworkgatewayconnection)ile BGP 'yi etkinleştirin.
 
 ```azurepowershell-interactive
 $connection = Get-AzVirtualNetworkGatewayConnection `
@@ -165,8 +165,8 @@ Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connecti
 
 İsteğe bağlı bir IPSec/IKE ilkesi belirterek bağlantıda [varsayılan öneriler](vpn-gateway-about-vpn-devices.md#ipsec) yerine tam olarak hangi IPSec/IKE şifreleme algoritması ve anahtar gücü kombinasyonunun kullanılacağını belirtebilirsiniz. Aşağıdaki örnek betik, şu algoritmalar ve parametreler ile farklı bir IPsec/IKE ilkesi oluşturur:
 
-* Ikev2: AES256, SHA256, DHGroup14
-* IPSec: Aes128, SHA1, PFS14, SA yaşam süresi 14,400 saniye & 102,400,000 KB
+* IKEv2: AES256, SHA256, DHGroup14
+* IPsec: AES128, SHA1, PFS14, SA Yaşam Süresi 14.400 saniye ve 102.400.000 KB
 
 ```azurepowershell-interactive
 $connection = Get-AzVirtualNetworkGatewayConnection -Name $Connection1 `
@@ -184,7 +184,7 @@ Algoritmaların ve yönergelerin tam listesini görmek için bkz. [S2S veya Sana
 
 ## <a name="add-another-s2s-vpn-connection"></a>Başka bir S2S VPN bağlantısı ekleme
 
-Ek bir S2S VPN bağlantısı aynı VPN ağ geçidini ekleme, başka bir yerel ağ geçidi oluşturma ve yeni yerel ağ geçidi ve VPN ağ geçidi arasında yeni bir bağlantı oluşturun. Aşağıdaki örneklerde, değişkenleri kendi ağ yapılandırmayı yansıtacak şekilde değiştirin emin olarak kullanın.
+Aynı VPN ağ geçidine ek bir S2S VPN bağlantısı ekleyin, başka bir yerel ağ geçidi oluşturun ve yeni yerel ağ geçidi ile VPN ağ geçidi arasında yeni bir bağlantı oluşturun. Değişkenlerini kendi ağ yapılandırmanızı yansıtacak şekilde değiştirdiğinizden emin olmak için aşağıdaki örnekleri kullanın.
 
 ```azurepowershell-interactive
 # On-premises network - LNGIP2 is the VPN device public IP address
@@ -212,7 +212,7 @@ Azure VPN ağ geçidiniz ile iki S2S VPN bağlantısı kurmuş oldunuz.
 
 ## <a name="delete-a-s2s-vpn-connection"></a>Bir S2S VPN bağlantısını silme
 
-Bir S2S VPN bağlantısı Sil [Remove-AzVirtualNetworkGatewayConnection](https://docs.microsoft.com/powershell/module/az.network/remove-azvirtualnetworkgatewayconnection).
+[Remove-AzVirtualNetworkGatewayConnection](https://docs.microsoft.com/powershell/module/az.network/remove-azvirtualnetworkgatewayconnection)Ile BIR S2S VPN bağlantısını silin.
 
 ```azurepowershell-interactive
 Remove-AzVirtualNetworkGatewayConnection -Name $Connection2 -ResourceGroupName $RG1
@@ -226,7 +226,7 @@ Remove-AzVirtualNetworkGatewayConnection -Name $LNG2 -ResourceGroupName $RG1
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu yapılandırma bir prototip, test veya kavram kanıtı dağıtımı parçasıysa, kullanabileceğiniz [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) VPN ağ geçidi, kaynak grubunu kaldırmak için komutu ve tüm ilgili kaynakları.
+Bu yapılandırma, prototip, test veya kavram kanıtı dağıtımı bir parçasıysa, [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) komutunu kullanarak kaynak grubunu, VPN ağ geçidini ve tüm ilgili kaynakları kaldırabilirsiniz.
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name $RG1

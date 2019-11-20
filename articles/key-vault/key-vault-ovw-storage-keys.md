@@ -1,200 +1,157 @@
 ---
-title: Depolama hesabı anahtarları Azure Key Vault ve Azure CLI ile yönetme
-description: Depolama hesabı anahtarları Azure Key Vault ve Azure depolama hesabınız için anahtar tabanlı erişim arasında sorunsuz bir tümleştirme sağlar.
+title: Azure Key Vault ve Azure CLı ile depolama hesabı anahtarlarını yönetme
+description: Depolama hesabı anahtarları, Azure depolama hesabına Azure Key Vault ve anahtar tabanlı erişim arasında sorunsuz bir tümleştirme sağlar.
 ms.topic: conceptual
 services: key-vault
 ms.service: key-vault
 author: msmbaldwin
 ms.author: mbaldwin
-manager: barbkess
-ms.date: 03/01/2019
-ms.openlocfilehash: 6ac054bc9750e4297080c4ab64030c9c6a5fb55a
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+manager: rkarlin
+ms.date: 09/18/2019
+ms.openlocfilehash: 62faf33dc8b3690036407972e12633e741a85d78
+ms.sourcegitcommit: 42748f80351b336b7a5b6335786096da49febf6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67312844"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72176743"
 ---
-# <a name="manage-storage-account-keys-with-azure-key-vault-and-the-azure-cli"></a>Depolama hesabı anahtarları Azure Key Vault ve Azure CLI ile yönetme 
+# <a name="manage-storage-account-keys-with-key-vault-and-the-azure-cli"></a>Key Vault ve Azure CLı ile depolama hesabı anahtarlarını yönetme
 
-Azure Key Vault, Azure depolama hesapları ve klasik depolama hesapları için anahtarları yönetir. Sizin için birkaç anahtar yönetimi işlevleri tamamlamak için anahtar kasası yönetilen depolama hesabı özelliğini kullanabilirsiniz.
+Bir Azure depolama hesabı, hesap adı ve anahtarı kapsayan kimlik bilgilerini kullanır. Anahtar otomatik olarak oluşturulur ve şifreleme anahtarı olarak değil, bir parola görevi görür. Key Vault, depolama hesabı anahtarlarını [Key Vault gizli](/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets)dizileri olarak depolayarak yönetir. 
 
-Bir [Azure depolama hesabı](/azure/storage/storage-create-storage-account) bir hesap adı ve anahtar oluşan bir kimlik bilgisi kullanır. Anahtar otomatik olarak oluşturulan ve bir parola yerine bir olarak hizmet veren bir şifreleme anahtarı. Key Vault depolama hesabı anahtarlarını depolayarak bunları olarak yöneten [Key Vault gizli dizileri](/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets). Anahtarları ile bir Azure depolama hesabı (eşitlenen) listelenir ve düzenli aralıklarla yeniden veya _Döndürülmüş_. 
+Anahtarları bir Azure depolama hesabıyla listelemek (eşitlemek) ve anahtarları düzenli olarak yeniden oluşturmak (döndürmek) için Key Vault yönetilen depolama hesabı anahtarı özelliğini kullanabilirsiniz. Hem depolama hesapları hem de klasik depolama hesapları için anahtarları yönetebilirsiniz.
 
 Yönetilen depolama hesabı anahtar özelliğini kullandığınızda, aşağıdaki noktaları göz önünde bulundurun:
 
-- Anahtar değerler hiçbir zaman bir çağıranın yanıt döndürülür.
-- Key Vault depolama hesabı anahtarlarınızı yönetmeniz gerekir. Yoksa, anahtarları kendiniz yönetebilir ve anahtar kasası işlemleri ile müdahaleyi önlemek.
-- Yalnızca tek bir anahtar kasası nesne depolama hesabı anahtarlarını yönetmeniz gerekir. Anahtar Yönetimi'nden birden çok nesne izin vermez.
-- Bir kullanıcı asıl olan, ancak bir hizmet sorumlusu ile değil, depolama hesabınızı yönetmek için Key Vault isteyebilir.
-- Key Vault yalnızca kullanarak anahtarları yeniden oluştur. El ile depolama hesabı anahtarlarını yeniden yok. 
+- Anahtar değerleri, bir çağırana yanıt olarak hiçbir şekilde döndürülmez.
+- Depolama hesabı anahtarlarınızı yalnızca Key Vault yönetmelidir. Anahtarları kendiniz yönetmeyin ve Key Vault süreçleriyle kesintiye uğramayın.
+- Depolama hesabı anahtarlarını yalnızca tek bir Key Vault nesnesi yönetmelidir. Birden çok nesneden anahtar yönetimine izin verme.
+- Depolama hesabınızı bir Kullanıcı sorumlusu ile yönetmek için Key Vault isteyebilirsiniz, ancak hizmet sorumlusu ile kullanamazsınız.
+- Anahtarları yalnızca Key Vault kullanarak yeniden oluşturun. Depolama hesabı anahtarlarınızı el ile yeniden üretme.
 
-> [!NOTE]
-> Azure Active Directory (Azure AD) ile Azure depolama tümleştirme Microsoft'un bulut tabanlı kimlik ve erişim yönetim hizmetidir.
-> Azure AD tümleştirmesi için kullanılabilir [Azure BLOB'ları ve kuyrukları](https://docs.microsoft.com/azure/storage/common/storage-auth-aad).
-> Azure AD kimlik doğrulama ve yetkilendirme için kullanın.
-> Azure AD, Azure Key Vault gibi Azure Depolama'ya OAuth2 belirteç tabanlı erişim sağlar.
->
-> Azure AD, bir uygulama veya kullanıcı kimliği yerine depolama hesabı kimlik bilgilerini kullanarak istemci uygulamanızın kimlik doğrulaması sağlar.
-> Kullanabileceğiniz bir [Azure AD kimlik yönetilen](/azure/active-directory/managed-identities-azure-resources/) Azure'da çalıştırdığınızda. Yönetilen kimlikleri, istemci kimlik doğrulaması ve kimlik bilgilerini veya uygulamanız ile depolama ihtiyacını ortadan kaldırıyor.
-> Azure AD, anahtar kasası tarafından da desteklenir, rol tabanlı erişim denetimi (RBAC), yetkilendirmeyi yönetmek için kullanır.
+Microsoft 'un bulut tabanlı kimlik ve erişim yönetimi hizmeti olan Azure Active Directory (Azure AD) ile Azure depolama tümleştirmesi kullanmanızı öneririz. Azure AD tümleştirmesi, Azure [Blobları ve kuyrukları](../storage/common/storage-auth-aad.md)için kullanılabilir ve Azure depolama 'ya OAuth2 belirteç tabanlı erişim sağlar (tıpkı Azure Key Vault gibi).
 
-### <a name="service-principal-application-id"></a>Hizmet sorumlusu uygulama kimliği
+Azure AD, depolama hesabı kimlik bilgileri yerine bir uygulama veya Kullanıcı kimliği kullanarak istemci uygulamanızın kimliğini doğrulayabilmeniz için izin verir. Azure 'da çalıştırdığınızda [Azure ad yönetilen kimliğini](/azure/active-directory/managed-identities-azure-resources/) kullanabilirsiniz. Yönetilen kimlikler, istemci kimlik doğrulaması gereksinimini ortadan kaldırır ve uygulamanızda veya uygulamanızdaki kimlik bilgilerini depolar.
 
-Azure AD kiracısı ile kayıtlı her uygulama sağlayan bir [hizmet sorumlusu](/azure/active-directory/develop/developer-glossary#service-principal-object). Hizmet sorumlusu uygulama kimliği (ID) olarak işlev görür. Uygulama kimliği, yetkilendirme Kurulum sırasında RBAC aracılığıyla diğer Azure kaynaklarına erişim için kullanılır.
+Azure AD, Key Vault tarafından da desteklenen yetkilendirmeyi yönetmek için rol tabanlı erişim denetimi 'ni (RBAC) kullanır.
 
-Anahtar kasası tüm Azure AD kiracıları önceden kayıtlı bir Microsoft uygulamasıdır. Key Vault, aynı uygulama kimliği ve her Azure bulut içinde kayıtlı değil.
+## <a name="service-principal-application-id"></a>Hizmet sorumlusu uygulama KIMLIĞI
 
-| Kiracılar | Bulut | Uygulama Kimliği |
+Bir Azure AD kiracısı, kayıtlı her uygulamayı bir [hizmet sorumlusu](/azure/active-directory/develop/developer-glossary#service-principal-object)ile sağlar. Hizmet sorumlusu, RBAC aracılığıyla diğer Azure kaynaklarına erişim için yetkilendirme kurulumu sırasında kullanılan uygulama KIMLIĞI olarak görev yapar.
+
+Key Vault, tüm Azure AD kiracılarında önceden kaydedilmiş bir Microsoft uygulamasıdır. Key Vault, her bir Azure bulutu 'nda aynı uygulama KIMLIĞI altına kaydedilir.
+
+| Kira | Una | Uygulama kimliği |
 | --- | --- | --- |
 | Azure AD | Azure Kamu | `7e7c393b-45d0-48b1-a35e-2905ddf8183c` |
 | Azure AD | Azure genel | `cfa8b339-82a2-471a-a3c9-0fc0be7a4093` |
-| Diğer  | Tüm | `cfa8b339-82a2-471a-a3c9-0fc0be7a4093` |
-
-<!-- Add closing sentences to summarize what the user accomplished in this section. -->
+| Farklı  | Kaydedilmemiş | `cfa8b339-82a2-471a-a3c9-0fc0be7a4093` |
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Depolama hesabı anahtarınızı yönetmek için anahtar Kasası'nı kullanmadan önce önkoşulları gözden geçirin:
+Bu kılavuzu gerçekleştirmek için, önce aşağıdakileri yapmanız gerekir:
 
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)’yi yükleyin.
-- Oluşturma bir [Azure depolama hesabı](https://azure.microsoft.com/services/storage/). İzleyin [adımları](https://docs.microsoft.com/azure/storage/).
-- Depolama hesabı adı yalnızca küçük harflerden ve rakamlardan kullanmanız gerekir. Adının uzunluğu 3 ile 24 karakter arasında olmalıdır.        
+- [Azure CLI 'Yı yükler](/cli/azure/install-azure-cli).
+- [Anahtar Kasası oluşturma](quick-create-cli.md)
+- [Bir Azure depolama hesabı oluşturun](../storage/common/storage-quickstart-create-account.md?tabs=azure-cli). Depolama hesabı adı yalnızca küçük harfler ve rakamlar kullanmalıdır. Adın uzunluğu 3 ile 24 karakter arasında olmalıdır.
       
 ## <a name="manage-storage-account-keys"></a>Depolama hesabı anahtarlarını yönetme
 
-Key Vault depolama hesabı anahtarlarını yönetmek için kullanmak için dört temel adım vardır:
+### <a name="connect-to-your-azure-account"></a>Azure hesabınıza bağlanma
 
-1. Mevcut bir depolama hesabını alın.
-1. Mevcut bir anahtar kasasını getirin.
-1. Anahtar kasası yönetilen depolama hesabı kasaya ekler. Ayarlama `key1` etkin anahtar ile bir oluşturma süresini 180 gün olarak.
-1. Kullanım `key1` belirtilen depolama hesabı için bir depolama bağlamını ayarlamak için.
+[Az Login](/powershell/module/az.accounts/connect-azaccount?view=azps-2.5.0) komutunu kullanarak Azure CLI oturumunuzun kimliğini doğrulayın.
 
-> [!NOTE]
-> Key Vault hizmeti, depolama hesabınızda operatör izinleri atanır.
-> 
-> Yalnızca Azure anahtar kasası yönetilen depolama hesabı anahtarlarını ayarladıktan sonra anahtarları Key Vault'u kullanarak değiştirin.
-> Yönetilen depolama hesabı anahtarlarını Key Vault depolama hesabı anahtarını döndürmesini yönetir.
+```azurecli-interactive
+az login
+``` 
 
-1. Bir depolama hesabı oluşturduktan sonra yönetmek için depolama hesabının kaynak Kimliğini almak için aşağıdaki komutu çalıştırın:
-    ```
-    az storage account show -n storageaccountname
-    ```
+### <a name="give-key-vault-access-to-your-storage-account"></a>Depolama hesabınıza Key Vault erişim izni verin
 
-    Kaynak Kimliği değeri komut çıktısını kopyalayın:
-    ```
-    /subscriptions/<subscription ID>/resourceGroups/ResourceGroup/providers/Microsoft.Storage/storageAccounts/StorageAccountName
-    ```
+Depolama hesabınıza erişmek Key Vault erişim sağlamak için Azure CLı [az role atama oluştur](/cli/azure/role/assignment?view=azure-cli-latest) komutunu kullanın. Komutu aşağıdaki parametre değerlerini belirtin:
 
-    Örnek çıktı:
-    ```
-    "objectId": "93c27d83-f79b-4cb2-8dd4-4aa716542e74"
-    ```
-    
-1. Anahtar Kasası'na "Depolama hesabı anahtarı işleci hizmet rolü" RBAC rolü atayın. Bu rol, depolama hesabınıza erişim kapsamını sınırlar. Bir Klasik depolama hesabı için "Klasik depolama hesabı anahtarı işleci hizmet rolü" rolünü kullanın.
+- `--role`: "depolama hesabı anahtar operatörü hizmeti rolü" RBAC rolünü geçirin. Bu rol, erişim kapsamını depolama hesabınızla sınırlandırır. Klasik bir depolama hesabı için bunun yerine "klasik depolama hesabı anahtar Işletmeni hizmeti rolü" geçirin.
+- `--assignee-object-id`: Azure genel bulutundaki Key Vault nesne KIMLIĞI olan "93c27d83-f79b-4CB2-8dd4-4aa716542e74" değerini geçirin. (Azure Kamu bulutundaki Key Vault nesne KIMLIĞINI almak için bkz. [hizmet sorumlusu uygulama kimliği](#service-principal-application-id).)
+- `--scope`: `/subscriptions/<subscriptionID>/resourceGroups/<StorageAccountResourceGroupName>/providers/Microsoft.Storage/storageAccounts/<YourStorageAccountName>` biçiminde olan depolama hesabı kaynak KIMLIĞINIZI geçirin. Abonelik KIMLIĞINIZI bulmak için Azure CLı [az Account List](/cli/azure/account?view=azure-cli-latest#az-account-list) komutunu kullanın; depolama hesabı adınızı ve depolama hesabı kaynak grubunuzu bulmak için Azure CLı [az Storage Account List](/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-list) komutunu kullanın.
 
-    ```
-    az role assignment create --role "Storage Account Key Operator Service Role" --assignee-object-id 93c27d83-f79b-4cb2-8dd4-4aa716542e74 --scope "/subscriptions/<subscriptionID>/resourceGroups/<StorageAccountResourceGroupName>/providers/Microsoft.Storage/storageAccounts/<StorageAccountName>"
-    ```
-    
-    `93c27d83-f79b-4cb2-8dd4-4aa716542e74` Nesne Kimliğini, anahtar Kasası'nda Azure genel bulutunda içindir. Nesne kimliği için Key Vault, Azure kamu bulutunda edinmek için bkz [hizmet sorumlusu uygulama kimliği](#service-principal-application-id).
-    
-1. Bir anahtar kasası yönetilen depolama hesabı oluşturun:
+```azurecli-interactive
+az role assignment create --role "Storage Account Key Operator Service Role" --assignee-object-id 93c27d83-f79b-4cb2-8dd4-4aa716542e74 --scope "/subscriptions/<subscriptionID>/resourceGroups/<StorageAccountResourceGroupName>/providers/Microsoft.Storage/storageAccounts/<YourStorageAccountName>"
+ ```
 
-    Bir oluşturma süresini 90 gün olarak ayarlayın. 90 günün sonunda, anahtar kasası oluşturur `key1` ve etkin anahtarı değiştirir `key2` için `key1`. `key1` ardından etkin bir anahtar olarak işaretlenir. 
+### <a name="create-a-key-vault-managed-storage-account"></a>Key Vault yönetilen bir depolama hesabı oluşturma
+
+ Azure CLı [az keykasa Storage](/cli/azure/keyvault/storage?view=azure-cli-latest#az-keyvault-storage-add) komutunu kullanarak Key Vault yönetilen bir depolama hesabı oluşturun. Yeniden oluşturma dönemini 90 gün olarak ayarlayın. 90 gün sonra, Key Vault `key1` ' ı yeniden üretir ve etkin anahtarı `key2` ' den `key1` ' ye değiştirir. `key1` daha sonra etkin anahtar olarak işaretlenir. Komutu aşağıdaki parametre değerlerini belirtin:
+
+- `--vault-name`: anahtar kasanızın adını geçirin. Anahtar kasanızın adını bulmak için Azure CLı [az keykasası List](/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-list) komutunu kullanın.
+- `-n`: depolama hesabınızın adını geçirin. Depolama hesabınızın adını bulmak için Azure CLı [az Storage Account List](/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-list) komutunu kullanın.
+- `--resource-id`: `/subscriptions/<subscriptionID>/resourceGroups/<StorageAccountResourceGroupName>/providers/Microsoft.Storage/storageAccounts/<YourStorageAccountName>` biçiminde olan depolama hesabı kaynak KIMLIĞINIZI geçirin. Abonelik KIMLIĞINIZI bulmak için Azure CLı [az Account List](/cli/azure/account?view=azure-cli-latest#az-account-list) komutunu kullanın; depolama hesabı adınızı ve depolama hesabı kaynak grubunuzu bulmak için Azure CLı [az Storage Account List](/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-list) komutunu kullanın.
    
-    ```
-    az keyvault storage add --vault-name <YourVaultName> -n <StorageAccountName> --active-key-name key1 --auto-regenerate-key --regeneration-period P90D --resource-id <Id-of-storage-account>
-    ```
+ ```azurecli-interactive
+az keyvault storage add --vault-name <YourKeyVaultName> -n <YourStorageAccountName> --active-key-name key1 --auto-regenerate-key --regeneration-period P90D --resource-id "/subscriptions/<subscriptionID>/resourceGroups/<StorageAccountResourceGroupName>/providers/Microsoft.Storage/storageAccounts/<YourStorageAccountName>"
+ ```
 
-<!-- Add closing sentences to summarize what the user accomplished in this section. -->
+## <a name="shared-access-signature-tokens"></a>Paylaşılan erişim imza belirteçleri
 
-## <a name="create-and-generate-tokens"></a>Oluşturma ve belirteçleri oluşturmak
+Ayrıca, Key Vault paylaşılan erişim imzası belirteçleri oluşturmasını isteyebilirsiniz. Paylaşılan erişim imzası, Depolama hesabınızdaki kaynaklara temsilci erişimi sağlar. İstemci, hesap anahtarlarınızı paylaşmadan Depolama hesabınızdaki kaynaklara erişim izni verebilirsiniz. Paylaşılan erişim imzası, hesap anahtarlarınızla ödün vermeden depolama kaynaklarınızı paylaşmak için güvenli bir yol sağlar.
 
-Paylaşılan erişim imzası belirteçleri oluşturmak için Key Vault da sorabilirsiniz. Paylaşılan erişim imzası, depolama hesabınızdaki kaynaklara temsilci erişimi sağlar. İstemciler hesap anahtarlarınızı paylaşmadan depolama hesabınızdaki kaynaklara erişim verebilirsiniz. Paylaşılan erişim imzası, hesap anahtarlarınızı tehlikeye atmadan depolama kaynaklarınızı paylaşmanın güvenli bir yol sağlar.
+Bu bölümdeki komutlar aşağıdaki eylemleri tamamlar:
 
-Bu bölümdeki komutlar aşağıdaki işlemleri tamamlayın:
+- Hesap paylaşılan erişim imzası tanımını `<YourSASDefinitionName>` olarak ayarlayın. Tanım, anahtar kasanız `<YourKeyVaultName>` Key Vault yönetilen bir depolama hesabında `<YourStorageAccountName>` olarak ayarlanır.
+- Blob, dosya, tablo ve kuyruk Hizmetleri için bir hesap paylaşılan erişim imza belirteci oluşturun. Belirteç, kaynak türleri hizmeti, kapsayıcısı ve nesnesi için oluşturulur. Belirteç, https üzerinden ve belirtilen başlangıç ve bitiş tarihleriyle birlikte tüm izinlerle oluşturulur.
+- Kasada Key Vault yönetilen bir depolama paylaşılan erişim imzası tanımı ayarlayın. Tanım, oluşturulan paylaşılan erişim imzası belirtecinin şablon URI 'sine sahiptir. Tanım `account` paylaşılan erişim imzası türüne sahiptir ve N gün için geçerlidir.
+- Paylaşılan erişim imzasının anahtar kasanıza gizli dizi olarak kaydedildiğini doğrulayın.
 
-- Kümesi bir hesabı paylaşılan erişim imzası tanımı `<YourSASDefinitionName>`. Bir anahtar kasası yönetilen depolama hesabına kümesi tanımı `<YourStorageAccountName>` anahtar kasanızdaki `<VaultName>`.
-- Blob, dosya, tablo ve kuyruk Hizmetleri için hesabı bir paylaşılan erişim imzası belirtecini oluşturun. Belirteç, kaynak türleri için hizmet ve kapsayıcı nesnesi oluşturulur. Belirteç, belirtilen başlangıç ve bitiş tarihleri ve https üzerinden tüm izinleri ile oluşturulur.
-- Kasaya bir anahtar kasası yönetilen paylaşılan depolama erişim imzası tanımı ayarlayın. Tanım oluşturulan paylaşılan erişim İmza belirteci URI Şablonu ' var. Paylaşılan erişim imzası türü tanımına sahip `account` ve N gün boyunca geçerli olur.
-- Paylaşılan erişim imzası tanımına karşılık gelen bir Key Vault gizli dizilerinden gerçek bir erişim belirteci alın.
+### <a name="create-a-shared-access-signature-token"></a>Paylaşılan erişim imza belirteci oluşturma
 
-Önceki bölümdeki adımları tamamladıktan sonra paylaşılan erişim imzası belirteçleri oluşturmak için Key Vault istemek için aşağıdaki komutları çalıştırın. 
+Azure CLı [az Storage Account Generate-SAS](/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-generate-sas) komutunu kullanarak bir paylaşılan erişim imzası tanımı oluşturun. Bu işlem, `storage` ve `setsas` izinlerini gerektirir.
 
-1. Bir paylaşılan erişim imzası tanımı oluşturun. Paylaşılan erişim imzası tanımı oluşturulduktan sonra fazla paylaşılan erişim İmza belirteci oluşturmak için Key Vault isteyin. Bu işlem gerektiriyor `storage` ve `setsas` izinleri.
-    ```
-    $sastoken = az storage account generate-sas --expiry 2020-01-01 --permissions rw --resource-types sco --services bfqt --https-only --account-name storageacct --account-key 00000000
-    ```
 
-    İşlemi hakkında daha fazla yardım için bkz: [az depolama hesabı SAS-Oluştur](https://docs.microsoft.com/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-generate-sas) başvuru belgeleri.
+```azurecli-interactive
+az storage account generate-sas --expiry 2020-01-01 --permissions rw --resource-types sco --services bfqt --https-only --account-name <YourStorageAccountName> --account-key 00000000
+```
+İşlem başarıyla çalıştıktan sonra çıktıyı kopyalayın.
 
-    İşlem başarıyla çalıştıktan sonra çıktısını kopyalayın.
-    ```console
-       "se=2020-01-01&sp=***"
-    ```
-
-1. Kullanım `$sasToken` önceki komutu tarafından oluşturulan ve paylaşılan erişim imzası tanımı oluşturun. Komut parametreleri hakkında daha fazla bilgi için bkz: [az keyvault depolama sas tanımı oluşturma](https://docs.microsoft.com/cli/azure/keyvault/storage/sas-definition?view=azure-cli-latest#required-parameters) başvuru belgeleri.
-    ```
-    az keyvault storage sas-definition create --vault-name <YourVaultName> --account-name <YourStorageAccountName> -n <NameOfSasDefinitionYouWantToGive> --validity-period P2D --sas-type account --template-uri $sastoken
-    ```
-
-    İlk kullanıcı izinleri depolama hesabına sahip olmadığında kullanıcının nesne kimliği alın:
-    ```
-    az ad user show --upn-or-object-id "developer@contoso.com"
-
-    az keyvault set-policy --name <YourVaultName> --object-id <ObjectId> --storage-permissions backup delete list regeneratekey recover     purge restore set setsas update
-    ```
-
-<!-- Add closing sentences to summarize what the user accomplished in this section. -->
-
-## <a name="fetch-tokens-in-code"></a>Kodunda belirteçleri alma
-
-Yakalama tarafından depolama hesabınızda işlemleri yürütmek [paylaşılan erişim imzası belirteçlerinin](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1) Key vault'tan.
-
-Anahtar Kasası'na kimlik doğrulaması için üç yolu vardır:
-
-- Yönetilen hizmet kimliği kullanın. Bu yaklaşım önerilir.
-- Bir hizmet sorumlusu ve sertifika kullanın. 
-- Bir hizmet sorumlusu ve parolayı kullanın. Bu yaklaşım önerilmez.
-
-Daha fazla bilgi için [Azure anahtar Kasası: Temel kavramlar](key-vault-whatis.md#basic-concepts).
-
-Aşağıdaki örnek, paylaşılan erişim imzası belirteçlerinin getirilecek gösterilmiştir. Paylaşılan erişim imzası tanımı oluşturduktan sonra belirteçleri getirin. 
-
-```cs
-// After you get a security token, create KeyVaultClient with vault credentials.
-var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(securityToken));
-
-// Get a shared access signature token for your storage from Key Vault.
-// The format for SecretUri is https://<VaultName>.vault.azure.net/secrets/<ExamplePassword>
-var sasToken = await kv.GetSecretAsync("SecretUri");
-
-// Create new storage credentials by using the shared access signature token.
-var accountSasCredential = new StorageCredentials(sasToken.Value);
-
-// Use the storage credentials and the Blob storage endpoint to create a new Blob service client.
-var accountWithSas = new CloudStorageAccount(accountSasCredential, new Uri ("https://myaccount.blob.core.windows.net/"), null, null, null);
-
-var blobClientWithSas = accountWithSas.CreateCloudBlobClient();
+```console
+"se=2020-01-01&sp=***"
 ```
 
-Dolmak üzere paylaşılan erişim İmza belirteci ise, paylaşılan erişim imzası belirtecini Key Vault'tan yeniden getirmek ve kod güncelleştirin.
+Bu çıktı bir sonraki adımda `--template-id` parametresine geçirilecek.
 
-```cs
-// If your shared access signature token is about to expire,
-// get the shared access signature token again from Key Vault and update it.
-sasToken = await kv.GetSecretAsync("SecretUri");
-accountSasCredential.UpdateSASToken(sasToken);
+### <a name="generate-a-shared-access-signature-definition"></a>Paylaşılan erişim imzası tanımı oluştur
+
+Bir paylaşılan erişim imzası tanımı oluşturmak için, önceki adımdan gelen çıktıyı `--template-id` parametresine geçirerek Azure CLı [az keykasası Storage SAS-Definition Create](/cli/azure/keyvault/storage/sas-definition?view=azure-cli-latest#az-keyvault-storage-sas-definition-create) komutunu kullanın.  Seçtiğiniz adı `-n` parametresine sağlayabilirsiniz.
+
+```azurecli-interactive
+az keyvault storage sas-definition create --vault-name <YourKeyVaultName> --account-name <YourStorageAccountName> -n <YourSASDefinitionName> --validity-period P2D --sas-type account --template-uri <OutputOfSasTokenCreationStep>
 ```
 
-<!-- Add closing sentences to summarize what the user accomplished in this section. -->
+### <a name="verify-the-shared-access-signature-definition"></a>Paylaşılan erişim imzası tanımını doğrulama
 
-### <a name="azure-cli-commands"></a>Azure CLI komutları
+Paylaşılan erişim imzası tanımının Azure CLı [az keykasası gizli listesini](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-list) kullanarak anahtar kasasında depolandığını ve [az keykasasecret gizli gösterme](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-show) komutlarını doğrulayabilirsiniz.
 
-Yönetilen depolama hesapları için uygun olan Azure CLI komutları hakkında daha fazla bilgi için bkz: [az keyvault depolama](https://docs.microsoft.com/cli/azure/keyvault/storage?view=azure-cli-latest) başvuru belgeleri.
+İlk olarak, [az keykasasecret List](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-list) komutunu kullanarak anahtar kasanızda paylaşılan erişim imzası tanımını bulun.
+
+```azurecli-interactive
+az keyvault secret list --vault-name <YourKeyVaultName>
+```
+
+SAS tanımınıza karşılık gelen gizli dizi şu özelliklere sahip olacaktır:
+
+```console
+    "contentType": "application/vnd.ms-sastoken-storage",
+    "id": "https://<YourKeyVaultName>.vault.azure.net/secrets/<YourStorageAccountName>-<YourSASDefinitionName>",
+```
+
+Bundan böyle gizli dizi içeriğini görüntülemek için [az keykasası Secret Show](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-show) komutunu ve `id` özelliğini kullanabilirsiniz.
+
+```azurecli-interactive
+az keyvault secret show --vault-name <YourKeyVaultName> --id <SasDefinitionID>
+```
+
+Bu komutun çıktısı, SAS tanım dizenizi @ no__t-0 olarak gösterir.
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [anahtarlara, parolalara ve sertifikalara](https://docs.microsoft.com/rest/api/keyvault/).
-- Makaleleri gözden [Azure anahtar kasası ekibi blogunu](https://blogs.technet.microsoft.com/kv/).
+- [Anahtarlar, gizli diziler ve sertifikalar](https://docs.microsoft.com/rest/api/keyvault/)hakkında daha fazla bilgi edinin.
+- [Azure Key Vault ekip bloguna](https://blogs.technet.microsoft.com/kv/)ilişkin makaleleri gözden geçirin.
+- Bkz. [keykasası depolama](https://docs.microsoft.com/cli/azure/keyvault/storage?view=azure-cli-latest) başvurusu belgeleri.

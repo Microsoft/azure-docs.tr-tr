@@ -1,5 +1,5 @@
 ---
-title: Pattern.Any varlık
+title: 'Öğretici: model. any varlığı-LUSıS'
 titleSuffix: Azure Cognitive Services
 description: Konuşmaların iyi biçimlendirilmiş olduğu ve verilerin sonunun konuşmadaki diğer sözcüklerle karıştırılma ihtimalinin yüksek olduğu konuşmalardan veri ayıklamak için pattern.any varlığını kullanın.
 services: cognitive-services
@@ -9,23 +9,25 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: tutorial
-ms.date: 06/12/2019
+ms.date: 11/11/2019
 ms.author: diberry
-ms.openlocfilehash: 6007f88af4d1049a87851b3808c66693173a648a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c118a74e273e153746240465692b1c712bd25f47
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67069241"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73953615"
 ---
-# <a name="tutorial-extract-free-form-data-with-patternany-entity"></a>Öğretici: Serbest biçimli Pattern.any varlık verileriyle ayıklayın
+# <a name="tutorial-extract-free-form-data-with-patternany-entity"></a>Öğretici: modelle serbest biçimli verileri ayıklama. herhangi bir varlık
 
 Bu öğreticide konuşmaların iyi biçimlendirilmiş olduğu ve verilerin sonunun konuşmadaki diğer sözcüklerle karıştırılma ihtimalinin yüksek olduğu konuşmalardan veri ayıklamak için pattern.any varlığını kullanacaksınız. 
+
+[!INCLUDE [Waiting for LUIS portal refresh](./includes/wait-v3-upgrade.md)]
 
 **Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:**
 
 > [!div class="checklist"]
-> * Örnek uygulamayı içeri aktarma
+> * Örnek uygulamayı içeri aktar
 > * Var olan varlığa örnek konuşma ekleme
 > * Pattern.any varlığını oluşturma
 > * Desen oluşturma
@@ -34,13 +36,13 @@ Bu öğreticide konuşmaların iyi biçimlendirilmiş olduğu ve verilerin sonun
 
 [!INCLUDE [LUIS Free account](../../../includes/cognitive-services-luis-free-key-short.md)]
 
-## <a name="using-patternany-entity"></a>Pattern.Any varlık kullanma
+## <a name="using-patternany-entity"></a>Model kullanma. herhangi bir varlık
 
 pattern.any varlığı, ifade nedeniyle varlığın sonunun konuşmanın geri kalanından ayrılmasının zor olduğu durumlarda serbest biçimli verileri bulmanızı sağlar. 
 
 Bu İnsan Kaynakları uygulaması, çalışanların şirket formlarını bulmasına yardımcı olmaktadır. 
 
-|İfade|
+|Konuşma|
 |--|
 |Where is **HRF-123456**? (HRF-123456 nerede?)|
 |Who authored **HRF-123234**? (HRF-123234'ü kim yazdı?)|
@@ -50,7 +52,7 @@ Ancak her formun hem bir biçimlendirilmiş adı (yukarıdaki tabloda kullanıla
 
 Formun kolay adı konuşmada şu şekilde olur:
 
-|İfade|
+|Konuşma|
 |--|
 |Where is **Request relocation from employee new to the company 2018 version 5**? (Yeni şirket çalışanı taşınma talep formu 2018 sürüm 5 nerede?)|
 |Who authored **"Request relocation from employee new to the company 2018 version 5"** ? (Yeni şirket çalışanı taşınma talep formu 2018 sürüm 5'i kim yazdı?)|
@@ -64,13 +66,13 @@ Sözcüklerin uzunluklarının değişmesi, LUIS'in varlığın sonunu belirleme
 |Who authored {FormName}[?] ({FormName} kim yazdı[?])|
 |{FormName} is published in French[?] ({FormName} Fransızca mı yayımlandı[?])|
 
-## <a name="import-example-app"></a>Örnek uygulamayı içeri aktarma
+## <a name="import-example-app"></a>Örnek uygulamayı içeri aktar
 
 1. [Uygulama JSON dosyasını](https://github.com/Azure-Samples/cognitive-services-language-understanding/blob/master/documentation-samples/tutorials/custom-domain-pattern-roles-HumanResources.json) indirip kaydedin.
 
-1. İçinde [LUIS portalı](https://www.luis.ai), **uygulamalarım** sayfasında, yeni bir uygulamaya JSON dosyasını içeri aktarın.
+1. [Luu portalında](https://www.luis.ai), **UYGULAMALARıM** sayfasında, JSON 'u yeni bir uygulamaya aktarın.
 
-1. **Yönet** bölümünde **Sürümler** sekmesinde sürümü kopyalayın ve `patt-any` olarak adlandırın. Kopyalama, özgün sürümünüzü etkilemeden farklı LUIS özelliklerini deneyebileceğiniz ideal bir yol sunar. Sürüm adı, URL rotasının bir parçası olarak kullanıldığından ad bir URL'de geçerli olmayan herhangi bir karakter içeremez.
+1. **Yönet** bölümünde **Sürümler** sekmesinde sürümü kopyalayın ve `patt-any` olarak adlandırın. Kopyalama, özgün sürümünüzü etkilemeden farklı LUIS özelliklerini deneyebileceğiniz ideal bir yol sunar. Sürüm adı URL rotasının bir parçası olarak kullanıldığından ad bir URL'de geçerli olmayan hiçbir karakter içeremez.
 
 ## <a name="add-example-utterances"></a>Örnek konuşmalar ekleme 
 
@@ -96,7 +98,7 @@ Pattern.any varlığı farklı uzunluklardaki varlıkları ayıklar. Desen varl�
 
 1. **Create new entity** (Yeni varlık oluştur) öğesini seçin, `FormName` adını girin ve tür olarak **Pattern.any** seçin. **Done** (Bitti) öğesini seçin. 
 
-    Bir Pattern.any yalnızca bir düzende geçerli olduğundan varlık içinde bir amaç'ın örnek konuşma etiketi olamaz. 
+    Bir desen için bir amaç örnek utinliği içindeki varlığı etiketleyemiyorum. any yalnızca bir desen içinde geçerlidir. 
 
     Ayıklanan verilere number veya datetimeV2 biçiminde diğer varlıkların da dahil edilmesini istiyorsanız Pattern.any ile number ve datetimeV2 varlıklarını da içeren bir birleşik varlık oluşturmanız gerekir.
 
@@ -134,9 +136,9 @@ Pattern.any varlığı farklı uzunluklardaki varlıkları ayıklar. Desen varl�
 
 1. Üst gezinti çubuğundan **Test** düğmesini seçerek test panelini kapatın.
 
-## <a name="using-an-explicit-list"></a>Açık bir listesi kullanma
+## <a name="using-an-explicit-list"></a>Açık liste kullanma
 
-Pattern.any içerdiğinde deseninizin varlıkları yanlış ayıkladığını fark ederseniz bu sorunu gidermek için [açık liste](luis-concept-patterns.md#explicit-lists) kullanın.
+Pattern.any içerdiğinde deseninizin varlıkları yanlış ayıkladığını fark ederseniz bu sorunu gidermek için [açık liste](reference-pattern-syntax.md#explicit-lists) kullanın.
 
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme

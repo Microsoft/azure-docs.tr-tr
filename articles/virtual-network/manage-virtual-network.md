@@ -1,7 +1,7 @@
 ---
-title: Oluşturma, değiştirme veya bir Azure sanal ağı Sil
+title: Azure sanal ağını oluşturma, değiştirme veya silme
 titlesuffix: Azure Virtual Network
-description: Oluşturma, değiştirme veya bir Azure sanal ağı silme öğrenin.
+description: Azure 'da bir sanal ağ oluşturmayı, değiştirmeyi veya silmeyi öğrenin.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -12,102 +12,102 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/10/2019
 ms.author: kumud
-ms.openlocfilehash: 235a82c6bba4165790c370c2641ee6cd41f10840
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2c2994c310369a0a6fe26ccc2c1e2e5de6680349
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64700476"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084707"
 ---
-# <a name="create-change-or-delete-a-virtual-network"></a>Oluşturma, değiştirme veya bir sanal ağı silme
+# <a name="create-change-or-delete-a-virtual-network"></a>Sanal ağ oluşturma, değiştirme veya silme
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Oluşturma ve bir sanal ağı silmek ve DNS sunucuları ve var olan bir sanal ağ için IP adresi alanları gibi ayarları değiştirme hakkında bilgi edinin. Sanal ağlara yeniyseniz, bunları hakkında daha fazla bilgi edinebilirsiniz [sanal ağa genel bakış](virtual-networks-overview.md) veya tamamlayarak bir [öğretici](quick-create-portal.md). Bir sanal ağ alt ağları içeriyor. Oluşturma, değiştirme ve alt ağları Sil öğrenmek için bkz. [alt ağları yönetme](virtual-network-manage-subnet.md).
+Var olan bir sanal ağ için sanal ağ oluşturma ve silme ve DNS sunucuları ve IP adresi alanları gibi ayarları değiştirme hakkında bilgi edinin. Sanal ağlarınız için yeni başladıysanız, [sanal ağa genel bakış](virtual-networks-overview.md) veya bir [öğreticiyi](quick-create-portal.md)tamamlama hakkında daha fazla bilgi edinebilirsiniz. Bir sanal ağ, alt ağlar içerir. Alt ağları oluşturma, değiştirme ve silme hakkında bilgi edinmek için bkz. [alt ağları yönetme](virtual-network-manage-subnet.md).
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu makalenin bir bölümündeki adımları tamamlamadan önce aşağıdaki görevleri tamamlayın:
+Bu makalenin herhangi bir bölümündeki adımları tamamlamadan önce aşağıdaki görevleri doldurun:
 
-- Azure hesabınız yoksa, kaydolmaya bir [ücretsiz deneme hesabınızı](https://azure.microsoft.com/free).
-- Portalı kullanarak, açık https://portal.azure.com ve Azure hesabınızda oturum.
-- Bu makaledeki görevleri tamamlamak için PowerShell komutlarını kullanarak, ya da komutları çalıştırmak [Azure Cloud Shell](https://shell.azure.com/powershell), veya PowerShell bilgisayarınızdan çalıştırarak. Azure Cloud Shell, bu makaledeki adımları çalıştırmak için kullanabileceğiniz ücretsiz bir etkileşimli kabuktur. Yaygın Azure araçları, kabuğa önceden yüklenmiştir ve kabuk, hesabınızla birlikte kullanılacak şekilde yapılandırılmıştır. Bu öğretici Azure PowerShell modülü sürüm 1.0.0 gerektirir veya üzeri. Yüklü sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). PowerShell'i yerel olarak çalıştırıyorsanız Azure bağlantısı oluşturmak için `Connect-AzAccount` komutunu da çalıştırmanız gerekir.
-- Bu makaledeki görevleri tamamlamak için Azure komut satırı arabirimi (CLI) komutlarını kullanarak, ya da komutları çalıştırmak [Azure Cloud Shell](https://shell.azure.com/bash), veya bilgisayarınızdan CLI çalıştırarak. Bu öğretici, Azure CLI Sürüm 2.0.31 gerektirir veya üzeri. Yüklü sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli). Azure CLI'yi yerel olarak çalıştırıyorsanız, aynı zamanda çalıştırmak ihtiyacınız `az login` Azure ile bir bağlantı oluşturmak için.
-- Oturum açın ya da Azure ile bağlandığınız hesabı atanmalıdır [ağ Katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolü veya bir [özel rol](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) içinde listelenen uygun eylemleri atanan [izinleri ](#permissions).
+- Henüz bir Azure hesabınız yoksa [ücretsiz deneme hesabı](https://azure.microsoft.com/free)için kaydolun.
+- Portalı kullanıyorsanız, https://portal.azure.comaçın ve Azure hesabınızla oturum açın.
+- Bu makaledeki görevleri tamamlamaya yönelik PowerShell komutlarını kullanıyorsanız, [Azure Cloud Shell](https://shell.azure.com/powershell)komutları çalıştırın veya PowerShell 'i bilgisayarınızdan çalıştırarak çalıştırın. Azure Cloud Shell, bu makaledeki adımları çalıştırmak için kullanabileceğiniz ücretsiz bir etkileşimli kabuktur. Yaygın Azure araçları, kabuğa önceden yüklenmiştir ve kabuk, hesabınızla birlikte kullanılacak şekilde yapılandırılmıştır. Bu öğretici, Azure PowerShell modülü sürümü 1.0.0 veya üstünü gerektirir. Yüklü sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). PowerShell'i yerel olarak çalıştırıyorsanız Azure bağlantısı oluşturmak için `Connect-AzAccount` komutunu da çalıştırmanız gerekir.
+- Bu makaledeki görevleri gerçekleştirmek için Azure komut satırı arabirimi (CLı) komutlarını kullanıyorsanız, [Azure Cloud Shell](https://shell.azure.com/bash)komutları çalıştırın ya da bilgisayarınızdan CLI 'yı çalıştırarak. Bu öğretici, Azure CLı sürüm 2.0.31 veya üstünü gerektirir. Yüklü sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli). Azure CLı 'yi yerel olarak çalıştırıyorsanız, Azure ile bağlantı oluşturmak için `az login` çalıştırmanız da gerekir.
+- Oturum açtığınızda veya Azure 'a bağlanmak için kullandığınız hesap, [ağ katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolüne veya [izinlerde](#permissions)listelenen uygun eylemlere atanmış [özel bir role](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) atanmalıdır.
 
 ## <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
-1. Seçin **+ kaynak Oluştur** > **ağ** > **sanal ağ**.
-2. Girin veya aşağıdaki ayarları için değerleri seçip **Oluştur**:
-   - **Ad**: Ad benzersiz olmalıdır [kaynak grubu](../azure-glossary-cloud-terminology.md?toc=%2fazure%2fvirtual-network%2ftoc.json#resource-group) sanal ağ oluşturulacağını seçin. Sanal ağ oluşturduktan sonra adını değiştiremezsiniz. Zaman içinde birden fazla sanal ağ oluşturabilirsiniz. Öneriler adlandırmak için bkz: [adlandırma kuralları](https://docs.microsoft.com/azure/architecture/best-practices/naming-conventions#naming-rules-and-restrictions). Bir adlandırma kuralı birden fazla sanal ağ yönetmeyi kolaylaştırmak yardımcı olabilir.
-   - **Adres alanı**: Bir sanal ağ adres alanı CIDR gösteriminde belirtilen bir veya daha fazla çakışmayan adres aralıkları oluşur. Tanımladığınız adres aralığı, genel veya özel (RFC 1918) olabilir. Genel veya özel olarak adres aralığını tanımlamak olsun, adres aralığı yalnızca birbirine bağlı sanal ağlar ve sanal ağa bağlı tüm şirket içi ağlarınızı sanal ağ içindeki erişilebiliyor. Aşağıdaki adresi aralıklarını eklenemiyor:
+1. **Sanal ağ** > **ağ** > **kaynak oluştur** ' u seçin.
+2. Aşağıdaki ayarlara ait değerleri girin veya seçin ve ardından **Oluştur**' u seçin:
+   - **Ad**: ad, içinde sanal ağı oluşturmak için seçtiğiniz [kaynak grubunda](../azure-glossary-cloud-terminology.md?toc=%2fazure%2fvirtual-network%2ftoc.json#resource-group) benzersiz olmalıdır. Sanal ağ oluşturulduktan sonra adı değiştiremezsiniz. Zaman içinde birden çok sanal ağ oluşturabilirsiniz. Adlandırma önerileri için bkz. [adlandırma kuralları](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#naming-and-tagging-resources). Bir adlandırma kuralını takip etmek, birden çok sanal ağı yönetmeyi kolaylaştırır.
+   - **Adres alanı**: bir sanal ağın adres alanı, CIDR gösteriminde belirtilen bir veya daha fazla çakışmayan adres aralığından oluşur. Tanımladığınız adres aralığı ortak veya özel olabilir (RFC 1918). Adres aralığını genel veya özel olarak tanımladığınıza göre, adres aralığına yalnızca sanal ağ içinden, birbirine bağlı sanal ağlardan ve sanal ağa bağladığınız şirket içi ağlardan erişilebilir. Aşağıdaki adres aralıklarını ekleyemezsiniz:
      - 224.0.0.0/4 (çok noktaya yayın)
      - 255.255.255.255/32 (yayın)
      - 127.0.0.0/8 (geri döngü)
      - 169.254.0.0/16 (bağlantı-yerel)
      - 168.63.129.16/32 (iç DNS, DHCP ve Azure Load Balancer [durum araştırması](../load-balancer/load-balancer-custom-probe-overview.md#probesource))
 
-     Sanal ağ oluştururken yalnızca bir adres aralığı tanımlayabilirsiniz, sanal ağ oluşturulduktan sonra daha fazla adres aralıkları adres alanına ekleyebilirsiniz. Mevcut bir sanal ağa adres aralığı ekleme konusunda bilgi için bkz [Ekle veya Kaldır'ı bir adres aralığı](#add-or-remove-an-address-range).
+     Portalda sanal ağı oluştururken yalnızca bir adres aralığı tanımlayabilmenize karşın, sanal ağ oluşturulduktan sonra adres alanına daha fazla adres aralığı ekleyebilirsiniz. Mevcut bir sanal ağa adres aralığı ekleme hakkında bilgi edinmek için bkz. [adres aralığı ekleme veya kaldırma](#add-or-remove-an-address-range).
 
      >[!WARNING]
-     >İki ağ, sanal ağ başka bir sanal ağ ile çakışan adres aralıkları varsa veya şirket içinde ağ bağlanamaz. Bir adres aralığı tanımlamadan önce gelecekte diğer sanal ağlara veya şirket içi ağları sanal ağa bağlanmak isteyebileceğiniz olup olmadığını göz önünde bulundurun.
+     >Bir sanal ağda başka bir sanal ağla veya şirket içi ağla çakışan adres aralıkları varsa, iki ağ bağlanamaz. Bir adres aralığı tanımlayabilmeniz için önce sanal ağı diğer sanal ağlara veya gelecekte şirket içi ağlara bağlamak isteyip istemediğinizi göz önünde bulundurun.
      >
      >
 
-     - **Alt ağ adı**: Alt ağ adı sanal ağ içinde benzersiz olmalıdır. Alt ağ oluşturulduktan sonra alt ağ adı değiştiremezsiniz. Portal, bir sanal ağ tüm alt ağlara sahip olması gereken da bir sanal ağ oluşturduğunuzda, bir alt ağda tanımladığınız gerektiriyor. Portalda, sanal ağ oluştururken yalnızca bir alt ağ tanımlayabilirsiniz. Sanal ağ oluşturulduktan sonra daha fazla alt ağı sanal ağa daha sonra ekleyebilirsiniz. Bir sanal ağa bir alt ağı eklemek için bkz: [alt ağları yönetme](virtual-network-manage-subnet.md). Azure CLI veya PowerShell kullanarak birden çok alt ağa sahip bir sanal ağ oluşturabilirsiniz.
+     - **Alt ağ adı**: alt ağ adı sanal ağ içinde benzersiz olmalıdır. Alt ağ oluşturulduktan sonra alt ağ adını değiştiremezsiniz. Bir sanal ağ oluşturmak için sanal ağ gerekli olmasa bile, Portal bir sanal ağ oluşturduğunuzda bir alt ağ tanımlamanızı gerektirir. Portalda, bir sanal ağ oluştururken yalnızca bir alt ağ tanımlayabilirsiniz. Sanal ağ oluşturulduktan sonra, sanal ağa daha sonra daha fazla alt ağ ekleyebilirsiniz. Bir sanal ağa alt ağ eklemek için bkz. [alt ağları yönetme](virtual-network-manage-subnet.md). Azure CLı veya PowerShell kullanarak birden çok alt ağa sahip bir sanal ağ oluşturabilirsiniz.
 
        >[!TIP]
-       >Bazı durumlarda, yöneticiler filtrelemek veya alt ağlar arasında trafiği yönlendirme denetlemek için farklı alt ağlar oluşturun. Alt ağlar tanımlamanız önce alt ağlar arasında trafiği yönlendirmek ve filtrelemek isteyebilirsiniz nasıl göz önünde bulundurun. Alt ağlar arası trafik filtreleme hakkında daha fazla bilgi için bkz. [ağ güvenlik grupları](security-overview.md). Azure otomatik olarak alt ağlar, ancak arasındaki trafiği yönlendirir Azure varsayılan yolları geçersiz kılabilirsiniz. Azures varsayılan alt ağ trafiğini yönlendirme hakkında daha fazla bilgi için bkz: [yönlendirmeye genel bakış](virtual-networks-udr-overview.md).
+       >Bazen, yöneticiler alt ağlar arasındaki trafik yönlendirmeyi filtrelemek veya denetlemek için farklı alt ağlar oluşturur. Alt ağları tanımladıktan önce, alt ağlarınız arasında trafiği nasıl filtrelemek ve dolaştırmak istediğinizi göz önünde bulundurun. Alt ağlar arasındaki trafiği Filtreleme hakkında daha fazla bilgi için bkz. [ağ güvenlik grupları](security-overview.md). Azure, trafiği otomatik olarak alt ağlar arasında yönlendirir, ancak Azure varsayılan yollarını geçersiz kılabilirsiniz. Varsayılan alt ağ trafiği yönlendirmesi hakkında daha fazla bilgi edinmek için bkz. [yönlendirmeye genel bakış](virtual-networks-udr-overview.md).
        >
 
-     - **Alt ağ adres aralığı**: Sanal ağ için girilen adres alanı içinde olmalıdır. Belirtebileceğiniz en küçük /29, alt ağ için sekiz IP adreslerini sağlayan aralığındadır. Azure her alt ağda protokol uyumluluğu için ilk ve son adresi ayırır. Üç ek adresleri, Azure hizmet kullanımı için ayrılmıştır. Sonuç olarak, bir sanal ağ bir / 29 alt ağ adres aralığı ile yalnızca üç kullanılabilir IP adresleri bulunur. Bir sanal ağ VPN ağ geçidi bağlamayı planlıyorsanız, ağ geçidi alt ağı oluşturmanız gerekir. Daha fazla bilgi edinin [ağ geçidi alt ağları için belirli bir adres aralığı konuları](../vpn-gateway/vpn-gateway-about-vpn-gateway-settings.md?toc=%2fazure%2fvirtual-network%2ftoc.json#gwsub). Belirli koşullar altında bir alt ağ oluşturulduktan sonra adres aralığını değiştirebilirsiniz. Bir alt ağ adres aralığı değiştirme konusunda bilgi edinmek için [alt ağları yönetme](virtual-network-manage-subnet.md).
-     - **Abonelik**: Seçin bir [abonelik](../azure-glossary-cloud-terminology.md?toc=%2fazure%2fvirtual-network%2ftoc.json#subscription). Aynı sanal ağda birden fazla Azure aboneliğinde kullanamazsınız. Ancak, bir Abonelikteki bir sanal ağı ile diğer Aboneliklerdeki sanal ağlara bağlanabilirsiniz [sanal ağ eşlemesi](virtual-network-peering-overview.md). Sanal ağa bağlanan tüm Azure kaynakları, sanal ağ ile aynı abonelikte olmalıdır.
-     - **Kaynak grubu**: Mevcut bir seçin [kaynak grubu](../azure-resource-manager/resource-group-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json#resource-groups) veya yeni bir tane oluşturun. Sanal ağ ile aynı kaynak grubunda veya farklı bir kaynak grubu sanal ağa bağlanan bir Azure kaynağı olabilir.
-     - **Konum**: Azure'ı seçin [konumu](https://azure.microsoft.com/regions/), bölge olarak da bilinir. Bir sanal ağ, Azure yalnızca bir konumda olabilir. Ancak, bir sanal ağ tek bir konumda bir sanal ağ başka bir konuma bir VPN ağ geçidi'ni kullanarak bağlanabilirsiniz. Sanal ağa bağlanan tüm Azure kaynakları, sanal ağ ile aynı konumda olmalıdır.
+     - **Alt ağ adres aralığı**: Aralık, sanal ağ için girdiğiniz adres alanı içinde olmalıdır. Belirtebileceğiniz en küçük Aralık/29, alt ağ için sekiz IP adresi sağlar. Azure, protokol uyumluluğu için her bir alt ağdaki ilk ve son adresi ayırır. Azure hizmeti kullanımı için üç ek adres ayrılır. Sonuç olarak,/29 alt ağ adres aralığına sahip bir sanal ağ, yalnızca üç adet kullanılabilir IP adresine sahiptir. Bir sanal ağı bir VPN ağ geçidine bağlamayı planlıyorsanız, bir ağ geçidi alt ağı oluşturmanız gerekir. [Ağ geçidi alt ağları için belirli adres aralığı konuları](../vpn-gateway/vpn-gateway-about-vpn-gateway-settings.md?toc=%2fazure%2fvirtual-network%2ftoc.json#gwsub)hakkında daha fazla bilgi edinin. Belirli koşullar altında alt ağ oluşturulduktan sonra adres aralığını değiştirebilirsiniz. Bir alt ağ adres aralığını değiştirme hakkında bilgi edinmek için bkz. [alt ağları yönetme](virtual-network-manage-subnet.md).
+     - **Abonelik**: bir [abonelik](../azure-glossary-cloud-terminology.md?toc=%2fazure%2fvirtual-network%2ftoc.json#subscription)seçin. Aynı sanal ağı birden fazla Azure aboneliğinde kullanamazsınız. Ancak, sanal ağ [eşlemesi](virtual-network-peering-overview.md)ile diğer aboneliklerdeki sanal ağlara bir abonelikte sanal ağ bağlayabilirsiniz. Sanal ağa bağlandığınız tüm Azure kaynakları, sanal ağla aynı abonelikte olmalıdır.
+     - **Kaynak grubu**: var olan bir [kaynak grubunu](../azure-resource-manager/resource-group-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json#resource-groups) seçin veya yeni bir tane oluşturun. Sanal ağa bağlandığınız bir Azure kaynağı, sanal ağla aynı kaynak grubunda veya farklı bir kaynak grubunda olabilir.
+     - **Konum**: bölge olarak da bilinen bir Azure [konumu](https://azure.microsoft.com/regions/)seçin. Bir sanal ağ yalnızca bir Azure konumunda olabilir. Ancak, bir sanal ağı, bir VPN ağ geçidi kullanarak, başka bir konumdaki sanal ağa bağlayabilirsiniz. Sanal ağa bağlandığınız tüm Azure kaynakları, sanal ağla aynı konumda olmalıdır.
 
-**Komutları**
+**Komut**
 
-- Azure CLI: [az ağ vnet oluşturma](/cli/azure/network/vnet)
-- PowerShell: [Yeni AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork)
+- Azure CLı: [az Network VNET Create](/cli/azure/network/vnet)
+- PowerShell: [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork)
 
-## <a name="view-virtual-networks-and-settings"></a>Sanal ağları görüntüle ve ayarları
+## <a name="view-virtual-networks-and-settings"></a>Sanal ağları ve ayarları görüntüle
 
-1. Portalın üst kısmındaki arama kutusuna girin *sanal ağlar* arama kutusuna. Zaman **sanal ağlar** arama sonuçlarında görünmesini, onu seçin.
-2. Sanal ağlar listesinden ilgili ayarları görüntülemek istediğiniz sanal ağı seçin.
-3. Seçtiğiniz sanal ağ için aşağıdaki ayarları listelenmiştir:
-   - **Genel Bakış**: Adres alanı ve DNS sunucuları da dahil olmak üzere sanal ağ hakkında bilgi sağlar. Adlı bir sanal ağ için genel ayarları aşağıdaki ekran görüntüsünde gösterilmektedir **MyVNet**:
+1. Portalın üst kısmındaki arama kutusuna, arama kutusuna *sanal ağlar* girin. Arama sonuçlarında **sanal ağlar** görüntülendiğinde, bunu seçin.
+2. Sanal ağlar listesinden, ayarlarını görüntülemek istediğiniz sanal ağı seçin.
+3. Seçtiğiniz sanal ağ için aşağıdaki ayarlar listelenir:
+   - **Genel bakış**: adres alanı ve DNS sunucuları dahil olmak üzere sanal ağ hakkında bilgi sağlar. Aşağıdaki ekran görüntüsünde, **Myvnet**adlı bir sanal ağın genel bakış ayarları gösterilmektedir:
 
      ![Ağ arabirimine genel bakış](./media/manage-virtual-network/vnet-overview.png)
 
-     Bir sanal ağ seçerek farklı bir abonelik veya kaynak grubuna taşıyabilirsiniz **değişiklik** yanındaki **kaynak grubu** veya **abonelik adı**. Bir sanal ağ taşıma hakkında bilgi edinmek için [kaynakları farklı kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/resource-group-move-resources.md?toc=%2fazure%2fvirtual-network%2ftoc.json). Makalede Önkoşullar ve Azure portalı, PowerShell ve Azure CLI kullanarak kaynakları taşıma listelenmektedir. Sanal ağa bağlı tüm kaynaklar ile sanal ağa taşımanız gerekir.
-   - **Adres alanı**: Sanal ağa atanır adres alanları listelenir. Adres alanına adres aralığı ekleyip öğrenmek için adımları tamamlamanız [Ekle veya Kaldır'ı bir adres aralığı](#add-or-remove-an-address-range).
-   - **Bağlı cihazlar**: Sanal ağa bağlı herhangi bir kaynağa listelenir. Önceki ekran görüntüsünde, üç ağ arabirimleri ve bir yük dengeleyici sanal ağa bağlanır. Tüm yeni kaynaklar oluşturup sanal ağa bağlama listelenir. Sanal ağa bağlı bir kaynağı silerseniz, artık listede görünür.
-   - **Alt ağlar**: Sanal ağ içinde mevcut alt ağlar listesi gösterilir. Bir alt ağı ekleyip öğrenmek için bkz. [alt ağları yönetme](virtual-network-manage-subnet.md).
-   - **DNS sunucuları**: Azure iç DNS sunucusu veya özel bir DNS sunucusu ad çözümlemesi için sanal ağa bağlı cihazları sağlayıp sağlamadığını belirtebilirsiniz. Azure portalını kullanarak bir sanal ağ oluşturduğunuzda, Azure'nın DNS sunucuları, sanal ağ içindeki ad çözümlemesi için varsayılan olarak kullanılır. DNS sunucuları değiştirmek için adımları tamamlamanız [değişiklik DNS sunucuları](#change-dns-servers) bu makaledeki.
-   - **Eşlemeler**: Abonelikte var olan eşlemeleri varsa, burada listelenir. Var olan eşlemeleri için ayarları görüntüleyin veya oluşturma, değiştirme veya silme eşlemeleri. Eşlemeleri hakkında daha fazla bilgi için bkz: [sanal ağ eşlemesi](virtual-network-peering-overview.md).
-   - **Özellikler**: Sanal ağın kaynak Kimliğini ve içinde bir Azure aboneliği de dahil olmak üzere sanal ağ ayarlarını görüntüler.
-   - **Diyagram**: Diyagram, sanal ağa bağlı tüm cihazlara görsel bir gösterimini sağlar. Diyagram cihazlarla ilgili bazı temel bilgileri yok. Bu görünümde, diyagramdaki bir cihazı yönetmek için cihazı seçin.
-   - **Azure ortak ayarları**: Azure ortak ayarları hakkında daha fazla bilgi için aşağıdaki bilgileri bakın:
+     **Kaynak grubu** veya **abonelik adı**' nın yanındaki **Değiştir** ' i seçerek bir sanal ağı farklı bir aboneliğe veya kaynak grubuna taşıyabilirsiniz. Bir sanal ağı nasıl taşıyacağınızı öğrenmek için bkz. [kaynakları farklı bir kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/resource-group-move-resources.md?toc=%2fazure%2fvirtual-network%2ftoc.json). Makalede önkoşulları ve Azure portal, PowerShell ve Azure CLı kullanarak kaynakların nasıl taşınacağı listelenmektedir. Sanal ağa bağlı tüm kaynaklar sanal ağla birlikte taşınmalıdır.
+   - **Adres alanı**: sanal ağa atanan adres alanları listelenir. Adres alanına adres aralığı ekleme ve kaldırma hakkında bilgi edinmek için [adres aralığı ekleme veya kaldırma](#add-or-remove-an-address-range)bölümündeki adımları uygulayın.
+   - **Bağlı cihazlar**: sanal ağa bağlı tüm kaynaklar listelenir. Önceki ekran görüntüsünde, sanal ağa üç ağ arabirimi ve bir yük dengeleyici bağlı. Oluşturduğunuz ve sanal ağa bağlandığınız tüm yeni kaynaklar listelenir. Sanal ağa bağlı bir kaynağı silerseniz, listede artık görünmez.
+   - **Alt ağlar**: sanal ağ içinde bulunan alt ağların bir listesi gösterilir. Bir alt ağ ekleme ve kaldırma hakkında bilgi edinmek için bkz. [alt ağları yönetme](virtual-network-manage-subnet.md).
+   - **DNS sunucuları**: Azure iç DNS sunucusunun mı yoksa özel bir DNS sunucusunun, sanal ağa bağlı cihazlar için ad çözümlemesi mi sağladığını belirtebilirsiniz. Azure portal kullanarak bir sanal ağ oluşturduğunuzda, Azure 'un DNS sunucuları bir sanal ağ içindeki ad çözümlemesi için varsayılan olarak kullanılır. DNS sunucularını değiştirmek için, bu makaledeki [DNS sunucularını değiştirme](#change-dns-servers) bölümündeki adımları uygulayın.
+   - Eşlemeler **: abonelikte**mevcut eşlemeler varsa, bunlar burada listelenir. Mevcut eşlemeler için ayarları görüntüleyebilir veya eşlemeler oluşturabilir, değiştirebilir veya silebilirsiniz. Eşlemeler hakkında daha fazla bilgi edinmek için bkz. [sanal ağ eşlemesi](virtual-network-peering-overview.md).
+   - **Özellikler**: sanal AĞıN kaynak kimliği ve bulunduğu Azure aboneliği dahil olmak üzere sanal ağla ilgili ayarları görüntüler.
+   - **Diyagram**: diyagram, sanal ağa bağlı tüm cihazların görsel bir gösterimini sağlar. Diyagramda cihazlarla ilgili bazı önemli bilgiler bulunur. Bu görünümdeki bir cihazı yönetmek için diyagramda aygıtı seçin.
+   - **Ortak Azure ayarları**: Genel Azure ayarları hakkında daha fazla bilgi edinmek için aşağıdaki bilgilere bakın:
      - [Etkinlik Günlüğü](../azure-monitor/platform/activity-logs-overview.md)
-     - [Erişim denetimi (IAM)](../role-based-access-control/overview.md)
+     - [Erişim denetimi (ıAM)](../role-based-access-control/overview.md)
      - [Etiketler](../azure-resource-manager/resource-group-using-tags.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
-     - [Kilitler](../azure-resource-manager/resource-group-lock-resources.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
+     - [Kaynaktaki](../azure-resource-manager/resource-group-lock-resources.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
      - [Otomasyon betiği](../azure-resource-manager/manage-resource-groups-portal.md#export-resource-groups-to-templates)
 
-**Komutları**
+**Komut**
 
-- Azure CLI: [az ağ vnet show](/cli/azure/network/vnet)
+- Azure CLı: [az Network VNET Show](/cli/azure/network/vnet)
 - PowerShell: [Get-AzVirtualNetwork](/powershell/module/az.network/get-azvirtualnetwork)
 
-## <a name="add-or-remove-an-address-range"></a>Bir adres aralığı Ekle Kaldır
+## <a name="add-or-remove-an-address-range"></a>Adres aralığı ekleme veya kaldırma
 
-Ekleyebilir ve sanal ağ için adres aralıklarını kaldırın. Bir adres aralığı CIDR gösteriminde belirtilmelidir ve aynı sanal ağdaki başka adres aralıklarıyla çakışamaz. Tanımladığınız adres aralıkları, genel veya özel (RFC 1918) olabilir. Genel veya özel olarak adres aralığını tanımlamak olsun, adres aralığı yalnızca birbirine bağlı sanal ağlar ve sanal ağa bağlı tüm şirket içi ağlarınızı sanal ağ içindeki erişilebiliyor. 
+Bir sanal ağ için adres aralıklarını ekleyebilir ve kaldırabilirsiniz. CıDR gösteriminde bir adres aralığı belirtilmelidir ve aynı sanal ağ içindeki diğer adres aralıklarıyla çakışamaz. Tanımladığınız adres aralıkları genel veya özel (RFC 1918) olabilir. Adres aralığını genel veya özel olarak tanımladığınıza göre, adres aralığına yalnızca sanal ağ içinden, birbirine bağlı sanal ağlardan ve sanal ağa bağladığınız şirket içi ağlardan erişilebilir. 
 
-İlişkili hiçbir alt ağ yoksa sanal ağ adres aralığı düşürebilir. Aksi takdirde, örneğin, adres aralığı için bir /16 /8 değiştirme yalnızca genişletebilirsiniz. Bir küçük adres aralığı ile başlayın ve ardından daha sonra genişletmek veya ek aralıkları ekleyin.
+Kendisiyle ilişkili alt ağınız yoksa, bir sanal ağın adres aralığını azaltabilirsiniz. Aksi takdirde, yalnızca adres aralığını genişletebilirsiniz, örneğin bir/16 ile/8 arasında değişiklik yapabilirsiniz. Küçük bir adres aralığıyla başlayabilir ve daha sonra genişletebilir veya ek aralıklar ekleyebilirsiniz.
 
 <!-- the last two sentences above are added per GitHub issue https://github.com/MicrosoftDocs/azure-docs/issues/20572 -->
 
-Aşağıdaki adresi aralıklarını eklenemiyor:
+Aşağıdaki adres aralıklarını ekleyemezsiniz:
 
 - 224.0.0.0/4 (çok noktaya yayın)
 - 255.255.255.255/32 (yayın)
@@ -115,69 +115,69 @@ Aşağıdaki adresi aralıklarını eklenemiyor:
 - 169.254.0.0/16 (bağlantı-yerel)
 - 168.63.129.16/32 (iç DNS, DHCP ve Azure Load Balancer [durum araştırması](../load-balancer/load-balancer-custom-probe-overview.md#probesource))
 
-Eklemek veya bir adres aralığı kaldırmak için:
+Adres aralığı eklemek veya kaldırmak için:
 
-1. Portalın üst kısmındaki arama kutusuna girin *sanal ağlar* arama kutusuna. Zaman **sanal ağlar** arama sonuçlarında görünmesini, onu seçin.
-2. Sanal ağlar listesinden eklemek veya bir adres aralığı kaldırmak istediğiniz sanal ağı seçin.
-3. Seçin **adres alanı**altında **ayarları**.
-4. Aşağıdaki seçeneklerden birini tamamlayın:
-    - **Bir adres aralığı Ekle**: Yeni bir adres aralığı girin. Adres aralığını, sanal ağ için tanımlanan var olan bir adres aralığı ile çakışamaz.
-    - **Bir adres aralığı kaldırmak**: Kaldırmak istediğiniz adres aralığını sağ tarafta seçin **...** , ardından **Kaldır**. Bir alt ağ adres aralığı varsa, adres aralığı kaldırılamıyor. Bir adres aralığı kaldırmak için önce tüm alt ağların (ve alt ağlarda herhangi bir kaynağa) silmelisiniz adres aralığı yok.
+1. Portalın üst kısmındaki arama kutusuna, arama kutusuna *sanal ağlar* girin. Arama sonuçlarında **sanal ağlar** görüntülendiğinde, bunu seçin.
+2. Sanal ağlar listesinden adres aralığını eklemek veya kaldırmak istediğiniz sanal ağı seçin.
+3. **Ayarlar**altında **Adres alanı**' nı seçin.
+4. Aşağıdaki seçeneklerden birini doldurun:
+    - **Adres aralığı Ekle**: yeni adres aralığını girin. Adres aralığı, sanal ağ için tanımlanan mevcut bir adres aralığıyla çakışamaz.
+    - **Adres aralığını kaldır**: kaldırmak istediğiniz adres aralığının sağında **.** .. öğesini seçin ve **Kaldır**' ı seçin. Adres aralığında bir alt ağ varsa, adres aralığını kaldıramazsınız. Bir adres aralığını kaldırmak için, önce adres aralığında bulunan tüm alt ağları (ve alt ağlardaki kaynakları) silmeniz gerekir.
 5. **Kaydet**’i seçin.
 
-**Komutları**
+**Komut**
 
-- Azure CLI: [az ağ vnet update](/cli/azure/network/vnet)
-- PowerShell: [Set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork)
+- Azure CLı: [az Network VNET Update](/cli/azure/network/vnet)
+- PowerShell: [set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork)
 
 ## <a name="change-dns-servers"></a>DNS sunucularını değiştirme
 
-Sanal ağ kaydı belirttiğiniz sanal ağ için DNS sunucuları ile bağlı tüm sanal makineler. Bunlar ayrıca ad çözümlemesi için belirtilen DNS sunucusu kullanın. Bir VM'deki her ağ arabirimi (NIC) kendi DNS sunucu ayarlarına sahip olabilir. Bir NIC kendi DNS sunucu ayarları varsa, sanal ağın DNS sunucusu ayarlarını geçersiz kılın. NIC DNS ayarları hakkında daha fazla bilgi edinmek için [ağ arabirimi görevler ve ayarlar](virtual-network-network-interface.md#change-dns-servers). VM'ler ve Azure Cloud Services'ta bir rol örnekleri için ad çözümlemesi hakkında daha fazla bilgi edinmek için bkz. [VM'ler ve rol örnekleri için ad çözümlemesi](virtual-networks-name-resolution-for-vms-and-role-instances.md). Ekleme, değiştirme veya bir DNS sunucusunu kaldırmak için:
+Sanal ağa bağlı tüm VM 'Ler, sanal ağ için belirttiğiniz DNS sunucularıyla kayıt kaydeder. Ayrıca, ad çözümlemesi için belirtilen DNS sunucusunu kullanır. Bir VM 'deki her ağ arabirimi (NIC) kendi DNS sunucusu ayarlarına sahip olabilir. Bir NIC 'nin kendi DNS sunucusu ayarları varsa, sanal ağın DNS sunucusu ayarlarını geçersiz kılar. NIC DNS ayarları hakkında daha fazla bilgi için bkz. [ağ arabirimi görevleri ve ayarları](virtual-network-network-interface.md#change-dns-servers). Azure Cloud Services VM 'Ler ve rol örnekleri için ad çözümlemesi hakkında daha fazla bilgi edinmek için bkz. [VM 'ler ve rol örnekleri Için ad çözümlemesi](virtual-networks-name-resolution-for-vms-and-role-instances.md). Bir DNS sunucusunu eklemek, değiştirmek veya kaldırmak için:
 
-1. Portalın üst kısmındaki arama kutusuna girin *sanal ağlar* arama kutusuna. Zaman **sanal ağlar** arama sonuçlarında görünmesini, onu seçin.
-2. Sanal ağlar listesinden, DNS sunucuları için değiştirmek istediğiniz sanal ağı seçin.
-3. Seçin **DNS sunucuları**altında **ayarları**.
+1. Portalın üst kısmındaki arama kutusuna, arama kutusuna *sanal ağlar* girin. Arama sonuçlarında **sanal ağlar** görüntülendiğinde, bunu seçin.
+2. Sanal ağlar listesinden, DNS sunucularını değiştirmek istediğiniz sanal ağı seçin.
+3. **Ayarlar**altında **DNS sunucuları**' nı seçin.
 4. Aşağıdaki seçeneklerden birini seçin:
-   - **Varsayılan (Azure tarafından sağlanan)** : Tüm kaynak adları ve özel IP adresleri, Azure DNS sunucularını otomatik olarak kaydedilir. Aynı sanal ağa bağlı herhangi bir kaynağa arasında adları çözebilirsiniz. Sanal ağlar arasında adlarını çözümlemek için bu seçeneği kullanamazsınız. Sanal ağlar arasında adlarını çözümlemek için özel bir DNS sunucusu kullanmanız gerekir.
-   - **Özel**: Bir sanal ağ için Azure sınıra kadar bir veya daha fazla sunucu ekleyebilirsiniz. DNS sunucusu sınırları hakkında daha fazla bilgi için bkz: [Azure sınırları](../azure-subscription-service-limits.md?toc=%2fazure%2fvirtual-network%2ftoc.json#virtual-networking-limits-classic). Aşağıdaki seçenekleriniz vardır:
-   - **Adres Ekle**: Sunucu, sanal ağın DNS sunucuları listesine ekler. Bu seçenek, DNS sunucusu ayrıca Azure ile kaydeder. Azure ile bir DNS sunucusu kaydettiğinize göre bu DNS sunucusu listesinde seçebilirsiniz.
-   - **Bir adresi kaldırmak**: Kaldırmak istediğiniz sunucuyu yanındaki seçin **...** , ardından **Kaldır**. Sunucuyu silmek sunucuya yalnızca bu sanal ağ listeden kaldırır. DNS sunucusu kullanmak için Azure'da diğer sanal ağlarınız için kayıtlı kalır.
-   - **DNS sunucusu adresleri yeniden sıralama**: DNS sunucularınızın doğru sırada ortamınız için liste doğrulamak önemlidir. DNS sunucu listesine belirtildikleri sırada kullanılır. Hepsini bir kez deneme ayarı olarak çalışmaz. Listedeki ilk DNS sunucusunu ulaşılabilirse, istemci DNS sunucusu düzgün çalışmasını bağımsız olarak, DNS sunucusu kullanır. Listelenen tüm DNS sunucuları kaldırın ve ardından bunları geri istediğiniz sırayla ekleyin.
-   - **Adresle değiştirmek**: DNS sunucusu listesinde vurgulayın ve ardından yeni adresi girin.
+   - **Varsayılan (Azure tarafından sağlanmış)** : tüm kaynak adları ve özel ıp adresleri Azure DNS sunucularına otomatik olarak kaydedilir. Aynı sanal ağa bağlı herhangi bir kaynak arasındaki adları çözebilirsiniz. Bu seçeneği, sanal ağlardaki adları çözümlemek için kullanamazsınız. Sanal ağlarda adları çözümlemek için özel bir DNS sunucusu kullanmanız gerekir.
+   - **Özel**: bir sanal ağ için Azure sınırına kadar bir veya daha fazla sunucu ekleyebilirsiniz. DNS sunucusu limitleri hakkında daha fazla bilgi edinmek için bkz. [Azure Limitleri](../azure-subscription-service-limits.md?toc=%2fazure%2fvirtual-network%2ftoc.json#virtual-networking-limits-classic). Aşağıdaki seçenekleriniz vardır:
+   - **Adres ekleyin**: sunucuyu sanal ağ DNS sunucuları listenize ekler. Bu seçenek ayrıca DNS sunucusunu Azure 'a kaydeder. Azure ile bir DNS sunucusu zaten kaydolduysanız, listeden bu DNS sunucusunu seçebilirsiniz.
+   - **Adresi Kaldır**: kaldırmak istediğiniz sunucunun yanında **..** . ' ı seçin ve ardından **kaldırın**. Sunucu silindiğinde bu sanal ağ listesinden sunucu kaldırılır. DNS sunucusu, diğer sanal ağlarınızın kullanması için Azure 'da kayıtlı kalır.
+   - **DNS sunucusu adreslerini yeniden sırala**: DNS sunucularınızı, ortamınız için doğru sırada listediğinizi doğrulamanız önemlidir. DNS sunucusu listeleri belirtildikleri sırada kullanılır. Hepsini bir kez deneme ayarı olarak çalışmamaları. Listedeki ilk DNS sunucusuna ulaşılırsa istemci, DNS sunucusunun düzgün çalışıp çalışmadığını fark etmeksizin bu DNS sunucusunu kullanır. Listelenen tüm DNS sunucularını kaldırın ve ardından bunları istediğiniz sırayla yeniden ekleyin.
+   - **Bir adresi değiştirin**: listedeki DNS sunucusunu vurgulayın ve yeni adresi girin.
 5. **Kaydet**’i seçin.
-6. Yeni DNS sunucusu ayarlarını atanmış oldukları için sanal ağa bağlı sanal makineleri yeniden başlatın. Vm'leri yeniden başlatılana kadar geçerli DNS ayarlarını kullanmaya devam edin.
+6. Sanal ağa bağlı olan VM 'Leri yeniden başlatarak yeni DNS sunucusu ayarları atanır. VM 'Ler yeniden başlatılana kadar geçerli DNS ayarlarını kullanmaya devam eder.
 
-**Komutları**
+**Komut**
 
-- Azure CLI: [az ağ vnet update](/cli/azure/network/vnet)
-- PowerShell: [Set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork)
+- Azure CLı: [az Network VNET Update](/cli/azure/network/vnet)
+- PowerShell: [set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork)
 
-## <a name="delete-a-virtual-network"></a>Bir sanal ağı silme
+## <a name="delete-a-virtual-network"></a>Sanal ağı silme
 
-Yalnızca ona bağlı hiçbir kaynaklar varsa, bir sanal ağ silebilirsiniz. Sanal ağ içindeki herhangi bir alt ağa bağlı kaynaklar varsa, sanal ağ içindeki tüm alt ağlara bağlı kaynakları silmeniz gerekir. Kaynak silme için uygulayacağınız adımlar, kaynak bağlı olarak farklılık gösterir. Alt ağlara bağlı kaynakları silmek öğrenmek için silmek istediğiniz her bir kaynak türü için belgeleri okuyun. Bir sanal ağı silmek için:
+Bir sanal ağı, yalnızca bağlı kaynak yoksa silebilirsiniz. Sanal ağ içindeki herhangi bir alt ağa bağlı kaynaklar varsa, önce sanal ağ içindeki tüm alt ağlara bağlı olan kaynakları silmeniz gerekir. Kaynağı silmek için aldığınız adımlar kaynağa bağlı olarak değişir. Alt ağlara bağlı kaynakların nasıl silineceğini öğrenmek için, silmek istediğiniz her kaynak türünün belgelerini okuyun. Bir sanal ağı silmek için:
 
-1. Portalın üst kısmındaki arama kutusuna girin *sanal ağlar* arama kutusuna. Zaman **sanal ağlar** arama sonuçlarında görünmesini, onu seçin.
+1. Portalın üst kısmındaki arama kutusuna, arama kutusuna *sanal ağlar* girin. Arama sonuçlarında **sanal ağlar** görüntülendiğinde, bunu seçin.
 2. Sanal ağlar listesinden silmek istediğiniz sanal ağı seçin.
-3. Cihaz seçerek sanal ağa bağlı olduğundan emin olun **bağlı cihazları**altında **ayarları**. Bağlı cihazlar varsa, sanal ağı silmeden önce bunları silmeniz gerekir. Bağlı cihaz yok ise seçin **genel bakış**.
+3. **Ayarlar**altında **bağlı cihazlar**' ı seçerek sanal ağa bağlı bir cihaz olmadığını doğrulayın. Bağlı cihazlar varsa, sanal ağı silebilmeniz için önce bunları silmeniz gerekir. Bağlı cihaz yoksa **genel bakış**' ı seçin.
 4. **Sil**’i seçin.
-5. Sanal ağ silinmesini onaylamak için seçin **Evet**.
+5. Sanal ağı silme işlemini onaylamak için **Evet**' i seçin.
 
-**Komutları**
+**Komut**
 
-- Azure CLI: [azure ağı vnet Sil](/cli/azure/network/vnet)
+- Azure CLı: [Azure ağı VNET silme](/cli/azure/network/vnet)
 - PowerShell: [Remove-AzVirtualNetwork](/powershell/module/az.network/remove-azvirtualnetwork)
 
 ## <a name="permissions"></a>İzinler
 
-Sanal ağlarda görevleri gerçekleştirmek için hesabınızı atanmalıdır [ağ Katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolü veya bir [özel](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) uygun eylemleri atanan rolü aşağıdaki tabloda listelenen:
+Sanal ağlarda görevleri gerçekleştirmek için, hesabınız [ağ katılımcısı](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) rolüne veya aşağıdaki tabloda listelenen uygun eylemlere atanmış [özel](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) bir role atanmalıdır:
 
 | Eylem                                  |   Ad                                |
 |---------------------------------------- |   --------------------------------    |
-|Microsoft.Network/virtualNetworks/read   |   Bir sanal ağ okuyun              |
-|Microsoft.Network/virtualNetworks/write  |   Bir sanal ağ oluştur veya güncelleştir  |
-|Microsoft.Network/virtualNetworks/delete |   Bir sanal ağı silme            |
+|Microsoft. Network/virtualNetworks/Read   |   Sanal ağ okuma              |
+|Microsoft. Network/virtualNetworks/Write  |   Sanal ağ oluşturma veya güncelleştirme  |
+|Microsoft. Network/virtualNetworks/Delete |   Sanal ağı silme            |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kullanarak bir sanal ağ oluşturma [PowerShell](powershell-samples.md) veya [Azure CLI](cli-samples.md) örnek komut dosyaları veya Azure kullanarak [Resource Manager şablonları](template-samples.md)
-- Oluşturma ve uygulama [Azure İlkesi](policy-samples.md) sanal ağlar için
+- [PowerShell](powershell-samples.md) veya [Azure CLI](cli-samples.md) örnek betikleri kullanarak veya Azure [Kaynak Yöneticisi şablonlarını](template-samples.md) kullanarak sanal ağ oluşturma
+- Sanal ağlar için [Azure ilkesi](policy-samples.md) oluşturma ve uygulama

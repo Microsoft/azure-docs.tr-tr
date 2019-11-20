@@ -4,17 +4,17 @@ ms.service: cloud-services
 ms.topic: include
 ms.date: 11/25/2018
 ms.author: jeconnoc
-ms.openlocfilehash: 26910fe2b0b45a6e31f9c907ac31d83a74a95775
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: a73e8b2d0c35fe4575f36598beee1c1e4bbca488
+ms.sourcegitcommit: 5d6c8231eba03b78277328619b027d6852d57520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188711"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68968957"
 ---
 > [!NOTE]
-> Bu bölümde başarıyla tamamlamak için bir çalışma yüklemesine, Node.js ve Azure SDK'sı platformunuz için Node.js için sahip olmanız gerekir.
+> Bu bölümü başarıyla tamamlayabilmeniz için, platformunuz için Node. js ' nin ve Node. js için Azure SDK 'sının çalışan bir yüklemesinin olması gerekir.
 > 
-> * Node.js için Azure SDK'sını yükleyin: [Windows Installer](https://go.microsoft.com/fwlink/?LinkId=254279) | [Mac Installer](https://go.microsoft.com/fwlink/?LinkId=253471) | [Linux indirme](https://go.microsoft.com/fwlink/?LinkId=253472)
-> * Mac veya Linux'ı kullanıyorsanız adresinden node.js'yi yükleyin [ http://nodejs.org ](http://nodejs.org). Windows Installer Node.js zaten içerir.
+> * Node. js için Azure SDK 'sını yükler: [Windows Installer](https://go.microsoft.com/fwlink/?LinkId=254279) | [Mac Installer](https://go.microsoft.com/fwlink/?LinkId=253471) | [Linux indirme](https://go.microsoft.com/fwlink/?LinkId=253472)
+> * Mac veya Linux kullanıyorsanız, ' den [https://nodejs.org](https://nodejs.org)Node. js ' yi yükleyebilirsiniz. Windows Installer zaten Node. js içeriyor.
 > 
 > 

@@ -13,15 +13,15 @@ ms.devlang: multiple
 ms.topic: conceptual
 ms.date: 11/13/2018
 ms.author: spelluru
-ms.openlocfilehash: 47fbce7ea26bcb7224fe2624d593d85cd178d610
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 964a472a5c0a6350090f83755747a12e89a1650e
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60420325"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68422923"
 ---
 # <a name="what-is-azure-relay"></a>Azure Geçiş nedir?
-Azure Relay hizmeti, kurumsal ağınızda çalışan hizmetleri güvenli bir şekilde genel buluta açmanızı sağlar. Güvenlik duvarınızda bir bağlantı noktası açma veya, kurumsal ağ altyapısına müdahale eden değişiklikler olmadan bunu yapabilirsiniz. 
+Azure Relay hizmeti, kurumsal ağınızda çalışan hizmetleri güvenli bir şekilde genel buluta açmanızı sağlar. Bu şekilde, güvenlik duvarınızda bir bağlantı noktasını açmadan veya kurumsal ağ altyapınızda izinsiz değişiklikler yapmaya gerek kalmadan yapabilirsiniz. 
 
 Geçiş hizmeti, şirket içi hizmetler ile bulutta veya başka bir şirket içi ortamda çalışan uygulamalar arasında aşağıdaki senaryoları destekler. 
 
@@ -44,7 +44,7 @@ Geçişli veri aktarımı desenindeki temel adımlar şunlardır:
 Azure Geçiş iki özelliğe sahiptir:
 
 - [Karma Bağlantılar](#hybrid-connections) - Çok platformlu senaryoları etkinleştiren açık standart web yuvalarını kullanır.
-- WCF geçişleri - uzak yordam çağrılarını etkinleştirmek için Windows Communication Foundation (WCF) kullanır. WCF Geçişi, birçok müşterinin WCF programlama modelleriyle kullanmakta olduğu eski geçiş teklifidir.
+- WCF geçişleri-uzak yordam çağrılarını etkinleştirmek için Windows Communication Foundation (WCF) kullanır. WCF Geçişi, birçok müşterinin WCF programlama modelleriyle kullanmakta olduğu eski geçiş teklifidir.
 
 ## <a name="hybrid-connections"></a>Karma Bağlantılar
 
@@ -56,7 +56,7 @@ Karma Bağlantılar protokolü hakkında ayrıntılı bilgi için bkz.[Karma Ba�
 > Azure Relay hizmetinin Karma Bağlantılar özelliği, eski BizTalk Services Karma Bağlantılar özelliğinin yerini almıştır. BizTalk Services Karma Bağlantılar özelliği, Azure Service Bus WCF Geçişi üzerine geliştirilmişti. Azure Relay hizmetindeki Karma Bağlantılar özelliği önceki WCF Geçişi özelliğini tamamlamaktadır. Bu iki hizmet özelliği (WCF Geçişi ve Karma Bağlantılar), Azure Relay hizmetinde birlikte kullanılabilir. Ortak bir ağ geçidine sahip bu iki özellik, diğer açılardan farklı olan uygulamalardır.
 
 ## <a name="wcf-relay"></a>WCF Geçişi
-WCF Geçişi tam .NET Framework ve WCF ile birlikte çalışır. Geçiş hizmeti ile şirket içi hizmetiniz arasındaki bağlantıyı bir WCF "geçiş" bağlamaları paketi kullanarak başlatırsınız. Geçiş bağlamaları bulutta Service Bus ile tümleşen WCF kanalı bileşenleri oluşturmak için tasarlanan yeni aktarım bağlama öğeleriyle eşleşir. Daha fazla bilgi için bkz. [WCF Geçişi ile çalışmaya başlama](relay-wcf-dotnet-get-started.md).
+WCF Geçişi tam .NET Framework ve WCF ile birlikte çalışır. Geçiş hizmeti ile şirket içi hizmetiniz arasındaki bağlantıyı bir WCF "geçiş" bağlamaları paketi kullanarak başlatırsınız. Geçiş bağlamaları, bulutta Service Bus tümleştirilebilen WCF kanal bileşenleri oluşturmak için tasarlanan yeni taşıma bağlama öğelerine eşlenir. Daha fazla bilgi için bkz. [WCF Geçişi ile çalışmaya başlama](service-bus-relay-tutorial.md).
 
 ## <a name="hybrid-connections-vs-wcf-relay"></a>Karma Bağlantılar ve WCF Geçişi
 Hem Karma Bağlantılar hem de WCF Geçişi bir kuruluş ağı içinde bulunan varlıklara güvenli bağlantı olanağı sağlar. Hangisinin diğerine tercih edileceği, aşağıdaki tabloda açıklandığı gibi özel gereksinimlerinize bağlıdır:
@@ -70,7 +70,7 @@ Hem Karma Bağlantılar hem de WCF Geçişi bir kuruluş ağı içinde bulunan v
 | **Standart Tabanlı açık protokol** | |x |
 | **RPC programlama modelleri** | |x |
 
-## <a name="architecture-processing-of-incoming-relay-requests"></a>Mimari: Gelen geçiş isteklerinin işlenmesi
+## <a name="architecture-processing-of-incoming-relay-requests"></a>Mimarisini Gelen geçiş isteklerinin işlenmesi
 Aşağıdaki diyagramda gelen geçiş isteklerinin Azure Relay tarafından nasıl işlendiği gösterilmektedir:
 
 ![Gelen WCF Geçiş İsteklerinin işlenmesi](./media/relay-what-is-it/ic690645.png)
@@ -82,13 +82,13 @@ Aşağıdaki diyagramda gelen geçiş isteklerinin Azure Relay tarafından nası
 5. Ağ geçidi bağlantı isteğini ağ geçidi deposundaki doğru ağ geçidine yönlendirir. 
 6. Ağ geçidi, dinleyen istemciye bir istek göndererek gönderen istemciye en yakın ağ geçidi düğümünde geçici bir kanal oluşturmasını sağlar. 
 7. Dinleyen istemci, gönderen istemciye en yakın olan ağ geçidine geçici bir kanal oluşturur. Ağ geçidi ile istemciler arasında bağlantı kurulduğuna göre istemciler ileti alışverişi gerçekleştirebilir. 
-8. Ağ geçidi iletileri gönderen istemciye dinleme istemciden iletir. 
+8. Ağ Geçidi, dinleme istemcisinden gönderilen iletileri gönderen istemciye iletir. 
 9. Ağ geçidi gönderen istemcideki iletileri gönderen dinleyen istemciye yönlendirir.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [.NET WebSockets ile çalışmaya başlama](relay-hybrid-connections-dotnet-get-started.md)
+* [.NET WebSockets kullanmaya başlama](relay-hybrid-connections-dotnet-get-started.md)
 * [.NET HTTP İstekleri kullanmaya başlayın](relay-hybrid-connections-http-requests-dotnet-get-started.md)
-* [Düğüm WebSockets ile çalışmaya başlama](relay-hybrid-connections-node-get-started.md)
+* [Node WebSockets kullanmaya başlama](relay-hybrid-connections-node-get-started.md)
 * [Node HTTP İstekleri kullanmaya başlayın](relay-hybrid-connections-http-requests-node-get-started.md)
 * [Geçiş hakkında SSS](relay-faq.md)
 

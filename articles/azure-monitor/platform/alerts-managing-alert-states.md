@@ -1,50 +1,49 @@
 ---
 title: Uyarı ve akıllı grup durumlarını yönetme
-description: Uyarı ve akıllı Grup örnek durumları yönetme
-author: anantr
-services: monitoring
+description: Uyarı ve akıllı Grup örneklerinin durumlarını yönetme
 ms.service: azure-monitor
-ms.topic: conceptual
-ms.date: 09/24/2018
-ms.author: anantr
 ms.subservice: alerts
-ms.openlocfilehash: 2aa521b0552b60e5a875a5f46ab9887c6e5b6e3e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.topic: conceptual
+author: anantr
+ms.author: robb
+ms.date: 09/24/2018
+ms.openlocfilehash: fd2a2a4b7d5033ecd35d02baa240bc7586e7a25d
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60919726"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555676"
 ---
 # <a name="manage-alert-and-smart-group-states"></a>Uyarı ve akıllı grup durumlarını yönetme
-Azure İzleyici'de uyarıları artık sahip bir [uyarı durumu ve izleme koşulu](https://aka.ms/azure-alerts-overview) ve benzer şekilde, akıllı grubunuz bir [akıllı Grup durumu](https://aka.ms/smart-groups). Durumu değişiklikleri şimdi geçmişine ilgili uyarı veya akıllı grubuyla ilişkili yakalanır. Bu makalede, bir uyarı hem akıllı bir grup için durum değiştirme işleminde size yol gösterir.
+Azure Izleyici 'deki uyarılar artık bir [uyarı durumuna ve bir izleyici koşuluna](https://aka.ms/azure-alerts-overview) sahiptir ve benzer şekilde akıllı gruplar [akıllı grup durumuna](https://aka.ms/smart-groups)sahiptir. Durum üzerinde yapılan değişiklikler artık ilgili uyarıyla veya akıllı grupla ilişkili geçmiş olarak yakalanır. Bu makalede, hem uyarı hem de akıllı grup için durumu değiştirme sürecinde size yol gösterilir.
 
-## <a name="change-the-state-of-an-alert"></a>Bir uyarının durumunu değiştirin
+## <a name="change-the-state-of-an-alert"></a>Bir uyarının durumunu değiştirme
 1. Bir uyarının durumunu aşağıdaki farklı yollarla değiştirebilirsiniz: 
-    * Tüm uyarılar sayfasında durumunu değiştirmek için istediğiniz uyarıları yanındaki onay kutusuna tıklayın ve durumunu değiştir'e tıklayın.   
+    * Tüm Uyarılar sayfasında, durumunu değiştirmek istediğiniz uyarıların yanındaki onay kutusuna tıklayın ve durumu Değiştir ' e tıklayın.   
     ![İzleme](./media/alerts-managing-alert-states/state-all-alerts.jpg)
-    * Belirli bir uyarı örneği için uyarı ayrıntıları sayfasındaki durumunu değiştir tıklayabilirsiniz.   
+    * Belirli bir uyarı örneği için Uyarı ayrıntıları sayfasında, durumu Değiştir ' e tıklayabilirsiniz.   
     ![İzleme](./media/alerts-managing-alert-states/state-alert-details.jpg)
-    * Belirli bir uyarı örneği için uyarı ayrıntıları sayfasındaki akıllı grubu bölmesinde istediğiniz uyarıları yanındaki onay kutusunu tıklatabilirsiniz    
+    * Belirli bir uyarı örneğinin Uyarı ayrıntıları sayfasında, akıllı grup bölmesinde istediğiniz uyarıların yanındaki onay kutusuna tıklayabilirsiniz    
     ![İzleme](./media/alerts-managing-alert-states/state-alert-details-sg.jpg)
 
-    * Akıllı grubu Ayrıntıları sayfasında üye Uyarılar listesinde değiştirme Stateto Değiştir'i tıklatın ve durumunu değiştirmek için istediğiniz uyarıları yanındaki onay kutusunu durumunu tıklayabilir ve görebilirsiniz durumunu değiştir'e tıklayın.   
+    * Akıllı Grup ayrıntıları sayfasında, üye uyarıları listesinde, durumunu değiştirmek istediğiniz uyarıların yanındaki onay kutusuna tıklayabilir ve durumu Değiştir ' e tıklayarak durumu Değiştir ' e tıklayabilirsiniz.   
     ![İzleme](./media/alerts-managing-alert-states/state-sg-details-alerts.jpg)
-1. Değişiklik durumu'ye tıkladığınızda, açılan pencere durumu (yeni/onaylanan/kapalı) seçin ve gerekirse bir açıklama girin, izin açılır.   
+1. Değişiklik durumunu tıklarken, bir açılan pencere açılır ve durumu seçmenizi sağlar (yeni/onaylanmış/kapalı) ve gerekirse bir yorum girersiniz.   
 ![İzleme](./media/alerts-managing-alert-states/state-alert-change.jpg)
-1. Bunu yaptıktan sonra durum değişikliği geçmişi ilgili uyarı kaydedilir. Bu işlem, İlgili Ayrıntılar sayfasını açarak ve Geçmiş bölümü denetimi de görüntülenebilir.    
+1. Bu işlem tamamlandıktan sonra durum değişikliği ilgili uyarının geçmişine kaydedilir. Bu, ilgili ayrıntılar sayfası açılarak ve geçmiş bölümü denetlenirken görüntülenebilir.    
 ![İzleme](./media/alerts-managing-alert-states/state-alert-history.jpg)
 
-## <a name="change-the-state-of-a-smart-group"></a>Akıllı bir grubu durumunu değiştirme
+## <a name="change-the-state-of-a-smart-group"></a>Bir akıllı grubun durumunu değiştirme
 1. Akıllı bir grubun durumunu aşağıdaki farklı yollarla değiştirebilirsiniz:
-    1. Akıllı grubu Listesi sayfasında durumunu değiştir'i tıklatın ve durumunu değiştirmek için istediğiniz akıllı grupları yanındaki onay kutusunu tıklatabilirsiniz.  
+    1. Akıllı Grup listesi sayfasında, durumunu değiştirmek istediğiniz akıllı grupların yanındaki onay kutusuna tıklayabilir ve durumu Değiştir ' e tıklayabilirsiniz.  
     ![İzleme](./media/alerts-managing-alert-states/state-sg-list.jpg)
-    1. Akıllı grubu ayrıntıları sayfasındaki durumunu değiştir tıklayabilirsiniz.        
+    1. Akıllı Grup ayrıntıları sayfasında, durumu Değiştir ' e tıklayabilirsiniz.        
     ![İzleme](./media/alerts-managing-alert-states/state-sg-details.jpg)
-1. Değişiklik durumu'ye tıkladığınızda, açılan pencere durumu (yeni/onaylanan/kapalı) seçin ve gerekirse bir açıklama girin, izin açılır. 
+1. Değişiklik durumunu tıklarken, bir açılan pencere açılır ve durumu seçmenizi sağlar (yeni/onaylanmış/kapalı) ve gerekirse bir yorum girersiniz. 
 ![İzleme](./media/alerts-managing-alert-states/state-sg-change.jpg)
    > [!NOTE]
-   >  Akıllı bir grubu durumunu değiştirmeyi üyesine uyarıları durumunu değiştirmez.
+   >  Bir akıllı grubun durumunun değiştirilmesi, bağımsız üye uyarılarının durumunu değiştirmez.
 
-1. Bunu yaptıktan sonra durum değişikliği ilgili akıllı Grup geçmişinde kaydedilir. Bu işlem, İlgili Ayrıntılar sayfasını açarak ve Geçmiş bölümü denetimi de görüntülenebilir.     
+1. Bu işlem tamamlandıktan sonra, durum değişikliği ilgili akıllı grubun geçmişine kaydedilir. Bu, ilgili ayrıntılar sayfası açılarak ve geçmiş bölümü denetlenirken görüntülenebilir.     
 ![İzleme](./media/alerts-managing-alert-states/state-sg-history.jpg)
 

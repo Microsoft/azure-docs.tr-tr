@@ -1,10 +1,10 @@
 ---
 title: Linux Vm'leri için DHCPv6'ı yapılandırma
 titlesuffix: Azure Load Balancer
-description: Linux Vm'leri için DHCPv6 yapılandırma
+description: Bu makalede, Linux VM 'Leri için DHCPv6 yapılandırma hakkında bilgi edinin.
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 keywords: IPv6, azure yük dengeleyici, ikili yığın, genel IP, yerel IPv6, mobil veya IOT
 ms.service: load-balancer
 ms.devlang: na
@@ -13,13 +13,13 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/22/2019
-ms.author: kumud
-ms.openlocfilehash: 66777ec314e95d81a4be57082f06ef16dc170186
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: allensu
+ms.openlocfilehash: 1eea6d71b06bac47dcc4fdca9302ee937e0fd54d
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60516544"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74077042"
 ---
 # <a name="configure-dhcpv6-for-linux-vms"></a>Linux Vm'leri için DHCPv6'ı yapılandırma
 
@@ -54,9 +54,9 @@ Bu belge, Linux sanal makinenizi bir IPv6 adresi alır, böylece DHCPv6 etkinle�
     ```bash
     sudo ifdown eth0 && sudo ifup eth0
     ```
-Ubuntu 17.10 ile başlayarak, varsayılan ağ yapılandırma mekanizmadır [NETPLAN]( https://netplan.io).  Ağ yapılandırması NETPLAN yükleme/örnek oluşturma zamanında YAML bu konumdaki yapılandırma dosyalarını okur: / {lib,etc,run}/netplan/*.yaml.
+Ubuntu 17,10 ile başlayarak, varsayılan ağ yapılandırma mekanizması [Netplan]( https://netplan.io)' dır.  Install/örneklemesi oluşturma sırasında NETPLAN şu konumdaki YAML yapılandırma dosyalarından ağ yapılandırmasını okur:/{lib, vs, Run}/Netplan/*. YAML.
 
-Lütfen bir *dhcp6:true* yapılandırmanızda her ethernet arabirimi için bildirimi.  Örneğin:
+Lütfen yapılandırmanızda her Ethernet arabirimi için bir *dhcp6: true* ifadesini ekleyin.  Örneğin:
   
         network:
           version: 2
@@ -64,7 +64,7 @@ Lütfen bir *dhcp6:true* yapılandırmanızda her ethernet arabirimi için bildi
             eno1:
               dhcp6: true
 
-Erken önyükleme sırasında "Oluşturucu ağ" yapılandırması için yazar/el belirtilen ağ cini NETPLAN hakkında başvuru bilgileri için cihaz denetimi kapalı çalıştırın netplan bkz https://netplan.io/reference.
+Erken önyükleme sırasında, Netplan "ağ Oluşturucu", bir yandan, NETPLAN ile ilgili başvuru bilgileri Için belirtilen ağ Daemon 'a cihaz denetimini el ile almak için yapılandırmayı bir şekilde yazar. https://netplan.io/reference.
  
 ## <a name="debian"></a>Debian
 

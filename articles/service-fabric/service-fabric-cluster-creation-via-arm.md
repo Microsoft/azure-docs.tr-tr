@@ -1,9 +1,9 @@
 ---
-title: Bir Azure Service Fabric kümesi oluşturma | Microsoft Docs
-description: Azure Resource Manager'ı kullanarak azure'da güvenli bir Service Fabric kümesi ayarlama konusunda bilgi edinin.  Varsayılan bir şablon kullanarak veya kendi küme şablonu kullanarak bir küme oluşturabilirsiniz.
+title: Azure Service Fabric kümesi oluşturma | Microsoft Docs
+description: Azure 'da Azure Resource Manager kullanarak güvenli bir Service Fabric kümesi ayarlamayı öğrenin.  Varsayılan bir şablon kullanarak veya kendi küme şablonunuzu kullanarak bir küme oluşturabilirsiniz.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: chackdan
 ms.assetid: 15d0ab67-fc66-4108-8038-3584eeebabaa
@@ -13,43 +13,43 @@ ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 08/16/2018
-ms.author: aljo
-ms.openlocfilehash: 709b59d257dd974e81d8b4058983f6e264ba0708
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: atsenthi
+ms.openlocfilehash: 241349724929845afa2fd2a4bacabf9b5017cc7c
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64925865"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72901560"
 ---
-# <a name="create-a-service-fabric-cluster-using-azure-resource-manager"></a>Azure Resource Manager kullanarak bir Service Fabric kümesi oluşturma 
+# <a name="create-a-service-fabric-cluster-using-azure-resource-manager"></a>Azure Resource Manager kullanarak Service Fabric kümesi oluşturma 
 > [!div class="op_single_selector"]
 > * [Azure Resource Manager](service-fabric-cluster-creation-via-arm.md)
-> * [Azure portal](service-fabric-cluster-creation-via-portal.md)
+> * [Azure portalda](service-fabric-cluster-creation-via-portal.md)
 >
 >
 
-Bir [Azure Service Fabric kümesi](service-fabric-deploy-anywhere.md) bir ağa bağlı sanal makinelerin, mikro hizmetlerin dağıtılıp yönetildiği kümesidir.  Azure'da çalışan bir Service Fabric kümesi, bir Azure kaynağıdır ve Azure Resource Manager kullanılarak dağıtılır. Bu makalede, Resource Manager'ı kullanarak azure'da güvenli bir Service Fabric kümesi dağıtmayı açıklar. Varsayılan bir küme şablon veya özel bir şablon kullanabilirsiniz.  Özel bir şablon yoksa, şunları yapabilirsiniz [nasıl oluşturacağınızı öğrenin](service-fabric-cluster-creation-create-template.md).
+[Azure Service Fabric kümesi](service-fabric-deploy-anywhere.md) , mikro hizmetlerinizin dağıtıldığı ve yönetildiği, ağa bağlı bir sanal makineler kümesidir.  Azure 'da çalışan bir Service Fabric kümesi, bir Azure kaynağıdır ve Azure Resource Manager kullanılarak dağıtılır. Bu makalede, Azure 'da Kaynak Yöneticisi kullanarak güvenli bir Service Fabric kümesinin nasıl dağıtılacağı açıklanır. Varsayılan bir küme şablonu veya özel şablon kullanabilirsiniz.  Zaten özel şablonunuz yoksa, [bir tane oluşturma hakkında bilgi](service-fabric-cluster-creation-create-template.md)edinebilirsiniz.
 
-Küme güvenliği, kümenin ilk kurulum ve daha sonra değiştirilemez yapılandırılır. Salt okunur bir küme ayarı önce [Service Fabric kümesi güvenlik senaryoları][service-fabric-cluster-security]. Azure'da Service Fabric kullanımları x509 güvenli kümenize ve onun uç noktaları, istemcilerin kimliğini doğrulamak için sertifika ve şifrelersiniz. Ayrıca, Azure Active Directory Yönetim uç noktalarına erişimi güvenli hale getirmek için tavsiye edilir. Azure AD kiracılar ve kullanıcılar küme oluşturmadan önce oluşturulmalıdır.  Daha fazla bilgi için okuma [istemcilerin kimliğini doğrulamak için Azure AD'yi ayarlarken ayarlamak](service-fabric-cluster-creation-setup-aad.md).
+Kümenin güvenliğini sağlamak için seçilen güvenlik türü (örn.: Windows kimliği, x509 vb.) kümenin ilk oluşturulması için belirtilmelidir ve bundan sonra değiştirilemez. Bir küme ayarlamadan önce [Service Fabric küme güvenliği senaryolarını][service-fabric-cluster-security]okuyun. Azure 'da Service Fabric, kümenizin ve uç noktalarının güvenliğini sağlamak, istemcilerin kimliğini doğrulamak ve verileri şifrelemek için x509 sertifikası kullanır. Yönetim uç noktalarına erişimin güvenliğini sağlamak için de Azure Active Directory önerilir. Daha fazla bilgi için, [istemcilerin kimliğini doğrulamak üzere Azure AD ayarlama](service-fabric-cluster-creation-setup-aad.md)makalesini okuyun.
 
-Üretim iş yüklerini çalıştırmak için bir üretim kümesi oluşturuyorsanız, ilk okuma öneririz [üretim hazırlık denetim](service-fabric-production-readiness-checklist.md).
+Üretim iş yüklerini çalıştırmak için bir üretim kümesi oluşturuyorsanız, önce [Üretim hazırlığı denetim listesini](service-fabric-production-readiness-checklist.md)okumanız önerilir.
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar 
-Bu makalede, bir küme dağıtmak için Service Fabric RM powershell veya Azure CLI modüllerini kullanın:
+Bu makalede, bir kümeyi dağıtmak için Service Fabric RM PowerShell veya Azure CLı modüllerini kullanın:
 
-* [Azure PowerShell 4.1 ve üzeri][azure-powershell]
-* [Azure CLI Sürüm 2.0 ve üzeri][azure-CLI]
+* [Azure PowerShell 4,1 ve üzeri][azure-powershell]
+* [Azure CLı sürüm 2,0 ve üzeri][azure-CLI]
 
-Service Fabric modülleri için başvuru belgeleri bulabilirsiniz:
-* [Az.ServiceFabric](https://docs.microsoft.com/powershell/module/az.servicefabric)
-* [az SF CLI Modülü](https://docs.microsoft.com/cli/azure/sf?view=azure-cli-latest)
+Service Fabric modülleriyle ilgili başvuru belgelerini buradan bulabilirsiniz:
+* [Az. ServiceFabric](https://docs.microsoft.com/powershell/module/az.servicefabric)
+* [az SF CLı modülü](https://docs.microsoft.com/cli/azure/sf?view=azure-cli-latest)
 
-### <a name="sign-in-to-azure"></a>Azure'da oturum açma
+### <a name="sign-in-to-azure"></a>Azure'da oturum açın
 
-Komutlardan herhangi birine bu makaledeki çalıştırmadan önce öncelikle Azure'da oturum açın.
+Bu makaledeki komutlardan birini çalıştırmadan önce önce Azure 'da oturum açın.
 
 ```powershell
 Connect-AzAccount
@@ -61,24 +61,24 @@ az login
 az account set --subscription $subscriptionId
 ```
 
-## <a name="create-a-new-cluster-using-a-system-generated-self-signed-certificate"></a>Sistem tarafından oluşturulan kendinden imzalı bir sertifika kullanarak yeni bir küme oluşturun
+## <a name="create-a-new-cluster-using-a-system-generated-self-signed-certificate"></a>Sistemin ürettiği otomatik olarak imzalanan sertifika kullanarak yeni bir küme oluşturma
 
-Sistem tarafından oluşturulan kendinden imzalı bir sertifika ile güvenli bir küme oluşturmak için aşağıdaki komutları kullanın. Bu komut, bu sertifikayı kullanarak yönetim işlemlerini gerçekleştirmek için küme güvenlik ve yönetim erişimi ayarlamak için kullanılan bir birincil küme sertifikası ayarlar.  Otomatik olarak imzalanan sertifikalar, test kümeleri güvenliğini sağlamak için kullanışlıdır.  Üretim kümeleri bir sertifika yetkilisinden (CA) bir sertifika ile güvenli hale getirilmelidir.
+Sistemin ürettiği otomatik olarak imzalanan bir sertifika ile güvenliği sağlanmış bir küme oluşturmak için aşağıdaki komutları kullanın. Bu komut, küme güvenliği için kullanılan bir birincil küme sertifikası ayarlar ve bu sertifikayı kullanarak yönetim işlemlerini gerçekleştirmek üzere yönetici erişimi ayarlamak için kullanılır.  Otomatik olarak imzalanan sertifikalar, test kümelerinin güvenliğini sağlamak için faydalıdır.  Üretim kümelerinin bir sertifika yetkilisinden (CA) bir sertifika ile güvenliği sağlanmalıdır.
 
-### <a name="use-the-default-cluster-template-that-ships-in-the-module"></a>Modülde birlikte gelen varsayılan küme şablonu kullanın
+### <a name="use-the-default-cluster-template-that-ships-in-the-module"></a>Modülde birlikte gelen varsayılan küme şablonunu kullanın
 
-Varsayılan şablonu kullanarak olabildiğince az parametre belirterek hızlı bir şekilde, bir küme oluşturmak için aşağıdaki komutu kullanın.
+Varsayılan şablonu kullanarak en az parametre belirterek bir kümeyi hızlıca oluşturmak için aşağıdaki komutu kullanın.
 
-Kullanılan şablon edinilebilir [Azure Service Fabric şablonu örnekleri: windows şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Windows-1-NodeTypes-Secure-NSG) ve [Ubuntu şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Ubuntu-1-NodeTypes-Secure)
+Kullanılan şablon [Azure Service Fabric şablonu örnekleri üzerinde kullanılabilir: Windows şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Windows-1-NodeTypes-Secure-NSG) ve [Ubuntu şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Ubuntu-1-NodeTypes-Secure)
 
-Aşağıdaki komutu ya da Windows oluşturabilir veya Linux kümeleri, işletim sistemi uygun şekilde belirtmeniz gerekir. PowerShell/CLI komutları da belirtilen sertifika çıkış *CertificateOutputFolder*; ancak, önceden oluşturulmuş emin sertifika klasör oluşturun. Komut diğer parametre VM SKU gibi de alır.
+Aşağıdaki komut Windows veya Linux kümeleri oluşturabilir, işletim sistemini uygun şekilde belirtmeniz gerekir. PowerShell/CLı komutları Ayrıca, belirtilen *Certificateoutputfolder*'da sertifikayı da çıktı. Ancak, Sertifika klasörünün zaten oluşturulduğundan emin olun. Komut, VM SKU 'SU gibi diğer parametreleri de alır.
 
 > [!NOTE]
-> Aşağıdaki PowerShell komutu, yalnızca Azure PowerShell ile çalışır `Az` modülü. Geçerli Azure Resource Manager PowerShell sürümü denetlemek için "Get-Module Az" aşağıdaki PowerShell komutunu çalıştırın. İzleyin [bu bağlantıyı](/powershell/azure/install-Az-ps) , Azure Resource Manager PowerShell sürümüne yükseltmek için. 
+> Aşağıdaki PowerShell komutu yalnızca Azure PowerShell `Az` modülüyle birlikte kullanılabilir. Azure Resource Manager PowerShell sürümünün geçerli sürümünü denetlemek için, aşağıdaki "Get-Module az" PowerShell komutunu çalıştırın. Azure Resource Manager PowerShell sürümünüzü yükseltmek için [Bu bağlantıyı](/powershell/azure/install-Az-ps) izleyin. 
 >
 >
 
-PowerShell kullanarak kümeye dağıtın:
+PowerShell kullanarak kümeyi dağıtma:
 
 ```powershell
 $resourceGroupLocation="westus"
@@ -95,7 +95,7 @@ $certOutputFolder="c:\certificates"
 New-AzServiceFabricCluster -ResourceGroupName $resourceGroupName -Location $resourceGroupLocation -CertificateOutputFolder $certOutputFolder -CertificatePassword $certpassword -CertificateSubjectName $CertSubjectName -OS $os -VmPassword $vmpassword -VmUserName $vmuser
 ```
 
-Azure CLI kullanarak kümeye dağıtın:
+Azure CLı kullanarak kümeyi dağıtma:
 
 ```azurecli
 declare resourceGroupLocation="westus"
@@ -118,9 +118,9 @@ az sf cluster create --resource-group $resourceGroupName --location $resourceGro
 
 ### <a name="use-your-own-custom-template"></a>Kendi özel şablonunuzu kullanın
 
-Gereksinimlerinize göre özel bir şablon oluşturmak ihtiyacınız varsa mevcut şablonlardan birini ile Başlat önerilir [Azure Service Fabric şablonu örnekleri](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master). Bilgi edinmek için nasıl [küme şablonunuzu özelleştirme][customize-your-cluster-template].
+Gereksinimlerinize uyacak özel bir şablon yazmak gerekirse, [Azure Service Fabric şablonu örneklerinde](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master)bulunan şablonlardan biriyle başlamanız önemle önerilir. [Küme şablonunuzu özelleştirmeyi][customize-your-cluster-template]öğrenin.
 
-Özel bir şablon zaten varsa, tüm üç sertifika şablonu ve parametre dosyası Parametreler şu şekilde adlandırılır ve aşağıdaki gibi null değerler ilgili denetleyin:
+Zaten özel bir şablonunuz varsa, şablondaki ve parametre dosyasındaki üç sertifika ile ilgili parametrelerin şu şekilde adlandırıldığını ve değerlerin null olduğunu aşağıdaki gibi denetleyin:
 
 ```json
    "certificateThumbprint": {
@@ -134,7 +134,7 @@ Gereksinimlerinize göre özel bir şablon oluşturmak ihtiyacınız varsa mevcu
     },
 ```
 
-PowerShell kullanarak kümeye dağıtın:
+PowerShell kullanarak kümeyi dağıtma:
 
 ```powershell
 $resourceGroupLocation="westus"
@@ -149,7 +149,7 @@ $templateFilePath="c:\mytemplates\mytemplate.json"
 New-AzServiceFabricCluster -ResourceGroupName $resourceGroupName -CertificateOutputFolder $certOutputFolder -CertificatePassword $certpassword -CertificateSubjectName $CertSubjectName -TemplateFile $templateFilePath -ParameterFile $parameterFilePath 
 ```
 
-Azure CLI kullanarak kümeye dağıtın:
+Azure CLı kullanarak kümeyi dağıtma:
 
 ```azurecli
 declare certPassword=""
@@ -166,16 +166,16 @@ az sf cluster create --resource-group $resourceGroupName --location $resourceGro
     --template-file $templateFilePath --parameter-file $parametersFilePath
 ```
 
-## <a name="create-a-new-cluster-using-your-own-x509-certificate"></a>Kendi X.509 sertifikası kullanarak yeni bir küme oluşturun
+## <a name="create-a-new-cluster-using-your-own-x509-certificate"></a>Kendi X. 509.440 sertifikanızı kullanarak yeni bir küme oluşturun
 
-Kümenizle güvenliğini sağlamak için kullanmak istediğiniz bir sertifika varsa kümesi oluşturmak için aşağıdaki komutu kullanın.
+Kümenizin güvenliğini sağlamak için kullanmak istediğiniz bir sertifikanız varsa, küme oluşturmak için aşağıdaki komutu kullanın.
 
-Bu, diğer amaçlar için kullanarak son bulur, CA imzalı bir sertifika ise, özellikle anahtar kasanız için ayrı bir kaynak grubuna sağlamanız önerilir. Anahtar Kasası'nı kendi kaynak grubuna yerleştirin öneririz. Bu eylem, anahtarları ve gizli bilgilerinizi kaybetmeden Service Fabric kümenizi içeren kaynak grubunu da dahil olmak üzere bilgi işlem ve depolama kaynak gruplarını kaldırmaya olanak tanır. **Anahtar kasanızı içeren kaynak grubunu *aynı bölgede olmalıdır* onu kullanarak bir küme.**
+Bu, diğer amaçlar için kullanarak da kullanacağınız CA imzalı bir sertifikasa, anahtar kasanıza özel olarak ayrı bir kaynak grubu sağlamanız önerilir. Anahtar kasasını kendi kaynak grubuna yerleştirmenizi öneririz. Bu eylem, anahtar ve gizli dizileri kaybetmeden Service Fabric kümenizi içeren kaynak grubu dahil olmak üzere işlem ve depolama kaynak gruplarını kaldırmanızı sağlar. **Anahtar kasanızı içeren kaynak grubunun, kendisini kullanan kümeyle *aynı bölgede olması gerekir* .**
 
-### <a name="use-the-default-five-node-one-node-type-template-that-ships-in-the-module"></a>Varsayılan beş düğüm, modüldeki birlikte gelen bir düğüm türü şablonu kullanın
-Kullanılan şablon edinilebilir [Azure örnekleri: Windows şablon](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Windows-1-NodeTypes-Secure-NSG) ve [Ubuntu şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Ubuntu-1-NodeTypes-Secure)
+### <a name="use-the-default-five-node-one-node-type-template-that-ships-in-the-module"></a>Modülde birlikte gelen bir düğüm türü şablonu olan varsayılan beş düğümü kullanın
+Kullanılan şablon [Azure örnekleri: Windows şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Windows-1-NodeTypes-Secure-NSG) ve [Ubuntu şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Ubuntu-1-NodeTypes-Secure) üzerinde kullanılabilir
 
-PowerShell kullanarak kümeye dağıtın:
+PowerShell kullanarak kümeyi dağıtma:
 
 ```powershell
 $resourceGroupLocation="westus"
@@ -190,7 +190,7 @@ $os="WindowsServer2016DatacenterwithContainers"
 New-AzServiceFabricCluster -ResourceGroupName $resourceGroupName -Location $resourceGroupLocation -KeyVaultResourceGroupName $vaultResourceGroupName -KeyVaultName $vaultName -CertificateFile C:\MyCertificates\chackocertificate3.pfx -CertificatePassword $certPassword -OS $os -VmPassword $vmpassword -VmUserName $vmuser 
 ```
 
-Azure CLI kullanarak kümeye dağıtın:
+Azure CLı kullanarak kümeyi dağıtma:
 
 ```azurecli
 declare vmPassword="Password!1"
@@ -210,10 +210,10 @@ az sf cluster create --resource-group $resourceGroupName --location $resourceGro
     --vm-password $vmPassword --vm-user-name $vmUser
 ```
 
-### <a name="use-your-own-custom-cluster-template"></a>Kendi özel küme şablonu kullanın
-Gereksinimlerinize göre özel bir şablon oluşturmak ihtiyacınız varsa mevcut şablonlardan birini ile Başlat önerilir [Azure Service Fabric şablonu örnekleri](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master). Bilgi edinmek için nasıl [küme şablonunuzu özelleştirme][customize-your-cluster-template].
+### <a name="use-your-own-custom-cluster-template"></a>Kendi özel küme şablonunuzu kullanın
+Gereksinimlerinize uyacak özel bir şablon yazmak gerekirse, [Azure Service Fabric şablonu örneklerinde](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master)bulunan şablonlardan biriyle başlamanız önemle önerilir. [Küme şablonunuzu özelleştirmeyi][customize-your-cluster-template]öğrenin.
 
-Zaten sahip özel bir şablon sonra olun emin olun, tüm üç sertifika şablonu ve parametre dosyası Parametreler şu şekilde adlandırılır ilgili kontrol edin ve değerleri null gibidir.
+Zaten özel bir şablonunuz varsa, şablondaki ve parametre dosyasındaki üç sertifika ile ilgili parametrelerin aşağıdaki şekilde adlandırıldığını ve değerlerin null olduğunu aşağıdaki şekilde kontrol ettiğinizden emin olun.
 
 ```json
    "certificateThumbprint": {
@@ -227,7 +227,7 @@ Zaten sahip özel bir şablon sonra olun emin olun, tüm üç sertifika şablonu
     },
 ```
 
-PowerShell kullanarak kümeye dağıtın:
+PowerShell kullanarak kümeyi dağıtma:
 
 ```powershell
 $resourceGroupLocation="westus"
@@ -243,7 +243,7 @@ $certificateFile="C:\MyCertificates\chackonewcertificate3.pem"
 New-AzServiceFabricCluster -ResourceGroupName $resourceGroupName -Location $resourceGroupLocation -TemplateFile $templateFilePath -ParameterFile $parameterFilePath -KeyVaultResourceGroupName $vaultResourceGroupName -KeyVaultName $vaultName -CertificateFile $certificateFile -CertificatePassword $certPassword
 ```
 
-Azure CLI kullanarak kümeye dağıtın:
+Azure CLı kullanarak kümeyi dağıtma:
 
 ```azurecli
 declare certPassword="Password!1"
@@ -260,11 +260,11 @@ az sf cluster create --resource-group $resourceGroupName --location $resourceGro
     --template-file $templateFilePath --parameter-file $parametersFilePath 
 ```
 
-### <a name="use-a-pointer-to-a-secret-uploaded-into-a-key-vault"></a>Bir anahtar kasasına yüklenmiş bir gizli dizi için bir işaretçi kullanın
+### <a name="use-a-pointer-to-a-secret-uploaded-into-a-key-vault"></a>Anahtar kasasında karşıya yüklenen gizli dizi için bir işaretçi kullanma
 
-Var olan bir anahtar Kasası'nı kullanmak için anahtar kasası olmalıdır [dağıtım için etkin](../key-vault/key-vault-manage-with-cli2.md#bkmk_KVperCLI) işlem kaynak sağlayıcısı sertifikaları almak ve küme düğümlerine yüklemek izin vermek için.
+Mevcut bir anahtar kasasını kullanmak için, [dağıtım için](../key-vault/key-vault-manage-with-cli2.md#bkmk_KVperCLI) anahtar kasasının, işlem kaynak sağlayıcısının bu kaynaktan sertifika almasını ve küme düğümlerine yüklemesini sağlamak için etkinleştirilmesi gerekir.
 
-PowerShell kullanarak kümeye dağıtın:
+PowerShell kullanarak kümeyi dağıtma:
 
 ```powershell
 Set-AzKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -EnabledForDeployment
@@ -276,7 +276,7 @@ $secretID="https://test1.vault.azure.net:443/secrets/testcertificate4/55ec7c4dc6
 New-AzServiceFabricCluster -ResourceGroupName $resourceGroupName -SecretIdentifier $secretId -TemplateFile $templateFilePath -ParameterFile $parameterFilePath 
 ```
 
-Azure CLI kullanarak kümeye dağıtın:
+Azure CLı kullanarak kümeyi dağıtma:
 
 ```azurecli
 declare $resourceGroupName = "testRG"
@@ -290,9 +290,9 @@ az sf cluster create --resource-group $resourceGroupName --location $resourceGro
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu noktada, Azure'da çalışan güvenli bir kümeye sahip. İleri [kümenize bağlanın](service-fabric-connect-to-secure-cluster.md) ve bilgi edinmek için nasıl [uygulama parolalarını yönetme](service-fabric-application-secret-management.md).
+Bu noktada, Azure 'da çalışan bir güvenli kümeniz vardır. Sonra, [kümenize bağlanın](service-fabric-connect-to-secure-cluster.md) ve [uygulama gizli dizilerini yönetmeyi](service-fabric-application-secret-management.md)öğrenin.
 
-JSON söz dizimi ve bir şablonu kullanmak için özellikler için bkz: [Microsoft.ServiceFabric/clusters şablon başvurusu](/azure/templates/microsoft.servicefabric/clusters).
+JSON sözdizimi ve özellikler için bir şablon kullanmak için bkz. [Microsoft. ServiceFabric/kümeler şablon başvurusu](/azure/templates/microsoft.servicefabric/clusters).
 
 <!-- Links -->
 [azure-powershell]:https://docs.microsoft.com/powershell/azure/install-Az-ps

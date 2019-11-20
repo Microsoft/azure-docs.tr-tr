@@ -16,18 +16,18 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d12991813f68a42f9846c1c9c9c31c01d371d1d4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: df45ab0a7b1729ae6c1602c9769cd5b6da26f6ac
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67107648"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014353"
 ---
-# <a name="quickstart-configure-named-locations-in-azure-active-directory"></a>Hızlı Başlangıç: Azure Active Directory'de adlandırılmış konumları yapılandırma
+# <a name="quickstart-configure-named-locations-in-azure-active-directory"></a>Hızlı Başlangıç: Azure Active Directory’de adlandırılmış konumları yapılandırma
 
 Adlandırılmış konumlar ile, kuruluşunuzda güvenilir IP adresi aralıklarını etiketleyebilirsiniz. Azure AD, aşağıdakileri yapmak için adlandırılmış konumları kullanır:
-- [Risk olaylarında](concept-risk-events.md) hatalı pozitifleri algılama. Güvenilir bir konumdan oturum açılması, kullanıcının oturum açma riskini azaltır.   
-- Yapılandırma [konum tabanlı koşullu erişim](../conditional-access/location-condition.md).
+- [Risk Algılamalarda](concept-risk-events.md)yanlış pozitif sonuçları algıla. Güvenilir bir konumdan oturum açılması, kullanıcının oturum açma riskini azaltır.   
+- [Konum tabanlı koşullu erişimi](../conditional-access/location-condition.md)yapılandırın.
 
 Bu hızlı başlangıçta, ortamınızda adlandırılmış konumları nasıl yapılandıracağınızı öğreneceksiniz.
 
@@ -41,9 +41,9 @@ Bu hızlı başlangıcı tamamlamak için şunlar gerekir:
 
 ## <a name="configure-named-locations"></a>Adlandırılmış konumları yapılandırma
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
 
-2. Sol bölmede seçin **Azure Active Directory**, ardından **koşullu erişim** gelen **güvenlik** bölümü.
+2. Sol bölmede **Azure Active Directory**' yi seçin ve ardından **güvenlik** bölümünden **koşullu erişim** ' i seçin.
 
     ![Koşullu erişim sekmesi](./media/quickstart-configure-named-locations/entrypoint.png)
 
@@ -55,7 +55,7 @@ Bu hızlı başlangıcı tamamlamak için şunlar gerekir:
 
    * **Ad** kutusuna, adlandırılmış konumunuz için bir ad girin.
    * **IP aralıkları** kutusuna CIDR biçiminde IP aralığını girin.  
-   * **Oluştur**’a tıklayın.
+   * **Oluştur**’ tıklayın.
     
      ![Yeni dikey pencere](./media/quickstart-configure-named-locations/61.png)
 
@@ -64,5 +64,5 @@ Bu hızlı başlangıcı tamamlamak için şunlar gerekir:
 Daha fazla bilgi için bkz.
 
 - [Azure AD koşullu erişim](../active-directory-conditional-access-azure-portal.md).
-- [Konum koşulları Azure AD koşullu erişim](../conditional-access/location-condition.md)
+- [Azure AD koşullu erişim 'deki konum koşulları](../conditional-access/location-condition.md)
 - [Riskli oturum açma işlemleri raporu](concept-risky-sign-ins.md).  

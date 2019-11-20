@@ -1,48 +1,48 @@
 ---
-title: Kaynak dosyaları - Azure Batch oluşturma ve kullanma | Microsoft Docs
-description: Azure Batch kaynak dosyaları çeşitli giriş kaynaklarından oluşturmayı öğrenin.
+title: Kaynak dosyaları oluşturma ve kullanma-Azure Batch | Microsoft Docs
+description: Çeşitli giriş kaynaklarından Azure Batch kaynak dosyaları oluşturmayı öğrenin.
 services: batch
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 ms.service: batch
 ms.topic: article
 ms.date: 03/14/2019
 ms.author: lahugh
-ms.openlocfilehash: 113faffb0ebac50a67c96ce21e0ee2c1564bb4fc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9c55b22d1cb85fb645087cf48b54f9d5ac12d58f
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65405650"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68322178"
 ---
-# <a name="creating-and-using-resource-files"></a>Kaynak dosyaları oluşturma ve kullanma
+# <a name="creating-and-using-resource-files"></a>Kaynak dosyalarını oluşturma ve kullanma
 
-Bir Azure Batch görevinde, genellikle işlemek için verilerin bazı formlarıyla gerektirir. Kaynak dosyalar, Batch sanal makinenize (VM) aracılığıyla bir görev bu verilerini sağlamak için araçlarıdır. Kaynak dosyaları tüm tür görevleri destekler: görevler, başlangıç görevleri, iş hazırlama görevleri, iş sürüm görevleri vb. Bu makale, birkaç ortak kaynak dosyaları oluşturma ve bunları bir VM yerleştirmek yöntemleri kapsar.  
+Azure Batch bir görev, genellikle işlemek için bir veri biçimi gerektirir. Kaynak dosyaları, bu verileri Batch sanal makinenize (VM) bir görev aracılığıyla sağlamak anlamına gelir. Tüm görev türleri kaynak dosyalarını destekler: görevler, başlangıç görevleri, iş hazırlama görevleri, iş sürümü görevleri vb. Bu makalede, kaynak dosyaları oluşturma ve bunları bir VM 'ye yerleştirme hakkında bazı yaygın yöntemler ele alınmaktadır.  
 
-Kaynak dosyalar toplu bir VM'de oturum verileri yerleştirmek için bir mekanizma, ancak veri türünü ve nasıl kullanıldığını esnektir. Ancak, bazı ortak kullanım örnekleri vardır:
+Kaynak dosyaları, Batch 'teki bir VM 'ye veri yerleştirmek için bir mekanizmadır, ancak veri türü ve kullanım sıklığı esnektir. Ancak bazı yaygın kullanım durumları vardır:
 
-1. Başlangıç görevinin kaynak dosyalarını kullanarak her VM'de ortak dosyaları sağlama
-1. Görevler tarafından işlenmek üzere giriş verilerini sağlayın
+1. Başlangıç görevindeki kaynak dosyalarını kullanarak her VM 'de ortak dosyaları sağlama
+1. Görevlere göre işlenecek giriş verilerini sağla
 
-Ortak dosyaları, örneğin, görevlerinizin çalıştıracağı uygulamaları yükleme için kullanılan bir başlangıç görevi dosyalarda olabilir. Giriş verileri ham görüntü veya video veri ya da Batch tarafından işlenecek herhangi bir bilgi olabilir.
+Ortak dosyalar, örneğin, görevlerinizin çalıştırdığı uygulamaları yüklemek için kullanılan bir başlangıç görevinde dosyalar olabilir. Giriş verileri ham görüntü veya video verisi veya toplu Işlem tarafından işlenecek herhangi bir bilgi olabilir.
 
-## <a name="types-of-resource-files"></a>Kaynak dosyaları türleri
+## <a name="types-of-resource-files"></a>Kaynak dosya türleri
 
-Kaynak dosyaları oluşturmak kullanılabilen birkaç farklı seçenek vardır. Kaynak dosyaları oluşturma işlemi, özgün verilerin depolandığı bağlı olarak değişir.
+Kaynak dosyaları oluşturmak için kullanabileceğiniz birkaç farklı seçenek vardır. Kaynak dosyaları oluşturma işlemi, özgün verilerin depolandığı yere bağlı olarak değişir.
 
-Bir kaynak dosyası oluşturmak için seçenekleri:
+Kaynak dosyası oluşturma seçenekleri:
 
-- [Depolama kapsayıcısı URL'si](#storage-container-url): Azure'da herhangi bir depolama kapsayıcısına bir kaynak dosyası oluşturur
-- [Depolama kapsayıcısı adı](#storage-container-name): Batch için bağlı bir Azure depolama hesabında bir kapsayıcı adı bir kaynak dosyası oluşturur
-- [Web uç noktası](#web-endpoint): Bir kaynak dosyası geçerli bir HTTP URL oluşturur.
+- [Depolama kapsayıcısı URL 'si](#storage-container-url): Azure 'daki herhangi bir depolama kapsayıcısından bir kaynak dosyası oluşturur
+- [Depolama kapsayıcısı adı](#storage-container-name): Toplu Iş ile bağlantılı bir Azure depolama hesabındaki kapsayıcının adından bir kaynak dosyası oluşturur
+- [Web uç noktası](#web-endpoint): Geçerli HTTP URL 'sinden bir kaynak dosyası oluşturur
 
-### <a name="storage-container-url"></a>Depolama kapsayıcısı URL'si
+### <a name="storage-container-url"></a>Depolama kapsayıcısı URL 'SI
 
-Bir depolama kapsayıcısı URL'si kullanarak tüm Azure depolama kapsayıcısında doğru izinlere sahip dosyalara erişebilir anlamına gelir.
+Depolama kapsayıcısı URL 'SI kullanmak, Azure 'daki herhangi bir depolama kapsayıcısındaki dosyalara doğru izinlerle erişebileceğiniz anlamına gelir.
 
-Bu C# örnek, dosyaları için blob depolama alanı olarak Azure depolama kapsayıcısı zaten yüklenmiş. Bir kaynak dosyası oluşturmak için gerekli verilere erişmek için önce depolama kapsayıcısına erişmek ihtiyacımız var.
+Bu C# örnekte, dosyalar zaten BLOB depolama alanı olarak bir Azure depolama kapsayıcısına yüklenmiş. Bir kaynak dosyası oluşturmak için gereken verilere erişmek için öncelikle depolama kapsayıcısına erişim edinmemiz gerekir.
 
-Paylaşılan erişim imzası (SAS) depolama kapsayıcısına erişmek için doğru izinlere sahip URI oluşturun. Sona erme zamanını ve SAS izinlerini ayarlayın. SAS hemen geçerli olur ve iki saat üretildikten sonra süresi dolar. Bu nedenle bu durumda, hiçbir başlangıç zamanı, belirtilir.
+Depolama kapsayıcısına erişmek için doğru izinlere sahip bir paylaşılan erişim imzası (SAS) URI 'SI oluşturun. SAS için sona erme saati ve izinlerini ayarlayın. Bu durumda başlangıç saati belirtilmez, bu nedenle SAS hemen geçerli hale gelir ve oluşturulduktan sonra iki saat sona erer.
 
 ```csharp
 SharedAccessBlobPolicy sasConstraints = new SharedAccessBlobPolicy
@@ -53,9 +53,9 @@ SharedAccessBlobPolicy sasConstraints = new SharedAccessBlobPolicy
 ```
 
 > [!NOTE]
-> Kapsayıcı erişimi için her ikisi de olmalıdır `Read` ve `List` izinler, yalnızca blob erişimle gerekir ancak `Read` izni.
+> Kapsayıcı erişimi için hem hem de `Read` `List` izinlerinizin olması gerekir, ancak bu, blob `Read` erişimi ile yalnızca izninizin olması gerekir.
 
-İzinleri yapılandırıldıktan sonra SAS belirteci oluşturma ve erişim depolama kapsayıcısı için SAS URL'sini biçimlendirin. Depolama kapsayıcısı için biçimlendirilmiş SAS URL'sini kullanarak, bir kaynak dosyası oluştur [ `FromStorageContainerUrl` ](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.resourcefile.fromstoragecontainerurl?view=azure-dotnet).
+İzinler yapılandırıldıktan sonra, SAS belirtecini oluşturun ve depolama kapsayıcısına erişim için SAS URL 'sini biçimlendirin. Depolama kapsayıcısı için biçimlendirilen SAS URL 'sini kullanarak ile [`FromStorageContainerUrl`](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.resourcefile.fromstoragecontainerurl?view=azure-dotnet)bir kaynak dosyası oluşturun.
 
 ```csharp
 CloudBlobContainer container = blobClient.GetContainerReference(containerName);
@@ -66,15 +66,15 @@ string containerSasUrl = String.Format("{0}{1}", container.Uri, sasToken);
 ResourceFile inputFile = ResourceFile.FromStorageContainerUrl(containerSasUrl);
 ```
 
-Bir SAS URL'si oluşturmak için alternatif bir kapsayıcı ve bloblarını Azure Blob Depolama alanında anonim, genel okuma erişimi etkinleştirmektir. Bunu yaptığınızda, hesap anahtarınız paylaşımı ve bir SAS gerek olmadan bu kaynaklara salt okunur erişim verebilirsiniz. Genel okuma erişimini, genellikle belirli bloblar her zaman için anonim okuma erişimi kullanılabilir olmasını istediğiniz senaryolar için kullanılır. Bu senaryo, çözümünüzün uygun değilse [bloblar için anonim erişim](../storage/blobs/storage-manage-access-to-resources.md) makale blob verilerinize erişimi yönetme hakkında daha fazla bilgi edinmek için.
+Bir SAS URL 'SI oluşturmanın alternatifi, Azure Blob depolama alanındaki bir kapsayıcıya ve bloblarına anonim, genel okuma erişimi sağlamak için kullanılır. Bunu yaparak, hesap anahtarınızı paylaşmadan ve SAS gerekmeden bu kaynaklara salt okuma erişimi verebilirsiniz. Genel okuma erişimi, genellikle belirli Blobların anonim okuma erişimi için her zaman kullanılabilir olmasını istediğiniz senaryolar için kullanılır. Bu senaryo çözümünüze uygunsa, blob verilerinize erişimi yönetme hakkında daha fazla bilgi edinmek için [bloblara anonim erişim](../storage/blobs/storage-manage-access-to-resources.md) makalesine bakın.
 
 ### <a name="storage-container-name"></a>Depolama kapsayıcısı adı
 
-Yapılandırma ve bir SAS URL'si oluşturmak yerine, blob verilerinize erişmek için Azure depolama kapsayıcısının adını kullanabilirsiniz. Depolama kapsayıcısı gereksinimlerine autostorage hesabı olarak da bilinir, Batch hesabınıza bağlı Azure depolama hesabı kullanılır. Autostorage hesabınız depolama kapsayıcı adını kullanarak bir depolama kapsayıcısına erişmek için bir SAS URL'si oluşturma ve yapılandırma atlamanızı sağlar.
+Bir SAS URL 'SI yapılandırmak ve oluşturmak yerine, blob verilerinize erişmek için Azure depolama kapsayıcının adını kullanabilirsiniz. Kullanılan depolama kapsayıcısının, yığın hesabınızla bağlantılı olan Azure depolama hesabında olması gerekir, bu, oto depolama hesabı olarak bilinir. Bir oto depolama hesabının depolama kapsayıcısı adının kullanılması, bir depolama kapsayıcısına erişmek için bir SAS URL 'SI yapılandırmayı ve oluşturmayı atlamanızı sağlar.
 
-Bu örnekte, kaynak dosyası oluşturmak için kullanılacak veri zaten bir Azure depolama hesabını Batch hesabınıza bağlı olduğunu varsayıyoruz. Adımları autostorage hesabınız yoksa bkz [Batch hesabı oluşturma](batch-account-create-portal.md) oluşturmak ve bir hesabı bağlamak hakkında ayrıntılar için.
+Bu örnekte, kaynak dosyası oluşturma için kullanılacak verilerin, Batch hesabınıza bağlı bir Azure depolama hesabında zaten olduğunu varsaytık. Bir yeniden depolama hesabınız yoksa, bir hesap oluşturma ve bağlama hakkında ayrıntılı bilgi için [Batch hesabı oluşturma](batch-account-create-portal.md) ' daki adımlara bakın.
 
-Bağlı depolama hesabı'nı kullanarak oluşturun ve bir depolama kapsayıcısı için SAS URL yapılandırma gerekmez. Bunun yerine, bağlantılı depolama hesabınızda depolama kapsayıcısını adını sağlayın.
+Bağlı bir depolama hesabı kullanarak bir depolama kapsayıcısına SAS URL 'SI oluşturmanız ve yapılandırmanız gerekmez. Bunun yerine, bağlantılı depolama hesabınızda depolama kapsayıcısının adını sağlayın.
 
 ```csharp
 ResourceFile inputFile = ResourceFile.FromAutoStorageContainer(containerName);
@@ -82,9 +82,9 @@ ResourceFile inputFile = ResourceFile.FromAutoStorageContainer(containerName);
 
 ### <a name="web-endpoint"></a>Web uç noktası
 
-Azure depolama alanına yüklenir olmayan verileri, kaynak dosyaları oluşturmak için hala kullanılabilir. Geçerli bir HTTP URL'si, girdi verilerini içeren belirtebilirsiniz. URL ve Batch API'sini için sağlanır ve sonra veri kaynak dosyası oluşturmak için kullanılır.
+Azure depolama 'ya yüklenmemiş veriler, kaynak dosyaları oluşturmak için hala kullanılabilir. Giriş verilerinizi içeren herhangi bir geçerli HTTP URL 'sini belirtebilirsiniz. URL Batch API 'sine sağlanır ve ardından veri, kaynak dosyası oluşturmak için kullanılır.
 
-Aşağıdaki C# örnek, giriş verilerinin kurgusal GitHub uç noktasında barındırılır. API, dosya geçerli web uç noktasından alır ve göreviniz tarafından kullanılacak bir kaynak dosyası oluşturur. Bu senaryo için gerekli kimlik bilgileri yok.
+Aşağıdaki C# örnekte, giriş verileri kurgusal GitHub uç noktasında barındırılır. API, geçerli Web uç noktasından dosyayı alır ve göreviniz tarafından tüketilen bir kaynak dosyası oluşturur. Bu senaryo için kimlik bilgisi gerekmez.
 
 ```csharp
 ResourceFile inputFile = ResourceFile.FromUrl("https://github.com/foo/file.txt", filePath);
@@ -92,23 +92,23 @@ ResourceFile inputFile = ResourceFile.FromUrl("https://github.com/foo/file.txt",
 
 ## <a name="tips-and-suggestions"></a>İpuçları ve öneriler
 
-Her Azure Batch görevinde dosyaları, Batch görevleri dosyalarını yönetmek için kullanılabilir seçenekleri sahip farklı şekilde kullanır. Aşağıdaki senaryolarda, kapsamlı, ancak bunun yerine birkaç yaygın durumlar kapsar ve öneriler sağlamak için kuruluşunuz değildir.
+Her bir Azure Batch görevi dosyaları farklı kullanır, bu nedenle Batch 'de dosyaları yönetmek için kullanılabilir seçenekler vardır. Aşağıdaki senaryolar kapsamlı bir şekilde değildir, bunun yerine birkaç yaygın durum ele alınmaktadır ve öneriler sağlar.
 
-### <a name="many-resource-files"></a>Birçok kaynak dosyaları
+### <a name="many-resource-files"></a>Birçok kaynak dosyası
 
-Batch işinizi tüm ortak dosyalar kullanmak çeşitli görevleri içerebilir. Birçok görevler arasında paylaşılan ortak görev dosyaları, kaynak dosyalar yerine dosyaları içeren bir uygulama paketi kullanarak daha iyi bir seçenek olabilir. Uygulama paketleri indirme hızını iyileştirmesini sağlar. Ayrıca, uygulama paketleri veri görevler arasında önbelleğe alınan görev dosyalarınızı genellikle değiştirmezseniz, uygulama paketleri, çözümünüz için uygun olabilir. Uygulama paketleri ile el ile birden çok kaynak dosyalarını yönetme ya da Azure depolamadaki dosyalara erişmek için SAS URL'lerini oluşturmak gerekmez. Batch, depolamak ve uygulama paketleriyle işlem düğümlerine dağıtmak amacıyla Azure Storage ile arka planda çalışır.
+Batch işiniz, hepsi aynı ortak dosyaları kullanan birkaç görev içerebilir. Ortak görev dosyaları birçok görev arasında paylaşılmışsa, kaynak dosyalarını kullanmak yerine dosyaları içerecek bir uygulama paketi kullanmak daha iyi bir seçenek olabilir. Uygulama paketleri indirme hızı için iyileştirme sağlar. Ayrıca, uygulama paketlerdeki veriler görevler arasında önbelleğe alınır, bu nedenle görev dosyalarınız sık değişmemesi halinde uygulama paketleri çözümünüz için uygun olabilir. Uygulama paketleriyle, Azure depolama 'daki dosyalara erişmek için çeşitli kaynak dosyalarını el ile yönetmeniz veya SAS URL 'Leri oluşturmanız gerekmez. Batch, uygulama paketlerini depolamak ve işlem düğümlerine dağıtmak için Azure depolama ile arka planda çalışmaktadır.
 
-Her görev, görev için benzersiz olan çok sayıda dosya varsa, kaynak dosyaları çoğunlukla büyük olasılıkla en iyi seçenektir. Uygulama paketleri içerikle yapmak kadar kolay değil güncelleştirilmesi veya değiştirilmesi genellikle benzersiz dosyaları kullanan görevler gerekir. Kaynak dosyaları güncelleştirme, ekleme veya tek tek dosyaları düzenleme için ek esneklik sağlar.
+Her görevin bu göreve özgü çok sayıda dosyası varsa, kaynak dosyaları çoğunlukla en iyi seçenektir. Benzersiz dosyalar kullanan görevlerin genellikle, uygulama paketleri içeriğiyle birlikte kullanılması kolay bir şekilde güncellenmesi veya değiştirilmeleri gerekir. Kaynak dosyaları, bireysel dosyaları güncelleştirme, ekleme veya düzenlemeyle ilgili ek esneklik sağlar.
 
-### <a name="number-of-resource-files-per-task"></a>Görev başına kaynak dosya sayısı
+### <a name="number-of-resource-files-per-task"></a>Görev başına kaynak dosyası sayısı
 
-Görev için belirtilen birkaç yüz kaynak dosyası varsa, Batch, çok büyük olması için görev reddedebilir. Kaynak dosyalarını görev sayısını en aza indirerek görevlerinizi küçük tutmak en iyisidir.
+Bir görevde birden fazla yüz kaynak dosyası belirtilmişse toplu Işlem, görevi çok büyük hale karşı reddedebilir. Görevin kendisinde kaynak dosyalarının sayısını en aza indirerek görevlerinizi küçük tutmanız en iyisidir.
 
-Hiçbir yolu ise göreviniz dosyalarının sayısını en aza indirmek için gereken, görevin kaynak dosyalarının bir depolama kapsayıcısı başvuruda tek bir kaynak dosyası oluşturarak iyileştirebilirsiniz. Bunu yapmak için kaynak dosyalarını bir Azure depolama kapsayıcısının içine yerleştirin ve kaynak dosyalarının farklı "Container" modu kullanın. Blob ön eki seçenekleri koleksiyonları görevleriniz için yüklenecek dosyaları belirtmek için kullanın.
+Görevin ihtiyaç duyacağı dosya sayısını en aza indirmenin bir yolu yoksa, kaynak dosyalarının depolama kapsayıcısına başvuran tek bir kaynak dosyası oluşturarak görevi iyileştirebilirsiniz. Bunu yapmak için, kaynak dosyalarınızı bir Azure depolama kapsayıcısına koyun ve kaynak dosyalarının farklı "kapsayıcı" modlarını kullanın. Görevleriniz için indirilecek dosya koleksiyonlarını belirtmek için blob öneki seçeneklerini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Hakkında bilgi edinin [uygulama paketleri](batch-application-packages.md) alternatif olarak kaynak dosyaları.
-- Kapsayıcılar için kaynak dosyalarını kullanma hakkında daha fazla bilgi için bkz. [kapsayıcı iş yüklerinin](batch-docker-container-workloads.md).
-- Toplayın ve görevlerinizi çıktı verilerini kaydetmek öğrenmek için bkz: [iş ve görev çıktılarını kalıcı hale getirme](batch-task-output.md).
+- Kaynak dosyalarına alternatif olarak [uygulama paketleri](batch-application-packages.md) hakkında bilgi edinin.
+- Kaynak dosyaları için kapsayıcıları kullanma hakkında daha fazla bilgi için bkz. [kapsayıcı iş yükleri](batch-docker-container-workloads.md).
+- Görevlerinizin çıkış verilerini nasıl toplayıp kaydedeceğiniz hakkında bilgi edinmek için bkz. [kalıcı iş ve görev çıktısı](batch-task-output.md).
 - Batch çözümleri oluşturmak için kullanılabilen [Batch API’leri ve araçları](batch-apis-tools.md) hakkında bilgi alın.

@@ -4,7 +4,7 @@ titlesuffix: Azure Load Balancer
 description: Azure PowerShell modülünü Azure Resource Manager ile birlikte kullanarak iç yük dengeleyici oluşturmayı öğrenin
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
@@ -12,13 +12,13 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/25/2017
-ms.author: kumud
-ms.openlocfilehash: 521f8f29e2f8475ab7308f5646b94c6fc0f6a01f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: allensu
+ms.openlocfilehash: b53225334c6a7d61fcee70327df5979af1e424ee
+ms.sourcegitcommit: 9a699d7408023d3736961745c753ca3cec708f23
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60398833"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68275405"
 ---
 # <a name="create-an-internal-load-balancer-by-using-the-azure-powershell-module"></a>Azure PowerShell modülünü kullanarak iç yük dengeleyici oluşturma
 
@@ -43,7 +43,7 @@ Bu makale Azure PowerShell modülünü Azure Resource Manager ile birlikte kulla
 Bir yük dengeleyiciyi dağıtmak için aşağıdaki nesneleri oluşturmanız gerekir:
 
 * Ön uç IP havuzu: Tüm gelen ağ trafiği için özel IP adresi.
-* Arka uç adres havuzu: Ön uç IP adresi yük dengeli trafiği alacak ağ arabirimleri.
+* Arka uç adres havuzu: Ön uç IP adresinden yük dengeli trafiği almak için ağ arabirimleri.
 * Yük Dengeleme kuralları: Yük Dengeleyici için bağlantı noktası (kaynak ve yerel) yapılandırması.
 * Araştırma yapılandırması: Sanal makineler için sistem durumu araştırmaları.
 * Gelen NAT kuralları: Sanal makinelere doğrudan erişim için bağlantı noktası kuralları.
@@ -116,7 +116,7 @@ Gelen trafik için ön uç IP havuzu, yük dengeli trafiği almak için de arka 
 
 ### <a name="step-1-create-a-front-end-ip-pool"></a>1\. adım: Ön uç IP havuzu oluşturma
 
-10\.0.2.0/24 alt ağı için 10.0.2.5 özel IP adresine sahip bir ön uç IP havuzu oluşturun. Bu adres, gelen ağ trafiği uç noktasıdır.
+10.0.2.0/24 alt ağı için 10.0.2.5 özel IP adresine sahip bir ön uç IP havuzu oluşturun. Bu adres, gelen ağ trafiği uç noktasıdır.
 
 ```azurepowershell-interactive
 $frontendIP = New-AzLoadBalancerFrontendIpConfig -Name LB-Frontend -PrivateIpAddress 10.0.2.5 -SubnetId $vnet.subnets[0].Id
@@ -134,14 +134,14 @@ $beaddresspool= New-AzLoadBalancerBackendAddressPoolConfig -Name "LB-backend"
 
 Ön uç IP havuzu ve arka uç adres havuzu oluşturulduktan sonra yük dengeleyici kaynağı kurallarını belirtin.
 
-### <a name="step-1-create-the-configuration-rules"></a>1\. adım: Yapılandırma kurallarını oluşturun
+### <a name="step-1-create-the-configuration-rules"></a>1\. adım: Yapılandırma kurallarını oluşturma
 
 Örnekte aşağıdaki dört kural nesnesi oluşturulur:
 
-* Gelen NAT kuralı Uzak Masaüstü Protokolü (RDP) için: 3441 numaralı bağlantı noktasında gelen tüm trafiği 3389 numaralı bağlantı noktasına yönlendirir.
-* İkinci gelen NAT kuralı RDP için: 3442 numaralı bağlantı noktasında gelen tüm trafiği 3389 numaralı bağlantı noktasına yönlendirir.
-* Sistem durumu araştırma kuralı: HealthProbe.aspx yolunun sistem durumunu denetler.
-* Yük Dengeleyici kuralı: Genel bağlantı noktası 80 numaralı yerel bağlantı noktası 80 arka uç adres havuzundaki tüm gelen trafiği Yük Dengeleme gerçekleştirir.
+* Uzak Masaüstü Protokolü (RDP) için bir gelen NAT kuralı: 3441 numaralı bağlantı noktasına gelen tüm trafiği 3389 numaralı bağlantı noktasına yönlendirir.
+* RDP için ikinci bir gelen NAT kuralı: 3442 numaralı bağlantı noktasına gelen tüm trafiği 3389 numaralı bağlantı noktasına yönlendirir.
+* Bir sistem durumu araştırma kuralı: Healtharaştırması. aspx yolunun sistem durumunu denetler.
+* Yük dengeleyici kuralı: Yük-genel bağlantı noktası 80 ' deki tüm gelen trafiği arka uç adres havuzundaki 80 numaralı yerel bağlantı noktasına dengeler.
 
 ```azurepowershell-interactive
 $inboundNATRule1= New-AzLoadBalancerInboundNatRuleConfig -Name "RDP1" -FrontendIpConfiguration $frontendIP -Protocol TCP -FrontendPort 3441 -BackendPort 3389
@@ -165,7 +165,7 @@ $NRPLB = New-AzLoadBalancer -ResourceGroupName "NRP-RG" -Name "NRP-LB" -Location
 
 İç yük dengeleyiciyi oluşturduktan sonra gelen yük dengeli ağ trafiğini alacak olan ağ arabirimlerini (NIC), NAT kurallarını ve araştırmayı tanımlamanız gerekir. Her ağ arabirimi bağımsız olarak yapılandırılır ve sonrasında bir sanal makineye atanır.
 
-### <a name="step-1-create-the-first-network-interface"></a>1\. adım: İlk ağ arabirimini oluşturun
+### <a name="step-1-create-the-first-network-interface"></a>1\. adım: İlk ağ arabirimini oluşturma
 
 Kaynak sanal ağını ve alt ağını alın. Bu değerler ağ arabirimlerini oluşturmak için kullanılır:
 
@@ -181,7 +181,7 @@ $backendSubnet = Get-AzVirtualNetworkSubnetConfig -Name LB-Subnet-BE -VirtualNet
 $backendnic1= New-AzNetworkInterface -ResourceGroupName "NRP-RG" -Name lb-nic1-be -Location "West US" -PrivateIpAddress 10.0.2.6 -Subnet $backendSubnet -LoadBalancerBackendAddressPool $nrplb.BackendAddressPools[0] -LoadBalancerInboundNatRule $nrplb.InboundNatRules[0]
 ```
 
-### <a name="step-2-create-the-second-network-interface"></a>2\. adım: İkinci ağ arabirimini oluşturun
+### <a name="step-2-create-the-second-network-interface"></a>2\. adım: İkinci ağ arabirimini oluşturma
 
 İkinci ağ arabirimini oluşturun ve **lb-nic2-be** adını verin. İkinci arabirimini birinci arabirimle aynı yük dengeleyici arka uç havuzuna atayın. RDP için ikinci NIC birimini ikinci NAT kuralıyla ilişkilendirin:
 
@@ -239,7 +239,7 @@ Ayarlar aşağıdaki gibi olmalıdır:
 
 
 
-### <a name="step-3-assign-the-nic-to-a-vm"></a>3\. adım: NIC Birimini bir VM'ye atayın
+### <a name="step-3-assign-the-nic-to-a-vm"></a>3\. adım: NIC 'yi bir VM 'ye atama
 
 `Add-AzVMNetworkInterface` komutunu kullanarak NIC birimini bir sanal makineye atayın.
 
@@ -249,7 +249,7 @@ Sanal makine oluşturma ve NIC atama ile ilgili adım adım talimatlar için bkz
 
 Sanal makine oluşturulduktan sonra ağ arabirimini ekleyin.
 
-### <a name="step-1-store-the-load-balancer-resource"></a>1\. adım: Yük Dengeleyici kaynağını Store
+### <a name="step-1-store-the-load-balancer-resource"></a>1\. adım: Yük dengeleyici kaynağını depolayın
 
 Yük dengeleyici kaynağını bir değişkene depolayın (henüz yapmadıysanız). Değişken adı olarak **$lb** kullanıyoruz. Betikteki öznitelik değerleri için önceki adımlarda oluşturulan yük dengeleyici kaynaklarının adlarını kullanın.
 
@@ -257,7 +257,7 @@ Yük dengeleyici kaynağını bir değişkene depolayın (henüz yapmadıysanız
 $lb = Get-AzLoadBalancer –name NRP-LB -resourcegroupname NRP-RG
 ```
 
-### <a name="step-2-store-the-back-end-configuration"></a>2\. adım: Arka uç yapılandırmasını Store
+### <a name="step-2-store-the-back-end-configuration"></a>2\. adım: Arka uç yapılandırmasını depolama
 
 Arka uç yapılandırmasını **$backend** değişkenine depolayın.
 
@@ -265,7 +265,7 @@ Arka uç yapılandırmasını **$backend** değişkenine depolayın.
 $backend = Get-AzLoadBalancerBackendAddressPoolConfig -name LB-backend -LoadBalancer $lb
 ```
 
-### <a name="step-3-store-the-network-interface"></a>3\. adım: Ağ arabirimi Store
+### <a name="step-3-store-the-network-interface"></a>3\. adım: Ağ arabirimini depolayın
 
 Ağ arabirimini başka bir değişkende depolayın. Bu arabirim "Ağ arabirimlerini oluşturma, 1. Adım" bölümünde oluşturulmuştu. Değişken adı olarak **$nic1** kullanıyoruz. Önceki örnekte kullanılan ağ arabirimi adını kullanın.
 
@@ -273,7 +273,7 @@ Ağ arabirimini başka bir değişkende depolayın. Bu arabirim "Ağ arabirimler
 $nic = Get-AzNetworkInterface –name lb-nic1-be -resourcegroupname NRP-RG
 ```
 
-### <a name="step-4-change-the-back-end-configuration"></a>4\. Adım: Arka uç yapılandırmasını değiştirin
+### <a name="step-4-change-the-back-end-configuration"></a>4\. Adım: Arka uç yapılandırmasını değiştirme
 
 Ağ arabiriminde arka uç yapılandırmasını değiştirin.
 
@@ -281,7 +281,7 @@ Ağ arabiriminde arka uç yapılandırmasını değiştirin.
 $nic.IpConfigurations[0].LoadBalancerBackendAddressPools=$backend
 ```
 
-### <a name="step-5-save-the-network-interface-object"></a>5\. Adım: Ağ arabirimi nesnesini kaydedin
+### <a name="step-5-save-the-network-interface-object"></a>5\. Adım: Ağ arabirimi nesnesini kaydetme
 
 Ağ arabirimi nesnesini kaydedin.
 
@@ -293,7 +293,7 @@ Arabirim arka uç havuzuna eklendikten sonra ağ trafiğine kurallara göre yük
 
 ## <a name="update-an-existing-load-balancer"></a>Mevcut yük dengeleyiciyi güncelleştirme
 
-### <a name="step-1-assign-the-load-balancer-object-to-a-variable"></a>1\. adım: Yük Dengeleyici nesnesini bir değişkene atayın.
+### <a name="step-1-assign-the-load-balancer-object-to-a-variable"></a>1\. adım: Yük dengeleyici nesnesini bir değişkene atama
 
 Yük dengeleyici nesnesini (önceki örnekte oluşturulan) **$slb** değişkenine atamak için `Get-AzLoadBalancer` komutunu kullanın:
 
@@ -301,7 +301,7 @@ Yük dengeleyici nesnesini (önceki örnekte oluşturulan) **$slb** değişkenin
 $slb = Get-AzLoadBalancer -Name NRP-LB -ResourceGroupName NRP-RG
 ```
 
-### <a name="step-2-add-a-nat-rule"></a>2\. adım: NAT kuralı ekleyin
+### <a name="step-2-add-a-nat-rule"></a>2\. adım: NAT kuralı ekleme
 
 Var olan bir yük dengeleyiciye yeni bir gelen NAT kuralı ekleyin. Ön uç havuzu için 81, arka uç havuzu için de 8181 numaralı bağlantı noktasını kullanın:
 
@@ -309,7 +309,7 @@ Var olan bir yük dengeleyiciye yeni bir gelen NAT kuralı ekleyin. Ön uç havu
 $slb | Add-AzLoadBalancerInboundNatRuleConfig -Name NewRule -FrontendIpConfiguration $slb.FrontendIpConfigurations[0] -FrontendPort 81  -BackendPort 8181 -Protocol Tcp
 ```
 
-### <a name="step-3-save-the-configuration"></a>3\. adım: Yapılandırmayı kaydedin
+### <a name="step-3-save-the-configuration"></a>3\. adım: Yapılandırmayı kaydetme
 
 `Set-AzureLoadBalancer` komutunu kullanarak yeni yapılandırmayı kaydedin:
 

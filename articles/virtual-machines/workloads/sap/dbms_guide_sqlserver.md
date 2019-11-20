@@ -1,5 +1,5 @@
 ---
-title: SAP iş yükü için SQL Server Azure sanal makineleri DBMS dağıtım | Microsoft Docs
+title: SAP iş yükü için Azure sanal makineler DBMS dağıtımı SQL Server | Microsoft Docs
 description: SAP iş yükü için SQL Server Azure Sanal Makineler DBMS dağıtımı
 services: virtual-machines-linux,virtual-machines-windows
 documentationcenter: ''
@@ -9,26 +9,25 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/26/2018
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 0c12c75bd5c357613d55e04aed67c0cc901135e6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9d0c6841e29323ceab0758f4c4d6881abd24532d
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60835534"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70099968"
 ---
-# <a name="sql-server-azure-virtual-machines-dbms-deployment-for-sap-netweaver"></a>SAP NetWeaver için SQL Server Azure sanal makineleri DBMS dağıtım
+# <a name="sql-server-azure-virtual-machines-dbms-deployment-for-sap-netweaver"></a>SAP NetWeaver için Azure sanal makineler DBMS dağıtımı SQL Server
 
 [767598]:https://launchpad.support.sap.com/#/notes/767598
 [773830]:https://launchpad.support.sap.com/#/notes/773830
 [826037]:https://launchpad.support.sap.com/#/notes/826037
-[965908]: https://launchpad.support.sap.com/#/notes/965908
+[), veritabanı yansıtmasıyla aynı şekilde kullanılması gerekir. 965908]: https://launchpad.support.sap.com/#/notes/965908
 [1031096]:https://launchpad.support.sap.com/#/notes/1031096
 [1114181]:https://launchpad.support.sap.com/#/notes/1114181
 [1139904]:https://launchpad.support.sap.com/#/notes/1139904
@@ -310,257 +309,257 @@ ms.locfileid: "60835534"
 
 
 
-Bu belge, Azure Iaas SAP iş yükü için SQL Server'ı dağıtma yaparken dikkate alınması gereken birkaç farklı alanlarını kapsar. Bu belge için bir önkoşul belge okuma [SAP iş yükü Azure sanal makineleri DBMS dağıtım konuları](dbms_guide_general.md) diğer yönergelerinde yanı sıra [AzureBelgeleri'ndeSAPişyükü](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/get-started). 
+Bu belge, Azure IaaS 'de SAP iş yükü için SQL Server dağıtımı yaparken göz önünde bulundurmanız gereken birçok farklı alanı içerir. Bu belgenin bir önkoşulu olarak, [SAP iş yükü Için Azure sanal MAKINELERI DBMS dağıtımı](dbms_guide_general.md) ve [Azure belgelerindeki SAP iş yükündeki](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/get-started)diğer kılavuzlar hakkında belge konularını okuduğunuzdan de okumalısınız. 
 
 
 
 > [!IMPORTANT]
-> Bu belgenin kapsamı SQL Server'da Windows sürümüdür. SAP, SAP yazılımının biriyle SQL Server Linux sürümünü desteklemediğinden. Belge Microsoft Azure SQL veritabanı, Microsoft Azure platformu bir hizmet teklifinin bir Platform olan üzerinde tartışmaktadır değil. Azure sanal bir hizmet Özelliği Azure altyapısından yararlanarak Makineler'de, şirket içi dağıtımlar için bilinen SQL Server ürün çalıştıran bu yazıdaki bir tartışma bulunmaktadır. Veritabanı özellikleri ve işlevleri bu iki teklifler arasında farklıdır ve birbiriyle karışmasını değil. Ayrıca bkz: <https://azure.microsoft.com/services/sql-database/>
+> Bu belgenin kapsamı, SQL Server Windows sürümüdür. SAP, SAP yazılımıyla SQL Server Linux sürümünü desteklememektedir. Belge, Microsoft Azure platformunun hizmet olarak platform olan Microsoft Azure SQL Veritabanı tartışımamaktadır. Bu yazıda tartışma, Azure sanal makinelerinde şirket içi dağıtımlar için bilinen, Azure 'un hizmet olarak altyapı özelliğinden yararlanarak SQL Server ürünün nasıl çalıştığı konusunda çalışmaktadır. Bu iki teklif arasındaki veritabanı özellikleri ve işlevleri farklıdır ve birbirleriyle karışık olmamalıdır. Ayrıca bkz:<https://azure.microsoft.com/services/sql-database/>
 > 
 >
 
-Genel olarak, en son SQL Server'ı kullanarak Azure Iaas içinde SAP iş yükü çalıştırmak için sürümleri dikkate almanız gerekir. En son SQL Server sürümleri, bazı Azure Hizmetleri ve İşlevler daha iyi tümleştirme sağlar. Veya Azure Iaas altyapısını işlemlerini iyileştirmenize değişiklikler içerir.
+Genel olarak, Azure IaaS 'de SAP iş yükünü çalıştırmak için en son SQL Server yayınları kullanmayı göz önünde bulundurmanız gerekir. En son SQL Server sürümleri, bazı Azure hizmetleri ve işlevlerine daha iyi tümleştirme sunar. Veya bir Azure IaaS altyapısında işlemleri en iyileştiren değişiklikler vardır.
 
-Gözden geçirmek için önerilen [bu] [ virtual-machines-sql-server-infrastructure-services] devam etmeden önce belgeleri.
+Devam etmeden önce [Bu][virtual-machines-sql-server-infrastructure-services] belgenin gözden geçirilmesi önerilir.
 
-Aşağıdaki bölümlerde yukarıdaki bağlantıyı altında belge parçalarını parçalarını toplanır ve belirtilen. SAP ilgili detaylar de belirtilmiştir ve bazı kavramları daha ayrıntılı olarak açıklanmıştır. Ancak, SQL Server'a özgü belgelere okuma önce ilgili belgelerde ilk üzerinde çalışmak için önerilir.
+Aşağıdaki bölümlerde, yukarıdaki bağlantının altındaki belgelerin bölümlerinin parçaları toplanır ve bahsedilir. SAP 'nin özelliklerinin yanı sıra bazı kavramların da daha ayrıntılı olarak açıklanmasıyla bahsedilir. Ancak, SQL Server özgü belgeleri okumadan önce yukarıdaki belgelerde çalışmanız kesinlikle önerilir.
 
-Iaas belirli bilgiler devam etmeden önce bilmeniz gereken bazı SQL Server vardır:
+Devam etmeden önce bilmeniz gereken IaaS özel bilgilerinde bazı SQL Server vardır:
 
-* **SQL sürüm desteği**: SAP müşteriler, SQL Server 2008 R2 ve Microsoft Azure sanal Makinesi'nde yüksek desteklenir. Önceki sürümlerinde desteklenmez. Bu genel gözden [destek bildirimiyle](https://support.microsoft.com/kb/956893) daha fazla ayrıntı için. Genel olarak, SQL Server 2008'de Microsoft tarafından desteklenir. Ancak, önemli işlevleri için SQL Server 2008 R2 ile birlikte sunulan, SAP, SQL Server 2008 R2 SAP için en düşük sürüm kaynaklanır. Genel olarak, en son SQL Server'ı kullanarak Azure Iaas içinde SAP iş yükü çalıştırmak için sürümleri dikkate almanız gerekir. En son SQL Server sürümleri, bazı Azure Hizmetleri ve İşlevler daha iyi tümleştirme sağlar. Veya Azure Iaas altyapısını işlemlerini iyileştirmenize değişiklikler içerir. Bu nedenle, yazıda SQL Server 2017 ve SQL Server 2016 ile sınırlıdır.
-* **SQL performansı**: Microsoft Azure da diğer genel bulut sanallaştırma teklifleri, ancak tek sonuçları ile barındırılan sanal makineleri gerçekleştirmek farklılık gösterebilir. Makaleyi inceleyin [Azure sanal Makineler'de SQL Server için en iyi performans](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-performance).
-* **Azure Marketteki görüntüleri kullanarak**: Yeni bir Microsoft Azure sanal makine dağıtmak için en hızlı yolu, Azure Marketi'nden bir görüntü kullanmaktır. En son SQL Server sürümleriyle içeren görüntüleri Azure Market'te vardır. SQL Server önceden yüklendiği görüntüleri için SAP NetWeaver uygulamalarını hemen kullanılamaz. Varsayılan SQL Server harmanlaması bu görüntülerin ve SAP NetWeaver sistemleri tarafından gerekli harmanlama yüklü nedenidir. Bu görüntüleri kullanmak için bölümde belgelenen adımları denetleyin [Microsoft Azure Marketi dışında bir SQL sunucu görüntüsü kullanarak][dbms-guide-5.6]. 
-
-
-## <a name="recommendations-on-vmvhd-structure-for-sap-related-sql-server-deployments"></a>VM/VHD yapısına'SAP ile ilgili SQL Server dağıtımları için öneriler
-Genel bir açıklama uygun olarak, SQL Server yürütülebilir dosyalar bulunan veya yüklü sanal makinenin işletim sistemi diski sistem sürücüsüne (C: sürücüsü\).  Genellikle, SQL Server sistem veritabanlarının en yüksek düzeyde SAP NetWeaver iş yükü tarafından kullanılmaz. Sonuç olarak (master, msdb ve model) SQL Server'ın sistem veritabanları da C:\ sürücüsü üzerinde kalır. Bir özel durum, SAP iş yükleri, söz konusu olduğunda, daha yüksek veri hacmine veya g/ç işlemleri toplu gerektirebilir, TempDB'de olmalıdır. İşletim sistemi VHD'si için uygulanmamalıdır g/ç iş yükü. Bu tür sistemler için aşağıdaki adımlar gerçekleştirilmelidir:
+* **SQL sürümü desteği**: SAP müşterileri için, Microsoft Azure sanal makinede SQL Server 2008 R2 ve üzeri desteklenir. Önceki sürümler desteklenmez. Daha fazla bilgi için bu genel [destek bildirimine](https://support.microsoft.com/kb/956893) bakın. Genellikle SQL Server 2008, Microsoft tarafından da desteklenir. Ancak, SQL Server 2008 R2 ile sunulan SAP 'nin önemli işlevleri nedeniyle, SAP için en düşük sürüm olan SQL Server 2008 R2. Genel olarak, Azure IaaS 'de SAP iş yükünü çalıştırmak için en son SQL Server yayınları kullanmayı göz önünde bulundurmanız gerekir. En son SQL Server sürümleri, bazı Azure hizmetleri ve işlevlerine daha iyi tümleştirme sunar. Veya bir Azure IaaS altyapısında işlemleri en iyileştiren değişiklikler vardır. Bu nedenle, kağıt 2016 SQL Server ve SQL Server 2017 ile kısıtlıdır.
+* **SQL performansı**: Microsoft Azure barındırılan sanal makineler, diğer genel bulut sanallaştırma teklifleri ile karşılaştırıldığında iyi sonuç verir, ancak ayrı sonuçlar farklılık gösterebilir. [Azure sanal makinelerinde SQL Server için en iyi makale performansı uygulamalarına](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-performance)göz atın.
+* **Azure Marketi 'Ndeki görüntüleri kullanma**: Yeni bir Microsoft Azure VM dağıtmanın en hızlı yolu, Azure Marketi 'nden bir görüntü kullanmaktır. Azure Marketi 'nde en son SQL Server sürümleri içeren görüntüler vardır. SQL Server zaten yüklü olduğu görüntüler SAP NetWeaver uygulamaları için hemen kullanılamaz. Bunun nedeni, varsayılan SQL Server harmanlama bu görüntülere yüklenir ve SAP NetWeaver sistemleri için gerekli harmanlama değildir. Bu tür görüntüleri kullanmak için, [Microsoft Azure Market bir SQL Server görüntüsünü kullanarak][dbms-guide-5.6]bölümde belgelenen adımları denetleyin. 
 
 
-* İle tüm SAP sertifikalı sanal makine türleri (SAP notu bkz [1928533]), A serisi VM'ler, tempdb verilerini ve günlük dosyaları kalıcı olmayan D:\ sürücüsüne yerleştirilebilir dışında. 
-* Bununla birlikte, birden fazla tempdb veri dosyası kullanmak için önerilir. VM türüne göre D:\ sürücüsüne birimlerin farklı olduğunu unutmayın. Farklı sanal makinelerin D:\ sürücüsüne tam boyutları makale onay [boyutları için Windows azure'da sanal makineler](https://docs.microsoft.com/azure/virtual-machines/windows/sizes).
+## <a name="recommendations-on-vmvhd-structure-for-sap-related-sql-server-deployments"></a>SAP ile ilgili SQL Server dağıtımlar için VM/VHD yapısına yönelik öneriler
+Genel açıklamaya uygun olarak, SQL Server yürütülebilir dosyaları, VM 'nin IŞLETIM sistemi diskinin sistem sürücüsüne yerleştirilmelidir veya yüklü olmalıdır (sürücü C:\).  Genellikle, SQL Server sistem veritabanlarının çoğu SAP NetWeaver iş yükünde yüksek düzeyde kullanılmaz. Sonuç olarak, SQL Server (Master, msdb ve model) sistem veritabanları C:\ dizininde kalabilir. aynı zamanda. SAP iş yükleri söz konusu olduğunda bir özel durum tempdb olmalıdır ve daha yüksek veri hacmi veya g/ç işlemleri birimi gerektirebilir. İşletim sistemi VHD 'sine uygulanmamalıdır, g/ç iş yükü. Bu tür sistemler için aşağıdaki adımlar gerçekleştirilmelidir:
 
-Bu yapılandırmalar, sistem sürücüsünün sağlamak mümkün olandan daha fazla alan kullanmak tempdb etkinleştirin. Kalıcı olmayan D:\ sürücüsüne de daha iyi g/ç gecikme süresi ve aktarım hızı (hariç, A serisi VM'ler) sunar. Uygun tempdb boyutunu belirlemek için var olan sistemler tempdb boyutları kontrol edebilirsiniz. 
+
+* Tüm SAP sertifikalı VM türleriyle (bkz. SAP Note [1928533]), A serisi VM 'ler, tempdb verileri ve günlük dosyaları, kalıcı olmayan d:\ üzerine yerleştirilebilecek sürücü. 
+* Bununla birlikte, birden çok tempdb veri dosyası kullanılması önerilir. Farkında olun D:\ sürücü birimleri VM türüne göre farklılık açmış. D:\ için tam boyutlar için farklı VM 'lerden oluşan sürücü, [Azure 'Da Windows sanal makinelerinin makale boyutlarını](https://docs.microsoft.com/azure/virtual-machines/windows/sizes)kontrol edin.
+
+Bu yapılandırma tempdb 'nin sistem sürücüsünün sağlayabileceğinden daha fazla alan kullanmasını sağlar. Kalıcı olmayan D:\ sürücü Ayrıca daha iyi g/ç gecikme süresi ve aktarım hızı (A serisi VM 'Ler hariç) sağlar. Uygun tempdb boyutunu belirleyebilmek için, mevcut sistemlerdeki tempdb boyutlarını kontrol edebilirsiniz. 
 
 >[!NOTE]
-> tempdb veri dosyası ve günlük dosyası oluşturduğunuz D:\ sürücüsüne üzerinde bir klasöre yerleştirin durumda klasörü sonra VM'yi yeniden başlatma yok emin olmanız gerekir. VM yeniden başlatıldıktan sonra D:\ sürücüsüne yeni başlatılmış olduğundan tüm dosya ve dizin yapıları temizlendiğinde. SQL Server hizmetinin başlangıç belgelenen önce D:\ sürücüsüne nihai dizin yapıları yeniden oluşturmak için bir olasılık [bu makalede](https://www.sqlserver.co.uk/index.php/using-ssds-in-azure-vms-to-store-sql-server-tempdb-and-buffer-pool-extensions/).
+> tempdb veri dosyalarını ve günlük dosyasını D:\ ' daki bir klasöre yerleştirmeniz durumunda oluşturduğunuz sürücü, bir VM yeniden başlatıldıktan sonra klasörün mevcut olduğundan emin olmanız gerekir. D:\ ' dan beri Sürücü, bir VM yeniden başlatıldıktan sonra, tüm dosya ve dizin yapıları temizlenmeden sonra yeniden başlatılır. D:\ üzerinde son dizin yapılarını yeniden oluşturma olanağı SQL Server hizmetinin başlangıcından önceki sürücü, [Bu makalede](https://www.sqlserver.co.uk/index.php/using-ssds-in-azure-vms-to-store-sql-server-tempdb-and-buffer-pool-extensions/)açıklanmamıştır.
 
-Tempdb verilerini ve tempdb logfile D:\ sürücüsüne yerleştirildiği ve bir SAP veritabanı ile SQL Server çalıştıran bir VM yapılandırması gibi görünür:
+Bir SAP veritabanıyla SQL Server çalıştıran ve tempdb verilerinin ve tempdb günlük dosyasının D:\ ' A yerleştirildiği bir VM yapılandırması. sürücü şöyle görünür:
 
 ![SQL Server için basit VM disk yapılandırması diyagramı](./media/dbms_sqlserver_deployment_guide/Simple_disk_structure.PNG)
 
-Yukarıdaki diyagramda, basit bir örnek gösterir. İçin makalede eluded gibi [SAP iş yükü Azure sanal makineleri DBMS dağıtım konuları](dbms_guide_general.md), sayı, ve Premium depolama disk boyutu farklı faktöre bağlıdır. Ancak genel öneririz:
+Yukarıdaki diyagramda basit bir durum görüntülenir. SAP iş yükü, numarası ve Premium Depolama disklerinin boyutu [Için Azure sanal MAKINELER DBMS dağıtımı](dbms_guide_general.md), farklı faktörlerden bağımlıdır. Ancak genel olarak şunları öneririz:
 
-- Bir veya birkaç küçük birimler oluşturmak için depolama alanları kullanarak, SQL Server veri dosyaları içerir. Bu yapılandırma altında yatan neden gerçek hayatta farklı boyutta veritabanı dosyalarını farklı g/ç iş yükü ile çok sayıda SAP veritabanlarıyla yoktur.
-- Yeterli IOPS sağlamak için depolama alanları'nı kullanarak ve SQL Server işlem günlüğü dosyası. Olası IOPS iş yükü genellikle SQL Server işlem hacmi değil olası hacmine ve işlem günlük birimi boyutlandırması için yol gösterici satır değil
-- Performans yeterince iyi olduğu sürece D:\drive tempdb için kullanın. Genel iş yükü performansı D:\ sürücüsüne üzerindeymiş tmepdb sınırlıdır, Premium depolama diskleri de önerildiği şekilde ayırmak için tempdb taşımak için dikkate almanız gerekebilir [bu makalede](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-performance).
+- SQL Server veri dosyalarını içeren bir veya az sayıda birim oluşturmak için depolama alanları kullanma. Bu yapılandırmanın arkasında, farklı g/ç iş yüküyle farklı boyutlardaki veritabanı dosyaları olan çok sayıda SAP veritabanı olduğu için gerçek hayatta yer vardır.
+- Depolama alanlarını kullanarak yeterli ıOPS ve SQL Server işlem günlük dosyası sağlayın. Potansiyel ıOPS iş yükü genellikle işlem günlüğü biriminin boyutlandırılmasına yönelik temel satırtır ve SQL Server işlem biriminin potansiyel hacmi değildir
+- Performans yeterince iyi olduğu sürece tempdb için D:\Drive kullanın. Genel iş yükü, D:\ ' da bulunan tmepdb tarafından performansı sınırlandırıldığında [Bu makalede](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-performance)önerilen şekilde tempdb 'Yi ayrı Premium Depolama disklerine taşımak için göz önünde bulundurmanız gereken sürücü.
 
 
-### <a name="special-for-m-series-vms"></a>M serisi sanal makineler için özel
-Azure M serisi VM için Azure Premium depolama performansı için Azure yazma Hızlandırıcı kullanırken karşılaştırıldığında faktörler tarafından işlem günlüğüne yazma gecikme süresi azaltılabilir. Bu nedenle, SQL Server işlem günlüğü için birim form vhd'sinin için Azure yazma Hızlandırıcı dağıtmanız gerekir. Ayrıntılar belgede okunabilir [yazma hızlandırıcı](https://docs.microsoft.com/azure/virtual-machines/windows/how-to-enable-write-accelerator).
+### <a name="special-for-m-series-vms"></a>D serisi VM 'Ler için özel
+Azure M serisi VM için, işlem günlüğüne yazma gecikmesi, Azure Yazma Hızlandırıcısı kullanılırken Azure Premium depolama performansına kıyasla faktörlerle azaltılabilir. Bu nedenle, SQL Server işlem günlüğü için birimi oluşturan VHD 'ler (ler) için Azure Yazma Hızlandırıcısı dağıtmanız gerekir. Ayrıntılar belge [yazma Hızlandırıcısı](https://docs.microsoft.com/azure/virtual-machines/windows/how-to-enable-write-accelerator)okunabilir.
   
 
 ### <a name="formatting-the-disks"></a>Diskleri biçimlendirme
-SQL Server için SQL Server veri ve günlük dosyalarını içeren diskler için NTFS blok boyutu 64 KB olmalıdır. D:\ sürücüsüne biçimlendirmek için gerek yoktur. Bu sürücü önceden biçimlendirilmiş gelir.
+SQL Server için, SQL Server veri ve günlük dosyaları içeren disklerin NTFS blok boyutu 64 KB olmalıdır. D:\ biçimini biçimlendirmeye gerek yoktur. sürücü. Bu sürücü önceden biçimlendirilen şekilde gelir.
 
-Geri yükleme ya da veritabanı oluşturulmasını veri dosyalarını dosyaların içeriğini sıfırlama tarafından başlatılıyor değil emin emin olmak için SQL Server hizmetini çalıştıran kullanıcı bağlamı belirli bir izni olduğundan emin olmanız gerekir. Genellikle Windows Yönetici grubundaki kullanıcılar bu izinlere sahip olursunuz. SQL Server hizmetini Windows yönetici olmayan kullanıcı kullanıcı bağlamında çalışırsa, kullanıcı hakkı bu kullanıcı atamanız gerekir **Birim bakım görevleri gerçekleştir**.  Bu Microsoft Bilgi Bankası makalesi ayrıntılara bakın: <https://support.microsoft.com/kb/2574695>
+Veritabanlarının geri yüklenmesi veya oluşturulması, dosyaların içeriğini sıfırlama yoluyla veri dosyalarını başlatmadığından emin olmak için, SQL Server hizmetinin üzerinde çalıştığı Kullanıcı bağlamının belirli bir izne sahip olduğundan emin olun. Genellikle Windows Yönetici grubundaki kullanıcılar bu izinlere sahiptir. SQL Server hizmeti Windows olmayan yönetici kullanıcısının kullanıcı bağlamında çalışıyorsa, kullanıcıya **toplu bakım görevlerini gerçekleştirmesi**için bu kullanıcıya atamanız gerekir.  Bu Microsoft Bilgi Bankası makalesindeki ayrıntılara bakın:<https://support.microsoft.com/kb/2574695>
 
-### <a name="impact-of-database-compression"></a>Veritabanı sıkıştırması etkisini
-Burada, g/ç bant genişliği sınırlayıcı bir etmen haline gelebilir yapılandırmalarında, IOPS azaltır her ölçü bir Azure gibi bir Iaas senaryosu çalıştırabilirsiniz iş yükü esnetme artırmaya yardımcı olabilir. Bu nedenle, henüz yapıldığında, SQL Server sayfa sıkıştırmayı uygulama SAP ve Microsoft tarafından mevcut SAP veritabanını Azure'a yüklemeden önerilir.
+### <a name="impact-of-database-compression"></a>Veritabanı sıkıştırmasının etkisi
+G/ç bant genişliğinin sınırlama faktörü olabileceği yapılandırmalarda, her ölçü, ıOPS 'yi azaltan iş yükünün Azure gibi bir IaaS senaryosunda çalıştırılabileceği şekilde uzamasına yardımcı olabilir. Bu nedenle, henüz yapılmazsa, mevcut bir SAP veritabanını Azure 'a yüklemeden önce hem SAP hem de Microsoft tarafından SQL Server sayfa sıkıştırması uygulanması önerilir.
 
-Azure'a yüklemeden önce veritabanı sıkıştırma gerçekleştirmek için öneri dışında iki nedenleri verilmiştir:
+Azure 'a yüklemeden önce veritabanı sıkıştırması gerçekleştirme önerisi iki nedenden dolayı verilmiştir:
 
 * Karşıya yüklenecek veri miktarı düşüktür.
-* Daha fazla CPU veya daha yüksek g/ç bant genişliği veya g/ç gecikme şirket içi daha az daha güçlü donanım kullanabilirsiniz varsayarak sıkıştırma yürütme süresi kısadır.
-* Küçük veritabanı boyutları için disk ayırmayı daha az maliyetlerine neden olabilir
+* Sıkıştırma yürütmesinin süresi, bir birinin daha fazla CPU veya daha yüksek g/ç bant genişliği veya şirket içi g/ç gecikme süresiyle daha güçlü donanımlar kullanabilmesi için daha kısadır.
+* Daha küçük veritabanı boyutları disk ayırma için daha az maliyete yol açabilir
 
-Şirket içi yaptığı gibi veritabanı sıkıştırma bir Azure sanal Makineler'de de çalışır. Mevcut SAP NetWeaver SQL Server veritabanları, sıkıştırma konusunda daha fazla ayrıntı denetlemek için makaleye [SAP geliştirilmiş sıkıştırma aracı MSSCOMPRESS](https://blogs.msdn.microsoft.com/saponsqlserver/2016/11/25/improved-sap-compression-tool-msscompress/). 
+Veritabanı sıkıştırması, şirket içinde olduğu gibi bir Azure sanal makinelerinde da çalışmaktadır. Mevcut SAP NetWeaver SQL Server veritabanlarının nasıl sıkıştırılması hakkında daha fazla bilgi için [GELIŞMIŞ SAP sıkıştırma aracı MSSCOMPRESS](https://blogs.msdn.microsoft.com/saponsqlserver/2016/11/25/improved-sap-compression-tool-msscompress/)makalesine bakın. 
 
-## <a name="sql-server-2014-and-more-recent---storing-database-files-directly-on-azure-blob-storage"></a>SQL Server 2014 ve daha yeni - depolama veritabanı dosyalarını doğrudan Azure Blob Depolama üzerinde
-SQL Server 2014 ve üzeri sürümlerde açık olasılığını doğrudan Azure Blob Store VHD etrafında 'sarmalayıcı' olmadan veritabanı dosyalarını depolamak için. Standart Azure depolama veya daha küçük VM türleri özellikle kullanımı ile bu tür dağıtımda, sınırlı sayıda bazı küçük bir VM türleri bağlı diskler tarafından uygulanabiliyordu IOPS sınırları nerede üstesinden gelebilir senaryolara olanak sağlar. Ancak, SQL Server'ın sistem veritabanları için kullanıcı veritabanları için dağıtım bu şekilde çalışır. Ayrıca, SQL Server'ın veri ve günlük dosyaları için çalışır. SAP SQL Server veritabanı dağıtmak istiyorsanız 'sarmalama' yerine bu şekilde VHD'ler, içine tutmak unutmayın:
+## <a name="sql-server-2014-and-more-recent---storing-database-files-directly-on-azure-blob-storage"></a>SQL Server 2014 ve daha yeni-veritabanı dosyalarını doğrudan Azure Blob depolama üzerinde depolama
+SQL Server 2014 ve üzeri sürümler, veritabanı dosyalarını, çevresindeki bir VHD 'nin ' sarmalayıcı ' öğesini olmadan doğrudan Azure Blob Mağazası üzerinde depolama olasılığını açın. Özellikle standart Azure depolama veya daha küçük VM türlerini kullanarak bu tür bir dağıtım, bazı küçük sanal makine türlerine bağlanabilir sınırlı sayıda disk tarafından zorlanan ıOPS sınırlarını aşabilecebileceğiniz senaryolara olanak sağlar. Bu dağıtım yöntemi, kullanıcı veritabanları için SQL Server, ancak sistem veritabanları için de kullanılır. Ayrıca, SQL Server veri ve günlük dosyaları için de kullanılabilir. Bu şekilde bir SAP SQL Server veritabanı dağıtmak istiyorsanız, VHD 'lere ' sarmalama ' yerine bu şekilde dağıtım yapmak istiyorsanız şunları göz önünde bulundurun:
 
-* Depolama hesabı gereksinimlerini VM SQL Server'ı dağıtmak için kullanılan bir çalıştırıyorsa aynı Azure bölgesinde olacak şekilde kullanılır.
-* VHD dağıtım ile ilgili farklı Azure depolama hesapları daha önce listelenen konular bu dağıtımlar da yöntem için geçerlidir. Azure depolama hesabı sınırları karşı g/ç işlemlerinin sayısı anlamına gelir.
-* Sanal makinenin depolama g/ç kota karşı hesap yerine depolama blobları SQL Server veri ve günlük dosyalarını temsil eden karşı trafiğin muhasebesi sanal makinenin ağ bant genişliği belirli VM türü. Ağ ve depolama için bant genişliği belirli bir VM türünün, makalesine başvurun [boyutları için Windows azure'da sanal makineler](https://docs.microsoft.com/azure/virtual-machines/windows/sizes).
-* Dosya g/ç ağ kotası aracılığıyla gönderme, sonucu olarak depolama kotası çoğunlukla stranding ve ile sanal makinenin toplam bant genişliği yalnızca kısmen kullanın.
-* Azure Premium depolama için farklı bir disk boyutlarına sahip IOPS ve g/ç aktarım hızı performans hedeflerini artık geçerli değildir. Azure Premium depolama blobları, oluşturduğunuz bile bulunur. Hedefleri belgelenen makaleyi [yüksek performanslı Premium depolama ve VM'ler için yönetilen diskler](https://docs.microsoft.com/azure/virtual-machines/windows/premium-storage). SQL Server veri dosyaları ve günlük dosyalarını doğrudan Azure Premium depolama alanında depolanan blobları yerleştirme sonucu olarak performans özellikleri VHD'lerde Azure Premium depolama ile karşılaştırıldığında farklı olabilir.
-* Azure Premium depolama diskleri olarak önbelleğe alma tabanlı bir konak, doğrudan Azure BLOB'ları üzerinde SQL Server veri dosyaları yerleştirirken kullanılabilir değil.
-* M serisi sanal makineler üzerinde SQL Server işlem günlüğü dosyasına yönelik milisaniyenin yazma desteklemek için Azure yazma Hızlandırıcı kullanılamaz. 
+* Kullanılan depolama hesabının, SQL Server VM 'yi dağıtmak için kullanılan aynı Azure bölgesinde olması gerekir.
+* VHD 'lerin farklı Azure depolama hesapları üzerinden dağıtılması hakkında daha önce listelenen konular bu dağıtım yöntemi için de geçerlidir. G/ç işlemlerinin, Azure depolama hesabı sınırlarına göre sayısı anlamına gelir.
+* VM 'nin depolama g/ç kotasına karşı, SQL Server veri ve günlük dosyalarını temsil eden depolama bloblarına karşı trafik, sanal makinenin belirli VM türünün ağ bant genişliğine göre hesaba katılmaz. Belirli bir sanal makine türünün ağ ve depolama bant genişliği için, [Azure 'Da Windows sanal makinelerinin makale boyutlarına](https://docs.microsoft.com/azure/virtual-machines/windows/sizes)başvurun.
+* Dosya g/ç 'yi ağ kotasından dağıtmaya bir sonuç olarak, depolama kotasını büyük ölçüde ve ile yalnızca kısmen VM 'nin Genel bant genişliğini kullanacak şekilde kullanırsınız.
+* IOP ve g/ç verimlilik performansı, Azure Premium Depolama 'nın farklı disk boyutları için sahip olduğu hedeflerse artık uygulanmaz. Oluşturduğunuz Bloblar Azure Premium depolamada bulunuyor olsa da. Hedefler, [yüksek performanslı Premium Depolama ve VM 'ler için yönetilen diskler](https://docs.microsoft.com/azure/virtual-machines/windows/premium-storage)makalesine belgelenmiştir. SQL Server veri dosyalarını ve günlük dosyalarını doğrudan Azure Premium depolamada depolanan bloblara yerleştirmekten kaynaklanan performans özellikleri, Azure Premium depolamada bulunan VHD 'lere kıyasla farklı olabilir.
+* Azure Premium depolama diskleri için kullanılabilir olarak ana bilgisayar tabanlı önbelleğe alma, SQL Server veri dosyalarını doğrudan Azure bloblarına yerleştirirken kullanılamaz.
+* M serisi VM 'lerde, Azure Yazma Hızlandırıcısı, SQL Server işlem günlüğü dosyasına karşı alt milisaniyelik yazmaları desteklemek için kullanılamaz. 
 
-Bu işlevlerin bilgi makalesinde bulunabilir [Microsoft azure'da SQL Server veri dosyaları](https://docs.microsoft.com/sql/relational-databases/databases/sql-server-data-files-in-microsoft-azure?view=sql-server-2017)
+Bu işlevselliğin ayrıntıları [Microsoft Azure içindeki veri dosyaları SQL Server](https://docs.microsoft.com/sql/relational-databases/databases/sql-server-data-files-in-microsoft-azure?view=sql-server-2017) makalesinde bulunabilir
 
-Üretim sistemleri için bu yapılandırmayı önlemek ve yerine SQL Server veri yerleşimi seçin ve doğrudan Azure BLOB üzerinde yerine Azure Premium depolama VHD'leri, günlük dosyalarını önerilir.
+Üretim sistemleri için öneri, bu yapılandırmayı önlemek ve Azure 'da doğrudan Azure Blob 'ları yerine Azure Premium Depolama VHD 'lerde SQL Server veri ve günlük dosyalarını seçmenizi sağlar.
 
 
-## <a name="sql-server-2014-buffer-pool-extension"></a>SQL Server 2014 arabellek havuzu genişletme
-SQL Server 2014 olarak adlandırılan yeni bir özellik tanıtılan [arabellek havuzu uzantısı](https://docs.microsoft.com/sql/database-engine/configure-windows/buffer-pool-extension?view=sql-server-2017). Arabellek havuzu sunucusunun yerel SSD veya VM tarafından desteklenen bir ikinci düzey önbelleği ile bellekte tutulur SQL Server'ın bu işlevselliği genişletir. Arabellek havuzu uzantısı 'bellek' daha büyük bir çalışma kümesi veri tutma sağlar. Azure standart depolama erişimi karşılaştırıldığında Azure VM'deki yerel SSD'ler üzerinde depolanan arabellek havuzu uzantısı Access'e faktörlerden daha hızlıdır. Arabellek havuzu uzantısı için Azure Premium depolama okuma önbelleği, SQL Server veri dosyaları için önerilen şekilde karşılaştırma, önemli hiçbir avantajı için arabellek havuzu genişletmelerini beklenmektedir. Azure işlem düğümünün yerel diskler hem önbellekler (SQL Server arabellek havuzu genişletme ve Premium depolama okuma önbelleği) kullandığınızdan emin nedenidir.
+## <a name="sql-server-2014-buffer-pool-extension"></a>SQL Server 2014 arabellek havuzu uzantısı
+SQL Server 2014, [arabellek havuzu uzantısı](https://docs.microsoft.com/sql/database-engine/configure-windows/buffer-pool-extension?view=sql-server-2017)olarak adlandırılan yeni bir özellik sunmuştur. Bu işlevsellik, bir sunucunun veya VM 'nin yerel SSD 'leri tarafından desteklenen ikinci düzey bir önbellek ile bellekte tutulan SQL Server arabellek havuzunu genişletir. Arabellek havuzu uzantısı, daha büyük bir çalışma veri kümesinin bellek içinde tutulmasını sağlar. Azure Standart depolama 'ya erişme ile karşılaştırıldığında, bir Azure VM 'nin yerel SSD 'leri üzerinde depolanan arabellek havuzunun uzantısına erişim çok daha hızlıdır. Arabellek havuzu uzantısı, SQL Server veri dosyaları için önerildiği şekilde Azure Premium Depolama okuma önbelleği ile karşılaştırılıyor, arabellek havuzu uzantıları için önemli bir avantaj beklenmez. Bunun nedeni hem önbellekler (SQL Server arabellek havuzu uzantısı ve Premium Depolama okuma önbelleği) Azure işlem düğümünün yerel disklerini kullanmaktır.
 
-Sırada SQL Server arabellek havuzu uzantısı ile SAP iş yükü kazanılan deneyimleri, karma ve hala NET öneriler her durumda kullanıp kullanmayacağınızı üzerinde izin vermiyor. SAP uygulama gerektiriyorsa çalışma kümesi ana belleğe uyan ideal durumdur. Bu arada, 4 TB ile bellek gelen Vm'leri sunan Azure ile çalışma kümesi bellekte tut ulaşılabilir olmalıdır. Bu nedenle arabellek havuzu uzantısı kullanımı için bazı nadir durumlarda sınırlıdır ve temel bir durumda olmaması gerekir.  
+SAP iş yükü karma olan SQL Server arabellek havuzu uzantısı ile aynı zamanda kazanılan deneyimler, her durumda bunu kullanıp kullanmayacağınızı açık önerilere izin vermez. İdeal durum, SAP uygulamasının ana belleğe sığması için gereken çalışma kümesidir. 4 TB 'a kadar bellek içeren VM 'Leri sunarken Azure ile birlikte, çalışma kümesinin bellekte tutulması için ulaşılabilir olması gerekir. Bu nedenle, arabellek havuzu uzantısının kullanımı nadir bazı durumlar ile sınırlıdır ve temel bir durum olmaması gerekir.  
 
 ## <a name="backuprecovery-considerations-for-sql-server"></a>SQL Server için yedekleme/kurtarma konuları
-SQL Server'ı Azure'a dağıtma, yedekleme yönteminize gözden geçirilmesi gerekir. Sistem, bir üretim sistemine değil olsa bile, SQL Server tarafından barındırılan SAP veritabanı düzenli aralıklarla yedeklenmelidir. Azure depolama üç görüntü tutar olduğundan, bir yedekleme şimdi daha az depolama kilitlenme telafi için açısından önemlidir. Uygun bir yedekleme ve kurtarma planı sürdürmek için öncelik daha belirli bir noktadaki zaman kurtarma özellikleri sağlayarak mantıksal/el ile hataları dengeleyebilir nedenidir. Bu nedenle yedeklemelerini geri belirli bir noktaya veritabanını geri veya var olan veritabanı kopyalayarak başka bir sistem kaynağını oluşturmak için Azure'da yedeklemelerini kullanın ya da kullanın olmaktır. 
+SQL Server Azure 'a dağıttığınızda, yedekleme yönteminizin gözden geçirilmesi gerekir. Sistem bir üretim sistemi olmasa bile, SQL Server tarafından barındırılan SAP veritabanının düzenli olarak yedeklenmesi gerekir. Azure depolama üç görüntü yaptığından, bir depolama kilitlenmesiyle ilgili olarak yedekleme artık daha az önemlidir. Uygun bir yedekleme ve kurtarma planının sürdürülmesi için öncelik nedeni, zaman kurtarma özelliklerini bir noktaya sağlayarak mantıksal/el ile hatalar için telafi sağlayabilmenin daha fazla olması olabilir. Böylece hedef, veritabanını belirli bir noktaya geri yüklemek ya da mevcut veritabanını kopyalayarak başka bir sistemi temel almak için Azure 'daki yedeklemeleri kullanmak üzere yedeklemeleri kullanmaktır. 
 
-Azure yedekleme olanaklar farklı SQL Server aramak için makaleyi okuyun [yedekleme ve Azure sanal Makineler'de SQL Server için geri yükleme](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-backup-recovery). Makale birkaç farklı olasılık kapsar.
+Azure 'daki farklı SQL Server yedekleme olasılıklarına bakmak için [Azure sanal makinelerinde SQL Server Için Yedekleme ve geri yükleme](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-backup-recovery)makalesini okuyun. Makale birçok farklı olasılıkların ele alınmaktadır.
 
-### <a name="manual-backups"></a>El ile yedekleme
-'Manual' yedeklemeleri gerçekleştirmek için çeşitli olanaklar var.
+### <a name="manual-backups"></a>El ile yedeklemeler
+' El ile ' yedeklemeler gerçekleştirmek için kullanabileceğiniz çeşitli olanaklar vardır:
 
-1. Doğrudan bağlı Azure disklerde geleneksel SQL Server yedekleme gerçekleştirme. Bu yöntem sistem yenilemeler için hemen kullanılabilir yedeklemelere sahip ve yeni sistemleri mevcut SAP sistemlerini bir kopyasını oluşturmak bir avantajı vardır.
-2.  SQL Server 2012 CU4 ve veritabanlarını yedeklemek için bir Azure depolama URL'si yüksek yedekleyebilirsiniz.
-3.  Dosya anlık görüntüsü yedekleri Azure Blob depolama alanındaki veritabanı dosyaları için. Bu yöntem yalnızca SQL Server veri ve günlük dosyalarını Azure blob depolama alanında bulunan olduğunda çalışır
+1. Doğrudan bağlı Azure disklerinde geleneksel SQL Server yedeklemeleri gerçekleştirme. Bu yöntem, yedeklemelerin sistem yenilemelerinde kullanılabilir olması ve mevcut SAP sistemlerinin kopyaları olarak yeni sistemlerin oluşturulması avantajına sahiptir.
+2.  SQL Server 2012 CU4 ve üzeri, veritabanlarını bir Azure Storage URL 'sine yedekleyebilir.
+3.  Azure Blob depolamada veritabanı dosyaları için dosya anlık görüntü yedeklemeleri. Bu yöntem yalnızca SQL Server verileriniz ve günlük dosyalarınız Azure Blob depolama alanında bulunuyorsa işe yarar.
 
-İlk yöntem, bilinen ve çoğu durumda şirket içi dünyanın de uygulanır. Ancak yine de, uzun vadeli yedekleme konumu çözmek için görevle bırakır. En az 30 gün içinde yerel olarak bağlı Azure depolama için yedeklemelerinizi tutmak istemediğiniz olduğundan ya da Azure yedekleme hizmeti veya yedeklemeleriniz için erişim ve koruma Yönetimi içeren başka bir üçüncü taraf yedekleme/Kurtarma aracını kullanmaya gerek vardır. Veya, azure'da büyük dosya sunucusu Windows depolama alanları kullanarak oluşturmak.
+İlk yöntem, şirket içi dünyada pek çok durumda iyi bilinirler ve uygulanır. Bununla birlikte, daha uzun vadeli yedekleme konumunu çözümlemek için görev sizi bırakır. Yerel olarak bağlı Azure depolamada yedeklemelerinizi 30 veya daha fazla güne karşı korumak istemediğiniz için, yedeklemeleriniz için erişim ve bekletme yönetimi içeren Azure Backup hizmetlerini veya başka bir üçüncü taraf yedekleme/kurtarma aracını kullanmanız gerekir. Ya da Windows depolama alanları kullanarak Azure 'da büyük bir dosya sunucusu oluşturabilirsiniz.
 
-İkinci yöntem daha yakın makalesinde açıklanan [URL'ye SQL Server Yedekleme](https://docs.microsoft.com/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-2017). SQL Server'ın farklı sürümleri, bu işlev bazı farklılıklar vardır. Bu nedenle, belirli SQL Server sürüm denetimi için belgeleri inceleyin denetlemeniz gerekir. Bu makalede kısıtlamaları birçok listelediğine dikkat edin önemlidir. Ya da yedekleme karşı olanağına sahip olursunuz:
+İkinci yöntem, [URL 'ye yedekleme SQL Server](https://docs.microsoft.com/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-2017)makalesinde daha yakından açıklanmıştır. Farklı SQL Server sürümleri bu işlevlerde bazı çeşitlere sahiptir. Bu nedenle, belirli SQL Server sürüm denetimi için belgelere göz atın. Bu makalede çok sayıda kısıtlama listelendiğine dikkat edin. Yedeklemeyi şu şekilde gerçekleştirebilirsiniz:
 
-- Ardından 1000 GB yedekleme boyutunu sınırlayan tek tek Azure sayfa blobu. Bu ayrıca aktarım hızı elde edebileceğiniz sınırlar.
-- Birden çok teorik bir yedekleme boyutu 12 TB etkinleştir (en fazla 64) Azure blok blobları,. En fazla yedekleme boyutu, teorik sınırdan daha küçük olabilir ancak, müşteri veritabanları ile testleri göstermiştir. Bu durumda, bekletme ve erişim o yedeklerin de yönetmekten sorumlu olursunuz.
+- Yedekleme boyutunu 1000 GB ile sınırlayan tek bir Azure Sayfa Blobu. Bu ayrıca elde ettiğiniz aktarım hızını da sınırlandırır.
+- Birden çok (64 ' e kadar) Azure blok blob 'ları, teorik olarak 12 TB 'lık yedekleme boyutunu etkinleştirir. Ancak, müşteri veritabanları ile testler maksimum yedekleme boyutunun teorik limitinden daha küçük olduğunu gösterdi. Bu durumda, yedeklemelerin bekletilmesini yönetmekten ve yedeklemeler de erişebilmekten siz sorumlusunuz.
 
 
 ### <a name="automated-backup-for-sql-server"></a>SQL Server için Otomatik Yedekleme
-Otomatik yedekleme, azure'daki bir Windows VM'de çalışan SQL Server Standard ve Enterprise sürümleri için otomatik bir yedekleme hizmeti sağlar. Bu hizmet tarafından sağlanan [SQL Server Iaas Aracısı uzantısı](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension), otomatik olarak yüklendiği SQL Server Windows sanal makine görüntüleri Azure portalında üzerinde. Yüklü SQL Server ile kendi işletim sistemi görüntüleri dağıtmak istiyorsanız VM uzantıları ayrı olarak yüklemeniz gerekir. Gerekli olan adımları, bu konuda belgelenmiştir [makale](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension).
+Otomatik yedekleme, Azure 'da Windows VM 'de çalışan SQL Server Standard ve Enterprise sürümleri için otomatik yedekleme hizmeti sağlar. Bu hizmet, Azure portal SQL Server Windows sanal makine görüntülerine otomatik olarak yüklenen [SQL Server IaaS Aracısı uzantısı](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension)tarafından sağlanır. SQL Server yüklü olan işletim sistemi görüntülerini dağıtırsanız, VM uzantılarını ayrı olarak yüklemeniz gerekir. Gerekli adımlar bu [makalede](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension)belgelenmiştir.
 
-Bu yöntemin özellikleri hakkında daha fazla bilgi aşağıdaki makalelerde bulunabilir:
+Bu yöntemin özellikleri hakkında daha fazla ayrıntı bu makalelerde bulunabilir:
 
-- SQL Server 2014: [SQL Server 2014 Virtual Machines'de (Resource Manager) için otomatik yedekleme](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-automated-backup)
-- SQL Server 2016/2017: [Azure Virtual Machines'de (Resource Manager) için otomatik yedekleme v2](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-automated-backup-v2)
+- SQL Server 2014: [SQL Server 2014 sanal makineleri için otomatik yedekleme (Kaynak Yöneticisi)](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-automated-backup)
+- SQL Server 2016/2017: [Azure sanal makineleri için otomatik yedekleme v2 (Kaynak Yöneticisi)](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-automated-backup-v2)
 
-Belgeleme bakarak, işlevselliği daha yeni SQL Server sürümleriyle geliştirilmiş olduğunu görebilirsiniz. Daha fazla ayrıntı otomatik yedekleri makalesinde yayımlanan SQL Server'da [Microsoft azure'da SQL Server yönetilen yedekleme](https://docs.microsoft.com/sql/relational-databases/backup-restore/sql-server-managed-backup-to-microsoft-azure?view=sql-server-2017). Teorik yedekleme boyut sınırını 12 TB'dir.  Otomatik yedeklemeler, 12 TB'ye kadar yedekleme boyutları için iyi bir yöntem olabilir. Birden çok BLOB'ları paralel olarak yazılır olduğundan, 100 MB/sn daha büyük bir işleme bekleyebilirsiniz. 
+Belgelere bakarak, daha güncel SQL Server yayınları ile işlevselliğin iyileştirilen olduğunu görebilirsiniz. SQL Server otomatikleştirilmiş yedeklemelerle ilgili bazı ayrıntılar, [SQL Server yönetilen yedekleme Microsoft Azure](https://docs.microsoft.com/sql/relational-databases/backup-restore/sql-server-managed-backup-to-microsoft-azure?view=sql-server-2017)makalesinde yayımlanmıştır. Teorik yedek boyut sınırı 12 TB 'tır.  Otomatik yedeklemeler, 12 TB 'a kadar yedekleme boyutları için iyi bir yöntem olabilir. Birden çok blob paralel olarak yazıldığından, 100 MB/sn 'den büyük bir verimlilik bekleyebilir. 
  
 
-### <a name="azure-backup-for-sql-server-vms"></a>SQL Server Vm'leri için Azure yedekleme
-Bu yeni yöntemi SQL Server Yedekleme Haziran 2018'den itibaren Azure yedekleme hizmetleri tarafından genel önizleme olarak sunulur. Diğer üçüncü taraf araçları kullanarak, yani bir hedef konuma stream yedekleri SQL Server VSS/VDI arabirimi yöntemi yedekleme SQL Server için aynıdır. Bu durumda hedef Azure kurtarma Hizmetleri kasası konumdur.
+### <a name="azure-backup-for-sql-server-vms"></a>SQL Server VM 'Ler için Azure Backup
+Bu yeni SQL Server yedeklemeleri yöntemi, Azure Backup Hizmetleri tarafından genel önizleme olarak Haziran 2018 ' den itibaren sunulmaktadır. SQL Server yedekleme yöntemi diğer üçüncü taraf araçları ile aynıdır; Yani, yedeklemeleri hedef konuma akışa almak için SQL Server VSS/VDı arabirimidir. Bu durumda, hedef konum Azure kurtarma hizmeti Kasası olur.
 
-Bu yedekleme yöntemi, birden fazla ayrıntılı bir açıklaması, izleme, yedekleme yapılandırmalarının Merkezi, çok sayıda avantaj ekler ve yönetim kullanılabilir [burada](https://docs.microsoft.com/azure/backup/backup-azure-sql-database). 
+Bu yedekleme yönteminin, merkezi yedekleme yapılandırmalarının, izlemenin ve yönetimin çok sayıda avantajını ekleyen ayrıntılı açıklaması [burada](https://docs.microsoft.com/azure/backup/backup-azure-sql-database)bulunabilir. 
 
 
 ### <a name="third-party-backup-solutions"></a>Üçüncü taraf yedekleme çözümleri
-SAP müşterilerinin oldukça sayısı için baştan başlayın ve Azure'da çalışan kendi SAP ortamının bir parçası için tam yeni yedekleme çözümleri tanıtacağız olasılığı vardı. Sonuç olarak, var olan yedekleme çözümleri kullanılır ve Azure'a genişletilmiş gerekmiyor. Mevcut yedekleme çözümleri, genellikle ana satıcıların bu alandaki en iyi çalıştığınız azure'a genişletme. 
+Çok sayıda SAP müşterisi için, Azure 'da çalışan SAP yatay 'in bir bölümü için baştan başlamak ve tam yeni yedekleme çözümleri tanıtmak mümkün değildir. Sonuç olarak, mevcut yedekleme çözümlerinin kullanılması ve Azure 'da genişletilmesi gerekir. Mevcut yedekleme çözümlerini Azure 'a genişletmek, genellikle bu alandaki ana satıcıların büyük bir çoğunluğu ile sorunsuz bir şekilde çalışmıştır. 
 
 
-## <a name="1b353e38-21b3-4310-aeb6-a77e7c8e81c8"></a>Microsoft Azure Marketi dışında bir SQL Server görüntüsü kullanma
-Microsoft SQL Server sürümlerini içeren sanal makineleri Azure Market'te sunar. SQL Server ve Windows için Lisansı gerektiren SAP müşteriler, bu görüntüleri kullanarak SQL Server'ın zaten yüklü olan Vm'leri getirerek lisans gereksinimi karşılamak için bir fırsat olabilir. SAP için görüntüleri kullanmak için aşağıdaki konuları yapılması gerekir:
+## <a name="1b353e38-21b3-4310-aeb6-a77e7c8e81c8"></a>Microsoft Azure Market SQL Server bir görüntü kullanma
+Microsoft, Azure Marketi 'nde zaten SQL Server sürümlerini içeren VM 'Leri sunmaktadır. SQL Server ve Windows için lisans gerektiren SAP müşterileri için, bu görüntüleri kullanmak, SQL Server zaten yüklü olan VM 'Leri çağırarak lisans gereksinimini kapsayan bir fırsat olabilir. Bu tür görüntüleri SAP için kullanabilmeniz için aşağıdaki noktalara dikkat edilmesi gerekir:
 
-* SQL Server değerlendirme olmayan sürümleri, Azure Marketi'nden dağıtılan VM 'Yalnızca Windows' dan daha yüksek maliyetleri alın. Compare prices için şu makalelere bakın: <https://azure.microsoft.com/pricing/details/virtual-machines/windows/> ve <https://azure.microsoft.com/pricing/details/virtual-machines/sql-server-enterprise/>. 
-* SAP tarafından desteklenen SQL Server sürümleri, yalnızca kullanabilirsiniz.
-* Azure Marketi'nde sunulan vm'lerde yüklü SQL Server örneğinin harmanlama SAP NetWeaver'ı çalıştırmak için SQL Server örneği gerektirir harmanlama değil. Aşağıdaki bölümde yönde rağmen ile harmanlama değiştirebilirsiniz.
+* Değerlendirme dışı sürümler SQL Server, Azure Marketi 'nden dağıtılan ' yalnızca Windows-yalnızca ' VM 'den daha yüksek maliyetler elde edin. Fiyatları karşılaştırmak için şu makalelere bakın: <https://azure.microsoft.com/pricing/details/virtual-machines/windows/> ve <https://azure.microsoft.com/pricing/details/virtual-machines/sql-server-enterprise/>. 
+* Yalnızca SAP tarafından desteklenen SQL Server yayınları kullanabilirsiniz.
+* Azure Marketi 'nde sunulan VM 'lerde yüklü olan SQL Server örneğinin harmanlaması, SAP NetWeaver 'in SQL Server örneğinin çalıştırılmasını gerektirir. Harmanlamayı, aşağıdaki bölümdeki yönleri de değiştirebilirsiniz.
 
-### <a name="changing-the-sql-server-collation-of-a-microsoft-windowssql-server-vm"></a>Microsoft Windows/SQL Server VM, SQL Server harmanlaması değiştiriliyor
-SQL Server görüntüleri Azure Market'te SAP NetWeaver uygulamaları tarafından gerekli harmanlamasını kullanacak şekilde ayarlanmadınız beri dağıtımdan hemen sonra değiştirilmesi gerekiyor. SQL Server için bu değişikliği harmanlama aşağıdaki adımlarla yönetici dağıtılan VM'de oturum açmaya devam edebilir ve VM dağıtıldıktan sürede yapılabilir:
+### <a name="changing-the-sql-server-collation-of-a-microsoft-windowssql-server-vm"></a>Bir Microsoft Windows/SQL Server VM SQL Server harmanlamasını değiştirme
+Azure Marketi 'ndeki SQL Server görüntüleri, SAP NetWeaver uygulamaları için gerekli olan harmanlamayı kullanacak şekilde kurulmadığından, dağıtımdan hemen sonra değiştirilmesi gerekir. SQL Server için, bu harmanlama değişikliği, VM dağıtıldığı anda aşağıdaki adımlarla yapılabilir ve bir yönetici dağıtılan VM 'de oturum açabiliyor:
 
 * Yönetici olarak bir Windows komut penceresi açın.
-* Dizini için C:\Program Files\Microsoft SQL Server\110\Setup Bootstrap\SQLServer2012 değiştirin.
-* Komutu yürütün: Setup.exe /QUIET /ACTION=REBUILDDATABASE /INSTANCENAME=MSSQLSERVER /SQLSYSADMINACCOUNTS=`<local_admin_account_name`> /SQLCOLLATION=SQL_Latin1_General_Cp850_BIN2   
-  * `<local_admin_account_name`> VM Galeriden ilk kez dağıtırken yönetici hesabı olarak tanımlanmış olan hesap.
+* Dizini C:\Program Files\Microsoft SQL Server\110\Setup Bootstrap\sqlserver2012olarak değiştirin.
+* Komutu yürütün: Setup. exe/quiet/Action = RebuildDatabase/InstanceName = MSSQLSERVER/sqlsysadminaccounts =`<local_admin_account_name`>/sqlharmanlama = SQL_Latin1_General_Cp850_BIN2   
+  * `<local_admin_account_name`>, sanal makine Galeri aracılığıyla ilk kez dağıtıldığında yönetici hesabı olarak tanımlanan hesaptır.
 
-İşlem yalnızca birkaç dakika sürer. Adım doğru sonucuyla sonlandı emin olmak için aşağıdaki adımları gerçekleştirin:
+İşlem yalnızca birkaç dakika sürer. Adımın doğru sonuçla sonlandırıp sonlanmadığını doğrulamak için aşağıdaki adımları gerçekleştirin:
 
-* SQL Server Management Studio’yu açın.
+* SQL Server Management Studio'yu açın.
 * Bir sorgu penceresi açın.
-* Komut sp_helpsort SQL Server ana veritabanında yürütün.
+* SQL Server ana veritabanında sp_helpsort komutunu yürütün.
 
-İstenen sonucu gibi görünmelidir:
+İstenen sonuç şöyle görünmelidir:
 
     Latin1-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non-Unicode Data
 
-Sonucu farklı ise, SAP dağıtmadan DURDURMAK ve neden Kurulum komutu beklendiği gibi çalışmaması inceleyin. SAP NetWeaver uygulamalarının daha yukarıda bahsedilen farklı SQL Server kod sayfaları ile SQL Server örneği dağıtımı **değil** desteklenir.
+Sonuç farklıysa SAP dağıtımı durdurun ve kurulum komutunun neden beklendiği gibi çalışmadığına ilişkin araştırma yapın. Yukarıda bahsedilen farklı SQL Server codepages ile SQL Server örneğine SAP NetWeaver uygulamalarının dağıtılması desteklenmez.
 
-## <a name="sql-server-high-availability-for-sap-in-azure"></a>SQL Server yüksek kullanılabilirlik için azure'da SAP
-SQL Server SAP için Azure Iaas dağıtımları kullanarak yüksek oranda kullanılabilir DBMS katmanın dağıtılacağı eklemek için birkaç farklı olasılık sahip. Bölümünde açıklandığı gibi [SAP iş yükü Azure sanal makineleri DBMS dağıtım konuları](dbms_guide_general.md) zaten Azure sağlayan farklı süresi SLA'ları için tek bir VM ile bir Azure kullanılabilirlik kümesinde dağıtılan Vm'leri bir çift. Bu, sürücü doğrultusunda Azure kullanılabilirlik kümeleri dağıtımda gerektiren süreli SLA üretim dağıtımlarınıza varsayılır. Böyle bir durumda, bu tür bir kullanılabilirlik kümesinde iki VM en az dağıtmanız gerekir. Bir VM etkin SQL Server örneği çalışır. Diğer VM edilgen örneği çalışır
+## <a name="sql-server-high-availability-for-sap-in-azure"></a>Azure 'da SAP için yüksek kullanılabilirlik SQL Server
+SAP için Azure IaaS dağıtımlarında SQL Server kullanarak, DBMS katmanını yüksek oranda kullanılabilir şekilde dağıtmak için çeşitli farklı olasılıklara sahip olursunuz. [SAP iş yükü Için Azure sanal MAKINELER DBMS dağıtımına Ilişkin önemli noktalara değinildiği](dbms_guide_general.md) gibi, Azure tek bir VM ve bir Azure kullanılabilirlik kümesinde dağıtılan bir çift sanal makine için farklı bir zaman SLA 'lar sağlar. Varsayım, Azure kullanılabilirlik kümelerinde dağıtımı gerektiren üretim dağıtımlarınız için güncel SLA 'yı doğru şekilde sağlamayız. Böyle bir durumda, bu tür bir kullanılabilirlik kümesinde en az iki VM dağıtmanız gerekir. Bir VM, etkin SQL Server örneğini çalıştırır. Diğer VM pasif örneği çalıştıracak
 
-### <a name="sql-server-clustering-using-windows-scale-out-file-server"></a>Windows ölçek genişletme dosya sunucusu kullanarak SQL Server Kümelemesi
-Microsoft Windows Server 2016 ile tanıtılan [depolama alanları doğrudan](https://docs.microsoft.com/windows-server/storage/storage-spaces/storage-spaces-direct-overview). Depolama alanları doğrudan dağıtımı bağlı olarak, SQL Server FCI Kümelemesi desteklenir. Bilgi makalesinde bulunabilir [yapılandırma SQL Server Yük devretme kümesi örneği Azure sanal Makineler'de](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-create-failover-cluster). Çözüm, küme kaynaklarını sanal IP adresi ile dağıtılacak Azure yük dengeleyici de gerektirir. SQL Server veritabanı dosyaları, depolama alanları ' depolanır. Bu nedenle, olan bir Azure Premium depolama tabanlı Windows depolama alanları'kurmak oluşturmak için gereken biçimde. Bu çözüm çok uzun henüz için desteklenen olduğundan, SAP üretim senaryolarında bu çözümü kullanan herhangi bir bilinen SAP müşterilerinin vardır.  
+### <a name="sql-server-clustering-using-windows-scale-out-file-server"></a>Windows genişleme dosya sunucusu kullanarak kümeleme SQL Server
+Windows Server 2016 ile, Microsoft [depolama alanları doğrudan](https://docs.microsoft.com/windows-server/storage/storage-spaces/storage-spaces-direct-overview)sunmuştur. Depolama Alanları Doğrudan dağıtımına göre SQL Server FCı Kümelemesi desteklenir. Ayrıntılar, [Azure sanal makinelerinde SQL Server yük devretme kümesi örneğini yapılandırma](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-create-failover-cluster)makalesinde bulunabilir. Çözüm, küme kaynaklarının sanal IP adresiyle başa çıkmak için bir Azure Yük dengeleyiciyi de gerektirir. SQL Server veritabanı dosyaları depolama alanlarında depolanır. Bu nedenle, Azure Premium Depolama 'yı temel alan Windows depolama alanlarını oluşturmak için gerekli bir seçenektir. Bu çözüm çok uzun olmadığı için desteklendiğinden SAP üretim senaryolarında bu çözümü kullanan bilinen bir SAP müşterisi yoktur.  
 
-### <a name="sql-server-log-shipping"></a>SQL Server günlük aktarma
-Yüksek kullanılabilirlik (HA) yöntemleri SQL Server günlük aktarma biridir. Yüksek kullanılabilirlik yapılandırmasında katılan Vm'leri ad çözümlemesinin çalışıp varsa, bir sorun yok ve Kurulum azure'da şirket içinde gerçekleştirilen herhangi bir ayar farklı değildir. Günlük aktarma ve günlük aktarma etrafında ilkeler ayarlama bakımından. SQL Server günlük aktarma ayrıntılarını makalesinde bulunabilir [günlük aktarma (SQL Server) hakkında](https://docs.microsoft.com/sql/database-engine/log-shipping/about-log-shipping-sql-server?view=sql-server-2017).
+### <a name="sql-server-log-shipping"></a>SQL Server günlük aktarımı
+Yüksek kullanılabilirlik yöntemlerinden biri (HA), günlük aktarma SQL Server. HA yapılandırmasına katılan VM 'Lerin çalışma adı çözümlemesi varsa, sorun yoktur ve Azure 'daki kurulum, şirket içinde gerçekleştirilen kurulumdan farklı değildir. Günlük dağıtımını ve günlük aktarma etrafında ilkeleri ayarlamaya göre. SQL Server günlük aktarma ayrıntıları, [günlük aktarma (SQL Server)](https://docs.microsoft.com/sql/database-engine/log-shipping/about-log-shipping-sql-server?view=sql-server-2017)makalesinde bulunabilir.
 
-SQL Server günlük işlevi, bir Azure bölgesi içinde yüksek kullanılabilirlik elde etmek için Azure'da zor kullanıldı. Ancak aşağıdaki senaryolarda SAP müşterilerinin Azure ile birlikte başarılı günlük aktarma kullandığınız:
+Azure 'da SQL Server günlük aktarma işlevselliği, tek bir Azure bölgesinde yüksek kullanılabilirlik elde etmek için kullanılır. Bununla birlikte, aşağıdaki senaryolarda SAP müşterileri Azure ile birlikte günlük dağıtımını başarıyla kullanıyor:
 
-- Bir Azure bölgesinden başka bir Azure bölgesine içine olağanüstü durum kurtarma senaryoları
-- Bir Azure bölgesi içinde şirket içi olağanüstü durum kurtarma yapılandırması
-- Şirket içi senaryolarından kesme üzerinden azure'a. Bu gibi durumlarda, günlük aktarma, azure'da yeni DBMS dağıtım devam eden üretim sistemi şirket içi ile eşitlemek için kullanılır. Zaman içinde kesme, üretim kapatılır ve son ve en son işlem günlüğü yedeklemeleri için Azure DBMS dağıtım aktarılan emin yapılır. Ardından Azure DBMS dağıtım için üretim açılır.  
+- Bir Azure bölgesindeki başka bir Azure bölgesine olağanüstü durum kurtarma senaryoları
+- Şirket içinden bir Azure bölgesine olağanüstü durum kurtarma yapılandırması
+- Şirket içinden Azure 'a kadar kesilen senaryolar. Bu durumlarda, Azure 'daki yeni DBMS dağıtımını şirket içi üretim sistemiyle eşleştirmek için günlük aktarma kullanılır. Kesme sırasında üretim kapatılır ve son ve en son işlem günlüğü yedeklemelerinin Azure DBMS dağıtımına aktarıldığından emin olun. Ardından, Azure DBMS dağıtımı üretim için açılır.  
 
 
 
 ### <a name="database-mirroring"></a>Veritabanı yansıtma
-SAP tarafından desteklenen yansıtma veritabanı (SAP notu bkz [965908]) üzerinde bir yük devretme iş ortağı SAP bağlantı dizesinde tanımlama kullanır. Şirketler arası durumlarda, iki VM aynı etki alanında olduğunu ve kullanıcı bağlamı iki SQL Server örneklerini de bir etki alanı kullanıcı altında çalışan ve ilgili iki SQL Server durumlarda yeterli ayrıcalıklara sahip varsayıyoruz. Bu nedenle, azure'da veritabanı yansıtma kurulumu tipik şirket içi Kurulumu/yapılandırma farklı değildir.
+SAP tarafından desteklenen veritabanı yansıtma (bkz. SAP Note [), veritabanı yansıtmasıyla aynı şekilde kullanılması gerekir. 965908]) SAP bağlantı dizesinde yük devretme ortağı tanımlamayı kullanır. Şirketler arası durumlarda iki VM 'nin aynı etki alanında olduğunu ve iki SQL Server örneğinin Kullanıcı bağlamının bir etki alanı kullanıcısı altında çalıştığını ve söz konusu iki SQL Server örneğinde yeterli ayrıcalıklara sahip olduğunu varsaytık. Bu nedenle, Azure 'da veritabanı yansıtma kurulumu, tipik bir şirket içi kurulum/yapılandırma arasında farklılık gösterir.
 
-Yalnızca bulut dağıtımlarına itibarıyla en kolay yöntem bir etki alanı içinde başka bir etki alanı Kurulum bu DBMS Vm'leri (ve ideal olarak özel SAP VM'ler) Azure'da zorunda kalmaz.
+Yalnızca bulutta gerçekleştirilen dağıtımlarda, en kolay yöntem, Azure 'daki başka bir etki alanı kurulumunun, bu DBMS VM 'Leri (ve ideal SAP VM 'Leri) bir etki alanı içinde olmasını sağlar.
 
-Bir etki alanı mümkün değilse, bir sertifika için uç noktalar burada açıklandığı şekilde yansıtma veritabanı kullanabilirsiniz: <https://docs.microsoft.com/sql/database-engine/database-mirroring/use-certificates-for-a-database-mirroring-endpoint-transact-sql>
+Bir etki alanı mümkün değilse, bir tane, burada açıklandığı gibi veritabanı yansıtma uç noktaları için sertifikalar da kullanabilir:<https://docs.microsoft.com/sql/database-engine/database-mirroring/use-certificates-for-a-database-mirroring-endpoint-transact-sql>
 
-Bir öğretici, azure'da veritabanı yansıtma ayarlamak için burada bulunabilir: <https://docs.microsoft.com/sql/database-engine/database-mirroring/database-mirroring-sql-server> 
+Azure 'da veritabanı yansıtmayı ayarlamaya yönelik bir öğretici şurada bulunabilir:<https://docs.microsoft.com/sql/database-engine/database-mirroring/database-mirroring-sql-server> 
 
 ### <a name="sql-server-always-on"></a>SQL Server her zaman açık
-Always On şirket için SAP desteklenmediğinden (SAP notu bkz [1772688]), azure'da SAP ile birlikte desteklenir. SQL Server kullanılabilirlik grubu dinleyicisini (Azure kullanılabilirlik kümesi'ile karıştırılır olarak değil) dağıtımı geçici olarak bazı özel durumlar vardır. bu yana Azure bu anda olası şirket içinde olduğu gibi bir AD/DNS nesne oluşturmaya izin vermiyor. Bu nedenle, bazı farklı bir yükleme adımları Azure belirli davranışını üstesinden gelmek gereklidir.
+Her zaman açık SAP şirket içi için desteklenir (bkz. SAP Note [1772688]), Azure 'da SAP ile birlikte desteklenir. Bu noktada Azure, şirket içinde mümkün olduğu için AD/DNS nesnesi oluşturulmasına izin vermediğinden, SQL Server kullanılabilirlik grubu dinleyicisinin (Azure kullanılabilirlik kümesiyle karıştırılmamalıdır) dağıtılmasıyla ilgili bazı özel noktalar vardır. Bu nedenle, belirli bir Azure davranışını aşmak için bazı farklı yükleme adımları gereklidir.
 
-Bir kullanılabilirlik grubu dinleyicisi kullanarak bazı hususlardır:
+Kullanılabilirlik grubu dinleyicisi kullanan bazı noktalar şunlardır:
 
-* Bir kullanılabilirlik grubu dinleyicisi kullanarak yalnızca Windows Server 2012 veya daha fazla sanal makinenin konuk işletim sistemi mümkündür. Windows Server 2012 için bu düzeltme ekini uygulandığından emin olmanız gerekir: <https://support.microsoft.com/kb/2854082> 
-* Windows Server 2008 R2 için bu düzeltme eki yok ve Always On #içeren veritabanı yansıtma ile aynı şekilde belirterek bir yük devretme ortağı bağlantı dizesinde kullanılacak (SAP default.pfl parametresi dbs/mss/sunucu - Bitti luSAPnotunabakın[965908]).
-* Bir kullanılabilirlik grubu dinleyicisi kullanırken, veritabanı VM'lerin ayrılmış bir yük dengeleyiciye bağlı gerekir. Azure burada iki VM'nin de bu arada kapatıldığından durumlarda yeni IP adresleri atama, önlemek için bir statik IP adresleri bu ağ arabirimleri için Vm'leri (statik IP adresi içindeaçıklanantanımlamaAlwaysOnyapılandırmaatamanızgerekir[bu] [ virtual-networks-reserved-private-ip] makale)
-* Küme düğümü üzerinde oluşturulan küme adı aynı IP adresini geçerli işlevselliği ile Azure atadığınız çünkü küme özel bir IP adresi gereken yere WSFC küme yapılandırma atandığında, gerekli ek adımlar vardır. Bu, kümeye farklı bir IP adresi atamak için el ile gerçekleştirilmesi anlamına gelir.
-* Kullanılabilirlik grubu dinleyicisi, kullanılabilirlik grubunun birincil ve ikincil çoğaltmalar çalıştıran sanal makinelere atanan TCP/IP'yi uç noktaları sayesinde, Azure'da oluşturulacak geçiyor.
-* Bu uç nokta ACL'leri ile güvenli hale getirmek için bir gereksinim olabilir.
+* Kullanılabilirlik grubu dinleyicisinin kullanılması yalnızca, sanal makinenin Konuk işletim sistemi olarak Windows Server 2012 veya üzeri olabilir. Windows Server 2012 için, bu düzeltme ekinin uygulandığından emin olmanız gerekir:<https://support.microsoft.com/kb/2854082> 
+* Windows Server 2008 R2 için, bu düzeltme eki mevcut değildir ve her zaman açık, bağlantı dizesinde bir yük devretme ortağı belirtilerek (SAP default. PFL parametresi DBS/,/sunucu-bkz. SAP notuna [), veritabanı yansıtmasıyla aynı şekilde kullanılması gerekir. 965908]).
+* Bir kullanılabilirlik grubu dinleyicisi kullanılırken, veritabanı VM 'lerinin ayrılmış bir Load Balancer bağlı olması gerekir. Azure 'un her iki VM arada kapatıldığı durumlarda yeni IP adresleri atamasını önlemek için, biri her zaman açık yapılandırmada bu sanal makinelerin ağ arabirimlerine statik IP adresleri atamalıdır (statik IP adresi tanımlama konusunda açıklanmaktadır [ Bu][virtual-networks-reserved-private-ip] Makale)
+* Azure 'un geçerli işlevselliği ile aynı IP adresini kümenin oluşturulduğu düğüm ile aynı IP adresine atayacağından, kümenin özel bir IP adresi olması gereken bir WSFC küme yapılandırması oluşturulurken gerekli olan özel adımlar vardır. Bu, kümeye farklı bir IP adresi atamak için el ile yapılan bir adımın gerçekleştirilmesi gerektiği anlamına gelir.
+* Kullanılabilirlik grubu dinleyicisi, Azure 'da kullanılabilirlik grubunun birincil ve ikincil çoğaltmalarını çalıştıran VM 'lere atanan TCP/IP uç noktalarıyla oluşturulacaktır.
+* Bu uç noktaların ACL 'lerle güvenli hale getirilmesine gerek duyabilirsiniz.
 
-Azure Vm'lerde SQL Server ile Always On dağıtma ayrıntılı belgeler gibi listeler:
+Azure VM 'lerde aşağıdakiler gibi SQL Server her zaman açık olarak dağıtma hakkında ayrıntılı belgeler:
 
-- [Karşınızda SQL Server Always On kullanılabilirlik grupları'Azure sanal makinelerinde](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-overview).
-- [Farklı bölgelerdeki Azure sanal makinelerinde Always On kullanılabilirlik grubu yapılandırma](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-dr).
-- [Azure'da bir Always On kullanılabilirlik grubu için bir yük dengeleyici yapılandırma](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener).
+- [Azure sanal makinelerinde SQL Server Always on kullanılabilirlik grupları Ile tanışın](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-overview).
+- [Azure sanal makinelerinde farklı bölgelerde her zaman açık kullanılabilirlik grubu yapılandırın](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-dr).
+- [Azure 'Da Always on kullanılabilirlik grubu için bir yük dengeleyici yapılandırın](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener).
 
 >[!NOTE]
-> Kullanılabilirlik grubu dinleyicisinin sanal IP adresi için Azure load balancer'ı yapılandırıyorsanız, noktalarının DirectServerReturn yapılandırıldığından emin olun. Bu seçenek yapılandırıldığında, ağ gidiş dönüş gecikmesine SAP uygulama katmanı ve DBMS katmanı arasında azaltır. 
+> Kullanılabilirlik grubu dinleyicisinin sanal IP adresi için Azure Yük dengeleyiciyi yapılandırıyorsanız, DirectServerReturn öğesinin yapılandırıldığından emin olun. Bu seçeneğin yapılandırılması, SAP uygulama katmanı ve DBMS katmanı arasındaki ağ gidiş dönüş gecikmesini azaltır. 
 
-SQL Server Always On en yaygın kullanılan yüksek kullanılabilirlik ve olağanüstü durum kurtarma işlevi Azure'da SAP iş yükü dağıtımları için kullanılan ' dir. Çoğu müşteri her zaman tek bir Azure bölgesi içinde yüksek kullanılabilirlik için kullanabilirsiniz. Dağıtım, yalnızca iki düğüm sınırlı ise, bağlantı için iki seçeneğiniz vardır:
+SQL Server her zaman açık, SAP iş yükü dağıtımları için Azure 'da kullanılan en yaygın kullanılan yüksek kullanılabilirlik ve olağanüstü durum kurtarma işlevidir. Çoğu müşteri tek bir Azure bölgesinde yüksek kullanılabilirlik için her zaman açık kullanır. Dağıtım yalnızca iki düğüm ile kısıtlanmışsa bağlantı için iki seçeneğiniz vardır:
 
-- Kullanılabilirlik grubu dinleyicisi kullanarak. Kullanılabilirlik grubu dinleyicisi ile bir Azure yük dengeleyici dağıtmak için gereklidir. Bu genellikle varsayılan dağıtım yöntemidir. SAP uygulamalarını kullanılabilirlik grubu dinleyicisi tek bir düğüm adlarla değildir ve bağlanmak için yapılandırılmış olması
-- SQL Server veritabanı yansıtma bağlantı parametrelerini kullanarak. Bu durumda, SAP uygulama bağlantı burada her iki düğüm adları olarak da adlandırılır bir şekilde yapılandırmanız gerekir. Bu tür bir SAP yan yapılandırma hakkında tam Ayrıntılar, SAP Not belgelenen [#965908](https://launchpad.support.sap.com/#/notes/965908). Bu seçeneği kullanarak, bir kullanılabilirlik grubu dinleyicisi yapılandırma gerek yoktur. Ve ile hiçbir Azure yük dengeleyici için SQL Server yüksek kullanılabilirlik. Sonuç olarak, Azure load balancer gelen trafiği SQL Server örneğine yönlendirilmemesidir olduğundan SAP uygulama katmanı ve DBMS katmanı arasındaki ağ gecikme süresi düşüktür. Ancak geri çağırma, iki örnek yaymasına izin, kullanılabilirlik grubunuzun kısıtlamak isterseniz bu seçeneği yalnızca çalışır. 
+- Kullanılabilirlik grubu dinleyicisini kullanma. Kullanılabilirlik grubu dinleyicisiyle bir Azure yük dengeleyici dağıtmanız gerekir. Bu, genellikle varsayılan dağıtım yöntemidir. SAP uygulamaları, tek bir düğüme karşı değil, kullanılabilirlik grubu dinleyicisine göre bağlanacak şekilde yapılandırılır
+- SQL Server veritabanı yansıtmasının bağlantı parametrelerini kullanma. Bu durumda, SAP uygulamalarının bağlantısını her iki düğüm adının de adlandırıldığı bir şekilde yapılandırmanız gerekir. Bu tür bir SAP tarafı yapılandırmasının tam ayrıntıları SAP Note [#965908](https://launchpad.support.sap.com/#/notes/965908)bölümünde belgelenmiştir. Bu seçeneği kullanarak, bir kullanılabilirlik grubu dinleyicisi yapılandırmanız gerekmez. Ve SQL Server yüksek kullanılabilirlik için Azure yük dengeleyici olmadan. Sonuç olarak, SQL Server örneğine gelen trafik Azure yük dengeleyici üzerinden yönlendirilmediğinden SAP uygulama katmanı ve DBMS katmanı arasındaki ağ gecikmesi daha düşüktür. Ancak, bu seçenek yalnızca kullanılabilirlik grubunuzu iki örneği kapsayacak şekilde kısıtladığınızda geçerlidir. 
 
-Videonuz müşteriler, Azure bölgeleri arasında ek olağanüstü durum kurtarma işlevleri için SQL Server Always On işlevsellik yararlanıyor. Birden fazla müşteri özelliği ikincil çoğaltmasından Yedekleme gerçekleştirmek için de kullanabilirsiniz. 
+Çok az sayıda müşteri, Azure bölgeleri arasında ek olağanüstü durum kurtarma işlevselliği için SQL Server her zaman açık işlevsellikten yararlanılarak. Birçok müşteri aynı zamanda ikincil bir çoğaltmadan yedeklemeler gerçekleştirme olanağını da kullanır. 
 
-## <a name="sql-server-transparent-data-encryption"></a>SQL Server saydam veri şifrelemesi
-SQL Server kullanan müşteriler sayıda [saydam veri şifrelemesi (TDE)](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-2017) zaman kendi SAP SQL Server dağıtımı izin ver veritabanları Azure'da. SQL Server TDE işlevselliğini tamamen SAP tarafından desteklenir (SAP notu bkz [#1380493](https://launchpad.support.sap.com/#/notes/1380493)). 
+## <a name="sql-server-transparent-data-encryption"></a>SQL Server Saydam Veri Şifrelemesi
+SAP SQL Server veritabanlarını Azure 'da dağıtmada SQL Server [Saydam veri şifrelemesi (TDE)](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-2017) kullanan birkaç müşteri vardır. SQL Server TDE işlevselliği SAP tarafından tam olarak desteklenir (bkz. SAP Note [#1380493](https://launchpad.support.sap.com/#/notes/1380493)). 
 
 ### <a name="applying-sql-server-tde"></a>SQL Server TDE uygulanıyor
-Heterojen geçiş şirket içi, Azure üzerinde çalışan Windows/SQL Server çalıştıran başka bir DBMS gelen gerçekleştirmek olduğu durumlarda, SQL Server, boş hedef veritabanında önceden oluşturmanız gerekir. Sonraki adım olarak, SQL Server TDE işlevselliğini uygular. Olsa da, üretim sistemi şirket içi hala çalışıyor. Bu sırayla gerçekleştirmek istediğiniz boş veritabanı şifreleme işleminin oldukça biraz sürebilir nedenidir. SAP alma işlemlerini ardından verilerin şifrelenmiş veritabanına kapalı kalma süresi aşamasında içeri aktarmanıza. Şifrelenmiş bir veritabanına aktarılması yükü daha sonra aşağı dışarı aktarma aşamasında veritabanı şifreleme bir şekilde daha düşük zaman etkisi zaman aşaması. Veritabanı üzerinde çalışan SAP iş yükü ile TDE uygulanmaya çalışılırken yapılan burada negatif karşılaşır. Bu nedenle, öneri TDE dağıtımını belirli veritabanı üzerinde SAP iş yükü olmadan yapılması gereken bir etkinlik olacak.
+Şirket içinde çalışan başka bir DBMS 'den, Azure 'da çalışan Windows/SQL Server 'e heterojen bir geçiş gerçekleştirdiğiniz durumlarda, boş hedef veritabanınızı önceden SQL Server oluşturmalısınız. Sonraki adımda SQL Server TDE işlevselliği uygularsınız. Şirket içi üretim sisteminizi hala çalıştırıyor olursunuz. Bu sırada gerçekleştirmek istediğiniz neden, boş veritabanını şifreleme işleminin biraz zaman alabilir. Ardından, SAP içeri aktarma işlemi, kapalı kalma süresi boyunca verileri şifrelenmiş veritabanına aktarır. Şifrelenmiş bir veritabanına içeri aktarma işlemi, sonraki zaman aşamasında dışarı aktarma aşamasından sonra veritabanını şifrelemeden daha düşük bir zamana sahiptir. Veritabanı üzerinde çalışan SAP iş yüküne sahip TDE ile TDE uygulama girişimi sırasında yapılan negatif deneyimler. Bu nedenle, öneri, belirli bir veritabanında SAP iş yükü olmadan gerçekleştirilmesi gereken TDE etkinliğinin dağıtımını sağlar.
 
-Burada, SAP SQL Server veritabanlarını şirket içinden Azure'a taşıyın durumlarda, hangi altyapı, hızlı uygulanan şifreleme alabilirsiniz test etmenizi öneririz. Bunun için bu bilgileri göz önünde bulundurun:
+SAP SQL Server veritabanlarını Şirket içinden Azure 'a taşıdığınız durumlarda, şifrelemeyi en hızlı şekilde uygulamış olduğunuz altyapıyı test etmenizi öneririz. Bunun için bu olguları aklınızda bulundurun:
 
-- Ne kadar iş parçacığı veritabanına veri şifrelemesi uygulamak için kullanılan tanımlayamazsınız. İş parçacığı sayısını majorly SQL Server veri ve günlük dosyaları, üzerinde dağıtılan disk birimlerinin sayısına bağlıdır. Daha fazla farklı birimler (sürücü harfleri) anlamına gelir. daha fazla iş parçacığı paralel olarak şifreleme gerçekleştirmek için bağlı. Bu tür bir yapılandırma biraz daha önceki disk yapılandırma öneri, bir veya daha az sayıda Azure vm'lerde SQL Server veritabanı dosyaları için depolama alanları oluşturma ile çelişiyor. Az sayıda birimler içeren bir yapılandırma için az sayıda şifreleme çalışan iş parçacıklarının sunulmasını sağlar. Şifreleme tek iş parçacığı 64 KB kapsamlarını okuma, şifreler ve bir kayıt kapsamı şifrelendi belirten işlem günlük dosyasına girilir yazın. Sonuç olarak hareket günlüğü yükü orta.
-- Eski SQL Server sürümleri artık SQL Server veritabanınıza şifrelediğinizde yedekleme sıkıştırma verimliliği almadı. SQL Server veritabanını şirket içi şifrelenir ve azure'da veritabanını geri yüklemek için Azure yedekleme kopyalayın planınızı olduğunda bu davranış bir sorunla geliştirebilir. SQL Server Yedekleme sıkıştırma faktörü 4 sıkıştırma oranı genellikle ulaşır.
-- SQL Server 2016 ile SQL Server şifreli veritabanlarına verimli bir şekilde de sıkıştırma izin veren yeni işlevler sunulur. Bkz: [bu blogları](https://blogs.msdn.microsoft.com/sqlcat/2016/06/20/sqlsweet16-episode-1-backup-compression-for-tde-enabled-databases/) bazı ayrıntılar için.
+- Veritabanına veri şifrelemesi uygulamak için kaç iş parçacığı kullanıldığını tanımlayamazsınız. İş parçacığı sayısı, SQL Server veri ve günlük dosyalarının dağıtıldığı disk birimi sayısına bağlıdır. Daha farklı birimler (sürücü harfleri) anlamına gelir, daha fazla iş parçacığı şifrelemeyi gerçekleştirmek için paralel olarak kullanılacaktır. Bu tür bir yapılandırma, Azure VM 'lerinde SQL Server veritabanı dosyaları için bir veya daha az sayıda depolama alanı oluşturmaya yönelik daha önceki disk yapılandırma önerimiyle bir bit ile çelişmektedir. Az sayıda birime sahip bir yapılandırma, şifrelemeyi yürüten az sayıda iş parçacığına yol açabilir. Tek bir iş parçacığı şifrelemesi, 64 KB 'LıK kapsamları okuyor, şifreler ve ardından işlem günlüğü dosyasına bir kayıt yazar ve bu da uzantının şifrelendiğini bildiriyor. Sonuç olarak, işlem günlüğü yükü orta olur.
+- Daha eski SQL Server sürümlerde, yedekleme sıkıştırması, SQL Server veritabanınızı şifrelediğinde artık verimlilik almadı. Bu davranış, planınız şirket içinde SQL Server veritabanınızı şifrelemek ve sonra Azure 'da veritabanını geri yüklemek için bir yedeklemeyi Azure 'a kopyalamak üzere bir sorun halinde geliştirebilir. SQL Server yedekleme sıkıştırması genellikle 4 faktörüyle bir sıkıştırma oranına erişir.
+- SQL Server 2016 ile, SQL Server şifrelenmiş veritabanlarının ve verimli bir şekilde sıkıştırılarını sağlayan yeni işlevler sunuldu. Bazı ayrıntılar için [bu bloglara](https://blogs.msdn.microsoft.com/sqlcat/2016/06/20/sqlsweet16-episode-1-backup-compression-for-tde-enabled-databases/) bakın.
  
-Uygulama olmadan az SAP iş yüküne yalnızca TDE şifreleme kullanarak, SAP veritabanı şirket içi için TDE uygulamak veya Azure'da Bunu yapmak için daha iyi olduğu belirli yapılandırmanızda test etmeniz gerekir. Azure'da, kesinlikle fazladan sağlama altyapı açısından daha fazla esnekliğe sahip olursunuz ve TDE uygulanan sonra altyapıyı Daralt.
+Yalnızca çok az SAP iş yükü olmadan TDE şifreleme uygulamasını düşünerek, şirket içi SAP veritabanınıza TDE veya Azure 'da bunu yapmak için daha iyi olup olmadığını özel yapılandırmanızda test etmelisiniz. Azure 'da, aşırı sağlama altyapısı açısından çok daha fazla esneklik elde edersiniz ve TDE uygulandıktan sonra altyapıyı küçültebilirsiniz.
 
 ### <a name="using-azure-key-vault"></a>Azure Key Vault kullanma
-Azure'un sunduğu hizmet bir [Key Vault](https://azure.microsoft.com/services/key-vault/) şifreleme anahtarlarını depolamak için. SQL Server diğer tarafta TDE sertifika deposu olarak Azure anahtar kasası yararlanmak için bir bağlayıcı sunmaktadır.
+Azure, şifreleme anahtarlarını depolamak için bir [Key Vault](https://azure.microsoft.com/services/key-vault/) hizmeti sunar. Diğer taraftan SQL Server, TDE sertifikaları için mağaza olarak Azure Key Vault yararlanmak üzere bir bağlayıcı sunar.
 
-Azure Key Vault için SQL Server TDE kullanmak için daha fazla ayrıntı listeler gibi:
+Aşağıdakiler gibi SQL Server TDE listelerini Azure Key Vault kullanma hakkında daha fazla bilgi:
 
-- [Azure anahtar kasası (SQL Server) ile Genişletilebilir anahtar yönetimi](https://docs.microsoft.com/sql/relational-databases/security/encryption/extensible-key-management-using-azure-key-vault-sql-server?view=sql-server-2017).
-- [Azure anahtar kasası - kurulum adımlarını kullanarak SQL Server TDE Genişletilebilir anahtar yönetimi](https://docs.microsoft.com/sql/relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault?view=sql-server-2017).
-- [SQL Server Bağlayıcısı Bakım ve sorun giderme](https://docs.microsoft.com/sql/relational-databases/security/encryption/sql-server-connector-maintenance-troubleshooting?view=sql-server-2017).
-- [Müşteriler SQL Server saydam veri şifrelemesi – TDE + Azure anahtar kasası hakkında daha fazla soruya](https://blogs.msdn.microsoft.com/saponsqlserver/2017/04/04/more-questions-from-customers-about-sql-server-transparent-data-encryption-tde-azure-key-vault/).
+- [Azure Key Vault (SQL Server) kullanılarak Genişletilebilir anahtar yönetimi](https://docs.microsoft.com/sql/relational-databases/security/encryption/extensible-key-management-using-azure-key-vault-sql-server?view=sql-server-2017).
+- [Azure Key Vault kurulum adımlarını kullanarak Genişletilebilir anahtar yönetimini SQL Server](https://docs.microsoft.com/sql/relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault?view=sql-server-2017).
+- [SQL Server Bağlayıcısı bakım & sorun giderme](https://docs.microsoft.com/sql/relational-databases/security/encryption/sql-server-connector-maintenance-troubleshooting?view=sql-server-2017).
+- [Müşterilerin SQL Server saydam veri şifrelemesi – TDE + Azure Key Vault hakkında daha fazla soru](https://blogs.msdn.microsoft.com/saponsqlserver/2017/04/04/more-questions-from-customers-about-sql-server-transparent-data-encryption-tde-azure-key-vault/).
 
 
 >[!IMPORTANT]
->SQL Server TDE, özellikle Azure anahtarla kasası kullanarak, SQL Server 2014, SQL Server 2016 ve SQL Server 2017 en son düzeltme eklerinin kullanmak için önerilir. Neden olan müşteri geri bildirimleri temelinde, iyileştirmeler ve düzeltmeler koda uygulandı. Örnek olarak, kontrol [KBA #4058175](https://support.microsoft.com/help/4058175/tde-enabled-backup-and-restore-slow-if-encryption-key-is-stored-in-ekm).
+>SQL Server TDE, özellikle de Azure Anahtar Kasası ile, SQL Server 2014, SQL Server 2016 ve SQL Server 2017 için en son düzeltme eklerinin kullanılması önerilir. Nedeni, müşteri geri bildirimlerine, iyileştirmeleri ve düzeltmeleri koda göre uygulanır. Örnek olarak, [KBA #4058175](https://support.microsoft.com/help/4058175/tde-enabled-backup-and-restore-slow-if-encryption-key-is-stored-in-ekm)denetleyin.
 >  
 
-## <a name="9053f720-6f3b-4483-904d-15dc54141e30"></a>Genel SQL Server SAP on Azure özeti
-Bu kılavuzda çok sayıda öneri ve birden çok kez Azure dağıtımınızı planlama önce okurken önerilir. Genel olarak, ancak üst genel DBMS Azure'a özel önerileri izlediğinizden emin olun:
+## <a name="9053f720-6f3b-4483-904d-15dc54141e30"></a>Azure 'da SAP için genel SQL Server Özeti
+Bu kılavuzda birçok öneri bulunur ve Azure dağıtımınızı planlamadan önce onu birden çok kez okumanızı öneririz. Genel olarak, Azure 'a özgü önerilerle ilgili en iyi genel DBMS 'yi izlediğinizden emin olun:
 
-1. Azure'da çoğu avantajları olan SQL Server 2017 gibi en son DBMS sürümü kullanın. 
-2. Dikkatli bir şekilde Azure kısıtlamaları ve veri dosya düzeni dengelemek için azure'da SAP sistemi ortamınızı planlayın:
-   * Yoksa çok fazla disk olmalıdır; ancak, gereken IOPS size ulaşabildiğimizden emin olmak için yeterli.
-   * Yönetilen diskleri kullanmazsanız, IOPS ayrıca Azure depolama hesabı sınırlı olduğunu ve depolama hesapları her Azure aboneliğinde sınırlı olduğunu unutmayın ([daha fazla ayrıntı][azure-subscription-service-limits]). 
-   * Yalnızca stripe disklerde bulunan daha yüksek bir performans sağlamak istiyorsanız.
-3. Hiçbir zaman yazılımını yükleyin veya kalıcı olmayan ve herhangi bir şey bu sürücüdeki bir Windows önyükleme sırasında kaybolur D:\ sürücüsüne Kalıcılık gerektiren tüm dosyaları yerleştirin.
-4. Azure standart depolama için diski önbelleğe alma işlemi kullanmayın.
-5. Azure coğrafi olarak çoğaltılmış Azure standart depolama hesapları kullanmayın.  Yerel olarak yedekli DBMS iş yükleri için kullanın.
-6. Veritabanı verileri çoğaltmak için DBMS satıcınızın HA/DR çözümü kullanın.
-7. Her zaman ad çözümlemesini kullanmasına, IP adreslerini güvenmeyin.
-8. SQL Server TDE kullanarak en son SQL Server düzeltme ekleri uygulayın.
-9. Olası en yüksek veritabanı sıkıştırma kullanın. SQL Server için sayfa sıkıştırmayı olduğu.
-10. SQL Server görüntüleri Azure Market'te kullanırken dikkatli olun. SQL Server birini kullanıyorsanız, herhangi bir SAP NetWeaver sistemini yüklemeden önce örneği harmanlamasıyla değiştirmeniz gerekir.
-11. Yükleme ve yapılandırma bölümünde anlatıldığı gibi SAP izleme ana bilgisayarı için Azure [Dağıtım Kılavuzu][deployment-guide].
+1. Azure 'da en fazla avantaj sunan SQL Server 2017 gibi en son DBMS sürümünü kullanın. 
+2. Veri dosyası yerleşimini ve Azure kısıtlamalarını dengelemek için SAP sisteminizi Azure 'da dikkatle planlayın:
+   * Çok fazla disk bulundurmayın, ancak gerekli ıOPS 'nize ulaşabildiğinizden emin olmak için yeterli.
+   * Yönetilen diskler kullanmıyorsanız, ıOPS 'nin Azure depolama hesabı başına da sınırlı olduğunu ve bu depolama hesaplarının her bir Azure aboneliği ([daha fazla ayrıntı][azure-subscription-service-limits]) içinde sınırlı olduğunu unutmayın. 
+   * Yalnızca daha yüksek bir verimlilik elde etmeniz gerekiyorsa diskler genelinde Stripe.
+3. Hiçbir koşulda yazılım yüklemeyin veya herhangi bir dosyayı hiçbir şekilde kalıcı hale getirin. kalıcı olmayan ve bu sürücüdeki herhangi bir şey Windows yeniden başlatıldığında kaybolduğu için sürücü.
+4. Azure Standart depolama için disk önbelleği kullanmayın.
+5. Azure coğrafi olarak çoğaltılan Azure Standart depolama hesaplarını kullanmayın.  DBMS iş yükleri için yerel olarak yedekli ' i kullanın.
+6. Veritabanı verilerini çoğaltmak için DBMS satıcınızın HA/DR çözümünü kullanın.
+7. Her zaman ad çözümlemesi kullan, IP adreslerine güvenmeyin.
+8. SQL Server TDE kullanarak en son SQL Server yamaları uygulayın.
+9. Mümkün olan en yüksek veritabanı sıkıştırmasını kullanın. SQL Server için sayfa sıkıştırması.
+10. Azure Marketi 'nden SQL Server görüntülerini kullanırken dikkatli olun. SQL Server birini kullanırsanız, herhangi bir SAP NetWeaver sistemini yüklemeden önce örnek harmanlamasını değiştirmelisiniz.
+11. [Dağıtım Kılavuzu][deployment-guide]' nda açıklandığı gibi Azure Için SAP ana bilgisayar izlemeyi yükleyip yapılandırın.

@@ -62,7 +62,7 @@ REST API veya Resource Manager şablonu kullanarak, aşağıdaki seçeneklerle b
 
 | Alan | Zorunlu? | Açıklama |
 | --- | --- | --- |
-| İşlemi |evet |"Ölçek" değeri olmalıdır |
+| operation |evet |"Ölçek" değeri olmalıdır |
 | sendToSubscriptionAdministrator |evet |değer "true" veya "false" olmalıdır. |
 | sendToSubscriptionCoAdministrators |evet |değer "true" veya "false" olmalıdır. |
 | customEmails |evet |değer null [] veya e-postaları dize dizisi olabilir |
@@ -106,7 +106,7 @@ Otomatik ölçeklendirme bildirim oluşturulduğunda, aşağıdaki meta verileri
 | Alan | Zorunlu? | Açıklama |
 | --- | --- | --- |
 | status |evet |Otomatik ölçeklendirme eylemi oluşturulduğunu gösteren durum |
-| İşlemi |evet |Bir artış örnekleri için "Ölçeği genişletme" olacaktır ve durumlarda bir azaltmak için "ölçek" olacaktır |
+| operation |evet |Bir artış örnekleri için "Ölçeği genişletme" olacaktır ve durumlarda bir azaltmak için "ölçek" olacaktır |
 | context |evet |Otomatik ölçeklendirme eylem bağlamı |
 | timestamp |evet |Otomatik ölçeklendirme eylemi tetiklendiğinde zaman damgası |
 | id |Evet |Resource Manager Kimliğini otomatik ölçeklendirme ayarı |
@@ -115,7 +115,7 @@ Otomatik ölçeklendirme bildirim oluşturulduğunda, aşağıdaki meta verileri
 | subscriptionId |Evet |Abonelik kimliği ölçeklendirilir hedef kaynak |
 | resourceGroupName |Evet |Ölçeklendirilen hedef kaynağın kaynak grubu adı |
 | resourceName |Evet |Ölçeklendirilen hedef kaynağın adı |
-| Kaynak türü |Evet |Üç desteklenen değerler: "microsoft.classiccompute/domainnames/slots/roles" - bulut hizmeti rolleri, "microsoft.compute/virtualmachinescalesets" - sanal makine ölçek kümeleri ve "Microsoft.Web/serverfarms" - Web uygulaması |
+| resourceType |Evet |Üç desteklenen değerler: "microsoft.classiccompute/domainnames/slots/roles" - bulut hizmeti rolleri, "microsoft.compute/virtualmachinescalesets" - sanal makine ölçek kümeleri ve "Microsoft.Web/serverfarms" - Web uygulaması |
 | resourceId |Evet |Resource Manager Kimliğini ölçeklendirilir hedef kaynak |
 | portalLink |Evet |Özet sayfasında, hedef kaynağı için Azure portal bağlantısı |
 | oldCapacity |Evet |Bir ölçek eylemi otomatik ölçeklendirme geçen zaman geçerli (eski) örnek sayısı |

@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: pod
 ms.topic: article
-ms.date: 05/22/2019
+ms.date: 07/11/2019
 ms.author: alkohli
-ms.openlocfilehash: 3bce5dd1dd34c53276c5486cc255c4cd93bb6080
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e232ad131b1c0930afcf5e7e78b386aba2c9490b
+ms.sourcegitcommit: 64798b4f722623ea2bb53b374fb95e8d2b679318
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66242142"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67839769"
 ---
 # <a name="azure-data-box-system-requirements"></a>Azure Data Box sistem gereksinimleri
 
@@ -52,6 +52,13 @@ Yazılım gereksinimleri, desteklenen işletim sistemleri, yerel web kullanıcı
 ## <a name="networking-requirements"></a>Ağ gereksinimleri
 
 Veri merkezinizin yüksek hızlı ağı olmalıdır. En az bir adet 10 GbE bağlantınızın olması önemle tavsiye edilir. 10 GbE bağlantı kullanılabilir değilse, 1 GbE veri bağlantısı, veri ancak hızı etkilenir kopyalama kopyalamak için kullanılabilir.
+
+### <a name="port-requirements"></a>Bağlantı noktası gereksinimleri
+
+Aşağıdaki tablo için SMB veya NFS trafiğine izin vermek için güvenlik duvarını açılması gereken bağlantı noktalarını listeler. Bu tabloda *içinde* veya *gelen* hangi gelen istemci istekleri erişimden Cihazınızı yönü belirtir. *Çıkış* veya *giden* , Data Box cihazınız gönderir dışarıdan, veri dağıtımı dışında yön ifade eder: Örneğin, Internet'e giden.
+
+[!INCLUDE [data-box-port-requirements](../../includes/data-box-port-requirements.md)]
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

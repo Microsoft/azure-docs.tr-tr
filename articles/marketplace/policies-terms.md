@@ -1,33 +1,34 @@
 ---
-title: Azure Market ilkeleri ve koşulları | Azure
-description: Tüm Yayımcılar ve teklifleri Microsoft Azure marketi'ndeki Microsoft Azure Marketi ilkeleri ve koşulları geçerlidir.
-services: Azure, Marketplace, AppSource
+title: Ticari Market ilkeleri ve koşulları | Mavisi
+description: Microsoft ticari Market ilkeleri ve koşulları, Microsoft Azure Market tüm Yayımcılar ve teklifler için geçerlidir.
+services: Azure, Marketplace, AppSource, commercial marketplace, Partner Center
 author: qianw211
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
-ms.date: 02/25/2019
+ms.date: 11/09/2019
 ms.author: v-qiwe
-ms.openlocfilehash: c5041e9f7b19508480ff27311ba61d180f4a5a01
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 79891f6a4036a21be8edc70044a29cfb9cca4755
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64937625"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73891066"
 ---
-# <a name="azure-marketplace-policies-and-terms"></a>Azure Market ilkeleri ve koşulları
+# <a name="commercial-marketplace-policies-and-terms"></a>Ticari Market ilkeleri ve koşulları
 
 >[!Note]
->"Market" veya "Azure Marketi" ait Microsoft veya üzerinden teklifler için sunulan veya olabilir müşteriler tarafından alındı ancak adlı, çalıştırılan platform anlamına gelir. Aksi belirtilmediği sürece, Market'te Azure Market, AppSource ve Azure portalında Market içerir.
+>"Microsoft ticari Market", Microsoft 'un sahip olduğu veya çalıştırılan, müşteriler tarafından sunulabilen veya müşteriler tarafından edinilen bir platform anlamına gelir. Aksi belirtilmediği takdirde, ticari Market Microsoft Azure Market ve Microsoft AppSource içerir.
 
-Azure Marketi'nde yayımlama teklifler gösterdiğiniz ilgi için teşekkür ederiz. Biz size zengin bir kaynağı bulut çözümleri ve iş teklifleri, dünya çapında müşterileri memnun olacağı ve işletmenizi oluşturmanıza yardımcı olacak bir dizi oluşturmak için iş ortaklığı için kaydedilmiş.
+Ticari Market 'te sunulan teklifler hakkında ilgilendiğiniz için teşekkür ederiz. Dünya çapındaki müşterilerin yanı sıra işinizi oluşturmanıza yardımcı olan bir dizi bulut çözümü ve iş kolu teklifi oluşturmak için sizinle işbirliği yapmak üzere çalışıyoruz.
 
-Teklifleri Market'te bizim ilkeleri ve koşulları ile uyumlu olmalıdır. Bu ilkeleri ve zaman zaman iyi bir müşteri deneyimi ve iş ortakları, başarılı olması için bir fırsat sağlar. Yardım için koşulları güncelleştiriyoruz. Bizim ilkeleri veya koşulları Geribildiriminiz varsa lütfen bize olarak açıklama satırı yaparak bildirin [Azure Market'in ve Appsource'un Forumu](https://www.microsoftpartnercommunity.com/t5/Azure-Marketplace-and-AppSource/bd-p/2222).
+Market 'teki teklifler İlkelerimize ve Koşullarımıza uygun olmalıdır. Bu ilkeleri ve koşulları, iyi bir müşteri deneyiminin sağlanmasına yardımcı olmak ve iş ortaklarına başarılı bir fırsat sağlamak için zaman zaman güncelleştiririz. İlkeleriniz veya koşullarımızla ilgili geri bildiriminiz varsa lütfen [Azure Marketi ve AppSource forumuna](https://www.microsoftpartnercommunity.com/t5/Azure-Marketplace-and-AppSource/bd-p/2222)yorum yaparak bize bildirin.
 
-## <a name="policies-and-terms"></a>İlkeleri ve koşulları
+## <a name="policies-and-terms"></a>İlkeler ve koşullar
 
-* [Azure Market sertifika ilkeleri](https://docs.microsoft.com/legal/marketplace/certification-policies)
+* [Ticari Market sertifika ilkeleri](https://docs.microsoft.com/legal/marketplace/certification-policies)
 
-* [Katılım ilkeleri](https://docs.microsoft.com/legal/marketplace/participation-policy)
+* [Katılım İlkeleri](https://docs.microsoft.com/legal/marketplace/participation-policy)
 
 * [Derecelendirme ve ilkeleri gözden geçirme](https://docs.microsoft.com/legal/marketplace/rating-review-policies)
 
@@ -35,6 +36,6 @@ Teklifleri Market'te bizim ilkeleri ve koşulları ile uyumlu olmalıdır. Bu il
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ziyaret [Azure Market'te ve Appsource'ta yayımlama Kılavuzu](./marketplace-publishers-guide.md) sayfası.
+[Azure Marketi ve AppSource Yayımlama Kılavuzu](./marketplace-publishers-guide.md) sayfasını ziyaret edin.
 
 ---

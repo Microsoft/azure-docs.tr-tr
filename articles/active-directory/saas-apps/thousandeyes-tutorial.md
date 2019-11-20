@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile ThousandEyes | Microsoft Docs'
-description: Azure Active Directory ve ThousandEyes arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: ThousandEyes ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve ThousandEyes arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -13,246 +13,204 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 03/27/2019
+ms.date: 10/04/2019
 ms.author: jeedes
-ms.openlocfilehash: bb78b014ffe2d40b9a61da8e47893056e435ddc6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.collection: M365-identity-device-management
+ms.openlocfilehash: cd179049f88454c62244cf1819cee08ef78d0633
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67088649"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72373247"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-thousandeyes"></a>Öğretici: ThousandEyes ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-thousandeyes"></a>Öğretici: ThousandEyes ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile ThousandEyes tümleştirme konusunda bilgi edinin.
-Azure AD ile ThousandEyes tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, ThousandEyes 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. ThousandEyes 'i Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* ThousandEyes erişimi, Azure AD'de kontrol edebilirsiniz.
-* Otomatik olarak (çoklu oturum açma) ThousandEyes için kendi Azure AD hesapları ile oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de ThousandEyes 'e erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla ThousandEyes otomatik olarak oturum açmalarına olanak tanıyın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile ThousandEyes yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* ThousandEyes tek oturum açma etkin abonelik
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* ThousandEyes çoklu oturum açma (SSO) etkin abonelik.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* ThousandEyes destekler **SP** tarafından başlatılan
+* ThousandEyes **SP ve ıDP** tarafından başlatılan SSO 'yu destekler
+* ThousandEyes [ **Otomatik** Kullanıcı sağlamayı destekler](https://docs.microsoft.com/azure/active-directory/saas-apps/thousandeyes-provisioning-tutorial)
 
-* ThousandEyes destekler [ **otomatik** kullanıcı sağlama](https://docs.microsoft.com/azure/active-directory/saas-apps/thousandeyes-provisioning-tutorial)
+> [!NOTE]
+> Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
 
 ## <a name="adding-thousandeyes-from-the-gallery"></a>Galeriden ThousandEyes ekleme
 
-Azure AD'de ThousandEyes tümleştirmesini yapılandırmak için ThousandEyes Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+ThousandEyes tümleştirmesini Azure AD 'ye göre yapılandırmak için, Galeriden ThousandEyes yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Galeriden ThousandEyes eklemek için aşağıdaki adımları gerçekleştirin:**
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **ThousandEyes** yazın.
+1. Sonuçlar panelinden **ThousandEyes** ' i seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+## <a name="configure-and-test-azure-ad-single-sign-on-for-thousandeyes"></a>ThousandEyes için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-    ![Azure Active Directory düğmesi](common/select-azuread.png)
+**B. Simon**adlı bir test kullanıcısı kullanarak Azure AD SSO 'yu ThousandEyes ile yapılandırın ve test edin. SSO 'nun çalışması için, ThousandEyes içinde bir Azure AD kullanıcısı ve ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+Azure AD SSO 'yu ThousandEyes ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    * Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    * Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[THOUSANDEYES SSO 'Yu yapılandırın](#configure-thousandeyes-sso)** .
+    * Kullanıcının Azure AD gösterimine bağlı olan ThousandEyes 'de B. Simon 'ya karşılık gelen bir **[ThousandEyes test kullanıcısı oluşturun](#create-thousandeyes-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-4. Arama kutusuna **ThousandEyes**seçin **ThousandEyes** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+1. [Azure Portal](https://portal.azure.com/), **ThousandEyes** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-     ![Sonuç listesinde ThousandEyes](common/search-new-app.png)
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+1. **Temel SAML yapılandırması** bölümünde, uygulama önceden yapılandırılmıştır ve gerekli URL 'ler Azure ile önceden doldurulmuştur. Kullanıcının **Kaydet** düğmesine tıklayarak yapılandırmayı kaydetmesi gerekir.
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma ThousandEyes adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısının ThousandEyes ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+1. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-Yapılandırma ve Azure AD çoklu oturum açma ThousandEyes ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+    **Oturum açma URL 'si** metin kutusuna bir URL yazın: `https://app.thousandeyes.com/login/sso`
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[ThousandEyes çoklu oturum açmayı yapılandırma](#configure-thousandeyes-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[ThousandEyes test kullanıcısı oluşturma](#create-thousandeyes-test-user)**  - kullanıcı Azure AD gösterimini bağlı ThousandEyes Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
-
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
-
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
-
-Azure AD çoklu oturum açma ile ThousandEyes yapılandırmak için aşağıdaki adımları gerçekleştirin:
-
-1. İçinde [Azure portalında](https://portal.azure.com/), **ThousandEyes** uygulama tümleştirme sayfasında **çoklu oturum açma**.
-
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
-
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
-
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
-
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
-
-    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
-
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
-
-    ![ThousandEyes etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-signonurl.png)
-
-    İçinde **oturum açma URL'si** metin kutusuna bir URL yazın:  `https://app.thousandeyes.com/login/sso`
-
-5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama sertifikası** bölümünde **sertifika bulun (base64)** ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. Üzerinde **ThousandEyes kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+1. **ThousandEyes ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-    b. Azure AD Tanımlayıcısı
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-    c. Oturum Kapatma URL'si
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extension girin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**’a tıklayın.
 
-### <a name="configure-thousandeyes-single-sign-on"></a>ThousandEyes tek oturum açmayı yapılandırın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-1. Farklı bir web tarayıcı penceresinde oturum açın, **ThousandEyes** yönetici olarak şirketin site.
+Bu bölümde, ThousandEyes 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-2. Üstteki menüden **ayarları**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde **ThousandEyes**' yi seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-    ![Ayarları](./media/thousandeyes-tutorial/ic790066.png "ayarları")
+   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-3. Tıklayın **hesabı**
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
+
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
+
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
+
+## <a name="configure-thousandeyes-sso"></a>ThousandEyes SSO 'yu yapılandırma
+
+1. Farklı bir Web tarayıcısı penceresinde, **ThousandEyes** şirket sitenizde yönetici olarak oturum açın.
+
+2. Üstteki menüde, **Ayarlar**' a tıklayın.
+
+    ![Ayarlar](./media/thousandeyes-tutorial/ic790066.png "ayarları")
+
+3. **Hesap** öğesine tıklayın
 
     ![Hesap](./media/thousandeyes-tutorial/ic790067.png "hesabı")
 
-4. Tıklayın **güvenlik ve kimlik doğrulaması** sekmesi.
+4. **Güvenlik & kimlik doğrulaması** sekmesine tıklayın.
 
-    ![Güvenlik ve kimlik doğrulaması](./media/thousandeyes-tutorial/ic790068.png "güvenlik ve kimlik doğrulaması")
+    ![Güvenlik & kimlik doğrulaması](./media/thousandeyes-tutorial/ic790068.png "Güvenlik & kimlik doğrulaması")
 
-5. İçinde **Kurulum çoklu oturum açma** bölümünde, aşağıdaki adımları gerçekleştirin:
+5. **Çoklu oturum açma kurulumu** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Çoklu oturum açma Kurulumu](./media/thousandeyes-tutorial/ic790069.png "çoklu oturum açma Kurulumu")
+    ![Çoklu oturum]açma kurulumu(./media/thousandeyes-tutorial/ic790069.png "Çoklu oturum açma") kurulumu
 
-    a. Seçin **çoklu oturum açmayı etkinleştirme**.
+    a. **Çoklu oturum açmayı etkinleştir '** i seçin.
 
-    b. İçinde **oturum açma sayfası URL'si** metin kutusu, yapıştırma **oturum açma URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
+    b. **Oturum açma sayfası URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'sini**yapıştırın.
 
-    c. İçinde **oturum kapatma sayfasını URL'si** metin kutusu, yapıştırma **oturum kapatma URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
+    c. **Oturum kapatma sayfası URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum kapatma URL 'sini**yapıştırın.
 
-    d. **Kimlik sağlayıcısını veren** metin kutusu, yapıştırma **Azure AD tanımlayıcısı**, hangi Azure Portalı'ndan kopyaladığınız.
+    d. **Kimlik sağlayıcısı veren** metin kutusu, Azure Portal KOPYALADıĞıNıZ **Azure ad tanımlayıcısını**yapıştırın.
 
-    e. İçinde **doğrulama sertifikası**, tıklayın **dosya**ve sonra Azure portalından indirilen sertifikayı karşıya yükleyin.
+    e. **Doğrulama sertifikası**' nda **Dosya Seç**' e tıklayın ve ardından Azure Portal indirdiğiniz sertifikayı karşıya yükleyin.
 
-    f. **Kaydet**’e tıklayın.
+    f. **Kaydet** düğmesine tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-thousandeyes-test-user"></a>ThousandEyes test kullanıcısı oluştur
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, ThousandEyes ' de Britta Simon adlı bir Kullanıcı oluşturmaktır. ThousandEyes, varsayılan olarak etkinleştirilen Otomatik Kullanıcı sağlamasını destekler. Otomatik Kullanıcı sağlamayı yapılandırma hakkında daha [fazla ayrıntı bulabilirsiniz](thousandeyes-provisioning-tutorial.md) .
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+**Kullanıcı el ile oluşturmanız gerekiyorsa aşağıdaki adımları gerçekleştirin:**
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+1. ThousandEyes şirket sitenizde yönetici olarak oturum açın.
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. **Ayarlar**' a tıklayın.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Ayarlar](./media/thousandeyes-tutorial/IC790066.png "ayarları")
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
-
-    ![Kullanıcı iletişim kutusu](common/user-properties.png)
-
-    a. İçinde **adı** alana **BrittaSimon**.
-  
-    b. İçinde **kullanıcı adı** alan türü brittasimon@yourcompanydomain.extension. Örneğin, BrittaSimon@contoso.com
-
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
-
-    d. **Oluştur**’a tıklayın.
-
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
-
-Bu bölümde, Azure çoklu oturum açma kullanmak için ThousandEyes erişim vererek Britta Simon etkinleştirin.
-
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **ThousandEyes**.
-
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
-
-2. Uygulamalar listesinde **ThousandEyes**.
-
-    ![Uygulamalar listesinde ThousandEyes bağlantı](common/all-applications.png)
-
-3. Soldaki menüde **kullanıcılar ve gruplar**.
-
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
-
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
-
-    ![Atama Ekle bölmesi](common/add-assign-user.png)
-
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
-
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
-
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
-
-### <a name="create-thousandeyes-test-user"></a>ThousandEyes test kullanıcısı oluşturma
-
-Bu bölümün amacı ThousandEyes Britta Simon adlı bir kullanıcı oluşturmaktır. ThousandEyes otomatik kullanıcı hazırlama, varsayılan olarak etkin olan destekler. Daha fazla ayrıntı bulabilirsiniz [burada](thousandeyes-provisioning-tutorial.md) otomatik kullanıcı sağlamayı yapılandırma.
-
-**Kullanıcı el ile oluşturmanız gerekiyorsa, aşağıdaki adımları uygulayın:**
-
-1. ThousandEyes şirketinizin sitesi için bir yönetici olarak oturum açın.
-
-2. Tıklayın **ayarları**.
-
-    ![Ayarları](./media/thousandeyes-tutorial/IC790066.png "ayarları")
-
-3. Tıklayın **hesabı**.
+3. **Hesap**' a tıklayın.
 
     ![Hesap](./media/thousandeyes-tutorial/IC790067.png "hesabı")
 
-4. Tıklayın **hesapları k & ullanıcıların** sekmesi.
+4. **Hesaplar & kullanıcılar** sekmesine tıklayın.
 
-    ![K & ullanıcıların hesapları](./media/thousandeyes-tutorial/IC790073.png "k & ullanıcıların hesapları")
+    Kullanıcı hesapları ![& hesaplar](./media/thousandeyes-tutorial/IC790073.png "& kullanıcılar")
 
-5. İçinde **Add Users & hesapları** bölümünde, aşağıdaki adımları gerçekleştirin:
+5. **Kullanıcı & hesaplarını Ekle** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Kullanıcı hesaplarını eklemek](./media/thousandeyes-tutorial/IC790074.png "kullanıcı hesaplarını ekleyin")
+    ![Kullanıcı hesapları ekleme](./media/thousandeyes-tutorial/IC790074.png "Kullanıcı hesapları ekleme")
 
-    a. İçinde **adı** metin kutusuna kullanıcı adını yazın ister **Britta Simon**.
+    a. **Ad** metin kutusuna **B. Simon**gibi kullanıcının adını yazın.
 
-    b. İçinde **e-posta** metin kutusuna kullanıcı e-posta türünü ister brittasimon@contoso.com.
+    b. **E-posta** metin kutusuna b.simon@contoso.com gibi kullanıcının e-postasını yazın.
 
-    b. Tıklayın **yeni kullanıcı hesabına eklemek**.
+    b. **Hesaba Yeni Kullanıcı Ekle**' ye tıklayın.
 
     > [!NOTE]
-    > Azure Active Directory hesap sahibinin onaylayın ve hesap etkinleştirme bağlantısı içeren bir e-posta alırsınız.
+    > Azure Active Directory hesap sahibi, hesabı onaylamaya ve etkinleştirmeye yönelik bir bağlantı içeren bir e-posta alır.
 
 > [!NOTE]
-> Herhangi diğer ThousandEyes kullanıcı hesabı oluşturma araçları kullanabilir veya API'leri tarafından ThousandEyes sağlamak için Azure Active Directory kullanıcı hesaplarını sağlanan.
+> Azure Active Directory Kullanıcı hesapları sağlamak için, ThousandEyes tarafından sunulan diğer tüm ThousandEyes Kullanıcı hesabı oluşturma araçlarını veya API 'Leri kullanabilirsiniz.
 
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+## <a name="test-sso"></a>Test SSO 'SU 
 
-Erişim paneli ThousandEyes kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama ThousandEyes için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+Erişim panelinde ThousandEyes kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız ThousandEyes için otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+## <a name="additional-resources"></a>Ek kaynaklar
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+
+- [Azure AD ile ThousandEyes deneyin](https://aad.portal.azure.com/)
 
 - [Kullanıcı sağlamayı yapılandırma](https://docs.microsoft.com/azure/active-directory/saas-apps/thousandeyes-provisioning-tutorial)

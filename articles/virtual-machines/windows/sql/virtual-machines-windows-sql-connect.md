@@ -1,6 +1,6 @@
 ---
-title: Bir SQL Server sanal makinesine (Resource Manager) bağlanma | Microsoft Docs
-description: Azure'da bir sanal makinede çalışan SQL Server'a bağlanma hakkında bilgi edinin. Bu konuda, Klasik dağıtım modeli kullanır. Senaryo ağ yapılandırmasını ve istemcinin konumuna bağlı olarak farklılık gösterir.
+title: SQL Server sanal makinesine bağlanma (Kaynak Yöneticisi) | Microsoft Docs
+description: Azure 'daki bir sanal makinede çalışan SQL Server bağlanmayı öğrenin. Bu konu klasik dağıtım modelini kullanır. Senaryolar ağ yapılandırmasına ve istemcinin konumuna göre farklılık gösterir.
 services: virtual-machines-windows
 documentationcenter: na
 author: MashaMSFT
@@ -8,147 +8,146 @@ manager: craigg
 tags: azure-resource-manager
 ms.assetid: aa5bf144-37a3-4781-892d-e0e300913d03
 ms.service: virtual-machines-sql
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 12/12/2017
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: 70e478ac70b7ab53f1357394f3a3cb0d92f41f00
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ae5c4cdd76f164d13da349c355a30d8b6dc83058
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67075774"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70102098"
 ---
-# <a name="connect-to-a-sql-server-virtual-machine-on-azure"></a>Azure'da bir SQL Server sanal makinesine bağlanma
+# <a name="connect-to-a-sql-server-virtual-machine-on-azure"></a>Azure 'da SQL Server sanal makinesine bağlanma
 
 ## <a name="overview"></a>Genel Bakış
 
-Bu konu, bir Azure sanal makinesinde çalışan SQL Server Örneğinize bağlanmak açıklar. Bazılarını içermektedir [genel bağlantı senaryoları](#connection-scenarios) ve daha sonra sağlar [portal bağlantı ayarları değiştirmeye ilişkin adımları](#change). Gerekirse sorun giderme veya portal dışında bağlantı yapılandırmak için bkz [el ile yapılandırma](#manual) bu konunun sonunda. 
+Bu konu, bir Azure sanal makinesinde çalışan SQL Server örneğine nasıl bağlanabileceğinizi açıklamaktadır. Bazı [genel bağlantı senaryolarını](#connection-scenarios) ele alır ve ardından [portalda bağlantı ayarlarını değiştirmek için adımlar](#change)sağlar. Portalın dışında sorun gidermeniz veya bağlantı yapılandırmanız gerekiyorsa, bu konunun sonundaki [el ile yapılandırma](#manual) konusuna bakın. 
 
-İncelemenin tamamını sağlama ve bağlantı olurdu olup [azure'da bir SQL Server sanal makinesi sağlama](virtual-machines-windows-portal-sql-server-provision.md).
+Hem sağlama hem de bağlantı için tam bir adım adım daha isterseniz, bkz. [Azure 'da SQL Server sanal makinesi sağlama](virtual-machines-windows-portal-sql-server-provision.md).
 
 ## <a name="connection-scenarios"></a>Bağlantı senaryoları
 
-SQL Server'ın bir sanal makine üzerinde çalışan bir istemcinin bağlandığı şekilde konumunu istemci ve ağ yapılandırmasına bağlı olarak farklılık gösterir.
+Bir istemcinin sanal makinede çalışan SQL Server bağlandığı şekilde, istemcinin konumuna ve ağ yapılandırmasına bağlı olarak farklılık gösterir.
 
-Azure portalında bir SQL Server VM'si sağlama türünü belirtme seçeneğiniz varsa **SQL Bağlantısı**.
+Azure portal SQL Server VM sağlarsanız, **SQL bağlantısı**türünü belirtme seçeneğiniz vardır.
 
-![Sağlama sırasında genel SQL bağlantı seçeneği](./media/virtual-machines-windows-sql-connect/sql-vm-portal-connectivity.png)
+![Sağlama sırasında genel SQL bağlantısı seçeneği](./media/virtual-machines-windows-sql-connect/sql-vm-portal-connectivity.png)
 
-Bağlantı seçenekleri şunlardır:
+Bağlantı seçenekleriniz şunlardır:
 
 | Seçenek | Açıklama |
 |---|---|
-| **Genel** | İnternet üzerinden SQL Server'a bağlanma |
-| **Özel** | Aynı sanal ağda SQL Server'a bağlanma |
-| **Yerel** | SQL Server'a aynı sanal makinede yerel olarak bağlanma | 
+| **Geneldir** | Internet üzerinden SQL Server bağlanma |
+| **Özelleştirme** | Aynı sanal ağda SQL Server Bağlan |
+| **Yerel** | Aynı sanal makinede yerel olarak SQL Server bağlanma | 
 
-Aşağıdaki bölümlerde açıklanmaktadır **genel** ve **özel** daha ayrıntılı seçenekleri.
+Aşağıdaki bölümlerde **ortak** ve **özel** seçenekler daha ayrıntılı açıklanmıştır.
 
-## <a name="connect-to-sql-server-over-the-internet"></a>Internet üzerinden SQL Server'a bağlanma
+## <a name="connect-to-sql-server-over-the-internet"></a>Internet üzerinden SQL Server bağlanma
 
-SQL Server veritabanı altyapısına Internet'ten bağlanmak istiyorsanız seçin **genel** için **SQL Bağlantısı** sağlama sırasında portalında türü. Portal otomatik olarak aşağıdaki adımları gerçekleştirir:
+SQL Server veritabanı altyapısına Internet 'ten bağlanmak istiyorsanız, sağlama sırasında portalda **SQL bağlantı** türü için **genel** ' i seçin. Portal aşağıdaki adımları otomatik olarak yapar:
 
-* TCP/IP Protokolü SQL Server için etkinleştirir.
-* SQL Server TCP bağlantı noktasını (varsayılan 1433) açmak için bir güvenlik duvarı kuralı yapılandırır.
-* SQL Server genel erişim için gerekli kimlik doğrulamasını etkinleştirir.
-* VM'de SQL Server bağlantı tüm TCP trafiği için ağ güvenlik grubu yapılandırır.
+* SQL Server için TCP/IP protokolünü etkinleştirilir.
+* SQL Server TCP bağlantı noktasını açmak için bir güvenlik duvarı kuralı yapılandırır (varsayılan 1433).
+* SQL Server kimlik doğrulamasını, genel erişim için gereklidir.
+* VM 'deki ağ güvenlik grubunu SQL Server bağlantı noktasındaki tüm TCP trafiğine yapılandırır.
 
 > [!IMPORTANT]
-> Sanal makine görüntüleri SQL Server Developer ve Express sürümleri için TCP/IP protokolünü otomatik olarak etkinleştirmez. Developer ve Express sürümleri için SQL Server Configuration Manager için kullanmalısınız [TCP/IP protokolünü el ile etkinleştirmek](#manualtcp) VM oluşturduktan sonra.
+> SQL Server Developer ve Express sürümleri için sanal makine görüntüleri TCP/IP protokolünü otomatik olarak etkinleştirmez. Geliştirici ve Express sürümleri için, VM 'yi oluşturduktan sonra [TCP/IP protokolünü el ile etkinleştirmek](#manualtcp) üzere SQL Server Yapılandırma Yöneticisi kullanmanız gerekir.
 
-İnternet erişimi olan herhangi bir istemci, sanal makinenin genel IP adresini veya IP adresi için atanan herhangi bir DNS etiketi belirterek SQL Server örneğine bağlanabilirsiniz. SQL Server bağlantı noktası 1433 ise, bağlantı dizesini belirtmek gerekmez. Aşağıdaki bağlantı dizesi, bir DNS etiketi ile bir SQL VM bağlandığı `sqlvmlabel.eastus.cloudapp.azure.com` SQL (Ayrıca kullanabileceğiniz ortak IP adresi) kimlik doğrulaması kullanarak.
+İnternet erişimi olan herhangi bir istemci, sanal makinenin genel IP adresini veya söz konusu IP adresine atanmış herhangi bir DNS etiketini belirterek SQL Server örneğine bağlanabilir. SQL Server bağlantı noktası 1433 ise bağlantı dizesinde belirtmeniz gerekmez. Aşağıdaki bağlantı dizesi, SQL kimlik doğrulaması `sqlvmlabel.eastus.cloudapp.azure.com` kullanan bir DNS etiketiyle SQL VM 'ye bağlanır (genel IP adresini de kullanabilirsiniz).
 
 ```
 Server=sqlvmlabel.eastus.cloudapp.azure.com;Integrated Security=false;User ID=<login_name>;Password=<your_password>
 ```
 
-Bu bağlantı için istemcileri internet üzerinden sağlar, ancak bu herkes SQL Server'ınıza bağlanmak göstermez. Dışında doğru kullanıcı adını ve parolayı istemciler vardır. Ancak, ek güvenlik için iyi bilinen bağlantı noktası 1433 önleyebilirsiniz. Örneğin, SQL Server'ın bağlantı noktası 1500 ve yerleşik uygun güvenlik duvarı ve ağ güvenlik grubu kuralları dinleyecek şekilde yapılandırdıysanız, sunucu adı için bağlantı noktası numarasını ekleyerek bağlanamadı. Aşağıdaki örnek bir özel bağlantı noktası numarası ekleyerek Öncekine değiştirir **1500**, sunucu adı:
+Bu, internet üzerinden istemciler için bağlantı sağlamasına karşın, bu, herkesin SQL Server bağlanabileceği anlamına gelmez. Dış istemciler, doğru Kullanıcı adı ve parolaya sahiptir. Bununla birlikte, ek güvenlik için, bilinen 1433 numaralı bağlantı noktasından kaçınabilirsiniz. Örneğin, 1500 numaralı bağlantı noktasını dinlemek için SQL Server yapılandırdıysanız ve uygun güvenlik duvarı ve ağ güvenlik grubu kuralları kurulduysa, bağlantı noktası numarasını sunucu adına ekleyerek bağlanabilirsiniz. Aşağıdaki örnek, sunucu adına **1500**, özel bir bağlantı noktası numarası ekleyerek öncekini değiştirir:
 
 ```
 Server=sqlvmlabel.eastus.cloudapp.azure.com,1500;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
 ```
 
 > [!NOTE]
-> İnternet üzerinden bir sanal makinede SQL Server sorguladığınızda, Azure veri merkezinden tüm giden veri normal tabi olan [üzerinde giden veri aktarımları fiyatlandırma](https://azure.microsoft.com/pricing/details/data-transfers/).
+> Bir VM 'de Internet üzerinden SQL Server sorguladığınızda, Azure veri merkezindeki tüm giden veriler [giden veri aktarımları](https://azure.microsoft.com/pricing/details/data-transfers/)için normal fiyatlandırmaya tabidir.
 
-## <a name="connect-to-sql-server-within-a-virtual-network"></a>Bir sanal ağ içinde SQL Server'a bağlanma
+## <a name="connect-to-sql-server-within-a-virtual-network"></a>Bir sanal ağ içinde SQL Server bağlanma
 
-Seçeneğini belirlediğinizde **özel** için **SQL Bağlantısı** türü, Azure portalında aynı ayarların çoğu yapılandırır **genel**. SQL Server bağlantı noktası (varsayılan 1433) dışında trafiğe izin verecek şekilde hiçbir ağ güvenlik grubu kuralı yok farktır.
+Portalda **SQL bağlantı** türü için **özel** ' i seçtiğinizde, Azure ayarların çoğunu **ortak**ile aynı şekilde yapılandırır. Bunun farkı, SQL Server bağlantı noktasında dış trafiğe izin veren bir ağ güvenlik grubu kuralı olmaması (varsayılan 1433).
 
 > [!IMPORTANT]
-> Sanal makine görüntüleri SQL Server Developer ve Express sürümleri için TCP/IP protokolünü otomatik olarak etkinleştirmez. Developer ve Express sürümleri için SQL Server Configuration Manager için kullanmalısınız [TCP/IP protokolünü el ile etkinleştirmek](#manualtcp) VM oluşturduktan sonra.
+> SQL Server Developer ve Express sürümleri için sanal makine görüntüleri TCP/IP protokolünü otomatik olarak etkinleştirmez. Geliştirici ve Express sürümleri için, VM 'yi oluşturduktan sonra [TCP/IP protokolünü el ile etkinleştirmek](#manualtcp) üzere SQL Server Yapılandırma Yöneticisi kullanmanız gerekir.
 
-Özel bir bağlantı ile birlikte kullanılan genellikle [sanal ağ](../../../virtual-network/virtual-networks-overview.md), çeşitli senaryolar sağlar. Bu sanal makineler farklı kaynak gruplarında bulunan mevcut olsa bile, Vm'leri aynı sanal ağda bağlanabilirsiniz. İle bir [siteden siteye VPN](../../../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal.md), makineleri şirket içi ağlar ile Vm'leri bağlanan karma mimarisi oluşturabilirsiniz.
+Özel bağlantı, genellikle çeşitli senaryolara izin veren [sanal ağla](../../../virtual-network/virtual-networks-overview.md)birlikte kullanılır. Aynı sanal ağdaki VM 'leri, bu VM 'Ler farklı kaynak gruplarında bulunsa bile bağlayabilirsiniz. [Siteden sıteye VPN](../../../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal.md)ile, şirket içi ağlar ve makinelerle VM 'leri bağlayan bir karma mimari de oluşturabilirsiniz.
 
-Sanal ağları Azure Vm'lerinizi bir etki alanına sağlar. SQL Server için Windows kimlik doğrulamasını kullanmak için tek yolu budur. Bir bağlantı senaryoları, kullanıcı adları ve parolaları ile SQL kimlik doğrulaması gerektirir.
+Sanal ağlar Ayrıca, Azure VM 'lerinizi bir etki alanına katlamada sağlar. Bu, SQL Server için Windows kimlik doğrulaması kullanmanın tek yoludur. Diğer bağlantı senaryoları, Kullanıcı adları ve parolalarla SQL kimlik doğrulaması gerektirir.
 
-Sanal ağınızdaki DNS yapılandırmış olduğunuz varsayılarak, SQL Server örneğinizi SQL Server VM bilgisayar adı bağlantı dizesinde belirterek bağlanabilirsiniz. Aşağıdaki örnek, Windows kimlik doğrulaması de yapılandırılmış olmasını ve kullanıcı SQL Server örneği için erişim verildi da varsayılır.
+Sanal ağınızda DNS yapılandırdığınız varsayıldığında, bağlantı dizesinde SQL Server VM bilgisayar adını belirterek SQL Server örneğinize bağlanabilirsiniz. Aşağıdaki örnek ayrıca Windows kimlik doğrulamasının de yapılandırıldığını ve kullanıcıya SQL Server örneğine erişim verildiğini varsayar.
 
 ```
 Server=mysqlvm;Integrated Security=true
 ```
 
-## <a id="change"></a> SQL bağlantı ayarlarını değiştir
+## <a id="change"></a>SQL bağlantı ayarlarını değiştir
 
 [!INCLUDE [windows-virtual-machines-sql-use-new-management-blade](../../../../includes/windows-virtual-machines-sql-new-resource.md)]
 
-Azure portalında SQL Server sanal makineniz için bağlantı ayarları değiştirebilirsiniz.
+Azure portal SQL Server sanal makinenizin bağlantı ayarlarını değiştirebilirsiniz.
 
-1. Azure portalında **SQL sanal makineleri**.
+1. Azure portal, **SQL sanal makineler**' i seçin.
 
-2. VM, SQL Server'ı seçin.
+2. SQL Server VM seçin.
 
-3. Altında **ayarları**seçin **güvenlik**.
+3. **Ayarlar**altında **güvenlik**' i seçin.
 
-4. Değişiklik **SQL bağlantı düzeyi** gerekli ayarınız için. İsteğe bağlı olarak, SQL Server bağlantı noktası veya SQL kimlik doğrulaması ayarlarını değiştirmek için bu alanı kullanabilirsiniz.
+4. **SQL bağlantı düzeyini** gerekli ayarınızla değiştirin. İsteğe bağlı olarak, SQL Server bağlantı noktasını veya SQL kimlik doğrulaması ayarlarını değiştirmek için bu alanı kullanabilirsiniz.
 
-   ![Değişiklik SQL Bağlantısı](./media/virtual-machines-windows-sql-connect/sql-vm-portal-connectivity-change.png)
+   ![SQL bağlantısını değiştir](./media/virtual-machines-windows-sql-connect/sql-vm-portal-connectivity-change.png)
 
-5. Güncelleştirmenin tamamlanması birkaç dakika bekleyin.
+5. Güncelleştirmenin tamamlanabilmesi için birkaç dakika bekleyin.
 
    ![SQL VM güncelleştirme bildirimi](./media/virtual-machines-windows-sql-connect/sql-vm-updating-notification.png)
 
-## <a id="manualtcp"></a> Developer ve Express sürümleri için TCP/IP'yi etkinleştirin
+## <a id="manualtcp"></a>Geliştirici ve Express sürümleri için TCP/IP 'yi etkinleştirme
 
-SQL Server bağlantı ayarlarını değiştirirken, Azure otomatik olarak TCP/IP Protokolü SQL Server Developer ve Express sürümleri için izin vermez. Aşağıdaki adımlarda, uzaktan IP adresiyle bağlanabilmeniz için TCP/IP’yi el ile nasıl etkinleştirebileceğiniz açıklanmıştır.
+SQL Server bağlantı ayarlarını değiştirirken Azure, SQL Server Developer ve Express sürümleri için TCP/IP protokolünü otomatik olarak etkinleştirmez. Aşağıdaki adımlarda, uzaktan IP adresiyle bağlanabilmeniz için TCP/IP’yi el ile nasıl etkinleştirebileceğiniz açıklanmıştır.
 
-İlk olarak, SQL Server makinesine Uzak Masaüstü ile bağlanın.
+İlk olarak, SQL Server makinesine uzak masaüstü ile bağlanın.
 
 [!INCLUDE [Connect to SQL Server VM with remote desktop](../../../../includes/virtual-machines-sql-server-remote-desktop-connect.md)]
 
-Ardından, TCP/IP protokolü ile etkinleştirmek **SQL Server Configuration Manager**.
+Sonra TCP/IP protokolünü **SQL Server Yapılandırma Yöneticisi**etkinleştirin.
 
 [!INCLUDE [Connect to SQL Server VM with remote desktop](../../../../includes/virtual-machines-sql-server-connection-tcp-protocol.md)]
 
 ## <a name="connect-with-ssms"></a>SSMS ile bağlanma
 
-Aşağıdaki adımlarda, Azure VM'niz için isteğe bağlı bir DNS etiketi oluşturmak ve sonra SQL Server Management Studio (SSMS) bağlanma gösterilmektedir.
+Aşağıdaki adımlarda, Azure VM 'niz için isteğe bağlı bir DNS etiketi oluşturma ve SQL Server Management Studio (SSMS) ile bağlanma işlemlerinin nasıl yapılacağı gösterilmektedir.
 
 [!INCLUDE [Connect to SQL Server in a VM Resource Manager](../../../../includes/virtual-machines-sql-server-connection-steps-resource-manager.md)]
 
-## <a id="manual"></a> El ile yapılandırma ve sorun giderme
+## <a id="manual"></a>El ile yapılandırma ve sorun giderme
 
-Portal otomatik olarak bağlantı yapılandırma seçenekleri sağlasa da, bağlantıyı el ile yapılandırma bilmek yararlıdır. Gereksinimleri anlama da sorun giderme konusunda yardımcı olabilir.
+Portal otomatik olarak bağlantı yapılandırma seçenekleri sağlasa da, bağlantının el ile nasıl yapılandırılacağını öğrenmek yararlı olur. Gereksinimleri anlamak sorun gidermeye da yardımcı olabilir.
 
-Aşağıdaki tabloda, bir Azure sanal Makinesinde çalışan SQL Server'a bağlanmak için gereken listelenmektedir.
+Aşağıdaki tabloda, bir Azure VM 'de çalışan SQL Server bağlanma gereksinimleri listelenmektedir.
 
 | Gereksinim | Açıklama |
 |---|---|
-| [SQL Server kimlik doğrulaması modunu etkinleştirin](https://docs.microsoft.com/sql/database-engine/configure-windows/change-server-authentication-mode#SSMSProcedure) | SQL Server kimlik doğrulaması, bir sanal ağda Active Directory yapılandırmadığınız sürece VM'ye uzaktan bağlanmak için gereklidir. |
-| [Bir SQL oturum açma oluşturma](https://docs.microsoft.com/sql/relational-databases/security/authentication-access/create-a-login) | SQL kimlik doğrulaması kullanıyorsanız, bir SQL oturum açma kullanıcı adı ve hedef veritabanınıza izinlere de sahip bir parola gerekir. |
-| [TCP/IP protokolünü etkinleştirin](#manualtcp) | SQL Server TCP üzerinden bağlantılara izin vermesi gerekir. |
-| [SQL Server bağlantı noktası için güvenlik duvarı kuralını etkinleştirme](https://docs.microsoft.com/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access) | VM Güvenlik duvarını SQL Server bağlantı noktası (varsayılan 1433) gelen trafiğe izin vermeniz gerekir. |
-| [TCP 1433 için bir ağ güvenlik grubu kuralı oluşturma](../../../virtual-network/manage-network-security-group.md#create-a-security-rule) | VM, internet üzerinden bağlanmak istiyorsanız (varsayılan 1433) SQL Server bağlantı noktası üzerinde trafiği almak izin vermeniz gerekir. Yerel ve sanal ağ-yalnızca bağlantıları bu gerektirmez. Azure portalında gereken tek adım budur. |
+| [SQL Server kimlik doğrulama modunu etkinleştir](https://docs.microsoft.com/sql/database-engine/configure-windows/change-server-authentication-mode#SSMSProcedure) | Sanal ağ üzerinde Active Directory yapılandırmadığınız takdirde VM 'ye uzaktan bağlanmak için SQL Server kimlik doğrulaması gerekir. |
+| [SQL oturum açma oluştur](https://docs.microsoft.com/sql/relational-databases/security/authentication-access/create-a-login) | SQL kimlik doğrulaması kullanıyorsanız, hedef veritabanınıza yönelik izinlere de sahip olan bir Kullanıcı adı ve parolayla SQL oturum açma gerekir. |
+| [TCP/IP protokolünü etkinleştir](#manualtcp) | SQL Server TCP üzerinden bağlantılara izin vermelidir. |
+| [SQL Server bağlantı noktası için güvenlik duvarı kuralını etkinleştir](https://docs.microsoft.com/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access) | VM 'deki güvenlik duvarı SQL Server bağlantı noktasında gelen trafiğe izin vermelidir (varsayılan 1433). |
+| [TCP 1433 için bir ağ güvenlik grubu kuralı oluşturma](../../../virtual-network/manage-network-security-group.md#create-a-security-rule) | Internet üzerinden bağlanmak istiyorsanız, VM 'nin SQL Server bağlantı noktasında trafik almasına izin vermelisiniz (varsayılan 1433). Yalnızca yerel ve sanal ağ bağlantılarında bu için gerekli değildir. Azure portal için gereken tek adım budur. |
 
 > [!TIP]
-> Portalda bağlantısını yapılandırırken yukarıdaki tabloda adımlarda sizin için gerçekleştirilir. Yapılandırmanızı doğrulamak veya el ile bağlantı kurmak için bu adımları yalnızca kullanın SQL Server için.
+> Yukarıdaki tablodaki adımlar, portalda bağlantı yapılandırdığınızda sizin için yapılır. Yalnızca yapılandırmanızı doğrulamak veya SQL Server için el ile bağlantı kurmak için bu adımları kullanın.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-Bağlantı adımları birlikte yönergeleri sağlama görmek için bkz. [azure'da bir SQL Server sanal makinesi sağlama](virtual-machines-windows-portal-sql-server-provision.md).
+Bu bağlantı adımlarıyla birlikte sağlama talimatlarını görmek için bkz. [Azure 'da SQL Server sanal makinesi sağlama](virtual-machines-windows-portal-sql-server-provision.md).
 
-Azure Vm'lerinde SQL Server çalıştırma ile ilgili diğer konular için bkz [Azure Virtual Machines'de SQL Server](virtual-machines-windows-sql-server-iaas-overview.md).
+Azure VM 'lerinde SQL Server çalıştırmaya ilişkin diğer konular için bkz. [Azure sanal makinelerinde SQL Server](virtual-machines-windows-sql-server-iaas-overview.md).

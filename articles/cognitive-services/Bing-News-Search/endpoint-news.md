@@ -1,7 +1,7 @@
 ---
 title: Bing Haber Arama uç noktaları
-titlesuffix: Azure Cognitive Services
-description: Haber arama API'si uç noktası özeti.
+titleSuffix: Azure Cognitive Services
+description: Bu makale, haber arama API uç noktalarının bir özetini sağlar; Haberler, en son haberler ve popüler haberler.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,48 +10,48 @@ ms.subservice: bing-news-search
 ms.topic: conceptual
 ms.date: 1/10/2019
 ms.author: aahi
-ms.openlocfilehash: 6ea218da23d65696c76008cb15e183fcc4bbda10
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dc7d16fe809e3e324f384b0d9e088dd7e6ab261c
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66383220"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111490"
 ---
-# <a name="bing-news-search-api-endpoints"></a>Bing haber arama API'si uç noktaları
+# <a name="bing-news-search-api-endpoints"></a>Bing Haber Arama API'si uç noktaları
 
-**Haber arama API'si** makaleler, Web sayfaları, görüntüler, video, haber verir ve [varlıkları](https://docs.microsoft.com/azure/cognitive-services/bing-entities-search/search-the-web). Varlıklar bir kişi, yer veya konu ile ilgili özet bilgiler içerir.
+**Haber Arama API 'si** , haber makalelerini, Web sayfalarını, görüntüleri, Videoları ve [varlıkları](https://docs.microsoft.com/azure/cognitive-services/bing-entities-search/search-the-web)döndürür. Varlıklar bir kişi, yer veya konu hakkında özet bilgiler içerir.
 
 ## <a name="endpoints"></a>Uç Noktalar
 
-Bing haber arama API'si kullanarak arama sonuçlarını haberleri almak için gönderin bir `GET` aşağıdaki uç noktalarından birinin isteği. Daha fazla başlık ve URL parametrelerini belirtimleri tanımlayın.
+Bing Haber Arama API'si kullanarak haber arama sonuçları almak için aşağıdaki uç noktalardan birine bir `GET` isteği gönderin. Üst bilgiler ve URL parametreleri daha fazla belirtim tanımlar.
 
-### <a name="news-items-by-search-query"></a>Arama sorgusu haber öğeleri
+### <a name="news-items-by-search-query"></a>Arama sorgusuna göre haber öğeleri
 
 ```
 GET https://api.cognitive.microsoft.com/bing/v7.0/news/search
 ```
 
-Bir arama sorgusuna göre haber öğelerini döndürür. Arama sorgusu boş ise, API üst haber makalelerini farklı kategorileri döndürür. Arama teriminizi kodlama ve ona ekleme URL bir sorgu`q=""` parametresi. Kullanılabilirlik için bkz: [desteklenen ülkeler/bölgeler ile pazarlar](language-support.md#supported-markets-for-news-search-endpoint).
+Arama sorgusunu temel alan haber öğelerini döndürür. Arama sorgusu boşsa, API, farklı kategorilerdeki en iyi haber makalelerini döndürür. Arama teriminizi kodlayıp`q=""` parametresine ekleyerek URL ile bir sorgu gönderin. Kullanılabilirlik için bkz. [Desteklenen ülkeler/bölgeler ve pazarlar](language-support.md#supported-markets-for-news-search-endpoint).
 
-### <a name="top-news-items-by-category"></a>Kategoriye göre üst haber öğeleri
+### <a name="top-news-items-by-category"></a>Kategoriye göre popüler Haberler öğeleri
 
 ```
 GET https://api.cognitive.microsoft.com/bing/v7.0/news  
 ```
 
-Kategoriye göre üst haber öğelerini döndürür. Özellikle en uygun işletme, spor veya eğlence makaleleri kullanarak isteyebilir `category=business`, `category=sports`, veya `category=entertainment`.  `category` Parametresi yalnızca kullanılabilir ile `/news` URL'si. Kategori belirleme için bazı biçimsel gereksinimi yoktur; başvurmak `category` içinde [sorgu parametresi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#query-parameters) belgeleri. Arama teriminizi kodlama ve ona ekleme URL bir sorgu`q=""` parametresi. Kullanılabilirlik için bkz: [desteklenen ülkeler/bölgeler ile pazarlar](language-support.md#supported-markets-for-news-endpoint).
+Kategoriye göre en popüler haber öğelerini döndürür. `category=business`, `category=sports`veya `category=entertainment`kullanarak en yüksek iş, spor veya eğlence makalelerini özellikle isteyebilirsiniz.  `category` parametresi yalnızca `/news` URL 'SI ile kullanılabilir. Kategorileri belirtmek için bazı biçimsel gereksinimler vardır; [sorgu parametresi](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#query-parameters) belgelerindeki `category` bakın. Arama teriminizi kodlayıp`q=""` parametresine ekleyerek URL ile bir sorgu gönderin. Kullanılabilirlik için bkz. [Desteklenen ülkeler/bölgeler ve pazarlar](language-support.md#supported-markets-for-news-endpoint).
 
-### <a name="trending-news-topics"></a>Popüler haber konularında 
+### <a name="trending-news-topics"></a>Popüler Haberler konuları 
 
 ```
 GET https://api.cognitive.microsoft.com/bing/v7.0/news/trendingtopics
 ```
 
-Şu anda sosyal ağlarda Öne çıkanlar haber konularında döndürür. Zaman `/trendingtopics` seçeneği dahildir, Bing arama yoksayar diğer çeşitli parametreleri gibi `freshness` ve `?q=""`. Kullanılabilirlik için bkz: [desteklenen ülkeler/bölgeler ile pazarlar](language-support.md#supported-markets-for-news-trending-endpoint).
+Sosyal ağlarda Şu anda popüler olan haber konularını döndürür. `/trendingtopics` seçeneği dahil edildiğinde, Bing arama `freshness` ve `?q=""`gibi diğer birkaç parametreyi yoksayar. Kullanılabilirlik için bkz. [Desteklenen ülkeler/bölgeler ve pazarlar](language-support.md#supported-markets-for-news-trending-endpoint).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Üstbilgileri, parametreleri, Pazar kodları, yanıt nesneleri, hata hakkındaki ayrıntılar için vb., bkz: [Bing haber arama API'si v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference) başvuru.
+Üstbilgiler, parametreler, Pazar kodları, yanıt nesneleri, hatalar vb. hakkındaki ayrıntılar için bkz. [Bing Haber Arama API 'si v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference) başvurusu.
 
-Her bir uç noktası tarafından desteklenen parametreleri hakkında tam bilgi için her türü için başvuru sayfalarına bakın.
-Haber arama API'si kullanarak temel istekleri örnekleri için bkz: [Bing haber arama hızlı başlangıçları](https://docs.microsoft.com/azure/cognitive-services/bing-news-search).
+Her uç nokta tarafından desteklenen parametreler hakkında tüm bilgiler için, her tür için başvuru sayfalarına bakın.
+Haber Arama API 'sini kullanan temel isteklerin örnekleri için bkz. [Bing haber arama Hızlı Başlat](https://docs.microsoft.com/azure/cognitive-services/bing-news-search).

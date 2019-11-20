@@ -1,72 +1,84 @@
 ---
-title: Sanal ağdan bir Azure container registry'ye erişimi kısıtlama
-description: Erişim yalnızca bir Azure sanal ağ içindeki kaynaklarla veya ortak IP adresi aralıkları bir Azure container registry'ye izin verin.
+title: Bir sanal ağla Azure Container Registry erişimi kısıtla
+description: Azure Container Registry 'ye yalnızca bir Azure sanal ağındaki veya genel IP adresi aralıklarından gelen kaynaklardan erişime izin verin.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: article
 ms.date: 07/01/2019
 ms.author: danlep
-ms.openlocfilehash: 06e45127f940e01de5f3ceeefc354014a88014db
-ms.sourcegitcommit: 6cb4dd784dd5a6c72edaff56cf6bcdcd8c579ee7
+ms.openlocfilehash: 5ba5c180def9539c486fb8727a0a78b4f98fa185
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67514403"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73931327"
 ---
-# <a name="restrict-access-to-an-azure-container-registry-using-an-azure-virtual-network-or-firewall-rules"></a>Bir Azure sanal ağ veya güvenlik duvarı kurallarını kullanarak bir Azure container registry'ye erişimi kısıtlama
+# <a name="restrict-access-to-an-azure-container-registry-using-an-azure-virtual-network-or-firewall-rules"></a>Azure sanal ağını veya güvenlik duvarı kurallarını kullanarak bir Azure Container Registry 'ye erişimi kısıtlama
 
-[Azure sanal ağı](../virtual-network/virtual-networks-overview.md) ve şirket içi kaynaklara Azure için güvenli, özel ağ sağlar. Bir Azure sanal ağı için özel Azure kapsayıcısı kayıt defteriniz erişim sınırlayarak, yalnızca sanal ağ içindeki kaynaklarla kayıt defterine erişim emin olun. Şirket içi senaryolar için yalnızca belirli IP adreslerinden gelen kayıt defteri erişim izni vermek için güvenlik duvarı kuralları yapılandırabilirsiniz.
+[Azure sanal ağ](../virtual-network/virtual-networks-overview.md) , Azure ve şirket içi kaynaklarınız için güvenli, özel ağ sağlar. Azure sanal ağından özel Azure Container Registry 'nize erişimi sınırlayarak, yalnızca sanal ağdaki kaynakların kayıt defterine erişebildiğinden emin olursunuz. Şirketler arası senaryolar için, yalnızca belirli IP adreslerinden kayıt defteri erişimine izin vermek üzere güvenlik duvarı kurallarını da yapılandırabilirsiniz.
 
-Bu makale bir Azure kapsayıcı kayıt defteri erişimi sınırlamak için ağ erişim kuralları oluşturmak için iki senaryo: bir sanal ağda dağıtılmış bir sanal makine veya sanal makinenin genel IP adresi.
+Bu makalede bir kapsayıcı kayıt defterinde gelen ağ erişim kurallarını yapılandırmak için iki senaryo gösterilmektedir: sanal bir ağda dağıtılan bir sanal makineden veya bir VM 'nin genel IP adresinden.
 
 > [!IMPORTANT]
-> Bu özellik şu anda önizlemededir ve bazı [sınırlamalar uygulanır](#preview-limitations). Önizlemeler, [ek kullanım koşullarını][terms-of-use] kabul etmeniz şartıyla kullanımınıza sunulur. Bu özelliğin bazı yönleri genel kullanıma açılmadan önce değişebilir.
+> Bu özellik şu anda önizleme aşamasındadır ve bazı [sınırlamalar geçerlidir](#preview-limitations). Önizlemeler, [ek kullanım koşullarını][terms-of-use] kabul etmeniz şartıyla kullanımınıza sunulur. Bu özelliğin bazı yönleri genel kullanıma açılmadan önce değişebilir.
 >
+
+Bunun yerine, bir güvenlik duvarının arkasındaki bir kapsayıcı kayıt defterine ulaşmak için kaynakların erişim kurallarını ayarlamanız gerekiyorsa, bkz. [güvenlik duvarı arkasındaki bir Azure Container Registry 'ye erişmek için kuralları yapılandırma](container-registry-firewall-access-rules.md).
+
 
 ## <a name="preview-limitations"></a>Önizleme sınırlamaları
 
-* Yalnızca bir **Premium** kapsayıcı kayıt defteri ağ erişim kuralları ile yapılandırılabilir. Kayıt defteri hizmet katmanları hakkında daha fazla bilgi için bkz: [Azure Container Registry SKU'ları](container-registry-skus.md). 
+* Yalnızca bir **Premium** kapsayıcı kayıt defteri, ağ erişim kurallarıyla yapılandırılabilir. Kayıt defteri hizmeti katmanları hakkında bilgi için bkz. [Azure Container Registry SKU 'lar](container-registry-skus.md). 
 
-* Yalnızca bir [Azure Kubernetes hizmeti](../aks/intro-kubernetes.md) küme veya Azure [sanal makine](../virtual-machines/linux/overview.md) konak olarak bir sanal ağ içindeki bir kapsayıcı kayıt defterine erişim için kullanılabilir. *Azure Container Instances gibi diğer Azure Hizmetleri şu anda desteklenmemektedir.*
+* Bir sanal ağdaki kapsayıcı kayıt defterine erişmek için bir konak olarak yalnızca bir [Azure Kubernetes hizmet](../aks/intro-kubernetes.md) kümesi veya Azure [sanal makinesi](../virtual-machines/linux/overview.md) kullanılabilir. *Azure Container Instances dahil diğer Azure hizmetleri şu anda desteklenmemektedir.*
 
-* [ACR görevleri](container-registry-tasks-overview.md) operations erişilen sanal ağ içinde bir kapsayıcı kayıt defterinde şu anda desteklenmez.
+* [ACR görev](container-registry-tasks-overview.md) işlemleri şu anda bir sanal ağda erişilen bir kapsayıcı kayıt defterinde desteklenmiyor.
 
-* Her kayıt, en fazla 100 sanal ağ kuralları destekler.
+* Her kayıt defteri en fazla 100 sanal ağ kuralını destekler.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure'ı kullanmak için CLI adımlar bu makalede, Azure CLI Sürüm 2.0.58 veya üstü gereklidir. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli].
+* Bu makalede Azure CLı adımlarını kullanmak için Azure CLı sürüm 2.0.58 veya üzeri gereklidir. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][azure-cli].
 
-* Bir kapsayıcı kayıt defterinde yoksa (Premium gerekli SKU) oluşturun ve bir örnek görüntü gibi anında iletme `hello-world` Docker hub'dan. Örneğin, [Azure portalında][quickstart-portal] or the [Azure CLI][quickstart-cli] bir kayıt defteri oluşturmak için. 
+* Zaten bir kapsayıcı kayıt defteriniz yoksa, bir tane oluşturun (Premium SKU gerekir) ve Docker Hub 'ından `hello-world` gibi örnek bir görüntü gönderin. Örneğin, [Azure Portal][quickstart-portal] veya [Azure CLI][quickstart-cli] kullanarak bir kayıt defteri oluşturun. 
 
-## <a name="about-network-rules-for-a-container-registry"></a>Kapsayıcı kayıt defteri için ağ kuralları hakkında
+* Farklı bir Azure aboneliğindeki bir sanal ağ kullanarak kayıt defteri erişimini kısıtlamak istiyorsanız, bu abonelikte Azure Container Registry kaynak sağlayıcısını kaydetmeniz gerekir. Örneğin:
 
-Varsayılan olarak Azure container registry, herhangi bir ağa konaklarında internet üzerinden bağlantı kabul eder. Bir sanal ağ ile bir AKS kümesi veya bir ağ sınırı geçmeden ssısdb'ye kayıt defteri güvenli bir şekilde erişmek için Azure VM gibi Azure kaynakları yalnızca izin verebilirsiniz. Ağ güvenlik duvarı kuralları beyaz liste de yapılandırabilirsiniz belirli genel internet IP adresi aralıkları. 
+  ```azurecli
+  az account set --subscription <Name or ID of subscription of virtual network>
 
-Tüm ağ bağlantıları reddeder bir kayıt defteri erişimi sınırlamak için ilk kayıt defteri varsayılan eylemi değiştirin. Ardından, ağ erişim kuralları ekleyin. İstemcilere verilen ağ kuralları üzerinden erişim gerekir devam [kapsayıcı kayıt defterine kimlik doğrulaması](https://docs.microsoft.com/azure/container-registry/container-registry-authentication) ve veri erişim iznine sahip olması.
+  az provider register --namespace Microsoft.ContainerRegistry
+  ``` 
+
+## <a name="about-network-rules-for-a-container-registry"></a>Bir kapsayıcı kayıt defteri için ağ kuralları hakkında
+
+Azure Container Registry, varsayılan olarak herhangi bir ağdaki konaklardan internet üzerinden bağlantıları kabul eder. Bir sanal ağ ile, bir ağ sınırını taşımadan, kayıt defterine güvenli bir şekilde erişmek için yalnızca bir AKS kümesi veya Azure VM gibi Azure kaynaklarına izin verebilirsiniz. Ayrıca, ağ güvenlik duvarı kurallarını yalnızca belirli genel İnternet IP adresi aralıklarına izin verecek şekilde yapılandırabilirsiniz. 
+
+Bir kayıt defterine erişimi sınırlandırmak için, önce tüm ağ bağlantılarını reddetmeye yönelik kayıt defteri varsayılan eylemini değiştirin. Ardından, ağ erişim kuralları ekleyin. Ağ kuralları aracılığıyla erişim izni verilen istemciler, [kapsayıcı kayıt defterinde kimlik doğrulamaya](https://docs.microsoft.com/azure/container-registry/container-registry-authentication) ve verilere erişme yetkisine sahip olmaya devam etmelidir.
 
 ### <a name="service-endpoint-for-subnets"></a>Alt ağlar için hizmet uç noktası
 
-Sanal ağ içinde bir alt ağından erişime izin vermek için eklemek gereken bir [hizmet uç noktası](../virtual-network/virtual-network-service-endpoints-overview.md) Azure Container Registry hizmeti. 
+Sanal ağdaki bir alt ağdan erişime izin vermek için Azure Container Registry hizmeti için bir [hizmet uç noktası](../virtual-network/virtual-network-service-endpoints-overview.md) eklemeniz gerekir. 
 
-Çok kiracılı hizmetler gibi Azure Container Registry, tüm müşteriler için tek bir IP adresleri kümesini kullanın. Hizmet uç noktası, bir kayıt defterine erişim için bir uç nokta atar. Bu uç nokta trafiği Azure omurga ağı üzerinden kaynağa bir en uygun rotayı sunar. Sanal ağ ve alt ağ kimlikleri, ayrıca her bir istekle aktarılır.
+Azure Container Registry gibi çok kiracılı hizmetler, tüm müşteriler için tek bir IP adresleri kümesi kullanır. Hizmet uç noktası bir kayıt defterine erişmek için bir uç nokta atar. Bu uç nokta, trafiğe Azure omurga ağı üzerinden en uygun yolu verir. Sanal ağın ve alt ağın kimlikleri de her istekle birlikte iletilir.
 
 ### <a name="firewall-rules"></a>Güvenlik duvarı kuralları
 
-IP ağ kuralları için izin verilen internet gibi CIDR gösterimini kullanarak adres aralıkları sağlamak *16.17.18.0/24* veya gibi bir tek tek IP adresleri *16.17.18.19*. IP ağ kuralları için yalnızca verilir *genel* internet IP adresi. IP adresi aralıkları için özel ağlar (RFC 1918 ' tanımlandığı şekilde) ayrılmış IP kurallarında izin verilmez.
+IP ağ kuralları için, *16.17.18.0/24* gibi CIDR gösterimini kullanarak izin verilen internet adresi aralıklarını veya *16.17.18.19*gibi tek bir IP adresini belirtin. IP ağ kurallarına yalnızca *genel* internet IP adresleri için izin verilir. Özel ağlar için ayrılan IP adresi aralıklarına (RFC 1918 ' de tanımlandığı gibi) IP kurallarında izin verilmez.
 
-## <a name="create-a-docker-enabled-virtual-machine"></a>Docker özellikli sanal makine oluşturma
+## <a name="create-a-docker-enabled-virtual-machine"></a>Docker özellikli bir sanal makine oluşturma
 
-Bu makalede, Azure container registry erişmek için Docker özellikli bir Ubuntu VM kullanın. Kayıt defterine Azure Active Directory kimlik doğrulaması kullanmak için ayrıca yüklemeniz [Azure CLI][azure-cli] VM üzerinde. Bir Azure sanal makinesi zaten varsa, bu Oluşturma adımı atlayın.
+Bu makalede, bir Azure Container Registry 'ye erişmek için Docker özellikli bir Ubuntu VM kullanın. Kayıt defterine Azure Active Directory kimlik doğrulaması kullanmak için [Azure CLI][azure-cli] 'yı sanal makineye de yüklersiniz. Zaten bir Azure sanal makineniz varsa, bu oluşturma adımını atlayın.
 
-Aynı kaynak grubunu, sanal makine ve kapsayıcı kayıt defteriniz için kullanabilir. Bu kurulum temizleme sonunda kolaylaştırır, ancak gerekli değildir. Sanal ağ ve sanal makine için ayrı bir kaynak grubu oluşturmayı seçerseniz, çalıştırma [az grubu oluşturma][az-group-create]. Aşağıdaki örnekte adlı bir kaynak grubu oluşturur *myResourceGroup* içinde *westcentralus* konumu:
+Sanal makineniz ve kapsayıcı kayıt defteriniz için aynı kaynak grubunu kullanabilirsiniz. Bu kurulum, sonda temizleme işlemini basitleştirir, ancak gerekli değildir. Sanal makine ve sanal ağ için ayrı bir kaynak grubu oluşturmayı seçerseniz, [az Group Create][az-group-create]komutunu çalıştırın. Aşağıdaki örnek *westcentralus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
 
 ```azurecli
 az group create --name myResourceGroup --location westus
 ```
 
-Artık varsayılan dağıtma Ubuntu Azure sanal makine ile [az vm oluşturma][az-vm-create]. Aşağıdaki örnekte adlı bir VM oluşturur *myDockerVM*:
+Şimdi [az VM Create][az-vm-create]ile varsayılan bir Ubuntu Azure sanal makinesini dağıtın. Aşağıdaki örnek, *Mydockervm*adlı bir sanal makine oluşturur:
 
 ```azurecli
 az vm create \
@@ -77,23 +89,23 @@ az vm create \
     --generate-ssh-keys
 ```
 
-VM’nin oluşturulması birkaç dakika sürer. Komut tamamlandığında, Not `publicIpAddress` Azure CLI tarafından görüntülenen. Sanal makineye ve isteğe bağlı olarak güvenlik duvarı kuralları daha sonra kurulumu için SSH bağlantılarına bu adresi kullanın.
+VM’nin oluşturulması birkaç dakika sürer. Komut tamamlandığında, Azure CLı tarafından gösterilecek `publicIpAddress` göz atın. Bu adresi VM 'ye SSH bağlantısı kurmak ve isteğe bağlı olarak daha sonra güvenlik duvarı kuralları kurmak için kullanın.
 
-### <a name="install-docker-on-the-vm"></a>Docker'ı VM'ye yükleyin
+### <a name="install-docker-on-the-vm"></a>SANAL makineye Docker 'ı yükler
 
-Sanal makine çalışmaya başladıktan sonra bir SSH bağlantısı VM'ye olun. Değiştirin *Publicıpaddress* sanal makinenizin genel IP adresiyle.
+VM çalıştırıldıktan sonra VM ile bir SSH bağlantısı oluşturun. *Publicıpaddress* değerini sanal MAKINENIZIN genel IP adresiyle değiştirin.
 
 ```bash
 ssh azureuser@publicIpAddress
 ```
 
-Ubuntu VM'ye Docker yüklemek için aşağıdaki komutu çalıştırın:
+Ubuntu VM 'ye Docker yüklemek için aşağıdaki komutu çalıştırın:
 
 ```bash
 sudo apt install docker.io -y
 ```
 
-Yükleme sonrasında, Docker VM üzerinde düzgün çalıştığını doğrulamak için aşağıdaki komutu çalıştırın:
+Yükleme sonrasında, Docker 'ın sanal makinede düzgün çalıştığını doğrulamak için aşağıdaki komutu çalıştırın:
 
 ```bash
 sudo docker run -it hello-world
@@ -109,19 +121,19 @@ This message shows that your installation appears to be working correctly.
 
 ### <a name="install-the-azure-cli"></a>Azure CLI'yı yükleme
 
-Bağlantısındaki [apt ile Azure CLI yükleme](/cli/azure/install-azure-cli-apt?view=azure-cli-latest) Ubuntu sanal makinenizde Azure CLI'yı yüklemek için. Bu makalede 2.0.58 sürümünü yüklediğinizden emin olun veya üzeri.
+Azure CLI 'yi, Ubuntu sanal makinenize yüklemek için [apt Ile Azure CLI 'Yı kurma](/cli/azure/install-azure-cli-apt?view=azure-cli-latest) bölümündeki adımları izleyin. Bu makalede, sürüm 2.0.58 veya üstünü yüklediğinizden emin olun.
 
-SSH bağlantısını kapatın.
+SSH bağlantısından çıkın.
 
 ## <a name="allow-access-from-a-virtual-network"></a>Bir sanal ağdan erişime izin ver
 
-Bu bölümde, bir Azure sanal ağındaki bir alt ağından erişime izin vermek için bir kapsayıcı kayıt defterinizi yapılandırın. Azure CLI ve Azure portalını kullanarak eşdeğer adımlar verilmiştir.
+Bu bölümde, kapsayıcı kayıt defterinizi Azure sanal ağındaki bir alt ağdan erişime izin verecek şekilde yapılandırın. Azure CLı ve Azure portal ile eşdeğer adımlar sağlanır.
 
-### <a name="allow-access-from-a-virtual-network---cli"></a>Sanal ağ - CLI üzerinden erişime izin ver
+### <a name="allow-access-from-a-virtual-network---cli"></a>Bir sanal ağ üzerinden erişime izin ver-CLı
 
-#### <a name="add-a-service-endpoint-to-a-subnet"></a>Bir alt ağ için hizmet uç noktası ekleme
+#### <a name="add-a-service-endpoint-to-a-subnet"></a>Bir alt ağa hizmet uç noktası ekleme
 
-Bir VM oluşturduğunuzda, Azure varsayılan olarak, aynı kaynak grubunda bir sanal ağ oluşturur. Sanal ağ adı, sanal makine adına bağlıdır. Örneğin, sanal makinenizin adını *myDockerVM*, varsayılan sanal ağ adı *myDockerVMVNET*, adlı bir alt ağ ile *myDockerVMSubnet*. Bunu kullanarak veya Azure portalında doğrulamak [az ağ vnet listesinde][az-network-vnet-list] komutu:
+Bir VM oluşturduğunuzda, Azure varsayılan olarak aynı kaynak grubunda bir sanal ağ oluşturur. Sanal ağın adı, sanal makinenin adını temel alır. Örneğin, *Mydockervm*sanal makinenizi adlandırdıysanız, varsayılan sanal ağ adı Mydockervmvnet adlı bir alt ağ ile Mydockervmvnet *olur.* Bunu Azure portal veya [az Network VNET List][az-network-vnet-list] komutunu kullanarak doğrulayın:
 
 ```azurecli
 az network vnet list --resource-group myResourceGroup --query "[].{Name: name, Subnet: subnets[0].name}"
@@ -138,7 +150,7 @@ az network vnet list --resource-group myResourceGroup --query "[].{Name: name, S
 ]
 ```
 
-Kullanım [az ağ sanal ağ alt ağı güncelleştirme][az-network-vnet-subnet-update] eklemek için komutu bir **Microsoft.ContainerRegistry** alt ağınız için hizmet uç noktası. Sanal ağ ve alt ağ aşağıdaki komutta adlarını değiştirin:
+Alt ağınıza bir **Microsoft. ContainerRegistry** hizmeti uç noktası eklemek için [az Network VNET subnet Update][az-network-vnet-subnet-update] komutunu kullanın. Aşağıdaki komutta, sanal ağınızın ve alt ağınızın adlarını değiştirin:
 
 ```azurecli
 az network vnet subnet update \
@@ -148,7 +160,7 @@ az network vnet subnet update \
   --service-endpoints Microsoft.ContainerRegistry
 ```
 
-Kullanım [az ağ sanal ağ alt ağı show][az-network-vnet-subnet-show] alt ağın kaynak Kimliğini almak için komutu. Bu ağ erişim kuralı yapılandırmak için daha sonraki bir adımda gerekir.
+Alt ağın kaynak KIMLIĞINI almak için [az Network VNET subnet Show][az-network-vnet-subnet-show] komutunu kullanın. Bu, bir ağ erişim kuralını yapılandırmak için sonraki bir adımda gerekli olacaktır.
 
 ```azurecli
 az network vnet subnet show \
@@ -165,72 +177,72 @@ az network vnet subnet show \
 /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myDockerVMVNET/subnets/myDockerVMSubnet
 ```
 
-#### <a name="change-default-network-access-to-registry"></a>Kayıt defterine varsayılan ağ erişimi değiştirme
+#### <a name="change-default-network-access-to-registry"></a>Kayıt defteri için varsayılan ağ erişimini değiştirme
 
-Varsayılan olarak, Azure container registry, herhangi bir ağdaki ana bilgisayarlardan gelen bağlantıları sağlar. Seçili ağ erişimini sınırlamak için erişimi engellemek için varsayılan eylem değiştirin. Aşağıdaki kayıt defterinizin adıyla değiştirin [az acr update][az-acr-update] komutu:
+Varsayılan olarak, bir Azure Container Registry, herhangi bir ağdaki konaklardan gelen bağlantılara izin verir. Seçilen bir ağa erişimi sınırlandırmak için, varsayılan eylemi erişimi Reddet olarak değiştirin. Kayıt defterinizin adını şu [az ACR Update][az-acr-update] komutunda değiştirin:
 
 ```azurecli
 az acr update --name myContainerRegistry --default-action Deny
 ```
 
-#### <a name="add-network-rule-to-registry"></a>Kayıt defterine ağ kuralı ekleyin
+#### <a name="add-network-rule-to-registry"></a>Kayıt defterine ağ kuralı ekle
 
-Kullanım [az acr ağ kuralı ekleyin][az-acr-network-rule-add] VM alt ağından erişime izin veren kayıt defteriniz için ağ kuralı eklemek için komutu. Kapsayıcı kayıt defterinin adı ve kaynak kimliği şu komutla alt ağın değiştirin: 
+Kayıt defterinize VM 'nin alt ağından erişime izin veren bir ağ kuralı eklemek için [az ACR Network-Rule Add][az-acr-network-rule-add] komutunu kullanın. Aşağıdaki komutta, kapsayıcı kayıt defterinin adını ve alt ağın kaynak KIMLIĞINI değiştirin: 
 
  ```azurecli
 az acr network-rule add --name mycontainerregistry --subnet <subnet-resource-id>
 ```
 
-Devam [kayıt defterine erişim doğrulayın](#verify-access-to-the-registry).
+[Kayıt defterine erişimi doğrulamaya](#verify-access-to-the-registry)devam edin.
 
-### <a name="allow-access-from-a-virtual-network---portal"></a>Bir sanal ağ - erişime izin verecek portalı
+### <a name="allow-access-from-a-virtual-network---portal"></a>Bir sanal ağ-Portal ' dan erişime izin ver
 
-#### <a name="add-service-endpoint-to-subnet"></a>Alt ağ için hizmet uç noktası ekleme
+#### <a name="add-service-endpoint-to-subnet"></a>Alt ağa hizmet uç noktası ekle
 
-Bir VM oluşturduğunuzda, Azure varsayılan olarak, aynı kaynak grubunda bir sanal ağ oluşturur. Sanal ağ adı, sanal makine adına bağlıdır. Örneğin, sanal makinenizin adını *myDockerVM*, varsayılan sanal ağ adı *myDockerVMVNET*, adlı bir alt ağ ile *myDockerVMSubnet*.
+Bir VM oluşturduğunuzda, Azure varsayılan olarak aynı kaynak grubunda bir sanal ağ oluşturur. Sanal ağın adı, sanal makinenin adını temel alır. Örneğin, *Mydockervm*sanal makinenizi adlandırdıysanız, varsayılan sanal ağ adı Mydockervmvnet adlı bir alt ağ ile Mydockervmvnet *olur.*
 
-Hizmet uç noktası, Azure Container Registry için bir alt ağa eklemek için:
+Bir alt ağa Azure Container Registry için bir hizmet uç noktası eklemek için:
 
-1. Üst kısmındaki arama kutusuna [Azure portalında][azure-portal], girin *sanal ağlar*. Zaman **sanal ağlar** arama sonuçlarında görünmesini, onu seçin.
-1. Sanal ağlar, sanal makinenizi dağıtıldığı, gibi sanal ağ seçim *myDockerVMVNET*.
-1. Altında **ayarları**seçin **alt ağlar**.
-1. Sanal makinenizi dağıtıldığı, gibi bir alt ağ seçin *myDockerVMSubnet*.
-1. Altında **hizmet uç noktalarını**seçin **Microsoft.ContainerRegistry**.
+1. [Azure Portal][azure-portal]üst kısmındaki arama kutusuna *sanal ağlar*girin. Arama sonuçlarında **sanal ağlar** görüntülendiğinde, bunu seçin.
+1. Sanal ağlar listesinden, sanal makinenizin dağıtıldığı sanal ağı ( *Mydockervmvnet*gibi) seçin.
+1. **Ayarlar**altında **alt ağlar**' ı seçin.
+1. Sanal makinenizin dağıtıldığı alt ağı seçin; örneğin, *Mydockervmsubnet*.
+1. **Hizmet uç noktaları**altında **Microsoft. containerregistry**' yi seçin.
 1. **Kaydet**’i seçin.
 
-![Alt ağ için hizmet uç noktası ekleme][acr-subnet-service-endpoint] 
+![Alt ağa hizmet uç noktası ekle][acr-subnet-service-endpoint] 
 
-#### <a name="configure-network-access-for-registry"></a>Ağ erişimi kayıt defteri için yapılandırma
+#### <a name="configure-network-access-for-registry"></a>Kayıt defteri için ağ erişimini yapılandırma
 
-Varsayılan olarak, Azure container registry, herhangi bir ağdaki ana bilgisayarlardan gelen bağlantıları sağlar. Sanal ağ erişimini sınırlamak için:
+Varsayılan olarak, bir Azure Container Registry, herhangi bir ağdaki konaklardan gelen bağlantılara izin verir. Sanal ağa erişimi sınırlandırmak için:
 
-1. Portalda kapsayıcı kayıt defterinize gidin.
-1. Altında **ayarları**seçin **güvenlik duvarı ve sanal ağlar**.
-1. Varsayılan olarak erişimi reddetmek için erişime izin verecek şekilde seçin: **seçili ağlar**. 
-1. Seçin **var olan sanal ağı Ekle**, sanal ağ ve bir hizmet uç noktası ile yapılandırılmış olan alt ağ seçin. **Add (Ekle)** seçeneğini belirleyin.
+1. Portalda kapsayıcı Kayıt defterinize gidin.
+1. **Ayarlar**altında **güvenlik duvarı ve sanal ağlar**' ı seçin.
+1. Erişimi varsayılan olarak reddetmek için, **Seçili ağlardan**erişime izin ver ' i seçin. 
+1. **Var olan sanal ağı ekle**' yi seçin ve bir hizmet uç noktası ile yapılandırdığınız sanal ağı ve alt ağı seçin. **Add (Ekle)** seçeneğini belirleyin.
 1. **Kaydet**’i seçin.
 
-![Kapsayıcı kayıt defteri için sanal ağ yapılandırma][acr-vnet-portal]
+![Kapsayıcı kayıt defteri için sanal ağı yapılandırma][acr-vnet-portal]
 
-Devam [kayıt defterine erişim doğrulayın](#verify-access-to-the-registry).
+[Kayıt defterine erişimi doğrulamaya](#verify-access-to-the-registry)devam edin.
 
-## <a name="allow-access-from-an-ip-address"></a>Bir IP adresinden erişime izin ver
+## <a name="allow-access-from-an-ip-address"></a>IP adresinden erişime izin ver
 
-Bu bölümde, kapsayıcı kayıt defterinizde belirli bir IP adresi veya aralığı erişime izin verecek şekilde yapılandırın. Azure CLI ve Azure portalını kullanarak eşdeğer adımlar verilmiştir.
+Bu bölümde, kapsayıcı kayıt defterinizi belirli bir IP adresinden veya aralıktan erişime izin verecek şekilde yapılandırın. Azure CLı ve Azure portal ile eşdeğer adımlar sağlanır.
 
-### <a name="allow-access-from-an-ip-address---cli"></a>-CLI bir IP adresinden erişime izin ver
+### <a name="allow-access-from-an-ip-address---cli"></a>IP adresinden erişime izin ver-CLı
 
-#### <a name="change-default-network-access-to-registry"></a>Kayıt defterine varsayılan ağ erişimi değiştirme
+#### <a name="change-default-network-access-to-registry"></a>Kayıt defteri için varsayılan ağ erişimini değiştirme
 
-Zaten yapmadıysanız, varsayılan olarak erişimi engellemek için kayıt defteri yapılandırmasını güncelleştirin. Aşağıdaki kayıt defterinizin adıyla değiştirin [az acr update][az-acr-update] komutu:
+Daha önce yapmadıysanız, kayıt defteri yapılandırmasını varsayılan olarak erişimi reddedecek şekilde güncelleştirin. Kayıt defterinizin adını şu [az ACR Update][az-acr-update] komutunda değiştirin:
 
 ```azurecli
 az acr update --name myContainerRegistry --default-action Deny
 ```
 
-#### <a name="remove-network-rule-from-registry"></a>Kayıt defterinden ağ kuralını Kaldır
+#### <a name="remove-network-rule-from-registry"></a>Ağ kuralını kayıt defterinden kaldır
 
-VM alt ağından erişime izin vermek için bir ağ kuralı daha önce eklediyseniz alt ağ hizmet uç noktası ve ağ kuralını kaldırın. Kapsayıcı kayıt defterinin adı ve kaynak kimliği, daha önceki bir adımda aldığınız alt ağın yerine [az acr ağ kuralını Kaldır][az-acr-network-rule-remove] komutu: 
+VM 'nin alt ağından erişime izin vermek için daha önce bir ağ kuralı eklediyseniz, alt ağın hizmet uç noktasını ve ağ kuralını kaldırın. Daha önceki bir adımda aldığınız alt ağın kapsayıcı kayıt defteri adını ve kaynak KIMLIĞINI [az ACR Network Rule Remove][az-acr-network-rule-remove] komutunda değiştirin: 
 
 ```azurecli
 # Remove service endpoint
@@ -246,87 +258,87 @@ az network vnet subnet update \
 az acr network-rule remove --name mycontainerregistry --subnet <subnet-resource-id>
 ```
 
-#### <a name="add-network-rule-to-registry"></a>Kayıt defterine ağ kuralı ekleyin
+#### <a name="add-network-rule-to-registry"></a>Kayıt defterine ağ kuralı ekle
 
-Kullanım [az acr ağ kuralı ekleyin][az-acr-network-rule-add] VM'nin IP adresinden erişime izin veren kayıt defteriniz için ağ kuralı eklemek için komutu. Kapsayıcı kayıt defterinin adı ve aşağıdaki komutta VM'nin genel IP adresini değiştirin.
+Kayıt defterinize VM 'nin IP adresinden erişime izin veren bir ağ kuralı eklemek için [az ACR Network-Rule Add][az-acr-network-rule-add] komutunu kullanın. Aşağıdaki komutta, kapsayıcı kayıt defterinin adını ve VM 'nin genel IP adresini değiştirin.
 
 ```azurecli
 az acr network-rule add --name mycontainerregistry --ip-address <public-IP-address>
 ```
 
-Devam [kayıt defterine erişim doğrulayın](#verify-access-to-the-registry).
+[Kayıt defterine erişimi doğrulamaya](#verify-access-to-the-registry)devam edin.
 
-### <a name="allow-access-from-an-ip-address---portal"></a>-Bir IP adresinden erişime portalı
+### <a name="allow-access-from-an-ip-address---portal"></a>Bir IP adresinden erişime izin ver-Portal
 
-#### <a name="remove-existing-network-rule-from-registry"></a>Kayıt defterinden mevcut ağ kuralını Kaldır
+#### <a name="remove-existing-network-rule-from-registry"></a>Mevcut ağ kuralını kayıt defterinden kaldır
 
-VM alt ağından erişime izin vermek için bir ağ kuralı önceden eklenen mevcut kuralı kaldırın. Farklı bir VM üzerindeki kayıt defterine erişmek istiyorsanız, bu bölümü atlayın.
+VM 'nin alt ağından erişime izin vermek için daha önce bir ağ kuralı eklediyseniz, mevcut kuralı kaldırın. Kayıt defterine farklı bir VM 'den erişmek istiyorsanız bu bölümü atlayın.
 
-* Azure Container Registry için alt ağ hizmet uç noktasını kaldırmak için alt ağ ayarlarını güncelleştirin. 
+* Alt ağın hizmet uç noktasını Azure Container Registry kaldırmak için alt ağ ayarlarını güncelleştirin. 
 
-  1. İçinde [Azure portalında][azure-portal], sanal makinenizi dağıtıldığı sanal ağa gidin.
-  1. Altında **ayarları**seçin **alt ağlar**.
-  1. Sanal makinenizi dağıtıldığı alt ağı seçin.
-  1. Altında **hizmet uç noktalarını**, onay kutusunu kaldırın **Microsoft.ContainerRegistry**. 
+  1. [Azure Portal][azure-portal], sanal makinenizin dağıtıldığı sanal ağa gidin.
+  1. **Ayarlar**altında **alt ağlar**' ı seçin.
+  1. Sanal makinenizin dağıtıldığı alt ağı seçin.
+  1. **Hizmet uç noktaları**altında **Microsoft. containerregistry**onay kutusunu kaldırın. 
   1. **Kaydet**’i seçin.
 
-* Alt kayıt defterine erişim izni veren ağ kuralını kaldırın.
+* Alt ağın kayıt defterine erişmesine izin veren ağ kuralını kaldırın.
 
-  1. Portalda kapsayıcı kayıt defterinize gidin.
-  1. Altında **ayarları**seçin **güvenlik duvarı ve sanal ağlar**.
-  1. Altında **sanal ağlar**sanal ağın adını seçin ve ardından **Kaldır**.
+  1. Portalda kapsayıcı Kayıt defterinize gidin.
+  1. **Ayarlar**altında **güvenlik duvarı ve sanal ağlar**' ı seçin.
+  1. **Sanal ağlar**altında sanal ağın adını seçip **Kaldır**' ı seçin.
   1. **Kaydet**’i seçin.
 
-#### <a name="add-network-rule-to-registry"></a>Kayıt defterine ağ kuralı ekleyin
+#### <a name="add-network-rule-to-registry"></a>Kayıt defterine ağ kuralı ekle
 
-1. Portalda kapsayıcı kayıt defterinize gidin.
-1. Altında **ayarları**seçin **güvenlik duvarı ve sanal ağlar**.
-1. Zaten yapmadıysanız, erişime izin verecek şekilde seçin **seçili ağlar**. 
-1. Altında **sanal ağlar**, hiçbir ağ seçildiğinden emin olun.
-1. Altında **Güvenlik Duvarı**, bir VM'nin genel IP adresini girin. Veya CIDR gösteriminde sanal makinenin IP adresini içeren bir adres aralığı girin.
+1. Portalda kapsayıcı Kayıt defterinize gidin.
+1. **Ayarlar**altında **güvenlik duvarı ve sanal ağlar**' ı seçin.
+1. Daha önce yapmadıysanız, **Seçili ağlardan**erişime izin vermeyi seçin. 
+1. **Sanal ağlar**altında ağın seçili olmadığından emin olun.
+1. **Güvenlik duvarı**altında, bir VM 'nın genel IP adresini girin. Ya da VM 'nin IP adresini içeren CıDR gösteriminde bir adres aralığı girin.
 1. **Kaydet**’i seçin.
 
-![Kapsayıcı kayıt defteri için güvenlik duvarı kuralı yapılandırma][acr-vnet-firewall-portal]
+![Kapsayıcı kayıt defteri için güvenlik duvarı kuralını yapılandırma][acr-vnet-firewall-portal]
 
-Devam [kayıt defterine erişim doğrulayın](#verify-access-to-the-registry).
+[Kayıt defterine erişimi doğrulamaya](#verify-access-to-the-registry)devam edin.
 
-## <a name="verify-access-to-the-registry"></a>Kayıt defteri erişimi doğrulayın
+## <a name="verify-access-to-the-registry"></a>Kayıt defterine erişimi doğrulama
 
-Güncelleştirilecek yapılandırma için birkaç dakika bekledikten sonra VM kapsayıcı kayıt defterine erişebildiğinizden emin olun. Sanal makinenizde bir SSH bağlantısı ve çalıştırma [az acr oturum açma][az-acr-login] kayıt defterinizde oturum açma komutu. 
+Yapılandırmanın güncelleştirilmesi birkaç dakika bekledikten sonra, sanal makinenin kapsayıcı kayıt defterine erişebildiğini doğrulayın. Sanal makinenize bir SSH bağlantısı oluşturun ve [az ACR Login][az-acr-login] komutunu çalıştırarak kayıt defterinizde oturum açın. 
 
 ```bash
 az acr login --name mycontainerregistry
 ```
 
-Gibi kayıt defteri işlemlerini gerçekleştirebilirsiniz `docker pull` kayıt defterinden bir örnek görüntü çekmek için. Bir görüntü ve etiket değeri kayıt defteri oturum açma sunucusu adıyla (tamamı küçük harf) öneki, kayıt defteri için uygun değiştirin:
+Kayıt defterinden örnek bir görüntü çekmek için `docker pull` Çalıştır gibi kayıt defteri işlemleri gerçekleştirebilirsiniz. Kayıt defteri oturum açma sunucusu adı (tümü küçük harf) önekini kullanarak kayıt defteriniz için uygun bir görüntü ve etiket değeri koyun:
 
 ```bash
 docker pull mycontainerregistry.azurecr.io/hello-world:v1
 ``` 
 
-Docker görüntüsünü sanal Makineye başarıyla çeker.
+Docker görüntüyü sanal makineye başarıyla çeker.
 
-Bu örnek, özel kapsayıcı kayıt defteri ağ erişim kuralı erişebilirsiniz gösterir. Ancak, kayıt defteri, yapılandırılmış bir ağ erişim kuralına sahip olmayan farklı bir oturum açma konaktan erişilemiyor. Kullanarak başka bir konaktan oturum açmaya çalışırsanız `az acr login` komutu veya `docker login` komut çıktısı aşağıdakine benzer:
+Bu örnekte, özel kapsayıcı kayıt defterine ağ erişim kuralıyla erişebileceğiniz gösterilmektedir. Ancak, kayıt defterine, yapılandırılmış bir ağ erişim kuralına sahip olmayan farklı bir oturum açma konağından erişilemez. `az acr login` komutunu veya `docker login` komutunu kullanarak başka bir konaktan oturum açmaya çalışırsanız, çıkış aşağıdakine benzer:
 
 ```Console
 Error response from daemon: login attempt to https://xxxxxxx.azurecr.io/v2/ failed with status: 403 Forbidden
 ```
 
-## <a name="restore-default-registry-access"></a>Varsayılan kayıt defteri erişimini geri yükleme
+## <a name="restore-default-registry-access"></a>Varsayılan kayıt defteri erişimini geri yükle
 
-Varsayılan olarak erişime izin verecek şekilde kayıt defterini geri yüklemek için yapılandırılmış ağ kuralları kaldırın. Daha sonra erişime izin vermek için varsayılan eylem ayarlayın. Azure CLI ve Azure portalını kullanarak eşdeğer adımlar verilmiştir.
+Kayıt defterini varsayılan olarak erişime izin verecek şekilde geri yüklemek için, yapılandırılmış tüm ağ kurallarını kaldırın. Ardından, varsayılan eylemi erişime izin verecek şekilde ayarlayın. Azure CLı ve Azure portal ile eşdeğer adımlar sağlanır.
 
-### <a name="restore-default-registry-access---cli"></a>Varsayılan kayıt defteri erişim - CLI
+### <a name="restore-default-registry-access---cli"></a>Varsayılan kayıt defteri erişimini geri yükleme-CLı
 
-#### <a name="remove-network-rules"></a>Ağ kurallarının Kaldır
+#### <a name="remove-network-rules"></a>Ağ kurallarını kaldır
 
-Kayıt için yapılandırılmış ağ kurallarının bir listesini görmek için aşağıdaki komutu çalıştırın. [az acr ağ kural listesi][az-acr-network-rule-list] komutu:
+Kayıt defteriniz için yapılandırılmış ağ kurallarının bir listesini görmek için şu [az ACR Network-Rule List][az-acr-network-rule-list] komutunu çalıştırın:
 
 ```azurecli
 az acr network-rule list--name mycontainerregistry 
 ```
 
-Yapılandırılan her kuralı Çalıştır [az acr ağ kuralını Kaldır][az-acr-network-rule-remove] kaldırmak için komutu. Örneğin:
+Yapılandırılan her kural için [az ACR Network-Rule Remove][az-acr-network-rule-remove] komutunu çalıştırarak kaldırın. Örneğin:
 
 ```azurecli
 # Remove a rule that allows access for a subnet. Substitute the subnet resource ID.
@@ -345,33 +357,33 @@ az acr network-rule remove \
 
 #### <a name="allow-access"></a>Erişime izin ver
 
-Aşağıdaki kayıt defterinizin adıyla değiştirin [az acr update][az-acr-update] komutu:
+Kayıt defterinizin adını şu [az ACR Update][az-acr-update] komutunda değiştirin:
 ```azurecli
 az acr update --name myContainerRegistry --default-action Allow
 ```
 
-### <a name="restore-default-registry-access---portal"></a>Geri yükleme varsayılan kayıt defteri erişim - portal
+### <a name="restore-default-registry-access---portal"></a>Varsayılan kayıt defteri erişimini geri yükleme-Portal
 
 
-1. Portalda, kapsayıcı kayıt defterinize gidin ve seçin **güvenlik duvarı ve sanal ağlar**.
-1. Altında **sanal ağlar**, her bir sanal ağ seçin ve ardından **Kaldır**.
-1. Altında **Güvenlik Duvarı**, her bir adres aralığı seçin ve ardından Sil simgesini seçin.
-1. Altında **erişime izin verecek**seçin **tüm ağlar**. 
+1. Portalda kapsayıcı Kayıt defterinize gidin ve **güvenlik duvarı ve sanal ağlar '** ı seçin.
+1. **Sanal ağlar**altında, her bir sanal ağı seçin ve ardından **Kaldır**' ı seçin.
+1. **Güvenlik duvarı**altında, her bir adres aralığını seçin ve ardından Sil simgesini seçin.
+1. **Erişime Izin ver**' ın altında **tüm ağlar**' ı seçin. 
 1. **Kaydet**’i seçin.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Tüm Azure kaynaklarını aynı kaynak grubunda ve artık ihtiyacınız oluşturduysanız, isteğe bağlı olarak kaynakları tek bir kullanarak silebilirsiniz [az grubu Sil](/cli/azure/group) komutu:
+Tüm Azure kaynaklarını aynı kaynak grubunda oluşturduysanız ve artık gerekmiyorsa, tek bir [az Group Delete](/cli/azure/group) komutu kullanarak kaynakları isteğe bağlı olarak silebilirsiniz:
 
 ```azurecli
 az group delete --name myResourceGroup
 ```
 
-Portalda, kaynakları temizlemek için myResourceGroup kaynak grubuna gidin. Kaynak grubu yüklendikten sonra tıklayarak **kaynak grubunu Sil** kaynak grubunu ve burada depolanan kaynakları kaldırmak için.
+Portalda kaynaklarınızı temizlemek için myResourceGroup kaynak grubuna gidin. Kaynak grubu yüklendikten sonra kaynak grubunu **Sil** ' e tıklayarak kaynak grubunu ve burada depolanan kaynakları kaldırın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Birden çok sanal ağ kaynakları ve özellikler bu makalede, ancak kısaca ele alınan. Azure sanal ağ belgeleri, kapsamlı bir şekilde bu konuları kapsamaktadır:
+Bu makalede kısaca çok sayıda sanal ağ kaynağı ve özelliği ele alınmıştır. Azure sanal ağ belgeleri bu konuları kapsamlı bir şekilde ele almaktadır:
 
 * [Sanal ağ](https://docs.microsoft.com/azure/virtual-network/manage-virtual-network)
 * [Alt ağ](https://docs.microsoft.com/azure/virtual-network/virtual-network-manage-subnet)

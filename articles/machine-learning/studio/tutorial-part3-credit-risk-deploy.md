@@ -1,8 +1,8 @@
 ---
-title: '3. Öğretici: Kredi riski model dağıtma'
-titleSuffix: Azure Machine Learning Studio
-description: Azure Machine Learning Studio'da bir kredi riski değerlendirmesi için Tahmine dayalı analiz çözümü oluşturmayı gösteren ayrıntılı bir öğretici. Bu öğretici üç üç bölümlü öğretici serisinin bir parçasıdır. Bu model bir web hizmeti olarak dağıtma işlemi gösterilmektedir.
-keywords: Kredi riski, Tahmine dayalı analiz çözümü, risk değerlendirmesi, dağıtma, web hizmeti
+title: 'Öğretici 3: Kredi risk modelini dağıtma'
+titleSuffix: ML Studio (classic) - Azure
+description: Azure Machine Learning Studio klasik sürümünde kredi riski değerlendirmesi için tahmine dayalı bir analiz çözümü oluşturmayı gösteren ayrıntılı bir öğretici. Bu öğretici, üç bölümden oluşan bir öğretici serisinin üçüncü bölümüdür. Bir modelin Web hizmeti olarak nasıl dağıtılacağını gösterir.
+keywords: kredi riski, tahmine dayalı analiz çözümü, risk değerlendirmesi, dağıtma, Web hizmeti
 author: sdgilley
 ms.author: sgilley
 services: machine-learning
@@ -10,230 +10,228 @@ ms.service: machine-learning
 ms.subservice: studio
 ms.topic: tutorial
 ms.date: 02/11/2019
-ms.openlocfilehash: 6cdccd54546296c85864f1588b71109ed8b8f79f
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 4e8e8a114a06029ef9a81d92b60afd575bc9661f
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60734805"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73839497"
 ---
-# <a name="tutorial-3-deploy-credit-risk-model---azure-machine-learning-studio"></a>3. Öğretici: Kredi riski model - Azure Machine Learning Studio dağıtma
+# <a name="tutorial-3-deploy-credit-risk-model---azure-machine-learning-studio-classic"></a>Öğretici 3: Kredi risk modelini dağıtma-Azure Machine Learning Studio (klasik)
 
-Bu öğreticide, bir Tahmine dayalı analiz çözümü geliştirme işleminin genişletilmiş bir göz atın. Machine Learning Studio'da basit bir model geliştirmektir.  Ardından bir Azure Machine Learning web hizmeti olarak modeli dağıtacağız.  Bu dağıtılmış modelin yeni verileri kullanarak tahmin yapabileceği. Bu öğretici **üç bölümlü öğretici bir serinin üçüncü bölümü**.
+Bu öğreticide, tahmine dayalı bir analiz çözümü geliştirme sürecinde genişletilmiş bir görünüm elde edersiniz. Machine Learning Studio (klasik) içinde basit bir model geliştirirsiniz.  Daha sonra modeli bir Azure Machine Learning Web hizmeti olarak dağıtabilirsiniz.  Bu dağıtılan model yeni verileri kullanarak tahminleri yapabilir. Bu öğretici, **üç bölümden oluşan bir öğretici serisinin üçüncü bölümüdür**.
 
 Bir kişinin kredi başvurusunda verdiği bilgilere dayanarak kredi riskini tahmin etmeniz gerektiğini varsayalım.  
 
-Kredi riski değerlendirmesi karmaşık bir sorundur ancak bu öğreticide, bir bit basitleştirir. Microsoft Azure Machine Learning Studio'yu kullanarak Tahmine dayalı analiz çözümü nasıl oluşturabileceğinize dair bir örnek olarak kullanacaksınız. Azure Machine Learning Studio ve Machine Learning web hizmeti bu çözüm için kullanacaksınız. 
+Kredi risk değerlendirmesi karmaşık bir sorundur, ancak bu öğreticide bir bit basitleştirilmesi sağlanır. Bunu, Microsoft Azure Machine Learning Studio (klasik) kullanarak tahmine dayalı analiz çözümü oluşturma hakkında bir örnek olarak kullanacaksınız. Bu çözüm için Azure Machine Learning Studio klasik sürümünü ve bir Machine Learning Web hizmetini kullanacaksınız. 
 
-Üç bölümü olan Bu öğreticide, genel kullanıma açık kredi risk verileriyle başlayın.  Ardından geliştirin ve Tahmine dayalı bir model eğitip.  Son olarak modeli bir web hizmeti olarak dağıtalım.
+Bu üç bölümden oluşan öğreticide, genel kullanıma açık kredi riski verileriyle karşılaşırsınız.  Daha sonra tahmine dayalı bir model geliştirip eğirsiniz.  Son olarak, modeli bir Web hizmeti olarak dağıtırsınız.
 
-İçinde [öğreticinin birinci kısmında](tutorial-part1-credit-risk.md), bir Machine Learning Studio çalışma alanı oluşturulduğunda, veri karşıya yüklendi ve bir deneme oluşturulur.
+[Öğreticinin bir parçası](tutorial-part1-credit-risk.md)olarak bir Machine Learning Studio (klasik) çalışma alanı oluşturdunuz, verileri karşıya yükledi ve bir deneme oluşturdunuz.
 
-İçinde [öğreticinin İkinci bölüm](tutorial-part2-credit-risk-train.md), eğitim ve modelleri değerlendirilir.
+[Öğreticinin ikinci bölümünde](tutorial-part2-credit-risk-train.md), modellerinizi eğitildiniz ve değerlendirdiniz.
 
-Öğreticinin bu bölümünde:
+Öğreticinin bu bölümünde şunları yapabilirsiniz:
 
 > [!div class="checklist"]
-> * Dağıtım için hazırlanma
+> * Dağıtıma hazırlanma
 > * Web hizmetini dağıtma
-> * Web hizmetini test edin
+> * Web hizmetini test etme
 > * Web hizmetini yönetme
 > * Web hizmetine erişme
 
-[!INCLUDE [machine-learning-free-trial](../../../includes/machine-learning-free-trial.md)]
-
 ## <a name="prerequisites"></a>Önkoşullar
 
-Tam [öğreticinin İkinci bölüm](tutorial-part2-credit-risk-train.md).
+[Öğreticinin ikinci bölümünü](tutorial-part2-credit-risk-train.md)doldurun.
 
-## <a name="prepare-for-deployment"></a>Dağıtım için hazırlanma
-Başkalarının Bu öğreticide geliştirdik Tahmine dayalı bir model kullanmak için bir fırsat vermek için bunu azure'da bir web hizmeti olarak dağıtabilirsiniz.
+## <a name="prepare-for-deployment"></a>Dağıtıma hazırlanma
+Başkalarına bu öğreticide geliştirdiğiniz tahmine dayalı modeli kullanma şansı vermek için, Azure 'da Web hizmeti olarak dağıtabilirsiniz.
 
-Bu noktaya kadar modelimizi eğitim ile denemeler. Ancak, dağıtılmış hizmet artık eğitim yapacak - kullanıcının girişi bizim modele dayalı Puanlama tarafından yeni tahminler üretmek gittiği. Biz bu denemeden dönüştürmek için bazı hazırlıklar yapacağız şekilde bir ***eğitim*** için deneme bir ***Tahmine dayalı*** denemeler yapın. 
+Modelimizi eğitmek için bu noktaya kadar deneme yapmış olursunuz. Ancak dağıtılan hizmet artık eğitimi yapamayacak. modelimize bağlı olarak kullanıcının girişini Puanlama yoluyla yeni tahminler oluşturacağız. Bu nedenle, bu denemeyi bir ***eğitim deneyminden*** tahmine ***dayalı*** bir deneyle dönüştürmek için bazı hazırlıklar yapacağız. 
 
-Dağıtım için üç adımlık bir işlemdir:  
+Dağıtım hazırlığı üç adımlı bir işlemdir:  
 
-1. Modelleri birini kaldırın
-1. Dönüştürme *eğitim denemesini* içinde oluşturduğunuz bir *Tahmine dayalı denemeye*
-1. Tahmine dayalı denemeye bir web hizmeti olarak dağıtma
+1. Modellerden birini kaldırma
+1. Oluşturduğunuz Eğitim denemesini tahmine dayalı bir *deneyle* dönüştürün
+1. Tahmine dayalı denemeyi Web hizmeti olarak dağıtma
 
-### <a name="remove-one-of-the-models"></a>Modelleri birini kaldırın
+### <a name="remove-one-of-the-models"></a>Modellerden birini kaldırma
 
-İlk olarak, bu deneme aşağı biraz trim gerekir. şu anda iki farklı modelleri deneme vardır, ancak yalnızca, bu web hizmeti olarak dağıttığınızda, bir model kullanmak istiyorsunuz.  
+İlk olarak, bu denemeyi biraz daha az kırpabilmeniz gerekir. Şu anda denemenin iki farklı modeli vardır, ancak bunu bir Web hizmeti olarak dağıtırken yalnızca bir model kullanmak istersiniz.  
 
-Artırmalı ağaç modeli SVM modelin daha iyi gerçekleştirilen verdiyseniz varsayalım. Yapılacak ilk şey kaldırmak, bu nedenle [iki sınıflı destekli vektör makinesi] [ two-class-support-vector-machine] modülü ve eğitim için kullanılan modül. Tıklayarak denemenin bir kopyasını önce yapmak isteyebileceğiniz **Kaydet** deneme tuvalinin altındaki.
+Daha önce, artırılmış ağaç modelinin SVM modelinden daha iyi gerçekleştirildiğinden emin olalım. Yani ilk yapmanız gereken [Iki sınıf destek vektör makinesi][two-class-support-vector-machine] modülünü ve bunu eğitmek için kullanılan modülleri kaldırdık. Deneme tuvalinin en altında **farklı kaydet** ' e tıklayarak önce denemenin bir kopyasını oluşturmak isteyebilirsiniz.
 
-Aşağıdaki modüller Sil yapmanız gerekir:  
+aşağıdaki modülleri silmeniz gerekir:  
 
-* [İki sınıflı destekli vektör makinesi][two-class-support-vector-machine]
-* [Modeli eğitme] [ train-model] ve [Score Model] [ score-model] ona bağlı modüller
-* [Veri Normalleştir] [ normalize-data] (her ikisi)
-* [Modeli değerlendirme] [ evaluate-model] (biz tamamlanmış değerlendirme modelleri için)
+* [İki sınıflı destek vektör makinesi][two-class-support-vector-machine]
+* Modele bağlı model ve [puan modeli][score-model] modüllerini [eğitme][train-model]
+* [Verileri Normalleştir][normalize-data] (her ikisi de)
+* [Modeli değerlendir][evaluate-model] (modellerin değerlendirilmesi tamamlandığımızda)
 
-Her modülü seçin ve Delete tuşuna basın veya modül sağ tıklayıp **Sil**. 
+Her modülü seçin ve DELETE tuşuna basın veya modüle sağ tıklayıp **Sil**' i seçin. 
 
-![Destekli vektör makinesi modeli kaldırılacağı silmek için hangi modülü vurgular](./media/tutorial-part3-credit-risk-deploy/publish3a.png)
+![Destek vektör makinesi modelini kaldırmak için hangi modüllerin silineceğini vurgular](./media/tutorial-part3-credit-risk-deploy/publish3a.png)
 
-Modelimiz şöyle görünmelidir:
+Modelimiz şu şekilde bir şekilde görünmelidir:
 
-![Destekli vektör makinesi modeli silindiğinde elde edilen deneme](./media/tutorial-part3-credit-risk-deploy/publish3.png)
+![Destek vektör makine modeli silindiğinde ortaya çıkan deneme](./media/tutorial-part3-credit-risk-deploy/publish3.png)
 
-Bu modeli kullanarak dağıtmak hazırız artık [iki sınıflı artırılmış karar ağacı][two-class-boosted-decision-tree].
+Şimdi, bu modeli [Iki sınıf önceden artırılmış karar ağacını][two-class-boosted-decision-tree]kullanarak dağıtmaya hazırız.
 
-### <a name="convert-the-training-experiment-to-a-predictive-experiment"></a>Eğitim denemesini öngörücü bir denemeye dönüştürme
+### <a name="convert-the-training-experiment-to-a-predictive-experiment"></a>Eğitim denemesini tahmine dayalı bir deneyle Dönüştür
 
-Bu model dağıtım için hazır hale getirmek için bu eğitim denemesini öngörücü bir denemeye dönüştürme gerekir. Bu üç adımdan oluşur:
+Bu modeli dağıtıma hazırlamak için, bu eğitim denemesini bir tahmine dayalı deneyle dönüştürmeniz gerekir. Bu üç adımdan oluşur:
 
-1. Modeli eğittiğimize ve ardından bizim eğitim modüllerinin yerine geçer kaydedin
-1. Eğitim için yalnızca gerekli olan modülleri kaldırmak için denemeyi Kırp
-1. Burada, web hizmeti giriş kabul eder ve burada Bu çıktıyı oluşturur tanımlayın
+1. Eğitilen modeli kaydedin ve ardından eğitim modüllerimizi değiştirin
+1. Yalnızca eğitim için gereken modülleri kaldırma denemesinin kırpmasını yapın
+1. Web hizmetinin girişi kabul edeceğini ve çıktının nerede oluşturduğu yeri tanımlayın
 
-Bunu el ile yapabilirsiniz, ancak tıklayarak üç adımı Neyse gerçekleştirilebilir **Web hizmetinin ayarı** deneme tuvalinin altındaki (ve seçerek **Tahmine dayalı Web hizmeti** seçeneği).
+Bunu el ile yapabilirsiniz ancak neyse ki, deneme tuvalinin alt kısmındaki **Web hizmeti ayarla** öğesine tıklanarak (tahmine **dayalı Web hizmeti** seçeneği seçilerek) tüm üç adımı gerçekleştirebilirsiniz.
 
 > [!TIP]
-> Daha ayrıntılı bilgi isterseniz ne olur eğitim denemesini öngörücü bir denemeye dönüştürme yaptığınızda, bkz: [modelinizin Azure Machine Learning Studio'da dağıtımına hazırlamak nasıl](convert-training-experiment-to-scoring-experiment.md).
+> Bir eğitim denemesini tahmine dayalı bir deneyle dönüştürdüğünüzde ne olacağı hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Machine Learning Studio (klasik) dağıtım için modelinizi hazırlama](convert-training-experiment-to-scoring-experiment.md).
 
-Tıkladığınızda **Web hizmetinin ayarı**, olacaklar:
+**Web hizmeti ayarla**' ya tıkladığınızda birkaç şey meydana gelir:
 
-* Tek bir eğitim modeli dönüştürülür **eğitilen Model** modülü ve deneme tuvaline solundaki modül paletindeki saklı (altında bulabilirsiniz **eğitilen modelleri**)
-* Eğitim için kullanılan modülleri kaldırılır; özellikle:
-  * [İki sınıflı Artırmalı karar ağacı][two-class-boosted-decision-tree]
+* Eğitilen model tek bir **eğitilen model** modülüne dönüştürülür ve deneme tuvalinin solundaki modül paletinde depolanır ( **eğitilen modeller**altında bulabilirsiniz)
+* Eğitim için kullanılan modüller kaldırılır; engelle
+  * [İki sınıf önceden artırılmış karar ağacı][two-class-boosted-decision-tree]
   * [Modeli eğitme][train-model]
-  * [Verileri bölme][split]
-  * İkinci [R betiği yürütme] [ execute-r-script] test verileri için kullanılan modül
-* Kaydedilmiş eğitilen modeli yeniden denemenin eklenir
-* **Web hizmeti giriş** ve **Web hizmeti çıkış** modülleri eklendi (bunlar burada kullanıcının veri modeli girer ve web hizmeti erişim sağlandığında hangi verilerin döndürülen tanımlar)
+  * [Verileri Böl][split]
+  * test verileri için kullanılan ikinci [Execute R betik][execute-r-script] modülü
+* Kaydedilen eğitilen model denemeye geri eklendi
+* **Web hizmeti girişi** ve **Web hizmeti çıkış** modülleri eklendi (Bunlar, kullanıcının verilerinin modeli nereye girebileceklerini ve Web hizmetine erişildiğinde verilerin döndürüleceğini belirler)
 
 > [!NOTE]
-> Denemeyi deneme tuvalinin üst kısmında eklenen sekmeleri altında iki parça kaydedildiğini görebilirsiniz. Özgün eğitim denemesini sekmesi altında olduğunu **eğitim denemesini**, ve yeni oluşturulan Tahmine dayalı denemeye altındadır **Tahmine dayalı denemeye**. Tahmine dayalı denemeye bir web hizmeti olarak dağıtacaksınız olur.
+> Deneyinin, deneme tuvalinin en üstünde eklenen sekmelerin altında iki parçaya kaydedildiğini görebilirsiniz. Özgün eğitim denemesi, **eğitim denemenizin**altındayken yeni oluşturulan tahmine dayalı deneme, tahmine **dayalı denemenin**altında. Tahmine dayalı deneme, Web hizmeti olarak dağıtacağınız bir deneyimdir.
 
-Bu belirli deneme ile bir ek adımı gerçekleştirmeniz gerekir.
-iki eklediğiniz [R betiği yürütme] [ execute-r-script] verileri için bir ağırlık işlevi sağlamak için modüller. Bu modüllerdeki son modelin kullanıma olabilmesi için eğitim ve sınama için gerekli bir kandırma oluştu.
-Machine Learning Studio'da bir kaldırıldı [R betiği yürütme] [ execute-r-script] kaldırdığınızda, modül [bölünmüş] [ split] modülü. Şimdi diğer kaldırın ve connect [meta verileri Düzenleyicisi] [ metadata-editor] doğrudan [Score Model][score-model].    
+Bu deneyle ek bir adım gerçekleştirmeniz gerekir.
+verilere bir ağırlık işlevi sağlamak için iki [Execute R betik][execute-r-script] modülü eklediniz. Bu, yalnızca eğitim ve test için gerekli olan bir eliydi ve bu modülleri son modelde alabilirsiniz.
+Machine Learning Studio (klasik) [bölme][split] modülünü kaldıran bir [Execute R betik][execute-r-script] modülünü kaldırdı. Artık diğer ve bağlantı [meta verileri düzenleyicisini][metadata-editor] doğrudan [model Puanlama][score-model]' ne gönderebilirsiniz.    
 
-Bizim deneme gibi görünmelidir:  
+Deneme mız şu şekilde görünmelidir:  
 
-![Eğitim modeli Puanlama](./media/tutorial-part3-credit-risk-deploy/publish4.png)
+![Eğitilen modeli Puanlama](./media/tutorial-part3-credit-risk-deploy/publish4.png)
 
 
 > [!NOTE]
-> UCI Almanca kredi kartı verileri veri kümesi Tahmine dayalı denemeye neden bıraktığınız merak ediyor olabilirsiniz. Hizmet değil özgün veri kümesinden kullanıcı verilerini puanlamak için neden özgün veri kümesinden modelde geliştirmediğinden geçiyor?
+> Tahmine dayalı denemenize ait UCı Almanya kredi kartı veri veri kümesini neden solınızdan merak ediyor olabilirsiniz. Hizmet özgün veri kümesine değil kullanıcının verilerini puanlıyor, bu nedenle özgün veri kümesini neden modelde bıraksın?
 > 
-> Hizmet asıl kredi kartı verileriyle gerektirmeyeceği geçerlidir. Ancak, şema vardır, kaç sütun gibi bilgileri içerir ve hangi sütunların sayısal bu veriler için gerekir. Bu şema bilgileri, kullanıcının verileri yorumlamak gereklidir. hizmet çalışırken, veri kümesi şemasını Puanlama modülü sahip olacak şekilde bağlı bu bileşenlerin bırakır. Verileri kullanılmaz, yalnızca şema.  
+> Hizmetin orijinal kredi kartı verilerine ihtiyacı yoktur. Ancak, bu verilerin şemasına ihtiyacı vardır. Bu, kaç sütun olduğunu ve hangi sütunların sayısal olduğunu belirten bilgiler içerir. Bu şema bilgileri, kullanıcının verilerini yorumlamak için gereklidir. hizmet çalışırken Puanlama modülünün veri kümesi şemasına sahip olması için bu bileşenleri bağlı bırakmalısınız. Veriler kullanılmaz, yalnızca şema.  
 > 
->Dikkat edilecek önemli bir unsur, özgün veri etiketi içeriyorsa, ardından web girdisinden beklenen şema ayrıca etiketli bir sütun beklediğiniz olan! Etiket ve diğer verileri, eğitim kümesinde olan ancak web girişlerinde web giriş ve eğitim veri kümesi, ortak bir modüle bağlanmadan önce olmaz, bu kullanacağınızı kaldırmaktır. 
+>Dikkat edilmesi gereken önemli nokta, özgün veri kümeniz etiketi içeriyorsa, Web girişinden beklenen şemanın de etiketi olan bir sütun beklediği bir şeydir! Bunu yapmanın bir yolu, etiketi ve eğitim veri kümesindeki diğer tüm verileri kaldırmanız, ancak web girişi ve eğitim veri kümesini ortak bir modüle bağlamadan önce Web girişlerinde olmayacaktır. 
 > 
 
-Son bir kez denemeyi çalıştırın (tıklayın **çalıştırma**.) Modelin hala çalıştığından emin olmak istiyorsanız, çıktısını tıklayın [Score Model] [ score-model] modülü ve select **sonuçlarını görüntüle**. Özgün veriler, kredi riski değeri ("Puanlanmış etiketler") ve puanlama olasılık değeri ("Puanlanmış olasılıklar".) ile birlikte görüntülendiğini görebilirsiniz. 
+Deneme süresini bir kez çalıştırın ( **Çalıştır**' a tıklayın.) Modelin hala çalıştığını doğrulamak istiyorsanız, [puan modeli][score-model] modülünün çıktısına tıklayın ve **sonuçları görüntüle**' yi seçin. Orijinal verilerin, kredi riski değeri ("puanlanmış Etiketler") ve Puanlama olasılık değeri ("puanlanmış olasılıkların") ile birlikte görüntülendiğini görebilirsiniz. 
 
 ## <a name="deploy-the-web-service"></a>Web hizmetini dağıtma
-Denemeyi ya da bir Klasik web hizmeti olarak veya Azure Resource Manager'a bağlı yeni bir web hizmeti olarak dağıtabilirsiniz.
+Denemeyi klasik bir Web hizmeti olarak veya Azure Resource Manager dayalı yeni bir Web hizmeti olarak dağıtabilirsiniz.
 
-### <a name="deploy-as-a-classic-web-service"></a>Klasik web hizmeti olarak dağıtma
-Bizim denemeden türetilmiş bir Klasik web hizmetini dağıtmak için **Web hizmeti Dağıt** seçin ve tuval aşağıda **Web hizmeti dağıtma [Klasik]**. Machine Learning Studio web hizmeti olarak denemeyi dağıtır ve bu web hizmeti için panoya alır. Bu sayfadan deney için döndürebilir (**anlık görüntüsünü görüntüle** veya **görüntülemek son**) ve web hizmeti basit bir test çalıştırın (bkz **web hizmetini Test** aşağıda). (Daha fazla bilgi, bu öğreticinin sonraki adımda) web hizmetine erişebilen uygulamaları oluşturmak için buradaki bilgiler de mevcuttur.
+### <a name="deploy-as-a-classic-web-service"></a>Klasik Web hizmeti olarak dağıtma
+Denediğimiz bir klasik Web hizmetini dağıtmak için, tuvalin altında **Web Hizmeti Dağıt** ' a tıklayın ve **Web Hizmeti Dağıt [klasik]** seçeneğini belirleyin. Machine Learning Studio (klasik), denemeyi bir Web hizmeti olarak dağıtır ve sizi o Web hizmeti panosuna götürür. Bu sayfadan denemeye geri dönebilir (**anlık görüntü** veya **en sonuncuyu**görüntüleme) ve Web hizmetinin basit bir testini çalıştırabilirsiniz (bkz. **Test Web hizmeti** ). Burada Web hizmetine erişebilen uygulamalar (Bu öğreticinin sonraki adımında daha fazla) oluşturmak için buradaki bilgiler de vardır.
 
-![Web hizmet Panosu](./media/tutorial-part3-credit-risk-deploy/publish6.png)
-
-
-Tıklayarak hizmeti yapılandırabilirsiniz **yapılandırma** sekmesi. (Bunu verilen deney adı varsayılan olarak) hizmet adını burada değiştirebilirsiniz ve bir açıklama girin. Daha fazla kolay etiketler için girdi ve çıktı verilerini de tanıyabilirsiniz.  
-
-![Web hizmetini yapılandır](./media/tutorial-part3-credit-risk-deploy/publish5.png)
+![Web hizmeti panosu](./media/tutorial-part3-credit-risk-deploy/publish6.png)
 
 
-### <a name="deploy-as-a-new-web-service"></a>Yeni bir web hizmeti dağıtma
+**Yapılandırma** sekmesine tıklayarak hizmeti yapılandırabilirsiniz. Burada, hizmet adını değiştirebilirsiniz (varsayılan olarak deneme adı verilir) ve buna bir açıklama verin. Giriş ve çıkış verileri için daha kolay Etiketler de verebilirsiniz.  
+
+![Web hizmetini yapılandırma](./media/tutorial-part3-credit-risk-deploy/publish5.png)
+
+
+### <a name="deploy-as-a-new-web-service"></a>Yeni bir Web hizmeti olarak dağıtma
 
 > [!NOTE] 
-> Yeni bir web hizmetini dağıtmak için web hizmetini dağıttığınız aboneliğe yeterli izinleri olmalıdır. Daha fazla bilgi için [Azure Machine Learning Web Hizmetleri portalını kullanarak bir web hizmetini yönetme](manage-new-webservice.md). 
+> Yeni bir Web hizmeti dağıtmak için, Web hizmetini dağıttığınız abonelikte yeterli izinlere sahip olmanız gerekir. Daha fazla bilgi için, [Azure Machine Learning Web Hizmetleri portalını kullanarak bir Web hizmetini yönetme](manage-new-webservice.md)makalesine bakın. 
 
-Yeni bir web hizmetini dağıtmak için sunduğumuz denemeden türetilmiş:
+Denediğimiz yeni bir Web hizmetini dağıtmak için:
 
-1. Tıklayın **Web hizmeti Dağıt** seçin ve tuval aşağıda **Web hizmeti dağıtma [Yeni]**. Machine Learning Studio, Azure Machine Learning web hizmetlerini aktarır **dağıtma deneme** sayfası.
+1. Tuvalin altında **Web Hizmeti Dağıt** ' a tıklayın ve **Web Hizmeti Dağıt [yeni]** seçeneğini belirleyin. Machine Learning Studio (klasik) sizi Azure Machine Learning Web Hizmetleri **dağıtım** denemesi sayfasına aktarır.
 
 1. Web hizmeti için bir ad girin. 
 
-1. İçin **fiyat planı**, bir devrenin fiyatlandırma planını seçin veya "Yeni Oluştur" seçebilir ve yeni plan bir ad verin ve aylık plan seçeneğini belirleyin. Hizmetinizi varsayılan bölgeden ve web hizmetiniz için planlar plan katmanları varsayılan bu bölgeye dağıtılır.
+1. **Fiyat planı**için, mevcut bir fiyatlandırma planı seçebilir veya "Yeni oluştur" seçeneğini belirleyip yeni plana bir ad verebilir ve aylık plan seçeneğini belirleyebilirsiniz. Varsayılan bölgeniz ve Web hizmetiniz için plan katmanları varsayılan olarak bu bölgeye dağıtılır.
 
-1. Tıklayın **dağıtma**.
+1. **Dağıt**' a tıklayın.
 
-Birkaç dakika sonra **hızlı** web hizmetiniz için sayfası açılır.
+Birkaç dakika sonra, Web hizmetiniz için **hızlı başlangıç** sayfası açılır.
 
-Tıklayarak hizmeti yapılandırabilirsiniz **yapılandırma** sekmesi. Hizmet burada değiştirebilirsiniz başlığı ve bir açıklama girin. 
+**Yapılandır** sekmesine tıklayarak hizmeti yapılandırabilirsiniz. Burada hizmet başlığını değiştirebilir ve bir açıklama verebilirsiniz. 
 
-Web hizmetini test etmek için **Test** sekme (bkz **web hizmetini Test** aşağıda). Web hizmetine erişebilen uygulamaları oluşturma hakkında daha fazla bilgi için tıklatın **Tüket** (Bu öğreticinin sonraki adımında, daha fazla ayrıntıya yazılacak) sekmesi.
-
-> [!TIP]
-> Bunu dağıttıktan sonra web hizmeti güncelleştirebilirsiniz. Örneğin, eğitim denemesini düzenleyebilir, sonra da, modelinizde değiştirmek istiyorsanız, model parametrelerinin ince ve tıklayın **Web hizmeti Dağıt**u seçerek **Web hizmeti dağıtma [Klasik]** veya **[Yeni] Web hizmetini dağıtma**. Denemeyi yeniden dağıttığınızda, artık güncelleştirilmiş model kullanarak web hizmeti değiştirir.  
-> 
-> 
-
-## <a name="test-the-web-service"></a>Web hizmetini test edin
-
-Web hizmeti erişim sağlandığında aracılığıyla kullanıcının veri girer **Web hizmeti giriş** burada da geçirilir Modülü [Score Model] [ score-model] modülü ve puanlanmış. Tahmine dayalı denemeye belirlediğiniz şekilde, özgün kredi riski veri kümesi ile aynı biçimde veri modeli bekliyor.
-Sonuçları kullanıcıya web hizmeti aracılığıyla döndürülen **Web hizmeti çıkış** modülü.
+Web hizmetini test etmek için, **Test** sekmesine tıklayın (aşağıdaki **Web hizmetini test** edin). Web hizmetine erişebilen uygulamalar oluşturma hakkında daha fazla bilgi **için, kullanma sekmesine tıklayın** (bu öğreticideki bir sonraki adım daha fazla ayrıntıya gidecektir).
 
 > [!TIP]
-> Tüm yapılandırılmış, Tahmine dayalı denemeye sahip olduğunuz şekilde oluşur [Score Model] [ score-model] modülü döndürülür. Bu, tüm giriş verilerini ayrıca kredi riski değeri ve puanlama olasılık içerir. Ancak isterseniz farklı bir şey döndürebilir; Örneğin, yalnızca kredi riski değer döndürebilir. Bunu yapmak için INSERT bir [Sütunları Seç] [ select-columns] arasında Modülü [Score Model] [ score-model] ve **Web hizmeti çıkış**döndürmek için web hizmeti istemediğiniz sütunları ortadan kaldırmak için. 
+> Web hizmetini dağıttıktan sonra güncelleştirebilirsiniz. Örneğin, modelinizi değiştirmek istiyorsanız Eğitim denemesini düzenleyebilir, model parametrelerini ince ayar ve **Web**hizmeti dağıt, **Web Hizmeti Dağıt [klasik]** veya **Web hizmetini dağıtma [yeni]** ' ya tıklayabilirsiniz. Denemeyi yeniden dağıttığınızda, şimdi güncelleştirilmiş modelinizi kullanarak Web hizmetinin yerini alır.  
 > 
 > 
 
-Klasik web test edebilirsiniz ya da hizmet **Machine Learning Studio** veya **Azure Machine Learning Web Hizmetleri** portalı.
-Yeni bir web test edebilirsiniz yalnızca hizmet **Machine Learning Web Hizmetleri** portalı.
+## <a name="test-the-web-service"></a>Web hizmetini test etme
+
+Web hizmetine erişildiğinde, kullanıcının verileri, [puan modeli modülüne ve puanına][score-model] geçirildiği **Web hizmeti giriş** modülüne girer. Tahmine dayalı denemeyi ayarlama yönteminiz, model, verileri orijinal kredi riski veri kümesiyle aynı biçimde bekler.
+Sonuçlar Web hizmetinden **Web hizmeti çıkış** modülü aracılığıyla kullanıcıya döndürülür.
 
 > [!TIP]
-> Azure Machine Learning Web Hizmetleri portalında test ederken, istek-yanıt hizmeti test etmek için kullanabileceğiniz örnek veriler oluşturma portalı olabilir. Üzerinde **yapılandırma** sayfasında, "Evet" seçeneğini **örnek veriler etkin?**. Üzerinde istek-yanıt sekmesini açtığınızda **Test** sayfasında, portal özgün kredi riski veri kümesinden alınan örnek veriler doldurur.
+> Tahmine dayalı denemenize sahip olduğunuz şekilde, [puan modeli][score-model] modülündeki tüm sonuçlar döndürülür. Bu, tüm giriş verilerini artı kredi riski değerini ve Puanlama olasılığını içerir. Ancak isterseniz farklı bir şey döndürebilirsiniz. Örneğin, yalnızca kredi risk değerini döndürebilirsiniz. Bunu yapmak için, Web hizmetinin döndürmesini istemediğiniz sütunları ortadan kaldırmak için [puan modeli][score-model] ve **Web hizmeti çıkışı** arasına bir [sütun Seç][select-columns] modülü ekleyin. 
+> 
+> 
 
-### <a name="test-a-classic-web-service"></a>Klasik web hizmetini test edin
+Klasik bir Web hizmetini **Machine Learning Studio (klasik)** veya **Azure Machine Learning Web Hizmetleri** portalında test edebilirsiniz.
+Yeni bir Web hizmetini yalnızca **Machine Learning Web Hizmetleri** portalında test edebilirsiniz.
 
-Machine Learning Studio'da veya Machine Learning Web Hizmetleri portalında bir Klasik web hizmetini test edebilirsiniz. 
+> [!TIP]
+> Azure Machine Learning Web Hizmetleri portalında test edilirken, portalın Istek-yanıt hizmetini test etmek için kullanabileceğiniz örnek veriler oluşturmasını sağlayabilirsiniz. **Yapılandırma** sayfasında, **örnek veriler etkin**olarak "Evet" i seçin. **Test** sayfasındaki Istek-yanıt sekmesini açtığınızda, Portal orijinal kredi riski veri kümesinden alınan örnek verileri doldurur.
 
-#### <a name="test-in-machine-learning-studio"></a>Machine Learning Studio'da test
+### <a name="test-a-classic-web-service"></a>Klasik Web hizmetini test etme
 
-1. Üzerinde **PANO** sayfasında web hizmeti, **Test** düğmesini **varsayılan uç nokta**. Bir iletişim kutusu açılır ve hizmet için bir giriş verisi sorar. Özgün kredi riski kümesinde görünen aynı sütunları şunlardır.  
+Klasik bir Web hizmetini Machine Learning Studio (klasik) veya Machine Learning Web Hizmetleri portalında test edebilirsiniz. 
 
-1. Bir veri kümesini girin ve ardından **Tamam**. 
+#### <a name="test-in-machine-learning-studio-classic"></a>Machine Learning Studio 'de test (klasik)
+
+1. Web hizmetinin **Pano** sayfasında, **varsayılan uç nokta**' ın altındaki **Test** düğmesine tıklayın. Bir iletişim kutusu açılır ve size hizmet için giriş verileri sorulur. Bunlar, orijinal kredi riski veri kümesinde görünen sütunlardır.  
+
+1. Bir veri kümesi girin ve ardından **Tamam**' a tıklayın. 
 
 #### <a name="test-in-the-machine-learning-web-services-portal"></a>Machine Learning Web Hizmetleri portalında test etme
 
-1. Üzerinde **PANO** sayfasında web hizmeti, **Test Önizleme** altında bağlantı **varsayılan uç nokta**. Azure Machine Learning Web Hizmetleri portalında web hizmeti uç noktası için test sayfası açılır ve hizmet için bir giriş verisi ister. Özgün kredi riski kümesinde görünen aynı sütunları şunlardır.
+1. Web hizmetinin **Pano** sayfasında, **varsayılan uç nokta**altındaki **Test önizlemesi** bağlantısına tıklayın. Web hizmeti uç noktası için Azure Machine Learning Web Hizmetleri portalındaki sınama sayfası açılır ve size hizmet için giriş verileri ister. Bunlar, orijinal kredi riski veri kümesinde görünen sütunlardır.
 
-2. Tıklayın **Test istek-yanıt**. 
+2. **Test isteği-yanıt**öğesine tıklayın. 
 
-### <a name="test-a-new-web-service"></a>Yeni bir web hizmetini test edin
+### <a name="test-a-new-web-service"></a>Yeni bir Web hizmetini test etme
 
-Yalnızca Machine Learning Web Hizmetleri portalında yeni bir web hizmetini test edebilirsiniz.
+Yeni bir Web hizmetini yalnızca Machine Learning Web Hizmetleri portalında test edebilirsiniz.
 
-1. İçinde [Azure Machine Learning Web Hizmetleri](https://services.azureml.net/quickstart) portal'ı tıklatın **Test** sayfanın üstünde. **Test** sayfası açılır ve hizmet için veri girebilirsiniz. Görüntülenen giriş alanları, özgün kredi riski kümesinde görünen sütunlara karşılık gelir. 
+1. [Azure Machine Learning Web Hizmetleri](https://services.azureml.net/quickstart) portalında, sayfanın üst kısmındaki **Test** ' e tıklayın. **Test** sayfası açılır ve hizmet için veri girişi yapabilirsiniz. Görüntülenen giriş alanları, orijinal kredi riski veri kümesinde görünen sütunlara karşılık gelir. 
 
-1. Bir veri kümesini girin ve ardından **Test istek-yanıt**.
+1. Bir veri kümesi girin ve ardından **Test isteği-yanıtı**' na tıklayın.
 
-Test sonuçlarını, çıkış sütununun sayfanın sağ tarafında görüntülenir. 
+Testin sonuçları, çıkış sütunundaki sayfanın sağ tarafında görüntülenir. 
 
 
 ## <a name="manage-the-web-service"></a>Web hizmetini yönetme
 
-Web hizmetinizi Klasik veya yeni dağıttıktan sonra buradan yönetebilirsiniz [Microsoft Azure Machine Learning Web Hizmetleri](https://services.azureml.net/quickstart) portalı.
+Klasik veya yeni bir Web hizmetinizi dağıttıktan sonra, [Microsoft Azure Machine Learning Web Hizmetleri](https://services.azureml.net/quickstart) portalından yönetebilirsiniz.
 
 Web hizmetinizin performansını izlemek için:
 
-1. Oturum [Microsoft Azure Machine Learning Web Hizmetleri](https://services.azureml.net/quickstart) portalı
-1. Tıklayın **Web Hizmetleri**
-1. Web hizmeti
-1. Tıklayın **Panosu**
+1. [Microsoft Azure Machine Learning Web Hizmetleri](https://services.azureml.net/quickstart) portalında oturum açın
+1. **Web Hizmetleri** ' ne tıklayın
+1. Web hizmetinize tıklayın
+1. **Panoya** tıklayın
 
 ## <a name="access-the-web-service"></a>Web hizmetine erişme
 
-Bu öğreticide önceki adımda, kredi riskini tahmin modeli kullanan bir web hizmetini dağıttığınız. Artık kullanıcıların veri göndermek ve sonuçları almak kullanabilirsiniz. 
+Bu öğreticinin önceki adımında, kredi riski tahmin modelini kullanan bir Web hizmeti dağıttınız. Artık kullanıcılar bu verilere veri gönderebiliyor ve sonuç alabilir. 
 
-Web hizmeti, alabilir ve dönüş verileri iki yöntemden biriyle REST API'lerini kullanarak bir Azure web hizmetidir:  
+Web hizmeti, REST API 'Leri kullanarak verileri alabilen ve döndürebili bir Azure Web hizmetidir:  
 
-* **İstek/yanıt** - kullanıcı bir HTTP protokolünü kullanarak bir veya daha fazla kredi veri satırlarını hizmetine gönderir ve hizmet yanıt veren bir veya daha fazla sonuç kümeleri.
-* **Toplu yürütme** - kullanıcı depolar veya daha fazla satır kredi verileri bir Azure blob ve sonra blob konum hizmetine gönderir. Hizmet giriş blob veri satırı puanlar, başka bir blobun sonuçlarını depolar ve bu kapsayıcı URL'sini döndürür.  
+* **İstek/yanıt** -Kullanıcı http protokolünü kullanarak hizmete bir veya daha fazla kredi verileri satırı gönderir ve hizmet bir veya daha fazla sonuç kümesiyle yanıt verir.
+* **Toplu yürütme** -Kullanıcı bir veya daha fazla kredi verileri satırını bir Azure blobuna depolar ve sonra blob konumunu hizmete gönderir. Hizmet, giriş blobundaki tüm veri satırlarını alır, sonuçları başka bir bloba depolar ve bu kapsayıcının URL 'sini döndürür.  
 
-Klasik web hizmetine erişmek için hızlı ve en kolay yollarından biri sayesinde [Azure ML istek-yanıt hizmeti Web uygulaması](https://azure.microsoft.com/marketplace/partners/microsoft/azuremlaspnettemplateforrrs/) veya [Azure ML toplu iş yürütme hizmeti Web uygulaması şablonunu](https://azure.microsoft.com/marketplace/partners/microsoft/azuremlbeswebapptemplate/).
+Klasik bir Web hizmetine erişmenin en hızlı ve en kolay yolu [Azure ML isteği-yanıt hizmeti Web uygulaması](https://azure.microsoft.com/marketplace/partners/microsoft/azuremlaspnettemplateforrrs/) veya [Azure ML Batch yürütme hizmeti Web uygulaması şablonunu](https://azure.microsoft.com/marketplace/partners/microsoft/azuremlbeswebapptemplate/)kullanmaktır.
 
-Bu web uygulaması şablonları, web hizmetinizin girdi verilerini ve hangi döndüreceği bildiği bir özel web uygulaması oluşturabilirsiniz. Tek yapmak için ihtiyacınız olan web hizmeti ve veri erişim sağlamak ve şablon geri kalanını yapar.
+Bu Web uygulaması şablonları, Web hizmetinizin giriş verilerini ve ne döneceğini bilen özel bir Web uygulaması oluşturabilir. Yapmanız gereken tek şey Web hizmetinize ve verilerinize erişim sağlar ve şablon Rest 'i yapar.
 
-Web uygulaması şablonları kullanma hakkında daha fazla bilgi için bkz. [web uygulaması şablonu ile bir Azure Machine Learning Web hizmetini kullanma](/azure/machine-learning/studio/consume-web-services).
+Web uygulaması şablonlarını kullanma hakkında daha fazla bilgi için bkz. [Web uygulaması şablonuyla Azure Machine Learning Web hizmeti](/azure/machine-learning/studio/consume-web-services)kullanma.
 
 
 
@@ -243,19 +241,19 @@ Web uygulaması şablonları kullanma hakkında daha fazla bilgi için bkz. [web
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, bu adımlar tamamlandı:
+Bu öğreticide, şu adımları tamamladınız:
 
 > [!div class="checklist"]
-> * Dağıtım için hazırlanma
+> * Dağıtıma hazırlanma
 > * Web hizmetini dağıtma
-> * Web hizmetini test edin
+> * Web hizmetini test etme
 > * Web hizmetini yönetme
 > * Web hizmetine erişme
 
-Ayrıca, R, sağlanan başlangıç kodunu kullanarak web hizmetine erişmek için özel bir uygulama geliştirebilirsiniz C#, ve Python programlama dilleri arasındadır.
+Ayrıca, R, C#ve Python programlama dillerinde sunulan başlatıcı kodu kullanarak Web hizmetine erişmek için özel bir uygulama da geliştirebilirsiniz.
 
 > [!div class="nextstepaction"]
-> [Bir Azure Machine Learning Web hizmetini kullanma](consume-web-services.md)
+> [Azure Machine Learning Web hizmeti kullanma](consume-web-services.md)
 
 <!-- Module References -->
 [evaluate-model]: https://msdn.microsoft.com/library/azure/927d65ac-3b50-4694-9903-20f6c1672089/

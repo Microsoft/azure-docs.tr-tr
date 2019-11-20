@@ -1,8 +1,8 @@
 ---
-title: Azure SQL veri ambarı - SSMS bağlanma | Microsoft Docs
-description: Bağlanmak ve Azure SQL Data Warehouse'u sorgulamak için SQL Server Management Studio (SSMS) kullanın.
+title: SSMS ile bağlanma
+description: Azure SQL veri ambarı 'na bağlanmak ve sorgu yapmak için SQL Server Management Studio (SSMS) kullanın.
 services: sql-data-warehouse
-author: XiaoyuL-Preview
+author: XiaoyuMSFT
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
@@ -10,14 +10,15 @@ ms.subservice: development
 ms.date: 04/17/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.openlocfilehash: 64ea7c175b733f974eba6c081ee2c98814cbcda2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: d5c903a24ea47cb152555330688dd0bc515c625b
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65873718"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73692590"
 ---
-# <a name="connect-to-sql-data-warehouse-with-sql-server-management-studio-ssms"></a>SQL Server Management Studio (SSMS) ile SQL Data Warehouse'a bağlanma
+# <a name="connect-to-sql-data-warehouse-with-sql-server-management-studio-ssms"></a>SQL Server Management Studio (SSMS) ile SQL Data Warehouse 'a bağlanma
 > [!div class="op_single_selector"]
 > * [Power BI](sql-data-warehouse-get-started-visualize-with-power-bi.md)
 > * [Azure Machine Learning](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md)
@@ -27,20 +28,20 @@ ms.locfileid: "65873718"
 > 
 > 
 
-Bağlanmak ve Azure SQL Data Warehouse'u sorgulamak için SQL Server Management Studio (SSMS) kullanın. 
+Azure SQL veri ambarı 'na bağlanmak ve sorgu yapmak için SQL Server Management Studio (SSMS) kullanın. 
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 Bu öğreticiyi kullanmak için şunlar gerekir:
 
-* Var olan bir SQL veri ambarı. Bir tane oluşturmak için bkz. [SQL Veri Ambarı oluşturma][Create a SQL Data Warehouse].
-* SQL Server Management Studio (yüklü SSMS). [SSMS yükleme] [ Install SSMS] zaten yoksa bir ücretsiz.
-* Tam SQL server adı. Bunu bulmak için bkz. [SQL Veri Ambarı'na bağlanma][Connect to SQL Data Warehouse].
+* Mevcut bir SQL veri ambarı. Bir tane oluşturmak için bkz. [SQL Data Warehouse oluşturma][Create a SQL Data Warehouse].
+* SQL Server Management Studio (SSMS) yüklendi. Zaten yoksa [SSMS 'yi][Install SSMS] ücretsiz olarak yükleyebilirsiniz.
+* Tam SQL server adı. Bunu bulmak için bkz. [SQL Data Warehouse'a bağlanma][Connect to SQL Data Warehouse].
 
-## <a name="1-connect-to-your-sql-data-warehouse"></a>1. SQL Data Warehouse'unuza bağlanma
+## <a name="1-connect-to-your-sql-data-warehouse"></a>1. SQL veri Ambarınızla bağlantı kurmak
 1. SSMS’i açın.
-2. Nesne Gezgini'ni açın. Bunu yapmak için **dosya** > **nesne Gezginine Bağlan**.
+2. Nesne Gezgini açın. Bunu yapmak için **dosya** > **Connect Nesne Gezgini**' i seçin.
    
-    ![SQL Server Object Explorer][1]
+    ![SQL Server Nesne Gezgini][1]
 3. Sunucuya Bağlan penceresindeki alanları doldurun.
    
     ![Sunucuya bağlanma][2]
@@ -53,7 +54,7 @@ Bu öğreticiyi kullanmak için şunlar gerekir:
    
     ![AdventureWorksDW'yi araştırma][3]
 
-## <a name="2-run-a-sample-query"></a>2. Örnek sorgu çalıştırma
+## <a name="2-run-a-sample-query"></a>2. örnek bir sorgu çalıştırın
 Artık veritabanınızla bağlantı kurulduğuna göre bir sorgu yazalım.
 
 1. SQL Server Nesne Gezgini'nde veritabanınıza sağ tıklayın.
@@ -65,7 +66,7 @@ Artık veritabanınızla bağlantı kurulduğuna göre bir sorgu yazalım.
     ```sql
     SELECT COUNT(*) FROM dbo.FactInternetSales;
     ```
-4. Sorguyu çalıştırın. Bunu yapmak için tıklatın `Execute` veya şu kısayolu kullanın: `F5`.
+4. Sorguyu çalıştırın. Bunu yapmak için `Execute` ' ye tıklayın veya şu kısayolu kullanın: `F5`.
    
     ![Sorgu çalıştırma][5]
 5. Sorgu sonuçlarına bakın. Bu örnekte FactInternetSales tablosunda 60398 satır var.
@@ -75,7 +76,7 @@ Artık veritabanınızla bağlantı kurulduğuna göre bir sorgu yazalım.
 ## <a name="next-steps"></a>Sonraki adımlar
 Artık bağlanıp sorgulama yapabildiğinize göre [PowerBI ile verileri görselleştirmeyi][visualizing the data with PowerBI] deneyin.
 
-Ortamınızı Azure Active Directory kimlik doğrulaması için yapılandırmak üzere bkz. [SQL Veri Ambarı’nda kimlik doğrulama][Authenticate to SQL Data Warehouse].
+Ortamınızı Azure Active Directory kimlik doğrulaması için yapılandırmak üzere bkz. [SQL Data Warehouse’da kimlik doğrulama][Authenticate to SQL Data Warehouse].
 
 <!--Arcticles-->
 [Connect to SQL Data Warehouse]: sql-data-warehouse-connect-overview.md

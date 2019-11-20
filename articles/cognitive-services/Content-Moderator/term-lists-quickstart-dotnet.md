@@ -1,23 +1,23 @@
 ---
 title: C# ile özel terim listesi kullanarak metin denetimi gerçekleştirme - Content Moderator
-titlesuffix: Azure Cognitive Services
+titleSuffix: Azure Cognitive Services
 description: C# için Content Moderator SDK'sını kullanarak özel terim listeleriyle metin denetleme.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
-ms.topic: quickstart
-ms.date: 10/10/2018
-ms.author: sajagtap
-ms.openlocfilehash: da8ad71ccf8b58ddf3ef7cc6a2f9e9c732913caa
-ms.sourcegitcommit: 90cec6cccf303ad4767a343ce00befba020a10f6
+ms.topic: conceptual
+ms.date: 10/24/2019
+ms.author: pafarley
+ms.openlocfilehash: 68da335875752d326ee718cade3d501623c70b49
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55858408"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72935951"
 ---
-# <a name="quickstart-check-text-against-a-custom-term-list-in-c"></a>Hızlı Başlangıç: Metin bir özel terim listesine karşı denetleyinC#
+# <a name="check-text-against-a-custom-term-list-in-c"></a>İçindeki özel bir terim listesine karşı metin denetleC#
 
 Azure Content Moderator'daki varsayılan genel terim listesi, içerik moderasyonu ihtiyaçlarının büyük bölümü için yeterlidir. Bununla birlikte, kuruluşunuza özgü terimleri elemek gerekebilir. Örneğin, daha fazla incelemek üzere rakiplerin adlarını etiketlemek isteyebilirsiniz. 
 
@@ -38,11 +38,11 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 REST API veya SDK aracılığıyla Content Moderator hizmetlerini kullanabilmeniz için önce bir abonelik anahtarınız olması gerekir. Birini almak için [Azure portalda](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesContentModerator) Content Moderator hizmetine abone olabilirsiniz.
 
-## <a name="create-your-visual-studio-project"></a>Visual Studio projenizi oluşturma
+## <a name="create-your-visual-studio-project"></a>Visual Studio projenizi oluşturun
 
-1. Çözümünüze yeni bir **Console uygulaması (.NET Framework)** projesi ekleyin.
+1. Çözümünüze yeni bir **Konsol uygulaması (.NET Framework)** projesi ekleyin.
 
-1. Projeyi **TermLists** olarak adlandırın. Bu projeyi çözümün tek başlatma projesi olarak seçin.
+1. Projeyi **TermLists** olarak adlandırın. Bu projeyi çözümün tekil başlangıç projesi olarak seçin.
 
 ### <a name="install-required-packages"></a>Gerekli paketleri yükleme
 
@@ -59,8 +59,7 @@ Aşağıdaki `using` deyimlerini ekleyin.
 
 ```csharp
 using Microsoft.Azure.CognitiveServices.ContentModerator;
-using Microsoft.CognitiveServices.ContentModerator;
-using Microsoft.CognitiveServices.ContentModerator.Models;
+using Microsoft.Azure.CognitiveServices.ContentModerator.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -70,10 +69,7 @@ using System.Threading;
 
 ### <a name="create-the-content-moderator-client"></a>Content Moderator istemcisini oluşturma
 
-Aboneliğiniz için bir Content Moderator istemcisi oluşturmak üzere aşağıdaki kodu ekleyin.
-
-> [!IMPORTANT]
-> **AzureRegion** ve **CMSubscriptionKey** alanlarını bölge tanımlayıcınız ve abonelik anahtarınız ile değiştirin.
+Aboneliğiniz için bir Content Moderator istemcisi oluşturmak üzere aşağıdaki kodu ekleyin. `AzureEndpoint` ve `CMSubscriptionKey` alanlarını Endpoint URL 'nizin ve abonelik anahtarınızın değerleriyle güncelleştirin. Bunları, Azure portal kaynağınızın **hızlı başlangıç** sekmesinde bulabilirsiniz.
 
 ```csharp
 /// <summary>
@@ -85,16 +81,9 @@ Aboneliğiniz için bir Content Moderator istemcisi oluşturmak üzere aşağıd
 public static class Clients
 {
     /// <summary>
-    /// The region/location for your Content Moderator account, 
-    /// for example, westus.
-    /// </summary>
-    private static readonly string AzureRegion = "YOUR API REGION";
-
-    /// <summary>
     /// The base URL fragment for Content Moderator calls.
     /// </summary>
-    private static readonly string AzureBaseURL =
-        $"https://{AzureRegion}.api.cognitive.microsoft.com";
+    private static readonly string AzureEndpoint = "YOUR ENDPOINT URL";
 
     /// <summary>
     /// Your Content Moderator subscription key.
@@ -113,7 +102,7 @@ public static class Clients
         // Create and initialize an instance of the Content Moderator API wrapper.
         ContentModeratorClient client = new ContentModeratorClient(new ApiKeyServiceClientCredentials(CMSubscriptionKey));
 
-        client.Endpoint = AzureBaseURL;
+        client.Endpoint = AzureEndpoint;
         return client;
     }
 }
@@ -147,7 +136,7 @@ private const double latencyDelay = 0.5;
 Terim listesini **ContentModeratorClient.ListManagementTermLists.Create** ile oluşturursunuz. **Create** için ilk parametre MIME türünü içeren bir dizedir ve "application/json" olmalıdır. Daha fazla bilgi için bkz. [API başvurusu](https://westus2.dev.cognitive.microsoft.com/docs/services/57cf755e3f9b070c105bd2c2/operations/57cf755e3f9b070868a1f67f). İkinci parametre, yeni terim listesi için bir ad ve açıklama içeren **Body** nesnesidir.
 
 > [!NOTE]
-> En çok **5 terim listeniz** olabilir ve her listedeki **terimlerin sayısı 10.000'i aşmamalıdır**.
+> Üst sınır, her biri **10.000 terimi aşmamak** kaydıyla **5 listedir**.
 
 namespace TermLists, class Program için aşağıdaki yöntem tanımını ekleyin.
 
@@ -275,7 +264,7 @@ Aşağıdaki parametreleri alan **ContentModeratorClient.TextModeration.ScreenTe
 - MIME türü; "text/html", "text/xml", "text/markdown" veya "text/plain" olabilir.
 - Elenecek metin.
 - Boole değeri. Metni elemeden önce otomatik olarak düzeltmek için bu alanı **true** değerine ayarlayın.
-- Boole değeri. Metindeki Kişisel Bilgileri (PII) algılamak için bu alanı **true** değerine ayarlayın.
+- Boole değeri. Metindeki kişisel verileri algılamak için bu alanı **doğru** olarak ayarlayın.
 - Terim listesi kimliği.
 
 Daha fazla bilgi için bkz. [API başvurusu](https://westus2.dev.cognitive.microsoft.com/docs/services/57cf753a3f9b070c105bd2c1/operations/57cf753a3f9b070868a1f66f).
@@ -373,7 +362,7 @@ static void DeleteTermList (ContentModeratorClient client, string list_id)
 }
 ```
 
-## <a name="putting-it-all-together"></a>Hepsini bir araya getirme
+## <a name="compose-the-main-method"></a>Main metodunu oluşturma
 
 **TermLists** ad alanının **Program** sınıfına **Main** yöntemi tanımını ekleyin. Son olarak, **Program** sınıfını ve **TermLists** ad alanını kapatın.
 
@@ -415,9 +404,9 @@ static void Main(string[] args)
 
 ## <a name="run-the-application-to-see-the-output"></a>Çıkışı görmek uygulamayı çalıştırma
 
-Çıkışınız aşağıdaki satırlarda olacaktır ama veriler değişebilir.
+Konsol çıktılarınız aşağıdakine benzer şekilde görünür:
 
-```
+```console
 Creating term list.
 Term list created. ID: 252.
 Updating information for term list with ID 252.
@@ -449,4 +438,4 @@ Press ENTER to close the application.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu ve diğer .NET için Content Moderator hızlı başlangıçları için [Content Moderator .NET SDK'sını](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator/) ve [Visual Studio çözümünü](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/ContentModerator) alın ve tümleştirmeniz üzerinde çalışmaya başlayın.
+Bu ve diğer .NET için Content Moderator hızlı başlangıçları için [Content Moderator .NET SDK](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator/) ve [Visual Studio çözümünü](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/ContentModerator) edinin ve tümleştirmeniz üzerinde çalışmaya başlayın.

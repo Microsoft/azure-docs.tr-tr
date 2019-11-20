@@ -1,48 +1,57 @@
 ---
-title: Azure veri fabrikası veri akışı Alter satır dönüştürme eşlemesi
-description: Azure veri fabrikası eşleme veri akışı Alter satır dönüştürme kullanarak veritabanı hedef güncelleştirme
+title: Azure Data Factory eşleme veri akışı değiştirme satırı dönüştürmesi
+description: Azure Data Factory eşleme veri akışı değiştirme satırı dönüşümünü kullanarak veritabanı hedefini güncelleştirme
 author: kromerm
 ms.author: makromer
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 03/12/2019
-ms.openlocfilehash: f0ac5bb36079983b10e4d86cc776bd4e5ee6817d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7a782c62165aa6f2641c2ebe8e4600198ec373c5
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65520158"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73486211"
 ---
-# <a name="azure-data-factory-alter-row-transformation"></a>Azure veri fabrikası Alter satır dönüştürme
+# <a name="azure-data-factory-alter-row-transformation"></a>Azure Data Factory alter Row dönüşümü
 
-Satır ekleme, silme, güncelleştirme ve upsert ilkeleri ayarlamak için Alter satır dönüştürme kullanın. Bire çok koşul ifadeleri olarak ekleyebilirsiniz. Bu koşulların her bir satırdaki (veya satır) neden eklenen, güncelleştirilen silindi, veya upsert. ALTER satır hem DDL ve DML işlemleri veritabanına karşı üretebilir.
+Satırlarda INSERT, DELETE, Update ve upsert ilkeleri ayarlamak için alter Row dönüşümünü kullanın. Tek-çok koşullarını ifade olarak ekleyebilirsiniz. Her satır, ilk eşleşen ifadeye karşılık gelen ilkeyle işaretlendiği için bu koşulların öncelik sırasına göre belirtilmesi gerekir. Bu koşulların her biri, eklenen, güncellenen, silinmekte veya toplanmakta olan bir satırın (veya satırların) oluşmasına neden olabilir. Alter Row, veritabanınıza göre hem DDL & DML eylemleri üretebilir.
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
 
-![Satır ayarlarını değiştir](media/data-flow/alter-row1.png "satır ayarlarını değiştirme")
+
+![Satır ayarlarını değiştir](media/data-flow/alter-row1.png "Satır ayarlarını değiştir")
 
 > [!NOTE]
-> ALTER satır dönüştürmeleri, yalnızca veritabanı havuzlarını veri akışınıza çalışacağı. Hata ayıklama oturumları sırasında satır (INSERT, update, delete, upsert) atama işlemleri gerçekleşmez. Bir işlem hattı için bir yürütme veri akışı görev ekleyin ve veritabanı tablolarınızı alter satır ilkeleri uygulamak için işlem hattı hata ayıklama veya tetikleyicileri kullanmanız gerekir.
+> Değişiklik satırı dönüşümleri, yalnızca veri akışınızda veritabanı veya CosmosDB havuzları üzerinde çalışır. Satırlara atadığınız eylemler (INSERT, Update, DELETE, upsert) hata ayıklama oturumları sırasında gerçekleşmeyecektir. Bir işlem hattına veri akışı yürütme görevi eklemeniz ve Veritabanı tablolarınızda alter Row ilkelerini uygulamak için ardışık düzen hata ayıklaması veya Tetikleyiciler kullanmanız gerekir.
+
+## <a name="indicate-a-default-row-policy"></a>Varsayılan bir satır ilkesi belirtin
+
+Alter Row dönüşümü oluşturun ve `true()`koşulu ile bir satır ilkesi belirtin. Önceden tanımlanmış ifadelerden hiçbirini karşılamayan her satır, belirtilen satır ilkesi için işaretlenir. Varsayılan olarak, herhangi bir koşullu ifadeyi karşılamayan her bir satır, `Insert`için işaretlenir.
+
+![Satır değiştirme bir ilke](media/data-flow/alter-row4.png "Satır değiştirme bir ilke")
+
+> [!NOTE]
+> Tüm satırları tek bir ilkeyle işaretlemek için, bu ilke için bir koşul oluşturup `true()`koşulu belirtebilirsiniz.
 
 ## <a name="view-policies"></a>İlkeleri görüntüle
 
-Veri akışı hata ayıklama modu açık konuma geçin ve sonra veri Önizleme Bölmesi'nde alter satır ilkelerinizi sonuçları görüntüleyin. Alter satır yürütme veri akışı hata ayıklama modunda DDL veya DML eylem hedef karşı oluşturmaz. Bu eylemlerin ortaya sahip olmak için bir yürütme veri akışı etkinliği içinde bir işlem hattı içinde veri akışı yürütün.
+Değişiklik satırı ilkelerinizin sonuçlarını veri önizleme bölmesinde görüntülemek için veri akışı hata ayıklama modunu açın. Veri akışı hata ayıklama modunda alter satırı yürütülmesi, Hedefinizdeki DDL veya DML eylemleri oluşturmaz. Bu eylemlerin gerçekleşmesini sağlamak için, veri akışını bir işlem hattının içindeki veri akışı yürütme etkinliğinin içinde yürütün.
 
-![Satır ilkeleri alter](media/data-flow/alter-row3.png "Alter satır ilkeleri")
+![Satır ilkelerini Değiştir](media/data-flow/alter-row3.png "Satır Ilkelerini Değiştir")
 
-Bu, doğrulamak ve her satır, koşullara göre durumunu görüntülemek olanak tanır. Simge her eklemeyi temsil eder, bir işlem hattı içinde veri akışını çalıştırdığınızda, hangi eylemini belirten, veri akışı gerçekleşen güncelleştirme, silme ve upsert eylem gerçekleşir.
+Bu, koşullarınıza göre her bir satırın durumunu doğrulamanızı ve görüntülemenizi sağlar. Veri akışında gerçekleşecek her bir INSERT, Update, DELETE ve upsert eylemi için, veri akışını bir işlem hattı içinde yürüttüğünüzde hangi eylemin gerçekleşeceğini belirten simge temsil eder.
 
 ## <a name="sink-settings"></a>Havuz ayarları
 
-Havuz türü Alter çalışmak satır için bir veritabanı olmalıdır. Havuz ayarları, her bir eylemin izin verilmesi için ayarlamanız gerekir.
+Alter Row 'un çalışması için bir veritabanı havuz türü olması gerekir. Havuz ayarları ' nda, değişiklik satırı koşullarınıza karşılık gelen her eylemi izin verilecek şekilde ayarlamanız gerekir.
 
-![Satır havuz alter](media/data-flow/alter-row2.png "Alter satır havuz")
+![Satır havuzunu Değiştir](media/data-flow/alter-row2.png "Satır havuzunu Değiştir")
 
-ADF veri akışı'de varsayılan davranışı ile veritabanı havuzlarını satırları eklemektir. Güncelleştirme, upsert eder ve silme de izin vermek istiyorsanız, bu eylemleri izin vermek için havuz kutularında de işaretlemeniz gerekir.
+ADF veri akışında veritabanı havuzları ile ilgili varsayılan davranış satır eklemedir. Güncelleştirme, ön ek ve silme işlemlerine izin vermek istiyorsanız, eylemlere izin vermek için havuzda bu kutuları da denetlemeniz gerekir.
 
 > [!NOTE]
-> Ekler, güncelleştirmeleri veya upsert eder havuzunda hedef tablodaki şema değiştirirseniz, veri akışınız başarısız olur. Veritabanınızda hedef şemayı değiştirmek için havuza "Tabloyu yeniden oluşturun" seçeneğini tercih etmelisiniz. Bırakın ve yeni şema tanımıyla, tabloyu yeniden oluşturun.
+> Ekleme, güncelleştirme veya ön ekler, havuzdaki hedef tablonun şemasını değiştirmezse, veri akışınız başarısız olur. Veritabanınızdaki hedef şemayı değiştirmek için, havuzda "tablo yeniden oluştur" seçeneğini seçmeniz gerekir. Bu, yeni şema tanımıyla tablonuzu bırakıp yeniden oluşturacak.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Alter satır dönüştürme işleminin ardından isteyebileceğiniz [verilerinizi bir hedef veri deposuna havuz](data-flow-sink.md).
+Alter Row dönüşümünde, [verilerinizi bir hedef veri deposuna havuza](data-flow-sink.md)almak isteyebilirsiniz.

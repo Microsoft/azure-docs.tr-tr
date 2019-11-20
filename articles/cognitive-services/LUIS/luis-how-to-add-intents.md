@@ -1,110 +1,87 @@
 ---
-title: Hedef ekleme
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: Intents sorularınız ya da aynı amaçları olan komutları gruplarını tanımlamak için LUIS uygulamanızı ekleyin.
+title: Amaç Ekle-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Aynı amaçları içeren soruların veya komutların gruplarını belirlemek için LUSıS uygulamanıza amaçlar ekleyin.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 04/01/2019
+ms.topic: conceptual
+ms.date: 11/08/2019
 ms.author: diberry
 ms.service: cognitive-services
-ms.openlocfilehash: 0c42ab44ba317888b982ba7c72f78be4ca73d93c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 66a3350dee60772ce706af8995179dcd8c485b64
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65148161"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73904302"
 ---
-# <a name="add-intents-to-determine-user-intention-of-utterances"></a>Konuşma kullanıcı amacınıza belirlemek için hedef ekleme
+# <a name="add-intents-to-determine-user-intention-of-utterances"></a>Kullanıcı amaçlarını belirleme amacını ekleyin
 
-Ekleme [hedefleri](luis-concept-intent.md) LUIS uygulamanızı sorularınız ya da bağdaştırıcılar aynı amaca sahip komutları gruplarını tanımlamak için. 
+Aynı amaca sahip olan soruların veya komutların gruplarını belirlemek için LUSıS uygulamanıza [amaçlar](luis-concept-intent.md) ekleyin. 
 
-Hedefleri, üst gezinti çubuğundan 's yönetilir **derleme** bölümünden, ardından sol bölmenin **hedefleri**. 
+Amaçlar, üst gezinti çubuğunun **Build** bölümünden ve ardından sol bölmenin amaçlarından **yönetilir.** 
+
+[!INCLUDE [Uses preview portal](includes/uses-portal-preview.md)]
 
 ## <a name="add-intent"></a>Amaç ekleme
 
-1. **Intents** (Amaçlar) sayfasında **Create new intent** (Yeni amaç oluştur) öğesini seçin.
+1. [Lusıs Önizleme portalında](https://preview.luis.ai), amaçları görüntülemek için **Oluştur** ' u seçin. 
+1. **Amaçlar** sayfasında **+ Oluştur**' u seçin.
+1. **Yeni amaç oluştur** iletişim kutusunda, amaç adını girin, örneğin `ModifyOrder`ve **bitti**' yi seçin.
 
-1. İçinde **yeni hedefi oluşturma** iletişim kutusunda, hedefi adı girin `GetEmployeeInformation`, tıklatıp **Bitti**.
+    > [!div class="mx-imgBorder"]
+    > ![amaç Ekle](./media/luis-how-to-add-intents/Addintent-dialogbox.png)
 
-    ![Hedefi ekleyin](./media/luis-how-to-add-intents/Addintent-dialogbox.png)
+    Amaç, örnek söyleyeni gerektirir.
 
-## <a name="add-an-example-utterance"></a>Bir örnek utterance Ekle
+## <a name="add-an-example-utterance"></a>Örnek bir mekan ekleyin
 
-Örnek konuşma metin kullanıcı sorularınız ya da komutları örnekleridir. Language Understanding (LUIS) öğretmeyi bir amaç için örnek konuşma eklemeniz gerekir.
+Örnek söyleyler, Kullanıcı sorularının veya komutlarının metin örnekleridir. Bu amacı tahmin etmek için Language Understanding (LUSıS) öğretmek için bir amaca yönelik örnek ekleme yapmanız gerekir. Amacınızı anlamak için, en fazla 15 ila 30 örnek araslar aralığında LUYA gerekir. Toplu olarak örnek eklemeyin. Her bir söylemeyle, zaten amaç içinde olan örneklerden farklı olduğu için dikkatle seçilmelidir. 
 
-1. Üzerinde **GetEmployeeInformation** hedefi Ayrıntıları sayfasında, beklediğiniz kullanıcılarınızdan gelen gibi ilgili bir utterance girin `Does John Smith work in Seattle?` metin kutusuna aşağıdaki hedefi adını ve Enter tuşuna basın.
+1. Amaç ayrıntıları sayfasında, kullanıcılarınızın altındaki metin kutusunda `Deliver a large cheese pizza` gibi, kullanıcılarınız için beklediğinizi ilgili bir yer girin ve ardından ENTER tuşuna basın.
  
-    ![Vurgulanan utterance ile ekran görüntüsü, hedefleri Ayrıntıları sayfası](./media/luis-how-to-add-intents/add-new-utterance-to-intent.png) 
+    > [!div class="mx-imgBorder"]
+    > Amaç Ayrıntıları sayfasının ekran görüntüsünü ![, söylenişi vurgulu](./media/luis-how-to-add-intents/add-new-utterance-to-intent.png) 
 
-    LUIS, tüm konuşma küçük harfe dönüştürür ve kısa çizgi gibi belirteçleri boşluk ekler.
+    LUO, tüm aralıkları küçük harfe dönüştürür ve kısa çizgiler gibi [belirteçlerin](luis-language-support.md#tokenization) etrafına boşluk ekler.
 
 <a name="#intent-prediction-discrepancy-errors"></a>
 
-## <a name="intent-prediction-errors"></a>Hedefi tahmin hataları 
+## <a name="intent-prediction-errors"></a>Amaç tahmin hataları 
 
-Bir örnek utterance bir amacı, hedefi tahmin hata yer şu anda örnek utterance amaç ve eğitim sırasında belirlenen tahmin hedefi arasında olabilir. 
+Bir amaca göre örnek, bu örnekte yer aldığı amaç ve eğitim sırasında belirlenen amaç arasında bir amaç tahmin hatası olabilir. 
 
-Utterance tahmin hataları bulmak ve bunları düzeltmek için kullanın **filtre** seçeneğin **değerlendirme** yanlış ve Unclear seçenekleri Sunucusu'yla birlikte **görünümü** seçeneği**Ayrıntılı görünümü**. 
+Söylenişi tahmin hatalarını bulmak ve bunları sabitlemek için, **ayrıntılı görünüm**' ün **Görünüm** seçeneğiyle yanlış ve belirsiz olarak birleştirilmiş **filtre** seçeneklerini kullanın. 
 
-![Utterance tahmin hataları bulmak ve bunları düzeltmek için filtre seçeneğini kullanın.](./media/luis-how-to-add-intents/find-intent-prediction-errors.png)
+![Söylenişi tahmin hatalarını bulmak ve bunları onarmak için filtre seçeneğini kullanın.](./media/luis-how-to-add-intents/find-intent-prediction-errors.png)
 
-Filtreler ve görünüm uygulanır ve örnek konuşma hatalarla olduğunda, örnek utterance liste konuşma ve sorunları gösterir.
+Filtreler ve görünüm uygulandığında ve hatalar ile ilgili örnek bir sorun oluşursa, örnek bir liste, söz konusu konuları ve sorunları gösterir.
 
-![! [Filtreler ve görünüm uygulanır ve örnek konuşma hatalarla olduğunda, örnek utterance liste konuşma ve sorunları gösterir.] (. / media/luis-how-to-add-intents/find-errors-in-utterances.png)](./media/luis-how-to-add-intents/find-errors-in-utterances.png#lightbox)
+> [!div class="mx-imgBorder"]
+> ![! [Filtreler ve görünüm uygulandığında ve hatalar ile ilgili örnekler varsa, örnek utterler listesi, bu noktalar ve sorunları gösterir.] (./Media/Luis-How-to-add-BITS/Find-Errors-ın-utterances.exe)](./media/luis-how-to-add-intents/find-errors-in-utterances.png#lightbox)
 
-Her satır için bu iki puanları farkı olan en yakın müsabık'ın puanı örnek utterance geçerli eğitim 's tahmin puanı gösterir. 
+Her satır, bu iki puandaki fark olan en yakın Rival 'in puanı olan utterance için geçerli eğitimin tahmin Puanını gösterir. 
 
-### <a name="fixing-intents"></a>Intents düzeltme
+### <a name="fixing-intents"></a>Amaçlar düzeltiliyor
 
-Hedefi tahmin hataların nasıl düzeltileceğini öğrenmek için kullanın [Özet Panosu](luis-how-to-use-dashboard.md). Özet panosu için etkin sürüme ait son eğitim analizini sağlar ve modelinizi düzeltmek için en çok istenen önerilerden sunar.  
-
-## <a name="add-a-custom-entity"></a>Özel bir varlık ekleme
-
-Bir amaç için bir utterance eklendikten sonra bir özel varlık oluşturma utterance metni seçebilirsiniz. Özel bir varlık ayıklama, doğru amaç birlikte etiket metni bir yoludur. 
-
-Bkz: [varlık eklemek için utterance](luis-how-to-add-example-utterances.md) daha fazla bilgi için.
-
-## <a name="entity-prediction-discrepancy-errors"></a>Varlık tahmin tutarsızlık hataları 
-
-Varlık kırmızı renkte göstermek için altı çizili olup bir [varlık tahmin tutarsızlık](luis-how-to-add-example-utterances.md#entity-status-predictions). Bu varlığın ilk geçtiği yeri olduğundan yok yeterli örnekler LUIS Yüksek Güvenilirlikli olması için bu metni doğru varlığı ile etiketlenir. Bu uyuşmazlık, uygulamayı eğitildi kaldırılır. 
-
-![Ekran görüntüsü, hedefleri Ayrıntıları sayfası, mavi renkle vurgulandığı özel varlık adı](./media/luis-how-to-add-intents/create-custom-entity-name-blue-highlight.png) 
-
-Metin gösteren bir varlık mavi renkle vurgulanır.  
-
-## <a name="add-a-prebuilt-entity"></a>Önceden oluşturulmuş bir varlık ekleme
-
-Bilgi için [önceden oluşturulmuş varlık](luis-how-to-add-entities.md#add-a-prebuilt-entity-to-your-app).
+Amaç tahmin hatalarını nasıl düzelteceğinizi öğrenmek için [Özet panosunu](luis-how-to-use-dashboard.md)kullanın. Özet Panosu, etkin sürümün son eğitimi için analiz sağlar ve modelinizi gidermeye yönelik en önemli önerileri sunar.  
 
 ## <a name="using-the-contextual-toolbar"></a>Bağlamsal araç çubuğunu kullanma
 
-Bir veya daha fazla örnek konuşma sol tarafındaki bir utterance kutuyu işaretleyerek listesinde seçili olduğunda utterance listenin üstündeki araç aşağıdaki eylemleri gerçekleştirmenizi sağlar:
+Bağlam araç çubuğu diğer eylemleri sağlar:
 
-* Yeniden atama hedefi: farklı eylemlerinize utterance(s) Taşı
-* Utterance(s) Sil
-* Varlık filtreleri: yalnızca filtrelenen varlık içeren konuşma Göster
-* Tümünü Göster / yalnızca hataları: tahmin hatalı konuşma ya da tüm konuşma göstermek
-* Varlıkları/belirteç görünümü: varlık adları ile varlıkları görünümünü göster veya utterance ham metni göster
-* Büyüteç: belirli bir metni içeren konuşma arayın
+* Örnek, düzenleme veya silme
+* Farklı bir amaca örnek olarak yeniden atama
+* Filtreler ve görünümler: yalnızca filtrelenmiş varlıkları içeren detersliği göster veya isteğe bağlı ayrıntıları görüntüle
+* Örnek söyleylerini arayın
 
-## <a name="working-with-an-individual-utterance"></a>Tek bir utterance ile çalışma
+## <a name="train-your-app-after-changing-model-with-intents"></a>Bir modeli amaçlar ile değiştirdikten sonra uygulamanızı eğitme
 
-Aşağıdaki eylemleri utterance sağındaki üç nokta menüsünden bir bireysel utterance gerçekleştirilebilir:
-
-* Düzen: utterance metnini değiştirme
-* Sil: utterance amacından kaldırın. Utterance hala istiyorsanız taşımak için daha iyi bir yöntem olan **hiçbiri** hedefi. 
-* Bir desen Ekle: Bir desen, bir ortak utterance alıp değiştirilebilir metin ve böylece daha fazla konuşma amacı, gereksinimini azaltarak Ignorable metin işaretlemek sağlar. 
-
-**Hedefi etiketli** sütun utterance amacı değiştirmenize olanak sağlar.
-
-## <a name="train-your-app-after-changing-model-with-intents"></a>Intents modeliyle değiştirdikten sonra uygulamanızı eğitin
-
-Ekleme, düzenleme veya kaldırma amacı, sonra [eğitme](luis-how-to-train.md) ve [yayımlama](luis-how-to-publish-app.md) uygulamanızı değişikliklerinizi uç nokta sorguları uygulanması. 
+Hedefleri ekledikten, düzenledikten veya kaldırdıktan sonra, değişikliklerinizin uç nokta sorgularına uygulanması için uygulamanızı [eğitin](luis-how-to-train.md) ve [yayımlayın](luis-how-to-publish-app.md) . Her tek değişiklikten sonra eğmeyin. Bir değişiklik grubundan sonra eğitme. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ekleme hakkında daha fazla bilgi edinin [örnek konuşma](luis-how-to-add-example-utterances.md) varlıklarla. 
+Varlıklarla [örnek](luis-how-to-add-example-utterances.md) ekleme hakkında daha fazla bilgi edinin. 

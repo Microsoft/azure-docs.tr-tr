@@ -1,38 +1,39 @@
 ---
-title: Microsoft ile işletmenizi tanıtmak | Azure Market
-description: Uygulama ve hizmet yayımcılar için Azure Market ve AppSource kullanarak işletmenizi yükseltin
+title: Işletmenizi Microsoft ile yükseltin | Azure Marketi
+description: Uygulama ve hizmet yayımcıları için Azure Marketi 'ni ve AppSource 'u kullanarak işinizi yükseltin
 services: Azure, Marketplace, Compute, Storage, Networking, Blockchain, Security
 author: jm-aditi-ms
 manager: pabutler
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 06/04/2018
 ms.author: ellacroi
-ms.openlocfilehash: f21c5f94c595fe3718a0a59a80deff8f1c53b9fc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c0f33402c5ff9f970e2ffebf405178dbc0974690
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64937644"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827800"
 ---
-# <a name="promote-your-business-with-microsoft"></a>Microsoft ile işletmenizi yükseltin 
+# <a name="promote-your-business-with-microsoft"></a>Işletmenizi Microsoft ile yükseltin 
 
-Microsoft iş ortakları (,) desteği ve uygulamanızın satmak basitleştirin veya Market'te vitrinler giren için hedef vardır. Marketi'nde listeleme tarafından programlar ve Market kaynaklara erişin. 
+Microsoft, iş ortaklarını destekleme amacını (siz) ve Market 'teki storeler içinde uygulamanızın satışını veya teklifinizi basitleştirmenizi sağlar. Market 'te listeleme yaparak Market 'teki program ve kaynaklara erişirsiniz. 
 
-Ardından, zaten Microsoft iş ortağı ağı (MPN) kaydolmadıysanız, devam etmeden önce bunu.  
-*   MPN hakkında daha fazla bilgi için ziyaret edin sayfasında bulunan Microsoft iş ortağı ağı [partner.microsoft.com](https://partner.microsoft.com).  
+Microsoft İş Ortağı Ağı (MPN) zaten kaydolmadıysanız devam etmeden önce bunu yapın.  
+*   MPN hakkında daha fazla bilgi için, [partner.Microsoft.com](https://partner.microsoft.com)adresinde bulunan Microsoft iş ortağı ağı sayfasını ziyaret edin.  
 
-MPN şu konularda rehberlik sağlar.  
+MPN aşağıdaki konularda rehberlik sağlar.  
 *   Yeni iş fırsatları  
-*   Takımlar veya iş ortakları ile bağlanma  
-*   Çözümler ve becerilerinizi artırılmasına yardımcı olmak için eğitim  
+*   Ekiplerle veya iş ortaklarıyla bağlantı kurma  
+*   Beceri uygulamanızı büyütmenize yardımcı olacak çözümler ve eğitim  
 
-Teklif veya uygulamanızı yükseltmek için diğer avantajları ve kaynakları erişmek için aşağıdaki tabloyu kullanın. 
+Teklifinizi veya uygulamanızı yükseltmek için, daha fazla avantaj ve kaynağa erişmek üzere aşağıdaki tabloyu kullanın. 
 
-| Avantajı | Kaynakları |  
+| sağlar | resources |  
 |:--- |:--- |  
-| Çekirdek Avantajlarınızı kullanın | Microsoft iş ortağı ağı bir parçası olarak, bir dizi zamandan ve paradan tasarruf etmenize yardımcı olabilecek temel avantajlar alırsınız. Avantajları yeteneklerinizi güçlendirebilir, daha iyi müşterilere ve işletmenizin tüm potansiyelini için bağlantılar oluşturmanıza da yardımcı olabilir.<ul> <li>Temel avantajlar hakkında daha fazla bilgi için temel avantajlar ziyaret edin ve gereksinimleri sayfasında bulunan [partner.microsoft.com/membership/core-benefits](https://partner.microsoft.com/membership/core-benefits).</li> </ul> |  
-| Bulut platformu uzmanlığı'na kazanın | Bir uzmanlık kazanmaya kendiniz diğer Microsoft iş ortakları arasında ayırt etmenize yardımcı olur. Bir uzmanlık kazanmaya ayrıca teknik uzmanlığa ve müşteri başarı pazarında gösteren yardımcı olur. Uzmanlık, ortak satış gibi birçok önemli iş ortağı programı için bir önkoşuldur.<ul> <li>Bulut platformu uzmanlığı hakkında daha fazla bilgi için ziyaret edin sayfasında bulunan bulut platformu uzmanlığı [partner.microsoft.com/membership/cloud-platform-competency](https://partner.microsoft.com/membership/cloud-platform-competency).</li> </ul> |  
-| Ortak satışa hazır olun | Ortak satışa hazır programı, doğrudan Microsoft satıcılarıyla ve hedef müşteri fırsatlarını ve hesap planlama diğer iş ortaklarıyla işbirliği sağlar. Çözümünüzü Microsoft satıcılarıyla satıcı çözüm Kataloğu'nda görünür hale gelir. Microsoft satıcılarıyla, işbirliği ve sizinle kazanma ödülünü.<ul> <li>Ortak satış hazırlığına hakkında daha fazla bilgi için yükseltme sayfasında bulunan işletmenize ziyaret [partner.microsoft.com/reach-customers/promote-your-business](https://partner.microsoft.com/reach-customers/promote-your-business).</li> </ul> |  
+| Temel avantajlarınızı kullanın | Microsoft İş Ortağı Ağı kapsamında, zaman ve para tasarrufu sağlamanıza yardımcı olabilecek bir temel avantajlar kümesi alırsınız. Avantajlar, olanaklarınızı güçlendirin, müşterilere daha iyi yardımcı olur ve tüm iş potansiyellerinize ulaşmak için bağlantılar oluşturmanıza da yardımcı olabilir.<ul> <li>Temel avantajlar hakkında daha fazla bilgi için, [partner.Microsoft.com/membership/Core-Benefits](https://partner.microsoft.com/membership/core-benefits)adresinde bulunan temel avantajlar ve gereksinimler sayfasını ziyaret edin.</li> </ul> |  
+| Bulut platformu uzmanlığına sahip olma | Bir uzmanlığa sahip olma, kendinizi diğer Microsoft iş ortakları arasında ayırt etmenize yardımcı olur. Uzmanlığın getirisi, pazardaki teknik uzmanlığın ve müşterinin başarısını göstermenize de yardımcı olur. Uzmanlığa, ortak satış gibi birçok anahtar ortağı programı için bir önkoşuldur.<ul> <li>Bulut platformu uzmanlığına ilişkin daha fazla bilgi için, [partner.Microsoft.com/membership/Cloud-Platform-competency](https://partner.microsoft.com/membership/cloud-platform-competency)adresinde bulunan bulut platformu uzmanlık sayfasını ziyaret edin.</li> </ul> |  
+| Ortak satış hazırlayın | Ortak satış için hazırlık programı, hedef müşteri fırsatları ve hesap planlama konusunda doğrudan Microsoft satıcıları ve diğer iş ortaklarıyla işbirliği yapmanıza olanak sağlar. Çözümünüz, satıcı çözüm kataloğunda Microsoft satıcılarıyla görünür hale gelir. Microsoft satıcıları, işbirliği yapmak ve sizinle kazanmak için yeniden tasarlanmıştır.<ul> <li>Ortak satış hazırlığı hakkında daha fazla bilgi için, [partner.Microsoft.com/Reach-Customers/promote-Your-Business](https://partner.microsoft.com/reach-customers/promote-your-business)adresinde bulunan işletmenizi Yükselt sayfasını ziyaret edin.</li> </ul> |  
 
 ---

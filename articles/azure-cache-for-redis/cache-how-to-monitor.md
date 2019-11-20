@@ -1,122 +1,114 @@
 ---
-title: Azure önbelleği için Redis izleme | Microsoft Docs
-description: Azure önbelleği için Redis örneği durumunu ve performansını izleme hakkında bilgi edinin
-services: cache
-documentationcenter: ''
+title: Redsıs için Azure önbelleğini izleme
+description: Redsıs örnekleri için Azure önbelleğinizin durumunu ve performansını nasıl izleyeceğinizi öğrenin
 author: yegu-ms
-manager: jhubbard
-editor: ''
-ms.assetid: 7e70b153-9c87-4290-85af-2228f31df118
 ms.service: cache
-ms.workload: tbd
-ms.tgt_pltfrm: cache
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 07/13/2017
 ms.author: yegu
-ms.openlocfilehash: 2cfd5a99144af1120afbf06fe6222228a9332bb6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 73e1e3bfbc84e6264897d571fca1bf31061d7ab6
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65787420"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74122756"
 ---
-# <a name="how-to-monitor-azure-cache-for-redis"></a>Azure önbelleği için Redis izleme
-Azure önbelleği için Redis kullandığı [Azure İzleyici](https://docs.microsoft.com/azure/monitoring-and-diagnostics/) önbelleği örneklerinizin izlemek için çeşitli seçenekler sağlayacak. Ölçümleri görüntüleyin, ölçüm grafikleri başlangıç panosuna sabitlemek, tarih ve saat aralığı grafikleri izleme özelleştirme, ekleyin ve ölçümleri grafikten kaldırabileceğiniz ve belirli koşullar karşılandığında uyarılar ayarlayın. Bu araçlar, Azure önbelleği için Redis örneği ve önbelleğe alma uygulamalarınızı yönetmenize yardımcı durumunu izlemenize olanak tanır.
+# <a name="how-to-monitor-azure-cache-for-redis"></a>Redsıs için Azure önbelleğini izleme
+Redsıs için Azure önbelleği, önbellek örneklerinizi izlemeye yönelik çeşitli seçenekler sunmak için [Azure izleyici](https://docs.microsoft.com/azure/monitoring-and-diagnostics/) 'yi kullanır. Ölçümleri görüntüleyebilir, ölçüm grafiklerini başlangıç panosuna sabitleyebilir, izleme grafiklerinin tarih ve saat aralığını özelleştirebilir, grafiklerden ölçümleri ekleyebilir ve kaldırabilir ve belirli koşullar karşılandığında uyarılar ayarlayabilirsiniz. Bu araçlar, Redsıs örnekleri için Azure önbelleğinizin durumunu izlemenize ve önbelleğe alma uygulamalarınızı yönetmenize yardımcı olur.
 
-Azure önbelleği için Redis örneği için toplanan ölçümler Redis kullanarak [bilgisi](https://redis.io/commands/info) 30 gün boyunca dakika ve otomatik olarak depolanan başına yaklaşık iki kez komut (bkz [dışarı önbellek ölçümleri](#export-cache-metrics) yapılandırmak için bir farklı bekletme ilkesi) için ölçümler grafiklerde görüntülenen edilebilmeleri ve uyarı kuralları tarafından değerlendirilen. Her önbellek ölçümü için kullanılan farklı bilgisi değerleri hakkında daha fazla bilgi için bkz: [kullanılabilir Ölçümler ve raporlama aralıkları](#available-metrics-and-reporting-intervals).
+Redsıs örnekleri için Azure Cache ölçümleri, dakikada yaklaşık olarak iki kez Redsıs [Info](https://redis.io/commands/info) komutu kullanılarak toplanır ve 30 gün boyunca otomatik olarak depolanır (bkz. farklı bir bekletme ilkesi yapılandırmak için [önbellek ölçümlerini dışarı aktarma](#export-cache-metrics) ), böylece ölçüm grafiklerinde görüntülenebilmeleri ve uyarı kuralları tarafından değerlendirilir. Her önbellek ölçümü için kullanılan farklı BILGI değerleri hakkında daha fazla bilgi için bkz. [kullanılabilir ölçümler ve raporlama aralıkları](#available-metrics-and-reporting-intervals).
 
 <a name="view-cache-metrics"></a>
 
-Önbellek ölçümleri görüntülemek için [Gözat](cache-configure.md#configure-azure-cache-for-redis-settings) cache Örneğinize [Azure portalında](https://portal.azure.com).  Azure önbelleği için Redis üzerinde bazı yerleşik grafikler sağlar **genel bakış** dikey penceresinde ve **Redis ölçümleri** dikey penceresi. Her grafiğin ekleme veya kaldırma Ölçümler ve raporlama aralığını değiştirmeyi özelleştirilebilir.
+Önbellek ölçümlerini görüntülemek için [Azure Portal](https://portal.azure.com)önbellek örneğinizi [inceleyin](cache-configure.md#configure-azure-cache-for-redis-settings) .  Redin için Azure Cache, **genel bakış** dikey penceresinde ve **redin ölçümleri** dikey penceresinde bazı yerleşik grafikler sağlar. Her bir grafik, ölçümler eklenerek veya kaldırılarak ve Raporlama aralığı değiştirilerek özelleştirilebilir.
 
-![Redis ölçümleri](./media/cache-how-to-monitor/redis-cache-redis-metrics-blade.png)
+![Redsıs ölçümleri](./media/cache-how-to-monitor/redis-cache-redis-metrics-blade.png)
 
-## <a name="view-pre-configured-metrics-charts"></a>Önceden yapılandırılmış ölçüm grafikleri görüntüleme
+## <a name="view-pre-configured-metrics-charts"></a>Önceden yapılandırılmış ölçüm grafiklerini görüntüleme
 
-**Genel bakış** dikey penceresinde bulunur aşağıdaki önceden yapılandırılmış izleme grafikleri.
+**Genel bakış** dikey penceresinde aşağıdaki önceden yapılandırılmış izleme grafikleri vardır.
 
-* [İzleme grafiklerini](#monitoring-charts)
+* [İzleme grafikleri](#monitoring-charts)
 * [Kullanım grafikleri](#usage-charts)
 
-### <a name="monitoring-charts"></a>İzleme grafiklerini
-**İzleme** konusundaki **genel bakış** dikey penceresinde bulunur **denk gelir ve isabetsiz okumaları**, **alır ve ayarlar**, **bağlantıları**, ve **toplam komutları** grafikler.
+### <a name="monitoring-charts"></a>İzleme grafikleri
+**Genel bakış** dikey penceresindeki **izleme** bölümünde **isabetler ve Isabetsizlik**, **alır ve ayarlar**, **Bağlantılar**ve **Toplam komut** grafikleri bulunur.
 
-![İzleme grafiklerini](./media/cache-how-to-monitor/redis-cache-monitoring-part.png)
+![İzleme grafikleri](./media/cache-how-to-monitor/redis-cache-monitoring-part.png)
 
 ### <a name="usage-charts"></a>Kullanım grafikleri
-**Kullanım** konusundaki **genel bakış** dikey penceresinde bulunur **Redis sunucu yükü**, **bellek kullanımı**, **ağ bant genişliği**, ve **CPU kullanımı** grafikleri ve ayrıca görüntüler **fiyatlandırma katmanı** önbellek örneği için.
+**Genel bakış** dikey penceresindeki **kullanım** bölümünde **redsıs sunucu yükü**, **bellek kullanımı**, **ağ bant genişliği**ve **CPU kullanımı** grafikleri bulunur ve ayrıca önbellek örneğinin **fiyatlandırma katmanı** görüntülenir.
 
 ![Kullanım grafikleri](./media/cache-how-to-monitor/redis-cache-usage-part.png)
 
-**Fiyatlandırma katmanı** önbellek fiyatlandırma katmanı ve yapmak için kullanılabilir görüntüler [ölçek](cache-how-to-scale.md) önbelleğe farklı bir fiyatlandırma katmanı.
+**Fiyatlandırma katmanı** , önbellek fiyatlandırma katmanını görüntüler ve önbelleği farklı bir fiyatlandırma katmanına [ölçeklendirmek](cache-how-to-scale.md) için kullanılabilir.
 
-## <a name="view-metrics-with-azure-monitor"></a>Azure İzleyici ile ölçümlerini görüntüleme
-Azure İzleyicisi'ni kullanarak özel grafikler oluşturma ve Redis ölçümleri görüntülemek için tıklatın **ölçümleri** gelen **kaynak menüsünde**ve aralığı, grafik türü ve diğer raporlama istediğiniz ölçümleri kullanarak grafiğinizi özelleştirin.
+## <a name="view-metrics-with-azure-monitor"></a>Azure izleyici ile ölçümleri görüntüleme
+Redsıs ölçümlerini görüntülemek ve Azure Izleyici 'yi kullanarak özel grafikler oluşturmak için **kaynak menüsünde** **ölçümler** ' e tıklayın ve istediğiniz ölçümleri, raporlama aralığını, grafik türünü ve daha fazlasını kullanarak grafiğinizi özelleştirin.
 
-![Redis ölçümleri](./media/cache-how-to-monitor/redis-cache-monitor.png)
+![Redsıs ölçümleri](./media/cache-how-to-monitor/redis-cache-monitor.png)
 
-Azure İzleyicisi'ni kullanarak ölçümleri ile çalışma hakkında daha fazla bilgi için bkz. [Microsoft azure'da ölçümlere genel bakış](../monitoring-and-diagnostics/monitoring-overview-metrics.md).
+Azure Izleyici kullanarak ölçümler ile çalışma hakkında daha fazla bilgi için, bkz. [Microsoft Azure ölçümlere genel bakış](../monitoring-and-diagnostics/monitoring-overview-metrics.md).
 
 <a name="how-to-view-metrics-and-customize-chart"></a>
 <a name="enable-cache-diagnostics"></a>
-## <a name="export-cache-metrics"></a>Önbellek ölçümleri dışarı aktarma
-Varsayılan olarak, Azure İzleyici'de önbellek ölçümleridir [30 gün saklanan](../azure-monitor/platform/data-platform-metrics.md) ve ardından silinir. Kalıcı önbellek ölçümlerinizi 30 günden daha uzun bir süre için [bir depolama hesabı atamak](../azure-monitor/platform/archive-diagnostic-logs.md) belirtin bir **bekletme (gün)** önbellek ölçümlerinizi ilkesi. 
+## <a name="export-cache-metrics"></a>Önbellek ölçümlerini dışarı aktar
+Varsayılan olarak, Azure Izleyici 'deki önbellek ölçümleri [30 gün boyunca depolanır](../azure-monitor/platform/data-platform-metrics.md) ve sonra silinir. Önbellek ölçümlerinizi 30 günden daha uzun bir süre boyunca kalıcı hale getirmek için [bir depolama hesabı](../azure-monitor/platform/archive-diagnostic-logs.md) belirleyebilir ve önbellek ölçümleriniz Için bir **bekletme (gün)** ilkesi belirtebilirsiniz. 
 
-Önbellek ölçümlerinizi için bir depolama hesabı yapılandırmak için:
+Önbellek ölçümleriniz için bir depolama hesabı yapılandırmak için:
 
-1. Tıklayın **tanılama** gelen **kaynak menüsünde** içinde **Azure önbelleği için Redis** dikey penceresi.
-2. Tıklayın **üzerinde**.
-3. Denetleme **bir depolama hesabında arşivle**.
-4. Önbellek ölçümlerini depolanacağı depolama hesabı seçin.
-5. Denetleme **1 dakika** onay kutusunu belirtin bir **bekletme (gün)** ilkesi. İstemiyorsanız, herhangi bir bekletme ilkesi uygulamak ve verileri süresiz olarak bekletmek ayarlayın **bekletme (gün)** için **0**.
+1. **Redsıs dikey penceresinde Azure önbelleğindeki** **Kaynak menüsünden** **Tanılamalar** ' a tıklayın.
+2. Öğesine **tıklayın.**
+3. **Arşivi bir depolama hesabına**çekin.
+4. Önbellek ölçümlerinin kaydedileceği depolama hesabını seçin.
+5. **1 dakikalık** onay kutusunu işaretleyin ve bir **bekletme (gün)** ilkesi belirtin. Herhangi bir bekletme ilkesi uygulamak ve verileri süresiz olarak saklamak istemiyorsanız, **bekletme (gün)** seçeneğini **0**olarak ayarlayın.
 6. **Kaydet**’e tıklayın.
 
-![Tanılama redis](./media/cache-how-to-monitor/redis-cache-diagnostics.png)
+![Redsıs tanılama](./media/cache-how-to-monitor/redis-cache-diagnostics.png)
 
 >[!NOTE]
->Depolama için önbellek ölçümlerinizi arşivleme yanı sıra, ayrıca [bunları bir olay hub'ına akış veya Azure İzleyici günlüklerine şirketlerde](../azure-monitor/platform/rest-api-walkthrough.md#retrieve-metric-values).
+>Önbellek ölçümlerinizi depolamaya arşivleme ek olarak, [bunları bir olay hub 'ına de bağlayabilir veya Azure izleyici günlüklerine gönderebilirsiniz](../azure-monitor/platform/rest-api-walkthrough.md#retrieve-metric-values).
 >
 >
 
-Ölçümlerinizin erişmek için daha önce bu makalede açıklanan Azure portalında görüntüleyebilir ve bunları da erişebilirsiniz kullanarak [Azure İzleyici ölçümleri REST API](../azure-monitor/platform/stream-monitoring-data-event-hubs.md).
+Ölçümlerinize erişmek için, bu makalede daha önce açıklanan Azure portal görüntüleyebilirsiniz ve [Azure Izleyici ölçümleri REST API](../azure-monitor/platform/stream-monitoring-data-event-hubs.md)kullanarak da erişebilirsiniz.
 
 > [!NOTE]
-> Depolama hesaplarını değiştirirseniz, önceden yapılandırılmış depolama hesabındaki verileri indirme için kullanılabilir kalır, ancak Azure portalında görüntülenmez.  
+> Depolama hesaplarını değiştirirseniz, daha önce yapılandırılan depolama hesabındaki veriler indirilmek üzere kullanılabilir kalır, ancak Azure portal gösterilmez.  
 > 
 > 
 
-## <a name="available-metrics-and-reporting-intervals"></a>Kullanılabilir Ölçümler ve raporlama aralıkları
-Önbellek ölçümlerini dahil olmak üzere çeşitli raporlama aralıkları kullanarak rapor **saati aşan**, **Bugün**, **geçen hafta**, ve **özel**. **Ölçüm** her bir ölçüm grafiği dikey grafikteki her ölçümün ortalama, minimum ve maksimum değerleri görüntüler ve bazı ölçümler için raporlama aralığı toplam görüntüleme. 
+## <a name="available-metrics-and-reporting-intervals"></a>Kullanılabilir ölçümler ve raporlama aralıkları
+Önbellek ölçümleri, **Geçmiş saat**, **bugün**, **geçen hafta**ve **özel**gibi birkaç Raporlama aralığı kullanılarak raporlanır. Her ölçüm grafiğinin **ölçüm** dikey penceresi grafikteki her ölçüm için Ortalama, en düşük ve en yüksek değerleri görüntüler ve bazı ölçümler Raporlama aralığı için bir toplam görüntüler. 
 
-Her ölçüm iki sürümünü içerir. Bir ölçüm ölçer performans kullanan önbellekler yanı sıra, tüm önbelleği [Kümeleme](cache-how-to-premium-clustering.md), ikinci bir sürümü içeren ölçüm, `(Shard 0-9)` tek parça bir önbellekte adı ölçüler performans. Örneğin, bir önbellek 4 parçaya sahipse `Cache Hits` tüm önbelleği isabetli okuma sayısının toplam tutar ve `Cache Hits (Shard 3)` yalnızca İsabeti için bu önbelleğin parça.
+Her ölçüm iki sürüm içerir. Bir ölçüm tüm önbelleğin performansını ölçer ve [kümeleme](cache-how-to-premium-clustering.md)kullanan önbellekler için, ad içinde `(Shard 0-9)` içeren ikinci bir sürümü bir önbellekte tek bir parça için performansı ölçer. Örneğin, bir önbellekte 4 parça varsa `Cache Hits` tüm önbelleğin toplam isabet miktarı olur ve `Cache Hits (Shard 3)` yalnızca önbelleğin söz konusu parçasına ait olan isabetlerğidir.
 
 > [!NOTE]
-> Önbellek ile hiçbir bağlı etkin istemci uygulamaları boşta olduğunda bile, bağlı istemciler, bellek kullanımı ve gerçekleştirilen işlemleri gibi bazı önbellek etkinliği görebilirsiniz. Bu etkinlik, bir Azure Cache, Redis örneği için işlemi sırasında normaldir.
+> Önbellek bağlı etkin istemci uygulamaları olmadan boşta kaldığında bile, bağlı istemciler, bellek kullanımı ve gerçekleştirilen işlemler gibi bazı önbellek etkinliklerini görebilirsiniz. Bu etkinlik, Redsıs örneği için Azure önbelleğinin çalışması sırasında normaldir.
 > 
 > 
 
 | Ölçüm | Açıklama |
 | --- | --- |
-| İsabetli Önbellek okuma sayısı |Belirtilen raporlama aralığı sırasında anahtar başarılı arama sayısı. Bu eşlendiği `keyspace_hits` redis [bilgisi](https://redis.io/commands/info) komutu. |
-| Önbellek gecikme süresi (Önizleme) | Gecikme süresi önbellek, önbellek düğümler arası gecikme süresini kapalı göre hesaplanır. Bu ölçüm, mikro saniye cinsinden ölçülür ve üç boyutu vardır: "Ortalama", "Min" ve "ortalama, minimum ve maksimum gecikme süresini önbelleği belirtilen zaman aralığı boyunca sırasıyla temsil eden Max". |
-| İsabetsiz önbellek okuma sayısı |Belirtilen raporlama aralığı sırasında başarısız anahtar arama sayısı. Bu eşlendiği `keyspace_misses` Redis bilgisi komutu. İsabetsiz önbellek okuma sayısı, önbellek ile ilgili bir sorun var. olmak zorunda gelmez. Örneğin, programlama edilgen önbellek düzeni kullanılırken, bir uygulama önbellekteki bir öğenin ilk arar. Öğesi (önbellek isabetsizliği) yoksa, öğe veritabanından alınan ve bir sonraki seferde önbelleğe eklenir. İsabetsiz önbellek okuma sayısı programlama edilgen önbellek düzeni için normal davranış ' dir. Önbellek kaçaklarının sayısı beklenenden yüksekse uygulama mantığı doldurur ve önbellekten okur inceleyin. Öğeleri çıkarıldığına bellek baskısı nedeniyle önbellekten sonra bazı önbellek isabetsizliği olabilir, ancak bellek Basıncı izlemek için daha iyi bir ölçüm olacaktır `Used Memory` veya `Evicted Keys`. |
-| Önbellek okuması |Önbelleğin megabayt (MB/sn) belirtilen raporlama aralığı sırasında saniye başına veri miktarını okuyabilir. Bu değer, önbellek barındıran ve Redis belirli değil sanal makineyi destekleyen ağ arabirim kartlarından elde edilir. **Bu değer bu önbelleği tarafından kullanılan ağ bant genişliği karşılık gelir. Uyarılar için sunucu tarafı ağ bant genişliği sınırlarını ayarlamak istiyorsanız, bunu kullanarak oluşturma `Cache Read` sayacı. Bkz: [bu tabloda](cache-faq.md#cache-performance) gözlemlenen bant genişliği sınırlarını çeşitli önbellek fiyatlandırma katmanları ve boyutları için.** |
-| Önbellek yazması |Önbelleğin megabayt (MB/sn) belirtilen sırasında saniye başına yazılan veri miktarı aralığı raporlama. Bu değer, önbellek barındıran ve Redis belirli değil sanal makineyi destekleyen ağ arabirim kartlarından elde edilir. Bu değer, ağ bant genişliğini önbelleğe istemciden gönderilen veri karşılık gelir. |
-| Bağlı istemciler |Belirtilen raporlama aralığı boyunca önbelleğe istemci bağlantılarının sayısı. Bu eşlendiği `connected_clients` Redis bilgisi komutu. Bir kez [bağlantı sınırı](cache-configure.md#default-redis-server-configuration) ulaşıldığında sonraki bağlantı denemelerinde önbellek için başarısız olan. Hiçbir etkin istemci uygulaması olsa bile, yine de olabilir bağlı istemciler dahili süreçleri ve bağlantıları nedeniyle birkaç örneklerini unutmayın. |
-| CPU |CPU kullanım yüzdesini Azure önbelleği için Redis sunucusu bir yüzdesi olarak belirtilen raporlama aralığı sırasında. Bu değer işletim sistemine eşler `\Processor(_Total)\% Processor Time` performans sayacı. |
-| Hatalar | Belirli hataları ve performans sorunları, önbelleğin bir belirtilen zaman aralığı boyunca yaşıyor olabilir. Bu ölçüm, sekiz boyutları farklı hata türleri temsil eden sahiptir, ancak daha sonra eklediğiniz. Şu anda temsil hata türleri aşağıdaki gibidir: <br/><ul><li>**Yük devretme** – bir önbellek yük devrettiğinde (alt yükseltir asıl)</li><li>**Kilitlenme** – önbellek beklenmedik bir şekilde düğümlerden birini kilitlendiğinde</li><li>**Dataloss** – önbellekte dataloss olduğunda</li><li>**UnresponsiveClients** – istemcilerin veri sunucudan yeterince hızlı değil okurken</li><li>**AOF** – AOF Kalıcılık için ilgili bir sorun oluştuğunda</li><li>**RDB** – RDB Kalıcılık için ilgili bir sorun oluştuğunda</li><li>**İçeri aktarma** – içeri aktarma RDB için ilgili bir sorun oluştuğunda</li><li>**Dışarı aktarma** – RDB dışarı aktarma için ilgili bir sorun oluştuğunda</li></ul> |
-| Çıkarılan anahtarlar |Öğe için belirtilen raporlama aralığı sırasında önbellekten çıkarılmasına `maxmemory` sınırı. Bu eşlendiği `evicted_keys` Redis bilgisi komutu. |
-| Süresi dolan anahtarlar |Öğe sayısı, belirtilen zaman aralığı boyunca önbellekten süresi doldu. Bu değer eşlendiği `expired_keys` Redis bilgisi komutu.|
-| Alır |Belirtilen raporlama aralığı sırasında önbellekten get işlemleri sayısı. Toplam aşağıdaki tüm komut Redis bilgisi değerleri değerdir: `cmdstat_get`, `cmdstat_hget`, `cmdstat_hgetall`, `cmdstat_hmget`, `cmdstat_mget`, `cmdstat_getbit`, ve `cmdstat_getrange`ve Önbelleği İsabetli ve isabetsiz toplamına eşittir Raporlama zaman aralığı boyunca. |
-| Saniye başına işlem | Komutlar belirtilen zaman aralığı boyunca önbellek sunucu tarafından saniyede işlenen toplam sayısı.  Bu değer, Redis bilgisi komuttan "instantaneous_ops_per_sec için" eşler. |
-| Redis sunucu yükü |Döngüleri Redis sunucu işleme ve iletileri için boşta beklenmiyor meşgul olduğu yüzdesi. Bu sayaç, Redis sunucusunun performans üst sınıra ulaşıp ulaşmadığını ve CPU işleme koyamıyoruz geldiğini 100 ulaşırsa herhangi daha hızlı çalışır. Yüksek Redis sunucu yükü görüyorsanız, istemci zaman aşımı özel durumları görürsünüz. Bu durumda artırma veya birden çok önbelleklerine verilerinizi bölümlemeyi göz önünde bulundurmalısınız. |
-| Ayarlar |Belirtilen raporlama aralığı boyunca önbelleğe ayarlama işlemleri sayısı. Toplam aşağıdaki tüm komut Redis bilgisi değerleri değerdir: `cmdstat_set`, `cmdstat_hset`, `cmdstat_hmset`, `cmdstat_hsetnx`, `cmdstat_lset`, `cmdstat_mset`, `cmdstat_msetnx`, `cmdstat_setbit`, `cmdstat_setex`, `cmdstat_setrange` , ve `cmdstat_setnx`. |
-| Toplam anahtar sayısı  | Son raporlama süre boyunca önbellekteki anahtarlar maksimum sayısı. Bu eşlendiği `keyspace` Redis bilgisi komutu. Etkin, kümeleme ile önbellekler için temel alınan ölçümleri sistemi ile ilgili bir sınırlama nedeniyle Raporlama zaman aralığı boyunca maksimum anahtar sayısı olan parça anahtarlarının sayısı toplam anahtarlarını döndürür.  |
-| İşlemler toplamı |Komutlar belirtilen zaman aralığı boyunca önbellek sunucu tarafından işlenen toplam sayısı. Bu değer eşlendiği `total_commands_processed` Redis bilgisi komutu. Azure önbelleği için Redis tamamen pub/sub için kullanıldığında olacağını ölçüm için Not `Cache Hits`, `Cache Misses`, `Gets`, veya `Sets`, olacaktır ancak `Total Operations` yansıtan pub/sub işlemleri için önbellek kullanım ölçümleri. |
-| Kullanılan bellek |Önbellek anahtar/değer çiftleri MB önbelleğinde belirtilen zaman aralığı boyunca kullanılan bellek miktarı. Bu değer eşlendiği `used_memory` Redis bilgisi komutu. Bu meta veriler ya da parçalanma içermez. |
-| Kullanılan bellek yüzdesi | Belirtilen zaman aralığı boyunca kullanılan toplam bellek %.  Bu bilgileri Redis komutu yüzdesini hesaplamak için "used_memory" değeri başvuruyor. |
-| Kullanılan bellek RSS |Önbellek parçalanma ve meta verileri de dahil olmak üzere belirtilen Raporlama zaman aralığı boyunca, MB olarak kullanılan bellek miktarı. Bu değer eşlendiği `used_memory_rss` Redis bilgisi komutu. |
+| Önbellek ısabetleri |Belirtilen Raporlama aralığı sırasında başarılı anahtar arama sayısı. Bu, Redsıs [Info](https://redis.io/commands/info) komutundan `keyspace_hits` eşlenir. |
+| Önbellek gecikmesi (Önizleme) | Önbelleğin düğümler arası gecikme süresi temel alınarak hesaplanan önbelleğin gecikmesi. Bu ölçüm mikrosaniye cinsinden ölçülür ve üç boyuta sahiptir: belirtilen Raporlama aralığı sırasında önbelleğin ortalama, en düşük ve en fazla gecikme süresini temsil eden "AVG", "min" ve "Max". |
+| Önbellek Isabetsizliği |Belirtilen Raporlama aralığı sırasında başarısız anahtar aramalarının sayısı. Bu, Redsıs ıNFO komutundan `keyspace_misses` eşlenir. Önbellek isabetsizliği, önbellekte bir sorun olduğu anlamına gelmez. Örneğin, önbelleğe alma programlama deseninin kullanıldığı bir uygulama, bir öğe için ilk önbellekte görünür. Öğe yoksa (önbellek isabetsizliği), öğe veritabanından alınır ve bir dahaki sefer için önbelleğe eklenir. Önbellek isabetsizliği, önbelleğe alma programlama deseninin normal davranışıdır. Önbellek isabetsizlik sayısı beklenenden yüksekse, önbellekten dolduran ve okunan uygulama mantığını inceleyin. Bellek baskısı nedeniyle Öğeler önbellekten çıkarılacaksa, bazı önbellek isabetsizliği olabilir, ancak bellek basıncını izlemek için daha iyi bir ölçüm `Used Memory` veya `Evicted Keys`. |
+| Önbellek Okuma |Belirtilen Raporlama aralığı sırasında önbellekten saniye başına megabayt (MB/sn) cinsinden okunan veri miktarı. Bu değer, önbelleği barındıran sanal makineyi destekleyen ve Redspecific olmayan ağ arabirimi kartlarından türetilir. **Bu değer, bu önbellek tarafından kullanılan ağ bant genişliğine karşılık gelir. Sunucu tarafı ağ bant genişliği sınırları için uyarı ayarlamak istiyorsanız bu `Cache Read` sayacını kullanarak oluşturun. Çeşitli önbellek fiyatlandırma katmanları ve boyutları için gözlenen bant genişliği sınırları için [Bu tabloya](cache-faq.md#cache-performance) bakın.** |
+| Önbellek yazma |Belirtilen Raporlama aralığı sırasında önbelleğe saniye başına megabayt (MB/sn) cinsinden yazılan veri miktarı. Bu değer, önbelleği barındıran sanal makineyi destekleyen ve Redspecific olmayan ağ arabirimi kartlarından türetilir. Bu değer, istemciden önbelleğe gönderilen verilerin ağ bant genişliğine karşılık gelir. |
+| Bağlı Istemciler |Belirtilen Raporlama aralığı sırasında önbelleğe yönelik istemci bağlantısı sayısı. Bu, Redsıs ıNFO komutundan `connected_clients` eşlenir. [Bağlantı sınırına](cache-configure.md#default-redis-server-configuration) ulaşıldığında önbelleğe yapılan bağlantı denemeleri başarısız olur. Etkin istemci uygulaması olmasa bile, iç süreçler ve bağlantılar nedeniyle bağlı istemcilerin birkaç örneği olabilir. |
+| CPU |Belirtilen Raporlama aralığı sırasında bir yüzde olarak Redsıs sunucusu için Azure önbelleğinin CPU kullanımı. Bu değer, işletim sistemi `\Processor(_Total)\% Processor Time` performans sayacı ile eşlenir. |
+| Hatalar | Belirli bir Raporlama aralığı sırasında önbelleğin karşılaştığı belirli sorunlar ve performans sorunları. Bu ölçüm, farklı hata türlerini temsil eden sekiz boyuta sahiptir, ancak gelecekte daha fazla eklenebilir. Şu anda temsil edilen hata türleri şunlardır: <br/><ul><li>**Yük devretme** – bir önbellek yük devretmediğinde (alt öğe ana için yükseltir)</li><li>**DataLoss** – önbellekte DataLoss olduğunda</li><li>**UnresponsiveClients** – istemciler sunucudan yeterince hızlı veri okumuyor</li><li>**AOF** : AOF kalıcılığı ile ilgili bir sorun olduğunda</li><li>**RDB** : RDB kalıcılığı ile ilgili bir sorun olduğunda</li><li>**Içeri aktarma** – RDB içeri aktarma ile ilgili bir sorun olduğunda</li><li>**Dışarı aktar** : RDB dışarı aktarma ile ilgili bir sorun olduğunda</li></ul> |
+| Çıkarılan anahtarlar |`maxmemory` sınırı nedeniyle belirtilen Raporlama aralığı sırasında önbellekten çıkarılan öğe sayısı. Bu, Redsıs ıNFO komutundan `evicted_keys` eşlenir. |
+| Süre dolma anahtarları |Belirtilen Raporlama aralığı sırasında önbellekten geçen öğe sayısı. Bu değer Redsıs ıNFO komutundan `expired_keys` eşlenir.|
+| İyorsa |Belirtilen Raporlama aralığı sırasında önbellekten alınan alma işlemlerinin sayısı. Bu değer, Redsıs ıNFO All komutundan aşağıdaki değerlerin toplamıdır: `cmdstat_get`, `cmdstat_hget`, `cmdstat_hgetall`, `cmdstat_hmget`, `cmdstat_mget`, `cmdstat_getbit`ve `cmdstat_getrange`, ve Raporlama aralığı sırasında önbellek isabetlerinin ve isabetsizlik toplamına eşdeğerdir. |
+| İşlem/saniye | Belirtilen Raporlama aralığı sırasında önbellek sunucusu tarafından saniye başına işlenen komutların toplam sayısı.  Bu değer Redsıs ıNFO komutundan "instantaneous_ops_per_sec" ile eşlenir. |
+| Redsıs sunucu yükü |Reddir sunucusunun işleme meşgul olduğu ve iletiler için boşta beklememe döngülerinin yüzdesi. Bu sayaç 100 'e ulaşırsa, Redo sunucusu bir performans üst sınırına ulaştığında ve CPU daha hızlı çalışmayı işleyemez. Yüksek Redsıs sunucu yükünü görüyorsanız, zaman aşımı özel durumlarını istemcide görürsünüz. Bu durumda, verilerinizi birden çok önbellekte ölçeklendirmeyi veya Bölümlendirmeyi düşünmelisiniz. |
+| Yapar |Belirtilen Raporlama aralığı sırasında önbelleğe yönelik ayarlanan işlem sayısı. Bu değer, Redsıs ıNFO All komutundan aşağıdaki değerlerin toplamıdır: `cmdstat_set`, `cmdstat_hset`, `cmdstat_hmset`, `cmdstat_hsetnx`, `cmdstat_lset`, `cmdstat_mset`, `cmdstat_msetnx`, `cmdstat_setbit`, `cmdstat_setex`, `cmdstat_setrange`ve `cmdstat_setnx`. |
+| Toplam anahtar sayısı  | Geçmiş raporlama dönemi boyunca önbellekte bulunan en fazla anahtar sayısı. Bu, Redsıs ıNFO komutundan `keyspace` eşlenir. Temel alınan ölçümler sisteminin bir sınırlaması nedeniyle, kümelemenin etkinleştirildiği önbellekler için, toplam anahtar, Raporlama aralığı sırasında en fazla sayıda anahtara sahip parça en fazla anahtar sayısını döndürür.  |
+| Toplam Işlem sayısı |Belirtilen Raporlama aralığı sırasında önbellek sunucusu tarafından işlenen komutların toplam sayısı. Bu değer Redsıs ıNFO komutundan `total_commands_processed` eşlenir. Redin için Azure Cache 'in yalnızca pub/Sub için kullanıldığı durumlarda `Cache Hits`, `Cache Misses`, `Gets`veya `Sets`için hiçbir ölçüm olmaz, ancak yayımlama/alt işlemler için önbellek kullanımını yansıtan `Total Operations` ölçümleri olacaktır. |
+| Kullanılan bellek |Belirtilen Raporlama aralığı boyunca önbellekte bulunan anahtar/değer çiftleri için kullanılan önbellek bellek miktarı. Bu değer Redsıs ıNFO komutundan `used_memory` eşlenir. Bu, meta veri veya parçalama içermez. |
+| Kullanılan bellek yüzdesi | Belirtilen Raporlama aralığı boyunca kullanılan toplam belleğin yüzdesi.  Bu, yüzdeyi hesaplamak için Redsıs ıNFO komutundan "used_memory" değerine başvurur. |
+| Kullanılan bellek RSS |Parçalama ve meta veriler dahil olmak üzere, belirtilen Raporlama aralığı sırasında MB cinsinden kullanılan önbellek bellek miktarı. Bu değer Redsıs ıNFO komutundan `used_memory_rss` eşlenir. |
 
 <a name="operations-and-alerts"></a>
 ## <a name="alerts"></a>Uyarılar
@@ -126,23 +118,23 @@ Her ölçüm iki sürümünü içerir. Bir ölçüm ölçer performans kullanan 
 * Web kancası çağırma
 * Bir Azure Mantıksal Uygulamasını çağırma
 
-Önbelleğinizi uyarı kurallarını yapılandırmak için tıklayın **uyarı kuralları** gelen **kaynak menüsünde**.
+Önbelleğiniz için uyarı kurallarını yapılandırmak üzere **kaynak menüsünde** **Uyarı kuralları** ' na tıklayın.
 
 ![İzleme](./media/cache-how-to-monitor/redis-cache-monitoring.png)
 
-Yapılandırma ve uyarılar kullanma hakkında daha fazla bilgi için bkz. [genel bakış, uyarı](../monitoring-and-diagnostics/insights-alerts-portal.md).
+Uyarıları yapılandırma ve kullanma hakkında daha fazla bilgi için bkz. [uyarılara genel bakış](../monitoring-and-diagnostics/insights-alerts-portal.md).
 
 ## <a name="activity-logs"></a>Etkinlik Günlükleri
-Etkinlik günlükleri, Azure önbelleği için Redis örneği üzerinde gerçekleştirilen işlemler hakkında bilgi sağlar. Daha önce "denetim günlüklerini" veya "işlem günlüklerinde" olarak biliniyordu. Etkinlik günlüklerini kullanarak, belirleyebilirsiniz "ne, kim ve ne zaman" işlemlerini (PUT, POST, DELETE), Azure önbelleği için Redis örneği üzerinde gerçekleştirilen herhangi bir yazma için. 
+Etkinlik günlükleri, Redsıs örnekleri için Azure önbelleğiniz üzerinde gerçekleştirilen işlemlere ilişkin öngörüler sağlar. Daha önce "Denetim günlükleri" veya "işletimsel Günlükler" olarak bilinirdi. Etkinlik günlüklerini kullanarak, Redsıs örnekleri için Azure önbelleğiniz üzerinde herhangi bir yazma işlemi (PUT, POST, DELETE) için "ne, kim ve ne zaman" i belirleyebilirsiniz. 
 
 > [!NOTE]
-> Etkinlik günlükleri, okuma (GET) işlemlerini içermez.
+> Etkinlik günlükleri okuma (GET) işlemlerini içermez.
 >
 >
 
-Önbellek hesabınız için etkinlik günlüklerini görüntülemek için tıklayın **etkinlik günlüklerini** gelen **kaynak menüsünde**.
+Önbelleğiniz için etkinlik günlüklerini görüntülemek için **kaynak menüsünde** **etkinlik günlükleri** ' ne tıklayın.
 
-Etkinlik günlükleri hakkında daha fazla bilgi için bkz. [Azure etkinlik günlüğü'ne genel bakış](../azure-monitor/platform/activity-logs-overview.md).
+Etkinlik günlükleri hakkında daha fazla bilgi için bkz. [Azure etkinlik günlüğü 'Ne genel bakış](../azure-monitor/platform/activity-logs-overview.md).
 
 
 

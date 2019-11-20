@@ -1,9 +1,9 @@
 ---
 title: Sertifika ortak adını kullanarak bir Azure Service Fabric kümesi oluşturma | Microsoft Docs
-description: Bir şablondan sertifika ortak adını kullanarak bir Service Fabric kümesi oluşturmayı öğrenin.
+description: Bir şablondan sertifika ortak adını kullanarak Service Fabric kümesi oluşturmayı öğrenin.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: ''
 ms.assetid: ''
@@ -12,31 +12,31 @@ ms.devlang: dotnet
 ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 04/24/2018
-ms.author: aljo
-ms.openlocfilehash: fe1adc0aef80066721ce0b80419c787fe25346a9
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.date: 09/06/2019
+ms.author: atsenthi
+ms.openlocfilehash: 73e02b4482f69ec0c9d5a602f30cefea77279778
+ms.sourcegitcommit: a4b5d31b113f520fcd43624dd57be677d10fc1c0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67190810"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70764735"
 ---
-# <a name="deploy-a-service-fabric-cluster-that-uses-certificate-common-name-instead-of-thumbprint"></a>Parmak izi yerine sertifika ortak adını kullanan bir Service Fabric kümesi dağıtma
-İki sertifika küme sertifika geçişi veya yönetim zorlaştırır aynı parmak olabilir. Ancak, aynı ortak adı veya konu birden çok sertifika sahip olabilir.  Sertifika ortak adları kullanarak bir küme, sertifika yönetimi çok daha kolay hale getirir. Bu makalede, sertifika ortak adına sertifika parmak izi yerine kullanılacak bir Service Fabric kümesi dağıtmayı açıklar.
+# <a name="deploy-a-service-fabric-cluster-that-uses-certificate-common-name-instead-of-thumbprint"></a>Parmak izi yerine sertifika ortak adı kullanan bir Service Fabric kümesi dağıtma
+İki sertifika aynı parmak izine sahip olamaz, bu da küme sertifikası geçişi veya yönetimini zorlaştırır. Ancak, birden çok sertifika aynı ortak ada veya konuya sahip olabilir.  Sertifika ortak adlarını kullanan bir küme, sertifika yönetimini çok daha kolay hale getirir. Bu makalede, sertifika parmak izi yerine sertifika ortak adını kullanmak üzere bir Service Fabric kümesinin nasıl dağıtılacağı açıklanır.
  
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="get-a-certificate"></a>Sertifika alma
-İlk olarak, bir sertifika alın bir [sertifika yetkilisi (CA)](https://wikipedia.org/wiki/Certificate_authority).  Sertifikanın ortak adı için özel etki alanı kendi ve bir etki alanı kayıt şirketi'ndan satın olmalıdır. Örneğin, "azureservicefabricbestpractices.com"; Microsoft çalışanları olmayan kişilerin MS etki alanlarına yönelik sertifikaları sertifikanız için yaygın olarak kullanılan adları olarak LB veya Traffic Manager DNS adlarını kullanamazsınız ve sağlamak için ihtiyacınız olacak şekilde sağlayabilirsiniz değil bir [Azure DNS bölgesi](https://docs.microsoft.com/azure/dns/dns-delegate-domain-azure-dns) , kendi özel Azure'da çözülebilir olması için etki alanı. Ayrıca, diğer kümeniz için özel etki alanını yansıtacak şekilde portalı istiyorsanız, kümenin "managementEndpoint" kendi özel etki alanınızı bildirmek isteyeceksiniz.
+## <a name="get-a-certificate"></a>Sertifika Al
+İlk olarak, bir [sertifika yetkilisinden (CA)](https://wikipedia.org/wiki/Certificate_authority)bir sertifika alın.  Sertifikanın ortak adı, sahip olduğunuz özel etki alanı için olmalıdır ve bir etki alanı kaydedicisinde satın alınmalıdır. Örneğin, "azureservicefabricbestpractices.com"; Microsoft çalışanları, MS etki alanları için sertifikaları sağlamayamadığından, LB veya Traffic Manager DNS adlarını sertifikanız için ortak adlar olarak kullanamazsınız ve özel etki alanınız için bir [Azure DNS bölgesi](https://docs.microsoft.com/azure/dns/dns-delegate-domain-azure-dns) sağlamanız gerekir. Azure 'da e. Ayrıca, portalınızın kümeniz için özel etki alanı diğer adını yansıtmasını istiyorsanız, kendi özel etki alanınızı kümenizin "managementEndpoint" olarak bildirmeniz gerekir.
 
-Test amacıyla, ücretsiz veya açık bir sertifika yetkilisinden bir CA imzalı bir sertifika alabilir.
+Sınama amacıyla, ücretsiz veya açık bir sertifika yetkilisinden CA imzalı bir sertifika edinebilirsiniz.
 
 > [!NOTE]
-> Azure portalında bir Service Fabric küme dağıtılırken oluşturulan dahil olmak üzere otomatik olarak imzalanan sertifikalar desteklenmiyor. 
+> Azure portal bir Service Fabric kümesi dağıtımında oluşturulanlar dahil, otomatik olarak imzalanan sertifikalar desteklenmez. 
 
-## <a name="upload-the-certificate-to-a-key-vault"></a>Bir anahtar kasasına sertifika yükleme
-Azure'da bir sanal makine ölçek kümesi üzerinde bir Service Fabric kümesine dağıtılır.  Sertifikayı bir anahtar Kasası'na yükleyin.  Kümeye dağıttığında, sertifikayı kümesi çalıştıran sanal makine ölçek kümesinde yükler.
+## <a name="upload-the-certificate-to-a-key-vault"></a>Sertifikayı bir anahtar kasasına yükleme
+Azure 'da bir Service Fabric kümesi, sanal makine ölçek kümesine dağıtılır.  Sertifikayı bir anahtar kasasına yükleyin.  Küme dağıtıldıktan sonra, sertifika kümenin üzerinde çalıştığı sanal makine ölçek kümesine yüklenir.
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force
@@ -62,7 +62,7 @@ $resourceId = $newKeyVault.ResourceId
 
 # Add the certificate to the key vault.
 $PasswordSec = ConvertTo-SecureString -String $Password -AsPlainText -Force
-$KVSecret = Import-AzureKeyVaultCertificate -VaultName $vaultName -Name $certName  -FilePath $certFilename -Password $PasswordSec
+$KVSecret = Import-AzKeyVaultCertificate -VaultName $vaultName -Name $certName  -FilePath $certFilename -Password $PasswordSec
 
 $CertificateThumbprint = $KVSecret.Thumbprint
 $CertificateURL = $KVSecret.SecretId
@@ -75,11 +75,11 @@ Write-Host "SourceVault              :"  $SourceVault
 Write-Host "Common Name              :"  $CommName    
 ```
 
-## <a name="download-and-update-a-sample-template"></a>İndirin ve bir örnek şablonu güncelleştirin
-Bu makalede [güvenli kümesi 5 düğümlü örnek](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Windows-1-NodeTypes-Secure) şablon ve şablon parametreleri. İndirme *azuredeploy.json* ve *azuredeploy.parameters.json* bilgisayarınıza dosyaları.
+## <a name="download-and-update-a-sample-template"></a>Örnek şablon indirme ve güncelleştirme
+Bu makale, [5 düğümlü güvenli küme örnek](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Windows-1-NodeTypes-Secure) şablonunu ve şablon parametrelerini kullanır. *Azuredeploy. JSON* ve *azuredeploy. Parameters. JSON* dosyalarını bilgisayarınıza indirin.
 
-### <a name="update-parameters-file"></a>Parametreler dosyasını güncelleştirme
-İlk olarak, açık *azuredeploy.parameters.json* dosyasını bir metin düzenleyicisinde ve aşağıdaki parametreyi ekleyin:
+### <a name="update-parameters-file"></a>Parametreleri Güncelleştir dosyası
+İlk olarak, *azuredeploy. Parameters. JSON* dosyasını bir metin düzenleyicisinde açın ve şu parametre değerini ekleyin:
 ```json
 "certificateCommonName": {
     "value": "myclustername.southcentralus.cloudapp.azure.com"
@@ -89,7 +89,7 @@ Bu makalede [güvenli kümesi 5 düğümlü örnek](https://github.com/Azure-Sam
 },
 ```
 
-Ardından, ayarlama *certificateCommonName*, *sourceVaultValue*, ve *certificateUrlValue* parametre değerlerini bu önceki komut dosyası tarafından döndürülen:
+Ardından, *Certificatecommonname*, *Sourcevaultvalue*ve *certificateurlvalue* parametre değerlerini önceki komut dosyası tarafından döndürülen değerlere ayarlayın:
 ```json
 "certificateCommonName": {
     "value": "myclustername.southcentralus.cloudapp.azure.com"
@@ -106,9 +106,9 @@ Ardından, ayarlama *certificateCommonName*, *sourceVaultValue*, ve *certificate
 ```
 
 ### <a name="update-the-template-file"></a>Şablon dosyasını güncelleştirme
-Ardından, açık *azuredeploy.json* dosyasını bir metin düzenleyicisinde ve sertifika ortak adına desteklemek için üç güncelleştirmeleri yapın.
+Sonra, *azuredeploy. JSON* dosyasını bir metin düzenleyicisinde açın ve sertifika ortak adını desteklemek için üç güncelleştirme yapın.
 
-1. İçinde **parametreleri** bölümünde, eklemek bir *certificateCommonName* parametresi:
+1. **Parametreler** bölümünde, bir *certificatecommonname* parametresi ekleyin:
     ```json
     "certificateCommonName": {
       "type": "string",
@@ -124,21 +124,21 @@ Ardından, açık *azuredeploy.json* dosyasını bir metin düzenleyicisinde ve 
     },
     ```
 
-    Ayrıca kaldırmayı düşünün *certificateThumbprint*, artık gerekli.
+    Ayrıca, *certificateThumbprint*öğesini kaldırmayı düşünün, artık gerekli olmayabilir.
 
-2. Değerini *sfrpApiVersion* "2018-02-01" değişkenini:
+2. *SfrpApiVersion* değişkeninin değerini "2018-02-01" olarak ayarlayın:
     ```json
     "sfrpApiVersion": "2018-02-01",
     ```
 
-3. İçinde **Microsoft.Compute/virtualMachineScaleSets** kaynağın ortak adı yerine parmak izi sertifika ayarlarını kullanmak için sanal makine uzantısını güncelleştirin.  İçinde **virtualMachineProfile**->**extensionprofile öğesine**->**uzantıları**->**özellikleri** -> **ayarları**->**sertifika**, Ekle 
+3. **Microsoft. COMPUTE/virtualMachineScaleSets** kaynağında, sanal makine uzantısını parmak izi yerine sertifika ayarları 'nda ortak adı kullanacak şekilde güncelleştirin.  **Virtualmachineprofile**->**extensionprofile**->**Extensions**Özellikler ayarları sertifikası, Ekle->->-> 
     ```json
        "commonNames": [
         "[parameters('certificateCommonName')]"
        ],
     ```
 
-    kaldırıp `"thumbprint": "[parameters('certificateThumbprint')]",`.
+    ve kaldırın `"thumbprint": "[parameters('certificateThumbprint')]",`.
 
     ```json
     "virtualMachineProfile": {
@@ -173,7 +173,7 @@ Ardından, açık *azuredeploy.json* dosyasını bir metin düzenleyicisinde ve 
           },
     ```
 
-4. İçinde **Microsoft.ServiceFabric/clusters** kaynak, "2018-02-01" için güncelleştirme API sürümü.  Ayrıca bir **certificateCommonNames** ayarı bir **commonNames** özelliği ekleme ve kaldırma **sertifika** (parmak izi özelliğiyle) şu şekilde ayarlama Örnek:
+4. **Microsoft. ServiceFabric/kümeler** KAYNAĞıNDA, API sürümünü "2018-02-01" olarak güncelleştirin.  Ayrıca **commonnames** özelliği Ile bir **certificatecommonnames** ayarı ekleyin ve **sertifika** ayarını (parmak izi özelliği ile) aşağıdaki örnekte olduğu gibi kaldırın:
    ```json
    {
        "apiVersion": "2018-02-01",
@@ -200,12 +200,12 @@ Ardından, açık *azuredeploy.json* dosyasını bir metin düzenleyicisinde ve 
        ...
    ```
    > [!NOTE]
-   > 'CertificateIssuerThumbprint' alanı, özel olarak beklenen verenler sertifikalarının bir belirtilen konu ortak adı ile belirtmeye izin verir. Bu alan, SHA1 parmak izleri virgülle ayrılmış bir numaralandırmasını kabul eder. Bu sertifika doğrulama - veren belirtilmemiş veya boş, sertifika, zincir oluşturulabilir, kimlik doğrulaması ve doğrulayıcı tarafından güvenilen bir kök yukarı biter kabul edilecek söz konusu güçlendirme olduğuna dikkat edin. Veren belirtilirse, sertifika parmak izini doğrudan verenini kök güvenilir olup olmamasına bakılmaksızın bu alana - belirtilen değerlerden herhangi birini eşleşiyorsa kabul edilecektir. Lütfen bir PKI sertifikaları için aynı konu için farklı sertifika yetkilileri kullanabilir ve bu nedenle tüm beklenen verenin parmak izleri belirtmek için belirli bir konu önemli olduğunu unutmayın.
+   > ' Certificateıssuerparmak Izi ' alanı, belirli bir konu ortak adına sahip olan sertifikaların beklenen verenler belirtilmesine izin verir. Bu alan, SHA1 parmak izlerinin virgülle ayrılmış bir listesini kabul eder. Bu, sertifika doğrulamasının güçlendirildiği bir durumdur. veren belirtilmediğinde veya boş olmadığında sertifika, zinciri oluşturulup doğrulanıyorsa kimlik doğrulaması için kabul edilecektir ve doğrulayıcı tarafından güvenilen bir kökte sona erer. Veren belirtilmişse, doğrudan veren 'in parmak izi bu alanda belirtilen değerlerden biriyle eşleşiyorsa, köke güvenilip güvenilmediği bağımsız olarak sertifika kabul edilir. Lütfen bir PKI 'nın aynı konu için sertifika vermek üzere farklı sertifika yetkilileri kullanabileceğini ve bu nedenle, belirli bir konu için beklenen tüm veren parmak izlerinin belirtilmesi önem taşımaktadır.
    >
-   > Verici belirtme, en iyi uygulama olarak kabul edilir; atlama sırasında çalışmaya devam edecektir - sertifikaları Güvenilen bir köke - zincirleme ayarlamak için bu davranış sınırlamalara sahiptir ve yakın gelecekte aşamalı olacak. Ayrıca kümeleri Azure'da dağıtılır ve X509 ile güvenliği sağlanan Not konu tarafından bildirilen ve özel bir PKI tarafından verilen sertifikaları açamayabilir (için Küme hizmeti iletişimi için), Azure Service Fabric hizmeti tarafından doğrulanmış olarak, PKI'ın sertifika ilkesi bulunabilir, kullanılabilir ve erişilebilir değil. 
+   > Verenin belirtilmesi en iyi yöntem olarak kabul edilir; Bunu yoksayarak, güvenilir bir köke kadar olan sertifikalar için çalışmaya devam eder. bu davranışın sınırlamaları vardır ve yakın gelecekte kullanıma sunulacaktır. Ayrıca, PKI 'nın sertifika Ilkesi varsa, Azure 'da dağıtılan ve özel bir PKI tarafından verilen ve konuya göre belirtilen x509 sertifikalarıyla güvenli hale getirilmiş kümelerin Azure Service Fabric hizmeti (kümeden hizmete iletişim için) tarafından doğrulanmamış olabileceğini unutmayın. bulunabilir, kullanılabilir ve erişilebilir değildir. 
 
 ## <a name="deploy-the-updated-template"></a>Güncelleştirilmiş şablonu dağıtma
-Güncelleştirilmiş şablonu, değişiklikleri yaptıktan sonra yeniden dağıtın.
+Değişiklikleri yaptıktan sonra güncelleştirilmiş şablonu yeniden dağıtın.
 
 ```powershell
 # Variables.
@@ -223,9 +223,9 @@ New-AzResourceGroupDeployment -ResourceGroupName $groupname -TemplateParameterFi
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Hakkında bilgi edinin [küme güvenlik](service-fabric-cluster-security.md).
-* Bilgi edinmek için nasıl [geçişi bir küme sertifikası](service-fabric-cluster-rollover-cert-cn.md)
-* [Küme sertifikalarını yönetme ve güncelleştirme](service-fabric-cluster-security-update-certs-azure.md)
-* Sertifika yönetimi basitleştirmek [değiştirme kümeden sertifika parmak izi için ortak ad](service-fabric-cluster-change-cert-thumbprint-to-cn.md)
+* [Küme güvenliği](service-fabric-cluster-security.md)hakkında bilgi edinin.
+* [Küme sertifikası geçişi](service-fabric-cluster-rollover-cert-cn.md) hakkında bilgi edinin
+* [Küme sertifikalarını güncelleştirme ve yönetme](service-fabric-cluster-security-update-certs-azure.md)
+* [Kümeyi sertifika parmak iziyle ortak ada değiştirerek](service-fabric-cluster-change-cert-thumbprint-to-cn.md) Sertifika yönetimini kolaylaştırın
 
 [image1]: .\media\service-fabric-cluster-change-cert-thumbprint-to-cn\PortalViewTemplates.png

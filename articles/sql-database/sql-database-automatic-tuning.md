@@ -1,6 +1,6 @@
 ---
-title: -Azure SQL veritabanı otomatik ayarlama | Microsoft Docs
-description: Azure SQL veritabanı, SQL sorguyu analiz eder ve kullanıcı iş yüküne otomatik olarak uyum sağlar.
+title: Otomatik ayarlamaya genel bakış
+description: Azure SQL veritabanı, SQL sorgusunu analiz eder ve Kullanıcı iş yüküne otomatik olarak uyum sağlar.
 services: sql-database
 ms.service: sql-database
 ms.subservice: performance
@@ -10,83 +10,82 @@ ms.topic: conceptual
 author: danimir
 ms.author: danil
 ms.reviewer: jrasnik, carlrab
-manager: craigg
 ms.date: 03/06/2019
-ms.openlocfilehash: 6e818da29b7ee0d17ebe4f8e523648146973fa63
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 179bb5c9d718a556b829af8f860cb284597835aa
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61415775"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821886"
 ---
-# <a name="automatic-tuning-in-azure-sql-database"></a>Azure SQL veritabanı'nda otomatik ayarlama
+# <a name="automatic-tuning-in-azure-sql-database"></a>Azure SQL veritabanı 'nda otomatik ayarlama
 
-Azure SQL veritabanı otomatik ayarlama, yapay ZEKA ve makine öğrenimi göre sürekli performans ayarlama yoluyla en yüksek performans ve kararlı iş yükleri sunar.
+Azure SQL veritabanı otomatik ayarlama, AI ve makine öğrenimine dayalı sürekli performans ayarları aracılığıyla en yüksek performans ve kararlı iş yükleri sağlar.
 
-Otomatik ayarlama, bir veritabanı üzerinde yürütülen sorgular sürekli olarak izlemek için yerleşik zeka kullanan bir tam olarak yönetilen akıllı performans hizmet ve performanslarını otomatik olarak geliştirir. Bu, veritabanı iş yüklerini değiştirme ve ayar önerileri uygulama uyarlama aracılığıyla dinamik olarak sağlanır. Otomatik ayarlama Azure aracılığıyla yapay ZEKA ile ilgili tüm veritabanlarından yatay olarak öğrenir ve dinamik olarak ayarlama eylemlerinin artırır. Otomatik üzerinde ayarlama ile Azure SQL veritabanı uzun süre çalışan, daha iyi gerçekleştirir.
+Otomatik ayarlama, bir veritabanında yürütülen sorguları sürekli olarak izlemek için yerleşik zeka kullanan tam olarak yönetilen bir akıllı performans hizmetidir ve performanslarını otomatik olarak geliştirir. Bu, veritabanı değişen iş yüklerine dinamik olarak uyarlanarak ve ayarlama önerilerini uygulayarak elde edilir. Otomatik ayarlama, Azure 'daki tüm veritabanlarından AI aracılığıyla yatay olarak öğrenir ve ayarlama eylemlerini dinamik olarak geliştirir. Daha uzun bir Azure SQL veritabanı, üzerinde otomatik ayarlama ile çalışır, daha iyidir.
 
-Azure SQL veritabanı otomatik ayarlama, kararlı ve üst düzey veritabanı iş yüklerinin performans sağlamak için etkinleştirebileceğiniz en önemli özelliklerden biri olabilir.
+Azure SQL veritabanı otomatik ayarlama, kararlı ve en yüksek performanslı veritabanı iş yükleri sağlamak üzere etkinleştirebileceğiniz en önemli özelliklerden biri olabilir.
 
-## <a name="what-can-automatic-tuning-do-for-you"></a>Otomatik ayarlama sizin için neler?
+## <a name="what-can-automatic-tuning-do-for-you"></a>Otomatik ayarlama sizin için ne yapabilir?
 
-- Azure SQL veritabanları otomatik performans ayarlama
-- Otomatik performans kazancı elde edildi doğrulanması
-- Otomatik geri alma ve kendi kendine düzeltme
+- Azure SQL veritabanlarının otomatik performans ayarlaması
+- Performans kazançlarını otomatik doğrulama
+- Otomatik geri alma ve kendi kendini düzeltme
 - Ayarlama geçmişi
-- Eylem T-SQL betikleri dağıtımlar için ayarlama
+- El ile dağıtımlar için işlem T-SQL betikleri ayarlama
 - Proaktif iş yükü performansı izleme
-- Yüz binlerce veritabanını yeteneğini ölçeği genişletme
-- Olumlu etkiyi DevOps kaynaklara ve toplam sahip olma maliyeti
+- Yüzlerce binlerce veritabanında ölçeği genişletme özelliği
+- DevOps kaynaklarına yönelik olumlu etki ve toplam sahip olma maliyeti
 
-## <a name="safe-reliable-and-proven"></a>Güvenli, güvenilir ve kendini kanıtlamış
+## <a name="safe-reliable-and-proven"></a>Güvenli, güvenilir ve kanıtlanmış
 
-Azure SQL'e uygulanan işlemlerde veritabanları için en yoğun iş yüklerinizin performansını tam olarak güvenli değildir. Sistem dikkatli kullanıcı yükleriyle karışmamasına için tasarlanmıştır. Otomatik ayarlama önerileri, yalnızca düşük kullanımı zamanlarda uygulanır. Sistem iş yükü performansını korumak için otomatik ayarlama işlemlerini de geçici olarak devre dışı bırakabilirsiniz. Böyle bir durumda, Azure portalında "Sistem tarafından devre dışı" iletisi gösterilir. Otomatik ayarlama, en yüksek kaynak önceliğe sahip iş yüklerini değerlendirir.
+Azure SQL veritabanlarına uygulanan ayarlama işlemleri, en yoğun iş yüklerinizin performansı için tamamen güvenlidir. Sistem, Kullanıcı iş yükleriyle karışmamak üzere tasarlanmıştır. Otomatik ayarlama önerileri yalnızca düşük kullanım saatlerinde uygulanır. Ayrıca sistem, iş yükü performansını korumak için otomatik ayarlama işlemlerini geçici olarak devre dışı bırakabilir. Böyle bir durumda, "sistem tarafından devre dışı bırakıldı" iletisi Azure portal görüntülenecektir. Otomatik ayarlama, en yüksek kaynak önceliğine sahip iş yüklerini sayar.
 
-Otomatik ayarlama mekanizmaları olgun ve Azure üzerinde çalışan birkaç milyon veritabanlarında perfected. Uygulanan otomatik ayarlama işlemleri, iş yükü performansına olumlu bir geliştirme olduğundan emin olmak için otomatik olarak doğrulanır. Azaltılmış performansa önerileri dinamik olarak algılandı ve en kısa sürede geri döndürüldü. Kaydedilen ayarlama geçmişi ile her bir Azure SQL veritabanı için yapılan geliştirmeleri ayarlama, düz bir izleme vardır. 
+Otomatik ayarlama mekanizmaları aynı ve Azure üzerinde çalışan birkaç milyon veritabanında ölçünüzü. Otomatik ayarlama işlemleri, iş yükü performansının olumlu bir geliştirmesi olduğundan emin olmak için otomatik olarak doğrulanır. Gerileyen performans önerileri dinamik olarak algılanır ve geri döndürülür. Kaydedilen ayarlama geçmişi ile, her bir Azure SQL veritabanı için yapılan ayarlama geliştirmelerinden oluşan açık bir izleme bulunur. 
 
-![Nasıl otomatik ayarlama çalışıyor mu](./media/sql-database-automatic-tuning/how-does-automatic-tuning-work.png)
+![Otomatik ayarlama nasıl çalışır?](./media/sql-database-automatic-tuning/how-does-automatic-tuning-work.png)
 
-Azure SQL veritabanı otomatik ayarlama, SQL Server otomatik ayarlama altyapısıyla çekirdek mantığını paylaşıyor. Yerleşik zeka mekanizması hakkında ek teknik bilgiler için bkz. [SQL Server otomatik ayarlama](https://docs.microsoft.com/sql/relational-databases/automatic-tuning/automatic-tuning).
+Azure SQL veritabanı otomatik ayarlama, temel mantığını SQL Server otomatik ayarlama altyapısıyla paylaşıyor. Yerleşik zeka mekanizması hakkında daha fazla teknik bilgi için [SQL Server otomatik ayarlama](https://docs.microsoft.com/sql/relational-databases/automatic-tuning/automatic-tuning)bölümüne bakın.
 
-## <a name="use-automatic-tuning"></a>Otomatik ayarlama kullanın
+## <a name="use-automatic-tuning"></a>Otomatik ayarlama kullan
 
-Otomatik ayarlama, aboneliğinizde etkinleştirilmesi gerekir. Azure portalını kullanarak bir otomatik ayarlama etkinleştirmek için bkz: [otomatik ayarlamayı etkinleştirme](sql-database-automatic-tuning-enable.md).
+Aboneliğinizde otomatik ayarlama özelliğinin etkinleştirilmesi gerekir. Azure portal kullanarak otomatik ayarlamayı etkinleştirmek için, bkz. [otomatik ayarlamayı etkinleştirme](sql-database-automatic-tuning-enable.md).
 
-Otomatik ayarlama otomatik doğrulama performans artışı, dahil olmak üzere ayar önerileri otomatik olarak uygulanması aracılığıyla otonom olarak çalışabilir. 
+Otomatik ayarlama, otomatik olarak performans kazanmasının otomatik olarak doğrulanması dahil ayarlama önerilerini uygulayarak olarak çalışabilen işleyebilir. 
 
-Daha fazla denetim otomatik ayarlama önerileri uygulaması kapatılabilir ve ayarlama önerileri el ile Azure Portalı aracılığıyla uygulanabilir. Yalnızca otomatik ayarlama önerileri görüntülemek ve betikler ve tercih ettiğiniz araçları el ile uygulamanız için çözümü kullanmak da mümkündür. 
+Daha fazla denetim için ayarlama önerilerinin otomatik uygulaması kapatılabilir ve ayarlama önerileri Azure portal aracılığıyla el ile uygulanabilir. Çözümü yalnızca otomatik ayarlama önerilerini görüntülemek ve seçtiğiniz betikler ve araçlar aracılığıyla el ile uygulamak için de kullanabilirsiniz. 
 
-Otomatik ayarlama works genel bir bakış ve tipik kullanım senaryoları için katıştırılmış video bakın:
+Otomatik ayarlamanın nasıl çalıştığına ve tipik kullanım senaryolarıyla ilgili genel bir bakış için bkz. gömülü video:
 
 
 > [!VIDEO https://channel9.msdn.com/Shows/Azure-Friday/Improve-Azure-SQL-Database-Performance-with-Automatic-Tuning/player]
 >
 
-## <a name="automatic-tuning-options"></a>Otomatik ayarlama seçeneklerini
+## <a name="automatic-tuning-options"></a>Otomatik ayarlama seçenekleri
 
-Azure SQL veritabanı'nda kullanılabilir otomatik ayarlama seçeneklerini şunlardır:
+Azure SQL veritabanında bulunan otomatik ayarlama seçenekleri şunlardır:
 
-| Otomatik ayarlama seçeneği | Tek veritabanı ve havuza veritabanı desteği | Örnek veritabanı desteği |
+| Otomatik ayarlama seçeneği | Tek veritabanı ve havuza alınmış veritabanı desteği | Örnek veritabanı desteği |
 | :----------------------------- | ----- | ----- |
-| **CREATE INDEX** -İş yükünüzün performansını artırabilir, dizinler oluşturan ve sorguların performansını iyileştirildiğini otomatik olarak doğrular dizinleri tanımlar. | Evet | Hayır | 
-| **DROP INDEX** -yedekli ve yinelenen dizinleri benzersiz ve uzun süre kullanılmamış dizinleri hariç olmak üzere günlük olarak tanımlar. (> 90 gün). Lütfen şu anda seçeneği bölüm değiştirme ve dizin ipuçlarını kullanarak uygulamaları ile uyumlu olmadığını unutmayın. | Evet | Hayır |
-| **SON iyi planı ZORLA** (otomatik plan düzeltme) - önceki iyi planı yavaştır ve azaltılmış planı yerine bilinen son iyi planı kullanan sorgular yürütme planını kullanarak tanımlayan SQL sorguları. | Evet | Evet |
+| **Dizin oluşturma** -iş yükünüzün performansını iyileştirebilecek dizinleri tanımlar, dizinler oluşturur ve sorguların performansının iyileştirildiğini otomatik olarak doğrular. | Evet | Hayır | 
+| **Drop Index** -benzersiz dizinler ve uzun süredir kullanılmayan dizinler dışında, yedekli ve yinelenen dizinleri her gün tanımlar (> 90 gün). Bu seçeneğin bölüm değiştirme ve Dizin ipuçlarını kullanan uygulamalarla uyumlu olmadığına lütfen unutmayın. Kullanılmayan dizinleri bırakma, Premium ve İş Açısından Kritik hizmet katmanlarında desteklenmez. | Evet | Hayır |
+| **Son ıyı planı zorla** (otomatik plan düzeltmesi)-SQL sorgularını, önceki iyi plandan daha yavaş bir yürütme planı kullanarak tanımlar ve gerileme planı yerine bilinen son iyi planı kullanarak sorgular. | Evet | Evet |
 
-Otomatik ayarlama tanımlayan **CREATE INDEX**, **DROP INDEX**, ve **ZORLA son iyi planı** veritabanınızın performansı iyileştirebilir ve bunları gösterir önerileri [Azure portalında](sql-database-advisor-portal.md)ve bunları üzerinden kullanıma sunan [T-SQL](https://docs.microsoft.com/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-current) ve [REST API](https://docs.microsoft.com/rest/api/sql/serverautomatictuning). SON iyi planı ZORLA hakkında daha fazla bilgi için bkz: T-SQL aracılığıyla otomatik ayarlama seçeneklerini yapılandırma [otomatik ayarlama, otomatik plan düzeltme tanıtır](https://azure.microsoft.com/blog/automatic-tuning-introduces-automatic-plan-correction-and-t-sql-management/).
+Otomatik ayarlama, veritabanı performanslarını iyileştirebilen ve bunları [Azure Portal](sql-database-advisor-portal.md)gösteren ve [T-SQL](https://docs.microsoft.com/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-current) [Ile ortaya çıkaran son iyi plan önerilerini tanımlar, Drop Index ve zorlar. REST API](https://docs.microsoft.com/rest/api/sql/serverautomatictuning). EN son ıyı hale zorlama planı ve T-SQL aracılığıyla otomatik ayarlama seçeneklerini yapılandırma hakkında daha fazla bilgi edinmek için bkz. otomatik [ayarlama otomatik plan düzeltmesini tanıtır](https://azure.microsoft.com/blog/automatic-tuning-introduces-automatic-plan-correction-and-t-sql-management/).
 
-Ya da portalı kullanarak ayar önerileri el ile uygulayabilirsiniz veya otomatik olarak çalışabilen uygulamak için ayar önerileri ayarlama sağlayabilirsiniz. Otonom olarak ayarlama önerileri için geçerli sistem izin vererek avantajları olduğundan, otomatik olarak var. doğrulama iş yükü performansına olumlu bir kazancı var ve algılanan hiçbir önemli bir performans geliştirmesi ise çalışır otomatik ayarlama önerileri geri al. Sıklıkla yürütülen değil önerilerinde tarafından etkilenen sorgular olması durumunda, en fazla 72 doğrulama aşamasını alabileceğine Lütfen dikkat edin. Tasarım saat.
+Portalı kullanarak ayarlama önerilerini el ile uygulayabilir ya da otomatik ayarlama olarak çalışabilen ' nin ayarlama önerilerini sizin yerinize gerçekleştirmesini sağlayabilirsiniz. System olarak çalışabilen 'ın ayarlama önerilerini uygulamasına izin vermenin avantajları, iş yükü performansına yönelik olumlu bir kazanç olduğunu otomatik olarak doğruladığından, önemli bir performans geliştirmesi algılanmadığında, bu işlem ayarlama önerisini otomatik olarak döndürür. Bu, sık yürütülemeyen bir ayar önerisi tarafından etkilenen sorgular söz konusu olduğunda, doğrulama aşamasının tasarım ile 72 saat arasında sürebileceğini unutmayın.
 
-El ile ayarlama uyguladığınızı durumunda öneriler, otomatik performans doğrulama ve ters mekanizmaları kullanılamaz. Ayrıca, el ile uygulanan önerileri 24-48 saat için etkin ve öneriler listesinde gösterilen kalır. Sistem otomatik olarak bunları testimizde önce. Bir öneri daha çabuk kaldırmak istiyorsanız, el ile iptal edebilirsiniz.
+T-SQL aracılığıyla ayarlama önerileri uyguluyorsanız, otomatik performans doğrulaması ve ters çevirme mekanizmaları kullanılamaz. Bu şekilde uygulanan öneriler etkin kalır ve 24-48 saat için ayarlama önerileri listesinde gösterilir. sistemi otomatik olarak çizmadan önce. Bir öneriyi daha erken kaldırmak istiyorsanız, Azure portal ' den atabilirsiniz.
 
-Otomatik ayarlama seçeneklerini bağımsız olarak etkinleştirilebilir veya veritabanı başına devre dışı veya bunlar üzerinde SQL veritabanı sunucuları yapılandırılabilir ve sunucudan ayarları devralıyor her bir veritabanına uygulanır. SQL veritabanı sunucularını otomatik ayarlama ayarları için Azure Varsayılanları devralabilir. Şu anda Azure Varsayılanları ayarlandığında FORCE_LAST_GOOD_PLAN etkin CREATE_INDEX etkin ve DROP_INDEX devre dışı bırakıldı.
+Otomatik ayarlama seçenekleri veritabanı başına bağımsız olarak etkinleştirilebilir veya devre dışı bırakılabilir ya da SQL veritabanı sunucularında yapılandırılabilirler ve ayarları sunucudan devralan her veritabanına uygulanabilir. SQL veritabanı sunucuları, otomatik ayarlama ayarları için Azure varsayılanlarını devralınabilir. Azure Varsayılanları Şu anda FORCE_LAST_GOOD_PLAN etkinleştirilir, CREATE_INDEX etkinleştirilir ve DROP_INDEX devre dışı bırakılır.
 
-Otomatik bir sunucuda seçenekleri ayarlama ve üst sunucuya ait veritabanlarına yönelik ayarları devralmayı yapılandırma gibi çok sayıda veritabanı otomatik ayarlama seçeneklerini yönetimini basitleştirir, otomatik ayarlama yapılandırmak için önerilen bir yöntemdir.
+Bir sunucuda otomatik ayarlama seçeneklerinin yapılandırılması ve üst sunucuya ait olan veritabanlarının ayarlarını devralma, çok sayıda veritabanı için otomatik ayarlama seçeneklerinin yönetimini basitleştikten sonra otomatik ayarlamayı yapılandırmak için önerilen bir yöntemdir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- İş yükünüz yönetmek için Azure SQL veritabanında otomatik ayarlama etkinleştirmek için bkz: [otomatik ayarlamayı etkinleştirme](sql-database-automatic-tuning-enable.md).
-- El ile incelemeniz ve otomatik ayarlama önerileri uygulamak için bkz: [bulun ve performans önerilerini uygulama](sql-database-advisor-portal.md).
-- Otomatik ayarlama önerileri görüntüleyin ve uygulamak için T-SQL kullanma bilgi edinmek için [T-SQL otomatik ayarlama yönetme](https://azure.microsoft.com/blog/automatic-tuning-introduces-automatic-plan-correction-and-t-sql-management/).
-- E-posta bildirimlerini otomatik ayarlama önerileri için oluşturma hakkında bilgi edinmek için [e-posta bildirimlerini otomatik ayarlama](sql-database-automatic-tuning-email-notifications.md).
-- Yerleşik zeka kullanılan otomatik ayarlama hakkında bilgi edinmek için bkz. [yapay zeka, Azure SQL veritabanlarına tabanlarını](https://azure.microsoft.com/blog/artificial-intelligence-tunes-azure-sql-databases/).
-- Azure SQL veritabanı ve SQL Server 2017 otomatik ayarlama çalıştığı hakkında bilgi edinmek için [SQL Server otomatik ayarlama](https://docs.microsoft.com/sql/relational-databases/automatic-tuning/automatic-tuning).
+- Azure SQL veritabanı 'nda iş yükünüzü yönetmek üzere otomatik ayarlamayı etkinleştirmek için bkz. [otomatik ayarlamayı etkinleştirme](sql-database-automatic-tuning-enable.md).
+- Otomatik ayarlama önerilerini el ile gözden geçirmek ve uygulamak için bkz. [performans önerilerini bulma ve uygulama](sql-database-advisor-portal.md).
+- T-SQL ' i kullanarak otomatik ayarlama önerilerini uygulama ve görüntüleme hakkında bilgi edinmek için bkz. [t-SQL aracılığıyla otomatik ayarlamayı yönetme](https://azure.microsoft.com/blog/automatic-tuning-introduces-automatic-plan-correction-and-t-sql-management/).
+- Otomatik ayarlama önerileri için e-posta bildirimleri oluşturma hakkında bilgi edinmek için bkz. [otomatik ayarlama Için e-posta bildirimleri](sql-database-automatic-tuning-email-notifications.md)
+- Otomatik ayarlama sırasında kullanılan yerleşik zeka hakkında bilgi edinmek için bkz. [yapay zeka uyarlayan Azure SQL veritabanları](https://azure.microsoft.com/blog/artificial-intelligence-tunes-azure-sql-databases/).
+- Otomatik ayarlama 'nın Azure SQL veritabanı ve SQL Server 2017 ' de nasıl çalıştığı hakkında bilgi edinmek için [SQL Server otomatik ayarlama](https://docs.microsoft.com/sql/relational-databases/automatic-tuning/automatic-tuning)bölümüne bakın.

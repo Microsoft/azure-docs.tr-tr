@@ -19,20 +19,26 @@
 - name: Kavramlar
   expanded: false
   items:
-    - name: Koşullu Erişimi Benimseme
-      href: howto-conditional-access-adoption-kit.md
-    - name: Ana hat koruma ilkeleri
-      href: concept-baseline-protection.md
+    - name: Sık kullanılan Koşullu Erişim İlkeleri
+      href: concept-conditional-access-policy-common.md
+    - name: Güvenlik varsayılanları
+      href: concept-conditional-access-security-defaults.md
+    - name: Koşullu Erişim ilkesi bileşenleri
+      href: concept-conditional-access-policies.md
     - name: Koşullar
       href: conditions.md
     - name: Konum koşulları
       href: location-condition.md
     - name: Denetimler
       href: controls.md
+    - name: Yalnızca rapor modu
+      href: concept-conditional-access-report-only.md
     - name: Hizmet bağımlılıkları
       href: service-dependencies.md
     - name: Durum aracı
       href: what-if-tool.md
+    - name: Ana hat koruma ilkeleri
+      href: concept-baseline-protection.md
 - name: Nasıl yapılır kılavuzları
   expanded: true
   items:
@@ -40,34 +46,50 @@
       href: plan-conditional-access.md
     - name: En iyi uygulamalar
       href: best-practices.md
-    - name: Ana hat ilkeleri
+    - name: Sık kullanılan Koşullu Erişim İlkeleri
       items:
         - name: Yöneticiler için MFA gerektirme
-          href: howto-baseline-protect-administrators.md
-        - name: Son kullanıcı koruması
-          href: howto-baseline-protect-end-users.md
+          href: howto-conditional-access-policy-admin-mfa.md
+        - name: Azure yönetimi için MFA gerektirme
+          href: howto-conditional-access-policy-azure-management.md
+        - name: Tüm kullanıcılar için MFA gerektirme
+          href: howto-conditional-access-policy-all-users-mfa.md
         - name: Eski kimlik doğrulamasını engelleme
-          href: howto-baseline-protect-legacy-auth.md
-        - name: Hizmet yönetimi için MFA gerektirme
-          href: howto-baseline-protect-azure.md
+          href: howto-conditional-access-policy-block-legacy.md
+        - name: Risk tabanlı Koşullu Erişim
+          href: howto-conditional-access-policy-risk.md
+        - name: MFA kaydı için güvenilen konum gerektirme
+          href: howto-conditional-access-policy-registration.md
+        - name: Erişimi konuma göre engelleme
+          href: howto-conditional-access-policy-location.md
+        - name: Uyumlu cihaz gerektirme
+          href: howto-conditional-access-policy-compliant-device.md
     - name: Eski kimlik doğrulamasını engelleme
       href: block-legacy-authentication.md
-    - name: Klasik ilkeleri geçirme
-      href: policy-migration.md
-    - name: Oturum açma sıklığı ve tarayıcı kalıcılık denetimleri
-      href: howto-conditional-access-session-lifetime.md
+    - name: MFA kaydı için Koşullu Erişim
+      href: '../authentication/howto-registration-mfa-sspr-combined.md#conditional-access-policies-for-combined-registration'
     - name: Onaylı istemci uygulamaları gerektirme
       href: app-based-conditional-access.md
     - name: Uygulama koruma ilkesi gerektir
       href: app-protection-based-conditional-access.md
     - name: Yönetilen cihazları gerektirme
       href: require-managed-devices.md
-    - name: MFA kaydı için güvenilen ağlar gerektirme
-      href: '../authentication/howto-registration-mfa-sspr-combined.md#conditional-access-policies-for-combined-registration'
     - name: Güvenilmeyen ağlardan gelen erişim denemeleri için MFA gerektirme
       href: untrusted-networks.md
     - name: Kullanım koşullarını gerekli kılma
       href: terms-of-use.md
+    - name: Yalnızca rapor modunu yapılandırma
+      href: howto-conditional-access-report-only.md
+    - name: Oturum açma sıklığı ve tarayıcı kalıcılık denetimleri
+      href: howto-conditional-access-session-lifetime.md
+    - name: Klasik ilkeleri geçirme
+      href: policy-migration.md
+    - name: Koşullu Erişimi Benimseme
+      href: howto-conditional-access-adoption-kit.md
+    - name: Sorun giderme
+      items:
+        - name: What If aracını kullanarak sorun giderme
+          href: troubleshoot-conditional-access-what-if.md
 - name: Başvuru
   items:
     - name: Teknik başvuru

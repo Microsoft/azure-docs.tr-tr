@@ -1,25 +1,25 @@
 ---
-title: Hızlı Başlangıç - Maliyet analiziyle Azure maliyetlerini keşfetme | Microsoft Docs
+title: Hızlı başlangıç-maliyet analizi ile Azure maliyetlerini araştırma | Microsoft Docs
 description: Bu hızlı başlangıç, Azure kurumsal maliyetlerinizi keşfetmek ve analiz etmek için maliyet analizini kullanmanıza yardımcı olur.
 services: cost-management
 keywords: ''
 author: bandersmsft
 ms.author: banders
-ms.date: 05/14/2019
+ms.date: 10/14/2019
 ms.topic: quickstart
 ms.service: cost-management
 manager: micflan
 ms.custom: seodec18
-ms.openlocfilehash: b4302713188237b97ffbe8473f6a37edd6741b36
-ms.sourcegitcommit: 36c50860e75d86f0d0e2be9e3213ffa9a06f4150
+ms.openlocfilehash: f2e1d19f69b426cee870d2ede489b7c458404704
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/16/2019
-ms.locfileid: "65793086"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72374763"
 ---
-# <a name="quickstart-explore-and-analyze-costs-with-cost-analysis"></a>Hızlı Başlangıç: Maliyet Analizi ile maliyetleri analiz
+# <a name="quickstart-explore-and-analyze-costs-with-cost-analysis"></a>Hızlı başlangıç: maliyet analizi ile maliyetleri araştırma ve analiz etme
 
-Azure maliyetlerinizi düzgün bir şekilde denetlemeden ve iyileştirmeden önce maliyetlerin kuruluşunuzun neresinden kaynaklandığını anlamanız gerekir. Hizmetlerinizin tutarının ne kadar olacağını bilmek, ortamlarınızı ve sistemlerinizi desteklemek için de yararlıdır. Maliyetlerin tüm kapsamıyla görünür olması kuruluşun harcama desenlerini doğru anlamak için önemlidir. Harcama desenleri, bütçeler gibi maliyet denetim mekanizmalarını güçlendirmek için kullanılabilir.
+Azure maliyetlerinizi düzgün bir şekilde denetlemeden ve iyileştirmeden önce maliyetlerin kuruluşunuzun neresinden kaynaklandığını anlamanız gerekir. Ayrıca, hizmet maliyetlerinizin ne kadar parasal olduğunu ve hangi ortamları ve sistemleri destekleyeceğinizi de yararlı olur. Maliyetlerin tüm kapsamıyla görünür olması kuruluşun harcama desenlerini doğru anlamak için önemlidir. Bütçeler gibi maliyet denetimi mekanizmalarını zorlamak için harcama desenleri kullanabilirsiniz.
 
 Bu hızlı başlangıçta, kurumsal maliyetlerinizi keşfetmek ve analiz etmek için maliyet analizini kullanırsınız. Maliyetlerin zaman içinde nerede oluştuğunu anlamak ve harcama eğilimlerini tanımlamak için kuruluşa göre toplanmış maliyetleri görüntüleyebilirsiniz. Bütçeye göre aylık, üç aylık, hatta yıllık maliyet eğilimlerini tahmin etmek için zaman içinde tahakkuk eden maliyetleri görüntüleyebilirsiniz. Bütçe, mali kısıtlamalara uymaya yardımcı olur. Bütçe, harcama düzensizliklerini yalıtmak amacıyla günlük veya aylık maliyetleri görüntülemek için de kullanılır. Dahası, geçerli raporun verilerini daha fazla analiz etmek için veya dış sistemde kullanmak üzere indirebilirsiniz.
 
@@ -32,95 +32,188 @@ Bu hızlı başlangıçta şunları yapmayı öğrenirsiniz:
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Maliyet analizi, Azure hesap türleri için farklı türde destekler. Desteklenen bir hesap türleri için tam listesini görüntülemek için bkz: [anlamak maliyet Yönetimi verilerine](understand-cost-mgt-data.md). Maliyet verilerini görüntülemek için bir Azure hesabınız için en azından okuma erişimi gerekir.
+Maliyet analizi, farklı türlerde Azure hesap türlerini destekler. Desteklenen hesap türlerinin tam listesini görüntülemek için bkz. [maliyet yönetimi verilerini anlama](understand-cost-mgt-data.md). Maliyet verilerini görüntülemek için, Azure hesabınız için en azından okuma erişiminizin olması gerekir.
 
-İçin [Kurumsal Anlaşma (EA)](https://azure.microsoft.com/pricing/enterprise-agreement/) müşteriler, okuma olması gerekir en az bir veya daha fazla maliyet verilerini görüntülemek için aşağıdaki kapsamları erişim.
+Azure maliyet yönetimi verilerine erişim atama hakkında daha fazla bilgi için bkz. [verilere erişim atama](assign-access-acm-data.md).
 
-- Fatura hesabı
-- Bölüm
-- Kayıt hesabı
-- Yönetim grubu
-- Abonelik
-- Kaynak grubu
+## <a name="sign-in-to-azure"></a>Azure'da oturum açın
 
-Maliyet Yönetimi verilerine erişim atama hakkında daha fazla bilgi için bkz. [verilerine erişim atama](assign-access-acm-data.md).
-
-## <a name="sign-in-to-azure"></a>Oturum açın: Azure
-
-- [https://portal.azure.com](https://portal.azure.com ) adresinden Azure portalında oturum açın.
+- https://portal.azure.com adresinden Azure portalında oturum açın.
 
 ## <a name="review-costs-in-cost-analysis"></a>Maliyet analizinde maliyetleri gözden geçirme
 
-Maliyetlerinizi maliyet analizi gözden geçirmek için Azure portal ve select kapsamı açın **maliyet analizi** menüsünde. Örneğin, gitmek **abonelikleri**listeden aboneliği seçin ve ardından **maliyet analizi** menüsünde. Kullanım **kapsam** zehirli maliyet analizi farklı bir kapsam penceresine geçin. Kapsamlar hakkında daha fazla bilgi için bkz: [anlayın ve kapsamlı iş](understand-work-scopes.md).
+Maliyet analizinde maliyetlerinizi gözden geçirmek için Azure portal kapsamı açın ve menüden **Maliyet Analizi** ' ni seçin. Örneğin, **abonelikler**' e gidin, listeden bir abonelik seçin ve ardından menüde **Maliyet Analizi** ' ni seçin. Maliyet analizinde farklı bir kapsama geçiş yapmak için **Kapsam** hapını kullanın. Kapsamlar hakkında daha fazla bilgi için bkz. [kapsamları anlama ve bunlarla çalışma](understand-work-scopes.md).
 
-Seçtiğiniz kapsam maliyet yönetimi, veri birleştirme sağlamak ve maliyet bilgilerini erişimi denetlemek için kullanılır. Kapsamları kullandığınızda, birden çok kapsam seçemezsiniz. Bunun yerine, başkalarının kadar geri alma ve daha sonra ihtiyacınız iç içe geçmiş kapsamlar aşağı filtre daha büyük bir kapsama seçin. Bu yaklaşım bazı kişiler birden çok iç içe kapsam kapsayan ve tek bir üst kapsam için erişiminiz olmayabilir beri anlamak önemlidir.
+Seçtiğiniz kapsam, maliyet yönetimi genelinde veri birleştirme ve maliyet bilgilerine erişim denetimi sağlamak için kullanılır. Kapsamları kullandığınızda, birden çok kapsam seçemezsiniz. Bunun yerine, başkalarının daha büyük bir kapsam seçersiniz ve daha sonra ihtiyacınız olan iç içe kapsamlar için filtre uygulayın. Bu yaklaşım, bazı kişilerin birden çok iç içe kapsam kapsayan tek bir üst kapsama erişimi olmadığı için anlaşılması önemlidir.
 
-İlk maliyet analizi görünümünde aşağıdaki alanlar bulunur:
+İlk maliyet analizi görünümü aşağıdaki alanlara sahiptir.
 
-**Toplam** – Geçerli ayın toplam maliyetlerini gösterir.
+**Birikmiş maliyet görünümü**: önceden tanımlanmış maliyet analizi görünümü yapılandırmasını temsil eder. Her görünüm tarih aralığı, ayrıntı düzeyi, gruplama ölçütü ve filtre ayarlarını içerir. Varsayılan görünüm geçerli fatura döneminin birikmiş maliyetlerini gösterir, ancak diğer yerleşik görünümlere de geçiş yapabilirsiniz. Daha fazla bilgi için bkz. [Maliyet görünümlerini özelleştirme](#customize-cost-views).
 
-**Bütçe** – Varsa, seçilen kapsam için planlanan harcama limitini gösterir.
+**Gerçek maliyet**: geçerli ay tahakkuk edildiği ve faturanızda gösterileceği için toplam kullanım ve satın alma maliyetlerini gösterir.
 
-**Birikmiş maliyetini** – toplam toplam günlük harcama, ayın en baştan başlatmayı gösterir. Fatura hesabınız veya aboneliğiniz için [bütçe oluşturduktan](tutorial-acm-create-budgets.md) sonra, bütçeye göre harcama eğiliminizi hemen görebilirsiniz. Tarihin üzerine gelerek o gün için birikmiş maliyeti görüntüleyebilirsiniz.
+**Tahmin**: seçtiğiniz zaman döneminin toplam tahmini maliyetlerini gösterir. (Tahmin önizlemededir.)
 
-**Özet (halka) grafikler** – Toplam maliyeti ortak bir standart özellikler kümesine ayırarak dinamik özetler sağlar. Bunlar en az masraflı geçerli ay için gösterir. İstediğiniz zaman farklı bir özet seçerek özet grafikleri değiştirebilirsiniz. Maliyetler varsayılan olarak şu kategorilere ayrılır: hizmet (ölçüm kategorisi), konum (bölge) ve alt kapsam. Örneğin, fatura hesapları altında kayıt hesapları, abonelikler altında kaynak grupları ve kaynak grupları altında kaynaklar.
+**Bütçe**: varsa, seçili kapsam için planlanan harcama limitini gösterir.
 
-![Azure portalında maliyet analizi başlangıç görünümü](./media/quick-acm-cost-analysis/cost-analysis-01.png)
+**Birikmiş ayrıntı düzeyi**: fatura döneminin başından itibaren toplam günlük maliyetleri gösterir. Fatura hesabınız veya aboneliğiniz için [bütçe oluşturduktan](tutorial-acm-create-budgets.md) sonra, bütçeye göre harcama eğiliminizi hemen görebilirsiniz. Tarihin üzerine gelerek o gün için birikmiş maliyeti görüntüleyebilirsiniz.
+
+**Pivot (halka) grafikler**: ortak bir dizi standart özellik tarafından toplam maliyetten oluşan dinamik özet 'ler sağlar. Bu kişiler, geçerli ay için en fazla en küçük maliyette gösterilir. İstediğiniz zaman farklı bir özet seçerek özet grafikleri değiştirebilirsiniz. Maliyetler hizmet (ölçüm kategorisi), konum (bölge) ve alt kapsam için varsayılan olarak kategorilere ayrılır. Örneğin, kayıt hesapları faturalandırma hesapları altında, kaynak grupları aboneliklerdeyse ve kaynaklar kaynak grupları altındadır.
+
+![Azure portal maliyet analizinin ilk görünümü](./media/quick-acm-cost-analysis/cost-analysis-01.png)
 
 ## <a name="customize-cost-views"></a>Maliyet görünümlerini özelleştirme
 
-Maliyet analizi en yaygın hedefler için en iyi duruma getirilmiş dört yerleşik görünümleri sahiptir:
+Maliyet analizi, en yaygın hedefler için en iyi duruma getirilmiş dört yerleşik görünüme sahiptir:
 
-Görünüm | Aşağıdaki gibi sorulara yanıt...
+Görüntüle | Şunun gibi sorular yanıtlayın
 --- | ---
-Birikmiş maliyet | Bu ay şimdiye kadar kullanmış olduğunuz? Bütçemin dışına çıkar mıyım?
-Günlük maliyet | Son 30 gün için günde maliyetlerinde herhangi bir artış var. neydi?
-Hizmete göre maliyet | Geçtiğimiz farklılık aylık kullanımı nasıl sahip 3 faturalar?
-Kaynağa göre maliyet | Hangi kaynakların en kadar bu ay maliyeti?
+Birikmiş maliyet | Bu ayda şimdiye kadar ne kadar süre harcanmalıyım? Bütçemin dışına çıkar mıyım?
+Günlük maliyet | Son 30 gün için günlük maliyetlerde herhangi bir artış vardı mi?
+Hizmete göre maliyet | Aylık kullanım son üç faturaya göre değişiyor mu?
+Kaynağa göre maliyet | Bu ayın hangi kaynakları en çok ne kadar maliyetlidir?
 
-![Bu ay için bir örnek seçimi gösteren Görünüm Seçici](./media/quick-acm-cost-analysis/view-selector.png)
+![Bu ay için örnek bir seçim gösteren seçiciyi görüntüle](./media/quick-acm-cost-analysis/view-selector.png)
 
 Öte yandan, birçok durumda daha derin analizler gerekir. Özelleştirme, seçilen tarihle sayfanın en üstünde başlatılır.
 
-Maliyet analizi, varsayılan olarak geçerli ayın verilerini gösterir. Genel Tarih aralıklarına kolayca geçiş yapmak için tarih seçiciyi kullanın. Son yedi gün, geçtiğimiz ay, yıl veya özel bir tarih aralığı birkaç örnek verilebilir. Kullandıkça Öde Abonelikleri, Takvim ayına son fatura ve geçerli fatura dönemi gibi bağlı olmayan, fatura dönemi göre tarih aralıkları de içerir. Kullanım **< önceki** ve **İleri >** sırasıyla önceki veya sonraki dönemini atlamak için menünün üst bağlantılar. Örneğin, **< önceki** son yedi günden 8-14 gün önce ve sonra 15-21 gün önce geçiş yapar.
+Maliyet analizi, varsayılan olarak geçerli ayın verilerini gösterir. Tarih seçiciyi kullanarak ortak tarih aralıklarına hızlıca geçiş yapın. Örnekler arasında son yedi gün, geçen ay, geçerli yıl veya özel bir tarih aralığı bulunur. Kullandıkça Öde abonelikleri, geçerli fatura dönemi veya son fatura gibi takvim ayına bağlı olmayan Faturalandırma döneminiz temelinde tarih aralıkları da içerir. Önceki veya sonraki döneme geçmek için menünün en üstündeki ÖNCEKI ve **sonraki >** bağlantılarını **<** kullanın. Örneğin, **önceki <** **son 7 günden** **8-14 gün önce** veya **15-21 gün önce**değişir.
 
-![Bu ay için bir örnek seçimi gösteren tarih seçici](./media/quick-acm-cost-analysis/date-selector.png)
+![Bu ay için örnek bir seçim gösteren tarih seçici](./media/quick-acm-cost-analysis/date-selector.png)
 
-Maliyet analizi varsayılan olarak **birikmiş** maliyetleri gösterir. Ek olarak önceki gün günlük toplama maliyetlerinizi sürekli büyüyen bir görünümünü her gün için tüm maliyetler birikmiş maliyetlerini içerir. Bu görünüm, seçilen zaman aralığı için bütçeye göre nasıl bir eğilim gösterdiğinizi ortaya koymak için iyileştirilmiştir.
+Maliyet analizi varsayılan olarak **birikmiş** maliyetleri gösterir. Birikmiş maliyetler, günlük toplam maliyetlerinizin sürekli büyüyen bir görünümü için her bir günün tüm maliyetlerini ve önceki günleri içerir. Bu görünüm, seçilen zaman aralığı için bütçeye göre nasıl bir eğilim gösterdiğinizi ortaya koymak için iyileştirilmiştir.
 
-Ayrıca, her günün maliyetlerini gösteren bir **günlük** görünüm vardır. Günlük görünüm büyüme eğilimini göstermez. Görünüm, günden güne maliyet sıçrama yaptığında veya iyice düştüğünde ortaya çıkan düzensizlikleri gösterecek şekilde tasarlanmıştır. Bütçe seçtiyseniz, günlük görünüm günlük bütçenizin neye benzeyeceğine ilişkin bir tahmin de gösterir. Günlük maliyetleriniz tutarlı olarak tahmini günlük bütçenin üzerinde olduğunda aylık bütçenizin aşılacağını öngörebilirsiniz. Tahmini günlük bütçe, bütçenizi alt düzeyde görselleştirmeye yardımcı olan bir araçtan başka bir şey değildir. Günlük maliyetlerinizde dalgalanmalar olduğunda tahmini günlük bütçenin aylık bütçeyle karşılaştırılması daha az kesinlik sağlar.
+Potansiyel bütçe ihlallerini belirlemek için tahmin grafiği görünümünü kullanın. Potansiyel bir bütçe ihlali olduğunda, öngörülen fazla harcama kırmızı renkle gösterilir. Grafikte bir gösterge simgesi de gösterilir. Simgenin üzerine gelindiğinde, bütçe ihlalinin tahmini tarihi gösterilir.
 
-Genel olarak, veri ya da bildirimler tüketilen kaynaklar için 8-12 saat içinde görmeyi bekleyebilirsiniz.
+![Olası bütçe ihlalini gösteren örnek](./media/quick-acm-cost-analysis/budget-breach.png)
 
-![Örnek, geçerli ay için günlük maliyetlerin gösteren günlük görünümü](./media/quick-acm-cost-analysis/daily-view.png)
+Ayrıca, her günün maliyetlerini gösteren bir **günlük** görünüm vardır. Günlük görünüm büyüme eğilimini göstermez. Görünüm, günden güne maliyet sıçrama yaptığında veya iyice düştüğünde ortaya çıkan düzensizlikleri gösterecek şekilde tasarlanmıştır. Bir bütçe seçtiyseniz günlük görünümü Ayrıca günlük bütçeniz için bir tahmin gösterir.
 
-**Gruplandırma ölçütü** maliyetleri de azaltın Kes ve tanımlamak için ortak özellikler, Katkıda Bulunanlar üst. Kaynak etiketlerine göre gruplandırmak için örneği için gruplandırma ölçütü istediğiniz etiket anahtarı seçin. Maliyetleri uygulanan bir etiketi olmayan kaynaklar için ek bir segment ile her bir etiket değeri tarafından ayrılır.
+Günlük maliyetleriniz tahmini günlük bütçenin bir üst kısmında olduğunda aylık bütçenize geçireceğiz. Tahmini günlük bütçe, bütçenizi daha düşük bir düzeyde görselleştirmenize yardımcı olmak için bir araçtır. Günlük maliyetlerinizde dalgalanmalar olduğunda tahmini günlük bütçenin aylık bütçeyle karşılaştırılması daha az kesinlik sağlar.
 
-Çoğu [destek Azure kaynakları etiketleme](../azure-resource-manager/tag-support.md), ancak bazı etiketler, faturalandırma ve maliyet Yönetimi'nde kullanılabilir değildir. Ayrıca, kaynak grubu etiketleri desteklenmez. Maliyet yönetimi, etiketler kaynağa doğrudan uygulanan tarihten itibaren kaynak etiketleri yalnızca destekler. İzleme [Azure maliyet yönetimi ile etiketi ilkeleri gözden geçirmek nasıl](https://www.youtube.com/watch?v=nHQYcYGKuyw) video maliyet veri görünürlüğünü artırmak için Azure etiketi ilke kullanma hakkında bilgi edinin.
+İşte harcama tahminini açık olan en son harcamanın günlük görünümü.
+](./media/quick-acm-cost-analysis/daily-view.png) geçerli ay için günlük maliyetleri gösteren 0 günlük görünüm @ no__t-1
 
-Burada, geçen ayın görünümü için Azure hizmet maliyetlerinin bir görünümü yer alır.
+Harcama tahminini devre dışı bırakırsanız, gelecekteki tarihler için öngörülen harcama görmezsiniz. Ayrıca, geçmişteki bir dönemdeki maliyetlere baktığınızda maliyet tahmini maliyetleri göstermez.
 
-![Örnek Azure hizmet maliyetlerini geçen aya ait gösteren gruplandırılmış günlük birikmiş görünümü](./media/quick-acm-cost-analysis/grouped-daily-accum-view.png)
-
-Özet grafiklerin filtreleri ve seçilen zaman aralığı için genel maliyetleri, daha geniş bir resmini vermek için ana grafiğin Göster farklı gruplandırmaları altında. Bir özellik ya da herhangi bir boyuta göre toplanmış maliyetleri görüntülemek üzere etiketi seçin.
-
-
-![Kaynak grubu adları gösteren geçerli görünüm için tam veri](./media/quick-acm-cost-analysis/full-data-set.png)
-
-Önceki resimde kaynak grubunun adları gösterilir. Etiket başına toplam maliyetleri görüntülemek üzere etikete göre gruplandırabilirsiniz, ancak kaynak veya kaynak grubu başına tüm etiketleri görüntüleme görünümlerden herhangi birinde maliyet analizi içinde kullanılabilir değil.
-
-Belirli bir öznitelik tarafından maliyetleri gruplandırma, üst 10 maliyete katkıda yüksekten düşüğe doğru gösterilmektedir. 10'dan fazla varsa, dokuz top maliyete katkıda ile gösterilen bir **başkalarının** tüm geri kalan grupların birlikte kapsayan bir grup. Etiketlere göre gruplandırma olduğunda da görebilirsiniz bir **Untagged** uygulanan etiket anahtarı yoksa maliyetleri için Grup. **Etiketlenmemiş** etiketlenmemiş maliyetleri etiketli maliyetlerinden daha yüksek olsa bile her zaman en son olur. Etiketlenmemiş maliyetleri parçası olması **başkalarının**, 10 veya daha fazla etiket değeri varsa.
-
-*Klasik* sanal makineler, ağ ve depolama kaynaklarını ayrıntılı fatura veri paylaşım yok. Olarak birleştirilmiş **Klasik Hizmetleri** maliyetleri gruplandırırken.
-
-Herhangi bir görünüm için tam veri kümesini görüntüleyebilirsiniz. Seçtiğiniz seçimleri veya uyguladığınız filtreler sunulan verileri etkiler. Veri kümesini görmek için tıklayın **grafik türü** listeleyin ve ardından **tablo** görünümü.
-
-![Geçerli görünümde bir tablo için verileri görüntüleme](./media/quick-acm-cost-analysis/chart-type-table-view.png)
+Genellikle, tüketilen kaynaklar için verileri veya bildirimleri 8-12 saat içinde görmeyi bekleyebilir.
 
 
-## <a name="download-cost-analysis-data"></a>Maliyet analizi verilerini indirme
+Maliyetleri bölmek ve en iyi katılımcıları belirlemek için ortak özelliklere **göre gruplandırın** . Örneğin, kaynak etiketlerine göre gruplandırmak için, gruplandırmak istediğiniz etiket anahtarını seçin. Bu etiketin uygulanmadığı kaynaklar için ek kesimle, maliyetler her bir etiket değeri tarafından bölünür.
 
-Maliyet analizinden bilgileri **indirerek**, Azure portalda şu anda gösterilen tüm veriler için CSV dosyası oluşturabilirsiniz. Uyguladığınız tüm filtreler ve gruplandırmalar dosyada yer alır. Etkin olarak görüntülenmeyen en yukarıdaki Toplam grafiğine ilişkin temel alınan veriler CSV dosyasına eklenir.
+Birçok [Azure kaynağı etiketlemeyi destekler](../azure-resource-manager/tag-support.md). Ancak, bazı Etiketler maliyet yönetimi ve Faturalandırma bölümünde kullanılamaz. Ayrıca, kaynak grubu etiketleri desteklenmez. Maliyet yönetimi yalnızca etiketlerin doğrudan kaynağa uygulandığı tarihten itibaren kaynak etiketlerini destekler. Maliyet veri görünürlüğünü artırmak üzere Azure etiket ilkesi 'ni kullanma hakkında bilgi edinmek için [Azure maliyet yönetimi videosu ile etiket ilkelerini gözden geçirme](https://www.youtube.com/watch?v=nHQYcYGKuyw) konusunu izleyin.
+
+Geçerli ay için Azure hizmet maliyetlerinin bir görünümü aşağıda verilmiştir.
+
+![Son ay için örnek Azure hizmeti maliyetlerini gösteren, günlük birikmiş görünüm gruplandırıldı](./media/quick-acm-cost-analysis/grouped-daily-accum-view.png)
+
+Varsayılan olarak, maliyet analizi tahakkuk ettikleri ve faturanızda **gerçek maliyet**olarak da bilinen tüm kullanım ve satın alma maliyetlerini gösterir. Gerçek maliyet görüntüleme, faturanızı mutabık kılma için idealdir. Bununla birlikte, maliyetlerden satın alma artışlarını ve diğer değişiklikleri maliyetten tutarak ücretlendirilir. Rezervasyon satın alma maliyetlerinin neden olduğu ani artışları düzleştirmek için, **itfası maliyeti**' ne geçin.
+
+![Rezervasyonların dönem genelinde yayıldığını ve ayırmayı kullanan kaynaklara ayrıldığını görmek için gerçek ve itfası maliyeti arasında geçiş yapın](./media/quick-acm-cost-analysis/metric-picker.png)
+
+Sürekliliği olan maliyet, rezervasyon satın alımlarını günlük parçalara ayırır ve bunları rezervasyon dönemi boyunca yayar. Örneğin, 1 Ocak 'ta $365 satın alma yerine, 1 Ocak 'tan 31 Aralık 'a kadar her gün bir $1 satın alma görürsünüz. Temel amortismanı buna ek olarak, bu maliyetler de ayırmayı kullanan belirli kaynaklar kullanılarak yeniden tahsis edilir ve ilişkilendirilir. Örneğin, iki sanal makine arasında $1 günlük ücret bölündüğünde, gün için $2 0,50 ücreti görürsünüz. Rezervasyonun bir kısmı gün boyunca kullanılmaz, geçerli sanal makine ile ilişkili $1 0,50 ücreti ve `UnusedReservation` olan bir ücretle ilgili olan başka bir $0,50 ücreti görürsünüz. Kullanılmayan ayırma maliyetlerinin yalnızca itfası maliyeti görüntülenirken görünebileceğini unutmayın.
+
+Maliyetlerin gösterdiği değişiklik nedeniyle, gerçek maliyet ve itfası maliyet görünümlerinin farklı toplam sayıları gösterdiğine dikkat edin. Genel olarak, bir rezervasyon satın alma ile aylık toplam maliyet, dönem maliyetlerini görüntülerken azaldıkça, rezervasyon satın alma işleminden sonraki aylarda de artış olur. İtfası yalnızca rezervasyon satın alma işlemleri için kullanılabilir ve şu anda Azure Marketi satın alımlara uygulanmaz.
+
+Aşağıdaki görüntüde kaynak grubu adları gösterilmektedir. Etiket başına toplam maliyeti görüntülemek için etikete göre gruplandırma yapabilir veya belirli bir kaynağın tüm etiketlerini görmek için **kaynak maliyeti** görünümünü kullanabilirsiniz.
+
+![Geçerli görünüm için kaynak grubu adlarını gösteren tam veri](./media/quick-acm-cost-analysis/full-data-set.png)
+
+Maliyetleri belirli bir özniteliğe göre gruplandırdığınızda, ilk 10 maliyet katkı sağlayanlar en yüksekten en düşüğe gösterilir. 10 ' dan fazla varsa, en yüksek maliyetli katkıda bulunanlar, kalan tüm grupları temsil eden **diğer** bir grupla gösterilir. Etiketlere göre gruplandırma yaparken, etiket anahtarı uygulanamayan maliyetler için **etiketlenmemiş** bir grup görünür. Etiketlenmemiş maliyetler etiketli maliyetlerden yüksek olsa da **etiketsiz** , her zaman son ' a sahip olur. 10 veya daha fazla etiket değeri varsa, etiketlenmemiş maliyetler **Diğerlerinin**bir parçası olur. En yüksek değerden en düşük maliyetle derecelendirilmesini sağlamak için tablo görünümüne geçin ve ayrıntı düzeyini **none** olarak değiştirin.
+
+Klasik sanal makineler, ağ ve depolama kaynakları ayrıntılı faturalandırma verilerini paylaşmaz. Maliyetler gruplandırılırken **Klasik hizmetler** olarak birleştirilir.
+
+Ana grafiğin altındaki Özet grafikler, seçili zaman aralığı ve filtreleri için genel maliyetlerinizin daha geniş bir resmini sunan farklı gruplandırmaları gösterir. Toplu maliyetleri herhangi bir boyuta göre görüntülemek için bir özellik veya etiket seçin.
+
+![Özet grafikleri gösteren örnek](./media/quick-acm-cost-analysis/pivot-charts.png)
+
+Tüm görünüm için tam veri kümesini görüntüleyebilirsiniz. Uyguladığınız seçimler veya filtreler, sunulan verileri etkiler. Tam veri kümesini görmek için **grafik türü** listesini seçip **tablo** görünümü ' nü seçin.
+
+![Bir tablo görünümündeki geçerli görünüm için veriler](./media/quick-acm-cost-analysis/chart-type-table-view.png)
+
+
+## <a name="understanding-grouping-and-filtering-options"></a>Gruplandırma ve filtreleme seçeneklerini anlama
+
+Aşağıdaki tabloda, en yaygın gruplandırma ve filtreleme seçeneklerinin bazıları ve ne zaman kullanmanız gerektiği listelenmektedir.
+
+| Özellik | Kullanılması gereken durumlar |
+| --- | --- |
+| **Fatura dönemi** | Maliyetleri fatura ayına göre bölün. Bu seçenek, takvim ayları ile bağlantılı olmayan Kullandıkça öde ve geliştirme/test abonelikleri için önemlidir. EA/MCA hesapları, aynı hedefi gerçekleştirmek için tarih seçicide veya aylık ayrıntı düzeyinde takvim ayları kullanabilir. |
+| **Ücret türü** | Kullanım, satın alma, iade ve kullanılmayan rezervasyon maliyetlerini kesin. Rezervasyon satın alımları ve para iadesi yalnızca, işlem maliyetleri kullanılırken, itfası maliyeti kullanılırken kullanılabilir. Kullanılmayan rezervasyon maliyetleri yalnızca itfası maliyetlerine bakmaya hazır olduğunda kullanılabilir. |
+| **Bulut** | AWS ve Azure 'un maliyetlerini azaltın. AWS maliyetleri yalnızca yönetim gruplarından, dış faturalandırma hesaplarından ve dış aboneliklerden kullanılabilir. |
+| **Departman** / **Fatura bölümü** | Maliyetleri EA Departmanı veya MCA Invoice bölümüne göre bölün. Bu seçenek yalnızca EA/MCA faturalandırma hesapları ve MCA faturalandırma profilleri için kullanılabilir. |
+| **Kayıt hesabı** | Maliyetleri EA hesap sahibine göre bölün. Bu seçenek yalnızca EA faturalandırma hesapları ve departmanları için kullanılabilir. |
+| **Sıklık** | Kullanım tabanlı, bir kerelik ve yinelenen maliyetleri kesin. |
+| **Si** | Azure kullanım ölçünün maliyetlerini azaltın. Bu seçenek yalnızca Azure kullanımı için kullanılabilir. Tüm satın alma ve Market kullanımı **belirtilmemiş** veya **atanmamış**olarak gösterilir. |
+| **Yayımcı türü** | AWS, Azure ve Market maliyetlerini bölün. |
+| **La** | Maliyetleri rezervasyona göre bölün. Ayırma içermeyen kullanımlar **belirtilmemiş**olarak gösterilir. |
+| **Kaynak** | Maliyetleri kaynağa göre bölün. Her satın alma, bir EA/PAYG faturalandırma hesabında veya MCA Faturalandırma profili düzeyinde uygulandığından, **belirtilen**şekilde görünür.  |
+| **Kaynak grubu** | Maliyetleri kaynak grubuna göre bölün. Bu seçenek yalnızca klasik olmayan kullanım için kullanılabilir. Klasik kaynak kullanımı **diğer**gibi görünür ve satın alma işlemleri **belirtilmemiş**olarak gösterilir. |
+| **Kaynak türü** | Maliyetleri kaynak türüne göre bölün. Bu seçenek yalnızca klasik olmayan kullanım için kullanılabilir. Klasik kaynak kullanımı **diğer**gibi görünür ve satın alma işlemleri **belirtilmemiş**olarak gösterilir. |
+| **Hizmet adı** veya **ölçüm kategorisi** | Azure hizmeti 'nin maliyetini azaltın. Bu seçenek yalnızca Azure kullanımı için kullanılabilir. Tüm satın alma ve Market kullanımı **belirtilmemiş** veya **atanmamış**olarak gösterilir. |
+| **Hizmet katmanı** veya **ölçüm alt kategorisi** | Azure kullanım ölçümü alt sınıflandırmasına göre maliyeti sonlandırın. Bu seçenek yalnızca Azure kullanımı için kullanılabilir. Tüm satın alma ve Market kullanımı **belirtilmemiş** veya **atanmamış**olarak gösterilir. |
+| **Abonelik** | Maliyetleri aboneliğe göre bölün. Tüm satın alımlar **belirtilmemiş**olarak gösterilir. |
+| **Tag** | Belirli bir etiket anahtarı için etiket değerlerine göre maliyetleri bölün. |
+
+Şartlar hakkında daha fazla bilgi için bkz. [Azure kullanımı ve ücretler dosyasında kullanılan koşulları anlayın](../billing/billing-understand-your-usage.md).
+
+
+## <a name="saving-and-sharing-customized-views"></a>Özelleştirilmiş görünümleri kaydetme ve paylaşma
+
+Maliyet analizini Azure portal panosuna sabitleyerek veya maliyet analizine bir bağlantı kopyalayarak özelleştirilmiş görünümleri başkalarıyla kaydedip paylaşabilirsiniz.
+
+Maliyet analizini sabitlemek için sağ üst köşedeki raptiye simgesini seçin. Maliyet analizini sabitleme yalnızca ana grafik veya tablo görünümünü kaydeder. Başkalarının kutucuğa erişmesine izin vermek için panoyu paylaşabilirsiniz. Bunun yalnızca Pano yapılandırmasını paylaştığı ve kullanıcılara temel alınan verilere erişim vermediği unutulmamalıdır. Maliyetlerine erişiminiz yoksa ancak paylaşılan bir panoya erişiminiz varsa, "erişim reddedildi" iletisi görürsünüz.
+
+Maliyet analizine bir bağlantı paylaşmak için dikey pencerenin en üstünde bulunan **paylaşma** ' yı seçin. Bu belirli bir kapsam için bu görünümü açan özel bir URL görünür. Maliyet erişiminiz yoksa ve bu URL 'YI alırsanız "erişim reddedildi" iletisi görürsünüz.
+
+Desteklenen her kapsam için maliyetlere erişim verme hakkında daha fazla bilgi edinmek için bkz. kapsamları gözden geçirin [ve kapsamlar ile çalışın](understand-work-scopes.md).
+
+## <a name="automation-and-offline-analysis"></a>Otomasyon ve çevrimdışı analiz
+
+Daha fazla analiz için verileri indirmeniz, kendi verilerinize birleştirmek veya kendi sistemlerinizle tümleştirmeniz gerektiğinde zaman vardır. Maliyet yönetimi birkaç farklı seçenek sunar. Başlangıç noktası olarak, maliyet analizinde aldığınız gibi bir geçici üst düzey özete ihtiyacınız varsa, ihtiyacınız olan görünümü oluşturun. Ardından **Dışa Aktar** ' ı SEÇIP **verileri CSV 'ye indir** ' i seçerek veya **verileri Excel 'e**indirerek indirin. Excel indirme, indirme oluşturmak için kullandığınız görünümde kapsam, sorgu yapılandırması, toplam ve oluşturulma tarihi gibi ek bağlam sağlar.
+
+Tam, toplanmış veri kümesine ihtiyacınız varsa, faturalandırma hesabından indirin. Ardından, portalın sol gezinti bölmesindeki hizmetler listesinden **maliyet yönetimi + faturalandırma**' a gidin. Varsa Faturalandırma hesabınızı seçin. **Kullanım + ücretler**' e gidin ve ardından istediğiniz fatura dönemi için **İndir** simgesini seçin.
+
+Maliyet verilerini almayı otomatikleştirmek için benzer bir yaklaşım alın. Dinamik filtreleme, gruplama ve toplama ile daha zengin analize yönelik [sorgu API](/rest/api/cost-management/query) 'sini kullanın veya tam, toplanmış veri kümesi Için [UsageDetails API](/rest/api/consumption/usageDetails) 'sini kullanın. Bu API 'lerin genel kullanılabilirlik (GA) sürümü 2019-01-01 ' dir. Bu API 'Lerde rezervasyon ve Market satın alımlarınızın önizlemesine erişim sağlamak için **2019-04-01-Preview** kullanın.
+
+Örneğin, aşağıda, ücretlendirilmiştir (kullanım, satın alma veya geri ödeme), Yayımcı türü (Azure ya da Market), kaynak grubu (satın alma için boş) ve rezervasyon (geçerli değilse boş) ile ayrılmış düşük maliyetlerden oluşan toplu bir görünüm yer alır.
+
+```
+POST https://management.azure.com/{scope}/providers/Microsoft.CostManagement/query?api-version=2019-04-01-preview
+Content-Type: application/json
+
+{
+  "type": "AmortizedCost",
+  "timeframe": "Custom",
+  "timePeriod": { "from": "2019-04-01", "to": "2019-04-30" },
+  "dataset": {
+    "granularity": "None",
+    "aggregation": {
+      "totalCost": { "name": "PreTaxCost", "function": "Sum" }
+    },
+    "grouping": [
+      { "type": "dimension", "name": "ChargeType" },
+      { "type": "dimension", "name": "PublisherType" },
+      { "type": "dimension", "name": "Frequency" },
+      { "type": "dimension", "name": "ResourceGroup" },
+      { "type": "dimension", "name": "SubscriptionName" },
+      { "type": "dimension", "name": "SubscriptionId" },
+      { "type": "dimension", "name": "ReservationName" },
+      { "type": "dimension", "name": "ReservationId" },
+    ]
+  },
+}
+```
+
+Toplama gerekmiyorsa ve tam ve ham veri kümesini tercih ediyorsanız:
+
+```
+GET https://management.azure.com/{scope}/providers/Microsoft.Consumption/usageDetails?metric=AmortizedCost&$filter=properties/usageStart+ge+'2019-04-01'+AND+properties/usageEnd+le+'2019-04-30'&api-version=2019-04-01-preview
+```
+
+Harcamaları tahakkuk ettikleri gibi göstermek için gerçek maliyetleriniz varsa, **tür**/**ölçüsünü** **actualcost**olarak değiştirin. Bu API 'Ler hakkında daha fazla bilgi için bkz. [sorgu](/rest/api/cost-management/query) ve [UsageDetails](/rest/api/consumption/usageDetails) API 'si belgeleri. Yayımlanan docs 'ın GA sürümüne göre olduğunu unutmayın. Ancak, her ikisi de yeni tür/ölçüm özniteliği dışında *2019-04-01-Preview* API sürümü için aynı ve özellik adlarını değiştirdi. (Aşağıdaki özellik adları hakkında daha fazla bilgi edinin.)
+
+Maliyet yönetimi API 'Leri kaynakların üzerindeki tüm kapsamlar arasında çalışır: Azure RBAC erişimi, EA faturalandırma hesapları (kayıtları), departmanlar ve EA Portal erişimi aracılığıyla kayıt hesapları aracılığıyla kaynak grubu, abonelik ve yönetim grubu. Kapsam KIMLIĞINIZI belirleme veya erişimi yönetme dahil olmak üzere kapsamlar hakkında daha fazla bilgi edinin [ve kapsamları anlayın ve bunlarla çalışın](understand-work-scopes.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

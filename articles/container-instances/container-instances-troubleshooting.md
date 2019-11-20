@@ -1,41 +1,44 @@
 ---
-title: Azure Container Instances sorunlarını giderme
-description: Azure Container Instances ile ilgili sorunları giderme hakkında bilgi edinin
+title: Sorun giderme Azure Container Instances
+description: Dağıtım, çalıştırma veya yönetme Azure Container Instances sık karşılaşılan sorunları giderme hakkında bilgi edinin
 services: container-instances
 author: dlepow
-manager: jeconnoc
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
-ms.date: 04/25/2019
+ms.date: 09/25/2019
 ms.author: danlep
 ms.custom: mvc
-ms.openlocfilehash: 9dc3e19f9429a6055a799f3f013c732538fa370d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8b102f31fe25b9c45d85a2dae269fce64be10a5d
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65070861"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74147847"
 ---
-# <a name="troubleshoot-common-issues-in-azure-container-instances"></a>Azure Container ınstances'da yaygın sorunlarını giderme
+# <a name="troubleshoot-common-issues-in-azure-container-instances"></a>Azure Container Instances genel sorunları giderme
 
-Bu makalede, Azure Container Instances'a kapsayıcıları dağıtma veya yönetmek için yaygın sorunlarını giderme gösterilmektedir. Ayrıca bkz: [sık sorulan sorular](container-instances-faq.md).
+Bu makalede, Azure Container Instances için kapsayıcıları yönetmek veya dağıtmak için sık karşılaşılan sorunların nasıl giderileceği gösterilmektedir. Ayrıca bkz. [sık sorulan sorular](container-instances-faq.md).
 
-## <a name="naming-conventions"></a>Adlandırma kuralları
+Ek desteğe ihtiyacınız varsa [Azure Portal](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) **Yardım + Destek** seçeneklerine bakın.
 
-Kapsayıcı kuruluma tanımlarken belirli parametreleri için adlandırma kısıtlamaları bağlılığı gerektirir. Aşağıda bir kapsayıcı için belirli gereksinimler Grup Özellikleri tablodur. Azure adlandırma kuralları hakkında daha fazla bilgi için bkz. [adlandırma kuralları] [ azure-name-restrictions] Azure mimari Merkezi'ne.
+## <a name="issues-during-container-group-deployment"></a>Kapsayıcı grubu dağıtımı sırasında sorunlar
+### <a name="naming-conventions"></a>Adlandırma kuralları
 
-| `Scope` | Uzunluk | Büyük/Küçük Harf Kullanımı | Geçerli karakterler | Önerilen düzen | Örnek |
+Kapsayıcı belirtimini tanımlarken, belirli parametreler adlandırma kısıtlamalarına uygun olması gerekir. Kapsayıcı grubu özellikleri için belirli gereksinimlere sahip bir tablo aşağıda verilmiştir. Azure adlandırma kuralları hakkında daha fazla bilgi için Azure Mimari Merkezi [adlandırma kuralları][azure-name-restrictions] bölümüne bakın.
+
+| Kapsam | Uzunluk | Büyük/Küçük Harf Kullanımı | Geçerli karakterler | Önerilen düzen | Örnek |
 | --- | --- | --- | --- | --- | --- |
-| Kapsayıcı grubu adı | 1-64 |Büyük/Küçük harfe duyarsız |İlk veya son karakter alfasayısal ve kısa çizgi herhangi bir yere hariç |`<name>-<role>-CG<number>` |`web-batch-CG1` |
-| Kapsayıcı adı | 1-64 |Büyük/Küçük harfe duyarsız |İlk veya son karakter alfasayısal ve kısa çizgi herhangi bir yere hariç |`<name>-<role>-CG<number>` |`web-batch-CG1` |
-| Kapsayıcı bağlantı noktaları | 1 ile 65535 arasında |Integer |1 ile 65535 arasında bir tamsayı |`<port-number>` |`443` |
-| DNS ad etiketi | 5-63 |Büyük/Küçük harfe duyarsız |İlk veya son karakter alfasayısal ve kısa çizgi herhangi bir yere hariç |`<name>` |`frontend-site1` |
-| Ortam değişkeni | 1-63 |Büyük/Küçük harfe duyarsız |İlk veya son karakter alfasayısal ve alt çizgi (_) herhangi bir yere hariç |`<name>` |`MY_VARIABLE` |
-| Birim adı | 5-63 |Büyük/Küçük harfe duyarsız |Küçük harf ve sayı ve kısa çizgi herhangi bir yere ilk veya son karakter hariç. Art arda iki kısa çizgi içeremez. |`<name>` |`batch-output-volume` |
+| Kapsayıcı grubu adı | 1-64 |Büyük/Küçük harfe duyarsız |İlk veya son karakter dışında bir yerde alfasayısal ve kısa çizgi |`<name>-<role>-CG<number>` |`web-batch-CG1` |
+| Kapsayıcı adı | 1-64 |Büyük/Küçük harfe duyarsız |İlk veya son karakter dışında bir yerde alfasayısal ve kısa çizgi |`<name>-<role>-CG<number>` |`web-batch-CG1` |
+| Kapsayıcı bağlantı noktaları | 1 ile 65535 arasında |Tamsayı |1 ile 65535 arasında tamsayı |`<port-number>` |`443` |
+| DNS ad etiketi | 5-63 |Büyük/Küçük harfe duyarsız |İlk veya son karakter dışında bir yerde alfasayısal ve kısa çizgi |`<name>` |`frontend-site1` |
+| Ortam değişkeni | 1-63 |Büyük/Küçük harfe duyarsız |Alfasayısal ve alt çizgi (_) ilk veya son karakter dışında bir yerde |`<name>` |`MY_VARIABLE` |
+| Birim adı | 5-63 |Büyük/Küçük harfe duyarsız |Küçük harfler ve rakamlar ve ilk veya son karakteri hariç her yerde tire. Art arda iki kısa çizgi içeremez. |`<name>` |`batch-output-volume` |
 
-## <a name="os-version-of-image-not-supported"></a>Desteklenmeyen işletim sistemi sürümü
+### <a name="os-version-of-image-not-supported"></a>Görüntünün işletim sistemi sürümü desteklenmiyor
 
-Azure Container Instances desteklemeyen, görüntü belirtirseniz bir `OsVersionNotSupported` hata döndürülür. Ardından, nerede benzer bir hatadır `{0}` dağıtmaya çalıştığınız görüntünün adı:
+Azure Container Instances desteklemediği bir görüntü belirtirseniz, bir `OsVersionNotSupported` hatası döndürülür. Hata, `{0}` dağıtmaya çalıştığınız görüntünün adı olan aşağıdakine benzerdir:
 
 ```json
 {
@@ -46,15 +49,15 @@ Azure Container Instances desteklemeyen, görüntü belirtirseniz bir `OsVersion
 }
 ```
 
-Bu hata, yarı yıllık kanal tabanlı dağıtımı Windows görüntüleri 1709 veya desteklenmeyen 1803 bıraktığınızda en sık karşılaşılır. Azure Container ınstances'da desteklenen Windows görüntüleri için bkz. [sık sorulan sorular](container-instances-faq.md#what-windows-base-os-images-are-supported).
+Bu hata en sık, yarı yıllık kanal sürümü 1709 veya 1803 tabanlı Windows görüntülerini dağıtmada desteklenmez ve bu durum desteklenmez. Azure Container Instances sürümünde desteklenen Windows görüntüleri için bkz. [sık sorulan sorular](container-instances-faq.md#what-windows-base-os-images-are-supported).
 
-## <a name="unable-to-pull-image"></a>Çekme görüntüsü oluşturulamıyor
+### <a name="unable-to-pull-image"></a>Görüntü çekilemiyor
 
-Azure Container Instances, görüntü çekmek başlangıçta kuramazsa, bir süre için yeniden dener. Görüntü çekme işlemi başarısız olmaya devam eder, ACI dağıtım sonunda başarısız olur ve görebileceğiniz bir `Failed to pull image` hata.
+Azure Container Instances ilk olarak görüntünüzü çekilemiyor, bir süre yeniden dener. Görüntü çekme işlemi başarısız olmaya devam ederse, ACI sonunda dağıtım başarısız olur ve bir `Failed to pull image` hatası görebilirsiniz.
 
-Bu sorunu çözmek için kapsayıcı örneğini silmek ve dağıtımınız yeniden deneyin. Görüntüyü kayıt defterinde var olduğundan ve görüntü adını doğru girdiğinizden emin olun.
+Bu sorunu çözmek için kapsayıcı örneğini silin ve dağıtımınızı yeniden deneyin. Görüntünün kayıt defterinde mevcut olduğundan ve görüntü adını doğru yazdığınızdan emin olun.
 
-Görüntü çekilen, olayları aşağıdaki gibi çıktısında gösterilen [az container show][az-container-show]:
+Görüntü çekemiyorum, aşağıdaki gibi olaylar [az Container Show][az-container-show]çıktısında gösterilmektedir:
 
 ```bash
 "events": [
@@ -84,12 +87,25 @@ Görüntü çekilen, olayları aşağıdaki gibi çıktısında gösterilen [az 
   }
 ],
 ```
+### <a name="resource-not-available-error"></a>Kaynak kullanılamıyor hatası
 
-## <a name="container-continually-exits-and-restarts-no-long-running-process"></a>Kapsayıcı sürekli olarak çıkar ve yeniden başlatılır (uzun süren işlem)
+Azure 'da değişen bölgesel kaynak yükü nedeniyle, bir kapsayıcı örneğini dağıtmaya çalışırken şu hatayı alabilirsiniz:
 
-Kapsayıcı grupları için varsayılan değer bir [yeniden başlatma ilkesi](container-instances-restart-policy.md) , **her zaman**, bunlar tamamlanana kadar çalıştırdıktan sonra kapsayıcı grubundaki kapsayıcı her zaman yeniden başlatın. Bu değişiklik yapmanız gerekebilir **OnFailure** veya **hiçbir zaman** görev-tabanlı kapsayıcıları çalıştırmak istiyorsanız. Belirtirseniz **OnFailure** ve hala bakın sürekli yeniden başlatıldıktan sonra uygulama veya betik kapsayıcınızda yürütülen bir sorun olabilir.
+`The requested resource with 'x' CPU and 'y.z' GB memory is not available in the location 'example region' at this moment. Please retry with a different resource request or in another location.`
 
-Kapsayıcı grupları olmadan uzun süre çalışan işlemleri çalıştırırken, yinelenen çıkar ve Ubuntu gibi veya Alpine görüntülerle yeniden görebilirsiniz. Aracılığıyla bağlanan [EXEC](container-instances-exec.md) kapsayıcı canlı tutma hiçbir işlem olarak çalışmıyor. Bu sorunu çözmek için kapsayıcıyı tutmak için kapsayıcı grubu dağıtımınız ile aşağıdaki gibi bir başlangıç komutu içerir.
+Bu hata, dağıtmayı denediğiniz bölgedeki ağır yük nedeniyle, Kapsayıcınız için belirtilen kaynakların bu anda ayrılamaz olduğunu gösterir. Sorununuzu gidermeye yardımcı olması için aşağıdaki risk azaltma adımlarından birini veya birkaçını kullanın.
+
+* Kapsayıcı dağıtım ayarlarınızın, [Azure Container Instances Için bölge kullanılabilirliği](container-instances-region-availability.md) bölümünde tanımlanan parametreler dahilinde olduğunu doğrulayın
+* Kapsayıcının daha düşük CPU ve bellek ayarlarını belirtin
+* Farklı bir Azure bölgesine dağıtın
+* Daha sonraki bir zamanda dağıtın
+
+## <a name="issues-during-container-group-runtime"></a>Kapsayıcı grubu çalışma zamanı sırasında sorunlar
+### <a name="container-continually-exits-and-restarts-no-long-running-process"></a>Kapsayıcı sürekli olarak çıkar ve yeniden başlatılır (uzun süre çalışan işlem yok)
+
+Kapsayıcı grupları **her zaman** [yeniden başlatma ilkesine](container-instances-restart-policy.md) varsayılan olarak, bu nedenle kapsayıcı grubundaki kapsayıcılar, tamamlandıktan sonra her zaman yeniden başlatılır. Görev tabanlı kapsayıcılar çalıştırmak istiyorsanız bunu **OnFailure** veya **hiçbir** şekilde değiştirmeniz gerekebilir. **OnFailure** ' i belirtirseniz ve yine de sürekli yeniden başlatmalar görüyorsanız, kapsayıcıda veya betikte yürütülen uygulamada bir sorun olabilir.
+
+Uzun süre çalışan süreçler olmadan kapsayıcı grupları çalıştırırken, Ubuntu veya alp gibi görüntülerle yinelenen çıkış ve yeniden başlatmalar görebilirsiniz. Kapsayıcı, etkin durumda olmayan bir işlem içermediğinden, [Exec](container-instances-exec.md) aracılığıyla bağlanma çalışmayacaktır. Bu sorunu çözmek için kapsayıcının çalışır durumda tutulması için kapsayıcı grubu dağıtımınıza aşağıdaki gibi bir start komutu ekleyin.
 
 ```azurecli-interactive
 ## Deploying a Linux container
@@ -102,7 +118,7 @@ az container create -g myResourceGroup --name mywindowsapp --os-type Windows --i
  --command-line "ping -t localhost"
 ```
 
-Kapsayıcı örnekleri API ve Azure portaldaki bir `restartCount` özelliği. Bir kapsayıcı için yeniden başlatma sayısını denetlemek için kullanabileceğiniz [az container show] [ az-container-show] Azure CLI komutu. Aşağıdaki örnekte, (olduğu için kısaltma kesildi) çıktı gördüğünüz `restartCount` çıktının sonunda özelliği.
+Container Instances API ve Azure portal bir `restartCount` özelliği içerir. Bir kapsayıcının yeniden başlatma sayısını denetlemek için, Azure CLı 'de [az Container Show][az-container-show] komutunu kullanabilirsiniz. Aşağıdaki örnek çıktıda (breçekimi için kesilmiş), çıktının sonundaki `restartCount` özelliğini görebilirsiniz.
 
 ```json
 ...
@@ -143,22 +159,23 @@ Kapsayıcı örnekleri API ve Azure portaldaki bir `restartCount` özelliği. Bi
 ```
 
 > [!NOTE]
-> Linux dağıtımları için çoğu kapsayıcı görüntülerini bash gibi bir kabuk varsayılan komut olarak ayarlayın. Kendi kendine bir kabuk uzun süre çalışan bir hizmeti olmadığından, bu kapsayıcılar hemen çıkmak ve varsayılan yapılandırıldığında bir yeniden başlatma döngüyü kalan **her zaman** yeniden başlatma ilkesi.
+> Linux dağıtımları için çoğu kapsayıcı görüntüsü, varsayılan komut olarak Bash gibi bir kabuk ayarlar. Kendi üzerindeki bir kabuk uzun süredir çalışan bir hizmet olmadığından, Bu kapsayıcılar hemen çıkış yapar ve varsayılan olarak **her zaman** yeniden başlatma ilkesiyle yapılandırıldığında bir yeniden başlatma döngüsüne girer.
 
-## <a name="container-takes-a-long-time-to-start"></a>Kapsayıcı başlatmak uzun sürüyor
+### <a name="container-takes-a-long-time-to-start"></a>Kapsayıcının başlaması uzun sürüyor
 
-Azure Container ınstances'da kapsayıcı başlangıç zamanını katkıda iki temel unsurlar şunlardır:
+Azure Container Instances içinde kapsayıcı başlatma zamanına katkıda bulunan üç ana etken şunlardır:
 
 * [Görüntü boyutu](#image-size)
 * [Görüntü konumu](#image-location)
+* [Önbelleğe alınmış görüntüler](#cached-images)
 
-Windows görüntüleri olan [ek hususlar](#cached-images).
+Windows görüntülerinin [ek konuları](#cached-images)vardır.
 
-### <a name="image-size"></a>Görüntü boyutu
+#### <a name="image-size"></a>Görüntü boyutu
 
-Kapsayıcınızı başlatma, ancak sonuçta uzun sürüyorsa başarılı, kapsayıcı görüntünüzü boyutta bakarak başlayın. Azure Container Instances'a kapsayıcı görüntünüzü isteğe bağlı olarak çeker. çünkü gördüğünüz başlangıç zamanını boyutuna doğrudan ilgilidir.
+Kapsayıcının başlaması uzun zaman alıyorsa, ancak sonuç olarak başarılı olduktan sonra kapsayıcı resminizin boyutuna bakarak başlayın. Azure Container Instances kapsayıcı görüntünüzü isteğe bağlı olarak çeker, gördüğünüz başlangıç zamanı doğrudan boyutuyla ilgilidir.
 
-Kapsayıcı görüntünüzü boyutunu kullanarak görüntüleyebileceğiniz `docker images` Docker CLI komutunu:
+Docker CLı 'daki `docker images` komutunu kullanarak kapsayıcı Resminizin boyutunu görüntüleyebilirsiniz:
 
 ```console
 $ docker images
@@ -166,50 +183,56 @@ REPOSITORY                                    TAG       IMAGE ID        CREATED 
 mcr.microsoft.com/azuredocs/aci-helloworld    latest    7367f3256b41    15 months ago    67.6MB
 ```
 
-Resim boyutları küçük tutmak için anahtar son görüntünüzü çalışma zamanında gerekli değil herhangi bir şey içermediğinden emin olmaktır. Yapmanın bir yolu bu olan [çok aşamalı yapılar][docker-multi-stage-builds]. Çok aşamalı son görüntü yalnızca uygulamanız için gereken yapıtları içerir ve hiçbir ek içerik sağlamak kolay, oluşturma zamanında gerekli yap oluşturur.
+Görüntü boyutlarının küçük tutulması için gereken anahtar, son görüntünüzün çalışma zamanında gerekli olmayan herhangi bir şey içermediğinden emin olmanızı sağlamaktır. Bunu yapmanın bir yolu [çok aşamalı Derlemelerle][docker-multi-stage-builds]aynıdır. Çok aşamalı derlemeler, son görüntünün yalnızca uygulamanız için gereken yapıtları içerdiğinden ve derleme zamanında gerekli olan ek içeriklerin hiçbirini içermediğinden emin olmanızı kolaylaştırır.
 
-### <a name="image-location"></a>Görüntü konumu
+#### <a name="image-location"></a>Görüntü konumu
 
-Başka bir yolu, kapsayıcının başlangıç zamanında görüntü çekme etkisini azaltmak, kapsayıcı görüntüsü barındırmaktır [Azure Container Registry](/azure/container-registry/) container ınstances'a dağıtmayı planladığınız burada aynı bölgede. Bu, kapsayıcı görüntüsü seyahat gereken ağ yolunu karşıdan yükleme süresini önemli ölçüde kısaltmak kısaltır.
+Kapsayıcının başlangıç saatine görüntü çekmenin etkilerini azaltmanın bir başka yolu da kapsayıcı görüntüsünü [Azure Container Registry](/azure/container-registry/) kapsayıcı örneklerini dağıtmak istediğiniz bölgede barındırmaktır. Bu, kapsayıcı görüntüsünün yolculuğu gereken ağ yolunu kısaltır ve indirme süresini önemli ölçüde kısaltır.
 
-### <a name="cached-images"></a>Önbelleğe alınan görüntüleri
+#### <a name="cached-images"></a>Önbelleğe alınmış görüntüler
 
-Azure Container Instances genel üzerinde oluşturulan görüntüleri için kapsayıcı başlatma süresini hızlandırmak amacıyla bir önbelleğe alma mekanizması kullanır [Windows temel görüntüleri](container-instances-faq.md#what-windows-base-os-images-are-supported)de dahil olmak üzere `nanoserver:1809`, `servercore:ltsc2019`, ve `servercore:1809`. Sık kullanılan Linux görüntüleri gibi `ubuntu:1604` ve `alpine:3.6` önbelleğe alınır. Önbelleğe alınan görüntüleri ve etiketleri güncel bir listesi için kullanmaya [önbelleğe alınmış görüntüleri listeleme] [ list-cached-images] API.
+Azure Container Instances, `nanoserver:1809`, `servercore:ltsc2019`ve `servercore:1809`dahil olmak üzere ortak [Windows temel görüntülerinde](container-instances-faq.md#what-windows-base-os-images-are-supported)oluşturulan görüntülerin kapsayıcı başlangıç süresini hızlandırmaya yardımcı olmak için bir önbelleğe alma mekanizması kullanır. `ubuntu:1604` ve `alpine:3.6` gibi yaygın olarak kullanılan Linux görüntüleri de önbelleğe alınır. Önbelleğe alınmış görüntülerin ve etiketlerin güncel listesi için [önbelleğe alınmış görüntüleri Listele][list-cached-images] API 'sini kullanın.
 
 > [!NOTE]
-> Windows Server 2019 tabanlı görüntüler Azure Container ınstances'da kullanımını Önizleme aşamasındadır.
+> Azure Container Instances 'da Windows Server 2019 tabanlı görüntülerin kullanımı önizlemededir.
 
-### <a name="windows-containers-slow-network-readiness"></a>Windows kapsayıcıları yavaş bir ağ hazırlığı
+#### <a name="windows-containers-slow-network-readiness"></a>Windows kapsayıcıları yavaş ağ hazırlığı
 
-İlk oluşturma, Windows kapsayıcıları, 30 saniyeye kadar (veya nadir durumlarda daha uzun) gelen veya giden bağlantı olabilir. Kapsayıcı uygulamanızı Internet bağlantısı gerektiriyorsa, gecikme ekleyin ve yeniden deneme mantığı, Internet bağlantısı kurmak 30 saniye izin vermek için. İlk Kurulumdan sonra kapsayıcı ağ iletişimi uygun şekilde devam edecektir.
+İlk oluşturma sırasında, Windows kapsayıcılarının 30 saniyeye kadar (veya daha uzun durumlarda, nadiren) gelen veya giden bağlantısı olmayabilir. Kapsayıcı uygulamanızın bir Internet bağlantısı olması gerekiyorsa, Internet bağlantısı kurmak için 30 saniye izin vermek üzere gecikme ve yeniden deneme mantığı ekleyin. İlk kurulumdan sonra kapsayıcı ağı uygun şekilde sürdürülür.
 
-## <a name="resource-not-available-error"></a>Kaynak kullanılamıyor hatası
+### <a name="cannot-connect-to-underlying-docker-api-or-run-privileged-containers"></a>Temel alınan Docker API 'sine bağlanılamıyor veya ayrıcalıklı kapsayıcılar Çalıştır
 
-Azure'da yük bölgesel kaynak değişen nedeniyle, bir kapsayıcı örneği dağıtmak çalışırken şu hatayı alabilirsiniz:
+Azure Container Instances, kapsayıcı gruplarını barındıran temeldeki altyapıya doğrudan erişim sunmaz. Bu, kapsayıcının ana bilgisayarında çalışan ve ayrıcalıklı kapsayıcıları çalıştıran Docker API 'sine erişimi içerir. Docker etkileşimine ihtiyacınız varsa, ACI API 'sinin nasıl desteklediğini görmek için [rest başvurusu belgelerine](https://aka.ms/aci/rest) bakın. Eksik bir sorun varsa, [acı geri bildirim forumlarında](https://aka.ms/aci/feedback)bir istek gönderin.
 
-`The requested resource with 'x' CPU and 'y.z' GB memory is not available in the location 'example region' at this moment. Please retry with a different resource request or in another location.`
+### <a name="container-group-ip-address-may-not-be-accessible-due-to-mismatched-ports"></a>Eşleşmeyen bağlantı noktaları nedeniyle kapsayıcı grubu IP adresi erişilebilir olmayabilir
 
-Bu hata, kapsayıcınız için belirtilen kaynaklara o anda ayrılamıyor dağıtmaya çalıştığınız bölgede ağır yük nedeniyle gösterir. Sorununuzu çözmenize yardımcı olması için bir veya daha fazla aşağıdaki risk azaltma adımlarını kullanın.
+Azure Container Instances, normal Docker yapılandırmasıyla benzer bağlantı noktası eşlemeyi henüz desteklememektedir. Bir kapsayıcı grubunun IP adresini, olması gerektiğine inanıyorsanız erişilebilir değilse, kapsayıcı grubunuza `ports` özelliği ile birlikte kullanıma sunabileceğiniz aynı bağlantı noktalarını dinlemek için kapsayıcı görüntünüzü yapılandırdığınızdan emin olun.
 
-* Kapsayıcı dağıtım ayarlarınızı kalan içinde tanımlanan parametreleri doğrulayın [Azure Container Instances için bölge kullanılabilirliği](container-instances-region-availability.md)
-* Kapsayıcı için daha düşük CPU ve bellek ayarlarını belirtin
-* Farklı bir Azure bölgesine dağıtın
-* Daha sonraki bir zamanda dağıtmak
+Azure Container Instances Container Image 'da yapılandırdığınız bağlantı noktasında dinleyebildiğini doğrulamak istiyorsanız, bağlantı noktasını kullanıma sunan `aci-helloworld` görüntüsünün bir dağıtımını test edin. Ayrıca `aci-helloworld` uygulamasını, bağlantı noktasında dinleyeceği şekilde çalıştırın. `aci-helloworld`, `PORT` dinlediği 80 varsayılan bağlantı noktasını geçersiz kılmak için isteğe bağlı bir ortam değişkenini kabul eder. Örneğin, 9000 bağlantı noktasını test etmek için, kapsayıcı grubunu oluştururken [ortam değişkenini](container-instances-environment-variables.md) ayarlayın:
 
-## <a name="cannot-connect-to-underlying-docker-api-or-run-privileged-containers"></a>Temel alınan Docker API'ye bağlanmak veya ayrıcalıklı kapsayıcıları çalıştırmak olamaz
+1. 9000 numaralı bağlantı noktasını kullanıma sunmak için kapsayıcı grubunu ayarlayın ve bağlantı noktası numarasını ortam değişkeninin değeri olarak geçirin. Örnek bash kabuğu için biçimlendirilir. PowerShell veya komut Istemi gibi başka bir kabuğu tercih ediyorsanız, değişken atamasını uygun şekilde ayarlamanız gerekir.
+    ```azurecli
+    az container create --resource-group myResourceGroup \
+    --name mycontainer --image mcr.microsoft.com/azuredocs/aci-helloworld \
+    --ip-address Public --ports 9000 \
+    --environment-variables 'PORT'='9000'
+    ```
+1. `az container create`komut çıkışında kapsayıcı grubunun IP adresini bulun. **IP**değerini arayın. 
+1. Kapsayıcı başarıyla sağlandıktan sonra, tarayıcınızda kapsayıcı uygulamasının IP adresine ve bağlantı noktasına gidin, örneğin: `192.0.2.0:9000`. 
 
-Azure Container Instances'a kapsayıcı grupları barındıran altyapının doğrudan erişim kullanıma sunmuyor. Bu Docker kapsayıcının konakta çalışan ve çalışan kapsayıcılar ayrıcalıklı API erişimi içerir. Docker etkileşimi gerektiriyorsa, kontrol [REST başvuru belgeleri](https://aka.ms/aci/rest) ne ACI API'sini destekleyen görmek için. Varsa eksik bir şeyler üzerinde talebinizi [ACI geri bildirim forumları](https://aka.ms/aci/feedback).
+    "Hoş geldiniz Azure Container Instances!" görmeniz gerekir Web uygulaması tarafından görünen ileti.
+1. Kapsayıcı ile işiniz bittiğinde `az container delete` komutunu kullanarak kaldırın.
 
-## <a name="ips-may-not-be-accessible-due-to-mismatched-ports"></a>IP'ler eşleşmeyen bağlantı noktaları nedeniyle erişilebilir olmayabilir
-
-Bu düzeltme yol haritasında ancak azure Container Instances şu anda normal docker yapılandırmasıyla gibi bağlantı noktası eşleme desteklemez. IP'ler olmayan erişilebilir olmalıdır düşündüğünüzde bulursanız, kapsayıcı grubu içinde ortaya çıkarttığınız aynı bağlantı noktalarını dinlemek için kapsayıcı görüntünüzü yapılandırdığınızdan emin olun `ports` özelliği.
+    ```azurecli
+    az container delete --resource-group myResourceGroup --name mycontainer
+    ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi nasıl [kapsayıcı günlüklerini ve olayları almak](container-instances-get-logs.md) kapsayıcılarınızı hata ayıklama yardımcı olmak için.
+Kapsayıcılarınızın hatalarını ayıklamanıza yardımcı olmak için [kapsayıcı günlüklerini ve olaylarını nasıl alacağınızı](container-instances-get-logs.md) öğrenin.
 
 <!-- LINKS - External -->
-[azure-name-restrictions]: https://docs.microsoft.com/azure/architecture/best-practices/naming-conventions#naming-rules-and-restrictions
+[azure-name-restrictions]: https://docs.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#naming-and-tagging-resources
 [windows-sac-overview]: https://docs.microsoft.com/windows-server/get-started/semi-annual-channel-overview
 [docker-multi-stage-builds]: https://docs.docker.com/engine/userguide/eng-image/multistage-build/
 [docker-hub-windows-core]: https://hub.docker.com/_/microsoft-windows-servercore

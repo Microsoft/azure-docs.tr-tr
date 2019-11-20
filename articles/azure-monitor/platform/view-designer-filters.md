@@ -1,82 +1,76 @@
 ---
-title: Azure İzleyici görünümlerde filtreleri | Microsoft Docs
-description: Azure İzleyici Görünümü'nde filtre görünümü değiştirmeden belirli bir özellik değeri tarafından görünümünde verileri filtrelemek kullanıcıların sağlar.  Bu makalede, bir filtre ve özel görünüm için bir tane ekleyin nasıl kullanılacağı açıklanır.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ce41dc30-e568-43c1-97fa-81e5997c946a
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici görünümlerindeki filtreler | Microsoft Docs
+description: Azure Izleyici görünümündeki bir filtre, kullanıcıların görünümün kendisini değiştirmeden belirli bir özelliğin değerine göre görünümdeki verileri filtrelemesine olanak tanır.  Bu makalede bir filtrenin nasıl kullanılacağı ve bir özel görünüme nasıl ekleneceği açıklanmaktadır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 06/22/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 31a902302ba806889854330c6517d9f5745f1c0c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 06/22/2018
+ms.openlocfilehash: 03950c7c87f659c5d1c032b5d3c1f74d136697c7
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60551741"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72931977"
 ---
-# <a name="filters-in-azure-monitor-views"></a>Azure İzleyici görünümlerde filtreleri
-A **filtre** içinde bir [Azure İzleyici görünümü](view-designer.md) kullanıcılar görünümü değiştirmeden belirli bir özellik değeri tarafından görünümünde verileri filtrelemek olanak sağlar.  Örneğin, görünümünüzü yalnızca belirli bir bilgisayardan veri görünümünü filtrelemek için kullanıcıları veya bilgisayarları kümesini izin verebilir.  Filtre birden çok özellikleri tarafından kullanıcılara izin vermek için tek bir görünümde birden çok filtre oluşturabilirsiniz.  Bu makalede, bir filtre ve özel görünüm için bir tane ekleyin nasıl kullanılacağı açıklanır.
+# <a name="filters-in-azure-monitor-views"></a>Azure Izleyici görünümlerindeki filtreler
+[Azure izleyici görünümündeki](view-designer.md) bir **filtre** , kullanıcıların görünümün kendisini değiştirmeden belirli bir özelliğin değerine göre görünümdeki verileri filtrelemesine olanak tanır.  Örneğin, görünüminizdeki kullanıcıların görünümü yalnızca belirli bir bilgisayar veya bilgisayar kümesi tarafından filtrelemesine izin verebilirsiniz.  Kullanıcıların birden çok özelliğe göre filtrelemesine olanak tanımak için, tek bir görünümde birden çok filtre oluşturabilirsiniz.  Bu makalede bir filtrenin nasıl kullanılacağı ve bir özel görünüme nasıl ekleneceği açıklanmaktadır.
 
 ## <a name="using-a-filter"></a>Filtre kullanma
-Tarih zaman aralığı en üstündeki açılan view tarih zaman aralığını değiştirebileceğiniz aşağı açmak üzere bir görünüme tıklayın.
+Görünümü açmak için bir görünümün en üstündeki tarih saat aralığına tıklayın ve sonra görünümün tarih saat aralığını değiştirebileceğiniz açılan açılan listesini açın.
 
 ![Filtre örneği](media/view-designer-filters/filters-example-time.png)
 
-Tıklayın **+** görünüm için tanımlanan özel filtreleri kullanarak filtre ekleyin. Açılan veya bir değer yazın ya da filtre için bir değer seçin. Tıklayarak filtreleri eklemeye devam **+** . 
+Görünüm için tanımlanan özel filtreleri kullanarak bir filtre eklemek için **+** tıklayın. Açılan listeden filtre için bir değer seçin ya da bir değer yazın. **+** tıklayarak filtre eklemeye devam edin. 
 
 
 ![Filtre örneği](media/view-designer-filters/filters-example-custom.png)
 
-Tüm değerleri için bir filtre kaldırmanız durumunda bu filtre artık uygulanır.
+Bir filtrenin tüm değerlerini kaldırırsanız, bu filtre artık uygulanmaz.
 
 
-## <a name="creating-a-filter"></a>Bir filtre oluşturma
+## <a name="creating-a-filter"></a>Filtre oluşturma
 
-Filtresi oluşturma **filtreleri** sekmesinde [bir görünümü düzenleme](view-designer.md).  Filtre görünümü için genel ve görünümünde tüm bölümleri geçerlidir.  
+[Bir görünüm düzenlenirken](view-designer.md) **Filtreler** sekmesinden bir filtre oluşturun.  Filtre görünüm için geneldir ve görünümdeki tüm parçalar için geçerlidir.  
 
 ![Filtre ayarları](media/view-designer-filters/filters-settings.png)
 
-Aşağıdaki tabloda filtre ayarlarını açıklar.
+Aşağıdaki tabloda bir filtrenin ayarları açıklanmaktadır.
 
 | Ayar | Açıklama |
 |:---|:---|
-| Alan Adı | Filtreleme için kullanılan alanın adı.  Bu alan summarıze alanında eşleşmelidir **değerler için sorgu**. |
-| Değerler için sorgu | Kullanıcı için Filtre açılan listeyi doldurmak için çalıştırılacak sorgu.  Bu sorgu ya da kullanmanız gerekir [özetlemek](/azure/kusto/query/summarizeoperator) veya [ayrı](/azure/kusto/query/distinctoperator) ve belirli bir alanla eşleşmelidir için benzersiz değerler sağlayan **alan adı**.  Kullanabileceğiniz [sıralama](/azure/kusto/query/sortoperator) kullanıcıya görüntülenen değerleri sıralamak için. |
-| Etiket | Filtre destekleyen sorgularında kullanılıyor ve ayrıca kullanıcıya görüntülenen alanın adı. |
+| Alan Adı | Filtreleme için kullanılan alanın adı.  Bu alan, **değerler Için sorgudaki**özetleme alanıyla eşleşmelidir. |
+| Değerler için sorgu | Kullanıcının filtre açılan listesini doldurmak için çalıştırılacak sorgu.  Bu sorgu, belirli bir alan için benzersiz değerler sağlamak üzere [özetleme](/azure/kusto/query/summarizeoperator) veya [ayrı](/azure/kusto/query/distinctoperator) bir değer kullanmalıdır ve **alan adıyla**eşleşmesi gerekir.  [Sıralamayı](/azure/kusto/query/sortoperator) kullanarak kullanıcıya görüntülenen değerleri sıralayabilirsiniz. |
+| Etiket | Filtreyi destekleyen sorgularda kullanılan alanın adı ve ayrıca kullanıcıya görüntülenir. |
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki tablo, birkaç ortak filtrelere örnekleri içerir.  
+Aşağıdaki tabloda, yaygın filtrelerin birkaç örneği yer almaktadır.  
 
 | Alan Adı | Değerler için sorgu | Etiket |
 |:--|:--|:--|
-| Computer   | Sinyal &#124; farklı bilgisayar &#124; bilgisayar asc göre sırala | Bilgisayarlar |
-| EventLevelName | Olay &#124; ayrı EventLevelName | Severity |
-| Err | Syslog &#124; ayrı Err | Severity |
-| SvcChangeType | ConfigurationChange &#124; ayrı svcChangeType | ChangeType |
+| Bilgisayar   | Sinyal &#124; farklı bilgisayar &#124; sıralama ölçütü bilgisayar ASC | Bilgisayarlar |
+| EventLevelName | Olay &#124; farklı EventLevelName | Önem Derecesi |
+| Severıtylevel | Syslog &#124; benzersiz SeverityLevel | Önem Derecesi |
+| SvcChangeType | ConfigurationChange &#124; farklı svcchangetype | ChangeType |
 
 
-## <a name="modify-view-queries"></a>Görünüm sorgularını değiştirme
+## <a name="modify-view-queries"></a>Görünüm sorgularını Değiştir
 
-Herhangi bir etkisi olması için bir filtre için görünümünde seçilen değeri filtrelemek için sorguları değiştirmeniz gerekir.  Ardından görünümünde sorgular değiştirmez, kullanıcının seçtiği herhangi bir değeri hiçbir etkisi olmaz.
+Bir filtrenin herhangi bir etkiye sahip olması için, görünümdeki tüm sorguları seçili değerlere göre filtreleyecek şekilde değiştirmeniz gerekir.  Görünümdeki herhangi bir sorguyu değiştirmezseniz, kullanıcının seçtiği tüm değerlerin hiçbir etkisi olmayacaktır.
 
-Bir filtre değeri bir sorguda kullanmak için sözdizimi aşağıdaki gibidir: 
+Sorguda filtre değeri kullanmanın sözdizimi şöyledir: 
 
     where ${filter name}  
 
-Örneğin, görünümünüzü olayları döndürür ve adlı bir filtre kullanan bir sorgu varsa _bilgisayarlar_, aşağıdaki sorguyu kullanabilirsiniz.
+Örneğin, görünümünüzde olayları döndüren ve _bilgisayarlar_adlı bir filtre kullanan bir sorgu varsa, aşağıdaki sorguyu kullanabilirsiniz.
 
     Event | where ${Computers} | summarize count() by EventLevelName
 
-Önem derecesi adlı başka bir filtre eklediyseniz, her iki filtreleri kullanmak için aşağıdaki sorguyu kullanabilirsiniz.
+Önem derecesi adlı başka bir filtre eklediyseniz, her iki filtreyi da kullanmak için aşağıdaki sorguyu kullanabilirsiniz.
 
     Event | where ${Computers} | where ${Severity} | summarize count() by EventLevelName
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Daha fazla bilgi edinin [görselleştirme bölümleri](view-designer-parts.md) özel görünümünüzü ekleyebilirsiniz.
+* Özel görünüminizdeki ekleyebileceğiniz [görselleştirme bölümleri](view-designer-parts.md) hakkında daha fazla bilgi edinin.

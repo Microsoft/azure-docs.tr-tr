@@ -2,17 +2,17 @@
 title: include dosyası
 description: include dosyası
 services: logic-apps
-author: ecfan
 ms.service: logic-apps
-ms.topic: include
-ms.date: 05/14/2018
+author: ecfan
 ms.author: estfan
+ms.topic: include
+ms.date: 09/18/2019
 ms.custom: include file
-ms.openlocfilehash: 6594031aeccae4b9f0ea843e2d72cb01a67d492d
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 1fbf8a8d83871fa4cbed3fa79d3c19d66406329d
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188127"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71121073"
 ---
-Mantıksal uygulamanızı herhangi bir hizmete erişebilmeniz için önce oluşturmanız gerekir bir *bağlantı* mantıksal uygulamanız ve hizmet arasında. Bu bağlantı daha önce oluşturmadıysanız, mantıksal uygulamanız için bir tetikleyici veya eylemi hizmet eklediğinizde ilgili bağlantı bilgilerini istenir. Logic Apps Tasarımcısı'nda, mantıksal uygulamanızdan doğrudan bu bağlantıyı oluşturmak kolay bir yol sağlar.
+Bir hizmete ilk kez erişen bir tetikleyici veya eylem kullandığınızda Logic Apps tasarımcı bu hizmetle *bağlantı* oluşturmanızı ister. Daha sonra gerekli bağlantı bilgilerini tasarımcı içindeki mantıksal uygulamanızdan doğrudan sağlayabilirsiniz.

@@ -1,9 +1,9 @@
 ---
-title: Güvenilir koleksiyonlar ile çalışma | Microsoft Docs
-description: Güvenilir koleksiyonlar ile çalışma için en iyi uygulamaları öğrenin.
+title: Güvenilir Koleksiyonlar ile çalışma | Microsoft Docs
+description: Güvenilir Koleksiyonlar ile çalışmaya yönelik en iyi uygulamaları öğrenin.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: ''
 ms.assetid: 39e0cd6b-32c4-4b97-bbcf-33dad93dcad1
@@ -13,16 +13,16 @@ ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 02/22/2019
-ms.author: aljo
-ms.openlocfilehash: bb99e5984f91edb0cf40f3bdc485624b9ec59833
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: atsenthi
+ms.openlocfilehash: 2d1284115a35881087e0ced0ee735ea38ce3f5ce
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60506748"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68598713"
 ---
 # <a name="working-with-reliable-collections"></a>Güvenilir Koleksiyonlar ile çalışma
-Service Fabric, güvenilir koleksiyonlar aracılığıyla .NET geliştiricileri için kullanılabilen bir durum bilgisi olan programlama modeli sunar. Özellikle, Service Fabric, güvenilir bir sözlük ve güvenilir bir kuyruk sınıfları sağlar. Bu sınıfların kullandığınızda, durumunuzu (ölçeklenebilirlik) bölümlenmiş çoğaltılan (kullanılabilirlik için) ve bir bölüm (için ACID semantiği) içinde hareket gerçekleşti. Şimdi bir güvenilir bir sözlük nesnesi tipik bir kullanım sırasında bakın ve hangi gerçekten başardığını görün.
+Service Fabric, güvenilir koleksiyonlar aracılığıyla .NET geliştiricileri için kullanılabilen bir durum bilgisi olan programlama modeli sunar. Özellikle, Service Fabric güvenilir sözlük ve güvenilir sıra sınıfları sağlar. Bu sınıfları kullandığınızda, durumunuzun bölümlenmesi (ölçeklenebilirlik için), çoğaltılan (kullanılabilirlik için) ve bir bölüm içinde (ACID semantiği için) işlem gerçekleştirilmiş olur. Güvenilir bir sözlük nesnesinin tipik bir kullanımına bakalım ve gerçekten ne yaptığını görelim.
 
 ```csharp
 try
@@ -49,20 +49,20 @@ catch (TimeoutException)
 }
 ```
 
-Güvenilir bir sözlük nesnelerine (hariç, geri alınamaz ClearAsync,), tüm işlemleri ITransaction nesneyi gerektirir. Bu nesne ile ilgili ve güvenilir bir sözlük ve/veya güvenilir yapmaya çalıştığınız tüm değişiklikleri tek bir bölüm içindeki nesneleri kuyruğa alın. Bir ITransaction edindiğiniz bölüm çağırarak kullanıcının StateManager'ın CreateTransaction yöntemi.
+Güvenilir sözlük nesnelerindeki tüm işlemler (geri alınamaz olan ClearAsync hariç), bir ITransaction nesnesi gerektirir. Bu nesne kendisiyle ilişkilendirilir ve tüm güvenilir sözlükte ve/veya güvenilir kuyruk nesnelerinde tek bir bölüm içinde yapmaya çalıştığınız tüm değişiklikler ile ilişkilendirilmiştir. Bölümün StateManager's CreateTransaction yöntemini çağırarak bir ITransaction nesnesi elde edersiniz.
 
-Yukarıdaki kod, bir güvenilir sözlüğün AddAsync yönteme ITransaction nesnesi geçirilir. Dahili olarak, bir anahtarı kabul edelim sözlük yöntemleri, anahtar ile ilişkili bir Okuyucu/Yazıcı kilidi alır. Yöntemi anahtarın değerini değiştirir, yöntem anahtarı bir yazma kilidi alır ve ardından yöntemi yalnızca anahtarın değerini okur, anahtarı bir okuma kilidi alınır. AddAsync anahtarının değerini yeni ve gönderilen değerle değiştiren olduğundan, anahtarın yazma kilidi alınır. Bu nedenle, 2 (veya daha fazla) iş parçacığı aynı anda aynı anahtarla değerler eklemek çalışırsanız, bir iş parçacığı yazma kilidi ve diğer iş parçacıklarını engeller. Varsayılan olarak, kilit 4 saniye için yöntem bloğu; 4 saniye sonra yöntemleri bir TimeoutException atar. Yöntem aşırı yüklemeleri tercih ediyorsanız, açık zaman aşımı değeri geçirmenize izin yok.
+Yukarıdaki kodda, ITransaction nesnesi güvenilir bir sözlüğün Addadsync yöntemine geçirilir. Dahili olarak, anahtar kabul eden sözlük yöntemleri, anahtarla ilişkili bir okuyucu/yazıcı kilidi alır. Yöntem anahtarın değerini değiştirirse, yöntemi anahtar üzerinde bir yazma kilidi alır ve yöntem yalnızca anahtarın değerinden okunursa, anahtar üzerinde bir okuma kilidi yapılır. Addadsync anahtarın değerini yeni, geçirilen değerine değiştirdiğinde, anahtarın yazma kilidi alınır. Bu nedenle, 2 (veya daha fazla) iş parçacığı aynı anda aynı anahtarla değer eklemeye çalışır, bir iş parçacığı yazma kilidi elde eder ve diğer iş parçacıkları da engeller. Varsayılan olarak, Yöntemler kilidi almak için 4 saniyeye kadar blok; 4 saniye sonra Yöntemler bir TimeoutException oluşturur. Yöntem aşırı yüklemeleri, tercih ediyorsanız açık bir zaman aşımı değeri geçirmenize olanak sağlar.
 
-Genellikle, yakalama ve tüm işlemi (yukarıdaki kodda gösterildiği gibi) denemeden bir TimeoutException için tepki vermek için kodunuzu yazın. Basit kodum yalnızca her seferinde 100 milisaniye geçirme Task.Delay aradığım. Ancak, gerçekte bir tür bir üstel geri alma gecikme kullanrak daha iyi olabilir.
+Genellikle, bir TimeoutException 'e yanıt vererek ve tüm işlemi yeniden denemeden (Yukarıdaki kodda gösterildiği gibi) kodu yazarsınız. Basit kodumda yalnızca görevi çağırıyorum. her seferinde 100 milisaniye geçen gecikme. Ancak gerçekte, bunun yerine bazı üstel geri dönme gecikmesini kullanarak daha iyi kapatılabilir.
 
-Kilit alınıncaya sonra AddAsync ITransaction nesneyle ilişkili bir iç geçici sözlük anahtarı ve değeri nesne başvuruları ekler. Bu, okuma-your-kendi-yazma işlemleri semantiğiyle sağlamak için gerçekleştirilir. Diğer bir deyişle, AddAsync çağırdıktan sonra bile, henüz işlem taahhüt değil (aynı ITransaction nesnesini kullanarak) TryGetValueAsync sonraki çağrı değeri döndürür. Ardından, anahtarınızı AddAsync serileştirir ve değeri için bayt dizileri nesneleri ve bu bayt dizileri yerel düğümde bir günlük dosyası ekler. Son olarak, aynı anahtar/değer bilgilere sahip oldukları için tüm ikincil çoğaltmalara bayt dizileri AddAsync gönderir. Anahtar/değer bilgiler bir günlük dosyasına yazılmış olsa da, bilgi ile ilişkili işlem kaydedilene kadar sözlük parçası dikkate alınmaz.
+Kilit alındıktan sonra, Addadsync, ITransaction nesnesiyle ilişkili bir iç geçici sözlüğe anahtar ve değer nesnesi başvurularını ekler. Bu, size salt yazılır yazma semantiğini sağlamak için yapılır. Diğer bir deyişle, Addadsync öğesini çağırdıktan sonra, bir sonraki TryGetValueAsync çağrısı (aynı ITransaction nesnesi kullanılarak), işlemi henüz kaydetmemiş olsanız bile değeri döndürür. Sonra, Addadsync, anahtar ve değer nesnelerinizi bayt dizileri olarak serileştirir ve bu bayt dizilerini yerel düğümdeki bir günlük dosyasına ekler. Son olarak, Addadsync, bayt dizilerini aynı anahtar/değer bilgilerine sahip olacak şekilde tüm ikincil çoğaltmalara gönderir. Anahtar/değer bilgileri bir günlük dosyasına yazılsa da, ilişkilendirildikleri işlem kaydedilene kadar bilgiler sözlüğün bir parçası olarak kabul edilmez.
 
-Yukarıdaki kod CommitAsync çağrısı tüm hareketin işlemlerini kaydeder. Özellikle, günlük dosyası yerel düğümde işleme bilgileri ekler ve ayrıca tüm ikincil çoğaltmalara yürütme kaydı gönderir. Bir ' % s'Çekirdeği (çoğu) çoğaltmaların vermiş sonra tüm veri değişiklikleri kalıcı olarak kabul edilir ve diğer iş parçacıkları/işlem aynı anahtarlar işleyebileceğiniz şekilde ITransaction nesnesi kullanılabilir anahtarlarla ilişkili kilitleri serbest bırakılır ve bunların değerler.
+Yukarıdaki kodda, Commınvosync çağrısı tüm işlem işlemlerini kaydeder. Özellikle, kaydetme bilgilerini yerel düğümdeki günlük dosyasına ekler ve ayrıca, kaydetme kaydını tüm ikincil çoğaltmalara gönderir. Çoğaltmaların bir çekirdeği (çoğunluğu) Yanıtlandıktan sonra, tüm veri değişiklikleri kalıcı olarak kabul edilir ve ITransaction nesnesi aracılığıyla yapılan anahtarlarla ilişkili kilitler, diğer iş parçacıklarının/işlemlerin aynı anahtarları ve bunların işlemesini sağlamak için serbest bırakılır. deðerler.
 
-CommitAsync (oluşturulan genellikle bir özel durum nedeniyle) çağrılmazsa ITransaction nesneyi elden. Service Fabric işlenmemiş ITransaction nesneyi elden, iptal bilgileri yerel düğümün günlük dosyasına ekler. ve hiçbir şey ikincil çoğaltmalardan birine gönderilmesi gerekir. Ve ardından, işlem kullanılabilir anahtarlarla ilişkili kilitleri serbest bırakılır.
+Commction eşitleme çağrılmadığından (genellikle bir özel durum nedeniyle), ITransaction nesnesi atılır. İşlenmemiş bir ITransaction nesnesini elden atılırken Service Fabric, iptal bilgilerini yerel düğümün günlük dosyasına ekler ve hiçbir şeyin ikincil çoğaltmalardan herhangi birine gönderilmesi gerekmez. Böylece, işlem aracılığıyla yönetilen anahtarlarla ilişkili kilitler serbest bırakılır.
 
-## <a name="common-pitfalls-and-how-to-avoid-them"></a>Yaygın görülen tehlikeleri ve bunların nasıl önleneceğini
-Güvenilir koleksiyonlar dahili olarak nasıl çalıştığını anlamak, bazı yaygın misuses bunların bir göz atalım. Aşağıdaki kodu bakın:
+## <a name="common-pitfalls-and-how-to-avoid-them"></a>Ortak ve nasıl kaçınacak
+Artık güvenilir koleksiyonların dahili olarak nasıl çalıştığını anladığınıza göre, bunların bazı yaygın kötüye kullanımlarına göz atalım. Aşağıdaki koda bakın:
 
 ```csharp
 using (ITransaction tx = StateManager.CreateTransaction())
@@ -79,9 +79,9 @@ using (ITransaction tx = StateManager.CreateTransaction())
 }
 ```
 
-Normal .NET sözlük ile çalışırken, bir anahtar/değer sözlüğüne ekleyin ve ardından (örneğin, LastLogin) bir özelliğin değerini değiştirin. Ancak, bu kod ile güvenilir bir sözlük düzgün çalışmaz. Unutmayın önceki tartışmadan AddAsync çağrısı bayt dizileri anahtar/değer nesnelere serileştirir ve ardından diziler yerel bir dosyaya kaydeder ve aynı zamanda ikincil çoğaltmalara gönderir. Bir özellik daha sonra değiştirirseniz, bu özelliğin değeri yalnızca bellekte değiştirir; Yerel dosya ya da kopyaya gönderilen verileri etkilemez. Bellekte nedir, hemen işlem kilitlenirse oluşturulur. Yeni bir işlem başlatıldığında veya başka bir çoğaltması birincil hale gelirse, eski özellik değeri kullanılabilir olduğunu.
+Normal bir .NET sözlüğü ile çalışırken, sözlüğe bir anahtar/değer ekleyebilir ve sonra bir özelliğin değerini (LastLogin gibi) değiştirebilirsiniz. Ancak, bu kod güvenilir bir sözlükle doğru çalışmaz. Önceki tartışmayı unutmayın, Addadsync çağrısı, anahtar/değer nesnelerini bayt dizileri olarak serileştirir ve sonra dizileri yerel bir dosyaya kaydeder ve ayrıca bunları ikincil çoğaltmalara gönderir. Daha sonra bir özelliği değiştirirseniz, bu özellik yalnızca bellekteki değeri değiştirir; Yerel dosyayı veya çoğaltmalara gönderilen verileri etkilemez. İşlem kilitlenirse, bellekte bulunan özellikler oluşur. Yeni bir işlem başladığında veya başka bir çoğaltma birincil hale gelirse, eski Özellik değeri kullanılabilir değildir.
 
-Yeterince ne kadar kolay, yukarıda gösterilen hata türü olmasını sağlamaktır stres olamaz. Ve işlem çökmesi hakkında bir hata olursa/olduğunda yalnızca öğreneceksiniz. Aşağıdaki iki satırı tersine çevirmek için kod yazmak için doğru şekilde teknolojidir:
+Yukarıda gösterilen hata türünü ne kadar kolay bir şekilde vurgulamıyorum. Ve yalnızca işlemin ne zaman/zaman aşağı gidecağından oluşan hata hakkında bilgi edineceksiniz. Kodu yazmanın doğru yolu, iki satırı tersine çevirmek için yeterlidir:
 
 
 ```csharp
@@ -93,7 +93,7 @@ using (ITransaction tx = StateManager.CreateTransaction())
 }
 ```
 
-Sıkça gösteren başka bir örnek aşağıda verilmiştir:
+Yaygın bir hata gösteren başka bir örnek aşağıda verilmiştir:
 
 ```csharp
 using (ITransaction tx = StateManager.CreateTransaction())
@@ -112,11 +112,11 @@ using (ITransaction tx = StateManager.CreateTransaction())
 }
 ```
 
-Yeniden normal .NET sözlükleri, yukarıdaki kod düzgün çalışır ve bir ortak desendir: geliştirici, bir değeri aramak için bir anahtar kullanır. Değeri varsa, geliştirici bir özelliğin değerini değiştirir. Bununla birlikte, güvenilir koleksiyonlar ile bu kodu olarak zaten ele alınan aynı sorun gösteriyor: **güvenilir bir koleksiyon için verdiğiniz sonra nesneyi değiştirmemelisiniz.**
+Normal .NET sözlükleriyle, yukarıdaki kod ince çalışır ve ortak bir modeldir: geliştirici bir değer aramak için bir anahtar kullanır. Değer varsa, geliştirici bir özelliğin değerini değiştirir. Bununla birlikte, güvenilir Koleksiyonlar ile, bu kod zaten tartışılan ile aynı sorunu sergiler: **güvenilir bir koleksiyona verdiğiniz bir nesneyi değiştirmemelidir.**
 
-Güvenilir bir koleksiyondaki bir değer güncelleştirmek için doğru yoldur mevcut değere bir başvuru almak ve sabit başvuruya göre bu başvurulan nesne göz önünde bulundurun. Daha sonra orijinal nesneyi tam bir kopyası olan yeni bir nesne oluşturun. Şimdi, bu yeni bir nesne durumunu değiştirebilir ve koleksiyona yeni nesne bayt dizileri ile seri hale, böylece yerel dosyanın sonuna ve kopyaya gönderilen yazma. Değişiklikler yaptıktan sonra bellek içi nesneler, yerel dosya ve tüm çoğaltmalar aynı tam duruma sahip. Tüm iyi!
+Güvenilir bir koleksiyondaki bir değeri güncelleştirmenin doğru yolu, var olan değere bir başvuru almak ve bu başvuru ile başvurulan nesneyi sabit olarak kabul etmek için kullanılır. Ardından, özgün nesnenin tam bir kopyası olan yeni bir nesne oluşturun. Şimdi, bu yeni nesnenin durumunu değiştirebilir ve yeni nesneyi koleksiyona, yerel dosyaya eklenerek ve çoğaltmalara gönderilmek üzere, bayt dizilerine seri hale getirilebilmesi için yazabilirsiniz. Değişiklik (ler) kaydedildikten sonra, bellek içi nesneler, yerel dosya ve tüm çoğaltmalar aynı duruma sahiptir. Hepsi iyi!
 
-Aşağıdaki kod, doğru şekilde güvenilir bir koleksiyondaki bir değer güncelleştirme gösterir:
+Aşağıdaki kod, güvenilir bir koleksiyondaki bir değeri güncelleştirmenin doğru yolunu göstermektedir:
 
 ```csharp
 using (ITransaction tx = StateManager.CreateTransaction())
@@ -142,10 +142,10 @@ using (ITransaction tx = StateManager.CreateTransaction())
 }
 ```
 
-## <a name="define-immutable-data-types-to-prevent-programmer-error"></a>Programcı hatayı önlemek için sabit veri türlerini tanımlayın
-Yanlışlıkla sabit göz önünde bulundurmanız gereken olduğunuz bir nesnenin durumu değiştirdiği kod üretir, ideal olarak, derleyici hataları bildirmek istiyoruz. Ancak, C# Derleyici bunu özelliği yok. Bu nedenle, programcı olası hataları önlemek için tanımladığınız türler öneririz sabit türleri için güvenilir koleksiyonlar ile kullanın. Bu özellikle, çekirdek değer türleri (örneğin, sayıları [Int32, UInt64, vb.], DateTime, Guid, TimeSpan ve benzeri) için takılıyor anlamına gelir. Ayrıca, dize de kullanabilirsiniz. Koleksiyon Özellikleri serileştirmek olarak önlemek idealdir ve bunları seri durumdan çıkarılırken sık performansı olumsuz etkileyebilir. Koleksiyon özellikleri kullanmak istiyorsanız, ancak yüksek oranda kullanılmasını öneririz. NET sabit koleksiyonlar kitaplığı ([gt;System.Collections.Immutable](https://www.nuget.org/packages/System.Collections.Immutable/)). Bu kitaplığı indirilerek kullanılabilir https://nuget.org. Ayrıca, sınıflar mühürleme ve mümkün olduğunda alanları salt okunur yapma öneririz.
+## <a name="define-immutable-data-types-to-prevent-programmer-error"></a>Programcı hatasını engellemek için değişmez veri türlerini tanımlayın
+İdeal olarak, sabit olarak göz önünde bulundurmanız gereken bir nesnenin durumunu değiştirmede yanlışlıkla kod oluşturduğunuzda derleyicinin hataları raporoluşturmasını istiyoruz. Ancak, C# derleyicinin bunu yapma yeteneği yoktur. Bu nedenle, potansiyel programcı hatalarından kaçınmak için, güvenilir koleksiyonlarla kullandığınız türleri değişmez türler olarak tanımlamanızı öneririz. Bu, özellikle de temel değer türlerini (sayılar [Int32, UInt64, vs.], DateTime, Guid, TimeSpan ve benzeri) gösteren bir anlamına gelir. Dizeyi de kullanabilirsiniz. Koleksiyon özelliklerinin serileştirilmesi ve seri durumdan kaldırılması en iyisidir. Ancak, koleksiyon özelliklerini kullanmak istiyorsanız, kullanımı önemle önerilir. NET 'in değişmez koleksiyonlar kitaplığı ([System. Collections. sabit](https://www.nuget.org/packages/System.Collections.Immutable/)). Bu kitaplık, ' den https://nuget.org indirileceği için kullanılabilir. Ayrıca, sınıflarınızı mühürleyen ve alanları mümkün olduğunca Salt okunabilir hale getirmeyi öneririz.
 
-Aşağıdaki UserInfo türünü tanımlayan yukarıda sözü edilen önerileri yararlanarak sabit bir tür gösterilmektedir.
+Aşağıdaki UserInfo türü, belirtilen önerilerden faydalanan sabit bir türün nasıl tanımlanacağını göstermektedir.
 
 ```csharp
 [DataContract]
@@ -184,7 +184,7 @@ public sealed class UserInfo
 }
 ```
 
-Öğe kimliği türü de bir sabit burada gösterildiği gibi türüdür:
+ItemId türü Ayrıca, burada gösterildiği gibi sabit bir türdür:
 
 ```csharp
 [DataContract]
@@ -200,22 +200,22 @@ public struct ItemId
 }
 ```
 
-## <a name="schema-versioning-upgrades"></a>Şema sürümü (yükseltme)
-Dahili olarak, güvenilir koleksiyonlar kullanarak, nesne seri hale. NET'in DataContractSerializer. Serileştirilmiş nesneler birincil kopyanın yerel diske yazılır ve ayrıca ikincil çoğaltmalara iletilir. Hizmetinizi geliştikçe hizmetiniz için gerekli veri (şema) türüne dönüştürmek istersiniz olasıdır. Verileriniz çok dikkatli yaklaşım sürüm oluşturma. İlk ve, her zaman eski verileri seri durumdan olmalıdır. Bu özellikle, seri durumundan çıkarma kodunuzu sonsuz geriye dönük olarak uyumlu olması gerektiği anlamına gelir: Hizmet kodunuzun sürüm 333 güvenilir koleksiyonda 5 yıl önce hizmeti kodunuza 1 sürümü tarafından yerleştirilen veri çalışabilir olmalıdır.
+## <a name="schema-versioning-upgrades"></a>Şema sürümü oluşturma (Yükseltmeler)
+Dahili olarak, güvenilir Koleksiyonlar kullanarak nesnelerinizi seri hale getirme. NET ' in DataContractSerializer. Serileştirilmiş nesneler birincil çoğaltmanın yerel diskine kalıcı hale getirilir ve ayrıca ikincil çoğaltmalara iletilir. Hizmetiniz sizin için gerekli olan veri türünü (şema) değiştirmek isteyebilirsiniz. Harika bir sorun ile verilerinizin sürümü oluşturma yaklaşımı. İlk ve daha sonra, her zaman eski verileri seri durumdan çıkartabilmeniz gerekir. Bu, özel olarak, seri durumdan çıkarma kodunuzun sonsuz bir geriye dönük uyumlu olması gerektiği anlamına gelir Hizmet kodunuzun sürüm 333 ' i, hizmet kodunuzun 5 yıl önce sürüm 1 ' i tarafından güvenilir bir koleksiyona yerleştirilmiş verilerle çalışabilebilmelidir.
 
-Ayrıca, hizmet yükseltilmiş bir yükseltme etki alanı aynı anda kodudur. Bu nedenle, yükseltme sırasında hizmet kodunuzun aynı anda çalışan iki farklı sürümlerini sahip. Hizmet kodunuzu eski sürümleri yeni şemayı işlemek mümkün olmayabilir gibi yeni şemayı kullanın. yeni sürümü hizmet kodunuzun olmamasına özen gösterin gerekir. Mümkün olduğunda, her sürümü hizmetinizin ileri doğru uyumlu bir sürüme göre olacak şekilde tasarlamanız gerekir. Özellikle, bu hizmet kodunuzun V1 açıkça işlemiyor herhangi bir şema öğeleri yoksay mümkün olması gerektiğini anlamına gelir. Ancak, herhangi bir veri açıkça hakkında bilmez ve yeniden kullanıma sözlük anahtarı veya değeri güncelleştirilirken yazma kaydedemezsiniz olmalıdır.
+Ayrıca, hizmet kodu tek seferde bir yükseltme etki alanı yükseltilir. Bu nedenle, bir yükseltme sırasında hizmet kodunuzun iki farklı sürümü aynı anda çalışır. Hizmet kodunuzun yeni sürümü yeni şemayı kullanarak, hizmet kodunuzun eski sürümleri yeni şemayı işleyemeyebilir. Mümkün olduğunda, hizmetinizin her sürümünü, bir sürüm ile ileri doğru uyumlu olacak şekilde tasarlamanız gerekir. Özellikle, bu, hizmet kodunuzun v1 açıkça işlemediği herhangi bir şema öğesini yoksaymanız gerektiği anlamına gelir. Ancak, bir sözlük anahtarını veya değerini güncelleştirirken, açıkça bilmeyen ve geri yazamayacak verileri kaydedebilmelidir.
 
 > [!WARNING]
-> Bir anahtar şemasını değiştirebilirsiniz, ancak, anahtarın karma kod ve eşittir algoritmaları kararlı olduğunu emin olmanız gerekir. Bu algoritmalar birini nasıl çalışması değiştirirseniz, anahtarı güvenilir bir sözlük içinde hiç olmadığı kadar yeniden aramak mümkün olmayacaktır.
-> Bir anahtar vardır, ancak kullanın--anahtar olarak dizesinin kendisinin kullanmayın String.GetHashCode sonucu anahtar olarak .NET dizeleri kullanılabilir.
+> Bir anahtarın şemasını değiştiremeyeceğiniz sürece, anahtarınızın karma kodu ve eşittir algoritmalarının kararlı olduğundan emin olmanız gerekir. Bu algoritmalardan birinin çalışmasını değiştirirseniz, anahtarı güvenilir sözlük içinde yeniden aramanız mümkün olmayacaktır.
+> .NET dizeleri anahtar olarak kullanılabilir ancak dizenin kendisini anahtar olarak kullanın; anahtar olarak String. GetHashCode sonucunu kullanmayın.
 
-Alternatif olarak, hangi genellikle iki bir yükseltme olarak adlandırılır gerçekleştirebilirsiniz. İki aşamalı bir yükseltmeye hizmetinizi V2 V1'den yükseltme: V2, kodu içeren yeni bir şema değişikliği ile nasıl bilir, ancak bu kod yürütülmez. V2 kod V1 verileri okur, üzerinde çalışır ve V1 verileri yazar. Tüm yükseltme etki alanları arasında yükseltme tamamlandıktan sonra daha sonra şekilde çalışan V2 örnekleri yükseltme tamamlandıktan sinyal verebilirsiniz. (Tek yönlü sinyaliyle bir yapılandırma yükseltmeyi alma için budur; bu iki aşamalı yükseltme bunu yapar.) Artık, V2 örnekleri okunan V1, V2 veri dönüştürme, üzerinde çalışır ve V2 veri yazılmasına yarar. Diğer örnekleri V2 veri okurken dönüştürmeniz gerekmez, bunlar yalnızca üzerinde çalışır ve V2 veri yazma.
+Alternatif olarak, genellikle iki yükseltme olarak adlandırılan işlemleri yapabilirsiniz. İki aşamalı bir yükseltme ile hizmetinizi v1 'den v2 'ye yükseltirsiniz: V2, yeni şema değişikliğine nasıl uğratacağını bilen, ancak bu kod yürütümeyen kodu içerir. V2 kodu v1 verilerini okuduğunda, üzerinde çalışır ve v1 verilerini yazar. Yükseltme tamamlandıktan sonra, yükseltme tüm etki alanlarında tamamlandıktan sonra, yükseltmenin tamamlandığı çalışan v2 örneklerine bir uyarı verebilirsiniz. (Bunu işaret etmenin bir yolu, bir yapılandırma yükseltmesini kullanıma sunmanız; bu, bu iki aşamalı yükseltme yapmayı sağlar.) Artık v2 örnekleri v1 verilerini okuyabilir, v2 verilerine dönüştürebilir, üzerinde işlem yapabilir ve V2 verisi olarak yazabilir. Diğer örnekler v2 verilerini okuduklarında, bunları dönüştürmeleri gerekmez, yalnızca üzerinde çalışır ve v2 verilerini yazar.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-İleri uyumlu veri sözleşmeleri oluşturma hakkında bilgi edinmek için [İleri uyumlu veri sözleşmeleri](https://msdn.microsoft.com/library/ms731083.aspx)
+İleri uyumlu veri sözleşmeleri oluşturma hakkında bilgi edinmek için bkz. [Ileri uyumlu veri sözleşmeleri](https://msdn.microsoft.com/library/ms731083.aspx)
 
-Sürüm oluşturma veri sözleşmelerinde en iyi yöntemleri öğrenmek için bkz: [veri sözleşmesi sürümü oluşturma](https://msdn.microsoft.com/library/ms731138.aspx)
+Sürüm oluşturma veri sözleşmeleri hakkında en iyi yöntemleri öğrenmek için bkz. [veri sözleşmesi sürümü oluşturma](https://msdn.microsoft.com/library/ms731138.aspx)
 
-Sürüme dayanıklı veri sözleşmeleri uygulama hakkında bilgi edinmek için bkz: [sürüme dayanıklı serileştirme geri çağırmaları](https://msdn.microsoft.com/library/ms733734.aspx)
+Sürüm dayanıklı veri sözleşmeleri uygulama hakkında bilgi edinmek için bkz. [Sürüm dayanıklı serileştirme geri çağırmaları](https://msdn.microsoft.com/library/ms733734.aspx)
 
-Birden çok sürüm genelinde çalışabilirler veri yapısı sağlamayı öğrenmek için bkz: [IExtensibleDataObject](https://msdn.microsoft.com/library/system.runtime.serialization.iextensibledataobject.aspx)
+Birden çok sürümde birlikte çalışabilecek bir veri yapısını nasıl sağlayabileceğinizi öğrenmek için bkz. [IExtensibleDataObject](https://msdn.microsoft.com/library/system.runtime.serialization.iextensibledataobject.aspx)

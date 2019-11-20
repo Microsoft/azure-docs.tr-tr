@@ -1,232 +1,261 @@
 ---
-title: Proje akustik Unity hazırlama Öğreticisi
+title: Project Acoustics Unity Bake öğreticisi
 titlesuffix: Azure Cognitive Services
-description: Bu öğreticide, Unity projesi akustik ile saklanacağı akustik açıklanmaktadır.
+description: Bu öğreticide, Unity 'de Project Acoustics ile Acoustics fırlama açıklanmaktadır.
 services: cognitive-services
-author: kegodin
+author: NoelCross
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: acoustics
 ms.topic: tutorial
 ms.date: 03/20/2019
-ms.author: kegodin
-ms.openlocfilehash: 2f0fcdcdf781c86179b67eeef0223d46da0fc65b
-ms.sourcegitcommit: 2028fc790f1d265dc96cf12d1ee9f1437955ad87
+ms.author: noelc
+ROBOTS: NOINDEX
+ms.openlocfilehash: 310decf8053ea16ba46250ba3aabe81c9c254e5e
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/30/2019
-ms.locfileid: "64916994"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72243118"
 ---
-# <a name="project-acoustics-unity-bake-tutorial"></a>Proje akustik Unity hazırlama Öğreticisi
-Bu öğreticide, Unity projesi akustik ile saklanacağı akustik açıklanmaktadır.
+# <a name="project-acoustics-unity-bake-tutorial"></a>Project Acoustics Unity Bake öğreticisi
+Bu öğreticide, Unity 'de Project Acoustics kullanarak Acoustics baklama açıklanmaktadır.
 
 Yazılım gereksinimleri:
-* [Unity 2018.2 +](https://unity3d.com) Windows için
-* [Unity projeniz içindeki proje akustik eklentisi tümleşik](unity-integration.md) veya [proje akustik Unity örnek içerik](unity-quickstart.md)
-* İsteğe bağlı: Bir [Azure Batch hesabı](create-azure-account.md) bakes hızlandırmak için kullanarak bulut bilgi işlem
+* Windows veya MacOS için [Unity 2018.2 +](https://unity3d.com)
+* Unity projenizde veya [Project Acoustics Unity örnek içeriğinde](unity-quickstart.md) [Tümleşik proje Acoustics eklentisi](unity-integration.md)
+* *Isteğe bağlı:* Bulut bilgi işlem kullanarak bakmayı hızlandırmak için bir [Azure Batch hesabı](create-azure-account.md)
 
-## <a name="open-the-project-acoustics-bake-window"></a>Açık proje akustik penceresi hazırlama
-Seçin **penceresi > akustik** Unity menüsünde:
+## <a name="open-the-project-acoustics-bake-window"></a>Project Acoustics hazırlama penceresini açın
+Unity 'de, **pencere** menüsünden **Acoustics** öğesini seçin.
 
-![Akustik penceresinde menü seçeneğinin vurgulandığı ekran görüntüsü, Unity Düzenleyicisi](media/window-acoustics.png)
+![Pencere menüsünde Acoustics seçeneği vurgulanmış olan Unity Düzenleyicisi](media/window-acoustics.png)
 
-## <a name="create-a-navigation-mesh"></a>Bir gezinti ağı oluşturun
-Proje akustik Gezinti kafes simülasyonu için dinleyici araştırma noktaları yerleştirmek için kullanır. Unity'nın kullanabilirsiniz [Gezinti kafes iş akışı](https://docs.unity3d.com/Manual/nav-BuildingNavMesh.html), veya başka bir 3B modelleme paketi kendi kafes tasarlamak için kullanabilirsiniz. 
+## <a name="create-a-navigation-mesh"></a>Gezinti kafesi oluşturma
+Project Acoustics benzetim için dinleyici araştırma noktaları yerleştirmek üzere bir gezinti ağı kullanır. Unity [Gezinti kafesi iş akışını](https://docs.unity3d.com/Manual/nav-BuildingNavMesh.html)kullanabilirsiniz. Ya da kendi ağ yayınınızı tasarlamak için farklı bir 3B modelleme paketi kullanabilirsiniz.
 
-## <a name="mark-acoustic-scene-objects"></a>Akustik görünüm nesnelerini işaretle
-Görünüm nesnelerini simülasyonu için iki tür proje akustik dayanır: gösterecek ve ses benzetim ve simülasyon dinleyicisi yoklama noktaları kısıtlar player Gezinti kafes occlude nesneleri. Her iki nesne türlerini kullanarak işaretlenen **nesneleri** sekmesi. 
+## <a name="mark-acoustic-scene-objects"></a>Akustik sahne nesnelerini işaretle
+Project Acoustics, simülasyon için iki tip sahne nesnesine dayanır:
+- Simülasyonda yansıtan ve occlude sesi veren nesneler
+- Benzetimde dinleyici araştırma noktalarını kısıtlayan oynatıcı gezinti kafesi
 
-Çünkü nesneleri işaretleme yalnızca ekler **AcousticsGeometry** veya **AcousticsNavigation** bileşenleri de kullanabilirsiniz nesnesine [standart Unity bileşen iş akışı](https://docs.unity3d.com/Manual/UsingComponents.html)işaretleyin veya nesneleri işaretini kaldırın. Yalnızca Mesh oluşturucular ve Terrains işaretlenebilir. Diğer tüm nesne türlerinin göz ardı edilir. Onay kutularını işaretleyin veya tüm etkilenen nesneler işaretini kaldırın.
+Her iki nesne türü de **nesneler** sekmesi kullanılarak işaretlenir.
 
-### <a name="mark-acoustic-occlusion-and-reflection-geometry"></a>Akustik kapatma ve yansıma geometri işaretle
-Açık **nesneleri** sekmesinde **akustik** penceresi. Herhangi bir nesne olarak işaretlemek **akustik geometri** occlude, yansıtacak veya ses devralarak. Akustik geometri, baştan sonra duvarlarının, çatılar, windows & Pencere Cam, rugs ve büyük Mobilya gibi içerebilir. Bu nesneler için rastgele bir karmaşıklık düzeyi kullanabilirsiniz. Sahne voxelized benzetimi önce olduğundan, ağaçlar olan çok sayıda küçük bırakır gibi yüksek oranda ayrıntılı kafesleri Basitleştirilmiş nesneleri hazırlama daha maliyetli değildir.
+Nesneleri işaretlemek yalnızca *AcousticsGeometry* veya *AcousticsNavigation* bileşenlerini nesnesine eklediğinden, nesneleri işaretlemek veya Işaretlerini kaldırmak için [Standart Unity bileşeni iş akışını](https://docs.unity3d.com/Manual/UsingComponents.html) da kullanabilirsiniz. Yalnızca kafes oluşturuculara ve terrat işaretlerini işaretleyebilirsiniz. Diğer tüm nesne türleri yok sayılacak. Onay kutuları etkilenen tüm nesneleri işaretler veya işaretini kaldırın.
 
-Görünmez çakışma kafesleri gibi akustik Etkilenme şeyleri dahil değildir.
+### <a name="mark-acoustic-occlusion-and-reflection-geometry"></a>Akustik occlusiyon ve yansıma geometrisini işaretle
+**Acoustics** penceresinin **nesneler** sekmesini açın. Nesnelerin occlude, yansıtmaları veya artışlarını devralarak seslerinin *Acoustics geometrisi* olarak işaretlenmesi. Acoustics geometrisi, toprak, duvarlar, Roofs, Windows ve pencere camı, Rug 'ler ve büyük mobilya gibi şeyleri içerebilir. Bu nesneler için herhangi bir rastgele karmaşıklık düzeyi kullanabilirsiniz. Sahnenin simülasyonundan önce voxlik olduğu için, çok sayıda yaprakları olan ağaçlar gibi son derece ayrıntılı kafesler, Basitleştirilmiş nesnelerden daha pahalı değildir.
 
-Bir nesnenin Dönüştür araştırma hesaplama zaman (aracılığıyla **araştırmaları** sekmesinde, aşağıdaki) hazırlama sonuçları sabittir. İşaretli nesnelerden herhangi birini sahnede taşıma araştırma hesaplama yineleme ve Sahne rebaking gerektirir.
+Görünmez çakışma kafesleri gibi Acoustics etkilemeyen şeyleri eklemeyin.
 
-### <a name="mark-the-navigation-mesh"></a>Gezinti kafes işaretle
-Unity'nın iş akışı ile oluşturulan gezinti kafesleri akustik sistem tarafından seçilir. Kendi kafesleri kullanmak için onlardan işaretlemek **nesneleri** sekmesi.
+Bir nesnenin araştırma hesaplaması sırasında dönüştürme işlemi ( **yoklamalar** sekmesi aracılığıyla), hazırlama sonuçlarında düzeltilir. Sahnedeki herhangi bir işaretlenmiş nesne daha sonra taşınırsa, araştırma hesaplamasının ve fırın redone olması gerekir.
 
-### <a name="for-reference-the-objects-tab-parts"></a>Başvuru için: Nesneleri sekmesini bölümleri
-Sekme sayfasındaki bölümleri şunlardır:
+### <a name="mark-the-navigation-mesh"></a>Gezinti kafesi işaretle
+Unity iş akışı üzerinden oluşturulan gezinti kafesleri Acoustics sistemi tarafından alınacaktır. Kendi kafeslerinizi kullanmak için **nesneler** sekmesinden işaretleyin.
 
-1. Sekme Seçimi düğmelerinin (**nesneleri** sekmesi seçili). Soldan sağa doğru bir akustik hazırlama yapmanın çeşitli adımlarında yol için bu düğmeleri kullanın.
-2. Bu sayfayı kullanarak yapmanız gerekenler kısa bir açıklaması.
-3. Kullanılabilir filtrelerin hiyerarşisi penceresi için. Belirtilen türe ait nesneleri için hiyerarşi penceresinde daha kolay işaretlerken şekilde filtrelemek için bunu kullanın. Henüz herhangi bir şey akustik için işaretlenen değil, son iki seçenekleri belirleyerek, hiçbir şey gösterilmektedir. Ancak, bunlar yaptıktan sonra işaretli nesneleri bulmak yararlı olabilir.
-4. Hiçbir nesne seçili olduğunda, bu bölümde sahnedeki tüm nesneleri durumunu gösterir:
-    * Toplam - etkin, gizli olmayan nesneleri Sahne içinde toplam sayısı.
-    * Yoksayıldı - Mesh oluşturucu veya Terrains olmayan nesne sayısı.
-    * Mesh - Mesh Oluşturucu sayısını sahnedeki nesneler
-    * Sahnedeki Arazi - nesnelerinin Arazi sayısı
-    * Geometri - kafes veya Arazi sayısı "Akustik geometri" işaretlenmiş sahnedeki nesneleri.
-    * Gezinti - kafes veya Arazi sayısı "Akustik gezinti" işaretlenmiş sahnedeki nesneler. Bu sayı, Unity'nın NavMesh içermez.
-5. Yalnızca Mesh oluşturucular ve Terrains görünümde 'işareti mümkün' nesne toplam sayısını gösterir. Onay kutularını işaretleyin için kullanabileceğiniz gösterir (uygun bileşenine ekleme) nesnelerle geometri veya akustik gezinme
-6. Bu Not, hiçbir şey seçili olduğunda, gerekirse işaretleme nesneleri seçmenizi anımsatır. Ayrıca, hiçbir şey seçmeden sahnedeki tüm nesneleri işaretlemek için bir veya iki onay kutularını kontrol edebilirsiniz.
-7. Bu bölüm, nesne seçiliyken, yalnızca seçilen nesnelerin durumunu gösterir.
-8. 'İşareti mümkün' seçili nesneler toplam sayısını gösterir. Denetleme veya onay kutularının işaretini işaretleyin veya yalnızca seçili nesneler işaretini kaldırın.
+### <a name="for-reference-the-objects-tab-parts"></a>Başvuru için: nesneler sekmesi bölümleri
+Sekme sayfasının bölümleri (açıklamalardan sonra resim):
 
-Hiçbir şey, sahnede seçili varsa, nesneler sekmesini aşağıdaki resim gibi görünecektir:
+1. Sekme seçimi düğmeleri ( **nesneler** sekmesi seçili olarak). Soldan sağa bir Acoustics Bake 'nin çeşitli adımlarında gezinmek için bu düğmeleri kullanın.
+1. Bu sekmeyi kullanarak yapabilecekleriniz için kısa bir açıklama.
+1. Hiyerarşi penceresi için kullanılabilir filtreler. Bunları kolayca işaretleyebilmeniz için Hiyerarşi penceresini belirtilen türdeki nesnelere filtrelemek için bu seçenekleri kullanın. Henüz Acoustics için herhangi bir şey eklemediyseniz, son iki seçeneğin seçilmesi hiçbir şey göstermeyecektir. Ancak, bu seçenekler işaretlendikten sonra nesneleri bulmanıza yardımcı olur.
+1. Hiçbir nesne seçili değilse, bu bölümde sahnenin tüm nesnelerinin durumu gösterilmektedir.
+    * Toplam: etkin, gizli olmayan nesnelerin toplam sayısı.
+    * Yoksayıldı: ağ Oluşturucu ya da terrat olmayan nesne sayısı.
+    * Kafes: kafes işleyici nesnelerinin sayısı.
+    * Teryağmur: teryağmur nesnelerinin sayısı.
+    * Geometri: **Acoustics geometrisi**olarak işaretlenen kafes veya teryağmur nesnelerinin sayısı.
+    * Gezinti: **Acoustics gezintisi**olarak işaretlenen ağ veya teryağmur nesnelerinin sayısı. Bu sayı Unity Navkafesi içermez.
+1. Sahnenin yalnızca ağ Oluşturucu ve terrat 'lar olan "MarkAble" nesnelerinin toplam sayısı. Bu nesneleri, Acoustics için geometri veya gezinti olarak işaretlemek için onay kutularını kullanın (uygun bileşeni öğesine ekleyin).
+1. Hiçbir şey seçili olmadığında, bu notta işaretlemek için nesneleri seçmenizi hatırlatır. Sahnedeki tüm nesneleri işaretlemek için bir veya iki onay kutusunu da seçebilirsiniz.
+1. Nesneler seçildiğinde, bu bölüm yalnızca seçili nesnelerin durumunu gösterir.
+1. "MarkAble" seçili nesnelerinin toplam sayısı. Onay kutularının seçilmesi veya temizlenmesi yalnızca seçili nesneleri işaretler veya işaretlerini kaldırır.
 
-![Seçim sekmesiyle akustik nesnelerin ekran görüntüsü](media/objects-tab-no-selection-detail.png)
+Sahnede seçili bir şey yoksa **nesneler** sekmesi aşağıdaki resme benzer şekilde görünür.
 
-Sahne veya hiyerarşi penceresinde seçilen bir şey varsa, aşağıdaki resim gibi görünecektir:
+![Hiçbir şey seçili olmayan Acoustics Objects sekmesi](media/objects-tab-no-selection-detail.png)
 
-![Ekran görüntüsü, akustik nesnelerin sekmesiyle gösterilen seçimi](media/objects-tab-selection-detail.png)
+Sahne veya hiyerarşi pencerenizde seçilmiş bir şey varsa, sekme aşağıdaki resme benzer şekilde görünür.
 
-Bazı nesneler işaretlenir ve bazı değil, uygun onay kutusunu "karma" bir değer gösterir:
+![Seçimlerle Acoustics Objects sekmesi](media/objects-tab-selection-detail.png)
 
-![Vurgulanan karma seçim simgesi sekmesiyle akustik nesnelerin ekran görüntüsü](media/mixed-object-selection-detail.png)
+Bazı nesneler işaretlenir ve bazıları yoksa, uygun onay kutularında aşağıdaki resimde olduğu gibi bir "karma" değeri gösterilir.
 
-Onay kutusuna tıklayarak işaretlenmesi için tüm nesneleri zorlar ve tıklayarak tekrar tüm nesneleri işaretini.
+![Karışık bir simgeler vurgulanmış şekilde Acoustics Objects sekmesi](media/mixed-object-selection-detail.png)
 
-Nesneleri, geometri ve gezinti için işaretlenebilir.
+Tüm öğeleri işaretlemek için onay kutusunu işaretleyin. Tüm nesnelerin işaretini kaldırmak için seçimini kaldırın.
+
+Nesneler hem geometri hem de gezinme için işaretlenebilir.
 
 ## <a name="select-acoustic-materials"></a>Akustik malzemeleri seçin
-Nesnelerinizi işaretlenmiş bitince **malzemeleri** düğmesi ve akustik malzemeleri atayın. Proje akustik malzemeleri sistem Unity visual malzemeleri sisteme bağlıdır: ayrı akustik malzemeler iki nesne için ayrı görsel malzeme olması gerekir.
+Nesneleriniz işaretlendikten sonra **malzemeler** düğmesini seçin. Ardından akustik malzemeler atayın. Project Acoustics malzemeler sistemi, Unity görsel malzemeler sistemine bağlıdır. İki nesnenin ayrı akustik malzemeleri olması için ayrı görsel malzemelere sahip olmaları gerekir.
 
-Akustik malzemeleri her yüzeyinden yansımasını ses enerji miktarını denetler. İçe alma için somut benzer varsayılan akustik malzeme vardır. Proje akustik görsel malzeme adına dayalı malzemeleri önerir. Akustik malzeme 'Custom' bir içe alma katsayısı kaydırıcı etkinleştirmek için bir malzeme atayabilirsiniz.
+Akustik malzeme seçimi, her yüzeyden geri yansıtılan ses enerji miktarını belirler. Varsayılan akustik malzemeler, çelik 'ya benzer şekilde bir anacıya sahiptir. Project Acoustics, görsel malzeme adına göre malzemeler önerir. Ayrıca, ayarlanabilir bir ansorption-katsayı kaydırıcısını etkinleştirmek için bir malzemeden **özel** olarak akustik malzemeler atayabilirsiniz.
 
-Verilen bir malzeme odasında reverberation süresini 0,01 için 0,20 aralığında içe alma değerlerine sahip çoğu malzemelerle, içe alma katsayısı için inversely ilişkilidir. Bu aralığın dışında kalan içe alma katsayıları malzemelerle çok absorbent.
+Bir odada belirli bir malzemenin ters tutulması süresi, büyük bir süre içinde kendi kendine ilgili bir katsayı ile ilgilidir. Çoğu malzemenin 0,01 ile 0,20 arasında bir aralığında ABD değeri vardır. Bu aralığın dışında, yaygın olmayan katların bulunduğu malzemeler çok büyük bir yerdir.
 
-![İçe alma katsayısı ile reverberation zaman negatif bir bağıntı gösteren grafik](media/reverb-time-graph.png)
+![Grafik, geri alma süresinin ve emme katının negatif bağıntısını gösterir.](media/reverb-time-graph.png)
 
-### <a name="for-reference-parts-of-the-materials-tab"></a>Başvuru için: Malzemeleri sekmesinin bölümleri
-![Unity sekmede akustik malzemeleri ekran görüntüsü](media/materials-tab-detail.png)
+### <a name="for-reference-parts-of-the-materials-tab"></a>Başvuru için: malzemeler sekmesinin bölümleri
+![Unity 'de Acoustics malzemeler sekmesi](media/materials-tab-detail.png)
+1. **Malzemeler** düğmesi bu sekmeyi görüntüler.
+2. Bu sekmeyi kullanarak yapabilecekleriniz için kısa bir açıklama.
+3. Bu onay kutusu seçildiğinde, yalnızca **Acoustics geometrisi** olarak işaretlenen nesneler tarafından kullanılan malzemeler listelenir. Aksi takdirde, sahnede kullanılan tüm malzemeler listelenir.
+4. **Acoustics** sütunundaki (#6) bir menüdeki seçeneklerin sırasını değiştirmek için bu seçenekleri kullanın. Akustik malzemeleri **ada** göre veya **Absorptivity**ile düşük ve yüksek olacak şekilde sıralayın.
+5. Sahnede kullanılan malzemelerin alfabetik sıralanmış bir listesi. **Yalnızca Işaretlen göster** onay kutusu işaretliyse (#3), yalnızca **Acoustics geometrisi** olarak işaretlenen nesneler tarafından kullanılan malzemeler gösterilir. Sahnedeki bu malzemeyi kullanan tüm nesneleri seçmek için burada bir malzeme seçin.
+6. Sahne malzemelerinin atandığı akustik malzemeler. Söz konusu sahne malzemesine atanan akustik malzemeleri değiştirmek için herhangi bir öğe seçin. Bu menülerin sıralama düzenini değiştirmek için **sıralama Acoustics by** seçenekleri (#4) kullanın.
+7. Sütunda seçili olan malzemenin akustik, sol tarafında (#6). 0 değeri, kusursuz yansıtıcı (hiçbir şekilde) anlamına gelir, 1 ise kusursuz bir şekilde (yansıma yoktur). Seçili malzeme özel olmadığı için, masorption katsayısı değiştirilemez **.**
+8. **Özel**olarak işaretlenen bir malzeme için kaydırıcı etkinleştirilir. Bir asorption katsayısı atamak için kaydırıcıyı taşıyabilir veya bir değer yazabilirsiniz.
 
-1. **Malzemeleri** sekmesini düğmesi, bu sayfasını getirmek için kullanılır.
-2. Bu sayfayı kullanarak yapmanız gerekenler kısa bir açıklaması.
-3. Bu onay kutusu işaretlendiğinde, nesneler tarafından kullanılan malzemeleri olarak işaretlenmiş **akustik geometri** listelenir. Aksi takdirde, sahnedeki kullanılan tüm malzemeleri listelenir.
-4. Açılan liste akustik sütunun (6) altında tıkladığınızda görüntülenen açılır menüsünde sırasını değiştirmek için bu seçenekleri kullanın. **Adı** akustik malzemeleri ada göre sıralar. "Absorptivity" bunları absorptivity düşükten yükseğe sırasına göre sıralar.
-5. Alfabetik olarak sıralanmış sahnede kullanılan malzeme listesi. Varsa **yalnızca Göster işaretlenmiş** onay kutusu işaretli (#3), olarak işaretlenmiş nesneler tarafından kullanılan malzemeleri **akustik geometri** gösterilir. Bir ortama buraya tıklayarak bu malzemeyi kullanan sahnedeki tüm nesneleri seçer.
-6. Akustik malzeme Sahne malzeme için atanmış olduğunu gösterir. Farklı bir akustik malzeme için Sahne malzeme atamak için bir açılan tıklayın. Burada kullanarak bir öğe tıkladığınızda gösterilen menüsünün sıralama düzenini değiştirebilirsiniz **akustik sıralama ölçütü:** (4) yukarıda seçenekleri.
-7. Önceki sütununda seçilen malzeme akustik içe alma katsayısı gösterir. Değeri sıfır mükemmel yansıtıcı anlamına gelir (hiçbir içe alma), değeri 1 anlamına gelir mükemmel absorptive (yansıma hiçbir) oluştu. İçe alma katsayısı, seçili malzeme "Özel" olmadığı sürece değiştirilemez.
-8. "Özel", kaydırıcıyı atanmış bir malzeme artık devre dışıdır ve kaydırıcıyı kullanarak içe alma katsayısı seçebilir veya bir değer yazarak.
+## <a name="calculate-and-review-listener-probe-locations"></a>Dinleyici araştırma konumlarını hesapla ve gözden geçirme
+Malzemeleri atadıktan sonra, **yoklamalar** sekmesine geçin. benzetim için dinleyici araştırma noktaları yerleştirmek için **Hesapla** 'yı seçin.
 
-## <a name="calculate-and-review-listener-probe-locations"></a>Hesaplamak ve dinleyici sondası konumlarını gözden geçirin
-Malzemeleri atadıktan sonra geçiş **araştırmaları** sekmesine **Calculate** simülasyonu için dinleyici araştırma noktaları yerleştirmek için.
+### <a name="what-the-calculate-button-does"></a>"Calculate" düğmesi ne yapar
+**Hesapla** düğmesi, seçtiğiniz akustik sahne geometrisini kullanarak sahneyi benzetim için hazırlar:
 
-### <a name="what-the-calculate-button-calculates"></a>"Hesapla..." düğmesini hesaplar
-**Hesaplamak...**  düğmesi sahneniz benzetimi için hazırlamak için seçilen akustik Sahne geometri kullanır:
+- Sahne alanı kafeslerden yararlanır ve bir *Voxel birimini*hesaplar. Voxel birimi, küçük üçüncü dereceden "voxfit" ile oluşan tüm sahnenin bir birimidir. Voxel boyutu benzetim sıklığıyla belirlenir ve **benzetim çözümleme** ayarı tarafından denetlenir. Her Voxel, "açık hava" veya sahne geometrisi içeren olarak işaretlenir. Bir Voxel, geometri içeriyorsa, Voxel, söz konusu geometriye atanmış olan malzemenin büyük bir katsayısı ile etiketlenir.
+- Dinleyici araştırma noktalarını yerleştirmek için gezinti kafesleri kullanır. Algoritma, uzamsal kapsam ve benzetim süresinin ve dosya boyutunun rekabet sorunlarını dengeler. Dar corler ve küçük boşlukların her zaman kapsama sahip olduğundan emin olmak için bu bir amaçlar. Tipik araştırma noktası, küçük sahneler için 100 arasında, büyük sahneler için birkaç bin arasındadır.
 
-1. Sahne kafesleri geometrisini alır ve voxel toplu hesaplar. Voxel birimin tamamını sahneniz barındırır ve küçük üçüncü dereceden "voxels" yapılan 3 boyutlu bir birimdir. Ayarlanan tarafından simülasyon sıklığı voxels boyutu belirlenir **benzetimi çözümleme** ayarı. Her voxel işaretlenmiş ya da olacak şekilde "havadan"açık"ya da Sahne geometri içeren. Bir voxel geometri içeriyorsa voxel bu geometriye atanmış malzemeleri içe alma katsayısı ile etiketlenir.
-2. Gezinti mesh(es) dinleyicisi yoklama noktaları yerleştirmek için kullanır. Algoritma corridors daraltmak rakip kaygıları sağlarken uzamsal kapsamı ve simülasyon saat ve dosya boyutu, dengeler ve küçük alanları her zaman miktar kapsama sahip. Tipik bir araştırma noktası birkaç bin büyük sahneler için küçük sahneler için 100'den aralığa sayar.
+Sahnenin boyutuna ve makinenizin hızına bağlı olarak, bu hesaplamalar birkaç dakika sürebilir.
 
-Sahneniz boyutunu ve makinenizin hızına bağlı olarak, bu hesaplamalar birkaç dakika sürebilir.
+### <a name="review-voxel-and-probe-placement"></a>Voxel ve araştırma yerleşimini gözden geçirin
+Sahnıza bakmaya hazırsınız olduğunuzdan emin olmak için hem Voxel verileri hem de araştırma noktası konumlarını önizleyin. Tamamlanmamış bir gezinti ağı veya eksik ya da ek akustik geometri, genellikle önizlemede kolayca görülebilir. **Şeyler** menüsünü kullanarak Voxel ve araştırma yerleşimini etkinleştirin veya devre dışı bırakın.
 
-### <a name="review-voxel-and-probe-placement"></a>Gözden geçirme voxel ve araştırma yerleştirme
-Hem voxel verileri hem de sahneniz hazırlama hazır olmak için araştırma noktası konumu önizlemesini görüntüleyin. Tamamlanmamış Gezinti kafes ya da eksik veya ek akustik geometri genellikle önizlemede hızlı bir şekilde görünür. Voxel ve araştırma yerleştirme etkinleştirilebilir veya şeyler menüsünü kullanarak devre dışı:
+![Unity 'de şeyler menüsü](media/gizmos-menu.png)
 
-![Unity menüde, ekran şeyler](media/gizmos-menu.png)
+Akustik geometriyi içeren Voxler yeşil küpler olarak gösterilir. Sahneye göz atın ve geometri olması gereken her şeyin Vox 'e sahip olduğunu doğrulayın. Sahne kameranın, Vox 'in gösterilmesi için nesnenin yaklaşık 5 metresinden fazla olması gerekebilir.
 
-Akustik geometri içeren Voxels yeşil küpleri olarak gösterilir. Sahneniz keşfedin ve geometri olması gereken her şeyi voxels sahip olduğunu doğrulayın. Kamerayı sahnenin yaklaşık 5 ölçümleri gösterilecek voxels için nesnenin içinde olması gerekir.
+Kalın çözünürlükte oluşturulan voxters çözünürlüğe göre karşılaştırırsanız, çok büyük bir Vox 'in büyük olduğunu görürsünüz.
 
-Kaba çözümleme vs iyi çözüm ile oluşturulan voxels karşılaştırırsanız kaba voxels iki kez büyük olduğunu görürsünüz.
+![Unity düzenleyicisinde kaba voxters Önizleme](media/voxel-cubes-preview.png)
 
-![Unity Düzenleyicisi'nde kaba voxels önizleme görüntüsü](media/voxel-cubes-preview.png)
+Simülasyon sonuçları, çalışma zamanında dinleyici araştırma noktası konumları arasında enterpolasyonlardır. Oyuncunun beklenen her yerde araştırma noktaları olup olmadığını kontrol edin.
 
-Simülasyon sonuçlarını, çalışma zamanında dinleyicisi yoklama noktası konumu arasında ilişkilendirilmiş. Oyuncu sahnede seyahat beklenen araştırma noktası herhangi bir yerde yakın denetleyin.
+![Unity düzenleyicisinde araştırma önizlemesi](media/probes-preview.png)
 
-![Unity Düzenleyicisi önizleme görüntüsü araştırmaları](media/probes-preview.png)
+### <a name="take-care-with-scene-renames"></a>Sahne yeniden adlandırmalarına dikkat edin
+Sahne adı, sahneyi araştırma noktası yerleşimini ve voxelileştirme 'u depolayan dosyalara bağlamak için kullanılır. Araştırma noktaları hesaplandıktan sonra sahneyi yeniden adlandırırsanız, malzeme atama ve yerleştirme verileri kaybedilir ve yeniden çalıştırmanız gerekir.
 
-### <a name="take-care-with-scene-renames"></a>Sahne yeniden adlandırma ile ilgileniriz
-Görünüm adı, Sahne voxelization ve araştırma noktası yerleştirme depolama dosyalara bağlanmak için kullanılır. Araştırma noktaları hesaplandıktan sonra Sahne adlandırılırsa malzeme atama ve yerleştirme veriler kaybedilir ve yeniden çalıştırılmalıdır.
+### <a name="for-reference-parts-of-the-probes-tab"></a>Başvuru için: yoklamalar sekmesinin bölümleri
+![Unity 'de Acoustics araştırmaları sekmesi](media/probes-tab-detail.png)
 
-### <a name="for-reference-parts-of-the-probes-tab"></a>Başvuru için: Araştırmalar sekmesinin bölümleri
-![Unity sekmesinde akustik araştırmaları, ekran görüntüsü](media/probes-tab-detail.png)
+1. **Yoklamalar** düğmesi bu sekmeyi getirir.
+2. Bu sekmede neler yapabileceğinize ilişkin kısa bir açıklama.
+3. Kaba veya ince simülasyon çözünürlüğü ayarlamak için bu seçenekleri kullanın. Kaba bir daha hızlıdır, ancak bir denge vardır. Ayrıntılar için bkz. [Bake çözünürlüğü](bake-resolution.md).
+4. Acoustics veri dosyalarının nereye yerleştirileceğini belirtir. Klasör seçicisine erişmek için " **...** " düğmesini seçin. Varsayılan konum *varlıklardır/AcousticsData*. Bu konumda bir *Düzenleyici* alt klasörü de oluşturulur. Daha fazla bilgi için, bu makalenin ilerleyen kısımlarında yer [alarak, hazırlama işlemi tarafından eklenen veri dosyaları](#Data-Files)bölümüne bakın.
+5. Burada belirtilen ön ek, bu sahnenin veri dosyalarını adlandırmak için kullanılır. Varsayılan değer "Acoustics_ *[Sahname]* " dir.
+6. Yoklamalar hesaplandıktan sonra, az önce açıklandığımız denetimler devre dışı bırakılmıştır. Hesaplamaları silmek ve yeni ayarlarla yeniden hesaplayabilmeniz için denetimleri etkinleştirmek üzere **Temizle** düğmesini seçin.
+7. Sahneyi tıklatıp araştırma noktası konumlarını hesaplamak için **Hesapla** ' yı seçin. Hesaplama, makinenizde yerel olarak yapılır. Bir bakmadan önce yapılmalıdır.
 
-1. **Araştırmaları** bu sayfasını getirmek için kullanılan sekmesini düğmesi
-2. Bu sayfayı kullanarak yapmanız gerekenler kısa bir açıklaması
-3. Bu, bir kaba veya iyi benzetimi çözüm seçmek için kullanın. Kaba daha hızlıdır, ancak belirli Artıları ve eksileri vardır. Bkz: [hazırlama çözümleme](bake-resolution.md) altındaki ayrıntılar için.
-4. Konum seçin olduğunda bu alanı kullanarak akustik veri dosyalarını yerleştirilmelidir. Klasör Seçici kullanmak için "..." düğmesine tıklayın. Varsayılan değer **varlıklar/AcousticsData**. Bir **Düzenleyicisi** alt bu konumu altında aynı zamanda oluşturulur. Veri dosyaları hakkında daha fazla bilgi için bkz. [veri dosyalarını](#Data-Files) aşağıda.
-5. Burada sağlanan ön ek kullanarak bu görünüm için veri dosyalarının adlandırılacaktır. "[Sahne adı] Acoustics_" varsayılandır.
-6. Araştırmaları hesapladıktan sonra yukarıdaki denetimleri devre dışı bırakılır. Tıklayın **Temizle** düğmesine hesaplamaları silmek ve denetimleri etkinleştirin; böylelikle yeni ayarlarla yeniden hesaplayın.
-7. Tıklayın **hesaplamak...**  Sahne voxelize için düğme ve araştırma noktası konumu hesaplayın. Makinenizde yerel olarak gerçekleştirilir ve bir hazırlama yapmadan önce yapılmalıdır.
+Project Acoustics 'in bu sürümünde, yoklamalar el ile yerleştirilemez. **Yoklamalar** sekmesinde otomatikleştirilmiş işlemi kullanın.
 
-Proje akustik'ın bu sürümünde, el ile yerleştirildiğinde araştırmalarla sağlanan otomatik sürecinde yerleştirilmelidir **araştırmaları** sekmesi.
+İnce çözüm hakkında daha fazla bilgi için bkz. [Bake çözünürlüğü](bake-resolution.md).
 
-Bkz: [hazırlama çözümleme](bake-resolution.md) kaba vs hakkında daha fazla ayrıntı için çözüm ince.
+## <a name="bake-your-scene-by-using-azure-batch"></a>Azure Batch kullanarak sahneye bakın
+Azure Batch hizmetini kullanarak sahneye bulutta bir işlem kümesi üzerinden bakmanıza neden olabilirsiniz. Project Acoustics Unity eklentisi, her Bake için bir Azure Batch kümesini oluşturmak, yönetmek ve bölmek üzere Azure Batch doğrudan bağlanır. **Bake** sekmesinde, Azure kimlik bilgilerinizi girin, bir küme makine türü ve boyutu seçin ve ardından **Bake**' yi seçin.
 
-## <a name="bake-your-scene-using-azure-batch"></a>Azure Batch kullanırken görünümünüze hazırlama
-Azure Batch hizmetini kullanarak bulutta bilgi işlem kümesi ile sahneniz hazırlama. Proje akustik Unity eklenti oluşturmak, yönetmek ve bir Azure Batch kümesi için her hazırlama kaldırmak için Azure Batch doğrudan bağlanır. Üzerinde **hazırlama** sekmesinde, Azure kimlik bilgilerinizi girin, bir küme makine türü ve boyut seçin ve tıklayın **hazırlama**.
+### <a name="for-reference-parts-of-the-bake-tab"></a>Başvuru için: Bake sekmesinin parçaları
+![Unity 'deki Acoustics Bake sekmesi](media/bake-tab-details.png)
 
-### <a name="for-reference-parts-of-the-bake-tab"></a>Başvuru için: Hazırlama sekmesinin bölümleri
-![Unity sekmesinde akustik, ekran görüntüsü hazırlama](media/bake-tab-details.png)
+1. **Bake** düğmesi bu sekmeyi görüntüler.
+2. Bu sayfada neler yapabileceğinize ilişkin kısa bir açıklama.
+3. Azure hesabınız oluşturulduktan sonra bu alanlara Azure kimlik bilgilerinizi girin. Daha fazla bilgi için bkz. [Azure Batch hesabı oluşturma](create-azure-account.md).
+4. Acoustics araç takımı için Docker Image etiketi alanı.
+5. Aboneliklerinizi yönetmek, kullanımı izlemek ve fatura bilgilerini görüntülemek için Azure portal açar.
+6. Hesaplama için kullanılacak Azure Batch işlem düğümü türünü belirtir. Düğüm türü, Azure veri merkezi konumunuz tarafından desteklenmelidir. Emin değilseniz, **Standard_F8s_v2**olarak bırakın.
+7. Hesaplama için kullanılacak düğüm sayısı. Bu sayı, FIRE süresini etkiler. Azure Batch çekirdek ayırdınız ile sınırlıdır. Varsayılan ayırma yalnızca iki 8 çekirdekli düğüm veya 1 16 çekirdekli düğüme izin verir, ancak Genişletilebilir. Çekirdek ayırma kısıtlamaları hakkında daha fazla bilgi için bkz. [Azure Batch hesabı oluşturma](create-azure-account.md).
+8. İşlem havuzunuzu [düşük öncelikli düğümleri](https://docs.microsoft.com/azure/batch/batch-low-pri-vms)kullanacak şekilde yapılandırmak için bu onay kutusunu işaretleyin. Düşük öncelikli işlem düğümleri çok daha düşük maliyetlidir. Ancak, her zaman kullanılabilir olmayabilir veya herhangi bir zamanda yok edilebilir.
+9. **Yoklamanız** sekmesinde hesaplanan şekilde sahnenin araştırma sayısı. Yoklamaların sayısı, bulutta çalıştırılması gereken benzetimleri sayısını belirler. Yoklamalara göre daha fazla düğüm belirtemezsiniz.
+10. İş için düğüm başlangıç saati hariç olmak üzere, bulutta çalıştırmak için gereken süre tahmini. İş çalışmaya başladıktan sonra, bu alan, sonuçları geri alana kadar ne kadar süreyle bir tahmin gösterir.
+11. Benzetimleri çalıştırmak için gereken bilgi işlem zamanının toplam miktarı. Bu değer, Azure 'da kullanılacak olan düğüm işlem zamanının toplam miktarıdır. Daha fazla bilgi için bu makalenin ilerleyen kısımlarında [Azure hazırlama maliyeti tahminini](#Estimating-bake-cost) inceleyin.
+12. Bu ileti, iş tamamlandığında hazırlama sonuçlarının kaydedileceği yeri belirtir.
+13. *(Yalnızca Gelişmiş kullanım:)* bu düğme, oluşturduğunuz bir fırt hakkında Unity 'yi unutmasını zorlar. Örneğin, sonuçları başka bir makine kullanarak indirdiyseniz, bu işi unutmak için **durumu temizle** düğmesini seçin. Sonuç dosyası, hazırsa *indirilmeyecektir.* *Bu, işi iptal etme ile aynı değildir. Çalışıyorsa, iş bulutta çalışmaya devam edecektir.*
+14. Hazırlama 'yi buluta göndermek için bu düğmeyi seçin. Bir iş çalışırken, bu düğme **Iptal işi**olur.
+15. Bilgisayarınızda [Acoustics simülasyonu](#Local-bake)işlemeye hazırlanmak için bu düğmeyi seçin.
+16. Bu alan, Bake 'nin durumunu gösterir. Hazırlama tamamlandığında, "indirilen" gösterir.
 
-1. Bu sayfasını getirmek için kullanılan hazırlama için sekmesinde düğme.
-2. Kısa bir açıklamasını bu sayfada yapmanız gerekenler.
-3. Azure hesabınız oluşturulduktan sonra Azure kimlik bilgilerinizi girmek için alanlar. Daha fazla bilgi için [bir Azure Batch hesabı oluşturma](create-azure-account.md).
-4. Akustik araç takımı için docker görüntü etiketi.
-5. Aboneliklerinizi yönetin, kullanımını izlemek ve faturalandırma bilgileri vb. görüntülemek için Azure portalını başlatın. 
-6. Azure batch işlem düğümü türü hesaplama için kullanılacak. Düğüm türü, Azure veri merkezi konumu tarafından desteklenmesi gerekir. Emin değilim, tutulacaksa **Standard_F8s_v2**.
-7. Bu hesaplama için kullanmak için düğüm sayısı. Buraya girdiğiniz numara, Azure Batch çekirdek ayırma ile sınırlıdır ve hazırlama tamamlanma süresi etkiler. Varsayılan ayırma yalnızca iki 8 çekirdek düğümleri veya bir 16 çekirdek düğümü sağlar, ancak genişletilebilir. Çekirdek ayırma kısıtlamaları hakkında daha fazla bilgi için bkz. [bir Azure Batch hesabı oluşturma](create-azure-account.md).
-8. Kullanılacak işlem havuzunuzu yapılandırmak için bu onay kutusunu seçin [düşük öncelikli düğümler](https://docs.microsoft.com/azure/batch/batch-low-pri-vms). Düşük öncelikli işlem düğümleri çok daha düşük bir maliyet vardır ancak bunlar her zaman kullanılabilir olmayabilir veya hiçbir zaman etkisiz hale getirilebilir.
-9. Sahneniz hesaplanır olarak için yoklama sayısı **araştırmaları** sekmesi. Yoklama sayısını bulutta çalıştırılması gereken simülasyonlar sayısını belirler. Araştırmalar sayısından daha fazla düğüm belirtemezsiniz.
-10. Geçen süreyi, bulutta çalıştırmak işinizi olması beklenir. Bu düğümü başlangıç süresini içermez. İş çalışmaya başladıktan sonra sonuçlar ulaşırsınız önce hakkında ne kadar süreyle olmalıdır budur. Bu yalnızca bir tahmin olduğunu unutmayın.
-11. Simülasyonlar çalıştırılması için gereken bilgi işlem zamanı toplam miktarı. Toplam süre Azure'da kullanılacak düğümü işlem budur. Bkz: [Estimating hazırlama maliyet](#Estimating-bake-cost) aşağıda bu değeri kullanma hakkında daha fazla bilgi için.
-12. Bu ileti, iş tamamlandığında hazırlama sonuçlarını kaydedileceği bildirir.
-13. (Yalnızca Gelişmiş kullanım) Bir hazırlama hakkında unutmak çok Unity zorlamak için gereksinim duyduğunuz herhangi bir nedenle gönderilmesi durumunda (örneğin başka bir makineyi kullanmayı sonuçları yüklenir), tıklayın **Temizle durumu** gönderilen işiyle ilgili unutmak çok düğmesi. Bu sonuç dosyası, hazır olduğunuzda anlamına gelir, olur **değil** indirebilir, ve **bu işi iptal ediliyor dosyasındakiyle aynı olmaması**. İşi çalışıyorsa, bulutta çalışmaya devam eder.
-14. Tıklayın **hazırlama** buluta hazırlama gönderme düğmesi. Bir iş çalışırken bu gösterir **işi iptal et** yerine.
-15. İşleme için hazırlar [akustik benzetimi PC'nizde](#Local-bake).
-16. Bu alan hazırlama durumunu gösterir. Tamamlandığında, göstermelidir **yüklenen**.
+[Azure Portal](https://portal.azure.com)etkin işler, işlem havuzları ve depolama hakkında her zaman bir bilgi edinebilirsiniz.
 
-Her zaman etkin işler, işlem havuzlarını ve depolama alanı ile ilgili eksiksiz bilgi alabileceğiniz [Azure portalında](https://portal.azure.com).
+Bir iş çalışırken, **Bake** düğmesi etiketi **işi iptal et**olarak değişir. Sürmekte olan işi iptal etmek için bu düğmeyi kullanın. Onaylamanız istenecektir. Bir işin iptal edilmesi geri alınamaz. İptal ettiğinizde, hiçbir sonuç kullanılamayacak, ancak yine de kullanılan tüm Azure işlem süresi ücretlendirilirsiniz.
 
-Bir iş çalışırken **hazırlama** düğmesi değişiklikleri **işi iptal et**. Devam eden işi iptal etmek için bu düğmeyi kullanın. İşi iptal edilmeden önce onaylayın istenir. Bir işi iptal ediliyor alınamaz, sonuç kullanıma sunulacak ve hala kullanılan herhangi bir Azure işlem süresi için ücretlendirilirsiniz.
+Bir Bake başladıktan sonra Unity 'yi kapatabilirsiniz. Projeye, düğüm türüne ve düğüm sayısına bağlı olarak, bir bulut fırından birkaç saat sürebilir. Projeyi yeniden yüklediğinizde ve Acoustics penceresini açtığınızda hazırlama iş durumu güncelleştirilecektir. İş tamamlanırsa, çıkış dosyası indirilir.
 
-Bir hazırlama başladıktan sonra Unity kapatabilirsiniz. Bir bulut hazırlama, proje, düğüm türü ve düğüm sayısına bağlı olarak birkaç saat sürebilir. Projeyi yeniden yükleyin ve akustik penceresini hazırlama iş durumu güncelleştirilir. İş tamamlandığında, çıkış dosyası indirilir.
+Güvenlik için Azure kimlik bilgileri yerel makinenizde depolanır ve Unity düzenleyicinizle ilişkilendirilir. Yalnızca Azure ile güvenli bir bağlantı kurmak için kullanılır.
 
-Azure kimlik bilgileri yerel makinenize güvenli bir şekilde depolanır ve Unity editor'ınızdaki ile ilişkili. Bunlar, yalnızca Azure güvenli bir bağlantı kurmak için kullanılır.
+## <a name="find-the-status-of-a-running-job-on-the-azure-portal"></a>Azure portal çalışan bir işin durumunu bulma
 
-### <a name="Estimating-bake-cost"></a> Azure hazırlama maliyet tahmini
+1. **Hazırlama** sekmesinde hazırlama iş kimliğini bulun.
 
-Ne verilen hazırlama maliyetini tahmin etmek için gösterilen değer ele **işlem maliyeti tahmini**bir süresi olan ve birden çok kez tarafından saatlik maliyet yerel para **VM düğüm türü** seçtiniz. Düğümleri duruma getirmek için gereken ve çalışan düğümü zaman sonucu dahil edilmez. Örneğin, **Standard_F8s_v2** düğüm türünüz için olan 0.40 $/ SA maliyeti ve işlem tahmini maliyeti 3 saat 57 dakika, işi çalıştırmak için tahmini maliyeti $0.40 * ~ 4 saat olacak = ~ 1,60$. Gerçek maliyet büyük olasılıkla çalışmaya düğümleri almak için ek süreyi nedeniyle biraz daha yüksek olacaktır. Maliyeti saatlik düğümü bulabilirsiniz [Azure Batch fiyatlandırması](https://azure.microsoft.com/pricing/details/virtual-machines/linux) sayfası ("select işlem için iyileştirilmiş" veya "yüksek performanslı işlem" kategorisi için).
+    ![Hazırlama sekmesinde, Unity hazırlama iş kimliği vurgulanmış](media/unity-job-id.png)  
 
-## <a name="Local-bake"></a> Sahneniz PC'nizde hazırlama
-Kendi bilgisayarınıza sahneniz hazırlama. Bu, bir Azure Batch hesabı oluşturmadan önce akustik küçük sahneler ile denemek için yararlı olabilir. Not akustik benzetim Sahne boyutuna bağlı olarak uzun zaman alabilir.
+2. [Azure Portal](https://portal.azure.com)açın, Bake Için kullanılan Batch hesabına gidin ve **işler**' i seçin.
+
+    ![Azure portal Işler bağlantısı](media/azure-batch-jobs.png)  
+
+3. İş listesinden iş KIMLIĞI için arama yapın.
+
+   ![Azure Portal, hazırlama iş durumu vurgulandı](media/azure-bake-job-status.png)  
+
+4. İlgili görevlerin durumunu ve genel iş durumunu görmek için iş KIMLIĞI ' ni seçin.
+
+   ![Hazırlama görevi durumu](media/azure-batch-task-state.png)  
+
+
+### <a name="Estimating-bake-cost"></a>Azure hazırlama maliyetini tahmin etme
+
+Ne kadar fazla maliyet olacağını tahmin etmek için bir süre olan **Tahmini Işlem maliyeti** değeri ile başlayın. Seçtiğiniz **VM düğüm türü** için bu değeri, yerel para biriminizde saatlik maliyet ile çarpın. Sonucun, düğümlerin çalışır duruma getirmek için gereken düğüm süresini içermediğini unutmayın.
+
+Örneğin, bir $0.40/hr maliyeti olan düğüm türü için **Standard_F8s_v2** ' i seçtiğinizi varsayalım. **Tahmini Işlem maliyeti** 3 saat ve 57 dakika ise, işi çalıştırmak için tahmini maliyet $0,40 * ~ 4 saat = ~ $1,60 olur. Düğümlerin çalışmaya başladığı ek süre nedeniyle gerçek maliyet büyük olasılıkla biraz daha yüksek olacaktır.
+
+Saatlik düğüm maliyetlerini [Azure Batch fiyatlandırmayla](https://azure.microsoft.com/pricing/details/virtual-machines/linux)bulun. (Kategori olarak iyileştirilmiş veya **yüksek performanslı** bilgi **işlem** ' i seçin.)
+
+## <a name="Local-bake"></a>Bilgisayarınızda sahne bakın
+Ayrıca, sahsitenizin kendinize ait bir BILGISAYAR üzerinde de bir bakın. Bu yöntem, bir Azure Batch hesabı oluşturmadan önce Acoustics for Small sahneleri denemek için yararlı olabilir. Ancak yerel Acoustics simülasyonu sahnenin boyutuna bağlı olarak uzun zaman alabilir.
 
 ### <a name="minimum-hardware-requirements"></a>En düşük donanım gereksinimleri
-* En az 8 çekirdek ve 32 GB RAM ile bir x86 64 işlemcisi
+* En az 8 çekirdeğe ve 32 GB RAM 'e sahip bir x86-64 işlemcisi
+* Docker 'ı çalıştırmak için [Hyper-V etkinleştirildi](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v)
 
-8 çekirdek makineye sahip Intel Xeon E5-1660 @ 3 GHz ve 32 GB RAM test işlemlerimizi içinde örnek olarak-
-* 100 araştırmaları ile küçük bir Sahneyi yaklaşık 2 saat kaba bir hazırlama veya 32 saate kadar iyi hazırlama sürebilir.
-* Orta ölçekli bir Sahne 1000 araştırmaları ile yaklaşık 20 saat kaba bir hazırlama için veya iyi hazırlama 21 gün sürebilir.
+Örnek olarak, 8 çekirdekli bir makine üzerinde sınamamız, Intel Xeon E5-1660 @ 3 GHz ve 32 GB RAM:
+* 100 araştırmalarla ilgili küçük bir sahne, ince bir fırt veya 32 saati boyunca yaklaşık 2 saat sürdü.
+* 1\.000 araştırmaların bulunduğu orta ölçekli bir sahne, ince bir fırt veya 21 gün boyunca yaklaşık 20 saat sürdü.
 
-### <a name="setup-docker"></a>Docker Kurulumu
-Yükleme ve Docker benzetim işleyen bilgisayarda yapılandırma-
-1. Yükleme [Docker araç takımı](https://www.docker.com/products/docker-desktop).
-2. Docker ayarları başlatın, "Gelişmiş" seçeneğine gidin ve en az 8 GB RAM'e sahip için kaynakları yapılandırma. Daha fazla CPU'ları için Docker ayırabilirsiniz, hazırlama daha hızlı tamamlanır. ![Örnek Docker ayarları görüntüsü](media/docker-settings.png)
-3. "Paylaşılan sürücüler için" gidin ve işleme için kullanılan sürücü için paylaşımı etkinleştirin.![Paylaşılan Docker ekran sürücü seçenekleri](media/docker-shared-drives.png)
+### <a name="set-up-docker"></a>Docker 'ı ayarlama
+Simülasyonu işleyecek BILGISAYARA Docker 'ı yükleyip yapılandırın:
+1. [Docker Desktop](https://www.docker.com/products/docker-desktop)'ı yükler.
+2. Docker ayarlarını açın, **Gelişmiş**' e gidin ve kaynakları en az 8 GB RAM için yapılandırın. Docker 'a ayırabileceğiniz CPU sayısı ne kadar yüksekse, fırt daha hızlı tamamlanır.  
+![ örnek Docker ayarları @ no__t-1
+1. **Paylaşılan sürücüler**' e gidin ve işlemek için kullanılan sürücü için paylaşımı açın.  
+![Docker paylaşılan sürücü seçenekleri @ no__t-1
 
-### <a name="run-local-bake"></a>Yerel çalışma hazırlama
-1. "Hazırlama yerel Hazırlama" düğmesine tıklayın **hazırlama** sekme ve burada yürütme komut dosyaları ve giriş dosyalarının kaydedileceği klasörü seçin. Ardından hazırlama en düşük donanım gereksinimlerini karşıladığından ve bu makineye klasörüne kopyalayarak Docker yüklü olduğu sürece herhangi bir makinede çalıştırabilirsiniz.
-2. "Runlocalbake.bat" komut dosyası kullanarak bir simülasyon başlatın. Bu betik, proje akustik Docker görüntüsünü simülasyon işlemi için gerekli araç takımıyla getirmek ve benzetimi Başlat. 
-3. Benzetim tamamlandıktan sonra elde edilen .ace dosyası, Unity projenize kopyalayın. Unity bu ikili dosya olarak tanır emin olmak için dosya uzantısı için (örneğin, "Scene1.ace.bytes") ".bytes" ekleyin. Simülasyonu için ayrıntılı günlük "AcousticsLog.txt" depolanır Herhangi bir sorunla karşılaşırsanız çalıştırırsanız, tanı koymaya yardımcı olmak için bu dosyayı paylaşın.
+### <a name="run-the-local-bake"></a>Yerel bakışta Çalıştır
+1. **Bake** sekmesinde **Yerel Bake 'yi hazırla** düğmesini seçin. Ardından, giriş dosyalarını ve yürütme komut dosyalarını kaydetmek için bir klasör konumu seçin. Daha sonra, en düşük donanım gereksinimlerini karşılayan ve bu makineye klasörü kopyalayarak Docker 'ı yüklediğiniz sürece hazırlama 'yi herhangi bir makinede çalıştırabilirsiniz.
+2. Benzetimi başlatmak için Windows üzerinde *runlocalbake. bat* betiğini veya macos üzerinde *runlocalbake.sh* betiğini çalıştırın. Bu betik, simülasyon işleme için gereken araç kümesiyle proje Acoustics Docker görüntüsünü getirir ve benzetimi başlatır.
+3. Simülasyon bittikten sonra, elde edilen *. Ace* dosyasını Unity projenize geri kopyalayın. Unity 'nin onu ikili bir dosya olarak tanımasını sağlamak için dosya uzantısına ". Bytes" ekleyin (örneğin, "scene1. Ace. Bytes"). Simülasyonu için ayrıntılı Günlükler *AcousticsLog. txt* ' de depolanır. Herhangi bir sorunla karşılaşırsanız sorunu tanılamanıza yardımcı olması için bu dosyayı inceleyin.
 
-## <a name="Data-Files"></a> Hazırlama işlemi tarafından eklenen veri dosyaları
+## <a name="Data-Files"></a>Hazırlama işlemi tarafından eklenen veri dosyaları
 
-Hazırlama işlemi sırasında oluşturulan dört veri dosyası vardır. Benzetim sonuçlarını içeren ve başlığınızı ile birlikte gelir. Diğerleri, Unity Editor ile ilgili verileri depolar.
+Aşağıdaki dört veri dosyası, hazırlama işlemi sırasında oluşturulur. Biri simülasyon sonuçlarını içerir ve başlığınız ile birlikte gelir. Diğer kullanıcılar Unity Düzenleyicisi ile ilgili verileri depolar.
 
-Benzetim sonucu:
-* **Varlıklar/AcousticsData/akustik\_[SceneName].ace.bytes**: Bu çalışma zamanı arama tablosundan ve simülasyon sonuçlarını ve voxelized akustik Sahne öğeleri içerir. Bu dosyanın adını ve konumunu alanlara kullanarak değiştirilebilir **araştırmaları** sekmesi.
+Simülasyon sonucu:
+* *Varlıklar/AcousticsData/Acoustics @ no__t-1 [manzara adı]. Ace. Bytes*: Bu dosya, çalışma zamanı arama tablosudur. Simülasyonu sonuçları ve voxeli, akustik sahne öğeleri içerir. Bu dosyanın adını ve konumunu **yoklamalar** sekmesinden değiştirebilirsiniz.
 
-Benzetim sonuç dosyası silmemeyi dikkat edin. Sahne rebaking tarafından büyük dışında kurtarılabilir değildir.
+   *Simülasyon sonuç dosyasını silmemeye dikkat edin. Sahnenin geri bakmasının dışında kurtarılabilir.*
 
 Düzenleyici veri dosyaları:
-* **Varlıklar/Düzenleyici / [SceneName]\_AcousticsParameters.asset**: Bu dosya akustik UI alanlarında girdiğiniz verileri depolar. Bu dosyanın adını ve konumunu değiştirilemez.
-* **Assets/AcousticsData/Editor/Acoustics_[SceneName].vox**: Bu dosya voxelized akustik geometri ve malzeme özellikleri kullanılarak hesaplanır depolar **hesapla...**  araştırmaları sekmesindeki düğmesi. Bu dosyanın adını ve konumunu alanlara kullanarak değiştirilebilir **araştırmaları** sekmesi.
-* **Varlıklar/AcousticsData/Düzenleyicisi/akustik\_[SceneName]\_config.xml**: Bu dosya kullanılarak hesaplanır benzetimi parametreleri depolar **hesapla...**  düğmesini **araştırmaları** sekmesi. Bu dosyanın adını ve konumunu alanlara kullanarak değiştirilebilir **araştırmaları** sekmesi.
+* *Varlıklar/düzenleyici/[manzara adı] \_AcousticsParameters. varlık*: Bu dosya, Acoustics Kullanıcı arabirimindeki alanlara girdiğiniz verileri depolar. Bu dosyanın adını ve konumunu değiştiremezsiniz.
+* *Varlıklar/AcousticsData/Editor/Acoustics_ [manzara adı].* II: Bu **Dosya, araştırma sekmesindeki** **Hesapla** düğmesini seçtiğinizde hesaplanan voxeli, Acoustics geometrisini ve malzeme özelliklerini depolar. Bu dosyanın adını ve konumunu **yoklamalar** sekmesinden değiştirebilirsiniz.
+* *Varlıklar/AcousticsData/Editor/Acoustics @ no__t-1 [manzara adı] @no__t -2config. xml*: Bu dosya **Calculate**' i seçtiğinizde hesaplanan simülasyon parametrelerini depolar. Bu dosyanın adını ve konumunu **yoklamalar** sekmesinden değiştirebilirsiniz.
 
-## <a name="set-up-the-acoustics-lookup-table"></a>Akustik arama tablosu ayarlama
-Sürükle ve bırak **proje akustik** sahneniz içine Proje panelinden prefab:
+## <a name="set-up-the-acoustics-lookup-table"></a>Acoustics arama tablosunu ayarlama
+Projeyi Proje panelinden **Acoustics** prefab 'den sahneye sürükleyin:
 
-![Ekran görüntüsü, akustik prefab Unity](media/acoustics-prefab.png)
+![Unity 'de Acoustics prefab](media/acoustics-prefab.png)
 
-Tıklayarak **ProjectAcoustics** Game nesne ve denetçisi panelini Git. Hazırlama sonuç (. konumunu belirtin ACE dosyası **varlıklar/AcousticsData**) sürükleme ve bırakma tarafından akustik Manager betiğe veya metin kutusunun yanındaki daireye düğmesine tıklayarak.
+**Projectacoustika** oyun nesnesini seçin ve Inspector paneline gidin. Hazırlama sonuçlarınızın konumunu belirtin (. Ace dosyası, *varlıklar/AcousticsData*): dosyayı Acoustics Manager betiğine sürükleyin veya metin kutusunun yanındaki daire düğmesini seçin.
 
-![Unity prefab akustik Yöneticisi ekran görüntüsü](media/acoustics-manager.png)  
+![Unity 'de Acoustics Manager prefab](media/acoustics-manager.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Keşfedin [Unity için denetimleri tasarım](unity-workflow.md)
-* Keşfedin [proje akustik tasarım kavramları](design-process.md)
-
+* [Unity tasarım denetimlerini](unity-workflow.md)araştırma.
+* [Project Acoustics tasarım kavramlarını](design-process.md)keşfet.

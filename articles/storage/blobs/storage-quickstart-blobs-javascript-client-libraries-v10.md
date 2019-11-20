@@ -1,44 +1,42 @@
 ---
-title: Hızlı Başlangıç - tarayıcıda JavaScript ve HTML kullanarak Azure depolamada blob oluşturma
-description: Bir HTML sayfasında JavaScript kullanarak blobları karşıya yüklemek, listelemek ve silmek için bir BlobService örneğini kullanma hakkında bilgi edinin.
+title: Hızlı Başlangıç-tarayıcıda JavaScript ve HTML kullanarak Azure depolamada blob oluşturma
+description: HTML sayfasında JavaScript kullanarak Blobları karşıya yüklemeyi, listeleyeceğinizi ve silmeyi öğrenin.
 services: storage
-keywords: depolama, javascript, html
-author: KarlErickson
+author: mhopkins-msft
 ms.custom: mvc
 ms.service: storage
-ms.author: karler
-ms.reviewer: seguler
-ms.date: 05/20/2019
+ms.author: mhopkins
+ms.date: 08/29/2019
 ms.topic: quickstart
 ms.subservice: blobs
-ms.openlocfilehash: a971f2b4b63b3fd35777d1d890da8451b84bb086
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: 018a0405215d084962f6c107a607c8f82fae2500
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67544035"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74132008"
 ---
 <!-- Customer intent: As a web application developer I want to interface with Azure Blob storage entirely on the client so that I can build a SPA application that is able to upload and delete files on blob storage. -->
 
-# <a name="quickstart-upload-list-and-delete-blobs-using-azure-storage-v10-sdk-for-javascripthtml-in-the-browser"></a>Hızlı Başlangıç: Karşıya yükleme, listeleme ve Azure depolama v10 SDK'sı, tarayıcıda JavaScript/HTML kullanarak blobları silme
+# <a name="quickstart-upload-list-and-delete-blobs-using-azure-storage-v10-sdk-for-javascripthtml-in-the-browser"></a>Hızlı başlangıç: tarayıcıda JavaScript/HTML için Azure Storage ile v10 arasındaki SDK 'sını kullanarak Blobları karşıya yükleme, listeleme ve silme
 
-Bu hızlı başlangıçta kullanmak bilgi edineceksiniz [JavaScript - Blob için Azure depolama SDK'sı V10](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob#readme) kitaplığı tamamen tarayıcıdan çalıştırılan JavaScript koddan blobları yönetme. Burada kullanılan yaklaşım, blob depolama hesabınıza korumalı erişimi güvence altına almak için gerekli güvenlik önlemlerinin nasıl kullanılacağını göstermektedir.
+Bu hızlı başlangıçta, tarayıcıdan tamamen tarayıcıda çalışan JavaScript kodundan blob 'ları yönetmek için [Azure Storage SDK ile v10 arasındaki for JavaScript-blob](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob#readme) Kitaplığı ' nı kullanmayı öğreneceksiniz. Burada kullanılan yaklaşım, blob depolama hesabınıza korumalı erişimi güvence altına almak için gerekli güvenlik önlemlerinin nasıl kullanılacağını göstermektedir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [storage-quickstart-prereq-include](../../../includes/storage-quickstart-prereq-include.md)]
 
-Azure depolama JavaScript istemci kitaplıkları doğrudan dosya sisteminde çalışmaz ve bir web sunucusundan sunulmalıdır. Bu konuda kullanan [Node.js](https://nodejs.org) temel sunucusu başlatılamıyor. Düğüm yüklememeyi tercih ederseniz, bir yerel web sunucusu çalıştırmanın başka bir yolla kullanabilirsiniz.
+Azure Storage JavaScript istemci kitaplıkları doğrudan dosya sisteminden çalışmaz ve bir Web sunucusundan sunulmalıdır. Bu konu, temel bir sunucu başlatmak için [Node. js](https://nodejs.org) kullanır. Düğümü yüklememeyi tercih ediyorsanız, yerel bir Web sunucusu çalıştırmanın başka bir düzeyini de kullanabilirsiniz.
 
-Hata ayıklamayı adımları uygulamaya ihtiyacınız olacak [Visual Studio Code](https://code.visualstudio.com) ve her iki [Chrome için hata ayıklayıcı](vscode:extension/msjsdiag.debugger-for-chrome) veya [Microsoft Edge için hata ayıklayıcı](vscode:extension/msjsdiag.debugger-for-edge) uzantısı.
+Hata ayıklamayla ilgili adımları takip etmek için [Visual Studio Code](https://code.visualstudio.com) ve [Microsoft Edge uzantısı Için Chrome veya hata ayıklayıcı](vscode:extension/msjsdiag.debugger-for-edge) [için hata ayıklayıcıya](vscode:extension/msjsdiag.debugger-for-chrome) gerek duyarsınız.
 
 ## <a name="setting-up-storage-account-cors-rules"></a>Depolama hesabı CORS kurallarını ayarlama
 
-Web uygulamanızı bir blob depolama istemciden erişebilmeniz için önce hesabınızı etkinleştirmek için yapılandırmalısınız [çıkış noktaları arası kaynak paylaşımı](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services), veya CORS.
+Web uygulamanızın istemciden bir blob depolamaya erişebilmesi için, hesabınızı, [çıkış noktaları arası kaynak paylaşımı](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services)veya CORS 'yi etkinleştirecek şekilde yapılandırmanız gerekir.
 
-Azure portalına geri dönün depolama hesabınızı seçin. Yeni bir CORS kuralı için gidin **ayarları** tıklayın ve bölüm **CORS** bağlantı. Ardından, **Ekle** düğmesine tıklayarak **CORS kuralı ekle** penceresini açın. Bu hızlı başlangıçta bir açık CORS kuralı oluşturacaksınız:
+Azure portalına geri dönün depolama hesabınızı seçin. Yeni bir CORS kuralı tanımlamak için, **Ayarlar** bölümüne gidin ve **CORS** bağlantısına tıklayın. Ardından, **Ekle** düğmesine tıklayarak **CORS kuralı ekle** penceresini açın. Bu hızlı başlangıçta bir açık CORS kuralı oluşturacaksınız:
 
-![Azure Blob Depolama Hesabı CORS ayarları](media/storage-quickstart-blobs-javascript-client-libraries/azure-blob-storage-cors-settings.png)
+![Azure Blob Depolama Hesabı CORS ayarları](media/storage-quickstart-blobs-javascript-client-libraries-v10/azure-blob-storage-cors-settings.png)
 
 Aşağıdaki tabloda her bir CORS ayarı açıklanmakta ve kuralı tanımlamak için kullanılan değerler anlatılmaktadır.
 
@@ -51,7 +49,7 @@ Aşağıdaki tabloda her bir CORS ayarı açıklanmakta ve kuralı tanımlamak i
 | En uzun geçerlilik süresi (saniye) | 86400 | Tarayıcının denetim öncesi SEÇENEKLER isteğini önbelleğe aldığı en uzun süre. *86400* değeri, önbelleğin bir tam gün boyunca kalmasına izin verir. |
 
 > [!IMPORTANT]
-> Üretimde kullandığınız tüm ayarların en az bir depolama hesabınıza güvenli erişimi sürdürmek için gerekli erişim miktarını kullanıma sunduğundan emin olun. Burada açıklanan CORS ayarları esnek bir güvenlik ilkesini tanımladığı için hızlı başlangıç için uygundur. Ancak bu ayarlar gerçek bir bağlam için önerilmez.
+> Üretimde kullandığınız tüm ayarların, güvenli erişim sağlamak için depolama hesabınıza gereken en düşük erişim miktarını kullanıma sunduğundan emin olun. Burada açıklanan CORS ayarları esnek bir güvenlik ilkesini tanımladığı için hızlı başlangıç için uygundur. Ancak bu ayarlar gerçek bir bağlam için önerilmez.
 
 Bundan sonra, Azure Cloud Shell hizmetini kullanarak bir güvenlik belirteci oluşturacaksınız.
 
@@ -59,9 +57,9 @@ Bundan sonra, Azure Cloud Shell hizmetini kullanarak bir güvenlik belirteci olu
 
 ## <a name="create-a-shared-access-signature"></a>Paylaşılan erişim imzası oluşturma
 
-Paylaşılan erişim imzası (SAS), Blob depolama alanına gönderilen isteklerini yetkilendirmek için tarayıcıda çalışan kod tarafından kullanılır. İstemci, SAS kullanarak hesap erişim anahtarı veya bağlantı dizesi kullanmadan depolama kaynaklarına erişimi yetkilendirebilir. SAS hakkında daha fazla bilgi edinmek için bkz. [Paylaşılan erişim imzaları (SAS) kullanma](../common/storage-dotnet-shared-access-signature-part-1.md).
+Paylaşılan erişim imzası (SAS), Blob depolama alanına gönderilen isteklerini yetkilendirmek için tarayıcıda çalışan kod tarafından kullanılır. İstemci, SAS kullanarak hesap erişim anahtarı veya bağlantı dizesi kullanmadan depolama kaynaklarına erişimi yetkilendirebilir. SAS hakkında daha fazla bilgi edinmek için bkz. [Paylaşılan erişim imzaları (SAS) kullanma](../common/storage-sas-overview.md).
 
-Azure cloud shell aracılığıyla veya Azure portalı ile Azure CLI veya Azure Depolama Gezgini'ni kullanarak bir SAS oluşturabilirsiniz. Aşağıdaki tabloda, CLI ile bir SAS oluşturmak için değer sağlamanız gereken parametreler açıklanmıştır.
+Azure Cloud Shell aracılığıyla veya Azure portal ya da Azure Depolama Gezgini ile Azure CLı kullanarak bir SAS oluşturabilirsiniz. Aşağıdaki tabloda CLı ile SAS oluşturmak için değer sağlamanız gereken parametreler açıklanmaktadır.
 
 | Parametre      |Açıklama  | Yer tutucu |
 |----------------|-------------|-------------|
@@ -69,7 +67,7 @@ Azure cloud shell aracılığıyla veya Azure portalı ile Azure CLI veya Azure 
 | *account-name* | Depolama hesabı adı. Daha önceki bir adımda ayrılan adı kullanın. | *YOUR_STORAGE_ACCOUNT_NAME* |
 | *account-key*  | Depolama hesabı anahtarı. Daha önceki bir adımda ayrılan anahtarı kullanın. | *YOUR_STORAGE_ACCOUNT_KEY* |
 
-JavaScript kodunuzda kullanabileceğiniz bir SAS oluşturmak için her yer tutucusu için gerçek değerlerle aşağıdaki CLI komutunu kullanın.
+JavaScript kodunuzda kullanabileceğiniz bir SAS oluşturmak için, her bir yer tutucu için gerçek değerlerle aşağıdaki CLı komutunu kullanın.
 
 ```azurecli-interactive
 az storage account generate-sas \
@@ -89,18 +87,18 @@ Her parametreden sonraki değer serisini biraz şifreli bulabilirsiniz. Bu param
 | *resource-types* | sco     | SAS’den etkilenen kaynaklar *service*, *container* ve *object* kaynaklarıdır. |
 | *services*       | b       | SAS’den etkilenen hizmet *blob* hizmetidir. |
 
-SAS oluşturulduktan sonra dönüş değeri kopyalayın ve bunu bir yere bir sonraki adımda kullanmak üzere kaydedin. Azure CLI dışında bir yöntem kullanılarak, SAS oluşturursa, ilk kaldırmanız gerekecek `?` varsa. Bu URL şablonu bu konunun ilerleyen bölümlerinde sağlanan URL ayırıcı SAS kullanıldığı karakterdir.
+SAS oluşturuldığına göre, geri dönüş değerini kopyalayın ve yaklaşan bir adımda kullanmak üzere bir yere kaydedin. Azure CLı dışında bir yöntem kullanarak SAS oluşturduysanız, varsa ilk `?` kaldırmanız gerekecektir. Bu karakter, daha sonra SAS kullanıldığı bu konunun URL şablonunda zaten sağlanmış olan bir URL ayırıcısıdır.
 
 > [!IMPORTANT]
 > Üretimde her zaman SSL kullanarak SAS belirteçlerini geçirin. Ayrıca, SAS belirteçleri sunucu üzerinde oluşturulmalı ve Azure Blob Depolama’ya geri geçirmek için HTML sayfasına gönderilmelidir. Düşünebileceğiniz bir yaklaşım, SAS belirteçleri oluşturmak için bir sunucusuz bir işlev kullanmaktır. Azure Portal, bir JavaScript işlevi ile SAS oluşturma özelliğine sahip işlev şablonları içerir.
 
 ## <a name="implement-the-html-page"></a>HTML sayfasını uygulama
 
-Bu bölümde, temel bir web sayfası oluşturmak ve başlatmak ve hata ayıklama sayfası için VS Code'u yapılandırma. Ancak, başlatabilirsiniz önce bir yerel web sunucusunu başlatmak ve tarayıcınızı istediğinde sayfaya hizmet etmek için Node.js kullanma gerekir. Ardından, çeşitli blob depolama API'leri çağırmak ve sonuçları sayfasında görüntülemek için JavaScript kodu ekleyeceksiniz. Bu çağrılarında sonuçlarını atabilirsiniz [Azure portalında](https://portal.azure.com), [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer)ve [Azure depolama uzantısı](vscode:extension/ms-azuretools.vscode-azurestorage) VS Code için.
+Bu bölümde, temel bir Web sayfası oluşturacak ve sayfayı başlatıp hata ayıklamanın VS Code yapılandıracaksınız. Bununla birlikte, başlamadan önce yerel bir Web sunucusunu başlatmak için Node. js ' yi kullanmanız ve tarayıcınız istediğinde sayfayı sunması gerekir. Ardından, çeşitli BLOB depolama API 'Lerini çağırmak ve sonuçları sayfada göstermek için JavaScript kodu ekleyeceksiniz. Ayrıca, bu çağrıların sonuçlarını VS Code için [Azure Portal](https://portal.azure.com), [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer)ve [Azure Storage uzantısı](vscode:extension/ms-azuretools.vscode-azurestorage) 'nda da görebilirsiniz.
 
 ### <a name="set-up-the-web-application"></a>Web uygulamasını ayarlama
 
-İlk olarak, adlı yeni bir klasör oluşturun *azure-blobs-javascript* ve VS Code'da açın. Ardından VS Code'da yeni bir dosya oluşturun, aşağıdaki HTML'yi ekleyin ve kaydedileceği *index.html* içinde *azure-blobs-javascript* klasör.
+İlk olarak, *Azure-Bloblar-JavaScript* adlı yeni bir klasör oluşturun ve vs Code açın. Ardından VS Code yeni bir dosya oluşturun, aşağıdaki HTML 'yi ekleyin ve *index. html* olarak *Azure-Blobları-JavaScript* klasörüne kaydedin.
 
 ```html
 <!DOCTYPE html>
@@ -124,11 +122,11 @@ Bu bölümde, temel bir web sayfası oluşturmak ve başlatmak ve hata ayıklama
 </html>
 ```
 
-### <a name="configure-the-debugger"></a>Hata Ayıklayıcı Yapılandırma
+### <a name="configure-the-debugger"></a>Hata ayıklayıcıyı yapılandırma
 
-VS code'da hata ayıklama uzantısı ayarlamak için seçin **hata ayıklama > Yapılandırması Ekle...** , ardından **Chrome** veya **Edge**uzantısı, yüklü önkoşullar bölümünde daha önce bağlı olarak. Bu eylem, oluşturur bir *launch.json* dosya ve düzenleyicide açılır.
+VS Code hata ayıklayıcı uzantısını ayarlamak için, **hata ayıkla > yapılandırma Ekle...** ' yi seçin, ardından ön koşullar bölümüne yüklediğiniz uzantıya bağlı olarak **Chrome** veya **Edge**' i seçin. Bu eylem bir *Launch. JSON* dosyası oluşturur ve düzenleyicide açar.
 
-Ardından, değişiklik *launch.json* dosya böylece `url` değeri içeren `/index.html` gösterildiği gibi:
+Sonra, `url` değeri gösterildiği gibi `/index.html` içermesi için *Launch. JSON* dosyasını değiştirin:
 
 ```json
 {
@@ -148,49 +146,49 @@ Ardından, değişiklik *launch.json* dosya böylece `url` değeri içeren `/ind
 }
 ```
 
-Bu yapılandırma, VS Code başlatmak için tarayıcıyı ve yüklemek için hangi URL söyler.
+Bu yapılandırma, hangi tarayıcının başlatılacağı ve hangi URL 'nin yükleneceğini VS Code söyler.
 
-### <a name="launch-the-web-server"></a>Web sunucusu başlatılamıyor
+### <a name="launch-the-web-server"></a>Web sunucusunu Başlat
 
-Yerel Node.js web sunucusunu başlatmak için **Görüntüle > Terminal** VS Code içindeki bir konsol penceresi açmak için ardından aşağıdaki komutu girin.
+Yerel Node. js web sunucusunu başlatmak için, VS Code içinde bir konsol penceresi açmak üzere **> terminali görüntüle** ' yi seçin ve sonra aşağıdaki komutu girin.
 
 ```console
 npx http-server
 ```
 
-Bu komut yükleyecek *http-server* paketini ve geçerli klasörde önceki adımda belirtilen de dahil olmak üzere varsayılan URL aracılığıyla kullanılabilir hale getirme sunucusu başlatılamıyor.
+Bu komut, *http-Server* paketini yükleyecek ve sunucuyu başlatarak, önceki adımda gösterilenler de dahil olmak üzere geçerli klasörü varsayılan URL 'ler aracılığıyla kullanılabilir hale getirir.
 
 ### <a name="start-debugging"></a>Hata Ayıklamayı Başlat
 
-Başlatmak için *index.html* ile VS Code hata ayıklayıcı iliştirilmiş, select tarayıcıda **hata ayıklama > hata ayıklamayı Başlat** veya VS Code'da F5 tuşuna basın.
+*İndex. html* dosyasını tarayıcıda vs Code hata ayıklayıcı ekli olarak başlatmak Için hata **Ayıkla > hata ayıklamayı Başlat** ' ı seçin veya vs Code ' de F5 tuşuna basın.
 
-Görüntülenen kullanıcı Arabirimi henüz bir işe yaramaz, ancak gösterilen her bir işlevin uygulamak için aşağıdaki bölümde, JavaScript kodu ekleyeceksiniz. Ardından, kesme noktaları ayarlayın ve kodunuz üzerinde durakladığında hata ayıklayıcısı ile etkileşim.
+Görüntülenecek kullanıcı arabirimi henüz hiçbir şey yapmaz, ancak gösterilen her işlevi uygulamak için aşağıdaki bölüme JavaScript kodu eklersiniz. Daha sonra, kodunuzda durakladığında kesme noktaları ayarlayabilir ve hata ayıklayıcı ile etkileşim kurabilirsiniz.
 
-Değişiklikler yaptığınızda *index.html*, tarayıcı değişiklikleri görmek için sayfayı yeniden emin olun. VS Code'da de seçebilirsiniz **hata ayıklama > hata ayıklama yeniden** ya da CTRL + SHIFT + F5 tuşuna basın.
+*İndex. html*' de değişiklik yaptığınızda, tarayıcıdaki değişiklikleri görmek için sayfayı yeniden yüklediğinizden emin olun. VS Code, hata **ayıklamayı yeniden başlatmak > hata ayıklamayı** seçebilir ya da CTRL + SHIFT + F5 tuşlarına basabilirsiniz.
 
-### <a name="add-the-blob-storage-client-library"></a>Blob depolama istemci kitaplığı Ekle
+### <a name="add-the-blob-storage-client-library"></a>BLOB depolama istemci kitaplığını ekleme
 
-Blob depolama, API çağrıları etkinleştirmeyi [JavaScript - Blob istemci kitaplığı Azure depolama SDK'sını indirin](https://aka.ms/downloadazurestoragejsblob), zip dosyasının içeriğini ayıklayın ve yerleştirin *azure storage.blob.js* dosyasında*azure-blobs-javascript* klasör.
+Blob Storage API 'sine yapılan çağrıları etkinleştirmek için önce [JavaScript-blob istemci kitaplığı Için Azure depolama SDK 'Sını indirin](https://aka.ms/downloadazurestoragejsblob), zip içeriğini ayıklayın ve *Azure-Storage-blob. js* dosyasını *Azure-Blobları-JavaScript* klasörüne yerleştirin.
 
-Ardından, aşağıdaki HTML'e yapıştırın *index.html* sonra `</body>` kapanış etiketi, yer tutucu açıklamayı değiştirin.
+Sonra, yer tutucu yorumunu değiştirerek, `</body>` kapanış etiketinden sonra aşağıdaki HTML 'yi *index. html* dosyasına yapıştırın.
 
 ```html
-<script src="azure-storage.blob.js" charset="utf-8"></script>
+<script src="azure-storage-blob.js" charset="utf-8"></script>
 
 <script>
 // You'll add code here in the following sections.
 </script>
 ```
 
-Bu kod, komut dosyasına bir başvuru ekler ve kendi JavaScript kodu için bir yer sağlar. Bu hızlı başlangıç amaçları doğrultusunda, kullandığımız *azure storage.blob.js* betiği VS Code'da açın, içeriğini okumak ve kesme noktaları ayarlayın. Üretim ortamında, daha fazla compact kullanması gereken *azure storage.blob.min.js* zip dosyasında da sağlanan.
+Bu kod, betik dosyasına bir başvuru ekler ve kendi JavaScript kodunuz için bir yer sağlar. Bu hızlı başlangıç amacıyla, *Azure-Storage-blob. js* komut dosyasını kullanarak vs Code açabilir, içeriğini okuyabilir ve kesme noktaları ayarlayabilirsiniz. Üretimde, ZIP dosyasında da sağlanmış olan daha Compact *Azure-Storage. blob. min. js* dosyasını kullanmanız gerekir.
 
-Her blob depolama işlevinde hakkında daha fazla bilgi bulabilirsiniz [başvuru belgeleri](https://docs.microsoft.com/javascript/api/%40azure/storage-blob/index). Bazı SDK'sındaki işlevleri yalnızca kullanılabilir node.js'de veya tarayıcıda yalnızca kullanılabilir olduğunu unutmayın.
+[Başvuru belgelerindeki](https://docs.microsoft.com/javascript/api/%40azure/storage-blob/index)her bir BLOB depolama işlevi hakkında daha fazla bilgi edinebilirsiniz. SDK 'daki bazı işlevlerin yalnızca Node. js ' de kullanılabilir veya yalnızca tarayıcıda kullanılabilir olduğunu unutmayın.
 
-Kodda *azure storage.blob.js* adlı bir genel değişken aktarır `azblob`, API'leri blob depolamaya erişmek için JavaScript kodunuzda kullanacağınız.
+*Azure-Storage-blob. js* içindeki kod, BLOB depolama API 'lerine erişmek için JavaScript kodunuzda kullanacağınız `azblob`adlı bir genel değişkeni dışa aktarır.
 
-### <a name="add-the-initial-javascript-code"></a>İlk JavaScript kodunu ekleyin
+### <a name="add-the-initial-javascript-code"></a>İlk JavaScript kodunu ekleme
 
-Ardından, aşağıdaki kodu yapıştırın `<script>` yer tutucu açıklamayı değiştirerek önceki kod bloğunda gösterildiği gibi.
+Ardından, aşağıdaki kodu, yer tutucu yorumunu değiştirerek önceki kod bloğunda gösterilen `<script>` öğesine yapıştırın.
 
 ```javascript
 const createContainerButton = document.getElementById("create-container-button");
@@ -208,13 +206,13 @@ const reportStatus = message => {
 }
 ```
 
-Aşağıdaki kodu kullanan her bir HTML öğesi ve uyguladığı için alanları bu kod oluşturur bir `reportStatus` çıkışını görüntülemek için işlev.
+Bu kod, aşağıdaki kodun kullanacağı her HTML öğesi için alanlar oluşturur ve çıktıyı göstermek için bir `reportStatus` işlevi uygular.
 
-Aşağıdaki bölümlerde, her yeni JavaScript kod bloğunun önceki blok sonra ekleyin.
+Aşağıdaki bölümlerde, bir önceki bloğundan sonra her bir JavaScript kodu bloğunu ekleyin.
 
 ### <a name="add-your-storage-account-info"></a>Depolama hesabı bilgilerinizi ekleyin
 
-Ardından, hesabınızın adını ve bir önceki adımda oluşturulan SAS yer tutucular yerine depolama hesabınızın erişmek için kod ekleyin.
+Daha sonra, depolama hesabınıza erişmek için kod ekleyin ve yer tutucuları, hesap adınızla ve önceki adımda oluşturduğunuz SAS ile değiştirin.
 
 ```javascript
 const accountName = "<Add your storage account name>";
@@ -225,11 +223,11 @@ const containerURL = new azblob.ContainerURL(
     azblob.StorageURL.newPipeline(new azblob.AnonymousCredential));
 ```
 
-Bu kod oluşturmak için SAS ve hesap bilgilerini kullanan bir [ContainerURL](https://docs.microsoft.com/javascript/api/@azure/storage-blob/ContainerURL) oluşturmak ve bir depolama kapsayıcısı işlemek için yararlı olan örnek.
+Bu kod, bir depolama kapsayıcısını oluşturmak ve işlemek için yararlı olan bir [Containerurl](https://docs.microsoft.com/javascript/api/@azure/storage-blob/ContainerURL) örneği oluşturmak için hesap BILGILERINIZI ve SAS 'yi kullanır.
 
-### <a name="create-and-delete-a-storage-container"></a>Oluşturma ve depolama kapsayıcısını silme
+### <a name="create-and-delete-a-storage-container"></a>Depolama kapsayıcısı oluşturma ve silme
 
-Ardından, oluşturmak ve karşılık gelen düğmesine bastığınızda, depolama kapsayıcısını silmek için kod ekleyin.
+Ardından, ilgili düğmeye bastığınızda depolama kapsayıcısını oluşturmak ve silmek için kod ekleyin.
 
 ```javascript
 const createContainer = async () => {
@@ -256,11 +254,11 @@ createContainerButton.addEventListener("click", createContainer);
 deleteContainerButton.addEventListener("click", deleteContainer);
 ```
 
-Bu kod ContainerURL çağırır [oluşturma](https://docs.microsoft.com/javascript/api/@azure/storage-blob/ContainerURL#create-aborter--icontainercreateoptions-) ve [Sil](https://docs.microsoft.com/javascript/api/@azure/storage-blob/ContainerURL#delete-aborter--icontainerdeletemethodoptions-) kullanmadan işlevleri bir [Aborter](https://docs.microsoft.com/javascript/api/@azure/storage-blob/aborter) örneği. Bu hızlı başlangıçta basit bir anlatım gözetildiği için bu kod, depolama hesabınız oluşturulduktan ve etkin olduğunu varsayar. Üretim kodunda Aborter örneği zaman aşımı işlevselliği eklemek için kullanın.
+Bu kod, [Aborter](https://docs.microsoft.com/javascript/api/@azure/storage-blob/aborter) örneği kullanmadan kapsayıcı URL 'si [oluşturma](https://docs.microsoft.com/javascript/api/@azure/storage-blob/containerclient#create-containercreateoptions-) ve [silme](https://docs.microsoft.com/javascript/api/@azure/storage-blob/containerclient#delete-containerdeletemethodoptions-) işlevlerini çağırır. Bu hızlı başlangıçta şeyleri basit tutmak için, bu kod depolama hesabınızın oluşturulduğunu ve etkinleştirildiğini varsayar. Üretim kodunda, zaman aşımı işlevselliği eklemek için bir Aborter örneği kullanın.
 
 ### <a name="list-blobs"></a>Blobları listeleme
 
-Ardından, tuşuna bastığınızda, depolama kapsayıcısını içeriğini listelemek için kod ekleyin **listesi dosyalar** düğmesi.
+Ardından, **liste dosyaları** düğmesine bastığınızda depolama kapsayıcısının içeriğini listelemek için kod ekleyin.
 
 ```javascript
 const listFiles = async () => {
@@ -292,11 +290,11 @@ const listFiles = async () => {
 listButton.addEventListener("click", listFiles);
 ```
 
-Bu kod [ContainerURL.listBlobFlatSegment](https://docs.microsoft.com/javascript/api/@azure/storage-blob/ContainerURL#listblobflatsegment-aborter--string--icontainerlistblobssegmentoptions-) tüm parçaları alındığından emin olmak için bir döngü işlevi. İsteğe bağlı olarak her bir kesim içeriyor ve güncelleştirmeleri blob öğeleri listesi döngü **dosyaları** listesi.
+Bu kod, tüm segmentlerin alındığından emin olmak için bir döngüde [Containerurl. Listblobyataysegment](https://docs.microsoft.com/javascript/api/@azure/storage-blob/containerclient#listblobsflat-containerlistblobsoptions-) işlevini çağırır. Her segment için, içerdiği blob öğeleri listesi üzerinde döngü yapılır ve **dosyalar** listesini güncelleştirir.
 
-### <a name="upload-blobs"></a>Blobları karşıya yüklemek
+### <a name="upload-blobs"></a>Blobları karşıya yükleme
 
-Ardından, dosyaları, tuşuna bastığınızda, depolama kapsayıcısına karşıya yüklemek için kod ekleyin **seçme ve dosyaları karşıya yükleme** düğmesi.
+Sonra, **dosyaları seç ve karşıya yükle** düğmesine bastığınızda dosyaları depolama kapsayıcısına yüklemek için kod ekleyin.
 
 ```javascript
 const uploadFiles = async () => {
@@ -320,11 +318,11 @@ selectButton.addEventListener("click", () => fileInput.click());
 fileInput.addEventListener("change", uploadFiles);
 ```
 
-Bu kod bağlanır **seçme ve dosyaları karşıya yükleme** düğmeye gizli `file-input` öğesi. Bu şekilde, düğmeyi `click` olayını harekete dosyası girişini `click` olay ve dosya seçici görüntülenir. Dosyaları seçin ve iletişim kutusunu kapatmak sonra `input` olayı oluşur ve `uploadFiles` işlevi çağrılır. Tarayıcı yalnızca bu işlevi çağıran [uploadBrowserDataToBlockBlob](https://docs.microsoft.com/javascript/api/@azure/storage-blob/#uploadbrowserdatatoblockblob-aborter--blob---arraybuffer---arraybufferview--blockbloburl--iuploadtoblockbloboptions-) seçtiğiniz her dosya için işlevi. Her çağrı bir listesine eklenir ve böylece bunların tümü aynı anda paralel olarak karşıya yüklenecek dosyaları neden bekleniyor olabilir bir Promise döndürür.
+Bu kod, **dosyaları seç ve karşıya yükle** düğmesini gizli `file-input` öğesine bağlar. Bu şekilde, düğme `click` olayı dosya girişi `click` olayını tetikler ve dosya seçiciyi görüntüler. Dosyaları seçtikten ve iletişim kutusunu kapattıktan sonra, `input` olay oluşur ve `uploadFiles` işlevi çağrılır. Bu işlev, seçtiğiniz her dosya için yalnızca Browser- [Uploadbrowserdatatoblockblob](https://docs.microsoft.com/javascript/api/@azure/storage-blob/blockblobclient#uploadbrowserdata-blob---arraybuffer---arraybufferview--blockblobparalleluploadoptions-) işlevini çağırır. Her çağrı, bir listeye eklenen bir Promise döndürür, böylece dosyalar paralel olarak karşıya yüklenmeye neden olur.
 
 ### <a name="delete-blobs"></a>Blob’ları silme
 
-Ardından, tuşuna bastığınızda, depolama kapsayıcısından dosyaları silmek için kod ekleyin **seçili dosyaları silmek** düğmesi.
+Ardından, **Seçili dosyaları sil** düğmesine bastığınızda depolama kapsayıcısından dosyaları silmek için kod ekleyin.
 
 ```javascript
 const deleteFiles = async () => {
@@ -348,19 +346,19 @@ const deleteFiles = async () => {
 deleteButton.addEventListener("click", deleteFiles);
 ```
 
-Bu kod [BlobURL.delete](https://docs.microsoft.com/javascript/api/@azure/storage-blob/BlobURL#delete-aborter--iblobdeleteoptions-) liste kutusunda seçili her dosyayı kaldırmak için işlevi. Ardından `listFiles` içeriğini yenilemek için daha önce gösterilen işlev **dosyaları** listesi.
+Bu kod, listede seçilen her dosyayı kaldırmak için [Bloburl. Delete](https://docs.microsoft.com/javascript/api/@azure/storage-blob/BlobURL#delete-aborter--iblobdeleteoptions-) işlevini çağırır. Daha sonra **Dosya** listesinin içeriğini yenilemek için daha önce gösterilen `listFiles` işlevini çağırır.
 
-### <a name="run-and-test-the-web-application"></a>Çalıştırma ve web uygulamasını test etme
+### <a name="run-and-test-the-web-application"></a>Web uygulamasını çalıştırma ve test etme
 
-Bu noktada, başlatın sayfa ve bir genel görünüm hakkında bilgi almak için deneme blob depolama çalışır. (Kapsayıcı oluşturduğunuz önce gibi dosyaları listelemek için çalıştığınızda) herhangi bir hata oluşursa, **durumu** bölmesinde alınan hata iletisi görüntülenir. Depolama API'leri tarafından döndürülen değerleri incelemek için JavaScript kodunda kesme noktaları da ayarlayabilirsiniz.
+Bu noktada, blob Storage 'ın nasıl çalıştığına ilişkin bir fikir almak için sayfayı ve denemeyi başlatabilirsiniz. Herhangi bir hata oluşursa (örneğin, kapsayıcıyı oluşturmadan önce dosyaları listeledikten sonra), **durum** bölmesinde alınan hata iletisi görüntülenir. Ayrıca, JavaScript kodunda, depolama API 'Leri tarafından döndürülen değerleri incelemek için kesme noktaları da ayarlayabilirsiniz.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu hızlı başlangıç sırasında oluşturulan kaynakları temizlemek için şuraya gidin: [Azure portalında](https://portal.azure.com) ve önkoşullar bölümünde oluşturduğunuz kaynak grubunu silin.
+Bu hızlı başlangıç sırasında oluşturulan kaynakları temizlemek için [Azure Portal](https://portal.azure.com) gidin ve Önkoşullar bölümünde oluşturduğunuz kaynak grubunu silin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta basit bir Web sitesi erişimi JavaScript tarayıcı tabanlı depolamadan blob oluşturdunuz. Kendi blob depolama, nasıl bir Web sitesi barındırabilirsiniz. bilgi edinmek için aşağıdaki öğreticiye geçin:
+Bu hızlı başlangıçta, tarayıcı tabanlı JavaScript 'ten blob depolamaya erişen basit bir Web sitesi oluşturdunuz. Blob depolamada bir Web sitesinin kendisini nasıl barındırabileceğinizi öğrenmek için aşağıdaki öğreticiye geçin:
 
 > [!div class="nextstepaction"]
-> [Blob Depolama üzerinde statik Web sitesi barındırma](https://docs.microsoft.com/azure/storage/blobs/storage-blob-static-website-host)
+> [Blob depolamada statik bir Web sitesi barındırma](https://docs.microsoft.com/azure/storage/blobs/storage-blob-static-website-host)

@@ -1,68 +1,68 @@
 ---
-title: LUIS ve QnAMaker - Bot tümleştirme
+title: LUSıS ve QnAMaker-bot tümleştirmesi
 titleSuffix: Azure Cognitive Services
-description: Soru-cevap Oluşturucu bankanızı büyük büyüdükçe, tek tek parça bir ayarlayın ve Bilgi Bankası daha küçük mantıksal parçalara bölmek için gerekir bakımını yapmak zor hale gelir.
+description: Soru-Cevap Oluşturma bilgi tabanınız büyüdükçe büyük bir tek tek tek parçalı bir küme olarak korunması zor olur ve bilgi bankasını daha küçük mantıksal parçalara bölmek için bir gereksinim vardır.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: article
-ms.date: 06/11/2019
+ms.date: 09/26/2019
 ms.author: diberry
 ms.custom: seodec18
-ms.openlocfilehash: 1792cf2359caef3211b4ce1ac86928eeb85d682b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7e1ea234bde96ce84259841bbc592bf6373bc639
+ms.sourcegitcommit: 4f3f502447ca8ea9b932b8b7402ce557f21ebe5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67053169"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71802803"
 ---
-# <a name="use-bot-with-qna-maker-and-luis-to-distribute-your-knowledge-base"></a>Bilgi bankanızı dağıtmak için soru-cevap oluşturucu ve LUIS ile bot kullanın
-Soru-cevap Oluşturucu bankanızı büyük büyüdükçe, tek tek parça bir ayarlayın ve Bilgi Bankası daha küçük mantıksal parçalara bölmek için gerekir bakımını yapmak zor hale gelir.
+# <a name="use-bot-with-qna-maker-and-luis-to-distribute-your-knowledge-base"></a>Bilgi tabanınızı dağıtmak için Soru-Cevap Oluşturma ve LUO ile bot kullanın
+Soru-Cevap Oluşturma bilgi tabanınız büyüdükçe büyük bir tek tek tek parçalı bir küme olarak korunması zor olur ve bilgi bankasını daha küçük mantıksal parçalara bölmek için bir gereksinim vardır.
 
-Soru-cevap oluşturucu içinde birden çok bilgi bankaları oluşturmak kolay olsa da, uygun Bilgi Bankası'na gelen soru yönlendirmek için mantığa ihtiyacınız olacak. LUIS kullanarak bunu yapabilirsiniz.
+Soru-Cevap Oluşturma ' de birden fazla bilgi tabanı oluşturmak basit olsa da, gelen soruyu ilgili Bilgi Bankası 'na yönlendirmek için bir mantığın olması gerekir. Bunu LUSıS kullanarak yapabilirsiniz.
 
-Bu makalede, Bot Framework v3 SDK'sını kullanır. Lütfen bu makaleye [Bot Framework makale](https://docs.microsoft.com/azure/bot-service/bot-builder-tutorial-dispatch?view=azure-bot-service-4.0&tabs=csharp), Bot Framework v4 SDK sürümünde bu bilgilerin ilgileniyorsanız.
+Bu makalede, bot Framework v3 SDK kullanılmaktadır. Bu bilgilerin bot Framework v4 SDK sürümü ile ilgileniyorsanız lütfen bu [bot Framework makalesine](https://docs.microsoft.com/azure/bot-service/bot-builder-tutorial-dispatch?view=azure-bot-service-4.0&tabs=csharp)bakın.
 
 ## <a name="architecture"></a>Mimari
 
-![Language Understanding mimarisi ile soru-cevap Oluşturucu](../media/qnamaker-tutorials-qna-luis/qnamaker-luis-architecture.PNG)
+![Language Understanding mimarisiyle Soru-Cevap Oluşturma](../media/qnamaker-tutorials-qna-luis/qnamaker-luis-architecture.PNG)
 
-Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modelden alır ve doğru soru-cevap Oluşturucu Bilgi Bankası'na yönlendirmek için bunu kullanın.
+Yukarıdaki senaryoda, Soru-Cevap Oluşturma ilk olarak bir LUO modelinden gelen sorunun amacını alır ve bunu, doğru Soru-Cevap Oluşturma bilgi tabanına yönlendirmek için kullanır.
 
-## <a name="create-a-luis-app"></a>Bir LUIS uygulaması oluşturma
+## <a name="create-a-luis-app"></a>LUSıS uygulaması oluşturma
 
-1. Oturum [LUIS](https://www.luis.ai/) portalı.
-1. [Uygulama oluşturma](https://docs.microsoft.com/azure/cognitive-services/luis/create-new-app).
-1. [Bir ekleme](https://docs.microsoft.com/azure/cognitive-services/luis/add-intents) her soru-cevap Oluşturucu Bilgi Bankası için. Örnek konuşma soru-cevap Oluşturucu bilgi bankalarından karşılık gelmelidir.
-1. [LUIS uygulaması eğitme](https://docs.microsoft.com/azure/cognitive-services/luis/luis-how-to-train) ve [LUIS uygulaması yayımlama](https://docs.microsoft.com/azure/cognitive-services/luis/publishapp) LUIS uygulamanızı.
-1. İçinde **Yönet** bölümünde, LUIS uygulama kimliği, LUIS uç noktası anahtarı Not ve ana bölge. Bu değerler daha sonra gerekecektir. 
+1. [Lui](https://www.luis.ai/) portalında oturum açın.
+1. [Uygulama oluşturun](https://docs.microsoft.com/azure/cognitive-services/luis/create-new-app).
+1. Her Soru-Cevap Oluşturma Bilgi Bankası için [bir amaç ekleyin](https://docs.microsoft.com/azure/cognitive-services/luis/add-intents) . Örnek, Soru-Cevap Oluşturma bilgi bankasındaki sorulara karşılık gelmelidir.
+1. Lusıs uygulamasını [eğitme](https://docs.microsoft.com/azure/cognitive-services/luis/luis-how-to-train) ve LUSıS uygulamasını halsıs uygulamanızın [yayımlaması](https://docs.microsoft.com/azure/cognitive-services/luis/publishapp) .
+1. **Yönet** bölümünde, lusıs uygulama KIMLIĞINIZI, lusıs bitiş noktası anahtarınızı ve [özel etki alanı adını](../../cognitive-services-custom-subdomains.md)unutmayın. Bu değerlere daha sonra ihtiyacınız olacak. 
 
-## <a name="create-qna-maker-knowledge-bases"></a>Soru-cevap Oluşturucu bilgi bankaları oluşturmak
+## <a name="create-qna-maker-knowledge-bases"></a>Soru-Cevap Oluşturma bilgi tabanları oluşturun
 
-1. Oturum [soru-cevap Oluşturucu](https://qnamaker.ai).
-1. [Oluşturma](https://www.qnamaker.ai/Create) bir bilgi bankaları için her amaca LUIS uygulaması.
-1. Test edin ve bilgi bankalarından yayımlayın. Her KB Yayımla'nı bb Kimliğini not edin, ana bilgisayar (alt etki alanı önce _.azurewebsites.net/qnamaker_) ve yetkilendirme uç noktası anahtarı. Bu değerler daha sonra gerekecektir. 
+1. [Soru-cevap oluşturma](https://qnamaker.ai)oturum açın.
+1. LUSıS uygulamasındaki her amaç için bir Bilgi Bankası temeli [oluşturun](https://www.qnamaker.ai/Create) .
+1. Bilgi temellerini test edin ve yayımlayın. Her bir KB 'yi yayımladığınızda, KB KIMLIĞI, kaynak adı ( _. azurewebsites.net/qnamaker_öncesi özel alt etki alanı) ve yetkilendirme uç noktası anahtarı hakkında bilgi alın. Bu değerlere daha sonra ihtiyacınız olacak. 
 
-    Bu makalede, tüm Azure soru-cevap Oluşturucu aynı abonelikte oluşturulan KB'leri varsayılır.
+    Bu makalede, KBs 'lerin aynı Azure Soru-Cevap Oluşturma aboneliğinde oluşturulduğu varsayılır.
 
-    ![Soru-cevap Oluşturucu HTTP isteği](../media/qnamaker-tutorials-qna-luis/qnamaker-http-request.png)
+    ![HTTP isteğini Soru-Cevap Oluşturma](../media/qnamaker-tutorials-qna-luis/qnamaker-http-request.png)
 
-## <a name="web-app-bot"></a>Web app Botu
+## <a name="web-app-bot"></a>Web uygulaması bot
 
-1. [Bir "Temel" Web App botu oluşturun](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart?view=azure-bot-service-4.0) LUIS uygulaması otomatik olarak içerir. ' % S ' 4.x SDK'yı seçin ve C# programlama dilidir.
+1. Bir LUO uygulamasını otomatik olarak içeren [bir "temel" Web uygulaması bot oluşturun](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart?view=azure-bot-service-4.0) . Programlama C# dilini seçin.
 
-1. Web app botu oluşturulduğunda, Azure portalında web app botu seçin.
-1. Seçin **uygulama ayarları** Web app botu hizmeti Gezinti ardından aşağı kaydırarak **uygulama ayarları** kullanılabilir Ayarlar bölümünde.
-1. Değişiklik **LuisAppId** ve önceki bölümde ardından select oluşturulan LUIS uygulaması değerine **Kaydet**.
+1. Web uygulaması bot oluşturulduktan sonra, Azure portal web uygulaması bot ' ı seçin.
+1. Web uygulaması bot hizmeti gezinmede **uygulama ayarları** ' nı seçin, sonra da kullanılabilir ayarlar ' ın **uygulama ayarları** bölümüne gidin.
+1. **Luisappıd** 'yi, önceki bölümde oluşturulan Luo uygulamasının değerine değiştirin ve ardından **Kaydet**' i seçin.
 
 
-## <a name="change-code-in-basicluisdialogcs"></a>BasicLuisDialog.cs kodda değişiklik
-1. Gelen **Bot Yönetim** select Azure portalında web app botu Gezinti bölümde **yapı**.
-2. Seçin **açık çevrimiçi Kod Düzenleyicisi**. İle çevrimiçi düzenleme ortamınızda yeni bir tarayıcı sekmesi açılır. 
-3. İçinde **WWWROOT** bölümünden **iletişim kutuları** dizinine sonra da açık **BasicLuisDialog.cs**.
-4. Bağımlılıkları üst kısmına ekleyin **BasicLuisDialog.cs** dosyası:
+## <a name="change-code-in-basicluisdialogcs"></a>BasicLuisDialog.cs 'de kodu değiştirme
+1. Azure portal web uygulaması bot 'ın **bot Management** bölümünden **Oluştur**' u seçin.
+2. **Çevrimiçi Kod Düzenleyiciyi Aç**' ı seçin. Çevrimiçi düzen ortamı ile yeni bir tarayıcı sekmesi açılır. 
+3. **Wwwroot** bölümünde, **iletişim kutuları** dizinini seçip **BasicLuisDialog.cs**açın.
+4. **BasicLuisDialog.cs** dosyasının en üstüne bağımlılıklar ekleyin:
 
     ```csharp
     using System;
@@ -76,7 +76,7 @@ Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modeld
     using System.Text;
     ```
 
-5. Ekleme aşağıdaki soru-cevap Oluşturucu yanıt seri durumdan çıkarmak için sınıflar:
+5. Soru-Cevap Oluşturma yanıtının serisini kaldırmak için aşağıdaki sınıfları ekleyin:
 
     ```csharp
     public class Metadata
@@ -103,19 +103,19 @@ Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modeld
     ```
 
 
-6. Soru-cevap Oluşturucu hizmeti için bir HTTP isteği yapmak için aşağıdaki sınıf ekleyin. Dikkat **yetkilendirme** üst bilginin değeri içeren bir word `EndpointKey` sözcüğünü izleyen bir alana sahip. JSON sonuç önceki sınıflara seri durumdan ve ilk yanıt döndürülür.
+6. Soru-Cevap Oluşturma hizmetine bir HTTP isteği oluşturmak için aşağıdaki sınıfı ekleyin. **Yetkilendirme** üstbilgisinin değeri, sözcükten sonraki bir boşluk ile `EndpointKey` sözcüklerini içerdiğine dikkat edin. JSON sonucunun önceki sınıflarda serisi kaldırıldı ve ilk yanıt döndürülür.
 
     ```csharp
     [Serializable]
     public class QnAMakerService
     {
-        private string qnaServiceHostName;
+        private string qnaServiceResourceName;
         private string knowledgeBaseId;
         private string endpointKey;
 
-        public QnAMakerService(string hostName, string kbId, string endpointkey)
+        public QnAMakerService(string resourceName, string kbId, string endpointkey)
         {
-            qnaServiceHostName = hostName;
+            qnaServiceResourceName = resourceName;
             knowledgeBaseId = kbId;
             endpointKey = endpointkey;
 
@@ -136,7 +136,7 @@ Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modeld
         }
         public async Task<string> GetAnswer(string question)
         {
-            string uri = qnaServiceHostName + "/qnamaker/knowledgebases/" + knowledgeBaseId + "/generateAnswer";
+            string uri = qnaServiceResourceName + "/qnamaker/knowledgebases/" + knowledgeBaseId + "/generateAnswer";
             string questionJSON = "{\"question\": \"" + question.Replace("\"","'") +  "\"}";
 
             var response = await Post(uri, questionJSON);
@@ -155,7 +155,7 @@ Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modeld
     ```
 
 
-7. BasicLuisDialog sınıfı değiştirin. Her LUIS hedefi bir yöntem ile donatılmış olmalıdır **LuisIntent**. Düzenleme parametresi gerçek LUIS hedefi addır. Donatılmış yöntem adı _gereken_ LUIS hedefi ad okunabilirliği ve bakım için ancak Tasarım aynı olması veya çalışma zamanı gerekli değildir.  
+7. BasicLuisDialog sınıfını değiştirin. Her bir LUIN amacı, **Luisamaç**ile donatılmış bir yönteme sahip olmalıdır. Dekorasyonu parametresi gerçek LUO amaç adıdır. Donatılmış Yöntem adı, okunabilirlik ve bakım için LUıN amaç _adı olmalıdır,_ ancak tasarım veya çalışma zamanında aynı olması gerekmez.  
 
     ```csharp
     [Serializable]
@@ -169,7 +169,7 @@ Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modeld
         // QnA Maker global settings
         // assumes all KBs are created with same Azure service
         static string qnamaker_endpointKey = "<QnA Maker endpoint KEY>";
-        static string qnamaker_endpointDomain = "my-qnamaker-s0-s";
+        static string qnamaker_resourceName = "my-qnamaker-s0-s";
         
         // QnA Maker Human Resources Knowledge base
         static string HR_kbID = "<QnA Maker KNOWLEDGE BASE ID>";
@@ -178,8 +178,8 @@ Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modeld
         static string Finance_kbID = "<QnA Maker KNOWLEDGE BASE ID>";
 
         // Instantiate the knowledge bases
-        public QnAMakerService hrQnAService = new QnAMakerService("https://" + qnamaker_endpointDomain + ".azurewebsites.net", HR_kbID, qnamaker_endpointKey);
-        public QnAMakerService financeQnAService = new QnAMakerService("https://" + qnamaker_endpointDomain + ".azurewebsites.net", Finance_kbID, qnamaker_endpointKey);
+        public QnAMakerService hrQnAService = new QnAMakerService("https://" + qnamaker_resourceName + ".azurewebsites.net", HR_kbID, qnamaker_endpointKey);
+        public QnAMakerService financeQnAService = new QnAMakerService("https://" + qnamaker_resourceName + ".azurewebsites.net", Finance_kbID, qnamaker_endpointKey);
 
         public BasicLuisDialog() : base(new LuisService(new LuisModelAttribute(
             LUIS_appId,
@@ -223,21 +223,21 @@ Yukarıdaki senaryoda soru-cevap Oluşturucu önce gelen soru amacı LUIS modeld
     ```
 
 
-## <a name="build-the-bot"></a>Bot oluşturma
-1. Kod Düzenleyicisi'nde sağ `build.cmd` seçip **konsolundan çalıştırın**.
+## <a name="build-the-bot"></a>Bot 'ı oluşturma
+1. Kod Düzenleyicisi 'nde, `build.cmd` ' a sağ tıklayıp **konsolundan Çalıştır**' ı seçin.
 
-    ![konsolundan çalıştırın](../media/qnamaker-tutorials-qna-luis/run-from-console.png)
+    ![konsoldan Çalıştır](../media/qnamaker-tutorials-qna-luis/run-from-console.png)
 
-2. Kod görünümü, bir terminal penceresi yapının sonuçlarını ve ilerleme durumunu gösteren değiştirilir.
+2. Kod görünümü, oluşturma işleminin ilerleme durumunu ve sonuçlarını gösteren bir Terminal penceresiyle değiştirilmiştir.
 
-    ![Konsol derleme](../media/qnamaker-tutorials-qna-luis/console-build.png)
+    ![Konsol derlemesi](../media/qnamaker-tutorials-qna-luis/console-build.png)
 
-## <a name="test-the-bot"></a>Bot test
-Azure portalında **Test Web sohbeti içinde** bot test etmek için. Karşılık gelen Bilgi Bankası'ndaki yanıt almak için farklı amaçlarla gelen iletileri yazın.
+## <a name="test-the-bot"></a>Bot 'ı test etme
+Azure portal, bot 'ı test etmek için **Web sohbetinde test '** i seçin. Karşılık gelen bilgi bankasından yanıt almak için farklı amaçlardan iletiler yazın.
 
-![Web sohbeti test](../media/qnamaker-tutorials-qna-luis/qnamaker-web-chat.png)
+![Web sohbeti testi](../media/qnamaker-tutorials-qna-luis/qnamaker-web-chat.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Soru-cevap Oluşturucu için bir iş süreklilik planı oluşturma](../How-To/business-continuity-plan.md)
+> [Soru-Cevap Oluşturma için iş sürekliliği planı oluşturma](../How-To/business-continuity-plan.md)

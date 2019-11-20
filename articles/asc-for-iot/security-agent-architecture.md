@@ -1,69 +1,66 @@
 ---
-title: IOT güvenlik Aracı Mimarisi Önizleme için Azure Güvenlik Merkezi'ni anlama | Microsoft Docs
-description: Azure Güvenlik Merkezi'nde IOT hizmeti için kullanılan aracıları için güvenlik aracı mimarisini anlama.
+title: IoT güvenlik Aracısı mimarisi için Azure Güvenlik Merkezi 'ni anlama | Microsoft Docs
+description: IoT hizmeti için Azure Güvenlik Merkezi 'nde kullanılan aracılar için güvenlik Aracısı mimarisini anlayın.
 services: asc-for-iot
-ms.service: ascforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: e78523ae-d70a-456a-818d-f8b1b025d7cb
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/25/2019
+ms.date: 07/26/2019
 ms.author: mlottner
-ms.openlocfilehash: 3c05b7e9b1c6d1b9214da168f7abfcbb322f8f6d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 998aeab197931a75579fc39b28e3a248b85fc57b
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65192527"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68596915"
 ---
-# <a name="security-agent-reference-architecture"></a>Güvenlik aracı başvuru mimarisi
+# <a name="security-agent-reference-architecture"></a>Güvenlik Aracısı başvuru mimarisi
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+IoT için Azure Güvenlik Merkezi, IoT Hub aracılığıyla güvenlik verilerini günlüğe kaydetmek, işlemek, toplamak ve göndermek için kullanılan güvenlik aracıları için başvuru mimarisi sağlar.
 
+Güvenlik aracıları kısıtlanmış bir IoT ortamında çalışacak şekilde tasarlanmıştır ve kullandıkları kaynaklarla karşılaştırıldığında bunların sağladığı değer bakımından yüksek düzeyde özelleştirilebilir.
 
-IOT için Azure Güvenlik Merkezi (ASC), oturum, işlemek, toplama ve güvenlik verileri IOT hub'ı üzerinden göndermek güvenlik aracılar için başvuru mimarisi sağlar.
+Güvenlik aracıları aşağıdaki özellikleri destekler:
 
-Güvenlik aracıları kısıtlanmış bir IOT ortamda çalışacak şekilde tasarlanmıştır ve değerleri kullandıkları kaynaklar için karşılaştırıldığında sağlamak açısından tümüyle özelleştirilebilir.
+- Temel Işletim sisteminden (Linux, Windows) ham güvenlik olayları toplayın. Kullanılabilir güvenlik veri toplayıcıları hakkında daha fazla bilgi edinmek için bkz. [IoT Aracısı yapılandırması Için Azure Güvenlik Merkezi](how-to-agent-configuration.md).
 
-Güvenlik aracıları, aşağıdaki özellikleri destekler:
+- Ham güvenlik olaylarını IoT Hub aracılığıyla gönderilen iletilere toplayın.
 
-- Ham güvenlik olayları alttaki işletim sisteminden (Linux, Windows) toplayın. Kullanılabilir güvenlik veri toplayıcıları hakkında daha fazla bilgi için bkz: [ASC IOT Aracısı yapılandırması için](how-to-agent-configuration.md).
+- Mevcut cihaz kimliğiyle veya ayrılmış bir modül kimliğiyle kimlik doğrulaması yapın. Daha fazla bilgi için bkz. [Güvenlik Aracısı kimlik doğrulama yöntemleri](concept-security-agent-authentication-methods.md) .
 
-- IOT hub'ı aracılığıyla gönderilen iletilere ham güvenlik olaylarını toplama.
+- **Azureiotsecurity** modülünün kullanımı üzerinden uzaktan yapılandırma ikizi. Daha fazla bilgi için bkz. [IoT Aracısı Için Azure Güvenlik Merkezi 'Ni yapılandırma](how-to-agent-configuration.md).
 
-- Var olan bir cihaz kimliği veya adanmış modül kimliği ile kimlik doğrulaması. Bkz: [güvenlik aracı kimlik doğrulama yöntemleri](concept-security-agent-authentication-methods.md) daha fazla bilgi için.
+IoT güvenlik aracıları için Azure Güvenlik Merkezi, açık kaynaklı projeler olarak geliştirilmiştir ve GitHub 'dan kullanılabilir: 
 
-- Aracılığıyla uzaktan yapılandırma **azureiotsecurity** modül ikizi. Daha fazla bilgi için bkz. [bir ASC IOT aracısı için yapılandırma](how-to-agent-configuration.md).
+- [IoT C tabanlı aracı için Azure Güvenlik Merkezi](https://github.com/Azure/Azure-IoT-Security-Agent-C) 
+- [IoT C#tabanlı aracı Için Azure Güvenlik Merkezi](https://github.com/Azure/Azure-IoT-Security-Agent-CS)
 
-ASC IOT güvenlik aracılar için açık kaynaklı proje olarak geliştirilir ve Github'dan kullanılabilir: 
+## <a name="agent-supported-platforms"></a>Aracılı desteklenen platformlar
 
-- [ASC için IOT C tabanlı aracı](https://github.com/Azure/Azure-IoT-Security-Agent-C) 
-- [IOT için ASC C#-tabanlı aracı](https://github.com/Azure/Azure-IoT-Security-Agent-CS)
+IoT için Azure Güvenlik Merkezi, 32 bit ve 64bit Windows için farklı yükleyici aracıları ve 32bit ve 64bit Linux için de aynıdır. Aşağıdaki tabloya göre cihazlarınızın her biri için doğru aracı yükleyicisine sahip olduğunuzdan emin olun:
 
-## <a name="agent-supported-platforms"></a>Aracı, desteklenen platformlar
-
-IOT için ASC, 32 bit ve 64 bit Windows için farklı bir yükleyici aracıları ve 32 bit ve 64 bit Linux için aynı sunar. Aşağıdaki tabloda cihazlarınızın her biri için doğru aracı yükleyicisini olduğundan emin olun:
-
-| 32 veya 64 bit | Linux | Windows |    Ayrıntılar|
+| Mimari | Linux | Windows |    Ayrıntılar|
 |----------|----------------------------------------------|-------------|-------------------------------------------|
-| 32 bit  | C  | C#  ||
-| 64 bit  | C#veya C           | C#      | Minimum kaynakları ile cihazları için C Aracısı'nı kullanın|
+| bit  | C  | C#  ||
+| 64  | C#veya C           | C#      | Daha kısıtlı veya en az cihaz kaynağı olan cihazlar için C Aracısı kullanmanızı öneririz.|
+|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, IOT güvenlik aracı mimarisi ve kullanılabilir yükleyicileri hakkında ASC öğrendiniz.
+Bu makalede IoT güvenlik Aracısı mimarisi ve kullanılabilir yükleyiciler için Azure Güvenlik Merkezi hakkında bilgi edindiniz.
 
-ASC ile IOT dağıtımı için Başlarken devam etmek için aşağıdaki makaleleri kullanın:
+IoT dağıtımı için Azure Güvenlik Merkezi 'ni kullanmaya devam etmek için aşağıdaki makaleleri kullanın:
 
-- Anlamak [güvenlik aracı kimlik doğrulama yöntemleri](concept-security-agent-authentication-methods.md)
-- Seçin ve dağıtan bir [güvenlik aracı](how-to-deploy-agent.md)
-- ASC gözden geçirmek için IOT [hizmet önkoşulları](service-prerequisites.md)
-- Bilgi edinmek için nasıl [ASC etkinleştirmek için IOT hub'ınızdaki IOT hizmeti](quickstart-onboard-iot-hub.md)
-- Hizmet hakkında daha fazla bilgi [ASC için IOT hakkında SSS](resources-frequently-asked-questions.md)
+- [Güvenlik Aracısı kimlik doğrulama yöntemlerini](concept-security-agent-authentication-methods.md) anlama
+- [Güvenlik aracısını](how-to-deploy-agent.md) seçme ve dağıtma
+- IoT [hizmeti önkoşulları](service-prerequisites.md) Için Azure Güvenlik Merkezi 'ni gözden geçirin
+- [IoT Hub IoT hizmeti Için Azure Güvenlik Merkezi](quickstart-onboard-iot-hub.md) 'ni nasıl etkinleştirebileceğinizi öğrenin
+- [IoT Için Azure Güvenlik Merkezi](resources-frequently-asked-questions.md) 'nden hizmet hakkında daha fazla bilgi edinin

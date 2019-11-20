@@ -1,73 +1,73 @@
 ---
-title: Dağıtıma genel bakış - Azure için Avere vFXT
-description: Azure için Avere vFXT dağıtımı genel bakış
+title: Dağıtıma genel bakış-Azure için avere vFXT
+description: Azure için avere vFXT dağıtmaya genel bakış
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 02/20/2019
-ms.author: v-erkell
-ms.openlocfilehash: 88305e5d877f5bc3cc7ebb116f69b0f49f162b79
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: 9684b230b8790e36cd7442c65481c0c71ce185d6
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60409929"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72255416"
 ---
-# <a name="avere-vfxt-for-azure---deployment-overview"></a>Azure - dağıtıma genel bakış için Avere vFXT
+# <a name="avere-vfxt-for-azure---deployment-overview"></a>Azure için avere vFXT-dağıtıma genel bakış
 
-Bu makalede, Azure kümesi ayarlama ve çalıştırma için Avere vFXT erişmek için gerekli adımlara genel bir bakış sağlar.
+Bu makale, Azure kümesi için avere vFXT 'nin çalışır duruma getirmek için gereken adımlara genel bir bakış sunar.
 
-Çeşitli görevleri önce ve Azure Marketi'nde vFXT küme oluşturduktan sonra gereklidir. Başlangıç ve bitiş işleminin NET bir fikir gereken çaba kapsam yardımcı olur. 
+Azure Marketi 'nden vFXT kümesini oluşturmadan önce ve sonra birkaç görev gereklidir. Baştan sona işlemin bitmesine açık olması, gereken çabaların kapsamını belirlemenize yardımcı olur. 
 
 ## <a name="deployment-steps"></a>Dağıtım adımları
 
-Sonra [sisteminizi planlama](avere-vfxt-deploy-plan.md), Avere vFXT kümenizi oluşturmak başlayabilirsiniz. 
+[Sisteminizi planlamadan](avere-vfxt-deploy-plan.md)sonra, avere vFXT kümenizi oluşturmaya başlayabilirsiniz. 
 
-Azure Marketi'nde bir Azure Resource Manager şablonu, gerekli bilgileri toplar ve tüm küme otomatik olarak dağıtır. 
+Azure Marketi 'ndeki bir Azure Resource Manager şablonu, gerekli bilgileri toplar ve tüm kümeyi otomatik olarak dağıtır. 
 
-VFXT küme çalışır duruma geldikten sonra istemcilerin kendisine bağlanıp nasıl kattığını bilmek isteyecektir ve gerekirse, yeni Blob Depolama kapsayıcısına verilerinizi taşıma.  
+VFXT kümesi çalışır duruma geçtikten sonra, istemcilerin bu sunucuya nasıl bağlanacağını ve gerekirse verilerinizi yeni BLOB depolama kapsayıcısına nasıl taşıyabileceğinizi bilmeniz gerekir.  
 
-Tüm adımlar bir genel bakış aşağıda verilmiştir.
+Tüm adımlara genel bakış aşağıda verilmiştir.
 
 1. Önkoşulları yapılandırma 
 
-   VM oluşturmadan önce Avere vFXT proje için yeni bir abonelik oluşturun, aboneliğin sahipliğini yapılandırmalı, kotalar denetleyin ve gereken ve Avere vFXT yazılımlarının kullanımı için koşulları kabul artışı isteyebilir. Okuma [Avere vFXT oluşturmak için hazırlık](avere-vfxt-prereqs.md) ayrıntılı yönergeler için.
+   Bir VM oluşturmadan önce, avere vFXT projesi için yeni bir abonelik oluşturmanız, abonelik sahipliğini yapılandırmanız, kotaları denetlemeniz ve gerekirse bir artış istemeniz ve avere vFXT yazılımının kullanımı için koşulları kabul etmeniz gerekir. Ayrıntılı yönergeler için [avere vFXT oluşturmayı hazırlama](avere-vfxt-prereqs.md) konusunu okuyun.
 
 1. Avere vFXT kümesi oluşturma 
 
-   Azure marketi, Azure kümesine için Avere vFXT oluşturmak için kullanın. Bir şablon için gerekli bilgileri toplar ve son ürün oluşturmak için komut dosyalarını çalıştırır.
+   Azure için avere vFXT 'yi oluşturmak için Azure Marketi 'ni kullanın. Şablon, gerekli bilgileri toplar ve son ürünü oluşturmak için betikleri yürütür.
 
-   Küme oluşturma, tüm Market şablonu tarafından gerçekleştirilen adımları içerir: 
+   Küme oluşturma işlemi, Market şablonu tarafından gerçekleştirilen bu adımları içerir: 
 
-   * Gerekirse, altyapı ve kaynak grupları, yeni ağ oluşturma
-   * Oluşturma bir *küme denetleyicisi*  
+   * Gerekirse yeni ağ altyapısı ve kaynak grupları oluşturuluyor
+   * *Küme denetleyicisi* oluşturma  
 
-     Avere vFXT kümenin aynı sanal ağda bulunan basit bir VM kümesi denetleyicisidir ve özel yazılım küme oluşturma ve yönetme için gerekli olan. Denetleyici vFXT düğümleri ve formları kümeyi oluşturur ve ayrıca bir yaşam süresi boyunca kümeyi yönetmek için bir komut satırı arabirimi sağlar.
+     Küme denetleyicisi, avere vFXT kümesiyle aynı sanal ağda bulunan ve kümeyi oluşturmak ve yönetmek için gerekli özel yazılıma sahip olan basit bir VM 'dir. Denetleyici, vFXT düğümlerini oluşturur ve kümeyi oluşturur ve ayrıca, yaşam süresi boyunca kümeyi yönetmek için bir komut satırı arabirimi sağlar.
 
-     Dağıtım sırasında yeni bir vnet oluşturun, denetleyiciniz bir genel IP adresi gerekir. Bu denetleyici küme sanal ağ dışında bağlamak için atlama konak olarak kullanılabileceği anlamına gelir.
+     Dağıtım sırasında yeni bir VNET oluşturursanız, denetleyicinizin genel bir IP adresi olur. Bu, denetleyicinin sanal ağın dışından kümeye bağlanmak için bir geçiş ana bilgisayarı olarak kullanılabileceği anlamına gelir.
 
-   * Küme düğümü sanal makineleri oluşturma
+   * Küme düğümü VM 'Leri oluşturma
 
-   * Küme düğümünü kümeyi oluşturmak için Vm'leri yapılandırma
+   * Küme düğümü VM 'lerini kümeyi oluşturacak şekilde yapılandırma
 
-   * İsteğe bağlı olarak, yeni bir Blob kapsayıcı oluşturma ve arka uç depolama kümesi için yapılandırma
+   * İsteğe bağlı olarak, yeni bir blob kapsayıcısı oluşturup küme için arka uç depolama olarak yapılandırma
 
 1. Kümeyi yapılandırma 
 
-   Avere vFXT yapılandırma arabiriminin (Avere küme ayarlarını özelleştirmek için Denetim Masası) bağlanın. İzleme desteği için iyileştirilmiş ve bir şirket içi veri merkezi kullanıyorsanız, depolama sistemi ekleyin.
+   Kümenin ayarlarını özelleştirmek için avere vFXT yapılandırma arabirimine (avere Denetim Masası) bağlanın. Destek izleme için kabul edin ve şirket içi veri merkezi kullanıyorsanız depolama sisteminizi ekleyin.
 
-   * [Erişim vFXT küme](avere-vfxt-cluster-gui.md)
-   * [Desteğini etkinleştir](avere-vfxt-enable-support.md)
+   * [VFXT kümesine erişme](avere-vfxt-cluster-gui.md)
+   * [Desteği etkinleştir](avere-vfxt-enable-support.md)
    * [Depolamayı yapılandırma](avere-vfxt-add-storage.md) (gerekirse)
 
-1. İstemciler bağlama
+1. İstemcileri bağla
 
-   Bölümündeki yönergeleri uygulayın [Avere vFXT küme bağlama](avere-vfxt-mount-clients.md) Yük Dengeleme ve istemci makineleri kümenin nasıl bağlama öğrenin.
+   Yük Dengeleme ve istemci makinelerin kümeyi nasıl bağlayacağınızı öğrenmek için [avere vFXT kümesini bağlama](avere-vfxt-mount-clients.md) bölümündeki yönergeleri izleyin.
 
-1. (Gerekirse) veri ekleme
+1. Veri Ekle (gerekirse)
 
-   Avere vFXT ölçeklenebilir çok istemci önbelleğini olduğundan, verileri yeni bir arka uç depolama kapsayıcısına taşımak için en iyi yolu çok istemci, birden çok iş parçacıklı bir dosya kopyalama ile stratejisidir. Okuma [vFXT kümeye veri taşıma](avere-vfxt-data-ingest.md) Ayrıntılar için.
+   Avere vFXT, ölçeklenebilir bir çoklu istemci önbelleği olduğundan, verileri yeni bir arka uç depolama kapsayıcısına taşımanın en iyi yolu çok istemcili, çok iş parçacıklı dosya kopyalama stratejisidir. Ayrıntılar için [verileri vFXT kümesine taşımayı](avere-vfxt-data-ingest.md) okuyun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Devam [Avere vFXT oluşturmak için hazırlık](avere-vfxt-prereqs.md) Avere vFXT dağıtmak için Azure başlangıç görevleri tamamlamak için. 
+Azure için avere vFXT 'yi dağıtmaya yönelik ön görevleri gerçekleştirmek üzere [avere vfxt oluşturmayı hazırlamaya](avere-vfxt-prereqs.md) devam edin. 

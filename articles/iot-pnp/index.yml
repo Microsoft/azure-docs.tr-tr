@@ -1,0 +1,74 @@
+### YamlMime:Landing
+title: IoT Tak Çalıştır Önizleme Belgeleri
+summary: IoT Tak Çalıştır Önizlemesi herhangi bir cihaz kodu yazmadan, bulut çözümlerinin cihazınızı otomatik olarak anlamasını ve cihazınızla etkileşime girmeye başlamasını sağlayan bir cihaz modeli tanımlamanızı sağlar.
+metadata:
+  title: IoT Tak Çalıştır Önizleme Belgeleri
+  description: IoT Tak Çalıştır Önizlemesi herhangi bir cihaz kodu yazmadan, bulut çözümlerinin cihazınızı otomatik olarak anlamasını ve cihazınızla etkileşime girmeye başlamasını sağlayan bir cihaz modeli tanımlamanızı sağlar.
+  services: iot-pnp
+  ms.service: iot-pnp
+  ms.topic: landing-page
+  author: dominicbetts
+  ms.author: dobett
+  manager: philmea
+  ms.date: 10/31/2019
+  ms.openlocfilehash: 442b9c5028ef899329912fa9d21ce780437d7970
+  ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73570186"
+landingContent:
+- title: IoT Tak Çalıştır hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: IoT Tak Çalıştır nedir?
+      url: overview-iot-plug-and-play.md
+  - linkListType: video
+    links:
+    - text: IoT Tak Çalıştır'a giriş
+      url: https://channel9.msdn.com/Shows/Internet-of-Things-Show/Introduction-to-IoT-Plug-and-Play/player
+- title: Cihazları geliştirme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: IoT Hub’a örnek cihaz bağlama
+      url: quickstart-connect-pnp-device.md
+    - text: IoT Central'a örnek cihaz bağlama
+      url: ../iot-central/quick-create-pnp-device-pnp.md?toc=/azure/iot-central-pnp/toc.json&bc=/azure/iot-central-pnp/breadcrumb/toc.json
+    - text: Cihaz oluşturmak amacıyla cihaz yetenek modelini kullanma
+      url: quickstart-create-pnp-device.md
+  - linkListType: tutorial
+    links:
+    - text: Visual Studio Code'u kullanarak cihaz yetenek modelini oluşturma ve test etme
+      url: tutorial-pnp-visual-studio-code.md
+    - text: Sertifikasyon için hazır cihaz oluşturma
+      url: tutorial-build-device-certification.md
+    - text: Cihazınız için sertifika alma
+      url: tutorial-certification-test.md
+  - linkListType: how-to-guide
+    links:
+    - text: Visual Studio Code için Azure IoT Tools’u kullanma
+      url: howto-develop-with-vs-vscode.md
+    - text: IoT için Microsoft Azure Sertifikalı portalına ekleme
+      url: howto-onboard-portal.md
+  - linkListType: concept
+    links:
+    - text: Ortak arabirimler
+      url: concepts-common-interfaces.md
+- title: Çözüm oluşturma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Çözümünüze bağlı bir cihazla etkileşim kurma
+      url: quickstart-connect-pnp-device-solution.md
+  - linkListType: concept
+    links:
+    - text: Model keşfi
+      url: concepts-model-discovery.md
+    - text: Ortak arabirimler
+      url: concepts-common-interfaces.md
+  - linkListType: how-to-guide
+    links:
+    - text: Çözümünüzden cihazlara bağlanma
+      url: howto-develop-solution.md

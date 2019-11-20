@@ -1,29 +1,29 @@
 ---
-title: Erişim Azure VMware çözümüyle CloudSimple - Portal
-description: VMware çözümü CloudSimple portalından Azure portalına erişin açıklar
+title: CloudSimple-Portal tarafından Azure VMware çözümüne erişin
+description: Azure portal 'ten CloudSimple portalı tarafından VMware çözümüne nasıl erişebileceğinizi açıklar
 author: sharaths-cs
 ms.author: b-shsury
 ms.date: 06/04/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 61c3d37f365034984231c780199e181872c010c6
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: 95d27bab243f6805436465f5027e519d33e20f6f
+ms.sourcegitcommit: 39d95a11d5937364ca0b01d8ba099752c4128827
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67544126"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69563229"
 ---
-# <a name="accessing-the-vmware-solution-by-cloudsimple-portal-from-azure-portal"></a>Azure portalından CloudSimple portal tarafından VMware çözümü erişme
+# <a name="access-the-vmware-solution-by-cloudsimple-portal-from-the-azure-portal"></a>Azure portal CloudSimple Portal tarafından kullanılan VMware çözümüne erişin
 
-Çoklu oturum açma CloudSimple portalına erişim için desteklenir. Azure portalında oturum açtıktan sonra yeniden imzalama olmadan CloudSimple portala erişebilirsiniz. İlk kez size erişim yetkisi vermek için istenirse CloudSimple portalı [CloudSimple hizmet yetkilendirme](#consent-to-cloudsimple-service-authorization-application) uygulama.  Yetkilendirme tek seferlik bir işlemdir.
+Çoklu oturum açma, CloudSimple portalına erişim için desteklenir. Azure portal oturum açtıktan sonra CloudSimple portalına yeniden oturum açmadan erişebilirsiniz. CloudSimple portalına ilk kez eriştiğinizde [Cloudsimple hizmet Yetkilendirme](#consent-to-cloudsimple-service-authorization-application) uygulamasını yetkilendirmeniz istenir.  Yetkilendirme, tek seferlik bir işlemdir.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Yerleşik kullanıcılarla **sahibi** ve **katkıda bulunan** rolleri CloudSimple portalına erişebilir.  Rolleri CloudSimple hizmet dağıtıldığı kaynak grubu üzerinde yapılandırılmalıdır.  Rolleri CloudSimple hizmet nesnesinde de yapılandırılabilir.  Rolünüz denetimi ile ilgili daha fazla bilgi için bkz: [rol atamalarını görüntüleyin](https://docs.microsoft.com/azure/role-based-access-control/check-access) makalesi.
+Yerleşik **sahibi** ve **katkıda bulunan** rollerine sahip kullanıcılar cloudsimple portalına erişebilir.  Rollerin, CloudSimple hizmeti 'nin dağıtıldığı kaynak grubunda yapılandırılması gerekir.  Roller, CloudSimple hizmeti nesnesinde de yapılandırılabilir.  Rolünüzü denetleme hakkında daha fazla bilgi için bkz. [rol atamalarını görüntüleme](https://docs.microsoft.com/azure/role-based-access-control/check-access) makalesi. Yalnızca yerleşik **sahibi** ve **katkıda bulunan** rollerine sahip kullanıcılar cloudsimple portalına erişebilir.  Rolün abonelikte yapılandırılması gerekir.  Rolünüzü denetleme hakkında daha fazla bilgi için bkz. [rol atamalarını görüntüleme](https://docs.microsoft.com/azure/role-based-access-control/check-access) makalesi.
 
-Özel roller kullanıyorsanız, rolü altında aşağıdaki işlemlerden birini olmalıdır ```Actions```.  Özel roller hakkında daha fazla bilgi için bkz. [Azure kaynakları için özel roller](https://docs.microsoft.com/azure/role-based-access-control/custom-roles).  İşlemlerden birini ise bir parçası ```NotActions```, kullanıcı portalı CloudSimple erişemez. 
+Özel roller kullanıyorsanız, rol altında ```Actions```aşağıdaki işlemlerden herhangi birine sahip olmalıdır.  Özel roller hakkında daha fazla bilgi için bkz. [Azure kaynakları Için özel roller](https://docs.microsoft.com/azure/role-based-access-control/custom-roles).  İşlemlerden herhangi biri bir parçasıysa ```NotActions```, Kullanıcı cloudsimple portalına erişemez.
 
 ```
 Microsoft.VMwareCloudSimple/*
@@ -40,36 +40,36 @@ Microsoft.VMwareCloudSimple/dedicatedCloudServices/*/write
 
 1. **Tüm Hizmetler**’i seçin.
 
-2. Arama **CloudSimple Hizmetleri**.
+2. **Cloudsimple Hizmetleri**için arama yapın.
 
-3. Özel bulut oluşturmak istediğiniz CloudSimple hizmeti seçin.
+3. Özel bulutunuzu oluşturmak istediğiniz CloudSimple hizmetini seçin.
 
-4. Üzerinde **genel bakış** sayfasında **CloudSimple Portal'a**.  CloudSimple portalı Azure portalından ilk kez erişiyorsanız yetkilendirmek için istenir [CloudSimple hizmet yetkilendirme](#consent-to-cloudsimple-service-authorization-application) uygulama. 
+4. **Genel bakış** sayfasında **Cloudsimple portalına git ' e**tıklayın.  CloudSimple portalına ilk kez Azure portal erişiyorsanız, [Cloudsimple hizmet Yetkilendirme](#consent-to-cloudsimple-service-authorization-application) uygulamasına yetki vermeniz istenir. 
 
-    ![CloudSimple portalını başlatma](media/launch-cloudsimple-portal.png)
+    ![CloudSimple portalını Başlat](media/launch-cloudsimple-portal.png)
 
-> [!TIP]
-> Doğrudan Azure portalından bir özel bulut işlemi (örneğin, oluşturma veya özel Bulutu genişletme) seçerseniz, belirtilen sayfaya CloudSimple portalı açılır.
+> [!NOTE]
+> Doğrudan Azure portal özel bir bulut işlemi seçerseniz (özel bir bulut oluşturma veya genişletme gibi), CloudSimple portalı belirtilen sayfada açılır.
 
-CloudSimple portalında **giriş** yan menüsünde özel Bulutlarınızın ilgili özet bilgiler görüntüler. Kaynaklarını ve kapasiteyi, özel bulut, uyarılar ve dikkat gerektiren görevler ile birlikte gösterilir. Ortak görevler için sayfanın üstündeki adlandırılmış simgeleri tıklatın.
+CloudSimple portalında yan menüden **giriş** ' i seçerek özel bulutlarınız hakkında özet bilgiler görüntüleyin. Özel bulutlarınızın kaynakları ve kapasitesi, dikkat gerektiren uyarılarla ve görevlerle birlikte gösterilir. Ortak görevler için sayfanın üst kısmındaki adlandırılmış simgeler ' e tıklayın.
 
 ![Giriş sayfası](media/cloudsimple-portal-home.png)
 
-## <a name="consent-to-cloudsimple-service-authorization-application"></a>Hizmet yetkilendirme CloudSimple uygulama onayı
+## <a name="consent-to-cloudsimple-service-authorization-application"></a>CloudSimple hizmet Yetkilendirme uygulamasına izin verme
 
-CloudSimple portaldan Azure portalını ilk kez çalıştırdığınızda CloudSimple hizmet yetkilendirme uygulama için onay gerektirir.  Seçin **kabul** CloudSimple portala erişmek ve istenen izinler. 
+CloudSimple portalının ilk kez Azure portal başlatılması, CloudSimple hizmet Yetkilendirme uygulaması için izin vermenizi gerektirir.  İstenen izinleri vermek ve CloudSimple portalına erişmek için **kabul et** ' i seçin.
 
-![CloudSimple hizmet yetkilendirme - Yöneticiler onayı](media/cloudsimple-azure-consent.png)
+![CloudSimple hizmet yetkilendirmesi-Yöneticiler için onay](media/cloudsimple-azure-consent.png)
 
-Genel yönetici ayrıcalığı varsa, kuruluşunuz için onay verebilir.  Seçin **onay kuruluşunuz adına**.
+Genel yönetici ayrıcalıklarınız varsa, kuruluşunuza izin verebilirsiniz.  **Kuruluşunuz adına izin '** yı seçin.
 
-![CloudSimple hizmet yetkilendirme - genel yönetici onayı](media/cloudsimple-azure-consent-global-admin.png)
+![CloudSimple hizmet yetkilendirmesi onayı-genel yönetici](media/cloudsimple-azure-consent-global-admin.png)
 
-İzinlerinizi CloudSimple portalına erişim izin vermiyorsa, gerekli izinleri vermek için kiracınızın genel yönetici ile iletişime geçin.  Kuruluşunuz adına bir genel yönetici onay verebilir.
+İzinleriniz CloudSimple portalına erişime izin vermezse, gerekli izinleri vermek için kiracınızın genel yöneticisine başvurun.  Genel yönetici, kuruluşunuzun adına izin verebilir.
 
-![CloudSimple hizmeti yetkilendirme için onay - Yöneticiler gerektirir](media/cloudsimple-azure-consent-requires-administrator.png)
+![CloudSimple hizmet yetkilendirmesi onayı-Yöneticiler gerektirir](media/cloudsimple-azure-consent-requires-administrator.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bilgi edinmek için nasıl [özel bulut oluşturma](https://docs.azure.cloudsimple.com/create-private-cloud/)
-* Bilgi edinmek için nasıl [bir özel bulut ortamı yapılandırma](quickstart-create-private-cloud.md)
+* [Özel bulut oluşturmayı](https://docs.azure.cloudsimple.com/create-private-cloud/) öğrenin
+* [Özel bir bulut ortamını yapılandırmayı](quickstart-create-private-cloud.md) öğrenin

@@ -9,11 +9,11 @@ ms.date: 04/24/2018
 ms.author: lizross
 ms.custom: include file
 ms.openlocfilehash: f2927bb10c282218e378f0f12a22cb1bfcdc9154
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
-ms.translationtype: MT
+ms.sourcegitcommit: 3e7646d60e0f3d68e4eff246b3c17711fb41eeda
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
+ms.lasthandoff: 09/11/2019
 ms.locfileid: "67112981"
 ---
 >[!NOTE] 
->Görüntüleme ya da kişisel verileri silme hakkında daha fazla bilgi için bkz: [GDPR veri sahibi isteklerini Azure](https://docs.microsoft.com/microsoft-365/compliance/gdpr-dsr-azure). GDPR hakkında daha fazla bilgi için bkz: [hizmet güveni portalı GDPR bölümünü](https://servicetrust.microsoft.com/ViewPage/GDPRGetStarted).
+>Kişisel verileri görüntüleme veya silme hakkında bilgi için bkz. [GDPR için Azure Veri Nesnesi İstekleri](https://docs.microsoft.com/microsoft-365/compliance/gdpr-dsr-azure). GDPR hakkında daha fazla bilgi için bkz. [Hizmet Güveni portalının GDPR bölümü](https://servicetrust.microsoft.com/ViewPage/GDPRGetStarted).

@@ -1,92 +1,117 @@
 ---
-title: Havuz dönüştürme Azure Data Factory veri akışı eşleme özelliğini ayarlama
-description: Bir havuz dönüşümünde eşleme veri akışı ayarlama konusunda bilgi edinin.
+title: Azure Data Factory veri akışı eşleme özelliğinde bir havuz dönüştürmesi ayarlayın
+description: Eşleme veri akışında bir havuz dönüştürmeyi ayarlamayı öğrenin.
 author: kromerm
 ms.author: makromer
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 02/03/2019
-ms.openlocfilehash: 4341cbb0e24330d535f5211c088f0068eab33af7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fa6a2fd853673493c93dbe65f889468c8e0c8617
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65596270"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74082944"
 ---
-# <a name="sink-transformation-for-a-data-flow"></a>Dönüşüm veri akışı için havuz
+# <a name="sink-transformation-for-a-data-flow"></a>Veri akışı için havuz dönüştürme
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
+Veri akışınızı dönüştürdükten sonra, verileri bir hedef veri kümesine havuza alabilirsiniz. Havuz dönüşümünde, hedef çıktı verileri için bir veri kümesi tanımı seçin. Veri akışınız için gereken sayıda havuz dönüşümlerine sahip olabilirsiniz.
 
-Veri akışınızı dönüştürdükten sonra bir hedef veri kümesine veri havuzu. Havuz dönüşümünde hedef çıktı verileri için bir veri kümesi tanımı seçin. Veri akışınızı gerektirdiği çok dönüşümleri havuz olabilir.
+Gelen verilerdeki şema kayması ve değişiklikler için, çıkış verilerini çıktı veri kümesinde tanımlı bir şema olmadan bir klasöre havuza alma. Ayrıca, kaynakta **şema Için Izin ver** ' i seçerek kaynaklarınızda sütun değişikliklerini hesaba ekleyebilirsiniz. Ardından, havuzdaki tüm alanları yeniden belirleyin.
 
-Şema değişikliklerini ve gelen verilerdeki değişiklikleri hesaba tanımlı bir şeması çıkış veri kümesinde olmayan bir klasör için çıktı verilerini havuz. Ayrıca sütun değişikliklerini kaynaklarınızı seçerek hesabının **şema değişikliklerini izin** kaynak. Ardından tüm eşleme havuzunda alanları.
+![Otomatik eşleme seçeneği dahil olmak üzere havuz sekmesindeki seçenekler](media/data-flow/sink1.png "Havuz 1")
 
-![Otomatik eşleme seçeneğiyle birlikte havuz sekmesindeki seçenekler](media/data-flow/sink1.png "havuzu 1")
+Tüm gelen alanları havuza almak için **Otomatik eşlemeyi**açın. Hedefe havuza eklenecek alanları seçmek veya hedefteki alanların adlarını değiştirmek için **Otomatik eşlemeyi**devre dışı bırakın. Ardından, çıkış alanlarını eşlemek için **eşleme** sekmesini açın.
 
-Tüm gelen alanları havuz için açma **otomatik eşleme**. Hedef havuz veya hedefteki alanların adlarını değiştirmek için alanları seçin için devre dışı **otomatik eşleme**. Açılacağını **eşleme** çıkış alanları eşleştirmek için sekmesinde.
-
-![Eşleme sekmesindeki seçenekler](media/data-flow/sink2.png "2 Havuz")
+![Eşleme sekmesindeki seçenekler](media/data-flow/sink2.png "Havuz 2")
 
 ## <a name="output"></a>Çıktı 
-Azure Blob Depolama veya Data Lake depolama havuzu türleri için bir klasöre dönüştürülmüş verileri çıktı. Spark havuz dönüştürme kullanan bölümleme düzenini temel alarak bölümlenmiş çıkış veri dosyalarını oluşturur. 
+Azure Blob depolama veya Data Lake Storage havuz türleri için, dönüştürülmüş verileri bir klasöre çıktı. Spark, havuz dönüşümünün kullandığı bölümleme şemasına göre bölümlenmiş çıkış veri dosyaları oluşturur. 
 
-Bölümleme düzeninden ayarlayabilirsiniz **İyileştir** sekmesi. Data Factory, çıkış tek bir dosyada birleştirmek istiyorsanız belirleyin **tek bölüm**.
+**En iyileştirme** sekmesinden bölümleme şemasını ayarlayabilirsiniz. Çıktlarınızı tek bir dosyada birleştirmek Data Factory istiyorsanız **tek bölüm**' ü seçin. Bölümlenmiş klasörleri sürdürmek veya oluşturmak isterseniz, **anahtar bölümleme** kullanın ve bölümlenmiş klasör yapıları için kullanmak istediğiniz anahtarları ayarlayın.
 
-![En iyi duruma getir sekmesindeki seçenekler](media/data-flow/opt001.png "havuz seçenekleri")
+![En Iyileştirme sekmesindeki seçenekler](media/data-flow/opt001.png "havuz seçenekleri")
 
 ## <a name="field-mapping"></a>Alan eşleme
+Havuz dönüşümünüzün **eşleme** sekmesinde, sol taraftaki gelen sütunları sağ taraftaki hedeflere eşleyebilirsiniz. Veri akışlarını dosyalara havuza aldığınızda Data Factory her zaman bir klasöre yeni dosyalar yazar. Bir veritabanı veri kümesine eşlediğinizde, eklemek, güncelleştirmek, kaldırmak veya silmek için veritabanı tablosu işlem seçeneklerini tercih edersiniz.
 
-Üzerinde **eşleme** sekmesi, havuz dönüşümü, sağdaki hedeflere sol gelen sütunlarda eşleyebilirsiniz. Bir veri akışı dosyalarını havuz, Data Factory yeni dosyaları bir klasöre her zaman yazın. Bir veritabanı veri kümesine eşlediğinizde, ayarlayarak bu şemayı kullanan yeni bir tablo oluşturabilir **ilkeyi Kaydet** için **üzerine yaz**. Veya var olan bir tabloya yeni satır eklemek ve ardından mevcut şemaya alanları eşleyin. 
+![Eşleme sekmesi](media/data-flow/sink2.png "Yapma")
 
-![Eşleşme sekmesini](media/data-flow/sink2.png "iç havuzları")
+Eşleme tablosunda birden çok sütunu bağlamak, birden çok sütunu bağlamak veya birden çok satırı aynı sütun adına eşlemek için çoklu seçim yapabilirsiniz.
 
-Eşleme tablosunda birden çok sütun bağlantısı, birden çok sütun delink veya birden çok satır aynı sütun adını eşleştirmek için çoklu seçim yapabilirsiniz.
+Gelen alan kümesini her zaman bir hedefle eşlemek ve esnek şema tanımlarını tam kabul etmek için, **şema Drçıkmasına Izin ver**' i seçin.
 
-Her zaman olan ve esnek bir şema tanımları, tam olarak kabul etmek için işaretleyin gelen alan kümesini hedef eşlemek için **şema değişikliklerini izin**.
+![Veri kümesindeki sütunlarla eşlenen alanları gösteren eşleme sekmesi](media/data-flow/multi1.png "birden çok seçenek")
 
-![Veri kümesindeki sütunları eşlenen alanlar gösteren eşleme sekmesinde](media/data-flow/multi1.png "birden fazla seçenek")
+Sütun eşlemelerinizi sıfırlamak için **yeniden eşle**' yi seçin.
 
-Seçin, sütun eşlemelerini sıfırlamak için **yeniden eşlemeniz**.
+![Havuz sekmesi](media/data-flow/sink1.png "Bir havuz")
 
-![Havuz sekmesi](media/data-flow/sink1.png "bir havuz")
+Şema değişirse havuzun başarısız olması için **Şemayı doğrula** ' yı seçin.
 
-Seçin **doğrulama şeması** şema değişirse havuz başarısız.
+Hedef klasördeki hedef dosyaları yazmadan önce havuz klasörünün içeriğini kesmek için **klasörü temizle** ' yi seçin.
 
-Seçin **klasörünü temizleme** havuz klasörünün içeriğini hedef dosyaların hedef klasörde yazmadan önce kesemez.
+## <a name="fixed-mapping-vs-rule-based-mapping"></a>Sabit eşleme ve kural tabanlı eşleme karşılaştırması
+Otomatik eşlemeyi devre dışı bırakırsanız, sütun tabanlı eşleme (Sabit eşleme) veya kural tabanlı eşleme ekleme seçeneğine sahip olursunuz. Kural tabanlı eşleme, sabit eşleme mantıksal ve fiziksel sütun adlarını eşleyebileceğiniz sırada eşleşen ifadeler yazmanıza izin verir.
+
+![Kural tabanlı eşleme](media/data-flow/rules4.png "Kural tabanlı eşleme")
+
+Kural tabanlı eşleme ' yi seçtiğinizde, gelen model kurallarını eşleştirmek ve giden alan adlarını tanımlamak için eşleşen ifadenizi değerlendirmek üzere ADF 'yi öğreneceksiniz. Hem alan hem de kural tabanlı eşlemelerin birleşimini ekleyebilirsiniz. Daha sonra alan adları, kaynaktan gelen meta veriler temelinde ADF tarafından çalışma zamanında oluşturulur. Oluşturulan alanların adlarını hata ayıklama sırasında ve veri önizleme bölmesini kullanarak görüntüleyebilirsiniz.
+
+Model eşleştirme ayrıntıları, [sütun deseninin belgelerinde](concepts-data-flow-column-pattern.md)yer alır.
+
+Ayrıca, satırı genişleterek ve "ad eşleşmeleri:" nın yanına bir normal ifade girerek kural tabanlı eşleştirmeyi kullanırken normal ifade desenleri de girebilirsiniz.
+
+![Regex eşleme](media/data-flow/scdt1g4.png "Regex eşleme")
+
+Kural tabanlı eşleme ve sabit eşleme ile ilgili temel yaygın bir örnek, tüm gelen alanları Hedefinizdeki aynı ada eşlemek istediğiniz durumdur. Sabit eşlemeler söz konusu olduğunda, tablodaki her sütunu ayrı ayrı listeleyin. Kural tabanlı eşleme için, ```true()``` kullanan tüm alanları ```$$```temsil eden aynı gelen alan adına eşleyen tek bir kuralınız olur.
+
+### <a name="sink-association-with-dataset"></a>Veri kümesiyle havuz ilişkilendirmesi
+
+Havuzunuzu seçtiğiniz veri kümesi, veri kümesi tanımında tanımlanmış bir şemaya sahip olabilir veya olmayabilir. Tanımlı bir şemaya sahip değilse, şema DRA izin vermeniz gerekir. Sabit bir eşleme tanımladığınızda, mantıksal-fiziksel ad eşlemesi havuz dönüşümünde kalır. Veri kümesinin şema tanımını değiştirirseniz, havuz eşlemenizi büyük olasılıkla bozacaksınız. Bunu önlemek için kural tabanlı eşleme kullanın. Kural tabanlı eşlemeler genelleştirilir, yani veri kümenizdeki şema değişikliklerinin eşlemeyi bozmayacak anlamına gelir.
 
 ## <a name="file-name-options"></a>Dosya adı seçenekleri
 
-Dosya adlandırma yukarı ayarlayın: 
+Dosya adlandırmayı ayarlama: 
 
-   * **Varsayılan**: Spark bölümü varsayılanlara dayanan adı dosyalarına izin verir.
-   * **Desen**: Bir desen çıktı dosyalarınızı girin. Örneğin, **KREDİLERİ [n]** loans1.csv loans2.csv ve benzeri oluşturacaksınız.
-   * **Bölüm başına**: Bölüm başına bir dosya adı girin.
-   * **Veri sütunu olarak**: Çıkış dosyası, bir sütunun değerine ayarlayın.
-   * **Tek bir dosyaya çıktı**: Bu seçenek ile ADF tek bir dosya adlı bölümlenmiş çıkış dosyalarının birleştirecek. Bu seçeneği kullanmak için veri kümenizde bir klasör adı için çözümlenmelidir. Ayrıca, lütfen bu birleştirme işlemi muhtemelen düğüm boyutu temel alınarak yük devredebildiğini dikkat edin.
+   * **Varsayılan**: Spark 'ın bölüm varsayılanlarına göre dosya adına erişmesine izin verin.
+   * **Model**: çıkış dosyalarınız için bir model girin. Örneğin, **[n] kredileri** , loans1. csv, loans2. csv, vb. oluşturacaktır.
+   * **Bölüm başına**: bölüm başına bir dosya adı girin.
+   * **Sütunda veri olarak**: çıkış dosyasını bir sütunun değeri olarak ayarlayın.
+   * **Tek bir dosyaya çıkış**: Bu seçenekle ADF bölümlenmiş çıkış dosyalarını tek bir adlandırılmış dosyada birleştirir. Bu seçeneği kullanmak için, veri kümeniz bir klasör adına çözümlenmelidir. Ayrıca, bu birleştirme işleminin düğüm boyutuna bağlı olarak başarısız olabileceğini lütfen unutmayın.
 
 > [!NOTE]
-> Yürütme veri akışı etkinliği çalıştırırken operations başlangıç dosyası. Bunlar, veri akışı hata ayıklama modunda başlamaz.
+> Dosya işlemleri yalnızca veri akışını Yürüt etkinliğini çalıştırdığınızda başlar. Veri akışı hata ayıklama modunda başlamamazlar.
 
 ## <a name="database-options"></a>Veritabanı seçenekleri
 
 Veritabanı ayarlarını seçin:
 
-* **Güncelleştirme yöntemi**: Eklemeleri izin vermek için varsayılandır. NET **izin INSERT** kaynağınızdan yeni satır ekleyerek durdurmak istiyorsanız. , Upsert, güncelleştirmek veya satırları silmek için önce bu eylemler için etiket satırlara alter satır dönüştürme ekleyin. 
-* **Tablo yeniden**: Bırakın veya hedef tablonuz tamamlanmadan veri akışı önce oluşturun.
-* **Truncate tablo**: Tamamlandığında veri akışı önce hedef tablosundan tüm satırları kaldırın.
-* **Yığın boyutu**: Bir sayı demetine Yazar öbeklere girin. Büyük veri yüklerine için bu seçeneği kullanın. 
-* **Hazırlamayı etkinleştirme**: PolyBase, Azure veri ambarı, havuz veri kümesi olarak yüklediğinizde kullanın.
+![SQL havuzu seçeneklerini gösteren ayarlar sekmesi](media/data-flow/alter-row2.png "SQL seçenekleri")
 
-![SQL havuz seçeneklerini gösteren Ayarlar sekmesinde,](media/data-flow/alter-row2.png "SQL seçenekleri")
+* **Güncelleştirme yöntemi**: varsayılan değer ekleme için izin verilir. Kaynağınızdan yeni satırlar eklemeyi durdurmak istiyorsanız **eklemeye Izin ver** ' i temizleyin. Satırları güncelleştirmek, kaldırmak veya silmek için önce bu eylemler için satırları etiketlemek üzere bir alter-Row dönüşümü ekleyin. 
+* **Tablo yeniden**oluşturma: veri akışı tamamlanmadan önce hedef tablonuzu bırakın veya oluşturun.
+* **Tablo kes**: veri akışı tamamlanmadan önce hedef tablonuzdaki tüm satırları kaldırın.
+* **Yığın boyutu**: demetini parçalara yazmalar için bir sayı girin. Büyük veri yükleri için bu seçeneği kullanın. 
+* **Hazırlamayı etkinleştir**: Azure veri ambarı 'nı havuz veri kümeniz olarak yüklediğinizde PolyBase kullanın.
+* **SQL betiklerini ön ve sonrası**: (ön işleme) ve sonra (işlem sonrası) verileri havuz veritabanınıza yazıldıktan sonra yürütülecek çok satırlı SQL betikleri girin
 
-> [!NOTE]
-> Veri akışı hedef veritabanınızda yeni bir tablo tanımı oluşturmak için Data Factory yönlendirebilir. Tablo tanımı oluşturmak için yeni bir tablo adı olan havuz dönüşümü bir veri kümesi ayarlayın. Aşağıdaki tablo adı, SQL veri kümesi seçin **Düzenle** ve yeni bir tablo adı girin. Daha sonra havuz dönüşümünde açma **şema değişikliklerini izin**. Ayarlama **Şemayı içeri aktar** için **hiçbiri**.
-
-![SQL veri kümesi ayarları, tablo adını düzenlemek nereye gösteren](media/data-flow/dataset2.png "SQL şeması")
+![SQL işleme betikleri ön ve sonrası](media/data-flow/prepost1.png "SQL işleme betikleri")
 
 > [!NOTE]
-> Güncelleştirme veya veritabanı havuzunuzu satırları silmek, anahtar sütunu ayarlamanız gerekir. Bu ayar için benzersiz satırındaki veri hareketi kitaplığı (DML) belirlemek alter satır dönüştürme sağlar.
+> Veri akışı ' nda, hedef veritabanınızda yeni bir tablo tanımı oluşturmak için Data Factory yönlendirebilirsiniz. Tablo tanımını oluşturmak için, havuz dönüşümünde yeni bir tablo adına sahip bir veri kümesi ayarlayın. SQL veri kümesinde tablo adının altında **Düzenle** ' yi seçin ve yeni bir tablo adı girin. Ardından, havuz dönüşümünde, **şema Drçıkmasına Izin ver**' i açın. **Içeri aktarma şemasını** **none**olarak ayarlayın.
+
+![Tablo adının nerede düzenleneceğini gösteren SQL veri kümesi ayarları](media/data-flow/dataset2.png "SQL şeması")
+
+> [!NOTE]
+> Veritabanı havuzinizdeki satırları güncelleştirdiğinizde veya sildiğinizde, anahtar sütununu ayarlamanız gerekir. Bu ayar alter-Row dönüşümünün veri taşıma kitaplığındaki (DML) benzersiz satırı belirlemesine izin verir.
+
+### <a name="cosmosdb-specific-settings"></a>CosmosDB 'ye özgü ayarlar
+
+CosmosDB 'de giriş verileri olduğunda, bu ek seçenekleri göz önünde bulundurmanız gerekir:
+
+* Bölüm anahtarı: Bu gerekli bir alandır. Koleksiyonunuz için bölüm anahtarını temsil eden bir dize girin. Örnek: ```/movies/title```
+* Aktarım hızı: Bu veri akışının her yürütmesi için CosmosDB koleksiyonunuza uygulamak istediğiniz ru sayısı için isteğe bağlı bir değer ayarlayın. Minimum değer 400 ' dir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-
-Veri akışınızı oluşturduğunuza göre eklemek bir [ardışık veri akış etkinliğini](concepts-data-flow-overview.md).
+Veri akışınızı oluşturduğunuza göre, işlem [hattınızı bir veri akışı etkinliği](concepts-data-flow-overview.md)ekleyin.

@@ -1,6 +1,6 @@
 ---
-title: Azure Key Vault ile yönetilen uygulamaları kullanma | Microsoft Docs
-description: Yönetilen uygulamaları dağıtırken erişim gizli dizilerini Azure Key Vault'ta kullanma işlemini gösterir
+title: Yönetilen uygulamalarla Azure Key Vault kullanma | Microsoft Docs
+description: Yönetilen uygulamalar dağıtıldığında Azure Key Vault erişim sırlarının nasıl kullanılacağını gösterir
 services: managed-applications
 author: tfitzmac
 ms.service: managed-applications
@@ -9,22 +9,22 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.date: 01/30/2019
 ms.author: tomfitz
-ms.openlocfilehash: 55410250ccd4dfceac8ac9ae5b81d4736de0d91a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a87066425845a7f1043576a858a361e601ba9cc8
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60588303"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71003424"
 ---
-# <a name="access-key-vault-secret-when-deploying-azure-managed-applications"></a>Azure yönetilen uygulamaları dağıtırken access Key Vault gizli
+# <a name="access-key-vault-secret-when-deploying-azure-managed-applications"></a>Azure yönetilen uygulamalar dağıtıldığında erişim Key Vault gizliliği
 
-(Parola gibi) güvenli bir değerle, dağıtım sırasında parametre olarak geçirmeniz gerektiğinde, değerini almak bir [Azure anahtar kasası](../key-vault/key-vault-whatis.md). Yönetilen uygulamaları dağıtırken Key Vault'a erişmek için erişim izni vermesi gerekir **Gereci kaynak sağlayıcısı** hizmet sorumlusu. Yönetilen uygulamaları hizmet işlemleri çalıştırmak için bu kimliği kullanır. Başarıyla bir değer dağıtım sırasında anahtar Kasasından almak için hizmet sorumlusu Key Vault erişebilir olması gerekir.
+Dağıtım sırasında bir parametre olarak güvenli bir değer (parola gibi) geçirmeniz gerektiğinde değeri bir [Azure Key Vault](../key-vault/key-vault-overview.md)alabilirsiniz. Yönetilen uygulamaları dağıttığınızda Key Vault erişmek için, **gereç kaynak sağlayıcısı** hizmet sorumlusuna erişim vermeniz gerekir. Yönetilen uygulamalar hizmeti, işlemleri çalıştırmak için bu kimliği kullanır. Dağıtım sırasında Key Vault bir değeri başarıyla almak için, hizmet sorumlusu Key Vault erişebilmelidir.
 
-Bu makalede yönetilen uygulamalarla çalışmak için Key Vault yapılandırma açıklanır.
+Bu makalede, Key Vault yönetilen uygulamalarla çalışacak şekilde nasıl yapılandırılacağı açıklanır.
 
-## <a name="enable-template-deployment"></a>Şablon dağıtımı etkinleştir
+## <a name="enable-template-deployment"></a>Şablon dağıtımını etkinleştir
 
-1. Portalda, anahtar kasanızı seçin.
+1. Portalda Key Vault seçin.
 
 1. **Erişim ilkeleri**'ni seçin.   
 
@@ -32,13 +32,13 @@ Bu makalede yönetilen uygulamalarla çalışmak için Key Vault yapılandırma 
 
 1. **Gelişmiş erişim ilkelerini görüntülemek için tıklayın**'ı seçin.
 
-   ![Gelişmiş erişim ilkelerini görüntülemek](./media/key-vault-access/advanced.png)
+   ![Gelişmiş erişim ilkelerini göster](./media/key-vault-access/advanced.png)
 
-1. Seçin **şablon dağıtımı için Azure Resource Manager'a erişimi etkinleştir**. Ardından **Kaydet**’i seçin.
+1. **Şablon dağıtımı için Azure Resource Manager erişimi etkinleştir**' i seçin. Ardından **Kaydet**’i seçin.
 
-   ![Şablon dağıtımı etkinleştir](./media/key-vault-access/enable-template.png)
+   ![Şablon dağıtımını etkinleştir](./media/key-vault-access/enable-template.png)
 
-## <a name="add-service-as-contributor"></a>Katkıda bulunan olarak hizmet Ekle
+## <a name="add-service-as-contributor"></a>Hizmet katkıda bulunan olarak ekle
 
 1. Seçin **erişim denetimi (IAM)** .
 
@@ -46,17 +46,17 @@ Bu makalede yönetilen uygulamalarla çalışmak için Key Vault yapılandırma 
 
 1. Seçin **rol ataması Ekle**.
 
-   ![Ekle'yi seçin](./media/key-vault-access/add-access-control.png)
+   ![Ekle 'yi seçin](./media/key-vault-access/add-access-control.png)
 
-1. Seçin **katkıda bulunan** rolü için. Arama **Gereci kaynak sağlayıcısı** ve kullanılabilir seçenekler arasından seçin.
+1. Rol için **katkıda bulunan** öğesini seçin. **Gereç kaynak sağlayıcısını** arayın ve kullanılabilir seçeneklerden seçin.
 
-   ![Arama sağlayıcısı](./media/key-vault-access/search-provider.png)
+   ![Sağlayıcı ara](./media/key-vault-access/search-provider.png)
 
 1. **Kaydet**’i seçin.
 
-## <a name="reference-key-vault-secret"></a>Key Vault gizli başvurusu
+## <a name="reference-key-vault-secret"></a>Key Vault gizli dizi başvurusu
 
-Yönetilen uygulamanızın bir şablon için Key Vault'tan bir gizli dizi geçirmek için kullanmanız gerekir bir [bağlı şablon](../azure-resource-manager/resource-group-linked-templates.md) ve bağlantılı şablon parametrelerini Key Vault'ta başvuru. Key Vault kaynak kimliği ve gizli dizi adı sağlayın.
+Bir Key Vault gizli anahtar yönetilen uygulamanızdaki bir şablona geçirmek için [bağlantılı şablon](../azure-resource-manager/resource-group-linked-templates.md) kullanmanız ve bağlantılı şablon için parametrelerde Key Vault başvurmanız gerekir. Key Vault kaynak KIMLIĞINI ve gizli dizi adını sağlayın.
 
 ```json
 "resources": [{
@@ -87,8 +87,8 @@ Yönetilen uygulamanızın bir şablon için Key Vault'tan bir gizli dizi geçir
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Key Vault'unuza yönetilen bir uygulama dağıtımı sırasında erişilebilir olacak şekilde yapılandırdınız.
+Key Vault yönetilen bir uygulamanın dağıtımı sırasında erişilebilir olacak şekilde yapılandırdınız.
 
-* Şablon parametresi olarak bir anahtar Kasası'ndaki bir değer geçirme hakkında daha fazla bilgi için bkz: [dağıtım sırasında güvenli bir parametre geçirmek için Azure anahtar kasası kullanım](../azure-resource-manager/resource-manager-keyvault-parameter.md).
-* Yönetilen uygulama örnekleri için bkz. [örnek projeler için Azure yönetilen uygulamalar](sample-projects.md).
+* Bir Key Vault değeri şablon parametresi olarak geçirme hakkında daha fazla bilgi için bkz. [dağıtım sırasında güvenli parametre değeri geçirmek için Azure Key Vault kullanma](../azure-resource-manager/resource-manager-keyvault-parameter.md).
+* Yönetilen uygulama örnekleri için bkz. [Azure yönetilen uygulamalar Için örnek projeler](sample-projects.md).
 * Yönetilen bir uygulamaya ait bir kullanıcı arabirimi tanım dosyası oluşturma hakkında bilgi için [CreateUiDefinition ile çalışmaya başlama](create-uidefinition-overview.md) konusunu inceleyin.

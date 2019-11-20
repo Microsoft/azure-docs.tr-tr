@@ -5,13 +5,13 @@ author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 04/05/2019
-ms.openlocfilehash: 3943332179a6d283a8ed3ca66ea559d5cea53a10
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/01/2019
+ms.openlocfilehash: 63d1213a2dded41df3f462722b354b03fe9f6e33
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65953200"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72801885"
 ---
 # <a name="approach-and-process-for-adopting-azure-data-catalog"></a>Azure Veri Kataloğu'nu benimseme yaklaşımı ve işlemi
 
@@ -54,7 +54,7 @@ Aşağıda vizyonunuzu tanımlamanıza yardımcı olacak birkaç ipucu verilmiş
 
 Aşağıda, Adventure Works adlı kurgusal şirket için örnek bir Veri Kataloğu vizyon mesajı verilmiştir:
 
-**Azure veri Kataloğu** Adventure Works Finans ekibini önemli veri kaynakları konusunda iş Birliği için güçlendirir, her ekip üyesi kolayca bulun ve verileri kullanmak için gereken ve bilgilerini ekibin tamamıyla paylaşabilir.
+**Azure Veri Kataloğu** , Adventure Works finans ekibini önemli veri kaynakları üzerinde işbirliği yapmak üzere güçler, böylece her ekip üyesi ihtiyaç duydukları verileri kolayca bulabilir ve kullanabilir ve kendi bilgilerini ekiple bir bütün olarak paylaşabilir.
 
 Net bir vizyon mesajınız olduğunda, Veri Kataloğu için uygun bir pilot proje tanımlamanız gerekir. Genellikle Veri Kataloğu için birkaç senaryo mevcuttur; bu nedenle sonraki bölümde ilgili kullanım durumlarını tanımlamaya yönelik birkaç ipucu sağlanmıştır.
 
@@ -69,7 +69,7 @@ Aşağıda durumları tanımlamaya yönelik birkaç ipucu verilmiştir:
 * **Ekibin hedeflerini tanımlayın** - Ekip hedeflerine nasıl ulaşır? Bu aşamada objektif olmak isteyeceğiniz için Veri Kataloğu'na odaklanmayın. Konunun teknoloji değil, iş sonuçları olduğunu unutmayın.
 * **İş sorununu tanımlayın** - Ekibin veri varlıklarını bulma ve bunlar hakkında bilgi edinme konusunda karşılaştığı sorunlar nelerdir? Örneğin, önemli veri kaynakları ile ilgili bilgiler bir ağ klasöründeki Excel çalışma kitaplarında bulunabilir ve ekip, çalışma kitaplarını bulmak için çok fazla zaman harcayabilir.
 * **Değişimle bağlantılı olarak ekip kültürünü anlayın** - Birçok benimseme zorluğu, yeni bir aracın uygulanmasından ziyade, değişime gösterilen dirençle ilgilidir. Bir ekibin değişime verdiği yanıt, kullanım durumlarının tanımlanması sırasında önem taşır. Bunun nedeni, var olan işlemin "her zaman böyle yapıldığı" için veya "bozuk olmayan bir şey neden düzeltilsin?" gerekçesi ile kullanımda olabileceği gerçeğidir. Herhangi bir yeni aracın veya işlemin benimsenmesi, durumdan etkilenen kişilerin değişimin getireceği değeri anlaması ve çözülecek sorunların önemini kabul etmesi durumunda her zaman çok daha kolay bir şekilde gerçekleşir.
-* **Veri varlıklarına ilgili odağı** -bir ekibin karşılaştığı iş sorunlarını ele alırken, "weeds Kes" yapmanız ve kurumsal veri varlıklarının daha etkili bir şekilde yararlanarak ilgili içeriği odaklanın.
+* **Odağı veri varlıklarıyla ilgili olarak tut** -bir ekip yüzünde iş sorunlarını ele alırken, "Weeds aracılığıyla kesmeniz" gerekir ve kurumsal veri varlıklarını daha verimli bir şekilde kullanmaya yönelik yeniliklere odaklanırsınız.
 
 Aşağıda Veri Kataloğu ile ilgili bazı örnek kullanım durumları verilmiştir:
 
@@ -91,7 +91,7 @@ Pilot planınız, Veri Kataloğu ile elde etmek istediğiniz iş hedeflerini kad
 
 ### <a name="target-the-right-team"></a>Doğru ekibi hedefleme
 
-Pilot projenizi belirlerken, var olan bir iş sorununu çözen en cazip senaryolara sahip ekibi seçin. Örneğin, bir iş analistinin SQL Server veritabanından rapor oluşturması. Sorun, yalnızca birkaç iş arkadaşı ile görüştükten sonra veri kaynağından haberdar olmuş olmasıdır. Son olarak, hangi veri kaynaklarını kullanması bulunmaya çalışılırken zaman kaybettikten sonra bunlar her veri kaynağının açıklamasını içeren bir Excel çalışma kitabının olduğunu öğrenmiştir. Excel çalışma kitabını yeterince ihtiyaç duydukları tabloları da kayıtlı ve de açıklamalı bunlar hızlı bir şekilde bu veri kaynaklarının bulmuş olacaktı **Azure veri Kataloğu**.
+Pilot projenizi belirlerken, var olan bir iş sorununu çözen en cazip senaryolara sahip ekibi seçin. Örneğin, bir iş analistinin SQL Server veritabanından rapor oluşturması. Sorun, yalnızca birkaç iş arkadaşını konuşduktan sonra veri kaynağını haberdar edebiliyor. Son olarak, hangi veri kaynaklarını kullanacağınızı bulmaya çalıştıktan sonra, her bir veri kaynağının açıklamasını içeren bir Excel çalışma kitabı hakkında daha fazla bilgi bulabilirsiniz. Excel çalışma kitabı, gerek duydukları tabloları yeterince açıklasa da, **Azure Veri Kataloğu**'nda kaydolduklarında ve açıklandıklarında bu veri kaynaklarını hızlıca bulmaları gerekir.
 
 ### <a name="identify-data-heroes"></a>Veri hero'larını tanımlama
 
@@ -101,7 +101,7 @@ Ekibin dengeli bir sunuma sahip olabilmesi için ilk projeniz, veri üreten ve v
 
 **Veri Tüketicileri**, verilerin iş sorunlarını çözmeye yönelik kullanımı konusunda uzmanlık sahibi kişilerdir. Örneğin, Nancy, veri analizi için Adventure Works SQL Server veri kaynaklarını kullanan bir iş analistidir.
 
-**Azure Veri Kataloğu**'nun çözdüğü iş sorunlarından biri, **Veri Üreticileri**'nin **Veri Tüketicileri**’ne bağlanmasıdır. Bunu, kurumsal veri kaynakları hakkındaki bilgiler için merkezi bir depo görevi görerek gerçekleştirir. David, Veri Kataloğu'nu kullanarak Adventure Works ve SQL Server veri kaynaklarını kaydeder. Bu veri kaynağını bulan herhangi bir kullanıcı, kitle kaynak kullanarak kendi fikirlerini bulunan veri kullanmanın yanı sıra veriler üzerinde paylaşabilirsiniz. Örneğin, Nancy katalogda arama yaparak veri kaynaklarını bulur ve verilerle ilgili uzman bilgilerini paylaşır.  Böylece kuruluş bünyesindeki diğer kişiler katalogda arama yaparak paylaşılan bilgilerden faydalanabilir.
+**Azure Veri Kataloğu**'nun çözdüğü iş sorunlarından biri, **Veri Üreticileri**'nin **Veri Tüketicileri**’ne bağlanmasıdır. Bunu, kurumsal veri kaynakları hakkındaki bilgiler için merkezi bir depo görevi görerek gerçekleştirir. David, Veri Kataloğu'nu kullanarak Adventure Works ve SQL Server veri kaynaklarını kaydeder. Bu veri kaynağını bulan herhangi bir kullanıcının crowdsourusing özelliği, bulduğu verileri kullanmanın yanı sıra veri üzerinde kendi eklentilerini paylaşabilir. Örneğin, Nancy katalogda arama yaparak veri kaynaklarını bulur ve verilerle ilgili uzman bilgilerini paylaşır.  Böylece kuruluş bünyesindeki diğer kişiler katalogda arama yaparak paylaşılan bilgilerden faydalanabilir.
 
 * Veri kaynaklarını kaydetme hakkında daha fazla bilgi için bkz. [Veri kaynaklarını kaydetme](data-catalog-get-started.md).
 * Veri kaynaklarını bulma hakkında daha fazla bilgi için bkz. [Veri kaynaklarını arama](data-catalog-get-started.md).
@@ -116,7 +116,7 @@ Sonraki bölümde, Adventure Works şirketine ait bir örnek proje açıklanmakt
 
 ### <a name="an-example-project"></a>Örnek proje
 
-Bu örnekte, iş analisti olan Nancy, SQL Server veritabanındaki verileri kullanarak ekibi için raporlar oluşturmaktadır. Sorun, yalnızca birkaç iş arkadaşı ile görüştükten sonra veri kaynağından haberdar olmuş olmasıdır. Kayıtlı ve merkezi bir konumda gibi ek açıklama, hızlı bir şekilde bu veri kaynaklarının bulmuş olacaktı **Azure veri Kataloğu**.
+Bu örnekte, iş analisti olan Nancy, SQL Server veritabanındaki verileri kullanarak ekibi için raporlar oluşturmaktadır. Sorun, yalnızca birkaç iş arkadaşını konuşduktan sonra veri kaynağını haberdar edebiliyor. Kayıtlı olmaları durumunda bu veri kaynaklarını hızla bulmaları ve **Azure Veri Kataloğu**gibi merkezi bir konumda Açıklanmaları gerekir.
 
 Nancy ve ekibinin çok değerli olan verileri ne kadar kolay bulabileceğini göstermek için, veri kaynağı kayıt aracını kullanarak Kataloğu veri kaynakları ile ilgili bilgilerle (meta veriler) doldurursunuz. Böylece, veritabanı ile ilgili bilgiler yalnızca birkaç kişi tarafından değil, ekip ve kuruluş tarafından kullanılabilir. Veri kaynakları Veri Kataloğu'na kaydedildikten sonra, Nancy ve ekibi bunları kolayca kullanabilir. Sonuç olarak ekibi için ve kuruluş için daha kapsamlı, ilgi düzeyi yüksek bir veri kataloğu elde edilir. Veri Kataloğu'nu benimseyen ekiplerin sayısı arttıkça işle ilgili veri kaynaklarının bulunması ve kullanılması kolaylaşır; böylece, verilerinizden daha fazla sonuç elde edilebilmesi için daha veri merkezli bir kültüre olanak tanınır.
 
@@ -125,7 +125,7 @@ Veri kaynağı kayıt aracı hakkında daha fazla bilgi için bkz. [Azure Veri K
 Nancy'nin ekibi ayrıca, pilot projenin bir parçası olarak, David ve iş arkadaşlarının bakımını yaptığı bir Excel çalışma kitabında açıklanan veri kaynaklarını kullanmaktadır. Kuruluştaki diğer ekipler de veri kaynaklarını açıklamak için Excel çalışma kitaplarını kullandığından, BT ekibi Excel çalışma kitabının Veri Kataloğu'na geçişini sağlamak üzere bir araç oluşturmaya karar verir. Pilot proje ekibi, var olan ek açıklamaları içeri aktarmak için Veri Kataloğu REST API'sini kullanarak, veri kaynağı kayıt aracını kullanma yoluyla veri kaynaklarından ayıklanan meta verilerden oluşan eksiksiz bir veri kataloğuna sahip olabilir ve bu katalog, el ile yeniden girdi olmaksızın veri üreticileri ve tüketicileri tarafından önceden belgelenmiş olan verileri eksiksiz olarak içerir. Kurumsal veri kataloğu büyüdükçe kuruluş, genel veri kaynakları için veri kaynağı kayıt aracını, özel kaynaklar ile genel olmayan senaryolar için de Veri Kataloğu API'sini kullanabilir.
 
 > [!NOTE]
-> Bir Excel çalışma kitabının Veri Kataloğu'na geçişini sağlamak için **Azure Veri Kataloğu** API'sini kullanan bir örnek araç geliştirdik. Veri Kataloğu API'si ve örnek araç hakkında bilgi edinmek için [Geçici çalışma kitabı kod örneğini indirin](https://azure.microsoft.com/documentation/samples/data-catalog-dotnet-excel-register-data-assets/) ve [Azure Veri Kataloğu REST API'si](/rest/api/datacatalog/) belgelerine başvurun.
+> Bir Excel çalışma kitabının Veri Kataloğu'na geçişini sağlamak için **Azure Veri Kataloğu** API'sini kullanan bir örnek araç geliştirdik. Veri Kataloğu API'si ve örnek araç hakkında bilgi edinmek için [Geçici çalışma kitabı kod örneğini indirin](https://github.com/Azure-Samples/data-catalog-dotnet-excel-register-data-assets) ve [Azure Veri Kataloğu REST API'si](/rest/api/datacatalog/) belgelerine başvurun.
 
 Pilot proje kullanıma alındığında, Veri Kataloğu benimseme planınızı yürütmenin zamanı gelmiştir.
 
@@ -165,4 +165,4 @@ Bu makalede, kuruluşunuzda **Azure Veri Kataloğu** ile çalışmaya başlama k
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Bir Azure veri Kataloğu oluşturma](data-catalog-get-started.md)
+[Azure Veri Kataloğu oluşturma](data-catalog-get-started.md)

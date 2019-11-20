@@ -1,32 +1,31 @@
 ---
-title: Windows VM uzantısı hatalarında sorun giderme | Microsoft Docs
-description: Azure Windows VM uzantısı hatalarında sorun giderme hakkında bilgi edinin
+title: Windows VM Uzantısı hatalarında sorun giderme
+description: Azure Windows VM Uzantısı hatalarında sorun giderme hakkında bilgi edinin
 services: virtual-machines-windows
 documentationcenter: ''
 author: kundanap
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: top-support-issue,azure-resource-manager
 ms.assetid: 878ab9b6-c3e6-40be-82d4-d77fecd5030f
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 03/29/2016
 ms.author: kundanap
-ms.openlocfilehash: cf53df30dfccb76a6f33621038ba7f031a69f6de
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bc99a9c9e9ff985730ec97dbacd1d7c1de06a45e
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62107253"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073647"
 ---
-# <a name="troubleshooting-azure-windows-vm-extension-failures"></a>Azure Windows VM uzantısı hatalarında sorun giderme
+# <a name="troubleshooting-azure-windows-vm-extension-failures"></a>Azure Windows VM Uzantısı hatalarında sorun giderme
 [!INCLUDE [virtual-machines-common-extensions-troubleshoot](../../../includes/virtual-machines-common-extensions-troubleshoot.md)]
 
-## <a name="viewing-extension-status"></a>Uzantı durumu görüntüleme
-Azure Resource Manager şablonları, Azure Powershell'den çalıştırılabilir. Şablon yürütüldükten sonra uzantı durumunun Azure kaynak Gezgini veya komut satırı araçları üzerinden görüntülenebilir.
+## <a name="viewing-extension-status"></a>Uzantı durumunu görüntüleme
+Azure Resource Manager Şablonlar Azure PowerShell yürütülebilir. Şablon yürütüldüğünde, uzantı durumu Azure Kaynak Gezgini veya komut satırı araçlarından görüntülenebilir.
 
 Örnek aşağıda verilmiştir:
 
@@ -59,13 +58,13 @@ Azure PowerShell:
     }
   ]
 
-## <a name="troubleshooting-extension-failures"></a>Uzantı sorunlarını giderme
-### <a name="rerun-the-extension-on-the-vm"></a>VM uzantısı yeniden çalıştırın
-Özel betik uzantısı kullanarak VM üzerinde betikleri çalıştırıyorsanız, burada VM başarıyla oluşturuldu, ancak komut dosyası başarısızdır hatayla bazen çalıştırabilirsiniz. Bu koşullar altında bu hatadan kurtulmak için önerilen yol uzantısını kaldırın ve şablonu yeniden çalıştırmayı sağlamaktır.
-Not: Gelecekte bu işlevsellik uzantısını kaldırmayı gereksinimini kaldırmak için artırılmış.
+## <a name="troubleshooting-extension-failures"></a>Uzantı hatalarında sorun giderme
+### <a name="rerun-the-extension-on-the-vm"></a>Uzantıyı VM 'de yeniden çalıştırın
+Özel Betik uzantısı kullanarak VM 'de komut dosyaları çalıştırıyorsanız, bazen VM 'nin başarıyla oluşturulduğu ancak betiğin başarısız olduğu bir hata ile çalışabilir. Bu koşullar altında, bu hatayı kurtarmak için önerilen yol, uzantıyı kaldırmak ve şablonu yeniden çalıştıramaktır.
+Note: gelecekte, uzantıyı kaldırma gereksinimini ortadan kaldırmak için bu işlev geliştirilir.
 
-#### <a name="remove-the-extension-from-azure-powershell"></a>Azure Powershell'den uzantısını kaldırma
+#### <a name="remove-the-extension-from-azure-powershell"></a>Uzantıyı Azure PowerShell kaldır
     Remove-AzVMExtension -ResourceGroupName $RGName -VMName $vmName -Name "myCustomScriptExtension"
 
-Uzantı kaldırıldıktan sonra şablonu VM üzerinde betikleri çalıştırma yeniden çalıştırılır olabilir.
+Uzantı kaldırıldıktan sonra, şablon, betikleri sanal makinede çalıştırmak için yeniden çalıştırılabilir.
 

@@ -1,6 +1,6 @@
 ---
-title: Veritabanı kurtarma - Azure SQL veritabanı hızlandırılmış | Microsoft Docs
-description: Azure SQL veritabanı tek veritabanları ve havuza alınmış veritabanlarını Azure SQL veritabanı ve Azure SQL veri veritabanları için hızlı ve tutarlı veritabanı kurtarma anlık bir işlem geri alma ve agresif günlük kesme sağlayan yeni bir özellik vardır. Ambarı.
+title: Hızlandırılmış veritabanı kurtarma
+description: Azure SQL veritabanı, Azure SQL veritabanı 'nda tek veritabanları ve havuza alınmış veritabanları için hızlı ve tutarlı veritabanı kurtarma, anlık işlem geri alma ve agresif günlük kesilme sağlayan yeni bir özelliğe sahiptir ve Azure SQL Data 'daki veritabanları Ambarını.
 ms.service: sql-database
 ms.subservice: high-availability
 ms.custom: ''
@@ -9,122 +9,121 @@ ms.topic: conceptual
 author: mashamsft
 ms.author: mathoma
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 01/25/2019
-ms.openlocfilehash: 77bc33747964a5f4ee1a67aba777dc3ed76b9a51
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: eff81693ff4c34dc00f66e9e5ea22e56d3ff9d77
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65073461"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73808097"
 ---
 # <a name="accelerated-database-recovery"></a>Hızlandırılmış veritabanı kurtarma
 
-**Veritabanı kurtarma (ADR) hızlandırılmış** özellikle uzun olduğu durumda, veritabanı kullanılabilirlik büyük ölçüde geliştiren yeni bir SQL veritabanı altyapısı özelliği çalıştıran işlem, SQL veritabanı altyapısı kurtarma işlemini yeniden tasarlanmasını tarafından. ADR, tek veritabanlarını havuza alınmış veritabanlarını Azure SQL veritabanı ve Azure SQL veri ambarı veritabanları için şu anda kullanılabilir. ADR başlıca yararları şunlardır:
+**Hızlandırılmış veritabanı kurtarma (ADR)** , SQL veritabanı altyapısı kurtarma işlemini yeniden tasarlayarak, özellikle uzun süre çalışan işlemler söz konusu olduğunda veritabanı kullanılabilirliğini büyük ölçüde geliştiren yenı bir SQL veritabanı altyapısı özelliğidir. ADR Şu anda Azure SQL veritabanı 'nda tek veritabanları ve havuza alınmış veritabanları ve Azure SQL veri ambarı 'nda (Şu anda genel önizlemededir) veritabanları için kullanılabilir. ADR 'nin başlıca avantajları şunlardır:
 
 - **Hızlı ve tutarlı veritabanı kurtarma**
 
-  ADR ile hızlı ve tutarlı veritabanı kurtarma etkin işlem sayısı ne olursa olsun, sistem veya boyutlarının etkinleştirme genel kurtarma zamanı uzun süre çalışan işlemleri etkilemez.
+  ADR ile, uzun süre çalışan işlemler genel kurtarma süresini etkilemez, sistemdeki etkin işlem sayısı veya boyutları ne olursa olsun hızlı ve tutarlı veritabanı kurtarmayı etkinleştirir.
 
-- **Anlık bir işlem geri alma**
+- **Anlık işlem geri alma**
 
-  ADR ile işlemi geri alma işlemi etkin olduğu süre veya yürüttü güncelleştirme sayısı bağımsız olarak anlık.
+  ADR ile işlem geri alma işlemi, işlemin etkin olduğu zamandan veya gerçekleştirilen güncelleştirmelerin sayısına bakılmaksızın anında gerçekleşir.
 
-- **Agresif günlüğünün kesilmesi**
+- **Agresif günlük kesilmesi**
 
-  ADR ile işlem günlüğü agresif, bile etkin uzun süre çalışan işlemler varsa, bu denetimi dışında büyümesini önleyen kesilir.
+  ADR ile, işlem günlüğü, etkin uzun süre çalışan işlemlerin varlığına bile, denetimin dışına büyümesini önleyen bir şekilde kesilir.
 
 ## <a name="the-current-database-recovery-process"></a>Geçerli veritabanı kurtarma işlemi
 
-SQL Server veritabanını Kurtarma aşağıdaki [ARIES](https://people.eecs.berkeley.edu/~brewer/cs262/Aries.pdf) kurtarma modelini ve diyagramda şu daha ayrıntılı olarak açıklanan ve aşağıdaki diyagramda gösterildiği üç aşamadan oluşur.
+SQL Server [veritabanı kurtarma, bu kurtarma modelini](https://people.eecs.berkeley.edu/~brewer/cs262/Aries.pdf) izler ve aşağıdaki diyagramda gösterilen ve diyagramda daha ayrıntılı şekilde açıklanacak üç aşamadan oluşur.
 
-![Geçerli kurtarma işlemi](./media/sql-database-accelerated-database-recovery/current-recovery-process.png)
+![geçerli kurtarma işlemi](./media/sql-database-accelerated-database-recovery/current-recovery-process.png)
 
 - **Analiz aşaması**
 
-  Son başarılı denetim (veya en eski LSN kirli sayfası) sona, SQL Server SE zastavil s zaman her bir işlem durumunu belirlemek için başından itibaren işlem günlüğünün taramayı iletin.
+  Son başarılı denetim noktasının başından (veya en eski kirli sayfa LSN), her bir işlemin durumunu SQL Server durdurulduğunda tespit etmek için, işlem günlüğü sonuna kadar ileri tarama.
 
-- **Aşama Yinele**
+- **Yeniden yineleme aşaması**
 
-  Veritabanı yineleme tüm kaydedilmiş işlemleri tarafından kilitlenme zamanında olduğu duruma getirmek için sonuna kadar eski işlenmemiş işlemden işlem günlüğünün taramayı iletin.
+  Tüm kaydedilmiş işlemleri yeniden gerçekleştirerek veritabanını kilitlenme süresi sırasında duruma getirmek için, işlem günlüğü sonuna kadar en eski işlenmemiş işlemden ileri tarama.
 
-- **Aşama Geri Al**
+- **Geri alma aşaması**
 
-  Kilitlenme süresini itibariyle etkin olduğu her bir işlem için bu işlem gerçekleştirilen işlemleri geri alma günlük geriye doğru erişir.
+  Kilitlenme süresi itibariyle etkin olan her işlem için, bu işlemin gerçekleştirdiği işlemleri geri alarak günlüğü geriye doğru geçer.
 
-Bu tasarımına bağlı olarak, SQL veritabanı altyapısı beklenmeyen bir yeniden başlatma kurtarmak için gereken süreyi sistemde kilitlenme anda (yaklaşık) en uzun etkin işlem boyutunu orantılıdır. Kurtarma tamamlanmamış tüm işlemler, bir geri alma gerektirir. İşlem gerçekleştirdi iş için gereken süre uzunluğunu orantılıdır ve zaman etkin olmuştur. Bu nedenle, (büyük toplu ekleme gibi işlemleri veya dizin oluşturma işlemleri büyük bir tabloda) SQL Server kurtarma işlemi uzun süre çalışan işlemler oradayken uzun zaman alabilir.
+Bu tasarıma bağlı olarak, SQL veritabanı altyapısının beklenmeyen bir yeniden başlatmadan kurtarmak için geçen süre (kabaca), kilitlenme sırasında sistemdeki en uzun etkin işlemin boyutuyla orantılıdır. Kurtarma işlemi tamamlanmamış tüm işlemlerin geri alınmasını gerektirir. Gerekli sürenin uzunluğu, işlemin gerçekleştirildiği iş ile orantılıdır ve etkin olduğu zaman. Bu nedenle, SQL Server kurtarma işlemi uzun süren işlemlerin (büyük bir tabloya karşı büyük toplu ekleme işlemleri veya dizin derleme işlemleri gibi) bulunması uzun zaman alabilir.
 
-Yukarıda açıklandığı gibi aynı geri kurtarma aşamasını kullanarak olarak da iptal ediliyor/bu tasarıma göre büyük bir işlem geri ayrıca bir uzun zaman alabilir.
+Ayrıca, bu tasarıma göre büyük bir işlemin iptal edilmesi/geri alınması, yukarıda açıklandığı gibi aynı geri alma kurtarma aşamasını kullandığından uzun zaman alabilir.
 
-Ayrıca, olduğunda uzun SQL veritabanı altyapısı işlem günlüğü kesilemiyor karşılık gelen günlük kayıtlarını kurtarma ve geri alma işlemleri için gerekli olduğu işlemler çalışıyor. Bu SQL veritabanı altyapısı tasarımı sonucu olarak, bazı müşteriler işlem günlüğü boyutu çok büyük artar ve büyük miktarda disk alanını kullanır sorun karşı karşıyadır.
+Buna ek olarak, uzun süreli işlemler olduğunda SQL veritabanı altyapısı işlem günlüğünü kesemez çünkü kurtarma ve geri alma işlemleri için karşılık gelen günlük kayıtları gereklidir. Bu SQL veritabanı altyapısının tasarımının bir sonucu olarak, bazı müşteriler, işlem günlüğü boyutunun çok büyük bir süre büyüdüğü ve çok büyük miktarlarda sürücü alanı tükettiği sorunu ortaya koyor.
 
 ## <a name="the-accelerated-database-recovery-process"></a>Hızlandırılmış veritabanı kurtarma işlemi
 
-ADR tamamen SQL veritabanı altyapısı kurtarma işlemini yeniden tasarlanmasını yukarıdaki sorunları ele alır:
+ADR, SQL veritabanı altyapısı kurtarma sürecini tamamen yeniden tasarlayarak Yukarıdaki sorunları giderir:
 
-- Sabit olun zaman/anında/en eski aktif işlem başına günlük tarama zorunda tarafından. ADR ile işlem günlüğünün yalnızca son başarılı denetim noktasından (veya eski kirli sayfa günlük sıra numarası (LSN)) işlenir. Sonuç olarak, Kurtarma süresi uzun tarafından etkilenmez işlemlerin çalıştırılması.
-- Artık bu yana tam işlem günlüğü işlem yapmanız gerekli işlem günlüğü alanını en aza indirin. Sonuç olarak, işlem günlüğü agresif bir biçimde kontrol noktaları kesilebiliyorsa ve yedeklemelerin.
+- Günlüğü en eski etkin işlemin başlangıcına kadar taramak zorunda kalmadan, bunu sabit bir zaman/anında yapın. ADR ile, işlem günlüğü yalnızca son başarılı denetim noktasından (veya en eski kirli sayfa günlüğü sıra numarası (LSN)) işlenir. Sonuç olarak, kurtarma süresi uzun süren işlemlerden etkilenmez.
+- Tüm işlem için günlüğü işlemek zorunda olmadığından, gerekli işlem günlüğü alanını en aza indirin. Sonuç olarak, işlem günlüğü, denetim noktaları ve yedeklemeler gerçekleşilerek kesilebilir.
 
-Yüksek bir düzeyde ADR, hızlı veritabanı kurtarma tüm fiziksel veritabanı değişikliklerini ve sınırlıdır ve neredeyse anında geri alınabilir yalnızca geri alma mantıksal işlemleri, sürüm oluşturma tarafından ulaşır. Bir kilitlenme süresini itibariyle etkin herhangi bir işlem iptal edildi olarak işaretlenmiş ve bu nedenle, bu işlemler tarafından oluşturulan tüm sürümleri eş zamanlı kullanıcı sorgular tarafından göz ardı edilebilir.
+ADR yüksek düzeyde, tüm fiziksel veritabanı değişikliklerinin sürümü çalıştırılarak hızlı veritabanı kurtarmaya erişir ve yalnızca sınırlı olan ve neredeyse anında geri alınabilecek mantıksal işlemleri geri alabilir. Kilitlenme süresi itibariyle etkin olan herhangi bir işlem iptal edildi olarak işaretlenir ve bu nedenle, bu işlemler tarafından oluşturulan tüm sürümler eşzamanlı kullanıcı sorguları tarafından yoksayılabilir.
 
-ADR kurtarma işlemi, geçerli kurtarma işlemi olarak aynı üç aşamadan oluşur. Bu aşamalar ADR ile nasıl çalışır? Aşağıdaki diyagramda gösterildiği ve diyagramı aşağıdaki daha ayrıntılı olarak açıklanmıştır.
+ADR kurtarma işlemi, geçerli kurtarma işlemiyle aynı üç aşamadan oluşur. Bu aşamaların ADR ile nasıl çalıştığı, aşağıdaki diyagramda gösterilmektedir ve diyagram sonrasında daha ayrıntılı olarak açıklanmıştır.
 
 ![ADR kurtarma işlemi](./media/sql-database-accelerated-database-recovery/adr-recovery-process.png)
 
 - **Analiz aşaması**
 
-  İşlem bugün sLog yeniden oluşturuluyor ve günlük kayıtları tutulmayan işlemleri için kopyalama eklenmesi ile aynı kalır.
+  İşlem, yeniden oluşturma işlemi ve sürümü olmayan işlemler için günlük kayıtlarının kopyalanması eklenmesiyle birlikte bugün ile aynı kalır.
   
-- **Yinele** aşaması
+- Yeniden **yineleme** aşaması
 
-  Ayrılmış iki aşamaya (P)
-  - 1\. Aşama
+  İki aşamaya kesildi (P)
+  - 1\. aşama
 
-      SLog (son denetim noktasından kadar eski işlenmemiş hareket) öğesinden yineler. Yalnızca birkaç kayıtlardan sLog işlenmesi gereken şekilde Yinele hızlı bir işlemdir.
+      SLog öğesinden Yinele (en eski, son denetim noktasına kadar). Yalnızca sLog ' dan birkaç kaydı işlemesi gerektiğinden, yineleme hızlı bir işlemdir.
       
-  - 2\. Aşama
+  - 2\. aşama
 
-     İşlem günlüğü başlatır (yerine, en eski işlenmemiş işlem) en son kontrol noktasından gelen Yinele
+     Işlem günlüğünden yineleme, son denetim noktasından başlar (en eski işlenmemiş işlem yerine)
      
-- **Aşama Geri Al**
+- **Geri alma aşaması**
 
-   Sürüm bilgisi olmayan işlemler geri sLog kullanarak geri alma aşamasında ADR ile neredeyse anında tamamlanır ve kalıcı sürüm Store (PV'ler) gerçekleştirmek için mantıksal geri ile satır düzeyi sürümü tabanlı geri.
+   ADR ile geri alma aşaması, sürüm temelli olmayan işlemleri ve kalıcı sürüm deposunu (PVS), satır düzeyinde sürüm tabanlı geri alma işlemini gerçekleştirmek üzere mantıksal geri alma ile geri almak için sLog kullanarak neredeyse anında tamamlar.
 
 ## <a name="adr-recovery-components"></a>ADR kurtarma bileşenleri
 
-ADR dört anahtar bileşenleri şunlardır:
+ADR 'nin dört temel bileşeni şunlardır:
 
-- **Kalıcı sürüm Store (PV'ler)**
+- **Kalıcı sürüm deposu (PVS)**
 
-  Kalıcı sürüm deposu için geleneksel yerine veritabanının kendisi oluşturulan satır sürümleri kalıcı bir yeni SQL veritabanı altyapısı mekanizmadır `tempdb` sürüm deposu. PV'ler kaynak yalıtımı sağlar hem de okunabilir ikincil veritabanı kullanılabilirliğini artırır.
+  Kalıcı sürüm deposu, geleneksel `tempdb` sürümü deposu yerine veritabanında oluşturulan satır sürümlerinin kalıcı hale getirilmesine yönelik yeni bir SQL veritabanı altyapısı mekanizmasıdır. PVS, kaynak yalıtımına izin verir ve okunabilir ikinciller kullanılabilirliğini geliştirir.
 
-- **Mantıksal geri döndür**
+- **Mantıksal olarak döndürülüyor**
 
-  Mantıksal geri satır düzeyi sürümü tabanlı geri alma gerçekleştiriliyor - tutulan tüm işlemler için anında işlemi geri alma ve geri alma sağlamak için zaman uyumsuz işlem sorumludur.
+  Mantıksal geri döndürme, satır düzeyinde sürüm tabanlı geri alma gerçekleştirmekten sorumlu zaman uyumsuz bir işlemdir ve tüm sürümlenmiş işlemler için anlık işlem geri alma ve geri alma sağlar. Mantıksal döndürmeyi şu şekilde gerçekleştirilir:
 
-  - Tüm iptal edilen işlem izler
-  - Tüm kullanıcı işlemleri için PV'ler kullanarak geri alma gerçekleştirir
-  - İşlem hemen sonra tüm kilitleri yayınlar Durdur
+  - Tüm durdurulan işlemleri izleyin ve bunları diğer işlemlere görünmez olarak işaretleyin. 
+  - İşlem günlüğünü fiziksel olarak taramak ve tek seferde değişiklikleri geri almak yerine tüm kullanıcı işlemleri için PVS 'yi kullanarak geri alma işlemi gerçekleştiriliyor.
+  - İşlem iptalinden hemen sonra tüm kilitler serbest bırakılıyor. Abort yalnızca bellekteki değişiklikleri işaretlemeyi içerdiğinden, işlem çok verimlidir ve bu nedenle kilitlerin uzun bir süre tutulması gerekmez.
 
 - **sLog**
 
-  sLog depoları (örneğin, meta veri önbellek geçersiz kılma, kilit alımları ve benzeri) sürüm bilgisi olmayan işlemler için kayıtları oturum ikincil bellek içi günlük bir akıştır. SLog aşağıdaki gibidir:
+  sLog, sürüm dışı işlemlere ait günlük kayıtlarını depolayan, ikincil bir bellek içi günlük akışıdır (meta veri önbelleği eksik doğrulaması, kilit alma işlemleri vb.). SLog:
 
-  - Düşük hacim ve bellek içi
-  - Denetim noktası işlemi sırasında serileştirilmekte olan tarafından diskte kalıcı olur
-  - Düzenli aralıklarla işlem işleme kesildi
-  - Hızlandırır Yinele ve yalnızca sürüm bilgisi olmayan işlemler işleyerek almayı geri al  
-  - Yalnızca gerekli günlük kayıtlarını koruma tarafından agresif işlem günlüğünün kesilmesi sağlar.
+  - Düşük birim ve bellek içi
+  - Denetim noktası işlemi sırasında serileştirilerek diskte kalıcı hale getirildi
+  - İşlemler işleme olarak düzenli aralıklarla kesildi
+  - Yalnızca sürümlenmemiş işlemleri işleyerek Yinele ve geri al işlemini hızlandırır  
+  - Yalnızca gerekli günlük kayıtlarını koruyarak agresif işlem günlüğü kesilmesine izin vermez
 
-- **Temizleme**
+- **Leyicisi**
 
-  Temizleyici düzenli aralıklarla uyanır ve gerekli olmayan sayfa sürümleri temizler, zaman uyumsuz bir işlemdir.
+  Temizleyici, düzenli aralıklarla uyandığı ve gerekli olmayan sayfa sürümlerini temizlediğinde zaman uyumsuz işlemdir.
 
-## <a name="who-should-consider-accelerated-database-recovery"></a>Kimin hızlandırılmış veritabanı kurtarma göz önünde bulundurmalıyım
+## <a name="who-should-consider-accelerated-database-recovery"></a>Hızlandırılmış veritabanı kurtarmayı kimler kabul etmelidir
 
-Müşteriler aşağıdaki türde ADR etkinleştirme dikkate almanız gerekir:
+Aşağıdaki müşteri türleri ADR 'yi etkinleştirmeyi düşünmelidir:
 
-- Çalışan işlemleri içeren iş yüklerine sahip müşteriler uzun.
-- Müşteriler etkin işlemler önemli oranda artma işlem günlüğünün yeri neden olan durumlarda gördünüz.  
-- Uzun süreler nedeniyle (örneğin, beklenmeyen SQL Server yeniden başlatma veya el ile işlem geri alma) kurtarma uzun süre çalışan SQL Server veritabanı kesintiler yaşamış müşteriler.
+- Uzun süren işlemlere sahip iş yükleri olan müşteriler.
+- Etkin işlemlerin, işlem günlüğünün önemli ölçüde büyümesine neden olduğu durumları gördük müşteriler.  
+- Uzun süreli veritabanı SQL Server süresi dolan müşteriler (beklenmeyen SQL Server yeniden başlatma veya el ile işlem geri alma gibi).
 

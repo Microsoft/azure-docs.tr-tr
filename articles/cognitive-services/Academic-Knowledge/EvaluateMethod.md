@@ -1,7 +1,7 @@
 ---
-title: Yöntemi - akademik bilgi API'si
+title: Yöntemi değerlendir-Akademik Bilgi API
 titlesuffix: Azure Cognitive Services
-description: Akademik varlıklara bir sorgu ifadeye göre bir dizi döndürmek için değerlendir yöntemi kullanın.
+description: Bir sorgu ifadesine dayalı bir akademik varlıklar kümesi döndürmek için değerlendir metodunu kullanın.
 services: cognitive-services
 author: alch-msft
 manager: nitinme
@@ -10,16 +10,17 @@ ms.subservice: academic-knowledge
 ms.topic: conceptual
 ms.date: 03/27/2017
 ms.author: alch
-ms.openlocfilehash: d2e628fb7fc502ef9ba81d20680d66f24fd7d138
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 69e701d6727e5410b71e6cf8fbe20a1cd038ddb0
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61339105"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68705001"
 ---
-# <a name="evaluate-method"></a>yöntemi
+# <a name="evaluate-method"></a>Yöntemi değerlendir
 
-**Değerlendirmek** REST API, akademik varlıklara bir sorgu ifadeye göre bir dizi döndürmek için kullanılır.
+**Değerlendirme** REST API, bir sorgu ifadesine dayalı bir akademik varlıklar kümesi döndürmek için kullanılır.
 <br>
 
 **REST uç noktası:**  
@@ -32,12 +33,12 @@ https://westus.api.cognitive.microsoft.com/academic/v1.0/evaluate?
 
 Ad     | Değer | Gerekli mi?  | Açıklama
 -----------|-----------|---------|--------
-**ifade**       | Metin dizesi | Evet | Sorgu ifadesinin hangi varlıkları döndürülmesi gerektiğini belirtir.
-**Model**      | Metin dizesi | Hayır  | Sorgulamak istediğiniz modelin adı.  Değer şu anda, varsayılan olarak *son*.        
-**Öznitelikleri** | Metin dizesi | Hayır<br>Varsayılan: Kimlik | Yanıta dahil öznitelik değerleri belirten bir virgülle ayrılmış listesi. Öznitelik adları büyük/küçük harfe duyarlıdır.
-**count**        | Sayı | Hayır<br>Varsayılan: 10 | Döndürülecek sonuç sayısı.
-**uzaklık**     | Sayı |   Hayır<br>Varsayılan: 0    | Döndürülecek ilk sonuç dizini.
-**OrderBy** |   Metin dizesi | Hayır<br>Varsayılan: olasılık azaltarak | Varlıkları sıralama için kullanılan bir öznitelik adı. İsteğe bağlı olarak, artan/azalan belirtilebilir. Biçim: *adı: asc* veya *adı: desc*.
+**ifadeyi**       | Metin dizesi | Evet | Hangi varlıkların döndürülüp döndürülmeyeceğini belirten bir sorgu ifadesi.
+**modelinizi**      | Metin dizesi | Hayır  | Sorgulamak istediğiniz modelin adı.  Şu anda, varsayılan değer *en*sonuncusudur.        
+**özelliklerine** | Metin dizesi | Hayır<br>varsayılanını Id | Yanıta dahil olan öznitelik değerlerini belirten, virgülle ayrılmış bir liste. Öznitelik adları büyük/küçük harfe duyarlıdır.
+**count**        | Number | Hayır<br>Varsayılan: 10 | Döndürülecek sonuç sayısı.
+**konumu**     | Number |   Hayır<br>Varsayılan: 0    | Döndürülecek ilk sonucun dizini.
+**OrderBy** |   Metin dizesi | Hayır<br>Varsayılan: prob 'yi azaltarak | Varlıkları sıralamak için kullanılan bir özniteliğin adı. İsteğe bağlı olarak, artan/azalan belirlenebilir. Biçim: *Name: ASC* veya *Name: DESC*.
   
  <br>
 
@@ -45,9 +46,9 @@ Ad     | Değer | Gerekli mi?  | Açıklama
 
 Ad | Açıklama
 -------|-----   
-**ifade** |  *Expr* istek parametresi.
-**Varlıklar** |  0 veya sorgu ifadesi ile eşleşen daha fazla varlık dizisi. Her varlık, bir doğal logaritmayı olasılık değerini ve diğer istenen özniteliklerinin değerlerini içerir.
-**İptal edildi** | İstek zaman aşımına uğrarsa true.
+**ifadeyi** |  İstekten *Expr* parametresi.
+**varlıklar** |  Sorgu ifadesiyle eşleşen 0 veya daha fazla varlık dizisi. Her varlık doğal bir günlük olasılık değeri ve istenen diğer özniteliklerin değerlerini içerir.
+**kesilmiş** | İstek zaman aşımına uğradı doğru.
 
 <br>
 
@@ -56,9 +57,9 @@ Ad | Açıklama
 https://westus.api.cognitive.microsoft.com/academic/v1.0/evaluate?expr=
 Composite(AA.AuN=='jaime teevan')&count=2&attributes=Ti,Y,CC,AA.AuN,AA.AuId
 ```
-<br>Genellikle, bir ifade gelen bir yanıt elde edileceği **yorumlama** yöntemi.  Ancak, aynı zamanda sorgu ifadeleri kendiniz oluşturabilirsiniz (bkz [sorgu ifadesi söz dizimi](QueryExpressionSyntax.md)).  
+<br>Genellikle, bir ifade **yorumlama** yöntemine bir yanıttan elde edilir.  Ancak sorgu ifadelerini kendiniz de oluşturabilirsiniz (bkz. [sorgu Ifadesi söz dizimi](QueryExpressionSyntax.md)).  
   
-Kullanarak *sayısı* ve *uzaklığı* parametre sonuçları çok sayıda elde edilemiyor, sonuçları bir çok büyük (ve büyük olasılıkla yavaş) yanıt tek bir istek göndermeden.  Bu örnekte, ilk yorumu ifade istek kullanılan **yorumlama** API yanıt olarak *expr* değeri. *Sayısı = 2* parametresi 2 varlık sonuçları istenen belirtir. Ve *öznitelikleri Za, Y, bilgi, AA =. AuN, AA. AuId* parametresi gösterir başlık, yıl, alıntı sayısı, yazarın adı ve Yazar Kimliği için her sonuç istenir.  Bkz: [varlık öznitelikleri](EntityAttributes.md) özniteliklerin bir listesi için.
+*Count* ve *sapmayı* parametrelerini kullanarak, çok sayıda sonuç tek bir istek gönderilmeden elde edilebilir ve bu da çok büyük (yüksek olabilecek yavaş) bir yanıta neden olur.  Bu örnekte, istek, *API değeri olarak* **yorumlanan** API yanıtından ilk yorumu için ifadeyi kullandı. *Count = 2* parametresi, 2 varlık sonuçlarının istendiğini belirtir. Ve *öznitelikleri = ti, Y, CC, aa. AuN, AA. Auıd* parametresi, her sonuç için başlık, yıl, alıntı sayısı, yazar adı ve yazar kimliğinin istendiğini belirtir.  Öznitelikler listesi için bkz. [varlık öznitelikleri](EntityAttributes.md) .
   
 ```JSON
 {

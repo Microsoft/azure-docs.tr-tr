@@ -1,35 +1,36 @@
 ---
-title: Azure Market vhd'lerinizden VM dağıtma
-description: Azure ile dağıtılan bir VHD'den VM kaydedileceği açıklanmaktadır.
+title: Azure Marketi için VHD 'inizden bir VM dağıtma
+description: Azure tarafından dağıtılan bir VHD 'den bir sanal makinenin nasıl kaydedileceği açıklanmaktadır.
 services: Azure, Marketplace, Cloud Partner Portal,
-author: v-miclar
+author: qianw211
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
-ms.date: 11/30/2018
-ms.author: pabutler
-ms.openlocfilehash: a393620f28d45ec494c4e899f01e7e9a92b3ceba
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/08/2019
+ms.author: evansma
+ms.openlocfilehash: 797c258c963d0daec32a8f9ac7c4e0665dc465d3
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938299"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73813407"
 ---
-# <a name="deploy-a-vm-from-your-vhds"></a>Vhd'lerinizden VM dağıtma
+# <a name="deploy-a-vm-from-your-vhds"></a>VHD 'inizden bir VM dağıtma
 
-Bu bölümde, bir sanal makine (VM) dağıtmak nasıl bir Azure ile dağıtılan sanal sabit diskten (VHD) açıklanmaktadır.  Gereken araçları ve bunları bir kullanıcı VM görüntüsü oluşturun ve ardından PowerShell betiklerini kullanarak Azure'a dağıtmak için nasıl kullanılacağını listeler.
+Bu bölümde, bir sanal makinenin (VM) Azure tarafından dağıtılan bir sanal sabit diskten (VHD) nasıl dağıtılacağı açıklanmaktadır.  Gerekli araçları ve Kullanıcı VM görüntüsü oluşturmak için bunları nasıl kullanacağınızı ve PowerShell betiklerini kullanarak Azure 'a dağıtmayı listeler.
 
-Sanal sabit disklerinizin (VHD) yükledikten sonra — genelleştirilmiş işletim sistemi VHD'si ve sıfır veya daha fazla veri diski VHD'leri — Azure depolama hesabınızın, bunları bir kullanıcı VM görüntüsü olarak kaydedebilirsiniz. Ardından bu görüntüyü test edebilirsiniz. İşletim sistemi VHD'si genelleştirilmiş olduğundan VHD URL'sini sağlayarak VM'yi doğrudan dağıtamazsınız.
+Sanal sabit disklerinizi (VHD) karşıya yükledikten sonra, genelleştirilmiş işletim sistemi VHD 'SI ve sıfır veya daha fazla veri diski VHD 'leri Azure depolama hesabınıza yükledikten sonra, bunları bir Kullanıcı VM görüntüsü olarak kaydedebilirsiniz. Daha sonra bu görüntüyü test edebilirsiniz. İşletim sistemi VHD 'niz Genelleştirilmiş olduğundan, VHD URL 'sini sağlayarak VM 'yi doğrudan dağıtamazsınız.
 
-VM görüntüleri hakkında daha fazla bilgi edinmek için şu blog gönderilerine bakın:
+VM görüntüleri hakkında daha fazla bilgi edinmek için aşağıdaki blog gönderilerine bakın:
 
 - [VM görüntüsü](https://azure.microsoft.com/blog/vm-image-blog-post/)
-- [VM görüntüsü PowerShell 'Nasıl yapılır'](https://azure.microsoft.com/blog/vm-image-powershell-how-to-blog-post/)
+- [VM görüntüsü PowerShell ' nasıl yapılır '](https://azure.microsoft.com/blog/vm-image-powershell-how-to-blog-post/)
 
 [!INCLUDE [updated-for-az](../../../../includes/updated-for-az.md)]
 
-## <a name="prerequisite-install-the-necessary-tools"></a>Önkoşul: gerekli araçları yükleyin
+## <a name="prerequisite-install-the-necessary-tools"></a>Önkoşul: gerekli araçları yükler
 
-Zaten yapmadıysanız, Azure PowerShell ve Azure CLI aşağıdaki yönergeleri kullanarak yükleyin:
+Daha önce yapmadıysanız, aşağıdaki yönergeleri kullanarak Azure PowerShell ve Azure CLı 'yi yükleyebilirsiniz:
 
 - [Azure PowerShell’i yükleme](https://docs.microsoft.com/powershell/azure/install-Az-ps)
 - [Azure CLI'yı yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli)
@@ -37,50 +38,50 @@ Zaten yapmadıysanız, Azure PowerShell ve Azure CLI aşağıdaki yönergeleri k
 
 ## <a name="deployment-steps"></a>Dağıtım adımları
 
-Oluşturma ve bir kullanıcı VM görüntüsü dağıtmak için aşağıdaki adımları kullanın:
+Bir Kullanıcı VM görüntüsü oluşturmak ve dağıtmak için aşağıdaki adımları kullanacaksınız:
 
-1. Yakalama ve görüntüyü Genelleştirme kapsar kullanıcı VM görüntüsü oluşturun. 
-2. Sertifikaları oluşturun ve bunları yeni bir Azure Key Vault'ta depolar. VM güvenli bir WinRM bağlantı kurmak için bir sertifika gereklidir.  Bir Azure Resource Manager şablonu ve bir Azure PowerShell Betiği sağlanır. 
-3. Sağlanan şablon ve betik kullanarak bir kullanıcı VM görüntüsünden VM dağıtın.
+1. Görüntüyü yakalamayı ve genelleştirmeyi gerektiren Kullanıcı VM görüntüsünü oluşturun. 
+2. Sertifikaları oluşturun ve yeni bir Azure Key Vault depolayın. VM ile güvenli bir WinRM bağlantısı kurmak için bir sertifika gerekir.  Bir Azure Resource Manager şablonu ve bir Azure PowerShell betiği sağlanır. 
+3. Sağlanan şablon ve betiği kullanarak VM 'yi bir Kullanıcı VM görüntüsünden dağıtın.
 
-Sanal makinenizin dağıtıldıktan sonra hazır olduğunuz [VM görüntünüzü sertifika](./cpp-certify-vm.md).
+VM 'niz dağıtıldıktan sonra [VM görüntünüzü onaylamaya](./cpp-certify-vm.md)hazırsınızdır.
 
-1. Tıklayın **yeni** araması **şablon dağıtımı**, ardından **düzenleyicide kendi şablonunuzu oluşturun**.  <br/>
-   ![Azure portalında VHD'yi dağıtım şablonu oluşturma](./media/publishvm_021.png)
+1. **Yeni** ' ye tıklayın ve **şablon dağıtımı**için arama yapın, ardından **düzenleyicide kendi şablonunuzu oluşturun**' i seçin.  <br/>
+   Azure portal](./media/publishvm_021.png) derleme VHD dağıtım şablonu ![
 
-1. Bunu kopyalayıp [JSON şablonunu](./cpp-deploy-json-template.md) Düzenleyicisi ve tıklatın **Kaydet**. <br/>
-   ![Azure portalında VHD'yi dağıtım şablonunu Kaydet](./media/publishvm_022.png)
+1. Bu [JSON şablonunu](./cpp-deploy-json-template.md) kopyalayıp düzenleyiciye yapıştırın ve **Kaydet**' e tıklayın. <br/>
+   Azure portal](./media/publishvm_022.png) VHD Dağıtım şablonunu ![Kaydet
 
-1. Görüntülenen için parametre değerlerini sağlayın **özel dağıtım** özellik sayfaları.
+1. Görüntülenmiş **özel dağıtım** özelliği sayfaları için parametre değerlerini belirtin.
 
    <table> <tr> <td valign="top"> <img src="./media/publishvm_023.png" alt="Custom deployment property page 1"> </td> <td valign="top"> <img src="./media/publishvm_024.png" alt="Custom deployment property page 2"> </td> </tr> </table> <br/> 
 
-   |  **Parametre**              |   **Açıklama**                                                            |
+   |  **Parametresinin**              |   **Açıklama**                                                            |
    |  -------------              |   ---------------                                                            |
-   | Kullanıcı depolama hesabı adı   | Genelleştirilmiş VHD bulunduğu depolama hesabı adı                    |
-   | Kullanıcı depolama kapsayıcısı adı | Genelleştirilmiş VHD bulunduğu kapsayıcı adı                          |
-   | Genel IP için DNS adı      | Genel IP DNS adı                                                           |
-   | Yönetici kullanıcı adı             | Yeni VM için yönetici hesabının kullanıcı adı                                  |
-   | Yönetici Parolası              | Yeni VM için yönetici hesabının parolası                                  |
-   | İşletim sistemi türü                     | VM işletim sistemi: `Windows` \| `Linux`                                    |
-   | Abonelik Kimliği             | Seçili abonelik tanımlayıcısı                                      |
-   | Location                    | Dağıtım coğrafi konum                                        |
+   | Kullanıcı depolama hesabı adı   | Genelleştirilmiş VHD 'nin bulunduğu depolama hesabı adı                    |
+   | Kullanıcı depolama kapsayıcısı adı | Genelleştirilmiş VHD 'nin bulunduğu kapsayıcı adı                          |
+   | Genel IP için DNS adı      | Genel IP DNS adı. DNS adı, VM 'nin, teklif dağıtıldıktan sonra bunu Azure portalında tanımlayacaksınız.  |
+   | Yönetici Kullanıcı adı             | Yeni VM için yönetici hesabının Kullanıcı adı                                  |
+   | Yönetici parolası              | Yeni VM için yönetici hesabının parolası                                  |
+   | İşletim Sistemi Türü                     | VM işletim sistemi: `Windows` \| `Linux`                                    |
+   | Abonelik Kimliği             | Seçili aboneliğin tanımlayıcısı                                      |
+   | Konum                    | Dağıtımın coğrafi konumu                                        |
    | VM Boyutu                     | [Azure VM boyutu](https://docs.microsoft.com/azure/virtual-machines/windows/sizes), örneğin `Standard_A2` |
-   | Genel IP adresi adı      | Genel IP adresi adı                                               |
-   | VM Adı                     | Yeni bir VM adı                                                           |
-   | Sanal ağ adı        | Sanal makine tarafından kullanılan sanal ağ adı                                   |
-   | NIC adı                    | Sanal ağ çalıştıran ağ arabirim kartı adı               |
-   | VHD URL'Sİ                     | İşletim sistemi diski VHD URL'si tamamlayın                                                     |
+   | Genel IP adresi adı      | Genel IP adresinizin adı                                               |
+   | VM Adı                     | Yeni VM 'nin adı                                                           |
+   | Sanal ağ adı        | VM tarafından kullanılan sanal ağın adı                                   |
+   | NIC adı                    | Sanal ağı çalıştıran ağ arabirimi kartının adı               |
+   | VHD URL 'SI                     | İşletim sistemi diski VHD URL 'SI                                                     |
    |  |  |
             
-1. Bu değerleri sizin sağlamanız sonra tıklayın **satın alma**. 
+1. Bu değerleri girdikten sonra **satın al**' a tıklayın. 
 
-Azure dağıtım başlayacak: Belirtilen depolama hesabı yolu içinde belirtilen yönetilmeyen VHD ile yeni bir VM oluşturur.  Tıklayarak ilerleme durumunu Azure portalında izleyebilirsiniz **sanal makineler** portalının sol taraftaki.  VM oluşturulduğunda durumu gelen değiştirecek `Starting` için `Running`. 
+Azure dağıtıma başlayacak: belirtilen depolama hesabı yolunda belirtilen yönetilmeyen VHD 'ye sahip yeni bir VM oluşturur.  Portalın sol tarafındaki **sanal makinelere** tıklayarak Azure Portal ilerleme durumunu izleyebilirsiniz.  VM oluşturulduğunda, durum `Starting` iken `Running`olarak değişir. 
 
 
-### <a name="deploy-a-vm-from-powershell"></a>Powershell'den VM dağıtma
+### <a name="deploy-a-vm-from-powershell"></a>PowerShell 'den VM dağıtma
 
-Yeni oluşturulan genelleştirilmiş VM görüntüsünden büyük bir VM'yi dağıtmak için aşağıdaki cmdlet'leri kullanın.
+Yeni oluşturulan Genelleştirilmiş VM görüntüsünden büyük bir VM dağıtmak için aşağıdaki cmdlet 'leri kullanın.
 
 ``` powershell
     $img = Get-AzureVMImage -ImageName "myVMImage"
@@ -93,5 +94,5 @@ Yeni oluşturulan genelleştirilmiş VM görüntüsünden büyük bir VM'yi dağ
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sonra [bir kullanıcı VM görüntüsü oluşturma](cpp-create-user-image.md) çözümünüz için.
+Ardından, çözümünüz için [bir Kullanıcı VM görüntüsü oluşturacaksınız](cpp-create-user-image.md) .
 

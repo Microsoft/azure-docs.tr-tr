@@ -1,71 +1,78 @@
-- name: Veritabanı Geçiş Hizmeti Belgeleri
+- name: Veritabanı Geçiş Hizmeti belgeleri
   href: index.yml
 - name: Genel Bakış
   items:
-    - name: Veritabanı Geçiş Hizmeti (DMS) nedir?
+    - name: Azure Veritabanı Geçiş Hizmeti nedir?
       href: dms-overview.md
 - name: Hızlı Başlangıçlar
   items:
-    - name: Hizmet Oluşturma - Portal
+    - name: Hizmet oluşturma - Portal
       href: quickstart-create-data-migration-service-portal.md
+    - name: Karma modda hizmet oluşturma - Portal
+      href: quickstart-create-data-migration-service-hybrid-portal.md
 - name: Öğreticiler
   items:
-    - name: SQL Server’ı Azure SQL DB’ye çevrimdışı geçirme
+    - name: SQL Server'ı Azure SQL Veritabanı tek veritabanına çevrimdışı geçirme
       href: tutorial-sql-server-to-azure-sql.md
-    - name: SQL Server’ı Azure SQL DB’ye çevrimiçi geçirme
+    - name: SQL Server'ı Azure SQL Veritabanı tek veritabanına çevrimiçi geçirme
       href: tutorial-sql-server-azure-sql-online.md
-    - name: SQL Server’ı Azure SQL DB Yönetilen Örneğine çevrimdışı geçirme
+    - name: SQL Server’ı Azure SQL DB yönetilen örneğine çevrimdışı geçirme
       href: tutorial-sql-server-to-managed-instance.md
-    - name: SQL Server’ı Azure SQL DB Yönetilen Örneğine çevrimiçi geçirme
+    - name: SQL Server’ı Azure SQL DB yönetilen örneğine çevrimiçi geçirme
       href: tutorial-sql-server-managed-instance-online.md
-    - name: RDS SQL Server’ı Azure SQL DB veya Azure SQL DB Yönetilen Örneğine çevrimiçi geçirme
+    - name: RDS SQL Server'ı Azure SQL Veritabanı tek veritabanına veya Azure SQL DB yönetilen örneğine çevrimiçi geçirme
       href: tutorial-rds-sql-server-azure-sql-and-managed-instance-online.md
     - name: MySQL’i MySQL için Azure DB’ye çevrimiçi geçirme
       href: tutorial-mysql-azure-mysql-online.md
     - name: RDS MySQL’i MySQL için Azure DB’ye çevrimiçi geçirme
       href: tutorial-rds-mysql-server-azure-db-for-mysql-online.md
-    - name: PostgreSQL’i çevrimiçi ortamda PostgreSQL için Azure DB‘ye geçirme
+    - name: PostgreSQL’i PostgreSQL için Azure DB-Tek sunucuya çevrimiçi geçirme
       href: tutorial-postgresql-azure-postgresql-online.md
-    - name: RDS PostgreSQL’i çevrimiçi ortamda PostgreSQL için Azure DB‘ye geçirme
+    - name: RDS PostgreSQL’i PostgreSQL için Azure DB-Tek sunucuya çevrimiçi geçirme
       href: tutorial-rds-postgresql-server-azure-db-for-postgresql-online.md
     - name: MongoDB'yi çevrimdışı ortamda Azure Cosmos DB Mongo API'sine geçirme
       href: tutorial-mongodb-cosmos-db.md
     - name: MongoDB'yi çevrimiçi ortamda Azure Cosmos DB Mongo API'sine geçirme
       href: tutorial-mongodb-cosmos-db-online.md
-    - name: Oracle'ı PostgreSQL çevrimiçi için Azure Veritabanı’na geçirme
+    - name: Oracle'ı PostgreSQL için Azure Veritabanı-Tek sunucuya çevrimiçi geçirme
       href: tutorial-oracle-azure-postgresql-online.md
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: SQL Server’ı Azure SQL DB'ye geçirmek için PowerShell kullanma
+    - name: SQL Server’ı Azure SQL DB tek veritabanına geçirmek için PowerShell kullanma
       href: howto-sql-server-to-azure-sql-powershell.md
-    - name: SQL Server’ı Azure SQL MI'ya geçirmek için PowerShell kullanma
+    - name: SQL Server’ı Azure SQL DB yönetilen örneğine geçirmek için PowerShell kullanma
       href: howto-sql-server-to-azure-sql-mi-powershell.md
     - name: Geçiş etkinliğini izleme
       href: how-to-monitor-migration-activity.md
-    - name: SSIS paketlerini Azure SQL Veritabanı’na geçirme
+    - name: SSIS paketlerini Azure SQL Veritabanı tek veritabanına yeniden dağıtma
       href: how-to-migrate-ssis-packages.md
-    - name: SSIS paketlerini Azure SQL Veritabanı yönetilen örneğine geçirme
+    - name: SSIS paketlerini Azure SQL Veritabanı yönetilen örneğine yeniden dağıtma
       href: how-to-migrate-ssis-packages-managed-instance.md
 - name: Kaynaklar
+  expanded: true
   items:
     - name: Veritabanı geçiş senaryosunun durumu
       href: resource-scenario-status.md
     - name: Önkoşullara genel bakış
       href: pre-reqs.md
-    - name: Azure SQL DB Yönetilen Örneği geçişlerinin ağ topolojileri
+    - name: Azure SQL DB MI geçişlerinin ağ topolojileri
       href: resource-network-topologies.md
+    - name: SQL Server'dan Azure SQL DB MI'ye çevrimiçi geçişler için özel roller
+      href: resource-custom-roles-sql-db-managed-instance.md
     - name: Sorun çözümü ve bilinen sorunlar
       items:
         - name: Kaynak veritabanı bağlantı sorunlarını giderme
           href: known-issues-troubleshooting-dms-source-connectivity.md
         - name: Genel sorunların ve hataların çözümü
           href: known-issues-troubleshooting-dms.md
-        - name: Bilinen Sorunlar - Azure SQL DB’ye çevrimiçi geçiş
+        - name: Bilinen Sorunlar - Azure SQL DB tek veritabanına çevrimiçi geçiş
           href: known-issues-azure-sql-online.md
         - name: Bilinen Sorunlar - MySQL için Azure DB’ye çevrimiçi geçiş
           href: known-issues-azure-mysql-online.md
-        - name: Bilinen Sorunlar - PostgreSQL için Azure DB’ye çevrimiçi geçiş
+        - name: Bilinen Sorunlar - PostgreSQL'den PostgreSQL için Azure DB-Tek sunucuya çevrimiçi geçiş
           href: known-issues-azure-postgresql-online.md
+        - name: Bilinen Sorunlar - Oracle'dan PostgreSQL için Azure DB-Tek sunucuya çevrimiçi geçiş
+          href: known-issues-oracle-azure-postgresql-online.md
     - name: Videolar
       items:
         - name: Veritabanı Geçiş Kılavuzu’nu kullanma
@@ -88,7 +95,7 @@
       items:
         - name: Veri geçişi senaryolarında kullanılabilen hizmet ve araçlar
           href: dms-tools-matrix.md
-        - name: Veritabanı Geçiş Kılavuzu
+        - name: Azure Veritabanı Geçiş Kılavuzu
           href: 'https://aka.ms/datamigration'
         - name: Data Migration Yardımcısı
           href: 'https://aka.ms/dma'
@@ -96,6 +103,8 @@
           href: 'https://aka.ms/ssma'
         - name: Veritabanı Yükseltme Deneyimi Yardımcısı
           href: 'https://aka.ms/dea-docs'
+        - name: Veri Erişimi Geçiş Araç Seti
+          href: 'https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit'
     - name: Sık Sorulan Sorular
       href: faq.md
     - name: UserVoice Geri Bildirimi

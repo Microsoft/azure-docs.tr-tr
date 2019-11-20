@@ -1,114 +1,143 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Language Understanding (LUIS) Belgeleri
+### YamlMime:Landing
+title: Language Understanding (LUIS) belgeleri
+summary: Language Understanding hizmetini kullanarak bir kişinin kendi sözcükleriyle ifade ettiği isteği uygulamanızın anlamasını sağlama hakkında bilgi edinin.
 metadata:
-  document_id: null
-  title: 'Language Understanding (LUIS) - Öğreticiler, Hızlı Başlangıçlar, API Başvurusu'
-  description: Language Understanding hizmetini kullanarak bir kişinin kendi sözcükleriyle ifade ettiği isteği uygulamanızın anlamasını sağlama hakkında bilgi edinin.
-  author: nitinme
-  manager: cgronlun
-  ms.service: cognitive-services
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 01/23/2019
+  ms.date: 09/19/2019
   ms.author: nitinme
-abstract:
-  description: 'Language Understanding (LUIS), bir kişinin kendi sözcükleriyle ifade ettiği isteği uygulamanızın anlamasını sağlar. LUIS, geliştiricilerin doğal dilde kullanıcı girdisi alabilen ve bu girdiden anlam çıkarabilen uygulamalar derlemesini sağlamak için makine öğrenimini kullanır.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: ../media/index/luis-landing-page-video.png
-      width: 250
-    title: 'LUIS yenilikleri (18:28)'
-    href: 'https://azure.microsoft.com/resources/videos/whats-new-with-language-understanding-service-luis'
-    width: 250
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/luis/what-is-luis
-            html: <p>Language Understanding Service (LUIS) hakkında daha fazla bilgi edinin.</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: LUIS nedir?
-          - href: /azure/cognitive-services/luis/luis-how-plan-your-app
-            html: <p>Uygulamanızla ilgili amaç ve varlık ana hattı oluşturun.</p>
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: LUIS uygulamanızı planlama
-          - href: /azure/cognitive-services/luis/luis-concept-best-practices
-            html: <p>LUIS uygulaması oluştururken bu en iyi yöntemleri kullanın.</p>
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: LUIS uygulaması için en iyi yöntemler
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: table
-        style: dataMatrix
-        columns:
-          - image:
-              src: media/index/logo_csharp.svg
-          - image:
-              src: media/index/logo_java.svg
-          - image:
-              src: media/index/logo_nodejs.svg
-          - image:
-              src: media/index/logo_python.svg
-        rows:
-          - title: Uç nokta API’leri
-            values:
-              - href: luis-get-started-cs-get-intent
-              - href: luis-get-started-java-get-intent
-              - href: luis-get-started-node-get-intent
-              - href: luis-get-started-python-get-intent
-          - title: Yazma API’si
-            values:
-              - href: luis-get-started-cs-add-utterance
-              - href: luis-get-started-java-add-utterance
-              - href: luis-get-started-node-add-utterance
-              - href: luis-get-started-python-add-utterance
-  - title: Adım adım öğreticiler
-    items:
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="luis-quickstart-intents-only">İnsan Kaynakları (İK) etki alanına yönelik uygulama oluşturma</a>
-          - html: <a href="luis-tutorial-prebuilt-intents-entities">Önceden derlenmiş amaçlar ve varlıklar ekleme</a>
-          - html: <a href="luis-quickstart-intents-regex-entity">Normal ifade varlığı ekleme</a>
-          - html: <a href="luis-quickstart-intent-and-list-entity">Liste varlığı ekleme</a>
-          - html: <a href="tutorial-entity-roles">Varlık rolleri kullanma</a>
-          - html: <a href="luis-quickstart-primary-and-secondary-data">Basit varlık ve tümcecik listesi ekleme</a>
-          - html: <a href="luis-quickstart-intent-and-key-phrase">keyPhrase varlığını ekleme</a>
-          - html: <a href="luis-quickstart-intent-and-sentiment-analysis">Yaklaşım analizi ekleme</a>
-  - title: Örnekler
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://aka.ms/luis-code-samples">GitHub’daki örnekler</a><br/>'
-  - title: Videolar
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://channel9.msdn.com/Shows/Azure-Friday/At-Build-2018-Cognitive-Services-Language-LUIS/player" > Azure Friday At Build 2018 - Bilişsel Hizmetler - Dil (LUIS)</a>'
-          - html: '<a href="https://channel9.msdn.com/events/Build/2018/BRK3208" >Build 2018 Session - Bot zekası, Konuşma Özellikleri ve NLU en iyi uygulamaları</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: REST API'leri v2
-            html: '<p><a href="https://go.microsoft.com/fwlink/?linkid=2092356"> Uç nokta API’si</a></p><p><a href="https://go.microsoft.com/fwlink/?linkid=2092087"> Yazma API’si</a></p>'
-          - title: SDK’lar
-            html: '<p><a href="https://aka.ms/luis-endpoint-sdk"> .NET uç nokta SDK’sı</a></p><p><a href="https://aka.ms/luis-authoring-sdk"> .NET Yazma SDK’sı</a></p>'
-          - title: PowerShell
-            html: '<p><a href=https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices">Azure CLI</a></p>'
+  author: nitinme
+  ms.service: cognitive-services
+  ms.subservice: language-understanding
+  services: cognitive-services
+  title: Language Understanding (LUIS) Belgeleri
+  titleSuffix: Azure Cognitive Services
+  description: Language Understanding (LUIS), bir kişinin kendi sözcükleriyle ifade ettiği isteği uygulamanızın anlamasını sağlar. LUIS, geliştiricilerin doğal dilde kullanıcı girdisi alabilen ve bu girdiden anlam çıkarabilen uygulamalar derlemesini sağlamak için makine öğrenimini kullanır.
+  ms.openlocfilehash: 70249b540e53ab8182a25f81d7401697b2b888c1
+  ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/20/2019
+  ms.locfileid: "71155027"
+landingContent:
+- title: Language Understanding (LUIS) hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Language Understanding nedir?
+      url: what-is-luis.md
+    - text: Yenilikler
+      url: whats-new.md
+    - text: LUIS portalı
+      url: https://www.luis.ai
+  - linkListType: concept
+    links:
+    - text: Uygulamanızı planlama
+      url: luis-how-plan-your-app.md
+    - text: Uygulamanızı yazma döngüsü
+      url: luis-concept-app-iteration.md
+  - linkListType: video
+    links:
+    - text: 'AI Tanıtım Turu: LUIS'
+      url: https://azure.microsoft.com/resources/videos/whats-new-with-language-understanding-service-luis
+- title: Amaçları, varlıkları ve özellikleri oluşturma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Hedefler
+      url: luis-concept-intent.md
+    - text: Varlıklar
+      url: luis-concept-entity-types.md
+    - text: İyi bir ifade örneği
+      url: luis-concept-utterance.md
+    - text: Tümcecik listesi özellikleri
+      url: luis-concept-feature.md
+  - linkListType: quickstart
+    links:
+    - text: 'Portal: Yeni LUIS uygulaması oluşturma'
+      url: get-started-portal-build-app.md
+    - text: C# SDK'sını kullanma
+      url: sdk-python-quickstart-authoring-app.md
+    - text: Python SDK’sını kullanma
+      url: sdk-python-quickstart-authoring-app.md
+  - linkListType: how-to-guide
+    links:
+    - text: Yeni LUIS uygulaması oluşturma
+      url: luis-how-to-start-new-app.md
+    - text: Örnek ifadelerle amaç ekleme
+      url: luis-how-to-add-intents.md
+    - text: Varlık ekleme
+      url: luis-how-to-add-example-utterances.md
+    - text: Tümcecik listesi özelliğini ekleme
+      url: luis-how-to-add-features.md
+- title: Sürüm, eğitme, test ve yayımlama
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Sürüm oluşturma
+      url: luis-concept-version.md
+    - text: Etkileşimli test
+      url: luis-concept-test.md
+    - text: Toplu işe testi
+      url: luis-concept-batch-test.md
+  - linkListType: quickstart
+    links:
+    - text: 'Portal: Uygulamayı tahmin uç noktasına dağıtma'
+      url: get-started-portal-deploy-app.md
+    - text: C# SDK'sını kullanma
+      url: sdk-python-quickstart-authoring-app.md#train-the-app
+    - text: Python SDK’sını kullanma
+      url: sdk-python-quickstart-authoring-app.md#train-the-app
+  - linkListType: how-to-guide
+    links:
+    - text: Uygulamanızın sürümü oluşturma
+      url: luis-how-to-manage-versions.md
+    - text: Etkileşimli test
+      url: luis-interactive-test.md
+    - text: Toplu işe testi
+      url: luis-how-to-batch-test.md
+    - text: Uygulamanızı eğitme
+      url: luis-how-to-train.md
+    - text: Tahmin uç noktasını kullanmak için yayımlama
+      url: luis-how-to-publish-app.md
+- title: Uç noktadan tahmin alma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: C# .NET SDK ile
+      url: sdk-csharp-quickstart-query-prediction-endpoint.md
+  - linkListType: quickstart
+    links:
+    - text: REST kullanarak C# ile
+      url: luis-get-started-cs-get-intent.md
+    - text: REST kullanarak Go ile
+      url: luis-get-started-go-get-intent.md
+    - text: REST kullanarak Java ile
+      url: luis-get-started-java-get-intent.md
+    - text: REST kullanarak Node.js ile
+      url: luis-get-started-node-get-intent.md
+    - text: REST kullanarak Python ile
+      url: luis-get-started-python-get-intent.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Geliştirici kaynakları
+      url: developer-reference-resource.md
+    - text: Uygulama sınırları
+      url: luis-boundaries.md
+    - text: Önceden oluşturulmuş varlıklar
+      url: luis-reference-prebuilt-entities.md
+    - text: Özel Varlıklar
+      url: luis-concept-entity-types.md#types-of-entities
+    - text: Önceden oluşturulmuş etki alanları
+      url: luis-reference-prebuilt-domains.md
+- title: Yardım ve geri bildirim
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Sorun giderme
+      url: troubleshooting.md
+    - text: Stack Overflow ile ilgili soru sorun
+      url: https://stackoverflow.com/questions/tagged/LUIS
+    - text: UserVoice ile hizmeti etkileme
+      url: https://cognitive.uservoice.com/forums/551524-luis

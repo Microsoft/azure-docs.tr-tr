@@ -2,19 +2,19 @@
 title: include dosyası
 description: include dosyası
 services: functions
-author: tdykstra
+author: ggailey777
 manager: cfowler
-ms.service: functions
+ms.service: azure-functions
 ms.topic: include
 ms.date: 05/17/2018
 ms.author: tdykstra
 ms.custom: include file
-ms.openlocfilehash: f8733ef907b8f31ace7ea72f705ba1b37d1adece
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: c2fff707dcaafac69efcad3dbf33446a7b797396
+ms.sourcegitcommit: f10ae7078e477531af5b61a7fe64ab0e389830e8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188161"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67608414"
 ---
 ### <a name="azure-storage-sdk-version-in-functions-1x"></a>Azure depolama SDK'sı sürümü işlevlerde 1.x
 

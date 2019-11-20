@@ -1,184 +1,162 @@
 ---
-title: Nasıl çalışır Personalizer - Personalizer
+title: Kişiselleştirici nasıl çalıştığı-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: Personalizer bir bağlamda kullanmak için hangi eylemin bulmak için makine öğrenimini kullanıyor. Her öğrenme döngüsü, yalnızca kendisine derecesini gönderdiğiniz ve ödül çağıran veriler üzerine geliştirilen bir modeli vardır. Her öğrenme döngüsü birbirinden tamamen bağımsızdır.
-author: edjez
+description: Kişiselleştirici, bir bağlamda hangi eylemin kullanılacağını saptamak için makine öğrenimini kullanır. Her öğrenme döngüsünün, işleme ve yeniden arama yoluyla kendisine gönderdiğiniz veriler üzerinde özel olarak eğitilen bir modeli vardır. Her öğrenme döngüsü birbirleriyle tamamen bağımsızdır.
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
-ms.date: 06/07/2019
-ms.author: edjez
-ms.openlocfilehash: d0a0a6101d876493188426d19f2fa845d20ee274
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.topic: conceptual
+ms.date: 10/23/2019
+ms.author: diberry
+ms.openlocfilehash: 902bf84ebf090cf9f0f886ad1e774ff7bdfeca93
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67055476"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490749"
 ---
 # <a name="how-personalizer-works"></a>Kişiselleştirme nasıl çalışır?
 
-Personalizer bir bağlamda kullanmak için hangi eylemin bulmak için makine öğrenimini kullanıyor. Özel olarak kendisine gönderilen veriler üzerinde eğitilmiş bir modeli öğrenme döngüsü her sahip **derece** ve **ödül** çağırır. Her öğrenme döngüsü birbirinden tamamen bağımsızdır. Her bir bölümü veya kişiselleştirmek isteyip uygulamanızın davranışını bir öğrenme döngüsü oluşturun.
+Kişiselleştirici, bir bağlamda hangi eylemin kullanılacağını saptamak için makine öğrenimini kullanır. Her öğrenme döngüsünün, işleme ve **yeniden** arama yoluyla kendisine gönderdiğiniz veriler üzerinde özel olarak **eğitilen bir** modeli vardır. Her öğrenme döngüsü birbirleriyle tamamen bağımsızdır. Kişiselleştirmek istediğiniz her bir bölüm veya davranış için bir öğrenme döngüsü oluşturun.
 
-Her bir döngü için **ile derece API'ye çağrı** geçerli bağlam üzerinde alan:
+Her döngü için, geçerli bağlamı temel alarak **Rank API 'sini** şu şekilde çağırın:
 
-* Olası eylemler listesi: içerik öğeleri, üst eylemi seçin.
-* Listesi [bağlam özellikleri](concepts-features.md): kullanıcı, içerik ve bağlam gibi ilgili bağlamsal veriler.
+* Olası eylemlerin listesi: üst eyleme seçilecek içerik öğeleri.
+* [Bağlam özelliklerinin](concepts-features.md)listesi: Kullanıcı, içerik ve bağlam gibi ilgili verileri bağlamsal olarak.
 
-**Derece** API karar ya da kullanılacak:
+**Derecelendirme** API 'si şu iki seçenekten birini kullanmanıza karar verir:
 
-* _Exploit_: Geçmiş verilere dayanan en iyi eylem karar vermek için geçerli model.
-* _Keşfedin_: Üst eylem yerine farklı bir eylem seçin.
+* _Yararlanma_: geçmiş verilere göre en iyi eyleme karar vermeye yönelik geçerli model.
+* _Keşfet_: en üstteki eylem yerine farklı bir eylem seçin.
 
-**Ödül** API:
+**Reward** API 'si:
 
-* Her bir derece görüşmesinin Ödül puanları ve özellikleri kaydederek modeli eğitmek için verileri toplar.
-* Belirtilen ayarlara dayanan modeli güncelleştirmek için bu verileri kullanan _öğrenme ilke_.
+* Her bir derece çağrısının özelliklerini ve yeniden puanlarını kaydederek modeli eğitmek için veri toplar.
+* , _Öğrenme ilkesinde_belirtilen yapılandırmaya göre modeli güncelleştirmek için bu verileri kullanır.
 
 ## <a name="architecture"></a>Mimari
 
-Aşağıdaki görüntüde sıralama ve ödül çağrıları çağırma mimari akışı gösterilmektedir:
+Aşağıdaki görüntüde, derece ve geri aramaları çağırmanın mimari akışı gösterilmektedir:
 
-![Alternatif metin](./media/how-personalizer-works/personalization-how-it-works.png "kişiselleştirme nasıl çalışır")
+![alternatif metin](./media/how-personalizer-works/personalization-how-it-works.png "Kişiselleştirmenin çalışması")
 
-1. Personalizer eylemin boyut belirlemek için bir iç yapay ZEKA modeli kullanır.
-1. Hizmet geçerli model yararlanma ya da yeni seçenekleri modeli için keşfetmek karar verir.  
-1. Derecelendirme sonucu, Event Hubs'a gönderilir.
-1. Personalizer ödül aldığında, Event Hubs'a ödül gönderilir. 
-1. Boyut sayısı ve ödül ilişkilendirilir.
-1. Yapay ZEKA modeli bağıntı sonuçlarına göre güncelleştirilir.
-1. Çıkarımı altyapısının, yeni modeli ile güncelleştirilir. 
+1. Kişiselleştirici, eylemin derecesini belirlemede bir iç AI modeli kullanır.
+1. Hizmet, geçerli modelden mı yararlanacağına karar verir veya model için yeni seçimler keşfetmeyi belirler.  
+1. Derecelendirme sonucu EventHub öğesine gönderilir.
+1. Kişiselleştirmede bir ödül alındığında, bu, EventHub öğesine gönderilir. 
+1. Rank ve ödül, bağıntılı.
+1. AI modeli, bağıntı sonuçlarına göre güncelleştirilir.
+1. Çıkarım altyapısı yeni modelle güncellenir. 
 
-## <a name="research-behind-personalizer"></a>Personalizer arkasında araştırma
+## <a name="research-behind-personalizer"></a>Kişiselleştirici arkasında araştırma
 
-Personalizer, üstün Bilim ve araştırma alanında üzerinden hesaplanmıştır [pekiştirmeye dayalı öğrenme](concepts-reinforcement-learning.md) raporlar, araştırma etkinlikleri ve devam eden bir araştırma alanlarının Microsoft Research dahil olmak üzere.
+Kişiselleştirici, Microsoft Research 'daki incelemeler, araştırma etkinlikleri ve devam eden araştırma dahil olmak üzere [pekiştirmeye dayalı Learning](concepts-reinforcement-learning.md) 'in alanında son teknoloji bilimine ve araştırmasına dayalıdır.
 
 ## <a name="terminology"></a>Terminoloji
 
-* **Döngü öğrenme**: Kişiselleştirme özelliğinden faydalanabilir, uygulamanızın her bir bölümü için öğrenme döngüsü oluşturabilirsiniz. Birden fazla deneyimini kişiselleştirmek için varsa, her biri için bir döngü oluşturun. 
+* **Öğrenme döngüsü**: uygulamanızın, kişiselleştirmeye faydalanabilir her bölümü için bir öğrenme döngüsü oluşturabilirsiniz. Kişiselleştirmek için birden fazla deneyim varsa, her biri için bir döngü oluşturun. 
 
-* **Eylemler**: Ürün ve promosyonlar, aralarından seçim yapabileceğiniz gibi içerik öğeleri eylemlerdir. Personalizer olarak bilinen, kullanıcılarınıza göstermek için en iyi eylemi seçer _ödüllendirin eylem_, derece API aracılığıyla. Her eylem, özellikleri derece istekle beraber gönderilen olabilir.
+* **Eylemler**: Eylemler, ürün veya promosyon gibi, aralarından seçim yapabileceğiniz içerik öğeleridir. Kişiselleştirici, sıralama API 'SI aracılığıyla kullanıcılarınıza, _Reward eylemi_olarak bilinen, göstermek için en iyi eylemi seçer. Her eylem, sıralama isteğiyle gönderilen özelliklere sahip olabilir.
 
-* **Bağlam**: Daha doğru bir sıra sağlamak için örneğin, bağlamıyla ilgili bilgileri sağlayın:
+* **Bağlam**: daha doğru bir derece sağlamak için, içeriğiniz hakkında bilgi sağlayın, örneğin:
     * Kullanıcı.
-    * Cihaz öğrenebilir. 
+    * Bulundukları cihaz. 
     * Geçerli saat.
-    * Diğer veriler geçerli durumu hakkında.
-    * Kullanıcı veya bağlam ilgili geçmiş verileri.
+    * Geçerli durumla ilgili diğer veriler.
+    * Kullanıcı veya bağlamla ilgili geçmiş verileri.
 
-    Özel uygulamanızın farklı bağlam bilgileri olabilir. 
+    Özel uygulamanız farklı bağlam bilgilerine sahip olabilir. 
 
-* **[Özellikleri](concepts-features.md)** : Bir içerik öğesi veya kullanıcı bağlamı hakkında bilgi birimidir.
+* **[Özellikler](concepts-features.md)** : bir içerik öğesi veya Kullanıcı bağlamı hakkındaki bilgi birimi.
 
-* **Ödül**: Kullanıcı sıralama API'sine nasıl yanıt verdiğini ölçü eylemi, 0 ile 1 arasında bir puan döndürdü. 0-1 değeri, kişiselleştirme iş hedeflerinize ulaşmak istediğiniz nasıl Yardım üzerinde temel iş mantığınızı tarafından ayarlanır. 
+* **Reward**: Kullanıcı, 0 ile 1 arasında bir puan olarak döndürülen API 'Yi sırasıyla derecelendirme API 'sine nasıl yanıtladığını gösteren bir ölçüdür. 0-1 değeri, iş mantığınızla belirlenir ve bu seçenek, nasıl kişiselleştirmenin iş hedeflerine nasıl ulaştığından yardımcı olur. 
 
-* **Araştırma**: En iyi eylem döndürmek yerine, bu kullanıcı için farklı bir eylem seçtiğinde Personalizer hizmet araştırmaktadır. Personalizer hizmet değişikliklerini, stagnation, önler ve devam eden kullanıcı davranışlarına yönelik inceleyerek uyarlayabilirsiniz. 
+* **Araştırma**: kişiselleştirici hizmeti, en iyi eylemi döndürmek yerine, Kullanıcı için farklı bir eylem seçerse, ne zaman araştırma yapılır. Kişiselleştirici hizmeti, ve ' yi inceleyerek devam eden kullanıcı davranışına uyum sağlayabilir. 
 
-* **Deneme süresi**: Personalizer hizmeti bir ödül için bekleyeceği süreyi, derece çağrı andan itibaren başlayarak, olay için oluştu.
+* **Deneme süresi**: Bu etkinlik için sıralama çağrısının başladığı andan Itibaren, kişiselleştirici hizmetin bir azalma için beklediği süre miktarı.
 
-* **Etkin olmayan olaylar**: Etkin olmayan bir olayın nerede derece çağrıldı, ancak kullanıcı hiç sonuç, istemci uygulama kararları nedeniyle görürsünüz emin değilseniz olan biridir. Etkin olmayan olaylar oluşturma ve kişiselleştirme sonuçlarını depolamak için izin verin ve sonra bunları daha sonra machine learning modeli etkilemeden atmak mı karar verin.
+* **Etkin olmayan olaylar**: etkin olmayan bir olay, derece olarak adlandırduğunuz bir olaydır, ancak istemci uygulama kararlarından dolayı kullanıcının sonucu göreceğinden emin olmadığınızı unutmayın. Etkin olmayan olaylar, kişiselleştirme sonuçları oluşturup depolamanıza olanak tanır ve ardından makine öğrenimi modelini etkilemeden daha sonra atmayı seçebilirsiniz.
 
-* **Model**: Personalizer modeli, tüm verileri sıralama ve ödül çağrıları ve öğrenme İlkesi tarafından belirlenen bir eğitim davranışı gönderdiğiniz bağımsız değişkenler birleşimi eğitim verilerini almaya kullanıcı davranışı hakkında bilgi edindiniz yakalar. 
+* **Model**: bir kişiselleştirici modeli, Kullanıcı davranışı hakkında öğrenilen tüm verileri yakalar, daha fazla bilgi almak için göndereceğiniz bağımsız değişkenlerin birleşiminden eğitim verileri alma ve öğrenme ilkesi tarafından belirlenen bir eğitim davranışı. 
 
-## <a name="example-use-cases-for-personalizer"></a>Örnek kullanım örnekleri için Personalizer
+* **Öğrenme ilkesi**: her olay üzerinde kişiselleştirici, makine öğrenimi algoritmalarının nasıl çalıştığını etkileyen bazı meta parametrelere göre belirlenir. Yeni kişiselleştirme döngüleri, bir varsayılan öğrenme Ilkesiyle başlatılır ve bu da Orta performans elde edebilir. [Değerlendirme](concepts-offline-evaluation.md)çalıştırılırken, kişiselleştirici, özel olarak döngülerinizin kullanım örneklerine Iyileştirilmiş yeni öğrenme ilkeleri oluşturabilir. Kişiselleştirmede, değerlendirme sırasında oluşturulan her bir döngü için en iyi duruma getirilmiş ilkelerle önemli ölçüde daha iyi işlem yapılır.
 
-* Hedefi açıklama & Kesinleştirme: kullanıcılarınız kullansın daha iyi bir deneyim bunların amacı olduğunda Yardım işaretini her kullanıcı için kişiselleştirilmiş bir seçenek sağlayarak.
-* Varsayılan menüler ve seçenekleri için öneriler: büyük olasılıkla öğesi bir impersonal menü veya alternatifleri listesi sunmak yerine bir ilk adım olarak kişiselleştirilmiş bir biçimde Öner bot sahip.
-* Bot nitelikleri & sesi: kişiselleştirilmiş bir yolla bu nitelikleri değişen ton, ayrıntı ve yazma stili değişebilir botlar için göz önünde bulundurun.
-* & Uyarı bildirim içeriği: kullanıcıların daha etkileşim kurmak için kullanılacak metni uyarıları karar verin.
-* & Uyarı zamanlama bildirim: daha fazla bunları etkileşim kurmak amacıyla kullanıcılara bildirimler gönderme zamanı öğrenilmesine kişiselleştirilmiş.
+## <a name="example-use-cases-for-personalizer"></a>Kişiselleştirici için örnek kullanım örnekleri
 
-## <a name="checklist-for-applying-personalizer"></a>Personalizer uygulamak için Denetim listesi
+* Amaç açıklaması & belirsizliği ortadan kaldırma: her kullanıcıya kişiselleştirilmiş bir seçenek sunarak kullanıcılarınızın amacı net bir deneyimle daha iyi bir deneyim sunmasına yardımcı olun.
+* Menüler için varsayılan öneriler & Seçenekler: bot 'ın, bir ımpersonal menüsü veya alternatifler listesi sunmak yerine, ilk adımla en olası öğeyi kişiselleştirilmiş bir şekilde önermesini sağlayabilirsiniz.
+* Bot nitelikleri & tonu: ton, ayrıntı ve yazma stili değişebilen botlar için, bu nitelikleri kişiselleştirilmiş yollarla değiştirmeyi göz önünde bulundurun.
+* Bildirim & uyarı içeriği: kullanıcılara daha fazla etkileşim kurmak için uyarı için hangi metnin kullanılacağına karar verin.
+* Bildirim & uyarı zamanlaması: kullanıcılara daha fazla gitmek için ne zaman bildirim gönderileceğini kişiselleştirilmiş olarak öğreniyor.
 
-Durumlarda Personalizer uygulayabilirsiniz burada:
+## <a name="how-to-use-personalizer-in-a-web-application"></a>Web uygulamasında kişiselleştirici kullanma
 
-* Uygulamanız için bir işletmeyi ya da kullanılabilirlik hedef vardır.
-* Uygulamanızda ne göstermek bağlamsal bir karar kullanıcılara sağlama bu hedefe burada artıracak bir yer var.
-* En iyi seçim yapabilir ve toplu kullanıcı davranışı ve toplam ödül puan öğrendiniz.
-* Kişiselleştirme için makine öğrenimi kullanımını izleyen [sorumlu kullanım yönergeleri](ethics-responsible-use.md) ve ekibiniz için Seçenekler.
-* Karar en iyi seçenek sıralaması olarak ifade edilebilir ([eylem](concepts-features.md#actions-represent-a-list-of-options) seçenekleri sınırlı bir dizi.
-* Bu seçimi ne kadar iyi çalışan, iş mantığı tarafından kullanıcı davranışı bazı yönlerini ölçme ve -1 ile 1 arasında bir sayı olarak ifade hesaplanabilir.
-* Ödül puan çok fazla karışıklık veya dış etkenler getirmek değil, özellikle deneme süresi hala ilgili olsa ödül puan hesaplanabilir kadar düşük olur.
-* Boyut bağlamı düşündüğünüz en az 5 özellikler sözlüğü doğru seçim yapmanıza yardımcı ve bu kişisel bilgi içermez ifade edebilirsiniz.
-* Her eylem bir sözlük olarak en az 5 öznitelikleri hakkında bilgi varsa veya düşündüğünüz özellikleri Personalizer doğru seçim yapmanıza yardımcı olur.
-* Verileri uzun süre tutmak en az 100.000 etkileşimleri geçmişini ulaşıncaya kadar yeterli.
+Bir Web uygulamasına döngü eklemek şunları içerir:
 
-## <a name="machine-learning-considerations-for-applying-personalizer"></a>Machine learning Personalizer uygulamak için dikkat edilmesi gerekenler
+* Hangi eylemlerin ve özelliklerin hangi şekilde kişiselleştirileceğini, hangi bağlam özelliklerinin kullanılacağını ve ne olacağını belirleyin.
+* Uygulamanızda kişiselleştirme SDK 'sına bir başvuru ekleyin.
+* Kişiselleştirmek için hazırsanız derecelendirme API 'sini çağırın.
+* EventID 'yi depolayın. Daha sonra ödül API 'si ile bir ödül gönderirsiniz.
+1. Kullanıcının kişiselleştirilmiş sayfanızı gördüğünüze emin olduktan sonra olayı etkinleştir ' i çağırın.
+1. Derecelendirilen içeriğin Kullanıcı seçimini bekleyin. 
+1. Derecelendirme API 'sinin çıktısının ne kadar iyi olduğunu belirtmek için Reward API çağrısı yapın.
 
-Personalizer öğrenme, bunu size geri bildirim tarafından verilen, makine öğrenimine bir yaklaşım pekiştirmeye üzerinde temel alır. 
+## <a name="how-to-use-personalizer-with-a-chat-bot"></a>Sohbet bot ile kişiselleştirici kullanma
 
-Personalizer bilgi edinin durumlarda en iyi yeri:
-* Sorun (örneğin, haber veya biçimde tercihlerinde) zaman içinde drifts varsa üzerine en iyi kişiselleştirme kalmak için yeterli olayları yoktur. Gerçek dünyada sürekli değişikliği personalizer Uyarlanır ancak sonuçları yok ise yeterli olayları ve verileri yeni eğilimlere keşfetmek uzmanlardan en uygun olmayacaktır. Sıklıkta gerçekleşen bir kullanım örneği seçmeniz gerekir. En az 500 kereden günde gerçekleşen kullanım örnekleri aranıyor göz önünde bulundurun.
-* Bağlam ve Eylemler öğrenme süreçlerini kolaylaştırmasına için yeterli özellikleri vardır.
-* Çağrı başına derece için 50'den az eylemler vardır.
-* Veri saklama ayarlarınıza Personalizer çevrimdışı değerlendirmeleri ve ilke iyileştirme gerçekleştirmek için yeterli veri toplamaya izin verin. 50\. 000'en az bir veri noktaları genellikle budur.
+Bu örnekte, kullanıcıyı her seferinde bir menü veya seçenek serisini göndermek yerine varsayılan bir öneride bulunmak için nasıl kişiselleştirme kullanacağınızı öğreneceksiniz.
 
-## <a name="how-to-use-personalizer-in-a-web-application"></a>Bir web uygulamasında Personalizer kullanma
-
-Bir web uygulaması için bir döngü ekleme içerir:
-
-* Hangi kişiselleştirmek için deneyimi belirlemek, hangi eylemleri ve kullandığınız özellikler, hangi bağlam özelliklerini kullanma ve hangi ödül ayarlarsınız.
-* Uygulamanızda kişiselleştirme SDK'sına bir başvuru ekleyin.
-* Kişiselleştirmek hazır olduğunuzda derece API çağrısı.
-* EventID Store. Daha sonra ödül API'si ile bir ödül gönderdiğiniz.
-1. Etkinleştirme kullanıcı kişisel sayfanıza yakaladı emin olduğunuzda olayı için çağırın.
-1. Kullanıcı Seçimi dereceli içerik için bekleyin. 
-1. Ödül ne kadar iyi sıralama API çıkışını yaptığınız belirtmek için API çağrısı.
-
-## <a name="how-to-use-personalizer-with-a-chat-bot"></a>Personalizer bir sohbet bot ile kullanma
-
-Bu örnekte, her kullanıcının bir dizi menü veya seçenekler aşağı göndermek yerine varsayılan öneride bulunmak için kişiselleştirme kullanmayı görürsünüz.
-
-* Alma [kod](https://github.com/Azure-Samples/cognitive-services-personalizer-samples/tree/master/samples/ChatbotExample) Bu örnek için.
-* Bot çözümünüzü ayarlayın. LUIS uygulamanızı yayımlamak emin olun. 
-* Boyut sayısı ve ödül API çağrıları için robot yönetin.
-    * LUIS yaklaşım işlemesine yönetmek için kod ekleyin. Varsa **hiçbiri** döndürülen hedefleri listesinde Personalizer derece için için ıntents üst amaç veya üst amaç 's puanı, iş mantığı eşiğin altında olduğu gibi gönderin.
-    * Amaç listesi kullanıcıya derece API yanıtından en iyi hedefi olan ilk amacıyla seçilebilir bağlantılar olarak gösterir.
-    * Kullanıcının seçiminin yakalayın ve bunu ödül API çağrısında gönderin. 
+* Bu örnek için [kodu](https://github.com/Azure-Samples/cognitive-services-personalizer-samples/tree/master/samples/ChatbotExample) alın.
+* Bot çözümünüzü ayarlayın. LUSıS uygulamanızı yayımladığınızdan emin olun. 
+* Bot için Rank ve Reward API çağrılarını yönetin.
+    * LUSıS amacını işlemeyi yönetmek için kod ekleyin. **Hiçbiri** , en üst amaç olarak döndürülmezse veya en üstteki amaç puanı iş mantığı eşiğinin altındaysa, amaçları derecelendirmek için amaçlar listesini kişiselleştiriciye gönderin.
+    * Kullanıcı listesini, sıralama API 'SI yanıtından en üst dereceli amaç olan ilk amacı olan seçilebilir bağlantılar olarak gösterir.
+    * Kullanıcının seçimini yakalayın ve bunu Reward API çağrısında gönderin. 
 
 ### <a name="recommended-bot-patterns"></a>Önerilen bot desenleri
 
-* Her kullanıcı için sonuçları önbelleğe alma aksine bir Kesinleştirme gereklidir her zaman Personalizer derece API çağrıları yapabilir. Hedefi belirsizliğini sonucu tek bir kişi için zaman içinde değişebilir ve varyanslar keşfetmek sıralama API izin vererek genel öğrenme hızlandırır.
-* Çok sayıda kullanıcı cihazını yaygındır ve böylece kişiselleştirmek için yeterli veri sahip bir etkileşim'i seçin. Örneğin, tanıtım soruları daha iyi uygun daha küçük açıklamalar olabilir derin yalnızca bazı kullanıcılar için alabilirsiniz konuşma grafiğinde.
-* "İlk öneri doğru" etkinleştirmek için sıralama API çağrılarını kullanmak konuşmaları, kullanıcı burada sorulan "İster X?" ya da "X kastettiniz?" ve kullanıcı yalnızca doğrulayabilirsiniz. Seçenekler burada menüden seçmelisiniz kullanıcıya sunan aksine. Örneğin, kullanıcı: "Bir kahve sipariş istiyorum" Bot: "çift espresso ister misiniz?". Bir öneri için doğrudan ilgili olarak bu şekilde ödül de güçlü sinyaldir.
+* Her bir kullanıcı için sonuçları önbelleğe alma aksine, her bir Kesinleştirme gerektiğinde, kişiselleştirici derecelendirme API 'SI çağrıları yapın. Belirsizliği ortadan kaldırmak bir kişi için zaman içinde değişebilir ve derecelendirme API 'sinin farkları keşfetmesine izin vermek genel öğrenmeyi hızlandıracaktır.
+* Çok sayıda kullanıcıyla ortak olan ve kişiselleştirmek için yeterli veri sahibi olan bir etkileşim seçin. Örneğin, giriş soruları, konuşma grafiğinde yalnızca birkaç kullanıcının ulaşabileceği daha küçük anlayışlardan daha iyi uyum sağlayabilir.
+* "İlk öneri," ister X ister X ister misiniz? "önerilerini etkinleştirmek için derecelendirme API çağrılarını kullanın ya da "X 'i mi kullanıyorsunuz?" ve Kullanıcı yalnızca şunları doğrulayabilirler; kullanıcıya bir menü arasından seçim yapmak zorunda oldukları seçenekleri verme aksine. Örneğin, "kahve" botu sıralamak istiyorum: "bir Double espresu istiyor musunuz?". Bu şekilde, daha doğrudan bir öneriyle ilgili olduğu için, ödül sinyali de güçlü olur.
 
-## <a name="how-to-use-personalizer-with-a-recommendation-solution"></a>Bir öneri Çözümle Personalizer kullanma
+## <a name="how-to-use-personalizer-with-a-recommendation-solution"></a>Bir öneri çözümü ile kişiselleştirici kullanma
 
-Büyük bir katalog derece API'ye gönderilen 30 olası eylemler olarak sunulabilir birkaç öğelerine aşağı filtrelemek için öneri Altyapısı'nı kullanın.
+Büyük bir kataloğu, daha sonra, derece API 'sine gönderilen 30 olası eylem olarak sunulabilen birkaç öğeye filtre uygulamak için öneri motorunuz kullanın.
 
-Öneri altyapıları ile Personalizer kullanabilirsiniz:
+Kişiselleştirme altyapılarını, kişiselleştirici ile kullanabilirsiniz:
 
-* Ayarlanan [öneri çözüm](https://github.com/Microsoft/Recommenders/). 
-* Bir sayfa görüntüleme önerileri kısa listesini almak için öneri modeli çağırın.
-* Öneri çözümünün çıktı derecelendirmek için kişiselleştirme çağırın.
-* Kullanıcı eyleminizi ödül API çağrısı ile ilgili geri bildirim gönderin.
-
-
-## <a name="pitfalls-to-avoid"></a>Kaçınılacak Tuzaklar
-
-* Burada kişiselleştirilmiş davranışı tüm kullanıcılar arasında bulunan bir şey ancak bunun yerine bir şey belirli kullanıcılar için anımsanacak değilse veya bir kullanıcıya özgü seçenekleri listesinden gelen Personalizer kullanmayın. Örneğin, bir ilk 20 olası menü öğeleri listesi pizza siparişi yararlıdır, ancak kullanıcıların çağırmak için ilgili kişi kişi listesi childcare (örneğin, "büyükanne") ile ilgili Yardım gerektiren kişiselleştirilebilir arasında bir şey olmadığında önermek Personalizer kullanma Kullanıcı tabanınızı.
+* [Öneri çözümünü](https://github.com/Microsoft/Recommenders/)ayarlayın. 
+* Bir sayfa görüntülenirken, önerilerin kısa bir listesini almak için öneri modelini çağırın.
+* Öneri çözümünün çıkışını derecelendirmek için kişiselleştirme çağrısı yapın.
+* Reward API çağrısıyla Kullanıcı eyleminiz hakkında geri bildirim gönderin.
 
 
-## <a name="adding-content-safeguards-to-your-application"></a>İçerik koruma uygulamanıza ekleme
+## <a name="pitfalls-to-avoid"></a>Kaçınmak için
 
-Uygulamanız için kullanıcıların ve bazıları için gösterilen içeriği güvenli olmayan veya bazı kullanıcılar için uygun olabilir, emin olmak önceden planlamanız gerekir içerik büyük sapmalar izin veriyorsa doğru korumaları görmesini, kullanıcılarınızın kabul edilemez önlemek içindir içeriği. Koruma uygulamak için en iyi modelidir: Koruma uygulamak için en iyi modelidir:
-    * Sıralama için Eylemler listesini edinin.
-    * Hedef kitle için uygun olmayan olanları filtreleyin.
-    * Yalnızca bu uygulanabilir Eylemler Sırala.
-    * Kullanıcı eylemine sıralanmış üst görüntüler.
+* Kişiselleştirilmiş davranışın tüm kullanıcılar genelinde keşfedilmeden, ancak belirli kullanıcılar için hatırlanması gereken bir şey olmadığı ya da kullanıcıya özgü alternatifler listesinden geldiği bir şey olmadığı kişiselleştirici kullanmayın. Örneğin, bir 20 olası menü öğesi listesinden ilk bir pizza sırası önermek için kişiselleştirici kullanılması faydalı olur, ancak çocuklarla ilgili yardım ("Grandma" gibi) için gerekli olduğunda kullanıcıların ilgili kişi listesinden çağrılabilecek iletişim, şunun genelinde kişiselleştirilebilir Kullanıcı tabanınız.
 
-Bazı mimarilerde yukarıdaki dizisi uygulamak zor olabilir. Bu durumda, derecelendirme sonra koruma uygulamak için alternatif bir yaklaşım yoktur, ancak provizyon koruma dışında kalan Eylemler Personalizer modeli eğitmek için kullanılmayan şekilde yapılması gerekir.
 
-* Devre dışı öğrenmeye sıralaması için Eylemler listesi alın.
-* Derece eylemler.
-* Üst eylem uygulanabilir olup olmadığını denetleyin.
-    * Üst işlem kurtarılabilir ise, bu dereceyi için öğrenme etkinleştirin ve ardından kullanıcıya göstermek.
-    * Üst eylem uygulanabilir değilse değil Bu sıralama için öğrenme etkinleştirmek ve kendi mantığı ya da alternatif yaklaşımlar karar kullanıcıya göstermek. İkinci en iyi kişilerinin sıralı seçeneği kullansanız bile, bu sıralama için öğrenme etkinleştirmeyin.
+## <a name="adding-content-safeguards-to-your-application"></a>Uygulamanıza içerik korumaları ekleme
 
-## <a name="verifying-adequate-effectiveness-of-personalizer"></a>Yeterli verimliliğini Personalizer doğrulanıyor
+Uygulamanız kullanıcılara gösterilen içerikte büyük sapmaya izin veriyorsa ve bu içeriklerin bazıları güvenli olmayabilir veya bazı kullanıcılar için uygun değilse, kullanıcılarınızın kabul edilebilir olarak görmesini engellemek için doğru korumalarının sağlandığından emin olmak için önceden planlamanız gerekir içeriði. Korumaları uygulamak için en iyi model şunlardır:
+    * Derecelendirmek için eylemlerin listesini alın.
+    * Hedef kitle için önemli olmayan olanları filtreleyin.
+    * Yalnızca bu uygulanabilir eylemleri derecelendir.
+    * Kullanıcıya en üst dereceli işlemleri görüntüleyin.
 
-Gerçekleştirerek Personalizer etkisini düzenli aralıklarla izleyebilirsiniz [çevrimdışı değerlendirmeleri](how-to-offline-evaluation.md)
+Bazı mimarilerde, yukarıdaki sıra uygulamak zor olabilir. Bu durumda, derecelendirmeden sonra korumaları uygulamaya yönelik alternatif bir yaklaşım vardır, ancak koruma dışında kalan eylemlerin kişiselleştirici modeli eğilmesi için kullanılması gerekir.
+
+* Öğrenme devre dışı bırakıldıktan sonra derecelendirmek için eylemlerin listesini alın.
+* İşlemleri sıralama.
+* En iyi eylemin uygun olup olmadığını denetleyin.
+    * En iyi eylem önemli ise, bu derece öğrenmeyi etkinleştirin ve sonra kullanıcıya gösterin.
+    * En iyi eylem önemli değilse, bu sıralama için öğrenmeyi etkinleştirmeyin ve kendi mantığınızla veya alternatif yaklaşımlarınızın kullanıcıya ne göstermesi gerektiğine karar verin. İkinci en iyi derecelendirilen seçeneği kullansanız bile, bu sıralama için öğrenmeyi etkinleştirmeyin.
+
+## <a name="verifying-adequate-effectiveness-of-personalizer"></a>Kişiselleştirici için yeterli verimlilik doğrulanıyor
+
+[Çevrimdışı değerlendirmeler](how-to-offline-evaluation.md) gerçekleştirerek, kişiselleştirmede düzenli aralıklarla etkili bir şekilde izleyebilirsiniz
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Anlamak [Personalizer kullanabileceğiniz](where-can-you-use-personalizer.md).
+[Kişiselleştirici 'yi nerede kullanacağınızı](where-can-you-use-personalizer.md)anlayın.
+[Çevrimdışı değerlendirmeler](how-to-offline-evaluation.md) gerçekleştirme

@@ -1,220 +1,221 @@
 ---
-title: Proje akustik Unreal hazırlama Öğreticisi
+title: Project Acoustics Unreal Bake öğreticisi
 titlesuffix: Azure Cognitive Services
-description: Bu belgede, Unreal Düzenleyici uzantısı kullanarak bir akustik hazırlama gönderme işlemi açıklanmaktadır.
+description: Bu belgede, gerçek olmayan Düzenleyici uzantısı kullanılarak bir Acoustics hazırlama gönderme işlemi açıklanmaktadır.
 services: cognitive-services
-author: kegodin
+author: NoelCross
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: acoustics
 ms.topic: tutorial
 ms.date: 03/20/2019
-ms.author: michem
-ms.openlocfilehash: 6b49a6b9e235414cd63eacdbad523bbda8646963
-ms.sourcegitcommit: 82efacfaffbb051ab6dc73d9fe78c74f96f549c2
+ms.author: noelc
+ROBOTS: NOINDEX
+ms.openlocfilehash: 7a868a5f9b06499e23710399733b0659d97f900d
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67304305"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68854897"
 ---
-# <a name="project-acoustics-unreal-bake-tutorial"></a>Proje akustik Unreal hazırlama Öğreticisi
-Bu belgede, Unreal Düzenleyici uzantısı kullanarak bir akustik hazırlama gönderme işlemi açıklanmaktadır.
+# <a name="project-acoustics-unreal-bake-tutorial"></a>Project Acoustics Unreal Bake öğreticisi
+Bu belgede, gerçek olmayan Düzenleyici uzantısı kullanılarak bir Acoustics hazırlama gönderme işlemi açıklanmaktadır.
 
-Bir hazırlama yapmaya beş adım vardır:
+Bake yapmanın beş adımı vardır:
 
-1. Oluşturma veya, oyuncu Gezinti kafes etiketi
-2. Etiket akustik geometri
-3. Geometriye akustik malzemeleri özellikler atama
-4. Önizleme araştırma yerleştirme
+1. Oynatıcı gezinti kafesi oluşturun veya etiketleyin
+2. Etiket Acoustics geometrisi
+3. Geometriye akustik malzemeler özellikleri atama
+4. Önizleme araştırması yerleşimi
 5. Hazırlama
 
-## <a name="open-the-project-acoustics-editor-mode"></a>Proje akustik Düzenleyicisi modunu açın
+## <a name="open-the-project-acoustics-editor-mode"></a>Project Acoustics düzenleyici modunu açın
 
-Proje akustik eklenti paketi projenize içeri aktarın. Bununla ilgili Yardım için bkz. [Unreal tümleştirme](unreal-integration.md) konu. Eklenti tümleştirildiğinde yeni akustik modu simgesini tıklatarak akustik kullanıcı arabirimini açın.
+Project Acoustics eklenti paketini projenize aktarın. Bu konuda yardım almak için, [Unreal Integration](unreal-integration.md) konusuna bakın. Eklenti tümleşik olduktan sonra, yeni Acoustics modu simgesine tıklayarak Acoustics Kullanıcı arabirimini açın.
 
-![Unreal Düzenleyicisi akustik modu ekran seçeneği](media/acoustics-mode.png)
+![Gerçek olmayan düzenleyici Acoustics modu seçeneğinin ekran görüntüsü](media/acoustics-mode.png)
 
-## <a name="tag-actors-for-acoustics"></a>Etiket aktörler için akustik
+## <a name="tag-actors-for-acoustics"></a>Acoustics için biçim aktörleri
 
-Akustik modu açtığınızda görüntülenen ilk sekme nesneleri sekmesidir. Ekler düzeyinizi içinde etiketi aktörler için bu sekmeyi kullanın **AcousticsGeometry** veya **AcousticsNavigation** aktörler için etiketler.
+Nesneler sekmesi, Acoustics modunu açtığınızda görüntülenen ilk sekmedir. **AcousticsGeometry** veya **AcousticsNavigation** etiketlerini aktöre eklemek için bu sekmeyi, düzeyinizdeki bir şekilde etiketleyerek kullanın.
 
-Dünya anahat Düzenleyicisi içinde bir veya daha fazla nesne seçin veya kullanın **toplu seçim** belirli bir kategorideki tüm nesnelerin seçmenize yardımcı olması için bölümü. Seçilen nesneler sonra kullanın **etiketleme** seçilen nesneler için istenen etiket uygulamak için bölüm.
+Dünya dışı bir veya daha fazla nesne seçin veya **toplu seçim** bölümünü kullanarak belirli bir kategorinin tüm nesnelerini seçmeye yardımcı olun. Nesneler seçildikten sonra, istenen etiketi seçili nesnelere uygulamak için **etiketleme** bölümünü kullanın.
 
-Sorun ne varsa **AcousticsGeometry** ya da **AcousticsNavigation** etiketi benzetime yoksayılacak. Yalnızca statik kafesleri nav kafesleri ve ortamlarını desteklenir. Başka bir şey etiketlerseniz göz ardı edilir.
+Bir **AcousticsGeometry** veya **AcousticsNavigation** etiketi yoksa simülasyonu göz ardı edilir. Yalnızca statik kafesler, NAV kafesler ve fdscapes desteklenir. Başka bir şey etiketlerseniz, yok sayılır.
 
-### <a name="for-reference-the-objects-tab-parts"></a>Başvuru için: Nesneleri sekmesini bölümleri
+### <a name="for-reference-the-objects-tab-parts"></a>Başvuru için: Nesneler sekmesi bölümleri
 
-![Unreal sekmede akustik nesnelerin ekran görüntüsü](media/unreal-objects-tab-details.png)
+![Gerçek olmayan Acoustics Objects sekmesinin ekran görüntüsü](media/unreal-objects-tab-details.png)
 
-1. Sekme Seçimi düğmelerinin (**nesneleri** sekmesi seçili). Yukarıdan bir akustik hazırlama yapmanın çeşitli adımlarında yol için bu düğmeleri kullanın.
-2. Bu sayfayı kullanarak yapmanız gerekenler kısa bir açıklaması.
-3. Aktörler düzeyinde kullanılabilir seçicileri.
-4. Tıklayarak **seçin** işaretli aktör türlerinden en az birini karşılayan düzeyinde tüm nesneleri seçer.
-5. Tıklayarak **Tü** geçerli seçimi temizler. Bu escape tuşuna basmak ile aynıdır.
-6. Geometri veya gezinti etiketi için seçilen aktörleri uygulanıp uygulanmayacağını seçin için bu radyo düğmelerini kullanın.
-7. Tıklayarak **etiketi** tüm seçili aktörler için seçili etiketi ekler.
-8. Tıklayarak **Etiketi Kaldır** seçili etiketi tüm seçili aktörler kaldırır.
-9. Tıklayarak **seçin etiketli** geçerli seçimi temizleyin ve şu anda seçili etiketi ile tüm aktörler seçin.
-10. Kaç tane aktörler her etiket türü ile etiketlenir istatistiklerine gösterir.
+1. Sekme seçimi düğmeleri (**nesneler** sekmesi seçili). En üstten en alta Acoustics Bake yapmak için çeşitli adımlarda gezinmek üzere bu düğmeleri kullanın.
+2. Bu sayfayı kullanarak yapmanız gerekenler hakkında kısa bir açıklama.
+3. Düzeydeki aktörlerin kullanılabilir seçicileri.
+4. **Seç** ' e tıkladığınızda, denetlenen aktör türlerinden en az biriyle eşleşen tüm nesneleri seçin.
+5. **Tüm seçimi kaldır** ' a tıkladığınızda geçerli seçim temizlenir. Bu, kaçış anahtarıyla vurmaya benzer.
+6. Seçili aktörlerin geometrisi veya gezinti etiketinin uygulanıp uygulanmayacağını belirlemek için bu radyo düğmelerini kullanın.
+7. **Etiketi** tıklatmak seçili etiketi seçili olan tüm aktörlerin tamamına ekler.
+8. **Untag** tıklamak seçili etiketi seçili olan tüm aktörlerden kaldırır.
+9. **Etiketli Seç** ' i tıklatmak geçerli seçimi temizler ve seçili olan etikete sahip tüm aktörleri seçer.
+10. Bu istatistikler, her etiket türüyle kaç aktörlerin etiketlenmekte olduğunu gösterir.
 
-### <a name="tag-acoustics-occlusion-and-reflection-geometry"></a>Akustik kapatma ve yansıma geometri etiketi
+### <a name="tag-acoustics-occlusion-and-reflection-geometry"></a>Etiket Acoustics occlusiyon ve yansıma geometrisi
 
-Akustik penceresinin nesneler sekmesini açın. Bunlar occlude, yansıtacak veya ses etkisini azaltmak, herhangi bir nesne akustik geometri işaretleyin. Akustik geometri, baştan sonra duvarlarının, çatılar, windows & Pencere Cam, rugs ve büyük Mobilya gibi içerebilir. Bu nesneler için rastgele bir karmaşıklık düzeyi kullanabilirsiniz. Sahne voxelized benzetimi önce olduğundan, ağaçlar olan çok sayıda küçük bırakır gibi yüksek oranda ayrıntılı kafesleri Basitleştirilmiş nesneleri hazırlama daha maliyetli değildir.
+Acoustics penceresinin nesneler sekmesini açın. Nesnelerin occlude, yansıtmaları veya artışlarını devralarak seslerinin Acoustics geometrisi olarak işaretlenmesi. Acoustics geometrisi, toprak, duvarlar, Roofs, Windows & pencere camı, Rug 'ler ve büyük mobilya gibi şeyleri içerebilir. Bu nesneler için herhangi bir rastgele karmaşıklık düzeyi kullanabilirsiniz. Sahnenin simülasyonundan önce voxlik olduğu için, çok küçük yaprakları olan ağaçlar gibi son derece ayrıntılı kafesler, Basitleştirilmiş nesnelerden daha pahalı değildir.
 
-Görünmez çakışma kafesleri gibi akustik Etkilenme şeyleri dahil değildir.
+Görünmez çakışma kafesleri gibi Acoustics etkilemeyen şeyleri eklemeyin.
 
-Bir nesnenin Dönüştür araştırma hesaplama zaman (araştırmaları sekmesi aracılığıyla aşağıda) hazırlama sonuçları sabittir. İşaretli nesnelerden herhangi birini sahnede taşıma araştırma hesaplama yineleme ve Sahne rebaking gerektirir.
+Bir nesnenin araştırma hesaplaması sırasında dönüştürme işlemi (aşağıdaki yoklamalar sekmesi aracılığıyla), hazırlama sonuçlarında düzeltilir. Sahnedeki işaretli nesnelerden herhangi birinin taşınması, araştırma hesaplamasının yeniden yapılması ve sahnenin yeniden gerçekleştirilmesi için gerekli olacaktır.
 
-### <a name="create-or-tag-a-navigation-mesh"></a>Oluşturma veya gezinti kafes etiketi
+### <a name="create-or-tag-a-navigation-mesh"></a>Gezinti kafesi oluşturma veya etiketleme
 
-Gezinti kafes simülasyonu için araştırma noktaları yerleştirmek için kullanılır. Unreal'ın kullanabileceğiniz [Nav Mesh sınırları birim](https://api.unrealengine.com/INT/Engine/AI/BehaviorTrees/QuickStart/2/index.html), ya da kendi gezinti kafes belirtebilirsiniz. En az bir nesne olarak etiketlemeniz gerekir **akustik Gezinti**. Unreal'ın gezinti kafes kullanıyorsanız, öncelikle oluşturduktan emin olun.
+Simülasyon için araştırma noktaları yerleştirmek üzere bir gezinti kafesi kullanılır. Gerçek olmayan [Gezgin kafes sınırları birimini](https://api.unrealengine.com/INT/Engine/AI/BehaviorTrees/QuickStart/2/index.html)kullanabilir veya kendi gezinti kafesinizi belirtebilirsiniz. En az bir nesneyi **Acoustics gezintisi**olarak etiketlemelisiniz. Eğer gerçek olmayan gezinti kafesi kullanıyorsanız, ilk olarak oluşturulduğundan emin olun.
 
-### <a name="acoustics-volumes"></a>Akustik birimleri ###
+### <a name="acoustics-volumes"></a>Acoustics birimleri ###
 
-Daha fazla, Gelişmiş özelleştirme, gezinti alanlara olun yoktur **akustik birimleri**. **Akustik birimleri** Gezinti kafes yoksay ve dahil etmek için alanları seçmenize olanak sağlayan görünümünüze ekleyebileceğiniz birer aktördür. Aktör değiştirilebilir bir özellik sunan "Ekle" ve "Dışarıda bırak" arasında. "Ekleme" birimleri, yalnızca alanlarının Gezinti kafes içlerindeki olarak kabul edilir ve yok sayılacak bu alanların "Dışarıda bırak" birimleri işaretleyin emin olun. Birimleri "Dışarıda bırak" sonra "Ekle" birimleri her zaman uygulanır. Etikete emin **akustik birimleri** olarak **akustik Gezinti** nesneleri sekmesindeki her zamanki sürecinde. Bu aktörler ***değil*** otomatik olarak etiketlenmiş.
+**Acoustics birimleri**ile gezinti alanlarınızla yapabileceğiniz daha fazla gelişmiş özelleştirme de vardır. **Acoustics birimler** , sahneye ekleyebileceğiniz aktörlerdir ve gezinti kafesine dahil edilecek ve göz ardı edilecek bölgeleri seçmenizi sağlar. Aktör, "Include" ve "Exclude" arasında geçiş yapılabilir bir özellik sunar. "Dahil" birimler yalnızca içindeki gezinti kafesinin ve "hariç tutma" birimlerinin kabul edildiği ve bu alanların yoksayılmasını sağlar. "Hariç tut" birimleri her zaman "Ekle" birimlerinden sonra uygulanır. Nesneler sekmesindeki olağan işlem aracılığıyla **Acoustics birimlerini** **Acoustics gezintisi** olarak etiketlediğinizden emin olun. Bu aktörler otomatik olarak etiketlenemez.
 
-![Unreal özelliklerinde akustik birim ekran görüntüsü](media/unreal-acoustics-volume-properties.png)
+![Acoustics Volume özelliklerinin gerçek zamanlı olmayan ekran görüntüsü](media/unreal-acoustics-volume-properties.png)
 
-Birimleri "Dışarıda bırak" ağırlıklı olarak nereye yerleştirileceğini olmayan araştırmaları için kaynak kullanım sıkılaştırma üzerinde ayrıntılı denetim vermek yöneliktir.
+"Hariç tutma" birimleri genellikle daha sıkı kaynak kullanımı için araştırmaların nereye yerleştirmediğinden ilgili ayrıntılı denetim sağlamak amacıyla tasarlanmıştır.
 
-![Dışlama akustik Unreal biriminde ekran görüntüsü](media/unreal-acoustics-volume-exclude.png)
+![Acoustics biriminin gerçek zamanlı hariç tutulmasını kaldırma ekran görüntüsü](media/unreal-acoustics-volume-exclude.png)
 
-Birimleri "Ekleme" gibi birden çok akustik bölgelere sahneniz bölmeniz istiyorsanız bir Sahne el ile oluşturma bölümlerini için kullanışlıdır. Örneğin, büyük bir Sahne varsa, birçok kilometre kare ve iki üzerinde akustik hazırlama istediğiniz ilgi alanlarına sahip. Sahnedeki iki büyük "Ekle" birimi çizmek ve bunların her biri için ACE dosyaları üretmek teker teker. Ardından, oyun player her kutucuk yaklaştığında uygun ACE dosya yüklemek için tetikleyici birimleri şema çağrıları ile birlikte kullanabilirsiniz.
+"Dahil etme" birimleri sahnenin el ile bölümlerini oluşturmak için faydalıdır. Örneğin, sahnesinizi birden çok akustik bölgeye bölmek ister. Örneğin, çok sayıda kilometre kare ve büyük bir sahneye sahipseniz ve Acoustics hakkında daha fazla ilgi alanına ihtiyacınız varsa iki ilginiz varsa. Sahnede iki büyük "Içerme" birimi çizebilir ve her biri için her biri için as dosyaları üretebilirsiniz. Ardından, oyuncu her kutucuğa yaklaşırsa, uygun ACE dosyasını yüklemek için şema çağrılarıyla birleştirilmiş tetikleyici birimleri kullanabilirsiniz.
 
-**Akustik birimleri** yalnızca Gezinti kısıtlamak ve ***değil*** geometrisi. Her araştırma bir "ekleme" içindeki **akustik birim** hala birim dışında tüm gerekli geometri içinde wave benzetimleri yaparken çeker. Bu nedenle, tüm discontinuities kapanması veya bir bölümünden diğerine geçmeden player kaynaklanan diğer akustik olmamalıdır.
+**Acoustics birimler** yalnızca, geometriyi kısıtlar, yalnızca gezinmeyi kısıtlar. Bir "Include" **Acoustics birimi** içindeki her bir araştırma, dalga simülasyonu gerçekleştirirken birimin dışındaki tüm gerekli geometriyi yine de çekmeye devam edecektir. Bu nedenle, bir bölümden diğerine geçen oyuncudan kaynaklanan, occlusiyon veya diğer Acoustics hiçbir süreksizlik olmaması gerekir.
 
 ## <a name="select-acoustic-materials"></a>Akustik malzemeleri seçin
 
-Nesnelerinizi etiketlendikten sonra tıklayın **malzemeleri** düğmesini malzemeleri sekmesine gidin. Bu sekme düzeyinde malzemelerin her malzeme özelliklerini belirtmek için kullanılır. Herhangi bir aktör etiketlenir önce boş olur.
+Nesneleriniz etiketledikten sonra malzemeler sekmesine gitmek için **malzemeler** düğmesine tıklayın. Bu sekme, düzeydeki her malzemenin malzeme özelliklerini belirtmek için kullanılacaktır. Aktörlerin etiketlenmesi için boş olur.
 
-Akustik malzemeleri her yüzeyinden yansımasını ses enerji miktarını denetler. İçe alma için somut benzer varsayılan akustik malzeme vardır. Proje akustik Sahne malzeme adına dayalı malzemeleri önerir.
+Akustik malzemeler her bir yüzeyden geri yansıtılan ses enerji miktarını denetler. Varsayılan akustik malzemeler somut ' a benzer. Project Acoustics, sahne malzemesi adına göre malzeme önerisinde bulunur.
 
-Verilen bir malzeme odasında reverberation süresini 0,01 için 0,20 aralığında içe alma değerlerine sahip çoğu malzemelerle, içe alma katsayısı için inversely ilişkilidir. Bu aralık yukarıda içe alma katsayıları malzemelerle çok absorbent. Örneğin, bir oda sesleri çok reverberant duvarlarının, kat veya tavan akustik malzeme sorun daha yüksek absorptivity tıklarsanız. Akustik malzeme atama, Sahne malzemeyi kullanan tüm aktörler için geçerlidir.
+Bir odadaki belirli bir malzemenin geri alma süresi, 0,01 ile 0,20 arasında çok sayıda malzemeyle ilgili değer elde eden, büyük bir ihtimalle kendi emme katsayısı ile ilgilidir. Bu aralığın üzerindeki çok büyük katlamalar içeren malzemeler çok büyük bir yerdir. Örneğin, bir oda çok daha fazla yankı alıyorsa, duvarların, tabanın veya tavan 'nin akustik malzemesini daha yüksek bir absorptivity ile değiştirin. Akustik malzeme atama, söz konusu sahne malzemesini kullanan tüm aktörler için geçerlidir.
 
-![İçe alma katsayısı ile reverberation zaman negatif bir bağıntı gösteren grafik](media/reverb-time-graph.png)
+![Bağımsız katsayı ile birlikte ters geçen sürenin negatif bağıntısını gösteren grafik](media/reverb-time-graph.png)
 
-### <a name="for-reference-parts-of-the-materials-tab"></a>Başvuru için: Malzemeleri sekmesinin bölümleri
+### <a name="for-reference-parts-of-the-materials-tab"></a>Başvuru için: Malzemeler sekmesinin bölümleri
 
-![Unreal sekmede akustik nesnelerin ekran görüntüsü](media/unreal-materials-tab-details.png)
+![Gerçek olmayan Acoustics Objects sekmesinin ekran görüntüsü](media/unreal-materials-tab-details.png)
 
-1. **Malzemeleri** sekmesini düğmesi, bu sayfasını getirmek için kullanılır.
-2. Bu sayfayı kullanarak yapmanız gerekenler kısa bir açıklaması.
-3. Aktörleri alınan düzeyinde kullanılan malzeme listesini olarak etiketlenmiş **AcousticsGeometry**. Bir ortama buraya tıklayarak bu malzemeyi kullanan sahnedeki tüm nesneleri seçer.
-4. Akustik malzeme Sahne malzeme için atanmış olduğunu gösterir. Farklı bir akustik malzeme için Sahne malzeme atamak için bir açılan tıklayın.
-5. Önceki sütununda seçilen malzeme akustik içe alma katsayısı gösterir. Değeri sıfır mükemmel yansıtıcı anlamına gelir (hiçbir içe alma), değeri 1 anlamına gelir mükemmel absorptive (yansıma hiçbir) oluştu. Bu değeri değiştirmek için akustik malzeme (#4. adım) güncelleştirir **özel**.
+1. Bu sayfayı getirmek için kullanılan **malzemeler** sekmesi düğmesi.
+2. Bu sayfayı kullanarak yapmanız gerekenler hakkında kısa bir açıklama.
+3. **AcousticsGeometry**olarak etiketlenen aktörlerden alınan düzeyde kullanılan malzemeler listesi. Buradaki bir malzemeye tıklanması, sahformdaki bu malzemeyi kullanan tüm nesneleri seçer.
+4. Sahne malzemelerinin atandığı akustik malzemeleri gösterir. Bir sahne malzemesini farklı bir akustik malzemeye yeniden atamak için bir açılır listeye tıklayın.
+5. Önceki sütunda seçili olan malzemenin akustik bir katsayısını gösterir. Sıfır değeri tam yansıtıcı (hiçbir şekilde) anlamına gelir, 1 değeri mükemmel bir şekilde (yansıma yoktur). Bu değerin değiştirilmesi, Acoustics malzemesini (adım #4) **özel**olarak güncelleştirecek.
 
-Malzeme, sahnede değişiklik yaparsanız, sekmeler olarak yansıyan şu değişiklikleri görmek için proje akustik eklentisi anahtarının gerekecektir **malzemeleri** sekmesi.
+Sahnedeki malzemelerde değişiklik yaparsanız, **malzemeler** sekmesinde yansıtılan değişiklikleri görmek Için Project Acoustics eklentisindeki sekmeleri değiştirmeniz gerekir.
 
-## <a name="calculate-and-review-listener-probe-locations"></a>Hesaplamak ve dinleyici sondası konumlarını gözden geçirin
+## <a name="calculate-and-review-listener-probe-locations"></a>Dinleyici araştırma konumlarını hesapla ve gözden geçirme
 
-Malzemeleri atadıktan sonra geçiş **araştırmaları** sekmesi.
+Malzemeleri atadıktan sonra, yoklamalar sekmesine geçin .
 
-### <a name="for-reference-parts-of-the-probes-tab"></a>Başvuru için: Araştırmalar sekmesinin bölümleri
+### <a name="for-reference-parts-of-the-probes-tab"></a>Başvuru için: Yoklamalar sekmesinin bölümleri
 
-![Unreal sekmesinde akustik araştırmaları, ekran görüntüsü](media/unreal-probes-tab-details.png)
+![Gerçek olmayan Acoustics araştırmaları sekmesinin ekran görüntüsü](media/unreal-probes-tab-details.png)
 
-1. **Araştırmaları** bu sayfasını getirmek için kullanılan sekmesini düğmesi
-2. Bu sayfayı kullanarak yapmanız gerekenler kısa bir açıklaması
-3. Bu, bir kaba veya iyi benzetimi çözüm seçmek için kullanın. Kaba daha hızlıdır, ancak belirli Artıları ve eksileri vardır. Bkz: [hazırlama çözümleme](bake-resolution.md) altındaki ayrıntılar için.
-4. Konum seçin olduğunda bu alanı kullanarak akustik veri dosyalarını yerleştirilmelidir. Klasör Seçici kullanmak için "..." düğmesine tıklayın. Veri dosyaları hakkında daha fazla bilgi için bkz. [veri dosyalarını](#Data-Files) aşağıda.
-5. Burada sağlanan ön ek kullanarak bu görünüm için veri dosyalarının adlandırılacaktır. "[Düzeyi adı] _AcousticsData" varsayılandır.
-6. Tıklayın **Calculate** Sahne voxelize için düğme ve araştırma noktası konumu hesaplayın. Makinenizde yerel olarak gerçekleştirilir ve bir hazırlama yapmadan önce yapılmalıdır. Araştırmaları hesaplanan, yukarıdaki denetimleri devre dışı bırakılır ve bu düğme söylemek değiştirecek sonra **Temizle**. Tıklayın **Temizle** düğmesine hesaplamaları silmek ve denetimleri etkinleştirin; böylelikle yeni ayarlarla yeniden hesaplayın.
+1. Bu sayfayı getirmek Için kullanılan yoklamalar sekme düğmesi
+2. Bu sayfayı kullanarak yapmanız gerekenler hakkında kısa bir açıklama
+3. Bu seçeneği kullanarak kaba bir benzetim veya ince simülasyon çözümü seçin. Kaba bir daha hızlıdır, ancak belirli bir avantajları vardır. Ayrıntılar için aşağıdaki [Bake çözümlemesine](bake-resolution.md) bakın.
+4. Acoustics veri dosyalarının bu alan kullanılarak yerleştirilmesi gereken konumu seçin. "..." İle düğmeye tıklayın bir klasör seçici kullanmak için. Veri dosyaları hakkında daha fazla bilgi için aşağıdaki [veri dosyalarına](#Data-Files) bakın.
+5. Bu sahnenin veri dosyaları burada belirtilen ön ek kullanılarak adlandırılacak. Varsayılan değer "[level Name] _AcousticsData".
+6. Sahneyi tıklatıp araştırma noktası konumlarını hesaplamak için **Hesapla** düğmesine tıklayın. Bu, makinenizde yerel olarak yapılır ve bir fırt yapılmadan önce gerçekleştirilmelidir. Yoklamalar hesaplandıktan sonra yukarıdaki denetimler devre dışı bırakılır ve bu düğme **Açık**olacak şekilde değişir. Hesaplamaları silmek ve yeni ayarları kullanarak yeniden hesaplayabilmeniz için denetimleri etkinleştirmek üzere **Temizle** düğmesine tıklayın.
 
-Araştırmalar aracılığıyla sağlanan otomatik işlem yerleştirilmelidir **araştırmaları** sekmesi.
-
-
-### <a name="what-the-calculate-button-calculates"></a>"Hesapla" düğme hesaplar
-
-**Calculate** düğmesi şimdiye sağladığınızdan tüm verileri alır (geometri, gezinti, malzemeler ve kaba/ince ayar) ve çeşitli adımlarda geçer:
-
-1. Sahne kafesleri geometrisini alır ve voxel toplu hesaplar. Voxel birimin tamamını sahneniz barındırır ve küçük üçüncü dereceden "voxels" yapılan 3 boyutlu bir birimdir. Ayarlanan tarafından simülasyon sıklığı voxels boyutu belirlenir **benzetimi çözümleme** ayarı. Her voxel işaretlenmiş ya da olacak şekilde "havadan"açık"ya da Sahne geometri içeren. Bir voxel geometri içeriyorsa voxel bu geometriye atanmış malzemeleri içe alma katsayısı ile etiketlenir.
-2. Player nereye acoustically ilginç konumları hesaplamak için Gezinti verileri kullanır. Daha küçük alanları gibi açılan kapılar ve koridorlarda ve alanları açmak için odalarını içerir makul küçük bir kümesi, bu konumlardan bulmak çalışır. Büyük sahneler kadar bin olabilir, ancak küçük sahneler için genellikle 100'den az konumları budur.
-3. Konumların her biri, hesaplar son dinleyici için bu parametreleri nasıl "açık" gibi bir dizi boyutu vb. içinde yer alan olduğunu belirler.
-4. Bu hesaplamaların sonuçlarını dosyaları belirttiğiniz konuma depolanır (bkz [veri dosyalarını](#Data-Files) aşağıda)
-
-Sahneniz boyutunu ve makinenizin hızına bağlı olarak, bu hesaplamalar birkaç dakika sürebilir.
-
-Bu hesaplamalar tamamlandıktan sonra hem voxel verileri hem de hazırlama iyi sonuç verecektir sağlamaya yardımcı olmak için araştırma noktası konumu önizleyebilirsiniz. Hatalı Gezinti kafes gibi şeyler veya Bunu düzeltmek için eksik ek geometri genellikle önizlemede kolayca görülebilir.
+Yoklamalar, yoklamalar sekmesinde belirtilen otomatik işlem aracılığıyla yerleştirilmelidir .
 
 
-## <a name="debug-display"></a>Görüntü hata ayıklama
+### <a name="what-the-calculate-button-calculates"></a>"Calculate" düğmesi ne hesaplar
 
-Araştırma hesaplama tamamlandıktan sonra yeni bir aktör dünya adlı anahat Düzenleyicisi içinde görünür **AcousticsDebugRenderer**. Denetimi **işleme araştırmaları** ve **işleme Voxels** Düzenleyicisi görünüm hata ayıklama görünen onay kutularını etkinleştirir.
+**Hesapla** düğmesi, şimdiye kadar verdiğiniz tüm verileri (geometri, gezinti, malzemeler ve kaba/ince ayar) alır ve birkaç adımdan geçer:
 
-![Gösteren ekran görüntüsü akustik hata ayıklama Oluşturucu aktör Unreal Düzenleyicisi'nde](media/acoustics-debug-renderer.png)
+1. Sahne alanı kafeslerden yararlanır ve bir Voxel birimini hesaplar. Voxel birimi, sahsitenizin tamamını kapsayan 3 boyutlu bir birimdir ve küçük üçüncü dereceden "voxfit" den oluşur. Voxbüyüklük 'ın boyutu simülasyon **çözünürlüğü** ayarı tarafından belirlenen benzetim sıklığıyla belirlenir. Her Voxel, "açık hava" ya da sahne geometrisi içeren olarak işaretlenir. Bir Voxel, geometri içeriyorsa, Voxel, bu geometriye atanan malzemenin büyük bir katsayısı ile etiketlenir.
+2. Daha sonra, oynatıcının gidebileceği acoustically ilginç konumları hesaplamak için gezinti verilerini kullanır. Bu konumların, doorways ve Hallas gibi daha küçük alanlar ve sonra boşluklar açmak için Odalar ve odalar gibi küçük bir kümesini bulmaya çalışır. Küçük sahneler için genellikle 100 konumundan daha az, büyük sahneler en fazla 1000 olabilir.
+3. Hesapladığı son dinleyici konumlarının her biri için, "açık" olarak boşluk, bulunduğu odanın boyutu vb. gibi çeşitli parametreleri belirler.
+4. Bu hesaplamaların sonuçları, belirttiğiniz konumdaki dosyalarda saklanır (aşağıdaki [veri dosyalarına](#Data-Files) bakın)
 
-Herhangi bir voxels veya üzerinde sizin düzeyinizde yayılan bir araştırmalarla görmüyorsanız, görünüm penceresinin içinde gerçek zamanlı işleme etkin olduğundan emin olun.
+Sahnenin boyutuna ve makinenizin hızına bağlı olarak, bu hesaplamalar birkaç dakika sürebilir.
 
-![Unreal gerçek zamanlı işleme seçeneğinin ekran görüntüsü](media/unreal-real-time-rendering.png)
+Bu hesaplamalar tamamlandıktan sonra, hazırlama 'nin iyi sonuçlar vermesini sağlamak için hem Voxel verilerinin hem de araştırma noktası konumlarından önizleme yapabilirsiniz. Hatalı gezinti kafesi veya eksik/ekstra geometri gibi şeyler genellikle önizleme sırasında hızla görünür hale gelir. böylece, bunu düzeltebilirsiniz.
 
-### <a name="voxels"></a>Voxels
 
-Voxels Sahne penceresinde yeşil küpler katılımcı geometri geçici olarak gösterilir. Yalnızca hava içeren Voxels gösterilmez. Benzetim kullanılacak tam voxel birimi gösterir tüm sahneniz çevresinde bir büyük yeşil kutu yoktur.
-Sahneniz taşıyın ve acoustically occluding geometri voxels sahip olduğunu doğrulayın. Ayrıca, bu akustik olmayan çakışma kafesleri voxelized etkinleştirilmemiş gibi nesneleri denetleyin. Kamerayı sahnenin yaklaşık 5 ölçümleri gösterilecek voxels için nesnenin içinde olması gerekir.
+## <a name="debug-display"></a>Hata ayıklama görüntüleme
 
-Kaba çözümleme vs iyi çözüm ile oluşturulan voxels karşılaştırırsanız kaba voxels iki kez büyük olduğunu görürsünüz.
+Araştırma hesaplaması tamamlandıktan sonra, **AcousticsDebugRenderer**adlı dünya çapında yeni bir aktör görüntülenir. **Işleme araştırmaları** ve **Işleme voxiksel** onay kutuları, hata ayıklama görüntüsünü düzenleyici görünüm penceresinin içinde etkinleştirir.
 
-![Unreal Düzenleyicisi'nde, ekran akustik voxels Önizleme](media/unreal-voxel-preview.png)
+![Acoustics hata ayıklama Oluşturucu aktörünü gerçek olmayan düzenleyicide gösteren ekran görüntüsü](media/acoustics-debug-renderer.png)
+
+Düzeyinize ait herhangi bir voxor veya araştırmasını görmüyorsanız, görünüm sayfasında gerçek zamanlı işlemenin etkinleştirildiğinden emin olun.
+
+![Reel olmayan gerçek zamanlı işleme seçeneğinin ekran görüntüsü](media/unreal-real-time-rendering.png)
+
+### <a name="voxels"></a>Voxpiksel
+
+Voxler, katılan geometrisi etrafında yeşil küpler olarak sahne penceresinde gösterilir. Yalnızca AIR içeren Voxler gösterilmez. Tüm sahnenin etrafında, simülasyonda kullanılacak tam Voxel birimini belirten büyük bir yeşil kutu vardır.
+Sahnenin etrafında ilerleyin ve acoustically-occluding geometrisinin voxunkinin olduğunu doğrulayın. Ayrıca, çakışma kafesler gibi Acoustics olmayan nesnelerin voxsuz olmadığını kontrol edin. Sahne kameranın, Vox 'in gösterilmesi için nesnenin yaklaşık 5 metresinden fazla olması gerekebilir.
+
+En iyi çözünürlük ile oluşturulan voxters çözünürlüğe göre karşılaştırırsanız, büyük ölçekli voxters 'ın büyük olduğunu görürsünüz.
+
+![Gerçek olmayan düzenleyicide Acoustics VOX, Preview 'ın ekran görüntüsü](media/unreal-voxel-preview.png)
 
 ### <a name="probe-points"></a>Araştırma noktaları
 
-Araştırma noktaları olası oynatıcı (dinleyici) konumları ile eşanlamlıdır. Benzetim, saklanacağı, tüm olası kaynak konumları her araştırma noktasına bağlanmayı akustik hesaplar. Çalışma zamanında dinleyici konumun yakınında araştırma noktaları arasında ilişkilendirilir.
+Araştırma noktaları, olası oynatıcı (dinleyici) konumları ile eşanlamlıdır. Fırıllama yaparken benzetim, tüm olası kaynak konumlarını her bir araştırma noktasına bağlamayı Acoustics hesaplar. Çalışma zamanında, dinleyici konumu yakın araştırma noktaları arasında enterpoladır.
 
-Araştırma noktaları player sahnede seyahat beklenen her yerde mevcut olduğunu denetlemek önemlidir. Araştırma noktaları üzerinde Gezinti kafes proje akustik altyapısı tarafından yerleştirilir ve taşınamaz veya düzenlendi, bu nedenle Gezinti kafes kapsar tüm olası player konumları araştırma noktaları inceleyerek emin olun.
+Gezindiğinde oyuncunun sahnede gezinildiği her yerde araştırma noktalarının mevcut olup olmadığını kontrol etmek önemlidir. Araştırma noktaları, proje Acoustics altyapısı tarafından gezinti altyapısına yerleştirilir ve taşınamaz ya da düzenlenemez, bu nedenle gezinti kafesinin araştırma noktalarını inceleyerek tüm olası oynatıcı konumlarını kapsadığından emin olun.
 
-![Ekran görüntüsü, akustik Unreal önizlemede araştırmaları](media/unreal-probes-preview.png)
+![Acoustics araştırmaları önizlemesi 'nin gerçek zamanlı olmayan görüntüsü](media/unreal-probes-preview.png)
 
-Bkz: [hazırlama çözümleme](bake-resolution.md) kaba vs hakkında daha fazla ayrıntı için çözüm ince.
+Daha ayrıntılı bir çözüm hakkında daha fazla bilgi için bkz. [Bake çözünürlüğü](bake-resolution.md) .
 
-## <a name="bake-your-level-using-azure-batch"></a>Azure Batch kullanarak düzeyinizi hazırlama
+## <a name="bake-your-level-using-azure-batch"></a>Azure Batch kullanarak düzeyinize bakın
 
-Azure Batch hizmetini kullanarak bulutta bilgi işlem kümesi ile sahneniz hazırlama. Proje akustik Unreal eklenti oluşturmak, yönetmek ve bir Azure Batch kümesi için her hazırlama kaldırmak için Azure Batch doğrudan bağlanır. Hazırlama sekmesinde, Azure kimlik bilgilerinizi girin, bir küme makine türü ve boyut seçin ve hazırlama'a tıklayın.
+Azure Batch hizmetini kullanarak sahneye bulutta bir işlem kümesiyle bakmanıza neden olabilirsiniz. Project Acoustics Unreal eklentisi, her Bake için bir Azure Batch kümesini oluşturmak, yönetmek ve bölmek üzere Azure Batch doğrudan bağlanır. Bake sekmesinde, Azure kimlik bilgilerinizi girin, bir küme makinesi türü ve boyutu seçin ve Bake ' ye tıklayın.
 
-### <a name="for-reference-parts-of-the-bake-tab"></a>Başvuru için: Hazırlama sekmesinin bölümleri
+### <a name="for-reference-parts-of-the-bake-tab"></a>Başvuru için: Hazırlama sekmesinin parçaları
 
-![Unreal sekmesinde akustik, ekran görüntüsü hazırlama](media/unreal-bake-tab-details.png)
+![Gerçek olmayan Acoustics Bake sekmesinin ekran görüntüsü](media/unreal-bake-tab-details.png)
 
-1. Bu sayfasını getirmek için kullanılan hazırlama için sekmesinde düğme.
-2. Kısa bir açıklamasını bu sayfada yapmanız gerekenler.
-3. Azure hesabınız oluşturulduktan sonra Azure kimlik bilgilerinizi girmek için alanlar. Daha fazla bilgi için [bir Azure Batch hesabı oluşturma](create-azure-account.md).
-4. Aboneliklerinizi yönetin, kullanımını izlemek ve faturalandırma bilgileri vb. görüntülemek için Azure portalını başlatın. 
-5. Azure batch işlem düğümü türü hesaplama için kullanılacak. Düğüm türü, Azure veri merkezi konumu tarafından desteklenmesi gerekir. Emin değilim, tutulacaksa **Standard_F8s_v2**.
-6. Bu hesaplama için kullanmak için düğüm sayısı. Buraya girdiğiniz numara, Azure Batch çekirdek ayırma ile sınırlıdır ve hazırlama tamamlanma süresi etkiler. Varsayılan ayırma yalnızca iki 8 çekirdek düğümleri veya bir 16 çekirdek düğümü sağlar, ancak genişletilebilir. Çekirdek ayırma kısıtlamaları hakkında daha fazla bilgi için bkz. [bir Azure Batch hesabı oluşturma](create-azure-account.md).
-7. Kullanılacak işlem havuzunuzu yapılandırmak için bu onay kutusunu seçin [düşük öncelikli düğümler](https://docs.microsoft.com/azure/batch/batch-low-pri-vms). Düşük öncelikli işlem düğümleri çok daha düşük bir maliyet vardır ancak bunlar her zaman kullanılabilir olmayabilir veya hiçbir zaman etkisiz hale getirilebilir.
-8. İşinizi bulutta çalıştırmak için için beklenen süre miktarı. Bu düğümü başlangıç süresini içermez. İş çalışmaya başladıktan sonra sonuçlar ulaşırsınız önce hakkında ne kadar süreyle olmalıdır budur. Bu yalnızca bir tahmin olduğunu unutmayın.
-9. Simülasyonlar çalıştırılması için gereken bilgi işlem zamanı toplam miktarı. Toplam süre Azure'da kullanılacak düğümü işlem budur. Bkz: [Estimating hazırlama maliyet](#Estimating-bake-cost) aşağıda bu değeri kullanma hakkında daha fazla bilgi için.
-10. Buluta hazırlama göndermek için hazırlama düğmesine tıklayın. Bir iş çalışırken bu gösterir **işi iptal et** yerine. Bu sekmede hatalar varsa veya iş akışı **araştırmaları** sekme tamamlanmamış, bu düğmeyi devre dışı bırakılır.
-11. Sahneniz hesaplanır olarak için yoklama sayısı **araştırmaları** sekmesi. Yoklama sayısını bulutta çalıştırılması gereken simülasyonlar sayısını belirler. Araştırmalar sayısından daha fazla düğüm belirtemezsiniz.
-12. Bu ileti, işin geçerli durumu bildirir veya bu sekmede hatalar varsa, bu hataları nelerdir.
+1. Bu sayfayı getirmek için kullanılan Bake sekmesi düğmesi.
+2. Bu sayfada yapılacaklar hakkında kısa bir açıklama.
+3. Azure hesabınız oluşturulduktan sonra Azure kimlik bilgilerinizi girme alanları. Daha fazla bilgi için bkz. [Azure Batch hesabı oluşturma](create-azure-account.md).
+4. Aboneliklerinizi yönetmek, kullanımı izlemek ve faturalandırma bilgilerini görüntülemek için Azure portal başlatın. 
+5. Hesaplama için kullanılacak Azure Batch işlem düğümü türü. Düğüm türü, Azure veri merkezi konumunuz tarafından desteklenmelidir. Emin değilseniz, **Standard_F8s_v2**adresinden ayrılın.
+6. Bu hesaplama için kullanılacak düğüm sayısı. Buraya girdiğiniz sayı, fırt 'in tamamlanma süresini etkiler ve Azure Batch çekirdek ayırmala sınırlıdır. Varsayılan ayırma yalnızca iki 8 çekirdekli düğüm veya 1 16 çekirdek düğümüne izin verir, ancak Genişletilebilir. Çekirdek ayırma kısıtlamaları hakkında daha fazla bilgi için bkz. [Azure Batch hesabı oluşturma](create-azure-account.md).
+7. İşlem havuzunuzu [düşük öncelikli düğümleri](https://docs.microsoft.com/azure/batch/batch-low-pri-vms)kullanacak şekilde yapılandırmak için bu onay kutusunu seçin. Düşük öncelikli işlem düğümleri çok daha düşük maliyetlidir, ancak her zaman kullanılamayabilir veya herhangi bir zamanda yok edilebilir.
+8. İşinizin bulutta çalışması için gerçekleşmesi beklenen geçen süre miktarı. Bu, düğüm başlangıç saatini içermez. İş çalışmaya başladıktan sonra, sonuçları geri almadan önce ne kadar süreyle olması gerektiğine ilişkin olur. Bunun yalnızca bir tahmin olduğunu unutmayın.
+9. Benzetimleri çalıştırmak için gereken bilgi işlem zamanının toplam miktarı. Bu, Azure 'da kullanılacak olan düğüm işlem zamanının toplam miktarıdır. Bu değeri kullanma hakkında daha fazla bilgi için bkz. [hazırlama maliyeti tahmini](#Estimating-bake-cost) .
+10. Fırt düğmesine tıklayarak, hazırlama 'yi buluta gönderebilirsiniz. Bir iş çalışırken bunun yerine **Iptal işi** gösterilir. Bu sekmede herhangi bir hata varsa veya yoklamalar sekmesindeki iş akışı tamamlanmadıysa, bu düğme devre dışı bırakılır.
+11. **Yoklamanız** sekmesinde hesaplanan şekilde sahnenin araştırma sayısı. Yoklamaların sayısı, bulutta çalıştırılması gereken benzetimleri sayısını belirler. Yoklamalara göre daha fazla düğüm belirtemezsiniz.
+12. Bu ileti, işin geçerli durumunu veya bu sekmede hata olduğunu, bu hataların ne olduğunu bildirir.
 
-Her zaman etkin işler, işlem havuzlarını ve depolama alanı ile ilgili eksiksiz bilgi alabileceğiniz [Azure portalında](https://portal.azure.com).
+[Azure Portal](https://portal.azure.com)etkin işler, işlem havuzları ve depolama hakkında her zaman bir bilgi edinebilirsiniz.
 
-Bir iş çalışırken **hazırlama** düğmesi değişiklikleri **işi iptal et**. Devam eden işi iptal etmek için bu düğmeyi kullanın. Bir işi iptal ediliyor alınamaz, sonuç kullanıma sunulacak ve yine de iptal önce kullanılan herhangi bir Azure işlem süresi için ücretlendirilirsiniz.
+Bir iş, **Işi iptal**etmek Için **Bake** düğmesi değişikliklerini çalıştırırken. Devam eden işi iptal etmek için bu düğmeyi kullanın. Bir işin iptal edilmesi geri alınamaz, hiçbir sonuç kullanılamayacak ve iptal edilmeden önce kullanılan tüm Azure işlem süresi ücretlendirmeye devam edecek.
 
-Bir hazırlama başladıktan sonra Unreal kapatabilirsiniz. Bir bulut hazırlama, proje, düğüm türü ve düğüm sayısına bağlı olarak birkaç saat sürebilir. Projeyi yeniden yükleyin ve akustik penceresini hazırlama iş durumu güncelleştirilir. İş tamamlandığında, çıkış dosyası indirilir.
+Bir fırt başlattığınızda, Unreal ' ı kapatabilirsiniz. Projeye, düğüm türüne ve düğüm sayısına bağlı olarak, bir bulut fırından birkaç saat sürebilir. Projeyi yeniden yüklediğinizde ve Acoustics penceresini açtığınızda hazırlama iş durumu güncelleştirilecektir. İş tamamlanırsa, çıkış dosyası indirilir.
 
-Azure kimlik bilgileri yerel makinenize güvenli bir şekilde depolanır ve Unreal projenizle ilişkili. Bunlar, yalnızca Azure güvenli bir bağlantı kurmak için kullanılır.
+Azure kimlik bilgileri yerel makinenizde güvenli bir şekilde depolanır ve gerçek olmayan projem ile ilişkilendirilir. Yalnızca Azure ile güvenli bir bağlantı kurmak için kullanılır.
 
-### <a name="Estimating-bake-cost"></a> Azure hazırlama maliyet tahmini
+### <a name="Estimating-bake-cost"></a>Azure hazırlama maliyeti tahmini
 
-Ne verilen hazırlama maliyetini tahmin etmek için gösterilen değer ele **işlem maliyeti tahmini**bir süresi olan ve birden çok kez tarafından saatlik maliyet yerel para **VM düğüm türü** seçtiniz. Düğümleri duruma getirmek için gereken ve çalışan düğümü zaman sonucu dahil edilmez. Örneğin, **Standard_F8s_v2** düğüm türünüz için olan 0.40 $/ SA maliyeti ve işlem tahmini maliyeti 3 saat 57 dakika, işi çalıştırmak için tahmini maliyeti $0.40 * ~ 4 saat olacak = ~ 1,60$. Gerçek maliyet büyük olasılıkla çalışmaya düğümleri almak için ek süreyi nedeniyle biraz daha yüksek olacaktır. Maliyeti saatlik düğümü bulabilirsiniz [Azure Batch fiyatlandırması](https://azure.microsoft.com/pricing/details/virtual-machines/linux) sayfası ("select işlem için iyileştirilmiş" veya "yüksek performanslı işlem" kategorisi için).
+Belirli bir fırt 'in maliyet olacağını tahmin etmek için, **Tahmini Işlem maliyeti**için gösterilen değeri alın ve bu süre, seçtiğiniz **VM düğüm türünün** yerel para birimindeki saatlik maliyet ile çarpın. Sonuç, düğümlerin çalışır duruma getirmek için gereken düğüm süresini içermez. Örneğin, düğüm türü için $0.40/sa maliyeti olan **Standard_F8s_v2** ' u seçerseniz ve tahmini işlem maliyeti 3 saat ve 57 dakika ise, işi çalıştırmak için tahmini maliyet $0,40 * ~ 4 saat = ~ $1,60 olur. Düğümlerin başlatılması, daha fazla zaman kaplamasından kaynaklanabilir. Saatlik düğüm maliyetini [Azure Batch fiyatlandırma](https://azure.microsoft.com/pricing/details/virtual-machines/linux) sayfasında bulabilirsiniz (kategori Için "işlem için iyileştirilmiş" veya "yüksek performanslı işlem" seçeneğini belirleyebilirsiniz).
 
 ### <a name="reviewing-the-bake-results"></a>Hazırlama sonuçlarını gözden geçirme
 
-Hazırlama işlemi tamamlandıktan sonra çalışma zamanı eklentisi çalıştırarak voxels ve araştırma noktaları beklenen konumlarına olduğunu kontrol edin.
+Hazırlama tamamlandıktan sonra, çalışma zamanı eklentisini çalıştırarak VOX, araştırma noktalarının beklenen konumlarda olup olmadığını kontrol edin.
 
 ## <a name="Data-Files"></a>Veri dosyaları
 
-Bu eklenti çeşitli noktalarında tarafından oluşturulan dört veri dosyası vardır. Yalnızca bir tanesi çalışma zamanında gereken ve projenizin paketleme yolu otomatik olarak eklenir, projenizin içerik/akustik klasöre yerleştirilir. Diğer üç akustik veri klasörü içinde olan ve olmayan paketlenir.
+Bu eklenti tarafından çeşitli noktalarda oluşturulan dört veri dosyası vardır. Çalışma zamanında bunlardan yalnızca biri gereklidir ve projenizin paketleme yoluna otomatik olarak eklenen projenizin Content/Acoustics klasörüne yerleştirilir. Diğer üç, Acoustics veri klasörünün içindedir ve paketlenmez.
 
-* **[Project]/Config/ProjectAcoustics.cfg**: Bu dosya akustik modu UI alanlarında girdiğiniz verileri depolar. Bu dosyanın adını ve konumunu değiştirilemez. Hazırlama etkileyen, bu dosyada depolanan diğer değerleri vardır, ancak bunlar Gelişmiş kullanıcılar için ve değiştirilmemesi gerekir.
-* **[Project] / içerik/akustik / [LevelName]\_AcousticsData.ace**: Bu, hangi hazırlama benzetimi sırasında oluşturulur ve, sahnenin akustik işlemek için çalışma zamanı tarafından kullanılan arama verileri içeren dosyadır. Bu dosyanın adını ve konumunu alanlara kullanarak değiştirilebilir **araştırmaları** sekmesi. Oluşturulduktan sonra bu dosyayı yeniden adlandırmak isterseniz, Unreal projenizden UAsset silin, dışında Unreal dosya Gezgini'nde dosyayı yeniden adlandırın ve ardından bu dosyayı yeni UAsset üretmek için Unreal yeniden içeri. UAsset kendisi tarafından yeniden adlandırma çalışmaz.
-* **[Project]/Plugins/ProjectAcoustics/AcousticsData/[LevelName]\_AcousticsData.vox**: Bu dosya, voxelized akustik geometri ve malzeme özelliklerine depolar. Kullanarak hesaplanan **Calculate** düğmesini **araştırmaları** sekmesi. Bu dosyanın adını ve konumunu alanlara kullanarak değiştirilebilir **araştırmaları** sekmesi.
-* **[Project] / Plugins/ProjectAcoustics/AcousticsData / [LevelName]\_AcousticsData\_config.xml**: Bu dosya kullanılarak hesaplanır parametreleri depolayan **Calculate** düğmesini **araştırmaları** sekmesi. Bu dosyanın adını ve konumunu alanlara kullanarak değiştirilebilir **araştırmaları** sekmesi.
+* **[Proje]/Config/ProjectAcoustics.cfg**: Bu dosya, Acoustics modundaki Kullanıcı arabirimindeki alanlara girdiğiniz verileri depolar. Bu dosyanın konumu ve adı değiştirilemez. Bu dosyada, Bake 'yi etkileyen başka değerler de vardır, ancak bunlar gelişmiş kullanıcılar içindir ve değiştirilmemelidir.
+* **[Proje]/Content/Acoustics/[LevelName]\_AcousticsData. Ace**: Bu dosya, hazırlama simülasyonu sırasında oluşturulur ve sahnenin Acoustics işlemek için çalışma zamanı tarafından kullanılan arama verilerini içerir. Bu dosyanın konumu ve adı, **yoklamalar** sekmesindeki alanlar kullanılarak değiştirilebilir. Oluşturulduktan sonra bu dosyayı yeniden adlandırmak isterseniz, gerçek olmayan projenizden Uvarlığı silin, dosyayı dosya Gezgini 'nde Unreal dışında yeniden adlandırın ve ardından yeni bir Uvarlık oluşturmak için bu dosyayı gerçek olmayan olarak yeniden içeri aktarın. Uıthe Ukıymeti 'nin yeniden adlandırılması çalışmaz.
+* **[Proje]/plugins/ProjectAcoustics/AcousticsData/[LevelName]\_AcousticsData. insan**: Bu dosya voxeliacoustics geometrisi ve malzeme özelliklerini depolar. Yoklamalar sekmesindeki **Hesapla** düğmesi kullanılarak hesaplanır . Bu dosyanın konumu ve adı, **yoklamalar** sekmesindeki alanlar kullanılarak değiştirilebilir.
+* **[Proje]/plugins/ProjectAcoustics/AcousticsData/[LevelName]\_AcousticsData\_config. xml**: Bu dosya, yoklamalar sekmesindeki **Hesapla** düğmesi kullanılarak hesaplanan parametreleri depolar. Bu dosyanın konumu ve adı, **yoklamalar** sekmesindeki alanlar kullanılarak değiştirilebilir.
 
-Azure'dan indirilen *.ace dosyasını silmek için dikkatli olun. Bu dosya Sahne rebaking tarafından dışında kurtarılamaz.
+Azure 'dan indirilen *. ACE dosyasını silmeyen bir işlem yapın. Bu dosya, sahneyi yeniden fırlama haricinde kurtarılabilir değildir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Keşfedin [Unreal için denetimleri tasarım](unreal-workflow.md)
-* Keşfedin [proje akustik tasarım kavramları](design-process.md)
+* [Gerçek zamanlı olmayan tasarım denetimlerini](unreal-workflow.md) keşfet
+* [Project Acoustics tasarım kavramlarını](design-process.md) keşfet
 

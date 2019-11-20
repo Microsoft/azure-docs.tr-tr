@@ -1,69 +1,79 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Application Gateway Belgeleri
+### YamlMime:Landing
+title: Azure Application Gateway belgeleri
+summary: Uygulama ağ geçitleri oluşturmayı öğrenin. Bu belgeler Azure kaynaklarınızda web trafiğini planlamanıza, dağıtmanıza ve yönetmenize yardımcı olur.
 metadata:
-  title: 'Azure Application Gateway Belgeleri - Öğreticiler, API Başvurusu'
-  meta.description: 'Learn how to create application gateways. Documentation helps you plan, deploy, and manage web traffic to your Azure resources.'
+  title: Azure Application Gateway belgeleri
+  description: Bulut tabanlı bir ağ güvenlik hizmeti olan Azure Güvenlik Duvarı'nı dağıtmayı öğrenin.
   services: application-gateway
-  author: vhorne
   ms.service: application-gateway
   ms.topic: landing-page
-  ms.date: 5/20/2019
+  author: vhorne
   ms.author: victorh
-abstract:
-  description: 'Bir hizmet olarak uygulama teslim denetleyicisi (ADC) olan Application Gateway’i nasıl dağıtabileceğinizi öğrenin. Öğreticiler, API başvuruları ve diğer belgelerde, kullanılabilirlik düzeyi yüksek ve ölçeklenebilir web ön ucu oluşturmanızı sağlayan uygulama düzeyinde yönlendirme ve yük dengeleme hizmetlerini nasıl ayarlayacağınız açıklanmıştır.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Application Gateway’i kullanarak kaynaklarınıza yönelik web trafiğini yönetmeyi öğrenin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/azure/application-gateway/media/index/portal.svg'
-            text: Azure Portal
-            href: 'https://docs.microsoft.com/azure/application-gateway/quick-create-portal'
-          - image:
-              src: 'https://docs.microsoft.com/azure/application-gateway/media/index/logo_powershell.svg'
-            text: Azure PowerShell
-            href: 'https://docs.microsoft.com/azure/application-gateway/quick-create-powershell'
-          - image:
-              src: 'https://docs.microsoft.com/azure/application-gateway/media/index/cli.svg'
-            text: Azure CLI
-            href: 'https://docs.microsoft.com/azure/application-gateway/quick-create-cli'
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure''da uygulama ağ geçitleri dağıtmayı, yönetmeyi ve izlemeyi öğrenin'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/application-gateway/application-gateway-web-application-firewall-portal">Web uygulaması güvenlik duvarıyla bir uygulama ağ geçidi oluşturma</a>
-          - html: <a href="/azure/application-gateway/create-ssl-portal">SSL sonlandırma ile bir uygulama ağ geçidi yapılandırma</a>
-          - html: <a href="/azure/application-gateway/create-multiple-sites-portal">Birden çok web sitesi barındırmak için bir uygulama ağ geçidi oluşturma ve yapılandırma</a>
-          - html: <a href="/azure/application-gateway/create-url-route-portal">Yol tabanlı yönlendirme kuralları ile bir uygulama ağ geçidi oluşturma</a>
-          - html: <a href="/azure/application-gateway/tutorial-url-redirect-cli">URL yolu tabanlı yönlendirme ile bir uygulama ağ geçidi oluşturma</a>
-          - html: <a href="/azure/application-gateway/tutorial-autoscale-ps">Web uygulaması erişimini geliştiren bir uygulama ağ geçidi oluşturma</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Bir uygulama ağ geçidi ile web trafiğini yönetin.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/application-gateway/cli-samples">Azure CLI</a>
-          - html: <a href="/azure/application-gateway/powershell-samples">Azure PowerShell</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/resourcemanager">Azure PowerShell</a></p><p><a href="/cli/azure/network/application-gateway">Azure CLI</a></p>
-          - title: Diller
-            html: '<p><a href="/dotnet/api">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.network">Java</a></p><p><a href="/javascript/api/azure-arm-network/ApplicationGateways">Node.js</a></p><p><a href="https://docs.microsoft.com/python/api/azure-mgmt-network/azure.mgmt.network.v2018_08_01.operations.applicationgatewaysoperations">Python</a></p>'
-          - title: REST
-            html: '<p><a href="https://msdn.microsoft.com/library/mt684941">Eksiksiz REST API Başvurusu</a></p>'
+  ms.date: 09/18/2019
+  ms.openlocfilehash: c0524eb96c40ea8e01dc3142b70d6d986d94ced4
+  ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73469869"
+landingContent:
+- title: Application Gateway hakkında bilgi edinin
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Application Gateway nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Sık sorulan sorular
+      url: application-gateway-faq.md
+- title: Application Gateway'i dağıtma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure Application Gateway ile web trafiğini yönlendirme
+      url: quick-create-portal.md
+- title: SSL sonlandırma ile dağıtma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Application Gateway ile SSL sonlandırma ve uçtan uca SSL
+      url: ssl-overview.md
+    - text: SSL ilkesine genel bakış
+      url: application-gateway-ssl-policy-overview.md
+  - linkListType: tutorial
+    links:
+    - text: SSL sonlandırma ile uygulama ağ geçidini yapılandırma
+      url: create-ssl-portal.md
+- title: Otomatik ölçeklendirme ve Alanlar arası yedekli Application Gateway
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Otomatik ölçeklendirme ve Alanlar arası yedekli Application Gateway v2
+      url: application-gateway-autoscaling-zone-redundant.md
+  - linkListType: tutorial
+    links:
+    - text: Web uygulaması erişimini geliştiren bir uygulama ağ geçidi oluşturma
+      url: tutorial-autoscale-ps.md
+- title: AKS için Giriş Denetleyicisi
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: AKS için Giriş Denetleyicisi nedir?
+      url: ingress-controller-overview.md
+  - linkListType: tutorial
+    links:
+    - text: AKS için Giriş Denetleyicisi oluşturma
+      url: ingress-controller-install-new.md
+- title: Application Gateway sorunlarını giderme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Application Gateway Kaynak Durumuna genel bakış
+      url: resource-health-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Log Analytics kullanarak Application Gateway Web Uygulaması Güvenlik Duvarı Günlüklerini inceleme
+      url: log-analytics.md
+    - text: Application Gateway'de Arka Uç Durumu sorunları
+      url: application-gateway-backend-health-troubleshooting.md

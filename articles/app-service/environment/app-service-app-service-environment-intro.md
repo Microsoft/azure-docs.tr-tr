@@ -1,6 +1,6 @@
 ---
-title: Giriş App Service ortamı v1 - Azure
-description: Tüm uygulamalarınızı çalıştırmak için güvenli, Vnet'e katılmış, özel ölçek birimleri sağlayan App Service ortamı v1 özelliği hakkında bilgi edinin.
+title: App Service Ortamı v1 'ye giriş-Azure
+description: Tüm uygulamalarınızı çalıştırmak için güvenli, VNet 'e katılmış ve ayrılmış ölçek birimleri sağlayan App Service Ortamı v1 özelliği hakkında bilgi edinin.
 services: app-service
 documentationcenter: ''
 author: stefsch
@@ -10,81 +10,80 @@ ms.assetid: 78e6d4f5-da46-4eb5-a632-b5fdc17d2394
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 2bb1a9c3922f435b6be78614aacff6e85bf475ff
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 32450d0c5fbb5599b286921b9653ae68faf40ecf
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62130747"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70070148"
 ---
-# <a name="introduction-to-app-service-environment-v1"></a>Giriş App Service ortamı v1
+# <a name="introduction-to-app-service-environment-v1"></a>App Service Ortamı v1 'ye giriş
 
 > [!NOTE]
-> Bu makale, App Service ortamı v1 hakkında yöneliktir.  App Service ortamı, kullanımı daha kolay ve daha güçlü bir altyapı üzerinde çalışan daha yeni bir sürümü var. Yeni sürüm başlama hakkında daha fazla bilgi edinmek için [App Service ortamı giriş](intro.md).
+> Bu makale App Service Ortamı v1 ile ilgilidir.  Daha güçlü altyapıda daha kolay ve çalışır App Service Ortamı daha yeni bir sürümü vardır. Yeni sürüm hakkında daha fazla bilgi edinmek için [App Service ortamı giriş](intro.md)ile başlayın.
 
 ## <a name="overview"></a>Genel Bakış
 
-App Service ortamı olan bir [Premium] [ PremiumTier] hizmet planı seçeneği [Azure App Service](../overview.md) güvenli olarak çalıştırmak için tam yalıtılmış ve ayrılmış bir ortam sağlar Azure App Service uygulamalarını yüksek ölçekte Web Apps, Mobile Apps ve API Apps dahil olmak üzere.  
+App Service Ortamı, Web Apps, Mobile Apps ve API Apps dahil olmak üzere yüksek ölçekte Azure App Service uygulamaları güvenli bir şekilde çalıştırmak için tam olarak yalıtılmış ve ayrılmış bir ortam sağlayan [Azure App Service](../overview.md) [Premium][PremiumTier] hizmet planı seçeneğidir.  
 
-App Service ortamları gerektiren uygulama iş yükleri için idealdir:
+App Service ortamlar, gereken uygulama iş yükleri için idealdir:
 
-* Çok yüksek ölçek
+* Çok yüksek ölçekli
 * Yalıtım ve güvenli ağ erişimi
 
-Müşteriler, tek bir Azure bölgesi içinde yanı sıra birden çok Azure bölgeleri arasında birden fazla App Service ortamları oluşturabilirsiniz.  Bu App Service ortamları yüksek RPS iş yüklerini desteklemek üzere durumu olmayan uygulama katmanlarını yatay yönde ölçeklendirmek için ideal hale getirir.
+Müşteriler tek bir Azure bölgesi içinde ve birden çok Azure bölgesinde birden çok App Service ortamı oluşturabilir.  Bu, yüksek RPS iş yüklerini desteklemek üzere durum açısından daha az uygulama katmanlarını yatay olarak ölçeklendirmeye yönelik App Service ortamlarını ideal hale getirir.
 
-App Service ortamları yalnızca tek bir müşterinin uygulamalarını çalıştırmak üzere yalıtılmıştır ve her zaman bir sanal ağa dağıtılır.  Her iki uygulama gelen ve giden ağ trafiği üzerinde ayrıntılı denetim imajlarını ve uygulamaları, şirket içi kurumsal kaynaklara sanal ağlar üzerinden yüksek hızda güvenli bağlantılar kurabilirsiniz.
+App Service ortamlar yalnızca tek bir müşterinin uygulamalarını çalıştırmak üzere yalıtılmıştır ve her zaman bir sanal ağa dağıtılır.  Müşteriler hem gelen hem de giden uygulama ağ trafiği üzerinde ayrıntılı denetime sahiptir ve uygulamalar, sanal ağlar üzerinde şirket içi kurumsal kaynaklara yüksek hızlı güvenli bağlantılar kurabilir.
 
-App Service ortamları etkinleştirme büyük ölçekli ve güvenli bir genel bakış için ağ erişimi, bkz: [AzureCon ayrıntılı Bakışında] [ AzureConDeepDive] üzerinde App Service ortamları!
+App Service ortamların yüksek ölçekli ve güvenli ağ erişimini etkinleştirme konusunda genel bir bakış için, App Service ortamlarında [AzureCon derin][AzureConDeepDive] inceleyin!
 
-Kullanarak yatay ölçeklendirme hakkında derinlemesine için birden fazla App Service ortamları Kurulumu bkz bir [coğrafi olarak dağıtılan uygulama Ayak izi][GeodistributedAppFootprint].
+Birden çok App Service ortamı kullanarak yatay ölçeklendirmeyle ilgili ayrıntılı bilgi için [coğrafi olarak dağıtılmış uygulama parmak izini][GeodistributedAppFootprint]ayarlama makalesine bakın.
 
-AzureCon ayrıntılı Bakışında gösterilen güvenlik mimarisinin nasıl yapılandırıldığını görmek için uygulamaya makaleye bakın bir [katmanlı güvenlik mimarisi](app-service-app-service-environment-layered-security.md) App Service ortamları ile.
+AzureCon derin ve içinde gösterilen güvenlik mimarisinin nasıl yapılandırıldığını görmek için App Service ortamları ile [katmanlı güvenlik mimarisi](app-service-app-service-environment-layered-security.md) uygulama makalesine bakın.
 
-App Service ortamlarında çalışan uygulamalar, web uygulaması güvenlik duvarları (WAF) gibi Yukarı Akış cihazları tarafından erişim sağlayabilirsiniz.  Makale [App Service ortamları için bir WAF yapılandırma](app-service-app-service-environment-web-application-firewall.md) bu senaryosuna değiniyor.
+App Service ortamlarında çalışan uygulamalar, Web uygulaması güvenlik duvarları (WAF) gibi yukarı akış cihazları tarafından geçitli erişime sahip olabilir.  [App Service ortamları için WAF yapılandırma](app-service-app-service-environment-web-application-firewall.md) makalesinde bu senaryo ele alınmaktadır.
 
 [!INCLUDE [app-service-web-to-api-and-mobile](../../../includes/app-service-web-to-api-and-mobile.md)]
 
-## <a name="dedicated-compute-resources"></a>Adanmış işlem kaynakları
+## <a name="dedicated-compute-resources"></a>Adanmış Işlem kaynakları
 
-Tüm işlem kaynakları bir App Service Ortamı'nda yalnızca tek bir aboneliğe ayrılmıştır ve bir App Service ortamı ile en fazla elli (50) bilgi işlem kaynakları özel kullanım için tek bir uygulama tarafından yapılandırılabilir.
+Bir App Service Ortamı tüm işlem kaynakları yalnızca tek bir aboneliğe ayrılmıştır ve bir App Service Ortamı tek bir uygulama tarafından özel kullanım için 50 (50) bilgi işlem kaynaklarıyla yapılandırılabilir.
 
-App Service ortamı, bir ön uç bilgi işlem kaynak havuzu yanı sıra bir ila üç çalışan işlem kaynak havuzları oluşur.
+Bir App Service Ortamı, bir ön uç bilgi işlem kaynak havuzundan ve bunlardan biri üç çalışan işlem kaynak havuzlarından oluşur.
 
-Ön uç havuzu olarak App Service ortamı içindeki uygulama isteklerinin otomatik iyi Yük Dengeleme, SSL sonlandırma sorumlu olan bilgi işlem kaynaklarını içerir.
+Ön uç havuzu, SSL sonlandırmasından sorumlu işlem kaynaklarını ve bir App Service Ortamı içindeki uygulama isteklerinin otomatik yük dengelemesini içerir.
 
-Her çalışan havuzu için ayrılan işlem kaynaklarını içeren [App Service planları][AppServicePlan], bir veya daha fazla Azure App Service uygulamalarını sırayla içerir.  Olabileceği en fazla üç farklı çalışan havuzları bir App Service Ortamı'nda, her çalışan havuzu farklı işlem kaynaklarına seçme esnekliğine sahip olursunuz.  
+Her çalışan havuzu [App Service planlarına][AppServicePlan]ayrılan işlem kaynaklarını içerir, bu da bir veya daha fazla Azure App Service uygulaması içerir.  App Service Ortamı en fazla üç farklı çalışan havuzu kullanılabilir olduğundan, her bir çalışan havuzu için farklı işlem kaynakları seçme esnekliği vardır.  
 
-Örneğin, bu, geliştirme veya test uygulamaları için hedeflenen App Service planları için daha güçlü işlem kaynaklarıyla bir çalışan havuzu oluşturmanıza olanak sağlar.  İkinci (veya hatta üçüncü) çalışan havuzu, App Service planları üretim uygulamalarını çalıştırmak için hedeflenen daha güçlü işlem kaynakları kullanabilir.
+Örneğin, bu, geliştirme veya test uygulamaları için tasarlanan App Service planları için daha az güçlü işlem kaynaklarıyla bir çalışan havuzu oluşturmanızı sağlar.  İkinci (veya hatta üçüncü) çalışan havuzu, üretim uygulamaları çalıştıran App Service planlarına yönelik daha güçlü işlem kaynakları kullanabilir.
 
-Ön uç ve çalışan havuzları için kullanılabilen işlem kaynaklarının miktarını hakkında daha fazla bilgi için bkz. [bir App Service ortamını yapılandırma][HowToConfigureanAppServiceEnvironment].  
+Ön uç ve çalışan havuzlarının kullanabileceği işlem kaynakları miktarı hakkında daha fazla bilgi için bkz. [nasıl yapılandırılır App Service ortamı][HowToConfigureanAppServiceEnvironment].  
 
-Desteklenen bir App Service Ortamı'nda kullanılabilir bilgi işlem kaynak boyutları hakkında daha fazla ayrıntı için inceleyin [App Service fiyatlandırması] [ AppServicePricing] sayfasında ve App Service ortamlarında kullanılabilir seçenekleri gözden geçirin Premium fiyatlandırma katmanı.
+App Service Ortamı desteklenen kullanılabilir işlem kaynağı boyutlarına ilişkin ayrıntılar için [App Service fiyatlandırma][AppServicePricing] sayfasına bakın ve Premium fiyatlandırma katmanındaki App Service ortamları için kullanılabilir seçenekleri gözden geçirin.
 
 ## <a name="virtual-network-support"></a>Sanal ağ desteği
 
-App Service ortamı oluşturulabilir **ya da** bir Azure Resource Manager sanal ağı **veya** Klasik dağıtım modeli sanal ağı ([sanalağlarhakkındadahafazlabilgi] [MoreInfoOnVirtualNetworks]).  App Service ortamı her zaman bir sanal ağ ve daha kesin bir sanal ağ alt ağı mevcut olmadığından, sanal ağların her iki gelen ve giden ağ iletişimini denetlemek için güvenlik özelliklerini yararlanabilirsiniz.  
+App Service Ortamı bir Azure Resource Manager Sanal ağda **veya** klasik dağıtım modeli sanal ağında ([sanal ağlarda daha fazla bilgi][MoreInfoOnVirtualNetworks]) oluşturulabilir.  Bir sanal ağda App Service Ortamı her zaman ve bir sanal ağın alt ağı içinde daha kesin bir şekilde bulunduğundan, hem gelen hem de giden ağ iletişimini denetlemek için sanal ağların güvenlik özelliklerinden yararlanabilirsiniz.  
 
-App Service ortamı genel bir IP adresiyle veya yalnızca bir Azure iç yük dengeleyici (ILB) adresi ile karşılıklı iç ya da Internet'e yönelik olabilir.
+Bir App Service Ortamı, bir genel IP adresi veya yalnızca bir Azure Iç Load Balancer (ıLB) adresiyle birlikte sunulan bir Internet ile karşılıklı olabilir.
 
-Kullanabileceğiniz [ağ güvenlik grupları] [ NetworkSecurityGroups] yer aldığı bir App Service ortamı alt ağına gelen ağ iletişimini kısıtlamak için.  Bu, Yukarı Akış cihazlarının ve web uygulaması güvenlik duvarları ve ağ SaaS sağlayıcıları gibi hizmetler arkasındaki uygulamaları çalıştırmanıza olanak sağlar.
+[Ağ güvenlik gruplarını][NetworkSecurityGroups] , bir App Service ortamı bulunduğu alt ağla gelen ağ iletişimini kısıtlamak için kullanabilirsiniz.  Bu sayede, Web uygulaması güvenlik duvarları ve ağ SaaS sağlayıcıları gibi yukarı akış cihazlarının ve hizmetlerinin arkasındaki uygulamalar çalıştırabilirsiniz.
 
-Uygulamalar, iç veritabanları ve web hizmetleri gibi şirket kaynaklarına da sıklıkla erişmelidir.  Bu uç noktaları, bir Azure sanal ağ içinde akan yalnızca iç ağ trafiğini kullanımına yaygın bir yaklaşımdır.  App Service ortamı iç Hizmetleri aynı sanal ağda katıldığından sonra ortamında çalışan uygulamalar üzerinden erişilebilir uç noktalar dahil erişilebilmesini [siteden siteye] [ SiteToSite] ve [Azure ExpressRoute] [ ExpressRoute] bağlantıları.
+Uygulamalar, iç veritabanları ve web hizmetleri gibi şirket kaynaklarına da sıklıkla erişmelidir.  Yaygın bir yaklaşım, bu uç noktaların yalnızca bir Azure sanal ağı içinde akan iç ağ trafiği için kullanılabilir hale getirme amaçlıdır.  App Service Ortamı, iç hizmetlerle aynı sanal ağa katıldığında, ortamda çalışan uygulamalar, [siteden siteye][SiteToSite] ve [Azure ExpressRoute][ExpressRoute] bağlantıları aracılığıyla erişilebilen uç noktalar dahil olmak üzere bunlara erişebilir.
 
-App Service ortamları, sanal ağlar ve şirket içi ağlar ile nasıl çalıştığı hakkında daha fazla ayrıntı üzerinde aşağıdaki makalelere başvurun için [ağ mimarisi][NetworkArchitectureOverview], [gelen denetleme Trafik][ControllingInboundTraffic], ve [arka uçları güvenli bir şekilde bağlanan][SecurelyConnectingToBackends]. 
+App Service ortamlarının sanal ağlarla ve şirket içi ağlarda nasıl çalıştığı hakkında daha fazla bilgi için, [ağ mimarisi][NetworkArchitectureOverview]üzerinde aşağıdaki makalelere bakın, [gelen trafiği kontrol][ControllingInboundTraffic]edin ve arka [uçlara güvenli][SecurelyConnectingToBackends]bir şekilde bağlanma. 
 
 ## <a name="getting-started"></a>Başlarken
 
-App Service ortamları ile çalışmaya başlamak için bkz: [nasıl için oluşturma bir App Service ortamı][HowToCreateAnAppServiceEnvironment]
+App Service ortamları ile çalışmaya başlamak için bkz. [nasıl App Service ortamı oluşturma][HowToCreateAnAppServiceEnvironment]
 
-App Service ortamı ağ mimarisi genel bakış için bkz. [ağ mimarisine genel bakış] [ NetworkArchitectureOverview] makalesi.
+App Service Ortamı ağ mimarisine genel bakış için bkz. [ağ mimarisine genel bakış][NetworkArchitectureOverview] makalesi.
 
-ExpressRoute ile bir App Service ortamını kullanma hakkında ayrıntılar için bkz. üzerinde aşağıdaki makalede [Expressroute ve App Service ortamları][NetworkConfigDetailsForExpressRoute].
+ExpressRoute ile App Service Ortamı kullanma hakkında ayrıntılı bilgi için [Express Route ve App Service ortamları][NetworkConfigDetailsForExpressRoute]hakkında aşağıdaki makaleye bakın.
 
 [!INCLUDE [app-service-web-try-app-service](../../../includes/app-service-web-try-app-service.md)]
 

@@ -1,9 +1,9 @@
 ---
-title: Yapılandırma ve Visual Studio ile depolama öykünücüsü kullanma | Microsoft Docs
-description: Yapılandırma ve Visual Studio ile depolama öykünücüsü kullanma
+title: Visual Studio ile depolama öykünücüsünü yapılandırma ve kullanma | Microsoft Docs
+description: Yerel geliştirme makinenizde Azure 'da bulunan BLOB, kuyruk ve tablo depolama hizmetlerini taklit eden bir yardımcı program olan depolama öykünücüsünü yapılandırma ve kullanma.
 services: visual-studio-online
 author: ghogen
-manager: douge
+manager: jillfra
 assetId: c8e7996f-6027-4762-806e-614b93131867
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
@@ -12,46 +12,46 @@ ms.workload: azure-vs
 ms.topic: conceptual
 ms.date: 8/17/2017
 ms.author: ghogen
-ms.openlocfilehash: 39e2071a62d6a1f6ee050f862856815048e50430
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: aca4bf5017a4ee23d69016b937673443c1a0e200
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62128305"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73935843"
 ---
-# <a name="configuring-and-using-the-storage-emulator-with-visual-studio"></a>Yapılandırma ve Visual Studio ile depolama öykünücüsü kullanma
+# <a name="configuring-and-using-the-storage-emulator-with-visual-studio"></a>Visual Studio ile depolama öykünücüsünü yapılandırma ve kullanma
 [!INCLUDE [storage-try-azure-tools](../includes/storage-try-azure-tools.md)]
 
 ## <a name="overview"></a>Genel Bakış
-Depolama öykünücüsü, yerel geliştirme makinenizde Azure'da kullanıma sunulan Blob, kuyruk ve tablo depolama hizmetleri taklit eden bir yardımcı Azure SDK'sı geliştirme ortamını içerir. Azure depolama hizmetleri kullanan bir bulut hizmeti oluşturma ve depolama hizmetleri çağıran herhangi bir dış uygulama yazma, kodunuzu yerel olarak depolama öykünücüsü test edebilirsiniz. Microsoft Visual Studio için Azure Araçları, Visual Studio'ya depolama öykünücüsünün yönetimini tümleştirin. Azure Araçları ilk kez kullanıldığında depolama öykünücüsü veritabanı başlatın, çalıştırdığınızda veya kodunuzu Visual Studio'dan hata ayıklama depolama öykünücüsü hizmeti başlatır ve aracılığıyla Azure Depolama Gezgini'ni depolama öykünücüsü veri salt okunur erişim sağlar.
+Azure SDK geliştirme ortamı, yerel geliştirme makinenizde Azure 'da bulunan BLOB, kuyruk ve tablo depolama hizmetlerini taklit eden bir yardımcı program olan depolama öykünücüsünü içerir. Azure depolama hizmetlerini kullanan bir bulut hizmeti oluşturuyorsanız veya depolama hizmetlerini çağıran herhangi bir dış uygulama yazıyorsanız, kodunuzu depolama öykünücüsünde yerel olarak test edebilirsiniz. Microsoft Visual Studio için Azure Araçları, depolama öykünücüsünün yönetimini Visual Studio 'ya tümleştirmelidir. Azure araçları ilk kullanımda depolama öykünücü veritabanını başlatır, Visual Studio 'da kodunuzu çalıştırdığınızda veya hata ayıkladığınızda depolama öykünücü hizmetini başlatır ve Azure Depolama Gezgini aracılığıyla depolama öykünücü verilerine salt okuma erişimi sağlar.
 
-Depolama öykünücüsü sistem gereksinimleri ve özel yapılandırma yönergeleri de dahil olmak üzere hakkında ayrıntılı bilgi için bkz. [geliştirme ve sınama için Azure depolama öykünücüsü kullanma](storage/common/storage-use-emulator.md).
-
-> [!NOTE]
-> Depolama öykünücüsü benzetim ve Azure depolama hizmetleri arasında işlev bazı farklar vardır. Bkz: [farklar arasında depolama öykünücüsü ve Azure depolama hizmetleri](storage/common/storage-use-emulator.md) belirli farklar hakkında bilgi için Azure SDK belgelerinde.
-> 
-> 
-
-## <a name="configuring-a-connection-string-for-the-storage-emulator"></a>Depolama öykünücüsü için bağlantı dizesini yapılandırma
-Depolama öykünücüsü rol içinde kod erişmek için bir Azure depolama hesabına işaret edecek şekilde daha sonra değiştirilebilir ve depolama öykünücüsü için işaret eden bir bağlantı dizesini yapılandırmak isteyeceksiniz. Bir depolama hesabına bağlanmak için çalışma zamanında rolünüz okuyabilen bir yapılandırma ayarı bir bağlantı dizesidir. Bağlantı dizeleri oluşturma hakkında daha fazla bilgi için bkz. [yapılandırma Azure Storage bağlantı dizelerini](/azure/storage/common/storage-configure-connection-string).
+Depolama öykünücüsü hakkında sistem gereksinimleri ve özel yapılandırma yönergeleri dahil ayrıntılı bilgiler için bkz. [geliştirme ve test Için Azure depolama öykünücüsünü kullanma](storage/common/storage-use-emulator.md).
 
 > [!NOTE]
-> Depolama öykünücüsü hesaba bir başvuru kodunuzdan kullanarak döndürebilir **DevelopmentStorageAccount** özelliği. Depolama öykünücüsü kodunuzdan erişmek istediğiniz, ancak uygulamanızı azure'a yayımlamayı düşünüyorsanız, Azure depolama hesabınıza erişmek ve bu bağlantıyı kullanmak için kodunuzu değiştirmek için bir bağlantı dizesi oluşturmanız gerekir, bu yaklaşım düzgün şekilde çalışır yayımlamadan önce dize. Bir bağlantı dizesi, depolama öykünücüsü hesabı ve Azure depolama hesabı arasında sıklıkla geçiş yapıyorsanız, bu işlemi basitleştirir.
+> Depolama öykünücüsü simülasyonu ve Azure depolama hizmetleri arasındaki işlevlerde bazı farklılıklar vardır. Belirli farklılıklar hakkında bilgi için Azure SDK belgelerindeki [depolama öykünücüsü Ile Azure depolama hizmetleri arasındaki farklara](storage/common/storage-use-emulator.md) bakın.
 > 
 > 
 
-## <a name="initializing-and-running-the-storage-emulator"></a>Depolama öykünücüsü'nü çalıştıran ve başlatma
-Çalıştırın veya hizmetinizi Visual Studio'da hata ayıklama, Visual Studio otomatik olarak depolama öykünücüsü başlatır belirtebilirsiniz. Çözüm Gezgini içinde kısayol menüsünü açın, **Azure** projesini ve ardından **özellikleri**. Üzerinde **geliştirme** sekmesinde **Azure depolama öykünücüsü'nü başlatmak** listesinde **True** (Bunu zaten bu değeri ayarlanmadıysa).
-
-İlk kez çalıştırdığınızda veya hizmetinizi Visual Studio'dan hata ayıklama depolama öykünücüsü başlatma işlemini başlatır. Bu işlem ve depolama öykünücüsü için yerel bağlantı noktaları ayırır ve depolama öykünücüsü veritabanı oluşturur. Bu işlem tamamlandıktan sonra depolama öykünücüsü veritabanı silinmedikçe yeniden çalıştırmanız gerekmez.
+## <a name="configuring-a-connection-string-for-the-storage-emulator"></a>Depolama öykünücüsü için bağlantı dizesi yapılandırma
+Bir rol içindeki koddan depolama öykünücüye erişmek için, depolama öykünücüsüne işaret eden ve daha sonra bir Azure depolama hesabına işaret edecek şekilde değiştirilebilen bir bağlantı dizesi yapılandırmak isteyeceksiniz. Bağlantı dizesi, rolünüzün bir depolama hesabına bağlanmak için çalışma zamanında okuyamayacağı bir yapılandırma ayarıdır. Bağlantı dizeleri oluşturma hakkında daha fazla bilgi için bkz. [Azure Storage bağlantı dizelerini yapılandırma](/azure/storage/common/storage-configure-connection-string).
 
 > [!NOTE]
-> Azure Araçları Haziran 2012 sürümünden itibaren depolama öykünücüsü, varsayılan olarak, SQL Express LocalDB içinde çalışır. Azure Araçları daha önceki sürümlerde, SQL Express 2005 veya 2008 ' in varsayılan örneğine karşı depolama öykünücüsü çalıştıran önce yüklemeniz gereken Azure SDK'sını yükleyebilirsiniz. Storage öykünücüsüne karşı bir SQL Express veya adlandırılmış bir'ın adlandırılmış örneği veya Microsoft SQL Server varsayılan örneğini de çalıştırabilirsiniz. Depolama öykünücüsü ve varsayılan örnekten başka bir örneğine karşı çalıştırmak için bkz'nı yapılandırmanız gerekiyorsa [geliştirme ve sınama için Azure depolama öykünücüsü kullanma](storage/common/storage-use-emulator.md).
+> **Developmentstorageaccount** özelliğini kullanarak, kodunuzda depolama öykünücü hesabına bir başvuru döndürebilirsiniz. Bu yaklaşım, kodunuzun depolama öykünücüsüyle erişmek istiyorsanız doğru çalışır, ancak uygulamanızı Azure 'da yayımlamayı planlıyorsanız, Azure depolama hesabınıza erişmek için bir bağlantı dizesi oluşturmanız ve kodunuzu bu bağlantıyı kullanacak şekilde değiştirmeniz gerekir yayımlamadan önce dize. Depolama öykünücü hesabı ve bir Azure depolama hesabı arasında sık sık geçiş yapıyorsanız, bir bağlantı dizesi bu işlemi basitleştirir.
 > 
 > 
 
-Depolama öykünücüsü yerel depolama hizmetlerinin durumunu görüntülemek ve başlatmak için durdurun ve bunları sıfırlamak için bir kullanıcı arabirimi sağlar. Depolama öykünücüsü hizmeti başlatıldıktan sonra kullanıcı arabirimi görüntüler veya başlatabilir veya Microsoft Azure öykünücüsü Windows görev çubuğunda bildirim alanı simgesini sağ tıklayarak hizmetini durdurun.
+## <a name="initializing-and-running-the-storage-emulator"></a>Depolama öykünücüsünü başlatma ve çalıştırma
+Visual Studio 'da hizmetinizi çalıştırdığınız veya hata ayıkladığınızda, Visual Studio 'Nun depolama öykünücüsünü otomatik olarak başlattığında emin olabilirsiniz. Çözüm Gezgini ' de, **Azure** projeniz için kısayol menüsünü açın ve **Özellikler**' i seçin. **Geliştirme** sekmesinde, **Azure depolama öykünücüsü** ' nü Başlat listesinde, **doğru** (zaten bu değere ayarlanmamışsa) seçeneğini belirleyin.
 
-## <a name="viewing-storage-emulator-data-in-server-explorer"></a>Sunucu Gezgini'nde depolama öykünücüsü verileri görüntüleme
-Sunucu Gezgininde Azure depolama, verileri görüntüleyebilir ve ayarlarını depolama öykünücüsü dahil olmak üzere, depolama hesapları, blob ve tablo verileri değiştirmek sağlar. Bkz: [yönetme Azure Blob depolama kaynaklarını depolama Gezgini'yle](https://docs.microsoft.com/azure/vs-azure-tools-storage-explorer-blobs) daha fazla bilgi için.
+Visual Studio 'da hizmetinize ilk kez çalıştırdığınızda veya hata ayıkladığınızda, depolama öykünücüsü bir başlatma işlemi başlatır. Bu işlem, depolama öykünücüsü için yerel bağlantı noktalarını ayırır ve depolama öykünücü veritabanını oluşturur. İşlem tamamlandıktan sonra, depolama öykünücü veritabanı silinmediği sürece bu işlemin yeniden çalıştırılması gerekmez.
+
+> [!NOTE]
+> Azure araçlarının Haziran 2012 sürümü ile başlayarak, depolama öykünücü, varsayılan olarak SQL Express LocalDB 'de çalışır. Azure araçlarının önceki sürümlerinde, depolama öykünücü, Azure SDK 'yı yükleyebilmeniz için önce yüklenmesi gereken varsayılan bir SQL Express 2005 veya 2008 örneğine göre çalışır. Depolama öykünücüsünü SQL Express 'in adlandırılmış bir örneğine veya Microsoft SQL Server adlandırılmış ya da varsayılan örneğine karşı çalıştırabilirsiniz. Depolama öykünücüsünü varsayılan örnek dışında bir örneğe karşı çalışacak şekilde yapılandırmanız gerekiyorsa bkz. [geliştirme ve test Için Azure depolama öykünücüsünü kullanma](storage/common/storage-use-emulator.md).
+> 
+> 
+
+Depolama öykünücüsü, yerel depolama hizmetlerinin durumunu görüntülemek ve bunları başlatmak, durdurmak ve sıfırlamak için bir kullanıcı arabirimi sağlar. Depolama öykünücüsü hizmeti başlatıldıktan sonra, Windows görev çubuğundaki Microsoft Azure Öykünücüsü bildirim alanı simgesine sağ tıklayarak Kullanıcı arabirimini görüntüleyebilir veya hizmeti başlatabilir veya durdurabilirsiniz.
+
+## <a name="viewing-storage-emulator-data-in-server-explorer"></a>Sunucu Gezgini 'de depolama öykünücü verilerini görüntüleme
+Sunucu Gezgini ' deki Azure depolama düğümü, depolama Emulator da dahil olmak üzere depolama hesaplarınızdaki blob ve tablo verileri için verileri görüntülemenize ve ayarları değiştirmenize olanak sağlar. Daha fazla bilgi için bkz. [Depolama Gezgini Ile Azure Blob depolama kaynaklarını yönetme](https://docs.microsoft.com/azure/vs-azure-tools-storage-explorer-blobs) .
 

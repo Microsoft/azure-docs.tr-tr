@@ -1,68 +1,91 @@
 ---
-title: IOT önkoşulları Önizleme için Azure Güvenlik Merkezi | Microsoft Docs
-description: Azure Güvenlik Merkezi ile IOT hizmet önkoşulları kullanmaya başlamak için gereken her şeyi ayrıntıları.
+title: IoT önkoşulları için Azure Güvenlik Merkezi | Microsoft Docs
+description: IoT hizmeti önkoşulları için Azure Güvenlik Merkezi 'ni kullanmaya başlamak için gereken her şeyin ayrıntıları.
 services: asc-for-iot
-ms.service: ascforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: 790cbcb7-1340-4cc1-9509-7b262e7c3181
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/26/2019
+ms.date: 09/25/2019
 ms.author: mlottner
-ms.openlocfilehash: 973b0044844fbdf38eefde2072631586a8ace593
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4440fec98d1f561da6375bcaadba4282076cc53b
+ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65192604"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71299474"
 ---
-# <a name="azure-security-center-for-iot-prerequisites"></a>Azure Güvenlik Merkezi IOT önkoşulları
+# <a name="azure-security-center-for-iot-prerequisites"></a>IoT önkoşulları için Azure Güvenlik Merkezi
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Bu makalede IoT hizmeti için Azure Güvenlik Merkezi 'nin farklı derleme blokları, başlamak için gerekenler ve hizmeti anlamanıza yardımcı olacak temel kavramlar açıklanmaktadır. 
 
-Bu makalede, farklı yapı taşları, Azure Güvenlik Merkezi (hizmet anlamanıza yardımcı olması için ASC) IOT hizmeti, başlamak için ihtiyacınız olanlar ve temel kavramlar için bir açıklama sağlar. 
+## <a name="minimum-requirements"></a>Minimum gereksinimler
 
-## <a name="minimum-requirements"></a>En düşük gereksinimleri
-
-- IOT hub'ı standart katman
-    - RBAC rolü **sahibi** düzeyi ayrıcalıklar 
+- Standart katman IoT Hub
+    - RBAC rol **sahibi** düzeyi ayrıcalıkları 
 - [Log Analytics çalışma alanı](https://docs.microsoft.com/azure/azure-monitor/learn/quick-create-workspace) 
 - Azure Güvenlik Merkezi (önerilir)
-    - Azure Güvenlik Merkezi kullanımı yalnızca bir öneri ve bu olmadan, bir gereksinim değil olsa diğer Azure kaynaklarınızı IOT hub'ının içinden görüntülemeniz mümkün olmayacaktır. 
+    - Azure Güvenlik Merkezi 'nin kullanımı, gereksinim değil, öneridir. Azure Güvenlik Merkezi olmadan, diğer Azure kaynaklarınızı IoT Hub içinde görüntüleyemedik. 
  
-## <a name="working-with-asc-for-iot-service"></a>IOT hizmeti için ASC ile çalışma
+## <a name="working-with-azure-security-center-for-iot-service"></a>IoT hizmeti için Azure Güvenlik Merkezi ile çalışma
 
-ASC IOT öngörüleri ve raporlama için Azure IOT Hub ve Azure Güvenlik Merkezi kullanılarak kullanılabilir. ASC bir hesapla Azure IOT Hub, IOT için etkinleştirmek için **sahibi** düzeyinde ayrıcalıkları gereklidir. IOT hub'ınızdaki IOT için ASC etkinleştirdikten sonra IOT öngörüleri için ASC olarak görüntülenir **güvenlik** özellik olarak ve Azure IOT hub'ında **IOT** Azure Güvenlik Merkezi'nde. 
+IoT öngörüleri ve raporlama için Azure Güvenlik Merkezi, Azure IoT Hub ve Azure Güvenlik Merkezi kullanılarak kullanılabilir. Azure IoT Hub IoT için Azure Güvenlik Merkezi 'ni etkinleştirmek üzere, **sahip** düzeyi ayrıcalıklarına sahip bir hesap gereklidir. IoT Hub IoT için ASC 'yi etkinleştirdikten sonra IoT öngörüleri için Azure Güvenlik Merkezi, Azure Güvenlik Merkezi 'nde Azure IoT Hub **güvenlik** özelliği olarak ve **IoT** olarak görüntülenir. 
 
 ## <a name="supported-service-regions"></a>Desteklenen hizmet bölgeleri 
 
-ASC IOT için şu anda aşağıdaki bölgelerde Azure IOT hub'ları için desteklenir:
-  - Orta ABD
-  - Kuzey Avrupa
+IoT için Azure Güvenlik Merkezi şu anda aşağıdaki Azure bölgelerindeki IoT Hub 'Ları için desteklenmektedir:
+  - Orta ABD  
+  - East US 
+  - Doğu ABD 2
+  - Batı Orta ABD
+  - Batı ABD
+  - Batı ABD 2
+  - Güney Orta ABD
+  - Orta Kuzey ABD
+  - Orta Kanada
+  - Doğu Kanada 
+  - Kuzey Avrupa    
+  - Güney Brezilya
+  - Fransa Orta  
+  - Birleşik Krallık Batı 
+  - Birleşik Krallık Güney
+  - Batı Avrupa 
+  - Kuzey Avrupa 
+  - Japonya Batı  
+  - Japonya Doğu  
+  - Avustralya Güneydoğu
+  - Avustralya Doğu
+  - Doğu Asya   
   - Güneydoğu Asya
+  - Kore Orta
+  - Kore Güney 
+  - Orta Hindistan
+  - Güney Hindistan
 
-## <a name="wheres-my-iot-hub"></a>IOT hub'ı nerede?
+IoT için Azure Güvenlik Merkezi, tüm Avrupa bölgelerinden gelen tüm trafiği Batı Avrupa bölgesel veri merkezine ve kalan tüm bölgeleri Orta ABD bölgesel veri merkezine yönlendirir.  
+  
+## <a name="wheres-my-iot-hub"></a>IoT Hub nerede?
 
-Başlamadan önce hizmet kullanılabilirliğini doğrulamak için IOT hub'ı konumu kontrol edin. 
+Başlamadan önce hizmet kullanılabilirliğini doğrulamak için IoT Hub konumunuzu denetleyin. 
 
-1. IOT Hub'ınızı açın. 
+1. IoT Hub açın. 
 2. **Genel Bakış**'a tıklayın. 
-3. Listelenen konumuyla eşleşen birini doğrulayın [hizmet bölgeleri desteklenen](#supported-service-regions). 
+3. Listelenen konumun [desteklenen hizmet bölgelerinden](#supported-service-regions)biriyle eşleştiğini doğrulayın. 
 
 
 ## <a name="supported-platforms-for-agents"></a>Aracılar için desteklenen platformlar 
 
-ASC IOT aracılar için artan cihaz ve platformları destekler. Bkz: [platform listesine desteklediği](how-to-deploy-agent.md) mevcut veya planlanan cihaz kitaplığınızı denetlemek için.  
+IoT aracıları için Azure Güvenlik Merkezi, büyüyen bir cihaz ve platform listesini destekler. Mevcut veya planlı cihaz kitaplığınızı denetlemek için [desteklenen platform listesine](how-to-deploy-agent.md) bakın.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Genel bakış](overview.md)
-- [Hizmeti etkinleştirme](quickstart-onboard-iot-hub.md)
-- [ASC için IOT hakkında SSS](resources-frequently-asked-questions.md)
-- [ASC IOT uyarılarını anlama](concept-security-alerts.md)
+- Azure IoT güvenliğine [genel bakış](overview.md) konusunu okuyun
+- [Hizmeti etkinleştirmeyi](quickstart-onboard-iot-hub.md) öğrenin
+- [IoT Için Azure Güvenlik MERKEZI SSS](resources-frequently-asked-questions.md) makalesini okuyun
+- [IoT uyarıları Için Azure Güvenlik Merkezi 'ni nasıl anlayacağınızı](concept-security-alerts.md) öğrenin

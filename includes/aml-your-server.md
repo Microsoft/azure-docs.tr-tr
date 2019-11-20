@@ -8,19 +8,19 @@ ms.author: sgilley
 manager: cgronlund
 ms.custom: include file
 ms.topic: include
-ms.date: 01/25/2019
-ms.openlocfilehash: ce8b117a3cbe0e3a5c4265729ccf5c0264241013
-ms.sourcegitcommit: 51a7669c2d12609f54509dbd78a30eeb852009ae
+ms.date: 09/26/2019
+ms.openlocfilehash: e11b1c8c19db73ace069d4bfda3516cdbbceaa02
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66391771"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73476110"
 ---
-1. Bölümündeki yönergeleri kullanın [bir Azure Machine Learning hizmeti çalışma alanı oluşturma](../articles/machine-learning/service/setup-create-workspace.md#portal) aşağıdakileri yapmak için:
-    * Miniconda ortamı oluşturma
-    * Azure Machine için Python SDK'sı Learning yükleme
-    * Çalışma alanı oluşturma
-    * Bir çalışma alanı yapılandırma dosyasını yazma (**aml_config/config.json**).
+1. Python için Azure Machine Learning SDK 'sını yüklemek için [Azure MACHINE LEARNING SDK](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py) 'daki yönergeleri kullanın
+
+1. [Azure Machine Learning çalışma alanı](../articles/machine-learning/service/how-to-manage-workspace.md)oluşturun.
+
+1. Bir [yapılandırma dosyası](../articles/machine-learning/service/how-to-configure-environment.md#workspace) dosyası (**aml_config/config. JSON**) yazın.
 
 1. [GitHub deposunu](https://aka.ms/aml-notebooks) kopyalayın.
 

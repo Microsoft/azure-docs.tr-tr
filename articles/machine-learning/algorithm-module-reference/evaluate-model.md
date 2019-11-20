@@ -1,7 +1,7 @@
 ---
-title: 'Modeli değerlendirme: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Eğitilen bir modelin doğruluğunu ölçmek için Azure Machine Learning hizmetinde Evaluate Model modülü kullanmayı öğrenin.
+title: 'Modeli değerlendir: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Eğitilen bir modelin doğruluğunu ölçmek için Azure Machine Learning modeli değerlendir modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,21 +9,20 @@ ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
 ms.date: 05/06/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: 40a8247c22da1f7a057e222565ffb2ec4c6b7fb3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ddc6a35d5959a2d1f85c151a6f229223db9ba566
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65028748"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73497917"
 ---
-# <a name="evaluate-model-module"></a>Model modülü değerlendir
+# <a name="evaluate-model-module"></a>Model modülünü değerlendir
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Eğitilen bir modelin doğruluğunu ölçmek için bu modülü kullanın. Oluşturulan bir modelden puan içeren bir veri kümesi sağlayın ve **Evaluate Model** modülü bir dizi endüstri standardı değerlendirme ölçümleri hesaplar.
+Eğitilen bir modelin doğruluğunu ölçmek için bu modülü kullanın. Bir modelden oluşturulan puanları içeren bir veri kümesi sağlarsınız ve **modeli değerlendir** modülü bir sektör standardı değerlendirme ölçümleri kümesini hesaplar.
   
- Tarafından döndürülen ölçümler **Evaluate Model** değerlendirmesini modelinin türüne bağlıdır:  
+ **Değerlendirme modeli** tarafından döndürülen ölçümler, değerlendirdiğiniz modelin türüne bağlıdır:  
   
 -   **Sınıflandırma modelleri**    
 -   **Regresyon modelleri**    
@@ -31,100 +30,100 @@ Eğitilen bir modelin doğruluğunu ölçmek için bu modülü kullanın. Oluşt
 
 
 > [!TIP]
-> Modeli değerlendirme için yeni başladıysanız, Dr ile video serisi öneririz. Bir parçası olarak Stephen Elston [makine öğrenme kursunun](https://blogs.technet.microsoft.com/machinelearning/2015/09/08/new-edx-course-data-science-machine-learning-essentials/) EdX öğesinden. 
+> Model değerlendirmesine yeni çalışıyorsanız, EdX 'in [makine öğrenimi kursu](https://blogs.technet.microsoft.com/machinelearning/2015/09/08/new-edx-course-data-science-machine-learning-essentials/) kapsamında Dr. Stephen Elston tarafından video serisini öneririz. 
 
 
-Kullanmak için üç yol vardır **Evaluate Model** Modülü:
+**Modeli değerlendir** modülünü kullanmanın üç yolu vardır:
 
-+ Puanları eğitim verileriniz üzerinde oluşturun ve bu puanları temel alarak modeli değerlendirme
-+ Puanları modeli oluşturur, ancak bu puanları temel ayrılmış bir sınama kümesi puanlar karşılaştırın
-+ Puanları, iki farklı ancak ilişkili model, aynı veri kümesini kullanarak karşılaştırın
++ Eğitim verileriniz üzerinde puanlar oluşturun ve bu puanları temel alarak modeli değerlendirin
++ Modelde puanlar oluşturun, ancak bu puanları ayrılmış bir test kümesinde puanlar ile karşılaştırın
++ Aynı veri kümesini kullanarak iki farklı ancak ilgili modellerin puanlarını karşılaştırın
 
-## <a name="use-the-training-data"></a>Eğitim verileri kullanma
+## <a name="use-the-training-data"></a>Eğitim verilerini kullanma
 
-Bir model değerlendirmek için bir dizi girdi sütunlarını ve puanlarını içeren bir veri kümesi bağlanmanız gerekir.  Başka bir veri varsa, özgün kümenizi kullanabilirsiniz.
+Bir modeli değerlendirmek için bir giriş sütunları ve puanları kümesi içeren bir veri kümesini bağlamanız gerekir.  Başka veri yoksa, özgün veri kümenizi kullanabilirsiniz.
 
-1. Connect **veri kümesi Puanlanmış** , çıktı [Score Model](./score-model.md) giriş **Evaluate Model**. 
-2. Tıklayın **Evaluate Model** modülü ve değerlendirme puanları oluşturmak için denemeyi çalıştırın.
+1. [Puan modelinin puın](./score-model.md) **veri kümesi** çıkışını, **değerlendirme modeli**girişine bağlayın. 
+2. **Modelleme modülünü değerlendir** ' e tıklayın ve değerlendirme puanlarını oluşturmak için işlem hattını çalıştırın.
 
-## <a name="use-testing-data"></a>Test verilerini kullanma
+## <a name="use-testing-data"></a>Test verilerini kullan
 
-Özgün veri kümeniz, eğitim ve veri kümelerini kullanarak, test içinde ayırmak için machine learning'de yaygın bir senaryo olduğundan [bölünmüş](./split-data.md) modül veya [bölüm ve örnek](./partition-and-sample.md) modülü. 
+Machine Learning 'deki yaygın bir senaryo, özgün veri kümelerinizi eğitim ve test veri kümelerini, [bölünmüş](./split-data.md) modül veya [bölüm ve örnek](./partition-and-sample.md) modülünü kullanarak ayıramaktır. 
 
-1. Connect **veri kümesi Puanlanmış** , çıktı [Score Model](score-model.md) giriş **Evaluate Model**. 
-2. Sağ giriş sınama verileri içeren verileri bölme modülünün çıkışına bağlayın **Evaluate Model**.
-2. Tıklayın **Evaluate Model** modülü ve select **Seçileni Çalıştır** değerlendirme puanları oluşturulacak.
+1. [Puan modelinin puın](score-model.md) **veri kümesi** çıkışını, **değerlendirme modeli**girişine bağlayın. 
+2. Test verilerini içeren bölünmüş veri modülünün çıkışını, **modeli değerlendir**'in sağ girişine bağlayın.
+2. **Modelleme modülünü değerlendir** ' e tıklayın ve değerlendirme puanlarını oluşturmak Için **Seçileni Çalıştır** ' ı seçin.
 
-## <a name="compare-scores-from-two-models"></a>İki modellerinden puanları karşılaştırın
+## <a name="compare-scores-from-two-models"></a>İki modelden puanları karşılaştırın
 
-Puanları için ikinci bir set de bağlanabilirsiniz **Evaluate Model**.  Puanları, sonuçları bilinen bir paylaşılan değerlendirme kümesi veya bir dizi farklı bir model aynı verilere yönelik sonuçları olabilir.
+Ayrıca, **modeli değerlendirmek**için ikinci bir puan kümesini bağlayabilirsiniz.  Puanlar, bilinen sonuçlara sahip bir paylaşılan değerlendirme kümesi veya aynı veriler için farklı bir modelden bir sonuç kümesi olabilir.
 
-Sonuçları aynı verileri iki farklı modellerdeki kolayca karşılaştırabilirsiniz çünkü bu yararlı bir özelliktir. Ya da farklı parametrelerle aynı veriler üzerinde iki farklı çalışmalardan puanları karşılaştırma.
+Aynı verilerdeki iki farklı modelden sonuçları kolayca karşılaştırabilmeniz için bu özellik yararlıdır. Ya da, farklı parametrelerle aynı veriler üzerinde bulunan iki farklı çalıştırmaların puanlarını karşılaştırabilirsiniz.
 
-1. Connect **veri kümesi Puanlanmış** , çıktı [Score Model](score-model.md) giriş **Evaluate Model**. 
-2. İkinci model için Model Puanlama modülü çıkışı için sağ girişine bağlayın **Evaluate Model**.
-3. Sağ **Evaluate Model**seçip **Seçileni Çalıştır** değerlendirme puanları oluşturulacak.
+1. [Puan modelinin puın](score-model.md) **veri kümesi** çıkışını, **değerlendirme modeli**girişine bağlayın. 
+2. İkinci modelin puan modeli modülünün çıkışını, **modeli değerlendir**' in sağ girişine bağlayın.
+3. **Modeli değerlendir**' e sağ tıklayın ve değerlendirme puanlarını oluşturmak Için **Seçileni Çalıştır** ' ı seçin.
 
 ## <a name="results"></a>Sonuçlar
 
-Çalıştırdıktan sonra **Evaluate Model**modülü sağ tıklatın ve seçin **değerlendirme sonuçlarını** sonuçları görmek için. Şunları yapabilirsiniz:
+**Modeli değerlendir**' i çalıştırdıktan sonra, modüle sağ tıklayın ve sonuçları görmek için **değerlendirme sonuçları** ' nı seçin. Şunları yapabilirsiniz:
 
-+ Diğer araçlarla daha kolay analiz için veri kümesi, sonuçları Kaydet
-+ Arabiriminde bir görselleştirme oluşturma
++ Diğer araçlarla daha kolay analize yönelik olarak sonuçları bir veri kümesi olarak kaydedin
++ Tasarımcıda görselleştirme oluşturma
 
-Veri kümeleri için her iki girişleri bağlanırsanız **Evaluate Model**, her iki veri kümesini veya her iki modelleri için ölçümleri sonuçları içerir.
-Model veya sol bağlantı noktasına bağlı veri ölçümleri için veri kümesi, ardından, rapor veya doğru bağlantı noktasına bağlı model ilk sunulur.  
+Veri kümelerini her iki **değerlendirme modeli**girişi için bağladığınızda, sonuçlar hem veri kümesinin hem de her iki modelin ölçümlerini içerir.
+Sol bağlantı noktasına eklenen model veya veriler, önce raporda, ardından veri kümesi için ölçümler veya sağ bağlantı noktasında eklenmiş model tarafından sunulur.  
 
-Örneğin, aşağıdaki resimde bir karşılaştırma sonuçları arasında aynı verileri, ancak farklı parametrelerle oluşturulmuş iki kümeleme modeli temsil eder.  
+Örneğin, aşağıdaki görüntü, aynı veriler üzerinde oluşturulmuş, ancak farklı parametrelerle oluşturulan iki kümeleme modelinden sonuçların karşılaştırmasını temsil eder.  
 
 ![AML&#95;Comparing2Models](media/module/aml-comparing2models.png "AML_Comparing2Models")  
 
-Bu kümeleme modeli olduğundan, değerlendirme sonuçlarını, iki regresyon modelinden puanları karşılaştırıldığında veya iki sınıflandırma modellerini kıyasla daha farklıdır. Ancak, genel sunu aynıdır. 
+Bu bir kümeleme modeli olduğundan, değerlendirme sonuçları, puanları iki gerileme modelinden karşılaştırmakla veya iki sınıflandırma modelinin karşılaştırılmasından farklı olur. Ancak, genel sunum aynıdır. 
 
 ## <a name="metrics"></a>Ölçümler
 
-Bu bölümde açıklanmaktadır modelleri ile kullanmak için desteklenen belirli türde döndürülen ölçümler **Evaluate Model**:
+Bu bölümde, **modeli değerlendir**ile kullanılmak üzere desteklenen belirli model türleri için döndürülen ölçümler açıklanmaktadır:
 
-+ [Sınıflandırma modelleri](#bkmk_classification)
++ [sınıflandırma modelleri](#bkmk_classification)
 + [regresyon modelleri](#bkmk_regression)
 
-###  <a name="bkmk_classification"></a> Sınıflandırma modelleri için ölçümleri
+###  <a name="bkmk_classification"></a>Sınıflandırma modelleriyle ilgili ölçümler
 
-Aşağıdaki ölçümler, sınıflandırma modellerini değerlendirirken raporlanır. Modeli karşılaştırmak, değerlendirme için seçtiğiniz ölçüm göre sıralanır.  
+Sınıflandırma modelleri değerlendirilirken aşağıdaki ölçümler raporlanır. Modelleri karşılaştırırsanız, bunlar değerlendirme için seçtiğiniz ölçüm tarafından derecelendirilir.  
   
--   **Doğruluk** sınıflandırma modeli özelliği toplam çalışmaları için doğru sonuçlar oranı olarak ölçer.  
+-   **Doğruluk** , toplam durum sonuçlarının gerçek sonuçlarının oranı olarak bir sınıflandırma modelinin iyiyliğini ölçer.  
   
--   **Duyarlık** doğru sonuçlar oranı tüm pozitif sonuç olduğunu.  
+-   **Duyarlık** , tüm pozitif sonuçlar üzerinde doğru sonuçların oranındaki orandır.  
   
--   **Geri çağırma** modeli tarafından döndürülen tüm doğru sonuçlar bölümüdür.  
+-   **Geri çağırma** , modelin döndürdüğü tüm doğru sonuçların kesiri.  
   
--   **F-puanı** kesinlik ve geri çağırma 0 ve 1, 1 olduğu ideal F puanı değeri arasında ağırlıklı ortalaması hesaplanır.  
+-   **F puanı** ağırlıklı duyarlık ortalaması olarak hesaplanır ve ideal F puanı değerinin 1 olduğu 0 ile 1 arasında geri çağırır.  
   
--   **AUC** çizilen eğri alanında ile ölçüler pozitif y ekseni ve yanlış pozitif x ekseninde üzerinde true. Bu ölçüm, farklı türlerde modeli sayesinde tek bir sayı sağladığı için kullanışlıdır.  
+-   **AUC** , y ekseninde gerçek pozitifler ve x ekseninde hatalı pozitif sonuçlar ile çizilen eğrinin altındaki alanı ölçer. Bu ölçüm, farklı türlerin modellerini karşılaştırmanızı sağlayan tek bir sayı sağladığından yararlıdır.  
   
-- **Ortalama Günlük kaybı** cezası yanlış sonuçlar için ifade etmek için kullanılan tek bir puan olduğu. İki olasılık dağıtımları – true ve bir modeli arasındaki fark olarak hesaplanır.  
+- **Ortalama günlük kaybı** , yanlış sonuçlar için ceza Puanını ifade etmek için kullanılan tek bir puandır. Bu, iki olasılık dağıtımı arasındaki fark olarak hesaplanır; gerçek bir değer ve modeldeki bir tane.  
   
-- **Günlük kaybı eğitim** rasgele tahmin sınıflandırıcı avantajı temsil eden tek bir puan. Günlük kaybı etiketleri bilinen değerlerle (zemin truth) çıkarır olasılıklar karşılaştırarak modelinizin belirsizlik ölçer. Bir bütün olarak modelin günlük kaybını en aza indirmek istiyorsunuz.
+- **Eğitim günlük kaybı** , sınıflandırıcının rastgele bir tahmine göre faydalanmasını temsil eden tek bir puandır. Günlük kayıp, çıktılarının çıkış yaptığı olasılıkların, etiketlerde bilinen değerler (zemin dışı) ile karşılaştırılmasıyla, modelinizin unkliğini ölçer. Modelin günlük kaybını bir bütün olarak en aza indirmek istiyorsunuz.
 
-##  <a name="bkmk_regression"></a> Regresyon modelleri için ölçümleri
+##  <a name="bkmk_regression"></a>Regresyon modelleriyle ilgili ölçümler
  
-Regresyon modelleri için döndürülen ölçümler genellikle hata miktarı tahmin etmek için tasarlanmıştır.  Model verileri de gözlemlenen ve tahmin edilen değerler arasındaki farkın küçükse uyacak şekilde değerlendirilir. Ancak, Kalanlar desene (herhangi bir tahmin edilen puan ve karşılık gelen gerçek değeri arasındaki farkı), çok olası sapması modelinde hakkında anlayabilirsiniz.  
+Regresyon modelleri için döndürülen ölçümler genellikle hata miktarını tahmin etmek için tasarlanmıştır.  Gözlemlenen ve tahmin edilen değerler arasındaki fark küçük olduğunda, bir model veriye uyacak şekilde değerlendirilir. Ancak, fazlalıklar (tahmin edilen herhangi bir nokta ve ilgili gerçek değer arasındaki fark), modelde potansiyel sapma hakkında çok daha fazla bilgi verebilir.  
   
- Aşağıdaki ölçümler, regresyon modelleri değerlendirmesi için rapor edilir. Modeli karşılaştırmak, değerlendirme için seçtiğiniz ölçüm göre sıralanır.  
+ Gerileme modellerini değerlendirmek için aşağıdaki ölçümler raporlanır. Modelleri karşılaştırdığınızda, değerlendirme için seçtiğiniz ölçüm tarafından derecelendirilir.  
   
-- **Mean Absolute error (MAE)** tahminler elde etmek için gerçek sonuçların ne kadar yakın olan ölçer; bu nedenle, daha düşük bir puan daha iyidir.  
+- **Ortalama mutlak hata (MAE)** , tahminleri gerçek sonuçlar için nasıl kapamaları gerektiğini ölçer; Bu nedenle, daha düşük bir puan daha iyidir.  
   
-- **Kök ortalama karesi alınmış hata (RMSE)** modelinde hata özetleyen tek bir değer oluşturur. Fark karesini tarafından ölçüm fazla öngörü ve eksik tahmin arasındaki farkı yok sayar.  
+- **Kök ortalama kare hatası (rmo)** modeldeki hatayı özetleyen tek bir değer oluşturur. Fark karelerini alıp, ölçüm, daha fazla tahmin ve tahmin düzeyi arasındaki farkı dikkate vermez.  
   
-- **Göreli mutlak hata (RAE)** beklenen ve gerçek değerler; arasındaki göreli mutlak fark göreli olduğundan ortalama farkı aritmetik ortalamasını tarafından ayrılmıştır.  
+- **Göreli mutlak hata (rampası)** , beklenen ve gerçek değerler arasındaki göreli mutlak farktır; göreli olarak, ortalama farkı aritmetik ortalama tarafından bölünür.  
   
-- **Göreli karesi alınmış hata (RSE)** benzer şekilde toplam karesi alınmış hata tahmin edilen değerler tarafından gerçek değerlerin toplam karesi alınmış hata bölerek normalleştirir.  
+- **Göreli kare hatası (RSE)** , gerçek değerlerin toplam kare şeklinde hataya göre öngörülen değerlerin toplam kare halinde hata sayısını normalleştirir.  
   
-- **Sıfır bir hata (MZOE) Anlama** tahmin doğru olup olmadığını gösterir.  Diğer bir deyişle: `ZeroOneLoss(x,y) = 1` olduğunda `x!=y`; Aksi takdirde `0`.
+- **Ortalama sıfır bir hata (MZOE)** , tahmine uygun olup olmadığını gösterir.  Diğer bir deyişle: `x!=y``ZeroOneLoss(x,y) = 1`; Aksi takdirde `0`.
   
-- **Katsayısı**genellikle denilen R<sup>2</sup>, 0 ile 1 arasında bir değer olarak Tahmine dayalı model gücünü temsil eder. Sıfır, model rastgele anlamına gelir (hiçbir şey açıklanmıştır); 1 bir mükemmel anlamına gelir. Ancak, dikkat R yorumlama içinde kullanılması gereken<sup>2</sup> değerleri, düşük değerler tamamen normal olabilir ve yüksek değerler, şüpheli olabilir.
+- Genellikle R<sup>2</sup>olarak anılan **belirleme katsayısı**, modelin tahmine dayalı gücünü 0 ile 1 arasında bir değer olarak temsil eder. Sıfır, modelin rastgele olduğu anlamına gelir (hiçbir şey açıklar); 1, mükemmel bir uyum olduğu anlamına gelir. Ancak, düşük değerler tamamen normal olabilir ve yüksek değerler şüpheli olduğundan, R<sup>2</sup> değerlerini yorumlamak için dikkatli bir değer kullanılmalıdır.
   
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

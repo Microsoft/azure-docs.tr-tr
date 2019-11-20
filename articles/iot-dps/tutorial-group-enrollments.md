@@ -1,23 +1,23 @@
 ---
-title: Java ve kayıt gruplarını kullanarak Azure IoT Hub'a sanal bir X.509 cihazı sağlama | Microsoft Docs
+title: 'Öğretici: Java ve kayıt grupları kullanarak Azure IoT Hub sanal bir X. 509.952 cihazı sağlama'
 description: Azure Öğreticisi - IoT Hub Cihazı Sağlama Hizmeti için Java cihaz ve hizmet SDK’sı ile kayıt grupları kullanarak sanal bir X.509 cihazı oluşturma ve sağlama
 author: wesmc7777
 ms.author: wesmc
-ms.date: 01/04/2018
+ms.date: 11/12/2019
 ms.topic: tutorial
 ms.service: iot-dps
 services: iot-dps
 manager: timlt
 ms.devlang: java
 ms.custom: mvc
-ms.openlocfilehash: 8e926c3ff7c3d7abc9467291e9b1de77781f664e
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: b3cb506b241adab44df490e2fe7f363d35f0f747
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61251165"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74112438"
 ---
-# <a name="create-and-provision-a-simulated-x509-device-using-java-device-and-service-sdk-and-group-enrollments-for-iot-hub-device-provisioning-service"></a>IoT Hub Cihazı Sağlama Hizmeti için Java cihaz ve hizmet SDK’sı ile grup kayıtları kullanarak sanal bir X.509 cihazı oluşturma ve sağlama
+# <a name="tutorial-create-and-provision-a-simulated-x509-device-using-java-device-and-service-sdk-and-group-enrollments-for-iot-hub-device-provisioning-service"></a>Öğretici: IoT Hub cihaz sağlama hizmeti için Java cihaz ve hizmet SDK 'Sı ve grup kayıtlarını kullanarak sanal bir X. 509.952 cihazı oluşturma ve sağlama
 
 Bu adımlar, Windows işletim sistemi çalıştıran geliştirme makinenizde X.509 cihazının simülasyonunu yapmayı ve kayıt gruplarıyla bir kod örneği kullanarak bu sanal cihazı Cihaz Sağlama Hizmeti ve IoT hub’ınızla bağlamayı gösterir. 
 
@@ -30,12 +30,12 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
 
 1. [Maven](https://maven.apache.org/install.html)'ı indirip yükleyin.
 
-1. `git` uygulamasının makinenizde yüklü olduğundan ve komut penceresinden erişilebilir ortam değişkenlerine eklendiğinden emin olun. Yüklenecek `git` araçlarının son sürümleri için [Software Freedom Conservancy’nin Git istemci araçlarına](https://git-scm.com/download/) bakın. Bunlara yerel Git deponuzla etkileşim kurmak için kullanabileceğiniz bir komut satırı uygulaması olan **Git Bash** dahildir. 
+1. `git` uygulamasının makinenizde yüklü olduğundan ve komut penceresinden erişilebilir ortam değişkenlerine eklendiğinden emin olun. Yüklenecek [ araçlarının son sürümleri için ](https://git-scm.com/download/)Software Freedom Conservancy’nin Git istemci araçlarına`git` bakın. Bunlara yerel Git deponuzla etkileşim kurmak için kullanabileceğiniz bir komut satırı uygulaması olan **Git Bash** dahildir. 
 
-1. Aşağıdaki [sertifika genel bakış](https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md) test sertifikalarınızı oluşturmak için.
+1. Test sertifikalarınızı oluşturmak için aşağıdaki [sertifikaya genel bakış ' ı](https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md) kullanın.
 
     > [!NOTE]
-    > Bu adım gerektirir [OpenSSL](https://www.openssl.org/), hangi ya da oluşturulan ve bir kaynaktan yüklendiğini veya indirilebilen ve yüklendiği bir [3. taraf](https://wiki.openssl.org/index.php/Binaries) gibi [bu](https://sourceforge.net/projects/openssl/). _Kök_, _ara_ ve _cihaz_ sertifikalarınızı önceden oluşturduysanız bu adımı atlayabilirsiniz.
+    > Bu adım, kaynaktan oluşturulup yüklenebilecek veya [bunun](https://sourceforge.net/projects/openssl/)gibi bir [üçüncü taraf](https://wiki.openssl.org/index.php/Binaries) tarafından yüklenip yüklenebilecek bir [OpenSSL](https://www.openssl.org/)gerektirir. _Kök_, _ara_ ve _cihaz_ sertifikalarınızı önceden oluşturduysanız bu adımı atlayabilirsiniz.
     >
 
     1. _Kök_ ve _ara_ sertifikalarınızı oluşturmak için ilk iki adımı izleyin.
@@ -46,14 +46,14 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
 
         1. **Sertifika Ekle** bölümüne aşağıdaki bilgileri girin:
             - Benzersiz bir sertifika adı girin.
-            - Seçin **_RootCA.pem_** oluşturduğunuz dosya.
+            - Oluşturduğunuz **_RootCA. ped_** dosyasını seçin.
             - Tamamlandığında **Kaydet** düğmesine tıklayın.
 
            ![Sertifika ekleme](./media/tutorial-group-enrollments/add-certificate.png)
 
         1. Yeni oluşturulan sertifikayı seçin:
             - **Doğrulama Kodu Oluştur**'a tıklayın. Oluşturulan kodu kopyalayın.
-            - Doğrulama adımını çalıştırın. Çalışan PowerShell pencerenize _doğrulama kodunu_ girin veya sağ tıklayarak yapıştırın.  **Enter**'a basın.
+            - Doğrulama adımını çalıştırın. Çalışan PowerShell pencerenize _doğrulama kodunu_ girin veya sağ tıklayarak yapıştırın.  Tuşuna **girin**.
             - Azure portalında yeni oluşturulmuş **_verifyCert4.pem_** dosyasını seçin. **Doğrula**’ya tıklayın.
 
               ![Sertifika doğrulama](./media/tutorial-group-enrollments/validate-certificate.png)
@@ -73,7 +73,7 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
     git clone https://github.com/Azure/azure-iot-sdk-java.git --recursive
     ```
 
-1. İndirilen kaynak kodunda örnek klasörüne gidin: **_azure-iot-sdk-java/provisioning/provisioning-samples/service-enrollment-group-sample_**. **_/src/main/java/samples/com/microsoft/azure/sdk/iot/ServiceEnrollmentGroupSample.java_** adlı dosyayı istediğiniz düzenleyicide açıp aşağıdaki ayrıntıları ekleyin:
+1. İndirilen kaynak kodunda örnek klasörüne gidin: **_azure-iot-sdk-java/provisioning/provisioning-samples/service-enrollment-group-sample_** . **_/src/main/java/samples/com/microsoft/azure/sdk/iot/ServiceEnrollmentGroupSample.java_** adlı dosyayı istediğiniz düzenleyicide açıp aşağıdaki ayrıntıları ekleyin:
 
     1. Portaldan sağlama hizmetinize ait `[Provisioning Connection String]` bilgisini aşağıdaki şekilde ekleyin:
 
@@ -91,9 +91,9 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
             private static final String PROVISIONING_CONNECTION_STRING = "[Provisioning Connection String]";
             ```
 
-    1. Ara, imza sertifikası dosyasının bir metin düzenleyicisinde açın. Güncelleştirme `PUBLIC_KEY_CERTIFICATE_STRING` Ara imzalama sertifikanızı değeri ile değeri.
+    1. Ara imza sertifika dosyanızı bir metin düzenleyicisinde açın. `PUBLIC_KEY_CERTIFICATE_STRING` değerini ara imzalama sertifikanızın değeriyle güncelleştirin.
 
-        Cihaz sertifikalarınızı Bash Kabuk ile oluşturduysanız *./certs/azure-iot-test-only.intermediate.cert.pem* Ara Sertifika anahtarı içerir. PowerShell ile oluşturulan, sertifikaları, *./Intermediate1.pem* ara sertifika dosyanız olur.
+        Cihaz sertifikalarınızı Bash Shell ile oluşturduysanız, *./certs/Azure-iot-test-only.intermediate.cert.pem* ara sertifika anahtarını içerir. Sertifikalarınız PowerShell ile oluşturulduysa, *./Intermediate1.pem* ara sertifika dosyanız olacaktır.
 
         ```java
         private static final String PUBLIC_KEY_CERTIFICATE_STRING =
@@ -160,7 +160,7 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
     cd azure-iot-sdk-java/provisioning/provisioning-samples/provisioning-X509-sample
     ```
 
-1. Düzen `/src/main/java/samples/com/microsoft/azure/sdk/iot/ProvisioningX509Sample.java` içerecek şekilde, _kimlik kapsamı_ ve _sağlama hizmeti genel uç noktası_ daha önce not ettiğiniz.
+1. `/src/main/java/samples/com/microsoft/azure/sdk/iot/ProvisioningX509Sample.java`, daha önce not ettiğiniz _kimlik kapsamınızı_ ve _sağlama hizmeti genel uç noktasını_ içerecek şekilde düzenleyin.
 
     ```java
     private static final String idScope = "[Your ID scope here]";
@@ -171,13 +171,13 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
     private static final String leafPrivateKey = "<Your Private PEM Key here>";
     ```
 
-1. Güncelleştirme `leafPublicPem` ve `leafPrivateKey` ortak ve özel cihaz sertifikalarınızı değişkenlerle.
+1. `leafPublicPem` ve `leafPrivateKey` değişkenlerini ortak ve özel cihaz sertifikalarınız ile güncelleştirin.
 
-    Cihaz sertifikalarınızı PowerShell ile oluşturulan dosyaları cihazım * varsayarsak ortak anahtar, özel anahtar ve PFX aygıt için.
+    Cihaz sertifikalarınızı PowerShell ile oluşturduysanız, mydevice * dosyaları cihaz için ortak anahtar, özel anahtar ve PFX 'yi içerir.
 
-    Cihaz sertifikalarınızı Bash Kabuk ile oluşturulan,./certs/new-device.cert.pem ortak anahtarı içerir. Cihazın özel anahtarı./private/new-device.key.pem dosyada olacaktır.
+    Cihaz sertifikalarınızı Bash Shell ile oluşturduysanız,./certs/New-Device.cert.pem ortak anahtarı içerir. Cihazın özel anahtarı./Private/New-Device.Key.pem dosyasında olacaktır.
 
-    Ortak anahtar dosyası ve güncelleştirme açın `leafPublicPem` değişken bu değere sahip. Metni kopyalayıp _---BEGIN PRIVATE KEY---_ için _---END PRIVATE KEY---_.
+    Ortak anahtar dosyanızı açın ve `leafPublicPem` değişkenini bu değerle güncelleştirin. Metni _-----özel anahtar-----başlat_ _-----son özel anahtar-----_ kopyalayın.
 
     ```java
     private static final String leafPublicPem = "-----BEGIN CERTIFICATE-----\n" +
@@ -189,7 +189,7 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
         "-----END CERTIFICATE-----\n";
     ```
 
-    Özel anahtar dosyası ve güncelleştirme açın `leafPrivatePem` değişken bu değere sahip. Metni kopyalayıp _---başlangıç RSA özel anahtar---_ için _---son RSA özel anahtar---_.
+    Özel anahtar dosyanızı açın ve `leafPrivatePem` değişkenini bu değerle güncelleştirin. _-----RSA PRIVATE key-----_ 'den _-----son rsa özel anahtar-----_ kadar metni kopyalayın.
 
     ```java
     private static final String leafPrivateKey = "-----BEGIN RSA PRIVATE KEY-----\n" +
@@ -201,9 +201,9 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
         "-----END RSA PRIVATE KEY-----\n";
     ```
 
-1. Yeni bir değişken eklemek hemen altına `leafPrivateKey` Ara sertifikanızı için. Bu yeni bir değişken adı `intermediateKey`. Bu Ara imzalama sertifikanızı değerini verin.
+1. Ara sertifikanızın hemen altına `leafPrivateKey` yeni bir değişken ekleyin. Bu yeni değişkeni `intermediateKey`adlandırın. Ara imzalama sertifikanızın değerini verin.
 
-    Cihaz sertifikalarınızı Bash Kabuk ile oluşturduysanız *./certs/azure-iot-test-only.intermediate.cert.pem* Ara Sertifika anahtarı içerir. PowerShell ile oluşturulan, sertifikaları, *./Intermediate1.pem* ara sertifika dosyanız olur.
+    Cihaz sertifikalarınızı Bash Shell ile oluşturduysanız, *./certs/Azure-iot-test-only.intermediate.cert.pem* ara sertifika anahtarını içerir. Sertifikalarınız PowerShell ile oluşturulduysa, *./Intermediate1.pem* ara sertifika dosyanız olacaktır.
 
     ```java
     private static final String intermediateKey = "-----BEGIN CERTIFICATE-----\n" +
@@ -215,7 +215,7 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
         "-----END CERTIFICATE-----\n";
     ```
 
-1. İçinde `main` işlevi, ekleme `intermediateKey` için `signerCertificates` toplama başlatma önce `securityProviderX509`.
+1. `main` işlevinde, `securityProviderX509`başlatılmadan önce `intermediateKey` `signerCertificates` koleksiyonuna ekleyin.
 
     ```java
     public static void main(String[] args) throws Exception
@@ -232,7 +232,7 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
             SecurityProvider securityProviderX509 = new SecurityProviderX509Cert(leafPublicPem, leafPrivateKey, signerCertificates);
     ```
 
-1. Değişikliklerinizi kaydetmek ve örnek oluşturun. Hedef klasöre gidin ve oluşturulan jar dosyasını ayıklayın.
+1. Değişikliklerinizi kaydedin ve örneği derleyin. Hedef klasöre gidin ve oluşturulan jar dosyasını ayıklayın.
 
     ```cmd/sh
     mvn clean install
@@ -252,7 +252,7 @@ Devam etmeden önce [IoT Hub Cihazı Sağlama Hizmetini Azure portalıyla ayarla
 Cihaz istemci örneği üzerinde çalışmaya ve inceleme yapmaya devam etmeyi planlıyorsanız bu Hızlı Başlangıç’ta oluşturulan kaynakları silmeyin. Devam etmeyi planlamıyorsanız, bu hızlı başlangıç ile oluşturulan tüm kaynakları silmek için aşağıdaki adımları kullanın:
 
 1. Makinenizde cihaz istemci örnek çıktı penceresini kapatın.
-1. Azure portalında sol taraftaki menüden **Tüm kaynaklar**’ı ve ardından Cihaz Sağlama hizmetini seçin. Hizmetinizin **Kayıtları Yönetme** dikey penceresini açıp **Bireysel Kayıtlar** sekmesine tıklayın. Bu Hızlı Başlangıç adımlarını kullanarak kaydettiğiniz cihazın *KAYIT KİMLİĞİ* değerini seçip en üstte bulunan **Sil** düğmesine tıklayın. 
+1. Azure portalında sol taraftaki menüden **Tüm kaynaklar**’ı ve ardından Cihaz Sağlama hizmetini seçin. Hizmetinizin kayıtları **yönetme** dikey penceresini açın ve sonra **bireysel** Kayıtlar sekmesine tıklayın. bu hızlı BAŞLANGıÇTA kaydettiğiniz cihazın *kayıt kimliği* ' ni seçin ve üstteki **Sil** düğmesine tıklayın. 
 1. Azure portalında sol taraftaki menüden **Tüm kaynaklar**’ı ve ardından IoT hub’ınızı seçin. Hub'ınızın **IoT Cihazları** dikey penceresini açıp bu Hızlı Başlangıç adımlarını kullanarak kaydettiğiniz cihazın *CİHAZ KİMLİĞİ* değerini seçip en üstte bulunan **Sil** düğmesine tıklayın.
 
 

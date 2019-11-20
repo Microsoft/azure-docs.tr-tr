@@ -1,68 +1,67 @@
 ---
-title: "Bir VM'ye veri diski D: sürücüsünü olun | Microsoft Docs"
-description: 'Bir veri sürücüsü olarak D: sürücüsü kullanabilmesi için bir Windows VM için sürücü harflerini değiştirme işlemini açıklamaktadır.'
+title: 'Bir sanal makinenin D: sürücüsünü veri diski yapın '
+description: 'D: sürücüsünü veri sürücüsü olarak kullanabilmeniz için bir Windows sanal makinesi için sürücü harflerinin nasıl değiştirileceğini açıklar.'
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 0867a931-0055-4e31-8403-9b38a3eeb904
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 01/02/2018
 ms.author: cynthn
-ms.openlocfilehash: cfd46d5e9750a81d89ed6d3a79bcc9bffdc3d0dd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 491e7b7be084017cc370fe431c3175ac5b2673f9
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60844209"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74033646"
 ---
-# <a name="use-the-d-drive-as-a-data-drive-on-a-windows-vm"></a>Bir Windows VM'de veri sürücüsü olarak D: sürücüsü kullanın.
-Uygulama verilerini depolamak için D sürücüsünü kullanması gerekirse, farklı bir sürücü harfi için geçici diski kullanmak için bu yönergeleri izleyin. Hiçbir zaman çalışır durumda bulundurmanıza gerek verileri depolamak için geçici diski kullanın.
+# <a name="use-the-d-drive-as-a-data-drive-on-a-windows-vm"></a>D: sürücüsünü Windows VM 'de veri sürücüsü olarak kullanma
+Uygulamanızın verileri depolamak için D sürücüsünü kullanması gerekiyorsa, geçici disk için farklı bir sürücü harfi kullanmak üzere bu yönergeleri uygulayın. Saklamanız gereken verileri depolamak için hiçbir şekilde geçici diski kullanmayın.
 
-Yeniden boyutlandırma, ya da **durdurun (Serbest)** bir sanal makine, bu yeni bir hiper yönetici sanal makinenin yerleştirme tetikleyebilir. Bir planlı veya plansız bir bakım olayı, ayrıca bu yerleştirme tetikleyebilir. Bu senaryoda, geçici disk için ilk kullanılabilir sürücü harfi atanır. Özellikle D: sürücüsü gerektiren bir uygulama varsa, geçici olarak pagefile.sys taşıma, yeni bir veri diski ekleme ve D harfi atamak ve ardından pagefile.sys geçici sürücüyü taşımak için şu adımları izlemesi gerekir. Sanal makine için farklı bir hiper yönetici taşınırsa tamamlandıktan sonra Azure geri D: olmayacaktır.
+Bir sanal makineyi yeniden boyutlandırabilir veya **durdurursanız (serbest bırakırsanız)** , bu, sanal makinenin yerleşimini yeni bir hiper yöneticiye tetikleyebilir. Planlı veya planlanmamış bir bakım olayı da bu yerleşimi tetikleyebilir. Bu senaryoda geçici disk, kullanılabilir ilk sürücü harfine yeniden atanır. Özellikle D: sürücüsünü gerektiren bir uygulamanız varsa, pagefile. sys dosyasını geçici olarak taşımak, yeni bir veri diski eklemek ve D harfine atamak için bu adımları uygulamanız gerekir ve ardından pagefile. sys dosyasını geçici sürücüye geri taşıyın. İşlem tamamlandıktan sonra, sanal makine farklı bir Hiper yöneticide taşınırsa Azure, D: ' yi geri almaz.
 
-Azure geçici disk nasıl kullandığı hakkında daha fazla bilgi için bkz. [Microsoft Azure sanal makineler üzerinde geçici sürücüyü anlama](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)
+Azure 'un geçici diski nasıl kullandığı hakkında daha fazla bilgi için bkz [. Microsoft Azure sanal makineler geçici sürücüyü anlama](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)
 
-## <a name="attach-the-data-disk"></a>Veri diski ekleme
-İlk olarak, sanal makineye veri diski gerekir. Portalı kullanarak bunu yapmak için bkz: [Azure portalında yönetilen veri diski ekleme](attach-managed-disk-portal.md).
+## <a name="attach-the-data-disk"></a>Veri diski iliştirme
+İlk olarak, veri diskini sanal makineye bağlamanız gerekir. Bunu Portal 'ı kullanarak yapmak için, bkz. [Azure Portal yönetilen veri diski iliştirme](attach-managed-disk-portal.md).
 
-## <a name="temporarily-move-pagefilesys-to-c-drive"></a>Geçici olarak pagefile.sys C sürücüye taşıyın
+## <a name="temporarily-move-pagefilesys-to-c-drive"></a>Pagefile. sys dosyasını C sürücüsüne geçici olarak taşıma
 1. Sanal makineye bağlanın. 
-2. Sağ **Başlat** menü ve select **sistem**.
-3. Sol taraftaki menüde **Gelişmiş Sistem ayarları**.
-4. İçinde **performans** bölümünden **ayarları**.
-5. Seçin **Gelişmiş** sekmesi.
-6. İçinde **sanal bellek** bölümünden **değişiklik**.
-7. Seçin **C** sürücü ve ardından **sistem yönetilen boyutu** ve ardından **ayarlamak**.
-8. Seçin **D** sürücü ve ardından **disk belleği dosyası** ve ardından **ayarlamak**.
-9. Uygula düğmesini tıklatın. Bilgisayar değişikliklerin etkili olabilmesi için yeniden başlatılması gerektiğini bir uyarı alırsınız.
+2. **Başlat** menüsüne sağ tıklayıp **sistem**' i seçin.
+3. Sol taraftaki menüde **Gelişmiş sistem ayarları**' nı seçin.
+4. **Performans** bölümünde **Ayarlar**' ı seçin.
+5. **Gelişmiş** sekmesini seçin.
+6. **Sanal bellek** bölümünde **Değiştir**' i seçin.
+7. **C** sürücüsünü seçin ve ardından **Sistem Yönetimli boyut** ' a ve **Ayarla**' ya tıklayın.
+8. **D** sürücüsünü seçin ve ardından **disk belleği dosyası yok** ' a tıkladıktan sonra **Ayarla**' ya tıklayın.
+9. Uygula ' ya tıklayın. Değişikliklerin etkili olması için bilgisayarın yeniden başlatılması gerektiğini belirten bir uyarı alacaksınız.
 10. Sanal makineyi yeniden başlatın.
 
-## <a name="change-the-drive-letters"></a>Sürücü harfini değiştirme
-1. VM yeniden başlatıldıktan sonra VM tekrar açın oturum açın.
-2. Tıklayın **Başlat** menü ve türü **diskmgmt.msc** ve Enter tuşuna basın. Disk Yönetimi başlar.
-3. Sağ **D**, geçici depolama sürücüsü ve select **sürücü harfi ve Yolları Değiştir**.
-4. Sürücü harfi altında yeni bir sürücü gibi seçin **T** ve ardından **Tamam**. 
-5. Veri diski üzerinde sağ tıklatın ve seçin **sürücü harfi ve Yolları Değiştir**.
-6. Sürücü harfi altında seçin **D** ve ardından **Tamam**. 
+## <a name="change-the-drive-letters"></a>Sürücü harflerini değiştirme
+1. VM yeniden başlatıldıktan sonra VM 'ye tekrar oturum açın.
+2. **Başlat** menüsüne tıklayın ve **diskmgmt. msc** yazın ve ENTER tuşuna basın. Disk Yönetimi başlar.
+3. **D**'ye, geçici depolama sürücüsüne sağ tıklayın ve **sürücü harfini ve yollarını Değiştir**' i seçin.
+4. Sürücü harfi altında **T** gibi yeni bir sürücü seçin ve ardından **Tamam**' a tıklayın. 
+5. Veri diskine sağ tıklayın ve **sürücü harfini ve yolları Değiştir**' i seçin.
+6. Sürücü harfi altında sürücü **D** ' yi seçin ve ardından **Tamam**' a tıklayın. 
 
-## <a name="move-pagefilesys-back-to-the-temporary-storage-drive"></a>Geçici depolama sürücüsüne Pagefile.sys dönün
-1. Sağ **Başlat** menü ve select **sistem**
-2. Sol taraftaki menüde **Gelişmiş Sistem ayarları**.
-3. İçinde **performans** bölümünden **ayarları**.
-4. Seçin **Gelişmiş** sekmesi.
-5. İçinde **sanal bellek** bölümünden **değişiklik**.
-6. İşletim sistemi sürücüsünü seçin **C** tıklatıp **disk belleği dosyası** ve ardından **ayarlamak**.
-7. Geçici depolama sürücüsünü seçin **T** ve ardından **sistem yönetilen boyutu** ve ardından **ayarlamak**.
-8. **Uygula**'ya tıklayın. Bilgisayar değişikliklerin etkili olabilmesi için yeniden başlatılması gerektiğini bir uyarı alırsınız.
+## <a name="move-pagefilesys-back-to-the-temporary-storage-drive"></a>Pagefile. sys dosyasını geçici depolama sürücüsüne geri taşıma
+1. **Başlat** menüsüne sağ tıklayıp **sistem** ' i seçin
+2. Sol taraftaki menüde **Gelişmiş sistem ayarları**' nı seçin.
+3. **Performans** bölümünde **Ayarlar**' ı seçin.
+4. **Gelişmiş** sekmesini seçin.
+5. **Sanal bellek** bölümünde **Değiştir**' i seçin.
+6. **C** OS sürücüsünü seçin ve **disk belleği dosyası yok** ' a tıkladıktan sonra **Ayarla**' ya tıklayın.
+7. Geçici **depolama sürücüsünü seçin** ve ardından **Sistem Yönetimli boyut** ' a ve **Ayarla**' ya tıklayın.
+8. **Uygula**'ya tıklayın. Değişikliklerin etkili olması için bilgisayarın yeniden başlatılması gerektiğini belirten bir uyarı alacaksınız.
 9. Sanal makineyi yeniden başlatın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Sanal makinenize kullanılabilir depolama alanı artırabilirsiniz [bir ek veri diski eklemeyi](attach-managed-disk-portal.md).
+* [Ek bir veri diski ekleyerek](attach-managed-disk-portal.md)sanal makineniz için kullanılabilir depolama alanını artırabilirsiniz.
 

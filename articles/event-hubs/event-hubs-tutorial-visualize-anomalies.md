@@ -1,6 +1,6 @@
 ---
-title: Veri anormallikleri gerçek zamanlı olayları - Azure Event Hubs, Görselleştirme | Microsoft Docs
-description: "Öğretici: Microsoft Azure Event Hubs'a gönderilen gerçek zamanlı olaylardaki veri anomalilerini görselleştirme"
+title: 'Öğretici: gerçek zamanlı olaylarda veri anormalilerini görselleştirme-Azure Event Hubs'
+description: 'Öğretici: Microsoft Azure gönderilen gerçek zamanlı olaylarda veri bozuklukilerini görselleştirin Event Hubs'
 services: event-hubs
 author: ShubhaVijayasarathy
 manager: timlt
@@ -8,17 +8,17 @@ ms.author: shvija
 ms.topic: tutorial
 ms.service: event-hubs
 ms.custom: seodec18
-ms.date: 02/26/2019
-ms.openlocfilehash: d6786e4e3382c7c4d7a6a6a28c3cd3621df221c1
-ms.sourcegitcommit: e7d4881105ef17e6f10e8e11043a31262cfcf3b7
+ms.date: 11/05/2019
+ms.openlocfilehash: 0cfff0196ebc20b9b01bc966b3590470d349e86e
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/29/2019
-ms.locfileid: "64867129"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718002"
 ---
-# <a name="tutorial-visualize-data-anomalies-in-real-time-events-sent-to-azure-event-hubs"></a>Öğretici: Gerçek zamanlı olayları Azure Event Hubs için gönderilen veri anomaliler görselleştirin
+# <a name="tutorial-visualize-data-anomalies-in-real-time-events-sent-to-azure-event-hubs"></a>Öğretici: Azure Event Hubs'a gönderilen gerçek zamanlı olaylardaki veri anomalilerini görselleştirme
 
-Azure Event Hubs ile Azure Stream Analytics'i kullanarak gelen verileri denetleyebilir, anomalileri ayırabilir ve Power BI'da görselleştirebilirsiniz. Bir olay hub'ına sürekli olarak gerçek zamanlı veriler göndererek saniyede milyonlarca olay ekleyen binlerce cihaza sahip olduğunuzu düşünelim. Bu kadar fazla verideki anomalileri veya hataları nasıl denetleyebilirsiniz? Örneğin, kredi kartı işlemleri gönderen ne aygıtların ve 5 saniyelik zaman aralığı içinde birden fazla ülkede/bölgede birden çok işlem sahip herhangi bir yerde yakalamak gerekiyor? Bu durum birisi kredi kartı bilgilerini çalıp dünyanın farklı yerlerinden aynı anda alışveriş yapmak için kullandığında ortaya çıkabilir. 
+Azure Event Hubs ile Azure Stream Analytics'i kullanarak gelen verileri denetleyebilir, anomalileri ayırabilir ve Power BI'da görselleştirebilirsiniz. Bir olay hub'ına sürekli olarak gerçek zamanlı veriler göndererek saniyede milyonlarca olay ekleyen binlerce cihaza sahip olduğunuzu düşünelim. Bu kadar fazla verideki anomalileri veya hataları nasıl denetleyebilirsiniz? Örneğin, cihazlar kredi kartı işlemleri gönderiyor ve 5 saniyelik bir zaman aralığı içinde birden çok ülkede/bölgede birden çok işlem olması gereken her yerde yakalamanız gerekiyorsa ne yapmalı? Bu durum birisi kredi kartı bilgilerini çalıp dünyanın farklı yerlerinden aynı anda alışveriş yapmak için kullandığında ortaya çıkabilir. 
 
 Bu öğreticide bu örneğin simülasyonunu yapacaksınız. Kredi kartı işlemleri oluşturup bunları bir olay hub'ına gönderen bir uygulama çalıştıracaksınız. Ardından Azure Stream Analytics ile veri akışını gerçek zamanlı olarak okuyacak, burada geçerli işlemlerle geçersiz işlemleri ayıracak ve Power BI'ı kullanarak geçersiz olarak etiketlenmiş olan işlemlerin görsel olarak tanımlanmasını sağlayacaksınız.
 
@@ -32,7 +32,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 Bu öğreticiyi tamamlamak için bir Azure aboneliğinizin olması gerekir. Aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun][].
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
@@ -54,7 +54,7 @@ Aşağıdaki bölümlerde bu gerekli adımların nasıl uygulanacağı açıklan
 3. Bir olay hub'ı oluşturun.
 
 > [!NOTE]
-> Her betikte öğreticinin ilerleyen bölümlerinde ihtiyacınız olacak değişkenler bulunur. Bunlar kaynak grubu adı ($resourceGroup), olay hub'ı ad alanı (**$eventHubNamespace**) ve olay hub'ı adıdır (**$eventHubName**). Bunlar makalenin ilerleyen bölümlerinde dolar işareti ($) ön ekiyle belirtildiğinden betikte ayarlanmış olduğunu anlayabilirsiniz.
+> Her betikte öğreticinin ilerleyen bölümlerinde ihtiyacınız olacak değişkenler bulunur. Bunlar kaynak grubu adı ($resourceGroup), olay hub'ı ad alanı ( **$eventHubNamespace**) ve olay hub'ı adıdır ( **$eventHubName**). Bunlar makalenin ilerleyen bölümlerinde dolar işareti ($) ön ekiyle belirtildiğinden betikte ayarlanmış olduğunu anlayabilirsiniz.
 
 <!-- some day they will approve the tab control; 
   When that happens, put CLI and PSH in tabs. -->
@@ -176,17 +176,17 @@ Artık olay hub'ınıza veri akışını başlatabilirsiniz. Bu verileri bir Pow
 
 2. İş için aşağıdaki bilgileri girin:
 
-   **İş adı**: Kullanım **contosoEHjob**. Bu alan işin adıdır ve genel olarak benzersiz olmalıdır.
+   **İş adı**: **contosoEHjob** yazın. Bu alan işin adıdır ve genel olarak benzersiz olmalıdır.
 
    **Abonelik**: Aboneliğinizi seçin.
 
-   **Kaynak grubu**: Olay hub'ınıza tarafından kullanılan aynı kaynak grubunu kullanın (**ContosoResourcesEH**).
+   **Kaynak grubu**: Olay hub'ınız (**ContosoResourcesEH**) tarafından kullanılan kaynak grubunun aynısını kullanın.
 
-   **Konum**: Kurulum komut dosyasında kullandığınız konumun aynısını kullanın (**Batı ABD**).
+   **Konum**: Kurulum betiğinde kullanılan konumun (**Batı ABD**) aynısını kullanın.
 
    ![Yeni bir Azure Stream Analytics işi oluşturma işleminin gösterildiği ekran görüntüsü.](./media/event-hubs-tutorial-visualize-anomalies/stream-analytics-add-job.png)
 
-    Kalan alanlarda varsayılan değerleri kabul edin. **Oluştur**’a tıklayın. 
+    Kalan alanlarda varsayılan değerleri kabul edin. **Oluştur**'a tıklayın. 
 
 ### <a name="add-an-input-to-the-stream-analytics-job"></a>Stream Analytics işine giriş ekleme
 
@@ -201,23 +201,23 @@ Steam Analytics işinin girişleri, olay hub'ından gelen kredi kartı işlemler
 
 2. **Girişler** bölmesinde **Akış girişi ekle**'ye tıklayın ve Event Hubs'ı seçin. Açılan ekranda aşağıdaki alanları doldurun:
 
-   **Giriş diğer adı**: Kullanım **contosoinputs**. Bu alan, veri sorgusu tanımlanırken kullanılan giriş akışının adıdır.
+   **Giriş diğer adı**: **contosoinputs** yazın. Bu alan, veri sorgusu tanımlanırken kullanılan giriş akışının adıdır.
 
    **Abonelik**: Aboneliğinizi seçin.
 
-   **Event Hubs ad alanı**: Olay hub'ı ad alanınızı seçin ($**eventHubNamespace**). 
+   **Event Hubs ad alanı**: Event Hub ad alanınızı ($**eventHubNamespace**) seçin. 
 
-   **Olay hub'ı adı**: Tıklayın **var olanı kullan** ve olay hub'ınızı seçin ($**eventHubName**).
+   **Olay Hub'ı adı**: **Var olanı kullan**'a tıklayıp olay hub'ınızı ($**eventHubName**) seçin.
 
-   **Event hubs'ı ilke adı**: Seçin **RootManageSharedAccessKey**.
+   **Event Hubs ilkesi adı**: **RootManageSharedAccessKey**'i seçin.
 
-   **Event hubs'ı tüketici grubu**: Bu alan varsayılan bir tüketici grubu kullanmak için boş bırakın.
+   **Event Hubs tüketici grubu**: Varsayılan tüketici grubunu kullanmak için bu alanı boş bırakın.
 
    Kalan alanlarda varsayılan değerleri kabul edin.
 
    ![Stream Analytics işine giriş akışı ekleme adımlarını gösteren ekran görüntüsü.](./media/event-hubs-tutorial-visualize-anomalies/stream-analytics-inputs.png)
 
-5. **Kaydet**’e tıklayın.
+5. **Kaydet** düğmesine tıklayın.
 
 ### <a name="add-an-output-to-the-stream-analytics-job"></a>Stream Analytics işine çıkış ekleme
 
@@ -225,11 +225,11 @@ Steam Analytics işinin girişleri, olay hub'ından gelen kredi kartı işlemler
 
 2. **Çıkışlar** bölmesinde **Ekle**'ye tıklayın ve **Power BI**'ı seçin. Açılan ekranda aşağıdaki alanları doldurun:
 
-   **Çıkış diğer adı**: Kullanım **contosooutputs**. Bu alan çıkışın benzersiz diğer adıdır. 
+   **Çıkış diğer adı**: **contosooutputs** yazın. Bu alan çıkışın benzersiz diğer adıdır. 
 
-   **Veri kümesi adı**: Kullanım **contosoehdataset**. Bu alan Power BI'da kullanılacak veri kümesinin adıdır. 
+   **Veri kümesi adı**: **contosoehdataset** yazın. Bu alan Power BI'da kullanılacak veri kümesinin adıdır. 
 
-   **Tablo adı**: Kullanım **contosoehtable**. Bu alan Power BI'da kullanılacak tablonun adıdır. 
+   **Tablo adı**: **contosoehtable** yazın. Bu alan Power BI'da kullanılacak tablonun adıdır. 
 
    Kalan alanlarda varsayılan değerleri kabul edin.
 
@@ -239,7 +239,7 @@ Steam Analytics işinin girişleri, olay hub'ından gelen kredi kartı işlemler
 
 4. Kalan alanlarda varsayılan değerleri kabul edin.
 
-5. **Kaydet**’e tıklayın.
+5. **Kaydet** düğmesine tıklayın.
 
 ### <a name="configure-the-query-of-the-stream-analytics-job"></a>Stream Analytics işinin sorgusunu yapılandırma
 
@@ -268,7 +268,7 @@ Bu sorgu, Power BI görselleştirmesine gönderilecek verilerin alınması için
    GROUP BY TumblingWindow(Duration(second, 1))
    ```
 
-4. **Kaydet**’e tıklayın.
+4. **Kaydet** düğmesine tıklayın.
 
 ### <a name="test-the-query-for-the-stream-analytics-job"></a>Stream Analytics işinin sorgusunu test etme 
 
@@ -318,19 +318,19 @@ Stream Analytics işinde **Çalıştır**'a, **Şimdi**'ye ve ardından **Çalı
 
    ![Görselleştirme türü ve alan belirtme işleminin ekran görüntüsü.](./media/event-hubs-tutorial-visualize-anomalies/power-bi-add-card-tile.png)
 
-   **İleri**'ye tıklayın.
+   **İleri**’ye tıklayın.
 
-10. Başlığı **Sahtekarlık amaçlı kullanımlar**, alt başlığı da **Son birkaç dakikadaki toplam veriler** yapın. **Uygula**'ya tıklayın. Kutucuk, panonuza kaydedilir.
+10. Başlığı **Sahtekarlık amaçlı kullanımlar**, alt başlığı da **Son birkaç dakikadaki toplam veriler** yapın. **Apply (Uygula)** düğmesine tıklayın. Kutucuk, panonuza kaydedilir.
 
     ![Pano kutucuğu için başlık ve alt başlık belirtme işleminin ekran görüntüsü.](./media/event-hubs-tutorial-visualize-anomalies/power-bi-tile-details.png)
 
     > [!IMPORTANT]
-    > Olay hub'ına veri akışı ve örnek uygulamayı çalıştırdığınızda, bu kutucuk sayısına (saniyede) hızlı bir şekilde değiştirir. Stream Analytics sorgusu değeri gerçekten güncelleştirmeleri çünkü **saniyede**. Bir 3 dakika dönen pencere toplamı son birkaç dakikada görmek için sorguyu güncelleştirin. 
+    > Örnek uygulamayı ve veri akışını Olay Hub 'ına çalıştırdığınızda, bu kutucukta bulunan sayı hızlı bir şekilde değişir (her saniye). Bunun nedeni, Stream Analytics sorgusunun değeri **her saniye**güncelleyen şeydir. Son birkaç dakika içinde toplamı görmek için sorguyu 3 dakikalık bir pencereye güncelleştirin. 
 11. Başka bir görselleştirme ekleyin. İlk birkaç adımı tekrarlayın:
 
     * **Kutucuk Ekle**'ye tıklayın.
     * **Özel Akış Verileri**'ni seçin. 
-    * **İleri**'ye tıklayın.
+    * **İleri**’ye tıklayın.
     * Veri kümenizi seçin ve **İleri**'ye tıklayın. 
 
 12. **Görselleştirme Türü** olarak **Çizgi grafik** türünü seçin.
@@ -339,7 +339,7 @@ Stream Analytics işinde **Çalıştır**'a, **Şimdi**'ye ve ardından **Çalı
 
 14. **Değerler** bölümünde **Değer ekle**'ye tıklayıp **fraudulentuses** değerini seçin.
 
-15. **Görüntülenecek zaman penceresi** için son beş dakikayı seçin. **İleri**'ye tıklayın.
+15. **Görüntülenecek zaman penceresi** için son beş dakikayı seçin. **İleri**’ye tıklayın.
 
 16. Başlık olarak **Zaman içindeki sahtekarlık amaçlı kullanımları göster** yazın, alt başlığı boş bırakın ve **Uygula**'ya tıklayın. Panonuz açılır.
 
@@ -365,7 +365,7 @@ az group delete --name $resourceGroup
 
 ### <a name="clean-up-resources-using-powershell"></a>PowerShell kullanarak kaynakları temizleme
 
-Kaynak grubunu kaldırmak için [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) komutu.
+Kaynak grubunu kaldırmak için [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) komutunu kullanın.
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name $resourceGroup

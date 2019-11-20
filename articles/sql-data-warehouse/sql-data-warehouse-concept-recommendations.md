@@ -1,6 +1,6 @@
 ---
-title: SQL veri ambarı önerileri - kavramları | Microsoft Docs
-description: SQL veri ambarı öneriler ve nasıl oluşturulacağını öğrenin
+title: SQL veri ambarı önerileri
+description: SQL veri ambarı önerileri ve bunların nasıl üretildiği hakkında bilgi edinin
 services: sql-data-warehouse
 author: kevinvngo
 manager: craigg-msft
@@ -10,56 +10,57 @@ ms.subservice: manage
 ms.date: 11/05/2018
 ms.author: kevin
 ms.reviewer: igorstan
-ms.openlocfilehash: b275f23209979e1a8068ecd99465f7b52392bc6c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 1a93339b99c6591ee9ed615c032d0eac58a372fe
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61421231"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827496"
 ---
 # <a name="sql-data-warehouse-recommendations"></a>SQL veri ambarı önerileri
 
-Bu makalede, Azure Danışmanı üzerinden SQL veri ambarı tarafından sunulan önerileri açıklanmaktadır.  
+Bu makalede, Azure Advisor aracılığıyla SQL veri ambarı tarafından sunulan öneriler açıklanmaktadır.  
 
-SQL veri ambarı veri Ambarınızı emin olmak için öneriler tutarlı performans için iyileştirilmiş sağlar. Veri ambarı önerileri ile sıkı bir şekilde tümleştirilir [Azure Danışmanı](https://docs.microsoft.com/azure/advisor/advisor-performance-recommendations) içinde doğrudan en iyi yöntemler sağlamak üzere [Azure portalında](https://aka.ms/Azureadvisor). SQL veri ambarı, veri ambarının geçerli durumunu analiz eder, telemetri ve yüzeyleri öneriler etkin iş yükünüz için günlük bir tempoyla toplar. Desteklenen veri ambarı öneri senaryoları, önerilen eylemleri uygulamak nasıl birlikte aşağıda özetlenmiştir.
+SQL veri ambarı, veri ambarınızın performans için tutarlı bir şekilde iyileştirildiğinden emin olmak için öneriler sağlar. Veri ambarı önerileri, doğrudan [Azure Portal](https://aka.ms/Azureadvisor)içinde en iyi uygulamaları sunmak Için [Azure Advisor](https://docs.microsoft.com/azure/advisor/advisor-performance-recommendations) ile sıkı bir şekilde tümleşiktir. SQL veri ambarı, veri ambarınızın geçerli durumunu analiz eder, bir günlük temposunda etkin iş yükünüz için telemetri ve yüzey önerilerini toplar. Desteklenen veri ambarı öneri senaryoları, önerilen eylemlerin nasıl uygulanacağı ile birlikte aşağıda özetlenmiştir.
 
-SQL veri ambarı Advisor hakkında geri bildirimde bulunmak veya herhangi bir sorunla karşılaşırsanız, ulaşın [ sqldwadvisor@service.microsoft.com ](mailto:sqldwadvisor@service.microsoft.com).   
+SQL veri ambarı Danışmanı hakkında geri bildiriminiz varsa veya herhangi bir sorunla karşılaşırsanız [sqldwadvisor@service.microsoft.com](mailto:sqldwadvisor@service.microsoft.com)ulaşın.   
 
-Tıklayın [burada](https://aka.ms/Azureadvisor) önerilerinizi bugün denetlemek için! Şu anda bu özellik yalnızca 2. nesil veri ambarları için geçerlidir. 
+Önerilerinizi bugün denetlemek için [buraya](https://aka.ms/Azureadvisor) tıklayın! Şu anda bu özellik yalnızca Gen2 veri ambarlarında geçerlidir. 
 
-## <a name="data-skew"></a>Veri dengesizliği
+## <a name="data-skew"></a>Veri eğriltme
 
-Veri dengesizliği yükünüz çalıştırırken ek veri hareketi veya kaynak darboğazları neden olabilir. Aşağıdaki belgeler, veri dengesizliği tanımlamak ve uygun dağıtım anahtar seçerek oluşmasını önlemek için Göster açıklar.
+Veri eğriltme, iş yükünüzü çalıştırırken ek veri hareketine veya kaynak performans sorunlarına neden olabilir. Aşağıdaki belgelerde, veri eğriliğini belirlemek ve en iyi bir dağıtım anahtarı seçerek oluşmasını engellemek için gösteri açıklanır.
 
-- [Belirlenmesi ve kaldırılmasına eğme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-tables-distribute#how-to-tell-if-your-distribution-column-is-a-good-choice) 
+- [Eğriliği tanımla ve Kaldır](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-tables-distribute#how-to-tell-if-your-distribution-column-is-a-good-choice) 
 
-## <a name="no-or-outdated-statistics"></a>Hayır veya güncel olmayan istatistikleri
+## <a name="no-or-outdated-statistics"></a>Hiç veya güncel olmayan Istatistik
 
-Yetersiz sorgu planlarına oluşturmak SQL veri ambarı sorgu iyileştiricisi neden olabileceği yetersiz istatistik sorgu performansı önemli ölçüde etkileyebilir. Aşağıdaki belgeler, oluşturma ve istatistikleri güncelleştirmeyi en iyi uygulamalar açıklanmaktadır:
+Daha iyi performans istatistikleri, SQL veri ambarı sorgu iyileştiricinin en iyi şekilde sorgu planları oluşturmasına neden olabileceği için sorgu performansını ciddi bir şekilde etkileyebilir. Aşağıdaki belgelerde, istatistikleri oluşturma ve güncelleştirme konusunda en iyi uygulamalar açıklanmaktadır:
 
 - [Tablo istatistikleri oluşturma ve güncelleştirme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-tables-statistics)
 
-Bu öneri tarafından etkilenen tabloların listesini görmek için aşağıdaki komutu çalıştırın. [T-SQL betiği](https://github.com/Microsoft/sql-data-warehouse-samples/blob/master/samples/sqlops/MonitoringScripts/ImpactedTables). Danışman, sürekli olarak bu önerileri oluşturmak için aynı T-SQL betiği çalıştırır.
+Bu önerilerin etkilenen tablolarının listesini görmek için aşağıdaki [T-SQL betiğini](https://github.com/Microsoft/sql-data-warehouse-samples/blob/master/samples/sqlops/MonitoringScripts/ImpactedTables)çalıştırın. Danışman, bu önerileri oluşturmak için sürekli olarak aynı T-SQL betiğini çalıştırır.
 
-## <a name="replicate-tables"></a>Tablo çoğaltma
+## <a name="replicate-tables"></a>Tabloları Çoğalt
 
-Çoğaltılmış tablo önerileri için aşağıdaki fiziksel özelliklerine göre tablo adayları Advisor algılar:
+Çoğaltılan tablo önerileri için, Advisor aşağıdaki fiziksel özelliklere göre tablo adaylarını algılar:
 
-- Çoğaltılmış tablo boyutu
+- Çoğaltılan tablo boyutu
 - Sütun sayısı
 - Tablo dağıtım türü
 - Bölüm sayısı
 
-Boyutu ve yüksek kaliteli önerileri oluşturulan emin olmak için etkinlik eşikleri geçici veri ambarı ve sürekli olarak Advisor satırları ortalama olarak, döndürülen tablo erişim sıklığı gibi iş yükü tabanlı buluşsal yararlanır. 
+Danışman, tablo erişim sıklığı, ortalama olarak döndürülen satırlar ve veri ambarı boyutunun ve etkinliğinin etrafındaki eşiklerini, yüksek kaliteli önerilerin oluşturulmasını sağlamak için sürekli olarak iş yükü tabanlı buluşsal yöntemler kullanır. 
 
-İş yükü tabanlı buluşsal yöntemler her çoğaltılmış tablo öneri için Azure portalında bulabilirsiniz aşağıda açıklanmıştır:
+Aşağıda, her bir çoğaltılan tablo önerisi için Azure portal bulabileceğiniz iş yükü tabanlı buluşsal yöntemler açıklanmaktadır:
 
-- Tarama ortalama-son yedi gün içindeki tablodaki her tablo erişim için döndürülen satırları ortalama yüzdesi
-- Sık gerçekleştirilen okuma, güncelleştirme - tablonun son yedi erişim etkinliğini gösteren sırasında günde güncelleştirilmemiş olduğunu gösterir.
-- Okuma/güncelleştirme oranı - nasıl sık tablonun son yedi gün içindeki ne zaman güncelleştirildiğini göre erişildi oranı
-- Etkinliği - erişim etkinliklere göre kullanımını ölçer. Bu tablo erişim etkinliğini göre ortalama tablo erişim etkinliğini son yedi gün içindeki veri ambarı arasında karşılaştırır. 
+- Ortalama tarama-son yedi gün içinde her tablo erişimi için tablodan döndürülen satırların ortalama yüzdesi
+- Sık okunan, güncelleştirme yok-tablonun, erişim etkinliğini gösterirken son yedi gün içinde güncelleştirilmemiş olduğunu belirtir
+- Okuma/güncelleştirme oranı-tablonun son yedi gün içinde güncelleştirildiği zamana göre ne sıklıkta erişildiğine ilişkin oran
+- Etkinlik-kullanımı, erişim etkinliğine göre ölçer. Bu, son yedi gün içinde veri ambarı genelinde ortalama tablo erişim etkinliğine göre tablo erişim etkinliğini karşılaştırır. 
 
-Şu anda Advisor yalnızca en fazla dört çoğaltılmış tablo adayları aynı anda en yüksek etkinlik öncelik kümelenmiş columnstore dizinleri ile birlikte gösterilir.
+Şu anda Danışman, en yüksek etkinliğin önceliğini belirleme kümelenmiş columnstore dizinleri ile aynı anda en fazla dört çoğaltılan tablo adayını gösterir.
 
 > [!IMPORTANT]
-> Çoğaltılmış tablo öneri tam kavram değil ve hesabı veri taşıma işlemleri almaz. Bu bir buluşsal yöntem eklemek için çalışıyoruz ancak bu sırada, her zaman iş yükünüz öneri uygulandıktan sonra doğrulamalıdır. Lütfen başvurun sqldwadvisor@service.microsoft.com ilerletmek için İş yükünüzün neden çoğaltılmış tablo önerileri fark ederseniz. Aşağıdaki çoğaltılmış tablolar hakkında daha fazla bilgi için ziyaret [belgeleri](https://docs.microsoft.com/azure/sql-data-warehouse/design-guidance-for-replicated-tables#what-is-a-replicated-table).
+> Çoğaltılan tablo önerisi, tam kanıt değildir ve hesaba veri taşıma işlemlerini almaz. Bunu bir buluşsal yöntem olarak eklemekle çalışıyoruz ancak bu arada, öneriyi uyguladıktan sonra iş yükünüzü her zaman doğrulamanız gerekir. İş yükünüzün çalışmasına neden olan çoğaltılmış tablo önerilerini buldıysanız lütfen sqldwadvisor@service.microsoft.com başvurun. Çoğaltılan tablolar hakkında daha fazla bilgi edinmek için aşağıdaki [belgeleri](https://docs.microsoft.com/azure/sql-data-warehouse/design-guidance-for-replicated-tables#what-is-a-replicated-table)ziyaret edin.

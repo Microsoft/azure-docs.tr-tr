@@ -1,60 +1,60 @@
 ---
-title: Azure İzleyicisi'nde ölçümler | Microsoft Docs
-description: Azure İzleyici'de izleme verileri gerçek zamanlı senaryoları destekleme kapasitesine sahip hafif ölçümleri açıklar.
+title: Azure Izleyici 'de ölçümler | Microsoft Docs
+description: Azure Izleyici 'de, neredeyse gerçek zamanlı senaryoları destekleyebilen hafif izleme verileri olan ölçümleri açıklar.
 documentationcenter: ''
 author: bwren
 manager: carmonm
 editor: tysonn
-ms.service: monitoring
+ms.service: azure-monitor
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/26/2019
 ms.author: bwren
-ms.openlocfilehash: 319def9072dbf38eff44ca4459428f1ef99a2b54
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e534754e46e6f2ad9b99b67d24d9f7da63a51a4f
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64867975"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71258371"
 ---
 # <a name="metrics-in-azure-monitor"></a>Azure İzleyicisi'nde ölçümler
 
 > [!NOTE]
-> Azure İzleyicisi'ni bir veri platformu, iki temel veri türleri üzerinde temel alır: Ölçüm ve günlükleri. Bu makalede ölçümleri açıklanır. Başvurmak [Azure İzleyici'de oturum](data-platform-logs.md) günlükleri ve çok ayrıntılı bir açıklaması için [Azure İzleyici, veri platformu](data-platform.md) iki bir karşılaştırması.
+> Azure Izleyici veri platformu iki temel veri türünü temel alır: Ölçümler ve Günlükler. Bu makalede ölçümler açıklanır. [Azure izleyici 'de](data-platform-logs.md) Günlükler hakkında ayrıntılı bir açıklama ve [Azure izleyici veri platformu](data-platform.md) için bu Iki değerin karşılaştırması için günlüklere bakın.
 
-Azure İzleyicisi'nde ölçümler, basit ve neredeyse gerçek zamanlı senaryoları için özellikle yararlı hale getirme destekleme yeteneği sorunlarını uyarılar ve hızlı algılanması. Bu makalede nasıl ölçümleri, bunları ile yapabileceklerinizi yapılandırılmıştır açıklar ve ölçümleri, veri depolama farklı veri kaynaklarını tanımlar.
+Azure Izleyici 'de ölçümler hafif ve neredeyse gerçek zamanlı senaryoları desteklemeye yönelik olarak, sorunların uyarı ve hızlı bir şekilde algılanması için oldukça yararlı hale sahiptir. Bu makalede, ölçümlerin nasıl yapılandırıldığı, bunlarla yapabilecekleriniz ve ölçümlerde veri depolayan farklı veri kaynakları tanımlanmaktadır.
 
 ## <a name="what-are-metrics"></a>Ölçümler nelerdir?
-Sayısal değerleri, belirli bir zamanda bir sistem bazı yönlerini açıklamak ölçümleridir. Ölçümler, düzenli aralıklarla toplanır ve sık örneklenebilir ve bir uyarı ile göreceli olarak basit bir mantıksal hızla harekete çünkü uyarmak için yararlıdır.
+Sayısal değerleri, belirli bir zamanda bir sistem bazı yönlerini açıklamak ölçümleridir. Ölçümler düzenli aralıklarla toplanır ve sıklıkla örneklenebilir ve bir uyarı görece basit mantığa göre hızla tetiklenebilir.
 
-## <a name="what-can-you-do-with-azure-monitor-metrics"></a>Azure İzleyici ölçümleri ile neler?
-Aşağıdaki tabloda, ölçüm verilerini Azure İzleyici'de kullanabileceğiniz farklı yollarını listeler.
+## <a name="what-can-you-do-with-azure-monitor-metrics"></a>Azure Izleyici ölçümleriyle ne yapabilirsiniz?
+Aşağıdaki tabloda, Azure Izleyici 'de ölçüm verilerini kullanmanın farklı yolları listelenmektedir.
 
 |  |  |
 |:---|:---|
-| Çözümle | Kullanım [ölçüm Gezgini](metrics-charts.md) bir grafikteki toplanan ölçümlerin analiz edin ve farklı kaynaklardan ölçümleri karşılaştırmak için. |
-| Görselleştirin | Ölçüm Gezgini için bir grafik sabitleme bir [Azure panosuna](../learn/tutorial-app-dashboards.md).<br>Oluşturma bir [çalışma kitabı](../app/usage-workbooks.md) birden çok etkileşimli bir rapordaki veri kümesi ile birleştirilecek. Sorgu sonuçlarını dışarı aktarma [Grafana](grafana-plugin.md) kendi yönelik Kompozit yararlanın ve diğer veri kaynaklarıyla birleştirmek için. |
-| Uyarı | Yapılandırma bir [ölçüm uyarısı kuralının](alerts-metric.md) bildirim gönderen veya alan [eylemi otomatik](action-groups.md) ölçüm değeri bir eşiği aştığında zaman. |
-| Otomatikleştirme |  Kullanım [otomatik ölçeklendirme](autoscale-overview.md) artırabilir veya azaltabilirsiniz bir Eşiği aşan bir ölçüm değeri temel alarak kaynakları. |
-| Dışarı Aktarma | [Rota ölçümleri günlüklerine](diagnostic-logs-stream-log-store.md) Azure İzleyici ölçümleri verileri birlikte Azure İzleyici günlüklerine verileri analiz etmek ve ölçüm değerleri 93 günden daha uzun süre saklamak için.<br>Stream için ölçümleri bir [olay hub'ı](stream-monitoring-data-event-hubs.md) dış sisteme yönlendirmek. |
-| Alma | Erişim ölçüm değerleri kullanarak bir komut satırı [PowerShell cmdlet'leri](https://docs.microsoft.com/powershell/module/az.applicationinsights)<br>Ölçüm değerleri kullanarak özel uygulama erişimi [REST API](rest-api-walkthrough.md).<br>Erişim ölçüm değerleri kullanarak bir komut satırı [CLI](/cli/azure/monitor/metrics). |
+| Çözümle | Bir grafikteki toplanan ölçümleri çözümlemek ve farklı kaynaklardaki ölçümleri karşılaştırmak için [Ölçüm Gezgini](metrics-charts.md) 'ni kullanın. |
+| Görselleştirin | Ölçüm Gezgini 'nden bir [Azure panosuna](../learn/tutorial-app-dashboards.md)grafik sabitleme.<br>Etkileşimli bir raporda birden fazla veri kümesiyle birleştirilecek bir [çalışma kitabı](../app/usage-workbooks.md) oluşturun. Bir sorgunun sonuçlarını [Grafana](grafana-plugin.md) olarak dışa aktarın ve diğer veri kaynaklarıyla birleştirin. |
+| Uyarı | Ölçüm değeri bir eşiği aştığında bir bildirim gönderen veya [otomatik eylem](action-groups.md) alan bir [ölçüm uyarısı kuralı](alerts-metric.md) yapılandırın. |
+| Otomatikleştir |  Bir eşiği aşan ölçüm değerine göre kaynakları artırmak veya azaltmak için [Otomatik ölçeklendirmeyi](autoscale-overview.md) kullanın. |
+| Dışarı Aktarma | Azure izleyici günlüklerindeki verilerle birlikte verileri analiz etmek ve 93 günden daha uzun süre için ölçüm değerlerini depolamak üzere [ölçümleri günlüklere yönlendirin](resource-logs-collect-storage.md) .<br>Bir [Olay Hub 'ına](stream-monitoring-data-event-hubs.md) , bunları dış sistemlere yönlendirmek için ölçüm akışı. |
+| Almanın | [PowerShell cmdlet 'lerini](https://docs.microsoft.com/powershell/module/az.applicationinsights) kullanarak bir komut satırından ölçüm değerlerine erişin<br>[REST API](rest-api-walkthrough.md)kullanarak özel uygulamadan ölçüm değerlerine erişin.<br>[CLI](/cli/azure/monitor/metrics)kullanarak bir komut satırından ölçüm değerlerine erişin. |
 | Arşiv | [Arşiv](..//learn/tutorial-archive-data.md) kaynağınızın denetim ya da çevrimdışı raporlamaya uyumluluk, performans veya sistem durumu geçmişi. |
 
-## <a name="how-is-data-in-azure-monitor-metrics-structured"></a>Azure İzleyici ölçümleri yapılandırılmış verileri nasıl mi?
-Azure İzleyici ölçümleri tarafından toplanan veriler, zaman damgası veri çözümlemesi için iyileştirilmiş bir zaman serisi veritabanına depolanır. Her ölçüm değerleri aşağıdaki özelliklere sahip bir zaman serisi kümesidir:
+## <a name="how-is-data-in-azure-monitor-metrics-structured"></a>Azure Izleyici ölçümleri içindeki veriler nasıl yapılandırılır?
+Azure Izleyici ölçümleri tarafından toplanan veriler zaman damgalı verileri çözümlemek için en iyi duruma getirilmiş bir zaman serisi veritabanında depolanır. Her ölçüm değeri kümesi, aşağıdaki özelliklere sahip bir zaman dizisidir:
 
-* Değer toplandığı zaman
-* Kaynak değeri ile ilişkili
+* Değerin toplandığı saat
+* Değerin ilişkilendirildiği kaynak
 * Ölçüm için bir kategori gibi davranan bir ad alanı
-* Bir ölçüm adı
-* Değer
-* Bazı ölçümler açıklandığı gibi birden çok boyutta olabilir [çok boyutlu ölçümler](#multi-dimensional-metrics). Özel ölçümler, en fazla 10 boyuta sahip olabilir.
+* Ölçüm adı
+* Değerin kendisi
+* Bazı ölçümler, çok [boyutlu ölçümler](#multi-dimensional-metrics)bölümünde açıklandığı gibi birden çok boyuta sahip olabilir. Özel ölçümler, en fazla 10 boyuta sahip olabilir.
 
 ## <a name="multi-dimensional-metrics"></a>Çok boyutlu ölçümleri
-Ölçüm verilerini zorlukları bilgileri için toplanan değerler bağlam sağlamak için çoğunlukla sınırlıdır biridir. Azure İzleyici, çok boyutlu ölçümler ile bu sorunu giderir. Bir ölçüm boyutlarını ölçüm değeri tanımlamak için ek veri taşıyan ad-değer çiftleridir. Örneğin, bir ölçüm _kullanılabilir disk alanı_ adlı bir boyutun olabilir _sürücü_ değerlerle _C:_ , _D:_ , hangi görüntüleme izin veya kullanılabilir disk alanı tüm sürücüler her biri için ayrı ayrı sürücü.
+Ölçüm verilerine yönelik güçlüklerden biri, toplanan değerler için bağlam sağlamak üzere genellikle sınırlı bilgi sağlamaktır. Azure Izleyici, çok boyutlu ölçümler ile bu zorluğu ele alınmaktadır. Bir ölçüm boyutlarını ölçüm değeri tanımlamak için ek veri taşıyan ad-değer çiftleridir. Örneğin, bir ölçüm _kullanılabilir disk alanı_ , _C:_ , _D:_ değerlerine sahip _sürücü_ adlı bir boyuta sahip olabilir, bu da tüm sürücülerde veya her sürücü için ayrı ayrı kullanılabilir disk alanı görüntülenmesine izin verir.
 
-Aşağıdaki örnekte adlı kuramsal bir ölçüm için iki veri kümesi gösterildiği _ağ aktarım hızı_. İlk veri kümesi herhangi bir boyutu vardır. İki boyutlu değerlerle ikinci bir veri kümesi gösterir _IP adresi_ ve _yönü_:
+Aşağıdaki örnekte adlı kuramsal bir ölçüm için iki veri kümesi gösterildiği _ağ aktarım hızı_. İlk veri kümesi herhangi bir boyutu vardır. İkinci veri kümesi, iki boyutlu değerleri, _IP adresini_ ve _yönü_gösterir:
 
 ### <a name="network-throughput"></a>Ağ aktarım hızı
 
@@ -81,32 +81,43 @@ Temel bir soru cevap ister yalnızca "my ağ aktarım hızı belirli bir zamanda
 
 Bu ölçüm, "ağ aktarım hızı için her bir IP adresi neydi?" ve "karşı gönderilen veri miktarını alındı?" gibi soruları yanıtlayabilirsiniz Çok boyutlu ölçümler, boyutsuz ölçümler için kıyasla ek analiz ve tanılama değer taşır.
 
-## <a name="interacting-with-azure-monitor-metrics"></a>Azure İzleyici ölçümleri ile etkileşim kurma
-Kullanım [ölçüm Gezgini](metrics-charts.md) etkileşimli olarak ölçüm veritabanınızdaki verileri analiz etme ve zaman içinde birden çok ölçüm değerleri grafik. Grafikler ile diğer görselleştirmeleri görüntülemek için panoya sabitleyebilirsiniz. Ölçümleri kullanarak da alabilirsiniz [Azure REST API izleme](rest-api-walkthrough.md).
+## <a name="interacting-with-azure-monitor-metrics"></a>Azure Izleyici ölçümleri ile etkileşim kurma
+Ölçüm veritabanınızdaki verileri etkileşimli olarak analiz etmek ve zaman içinde birden çok ölçümün değerlerini grafik olarak eklemek için [Ölçüm Gezgini](metrics-charts.md) kullanın. Grafikleri bir panoya sabitleyebilir ve diğer görselleştirmelerle görüntüleyebilirsiniz. Ölçümleri kullanarak da alabilirsiniz [Azure REST API izleme](rest-api-walkthrough.md).
 
 ![Ölçüm Gezgini](media/data-platform/metrics-explorer.png)
 
-## <a name="sources-of-azure-monitor-metrics"></a>Azure İzleyici ölçümleri kaynakları
-Azure İzleyici tarafından toplanan ölçümleri üç temel kaynakları vardır. Bu ölçümler Azure İzleyici ölçüm veritabanında toplandıktan sonra kaynak bağımsız olarak birlikte değerlendirilebilir.
+## <a name="sources-of-azure-monitor-metrics"></a>Azure Izleyici ölçümlerinin kaynakları
+Azure İzleyici tarafından toplanan ölçümleri üç temel kaynakları vardır. Bu ölçümler Azure Izleyici ölçüm veritabanında toplandıktan sonra, kaynağı ne olursa olsun birlikte değerlendirilebilirler.
 
-**Platform ölçümleri** Azure kaynakları tarafından oluşturulur ve bunların sistem durumu ve performans görünürlük sağlar. Her kaynak türünü oluşturur bir [farklı ölçüm kümesini](metrics-supported.md) gerekli herhangi bir yapılandırma olmadan. Platform ölçümleri ölçüm 's tanımında aksi belirtilmediği sürece, bir dakikalık sıklıkta Azure kaynaklarından toplanır. 
+**Platform ölçümleri** Azure kaynakları tarafından oluşturulur ve bunların sistem durumu ve performans görünürlük sağlar. Her kaynak türünü oluşturur bir [farklı ölçüm kümesini](metrics-supported.md) gerekli herhangi bir yapılandırma olmadan. Platform ölçümleri, ölçüm tanımında aksi belirtilmedikçe, Azure kaynaklarından tek dakikalık bir sıklıkta toplanır. 
 
-**Konuk işletim sistemi ölçümleri** bir sanal makine konuk işletim sisteminden toplanır. İle Windows sanal makineler için konuk işletim sistemi ölçümlerini etkinleştirmeniz [Windows Tanılama uzantısı (WAD)](../platform/diagnostics-extension-overview.md) ve Linux sanal makineleri ile [InfluxData Telegraf aracı](https://www.influxdata.com/time-series-platform/telegraf/).
+**Konuk işletim sistemi ölçümleri** , bir sanal makinenin Konuk işletim sisteminden toplanır. [Windows Tanılama uzantısı (WAD)](../platform/diagnostics-extension-overview.md) ile Windows sanal makineler için konuk işletim sistemi ölçümlerini etkinleştirin ve etkileyen Linux sanal makineleri Için [telegraf aracısını](https://www.influxdata.com/time-series-platform/telegraf/)etkinleştirin.
 
 **Uygulama ölçümleri** performans sorunları tespit edin ve eğilimler, uygulamanızın nasıl kullanıldığını izlemenize yardımcı olur ve izlenen uygulamalar için Application Insights tarafından oluşturulur. Bu tür değerleri olarak içerir _sunucu yanıt süresi_ ve _tarayıcı özel durumları_.
 
-**Özel ölçümler** otomatik olarak kullanılabilir olan standart ölçümlerin yanı sıra tanımladığınız ölçümleridir. Yapabilecekleriniz [uygulamanızda özel ölçümler tanımlayın](../app/api-custom-events-metrics.md) kullanarak bir Azure hizmeti için özel ölçümleri oluşturma veya Application Insights tarafından izlenen [özel ölçümler API](metrics-store-custom-rest-api.md).
+**Özel ölçümler** , otomatik olarak kullanılabilen standart ölçümlere ek olarak tanımladığınız ölçümlerdir. Uygulamanızda Application Insights tarafından izlenen [özel ölçümleri tanımlayabilir](../app/api-custom-events-metrics.md) veya [özel ölçüm API](metrics-store-custom-rest-api.md)'sini kullanarak bir Azure hizmeti için özel ölçümler oluşturabilirsiniz.
 
 ## <a name="retention-of-metrics"></a>Ölçüm bekletme
-Azure'da en fazla kaynak için ölçüm 93 gün boyunca saklanır. Bazı özel durumlar vardır:
-  * **Klasik konuk işletim sistemi ölçümleri**. Klasik konuk işletim sistemi ölçümleri 14 gün boyunca saklanır. Daha uzun bekletme süresi için ile toplanan yeni konuk işletim sistemi ölçümler kullanılması önerilir [Windows Tanılama uzantısı (WAD)](../platform/diagnostics-extension-overview.md) ve Linux sanal makineleri ile [InfluxData Telegraf aracı](https://www.influxdata.com/time-series-platform/telegraf/).
-  * **Application Insights günlük tabanlı ölçümleri**. Sahne arkasında [günlük tabanlı ölçümler](../app/pre-aggregated-metrics-log-metrics.md) günlük sorgulara çevir. Kendi saklama, temel alınan günlüklerinde olayların bekletme eşleşir. Application Insights kaynakları için günlükleri, 90 gün boyunca depolanır. 
+Azure 'daki çoğu kaynak için ölçümler 93 gün süreyle depolanır. Bazı özel durumlar vardır:
+
+**Konuk işletim sistemi ölçümleri**
+-   **Klasik Konuk işletim sistemi ölçümleri**. Bunlar, [Windows Tanılama uzantısı (WAD)](../platform/diagnostics-extension-overview.md) veya [Linux Tanılama uzantısı (LAD)](../../virtual-machines/extensions/diagnostics-linux.md) tarafından toplanan performans sayaçlarıdır ve bir Azure depolama hesabına yönlendirilir. Bu ölçümler için bekletme 14 gündür.
+-   **Azure Izleyici ölçümlerine gönderilen Konuk işletim sistemi ölçümleri**. Bunlar, Windows Tanılama uzantısı (WAD) tarafından toplanan performans sayaçlarıdır ve [Azure Izleyici havuzuna](diagnostics-extension-overview.md#data-storage)veya Linux makinelerde [etkileyen bir telegraf Aracısı](https://www.influxdata.com/time-series-platform/telegraf/) aracılığıyla gönderilir. Bu ölçümler için bekletme 93 gündür.
+-   **Log Analytics Aracısı tarafından toplanan Konuk işletim sistemi ölçümleri**. Bunlar, Log Analytics Aracısı tarafından toplanan ve bir Log Analytics çalışma alanına gönderilen performans sayaçlarıdır. Bu ölçümler için bekletme 31 gündür ve 2 yıla kadar genişletilebilir.
+
+**Günlük tabanlı ölçümleri Application Insights**. 
+- Sahnenin arkasında [günlük tabanlı ölçümler](../app/pre-aggregated-metrics-log-metrics.md) , günlük sorgularına dönüştürülür. Saklama süresi, olayların temel alınan günlüklerde bekletilmesi ile eşleşir. Application Insights kaynaklar için Günlükler 90 gün süreyle depolanır.
+
 
 > [!NOTE]
-> Yapabilecekleriniz [platformu Azure İzleyici kaynak ölçümlerini bir Log Analytics çalışma alanına gönderme](diagnostic-logs-stream-log-store.md) uzun vadeli eğilimleri belirlemek için.
+> [Azure izleyici kaynakları için platform ölçümlerini, uzun dönem eğilimi için bir Log Analytics çalışma alanına gönderebilirsiniz](resource-logs-collect-storage.md) .
+
+
+
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [Azure İzleyici, veri platformu](data-platform.md).
-- Hakkında bilgi edinin [günlük verilerini Azure İzleyici'de](data-platform-logs.md).
+- [Azure izleyici veri platformu](data-platform.md)hakkında daha fazla bilgi edinin.
+- [Azure izleyici 'de günlük verileri](data-platform-logs.md)hakkında bilgi edinin.
 - Hakkında bilgi edinin [izleme verilerini kullanılabilir](data-sources.md) azure'daki farklı kaynakları.

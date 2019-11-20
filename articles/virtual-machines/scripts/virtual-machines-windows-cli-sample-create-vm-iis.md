@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - IIS yükleme | Microsoft Docs
+title: Azure CLI Betik Örneği - IIS yükleme
 description: Azure CLI Betik Örneği - IIS yükleme
 services: virtual-machines-Windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: ''
 ms.assetid: ''
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: vm-Windows
 ms.workload: infrastructure
 ms.date: 02/28/2017
 ms.author: cynthn
-ms.openlocfilehash: 4b4d8f68c8b541b44065931991fea7c598aa770e
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 1ec0ada9143d193f8ee976d53d0b9754904efbe5
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60318096"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039951"
 ---
 # <a name="quick-create-a-virtual-machine-with-the-azure-cli"></a>Azure CLI ile sanal makineyi hızlı oluşturma
 

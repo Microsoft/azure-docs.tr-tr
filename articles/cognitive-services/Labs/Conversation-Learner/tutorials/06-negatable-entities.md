@@ -1,7 +1,7 @@
 ---
-title: Konuşma Öğrenici sahip bir Model - Microsoft Bilişsel hizmetler değişkeni yoksayılamaz varlıklar kullanma | Microsoft Docs
+title: Conversation Learner modeliyle, Microsoft bilişsel hizmetler ile Negatiftablo varlıklarını kullanma | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici modeliyle değişkeni yoksayılamaz varlıkları kullanmayı öğrenin.
+description: Conversation Learner modeliyle bir Negatiftablo varlıklarını nasıl kullanacağınızı öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,91 +10,92 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: 2c758d1dd5d4d1e7ab25faccd5280963211181d1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 4edbfc396d4ab32b991b084a7b738f04b5205418
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66388800"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68704100"
 ---
-# <a name="how-to-use-negatable-entities-with-a-conversation-learner-model"></a>Konuşma Öğrenici modeliyle değişkeni yoksayılamaz varlıklar kullanma
+# <a name="how-to-use-negatable-entities-with-a-conversation-learner-model"></a>Conversation Learner modeliyle Negatiftablo varlıklarını kullanma
 
-Bu öğreticide "Negatable" özelliğini varlıkları gösterir.
+Bu öğreticide varlıkların "Negatiftable" özelliği gösterilmektedir.
 
 ## <a name="video"></a>Video
 
-[![Değişkeni yoksayılamaz varlıkları öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_NegatableEntities_Preview)](https://aka.ms/cl_Tutorial_v3_NegatableEntities)
+[![Negatiftablo varlıkları öğreticisi önizlemesi](https://aka.ms/cl_Tutorial_v3_NegatableEntities_Preview)](https://aka.ms/cl_Tutorial_v3_NegatableEntities)
 
 ## <a name="requirements"></a>Gereksinimler
-Bu öğreticide, genel öğretici Bot çalışıyor olması gerekir
+Bu öğreticide, genel öğretici bot 'ın çalışıyor olması gerekir
 
     npm run tutorial-general
 
 ## <a name="details"></a>Ayrıntılar
-Bir varlığın "Negatable" özelliği, hem normal (pozitif) etiket sağlar ve negatif varlık örneklerini, pozitif ve negatif modellerde tabanlı öğretmek ve var olan bir varlığa değerini Temizle. Kendi "Negatable" özellik kümesine sahip varlıklar konuşma daha yalın değişkeni yoksayılamaz varlık adı verilir.
+Bir varlığın "Negatiftable" özelliği, varlığın hem normal (olumlu) hem de negatif örneklerinin etiketlemesini, olumlu ve negatif modellere göre öğretebilir ve var olan bir varlığın değerini temizlemenizi sağlar. "Negatiftable" özelliği ayarlanmış varlıklara sahip varlıklar, konuşma anlayıcı içindeki Negatiftablo varlıkları olarak adlandırılır.
 
 ## <a name="steps"></a>Adımlar
 
-Giriş sayfasında Web kullanıcı arabiriminde başlatın.
+Web Kullanıcı arabirimindeki giriş sayfasında başlatın.
 
 ### <a name="create-the-model"></a>Model oluşturma
 
-1. Seçin **yeni modeli**.
-2. Girin **NegatableEntity** için **adı**.
+1. **Yeni model**' i seçin.
+2. **Ad**Için bir **negatiftableentity** girin.
 3. **Oluştur**’u seçin.
 
 ### <a name="entity-creation"></a>Varlık oluşturma
 
-1. Seçin **varlıkları** sol bölmesinde, ardından **yeni varlık**.
-2. Seçin **eğitilmiş özel** için **varlık türü**.
-3. Girin **adı** için **varlık adı**.
-4. Denetleme **Negatable** kullanıcıların bir varlık değeri belirtin veya bir şey olmadığını söylüyor sağlamak için *değil* varlık değeri böylece eşleşen varlık değeri siliniyor.
+1. Sol panelde **varlıklar** ' ı ve sonra **yeni varlık**' ı seçin.
+2. **Varlık türü**Için **özel eğitimli** ' i seçin.
+3. **Varlık adı**için **ad** girin.
+4. Kullanıcıların bir varlık değeri sağlamasını sağlamak için **negatifi** işaretleyin veya bir şeyi bir varlık değeri olmadığını söyleyin, bu nedenle eşleşen varlık değerini silin.
 5. **Oluştur**’u seçin.
 
 ![](../media/T06_entity_create.png)
 
-### <a name="create-the-first-action"></a>İlk Eylem oluştur
+### <a name="create-the-first-action"></a>Ilk eylemi oluşturma
 
-1. Seçin **eylemleri** sol bölmesinde, ardından **yeni eylem**.
-2. Girin **adınızı bilmiyorum.** için **Botun yanıt...** .
-3. Girin **adı** için **eleyerek sağlar**.
+1. Sol panelde **Eylemler** ' i ve sonra **yeni eylem**' i seçin.
+2. **Adınızı bilmiyorum yazın.** **bot 'un yanıtı için...** .
+3. Ayırt **edici sahibine**için **ad** girin.
 4. **Oluştur**’u seçin.
 
 ![](../media/T06_action_create_1.png)
 
-### <a name="create-the-second-action"></a>İkinci Eylem oluştur
+### <a name="create-the-second-action"></a>Ikinci eylemi oluşturma
 
-1. Seçin **eylemleri** sol bölmesinde, ardından **yeni eylem**.
-2. Girin **adınızı biliyorum. Bu, $name olur.** için **Botun yanıt...** .
+1. Sol panelde **Eylemler** ' i ve sonra **yeni eylem**' i seçin.
+2. Adınızı **biliyorum yazın. $Name.** **bot 'un yanıtı için...** .
 3. **Oluştur**’u seçin.
 
 > [!NOTE]
-> **Adı** varlık olarak otomatik olarak eklenen bir **gerekli varlıkları** yanıt utterance başvuruya göre.
+> **Ad** varlığı, yanıt ututundaki başvuruya göre **gerekli varlıklar** olarak otomatik olarak eklenmiştir.
 
-Artık iki eylem var.
+Artık iki eylemleriniz vardır.
 
 ![](../media/T06_action_create_2.png)
 
 ### <a name="train-the-model"></a>Modeli eğitme
 
-1. Seçin **eğitme iletişim kutuları** sol bölmesinde, ardından **yeni Train iletişim**.
-2. Girin **hello** kullanıcının utterance sol sohbet panelinde için.
-3. Seçin **puan Eylemler**.
-4. Seçin **adınızı bilmiyorum.** Eylem listesinden. % 100 olarak temel kısıtlamalar yalnızca geçerli eylem yüzdebirliktir.
-5. Girin **adımın Frank olduğu** kullanıcının utterance sol sohbet panelinde için.
-6. Vurgulama **Frank** seçip **+ ad**. Değişkeni yoksayılamaz varlıkların iki örneği: (+) artı ekler veya değer;'üzerine yazar (-) eksi değer kaldırır.
-7. Seçin **puan Eylemler**. **Adı** varlık artık olarak tanımlanmıştır **Frank** modelin bellekte, böylece **adınızı biliyorum. $Name olan** eylemi, kullanılabilir.
-8. Seçin **adınızı biliyorum. Bu, $name olur.** Eylem listesinden.
-9. Girin **adımın Frank değil.** Sol sohbet panelinde kullanıcının utterance için.
-10. Vurgulama **Frank** seçip **-adı** değerini temizlemek için **adı** varlık.
-11. Seçin **puan Eylemler**.
-12. Seçin **adınızı bilmiyorum.** Eylem listesinden.
-13. Girin **Susan My adıdır.** kullanıcının üçüncü utterance için sol sohbet panelinde.
-14. Vurgulama **Susan** ardından **+ adı** 
+1. Sol panelde iletişim **kutularını eğitme** ' yi ve ardından **Yeni eğitme iletişim kutusunu**seçin.
+2. Sol sohbet panelinde kullanıcının utterliği için **Merhaba** yazın.
+3. **Puan eylemlerini**seçin.
+4. **Adınızı bilmiyorum ' ı seçin.** Eylemler listesinden. Yüzdebirlik değeri, kısıtlamalara göre geçerli olan tek eylem olarak% 100 ' dir.
+5. Kullanıcının sol sohbet panelinde UTİ olarak **adı filiz** 'e yazın.
+6. **Filiz** ' i vurgulayın ve **+ ad**' ı seçin. Negatiftablo varlıklarının iki örneği vardır: (+) artı değeri ekler veya üzerine yazar; (-) eksi değeri kaldırır.
+7. **Puan eylemlerini**seçin. **Ad** varlığı şimdi modelin belleğinde **filiz** olarak tanımlanmıştır **, bu nedenle adınızı biliyorum. $Name** eylem kullanılabilir.
+8. Adınızı **biliyorum ' ı seçin. $Name.** Eylemler listesinden.
+9. **Ad My adı filiz değil.** kullanıcının, sol sohbet paneli ' ne kadar.
+10. **Ad** varlığındaki değeri temizlemek için **filiz** ' i ve Select **-Name** ' i vurgulayın.
+11. **Puan eylemlerini**seçin.
+12. **Adınızı bilmiyorum ' ı seçin.** Eylemler listesinden.
+13. **My Name to çiğdem yazın.** Sol sohbet panelinde kullanıcının üçüncü utterliği için.
+14. **Çiğdem** ve **+ ad** Vurgula 
 
 ![](../media/T06_training.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Birden çok değerli varlıklar](./07-multi-value-entities.md)
+> [Çoklu değerli varlıklar](./07-multi-value-entities.md)

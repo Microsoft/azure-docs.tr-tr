@@ -1,40 +1,40 @@
 ---
-title: OPC İkizi mimarisi - Azure | Microsoft Docs
-description: OPC İkizi mimarisi
+title: OPC Ikizi mimarisi-Azure | Microsoft Docs
+description: Bu makalede OPC Ikizi mimarisine genel bakış sunulmaktadır. Sunucu bulma, etkinleştirme, göz atma ve izleme hakkında bilgi açıklar.
 author: dominicbetts
 ms.author: dobett
 ms.date: 11/26/2018
 ms.topic: overview
-ms.service: iot-industrialiot
+ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 002e2e06201688638df98e16c45282187f593a3a
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: b8d4424c92ff24c36650e34a5d050bdc5f0f9091
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67444252"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819848"
 ---
-# <a name="opc-twin-architecture"></a>OPC İkizi mimarisi
+# <a name="opc-twin-architecture"></a>OPC Ikizi mimarisi
 
-Aşağıdaki diyagramlarda OPC İkizi mimarisi gösterilmektedir.
+Aşağıdaki diyagramlarda OPC Ikizi mimarisi gösterilmektedir.
 
-## <a name="discover-and-activate"></a>Bulma ve etkinleştirme
+## <a name="discover-and-activate"></a>Bul ve Etkinleştir
 
-1. İşleci, modüldeki tarama ağ etkinleştirir veya bulma URL'si kullanarak tek seferlik bir bulmayı kolaylaştırır. Uygulama bilgilerini ve bulunan uç noktaları telemetri işleme için ekleme aracıya gönderilir.  OPC UA cihaz ekleme Aracısı bulma veya Tarama modunda olduğunda OPC İkizi IOT Edge modülü tarafından gönderilen OPC UA sunucu bulma olayları işler. Uygulama kaydı ve OPC UA cihaz kayıt defterinde güncelleştirmeler bulma olayları sonucu.
+1. İşleci, modülde ağ taramayı sağlar veya bir bulma URL 'SI kullanarak bir kerelik bulma işlemi yapar. Bulunan uç noktalar ve uygulama bilgileri, işleme için ekleme aracısına telemetri aracılığıyla gönderilir.  OPC UA cihaz ekleme Aracısı, bulma veya tarama modundayken OPC Ikizi IoT Edge modülü tarafından gönderilen OPC UA sunucu bulma olaylarını işler. Bulma olayları, uygulama kaydı ve OPC UA cihaz kayıt defterindeki güncelleştirmeler ile sonuçlanır.
 
-   ![OPC İkizi nasıl çalışır?](media/overview-opc-twin-architecture/opc-twin1.png)
+   ![OPC Ikizi nasıl çalıştığı](media/overview-opc-twin-architecture/opc-twin1.png)
 
-1. Operatör bulunan uç noktası'nın sertifikasını inceler ve erişim için kayıtlı bir uç nokta çifti etkinleştirir. 
+1. İşleci, bulunan uç noktanın sertifikasını inceler ve erişim için kayıtlı uç nokta ikizi etkinleştirir. 
 
-   ![OPC İkizi nasıl çalışır?](media/overview-opc-twin-architecture/opc-twin2.png)
+   ![OPC Ikizi nasıl çalıştığı](media/overview-opc-twin-architecture/opc-twin2.png)
 
-## <a name="browse-and-monitor"></a>Göz atma ve izleme
+## <a name="browse-and-monitor"></a>Tarama ve izleme
 
-1. Sonra işleci göz atın veya sunucu bilgi modeli incelemek, nesne değişkenleri okuma/yazma ve yöntemleri çağırmak için İkizi hizmeti REST API'sini kullanabilirsiniz.  Kullanıcı, OPC UA tam olarak HTTP ve JSON ifade edilen basitleştirilmiş bir API kullanır.
+1. İşlem etkinleştirildikten sonra operatör, Ikizi Service REST API kullanarak sunucu bilgi modeli ' ni tarayın veya inceleyebilir, nesne değişkenlerini ve çağrı yöntemlerini okur/yazabilir.  Kullanıcı, HTTP ve JSON içinde tam olarak ifade edilen basitleştirilmiş bir OPC UA API kullanır.
 
-   ![OPC İkizi nasıl çalışır?](media/overview-opc-twin-architecture/opc-twin3.png)
+   ![OPC Ikizi nasıl çalıştığı](media/overview-opc-twin-architecture/opc-twin3.png)
 
-1. İkiz hizmet REST arabirimi, OPC yayımcı olarak izlenen öğeleri ve abonelikler oluşturmak için de kullanılabilir. OPC Publisher, IOT Hub'ına OPC UA server sistemlerden gönderilecek telemetri sağlar. OPC Publisher hakkında daha fazla bilgi için bkz: [OPC yayımcı nedir](overview-opc-publisher.md).
+1. İkizi hizmet REST arabirimi, OPC yayımcısı 'nda izlenen öğeler ve abonelikler oluşturmak için de kullanılabilir. OPC yayımcısı, telemetri 'e OPC UA sunucu sistemlerinden IoT Hub gönderilmesine olanak tanır. OPC yayımcısı hakkında daha fazla bilgi için bkz. [OPC yayımcısı nedir](overview-opc-publisher.md).
 
-   ![OPC İkizi nasıl çalışır?](media/overview-opc-twin-architecture/opc-twin4.png)
+   ![OPC Ikizi nasıl çalıştığı](media/overview-opc-twin-architecture/opc-twin4.png)

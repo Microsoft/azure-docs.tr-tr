@@ -1,106 +1,104 @@
 ---
-title: Azure VM başına vCPU Kotayı artırmak istekleri | Microsoft Docs
-description: VM vCPU kotası istekleri artırın
+title: VM başına Azure vCPU kotası artış istekleri | Microsoft Docs
+description: VM başına vCPU kota artışı istekleri
 author: sowmyavenkat86
 ms.author: svenkat
 ms.date: 06/07/2019
 ms.topic: article
-ms.service: azure
+ms.service: azure-supportability
 ms.assetid: ce37c848-ddd9-46ab-978e-6a1445728a3b
-ms.openlocfilehash: 79879cd7f5ea5af1b794735f32e6e1367458e124
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.openlocfilehash: e99bdd92d4a1aab833a95943b22aaabe7f0daa1d
+ms.sourcegitcommit: 961468fa0cfe650dc1bec87e032e648486f67651
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67310719"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72248671"
 ---
-# <a name="vm-series-vcpu-limit-increase"></a>VM Serisi vCPU sınır artışı
+# <a name="vm-series-vcpu-limit-increase"></a>VM Serisi vCPU sınırı artışı
 
-Sanal makineler ve sanal makine ölçek kümeleri için Kaynak Yöneticisi'ni vCPU kotaları, her bölgede her abonelik için iki katmanda uygulanır. 
+Sanal makineler ve sanal makine ölçek kümeleri için Kaynak Yöneticisi vCPU kotaları, her bir bölgede her bir abonelik için iki katmanda zorlanır. 
 
-İlk katmandır **toplam bölgesel Vcpu sınırına** (genelinde tüm VM serisi), ve ikinci katman **Vcpu VM serisi sınırlamak** (örneğin, D serisi Vcpu). Dilediğiniz zaman dağıtılması için yeni bir sanal makine olduğu belirli sanal makine serisi için onaylanmış vCPU kotası VM serisi için yeni ve mevcut Vcpu kullanım toplamını aşmamalıdır. Ayrıca, tüm VM serisi dağıtılmış toplam yeni ve mevcut vCPU sayısı abonelik için onaylanmış toplam bölgesel Vcpu kotası aşmamalıdır. Kotalarda biri aşılırsa, VM dağıtımı izin verilmiyor.
-Azure Portalı'ndan VM serisi Vcpu kotası sınırının artışı isteyebilir. VM serisi kota artış, toplam bölgesel Vcpu sınırına tutarında otomatik olarak artırır. 
+İlk katman **Toplam bölgesel vCPU sayısı sınırı** (tüm VM serileri genelinde) ve ıkıncı katman **VM Serisi vCPU sayısı sınırı** (D serisi vCPU 'lar gibi). Yeni bir VM 'nin dağıtılması her seferinde, bu VM Serisi için yeni ve var olan vCPU 'ların toplamı, söz konusu VM Serisi için onaylanan vCPU kotasını aşmamalıdır. Ayrıca, tüm VM dizileri genelinde dağıtılan toplam yeni ve var olan vCPU sayısı, abonelik için onaylanan toplam bölgesel vCPU kotasını aşmamalıdır. Bu kotalardan biri aşılırsa, VM dağıtımına izin verilmez.
+Azure portal VM Serisi için vCPU kota sınırı artışı isteyebilirsiniz. VM Serisi kotasının bir artışı toplam bölgesel vCPU sayısını aynı tutara göre otomatik olarak arttırır. 
 
-Yeni bir abonelik oluşturulurken varsayılan toplam bölgesel vcpu sayısı tek tek tüm VM serisi için varsayılan vCPU kotaları toplamına eşit olmayabilir. Bu, bir abonelikte dağıtmak istediğiniz tek tek her VM serisi için yeterli miktarda kota, ancak tüm dağıtımlar için toplam bölgesel Vcpu için yeterli kotası ile sonuçlanabilir. Bu durumda, açıkça toplam bölgesel Vcpu sınırı artırmak için bir istek göndermeniz gerekir. Toplam bölgesel vcpu sayısı sınırı, bölge için tüm VM serisi arasında onaylı kota toplamını aşamaz.
+[Sanal makine vCPU kotaları sayfasında](https://docs.microsoft.com/azure/virtual-machines/windows/quotas) ve [Azure aboneliği ve hizmet limitleri](https://aka.ms/quotalimits) sayfasında kotalar hakkında daha fazla bilgi edinin. 
 
-Kotaları hakkında daha fazla bilgi [sanal makine vCPU Kotası sayfası](https://docs.microsoft.com/azure/virtual-machines/windows/quotas) ve [Azure aboneliği ve hizmet sınırlamaları](https://aka.ms/quotalimits) sayfası. 
+Artık **Yardım + Destek** dikey penceresi veya portalda **kullanımlar + kota** dikey penceresi aracılığıyla bir artış isteğinde bulunabilir. 
 
-Şimdi aracılığıyla bir artış istemek **Yardım + Destek** dikey veya **kullanımları + kota** portaldaki dikey pencere. 
+## <a name="request-per-vm-series-vcpu-quota-increase-at-subscription-level-using-the-help--support-blade"></a>**Yardım + Destek** dikey penceresini kullanarak ABONELIK düzeyindeki VM Serisi vCPU kotası artışına göre istek
 
-## <a name="request-per-vm-series-vcpu-quota-increase-at-subscription-level-using-the-help--support-blade"></a>İstek başına VM serisi vCPU kota artışı kullanarak abonelik düzeyinde **Yardım + Destek** dikey penceresi
+Azure portal Azure 'un ' yardım + destek ' dikey penceresi aracılığıyla bir destek isteği oluşturmak için aşağıdaki yönergeleri izleyin. 
 
-Azure'nın 'Yardım + Destek' dikey penceresinde Azure portalında kullanılabilir üzerinden destek isteği oluşturmak için aşağıdaki yönergeleri izleyin. 
+1. @No__t-0 ' dan **Yardım + Destek**' i seçin.
 
-1. Gelen https://portal.azure.com seçin **Yardım + Destek**.
-
-![Yardım + destek](./media/resource-manager-core-quotas-request/helpsupport.png)
+   ![Yardım ve destek](./media/resource-manager-core-quotas-request/helpsupport.png)
  
-2.  **Yeni destek isteği**’ni seçin. 
+2.  **Yeni destek isteği ' ni**seçin. 
 
-![Yeni destek isteği](./media/resource-manager-core-quotas-request/newsupportrequest.png)
+     ![Yeni destek isteği](./media/resource-manager-core-quotas-request/newsupportrequest.png)
 
-3. Sorun türü açılır listesinde seçin **hizmet ve abonelik sınırlarını (kotalar)** .
+3. Sorun türü açılır listesinde **hizmet ve abonelik limitleri (kotalar)** öğesini seçin.
 
-![Sorun türü açılan kutusu](./media/resource-manager-core-quotas-request/issuetypedropdown.png)
+   ![Sorun türü açılan kutusu](./media/resource-manager-core-quotas-request/issuetypedropdown.png)
 
-4. Kotasını artırmanız gereken aboneliği seçin.
+4. Daha fazla kotanın olması gereken aboneliği seçin.
 
-![Abonelik newSR seçin](./media/resource-manager-core-quotas-request/select-subscription-sr.png)
+   ![Abonelik newSR 'yi seçin](./media/resource-manager-core-quotas-request/select-subscription-sr.png)
    
-5. Seçin **- VM (çekirdek Vcpu) abonelik sınırını artırır işlem** içinde **kota türü** açılır. 
+5. **Kota türü** açılan menüsünde **işlem-VM (çekirdek-vCPU) abonelik sınırı artışları** ' ni seçin. 
 
-![Kota türü seçin](./media/resource-manager-core-quotas-request/select-quota-type.png)
+   ![Kota türünü seçin](./media/resource-manager-core-quotas-request/select-quota-type.png)
 
-6. İçinde **sorun ayrıntıları**, tıklayarak isteğiniz işlem yardımcı olacak ek bilgiler sağlayın **ayrıntıları sağlayın**.
+6. **Sorun ayrıntıları**' nda, **Ayrıntılar sağla**' ya tıklayarak isteğinizi işlemeye yardımcı olacak ek bilgiler sağlayın.
 
-![Ayrıntıları sağlayın](./media/resource-manager-core-quotas-request/provide-details.png)
+   ![Ayrıntıları belirtin](./media/resource-manager-core-quotas-request/provide-details.png)
 
-7. İçinde **kota ayrıntıları** paneline dağıtım modeli seçin ve bir konum seçin.
+7. **Kota ayrıntıları** panelinde, dağıtım modeli ' ni seçin ve bir konum seçin.
 
-![Kota ayrıntıları DM](./media/resource-manager-core-quotas-request/quota-details.png)
+   ![Kota ayrıntıları DM](./media/resource-manager-core-quotas-request/quota-details.png)
 
-8. Seçin **SKU aileleri** artışı gerektirir. 
+8. Artış gerektiren **SKU aileleri** seçin. 
 
-![SKU Ailesi](./media/resource-manager-core-quotas-request/sku-family.png)
+   ![SKU ailesi](./media/resource-manager-core-quotas-request/sku-family.png)
 
-9. İstediğiniz yeni sınırları, abonelik üzerinde girin. Bir satırı kaldırmak için SKU ailesi açılır listeden SKU'seçeneğinin işaretini kaldırın veya atma "x" simgesini tıklatın. Her SKU ailesi için istenen kotayı girdikten sonra tıklayın **Kaydet ve devam et** ile destek isteği oluşturma devam etmek için kota Ayrıntılar paneli üzerinde.
+9. Abonelikte istediğiniz yeni limitleri girin. Bir satırı kaldırmak için, SKU ailesi açılan menüsünden SKU 'nun işaretini kaldırın veya atma "x" simgesine tıklayın. Her SKU ailesi için istenen kotayı girdikten sonra, destek isteği oluşturmaya devam etmek için kota ayrıntıları panelinde **Kaydet ve devam et** ' e tıklayın.
 
-![Yeni sınırlar](./media/resource-manager-core-quotas-request/new-limits.png)
+   ![Yeni sınırlar](./media/resource-manager-core-quotas-request/new-limits.png)
 
 
-## <a name="request-per-vm-series-vcpu-quota-increase-at-subscription-level-using-usages--quota-blade"></a>İstek başına VM serisi vCPU kota artışı kullanarak abonelik düzeyinde **kullanımları + kota** dikey penceresi
+## <a name="request-per-vm-series-vcpu-quota-increase-at-subscription-level-using-usages--quota-blade"></a>**Kullanımlar + kota** dikey penceresini kullanarak abonelik düzeyindeki sanal makine serisi vCPU kotası artışına göre istek
 
-Azure'nın 'kullanımı + kota' aracılığıyla bir destek isteği oluşturmak için aşağıdaki yönergeleri izleyin dikey penceresinde Azure portalında kullanılabilir. 
+Azure 'un ' kullanım + kota ' dikey penceresi aracılığıyla Azure portal kullanılabilir bir destek isteği oluşturmak için aşağıdaki yönergeleri izleyin. 
 
-1. Gelen https://portal.azure.com seçin **abonelikleri**.
+1. @No__t-0 ' dan **abonelikler**' i seçin.
 
-![Subscriptions](./media/resource-manager-core-quotas-request/subscriptions.png)
+   ![Abonelikler](./media/resource-manager-core-quotas-request/subscriptions.png)
 
-2. Kotasını artırmanız gereken aboneliği seçin.
+2. Daha fazla kotanın olması gereken aboneliği seçin.
 
-![Abonelik seçme](./media/resource-manager-core-quotas-request/select-subscription.png)
+   ![Abonelik seçin](./media/resource-manager-core-quotas-request/select-subscription.png)
 
-3. Seçin **kullanım ve kotalar**
+3. **Kullanım + kotalar** ' ı seçin
 
-![Kullanım ve kotalar seçin](./media/resource-manager-core-quotas-request/select-usage-quotas.png)
+   ![Kullanım ve kotaları seçin](./media/resource-manager-core-quotas-request/select-usage-quotas.png)
 
-4. Sağ üst köşedeki seçin **istek artışı**.
+4. Sağ üst köşede **istek artışı**' nı seçin.
 
-![İstek artışı](./media/resource-manager-core-quotas-request/request-increase.png)
+   ![İstek artışı](./media/resource-manager-core-quotas-request/request-increase.png)
 
-5. Seçin **işlem VM (çekirdek Vcpu) abonelik sınırını artırır** Teklif türü. 
+5. **İşlem-VM (çekirdek-vCPU) abonelik sınırı** ' nı seçin, teklif türü olarak artar. 
 
-![Formu doldurun](./media/resource-manager-core-quotas-request/forms.png)
+   ![Formu doldur](./media/resource-manager-core-quotas-request/select-quota-type.png)
    
-6. İçinde **kota ayrıntıları** paneline dağıtım modeli seçin ve bir konum seçin.
+6. **Kota ayrıntıları** panelinde, dağıtım modeli ' ni seçin ve bir konum seçin.
 
-![Kota sorun dikey penceresi](./media/resource-manager-core-quotas-request/problemstep.png)
+   ![Kota sorunu dikey penceresi](./media/resource-manager-core-quotas-request/quota-details.png)
 
-7. Seçin **SKU aileleri** artışı gerektirir.
+7. Artış gerektiren **SKU aileleri** seçin.
 
-![SKU serileri](./media/resource-manager-core-quotas-request/sku-family.png)
+   ![SKU serisi seçildi](./media/resource-manager-core-quotas-request/sku-family.png)
 
-8. İstediğiniz yeni sınırları, abonelik üzerinde girin. Bir satırı kaldırmak için SKU ailesi açılır listeden SKU'seçeneğinin işaretini kaldırın veya atma "x" simgesini tıklatın. Her SKU ailesi için istenen kotayı girdikten sonra tıklayın **Kaydet ve devam et** ile destek isteği oluşturma devam etmek için sorun adım sayfasında.
+8. Abonelikte istediğiniz yeni limitleri girin. Bir satırı kaldırmak için, SKU ailesi açılan menüsünden SKU 'nun işaretini kaldırın veya atma "x" simgesine tıklayın. Her SKU ailesi için istenen kotayı girdikten sonra, destek isteği oluşturmaya devam etmek için sorun adımı sayfasında Kaydet ' e tıklayın **ve devam edin** .
 
-![SKU yeni kota isteği](./media/resource-manager-core-quotas-request/new-limits.png)
-
+   ![SKU yeni kota isteği](./media/resource-manager-core-quotas-request/new-limits.png)
+ 

@@ -1,8 +1,8 @@
 ---
-title: Azure SQL Veri Ambarı'na Bağlanma | Microsoft Belgeleri
-description: Azure SQL veri ambarı'na bağlanın.
+title: Azure SQL Data Warehouse’a bağlanma
+description: Azure SQL veri ambarı 'na bağlanın.
 services: sql-data-warehouse
-author: XiaoyuL-Preview
+author: XiaoyuMSFT
 manager: craigg
 ms.service: sql-data-warehouse
 ms.topic: conceptual
@@ -10,20 +10,21 @@ ms.subservice: development
 ms.date: 04/17/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.openlocfilehash: 2c937285b9c54072c6d1e1b0628c3d5fbfe786f3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 5a14b99753c9f06f2e0cf32dd8b5c7776cfdad89
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65873659"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685883"
 ---
 # <a name="connect-to-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse’a bağlanma
-Azure SQL veri ambarı'na bağlanın.
+Azure SQL veri ambarı 'na bağlanın.
 
 ## <a name="find-your-server-name"></a>Sunucu adınızı bulma
-Aşağıdaki örnekte sunucu adı samplesvr.database.windows.net şeklindedir. Tam sunucu adını bulmak için:
+Aşağıdaki örnekteki sunucu adı samplesvr.database.windows.net ' dir. Tam sunucu adını bulmak için:
 
-1. [Azure Portalı][Azure portal]’na gidin.
+1. [Azure Portal][Azure portal] gidin.
 2. **SQL veri ambarları**’na tıklayın.
 3. Bağlanmak istediğiniz veri ambarına tıklayın.
 4. Tam sunucu adını bulun.
@@ -31,7 +32,7 @@ Aşağıdaki örnekte sunucu adı samplesvr.database.windows.net şeklindedir. T
     ![Tam sunucu adı][1]
 
 ## <a name="supported-drivers-and-connection-strings"></a>Desteklenen sürücüler ve bağlantı dizeleri
-Azure SQL Veri Ambarı; [ADO.NET][ADO.NET], [ODBC][ODBC], [PHP][PHP] ve [JDBC][JDBC]’yi destekler. En son sürümü ve belgeleri bulmak için yukarıdaki sürücülerden birine tıklayın. Otomatik olarak kullandığınız sürücünün bağlantı dizesini Azure portalından oluşturmak için tıklayın **veritabanı bağlantı dizelerini Göster** önceki örnekten. Aşağıda ayrıca her sürücü için bir bağlantı dizesinin nasıl göründüğü ile ilgili bazı örnekler verilmiştir.
+Azure SQL Veri Ambarı [ADO.NET][ADO.NET], [ODBC][ODBC], [PHP][PHP] ve [JDBC][JDBC]’yi destekler. En son sürümü ve belgeleri bulmak için, önceki sürücülerden birine tıklayın. Azure portal kullandığınız sürücü için bağlantı dizesini otomatik olarak oluşturmak için, önceki örnekteki **veritabanı bağlantı dizelerini göster** ' e tıklayın. Aşağıda ayrıca her sürücü için bir bağlantı dizesinin nasıl göründüğü ile ilgili bazı örnekler verilmiştir.
 
 > [!NOTE]
 > Bağlantınızın kısa süreli kesintiler sırasında devam etmesi için bağlantı zaman aşımını 300 saniyeye ayarlayın.

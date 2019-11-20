@@ -1,31 +1,25 @@
 ---
-title: SKU serileri kullanılamıyor | Microsoft Docs
-description: Bazı SKU serileri bu bölge için seçili abonelik için kullanılamaz.
+title: SKU serisi kullanılamıyor | Microsoft Docs
+description: Bu bölge için seçili abonelik için bazı SKU serisi kullanılamıyor.
 services: Azure Supportability
-documentationcenter: ''
 author: stevendotwang
-manager: rajatk
-editor: ''
 ms.service: azure-supportability
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 11/09/2017
 ms.author: xingwan
-ms.openlocfilehash: a57899e36a6716a6fd59cb018119c225b7396c0d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e317ae1ad88cf162f1d55a06d19e7b3b0b88ce60
+ms.sourcegitcommit: 961468fa0cfe650dc1bec87e032e648486f67651
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60649132"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72249037"
 ---
 # <a name="region-or-sku-unavailable"></a>Bölge veya SKU kullanılamıyor
-Bu makalede bir Azure aboneliğinin bir bölge veya sanal makine SKU'suna erişimin olmaması sorunun nasıl çözüleceği açıklanır.
+Bu makalede, bir Azure aboneliği 'nin bir bölge veya VM SKU 'SU erişimi olmadığı sorununu çözme konusu açıklanır.
 
 ## <a name="symptoms"></a>Belirtiler
 
-### <a name="when-deploying-a-virtual-machine-you-receive-one-of-the-following-error-messages"></a>Bir sanal makineyi dağıtırken aşağıdaki hata iletilerinden birini alabilirsiniz:
+### <a name="when-deploying-a-virtual-machine-you-receive-one-of-the-following-error-messages"></a>Bir sanal makineyi dağıttığınızda, aşağıdaki hata iletilerinden birini alırsınız:
 ```
 Code: SkuNotAvailable
 Message: The requested size for resource '<resource>' is currently not available in location 
@@ -43,7 +37,7 @@ Code: NotAvailableForSubscription
 Message: This size is currently unavailable in this location for this subscription
 ```
 
-### <a name="when-purchasing-reserved-virtual-machine-instances-you-receive-one-of-the-following-error-messages"></a>Ayrılmış sanal makine örnekleri satın alırken aşağıdaki hata iletilerinden birini alabilirsiniz:
+### <a name="when-purchasing-reserved-virtual-machine-instances-you-receive-one-of-the-following-error-messages"></a>Ayrılmış sanal makine örnekleri satın alırken, aşağıdaki hata iletilerinden birini alırsınız:
 
 ```
 Message: Your subscription doesn’t support virtual machine reservation in <location>. Choose a 
@@ -54,31 +48,31 @@ different location. Supported locations are: <list of locations>
 Message: This size is currently unavailable in this location for this subscription
 ```
 
-### <a name="when-creating-a-support-request-to-increase-compute-core-quota-a-region-or-a-sku-family-is-not-available-for-selection"></a>İşlem çekirdek kotasını artırmak için bir destek isteği oluştururken, bir bölge veya SKU ailesi seçimi için kullanılamaz.
+### <a name="when-creating-a-support-request-to-increase-compute-core-quota-a-region-or-a-sku-family-is-not-available-for-selection"></a>İşlem çekirdek kotasını artırmak için bir destek isteği oluştururken, bir bölge veya SKU ailesi seçim için kullanılamaz.
 
 ## <a name="solution"></a>Çözüm
-Öncelikle, bir alternatif bölgelere veya iş gereksinimlerinize uyan SKU ele almanızı öneririz. Uygun bir bölge veya SKU bulamıyor varsa "Abonelik yönetimi" oluşturun [destek isteği](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest) aşağıdaki adımları izleyin:
+Önce, iş gereksinimlerinizi karşılayan alternatif bir bölgeyi veya SKU 'YU düşünmeniz önerilir. Uygun bir bölge veya SKU bulamıyorsanız aşağıdaki adımları izleyerek bir "Abonelik Yönetimi" [destek isteği](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest) oluşturun:
 
 
-- Temel bilgileri sayfasında, sorun türü olarak "Abonelik yönetimi" seçin, aboneliği seçin ve "İleri" ye tıklayın.
+- Temel bilgiler sayfasında, sorun türü ' nü "Abonelik Yönetimi" olarak seçin, aboneliği seçin ve "Ileri" ye tıklayın.
 
-![Temel Bilgiler dikey penceresi](./media/SKU-series-unavailable/BasicsSubMgmt.png)
+![Temel bilgiler dikey penceresi](./media/SKU-series-unavailable/BasicsSubMgmt.png)
 
 
--   Sorun sayfasında "diğer genel sorular" sorun türü seçin.
+-   Sorun sayfasında, sorun türünü "diğer genel sorular" olarak seçin.
 - Ayrıntılar bölümünde:
-  - Sanal makineleri dağıtma veya ayrılmış sanal makine örnekleri satın arıyorsanız Lütfen belirtin
-  - Lütfen bölge, SKU ve dağıtmayı veya satın planlama sanal makine örneği sayısını belirtin
+  - Lütfen sanal makineler dağıtmayı veya ayrılmış sanal makine örneklerini satın almayı düşünüyorsanız belirtin
+  - Lütfen dağıtmayı veya satın almayı planladığınız sanal makine örneklerinin bölge, SKU 'SU ve sayısını belirtin
 
 
-![Sorun](./media/SKU-series-unavailable/ProblemSubMgmt.png)
+![Gidermek](./media/SKU-series-unavailable/ProblemSubMgmt.png)
 
--   İletişim bilgilerinizi girin ve "Oluştur" a tıklayın.
+-   İletişim ayrıntılarınızı girin ve "Oluştur" a tıklayın.
 
-![İletişim Bilgileri](./media/SKU-series-unavailable/ContactInformation.png)
+![İletişim bilgileri](./media/SKU-series-unavailable/ContactInformation.png)
 
-## <a name="feedback"></a>Geri Bildirim
-Her zaman geri bildirim ve öneriler için açık duyuyoruz! Bize gönderin, [önerileri](https://feedback.azure.com/forums/266794-support-feedback). Ayrıca, üzerinden bize ile görüşebilirsiniz [Twitter](https://twitter.com/azuresupport) veya [MSDN Forumları](https://social.msdn.microsoft.com/Forums/azure).
+## <a name="feedback"></a>Geri bildirim
+Geri bildirim ve önerilere her zaman açıktır! [Önerilerinizi](https://feedback.azure.com/forums/266794-support-feedback)bize gönderin. Ayrıca, [Twitter](https://twitter.com/azuresupport) veya [MSDN forumları](https://social.msdn.microsoft.com/Forums/azure)aracılığıyla bizimle iletişim sağlayabilirsiniz.
 
 ## <a name="learn-more"></a>Daha fazla bilgi edinin
 [Azure desteği SSS](https://azure.microsoft.com/support/faq)

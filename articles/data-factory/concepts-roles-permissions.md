@@ -1,6 +1,6 @@
 ---
-title: Rolleri ve izinleri için Azure Data Factory | Microsoft Docs
-description: Veri fabrikaları oluşturmak ve alt kaynak ile çalışmak için gerekli izinleri ve rolleri açıklanır.
+title: Azure Data Factory roller ve izinler
+description: Veri fabrikaları oluşturmak ve alt kaynaklarla çalışmak için gereken rolleri ve izinleri açıklar.
 ms.date: 11/5/2018
 ms.topic: conceptual
 ms.service: data-factory
@@ -8,21 +8,21 @@ services: data-factory
 documentationcenter: ''
 ms.workload: data-services
 ms.tgt_pltfrm: na
-author: gauravmalhot
-ms.author: gamal
+author: djpmsft
+ms.author: daperlov
 manager: craigg
-ms.openlocfilehash: 19666eb668dd120c1705c6a62a8ba1abd2321026
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f5b4cbc670a429a84f42be79adb00057656a5483
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61261861"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73681419"
 ---
-# <a name="roles-and-permissions-for-azure-data-factory"></a>Rolleri ve izinleri için Azure Data Factory
+# <a name="roles-and-permissions-for-azure-data-factory"></a>Azure Data Factory roller ve izinler
 
-Bu makalede, Azure Data Factory kaynaklarını oluşturmak ve yönetmek için gereken rolleri ve bu rolleri tarafından verilen izinleri açıklar.
+Bu makalede, Azure Data Factory kaynaklarını oluşturmak ve yönetmek için gereken roller ve bu roller tarafından verilen izinler açıklanmaktadır.
 
-## <a name="roles-and-requirements"></a>Rolleri ve gereksinimleri
+## <a name="roles-and-requirements"></a>Roller ve gereksinimler
 
 Data Factory örnekleri oluşturmak için, Azure’da oturum açarken kullandığınız kullanıcı hesabı, *katkıda bulunan*, *sahip* veya *yönetici* rollerinin üyesi ya da bir Azure aboneliğinin yöneticisi olmalıdır. Abonelikte sahip olduğunuz izinleri görüntülemek için Azure portalına gidin, sağ üst köşeden kullanıcı adınızı ve sonra **İzinler**’i seçin. Birden çok aboneliğe erişiminiz varsa uygun aboneliği seçin. 
 
@@ -32,60 +32,64 @@ Data Factory için veri kümeleri, bağlı hizmetler, işlem hatları, tetikleyi
 
 Kullanıcı rolü eklemeye ilişkin örnek yönergeler için [Rol ekleme](../billing/billing-add-change-azure-subscription-administrator.md) makalesine bakın.
 
-## <a name="set-up-permissions"></a>İzinleri ayarlama
+## <a name="set-up-permissions"></a>İzinleri ayarla
 
-Bir veri fabrikasını oluşturduktan sonra data factory ile çalışmak için diğer kullanıcılara bildirmek isteyebilirsiniz. Diğer kullanıcılara erişim vermek için yerleşik olarak eklemek zorunda **Data Factory Katılımcısı** data factory içeren kaynak grubunu rolü.
+Data Factory oluşturduktan sonra, diğer kullanıcıların Data Factory ile çalışmasına izin vermek isteyebilirsiniz. Bu erişimi diğer kullanıcılara vermek için, bunları veri fabrikasını içeren kaynak grubundaki yerleşik **Data Factory katkıda** bulunan rolüne eklemeniz gerekir.
 
-### <a name="scope-of-the-data-factory-contributor-role"></a>Data Factory Katılımcısı rol kapsamı
+### <a name="scope-of-the-data-factory-contributor-role"></a>Data Factory katkıda bulunan rolünün kapsamı
 
-Üyelik **Data Factory Katılımcısı** rol kullanıcıların yapmalarına şunları sağlar:
-- Oluşturma, düzenleme ve veri fabrikaları ve veri kümeleri, bağlı hizmetler, işlem hatlarını, tetikleyiciler ve tümleştirme çalışma zamanları dahil olmak üzere alt kaynakları silin.
-- Resource Manager şablonları dağıtın. Resource Manager dağıtımı, Azure portalında veri fabrikası tarafından kullanılan dağıtım yöntemidir.
-- Veri Fabrikası için App Insights uyarıları yönetin.
+**Data Factory katkıda** bulunan rolündeki üyelik, kullanıcıların aşağıdaki işlemleri yapmanızı sağlar:
+- Veri kümeleri, bağlı hizmetler, işlem hatları, Tetikleyiciler ve tümleştirme çalışma zamanları dahil olmak üzere veri fabrikaları ve alt kaynaklar oluşturun, düzenleyin ve silin.
+- Kaynak Yöneticisi şablonları dağıtın. Kaynak Yöneticisi dağıtım, Azure portal Data Factory tarafından kullanılan dağıtım yöntemidir.
+- Bir veri fabrikası için App Insights uyarılarını yönetin.
 - Destek bileti oluşturun.
 
-Bu rol hakkında daha fazla bilgi için bkz. [Data Factory Katılımcısı rolü](../role-based-access-control/built-in-roles.md#data-factory-contributor).
+Bu rol hakkında daha fazla bilgi için bkz. [Data Factory katkıda bulunan rolü](../role-based-access-control/built-in-roles.md#data-factory-contributor).
 
-### <a name="resource-manager-template-deployment"></a>Resource Manager şablon dağıtımı
+### <a name="resource-manager-template-deployment"></a>Kaynak Yöneticisi şablonu dağıtımı
 
-**Data Factory Katılımcısı** rol, kaynak grubu düzeyinde veya bu düzeyin üstünde, Resource Manager şablonlarını dağıtma kullanıcılar olanak tanır. Sonuç olarak, rolünün üyeleri, hem veri fabrikaları ve veri kümeleri, bağlı hizmetler, işlem hatlarını, tetikleyiciler ve tümleştirme çalışma zamanları dahil olmak üzere, kendi alt kaynakları dağıtmak için Resource Manager şablonlarını kullanabilirsiniz. Bu rolün üyeliğini diğer kaynaklar, ancak oluşturmalarına izin vermez.
+Kaynak grubu düzeyinde veya yukarıdaki **Data Factory katkıda** bulunan rolü, kullanıcıların Kaynak Yöneticisi şablonları dağıtmasını sağlar. Sonuç olarak, rol üyeleri veri kümeleri, bağlı hizmetler, işlem hatları, Tetikleyiciler ve tümleştirme çalışma zamanları dahil olmak üzere hem veri fabrikalarını hem de alt kaynaklarını dağıtmak için Kaynak Yöneticisi şablonları kullanabilir. Bu roldeki üyelik, kullanıcının diğer kaynakları oluşturmalarına izin vermez.
 
-Data Factory izinleri Azure depoları ve GitHub üzerindeki izinleri bağımsızdır. Sonuç olarak, yalnızca okuyucu rolünün bir üyesi olan bir kullanıcı deposu izinlerle Data Factory alt kaynakları düzenleyebilir ve işleme depoya değiştirir, ancak bu değişiklikler yayımlanamaz.
+Azure Repos ve GitHub üzerindeki izinler Data Factory izinlerinden bağımsızdır. Sonuç olarak, yalnızca okuyucu rolünün bir üyesi olan depo izinlerine sahip bir Kullanıcı, Data Factory alt kaynakları düzenleyebilir ve değişiklikleri depoya kaydedebilir, ancak bu değişiklikleri yayımlayamaz.
 
 > [!IMPORTANT]
-> Resource Manager şablon dağıtımı ile **Data Factory Katılımcısı** rol izinlerinizi yükseltmesine değil. Örneğin, bir Azure sanal makine oluşturan bir şablonu dağıtmak ve sanal makineler oluşturmak için izniniz yoksa, dağıtım bir Yetkilendirme hatası ile başarısız olur.
+> **Data Factory katkıda** bulunan rolüyle şablon dağıtımı kaynak yöneticisi, izinlerinizi yükselmez. Örneğin, bir Azure sanal makinesi oluşturan bir şablon dağıtırsanız ve sanal makine oluşturma izniniz yoksa, dağıtım bir yetkilendirme hatasıyla başarısız olur.
 
-### <a name="custom-scenarios-and-custom-roles"></a>Özel senaryoları ve özel roller
+### <a name="custom-scenarios-and-custom-roles"></a>Özel senaryolar ve özel roller
 
-Bazı durumlarda farklı bir veri fabrikası kullanıcılar için farklı erişim düzeyleri vermeniz gerekebilir. Örneğin:
-- Kullanıcılar yalnızca izinlerine belirli data factory'ye sahip olduğu bir grubun gerekebilir.
-- Veya bir grup olduğu kullanıcılar yalnızca veri fabrikası (veya fabrikaları) izleyebilir ancak değiştiremez gerekebilir.
+Bazen farklı veri fabrikası kullanıcıları için farklı erişim düzeyleri vermeniz gerekebilir. Örneğin:
+- Kullanıcıların yalnızca belirli bir veri fabrikası üzerinde izinlere sahip olduğu bir gruba ihtiyacınız olabilir.
+- Veya kullanıcıların yalnızca bir veri fabrikasını (veya fabrikaları) izleyebileceği ancak değiştiremeyeceğiniz bir gruba ihtiyacınız olabilir.
 
-Özel roller oluşturma ve bu rollere kullanıcılar atayarak bu özel senaryoları elde edebilirsiniz. Özel roller hakkında daha fazla bilgi için bkz. [azure'da özel roller](..//role-based-access-control/custom-roles.md).
+Özel roller oluşturup bu rollere Kullanıcı atayarak bu özel senaryolar elde edebilirsiniz. Özel roller hakkında daha fazla bilgi için bkz. [Azure 'Da özel roller](..//role-based-access-control/custom-roles.md).
 
-Özel rollerle elde edebileceğiniz gösteren bazı örnekler şunlardır:
+Özel rollerle neler sağlayabileceğinizi gösteren birkaç örnek aşağıda verilmiştir:
 
-- Bir kullanıcı oluşturmak, düzenlemek veya herhangi bir kaynak grubu data factory'de Azure portalından silme olanak tanır.
+- Bir kullanıcının, bir kaynak grubundaki herhangi bir veri fabrikasını Azure portal oluşturmasına, düzenlemesine veya silmesine izin verin.
 
-  Yerleşik atama **Data Factory Katılımcısı** kullanıcı için kaynak grubu düzeyinde rolü. Bir Abonelikteki herhangi bir veri fabrikası erişmesine izin vermek istiyorsanız, abonelik düzeyinde rolü atayın.
+  Yerleşik **Data Factory katkıda** bulunan rolünü Kullanıcı için kaynak grubu düzeyinde atayın. Bir abonelikteki herhangi bir veri fabrikasına erişime izin vermek istiyorsanız, rolü abonelik düzeyinde atayın.
 
-- Bir kullanıcı görünümü (okuma) sağlar ve veri fabrikası, izleme ancak düzenleyemez ya da değiştirin.
+- Bir kullanıcının bir veri fabrikasını görüntülemesine (okumasına) ve izlemesine izin verin, ancak düzenleyemez veya değiştirmeyin.
 
-  Yerleşik atama **okuyucu** kullanıcı için veri fabrikası kaynağında rol.
+  Kullanıcı için veri fabrikası kaynağında yerleşik **okuyucu** rolünü atayın.
 
-- Azure portalında tek bir veri fabrikası düzenleme kullanıcı sağlar.
+- Kullanıcının Azure portal tek bir veri fabrikasını düzenlemesine izin verin.
 
-  Bu senaryo, iki rol atamalarını gerektirir.
+  Bu senaryo için iki rol ataması gerekir.
 
-  1. Yerleşik atama **katkıda bulunan** data factory düzeyde rolü.
-  2. Özel rol oluşturma izni olan **Microsoft.Resources/deployments/** . Kaynak grubu düzeyinde kullanıcı bu özel bir rol atayın.
+  1. Yerleşik **katkıda** bulunan rolünü Veri Fabrikası düzeyinde atayın.
+  2. **Microsoft. resources/dağıtımlar/** izniyle özel bir rol oluşturun. Bu özel rolü, kaynak grubu düzeyinde kullanıcıya atayın.
 
-- Bir kullanıcı ya da Powershell'den SDK'sı, ancak Azure Portalı'nda bir veri fabrikası güncelleştirmesi olanak tanır.
+- Kullanıcının yalnızca bağlı bir hizmette bağlantıyı test edebilmesini sağlar
 
-  Yerleşik atama **katkıda bulunan** kullanıcı için veri fabrikası kaynağında rol. Bu rol, Azure portalında kaynakları görmek kullanıcı izin verir, ancak kullanıcı erişemez **Yayımla** ve **tümünü Yayımla** düğmeleri.
+    Şu eylemler için izinlerle özel bir rol rolü oluşturun: **Microsoft. DataFactory/Factory/getFeatureValue/Read** ve **Microsoft. DataFactory/Factory/getDataPlaneAccess/Read**. Bu özel rolü kullanıcı için Data Factory kaynağına atayın.
+
+- Bir kullanıcının PowerShell veya SDK 'dan bir veri fabrikasını güncelleştirmesine izin verin, ancak Azure portal.
+
+  Kullanıcı için veri fabrikası kaynağında yerleşik **katkıda** bulunan rolünü atayın. Bu rol, kullanıcının Azure portal kaynakları görmesini sağlar, ancak kullanıcı **Yayımla** ve **Tümünü Yayımla** düğmelerine erişemez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure - roller hakkında daha fazla bilgi [rol tanımları anlama](../role-based-access-control/role-definitions.md)
+- Azure 'da roller hakkında daha fazla bilgi edinin- [rol tanımlarını anlayın](../role-based-access-control/role-definitions.md)
 
-- Daha fazla bilgi edinin **Data Factory Katılımcısı** rol - [Data Factory Katılımcısı rolü](../role-based-access-control/built-in-roles.md#data-factory-contributor).
+- **Data Factory katkıda** bulunan rol [Data Factory katkıda bulunan rolü](../role-based-access-control/built-in-roles.md#data-factory-contributor)hakkında daha fazla bilgi edinin.

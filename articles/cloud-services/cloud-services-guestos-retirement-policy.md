@@ -1,6 +1,6 @@
 ---
-title: Azure konuk işletim sistemi için desteklenebilirlik ve kullanımdan kaldırma İlkesi Kılavuzu | Microsoft Docs
-description: Hangi Microsoft olarak yönlendirilmesinin Azure konuk işletim sistemi bulut Hizmetleri tarafından kullanılan destekleyecek hakkında bilgi sağlar.
+title: Azure Konuk işletim sistemi için desteklenebilirlik ve emeklilik ilkesi Kılavuzu | Microsoft Docs
+description: Microsoft 'un Cloud Services tarafından kullanılan Azure Konuk işletim sistemi ile ilgili olarak desteklediği bilgiler hakkında bilgi sağlar.
 services: cloud-services
 documentationcenter: na
 author: raiye
@@ -8,75 +8,74 @@ manager: timlt
 editor: ''
 ms.assetid: 919dd781-4dc6-4e50-bda8-9632966c5458
 ms.service: cloud-services
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: tbd
 ms.date: 9/20/2017
 ms.author: raiye
-ms.openlocfilehash: ce66d44c0ddb84ed8c2908d02b8062195d6b461d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fbe9b3379799fe3cf0a56d921ab257bc87606ca9
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61215848"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68945443"
 ---
-# <a name="azure-guest-os-supportability-and-retirement-policy"></a>Azure konuk işletim sistemi desteklenebilirliği ve kullanımdan kaldırma İlkesi
-Azure konuk işletim sistemi için bu sayfadaki bilgileri ilgili ([konuk işletim sistemi](cloud-services-guestos-update-matrix.md)) bulut Hizmetleri worker ve web rolleri (PaaS). Sanal makineler (Iaas) için geçerli değildir.
+# <a name="azure-guest-os-supportability-and-retirement-policy"></a>Azure Konuk işletim sistemi desteklenebilirlik ve emeklilik ilkesi
+Bu sayfadaki bilgiler, Cloud Services worker ve Web rolleri (PaaS) için Azure Konuk işletim sistemi ([konuk OS](cloud-services-guestos-update-matrix.md)) ile ilgilidir. Sanal makineler (IaaS) için geçerlidir.
 
-Microsoft olan bir yayımlanan [konuk işletim sistemi için destek ilkesi](https://support.microsoft.com/gp/azure-cloud-lifecycle-faq). Okuduğunuz sayfası artık ilke nasıl uygulandığını açıklar.
+Microsoft 'un [Konuk işletim sistemi için yayımlanmış bir destek ilkesi](https://support.microsoft.com/gp/azure-cloud-lifecycle-faq)vardır. Okuduğunuz sayfa, ilkenin nasıl uygulandığını anlatmaktadır.
 
 İlke
 
-1. Microsoft destekleyeceği **en az iki en son konuk işletim sistemi aileleri**. Bir aile devre dışı bırakıldığında, müşterilerin daha yeni bir desteklenen konuk işletim sistemi ailesi güncelleştirmek için resmi o tarihten itibaren 12 ay süreyle var.
-2. Microsoft destekleyeceği **en az iki en son sürümü desteklenen konuk işletim sistemi aileleri**.
-3. Microsoft destekleyeceği **en az iki sürümü en son Azure SDK'sı**. SDK sürümü devre dışı bırakıldığında, müşterilerinin daha yeni bir sürüme güncelleştirmek için resmi o tarihten itibaren 12 ay süreyle olacaktır.
+1. Microsoft, **Konuk işletim sisteminin en az iki ailesinden birini**destekleyecektir. Bir aile devre dışı bırakıldığında, müşterilerin resmi kullanımdan kaldırma tarihinden itibaren daha yeni desteklenen bir konuk işletim sistemi ailesine güncelleştirilmesi için 12 ay daha vardır.
+2. Microsoft, **Desteklenen Konuk işletim sistemi ailelerinin en az iki sürümünü**destekleyecektir.
+3. Microsoft, **en azından Azure SDK 'nın en son iki sürümünü**destekleyecektir. SDK 'nın bir sürümü kullanımdan kaldırıldığında müşterilerin daha yeni bir sürüme güncelleştirilmesi için resmi kullanımdan kaldırma tarihinden itibaren 12 ay olur.
 
-Bazen, iki ailesi veya sürümler birden fazla desteklenebilir. Resmi konuk işletim sistemi destek bilgileri görüntülenecek [Azure konuk işletim sistemi sürümleri ve SDK uyumluluk matrisi](cloud-services-guestos-update-matrix.md).
+Her zaman iki aileden veya yayınların daha fazlası desteklenebilir. Resmi Konuk işletim sistemi destek bilgileri, [Azure Konuk işletim sistemi sürümleri ve SDK uyumluluk matrisi](cloud-services-guestos-update-matrix.md)'nde görünür.
 
-## <a name="when-a-guest-os-version-is-retired"></a>Bir konuk işletim sistemi sürümü ne zaman devre dışı bırakıldı
-Yeni konuk işletim sistemi **sürümleri** ayda hakkında en son MSRC güncelleştirmeler sunulmuştur. Normal aylık güncelleştirmeler nedeniyle bir konuk işletim sistemi sürümü genellikle yaklaşık 60 gün sonra sürüm devre dışı. Bu etkinlik, kullanılabilir her ürün ailesi için en az iki konuk işletim sistemi sürümleri tutar.
+## <a name="when-a-guest-os-version-is-retired"></a>Konuk işletim sistemi sürümü kullanımdan kaldırıldığında
+Yeni Konuk işletim sistemi **sürümleri** , en son MSRC güncelleştirmelerini birleştirmek için her ay hakkında tanıtılmıştır. Normal aylık güncelleştirmeler nedeniyle, Konuk işletim sistemi sürümü normalde, yayınlanmasından sonra 60 gün içinde devre dışı bırakılır. Bu etkinlik, her bir aile için en az iki konuk işletim sistemi sürümünün kullanılabilmesini önler.
 
-### <a name="process-during-a-guest-os-family-retirement"></a>İşlem sırasında bir konuk işletim sistemi ailesi kullanımdan kaldırma
-Müşterilerimizi duyurulan sonra müşterilerin eski ailesi resmi olarak hizmetinden kaldırılmadan önce "geçiş" 12 aylık dönem var. Bu geçiş süresi Microsoft kararımıza uzatılabilir. Güncelleştirmeleri denetleyecekse [Azure konuk işletim sistemi sürümleri ve SDK uyumluluk matrisi](cloud-services-guestos-update-matrix.md).
+### <a name="process-during-a-guest-os-family-retirement"></a>Konuk işletim sistemi ailesi kullanımdan kaldırılması sırasında işlem
+Emeklilik duyurulduktan sonra, müşterilerin eski aile hizmetten kaldırılmadan önce 12 aylık "geçiş" süresi vardır. Bu geçiş süresi, Microsoft 'un bir şekilde genişletilebilir. Güncelleştirmeler [Azure Konuk işletim sistemi sürümleri ve SDK uyumluluk matrisi](cloud-services-guestos-update-matrix.md)' ne gönderilir.
 
-Aşamalı olarak kullanımdan kaldırma işlemi, geçiş dönemi altı (6) ay başlar. Bu süre boyunca:
+Aşamalı bir kullanımdan kaldırma işlemi, geçiş dönemine altı (6) ay sonra başlayacaktır. Şu süre boyunca:
 
-1. Microsoft, müşterilerinin kullanımdan kaldırma bilgilendirir.
-2. Azure SDK'sının daha yeni sürümü devre dışı bırakılan konuk işletim sistemi ailesi desteklemeyeceği.
-3. Yeni dağıtımlar ve bulut hizmetlerinin yeniden dağıtım gerekmeksizin devre dışı bırakılan ailesinde izin verilmiyor
+1. Microsoft, emekliliğin müşterilerine bildirim gönderir.
+2. Azure SDK 'sının daha yeni sürümü kullanımdan kaldırılan Konuk işletim sistemi ailesini desteklemez.
+3. Kullanımdan kaldırılan ailede Cloud Services Yeni dağıtımlar ve yeniden dağıtımlarına izin verilmez
 
-Microsoft, yeni konuk işletim sistemi sürümü en son MSRC güncelleştirmeleri "sona erme tarihi" bilinen geçiş dönemin son günü kadar ekleme tanıtmak devam eder. Sona erme tarihini Cloud Services çalışan yine de Azure SLA altında desteklenmeyen. Microsoft, yükseltme, silmek veya bu tarihten sonra bu hizmetlerini durdurmak için takdirine bağlı olarak sahiptir.
+Microsoft, "sona erme tarihi" olarak bilinen geçiş döneminin son gününe kadar en son MSRC güncelleştirmelerini dahil eden yeni Konuk işletim sistemi sürümünü almaya devam edecektir. Sona erme tarihi, Azure SLA altında hala çalışmaya devam Cloud Services desteklenebilir. Microsoft bu tarihten sonra bu hizmetleri yükseltmeyi, silmeyi veya durdurmayı zorlamaya yönelik bir kararına sahiptir.
 
-### <a name="process-during-a-guest-os-version-retirement"></a>İşlem sırasında bir konuk işletim sistemi sürümü kullanımdan kaldırma
-Müşteriler otomatik olarak güncelleştirmek için konuk işletim sistemi ayarlarsanız, hiçbir zaman konuk işletim sistemi sürümleri ile ne yapılacağı hakkında endişelenmeye gerek sahiptirler. Bunlar her zaman en son konuk işletim sistemi sürümü kullanıyor olacaksınız.
+### <a name="process-during-a-guest-os-version-retirement"></a>Konuk işletim sistemi sürümü kullanımdan kaldırılması sırasında işlem
+Müşteriler Konuk işletim sistemini otomatik olarak güncelleştirecek şekilde ayarlarsanız, Konuk işletim sistemi sürümleriyle uğraşmak zorunda kalmaz. Her zaman en son Konuk işletim sistemi sürümünü kullanacaktır.
 
-Konuk işletim sistemi sürümleri, her ay kullanıma sunulur. Normal yayın oranı nedeniyle, her sürüm sabit bir kullanım ömrü vardır.
+Konuk işletim sistemi sürümleri her ay yayımlanır. Normal sürümlerin oranı nedeniyle, her sürümde sabit bir lifespan bulunur.
 
-Kullanım ömrü içinde 60 günde bir sürümüdür "*devre dışı*". "Devre dışı" sürüm Portalı'ndan kaldırılır anlamına gelir. Sürüm artık CSCFG yapılandırma dosyasında ayarlanabilir. Var olan dağıtımları, çalışan bırakılır. Ancak, yeni dağıtımlar ve varolan dağıtımları için kod ve yapılandırma güncelleştirmeleri değil izin verilir.
+Süre 60 gün içinde, bir sürüm "*devre dışı*". "Devre dışı", sürümün portaldan kaldırıldığı anlamına gelir. Sürüm artık CSCFG yapılandırma dosyasından ayarlanamaz. Mevcut dağıtımlar çalışıyor. Ancak, var olan dağıtımlara yönelik yeni dağıtımlar ve kod ve yapılandırma güncelleştirmelerine izin verilmez.
 
-"Devre dışı olma", süre sonra konuk işletim sistemi sürümü "expires" ve yine de bu süresi dolmuş sürümü çalıştıran tüm yüklemeleri için güvenlik ve güvenlik açığı sorunları sunulur. Genellikle, sona erme disablement dönemden sonu değişebilir şekilde toplu olarak gerçekleştirilir.
+"Devre dışı" olduktan sonra, Konuk işletim sistemi sürümü "süre sonu" ve bu sürümü hala çalıştıran Yüklemeler, güvenlik ve güvenlik açığı sorunlarına açıktır. Genellikle, süre sonu toplu olarak yapılır, bu nedenle, disablement 'ten süre sonuna kadar olan süre farklılık gösterebilir.
 
-Konuk işletim sistemi el ile güncelleştirmek için kendi hizmetlerini yapılandıran müşteriler olun hizmetlerini bir desteklenen konuk işletim sisteminde çalıştırıyorsanız. Bir hizmet, konuk işletim Sisteminin otomatik olarak güncelleştirmek için yapılandırılmışsa, temel platform uyumluluğu sağlayacak ve en son konuk işletim sistemi için yükseltir.
+Hizmetlerini Konuk işletim sistemini el ile güncelleştirmek üzere yapılandıran müşteriler, hizmetlerinin desteklenen bir konuk işletim sisteminde çalıştığından emin olmalıdır. Bir hizmet Konuk işletim sistemini otomatik olarak güncelleştirecek şekilde yapılandırıldıysa, temel alınan platform uyumluluğa sahip olur ve en son Konuk işletim sistemine yükseltilir.
 
-Bu nokta müşteri geçişi kolaylaştırmak için Microsoft'un kararımıza uzun yapılabilir. Üzerinde herhangi bir değişiklik duyurulacaktır [Azure konuk işletim sistemi sürümleri ve SDK uyumluluk matrisi](cloud-services-guestos-update-matrix.md).
+Bu dönemler, Microsoft 'un müşteri geçişlerini kolaylaştırmak için daha uzun bir süre yapılabilir. [Azure Konuk işletim sistemi sürümleri ve SDK Uyumluluk matrisinde](cloud-services-guestos-update-matrix.md)tüm değişiklikler gönderilir.
 
-### <a name="notifications-during-retirement"></a>Kullanımdan kaldırma sırasında bildirim
-* **Aile devre dışı bırakma** <br>Microsoft blog gönderileri ve portal bildirimi kullanır. Yine de devre dışı bırakılan bir konuk işletim sistemi ailesi kullanan müşteriler, atanan hizmet yöneticileri için doğrudan iletişim (e-posta, portal iletileri, telefon görüşmesi) aracılığıyla bildirilir. Tüm değişiklikler için yayımlanacak [Azure konuk işletim sistemi sürümleri ve SDK uyumluluk matrisi](cloud-services-guestos-update-matrix.md).
-* **Sürüm devre dışı bırakma** <br>Tüm değişikliklerin ve ortaya tarihler için yayımlanacak [Azure konuk işletim sistemi sürümleri ve SDK uyumluluk matrisi](cloud-services-guestos-update-matrix.md)sürüm, devre dışı bırakıldı ve süre sonu. Bunlar bir devre dışı konuk işletim sistemi sürümü veya ailesinde çalışan dağıtımlarınız varsa Hizmetleri Yöneticiler e-posta alırsınız. Bu e-postaları zamanlamasını farklılık gösterebilir. Genellikle bu zamanlama resmi SLA olmasa da en az bir ay önce disablement, benzerdir.
+### <a name="notifications-during-retirement"></a>Kullanımdan kaldırma sırasındaki bildirimler
+* **Aile kullanımdan kaldırma** <br>Microsoft, blog gönderilerini ve Portal bildirimini kullanır. Kullanımdan kaldırılan bir konuk işletim sistemi ailesini kullanmaya devam eden müşteriler, atanan hizmet yöneticilerine doğrudan iletişim (e-posta, Portal iletileri, telefon araması) aracılığıyla bildirilir. Tüm değişiklikler [Azure Konuk işletim sistemi sürümleri ve SDK uyumluluğu matrisine](cloud-services-guestos-update-matrix.md)gönderilir.
+* **Sürüm kullanımdan kaldırma** <br>Tüm değişiklikler ve yaptığınız tarihler, yayın, devre dışı ve sona erme dahil olmak üzere [Azure Konuk işletim sistemi sürümleri ve SDK uyumluluğu matrisine](cloud-services-guestos-update-matrix.md)gönderilir. Hizmet yöneticileri, devre dışı bırakılmış bir konuk işletim sistemi sürümünde veya ailesinde çalışan dağıtımlar varsa e-posta alır. Bu e-postaların zamanlaması farklılık gösterebilir. Genellikle bu zamanlama resmi bir SLA değil, disablement 'in en az bir ayda olur.
 
 ## <a name="frequently-asked-questions"></a>Sık sorulan sorular
-**Geçiş etkilerini azaltmak ne?**
+**Geçişin etkilerini nasıl azaltabilirim?**
 
-Cloud Services tasarlamaya yönelik en son konuk işletim sistemi ailesi kullanmanızı öneririz.
+Cloud Services tasarlamak için en son Konuk işletim sistemi ailesini kullanmanızı öneririz.
 
-1. Erken geçişinizi daha yeni bir ailesine planlamaya başlayın.
-2. Yeni ailesinde çalışan, bulut hizmeti test etmek için geçici test dağıtımları ayarlayın.
-3. Konuk işletim sistemi sürümünüzü ayarlamak **otomatik** (osVersion = * içinde [.cscfg](cloud-services-model-and-package.md#cscfg) dosyası) otomatik olarak yeni konuk işletim sistemi sürümleri için geçiş oluşmaz.
+1. Geçişinizi daha yeni bir aileden erken planlamaya başlayın.
+2. Yeni aile üzerinde çalışan bulut hizmetinizi test etmek için geçici test dağıtımları ayarlayın.
+3. Konuk işletim sistemi sürümünüzü **Otomatik** (osVersion = * [. cscfg](cloud-services-model-and-package.md#cscfg) dosyasında) olarak ayarlayın, böylece yeni Konuk işletim sistemi sürümlerine geçiş otomatik olarak gerçekleşir.
 
-**Ne web Uygulamam işletim sistemi ile daha derin tümleştirme gerektiriyor?**
+**Web uygulamamın işletim sistemi ile daha derin bir tümleştirme gerektirmesi durumunda ne olacak?**
 
-Web uygulama mimarinizin işletim sisteminin temel alınan özelliklere bağımlı, desteklenen platform özellikleri gibi kullanın [başlangıç görevleri](cloud-services-startup-tasks.md) veya diğer genişletilebilirlik mekanizması. Alternatif olarak, ayrıca kullanabileceğiniz [Azure sanal makineler](https://azure.microsoft.com/documentation/scenarios/virtual-machines/) (Iaas – hizmet olarak altyapı), temel alınan işletim sistemin bakımından sorumlu olduğu.
+Web uygulaması mimariniz işletim sisteminin temel özelliklerine bağımlıysa, [Başlangıç görevleri](cloud-services-startup-tasks.md) veya diğer genişletilebilirlik mekanizmaları gibi platform tarafından desteklenen özellikleri kullanın. Alternatif olarak, temel işletim sisteminin korunmasından sorumlu olduğunuz [Azure sanal makinelerini](https://azure.microsoft.com/documentation/scenarios/virtual-machines/) (hizmet olarak altyapı) de kullanabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-En son gözden [konuk işletim sistemi sürümlerinden](cloud-services-guestos-update-matrix.md).
+En son [Konuk işletim sistemi sürümlerini](cloud-services-guestos-update-matrix.md)gözden geçirin.

@@ -1,68 +1,75 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Privileged Identity Management belgeleri
+summary: Azure Active Directory (AD) Privileged Identity Management (PIM) sayesinde ayrıcalıklı rollere yönelik hazır yönetici erişimini sınırlandırabilir, erişebilecek kişileri keşfedebilir ve ayrıcalıklı erişimi gözden geçirebilirsiniz.
 metadata:
-  document_id: null
-  title: Azure AD Privileged Identity Management (PIM) belgeleri | Microsoft Docs
-  description: 'Ayrıcalıklı rollere yönelik hazır yönetici erişimini sınırlandırmak, erişebilecek kişileri keşfetmek ve ayrıcalıklı erişimi gözden geçirmek için Azure Active Directory (AD) Privileged Identity Management (PIM) hakkında bilgi edinin.'
+  title: Privileged Identity Management belgeleri
+  description: Ayrıcalıklı rollere yönelik hazır yönetici erişimini sınırlandırmak, erişebilecek kişileri keşfetmek ve ayrıcalıklı erişimi gözden geçirmek için Azure Active Directory (AD) Privileged Identity Management (PIM) hakkında bilgi edinin.
   services: active-directory
-  author: rolyon
-  manager: mtillman
   ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: pim
   ms.topic: landing-page
-  ms.date: 09/04/2018
-  ms.author: rolyon
-abstract:
-  description: 'Azure Active Directory (AD) Privileged Identity Management (PIM) sayesinde ayrıcalıklı rollere yönelik hazır yönetici erişimini sınırlandırabilir, erişebilecek kişileri keşfedebilir ve ayrıcalıklı erişimi gözden geçirebilirsiniz.'
-  aside:
-    image:
-      alt: null
-      height: 112
-      src: media/index/video-thumb-pim.png
-      width: 200
-    title: 'Krallığınızın anahtarlarını koruyun (42:45)'
-    href: 'https://www.youtube.com/embed/w7wTpZYJJeQ'
-    width: 200
-sections:
-  - title: Uygun ve etkin rol kullanıcılarına yönelik nasıl yapılır kılavuzları
-    items:
-      - type: table
-        style: dataMatrix
-        columns:
-          - image:
-              src: media/index/Azure Active Directory_COLOR.svg
-            title: Azure AD rolleri
-          - image:
-              src: media/index/Cubes.svg
-            title: Azure kaynakları
-        rows:
-          - title: Rollerimi etkinleştir
-            values:
-              - href: /azure/active-directory/privileged-identity-management/pim-how-to-activate-role
-              - href: /azure/active-directory/privileged-identity-management/pim-resource-roles-activate-your-roles
-  - title: Yöneticiler için nasıl yapılır kılavuzları
-    items:
-      - type: table
-        style: dataMatrix
-        columns:
-          - image:
-              src: media/index/Azure Active Directory_COLOR.svg
-            title: Azure AD rolleri
-          - image:
-              src: media/index/Cubes.svg
-            title: Azure kaynakları
-        rows:
-          - title: Rol atama
-            values:
-              - href: /azure/active-directory/privileged-identity-management/pim-how-to-add-role-to-user
-              - href: /azure/active-directory/privileged-identity-management/pim-resource-roles-assign-roles
-          - title: İstekleri onaylama
-            values:
-              - href: /azure/active-directory/privileged-identity-management/azure-ad-pim-approval-workflow
-              - href: /azure/active-directory/privileged-identity-management/pim-resource-roles-approval-workflow
-          - title: Rol ayarlarını yapılandırma
-            values:
-              - href: /azure/active-directory/privileged-identity-management/pim-how-to-change-default-settings
-              - href: /azure/active-directory/privileged-identity-management/pim-resource-roles-configure-role-settings
+  ms.collection: 
+  author: curtand
+  ms.author: curtand
+  ms.date: 08/28/2019
+  ms.openlocfilehash: 80b562ff3f5fba7c57253e3761802dd3379b017b
+  ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/17/2019
+  ms.locfileid: "72554323"
+landingContent:
+- title: Privileged Identity Management hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure AD Privileged Identity Management nedir?
+      url: pim-configure.md
+  - linkListType: concept
+    links:
+    - text: Lisans gereksinimleri
+      url: subscription-requirements.md
+  - linkListType: video
+    links:
+    - text: Ortamınızın anahtarlarını koruma
+      url: https://www.youtube.com/embed/w7wTpZYJJeQ
+- title: Başlarken
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Privileged Identity Management'ı dağıtma
+      url: pim-deployment-plan.md
+    - text: Privileged Identity Management'ı kullanmaya başlama
+      url: pim-getting-started.md
+- title: Rollerimi etkinleştirme (uygun ve etkin rol kullanıcıları)
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD rollerimi etkinleştirme
+      url: pim-how-to-activate-role.md
+    - text: Azure kaynağı rollerimi etkinleştirme
+      url: pim-resource-roles-activate-your-roles.md
+- title: Rol atama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD rollerini atama
+      url: pim-how-to-add-role-to-user.md
+    - text: Azure kaynağı rollerini atama
+      url: pim-resource-roles-assign-roles.md
+- title: İstekleri onaylama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD rolleri için istekleri onaylama
+      url: azure-ad-pim-approval-workflow.md
+    - text: Azure kaynak rolleri için istekleri onaylama
+      url: pim-resource-roles-approval-workflow.md
+- title: Rol ayarlarını yapılandırma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD rol ayarlarını yapılandırma
+      url: pim-how-to-change-default-settings.md
+    - text: Azure kaynağı rol ayarlarını yapılandırma
+      url: pim-resource-roles-configure-role-settings.md

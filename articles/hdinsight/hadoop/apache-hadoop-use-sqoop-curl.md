@@ -1,44 +1,44 @@
 ---
-title: Azure HDInsight, Apache Sqoop ile verileri dışarı aktarmak için Curl kullanın.
-description: Curl kullanarak HDInsight için Apache Sqoop'u işleri uzaktan göndermek öğrenin.
+title: Azure HDInsight 'ta Apache Sqoop ile verileri dışarı aktarmak için kıvrımlı kullanma
+description: Kıvrımlı kullanarak Apache Sqoop işlerini Azure HDInsight 'a uzaktan göndermeyi öğrenin.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 04/15/2019
-ms.openlocfilehash: ede0538e90e9f35797546f34bfed757c2727b194
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: f70c0a0b68e24e3d61a6c0cef238d1f60911e271
+ms.sourcegitcommit: fa4852cca8644b14ce935674861363613cf4bfdf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508882"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70810720"
 ---
-# <a name="run-apache-sqoop-jobs-in-hdinsight-with-curl"></a>Curl ile HDInsight, Apache Sqoop işleri çalıştırma
+# <a name="run-apache-sqoop-jobs-in-hdinsight-with-curl"></a>HDInsight 'ta kıvrımlı ile Apache Sqoop işleri çalıştırma
 [!INCLUDE [sqoop-selector](../../../includes/hdinsight-selector-use-sqoop.md)]
 
-Bir Apache Hadoop kümesi HDInsight üzerinde Apache Sqoop işlerini çalıştırmak için Curl kullanmayı öğrenin. Bu makalede, Azure depolama alanından verileri dışarı aktarma ve Curl kullanarak bir SQL Server veritabanına aktarmak nasıl gösterir. Bu makalede devamı niteliğindedir [HDInsight, Hadoop ile Apache Sqoop'u kullanma](./hdinsight-use-sqoop.md).
+HDInsight 'ta Apache Hadoop kümesinde Apache Sqoop işleri çalıştırmak için kıvrımlı kullanmayı öğrenin. Bu makalede, Azure depolama 'dan verileri dışarı aktarma ve kıvrımlı kullanarak bir SQL Server veritabanına aktarma işlemlerinin nasıl yapılacağı gösterilir. Bu makalede, [HDInsight 'Ta Hadoop Ile Apache Sqoop kullanma](./hdinsight-use-sqoop.md)işlemi devam ediyor.
 
-Curl, çalıştırma, izleme ve Sqoop iş sonuçlarını almak üzere ham HTTP isteklerini kullanarak HDInsight ile nasıl etkileşim kurabileceğine göstermek için kullanılır. Bu, WebHCat REST (eski adıyla templeton da bilinir) HDInsight kümeniz tarafından sağlanan API kullanarak çalışır.
+Kıvrımlı, Sqoop işlerinin sonuçlarını çalıştırmak, izlemek ve almak için ham HTTP istekleri kullanarak HDInsight ile nasıl etkileşim kurabileceğinizi göstermek için kullanılır. Bu, HDInsight kümeniz tarafından sağlanmış olan WebHCat REST API (eski adıyla Temptaton) kullanılarak işe yarar.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Tamamlanmasından [test ortamını ayarlama](./hdinsight-use-sqoop.md#create-cluster-and-sql-database) gelen [HDInsight, Hadoop ile Apache Sqoop'u kullanma](./hdinsight-use-sqoop.md).
+* [Test ortamını ayarlama](./hdinsight-use-sqoop.md#create-cluster-and-sql-database) , [HDInsight 'Ta Hadoop Ile Apache Sqoop kullanın](./hdinsight-use-sqoop.md).
 
-* Azure SQL veritabanını sorgulamak için bir istemci. Kullanmayı [SQL Server Management Studio](../../sql-database/sql-database-connect-query-ssms.md) veya [Visual Studio Code](../../sql-database/sql-database-connect-query-vscode.md).
+* Azure SQL veritabanını sorgulamak için bir istemci. [SQL Server Management Studio](../../sql-database/sql-database-connect-query-ssms.md) veya [Visual Studio Code](../../sql-database/sql-database-connect-query-vscode.md)kullanmayı düşünün.
 
-* [Curl](https://curl.haxx.se/). Curl, bir HDInsight kümesine ya da veri aktarımı için kullanılan bir araçtır.
+* [Kıvır](https://curl.haxx.se/). Kıvrımlı bir HDInsight kümesine veya bir HDInsight kümesinden veri aktarmaya yönelik bir araçtır.
 
-* [jq](https://stedolan.github.io/jq/). Jq yardımcı programı, REST isteklerinden döndürülen JSON verilerini işlemek için kullanılır.
+* [JQ](https://stedolan.github.io/jq/). JQ yardımcı programı, REST isteklerinden döndürülen JSON verilerini işlemek için kullanılır.
 
-## <a name="submit-apache-sqoop-jobs-by-using-curl"></a>Curl kullanarak Apache Sqoop işlerini gönderme
+## <a name="submit-apache-sqoop-jobs-by-using-curl"></a>Kıvrımlı kullanarak Apache Sqoop işleri gönderme
 
-Apache Sqoop işlerini Azure depolama biriminden SQL Server'ı kullanarak verileri dışarı aktarmak için Curl kullanın.
+Azure depolama 'dan SQL Server ' ye Apache Sqoop işleri kullanarak verileri dışarı aktarmak için kıvrımlı kullanın.
 
 > [!NOTE]  
 > Curl’ü veya WebHCat ile başka bir REST iletişimini kullanırken HDInsight küme yöneticisinin kullanıcı adı ve parolasını sağlayarak isteklerin kimliğini doğrulamanız gerekir. Ayrıca, sunucuya istek göndermek için kullanılan Tekdüzen Kaynak Tanımlayıcısı’nın (URI) bir parçası olarak küme adını kullanmanız gerekir.
 
-Bu bölümdeki komutları için değiştirin `USERNAME` kümesinin kimliğini doğrulama ve değiştirme için kullanıcıyla `PASSWORD` kullanıcı hesabı için parola. `CLUSTERNAME` değerini kümenizin adıyla değiştirin.
+Bu bölümdeki komutlar için, küme kimliğini doğrulamak `USERNAME` için kullanıcıyla değiştirin ve Kullanıcı hesabı parolasıyla değiştirin. `PASSWORD` `CLUSTERNAME` değerini kümenizin adıyla değiştirin.
  
 REST API’sinin güvenliği [temel kimlik doğrulaması](https://en.wikipedia.org/wiki/Basic_access_authentication) ile sağlanır. Kimlik bilgilerinizin sunucuya güvenli bir şekilde gönderilmesi için istekleri her zaman Güvenli HTTP (HTTPS) kullanarak yapmanız gerekir.
 
@@ -54,7 +54,7 @@ REST API’sinin güvenliği [temel kimlik doğrulaması](https://en.wikipedia.o
     {"status":"ok","version":"v1"}
     ```
 
-2. Değiştirin `SQLDATABASESERVERNAME`, `USERNAME@SQLDATABASESERVERNAME`, `PASSWORD`, `SQLDATABASENAME` önkoşulları uygun değerlerle. Sqoop işi göndermek için aşağıdakileri kullanın:
+2. ,,,,,,,,,,,,,,,, `SQLDATABASESERVERNAME` `USERNAME@SQLDATABASESERVERNAME` `PASSWORD` `SQLDATABASENAME` Bir Sqoop işi göndermek için aşağıdakileri kullanın:
 
     ```cmd
     curl -u USERNAME:PASSWORD -d user.name=USERNAME -d command="export --connect jdbc:sqlserver://SQLDATABASESERVERNAME.database.windows.net;user=USERNAME@SQLDATABASESERVERNAME;password=PASSWORD;database=SQLDATABASENAME --table log4jlogs --export-dir /example/data/sample.log --input-fields-terminated-by \0x20 -m 1" -d statusdir="wasb:///example/data/sqoop/curl" https://CLUSTERNAME.azurehdinsight.net/templeton/v1/sqoop
@@ -62,36 +62,36 @@ REST API’sinin güvenliği [temel kimlik doğrulaması](https://en.wikipedia.o
 
     Bu komutta kullanılan parametreler aşağıdaki gibidir:
 
-   * **-d** - beri `-G` kullanılmıyorsa, varsayılan POST yöntemine istek. `-d` istekle beraber gönderilen veri değerleri belirtir.
+   * **-d** -bu `-G` yana kullanılmadığından, istek varsayılan Post yöntemine göre yapılır. `-d`istekle birlikte gönderilen veri değerlerini belirtir.
 
-       * **User.Name** -komutu çalıştıran kullanıcı.
+       * **User.Name** -komutunu çalıştıran kullanıcı.
 
-       * **komut** -çalıştırılacak Sqoop komutu.
+       * **komut** -yürütülecek Sqoop komutu.
 
-       * **statusdir** -bu görev için durum yazılacağı dizin.
+       * **statusdir** -bu işin durumunun yazılacağı dizin.
 
-     Bu komut, iş durumunu denetlemek için kullanılan bir iş kimliği döndürür.
+     Bu komut, işin durumunu denetlemek için kullanılabilecek bir iş KIMLIĞI döndürür.
 
        ```json
        {"id":"job_1415651640909_0026"}
        ```
 
-3. İşin durumunu denetlemek için aşağıdaki komutu kullanın. Değiştirin `JOBID` ile önceki adımda döndürülen değer. Örneğin, dönüş değeri `{"id":"job_1415651640909_0026"}`, ardından `JOBID` olacaktır `job_1415651640909_0026`.
+3. İşin durumunu denetlemek için aşağıdaki komutu kullanın. Önceki `JOBID` adımda döndürülen değerle değiştirin. Örneğin, dönüş değeri `{"id":"job_1415651640909_0026"}` `JOBID` olsaydı `job_1415651640909_0026`, olur.
 
     ```cmd
     curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.net/templeton/v1/jobs/JOBID | jq .status.state
     ```
 
-    İş tamamlandı, durumu olacaktır **başarılı**.
+    İş tamamlandıysa, durum **başarılı**olur.
    
    > [!NOTE]  
-   > Bu Curl isteği işle ilgili bilgileri içeren bir JavaScript nesne gösterimi (JSON) belge döndürür; jq, yalnızca durum değeri almak için kullanılır.
+   > Bu kıvrımlı istek, işle ilgili bilgiler içeren bir JavaScript Nesne Gösterimi (JSON) belgesi döndürür; JQ yalnızca durum değerini almak için kullanılır.
 
-4. İş durumu için değiştiğinde **başarılı**, Azure Blob depolama alanından iş sonuçlarını alabilirsiniz. `statusdir` Sorguyla geçirilen parametre içerir; bu durumda, çıkış dosyasının konumu `wasb:///example/data/sqoop/curl`. Bu adres iş çıktısı depolar `example/data/sqoop/curl` HDInsight kümeniz tarafından kullanılan varsayılan depolama kapsayıcısı üzerinde dizin.
+4. İşin durumu **başarılı**olarak değiştirildikten sonra, Azure Blob depolamadan iş sonuçlarını alabilirsiniz. Sorguyla geçirilen `wasb:///example/data/sqoop/curl`parametre, çıkış dosyasının konumunu içerir; bu durumda,. `statusdir` Bu adres, iş `example/data/sqoop/curl` çıktısını HDInsight kümeniz tarafından kullanılan varsayılan depolama kapsayıcısının dizininde depolar.
 
-    Stderr ve stdout bloblara erişmek için Azure portalını kullanabilirsiniz.
+    Stderr ve STDOUT bloblarına erişmek için Azure portal kullanabilirsiniz.
 
-5. Verileri dışarı aktarılan doğrulamak için dışarı aktarılan verileri görüntülemek için aşağıdaki sorguları SQL istemcisinden kullanın:
+5. Verilerin verildiğini doğrulamak için, SQL istemcinizden aşağıdaki sorguları kullanarak aktarılmış verileri görüntüleyin:
 
     ```sql
     SELECT COUNT(*) FROM [dbo].[log4jlogs] WITH (NOLOCK);
@@ -99,20 +99,20 @@ REST API’sinin güvenliği [temel kimlik doğrulaması](https://en.wikipedia.o
     ```
 
 ## <a name="limitations"></a>Sınırlamalar
-* Toplu Dışarı Aktar - ile Linux tabanlı HDInsight, Microsoft SQL Server veya Azure SQL veritabanı için verileri dışarı aktarmak için kullanılan Sqoop bağlayıcısının toplu ekleme şu anda desteklemiyor.
-* -Kullanırken, Linux tabanlı HDInsight ile toplu işleme `-batch` ekler gerçekleştirirken geçiş, Sqoop, birden çok eklemeleri toplu INSERT işlemler yerine gerçekleştirir.
+* Toplu dışa aktarma-Linux tabanlı HDInsight Ile, Microsoft SQL Server veya Azure SQL veritabanı 'na veri aktarmak için kullanılan Sqoop Bağlayıcısı Şu anda toplu eklemeleri desteklememektedir.
+* Toplu işleme-Linux tabanlı HDInsight ile, eklemeleri gerçekleştirirken `-batch` anahtarı kullanırken, ekleme işlemlerini toplu olarak tamamlamak yerine Sqoop birden çok ekleme gerçekleştirir.
 
 ## <a name="summary"></a>Özet
-Bu belgede gösterildiği gibi ham bir HTTP isteği çalıştırma, izleme ve HDInsight kümenizi Sqoop işleri sonuçlarını görüntülemek için kullanabilirsiniz.
+Bu belgede gösterildiği gibi, HDInsight kümenizdeki Sqoop işlerinin sonuçlarını çalıştırmak, izlemek ve görüntülemek için ham bir HTTP isteği kullanabilirsiniz.
 
 Bu makalede kullanılan REST arabirimi hakkında daha fazla bilgi için bkz. <a href="https://sqoop.apache.org/docs/1.99.3/RESTAPI.html" target="_blank">Apache Sqoop REST API Kılavuzu</a>.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[HDInsight üzerinde Apache Hadoop ile Apache Sqoop'u kullanma](hdinsight-use-sqoop.md)
+[HDInsight üzerinde Apache Hadoop Apache Sqoop kullanma](hdinsight-use-sqoop.md)
 
-İlgili makaleler için diğer HDInsight curl:
+Kıvrımlı ile ilgili diğer HDInsight makaleleri için:
  
-* [Azure REST API'sini kullanarak Apache Hadoop kümeleri oluşturma](../hdinsight-hadoop-create-linux-clusters-curl-rest.md)
-* [REST kullanarak HDInsight, Apache Hadoop ile Apache Hive sorguları çalıştırma](apache-hadoop-use-hive-curl.md)
-* [REST kullanarak HDInsight üzerinde Apache Hadoop MapReduce işlerle çalışma](apache-hadoop-use-mapreduce-curl.md)
+* [Azure REST API kullanarak Apache Hadoop kümeleri oluşturma](../hdinsight-hadoop-create-linux-clusters-curl-rest.md)
+* [REST kullanarak HDInsight 'ta Apache Hadoop Apache Hive sorguları çalıştırma](apache-hadoop-use-hive-curl.md)
+* [REST kullanarak HDInsight üzerinde Apache Hadoop MapReduce işleri çalıştırma](apache-hadoop-use-mapreduce-curl.md)
 

@@ -1,0 +1,57 @@
+- name: Azure Güvenlik Duvarı Yöneticisi Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure Güvenlik Duvarı Yöneticisi nedir?
+      href: overview.md
+- name: Öğreticiler
+  expanded: true
+  items:
+    - name: Bulut ağınızın güvenliğini sağlama - portal
+      href: secure-cloud-network.md
+- name: Kavramlar
+  items:
+    - name: Güvenli sanal merkez nedir?
+      href: secured-virtual-hub.md
+    - name: Genel dağıtım işlemi
+      href: deployment-overview.md
+    - name: Güvenilen güvenlik iş ortakları
+      href: trusted-security-partners.md
+    - name: Kural işleme mantığı
+      href: rule-processing.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Güvenilen güvenlik iş ortaklarını dağıtma
+      href: deploy-trusted-security-partner.md
+    - name: Güvenlik Duvarı ilkesine geçme
+      href: migrate-to-policy.md
+- name: Başvuru
+  items:
+    - name: Azure CLI
+      href: /cli/azure/ext/azure-firewall/network/firewall
+    - name: Azure PowerShell
+      href: /powershell/module/az.network/new-azfirewall
+    - name: .NET
+      href: /dotnet/api
+    - name: Java
+      href: /java/api
+    - name: Node.js
+      href: 'https://azure.microsoft.com/develop/nodejs/#azure-sdk'
+    - name: Python
+      href: 'https://azure.microsoft.com/develop/python/'
+    - name: REST
+      href: /rest/api/firewall
+    - name: Azure Resource Manager
+      href: ../azure-resource-manager/resource-group-overview.md
+- name: Kaynaklar
+  items:
+    - name: Yazar şablonları
+      href: ../azure-resource-manager/resource-group-authoring-templates.md
+    - name: Azure Yol Haritası
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: Topluluk şablonları
+      href: 'https://azure.microsoft.com/documentation/templates'
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/azure-firewall/'
+    - name: Bölgesel kullanılabilirlik
+      href: 'https://azure.microsoft.com/regions/services/'

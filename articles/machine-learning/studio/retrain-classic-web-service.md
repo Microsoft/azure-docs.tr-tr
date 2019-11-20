@@ -1,7 +1,7 @@
 ---
-title: Klasik bir web hizmetini tekrar eğitip dağıtma
-titleSuffix: Azure Machine Learning Studio
-description: Modeli yeniden eğitme ve Azure Machine Learning Studio'da eğitim yeni modeli kullanmak için bir Klasik web hizmetini güncelleştirmek hakkında bilgi edinin.
+title: Klasik Web hizmetini yeniden eğitme
+titleSuffix: ML Studio (classic) - Azure
+description: Bir modeli yeniden eğitme ve klasik Web hizmetini Azure Machine Learning Studio (klasik) ' de yeni eğitilen modeli kullanacak şekilde güncelleştirme hakkında bilgi edinin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,84 +10,84 @@ author: peterclu
 ms.author: amlstudiodocs
 ms.custom: seodec18, previous-ms.author=yahajiza, previous-author=YasinMSFT
 ms.date: 02/14/2019
-ms.openlocfilehash: b636883ee1f08fa0fb6d080b6980cd07553dde1b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: eac7674ae4a88621a803c70bd55a88e65b2cb7e9
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65234054"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838685"
 ---
-# <a name="retrain-and-deploy-a-classic-studio-web-service"></a>Yeniden eğitme ve klasik Studio web hizmeti dağıtma
+# <a name="retrain-and-deploy-a-classic-studio-classic-web-service"></a>Klasik bir Studio (klasik) Web hizmetini yeniden eğitme ve dağıtma
 
-Makine öğrenimi modelleri yeniden eğitme doğru ve göre en alakalı verileri kullanılabilir kalmasını sağlamak için bir yoludur. Bu makalede Klasik Studio web hizmeti yeniden eğitme yapmayı gösterir. Yeni bir Studio web hizmetini yeniden eğitme hakkında bir kılavuz için [bu nasıl yapılır makalesine bakın.](retrain-machine-learning-model.md)
+Makine öğrenimi modellerini yeniden eğitmek, uygun olan en uygun verilere göre ve bunların doğru kalmasını sağlamanın bir yoludur. Bu makalede, klasik bir Studio (klasik) Web hizmetini yeniden eğitme konusu gösterilmektedir. Yeni bir Studio (klasik) Web hizmetini yeniden eğitme hakkında bir kılavuz için, [Bu nasıl yapılır makalesini görüntüleyin.](retrain-machine-learning-model.md)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Bu makalede, özel olarak yeniden eğitme deneme hem öngörücü bir denemeye zaten sahip olduğunuzu varsayar. Bu adımları açıklanmıştır [yeniden eğitme ve makine öğrenme modeli dağıtın.](/azure/machine-learning/studio/retrain-machine-learning-model) Ancak, yeni bir web hizmeti olarak makine öğrenimi modelinizi dağıtmak yerine, Tahmine dayalı denemeye Klasik web hizmeti olarak dağıtır.
+Bu makalede, hem yeniden eğitim denemenize hem de tahmine dayalı denemenize sahip olduğunuz varsayılır. Bu adımlar, [makine öğrenimi modelini yeniden eğitme ve dağıtma](/azure/machine-learning/studio/retrain-machine-learning-model) bölümünde açıklanmaktadır. Ancak, makine öğrenimi modelinizi yeni bir Web hizmeti olarak dağıtmak yerine, tahmine dayalı denemenizi klasik bir Web hizmeti olarak dağıtacaksınız.
      
-## <a name="add-a-new-endpoint"></a>Yeni bir uç nokta Ekle
+## <a name="add-a-new-endpoint"></a>Yeni uç nokta Ekle
 
-Özgün eğitim ile eşitlenmiş olarak tutulur, uç nokta Puanlama ve denemeleri eğitilen model Puanlama varsayılan dağıttığınız Tahmine dayalı web hizmeti içerir. Web hizmetiniz için yeni bir eğitilen modeli güncelleştirmek için yeni bir Puanlama uç noktası oluşturmanız gerekir.
+Dağıttığınız tahmine dayalı Web hizmeti, özgün eğitim ve Puanlama denemeleri eğitilen modeliyle eşitlenmiş olarak tutulan bir varsayılan Puanlama uç noktası içerir. Web hizmetinizi yeni eğitilen bir modelle güncelleştirmek için yeni bir Puanlama uç noktası oluşturmanız gerekir.
 
-Yeni bir uç noktası için bir web hizmeti olarak Ekle iki yolu vardır:
+Web hizmetine yeni bir uç nokta eklemenin iki yolu vardır:
 
 * Programlı olarak
 * Azure Web Hizmetleri portalını kullanma
 
 > [!NOTE]
-> Tahmine dayalı Web hizmeti için eğitim Web Hizmeti uç noktası ekleme emin olun. Hem eğitim hem de bir Tahmine dayalı Web hizmeti doğru olarak dağıttıysanız, listelenen iki ayrı web hizmetlerini görmelisiniz. Tahmine dayalı Web hizmeti "[Tahmine dayalı ifade ile.]" ile bitmelidir.
+> Eğitim Web hizmetine değil, tahmine dayalı Web hizmetine uç noktayı eklediğinizden emin olun. Hem eğitim hem de tahmine dayalı bir Web hizmetini doğru bir şekilde dağıttıysanız, listelenen iki ayrı Web hizmeti görmeniz gerekir. Tahmine dayalı Web hizmeti "[Predictive exp.]" ile bitmelidir.
 >
 
 ### <a name="programmatically-add-an-endpoint"></a>Program aracılığıyla bir uç nokta ekleme
 
-Bu konuda sağlanan örnek kodu kullanarak Puanlama uç noktalar ekleyebilirsiniz [GitHub deposu](https://github.com/hning86/azuremlps#add-amlwebserviceendpoint).
+Bu [GitHub deposunda](https://github.com/hning86/azuremlps#add-amlwebserviceendpoint)sunulan örnek kodu kullanarak Puanlama uç noktaları ekleyebilirsiniz.
 
-### <a name="use-the-azure-web-services-portal-to-add-an-endpoint"></a>Bir uç nokta eklemek için Azure Web Hizmetleri portalını kullanma
+### <a name="use-the-azure-web-services-portal-to-add-an-endpoint"></a>Uç nokta eklemek için Azure Web Hizmetleri portalını kullanma
 
-1. Machine Learning Studio'da, sol gezinti sütununda, Web Hizmetleri.
-1. Web hizmeti Pano altındaki tıklatın **yönetin uç noktaları Önizleme**.
-1. **Ekle**'yi tıklatın.
-1. Bir ad ve yeni uç nokta için bir açıklama yazın. Günlüğe kaydetme düzeyini ve örnek veriler etkin olup olmadığını seçin. Günlüğe kaydetme hakkında daha fazla bilgi için bkz. [Machine Learning web hizmetleri için günlüğe kaydetmeyi etkinleştirme](web-services-logging.md).
+1. Machine Learning Studio (klasik) ' de, sol gezinti sütununda Web Hizmetleri ' ne tıklayın.
+1. Web hizmeti panosunun en altında, **uç nokta önizlemeyi Yönet**' e tıklayın.
+1. **Ekle**'ye tıklayın.
+1. Yeni uç nokta için bir ad ve açıklama yazın. Günlüğe kaydetme düzeyini ve örnek verilerin etkinleştirilip etkinleştirilmeyeceğini seçin. Günlüğe kaydetme hakkında daha fazla bilgi için bkz. [Machine Learning Web Hizmetleri için günlüğü etkinleştirme](web-services-logging.md).
 
-## <a name="update-the-added-endpoints-trained-model"></a>Eklenen uç noktanın eğitilen modeli güncelleştirme
+## <a name="update-the-added-endpoints-trained-model"></a>Eklenen uç noktanın eğitilen modelini Güncelleştir
 
-### <a name="retrieve-patch-url"></a>Düzeltme eki URL'sini alın
+### <a name="retrieve-patch-url"></a>YAMA URL 'sini al
 
-### <a name="option-1-programmatically"></a>1\. seçenek: Programlı olarak
+### <a name="option-1-programmatically"></a>Seçenek 1: program aracılığıyla
 
-Düzeltme eki URL'sini doğru programlı olarak almak için şu adımları izleyin:
+Programlı olarak doğru düzeltme eki URL 'sini almak için şu adımları izleyin:
 
-1. Çalıştırma [AddEndpoint](https://github.com/raymondlaghaeian/AML_EndpointMgmt/blob/master/Program.cs) örnek kodu.
-1. AddEndpoint çıktısından Bul *HelpLocation* değeri ve URL'yi kopyalayın.
+1. [Addendpoint](https://github.com/raymondlaghaeian/AML_EndpointMgmt/blob/master/Program.cs) örnek kodunu çalıştırın.
+1. AddEndpoint çıktısından, *Helplocation* değerini bulun ve URL 'yi kopyalayın.
 
-   ![HelpLocation addEndpoint örnek çıktı.](./media/retrain-classic/addEndpoint-output.png)
-1. URL, Yardım bağlantıları için web hizmeti sağlayan bir sayfaya gitmek için bir tarayıcıya yapıştırın.
-1. Tıklayın **kaynak güncelleştirme** düzeltme eki Yardım sayfasını açmak için bağlantı.
+   ![AddEndpoint örneğinin çıkışında HelpLocation.](./media/retrain-classic/addEndpoint-output.png)
+1. Web hizmeti için Yardım bağlantıları sağlayan bir sayfaya gitmek için URL 'YI bir tarayıcıya yapıştırın.
+1. Düzeltme Eki yardımı sayfasını açmak için **Kaynağı Güncelleştir** bağlantısına tıklayın.
 
 ### <a name="option-2-use-the-azure-machine-learning-web-services-portal"></a>2\. seçenek: Azure Machine Learning Web Hizmetleri portalını kullanma
 
-Doğru düzeltme eki using the web portal URL almak için aşağıdaki adımları izleyin:
+Web portalını kullanarak doğru düzeltme eki URL 'sini almak için aşağıdaki adımları izleyin:
 
-1. Oturum [Azure Machine Learning Web Hizmetleri](https://services.azureml.net/) portalı.
-1. Tıklayın **Web Hizmetleri** veya **Klasik Web Hizmetleri** en üstünde.
-1. İle çalışırken Puanlama web hizmeti (web hizmeti varsayılan adını değiştirirseniz olmadı "[Puanlama ifade içinde.]" sonunda).
-1. Tıklayın **+ yeni**.
+1. [Azure Machine Learning Web Hizmetleri](https://services.azureml.net/) portalında oturum açın.
+1. En üstteki **Web Hizmetleri** veya **Klasik Web Hizmetleri** ' ne tıklayın.
+1. Üzerinde çalıştığınız Puanlama Web hizmeti ' ne tıklayın (Web hizmetinin varsayılan adını değiştirmediyseniz, "[Puanlama exp.]" içinde sona acaktır).
+1. **+ Yeni**seçeneğine tıklayın.
 1. Uç nokta eklendikten sonra uç nokta adına tıklayın.
-1. Altında **düzeltme eki** URL'yi tıklatın **API Yardım** düzeltme eki uygulama Yardım sayfasını açın.
+1. **Düzeltme Eki** URL 'Si altında **API yardımı** ' na tıklayarak düzeltme eki uygulama yardım sayfasını açın.
 
 > [!NOTE]
-> Tahmine dayalı Web hizmeti yerine eğitim Web hizmeti için uç nokta eklediyseniz tıkladığınızda aşağıdaki hatayı alırsınız **kaynak güncelleştirme** bağlantı: "Üzgünüz, ancak bu özellik desteklenmez ve bu bağlamda kullanılamaz. Bu Web hizmetini güncelleştirilebilir hiçbir kaynak vardır. Biz Verdiğimiz rahatsızlık için özür dileriz ve bu iş akışı geliştirme konusunda durmaksızın çalışıyoruz."
+> Bitiş noktasını, tahmine dayalı Web hizmeti yerine eğitim Web hizmetine eklediyseniz, **Kaynağı Güncelleştir** bağlantısına tıkladığınızda şu hatayı alırsınız: "Üzgünüm, ancak bu özellik desteklenmiyor veya bu bağlamda kullanılamıyor. Bu Web hizmetinde güncelleştirilebilir kaynak yok. Bu sorundan dolayı özür dileriz ve bu iş akışını iyileştirmek için çalışıyoruz. "
 >
 
-Düzeltme eki yardım sayfasına düzeltme eki kullanmalısınız URL içerir ve onu çağırmak için kullanabileceğiniz örnek kodu sağlar.
+YAMA yardım sayfası, kullanmanız gereken düzeltme eki URL 'sini içerir ve bunu çağırmak için kullanabileceğiniz örnek kodu sağlar.
 
-![Düzeltme URL'si.](./media/retrain-classic/ml-help-page-patch-url.png)
+![Düzeltme Eki URL 'SI.](./media/retrain-classic/ml-help-page-patch-url.png)
 
-### <a name="update-the-endpoint"></a>Uç noktası güncellenemedi
+### <a name="update-the-endpoint"></a>Uç noktayı Güncelleştir
 
-Artık, daha önce oluşturduğunuz Puanlama uç noktasını güncelleştirmek için eğitilen modeli kullanabilirsiniz.
+Artık, daha önce oluşturduğunuz Puanlama bitiş noktasını güncelleştirmek için eğitilen modeli kullanabilirsiniz.
 
-Aşağıdaki örnek kod, nasıl kullanılacağını gösterir *BaseLocation*, *RelativeLocation*, *SasBlobToken*ve URL uç noktasını güncelleştirmek için düzeltme eki.
+Aşağıdaki örnek kod, uç noktayı güncelleştirmek için *Baselocation*, *relativelocation*, *SASBLOBTOKEN*ve Patch URL 'sini nasıl kullanacağınızı gösterir.
 
     private async Task OverwriteModel()
     {
@@ -127,25 +127,25 @@ Aşağıdaki örnek kod, nasıl kullanılacağını gösterir *BaseLocation*, *R
         }
     }
 
-*ApiKey* ve *endpointUrl* için uç nokta panodan arama alınabilir.
+Çağrı için *Apikey* ve *endpointUrl* , Endpoint panosundan elde edilebilir.
 
-Değerini *adı* parametresinde *kaynakları* Tahmine dayalı denemeye kaydedilmiş eğitilen modele kaynak adı ile eşleşmelidir. Kaynak adı almak için:
+*Kaynaklardaki* *ad* parametresinin değeri, tahmine dayalı deneyde kaydedilen eğitilen modelin kaynak adıyla eşleşmelidir. Kaynak adını almak için:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-1. Sol menüde **Machine Learning**.
-1. Adı altında çalışma alanınızı tıklayın ve ardından **Web Hizmetleri**.
-1. Adı altında tıklatın **Görselleştirmenizdeki modeli [Tahmine dayalı exp.]** .
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+1. Sol menüden **Machine Learning**' ye tıklayın.
+1. Ad ' ın altında, çalışma alanınıza ve ardından **Web Hizmetleri**' ne tıklayın.
+1. Ad ' ın altında, **Census modeli [tahmine dayalı exp.]** öğesine tıklayın.
 1. Eklediğiniz yeni uç noktaya tıklayın.
-1. Uç nokta panosunda **kaynak güncelleştirme**.
-1. Web hizmeti için güncelleştirme kaynağı API belgeleri sayfasında bulabilirsiniz **kaynak adı** altında **güncelleştirilebilir kaynakları**.
+1. Uç nokta panosunda **Kaynağı Güncelleştir**' e tıklayın.
+1. Web hizmetinin kaynak API belgelerini Güncelleştir sayfasında, **kaynak adını** **güncelleştirilebilir kaynaklar**altında bulabilirsiniz.
 
-Değeriniz SAS belirtecinizle uç noktası güncelleniyor sonlandırmadan önce dolarsa, yeni bir belirteç almak için iş Kimliğine sahip bir GET gerçekleştirmeniz gerekir.
+Uç noktayı güncelleştirmeden önce SAS belirtecinizin süresi dolarsa, yeni bir belirteç edinmek için Iş KIMLIĞIYLE birlikte bir alma işlemi gerçekleştirmeniz gerekir.
 
-Kod başarıyla çalıştıktan sonra yeni uç nokta yaklaşık 30 saniye içinde retrained modeli kullanarak başlamanız gerekir.
+Kod başarıyla çalıştırıldığında, yeni uç noktanın yaklaşık 30 saniye içinde geri çekme modelini kullanmaya başlaması gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Web hizmetlerini yönetme veya birden çok denemeleri çalıştırması izlemek hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+Web hizmetlerini yönetme veya birden çok denemeleri çalıştırmasını izleme hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
 
-* [Web Hizmetleri portalını keşfedin](manage-new-webservice.md)
+* [Web Hizmetleri portalını keşfet](manage-new-webservice.md)
 * [Deneme yinelemelerini yönetme](manage-experiment-iterations.md)

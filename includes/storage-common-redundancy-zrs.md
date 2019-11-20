@@ -5,20 +5,22 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: include
-ms.date: 11/04/2018
+ms.date: 06/28/2019
 ms.author: tamram
 ms.custom: include file
-ms.openlocfilehash: d25efa8c666fa91c7bd652a7cf931ea6ca379aa2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b7fddce8f682bc341b361a47f8e083cc281e90aa
+ms.sourcegitcommit: 32242bf7144c98a7d357712e75b1aefcf93a40cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67133173"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70309583"
 ---
-Bölgesel olarak yedekli depolama (ZRS), verilerinizi tek bir bölgede üç depolama kümeleri arasında eşzamanlı olarak çoğaltır. Her Depolama kümesi diğerlerinden fiziksel olarak ayrılır ve kendi kullanılabilirlik bölgesinde (AZ) bulunur. Her kullanılabilirlik alanı&mdash;ve ZRS küme içindeki&mdash;otonom ve ayrı bir yardımcı programları ve ağ özellikleri içerir. Yalnızca tüm çoğaltmalar için üç kümeleri arasında verileri yazıldıktan sonra bir ZRS depolama hesabına yazma isteği başarıyla döndürür.
+Bölgesel olarak yedekli depolama (ZRS), verilerinizi tek bir bölgedeki üç depolama kümesi arasında eşzamanlı olarak çoğaltır. Her depolama kümesi diğerlerinden fiziksel olarak ayrılır ve kendi kullanılabilirlik bölgesinde (AZ) bulunur. Her bir kullanılabilirlik&mdash;alanı ve&mdash;içindeki ZRS kümesi özerk olur ve ayrı yardımcı programlar ve ağ özellikleri içerir. ZRS depolama hesabına yönelik yazma isteği, veriler yalnızca üç küme genelinde tüm yinelemelere yazıldıktan sonra başarıyla döndürülür.
 
-ZRS çoğaltmalı kullanarak bir depolama hesabında verilerinizin depoladığınızda, erişmek ve bir kullanılabilirlik alanı kullanılamaz duruma gelirse, verilerinizi yönetmek devam edebilirsiniz. ZRS, üstün performans ve düşük gecikme sağlar. ZRS sunar aynı [ölçeklenebilirlik hedefleri](../articles/storage/common/storage-scalability-targets.md) olarak [yerel olarak yedekli depolama (LRS)](../articles/storage/common/storage-redundancy-lrs.md).
+Verilerinizi ZRS çoğaltmasını kullanarak bir depolama hesabında depoladığınızda, bir kullanılabilirlik bölgesi kullanılamaz hale gelirse verilerinize erişmeye ve bunları yönetmeye devam edebilirsiniz. ZRS, mükemmel performans ve düşük gecikme süresi sağlar. ZRS [yerel olarak yedekli depolama (LRS)](../articles/storage/common/storage-redundancy-lrs.md)ile aynı [ölçeklenebilirlik hedeflerini](../articles/storage/common/storage-scalability-targets.md) sunmaktadır.
 
-ZRS, tutarlılık, dayanıklılık ve yüksek kullanılabilirlik gerektiren senaryolar için göz önünde bulundurun. Bir kesinti veya doğal afetler bir kullanılabilirlik bölgesi kullanılamıyor işler olsa bile, ZRS depolama nesnelerin en az % 99,9999999999 dayanıklılık sunar (12 9) belirli bir yıl boyunca.
+Tutarlılık, dayanıklılık ve yüksek kullanılabilirlik gerektiren senaryolar için ZRS 'yi değerlendirin. Bir kesinti veya doğal olağanüstü durum bir kullanılabilirlik bölgesini kullanılamaz hale gelirse, ZRS belirli bir yıl boyunca en az% 99,9999999999 (12 9 ' a) depolama nesneleri için dayanıklılık sağlar.
 
-Kullanılabilirlik alanları hakkında daha fazla bilgi için bkz. [kullanılabilirlik alanlarına genel bakış](https://docs.microsoft.com/azure/availability-zones/az-overview).
+Coğrafi bölge yedekli depolama (GZRS) (Önizleme), birincil bölgedeki üç Azure kullanılabilirlik bölgesinde verilerinizi eşzamanlı olarak çoğaltır ve sonra verileri zaman uyumsuz olarak ikincil bölgeye çoğaltır. GZRS, en yüksek dayanıklılık ile birlikte yüksek kullanılabilirlik sağlar. GZRS belirli bir yıl boyunca nesnelerin en az% 99.99999999999999 (16 9) oranında dayanıklılığını sağlamak üzere tasarlanmıştır. İkincil bölgedeki verilere yönelik okuma erişimi için, Okuma Erişimli Coğrafi bölge yedekli depolamayı (RA-GZRS) etkinleştirin. GZRS hakkında daha fazla bilgi için bkz. [coğrafi bölge yedekli depolama, yüksek oranda kullanılabilirlik ve en yüksek dayanıklılık (Önizleme) için](../articles/storage/common/storage-redundancy-gzrs.md).
+
+Kullanılabilirlik alanları hakkında daha fazla bilgi için bkz. [kullanılabilirlik alanları genel bakış](https://docs.microsoft.com/azure/availability-zones/az-overview).

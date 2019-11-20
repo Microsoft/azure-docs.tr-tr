@@ -1,0 +1,59 @@
+### YamlMime:Landing
+title: Azure HPC Önbelleği belgeleri
+summary: Okuma yoğunluklu yüksek performanslı bilgi işlem (HPC) iş yükleri için dosya erişimini hızlandırmak üzere Azure HPC Önbelleği kullanın
+metadata:
+  title: Microsoft Azure HPC Önbelleği
+  description: İşlem kaynaklarınız ve depolama alanı arasındaki gecikme sorununu çözmek için Azure HPC Önbelleği oluşturmayı ve kullanmayı öğrenin. Azure HPC Önbelleği, dosya tabanlı okuma yoğunluklu iş yükleri için kullanılır ve Azure Blob depolamayı ve şirket içi donanım dosyalayıcıları içeren bir toplu sanal dosya sistemi oluşturabilir.
+  ms.service: hpc-cache
+  ms.topic: landing-page
+  ms.collection: collection
+  author: ekpgh
+  ms.author: rohogue
+  ms.date: 11/07/2019
+  ms.openlocfilehash: 07a161066cdea57d42050986bc9e16d98a9310a6
+  ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/19/2019
+  ms.locfileid: "74166498"
+landingContent:
+- title: Azure HPC Önbelleği hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure HPC Önbelleği nedir?
+      url: hpc-cache-overview.md
+- title: Başlarken
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure HPC Önbelleği için önkoşulları yapılandırma
+      url: hpc-cache-prereqs.md
+    - text: Önbelleği oluşturma
+      url: hpc-cache-create.md
+    - text: Depolama ekleme
+      url: hpc-cache-add-storage.md
+    - text: İstemcileri bağlama
+      url: hpc-cache-mount.md
+    - text: Önbelleği yönetme ve izleme
+      url: hpc-cache-manage.md
+  - linkListType: concept
+    links:
+    - text: Toplanan ad alanını planlama
+      url: hpc-cache-namespace.md
+    - text: Verileri depolama hedeflerine taşıma (gerekirse)
+      url: hpc-cache-ingest.md
+- title: Sorun giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Destek bileti açma
+      url: hpc-cache-support-ticket.md
+    - text: Depolama hedefini düzenleme
+      url: hpc-cache-edit-storage.md
+    - text: Blob depolama hedefleri oluşturmak için güvenlik duvarı ayarları etrafında çalışma
+      url: hpc-cache-blob-firewall-fix.md
+  - linkListType: concept
+    links:
+    - text: Bölgesel kesintiden kurtulma
+      url: hpc-region-recovery.md

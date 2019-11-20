@@ -1,6 +1,6 @@
 ---
-title: Azure Service Bus ad alanı oluşturma ve Azure Resource Manager şablonu kullanarak sıraya | Microsoft Docs
-description: Service Bus ad alanı ve Azure Resource Manager şablonu kullanarak kuyruk oluşturma
+title: 'Hızlı başlangıç: Azure Resource Manager şablonu kullanarak Azure Service Bus ad alanı ve kuyruk oluşturma'
+description: 'Hızlı başlangıç: Azure Resource Manager şablonu kullanarak Service Bus ad alanı ve kuyruk oluşturma'
 services: service-bus-messaging
 documentationcenter: .net
 author: spelluru
@@ -9,43 +9,43 @@ editor: ''
 ms.assetid: a6bfb5fd-7b98-4588-8aa1-9d5f91b599b6
 ms.service: service-bus-messaging
 ms.devlang: tbd
-ms.topic: article
+ms.topic: quickstart
 ms.tgt_pltfrm: dotnet
 ms.workload: na
-ms.date: 01/23/2019
+ms.date: 11/05/2019
 ms.author: spelluru
-ms.openlocfilehash: 6d7e4253d37d5b50fc8c3de1c8c31636e59b2b9c
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 40aeff225cfa6d499ebdfae6736e0684b2a27244
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67444780"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718801"
 ---
-# <a name="create-a-service-bus-namespace-and-a-queue-using-an-azure-resource-manager-template"></a>Service Bus ad alanı ve bir Azure Resource Manager şablonu kullanarak kuyruk oluşturma
+# <a name="quickstart-create-a-service-bus-namespace-and-a-queue-using-an-azure-resource-manager-template"></a>Hızlı başlangıç: Azure Resource Manager şablonu kullanarak Service Bus ad alanı ve kuyruk oluşturma
 
-Bu makalede, Service Bus ad alanı ve bu ad alanı içinde bir kuyruk oluşturan bir Azure Resource Manager şablonunun nasıl kullanılacağı gösterilmektedir. Makalede nasıl belirtmek için hangi kaynaklara dağıtılır ve parametrelerin nasıl dağıtıldığının ve dağıtım yürütülürken belirtilen açıklanmaktadır. Bu şablonu kendi dağıtımlarınız için kullanabilir veya kendi gereksinimlerinize göre özelleştirebilirsiniz.
+Bu makalede, bu ad alanı içinde bir Service Bus ad alanı ve bir sıra oluşturan Azure Resource Manager şablonun nasıl kullanılacağı gösterilmektedir. Makalesinde hangi kaynakların dağıtıldığını ve dağıtım yürütüldüğünde belirtilen parametrelerin nasıl tanımlanacağı açıklanmaktadır. Bu şablonu kendi dağıtımlarınız için kullanabilir veya kendi gereksinimlerinize göre özelleştirebilirsiniz.
 
-Şablonları oluşturma hakkında daha fazla bilgi için lütfen bkz [Azure Resource Manager şablonları yazma][Authoring Azure Resource Manager templates].
+Şablon oluşturma hakkında daha fazla bilgi için lütfen bkz. [Azure Resource Manager şablonları yazma][Authoring Azure Resource Manager templates].
 
-Tam şablon için bkz: [Service Bus ad alanı ve kuyruk şablon][Service Bus namespace and queue template] GitHub üzerinde.
+Tüm şablon için GitHub 'daki [Service Bus ad alanı ve kuyruk şablonu][Service Bus namespace and queue template] ' na bakın.
 
 > [!NOTE]
-> Aşağıdaki Azure Resource Manager şablonları, yükleme ve dağıtım için kullanılabilir.
+> Aşağıdaki Azure Resource Manager şablonları indirme ve dağıtım için kullanılabilir.
 > 
-> * [Kuyruk ve yetkilendirme kuralı ile bir Service Bus ad alanı oluşturma](service-bus-resource-manager-namespace-auth-rule.md)
-> * [Konu ve abonelik ile Service Bus ad alanı oluşturma](service-bus-resource-manager-namespace-topic.md)
+> * [Kuyruk ve yetkilendirme kuralıyla Service Bus ad alanı oluşturma](service-bus-resource-manager-namespace-auth-rule.md)
+> * [Konu ve abonelikle bir Service Bus ad alanı oluşturma](service-bus-resource-manager-namespace-topic.md)
 > * [Service Bus ad alanı oluşturma](service-bus-resource-manager-namespace.md)
-> * [Konusu, aboneliği ve kuralı ile bir Service Bus ad alanı oluşturma](service-bus-resource-manager-namespace-topic-with-rule.md)
+> * [Konu, abonelik ve kuralla Service Bus ad alanı oluşturma](service-bus-resource-manager-namespace-topic-with-rule.md)
 > 
-> En yeni şablonları denetlemek için ziyaret [Azure hızlı başlangıç şablonları][Azure Quickstart Templates] galeri ve arama **Service Bus**.
+> En son şablonları denetlemek için [Azure hızlı başlangıç şablonları][Azure Quickstart Templates] Galerisi ' ni ziyaret edin ve **Service Bus**arayın.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="what-will-you-deploy"></a>Ne dağıtacaksınız?
 
-Bu şablonu kullanarak bir Service Bus ad alanı bir kuyruk aracılığıyla dağıtın.
+Bu şablonla bir Service Bus ad alanını bir sıraya dağıtırsınız.
 
-[Service Bus kuyruklarını](service-bus-queues-topics-subscriptions.md#queues) ilk giren ilk çıkar (FIFO) bir veya birden çok rakip tüketiciye ileti teslimi sunar.
+[Service Bus kuyrukları](service-bus-queues-topics-subscriptions.md#queues) , bir veya daha fazla rakip tüketiciye ilk olarak ilk çıkar (FIFO) ileti teslimi sunar.
 
 Dağıtımı otomatik olarak çalıştırmak için aşağıdaki düğmeye tıklayın:
 
@@ -53,12 +53,12 @@ Dağıtımı otomatik olarak çalıştırmak için aşağıdaki düğmeye tıkla
 
 ## <a name="parameters"></a>Parametreler
 
-Azure Resource Manager sayesinde, şablon dağıtıldığında belirtmek istediğiniz değerlerin parametrelerini siz tanımlarsınız. Adlı bir bölüm şablonu içerir `Parameters` , tüm parametre değerlerini içerir. Dağıtmakta olduğunuz projeye veya dağıtım yaptığınız ortama bağlı olarak değişir bu değerleri için bir parametre tanımlamanız gerekir. Her zaman aynı kalır değerler için parametre tanımlamayın. Her parametre değeri, dağıtılan kaynakları tanımlamak için şablonda kullanılır.
+Azure Resource Manager sayesinde, şablon dağıtıldığında belirtmek istediğiniz değerlerin parametrelerini siz tanımlarsınız. Şablon, tüm parametre değerlerini içeren `Parameters` adlı bir bölüm içerir. Dağıttığınız projeye göre veya dağıttığınız ortama göre farklılık gösteren değerler için bir parametre tanımlamalısınız. Her zaman aynı kalacak değerler için parametre tanımlamayın. Her parametre değeri, dağıtılan kaynakları tanımlamak için şablonda kullanılır.
 
 Şablon aşağıdaki parametreleri tanımlar.
 
 ### <a name="servicebusnamespacename"></a>serviceBusNamespaceName
-Oluşturmak için Service Bus ad alanı adı.
+Oluşturulacak Service Bus ad alanının adı.
 
 ```json
 "serviceBusNamespaceName": {
@@ -69,8 +69,8 @@ Oluşturmak için Service Bus ad alanı adı.
 }
 ```
 
-### <a name="servicebusqueuename"></a>serviceBusQueueName
-Service Bus ad alanında oluşturulan Kuyruğun adı.
+### <a name="servicebusqueuename"></a>Servicebussıraadı
+Service Bus ad alanında oluşturulan kuyruğun adı.
 
 ```json
 "serviceBusQueueName": {
@@ -79,7 +79,7 @@ Service Bus ad alanında oluşturulan Kuyruğun adı.
 ```
 
 ### <a name="servicebusapiversion"></a>serviceBusApiVersion
-Hizmet veri yolu API'sini şablon sürümü.
+Şablonun Service Bus API sürümü.
 
 ```json
 "serviceBusApiVersion": { 
@@ -91,18 +91,19 @@ Hizmet veri yolu API'sini şablon sürümü.
 ```
 
 ## <a name="resources-to-deploy"></a>Dağıtılacak kaynaklar
-Standart bir Service Bus ad alanı türü oluşturur **Mesajlaşma**, bir kuyruk aracılığıyla.
+**İleti**türünde bir kuyruk ile standart bir Service Bus ad alanı oluşturur.
 
 ```json
-"resources ": [{
-        "apiVersion": "[variables('sbVersion')]",
+{
+    "resources": [{
+        "apiVersion": "2017-04-01",
         "name": "[parameters('serviceBusNamespaceName')]",
-        "type": "Microsoft.ServiceBus/Namespaces",
-        "location": "[variables('location')]",
-        "kind": "Messaging",
+        "type": "Microsoft.ServiceBus/namespaces",
+        "location": "[parameters('location')]",
         "sku": {
-            "name": "Standard",
+            "name": "Standard"
         },
+        "properties": {},
         "resources": [{
             "apiVersion": "[variables('sbVersion')]",
             "name": "[parameters('serviceBusQueueName')]",
@@ -111,13 +112,14 @@ Standart bir Service Bus ad alanı türü oluşturur **Mesajlaşma**, bir kuyruk
                 "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
             ],
             "properties": {
-                "path": "[parameters('serviceBusQueueName')]",
+                "path": "[parameters('serviceBusQueueName')]"
             }
         }]
     }]
+}
 ```
 
-JSON söz dizimi ve özellikler için bkz: [ad alanları](/azure/templates/microsoft.servicebus/namespaces) ve [kuyrukları](/azure/templates/microsoft.servicebus/namespaces/queues).
+JSON sözdizimi ve özellikleri için bkz. [ad alanları](/azure/templates/microsoft.servicebus/namespaces) ve [Kuyruklar](/azure/templates/microsoft.servicebus/namespaces/queues).
 
 ## <a name="commands-to-run-deployment"></a>Dağıtımı çalıştırma komutları
 [!INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
@@ -137,12 +139,12 @@ azure group deployment create \<my-resource-group\> \<my-deployment-name\> --tem
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Ad alanı/sıra için bir Yetkilendirme kuralının nasıl oluşturulacağını gösteren aşağıdaki konuya bakın: [Bir Service Bus yetkilendirme kuralı için ad alanı ve bir Azure Resource Manager şablonu kullanarak kuyruk oluşturma](service-bus-resource-manager-namespace-auth-rule.md)
+Ad alanı/kuyruk için bir yetkilendirme kuralı oluşturmayı gösteren aşağıdaki konuya bakın: [bir Azure Resource Manager şablonu kullanarak ad alanı ve sıra için Service Bus yetkilendirme kuralı oluşturma](service-bus-resource-manager-namespace-auth-rule.md)
 
-Bu makaleler görüntüleyerek bu kaynakları yönetmeyi öğrenin:
+Şu makaleleri görüntüleyerek bu kaynakları yönetmeyi öğrenin:
 
 * [Service Bus’ı PowerShell ile yönetme](service-bus-manage-with-ps.md)
-* [Service Bus Explorer ile Service Bus kaynaklarını yönetme](https://github.com/paolosalvatori/ServiceBusExplorer/releases)
+* [Service Bus Gezgini ile Service Bus kaynaklarını yönetme](https://github.com/paolosalvatori/ServiceBusExplorer/releases)
 
 [Authoring Azure Resource Manager templates]: ../azure-resource-manager/resource-group-authoring-templates.md
 [Service Bus namespace and queue template]: https://github.com/Azure/azure-quickstart-templates/blob/master/201-servicebus-create-queue/

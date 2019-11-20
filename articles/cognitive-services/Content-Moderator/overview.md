@@ -1,6 +1,6 @@
 ---
 title: Azure Content Moderator nedir?
-titlesuffix: Azure Cognitive Services
+titleSuffix: Azure Cognitive Services
 description: Kullanıcıların oluşturduğu içeriği izlemek, işaretlemek, değerlendirmek ve uygunsuz malzemeleri filtrelemek için Content Moderator kullanmayı öğrenin.
 services: cognitive-services
 author: PatrickFarley
@@ -8,31 +8,31 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: overview
-ms.date: 02/20/2019
+ms.date: 07/03/2019
 ms.author: pafarley
-ms.openlocfilehash: 14cf500cff9f1f7f8b1573862c3060326e6518fa
-ms.sourcegitcommit: 6932af4f4222786476fdf62e1e0bf09295d723a1
+ms.openlocfilehash: a78a92a33075a97ddadb2e1fe677b7ded541d12c
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66688847"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68565585"
 ---
 # <a name="what-is-azure-content-moderator"></a>Azure Content Moderator nedir?
 
-Azure Content Moderator API'si rahatsız edici, riskli veya istenmeyen olabilecek öğeleri tespit etme amacıyla metin, görüntü ve video içeriğinde denetim gerçekleştiren bir bilişsel hizmettir. Hizmet, böyle bir öğeyle karşılaştığında içeriğe uygun etiketler (bayraklar) ekler. Uygulamanız da bu bayraklı içeriği dikkate alarak düzenlemelere uygunluk ya da kullanıcılar için istenen ortamın oluşturulması amacıyla işlem gerçekleştirebilir. Bkz: [yönetim API'leri](#moderation-apis) ne farklı içerik bayraklar hakkında daha fazla bilgi edinmek için bölüm belirtin.
+Azure Content Moderator API'si rahatsız edici, riskli veya istenmeyen olabilecek öğeleri tespit etme amacıyla metin, görüntü ve video içeriğinde denetim gerçekleştiren bir bilişsel hizmettir. Hizmet, böyle bir öğeyle karşılaştığında içeriğe uygun etiketler (bayraklar) ekler. Uygulamanız da bu bayraklı içeriği dikkate alarak düzenlemelere uygunluk ya da kullanıcılar için istenen ortamın oluşturulması amacıyla işlem gerçekleştirebilir. Farklı içerik bayraklarının ne belirtdiklerine ilişkin daha fazla bilgi edinmek için [denetleme API 'leri](#moderation-apis) bölümüne bakın.
 
 ## <a name="where-it-is-used"></a>Kullanıldığı yerler
 
 Aşağıda bir yazılım geliştirme uzmanının veya ekibinin Content Moderator özelliklerinden faydalanmak isteyebileceği birkaç senaryo verilmiştir:
 
-- Ürün katalogları ve diğer kullanıcı tarafından oluşturulan içerikleri Orta çevrimiçi marketlerdir.
-- Kullanıcı tarafından oluşturulan oyun yapıtlar ve sohbet odaları Orta oyun şirketler.
-- Görüntü, metin ve bunların kullanıcılar tarafından eklenen videoları Orta sosyal Mesajlaşma platformlar.
-- Kendi içerik için merkezi yönetimini uygulamak Kurumsal medya şirketlerinin.
-- Öğrenciler ve eğitimciler için uygun olmayan içerikleri filtreleme K-12 eğitim çözüm sağlayıcıları.
+- Çevrimiçi Pazar, bu orta düzey ürün kataloglarını ve diğer Kullanıcı tarafından oluşturulan içeriği koyar.
+- Kullanıcı tarafından oluşturulan oyun yapıtları ve sohbet odalarını kullanan oyun şirketleri.
+- Kullanıcıları tarafından eklenen görüntü, metin ve videoların bulunduğu sosyal mesaj platformları.
+- İçerikleri için merkezi denetleme uygulayan kurumsal medya şirketleri.
+- K-12 Eğitim çözüm sağlayıcıları öğrenciler ve eğitimciler için uygun olmayan içeriği filtreleyerek.
 
 > [!NOTE]
-> Geçersiz alt istismarıyla kategorisinde olabilecek resimleri algılama için Content Moderator'ı kullanamazsınız. Ancak, tam kuruluşlar kullanabilir [PhotoDNA bulut hizmeti](https://www.microsoft.com/photodna "Microsoft PhotoDNA bulut hizmeti") ekranına bu içerik türü için.
+> Geçersiz alt düzey yararlanma görüntülerini algılamak için Content Moderator kullanamazsınız. Ancak, nitelikli kuruluşlar bu içerik türü için [PhotoDNA bulut hizmeti](https://www.microsoft.com/photodna "Microsoft PhotoDNA Cloud Service") 'i kullanabilir.
 
 ## <a name="what-it-includes"></a>Neleri içerir
 
@@ -40,15 +40,15 @@ Content Moderator hizmeti hem REST çağrıları hem de .NET SDK'sı ile sunulan
 
 ## <a name="moderation-apis"></a>Yönetim API’leri
 
-Content Moderator hizmeti, büyük olasılıkla uygun veya uygunsuz malzeme için içerik denetimi API'leri içerir.
+Content Moderator hizmeti, uygunsuz veya sakıncalı olabilecek malzemelere yönelik içeriği denetleyen denetleme API 'Lerini içerir.
 
-![Content Moderator denetimi API'leri için Blok Diyagramı](images/content-moderator-mod-api.png)
+![Content Moderator denetleme API 'Leri için blok diyagramı](images/content-moderator-mod-api.png)
 
-Aşağıdaki tabloda, yönetim API'lerini farklı türleri açıklanmaktadır.
+Aşağıdaki tabloda farklı denetleme API 'Leri açıklanmaktadır.
 
 | API grubu | Açıklama |
 | ------ | ----------- |
-|[**Metin denetimi**](text-moderation-api.md)| Metin rahatsız edici içerik, cinsel açık veya müstehcen içerik, küfür ve kişisel verileri tarar.|
+|[**Metin denetimi**](text-moderation-api.md)| Saldırgan içeriği, cinsel açık veya müstehcen içerik, küfür ve kişisel veriler için metin tarar.|
 |[**Özel terim listeleri**](try-terms-list-api.md)| Metinleri yerleşik terimlere ek olarak özel terim listesine göre tarar. İçerik ilkelerinize göre içerik engellemek veya izin vermek için özel listeler kullanabilirsiniz.|  
 |[**Görüntü denetimi**](image-moderation-api.md)| Görüntülerde yetişkinlere yönelik veya müstehcen görüntü taraması yapar, Optik Karakter Tanıyıcı (OCR) ile görüntüdeki metinleri tanır ve yüzleri algılar.|
 |[**Özel görüntü listeleri**](try-image-list-api.md)| Görüntüleri özel görüntü listesine göre tarar. Özel görüntü listelerini kullanarak tekrar tekrar sınıflandırmak istemediğiniz yaygın içerik örneklerini filtreleyebilirsiniz.|
@@ -56,23 +56,23 @@ Aşağıdaki tabloda, yönetim API'lerini farklı türleri açıklanmaktadır.
 
 ## <a name="review-apis"></a>API’leri inceleme
 
-İnceleme API'lerini denetimi işlem hattınızı İnsan geçirenlerle tümleştirmenize olanak tanır. Kullanım [işleri](review-api.md#jobs), [incelemeleri](review-api.md#reviews), ve [iş akışı](review-api.md#workflows) oluşturmak ve ile İnsan içinde--döngüsü iş akışlarını otomatikleştirmek için operations [gözden geçirme aracı](#the-review-tool) () Aşağıda).
+Inceleme API 'Leri, denetleme işlem hattınızı insan gözden geçirenler ile tümleştirmenize olanak sağlar. [İnceleme aracı](#the-review-tool) (aşağıda) ile insan döngüsü iş akışları oluşturmak ve otomatikleştirmek için [işler](review-api.md#jobs), [incelemeler](review-api.md#reviews)ve [iş akışı](review-api.md#workflows) işlemlerini kullanın.
 
 > [!NOTE]
-> İş akışı API .NET SDK'yı henüz kullanılamıyor, ancak REST uç noktası ile kullanılabilir.
+> Iş akışı API 'SI henüz .NET SDK 'da kullanılamıyor ancak REST uç noktasıyla birlikte kullanılabilir.
 
-![Content Moderator için blok diyagramını API'leri gözden geçirin](images/content-moderator-rev-api.png)
+![Content Moderator gözden geçirme API 'Leri için diyagramı engelle](images/content-moderator-rev-api.png)
 
-## <a name="the-review-tool"></a>Gözden geçirme aracı
+## <a name="the-review-tool"></a>Inceleme aracı
 
-Content Moderator hizmet ayrıca web tabanlı içerir [gözden geçirme aracı](Review-Tool-User-Guide/human-in-the-loop.md), içeriği barındıran işlemek İnsan Moderatörler gözden geçirir. İnsan girişi hizmeti eğitmez ancak hizmetin ve insanlardan oluşan ekibin birlikte kullanılması, geliştiricilerin verimlilik ve doğruluk arasındaki doğru dengeyi yakalamasını sağlar. İnceleme aracını da kullanıcı dostu bir sağlayan çeşitli Content Moderator kaynaklar için ön uç.
+Content Moderator hizmeti Ayrıca, insan moderatör 'nin işlemesi için içerik incelemelerini barındıran Web tabanlı [İnceleme aracını](Review-Tool-User-Guide/human-in-the-loop.md)da içerir. İnsan girişi hizmeti eğitmez ancak hizmetin ve insanlardan oluşan ekibin birlikte kullanılması, geliştiricilerin verimlilik ve doğruluk arasındaki doğru dengeyi yakalamasını sağlar. Inceleme aracı Ayrıca çeşitli Content Moderator kaynakları için Kullanıcı dostu bir ön uç sağlar.
 
 ![Content Moderator insan inceleme aracı giriş sayfası](images/homepage.PNG)
 
 ## <a name="data-privacy-and-security"></a>Veri gizliliği ve güvenliği
 
-Olarak tüm Bilişsel hizmetler, Content Moderator hizmeti kullanan geliştiricilerin Microsoft'un müşteri verilerini ilkelerinin bilmeniz gerekir. Bkz: [Bilişsel Hizmetler sayfasına](https://www.microsoft.com/trustcenter/cloudservices/cognitiveservices) daha fazla bilgi için Microsoft Trust Center.
+Tüm bilişsel hizmetlerde olduğu gibi, Content Moderator hizmetini kullanan geliştiriciler Microsoft 'un müşteri verileri ilkelerine göre farkında olmalıdır. Daha fazla bilgi edinmek için Microsoft Güven Merkezi ' nde bilişsel [Hizmetler sayfasına](https://www.microsoft.com/trustcenter/cloudservices/cognitiveservices) bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-' Ndaki yönergeleri takip ederek Content Moderator hizmetini kullanmaya başlama [deneyin Content Moderator Web'de](quick-start.md).
+[Web üzerinde Try Content moderator](quick-start.md)yönergelerini izleyerek Content moderator hizmetini kullanmaya başlayın.

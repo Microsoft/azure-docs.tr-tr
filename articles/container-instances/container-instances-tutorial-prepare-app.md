@@ -1,21 +1,22 @@
 ---
-title: Öğretici - kapsayıcı görüntüsü Azure Container Instances için hazırlama
-description: Azure Container Instances Öğreticisi bölüm 1 / 3 - Azure Container Instances'a dağıtılacak uygulamayı içinde bir kapsayıcı görüntüsü hazırlama
+title: Öğretici-Azure Container Instances için kapsayıcı görüntüsü hazırlama
+description: Azure Container Instances öğreticisi Bölüm 1/3-Azure Container Instances dağıtım için bir kapsayıcı görüntüsünde uygulama hazırlama
 services: container-instances
 author: dlepow
+manager: gwallace
 ms.service: container-instances
 ms.topic: tutorial
 ms.date: 03/21/2018
 ms.author: danlep
 ms.custom: seodec18, mvc
-ms.openlocfilehash: f5d6ac81cc2553cc4a2d7b86c21417aa5ab1d572
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 719237f63d387cf56ab7947f8f168e0aa4351376
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60685698"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68325578"
 ---
-# <a name="tutorial-create-a-container-image-for-deployment-to-azure-container-instances"></a>Öğretici: Azure Container Instances'a dağıtılacak için kapsayıcı görüntüsü oluşturma
+# <a name="tutorial-create-a-container-image-for-deployment-to-azure-container-instances"></a>Öğretici: Azure Container Instances dağıtım için bir kapsayıcı görüntüsü oluşturun
 
 Azure Container Instances, Docker kapsayıcılarının herhangi bir sanal makine sağlama veya herhangi bir üst düzey hizmet benimsenmesi gerekmeden Azure altyapısına dağıtılmasını sağlar. Bu öğreticide, Azure Container Instances kullanılarak çalıştırılabilen bir kapsayıcı görüntüsüne küçük bir Node.js web uygulamasını paketlersiniz.
 
@@ -34,7 +35,7 @@ Serinin ilk bölümündeki bu makalede şunları yapacaksınız:
 
 ## <a name="get-application-code"></a>Uygulama kodunu alma
 
-Bu öğreticideki örnek uygulama, [Node.js][nodejs] ile derlenen basit bir web uygulamasıdır. Uygulama, statik bir HTML sayfası görevi görür ve aşağıdaki ekran görüntüsüne benzer:
+Bu öğreticideki örnek uygulama, [Node. js][nodejs]' de yerleşik olarak bulunan basit bir Web uygulamasıdır. Uygulama, statik bir HTML sayfası görevi görür ve aşağıdaki ekran görüntüsüne benzer:
 
 ![Tarayıcıda gösterilen öğretici uygulama][aci-tutorial-app]
 
@@ -44,11 +45,11 @@ Bu öğreticideki örnek uygulama, [Node.js][nodejs] ile derlenen basit bir web 
 git clone https://github.com/Azure-Samples/aci-helloworld.git
 ```
 
-Doğrudan GitHub’dan da [ZIP arşivini indirebilirsiniz][aci-helloworld-zip].
+Ayrıca [, ZIP arşivini][aci-helloworld-zip] GitHub 'dan doğrudan indirebilirsiniz.
 
 ## <a name="build-the-container-image"></a>Kapsayıcı görüntüsünü oluşturma
 
-Örnek uygulamada bulunan Dockerfile, kapsayıcının nasıl derlendiğini gösterir. Kapsayıcılarla kullanmaya uygun küçük bir dağıtım olan [Alpine Linux][alpine-linux] tabanlı [resmi bir Node.js görüntüsünden][docker-hub-nodeimage] başlatılır. Ardından uygulama dosyalarını kapsayıcıya kopyalar, Node Package Manager’ı kullanarak bağımlılıkları yükler ve son olarak uygulamayı başlatır.
+Örnek uygulamada bulunan Dockerfile, kapsayıcının nasıl derlendiğini gösterir. Kapsayıcılarla kullanım için uygun olan küçük bir dağıtım olan [alp Linux][alpine-linux]tabanlı [resmi bir Node. js görüntüsünden][docker-hub-nodeimage] başlar. Ardından uygulama dosyalarını kapsayıcıya kopyalar, Node Package Manager’ı kullanarak bağımlılıkları yükler ve son olarak uygulamayı başlatır.
 
 ```Dockerfile
 FROM node:8.9.3-alpine
@@ -59,13 +60,13 @@ RUN npm install
 CMD node /usr/src/app/index.js
 ```
 
-Kapsayıcı görüntüsünü oluşturmak için [docker build][docker-build] komutunu kullanın ve görüntüyü *aci-tutorial-app* olarak etiketleyin:
+Kapsayıcı görüntüsünü oluşturmak için [Docker Build][docker-build] komutunu kullanın ve bunu *aci-öğreticisi-App*olarak etiketleyin:
 
 ```bash
 docker build ./aci-helloworld -t aci-tutorial-app
 ```
 
-[docker build][docker-build] komutunun çıktısı aşağıdakine benzer (okunabilirliği artırmak için kesilmiştir):
+[Docker Build][docker-build] komutunun çıktısı aşağıdakine benzer (okunabilirlik için kesildi):
 
 ```console
 $ docker build ./aci-helloworld -t aci-tutorial-app
@@ -87,7 +88,7 @@ Successfully built 6edad76d09e9
 Successfully tagged aci-tutorial-app:latest
 ```
 
-Oluşturulan görüntüyü görmek için [docker images][docker-images] komutunu kullanın:
+Oluşturulan görüntüyü görmek için [Docker görüntüleri][docker-images] komutunu kullanın:
 
 ```bash
 docker images
@@ -103,7 +104,7 @@ aci-tutorial-app    latest    5c745774dfa9    39 seconds ago    68.1 MB
 
 ## <a name="run-the-container-locally"></a>Kapsayıcıyı yerel olarak çalıştırma
 
-Kapsayıcıyı Azure Container Instances’a dağıtmadan önce [docker run][docker-run] komutunu kullanarak bunu yerel olarak çalıştırın ve çalışır durumda olduğunu doğrulayın. `-d` anahtarı kapsayıcının arka planda çalışmasını sağlar. `-p` ise işleminizdeki rastgele bağlantı noktalarından birini kapsayıcının 80 numaralı bağlantı noktasına eşlemenizi sağlar.
+Kapsayıcıyı Azure Container Instances ' a dağıtmadan önce, [Docker Run][docker-run] ' ı kullanarak yerel olarak çalıştırın ve çalıştığını onaylayın. `-d` anahtarı kapsayıcının arka planda çalışmasını sağlar. `-p` ise işleminizdeki rastgele bağlantı noktalarından birini kapsayıcının 80 numaralı bağlantı noktasına eşlemenizi sağlar.
 
 ```bash
 docker run -d -p 8080:80 aci-tutorial-app

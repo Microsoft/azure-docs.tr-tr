@@ -1,40 +1,40 @@
 ---
-title: CloudSimple hesap yönetimi - Azure
-description: CloudSimple hesapları yönetme hakkında bilgi edinin
+title: CloudSimple hesap yönetimi-Azure
+description: CloudSimple hesaplarını yönetme hakkında bilgi edinin
 author: sharaths-cs
 ms.author: dikamath
 ms.date: 04/10/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: da0b948ff1445c98d3c254e97d0a02a6641699db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a180e2ba6c1a610116271d5a9b6e3fdf562cecdf
+ms.sourcegitcommit: 39d95a11d5937364ca0b01d8ba099752c4128827
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64577788"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69563200"
 ---
 # <a name="account-management-overview"></a>Hesap yönetimine genel bakış
 
-CloudSimple hizmetinizi oluşturduğunuzda, bir hesap üzerinde CloudSimple oluşturur.  Hizmet bulunduğu Azure aboneliğinizle ilişkili hesaptır.  Tüm kullanıcılarla **sahibi** ve **katkıda bulunan** abonelikte yer alan rolleri CloudSimple portalına erişim vardır.  Azure abonelik kimliği ve Kiracı kimliği CloudSimple hizmetle ilişkili bulunur [hesaplar sayfasında](https://docs.azure.cloudsimple.com/account/).
+CloudSimple hizmetinizi oluşturduğunuzda, CloudSimple üzerinde bir hesap oluşturur.  Hesap, hizmetin bulunduğu Azure aboneliğiniz ile ilişkilendirilir.  Abonelikte **sahip** ve **katkıda** bulunan rollerine sahip tüm kullanıcıların cloudsimple portalına erişimi vardır.  CloudSimple hizmetiyle ilişkili Azure abonelik KIMLIĞI ve kiracı KIMLIĞI [hesaplar sayfasında](account.md)bulunur.
 
-## <a name="additional-alert-emails"></a>Ek uyarı e-postası
+## <a name="additional-alert-emails"></a>Ek uyarı e-postaları
 
-Kimlikleri e-posta uyarıları almak için CloudSimple yapılandırabilirsiniz:
+CloudSimple ' daki e-posta kimliklerini, uyarı almak için yapılandırabilirsiniz:
 
-* Hizmetinizle ilgili
+* Hizmetinize ilişkin
 * Otomatik işleme için
 
-## <a name="cloudsimple-operator-access"></a>CloudSimple işleci erişim
+## <a name="cloudsimple-operator-access"></a>CloudSimple işleç erişimi
 
-Hizmet operasyon personeli için CloudSimple portalına erişimi denetleyebilirsiniz.  Bir destek bileti gönderin, hizmet operasyon personeli portalında oturum açın.  Hizmet işlemleri bildirilen herhangi bir sorunu düzeltir ve gerçekleştirilen eylemler, Denetim günlüklerinde bulunabilir.
+Hizmet işlemleri personeli için CloudSimple portalına erişimi denetleyebilirsiniz.  Hizmet işlemleri personeli, bir destek bileti gönderdiğinizde portalda oturum açın.  Hizmet işlemleri, bildirilen tüm sorunları düzeltir ve gerçekleştirilen eylemler denetim günlüklerinde kullanılabilir.
 
 ## <a name="users"></a>Kullanıcılar
 
-Kullanan tüm kullanıcılara **sahibi** ve **katkıda bulunan** abonelikte rolünün CloudSimple portalına erişim vardır.  Portalına eriştiğinde, kullanıcı CloudSimple hesabı oluşturulur.  Erişimi belirli kullanıcılar için CloudSimple portalına hesapları sayfasından devre dışı bırakabilirsiniz.
+Abonelikte **sahip** ve **katkıda** bulunan rolü olan tüm kullanıcıların cloudsimple portalına erişimi vardır.  Portala eriştiğinizde, Kullanıcı CloudSimple hesabında oluşturulur.  Hesaplar sayfasından belirli kullanıcılar için CloudSimple portalına erişimi devre dışı bırakabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Hesap Özeti görüntüle](https://docs.azure.cloudsimple.com/account/)
-* [Kullanıcı listesini görüntüle](https://docs.azure.cloudsimple.com/users/)
+* [Hesap özetini görüntüle](account.md)
+* [Kullanıcı listesini görüntüle](users.md)

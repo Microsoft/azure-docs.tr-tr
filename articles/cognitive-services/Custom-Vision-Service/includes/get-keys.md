@@ -4,15 +4,18 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 02/07/2019
 ms.author: pafarley
-ms.openlocfilehash: d5d1d744b064bc015bf2a4d708f4b227e6d68e5c
-ms.sourcegitcommit: 778e7376853b69bbd5455ad260d2dc17109d05c1
+ms.openlocfilehash: fa13d9bdf73b87597d4eb01830ec2c76538521fe
+ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/23/2019
-ms.locfileid: "66236383"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73800181"
 ---
 ## <a name="get-the-training-and-prediction-keys"></a>Eğitim ve tahmin anahtarlarını alma
 
-Projenin hizmetle etkileşimli çalışması için geçerli bir abonelik anahtarları kümesi gerekir. Ücretsiz deneme anahtarları kümesi almak için [Özel Görüntü İşleme web sitesine](https://customvision.ai) gidin ve bir Microsoft hesabıyla oturum açın. Sağ üst kısımdaki __dişli simgesini__ seçin. __Hesaplar__ bölümünde, __Eğitim Anahtarı__ ve __Tahmin Anahtarı__ alanlarındaki değerleri görüntüleyin. Bunlar daha sonra gerekecektir. 
+Projenin hizmetle etkileşimde bulunmak için geçerli bir abonelik anahtarları kümesi olması gerekir. Öğeleri [özel görüntü işleme web sitesinde](https://customvision.ai)bulabilirsiniz. Özel Görüntü İşleme kaynaklarınızı oluşturmak için kullanılan Azure hesabıyla ilişkili hesapla oturum açın. Giriş sayfasında (yeni proje ekleme seçeneğinin bulunduğu sayfa) sağ üstteki __dişli simgesini__ seçin. Eğitim ve tahmin kaynaklarınızı listede bulun ve genişletin. Burada eğitim anahtarınızı, tahmin anahtarınızı ve tahmini kaynak KIMLIĞI değerlerini bulabilirsiniz. Bu değerleri geçici bir konuma kaydedin.
 
 ![Anahtarlar kullanıcı arabiriminin görüntüsü](../media/csharp-tutorial/training-prediction-keys.png)
+
+Ya da bu anahtarları ve KIMLIĞI, Özel Görüntü İşleme eğitim ve tahmin kaynaklarınızı görüntüleyerek ve __anahtarlar__ sekmesine giderek [Azure Portal](https://www.portal.azure.com) elde edebilirsiniz. Eğitim anahtarınızı ve tahmin anahtarınızı bulabilirsiniz. Tahmin kaynak KIMLIĞINIZI almak için tahmin kaynağınızın __Özellikler__ sekmesine gidin.
+

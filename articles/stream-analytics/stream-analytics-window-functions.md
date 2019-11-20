@@ -8,20 +8,20 @@ ms.reviewer: jasonh
 ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 06/11/2019
-ms.openlocfilehash: 56b6f11d226f25e3094a90d8646fa13860ee306e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 530ff8d09d6c580a31ae26929fafcec5bb5b471b
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67066755"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67621601"
 ---
 # <a name="introduction-to-stream-analytics-windowing-functions"></a>Stream Analytics Pencereleme işlevleri'ne giriş
 
 Saat akış senaryolarda, zamana bağlı windows bulunan veriler üzerinde işlem gerçekleştirme yaygın modelidir. Stream Analytics, geliştiricilerin çok az bir çabayla Yazar karmaşık akış işleme işlerini Pencereleme işlevleri için yerel desteğe sahiptir.
 
-Aralarından seçim zamana bağlı windows dört çeşit vardır: [**Atlayan**](https://msdn.microsoft.com/azure/stream-analytics/reference/tumbling-window-azure-stream-analytics), [ **atlamalı**](https://msdn.microsoft.com/azure/stream-analytics/reference/hopping-window-azure-stream-analytics), [ **kayan**](https://msdn.microsoft.com/azure/stream-analytics/reference/sliding-window-azure-stream-analytics), ve [ **oturumu**  ](https://msdn.microsoft.com/azure/stream-analytics/reference/session-window-azure-stream-analytics) windows.  Pencere işlevleri kullanmak [ **GROUP BY** ](https://msdn.microsoft.com/azure/stream-analytics/reference/group-by-azure-stream-analytics) sorgu söz dizimi, Stream Analytics işlerinde yan tümcesi. Olayları kullanarak birden çok windows üzerinde toplayabilirsiniz [ **Windows()** işlevi](https://docs.microsoft.com/stream-analytics-query/windows-azure-stream-analytics).
+Aralarından seçim zamana bağlı windows dört çeşit vardır: [**Atlayan**](https://docs.microsoft.com/stream-analytics-query/tumbling-window-azure-stream-analytics), [ **atlamalı**](https://docs.microsoft.com/stream-analytics-query/hopping-window-azure-stream-analytics), [ **kayan**](https://docs.microsoft.com/stream-analytics-query/sliding-window-azure-stream-analytics), ve [ **oturumu**  ](https://docs.microsoft.com/stream-analytics-query/session-window-azure-stream-analytics) windows.  Pencere işlevleri kullanmak [ **GROUP BY** ](https://docs.microsoft.com/stream-analytics-query/group-by-azure-stream-analytics) sorgu söz dizimi, Stream Analytics işlerinde yan tümcesi. Olayları kullanarak birden çok windows üzerinde toplayabilirsiniz [ **Windows()** işlevi](https://docs.microsoft.com/stream-analytics-query/windows-azure-stream-analytics).
 
-Tüm [Pencereleme](https://msdn.microsoft.com/azure/stream-analytics/reference/windowing-azure-stream-analytics) işlemleri çıktı sonuçları **son** penceresinin. Çıktı penceresi kullanılan toplama işleve göre tek bir olay olacaktır. Çıkış olayı penceresinin bitiş zaman damgası sahip olur ve tüm pencere işlevleri sabit uzunluk ile tanımlanır. 
+Tüm [Pencereleme](https://docs.microsoft.com/stream-analytics-query/windowing-azure-stream-analytics) işlemleri çıktı sonuçları **son** penceresinin. Çıktı penceresi kullanılan toplama işleve göre tek bir olay olacaktır. Çıkış olayı penceresinin bitiş zaman damgası sahip olur ve tüm pencere işlevleri sabit uzunluk ile tanımlanır. 
 
 ![Stream Analytics pencere işlevleri kavramı](media/stream-analytics-window-functions/stream-analytics-window-functions-conceptual.png)
 
@@ -56,6 +56,6 @@ Bir bölüm anahtarı sağlandığında olayları anahtarıyla birlikte gruplan�
 * [Azure Stream analytics'e giriş](stream-analytics-introduction.md)
 * [Azure Akış Analizi'ni kullanmaya başlama](stream-analytics-real-time-fraud-detection.md)
 * [Azure Akış Analizi işlerini ölçeklendirme](stream-analytics-scale-jobs.md)
-* [Azure Akış Analizi Sorgu Dili Başvurusu](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure Akış Analizi Sorgu Dili Başvurusu](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
 * [Azure Akış Analizi Yönetimi REST API'si Başvurusu](https://msdn.microsoft.com/library/azure/dn835031.aspx)
 

@@ -1,80 +1,81 @@
 ---
-title: Azure Marketi için bir sanal makine teklifi için teknik varlıkları oluşturma
-description: Azure Marketi'nde bir sanal makine teklifi için teknik varlıkları oluşturma açıklanır.
+title: Azure Marketi için bir sanal makine teklifi için teknik varlıklar oluşturma
+description: Azure Marketi 'nde bir sanal makine teklifi için teknik varlıkların nasıl oluşturulacağını açıklar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: pbutlerm
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 08/20/2018
 ms.author: pabutler
-ms.openlocfilehash: 6113c10cd152a22bd31e7212d86925b0c2107e58
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 45d0ff5b7b3fea1566b13b61bd01cc17da61e4b3
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938404"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824504"
 ---
-# <a name="create-technical-assets-for-a-virtual-machine-offer"></a>Bir sanal makine teklifi için teknik varlıkları oluşturma
+# <a name="create-technical-assets-for-a-virtual-machine-offer"></a>Bir sanal makine teklifi için teknik varlıklar oluşturma
 
-Bu bölümde, oluşturma ve Azure Market teknik varlıkları bir sanal makine (VM) teklifi için yapılandırma açıklanmaktadır.  Bir VM iki bileşenleri içerir: isteğe bağlı ilişkili veri diskleri ve çözüm sanal sabit disk (VHD).  
+Bu bölümde, Azure Marketi için bir sanal makine (VM) teklifiyle ilgili teknik varlıkları oluşturma ve yapılandırma adımları anlatılmaktadır.  VM iki bileşen içerir: çözüm sanal sabit diski (VHD) ve isteğe bağlı olarak ilişkili veri diskleri.  
 
-- *Sanal sabit diskleri (VHD'ler)* , işletim sistemi ve Azure Marketi'nde teklifinizle dağıtacağınız çözümünüzü içeren. VHD Hazırlama işlemi Linux tabanlı olmasına bağlı olarak farklılık gösterir, Windows tabanlı veya özel tabanlı bir VM.
-- *Veri diskleri* bir sanal makine için ayrılmış, kalıcı depolama temsil eder. Yapmak *değil* VHD çözümü kullanın (örneğin, `C:` sürücü) kalıcı bilgileri depolamak için.
+- Azure Market teklifinizle birlikte dağıtacağınız işletim sistemini ve çözümünüzü içeren *sanal sabit diskler (VHD)* . VHD 'yi hazırlama işlemi, Linux tabanlı, Windows tabanlı veya özel tabanlı bir VM olmasına bağlı olarak farklılık gösterir.
+- *Veri diskleri* , bir sanal makine için adanmış ve kalıcı depolamayı temsil eder. Kalıcı bilgileri depolamak için çözüm VHD 'yi (örneğin, `C:` sürücüsü *) kullanmayın.*
 
-Bir işletim sistemi diski ile sıfır, bir VM görüntüsü içerir veya daha fazla veri diski. Disk başına bir VHD gereklidir. Oluşturulacak bir VHD bile boş veri diskleri gerektirir.
-VM işletim sistemi, VM boyutu, açmak için bağlantı noktası yapılandırmanız gerekir ve bağlı veri diskleri en fazla 15.
+Bir VM görüntüsü, bir işletim sistemi diski ve sıfır veya daha fazla veri diski içerir. Disk başına bir VHD gereklidir. Boş veri diskleri bile, bir VHD 'nin oluşturulmasını gerektirir.
+VM işletim sistemini, VM boyutunu, açılacak bağlantı noktalarını ve en fazla 15 bağlı veri diski yapılandırmanız gerekir.
 
 > [!TIP] 
-> Kullandığınız işletim sisteminden bağımsız olarak yalnızca SKU için gereken en az sayıda veri diski ekleyin. Müşteriler dağıtım sırasında bir görüntünün parçası olan diskler kaldıramazsınız ancak bunlar her zaman diskleri süresince veya dağıtım sonrasında ekleyebilirsiniz. 
+> Kullandığınız işletim sisteminden bağımsız olarak yalnızca SKU için gereken en az sayıda veri diski ekleyin. Müşteriler, dağıtım sırasında bir görüntünün parçası olan diskleri kaldıramaz, ancak dağıtım sırasında veya sonrasında her zaman disk ekleyebilirler. 
 
 > [!IMPORTANT]
-> *Yeni bir görüntü sürümü sayısı disk değiştirmeyin.* Görüntüde veri diskleri yeniden yapılandırmanız gerekir, yeni bir SKU'ya tanımlayın. Farklı disk sayısı olan yeni bir görüntü sürümü yayımlama, yeni dağıtım çözümleri Azure Resource Manager şablonları ve diğer senaryolar ile otomatik ölçeklendirme, otomatik dağıtım durumlarda yeni görüntü sürümünü temel bozucu olası sahip olur.
+> *Yeni bir görüntü sürümündeki disk sayısını değiştirmeyin.* Görüntüdeki veri disklerini yeniden yapılandırmanız gerekiyorsa, yeni bir SKU tanımlayın. Farklı disk sayımlarıyla yeni bir görüntü sürümünün yayımlanması, otomatik ölçeklendirme, çözümlerin Azure Resource Manager şablonları ve diğer senaryolar aracılığıyla otomatik olarak dağıtılması gibi yeni görüntü sürümüne bağlı olarak yeni dağıtım olasılığını ortadan kaldırılacaktır.
 
 [!INCLUDE [updated-for-az](../../../../includes/updated-for-az.md)]
 
-## <a name="fundamental-technical-knowledge"></a>Temel teknik bilgiler
+## <a name="fundamental-technical-knowledge"></a>Temel teknik bilgi
 
-Tasarım, geliştirme ve test bu varlıkları zaman ayırın ve Azure platformu ve teklif oluşturmak için kullanılan teknolojileri teknik bilgi gerektirir. Çözüm etki alanınız ek olarak, mühendislik ekibiniz aşağıdaki Microsoft teknolojileri hakkında bilgilere sahip olmanız gerekir: 
--   Temel düzeyde bilinmesini [Azure Hizmetleri](https://azure.microsoft.com/services/) 
--   Nasıl yapılır [tasarlayabilir ve Azure uygulamaları tasarlama](https://azure.microsoft.com/solutions/architecture/)
--   Bilgisine [Azure sanal makineler](https://azure.microsoft.com/services/virtual-machines/), [Azure depolama](https://azure.microsoft.com/services/?filter=storage) ve [Azure ağ iletişimi](https://azure.microsoft.com/services/?filter=networking)
--   Bilgisine [Azure Resource Manager](https://azure.microsoft.com/features/resource-manager/)
--   Bilgisine [JSON](https://www.json.org/)
+Bu varlıkların tasarlanmasına, oluşturulmasına ve test edilmesine zaman alır ve hem Azure platformu hem de teklifi oluşturmak için kullanılan teknolojiler hakkında teknik bilgi gerektirir. Çözüm etki alanınız ' ne ek olarak, mühendislik ekibiniz aşağıdaki Microsoft teknolojileri hakkında bilgi sahibi olmalıdır: 
+-   [Azure hizmetlerini](https://azure.microsoft.com/services/) temel olarak anlama 
+-   [Azure uygulamalarını tasarlama ve mimarın](https://azure.microsoft.com/solutions/architecture/)
+-   [Azure sanal makineler](https://azure.microsoft.com/services/virtual-machines/), [Azure depolama](https://azure.microsoft.com/services/?filter=storage) ve [Azure ağı](https://azure.microsoft.com/services/?filter=networking) ile çalışma hakkında bilgi
+-   [Azure Resource Manager](https://azure.microsoft.com/features/resource-manager/) çalışma bilgileri
+-   [JSON](https://www.json.org/) hakkında çalışma bilgisi
 
 
-## <a name="suggested-tools"></a>Önerilen Araçlar 
+## <a name="suggested-tools"></a>Önerilen araçlar 
 
-Birini veya her ikisini VHD'ler ve sanal makineleri yönetmenize yardımcı olması için aşağıdaki komut dosyası ortamları seçin:
+VHD 'Lerin ve VM 'Lerin yönetilmesine yardımcı olmak için aşağıdaki komut dosyası ortamlarının birini veya her ikisini birden seçin:
 -   [Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview)
 -   [Azure CLI](https://docs.microsoft.com/cli/azure)
 
-Ayrıca, aşağıdaki araçları, geliştirme ortamınızı eklemenizi öneririz: 
+Ayrıca, aşağıdaki araçların geliştirme ortamınıza eklenmesini öneririz: 
 
 -   [Azure Depolama Gezgini](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer)
 -   [Visual Studio Code](https://code.visualstudio.com/)
     *   Uzantı: [Azure Resource Manager araçları](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools)
     *   Uzantı: [Beautify](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify)
-    *   Uzantı: [JSON prettify](https://marketplace.visualstudio.com/items?itemName=mohsen1.prettify-json)
+    *   Uzantı: [prettify JSON](https://marketplace.visualstudio.com/items?itemName=mohsen1.prettify-json)
 
-Ayrıca araçlar da gözden geçirme öneririz [Azure Geliştirici Araçları](https://azure.microsoft.com/tools/) sayfası ve Visual Studio kullanıyorsanız [Visual Studio Market](https://marketplace.visualstudio.com/).
+Ayrıca, [Azure Geliştirici Araçları](https://azure.microsoft.com/tools/) sayfasındaki kullanılabilir araçların incelenmesi önerilir ve Visual Studio kullanıyorsanız, [Visual Studio Market](https://marketplace.visualstudio.com/).
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu bölümde sonraki makalelerinde oluşturma ve bu VM varlıkları kaydetme adım adım:
+Bu bölümdeki sonraki makaleler, bu VM varlıklarını oluşturma ve kaydetme adımlarında size yol gösterir:
 
-1. [Azure ile uyumlu sanal sabit disk Oluştur](./cpp-create-vhd.md) ya da bir Linux veya Windows tabanlı Azure ile uyumlu bir VHD oluşturma açıklanır.  Bu VM karşıya yükleme için hazırlanılıyor boyutlandırma ve düzeltme eki uygulama gibi en iyi uygulamaları içerir.
+1. [Azure ile uyumlu bir sanal sabit disk oluşturma](./cpp-create-vhd.md) , Azure ile uyumlu bir Linux veya WINDOWS tabanlı VHD oluşturmayı açıklar.  Bu, boyutlandırma, düzeltme eki uygulama ve VM 'yi karşıya yükleme için hazırlama gibi en iyi uygulamaları içerir.
 
-2. [Sanal makineye bağlanma](./cpp-connect-vm.md) uzaktan, yeni oluşturulan VM'ye bağlanın ve içine oturum açıklanmaktadır.  Bu makalede, ayrıca kullanım maliyet tasarrufu için VM'yi durdurmak nasıl açıklar.
+2. [Sanal makineye bağlanma,](./cpp-connect-vm.md) yenı oluşturulan sanal makinenize uzaktan bağlanmayı ve oturum açmayı açıklar.  Bu makalede ayrıca, kullanım maliyetlerinde kaydedilecek VM 'nin nasıl durdurulacağı açıklanmaktadır.
 
-3. [Sanal makine yapılandırma](./cpp-configure-vm.md) doğru VHD boyutunu seçme, görüntünüzü generalize, en son güncelleştirmeleri (düzeltme) uygulama ve özel yapılandırmalar zamanlama açıklanmaktadır.
+3. [Sanal makineyi yapılandırma](./cpp-configure-vm.md) doğru VHD boyutunu seçme, görüntünüzü Genelleştirme, en son güncelleştirmeleri uygulama (düzeltme ekleri) ve özel yapılandırma zamanlama hakkında bilgiler sağlar.
 
-4. [Bir sanal sabit diskten bir sanal makine dağıtma](./cpp-deploy-vm-vhd.md) nasıl Azure dağıtılan bir VHD'den VM kaydedileceği açıklanmaktadır.  Gereken araçları ve bunları bir kullanıcı VM görüntüsü oluşturun, ardından kullanarak Azure'a dağıtmak için nasıl kullanılacağını listeler [Microsoft Azure Portal'da](https://ms.portal.azure.com/) veya PowerShell betikleri. 
+4. Sanal bir [sabit diskten bir sanal makine dağıtmak](./cpp-deploy-vm-vhd.md) , bir VM 'nin Azure tarafından DAĞıTıLAN bir VHD 'den nasıl kaydedileceği açıklanmaktadır.  Gerekli araçları ve bunların bir Kullanıcı VM görüntüsü oluşturmak için nasıl kullanılacağını ve [Microsoft Azure Portal](https://ms.portal.azure.com/) ya da PowerShell betiklerini kullanarak Azure 'a dağıtmayı listeler. 
 
-5. [Bir sanal makine görüntüsü onaylamak](./cpp-certify-vm.md) test edin ve Azure Marketi'nde sertifika için bir VM görüntüsü gönderme açıklanmaktadır. Nereden edinilir açıklar *Azure sertifikası için sertifika Test aracı* aracı ve VM görüntünüzü onaylamak için bu aracı kullanın. 
+5. [Bir sanal makine görüntüsünü onaylama](./cpp-certify-vm.md) Azure Market sertifikası IÇIN bir VM görüntüsünü test etme ve gönderme hakkında bilgiler sağlar. *Azure Sertifikalı aracı Için sertifika test aracı* 'nı nereden ALACAĞıNıZ ve VM görüntünüzü onaylamak için bu aracın nasıl kullanılacağı açıklanmaktadır. 
 
-6. [SAS URI'sini Al](./cpp-get-sas-uri.md) paylaşılan erişim imzası (SAS), VM yansımaları için URI alınacağı açıklanmaktadır.
+6. [SAS URI 'Si alma](./cpp-get-sas-uri.md) , sanal makine görüntülerinizin paylaşılan erişim IMZASıNı (SAS) URI 'sini almayı açıklar.
  
-Destekleyici bir makale olarak [ortak paylaşılan erişim imzası URL'si sorunlarını](./cpp-common-sas-url-issues.md) SAS URI'leri ile ilgili olası çözümü karşılaşabileceğiniz bazı yaygın sorunlar listelenir.
+Destekleyici bir makale olarak, [ortak paylaşılan erişim imzası URL 'si sorunları](./cpp-common-sas-url-issues.md) , SAS URI 'lerini ve ilgili olası çözümleri kullanarak karşılaşabileceğiniz bazı yaygın sorunları listeler.
 
-Tüm adımları tamamladıktan sonra hazır olmayacak [, VM teklifi yayımlama](./cpp-publish-offer.md) Azure Marketi.
+Tüm bu adımları tamamladıktan sonra, [sanal makine teklifinizi](./cpp-publish-offer.md) Azure Marketi 'ne yayımlamaya hazırlarsınız.

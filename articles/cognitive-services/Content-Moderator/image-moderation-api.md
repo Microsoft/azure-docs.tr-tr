@@ -1,29 +1,29 @@
 ---
-title: Denetimi - Content Moderator resim
-titlesuffix: Azure Cognitive Services
-description: Content Moderator'ın makine Yardımlı resim denetimi ve orta görüntüleri için İnsan-de--döngü gözden geçirme aracı yetişkinlere yönelik ve müstehcen içeriği için kullanın.
+title: Görüntü denetleme-Content Moderator
+titleSuffix: Azure Cognitive Services
+description: Yetişkin ve kcy içeriği için orta görüntülerde Content Moderator makine yardımlı görüntü denetlemesi ve Kullanıcı döngüsü Inceleme aracını kullanın.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 01/10/2019
-ms.author: sajagtap
-ms.openlocfilehash: 9f1df23d1f0f24787bb9267064ffd647eda2cb74
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: pafarley
+ms.openlocfilehash: 6d419135a1da68d23689f66d3134a638d71a3eab
+ms.sourcegitcommit: 38251963cf3b8c9373929e071b50fd9049942b37
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60699282"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73044110"
 ---
-# <a name="learn-image-moderation-concepts"></a>Görüntü denetimi kavramları öğrenin
+# <a name="learn-image-moderation-concepts"></a>Görüntü denetleme kavramlarını öğrenin
 
-Content Moderator'ın makine Yardımlı resim denetimi kullanın ve [İnsan içinde--döngüsü gözden geçirme aracı](Review-Tool-User-Guide/human-in-the-loop.md) yetişkinlere yönelik ve müstehcen içerikleri için görüntüleri denetlemek. Metin içeriği için görüntü tarama, metin ayıklama ve yüzleri algılayın. Başka bir işlem yapmanıza ve özel listeler karşı görüntüleri eşleşmiyor.
+Yetişkin ve kcy içeriği için orta görüntülerde Content Moderator makine yardımlı görüntü denetlemesi ve [Kullanıcı döngüsü İnceleme aracını](Review-Tool-User-Guide/human-in-the-loop.md) kullanın. Metin içeriğinin görüntülerini tarayın ve bu metni ayıklayın ve yüzleri algılayın. Görüntüleri özel listelerle eşleştirebilir ve daha fazla işlem gerçekleştirebilirsiniz.
 
-## <a name="evaluating-for-adult-and-racy-content"></a>Yetişkinlere yönelik ve müstehcen içeriğin denetimi için değerlendirme
+## <a name="evaluating-for-adult-and-racy-content"></a>Yetişkin ve kcy içeriği değerlendirmesi
 
-**Değerlendir** işlem, 0 ile 1 arasında bir güven puanı döndürür. Ayrıca Boole veri eşittir true veya false döndürür. Bu değerler, görüntünün olası yetişkinlere yönelik veya müstehcen içerik içerip içermediğini tahmin edin. Görüntünüzü (dosya veya URL) ile API çağırdığınızda, döndürülen yanıt aşağıdaki bilgileri içerir:
+**Değerlendir** işlemi, 0 ile 1 arasında bir güvenirlik puanı döndürür. Ayrıca, true veya false değerine eşit Boole verileri döndürür. Bu değerler, görüntüde olası yetişkin veya kcy içeriği içerip içermediğini tahmin eder. Bir API 'yi yansımanıza (dosya veya URL) çağırdığınızda döndürülen yanıt aşağıdaki bilgileri içerir:
 
     "ImageModeration": {
       .............
@@ -38,18 +38,18 @@ Content Moderator'ın makine Yardımlı resim denetimi kullanın ve [İnsan içi
 > 
 > - `isImageAdultClassified`, belirli durumlarda açık saçık veya yetişkinlere yönelik olarak değerlendirilebilecek görüntülerin mevcut olma olasılığını gösterir.
 > - `isImageRacyClassified`, belirli durumlarda davetkar veya yetişkinlere yönelik olarak değerlendirilebilecek görüntülerin mevcut olma olasılığını gösterir.
-> - Puanları 0 ile 1 arasındadır. Yüksek puanı, kategori uygun olabilir yüksek modeli tahmin etmektir. Bu önizleme, el ile kodlanmış sonuçları yerine istatistiksel bir model kullanır. Her kategori için gereksinimlerinizi nasıl hizalandığını belirlemek için kendi içeriğe sahip test etmenizi öneririz.
-> - Boole değerleri: true veya false iç puanına göre eşikleri bağlı olarak. Müşteriler, bu değeri kullanın veya kendi içerik ilkelere dayalı özel eşikler karar değerlendirmelisiniz.
+> - Puanlar 0 ile 1 arasındadır. Puan arttıkça, modelin daha yüksek olması kategorinin uygulanabilir olabileceğini tahmin edilir. Bu önizleme el ile kodlanmış sonuçlar yerine istatistiksel bir modeli kullanır. Her kategorinin gereksinimlerinize göre nasıl hizalanacağını öğrenmek için kendi içeriklerinizi test etmenizi öneririz.
+> - Boole değerleri, iç puan eşiklerine bağlı olarak doğru ya da yanlış şeklindedir. Müşteriler, bu değerin kullanılıp kullanılmayacağını ya da içerik ilkelerine bağlı olarak özel eşiklere karar vermesini değerlendirmelidir.
 
-## <a name="detecting-text-with-optical-character-recognition-ocr"></a>Metin ile optik karakter tanıma (OCR) algılama
+## <a name="detecting-text-with-optical-character-recognition-ocr"></a>Optik karakter tanıma ile metin algılama (OCR)
 
-**Optik karakter tanıma (OCR)** işlemi resimdeki metin içeriğini varlığını tahmin eder ve diğer kullanımları arasında metin denetimi için ayıklar. Dil belirtebilirsiniz. Bir dil belirtmezseniz, saptama İngilizce için varsayılan olarak.
+**Optik karakter tanıma (OCR)** işlemi, bir görüntüdeki metin içeriğinin varlığını tahmin eder ve diğer kullanımlar arasında metin düzenlemesi için ayıklar. Dili belirtebilirsiniz. Bir dil belirtmezseniz, algılama varsayılan olarak Ingilizce 'Dir.
 
 Yanıt aşağıdaki bilgileri içerir:
-- Orijinal metni.
-- Güven puanlarını algılanan metin öğeleriyle.
+- Özgün metin.
+- Algılanan metin öğeleri, bunların güven puanlarıyla birlikte.
 
-Örnek Ayıkla:
+Örnek ayıklama:
 
     "TextDetection": {
       "status": {
@@ -66,14 +66,14 @@ Yanıt aşağıdaki bilgileri içerir:
 
 ## <a name="detecting-faces"></a>Yüz algılama
 
-Görüntüleri yüzleri gibi kişisel verileri algılamak için yüzleri algılama yardımcı olur. Her bir resim, olası yüzleri ve olası yüzlerin sayısı algılayın.
+Yüzeyleri algılama, görüntülerde yüzler gibi kişisel verileri algılamaya yardımcı olur. Olası yüzeyleri ve her görüntüde olası yüz sayısını tespit edersiniz.
 
-Yanıt, bu bilgiler şunları içerir:
+Yanıt şu bilgileri içerir:
 
 - Yüz sayısı
-- Yüz algılandı konumlarını listesi
+- Algılanan yüzlerin konumları listesi
 
-Örnek Ayıkla:
+Örnek ayıklama:
 
 
     "FaceDetection": {
@@ -99,30 +99,30 @@ Yanıt, bu bilgiler şunları içerir:
       ]
     }
 
-## <a name="creating-and-managing-custom-lists"></a>Özel listeleri oluşturma ve yönetme
+## <a name="creating-and-managing-custom-lists"></a>Özel listeler oluşturma ve yönetme
 
-Görüntüleri veya diğer türdeki bir içeriği, kullanıcıların karşıya yüklenmesinin ardından birçok çevrimiçi topluluklarına rahatsız edici öğeleri birden çok kez aşağıdaki gün, hafta ve ay paylaşılan. Sürekli tarama ve aynı görüntü veya birden fazla yerde görüntüden bile biraz değiştirilmiş sürümlerini filtreleme maliyetlerini, pahalı ve hata yapmaya açık olabilir.
+Birçok çevrimiçi topluluk içinde, kullanıcılar görüntüleri veya diğer içerik türlerini karşıya yükledikten sonra, rahatsız edici öğeler şu günlerde, haftalarda ve aylarda birden çok kez paylaşılabilir. Aynı görüntünün ve hatta birden çok yerden görüntünün küçük bir yerinde değiştirilmiş sürümlerinin sürekli taranması ve filtrelenmesi maliyetleri pahalı ve hata durumunda olabilir.
 
-Birden çok kez aynı görüntü yönetme yerine rahatsız edici görüntüleri özel engellenen içerik listenize ekleyin. Bu şekilde, içerik denetleme sistemi, özel listelerinizle gelen görüntüleri karşılaştırır ve herhangi başka bir işlemeye durdurur.
+Aynı görüntüyü birden çok kez Moderasyon yapmak yerine, rahatsız edici görüntüleri özel engellenen içerik listenize eklersiniz. Bu şekilde, içerik denetleme sisteminiz gelen görüntüleri özel listelerinizle karşılaştırır ve diğer işlemleri de sonlandırır.
 
 > [!NOTE]
-> Liste sayısı üst sınırı, her biri **10.000 görüntüyü aşmamak** kaydıyla **5 görüntü listesidir**.
+> Listesi sayısı üst sınırı, her biri **10.000 görüntüyü aşmamak** kaydıyla **5 listedir**.
 >
 
-Content Moderator eksiksiz [görüntü listesi Yönetimi API'sini](try-image-list-api.md) özel görüntüleri listesini yönetmek için işlemleri. İle başlayan [görüntü listeleri API Konsolu](try-image-list-api.md) ve REST API kod örnekleri kullanın. Ayrıca kullanıma [görüntü listesi .NET Hızlı Başlangıç](image-lists-quickstart-dotnet.md) Visual Studio ve C# ile deneyiminiz varsa.
+Content Moderator, özel görüntülerin listesini yönetmeye yönelik işlemler içeren, tamamlanmış bir [görüntü listesi yönetim API 'si](try-image-list-api.md) sağlar. [Görüntü LISTELERI API konsolu](try-image-list-api.md) ile başlayın ve REST API kod örneklerini kullanın. Visual Studio ve hakkında bilgi sahibiyseniz, [görüntü listesi .net hızlı](image-lists-quickstart-dotnet.md) başlangıcı ' C#nı da inceleyin.
 
-## <a name="matching-against-your-custom-lists"></a>Özel listelerinizi karşı eşleştirme
+## <a name="matching-against-your-custom-lists"></a>Özel listelerinize karşı eşleme
 
-Eşleştirme işlemi, oluşturulan ve yönetilen listeleme işlemleri kullanarak, özel listeler hiçbirini karşı gelen görüntülerin benzer öğe eşleştirmesi sağlar.
+Eşleştirme işlemi, gelen görüntülerin, liste işlemleri kullanılarak oluşturulup yönetilen özel listelerden herhangi birine karşı belirsiz şekilde eşleşmesini sağlar.
 
-Bir eşleşme bulunursa, işlem tanıtıcısı ve eşleşen görüntü denetimi etiketlerini döndürür. Yanıt, bu bilgiler şunları içerir:
+Bir eşleşme bulunursa, işlem eşleşen görüntünün tanımlayıcısını ve denetleme etiketlerini döndürür. Yanıt şu bilgileri içerir:
 
-- (0 ile 1 arasında) eşleştirme puanı
-- Eşleşen görüntüsü
-- Görüntü etiketleri (önceki denetimi sırasında atanır)
+- Puanı Eşleştir (0 ile 1 arasında)
+- Eşleşen resim
+- Resim etiketleri (önceki denetleme sırasında atanır)
 - Görüntü etiketleri
 
-Örnek Ayıkla:
+Örnek ayıklama:
 
     {
     ..............,
@@ -139,12 +139,12 @@ Bir eşleşme bulunursa, işlem tanıtıcısı ve eşleşen görüntü denetimi 
     ....
     }
 
-## <a name="human-review-tool"></a>İnsan inceleme aracı
+## <a name="human-review-tool"></a>İnsan tarafından inceleme aracı
 
-Daha fazla bilgi için ince durumlarda Content Moderator'ı kullanın [İnceleme aracında](Review-Tool-User-Guide/human-in-the-loop.md) ve içeriği için İnsan, Moderatörler gözden geçirmesi ve denetleme sonuçları yüzey API'si. Bunlar, makine tarafından atanan etiketleri gözden geçirin ve son kararlarına onaylayın.
+Daha fazla bilgi sahibi olmak için Content Moderator [Gözden geçirme aracını](Review-Tool-User-Guide/human-in-the-loop.md) ve API 'sini kullanarak insan moderatlarınız için gözden geçirme sonuçlarını ve içeriğini kullanın. Makine tarafından atanan etiketleri gözden geçirir ve son kararları onaylanır.
 
-![İnsan denetimciler için görüntü incelemesi](images/moderation-reviews-quickstart-dotnet.PNG)
+![İnsan moderatörler için görüntü incelemesi](images/moderation-reviews-quickstart-dotnet.PNG)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sürücü test [görüntü denetim API'si konsol](try-image-api.md) ve REST API kod örnekleri kullanın. Ayrıca kullanıma [görüntü denetimi .NET hızlı](image-moderation-quickstart-dotnet.md) Visual Studio ve C# ile deneyiminiz varsa.
+[Görüntü denetleme API konsolunun](try-image-api.md) sürücüsünü test edin ve REST API kod örneklerini kullanın. Ayrıca, Visual Studio ve hakkında bilginiz varsa [.NET SDK hızlı](dotnet-sdk-quickstart.md) başlangıcı ' C#nın görüntü düzenlemesi bölümüne göz atın.

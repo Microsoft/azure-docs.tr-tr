@@ -1,93 +1,92 @@
 ---
-title: Azure'da Windows VM'ler için eşitleme zaman | Microsoft Docs
-description: Zaman eşitleme Windows sanal makineleri için.
+title: Azure 'da Windows VM 'Leri için zaman eşitleme
+description: Windows sanal makineleri için zaman eşitleme.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 09/17/2018
 ms.author: cynthn
-ms.openlocfilehash: aac0a3ab14cc2543fe3b60f4c52e14e3cb0ee743
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 58824b13cfac264c051de6bea45d2dab3aae8fae
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65991706"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74068114"
 ---
-# <a name="time-sync-for-windows-vms-in-azure"></a>Azure'da Windows VM'ler için zaman eşitleme
+# <a name="time-sync-for-windows-vms-in-azure"></a>Azure 'da Windows VM 'Leri için zaman eşitleme
 
-Zaman eşitleme, güvenlik ve olay bağıntısı için önemlidir. Bazen, dağıtılmış işlemler uygulama için kullanılır. Birden çok bilgisayar sistemleri arasındaki zaman doğruluğu eşitleme ile elde edilir. Eşitleme yeniden başlatma ve bir zaman kaynağı ve zamanı getirilirken bilgisayar arasındaki ağ trafiği dahil olmak üzere birden çok şey etkilenebilir. 
+Zaman eşitleme, güvenlik ve olay bağıntısı açısından önemlidir. Bazen dağıtılmış işlem uygulamaları için kullanılır. Birden çok bilgisayar sistemi arasındaki zaman doğruluğu eşitleme yoluyla elde edilir. Eşitleme, zaman kaynağı ve saati geçen bilgisayar arasındaki yeniden başlatmalar ve ağ trafiği dahil olmak üzere birden çok işlemden etkilenebilir. 
 
-Azure artık Windows Server 2016 çalıştıran altyapı tarafından desteklenir. Windows Server 2016, gelişmiş algoritmalar saat düzeltin ve yerel saat ile UTC eşitlemek için koşul için kullanılan sahiptir.  Windows Server 2016'da nasıl Vm'leri konak üzerinde doğru zaman eşitleme yöneten VMICTimeSync hizmet geliştirildi. Geliştirmeleri VM başlangıç veya VM geri yükleme ve kesme gecikmesi düzeltme Windows Saati (W32time) için sağlanan örnekleri için daha doğru başlangıç saati içerir. 
+Azure artık Windows Server 2016 çalıştıran altyapı tarafından desteklenmektedir. Windows Server 2016, saat ve durum durumunu düzeltmek için kullanılan ve UTC ile eşitlenmesi için geliştirilmiş algoritmalara sahiptir.  Windows Server 2016 Ayrıca sanal makinelerin doğru zaman için konakla nasıl eşitleneceğini yöneten Vmictimessync hizmetini geliştirmiştir. Geliştirmeler, VM başlatma veya VM geri yükleme sırasında daha doğru ilk zamanı ve Windows saatine (W32Time) sağlanan örnekler için kesme gecikmesi düzeltmesini içerir. 
 
 
 >[!NOTE]
->Windows Saat hizmeti hızlı bir genel bakış için bu göz atın [üst düzey genel bakış videosu](https://aka.ms/WS2016TimeVideo).
+>Windows Saat hizmeti 'ne hızlı bir genel bakış için, bu [üst düzey genel bakış videosunu](https://aka.ms/WS2016TimeVideo)inceleyin.
 >
-> Daha fazla bilgi için [Windows Server 2016 doğru zamanı](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time). 
+> Daha fazla bilgi için bkz. [Windows Server 2016 Için doğru süre](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time). 
 
 ## <a name="overview"></a>Genel Bakış
 
-Bir bilgisayar saatini doğruluk ne kadar yakın bilgisayar saati Eşgüdümlü Evrensel Saat (UTC) zamanı standart açıktır gauged. UTC yalnızca devre dışı olarak 300 yıl cinsinden bir saniye olabilir kesin atomik saatler çok uluslu bir örnek tarafından tanımlanır. Ancak UTC doğrudan okunurken özel bir donanım gerektirir. Bunun yerine, saat sunucuları UTC'ye eşitlenir ve ölçeklenebilirlik ve sağlamlık sağlamak için diğer bilgisayarlardan erişilir. Her bilgisayar eşitleme hizmeti çalıştıran kullanmak için hangi saat sunucuları bilir ve bilgisayar saatini düzeltilmesi gerekip gerekmediğini düzenli olarak denetler ve gerekirse süreyi ayarlar. 
+Bir bilgisayar saatinin doğruluğu, bilgisayar saatinin Eşgüdümlü Evrensel Saat (UTC) zaman standardına ne kadar yakın olduğunu gauged. UTC, 300 yıl içinde yalnızca bir saniye boyunca kapalı olabilecek, çok uluslu bir tam atomik saatler örneği tarafından tanımlanır. Ancak UTC okuma doğrudan özel donanım gerektirir. Bunun yerine, zaman sunucuları UTC ile eşitlenir ve ölçeklenebilirlik ve sağlamlık sağlamak için diğer bilgisayarlardan erişilir. Her bilgisayarda, hangi zaman sunucularının kullanılacağını bilen ve bilgisayar saatinin düzeltilmesi ve gerektiğinde zaman ayarlaması gerekip gerekmediğini bilen zaman eşitleme hizmeti çalışmaktadır. 
 
-Azure ana Katman 1 Microsoft'a ait cihazlardan, GPS anten ile kendi zaman iç Microsoft saat sunucuları eşitlenir. Azure sanal makineler'de ya da doğru zaman geçirmek için konakta bağlıdır (*konak zaman*) VM veya VM'yi açın doğrudan saat saat sunucusu veya her ikisinin bir birleşiminde alabilirsiniz. 
+Azure Konakları, Microsoft 'a ait stratum 1 cihazlarından, GPS anteniyle zaman alan iç Microsoft zaman sunucularıyla eşitlenir. Azure 'daki sanal makineler, ana bilgisayarlarına bağlı olarak doğru süreyi (*konak saati*) VM 'ye veya VM 'nin bir zaman sunucusundan ya da her ikisinin birleşimini doğrudan almasını sağlayabilir. 
 
-Sanal makine konak etkileşim saati da etkileyebilir. Sırasında [Bakımı koruma bellek](maintenance-and-updates.md#maintenance-that-doesnt-require-a-reboot), Vm'leri 30 saniyeye kadar duraklatıldı. Örneğin, bakım başlamadan önce VM saat 10:00:00 AM'den gösterir ve 28 saniye sürer. VM çağrıldıktan sonra sanal makinedeki saat 10:00:00 28 saniye olabilecek'da, yine de gösterebilir devre dışı. Bu, doğru VMICTimeSync hizmet konak ve istemleri değişiklikler için VM'ler üzerinde gerçekleştirilecek dengelemek için neler olduğunu izler.
+Konak ile sanal makine etkileşimleri de aynı zamanda saati etkileyebilir. [Bakım koruma](maintenance-and-updates.md#maintenance-that-doesnt-require-a-reboot)sırasında, VM 'ler 30 saniyeye kadar duraklatılır. Örneğin, bakım başlamadan önce VM saati 10:00:00 ' i gösterir ve 28 saniye sürer. VM çalışmaya devam ettikten sonra, sanal makine üzerindeki saat yine 28 saniye olan 10:00:00 ' i gösteriyor olabilir. Bunu düzeltmek için, Vmictimessync hizmeti konakta neler olduğunu izler ve VM 'lerde telafi etmek için değişikliklerin gerçekleşmesini ister.
 
-VMICTimeSync hizmet örneği veya eşitleme modda çalışır ve yalnızca bir saat ileri olumlu yönde etkiler. W32time çalışıyor olmasını gerektiren örnek modunda VMICTimeSync hizmeti konak her 5 saniyede bir yoklar ve zamanı örnekleri için W32time sağlar. Her 30 saniyede yaklaşık W32time hizmeti en son zaman örneği alır ve konuğun saat etkilemek için kullanır. Bir konuk sürdürüldü veya 5 saniyeden ana bilgisayarın saati arkasındaki bir konuğun saat drifts eşitleme modunu etkinleştirir. W32time hizmeti düzgün şekilde çalıştığı durumlarda asla ikinci durumda olmaması gerekir.
+Vmictimessync hizmeti, örnek veya eşitleme modunda çalışır ve yalnızca ileriye dönük saati etkiler. W32Time 'ın çalıştırılmasını gerektiren örnek modda, Vmictimessync hizmeti ana bilgisayarı 5 saniyede bir yoklar ve W32Time için zaman örnekleri sağlar. Her 30 saniyede bir, W32Time hizmeti en son örneği alır ve konuğun saatini etkilemek için kullanır. Bir konuğun sürdürüleceği veya bir konuğun saatinin, ana bilgisayar saatinin arkasında 5 saniyeden uzun Drifts, eşitleme modu etkinleştirir. W32Time hizmetinin düzgün çalıştığı durumlarda, ikinci durum asla gerçekleşmemelidir.
 
-Zaman eşitleme çalışmıyor olmadan, sanal makinedeki saatin hataları accumulate. Yalnızca bir VM olduğunda, iş yüküne yüksek oranda doğru zaman tutma gerektirmedikçe etkisini önemli olmayabilir. Ancak çoğu durumda, biz birden fazla varsa, birbirine bağlı işlemler ve süre tüm dağıtım tutarlı olması gerekiyor izlemek için zaman kullanan VM'ler. Zaman VM'ler arasında farklı olduğunda, aşağıdaki etkileri görebilirsiniz:
+Zaman eşitleme çalışmaya gerek kalmadan, VM 'deki saat hata birikmesini ister. Yalnızca bir VM olduğunda, iş yükü son derece doğru zaman kazandıran olması gerekmedikçe etki önemli olmayabilir. Ancak çoğu durumda, işlemleri izlemek için zaman kullanan birden çok, birbirine bağlı sanal makine ve tüm dağıtımın tamamında tutarlı olması gerekir. VM 'Ler arasındaki zaman farklıysa, aşağıdaki etkileri görebilirsiniz:
 
-- Kimlik doğrulaması başarısız olur. Güvenlik protokolleri Kerberos ister veya sertifika bağımlı teknolojisini kullanan sistemler arasında tutarlı olan zaman. 
-- Günlükleri (veya diğer verileri) zamanında kabul etmiyorsanız ne bir sistemde bulmamız çok zordur. Aynı olay, farklı zamanlarda yapmayı bağıntı zor oluştu gibi görünür.
-- Saat kapalıysa, faturalandırma yanlış hesaplanması.
+- Kimlik doğrulaması başarısız olur. Kerberos veya sertifikaya bağımlı teknoloji gibi güvenlik protokolleri, sistemler arasında tutarlı olan zamana bağlıdır. 
+- Günlükler (veya diğer veriler) zaman içinde kabul etmiyorsanız sistemde ne olduğunu anlamak çok zordur. Aynı olay farklı zamanlarda gerçekleşmekle benzer ve bağıntı daha zor hale gelir.
+- Saat kapalıysa faturalandırma yanlış hesaplanabilir.
 
-Zaman eşitleme en son iyileştirmelerden kullanabileceğiniz sağlayan konuk işletim sistemi olarak Windows Server 2016'yı kullanarak Windows dağıtımlar için en iyi sonuçlar elde edersiniz.
+Windows dağıtımları için en iyi sonuçlar, Konuk işletim sistemi olarak Windows Server 2016 kullanılarak elde edilir ve bu da zaman eşitlemeyle ilgili en son geliştirmeleri kullanmanıza neden olur.
 
 ## <a name="configuration-options"></a>Yapılandırma seçenekleri
 
-Zaman eşitleme Windows Azure'da barındırılan sanal makineleriniz için yapılandırmaya yönelik üç seçenek vardır:
+Azure 'da barındırılan Windows sanal makinelerinize zaman eşitlemesini yapılandırmak için üç seçenek vardır:
 
-- Ana saat ve time.windows.com. Bu, Azure Market görüntüleri kullanılan varsayılan yapılandırmadır.
-- Konak yalnızca.
-- Başka bir, dış saat sunucusu ile veya olmadan konağı zaman kullanarak kullanın.
+- Ana bilgisayar süresi ve time.windows.com. Bu, Azure Marketi görüntülerinde kullanılan varsayılan yapılandırmadır.
+- Yalnızca konak.
+- Konak süresi kullanmadan veya olmadan başka bir dış saat sunucusu kullanın.
 
 
 ### <a name="use-the-default"></a>Varsayılanı kullan
 
-Varsayılan olarak, Windows işletim sistemi VM görüntüleri için iki kaynaktan eşitlemek w32time yapılandırılır: 
+Varsayılan olarak, Windows işletim sistemi VM görüntüleri W32Time için iki kaynaktan eşitlenecek şekilde yapılandırılır: 
 
-- NtpClient sağlayıcısı time.windows.com bilgilerini alır.
-- Konak iletişim kurmak için kullanılan VMICTimeSync hizmet, VM'ler için saat ve bakım için sanal makine duraklatıldıktan sonra düzeltmeleri yapın. Azure konakları, doğru zamanı tutmak için Microsoft'a ait katman 1 cihazları kullanın.
+- Time.windows.com adresinden bilgi alan NtpClient sağlayıcısı.
+- Konak saatini VM 'Lerle iletişim kurmak ve bakım için VM duraklatıldıktan sonra düzeltmeler yapmak için kullanılan Vmictimessync hizmeti. Azure Konakları, doğru zaman saklamak için Microsoft 'a ait stratum 1 cihazlarını kullanır.
 
-W32Time aşağıdaki öncelik sırasına göre zaman sağlayıcısı tercih eder: katman düzeyi, kök gecikme, kök dağılımı, saat uzaklığı. Çoğu durumda, daha düşük katman Time.Windows.com rapor ettiğinden w32time time.windows.com konağa tercih edebilir. 
+W32Time, zaman sağlayıcısını aşağıdaki öncelik sırasına göre tercih eder: katman düzeyi, kök gecikmesi, kök dağılımı, zaman değeri. Çoğu durumda, time.windows.com, daha düşük bir sınır bildirdiğinden, W32Time ana bilgisayara yönelik olarak tercih edebilir. 
 
-Etki alanına katılan makineler için etki alanının kendisini süre eşitleme hiyerarşiye ancak orman kökü hala ihtiyacı bir yere biraz ve aşağıdaki maddeler hala true tutan oluşturur.
+Etki alanına katılmış makinelerde, etki alanının kendisi zaman eşitleme hiyerarşisi oluşturur, ancak orman kökünün hala herhangi bir yerden zaman sürilmesi gerekir ve aşağıdaki noktalar doğru kalmaya devam eder.
 
 
 ### <a name="host-only"></a>Yalnızca konak 
 
-Time.Windows.com genel bir NTP sunucusu olduğundan, bu kez eşitleniyor internet üzerinden trafik gönderen gerektirir, değişen paket gecikmeler zaman eşitleme kalitesini olumsuz yönde etkileyebilir. Yalnızca konak eşitlenecek geçerek Time.Windows.com kaldırma sürenizi bazen geliştirebilir eşitleme sonuçları.
+Time.windows.com genel bir NTP sunucusu olduğundan, süresi ile eşitleme, internet üzerinden trafik gönderilmesini gerektirir, farklı paket gecikmeleri, zaman eşitlemenin kalitesini olumsuz etkileyebilir. Yalnızca konak eşitlemeye geçiş yaparak time.windows.com kaldırıldığında, bazen zaman eşitleme sonuçlarınızı geliştirebilirsiniz.
 
-Yalnızca ana bilgisayar saati eşitleme yapar varsayılan yapılandırmayı kullanarak zaman eşitleme karşılaşırsanız, algılama sorunları geçiliyor. Bu VM üzerinde zaman eşitleme artardı görmek için yalnızca ana bilgisayar eşitleme deneyin. 
+Yalnızca konak zaman eşitlemeye geçiş yapmak, varsayılan yapılandırmayı kullanarak zaman eşitleme sorunlarıyla karşılaşırsanız anlamlı hale gelir. VM 'nin zaman eşitlemesini iyileştirecağından emin olmak için yalnızca konak eşitlemesini deneyin. 
 
 ### <a name="external-time-server"></a>Dış saat sunucusu
 
-Belirli bir zaman eşitleme gereksinimleriniz varsa da ayrıca dış saat sunucuları kullanma seçeneği mevcuttur. Dış saat sunucuları olmayan Microsoft veri merkezleri ya da işleme artık saniye içinde özel bir şekilde barındırılan makinelerle süre gerekmemesi sağlayarak, test senaryoları için yararlı olabilecek belirli bir zaman sağlayabilir.
+Belirli zaman eşitleme gereksinimleriniz varsa, dış saat sunucuları kullanma seçeneği de vardır. Dış saat sunucuları, test senaryoları için faydalı olabilecek, Microsoft olmayan veri merkezlerinde barındırılan makinelerle zaman tutarlılığına olanak sağlayan veya özel bir şekilde çok fazla saniye idare eden belirli bir zaman sağlayabilir.
 
-Dış sunucuları VMICTimeSync hizmeti ve bir varsayılan yapılandırmaya benzer sonuçlar sağlamak için VMICTimeProvider ile birleştirebilirsiniz. 
+Varsayılan yapılandırmaya benzer sonuçlar sağlamak için dış sunucuları Vmictimessync hizmeti ve VMICTimeProvider ile birleştirebilirsiniz. 
 
 ## <a name="check-your-configuration"></a>Yapılandırmanızı denetleyin
 
 
-NtpClient zaman sağlayıcısı açık NTP sunucuları (NTP) veya etki alanı zaman eşitleme (NT5DS) kullanacak şekilde yapılandırılmışsa denetleyin.
+NtpClient saat sağlayıcısının açık NTP sunucuları (NTP) veya etki alanı zaman eşitlemesini (NT5DS) kullanacak şekilde yapılandırılıp yapılandırılmadığını denetleyin.
 
 ```
 w32tm /dumpreg /subkey:Parameters | findstr /i "type"
@@ -100,65 +99,65 @@ Value Name                 Value Type          Value Data
 Type                       REG_SZ              NTP
 ```
 
-Ne zaman sunucusu görmek için NtpClient zaman sağlayıcısı, bir yükseltilmiş komut isteminde kullanır:
+NtpClient saat sağlayıcısının hangi zaman sunucusunu kullandığını görmek için, yükseltilmiş bir komut isteminde şunu yazın:
 
 ```
 w32tm /dumpreg /subkey:Parameters | findstr /i "ntpserver"
 ```
 
-Varsayılan VM kullanıyorsanız, çıktı şuna benzeyecektir:
+VM varsayılan değer kullanıyorsa, çıkış şöyle görünür:
 
 ```
 NtpServer                  REG_SZ              time.windows.com,0x8
 ```
 
 
-Ne zaman sağlayıcısı şu anda kullanıldığını görmek için.
+Hangi zaman sağlayıcının kullanılmakta olduğunu görmek için.
 
 ```
 w32tm /query /source
 ```
 
 
-Gördüğünüz çıktı ve ne anlama aşağıda verilmiştir:
+Görebileceğiniz çıktı ve ne anlama gelir:
     
-- **time.Windows.com** -varsayılan yapılandırmasında w32time zaman time.windows.com elde edersiniz. Zaman eşitleme kalite internet bağlantısı bağlıdır ve paket gecikmeleri etkilenir. Bu, varsayılan kurulumu normal çıktısı bulunmaktadır.
-- **VM IC zaman eşitleme sağlayıcısı** -VM konağından zaman eşitleniyor. Bu genellikle, yalnızca ana bilgisayar saati eşitleme için katılımı veya NtpServer şu anda kullanılabilir değilse kaynaklanır. 
-- *Etki alanı sunucunuz* - geçerli makine bir etki alanında olduğundan ve etki alanı zaman eşitleme hiyerarşisi tanımlar.
-- *Başka bir sunucuda* -zaman başka bir sunucudan almak için açıkça w32time yapılandırıldı. Zaman eşitleme kalitesi, bu zaman server kalitesini bağlıdır.
-- **Yerel CMOS saat** -saat eşitlenmemiş. W32Time bir yeniden başlatma işleminden sonra veya tüm yapılandırılan süre kaynakları mevcut olmadığı durumlarda başlatmak için yeterli zamana sahip değilse bu çıkış elde edebilirsiniz.
+- **Time.Windows.com** -varsayılan yapılandırmada w32time, Time.Windows.com 'ten zaman alabilir. Zaman eşitleme kalitesi, internet bağlantısına bağlıdır ve paket gecikmelerinden etkilenir. Bu, varsayılan kurulumun olağan çıktıdır.
+- **VM IC zaman eşitleme sağlayıcısı** -VM, zaman konaktan eşitleniyor. Bu, genellikle yalnızca konak zaman eşitlemesini tercih ediyorsanız veya NtpServer Şu anda kullanılabilir durumda değilse oluşur. 
+- *Etki alanı sunucunuz* -geçerli makine bir etki alanında ve etki alanı zaman eşitleme hiyerarşisini tanımlar.
+- *Diğer bir sunucu* -W32Time, başka bir sunucudan saati almak üzere açık bir şekilde yapılandırılmıştır. Zaman eşitleme kalitesi, bu zamana sunucu kalitesine bağlıdır.
+- **Yerel CMOS saat** saati zaman uyumsuz. W32Time 'ın yeniden başlatmanın ardından başlaması yeterli zaman yoksa veya yapılandırılan tüm zaman kaynakları kullanılabilir olmadığında bu çıktıyı alabilirsiniz.
 
 
-## <a name="opt-in-for-host-only-time-sync"></a>Yalnızca ana bilgisayar saati eşitleme katılımı
+## <a name="opt-in-for-host-only-time-sync"></a>Yalnızca konak zaman eşitlemesini kabul etme
 
-Azure sürekli eşitleme konaklarda geliştirme çalışmaları ve tüm zaman eşitleme altyapısı Microsoft'a ait veri merkezlerinde birlikte bulunmasını garanti edebilir. Zaman eşitleme time.windows.com birincil zaman kaynağı olarak kullanmayı tercih eder varsayılan kurulumu ile ilgili sorunlar varsa, katılım için yalnızca ana bilgisayar saati eşitleme için aşağıdaki komutları kullanabilirsiniz.
+Azure, konaklarda zaman eşitlemesini iyileştirmek için sürekli olarak çalışmaktadır ve tüm zaman eşitleme altyapısının Microsoft 'un sahip olduğu veri merkezlerinde birlikte bulunduğundan emin olabilir. Birincil saat kaynağı olarak time.windows.com kullanmayı tercih eden varsayılan kurulumla zaman eşitleme sorunlarınız varsa, yalnızca konak zaman eşitlemesini kabul etmek için aşağıdaki komutları kullanabilirsiniz.
 
-VMIC sağlayıcısı etkin olarak işaretleyin. 
+VMıC sağlayıcısını etkin olarak işaretleyin. 
 
 ```
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\w32time\TimeProviders\VMICTimeProvider /v Enabled /t REG_DWORD /d 1 /f
 ```
 
-NTPClient sağlayıcısı devre dışı olarak işaretleyebilirsiniz.
+NTPClient sağlayıcısını devre dışı olarak işaretleyin.
 
 ```
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\w32time\TimeProviders\NtpClient /v Enabled /t REG_DWORD /d 0 /f
 ```
 
-W32time hizmeti yeniden başlatın.
+W32Time hizmetini yeniden başlatın.
 
 ```
 net stop w32time && net start w32time
 ```
 
 
-## <a name="windows-server-2012-and-r2-vms"></a>Windows Server 2012 ve R2 VM'ler 
+## <a name="windows-server-2012-and-r2-vms"></a>Windows Server 2012 ve R2 VM 'Leri 
 
-Windows Server 2012 ve Windows Server 2012 R2'in zaman eşitleme için farklı varsayılan ayarları vardır. Varsayılan olarak w32time kesin zaman düşük yüklerle hizmeti üzerinden tercih ettiği şekilde yapılandırılır. 
+Windows Server 2012 ve Windows Server 2012 R2 zaman eşitleme için farklı varsayılan ayarlara sahiptir. W32Time varsayılan olarak, hizmetin daha düşük bir zamana kadar yük yükünü tercih eden bir şekilde yapılandırılmıştır. 
 
-Windows Server 2012 ve 2012 R2 dağıtımlarını kesin zaman tercih yeni varsayılan değerleri kullanmak taşımak istiyorsanız, aşağıdaki ayarları uygulayabilirsiniz.
+Windows Server 2012 ve 2012 R2 dağıtımlarınızı kesin bir süre tercih eden daha yeni varsayılan değerleri kullanmak üzere taşımak istiyorsanız, aşağıdaki ayarları uygulayabilirsiniz.
 
-W32time yoklama güncelleştirin ve aralıkları, Windows Server 2016 ayarlarınızla eşleşecek şekilde güncelleştirin.
+W32Time yoklama ve güncelleştirme aralıklarını Windows Server 2016 ayarlarıyla eşleşecek şekilde güncelleştirin.
 
 ```
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\w32time\Config /v MinPollInterval /t REG_DWORD /d 6 /f
@@ -167,9 +166,9 @@ reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\w32time\Config /v U
 w32tm /config /update
 ```
 
-İçin yeni bir yoklama aralıkları kullanabilmek w32time NtpServers kullanarak olarak işaretlenir. Sunucuları 0x1 bit bayrak maskeyle açıklamalı olan, bu mekanizma geçersiz kılarsınız ve w32time SpecialPollInterval yerine kullanırsınız. Belirtilen NTP sunucuları ya da 0x8 bayrağı veya bayrak hiç kullandığınızdan emin olun:
+W32Time 'nin yeni yoklama aralıklarını kullanabilmesi için, NtpServers bunları kullanarak işaretlenir. Sunucularla, bu mekanizmayı geçersiz kılabilecek 0x1 bitflag maskesi ile açıklanacaksa ve W32Time, bunun yerine SpecialPollInterval kullanır. Belirtilen NTP sunucularının 0x8 bayrağını kullanıyor veya hiç bayrak bulunmadığından emin olun:
 
-Hangi bayrakları için kullanılan NTP sunucularını kullanıldığını denetleyin.
+Kullanılan NTP sunucuları için hangi bayrakların kullanıldığını kontrol edin.
 
 ```
 w32tm /dumpreg /subkey:Parameters | findstr /i "ntpserver"
@@ -179,9 +178,9 @@ w32tm /dumpreg /subkey:Parameters | findstr /i "ntpserver"
 
 Zaman eşitleme hakkında daha fazla ayrıntı için bağlantılar aşağıda verilmiştir:
 
-- [Windows Zaman hizmeti araçları ve ayarları](https://docs.microsoft.com/windows-server/networking/windows-time-service/Windows-Time-Service-Tools-and-Settings)
-- [Windows Server 2016 geliştirmeleri ](https://docs.microsoft.com/windows-server/networking/windows-time-service/windows-server-2016-improvements)
-- [Windows Server 2016 için doğru zamanı](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time)
-- [Yüksek doğruluk ortamları için Windows Saat hizmeti yapılandırmak için destek sınır](https://docs.microsoft.com/windows-server/networking/windows-time-service/support-boundary)
+- [Windows Saat hizmeti araçları ve ayarları](https://docs.microsoft.com/windows-server/networking/windows-time-service/Windows-Time-Service-Tools-and-Settings)
+- [Windows Server 2016 geliştirmeleri](https://docs.microsoft.com/windows-server/networking/windows-time-service/windows-server-2016-improvements)
+- [Windows Server 2016 için doğru saat](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time)
+- [Windows Saat hizmetini yüksek doğruluk ortamları için yapılandırmak üzere sınır desteği](https://docs.microsoft.com/windows-server/networking/windows-time-service/support-boundary)
 
 

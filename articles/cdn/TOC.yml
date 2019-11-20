@@ -1,8 +1,8 @@
-- name: CDN Belgeleri
+- name: Content Delivery Network belgeleri
   href: index.yml
 - name: Genel Bakış
   items:
-    - name: Azure CDN nedir?
+    - name: Azure Content Delivery Network (Azure CDN) nedir?
       href: cdn-overview.md
     - name: Ürün özelliklerini karşılaştırma
       href: cdn-features.md
@@ -12,7 +12,7 @@
       href: cdn-create-new-endpoint.md
     - name: Depolama hesabı tümleştirme
       href: cdn-create-a-storage-account-with-cdn.md
-    - name: Azure Resource Manager şablonunu kullanarak profil oluşturma
+    - name: Azure Resource Manager şablonu kullanarak profil oluşturma
       href: create-profile-resource-manager-template.md
 - name: Öğreticiler
   items:
@@ -26,6 +26,8 @@
       href: cdn-custom-ssl.md
     - name: Önbelleğe alma kuralları ayarlama
       href: cdn-caching-rules-tutorial.md
+    - name: Standart kural altyapısını kullanarak HTTPS'yi zorlama
+      href: cdn-standard-rules-engine.md
 - name: Örnekler
   items:
     - name: Kod örnekleri
@@ -38,7 +40,7 @@
       href: cdn-china-delivery.md
     - name: HTTP/2 desteği
       href: cdn-http2.md
-    - name: Verizon POP listesini alma
+    - name: Verizon POP listesi alma
       href: cdn-pop-list-api.md
     - name: Standart Verizon’dan Premium Verizon’a geçirme
       href: cdn-migrate.md
@@ -49,7 +51,7 @@
     - name: İçeriği iyileştirme
       href: cdn-optimization-overview.md
       items:
-        - name: Büyük dosya iyileştirmesi
+        - name: Büyük dosya iyileştirme
           href: cdn-large-file-optimization.md
         - name: Medya akışını iyileştirme
           href: cdn-media-streaming-optimization.md
@@ -59,15 +61,15 @@
       items:
         - name: Uç nokta oluşturma
           href: cdn-create-endpoint-how-to.md
-        - name: Azure PowerShell ile yönetme
+        - name: Azure PowerShell kullanarak yönetme
           href: cdn-manage-powershell.md
-        - name: Ülkeye/bölgeye göre erişimi kısıtlama
+        - name: Ülkeye veya bölgeye göre erişimi kısıtlama
           href: cdn-restrict-access-by-country.md
         - name: Dosyaları sıkıştırarak performansı geliştirme
           href: cdn-improve-performance.md
         - name: Önbelleğe alma davranışını denetleme
           items:
-            - name: Önbelleğe alma davranışını önbelleğe alma kurallarıyla denetleme
+            - name: Önbelleğe alma davranışını önbelleğe alma kurallarını kullanarak denetleme
               href: cdn-caching-rules.md
             - name: Sorgu dizesine göre içeriği önbelleğe alma
               items:
@@ -79,7 +81,7 @@
               href: cdn-purge-endpoint.md
             - name: Önbelleğe alınan varlıkları önceden yükleme
               href: cdn-preload-endpoint.md
-        - name: Yaşam süresi yapılandırma
+        - name: Yaşam süresi (TTL) yapılandırma
           items:
             - name: Azure web içeriği
               href: cdn-manage-expiration-of-cloud-service-content.md
@@ -87,13 +89,13 @@
               href: cdn-manage-expiration-of-blob-content.md
         - name: Belirteç kimlik doğrulaması
           href: cdn-token-auth.md
-        - name: SAS depolama desteği
+        - name: Paylaşılan erişim imzası depolama desteği
           href: cdn-sas-storage-support.md
         - name: Çıkış noktaları arası kaynak paylaşma
           href: cdn-cors.md
         - name: Kaynakları izleme
           href: cdn-resource-health.md
-        - name: Davranışı kurallarla geçersiz kılma
+        - name: Davranışı geçersiz kılmak için kuralları kullanma
           href: cdn-verizon-premium-rules-engine.md
         - name: Traffic Manager’ı kullanma
           href: cdn-traffic-manager.md
@@ -108,7 +110,7 @@
               href: cdn-analyze-usage-patterns.md
             - name: Verizon özel raporları
               href: cdn-verizon-custom-reports.md
-        - name: Verizon'dan alınan Azure CDN Premium için Analytics araçları
+        - name: Verizon'dan alınan Premium Azure CDN için Analytics araçları
           items:
             - name: Gelişmiş HTTP raporları oluşturma
               href: cdn-advanced-http-reports.md
@@ -134,6 +136,13 @@
           href: cdn-troubleshoot-allowed-ca.md
 - name: Başvuru
   items:
+    - name: Standart kural altyapısı başvurusu
+      href: cdn-standard-rules-engine-reference.md
+      items:
+        - name: Standart kural altyapısı eşleştirme koşulları
+          href: cdn-standard-rules-engine-match-conditions.md
+        - name: Standart kural altyapısı eylemleri
+          href: cdn-standard-rules-engine-actions.md
     - name: Verizon Premium kural altyapısı başvurusu
       href: cdn-verizon-premium-rules-engine-reference.md
       items:
@@ -150,6 +159,8 @@
       items:
         - name: X-EC-Debug üst bilgileri
           href: cdn-http-debug-headers.md
+    - name: Microsoft’a özgü HTTP üst bilgileri
+      href: cdn-msft-http-debug-headers.md
     - name: Azure PowerShell
       href: /powershell/module/az.cdn
     - name: .NET
@@ -166,7 +177,7 @@
           href: cdn-pop-locations.md
         - name: Kısaltmaya göre POP konumları
           href: cdn-pop-abbreviations.md
-    - name: Azure CDN faturalamasını anlama
+    - name: Azure Content Delivery Network faturalaması
       href: cdn-billing.md
     - name: Azure Yol Haritası
       href: 'https://azure.microsoft.com/roadmap/'

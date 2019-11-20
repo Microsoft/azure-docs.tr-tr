@@ -1,6 +1,6 @@
 ---
-title: SAML çoklu oturum açma için Azure Active Directory Uygulama Proxy'si (Önizleme) ile şirket içi uygulamalar | Microsoft Docs
-description: Şirket içi için çoklu oturum açma sağlamak öğrenin SAML kimlik doğrulaması ile güvenliği sağlanan uygulama proxy'si aracılığıyla yayımlanan uygulamaları.
+title: Azure AD Uygulaması Proxy 'Si ile şirket içi uygulamalar için SAML çoklu oturum açma | Microsoft Docs
+description: SAML kimlik doğrulamasıyla güvenliği sağlanan şirket içi uygulamalar için çoklu oturum açma sağlamayı öğrenin. Uygulama proxy 'Si ile şirket içi uygulamalara uzaktan erişim sağlama.
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -11,62 +11,93 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 05/20/2019
+ms.date: 10/24/2019
 ms.author: mimart
 ms.reviewer: japere
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 907cb598d708bfa26f53d2e43fef5456258c21b1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d004d1183c9f5c1aec2dae7ab2d638528f164cd9
+ms.sourcegitcommit: f7f70c9bd6c2253860e346245d6e2d8a85e8a91b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66393040"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73062508"
 ---
-# <a name="saml-single-sign-on-for-on-premises-applications-with-application-proxy-preview"></a>SAML çoklu oturum açma için uygulama ara sunucusu (Önizleme) ile şirket içi uygulamalar
+# <a name="saml-single-sign-on-for-on-premises-applications-with-application-proxy"></a>Uygulama proxy 'Si ile şirket içi uygulamalar için SAML çoklu oturum açma
 
-SAML kimlik doğrulaması ile güvenli hale getirilir ve uygulama proxy'si aracılığıyla bu uygulamalara uzaktan erişim sağlayan bir şirket içi uygulamalar için çoklu oturum açma (SSO) sağlayabilirsiniz. SAML çoklu oturum açma ile Azure Active Directory (Azure AD) kullanıcının Azure AD hesabı kullanarak uygulamaya kimliğini doğrular. Azure AD oturum açma bilgileri uygulamaya bir bağlantı protokolü üzerinden iletişim kurar. Ayrıca, kullanıcılar, SAML Taleplerde tanımladığınız kurallarına göre belirli uygulama rolleri eşleyebilirsiniz. SAML SSO yanı sıra uygulama ara sunucusu sağlayarak kullanıcılarınızın dış uygulama ve sorunsuz SSO bir deneyim erişebilir.
+SAML kimlik doğrulamasıyla güvenliği sağlanan şirket içi uygulamalara çoklu oturum açma (SSO) ve uygulama proxy 'Si aracılığıyla bu uygulamalara uzaktan erişim sağlama sağlayabilirsiniz. SAML çoklu oturum açma ile Azure Active Directory (Azure AD) kullanıcının Azure AD hesabını kullanarak uygulamanın kimliğini doğrular. Azure AD, oturum açma bilgilerini bir bağlantı protokolü aracılığıyla uygulamayla iletişim kurar. Ayrıca, SAML talepleriniz içinde tanımladığınız kurallara göre kullanıcıları belirli uygulama rollerine eşleyebilirsiniz. SAML SSO 'ya ek olarak uygulama proxy 'Si etkinleştirilerek, kullanıcılarınız uygulamaya dış erişime ve sorunsuz bir SSO deneyimine sahip olur.
 
-Uygulamalar tarafından verilen SAML belirteçlerini kullanamayabilir **Azure Active Directory**. Bu yapılandırma, bir şirket içi kimlik sağlayıcısı kullanan uygulamalar için geçerli değildir. Bu senaryolar için incelemeniz önerilir [kaynakları geçirmek için uygulamaların Azure AD'ye](migration-resources.md).
+Uygulamalar, **Azure Active Directory**tarafından verilen SAML belirteçlerini tüketebilmelidir. Bu yapılandırma, şirket içi kimlik sağlayıcısı kullanan uygulamalar için uygulanmaz. Bu senaryolar için, [uygulamaları Azure AD 'ye geçirmeye yönelik kaynakları](migration-resources.md)gözden geçirmeyi öneririz.
 
-SAML SSO uygulama ara sunucusu ile SAML belirteci şifreleme özelliği ile de çalışır. Daha fazla bilgi için bkz. [yapılandırma Azure AD SAML belirteci şifreleme](howto-saml-token-encryption.md).
+Uygulama proxy 'Si ile SAML SSO, SAML belirteci şifreleme özelliği ile de kullanılabilir. Daha fazla bilgi için bkz. [Azure AD SAML belirteci şifrelemesini yapılandırma](howto-saml-token-encryption.md).
 
-## <a name="publish-the-on-premises-application-with-application-proxy"></a>Uygulama Ara sunucusu ile şirket içi uygulama yayımlama
+Aşağıdaki protokol diyagramlarında, hem hizmet sağlayıcısı tarafından başlatılan (SP-başlatılan) Flow hem de kimlik sağlayıcısı tarafından başlatılan (IDP-başlatılan) akış için çoklu oturum açma sırası açıklanır. Uygulama proxy 'Si, SAML isteği ve şirket içi uygulamaya gelen yanıtı önbelleğe alarak SAML SSO ile birlikte çalışarak.
 
-Şirket içi uygulamaları için SSO sağlamadan önce uygulama proxy'si etkinleştirdiyseniz ve yüklü bir Bağlayıcınız emin olun. Bkz: [Azure AD'de uygulama ara sunucusu üzerinden uzaktan erişim için şirket içi uygulama ekleme](application-proxy-add-on-premises-application.md) bilgi edinmek için nasıl.
+  ![SAML SP akışı](./media/application-proxy-configure-single-sign-on-on-premises-apps/saml-sp-initiated-flow.png)
 
-Öğreticide geçerken aşağıdakileri göz önünde bulundurun:
+  ![SAML SP akışı](./media/application-proxy-configure-single-sign-on-on-premises-apps/saml-idp-initiated-flow.png)
 
-* Öğreticide yönergelere göre uygulamanızı yayımlayın. Seçtiğinizden emin olun **Azure Active Directory** olarak **ön kimlik doğrulaması** yöntemi uygulamanız için (adım 4 [şirket içi bir uygulamayı Azure AD'ye ekleme](application-proxy-add-on-premises-application.md#add-an-on-premises-app-to-azure-ad
-)).
-* Kopyalama **dış URL** uygulama için.
-* En iyi uygulama, mümkün olduğunda özel etki alanları için bir en iyi duruma getirilmiş kullanıcı deneyimini kullanın. Daha fazla bilgi edinin [Azure AD uygulama proxy'sinde özel etki alanları ile çalışma](application-proxy-configure-custom-domain.md).
-* Uygulamayı en az bir kullanıcı ekleyin ve test hesabının şirket içi uygulamaya erişimi olduğundan emin olun. Test hesabının test ederek uygulama erişebiliyorsa kullanarak **dış URL** uygulama proxy'si doğrulamak için doğru şekilde ayarlanır. Sorun giderme bilgileri için bkz: [uygulama proxy'si sorunlarını giderme sorunlarını ve hata iletileri](application-proxy-troubleshoot.md).
+## <a name="create-an-application-and-set-up-saml-sso"></a>Uygulama oluşturma ve SAML SSO 'yu ayarlama
 
-## <a name="set-up-saml-sso"></a>SAML SSO'yu ayarlama
+1. Azure portal **Kurumsal uygulamaları > Azure Active Directory** seçin ve **Yeni uygulama**' yı seçin.
 
-1. Azure portalında **Azure Active Directory > Kurumsal uygulamalar** ve uygulamayı listeden seçin.
-1. Uygulamanın gelen **genel bakış** sayfasında **çoklu oturum açma**.
-1. Seçin **SAML** çoklu oturum açma yöntemi olarak.
-1. İçinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında, Düzenle **temel SAML yapılandırma** verileri ve adımları izleyerek [Enter temel SAML yapılandırma](configure-single-sign-on-non-gallery-applications.md#saml-based-single-sign-on) SAML tabanlı yapılandırmak için uygulama için kimlik doğrulaması.
+2. Şirket **içi uygulamalar** bölümünde Şirket **içi uygulama ekle**' yi seçin.
 
-   * Emin **yanıt URL'si** eşleşen **dış URL** uygulama proxy'si aracılığıyla yayımlandığından ya da bir yol altında şirket içi uygulama için **dış URL**.
-   * Burada uygulamanızın gerektirdiği farklı bir IDP tarafından başlatılan Flow **yanıt URL'si** SAML yapılandırması bu olarak Ekle bir **ek** olarak atamak için URL'yi yanındaki onay kutusunu işaretleyin ve liste Birincil **yanıt URL'si**.
-   * SP tarafından başlatılan bir akış için arka uç uygulaması doğru belirttiğinden emin **yanıt URL'si** veya kimlik doğrulama belirtecini alma için kullanılacak onay belgesi tüketici hizmeti URL'si.
+3. Yeni uygulamanız için görünen adı girin ve ardından **Ekle**' yi seçin.
 
-     ![Temel SAML yapılandırma verilerini girin](./media/application-proxy-configure-single-sign-on-on-premises-apps/basic-saml-configuration.png)
+4. Uygulamanın **genel bakış** sayfasında, **Çoklu oturum açma**' yı seçin.
+
+5. Çoklu oturum açma yöntemi olarak **SAML** ' yi seçin.
+
+6. Önce SAML SSO 'yu kurumsal ağ üzerinde çalışırken çalışacak şekilde ayarlayın. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** başlığına gidin ve **düzenleme** simgesini (bir kurşun kalem) seçin. Uygulamanın SAML tabanlı kimlik doğrulamasını yapılandırmak için [temel SAML yapılandırması girme](configure-single-sign-on-non-gallery-applications.md#step-1-edit-the-basic-saml-configuration) bölümündeki adımları izleyin.
+
+7. Uygulamaya en az bir kullanıcı ekleyin ve test hesabının uygulamaya erişimi olduğundan emin olun. Şirket ağına bağlıyken, uygulamada çoklu oturum açma olup olmadığını görmek için test hesabını kullanın. 
+
+   > [!NOTE]
+   > Uygulama ara sunucusunu ayarladıktan sonra geri dönüp SAML **yanıt URL**'sini güncelleştirebilirsiniz.
+
+## <a name="publish-the-on-premises-application-with-application-proxy"></a>Şirket içi uygulamayı uygulama proxy 'Si ile yayımlama
+
+Şirket içi uygulamalar için SSO sağlayabilmeniz için önce uygulama ara sunucusunu etkinleştirmeniz ve bir bağlayıcı yüklemeniz gerekir. Şirket içi ortamınızı hazırlamaya, bir bağlayıcıyı yüklemeye ve kaydetmeye ve bağlayıcıyı test etme hakkında bilgi edinmek için [Azure AD 'de uygulama proxy 'si aracılığıyla uzaktan erişim için şirket içi uygulama ekleme](application-proxy-add-on-premises-application.md) öğreticisine bakın. Ardından, uygulama proxy 'Si ile yeni uygulamanızı yayımlamak için aşağıdaki adımları izleyin. Aşağıda belirtilmeyen diğer ayarlar için öğreticideki [Şirket içi uygulamayı Azure AD 'ye ekleme](application-proxy-add-on-premises-application.md#add-an-on-premises-app-to-azure-ad) bölümüne bakın.
+
+1. Uygulama Azure portal hala açıkken **uygulama proxy 'si**' ni seçin. Uygulamanın **Iç URL** 'sini sağlayın. Özel bir etki alanı kullanıyorsanız, uygulamanız için SSL sertifikasını da yüklemeniz gerekir. 
+   > [!NOTE]
+   > En iyi uygulama olarak, en iyi duruma getirilmiş bir kullanıcı deneyimi için mümkün olduğunda özel etki alanları kullanın. [Azure AD uygulama ara sunucusu özel etki alanlarıyla çalışma](application-proxy-configure-custom-domain.md)hakkında daha fazla bilgi edinin.
+
+2. Uygulamanız için **ön kimlik doğrulama** yöntemi olarak **Azure Active Directory** ' yi seçin.
+
+3. Uygulamanın **dış URL** 'sini kopyalayın. SAML yapılandırmasını tamamlayabilmeniz için bu URL 'ye ihtiyacınız olacak.
+
+4. Test hesabını kullanarak, uygulama proxy 'sinin doğru şekilde ayarlandığını doğrulamak için uygulamayı **dış URL** ile açmayı deneyin. Sorun varsa bkz. [uygulama proxy 'si sorunlarını ve hata Iletilerini sorun giderme](application-proxy-troubleshoot.md).
+
+## <a name="update-the-saml-configuration"></a>SAML yapılandırmasını güncelleştirme
+
+1. Uygulama Azure portal hala açıkken **Çoklu oturum açma**' yı seçin. 
+
+2. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** başlığına gidin ve **düzenleme** simgesini (bir kurşun kalem) seçin. Uygulama ara sunucusu 'nda yapılandırdığınız **dış URL** , **tanımlayıcı**, **yanıt URL 'SI**ve **oturum kapatma URL 'si** alanlarını otomatik olarak doldurur. Uygulama proxy 'Sinin doğru çalışması için gerekli olduklarından, bu URL 'Leri düzenlemeyin.
+
+3. Daha önce yapılandırılan **yanıt URL** 'sini, etki alanına uygulama proxy 'si tarafından erişilebilmeleri için düzenleyin. Örneğin, **dış URL** 'niz `https://contosotravel-f128.msappproxy.net` ve özgün **yanıt URL 'si** `https://contosotravel.com/acs`, `https://contosotravel-f128.msappproxy.net/acs`için özgün **yanıt URL** 'sini güncelleştirmeniz gerekir. 
+
+    ![Temel SAML yapılandırma verilerini girin](./media/application-proxy-configure-single-sign-on-on-premises-apps/basic-saml-configuration.png)
+
+
+4. Varsayılan olarak işaretlemek için güncelleştirilmiş **yanıt URL 'sinin** yanındaki onay kutusunu işaretleyin.
+
+   * Gerekli **yanıt URL 'si** zaten listeleniyorsa, bu **yanıt URL 'sini** varsayılan olarak Işaretleyin ve önceden yapılandırılmış **yanıt URL**'sini silin.
+
+   * SP tarafından başlatılan bir akış için, arka uç uygulamasının kimlik doğrulama belirtecini almak için doğru **yanıt URL** 'Sini veya onaylama tüketici hizmeti URL 'sini belirttiğinden emin olun.
 
     > [!NOTE]
-    > Arka uç uygulaması bekliyorsa **yanıt URL'si** İç URL olmasını ya da kullanım gerekir [özel etki alanları](application-proxy-configure-custom-domain.md) iç ve dış URL'leri eşleşen veya oturum açma My Apps güvenli uzantıyı yüklemek için Kullanıcıların cihazlarında. Bu uzantı için uygun uygulama ara Sunucusu hizmeti otomatik olarak yönlendirir. Uzantıyı yüklemek için bkz: [My Apps güvenli oturum açma uzantısı](../user-help/my-apps-portal-end-user-access.md#download-and-install-the-my-apps-secure-sign-in-extension).
-
+    > Arka uç uygulaması, **yanıt URL** 'SININ iç URL olmasını bekliyorsa, iç ve dış URL 'leri eşleştirmek için [özel etki alanları](application-proxy-configure-custom-domain.md) kullanmanız ya da kullanıcıların cihazlarında uygulamalarımın güvenli oturum açma uzantısını yüklemeniz gerekir. Bu uzantı, uygun uygulama proxy 'Si hizmetine otomatik olarak yönlendirilir. Uzantıyı yüklemek için bkz. [uygulamalarımın güvenli oturum açma uzantısı](../user-help/my-apps-portal-end-user-access.md#download-and-install-the-my-apps-secure-sign-in-extension).
+    
 ## <a name="test-your-app"></a>Uygulamanızı test etme
 
-Tüm adımları tamamladıktan sonra uygulamanızı ve çalışıyor olması gerekir. Uygulamayı test etmek için:
+Tüm bu adımları tamamladığınızda, uygulamanız çalışır duruma gelmelidir. Uygulamayı test etmek için:
 
-1. Bir tarayıcı açın ve uygulama yayımlandığında oluşturduğunuz dış URL'ye gidin. 
-1. Bir uygulamaya atanan test hesapla oturum açın. Uygulama yük ve uygulamaya SSO sahip olması gerekir.
+1. Bir tarayıcı açın ve uygulamayı yayımladığınızda oluşturduğunuz **dış URL** 'ye gidin. 
+1. Uygulamaya atadığınız test hesabıyla oturum açın. Uygulamayı yükleyebilir ve uygulamanın içinde SSO 'SU olabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure AD uygulama proxy'si nasıl çoklu oturum açma sağlar?](application-proxy-single-sign-on.md)
-- [Uygulama Ara sunucusu sorunlarını giderme](application-proxy-troubleshoot.md)
+- [Azure AD Uygulama Ara Sunucusu çoklu oturum açma nasıl sağlar?](application-proxy-single-sign-on.md)
+- [Uygulama ara sunucusu sorunlarını giderme](application-proxy-troubleshoot.md)

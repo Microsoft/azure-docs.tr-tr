@@ -3,23 +3,19 @@ title: Azure Cloud Services ve ASP.NET kullanmaya başlama | Microsoft Belgeleri
 description: ASP.NET MVC ve Azure kullanarak çok katmanlı bir uygulama oluşturma hakkında bilgi edinin. Uygulama, web rolü ve çalışan rolü ile birlikte bir bulut hizmetinde çalışır. Entity Framework, SQL Database ve Azure Storage kuyruklarını ve blob’larını kullanır.
 services: cloud-services, storage
 documentationcenter: .net
-author: jpconnock
-manager: timlt
-editor: ''
-ms.assetid: d7aa440d-af4a-4f80-b804-cc46178df4f9
+author: georgewallace
+manager: carmonm
 ms.service: cloud-services
-ms.workload: tbd
-ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: conceptual
 ms.date: 05/15/2017
-ms.author: jeconnoc
-ms.openlocfilehash: 3082ca34f2bcb71dd7aa02b4539899997374cfc0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: gwallace
+ms.openlocfilehash: 3f2c60be29d679d0b0d30b6bf471f083c66ba93f
+ms.sourcegitcommit: 3073581d81253558f89ef560ffdf71db7e0b592b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65595172"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68827663"
 ---
 # <a name="get-started-with-azure-cloud-services-and-aspnet"></a>Azure Cloud Services ve ASP.NET kullanmaya başlama
 
@@ -35,8 +31,8 @@ Uygulama bir reklam bülteni panosudur. Kullanıcılar metin girerek ve görünt
 
 Uygulama bir arka uç işleminde küçük resim oluşturmaya yönelik CPU yoğunluklu iş yükünü azaltmak üzere [kuyruk merkezli çalışma deseni](https://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/queue-centric-work-pattern) kullanır.
 
-## <a name="alternative-architecture-app-service-and-webjobs"></a>Alternatif mimari: App Service ve WebJobs
-Bu öğreticide bir Azure bulut hizmetinde hem ön ucun hem de arka ucun nasıl çalıştırılacağı gösterilmektedir. Ön uç çalıştırılması alternatiftir [Azure App Service](/azure/app-service/) ve [WebJobs](https://go.microsoft.com/fwlink/?LinkId=390226) arka uç için özellik. WebJobs kullanan bir öğretici için bkz. [Azure WebJobs SDK ile Çalışmaya Başlama](https://github.com/Azure/azure-webjobs-sdk/wiki). Senaryonuza en uygun hizmetlerin nasıl seçileceği hakkında daha fazla bilgi için bkz. [Azure App Service, Cloud Services ve virtual machines karşılaştırması](/azure/architecture/guide/technology-choices/compute-decision-tree).
+## <a name="alternative-architecture-app-service-and-webjobs"></a>Alternatif mimari: App Service ve Web Işleri
+Bu öğreticide bir Azure bulut hizmetinde hem ön ucun hem de arka ucun nasıl çalıştırılacağı gösterilmektedir. Diğer bir seçenek de ön ucu [Azure App Service](/azure/app-service/) çalıştırmak ve arka uç Için [WebJobs](https://go.microsoft.com/fwlink/?LinkId=390226) özelliğini kullanmaktır. WebJobs kullanan bir öğretici için bkz. [Azure WebJobs SDK ile Çalışmaya Başlama](https://github.com/Azure/azure-webjobs-sdk/wiki). Senaryonuza en uygun hizmetleri seçme hakkında daha fazla bilgi için bkz. [Azure App Service, Cloud Services ve sanal makineler karşılaştırması](/azure/architecture/guide/technology-choices/compute-decision-tree).
 
 ## <a name="what-youll-learn"></a>Öğrenecekleriniz
 * Azure SDK’sını yükleyerek Azure dağıtımı için makinenizi etkinleştirme.
@@ -51,7 +47,7 @@ Bu öğreticide bir Azure bulut hizmetinde hem ön ucun hem de arka ucun nasıl 
 
 Uygulamayı bir Azure aboneliği olmadan yerel olarak çalıştırabilirsiniz, ancak uygulamayı buluta dağıtmak için bir abonelik gerekecektir. Bir hesabınız yoksa, [MSDN abone avantajlarınızı etkinleştirebilir](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A55E3C668) veya [ücretsiz deneme için kaydolabilirsiniz.](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=A55E3C668)
 
-Öğretici yönergeleri aşağıdaki ürünlerden birini ile çalışır:
+Öğretici yönergeleri aşağıdaki ürünlerden biriyle çalışır:
 
 * Visual Studio 2013
 * Visual Studio 2015
@@ -128,7 +124,7 @@ Azure bulut hizmeti, uygulamanın çalıştırılacağı ortamıdır.
 5. Uygulamayı dağıtmak istediğiniz bölgeyi seçin.
 
     Bu alan, bulut hizmetinizin hangi veri merkezinde barındırılacağını belirtir. Bir üretim uygulaması için müşterilerinize en yakın bölgeyi seçmeniz gerekir. Bu öğretici için size en yakın bölgeyi seçin.
-5. **Oluştur**’a tıklayın.
+5.           **Oluştur**'a tıklayın.
 
     Aşağıdaki görüntüde bulut hizmeti CSvccontosoads.cloudapp.net URL’si ile oluşturulur.
 
@@ -157,7 +153,7 @@ Uygulama bulutta çalıştırıldığında bulut tabanlı bir veritabanı kullan
 9. Yeni sunucu için **Seçin**’e tıklayın.
 
     ![Yeni SQL Veritabanı sunucusu](./media/cloud-services-dotnet-get-started/newdbserver.png)
-10. **Oluştur**’a tıklayın.
+10.           **Oluştur**'a tıklayın.
 
 ### <a name="create-an-azure-storage-account"></a>Azure Storage hesabı oluşturma
 Azure Storage hesabı kuyruk ve blob verilerini buluta depolamaya yönelik kaynaklar sağlar.
@@ -180,7 +176,7 @@ Gerçek bir uygulamada genellikle uygulama verilerine karşı günlük verileri 
     Bulut hizmeti ve depolama hesabı farklı veri merkezlerinde (farklı bölgelerde) olduğunda gecikme artar ve veri merkezinin dışındaki bant genişliği için sizden ücret alınır. Bir veri merkezi içinde bant genişliği ücretsizdir.
 
     Azure benzeşim grupları bir veri merkezinde bulunan kaynaklar arasındaki uzaklığı en aza indirmeye yönelik bir mekanizma sağlar. Bu öğretici benzeşim gruplarını kullanmaz. Daha fazla bilgi için bkz. [Azure’da Benzeşim Grubu Oluşturma](/previous-versions/azure/reference/gg715317(v=azure.100)).
-7. **Oluştur**’a tıklayın.
+7.           **Oluştur**'a tıklayın.
 
     ![Yeni depolama hesabı](./media/cloud-services-dotnet-get-started/newstorage.png)
 
@@ -358,7 +354,7 @@ Contoso Ads uygulamasının oluşturulması aşağıdaki adımları içerir:
 
 ### <a name="set-project-references"></a>Proje başvurularını ayarlama
 1. ContosoAdsWeb projesinde ContosoAdsCommon projesine bir başvuru ayarlayın. ContosoAdsWeb projesine sağ tıklayın ve ardından **Başvurular** - **Başvuru Ekle** öğesine tıklayın. **Başvuru Yöneticisi** iletişim kutusunda sol bölmedeki **Çözüm – Projeler** öğesini seçin, **ContosoAdsCommon**’ı seçin ve ardından **Tamam**’a tıklayın.
-2. ContosoAdsWorker projesinde ContosoAdsCommon projesine bir başvuru ayarlayın.
+2. ContosoAdsWorker projesinde, ContosoAdsCommon projesine bir başvuru ayarlayın.
 
     ContosoAdsCommon hem ön uç ve arka uç tarafından kullanılacak olan Entity Framework veri modeli ve bağlam sınıfını içerir.
 3. ContosoAdsWorker projesinde bir `System.Drawing` başvurusu ayarlayın.
@@ -381,7 +377,7 @@ Bu bölümde, yerel olarak test etmek amacıyla Azure Storage ve SQL bağlantı 
 3. ContosoAdsCloudService projesinde **Roller** altındaki ContosoAdsWeb öğesine sağ tıklayın ve ardından **Özellikler**’e tıklayın.
 
     ![Rol özellikleri](./media/cloud-services-dotnet-get-started/roleproperties.png)
-4. İçinde **ContosoAdsWeb [rol]** Özellikler penceresini tıklatın **ayarları** sekmesine ve ardından **ayar Ekle**.
+4. **Contosoadsweb [rol]** özellikleri penceresinde, **Ayarlar** sekmesine tıklayın ve ardından **Ayar ekle**' ye tıklayın.
 
     **Hizmet Yapılandırma** ayarını **Tüm Yapılandırmalar** olarak bırakın.
 5. *StorageConnectionString* adlı bir ayar ekleyin. **Tür** değerini *ConnectionString* olarak, **Değer** seçeneğini *UseDevelopmentStorage=true* olarak ayarlayın.
@@ -391,9 +387,9 @@ Bu bölümde, yerel olarak test etmek amacıyla Azure Storage ve SQL bağlantı 
 7. ContosoAdsWorker rol özelliklerine bir depolama bağlantı dizesi eklemek için aynı yordamı izleyin.
 8. Hala **ContosoAdsWorker [Rolü]** özellikler penceresindeyken başka bir bağlantı dizesi ekleyin:
 
-   * Ad: ContosoAdsDbConnectionString
-   * Şunu yazın: String
-   * Değer: Web rolü projesi kullandığınız bağlantı dizesinin aynısını yapıştırın. (Aşağıdaki örnek Visual Studio 2013 içindir. Bu örneği kopyalarsanız ve Visual Studio 2015 veya sonraki bir sürümü kullanıyorsanız Veri Kaynağını değiştirmeyi unutmayın.)
+   * Adı: ContosoAdsDbConnectionString
+   * Şunu yazın: Dize
+   * Değer: Web rolü projesi için kullandığınız bağlantı dizesini yapıştırın. (Aşağıdaki örnek Visual Studio 2013 içindir. Bu örneği kopyalarsanız ve Visual Studio 2015 veya sonraki bir sürümü kullanıyorsanız Veri Kaynağını değiştirmeyi unutmayın.)
 
        ```
        Data Source=(localdb)\v11.0; Initial Catalog=ContosoAds; Integrated Security=True; MultipleActiveResultSets=True;
@@ -408,9 +404,9 @@ Bir proje veya klasöre dosya eklemek için proje veya klasöre sağ tıklayıp 
 2. ContosoAdsWeb projesinde indirilen projeden aşağıdaki dosyaları ekleyin.
 
    * *Global.asax.cs*.  
-   * İçinde *görünümler/paylaşılan* klasörü: *\_Layout.cshtml*.
-   * İçinde *görünümler/giriş* klasörü: *Index.cshtml*.
-   * İçinde *denetleyicileri* klasörü: *AdController.cs*.
+   * *Views\shared* klasöründe: Layout. cshtml.  *\_*
+   * *Views\home* klasöründe: *Index. cshtml*.
+   * *Denetleyiciler* klasöründe: *AdController.cs*.
    * *Görünümler/Reklam* klasöründe (öncelikle klasörü oluşturun): beş *.cshtml* dosyası.
 3. ContosoAdsWorker projesinde indirilen projeden *WorkerRole.cs* ekleyin.
 
@@ -518,7 +514,7 @@ var imagesQueue = queueClient.GetQueueReference("images");
 imagesQueue.CreateIfNotExists();
 ```
 
-### <a name="contosoadsweb---layoutcshtml"></a>ContosoAdsWeb - \_Layout.cshtml
+### <a name="contosoadsweb---_layoutcshtml"></a>ContosoAdsWeb - \_Layout.cshtml
 *_Layout.cshtml* dosyası üst bilgi ve alt bilgide uygulama adını ayarlar ve bir "Reklamlar" menü girişi oluşturur.
 
 ### <a name="contosoadsweb---viewshomeindexcshtml"></a>ContosoAdsWeb - Görünümler\Giriş\Dizin.cshtml
@@ -700,7 +696,7 @@ public override void Run()
 }
 ```
 
-Döngünün her yinelemesinden sonra herhangi bir kuyruk iletisi bulunmazsa program bir saniye için uyku moduna geçer. Bunun yapılması çalışan rolünün aşırı CPU süresi ve depolama işlem maliyetleri doğurmasını engeller. Microsoft Müşteri Danışma Ekibi bunu dahil etmeyi unutan, üretime dağıtan ve tatile giden bir geliştiricinin hikayesini anlatır. Geri döndüğünde gözetim maliyeti tatilin maliyetini aşmıştı.
+Döngünün her yinelemesinden sonra herhangi bir kuyruk iletisi bulunmazsa program bir saniye için uyku moduna geçer. Bunun yapılması çalışan rolünün aşırı CPU süresi ve depolama işlem maliyetleri doğurmasını engeller. Microsoft Müşteri Danışma Ekibi bunu dahil etmeyi unutan, üretime dağıtan ve tatile giden bir geliştiricinin hikayesini anlatır. Geri geldiğinde, daha fazla bakış maliyeti tatilden daha fazla.
 
 Bazı durumlarda bir kuyruk iletisinin içeriği işlemede hataya neden olur. Buna *zehir iletisi* adı verilir ve bir hatayı günlüğe kaydedip döngüyü yeniden başlatırsanız bu iletiyi sonu gelmez bir şekilde işlemeye çalışabilirsiniz.  Bu nedenle, yakalama bloğu uygulamanın geçerli iletiyi işlemeyi kaç kez denediğini denetleyen bir if deyimi içerir ve 5’ten fazla kez denediyse ileti kuyruktan silinir.
 
@@ -776,7 +772,7 @@ Azure Storage’da en iyi yöntemler ve yaklaşımlar hakkında bir tanıtım i�
 
 Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
-* [Azure Cloud Services bölüm 1: Giriş](https://justazure.com/microsoft-azure-cloud-services-part-1-introduction/)
+* [Azure Cloud Services Bölüm 1: Giriş](https://justazure.com/microsoft-azure-cloud-services-part-1-introduction/)
 * [Cloud Services nasıl yönetilir?](cloud-services-how-to-manage-portal.md)
 * [Azure Depolama](https://docs.microsoft.com/azure/storage/)
 * [Bulut hizmeti sağlayıcısı seçme](https://azure.microsoft.com/overview/choosing-a-cloud-service-provider/)

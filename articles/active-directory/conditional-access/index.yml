@@ -1,56 +1,71 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure AD Koşullu Erişim Belgeleri
+### YamlMime:Landing
+title: Azure AD Koşullu Erişim belgeleri
+summary: Azure Active Directory Koşullu Erişim’i nasıl yapılandırıp ve test edeceğinizi öğrenin
 metadata:
-  document_id: null
-  title: 'Azure Active Directory Koşullu Erişim Belgeleri - Öğreticiler, hızlı başlangıçlar, kavramlar, başvurular | Microsoft Docs'
-  description: Azure Active Directory Koşullu Erişimini yapılandırmayı ve test etmeyi öğrenin.
+  title: Azure AD Koşullu Erişim belgeleri
+  description: Azure Active Directory Koşullu Erişim’i nasıl yapılandırıp ve test edeceğinizi öğrenin
   services: active-directory
-  ms.subservice: conditional-access
-  author: MicrosoftGuyJFlo
-  manager: daveba
   ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: conditional-access
   ms.topic: landing-page
-  ms.date: 08/14/2018
+  author: MicrosoftGuyJFlo
   ms.author: joflore
-abstract:
-  description: 'Azure AD Koşullu Erişimini yapılandırarak güvenlik ve üretkenlik arasındaki dengeyi sağlamayı öğrenin. Koşullu Erişim ilkeleriyle, erişim hakkındaki kararlarınızı alırken bulut uygulamalarınıza erişimi de hesaba katabilirsiniz. Örneğin, erişim kararlarınızda aşağıdaki soruların yanıtlarını belirtebilirsiniz:<ul><li>Kullanıcının ağ konumu nedir?</li><li>Erişim girişimi yönetilen bir cihazdan mı başlatıldı?</li><li>Bağlantı girişimi hangi istemci uygulamasından başlatıldı?</li><li>Erişim girişimi riski bir oturumdan mı yapıldı?</li></ul>Aşağıdaki kaynaklar hızlı bir başlangıç yapmanıza yardımcı olur.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: ./media/index/video.png
-      width: 246
-    title: Koşullu Erişim hakkındaki açıklamalar
-    href: 'https://www.youtube.com/watch?v=XruceejcCKQ'
-    width: 246
-sections:
-  - title: 5 dakikalık hızlı başlangıçlar
-    items:
-      - type: paragraph
-        text: Sıkça karşılaşılan erişim senaryolarında Koşullu Erişim ilkelerini yapılandırmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: ./media/index/i_security-management.png
-            text: Belirli uygulamalar için MFA gerektirme
-            href: app-based-mfa.md
-          - image:
-              src: ./media/index/i_security-management.png
-            text: Oturum riski algılandığında erişimi engelleme
-            href: app-sign-in-risk.md
-          - image:
-              src: ./media/index/i_security-management.png
-            text: Kullanım koşullarının kabul edilmesini gerektirme
-            href: require-tou.md
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Klasik Koşullu Erişim ilkelerinizin geçişini yapmayı öğrenin.
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/active-directory/conditional-access/policy-migration-mfa">Çok faktörlü kimlik doğrulaması gerektiren klasik bir ilkeyi geçirme</a>
+  ms.date: 08/20/2019
+  ms.collection: M365-identity-device-management
+  ms.openlocfilehash: 39f9cf3e64e343c2da98f2c4f4b403ccdc0f3f20
+  ms.sourcegitcommit: b3bad696c2b776d018d9f06b6e27bffaa3c0d9c3
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/21/2019
+  ms.locfileid: "69874258"
+landingContent:
+- title: Koşullu Erişim hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Koşullu Erişim nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Koşullar nelerdir?
+      url: conditions.md
+    - text: Konumları nasıl tanımlayabilirim?
+      url: location-condition.md
+    - text: Denetimler nedir?
+      url: controls.md
+    - text: Koşullu Erişim hizmeti bağımlılıkları
+      url: service-dependencies.md
+- title: Koşullu Erişimi dağıtma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Koşullu Erişim dağıtımını planlama
+      url: plan-conditional-access.md
+  - linkListType: how-to-guide
+    links:
+    - text: Eski kimlik doğrulamasını engelleme
+      url: block-legacy-authentication.md
+    - text: What If aracını kullanarak sorun giderme
+      url: troubleshoot-conditional-access-what-if.md
+- title: Sık kullanılan Koşullu Erişim İlkeleri
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Sık kullanılan Koşullu Erişim İlkeleri
+      url: concept-conditional-access-policy-common.md
+  - linkListType: how-to-guide
+    links:
+    - text: Yöneticiler için MFA gerektirme
+      url: howto-conditional-access-policy-admin-mfa.md
+    - text: Azure yönetimi için MFA gerektirme
+      url: howto-conditional-access-policy-azure-management.md
+    - text: Eski kimlik doğrulamasını engelleme
+      url: howto-conditional-access-policy-block-legacy.md
+    - text: Risk Tabanlı Koşullu Erişim (Azure AD Premium P2 gerektirir)
+      url: howto-conditional-access-policy-risk.md
+    - text: MFA kaydı için güvenilen konum gerektirme
+      url: howto-conditional-access-policy-registration.md
+    - text: Erişimi konuma göre engelleme
+      url: howto-conditional-access-policy-location.md
+    - text: Uyumlu cihaz gerektirme
+      url: howto-conditional-access-policy-compliant-device.md

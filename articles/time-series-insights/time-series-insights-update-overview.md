@@ -1,100 +1,98 @@
 ---
-title: 'Genel Bakış: Azure Time Series Insights Önizleme | Microsoft Docs'
-description: Azure zaman serisi İçgörüler Önizleme genel bakış.
+title: 'Genel Bakış: Azure Time Series Insights önizlemesi nedir? -Azure Time Series Insights | Microsoft Docs'
+description: Azure Time Series Insights önizlemede önemli iyileştirmeler hakkında bilgi edinin.
 ms.service: time-series-insights
 services: time-series-insights
-author: ashannon7
+author: deepakpalled
 ms.author: dpalled
 manager: cshankar
-ms.reviewer: dpalled
 ms.workload: big-data
 ms.topic: overview
-ms.date: 04/26/2019
+ms.date: 10/29/2019
 ms.custom: seodec18
-ms.openlocfilehash: b32ff070a1ffa9f83132ecc1d3e43bae398f509d
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.openlocfilehash: cde846152ff183db857b8a0549fafd24700ffff9
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67460714"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014738"
 ---
-# <a name="azure-time-series-insights-preview"></a>Azure Time Series Insights Önizleme
+# <a name="what-is-azure-time-series-insights-preview"></a>Azure Time Series Insights Önizleme nedir?
 
-Azure zaman serisi öngörüleri Önizleme bir uçtan uca olarak bir-hizmet platform (PaaS) teklifidir. Toplamak, işlem, depolamak, çözümlemek ve yüksek oranda contextualized, zaman serisi iyileştirilmiş IOT ölçekli veri sorgulamak için kullanılır. Time Series Insights, geçici veri keşfi ve operasyonel analiz için idealdir. Time Series Insights karşıladığını endüstriyel IOT dağıtımları geniş gerektiğini sunan bir benzersiz şekilde genişletilebilir ve özelleştirilmiş hizmetidir.
+Azure Time Series Insights önizlemesi, uçtan uca bir hizmet olarak platform (PaaS) teklifiyle yapılır. Bu özelliği, Nesnelerin İnterneti (IoT) ölçekli verileri toplamak, işlemek, depolamak, analiz etmek ve sorgulamak için kullanabilirsiniz. Bu, zaman serisi için yüksek düzeyde olan ve en iyileştirilmiş veriler. 
 
-> [!TIP]
-> Özellikleri için genel kullanılabilirlik (GA) bilgi [Azure zaman serisi öngörüleri GA genel bakış](time-series-insights-overview.md).
+Time Series Insights, geçici veri araştırması ve işletimsel analizler için tasarlanmıştır. Endüstriyel IoT dağıtımlarının geniş ihtiyaçlarını karşılayan genişletilebilir ve özelleştirilmiş bir hizmet sunumudur.
 
 ## <a name="video"></a>Video
 
-### <a name="learn-more-about-azure-time-series-insights-preview-br"></a>Azure zaman serisi öngörüleri önizlemesi hakkında daha fazla bilgi edinin. </br>
+Azure Time Series Insights önizleme hakkında daha fazla bilgi edinin.
 
 > [!VIDEO https://channel9.msdn.com/Shows/Internet-of-Things-Show/Azure-Time-Series-Insights-e2e-solution-for-industrial-IoT-analytics/player]
 
-## <a name="define-iot-data"></a>IOT verilerini tanımlayın
+## <a name="definition-of-iot-data"></a>IoT verilerinin tanımı
 
-IOT verilerini varlık yoğun kuruluşlarda kullanılabilir olan tüm endüstriyel verilerdir. Oldukça gürültülü ölçümleri kayıt varlıklarından gönderildiği IOT verilerini genellikle yüksek oranda yapılandırılmamış. Bu ölçümler, sıcaklık, hareket ve nem içerir. Bu veri akışlarını Sık önemli boşlukları, bozuk bir ileti ve false okumalar tarafından belirlenir. Herhangi bir çözümlemesi gerçekleşebilmesi bu akıştaki verilerin temizlenmesi gerekir.
+Sektör açısından yoğun kuruluşlarda endüstriyel IoT verileri genellikle endüstriyel bir ayarda cihazların ve algılayıcıların farklılaştırmasından dolayı yapısal tutarlılık içermemekte değildir. Bu akışların verileri, önemli boşluklar ve bazen bozulmuş iletiler ve yanlış okumalar ile belirlenir. IoT verileri genellikle ilk taraf veya üçüncü kaynaklardan (örneğin, uçtan uca iş akışları için bağlam ekleyen) gelen ek veri girişlerinin bağlamında anlamlıdır. Hava durumu verileri gibi üçüncü taraf veri kaynaklarından gelen girişler, belirli bir yüklemede telemetri akışlarının sağlanmasına yardımcı olabilir. 
 
-IOT verilerini genellikle yalnızca CRM veya ERP gibi birinci taraf kaynaklardan gelen ek verisi girişleri bağlamında anlamlı olur. Giriş, ayrıca hava durumu veya konumu gibi üçüncü taraf veri kaynaklarından gelir.
+Tüm bu işlemler, yalnızca işletimsel ve iş amaçları için verilerin bir bölümü için kullanılır ve analizler için contextuselleştirilmesi gerekir. Endüstriyel veriler genellikle daha uzun süre içinde daha fazla bilgi sahibi olmak için historicized eğilimleri anlamak ve eğilimleri ilişkilendirmek için kullanılır. Toplanan IoT verilerini eyleme dönüştürülebilir içgörüler halinde açmak şunları gerektirir: 
 
-Sonuç olarak, veriler yalnızca bir bölümünü işlem ve işletme amacıyla kullanılır. Bu tür veriler iş raporlama ve analiz için tutarlı, kapsamlı, geçerli ve doğru bilgileri sağlar. Durumun dönüş verileri eyleme dönüştürülebilir içgörüler haline gerektirir IOT toplanır:
+* Verilerin çözümlenmesi, filtreleneceği, enterpola, dönüştürülemesinde ve analiz amacıyla hazırlanması için veri işleme.
+* Verileri normalleştirerek, diğer bir deyişle verileri normalleştirime ve anlayan bir yapı.
+* İşlenen (veya türetilen) verilerin ve ham verilerin uzun veya sonsuz tutulması için ekonomik depolama.
 
-* Veri işleme, temizlemek için filtre enterpolasyon dönüştürme ve verileri analiz için hazırlar.
-* Gidin ve diğer bir deyişle verileri anlamak için Normalleştir ve veri bağlama göre ele alınmasına yapısı.
-* Yıllık işlenen ya da türetilmiş değerinde, veri ve ham verileri uzun veya sınırsız bekletme için uygun maliyetli depolama sağlar.
+Bu veriler, iş analizi ve raporlama için tutarlı, kapsamlı, güncel ve doğru bilgiler sağlar.
 
-Tipik bir IOT veri akışı aşağıdaki resimde gösterilmektedir.
+Aşağıdaki görüntüde tipik bir IoT veri akışı gösterilmektedir.
 
-  ![IOT veri akışı][1]
+[![IoT veri akışı](media/v2-update-overview/overview-one.png)](media/v2-update-overview/overview-one.png#lightbox)
 
 ## <a name="azure-time-series-insights-for-industrial-iot"></a>Endüstriyel IOT için Azure Time Series Insights
 
-Geçerli IOT yatay farklı. Müşteriler, üretim, otomotiv, enerji, yardımcı programlar, akıllı Binalar ve danışmanlık sektörler yayılır. Geçici veri keşfi verinin şeklini bilinmeyen olduğu senaryolar içerir. Senaryoları operasyonel analiz Operasyonel Verimliliği için şema veya açıkça Modellenen veriler üzerinde de içerir. Bu senaryolar, genellikle yan yana var ve farklı kullanım durumlarına destekler. Endüstriyel IOT kuruluşlara ve kendi dijital revolution başarısı için önemli olduğu platform özellikleri şunlardır:
+IoT yatay, üretim, oto ve enerji, yardımcı programlar, akıllı binalar ve danışmanlık gibi çeşitli sektör segmentlerini kapsayan müşterilerle aynıdır. Büyük ölçekli IoT verilerine hedeflenmiş kapsamlı analizler sağlayan, bulut tabanlı bu çok sayıda endüstriyel IoT Market genelinde gelişmeye devam etmektedir. 
 
-- Çok katmanlı depolama, hem sıcak ve soğuk.
-- Zaman serisi verilerini tutarında yıllık Depolama olanağı.
-- Açıkça model ve varlık tabanlı operasyonel zeka sorgularını en iyi duruma getirme olanağı.
+Azure Time Series Insights, zaman serisi verilerinin, varlık tabanlı öngörülerin ve bulma için en iyi sınıf kullanıcı deneyiminin yerleşik olarak belirlenmesi için zengin anlam modellemesi sunarak bu Pazar gereksinimini ortadan kaldırarak, popüler, anomali algılama ve operasyonel zeka. 
 
-Zaman serisi görüşleri, IOT veri keşfi ve operasyonel içgörüler sunan kapsamlı, uçtan uca bir PaaS olur. Zaman serisi görüşleri, IOT ölçekli zaman serisi verilerini analiz etmek için tam olarak yönetilen bulut hizmeti sunar.
+Etkileşimli veri araştırma olanaklarımızla birleştirilmiş bir zengin işletimsel analiz platformu, IoT varlıklarından toplanan verilerden daha fazla değer elde etmek için Time Series Insights kullanabilirsiniz. Önizleme teklifi şunları destekler: 
 
-Ham veri bir şemasız, bellek içi depolama alanında depolayabilirsiniz. Ardından, bir dağıtılmış sorgu altyapısı ve API etkileşimli geçici sorgular gerçekleştirebilirsiniz. Olun milyarlarca olayı saniyeler içinde görselleştirin için zengin kullanıcı deneyimini kullanın. Daha fazla bilgi edinin [veri keşfi özellikleri](./time-series-insights-overview.md).
+* Sıcak ve soğuk analiz desteğiyle çok katmanlı depolama çözümü, müşterilere, normal veriler üzerinde etkileşimli analizler ve geçmiş verilerin deklikler üzerinde işletimsel zeka 'lar arasında veri yönlendirme seçeneği sağlar. 
 
-Time Series Insights şu anda önizlemede operasyonel içgörüler özellikleri de sunar. Etkileşimli veri keşfi ve operasyonel zeka ile birlikte IOT varlıklarından toplanan verilerinizden daha fazla değer türetmek için Time Series Insights'ı kullanabilirsiniz. Önizleme Teklifi destekler:
+    *   Sık gerçekleştirilen ve kısa süre içinde çok sayıda sorgu daha kısa sürede gerçekleştirmeye yönelik son derece etkileşimli bir sıcak analiz çözümü 
+    *   Azure depolama 'yı temel alan ölçeklenebilir, performansı en iyi duruma getirilmiş bir zaman serisi veri Gölü ve müşterilerin, zaman serisi verilerinin Saniyeler içinde eğilimini eğilim altına almalarına olanak tanır. 
 
-* Ölçeklenebilir ve performans ve maliyet iyileştirilmiş bir zaman serisi verilerini depolar. Bu bulut tabanlı bir IOT çözümü, saniyeler içinde zaman serisi verilerini tutarında yıllık eğilim.
-* Varlıklar ve cihazlardan türetilmiş ve nonderived sinyal ile ilişkili meta verileri ve etki alanı açıklayan anlam modeli desteği.
-* Varlık tabanlı veri öngörüleri birleştiren zengin ve geçici data analytics ile geliştirilmiş bir kullanıcı deneyimi. Bu birleşim, iş ve operasyonel zeka sürücüleri.
-* Gelişmiş makine öğrenme ve analiz araçları ile tümleştirme. Azure Databricks, Apache Spark, Azure Machine Learning, Jupyter not defterleri ve Power BI araçları içerir. Bu araçlar zaman serisi verilerini sorunlarını gidermek ve Operasyonel Verimliliği artırmaya yardımcı olur.
+* Varlıkların ve cihazların türetilmiş ve ham sinyalleriyle ilişkili etki alanını ve meta verileri açıklayan anlam modeli desteği.
 
-Birlikte, operasyonel içgörüler ve veri keşfi, basit bir Kullandıkça Öde fiyatlandırma modeline veri işleme, depolama ve sorgu ile sunulmaktadır. Bu faturalama modeli, değişen iş gereksinimlerinize uygun.
+* Müşterinin sahip olduğu Azure depolama hesabında geçmiş zaman serisi verilerini depolamak için esnek analiz platformu, böylelikle müşterilerin IoT verilerinin sahipliğine sahip olmasını sağlar. Veriler, tahmine dayalı analiz, makine öğrenimi ve Spark dahil tanıdık teknolojiler kullanılarak gerçekleştirilen diğer özel hesaplamalar dahil olmak üzere çeşitli veri senaryolarında bağlantı ve birlikte çalışabilirliği sağlayan açık kaynaklı Apache Parquet biçiminde depolanır. Databricks ve Jupyıter.
 
-Bu üst düzey veri akış diyagramı güncelleştirmeleri gösterir.
+* Gelişmiş sorgu API 'Leri ve Kullanıcı deneyimi ile varlık tabanlı veri içgörülerini enterpolasyon, skaler ve toplama işlevleri, kategorik değişkenler, dağılım çizimleri ve zaman değiştirme zamanı desteğiyle zengin, geçici veri analiziyle birleştiren zengin analiz derinlemesine analize yönelik dizi sinyalleri.
 
-  ![Temel işlevler][2]
+*   Kurumsal IoT müşterilerimiz için ölçek, performans, güvenlik ve güvenilirlik ihtiyaçlarını destekleyecek kurumsal sınıf platformu.
 
-Bu anahtar endüstriyel IOT özelliklerini sunulmasıyla birlikte, zaman serisi görüşleri aşağıdaki faydaları sağlar.
+* Uçtan uca analiz için genişletilebilirlik ve tümleştirme desteği. Time Series Insights çeşitli veri senaryoları için genişletilebilir bir analiz platformu sağlar. Time Series Insights Power BI Bağlayıcısı, müşterilerin tek bir cam bölmesinde bı ve zaman serisi analizlerinin Birleşik görünümünü almak için doğrudan Power BI Time Series Insights yaptıkları sorguları almasını sağlar.
+
+Aşağıdaki diyagramda, üst düzey veri akışı gösterilmektedir.
+
+  [![temel özellikleri](media/v2-update-overview/overview-two.png)](media/v2-update-overview/overview-two.png#lightbox)
+
+Azure Time Series Insights, veri işleme, depolama (veri ve meta veriler) ve sorgu için, müşterilerin kullanımını iş taleplerine uyacak şekilde ayarlamanıza olanak tanıyan ölçeklenebilir bir Kullandıkça Öde fiyatlandırma modeli sunar. 
+ 
+Bu temel Endüstriyel IoT özelliklerine giriş ile Time Series Insights, aşağıdaki başlıca avantajları da sağlar.  
 
 | | |
 | ---| ---|
-| IOT ölçekli zaman serisi verilerinin çok katmanlı depolama | Veri alma için ortak veri işleme sahip bir işlem hattı, etkileşimli sorgular için Orta Gecikmeli depolama birimindeki verileri depolayabilirsiniz. Veri soğuk depolama için büyük miktarda veriyi depolayabilirsiniz. Yüksek performanslı varlık tabanlı avantajlarından yararlanmak [sorguları](./time-series-insights-update-tsq.md). |
-| Zaman serisi modeli, ham telemetri bağlama göre ele alınmasına ve varlık tabanlı içgörülere sahip olun | Ham telemetri verileri tanımlayıcı ile bağlama göre ele alınmasına [zaman serisi modeli](./time-series-insights-update-tsm.md). Zengin operasyonel zeka ile yüksek oranda cihaz tabanlı sorgular performans ve maliyet iyileştirme türetilir. |
-| Diğer veri çözümleriyle sorunsuz ve sürekli tümleştirme | Time Series Insights veri [depolanan](./time-series-insights-update-storage-ingress.md) açık kaynaklı Apache Parquet dosyalarını içinde. Bu tümleştirme sayesinde diğer veri çözümleri ilk ya da üçüncü taraf uçtan uca senaryolar için kolay olup olmadığını. Bu senaryolar, iş zekası, Gelişmiş makine öğrenimi ve Tahmine dayalı analiz içerir. |
-| Gerçek zamanlı veri araştırması | [Azure zaman serisi öngörüleri önizlemesi Gezgini](./time-series-insights-update-explorer.md) görselleştirme tüm veri alımı komut zinciri ile akış için kullanıcı deneyimi sunar. Kısa bir süre içinde bir olay kaynağı bağlandıktan sonra görüntülemek keşfedin ve olay verileri sorgulayın. Bu şekilde, bir cihaz beklendiği gibi veri yayan olup olmadığını doğrulayabilirsiniz. Bir IOT varlık sistem durumu, üretkenlik ve genel verimliliğini de izleyebilirsiniz. |
-| Kök neden analizini ve anormallik algılama | [Azure zaman serisi öngörüleri önizlemesi Gezgini](./time-series-insights-update-explorer.md) gerçekleştirin ve çok adımlı kök analiz neden deseni hem perspektif görünüm destekler. Azure Stream Analytics ile birlikte, neredeyse gerçek zamanlı uyarılar ve anomalileri algılamak için Time Series Insights'ı kullanabilirsiniz. |
-| Time Series Insights platformunu temel alan özel uygulamalar | Zaman serisi görüşleri destekler [JavaScript SDK'sı](./tutorial-explore-js-client-lib.md). SDK, zengin denetimleri ve sorguları yönelik Basitleştirilmiş erişim sağlar. İş gereksinimlerinize uyacak şekilde özel IOT uygulamaları Time Series Insights üzerine oluşturmak için SDK'yi kullanın. Time Series Insights ayrıca kullanabileceğiniz [sorgu API'leri](./time-series-insights-update-tsq.md) doğrudan sürücü verilerini özel IOT uygulamaları için. |
+| IoT ölçeğinde zaman serisi verileri için çok katmanlı depolama | Verilerin içe aktarılmasıyla ilgili bir paylaşılan veri işleme işlem hattı sayesinde, verileri hem normal hem de soğuk depolara aktarabilirsiniz. Büyük hacimli verileri depolamak için etkileşimli sorgular ve soğuk mağaza için ısınma mağazasını kullanın. Yüksek performanslı varlık tabanlı sorgulardan nasıl yararlanabilmeniz hakkında daha fazla bilgi için bkz. [sorgular](./time-series-insights-update-tsq.md). |
+| Ham telemetri eklemek ve varlık tabanlı Öngörüler türetmeye yönelik zaman serisi modeli | Tarih serisi modelini, zaman serisi verileriniz için örnekler, hiyerarşiler, türler ve değişkenler oluşturmak için kullanabilirsiniz. Zaman serisi modeli hakkında daha fazla bilgi edinmek için bkz. [zaman serisi modeli](./time-series-insights-update-tsm.md).  |
+| Diğer veri çözümleriyle sorunsuz ve sürekli tümleştirme | Time Series Insights soğuk depodaki veriler, açık kaynaklı Apache Parquet dosyalarında [depolanır](./time-series-insights-update-storage-ingress.md) . Bu, iş zekası, gelişmiş makine öğrenimi ve tahmine dayalı analiz gibi senaryolar için diğer veri çözümleri, 1 veya 3. taraf ile veri tümleştirmeyi sağlar. |
+| Neredeyse gerçek zamanlı veri araştırması | [Azure Time Series Insights Preview Explorer](./time-series-insights-update-explorer.md) Kullanıcı deneyimi, alma işlem hattı aracılığıyla tüm veri akışı için görselleştirme sağlar. Bir olay kaynağını bağlandıktan sonra olay verilerini görüntüleyebilir, keşfedebilir ve sorgulayabilirsiniz. Bu şekilde, bir cihazın verileri beklendiği gibi yayıp yaymadığını doğrulayabilirsiniz. Ayrıca, bir IoT varlığını sistem durumu, üretkenlik ve genel verimlilik için izleyebilirsiniz. | 
+| Genişletilebilirlik ve Tümleştirme | Azure Time Series Insights Power BI bağlayıcı tümleştirmesi, **dışa aktarma** seçeneği aracılığıyla doğrudan zaman serisi Gezgini kullanıcı deneyiminde kullanılabilir ve müşterilerin Kullanıcı deneyimimizde oluşturdukları zaman serisi sorgularını doğrudan dışarı aktarmalarına izin verir. Power BI masaüstüne ekleyin ve zaman serisi grafiklerini diğer bı analizlerinin yanı sıra görüntüleyin. Bu, IoT zaman serisi dahil çeşitli veri kaynaklarından analizler üzerinde tek bir cam bölmesi sunarak Power BI yatırım yapan endüstriyel IoT kuruluşları için bir yeni senaryolar sınıfına açar. | 
+| Time Series Insights platformunda oluşturulan özel uygulamalar | Time Series Insights [JavaScript SDK 'sını](https://github.com/microsoft/tsiclient/blob/master/docs/API.md)destekler. SDK, zengin denetimleri ve sorguları yönelik Basitleştirilmiş erişim sağlar. İş gereksinimlerinize uyacak şekilde Time Series Insights en üstünde özel IoT uygulamaları oluşturmak için SDK 'Yı kullanın. Ayrıca, verileri özel IoT uygulamalarına yönlendirmek için doğrudan Time Series Insights [sorgu API 'lerini](./time-series-insights-update-tsq.md) de kullanabilirsiniz. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure zaman serisi öngörüleri önizlemesi ile çalışmaya başlayın:
+Azure Time Series Insights Preview ile çalışmaya başlama:
 
 > [!div class="nextstepaction"]
-> [Hızlı Başlangıç kılavuzunu okuyun](./time-series-insights-update-quickstart.md)
+> [Hızlı Başlangıç Kılavuzu](./time-series-insights-update-quickstart.md)
 
 Kullanım örnekleri hakkında bilgi edinin:
 
 > [!div class="nextstepaction"]
-> [Azure zaman serisi öngörüleri Önizleme kullanım örnekleri](./time-series-insights-update-use-cases.md)
-
-<!-- Images -->
-[1]: media/v2-update-overview/overview-one.png
-[2]: media/v2-update-overview/overview-two.png
+> [Azure Time Series Insights Önizleme kullanım örnekleri](./time-series-insights-update-use-cases.md)

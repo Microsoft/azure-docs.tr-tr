@@ -5,30 +5,31 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: include
-ms.date: 03/26/2018
-ms.author: jeking
+ms.date: 06/28/2019
+ms.author: tamram
 ms.custom: include file
-ms.openlocfilehash: efa593d0ff0043d81574b67192deed30933e1e40
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 28b53864abc37a880a9573cc9657231aff862336
+ms.sourcegitcommit: df7942ba1f28903ff7bef640ecef894e95f7f335
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188982"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69029879"
 ---
-Coğrafi olarak yedekli depolama (GRS), en az % 99,99999999999999'si sağlamak için tasarlanmıştır (16 9) mil birincil bölgeden yüzlerce ikincil bir bölgeye veri çoğaltma ile belirli bir yıl boyunca nesnelerin dayanıklılık. Etkin GRS depolama hesabınızın sahip, verilerinizi tam bölgesel bir kesinti veya birincil bölgeye kurtarılamaz bir olağanüstü durum olması durumunda bile kalıcı olur.
+Coğrafi olarak yedekli depolama (GRS), verilerinizi birincil bölgeden yüzlerce mil uzakta olan ikincil bir bölgeye çoğaltarak belirli bir yıl boyunca en az% 99.99999999999999 (16 9) nesne dayanıklılığı sağlamak üzere tasarlanmıştır. Depolama hesabınızda GRS etkinse, tüm bölgesel bir kesinti veya birincil bölgenin kurtarılamaz bir olağanüstü durum durumunda bile verileriniz dayanıklı olur.
 
-GRS için kullanmayı seçerseniz, aralarından seçim yapabileceğiniz ilgili iki seçeneğiniz vardır:
+GRS 'yi kabul ediyorsanız, aralarından seçim yapabileceğiniz iki ilgili seçeneğe sahipsiniz:
 
-* Veriler yalnızca Microsoft ikincil bölgeye birincil bir yük devretme başlatır, okumak kullanılabilir ancak bu GRS, verilerinizi ikincil bir bölgede başka bir veri merkezine çoğaltır. 
-* GRS okuma erişimli coğrafi olarak yedekli depolama (RA-GRS) temel alır. RA-GRS, verilerinizi ikincil bir bölgede başka bir veri merkezine çoğaltılır ve ayrıca ikincil bölgeden okumak için seçeneği sağlar. RA-GRS ile mi Microsoft ikincil bölgeye birincil bir yük devretme başlatır bağımsız olarak ikincil bölgeye okuma yapabilirsiniz. 
+* GRS, verilerinizi ikincil bölgedeki başka bir veri merkezine çoğaltır, ancak Microsoft birincil ve ikincil bölgeye bir yük devretme işlemi başlattığında bu veriler okunabilir.
+* Okuma Erişimli Coğrafi olarak yedekli depolama (RA-GRS), GRS 'yi temel alır. RA-GRS, verilerinizi ikincil bölgedeki başka bir veri merkezine çoğaltır ve ayrıca ikincil bölgeden okuma seçeneği sağlar. RA-GRS sayesinde, Microsoft 'un birincili ikincil bölgeye yük devretme işlemi başlatıp başlatmadığına bakılmaksızın ikincil bölgeden okuyabilirsiniz.
 
-GRS veya RA-GRS etkin olan bir depolama hesabı için tüm verileri ilk kez çoğaltılır yerel olarak yedekli depolama (LRS). Bir güncelleştirme, öncelikle birincil konuma taahhüt eder ve LRS kullanılarak çoğaltılır. Güncelleştirmeyi zaman uyumsuz olarak GRS kullanarak ikincil bir bölgeye çoğaltılır. İkincil konuma veri yazıldığında de LRS kullanarak içinde bu konuma çoğaltılır. 
+GRS veya RA-GRS kullanan bir depolama hesabı için tüm veriler önce yerel olarak yedekli depolama (LRS) ile çoğaltılır. Bir güncelleştirme öncelikle birincil konuma kaydedilir ve LRS kullanılarak çoğaltılır. Güncelleştirme daha sonra GRS kullanarak ikincil bölgeye zaman uyumsuz olarak çoğaltılır. Veriler ikincil konuma yazıldığında, LRS kullanarak bu konumda da çoğaltılır.
 
-Birincil ve ikincil bölgeler, çoğaltmalar ayrı hata etki alanları arasında yönetme ve yükseltme etki alanları içindeki bir depolama ölçek birimi. Depolama ölçek birimi, veri merkezi içinde temel çoğaltma birimidir. Bu düzeyde çoğaltma LRS tarafından sağlanır; Daha fazla bilgi için [yerel olarak yedekli depolama (LRS): Azure depolama için düşük maliyetli veri yedekliği](../articles/storage/common/storage-redundancy-lrs.md).
+Birincil ve ikincil bölgeler, ayrı hata etki alanları genelinde çoğaltmaları yönetir ve depolama ölçek birimi içindeki etki alanlarını yükseltir. Depolama ölçek birimi, veri merkezi içindeki temel çoğaltma birimidir. Bu düzeyde çoğaltma, LRS tarafından sağlanır; daha fazla bilgi için bkz [. yerel olarak yedekli depolama (LRS): Azure depolama](../articles/storage/common/storage-redundancy-lrs.md)için düşük maliyetli veri artıklığı.
 
-Hangi çoğaltma seçeneği kullanmak için karar verirken, aşağıdaki noktaları göz önünde bulundurun:
+Hangi çoğaltma seçeneğinin kullanılacağına karar verirken bu noktaları göz önünde bulundurun:
 
-* Bölgesel olarak yedekli depolama (ZRS), yüksek oranda kullanılabilirlik ile zaman uyumlu çoğaltma sağlar ve bazı senaryolar için GRS veya RA-GRS daha iyi bir seçim olabilir. ZRS hakkında daha fazla bilgi için bkz. [ZRS](../articles/storage/common/storage-redundancy-zrs.md).
-* Zaman uyumsuz çoğaltma, ikincil bölgeye çoğaltılır, birincil bölgeye yazılır veri andan itibaren bir gecikme içerir. Birincil bölgeden verilerin kurtarılamaması durumunda bölgesel bir olağanüstü durum yaşandığında ikincil bölgeye henüz çoğaltılan henüz değişiklikler kaybolabilir.
-* GRS ile Microsoft ikincil bölgeye yük devretme başlatır sürece çoğaltma okuma veya yazma erişimi için kullanılabilir değildir. Bir yük devretme durumunda okuma ve yük devretme sonrasında bu verilere yazma erişimi tamamlandı. Daha fazla bilgi için lütfen bkz [olağanüstü durum kurtarma Kılavuzu](../articles/storage/common/storage-disaster-recovery-guidance.md).
-* İkincil bölgeden okumak uygulamanız gerekiyorsa, RA-GRS etkinleştirin.
+* Coğrafi bölge yedekli depolama (GZRS) (Önizleme), üç Azure kullanılabilirlik alanında verileri eşzamanlı olarak çoğaltarak ve ardından verileri zaman uyumsuz olarak ikincil bölgeye çoğaltırken maksimum dayanıklılık ile birlikte yüksek kullanılabilirlik sağlar. İkincil bölgeye okuma erişimini de etkinleştirebilirsiniz. GZRS belirli bir yıl boyunca nesnelerin en az% 99.99999999999999 (16 9) oranında dayanıklılığını sağlamak üzere tasarlanmıştır. GZRS hakkında daha fazla bilgi için bkz. [coğrafi bölge yedekli depolama, yüksek oranda kullanılabilirlik ve en yüksek dayanıklılık (Önizleme) için](../articles/storage/common/storage-redundancy-gzrs.md).
+* Bölgesel olarak yedekli depolama (ZRS), üç Azure kullanılabilirlik alanı arasında zaman uyumlu çoğaltma ile yüksek kullanılabilirlik sağlar ve GRS veya RA-GRS 'den bazı senaryolar için daha iyi bir seçenek olabilir. ZRS hakkında daha fazla bilgi için bkz. [ZRS](../articles/storage/common/storage-redundancy-zrs.md).
+* Zaman uyumsuz çoğaltma, verilerin birincil bölgeye yazıldığı zamandan, ikincil bölgeye çoğaltılmasıyla ilgili bir gecikme içerir. Bölgesel bir olağanüstü durum durumunda, bu veriler birincil bölgeden kurtarılamazsa, ikincil bölgeye henüz çoğaltılmamış değişiklikler kaybolabilir.
+* GRS ile Microsoft, ikincil bölgede bir yük devretme işlemi başlatmadığı takdirde okuma veya yazma erişimi için kullanılamaz. Yük devretme durumunda, yük devretme tamamlandıktan sonra bu verilere okuma ve yazma erişiminiz olacaktır. Daha fazla bilgi için lütfen bkz. [olağanüstü durum kurtarma Kılavuzu](../articles/storage/common/storage-disaster-recovery-guidance.md).
+* Uygulamanızın ikincil bölgeden okuması gerekiyorsa, RA-GRS veya RA-GZRS (Önizleme) seçeneğini etkinleştirin.

@@ -1,5 +1,5 @@
 ---
-title: Azure hizmet kataloğu yönetilen uygulaması oluşturma ve yayımlama | Microsoft Docs
+title: Azure Hizmet kataloğu yönetilen uygulamasını yayımlama
 description: Kuruluşunuzun üyelerine yönelik bir Azure yönetilen uygulaması oluşturmayı gösterir.
 services: managed-applications
 author: tfitzmac
@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.date: 10/04/2018
 ms.author: tomfitz
-ms.openlocfilehash: dc86943924cd0c47c465e9d3bac4ca91b73a3ff5
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: f248fe125873b4ed1e930e56865e4e403bcceea6
+ms.sourcegitcommit: 87efc325493b1cae546e4cc4b89d9a5e3df94d31
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66171563"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73053835"
 ---
 # <a name="create-and-publish-a-managed-application-definition"></a>Yönetilen uygulama tanımı oluşturma ve yayımlama
 
@@ -85,20 +85,20 @@ Aşağıdaki JSON’u dosyanıza ekleyin. Depolama hesabı oluşturma parametrel
 
 mainTemplate.json dosyasını kaydedin.
 
-## <a name="create-the-user-interface-definition"></a>Kullanıcı arabirimi tanımı oluşturma
+## <a name="defining-your-create-experience-using-createuidefinitionjson"></a>Createuıdefinition. JSON kullanarak oluşturma deneyiminizi tanımlama
 
-Azure portalı, yönetilen uygulamayı oluşturan kullanıcılar için kullanıcı arabirimini oluşturmak üzere **createUiDefinition.json** dosyasını kullanır. Her bir parametre için kullanıcıların nasıl giriş sağladığını siz tanımlarsınız. Açılır liste, metin kutusu, parola kutusu ve diğer giriş araçları gibi seçenekleri kullanabilirsiniz. Yönetilen bir uygulamaya ait bir kullanıcı arabirimi tanım dosyası oluşturma hakkında bilgi için [CreateUiDefinition ile çalışmaya başlama](create-uidefinition-overview.md) konusunu inceleyin.
+Yayımcı olarak, yönetilen uygulamalar oluşturan kullanıcılar için arabirim üreten **Createuıdefinition. JSON** dosyasını kullanarak oluşturma deneyiminizi tanımlarsınız. Kullanıcıların, açılan liste, metin kutuları ve parola kutuları dahil olmak üzere [Denetim öğelerini](create-uidefinition-elements.md) kullanarak her bir parametre için giriş nasıl sağlayacağınızı tanımlarsınız.
 
-**createUiDefinition.json** adlı bir dosya oluşturun. Bu ad büyük/küçük harfe duyarlıdır.
+**Createuıdefinition. JSON** adlı bir dosya oluşturun (Bu ad büyük/küçük harfe duyarlıdır)
 
-Aşağıdaki JSON’u dosyaya ekleyin.
+Aşağıdaki Başlatıcı JSON dosyasını dosyaya ekleyin ve kaydedin.
 
 ```json
 {
-    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
-    "handler": "Microsoft.Compute.MultiVm",
-    "version": "0.1.2-preview",
-    "parameters": {
+   "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+   "handler": "Microsoft.Azure.CreateUIDef",
+   "version": "0.1.2-preview",
+   "parameters": {
         "basics": [
             {}
         ],
@@ -142,7 +142,7 @@ Aşağıdaki JSON’u dosyaya ekleyin.
 }
 ```
 
-createUiDefinition.json dosyasını kaydedin.
+Daha fazla bilgi için bkz. [Createuıdefinition ile çalışmaya başlama](create-uidefinition-overview.md).
 
 ## <a name="package-the-files"></a>Dosyaları paketleme
 

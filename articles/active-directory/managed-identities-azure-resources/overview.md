@@ -12,15 +12,15 @@ ms.subservice: msi
 ms.devlang: ''
 ms.topic: overview
 ms.custom: mvc
-ms.date: 06/19/2019
+ms.date: 09/26/2019
 ms.author: markvi
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8c4f670f3bb14610e7f29a9201b357e73dacf09b
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.openlocfilehash: f5a9f83a8f6e8d5e83f30d30da2b1c4c0f722dc3
+ms.sourcegitcommit: f7f70c9bd6c2253860e346245d6e2d8a85e8a91b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67293230"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73063048"
 ---
 # <a name="what-is-managed-identities-for-azure-resources"></a>Azure kaynakları için yönetilen kimlikler nedir?
 
@@ -37,20 +37,20 @@ Azure kaynakları için yönetilen kimlikler özelliği, Azure abonelikleri içi
 
 ## <a name="terminology"></a>Terminoloji
 
-Aşağıdaki terimler yönetilen kimlikleri, Azure kaynaklarını belgeleri kümesi için kullanılır:
+Aşağıdaki terimler Azure kaynakları için Yönetilen kimlikler belge kümesi boyunca kullanılır:
 
-- **İstemci kimliği** -ilk kendi sağlama sırasında bir uygulama ve hizmet sorumlusu bağlı Azure AD tarafından oluşturulan benzersiz bir tanımlayıcı.
-- **Sorumlu Kimliği** -nesne Kimliğini bir Azure kaynağı için rol tabanlı erişim vermek için kullanılan, yönetilen kimliği için hizmet sorumlusu nesnesi.
-- **Azure örnek meta veri hizmeti (IMDS)** -REST uç noktasını tüm Iaas Vm'leri için erişilebilir Azure Resource Manager aracılığıyla oluşturulan. Uç noktası, yalnızca VM içinden erişilebilir bir bilinen yönlendirilemeyen IP adresinde (169.254.169.254 numaralı) kullanılabilir.
+- **ISTEMCI kimliği** -Azure AD tarafından oluşturulan ve ilk sağlama sırasında bir uygulamaya ve hizmet sorumlusuna bağlı olan benzersiz bir tanımlayıcı.
+- **Asıl kimlik** -Azure kaynağına rol tabanlı erişim sağlamak için kullanılan yönetilen Kimliğiniz için hizmet sorumlusu NESNESININ nesne kimliği.
+- **Azure Instance Metadata Service (IMDS)** -Azure Resource Manager kullanılarak oluşturulan tüm IaaS VM 'lerine ERIŞILEBILEN bir REST uç noktası. Uç nokta, yalnızca VM içinden erişilebilen, iyi bilinen yönlendirilebilir olmayan IP adresinde (169.254.169.254) kullanılabilir.
 
-## Azure kaynakları için yönetilen kimlikleri nasıl çalışır?<a name="how-does-it-work"></a>
+## Azure kaynakları için Yönetilen kimlikler nasıl çalışır?<a name="how-does-it-work"></a>
 
 İki tür yönetilen kimlik vardır:
 
 - **Sistem tarafından atanan yönetilen kimlik** doğrudan bir Azure hizmet örneğinde etkinleştirilir. Kimlik etkinleştirildiğinde Azure, örneğin aboneliğinin güvendiği Azure AD kiracısında örnek için bir kimlik oluşturur. Kimlik oluşturulduktan sonra, kimlik bilgileri örneğe sağlanır. Sistem tarafından atanan kimliğin yaşam döngüsü, içinde etkinleştirildiği Azure hizmet örneğine doğrudan bağlıdır. Örnek silinirse, Azure AD'deki kimlik bilgileri ve kimlik Azure tarafından otomatik olarak temizlenir.
 - **Kullanıcı tarafından atanan yönetilen kimlik**, tek başına bir Azure kaynağı olarak oluşturulur. Bir oluşturma işlemi çerçevesinde, Azure kullanılan abonelik tarafından güvenilen Azure AD kiracısında bir kimlik oluşturur. Kimlik oluşturulduktan sonra, bir veya birden çok Azure hizmet örneğine atanabilir. Kullanıcı tarafından atanan kimliğin yaşam döngüsü, bu kimliğin atandığı Azure hizmet örneklerinin yaşam döngüsünden ayrı olarak yönetilir.
 
-Dahili olarak, yönetilen özel bir tür yalnızca Azure kaynakları ile kullanılacak kilitlenen hizmet sorumluları Kimlikleridir. Yönetilen kimlik silindiğinde, karşılık gelen hizmet sorumlusu otomatik olarak kaldırılır. 
+Dahili olarak, Yönetilen kimlikler yalnızca Azure kaynaklarıyla kullanılmak üzere kilitlenen özel bir türün hizmet ilkeleridir. Yönetilen kimlik silindiğinde, buna karşılık gelen hizmet sorumlusu otomatik olarak kaldırılır. 
 
 Kodunuzda Azure AD kimlik doğrulamasını destekleyen hizmetler için erişim belirteci istemek üzere yönetilen kimlik kullanılabilir. Hizmet örneği tarafından kullanılan kimlik bilgilerinin dağıtımıyla Azure ilgilenir. 
 
@@ -60,48 +60,46 @@ Aşağıdaki diyagramda yönetilen hizmet kimliklerinin Azure sanal makineleriyl
 
 |  Özellik    | Sistem tarafından atanan yönetilen kimlik | Kullanıcı tarafından atanan yönetilen kimlik |
 |------|----------------------------------|--------------------------------|
-| Oluşturma |  Bir Azure kaynağı (örneğin, bir Azure sanal makinesi veya Azure App Service) bir parçası olarak oluşturulan | Tek başına bir Azure kaynağı olarak oluşturuldu |
-| Yaşam döngüsü | Yönetilen kimlik ile oluşturulmuş bir Azure kaynak yaşam döngüsü paylaşıldığı. <br/> Üst kaynak silindiğinde, yönetilen kimlik olarak da silinir. | Bağımsız yaşam döngüsü. <br/> Açıkça silinmelidir. |
-| Azure kaynakları arasında paylaşma | Paylaşılamaz. <br/> Yalnızca tek bir Azure kaynağı ile ilişkili olabilir. | Paylaşılabilir <br/> Aynı kullanıcı tarafından atanan yönetilen kimlik birden fazla Azure kaynak ile ilişkilendirilebilir. |
-| Genel kullanım örnekleri | İçinde tek bir Azure kaynak içeren iş yükleri <br/> İş yükleri bağımsız kimlikleri gerekir. <br/> Örneğin, tek bir sanal makinede çalışan bir uygulama | Birden çok kaynak üzerinde çalışan iş yükleri ve tek bir kimlik paylaşmasını sağlayabilirsiniz. <br/> Hazırlama akışında bir parçası olarak güvenli bir kaynağa öncesi yetkilendirme gerektiren iş yükleri. <br/> Burada kaynakları sık dönüştürülünceye iş yükleri, ancak izinleri tutarlı kalmalıdır. <br/> Örneğin, birden çok sanal makine aynı kaynağa erişmek için gereken yere iş yükü | 
+| Oluşturulurken |  Bir Azure kaynağının parçası olarak oluşturulur (örneğin, bir Azure sanal makinesi veya Azure App Service) | Tek başına Azure kaynağı olarak oluşturulur |
+| Yaşam Döngüsü | Yönetilen kimliğin ile oluşturulduğu Azure kaynağıyla paylaşılan yaşam döngüsü. <br/> Üst kaynak silindiğinde, yönetilen kimlik de silinir. | Bağımsız yaşam döngüsü. <br/> Açıkça silinmelidir. |
+| Azure kaynakları arasında paylaşım | Paylaştırılamaz. <br/> Yalnızca tek bir Azure kaynağıyla ilişkilendirilebilir. | Paylaşılabilir <br/> Aynı kullanıcı tarafından atanan yönetilen kimlik birden fazla Azure kaynağıyla ilişkilendirilebilir. |
+| Genel kullanım | Tek bir Azure kaynağı içinde yer alan iş yükleri <br/> Bağımsız kimliklere ihtiyacınız olan iş yükleri. <br/> Örneğin, tek bir sanal makinede çalışan bir uygulama | Birden çok kaynak üzerinde çalışan ve tek bir kimliği paylaşabilen iş yükleri. <br/> Sağlama akışının bir parçası olarak güvenli bir kaynağa ön kimlik doğrulaması gerektiren iş yükleri. <br/> Kaynakların sık geri dönüştürüleceği iş yükleri, ancak izinlerin tutarlı kalması gerekir. <br/> Örneğin, birden çok sanal makinenin aynı kaynağa erişmesi gereken bir iş yükü | 
 
 ### <a name="how-a-system-assigned-managed-identity-works-with-an-azure-vm"></a>Sistem tarafından atanmış yönetilen kimliğin Azure VM ile çalışma şekli
 
 1. Azure Resource Manager sanal makinede sistem tarafından atanan yönetilen kimliği etkinleştirmek için bir istek alır.
+
 2. Azure Resource Manager, Azure AD'de sanal makinenin kimliği için bir hizmet sorumlusu oluşturur. Hizmet sorumlusu, bu abonelik tarafından güvenilen Azure AD kiracısında oluşturulur.
-3. Azure Resource Manager sanal makinede kimliği yapılandırır:
-    1. Azure Instance Metadata Service kimliği uç noktasını hizmet sorumlusu istemci kimliği ve sertifikasıyla güncelleştirir.
-    1. VM uzantısını (Ocak 2019'da kullanımdan kaldırılması planlanan) sağlar ve hizmet sorumlusu istemci kimliğini ve sertifikayı ekler. (Bu adımın kullanımdan kaldırılması planlanmaktadır.)
+
+3. Azure Resource Manager, Azure Instance Metadata Service Identity uç noktasını hizmet sorumlusu istemci KIMLIĞI ve sertifikasıyla güncelleştirerek VM 'deki kimliği yapılandırır.
+
 4. VM bir kimliğe sahip olduktan sonra hizmet sorumlusunu kullanarak Azure kaynaklarına VM erişimi sağlayabilirsiniz. Azure Resource Manager'ı çağırmak için Azure AD'de rol tabanlı erişim denetimini (RBAC) kullanarak VM hizmet sorumlusuna uygun rolü atayabilirsiniz. Key Vault'u çağırmak için kodunuza Key Vault'ta belirli bir gizli diziye veya anahtara erişim verebilirsiniz.
-5. Sanal makinede çalışan kod, yalnızca VM içinden erişilebilir Azure örnek meta veri Hizmeti uç noktasından bir belirteç isteyebilirsiniz: `http://169.254.169.254/metadata/identity/oauth2/token`
+
+5. VM üzerinde çalışan kodunuz Azure örnek meta veri hizmeti uç noktasından yalnızca VM 'nin içinden erişilebilen bir belirteç isteyebilir: `http://169.254.169.254/metadata/identity/oauth2/token`
     - Resource parametresi belirtecin gönderildiği hizmeti belirtir. Azure Resource Manager ile kimlik doğrulaması için `resource=https://management.azure.com/` kullanın.
     - API version parametresi IMDS sürümünü belirtir; api-version=2018-02-01 veya üstünü kullanın.
 
-> [!NOTE]
-> Kodunuzu VM uzantısı uç noktasından bir belirteç de isteyebilir, ancak bu yakında kullanımdan planlanmaktadır. VM uzantısı hakkında daha fazla bilgi için bkz: [Azure IMDS kimlik doğrulaması için VM uzantısı'ten geçiş](howto-migrate-vm-extension.md).
-
 6. Azure AD'ye erişim belirteci isteyen bir çağrı yapılır (5. adımda belirtildiği gibi) ve bu çağrıda 3. adımda yapılandırılan istemci kimliği ve sertifikası kullanılır. Azure AD bir JSON Web Token (JWT) erişim belirteci döndürür.
+
 7. Kodunuz erişim belirtecini bir çağrıda Azure AD kimlik doğrulamasını destekleyen hizmete gönderir.
 
 ### <a name="how-a-user-assigned-managed-identity-works-with-an-azure-vm"></a>Kullanıcı tarafından atanmış yönetilen kimliğin Azure VM ile çalışma şekli
 
 1. Azure Resource Manager kullanıcı tarafından atanan bir yönetilen kimlik oluşturma isteği alır.
+
 2. Azure Resource Manager, Azure AD'de kullanıcı tarafından atanan yönetilen kimlik için bir hizmet sorumlusu oluşturur. Hizmet sorumlusu, bu abonelik tarafından güvenilen Azure AD kiracısında oluşturulur.
-3. Azure Resource Manager sanal makinede kullanıcı tarafından atanan yönetilen kimliği yapılandırmak için bir istek alır:
-    1. Azure Instance Metadata Service kimliği uç noktasını kullanıcı tarafından atanan yönetilen kimlik hizmet sorumlusu istemci kimliği ve sertifikasıyla güncelleştirir.
-    1. VM uzantısını sağlar ve kullanıcı tarafından atanan yönetilen kimlik hizmet sorumlusu istemci kimliğiyle sertifikasını ekler. (Bu adımın kullanımdan kaldırılması planlanmaktadır.)
+
+3. Azure Resource Manager, Kullanıcı tarafından atanan yönetilen kimliği bir VM üzerinde yapılandırma ve Kullanıcı tarafından atanan yönetilen kimlik hizmet sorumlusu istemci KIMLIĞI ve sertifikasıyla Azure Instance Metadata Service Identity uç noktasını güncelleştirme isteği alır.
+
 4. Kullanıcı tarafından atanan yönetilen kimlik oluşturulduktan sonra hizmet sorumlusu bilgilerini kullanarak Azure kaynaklarına erişim verir. Azure Resource Manager'ı çağırmak için Azure AD'de RBAC özelliğini kullanarak kullanıcı tarafından atanan kimliğin hizmet sorumlusuna uygun rolü atayabilirsiniz. Key Vault'u çağırmak için kodunuza Key Vault'ta belirli bir gizli diziye veya anahtara erişim verebilirsiniz.
 
    > [!Note]
    > Bu adımı 3. adımdan önce de gerçekleştirebilirsiniz.
 
-5. Sanal makinede çalışan kod, yalnızca VM içinden erişilebilir Azure örnek meta veri hizmeti kimlik uç noktasından bir belirteç isteyebilirsiniz: `http://169.254.169.254/metadata/identity/oauth2/token`
+5. VM üzerinde çalışan kodunuz Azure Instance Metadata Service Identity uç noktasından yalnızca VM içinden erişilebilen bir belirteç isteyebilir: `http://169.254.169.254/metadata/identity/oauth2/token`
     - Resource parametresi belirtecin gönderildiği hizmeti belirtir. Azure Resource Manager ile kimlik doğrulaması için `resource=https://management.azure.com/` kullanın.
     - Client ID parametresi belirtecin hangi kimlik için istendiğini belirtir. Tek bir sanal makinede birden çok kullanıcı tarafından atanan kimlik olduğunda, belirsizliği ortadan kaldırmak için bu değer gereklidir.
     - API version parametresi, Azure Instance Metadata Service sürümünü belirtir. `api-version=2018-02-01` veya daha yüksek bir değer kullanın.
-
-> [!NOTE]
-> Kodunuzu VM uzantısı uç noktasından bir belirteç de isteyebilir, ancak bu yakında kullanımdan planlanmaktadır. VM uzantısı hakkında daha fazla bilgi için bkz: [Azure IMDS kimlik doğrulaması için VM uzantısı'ten geçiş](howto-migrate-vm-extension.md).
 
 6. Azure AD'ye erişim belirteci isteyen bir çağrı yapılır (5. adımda belirtildiği gibi) ve bu çağrıda 3. adımda yapılandırılan istemci kimliği ve sertifikası kullanılır. Azure AD bir JSON Web Token (JWT) erişim belirteci döndürür.
 7. Kodunuz erişim belirtecini bir çağrıda Azure AD kimlik doğrulamasını destekleyen hizmete gönderir.
@@ -111,7 +109,7 @@ Aşağıdaki diyagramda yönetilen hizmet kimliklerinin Azure sanal makineleriyl
 Yönetilen kimlikleri farklı Azure kaynaklarına erişme amacıyla kullanmayı öğrenmek için aşağıdaki öğreticileri deneyin.
 
 > [!NOTE]
-> Kullanıma [Microsoft Azure kaynakları için yönetilen kimlikleri uygulama](https://www.pluralsight.com/courses/microsoft-azure-resources-managed-identities-implementing) dahil olmak üzere yönetilen kimlikleri hakkında daha fazla bilgi ayrıntılı video izlenecek yollar desteklenen çeşitli senaryolar için kursu.
+> Desteklenen birkaç senaryonun ayrıntılı video talimatları da dahil olmak üzere, Yönetilen kimlikler hakkında daha fazla bilgi için [Microsoft Azure kaynakları Için Yönetilen kimlikler uygulama](https://www.pluralsight.com/courses/microsoft-azure-resources-managed-identities-implementing) Kursu ' na göz atın.
 
 Yönetilen kimlikleri Windows VM ile kullanmayı öğrenin:
 
@@ -124,23 +122,25 @@ Yönetilen kimlikleri Windows VM ile kullanmayı öğrenin:
 
 Yönetilen kimlikleri Linux VM ile kullanmayı öğrenin:
 
+* [Erişim Azure Container Registry](../../container-registry/container-registry-authentication-managed-identity.md)
 * [Azure Data Lake Store’a erişme](tutorial-linux-vm-access-datalake.md)
 * [Azure Resource Manager’a erişme](tutorial-linux-vm-access-arm.md)
 * [Erişim anahtarı kullanarak Azure Depolama’ya erişme](tutorial-linux-vm-access-storage.md)
 * [Paylaşılan erişim anahtarlarını kullanarak Azure Depolama’ya erişme](tutorial-linux-vm-access-storage-sas.md)
 * [Azure Key Vault ile Azure AD dışı bir kaynağa erişme](tutorial-linux-vm-access-nonaad.md)
-* [Azure kapsayıcı kayıt defteri](../../container-registry/container-registry-authentication-managed-identity.md)
 
 Yönetilen kimlikleri diğer Azure hizmetleri ile kullanmayı öğrenin:
 
-* [Azure uygulama hizmeti](/azure/app-service/overview-managed-identity)
-* [Azure İşlevleri](/azure/app-service/overview-managed-identity)
-* [Azure Logic Apps](/azure/logic-apps/create-managed-service-identity)
-* [Azure Service Bus](../../service-bus-messaging/service-bus-managed-service-identity.md)
-* [Azure Event Hubs](../../event-hubs/event-hubs-managed-service-identity.md)
+* [Azure App Service](/azure/app-service/overview-managed-identity)
 * [Azure API Management](../../api-management/api-management-howto-use-managed-service-identity.md)
 * [Azure Container Instances](../../container-instances/container-instances-managed-identity.md)
-* [Azure kapsayıcı kayıt defteri görevleri](../../container-registry/container-registry-tasks-authentication-managed-identity.md)
+* [Azure Container Registry görevler](../../container-registry/container-registry-tasks-authentication-managed-identity.md)
+* [Azure Event Hubs](../../event-hubs/event-hubs-managed-service-identity.md)
+* [Azure İşlevleri](/azure/app-service/overview-managed-identity)
+* [Azure Kubernetes Service](/azure/aks/use-managed-identity)
+* [Azure Logic Apps](/azure/logic-apps/create-managed-service-identity)
+* [Azure Service Bus](../../service-bus-messaging/service-bus-managed-service-identity.md)
+
 
 ## Bu özelliği hangi Azure hizmetleri destekliyor?<a name="which-azure-services-support-managed-identity"></a>
 

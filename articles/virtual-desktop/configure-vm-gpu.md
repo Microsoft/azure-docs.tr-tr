@@ -1,97 +1,94 @@
 ---
-title: Windows sanal masaüstü Önizleme - Azure GPU yapılandırın
-description: GPU hızlandırmalı işleme ve Windows sanal masaüstü önizlemede kodlama elverişli hale getirme.
+title: Windows sanal masaüstü için GPU 'YU Yapılandırma-Azure
+description: Windows sanal masaüstü 'nde GPU hızlandırmalı işleme ve kodlamayı etkinleştirme.
 services: virtual-desktop
 author: gundarev
 ms.service: virtual-desktop
-ms.topic: how-to
+ms.topic: conceptual
 ms.date: 05/06/2019
 ms.author: denisgun
-ms.openlocfilehash: a6a67c89253a1b16f9266d7917655d1b1104022e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a0965dc4011b449e617f6dbaeafb68bfa796b620
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65159578"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73953943"
 ---
-# <a name="configure-graphics-processing-unit-gpu-acceleration-for-windows-virtual-desktop-preview"></a>Grafik işlem birimi (GPU) hızlandırma Windows sanal masaüstü Önizleme için yapılandırma
+# <a name="configure-graphics-processing-unit-gpu-acceleration-for-windows-virtual-desktop"></a>Windows sanal masaüstü için grafik işleme birimi (GPU) hızlandırmasını yapılandırma
 
-Windows sanal masaüstü önizlemesi, GPU hızlandırmalı işleme ve Gelişmiş uygulama performans ve ölçeklenebilirlik için kodlama destekler. GPU hızlandırma grafik kullanımı yoğun uygulamalar için özellikle önemlidir.
+Windows sanal masaüstü, geliştirilmiş uygulama performansı ve ölçeklenebilirliği için GPU hızlandırmalı işleme ve kodlamayı destekler. GPU hızlandırma özellikle grafik yoğun uygulamalar için önemlidir.
 
-GPU hızlandırma oluşturma ve kodlama için kullanılacak GPU için iyileştirilmiş bir Azure sanal makinesi oluşturun, konak havuzunuza ekleme ve yapılandırmak için bu makaledeki yönergeleri izleyin. Bu makalede, yapılandırılmış bir Windows sanal masaüstü kiracısına zaten sahip varsayılır.
+GPU ile iyileştirilmiş bir Azure sanal makinesi oluşturmak, konak havuzunuza eklemek ve işleme ve kodlama için GPU hızlandırmasını kullanacak şekilde yapılandırmak için bu makaledeki yönergeleri izleyin. Bu makalede, zaten yapılandırılmış bir Windows sanal masaüstü kiracınız olduğu varsayılır.
 
 ## <a name="select-a-gpu-optimized-azure-virtual-machine-size"></a>GPU için iyileştirilmiş bir Azure sanal makine boyutu seçin
 
-Azure'un sunduğu birçok [GPU için iyileştirilmiş sanal makine boyutları](/azure/virtual-machines/windows/sizes-gpu). Konak havuzunuz için doğru seçenek belirli uygulama iş yükleri, kullanıcı deneyimi ve maliyet istenen kalite dahil çeşitli Etkenler sayısına bağlıdır. Genel olarak, daha büyük ve daha yetenekli Gpu'lar verili kullanıcı yoğunluğunu en iyi bir kullanıcı deneyimi sunar.
+Azure, çok sayıda [GPU iyileştirilmiş sanal makine boyutu](/azure/virtual-machines/windows/sizes-gpu)sunar. Konak havuzunuzun sağ seçimi, belirli uygulama iş yükleriniz, istenen kullanıcı deneyimi kalitesi ve maliyet dahil olmak üzere çeşitli etkenlere bağlıdır. Genel olarak, daha büyük ve daha yetenekli GPU 'Lar belirli bir kullanıcı yoğunluğu konusunda daha iyi bir kullanıcı deneyimi sunar.
 
-## <a name="create-a-host-pool-provision-your-virtual-machine-and-configure-an-app-group"></a>Bir konak havuzu oluşturun, sanal makinenize kaynak sağlamak ve bir uygulama grubu yapılandırma
+## <a name="create-a-host-pool-provision-your-virtual-machine-and-configure-an-app-group"></a>Bir konak havuzu oluşturun, sanal makinenizi sağlayın ve bir uygulama grubu yapılandırın
 
-Seçilen boyutta bir VM kullanarak yeni bir konak havuzu oluşturun. Yönergeler için [Öğreticisi: Azure Marketi ile konak havuz oluşturma](/azure/virtual-desktop/create-host-pools-azure-marketplace).
+Seçtiğiniz boyuttaki bir VM 'yi kullanarak yeni bir konak havuzu oluşturun. Yönergeler için bkz. [öğretici: Azure Marketi ile konak havuzu oluşturma](/azure/virtual-desktop/create-host-pools-azure-marketplace).
 
-Windows sanal masaüstü önizlemesi, GPU hızlandırmalı işleme ve aşağıdaki işletim sistemlerinde kodlamayı destekler:
+Windows sanal masaüstü, aşağıdaki işletim sistemlerinde GPU hızlandırmalı işleme ve kodlamayı destekler:
 
-* Windows 10 sürüm 1511 veya daha yeni
+* Windows 10 sürüm 1511 veya daha yenisi
 * Windows Server 2016 veya daha yenisi
 
-Ayrıca bir uygulama grubu yapılandırma veya yeni bir ana makine havuzu oluşturduğunuzda, otomatik olarak oluşturulan ("Masaüstü uygulama grubu" olarak adlandırılır) varsayılan masaüstü uygulaması gruplandırma gerekir. Yönergeler için [Öğreticisi: Windows sanal masaüstü Önizleme için uygulama gruplarını yönetme](/azure/virtual-desktop/manage-app-groups).
+Ayrıca, yeni bir konak havuzu oluştururken otomatik olarak oluşturulan varsayılan masaüstü uygulama grubunu ("Masaüstü uygulama grubu" adlı) kullanmanız gerekir. Yönergeler için bkz. [öğretici: Windows sanal masaüstü için uygulama gruplarını yönetme](/azure/virtual-desktop/manage-app-groups).
 
->[!NOTE]
->Windows sanal masaüstü önizlemesi, GPU özellikli konak havuzlar için yalnızca "Masaüstü" uygulama grubu türü destekler. Uygulama grupları "RemoteApp" türündeki GPU özellikli konak havuzlar için desteklenmiyor.
+## <a name="install-supported-graphics-drivers-in-your-virtual-machine"></a>Sanal makinenize desteklenen grafik sürücülerini yükler
 
-## <a name="install-supported-graphics-drivers-in-your-virtual-machine"></a>Sanal makinenizi desteklenen grafik sürücüleri yükleyin
+Windows sanal masaüstündeki Azure N serisi sanal makinelerin GPU yeteneklerini avantajlarından yararlanmak için NVıDıA grafik sürücülerini yüklemelisiniz. Sürücüleri el ile ya da [NVıDıA GPU sürücü uzantısını](/azure/virtual-machines/extensions/hpccompute-gpu-windows)kullanarak yüklemek için [Windows çalıştıran N SERISI VM 'lerde NVIDIA GPU sürücülerini yüklemek](/azure/virtual-machines/windows/n-series-driver-setup) için yönergeleri izleyin.
 
-Windows sanal masaüstü önizlemede Azure N serisi VM'ler, GPU özelliklerine yararlanmak için NVIDIA grafik sürücüleri yüklemeniz gerekir. Konumundaki yönergeleri [yükleme NVIDIA GPU sürücüleri Windows çalıştıran N serisi vm'lerde](/azure/virtual-machines/windows/n-series-driver-setup) sürücüleri ya da el ile yüklemek için veya bu adı kullanıyor [NVIDIA GPU sürücüsünün uzantısı](/azure/virtual-machines/extensions/hpccompute-gpu-windows).
+Yalnızca Azure tarafından dağıtılan [NVıDıA GRID sürücülerinin](/azure/virtual-machines/windows/n-series-driver-setup#nvidia-grid-drivers) Windows sanal masaüstü için desteklendiğini unutmayın.
 
-Not yalnızca [NVIDIA GRID sürücüleri](/azure/virtual-machines/windows/n-series-driver-setup#nvidia-grid-drivers) Azure tarafından dağıtılmış Windows sanal masaüstü Önizleme için desteklenmektedir.
+Sürücü yüklemesinden sonra, bir VM yeniden başlatması gerekir. Grafik sürücülerinin başarıyla yüklendiğini doğrulamak için yukarıdaki yönergelerdeki doğrulama adımlarını kullanın.
 
-Sürücü yükleme sonrasında, VM yeniden başlatma gereklidir. Doğrulama adımları, grafik sürücüleri başarıyla yüklendiğini doğrulamak için yukarıdaki yönergeleri kullanın.
+## <a name="configure-gpu-accelerated-app-rendering"></a>GPU hızlandırmalı uygulama işlemeyi yapılandırma
 
-## <a name="configure-gpu-accelerated-app-rendering"></a>Uygulama GPU hızlandırmalı işleme yapılandırın
+Varsayılan olarak, çoklu oturum yapılandırmalarında çalışan uygulamalar ve masaüstleri CPU ile işlenir ve işleme için kullanılabilir GPU 'ları kullanmaz. GPU hızlandırmalı işlemeyi etkinleştirmek için oturum ana bilgisayarı için grup ilkesi yapılandırın:
 
-Varsayılan olarak, uygulamalara ve masaüstlerine çoklu oturum yapılandırmasında çalışan ve CPU işlenir ve işleme için mevcut Gpu'lar yararlanıyor mu. GPU hızlandırmalı işleme olanağı oturumu ana bilgisayarı için Grup İlkesi yapılandırın:
+1. Yerel yönetici ayrıcalıklarına sahip bir hesap kullanarak VM 'nin masaüstüne bağlanın.
+2. Başlat menüsünü açın ve grup ilkesi düzenleyicisini açmak için "gpedit. msc" yazın.
+3.  >  > **Windows bileşenleri** > **Uzak Masaüstü Hizmetleri** ** > Uzak Masaüstü Oturumu Ana Bilgisayarı** > **uzak oturum ortamı** **Yönetim Şablonları** **bilgisayar yapılandırması** ' na gidin.
+4. İlke ' yi seçin **tüm Uzak Masaüstü Hizmetleri oturumları için donanım varsayılan grafik bağdaştırıcısını kullanın** ve bu ilkeyi, uzak oturumda GPU oluşturmayı etkinleştirmek için **etkin** olarak ayarlayın.
 
-1. Yerel yönetici ayrıcalıklarına sahip bir hesap kullanarak VM masaüstüne bağlanın.
-2. "Grup İlkesi Düzenleyicisi'ni açmak için Başlat menüsü ve türü gpedit.msc" açın.
-3. Ağaç için Git **Bilgisayar Yapılandırması** > **Yönetim Şablonları** > **Windows bileşenleri**  >   **Uzak Masaüstü Hizmetleri** > **Uzak Masaüstü oturumu konağı** > **uzak oturumu ortam**.
-4. İlkeyi seçin **donanım varsayılan grafik bağdaştırıcısının tüm Uzak Masaüstü Hizmetleri oturumlarına kullanın** ve bu ilke kümesine **etkin** uzak oturumu de GPU işleme olanağı.
+## <a name="configure-gpu-accelerated-frame-encoding"></a>GPU hızlandırmalı çerçeve kodlamasını yapılandırma
 
-## <a name="configure-gpu-accelerated-frame-encoding"></a>GPU hızlandırmalı çerçeve kodlama yapılandırın
+Uzak Masaüstü, uzak masaüstü istemcilerine iletilmek üzere uygulamalar ve masaüstü bilgisayarlar tarafından oluşturulan tüm grafikleri (GPU ile veya CPU ile işlenmeksizin) kodlar. Varsayılan olarak, uzak masaüstü bu kodlama için kullanılabilir GPU 'lara ait değildir. GPU hızlandırmalı çerçeve kodlamasını etkinleştirmek için oturum ana bilgisayarı için grup ilkesi yapılandırın. Yukarıdaki adımlara devam edin:
 
-Uzak Masaüstü (CPU veya GPU ile işlenmiş olup olmadığını) uygulamaları ve masaüstü bilgisayarlar tarafından işlenen tüm grafik iletilmesi için Uzak Masaüstü istemcilerini kodlar. Varsayılan olarak, Uzak Masaüstü, kullanılabilir GPU'ları bu kodlama için yararlanmaz. GPU hızlandırmalı çerçeve kodlamasını etkinleştirmek oturumu ana bilgisayarı için Grup İlkesi'ni yapılandırın. Yukarıdaki adımları etmeden:
-
-1. İlkeyi seçin **Uzak Masaüstü bağlantıları için öncelik H.264/AVC 444 grafik modu** ve bu ilke kümesine **etkin** H.264/AVC 444 codec uzak oturumu zorlamak için.
-2. İlkeyi seçin **yapılandırma H.264/AVC donanım Uzak Masaüstü bağlantıları için kodlama** ve bu ilke kümesine **etkin** donanım uzak oturumu için AVC/H.264 kodlamasını etkinleştirmek için.
+1. **Uzak Masaüstü bağlantıları için Ilke öncelik atama H.,/avc 444 grafik modu** ' nu seçin ve bu ilkeyi uzak oturumda h., ve AVC 444 codec bileşenini zorlamak için **etkin** olarak ayarlayın.
+2. **Uzak Masaüstü bağlantıları için, Ilke yapılandırma H. ıfer/AVC donanım kodlamasını** seçin ve bu ilkeyi uzak oturumda AVC/H. IBU için donanım kodlamayı etkinleştirmek üzere **etkin** olarak ayarlayın.
 
     >[!NOTE]
-    >Windows Server 2016'da seçenek kümesi **tercih AVC donanım kodlama** için **her zaman**.
+    >Windows Server 2016 ' de, **her zaman denemek**Için **AVC donanım kodlamasını tercih et** seçeneğini belirleyin.
 
-3. Grup İlkeleri düzenlendi, bir Grup İlkesi güncelleştirmesini zorla. Komut istemi açıp şunu yazın:
+3. Artık grup ilkeleri düzenlenmişse, bir grup ilkesi güncelleştirmesini zorlayın. Komut Istemi ' ni açın ve şunu yazın:
 
     ```batch
     gpupdate.exe /force
     ```
 
-4. Uzak Masaüstü oturumundan oturumu kapatın.
+4. Uzak Masaüstü oturumunda oturumu kapatın.
 
-## <a name="verify-gpu-accelerated-app-rendering"></a>Uygulama GPU hızlandırmalı işleme doğrulayın
+## <a name="verify-gpu-accelerated-app-rendering"></a>GPU hızlandırmalı uygulama işlemeyi doğrulama
 
-Uygulamaları GPU işleme için kullandığını doğrulamak için aşağıdakilerden birini deneyin:
+Uygulamaların işleme için GPU 'YU kullandığını doğrulamak için aşağıdakilerden birini deneyin:
 
-* Kullanım `nvidia-smi` bölümünde anlatıldığı gibi bir yardımcı programı [sürücü yüklemesini doğrulama](/azure/virtual-machines/windows/n-series-driver-setup#verify-driver-installation) uygulamalarınızı çalıştırırken için GPU kullanımını denetlemek için.
-* Desteklenen işletim sistemi sürümlerinde, GPU kullanımı denetlemek için Görev Yöneticisi'ni kullanabilirsiniz. GPU uygulamaları GPU kullandığını görmek için "Performans" sekmesini seçin.
+* Uygulamalarınızı çalıştırırken GPU kullanımını denetlemek için [Sürücü yüklemesini doğrula](/azure/virtual-machines/windows/n-series-driver-setup#verify-driver-installation) bölümünde açıklandığı gibi `nvidia-smi` yardımcı programını kullanın.
+* Desteklenen işletim sistemi sürümlerinde, Görev Yöneticisi 'Ni kullanarak GPU kullanımını kontrol edebilirsiniz. Uygulamaların GPU 'YU kullanıp kullanmadığını görmek için "performans" sekmesindeki GPU 'YU seçin.
 
-## <a name="verify-gpu-accelerated-frame-encoding"></a>GPU hızlandırmalı çerçeve kodlama doğrulayın
+## <a name="verify-gpu-accelerated-frame-encoding"></a>GPU hızlandırmalı çerçeve kodlamasını doğrulama
 
-Uzak Masaüstü GPU hızlandırmalı kodlama kullandığını doğrulamak için:
+Uzak Masaüstü 'Nün GPU hızlandırmalı kodlama kullandığını doğrulamak için:
 
-1. Windows Sanal Masaüstü İstemcisi'ni kullanarak VM masaüstüne bağlanın.
-2. Olay Görüntüleyicisi'ni başlatın ve aşağıdaki düğümüne gidin: **Uygulama ve hizmet günlükleri** > **Microsoft** > **Windows** > **RemoteDesktopServices-RdpCoreTS**  >  **İşletimsel**
-3. GPU hızlandırmalı kodlama kullanılıyorsa belirlemek için olay kimliği 170 için bakın. Portalın "AVC donanım Kodlayıcı etkin: 1" sonra GPU kodlama kullanılır.
-4. AVC 444 mod kullanılıp kullanılmadığını belirlemek için olay kimliği 162 için bakın. Portalın "AVC kullanılabilir: 1 ilk profili: 2048" ardından AVC 444 kullanılır.
+1. Windows sanal masaüstü istemcisi 'ni kullanarak VM 'nin masaüstüne bağlanın.
+2. Olay Görüntüleyicisi başlatın ve şu düğüme gidin: **uygulama ve hizmet günlükleri** > **Microsoft** > **Windows** > **remotedesktopservices-rdpcorets** > **işletimsel**
+3. GPU hızlandırmalı kodlamanın kullanıldığını anlamak için, olay KIMLIĞI 170 ' i arayın. "AVC donanım Kodlayıcısı etkin: 1" görürseniz, GPU kodlaması kullanılır.
+4. AVC 444 modunun kullanıldığını anlamak için, olay KIMLIĞI 162 ' yi arayın. "AVC kullanılabilir: 1 başlangıç profili: 2048" görürseniz, AVC 444 kullanılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu yönergeler bir oturumla konakta VM GPU hızlandırmalı ve çalışıyor olmalıdır. Daha büyük bir konak havuzunda GPU ivmesini etkinleştirmek için bazı ek hususlar:
+Bu yönergelerin tek bir oturum ana bilgisayar VM 'sinde GPU hızlandırmalı ve üzerinde çalışıyor olması gerekir. Daha büyük bir konak havuzu genelinde GPU hızlandırmayı etkinleştirmeye yönelik bazı ek noktalar:
 
-* Kullanmayı [NVIDIA GPU sürücüsünün uzantısı](/azure/virtual-machines/extensions/hpccompute-gpu-windows) sürücü yükleme ve güncelleştirme VM sayısı arasında basitleştirmek için.
-* Grup İlkesi yapılandırması VM sayısı arasında basitleştirmek için Active Directory Grup İlkesi'ni kullanmayı düşünün. Grup İlkesi Active Directory etki alanında dağıtma hakkında daha fazla bilgi için bkz: [Grup İlkesi nesneleri ile çalışma](https://go.microsoft.com/fwlink/p/?LinkId=620889).
+* Bir dizi sanal makine genelinde sürücü yüklemeyi ve güncelleştirmeleri basitleştirmek için [NVıDıA GPU sürücü uzantısını](/azure/virtual-machines/extensions/hpccompute-gpu-windows) kullanmayı düşünün.
+* Bir dizi sanal makine genelinde Grup ilkesi yapılandırmasını basitleştirmek için Active Directory grup ilkesi kullanmayı düşünün. Active Directory etki alanında grup ilkesi dağıtma hakkında daha fazla bilgi için bkz. [Grup İlkesi nesneleriyle çalışma](https://go.microsoft.com/fwlink/p/?LinkId=620889).

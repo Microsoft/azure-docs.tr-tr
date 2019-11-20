@@ -1,21 +1,22 @@
 ---
-title: Bir Node.js MongoDB uygulamasını Azure Cosmos DB'ye bağlama
-description: Bu hızlı başlangıçta Azure Cosmos DB için node.js'de yazılmış mevcut bir MongoDB uygulamasını na nasıl bağlanacağınız gösterilmiştir.
-author: rimman
-ms.author: rimman
+title: 'Hızlı başlangıç: bir Node. js MongoDB uygulamasını Azure Cosmos DB bağlama'
+description: Bu hızlı başlangıçta, Node. js ' de yazılmış mevcut bir MongoDB uygulamasının Azure Cosmos DB 'e nasıl bağlanacağı gösterilmektedir.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.devlang: nodejs
 ms.topic: quickstart
 ms.date: 05/21/2019
-ms.openlocfilehash: 3f6eca30379eb8890695df946f1d7e697cb3f7d7
-ms.sourcegitcommit: 59fd8dc19fab17e846db5b9e262a25e1530e96f3
+ms.custom: seo-javascript-september2019, seo-javascript-october2019
+ms.openlocfilehash: c2a689f7c3ac1308e12d0e371a9ad7f7187417d6
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65979058"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72792186"
 ---
-# <a name="quickstart-migrate-an-existing-mongodb-nodejs-web-app-to-azure-cosmos-db"></a>Hızlı Başlangıç: Mevcut bir MongoDB Node.js web uygulamasını Azure Cosmos DB'ye geçirme 
+# <a name="quickstart-migrate-an-existing-mongodb-nodejs-web-app-to-azure-cosmos-db"></a>Hızlı başlangıç: mevcut bir MongoDB Node. js web uygulamasını Azure Cosmos DB geçirin 
 
 > [!div class="op_single_selector"]
 > * [.NET](create-mongodb-dotnet.md)
@@ -26,11 +27,11 @@ ms.locfileid: "65979058"
 > * [Golang](create-mongodb-golang.md)
 >  
 
-Azure Cosmos DB, Microsoft'un genel olarak dağıtılmış çok modelli veritabanı hizmetidir. Hızla oluşturun ve belge, anahtar/değer ve her biri genel dağıtım ve yatay ölçeklendirme özelliklerinden faydalanabilirsiniz Cosmos DB'nin grafik veritabanlarını sorgulama. 
+Bu hızlı başlangıçta, Node. js ' de yazılmış mevcut bir MongoDB uygulamasını kullanma ve MongoDB istemcisini destekleyen Azure Cosmos veritabanınıza bağlama işlemlerinin nasıl yapılacağı gösterilir. Diğer bir deyişle, verilerin Cosmos veritabanında depolandığı uygulamaya saydamdır.
 
-Bu hızlı başlangıçta, node.js'de yazılmış mevcut bir MongoDB uygulamasını kullanma ve MongoDB istemci destekleyen Cosmos veritabanına bağlanmak gösterilmektedir. Diğer bir deyişle, saydam uygulama verileri bir Cosmos veritabanında depolanır.
+Azure Cosmos DB, Microsoft'un genel olarak dağıtılmış çok modelli veritabanı hizmetidir. Cosmos DB temel dağıtım ve yatay ölçek özelliğinden faydalanabilir ve her şey belge, anahtar/değer ve grafik veritabanlarını hızlıca oluşturup sorgulayabilirsiniz.
 
-İşiniz bittiğinde, çalışan bir MEAN uygulamanız (MongoDB, Express, Angular ve Node.js) olacaktır üzerinde [Cosmos DB](https://azure.microsoft.com/services/cosmos-db/). 
+İşiniz bittiğinde, [Cosmos DB](https://azure.microsoft.com/services/cosmos-db/)üzerinde çalışan bir ortalama uygulamanız (MongoDB, Express, angular ve Node. js) olacaktır. 
 
 ![Azure App Service’te çalışan MEAN.js uygulaması](./media/create-mongodb-nodejs/meanjs-in-azure.png)
 
@@ -54,7 +55,7 @@ Node.js çalıştırma bilgisine sahip olmanız gerekir. Bu hızlı başlangıç
 1. Bir komut istemini açın, git-samples adlı yeni bir klasör oluşturun ve komut istemini kapatın.
 
     ```bash
-    md "C:\git-samples"
+    mkdir "C:\git-samples"
     ```
 
 2. Git Bash gibi bir Git terminal penceresi açın ve örnek uygulamayı yüklemek üzere yeni bir klasör olarak değiştirmek için `cd` komutunu kullanın.
@@ -100,17 +101,17 @@ Yüklenen bir Azure CLI kullanıyorsanız `az` komutunu çalıştırarak `cosmos
 
 Aşağıdaki örnekte Batı Avrupa bölgesinde bir kaynak grubu oluşturulmaktadır. Kaynak grubu için benzersiz bir ad seçin.
 
-Azure Cloud Shell kullanıyorsanız **Deneyin**'e tıklayın, oturum açmak için ekrandaki istemleri uygulayın, ardından komutu komut istemine kopyalayın.
+Azure Cloud Shell kullanıyorsanız, **deneyin**' i seçin, oturum açmak için ekrandaki istemleri izleyin, sonra komutu komut istemine kopyalayın.
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location "West Europe"
 ```
 
-## <a name="create-an-azure-cosmos-db-account"></a>Azure Cosmos DB hesabı oluşturun
+## <a name="create-an-azure-cosmos-db-account"></a>Azure Cosmos DB hesabı oluşturma
 
-Bir Cosmos hesabı [az cosmosdb oluşturma](/cli/azure/cosmosdb#az-cosmosdb-create) komutu.
+[Az cosmosdb Create](/cli/azure/cosmosdb#az-cosmosdb-create) komutuyla bir Cosmos hesabı oluşturun.
 
-Aşağıdaki komutta Lütfen gördüğünüz kendi benzersiz Cosmos hesap adınızı alternatif `<cosmosdb-name>` yer tutucu. Bu benzersiz ad, Cosmos DB uç noktasının bir parçası kullanılacak (`https://<cosmosdb-name>.documents.azure.com/`), adın azure'daki tüm Cosmos hesaplarında benzersiz olması gerekir. 
+Aşağıdaki komutta, lütfen `<cosmosdb-name>` yer tutucusunu gördüğünüz benzersiz Cosmos hesabınızın adını yerine koyun. Bu benzersiz ad Cosmos DB uç noktanızın (`https://<cosmosdb-name>.documents.azure.com/`) bir parçası olarak kullanılır. bu nedenle, adın Azure 'daki tüm Cosmos hesaplarında benzersiz olması gerekir. 
 
 ```azurecli-interactive
 az cosmosdb create --name <cosmosdb-name> --resource-group myResourceGroup --kind MongoDB
@@ -157,14 +158,14 @@ DB/databaseAccounts/<cosmosdb-name>",
 
 ## <a name="connect-your-nodejs-application-to-the-database"></a>Node.js uygulamanızı veritabanına bağlama
 
-Bu adımda, MEAN.js örnek uygulamanızı, yeni oluşturduğunuz Cosmos veritabanına bağlanın. 
+Bu adımda, ortalama. js örnek uygulamanızı yeni oluşturduğunuz Cosmos veritabanına bağlayadınız. 
 
 <a name="devconfig"></a>
 ## <a name="configure-the-connection-string-in-your-nodejs-application"></a>Node.js uygulamanızda bağlantı dizesini yapılandırma
 
 MEAN.js deponuzda `config/env/local-development.js` dosyasını açın.
 
-Bu dosyanın içeriğini aşağıdaki kodla değiştirin. Ayrıca iki değiştirdiğinizden emin olun `<cosmosdb-name>` yer tutucusunu Cosmos hesabınızın adını.
+Bu dosyanın içeriğini aşağıdaki kodla değiştirin. İki `<cosmosdb-name>` yer tutucusunu Cosmos hesap adınızla değiştirdiğinizden de emin olun.
 
 ```javascript
 'use strict';
@@ -178,10 +179,10 @@ module.exports = {
 
 ## <a name="retrieve-the-key"></a>Anahtarı alma
 
-Bir Cosmos veritabanına bağlanmak için veritabanı anahtarı gerekir. Birincil anahtarı almak için [az cosmosdb list-keys](/cli/azure/cosmosdb#az-cosmosdb-list-keys) komutunu kullanın.
+Cosmos veritabanına bağlanmak için veritabanı anahtarına ihtiyacınız vardır. Birincil anahtarı almak için [az cosmosdb Keys List](/cli/azure/cosmosdb/keys#az-cosmosdb-keys-list) komutunu kullanın.
 
 ```azurecli-interactive
-az cosmosdb list-keys --name <cosmosdb-name> --resource-group myResourceGroup --query "primaryMasterKey"
+az cosmosdb keys list --name <cosmosdb-name> --resource-group myResourceGroup --query "primaryMasterKey"
 ```
 
 Azure CLI aşağıdaki örneğe benzer bilgiler çıkarır. 
@@ -204,7 +205,7 @@ npm start
 
 Bir konsol iletisi, geliştirme ortamının çalışır durumda olduğunu söyleyecektir. 
 
-Bir tarayıcıda `http://localhost:3000` sayfasına gidin. Üstteki menüden **Kaydol**’a tıklayıp iki sahte kullanıcı oluşturmaya çalışın. 
+Tarayıcıda `http://localhost:3000` ' a gidin. Üstteki menüden **Kaydol** ' u seçin ve iki kukla Kullanıcı oluşturmayı deneyin. 
 
 MEAN.js örnek uygulaması, kullanıcı verilerini veritabanında depolar. Başarılı olursanız ve MEAN.js oluşturulan kullanıcının oturumunu otomatik olarak açarsa, Azure Cosmos DB bağlantınız çalışıyordur. 
 
@@ -212,18 +213,18 @@ MEAN.js örnek uygulaması, kullanıcı verilerini veritabanında depolar. Başa
 
 ## <a name="view-data-in-data-explorer"></a>Veri Gezgini’nde verileri görüntüleme
 
-Bir Cosmos veritabanında depolanan verileri görüntüleyin ve Azure portalındaki sorgu kullanılabilir.
+Cosmos veritabanında depolanan veriler, Azure portal görüntülemek ve sorgulamak için kullanılabilir.
 
 Önceki adımda oluşturulan verileri görüntülemek, sorgulamak ve üzerinde çalışmak için web tarayıcınızda [Azure portalı](https://portal.azure.com) oturumunu açın.
 
-Arama kutusuna Azure Cosmos DB yazın. Cosmos hesabı dikey penceresi açıldığında Cosmos hesabınızı seçin. Sol gezinti bölmesinde Veri Gezgini'ne tıklayın. Koleksiyonlar bölmesinde koleksiyonunuzu genişletin; bundan sonra koleksiyondaki belgeleri görüntüleyebilir, verileri sorgulayabilir ve hatta saklı yordam, tetikleyici ve UDF’ler oluşturup çalıştırabilirsiniz. 
+Üst arama kutusuna **Azure Cosmos DB**girin. Cosmos hesabı dikey penceresi açıldığında, Cosmos hesabınızı seçin. Sol gezinti bölmesinde **Veri Gezgini**' yi seçin. Koleksiyonlar bölmesinde koleksiyonunuzu genişletin; bundan sonra koleksiyondaki belgeleri görüntüleyebilir, verileri sorgulayabilir ve hatta saklı yordam, tetikleyici ve UDF’ler oluşturup çalıştırabilirsiniz. 
 
 ![Azure portalında Veri Gezgini](./media/create-mongodb-nodejs/cosmosdb-connect-mongodb-data-explorer.png)
 
 
 ## <a name="deploy-the-nodejs-application-to-azure"></a>Node.js uygulamasını Azure’a dağıtma
 
-Bu adımda, Cosmos DB için Node.js uygulamanızı dağıtın.
+Bu adımda, Cosmos DB için Node. js uygulamanızı dağıtırsınız.
 
 Daha önce değiştirdiğiniz yapılandırma dosyasının geliştirme ortamına (`/config/env/local-development.js`) yönelik olduğunu fark etmiş olabilirsiniz. Uygulamanızı App Service’e dağıttığınızda, varsayılan olarak üretim ortamında çalıştırılır. O halde şimdi, ilgili yapılandırma dosyasında aynı değişikliği yapmanız gerekir.
 
@@ -236,7 +237,7 @@ MEAN.js deponuzda `config/env/production.js` dosyasını açın.
 ```
 
 > [!NOTE] 
-> `ssl=true` Seçeneği önemlidir çünkü [Cosmos DB, SSL gerektirir](connect-mongodb-account.md#connection-string-requirements). 
+> [Cosmos DB SSL gerektirdiğinden](connect-mongodb-account.md#connection-string-requirements)`ssl=true` seçeneği önemlidir. 
 >
 >
 
@@ -252,7 +253,7 @@ git commit -m "configured MongoDB connection string"
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, Cosmos hesabı oluşturma, bir koleksiyon oluşturun ve bir konsol uygulamasını çalıştırmayı öğrendiniz. Şimdi, Cosmos veritabanınıza ek veri aktarabilirsiniz. 
+Bu hızlı başlangıçta, Cosmos hesabı oluşturmayı, bir koleksiyon oluşturmayı ve bir konsol uygulamasını çalıştırmayı öğrendiniz. Artık Cosmos veritabanınıza ek veri aktarabilirsiniz. 
 
 > [!div class="nextstepaction"]
 > [Azure Cosmos DB’ye MongoDB verileri aktarma](mongodb-migrate.md)

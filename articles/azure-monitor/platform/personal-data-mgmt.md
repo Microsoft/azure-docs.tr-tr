@@ -1,130 +1,129 @@
 ---
-title: Azure Log Analytics içinde depolanan kişisel verilere yönelik kılavuz | Microsoft Docs
-description: Bu makalede, tanımlamak ve kaldırmak için Azure Log Analytics ve yöntemleri depolanan kişisel verileri yönetme açıklar.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Log Analytics 'de depolanan kişisel veriler için rehberlik | Microsoft Docs
+description: Bu makalede, Azure Log Analytics 'de depolanan kişisel verilerin ve bunları belirleme ve kaldırma yöntemlerinde nasıl yönetileceği açıklanır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 05/18/2018
+author: MGoedtel
 ms.author: magoedte
-ms.openlocfilehash: 0cf5a80e3eedbe7efb8463162b5b3ed489ac08c8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 05/18/2018
+ms.openlocfilehash: 7733b27bb5af01e55cd732c16f6c9cb1e9301819
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61087296"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72932139"
 ---
 # <a name="guidance-for-personal-data-stored-in-log-analytics-and-application-insights"></a>Log Analytics ve Application Insights depolanan kişisel verilere yönelik kılavuz
 
-Log Analytics, kişisel veriler bulunma olasılığı olduğu bir veri deposudur. Application Insights, Log Analytics bölümünde verilerini depolar. Bu makalede, Log Analytics ve Application Insights bu tür veriler genellikle, bu tür verileri işlemek için özellikleri yanı sıra bulunduğu ele alınacaktır.
+Log Analytics kişisel verilerin bulunma olasılığı olan bir veri deposudur. Application Insights verilerini Log Analytics bir bölümde depolar. Bu makale, Log Analytics nerede olduğunu ve bu verilerin tipik olarak Application Insights olduğunu ve bu tür verileri işleyebileceğiniz özellikleri tartışacaktır.
 
 > [!NOTE]
-> Bu makalenin amaçları için _günlük verilerini_ bir Log Analytics çalışma alanına gönderilen verilerin başvuruyor ancak _uygulama verileri_ Application Insights tarafından toplanan verileri ifade eder.
+> Bu makalenin _günlük verileri_ , bir Log Analytics çalışma alanına gönderilen verileri ifade ederken, _uygulama verileri_ Application Insights tarafından toplanan verilere başvurur.
 
 [!INCLUDE [gdpr-dsr-and-stp-note](../../../includes/gdpr-dsr-and-stp-note.md)]
 
 ## <a name="strategy-for-personal-data-handling"></a>Kişisel veri işleme stratejisi
 
-Bu, şirketinizin en fazla ve sonuçta ile özel işleyecek stratejisini belirlemek için veri (varsa) ancak bazı olası yaklaşımlar aşağıda verilmiştir. Bir teknik açısından en fazla tercih sırasına göre listelenen en az tercih için:
+Siz ve şirketiniz size özel verilerinizi işleyeceği stratejiyi (Eğer varsa) son olarak belirleyemiyorsa, aşağıdakiler olası yaklaşımlardır. Bu kişiler, en az tercih edilen teknik bir görünümün tercih sırasına göre listelenmiştir:
 
-* Mümkünse, koleksiyonunu durdurma, karartmak, Anonimleştir veya aksi "özel" kabul dışlanacak toplanmakta olan verileri ayarlayın. Bu _popüleri_ işleme çok pahalı ve etkili bir veri oluşturmaya gerek kaydetme, tercih edilen yaklaşım.
-* Mümkün olduğunda veri platformu ve performans üzerindeki etkiyi azaltmak için veri'leri normalleştirmek çalışır. Örneğin, günlük kaydı açık bir kullanıcı kimliği yerine kullanıcı adı ve ardından başka bir yerde kaydedilebilecek bir iç kimliği ayrıntılarının bağıntısını bir arama verileri oluşturun. Böylece, kullanıcılarınız kendi kişisel bilgilerinin silmenize istemelisiniz yalnızca kullanıcıya karşılık gelen arama tablosundaki satırın silinmesi yeterli olacağını mümkündür. 
-* Son olarak, özel veri toplanması gereken, işlem temizleme API yol ve dışa aktarma ve bir kullanıcıyla ilişkili herhangi bir özel veri siliniyor olabilir yükümlülükleri karşılamak için var olan sorgu API'si yolu oluşturun. 
+* Mümkün olduğunda, toplamayı durdurun, bir araya getirebilir, Anonimleştir veya aksi takdirde, toplanan verileri "Private" olarak kabul edilmeden hariç tutun. Bu, tercih edilen yaklaşımdan _yararlanarak_ çok maliyetli ve kesin bir veri işleme stratejisi oluşturmanız için ihtiyaç duymaktır.
+* Mümkün olmadığı durumlarda veri platformu ve performans üzerindeki etkiyi azaltmak için verileri normalleştirmeye çalışın. Örneğin, bir açık kullanıcı KIMLIĞINI günlüğe kaydetmek yerine, Kullanıcı adını ve ayrıntılarını daha sonra günlüğe kaydedilebilir bir iç KIMLIKLE bağıntılı bir arama verileri oluşturun. Bu şekilde, kullanıcılarınızın kişisel bilgilerini silmenizi istemesi gerekir, yalnızca kullanıcıya karşılık gelen arama tablosundaki satırı silmek mümkündür. 
+* Son olarak, özel verilerin toplanması gerekiyorsa, bir kullanıcıyla ilişkili tüm özel verileri dışarı ve silmeye yönelik tüm yükümlülükleri karşılamak üzere Temizleme API 'si yolu ve var olan sorgu API 'SI yolu etrafında bir işlem oluşturun. 
 
-## <a name="where-to-look-for-private-data-in-log-analytics"></a>Log analytics'te özel verileri aramak nerede?
+## <a name="where-to-look-for-private-data-in-log-analytics"></a>Log Analytics özel verilerin nerede aranacağı?
 
-Log Analytics'in, verilerinizin bir şemaya prescribing çalışırken her alanı özel değerlerle geçersiz olanak tanıyan esnek deposu bulunur. Ayrıca, herhangi bir özel şema aktarılabilir. Bu nedenle, tam olarak nerede özel veriler belirli çalışma alanınızda bulunacaktır söyleyin mümkün değildir. Aşağıdaki konumlarda ancak iyi envanterinize başlangıç noktaları:
+Log Analytics, verilerinize bir şemayı etkilemeden, her alanı özel değerlerle geçersiz kılmanıza olanak sağlayan esnek bir depodır. Ayrıca, herhangi bir özel şema alınabilir. Bu nedenle, özel verilerin özel çalışma alanınızda nerede bulunacağı kesin bir şekilde söylemek olanaksızdır. Ancak, aşağıdaki konumlar envanterinizdeki başlangıç noktalarından iyidir:
 
 ### <a name="log-data"></a>Günlük verileri
 
-* *IP adresleri*: Log Analytics, birçok farklı tablolar arasında çeşitli IP bilgileri toplar. Örneğin, aşağıdaki sorgu tüm tabloları IPv4 adresleri son 24 saat boyunca toplanan burada gösterilmektedir:
+* *IP adresleri*: Log Analytics birçok farklı tablo arasında çeşitli IP bilgilerini toplar. Örneğin, aşağıdaki sorgu, son 24 saat içinde IPv4 adreslerinin toplandığı tüm tabloları gösterir:
     ```
     search * 
     | where * matches regex @'\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b' //RegEx originally provided on https://stackoverflow.com/questions/5284147/validating-ipv4-addresses-with-regexp
     | summarize count() by $table
     ```
-* *Kullanıcı kimliklerini*: Çok çeşitli çözümler ve tablolar kullanıcı kimlikleri bulundu. Belirli bir kullanıcı adı için arama komutunu kullanarak, veri kümesi genelinde arayabilirsiniz:
+* *Kullanıcı kimlikleri*: Kullanıcı kimlikleri, çok çeşitli çözüm ve tablolarda bulunur. Arama komutunu kullanarak, tüm veri kümeniz genelinde belirli bir kullanıcı adına bakabilirsiniz:
     ```
     search "[username goes here]"
     ```
-  Yalnızca kullanıcı tarafından okunabilen kullanıcı adları aynı zamanda doğrudan geri belirli bir kullanıcıya izlenebilir GUID'leri için aranacak unutmayın!
-* *Cihaz kimlikleri*: "Kullanıcı kimlikleri gibi cihaz kimlikleri bazen özel" olarak kabul edilir. Tabloları tanımlamak için kullanıcı kimlikleri için yukarıda listelenen bölgelere aynı yaklaşımı kullanmak olduğunda bu bir sorun olabilir. 
-* *Özel veri*: Log Analytics'e sağlayan çeşitli yöntemler koleksiyonda: özel günlükleri ve özel alanları [HTTP veri toplayıcı API'sini](../../azure-monitor/platform/data-collector-api.md) , ve özel veri, sistem olay günlüklerini bir parçası olarak toplanır. Bunların tümü, özel veri içeren açıktır ve herhangi bir veri var olup olmadığını doğrulamak için incelenmelidir.
-* *Çözüm Yakalanan veriler*: Çözüm mekanizması açık uçlu bir tane olduğundan, uyumluluk sağlamak için çözümler tarafından oluşturulan tüm tabloları incelemeniz önerilir.
+  Yalnızca insan tarafından okunabilen kullanıcı adlarına değil, ayrıca doğrudan belirli bir kullanıcıya geri görünebilirler.
+* *Cihaz kimlikleri*: Kullanıcı kimlikleri gibi, cihaz kimlikleri bazen "özel" olarak kabul edilir. Bunun sorun olabileceği tabloları belirlemek için Kullanıcı kimlikleri için yukarıda listelenen yaklaşımı kullanın. 
+* *Özel veriler*: Log Analytics, koleksiyonu çeşitli yöntemlerle sağlar: özel Günlükler ve özel alanlar, [http veri toplayıcı API 'si](../../azure-monitor/platform/data-collector-api.md) ve sistem olay günlüklerinin bir parçası olarak toplanan özel veriler. Bunların tümü özel verileri içerecek şekilde açıktır ve bu tür verilerin mevcut olup olmadığını doğrulamak için incelenmelidir.
+* *Çözüm-yakalanan veriler*: çözüm mekanizması bir açık sonlandırdığı için, uyumluluk sağlamak için çözümler tarafından oluşturulan tüm tabloları gözden geçirmeyi öneririz.
 
 ### <a name="application-data"></a>Uygulama verileri
 
-* *IP adresleri*: Application Insights varsayılan olarak "0.0.0.0" tüm IP adresi alanlarıyla karartmak, ancak oturum bilgilerini korumak için gerçek kullanıcı IP bu değerle geçersiz kılmak için oldukça sık kullanılan bir desendir. Aşağıdaki Analytics sorgusu, son 24 saat boyunca "0.0.0.0" dışındaki IP adresi sütundaki değerleri içeren herhangi bir tabloda bulmak için kullanılabilir:
+* *IP adresleri*: Application Insights, varsayılan olarak tüm IP adresi alanlarını "0.0.0.0" olarak saklar, oturum bilgilerini sürdürmek için bu değeri gerçek Kullanıcı IP 'si ile geçersiz kılan oldukça yaygın bir modeldir. Aşağıdaki analiz sorgusu, IP adresi sütununda, son 24 saat içinde "0.0.0.0" dışındaki değerleri içeren herhangi bir tabloyu bulmak için kullanılabilir:
     ```
     search client_IP != "0.0.0.0"
     | where timestamp > ago(1d)
     | summarize numNonObfuscatedIPs_24h = count() by $table
     ```
-* *Kullanıcı kimliklerini*: Varsayılan olarak, kullanıcı ve oturum izleme için Application Insights rastgele oluşturulmuş kimlikleri kullanır. Ancak, bir kimliği uygulamayla ilgili daha fazla saklamak için geçersiz kılınan bu alanları görmek için yaygındır. Örneğin: kullanıcı adları, AAD GUID'leri, vs. Bu kimlik genellikle olarak değerlendirilir kapsamındaki kişisel verileri olarak ve bu nedenle, uygun şekilde yapılması gerekir. Karartmak veya bu kimliklerinin Anonimleştir denemek için her zaman bizim kullanılması önerilir. Burada bu değerleri yaygın olarak bulunan alanları session_ıd, USER_ID, user_AuthenticatedId, user_AccountId yanı sıra customDimensions içerir.
-* *Özel veri*: Application Insights için herhangi bir veri türü bir dizi özel boyutlar eklenecek sağlar. Bu boyutlara olabilir *herhangi* veri. Son 24 saat boyunca toplanan herhangi bir özel boyutlar tanımlamak için aşağıdaki sorguyu kullanın:
+* *Kullanıcı kimlikleri*: Application Insights, varsayılan olarak, Kullanıcı ve oturum izleme için rastgele oluşturulan kimlikleri kullanır. Bununla birlikte, bir KIMLIĞI uygulamayla ilgili daha uygun bir şekilde depolamak için bu alanların geçersiz kılındığından, yaygın bir şekilde görüntülenir. Örneğin: Kullanıcı adları, AAD GUID 'Leri, vb. Bu kimlikler genellikle kişisel veri olarak kapsam içi olarak değerlendirilir ve bu nedenle uygun şekilde işlenmelidir. Önerimiz, bu kimlikleri gizleme veya Anonimleştir her zaman denenmektir. Bu değerlerin yaygın olarak bulunduğu alanlar session_Id, user_Id, user_AuthenticatedId, user_AccountId ve customDimensions içerir.
+* *Özel veriler*: Application Insights tüm veri türlerine bir dizi özel boyut eklemenizi sağlar. Bu boyutlar *herhangi bir* veri olabilir. Son 24 saat içinde toplanan özel boyutları belirlemek için aşağıdaki sorguyu kullanın:
     ```
     search * 
     | where isnotempty(customDimensions)
     | where timestamp > ago(1d)
     | project $table, timestamp, name, customDimensions 
     ```
-* *Bellek ve aktarım sırasında verileri*: Application Insights, özel durumlar, istekler, bağımlılık çağrıları ve izlemeler izler. Özel veriler genellikle kod ve HTTP çağrısı düzeyinde toplanabilir. Özel durumlar, istekler, bağımlılıklar ve izlemeleri tabloları tür verileri tanımlamak için gözden geçirin. Kullanım [telemetri başlatıcılar](https://docs.microsoft.com/azure/application-insights/app-insights-api-filtering-sampling) mümkün olduğunda bu verileri karartmak.
-* *Anlık görüntü hata ayıklayıcısı yakalamaları*: [Snapshot Debugger](https://docs.microsoft.com/azure/application-insights/app-insights-snapshot-debugger) özellik Application ınsights'da uygulamanızı üretim örneği üzerinde bir özel durum yakalandı her hata ayıklama anlık görüntüleri toplamak sağlar. Anlık görüntüleri, özel durumların yanı sıra, yığındaki her adımda yerel değişkenler için değerler baştaki tam yığın izlemesi açığa çıkarır. Ne yazık ki, bu özellik ek noktalarından veya anlık görüntü verileri programlı erişim seçmeli silme işlemi için izin vermez. Bu nedenle, varsayılan anlık görüntü elde tutma oranı, uyumluluk gereksinimlerini karşılamadığı, özelliği devre dışı bırakmak için kullanılması önerilir.
+* *Bellek içi ve aktarım verileri*: Application Insights özel durumları, istekleri, bağımlılık çağrılarını ve izlemeleri izler. Özel veriler genellikle kod ve HTTP çağrı düzeyinde toplanabilir. Bu tür verileri belirlemek için özel durumları, istekleri, bağımlılıkları ve izleme tablolarını gözden geçirin. Bu verileri gizleme olasılığı bulunan [telemetri başlatıcıları](https://docs.microsoft.com/azure/application-insights/app-insights-api-filtering-sampling) 'nı kullanın.
+* *Snapshot Debugger yakalamaları*: Application Insights [Snapshot Debugger](https://docs.microsoft.com/azure/application-insights/app-insights-snapshot-debugger) özelliği, uygulamanızın üretim örneğinde bir özel durum yakalandığında hata ayıklama anlık görüntülerini toplamanıza olanak tanır. Anlık görüntüler, yığının her adımında yerel değişkenlerin değerlerinin yanı sıra özel durumlar için tam yığın izlemenin önde gelen listesini ortaya çıkarır. Ne yazık ki, bu özellik yapışma noktalarının seçmeli silinmesine veya anlık görüntü içindeki verilere programlı erişime izin vermez. Bu nedenle, varsayılan anlık görüntü saklama oranı uyumluluk gereksinimlerinizi karşılamıyorsa, özelliği kapatmanız önerilir.
 
-## <a name="how-to-export-and-delete-private-data"></a>Dışarı aktarma ve silme özel veriler
+## <a name="how-to-export-and-delete-private-data"></a>Özel verileri dışarı aktarma ve silme
 
-Belirtildiği gibi [kişisel veri işleme stratejisi](#strategy-for-personal-data-handling) bölümüne, __kesin__ if koleksiyonunu devre dışı bırakmak için veri toplama İlkesi yapılandırılacak olası tüm, önerilir Aksi takdirde "özel" kabul kaldırmak için değiştirme obfuscating veya onu anonymizing özel veriler. Size ve ekibinize tanımlayın ve otomatikleştirmek için bir strateji, bir arabirim verileriyle etkileşim kurmak müşterileriniz için derleme maliyetlerini ve devam eden bakım maliyetlerini veri en önemli sonucu işleme. Ayrıca, Log Analytics ve Application Insights ve yüksek hacimde eş zamanlı sorgu hesaplama açısından pahalı veya temizleme API çağrılarının tüm Log Analytics işlevselliği etkileşim olumsuz olasılığına sahiptir. Başka bir deyişle, burada özel veri gerekir toplanmasını geçerli bazı senaryolar vardır. Bu durumlarda, bu bölümde açıklanan şekilde veri yapılmalıdır.
+[Kişisel veri işleme stratejisinde](#strategy-for-personal-data-handling) daha önce bahsedildiği gibi, özel veri toplamayı devre dışı bırakmak, verileri belirsizleştirmeyi veya anonimleştirmeyi sağlamak üzere veri toplama ilkenizi yeniden yapılandırmak için __kullanılması önemle__ önerilir veya Aksi takdirde, bunu "özel" olarak kabul edilmeden kaldırmak için değiştirme. Verilerin işlenmesi, sizin ve ekibinizin bir strateji tanımlayıp otomatikleştirilmesi için size maliyetleri, müşterilerinizin verileriyle etkileşim kurması için bir arabirim oluşturmak ve devam eden bakım maliyetlerine neden olur. Ayrıca, Log Analytics ve Application Insights açısından hesaplama maliyetlidir ve çok sayıda eşzamanlı sorgu veya temizleme API çağrısı, diğer tüm etkileşimi Log Analytics işlevselliğiyle olumsuz yönde etkilemenize olanak sağlar. Yani, özel verilerin toplanması gereken bazı geçerli senaryolar vardır. Bu gibi durumlarda, verilerin bu bölümde açıklandığı gibi işlenmesi gerekir.
 
 [!INCLUDE [gdpr-intro-sentence](../../../includes/gdpr-intro-sentence.md)]
 
-### <a name="view-and-export"></a>Görüntüle ve dışarı aktarma
+### <a name="view-and-export"></a>Görüntüle ve dışarı aktar
 
-Hem görüntüleme hem de veri isteklerini dışarı aktarmak için [Log Analytics sorgu API'si](https://dev.loganalytics.io/) veya [Application Insights sorgu API'si](https://dev.applicationinsights.io/quickstart) kullanılmalıdır. Kullanıcılarınıza sunmak için uygun bir veri şekli dönüştürmek için mantıksal uygulamanız size olacaktır. [Azure işlevleri](https://azure.microsoft.com/services/functions/) böyle bir mantık barındırmak için harika bir yer sağlar.
+Veri görüntüleme ve dışarı aktarma istekleri için [Log Analytics sorgu API 'si](https://dev.loganalytics.io/) veya [Application Insights sorgu API 'si](https://dev.applicationinsights.io/quickstart) kullanılmalıdır. Kullanıcılarınıza teslim etmek üzere verilerin şeklini uygun bir şekilde dönüştürme mantığı, uygulamanız için size uygun olacaktır. [Azure işlevleri](https://azure.microsoft.com/services/functions/) bu tür mantığı barındırmak için harika bir yer sunar.
 
 > [!IMPORTANT]
->  Temizleme işlemleri büyük çoğunluğu SLA'sı çok hızlı tamamlarken **resmi 30 günde temizleme işlemlerinin tamamlanmasını SLA ayarlanır** yoğun kullanılan bir veri platformu etkilerini nedeniyle. Bu otomatik bir işlemdir; bir işlem daha hızlı işlenmesi istemek için hiçbir yolu yoktur.
+>  Temizleme işlemlerinin büyük çoğunluğu SLA 'dan çok daha hızlı tamamlanabilir, ancak **Temizleme işlemlerinin tamamlanmasına yönelik RESMI SLA** , kullanılan veri platformunda ağır etkileri nedeniyle 30 gün içinde ayarlanır. Bu otomatikleştirilmiş bir işlemdir; bir işlemin daha hızlı işlenmesini istemek için bir yol yoktur.
 
 ### <a name="delete"></a>Sil
 
 > [!WARNING]
-> Log analytics'te siler yıkıcı ve çevrilemez! Lütfen son derece dikkatli olun, bunların yürütme kullanın.
+> Log Analytics, bozucu ve geri alınamaz bir şekilde silinir! Lütfen yürütmesinde çok dikkatli olun.
 
-Yaptık kullanılabilir gizlilik işlemlerinin bir parçası olarak bir *Temizleme* API yolu. Bu yol, böylece ile ilişkili riski nedeniyle olabildiğince az kullanılmalıdır olası performans etkisini ve olası tüm toplamalar, Ölçümler ve Log Analytics verilerinizi diğer yönleri eğriltmek için. Bkz: [kişisel veri işleme stratejisi](#strategy-for-personal-data-handling) özel verileri işlemek alternatif yaklaşımlar için bölüm.
+Bir *Temizleme* API 'si yolunu işlemenin bir parçası olarak kullanıma sunulmuştur. Bu yol, sorun ile ilişkili risk, olası performans etkisi ve Log Analytics verilerinizin diğer yönlerini, ölçümlerinin ve diğer yönlerini eğmek için potansiyel olarak kullanılmalıdır. Özel verileri işlemeye yönelik alternatif yaklaşımlar için [kişisel veri Işleme stratejisi](#strategy-for-personal-data-handling) bölümüne bakın.
 
-Temizleme, uygulama ya da kullanıcı (bile kaynak sahibi dahil) azure'daki açıkça alınmadan verilen Azure Kaynak Yöneticisi'ndeki Rol yürütmek için izinlere sahip üst düzeyde ayrıcalıklı bir işlemdir. Bu rol _veri Purger_ ve olası veri kaybını nedeniyle dikkatli Devredilmiş olması. 
+Temizleme, Azure 'daki hiçbir uygulamanın veya kullanıcının (kaynak sahibi dahil) Azure Resource Manager içinde açıkça bir rol verilmeden yürütme izinlerine sahip olacağı yüksek ayrıcalıklı bir işlemdir. Bu rol _veri_ kaybı olur ve veri kaybı nedeniyle dikkatli bir şekilde temsil edilmelidir. 
 
-Azure Resource Manager rol atandıktan sonra iki yeni API yolları kullanılabilir: 
+> [!IMPORTANT]
+> Sistem kaynaklarını yönetmek için, temizleme istekleri saat başına 50 istekte azaltılır. Tek bir komut göndererek Temizleme isteklerinin yürütülmesi, koşulu temizleme gerektiren tüm Kullanıcı kimliklerini içerir. Birden çok kimlik belirtmek için [ın işlecini](/azure/kusto/query/inoperator) kullanın. Sonuçların beklendiğini doğrulamak için Temizleme isteğini yürütmeden önce sorguyu çalıştırmalısınız. 
+
+
+
+Azure Resource Manager rolü atandıktan sonra iki yeni API yolu mevcuttur: 
 
 #### <a name="log-data"></a>Günlük verileri
 
-* [Temizleme sonrası](https://docs.microsoft.com/rest/api/loganalytics/workspaces%202015-03-20/purge) - silinecek verilerin parametrelerini belirten nesnesini alır ve bir başvuru GUID'sini döndürür 
-* GET temizleme durumu - POST temizleme çağrısına temizleme API'nizi durumunu belirlemek için çağıran bir URL içeren bir 'x-ms-durumunu-location' üst bilgisi döndürür. Örneğin:
+* [Temizleme sonrası](https://docs.microsoft.com/rest/api/loganalytics/workspaces%202015-03-20/purge) -Silinecek verilerin parametrelerini belirten bir nesne alır ve bir başvuru GUID 'si döndürür 
+* Temizleme durumunu Al-Temizleme API 'sinin durumunu öğrenmek için çağırabileceğiniz bir URL 'YI içeren bir ' x-MS-Status-Location ' üst bilgisi döndürür. Örnek:
 
     ```
-    x-ms-status-location: https://management.azure.com/subscriptions/[SubscriptionId]/resourceGroups/[ResourceGroupName]/providers/Microsoft.OperatonalInsights/workspaces/[WorkspaceName]/operations/purge-[PurgeOperationId]?api-version=2015-03-20
+    x-ms-status-location: https://management.azure.com/subscriptions/[SubscriptionId]/resourceGroups/[ResourceGroupName]/providers/Microsoft.OperationalInsights/workspaces/[WorkspaceName]/operations/purge-[PurgeOperationId]?api-version=2015-03-20
     ```
 
 > [!IMPORTANT]
->  SLA'mız, Log Analytics tarafından kullanılan veri platformu ağır etkilerini nedeniyle daha hızlı tamamlanması büyük çoğunluğu temizleme işlemleri bekliyoruz sırada **resmi 30 günde temizleme işlemlerinin tamamlanmasını SLA ayarlanır**. 
+>  Temizleme işlemlerinin büyük çoğunluğunun SLA 'ümüzden çok daha hızlı tamamlanmasını bekliyoruz, çünkü Log Analytics tarafından kullanılan veri platformunda ağır etkileri nedeniyle, **Temizleme işlemlerinin tamamlanmasına yönelik resmi SLA 'sı 30 gün olarak ayarlanır**. 
 
 #### <a name="application-data"></a>Uygulama verileri
 
-* [Temizleme sonrası](https://docs.microsoft.com/rest/api/application-insights/components/purge) - silinecek verilerin parametrelerini belirten nesnesini alır ve bir başvuru GUID'sini döndürür
-* GET temizleme durumu - POST temizleme çağrısına temizleme API'nizi durumunu belirlemek için çağıran bir URL içeren bir 'x-ms-durumunu-location' üst bilgisi döndürür. Örneğin:
+* [Temizleme sonrası](https://docs.microsoft.com/rest/api/application-insights/components/purge) -Silinecek verilerin parametrelerini belirten bir nesne alır ve bir başvuru GUID 'si döndürür
+* Temizleme durumunu Al-Temizleme API 'sinin durumunu öğrenmek için çağırabileceğiniz bir URL 'YI içeren bir ' x-MS-Status-Location ' üst bilgisi döndürür. Örnek:
 
    ```
    x-ms-status-location: https://management.azure.com/subscriptions/[SubscriptionId]/resourceGroups/[ResourceGroupName]/providers/microsoft.insights/components/[ComponentName]/operations/purge-[PurgeOperationId]?api-version=2015-05-01
    ```
 
 > [!IMPORTANT]
->  Temizleme işlemleri büyük çoğunluğu ağır Application Insights tarafından kullanılan veri platformu etkilerini nedeniyle SLA çok hızlı tamamlarken **resmi 30 günde temizleme işlemlerinin tamamlanmasını SLA ayarlanır**.
+>  Temizleme işlemlerinin büyük çoğunluğu SLA 'dan çok daha hızlı tamamlanabilir, çünkü Application Insights tarafından kullanılan veri platformunda ağır etkileri nedeniyle, **Temizleme işlemlerinin tamamlanmasına yönelik resmi SLA 'sı 30 gün olarak ayarlanır**.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Log Analytics verilerini nasıl toplanan, işlenen ve güvenliği hakkında daha fazla bilgi için bkz: [Log Analytics veri güvenliği](../../azure-monitor/platform/data-security.md).
-- Application Insights verilerini nasıl toplanan, işlenen ve güvenliği hakkında daha fazla bilgi için bkz: [Application Insights veri güvenliği](../../azure-monitor/app/data-retention-privacy.md).
+- Log Analytics verilerinin nasıl toplandığı, işlendiği ve güvenliğinin sağlandığı hakkında daha fazla bilgi edinmek için bkz. [Log Analytics veri güvenliği](../../azure-monitor/platform/data-security.md).
+- Application Insights verilerinin nasıl toplandığı, işlendiği ve güvenliğinin sağlandığı hakkında daha fazla bilgi edinmek için bkz. [Application Insights veri güvenliği](../../azure-monitor/app/data-retention-privacy.md).

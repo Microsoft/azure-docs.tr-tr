@@ -4,17 +4,17 @@ ms.author: crdun
 ms.service: app-service-mobile
 ms.topic: include
 ms.date: 08/23/2018
-ms.openlocfilehash: 83a0adf98298225b52d3b4fdfa2ca861ebb70bb9
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 346f63109e673692d425ede6bdbcb6f633af80bb
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67189057"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68857523"
 ---
-**.NET arka uç (C#)** :
+**.Net arka ucuC#()** :
   
-1. Visual Studio'da sunucu projeye sağ tıklayın ve **NuGet paketlerini Yönet**, arama `Microsoft.Azure.NotificationHubs`, ardından **yükleme**. Bu arka ucunuzdan bildirim göndermek için Notification Hubs kitaplığına yükler.
-2. Arka ucun Visual Studio projeyi açın **denetleyicileri** > **TodoItemController.cs**. Dosyasının en üstüne aşağıdakileri ekleyin `using` deyimi:
+1. Visual Studio 'da sunucu projesine sağ tıklayın ve **NuGet Paketlerini Yönet**' e tıklayın, için `Microsoft.Azure.NotificationHubs`arama yapın ve ardından **Install**' a tıklayın. Bu, arka ucunuzdaki bildirimleri göndermek için Notification Hubs kitaplığını kurar.
+2. Arka ucun Visual Studio projesinde, **Controllers** > **TodoItemController.cs**' ı açın. Dosyanın en üstüne aşağıdaki `using` ifadeyi ekleyin:
 
     ```csharp
     using Microsoft.Azure.Mobile.Server.Config;
@@ -67,9 +67,9 @@ ms.locfileid: "67189057"
 
 **Node.js arka ucu**:
 
-1. Bunu zaten bunu yapmadıysanız [hızlı başlangıç projesi indirme](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#download-quickstart) veya başka kullanım [Azure portalında çevrimiçi düzenleyicisini](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#online-editor).    
+1. Arka uç projenizi ayarlayın.    
 
-2. Todoitem.js tablo betiğini aşağıdaki kodla değiştirin:
+2. TodoItem. js tablo betiğini şu kodla değiştirin:
 
     ```javascript
     var azureMobileApps = require('azure-mobile-apps'),
@@ -110,4 +110,4 @@ ms.locfileid: "67189057"
     module.exports = table;
     ```
 
-3. Yerel bilgisayarınızda dosyası düzenlenirken, sunucu projesi yeniden yayımlayın.
+3. Yerel bilgisayarınızda dosyayı düzenlediğinizde, sunucu projesini yeniden yayımlayın.

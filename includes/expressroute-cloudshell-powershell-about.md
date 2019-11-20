@@ -1,21 +1,24 @@
 ---
 title: include dosyası
 description: include dosyası
-services: vpn-gateway
+services: expressroute
 author: cherylmc
-ms.service: vpn-gateway
+ms.service: expressroute
 ms.topic: include
-ms.date: 02/21/2019
+ms.date: 11/05/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: ba6673b5fda6af8c9bd3ef53dff33fe63f41e26d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a78a44f9e4dd1b64ae989dffa04892a490b986d4
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67133228"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73748132"
 ---
-Bu makalede PowerShell cmdlet'lerini kullanır. Bu cmdlet'leri çalıştırmak için Azure Cloud Shell'i kullanabilirsiniz. Azure Cloud Shell önceden yaygın Azure Araçları ve hesabınızla birlikte kullanmak için yapılandırılmış olan ücretsiz bir etkileşimli kabuktur. **Kopyala**’ya tıklayarak kodu kopyalayın, Cloud Shell’e yapıştırın ve Enter tuşuna basarak çalıştırın. Cloud Shell’i başlatmanın birkaç yolu vardır:
+Azure Cloud Shell, Azure PowerShell yerel olarak yüklemek yerine çoğu PowerShell cmdlet 'ini çalıştırmak için kullanabilirsiniz. Azure Cloud Shell, ortak Azure Araçları önceden yüklenmiş ve hesabınızla kullanılmak üzere yapılandırılmış, ücretsiz bir etkileşimli kabuktur.
+Bu makalede yer alan herhangi bir kodu Azure Cloud Shell çalıştırmak için, bir Cloud Shell oturumu açın, kodu kopyalamak için bir kod bloğundaki **Kopyala** düğmesini kullanın ve Windows ve Linux 'ta __CTRL + SHIFT + v__ ile Cloud Shell oturumuna yapıştırın veya __cmd + SHIFT + v__ macOS 'ta. Yapıştırılan metin otomatik olarak yürütülmez, kodu çalıştırmak için **ENTER** tuşuna basın.
+
+Cloud Shell’i başlatmanın birkaç yolu vardır:
 
 |  |   |
 |-----------------------------------------------|---|
@@ -23,7 +26,3 @@ Bu makalede PowerShell cmdlet'lerini kullanır. Bu cmdlet'leri çalıştırmak i
 | Cloud Shell’i tarayıcınızda açın. | [![https://shell.azure.com/powershell](./media/vpn-gateway-cloud-shell-powershell/launchcloudshell.png)](https://shell.azure.com/powershell) |
 | Azure portalının sağ üst kısmındaki menüde yer alan **Cloud Shell** düğmesine tıklayın. | [![Portalda Cloud Shell](./media/vpn-gateway-cloud-shell-powershell/cloud-shell-menu.png)](https://portal.azure.com) |
 |  |  |
-
-**Azure PowerShell'i yerel olarak çalıştırın**
-
-Ayrıca, yükleyin ve Azure PowerShell cmdlet'lerini, bilgisayarınızda yerel olarak çalıştırın. PowerShell cmdlet'leri sık sık güncelleştirilir. En son sürümünü çalıştırmıyorsanız, yönergelerde belirtilen değerler başarısız olabilir. PowerShell, sisteminizde yüklü sürümlerini bulmak için kullanın `Get-Module -ListAvailable Az` cmdlet'i. Yüklemek veya güncelleştirmek için bkz: [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps).

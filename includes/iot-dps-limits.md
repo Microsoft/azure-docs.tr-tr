@@ -4,34 +4,36 @@ ms.service: billing
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: jroth
-ms.openlocfilehash: 610f5fcf80db8ffa0c7207d459b98087cbb4773b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4bd890adcaa4982c52366faed0f2975729290360
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66455200"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73612194"
 ---
-Aşağıdaki tabloda, Azure IOT Hub cihazı sağlama hizmeti kaynakları için geçerli olan sınırlar listelenmektedir.
+Aşağıdaki tabloda, Azure IoT Hub cihaz sağlama hizmeti kaynakları için uygulanan sınırlar listelenmektedir.
 
-| Resource | Sınır |
+| Kaynak | Sınır |
 | --- | --- |
-| En fazla cihaz sağlama hizmetlerini Azure aboneliği başına | 10 |
-| Kayıtları sayısı | 1\.000.000 |
+| Azure aboneliği başına maksimum cihaz sağlama hizmeti | 10 |
 | En fazla kayıt sayısı | 1\.000.000 |
-| Kayıt grupları sayısı | 100 |
-| CAs sayısı | 25 |
-| İletinin en büyük boyutu | 96 KB'LIK|
+| En fazla kayıt sayısı | 1\.000.000 |
+| En fazla kayıt grubu sayısı | 100 |
+| CA sayısı üst sınırı | 25 |
+| En fazla bağlantılı IoT Hub sayısı | 50 |
+| En büyük ileti boyutu | 96 KB|
+
 
 > [!NOTE]
-> Aboneliğinizdeki örneği sayısını artırmak için kişi [Microsoft Support](https://azure.microsoft.com/support/options/).
+> Aboneliğinizdeki örneklerin sayısını artırmak için [Microsoft desteği](https://azure.microsoft.com/support/options/)başvurun.
 
 > [!NOTE]
-> Kayıtlar ve sağlama hizmetinizi kayıtları sayısını artırmak için kişi [Microsoft Support](https://azure.microsoft.com/support/options/).
+> Sağlama hizmetinizdeki kayıt ve kayıt sayısını artırmak için [Microsoft desteği](https://azure.microsoft.com/support/options/)başvurun.
 
-Aşağıdaki kotalar aşıldığında cihaz sağlama hizmeti istekleri kısıtlar.
+Cihaz sağlama hizmeti, aşağıdaki kotalar aşıldığında istekleri kısıtlar.
 
 | Kısıtlama | Birim başına değer |
 | --- | --- |
-| İşlemler | 200/min/hizmet |
-| Cihaz kayıtları | 200/min/hizmet |
+| İşlemler | 200/dk/hizmet |
+| Cihaz kayıtları | 200/dk/hizmet |
 | Cihaz yoklama işlemi | 5/10 sn/cihaz |

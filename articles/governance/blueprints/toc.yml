@@ -11,6 +11,9 @@
     - name: Şema oluşturma - Portal
       displayName: 'publish, assign, track, unassign, delete'
       href: create-blueprint-portal.md
+    - name: Şema oluşturma - PowerShell
+      displayName: 'publish, assign, track, unassign, delete'
+      href: create-blueprint-powershell.md
     - name: Şema oluşturma - REST API
       displayName: 'publish, assign, track, unassign, delete'
       href: create-blueprint-rest-api.md
@@ -27,6 +30,58 @@
     - name: Dizin oluşturma
       displayName: 'list, examples'
       href: ./samples/index.md
+    - name: Kanada Federal PBMM
+      items:
+        - name: Genel Bakış
+          displayName: 'standards, canada, federal, pbmm'
+          href: ./samples/canada-federal-pbmm/index.md
+        - name: Denetim eşlemesi
+          displayName: 'standards, canada, federal, pbmm'
+          href: ./samples/canada-federal-pbmm/control-mapping.md
+        - name: Dağıtım adımları
+          displayName: 'standards, canada, federal, pbmm'
+          href: ./samples/canada-federal-pbmm/deploy.md
+    - name: CIS Microsoft Azure Foundations Benchmark
+      items:
+        - name: Genel Bakış
+          displayName: 'standards, cis'
+          href: ./samples/cis-azure-1.1.0/index.md
+        - name: Öneri eşlemesi
+          displayName: 'standards, cis'
+          href: ./samples/cis-azure-1.1.0/control-mapping.md
+        - name: Dağıtım adımları
+          displayName: 'standards, cis'
+          href: ./samples/cis-azure-1.1.0/deploy.md
+    - name: FedRAMP Moderate
+      items:
+        - name: Genel Bakış
+          displayName: 'standards, fedramp, moderate'
+          href: ./samples/fedramp-m/index.md
+        - name: Denetim eşlemesi
+          displayName: 'standards, fedramp, moderate'
+          href: ./samples/fedramp-m/control-mapping.md
+        - name: Dağıtım adımları
+          displayName: 'standards, fedramp, moderate'
+          href: ./samples/fedramp-m/deploy.md
+    - name: IRS 1075
+      items:
+        - name: Genel Bakış
+          displayName: 'standards, irs, 1075'
+          href: ./samples/irs-1075/index.md
+        - name: Denetim eşlemesi
+          displayName: 'standards, irs, 1075'
+          href: ./samples/irs-1075/control-mapping.md
+    - name: ISO 27001
+      items:
+        - name: Genel Bakış
+          displayName: 'standards, iso, 27001'
+          href: ./samples/iso27001/index.md
+        - name: Denetim eşlemesi
+          displayName: 'standards, iso, 27001'
+          href: ./samples/iso27001/control-mapping.md
+        - name: Dağıtım adımları
+          displayName: 'standards, iso, 27001'
+          href: ./samples/iso27001/deploy.md
     - name: ISO 27001 - Paylaşılan Hizmetler
       items:
         - name: Genel Bakış
@@ -49,11 +104,17 @@
         - name: Dağıtım adımları
           displayName: 'standards, iso, 27001'
           href: ./samples/iso27001-ase-sql-workload/deploy.md
-    - name: NIST SP 800-53 Rev 4
+    - name: NIST SP 800-53 Rev4
       items:
+        - name: Genel Bakış
+          displayName: 'standards, nist, 800-53, rev 4'
+          href: ./samples/nist-sp-800-53-rev4/index.md
         - name: Denetim eşlemesi
-          displayName: 'standards, nist, 800-53'
+          displayName: 'standards, nist, 800-53, rev 4'
           href: ./samples/nist-sp-800-53-rev4/control-mapping.md
+        - name: Dağıtım adımları
+          displayName: 'standards, nist, 800-53, rev 4'
+          href: ./samples/nist-sp-800-53-rev4/deploy.md
     - name: PCI-DSS v3.2.1
       items:
         - name: Genel Bakış
@@ -65,6 +126,17 @@
         - name: Dağıtım adımları
           displayName: 'standards, Payment Card Industry Data Security Standard'
           href: ./samples/pci-dss-3.2.1/deploy.md
+    - name: SWIFT CSP v2020
+      items:
+        - name: Genel Bakış
+          displayName: 'standards, SWIFT CSP-CSCF v2020'
+          href: ./samples/swift-2020/index.md
+        - name: Denetim eşlemesi
+          displayName: 'standards, SWIFT CSP-CSCF v2020'
+          href: ./samples/swift-2020/control-mapping.md
+        - name: Dağıtım adımları
+          displayName: 'standards, SWIFT CSP-CSCF v2020'
+          href: ./samples/swift-2020/deploy.md
     - name: UK OFFICIAL ve UK NHS
       items:
         - name: Genel Bakış
@@ -76,6 +148,22 @@
         - name: Dağıtım adımları
           displayName: 'standards, uk official, uk nhs'
           href: ./samples/ukofficial/deploy.md
+    - name: CAF Foundation
+      items:
+        - name: Genel Bakış
+          displayName: 'caf, foundation'
+          href: ./samples/caf-foundation/index.md
+        - name: Dağıtım adımları
+          displayName: 'caf, foundation, deploy'
+          href: ./samples/caf-foundation/deploy.md
+    - name: CAF Geçişi giriş bölgesi
+      items:
+        - name: Genel Bakış
+          displayName: 'caf, migrate, landing zone'
+          href: ./samples/caf-migrate-landing-zone/index.md
+        - name: Dağıtım adımları
+          displayName: 'caf, migrate, landing zone, deploy'
+          href: ./samples/caf-migrate-landing-zone/deploy.md
 - name: Kavramlar
   items:
     - name: Şema yaşam döngüsü
@@ -98,9 +186,15 @@
     - name: Atamaları PowerShell ile yönetme
       displayName: 'create, update, remove'
       href: ./how-to/manage-assignments-ps.md
+    - name: PowerShell ile içeri ve dışarı aktarma
+      displayName: 'import, export, folders'
+      href: ./how-to/import-export-ps.md
     - name: Mevcut atamaları portaldan güncelleştirme
       displayName: 'lock, errors'
       href: ./how-to/update-existing-assignments.md
+    - name: Ortamınızı Blueprint İşleci için yapılandırma
+      displayName: 'rbac, user-assigned, managed, identity, management group'
+      href: ./how-to/configure-for-blueprint-operator.md
     - name: Şemaları Kod Olarak Yönetme (topluluk)
       href: 'https://github.com/Azure/azure-blueprints/blob/master/README.md'
 - name: Sorun giderme

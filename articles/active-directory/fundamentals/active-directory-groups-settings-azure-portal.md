@@ -2,23 +2,23 @@
 title: Grup bilgileri - Azure Active Directory Düzenle | Microsoft Docs
 description: Azure Active Directory kullanarak grubunuzun bilgilerini düzenleme hakkında yönergeler.
 services: active-directory
-author: eross-msft
+author: msaburnley
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: fundamentals
 ms.topic: conceptual
 ms.date: 08/27/2018
-ms.author: lizross
+ms.author: ajburnle
 ms.reviewer: krbain
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 691f705574050b15869a0ac8b7d128507e5aae10
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: dc06abca08b2522ac57552e85f7c1bac3ef854af
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60248806"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68561886"
 ---
 # <a name="edit-your-group-information-using-azure-active-directory"></a>Azure Active Directory'yi kullanarak, grup bilgilerini Düzenle
 
@@ -39,7 +39,7 @@ Azure Active Directory (Azure AD) kullanarak, ad, açıklama ve üyelik türün�
 
 4. Grup seçin **MDM İlkesi - Batı**ve ardından **özellikleri** gelen **Yönet** alan.
 
-    ![Üye seçeneği ve vurgulanmış bilgi grubu genel bakış sayfası](media/active-directory-groups-settings-azure-portal/group-overview-blade.png)
+    ![Gruba genel bakış sayfası, üye seçeneği ve bilgiler vurgulandı](media/active-directory-groups-settings-azure-portal/group-overview-blade.png)
 
 5. Güncelleştirme **genel ayarlar** dahil olmak üzere, gerektiği gibi bilgileri:
 
@@ -51,7 +51,7 @@ Azure Active Directory (Azure AD) kullanarak, ad, açıklama ve üyelik türün�
 
     - **Grup türü.** Oluşturulduktan sonra bir grup türünü değiştiremezsiniz. Değiştirilecek **grup türü**, grubunu silin ve yeni bir tane oluşturmanız gerekir.
     
-    - **Üyelik türü.** Üyelik türünü değiştirin. Çeşitli kullanılabilir üyeliği türleri hakkında daha fazla bilgi için bkz. [nasıl yapılır: Temel bir grup oluşturma ve Azure Active Directory portalı kullanarak üye ekleme](active-directory-groups-create-azure-portal.md).
+    - **Üyelik türü.** Üyelik türünü değiştirin. Kullanılabilir çeşitli üyelik türleri hakkında daha fazla bilgi için bkz [. nasıl yapılır: Azure Active Directory portalını](active-directory-groups-create-azure-portal.md)kullanarak temel bir grup oluşturun ve üye ekleyin.
     
     - **Nesne Kimliği** Nesne Kimliğini değiştiremezsiniz, ancak bu grup için PowerShell komutlarında kullanılacak kopyalayabilirsiniz. PowerShell cmdlet'leri kullanma hakkında daha fazla bilgi için bkz. [Grup ayarlarını yapılandırmak için Azure Active Directory cmdlet'leri](../users-groups-roles/groups-settings-v2-cmdlets.md).
 

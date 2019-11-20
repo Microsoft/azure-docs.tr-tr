@@ -3,21 +3,21 @@ title: Paralel iş yükü çalıştırma - Azure Batch Python
 description: Öğretici - Batch Python istemci kitaplığını kullanarak Azure Batch’te ffmpeg ile paralel medya dosyaları işleme
 services: batch
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 ms.service: batch
 ms.devlang: python
 ms.topic: tutorial
 ms.date: 11/29/2018
 ms.author: lahugh
 ms.custom: mvc
-ms.openlocfilehash: 364599c6eb555d1ec72e84c998ae0c4e9a43929b
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: d06cf74b2a29af3fea2c24facac2899d09a0a84f
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67341609"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71090779"
 ---
-# <a name="tutorial-run-a-parallel-workload-with-azure-batch-using-the-python-api"></a>Öğretici: Python API'sini kullanarak Azure Batch ile paralel iş yükü çalıştırma
+# <a name="tutorial-run-a-parallel-workload-with-azure-batch-using-the-python-api"></a>Öğretici: Python API 'sini kullanarak Azure Batch ile paralel iş yükü çalıştırma
 
 Büyük ölçekli paralel ve yüksek performanslı bilgi işlem (HPC) toplu işlerini Azure’da verimli bir şekilde çalıştırmak için Azure Batch’i kullanın. Bu öğreticide, Batch kullanarak paralel iş yükü çalıştırmaya ilişkin bir Python örneği açıklanmaktadır. Genel bir Batch uygulaması iş akışı hakkında bilgi alacak ve Batch ve Depolama kaynakları ile programlı olarak etkileşimde bulunmayı öğreneceksiniz. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
@@ -123,7 +123,7 @@ Aşağıdaki bölümlerde örnek uygulama, Batch hizmetinde iş yükünü işlem
 
 ### <a name="authenticate-blob-and-batch-clients"></a>Blob ve Batch istemcilerinde kimlik doğrulaması
 
-Bir depolama hesabıyla etkileşimde bulunmak için uygulama, [azure-storage-blob](https://pypi.python.org/pypi/azure-storage-blob) paketini kullanarak bir [BlockBlobService](/python/api/azure.storage.blob.blockblobservice.blockblobservice) nesnesi oluşturur.
+Bir depolama hesabıyla etkileşimde bulunmak için uygulama, [azure-storage-blob](https://pypi.python.org/pypi/azure-storage-blob) paketini kullanarak bir [BlockBlobService](/python/api/azure-storage-blob/azure.storage.blob.blockblobservice.blockblobservice) nesnesi oluşturur.
 
 ```python
 blob_client = azureblob.BlockBlobService(
@@ -144,7 +144,7 @@ batch_client = batch.BatchServiceClient(
 
 ### <a name="upload-input-files"></a>Giriş dosyalarını karşıya yükleme
 
-Uygulama, giriş MP4 dosyaları için bir depolama kapsayıcısı ve görev çıkışı için bir kapsayıcı oluşturmak üzere `blob_client` başvurusunu kullanır. Daha sonra, yerel `InputFiles` dizinindeki MP4 dosyalarını kapsayıcıya yüklemek üzere `upload_file_to_container` işlevini çağırır. Depolama alanındaki dosyalar, Batch hizmetinin daha sonra işlem düğümlerine indirebileceği Batch [ResourceFile](/python/api/azure.batch.models.resourcefile) nesneleri olarak tanımlanır.
+Uygulama, giriş MP4 dosyaları için bir depolama kapsayıcısı ve görev çıkışı için bir kapsayıcı oluşturmak üzere `blob_client` başvurusunu kullanır. Daha sonra, yerel `InputFiles` dizinindeki MP4 dosyalarını kapsayıcıya yüklemek üzere `upload_file_to_container` işlevini çağırır. Depolama alanındaki dosyalar, Batch hizmetinin daha sonra işlem düğümlerine indirebileceği Batch [ResourceFile](/python/api/azure-batch/azure.batch.models.resourcefile) nesneleri olarak tanımlanır.
 
 ```python
 blob_client.create_container(input_container_name, fail_on_exist=False)
@@ -165,13 +165,13 @@ input_files = [
 
 ### <a name="create-a-pool-of-compute-nodes"></a>İşlem düğümleri havuzu oluşturma
 
-Ardından örnek, `create_pool` çağrısıyla Batch hesabında bir işlem düğümü havuzu oluşturur. Bu tanımlı işlev; düğüm sayısını, VM boyutunu ve havuz yapılandırmasını ayarlamak üzere Batch [PoolAddParameter](/python/api/azure.batch.models.pooladdparameter) sınıfını kullanır. Burada bir [VirtualMachineConfiguration](/python/api/azure.batch.models.virtualmachineconfiguration) nesnesini belirtir bir [Imagereference](/python/api/azure.batch.models.imagereference) Azure Market'te yayımlanmış bir Ubuntu Server 18.04 LTS görüntüsüne. Batch, Azure Market’te çok çeşitli VM görüntülerinin yanı sıra özel VM görüntülerini destekler.
+Ardından örnek, `create_pool` çağrısıyla Batch hesabında bir işlem düğümü havuzu oluşturur. Bu tanımlı işlev; düğüm sayısını, VM boyutunu ve havuz yapılandırmasını ayarlamak üzere Batch [PoolAddParameter](/python/api/azure-batch/azure.batch.models.pooladdparameter) sınıfını kullanır. Burada [Virtualmachineconfiguration](/python/api/azure-batch/azure.batch.models.virtualmachineconfiguration) nesnesi, Azure Marketi 'Nde yayınlanan Ubuntu Server 18,04 LTS görüntüsüne bir [ImageReference](/python/api/azure-batch/azure.batch.models.imagereference) belirtir. Batch, Azure Market’te çok çeşitli VM görüntülerinin yanı sıra özel VM görüntülerini destekler.
 
 Düğüm sayısı ve VM boyutu, tanımlı sabitler kullanılarak ayarlanır. Batch, adanmış düğümleri ve [düşük öncelikli düğümleri](batch-low-pri-vms.md) destekler ve havuzlarınızda bunlardan birini ya da her ikisini birden kullanabilirsiniz. Adanmış düğümler, havuzunuz için ayrılmıştır. Düşük öncelikli düğümler ise Azure’daki fazlalık VM kapasitesinden indirimli bir fiyat karşılığında sunulur. Azure’da yeterli kapasite yoksa düşük öncelikli düğümler kullanılamaz duruma gelir. Örnek, varsayılan olarak *Standard_A1_v2* boyutunda yalnızca 5 düşük öncelikli düğüm içeren bir havuz oluşturur. 
 
-Fiziksel düğüm özelliklerine ek olarak, bu havuz yapılandırması bir [StartTask](/python/api/azure.batch.models.starttask) nesnesi içerir. StartTask, her düğümü havuza katıldığında ve her yeniden başlatıldığında yürütecektir. Bu örnekte StartTask, ffmpeg paketini ve bağımlılıkları düğümlere yüklemek için Bash kabuk komutları çalıştırır.
+Fiziksel düğüm özelliklerine ek olarak, bu havuz yapılandırması bir [StartTask](/python/api/azure-batch/azure.batch.models.starttask) nesnesi içerir. StartTask, her düğümü havuza katıldığında ve her yeniden başlatıldığında yürütecektir. Bu örnekte StartTask, ffmpeg paketini ve bağımlılıkları düğümlere yüklemek için Bash kabuk komutları çalıştırır.
 
-[Pool.add](/python/api/azure.batch.operations.pooloperations) yöntemi, havuzu Batch hizmetine gönderir.
+[Pool.add](/python/api/azure-batch/azure.batch.operations.pooloperations) yöntemi, havuzu Batch hizmetine gönderir.
 
 ```python
 new_pool = batch.models.PoolAddParameter(
@@ -199,9 +199,9 @@ new_pool = batch.models.PoolAddParameter(
 batch_service_client.pool.add(new_pool)
 ```
 
-### <a name="create-a-job"></a>Bir iş oluşturma
+### <a name="create-a-job"></a>İş oluştur
 
-Bir Batch işi, üzerinde görevlerin çalıştırılacağı bir havuz ve iş için öncelik ile zamanlama gibi isteğe bağlı ayarları belirtir. Örnek, `create_job` çağrısıyla bir iş oluşturur. Bu tanımlı işlev, havuzunuzda bir iş oluşturmak üzere [JobAddParameter](/python/api/azure.batch.models.jobaddparameter) sınıfını kullanır. [Job.add](/python/api/azure.batch.operations.joboperations) yöntemi, havuzu Batch hizmetine gönderir. Başlangıçta iş hiçbir görev içermez.
+Bir Batch işi, üzerinde görevlerin çalıştırılacağı bir havuz ve iş için öncelik ile zamanlama gibi isteğe bağlı ayarları belirtir. Örnek, `create_job` çağrısıyla bir iş oluşturur. Bu tanımlı işlev, havuzunuzda bir iş oluşturmak üzere [JobAddParameter](/python/api/azure-batch/azure.batch.models.jobaddparameter) sınıfını kullanır. [Job.add](/python/api/azure-batch/azure.batch.operations.joboperations) yöntemi, havuzu Batch hizmetine gönderir. Başlangıçta iş hiçbir görev içermez.
 
 ```python
 job = batch.models.JobAddParameter(
@@ -213,11 +213,11 @@ batch_service_client.job.add(job)
 
 ### <a name="create-tasks"></a>Görev oluşturma
 
-Uygulama, `add_tasks` çağrısıyla iş içinde görevler oluşturur. Bu tanımlı işlev, [TaskAddParameter](/python/api/azure.batch.models.taskaddparameter) sınıfını kullanarak görev nesnelerinin bir listesini oluşturur. Her görev, bir `command_line` parametresi kullanarak giriş `resource_files` nesnesini işlemek üzere ffmpeg çalıştırır. ffmpeg, daha önce havuz oluşturulduğunda her bir düğüme yüklenmiştir. Burada komut satırı, her bir giriş MP4 (video) dosyasını bir MP3 (ses) dosyasına dönüştürmek için ffmpeg çalıştırır.
+Uygulama, `add_tasks` çağrısıyla iş içinde görevler oluşturur. Bu tanımlı işlev, [TaskAddParameter](/python/api/azure-batch/azure.batch.models.taskaddparameter) sınıfını kullanarak görev nesnelerinin bir listesini oluşturur. Her görev, bir `command_line` parametresi kullanarak giriş `resource_files` nesnesini işlemek üzere ffmpeg çalıştırır. ffmpeg, daha önce havuz oluşturulduğunda her bir düğüme yüklenmiştir. Burada komut satırı, her bir giriş MP4 (video) dosyasını bir MP3 (ses) dosyasına dönüştürmek için ffmpeg çalıştırır.
 
-Örnek, komut satırını çalıştırdıktan sonra MP3 dosyası için bir [OutputFile](/python/api/azure.batch.models.outputfile) nesnesi oluşturur. Her bir görevin çıkış dosyaları (bu örnekte bir tane), görevin `output_files` özelliği kullanılarak bağlı depolama hesabındaki bir kapsayıcıya yüklenir.
+Örnek, komut satırını çalıştırdıktan sonra MP3 dosyası için bir [OutputFile](/python/api/azure-batch/azure.batch.models.outputfile) nesnesi oluşturur. Her bir görevin çıkış dosyaları (bu örnekte bir tane), görevin `output_files` özelliği kullanılarak bağlı depolama hesabındaki bir kapsayıcıya yüklenir.
 
-Sonra uygulama, [task.add_collection](/python/api/azure.batch.operations.taskoperations) yöntemi ile görevleri işe ekler ve işlem düğümleri üzerinde çalışmak üzere kuyruğa alır. 
+Sonra uygulama, [task.add_collection](/python/api/azure-batch/azure.batch.operations.taskoperations) yöntemi ile görevleri işe ekler ve işlem düğümleri üzerinde çalışmak üzere kuyruğa alır. 
 
 ```python
 tasks = list()
@@ -247,7 +247,7 @@ batch_service_client.task.add_collection(job_id, tasks)
 
 Bir işe görevler eklendiğinde, Batch bu görevleri ilişkili havuzdaki işlem düğümleri üzerinde yürütülmek üzere otomatik olarak kuyruğa alır ve zamanlar. Belirttiğiniz ayarlara göre, Batch tüm kuyruğa alma, zamanlama, yeniden deneme görevlerini ve diğer görev yönetimi sorumluluklarını yerine getirir. 
 
-Görevin yürütülüşünün izlenmesi için birçok yaklaşım vardır. Bu örnekteki `wait_for_tasks_to_complete` işlevi, belirli bir durum (bu örnekte tamamlanmış durum) için bir süre boyunca görevleri izlemek üzere [TaskState](/python/api/azure.batch.models.taskstate) nesnesini kullanır.
+Görevin yürütülüşünün izlenmesi için birçok yaklaşım vardır. Bu örnekteki `wait_for_tasks_to_complete` işlevi, belirli bir durum (bu örnekte tamamlanmış durum) için bir süre boyunca görevleri izlemek üzere [TaskState](/python/api/azure-batch/azure.batch.models.taskstate) nesnesini kullanır.
 
 ```python
 while datetime.datetime.now() < timeout_expiration:
@@ -267,7 +267,7 @@ while datetime.datetime.now() < timeout_expiration:
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Görevleri çalıştırdıktan sonra, uygulama kendi oluşturduğu giriş depolama kapsayıcısını otomatik olarak siler ve Batch havuzu ve işini silme seçeneğini sunar. BatchClient'ın [JobOperations](/python/api/azure.batch.operations.joboperations) ve [PoolOperations](/python/api/azure.batch.operations.pooloperations) sınıflarının her ikisi de, silmeyi onaylamanız durumunda çağrılan silme yöntemleri içerir. İşlerin ve görevlerin kendileri için sizden ücret alınmasa da işlem düğümleri için ücret alınır. Bu nedenle, havuzları yalnızca gerektiğinde ayırmanız önerilir. Havuzu sildiğinizde düğümler üzerindeki tüm görev çıkışları silinir. Ancak, giriş ve çıkış dosyaları depolama hesabında kalır.
+Görevleri çalıştırdıktan sonra, uygulama kendi oluşturduğu giriş depolama kapsayıcısını otomatik olarak siler ve Batch havuzu ve işini silme seçeneğini sunar. BatchClient'ın [JobOperations](/python/api/azure-batch/azure.batch.operations.joboperations) ve [PoolOperations](/python/api/azure-batch/azure.batch.operations.pooloperations) sınıflarının her ikisi de, silmeyi onaylamanız durumunda çağrılan silme yöntemleri içerir. İşlerin ve görevlerin kendileri için sizden ücret alınmasa da işlem düğümleri için ücret alınır. Bu nedenle, havuzları yalnızca gerektiğinde ayırmanız önerilir. Havuzu sildiğinizde düğümler üzerindeki tüm görev çıkışları silinir. Ancak, giriş ve çıkış dosyaları depolama hesabında kalır.
 
 Kaynak grubunu, Batch hesabını ve depolama hesabını artık gerekli değilse silin. Azure portalında bu işlemi yapmak için Batch hesabına ait kaynak grubunu seçin ve **Kaynak Grubunu Sil**’e tıklayın.
 

@@ -1,0 +1,80 @@
+- name: Azure Özel Bağlantı Belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure Özel Bağlantı nedir?
+      href: private-link-overview.md
+- name: Hızlı Başlangıçlar
+  items:
+    - name: Özel Uç Nokta oluşturma
+      items:
+        - name: Azure portal
+          href: create-private-endpoint-portal.md
+        - name: Azure CLI
+          href: create-private-endpoint-cli.md
+        - name: Azure PowerShell
+          href: create-private-endpoint-powershell.md
+    - name: Özel Bağlantı hizmeti oluşturma
+      items:
+        - name: Azure PowerShell
+          href: create-private-link-service-powershell.md
+        - name: Azure CLI
+          href: create-private-link-service-cli.md
+- name: Kavramlar
+  items:
+    - name: Özel Uç Nokta
+      href: private-endpoint-overview.md
+    - name: Özel Bağlantı Hizmeti
+      href: private-link-service-overview.md
+- name: Nasıl yapılır
+  items:
+    - name: Bir depolama hesabına özel olarak bağlanma
+      href: create-private-endpoint-storage-portal.md
+    - name: Cosmos DB hesabına özel olarak bağlanma
+      href: create-private-endpoint-cosmosdb-portal.md
+    - name: Özel bir uç nokta için ağ ilkelerini devre dışı bırakma
+      href: disable-private-endpoint-network-policy.md
+    - name: Özel Bağlantı Hizmeti için ağ ilkelerini devre dışı bırakma
+      href: disable-private-link-service-network-policy.md
+    - name: Özel uç noktaları yönetme
+      href: manage-private-endpoint.md
+- name: Başvuru
+  items:
+    - name: Azure CLI
+      href: /cli/azure/network
+    - name: Azure PowerShell
+      href: /powershell/module/az.network
+    - name: .NET
+      href: /api/overview/azure/virtual-network
+    - name: Java
+      href: /java/api/
+    - name: Node.js
+      href: 'https://docs.microsoft.com/javascript/azure#azure-sdk'
+    - name: Python
+      href: 'https://azure.microsoft.com/develop/python/'
+    - name: REST
+      href: /rest/api/virtualnetwork/privateendpoints
+    - name: Resource Manager şablonu
+      href: /azure/templates/microsoft.network/allversions
+    - name: Kod örnekleri
+      href: 'https://azure.microsoft.com/resources/samples/?service=virtual-network'
+- name: Kaynaklar
+  items:
+    - name: Microsoft Learn ile becerilerinizi geliştirin
+      href: /learn/browse/
+    - name: Azure yol haritası
+      href: 'https://azure.microsoft.com/roadmap/?category=networking'
+    - name: Ağ blogu
+      href: 'https://azure.microsoft.com/blog/topics/networking'
+    - name: Ağ forumu
+      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=WAVirtualMachinesVirtualNetwork'
+    - name: Ağ geri bildirimi
+      href: 'https://feedback.azure.com/forums/217313-networking?category_id=77469'
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/virtual-network'
+    - name: Fiyatlandırma hesaplayıcı
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: Stack Overflow
+      href: 'https://stackoverflow.com/questions/tagged/azure-virtual-network'
+    - name: SSS
+      href: private-link-faq.md

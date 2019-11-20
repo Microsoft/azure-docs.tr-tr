@@ -1,181 +1,181 @@
 ---
-title: Query Store MariaDB için Azure veritabanı'nda
-description: Bu makalede MariaDB için Azure veritabanı için Query Store özelliği
+title: MariaDB için Azure veritabanı 'nda sorgu deposu
+description: Zaman içinde performansı izlemenize yardımcı olması için, MariaDB için Azure veritabanı 'nda sorgu depolama özelliği hakkında bilgi edinin.
 author: ajlam
 ms.author: andrela
 ms.service: mariadb
 ms.topic: conceptual
-ms.date: 06/27/2019
-ms.openlocfilehash: 883f780059e38c53dedda309dd059cc714539f80
-ms.sourcegitcommit: aa66898338a8f8c2eb7c952a8629e6d5c99d1468
+ms.date: 11/04/2019
+ms.openlocfilehash: 67ca6aa36166e8ae08bedec82441e45930976b80
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67462081"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73604007"
 ---
-# <a name="monitor-azure-database-for-mariadb-performance-with-query-store"></a>Query Store MariaDB performansı için Azure veritabanı izleme
+# <a name="monitor-azure-database-for-mariadb-performance-with-query-store"></a>Sorgu deposu ile MariaDB için Azure veritabanı performansını izleme
 
-**İçin geçerlidir:**  10.2 MariaDB için Azure veritabanı
+**Uygulama hedefi:** MariaDB için Azure veritabanı 10,2
 
-> [!NOTE]
-> Query Store Önizleme aşamasındadır.
+MariaDB için Azure veritabanı 'nda bulunan Query Store özelliği, sorgu performansını zamana göre izlemek için bir yol sağlar. Sorgu deposu, en uzun çalışan ve en fazla kaynak yoğunluklu sorguları hızlı bir şekilde bulmanıza yardımcı olarak performans sorunlarını basitleştirir. Sorgu deposu sorgular ve çalışma zamanı istatistikleri geçmişini otomatik olarak yakalar ve bunları gözden geçirmeniz için saklar. Veritabanı kullanım düzenlerini görebilmeniz için verileri zaman pencereleri ile ayırır. Tüm kullanıcılar, veritabanları ve sorgular için veriler, MariaDB için Azure veritabanı örneğindeki **MySQL** şema veritabanında depolanır.
 
-Mariadb için Azure veritabanı için Query Store özelliği zaman içinde sorgu performansını izlemek için bir yol sağlar. Query Store performans sorunlarını giderme hızlı bir şekilde yardımcı olarak basitleştirir, uzun süre çalışan ve en yoğun kaynak sorgularını bulun. Query Store geçmişini sorgular ve çalışma zamanı İstatistikleri otomatik olarak yakalar ve bunları gözden geçirmeniz için saklar. Veritabanı kullanım modellerini görebilmeniz için veri zaman pencereleri tarafından ayırır. Tüm kullanıcılar, veritabanları ve sorgular için veriler depolanır **mysql** MariaDB örneği için Azure veritabanı'nda veritabanı şeması.
+## <a name="common-scenarios-for-using-query-store"></a>Sorgu deposunu kullanmaya yönelik genel senaryolar
 
-## <a name="common-scenarios-for-using-query-store"></a>Query Store kullanma ile ilgili yaygın senaryolar
+Sorgu deposu, aşağıdakiler de dahil olmak üzere birkaç senaryo için kullanılabilir:
 
-Sorgu deposu aşağıdaki gibi senaryolarda, bir süre içinde kullanılabilir:
+- Gerileyen sorgular algılanıyor
+- Belirli bir zaman penceresinde bir sorgunun kaç kez yürütüldüğünü belirleme
+- Büyük değişimleri 'yi görmek için zaman pencereleri içindeki bir sorgunun ortalama yürütme süresini karşılaştırma
 
-- Gerileyen sorgu algılama
-- Sayısını belirleyen bir sorgu belirli bir zaman penceresinde yürütüldü
-- Bir sorgu ortalama yürütme süresi büyük deltaları görmek için zaman pencereleri arasında karşılaştırma
+## <a name="enabling-query-store"></a>Sorgu deposu etkinleştiriliyor
 
-## <a name="enabling-query-store"></a>Query Store etkinleştirme
+Sorgu deposu bir katılım özelliğidir, bu nedenle bir sunucuda varsayılan olarak etkin değildir. Sorgu deposu, belirli bir sunucudaki tüm veritabanları için etkin veya devre dışı bırakılır ve veritabanı başına açılamaz veya kapatılamaz.
 
-Query Store bir katılımı özelliği olduğundan, bir sunucuda varsayılan olarak etkin değildir. Query store etkin ya da belirli bir sunucudaki tüm veritabanları için genel olarak devre dışı ve veritabanı başına açıp açılamaz.
+### <a name="enable-query-store-using-the-azure-portal"></a>Azure portal kullanarak sorgu deposunu etkinleştirin
 
-### <a name="enable-query-store-using-the-azure-portal"></a>Query Store Azure portalını kullanarak etkinleştirin
+1. Azure portal oturum açın ve MariaDB sunucusu için Azure veritabanınızı seçin.
+1. Menüdeki **Ayarlar** bölümünde **sunucu parametreleri** ' ni seçin.
+1. Query_store_capture_mode parametresini arayın.
+1. Değeri tümü ve **Kaydet**olarak ayarlayın.
 
-1. Azure portalında oturum açın ve MariaDB için Azure veritabanı sunucunuza seçin.
-1. Seçin **sunucu parametreleri** içinde **ayarları** menüsünün bölümünde.
-1. Query_store_capture_mode parametresi için arama yapın.
-1. Tüm ayarlayın ve **Kaydet**.
+Sorgu deponuzda bekleme istatistiklerini etkinleştirmek için:
 
-Bekleme istatistikleri, Query Store etkinleştirmek için:
+1. Query_store_wait_sampling_capture_mode parametresini arayın.
+1. Değeri tümü ve **Kaydet**olarak ayarlayın.
 
-1. Query_store_wait_sampling_capture_mode parametresi için arama yapın.
-1. Tüm ayarlayın ve **Kaydet**.
+İlk veri toplu işi MySQL veritabanında kalıcı hale getirilemediği için 20 dakikaya kadar izin verin.
 
-İlk toplu işin mysql veritabanında kalıcı hale getirmek için veri 20 dakikaya kadar izin verin.
+## <a name="information-in-query-store"></a>Sorgu deposundaki bilgiler
 
-## <a name="information-in-query-store"></a>Query Store bilgileri
+Sorgu deposunda iki depo vardır:
 
-Query Store iki deposu sahiptir:
+- Sorgu yürütme istatistikleri bilgilerini kalıcı hale getiren çalışma zamanı istatistikleri deposu.
+- Kalıcı bekleme istatistikleri bilgileri için bekleme istatistikleri deposu.
 
-- Bir çalışma zamanı istatistikleri sorgu yürütme istatistikleri bilgilerini kalıcı hale getirilmesine yönelik depolayın.
-- Bekleme istatistikleri deposu bekleme istatistikleri bilgileri kalıcı hale getirme için.
+Alan kullanımını en aza indirmek için, çalışma zamanı istatistikleri deposundaki çalışma zamanı yürütme istatistikleri, sabit ve yapılandırılabilir bir zaman penceresi üzerinden toplanır. Bu mağazalardaki bilgiler, sorgu deposu görünümlerini sorgulayarak görünür.
 
-Çalışma zamanı yürütme istatistikleri çalışma zamanı istatistikleri depolama alanı kullanımını en aza indirmek için bir sabit, yapılandırılabilir zaman penceresi üzerinde toplanır. Bilgiler, bu depoları, sorgu deposu görünümleri sorgulayarak görülebilir.
-
-Aşağıdaki sorgu, Query Store içinde sorguları hakkında bilgi döndürür:
+Aşağıdaki sorgu, sorgu deposundaki sorgular hakkında bilgi döndürüyor:
 
 ```sql
 SELECT * FROM mysql.query_store;
 ```
 
-Veya bu sorgu için bekleme istatistikleri:
+Ya da bekleme istatistikleri için bu sorgu:
 
 ```sql
 SELECT * FROM mysql.query_store_wait_stats;
 ```
 
-## <a name="finding-wait-queries"></a>Bulma bekleme sorguları
+## <a name="finding-wait-queries"></a>Bekleme sorguları bulunuyor
 
-Bekleme olay türleri farklı bekleme olaylarını benzerliğe göre demetlerin içine birleştirin. Query Store, bekleme olay türü, belirli bir bekleme olay adı ve söz konusu sorgu sağlar. İstatistikleri, hangi sorgu performans özellikleri için katkıda bulunan bir daha iyi anlayabilmek anlamına gelir. Bu bekleme bilgileri sorgu çalışma zamanı ile ilişkilendirmek işaretleyebilmesine.
+> [!NOTE]
+> Bekleme istatistikleri yoğun iş yükü saatlerinde etkinleştirilmemelidir veya hassas iş yükleri için süresiz olarak açık olmalıdır. <br>Yüksek CPU kullanımı veya daha düşük sanal çekirdekler ile yapılandırılmış sunucularda çalışan iş yükleri için bekleme istatistiklerini etkinleştirirken dikkatli olun. Süresiz olarak açılmamalıdır. 
 
-Nasıl daha fazla bekleme istatistikleri Query Store kullanarak iş yükünüzü Öngörüler elde edebilir, bazı örnekleri aşağıda verilmiştir:
+Bekleme olay türleri, farklı bekleme olaylarını benzerliğe göre demetlere birleştirir. Sorgu deposu, bekleme olay türü, belirli bir bekleme olayı adı ve söz konusu sorguyu sağlar. Bu bekleme bilgilerini sorgu çalışma zamanı istatistikleri ile ilişkilendirebilmek, sorgu performansı özelliklerine katkıda bulunan şeyleri daha ayrıntılı bir şekilde anlayabilmeniz anlamına gelir.
 
-| **Gözlem** | **Eylem** |
+İşte iş yükünüze, sorgu deposundaki bekleme istatistiklerini kullanarak nasıl daha fazla öngörü kazankullanabileceğinizi gösteren bazı örnekler:
+
+| **Kümesinin** | **Eylem** |
 |---|---|
-|Yüksek kilit bekler | Etkilenen sorgular için sorgu metinleri denetleyin ve hedef varlıklar tanımlayın. Query Store içinde sık yürütülür aynı varlığı değiştirme diğer sorgularını bulun ve/veya yüksek süresine sahip. Bu sorguları tanımlama sonra eşzamanlılığı artırmak için uygulama mantığını değiştirmeyi düşünün veya daha az kısıtlayıcı bir yalıtım düzeyi kullanın. |
-|Yüksek arabellek GÇ bekler | Query Store sorgular çok sayıda fiziksel okur ile bulun. Yüksek g/ç beklediği sorgularla eşleşirlerse taramalar yerine giriş yapmak için temel alınan varlık, bir dizini arar göz önünde bulundurun. Bu sorguları g/ç ek yükü en aza. Denetleme **performans önerileri** sunucunuzun dizin önerileri sorguları iyileştirmek bu sunucu için olup olmadığını görmek için Portalı'nda. |
-|Yüksek bellek bekler | Query Store sorgularda tüketen başlıca bellek bulun. Büyük olasılıkla, bu sorgular daha fazla ilerleme durumunu etkilenen sorgular geciktirme. Denetleme **performans önerileri** sunucunuzun bu sorguların iyileştirilmesine dizin önerileri olup olmadığını görmek için Portalı'nda.|
+|Yüksek kilit bekler | Etkilenen sorgular için Sorgu metinlerini denetleyin ve hedef varlıkları doğrulayın. Sık çalıştırılan ve/veya yüksek süredeki aynı varlığı değiştiren diğer sorgular için sorgu deposuna bakın. Bu sorguları tanımladıktan sonra, eşzamanlılık geliştirmek için uygulama mantığını değiştirmeyi düşünün veya daha az kısıtlayıcı bir yalıtım düzeyi kullanın. |
+|Yüksek arabellekli GÇ bekler | Sorgu deposunda yüksek sayıda fiziksel okuma içeren sorguları bulun. Yüksek GÇ beklemeleri olan sorgularla eşleşiyorsa, taramalar yerine aramalar yapmak için temel alınan varlıktaki bir dizin ile tanışın. Bu, sorguların GÇ ek yükünü en aza indirir. Bu sunucu için sorguları iyileştirmek üzere dizin önerileri olup olmadığını görmek için portalda sunucunuzun **performans önerilerini** kontrol edin. |
+|Yüksek bellek bekler | Sorgu deposundaki en üstteki bellek kullanan sorguları bulun. Bu sorgular büyük olasılıkla etkilenen sorguların daha fazla ilerlemesini erteliyor. Bu sorguları iyileştirebilecek Dizin önerileri olup olmadığını görmek için portalda sunucunuzun **performans önerilerini** kontrol edin.|
 
 ## <a name="configuration-options"></a>Yapılandırma seçenekleri
 
-Query Store etkin olduğunda pencere başına 500 ayrı sorguları en fazla 15 dakikalık toplama windows verileri kaydeder.
+Sorgu deposu etkinleştirildiğinde, verileri 15 dakikalık toplama Windows 'a kadar, her pencere için en fazla 500 farklı sorguya kaydeder.
 
-Query Store parametreleri yapılandırmak için aşağıdaki seçenekler kullanılabilir.
+Sorgu deposu parametrelerini yapılandırmak için aşağıdaki seçenekler kullanılabilir.
 
-| **Parametre** | **Açıklama** | **Varsayılan** | **Aralığı** |
+| **Parametresinin** | **Açıklama** | **Varsayılan** | **Aralık** |
 |---|---|---|---|
-| query_store_capture_mode | AÇIK/kapalı değerine göre sorgu deposu özelliği etkinleştirin. Not: Performance_schema kapalı ise, üzerinde query_store_capture_mode kapatma performance_schema ve performans şema araçları bu özellik için gerekli bir alt kümesi üzerinde kapatır. | TÜM | NONE, TÜM |
-| query_store_capture_interval | Sorgu deposu aralığı dakika cinsinden yakalayın. İçinde sorgu ölçümleri toplanır aralığı belirtmeye izin verir | 15 | 5 - 60 |
-| query_store_capture_utility_queries | Kapatma açık veya kapalı sistemde yürütülen tüm yardımcı programı sorgular yakalamak için. | NO | EVET, HAYIR |
-| query_store_retention_period_in_days | Zaman penceresi ilişkin sorgu Deposu'nda veri saklanacağı gün sayısı. | 7 | 1 - 30 |
+| query_store_capture_mode | Değer temelinde sorgu deposu özelliğini açın/kapatın. Note: performance_schema KAPALıYSA, query_store_capture_mode ' ın etkinleştirilmesi, bu özellik için gerekli olan performance_schema ve performans şeması gereçlerinin bir alt kümesini etkinleştirebilir. | Bütün | HIÇBIRI, TÜMÜ |
+| query_store_capture_interval | Sorgu deposu yakalama aralığı dakika olarak. Sorgu ölçümlerinin toplanmış olduğu aralığın belirtilmesine izin verir | 15 | 5 - 60 |
+| query_store_capture_utility_queries | Sistemde yürütülen tüm yardımcı program sorgularını yakalamak için açma veya kapatma. | NO | EVET, HAYıR |
+| query_store_retention_period_in_days | Sorgu deposundaki verilerin saklanacağı zaman penceresi. | 7 | 1 - 30 |
 
-Özellikle istatistikleri beklemek için aşağıdaki seçenekler geçerlidir.
+Aşağıdaki seçenekler özellikle bekleme istatistikleri için geçerlidir.
 
-| **Parametre** | **Açıklama** | **Varsayılan** | **Aralığı** |
+| **Parametresinin** | **Açıklama** | **Varsayılan** | **Aralık** |
 |---|---|---|---|
-| query_store_wait_sampling_capture_mode | / OFF bekleme istatistikleri ON kapatma izin verir. | YOK | NONE, TÜM |
-| query_store_wait_sampling_frequency | Saniye cinsinden bekleme örnekleme Alters sıklığı. 5 ile 300 saniye. | 30 | 5-300 |
+| query_store_wait_sampling_capture_mode | Bekleme istatistiklerinin açılmasını/KAPATıLMASıNı sağlar. | SEÇIM | HIÇBIRI, TÜMÜ |
+| query_store_wait_sampling_frequency | Saniye cinsinden bekleme örnekleme sıklığını değiştirir. 5-300 saniye. | 30 | 5-300 |
 
 > [!NOTE]
-> Şu anda **query_store_capture_mode** hem anlamına gelir, bu yapılandırma yerini **query_store_capture_mode** ve **query_store_wait_sampling_capture_mode** Tüm çalışmak bekleme istatistikleri için etkinleştirilmesi gerekir. Varsa **query_store_capture_mode** bekleme istatistikleri etkin performance_schema yanı sıra, sorgu deposu tarafından yakalanan query_text yararlanan bu yana bekleme istatistikleri de kapalıdır sonra devre dışı bırakılır.
+> Şu anda **query_store_capture_mode** , bu yapılandırmanın yerini alır, ancak her iki **query_store_capture_mode** ve **query_store_wait_sampling_capture_mode** de bekleyen istatistiklerin çalışması için her ikisi de etkinleştirilmelidir. **Query_store_capture_mode** devre dışı bırakılırsa, bekleme istatistiği, performance_schema etkin ' i ve sorgu deposu tarafından yakalanan query_text ' den yararlandığından, bekleme istatistikleri de kapanır.
 
-Kullanım [Azure portalında](howto-server-parameters.md) almak veya bir parametre için farklı bir değer ayarlamak için.
+Bir parametre için farklı bir değer almak veya ayarlamak için [Azure Portal](howto-server-parameters.md) kullanın.
 
-## <a name="views-and-functions"></a>Görünümleri ve işlevleri
+## <a name="views-and-functions"></a>Görünümler ve işlevler
 
-Görüntüleyin ve Query Store aşağıdaki görünümleri ve işlevleri kullanarak yönetin. Herhangi biri [seçme ayrıcalığı ortak rolün](howto-create-users.md#create-additional-admin-users) bu görünümler, Query Store verileri görmek için kullanabilirsiniz. Bu görünümler yalnızca kullanılabilir **mysql** veritabanı.
+Aşağıdaki görünümleri ve işlevleri kullanarak sorgu deposunu görüntüleyin ve yönetin. [Ayrıcalık Seç ortak rolünde](howto-create-users.md#create-additional-admin-users) bulunan herkes, bu görünümleri sorgu deposundaki verileri görmek için kullanabilir. Bu görünümler yalnızca **MySQL** veritabanında kullanılabilir.
 
-Sorgular, değişmez değerler ve sabitleri kaldırdıktan sonra kendi yapı bakarak normalleştirilir. İki sorguları dışında değişmez değerler aynıysa, aynı karmaya sahip.
+Sorgular, sabit değerler ve sabitler kaldırıldıktan sonra yapısına bakılarak normalleştirilmelidir. İki sorgu özdeş değerler hariç aynıysa, aynı karma değerine sahip olur.
 
-### <a name="mysqlquerystore"></a>mysql.query_store
+### <a name="mysqlquery_store"></a>MySQL. query_store
 
-Bu görünüm Query Store tüm verileri döndürür. Her ayrı bir veritabanı kimliği, kullanıcı kimliği ve sorgu kimliği için bir satır var.
+Bu görünüm, sorgu deposundaki tüm verileri döndürür. Her farklı veritabanı KIMLIĞI, Kullanıcı KIMLIĞI ve sorgu KIMLIĞI için bir satır vardır.
 
-| **Name** | **Veri türü** | **IS_NULLABLE** | **Açıklama** |
+| **Ad** | **Veri türü** | **IS_NULLABLE** | **Açıklama** |
 |---|---|---|---|
-| `schema_name`| varchar(64) | NO | Şema adı |
-| `query_id`| bigint(20) | NO| Aynı sorgu farklı Şeması'nda, yeni bir kimliği çalıştırırsa, belirli bir sorgu için oluşturulan benzersiz bir kimlik oluşturulur |
-| `timestamp_id` | timestamp| NO| Sorgunun yürütüldüğü zaman damgası. Bu query_store_interval yapılandırmasına dayanır|
-| `query_digest_text`| LONGTEXT| NO| Tüm harfleri kaldırdıktan sonra normalleştirilmiş sorgu metni|
-| `query_sample_text` | LONGTEXT| NO| İlk değişmez değerleri ile gerçek sorgu görünümü|
-| `query_digest_truncated` | bit| EVET| Sorgu metni olup kesildi. Sorgu 1 KB'den daha uzun olması durumunda değeri Evet olacaktır|
-| `execution_count` | bigint(20)| NO| Sorgu çalıştırılmış bu zaman damgası kimliği / yapılandırılmış aralığı süresince sayısı|
-| `warning_count` | bigint(20)| NO| Bu sorgu iç sırasında oluşturulan uyarı sayısı|
-| `error_count` | bigint(20)| NO| Bu sorgu zaman aralığı boyunca oluşturulan hata sayısı|
-| `sum_timer_wait` | double| EVET| Bu sorgu aralığı boyunca toplam yürütme süresi|
-| `avg_timer_wait` | double| EVET| Bu sorgu aralığı sırasında ortalama yürütme süresi|
-| `min_timer_wait` | double| EVET| Bu sorgu için minimum yürütme süresi|
-| `max_timer_wait` | double| EVET| En fazla yürütme zamanı|
-| `sum_lock_time` | bigint(20)| NO| Bu sorgu yürütme sırasında bu zaman penceresi için tüm kilitler için harcanan süre toplam miktarı|
-| `sum_rows_affected` | bigint(20)| NO| Etkilenen satır sayısı|
-| `sum_rows_sent` | bigint(20)| NO| İstemciye gönderilen satır sayısı|
-| `sum_rows_examined` | bigint(20)| NO| Denetlenen satır sayısı|
-| `sum_select_full_join` | bigint(20)| NO| Katılma tam sayısı|
-| `sum_select_scan` | bigint(20)| NO| Select tarama sayısı |
-| `sum_sort_rows` | bigint(20)| NO| Sıralanmış satır sayısı|
-| `sum_no_index_used` | bigint(20)| NO| Dizin sorgu zaman kullanmayan sayısı|
-| `sum_no_good_index_used` | bigint(20)| NO| Sorgu yürütme altyapısı iyi dizin ne zaman kullanmayan sayısı|
-| `sum_created_tmp_tables` | bigint(20)| NO| Geçici tablolar oluşturulan toplam sayısı|
-| `sum_created_tmp_disk_tables` | bigint(20)| NO| Toplam sayısını (g/ç oluşturur) diskte oluşturulan geçici tablolar|
-| `first_seen` | timestamp| NO| İlk örneğini (UTC) sorgu toplama penceresi sırasında|
-| `last_seen` | timestamp| NO| Son oluşum (UTC) sorgunun bu toplama penceresi sırasında|
+| `schema_name`| varchar (64) | NO | Şemanın adı |
+| `query_id`| büyük tamsayı (20) | NO| Belirli sorgu için oluşturulan benzersiz KIMLIK, aynı sorgu farklı şemada yürütülüyorsa yeni bir KIMLIK oluşturulur |
+| `timestamp_id` | timestamp| NO| Sorgunun yürütüldüğü zaman damgası. Bu, query_store_interval yapılandırmasına dayalıdır|
+| `query_digest_text`| LONGTEXT| NO| Tüm sabit değerleri kaldırdıktan sonra normalleştirilmiş sorgu metni|
+| `query_sample_text` | LONGTEXT| NO| Değişmez değer içeren gerçek sorgunun ilk görünümü|
+| `query_digest_truncated` | sürümleri| YES| Sorgu metninin kesilip kesilmediğini belirtir. Sorgu 1 KB 'den uzunsa değer Evet olur|
+| `execution_count` | büyük tamsayı (20)| NO| Sorgunun bu zaman damgası KIMLIĞI için kaç kez yürütüldüğü (yapılandırılmış Aralık dönemi sırasında)|
+| `warning_count` | büyük tamsayı (20)| NO| Bu sorgunun iç sırada oluşturduğu uyarı sayısı|
+| `error_count` | büyük tamsayı (20)| NO| Bu sorgunun Aralık sırasında oluşturduğu hata sayısı|
+| `sum_timer_wait` | double| YES| Bu sorgunun Aralık boyunca toplam yürütme süresi|
+| `avg_timer_wait` | double| YES| Bu sorgu için Aralık sırasında ortalama yürütme süresi|
+| `min_timer_wait` | double| YES| Bu sorgu için en düşük yürütme süresi|
+| `max_timer_wait` | double| YES| En fazla yürütme süresi|
+| `sum_lock_time` | büyük tamsayı (20)| NO| Bu zaman penceresi sırasında bu sorgu yürütmesinin tüm kilitleri için harcanan toplam süre miktarı|
+| `sum_rows_affected` | büyük tamsayı (20)| NO| Etkilenen satır sayısı|
+| `sum_rows_sent` | büyük tamsayı (20)| NO| İstemciye gönderilen satır sayısı|
+| `sum_rows_examined` | büyük tamsayı (20)| NO| İncelenen satır sayısı|
+| `sum_select_full_join` | büyük tamsayı (20)| NO| Tam birleşim sayısı|
+| `sum_select_scan` | büyük tamsayı (20)| NO| Seçme taraması sayısı |
+| `sum_sort_rows` | büyük tamsayı (20)| NO| Sıralanan satır sayısı|
+| `sum_no_index_used` | büyük tamsayı (20)| NO| Sorgunun herhangi bir dizini kullanmayan zaman sayısı|
+| `sum_no_good_index_used` | büyük tamsayı (20)| NO| Sorgu yürütme altyapısının herhangi bir iyi Dizin kullanmayan zaman sayısı|
+| `sum_created_tmp_tables` | büyük tamsayı (20)| NO| Toplam oluşturulan geçici tablo sayısı|
+| `sum_created_tmp_disk_tables` | büyük tamsayı (20)| NO| Diskte oluşturulan toplam geçici tablo sayısı (g/ç oluşturur)|
+| `first_seen` | timestamp| NO| Toplama penceresi sırasında sorgunun ilk oluşumu (UTC)|
+| `last_seen` | timestamp| NO| Bu toplama penceresi sırasında sorgunun son oluşumu (UTC)|
 
-### <a name="mysqlquerystorewaitstats"></a>mysql.query_store_wait_stats
+### <a name="mysqlquery_store_wait_stats"></a>MySQL. query_store_wait_stats
 
-Bu görünüm, Query Store olayları verileri döndürür bekleyin. Her farklı veritabanı kimliği, kullanıcı kimliği, sorgu kimliği ve olay için bir satır var.
+Bu görünüm sorgu deposundaki bekleme olayları verilerini döndürür. Her farklı veritabanı KIMLIĞI, Kullanıcı KIMLIĞI, sorgu KIMLIĞI ve olay için bir satır vardır.
 
-| **Name**| **Veri türü** | **IS_NULLABLE** | **Açıklama** |
+| **Ad**| **Veri türü** | **IS_NULLABLE** | **Açıklama** |
 |---|---|---|---|
-| `interval_start` | timestamp | NO| Başlangıç aralığı (15 dakikalık artırma)|
-| `interval_end` | timestamp | NO| Bitiş aralığı (15 dakikalık artırma)|
-| `query_id` | bigint(20) | NO| Normalleştirilmiş sorgu (sorgu deposundan) üzerinde oluşturulan benzersiz kimliği|
-| `query_digest_id` | VARCHAR(32) | NO| (Sorgu deposundan) değişmez değerler kaldırdıktan sonra normalleştirilmiş sorgu metni |
-| `query_digest_text` | LONGTEXT | NO| Gerçek sorgu (sorgu deposundan) değişmez değerleri ile ilk görünümü |
-| `event_type` | VARCHAR(32) | NO| Bekleme olay kategorisi |
-| `event_name` | VARCHAR(128) | NO| Bekleme olayın adı |
-| `count_star` | bigint(20) | NO| Sorgu aralığı sırasında örneklenen bekleme olay sayısı |
-| `sum_timer_wait_ms` | double | NO| Toplam bekleme süresi (milisaniye cinsinden) bu sorgu aralığı sırasında |
+| `interval_start` | timestamp | NO| Aralık başlangıcı (15 dakikalık artış)|
+| `interval_end` | timestamp | NO| Aralığın sonu (15 dakikalık artış)|
+| `query_id` | büyük tamsayı (20) | NO| Normalleştirilmiş sorguda (sorgu deposundan) oluşturulan benzersiz KIMLIK|
+| `query_digest_id` | varchar (32) | NO| Tüm sabit değerleri kaldırıldıktan sonra normalleştirilmiş sorgu metni (sorgu deposundan) |
+| `query_digest_text` | LONGTEXT | NO| Değişmez değer içeren gerçek sorgunun ilk görünümü (sorgu deposundan) |
+| `event_type` | varchar (32) | NO| Bekleme olayının kategorisi |
+| `event_name` | varchar (128) | NO| Bekleme olayının adı |
+| `count_star` | büyük tamsayı (20) | NO| Sorgu aralığı boyunca örneklenen bekleme olaylarının sayısı |
+| `sum_timer_wait_ms` | double | NO| Bu sorgunun Aralık boyunca toplam bekleme süresi (milisaniye cinsinden) |
 
 ### <a name="functions"></a>İşlevler
 
-| **Name**| **Açıklama** |
+| **Ad**| **Açıklama** |
 |---|---|
-| `mysql.az_purge_querystore_data(TIMESTAMP)` | Belirli bir zaman damgasını önce tüm sorgu deposu verileri temizler |
-| `mysql.az_procedure_purge_querystore_event(TIMESTAMP)` | Belirli bir zaman damgasını önce olay verilerini temizler tüm bekleyin |
-| `mysql.az_procedure_purge_recommendation(TIMESTAMP)` | Öneriler, sona erme önce belirtilen zaman damgası olan temizler |
+| `mysql.az_purge_querystore_data(TIMESTAMP)` | Verilen zaman damgasından önce tüm sorgu depolama verilerini temizler |
+| `mysql.az_procedure_purge_querystore_event(TIMESTAMP)` | Verilen zaman damgasından önce tüm bekleme olayı verilerini temizler |
+| `mysql.az_procedure_purge_recommendation(TIMESTAMP)` | Süre sonu verilen zaman damgasından önce olan önerileri temizler |
 
 ## <a name="limitations-and-known-issues"></a>Sınırlamalar ve bilinen sorunlar
 
-- MariaDB sunucu parametresi varsa `default_transaction_read_only` Query Store, veri yakalama gerçekleştiremez.
-- Uzun Unicode sorgular karşılaşırsa, Query Store İşlevler'in kesilmesi (\>= 6000 bayt).
+- Bir MariaDB sunucusunda `default_transaction_read_only` parametresi varsa, sorgu deposu veri yakalayamaz.
+- Sorgu deposu işlevselliği, uzun Unicode sorgularıyla karşılaşırsa kesintiye uğrar (\>= 6000 bayt).
 - Bekleme istatistikleri için bekletme süresi 24 saattir.
-- Bekleme istatistikleri örnek Za yakalama olayların bir kesir kullanır. Sıklık parametresini kullanarak değiştirilebilir `query_store_wait_sampling_frequency`.
+- Bekleme istatistikleri örnek TI kullanarak olayların bir bölümünü yakalar. Sıklık `query_store_wait_sampling_frequency`parametresi kullanılarak değiştirilebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [sorgu performansı öngörüleri](concepts-query-performance-insight.md)
+- [Sorgu performansı öngörüleri](concepts-query-performance-insight.md) hakkında daha fazla bilgi edinin

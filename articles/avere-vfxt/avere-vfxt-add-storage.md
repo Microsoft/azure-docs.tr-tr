@@ -1,178 +1,178 @@
 ---
-title: Avere vFXT depolama - Azure'ı yapılandırma
-description: Bir arka uç depolama sistemi için Azure, Avere vFXT için ekleme
+title: Avere vFXT Storage 'ı Yapılandırma-Azure
+description: Azure için avere vFXT 'nize arka uç depolama sistemi ekleme
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 01/29/2019
-ms.author: v-erkell
-ms.openlocfilehash: 6d35d5cdeafb80a36f910d71393802a3affb4df8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: 86b63e6d9799387347093e469015fbd3019069d1
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515894"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72255051"
 ---
 # <a name="configure-storage"></a>Depolama alanını yapılandırma
 
-Bu adım bir arka uç depolama sistemi vFXT kümeniz için ayarlar.
+Bu adım, vFXT kümeniz için bir arka uç depolama sistemi ayarlar.
 
 > [!TIP]
-> Avere vFXT küme birlikte yeni bir Azure Blob kapsayıcısı oluşturduysanız, bu kapsayıcı zaten kullanılmak üzere ayarlanmış ve depolama alanı eklemek gerekmez.
+> Avere vFXT kümesiyle birlikte yeni bir Azure Blob kapsayıcısı oluşturduysanız bu kapsayıcı zaten kullanım için ayarlanmıştır ve depolama eklemeniz gerekmez.
 
-Yeni bir Blob kapsayıcısı ile kümenizi oluşturmadıysanız, ya da bir ek donanım veya bulut tabanlı depolama sistemi eklemek istiyorsanız aşağıdaki yönergeleri izleyin.
+Kümeniz ile yeni bir blob kapsayıcısı oluşturmadıysanız veya ek bir donanım ya da bulut tabanlı depolama sistemi eklemek istiyorsanız bu yönergeleri izleyin.
 
-İki ana görevi vardır:
+İki ana görev vardır:
 
-1. [Bir çekirdek dosyalayıcı oluşturma](#create-a-core-filer), mevcut bir depolama sistemi ya da bir Azure depolama hesabı vFXT kümenizi bağlanır.
+1. VFXT kümenizi var olan bir depolama sistemine veya bir Azure Storage hesabına bağlayan [bir çekirdek filme oluşturun](#create-a-core-filer).
 
-1. [Ad alanı birleşim oluşturma](#create-a-junction), istemcilerin bağlar yolunu tanımlar.
+1. İstemcilerin bağlanacağı yolu tanımlayan [bir ad alanı kavşak oluşturun](#create-a-junction).
 
-Bu adımları Avere Denetim Masası'nı kullanın. Okuma [vFXT kümeye erişmek](avere-vfxt-cluster-gui.md) nasıl kullanılacağını öğrenin.
+Bu adımlar avere denetim masasını kullanır. Nasıl kullanacağınızı öğrenmek için [vFXT kümesine erişin](avere-vfxt-cluster-gui.md) .
 
-## <a name="create-a-core-filer"></a>Bir çekirdek dosyalayıcı oluşturma
+## <a name="create-a-core-filer"></a>Çekirdek filme oluşturma
 
-"Çekirdek dosyalayıcı", bir arka uç depolama sistemi vFXT bir terimdir. Depolama, bir donanım NAS Gereci NetApp veya Isilon gibi veya Bulut nesne deposu olabilir. Çekirdek filtreleri hakkında daha fazla bilgi bulunabilir [Avere içinde küme ayarları Kılavuzu](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/settings_overview.html#managing-core-filers).
+"Core filme", arka uç depolama sistemi için bir vFXT terimidir. Depolama, NetApp veya ıınon gibi bir donanım NAS gereci olabilir veya bir bulut nesne deposu olabilir. Çekirdek filtrelerin hakkında daha fazla bilgi [için avere küme ayarları kılavuzunda](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/settings_overview.html#managing-core-filers)bulabilirsiniz.
 
-Bir çekirdek dosyalayıcı eklemek için iki ana tür çekirdek filtrelerin birini seçin:
+Bir çekirdek fili eklemek için, iki temel tür çekirdek dosyasıcıdan birini seçin:
 
-  * [NAS çekirdek dosyalayıcı](#nas-core-filer) -NAS çekirdek dosyalayıcı eklemeyi açıklar 
-  * [Azure depolama bulut çekirdek dosyalayıcı](#azure-storage-cloud-core-filer) -bulut çekirdek dosyalayıcı bir Azure depolama hesabı eklemeyi açıklar
+  * [NAS Core fili](#nas-core-filer) -bir NAS Core filin nasıl ekleneceğini açıklar 
+  * [Azure depolama bulut çekirdeği fili](#azure-storage-cloud-core-filer) -bir Azure depolama hesabının bulut çekirdeği filmi olarak ekleneceğini açıklar
 
-### <a name="nas-core-filer"></a>NAS çekirdek dosyalayıcı
+### <a name="nas-core-filer"></a>NAS Core fili
 
-Bir şirket içi NetApp NAS çekirdek dosyalayıcı olabilir veya Isilon ya da bulutta bir NAS uç noktası. Depolama sistemine güvenilir bir yüksek hızlı bağlantıyı Avere vFXT kümeye - Örneğin, 1 GB/sn ExpressRoute bağlantı (VPN değil) - olmalıdır ve kullanılan NAS dışarı aktarmaları için küme kök erişim vermelisiniz.
+Bir NAS Core, bir şirket içi NetApp veya IConnectionPoint ya da buluttaki bir NAS uç noktası olabilir. Depolama sisteminin avere vFXT kümesine güvenilir bir yüksek hızlı bağlantısı olması gerekir (örneğin, bir 1 Gbps ExpressRoute bağlantısı (VPN değil)) ve bu, kullanılmakta olan NAS dışarı aktarmaları için küme kök erişimi vermelidir.
 
-Aşağıdaki adımlar bir NAS çekirdek gösterecek şekilde ekleyin:
+Aşağıdaki adımlar bir NAS Core fili ekler:
 
-1. Avere Denetim Masası'ndan tıklayın **ayarları** en üstteki sekmedeki.
+1. Avere denetim masasından üstteki **Ayarlar** sekmesine tıklayın.
 
-1. Tıklayın **çekirdek dosyalayıcı** > **yönetme çekirdek filtrelerin** soldaki.
+1. **Çekirdek Filer**@no__t ' a tıklayın. sol taraftaki**çekirdek filers 'yi yönetin** .
 
 1. **Oluştur**’a tıklayın.
 
-   ![Oluştur düğmesine imleci ile Ekle yeni çekirdek dosyalayıcı sayfasının ekran görüntüsü](media/avere-vfxt-add-core-filer-start.png)
+   ![Oluştur düğmesinin üzerinde bir imlece yeni çekirdek dosyalayıcı ekleme sayfasının ekran görüntüsü](media/avere-vfxt-add-core-filer-start.png)
 
-1. Sihirbaz gerekli bilgileri doldurun: 
+1. Sihirbazda gerekli bilgileri girin: 
 
-   * Çekirdek gösterecek şekilde adlandırın.
-   * Varsa bir tam etki alanı adı (FQDN) belirtin. Aksi takdirde, bir IP adresi veya ana bilgisayar adı, çekirdek dosyalayıcı için çözümler sağlar.
-   * Dosyalayıcı sınıfınıza listeden seçin. Emin değilseniz, belirleyin **diğer**.
+   * Çekirdek filinizi adlandırın.
+   * Varsa tam etki alanı adı (FQDN) sağlayın. Aksi takdirde, çekirdek filize çözümlenen bir IP adresi veya ana bilgisayar adı sağlayın.
+   * Listeden dosyalayıcı sınıfınızı seçin. Emin değilseniz, **diğer**' i seçin.
 
-     ![Çekirdek dosyalayıcı adı ve tam etki alanı adı ekleme yeni çekirdek dosyalayıcı sayfasının ekran görüntüsü](media/avere-vfxt-add-core-filer.png)
+     ![Çekirdek dosyalayıcı adı ve tam etki alanı adına sahip yeni çekirdek film ekleme sayfasının ekran görüntüsü](media/avere-vfxt-add-core-filer.png)
   
-   * Tıklayın **sonraki** ve önbellek İlkesi'ni seçin. 
-   * Tıklayın **dosyalayıcı ekleme**.
-   * Daha ayrıntılı bilgi için bkz [yeni bir NAS ekleme çekirdek dosyalayıcı](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/new_core_filer_nas.html) Avere içinde küme ayarları Kılavuzu.
+   * **İleri** ' ye tıklayın ve bir önbellek ilkesi seçin. 
+   * **Filigran Ekle**' ye tıklayın.
+   * Daha ayrıntılı bilgi için, avere küme ayarları kılavuzunda [Yeni BIR NAS Core filme ekleme](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/new_core_filer_nas.html) bölümüne bakın.
 
-Ardından, devam [bir birleşim oluşturma](#create-a-junction).  
+Sonra, [bir birleşim oluşturmaya](#create-a-junction)devam edin.  
 
-### <a name="azure-storage-cloud-core-filer"></a>Azure depolama bulut çekirdek dosyalayıcı
+### <a name="azure-storage-cloud-core-filer"></a>Azure depolama bulutu çekirdek fili
 
-VFXT kümenizin arka uç depolama alanı olarak Azure Blob Depolama kullanmak için boş bir kapsayıcı bir çekirdek dosyalayıcı eklemeniz gerekir.
+VFXT kümenizin arka uç depolama alanı olarak Azure Blob depolamayı kullanmak için, temel bir filme olarak eklemek üzere boş bir kapsayıcıya ihtiyacınız vardır.
 
 > [!TIP] 
-> Bir blob kapsayıcısı Avere vFXT küme oluşturma aynı anda oluşturmayı seçerseniz, dağıtım şablonu veya betik bir depolama kapsayıcısı oluşturur, bir çekirdek dosyalayıcı tanımlar ve ad alanı birleşim vFXT kümesi oluşturmanın bir parçası oluşturur. Şablon, ayrıca kümenin sanal ağ içindeki depolama hizmet uç noktası oluşturur. 
+> Aynı anda avere vFXT kümesini oluşturduğunuz sırada bir blob kapsayıcısı oluşturmayı seçerseniz, dağıtım şablonu veya betiği bir depolama kapsayıcısı oluşturur, onu bir çekirdek filsi olarak tanımlar ve vFXT kümesi oluşturmanın bir parçası olarak ad alanı birleşimi oluşturur. Şablon, kümenin sanal ağı içinde bir depolama hizmeti uç noktası da oluşturur. 
 
-BLOB Depolama, kümeye ekleme, bu görevleri gerektirir:
+BLOB depolama alanını kümenize eklemek için şu görevler gereklidir:
 
-* Depolama hesabı oluşturma (aşağıda 1 adım)
-* (Adım 2-3) boş bir Blob kapsayıcısı oluşturma
-* Depolama erişim anahtarı vFXT kümesi (4-6. adım) için bir bulut kimlik bilgisi olarak Ekle
-* Blob kapsayıcısı çekirdek dosyalayıcı vFXT kümenin (adım 7-9) olarak Ekle
-* Çekirdek dosyalayıcı bağlamak için istemcilerin kullandığı bir ad alanı birleşim oluşturun ([bir birleşim oluşturma](#create-a-junction), aynı donanım ve bulut depolama için)
+* Depolama hesabı oluştur (aşağıdaki 1. adım)
+* Boş bir blob kapsayıcısı oluşturun (adım 2-3)
+* Depolama erişim anahtarını vFXT kümesine yönelik bir bulut kimlik bilgisi olarak ekleyin (adım 4-6)
+* Blob kapsayıcısını vFXT kümesi için bir çekirdek fili olarak ekleyin (adım 7-9)
+* İstemcilerin çekirdek filmci bağlamak için kullandığı bir ad alanı birleşimi oluşturma (hem donanım hem de bulut depolaması için aynı olan[bir birleşim oluşturun](#create-a-junction))
 
-Küme oluşturulduktan sonra BLOB Depolama eklemek için aşağıdaki adımları izleyin. 
+Kümeyi oluşturduktan sonra blob depolaması eklemek için aşağıdaki adımları izleyin. 
 
-1. Bu ayarlar ile bir genel amaçlı V2 depolama hesabı oluşturun:
+1. Şu ayarlarla genel amaçlı v2 depolama hesabı oluşturun:
 
-   * **Abonelik** - vFXT kümeyle aynı
-   * **Kaynak grubu** - (isteğe bağlı) vFXT küme grubu olarak aynı
-   * **Konum** - vFXT kümeyle aynı
-   * **Performans** - standart (Premium depolama desteklenmiyor)
-   * **Hesap türü** -genel amaçlı V2 (depolama v2)
+   * **Abonelik** -vFXT kümesiyle aynı
+   * **Kaynak grubu** -vFXT küme grubuyla aynı (isteğe bağlı)
+   * **Konum** -vFXT kümesiyle aynı
+   * **Performans** standardı (Premium Depolama desteklenmez)
+   * **Hesap türü** -genel amaçlı v2 (StorageV2)
    * **Çoğaltma** -yerel olarak yedekli depolama (LRS)
-   * **Erişim katmanı** - sık erişimli
-   * **Güvenli aktarım gereklidir** -(varsayılan olmayan değer) bu seçeneği devre dışı
-   * **Sanal ağlar** - gerekli değil
+   * **Erişim katmanı** -sık erişimli
+   * **Güvenli aktarım gerekli** -bu seçeneği devre dışı bırak (varsayılan olmayan değer)
+   * **Sanal ağlar** -gerekli değil
 
-   Azure portalını kullanın veya "Azure'a dağıtın" düğmeye tıklayın.
+   Azure portal kullanabilir veya aşağıdaki "Azure 'a dağıt" düğmesine tıklayabilirsiniz.
 
-   [![Depolama hesabı oluşturmak için](media/deploytoazure.png)](https://ms.portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAvere%2Fmaster%2Fsrc%2Fvfxt%2Fstorageaccount%2Fazuredeploy.json)
+   [depolama hesabı oluşturmak için ![düğme](media/deploytoazure.png)](https://ms.portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAvere%2Fmaster%2Fsrc%2Fvfxt%2Fstorageaccount%2Fazuredeploy.json)
 
-1. Hesap oluşturulduktan sonra depolama hesabı sayfasına göz atın.
+1. Hesap oluşturulduktan sonra depolama hesabı sayfasına gidin.
 
-   ![Azure portalında yeni depolama hesabı](media/avere-vfxt-new-storage-acct.png)
+   ![Azure portal yeni depolama hesabı](media/avere-vfxt-new-storage-acct.png)
 
-1. Tıklayarak bir blob kapsayıcısı oluşturursunuz **Blobları** genel bakış sayfasında ve ardından **+ kapsayıcı**. Herhangi bir kapsayıcı adı kullanın ve erişim ayarlandığından emin olun **özel**.
+1. Genel Bakış sayfasında **Bloblar** ' a tıklayıp **+ Container**' a tıklayarak bir blob kapsayıcısı oluşturun. Herhangi bir kapsayıcı adı kullanın ve erişimin **özel**' e ayarlandığından emin olun.
 
-   ![Depolama BLOB'ları sayfası mevcut kapsayıcı yok](media/avere-vfxt-blob-no-container.png)
+   ![Mevcut kapsayıcıları olmayan depolama Blobları sayfası](media/avere-vfxt-blob-no-container.png)
 
-1. Azure depolama hesabı anahtarını tıklayarak **erişim anahtarları** altında **ayarları**:
+1. **Ayarlar**altında **erişim anahtarları** ' na tıklayarak Azure depolama hesabı anahtarını alın:
 
-   ![Anahtar kopyalama için azure portalında GUI](media/avere-vfxt-copy-storage-key.png) 
+   ![Anahtarı kopyalamak için Azure portal GUI](media/avere-vfxt-copy-storage-key.png) 
 
-1. Kümenizin Avere Denetim Masası'nı açın. Tıklayın **ayarları**ve daha sonra **küme** > **bulut kimlik bilgileri** sol gezinti bölmesinde. Bulut kimlik bilgileri sayfasında tıklayın **kimlik bilgileri Ekle**.
+1. Kümeniz için avere denetim masasını açın. **Ayarlar**' a tıklayın ve ardından sol gezinti bölmesinde **küme** > **bulut kimlik bilgileri** ' ni açın. Bulut kimlik bilgileri sayfasında **kimlik bilgisi ekle**' ye tıklayın.
 
-   ![Bulut kimlik bilgileri yapılandırma sayfasında kimlik bilgileri Ekle düğmesine tıklayın](media/avere-vfxt-new-credential-button.png)
+   ![Bulut kimlik bilgileri yapılandırma sayfasında kimlik bilgisi Ekle düğmesine tıklayın](media/avere-vfxt-new-credential-button.png)
 
-1. Bulut çekirdek Fili Oluşturucu için bir kimlik bilgisi oluşturmak için aşağıdaki bilgileri doldurun: 
+1. Bulut çekirdeği fili için bir kimlik bilgisi oluşturmak üzere aşağıdaki bilgileri girin: 
 
    | Alan | Değer |
    | --- | --- |
-   | Kimlik bilgisi adı | açıklayıcı bir ad |
-   | Hizmet türü | (Azure depolama erişim anahtarını seçin) |
-   | Kiracı | Depolama hesabı adı |
-   | Abonelik | Abonelik kimliği |
-   | Depolama erişim anahtarı | Azure depolama hesabı anahtarı (önceki adımda kopyaladığınız) | 
+   | Kimlik bilgisi adı | herhangi bir açıklayıcı ad |
+   | Hizmet türü | (Azure Storage erişim anahtarını seçin) |
+   | Kiracı | depolama hesabı adı |
+   | Abonelik | abonelik kimliği |
+   | Depolama erişim anahtarı | Azure depolama hesabı anahtarı (önceki adımda kopyalanmış) | 
 
-   **Gönder**'e tıklayın.
+   **Gönder**' e tıklayın.
 
-   ![Bulut kimlik bilgisi form Avere Denetim Masası'ndaki tamamlandı](media/avere-vfxt-new-credential-submit.png)
+   ![Avere Denetim Masası 'nda bulut kimlik bilgisi tamamlandı formu](media/avere-vfxt-new-credential-submit.png)
 
-1. Ardından, çekirdek dosyalayıcı oluşturun. Avere Denetim Masası'ndaki sol tarafındaki tıklayın **çekirdek dosyalayıcı** >  **yönetme çekirdek filtrelerin**. 
+1. Sonra, çekirdek filleyici oluşturun. Avere Denetim Masası ' nın sol tarafında, çekirdek **Filer**@no__t ' a tıklayın,**çekirdek filers 'yi yönetin**. 
 
-1. Tıklayın **Oluştur** düğmesini **yönetme çekirdek filtrelerin** Ayarları sayfası.
+1. **Çekirdek filers ayarlarını yönetme** sayfasındaki **Oluştur** düğmesine tıklayın.
 
-1. Sihirbaz doldurun:
+1. Sihirbazı doldurun:
 
-   * Dosya türünü seçin **bulut**. 
-   * Yeni çekirdek dosyalayıcı adlandırın ve tıklatın **sonraki**.
-   * Varsayılan önbellek ilkesini kabul edin ve üçüncü sayfasına devam edin.
-   * İçinde **hizmet türünü**, seçin **Azure depolama**. 
-   * Daha önce oluşturduğunuz kimlik bilgilerini seçin.
-   * Ayarlama **demetine içeriği** için **boş**
-   * Değişiklik **sertifika doğrulama** için **devre dışı**
-   * Değişiklik **sıkıştırma modu** için **yok**  
+   * Dosyalayıcı türü **bulutu**' nı seçin. 
+   * Yeni çekirdek filcer ' ı adlandırın ve **İleri**' ye tıklayın.
+   * Varsayılan önbellek ilkesini kabul edin ve üçüncü sayfaya devam edin.
+   * **Hizmet türü**' nde **Azure Storage**' ı seçin. 
+   * Daha önce oluşturulan kimlik bilgisini seçin.
+   * **Demet Içeriğini** **boş** olarak ayarla
+   * **Sertifika doğrulamasını** **devre dışı** olarak değiştirme
+   * **Sıkıştırma modunu** **yok** olarak değiştirme  
    * **İleri**’ye tıklayın.
-   * Dördüncü sayfada kapsayıcıda adını **demet adı** olarak *storage_account_name*/*container_name*.
-   * İsteğe bağlı olarak, **şifreleme türü** için **hiçbiri**.  Azure depolama, varsayılan olarak şifrelenir.
-   * Tıklayın **dosyalayıcı ekleme**.
+   * Dördüncü sayfada, **demet adı** ' nda kapsayıcının adını *storage_account_name*/*container_name*olarak girin.
+   * İsteğe bağlı olarak, **şifreleme türünü** **hiçbiri**olarak ayarlayın.  Azure depolama, varsayılan olarak şifrelenir.
+   * **Filigran Ekle**' ye tıklayın.
 
-   Daha ayrıntılı bilgi için okuma [yeni bir bulut çekirdek dosyalayıcı ekleme](<https://azure.github.io/Avere/legacy/ops_guide/4_7/html/new_core_filer_cloud.html>) Avere küme yapılandırma kılavuzu. 
+   Daha ayrıntılı bilgi için, avere kümesi yapılandırma kılavuzu 'na [Yeni bir bulut çekirdeği ekleme](<https://azure.github.io/Avere/legacy/ops_guide/4_7/html/new_core_filer_cloud.html>) bölümünü okuyun. 
 
-Sayfa yenilenir ve yeni çekirdek gösterecek şekilde görüntülemek için sayfayı yenileyebilirsiniz.
+Sayfa yenilenir veya yeni çekirdek filinizi göstermek için sayfayı yenileyebilirsiniz.
 
-Ardından, için ihtiyacınız [bir birleşim oluşturma](#create-a-junction).
+Sonra [bir birleşim oluşturmanız](#create-a-junction)gerekir.
 
-## <a name="create-a-junction"></a>Bir bağlantı oluşturun
+## <a name="create-a-junction"></a>Birleşim oluştur
 
-Bir birleşim istemciler için oluşturduğunuz bir yoludur. İstemciler, bağlama yolunu ve seçtiğiniz hedefe ulaşır.
+Birleşim, istemciler için oluşturduğunuz bir yoldur. İstemciler yolu bağlayabilir ve seçtiğiniz hedefe ulaşır.
 
-Örneğin, aşağıdakileri oluşturabilirsiniz `/avere/files` , NetApp çekirdek gösterecek şekilde eşlemek için `/vol0/data` dışarı aktarma ve `/project/resources` alt.
+Örneğin, NetApp Core dosyalayıcı `/vol0/data` dışa aktarma ve `/project/resources` alt dizinine eşlemek için `/avere/files` oluşturabilirsiniz.
 
-Merkezleriyle hakkında daha fazla bilgi bulunabilir [Avere küme yapılandırma Kılavuzu'nun ad alanı bölümünde](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_namespace.html).
+Junler hakkında daha fazla bilgi [avere kümesi yapılandırma kılavuzunun ad alanı bölümünde](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_namespace.html)bulunabilir.
 
-Avere Denetim Masası Ayarları arabirimi aşağıdaki adımları izleyin:
+Avere Denetim Masası ayarları arabirimindeki şu adımları izleyin:
 
-* Tıklayın **VServer** > **Namespace** sol üst.
-* İle başlayan bir ad alanı yolu sağlamak / (eğik çizgi) gibi ``/avere/data``.
-* Çekirdek dosyalayıcı seçin.
-* Çekirdek dosyalayıcı Dışa Aktar'ı seçin.
+* Sol üst köşedeki **vServer** > **ad alanı** ' na tıklayın.
+* @No__t-0 gibi bir ad alanı yolunu/(eğik çizgi) ile başlayarak belirtin.
+* Çekirdek filinizi seçin.
+* Çekirdek dosyalayıcı dışarı aktarmayı seçin.
 * **İleri**’ye tıklayın.
 
-  ![Birleşim, çekirdek dosyalayıcı ve dışarı aktarma tamamlandı alanlarla "yeni birleşim Ekle" sayfasının ekran görüntüsü](media/avere-vfxt-add-junction.png)
+  ![Birleşim, çekirdek filme ve dışarı aktarma için tamamlanan alanlarla birlikte "yeni birleşim Ekle" sayfasının ekran görüntüsü](media/avere-vfxt-add-junction.png)
 
-Birleşim birkaç saniye sonra görünür. Ek merkezleriyle gerektiği şekilde oluşturun.
+Birleşim birkaç saniye sonra görünecektir. Gerektiğinde ek junler oluşturun.
 
-Birleşim oluşturulduktan sonra istemciler için [Avere vFXT küme bağlama](avere-vfxt-mount-clients.md) dosya sistemine erişebilir.
+Birleşim oluşturulduktan sonra istemciler, dosya sistemine erişmek için [avere vFXT kümesini bağlayabilir](avere-vfxt-mount-clients.md) .

@@ -1,177 +1,216 @@
 ---
-title: Data Lake araçları, Visual Studio için Azure HDInsight kullanarak Apache hadoop'a bağlama
-description: Yükleme ve Azure HDInsight, Apache Hadoop kümelerine bağlanmak için Visual Studio için Data Lake Araçları'nı kullanın ve ardından Hive sorguları çalıştırma hakkında bilgi edinin.
+title: Apache Hadoop & Visual Studio Data Lake araçları-Azure HDInsight
+description: Visual Studio için Data Lake araçları 'nı yüklemeyi ve kullanmayı ve Azure HDInsight 'ta Apache Hadoop kümelerine bağlanmayı ve ardından Hive sorguları çalıştırmayı öğrenin.
 keywords: hadoop araçları, hive sorgusu, visual studio, visual studio hadoop
-services: hdinsight
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017,seodec18
 ms.topic: conceptual
-ms.date: 06/03/2019
-ms.openlocfilehash: 485f3a4b6a5fde532229873fe1f3feaa30ece523
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 10/29/2019
+ms.openlocfilehash: 4ad58bc2d61f063dce2c23f60a65dcbec48a2303
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67450209"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73825072"
 ---
-# <a name="use-data-lake-tools-for-visual-studio-to-connect-to-azure-hdinsight-and-run-apache-hive-queries"></a>Bağlanmak için Azure HDInsight ve Apache Hive sorguları çalıştırmak için Visual Studio için Data Lake Araçları'nı kullanın
+# <a name="use-data-lake-tools-for-visual-studio-to-connect-to-azure-hdinsight-and-run-apache-hive-queries"></a>Visual Studio için Data Lake araçları 'nı kullanarak Azure HDInsight 'a bağlanma ve Apache Hive sorguları çalıştırma
 
-Nasıl kullanacağınızı öğrenin [Microsoft Azure Data Lake ve Stream Analytics araçları Visual Studio için](https://www.microsoft.com/download/details.aspx?id=49504) (Ayrıca adlı Data Lake Apache Hadoop'a bağlama için araçları) kümeleri içinde [Azure HDInsight](../hdinsight-hadoop-introduction.md) ve Hive sorguları göndermek.  
+[Azure HDInsight 'ta Apache Hadoop kümelerine](apache-hadoop-introduction.md) bağlanmak ve Hive sorguları göndermek üzere Visual Studio için Microsoft Azure Data Lake ve Stream Analytics araçları 'nı (Data Lake araçları olarak da bilinir) nasıl kullanacağınızı öğrenin.  
 
-HDInsight'ı kullanma hakkında daha fazla bilgi için [HDInsight'a giriş](../hdinsight-hadoop-introduction.md) ve [HDInsight ile çalışmaya başlama](apache-hadoop-linux-tutorial-get-started.md) bölümlerine göz atın.  
+HDInsight kullanma hakkında daha fazla bilgi için bkz. [HDInsight kullanmaya başlama](apache-hadoop-linux-tutorial-get-started.md).  
 
-Bir Apache Storm kümesine bağlanma hakkında daha fazla bilgi için bkz. [geliştirme C# Visual Studio kullanarak HDInsight üzerinde Apache Storm topolojilerini](../storm/apache-storm-develop-csharp-visual-studio-topology.md).
+Apache Storm kümesine bağlanma hakkında daha fazla bilgi için bkz. [Visual Studio C# için Data Lake araçları 'nı kullanarak Apache Storm için topoloji geliştirme](../storm/apache-storm-develop-csharp-visual-studio-topology.md).
 
 Visual Studio için Data Lake Araçlarını hem Azure Data Lake Analytics’e hem de HDInsight’a erişmek için kullanabilirsiniz. Data Lake Araçları hakkında bilgi için bkz. [Visual Studio için Data Lake Araçları'nı kullanarak U-SQL betikleri geliştirme](../../data-lake-analytics/data-lake-analytics-data-lake-tools-get-started.md).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Bu makaleyi tamamlamak ve Visual Studio için Data Lake araçları kullanmak için aşağıdaki öğeler gerekir:
+Bu makaleyi tamamlayıp Visual Studio için Data Lake araçları 'nı kullanmak için aşağıdaki öğeler gereklidir:
 
-* Bir Azure HDInsight kümesi. Bir HDInsight kümesi oluşturmak için bkz: [Azure HDInsight Apache Hadoop kullanmaya başlama](apache-hadoop-linux-tutorial-get-started.md). Etkileşimli Apache Hive sorguları çalıştırmak için gereken bir [HDInsight etkileşimli sorgu](../interactive-query/apache-interactive-query-get-started.md) kümesi.  
+* Bir Azure HDInsight kümesi. HDInsight kümesi oluşturmak için bkz. [Azure HDInsight 'ta Apache Hadoop kullanmaya başlama](apache-hadoop-linux-tutorial-get-started.md). Etkileşimli Apache Hive sorguları çalıştırmak için [HDInsight etkileşimli sorgu](../interactive-query/apache-interactive-query-get-started.md) kümesine ihtiyacınız vardır.  
 
-* [Visual Studio](https://visualstudio.microsoft.com/downloads/) (2013 veya daha yeni).  [Visual Studio Community sürümü](https://visualstudio.microsoft.com/vs/community/) ücretsizdir.  Ayrıca bkz [Visual Studio 2017'yi yükleme](https://docs.microsoft.com/visualstudio/install/install-visual-studio) ve [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/). Visual Studio 2019 ile hafif arabirimi farklılıkları vardır.
-
-  > [!IMPORTANT]  
-  > Data Lake araçları artık Visual Studio 2013 için desteklenmiyor.
+* [Visual Studio](https://visualstudio.microsoft.com/downloads/). [Visual Studio Community sürümü](https://visualstudio.microsoft.com/vs/community/) ücretsizdir. Burada gösterilen yönergeler [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)içindir.
 
 ## <a name="install-data-lake-tools-for-visual-studio"></a>Visual Studio için Data Lake Araçları’nı yükleme.  
-<a name="install-or-update-data-lake-tools-for-visual-studio"></a>
 
-* Visual Studio 2017 veya Visual Studio 2019  
-  Yükleme sırasında dahil en az olun iş yükleri **Azure geliştirme** veya **veri depolama ve işleme**.  
+Visual Studio sürümünüze yönelik Data Lake araçları yüklemek için uygun yönergeleri izleyin:
 
-  Var olan yüklemeler için menü çubuğundan gitmek için **Araçları** > **araçları ve özellikleri Al...**  Visual Studio Yükleyicisi'ni açın.  Ardından en az iş yükleri **Azure geliştirme** veya **veri depolama ve işleme**.
+- Visual Studio 2017 veya Visual Studio 2019 için:
 
-  ![Visual Studio Yükleyicisi'nin ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/vs2017_installation.png)
+    Visual Studio yüklemesi sırasında, **Azure geliştirme** iş yükü veya **veri depolama ve işleme** iş yükünü dahil ettiğinizden emin olun.  
 
-* Visual Studio 2013 ve 2015  
-  [Data Lake araçlarını indirin](https://www.microsoft.com/download/details.aspx?id=49504). Visual Studio sürümünüzle eşleşen Data Lake Araçları sürümünü seçin.  
+    Mevcut Visual Studio yüklemeleri için IDE menü çubuğuna gidin **ve Araçlar ' ı seçerek Visual Studio yükleyicisi** açmak üzere Araçlar **ve Özellikler alın** > . **Iş yükleri** sekmesinde, en az **Azure geliştirme** iş yükünü ( **Web & bulutu**altında) veya **veri depolama ve işleme** iş yükünü ( **diğer araç kümeleri**altında) seçin.
 
-> [!NOTE]  
-> Şu anda Visual Studio için Data Lake Araçları’nın yalnızca İngilizce sürümü mevcuttur.
+  ![İş yükü seçimi, Visual Studio Yükleyicisi](./media/apache-hadoop-visual-studio-tools-get-started/vs-installation.png)
 
-## <a name="update-data-lake-tools-for-visual-studio"></a>Visual Studio için Data Lake araçları güncelleştirme  
+- Visual Studio 2015 için:
 
-1. Visual Studio'yu açın.
+    [Data Lake araçlarını indirin](https://www.microsoft.com/download/details.aspx?id=49504). Visual Studio sürümünüzle eşleşen Data Lake Araçları sürümünü seçin.
 
-2. Menü çubuğundan gidin **Araçları** > **Uzantılar ve güncelleştirmeler...** .
+## <a name="update-data-lake-tools-for-visual-studio"></a>Visual Studio için güncelleştirme Data Lake araçları  
 
-3. Gelen **Uzantılar ve güncelleştirmeler** penceresini genişletin **güncelleştirmeleri** soldaki.
+Daha sonra, Data Lake araçlarını en son sürüme güncelleştirdiğinizden emin olun.
 
-4. Bir güncelleştirme varsa **Azure Data Lake ve Stream analitik araçlar** ana penceresinde görünür.  Seçin **güncelleştirme**.
+1. Visual Studio’yu açın.
+
+2. **Başlangıç** penceresinde, **kod olmadan devam et**' i seçin.
+
+3. Visual Studio IDE menü çubuğunda, uzantıları **yönet** > **Uzantılar** ' ı seçin.
+
+4. **Uzantıları Yönet** Iletişim kutusunda **güncelleştirmeler** düğümünü genişletin.
+
+5. Kullanılabilir güncelleştirmelerin listesi **Azure Data Lake ve Stream analitik araçları**içeriyorsa, bu seçeneği seçin. Ardından **güncelleştirme** düğmesini seçin. **İndir ve yükle** iletişim kutusu görüntülendikten ve kaybolduktan sonra, Visual Studio **Azure Data Lake ve Stream analitik araçları** uzantısını güncelleştirme zamanlamaya ekler.
+
+6. Tüm Visual Studio pencerelerini kapatın. **VSIX yükleyicisi** iletişim kutusu görüntülenir.
+
+7. Lisans koşullarını okumak için **Lisans** ' ı seçin ve ardından **VSIX yükleyicisi** Iletişim kutusuna dönmek için **Kapat** ' ı seçin.
+
+8. **Değiştir**'i seçin. Uzantı güncelleştirmesi yüklemesi başlar. Bir süre sonra, iletişim kutusu değişiklik yapma işlemi yapıldığını gösterecek şekilde değişir. **Kapat**' ı seçin ve ardından Visual Studio 'yu yeniden başlatarak yüklemeyi doldurun.
 
 > [!NOTE]  
 > Etkileşimli Sorgu kümelerine bağlanmak ve etkileşimli Hive sorguları çalıştırmak için yalnızca Data Lake Araçları sürüm 2.3.0.0 veya üzerini kullanabilirsiniz.
 
 ## <a name="connect-to-azure-subscriptions"></a>Azure aboneliklerine bağlanma
-Visual Studio için Data Lake Araçları’nı kullanarak HDInsight kümelerinize bağlanabilir, bazı temel yönetim işlemlerini gerçekleştirebilir ve Hive sorguları çalıştırabilirsiniz.
+
+Visual Studio için Data Lake araçları 'nı kullanarak HDInsight kümelerinize bağlanabilir, bazı temel yönetim işlemlerini gerçekleştirebilir ve Hive sorguları çalıştırabilirsiniz.
 
 > [!NOTE]  
-> Genel bir Hadoop kümesine bağlanma hakkında bilgi için bkz. [Visual Studio kullanarak Hive sorguları yazma ve gönderme](https://blogs.msdn.com/b/xiaoyong/archive/2015/05/04/how-to-write-and-submit-hive-queries-using-visual-studio.aspx).
+> Genel bir Hadoop kümesine bağlanma hakkında daha fazla bilgi için bkz. [Visual Studio kullanarak Hive sorguları yazma ve gönderme](https://blogs.msdn.microsoft.com/xiaoyong/2015/05/04/how-to-write-and-submit-hive-queries-using-visual-studio/).
+
+### <a name="connect-to-an-azure-subscription"></a>Bir Azure aboneliğine Bağlanma
 
 Azure aboneliğinize bağlanmak için:
 
-1. Visual Studio'yu açın.
+1. Visual Studio’yu açın.
 
-2. Menü çubuğundan gidin **görünümü** > **Sunucu Gezgini**.
+2. **Başlangıç** penceresinde, **kod olmadan devam et**' i seçin.
 
-3. Sunucu Gezgini'nden sağ **Azure**seçin **Microsoft Azure aboneliğine Bağlan...** ve oturum açma işlemini tamamlayın.
+3. IDE menü çubuğunda **görüntüle** > **Sunucu Gezgini**öğesini seçin.
 
-4. Sunucu Gezgini'nde, var olan HDInsight kümelerinin listesi görünür. Kümeniz yoksa Azure portalı, Azure PowerShell veya HDInsight SDK’yı kullanarak bir küme oluşturabilirsiniz. Daha fazla bilgi için bkz. [HDInsight kümesi oluşturma](../hdinsight-hadoop-provision-linux-clusters.md).
+4. **Sunucu Gezgini**' de **Azure**' a sağ tıklayın, **Microsoft Azure aboneliğine Bağlan**' ı seçin ve kimlik doğrulama işlemini doldurun. **Sunucu Gezgini**, var olan HDInsight kümelerinin bir listesini görüntülemek için **Azure** > **HDInsight** ' ı genişletin.
 
-   ![Sunucu Gezgini’nde Visual Studio için Data Lake Araçları küme listesinin ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-server-explorer.png "Sunucu Gezgini’nde Visual Studio için Data Lake Araçları küme listesi")
+5. Herhangi bir kümeniz yoksa, Azure portal, Azure PowerShell veya HDInsight SDK kullanarak bir tane oluşturun. Daha fazla bilgi için bkz. [HDInsight 'ta kümeleri ayarlama](../hdinsight-hadoop-provision-linux-clusters.md).
 
-5. HDInsight kümesini genişletin. **Hive veritabanları**, varsayılan depolama hesabı, bağlantılı depolama hesapları ve **Hadoop hizmeti günlüğünü** görünür. Varlıkları daha da genişletebilirsiniz.
+   ![HDInsight küme listesi, Sunucu Gezgini, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-server-explorer.png)
+
+6. HDInsight kümesini genişletin. Küme, **Hive veritabanları**, varsayılan depolama hesabı, diğer bağlı depolama hesapları ve **Hadoop hizmeti günlüğü**için düğümler içerir. Varlıkları daha da genişletebilirsiniz.
 
 Azure aboneliğinize bağlandıktan sonra aşağıdaki görevleri gerçekleştirebilirsiniz.
 
+### <a name="connect-to-azure-from-visual-studio"></a>Visual Studio 'dan Azure 'a bağlanma
+
 Visual Studio'dan Azure portalına bağlanmak için:
 
-1. Sunucu Gezgini'nden gidin **Azure** > **HDInsight** ve kümenizi seçin.
+1. **Sunucu Gezgini**' de **Azure** > **HDInsight** ' ı genişletin ve kümenizi seçin.
 
-2. Bir HDInsight kümesine sağ tıklayın ve seçin **kümeyi [sic] Azure portalında Yönet**.
+2. Bir HDInsight kümesine sağ tıklayın ve **Azure Portal kümeyi Yönet**' i seçin.
 
-Soru sorun ve/veya Visual Studio geri bildirim sağlamak için:
+### <a name="offer-questions-and-feedback-from-visual-studio"></a>Visual Studio 'dan sorularınızı ve geri bildirimleri sunun
 
-1. Sunucu Gezgini'nden gidin **Azure** > **HDInsight**.
+Soru sormak ve/veya Visual Studio 'dan geri bildirim sağlamak için:
 
-2. Sağ **HDInsight** ya da seçin **MSDN Forumu** sorularınızı sormak için veya **geribildirimde** geri bildirim sağlamak için.
+1. Sunucu Gezgini **Azure** > **HDInsight**' ı seçin.
 
-## <a name="link-a-cluster"></a>Küme bağlantı
-Sağ tıklayarak bir küme bağlayabiliyordu **HDInsight** seçip **bir HDInsight kümesini bağlarsınız**. Girin **bağlantı URL'si**, **kullanıcı adı** ve **parola**, tıklayın **sonraki** ardından **son**, küme başarılı HDInsight düğümü altında listelenmelidir.
+2. **HDInsight** ' a sağ tıklayın ve soru sormak Için **MSDN Forumu** ' nu seçin ya da geri bildirimde bulunmak için **geri bildirimde** bulunun.
 
-![Ekran görüntüsü, Data Lake araçları Visual Studio bağlantı küme iletişimi için](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-link-cluster-dialog.png)
+## <a name="link-to-or-edit-a-cluster"></a>Bir kümeyi bağlama veya düzenleme
 
-Sağ tıklayın bağlı küme seçin **Düzenle**, kullanıcıyı küme bilgilerini güncelleştirin. Bir HDInsight kümesi ekleme yalnızca Hive şimdilik destekler.
+> [!NOTE]
+> Şu anda bağlantı için kullanabileceğiniz tek HDInsight kümesi türü bir Hive türüdür.
 
-![Ekran görüntüsü, Data Lake araçları Visual Studio bağlantı kümesi güncelleştirmesi](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-link-cluster-update.png)
+Bir HDInsight kümesini bağlamak için:
+
+1. HDInsight ' **a** **sağ tıklayın ve**ardından HDInsight kümesi bağla iletişim kutusunu göstermek Için **bir HDInsight kümesi bağla** ' yı seçin.
+
+2. *Https\://\<küme&nbsp;name >. azurehdinsight. net*biçiminde bir **bağlantı URL 'si** girin. Başka bir alana gittiğinizde **küme adı** URL 'nizin küme adı bölümüyle otomatik olarak doldurulur. Ardından bir **Kullanıcı adı** ve **parola**girin ve **İleri**' yi seçin.
+
+    ![Bir kümeyi bağlama, HDInsight, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-link-cluster-dialog.png)
+
+3. **Son**’u seçin. Küme bağlama başarılı olursa, küme **HDInsight** düğümü altında listelenir.
+
+Bağlı bir kümeyi güncelleştirmek için kümeye sağ tıklayın ve **Düzenle**' yi seçin. Daha sonra küme bilgilerini güncelleştirebilirsiniz.
+
+![Bağlı kümeyi düzenleme, HDInsight, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-link-cluster-update.png)
 
 ## <a name="explore-linked-resources"></a>Bağlantılı kaynakları araştırma
-Sunucu Gezgini'nde, varsayılan depolama hesabını ve bağlı tüm depolama hesaplarını görebilirsiniz. Varsayılan depolama hesabını genişletirseniz, depolama hesabında kapsayıcıları görebilirsiniz. Varsayılan depolama hesabı ve varsayılan kapsayıcı işaretlenmiştir. Kapsayıcı içeriğini görüntülemek için kapsayıcıların herhangi birine sağ tıklayın.
+Sunucu Gezgini'nde, varsayılan depolama hesabını ve bağlı tüm depolama hesaplarını görebilirsiniz. Varsayılan depolama hesabını genişletirseniz, depolama hesabında kapsayıcıları görebilirsiniz. Varsayılan depolama hesabı ve varsayılan kapsayıcı işaretlenmiştir.
 
-![Sunucu Gezgini’nde Visual Studio için Data Lake Araçları bağlantılı kaynakları listeleme ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-linked-resources.png "Bağlantılı kaynakları listeleme")
+![Sunucu Gezgini içindeki Visual Studio bağlantılı kaynaklarına yönelik Data Lake araçları](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-linked-resources.png)
 
-Bir kapsayıcıyı açtıktan sonra aşağıdaki düğmeleri kullanarak blob’ları karşıya yükleyebilir, silebilir ve indirebilirsiniz:
+Kapsayıcıya sağ tıklayın ve kapsayıcının içeriğini görüntülemek için **kapsayıcıyı görüntüle** ' yi seçin. Bir kapsayıcıyı açtıktan sonra, araç çubuğu düğmelerini kullanarak içerik listesini **yenileyebilir** , **blobu yükleyebilir**, **Seçili Blobları silebilir**, **BLOB 'u açabilir**ve seçili blob 'ları indirebilirsiniz (**farklı kaydet**).
 
-![Sunucu Gezgini’nde Visual Studio için Data Lake Araçları blob işlemlerinin ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-blob-operations.png "Sunucu Gezgini’nde blob yükleme, silme ve indirme")
+![Kapsayıcı listesi ve BLOB işlemleri, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-blob-operations.png)
 
 ## <a name="run-interactive-apache-hive-queries"></a>Etkileşimli Apache Hive sorguları çalıştırma
-[Apache Hive](https://hive.apache.org), Hadoop üzerinde oluşturulmuş bir veri ambarı altyapısıdır. Hive veri özetleme, sorgular ve analiz için kullanılır. Visual Studio’dan Hive sorguları çalıştırmak üzere Visual Studio için Data Lake Araçları’nı kullanabilirsiniz. Hive hakkında daha fazla bilgi için bkz. [HDInsight ile Hive kullanma Apache](hdinsight-use-hive.md).
+[Apache Hive](https://hive.apache.org), Hadoop üzerinde oluşturulmuş bir veri ambarı altyapısıdır. Hive veri özetleme, sorgular ve analiz için kullanılır. Visual Studio’dan Hive sorguları çalıştırmak üzere Visual Studio için Data Lake Araçları’nı kullanabilirsiniz. Hive hakkında daha fazla bilgi için bkz. [Azure HDInsight 'ta Apache Hive ve HiveQL nedir?](hdinsight-use-hive.md).
 
-[Etkileşimli Sorgu](../interactive-query/apache-interactive-query-get-started.md), Apache Hive 2.1 sürümünde [LLAP üzerinde Hive](https://cwiki.apache.org/confluence/display/Hive/LLAP) kullanır. Etkileşimli Sorgu büyük, depolanmış veri kümelerinde karmaşık veri ambarı stili sorgulara etkileşim katar. Etkileşimli Sorgu üzerinde Hive sorgularının çalıştırılması, geleneksel Hive toplu işlerine kıyasla çok daha hızlıdır. 
+[Azure HDInsight 'Ta etkileşimli sorgu](../interactive-query/apache-interactive-query-get-started.md) Apache Hive 2,1 ' de [LLAP üzerinde Hive](https://cwiki.apache.org/confluence/display/Hive/LLAP) kullanır. Etkileşimli sorgu, büyük, depolanmış veri kümelerinde karmaşık, veri ambarı stili sorgulara etkileşim getirir. Etkileşimli sorgu üzerinde Hive sorgularının çalıştırılması, geleneksel Hive toplu iş işlemlerinden çok daha hızlıdır. 
 
 > [!NOTE]  
 > Etkileşimli Hive sorgularını yalnızca bir [HDInsight Etkileşimli Sorgu](../interactive-query/apache-interactive-query-get-started.md) kümesine bağlandığınızda çalıştırabilirsiniz.
 
 Ayrıca, Visual Studio için Data Lake Araçları’nı kullanarak bir Hive işinin içeriğini görebilirsiniz. Visual Studio için Data Lake Araçları bazı Hive işlerinin Yarn günlüklerini toplar ve yüzeye çıkarır.
 
-Sunucu Gezgini'nden gidin **Azure** > **HDInsight** ve kümenizi seçin.  Bu, başlangıç noktası olarak bölümlerde izlemek için Sunucu Gezgini olacaktır.
+**Sunucu Gezgini** **Azure** > **HDInsight** ' ı seçin ve kümenizi seçin.  Bu düğüm, Bölüm izlemek için **Sunucu Gezgini** başlangıç noktasıdır.
 
-### <a name="view-hivesampletable"></a>Görünüm hivesampletable
-Tüm HDInsight kümeleri adlı bir varsayılan örnek Hive tablosuna sahiptir `hivesampletable`.  
+### <a name="view-hivesampletable"></a>Hivesampletable 'ı görüntüle
 
-Gidin, kümenizden **Hive veritabanları** > **varsayılan** > **hivesampletable**.
+Tüm HDInsight kümeleri `hivesampletable`adlı varsayılan bir örnek Hive tablosuna sahiptir.  
 
-* Görüntülenecek `hivesampletable` şema:  
-Genişletin **hivesampletable**.
+Kümeinizden **Hive veritabanları** > **varsayılan** > **hivesampletable**' ı seçin.
 
-* Görüntülenecek `hivesampletable` veri:  
-Sağ **hivesampletable**seçip **ilk 100 satırı görüntüle**.  Bu, Hive ODBC sürücüsünü kullanarak aşağıdaki Hive sorgusunu çalıştırmaya eşdeğerdir:
+- `hivesampletable` şemasını görüntülemek için:
 
-   `SELECT * FROM hivesampletable LIMIT 100`
+    **Hivesampletable**öğesini genişletin. `hivesampletable` sütunlarının adları ve veri türleri gösterilir.
 
-  Satır sayısını özelleştirebilirsiniz.
+- `hivesampletable` verilerini görüntülemek için:
 
-  ![HDInsight Hive Visual Studio şema sorgusunun ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-hive-schema.png "Hive sorgu sonuçları")
+    **Hivesampletable**öğesine sağ tıklayın ve **Ilk 100 satırı görüntüle**' yi seçin. 100 sonuçlarının listesi **Hive tablosu: hivesampletable** penceresinde görünür. Bu eylem, Hive ODBC sürücüsünü kullanarak aşağıdaki Hive sorgusunu çalıştırmaya eşdeğerdir:
+
+    `SELECT * FROM hivesampletable LIMIT 100`
+
+    Satır sayısını, satır **sayısını**değiştirerek özelleştirebilirsiniz. aşağı açılan listeden 50, 100, 200 veya 1000 satırları seçebilirsiniz.
 
 ### <a name="create-hive-tables"></a>Hive tabloları oluşturma
-Bir Hive tablosu oluşturmak için GUI’yi ya da Hive sorgularını kullanabilirsiniz. Hive sorguları kullanma hakkında daha fazla bilgi için bkz: [Apache Hive sorgularını çalıştırma](#run.queries).
+Bir Hive tablosu oluşturmak için GUI’yi ya da Hive sorgularını kullanabilirsiniz. Hive sorguları kullanma hakkında daha fazla bilgi için bkz. [Hive sorguları oluşturma ve çalıştırma](#create-and-run-hive-queries).
 
-1. Gidin, kümenizden **Hive veritabanları** > **varsayılan**.
+1. Kümeinizden **varsayılan** > **Hive veritabanları** ' nı seçin.
 
-2. Sağ **varsayılan**seçip **Create Table**.
+2. **Varsayılan**' a sağ tıklayın ve **tablo oluştur**' u seçin.
 
-3. Tabloyu istediğiniz gibi yapılandırın.  
+3. Tabloyu yapılandırın.
 
-4. Yeni Hive tablosu oluşturmak üzere işi göndermek için **Tablo Oluştur**’u seçin.
+4. Yeni Hive tablosunu oluşturan işi göndermek için **tablo oluştur** düğmesini seçin.
 
-    ![HDInsight Visual Studio Araçları Tablo Oluştur penceresinin ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-create-hive-table.png "Hive tablosu oluştur")
+    ![Tablo penceresi, Hive, HDInsight kümesi, Visual Studio oluştur](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-create-hive-table.png)
 
-### <a name="run.queries"></a>Oluşturma ve Hive sorguları çalıştırma
+### <a name="create-and-run-hive-queries"></a>Hive sorguları oluşturma ve çalıştırma
 Hive sorguları oluşturmak ve çalıştırmak için iki seçeneğiniz vardır:
 
 * Geçici sorgular oluşturma
 * Hive uygulaması oluşturma
 
-Oluşturmak ve geçici sorguları çalıştırmak için:
+#### <a name="create-an-ad-hoc-query"></a>Geçici sorgu oluşturma
 
-1. Sorguyu çalıştırmak ve istediğiniz kümeye sağ **Hive sorgusu yaz**.  
+Geçici sorgu oluşturmak ve çalıştırmak için:
 
-2. Aşağıdaki Hive sorgusunu girin:
+1. Sorguyu çalıştırmak istediğiniz kümeye sağ tıklayın ve **Hive sorgusu yaz**' ı seçin.  
+
+2. Hive sorgusu girin.
+
+    Hive düzenleyicisi IntelliSense’i destekler. Visual Studio için Data Lake Araçları, Hive betiğinizi düzenlerken uzak meta verilerin yüklenmesini destekler. Örneğin, `SELECT * FROM`yazarsanız, IntelliSense önerilen tüm tablo adlarını listeler. Bir tablo adı belirtildiğinde, IntelliSense sütun adlarını listeler. Araçlar çoğu Hive DML deyimlerini, alt sorguları ve yerleşik UDF'leri destekler.
+
+    ![IntelliSense örnek 1, Hive geçici sorgu, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-intellisense-table-names.png)
+
+    ![IntelliSense örnek 2, Hive geçici sorgu, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-intellisense-column-names.png)
+
+    > [!NOTE]  
+    > IntelliSense yalnızca HDInsight araç çubuğunda seçilen kümelerin meta verilerini önerir.
+
+    Kullanabileceğiniz örnek bir sorgu aşağıda verilmiştir:
 
     ```sql
     SELECT devicemodel, COUNT(devicemodel) AS deviceCount
@@ -180,116 +219,113 @@ Oluşturmak ve geçici sorguları çalıştırmak için:
     ORDER BY devicemodel
     ```
 
-    Hive düzenleyicisi IntelliSense’i destekler. Visual Studio için Data Lake Araçları, Hive betiğinizi düzenlerken uzak meta verilerin yüklenmesini destekler. Örneğin, `SELECT * FROM`, IntelliSense önerilen tablo adlarını listeler. Bir tablo adı belirtildiğinde, IntelliSense sütun adlarını listeler. Araçlar çoğu Hive DML deyimlerini, alt sorguları ve yerleşik UDF'leri destekler.
-
-    ![HDInsight Visual Studio Araçları IntelliSense örnek 1’in ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-intellisense-table-names.png "U-SQL IntelliSense")
-
-    ![HDInsight Visual Studio Araçları IntelliSense örnek 2’nin ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-intellisense-column-names.png "U-SQL IntelliSense")
-
-   > [!NOTE]  
-   > IntelliSense yalnızca HDInsight araç çubuğunda seçilen kümelerin meta verilerini önerir.
-
 3. Yürütme modunu seçin:
 
     * **Etkileşimli**  
 
-      Olun **etkileşimli** seçilir ve ardından **yürütme**.
+        İlk açılan listede **etkileşimli**' i seçin ve ardından **Yürüt**' ü seçin.
 
-      ![Sorgusunun ekran görüntüsü ve yürütme](./media/apache-hadoop-visual-studio-tools-get-started/execute.png)  
+        ![Etkileşimli mod, Hive geçici sorgu, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-query-execute.png)  
 
     * **Batch**  
 
-      Olun **Batch** seçilir ve ardından **Gönder**.  Gelişmiş gönderme seçeneğini belirlerseniz, yapılandırma **iş adı**, **bağımsız değişkenleri**, **ek yapılandırmalar**, ve **durum dizini**komut.
+        İlk açılan listede **toplu işlem**' i seçin ve ardından **Gönder** ' i seçin (veya **Gönder** ' ın yanındaki açılan simgeyi seçin ve **Gelişmiş**' i seçin).
 
-      ![Sorgu ve batch ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/batch.png)  
+        ![Batch modu, Hive geçici sorgu, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-query-batch.png)
 
-      ![HDInsight Hadoop Hive sorgusunun ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-submit-jobs-advanced.png "Sorgu gönderme")
+        Gelişmiş gönder seçeneğini belirlerseniz, **betiği gönder** iletişim kutusu görüntülenir. Betik için **Iş adı**, **bağımsız değişkenler**, **ek yapılandırma**ve **durum dizini** yapılandırın.
+
+        ![Betik Gönder iletişim kutusu, Hive geçici sorgu, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-submit-jobs-advanced.png)
 
       > [!NOTE]  
-      > Etkileşimli sorgu kümelerine toplu gönderebilirsiniz değil.  Etkileşimli mod kullanmanız gerekir.
+      > Etkileşimli sorgu kümelerine toplu işler gönderemezsiniz.  Etkileşimli mod kullanmanız gerekir.
+
+#### <a name="create-a-hive-application"></a>Hive uygulaması oluşturma
 
 Hive çözümü oluşturmak ve çalıştırmak için:
 
-1. Menü çubuğundan gidin **dosya** > **yeni** > **proje...** .
+1. Menü çubuğundan **dosya** > **Yeni** > **Proje**' yi seçin.
 
-2. Sol bölmede gidin **yüklü** > **Azure Data Lake** > **HIVE (HDInsight)** .  
+2. **Yeni proje oluştur** penceresinde, arama kutusunu seçin ve **Hive**yazın. Ardından **Hive uygulaması** ' nı seçin ve **İleri**' yi seçin.
 
-3. Orta bölmede seçin **Hive Uygulaması**’nı seçin. Özellikleri girip **Tamam**’ı seçin.
+3. **Yeni projeyi yapılandırın** penceresinde bir **Proje adı**girin, proje **konumunu**seçin veya oluşturun ve ardından **Oluştur**' u seçin.
 
-    ![HDInsight Visual Studio Araçları yeni Hive projesinin ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-new-hive-project.png "Visual Studio’dan Hive uygulamaları oluşturma")
+    ![Yeni Hive uygulaması, yeni proje pencerenizi yapılandırma, HDInsight Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-new-hive-project.png)
 
 4. Betiği açmak için **Çözüm Gezgini**’nde **Script.hql** öğesine çift tıklayın.
 
-### <a name="view-job-summary-and-output"></a>İş özeti görüntüle ve çıkış
+### <a name="view-job-summary-and-output"></a>İş özetini ve çıktıyı görüntüleme
 
-İş özetinde arasında biraz farklılık gösterir **Batch** ve **etkileşimli** modu.
+İş Özeti, **Batch** ve **etkileşimli** mod arasında biraz farklılık gösterir.
 
-![İş özeti](./media/apache-hadoop-visual-studio-tools-get-started/jobSummary.png "Hive iş özeti")
+![Hive iş Özeti pencereleri, toplu iş ve etkileşimli mod, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-job-summary.png)
 
-Kullanım **Yenile** iş durumu olana kadar durumunu güncelleştirmek için düğme **tamamlandı**.  
+İş durumu **tamamlandı**olarak değiştirilene kadar durumu güncelleştirmek için **Yenile** simgesini kullanın.  
 
-* İş ayrıntıları için **Batch** modunda görmek için alt kısımdaki bağlantıları seçin **iş sorgusu**, **iş çıktısı**, **iş günlüğü**, veya **Yarn günlüğü**.
+* **Batch** modundan iş ayrıntıları Için, **iş sorgusunu**, **iş çıkışını**veya **Iş günlüğünü**görmek ya da **Yarn günlüklerini görüntülemek**için alttaki bağlantıları seçin.
 
-* İş ayrıntıları için **etkileşimli** modu, bkz: sekmeler **çıkış** ve **HiveServer2 çıkışı**.
+* **Etkileşimli** moddan iş ayrıntıları için **Çıkış** ve **HiveServer2 çıkış** bölmeleri bölümüne bakın.
 
-  ![iş ayrıntıları](./media/apache-hadoop-visual-studio-tools-get-started/tabs.png "Hive işi ayrıntıları")
+    ![Hive etkileşimli iş çıktısı, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-job-details.png)
 
-### <a name="view-job-graph"></a>İş grafiği görüntüle
+### <a name="view-job-graph"></a>İş grafiğini görüntüle
 
-Şu anda iş grafiklerini, yalnızca yürütme altyapısı Tez kullanan Hive işleri için gösterilir.  Tez etkinleştirme hakkında daha fazla bilgi için bkz: [Apache Hive, HDInsight kullanma](hdinsight-use-hive.md).  Ayrıca bkz [Map Reduce yerine Apache Tez kullanma](../hdinsight-hadoop-optimize-hive-query.md#use-apache-tez-instead-of-map-reduce).  
+Şu anda iş grafikleri yalnızca, yürütme altyapısı olarak tez kullanan Hive işleri için gösterilir.  Tez 'yi etkinleştirme hakkında bilgi için bkz. [Azure HDInsight 'ta Apache Hive ve HiveQL nedir?](hdinsight-use-hive.md).  Ayrıca bkz. [harita azaltma yerine Apache tez kullanın](../hdinsight-hadoop-optimize-hive-query.md#use-apache-tez-instead-of-map-reduce).  
 
-Köşe içindeki tüm işleçleri görüntülemek için iş grafiğinin köşelerine çift tıklayın. Ayrıca, işleç hakkında daha fazla ayrıntı görmek için belirli bir işleci işaret edebilirsiniz.
+Köşe içindeki tüm işleçleri görüntülemek için, iş grafiğinin köşelerine çift tıklayın. Ayrıca, işleç hakkında daha fazla ayrıntı görmek için belirli bir işleci işaret edebilirsiniz.
 
-Hiçbir Tez uygulaması başlatılmadan, Tez yürütme altyapısı belirtilmiş olsa bile iş grafiğinin görünmeyebilir.  Bunun nedeni işin DML deyimleri içermemesi veya DML deyimlerinin bir Tez uygulaması başlatılmadan döndürebilir gerçekleşebilir. Örneğin, `SELECT * FROM table1` Tez uygulamasını başlatmaz.
+Tez yürütme altyapısı olarak belirtilmiş olsa bile, hiçbir tez uygulaması başlatılmasa bile iş grafiği görünmeyebilir.  Bu durum, iş DML deyimlerini içermediğinden veya DML deyimleri tez uygulaması başlatmadan döndürebileceğinden bu durum oluşabilir. Örneğin, `SELECT * FROM table1` tez uygulamasını başlatamaz.
 
-![İş grafiği](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-fast-path-hive-execution.png "Hive iş özeti")
+![Apache Hive iş grafiği, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-fast-path-hive-execution.png)
 
+### <a name="view-task-execution-detail"></a>Görev yürütme ayrıntılarını görüntüleme
 
-### <a name="task-execution-detail"></a>Görev Yürütme ayrıntısı
+İş Grafında, Hive işleri için yapılandırılmış ve görselleştirilmiş bilgileri almak üzere **görev yürütme ayrıntısı** ' nı seçebilirsiniz. Daha fazla iş ayrıntısı da alabilirsiniz. Performans sorunları oluşursa, sorun hakkında daha fazla bilgi almak için bu görünümü kullanabilirsiniz. Örneğin, her bir görevin nasıl çalıştığı ve her görevle ilgili ayrıntılı bilgilerin yanı sıra (veri okuma/yazma, zamanlama/başlangıç/bitiş zamanı ve daha fazlası) hakkında bilgi alabilirsiniz. İş yapılandırmalarını veya sistem mimarisini görselleştirilmiş bilgilere göre ayarlamak için bilgileri kullanın.
 
-İş grafiği, seçtiğiniz **görev yürütme ayrıntısı** almak için yapılandırılmış ve görselleştirilmiş bilgiler Hive işleri için. Bununla birlikte, daha fazla iş ayrıntısı alabilirsiniz. Performans sorunları oluşursa, sorun hakkında daha fazla bilgi almak için bu görünümü kullanabilirsiniz. Örneğin, her bir görevin nasıl çalıştığı hakkında bilgi ve her görev (veri okuma/yazma, zamanlama/başlangıç/bitiş zamanı vb.) hakkında ayrıntılı bilgi elde edebilirsiniz. İş yapılandırmalarını veya sistem mimarisini görselleştirilmiş bilgilere göre ayarlamak için bilgileri kullanın.
-
-![Data Lake Visual Studio Araçları Görev Yürütme Görünümünün ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-task-execution-view.png "Görev Yürütme Görünümü")
-
+![Görev yürütme görünümü penceresi, Data Lake Visual Studio Araçları](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-task-execution-view.png)
 
 ### <a name="view-hive-jobs"></a>Hive İşlerini Görüntüleme
+
 Hive işleri için iş sorguları, iş çıktısı, iş günlükleri ve Yarn günlüklerini görüntüleyebilirsiniz.
 
-Araçların en son sürümünde Yarn günlüklerini toplayarak ve görünmesini sağlayarak Hive işlerinizin içeriğini görebilirsiniz. Yarn günlüğü, performans sorunlarını araştırmanıza yardımcı olabilir. HDInsight'ın Yarn günlüklerini nasıl topladığı hakkında daha fazla bilgi için bkz. [HDInsight uygulama günlüklerine programlamayla erişme](../hdinsight-hadoop-access-yarn-app-logs.md).
+Araçların en son sürümünde Yarn günlüklerini toplayarak ve görünmesini sağlayarak Hive işlerinizin içeriğini görebilirsiniz. Yarn günlüğü, performans sorunlarını araştırmanıza yardımcı olabilir. HDInsight 'ın Yarn günlüklerini nasıl topladığı hakkında daha fazla bilgi için bkz. [erişim Apache HADOOP YARN uygulama günlükleri](../hdinsight-hadoop-access-yarn-app-logs-linux.md).
 
 Hive işlerini görüntülemek için:
 
-1. Bir HDInsight kümesine sağ tıklayın ve seçin **işleri görüntüle**. Küme üzerinde çalıştırılan Hive işlerinin listesi görüntülenir.  
+1. Bir HDInsight kümesine sağ tıklayın ve **Işleri görüntüle**' yi seçin.
 
-2. Bir iş seçin. **Hive İş Özeti** penceresinde aşağıdakilerden birini seçin:
+    ![Işleri görüntüleme, Apache Hive, HDInsight kümesi, Visual Studio](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-view-hive-jobs.png)
+
+    Küme üzerinde çalıştırılan Hive işlerinin listesi görüntülenir.  
+
+2. Bir iş seçin. **Hive Iş Özeti** penceresinde, aşağıdaki bağlantılardan birini seçin:
     - **İş Sorgusu**
     - **İş Çıktısı**
     - **İş Günlüğü**  
     - **Yarn günlüğü**
 
-    ![HDInsight Visual Studio Araçları Hive İşlerini Görüntüle penceresinin ekran görüntüsü](./media/apache-hadoop-visual-studio-tools-get-started/hdinsight-visual-studio-tools-view-hive-jobs.png "Hive işlerini görüntüle")
+## <a name="run-apache-pig-scripts"></a>Apache Pig betiklerini çalıştır
 
+1. Menü çubuğundan **dosya** > **Yeni** > **Proje**' yi seçin.
 
-## <a name="run-apache-pig-scripts"></a>Apache Pig betikleri çalıştırma
+2. **Başlangıç** penceresinde arama kutusunu seçin ve **Pig**girin. Sonra **Pig uygulamasını** seçin ve **İleri**' yi seçin.
 
-1. Menü çubuğundan gidin **dosya** > **yeni** > **proje...** .
+3. **Yeni projenizi yapılandırın** penceresinde bir **Proje adı**girin ve proje için bir **konum** seçin veya oluşturun. Ardından **Oluştur**’u seçin.
 
-2. Sol bölmede gidin **yüklü** > **Azure Data Lake** > **Pig (HDInsight)** .  
-
-3. Orta bölmede seçin **Pig uygulama**. Özellikleri girip **Tamam**’ı seçin.
-
-4. İçinde **Çözüm Gezgini**, çift **Script.pig** komut dosyasını açın.
+4. IDE **Çözüm Gezgini** bölmesinde, Script **. Pig** öğesine çift tıklayarak betiği açın.
 
 ## <a name="feedback-and-known-issues"></a>Geri bildirim ve bilinen sorunlar
+
 * Null değerlerle başlatılan sonuçların gösterilmediği bir sorun düzeltilmiştir. Bu sorun sizi engelliyorsa destek ekibine başvurun.
+
 * Visual Studio tarafından oluşturulan HQL betiği kullanıcının yerel bölge ayarlarına bağlı olarak kodlanır. Betiği bir kümeye ikili dosya olarak yüklerseniz betik doğru şekilde yürütülmez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
+
 Bu makalede Visual Studio’dan HDInsight kümelerine bağlanmak üzere Visual Studio için Data Lake Araçları paketini kullanmayı öğrendiniz. Ayrıca bir Hive sorgusu çalıştırmayı öğrendiniz. Daha fazla bilgi için şu makalelere bakın:
 
-* [Visual Studio için Data Lake araçları kullanarak Apache Hive sorguları çalıştırma](apache-hadoop-use-hive-visual-studio.md)
-* [HDInsight'ta Hadoop Hive kullanma](hdinsight-use-hive.md)
-* [HDInsight Apache Hadoop kullanmaya başlama](apache-hadoop-linux-tutorial-get-started.md)
-* [HDInsight, Apache Hadoop işlerini gönderme](submit-apache-hadoop-jobs-programmatically.md)
-* [HDInsight, Apache Hadoop ile twitter verilerini çözümleme](../hdinsight-analyze-twitter-data.md)
-
+* [Visual Studio için Data Lake araçlarını kullanarak Apache Hive sorgularını çalıştırma](apache-hadoop-use-hive-visual-studio.md)
+* [Azure HDInsight 'ta Apache Hive ve HiveQL nedir?](hdinsight-use-hive.md)
+* [Apache Hadoop kümesi oluşturma-şablon](apache-hadoop-linux-tutorial-get-started.md)
+* [HDInsight 'ta Apache Hadoop işleri gönderme](submit-apache-hadoop-jobs-programmatically.md)
+* [HDInsight üzerinde Apache Hive ve Apache Hadoop kullanarak Twitter verilerini çözümleme](../hdinsight-analyze-twitter-data-linux.md)

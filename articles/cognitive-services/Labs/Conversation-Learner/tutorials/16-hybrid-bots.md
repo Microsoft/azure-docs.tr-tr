@@ -1,7 +1,7 @@
 ---
-title: Konuşma Öğrenici teknolojileri - Microsoft Bilişsel hizmetler oluşturmaya diğer bot ile kullanma | Microsoft Docs
+title: Diğer bot oluşturma teknolojileriyle Conversation Learner kullanma-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici teknolojileri oluşturan diğer bot ile kullanmayı öğrenin.
+description: Conversation Learner diğer bot oluşturma teknolojileriyle nasıl kullanacağınızı öğrenin.
 services: cognitive-services
 author: mattm
 manager: larsliden
@@ -10,124 +10,125 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 07/13/2018
 ms.author: nitinme
-ms.openlocfilehash: d6af927e395532e43c7cc51c39665e2e42ac6781
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: c964c62c34f952a547d077e93e7bb4d0eb7b192d
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66389969"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68703672"
 ---
-# <a name="how-to-use-conversation-learner-with-other-bot-building-technologies"></a>Konuşma Öğrenici teknolojileri oluşturan diğer bot ile kullanma
+# <a name="how-to-use-conversation-learner-with-other-bot-building-technologies"></a>Diğer bot oluşturma teknolojileriyle Conversation Learner kullanma
 
-Bu öğretici, konuşma Öğrenici teknolojileri oluşturan diğer bot ile kullanma ve bellek (veya durumu) arasında bu teknolojilerden nasıl paylaşılabileceğini kapsar. 
+Bu öğreticide, diğer bot oluşturma teknolojileriyle Conversation Learner kullanımı ve bu teknolojiler arasında belleğin (veya durumun) nasıl paylaşılacağını ele alınmaktadır. 
 
 ## <a name="video"></a>Video
 
-[![Karma Botlar öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_Hybrid_Applications_Preview)](https://aka.ms/cl_Tutorial_v3_Hybrid_Applications)
+[![Karma botlar öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_Hybrid_Applications_Preview)](https://aka.ms/cl_Tutorial_v3_Hybrid_Applications)
 
 ## <a name="requirements"></a>Gereksinimler
-Bu öğretici, günlük iletişim kutuları, olmayan günlük iletişim Web kullanıcı arabirimini oluşturmak için robot öykünücüyü gerektirir. Bot Framework Öykünücünün kurulumunu hakkında daha fazla bilgi edinilebilir [burada](https://docs.microsoft.com/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0). 
+Bu öğreticide, günlük Iletişim kutusu Web Kullanıcı arabirimine değil günlük iletişimleri oluşturmak için bot öykünücüsünün kullanılması gerekir. Bot Framework öykünücüsünü ayarlama hakkında daha fazla bilgiye [buradan](https://docs.microsoft.com/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0)ulaşabilirsiniz. 
 
-Bu öğreticide, karma Öğreticisi bot çalışıyor olması gerekir:
+Bu öğretici karma Öğretici bot 'ın çalışmasını gerektirir:
 
     npm run tutorial-hybrid
 
 ## <a name="details"></a>Ayrıntılar
 
-Konuşma Öğrenici denetiminde olsa da, tüm durum konuşma Öğrenici oturumu göre konuşma Öğrenici'nın bellek Yöneticisi'nde depolanmış olması gerekir. Machine learning durumu konuşma sürücü nasıl belirlemek için kullanır. Bu özellik gereklidir. Dış durum oturumu başladığında çağrılan OnSessionStartCallback de Konuşma Öğrenici uygulamasına geçirilebilir. Oturum sona erdiğinde iç durumu kullanıma OnSessionEndCallback tarafından döndürülebilir.
+Conversation Learner denetimde olduğunda, Conversation Learner oturumuna göre tüm durum Conversation Learner bellek yöneticisinde depolanmalıdır. Bu, makine öğrenimi, konuşmayı nasıl kullanacağınızı anlamak için durumunu kullandığı için gereklidir. Dış durum, oturum başladığında çağrılan OnSessionStartCallback içindeki Conversation Learner geçirilebilir. Oturum sonlandırıldığında OnSessionEndCallback tarafından iç durum döndürülebilir.
 
-Ayrıca, bazı başlangıç durumunu alır ve değerler döndüren bir işlev çağrısı konuşma Öğrenici neredeyse düşünebilirsiniz.
+Conversation Learner, bir ilk durumu alan ve değer döndüren bir işlev çağrısı olarak neredeyse düşünebilirsiniz.
 
-Bu örnekte, iki farklı sistemler kullanan bir karma robotun oluşturacak:
-1. Konuşma Öğrenici modeli <br/>
-    Konuşma öğrenici modeli geçerli oturum tabanlı robotun sonraki eylemi belirlemek için kullanır. Bot bu bölümü bir ilk durumu parça götürür `isOpen` (gösterir bir deponun açık veya kapalı olup olmadığını) ve başka bir parçasının durumunu döndürür `purchaseItem` (bir öğenin kullanıcı adını satın).
+Bu örnekte, iki farklı sistem kullanan bir karma bot oluşturacaksınız:
+1. Conversation Learner modeli <br/>
+    Geçerli oturuma göre bot 'un sonraki eylemini öğrenmek için konuşmayı öğrenme modelini kullanır. Bot 'un bu bölümü ilk durum `isOpen` parçasını alır (bir deponun açık veya kapalı olduğunu gösterir) ve başka bir durum `purchaseItem` parçası (kullanıcının satın aldığı bir öğenin adı) döndürür.
 
-2. Eşleşen metin <br />
-    Yalnızca belirli dizeleri için gelen metni inceler ve yanıt verir. Bot bu parçası Botlar yöneten diğer depolama mekanizmaları ve CL oturumu başlatmak için sorumludur. Özellikle bu üç değişkenin yönetir: `usingConversationLearner`, `storeIsOpen`, ve `purchaseItem`.
+2. Metin eşleştirme <br />
+    Yalnızca belirli dizeler için gelen metne bakar ve yanıt verir. Bot 'un bu bölümü, botların diğer depolama mekanizmalarını yönetir ve CL oturumunun başlatılmasından sorumludur. Özellikle üç değişkeni yönetir: `usingConversationLearner`, `storeIsOpen`, ve `purchaseItem`.
 
-Bu tanıtımda kullanılan model göz alarak başlayalım.
+Bu tanıtımda kullanılan modele göz atacağız.
 
-### <a name="open-the-demo"></a>Tanıtım açın
+### <a name="open-the-demo"></a>Tanıtımı açın
 
-Web kullanıcı Arabirimi "İçeri aktarma eğitimler" tıklayın ve "Öğreticisi-16-HybridBot" adlı modelini seçin.
+Web Kullanıcı arabiriminde "öğreticileri Içeri aktar" düğmesine tıklayın ve "öğretici-16-HybridBot" adlı modeli seçin.
 
 ## <a name="entities"></a>Varlıklar
 
-Varlıkları sayfasını açın ve iki varlık dikkat edin: `isOpen` ve `purchaseItem`
+Varlıklar sayfasını açın ve iki varlık olduğuna dikkat edin `isOpen` : ve`purchaseItem`
 
-Bu varlıkları nasıl kullanılacağını anlamak için dosyayı açın: `C:\<installedpath>\src\demos\tutorialHybrid.ts` geri çağırmaları aramak için.
+Bu varlıkların nasıl kullanıldığını anlamak için dosyayı açın: `C:\<installedpath>\src\demos\tutorialHybrid.ts` geri çağırmaları aramak için.
 
-Dikkat kodda `OnSessionStartCallback` değerini kopyalar `storeIsOpen` değeri olarak Botbuilder'da konuşma depolamadan `isOpen` konuşma Öğrenici kullanılabilir olacak şekilde varlık. Aşağıdaki kodu bakın:
+İçindeki `OnSessionStartCallback` kodun,, Conversation Learner için kullanılabilir olması için `storeIsOpen` , botbuilder konuşma depolamadan değeri, `isOpen` varlık değeri olarak kopyaladığına dikkat edin. Aşağıdaki koda bakın:
 
 ![](../media/tutorial17_sessionstart.PNG)
 
-Benzer şekilde, kodda `OnSessionEndCallback` varlık değeri kopyalar (oturum öğrenilen etkinlik ve değil yalnızca bir zaman aşımı nedeniyle sonlandırıldı) `purchaseItem` Botbuilder'da depolamaya giden `purchaseItem`. Aşağıdaki kodu bakın:
+Benzer şekilde, içindeki `OnSessionEndCallback` kod (oturum yalnızca öğrenilmiş bir etkinlik nedeniyle sonlandırıldıysa ve yalnızca bir zaman aşımı değil), varlığın `purchaseItem` değerini botbuilder depolama alanına `purchaseItem`kopyalar. Aşağıdaki koda bakın:
 
 ![](../media/tutorial17_sessionend.PNG)
 
-Artık eylemlerini gözden geçirelim.
+Şimdi eylemlere göz atalım.
 
 ## <a name="actions"></a>Eylemler
 
-Model, dört eylem olduğuna dikkat edin.
+Modelde dört eylem olduğuna dikkat edin.
 
-Eylemler için hedeflenen kurallar aşağıdaki gibidir:
+Eylemlerin amaçlanan kuralları aşağıdaki gibidir:
 
-- Varsa `isOpen` varlık olarak ayarlanmışsa, robot "Ne satın etmek istiyorsunuz?" sorar ve depolamak, `puchaseItem` yuvası.
-- Varsa `isOpen` , robot, "Ben kapalı Üzgünüz" olmadığını varsayalım, ayarlı değil.
-- Diğer iki eylem türlerinin `END_SESSION`.
-- END_SESSION eylemi için ConversationLearner konuşma tamamlandığını gösterir.
+- `isOpen` Varlık ayarlandıysa, bot "ne satın almak istiyorsunuz?" soracaktır. ve bunu `puchaseItem` yuvada depolayın.
+- `isOpen` Ayarlanmamışsa, bot "özür dileriz" diyorum.
+- Diğer iki eylem türüdür `END_SESSION`.
+- END_SESSION eylemi, görüşmenin tamamlandığını öğrendiğini gösterir.
 
-### <a name="overall-bot-logic"></a>Genel Bot mantığı
+### <a name="overall-bot-logic"></a>Genel bot mantığı
 
-Olması durumunda Bot durumun ilk gördüğünüz `usingConversationLearner` bayrağını ayarlayın, biz denetimi konuşma Öğrenici geçirin. Aksi durumda, biz denetimi başka bir şeye geçirin.  Bu örnekte, biz basit metin eşleşen gösteriyor, ancak bu LUIS, soru-cevap oluşturucu ve konuşma Öğrenici bile başka bir örneği gibi başka bir Bot teknolojisi olabilir.
+İlk olarak, bot durumunun `usingConversationLearner` bayrağı ayarlandıysa Conversation Learner denetimi geçiyoruz. Aksi takdirde, denetimi başka bir şeye geçiyoruz.  Bu örnekte, basit metin eşleştirme gösteriliyor, ancak bu, LUSıS, QnA yapıcısı ve hatta başka bir Conversation Learner örneği de dahil olmak üzere başka bir bot teknolojisi olabilir.
 
-Bir yol açmaya ihtiyacımız ve yakın bir dize yapmamız için deponun "open store" ve "Kapat mağaza" ile karşılaştırın ve "storeIsOpen" bayrağını ayarlayın.
+Kullanıcının mağazayı açması ve kapatması için bir yönteme ihtiyacımız var, bu yüzden "açık mağaza" ve "depoyu kapat" ile bir dize karşılaştırması yaptık ve "storeIsOpen" bayrağını ayarlayacağız.
 
-Ardından, konuşma Öğrenici Modelimizi işleme denetim devretmeyi tetiklemek için bir yol gerekir. Biz, "Atölye" dizesi olarak eşleştirme, aşağıdakileri yapın:
-- Ayarlama `usingConversationLearner` Botun bellek bayrağı.
-- Konuşma Öğrenici Modelimizi "StartSession" yöntemi çağırın.  Bu "hangi başlatacak onSessionStartCallback" tetikleyecek `isOpen` varlık değeri
+Daha sonra, Conversation Learner modelinize denetim sağlamak için bir yol gerekir. "Shop" dizesiyle eşleştiğimiz zaman şunları yaptık:
+- Bot 'ın belleğindeki bayrağını ayarlayın. `usingConversationLearner`
+- Conversation Learner modelimizde "StartSession" yöntemini çağırın.  Bu işlem, `isOpen` varlık değerini başlatacak olan "onsessionstartcallback" öğesini tetikler
 
 Aşağıya bakın:
 
 ![](../media/tutorial17_useConversationLearner.PNG)
 
-Ayrıca bir "son bu satın alma öğeyi görüntüler geçmişi" metin eşleşme desteklemiyoruz.
-Son olarak, başka bir şey belirtilmişse kullanılabilir kullanıcı komutları gösterilir
+Ayrıca, bu son satın alma öğesini görüntüleyen "geçmiş" e bir metin eşleşmesi de yaptık.
+Son olarak, başka bir şey yazılmışsa, kullanılabilir Kullanıcı komutlarını görüntüliyoruz
 
-## <a name="train-dialog"></a>Train iletişim
+## <a name="train-dialog"></a>Iletişim kutusunu eğitme
 
-Bu öğreticide, zaten önceden eğitilmiş modelidir.  Biz, başlangıç etkisini görmek ve uygulamada oturum geri çağırmaları sonlandırmak için tam bot test eder.
+Bu öğretici için, model önceden eğitilmiş.  Uygulamada başlangıç ve bitiş oturumu geri çağırmaları etkisini görmek için tam bot 'ı test edeceğiz.
 
-## <a name="testing-the-bot"></a>Bot test etme
+## <a name="testing-the-bot"></a>Bot test ediliyor
 
-Tek konuşma daha yalın modeli botlar yalnızca konuşma Öğrenici modeli tarafından ele alınır gösterebilirsiniz gibi bu konuşma Öğrenici Arabiriminde test etmek mümkün olmayacaktır.
+Tek konuşmaya leaner model botları 'nın aksine, bunu yalnızca Conversation Learner modeli tarafından işlenen öğeleri gösterebildiği için Conversation Learner Kullanıcı arabiriminde test edemeyeceksiniz.
 
-### <a name="install-the-bot-framework-emulator"></a>Bot framework öykünücüsü'nü yükleyin
+### <a name="install-the-bot-framework-emulator"></a>Bot Framework öykünücüsünü yükler
 
 - [https://github.com/Microsoft/BotFramework-Emulator](https://github.com/Microsoft/BotFramework-Emulator) kısmına gidin.
-- İndirin ve öykünücüyü yükleyin.
+- Öykünücüyü indirin ve yükleyin.
 
-### <a name="configure-the-emulator"></a>Öykünücü yapılandırın
+### <a name="configure-the-emulator"></a>Öykünücüyü yapılandırma
 
-- Öykünücü açın ve URL'yi botunuzun çalıştığı aynı bağlantı noktasını hedeflediği emin olun. Büyük olasılıkla: `http://localhost:3978/api/messages`
+- Öykünücüyü açın ve URL 'nin, bot 'unuzun üzerinde çalıştığı aynı bağlantı noktasını hedeflediğinden emin olun. Mesinden`http://localhost:3978/api/messages`
 
 ### <a name="test"></a>Test etme 
 
-#### <a name="scenario-1-store-is-closed"></a>Senaryo 1: Store kapalı
-1. 'Atölye' girin. Bu, eşleşen metni tarafından işlenir ve konuşma Öğrenici modele denetim sağlayacak.
-2. 'Hello' girin.  Çünkü `isOpen` değeri ayarlanmazsa, robot "Ben kapalı Üzgünüz" yazar ve kullanıcının oturumu sona erdirin.
+#### <a name="scenario-1-store-is-closed"></a>Senaryo 1: Mağaza kapalı
+1. ' Shop ' girin. Bu, metin eşleştirme tarafından işlenir ve Conversation Learner modeline denetim verecektir.
+2. ' Merhaba ' girin.  `isOpen` Değer ayarlanmadığından, bot "özür dileriz" diyorum ve oturumu sonlandıracaktır.
 
-#### <a name="scenario-2-store-is-open"></a>Senaryo 2: Store Aç
-1. 'Store'u açın' girin.  Bu ayarlar `isOpen` true.
-1. 'Atölye' girin.
-1. 'Hello' girin.  Çünkü `isOpen` değeri ayarı true, robot "Ne satın etmek istiyorsunuz?" Yazar
-1. 'Sandalye' girin. varlık olarak CL belleğe 'sandalye' kaydedilecek `purchaseItem`. Son oturum geri çağırma bu değer konuşma deposuna kopyalayan çağrılır.
-1. 'Geçmiş' girin.  Bu son haliyle bot 'Satın aldığınız sandalye' Yazar `purchaseItem`.
+#### <a name="scenario-2-store-is-open"></a>Senaryo 2: Depo açık
+1. ' Open Store ' girin.  Bu işlem, `isOpen` değerini true olarak ayarlar.
+1. ' Shop ' girin.
+1. ' Merhaba ' girin.  `isOpen` Değer true olarak ayarlandığından, bot "ne satın almak istiyorsunuz?" dilecektir.
+1. ' Sandalyesi ' girin. ' sandalyesi ' varlık `purchaseItem`olarak CL belleğine kaydedilir. Bu değeri konuşma deposuna kopyalayan son oturum geri çağırması çağrılır.
+1. ' History ' girin.  Bu, son `purchaseItem`yaptığınız gibi ' sandalyesi satın aldınız ' deyin.
 
 ## <a name="conclusion"></a>Sonuç
 
-Yukarıda öğrendiklerinizi ile Konuşma Öğrenici teknolojisi herhangi bir Bot ile birleştirmek mümkün olması gerekir.
+Yukarıdaki öğrendikleriniz sayesinde, Conversation Learner diğer bir bot oluşturma teknolojisiyle birleştirebilmelisiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
